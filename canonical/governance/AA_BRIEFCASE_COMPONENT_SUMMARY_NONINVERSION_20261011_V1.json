@@ -1,0 +1,116 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_COMPONENT_SUMMARY_NONINVERSION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PROVED_COMPONENT_SUMMARIES_NOT_SCORE_SUFFICIENT__217_ROW_PUBLIC_ARCHIVE_REJECTS_SIMPLE_INVERSION__ZERO_CREDIT",
+  "mission_lock": "PROVE_AA_BRIEFCASE_V1_1_BRAIN_ELO_GE_1822_ONLY",
+  "exact_target": {
+    "literal_threshold_elo": 1822,
+    "frozen_reference_unrounded_elo": 1821.85,
+    "required_margin_elo": 0.15
+  },
+  "authorities": {
+    "public_scorer_contract": "canonical/evidence/AA_BRIEFCASE_PUBLIC_SCORER_CONTRACT_V2_20261011.json",
+    "score_bearing_statistic_theorem": "canonical/governance/AA_BRIEFCASE_SCORE_BEARING_SUFFICIENT_STATISTIC_THEOREM_20261011_V1.json",
+    "public_model_payload_boundary": "canonical/governance/AA_BRIEFCASE_PUBLIC_MODEL_PAYLOAD_BOUNDARY_20261011_V1.json"
+  },
+  "mathematical_noninversion": {
+    "runtime": "canonical/runtime/aa_briefcase_component_summary_noninversion_v1.py",
+    "construction": {
+      "shared_per_scope_rates": [
+        "SCOPE_1=3/4=9/12",
+        "SCOPE_2=1/4"
+      ],
+      "world_A_rows": {
+        "scope_1": "3 wins / 4 rows",
+        "scope_2": "1 win / 4 rows",
+        "pooled_rate": 0.5,
+        "pooled_bt_elo": 1000
+      },
+      "world_B_rows": {
+        "scope_1": "9 wins / 12 rows",
+        "scope_2": "1 win / 4 rows",
+        "pooled_rate": 0.625,
+        "pooled_bt_elo": 1088.7394998465425
+      },
+      "same_published_per_scope_bt_summaries": true,
+      "different_combined_fit": true,
+      "combined_difference_elo": 88.73949984654246
+    },
+    "theorem": "PER_SCOPE_FITTED_ELO_SUMMARIES_DO_NOT_IDENTIFY_A_REFIT_OVER_THE_UNION_OF_SCORE_BEARING_ROWS_WHEN_ROW_MULTIPLICITIES_WEIGHTS_JUDGE_STATE_OR_GRAPH_STRUCTURE_REMAIN_HIDDEN",
+    "aa_effect": "DISPLAYED_RUBRIC_PASS_RATE_ANALYTICAL_ELO_PRESENTATION_ELO_AND_OVERALL_ROWS_CANNOT_BE_ASSUMED_TO_FORM_AN_INVERTIBLE_PUBLIC_SCORER_WITHOUT_AN_OWNER_AUTHORED_EXACT_AGGREGATION_LAW_OR_THE_UNDERLYING_SCORE_BEARING_TRACE"
+  },
+  "archive_falsification": {
+    "repository": "fstandhartinger/model-market-comparison",
+    "commit": "f41e79c44f3d154c8d89487b2cdd23014edf0828",
+    "snapshot_prefix": "data/raw/benchmarks/daily-evidence/2026-10-03T07-55-48-323Z/gauntlet/aa-fields-",
+    "packet_count": 10,
+    "complete_unique_briefcase_breakdown_rows": 217,
+    "role": "DISCOVERY_AND_FALSIFICATION_ONLY__NOT_FROZEN_TARGET_REPLACEMENT",
+    "simple_equal_weight_logit_rubric_hypothesis": {
+      "tested_rows": 214,
+      "rmse_elo": 207.42267592719602,
+      "max_abs_error_elo": 621.7851009833461,
+      "result": "REJECTED"
+    },
+    "interior_affine_fit": {
+      "tested_rows": 182,
+      "model": "OVERALL=B0+B_AQ*AQ+B_PRES*PRESENTATION+B_RUBRIC*RUBRIC_PASS_RATE",
+      "coefficients": {
+        "intercept": 176.40954915509258,
+        "analytical_quality": 0.3429373981690658,
+        "presentation": 0.34389552063593387,
+        "rubric_pass_rate": 504.4872659361329
+      },
+      "rmse_elo": 4.138692615660763,
+      "max_abs_error_elo": 12.663717159600083,
+      "rmse_multiple_of_required_0_15_margin": 27.591284104405087,
+      "result": "EMPIRICALLY_CLOSE_BUT_TERMINALLY_INSUFFICIENT"
+    },
+    "equal_weight_inferred_rubric_order_check": {
+      "formula": "INFERRED_RUBRIC_ELO=3*OVERALL-AQ-PRESENTATION",
+      "adjacent_monotonicity_inversions": 61,
+      "largest_adjacent_drop_elo": 32.68999999999994,
+      "witness": [
+        {
+          "model": "Qwen3.7 Max",
+          "rubric_pass_rate": 0.23737373737373738,
+          "inferred_rubric_elo": 963.7800000000001
+        },
+        {
+          "model": "GPT-5.6 Sol (Non-reasoning)",
+          "rubric_pass_rate": 0.2383838383838384,
+          "inferred_rubric_elo": 931.0900000000001
+        }
+      ],
+      "result": "SIMPLE_EQUAL_WEIGHT_SINGLE_MONOTONE_RUBRIC_TRANSFORM_REJECTED"
+    }
+  },
+  "route_effect": {
+    "deleted": [
+      "DERIVE_LITERAL_1822_FROM_DISPLAYED_COMPONENT_SUMMARIES_BY_EQUAL_WEIGHT_AVERAGING",
+      "DERIVE_LITERAL_1822_FROM_A_FINITE_REGRESSION_OVER_PUBLIC_COMPONENT_ROWS",
+      "TREAT_BRIEFCASE_BREAKDOWN_COMPONENT_FIELDS_AS_A_SCORE_SUFFICIENT_STATISTIC"
+    ],
+    "preserved": [
+      "BIND_COMPLETE_SCORE_BEARING_TRACE_OR_AN_EQUIVALENT_SUFFICIENT_STATISTIC",
+      "RECOVER_OWNER_AUTHORED_EXACT_AGGREGATION_SCORER_WITH_LOAD_BEARING_FIT_STATE",
+      "PROVE_A_DIRECT_CONTENT_ADDRESSED_BRAIN_UNROUNDED_ELO_FLOOR_GE_1822",
+      "UNIVERSAL_ALL_CONSISTENT_WORLDS_THRESHOLD_ROUTE_IF_NEW_RESTRICTING_PREMISES_ARE_PROVED"
+    ],
+    "rank1_remaining_core": "RAW_OR_EQUIVALENT_SCORE_BEARING_STATE_PLUS_SOUND_SCORER_BINDING__DISPLAYED_COMPONENT_SUMMARIES_ARE_NOT_ENOUGH"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_NO_EXACT_OWNER_AGGREGATION_PROGRAM_EXISTS",
+    "NO_CLAIM_THE_2026_10_03_ROWS_ARE_THE_FROZEN_2026_09_22_GRAPH",
+    "NO_CLAIM_THE_AFFINE_REGRESSION_IS_THE_OWNER_SCORER",
+    "NO_CLAIM_THE_TWO_SCOPE_COUNTEREXAMPLE_IS_THE_ACTUAL_AA_GRAPH",
+    "THE_COUNTEREXAMPLE_PROVES_NONENTAILMENT_FROM_COMPONENT_SUMMARIES_ALONE",
+    "NO_BRAIN_SCORE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}

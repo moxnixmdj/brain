@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_COMPONENT_SUMMARY_NONINVERSION_LOCAL_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__8_OF_8__EXACT_COUNTEREXAMPLE_REPLAY__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/aa_briefcase_component_summary_noninversion_v1.py",
+      "git_blob_sha": "a171e04818a68e974fe156aa7fc4e3479289f685"
+    },
+    "tests": {
+      "path": "canonical/tests/test_aa_briefcase_component_summary_noninversion_v1.py",
+      "git_blob_sha": "6ed803e7c20d50fbbefb94b40b581305d09e3a6a"
+    },
+    "governance": {
+      "path": "canonical/governance/AA_BRIEFCASE_COMPONENT_SUMMARY_NONINVERSION_20261011_V1.json",
+      "git_blob_sha": "1c7dd288104eca370948c519ec359134486eed27"
+    }
+  },
+  "local_replay": {
+    "python_unittest_return_code": 0,
+    "tests_run": 8,
+    "tests_passed": 8,
+    "tests_failed": 0,
+    "cases": [
+      "SAME_SCOPE_ONE_RATE_IN_BOTH_WORLDS",
+      "SAME_SCOPE_TWO_RATE_IN_BOTH_WORLDS",
+      "SAME_PER_SCOPE_ELO_SUMMARIES",
+      "WORLD_A_COMBINED_ELO_EQUALS_ANCHOR",
+      "WORLD_B_COMBINED_ELO_HIGHER",
+      "IDENTICAL_COMPONENT_SUMMARIES_DIFFERENT_COMBINED_ELO",
+      "INVALID_PROBABILITY_REJECTED",
+      "NONINTERIOR_COUNTS_REJECTED"
+    ]
+  },
+  "verified_truth": {
+    "component_summaries_score_sufficient": false,
+    "hidden_row_multiplicity_can_change_combined_fit_without_changing_per_scope_fitted_summaries": true,
+    "world_a_combined_elo": 1000,
+    "world_b_combined_elo": 1088.7394998465425,
+    "difference_elo": 88.73949984654246,
+    "literal_1822_certified": false
+  },
+  "hard_nonclaims": [
+    "NO_BRAIN_AA_BRIEFCASE_SCORE",
+    "NO_CLAIM_COUNTEREXAMPLE_MATCHES_OWNER_GRAPH",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
