@@ -1,4 +1,8 @@
-"""Fail-closed donor-independence audit for the frozen terminal candidate path.
+"""Fail-closed static source-closure preflight for the frozen terminal candidate path.
+
+This audit is useful but deliberately non-authoritative for donor independence:
+static Python source inspection cannot prove a complete runtime dependency census
+or exclude a locally copied/rehosted general-purpose model by itself.
 
 The audit recursively classifies candidate imports and rejects target-capability
 providers, network clients, process escape, dynamic imports, and unknown
@@ -268,8 +272,16 @@ def evaluate(root: Path = ROOT) -> dict[str, Any]:
     errors = sorted(set(errors))
     return {
         "schema": "PROJECT_BRAIN_TERMINAL_CANDIDATE_DONOR_INDEPENDENCE_AUDIT_V1",
-        "status": "PASS" if not errors else "FAIL_CLOSED",
+        "status": "PASS__STATIC_SOURCE_PREFLIGHT_ONLY" if not errors else "FAIL_CLOSED",
         "pass": not errors,
+        "source_static_preflight_pass": not errors,
+        "donor_independence_authority": False,
+        "runtime_cognition_provenance_authority": False,
+        "external_contribution_census_complete": False,
+        "full_runtime_dependency_inventory_complete": False,
+        "runtime_cognition_dependency_class": "UNPROVEN__STATIC_SOURCE_PREFLIGHT_ONLY",
+        "model_dependency_count": None,
+        "external_model_runtime_dependency_count": None,
         "root_modules": list(ROOT_MODULES),
         "repository_owned_dependency_file_count": len(files),
         "repository_owned_dependency_files": files,
@@ -282,11 +294,14 @@ def evaluate(root: Path = ROOT) -> dict[str, Any]:
         "cad_partspec_run_code_reachable": bool(run_code_calls),
         "undeclared_dependency_count": len(errors),
         "errors": errors,
+        "terminal_credit_delta": 0,
+        "hard_nonclaim": "STATIC_SOURCE_CLOSURE_PASS_DOES_NOT_PROVE_COMPLETE_RUNTIME_DEPENDENCY_CENSUS_OR_DONOR_INDEPENDENCE",
         "rule": (
             "PASS_IFF_RECURSIVE_CANDIDATE_SOURCE_CLOSURE_HAS_NO_TARGET_PROVIDER_"
             "NETWORK_DYNAMIC_IMPORT_PROCESS_ESCAPE_OR_UNCLASSIFIED_EXTERNAL_DEPENDENCY__"
             "CAD_DYNAMIC_EXECUTION_ALLOWED_ONLY_ON_EXACT_TERMINAL_FROZEN_BLOBS__"
-            "HISTORICAL_RUN_CODE_HELPER_MUST_BE_UNREACHABLE"
+            "HISTORICAL_RUN_CODE_HELPER_MUST_BE_UNREACHABLE__"
+            "STATIC_PREFLIGHT_ONLY__FINAL_DONOR_AUTHORITY_REQUIRES_TRANSFER_V2_RUNTIME_CENSUS_AND_CLEANROOM"
         ),
     }
 
