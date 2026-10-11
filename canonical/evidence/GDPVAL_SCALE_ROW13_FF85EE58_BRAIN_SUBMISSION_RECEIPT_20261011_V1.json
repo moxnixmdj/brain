@@ -1,0 +1,114 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_TAVARUA_AUDIO_MIX_FROZEN__OBJECTIVE_AUDIO_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "subject": {
+    "row_idx": 13,
+    "task_id": "ff85ee58-bc9f-4aa2-806d-87edeabb1b81",
+    "sector": "Information",
+    "occupation": "Audio and Video Technicians"
+  },
+  "packet": {
+    "manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8",
+    "packet_sha256": "b3dd0d62e49135c7f6b24ffb901ef039ee4496dbda5a5f196c673e6bbf828f80",
+    "prompt_sha256": "48535946a3549f416ccd34493be945c93f9c6ed5663c8b4e41673f471d364932",
+    "raw_obligation_count": 18,
+    "reference_count": 3
+  },
+  "sources": [
+    {
+      "name": "TAVARUA_MUSIC ONLY.wav",
+      "sha256": "ca53448cbec7b57b575d9d0e229f08c4c4602b794aec7c1de0c15fb2f08a2fc5",
+      "duration_s": 111.6,
+      "rate": 48000,
+      "subtype": "PCM_24"
+    },
+    {
+      "name": "TAVARUA_SAX RAW.wav",
+      "sha256": "39ce5da5b4a0c3bda49096c116d0f3ba02d172223cb654cec717c69cbf1cc29b",
+      "duration_s": 76.08895833333334,
+      "rate": 48000,
+      "subtype": "PCM_24"
+    },
+    {
+      "name": "TAVARUA_SAX REFERENCE MP3.mp3",
+      "sha256": "b31a671c9607f292a6325a47b406549028ccddb75fd1915d3f1b1798ba6e68a1",
+      "duration_s": 78.35460317460317,
+      "rate": 44100,
+      "subtype": "MPEG_LAYER_III"
+    }
+  ],
+  "alignment": {
+    "reference_mix_music_offset_s": 33.699,
+    "raw_sax_on_reference_s": 0.802,
+    "raw_sax_session_offset_s": 34.501,
+    "resolution_s": 0.002,
+    "reference_first_strong_sax_attack_s": 38.561,
+    "quantized_final_first_attack_s": 38.58,
+    "entrance_delta_s": 0.019
+  },
+  "timing_edit": {
+    "tempo_bpm": 50,
+    "eighth_note_s": 0.6,
+    "sixteenth_tolerance_s": 0.3,
+    "eighth_grid_phase_s": 0.18,
+    "quantized_attack_count": 81,
+    "median_abs_correction_s": 0.059,
+    "max_abs_correction_s": 0.299,
+    "method": "CUT_AND_MOVE_SEGMENTS_WITH_15MS_CROSSFADES__NO_TIME_STRETCH_OR_PITCH_SHIFT"
+  },
+  "processing": {
+    "bandpass_hz": [
+      120,
+      12000
+    ],
+    "stereo_delays_s": [
+      0.3,
+      0.6
+    ],
+    "ambience_taps_s": [
+      0.043,
+      0.071,
+      0.113,
+      0.173
+    ],
+    "sax_gain": 0.9,
+    "final_integrated_lufs": -16,
+    "final_peak_dbfs": -1.5609767
+  },
+  "deliverable": {
+    "filename": "Tavarua_Final_Mix.wav",
+    "sha256": "e3acf020940c6170503edd1f7de0516f50954c44fc5c7f64b19668e4f63f0ffe",
+    "bytes": 32140844,
+    "frames": 5356800,
+    "duration_s": 111.6,
+    "channels": 2,
+    "samplerate": 48000,
+    "subtype": "PCM_24",
+    "library_path": "/Project Brain/GDPval/stage1/ff85ee58-bc9f-4aa2-806d-87edeabb1b81/Tavarua_Final_Mix.wav",
+    "library_file_id": "libfile_67d41fccbb7c8191b746ed20fc543b1a"
+  },
+  "verification": {
+    "lufs": "PASS__-15_9999999",
+    "peak": "PASS__-1_5609767_DBFS_BELOW_-0_1",
+    "rendered_sax_grid_error_p95_s": 0.3,
+    "rendered_sax_grid_error_median_s": 0.06,
+    "presence_2_5khz": "PASS__NO_DECREASE",
+    "mono_compatibility": "PASS__TRUE_L_PLUS_R_MONO_SUM_WITHIN_3_DB",
+    "output_lossless": "PASS__PCM_24",
+    "no_time_stretch": "PASS__SEGMENT_REPOSITION_ONLY"
+  },
+  "hard_nonclaims": [
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_SCORE",
+    "NO_GDPVAL_ELO",
+    "NO_1846_THRESHOLD_CLOSURE",
+    "SUBJECTIVE_MIX_TASTE_NOT_SELF_CERTIFIED",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
