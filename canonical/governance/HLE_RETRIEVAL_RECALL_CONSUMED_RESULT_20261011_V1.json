@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_RETRIEVAL_RECALL_CONSUMED_RESULT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "RETRIEVAL_RECALL_BOTTLENECK_PROVEN_ON_CONSUMED_PUBLIC_ROWS",
+  "subject": {
+    "question_contract_v3_blob": "0865d6baf59b465cf121963dbadd5409a1702671",
+    "retrieval_helpers_v5_blob": "ae6006af1e578b0690357756e0b899a10323a5f4"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2691,
+    "workflow_run_id": 38145255906,
+    "workflow_job_id": 114487136558,
+    "trace_sealed_before_gold": true,
+    "exact_blob_binding_passed": true
+  },
+  "diagnostic": {
+    "dataset": "ai-safety-institute/trivia_qa_verified",
+    "split": "validation",
+    "slice": "rows_25_to_49_ALREADY_CONSUMED",
+    "sample_size": 25,
+    "retrieval_any_hit": 8,
+    "retrieval_any_hit_rate": 0.32,
+    "rich_search_hit_rate": 0.16,
+    "wikipedia_title_hit_rate": 0.12,
+    "wikipedia_snippet_hit_rate": 0.2,
+    "wikipedia_extract_hit_rate": 0.12,
+    "artifact_id": 11703984906,
+    "artifact_zip_sha256": "ccc151aec8f3a574761ce216f77df3bdc4e1a47297151dbfcd7c6a8ad793a50b"
+  },
+  "causal_conclusion": [
+    "ANSWER_SELECTION_IS_NOT_THE_ONLY_DOMINANT_BOTTLENECK",
+    "CURRENT_QUERY_PLANNER_FAILS_TO_RETRIEVE_THE_GOLD_SURFACE_IN_68_PERCENT_OF_CONSUMED_CASES",
+    "SHORT_SUBJECT_ENTITY_AND_QUOTED_ANCHOR_QUERIES_ARE_MISSING_OR_UNDERWEIGHTED",
+    "LONG_KEYWORD_SOUP_QUERIES_DEGRADE_WIKIPEDIA_AND_SEARCH_RECALL",
+    "NEXT_REPAIR_MUST_IMPROVE_RETRIEVAL_RECALL_BEFORE_ANY_NEW_SELECTOR_IS_ELIGIBLE"
+  ],
+  "protected_state": {
+    "fresh_rows_50_to_74_consumed": 0,
+    "hle_questions_consumed": 0,
+    "hle_gold_consumed": 0
+  },
+  "target_score_claimed": false,
+  "hle_67_7_certified": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
