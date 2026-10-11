@@ -228,7 +228,7 @@ def _request_fields(endpoint: Mapping[str, Any]) -> list[dict[str, Any]]:
 
     def put(name: str, *, required: bool, is_array: bool, raw_spec: Any) -> None:
         name = str(name or "").strip()
-        if not name or name in {"data","properties","body"}:
+        if not name or _norm_name(name) in {"data","properties","body"}:
             return
         prev = fields.get(name)
         row = {
@@ -389,10 +389,16 @@ def _literal_id_for_semantic(semantic: str, goal: str, facts: Mapping[str, list[
         )
         if m and ("_" in m.group(1) or "-" in m.group(1) or any(ch.isdigit() for ch in m.group(1))):
             return m.group(1)
-    for value in facts.get("id_literal", []):
+    literals = list(facts.get("id_literal", []))
+    for value in literals:
         low = value.lower()
         if low.startswith(semantic[:4]) or low.startswith(semantic):
             return value
+    # A schema-level generic id/key parameter has no entity-specific prefix.
+    # If the goal contains exactly one identifier-shaped literal, binding it is
+    # deterministic. Multiple literals remain ambiguous and therefore unbound.
+    if semantic == "id" and len(literals) == 1:
+        return literals[0]
     return None
 
 
@@ -436,6 +442,104 @@ def _bind_semantic_value(
 
     return None
 
+
+
+def endpoint_grounding_contract(
+    *,
+    goal: str,
+    endpoint: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Describe which endpoint inputs are grounded before any world observation.
+
+    This is planning metadata only. It never invents values and never executes
+    a tool. Required values that are not derivable from the goal or declared
+    defaults are exposed as field-level evidence obligations.
+    """
+    facts = _cue_facts(goal, [])
+    rows: list[dict[str, Any]] = []
+
+    for spec in _param_specs(endpoint):
+        value = spec.get("default")
+        source = "default" if value is not None else None
+        if value is None:
+            value = _bind_semantic_value(
+                spec["canonical"],
+                goal=goal,
+                facts=facts,
+                records=[],
+            )
+            if value is not None:
+                source = "goal"
+        rows.append({
+            "kind": "parameter",
+            "name": spec["name"],
+            "canonical": spec["canonical"],
+            "required": bool(spec["required"]),
+            "array": bool(spec["array"]),
+            "location": spec["location"],
+            "grounded_before_observation": value is not None,
+            "grounding_source": source,
+        })
+
+    request_rows = _request_fields(endpoint)
+    for spec in request_rows:
+        value = _bind_semantic_value(
+            spec["canonical"],
+            goal=goal,
+            facts=facts,
+            records=[],
+        )
+        rows.append({
+            "kind": "body",
+            "name": spec["name"],
+            "canonical": spec["canonical"],
+            "required": bool(spec["required"]),
+            "array": bool(spec["array"]),
+            "location": "body",
+            "grounded_before_observation": value is not None,
+            "grounding_source": "goal" if value is not None else None,
+        })
+
+    method = str(endpoint.get("method") or "").upper().strip()
+    action_like_create = method == "POST"
+    has_name_field = any(
+        row["kind"] == "body" and row["canonical"] == "name"
+        for row in rows
+    )
+
+    obligations: list[str] = []
+    for row in rows:
+        if row["required"] and not row["grounded_before_observation"]:
+            if row["canonical"] not in obligations:
+                obligations.append(row["canonical"])
+
+    # Creation without a grounded identity is unsafe even when an API marks
+    # "name" optional. If the schema exposes a name/title field, require its
+    # grounding before creation so we do not create anonymous wrong objects.
+    if action_like_create and has_name_field:
+        name_rows = [
+            row for row in rows
+            if row["kind"] == "body" and row["canonical"] == "name"
+        ]
+        if not any(row["grounded_before_observation"] for row in name_rows):
+            if "name" not in obligations:
+                obligations.append("name")
+
+    return {
+        "schema": SCHEMA,
+        "endpoint_id": str(endpoint.get("id") or endpoint.get("name") or ""),
+        "method": method,
+        "fields": rows,
+        "required_evidence_semantics": sorted(obligations),
+        "goal_grounded_semantics": sorted({
+            row["canonical"]
+            for row in rows
+            if row["grounded_before_observation"]
+        }),
+        "request_semantics": sorted({
+            row["canonical"] for row in rows if row["kind"] == "body"
+        }),
+    }
 
 def bind_endpoint_call(
     *,

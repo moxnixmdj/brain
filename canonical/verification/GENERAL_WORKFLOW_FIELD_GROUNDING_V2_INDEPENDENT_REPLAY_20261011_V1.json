@@ -1,0 +1,117 @@
+{
+  "schema": "PROJECT_BRAIN_GENERAL_WORKFLOW_FIELD_GROUNDING_V2_INDEPENDENT_REPLAY_20261011_V1",
+  "status": "PASS__FOCUSED_AND_ADJACENT_REPLAY__ZERO_ACCEPTANCE_CREDIT",
+  "date": "2026-10-11",
+  "mission_scope": {
+    "capability": "GENERAL_WORKFLOW_FIELD_GROUNDING_V2",
+    "benchmark_role": "AUTOMATIONBENCH_IS_MEASUREMENT_SURFACE_NOT_OPTIMIZATION_TARGET",
+    "exact_private_predicate": "AUTOMATIONBENCH_GE_40",
+    "exact_private_predicate_status": "OPEN",
+    "no_goal_substitution": true
+  },
+  "candidate": {
+    "pr": 4601,
+    "branch": "general-workflow-field-grounding-v2-20261011-sol",
+    "verified_head_sha": "61c9e3a56e2e9bb8c6484bada10e5d6e8bc3a7d7",
+    "stirrup_model_slug": "project-brain/general-workflow-field-grounding-v2",
+    "active_transport_state_machine": "canonical/runtime/automationbench_policy_state_machine_v2.py",
+    "planner": "canonical/runtime/generic_goal_tool_effect_planner_v2.py",
+    "binder": "canonical/runtime/generic_tool_argument_binder_v1.py",
+    "verifier": "canonical/runtime/generic_goal_state_verifier_v2.py",
+    "legacy_app_specific_compiler_reachable_from_v2": false
+  },
+  "verification_carrier": {
+    "type": "EXISTING_REMOTE_SPRITE",
+    "sprite_name": "brain-live-runtime-v1-verify-20261008",
+    "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "new_sprite_provisioned_for_this_replay": false,
+    "laptop_used_for_replay": false,
+    "replay_directory": "/tmp/automationbench-general-v2-replay"
+  },
+  "github_ci_observation": {
+    "runs": [
+      {
+        "name": "capability-transfer-governance",
+        "run_id": 38150159333,
+        "status": "FAILED_BEFORE_OBSERVABLE_STEPS",
+        "steps": null
+      },
+      {
+        "name": "verify-reached-escape-no-bypass",
+        "run_id": 38150159390,
+        "status": "FAILED_BEFORE_OBSERVABLE_STEPS",
+        "steps": null
+      }
+    ],
+    "job_logs": "UNAVAILABLE__BLOB_NOT_FOUND",
+    "adjudication": "NOT_CODE_FAILURE_EVIDENCE"
+  },
+  "falsification_trajectory": {
+    "first_replay": {
+      "test_count": 42,
+      "result": "FAIL",
+      "failures": 4,
+      "general_root_causes": [
+        "REQUEST_SCHEMA_WRAPPER_BODY_MISPARSED_AS_REQUIRED_FIELD",
+        "AMBIGUOUS_NOUN_MESSAGE_MISCLASSIFIED_AS_NOTIFY_ACTION",
+        "RELATION_ID_EVIDENCE_NOT_TYPED_BY_RESOURCE_SEMANTICS"
+      ]
+    },
+    "repairs": [
+      "CASE_INSENSITIVE_REQUEST_WRAPPER_FILTERING",
+      "NOUN_VS_IMPERATIVE_ACTION_DISAMBIGUATION",
+      "RELATION_ID_RESOURCE_SEMANTIC_TYPING",
+      "UNIQUE_GENERIC_ID_LITERAL_GROUNDING",
+      "S_ENDING_SINGULAR_NOUN_PRESERVATION"
+    ],
+    "same_falsifiers_after_repairs": {
+      "test_count": 42,
+      "result": "PASS"
+    },
+    "regression_expanded_replay": {
+      "test_count": 46,
+      "result": "PASS"
+    },
+    "adjacent_compatibility_replay": {
+      "test_count": 81,
+      "result": "PASS"
+    }
+  },
+  "expanded_replay_modules": [
+    "canonical.tests.test_generic_goal_tool_effect_planner_v1",
+    "canonical.tests.test_generic_tool_argument_binder_v1",
+    "canonical.tests.test_generic_goal_tool_effect_planner_v2",
+    "canonical.tests.test_generic_goal_state_verifier_v1",
+    "canonical.tests.test_generic_goal_state_verifier_v2",
+    "canonical.tests.test_automationbench_owned_policy_kernel_v1",
+    "canonical.tests.test_automationbench_mutation_compiler_v1",
+    "canonical.tests.test_automationbench_policy_state_machine_v1",
+    "canonical.tests.test_automationbench_policy_state_machine_v2",
+    "canonical.tests.test_automationbench_stirrup_client_v1"
+  ],
+  "expanded_replay_result": {
+    "tests_run": 81,
+    "failures": 0,
+    "errors": 0,
+    "result": "PASS"
+  },
+  "currentness_check": {
+    "original_pr_base_sha": "a3f1cdbefc0f714866ad6a87f9748e66f9939832",
+    "main_commits_ahead_of_original_base": 54,
+    "main_files_changed_since_original_base_overlap_pr_4601_changed_files": false,
+    "interpretation": "NO_LOAD_BEARING_FILE_OVERLAP_OBSERVED_IN_COMPARE"
+  },
+  "boundaries": {
+    "private_automationbench_tasks_used": false,
+    "private_automationbench_assertions_used": false,
+    "private_automationbench_result_observed": false,
+    "public_to_private_equivalence_claimed": false,
+    "automationbench_ge_40_proved": false,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "private_threshold_successes_required": 263,
+    "private_denominator": 657
+  }
+}

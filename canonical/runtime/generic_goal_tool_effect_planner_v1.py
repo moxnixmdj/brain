@@ -33,6 +33,14 @@ _ACTION_WORDS = {
     "create": ("create","add","log","record","post","schedule","open","make","submit","append","insert"),
 }
 _ALL_ACTION_TERMS = {x for xs in _ACTION_WORDS.values() for x in xs}
+_AMBIGUOUS_ACTION_WORDS = {
+    "message","reply","alert","record","post","update","change","list",
+    "schedule","archive","open",
+}
+_VERB_PREFIX_TAILS = {
+    "please","then","and","to","must","should","can","could","would",
+    "will","now","also","next",
+}
 _GENERIC_RESOURCE = {
     "data","record","records","item","items","thing","things","field","fields",
     "value","values","api","endpoint","endpoints","tool","tools","workspace",
@@ -44,9 +52,12 @@ def _singular(token: str) -> str:
     t = token.lower().strip("_-.")
     if len(t) > 4 and t.endswith("ies"):
         return t[:-3] + "y"
-    if len(t) > 4 and t.endswith("sses"):
+    # Preserve common singular nouns whose lexical form ends in s.
+    if t.endswith(("status", "analysis", "basis", "crisis", "thesis", "diagnosis")):
         return t
-    if len(t) > 4 and t.endswith("s") and not t.endswith("ss"):
+    if len(t) > 4 and t.endswith(("sses", "ss")):
+        return t
+    if len(t) > 4 and t.endswith("s"):
         return t[:-1]
     return t
 
@@ -77,12 +88,24 @@ def _split_clauses(goal: str) -> list[str]:
     return [x.strip(" ,") for x in parts if x and x.strip(" ,")]
 
 
+def _ambiguous_word_is_verb(low: str, start: int) -> bool:
+    prefix = low[:start].strip()
+    if not prefix:
+        return True
+    words = re.findall(r"[a-z]+", prefix)
+    if not words:
+        return True
+    return words[-1] in _VERB_PREFIX_TAILS
+
+
 def _action_hits(clause: str) -> list[tuple[int, str, str, bool]]:
     low = clause.lower()
     hits: list[tuple[int, str, str, bool]] = []
     for action, words in _ACTION_WORDS.items():
         for word in words:
             for m in re.finditer(r"\b" + re.escape(word) + r"\b", low):
+                if word in _AMBIGUOUS_ACTION_WORDS and not _ambiguous_word_is_verb(low, m.start()):
+                    continue
                 resolved = action
                 if word == "add":
                     tail = low[m.end():]
