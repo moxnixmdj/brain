@@ -1,11 +1,6 @@
 name: Full private current-main regression
 
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - ".github/workflows/full-private-current-main-regression.yml"
-      - "canonical/**"
   push:
     branches: [main]
     paths:
@@ -169,5 +164,5 @@ jobs:
               raise SystemExit(1)
           PY
 
-# carrier: isolated-self-hosted-linux-x64-brain-regression-exact-subject-auto-restart-on-canonical-drift-20261011-v6
+# carrier: main-only-self-hosted-linux-x64-brain-regression-auto-restart-on-canonical-drift-20261011-v7
 # receipt: log-and-check-summary-authoritative-for-canonicalization__artifact-storage-not-required
