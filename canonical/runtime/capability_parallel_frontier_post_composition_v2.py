@@ -10,6 +10,8 @@ PROF="canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json"
 ASSURANCE="canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json"
 BYTES="canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json"
 R2="canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json"
+SPECIALIZATION="canonical/governance/CURRENT_FRONTIER_REUSE_SPECIALIZATION_20261011_V1.json"
+GAP_A_WORK="ESCAPE_GAP_A_AUTHENTICATED_ROW_PROOFS"
 PROF_WORK="PROFESSIONAL_QUALITY_V7_PROPERTY_TRUTH_DEPLETION"
 ASSURANCE_WORK="ASSURANCE_UVCK_V2_PROMOTION_GATES"
 R2_WORK="R2_FINANCE_SEMANTIC_ADEQUACY_TAIL"
@@ -93,12 +95,43 @@ def _r2(f:dict,root:Path):
  ev=dict(row.get("read_only_evidence") or {}); ev.update({"source":R2,"source_git_blob_sha":sha,"general_mechanism_closed":True,"finance_tail_closed":False,"wake_gate":False,"vector_bounds_complete":False,"dynamic_current_pointer_follow":True}); row["read_only_evidence"]=ev
  return {"git_blob_sha":sha,"version":ver}
 
+
+def _decision_value_escape(f:dict,root:Path):
+ d,sha=_load(root,SPECIALIZATION)
+ rows=d.get("active_rows")
+ if not isinstance(rows,list) or not rows: raise PostCompositionFrontierV2Error("ESCAPE_SPECIALIZATION_ROWS")
+ actionable=[]; sleeping=[]
+ for row in rows:
+  if not isinstance(row,Mapping) or not isinstance(row.get("id"),str) or not row["id"]: raise PostCompositionFrontierV2Error("ESCAPE_SPECIALIZATION_ROW")
+  mode=str(row.get("mode") or "")
+  item={"id":row["id"],"mode":mode,"delta":row.get("delta")}
+  if "WAKE_GATED" in mode or "EVENT_DRIVEN" in mode or "PARK" in mode:
+   sleeping.append(item)
+  else:
+   actionable.append(item)
+ if len({x["id"] for x in actionable+sleeping})!=len(rows): raise PostCompositionFrontierV2Error("ESCAPE_SPECIALIZATION_DUPLICATE")
+ row=_cand_id(f,GAP_A_WORK)
+ row["scheduler_state"]="READY_EVIDENCE" if actionable else "SLEEPING"
+ row["evidence_acquisition_mode"]="READ_ONLY" if actionable else "NONE"
+ row["readiness"]="DECISION_VALUE_GATED__"+str(len(actionable))+"_ACTIONABLE__"+str(len(sleeping))+"_SLEEPING"
+ row["causal_role"]="ACQUIRE_ONLY_POLICY_CHANGING_CURRENT_REALITY_FOR_ACTIONABLE_ROWS__UNCHANGED_WAKE_GATED_AND_EVENT_DRIVEN_ROWS_MUST_NOT_CONSUME_SAME_INFORMATION_WORK"
+ ev=dict(row.get("read_only_evidence") or {})
+ ev.update({"source":SPECIALIZATION,"source_git_blob_sha":sha,"decision_value_gate":True,"actionable_row_ids":[x["id"] for x in actionable],"sleeping_row_ids":[x["id"] for x in sleeping],"actionable_rows":actionable,"sleeping_rows":sleeping,"vector_bounds_complete":False,"dynamic_current_pointer_follow":True})
+ row["read_only_evidence"]=ev
+ source_set=f.get("scope",{}).get("source_set")
+ if not isinstance(source_set,list): raise PostCompositionFrontierV2Error("ESCAPE_SPECIALIZATION_SOURCE_SET")
+ existing=[x for x in source_set if isinstance(x,dict) and x.get("path")==SPECIALIZATION]
+ if len(existing)>1: raise PostCompositionFrontierV2Error("ESCAPE_SPECIALIZATION_SOURCE_CARDINALITY")
+ if existing: existing[0]["git_blob_sha"]=sha
+ else: source_set.append({"path":SPECIALIZATION,"git_blob_sha":sha})
+ return {"git_blob_sha":sha,"actionable_row_ids":[x["id"] for x in actionable],"sleeping_row_ids":[x["id"] for x in sleeping]}
+
 def refresh_post_composition_currentness(frontier:Mapping[str,Any],*,root:Path=core.ROOT):
- f=json.loads(json.dumps(frontier)); p=_prof(f,root); a=_assurance(f,p,root); b=_bytes(f,root); r=_r2(f,root)
+ f=json.loads(json.dumps(frontier)); p=_prof(f,root); a=_assurance(f,p,root); b=_bytes(f,root); r=_r2(f,root); dv=_decision_value_escape(f,root)
  for row in f.get("candidates",[]):
   if isinstance(row,dict) and row.get("scheduler_state")=="PARKED":
    row["original_scheduler_state"]="PARKED"; row["scheduler_state"]="BLOCKED"
- f["dynamic_currentness"]={"professional_pointer_follow":True,"assurance_pointer_follow":True,"bytes_pointer_follow":True,"r2_pointer_follow":True,"parked_normalized_to_nonprimary":True,"professional":p,"assurance":a,"bytes":b,"r2":r,"other_source_families_dynamic_follow":False}
+ f["dynamic_currentness"]={"professional_pointer_follow":True,"assurance_pointer_follow":True,"bytes_pointer_follow":True,"r2_pointer_follow":True,"escape_specialization_pointer_follow":True,"parked_normalized_to_nonprimary":True,"professional":p,"assurance":a,"bytes":b,"r2":r,"decision_value_escape":dv,"other_source_families_dynamic_follow":False}
  return f
 
 def plan_current_post_composition_frontier():
