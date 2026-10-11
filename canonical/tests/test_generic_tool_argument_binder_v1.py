@@ -173,6 +173,21 @@ class GenericToolArgumentBinderV1Tests(unittest.TestCase):
         self.assertFalse(out["pass"])
         self.assertIn("REQUIRED_PARAMETER_UNGROUNDED", out["reason"])
 
+    def test_body_wrapper_label_is_not_a_field(self):
+        endpoint = {
+            "id":"work.create",
+            "method":"POST",
+            "url":"https://work.invalid/tasks",
+            "request":"Body: {name (optional, string), project (optional, string)}",
+        }
+        out = endpoint_grounding_contract(
+            goal="Create the task in project proj_blue.",
+            endpoint=endpoint,
+        )
+        names = [x["name"] for x in out["fields"]]
+        self.assertNotIn("Body", names)
+        self.assertNotIn("body", names)
+
     def test_required_unknown_body_field_fails_closed(self):
         endpoint = {
             "id":"opaque.create",
