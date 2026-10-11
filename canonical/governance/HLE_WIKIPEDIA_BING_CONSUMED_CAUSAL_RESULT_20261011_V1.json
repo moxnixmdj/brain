@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_WIKIPEDIA_BING_CONSUMED_CAUSAL_RESULT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_CONSUMED_DIAGNOSTIC__CAUSAL_RETRIEVAL_GAIN_CONFIRMED",
+  "subject": {
+    "runtime_blob": "eace56be88b0047aaebfe713c61ddf6acea59296",
+    "planner_v1_blob": "2386db287d08153ffb905f8cd89a76f4ebf19d9f",
+    "diagnostic_harness_blob": "4a6a7ae70f7087c9aa340f6e7964189e7bad0355"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2711,
+    "workflow_run_id": 38152517963,
+    "workflow_job_id": 114508711108,
+    "conclusion": "success",
+    "trace_manifest_sha256": "5bcb5c8617f8070a0f1c7a4e49d1b4594638e408d8374ecbb41171dfa2b91bde"
+  },
+  "causal_design": {
+    "population": "ONLY_NINE_ALREADY_CONSUMED_SHARED_MISSES_FROM_V1_V2_PAIRED_RESULT",
+    "target_ids": [
+      27,
+      32,
+      37,
+      38,
+      39,
+      41,
+      43,
+      44,
+      45
+    ],
+    "gold_loaded_only_after_retrieval_trace_sealed": true,
+    "mediawiki_search_api_used": false,
+    "discovery_transport": "BING_RSS",
+    "external_model_calls": 0
+  },
+  "diagnostic": {
+    "sample_size": 9,
+    "page_count": 19,
+    "trace_errors": 0,
+    "bing_rss_query_attempts": 38,
+    "unique_gain_count": 2,
+    "unique_gain_ids": [
+      27,
+      44
+    ],
+    "remaining_miss_ids": [
+      32,
+      37,
+      38,
+      39,
+      41,
+      43,
+      45
+    ],
+    "residual_recovery_rate": 0.2222222222222222
+  },
+  "causal_conclusion": [
+    "WIKIPEDIA_VIA_BING_PAGE_TRANSPORT_RECOVERS_REAL_EVIDENCE_MISSED_BY_PRIOR_V1_AND_V2_RETRIEVAL",
+    "THE_GAIN_IS_ORTHOGONAL_TO_PRIOR_QUERY_PLANNER_HITS_ON_THIS_CONSUMED_SLICE",
+    "MEDIAWIKI_SEARCH_API_429_CAN_BE_BYPASSED_WITHOUT_SLEEPING_OR_MODEL_COGNITION",
+    "TRANSPORT_REPAIR_IS_PROMOTABLE_AS_A_GENERAL_RETRIEVAL_CAPABILITY_COMPONENT",
+    "SEVEN_SHARED_MISSES_REMAIN_AND_RELATION_REQUIREMENT_SEARCH_IS_NEXT"
+  ],
+  "decision": [
+    "KEEP_AND_INTEGRATE_HARDENED_WIKIPEDIA_BING_TRANSPORT",
+    "DO_NOT_CLAIM_MORE_THAN_TWO_OF_NINE_RESIDUAL_RECOVERIES_FROM_THIS EVIDENCE",
+    "TEST_RELATION_REQUIREMENTS_ADDITIVELY_ON_REMAINING_SEVEN_OR_ALL_NINE_IN_SAME_SNAPSHOT",
+    "DO_NOT_CONSUME_FRESH_HLE"
+  ],
+  "hle_questions_consumed": 0,
+  "hle_gold_consumed": 0,
+  "external_model_calls_total": 0,
+  "model_dependency_count_total": 0,
+  "hle_score_credit": 0,
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
