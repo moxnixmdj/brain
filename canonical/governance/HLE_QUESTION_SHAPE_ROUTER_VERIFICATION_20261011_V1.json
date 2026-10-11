@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_QUESTION_SHAPE_ROUTER_VERIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "EXACT_TESTED_BYTES_BOUND__2500_OF_2500_STRUCTURES_ROUTED__ZERO_ANSWER_AUTHORITY",
+  "runtime": {
+    "path": "canonical/runtime/hle_question_shape_router_v1.py",
+    "git_blob_sha1": "7e0b84642dc22784c048fc1b2952c62ccbac83d1",
+    "sha256": "d758c608d356a34451983f36809647b95b503ae8c24ee4e68b2f3832b9e6c452",
+    "creation_commit": "2546eaf75b5f39b0b341bf814f9a037d19cde627"
+  },
+  "tests": {
+    "path": "canonical/tests/test_hle_question_shape_router_v1.py",
+    "git_blob_sha1": "0c2948e7707816d8bda4142a9e819e81caabd058",
+    "sha256": "394588fdc4e8bb6038fae64ef26611aa5093441131a542ac6ce5f7bbe4cf43ac",
+    "synthetic_tests": 10,
+    "synthetic_passed": 10,
+    "repository_ci_claimed": false
+  },
+  "real_population_structural_validation": {
+    "dataset_sha256": "6d0ee0602e8aea6b159509577e884f48ecac7b8e3f6822a35f51335a446c726a",
+    "population": 2500,
+    "routed": 2500,
+    "failed": 0,
+    "candidate_lane_counts_overlap_allowed": {
+      "SYMBOLIC_NUMERIC_REASONING": 1452,
+      "ENTITY_TERM_OR_RELATION_LOOKUP": 984,
+      "MULTIPLE_CHOICE_TYPED_DECISION": 591,
+      "IMAGE_SEMANTICS_REQUIRED": 342,
+      "OPEN_SEMANTIC_REASONING": 187,
+      "TEMPORAL_LOOKUP_OR_DERIVATION": 117,
+      "PROGRAMMATIC_CODE_REASONING": 36,
+      "BOOLEAN_PROPOSITION": 23,
+      "FORMAL_OR_ARGUMENT_PROOF": 6
+    },
+    "exact_match_lane_counts_overlap_allowed": {
+      "SYMBOLIC_NUMERIC_REASONING": 1263,
+      "ENTITY_TERM_OR_RELATION_LOOKUP": 614,
+      "IMAGE_SEMANTICS_REQUIRED": 264,
+      "OPEN_SEMANTIC_REASONING": 187,
+      "TEMPORAL_LOOKUP_OR_DERIVATION": 88,
+      "PROGRAMMATIC_CODE_REASONING": 27,
+      "BOOLEAN_PROPOSITION": 17,
+      "FORMAL_OR_ARGUMENT_PROOF": 6
+    },
+    "primary_lane_counts": {
+      "SYMBOLIC_NUMERIC_REASONING": 1166,
+      "MULTIPLE_CHOICE_TYPED_DECISION": 513,
+      "IMAGE_SEMANTICS_REQUIRED": 342,
+      "ENTITY_TERM_OR_RELATION_LOOKUP": 254,
+      "OPEN_SEMANTIC_REASONING": 187,
+      "TEMPORAL_LOOKUP_OR_DERIVATION": 28,
+      "PROGRAMMATIC_CODE_REASONING": 5,
+      "BOOLEAN_PROPOSITION": 4,
+      "FORMAL_OR_ARGUMENT_PROOF": 1
+    },
+    "validation_mode": "Questions were passed only inside private programmatic execution; only aggregate structural counts were emitted. No question, option, task-id, answer, or rationale values were emitted.",
+    "gold_accessed": false
+  },
+  "authority_boundary": {
+    "routing_authority": true,
+    "semantic_truth_authority": false,
+    "answer_authority": false,
+    "lane_sufficiency_proved": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "model_inference_requests": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
