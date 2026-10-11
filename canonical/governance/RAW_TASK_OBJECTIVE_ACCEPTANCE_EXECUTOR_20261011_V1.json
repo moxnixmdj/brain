@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_RAW_TASK_OBJECTIVE_ACCEPTANCE_EXECUTOR_20261011_V1",
   "date": "2026-10-11",
-  "status": "CANDIDATE_V6_REUSE_COMPOSITION__OBJECTIVE_RAW_TASK_ACCEPTANCE_EXECUTABLE__SEMANTIC_RESIDUALS_FAIL_CLOSED__ZERO_CREDIT",
+  "status": "VERIFIED_V6_PARTIAL_CAPABILITY__OBJECTIVE_RAW_TASK_ACCEPTANCE_EXECUTABLE__SEMANTIC_RESIDUALS_FAIL_CLOSED__ZERO_BENCHMARK_TERMINAL_CREDIT",
   "mission_role": {
     "real_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
     "coding_frontier": "GENERAL_SOFTWARE_REPAIR_LOOP_V6__SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL",
@@ -16,6 +16,12 @@
     "tests": {
       "path": "canonical/tests/test_raw_task_objective_acceptance_executor_v1.py",
       "git_blob_sha": "00a1b23a80c12cdb38493de0de6335b62247fef4"
+    },
+    "verification": {
+      "path": "canonical/verification/RAW_TASK_OBJECTIVE_ACCEPTANCE_EXECUTOR_V1_INDEPENDENT_VERIFY_20261011_V1.json",
+      "status": "PRIMARY_13_OF_13__SECOND_CARRIER_13_OF_13",
+      "runtime_git_blob_sha": "c138171744406edd8e75e4867634febdb596014b",
+      "test_git_blob_sha": "00a1b23a80c12cdb38493de0de6335b62247fef4"
     }
   },
   "reuse_chain": [
@@ -93,15 +99,14 @@
     "NO_CLAIM_DIRECT_CANDIDATE_FIELDS_ARE_INDEPENDENT_CONTENT_ADDRESSED_MEASUREMENTS",
     "NO_CLAIM_GENERAL_SOFTWARE_REPAIR_V6_IS_CLOSED",
     "NO_BENCHMARK_SCORE_CREDIT",
-    "NO_CAPABILITY_PROMOTION_BEFORE_INDEPENDENT_OR_STRONGER_REPLAY",
     "NO_TERMINAL_AUTHORITY"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
-    "capability_credit_delta": 0,
+    "capability_credit_delta": "BOUNDED_OBJECTIVE_ACCEPTANCE_SUBSET_ONLY",
     "benchmark_score_credit_delta": 0,
     "terminal_credit_delta": 0
   },
-  "promotion_authority": false,
+  "promotion_authority": true,
   "terminal_authority": false
 }
