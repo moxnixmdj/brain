@@ -1,0 +1,115 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_MPMATH_FDOT_V47_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__MPMATH_FDOT_FAIL_CLOSED_PRUNE__SPENT_NEXT52_AND_FRESH_NEXT53_PASS__NEXT54_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_EVALF_POW_RATIONAL_V46_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "92056a1de7d8c4a109dd6aca9bf295a9e3956a42a5f7672b321faf75aa842a9b",
+    "transform": "canonical/research/bytes/tools/conservative_mpmath_fdot_prune_v47.py",
+    "manifest_sha256": "65a5f292a0a1bbe64961f02eb84d204391d6aa8cdee1f970c34f648b7615d7f7",
+    "python_files": 277,
+    "raw_python_source_bytes": 1738721,
+    "B_exec_raw_python_source_bytes": 1741481,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v46_bytes": -1645,
+    "B_exec_delta_vs_v46_bytes": -1645
+  },
+  "selection": {
+    "id": "MPMATH_PYTHONMPCONTEXT_FDOT_FAIL_CLOSED_PRUNE_V47",
+    "method": "RANK_REMAINING_FUNCTION_BODY_BYTE_SAVINGS__FALSIFY_LARGER_CANDIDATES_ON_SPENT_NEXT52__REPLACE_FDOT_BODY_WITH_FAIL_CLOSED_BOUNDARY__VERIFY_COMPLETE_SPENT_NEXT52__THEN_FRESH_NEXT53",
+    "changed_body_count": 1,
+    "body": "mpmath/ctx_mp_python.py::PythonMPContext.fdot",
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "discovery_evidence": {
+    "corpus": "QUAL_SUCCESSOR_NEXT52_20261011_V1",
+    "role": "SPENT_DISCOVERY_AND_CALIBRATION_ONLY__NOT_FRESH_QUALIFICATION",
+    "candidate_fail_closed_replacement": "13800/13800",
+    "larger_candidates_falsified": [
+      {
+        "body": "sympy/simplify/powsimp.py::powsimp",
+        "nominal_saved_bytes": 10617,
+        "result": "REJECTED__LIMIT_POLY_RATIO_LIMIT_SINX_SERIES_COEFF_FAIL_IMMEDIATELY"
+      },
+      {
+        "body": "sympy/polys/constructor.py::_construct_composite",
+        "nominal_saved_bytes": 3244,
+        "result": "REJECTED__13_SPENT_NEXT52_ROOT_CASES_REQUIRE_BODY"
+      },
+      {
+        "body": "sympy/core/power.py::Pow.as_real_imag",
+        "nominal_saved_bytes": 2845,
+        "result": "REJECTED__17_SPENT_NEXT52_ROOT_CASES_REQUIRE_BODY"
+      }
+    ],
+    "claim_boundary": "Passing the fail-closed replacement on the bounded qualification proves route adequacy for the measured corpus, not universal mpmath fdot deadness."
+  },
+  "qualification": {
+    "spent_NEXT52": {
+      "id": "QUAL_SUCCESSOR_NEXT52_20261011_V1",
+      "cases": 13800,
+      "corpus_sha256": "30ea78acca28b10a42b24726fcc6c33ac592ce821de859f63faf1978100d2529",
+      "candidate": "13800/13800",
+      "failures": 0,
+      "spent": true,
+      "execution_mode": "FIVE_BALANCED_SHARDS__2760_CASES_EACH"
+    },
+    "fresh_NEXT53": {
+      "id": "QUAL_SUCCESSOR_NEXT53_20261011_V1",
+      "cases": 14030,
+      "corpus_sha256": "7f1dd1549e6df0b47baf56e52c96fd10d11fbb946c6e84bda8c2cb805fedda3c",
+      "candidate": "14030/14030",
+      "failures": 0,
+      "spent": true,
+      "execution_mode": "FIVE_BALANCED_SHARDS__2806_CASES_EACH"
+    }
+  },
+  "reproducibility": {
+    "clean_room_v46_to_v47_reconstruction": "PASS__278_OF_278_FILES_BYTE_IDENTICAL",
+    "regenerated_manifest_sha256": "65a5f292a0a1bbe64961f02eb84d204391d6aa8cdee1f970c34f648b7615d7f7",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V47_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_9addb2f29ae081918c975135b84b61a5",
+    "file_id": "file_00000000091c8210b9a642151eec209c",
+    "bytes": 271528,
+    "sha256": "39840c368ce6d16eaf8f40c5476dc0c39aad3fa6d11831f0d2e22d2d1a42f276"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT54_20261011_V1",
+    "cases": 14260,
+    "seed": 305041766,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT54_20261011_V1_PIPE_V47_MANIFEST_IDENTITY",
+    "seed_material": "QUAL_SUCCESSOR_NEXT54_20261011_V1|65a5f292a0a1bbe64961f02eb84d204391d6aa8cdee1f970c34f648b7615d7f7",
+    "per_operation_budget": 1240,
+    "corpus_sha256": "a429b6448d1a72ccf533b6a89b845561fd6a4b9a2ddb9e61d9dc00d8abedbaad",
+    "bytes": 1686384,
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT54_20261011_V1.jsonl",
+    "library_file_id": "libfile_670fdd6d6c30819193bfce6c8c228e14",
+    "file_id": "file_000000004adc8210ae845f4e5ccee860",
+    "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0_EXACT_ROUTE_EXPECTED_OUTPUTS__DETERMINISTIC_PARAMETER_STREAM__FIVE_SHARD_EXPECTED_OUTPUT_EVALUATION__CANONICAL_ROW_REASSEMBLY",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V47 is 1,738,721 raw Python-source bytes, 1,645 bytes below V46.",
+    "MEASURED: V47 passes complete spent NEXT52 13,800/13,800 with zero failures.",
+    "MEASURED: previously untouched NEXT53 passes V47 14,030/14,030 with zero failures.",
+    "MEASURED: clean-room V46-to-V47 reconstruction is 278/278 files byte-identical.",
+    "MEASURED: NEXT54 is durably frozen at 14,260 cases and remains unspent.",
+    "MEASURED: three larger candidate cuts were falsified on spent NEXT52 before selecting fdot.",
+    "NOT PROVED: universal SymPy/mpmath equivalence outside the bounded exact-symbolic route.",
+    "NOT PROVED: universal deadness of PythonMPContext.fdot outside measured route.",
+    "NOT PROVED: external second-carrier replay.",
+    "NOT PROMOTED: no capability, acceptance, ownership, quality, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
