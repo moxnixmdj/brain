@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_LITERAL_EXCEPTION_MESSAGE_V78_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__56_LITERAL_EXCEPTION_MESSAGE_COMPACTIONS__18_FILES__FULL_NEXT82_20700_OF_20700__FRESH_NEXT83_20930_OF_20930__CLEAN_RECONSTRUCTION_278_OF_278__NEXT84_UNSPENT__ZERO_CREDIT",
+  "subject_manifest_sha256": "02c3ebcef2e0f5e50c0807f03ac65c8715b34d998cf427f93d26d4adb3eb807d",
+  "predecessor_manifest_sha256": "b03d2329afd48ac7f66fa8c90bd52d1bd454cf15547b67e305fabb2e1fb3111a",
+  "replacement_count": 56,
+  "changed_file_count": 18,
+  "saved_bytes": 1936,
+  "spent_NEXT82": {
+    "passed": 20700,
+    "total": 20700,
+    "failures": 0
+  },
+  "fresh_NEXT83": {
+    "passed": 20930,
+    "total": 20930,
+    "failures": 0
+  },
+  "clean_room_reconstruction": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+  "next84": {
+    "cases": 21160,
+    "sha256": "af216fee46b5759e69726fe8d5281cf27745a56a33baa72bc0683ef217a5506b",
+    "spent": false
+  },
+  "external_second_carrier_verified": false,
+  "hard_nonclaims": [
+    "NO_EXTERNAL_EXCEPTION_MESSAGE_EQUIVALENCE",
+    "NO_NEXT84_EXECUTION",
+    "NO_UNIVERSAL_SYMPY_EQUIVALENCE",
+    "NO_CAPABILITY_OR_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0
+}
