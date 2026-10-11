@@ -101,6 +101,29 @@ class AffineOperator:
         return (self.a,self.b,self.c,self.d,self.e_rule,self.f_rule,self.shape_rule)
 
 
+def _offset_description_cost(rule:str, shape_rule:str)->float:
+    if rule=="ZERO":
+        return 0.0
+    if rule.startswith("BBOX_"):
+        return 0.5 if shape_rule.startswith("NONZERO_BBOX") else 1.0
+    if rule in ("H_MINUS_1","W_MINUS_1"):
+        return 1.0
+    if rule.startswith("CONST_"):
+        return 1.5
+    raise AffineGridOperatorError("OFFSET_RULE_UNSUPPORTED")
+
+
+def _operator_cost(op:AffineOperator)->float:
+    coeff_cost=sum(int(x!=0) for x in (op.a,op.b,op.c,op.d))
+    shape_cost=0.0 if op.shape_rule=="SAME" else 0.5 if op.shape_rule=="SWAP" else 1.0
+    return (
+        float(coeff_cost)
+        + shape_cost
+        + _offset_description_cost(op.e_rule,op.shape_rule)
+        + _offset_description_cost(op.f_rule,op.shape_rule)
+    )
+
+
 def _apply(g:Grid, op:AffineOperator)->Grid|None:
     ih,iw=_shape(g)
     shape=ShapeRule(op.shape_rule).apply(g)
@@ -190,15 +213,19 @@ def induce(
             "terminal_authority":False,
         }
 
-    sigs=sorted({op.signature() for op in exact})
+    minimum_cost=min(_operator_cost(op) for op in exact)
+    selected=[op for op in exact if _operator_cost(op)==minimum_cost]
+    sigs=sorted({op.signature() for op in selected})
     return {
         "schema":SCHEMA,"status":"EXACT_OPERATORS",
         "operators":[{"a":a,"b":b,"c":c,"d":d,"e_rule":e,"f_rule":f,"shape_rule":s} for a,b,c,d,e,f,s in sigs],
         "operator_count":len(sigs),
+        "minimum_description_cost":minimum_cost,
         "ambiguity_preserved":len(sigs)>1,
         "candidates_evaluated":evaluated,
         "complete_within_declared_bound":True,
-        "completeness_scope":"UNIMODULAR_2D_INTEGER_AFFINE_MAPS_COEFF_NEG1_0_1_X_SAME_OR_SWAP_SHAPE",
+        "completeness_scope":"UNIMODULAR_2D_INTEGER_AFFINE_MAPS_COEFF_NEG1_0_1_X_SYMBOLIC_CONTENT_RELATIVE_OFFSETS_X_DECLARED_SHAPE_RULES",
+        "selection_rule":"MINIMUM_DESCRIPTION_COST__REUSE_ALREADY_INVOKED_CONTENT_RELATIVE_LATENTS_BEFORE_FREE_CONSTANTS",
         "terminal_authority":False,
         "promotion_authority":False,
     }
