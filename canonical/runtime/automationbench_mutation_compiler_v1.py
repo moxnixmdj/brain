@@ -84,9 +84,16 @@ def compile_salesforce_mark_won(
     endpoint_url_template: str = "https://yourinstance.salesforce.com/services/data/v61.0/sobjects/Opportunity/{id}",
 ) -> dict[str, Any] | None:
     low = prompt.lower()
-    if "salesforce" not in low and "opportunit" not in low:
-        return None
-    if not any(p in low for p in ("mark it as won","mark as won","closed won","mark the opportunity as won")):
+    if not any(
+        p in low
+        for p in (
+            "mark it as won",
+            "mark as won",
+            "closed won",
+            "mark the opportunity as won",
+            "mark the deal as won",
+        )
+    ):
         return None
 
     # Use informative capitalized phrase fragments near opportunity/deal wording.
