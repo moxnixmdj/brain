@@ -25,7 +25,7 @@
       },
       {
         "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "git_blob_sha": "04f3ef6a1722f55258a385d290bf572d55bf810b"
+        "git_blob_sha": "96d5f933f7a3e75e721758aaad6edd444dfaf244"
       },
       {
         "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
@@ -156,11 +156,11 @@
       "ready": "BLOCKED_ONLY_BY_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION"
     },
     {
-      "work_id": "BYTES_EXACT_SYMBOLIC_V58_NEXT_PHYSICAL_CUT",
+      "work_id": "BYTES_EXACT_SYMBOLIC_V60_NEXT_PHYSICAL_CUT",
       "work_type": "EFFICIENCY_IMPROVEMENT",
       "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1713212_RAW_PYTHON_BYTES_USING_SPENT_NEXT64_ONLY__RERANK_BEFORE_NEW_PHYSICAL_CUT__DO_NOT_TOUCH_FROZEN_NEXT65_BEFORE_CUT",
-      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V58_CURRENT__TWO_UTILITY_FAILCLOSE_VERIFIED",
+      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1713090_RAW_PYTHON_BYTES_USING_SPENT_NEXT67_ONLY__RERANK_BEFORE_NEW_PHYSICAL_CUT__DO_NOT_TOUCH_FROZEN_NEXT68_BEFORE_CUT",
+      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V60_CURRENT__NEXT66_REPAIR_AND_FRESH_NEXT67_VERIFIED",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
       "scheduler_state": "READY_EXECUTION",
@@ -179,18 +179,18 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "source_git_blob_sha": "04f3ef6a1722f55258a385d290bf572d55bf810b",
-        "raw_python_source_bytes": 1713212,
-        "B_exec_raw_python_source_bytes": 1715972,
-        "qualification": "16560/16560",
-        "next_action": "RERANK_EXACT_V58_USING_SPENT_NEXT64_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT65_20261011_V1",
-        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT65_20261011_V1",
-        "next_frozen_library_file_id": "libfile_3e89a90f8724819180239691717ac934",
+        "source_git_blob_sha": "96d5f933f7a3e75e721758aaad6edd444dfaf244",
+        "raw_python_source_bytes": 1713090,
+        "B_exec_raw_python_source_bytes": 1715850,
+        "qualification": "17250/17250",
+        "next_action": "RERANK_EXACT_V60_USING_SPENT_NEXT67_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT68_20261011_V1",
+        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT68_20261011_V1",
+        "next_frozen_library_file_id": "libfile_3f5ba0e0123481919cc240491ebd5cb2",
         "independent_verification": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPF_PERTURB_V55_VERIFY_20261011_V1.json",
         "vector_bounds_complete": false,
         "next_frozen_spent": false
       },
-      "ready": "V58_CURRENT_AT_1713212_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT",
+      "ready": "V60_CURRENT_AT_1713090_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT",
       "source_git_blob_sha": "cc039dec0d7361bfb83c7121433eabcb82ce5581"
     },
     {
@@ -645,12 +645,12 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "04f3ef6a1722f55258a385d290bf572d55bf810b",
-    "status": "ACTIVE_RESEARCH__TWO_UTILITY_V58_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1713212,
-    "B_exec_raw_python_source_bytes": 1715972,
-    "qualification": "16560/16560",
-    "next": "Rerank exact V58 using spent NEXT64 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT65_20261011_V1.",
+    "observed_git_blob_sha": "96d5f933f7a3e75e721758aaad6edd444dfaf244",
+    "status": "ACTIVE_RESEARCH__REPAIRED_V60_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1713090,
+    "B_exec_raw_python_source_bytes": 1715850,
+    "qualification": "17250/17250",
+    "next": "Rerank exact V60 using spent NEXT67 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT68_20261011_V1.",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   }
