@@ -422,14 +422,14 @@
     "exact_target_family_count_19": true,
     "every_required_behavior_contracted": true,
     "every_required_behavior_has_admissible_proof": true,
-    "donor_dependent_required_behaviors_zero": true,
+    "donor_dependent_required_behaviors_zero": false,
     "unexplained_required_behaviors_zero": true,
     "unresolved_verifier_mutations_zero": true,
     "unresolved_composition_failures_zero": true,
     "contaminated_evidence_used_for_promotion_zero": true,
     "resource_or_authority_violations_zero": true,
     "all_frozen_opus_acceptance_predicates_pass": false,
-    "final_donor_deletion_cleanroom_pass": true,
+    "final_donor_deletion_cleanroom_pass": false,
     "proof_bundle_frozen": false
   },
   "counters": {
@@ -513,9 +513,13 @@
     "rule": "FINITE_SAMPLE_SUCCESS_CANNOT_CLOSE_PROTOCOL_WIDE_ABSOLUTE_DOMINANCE_WITHOUT_INDEPENDENT_SCOPE_COMPLETENESS"
   },
   "global_ownership_postconditions": {
-    "status": "INDEPENDENT_PASS",
-    "evidence": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-    "evidence_blob_sha": "e0dbd996c18bdb818693ab0d217d751594a03d0f"
+    "status": "INVALIDATED_BY_CAPABILITY_TRANSFER_V2_ZERO_MODEL_RUNTIME_COGNITION_REQUIREMENTS__REQUALIFICATION_REQUIRED",
+    "historical_evidence": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "historical_evidence_blob_sha": "e0dbd996c18bdb818693ab0d217d751594a03d0f",
+    "invalidation": "canonical/verification/CAPABILITY_TRANSFER_V2_DONOR_AUTHORITY_INVALIDATION_20261011_V1.json",
+    "current_authority": false,
+    "requalification_required": true,
+    "required_reducer": "canonical/runtime/terminal_global_ownership_postconditions_reducer_v1.py"
   },
   "donor_deletion_cleanroom": {
     "status": "INDEPENDENT_PASS",
@@ -633,5 +637,13 @@
     "promotion_evidence": "canonical/verification/ACCEPTED_THREE_OWNERSHIP_PROMOTION_PROOF_20261003_V1.json",
     "new_reality_units_consumed": 0,
     "incremental_spend_usd": 0
+  },
+  "donor_authority_reconciliation": {
+    "status": "CURRENT_FAIL_CLOSED__LEGACY_OFFLINE_ONLY_DONOR_RECEIPT_HISTORICAL_ONLY",
+    "invalidation": "canonical/verification/CAPABILITY_TRANSFER_V2_DONOR_AUTHORITY_INVALIDATION_20261011_V1.json",
+    "historical_counter_value_preserved_for_provenance": 0,
+    "historical_counter_current_proof_authority": false,
+    "current_donor_independence_proved": false,
+    "terminal_credit_delta": 0
   }
 }
