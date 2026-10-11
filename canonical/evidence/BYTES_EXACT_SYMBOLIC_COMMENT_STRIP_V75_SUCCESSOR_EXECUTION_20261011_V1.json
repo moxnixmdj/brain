@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_COMMENT_STRIP_V75_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__PROOF_CARRYING_COMMENT_AND_TRAILING_WHITESPACE_COMPACTION__STRONG_EXECUTABLE_EQUIVALENCE_TO_V74__NEXT82_REMAINS_FROZEN_UNSPENT__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_AST_IDENTICAL_INLINE_V74_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "b0b5024dbd831e104d25373dc2bc2c14feed5892624d3cae4d5100bfaa1eb18f",
+    "transform": "canonical/research/bytes/tools/conservative_comment_semantic_compact_v75.py",
+    "manifest_sha256": "42c3255fe51bc6e7c30afd912d3fd3aabc422742b4671eed1e7b7fc50ce290f9",
+    "python_files": 277,
+    "raw_python_source_bytes": 1616922,
+    "B_exec_raw_python_source_bytes": 1619682,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v74_bytes": -144
+  },
+  "selection": {
+    "id": "COMMENT_AND_TRAILING_WHITESPACE_STRONG_EQUIVALENCE_COMPACTION_V75",
+    "changed_python_file_count": 3,
+    "rejected_candidate_file_count": 0,
+    "deleted_source_bytes": 144,
+    "changed_files": [
+      "mpmath/libmp/libmpc.py",
+      "sympy/core/intfunc.py",
+      "sympy/core/numbers.py"
+    ],
+    "acceptance_rule": "ACCEPT_FILE_ONLY_IF_SIGNIFICANT_TOKEN_STREAM_AST_AND_RECURSIVE_EXECUTABLE_CODE_ARE_ALL_IDENTICAL"
+  },
+  "strong_equivalence": {
+    "significant_token_streams_identical": "3_OF_3",
+    "ast_identical": "3_OF_3",
+    "recursive_executable_code_identical": "3_OF_3",
+    "proof_library_path": "/Brain Evidence/Bytes/BYTES_V75_STRONG_EQUIVALENCE_PROOF_20261011_V1.json",
+    "proof_library_file_id": "libfile_dbbb5fc8527c8191bbafbf8744ecf39c",
+    "proof_sha256": "f0936dcae652e32f185676d29fc157128084d1b33bf9feac3b912255c9e10586",
+    "bounded_route_transfer": "V74_NEXT81_RESULT_TRANSFERS_TO_V75_BECAUSE_CHANGED_MODULE_EXECUTABLE_CODE_IS_IDENTICAL_ON_THE_BOUNDED_ROUTE"
+  },
+  "qualification": {
+    "inherited_NEXT81": {
+      "cases": 20470,
+      "predecessor_V74": "20470/20470",
+      "candidate_V75_execution_complete": false,
+      "transfer_basis": "STRONG_EXECUTABLE_EQUIVALENCE"
+    },
+    "direct_partial_replay": {
+      "candidate_V75": "16760/16760",
+      "failures": 0,
+      "status": "SUPPORTING_ONLY__NOT_PRIMARY_PROOF"
+    }
+  },
+  "reproducibility": {
+    "clean_room_v74_to_v75_reconstruction": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+    "regenerated_manifest_sha256": "42c3255fe51bc6e7c30afd912d3fd3aabc422742b4671eed1e7b7fc50ce290f9",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V75_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_2e9cd9083d308191a82c4349b9c82d3f",
+    "file_id": "file_000000004e7481f4b29d81173fd95229",
+    "bytes": 266076,
+    "sha256": "95eb0eeb6cecd9c91b36c791739220fcd84896cba556557a0ff77a04e8c1a7c3"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT82_20261011_V1",
+    "cases": 20700,
+    "seed": 706387887,
+    "corpus_sha256": "a50d77134ca612abaa96a015c055d1a59b9d19f8688d2014dd10ba3a7fa7d71f",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT82_V74_CORRECTED_20261011_V1.jsonl",
+    "library_file_id": "libfile_d16a034393bc81919a35bacdfacbb058",
+    "status": "FROZEN_UNSPENT__NOT_EXECUTED_FOR_V75",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V75 is 1,616,922 raw Python-source bytes, 144 bytes below V74.",
+    "MEASURED: all three changed modules preserve significant token stream, AST, and recursive executable code identity.",
+    "MEASURED: clean-room V74-to-V75 reconstruction is 278/278 durable files byte-identical.",
+    "MEASURED: 16,760 directly replayed NEXT81 cases pass with zero failures; the remaining cases were not executed and are not claimed as executed.",
+    "INFERRED WITH COMPLETE CHANGED-SURFACE PROOF: V74 bounded-route qualification transfers to V75 because executable code is identical for every changed module.",
+    "MEASURED: corrected NEXT82 remains frozen and unspent.",
+    "NOT PROVED: equivalence for intentional source-text/comment consumers or traceback line-position consumers outside the bounded exact-symbolic route.",
+    "NOT PROMOTED: zero capability, acceptance, ownership, professional, quality, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "professional_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
