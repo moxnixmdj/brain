@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_TWO_UTILITY_V58_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__TWO_NONOVERLAPPING_FAILCLOSE_CUTS__SPENT_NEXT63_AND_FRESH_NEXT64_PASS__NEXT65_FROZEN_UNSPENT__ZERO_CREDIT",
+  "predecessor": {
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MPF_TUPLE4_V57_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "manifest_sha256": "5af543694a726b13666f7dbff68417eb8d4f600dc4d0e244c3e16e17ee6a2da3"
+  },
+  "subject": {
+    "transform": "canonical/research/bytes/tools/conservative_two_utility_prune_v58.py",
+    "manifest_sha256": "409dd682c47e2a25acc2915af689650757f02cf828826a9854d06c0e386bb1c1",
+    "python_files": 277,
+    "raw_python_source_bytes": 1713212,
+    "B_exec_raw_python_source_bytes": 1715972,
+    "raw_delta_vs_v57_bytes": -214
+  },
+  "selection": {
+    "bodies": [
+      "mpmath/libmp/libmpf.py::strict_normalize",
+      "mpmath/libmp/libmpf.py::mpf_frexp"
+    ],
+    "saved_raw_python_bytes": 214,
+    "rejected_sibling": "mpmath/libmp/libmpf.py::mpf_abs",
+    "rejected_sibling_reason": "rare roots counterexamples on spent NEXT63"
+  },
+  "qualification": {
+    "spent_NEXT63": {
+      "cases": 16330,
+      "sha256": "6efce0ec04745f39dac6fef3060587f9f92a3edf86ff35fd137fe8e8803ff11e",
+      "passed": 16330,
+      "failed": 0
+    },
+    "fresh_NEXT64": {
+      "cases": 16560,
+      "sha256": "2b010659915163dd631b761329671874754f9c28999ff26cff03646c2afa6706",
+      "passed": 16560,
+      "failed": 0
+    }
+  },
+  "reproducibility": {
+    "clean_room_reconstruction": "278/278 durable files byte-identical",
+    "archive_sha256": "c4ca2d876e762b887c81d5eac0b40fd21ca1e06e39b8fec3dfef399739182517",
+    "archive_bytes": 264156,
+    "archive_library_file_id": "libfile_76ad2423f52881918b428e1df4e39d69"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT65_20261011_V1",
+    "cases": 16790,
+    "seed": 1656986324,
+    "per_operation_budget": 1460,
+    "sha256": "441ebf4a345f13eb8a4b8f9e3cac1ba6f03d8afc7234563e159c75ca3e755d6f",
+    "bytes": 1984170,
+    "library_file_id": "libfile_3df61ae4ba0c8191bcbd9d4525838992",
+    "spent": false
+  },
+  "truth_boundary": [
+    "V58 is 214 raw Python bytes below V57.",
+    "V58 passes complete spent NEXT63 16330/16330.",
+    "V58 passes previously untouched NEXT64 16560/16560.",
+    "mpf_abs whole-body deletion is rejected by rare roots counterexamples.",
+    "NEXT65 is durably frozen unspent.",
+    "No capability, acceptance, promotion, or terminal credit is claimed."
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
