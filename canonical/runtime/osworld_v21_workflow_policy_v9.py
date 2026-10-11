@@ -10,7 +10,8 @@ from typing import Any, Mapping
 
 from canonical.runtime.osworld_v21_receipt_dataflow_v3 import materialize_explicit_references
 from canonical.runtime.osworld_v21_workflow_policy_v1 import split_explicit_subgoals
-from canonical.runtime.osworld_v21_unified_policy_v14 import decide as base_decide\nfrom canonical.runtime.osworld_v21_semantic_normalizer_v1 import normalize_instruction
+from canonical.runtime.osworld_v21_unified_policy_v14 import decide as base_decide
+from canonical.runtime.osworld_v21_semantic_normalizer_v1 import normalize_instruction
 
 SCHEMA="PROJECT_BRAIN_OSWORLD_V21_WORKFLOW_POLICY_V9"
 MAX_SEMANTIC_CLAUSES=6
