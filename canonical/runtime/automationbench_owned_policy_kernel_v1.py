@@ -37,38 +37,38 @@ _STOP = {
 }
 
 _APP_ALIASES = {
-    "gmail": ("gmail","email","emails","mail"),
-    "google_sheets": ("google sheets","spreadsheet","spreadsheets","worksheet","sheet"),
-    "google_drive": ("google drive","drive","file","files"),
-    "slack": ("slack","channel"),
-    "salesforce": ("salesforce","opportunity","opportunities","lead","leads","account"),
-    "asana": ("asana","project","section","task"),
-    "trello": ("trello","board","card","list"),
-    "hubspot": ("hubspot","deal","contact","ticket"),
-    "jira": ("jira","issue"),
-    "quickbooks": ("quickbooks","invoice","bill","sales receipt","estimate"),
-    "xero": ("xero","invoice","bill","credit note"),
-    "wave": ("wave","invoice","product"),
-    "airtable": ("airtable","base","table","record"),
-    "monday": ("monday","board","item"),
-    "notion": ("notion","page","database"),
-    "google_calendar": ("google calendar","calendar","event","meeting"),
-    "zoom": ("zoom","meeting","recording"),
-    "docusign": ("docusign","envelope","signer"),
-    "mailchimp": ("mailchimp","subscriber","campaign","audience"),
-    "zendesk": ("zendesk","ticket"),
-    "freshdesk": ("freshdesk","ticket","contact"),
-    "intercom": ("intercom","conversation","contact"),
-    "helpscout": ("helpscout","conversation"),
-    "hiver": ("hiver","conversation"),
-    "buffer": ("buffer","post"),
-    "twitter": ("twitter","tweet"),
-    "linkedin": ("linkedin","post"),
-    "instagram": ("instagram","media","post"),
-    "facebook_pages": ("facebook page","facebook post"),
-    "twilio": ("twilio","sms","text message"),
-    "bamboohr": ("bamboohr","employee","time off"),
-    "recruitee": ("recruitee","candidate","job"),
+    "gmail": ("gmail", "email", "emails", "mail"),
+    "google_sheets": ("google sheets", "spreadsheet", "spreadsheets", "worksheet"),
+    "google_drive": ("google drive",),
+    "slack": ("slack",),
+    "salesforce": ("salesforce",),
+    "asana": ("asana",),
+    "trello": ("trello",),
+    "hubspot": ("hubspot",),
+    "jira": ("jira",),
+    "quickbooks": ("quickbooks",),
+    "xero": ("xero",),
+    "wave": ("wave",),
+    "airtable": ("airtable",),
+    "monday": ("monday.com", "monday "),
+    "notion": ("notion",),
+    "google_calendar": ("google calendar",),
+    "zoom": ("zoom",),
+    "docusign": ("docusign",),
+    "mailchimp": ("mailchimp",),
+    "zendesk": ("zendesk",),
+    "freshdesk": ("freshdesk",),
+    "intercom": ("intercom",),
+    "helpscout": ("helpscout", "help scout"),
+    "hiver": ("hiver",),
+    "buffer": ("buffer",),
+    "twitter": ("twitter",),
+    "linkedin": ("linkedin",),
+    "instagram": ("instagram",),
+    "facebook_pages": ("facebook page", "facebook pages"),
+    "twilio": ("twilio", "sms"),
+    "bamboohr": ("bamboohr",),
+    "recruitee": ("recruitee",),
 }
 
 _ACTION_TERMS = {
@@ -96,6 +96,41 @@ _API_NATIVE = {
     "ticket": "tickets",
     "record": "records",
     "file": "files",
+}
+
+_APP_SEARCH_HINTS = {
+    "gmail": "messages list get search",
+    "google_sheets": "spreadsheets worksheets values rows get",
+    "google_drive": "files list get search",
+    "slack": "conversations channels messages history search",
+    "salesforce": "records query get opportunities leads contacts",
+    "asana": "tasks projects sections get",
+    "trello": "boards lists cards get",
+    "hubspot": "contacts companies deals tickets get",
+    "jira": "issues projects search get",
+    "quickbooks": "customers invoices bills query get",
+    "xero": "contacts invoices bills payments get",
+    "wave": "customers invoices products get",
+    "airtable": "records tables bases get",
+    "monday": "boards items get",
+    "notion": "pages databases search get",
+    "google_calendar": "events calendars list get",
+    "zoom": "meetings registrants recordings get",
+    "docusign": "envelopes recipients templates get",
+    "mailchimp": "members lists campaigns get",
+    "zendesk": "tickets users organizations get",
+    "freshdesk": "tickets contacts get",
+    "intercom": "conversations contacts tickets get",
+    "helpscout": "conversations mailboxes get",
+    "hiver": "conversations get",
+    "buffer": "posts get",
+    "twitter": "tweets users get",
+    "linkedin": "posts messages invitations get",
+    "instagram": "media get",
+    "facebook_pages": "posts photos get",
+    "twilio": "messages calls get",
+    "bamboohr": "employees time off get",
+    "recruitee": "candidates jobs get",
 }
 
 
@@ -164,7 +199,10 @@ def search_queries(prompt: str, *, max_queries: int = 6) -> list[str]:
     apps = cls["apps"] or [""]
     for app in apps[:4]:
         app_terms = app.replace("_", " ")
-        q = " ".join(x for x in [app_terms, *action_words[:3], *keep[:5]] if x)
+        hint = _APP_SEARCH_HINTS.get(app, "")
+        q = " ".join(
+            x for x in [app_terms, hint, *action_words[:2], *keep[:3]] if x
+        )
         if q and q not in queries:
             queries.append(q)
 
@@ -249,27 +287,91 @@ def _required_parameters(ep: Mapping[str, Any]) -> list[tuple[str, dict[str, Any
 
 
 def _ground_required_param(name: str, prompt: str) -> str | None:
-    """Conservatively ground obvious scalar path/query parameters from prompt."""
-    low_name = name.lower().replace("-", "_")
-    emails = _EMAIL.findall(prompt or "")
-    dates = _DATE.findall(prompt or "")
-    ids = _ID.findall(prompt or "")
+    """Conservatively ground scalar API parameters from explicit prompt literals."""
+    raw_name = name.lower().replace("-", "_")
+    compact = re.sub(r"[^a-z0-9]", "", raw_name)
+    text = str(prompt or "")
+    emails = _EMAIL.findall(text)
+    dates = _DATE.findall(text)
+    ids = _ID.findall(text)
 
-    if "email" in low_name and emails:
+    if "email" in compact and emails:
         return emails[0]
-    if any(k in low_name for k in ("date","start","end","due")) and dates:
+    if any(k in compact for k in ("date", "start", "end", "due")) and dates:
         return dates[0]
 
-    # Prefer literal identifier forms for *_id, gid, key, project/workspace/etc.
-    if (
-        low_name.endswith(("_id", "_gid"))
-        or low_name in {"id","gid","key","workspace","project","board","base","table","channel"}
-    ):
+    if compact in {"worksheetid", "worksheet", "range"}:
+        quoted_worksheet = re.search(
+            r"\bworksheet\s+['\"]([^'\"]+)['\"]",
+            text,
+            re.I,
+        )
+        if quoted_worksheet:
+            return quoted_worksheet.group(1).strip()
+
+    # Prefer noun-bound identifiers, but inspect all matches. Natural language
+    # can contain phrases like "Facilities project in Asana" before the actual
+    # identifier phrase "project proj_facilities".
+    prefix_by_param = {
+        "spreadsheetid": "ss_",
+        "worksheetid": "ws_",
+        "projectgid": "proj_",
+        "projectid": "proj_",
+        "workspacegid": "ws_",
+        "workspaceid": "ws_",
+        "sectiongid": "sec_",
+        "sectionid": "sec_",
+    }
+    noun_patterns = (
+        (("spreadsheetid", "spreadsheet"), r"\bspreadsheet\s+([A-Za-z0-9_-]+)\b"),
+        (("worksheetid", "worksheet", "range"), r"\bworksheet\s+['\"]?([A-Za-z0-9_-]+)['\"]?"),
+        (("projectgid", "projectid", "project"), r"\bproject\s+([A-Za-z0-9_-]+)\b"),
+        (("workspacegid", "workspaceid", "workspace"), r"\bworkspace\s+([A-Za-z0-9_-]+)\b"),
+        (("sectiongid", "sectionid", "section"), r"\bsection\s+([A-Za-z0-9_-]+)\b"),
+        (("channelid", "channel"), r"\bchannel\s+([A-Za-z0-9_-]+)\b"),
+    )
+    for names, pattern in noun_patterns:
+        if compact not in names:
+            continue
+        matches = [
+            value.strip().strip("'\"")
+            for value in re.findall(pattern, text, re.I)
+            if value and value.lower() not in _STOP
+        ]
+        expected_prefix = prefix_by_param.get(compact)
+        if expected_prefix:
+            preferred = [
+                value for value in matches
+                if value.lower().startswith(expected_prefix)
+            ]
+            if len(preferred) == 1:
+                return preferred[0]
+        if len(matches) == 1:
+            return matches[0]
+
+    # Stable-prefix fallback when the noun is omitted.
+    prefix = prefix_by_param.get(compact)
+    if prefix:
+        matches = [x for x in ids if x.lower().startswith(prefix)]
+        if len(matches) == 1:
+            return matches[0]
+
+    # A range can safely use an explicitly named worksheet identifier/title.
+    if compact == "range":
+        ws = re.search(r"\bworksheet\s+['\"]?([A-Za-z0-9 _-]+?)['\"]?(?=\s|[),.;]|$)", text, re.I)
+        if ws:
+            return ws.group(1).strip().strip("'\"")
+        quoted = re.findall(r"worksheet\s+['\"]([^'\"]+)['\"]", text, re.I)
+        if len(quoted) == 1:
+            return quoted[0]
+
+    # Generic IDs are only safe when exactly one identifier-like literal exists.
+    if compact in {"id", "gid", "key"}:
         candidates = [
             x for x in ids
             if any(ch.isdigit() for ch in x) or "_" in x or "-" in x
         ]
-        if candidates:
+        if len(candidates) == 1:
             return candidates[0]
     return None
 
@@ -331,6 +433,132 @@ def observation_plan(
     return out
 
 
+def followup_observation_plan(
+    prompt: str,
+    search_payloads: Iterable[str | Mapping[str, Any]],
+    observation_payloads: Iterable[Any],
+    *,
+    max_calls: int = 6,
+) -> list[dict[str, Any]]:
+    """Expand list/search results into safe record-detail GET calls.
+
+    V1 deliberately handles only endpoint families where the record identifier
+    was returned by an earlier benchmark read. This avoids inventing IDs while
+    enabling the common list -> get tool pattern.
+    """
+    endpoints: list[dict[str, Any]] = []
+    seen_eps: set[tuple[str, str]] = set()
+    for payload in search_payloads:
+        for ep in parse_search_payload(payload):
+            key = (str(ep.get("method") or ""), str(ep.get("url") or ""))
+            if key in seen_eps:
+                continue
+            seen_eps.add(key)
+            endpoints.append(ep)
+
+    records: list[dict[str, Any]] = []
+
+    def walk(value: Any) -> None:
+        if isinstance(value, str):
+            try:
+                walk(json.loads(value))
+            except Exception:
+                return
+            return
+        if isinstance(value, Mapping):
+            row = dict(value)
+            if any(str(k).lower() in {"id", "gid", "threadid", "thread_id"} for k in row):
+                records.append(row)
+            for child in row.values():
+                walk(child)
+            return
+        if isinstance(value, list):
+            for child in value:
+                walk(child)
+
+    for payload in observation_payloads:
+        walk(payload)
+
+    detailed_message_ids = {
+        str(row.get("id"))
+        for row in records
+        if row.get("id") is not None
+        and any(
+            row.get(k) not in (None, "", [], {})
+            for k in ("body", "body_plain", "payload", "subject", "from_", "from")
+        )
+    }
+    listed_message_ids = []
+    for row in records:
+        rid = row.get("id")
+        if rid is None:
+            continue
+        rid = str(rid)
+        has_thread = row.get("threadId") is not None or row.get("thread_id") is not None
+        if has_thread and rid not in detailed_message_ids and rid not in listed_message_ids:
+            listed_message_ids.append(rid)
+
+    out: list[dict[str, Any]] = []
+    for ep in rank_endpoints(prompt, endpoints):
+        if str(ep.get("method") or "").upper() != "GET":
+            continue
+        ep_id = str(ep.get("id") or "").lower()
+        ep_text = _endpoint_text(ep)
+
+        # Gmail list -> message detail. The candidate IDs come only from a
+        # prior list response and are skipped once a detailed record is seen.
+        is_gmail_message_get = (
+            "gmail" in ep_text
+            and "message" in ep_text
+            and (
+                ep_id.endswith("messages.get")
+                or "specific email message by its id" in ep_text
+            )
+        )
+        if not is_gmail_message_get or not listed_message_ids:
+            continue
+
+        for message_id in listed_message_ids:
+            url = str(ep.get("url") or "")
+            if not url:
+                continue
+            params: dict[str, str] = {}
+            ok = True
+            for name, spec in _required_parameters(ep):
+                compact = re.sub(r"[^a-z0-9]", "", name.lower())
+                value: Any = spec.get("default")
+                if value is None and compact in {"id", "messageid"}:
+                    value = message_id
+                if value is None:
+                    value = _ground_required_param(name, prompt)
+                if value is None:
+                    ok = False
+                    break
+                value = str(value)
+                if str(spec.get("location") or "").lower() == "path" or ("{" + name + "}") in url:
+                    placeholder = "{" + name + "}"
+                    if placeholder not in url:
+                        ok = False
+                        break
+                    url = url.replace(placeholder, quote(value, safe=""))
+                else:
+                    params[name] = value
+            if not ok or "{" in url or "}" in url:
+                continue
+            args: dict[str, Any] = {"method": "GET", "url": url}
+            if params:
+                args["params"] = json.dumps(params, sort_keys=True)
+            out.append({
+                "tool": "api_fetch",
+                "arguments": args,
+                "endpoint_id": ep.get("id"),
+                "grounded_from_observation_id": message_id,
+            })
+            if len(out) >= max_calls:
+                return out
+    return out
+
+
 def _parse_dt(value: Any) -> float:
     if value is None:
         return 0.0
@@ -366,6 +594,10 @@ def rank_source_records(
             str(rec.get(k) or "")
             for k in ("subject","title","body","body_plain","text","description","notes")
         )
+        sender_text = " ".join(
+            str(rec.get(k) or "")
+            for k in ("from_", "from", "sender", "sender_email", "author")
+        )
         low = text.lower()
         blocked = record_role == "action_candidate" and any(
             marker in low
@@ -373,10 +605,12 @@ def rank_source_records(
         )
         terms = set(_content_terms(text))
         overlap = len(pterms & terms)
+        sender_terms = set(_content_terms(sender_text.replace("@", " ").replace(".", " ")))
+        sender_overlap = len(pterms & sender_terms)
         labels = {str(x).upper() for x in (rec.get("label_ids") or [])}
         unread = "UNREAD" in labels or rec.get("is_read") is False
         ts = _parse_dt(rec.get("date") or rec.get("updated_at") or rec.get("timestamp"))
-        score = overlap * 10 + (3 if unread else 0)
+        score = overlap * 10 + sender_overlap * 25 + (3 if unread else 0)
         rows.append((blocked, -score, -ts, idx, rec))
     rows.sort(key=lambda x: (x[0], x[1], x[2], x[3]))
     return [rec for blocked, _, _, _, rec in rows if not blocked]

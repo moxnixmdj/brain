@@ -13,16 +13,24 @@ import json
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime.automationbench_mutation_compiler_v1 import (
+    compile_asana_add_tag,
     compile_asana_add_to_section,
     compile_asana_create_task,
     compile_salesforce_mark_won,
     validate_nonnegative_action,
 )
+from canonical.runtime.automationbench_communication_grounder_v1 import resolve_communication
 from canonical.runtime.automationbench_owned_policy_kernel_v1 import (
+    followup_observation_plan,
     observation_plan,
     rank_source_records,
     search_queries,
 )
+from canonical.runtime.automationbench_simulated_communication_v1 import (
+    SURFACE as SIMULATED_SURFACE,
+    compile_simulated_communication,
+)
+from canonical.runtime.automationbench_workflow_ir_v1 import compile_workflow_ir
 
 SCHEMA = "PROJECT_BRAIN_AUTOMATIONBENCH_POLICY_STATE_MACHINE_V1"
 
@@ -109,6 +117,25 @@ def next_policy_action(
 
     observations = [_payload(x) for x in fetches]
 
+    # Expand list/search reads into detail reads only when identifiers were
+    # grounded by prior observations.
+    followups = followup_observation_plan(
+        prompt,
+        [_payload(x) for x in searches],
+        observations,
+        max_calls=max_parallel_calls,
+    )
+    if followups:
+        return {
+            "schema": SCHEMA,
+            "status": "CALL_TOOLS",
+            "phase": "OBSERVE_DETAILS",
+            "calls": [
+                {"tool": x["tool"], "arguments": x["arguments"]}
+                for x in followups
+            ],
+        }
+
     # Typed compiler 1: Salesforce mark-won.
     action = compile_salesforce_mark_won(prompt, observations)
     if action is not None and validate_nonnegative_action(prompt, action):
@@ -135,7 +162,21 @@ def next_policy_action(
                 "calls": [{"tool": action["tool"], "arguments": action["arguments"]}],
             }
 
-    # Typed compiler 2: create an Asana task from the best eligible source record.
+    # Continue a created Asana task with an explicitly grounded tag.
+    if _semantic_done(history, "ASANA_TASK_CREATE") and not _semantic_done(
+        history, "ASANA_TASK_ADD_TAG"
+    ):
+        action = compile_asana_add_tag(prompt, observations)
+        if action is not None and validate_nonnegative_action(prompt, action):
+            return {
+                "schema": SCHEMA,
+                "status": "CALL_TOOLS",
+                "phase": "MUTATE",
+                "semantic": action["semantic"],
+                "calls": [{"tool": action["tool"], "arguments": action["arguments"]}],
+            }
+
+    # Typed compiler 3: create an Asana task from the best eligible source record.
     all_records: list[dict[str, Any]] = []
     for obs in observations:
         all_records.extend(_flatten_records(obs))
@@ -151,6 +192,45 @@ def next_policy_action(
                     "semantic": action["semantic"],
                     "calls": [{"tool":action["tool"],"arguments":action["arguments"]}],
                 }
+
+    # Generic literal communication: execute only content already grounded
+    # in the task prompt. Derived summaries and calculated values stay open.
+    workflow_ir = compile_workflow_ir(prompt)
+    for communication in workflow_ir.get("communications", []):
+        grounded = resolve_communication(
+            communication,
+            prompt=prompt,
+            observations=observations,
+        )
+        if grounded.get("grounding_complete") is not True:
+            continue
+        compiled = compile_simulated_communication(
+            {
+                "surface": SIMULATED_SURFACE,
+                "channel": grounded.get("channel"),
+                "destination": grounded.get("destination"),
+                "subject": grounded.get("subject"),
+                "content": grounded.get("content_literal"),
+                "grounding_complete": True,
+                "provenance_bound": grounded.get("provenance_bound") is True,
+            }
+        )
+        if compiled.get("pass") is not True:
+            continue
+        semantic = str(compiled.get("semantic") or "")
+        if not semantic or _semantic_done(history, semantic):
+            continue
+        call = compiled.get("tool_call")
+        if not isinstance(call, Mapping):
+            continue
+        return {
+            "schema": SCHEMA,
+            "status": "CALL_TOOLS",
+            "phase": "COMMUNICATE",
+            "semantic": semantic,
+            "semantic_family": compiled.get("semantic_family"),
+            "calls": [{"tool": call["tool"], "arguments": call["arguments"]}],
+        }
 
     return {
         "schema": SCHEMA,

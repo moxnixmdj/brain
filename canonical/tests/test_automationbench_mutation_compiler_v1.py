@@ -4,6 +4,7 @@ import json
 import unittest
 
 from canonical.runtime.automationbench_mutation_compiler_v1 import (
+    compile_asana_add_tag,
     compile_asana_create_task,
     compile_salesforce_mark_won,
     compile_sheets_append,
@@ -70,6 +71,67 @@ class AutomationBenchMutationCompilerV1Tests(unittest.TestCase):
                 row_values=["x", None],
             )
         )
+
+    def test_asana_add_tag_uses_exact_created_task_and_source_tag(self):
+        prompt = (
+            "Check the latest fire drill email for the task details, due date, "
+            "and what tag to use in Asana."
+        )
+        observations = [
+            {
+                "messages":[
+                    {
+                        "id":"source",
+                        "body_plain":(
+                            "Please create task: Monthly Fire Drill Checklist - February. "
+                            "Due: 2026-02-18. Tag: Compliance."
+                        )
+                    }
+                ]
+            },
+            {
+                "data":{
+                    "gid":"task_new",
+                    "name":"Monthly Fire Drill Checklist - February",
+                    "due_on":"2026-02-18"
+                }
+            },
+        ]
+        out = compile_asana_add_tag(prompt, observations)
+        self.assertIsNotNone(out)
+        self.assertIn("/tasks/task_new/addTag", out["arguments"]["url"])
+        self.assertEqual(json.loads(out["arguments"]["body"]), {"tag":"Compliance"})
+        self.assertEqual(out["grounding"]["tag"], "Compliance")
+
+    def test_asana_add_tag_fails_closed_on_ambiguous_tag_labels(self):
+        prompt = "Check what tag to use in Asana."
+        observations = [
+            {
+                "id":"source1",
+                "body_plain":"Create task: Safety Review. Due: 2026-02-18. Tag: Compliance."
+            },
+            {
+                "id":"source2",
+                "body_plain":"Create task: Safety Review. Due: 2026-02-18. Tag: Urgent."
+            },
+            {
+                "data":{"gid":"task_new","name":"Safety Review","due_on":"2026-02-18"}
+            },
+        ]
+        self.assertIsNone(compile_asana_add_tag(prompt, observations))
+
+    def test_asana_add_tag_requires_matching_created_task(self):
+        prompt = "Check what tag to use in Asana."
+        observations = [
+            {
+                "id":"source",
+                "body_plain":"Create task: Safety Review. Due: 2026-02-18. Tag: Compliance."
+            },
+            {
+                "data":{"gid":"other","name":"Different Task","due_on":"2026-02-18"}
+            },
+        ]
+        self.assertIsNone(compile_asana_add_tag(prompt, observations))
 
     def test_negative_prompt_guard_blocks_create(self):
         action = compile_asana_create_task(

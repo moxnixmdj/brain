@@ -305,3 +305,89 @@ def compile_asana_add_to_section(
             "project_gid": project_gid,
         },
     }
+
+
+def compile_asana_add_tag(
+    prompt: str,
+    observations: Sequence[Any],
+    *,
+    endpoint_url_template: str = "https://app.asana.com/api/1.0/tasks/{task_gid}/addTag",
+) -> dict[str, Any] | None:
+    """Apply an explicitly grounded tag label to the exact created Asana task.
+
+    AutomationBench's simulated Asana implementation accepts the `tag` request
+    value directly and records it in the add_tag_to_task action. No tag-directory
+    lookup or invented GID is needed.
+    """
+    low = prompt.lower()
+    if "asana" not in low or "tag" not in low:
+        return None
+
+    all_records = _records(observations)
+
+    target_names: list[str] = []
+    tag_labels: list[str] = []
+    for rec in all_records:
+        text = " ".join(
+            _s(rec.get(k))
+            for k in ("body", "body_plain", "text", "description", "subject", "title")
+        )
+        m_name = re.search(r"(?:create\s+task|task)\s*:\s*([^\n.]+)", text, re.I)
+        if m_name:
+            target_names.append(m_name.group(1).strip())
+        for m_tag in re.finditer(r"\bTag\s*:\s*([^\n.;]+)", text, re.I):
+            value = m_tag.group(1).strip()
+            if value:
+                tag_labels.append(value)
+
+    # Prompt-level explicit fallback, e.g. "tag it Compliance".
+    if not tag_labels:
+        m_prompt_tag = re.search(
+            r"\btag(?:\s+(?:it|the\s+task))?(?:\s+with)?\s+['\"]?([A-Za-z][A-Za-z0-9 _-]{1,50})['\"]?",
+            prompt,
+            re.I,
+        )
+        if m_prompt_tag:
+            value = m_prompt_tag.group(1).strip()
+            # Stop before common continuation markers.
+            value = re.split(r"\s+(?:and|then|before|after|notify|send|post)\b", value, maxsplit=1, flags=re.I)[0].strip()
+            if value:
+                tag_labels.append(value)
+
+    target_names = list(dict.fromkeys(target_names))
+    tag_labels = list(dict.fromkeys(tag_labels))
+    if len(tag_labels) != 1 or not target_names:
+        return None
+    tag_label = tag_labels[0]
+
+    task_candidates: list[dict[str, Any]] = []
+    for rec in all_records:
+        gid = _s(_ci_get(rec, "gid", "id", "Id"))
+        name = _s(_ci_get(rec, "name", "title"))
+        if not gid or not name:
+            continue
+        if any(name.lower() == target.lower() for target in target_names):
+            task_candidates.append(rec)
+
+    if not task_candidates:
+        return None
+    task = task_candidates[-1]
+    task_gid = _s(_ci_get(task, "gid", "id", "Id"))
+    if not task_gid:
+        return None
+
+    return {
+        "schema": SCHEMA,
+        "semantic": "ASANA_TASK_ADD_TAG",
+        "tool": "api_fetch",
+        "arguments": {
+            "method": "POST",
+            "url": endpoint_url_template.replace("{task_gid}", task_gid),
+            "body": json.dumps({"tag": tag_label}, sort_keys=True),
+        },
+        "grounding": {
+            "task_gid": task_gid,
+            "task_name": _s(_ci_get(task, "name", "title")),
+            "tag": tag_label,
+        },
+    }
