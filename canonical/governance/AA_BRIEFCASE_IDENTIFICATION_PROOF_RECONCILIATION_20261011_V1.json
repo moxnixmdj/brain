@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_IDENTIFICATION_PROOF_RECONCILIATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "DUPLICATE_PROOF_RECONCILED__PREEXISTING_TOP_SUPPORT_COLLAPSE_RETAINS_AUTHORITY__LATER_TWO_RUBRIC_CUT_CORROBORATIVE_ONLY__ZERO_CREDIT",
+  "authoritative_prior": {
+    "governance": {
+      "path": "canonical/governance/AA_BRIEFCASE_TOP_SUPPORT_COLLAPSE_20261011_V1.json",
+      "git_blob_sha": "027a411b83ae51dc96a7c9e1f8730248a0b735da"
+    },
+    "runtime": {
+      "path": "canonical/runtime/aa_briefcase_top_support_collapse_v1.py",
+      "git_blob_sha": "0c88d4346f028200259492a76e338e6d7086548f"
+    },
+    "tests": {
+      "path": "canonical/tests/test_aa_briefcase_top_support_collapse_v1.py",
+      "git_blob_sha": "1977e713860c4cc238b3201016edd7bd65e94eb3"
+    },
+    "verification": {
+      "path": "canonical/verification/AA_BRIEFCASE_TOP_SUPPORT_COLLAPSE_LOCAL_VERIFY_20261011_V1.json",
+      "git_blob_sha": "7fce0cdff6fb47c30086efa7eccbc11a4c22f933",
+      "result": "PASS__8_OF_8"
+    }
+  },
+  "later_corroboration": {
+    "governance": {
+      "path": "canonical/governance/AA_BRIEFCASE_RAW_SUPERDOMAIN_TOP_SUPPORT_CUT_20261011_V1.json",
+      "git_blob_sha": "f8ce8ddbf1740066a6e2241a75c6c46de11b29d3"
+    },
+    "runtime": "canonical/runtime/aa_briefcase_hidden_rubric_indistinguishability_v1.py",
+    "tests": "canonical/tests/test_aa_briefcase_hidden_rubric_indistinguishability_v1.py",
+    "verification": {
+      "path": "canonical/verification/AA_BRIEFCASE_HIDDEN_RUBRIC_INDISTINGUISHABILITY_LOCAL_VERIFY_20261011_V1.json",
+      "git_blob_sha": "420d29e292854326341c700308e49c1d533e97a5",
+      "result": "LOCAL_8_OF_8_PASS__NOT_INDEPENDENT"
+    },
+    "novel_proof_credit": 0,
+    "active_authority": false,
+    "preservation_reason": "KEEP_CONTENT_ADDRESSED_HISTORY_AND_AVOID_DANGLING_REFERENCES"
+  },
+  "shared_conclusion": "OPAQUE_ARBITRARY_HIDDEN_PREDICATE_SUPERDOMAIN_HAS_NO_NONTRIVIAL_GLOBAL_TOP_SUPPORT__A_SOUND_RESTRICTION_OR_REFERENCE_RELATION_IS_REQUIRED",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
