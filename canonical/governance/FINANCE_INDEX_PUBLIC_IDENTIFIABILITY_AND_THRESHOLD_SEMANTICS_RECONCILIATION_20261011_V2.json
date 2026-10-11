@@ -1,0 +1,215 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_INDEX_PUBLIC_IDENTIFIABILITY_AND_THRESHOLD_SEMANTICS_RECONCILIATION_20261011_V2",
+  "date": "2026-10-11",
+  "status": "PUBLIC_IDENTIFIABILITY_EXHAUSTED_TO_CURRENT_INFORMATION_CUT__DISPLAYED_61_SEPARATED_FROM_LITERAL_RAW_GE_61__INNER_COMPONENT_OPERATOR_AND_BRAIN_SCORE_RECEIPTS_STILL_OPEN__ZERO_CREDIT",
+  "target": {
+    "predicate_id": "FINANCE_ACCOUNTING_INDEX_GE_61",
+    "owner": "Artificial Analysis",
+    "surface": "Finance & Accounting Index",
+    "mission_lock": "PRESERVE_LITERAL_GE_61_UNLESS_A_SEPARATELY_VERIFIED_ACCEPTANCE_CONTRACT_PROVES_THE_PREDICATE_IS_DEFINED_ON_DISPLAYED_ROUNDED_SCORE",
+    "automatic_rebase_to_opus_raw_score_forbidden": true
+  },
+  "current_owner_surface": {
+    "observed_date": "2026-10-11",
+    "displayed_leader": {
+      "model": "Claude Opus 5.5 (Max, Default Fallback)",
+      "displayed_finance_index": 61,
+      "source": "https://artificialanalysis.ai/models/capabilities/finance-and-accounting"
+    },
+    "published_outer_components": [
+      {
+        "capability": "BUSINESS_KNOWLEDGE",
+        "weight": 0.3,
+        "evaluation": "AA-Omniscience Business Accuracy"
+      },
+      {
+        "capability": "AGENTIC_KNOWLEDGE_WORK",
+        "weight": 0.3,
+        "evaluations": [
+          "GDPval-AA v2.1",
+          "AA-Briefcase v1.1"
+        ]
+      },
+      {
+        "capability": "REASONING",
+        "weight": 0.2,
+        "evaluation": "HLE"
+      },
+      {
+        "capability": "AGENTIC_TOOL_USE",
+        "weight": 0.1,
+        "evaluation": "AutomationBench-AA Finance"
+      },
+      {
+        "capability": "LONG_CONTEXT",
+        "weight": 0.05,
+        "evaluations": [
+          "AA-LCR v1.1",
+          "GDP.pdf"
+        ]
+      },
+      {
+        "capability": "NON_HALLUCINATION",
+        "weight": 0.05,
+        "evaluation": "AA-Omniscience Business Non-Hallucination"
+      }
+    ],
+    "exact_outer_rule": "FINANCE_INDEX = 0.30*K + 0.30*A + 0.20*H + 0.10*T + 0.05*C + 0.05*N",
+    "capability_breakdown_numeric_values_public": false,
+    "source": "https://artificialanalysis.ai/models/capabilities/finance-and-accounting"
+  },
+  "first_party_v1_1_structure": {
+    "source": "https://artificialanalysis.ai/articles/artificial-analysis-capability-indices-v1-1",
+    "verified": [
+      "CAPABILITY_INDICES_MAP_O_NET_STYLE_WORK_TASKS_TO_BENCHMARKS",
+      "BENCHMARK_WEIGHTING_IS_DESCRIBED_AS_DRIVEN_BY_HOW_OFTEN_THE_BENCHMARKS_CAPABILITY_APPEARS_ACROSS_MAPPED_WORK_TASKS",
+      "DOMAIN_SLICING_IS_USED_WHEN_AVAILABLE",
+      "FINANCE_TOOL_USE_IS_EXPLICITLY_SOURCED_FROM_THE_FINANCE_SLICE_OF_AUTOMATIONBENCH_AA",
+      "AA_BRIEFCASE_WAS_ADDED_ALONGSIDE_GDPVAL_AA_V2_INSIDE_AGENTIC_KNOWLEDGE_WORK",
+      "GDP_PDF_WAS_ADDED_ALONGSIDE_LCR_INSIDE_LONG_CONTEXT"
+    ],
+    "task_count_weighting_220_to_91_supported": false,
+    "reason_task_count_weighting_rejected": "THE_PUBLISHED_WEIGHTING_DESCRIPTION REFERENCES O_NET_CAPABILITY_FREQUENCY_ACROSS_REAL_WORLD_WORK_TASKS_NOT THE NUMBER_OF_ROWS_IN_GDPVAL_OR_BRIEFCASE",
+    "equal_pooling_status": "STRONGLY_SUGGESTED_BY_SHARED_CAPABILITY_FREQUENCY_SIGNAL_BUT_NOT EXPLICITLY_SPECIFIED_AS_AN_ARITHMETIC_MEAN__NO_ACCEPTANCE_CREDIT"
+  },
+  "primitive_metric_bindings": {
+    "source": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+    "verified": [
+      "GDPVAL_AA_V2_1_INDEX_NORMALIZATION_CLAMP_ELO_MINUS_500_OVER_2000",
+      "AA_BRIEFCASE_V1_1_INDEX_NORMALIZATION_CLAMP_ELO_MINUS_500_OVER_2000",
+      "HLE_IS_PASS_AT_1_STYLE_ACCURACY",
+      "AA_LCR_V1_1_IS_PASS_AT_1_STYLE_SCORE",
+      "AA_OMNISCIENCE_EXPOSES_ACCURACY_AND_NON_HALLUCINATION_AS_DISTINCT_METRICS",
+      "GDP_PDF_HEADLINE_REPORTS_ALL_PASS_AND_ALSO_REPORTS_TASK_MACRO_MEAN_PASS_DOMAIN_CUTS",
+      "AUTOMATIONBENCH_AA_HEADLINE_SCORE_ZEROS_A_TASK_IF_ANY_GUARDRAIL_IS_VIOLATED_AND_THEN_AVERAGES_OBJECTIVE_COMPLETION"
+    ],
+    "does_not_prove_capability_inner_operator": true
+  },
+  "public_client_boundary": {
+    "owner_page_server_rendered_component_values": false,
+    "owner_page_labels_component_breakdown": "Not publicly available",
+    "free_api_exposes_headline_capability_indices": true,
+    "free_api_exposes_six_finance_component_subscores": false,
+    "openapi_exposes_current_inner_component_formula": false,
+    "conclusion": "PUBLIC_OWNER_SURFACE_EXPOSES_OUTER_WEIGHTS_AND_HEADLINE_INDEX_BUT_NOT_THE_NUMERIC_CAPABILITY_VECTOR_OR_COMPLETE_INNER_POOLING_AND_SLICE_BINDING"
+  },
+  "independent_mirror_observation": {
+    "purpose": "THRESHOLD_SEMANTICS_DIAGNOSTIC_ONLY__NOT_OWNER_AUTHORITY",
+    "observed_underlying_opus55_finance_index_approx": 60.7295442846867,
+    "mirrors": [
+      "https://www.aibattle.space/data/rankings/llm-index-artificial-analysis-finance-accounting-index.json",
+      "https://hollobit.github.io/SOTA/"
+    ],
+    "owner_displayed_value": 61,
+    "implication": "DISPLAYED_61_CAN_BE_CONSISTENT_WITH_AN_UNDERLYING_VALUE_BELOW_61",
+    "hard_rule": "DO_NOT_TREAT_OPUS_NONINFERIORITY_OR_DISPLAYED_61_AS_PROOF_OF_LITERAL_RAW_GE_61_WITHOUT ACCEPTANCE_SCALE_BINDING"
+  },
+  "nonidentifiability_certificate": {
+    "statement": "THE_PUBLIC_HEADLINE_SCORE_AND_PUBLISHED_OUTER_WEIGHTS_DO_NOT_IDENTIFY_THE_HIDDEN_COMPONENT_VECTOR",
+    "symbolic_proof": {
+      "fixed_known_reasoning_component": "H",
+      "hidden_components": [
+        "K",
+        "A",
+        "T",
+        "C",
+        "N"
+      ],
+      "equation": "F = 0.30*K + 0.30*A + 0.20*H + 0.10*T + 0.05*C + 0.05*N",
+      "invariance": "FOR_ANY_DELTA_THAT_KEEPS_VALUES_IN_RANGE, (K,A,T,C,N) -> (K+DELTA,A-DELTA,T,C,N) LEAVES F EXACTLY UNCHANGED",
+      "consequence": "ONE_HEADLINE_EQUATION_CANNOT_RECOVER_K_AND_A_EVEN_IF_H,T,C,N_WERE OTHERWISE_FIXED; WITH_MULTIPLE_HIDDEN_DOMAIN_VALUES_THE_NONIDENTIFIABILITY_IS_STRONGER"
+    },
+    "current_display_example_for_illustration_only": {
+      "displayed_F": 61,
+      "H": 61.4,
+      "equal_hidden_baseline_x": 60.9,
+      "vector_1": {
+        "K": 60.9,
+        "A": 60.9,
+        "T": 60.9,
+        "C": 60.9,
+        "N": 60.9
+      },
+      "vector_2": {
+        "K": 70.9,
+        "A": 50.9,
+        "T": 60.9,
+        "C": 60.9,
+        "N": 60.9
+      },
+      "both_give_same_display_equation_value": true,
+      "warning": "ILLUSTRATES_IDENTIFIABILITY_ONLY__DOES_NOT_ASSERT_THE_UNROUNDED_OWNER_INDEX_EQUALS_61_OR_THAT_EITHER_VECTOR_IS_THE_OWNER_VECTOR"
+    }
+  },
+  "public_domain_observations_non_authoritative_for_index_mapping": {
+    "independent_mirror_examples": [
+      "AUTOMATIONBENCH_AA_FINANCE_RAW_OBJECTIVE_COMPLETION_EXISTS_AS_A_DOMAIN_METRIC",
+      "GDP_PDF_FINANCE_INVESTING_CRITERION_PASS_RATE_EXISTS_AS_A_DOMAIN_METRIC",
+      "AA_OMNISCIENCE_BUSINESS_INDEX_EXISTS_AS_A_DOMAIN_METRIC"
+    ],
+    "forbidden_transfer": [
+      "RAW_AUTOMATION_FINANCE_OBJECTIVE_COMPLETION_MUST_NOT_BE_ASSUMED_TO_EQUAL_THE_FINANCE_TOOL_USE_SUBSCORE",
+      "GDP_PDF_FINANCE_INVESTING_CRITERION_PASS_MUST_NOT_BE_ASSUMED_TO_EQUAL_THE_LONG_CONTEXT_GDP_PDF_INPUT",
+      "AA_OMNISCIENCE_BUSINESS_INDEX_MUST_NOT_BE_SUBSTITUTED_FOR_BUSINESS_ACCURACY_OR_BUSINESS_NON_HALLUCINATION"
+    ]
+  },
+  "falsified_or_unproven_shortcuts": [
+    "NO_MIN_GDPVAL_BRIEFCASE_LOWER_BOUND_WITHOUT_A_PUBLISHED_OR_VERIFIED_CONVEX_INNER_OPERATOR",
+    "NO_220_TO_91_TASK_COUNT_WEIGHTING_INFERENCE",
+    "NO_GLOBAL_BENCHMARK_SCORE_SUBSTITUTION_FOR_DOMAIN_SLICED_COMPONENTS",
+    "NO_FINANCE_RAW_OBJECTIVE_COMPLETION_SUBSTITUTION_WITHOUT_EXACT_CAPABILITY_BINDING",
+    "NO_GDP_PDF_DOMAIN_CRITERION_PASS_SUBSTITUTION_WITHOUT_EXACT_CAPABILITY_BINDING",
+    "NO_CROSS_EPOCH_ELO_OR_CAPABILITY_SCORE_ALGEBRA",
+    "NO_STANDALONE_SUBSTRATE_MODEL_SCORE_CREDIT_AS_BRAIN_SCORE",
+    "NO_BEHAVIORAL_FINANCE_QUALITY_PROOF_AS_NUMERIC_FINANCE_INDEX_CREDIT"
+  ],
+  "current_brain_receipt_state": {
+    "verified_finance_component_receipt_count": 0,
+    "known_related_branches": {
+      "GDPVAL": "NO_MATCHED_EPOCH_BRAIN_SCORE_RECEIPT",
+      "AA_BRIEFCASE": "NO_AUTHENTIC_BRAIN_SCORE_RECEIPT",
+      "HLE": "NO_ADMISSIBLE_FINANCE_COMPONENT_SCORE_RECEIPT",
+      "AUTOMATIONBENCH": "PUBLIC_RUNTIME_BOUND_BUT_PRIVATE_SCOPE_SCORE_NOT_PROVED"
+    },
+    "acceptance_credit_delta": 0
+  },
+  "irreducible_closure_routes": [
+    "SIX_OWNER_SCALE_BOUND_NORMALIZED_BRAIN_COMPONENT_LOWER_BOUND_RECEIPTS_WHOSE_WEIGHTED_SUM_IS_AT_LEAST_61",
+    "EXACT_OWNER_INNER_POOLING_DOMAIN_SLICING_AND_NORMALIZATION_BINDING_PLUS_AUTHENTIC_BRAIN_OUTCOMES_ON_EVERY_REQUIRED_COMPONENT_SCOPE",
+    "OWNER_ACCEPTED_OR_PROTOCOL_EQUIVALENT_DIRECT_BRAIN_FINANCE_INDEX_RESULT_AT_OR_ABOVE_LITERAL_61",
+    "SEPARATELY_VERIFIED_SCOPE_SAFE_CERTIFICATE_WHOSE_CONCLUSION_DIRECTLY_IMPLIES_LITERAL_FINANCE_INDEX_GE_61"
+  ],
+  "scheduler_effect": {
+    "delete": [
+      "REPEAT_STATIC_PUBLIC_SEARCH_FOR_HIDDEN_FINANCE_COMPONENT_NUMBERS_ABSENT_SOURCE_DELTA",
+      "REPEAT_220_VS_91_TASK_COUNT_WEIGHT_HYPOTHESIS",
+      "PROMOTE_EQUAL_POOLING_FROM_SEMANTIC_PLAUSIBILITY_ALONE",
+      "USE_ROUNDED_OPUS_DISPLAY_SCORE_AS_RAW_THRESHOLD_RECEIPT",
+      "REUSE_GLOBAL_OR_DOMAIN_DIAGNOSTIC_METRICS_AS_CAPABILITY_SUBSCORES_WITHOUT_BINDING"
+    ],
+    "wake_on": [
+      "OWNER_PUBLISHES_CAPABILITY_BREAKDOWN_VALUES_OR_INNER_OPERATOR",
+      "AUTHORIZED_OWNER_OR_PROTOCOL_EQUIVALENT_BRAIN_FINANCE_RESULT",
+      "NEW_CONTENT_ADDRESSED_NORMALIZED_BRAIN_COMPONENT_RECEIPT",
+      "NEW_SCOPE_SAFE_DIRECT_NUMERIC_CERTIFICATE",
+      "NEW_FIRST_PARTY_ACCEPTANCE_RULE_PROVING_DISPLAYED_ROUNDED_SCORE_IS_THE_TARGET_SCALE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_FINANCE_INDEX_GE_61_PROOF",
+    "NO_OPUS_RAW_SCORE_AUTHORITY_FROM_THIRD_PARTY_MIRRORS",
+    "NO_EQUAL_POOLING_PROOF",
+    "NO_FINANCE_COMPONENT_VECTOR_RECOVERED",
+    "NO_BRAIN_COMPONENT_SCORE_CREATED",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false
+}
