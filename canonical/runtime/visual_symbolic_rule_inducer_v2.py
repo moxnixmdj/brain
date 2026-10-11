@@ -405,7 +405,7 @@ def solve(
         max_predicates_per_node=max_predicates_per_node,
         max_search_subproblems=max_search_subproblems,
         max_generated_split_nodes=max_generated_split_nodes,
-        top_k=max(8, attempts * 4),
+        top_k=max(2, attempts),
     )
     if result.get("status") != "EXACT_RULES_FOUND":
         return {
