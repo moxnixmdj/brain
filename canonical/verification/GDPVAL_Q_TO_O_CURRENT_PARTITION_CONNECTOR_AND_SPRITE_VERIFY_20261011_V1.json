@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_Q_TO_O_CURRENT_PARTITION_CONNECTOR_AND_SPRITE_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__CURRENT_BLOBS_RECOMPUTED__SPRITE_PARTITION_REPLAY_PASS__13_EQUALS_11O_PLUS_1Q_PLUS_1PARKED__ZERO_CREDIT",
+  "subject": {
+    "current_cut_path": "canonical/governance/CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_CUT_20261011_V1.json",
+    "current_cut_git_blob_sha": "07b3ca1b623209d224ade26b174da3f6247fefaf",
+    "reclassification_path": "canonical/governance/GDPVAL_CURRENT_FIXED_BAR_ENGINE_RECLASSIFICATION_20261011_V1.json",
+    "reclassification_git_blob_sha": "c16a49726507d6611a24bde323e0436a65870b59"
+  },
+  "connector_recomputation": {
+    "total": true,
+    "active": true,
+    "parked": true,
+    "o11": true,
+    "q1": true,
+    "disjoint": true,
+    "gdpval_o": true,
+    "aa_q": true,
+    "tb_parked": true
+  },
+  "independent_runtime_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "result": "PASS GDPVAL_Q_TO_O_PARTITION 13=11O+1Q+1PARKED",
+    "independence_scope": "SET_PARTITION_AND_CARDINALITY_ONLY__SOURCE_IDENTITY_RECOMPUTED_BY_GITHUB_CONNECTOR"
+  },
+  "proved": [
+    "GDPVAL_FIXED_BAR_E1_IS_CURRENT_PRIMARY_O_OBJECTIVE_ACCEPTANCE_ROW",
+    "GDPVAL_IS_NOT_A_PRIMARY_Q_RELATION_ROW",
+    "AA_BRIEFCASE_IS_THE_ONLY_CURRENT_PRIMARY_Q_ROW",
+    "TB_SCIENCE_REMAINS_PARKED",
+    "THE_13_ROW_PARTITION_IS_EXACT_AND_DISJOINT"
+  ],
+  "hard_nonclaims": [
+    "NO_GDPVAL_ACCEPTANCE_CREDIT",
+    "NO_AA_BRIEFCASE_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_MATCHED_GDPVAL_BRAIN_SCORE_EXISTS",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
