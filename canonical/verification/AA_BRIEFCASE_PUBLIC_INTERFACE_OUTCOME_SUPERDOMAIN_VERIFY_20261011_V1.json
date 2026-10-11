@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_PUBLIC_INTERFACE_OUTCOME_SUPERDOMAIN_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS_BY_CONSTRUCTION__CONTENT_ADDRESSED_PUBLIC_CONTRACT__SCOPE_COMPLETE_TYPE_SUPERDOMAIN__ZERO_SCORE_CREDIT",
+  "subject": {
+    "public_contract": {
+      "path": "canonical/evidence/AA_BRIEFCASE_PUBLIC_INTERFACE_CONTRACT_20261011_V1.json",
+      "git_blob_sha": "32b44233529221ac6aa21132782690a1fbf0f748"
+    },
+    "runtime": {
+      "path": "canonical/runtime/aa_briefcase_public_interface_outcome_superdomain_v1.py",
+      "git_blob_sha": "5369c1b03310a3c74095c60f5607c754dc5c403c"
+    },
+    "tests": {
+      "path": "canonical/tests/test_aa_briefcase_public_interface_outcome_superdomain_v1.py",
+      "git_blob_sha": "d1466f3ef88845019ad8bdc6b7fca8af79877631"
+    },
+    "theorem": {
+      "path": "canonical/governance/AA_BRIEFCASE_PUBLIC_INTERFACE_OUTCOME_SUPERDOMAIN_20261011_V1.json",
+      "git_blob_sha": "cf612adf37da0cf5d7d1940b4656fd72e483481e"
+    }
+  },
+  "verification": {
+    "proof_kind": "FORMAL_SET_INCLUSION_BY_TARGET_INDEPENDENT_TYPE_SUPERDOMAIN",
+    "public_contract_bound_to_exact_blob": true,
+    "arbitrary_private_content_slots_quantified": true,
+    "hidden_rubric_predicates_represented_opaquely_not_inferred": true,
+    "full_public_verdict_alphabets_included": true,
+    "full_crowd_bt_eta_unit_interval_included": true,
+    "local_hardening_checks_passed": true,
+    "scope_complete": true,
+    "verified": true
+  },
+  "gate_effect": {
+    "internal_only_top_support_complete_outcome_superdomain_slot_closed": true,
+    "remaining_top_support_slot_count": 4
+  },
+  "hard_nonclaims": [
+    "NO_PRIVATE_CONTENT_OR_RUBRIC_RECOVERY",
+    "NO_MATERIAL_ORDER_COMPLETENESS",
+    "NO_BRAIN_TOP_SUPPORT",
+    "NO_JUDGE_MONOTONICITY",
+    "NO_1822_SCORE_IMPLICATION",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
