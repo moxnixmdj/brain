@@ -4,6 +4,7 @@ import pytest
 
 from canonical.runtime.finance_quantitative_algebra_v1 import (
     FinanceAlgebraError,
+    actual_fiscal_days,
     adjusted_ebitda,
     adjusted_ebitdar,
     basis_points_between,
@@ -42,6 +43,12 @@ def test_percent_change_and_guidance_beat_miss():
     assert transaction_premium("130", "100") == D("30.0")
     assert beat_miss_percent("90", "100") == D("-10.0")
     assert midpoint("80", "120") == D("100")
+
+
+
+def test_inclusive_fiscal_days_handles_52_and_53_week_years():
+    assert actual_fiscal_days("2024-01-29", "2025-02-02") == 371
+    assert actual_fiscal_days("2024-02-03", "2025-01-31") == 364
 
 
 def test_inventory_and_fixed_charge_formulas():
