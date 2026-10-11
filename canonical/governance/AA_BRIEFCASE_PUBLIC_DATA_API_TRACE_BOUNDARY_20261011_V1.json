@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_PUBLIC_DATA_API_TRACE_BOUNDARY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PUBLIC_OPENAPI_EXHAUSTED__MODEL_LEVEL_AA_ELO_ONLY__NO_AA_RAW_JUDGMENT_OR_TRACE_ENDPOINT__ZERO_CREDIT",
+  "mission_lock": "PROVE_AA_BRIEFCASE_V1_1_BRAIN_ELO_GE_1822_ONLY",
+  "public_authority": {
+    "docs": "https://artificialanalysis.ai/data-api/docs",
+    "openapi": "https://artificialanalysis.ai/api/v2/openapi",
+    "observed_api_version": "2.0",
+    "current_intelligence_index_version": "4.3.2"
+  },
+  "openapi_findings": {
+    "model_level_field": "aa_briefcase_elo",
+    "free_tier": {
+      "full_per_benchmark_evaluation_set": false,
+      "headline_indices_and_capability_indices": true
+    },
+    "pro_model_level": {
+      "aa_briefcase_elo": true,
+      "raw_aa_briefcase_judgments": false,
+      "raw_aa_briefcase_comparisons": false,
+      "raw_aa_briefcase_rubric_verdicts": false,
+      "raw_aa_briefcase_score_trace": false
+    },
+    "commercial_raw_measurements_endpoint": {
+      "path": "/api/v2/language/providers/{slug}/measurements",
+      "subject": "LLM_PERFORMANCE_TELEMETRY__OUTPUT_SPEED_TTFT_TTFA_END_TO_END_SUCCESS",
+      "aa_briefcase_grading_trace": false
+    },
+    "dedicated_aa_briefcase_evaluation_service_endpoint": false,
+    "dedicated_critpt_evaluation_service_exists_as_contrast": true
+  },
+  "implication": {
+    "public_api_can_supply_terminal_brain_score_if_brain_were_already_owner_evaluated": false,
+    "public_api_can_reconstruct_hidden_frozen_score_bearing_trace": false,
+    "public_api_can_supply_missing_synthetic_rubric_rows": false,
+    "public_api_can_supply_aq_presentation_realized_comparison_rows": false,
+    "route_effect": "DELETE_PUBLIC_DATA_API_AS_A_ZERO_WAIT_SOURCE_OF_THE_MISSING_AA_BRIEFCASE_SCORE_BEARING_SUFFICIENT_STATISTIC"
+  },
+  "relation_to_existing_proofs": {
+    "sufficient_statistic": "canonical/governance/AA_BRIEFCASE_SCORE_BEARING_SUFFICIENT_STATISTIC_THEOREM_20261011_V1.json",
+    "component_noninversion": "canonical/governance/AA_BRIEFCASE_COMPONENT_SUMMARY_NONINVERSION_20261011_V1.json",
+    "internal_gate": "canonical/runtime/aa_briefcase_internal_only_certification_gate_v3.py"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_UNDOCUMENTED_PRIVATE_OWNER_ENDPOINTS_DO_NOT_EXIST",
+    "NO_CLAIM_COMMERCIAL_BESPOKE_DATA_COULD_NOT_BE_NEGOTIATED",
+    "NO_EXTERNAL_PAID_OR_OWNER_HELP_ROUTE_IS_USED_OR_REQUIRED_BY_THIS_ARTIFACT",
+    "NO_BRAIN_AA_BRIEFCASE_SCORE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
