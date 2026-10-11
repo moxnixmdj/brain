@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_SPRITE_INDEPENDENT_VERIFY_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_BRAIN_BLOBS__FOCUSED_47_OF_47__INDEPENDENT_SPRITE_27_OF_27__ZERO_HELDOUT",
+  "capability_id": "chart.raster.direct_curve_label_family_rank.v1",
+  "subject": {
+    "runtime_path": "canonical/runtime/bound_capabilities/chart_direct_curve_label_family_rank_v1.py",
+    "runtime_git_blob_sha": "e3be28bd83ce0a9359a2ce9cedc8415dbcf745d2",
+    "authored_test_path": "canonical/tests/test_chart_direct_curve_label_family_rank_v1.py",
+    "authored_test_git_blob_sha": "4c8fc60d72e160f9995c5df1b0af75b97d9a1eb9",
+    "origin_candidate_pr": 4666,
+    "origin_candidate_merge_commit": "1e095acda08f2f00859946db796d5f8d440ebe2c"
+  },
+  "focused_primary_replay": {
+    "repository": "moxnixmdj/brain",
+    "workflow_run_id": 38155272543,
+    "workflow_job_id": 114516848546,
+    "candidate_tests": "13_OF_13_PASS",
+    "neighboring_chart_regressions": "34_OF_34_PASS",
+    "total": "47_OF_47_PASS",
+    "second_carrier_independent": false
+  },
+  "independent_second_carrier": {
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "verifier_repository_commit": "86e36b09ae6ec3c9da90c9a19a328e6dafc174ab",
+    "independent_test_path": "verification/independent_chart_direct_curve_label_family_rank_v1.py",
+    "independent_test_git_blob_sha": "d327f22c7d35e754298f477660a140198e042999",
+    "carrier": "SPRITE__brain-capability-first-scheduler-verify-20261008-v1",
+    "isolated_checkout": true,
+    "exact_runtime_blob_rechecked": "e3be28bd83ce0a9359a2ce9cedc8415dbcf745d2",
+    "exact_authored_test_blob_rechecked": "4c8fc60d72e160f9995c5df1b0af75b97d9a1eb9",
+    "exact_independent_test_blob_rechecked": "d327f22c7d35e754298f477660a140198e042999",
+    "python": "3.14.4",
+    "authored_tests": "13_OF_13_PASS",
+    "verifier_authored_falsification_tests": "14_OF_14_PASS",
+    "total": "27_OF_27_PASS",
+    "independence_basis": "SEPARATE_REMOTE_CARRIER__VERIFIER_REPOSITORY_EXACT_COMMIT__VERIFIER_AUTHORED_ADVERSARIAL_SUITE"
+  },
+  "proved_bounded_scope": [
+    "UNIQUE_ENDPOINT_ADJACENT_ALPHA_OR_ALPHANUMERIC_OCR_LABEL_TO_EXACT_POLYLINE_BINDING",
+    "LEFT_AND_RIGHT_ENDPOINT_BINDING",
+    "SAME_COLOR_CURVES_REMAIN_DISTINCT_WHEN_DIRECT_LABELS_BIND_DIFFERENT_POLYLINE_INDICES",
+    "CALIBRATED_BOUND_CURVE_FAMILY_HIGH_TO_LOW_RANK_AT_X",
+    "UNIQUE_NEAREST_BOUND_CURVE_TO_REQUESTED_Y_AT_X",
+    "LINEAR_AND_LOG10_Y_AXIS_VALUE_TRANSFORMS",
+    "AMBIGUOUS_ENDPOINTS_DUPLICATE_LABELS_MULTIPLE_LABELS_PER_CURVE_UNBRACKETED_QUERIES_VERTICAL_OVERLAP_LARGE_GAPS_UNSUPPORTED_SCALES_AND_NEAREST_TIES_FAIL_CLOSED"
+  ],
+  "ownership": {
+    "brain_owned": true,
+    "external_general_purpose_model_runtime_dependency_count": 0,
+    "donor_general_purpose_model_runtime_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "accounting": {
+    "heldout_chartography_cases_consumed": 0,
+    "benchmark_score_credit_delta": 0,
+    "capability_comparison_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CHARTOGRAPHY_GE89",
+    "NO_BRANDED_BENCHMARK_SCORE",
+    "NO_INLINE_CONTOUR_LABEL_AUTHORITY",
+    "NO_ARBITRARY_DIRECT_LABEL_PLACEMENT_AUTHORITY",
+    "NO_DOMAIN_SEMANTIC_INTERPRETATION",
+    "NO_HELDOUT_CHARTOGRAPHY_COVERAGE_CLAIM"
+  ],
+  "bounded_capability_promotion_supported": true,
+  "terminal_authority": false
+}
