@@ -25,7 +25,7 @@
       },
       {
         "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "git_blob_sha": "6e46499ecd310e962e726f7a847715f7747955dc"
+        "git_blob_sha": "a47697971500f36c18247706a766be28b0031ed1"
       },
       {
         "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
@@ -156,18 +156,16 @@
       "ready": "BLOCKED_ONLY_BY_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION"
     },
     {
-      "work_id": "BYTES_EXACT_SYMBOLIC_V52_NEXT59_DURABILITY_GATE",
+      "work_id": "BYTES_EXACT_SYMBOLIC_V52_NEXT_PHYSICAL_CUT",
       "work_type": "EFFICIENCY_IMPROVEMENT",
       "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-      "causal_role": "V52_VERIFIED_AT_1717827_RAW_PYTHON_BYTES__SPENT_NEXT57_AND_FRESH_NEXT58_PASS__NEXT59_CONTENT_HASH_FROZEN_BUT_DURABLE_PERSISTENCE_REQUIRED_BEFORE_ANY_V53_PHYSICAL_CUT",
-      "readiness": "BLOCKED_ONLY_ON_DURABLE_NEXT59_BYTE_IDENTICAL_PERSISTENCE__DO_NOT_SPEND_NEXT59__NO_NEW_PHYSICAL_CUT",
+      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1717827_RAW_PYTHON_BYTES_USING_SPENT_NEXT58_ONLY__NEXT59_IS_DURABLY_FROZEN_BY_VERIFIED_DETERMINISTIC_RECONSTRUCTION__MAKE_NEW_PHYSICAL_CUT_BEFORE_SPENDING_NEXT59",
+      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V52_CURRENT__MPF_POW_INT_SQUARE_ONLY_SPECIALIZATION_VERIFIED",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
-      "scheduler_state": "BLOCKED",
-      "prerequisites_satisfied": false,
-      "prerequisite_work_ids": [
-        "DURABLE_NEXT59_BYTE_IDENTICAL_PERSISTENCE"
-      ],
+      "scheduler_state": "READY_EXECUTION",
+      "prerequisites_satisfied": true,
+      "prerequisite_work_ids": [],
       "mutation_keys": [
         "canonical:bytes"
       ],
@@ -176,24 +174,25 @@
       ],
       "explicit_conflict_work_ids": [],
       "evidence_conflict_keys": [],
-      "evidence_acquisition_mode": "NONE",
+      "evidence_acquisition_mode": "READ_ONLY",
       "vector_evidence_state": "PARTIAL",
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "source_git_blob_sha": "6e46499ecd310e962e726f7a847715f7747955dc",
+        "source_git_blob_sha": "a47697971500f36c18247706a766be28b0031ed1",
         "raw_python_source_bytes": 1717827,
         "B_exec_raw_python_source_bytes": 1720587,
         "qualification": "15180/15180",
-        "next_action": "PERSIST_OR_BYTE_IDENTICALLY_REGENERATE_QUAL_SUCCESSOR_NEXT59_20261011_V1_TO_BOUND_SHA256__THEN_RERANK_V52_USING_SPENT_NEXT58_ONLY",
+        "next_action": "RERANK_EXACT_V52_USING_SPENT_NEXT58_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_RECONSTRUCTING_OR_SPENDING_NEXT59",
         "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT59_20261011_V1",
         "next_frozen_sha256": "5c7cf733614d58648dbe4fbfc855e7451651c652555eb895fcdcef39df780c92",
         "next_frozen_spent": false,
-        "next_frozen_durable_persisted": false,
+        "next_frozen_durable_reconstruction_verified": true,
         "independent_verification": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPF_POW_INT_V52_INDEPENDENT_VERIFY_20261011_V1.json",
+        "next_frozen_reconstruction_verification": "canonical/verification/BYTES_QUAL_SUCCESSOR_NEXT59_DETERMINISTIC_RECONSTRUCTION_VERIFY_20261011_V1.json",
         "vector_bounds_complete": false
       },
-      "ready": "V52_CURRENT_AT_1717827_BYTES__NEXT59_PERSISTENCE_GATE_ONLY__NO_V53_CUT_UNTIL_CLOSED",
+      "ready": "V52_CURRENT_AT_1717827_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT_USING_SPENT_NEXT58",
       "source_git_blob_sha": "cc039dec0d7361bfb83c7121433eabcb82ce5581"
     },
     {
@@ -427,7 +426,7 @@
   "live_selection": {
     "authorized": false,
     "reason": "PROFESSIONAL_PROPERTY_TRUTH_IS_24_OF_24__FULL_PRIVATE_CURRENT_MAIN_REGRESSION_IS_THE_ONLY_PROFESSIONAL_PROMOTION_GATE__MULTIPLE_DISTINCT_REPOSITORY_WORKFLOWS_FAIL_PRESTEP_IN_THE_SAME_WINDOW__FULL_REGRESSION_EXECUTED_ZERO_STEPS__EXISTING_SPRITE_ALTERNATE_CARRIER_CANNOT_AUTHENTICATE_PRIVATE_CANONICAL_REPO__OTHER_NONCONFLICTING_REUSE_FIRST_FRONTIERS_CONTINUE",
-    "exact_next": "PARALLEL:CONTINUE_NONCONFLICTING_CAPABILITY_FIRST_GENERAL_DEVELOPMENT__BYTES_WAKES_FOR_V53_ONLY_AFTER_DURABLE_NEXT59_BYTE_IDENTITY__PROFESSIONAL_WAKES_ONLY_ON_ZERO_SPEND_CARRIER_STATE_CHANGE_OR_STRONGER_VALID_REGRESSION_RECEIPT"
+    "exact_next": "PARALLEL:BYTES_V52_RESOURCE_PARETO_CUT_PLUS_OTHER_NONCONFLICTING_CAPABILITY_FIRST_GENERAL_DEVELOPMENT__PROFESSIONAL_WAKES_ONLY_ON_ZERO_SPEND_CARRIER_STATE_CHANGE_OR_STRONGER_VALID_REGRESSION_RECEIPT"
   },
   "hard_nonclaims": [
     "NO_GLOBAL_UNKNOWN_WORK_COMPLETENESS_CLAIM",
@@ -573,7 +572,7 @@
     "new_primitive_required": false,
     "terminal_credit_delta": 0
   },
-  "exact_next": "NO_SAME_INFORMATION_CHECKPOINT_WORK__DO_NOT_REPEAT_HOSTED_ACTIONS__BYTES_V52_IS_VERIFIED_BUT_NEXT59_DURABILITY_GATES_ANY_V53_CUT__CONTINUE_OTHER_NONCONFLICTING_CAPABILITY_FIRST_GENERAL_DEVELOPMENT__WAKE_EXTERNAL_ROWS_ONLY_ON_POLICY_CHANGING_REALITY",
+  "exact_next": "NO_SAME_INFORMATION_CHECKPOINT_WORK__DO_NOT_REPEAT_HOSTED_ACTIONS__RERANK_EXACT_BYTES_V52_USING_SPENT_NEXT58_AND_MAKE_ONE_NEW_PHYSICAL_CUT_BEFORE_RECONSTRUCTING_OR_SPENDING_NEXT59__CONTINUE_OTHER_NONCONFLICTING_CAPABILITY_FIRST_GENERAL_DEVELOPMENT",
   "professional_semantic_v2_successor_claim_batch_current": {
     "status": "INDEPENDENTLY_VERIFIED__CLAIM_AND_SCOPE_GENERATION_COMPLETE__PROPERTY_TRUTH_NEXT",
     "batch": {
@@ -648,13 +647,14 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "6e46499ecd310e962e726f7a847715f7747955dc",
-    "status": "ACTIVE_RESEARCH__MPF_POW_INT_SQUARE_ONLY_V52_FRONTIER__SUCCESSOR_READY_WITH_NEXT59_PERSISTENCE_GATE",
+    "observed_git_blob_sha": "a47697971500f36c18247706a766be28b0031ed1",
+    "status": "ACTIVE_RESEARCH__MPF_POW_INT_SQUARE_ONLY_V52_FRONTIER__SUCCESSOR_READY",
     "raw_python_source_bytes": 1717827,
     "B_exec_raw_python_source_bytes": 1720587,
     "qualification": "15180/15180",
-    "next": "Persist or byte-identically regenerate frozen NEXT59 to bound SHA-256; then rerank exact V52 using spent NEXT58 only before any new physical cut.",
+    "next": "Rerank exact V52 using spent NEXT58 only; make a new physical cut before reconstructing/spending frozen NEXT59.",
     "independent_verification_path": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPF_POW_INT_V52_INDEPENDENT_VERIFY_20261011_V1.json",
+    "next_frozen_reconstruction_verification": "canonical/verification/BYTES_QUAL_SUCCESSOR_NEXT59_DETERMINISTIC_RECONSTRUCTION_VERIFY_20261011_V1.json",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   }
