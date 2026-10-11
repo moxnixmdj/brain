@@ -361,6 +361,60 @@ def _repeat_grid(grid: Grid, row_repeats: int, col_repeats: int) -> Grid:
     return tuple(row for _ in range(row_repeats) for row in row_block)
 
 
+def _nonzero_color_counts(grid: Grid) -> Counter[int]:
+    return Counter(v for row in grid for v in row if v != 0)
+
+
+def _repeat_single_nonzero_by_count(grid: Grid) -> Grid | None:
+    counts = _nonzero_color_counts(grid)
+    if len(counts) != 1:
+        return None
+    color, count = next(iter(counts.items()))
+    return (tuple(color for _ in range(count)),)
+
+
+def _colors_by_pixel_count_desc(grid: Grid) -> Grid | None:
+    counts = _nonzero_color_counts(grid)
+    if not counts:
+        return None
+    colors = sorted(counts, key=lambda c: (-counts[c], c))
+    return tuple((c,) for c in colors)
+
+
+def _dominant_exclusion_count_desc(grid: Grid) -> Grid | None:
+    counts = _nonzero_color_counts(grid)
+    if len(counts) < 2:
+        return None
+    best = max(counts.values())
+    dominant = [c for c, n in counts.items() if n == best]
+    if len(dominant) != 1:
+        return None
+    colors = [c for c in counts if c != dominant[0]]
+    colors.sort(key=lambda c: (-counts[c], c))
+    return tuple((c,) for c in colors)
+
+
+def _max_frequency_colors_left_right(grid: Grid) -> Grid | None:
+    counts = _nonzero_color_counts(grid)
+    if not counts:
+        return None
+    max_count = max(counts.values())
+    colors = [c for c, n in counts.items() if n == max_count]
+    positions: dict[int, list[tuple[int, int]]] = {c: [] for c in colors}
+    for r, row in enumerate(grid):
+        for c, value in enumerate(row):
+            if value in positions:
+                positions[value].append((r, c))
+    colors.sort(
+        key=lambda color: (
+            sum(c for _, c in positions[color]) / len(positions[color]),
+            color,
+        )
+    )
+    row = tuple(colors)
+    return tuple(row for _ in range(max_count))
+
+
 def _infer_recolor(pairs: Sequence[tuple[Grid, Grid]]) -> dict[int, int] | None:
     mapping: dict[int, int] = {}
     for inp, out in pairs:
@@ -1167,6 +1221,14 @@ def _predict(h: Mapping[str, Any], grid: Grid) -> Grid | None:
     if kind == "MARKER_POSITION_ROW_FILL":
         mapping = {int(k): int(v) for k, v in h["mapping"].items()}
         return _marker_position_row_fill_predict(grid, mapping)
+    if kind == "REPEAT_SINGLE_COLOR_BY_COUNT":
+        return _repeat_single_nonzero_by_count(grid)
+    if kind == "COLORS_BY_PIXEL_COUNT_DESC":
+        return _colors_by_pixel_count_desc(grid)
+    if kind == "DOMINANT_EXCLUSION_COUNT_DESC":
+        return _dominant_exclusion_count_desc(grid)
+    if kind == "MAX_FREQUENCY_COLORS_LEFT_RIGHT":
+        return _max_frequency_colors_left_right(grid)
     raise ARCNoveltyCompilerError("HYPOTHESIS_KIND_UNSUPPORTED")
 
 
@@ -1394,6 +1456,16 @@ def compile_hypotheses(
         if _consistent(h, pairs):
             candidates.append(h)
 
+    for kind in (
+        "REPEAT_SINGLE_COLOR_BY_COUNT",
+        "COLORS_BY_PIXEL_COUNT_DESC",
+        "DOMINANT_EXCLUSION_COUNT_DESC",
+        "MAX_FREQUENCY_COLORS_LEFT_RIGHT",
+    ):
+        h = {"kind": kind}
+        if _consistent(h, pairs):
+            candidates.append(h)
+
     crop = {"kind": "CROP_NON_BACKGROUND"}
     if _consistent(crop, pairs):
         candidates.append(crop)
@@ -1462,6 +1534,8 @@ def compile_hypotheses(
             "PER_COLOR_BOUNDING_BOX_FILL",
             "SAME_COLOR_DIAGONAL_CONNECTION",
             "MARKER_POSITION_ROW_FILL",
+            "EIGHT_NEIGHBOR_COLOR_MULTISET_RULE",
+            "COUNT_AND_FREQUENCY_REDUCTIONS",
             "NON_BACKGROUND_BOUNDING_BOX_CROP",
             "UNIQUE_LARGEST_OR_SMALLEST_COMPONENT_CROP",
         ],
