@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_FIELD_SCOPED_ZERO_REALITY_REUSE_GATE_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_SPRITE__EXACT_BRANCH_BYTES__61_OF_61__VERIFICATION_REUSE_BINDING_EXECUTABLE__ZERO_CREDIT",
+  "subject_base_main_commit": "5fb705e9ceaddd12040c339abddcfa60a148f028",
+  "source_bindings": {
+    "canonical/runtime/field_scoped_zero_reality_reuse_gate_v1.py": "e13cfd0549189c79f5be5fb2a20973cf79fb76cb",
+    "canonical/tests/test_field_scoped_zero_reality_reuse_gate_v1.py": "581021c88bbb903cac89b7bab8b5e332d33cf980",
+    "canonical/runtime/pure_field_projection_capsule_v1.py": "793fcd21d3544ffc6316eb029753fdbc7a9d9a39",
+    "canonical/runtime/pure_field_projection_currentness_v1.py": "79c47fa4838e28b1889358e4cb26245f8510fecb",
+    "canonical/runtime/pure_projection_consumer_guard_v1.py": "9b623c5219cfe4b6037323fd5e8fc4dbd2b32907",
+    "canonical/runtime/pure_sealed_projection_consumer_v1.py": "159f3e0889e3aaf05432226709b88b6ecb106f0d",
+    "canonical/runtime/sealed_field_projection_consumer_v1.py": "348cc225d0a114ef73e549e368c6554272fcb598",
+    "canonical/runtime/field_scoped_authority_projection_gate_v1.py": "770174d3f70e18d35dfe18449c613df0259c6dd2",
+    "canonical/runtime/honesty_closed_world_input_manifest_v1.py": "0b7b84ed9b9cf77558a88b9871209d5d8bf7d8c9",
+    "canonical/runtime/zero_ambient_namespace_launcher_v1.py": "6e687527e9c4da82fb5d974a729aaa263ee73ea8"
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-field-projection-verify-20261011-v1",
+    "sprite_id": "sprite-f7ddb46b-7a9b-437e-8079-e815b9ab6fb5",
+    "python": "3.13.7",
+    "pytest": "9.1.1",
+    "tests_run": 61,
+    "tests_passed": 61,
+    "tests_failed": 0,
+    "included_suites": [
+      "test_pure_projection_consumer_guard_v1.py",
+      "test_field_scoped_authority_projection_gate_v1.py",
+      "test_sealed_field_projection_consumer_v1.py",
+      "test_pure_field_projection_capsule_v1.py",
+      "test_pure_field_projection_currentness_v1.py",
+      "test_pure_sealed_projection_consumer_v1.py",
+      "test_field_scoped_zero_reality_reuse_gate_v1.py"
+    ]
+  },
+  "proved": [
+    "SEMANTIC_CURRENTNESS_ALONE_CANNOT_GRANT_VERIFICATION_REUSE_AUTHORITY",
+    "REUSE_REQUIRES_EXACT_SEMANTIC_IDENTITY_CURRENTNESS",
+    "REUSE_REQUIRES_PURE_SEALED_EXECUTION_BINDING_THE_SAME_CONSUMER_PROJECTION_AND_RESULT",
+    "REUSE_REQUIRES_PRIOR_INDEPENDENT_RESULT_VERIFICATION_BINDING_THE_SAME_SEMANTIC_IDENTITY_AND_RESULT",
+    "OPEN_EXTERNAL_OR_DYNAMIC_DEPENDENCIES_FAIL_CLOSED",
+    "HELPER_FILE_OR_UNDECLARED_REPOSITORY_READ_EXCLUSION_REMAINS_LOAD_BEARING",
+    "GRANTED_AUTHORITY_IS_ZERO_REALITY_VERIFICATION_REUSE_ONLY",
+    "EXECUTION_PROMOTION_FRESH_REALITY_ACCEPTANCE_CAPABILITY_OWNERSHIP_AND_TERMINAL_AUTHORITY_REMAIN_FALSE"
+  ],
+  "hard_nonclaims": [
+    "NO_FRESH_REALITY_REUSE",
+    "NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_CLAIM_ARBITRARY_VERIFIERS_CAN_USE_FIELD_SCOPING"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

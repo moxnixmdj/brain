@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_V4_SEMANTIC_REUSE_ACTIVATION_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_CURRENT_MAIN_REBASE__61_OF_61_VERIFICATION_PRESERVED__POINTER_CHAIN_8_OF_8__ZERO_CREDIT",
+  "base_main_commit": "ff83bbbbb3273f833ff299cdc9868142e530cd53",
+  "currentness_reason": "INTERVENING_MAIN_CHANGES_TOUCHED_WAKE_GATE_SCHEDULER_AND_FRONTIER_WRAPPERS_BUT_NOT_ANY_OF_THE_61_OF_61_FIELD_SCOPED_RUNTIME_TEST_DEPENDENCIES__ONLY_INTEGRATION_WRAPPER_RECOMPUTED",
+  "exact_bindings": {
+    "reuse_runtime": [
+      "canonical/runtime/field_scoped_zero_reality_reuse_gate_v1.py",
+      "e13cfd0549189c79f5be5fb2a20973cf79fb76cb"
+    ],
+    "reuse_test": [
+      "canonical/tests/test_field_scoped_zero_reality_reuse_gate_v1.py",
+      "581021c88bbb903cac89b7bab8b5e332d33cf980"
+    ],
+    "independent_verify": [
+      "canonical/verification/FIELD_SCOPED_ZERO_REALITY_REUSE_GATE_INDEPENDENT_VERIFY_20261011_V1.json",
+      "f8baad527497dcbeaa3165b62d40494375239909"
+    ],
+    "v4_policy": [
+      "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V4.json",
+      "f08fd90474aa38f89db171c70e10a6d47e6d7ec5"
+    ],
+    "current_scheduler": [
+      "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json",
+      "348313fe4620b6011387278e013bfa7c172bdf80"
+    ],
+    "current_mission": [
+      "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+      "e18b06ad93f8c085a1234616fed25e749fe3ae27"
+    ]
+  },
+  "checks": {
+    "scheduler_v4_binding": true,
+    "scheduler_runtime_binding": true,
+    "scheduler_independent_verify_binding": true,
+    "mission_scheduler_blob_binding": true,
+    "mission_v4_policy_binding": true,
+    "v4_independent_verify_binding": true,
+    "independent_stack_61_of_61": true,
+    "consequential_authority_remains_false": true
+  },
+  "result": {
+    "zero_reality_verification_reuse_gate_load_bearing": true,
+    "semantic_currentness_alone_reuse_authority": false,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "fresh_reality_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
