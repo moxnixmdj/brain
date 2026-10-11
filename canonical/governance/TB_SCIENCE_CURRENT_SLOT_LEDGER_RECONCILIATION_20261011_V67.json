@@ -8,7 +8,8 @@
   },
   "verification": {
     "path": "canonical/verification/TB_SCIENCE_RANK21_FINAL_ZERO_NONCREDITABLE_VERIFY_20261011_V1.json",
-    "pass": true
+    "pass": true,
+    "git_blob_sha": "3bbb3f32119e28f152c929a56ed43a70eda28b72"
   },
   "counts": {
     "benchmark_trials_consumed": 19,
