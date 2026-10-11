@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_V60_PERSISTENCE_AND_NEXT67_FRESH_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__V60_PAYLOAD_PERSISTED__NEXT67_EXACT_AND_FRESH_PASS_17250_OF_17250__NEXT68_DURABLY_FROZEN_UNSPENT__ZERO_CREDIT",
+  "checks": {
+    "v60_target_manifest_exact": true,
+    "v60_raw_python_source_bytes": 1713090,
+    "v60_library_archive_file_id": "libfile_afa0d53808cc8191976782dc3e9ea40a",
+    "v60_library_archive_sha256": "7ebb193e07a2a1e18265ebf4b1ef76b4c011b665bf100d35550033b894d96dd9",
+    "v60_archive_reextract_payload_manifest_sha256": "6ab3ad3366fe10d0d081784d61838d097eac1c242cee729453d78d48ede5033e",
+    "next67_library_file_id": "libfile_f6aae9e669348191ac8c057faff368fd",
+    "next67_sha256": "aab6e4fb65f266211585f9d60c88c3dcc2834ca832d91c50357edd7bd2ac20be",
+    "next67_cases": 17250,
+    "next67_candidate_passed": 17250,
+    "next67_candidate_failed": 0,
+    "next67_freshness_consumed": true,
+    "next68_library_file_id": "libfile_3f5ba0e0123481919cc240491ebd5cb2",
+    "next68_sha256": "ee4eb1b62ce24c1c31e39c19585ce5a04e01fc6099b88c65a7530840a6c15e70",
+    "next68_cases": 17480,
+    "next68_spent": false
+  },
+  "result": "V60_IS_ELIGIBLE_TO_REPLACE_V58_AS_CURRENT_BYTES_RESEARCH_FRONTIER",
+  "hard_nonclaims": [
+    "NO_CAPABILITY_ACCEPTANCE_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT",
+    "NO_EXTERNAL_SECOND_CARRIER_VERIFICATION",
+    "NO_NEXT68_EXECUTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
