@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_RELATION_WIKIPEDIA_COMPOSITION_CONSUMED_RESULT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_PAIRED_CONSUMED_DIAGNOSTIC__NO_COMPOSITION_UNIQUE_GAIN",
+  "frozen_components": {
+    "relation_compiler_blob": "e922ba115ddf596bfcf78ae6988b67a0650e772d",
+    "wikipedia_bing_transport_blob": "eace56be88b0047aaebfe713c61ddf6acea59296",
+    "planner_v1_blob": "2386db287d08153ffb905f8cd89a76f4ebf19d9f",
+    "diagnostic_harness_blob": "ad93223a32c7e06c8aff2ae99e556c0d50cee025"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow_run_id": 38154040648,
+    "workflow_job_id": 114513201930,
+    "conclusion": "success",
+    "artifact_id": 11707384249,
+    "artifact_zip_sha256": "dd1ece44600e9fd61aaef45d3fa381056dc6190b86fca4c700f5b894a0805733",
+    "trace_manifest_sha256": "17efbc03d68acf9baa3455b8717579d7600b203d1df95dc470628addccc630dd"
+  },
+  "diagnostic": {
+    "target_ids": [
+      32,
+      37,
+      38,
+      41,
+      43,
+      45
+    ],
+    "sample_size": 6,
+    "baseline_hits": 1,
+    "baseline_hit_ids": [
+      38
+    ],
+    "composition_hits": 1,
+    "composition_hit_ids": [
+      38
+    ],
+    "composition_unique_gain_count": 0,
+    "composition_unique_gain_ids": [],
+    "baseline_unique_loss_ids": []
+  },
+  "interpretation": [
+    "RELATION_QUERY_PLUS_WIKIPEDIA_PAGE_COMPOSITION_DID_NOT_ADD_A_UNIQUE_HIT_ON_THE_SIX_CONSUMED_RESIDUALS",
+    "THE_SINGLE_HIT_WAS_ALREADY_PRESENT_IN_THE_SAME_SNAPSHOT_BASELINE_WIKIPEDIA_TRANSPORT_ARM",
+    "LIVE_RETRIEVAL_SURFACES_CAN_CHANGE_ACROSS_RUNS_SO_ONLY_PAIRED_WITHIN_RUN_DIFFERENCES RECEIVE_CAUSAL_WEIGHT",
+    "NO_COMPOSITION_PROMOTION_FROM_THIS_RESULT"
+  ],
+  "hle_questions_consumed": 0,
+  "hle_gold_consumed": 0,
+  "external_model_calls_total": 0,
+  "model_dependency_count_total": 0,
+  "capability_credit_delta": 0,
+  "hle_score_credit": 0,
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
