@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_PUBLIC_DATA_ACCESS_BOUNDARY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PUBLIC_WEB_METADATA_VISIBLE__EXECUTION_CARRIER_FILE_ACCESS_HTTP_401__NO_GOLDEN_ANSWER_SCHEMA_AUDIT_EXECUTED__WAKE_ON_AUTHENTICATED_OR_OWNER_EQUIVALENT_ACCESS__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "public_visibility": {
+    "dataset": "surgeai/chartography",
+    "web_dataset_row_count": 100,
+    "web_columns": [
+      "chart_path",
+      "prompt",
+      "golden_answer",
+      "task_id",
+      "domain_combined",
+      "source_type",
+      "source_url"
+    ],
+    "intended_use": "EVALUATION_ONLY__NOT_FOR_TRAINING_OR_FINE_TUNING"
+  },
+  "failed_execution_access": [
+    {
+      "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+      "endpoint_class": "HUGGING_FACE_DATASET_API_OR_DATASET_SERVER",
+      "result": "HTTP_401_UNAUTHORIZED",
+      "golden_answers_read": 0
+    },
+    {
+      "carrier": "brain-v5-audit-cleanroom-20261010",
+      "endpoint_class": "NOT_RETRIED_AFTER_SAME_PUBLIC_ANONYMOUS_ACCESS_CLASS_PROVED_BLOCKED",
+      "golden_answers_read": 0
+    },
+    {
+      "carrier": "GITHUB_PUBLIC_RUNNER",
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "workflow_run_id": 38111003733,
+      "job_id": 114386369704,
+      "endpoint": "https://huggingface.co/datasets/surgeai/chartography/resolve/main/data.parquet?download=true",
+      "result": "HTTP_401_UNAUTHORIZED_AFTER_RETRIES",
+      "download_step": "FAILED_BEFORE_SCHEMA_AUDIT",
+      "golden_answers_read": 0
+    }
+  ],
+  "consequence": {
+    "deterministic_lower_bound_scorer_design_blocked": false,
+    "deterministic_lower_bound_scorer_verified": true,
+    "full_100_task_grammar_coverage_measurement_blocked": true,
+    "brain_model_training_or_tuning_performed": false,
+    "wake_conditions": [
+      "AUTHENTICATED_HUGGING_FACE_ACCESS_TO_SURGEAI_CHARTOGRAPHY_DATA_PARQUET",
+      "OWNER_EQUIVALENT_CONTENT_ADDRESSED_100_TASK_METADATA_SOURCE",
+      "PUBLIC_EXECUTION_CARRIER_CAN_READ_THE_SAME_HELD_OUT_METADATA_WITHOUT_AUTHENTICATION"
+    ],
+    "scheduler_rule": "DO_NOT_REPEAT_ANONYMOUS_RAW_HUGGING_FACE_FILE_OR_DATASET_API_FETCHES_UNTIL_ACCESS_STATE_CHANGES__CONTINUE_PROTOCOL_EQUIVALENT_HARNESS_WORK_NOT_REQUIRING_GOLDEN_ANSWER_BYTES"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_DATASET_IS_PRIVATE",
+    "NO_CLAIM_USER_ACCOUNT_LACKS_HUGGING_FACE_ACCESS",
+    "NO_GOLDEN_ANSWER_SCHEMA_COVERAGE_RESULT",
+    "NO_CHARTOGRAPHY_SCORE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "golden_answers_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
