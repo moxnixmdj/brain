@@ -1,0 +1,184 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "ENFORCE-V22-BENCHMARK-INFORMATION-EQUIVALENCE-20261011-SOL",
+  "status": "CANDIDATE__CURRENT_BASE_BOUND__ZERO_CREDIT",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "f3d91e879f4d139a2eed2c58494790fcd6875a71",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "V22_BENCHMARK_INFORMATION_EQUIVALENCE_ADMISSION_GAP__PROVIDER_UI_PROVISIONING_CONFUSION",
+  "action_kind": "GOVERNANCE_GUARD",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::V22_BENCHMARK_INFORMATION_EQUIVALENCE_ADMISSION_GAP__PROVIDER_UI_PROVISIONING_CONFUSION",
+  "expected_parent_frontier_change": "Guarded benchmark-derived EXTERNAL_RESULT_OR_ACCESS actions fail closed unless they are bound to the benchmark information-equivalence law, proved in the current minimum information cut, proved nondominated, nonblocking while internal certificate search has information gain, and backed by content-addressed provisioning or authorization evidence when self-service access is claimed.",
+  "highest_leverage_now": true,
+  "stop_condition": "Trusted frontier-sensitive PR validation and guarded child execution both reject benchmark/provider procedure privilege, critical-path provider waiting with live internal certificate information gain, stale or absent certificate-exhaustion receipts, and UI-only self-service provisioning claims; existing non-benchmark V22 admissions remain unchanged; zero credit is granted.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "explicit_user_authorization": "update everything you should update perfectly, and execute everything you should execute perfectly.",
+  "weakens_existing_guard": false,
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "mode": "CONTROL_PLANE_PREREQUISITE",
+    "control_plane_gap": "V22_SCHEDULER_ENFORCEMENT_GAP",
+    "minimum_prerequisite_for": [
+      "EXTERNAL_RESULT_OR_ACCESS",
+      "UNIVERSAL_SCOPE_AND_COMPOSITION",
+      "BEHAVIORAL_QUOTIENT_AND_TRANSFER"
+    ],
+    "target_truth_obligations": [
+      "GLOBAL_BENCHMARK_INFORMATION_EQUIVALENCE_ADMISSION_FOR_BENCHMARK_DERIVED_EXTERNAL_RESULT_OR_ACCESS"
+    ],
+    "proof_state_reachability": "PREVENTS_BENCHMARK_PROVIDER_PROCEDURES_FROM_ENTERING_GUARDED_EXECUTION_AS_CRITICAL_PATH_WORK_WITHOUT_DECISION_INFORMATION_MINIMALITY_AND_REAL_ACCESS_EVIDENCE",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "tournament": {
+      "proposal_id": "P_V22_BENCHMARK_INFORMATION_EQUIVALENCE_ADMISSION",
+      "falsifier_id": "F_BENCHMARK_OR_PROVIDER_PROCEDURE_CAN_PASS_GUARDED_PATH_WITHOUT_INFORMATION_MINIMALITY_OR_REAL_PROVISIONING",
+      "decisive_question": "Can a benchmark-derived external-result or provider-access action reach guarded execution or trusted PR admission without proving current-cut membership, nondominance, nonblocking external wait while internal proof search has information gain, and real provisioning when self-service is claimed?",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [
+        {
+          "path": "canonical/verification/V22_SCHEDULER_ENFORCEMENT_GAP_20261005_V1.json",
+          "git_blob_sha": "1fbc33cc8d98e0612c83570d655ac54ee49a9d16"
+        }
+      ]
+    }
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "canonical_base_commit": "f3d91e879f4d139a2eed2c58494790fcd6875a71",
+    "real_outcome": "The already-canonical benchmark-as-measurement rule becomes mechanically enforced at existing V22 guarded action chokepoints instead of remaining advisory.",
+    "required_capability": "TRUTH_PRESERVING_BENCHMARK_INFORMATION_EQUIVALENCE_ACTION_ADMISSION",
+    "obs_goal": {
+      "real_outcome": "Prevent benchmark/provider procedures from being mistaken for the capability objective or promoted to critical-path work without proving they are the minimum decision-preserving route.",
+      "proxy_goals_deleted": [
+        "GET_API_KEY_AS_OBJECTIVE",
+        "RUN_PRIVATE_BENCHMARK_BECAUSE_IT_EXISTS",
+        "INFER_ACCOUNT_PROVISIONING_FROM_CLIENT_UI"
+      ],
+      "surviving_necessity": "Extend the existing V22 admission guard so benchmark-derived external routes must prove information minimality, nondominance, nonblocking wait semantics, and real access evidence."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical/laws/BENCHMARK_OUTPUT_INFORMATION_EQUIVALENCE_LAW_V1.md",
+        "canonical/runtime/benchmark_output_information_equivalence_gate_v1.py",
+        "canonical/governance/BENCHMARK_WITNESS_ELIMINATION_SYNTHESIS_20261006_V1.json",
+        "canonical/runtime/benchmark_witness_elimination_compiler_v3.py",
+        "execution_guard/v22_prewrite_admission.py",
+        "canonical/runtime/enforce_goal_hierarchy.py",
+        "execution_guard/github_actions_guarded_run_live.py"
+      ],
+      "external_existing_routes_checked": [
+        "No external route is required for this governance repair; the missing capability is enforcement at existing repository chokepoints."
+      ],
+      "capability_work_deleted": [
+        "NEW_BENCHMARK_SCHEDULER",
+        "NEW_PROOF_COVER_ENGINE",
+        "NEW_PROVIDER_ACCESS_CLIENT"
+      ],
+      "surviving_gap": "Existing theory and certificate compiler are correct, but V22 action admission does not enforce them for benchmark-derived EXTERNAL_RESULT_OR_ACCESS actions."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_GUARD_ENFORCEMENT_GAP",
+      "delete_bypass_substitute_options": [
+        "reuse existing benchmark information-equivalence law",
+        "reuse witness-elimination synthesis",
+        "extend existing V22 prewrite admission",
+        "reuse both existing receipt-plumbing chokepoints"
+      ],
+      "surviving_causal_blocker": "V22_BENCHMARK_INFORMATION_EQUIVALENCE_ADMISSION_GAP__PROVIDER_UI_PROVISIONING_CONFUSION"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "EXTEND_EXISTING_V22_PREWRITE_ADMISSION_AND_SHARED_RECEIPT_DISCOVERY",
+        "ADD_PARALLEL_BENCHMARK_ADMISSION_CONTROLLER",
+        "CONTINUE_ADVISORY_ONLY_POLICY"
+      ],
+      "losing_routes_reason": "A parallel controller duplicates existing chokepoints; advisory-only policy already failed to prevent procedure drift.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Adversarial unit tests can deterministically falsify admission semantics; trusted PR and guarded child paths then independently exercise the same code."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "BENCHMARK_OR_PROVIDER_ACCESS_ACTIONS_ADMITTED_ONLY_BECAUSE_CLIENT_UI_OR_PROVIDER_PROCEDURE_EXISTS",
+        "CRITICAL_PATH_PROVIDER_WAIT_WHILE_INTERNAL_CERTIFICATE_SEARCH_HAS_NONZERO_INFORMATION_GAIN"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "content-addressed V22 receipt validation",
+        "benchmark witness elimination ordering",
+        "current minimum-cut scheduling",
+        "falsification tournament binding"
+      ],
+      "fresh_reuse_plan": "Use one receipt-discovery function from V22 admission in both trusted PR validation and guarded child execution."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused existing benchmark-equivalence law",
+        "reused V22 active pointer",
+        "reused benchmark witness predicate registry from synthesis",
+        "reused V22 scheduler enforcement gap receipt"
+      ],
+      "search_stop_decision": "Stop architecture search because the exact missing enforcement point and both current chokepoints are already identified; implementation is smaller and stronger than another policy layer.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "EXTEND_EXISTING_V22_GUARD",
+      "PARALLEL_BENCHMARK_GUARD",
+      "ADVISORY_POLICY_ONLY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PARALLEL_BENCHMARK_GUARD",
+      "ADVISORY_POLICY_ONLY",
+      "PROVIDER_WAIT_AS_DEFAULT"
+    ],
+    "selected_surviving_route": "EXTEND_EXISTING_V22_PREWRITE_ADMISSION_AND_SHARED_RECEIPT_DISCOVERY",
+    "why_selected_route_is_fastest_sufficient": "It converts already-canonical benchmark information-equivalence policy into fail-closed behavior at the two existing trusted chokepoints with no new external dependency and no duplicated scheduler.",
+    "expected_parent_level_state_change": "Guarded benchmark-derived EXTERNAL_RESULT_OR_ACCESS actions fail closed unless they are bound to the benchmark information-equivalence law, proved in the current minimum information cut, proved nondominated, nonblocking while internal certificate search has information gain, and backed by content-addressed provisioning or authorization evidence when self-service access is claimed.",
+    "stop_condition": "Trusted frontier-sensitive PR validation and guarded child execution both reject benchmark/provider procedure privilege, critical-path provider waiting with live internal certificate information gain, stale or absent certificate-exhaustion receipts, and UI-only self-service provisioning claims; existing non-benchmark V22 admissions remain unchanged; zero credit is granted.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "This is a governance guard repair bound to already-canonical policy and already-existing enforcement chokepoints; external route discovery cannot improve the local admission semantics."
+    }
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
