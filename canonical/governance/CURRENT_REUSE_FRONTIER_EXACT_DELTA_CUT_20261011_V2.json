@@ -216,6 +216,7 @@
     "exact_next": "WAKE_ONLY_ON_AUTHORIZED_EXACT_PRIVATE_CURRENT_MAIN_CARRIER_OR_REAL_HOSTED_JOB_STEP_OR_STRONGER_VALID_RECEIPT"
   },
   "scheduler": [
+    "ROUTE_ALL_O11_ROWS_THROUGH_CURRENT_PROJECTION_AWARE_V2_GATE_AND_SEARCH",
     "RUN_O11_AND_Q1_REUSE_ENGINES_ONLY_AGAINST_THE_EXACT_IRREDUCIBLE_DELTAS_ABOVE",
     "PREFER_ONE_SCOPE_COMPLETE_CERTIFICATE_THAT_DISCHARGES_MULTIPLE_ROWS",
     "DEDUPLICATE_ANY_EXTERNAL_FACT_BEFORE_ACQUISITION",
@@ -236,5 +237,13 @@
     "acceptance_credit_delta": 0,
     "capability_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "executor_binding": {
+    "current_o_gate": "canonical/runtime/current_escape_o_objective_acceptance_law_gate_v2.py",
+    "current_o_search": "canonical/runtime/current_escape_o_proof_instantiation_search_v2.py",
+    "verification": "canonical/verification/CURRENT_O_PROJECTION_GATE_V2_VERIFY_20261011_V1.json",
+    "verification_git_blob_sha": "2210f23a9691ddd2b848fecdb62137998d54e559",
+    "replay": "12_OF_12_PASS__GDPVAL_O__AA_Q__TB_PARKED",
+    "rule": "ALL_O11_EXACT_DELTAS_ROUTE_THROUGH_CURRENT_PROJECTION_AWARE_V2_EXECUTOR__HISTORICAL_O11_Q2_MEMBERSHIP_HAS_ZERO_CURRENT_AUTHORITY"
   }
 }
