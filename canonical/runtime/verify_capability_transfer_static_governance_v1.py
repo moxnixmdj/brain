@@ -12,6 +12,12 @@ assert b["capability_transfer_ownership_gate_required"] is True
 assert b["teacher_or_donor_runtime_cognition_forbidden"] is True
 assert b["copied_or_rehosted_teacher_is_not_transfer"] is True
 assert b["post_donor_removal_heldout_qualification_required"] is True
+assert b["donor_provenance_must_persist_across_verified_episodes"] is True
+assert b["donor_derived_skill_candidate_requires_exact_candidate_bound_transfer_record"] is True
+assert b["donor_derived_skill_verifier_must_not_run_before_transfer_gate_pass"] is True
+assert b["transfer_gate_pass_never_grants_reuse_by_itself"] is True
+assert b["donor_derived_skill_requires_independent_skill_verification_after_transfer_gate"] is True
+assert b["temporal_provenance_laundering_forbidden"] is True
 s=J("canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V3.json")
 assert s["promotion_requires_transfer_gate_pass"] is True
 d=J("canonical/governance/DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_V2.json")
