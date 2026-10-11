@@ -22,7 +22,7 @@ _ACTION_START=re.compile(
     r"retrieve|list|show|open|navigate|go|click|press|select|choose|fill|enter|type|"
     r"set|change|update|edit|create|delete|remove|submit|send|reply|add|save|export|"
     r"move|rename|install|uninstall|disable|enable|write|replace|sort|merge|duplicate|"
-    r"pause|play|switch|insert)\b",
+    r"pause|play|switch|insert|format|freeze|copy|autofit|align|position)\b",
     re.I,
 )
 
