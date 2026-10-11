@@ -104,6 +104,31 @@ def test_qualitative_question_does_not_fake_quantitative_coverage():
     assert out["benchmark_score_credit"] == 0
 
 
+
+def test_market_sentiment_is_compiled_as_deterministic_return_consequence():
+    out = compile_question(
+        "Calculate the closing share price return and use it to gauge market sentiment."
+    )
+    assert {"SHARE_PRICE_RETURN", "MARKET_SENTIMENT_FROM_RETURN"} <= set(out["operations"])
+    assert out["semantic_tail_required"] is False
+
+
+def test_guidance_conservatism_is_compiled_as_strict_dominance_candidate():
+    out = compile_question(
+        "Compare beat / (miss) % across guidance and determine which company gave more conservative guidance."
+    )
+    assert {"BEAT_MISS_PERCENT", "GUIDANCE_CONSERVATISM_DOMINANCE"} <= set(out["operations"])
+    assert out["semantic_tail_required"] is False
+
+
+def test_strategic_investments_label_does_not_create_fake_semantic_tail():
+    out = compile_question(
+        'Build a DCF and exclude the value of "strategic investments".'
+    )
+    assert "DCF" in out["operations"]
+    assert out["semantic_tail_required"] is False
+
+
 def test_source_hints_are_advisory_only():
     out = compile_question(
         "Use the 8-K and annual report plus closing share price to calculate a return."
