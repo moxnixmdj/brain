@@ -25,7 +25,7 @@
       },
       {
         "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "git_blob_sha": "a47697971500f36c18247706a766be28b0031ed1"
+        "git_blob_sha": "2c23eac2b4009b98bff590e075b2422022d84214"
       },
       {
         "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
@@ -156,11 +156,11 @@
       "ready": "BLOCKED_ONLY_BY_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION"
     },
     {
-      "work_id": "BYTES_EXACT_SYMBOLIC_V52_NEXT_PHYSICAL_CUT",
+      "work_id": "BYTES_EXACT_SYMBOLIC_V53_NEXT_PHYSICAL_CUT",
       "work_type": "EFFICIENCY_IMPROVEMENT",
       "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1717827_RAW_PYTHON_BYTES_USING_SPENT_NEXT58_ONLY__NEXT59_IS_DURABLY_FROZEN_BY_VERIFIED_DETERMINISTIC_RECONSTRUCTION__MAKE_NEW_PHYSICAL_CUT_BEFORE_SPENDING_NEXT59",
-      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V52_CURRENT__MPF_POW_INT_SQUARE_ONLY_SPECIALIZATION_VERIFIED",
+      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1715881_RAW_PYTHON_BYTES_USING_SPENT_NEXT59_ONLY__RERANK_BEFORE_NEW_PHYSICAL_CUT__DO_NOT_TOUCH_FROZEN_NEXT60_BEFORE_CUT",
+      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V53_CURRENT__NINE_BODY_MPMATH_PERIPHERAL_PRUNE_VERIFIED",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
       "scheduler_state": "READY_EXECUTION",
@@ -179,12 +179,12 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "source_git_blob_sha": "a47697971500f36c18247706a766be28b0031ed1",
-        "raw_python_source_bytes": 1717827,
-        "B_exec_raw_python_source_bytes": 1720587,
-        "qualification": "15180/15180",
-        "next_action": "RERANK_EXACT_V52_USING_SPENT_NEXT58_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_RECONSTRUCTING_OR_SPENDING_NEXT59",
-        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT59_20261011_V1",
+        "source_git_blob_sha": "2c23eac2b4009b98bff590e075b2422022d84214",
+        "raw_python_source_bytes": 1715881,
+        "B_exec_raw_python_source_bytes": 1718641,
+        "qualification": "15410/15410",
+        "next_action": "RERANK_EXACT_V53_USING_SPENT_NEXT59_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT60_20261011_V1",
+        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT60_20261011_V1",
         "next_frozen_sha256": "5c7cf733614d58648dbe4fbfc855e7451651c652555eb895fcdcef39df780c92",
         "next_frozen_spent": false,
         "next_frozen_durable_reconstruction_verified": true,
@@ -192,7 +192,7 @@
         "next_frozen_reconstruction_verification": "canonical/verification/BYTES_QUAL_SUCCESSOR_NEXT59_DETERMINISTIC_RECONSTRUCTION_VERIFY_20261011_V1.json",
         "vector_bounds_complete": false
       },
-      "ready": "V52_CURRENT_AT_1717827_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT_USING_SPENT_NEXT58",
+      "ready": "V53_CURRENT_AT_1715881_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT",
       "source_git_blob_sha": "cc039dec0d7361bfb83c7121433eabcb82ce5581"
     },
     {
@@ -647,14 +647,12 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "a47697971500f36c18247706a766be28b0031ed1",
-    "status": "ACTIVE_RESEARCH__MPF_POW_INT_SQUARE_ONLY_V52_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1717827,
-    "B_exec_raw_python_source_bytes": 1720587,
-    "qualification": "15180/15180",
-    "next": "Rerank exact V52 using spent NEXT58 only; make a new physical cut before reconstructing/spending frozen NEXT59.",
-    "independent_verification_path": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPF_POW_INT_V52_INDEPENDENT_VERIFY_20261011_V1.json",
-    "next_frozen_reconstruction_verification": "canonical/verification/BYTES_QUAL_SUCCESSOR_NEXT59_DETERMINISTIC_RECONSTRUCTION_VERIFY_20261011_V1.json",
+    "observed_git_blob_sha": "2c23eac2b4009b98bff590e075b2422022d84214",
+    "status": "ACTIVE_RESEARCH__NINE_BODY_PERIPHERAL_V53_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1715881,
+    "B_exec_raw_python_source_bytes": 1718641,
+    "qualification": "15410/15410",
+    "next": "Rerank exact V53 using spent NEXT59 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT60_20261011_V1.",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   }
