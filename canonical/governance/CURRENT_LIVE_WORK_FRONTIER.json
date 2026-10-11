@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_LIVE_WORK_FRONTIER_V1",
   "date": "2026-10-11",
-  "status": "CURRENT_PROFESSIONAL_24_OF_24__FULL_PRIVATE_REGRESSION_GATE_OPEN__GITHUB_HOSTED_ACTIONS_BILLING_OR_SPENDING_LIMIT_PRESTART_BLOCK__12_CHECKPOINT_ROWS_WAKE_GATED__CAPABILITY_FIRST_AND_RESOURCE_PARETO_WORK_PRIMARY__ZERO_CREDIT__CODING_CAPABILITY_FIRST_ACTIVE__BENCHMARK_CAPABILITY_DOMINANCE_CONTROLLER_ACTIVE",
-  "frontier_id": "LIVE_WORK_FRONTIER_20261011_PROF_PROPERTY_24_OF_24_V27",
+  "status": "CURRENT_PROFESSIONAL_24_OF_24__FULL_PRIVATE_REGRESSION_GATE_OPEN__GITHUB_HOSTED_ACTIONS_BILLING_OR_SPENDING_LIMIT_PRESTART_BLOCK__12_CHECKPOINT_ROWS_WAKE_GATED__CAPABILITY_FIRST_AND_RESOURCE_PARETO_WORK_PRIMARY__CHARTOGRAPHY_BRAIN_NATIVE_RESIDUAL_ACTIVE__ZERO_CREDIT__CODING_CAPABILITY_FIRST_ACTIVE__BENCHMARK_CAPABILITY_DOMINANCE_CONTROLLER_ACTIVE",
+  "frontier_id": "LIVE_WORK_FRONTIER_20261011_CHARTOGRAPHY_NATIVE_REBIND_V28",
   "scope": {
     "base_main_commit": "8916f4b00768329eb101be88ad6effbfd3704d67",
     "completeness_semantics": "COMPLETE_FOR_EXPLICIT_CURRENT_ACTIONABLE_OR_SCHEDULABLE_WORK_EXPOSED_BY_THE_BOUND_CURRENT_AUTHORITY_SOURCES__NOT_COMPLETE_FOR_UNKNOWN_FUTURE_WORK_OR_UNDISCOVERED_CAPABILITIES",
@@ -38,6 +38,10 @@
       {
         "path": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
         "git_blob_sha": "6a708375e542de18e07f81a457af0a97d832b80d"
+      },
+      {
+        "path": "canonical/governance/CHARTOGRAPHY_CAPABILITY_PROOF_FRONTIER_V1.json",
+        "git_blob_sha": "13d434a1de8145c5f141bdd459eba6b23146f776"
       }
     ],
     "base_main_commit_role": "OBSERVED_BEFORE_RECONCILIATION_COMMIT__DIAGNOSTIC_ONLY__CURRENT_POINTER_PATHS_WIN_ON_DRIFT"
@@ -75,6 +79,12 @@
       "id": "R12_MATERIAL_DEFEATER_TOTALITY_ROUTE_AUDIT",
       "truth": "INDEPENDENT_REPLAY_PASS__EIGHT_OF_EIGHT_R12_CONTRACT_CLAUSES_VERIFIED__FINITE_CATALOG_AND_EIGHT_CLAUSE_TOTALITY_SHORTCUTS_REJECTED__UNIVERSAL_OR_GENERATOR_SUPERSET_CLOSURE_ONLY",
       "source": "canonical/verification/PROFESSIONAL_R12_MATERIAL_DEFEATER_TOTALITY_ROUTE_AUDIT_VERIFY_20261010_V1.json",
+      "dynamic_current_pointer_follow": false
+    },
+    {
+      "id": "CHARTOGRAPHY_BRAIN_NATIVE_CURRENT",
+      "truth": "POSITIONED_OCR_NUMERIC_TICK_AXIS_BINDING_INDEPENDENTLY_VERIFIED__MODEL_INDEPENDENT__BROADER_LEGEND_STYLE_AND_PROFESSIONAL_CHART_SEMANTICS_OPEN__HELDOUT_ZERO",
+      "source": "canonical/verification/CHART_POSITIONED_OCR_AXIS_BINDING_V1_VERIFY_20261011.json",
       "dynamic_current_pointer_follow": false
     }
   ],
@@ -119,6 +129,43 @@
         "coupled_replay": "PRIMARY_8_OF_8__SECOND_SPRITE_8_OF_8"
       },
       "ready": "BUILD_GENERAL_SOFTWARE_REPAIR_LOOP_V4__TARGET_DYNAMIC_EXECUTION_TRACE_AND_DATAFLOW_SEMANTIC_LOCALIZATION__DO_NOT_WAIT_FOR_BENCHMARK_OWNER"
+    },
+    {
+      "work_id": "CHARTOGRAPHY_BRAIN_NATIVE_PROFESSIONAL_SEMANTICS_V2",
+      "work_type": "CAPABILITY_BUILD",
+      "frontier_class": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "source": "canonical/governance/CHARTOGRAPHY_CAPABILITY_PROOF_FRONTIER_V1.json",
+      "causal_role": "EXTEND_VERIFIED_MODEL_INDEPENDENT_RASTER_SCENE_GRAPH_POSITIONED_OCR_AND_AXIS_CALIBRATION_TO_GENERAL_LEGEND_STYLE_BINDING_AND_PUBLICLY_DECLARED_PROFESSIONAL_CHART_FAMILIES__CHARTOGRAPHY_SCORE_REMAINS_LATER_AUDIT",
+      "readiness": "READY_EXECUTION__POSITIONED_OCR_AXIS_BINDING_INDEPENDENTLY_VERIFIED__LEGEND_STYLE_BINDING_AND_MULTIPLE_PROFESSIONAL_CHART_SEMANTICS_REMAIN_OPEN",
+      "claims_new_primitive": true,
+      "score_state": "NOT_A_BENCHMARK_SCORE_TASK",
+      "scheduler_state": "READY_EXECUTION",
+      "prerequisites_satisfied": true,
+      "prerequisite_work_ids": [],
+      "mutation_keys": [
+        "canonical:chartography-capability"
+      ],
+      "authority_keys": [
+        "authority:chartography-capability-first"
+      ],
+      "explicit_conflict_work_ids": [],
+      "evidence_conflict_keys": [],
+      "evidence_acquisition_mode": "READ_ONLY",
+      "vector_evidence_state": "PARTIAL",
+      "vector_evidence": {},
+      "read_only_evidence": {
+        "capability_frontier_path": "canonical/governance/CHARTOGRAPHY_CAPABILITY_PROOF_FRONTIER_V1.json",
+        "capability_frontier_git_blob_sha": "13d434a1de8145c5f141bdd459eba6b23146f776",
+        "verified_brain_subject": "canonical/governance/CHARTOGRAPHY_BRAIN_NATIVE_DETERMINISTIC_SUBJECT_V3.json",
+        "verified_positioned_ocr_axis_binding": "canonical/verification/CHART_POSITIONED_OCR_AXIS_BINDING_V1_VERIFY_20261011.json",
+        "verified_runtime_blob_sha": "1ccab094a14ae261a01912ad6e573ffc09fa8b35",
+        "model_dependency_count": 0,
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "heldout_cases_consumed": 0,
+        "incremental_spend_usd": 0,
+        "chartography_score_credit": 0
+      },
+      "ready": "BUILD_BRAIN_NATIVE_LEGEND_STYLE_BINDING_AND_NEXT_PUBLIC_CHART_FAMILY_ADAPTERS__DO_NOT_TOUCH_HELDOUT"
     },
     {
       "work_id": "PROFESSIONAL_QUALITY_V7_PROPERTY_TRUTH_DEPLETION",
