@@ -45,6 +45,16 @@ UNIVERSAL_PROOF_KINDS = {
     "GENERATOR_CLOSURE_SCOPE_COMPLETE",
     "SELECTED_COVER_COMPLEMENT_UNSAT",
 }
+GLOBAL_OWNERSHIP_REDUCER = "canonical/runtime/terminal_global_ownership_postconditions_reducer_v1.py"
+GLOBAL_OWNERSHIP_REQUIRED_PREDICATES = (
+    "final_donor_deletion_cleanroom_pass",
+    "donor_deletion_protocol_v2_bound",
+    "runtime_cognition_model_independent",
+    "zero_external_model_runtime_cognition_dependencies",
+    "copied_or_rehosted_teacher_absent",
+    "runtime_dependency_inventory_complete",
+)
+
 UNIVERSAL_REQUIRED_TRUE = (
     "independent_verified",
     "exact_byte_bound",
@@ -189,6 +199,63 @@ def _evaluate_universal_cover_proof(
     }
 
 
+def _evaluate_current_donor_authority(
+    manifest: dict[str, Any],
+    repo_root: Path | None,
+) -> dict[str, Any]:
+    failures: list[str] = []
+    if repo_root is None:
+        return {
+            "pass": False,
+            "failed_predicates": ["DONOR_AUTHORITY_REPOSITORY_ROOT_REQUIRED"],
+        }
+    root = repo_root.resolve()
+    gp = manifest.get("global_ownership_postconditions")
+    if not isinstance(gp, dict):
+        return {
+            "pass": False,
+            "failed_predicates": ["GLOBAL_OWNERSHIP_POSTCONDITIONS_MISSING"],
+        }
+    binding = {
+        "path": gp.get("evidence"),
+        "git_blob_sha": gp.get("evidence_blob_sha"),
+    }
+    receipt, error = _load_bound_json(binding, root)
+    if error is not None:
+        failures.append("GLOBAL_OWNERSHIP_RECEIPT_UNBOUND:" + error)
+        receipt = {}
+    reducer_path = (root / GLOBAL_OWNERSHIP_REDUCER).resolve()
+    try:
+        reducer_path.relative_to(root)
+    except ValueError:
+        failures.append("GLOBAL_OWNERSHIP_REDUCER_PATH_ESCAPES_REPOSITORY")
+    if not reducer_path.is_file():
+        failures.append("GLOBAL_OWNERSHIP_REDUCER_MISSING")
+        reducer_blob = None
+    else:
+        reducer_blob = _git_blob_sha(reducer_path)
+    if receipt.get("brain_reducer_blob_sha") != reducer_blob:
+        failures.append("GLOBAL_OWNERSHIP_RECEIPT_REDUCER_BLOB_STALE")
+    if "INDEPENDENT_PUBLIC_RUNNER_PASS" not in str(receipt.get("status", "")):
+        failures.append("GLOBAL_OWNERSHIP_RECEIPT_NOT_INDEPENDENT_PASS")
+    result = receipt.get("result")
+    predicates = result.get("terminal_predicates") if isinstance(result, dict) else None
+    if not isinstance(predicates, dict):
+        failures.append("GLOBAL_OWNERSHIP_RECEIPT_PREDICATES_MISSING")
+    else:
+        for name in GLOBAL_OWNERSHIP_REQUIRED_PREDICATES:
+            if predicates.get(name) is not True:
+                failures.append(
+                    "GLOBAL_OWNERSHIP_ZERO_MODEL_PREDICATE_NOT_TRUE:" + name
+                )
+    unique = sorted(set(failures))
+    return {
+        "pass": not unique,
+        "failed_predicates": unique,
+        "receipt_binding": binding if not unique else None,
+    }
+
+
 def _family_terminally_closed(family: dict[str, Any]) -> bool:
     """Derive terminal closure from semantic fields, not display-label equality.
 
@@ -280,6 +347,10 @@ def evaluate_manifest(
         if counters.get(counter) != 0 and predicates.get(predicate) is True:
             failures.append(f"COUNTER_PREDICATE_CONTRADICTION:{counter}:{predicate}")
 
+    donor_authority = _evaluate_current_donor_authority(manifest, repo_root)
+    for failure in donor_authority["failed_predicates"]:
+        failures.append("DONOR_AUTHORITY:" + failure)
+
     legacy_failures = sorted(set(failures))
     universal = _evaluate_universal_cover_proof(manifest, repo_root)
 
@@ -317,6 +388,7 @@ def evaluate_manifest(
         "failed_predicates": effective_failures,
         "legacy_family_route_failed_predicates": legacy_failures,
         "universal_cover_route": universal,
+        "current_donor_authority": donor_authority,
         "family_count": len(families),
         "closed_family_count": sum(
             1 for family in families
