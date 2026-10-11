@@ -116,7 +116,15 @@
         "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
       ],
       "state": "OPEN_UNBOUND_RELATION",
-      "capability_credit": 0
+      "capability_credit": 0,
+      "supporting_evidence": [
+        "canonical/governance/CHARTOGRAPHY_CAPABILITY_PROOF_FRONTIER_V1.json",
+        "canonical/governance/CHARTOGRAPHY_PUBLIC_DECLARATION_CAPABILITY_COVERAGE_V1.json",
+        "canonical/verification/CHART_LEGEND_STYLE_BINDING_V1_VERIFY_20261011.json",
+        "canonical/verification/CHART_CURVE_VALUE_QUERY_V1_VERIFY_20261011.json"
+      ],
+      "residual_state": "OPEN__PUBLIC_DECLARED_FAMILIES_PARTIALLY_SUPPORTED__NO_TYPED_ENTAILMENT_TO_GE89",
+      "next_minimum_information_action": "BUILD_AND_INDEPENDENTLY_VERIFY_BRAIN_NATIVE_CURVE_X_AT_Y_INTERSECTION"
     },
     {
       "benchmark_id": "OSWORLD_2_1_PARTIAL_GE_81_8",
