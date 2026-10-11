@@ -287,7 +287,17 @@
     "runtime_cognition_credit_guard_verification_path": "canonical/verification/RUNTIME_COGNITION_CREDIT_GUARD_REMOTE_VERIFY_20261011_V1.json",
     "local_runner_for_cognition_governance_forbidden": true,
     "runtime_cognition_credit_guard_ownership_promotion_binding_required": true,
-    "runtime_cognition_credit_guard_final_cleanroom_binding_required": true
+    "runtime_cognition_credit_guard_final_cleanroom_binding_required": true,
+    "benchmark_execution_admission_required": true,
+    "benchmark_execution_admission_path": "canonical/runtime/benchmark_execution_admission_v1.py",
+    "benchmark_execution_reconciliation_required": true,
+    "benchmark_execution_reconciliation_path": "canonical/governance/BENCHMARK_OUTPUT_INFORMATION_EQUIVALENCE_EXECUTION_RECONCILIATION_20261011_V1.json",
+    "benchmark_procedure_goal_confusion_regression_path": "canonical/regressions/2026-10-11_BENCHMARK_PROCEDURE_GOAL_CONFUSION.json",
+    "provider_access_has_no_intrinsic_scheduling_privilege": true,
+    "provider_ui_presence_is_not_provisioning_evidence": true,
+    "benchmark_or_provider_action_requires_current_minimum_information_cut_membership": true,
+    "benchmark_or_provider_action_requires_route_nondominance": true,
+    "benchmark_capability_relation_requires_race_against_decision_equivalent_or_stronger_certificate": true
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
