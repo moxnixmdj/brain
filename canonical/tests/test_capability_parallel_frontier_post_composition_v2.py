@@ -11,7 +11,7 @@ from canonical.runtime import capability_parallel_frontier_v2 as core
 ROOT=Path(__file__).resolve().parents[2]
 
 def _copy_sources(tmp:Path):
- for rel in (p.PROF,p.ASSURANCE,p.BYTES,p.R2):
+ for rel in (p.PROF,p.ASSURANCE,p.BYTES,p.R2,p.SPECIALIZATION):
   src=ROOT/rel; dst=tmp/rel; dst.parent.mkdir(parents=True,exist_ok=True); dst.write_bytes(src.read_bytes())
 
 class PostCompositionFrontierV2Tests(unittest.TestCase):
@@ -30,7 +30,7 @@ class PostCompositionFrontierV2Tests(unittest.TestCase):
  def test_refresh_binds_exact_current_four_source_hashes(self):
   f=p.refresh_post_composition_currentness(core.load_current_frontier())
   bound={x["path"]:x["git_blob_sha"] for x in f["scope"]["source_set"]}
-  for rel in (p.PROF,p.ASSURANCE,p.BYTES,p.R2):
+  for rel in (p.PROF,p.ASSURANCE,p.BYTES,p.R2,p.SPECIALIZATION):
    self.assertEqual(bound[rel],p._git_blob_sha(ROOT/rel),rel)
   prow=next(x for x in f["candidates"] if x.get("work_id")==p.PROF_WORK)
   arow=next(x for x in f["candidates"] if x.get("work_id")==p.ASSURANCE_WORK)
@@ -89,6 +89,34 @@ class PostCompositionFrontierV2Tests(unittest.TestCase):
   f=p.refresh_post_composition_currentness(f)
   with self.assertRaisesRegex(core.ParallelFrontierError,"LIVE_WORK_FRONTIER_STALE"):
    core.plan_parallel_frontier(f)
+
+
+ def test_escape_decision_value_gate_sleeps_same_information_rows(self):
+  f=p.refresh_post_composition_currentness(core.load_current_frontier())
+  dv=f["dynamic_currentness"]["decision_value_escape"]
+  self.assertEqual(dv["actionable_row_ids"],[])
+  self.assertIn("CODING_TB4_GE_66_4",dv["sleeping_row_ids"])
+  self.assertIn("CODING_FRONTIERCODE_GE_54_4",dv["sleeping_row_ids"])
+  self.assertIn("CODING_CURSORBENCH_GE_57_8",dv["sleeping_row_ids"])
+  self.assertIn("MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",dv["sleeping_row_ids"])
+  row=next(x for x in f["candidates"] if x.get("work_id")==p.GAP_A_WORK)
+  self.assertEqual(row["scheduler_state"],"SLEEPING")
+  self.assertEqual(row["read_only_evidence"]["actionable_row_ids"],[])
+  self.assertEqual(row["evidence_acquisition_mode"],"NONE")
+  self.assertEqual(len(dv["sleeping_row_ids"]),12)
+  self.assertTrue(row["read_only_evidence"]["decision_value_gate"])
+
+ def test_escape_decision_value_gate_sleeps_all_when_modes_are_wake_or_event_driven(self):
+  with tempfile.TemporaryDirectory() as td:
+   root=Path(td); _copy_sources(root)
+   q=root/p.SPECIALIZATION; d=json.loads(q.read_text())
+   for row in d["active_rows"]: row["mode"]="WAKE_GATED_TEST"
+   q.write_text(json.dumps(d))
+   f=p.refresh_post_composition_currentness(core.load_current_frontier(),root=root)
+   row=next(x for x in f["candidates"] if x.get("work_id")==p.GAP_A_WORK)
+   self.assertEqual(row["scheduler_state"],"SLEEPING")
+   self.assertEqual(row["evidence_acquisition_mode"],"NONE")
+   self.assertEqual(row["read_only_evidence"]["actionable_row_ids"],[])
 
 if __name__=="__main__":
  unittest.main(verbosity=2)
