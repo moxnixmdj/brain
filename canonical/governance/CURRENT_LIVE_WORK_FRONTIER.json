@@ -172,8 +172,8 @@
       "work_type": "CAPABILITY_BUILD",
       "frontier_class": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
       "source": "canonical/governance/CHARTOGRAPHY_CAPABILITY_PROOF_FRONTIER_V1.json",
-      "causal_role": "BUILD_AND_VERIFY_DIRECT_CURVE_LABEL_BINDING_AND_FAMILY_RANK__NEXT_HIGHEST_REUSE_TO_WALL_CLOCK_RESIDUAL_AFTER_BIDIRECTIONAL_CURVE_QUERY_VERIFICATION__BENCHMARK_SCORE_REMAINS_LATER_AUDIT",
-      "readiness": "READY_EXECUTION__CURVE_Y_AT_X_VERIFIED_16_OF_16__CURVE_X_AT_Y_VERIFIED_17_OF_17__DIRECT_CURVE_LABEL_AND_FAMILY_RANK_NEXT",
+      "causal_role": "RECOMPUTE_POST_DIRECT_LABEL_CAPABILITY_COVERAGE_AND_SELECT_NEXT_HIGHEST_REUSE_TO_WALL_CLOCK_BRAIN_NATIVE_RESIDUAL__BENCHMARK_SCORE_REMAINS_LATER_AUDIT",
+      "readiness": "READY_RERANK__CURVE_Y_AT_X_VERIFIED__CURVE_X_AT_Y_VERIFIED__DIRECT_ENDPOINT_LABEL_AND_FAMILY_RANK_SECOND_CARRIER_27_OF_27_VERIFIED",
       "claims_new_primitive": true,
       "score_state": "NOT_A_BENCHMARK_SCORE_TASK",
       "scheduler_state": "READY_EXECUTION",
@@ -213,9 +213,17 @@
         "inverse_curve_query_verification": "canonical/verification/CHART_CURVE_X_AT_Y_QUERY_V1_VERIFY_20261011.json",
         "inverse_curve_query_runtime_blob_sha": "04866f3aee99d9fd964f13571d8af278dfa6fe5e",
         "inverse_curve_query_tests": "11_AUTHOR_PLUS_6_INDEPENDENT_PASS",
-        "inverse_curve_query_verifier_run_id": 38153488048
+        "inverse_curve_query_verifier_run_id": 38153488048,
+        "direct_curve_label_family_rank_verification": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_VERIFY_20261011.json",
+        "direct_curve_label_family_rank_independent_verification": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_INDEPENDENT_VERIFY_20261011.json",
+        "direct_curve_label_family_rank_runtime_blob_sha": "e3be28bd83ce0a9359a2ce9cedc8415dbcf745d2",
+        "direct_curve_label_family_rank_tests": "FOCUSED_47_OF_47_PLUS_SECOND_CARRIER_27_OF_27_PASS",
+        "direct_curve_label_family_rank_second_carrier_independent": true,
+        "direct_curve_label_family_rank_independent_verifier_pr": 2723,
+        "direct_curve_label_family_rank_independent_run_id": 38167990652,
+        "direct_curve_label_family_rank_independent_artifact_id": 11713120076
       },
-      "ready": "BUILD_AND_INDEPENDENTLY_VERIFY_DIRECT_CURVE_LABEL_BINDING_AND_FAMILY_RANK__NO_GATED_BENCHMARK_EXECUTION"
+      "ready": "RECOMPUTE_POST_DIRECT_LABEL_CAPABILITY_COVERAGE__SELECT_NEXT_NONREDUNDANT_NATIVE_RESIDUAL__NO_GATED_BENCHMARK_EXECUTION"
     },
     {
       "work_id": "PROFESSIONAL_QUALITY_V7_PROPERTY_TRUTH_DEPLETION",
