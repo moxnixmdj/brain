@@ -9,11 +9,13 @@ from canonical.runtime.finance_quantitative_algebra_v1 import (
     basis_points_between,
     beat_miss_percent,
     cagr,
+    conservative_guidance_dominance,
     days_inventory_outstanding,
     dcf_enterprise_value,
     debt_to_total_capital,
     enterprise_value,
     fixed_charge_coverage_ratio,
+    market_sentiment_from_return,
     midpoint,
     moic,
     percent_change,
@@ -84,6 +86,19 @@ def test_rank_comparison_is_deterministic():
     assert rank_desc(a) == ["A", "B", "C"]
     assert same_rank_order(a, b) is True
     assert same_rank_order(a, c) is False
+
+
+
+def test_market_sentiment_is_only_return_sign():
+    assert market_sentiment_from_return("2.5") == "POSITIVE"
+    assert market_sentiment_from_return("-0.1") == "NEGATIVE"
+    assert market_sentiment_from_return("0") == "NEUTRAL"
+
+
+def test_guidance_conservatism_requires_strict_series_dominance():
+    assert conservative_guidance_dominance(["4", "8"], ["-4", "-2"]) == "A"
+    assert conservative_guidance_dominance(["-4"], ["4", "8"]) == "B"
+    assert conservative_guidance_dominance(["1", "5"], ["3", "4"]) == "AMBIGUOUS"
 
 
 def test_fail_closed_numeric_boundaries():
