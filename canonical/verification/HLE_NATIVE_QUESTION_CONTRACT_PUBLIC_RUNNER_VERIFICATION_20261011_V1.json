@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_NATIVE_QUESTION_CONTRACT_PUBLIC_RUNNER_VERIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BLOBS__SYNTHETIC_ONLY__ZERO_HLE_SCORE_CREDIT",
+  "subject": {
+    "preexposure": {
+      "path": "canonical/governance/HLE_NATIVE_QUESTION_CONTRACT_PREEXPOSURE_20261011_V1.json",
+      "git_blob_sha": "a01caf6bd031828b962a6a30582e968ef184af11"
+    },
+    "runtime": {
+      "path": "canonical/runtime/hle_native_question_contract_v1.py",
+      "git_blob_sha": "7acc064d880f266a28855eefe518ae40ff8ae49b"
+    },
+    "mcq_dependency": {
+      "path": "canonical/runtime/hle_native_semantic_compiler_v1.py",
+      "git_blob_sha": "238ebf2ffe23e527fceae919cbc30453a290fdd2"
+    },
+    "tests": {
+      "path": "canonical/tests/test_hle_native_question_contract_v1.py",
+      "git_blob_sha": "506feb40e8b0a0ba84c33d683a1ccc03a16c5e2f"
+    }
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2664,
+    "head_commit": "fa3f7522fa6de3d0bfd2e492614ddff4bd2bc1dc",
+    "workflow_name": "Verify HLE Brain-native question contract V1",
+    "workflow_run_id": 38138389664,
+    "conclusion": "success"
+  },
+  "verified": [
+    "FROZEN_SYNTHETIC_20_SURFACE_REPLAY",
+    "VISIBLE_MCQ_COMPILATION_WITHOUT_ANSWER_TYPE_METADATA",
+    "BOUNDED_NON_VERBATIM_RESEARCH_FOCUS",
+    "NEGATIVE_POLARITY_DETECTION",
+    "FAIL_CLOSED_UNKNOWN_SURFACE",
+    "ZERO_MODEL_ZERO_GOLD_ACCOUNTING"
+  ],
+  "hard_nonclaims": [
+    "NO_REAL_HLE_TASK_EXECUTED",
+    "NO_ANSWER_CORRECTNESS_AUTHORITY",
+    "NO_HLE_SCORE_CREDIT",
+    "NO_OPEN_WORLD_SEMANTIC_UNDERSTANDING_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
