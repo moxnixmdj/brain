@@ -1,0 +1,122 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_RELATION_RESIDUAL_COVERAGE_MAP_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ANSWER_BLIND_COVERAGE_MAP_ON_ALREADY_CONSUMED_PUBLIC_DIAGNOSTIC_QUESTIONS__ZERO_CREDIT",
+  "evidence_basis": {
+    "consumed_short_seed_result_commit": "63e58d35d7dc5993a58ed6add6b674830fedf891",
+    "planner_v2_paired_result_commit": "e36e3ac08a27be40c367ec718a9b711bb600b080",
+    "remaining_shared_miss_ids": [
+      27,
+      32,
+      37,
+      38,
+      39,
+      41,
+      43,
+      44,
+      45
+    ],
+    "relation_compiler_runtime_blob": "ab784ca199b454d0d80e11e9f4faf7812e1eec4d",
+    "relation_compiler_tests_blob": "52b8570a2c1849f20aeb4e59fb2356bf856cf279"
+  },
+  "answer_blind_mapping": [
+    {
+      "row_idx": 27,
+      "visible_relation_shape": "CITY_NAMED_AFTER_PERSON_WITH_ROLE",
+      "compiler_methods": [
+        "NAMED_AFTER_RELATION",
+        "ENTITY_PREDICATE_BRIDGE"
+      ]
+    },
+    {
+      "row_idx": 32,
+      "visible_relation_shape": "PAIRWISE_KINSHIP_BETWEEN_TWO_NAMED_PEOPLE",
+      "compiler_methods": [
+        "PAIRWISE_RELATION",
+        "PAIRWISE_FAMILY_RELATION",
+        "ENTITY_PREDICATE_BRIDGE"
+      ]
+    },
+    {
+      "row_idx": 37,
+      "visible_relation_shape": "DESCRIPTIVE_PERSON_IDENTITY_WITH_ARTIST_POSTER_PREDICATE",
+      "compiler_methods": [
+        "DESCRIPTIVE_PERSON_IDENTITY",
+        "ENTITY_PREDICATE_BRIDGE"
+      ]
+    },
+    {
+      "row_idx": 38,
+      "visible_relation_shape": "DYNASTY_OR_FAMILY_IDENTITY_WITH_ALIAS_AND_LOCATION",
+      "compiler_methods": [
+        "ALIAS_ENTITY_RELATION",
+        "ENTITY_PREDICATE_BRIDGE"
+      ]
+    },
+    {
+      "row_idx": 39,
+      "visible_relation_shape": "DEFINITION_FROM_GEOMETRIC_PROPERTIES",
+      "compiler_methods": [
+        "DEFINITION_RELATION"
+      ]
+    },
+    {
+      "row_idx": 41,
+      "visible_relation_shape": "PERSON_TO_EDUCATION_INSTITUTION_DROPPED_OUT",
+      "compiler_methods": [
+        "SUBJECT_INSTITUTION_RELATION",
+        "ENTITY_PREDICATE_BRIDGE"
+      ]
+    },
+    {
+      "row_idx": 43,
+      "visible_relation_shape": "ORDINAL_PERSON_IDENTITY_WITH_MOUNTAINEER_PEAKS_PREDICATE",
+      "compiler_methods": [
+        "ORDINAL_PERSON_IDENTITY",
+        "DESCRIPTIVE_PERSON_IDENTITY"
+      ]
+    },
+    {
+      "row_idx": 44,
+      "visible_relation_shape": "ORDINAL_PERSON_IDENTITY_WITH_ASSASSINATION_PREDICATE",
+      "compiler_methods": [
+        "ORDINAL_PERSON_IDENTITY",
+        "DESCRIPTIVE_PERSON_IDENTITY"
+      ]
+    },
+    {
+      "row_idx": 45,
+      "visible_relation_shape": "SHARED_NAME_BETWEEN_CITY_AND_ANATOMICAL_TERM",
+      "compiler_methods": [
+        "SHARED_NAME_RELATION",
+        "DEFINITION_RELATION"
+      ]
+    }
+  ],
+  "coverage": {
+    "residual_count": 9,
+    "residuals_with_at_least_one_specific_relation_method": 9,
+    "static_method_coverage_rate": 1,
+    "causal_retrieval_gain_proven": false
+  },
+  "decision": [
+    "RELATION_REQUIREMENT_COMPILER_IS_THE_HIGHEST_INFORMATION_NEXT_CAUSAL_TEST",
+    "TEST_AS_ADDITIVE_QUERIES_AGAINST_V1_BASELINE_ON_THE_SAME_BING_RSS_SNAPSHOT",
+    "PROMOTE_ONLY_IF_IT_CREATES_UNIQUE_RETRIEVAL_HITS_WITH_NO_BASELINE_LOSS",
+    "DO_NOT_USE_FRESH_HLE_FOR_THIS_TEST",
+    "DO_NOT_TUNE_RULES_AFTER_SEEING_GOLD_ON_THE_PAIRED_TEST"
+  ],
+  "hard_nonclaims": [
+    "STATIC_RULE_COVERAGE_IS_NOT_RETRIEVAL_SUCCESS",
+    "PUBLIC_WEB_RECONNAISSANCE_IS_NOT_BRAIN_CAPABILITY_CREDIT",
+    "NO_HLE_SCORE_OR_TERMINAL_CAPABILITY_CREDIT"
+  ],
+  "hle_questions_consumed": 0,
+  "hle_gold_consumed": 0,
+  "external_model_calls_total": 0,
+  "model_dependency_count_total": 0,
+  "capability_credit_delta": 0,
+  "hle_score_credit": 0,
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
