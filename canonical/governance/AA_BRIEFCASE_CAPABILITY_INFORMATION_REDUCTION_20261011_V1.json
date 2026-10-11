@@ -1,0 +1,98 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_CAPABILITY_INFORMATION_REDUCTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CAPABILITY_MEASUREMENT_REFRAMED__LITERAL_ELO_RETAINED_AS_AUDIT__MINIMUM_SAME_SUBJECT_BASIS_REQUIRED__ZERO_CREDIT",
+  "user_intent_clarification": {
+    "primary_question": "WHAT_IS_THE_MINIMUM_SUFFICIENT_EVIDENCE_NEEDED_TO_OBTAIN_THE_CAPABILITY_COMPARISON_OR_MEASUREMENT_INFORMATION_THE_BENCHMARK_OUTPUT_WAS_BEING_USED_TO_PROVIDE",
+    "benchmark_mechanism_is_intrinsically_required": false,
+    "benchmark_mechanism_required_only_when": "NECESSARY_TO_ESTABLISH_THE_DECISION_RELEVANT_CAPABILITY_COMPARISON_OR_TO_CLAIM_THE_LITERAL_OFFICIAL_SCORE"
+  },
+  "target_split": {
+    "primary_capability_decision": {
+      "id": "BRAIN_PROFESSIONAL_CAPABILITY_NONINFERIOR_TO_OPUS_5_5_AA_REFERENCE",
+      "reference_id": "OPUS_5_5_AA_BRIEFCASE_1822_REFERENCE",
+      "score_bearing_public_dimensions": [
+        "RUBRIC",
+        "ANALYTICAL_QUALITY",
+        "PRESENTATION"
+      ],
+      "execution_prerequisite": "AA_PUBLIC_TASK_INTERFACE_EXECUTION_CAPABILITY",
+      "status": "OPEN__NO_COMPLETE_ADMISSIBLE_REFERENCE_BOUND_SAME_SUBJECT_BASIS_YET"
+    },
+    "secondary_literal_audit": {
+      "benchmark": "AA-Briefcase",
+      "version": "1.1",
+      "threshold_elo": 1822,
+      "status": "OPEN_AND_WAKE_GATED",
+      "authority": "canonical/governance/AA_BRIEFCASE_INTERNAL_ONLY_STRATEGY_OVERRIDE_20261011_V4.json",
+      "backpropagation_from_capability_certificate_forbidden": true
+    }
+  },
+  "failure_class_basis": [
+    "RUBRIC_INFERIORITY",
+    "ANALYTICAL_QUALITY_INFERIORITY",
+    "PRESENTATION_INFERIORITY",
+    "EXECUTION_INTERFACE_FAILURE"
+  ],
+  "certificate_admission": {
+    "verified": true,
+    "causal": true,
+    "generalization_bound": true,
+    "subject_bound": true,
+    "reference_bound": true,
+    "same_exact_brain_subject_across_selected_basis": true,
+    "reference_id_exact": "OPUS_5_5_AA_BRIEFCASE_1822_REFERENCE"
+  },
+  "optimization_rule": {
+    "objective": "MINIMIZE_TOTAL_ACTION_COST_THEN_CERTIFICATE_COUNT_THEN_STABLE_ID_ORDER",
+    "solver": "EXACT_MINIMUM_SET_COVER_OVER_ADMISSIBLE_CERTIFICATES_WITH_SAME_SUBJECT_CONSTRAINT",
+    "stop_condition": "EVERY_CAPABILITY_FAILURE_CLASS_ELIMINATED_BY_AN_ADMISSIBLE_SAME_SUBJECT_REFERENCE_BOUND_BASIS",
+    "prefer_integrated_certificate": true,
+    "reason": "ONE_SCOPE_COMPLETE_REFERENCE_BOUND_CERTIFICATE_CAN_DOMINATE_MANY_SAMPLE_LEVEL_BENCHMARK_ACTIONS"
+  },
+  "implementation": {
+    "runtime": {
+      "path": "canonical/runtime/aa_briefcase_capability_information_reduction_v1.py",
+      "git_blob_sha": "27c3d6b952a3cdcb458e7f6b40c3aa21f24e283d"
+    },
+    "tests": {
+      "path": "canonical/tests/test_aa_briefcase_capability_information_reduction_v1.py",
+      "git_blob_sha": "184d18e878af0430953ccbfbbeca9df419fcaa73"
+    }
+  },
+  "current_evidence_probe": {
+    "professional_property_truth_24_of_24": {
+      "preserved": true,
+      "capability_reference_bound": false,
+      "direct_noninferiority_credit": 0
+    },
+    "selected_cell_top_law_30_case": {
+      "preserved": true,
+      "scope_generalization_bound_for_primary_decision": false,
+      "capability_reference_bound": false,
+      "direct_noninferiority_credit": 0
+    },
+    "current_complete_basis": false
+  },
+  "active_next_action": "BUILD_THE_CHEAPEST_REFERENCE_BOUND_CAUSAL_GENERALIZATION_CERTIFICATE_OR_CERTIFICATE_SET_ON_ONE_EXACT_BRAIN_SUBJECT_THAT_ELIMINATES_ALL_REMAINING_CAPABILITY_FAILURE_CLASSES",
+  "deleted_work": [
+    "REPLAY_AA_PRIVATE_91_TASKS_AS_AN_INTRINSIC_REQUIREMENT_FOR_CAPABILITY_COMPARISON",
+    "RECONSTRUCT_LITERAL_1822_WHEN_THE_LITERAL_SCORE_IS_NOT_THE_DECISION_TARGET",
+    "SEARCH_PUBLIC_SCORE_TRACES_WITHOUT_A_NEW_SOURCE_GENERATION",
+    "TREAT_24_OF_24_GENERIC_PROPERTY_TRUTH_AS_REFERENCE_NONINFERIORITY",
+    "STITCH_CERTIFICATES_FROM_DIFFERENT_BRAIN_SUBJECTS",
+    "BACKPROPAGATE_CAPABILITY_NONINFERIORITY_INTO_LITERAL_OFFICIAL_AA_ELO"
+  ],
+  "preserved_truth": [
+    "THE_LITERAL_AA_1822_PREDICATE_REMAINS_UNPROVED",
+    "THE_V4_ZERO_EXTERNAL_LITERAL_SCORE_FIXED_POINT_REMAINS_VALID",
+    "THE_GLOBAL_LIVE_WORK_FRONTIER_ALREADY_CLASSIFIES_BENCHMARK_ROWS_AS_AUDIT_ONLY_UNLESS_THEY_LOCALIZE_A_REAL_CAPABILITY_DEFECT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
