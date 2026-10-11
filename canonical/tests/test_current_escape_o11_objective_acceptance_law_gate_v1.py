@@ -16,6 +16,7 @@ CURSOR = "CODING_CURSORBENCH_GE_57_8"
 MYSTERY = "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER"
 GDP = "PROWORK_GDPVAL_GE_1846"
 AA = "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT"
+TB = "TB_SCIENCE_GE_58_7"
 
 
 def _blob(path: Path) -> str:
@@ -38,13 +39,14 @@ def frontier(root: Path) -> None:
         "CODING_FRONTIERCODE_GE_54_4",
         "AUTOMATIONBENCH_GE_40",
         "HLE_TOOLS_GE_67_7",
-        "TB_SCIENCE_GE_58_7",
+        TB,
         "CHARTOGRAPHY_TOOLS_GE_89",
         "OSWORLD_2_1_PARTIAL_GE_81_8",
         "FINANCE_ACCOUNTING_INDEX_GE_61",
         "FINANCE_AGENT_V2_GE_58_59",
     ]
-    manifest_path = root / "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json"
+    manifest_rel = "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json"
+    manifest_path = root / manifest_rel
     _write(
         manifest_path,
         {
@@ -52,13 +54,15 @@ def frontier(root: Path) -> None:
             "rows": [{"obligation_id": x} for x in rows],
         },
     )
+
+    oq_path = root / gate.OQ_PATH
     _write(
-        root / "canonical/governance/CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1.json",
+        oq_path,
         {
             "schema": gate.OQ_SCHEMA,
             "status": "CURRENT_13_ESCAPE_ACCEPTANCE_FRONTIER_EXECUTABLY_REDUCED_TO_O11_Q2__TWO_SHARED_ACCEPTANCE_LAWS__ZERO_CREDIT",
             "source_manifest": {
-                "path": "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json",
+                "path": manifest_rel,
                 "git_blob_sha": _blob(manifest_path),
             },
             "reduction": {
@@ -69,6 +73,105 @@ def frontier(root: Path) -> None:
         },
     )
 
+    verify_rel = "canonical/verification/GDPVAL_FIXED_BAR_OWNER_PAIRWISE_NONNECESSITY_VERIFICATION_20261009_V1.json"
+    verify_path = root / verify_rel
+    _write(
+        verify_path,
+        {
+            "schema": gate.GDPVAL_VERIFY_SCHEMA,
+            "status": "PASS__SOURCE_BINDINGS_CURRENT__WOLFRAM_SYMBOLIC_NONNECESSITY_TRUE__ZERO_CREDIT",
+            "conclusion": "EXACT_OWNER_PAIRWISE_SEMANTICS_IS_NOT_NECESSARY_FOR_CURRENT_FIXED_BAR_E1_ACCEPTANCE__PRESERVE_AS_DORMANT_ALTERNATIVE_ROUTE_ONLY",
+        },
+    )
+
+    reclass_rel = "canonical/governance/GDPVAL_CURRENT_FIXED_BAR_ENGINE_RECLASSIFICATION_20261011_V1.json"
+    reclass_path = root / reclass_rel
+    _write(
+        reclass_path,
+        {
+            "schema": gate.GDPVAL_RECLASS_SCHEMA,
+            "status": "CURRENT_PRIMARY_ROUTE_RECLASSIFIED__GDPVAL_MOVED_Q_TO_O_FOR_FIXED_BAR_E1__ZERO_CREDIT",
+            "target_obligation": GDP,
+            "source_bindings": {
+                "fixed_bar_nonnecessity_verification": {
+                    "path": verify_rel,
+                    "git_blob_sha": _blob(verify_path),
+                }
+            },
+            "current_acceptance_shape": {
+                "acceptance_relation_class": "OBJECTIVE_FIXED_BAR",
+                "hidden_owner_pairwise_relation_is_free_variable_of_decision": False,
+            },
+            "engine_effect": {
+                "previous": "Q_ACCEPTANCE_RELATION_ROBUST_COMMON_POLICY",
+                "current": "O_OBJECTIVE_ACCEPTANCE_INSTANTIATION",
+                "new_primitive_required": False,
+            },
+        },
+    )
+
+    active_o = [
+        CURSOR,
+        MYSTERY,
+        GDP,
+        "CODING_TB4_GE_66_4",
+        "CODING_FRONTIERCODE_GE_54_4",
+        "AUTOMATIONBENCH_GE_40",
+        "HLE_TOOLS_GE_67_7",
+        "CHARTOGRAPHY_TOOLS_GE_89",
+        "OSWORLD_2_1_PARTIAL_GE_81_8",
+        "FINANCE_ACCOUNTING_INDEX_GE_61",
+        "FINANCE_AGENT_V2_GE_58_59",
+    ]
+    cut_rel = "canonical/governance/CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_CUT_20261011_V1.json"
+    cut_path = root / cut_rel
+    cut_status = "CURRENT_ACTIVE_ESCAPE_COLLAPSED_TO_TWO_REUSE_ENGINES__O11_ACTIVE__Q1_ACTIVE__TB_PARKED__GDPVAL_FIXED_BAR_RECLASSIFIED_Q_TO_O__ZERO_CREDIT"
+    _write(
+        cut_path,
+        {
+            "schema": gate.ENGINE_CUT_SCHEMA,
+            "status": cut_status,
+            "source_bindings": {
+                "oq": [gate.OQ_PATH, _blob(oq_path)],
+                "manifest": [manifest_rel, _blob(manifest_path)],
+                "gdpval_fixed_bar_reclassification": [
+                    reclass_rel,
+                    _blob(reclass_path),
+                ],
+            },
+            "current_partition": {
+                "total_escape_rows": 13,
+                "active_rows": 12,
+                "parked_rows": 1,
+                "active_gap_b_rows": 0,
+                "active_o_rows": 11,
+                "active_q_rows": 1,
+                "parked_obligation_ids": [TB],
+                "active_q_obligation_ids": [AA],
+                "active_o_obligation_ids": active_o,
+            },
+        },
+    )
+
+    _write(
+        root / gate.CURRENT_RESIDUAL_PATH,
+        {
+            "schema": gate.CURRENT_RESIDUAL_SCHEMA,
+            "status": "DERIVED_CURRENT_CLASSIFICATION__ESCAPE_TOPOLOGY_12_ACTIVE_ACQUISITION_PLUS_1_PARKED_TB__NO_ACTIVE_GAP_B__ZERO_CREDIT",
+            "escape_current_topology": {
+                "frozen_obligation_count": 13,
+                "active_gap_a_acquisition_rows": 12,
+                "active_gap_b_strict_progress_rows": 0,
+                "parked_unresolved_rows": 1,
+                "parked_obligation_ids": [TB],
+            },
+            "current_escape_two_engine_minimum_delta_cut": {
+                "path": cut_rel,
+                "git_blob_sha": _blob(cut_path),
+                "status": cut_status,
+            },
+        },
+    )
 
 def proof(claim_id: str, scope: str, *, claim_value=None, target_value=None, proof_type="DETERMINISTIC_DERIVATION"):
     out = {
@@ -257,14 +360,19 @@ def base_claim(pid: str, *, benchmark_id: str, cert: dict, superset=False):
 
 
 class CurrentEscapeO11ObjectiveAcceptanceLawGateTests(unittest.TestCase):
-    def test_current_frontier_is_exactly_o11_q2(self):
+    def test_current_frontier_is_exactly_o11_q1_with_tb_parked(self):
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
             frontier(root)
-            o, q, _ = gate._frontier(root)
+            o, q, meta = gate._frontier(root)
             self.assertEqual(len(o), 11)
-            self.assertEqual(q, {GDP, AA})
+            self.assertEqual(q, {AA})
+            self.assertIn(GDP, o)
             self.assertIn(MYSTERY, o)
+            self.assertNotIn(TB, o)
+            self.assertNotIn(TB, q)
+            self.assertEqual(meta["parked_obligation_ids"], [TB])
+            self.assertIn("O11_ACTIVE__Q1_ACTIVE__TB_PARKED", meta["status"])
 
     def test_current_threshold_claim_routes_through_existing_kernel(self):
         with tempfile.TemporaryDirectory() as d:
@@ -321,21 +429,76 @@ class CurrentEscapeO11ObjectiveAcceptanceLawGateTests(unittest.TestCase):
             self.assertEqual(out["kernel_verdict"]["predicate_id"], MYSTERY)
             self.assertNotEqual(out["kernel_verdict"]["predicate_id"], "MYSTERYMECHANISM_GE_49_55")
 
-    def test_q_row_is_rejected_to_q_law(self):
+    def test_gdpval_reclassified_to_o_routes_through_existing_kernel(self):
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
             frontier(root)
             claim = base_claim(
                 GDP,
                 benchmark_id="GDPVAL",
-                cert=threshold_cert(GDP, lower=1900, target=1866),
+                cert=threshold_cert(GDP, lower=1900, target=1846),
             )
             out = gate.evaluate(
                 {"obligation_id": GDP, "claim_spec": claim},
                 repo_root=root,
             )
+            self.assertTrue(out["pass"], out)
+            self.assertEqual(out["proof_mode"], "THRESHOLD_LOWER_BOUND")
+            self.assertEqual(out["current_o_count"], 11)
+            self.assertEqual(out["current_q_count"], 1)
+
+    def test_current_q_row_is_rejected_to_q_law(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            frontier(root)
+            claim = base_claim(
+                AA,
+                benchmark_id="AA_BRIEFCASE",
+                cert=threshold_cert(AA, lower=1900, target=1822),
+            )
+            out = gate.evaluate(
+                {"obligation_id": AA, "claim_spec": claim},
+                repo_root=root,
+            )
             self.assertFalse(out["pass"])
             self.assertEqual(out["status"], "NOT_APPLICABLE__CURRENT_Q_ROW")
+
+    def test_parked_tb_science_is_not_current_o_work(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            frontier(root)
+            claim = base_claim(
+                TB,
+                benchmark_id="TB_SCIENCE",
+                cert=threshold_cert(TB),
+            )
+            out = gate.evaluate(
+                {"obligation_id": TB, "claim_spec": claim},
+                repo_root=root,
+            )
+            self.assertFalse(out["pass"])
+            self.assertEqual(out["status"], "NOT_APPLICABLE__CURRENT_PARKED_ROW")
+
+    def test_current_cut_blob_drift_fails_closed(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            frontier(root)
+            cut_path = root / "canonical/governance/CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_CUT_20261011_V1.json"
+            cut = json.loads(cut_path.read_text(encoding="utf-8"))
+            cut["status"] += "__TAMPER"
+            _write(cut_path, cut)
+            claim = base_claim(
+                CURSOR,
+                benchmark_id="CURSORBENCH_4_0",
+                cert=threshold_cert(CURSOR),
+            )
+            out = gate.evaluate(
+                {"obligation_id": CURSOR, "claim_spec": claim},
+                repo_root=root,
+            )
+            self.assertFalse(out["pass"])
+            self.assertEqual(out["status"], "FAIL_CLOSED")
+            self.assertIn("CURRENT_TWO_ENGINE_CUT_BLOB_DRIFT", out["reason"])
 
     def test_claim_predicate_must_equal_obligation(self):
         with tempfile.TemporaryDirectory() as d:
