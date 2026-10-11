@@ -71,7 +71,7 @@ def extract_words(
     src=pathlib.Path(image_path).resolve(strict=True)
     if psm is not None and psm_values is not None:
         raise PositionedOCRError("PSM_AND_PSM_VALUES_MUTUALLY_EXCLUSIVE")
-    modes=list(psm_values) if psm_values is not None else ([psm] if psm is not None else [11,6,3])
+    modes=list(psm_values) if psm_values is not None else ([psm,6,3] if psm is not None else [11,6,3])\n    modes=list(dict.fromkeys(int(x) for x in modes))
     if not modes or any(int(x) not in {3,6,7,11} for x in modes):
         raise PositionedOCRError("PSM_OUTSIDE_PINNED_SCOPE")
     dependency=verify_dependency_surface()
