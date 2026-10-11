@@ -10,7 +10,7 @@ on:
 
 concurrency:
   group: full-private-current-main-regression-${{ github.event_name }}-${{ github.event_name == 'pull_request' && github.event.pull_request.number || 'main' }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 permissions:
   contents: read
@@ -38,9 +38,23 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          venv="${RUNNER_TEMP}/brain-regression-venv"
-          python -m venv --clear "${venv}"
-          "${venv}/bin/python" -m pip install --disable-pip-version-check pytest==9.1.1 numpy "pydantic>=2,<3" python-docx Pillow opencv-python-headless langdetect cadquery==2.6.1 pypdf==6.19.0 sympy==1.14.0 mpmath==1.3.0 lark==1.3.1
+          cache_root="${HOME}/.cache/project-brain/full-regression"
+          deps_key="py312-pytest9.1.1-numpy2.5.4-pydantic2.14.0-docx1.2.0-pillow12.3.0-opencv5.0.0.93-langdetect1.0.9-cadquery2.6.1-pypdf6.19.0-sympy1.14.0-mpmath1.3.0-lark1.3.1-v1"
+          venv="${cache_root}/${deps_key}"
+          ready="${venv}/.brain_ready"
+          mkdir -p "${cache_root}"
+          if [ ! -f "${ready}" ]; then
+            rm -rf "${venv}"
+            python -m venv "${venv}"
+            "${venv}/bin/python" -m pip install --disable-pip-version-check \
+              pytest==9.1.1 numpy==2.5.4 pydantic==2.14.0 python-docx==1.2.0 \
+              Pillow==12.3.0 opencv-python-headless==5.0.0.93 langdetect==1.0.9 \
+              cadquery==2.6.1 pypdf==6.19.0 sympy==1.14.0 mpmath==1.3.0 lark==1.3.1
+            "${venv}/bin/python" -m pip check
+            "${venv}/bin/python" -m pip freeze | sort > "${venv}/.brain_freeze.txt"
+            touch "${ready}"
+          fi
+          "${venv}/bin/python" -m pip check
           printf '%s\n' "${venv}/bin" >> "${GITHUB_PATH}"
 
       - name: Record exact subject
@@ -56,6 +70,7 @@ jobs:
           printf '%s\n' "${GITHUB_RUN_ATTEMPT}" > "${root}/run_attempt.txt"
           python --version | tee "${root}/python_version.txt"
           python -m pytest --version | tee "${root}/pytest_version.txt"
+          python -m pip freeze | sort | tee "${root}/pip_freeze.txt"
           printf '%s\n' "${RUNNER_NAME}" | tee "${root}/runner_name.txt"
 
       - name: Compile assurance and professional load-bearing runtimes
@@ -114,6 +129,9 @@ jobs:
           sha=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
           expected=os.environ["EXPECTED_SUBJECT_SHA"]
           recorded=read("subject_sha.txt").strip()
+          subprocess.run(["git","fetch","--quiet","origin","main"],check=True)
+          current_main_sha=subprocess.check_output(["git","rev-parse","origin/main"],text=True).strip()
+          current_main_binding=(sha==current_main_sha)
           pytest_out=read("pytest.txt")
           assurance_out=read("assurance.txt")
           pytest_rc=int((read("pytest_rc.txt") or "999").strip())
@@ -129,16 +147,19 @@ jobs:
               doc=ET.parse(xml_path).getroot()
               suites=[doc] if doc.tag=="testsuite" else list(doc.findall("testsuite"))
               tests_executed=sum(int(s.attrib.get("tests","0")) for s in suites)
-          passed=(subject_binding and pytest_started and pytest_completed and assurance_started and assurance_completed and tests_executed>0 and pytest_rc==0 and assurance_rc==0)
+          passed=(subject_binding and current_main_binding and pytest_started and pytest_completed and assurance_started and assurance_completed and tests_executed>0 and pytest_rc==0 and assurance_rc==0)
           receipt={
             "schema":"PROJECT_BRAIN_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION_V2",
             "subject_commit_sha":sha,
             "expected_subject_sha":expected,
             "subject_binding":subject_binding,
+            "current_main_sha_at_receipt":current_main_sha,
+            "current_main_binding":current_main_binding,
             "github_run_id":os.environ["GITHUB_RUN_ID"],
             "github_run_attempt":os.environ["GITHUB_RUN_ATTEMPT"],
             "python_version":read("python_version.txt").strip(),
             "pytest_version":read("pytest_version.txt").strip(),
+            "pip_freeze_sha256":hashlib.sha256(read("pip_freeze.txt").encode()).hexdigest(),
             "runner_name":read("runner_name.txt").strip(),
             "pytest_started":pytest_started,
             "pytest_completed":pytest_completed,
@@ -167,5 +188,5 @@ jobs:
               raise SystemExit(1)
           PY
 
-# carrier: main-only-self-hosted-linux-x64-brain-regression-auto-restart-on-canonical-drift-20261011-v7
+# carrier: main-only-self-hosted-linux-x64-brain-regression-latest-pending-plus-persistent-env-20261011-v8
 # receipt: log-and-check-summary-authoritative-for-canonicalization__artifact-storage-not-required
