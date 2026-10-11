@@ -1,3 +1,7 @@
+import contextlib
+import hashlib
+import io
+
 from canonical.runtime.osworld_v21_state_ops_v1 import StateOpsError, compile_state_ops
 
 
@@ -150,3 +154,47 @@ def test_run_cli_argument_alias_conflicts_fail_closed():
         assert str(exc) == "RUN_CLI_ARGV_ALIAS_CONFLICT"
     else:
         raise AssertionError("expected argv alias conflict")
+
+
+def _execute_compiled(payload):
+    source = compile_state_ops(payload)
+    stream = io.StringIO()
+    with contextlib.redirect_stdout(stream):
+        exec(source, {})
+    return stream.getvalue()
+
+
+def test_write_text_emits_postcondition_receipt(tmp_path):
+    target = tmp_path / "receipt.txt"
+    out = _execute_compiled({
+        "ops": [{"type": "WRITE_TEXT", "path": str(target), "text": "alpha"}]
+    })
+    digest = hashlib.sha256(b"alpha").hexdigest()
+    assert target.read_text(encoding="utf-8") == "alpha"
+    assert "WRITE_TEXT:PASS:" + str(target) in out
+    assert ":chars=5:bytes=5:sha256=" + digest in out
+
+
+def test_mutation_then_assert_exposes_causal_progress(tmp_path):
+    target = tmp_path / "verified.txt"
+    out = _execute_compiled({
+        "ops": [
+            {"type": "WRITE_TEXT", "path": str(target), "text": "alpha"},
+            {"type": "ASSERT_TEXT_EQUALS", "path": str(target), "text": "alpha"},
+        ]
+    })
+    assert "WRITE_TEXT:PASS:" + str(target) in out
+    assert "ASSERT_TEXT_EQUALS:PASS:" + str(target) in out
+
+
+def test_mutating_ops_compile_explicit_receipts():
+    source = compile_state_ops({
+        "ops": [
+            {"type": "MKDIR", "path": "/home/oai/share/x"},
+            {"type": "DELETE", "path": "/home/oai/share/y"},
+            {"type": "RUN_CLI", "argv": ["ffprobe", "-version"]},
+        ]
+    })
+    assert "MKDIR:PASS:/home/oai/share/x" in source
+    assert "DELETE:PASS:/home/oai/share/y" in source
+    assert "RUN_CLI:PASS:ffprobe:returncode=" in source
