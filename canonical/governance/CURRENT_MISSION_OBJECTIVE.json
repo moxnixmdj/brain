@@ -32,7 +32,7 @@
     "primary_entrypoint": "plan_current_post_composition_frontier",
     "scalar_fallback_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
     "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V15__PROFESSIONAL_24_OF_24__CHECKPOINT_ROWS_ALL_WAKE_GATED__GITHUB_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__0_SAME_INFORMATION_CHECKPOINT_RUNS__CAPABILITY_FIRST_PRIMARY__ZERO_GLOBAL_CREDIT",
-    "observed_git_blob_sha": "30b21ce7fcdec291b2b475a8969d3da7ce4c0c9c",
+    "observed_git_blob_sha": "244ca6b419b433d7531f9061a55177c9355bc783",
     "semantic_reuse_policy": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V4.json",
     "semantic_reuse_policy_git_blob_sha": "f08fd90474aa38f89db171c70e10a6d47e6d7ec5",
     "verified_improvement_loop": "canonical/governance/VERIFIED_IMPROVEMENT_LOOP_V2_ACTIVATION_20261011_V1.json",
@@ -58,7 +58,7 @@
   },
   "current_parallel_frontier_control": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "observed_git_blob_sha": "1f97f90269520b97d4547fc73b66020fe1e53793",
+    "observed_git_blob_sha": "ed5df12c2ad4b316505166834372d798c3e4638b",
     "status": "PROFESSIONAL_24_OF_24__HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__12_CHECKPOINT_ROWS_WAKE_GATED__0_SAME_INFORMATION_CHECKPOINT_RUNS__CAPABILITY_FIRST_AND_RESOURCE_PARETO_WORK_PRIMARY__ZERO_TERMINAL_CREDIT",
     "binding": "MUTABLE_CURRENT_PATH_IDENTITY__SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_PROJECTIONS_REFRESHED_AT_CALL_TIME__OTHER_SOURCE_DRIFT_FAILS_CLOSED",
     "snapshot_is_runtime_authority_for_supported_dynamic_families": false
@@ -245,13 +245,13 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "46f0274dfb44b09a7b6ecd149f69f702ecaa3c4b",
-    "status": "ACTIVE_RESEARCH__MPC_POW_INT_V51_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1719563,
-    "B_exec_raw_python_source_bytes": 1722323,
-    "qualification": "14950/14950",
-    "next": "Rerank exact V51 using spent NEXT57 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT58_20261011_V1.",
-    "independent_verification_path": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPC_POW_INT_V51_INDEPENDENT_VERIFY_20261011_V1.json",
+    "observed_git_blob_sha": "31ed2877cc5c861a4163a14d27acb227aac904db",
+    "status": "ACTIVE_RESEARCH__TWO_BODY_V52_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1716288,
+    "B_exec_raw_python_source_bytes": 1719048,
+    "qualification": "15410/15410",
+    "next": "Rerank exact V52 using spent NEXT59 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT60_20261011_V1.",
+    "independent_verification_path": "canonical/verification/BYTES_EXACT_SYMBOLIC_TWO_BODY_V52_INDEPENDENT_VERIFY_20261011_V1.json",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   },
@@ -266,7 +266,7 @@
   },
   "capability_frontier_currentness_reconciliation": {
     "path": "canonical/governance/CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1.json",
-    "observed_git_blob_sha": "6efac84fce0131ec5fda98194970831469d6095f",
+    "observed_git_blob_sha": "96c22746c2cc3df8bf3f6863a2bbdab9e9a3ce20",
     "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__ESCAPE_12_WAKE_GATED__BYTES_V51__R2_V91_WAKE_GATED__TB_PARKED__ZERO_CREDIT",
     "next": "NO_SAME_INFORMATION_CHECKPOINT_RUNS__DO_NOT_REOPEN_PROFESSIONAL_PROPERTY_TRUTH__WAKE_REGRESSION_ONLY_ON_ZERO_SPEND_CARRIER_STATE_CHANGE__PRIMARY_CAPACITY_TO_CAPABILITY_FIRST_GENERAL_DEVELOPMENT_AND_BYTES_V51_RESOURCE_PARETO_WORK"
   },
