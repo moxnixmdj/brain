@@ -163,7 +163,7 @@ def resolve_projection(prior_rows,mode:str,field_name:str,source_hint:str)->dict
             found=_field(record,field_name)
             for key,value in found:
                 candidates.append({
-                    "row_index":row_index,"source":source,"path":list(path)+(key,),"value":value
+                    "row_index":row_index,"source":source,"path":list(path)+[key],"value":value
                 })
     if not candidates:
         return {"schema":SCHEMA,"pass":False,"status":"OPEN__FIELD_NOT_FOUND","field":_norm(field_name)}
@@ -200,7 +200,7 @@ def resolve_filtered_scalar(prior_rows,field_name:str,source_hint:str,filter_fie
             if len(values)==1:
                 matches.append({
                     "row_index":row_index,"source":source,
-                    "path":list(path)+(values[0][0],),"value":values[0][1],
+                    "path":list(path)+[values[0][0]],"value":values[0][1],
                 })
     if not matches:
         return {"schema":SCHEMA,"pass":False,"status":"OPEN__RELATION_NOT_FOUND"}
