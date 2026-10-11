@@ -7,6 +7,7 @@ SCHEMA = "PROJECT_BRAIN_AA_BRIEFCASE_CAPABILITY_INFORMATION_REDUCTION_V1"
 BENCHMARK = "AA-Briefcase"
 VERSION = "1.1"
 REFERENCE_ELO = 1822
+REFERENCE_ID = "OPUS_5_5_AA_BRIEFCASE_1822_REFERENCE"
 SCORE_DIMENSIONS = frozenset({"RUBRIC", "ANALYTICAL_QUALITY", "PRESENTATION"})
 FAILURE_CLASSES = frozenset({
     "RUBRIC_INFERIORITY",
@@ -20,6 +21,11 @@ class ReductionError(ValueError):
     pass
 
 
+def _valid_sha256(value: Any) -> bool:
+    s = str(value or "")
+    return len(s) == 64 and all(c in "0123456789abcdef" for c in s)
+
+
 def validate_target_contract(contract: Mapping[str, Any]) -> None:
     if contract.get("benchmark") != BENCHMARK:
         raise ReductionError("BENCHMARK_MISMATCH")
@@ -27,6 +33,8 @@ def validate_target_contract(contract: Mapping[str, Any]) -> None:
         raise ReductionError("VERSION_MISMATCH")
     if contract.get("literal_audit_threshold_elo") != REFERENCE_ELO:
         raise ReductionError("LITERAL_AUDIT_THRESHOLD_MISMATCH")
+    if contract.get("reference_id") != REFERENCE_ID:
+        raise ReductionError("REFERENCE_ID_MISMATCH")
     if contract.get("literal_score_is_primary") is not False:
         raise ReductionError("LITERAL_SCORE_MUST_BE_AUDIT_ONLY")
     if contract.get("capability_comparison_is_primary") is not True:
@@ -38,19 +46,18 @@ def validate_target_contract(contract: Mapping[str, Any]) -> None:
         raise ReductionError("LITERAL_SCORE_BACKPROPAGATION_GUARD_MISSING")
 
 
-def _candidate_record(raw: Mapping[str, Any]) -> tuple[str, frozenset[str], float]:
+def _candidate_record(raw: Mapping[str, Any]) -> tuple[str, frozenset[str], float, str]:
     cid = str(raw.get("id") or "")
     if not cid:
         raise ReductionError("CANDIDATE_ID_MISSING")
-    required_flags = (
-        "verified",
-        "causal",
-        "generalization_bound",
-        "subject_bound",
-        "reference_bound",
-    )
+    required_flags = ("verified", "causal", "generalization_bound", "subject_bound", "reference_bound")
     if not all(raw.get(k) is True for k in required_flags):
         raise ReductionError(f"CANDIDATE_NOT_ADMISSIBLE:{cid}")
+    if raw.get("reference_id") != REFERENCE_ID:
+        raise ReductionError(f"CANDIDATE_REFERENCE_MISMATCH:{cid}")
+    subject_sha256 = str(raw.get("subject_sha256") or "")
+    if not _valid_sha256(subject_sha256):
+        raise ReductionError(f"CANDIDATE_SUBJECT_SHA256_INVALID:{cid}")
     covered_raw = raw.get("eliminates_failure_classes")
     if not isinstance(covered_raw, list):
         raise ReductionError(f"CANDIDATE_COVERAGE_INVALID:{cid}")
@@ -60,7 +67,7 @@ def _candidate_record(raw: Mapping[str, Any]) -> tuple[str, frozenset[str], floa
     cost = float(raw.get("action_cost", 1.0))
     if cost < 0:
         raise ReductionError(f"CANDIDATE_COST_NEGATIVE:{cid}")
-    return cid, covered, cost
+    return cid, covered, cost, subject_sha256
 
 
 def minimum_sufficient_basis(
@@ -72,8 +79,8 @@ def minimum_sufficient_basis(
     if not required or not required <= FAILURE_CLASSES:
         raise ReductionError("REQUIRED_FAILURE_CLASS_SET_INVALID")
 
-    admissible: list[tuple[str, frozenset[str], float]] = []
-    rejected: list[dict[str, str]] = []
+    admissible = []
+    rejected = []
     for raw in candidates:
         try:
             admissible.append(_candidate_record(raw))
@@ -83,6 +90,8 @@ def minimum_sufficient_basis(
     best = None
     for r in range(1, len(admissible) + 1):
         for combo in combinations(admissible, r):
+            if len({x[3] for x in combo}) != 1:
+                continue
             union = frozenset().union(*(x[1] for x in combo))
             if not required <= union:
                 continue
@@ -96,7 +105,7 @@ def minimum_sufficient_basis(
         covered = frozenset().union(*(x[1] for x in admissible)) if admissible else frozenset()
         return {
             "schema": SCHEMA,
-            "status": "OPEN__NO_COMPLETE_ADMISSIBLE_BASIS",
+            "status": "OPEN__NO_COMPLETE_SAME_SUBJECT_ADMISSIBLE_BASIS",
             "capability_noninferiority_proved": False,
             "selected_certificate_ids": [],
             "missing_failure_classes": sorted(required - covered),
@@ -108,9 +117,11 @@ def minimum_sufficient_basis(
     key, combo = best
     return {
         "schema": SCHEMA,
-        "status": "PASS__MINIMUM_SUFFICIENT_CAPABILITY_BASIS_SELECTED",
+        "status": "PASS__MINIMUM_SUFFICIENT_SAME_SUBJECT_CAPABILITY_BASIS_SELECTED",
         "capability_noninferiority_proved": True,
         "selected_certificate_ids": sorted(x[0] for x in combo),
+        "subject_sha256": combo[0][3],
+        "reference_id": REFERENCE_ID,
         "total_action_cost": key[0],
         "covered_failure_classes": sorted(required),
         "rejected_candidates": rejected,
@@ -129,6 +140,8 @@ def current_evidence_probe() -> dict[str, Any]:
             "generalization_bound": True,
             "subject_bound": True,
             "reference_bound": False,
+            "reference_id": REFERENCE_ID,
+            "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e",
             "eliminates_failure_classes": ["EXECUTION_INTERFACE_FAILURE"],
             "action_cost": 0,
         },
@@ -139,6 +152,8 @@ def current_evidence_probe() -> dict[str, Any]:
             "generalization_bound": False,
             "subject_bound": True,
             "reference_bound": False,
+            "reference_id": REFERENCE_ID,
+            "subject_sha256": "0" * 64,
             "eliminates_failure_classes": [
                 "RUBRIC_INFERIORITY",
                 "ANALYTICAL_QUALITY_INFERIORITY",
@@ -153,7 +168,7 @@ def current_evidence_probe() -> dict[str, Any]:
         "SELECTED_CELL_TOP_LAW_30_CASE",
     ]
     out["next_action_class"] = (
-        "BUILD_REFERENCE_BOUND_CAUSAL_GENERALIZATION_CERTIFICATE(S)_THAT_ELIMINATE_"
-        "THE_REMAINING_CAPABILITY_FAILURE_CLASSES_WITH_MINIMUM_TOTAL_ACTION_COST"
+        "BUILD_REFERENCE_BOUND_CAUSAL_GENERALIZATION_CERTIFICATE(S)_ON_ONE_EXACT_BRAIN_SUBJECT_"
+        "THAT_ELIMINATE_THE_REMAINING_CAPABILITY_FAILURE_CLASSES_WITH_MINIMUM_TOTAL_ACTION_COST"
     )
     return out
