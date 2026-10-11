@@ -170,10 +170,11 @@
   "independent_verification_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V25_INDEPENDENT_VERIFICATION_20261010_V1.json",
   "prior_fresh_falsification_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT25_FALSIFICATION_20261010_V1.json",
   "current_frontier_independent_verification": {
-    "path": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPMATH_PERIPHERAL_V48_INDEPENDENT_VERIFY_20261011_V1.json",
-    "git_blob_sha": "b06bb49d410146c30479bc5ef49b09ef348062cc",
-    "status": "PASS__V47_TO_V48_278_OF_278__NEXT53_14030_OF_14030__FRESH_NEXT54_14260_OF_14260__NEXT55_UNSPENT",
-    "external_second_carrier_verified": false,
+    "path": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPMATH_PERIPHERAL_V49_INDEPENDENT_VERIFY_20261011_V1.json",
+    "git_blob_sha": "89b8017232222b6b7a64808ef23161ade6ad42e8",
+    "status": "PASS__INDEPENDENT_V49_ARCHIVE_AND_CANONICAL_NEXT55_REPLAY__14490_OF_14490__NEXT56_UNSPENT",
+    "independent_second_carrier_verified": true,
+    "carrier": "CHATGPT_ISOLATED_CONTAINER",
     "promotion_credit_delta": 0
   }
 }
