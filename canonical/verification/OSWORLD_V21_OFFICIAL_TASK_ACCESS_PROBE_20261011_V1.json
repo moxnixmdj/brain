@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_OFFICIAL_TASK_ACCESS_PROBE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_BLOCKER__PUBLIC_KVM_RUNNER_HAS_NO_HUGGINGFACE_CREDENTIAL__ZERO_CASE__ZERO_CREDIT",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2648,
+    "branch": "osworld-v21-official-task-access-20261011-v1",
+    "commit": "76488df7b8d2c2898e270a31f67fcc6931859ef3",
+    "workflow_run_id": 38126933932,
+    "workflow_job_id": 114433133299,
+    "workflow_conclusion": "success"
+  },
+  "probe_contract": {
+    "benchmark_cases_executed": 0,
+    "gated_task_bytes_uploaded": false,
+    "credential_values_printed": false,
+    "candidate_secret_names": [
+      "HF_TOKEN",
+      "HUGGINGFACE_TOKEN",
+      "HF_ACCESS_TOKEN"
+    ],
+    "requested_task_repository": "xlangai/osworld_v2_tasks",
+    "requested_revision": "0a1aadad95aa79b00b3783e717d865089ab06e26",
+    "would_verify_all_108_sha256_and_sizes_if_authorized": true
+  },
+  "observed": {
+    "credential_present": false,
+    "download_attempted": false,
+    "matched_task_count": 0,
+    "result": "BLOCKED__NO_HUGGINGFACE_CREDENTIAL_IN_PUBLIC_RUNNER"
+  },
+  "deduction": [
+    "THE_EXISTING_FREE_PUBLIC_KVM_CARRIER_DOES_NOT_CURRENTLY POSSESS AUTHORIZATION MATERIAL FOR THE GATED OFFICIAL TASK DATASET.",
+    "THIS DOES_NOT REOPEN PUBLIC_REFERENCE_EQUIVALENCE AS A SERIAL REQUIREMENT.",
+    "DIRECT_MATCHED_EXECUTION REMAINS THE STRONGER ACCEPTANCE ROUTE ONCE AUTHORIZED OFFICIAL BYTES ARE AVAILABLE."
+  ],
+  "public_mirror_search": {
+    "searched_exact_task_001_sha256": "9f8731d02aacb37f6eed0e6e4c7738758c3d7c9fb1b1fa83a9ea08751af19839",
+    "result": "NO_DISCOVERED_PUBLIC_TASK_IMPLEMENTATION__ONLY_OFFICIAL_OR_FORKED_MANIFEST_HITS",
+    "claimed_exhaustive": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_NO_AUTHORIZED_CREDENTIAL EXISTS ANYWHERE ELSE",
+    "NO_CLAIM GATED DATA CANNOT BE ACCESSED AFTER AUTHORIZATION",
+    "NO_BRAIN_SCORE",
+    "NO_ACCEPTANCE_CREDIT"
+  ],
+  "terminal_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}

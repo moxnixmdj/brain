@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_CAPABILITY_FIRST_EXECUTION_LOCK_20261011_V2",
+  "date": "2026-10-11",
+  "status": "ACTIVE_CAPABILITY_FIRST_LOCK_V2__EXPLICIT_ORDERED_MULTI_STEP_COMPOSITION_INDEPENDENTLY_VERIFIED__SEMANTIC_DECOMPOSITION_AND_CROSS_TOOL_DATAFLOW_NEXT__ZERO_SCORE_CREDIT",
+  "supersedes": "canonical/governance/OSWORLD_V21_CAPABILITY_FIRST_EXECUTION_LOCK_20261011_V1.json",
+  "target_reference": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "primary_objective": "MAXIMIZE_GENERAL_RELIABLE_COMPUTER_USE_CAPABILITY_PER_RESOURCE__OSWORLD_REMAINS_FINAL_MEASUREMENT_ONLY",
+  "credited_subject": {
+    "id": "brain-osworld-v21-model-independent-state-app-web-v3",
+    "runtime": "canonical/runtime/osworld_v21_brain_subject_v3.py",
+    "policy": "canonical/runtime/osworld_v21_workflow_policy_v1.py",
+    "general_purpose_model_runtime_cognition": false,
+    "external_generation_provider": false
+  },
+  "independently_verified_current_state": {
+    "evidence": "canonical/verification/OSWORLD_V21_CAPABILITY_FIRST_WORKFLOW_CURRENT_HEAD_INDEPENDENT_VERIFY_20261011_V1.json",
+    "verified_head": "ec925e4d15c448c3daba3631834917363d77ca7a",
+    "tests_passed": 119,
+    "tests_failed": 0,
+    "benchmark_cases_consumed": 0,
+    "incremental_spend_usd": 0,
+    "capabilities": [
+      "MODEL_INDEPENDENT_STATE_APP_WEB_SUBJECT",
+      "TYPED_COMPUTER_SURFACE",
+      "POSITIONED_TEXT_GROUNDING",
+      "BROWSER_STATE_MACHINE",
+      "DECLARATIVE_FILE_STATE_MUTATION_WITH_ASSERTED_POSTCONDITIONS",
+      "TYPED_NATIVE_APP_OPERATIONS",
+      "PRODUCT_NATIVE_WEB_APP_OBSERVATION",
+      "EXPLICIT_ORDERED_SUBGOAL_COMPOSITION",
+      "EVIDENCE_GATED_CLAUSE_ADVANCEMENT",
+      "APP_OPERATION_COMPLETION_MEMORY",
+      "CROSS_CLAUSE_RECEIPT_ISOLATION"
+    ]
+  },
+  "partial_closure": {
+    "prior_residual": "MULTI_STEP_GOAL_DECOMPOSITION_AND_POSTCONDITION_VERIFICATION_ACROSS_EXISTING_OPERATION_FAMILIES",
+    "closed": [
+      "EXPLICIT_SEMICOLON_THEN_AND_NUMBERED_OR_BULLETED_ORDERED_CLAUSE_DECOMPOSITION",
+      "NO_SPLIT_INSIDE_QUOTED_TEXT",
+      "NO_INVENTED_SPLIT_ON_ORDINARY_AND",
+      "CLAUSE_LOCAL_HISTORY",
+      "ADVANCE_ONLY_AFTER_UNDERLYING_POLICY_EMITS_VERIFIED_DONE",
+      "SUCCESSFUL_IDENTICAL_APP_OP_NOT_REPEATED",
+      "FINAL_TYPED_APP_OP_SUCCESS_CAN_SERVE_AS_COMPLETION_RECEIPT"
+    ],
+    "still_open": [
+      "SEMANTIC_DECOMPOSITION_OF_VAGUE_OR_UNORDERED_MULTI_CONSTRAINT_GOALS",
+      "CROSS_TOOL_INFORMATION_DATAFLOW_WHERE_LATER_ARGUMENTS_DEPEND_ON_EARLIER_OBSERVATIONS",
+      "GENERAL_CONSTRAINT_PRESERVATION_ACROSS_LONG_WORKFLOWS"
+    ]
+  },
+  "ranked_next_frontier": [
+    {
+      "rank": 1,
+      "residual": "CROSS_TOOL_INFORMATION_DATAFLOW_AND_SEMANTIC_DECOMPOSITION",
+      "leverage_reason": "EXISTING_TOOLS_ALREADY_EXECUTE_BROWSER_FILE_APP_WEB_OPERATIONS__THE_MISSING_VALUE_IS_COMPOSING_OBSERVED_FACTS_INTO_LATER_ACTION_ARGUMENTS"
+    },
+    {
+      "rank": 2,
+      "residual": "GENERAL_DOCUMENT_SPREADSHEET_PRESENTATION_TRANSFORMATIONS",
+      "leverage_reason": "HIGH_REUSE_ACROSS_WPS_LIBREOFFICE_AND_EXCEL_STYLE_WORK"
+    },
+    {
+      "rank": 3,
+      "residual": "CODE_WORKSPACE_REPOSITORY_EDIT_EXECUTE_VERIFY",
+      "leverage_reason": "RECURRING_GENERAL_ENGINEERING_WORKFLOW"
+    },
+    {
+      "rank": 4,
+      "residual": "MEDIA_GEOMETRY_AND_TIMELINE_TRANSFORMATIONS",
+      "leverage_reason": "RECURRING_IMAGE_VIDEO_AUDIO_FAMILY"
+    },
+    {
+      "rank": 5,
+      "residual": "IRREDUCIBLE_VISUAL_ONLY_GROUNDING_AND_RECOVERY",
+      "leverage_reason": "LAST_RESORT_AFTER_STRUCTURED_STATE_ROUTES"
+    }
+  ],
+  "development_law": {
+    "benchmark_rows_are_roadmap": false,
+    "public_reference_semantics_runtime_input": false,
+    "task_id_branching": false,
+    "reference_trajectory_replay": false,
+    "external_general_purpose_model_credited_runtime": false,
+    "repair_rule": "REPAIR_GENERAL_CAUSE__VERIFY_ON_FRESH_NEIGHBORING_OR_ADVERSARIAL_SYNTHETIC_CASES__ONLY_THEN_FREEZE"
+  },
+  "next_execution_cut": [
+    "BUILD_GENERIC_RECEIPT_TO_LATER_ACTION_DATAFLOW_WITH_PROVENANCE_AND_AMBIGUITY_FAIL_CLOSED",
+    "QUALIFY_CROSS_TOOL_DATAFLOW_ON_SYNTHETIC_NON_BENCHMARK_WORKFLOWS",
+    "THEN_EXPAND_DOCUMENT_SPREADSHEET_PRESENTATION_STATE_TRANSFORMATIONS",
+    "DO_NOT_CONSUME_OSWORLD_SCORE_CASES_DURING_DEVELOPMENT"
+  ],
+  "hard_nonclaims": [
+    "NO_OFFICIAL_OSWORLD_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_119_SYNTHETIC_TESTS_IMPLY_81_8",
+    "NO_CLAIM_GENERAL_SEMANTIC_DECOMPOSITION_IS_SOLVED",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ]
+}

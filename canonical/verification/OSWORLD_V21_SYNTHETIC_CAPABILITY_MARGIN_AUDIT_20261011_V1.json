@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_SYNTHETIC_CAPABILITY_MARGIN_AUDIT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__51_OF_51_AVAILABLE_CROSS_GENERATION_SYNTHETIC_TESTS__ZERO_BENCHMARK_CASES__MARGIN_NOT_YET_SUFFICIENT_FOR_SCORE_CLAIM",
+  "target_reference": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "subject_reference": "brain-osworld-v21-model-independent-observed-state-recovery-v16",
+  "branch": "osworld-capability-first-v16-20261011",
+  "independent_carrier": {
+    "type": "SPRITE",
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "working_tree": "/tmp/osworld-v14-closure",
+    "incremental_spend_usd": 0
+  },
+  "replay": {
+    "command": "PYTHONPATH=. python3 -m pytest -q canonical/tests",
+    "passed": 51,
+    "failed": 0,
+    "warnings": 18,
+    "elapsed_seconds": 1.44,
+    "benchmark_cases_consumed": 0
+  },
+  "covered_test_families": [
+    "GENERIC_POLICY",
+    "WORKFLOW_DECOMPOSITION",
+    "RECEIPT_DATAFLOW",
+    "VISUAL_FALLBACK",
+    "SEMANTIC_NORMALIZATION",
+    "COMPARATIVE_VISUAL_GROUNDING",
+    "OBSERVED_STATE_RECOVERY"
+  ],
+  "interpretation": "CURRENT_AVAILABLE_SYNTHETIC_CAPABILITY_SUITE_IS INTERNALLY COHERENT; THIS IS A DEVELOPMENT MARGIN SIGNAL ONLY, NOT A BENCHMARK SCORE OR DISTRIBUTION-COMPLETE CERTIFICATE.",
+  "next_information_gain": [
+    "ADD_FRESH_ADVERSARIAL_STATE_RECONSTRUCTION CASES NOT USED TO BUILD V16",
+    "GENERALIZE RECOVERY BEYOND EXPLICIT DIALOG BUTTONS",
+    "VERIFY GENERAL GOAL-STATE COMPLETION EVIDENCE",
+    "RUN FINAL MATCHED OSWORLD ONLY AFTER FRESH MARGIN REMAINS STRONG"
+  ],
+  "hard_nonclaims": [
+    "NO_OFFICIAL_OSWORLD_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_51_OF_51_SYNTHETIC_TESTS_IMPLIES_81_8",
+    "NO_ACCEPTANCE_OR TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

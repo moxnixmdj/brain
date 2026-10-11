@@ -1,0 +1,124 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_DIRECT_MATCHED_RUN_CONTRACT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_CANDIDATE__DIRECT_OFFICIAL_BYTE_ROUTE__REFERENCE_EQUIVALENCE_NOT_SERIAL_PREREQUISITE__NO_SCORE_YET",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "threshold_partial_mean": 0.818,
+  "run_count": 5,
+  "task_count_per_run": 108,
+  "purpose": "Replace the false serial dependency 'prove public reference export equals owner implementation, then evaluate' with the stronger direct route: execute the official pinned OSWorld v2.1 bytes under the matched public protocol, while retaining the public reference corpus only as supporting semantic/provenance evidence.",
+  "governing_proofs": [
+    "canonical/governance/OSWORLD_REFERENCE_EQUIVALENCE_DESERIALIZATION_20261011_V1.json",
+    "canonical/verification/OSWORLD_REFERENCE_EQUIVALENCE_DESERIALIZATION_INDEPENDENT_VERIFY_20261011_V1.json",
+    "canonical/governance/OSWORLD_OPUS55_PROTOCOL_PUBLIC_BINDING_20261011_V1.json",
+    "canonical/governance/OSWORLD_V21_PINNED_TASK_UNIVERSE_IDENTITY_20261010_V1.json",
+    "canonical/governance/OSWORLD_V21_OFFICIAL_COMPONENT_PIN_REDUCTION_V1.json"
+  ],
+  "official_release": {
+    "code_repository": "xlang-ai/OSWorld-V2",
+    "tag": "osworld-v2.1",
+    "tag_commit": "3d778a3c9a34a079316f70df023b166700445792",
+    "base_commit": "325ab352e2ff7410854bf8e3324c391bc60e7526",
+    "tasks_repository": "xlangai/osworld_v2_tasks",
+    "tasks_revision": "0a1aadad95aa79b00b3783e717d865089ab06e26",
+    "task_hash_manifest_path": "benchmark_releases/osworld-v2.1.task_hashes.json",
+    "task_hash_manifest_sha256": "c54d428329be5ca72742a6becd49ee83cf739df5dea429bba182e1f3f21badfb",
+    "gated_assets_repository": "xlangai/osworld_v2_assets_gated",
+    "gated_assets_revision": "384b3834faba5700a7b589e6cc181490c9808949",
+    "website_repository": "Task-Web/OSWorld-web",
+    "website_tag": "osworld-v2.1",
+    "website_commit": "60c89fe6a8ed934668619d8d26132848239eb8ee",
+    "docker_artifact_revision": "6e16459a2feb5a8f1ed65babcfe7a2a6205d049d",
+    "docker_artifact_sha256": "14b08aa7ba6c023ecb91d46de8df5de32af4d1d6bd75ea925519caf9677fc8b3",
+    "docker_runtime_digest": "happysixd/osworld-docker@sha256:0e6497a9295647cf05bf2b2af522fdd79bdeba2737595259cab310a3bcf6baa9"
+  },
+  "protocol": {
+    "screen_width": 1920,
+    "screen_height": 1080,
+    "max_action_steps_per_task": 500,
+    "reasoning_effort": "max",
+    "grader_for_model_graded_checkpoints": "Claude Opus 4.8",
+    "retain_all_screenshots": true,
+    "context_management": "server-side compaction after 100k tokens when applicable to matched subject route",
+    "metric": "mean per-task partial credit across weighted checkpoints",
+    "aggregation": "five independent pass@1 runs using one frozen Brain subject; arithmetic mean of the five 108-task run means",
+    "acceptance": "PASS iff every comparability gate passes and aggregate partial mean >= 0.818"
+  },
+  "direct_byte_identity_gate": {
+    "required": true,
+    "rule": "Immediately before task loading in each evaluation workspace, hash every task_001.py through task_108.py and require exact size+SHA256 equality to the canonical official osworld-v2.1 task hash manifest. Any missing, extra required identity mismatch, manifest mismatch, or source-revision mismatch fails closed before scored execution.",
+    "race_control": "Verifier and loader must consume the same immutable/read-only verified task tree, or bind a tree digest/inode-equivalent immutable snapshot so post-verification substitution cannot occur.",
+    "public_reference_corpus_is_execution_input": false,
+    "public_reference_trajectory_or_solution_access_during_run": false
+  },
+  "subject_freeze": {
+    "freeze_before_first_scored_task": [
+      "Brain canonical commit",
+      "OSWorld adapter blob",
+      "controller/configuration blobs",
+      "tool/capability registry blobs",
+      "evaluation wrapper"
+    ],
+    "outcome_driven_changes_between_five_runs": false,
+    "task_specific_learning_from_reference_trajectories": false,
+    "allowed_between_runs": "environment reset, deterministic cache reuse that does not expose prior scored outcomes to the subject, and non-semantic transport retry where benchmark rules permit"
+  },
+  "required_preflight": [
+    "official code pin exact",
+    "108 official task bytes exact and race-free",
+    "gated assets revision accessible",
+    "pinned website deployment reachable",
+    "GitLab protocol service reachable with valid private token where selected tasks require it",
+    "provider image/digest exact",
+    "1920x1080 environment",
+    "official evaluator path unmodified",
+    "Brain adapter interface smoke: reset + predict(instruction, obs) -> response/actions + env.step",
+    "zero benchmark task consumed before all preflight gates pass"
+  ],
+  "scored_receipt_required_fields": [
+    "Brain commit and exact adapter/controller blob identities",
+    "release/component pins",
+    "verified 108-task identity receipt",
+    "per-run ordered 108-task score vectors",
+    "per-task official evaluator receipts and retained screenshots",
+    "five run means",
+    "aggregate partial mean",
+    "protocol deviations, if any",
+    "incremental spend"
+  ],
+  "equivalence_resolution": {
+    "public_reference_owner_byte_equivalence_required_before_direct_run": false,
+    "reason": "The direct route consumes official pinned owner task bytes and official evaluator/setup logic; therefore uncertainty in a semantically faithful public reference export cannot contaminate the scored input. Reference equivalence remains auxiliary evidence, not a prerequisite.",
+    "residual_reference_toctou_gap_blocks_direct_run": false
+  },
+  "current_external_access_fact": {
+    "public_runner_probe_pr": 2648,
+    "public_runner_probe_commit": "76488df7b8d2c2898e270a31f67fcc6931859ef3",
+    "result": "BLOCKED__NO_HUGGINGFACE_CREDENTIAL_IN_PUBLIC_RUNNER",
+    "implication": "The already-proven free KVM carrier presently lacks an authorization credential for the gated official task dataset. This is an access fact, not an equivalence-theorem failure."
+  },
+  "current_performance_fact": {
+    "authentic_brain_osworld_v21_score_observed": false,
+    "score_claim_permitted": false,
+    "threshold_claim_permitted": false,
+    "reason": "No comparable five-run Brain execution receipt exists yet."
+  },
+  "next_irreducible_actions": [
+    "Supply or discover authorized access to the exact gated task/assets revisions without weakening the zero-spend rule.",
+    "Bind the frozen Brain controller through the thin native OSWorld agent interface.",
+    "Pass the complete zero-case preflight.",
+    "Execute five frozen-subject 108-task runs and compute the official partial mean.",
+    "Promote OSWORLD_2_1_PARTIAL_GE_81_8 only if the aggregate receipt is >= 0.818."
+  ],
+  "hard_nonclaims": [
+    "NO_CURRENT_BRAIN_SCORE",
+    "NO_CLAIM_PUBLIC_REFERENCE_BYTES_EQUAL_GATED_OWNER_BYTES",
+    "NO_CLAIM_SEMANTIC_REFERENCE_EXPORT_IS_AN_EXECUTION_SUBSTITUTE",
+    "NO_ACCEPTANCE_CREDIT_FROM_PROTOCOL_CONSTRUCTION",
+    "NO_INFERENCE_FROM_BROWSER_COMPONENT_TESTS_TO_OSWORLD_81_8"
+  ],
+  "incremental_spend_usd": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "acceptance_credit_delta": 0
+}

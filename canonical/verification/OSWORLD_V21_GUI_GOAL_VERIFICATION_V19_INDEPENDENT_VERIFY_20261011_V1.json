@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_GUI_GOAL_VERIFICATION_V19_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__V19_DETERMINISTIC_CURRENT_GUI_GOAL_VERIFICATION__72_OF_72_ACCUMULATED_SYNTHETIC_TESTS__ZERO_BENCHMARK_CASES__ZERO_SCORE_CREDIT",
+  "target_reference": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "subject_id": "brain-osworld-v21-model-independent-gui-goal-verification-v19",
+  "branch": "osworld-capability-first-v16-20261011",
+  "independent_carrier": {
+    "type": "SPRITE",
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "working_tree": "/tmp/osworld-v14-closure",
+    "incremental_spend_usd": 0
+  },
+  "exact_blobs": {
+    "canonical/runtime/osworld_v21_gui_goal_verifier_v1.py": "94be4a30c93b03086540ffa33aef151cd4ee997e",
+    "canonical/runtime/osworld_v21_brain_agent_adapter_v8.py": "f09379f967c12c51953af11e25446c925ae3c944",
+    "canonical/runtime/osworld_v21_workflow_policy_v13.py": "2d4cb74ca7d673f7c23e3b5102a7b63928435ca4",
+    "canonical/runtime/osworld_v21_brain_subject_v19.py": "92e126eaa23eefa6e8c741fd85b4c02fd1233e64",
+    "canonical/tests/test_osworld_v21_gui_goal_verification_v19.py": "ee91356cd379001c983bf750b911ba80b3d0135a"
+  },
+  "replay": {
+    "command": "PYTHONPATH=. python3 -m pytest -q canonical/tests",
+    "python_compile_pass": true,
+    "passed": 72,
+    "failed": 0,
+    "warnings": 18,
+    "elapsed_seconds": 1.54,
+    "predecessor_tests_preserved": 67,
+    "benchmark_cases_consumed": 0
+  },
+  "newly_proved": [
+    "CHECKED_UNCHECKED_SELECTED_DISABLED_CURRENT_STATE_PREDICATES",
+    "EXACT_EDITABLE_VALUE_CURRENT_STATE_PREDICATE",
+    "ACTIVE_WINDOW_CURRENT_STATE_PREDICATE",
+    "UNSUPPORTED_CLICK_ONLY_GOALS_DO_NOT_BECOME_STATE_EVIDENCE",
+    "VERIFIED_ALREADY_SATISFIED_INITIAL_STATE_CAN_FINISH_WITHOUT_MUTATION",
+    "GUI_GOAL_EVIDENCE_IS_BOUND_TO_CURRENT_SCREEN_IDENTITY"
+  ],
+  "hard_nonclaims": [
+    "NO_OFFICIAL_OSWORLD_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_72_SYNTHETIC_TESTS_IMPLIES_81_8",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

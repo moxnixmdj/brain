@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_EXACT_OPERATIVE_POLICY_SYNTHETIC_PUBLIC_RUNNER_VERIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_BRAIN_OWNED_QWEN_POLICY_TWO_CYCLE_BROWSER_PLANNING__ZERO_BENCHMARK_CASES__ZERO_CREDIT",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "osw-operative-policy-smoke-v1",
+    "head_sha": "2a341f4765a29db2b9eda48d5ba75585ff093c0b",
+    "workflow": ".github/workflows/osw-operative-policy-smoke-v1.yml",
+    "workflow_run_id": 38135274723,
+    "workflow_job_id": 114457755436,
+    "artifact_id": 11699999901,
+    "artifact_digest": "sha256:727a315c53771d223a06c46605e5906344a26cfcf96da7890167d866e87ad286"
+  },
+  "owned_subject": {
+    "model_file": "Qwen3.5-9B-M-TS-Q4_K_M.gguf",
+    "model_bytes": 5060174144,
+    "model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "source": "BRAIN_CONTROLLED_RELEASE_SHARDS_REASSEMBLED_AND_HASH_VERIFIED",
+    "llama_cpp_revision": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+    "external_generation_provider": false
+  },
+  "exact_blobs": {
+    "canonical/runtime/harbor_command_policy.py": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "canonical/runtime/harbor_science_planner_v1.py": "58964dc8d6b5eed5c202081cd800035c791eeb1d",
+    "canonical/runtime/osworld_v21_local_qwen_policy_v1.py": "8c852df15c463f347c63ba34e04281e034065c50",
+    "canonical/runtime/osworld_v21_host_browser_ops_v1.py": "bfaf6f36b5bbd739ceff34ddb71ed9c603dc4240",
+    "canonical/runtime/osworld_v21_host_guest_ops_v1.py": "f002bbb5aadc302c9bff644c59c85485fb3bb668",
+    "canonical/runtime/osworld_v21_state_ops_v1.py": "0cba0ee052746e41988a666a2948c4e842e0a259",
+    "canonical/runtime/osworld_v21_brain_agent_adapter_v1.py": "bf7513f1d7837d42f782e714f77975e59d73994f"
+  },
+  "observed": {
+    "cycles": 2,
+    "browser_ops": [
+      {
+        "type": "OBSERVE"
+      },
+      {
+        "type": "CLICK_TEXT",
+        "text": "Submit",
+        "exact": true
+      }
+    ],
+    "policy_calls": [
+      {
+        "input_tokens": 1351,
+        "duration_s": 111.52,
+        "effective_timeout_s": 300
+      },
+      {
+        "input_tokens": 1536,
+        "duration_s": 34.84,
+        "effective_timeout_s": 300
+      }
+    ],
+    "benchmark_task_data_used": false,
+    "reference_trajectories_used": false,
+    "terminal_cases_consumed": 0
+  },
+  "relation_to_current_adapter": {
+    "current_adapter_blob": "1a203aa33ec89a172dab58804549258495308d52",
+    "tested_adapter_blob": "bf7513f1d7837d42f782e714f77975e59d73994f",
+    "delta": "CURRENT_ADAPTER_ADDS_FAIL_SOFT_AUXILIARY_OCR_OBSERVATION_HANDLING",
+    "transfer_claim": "NO_WHOLE_BLOB_IDENTITY_CLAIM__THIS_RECEIPT_PROVES_THE_OWNED_PLANNER_AND_BROWSER_POLICY_PATH; CURRENT_ADAPTER_STRUCTURE_IS_SEPARATELY_VERIFIED"
+  },
+  "proved": [
+    "EXACT_BRAIN_CONTROLLED_MODEL_BYTES_LOAD_AND_SERVE_LOCALLY",
+    "OPERATIVE_LOCAL_QWEN_POLICY_EMITS_REQUIRED_TOOL_CALL",
+    "UNKNOWN_BROWSER_STATE_IS_FIRST_OBSERVED",
+    "LIVE_OBSERVATION_RECEIPT_CAUSES_CORRECT_GENERIC_TEXT_TARGETED_CLICK",
+    "NO_EXTERNAL_GENERATION_PROVIDER_OR_REFERENCE_TRAJECTORY_IS_NEEDED_FOR_THE_TWO_CYCLE_POLICY"
+  ],
+  "hard_nonclaims": [
+    "NO_OSWORLD_BENCHMARK_TASK_EXECUTED",
+    "NO_CURRENT_WHOLE_SUBJECT_BLOB_IDENTITY_FROM_THIS RECEIPT ALONE",
+    "NO_CLAIM_POLICY_QUALITY_GE_81_8",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

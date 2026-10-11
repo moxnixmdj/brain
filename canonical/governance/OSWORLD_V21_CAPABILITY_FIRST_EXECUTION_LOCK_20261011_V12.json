@@ -1,0 +1,17 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_CAPABILITY_FIRST_EXECUTION_LOCK_20261011_V12",
+  "date": "2026-10-11",
+  "status": "ACTIVE__V14_VERIFIED__VISUAL_DISAMBIGUATION_NEXT__ZERO_SCORE_CREDIT",
+  "supersedes": "canonical/governance/OSWORLD_V21_CAPABILITY_FIRST_EXECUTION_LOCK_20261011_V11.json",
+  "target_reference": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "credited_subject": "brain-osworld-v21-model-independent-semantic-normalization-v14",
+  "evidence": "canonical/verification/OSWORLD_V21_SEMANTIC_NORMALIZATION_V14_INDEPENDENT_VERIFY_20261011_V1.json",
+  "next": [
+    "GENERALIZED_VISUAL_TARGET_DISAMBIGUATION",
+    "GENERIC_STATE_MISMATCH_AND_DIALOG_RECOVERY",
+    "FINAL_MATCHED_MEASUREMENT_ONLY_AFTER_CAPABILITY_MARGIN"
+  ],
+  "benchmark_cases_consumed": 0,
+  "incremental_spend_usd": 0,
+  "score_claim_allowed": false
+}

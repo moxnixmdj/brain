@@ -1,0 +1,113 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_BRAIN_NATIVE_POLICY_COMPOSITION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_CANDIDATE__BRAIN_OWNED_TEXT_PLANNER_PLUS_LIVE_BROWSER_STATE_PLUS_DECLARATIVE_STATE_OPS__SYNTHETIC_RUNTIME_QUALIFICATION_PENDING__ZERO_SCORE_CREDIT",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "architecture": [
+    "OSWORLD_INSTRUCTION_AND_LIVE_OBSERVATION",
+    "LIVE_CHROME_CDP_STATE_WHEN_BROWSER_PRESENT",
+    "BRAIN_OWNED_QWEN35_9B_TEXT_PLANNER",
+    "STRICT_DECLARATIVE_ACTION_DSL",
+    "BROWSER_CDP_ACTION_OR_GUEST_STATE_OP_OR_GUI_FALLBACK",
+    "FRESH_OBSERVATION",
+    "REPEAT_UNTIL_DONE_OR_FAIL"
+  ],
+  "exact_owned_planner": {
+    "model_file": "Qwen3.5-9B-M-TS-Q4_K_M.gguf",
+    "bytes": 5060174144,
+    "sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "brain_controlled_release_repo": "moxnixmdj/verification-capsule-runner",
+    "brain_controlled_release_tag": "brain-capability-qwen35-9b-m-exact-v1",
+    "llama_cpp_revision": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "remote_model_fallback": false,
+    "runtime": "canonical/runtime/osworld_v21_qwen35_planner_v1.py"
+  },
+  "browser_surface": {
+    "runtime": "canonical/runtime/osworld_v21_browser_cdp_v1.py",
+    "source": "OSWorld exposed Chromium debugging endpoint only",
+    "reads_task_source": false,
+    "reads_evaluator_source": false,
+    "arbitrary_javascript": false,
+    "operations": [
+      "NAVIGATE",
+      "CLICK_SELECTOR",
+      "CLICK_TEXT",
+      "FILL",
+      "PRESS",
+      "SELECT",
+      "CHECK",
+      "NEW_TAB",
+      "CLOSE_TAB"
+    ]
+  },
+  "guest_state_surface": {
+    "runtime": "canonical/runtime/osworld_v21_state_ops_v1.py",
+    "raw_shell": false,
+    "raw_python": false,
+    "protected_paths": [
+      "/evaluation_examples",
+      "/benchmark_releases",
+      "/root",
+      "/proc",
+      "/sys",
+      "/dev",
+      "/run/secrets"
+    ],
+    "purpose": "generic end-state transformation where benchmark rules permit API/state operations"
+  },
+  "native_adapter": {
+    "runtime": "canonical/runtime/osworld_v21_brain_agent_adapter_v1.py",
+    "contract": "reset(); predict(instruction,obs)->(response,actions)",
+    "screen": [
+      1920,
+      1080
+    ],
+    "browser_ops_execute_host_side_against_benchmark_exposed_CDP": true,
+    "browser_op_consumes_osworld_step_via_returned_WAIT": true
+  },
+  "runner_binding": {
+    "runtime": "canonical/runtime/osworld_v21_runner_binding_v1.py",
+    "changed_surface": "pre-call agent.bind_environment(env) only",
+    "task_setup_changed": false,
+    "stepping_changed": false,
+    "evaluator_changed": false,
+    "scoring_changed": false,
+    "aggregation_changed": false
+  },
+  "policy_firewall": {
+    "public_reference_trajectories_as_execution_input": false,
+    "task_id_branching": false,
+    "hidden_expected_answer_input": false,
+    "evaluator_source_input": false,
+    "official_task_source_input": false,
+    "external_agent_execution_substitution": false
+  },
+  "current_verification": {
+    "synthetic_planner_workflow_repo": "moxnixmdj/verification-capsule-runner",
+    "synthetic_planner_branch": "osw-planner-smoke-v1",
+    "synthetic_planner_head": "b68875e2afb91f09c62f697a6b78c5acb27e58b7",
+    "workflow_run_id": 38134861659,
+    "state": "IN_PROGRESS_AT_FREEZE",
+    "terminal_cases_consumed": 0
+  },
+  "unresolved": [
+    "SYNTHETIC_EXACT_PLANNER_RUNTIME_RECEIPT",
+    "SYNTHETIC_LIVE_CDP_END_TO_END_RECEIPT",
+    "NON_BROWSER_STATE_OBSERVATION_AND_VISUAL_FALLBACK_COMPOSITION",
+    "AUTHENTIC_MATCHED_FIVE_RUN_OSWORLD_V21_PARTIAL_SCORE_GE_0_818"
+  ],
+  "hard_nonclaims": [
+    "NO_OSWORLD_TASK_EXECUTED_BY_THIS_ARTIFACT",
+    "NO_CLAIM_QWEN35_9B_POLICY_QUALITY_IS_SUFFICIENT_FOR_81_8",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false
+}

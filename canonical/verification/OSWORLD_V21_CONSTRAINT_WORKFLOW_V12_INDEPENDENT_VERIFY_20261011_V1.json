@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_CONSTRAINT_WORKFLOW_V12_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__MODEL_INDEPENDENT_V12__196_OF_196_SYNTHETIC_TESTS__ZERO_BENCHMARK_CASES__ZERO_SCORE_CREDIT",
+  "target_reference": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "subject": {
+    "branch": "osworld-v21-direct-matched-run-20261011-v1",
+    "verified_head_sha": "e0053e1cacc050cd62acdecb48400573b34c38eb",
+    "subject_id": "brain-osworld-v21-model-independent-invariant-workflow-v12",
+    "general_purpose_model_runtime_cognition": false
+  },
+  "independent_carrier": {
+    "type": "SPRITE",
+    "name": "brain-live-runtime-v1-verify-20261008",
+    "id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "working_tree": "/home/sprite/osworld-v12-verify",
+    "incremental_spend_usd": 0
+  },
+  "replay": {
+    "first_attempt": {
+      "passed": 192,
+      "failed": 4,
+      "reason": "GERUND_INVARIANT_GRAMMAR_MISS"
+    },
+    "repaired_attempt": {
+      "passed": 196,
+      "failed": 0,
+      "elapsed_seconds": 0.37,
+      "benchmark_cases_consumed": 0
+    }
+  },
+  "exact_new_blobs": {
+    "canonical/runtime/osworld_v21_constraint_guard_v1.py": "36047ee6079b76f18ac27e088d47c79b3f9b5b3d",
+    "canonical/runtime/osworld_v21_brain_agent_adapter_v6.py": "df6257fea2dc8dc92ec015ee37020aa73d053f90",
+    "canonical/runtime/osworld_v21_brain_subject_v12.py": "bb729e328ec30294bd3c53eca20ef09e4432d06e",
+    "canonical/tests/test_osworld_v21_constraint_workflow_v12.py": "4ca16e53087b0340fec4f191f08460b69c4e4fe8"
+  },
+  "proved": [
+    "EXPLICIT_PATH_INVARIANT_EXTRACTION",
+    "PROTECTED_FILE_BYTE_IDENTITY_SNAPSHOT_AND_REVERIFY",
+    "CONFLICTING_ACTIONS_FAIL_CLOSED",
+    "OUT_OF_BAND_CHANGE_DETECTION",
+    "TWELVE_CLAUSE_RECEIPT_GATED_WORKFLOW",
+    "MODEL_INDEPENDENT_TASK_ID_FREE_RUNTIME"
+  ],
+  "remaining": [
+    "IRREDUCIBLE_VISUAL_ONLY_GROUNDING_AND_RECOVERY",
+    "FINAL_MATCHED_OSWORLD_MEASUREMENT"
+  ],
+  "hard_nonclaims": [
+    "NO_OFFICIAL_OSWORLD_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

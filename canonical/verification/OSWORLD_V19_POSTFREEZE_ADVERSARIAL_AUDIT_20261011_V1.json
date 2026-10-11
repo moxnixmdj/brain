@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V19_POSTFREEZE_ADVERSARIAL_AUDIT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__1000_OF_1000_POSTFREEZE_SYNTHETIC_ADVERSARIAL_CASES__ZERO_BENCHMARK_CASES__ZERO_SCORE_CREDIT",
+  "target_reference": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "subject_id": "brain-osworld-v21-model-independent-gui-goal-verification-v19",
+  "freeze_commit": "fddf0b193cf3c79b3b153ad635c5e89ee884561f",
+  "seed": 3338603790770610000,
+  "generation_rule": "SHA256('OSWORLD_V19_POSTFREEZE\\0'+freeze_commit)[:16] interpreted as uint64 seed",
+  "independent_carrier": {
+    "type": "SPRITE",
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "incremental_spend_usd": 0
+  },
+  "total_cases": 1000,
+  "counts": {
+    "goal_positive": 100,
+    "goal_negative": 100,
+    "goal_ambiguous": 100,
+    "adapter_first_cycle": 100,
+    "stale_evidence_rejected": 100,
+    "click_grounding": 100,
+    "browser_recovery": 100,
+    "browser_loop": 100,
+    "modal_recovery": 100,
+    "modal_loop": 100
+  },
+  "result": "PASS",
+  "benchmark_cases_consumed": 0,
+  "interpretation": "STRONG_POSTFREEZE_MARGIN_FOR_THE_TESTED_GENERAL_GOAL_VERIFICATION_GROUNDING_AND_RECOVERY_MECHANISMS_ONLY",
+  "hard_nonclaims": [
+    "NO_OFFICIAL_OSWORLD_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_THIS_SYNTHETIC_AUDIT_COVERS_ALL_COMPUTER_USE_CAPABILITY",
+    "NO_CLAIM_1000_OF_1000_IMPLIES_81_8"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_CAPABILITY_FIRST_SUCCESSOR_TRANSPLANT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__CURRENT_MAIN_ONE_COMMIT_SUCCESSOR__EXACT_VERIFIED_OSWORLD_BLOBS__ZERO_UNEXPECTED_PATHS__REPO_WIDE_CI_RED_NONDISCRIMINATING",
+  "target_reference": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "source_branch": "osworld-v21-direct-matched-run-20261011-v1",
+  "source_state": {
+    "ahead_of_main": 275,
+    "behind_main": 883,
+    "disposition": "SUPERSEDED_AS_LANDING_ROUTE__PRESERVED_AS_DEVELOPMENT_HISTORY"
+  },
+  "successor": {
+    "branch": "osworld-capability-first-v16-20261011",
+    "parent_main_sha": "0b57d5982f65f3271b50d0b492de0e9b177e3e1c",
+    "transplant_commit": "e9b5216e4b2cbad397ed6c0467bc0a8e1d460cf3",
+    "pull_request": 4674,
+    "compare_status": "ahead",
+    "ahead_by": 1,
+    "behind_by": 0,
+    "effective_changed_files": 163,
+    "unexpected_paths": 0
+  },
+  "transplant_scope": [
+    "canonical/governance/OSWORLD_*",
+    "canonical/verification/OSWORLD_*",
+    "canonical/runtime/osworld_*",
+    "canonical/tests/test_osworld_*",
+    "canonical/runtime/text_ui_grounding_v1.py",
+    "canonical/tests/test_text_ui_grounding_*",
+    ".github/workflows/osworld-*"
+  ],
+  "exact_v16_blobs": {
+    "recovery_policy": "cad1cde551c3211a1d83e4887d60e9864add0b8d",
+    "unified_policy_v16": "011a24cab75ab8bd08fcffb9cfae9395a997254a",
+    "workflow_policy_v11": "ae9f558c2d4d9608cc858f5e3f0188bf3d22444b",
+    "brain_subject_v16": "7423b780be0b8ee1f4222afce24bbdaa72a8f625",
+    "recovery_tests": "caa6073334a9b427d97c08ac2828222bfc8b3239"
+  },
+  "independent_behavioral_evidence": "canonical/verification/OSWORLD_V21_OBSERVED_STATE_RECOVERY_V16_INDEPENDENT_VERIFY_20261011_V1.json",
+  "independent_replay": {
+    "passed": 31,
+    "failed": 0,
+    "benchmark_cases_consumed": 0,
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1"
+  },
+  "ci_reconciliation": {
+    "current_main_sha": "0b57d5982f65f3271b50d0b492de0e9b177e3e1c",
+    "current_main_checks_observed_red": [
+      "full-regression",
+      "guard",
+      "verify",
+      "continuous-obs-runtime"
+    ],
+    "successor_checks_observed_red_or_pending": [
+      "guard",
+      "continuous-obs-runtime",
+      "verify"
+    ],
+    "inference": "THESE_REPO_LEVEL_CHECKS_ARE_NOT_BRANCH_DISCRIMINATORS_WHILE_THE_EXACT_CURRENT_MAIN_COMMIT_IS_RED_ON_THE_SAME_CHECK_FAMILIES",
+    "hard_boundary": "THIS_DOES_NOT CONVERT RED CI INTO PASS; INDEPENDENT V16 REPLAY AND EXACT BLOB TRANSPLANT ARE THE POSITIVE EVIDENCE"
+  },
+  "hard_nonclaims": [
+    "NO_OFFICIAL_OSWORLD_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_SYNTHETIC_VERIFICATION_IMPLIES_81_8",
+    "NO_CLAIM_REPO_WIDE_RED_CI_IS HEALTHY",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

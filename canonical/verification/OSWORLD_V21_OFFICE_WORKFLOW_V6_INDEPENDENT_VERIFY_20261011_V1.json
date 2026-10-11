@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_OFFICE_WORKFLOW_V6_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__MODEL_INDEPENDENT_V6_OFFICE_TRANSFORM_EXPANSION__153_OF_153_SYNTHETIC_TESTS__ZERO_BENCHMARK_CASES__ZERO_SCORE_CREDIT",
+  "target_reference": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "subject": {
+    "branch": "osworld-v21-direct-matched-run-20261011-v1",
+    "verified_head_sha": "3c0f4b78b557b446e3ce15ff7f67d59b4c4e8f70",
+    "subject_id": "brain-osworld-v21-model-independent-office-workflow-v6",
+    "general_purpose_model_runtime_cognition": false,
+    "external_generation_provider": false
+  },
+  "independent_carrier": {
+    "type": "SPRITE",
+    "name": "brain-live-runtime-v1-verify-20261008",
+    "id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "working_tree": "/home/sprite/osworld-v4-current-head-verify/osworld-v3-combined-verify",
+    "incremental_spend_usd": 0
+  },
+  "replay": {
+    "command": "PYTHONPATH=. python3 -m pytest -q canonical/tests --ignore=canonical/tests/test_osworld_v21_browser_ops_v1.py",
+    "passed": 153,
+    "failed": 0,
+    "elapsed_seconds": 3.76,
+    "benchmark_cases_consumed": 0
+  },
+  "exact_load_bearing_blobs": {
+    "canonical/runtime/osworld_v21_app_policy_overlay_v3.py": "359b205cade0d4711f8730f1b4140b680c268bfb",
+    "canonical/runtime/osworld_v21_web_app_policy_overlay_v1.py": "84432ddbef9428df9bd082b593b7d4f64a6f7656",
+    "canonical/runtime/osworld_v21_workflow_policy_v3.py": "bcd36a6978fbb5a0d980234a12fc6cb366588aff",
+    "canonical/runtime/osworld_v21_brain_subject_v6.py": "c70dcaa4ce501403f01876745ed763020dd30a0c",
+    "canonical/tests/test_osworld_v21_app_policy_overlay_v3.py": "7314cee3f0d9e674089b4bf4cf0f0877319a5364"
+  },
+  "newly_proved": [
+    "HIGH_CONFIDENCE_WRITER_CASE_TRANSFORM_ROUTING",
+    "CALC_FREEZE_PANES_NUMBER_FORMAT_AUTOFIT_RANGE_FORMAT_AND_SHEET_COPY_ROUTING",
+    "IMPRESS_FONT_COLOR_BOX_POSITION_SLIDE_BACKGROUND_AND_IMAGE_EXPORT_ROUTING",
+    "NEW_OFFICE_OPERATIONS_COMPOSE_WITH_EXISTING_POSTCONDITION_GATED_SEMANTIC_WORKFLOWS",
+    "PRIOR_BROWSER_FILE_DATAFLOW_AND_WORKFLOW_SYNTHETIC SUITES_REMAIN_GREEN"
+  ],
+  "remaining_general_residuals": [
+    "FORMULA_CHART_PIVOT_VALIDATION_AND_MULTI_OBJECT_SPREADSHEET_TRANSFORMS",
+    "RICHER_NONSCALAR_RELATIONAL_AND_AGGREGATE_DATAFLOW",
+    "CODE_WORKSPACE_REPOSITORY_EDIT_EXECUTE_VERIFY",
+    "MEDIA_GEOMETRY_AND_TIMELINE_TRANSFORMATION",
+    "IRREDUCIBLE_VISUAL_ONLY_GROUNDING_AND_RECOVERY",
+    "AUTHENTIC_FINAL_OSWORLD_MEASUREMENT_ONLY_AFTER_CAPABILITY_MARGIN"
+  ],
+  "hard_nonclaims": [
+    "NO_OFFICIAL_OSWORLD_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_153_SYNTHETIC_TESTS_IMPLY_81_8",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ]
+}

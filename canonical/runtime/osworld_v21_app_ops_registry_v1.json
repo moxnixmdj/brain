@@ -1,0 +1,437 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_APP_OP_REGISTRY_V1",
+  "date": "2026-10-11",
+  "status": "CURATED_PUBLIC_GENERIC_APP_OPERATION_REGISTRY__ZERO_TASK_DATA",
+  "source": {
+    "repository": "xlang-ai/OSWorld-V2",
+    "ref": "osworld-v2.1",
+    "basis": "mm_agents/autoglm/tools/apis/*.json"
+  },
+  "apps": {
+    "libreoffice_writer": {
+      "class_name": "WriterTools",
+      "operations": {
+        "save": {
+          "required": []
+        },
+        "find_and_replace": {
+          "required": [
+            "pattern",
+            "replacement"
+          ]
+        },
+        "set_font": {
+          "required": [
+            "font_name"
+          ]
+        },
+        "set_line_spacing": {
+          "required": [
+            "spacing_value"
+          ]
+        },
+        "remove_highlighting": {
+          "required": []
+        },
+        "set_strikethrough": {
+          "required": [
+            "pattern"
+          ]
+        },
+        "set_font_size": {
+          "required": [
+            "font_size",
+            "pattern"
+          ]
+        },
+        "export_to_pdf": {
+          "required": []
+        },
+        "set_paragraph_alignment": {
+          "required": [
+            "alignment"
+          ]
+        },
+        "capitalize_words": {
+          "required": []
+        },
+        "set_default_font": {
+          "required": [
+            "font_name"
+          ]
+        },
+        "add_page_numbers": {
+          "required": [
+            "position"
+          ]
+        },
+        "insert_page_break": {
+          "required": []
+        },
+        "change_text_case": {
+          "required": [
+            "case_type",
+            "pattern"
+          ]
+        }
+      }
+    },
+    "libreoffice_calc": {
+      "class_name": "CalcTools",
+      "operations": {
+        "save": {
+          "required": []
+        },
+        "switch_active_sheet": {
+          "required": [
+            "sheet_name"
+          ]
+        },
+        "highlight_range": {
+          "required": [
+            "range_str"
+          ]
+        },
+        "transpose_range": {
+          "required": [
+            "source_range",
+            "target_cell"
+          ]
+        },
+        "export_to_csv": {
+          "required": []
+        },
+        "sort_column": {
+          "required": [
+            "column_name"
+          ]
+        },
+        "hide_row_data": {
+          "required": []
+        },
+        "merge_cells": {
+          "required": [
+            "range_str"
+          ]
+        },
+        "set_cell_value": {
+          "required": [
+            "cell",
+            "value"
+          ]
+        },
+        "format_range": {
+          "required": [
+            "range_str"
+          ]
+        },
+        "freeze_panes": {
+          "required": []
+        },
+        "rename_sheet": {
+          "required": [
+            "old_name",
+            "new_name"
+          ]
+        },
+        "copy_sheet": {
+          "required": [
+            "source_sheet"
+          ]
+        },
+        "set_number_format": {
+          "required": [
+            "range_str",
+            "format_type"
+          ]
+        },
+        "adjust_column_width": {
+          "required": [
+            "columns"
+          ]
+        },
+        "adjust_row_height": {
+          "required": [
+            "rows"
+          ]
+        },
+        "export_to_pdf": {
+          "required": []
+        },
+        "set_zoom_level": {
+          "required": [
+            "zoom_percentage"
+          ]
+        },
+        "get_workbook_info": {
+          "required": []
+        },
+        "get_column_data": {
+          "required": [
+            "column_name"
+          ]
+        },
+        "set_column_values": {
+          "required": [
+            "column_name",
+            "data"
+          ]
+        },
+        "set_validation_list": {
+          "required": [
+            "column_name",
+            "values"
+          ]
+        },
+        "reorder_columns": {
+          "required": [
+            "column_order"
+          ]
+        },
+        "create_pivot_table": {
+          "required": [
+            "source_sheet",
+            "table_name",
+            "value_fields"
+          ]
+        },
+        "create_chart": {
+          "required": [
+            "chart_type",
+            "data_range"
+          ]
+        },
+        "reorder_sheets": {
+          "required": [
+            "sheet_name",
+            "position"
+          ]
+        },
+        "set_chart_legend_position": {
+          "required": [
+            "position"
+          ]
+        },
+        "set_cell_formula_verified": {
+          "required": [
+            "cell",
+            "formula"
+          ]
+        }
+      }
+    },
+    "libreoffice_impress": {
+      "class_name": "ImpressTools",
+      "operations": {
+        "save": {
+          "required": []
+        },
+        "go_to_slide": {
+          "required": [
+            "slide_index"
+          ]
+        },
+        "duplicate_slide": {
+          "required": [
+            "slide_index"
+          ]
+        },
+        "set_slide_font": {
+          "required": [
+            "slide_index",
+            "font_name"
+          ]
+        },
+        "set_style": {
+          "required": [
+            "slide_index",
+            "box_index"
+          ]
+        },
+        "set_background_color": {
+          "required": [
+            "slide_index",
+            "box_index",
+            "color"
+          ]
+        },
+        "set_text_color": {
+          "required": [
+            "slide_index",
+            "box_index",
+            "color"
+          ]
+        },
+        "delete_content": {
+          "required": [
+            "slide_index",
+            "box_index"
+          ]
+        },
+        "set_slide_orientation": {
+          "required": [
+            "orientation"
+          ]
+        },
+        "position_box": {
+          "required": [
+            "slide_index",
+            "box_index",
+            "position"
+          ]
+        },
+        "set_slide_background": {
+          "required": []
+        },
+        "save_as": {
+          "required": [
+            "file_path"
+          ]
+        },
+        "insert_image": {
+          "required": [
+            "slide_index",
+            "image_path"
+          ]
+        },
+        "set_textbox_alignment": {
+          "required": [
+            "slide_index",
+            "box_index",
+            "alignment"
+          ]
+        },
+        "set_slide_number": {
+          "required": []
+        },
+        "export_to_image": {
+          "required": [
+            "file_path",
+            "format"
+          ]
+        },
+        "get_slide_count": {
+          "required": []
+        }
+      }
+    },
+    "code": {
+      "class_name": "CodeTools",
+      "operations": {
+        "launch_vscode": {
+          "required": [
+            "path"
+          ]
+        },
+        "compare_files": {
+          "required": [
+            "file1",
+            "file2"
+          ]
+        },
+        "add_folder": {
+          "required": [
+            "folder"
+          ]
+        },
+        "goto_file": {
+          "required": [
+            "file_path"
+          ]
+        },
+        "perform_merge": {
+          "required": [
+            "path1",
+            "path2",
+            "base",
+            "result"
+          ]
+        },
+        "remove_folder": {
+          "required": [
+            "folder"
+          ]
+        },
+        "install_extension": {
+          "required": [
+            "extension_id"
+          ]
+        },
+        "uninstall_extension": {
+          "required": [
+            "extension_id"
+          ]
+        },
+        "list_extensions": {
+          "required": []
+        },
+        "update_extensions": {
+          "required": []
+        },
+        "disable_extension": {
+          "required": [
+            "extension_id"
+          ]
+        },
+        "toggle_sync": {
+          "required": [
+            "state"
+          ]
+        }
+      }
+    },
+    "vlc": {
+      "class_name": "VLCTools",
+      "operations": {
+        "get_playlist": {
+          "required": []
+        },
+        "play": {
+          "required": []
+        },
+        "pause": {
+          "required": []
+        },
+        "next": {
+          "required": []
+        },
+        "previous": {
+          "required": []
+        },
+        "add_to_playlist": {
+          "required": [
+            "uri"
+          ]
+        },
+        "get_current_time": {
+          "required": []
+        },
+        "get_media_duration": {
+          "required": []
+        },
+        "toggle_fullscreen": {
+          "required": []
+        },
+        "get_settings": {
+          "required": []
+        },
+        "set_settings": {
+          "required": [
+            "field",
+            "value"
+          ]
+        },
+        "get_media_files": {
+          "required": [
+            "path"
+          ]
+        }
+      }
+    }
+  },
+  "hard_nonclaims": [
+    "NO_TASK_ID_MAPPING",
+    "NO_REFERENCE_TRAJECTORY_INPUT",
+    "NO_MODEL_COGNITION"
+  ]
+}
