@@ -1,23 +1,23 @@
 {
   "schema": "PROJECT_BRAIN_CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1",
   "date": "2026-10-10",
-  "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_CARRIER_WAKE_GATED__ESCAPE_12_ACTIVE_ACQUISITION__BYTES_V32__R2_V87_WAKE_GATED__TB_PARKED__ZERO_CREDIT",
+  "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_CARRIER_WAKE_GATED__ESCAPE_12_ACTIVE_ACQUISITION__BYTES_V41__R2_V91_WAKE_GATED__TB_PARKED__ZERO_CREDIT",
   "sources": {
     "professional": {
       "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-      "git_blob_sha": "219fcd3aab318bde5d64e955a430ea7e60d7bf8e"
+      "git_blob_sha": "34f2583ae019ec4730f0841cb0b32016ec968645"
     },
     "assurance": {
       "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
-      "git_blob_sha": "27acc7e80c0b85a778b8f8dbbd77aefe312ceef8"
+      "git_blob_sha": "e421e0fec8d09f1359bafceb1bf215df8571f501"
     },
     "bytes": {
       "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-      "git_blob_sha": "22bb42347a8c823f057dc1dcbe38e1e9b2d3c5b1"
+      "git_blob_sha": "3b97e3e440487eada1d38481d0194925f8730b26"
     },
     "r2": {
       "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-      "git_blob_sha": "91a2000e0972bc5ce4c03f9a2dcaed13a822ad58"
+      "git_blob_sha": "eaeb22cef6a8d85d6bbcad2e06706457cb573d1a"
     },
     "tb_science": {
       "path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
@@ -25,7 +25,7 @@
     },
     "terminal": {
       "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-      "git_blob_sha": "2f4c0900bb5c0d5b4e3b5831f13e951ad75fe859"
+      "git_blob_sha": "ae28dee5dd638813f4c42aa6d7c46d4950f1c0f8"
     }
   },
   "frontier": {
@@ -33,7 +33,7 @@
       "ESCAPE_12_ACTIVE_ACQUISITION_ROW_PROOF_INSTANTIATION_REUSE"
     ],
     "safe_parallel_ready": [
-      "BYTES_V32_RESOURCE_PARETO_CUT"
+      "BYTES_V41_RESOURCE_PARETO_CUT"
     ],
     "blocked": [
       "ASSURANCE_UVCK_V2_PROMOTION_UNTIL_REAL_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_EXECUTES_AND_PASSES"
@@ -63,7 +63,7 @@
     "acceptance": false,
     "terminal": false
   },
-  "next": "INSTANTIATE_EXISTING_AUTHENTICATED_POLICY_COVER_AND_ROW_PROOF_MACHINERY_FOR_12_ACTIVE_ESCAPE_ACQUISITION_ROWS__DO_NOT_REOPEN_24_OF_24_PROFESSIONAL_PROPERTY_TRUTH__WAKE_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_ONLY_ON_REAL_CARRIER_STATE_CHANGE__PARALLELIZE_NONCONFLICTING_BYTES_RESOURCE_WORK",
+  "next": "INSTANTIATE_EXISTING_AUTHENTICATED_POLICY_COVER_AND_ROW_PROOF_MACHINERY_FOR_ACTIVE_ESCAPE_ACQUISITION_ROWS__DO_NOT_REOPEN_24_OF_24_PROFESSIONAL_PROPERTY_TRUTH__WAKE_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_ONLY_ON_REAL_CARRIER_STATE_CHANGE__PARALLELIZE_NONCONFLICTING_BYTES_V41_RESOURCE_WORK",
   "acceptance_credit_delta": 0,
   "capability_credit_delta": 0,
   "terminal_credit_delta": 0

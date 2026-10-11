@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_COUNT_OPS_EXPR_V41_SUCCESSOR_EXECUTION_20261011_V1",
   "date": "2026-10-11",
-  "status": "VERIFIED_SUCCESSOR_CANDIDATE__SPENT_NEXT45_AND_FRESH_NEXT46_PASS__NEXT47_FREEZE_PENDING__NOT_CURRENT_POINTER__ZERO_PROMOTION_CREDIT",
+  "status": "VERIFIED_RESEARCH_FRONTIER__SPENT_NEXT45_AND_NEXT46_PASS__NEXT47_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
   "subject": {
     "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_ASSUMPTION_PERIPHERAL_V40_SUCCESSOR_EXECUTION_20261011_V1.json",
     "predecessor_manifest_sha256": "f6c950d49791f05fbfc1e8985fde4c1b623b8087b62f89fc7d4a30f78e39e97a",
@@ -37,7 +37,7 @@
       "failures": 0,
       "spent": true
     },
-    "fresh_NEXT46": {
+    "spent_NEXT46": {
       "id": "QUAL_SUCCESSOR_NEXT46_20261011_V1",
       "cases": 12420,
       "corpus_sha256": "bc22c8306594b851f38f0374e91775fbc2d9670bcc57d048e582561c243836f3",
@@ -58,9 +58,9 @@
     "sha256": "d11ad0e1ddd2e4e2b1879e09c66b956ee052a4c16ed751ce326b3ec00c6c0b8f"
   },
   "promotion_boundary": {
-    "current_pointer_remains": "V40",
-    "reason": "NEXT47_FROZEN_CORPUS_NOT_YET_DURABLY_MATERIALIZED",
-    "next": "FREEZE_QUAL_SUCCESSOR_NEXT47_20261011_V1_FROM_TRUSTED_DONOR_WITHOUT_EVALUATING_V41__THEN_RECONCILE_CURRENT_POINTERS"
+    "current_pointer_can_advance_to": "V41",
+    "reason": "NEXT47_FROZEN_DURABLY_AFTER_V41_PHYSICAL_CUT_AND_NEXT46_FALSIFICATION",
+    "next": "RERANK_EXACT_V41_USING_SPENT_NEXT46_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_TOUCHING_QUAL_SUCCESSOR_NEXT47_20261011_V1"
   },
   "truth_boundary": [
     "MEASURED: V41 is 1,744,868 raw Python-source bytes, 1,686 below exact V40.",
@@ -69,7 +69,9 @@
     "MEASURED: full count_ops deletion is invalid; exactly four NEXT44 roots cases require it.",
     "MEASURED: clean-room V40-to-V41 reconstruction yields 277/277 Python files byte-identical.",
     "NOT PROVED: external second-carrier replay.",
-    "NOT CURRENT: V40 remains current until NEXT47 is frozen and current pointers are reconciled.",
+    "MEASURED: NEXT47 is durably frozen at 12,650 cases, seed 2,989,342,359, SHA-256 e4848f81bf1bbf1ebc795d1ee5e3c4db1035f8227272ed60afc9fb59662a6fef, and remains unspent.",
+    "MEASURED: the parallel expectation accelerator was byte-identical to the canonical serial generator on an independent 130-case cross-check.",
+    "CURRENTNESS: V41 is eligible to become current in the same reconciliation that updates the Bytes authority and scheduler projections.",
     "NOT PROMOTED: no capability, acceptance, ownership, quality, or terminal credit."
   ],
   "incremental_spend_usd": 0,
@@ -78,5 +80,20 @@
   "ownership_credit_delta": 0,
   "quality_credit_delta": 0,
   "promotion_credit_delta": 0,
-  "terminal_credit_delta": 0
+  "terminal_credit_delta": 0,
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT47_20261011_V1",
+    "cases": 12650,
+    "seed": 2989342359,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT47_20261011_V1_PIPE_V41_MANIFEST_IDENTITY",
+    "seed_material": "QUAL_SUCCESSOR_NEXT47_20261011_V1|975445352f47077530dadacab2e387c227a9787b4b693678c740c3e3b080af38",
+    "per_operation_budget": 1100,
+    "corpus_sha256": "e4848f81bf1bbf1ebc795d1ee5e3c4db1035f8227272ed60afc9fb59662a6fef",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT47_20261011_V1.jsonl",
+    "library_file_id": "libfile_9a89cf0c18dc819185ee48ec77fb2f6c",
+    "generation_provenance": "PARALLEL_EXPECTED_OUTPUT_ACCELERATOR_BYTE_IDENTICAL_TO_CANONICAL_SERIAL_GENERATOR_ON_INDEPENDENT_130_CASE_CORPUS",
+    "independent_crosscheck_sha256": "d4349727bc946e29a757ea539fe3fd5b981a5bb9363042656de45498aa012205",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  }
 }
