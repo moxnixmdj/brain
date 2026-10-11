@@ -1,14 +1,14 @@
 {
   "schema": "PROJECT_BRAIN_GDPVAL_DEFENSIBLE_FRESH_SUBMISSION_MANIFEST_20261011_V1",
   "date": "2026-10-11",
-  "status": "PARTIAL_CONTENT_ADDRESSED_MANIFEST__25_DEFENSIBLE_FRESH_SUBJECTS__FAIL_CLOSED_TOMBSTONES_PREVAIL",
+  "status": "PARTIAL_CONTENT_ADDRESSED_MANIFEST__27_DEFENSIBLE_FRESH_SUBJECTS__FAIL_CLOSED_TOMBSTONES_PREVAIL",
   "benchmark": "GDPval-AA v2.1",
   "dataset": {
     "revision_sha": "11e7900cdcac61bc4daf59e65feb238acda98fbf",
     "population_count": 220,
     "manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8"
   },
-  "fresh_subject_count": 25,
+  "fresh_subject_count": 27,
   "fresh_rows": [
     5,
     6,
@@ -33,6 +33,8 @@
     31,
     36,
     40,
+    45,
+    50,
     211,
     217
   ],
@@ -245,6 +247,24 @@
       "status": "PASS__FRESH_ROW40_RENTAL_AGREEMENT_SELF_SERVICE_GUIDE_DOCX_FROZEN__RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT"
     },
     {
+      "row_idx": 45,
+      "task_id": "f3351922-dbdd-45da-85c5-e7110696bbe5",
+      "receipt_path": "canonical/evidence/GDPVAL_SCALE_ROW45_F3351922_BRAIN_SUBMISSION_RECEIPT_20261011_V1.json",
+      "receipt_blob_sha": "b131b16cf27cd853608ac7426340eb8d0abe03a0",
+      "precommit_commit": "c604f5006820ce3ca24d6afc2487a95a30886a6c",
+      "output_freeze_commit": "7824a35427353a9fcf449e470e0e96fab2727f62",
+      "status": "PASS__FRESH_ROW45_TSP_TRANSITION_EMAIL_DOCX_FROZEN__CURRENT_FEDERAL_SOURCE_AND_RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT"
+    },
+    {
+      "row_idx": 50,
+      "task_id": "401a07f1-d57e-4bb0-889b-22de8c900f0e",
+      "receipt_path": "canonical/evidence/GDPVAL_SCALE_ROW50_401A07F1_BRAIN_SUBMISSION_RECEIPT_20261011_V1.json",
+      "receipt_blob_sha": "6c2ad829dc34b5452ad3333f6d2476e6cb24d5b9",
+      "precommit_commit": "c604f5006820ce3ca24d6afc2487a95a30886a6c",
+      "output_freeze_commit": "b4363213e95c5971cc86b02928a2eedce3897d89",
+      "status": "PASS__FRESH_ROW50_514_WORD_SCIENCE_EDITORIAL_DOCX_FROZEN__LINK_AND_RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT"
+    },
+    {
       "row_idx": 211,
       "task_id": "a4a9195c-5ebe-4b8d-a0c2-4a6b7a49da8b",
       "receipt_path": "canonical/evidence/GDPVAL_SCALE_ROW211_A4A9195C_BRAIN_SUBMISSION_RECEIPT_20261011_V1.json",
@@ -310,10 +330,10 @@
     }
   ],
   "coverage": {
-    "fresh_frozen_tasks": 25,
+    "fresh_frozen_tasks": 27,
     "population_tasks": 220,
-    "fresh_fraction": 0.11363636363636363,
-    "remaining_without_defensible_fresh_submission": 195
+    "fresh_fraction": 0.12272727272727273,
+    "remaining_without_defensible_fresh_submission": 193
   },
   "precedence_rule": "EXPLICIT_CONTAMINATION_OR_IDENTITY_TOMBSTONE_OVERRIDES_ANY_LATER_RECEIPT_LABELLED_FRESH_FOR_THE_SAME_ROW",
   "boundary": [
