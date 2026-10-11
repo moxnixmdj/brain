@@ -145,6 +145,35 @@ def _benchmark_external_route_errors(
     return errors
 
 
+def referenced_receipt_paths(admission: Any) -> list[str]:
+    if not isinstance(admission, Mapping):
+        return []
+    refs: list[str] = []
+
+    wake = admission.get("wake_receipt_path")
+    if _nonempty(wake):
+        refs.append(str(wake))
+
+    tournament = admission.get("tournament")
+    if isinstance(tournament, Mapping):
+        for row in tournament.get("counterexample_receipts") or []:
+            if isinstance(row, Mapping) and _nonempty(row.get("path")):
+                refs.append(str(row["path"]))
+
+    info = admission.get("benchmark_information_equivalence")
+    if isinstance(info, Mapping):
+        for field in (
+            "certificate_exhaustion_receipt",
+            "self_service_provisioning_receipt",
+            "existing_authorized_credential_receipt",
+        ):
+            row = info.get(field)
+            if isinstance(row, Mapping) and _nonempty(row.get("path")):
+                refs.append(str(row["path"]))
+
+    return sorted(set(refs))
+
+
 def admission_errors(
     admission: Any,
     pointer: Mapping[str, Any],
