@@ -1,0 +1,122 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_DOCSTRING_STRIP_V76_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__DOCSTRING_STRIP__QUALIFICATION_TRANSFER_BY_EXACT_EXECUTABLE_EQUIVALENCE__NEXT83_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_COMMENT_STRIP_V75_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "42c3255fe51bc6e7c30afd912d3fd3aabc422742b4671eed1e7b7fc50ce290f9",
+    "transform": "canonical/research/bytes/tools/conservative_docstring_strip_v76.py",
+    "manifest_sha256": "ea2958321bf8c5b35f6f3f6d98bee0f8498a52f51dff6826d76632e8b5a61940",
+    "python_files": 277,
+    "raw_python_source_bytes": 1615553,
+    "B_exec_raw_python_source_bytes": 1618313,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v75_bytes": -1369,
+    "B_exec_delta_vs_v75_bytes": -1369
+  },
+  "selection": {
+    "id": "INTFUNC_DOCSTRING_STRIP_V76",
+    "method": "REMOVE_ONLY_TRUE_MODULE_CLASS_FUNCTION_DOCSTRING_EXPR_NODES_IN_SYMPY_CORE_INTFUNC__AST_UNPARSE__COMPILE__POST_STRIP_AST_IDENTITY__EXACT_BASE_AND_TARGET_GUARDS",
+    "changed_python_file_count": 1,
+    "changed_path": "sympy/core/intfunc.py",
+    "removed_docstring_count": 2,
+    "source_introspection_semantics_preserved": false,
+    "bounded_route_semantics_verified": true,
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "qualification_transfer": {
+    "reference_candidate": {
+      "role": "FULLY_DIRECTLY_QUALIFIED_EXECUTABLE_REFERENCE__NOT_PROMOTED",
+      "manifest_sha256": "72b33ac081a02196c047eaabe1251fd87452d5da9608a5f9699e739452d9fe8a",
+      "raw_python_source_bytes": 1615616,
+      "archive_library_path": "/Brain Evidence/Bytes/BYTES_V76_QUALIFIED_REFERENCE_DOCSTRIP_V74BASE_20261011_V1.tar.xz",
+      "archive_library_file_id": "libfile_c6a1f0478f1c81918a7a312d23b5f52f",
+      "archive_bytes": 265732,
+      "archive_sha256": "fca7847c18d01c4c51e1dec8a005dcf738eb094d954310b8f8f90c2effdd4c12"
+    },
+    "direct_reference_qualification": {
+      "spent_NEXT81": {
+        "id": "QUAL_SUCCESSOR_NEXT81_20261011_V1",
+        "cases": 20470,
+        "corpus_sha256": "f6ce8c05e6c7c4a4df436d03176a4d824555ddc6abeaa557eb1d3fd1912f57a1",
+        "result": "20470/20470",
+        "failures": 0
+      },
+      "fresh_corrected_NEXT82": {
+        "id": "QUAL_SUCCESSOR_NEXT82_20261011_V1",
+        "cases": 20700,
+        "corpus_sha256": "a50d77134ca612abaa96a015c055d1a59b9d19f8688d2014dd10ba3a7fa7d71f",
+        "result": "20700/20700",
+        "failures": 0
+      }
+    },
+    "reference_to_v76_equivalence": {
+      "python_file_count": 277,
+      "type_comments_ast_identity": "277/277",
+      "recursive_executable_code_identity": "277/277",
+      "source_byte_difference_file_count": 2,
+      "source_byte_differences": [
+        {
+          "path": "mpmath/libmp/libmpc.py",
+          "reference_bytes": 7186,
+          "v76_bytes": 7144,
+          "delta": -42,
+          "classification": "COMMENT_OR_TRAILING_WHITESPACE_ONLY"
+        },
+        {
+          "path": "sympy/core/numbers.py",
+          "reference_bytes": 70943,
+          "v76_bytes": 70922,
+          "delta": -21,
+          "classification": "COMMENT_OR_TRAILING_WHITESPACE_ONLY"
+        }
+      ],
+      "consequence": "NEXT81_AND_CORRECTED_NEXT82_RESULTS_TRANSFER_EXACTLY_TO_V76_EXECUTABLE_BEHAVIOR"
+    }
+  },
+  "reproducibility": {
+    "clean_room_v75_to_v76_reconstruction": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+    "regenerated_manifest_sha256": "ea2958321bf8c5b35f6f3f6d98bee0f8498a52f51dff6826d76632e8b5a61940",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V76_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_ad7016e724b081919bcb590fbfc37849",
+    "bytes": 265688,
+    "sha256": "df43822de776f7f78800190e93c4870337ad7019de0668978b8c256dbb869e49"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT83_20261011_V1",
+    "cases": 20930,
+    "seed": 3766788354,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT83_20261011_V1_PIPE_V76_MANIFEST_IDENTITY",
+    "seed_material": "QUAL_SUCCESSOR_NEXT83_20261011_V1|ea2958321bf8c5b35f6f3f6d98bee0f8498a52f51dff6826d76632e8b5a61940",
+    "per_operation_budget": 1820,
+    "corpus_sha256": "31fa9c3a1bde80da7ba8928f784ada57f9761241a938bf9bb7551ebb0d9bb8b8",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT83_20261011_V1.jsonl",
+    "library_file_id": "libfile_330aad6cf77081918195a59fbd5ddea9",
+    "generation_provenance": "CANONICAL_GENERATOR_PARAMETER_STREAM_CROSSCHECKED_20700_OF_20700_AGAINST_CORRECTED_NEXT82__SINGULAR_LINEAR_SOLVE_CONTROL_FLOW_PRESERVED__STOCK_SYMPY_1_14_0_MPMATH_1_3_0_EXPECTED_OUTPUTS__DETERMINISTIC_64_SHARD_REASSEMBLY",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_NON_EQUIVALENCE_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V76 is 1,615,553 raw Python-source bytes, 1,369 bytes below canonical V75.",
+    "MEASURED: exactly two docstring expression nodes in sympy/core/intfunc.py are removed.",
+    "MEASURED: clean-room V75-to-V76 reconstruction is 278/278 durable files byte-identical.",
+    "MEASURED: the directly qualified reference candidate passes NEXT81 20,470/20,470 and corrected NEXT82 20,700/20,700.",
+    "MEASURED: V76 and the directly qualified reference are AST-identical and recursively executable-code-identical across all 277 Python files.",
+    "MEASURED: NEXT83 is durably frozen at 20,930 cases and remains unspent.",
+    "NOT PROVED: source introspection or __doc__ equivalence outside the bounded exact-symbolic route.",
+    "NOT PROVED: external second-carrier replay.",
+    "NOT PROMOTED: no capability, acceptance, ownership, professional, quality, promotion, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "professional_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
