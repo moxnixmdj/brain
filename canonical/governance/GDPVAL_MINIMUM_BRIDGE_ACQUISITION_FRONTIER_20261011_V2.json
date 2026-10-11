@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_MINIMUM_BRIDGE_ACQUISITION_FRONTIER_V2",
+  "date": "2026-10-11",
+  "status": "CURRENT_FRONTIER__OWNER_EXAMPLE_SUBMISSION_SURFACE_EXISTS_BUT_NO_SOUND_BRIDGE_IS_YET_AVAILABLE__TARGETED_WAKE_ONLY__ZERO_CREDIT",
+  "frozen_target": {
+    "predicate": "BRAIN_PROFESSIONAL_WORK_CAPABILITY_GE_CAPABILITY_EVIDENCED_BY_FROZEN_OPUS55_GDPVAL_AA_V2_1_1846",
+    "benchmark": "GDPval-AA",
+    "version": "2.1",
+    "reference_model": "Claude Opus 5.5",
+    "frozen_reference_elo": 1846
+  },
+  "predecessor": {
+    "path": "canonical/governance/GDPVAL_MINIMUM_BRIDGE_ACQUISITION_FRONTIER_20261011_V1.json",
+    "merge_commit": "574e0b0c556d4eb100398ab54a93488de2327b20",
+    "preserved": "THREE_ADMISSIBLE_BRIDGE_CLASSES_AND_FAIL_CLOSED_TARGET_SEMANTICS"
+  },
+  "new_surface_delta": {
+    "path": "canonical/governance/GDPVAL_OWNER_EXAMPLE_SUBMISSION_SURFACE_DELTA_20261011_V1.json",
+    "git_blob_sha": "0d8711478d6e805d522176748aba69065b1280b3",
+    "effect": "NARROWS_OWNER_PUBLIC_SURFACE_EXHAUSTION_TO_NO_SUFFICIENT_TARGET_BRIDGE_FOUND;FIRST_PARTY_EXAMPLE_DELIVERABLES_EXIST"
+  },
+  "bridge_state": {
+    "MATCHED_SCORE": {
+      "available": false,
+      "minimum_missing": "A content-addressed Brain GDPval-AA v2.1 owner-score receipt comparable to frozen 1846, or a protocol-equivalent score-bearing route with a proved epoch/scale bridge."
+    },
+    "TARGET_RELATIVE_PAIRWISE": {
+      "available": false,
+      "new_progress": "Artificial Analysis first-party Example Tasks & Submissions exposes owner-hosted model deliverables.",
+      "minimum_missing": "A scope-sufficient authenticated Brain-vs-frozen-Opus relation: for example target Opus 5.5 deliverables/outcomes on a predeclared sufficient scope plus a sound judge/aggregation bridge, or authentic owner pairwise outcomes that entail noninferiority.",
+      "task_1_opus55_artifact_observed": false
+    },
+    "ABSOLUTE_DOMINANCE": {
+      "available": false,
+      "minimum_missing": "A scope-complete professional-quality order covering holistic measurement, observation, owner-evaluator containment or stronger universal evaluator coverage, normative aggregation, and the decision rule strongly enough to entail the frozen capability relation."
+    },
+    "any_bridge_available": false
+  },
+  "live_public_observation": {
+    "page": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+    "live_opus55_max_elo": 1866,
+    "live_anchor": "DeepSeek V4.1 Flash (max) at 1600",
+    "frozen_target_rebased": false,
+    "role": "FRESHNESS_AND_SURFACE_DISCOVERY_ONLY"
+  },
+  "scheduler": {
+    "execute_now": "ONLY_ZERO_SPEND_ACTIONS_WITH_A_DIRECT_CHANCE_TO_FLIP_MATCHED_SCORE_TARGET_RELATIVE_PAIRWISE_OR_ABSOLUTE_DOMINANCE",
+    "default_off": [
+      "GENERATE_REMAINING_PUBLIC_GDPVAL_SUBMISSIONS",
+      "REPEAT_PUBLIC_RUBRIC_SCORING",
+      "REPROVE_EXISTING_24_OF_24_PROFESSIONAL_SCOPE_OR_PROPERTY_TRUTH",
+      "REPEAT_UNCHANGED_BROAD_OWNER_SURFACE_SEARCH",
+      "GUESS_UNCHANGED_CDN_PATHS",
+      "TRANSPORT_1866_TO_1846_WITHOUT_A_PROVED_BRIDGE"
+    ],
+    "targeted_wake": [
+      "FIRST_PARTY_EXAMPLE_SURFACE_EXPOSES_OPUS55_ARTIFACT_OR_OWNER_PAIRWISE_OUTCOME",
+      "FIRST_PARTY_EXAMPLE_SURFACE_EXPOSES_STABLE_NONINTERACTIVE_TASK_OR_MODEL_SELECTOR_THAT_CAN_RECOVER_DECISION_CHANGING_ARTIFACTS",
+      "NEW_FIRST_PARTY_ZERO_SPEND_SUBMISSION_OR_GRADING_ENDPOINT",
+      "AUTHENTIC_MATCHED_BRAIN_OWNER_SCORE_RECEIPT",
+      "NEW_SCOPE_COMPLETE_QUALITY_THEOREM_CLOSES_ABSOLUTE_DOMINANCE"
+    ],
+    "first_sound_route_wins": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GDPVAL_GE_1846",
+    "NO_CLAIM_BRAIN_GE_OPUS55",
+    "NO_CLAIM_OWNER_EXAMPLE_SUBMISSIONS_ARE_SCOPE_SUFFICIENT",
+    "NO_CLAIM_OPUS55_EXAMPLE_ARTIFACTS_DO_NOT_EXIST",
+    "NO_CROSS_EPOCH_TRANSPORT",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
