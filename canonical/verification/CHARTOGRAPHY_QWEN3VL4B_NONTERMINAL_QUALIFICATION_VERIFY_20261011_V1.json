@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_QWEN3VL4B_NONTERMINAL_QUALIFICATION_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_PINNED_QWEN_SUBJECT__7_OF_7_NONTERMINAL_CHART_REASONING__ZERO_BENCHMARK_CASES__ZERO_SPEND__ZERO_CREDIT",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "public_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "workflow": ".github/workflows/chartography-qwen3vl4b-nonterminal-qualification-v1.yml",
+    "workflow_run_id": 38108600912,
+    "workflow_job_id": 114379270095,
+    "head_sha": "50d0de2823c5c5af5dc89d8d41a3b51d9f8c2fa7",
+    "conclusion": "success",
+    "artifact_id": 11691281874,
+    "artifact_name": "chartography-qwen3vl4b-nonterminal-qualification-v1",
+    "artifact_size_bytes": 10199,
+    "artifact_digest": "sha256:7f67c97ae3604d6d54a18e938db5110c98218795adf08ae68be661cba8c621ba"
+  },
+  "subject": {
+    "model_sha256": "66358cb18bb6b3b1b6675aa412c7a88ef01d228f481184d13668e5201c730a0a",
+    "projector_sha256": "30ba2c7dd3127a4561b6cba9d13d0f711c91bdb38742e2f56d73c8cb596bd06d",
+    "llama_cpp_commit": "a7fb71fab83b474a0892b9a05aaa3a8ddca2729b"
+  },
+  "qualification": {
+    "case_count": 7,
+    "passed": 7,
+    "failed": 0,
+    "minimum_pass_count": 6,
+    "qualification_pass": true,
+    "cases": [
+      {
+        "id": "vertical_bars",
+        "expected": "D",
+        "parsed": "D",
+        "wall_seconds": 44.564,
+        "stdout_sha256": "0cfa89cfe9da548fbcbd3fb1bf87aab417a59ce67a3262526945347b08368a9e"
+      },
+      {
+        "id": "line_lowest",
+        "expected": "C",
+        "parsed": "C",
+        "wall_seconds": 47.784,
+        "stdout_sha256": "4dff3664f540a5ba61c657ae0734925112a5dee9f4c071c926d7d4763f84a4ac"
+      },
+      {
+        "id": "grouped_bars",
+        "expected": "Beta",
+        "parsed": "Beta",
+        "wall_seconds": 50.795,
+        "stdout_sha256": "334a60c1debc99f1eed25be1f9edd2a45897f6b5a6d59aec60339d1a26779d2f"
+      },
+      {
+        "id": "stacked_bars",
+        "expected": "C",
+        "parsed": "C",
+        "wall_seconds": 45.301,
+        "stdout_sha256": "4dff3664f540a5ba61c657ae0734925112a5dee9f4c071c926d7d4763f84a4ac"
+      },
+      {
+        "id": "scatter_positive",
+        "expected": "positive",
+        "parsed": "positive",
+        "wall_seconds": 49.403,
+        "stdout_sha256": "4ca4dc608af7843e96c1ceaa3560ef4db37e773ab8f31b75f2fc99575071a0d2"
+      },
+      {
+        "id": "horizontal_bars",
+        "expected": "South",
+        "parsed": "South",
+        "wall_seconds": 46.049,
+        "stdout_sha256": "04b22fa67027195b4300ed5e9f6ea4623be777f913934f36b32257d75a52f81c"
+      },
+      {
+        "id": "dual_line",
+        "expected": "Beta",
+        "parsed": "Beta",
+        "wall_seconds": 46.451,
+        "stdout_sha256": "334a60c1debc99f1eed25be1f9edd2a45897f6b5a6d59aec60339d1a26779d2f"
+      }
+    ]
+  },
+  "proved": [
+    "EXACT_PINNED_QWEN_SUBJECT_EXECUTES_ON_ZERO_COST_PUBLIC_RUNNER",
+    "BASIC_CHART_VISUAL_REASONING_ACROSS_BAR_LINE_GROUPED_STACKED_SCATTER_HORIZONTAL_AND_MULTI_SERIES_CASES_PASSES_7_OF_7",
+    "GENERIC_NONTERMINAL_CHART_REASONING_QUALIFICATION_IS_NO_LONGER_AN_OPEN_CHARTOGRAPHY_PREREQUISITE"
+  ],
+  "hard_nonclaims": [
+    "NO_RELEASED_CHARTOGRAPHY_BENCHMARK_CASES_CONSUMED",
+    "NO_OFFICIAL_GEMINI_JUDGE_EXECUTED",
+    "NO_CHARTOGRAPHY_GE_89",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "external_dataset_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
