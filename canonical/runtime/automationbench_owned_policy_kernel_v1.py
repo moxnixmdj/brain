@@ -340,16 +340,7 @@ def _ground_required_param(name: str, prompt: str) -> str | None:
         if len(matches) == 1:
             return matches[0]
 
-    # API-specific stable prefixes used by the public benchmark state.
-        "spreadsheetid": "ss_",
-        "worksheetid": "ws_",
-        "projectgid": "proj_",
-        "projectid": "proj_",
-        "workspacegid": "ws_",
-        "workspaceid": "ws_",
-        "sectiongid": "sec_",
-        "sectionid": "sec_",
-    }
+    # Stable-prefix fallback when the noun is omitted.
     prefix = prefix_by_param.get(compact)
     if prefix:
         matches = [x for x in ids if x.lower().startswith(prefix)]
