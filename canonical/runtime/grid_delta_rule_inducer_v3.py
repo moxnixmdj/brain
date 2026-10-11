@@ -18,7 +18,7 @@ from canonical.runtime import grid_delta_rule_inducer_v2 as v2
 from canonical.runtime.finite_feature_expression_inventor_v1 import (
     LabeledRow,
     evaluate as evaluate_discriminator,
-    invent as invent_discriminator,
+    invent_across_feature_packs as invent_discriminator,
 )
 
 SCHEMA="PROJECT_BRAIN_GRID_DELTA_RULE_INDUCER_V3"
@@ -124,8 +124,8 @@ def induce(training_pairs:Sequence[Mapping[str,Sequence[Sequence[int]]]])->dict[
 
     target_options=[]
     for target in targets:
-        invented=invent_discriminator(_target_rows(pairs,target))
-        if invented.get("status")!="INVENTED_DISCRIMINATORS":
+        invented=invent_discriminator(_target_rows(pairs,target),max_pack_size=3,max_packs=1000)
+        if invented.get("status")!="INVENTED_DISCRIMINATORS_ACROSS_FEATURE_PACKS":
             return {
                 "schema":SCHEMA,
                 "status":"REPRESENTATION_INVENTION_FAILED",
