@@ -1,3 +1,5 @@
+import re
+
 from canonical.runtime.livebench_legacy15_joint_witness_v1 import solve
 
 
@@ -108,3 +110,78 @@ def test_quotation_bullets_and_end_all_compose():
     response = out["response"]
     assert len(re.findall(r"^\\s*\\*[^\\*].*$", response, flags=re.MULTILINE)) == 2
     assert response.strip().strip('"').lower().endswith("any other questions?")
+
+
+def test_json_route_has_no_fixed_response_word_collision():
+    prompt = (
+        "Include keywords ['response'] in the response. "
+        "Do not include keywords ['response'] in the response. "
+        "Entire output should be wrapped in JSON format. You can use markdown ticks such as ```."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    assert re.search(r"\\bresponse\\b", out["response"], flags=re.IGNORECASE) is None
+    assert "response" in out["response"].lower()
+
+
+def test_section_forbidden_collision_is_removed_by_digit_gluing():
+    prompt = (
+        "Do not include keywords ['section'] in the response. "
+        "Your response must have 2 sections. Mark the beginning of each section with Section X, such as:\n"
+        "Section 1\n[content of section 1]\nSection 2\n[content of section 2]"
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    response = out["response"]
+    assert "Section1" in response and "Section2" in response
+    assert re.search(r"\\bsection\\b", response, flags=re.IGNORECASE) is None
+
+
+def test_sentence_less_than_one_singleton_has_empty_exact_witness():
+    out = solve(_env("Your response should contain less than 1 sentences."))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    assert out["response"] == ""
+
+
+def test_sentence_less_than_one_with_positive_output_is_hard_unsat():
+    prompt = (
+        "Your response should contain less than 1 sentences. "
+        "Your answer must contain a title, wrapped in double angular brackets, such as <<poem of joy>>."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "FAIL_CLOSED"
+    assert out["error"] == "HARD_UNSAT_SENTENCE_LT1_REQUIRES_NONEMPTY_OUTPUT"
+
+
+def test_postscript_end_less_than_two_uses_sentence_neutral_marker():
+    prompt = (
+        "Your response should contain less than 2 sentences. "
+        "At the end of your response, please explicitly add a postscript starting with P.S. "
+        "Finish your response with this exact phrase Any other questions?. No other words should follow this phrase."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
+    response = out["response"].lower()
+    assert "p.s." in response
+    assert response.endswith("any other questions?")
+
+
+def test_nth_first_word_forbidden_is_detected_not_faked():
+    prompt = (
+        "Do not include keywords ['anchor'] in the response. "
+        "There should be 2 paragraphs. Paragraphs and only paragraphs are separated with each other by two "
+        "new lines as if it was '\\n\\n' in python. Paragraph 1 must start with word anchor."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "FAIL_CLOSED"
+    assert out["error"] == "FORBIDDEN_COLLISION:anchor"
+
+
+def test_end_phrase_forbidden_word_is_detected_not_faked():
+    prompt = (
+        "Do not include keywords ['other'] in the response. "
+        "Finish your response with this exact phrase Any other questions?. No other words should follow this phrase."
+    )
+    out = solve(_env(prompt))
+    assert out["status"] == "FAIL_CLOSED"
+    assert out["error"] == "FORBIDDEN_COLLISION:other"
