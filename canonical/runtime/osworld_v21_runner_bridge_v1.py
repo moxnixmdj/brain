@@ -26,6 +26,8 @@ def build_agent(
     screen_width: int = 1920,
     screen_height: int = 1080,
     browser_controller: Any | None = None,
+    guest_controller: Any | None = None,
+    ocr_provider: Any | None = None,
 ) -> BrainOSWorldAgent:
     return BrainOSWorldAgent(
         policy_provider,
@@ -33,6 +35,8 @@ def build_agent(
         screen_width=screen_width,
         screen_height=screen_height,
         browser_controller=browser_controller,
+        guest_controller=guest_controller,
+        ocr_provider=ocr_provider,
     )
 
 
