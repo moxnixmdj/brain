@@ -4664,6 +4664,82 @@
         "benchmark_cases_consumed": 0,
         "external_general_purpose_model_runtime_dependency_count": 0
       }
+    },
+    "science.raw_resource.solve.v2": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "adapter_module": "general_scientific_raw_resource_v2",
+      "entrypoint": "run",
+      "cost": 2,
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "science",
+        "scientific",
+        "data",
+        "numeric",
+        "regression",
+        "periodic",
+        "rule",
+        "abduction",
+        "solve",
+        "analyze",
+        "infer"
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "requires": [
+        "science.raw_resource.available"
+      ],
+      "provides": [
+        "science.result.verified"
+      ],
+      "result_fields": [
+        "verified",
+        "status",
+        "family",
+        "receipt_sha256",
+        "scientific_result",
+        "compile_receipt_sha256"
+      ],
+      "limitations": [
+        "Repository-local bounded resources only; absolute and escaping roots fail closed.",
+        "Delegates only to the independently verified general scientific raw-resource V2 bounded semantic stack.",
+        "Current verified semantic families remain symbolic regression, shared-period fitting, finite rule synthesis, and abductive residual analysis.",
+        "Finite bounded semantic ontology is not open-world natural-language understanding.",
+        "No benchmark-score or terminal authority."
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "science.raw_resource.solve.v2",
+          "instruction": "${input.instruction}",
+          "roots": "${input.roots}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "verified",
+          "value": true
+        }
+      },
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/general_scientific_raw_resource_v2.py",
+        "exact_adapter_git_blob_sha": "19b53f73a86939ca516d6b0a5fe2320e70a9180f",
+        "delegated_runtime_path": "canonical/runtime/general_scientific_raw_resource_pipeline_v2.py",
+        "delegated_runtime_git_blob_sha": "51e7b8c75a2b62d5aa765661809276a38d11b114",
+        "external_general_purpose_model_runtime_dependency_count": 0
+      },
+      "verification": {
+        "independent_verified": true,
+        "receipt_path": "canonical/verification/BOUND_GENERAL_SCIENTIFIC_RAW_RESOURCE_V2_VERIFY_20261011_V1.json",
+        "exact_adapter_git_blob_sha": "19b53f73a86939ca516d6b0a5fe2320e70a9180f",
+        "exact_test_git_blob_sha": "db364aa6135c57192f89242c3c2fb828379d81c2",
+        "environments_verified": 2,
+        "focused_tests_passed_per_environment": 6,
+        "benchmark_cases_consumed": 0,
+        "external_general_purpose_model_runtime_dependency_count": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
