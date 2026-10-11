@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
+  "capability_id": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "status": "ACTIVE_GENERAL_CAPABILITY_FIRST__ZERO_CREDIT_FROM_CONTROL_PLANE_RECONCILIATION",
+  "real_capability": true,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "parent_frontier_capability": null,
+  "parent_families": [
+    "ADVANCED_AGENTIC_CODING",
+    "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
+    "TECHNICAL_SCIENTIFIC_REASONING",
+    "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "COMPLEX_MULTI_TOOL_AGENCY",
+    "MULTI_CAPABILITY_COMPOSITION",
+    "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+    "UNKNOWN_DOMAIN_ADAPTATION",
+    "PROFESSIONAL_KNOWLEDGE_WORK",
+    "COMPUTER_AND_BROWSER_USE",
+    "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+  ],
+  "useful_behavior": "Solve diverse consequential problems reliably with reusable Brain-owned capabilities, effective tool and computer use, verification, adaptation, transfer, and resource efficiency without benchmark-specific overfitting or load-bearing external model cognition.",
+  "residual_gap": "GENERAL_CAPABILITY_FRONTIER_SELECTION__CHOOSE_HIGHEST_EXPECTED_VERIFIED_GENERAL_CAPABILITY_GAIN_PER_RESOURCE_FROM_CURRENT_CAUSAL_EVIDENCE",
+  "current_atomic_blocker": "GENERAL_CAPABILITY_FRONTIER_SELECTION__CHOOSE_HIGHEST_EXPECTED_VERIFIED_GENERAL_CAPABILITY_GAIN_PER_RESOURCE_FROM_CURRENT_CAUSAL_EVIDENCE",
+  "next_action": "SELECT_NONDOMINATED_GENERAL_CAPABILITY_ACTION__REUSE_ADAPT_VERIFY_PROMOTE_FIRST__BENCHMARK_ONLY_AS_AUDIT_FALSIFIER_CALIBRATION_OR_CAUSAL_PROBE",
+  "current_atomic_next_action": "SELECT_NONDOMINATED_GENERAL_CAPABILITY_ACTION__REUSE_ADAPT_VERIFY_PROMOTE_FIRST__BENCHMARK_ONLY_AS_AUDIT_FALSIFIER_CALIBRATION_OR_CAUSAL_PROBE",
+  "next_progress_event_target": "VERIFIED_GENERAL_CAPABILITY_GAIN_OR_CAUSAL_FALSIFICATION__THEN_OPTIONAL_MILESTONE_AUDIT",
+  "development_policy": {
+    "authority": "canonical/governance/CURRENT_DEVELOPMENT_AUTHORITY.json",
+    "law": "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+    "route_order": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "ADAPT",
+      "SUBSTITUTE",
+      "COMPOSE",
+      "CONFIGURE",
+      "INTEGRATE",
+      "SYNTHESIZE_NEW_PRIMITIVE"
+    ],
+    "benchmark_role": "AUDIT_FALSIFIER_CALIBRATION_OR_CAUSAL_PROBE_ONLY",
+    "new_primitive_default_authorized": false,
+    "hard_incremental_spend_usd": 0
+  },
+  "ownership_constraints": [
+    "EXTERNAL_GENERAL_PURPOSE_MODEL_RUNTIME_COGNITION_LOAD_BEARING_FOR_CREDITED_TASK_FORBIDDEN",
+    "DONOR_DERIVED_CAPABILITY_MUST_SURVIVE_TEACHER_AND_DONOR_REMOVAL",
+    "COPIED_OR_REHOSTED_EXTERNAL_MODEL_IS_NOT_CAPABILITY_TRANSFER",
+    "CLAIM_SCOPE_MUST_NOT_EXCEED_INDEPENDENT_VERIFICATION"
+  ],
+  "authority": [
+    "canonical/governance/CURRENT_TERMINAL_GOAL_OVERRIDE.json",
+    "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+    "canonical/governance/CURRENT_DEVELOPMENT_AUTHORITY.json",
+    "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+    "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "canonical/laws/CAPABILITY_TRANSFER_VS_COGNITION_OUTSOURCING_LAW_V1.md"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
