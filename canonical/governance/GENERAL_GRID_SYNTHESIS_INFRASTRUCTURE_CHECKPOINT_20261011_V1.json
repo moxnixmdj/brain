@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_GENERAL_GRID_SYNTHESIS_INFRASTRUCTURE_CHECKPOINT_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_IMPLEMENTATION_INFRASTRUCTURE__INDEPENDENT_EXACT_BLOB_REPLAY_PASS__ZERO_OPEN_WORLD_OR_FAMILY_CREDIT",
+  "purpose": "Land generic bounded grid program composition and typed delta-rule synthesis infrastructure independently of ARC score climbing.",
+  "components": {
+    "finite_grid_program_inducer_v1": {
+      "runtime": "canonical/runtime/finite_grid_program_inducer_v1.py",
+      "blob_sha": "983022ed39c5ec1292906f3ff18ae55d61be048d",
+      "tests": "canonical/tests/test_finite_grid_program_inducer_v1.py",
+      "tests_blob_sha": "39ff1e76af8019305d266cf8aa4de9ec770bfd6d",
+      "scope": [
+        "EXHAUSTIVE_WITHIN_DECLARED_OPERATOR_REGISTRY_AND_DEPTH",
+        "NO_TARGET_SCORE_BEAM_PRUNING",
+        "MINIMUM_TOTAL_OPERATOR_COST",
+        "PRESERVE_EQUAL_MINIMUM_EXACT_PROGRAMS",
+        "FAIL_CLOSED_ON_BOUND_OVERFLOW"
+      ]
+    },
+    "grid_delta_rule_inducer_v1": {
+      "runtime": "canonical/runtime/grid_delta_rule_inducer_v1.py",
+      "blob_sha": "ccdcf2f2cbb87444e57443ff77691aaaaf8181eb",
+      "tests": "canonical/tests/test_grid_delta_rule_inducer_v1.py",
+      "tests_blob_sha": "6cbc7728670ad394f4c525035b10618d2b7ab2b5",
+      "scope": [
+        "REUSE_VERIFIED_G0_FINITE_TYPED_RULE_SYNTHESIS",
+        "SYNTHESIZE_SAME_SHAPE_CELL_CHANGE_SELECTORS",
+        "MULTI_TARGET_CONFLICT_CHECK",
+        "FULL_TRAINING_CELL_REPLAY"
+      ]
+    },
+    "grid_delta_rule_inducer_v2": {
+      "runtime": "canonical/runtime/grid_delta_rule_inducer_v2.py",
+      "blob_sha": "695f309d946d9203e7f83eeab61540a6093c37b3",
+      "tests": "canonical/tests/test_grid_delta_rule_inducer_v2.py",
+      "tests_blob_sha": "b254d89f89634d8ba6230b7dcb6c77ee00fc068d",
+      "scope": [
+        "TASK_DERIVED_ATTRIBUTE_EQUALITY_ATOMS",
+        "ADMISSIBLE_SINGLETON_AND_PAIR_ATTRIBUTE_PACKS_BEFORE_TRIPLES_WITHIN_BOUND",
+        "FACTORIZED_EQUAL_COST_AMBIGUITY",
+        "CONSENSUS_ONLY_UNSEEN_PREDICTION",
+        "FULL_TRAINING_REPLAY"
+      ]
+    }
+  },
+  "independent_replay": {
+    "receipt": "canonical/verification/GENERAL_GRID_SYNTHESIS_INDEPENDENT_REPLAY_20261011_V1.json",
+    "receipt_sha256": "e27782d59bc0c1550bec8c30655043ab2ec6851372b422b445fc89db8cec11e8",
+    "carrier": "brain-cad-proof-clean-20261009",
+    "passed": 14,
+    "failed": 0,
+    "pass_all": true
+  },
+  "relation_to_affine_invention": {
+    "already_merged_main_commit": "cfd859216d73923cdb5f55a5786b057c3efe28c9",
+    "capability": "FINITE_AFFINE_GRID_OPERATOR_INDUCTION_001",
+    "note": "THE_AFFINE_OPERATOR_INVENTOR_IS_SEPARATE_AND_ALREADY_PROMOTED_ON_ITS_FROZEN_10_OF_10_GENERALIZATION_EVIDENCE"
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_WORLD_PROGRAM_SYNTHESIS",
+    "NO_ARBITRARY_PREDICATE_INVENTION",
+    "NO_WHOLE_UNKNOWN_DOMAIN_CAPABILITY_CREDIT",
+    "NO_ARC_AGI_SCORE_OR_PARITY_CLAIM",
+    "NO_CLAIM_THESE_14_TESTS_FORM_A_SCOPE_COMPLETE_GENERALIZATION_PROOF"
+  ],
+  "accounting": {
+    "external_frontier_model_runtime_cognition": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0
+  }
+}
