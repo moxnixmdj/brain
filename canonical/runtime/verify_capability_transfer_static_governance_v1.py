@@ -54,6 +54,7 @@ assert "zero_external_model_runtime_cognition_dependencies" in kstar
 manifest=J("canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json")
 mtp=manifest.get("terminal_predicates") or {}
 mgp=manifest.get("global_ownership_postconditions") or {}
+mdc=manifest.get("donor_deletion_cleanroom") or {}
 if mtp.get("final_donor_deletion_cleanroom_pass") is True:
     evidence=mgp.get("evidence")
     evidence_blob=mgp.get("evidence_blob_sha")
@@ -76,8 +77,12 @@ if mtp.get("final_donor_deletion_cleanroom_pass") is True:
 else:
     assert mgp.get("current_authority") is False
     assert mgp.get("requalification_required") is True
+    assert mdc.get("current_authority") is False
+    assert mdc.get("requalification_required") is True
+    assert mdc.get("required_protocol")=="canonical/governance/DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_V2.json"
     invalidation=mgp.get("invalidation")
     assert isinstance(invalidation,str) and (R/invalidation).is_file()
+    assert mdc.get("invalidation")==invalidation
 
 legacy=J("canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json")
 if (legacy.get("truth") or {}).get("donor_cleanroom")=="INDEPENDENT_PASS":
