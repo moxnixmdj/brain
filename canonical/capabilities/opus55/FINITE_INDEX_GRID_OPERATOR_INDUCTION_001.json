@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_FINITE_INDEX_GRID_OPERATOR_INDUCTION_001",
+  "date": "2026-10-11",
+  "status": "VERIFIED_BRAIN_OWNED_BOUNDED_INDEX_EXPRESSION_OPERATOR_INDUCTION__ZERO_WHOLE_ARC_OR_OPEN_WORLD_CREDIT",
+  "capability_id": "FINITE_INDEX_GRID_OPERATOR_INDUCTION_001",
+  "implementation": {
+    "runtime": "canonical/runtime/finite_index_grid_operator_inducer_v1.py",
+    "runtime_blob_sha": "dec66d044f482dbc48e492f13b96f3687628eb91",
+    "tests": "canonical/tests/test_finite_index_grid_operator_inducer_v1.py",
+    "tests_blob_sha": "7f78ad45e69f70ea8d0574b89e800a1e6c6e0c40"
+  },
+  "verified_scope": [
+    "FROM_GRID_DEMONSTRATIONS_SYNTHESIZE_MINIMUM_DESCRIPTION_COST_EXACT_OPERATORS_WITHIN_THE_DECLARED_INDEX_EXPRESSION_GRAMMAR",
+    "INTEGER_ROW_COLUMN_SCALING_FACTORS_1_TO_4",
+    "INTEGER_TILING_AND_REPETITION_VIA_MODULO_INDEX_PROGRAMS",
+    "TRANSPOSED_SCALING_AND_TRANSPOSED_TILING",
+    "REVERSED_SCALED_VARIANTS_EXPRESSIBLE_BY_DECLARED_REVERSE_DIVISION_INDEX_FORMS",
+    "PRESERVE_EQUAL_MINIMUM_OPERATOR_AMBIGUITY_AND_ABSTAIN_ON_UNSEEN_DISAGREEMENT",
+    "FAIL_CLOSED_ON_SEARCH_BOUND_OVERFLOW"
+  ],
+  "independent_frozen_generalization": {
+    "fixture": "canonical/evaluation/FINITE_INDEX_GRID_OPERATOR_FROZEN_GENERALIZATION_20261011_V1.json",
+    "fixture_blob_sha": "46dcbe5767822c60f03edcaf3c0119957a92a0ae",
+    "fixture_sha256": "6da8781eae7ef5b92c0ad49bd4777ad3b4502ec23b83067aca109d2a6b7494c5",
+    "receipt": "canonical/verification/FINITE_INDEX_GRID_OPERATOR_FROZEN_GENERALIZATION_RECEIPT_20261011_V1.json",
+    "receipt_blob_sha": "f28de59d25c95dba45a476cee60eb679fa1758b3",
+    "receipt_sha256": "94e47b140c681cce79336ccd3ac688c341b202b8000e0112393972be86d2a47a",
+    "independent_carrier": "brain-cad-proof-clean-20261009",
+    "task_count": 10,
+    "passed": 10,
+    "failed": 0,
+    "pass_all": true
+  },
+  "prior_exact_blob_tests": {
+    "carrier": "brain-arc-donor-verify-20261011-v1",
+    "passed": 7,
+    "failed": 0
+  },
+  "ownership": {
+    "donor_runtime_required": false,
+    "external_frontier_model_runtime_cognition": false,
+    "external_learned_capability_calls": 0,
+    "incremental_spend_usd": 0
+  },
+  "exclusions": [
+    "NO_OPEN_WORLD_OPERATOR_INVENTION",
+    "NO_ARBITRARY_PROGRAM_SYNTHESIS",
+    "NO_CONTENT_CONDITIONAL_PIXEL_GENERATION_BEYOND_INDEX_COPY_PROGRAMS",
+    "NO_ARC_AGI_SCORE_OR_PARITY_CLAIM",
+    "NO_WHOLE_UNKNOWN_DOMAIN_OR_ABSTRACT_GENERALIZATION_FAMILY_CREDIT"
+  ],
+  "causal_role": {
+    "prior_missing_effect": "INVENT_OPERATOR_CLASSES_OUTSIDE_THE_VERIFIED_AFFINE_CONTENT_RELATIVE_HYPOTHESIS_CLASS",
+    "discharged_subeffect": "INVENT_BOUNDED_NON_AFFINE_INDEX_PROGRAM_GRID_OPERATORS_FROM_DEMONSTRATIONS",
+    "remaining_residual": "INVENT_CONTENT_CONDITIONAL_OBJECT_RELATIONAL_AND_OTHER_OPERATOR_CLASSES_OUTSIDE_AFFINE_AND_INDEX_COPY_GRAMMARS"
+  },
+  "accounting": {
+    "terminal_credit_delta": 0,
+    "family_credit_delta": 0,
+    "whole_goal_credit_delta": 0
+  }
+}
