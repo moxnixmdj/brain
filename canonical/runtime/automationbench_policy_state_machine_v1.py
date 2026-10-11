@@ -112,6 +112,45 @@ def _tool_results_after_semantic(
     return out
 
 
+def _assistant_receipts(
+    history: Sequence[Mapping[str, Any]],
+    metadata_key: str,
+) -> list[Any]:
+    out: list[Any] = []
+    for row in history:
+        if not isinstance(row, Mapping):
+            continue
+        metadata = row.get("metadata")
+        if not isinstance(metadata, Mapping):
+            continue
+        value = metadata.get(metadata_key)
+        if isinstance(value, list):
+            out.extend(value)
+        elif value is not None:
+            out.append(value)
+    return out
+
+
+def _pre_generic_action_observations(
+    history: Sequence[Mapping[str, Any]],
+) -> list[Any]:
+    out: list[Any] = []
+    for row in history:
+        if not isinstance(row, Mapping):
+            continue
+        metadata = row.get("metadata")
+        if isinstance(metadata, Mapping):
+            semantic = str(metadata.get("project_brain/automationbench_semantic") or "")
+            if semantic.startswith("GENERIC_TOOL_EFFECT::"):
+                break
+        if (
+            str(row.get("kind") or row.get("type") or "") == "tool_result"
+            and str(row.get("name") or row.get("tool") or "") == "api_fetch"
+        ):
+            out.append(_payload(row))
+    return out
+
+
 def next_policy_action(
     *,
     prompt: str,
