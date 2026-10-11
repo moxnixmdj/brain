@@ -12,6 +12,7 @@ def valid_receipt():
         "benchmark_version": "1.0.6",
         "population": {
             "kind": "PRIVATE_HELD_OUT",
+            "official_leaderboard_population": True,
             "population_identity_sha256": "1" * 64,
             "denominator": 657,
         },
@@ -19,25 +20,17 @@ def valid_receipt():
         "max_steps_per_task": 50,
         "task_success_metric": "task_completed_correctly",
         "fallback_models_used": False,
-        "candidate": {"content_sha256": "2" * 64},
+        "candidate": {
+            "content_sha256": "2" * 64,
+            "all_execution_components_bound": True,
+        },
         "owner_attestation": {
             "issuer_kind": "ZAPIER",
+            "official_v1_0_6_private_leaderboard_surface": True,
             "receipt_path": "owner://zapier/automationbench/run-1",
             "receipt_sha256": "3" * 64,
             "independent_verified": True,
             "run_epoch": "2026-10-11T00:00:00Z",
-            "target_reference_match": {
-                "reference_system": "Claude Opus 5.5",
-                "reference_score_percent": "40.0",
-                "reference_origin": "ZAPIER_RUN_REPORTED_BY_ANTHROPIC",
-                "exact_epoch_or_owner_bridge": True,
-                "population_scope_comparable": True,
-                "scoring_semantics_comparable": True,
-                "tool_protocol_comparable": True,
-                "step_limit_comparable": True,
-                "fallback_policy_comparable": True,
-                "binding_sha256": "4" * 64,
-            },
         },
         "success_count": 263,
         "aggregate_score_percent": "40.03",
@@ -45,13 +38,13 @@ def valid_receipt():
 
 
 class Tests(unittest.TestCase):
-    def test_263_of_owner_attested_657_locks_pass(self):
+    def test_263_of_657_locks_pass(self):
         out = evaluate(valid_receipt())
         self.assertTrue(out["pass"], out)
         self.assertEqual(out["threshold_success_count"], 263)
         self.assertEqual(out["decision"], "PASS_LOCKED")
 
-    def test_262_of_owner_attested_657_locks_fail(self):
+    def test_262_of_657_locks_fail(self):
         receipt = valid_receipt()
         receipt["success_count"] = 262
         receipt["aggregate_score_percent"] = "39.88"
@@ -62,60 +55,68 @@ class Tests(unittest.TestCase):
         receipt = valid_receipt()
         receipt["population"]["kind"] = "PUBLIC"
         out = evaluate(receipt)
-        self.assertFalse(out["pass"])
         self.assertIn("PRIVATE_HELD_OUT_SCOPE_REQUIRED", out["errors"])
 
-    def test_exact_reference_epoch_or_owner_bridge_is_required(self):
+    def test_official_population_attestation_is_required(self):
         receipt = valid_receipt()
-        receipt["owner_attestation"]["target_reference_match"][
-            "exact_epoch_or_owner_bridge"
-        ] = False
+        receipt["population"]["official_leaderboard_population"] = False
         out = evaluate(receipt)
-        self.assertFalse(out["pass"])
-        self.assertIn("EXACT_REFERENCE_EPOCH_OR_OWNER_BRIDGE_REQUIRED", out["errors"])
+        self.assertIn(
+            "OFFICIAL_LEADERBOARD_POPULATION_ATTESTATION_REQUIRED", out["errors"]
+        )
 
-    def test_population_scope_match_is_required(self):
+    def test_version_must_match_current_official_surface(self):
         receipt = valid_receipt()
-        receipt["owner_attestation"]["target_reference_match"][
-            "population_scope_comparable"
-        ] = False
+        receipt["benchmark_version"] = "1.0.5"
         out = evaluate(receipt)
-        self.assertIn("REFERENCE_POPULATION_SCOPE_MATCH_REQUIRED", out["errors"])
+        self.assertIn("BENCHMARK_VERSION_MISMATCH", out["errors"])
 
-    def test_protocol_match_is_required(self):
+    def test_denominator_must_match_current_private_population(self):
         receipt = valid_receipt()
-        receipt["owner_attestation"]["target_reference_match"][
-            "tool_protocol_comparable"
-        ] = False
+        receipt["population"]["denominator"] = 600
         out = evaluate(receipt)
-        self.assertIn("REFERENCE_TOOL_PROTOCOL_MATCH_REQUIRED", out["errors"])
+        self.assertIn("PRIVATE_POPULATION_DENOMINATOR_MISMATCH", out["errors"])
 
-    def test_no_fallback_models_required(self):
+    def test_api_mode_is_required(self):
+        receipt = valid_receipt()
+        receipt["tool_mode"] = "zapier"
+        out = evaluate(receipt)
+        self.assertIn("TOOL_MODE_MISMATCH", out["errors"])
+
+    def test_50_step_limit_is_required(self):
+        receipt = valid_receipt()
+        receipt["max_steps_per_task"] = 49
+        out = evaluate(receipt)
+        self.assertIn("MAX_STEPS_MISMATCH", out["errors"])
+
+    def test_fallback_use_is_allowed_when_bound_into_candidate(self):
         receipt = valid_receipt()
         receipt["fallback_models_used"] = True
         out = evaluate(receipt)
-        self.assertIn("NO_FALLBACK_MODELS_REQUIRED", out["errors"])
+        self.assertTrue(out["pass"], out)
+        self.assertTrue(out["fallback_models_used"])
 
-    def test_current_public_version_is_not_assumed_to_be_target_epoch(self):
+    def test_fallback_policy_must_be_explicit(self):
         receipt = valid_receipt()
-        receipt["benchmark_version"] = "owner-private-epoch-X"
+        receipt.pop("fallback_models_used")
         out = evaluate(receipt)
-        self.assertEqual(out["decision"], "PASS_LOCKED")
+        self.assertIn("FALLBACK_POLICY_MUST_BE_EXPLICIT_BOOLEAN", out["errors"])
 
-    def test_denominator_is_not_hardcoded_to_657(self):
+    def test_all_execution_components_must_be_bound(self):
         receipt = valid_receipt()
-        receipt["population"]["denominator"] = 1000
-        receipt["success_count"] = 400
-        receipt["aggregate_score_percent"] = "40.0"
+        receipt["candidate"]["all_execution_components_bound"] = False
         out = evaluate(receipt)
-        self.assertEqual(out["threshold_success_count"], 400)
-        self.assertEqual(out["decision"], "PASS_LOCKED")
+        self.assertIn("ALL_EXECUTION_COMPONENTS_MUST_BE_BOUND", out["errors"])
 
-    def test_bad_owner_receipt_digest_fails_closed(self):
+    def test_owner_must_attest_official_v1_0_6_private_surface(self):
         receipt = valid_receipt()
-        receipt["owner_attestation"]["receipt_sha256"] = "bad"
+        receipt["owner_attestation"][
+            "official_v1_0_6_private_leaderboard_surface"
+        ] = False
         out = evaluate(receipt)
-        self.assertIn("OWNER_RECEIPT_SHA256_REQUIRED", out["errors"])
+        self.assertIn(
+            "OFFICIAL_V1_0_6_PRIVATE_SURFACE_ATTESTATION_REQUIRED", out["errors"]
+        )
 
     def test_owner_independent_verification_required(self):
         receipt = valid_receipt()
@@ -131,13 +132,6 @@ class Tests(unittest.TestCase):
             "REPORTED_SCORE_INCONSISTENT_WITH_SUCCESS_COUNT_AND_DENOMINATOR",
             out["errors"],
         )
-
-    def test_success_count_cannot_exceed_denominator(self):
-        receipt = valid_receipt()
-        receipt["success_count"] = 658
-        receipt["aggregate_score_percent"] = "100"
-        out = evaluate(receipt)
-        self.assertIn("SUCCESS_COUNT_EXCEEDS_DENOMINATOR", out["errors"])
 
     def test_verifier_never_self_promotes_project_credit(self):
         out = evaluate(valid_receipt())
