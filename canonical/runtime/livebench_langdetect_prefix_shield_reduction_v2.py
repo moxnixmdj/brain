@@ -26,6 +26,7 @@ Zero acceptance/capability credit is granted here.
 """
 from __future__ import annotations
 
+FALSIFICATION_REASON = "FALSIFIED__PINNED_SCORER_EXCEPTION_HANDLER_RAISES_NAMEERROR_BECAUSE_LOGGING_IS_UNBOUND"\n
 from typing import Any, Sequence
 
 from canonical.runtime import livebench_union25_archetypes_v1 as u
