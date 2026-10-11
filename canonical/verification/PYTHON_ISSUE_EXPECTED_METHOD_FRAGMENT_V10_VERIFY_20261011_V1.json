@@ -58,7 +58,7 @@
   "promotion": {
     "verified_bound_capability": false,
     "bound_registry_update_authorized": false,
-    "reason": "NO_POSTFREEZE_POSITIVE_HELDOUT_MATCH_AND_NO_INDEPENDENT_SECOND_CARRIER_FOR_THIS_V10_FRAGMENT",
+    "reason": "NO_POSTFREEZE_POSITIVE_HELDOUT_MATCH__NEGATIVE_HELDOUT_PRECISION_5_OF_5_ONLY__NO_INDEPENDENT_SECOND_CARRIER_FOR_THIS_V10_FRAGMENT",
     "allowed_role": "DEVELOPMENT_CANDIDATE_AND_CAUSAL_FRONTIER_EVIDENCE"
   },
   "accounting": {
@@ -74,5 +74,48 @@
     "NO_WHOLE_TASK_ACCEPTANCE",
     "NO_POSITIVE_HELDOUT_GENERALIZATION_CLAIM",
     "NO_FRONTIERCODE_OR_CURSORBENCH_SCORE_INFERENCE"
-  ]
+  ],
+  "postfreeze_negative_heldout": {
+    "frozen_head": "627f4bd20c339156e1fbc439379580ad7b96d3b4",
+    "discovered_after_freeze": true,
+    "cases": [
+      {
+        "source": "https://github.com/databrickslabs/dqx/issues/1136",
+        "required_obligations": 35,
+        "fragment_compiled": false,
+        "residual_obligations": 35,
+        "acceptance_stop_authorized": false
+      },
+      {
+        "source": "https://github.com/ostris/ai-toolkit/issues/1056",
+        "required_obligations": 68,
+        "fragment_compiled": false,
+        "residual_obligations": 68,
+        "acceptance_stop_authorized": false
+      },
+      {
+        "source": "https://github.com/Neoteroi/BlackSheep/issues/567",
+        "required_obligations": 59,
+        "fragment_compiled": false,
+        "residual_obligations": 59,
+        "acceptance_stop_authorized": false
+      },
+      {
+        "source": "https://github.com/colinoflynn/pico-python/issues/204",
+        "required_obligations": 23,
+        "fragment_compiled": false,
+        "residual_obligations": 23,
+        "acceptance_stop_authorized": false
+      },
+      {
+        "source": "https://github.com/sympy/sympy/issues/29801",
+        "required_obligations": 25,
+        "fragment_compiled": false,
+        "residual_obligations": 25,
+        "acceptance_stop_authorized": false
+      }
+    ],
+    "result": "5_OF_5_FAIL_CLOSED__0_FALSE_POSITIVE_FRAGMENTS__0_ACCEPTANCE_STOPS",
+    "interpretation": "PRECISION_EVIDENCE_ONLY__NOT_POSITIVE_HELDOUT_GENERALIZATION"
+  }
 }
