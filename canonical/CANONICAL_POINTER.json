@@ -266,7 +266,11 @@
       "TARGET_SOLVING_COGNITION=>K3_FORBIDDEN",
       "DONOR_DERIVED_LEARNED_MECHANISM=>K2_TRANSFER_GATED",
       "SOURCE_BOUND_NON_AUTHORITATIVE_FACT_OR_EVIDENCE=>K1_INFORMATION_ONLY"
-    ]
+    ],
+    "runtime_external_cognition_lock_verifier_required": true,
+    "runtime_external_cognition_lock_verifier_path": "canonical/runtime/verify_external_cognition_runtime_lock_v1.py",
+    "python_startup_model_planner_kill_switch_required": true,
+    "python_startup_model_planner_kill_switch_path": "sitecustomize.py"
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",

@@ -22,4 +22,5 @@ jobs:
       - name: Verify permanent transfer governance
         run: |
           python canonical/runtime/verify_capability_transfer_static_governance_v1.py
+          python canonical/runtime/verify_external_cognition_runtime_lock_v1.py
           python -m pytest -q canonical/tests/test_capability_transfer_ownership_gate_v1.py canonical/tests/test_acceptance_capability_source_gate_v2.py
