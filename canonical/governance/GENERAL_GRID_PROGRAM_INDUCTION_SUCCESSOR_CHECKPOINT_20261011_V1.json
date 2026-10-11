@@ -1,0 +1,119 @@
+{
+  "schema": "PROJECT_BRAIN_GENERAL_GRID_PROGRAM_INDUCTION_SUCCESSOR_CHECKPOINT_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__IMPLEMENTED_AND_SINGLE_CARRIER_EXACT_BLOB_TESTED__CROSS_CARRIER_ARC_AUDIT_NOT_EXECUTED__ZERO_TERMINAL_CREDIT",
+  "objective": "Replace manual ARC operator hill-climbing with Brain-owned bounded program composition and adaptive typed rule induction that preserve ambiguity and fail closed.",
+  "baseline": {
+    "branch": "successor/arc-novelty-compiler-v16-20261011",
+    "public_arc_agi_1_training_score": {
+      "solved": 83,
+      "total": 400,
+      "rate": 0.2075
+    },
+    "result_sha256": "38c467bd68f830ec66c0af2abce18c218438312aa55177a1c23d736f60a4e037",
+    "arc_corpus_commit": "399030444e0ab0cc8b4e199870fb20b863846f34",
+    "role": "FROZEN_REGRESSION_BASELINE__NOT_GENERALIZATION_OR_TERMINAL_EVIDENCE"
+  },
+  "implemented": {
+    "finite_grid_program_inducer_v1": {
+      "path": "canonical/runtime/finite_grid_program_inducer_v1.py",
+      "blob_sha": "983022ed39c5ec1292906f3ff18ae55d61be048d",
+      "test_path": "canonical/tests/test_finite_grid_program_inducer_v1.py",
+      "test_blob_sha": "39ff1e76af8019305d266cf8aa4de9ec770bfd6d",
+      "contract": [
+        "EXHAUSTIVE_WITHIN_DECLARED_OPERATOR_REGISTRY_AND_MAX_DEPTH",
+        "NO_TARGET_SCORE_BEAM_PRUNING",
+        "MINIMUM_TOTAL_OPERATOR_COST",
+        "PRESERVE_ALL_EQUAL_MINIMUM_EXACT_PROGRAMS",
+        "FAIL_CLOSED_ON_SEARCH_BOUND_OVERFLOW"
+      ],
+      "exact_blob_single_carrier_tests": {
+        "passed": 6,
+        "failed": 0
+      }
+    },
+    "arc_program_induction_adapter_v1": {
+      "path": "canonical/runtime/arc_program_induction_adapter_v1.py",
+      "blob_sha": "db052e605f119494ffdf0d5534f841fbfbb436ad",
+      "role": "EXPOSE_EXISTING_BRAIN_OWNED_GRID_PRIMITIVES_TO_GENERIC_PROGRAM_SEARCH",
+      "benchmark_specific_answer_logic": false
+    },
+    "grid_delta_rule_inducer_v1": {
+      "path": "canonical/runtime/grid_delta_rule_inducer_v1.py",
+      "blob_sha": "ccdcf2f2cbb87444e57443ff77691aaaaf8181eb",
+      "test_path": "canonical/tests/test_grid_delta_rule_inducer_v1.py",
+      "test_blob_sha": "6cbc7728670ad394f4c525035b10618d2b7ab2b5",
+      "contract": [
+        "REUSE_VERIFIED_G0_FINITE_TYPED_RULE_SYNTHESIS",
+        "SYNTHESIZE_CELL_CHANGE_SELECTORS",
+        "MULTI_TARGET_CONFLICT_CHECK",
+        "FULL_TRAINING_CELL_REPLAY_BEFORE_ACCEPTANCE"
+      ],
+      "exact_blob_single_carrier_tests": {
+        "passed": 4,
+        "failed": 0
+      }
+    },
+    "grid_delta_rule_inducer_v2": {
+      "path": "canonical/runtime/grid_delta_rule_inducer_v2.py",
+      "blob_sha": "695f309d946d9203e7f83eeab61540a6093c37b3",
+      "test_path": "canonical/tests/test_grid_delta_rule_inducer_v2.py",
+      "test_blob_sha": "b254d89f89634d8ba6230b7dcb6c77ee00fc068d",
+      "contract": [
+        "TASK_DERIVED_ATTRIBUTE_EQUALITY_ATOMS",
+        "ALL_ADMISSIBLE_SINGLETON_AND_PAIR_ATTRIBUTE_PACKS_BEFORE_TRIPLES_WITHIN_BOUND",
+        "MINIMUM_CONJUNCTIVE_RULE_SYNTHESIS_VIA_G0",
+        "FACTORIZED_EQUAL_COST_AMBIGUITY",
+        "UNSEEN_PREDICTION_REQUIRES_RULE_ALTERNATIVE_CONSENSUS",
+        "FULL_TRAINING_REPLAY"
+      ],
+      "exact_blob_single_carrier_tests": {
+        "passed": 4,
+        "failed": 0
+      }
+    }
+  },
+  "diagnostics": {
+    "generic_depth2_fixed_audit_on_consumed_v16_misses": {
+      "searched_unsolved": 317,
+      "synthetic_two_step_recovery": true,
+      "retrospective_new_exact_arc_training_test_solves": 0,
+      "interpretation": "COMPOSITION_ALONE_NOT_CURRENT_PRIMARY_BOTTLENECK"
+    },
+    "delta_v1_fixed_retrospective_audit_on_consumed_v16_misses": {
+      "searched_unsolved": 317,
+      "retrospective_new_exact_arc_training_test_solves": 1,
+      "interpretation": "AUTOMATIC_TYPED_RULE_INDUCTION_CAN_RECOVER_AT_LEAST_ONE PREVIOUSLY_UNSOLVED_CONSUMED_TASK_WITHOUT_TASK_SPECIFIC_OPERATOR_CODE"
+    },
+    "adaptive_v2_cross_carrier_audit": {
+      "status": "NOT_EXECUTED",
+      "reason": [
+        "PRIMARY_VERIFIER_SPRITE_TRANSPORT_TIMEOUT_TWICE",
+        "SECOND_VERIFIER_SPRITE_EXEC_INPUT_OUTPUT_ERROR_BEFORE_RESULT"
+      ],
+      "score_claim": false
+    }
+  },
+  "strategic_update": {
+    "old_primary_loop": "INSPECT_ARC_MISS__HAND_ADD_OPERATOR__RERUN_SCORE",
+    "new_primary_loop": "GENERATE_TYPED_PROGRAMS_AND_RULES__FALSIFY__PRESERVE_AMBIGUITY__GENERALIZE_ON_UNTOUCHED_CASES__PROMOTE_REUSABLE_SKILL",
+    "arc_agi_1_training_role": "REGRESSION_AND_DIAGNOSTIC_ONLY",
+    "next_required_step": "INDEPENDENT_CROSS_CARRIER_REPLAY_PLUS_FROZEN_UNTOUCHED_GENERALIZATION_SET_BEFORE_ANY_PROMOTION"
+  },
+  "hard_nonclaims": [
+    "NO_ARC_AGI_PARITY_CLAIM",
+    "NO_NEW_OFFICIAL_OR_HIDDEN_ARC_SCORE",
+    "NO_CLAIM_ADAPTIVE_V2_IMPROVES_ARC_SCORE_BECAUSE_CROSS_CARRIER_AUDIT_DID_NOT_EXECUTE",
+    "NO_CLAIM_OPEN_WORLD_PROGRAM_SYNTHESIS",
+    "NO_CLAIM_ARBITRARY_PREDICATE_INVENTION",
+    "NO_PROMOTION_TO_MAIN_FROM_THIS_CHECKPOINT"
+  ],
+  "accounting": {
+    "external_frontier_model_runtime_cognition": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "capability_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "independent_verification_required": true
+}
