@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_CAPABILITY_FIRST_EXECUTION_LOCK_20261011_V5",
+  "date": "2026-10-11",
+  "status": "ACTIVE_CAPABILITY_FIRST_LOCK_V5__V7_STRUCTURED_NATIVE_APP_WORKFLOWS_INDEPENDENTLY_VERIFIED__RELATIONAL_DATAFLOW_AND_FORMULA_VERIFICATION_NEXT__ZERO_SCORE_CREDIT",
+  "supersedes": "canonical/governance/OSWORLD_V21_CAPABILITY_FIRST_EXECUTION_LOCK_20261011_V4.json",
+  "target_reference": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "primary_objective": "MAXIMIZE_GENERAL_RELIABLE_COMPUTER_USE_CAPABILITY_PER_RESOURCE__OSWORLD_IS_FINAL_MEASUREMENT_ONLY",
+  "credited_subject": {
+    "id": "brain-osworld-v21-model-independent-structured-app-workflow-v7",
+    "runtime": "canonical/runtime/osworld_v21_brain_subject_v7.py",
+    "policy": "canonical/runtime/osworld_v21_workflow_policy_v3.py",
+    "app_overlay": "canonical/runtime/osworld_v21_app_policy_overlay_v4.py",
+    "dataflow": "canonical/runtime/osworld_v21_receipt_dataflow_v2.py",
+    "general_purpose_model_runtime_cognition": false
+  },
+  "verification": {
+    "evidence": "canonical/verification/OSWORLD_V21_STRUCTURED_APP_WORKFLOW_V7_INDEPENDENT_VERIFY_20261011_V1.json",
+    "verified_head": "aa0f857bdee8a05781e2f07c5d5d1f8753fcd2f4",
+    "passed": 159,
+    "failed": 0,
+    "benchmark_cases_consumed": 0,
+    "incremental_spend_usd": 0
+  },
+  "current_capability_gain": [
+    "PROVENANCE_BOUND_SCALAR_CROSS_TOOL_DATAFLOW",
+    "CAPABILITY_GROUNDED_MULTI_STEP_DECOMPOSITION",
+    "EXPANDED_WRITER_CALC_IMPRESS_TYPED_TRANSFORMS",
+    "STRUCTURED_NATIVE_APP_OBSERVATION_RECEIPTS",
+    "ADVANCED_SPREADSHEET_CHART_PIVOT_VALIDATION_AND_COLUMN_OPERATIONS",
+    "POSTCONDITION_GATED_OPERATION_COMPOSITION"
+  ],
+  "development_rule": "BUILD_GENERAL_MECHANISMS__VERIFY_ON_FRESH_SYNTHETIC_NEIGHBORS__KEEP_OSWORLD_AS_FINAL_MEASUREMENT_ONLY",
+  "ranked_next": [
+    "NONSCALAR_RELATIONAL_AND_AGGREGATE_DATAFLOW_OVER_LISTS_TABLES_AND_RECORDS",
+    "FORMULA_GENERATION_AND_VERIFICATION",
+    "CODE_WORKSPACE_EDIT_EXECUTE_VERIFY",
+    "MEDIA_GEOMETRY_AND_TIMELINE_TRANSFORMATIONS",
+    "IRREDUCIBLE_VISUAL_ONLY_GROUNDING_AND_RECOVERY"
+  ],
+  "score_state": {
+    "authentic_brain_score_observed": false,
+    "threshold_percent": 81.8,
+    "score_claim_allowed": false
+  },
+  "hard_nonclaims": [
+    "NO_OFFICIAL_OSWORLD_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_159_SYNTHETIC_TESTS_IMPLY_81_8",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ]
+}
