@@ -1,0 +1,168 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_SPECIAL_PROFILE_V36_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__SPENT_NEXT40_AND_FRESH_NEXT41_PASS__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_HIGHLEVEL_PROFILE_V35_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_git_blob_sha": "79969ee781d5642f243f5356135332feca8f80d8",
+    "transform": "canonical/research/bytes/tools/conservative_special_profile_prune_v36.py",
+    "transform_git_blob_sha": "b87c55dda36727937c79cd61ecaf1da99068aee2",
+    "predecessor_manifest_sha256": "c0299bf134c92e6d850b64d3b135df59d766ae91954ab7bf15bcfe48c4989ca8",
+    "manifest_sha256": "e0c2e96ab217bbcf5b14031f8c1b615d39259331382eaa17920a8766b207ce29",
+    "python_files": 277,
+    "raw_python_source_bytes": 1782329,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 1785089,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v35_bytes": -6875,
+    "B_exec_delta_vs_v35_bytes": -6875
+  },
+  "selection": {
+    "id": "CONSERVATIVE_SPECIAL_PROFILE_SPENT_NEXT40_V36",
+    "method": "PROFILE_BALANCED_1440_CASE_SPENT_NEXT40_SAMPLE__120_PER_OPERATION__SELECT_HIGH_LEVEL_OUT_OF_ROUTE_BODIES__THEN_REQUIRE_FULL_SPENT_NEXT40_REPLAY",
+    "profiled_spent_NEXT40_cases": 1440,
+    "profile_sample_per_operation": 120,
+    "full_spent_replay_is_load_bearing": true,
+    "selected_function_bodies": [
+      [
+        "sympy/functions/special/elliptic_integrals.py",
+        "elliptic_e.eval"
+      ],
+      [
+        "sympy/functions/combinatorial/numbers.py",
+        "bell.eval"
+      ],
+      [
+        "sympy/functions/combinatorial/numbers.py",
+        "andre.eval"
+      ],
+      [
+        "sympy/functions/combinatorial/numbers.py",
+        "_AOP_product"
+      ],
+      [
+        "sympy/functions/combinatorial/numbers.py",
+        "motzkin.is_motzkin"
+      ],
+      [
+        "sympy/functions/special/bessel.py",
+        "airybi.taylor_term"
+      ],
+      [
+        "sympy/functions/special/delta_functions.py",
+        "DiracDelta.eval"
+      ],
+      [
+        "sympy/functions/special/gamma_functions.py",
+        "loggamma.eval"
+      ],
+      [
+        "sympy/sets/fancysets.py",
+        "Range._sup"
+      ],
+      [
+        "sympy/sets/fancysets.py",
+        "Range._inf"
+      ],
+      [
+        "sympy/assumptions/assume.py",
+        "AppliedPredicate.binary_symbols"
+      ],
+      [
+        "sympy/matrices/expressions/matexpr.py",
+        "MatrixExpr.from_index_summation"
+      ],
+      [
+        "sympy/functions/elementary/complexes.py",
+        "periodic_argument._getunbranched"
+      ],
+      [
+        "sympy/series/residues.py",
+        "residue"
+      ]
+    ],
+    "selected_body_count": 14,
+    "behavior": "REPLACE_SELECTED_OUTSIDE_TESTED_BOUNDED_CONTRACT_BODIES_WITH_FAIL_CLOSED_NOTIMPLEMENTEDERROR",
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "falsified_alternative": {
+    "id": "STRPRINTER_ADD_MUL_DUAL_PRUNE",
+    "proposed_raw_delta_bytes": -3783,
+    "spent_NEXT40_result": "11039/11040",
+    "failure_count": 1,
+    "failing_case_index_zero_based": 3607,
+    "failing_operation": "roots",
+    "failure": "NotImplementedError:outside Brain bounded exact-symbolic contract",
+    "isolated_result": {
+      "StrPrinter._print_Add": "FAIL_SAME_ROOTS_CASE",
+      "StrPrinter._print_Mul": "FAIL_SAME_ROOTS_CASE"
+    },
+    "conclusion": "BOTH_PRINTING_BODIES_ARE_RARE_BUT_LOAD_BEARING_FOR_THE_BOUND_ROUTE__CUT_REJECTED"
+  },
+  "qualification": {
+    "spent_NEXT40": {
+      "id": "QUAL_SUCCESSOR_NEXT40_20261011_V1",
+      "cases": 11040,
+      "corpus_sha256": "11dd26dc5a271fc77bdb3c2659d52b86599a98fd6a736f0d20d10532d2174694",
+      "candidate": "11040/11040",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT41": {
+      "id": "QUAL_SUCCESSOR_NEXT41_20261011_V1",
+      "cases": 11270,
+      "corpus_sha256": "7d69f6b15c39ccee83d19bc44a684d8580fbd7a2f7c792f272dab7e54c2a7c68",
+      "candidate": "11270/11270",
+      "clean_room_reconstruction": "11270/11270",
+      "extracted_archive_replay": "11270/11270",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "clean_room_V35_to_V36_reconstruction": "PASS__278_OF_278_NONCACHE_FILES_BYTE_IDENTICAL__ZERO_MISMATCH",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
+    "replay_carrier": "CHATGPT_CONTAINER_FORKED_5_WORKER_EXACT_ROUTE_REPLAY",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V36_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_c665222c78e48191981798b3ebe4835a",
+    "bytes": 277132,
+    "sha256": "181d5203e9d8792afe4be06a4217e5bf91b328a65052d84e6c502018f1876210",
+    "archive_size_is_not_used_as_B_exec": true
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT42_20261011_V1",
+    "cases": 11500,
+    "seed": 1785596912,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT42_20261011_V1_PIPE_V36_MANIFEST_IDENTITY",
+    "seed_material": "QUAL_SUCCESSOR_NEXT42_20261011_V1|e0c2e96ab217bbcf5b14031f8c1b615d39259331382eaa17920a8766b207ce29",
+    "per_operation_budget": 1000,
+    "corpus_sha256": "734d6dbd1f50ace3425a7732f63b1d9d5f662620a3296a2612ada60c4a45e7d9",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT42_20261011_V1.jsonl",
+    "library_file_id": "libfile_020b91d0d1e081919de8d64a443b85c2",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: exact V36 source is 1,782,329 raw Python-source bytes, 6,875 bytes below exact V35.",
+    "MEASURED: V36 passes full spent NEXT40 11,040/11,040 with zero failures.",
+    "MEASURED: previously frozen untouched NEXT41 passes V36 11,270/11,270; clean-room reconstruction and extracted archive also pass.",
+    "MEASURED: a larger StrPrinter Add+Mul cut was rejected by one real spent roots counterexample, and each body independently reproduces the failure.",
+    "MEASURED: NEXT42 is frozen before any V37 physical cut and remains unspent.",
+    "NOT PROVED: external second-carrier replay of V36.",
+    "NOT PROVED: universal SymPy semantic equivalence outside the bounded exact-symbolic route.",
+    "NOT PROMOTED: no Opus-family capability, acceptance, ownership, quality, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
