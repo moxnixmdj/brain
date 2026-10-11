@@ -388,6 +388,63 @@ def _object_feature(component: Component, feature: str) -> str:
     raise ARCNoveltyCompilerError("OBJECT_FEATURE_UNSUPPORTED")
 
 
+def _local_feature(grid: Grid, r: int, c: int, feature: str) -> str:
+    h, w = _shape(grid)
+    v = grid[r][c]
+    cross: list[int] = []
+    for dr, dc in ((-1, 0), (1, 0), (0, -1), (0, 1)):
+        rr, cc = r + dr, c + dc
+        cross.append(grid[rr][cc] if 0 <= rr < h and 0 <= cc < w else -1)
+    if feature == "COLOR_COUNTS":
+        n4 = sum(x not in (0, -1) for x in cross)
+        n8 = 0
+        for dr in (-1, 0, 1):
+            for dc in (-1, 0, 1):
+                if dr == 0 and dc == 0:
+                    continue
+                rr, cc = r + dr, c + dc
+                if 0 <= rr < h and 0 <= cc < w and grid[rr][cc] != 0:
+                    n8 += 1
+        return f"{v}|{n4}|{n8}"
+    if feature == "BIN_CROSS":
+        bits = ",".join(str(-1 if x == -1 else 0 if x == 0 else 1) for x in cross)
+        return f"{0 if v == 0 else 1}|{bits}"
+    raise ARCNoveltyCompilerError("LOCAL_FEATURE_UNSUPPORTED")
+
+
+def _infer_local_rule(
+    pairs: Sequence[tuple[Grid, Grid]],
+    feature: str,
+) -> dict[str, int] | None:
+    mapping: dict[str, int] = {}
+    for inp, out in pairs:
+        if _shape(inp) != _shape(out):
+            return None
+        h, w = _shape(inp)
+        for r in range(h):
+            for c in range(w):
+                key = _local_feature(inp, r, c, feature)
+                target = out[r][c]
+                if key in mapping and mapping[key] != target:
+                    return None
+                mapping[key] = target
+    return mapping if mapping else None
+
+
+def _local_rule_predict(grid: Grid, feature: str, mapping: Mapping[str, int]) -> Grid | None:
+    h, w = _shape(grid)
+    out: list[tuple[int, ...]] = []
+    for r in range(h):
+        row: list[int] = []
+        for c in range(w):
+            key = _local_feature(grid, r, c, feature)
+            if key not in mapping:
+                return None
+            row.append(int(mapping[key]))
+        out.append(tuple(row))
+    return tuple(out)
+
+
 def _infer_object_recolor(
     pairs: Sequence[tuple[Grid, Grid]],
     feature: str,
@@ -476,6 +533,8 @@ def _predict(h: Mapping[str, Any], grid: Grid) -> Grid | None:
         return _panel_relation_predict(grid, h["orientation"], h["mapping"])
     if kind == "OBJECT_PROPERTY_RECOLOR":
         return _object_recolor_predict(grid, h["feature"], h["mapping"])
+    if kind == "LOCAL_NEIGHBORHOOD_RULE":
+        return _local_rule_predict(grid, h["feature"], h["mapping"])
     raise ARCNoveltyCompilerError("HYPOTHESIS_KIND_UNSUPPORTED")
 
 
@@ -580,6 +639,17 @@ def compile_hypotheses(
             if _consistent(h, pairs):
                 candidates.append(h)
 
+    for feature in ("COLOR_COUNTS", "BIN_CROSS"):
+        mapping = _infer_local_rule(pairs, feature)
+        if mapping is not None:
+            h = {
+                "kind": "LOCAL_NEIGHBORHOOD_RULE",
+                "feature": feature,
+                "mapping": dict(sorted(mapping.items())),
+            }
+            if _consistent(h, pairs):
+                candidates.append(h)
+
     for feature in ("BBOX", "DENSITY"):
         mapping = _infer_object_recolor(pairs, feature)
         if mapping is not None:
@@ -639,6 +709,7 @@ def compile_hypotheses(
             "BOUNDING_BOX_TOP_LEFT_QUADRANT_EXTRACTION",
             "SEPARATOR_PANEL_UNIQUE_COLOR_SELECTION",
             "EQUAL_PANEL_CELLWISE_ZERO_NONZERO_RELATION",
+            "LOCAL_NEIGHBORHOOD_OUTPUT_RULE",
             "CONNECTED_OBJECT_PROPERTY_RECOLOR",
             "NON_BACKGROUND_BOUNDING_BOX_CROP",
             "UNIQUE_LARGEST_OR_SMALLEST_COMPONENT_CROP",
