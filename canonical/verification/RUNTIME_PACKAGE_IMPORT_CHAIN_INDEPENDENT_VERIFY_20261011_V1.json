@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_RUNTIME_PACKAGE_IMPORT_CHAIN_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__MAIN_IMPORT_DEFECT_REPRODUCED__PACKAGE_IMPORT_REPAIR_AND_BRIDGE_TEST_CURRENTNESS_13_OF_13__ZERO_TERMINAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "base_main_commit": "6a485303239529d5ced4f20287c4108535c4b6cf",
+  "repair_branch": "repair/runtime-package-import-chain-20261011-v1",
+  "verified_branch_head": "73cf845aeebb4164a82c230e9d70b680d23dd182",
+  "exact_blobs": {
+    "canonical/runtime/independent_npm_codec_verifier.py": "b7edf974d3b0b4817f3dff8835b516c52c45f984",
+    "canonical/runtime/auto_npm_library_acquisition.py": "c59c53317c000ce171352bd216b80a1e5fe533bf",
+    "canonical/runtime/npm_package_utils.py": "05fd0591083034df48c3ee426d6b3e11e0183555",
+    "canonical/runtime/astra_runtime.py": "cbbaa444ec1a70b16593af3c39bfb270c7859d2c",
+    "canonical/tests/test_runtime_package_import_chain_v1.py": "0d3f088d5b77fb33cb46ebcc8e5efc8606064c65",
+    "canonical/tests/test_independent_npm_codec_verifier_bridge.py": "0621c428f8814528072f63dce8a8ebe8c7eebd27",
+    "canonical/tests/test_external_tool_bridge_wait.py": "eb9388276b4b85330f919f5e0adab720a54b9a5b",
+    "canonical/tests/test_external_tool_bridge.py": "4556190b6e8f7e9774f165e2e5146914eb293911"
+  },
+  "falsification": {
+    "subject_commit": "6a485303239529d5ced4f20287c4108535c4b6cf",
+    "test": "canonical.tests.test_runtime_package_import_chain_v1",
+    "result": "FAIL_AS_EXPECTED",
+    "failure_class": "MODULE_IMPORT_INTEGRATION_DEFECT",
+    "error": "ModuleNotFoundError: No module named 'auto_npm_library_acquisition'",
+    "py_compile_before_import_test": "PASS"
+  },
+  "repair": {
+    "changes": [
+      "USE_CANONICAL_RUNTIME_PACKAGE_QUALIFIED_IMPORTS_IN_INDEPENDENT_NPM_CODEC_VERIFIER",
+      "USE_CANONICAL_RUNTIME_PACKAGE_QUALIFIED_IMPORT_IN_AUTO_NPM_LIBRARY_ACQUISITION",
+      "ADD_PACKAGE_IMPORT_CHAIN_REGRESSION",
+      "REBIND_NPM_BRIDGE_TEST_TO_CURRENT_CONTINUOUS_OBS_AUTHORIZATION_AND_TASK_SCOPED_BRIDGE_CONTRACT",
+      "REBIND_BRIDGE_WAIT_TESTS_TO_CURRENT_AUTHORIZATION_AND_TASK_SCOPED_BRIDGE_CONTRACT",
+      "ADD_NEGATIVE_TEST_THAT_UNBOUND_INFORMATION_AUTHORITY_CREATES_NO_BRIDGE_REQUEST"
+    ],
+    "runtime_policy_weakened": false
+  },
+  "independent_replay": {
+    "carrier_kind": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "isolated_path": "/home/sprite/npm-import-chain-clean",
+    "py_compile": "PASS",
+    "suites": [
+      "canonical.tests.test_runtime_package_import_chain_v1",
+      "canonical.tests.test_independent_npm_codec_verifier_bridge",
+      "canonical.tests.test_external_tool_bridge_wait",
+      "canonical.tests.test_external_tool_bridge"
+    ],
+    "tests_run": 13,
+    "tests_passed": 13,
+    "failures": 0,
+    "errors": 0
+  },
+  "boundaries": [
+    "THIS_VERIFIES_THE_RUNTIME_PACKAGE_IMPORT_CHAIN_AND_ADJACENT_EXTERNAL_BRIDGE_CONTRACT_ONLY",
+    "THIS_IS_NOT_A_FULL_PRIVATE_CURRENT_MAIN_REPOSITORY_REGRESSION",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY_FROM_THIS_RECEIPT"
+  ],
+  "next": "MERGE_THIS_MINIMAL_VERIFIED_DELTA__THEN_REBASE_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION_TO_NEW_EXACT_MAIN",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
