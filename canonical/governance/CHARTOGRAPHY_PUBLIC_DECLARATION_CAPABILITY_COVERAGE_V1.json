@@ -48,6 +48,10 @@
     {
       "capability_id": "chart.read.binary_phase_solvus.v1",
       "verification": "canonical/verification/CHARTOGRAPHY_BRAIN_NATIVE_CURRENT_V3_VERIFY_20261011.json"
+    },
+    {
+      "capability_id": "chart.raster.curve_x_at_y_query.v1",
+      "verification": "canonical/verification/CHART_CURVE_X_AT_Y_QUERY_V1_VERIFY_20261011.json"
     }
   ],
   "declared_family_coverage": [
@@ -57,10 +61,10 @@
       "verified_support": [
         "CALIBRATED_AXES",
         "LEGEND_COLOR_BINDING",
-        "UNIQUE_CURVE_Y_AT_X"
+        "UNIQUE_CURVE_Y_AT_X",
+        "UNIQUE_CURVE_X_AT_Y_OR_THRESHOLD_INTERSECTION"
       ],
       "open": [
-        "CURVE_X_AT_Y_OR_THRESHOLD_INTERSECTION",
         "SURVIVAL_DOMAIN_SEMANTICS",
         "SAME_COLOR_OR_STYLE_OVERLAP_WHERE_PRESENT"
       ]
@@ -71,12 +75,12 @@
       "verified_support": [
         "LINEAR_OR_LOG10_AXES",
         "LEGEND_COLOR_BINDING",
-        "UNIQUE_CURVE_Y_AT_X"
+        "UNIQUE_CURVE_Y_AT_X",
+        "UNIQUE_CURVE_X_AT_Y_OR_THRESHOLD_INTERSECTION"
       ],
       "open": [
         "MULTI_PANEL_OR_MAGNITUDE_PHASE_BINDING",
-        "BODE_DOMAIN_SEMANTICS",
-        "CURVE_X_AT_Y_THRESHOLD_WHERE_REQUIRED"
+        "BODE_DOMAIN_SEMANTICS"
       ]
     },
     {
@@ -84,7 +88,8 @@
       "state": "PARTIAL_SUPPORT_ONLY",
       "verified_support": [
         "CALIBRATED_AXES",
-        "RASTER_CURVE_GEOMETRY"
+        "RASTER_CURVE_GEOMETRY",
+        "UNIQUE_CURVE_X_AT_Y_OR_THRESHOLD_INTERSECTION"
       ],
       "open": [
         "DIRECT_CURVE_LABEL_BINDING",
@@ -145,8 +150,9 @@
       ],
       "estimated_implementation_wall_clock_class": "SMALL",
       "ownership_route": "BRAIN_NATIVE_DETERMINISTIC_COMPOSITION",
-      "selection_state": "SELECTED_NEXT_BY_REUSE_TO_WALL_CLOCK",
-      "proposition_closure_authority": false
+      "selection_state": "VERIFIED_PROMOTED__17_OF_17_TOTAL_CHECKS",
+      "proposition_closure_authority": false,
+      "verification": "canonical/verification/CHART_CURVE_X_AT_Y_QUERY_V1_VERIFY_20261011.json"
     },
     {
       "id": "DIRECT_CURVE_LABEL_BINDING_AND_FAMILY_RANK",
@@ -156,7 +162,7 @@
         "CONTOUR_MAP"
       ],
       "estimated_implementation_wall_clock_class": "MEDIUM",
-      "selection_state": "NEXT_CANDIDATE_AFTER_INVERSE_CURVE_QUERY",
+      "selection_state": "SELECTED_NEXT_BY_REUSE_TO_WALL_CLOCK",
       "proposition_closure_authority": false
     },
     {
@@ -196,7 +202,7 @@
       "proposition_closure_authority": false
     }
   ],
-  "selected_next_action": "BUILD_AND_INDEPENDENTLY_VERIFY_BRAIN_NATIVE_CURVE_X_AT_Y_INTERSECTION",
+  "selected_next_action": "BUILD_AND_INDEPENDENTLY_VERIFY_DIRECT_CURVE_LABEL_BINDING_AND_FAMILY_RANK",
   "relation_to_target": {
     "comparison_predicate": "BRAIN_CAPABILITY_NONINFERIOR_TO_TARGET_ON_BOUND_SCOPE__CHARTOGRAPHY_TOOLS_GE_89",
     "current_relation": "OPEN_UNBOUND_RELATION",

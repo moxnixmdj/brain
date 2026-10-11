@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_CHART_CURVE_X_AT_Y_QUERY_V1_VERIFY_20261011",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_BRAIN_BLOBS__AUTHOR_TESTS_PLUS_INDEPENDENT_FALSIFICATION",
+  "capability_id": "chart.raster.curve_x_at_y_query.v1",
+  "origin_brain_pr": 4634,
+  "origin_brain_head_commit": "1e589db56de7ccd8c12c32528dcfd33ca6ca1a0c",
+  "verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "verifier_pr": 2715,
+  "verifier_merge_sha": "ed91f366ea9690bcfb4aa8406887155a51c027c8",
+  "workflow_run_id": 38153488048,
+  "workflow_job_id": 114511585709,
+  "artifact_id": 11707034108,
+  "artifact_zip_sha256": "56e9d2298b753c43b8a1c49640638f70be250d935de39719bcd063b029a6db5d",
+  "exact_blobs": {
+    "runtime": "04866f3aee99d9fd964f13571d8af278dfa6fe5e",
+    "tests": "325d125c3e55acab091be139a35ba3b9d1e57c25",
+    "curve_value": "107e20dd66840ecaba32e9e9f6cbfc764da1ae0b",
+    "legend_binding": "aeed8dc4dc231d1d1a794188974930e9457c7ecb",
+    "axis_binding": "1ccab094a14ae261a01912ad6e573ffc09fa8b35",
+    "scene_graph": "258999b07287287db2037af777973d5bbb39116d"
+  },
+  "author_test_count": 11,
+  "author_tests_passed": 11,
+  "independent_falsification_count": 6,
+  "independent_falsification_passed": 6,
+  "heldout_chartography_cases_consumed": 0,
+  "external_general_purpose_model_runtime_dependency_count": 0,
+  "donor_general_purpose_model_runtime_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "chartography_score_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "proved": [
+    "UNIQUE_LEGEND_BOUND_COLOR_CURVE_X_AT_Y_QUERY",
+    "LINEAR_AND_LOG10_AXIS_TRANSFORMS",
+    "EXACT_VERTEX_CROSSING_COALESCENCE_WITHIN_ONE_POLYLINE",
+    "MULTIPLE_CROSSING_FAIL_CLOSED",
+    "HORIZONTAL_TARGET_OVERLAP_FAIL_CLOSED",
+    "SAME_COLOR_MULTI_POLYLINE_AMBIGUITY_FAIL_CLOSED_EVEN_WHEN_COINCIDENT",
+    "LARGE_SEGMENT_GAP_FAIL_CLOSED",
+    "OUT_OF_RANGE_AND_MISSING_LABEL_FAIL_CLOSED",
+    "ZERO_MODEL_NO_DOMAIN_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_DOMAIN_SEMANTIC_AUTHORITY",
+    "NO_MULTIPLE_CROSSING_SELECTION_AUTHORITY",
+    "NO_HORIZONTAL_TARGET_OVERLAP_SELECTION_AUTHORITY",
+    "NO_SAME_COLOR_MULTI_SERIES_DISAMBIGUATION_AUTHORITY",
+    "NO_CHARTOGRAPHY_SCORE",
+    "NO_HELDOUT_COVERAGE_CLAIM"
+  ]
+}
