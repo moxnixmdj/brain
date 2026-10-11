@@ -175,7 +175,7 @@ def decide(state: Mapping[str, Any]) -> dict[str, Any]:
 
     url = re.search(r"https?://[^\s<>\]\[)(']+", instruction)
     if url and not _same_state_repeat(state):
-        return {"response": "open explicit URL", "actions": [{"type": "BROWSER_OPEN_URL", "url": url.group(0)}]}
+        return {"response": "open explicit URL", "actions": [{"type": "BROWSER_OP", "op": {"type": "NAVIGATE", "url": url.group(0)}}]}
 
     searchboxes = [e for e in elements if e.editable and ("search" in _norm(e.label) or e.tag.endswith("searchbox"))]
     if re.search(r"\bsearch\b", ni) and len(searchboxes) == 1 and not _same_state_repeat(state):
@@ -183,7 +183,7 @@ def decide(state: Mapping[str, Any]) -> dict[str, Any]:
         if value:
             return {
                 "response": "fill unique search field",
-                "actions": [{"type": "BROWSER_FILL", "label": searchboxes[0].label, "value": value}],
+                "actions": [{"type": "BROWSER_OP", "op": {"type": "FILL_LABEL", "label": searchboxes[0].label, "value": value}}],
             }
 
     field = _unique_exact_target(instruction, elements, editable=True)
@@ -192,7 +192,7 @@ def decide(state: Mapping[str, Any]) -> dict[str, Any]:
         if value is not None:
             return {
                 "response": "fill uniquely grounded field",
-                "actions": [{"type": "BROWSER_FILL", "label": field.label, "value": value}],
+                "actions": [{"type": "BROWSER_OP", "op": {"type": "FILL_LABEL", "label": field.label, "value": value}}],
             }
 
     target = _unique_exact_target(instruction, elements, editable=False)
