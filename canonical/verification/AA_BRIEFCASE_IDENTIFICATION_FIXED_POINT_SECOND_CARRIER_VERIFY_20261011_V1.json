@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_IDENTIFICATION_FIXED_POINT_SECOND_CARRIER_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "SECOND_CARRIER_REPLAY_PASS__CONTENT_ADDRESSED_READBACK_PASS__NOT_INDEPENDENT_REVIEWER__ZERO_CREDIT",
+  "target": {
+    "path": "canonical/governance/AA_BRIEFCASE_MEASUREMENT_SEMANTIC_TARGET_V1.json",
+    "git_blob_sha": "8f24ca30e6cceb8a58f619da1623037c0a4bda0b",
+    "predicate": "BRAIN_PROFESSIONAL_WORK_CAPABILITY_GE_CAPABILITY_EVIDENCED_BY_FROZEN_OPUS55_AA_BRIEFCASE_1822"
+  },
+  "fixed_point": {
+    "commit": "875004c7000032393241777ea5cf1c5db2416af1",
+    "frontier": {
+      "path": "canonical/governance/AA_BRIEFCASE_MINIMUM_INFORMATION_FRONTIER_20261011_V3.json",
+      "git_blob_sha": "4eb232704d4c8ddb31f9c44f08a2bc5f1d94ad5e"
+    },
+    "current_pointer_before_this_verification": {
+      "path": "canonical/governance/CURRENT_AA_BRIEFCASE_CAPABILITY_INFORMATION.json",
+      "git_blob_sha": "ec36a3f8fedc1a94b1cd0b773dc591473c90b42d"
+    }
+  },
+  "authoritative_collapse_chain": {
+    "governance": {
+      "path": "canonical/governance/AA_BRIEFCASE_TOP_SUPPORT_COLLAPSE_20261011_V1.json",
+      "git_blob_sha": "027a411b83ae51dc96a7c9e1f8730248a0b735da"
+    },
+    "runtime": {
+      "path": "canonical/runtime/aa_briefcase_top_support_collapse_v1.py",
+      "git_blob_sha": "0c88d4346f028200259492a76e338e6d7086548f"
+    },
+    "tests": {
+      "path": "canonical/tests/test_aa_briefcase_top_support_collapse_v1.py",
+      "git_blob_sha": "1977e713860c4cc238b3201016edd7bd65e94eb3"
+    },
+    "prior_local_verification": {
+      "path": "canonical/verification/AA_BRIEFCASE_TOP_SUPPORT_COLLAPSE_LOCAL_VERIFY_20261011_V1.json",
+      "git_blob_sha": "7fce0cdff6fb47c30086efa7eccbc11a4c22f933",
+      "status": "PASS__8_OF_8"
+    }
+  },
+  "internal_bridge_chain": {
+    "runtime": {
+      "path": "canonical/runtime/aa_briefcase_internal_top_support_bridge_v1.py",
+      "git_blob_sha": "d1046ea238d07efc537b3d600410c18fbcf3c6ca"
+    },
+    "tests": {
+      "path": "canonical/tests/test_aa_briefcase_internal_top_support_bridge_v1.py",
+      "git_blob_sha": "f48ba98370934a18dbeba76df5e5e95346a6fba2"
+    },
+    "prior_local_verification": {
+      "path": "canonical/verification/AA_BRIEFCASE_INTERNAL_TOP_SUPPORT_BRIDGE_LOCAL_VERIFY_20261011_V1.json",
+      "git_blob_sha": "c988e8ff53781e505492a1aced2ed50e3f9db4d9",
+      "status": "PASS__8_OF_8"
+    }
+  },
+  "connector_readback": {
+    "all_referenced_blob_shas_matched_live_main": true,
+    "checked_paths": 9,
+    "mismatch_count": 0
+  },
+  "second_carrier_replay": {
+    "carrier": "ISOLATED_PYTHON_REASONING_REPLAY_OUTSIDE_REPOSITORY_RUNTIME",
+    "checks_run": 7,
+    "checks_passed": 7,
+    "checks_failed": 0,
+    "verified": [
+      "SINGLETON_OUTCOME_DOMAIN_HAS_UNIVERSAL_TOP",
+      "TWO_DISTINCT_OUTCOMES_HAVE_NO_UNIVERSAL_TOP_UNDER_ALL_INDICATOR_PREDICATES",
+      "THREE_DISTINCT_OUTCOMES_HAVE_NO_UNIVERSAL_TOP_UNDER_ALL_INDICATOR_PREDICATES",
+      "DISTINCT_OUTCOME_DOES_NOT_DOMINATE_ANOTHER_UNDER_ALL_INDICATORS",
+      "REFLEXIVITY_IS_PRESERVED",
+      "CURRENT_SELECTED_PROFESSIONAL_CELL_FAILS_CLOSED_FOR_AA_WIDE_LIFT",
+      "FAILURE_REASON_IS_MISSING_UNIVERSAL_SOURCE_DOMAIN_TOP_LAW"
+    ],
+    "independent_reviewer": false
+  },
+  "revalidated_conclusion": {
+    "same_information_aa_specific_search_has_positive_expected_information_gain": false,
+    "w_identify_credit_bearing_bridge_found": false,
+    "w_cover_schedulable_for_terminal_credit": false,
+    "w_quality_schedulable_for_terminal_credit": false,
+    "reopen_only_on_new_distinguishing_premise": true,
+    "new_distinguishing_premise_classes": [
+      "SOUND_RESTRICTION_OF_ACTUAL_PRIVATE_RUBRIC_OR_JUDGE_CLASS",
+      "MATCHED_REFERENCE_RELATION_ON_ACTUAL_SCORE_BEARING_SCOPE",
+      "OWNER_ACCEPTED_OR_PROTOCOL_EQUIVALENT_RELATION_WITH_TERMINAL_ENTAILMENT"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_OF_INDEPENDENT_HUMAN_OR_EXTERNAL_REVIEW",
+    "NO_CLAIM_BRAIN_IS_BELOW_OR_ABOVE_OPUS_ON_AA_CAPABILITY",
+    "NO_CLAIM_ACTUAL_PRIVATE_RUBRICS_ARE_ARBITRARY_INDICATORS",
+    "NO_LITERAL_AA_ELO_CREDIT",
+    "NO_CAPABILITY_NONINFERIORITY_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
