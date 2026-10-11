@@ -199,15 +199,36 @@ def invent(rows:Sequence[LabeledRow])->dict[str,Any]:
             continue
         informative.append(p)
 
-    if len(informative)>MAX_PREDICATES:
-        # The proof-preserving common-positive reduction was insufficient to fit
-        # the verified G0 predicate bound. Do not silently heuristic-prune a
-        # possibly necessary atom: report the bound explicitly.
+    # Quotient predicates by identical truth vectors over the complete observed
+    # population. This is behavior-preserving for the current synthesis problem.
+    # Within each class retain every equal-minimum-cost expression as an alias so
+    # representational ambiguity is not silently erased.
+    classes_by_signature={}
+    for p in informative:
+        signature=tuple(_predicate_truth(p,row.features) for row in population)
+        classes_by_signature.setdefault(signature,[]).append(p)
+
+    behavior_classes=[]
+    for idx,(signature,members) in enumerate(sorted(classes_by_signature.items(),key=lambda kv:kv[0])):
+        min_cost=min(float(p["cost"]) for p in members)
+        aliases=sorted(
+            [p for p in members if float(p["cost"])==min_cost],
+            key=lambda p:p["predicate_id"],
+        )
+        behavior_classes.append({
+            "class_id":f"BC_{idx:03d}",
+            "signature":signature,
+            "cost":min_cost,
+            "aliases":aliases,
+        })
+
+    if len(behavior_classes)>MAX_PREDICATES:
         return {
             "schema":SCHEMA,
             "status":"SEARCH_BOUND_EXCEEDED",
-            "reason":"COMMON_POSITIVE_PREDICATE_FRONTIER_TOO_LARGE",
-            "predicate_count":len(informative),
+            "reason":"BEHAVIOR_CLASS_FRONTIER_TOO_LARGE",
+            "predicate_behavior_class_count":len(behavior_classes),
+            "raw_informative_predicate_count":len(informative),
             "max_predicates":MAX_PREDICATES,
             "terminal_authority":False,
         }
@@ -215,17 +236,21 @@ def invent(rows:Sequence[LabeledRow])->dict[str,Any]:
 
     specs=[
         PredicateSpec(
-            p["predicate_id"],
-            "derived_numeric_predicate",
+            c["class_id"],
+            "derived_numeric_predicate_behavior_class",
             {"path":"canonical/runtime/finite_feature_expression_inventor_v1.py","span":[0,1]},
-            float(p["cost"]),
+            float(c["cost"]),
         )
-        for p in informative
+        for c in behavior_classes
     ]
-    by_id={p["predicate_id"]:p for p in informative}
+    class_by_id={c["class_id"]:c for c in behavior_classes}
     examples=[]
-    for row in population:
-        facts=frozenset(p["predicate_id"] for p in informative if _predicate_truth(p,row.features))
+    for row_index,row in enumerate(population):
+        facts=frozenset(
+            c["class_id"]
+            for c in behavior_classes
+            if c["signature"][row_index]
+        )
         examples.append(RuleExample(row.row_id,facts,row.positive,{"observation_id":row.row_id}))
 
     result=synthesize_minimal_conjunctive_rule(
@@ -239,22 +264,44 @@ def invent(rows:Sequence[LabeledRow])->dict[str,Any]:
             "status":"NO_SYNTHESIZED_DISCRIMINATOR",
             "g0_status":result.get("status"),
             "predicate_frontier_complete":frontier_complete,
-            "predicate_count":len(informative),
+            "predicate_count":len(informative),\n        "predicate_behavior_class_count":len(behavior_classes),
             "terminal_authority":False,
         }
 
     accepted=[]
     for rule in result["rules"]:
-        ids=tuple(x["predicate_id"] for x in rule["preconditions"])
+        class_ids=tuple(x["predicate_id"] for x in rule["preconditions"])
         replay=[
-            all(_predicate_truth(by_id[pid],row.features) for pid in ids)
-            for row in population
+            all(class_by_id[cid]["signature"][row_index] for cid in class_ids)
+            for row_index,_row in enumerate(population)
         ]
         labels=[row.positive for row in population]
-        if replay==labels:
+        if replay!=labels:
+            continue
+
+        # Expand equal-minimum representational aliases. Keep a hard explicit
+        # bound rather than silently dropping alternatives.
+        alias_products=[class_by_id[cid]["aliases"] for cid in class_ids]
+        combinations_out=[([],0)]
+        for aliases in alias_products:
+            next_out=[]
+            for prefix,_ in combinations_out:
+                for alias in aliases:
+                    next_out.append((prefix+[alias],0))
+                    if len(next_out)>256:
+                        return {
+                            "schema":SCHEMA,
+                            "status":"SEARCH_BOUND_EXCEEDED",
+                            "reason":"ALIAS_EXPANSION_LIMIT",
+                            "limit":256,
+                            "terminal_authority":False,
+                        }
+            combinations_out=next_out
+        for aliases,_ in combinations_out:
             accepted.append({
-                "predicate_ids":list(ids),
-                "predicates":[by_id[pid] for pid in ids],
+                "predicate_ids":[p["predicate_id"] for p in aliases],
+                "predicates":aliases,
+                "behavior_class_ids":list(class_ids),
                 "cost":rule["cost"],
             })
 
@@ -262,7 +309,10 @@ def invent(rows:Sequence[LabeledRow])->dict[str,Any]:
         return {"schema":SCHEMA,"status":"INTERNAL_REPLAY_FAILURE","terminal_authority":False}
 
     min_cost=min(float(x["cost"]) for x in accepted)
-    best=sorted([x for x in accepted if float(x["cost"])==min_cost],key=lambda x:x["predicate_ids"])
+    best=sorted(
+        [x for x in accepted if float(x["cost"])==min_cost],
+        key=lambda x:(x["behavior_class_ids"],x["predicate_ids"]),
+    )
     return {
         "schema":SCHEMA,
         "status":"INVENTED_DISCRIMINATORS",
