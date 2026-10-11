@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_BENCHMARK_AUDIT_FREEZE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE__BENCHMARK_DEVELOPMENT_FROZEN__RANK23_UNREAD_UNSTARTED__CAPABILITY_CLOSURE_REQUIRED",
+  "objective": "Develop benchmark-independent scientific capability until hidden-benchmark execution is an audit rather than the development loop.",
+  "evidence": {
+    "rank22_result": {
+      "path": "canonical/verification/TB_SCIENCE_RANK22_FINAL_ZERO_VERIFY_20261011_V1.json",
+      "git_blob_sha": "9c5e9a6ec8c67109e49913dabb512bb50a6482d7",
+      "reward": 0,
+      "root_class": "ZERO_MODEL_SCIENCE_CAPABILITY_INADEQUATE__NO_REQUIRED_POSTERIOR_OUTPUTS"
+    },
+    "general_scientific_controller": {
+      "path": "canonical/verification/GENERAL_SCIENTIFIC_CAPABILITY_CONTROLLER_V1_VERIFY_20261011_V1.json",
+      "git_blob_sha": "0678e71f72a5a7e92e2aa148a3e980dfeb2ff97d"
+    },
+    "scientific_artifact_contract": {
+      "path": "canonical/verification/SCIENTIFIC_ARTIFACT_CONTRACT_V1_VERIFY_20261011_V1.json",
+      "git_blob_sha": "469d59fa896848cc10543fa72601ee22d8f77710"
+    },
+    "scientific_numeric_task_compiler": {
+      "path": "canonical/verification/SCIENTIFIC_NUMERIC_TASK_COMPILER_V1_VERIFY_20261011_V1.json",
+      "git_blob_sha": "c69aed9c11c66e5c474df03f703f97dde67d8014"
+    },
+    "scientific_numeric_task_pipeline": {
+      "path": "canonical/verification/SCIENTIFIC_NUMERIC_TASK_PIPELINE_V1_VERIFY_20261011_V1.json",
+      "git_blob_sha": "b664987cd38719539a8d42cab938a0b93da3f7e4"
+    }
+  },
+  "rank23": {
+    "slot_id": "terminal-bench-science/dna-storage-codec::trial-0",
+    "task_digest": "sha256:bde6852289db3f5474aedc96c54aca201d11be6c61f4fef019998b2b689e65ac",
+    "staged_authority_path": "canonical/governance/TB_SCIENCE_RANK23_ONE_SLOT_EXECUTION_AUTHORITY_20261011_V1.json",
+    "staged_authority_git_blob_sha": "ee4092875cfe187bb414fd4ca881c95ac73e6e24",
+    "staged_authority_was_effective": false,
+    "task_read": false,
+    "task_started": false,
+    "benchmark_trials_consumed": 0,
+    "activation_present": false
+  },
+  "closure_requirements": {
+    "benchmark_independent_routing": true,
+    "no_benchmark_identifier_routing": true,
+    "no_external_or_local_general_purpose_model_runtime_cognition": true,
+    "raw_task_to_typed_problem_compilation_required": true,
+    "resource_and_schema_binding_required": true,
+    "verified_capability_composition_required": true,
+    "verifier_driven_recovery_required": true,
+    "declared_artifact_materialization_required": true,
+    "unseen_shadow_gauntlet_required": true,
+    "two_environment_replay_required": true,
+    "causal_failure_evidence_required": true,
+    "arbitrary_benchmark_subject_consumption_for_debugging_forbidden": true
+  },
+  "current_verified_scope": {
+    "controller_families": [
+      "SYMBOLIC_REGRESSION_WITH_BOUNDED_SEARCH_RECOVERY",
+      "FINITE_TYPED_RULE_SYNTHESIS",
+      "ABDUCTIVE_RESIDUAL_ANALYSIS",
+      "SHARED_PERIOD_FITTING_WITH_SECOND_HARMONIC_ALIAS_DISAMBIGUATION"
+    ],
+    "raw_numeric_compiler_families": [
+      "SYMBOLIC_REGRESSION",
+      "SHARED_PERIOD_FITTING"
+    ],
+    "artifact_formats": [
+      "JSON",
+      "CSV",
+      "MARKDOWN"
+    ],
+    "remaining_primary_gap": "GENERAL_RAW_TASK_AND_RESOURCE_TO_TYPED_CAPABILITY_COMPILATION_BEYOND_BOUNDED_NUMERIC_SUBSET"
+  },
+  "controls": {
+    "public_rank23_reseal_promotion_authority": false,
+    "rank23_execution_authority": false,
+    "rank23_task_read_authority": false,
+    "rank23_activation_authority": false,
+    "rank23_retry_authority": false,
+    "rank23_replacement_authority": false,
+    "benchmark_scheduler_frozen": true,
+    "incremental_spend_usd_max": 0
+  },
+  "resume_condition": "A_NEW_BENCHMARK_INDEPENDENT_SCIENTIFIC_CAPABILITY_CLOSURE_RECEIPT_MUST_PASS_THE_REQUIRED_SHADOW_GAUNTLET_AND_EXPLICITLY_AUTHORIZE_ONE_AUDIT_DISPATCH",
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "benchmark_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
