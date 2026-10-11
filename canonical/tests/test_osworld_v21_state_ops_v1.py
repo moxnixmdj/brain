@@ -198,3 +198,53 @@ def test_mutating_ops_compile_explicit_receipts():
     assert "MKDIR:PASS:/home/oai/share/x" in source
     assert "DELETE:PASS:/home/oai/share/y" in source
     assert "RUN_CLI:PASS:ffprobe:returncode=" in source
+
+
+def test_list_dir_emits_bounded_structured_receipt(tmp_path):
+    (tmp_path / "b.txt").write_text("b", encoding="utf-8")
+    (tmp_path / "a.txt").write_text("a", encoding="utf-8")
+    out = _execute_compiled({
+        "ops": [{"type": "LIST_DIR", "path": str(tmp_path), "max_entries": 10}]
+    })
+    assert "LIST_DIR:PASS:" + str(tmp_path) + ":" in out
+    assert '"name":"a.txt"' in out
+    assert '"name":"b.txt"' in out
+
+
+def test_text_replace_exact_and_receipted(tmp_path):
+    target = tmp_path / "a.txt"
+    target.write_text("alpha beta alpha", encoding="utf-8")
+    out = _execute_compiled({
+        "ops": [{
+            "type": "TEXT_REPLACE",
+            "path": str(target),
+            "old": "alpha",
+            "new": "omega",
+            "replace_all": False,
+        }]
+    })
+    assert target.read_text(encoding="utf-8") == "omega beta alpha"
+    assert "TEXT_REPLACE:PASS:" + str(target) in out
+
+
+def test_text_replace_missing_old_fails_at_execution(tmp_path):
+    target = tmp_path / "a.txt"
+    target.write_text("alpha", encoding="utf-8")
+    source = compile_state_ops({
+        "ops": [{"type": "TEXT_REPLACE", "path": str(target), "old": "missing", "new": "x"}]
+    })
+    try:
+        exec(source, {})
+    except AssertionError as exc:
+        assert "TEXT_REPLACE_OLD_NOT_FOUND" in str(exc)
+    else:
+        raise AssertionError("expected exact old-text guard")
+
+
+def test_list_dir_protected_path_rejected():
+    try:
+        compile_state_ops({"ops": [{"type": "LIST_DIR", "path": "/evaluation_examples"}]})
+    except StateOpsError as exc:
+        assert str(exc) == "PROTECTED_PATH_FORBIDDEN"
+    else:
+        raise AssertionError("expected protected path rejection")
