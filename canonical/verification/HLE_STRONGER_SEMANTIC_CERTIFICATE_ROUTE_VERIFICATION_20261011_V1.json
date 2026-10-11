@@ -1,60 +1,27 @@
 {
   "schema": "PROJECT_BRAIN_HLE_STRONGER_SEMANTIC_CERTIFICATE_ROUTE_VERIFICATION_20261011_V1",
   "date": "2026-10-11",
-  "status": "CONNECTOR_RECOMPUTATION_PASS__LOGICAL_AND_ARITHMETIC_ROUTE_VERIFIED__NOT_AN_HLE_SCORE__ZERO_CREDIT",
-  "subject": {
-    "path": "canonical/governance/HLE_STRONGER_SEMANTIC_CERTIFICATE_ROUTE_20261011_V1.json",
-    "git_blob_sha": "16f4dba7ee3b631cf28dc3d57d98e61a9e7afb98",
-    "main_commit": "bbf71c2be65e0a80fd819788ff7dd81339795420"
-  },
+  "status": "TRUTH_REPAIRED__REFERENCE_SEMANTIC_THEOREM_PASS__TARGET_SCORE_TRANSFER_FAILS_WITHOUT_GRADER_BINDING__ZERO_CREDIT",
   "checks": [
-    {
-      "id": "TOTAL_SLOT_ARITHMETIC",
-      "pass": true,
-      "recomputation": "2500 * 5 = 12500"
-    },
-    {
-      "id": "THRESHOLD_INTEGER_CEILING",
-      "pass": true,
-      "recomputation": "ceil(0.677 * 12500) = ceil(8462.5) = 8463"
-    },
-    {
-      "id": "CERTIFIED_FRACTION",
-      "pass": true,
-      "recomputation": "8463 / 12500 = 0.67704 = 67.704% > 67.7%"
-    },
-    {
-      "id": "EXACT_IDENTITY_LOGIC",
-      "pass": true,
-      "recomputation": "IF committed_answer_string == hidden_official_gold_string THEN the committed answer is exactly the official reference answer"
-    },
-    {
-      "id": "QUARANTINE_SEPARATION",
-      "pass": true,
-      "recomputation": "ROUTE_DOES_NOT_ASSERT_THAT_ANY_STOCHASTIC_LLM_JUDGE_MUST_OUTPUT_CORRECT_ON_EXACT_GOLD_IDENTITY"
-    },
-    {
-      "id": "NO_EXECUTION_OVERCLAIM",
-      "pass": true,
-      "recomputation": "THE_THEOREM_ALONE_PRODUCES_ZERO_HLE_SCORE_AND_ZERO_ACCEPTANCE_CREDIT"
-    }
+    {"id":"TOTAL_SLOT_ARITHMETIC","pass":true,"recomputation":"2500 * 5 = 12500"},
+    {"id":"REFERENCE_EXACTNESS_THRESHOLD","pass":true,"recomputation":"ceil(0.677 * 12500) = 8463; 8463/12500 = 67.704%"},
+    {"id":"EXACT_IDENTITY_IMPLIES_REFERENCE_ANSWER","pass":true},
+    {"id":"REFERENCE_ANSWER_IMPLIES_TARGET_LLM_JUDGE_CORRECT_BIT","pass":false,"reason":"NO_DETERMINISTIC_OR_SCOPE_COMPLETE_ONE_SIDED_RELATION_BOUND_FOR_ANTHROPIC_CLAUDE_OPUS_4_6_GRADER"},
+    {"id":"TARGET_PUBLISHED_SCORE_TRANSFER","pass":false,"reason":"TARGET_SCORE_IS_MODEL_GRADED_PER_ANTHROPIC_FIRST_PARTY_PROTOCOL"}
   ],
   "proved": [
-    "THE_PROPRIETARY_CLAUDE_OPUS_4_6_GRADER_IS_NOT_LOGICALLY_REQUIRED_FOR_THE_STRONGER_REFERENCE_SEMANTIC_CERTIFICATE_BRANCH",
-    "8463_EXACT_HIDDEN_GOLD_IDENTITIES_ACROSS_12500_MATCHED_TRIAL_SLOTS_ARE_SUFFICIENT_FOR_A_REFERENCE_SEMANTIC_CORRECTNESS_CERTIFICATE_STRICTLY_ABOVE_67_7_PERCENT"
+    "EXACT_HIDDEN_GOLD_IDENTITY_IS_DIRECT_REFERENCE_ANSWER_EVIDENCE",
+    "8463_OF_12500_EXACT_IDENTITIES_CERTIFY_67_704_PERCENT_REFERENCE_EXACTNESS"
   ],
   "not_proved": [
-    "CURRENT_BRAIN_HLE_SCORE_GE_67_7",
-    "CLAUDE_OPUS_4_6_WOULD_LABEL_ALL_EXACT_GOLD_IDENTITIES_CORRECT",
-    "AUTHORIZED_DATASET_ACCESS",
-    "EXACT_ANTHROPIC_DATASET_REVISION_IDENTITY",
-    "ANY_TERMINAL_HLE_EXECUTION"
+    "CLAUDE_OPUS_4_6_GRADER_CORRECT_BITS_GE_8463",
+    "BRAIN_HLE_PUBLISHED_SCORE_GE_67_7",
+    "TARGET_GRADER_EQUIVALENCE_OR_ONE_SIDED_RELATION"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
     "terminal_cases_consumed": 0,
     "acceptance_credit_delta": 0,
-    "capability_credit_delta": 0,
     "terminal_credit_delta": 0
   }
 }
