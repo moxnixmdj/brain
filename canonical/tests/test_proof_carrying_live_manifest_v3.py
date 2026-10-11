@@ -300,3 +300,93 @@ def test_invalid_last_known_good_fails_closed():
     assert out["pass"] is False
     assert out["rollback_required"] is True
     assert out["last_known_good_manifest_sha256"] is None
+
+
+def _canon_sha(value):
+    import hashlib
+    import json
+    return hashlib.sha256(
+        json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+
+
+def improvement_receipt(rid="rlearn"):
+    phase_receipts = {
+        name: h(str((i % 9) + 1))
+        for i, name in enumerate(
+            (
+                "understand",
+                "plan",
+                "compose",
+                "act",
+                "verify",
+                "learn",
+                "generalize",
+                "compress",
+                "reuse",
+            )
+        )
+    }
+    phase_outputs = {
+        name: h("abcdefghi"[i])
+        for i, name in enumerate(phase_receipts)
+    }
+    core = {
+        "episode_id": "learned-episode",
+        "subject_sha256": h("7"),
+        "route_id": rid,
+        "route_manifest_sha256": h("8"),
+        "phase_receipt_sha256": phase_receipts,
+        "phase_output_sha256": phase_outputs,
+        "neighbor_receipt_sha256": [h("1"), h("2")],
+        "compression_receipt_sha256": h("3"),
+    }
+    return {
+        "schema": "PROJECT_BRAIN_VERIFIED_IMPROVEMENT_LOOP_V2",
+        "pass": True,
+        "promotion_candidate": True,
+        "promotion_authority": False,
+        **core,
+        "improvement_receipt_sha256": _canon_sha(core),
+    }
+
+
+def learned_route():
+    row = route("rlearn", "clearn", "k=learn", "exec:learn")
+    row["origin_class"] = "LEARNED_V2"
+    row["improvement_receipt"] = improvement_receipt("rlearn")
+    return row
+
+
+def test_learned_v2_route_requires_exact_self_bound_improvement_receipt():
+    out = compile_manifest(
+        [learned_route()],
+        verified_deployable_capability_ids=["clearn"],
+    )
+    assert out["pass"] is True, out
+    assert out["routes"][0]["origin_class"] == "LEARNED_V2"
+    assert out["routes"][0]["improvement_receipt_sha256"] == (
+        learned_route()["improvement_receipt"]["improvement_receipt_sha256"]
+    )
+
+
+def test_learned_v2_improvement_receipt_tamper_fails():
+    row = learned_route()
+    row["improvement_receipt"]["subject_sha256"] = h("9")
+    out = compile_manifest(
+        [row],
+        verified_deployable_capability_ids=["clearn"],
+    )
+    assert out["pass"] is False
+    assert out["detail"] == "IMPROVEMENT_RECEIPT_SELF_DIGEST_MISMATCH"
+
+
+def test_learned_v2_route_id_mismatch_fails():
+    row = learned_route()
+    row["improvement_receipt"] = improvement_receipt("other-route")
+    out = compile_manifest(
+        [row],
+        verified_deployable_capability_ids=["clearn"],
+    )
+    assert out["pass"] is False
+    assert out["detail"] == "IMPROVEMENT_ROUTE_ID_MISMATCH"
