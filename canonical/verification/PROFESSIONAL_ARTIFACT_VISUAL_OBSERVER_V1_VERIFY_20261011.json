@@ -1,0 +1,124 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_ARTIFACT_VISUAL_OBSERVER_V1_VERIFY",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_PUBLIC_RUNNER__EXACT_REPAIRED_BRAIN_BLOBS__11_OF_11_FOCUSED__REAL_PDF_DOCX_PPTX_XLSX_COMPOSITION__ZERO_BENCHMARK_OR_TERMINAL_CREDIT",
+  "subject": {
+    "runtime_path": "canonical/runtime/professional_artifact_visual_observer_v1.py",
+    "runtime_git_blob_sha": "27be857789160e6971fb4d20265eae30468ea063",
+    "tests_path": "canonical/tests/test_professional_artifact_visual_observer_v1.py",
+    "tests_git_blob_sha": "24db6f10c71df9ec20ca34ac6bd6a64b90c89ce1",
+    "capability_id": "professional.artifact.visual_observer.v1"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2716,
+    "head_commit": "20ee182f0a5e92f17283d3d9eecb1749fe51b022",
+    "workflow_run_id": 38153807927,
+    "workflow_job_id": 114512510133,
+    "conclusion": "success",
+    "artifact": {
+      "id": 11707950964,
+      "name": "professional-artifact-visual-observer-v1-verification",
+      "digest": "sha256:356b4375e669286466f9381c29b4e2fcff110a121d67d8bc93a4b081d5364124"
+    }
+  },
+  "exact_blob_checks": {
+    "runtime": "27be857789160e6971fb4d20265eae30468ea063",
+    "tests": "24db6f10c71df9ec20ca34ac6bd6a64b90c89ce1",
+    "positioned_ocr": "19f3087489ce7f6f935fc7baaebdc8cd672f4b62",
+    "base_ocr": "45714d7a0160802d986042910da1c4c6462676e5"
+  },
+  "pinned_dependency_surface": {
+    "tesseract_version": "5.3.4",
+    "tesseract_ocr_package": "5.3.4-1build5",
+    "libtesseract5_package": "5.3.4-1build5",
+    "tesseract_ocr_eng_package": "1:4.1.0-2",
+    "eng_model_sha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+    "verified": true
+  },
+  "focused_falsification": {
+    "count": 11,
+    "passed": 11,
+    "result": "PASS"
+  },
+  "real_native_format_composition": [
+    {
+      "format": "pdf",
+      "page_count": 1,
+      "pass": true
+    },
+    {
+      "format": "docx",
+      "page_count": 1,
+      "pass": true
+    },
+    {
+      "format": "pptx",
+      "page_count": 1,
+      "pass": true
+    },
+    {
+      "format": "xlsx",
+      "page_count": 2,
+      "pass": true
+    }
+  ],
+  "real_page_gates": [
+    "PAGE_NOT_BLANK",
+    "TEXT_PRESENT_WHEN_REQUIRED",
+    "OCR_LINE_CONFIDENCE_BOUNDED",
+    "TEXT_NOT_TOUCHING_HARD_CROP",
+    "NO_MAJOR_OCR_LINE_OVERLAP"
+  ],
+  "render_verification": {
+    "relation": "INDEPENDENT_EQUIVALENT_LIBREOFFICE_TO_PDF_TO_POPPLER_SHIM__NOT_BYTE_IDENTITY_TO_BRAIN_RENDER_MODULE",
+    "verification_shim_git_blob_sha": "9728fc59b85115925a982e3fb3f5f483dd05cb4e",
+    "brain_render_substrate_path": "canonical/runtime/native_artifact_render_preservation_proof_v1.py",
+    "brain_render_substrate_git_blob_sha": "39374e775d54cdc58315d7a1f877d834282a64f7",
+    "byte_identity_claimed": false
+  },
+  "causal_failure_and_repair": {
+    "first_run_id": 38153554981,
+    "first_run_result": "FAIL_AT_REAL_XLSX_COMPOSITION",
+    "observed_failure": [
+      "ONE_ZERO_CONFIDENCE_OCR_LINE_VETOED_AN_OTHERWISE_READABLE_PAGE",
+      "SPARSE_PAGE_WITH_CONFIDENT_POSITIONED_TEXT_WAS_MISCLASSIFIED_BLANK_BY_INK_FRACTION_ONLY"
+    ],
+    "repaired_rules": [
+      "OCR_RELIABILITY_REQUIRES_MEDIAN_CONFIDENCE_AT_THRESHOLD_AND_AT_LEAST_HALF_OF_LINES_CONFIDENT",
+      "PAGE_IS_NONBLANK_IF_INK_THRESHOLD_PASSES_OR_AT_LEAST_ONE_POSITIONED_TEXT_LINE_IS_CONFIDENT"
+    ],
+    "dedicated_new_regressions": 2,
+    "repaired_run_id": 38153807927,
+    "repaired_run_result": "PASS"
+  },
+  "proved_scope": [
+    "BRAIN_CAN_RENDER_COMMON_PROFESSIONAL_NATIVE_ARTIFACTS_THROUGH_THE_BOUND_RENDER_PIPELINE",
+    "BRAIN_CAN_OBSERVE_POSITIONED_ENGLISH_TEXT_WITH_THE_PINNED_TESSERACT_SURFACE",
+    "BRAIN_CAN_DERIVE_BOUNDED_TECHNICAL_PAGE_EVIDENCE_FOR_BLANKNESS_TEXT_PRESENCE_OCR_CONFIDENCE_HARD_CROP_CONTACT_AND_MAJOR_OCR_LINE_OVERLAP",
+    "THE_OBSERVATION_IS_CONTENT_ADDRESSED_AND_FAILS_CLOSED_ON_DECLARED_OUT_OF_SCOPE_CONDITIONS"
+  ],
+  "effect": {
+    "professional_r4": "ADVANCES_OBJECTIVE_RENDERED_PAGE_OBSERVATION_SUBGAP_ONLY",
+    "gdpval_absolute_dominance": "ADVANCES_ONE_MEASUREMENT_COMPONENT__ABSOLUTE_DOMINANCE_REMAINS_FALSE",
+    "aa_briefcase": "REUSABLE_ARTIFACT_OBSERVATION_CAPABILITY__NO_PRIVATE_SCOPE_OR_OWNER_PREFERENCE_CLOSURE"
+  },
+  "hard_nonclaims": [
+    "NO_HOLISTIC_AESTHETIC_QUALITY_TOP",
+    "NO_SEMANTIC_RELEVANCE_OR_CORRECTNESS_TOP",
+    "NO_OWNER_EVALUATOR_CONTAINMENT",
+    "NO_NORMATIVE_AGGREGATION_CLOSURE",
+    "NO_GDPVAL_OR_AA_BRIEFCASE_SCORE_CREDIT",
+    "NO_OPUS55_NONINFERIORITY",
+    "NO_GLOBAL_R4_ROOT_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_cases_consumed": 0,
+    "external_general_purpose_model_runtime_dependency_count": 0,
+    "benchmark_score_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
