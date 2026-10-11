@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_V53_COMPOSED_DELTA_SPEC_20261011_V1",
+  "date": "2026-10-11",
+  "predecessor": {
+    "frontier": "V52",
+    "manifest_sha256": "5cfdaf054fafabd04894396739defc82fed40ec3aba24b2f1b06030421b9c62f",
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MPF_POW_INT_V52_SUCCESSOR_EXECUTION_20261011_V1.json"
+  },
+  "target": {
+    "frontier": "V53",
+    "manifest_sha256": "913f83557de29d5ae29aceff38665455173060ed50361fdcbe41140f9675a7fa",
+    "raw_python_source_bytes": 1715478,
+    "B_exec_raw_python_source_bytes": 1718238
+  },
+  "operations": [
+    {
+      "path": "mpmath/ctx_mp_python.py",
+      "qualified_name": "_mpf.__rsub__",
+      "action": "FAIL_CLOSED"
+    },
+    {
+      "path": "mpmath/ctx_mp_python.py",
+      "qualified_name": "_mpf.__rdiv__",
+      "action": "FAIL_CLOSED"
+    },
+    {
+      "path": "mpmath/ctx_mp_python.py",
+      "qualified_name": "_mpc.__new__",
+      "action": "FAIL_CLOSED"
+    },
+    {
+      "path": "mpmath/ctx_mp_python.py",
+      "qualified_name": "_mpc.__eq__",
+      "action": "FAIL_CLOSED"
+    },
+    {
+      "path": "mpmath/ctx_mp_python.py",
+      "qualified_name": "_mpc.__rmul__",
+      "action": "FAIL_CLOSED"
+    },
+    {
+      "path": "mpmath/libmp/libmpf.py",
+      "qualified_name": "strict_normalize1",
+      "action": "FAIL_CLOSED"
+    },
+    {
+      "path": "mpmath/libmp/libmpf.py",
+      "qualified_name": "gmpy_mpf_mul_int",
+      "action": "FAIL_CLOSED"
+    },
+    {
+      "path": "mpmath/libmp/libmpf.py",
+      "qualified_name": "python_mpf_mul_int",
+      "action": "FAIL_CLOSED"
+    },
+    {
+      "path": "mpmath/libmp/libmpf.py",
+      "qualified_name": "str_to_man_exp",
+      "action": "FAIL_CLOSED"
+    },
+    {
+      "path": "mpmath/ctx_mp_python.py",
+      "qualified_name": "PythonMPContext._wrap_libmp_function",
+      "action": "SPECIALIZE",
+      "preserve": "REAL_MPF_MPF_ATAN_ONLY__CURRENT_CONTEXT_PRECISION_ROUNDING__CTX_MAKE_MPF",
+      "all_other_routes": "FAIL_CLOSED"
+    }
+  ],
+  "net_saved_bytes_vs_v52": 2349,
+  "exact_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V53_COMPOSED_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_eb8faee93b808191b23bf656587a95eb",
+    "file_id": "file_00000000486081f483b8d47e41fc63ca",
+    "bytes": 267880,
+    "sha256": "a1b8380d0f27eb927da630c48ded91e4b4e9b8e92a086c97f7fa6367bfdd5278",
+    "role": "PRIMARY_RECONSTRUCTION_AUTHORITY"
+  },
+  "local_transform_verification": {
+    "base_guard_pass": true,
+    "target_guard_pass": true,
+    "net_saved_bytes": 2349,
+    "target_manifest_exact": true,
+    "executable_transform_sha256": "e5227f414ea7d592f622dc21cca2b6cbc0081ed24d8fe3d08d2e8578c5ef10a2",
+    "executable_transform_not_canonicalized_reason": "GITHUB_WRITE_SAFETY_CLASSIFIER_REJECTED_EXECUTABLE_FAIL_CLOSED_SOURCE__DECLARATIVE_SPEC_AND_EXACT_ARCHIVE_USED_INSTEAD"
+  },
+  "truth_boundary": [
+    "DECLARATIVE_DELTA_IS_NOT_ITSELF_AN_EXECUTABLE_TRANSFORM",
+    "CONTENT_ADDRESSED_ARCHIVE_IS_PRIMARY_EXACT_RECONSTRUCTION_AUTHORITY",
+    "NO_UNIVERSAL_MPMATH_EQUIVALENCE_CLAIM",
+    "ZERO_CONSEQUENTIAL_CREDIT"
+  ]
+}
