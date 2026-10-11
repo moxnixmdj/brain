@@ -136,6 +136,41 @@ def _compile_op(op: Mapping[str, Any]) -> str:
             f"print('DELETE:PASS:{p}:exists='+str(_p.exists()))"
         )
 
+    if kind == "LIST_DIR":
+        p = _path(op.get("path"))
+        max_entries = op.get("max_entries", 200)
+        if isinstance(max_entries, bool) or not isinstance(max_entries, int) or not 1 <= max_entries <= 500:
+            raise StateOpsError("LIST_DIR_MAX_ENTRIES_INVALID")
+        return (
+            f"_p=pathlib.Path({p!r}); assert _p.is_dir(), 'NOT_DIRECTORY:{p}'; "
+            f"_rows=[]; "
+            f"[_rows.append({{'name':x.name,'path':str(x),'is_file':x.is_file(),'is_dir':x.is_dir(),'size':(x.stat().st_size if x.is_file() else None)}}) "
+            f"for x in sorted(_p.iterdir(), key=lambda z:z.name.casefold())[:{max_entries}]]; "
+            f"print('LIST_DIR:PASS:{p}:'+json.dumps(_rows,ensure_ascii=False,separators=(',',':')))"
+        )
+
+    if kind == "TEXT_REPLACE":
+        p = _path(op.get("path"))
+        old = op.get("old")
+        new = op.get("new")
+        replace_all = op.get("replace_all", True)
+        if not isinstance(old, str) or not old:
+            raise StateOpsError("TEXT_REPLACE_OLD_REQUIRED")
+        if not isinstance(new, str):
+            raise StateOpsError("TEXT_REPLACE_NEW_REQUIRED")
+        if not isinstance(replace_all, bool):
+            raise StateOpsError("TEXT_REPLACE_ALL_INVALID")
+        if len(old.encode("utf-8")) > MAX_TEXT_BYTES or len(new.encode("utf-8")) > MAX_TEXT_BYTES:
+            raise StateOpsError("TEXT_REPLACE_VALUE_TOO_LARGE")
+        count_expr = "-1" if replace_all else "1"
+        return (
+            f"_p=pathlib.Path({p!r}); _src=_p.read_text(encoding='utf-8'); "
+            f"assert {old!r} in _src, 'TEXT_REPLACE_OLD_NOT_FOUND'; "
+            f"_dst=_src.replace({old!r},{new!r},{count_expr}); "
+            f"_n=_p.write_text(_dst,encoding='utf-8'); _b=_p.read_bytes(); "
+            f"print('TEXT_REPLACE:PASS:{p}:chars='+str(_n)+':sha256='+hashlib.sha256(_b).hexdigest())"
+        )
+
     if kind == "READ_TEXT":
         p = _path(op.get("path"))
         max_chars = op.get("max_chars", 8000)
