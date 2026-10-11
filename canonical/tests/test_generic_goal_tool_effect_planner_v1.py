@@ -374,5 +374,17 @@ class GenericGoalToolEffectPlannerV1Tests(unittest.TestCase):
         self.assertIn("batch", resources)
 
 
+    def test_endpoint_profile_exposes_compound_operation_terms(self):
+        p = profile_endpoint({
+            "id":"opaque.messages.postMessage",
+            "method":"POST",
+            "url":"https://opaque.invalid/messages/postMessage",
+            "description":"Send a message to a channel.",
+        })
+        self.assertIn("postmessage", p["operation_terms"])
+        self.assertIn("post", p["operation_terms"])
+        self.assertIn("message", p["operation_terms"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
