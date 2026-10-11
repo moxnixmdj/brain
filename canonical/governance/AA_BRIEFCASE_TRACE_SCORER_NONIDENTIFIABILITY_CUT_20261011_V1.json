@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_TRACE_SCORER_NONIDENTIFIABILITY_CUT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PROVED_TWO_REMAINING_SCORE_TRACE_ROUTE_PREMISES_NOT_DERIVABLE_FROM_PUBLIC_CONTRACT_ALONE__ZERO_CREDIT",
+  "target": "AA-Briefcase v1.1 >= 1822 Elo",
+  "public_methodology": {
+    "version": "4.3.2",
+    "facts": [
+      "AA-Briefcase v1.1 fits each score-bearing scope with Crowd-BT.",
+      "Annotator quality eta is fitted per scope on past AA-Briefcase judgments.",
+      "Rubric grading is converted to synthetic head-to-head matches and included with analytical-quality and presentation scopes.",
+      "Headline Elo is anchored to GPT-5.5 (medium) at 1000."
+    ],
+    "sources": [
+      "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "https://artificialanalysis.ai/evaluations/aa-briefcase"
+    ]
+  },
+  "route_before": {
+    "proved": [
+      "SCORE_BEARING_SUFFICIENT_STATISTIC",
+      "FROZEN_REFERENCE_1822"
+    ],
+    "missing": [
+      "COMPLETE_REFERENCE_CANDIDATE_SCORE_BEARING_TRACE_EQUIVALENCE",
+      "SCORER_IMPLEMENTATION_EQUIVARIANCE_OR_UNIQUE_FIT"
+    ]
+  },
+  "theorem": {
+    "trace_nonidentifiability": {
+      "statement": "THE_BOUND_PUBLIC_INTERFACE_AND_SCORER TYPES DO_NOT DETERMINE THE PRIVATE SCORE_BEARING TRACE.",
+      "witness": "TWO WORLDS SHARE IDENTICAL PUBLIC TASK COUNT PROJECT COUNT JUDGE PANEL ANCHOR AND SCORER TYPES BUT DIFFER IN RUBRIC ANALYTICAL AND PRESENTATION VERDICTS.",
+      "consequence": "COMPLETE_REFERENCE_CANDIDATE_TRACE_EQUIVALENCE_CANNOT_BE_DERIVED_FROM_PUBLIC_TYPE INFORMATION ALONE."
+    },
+    "scorer_uniqueness_nonimplication": {
+      "crowd_bt": "Q=ETA*P_BT+(1-ETA)*(1-P_BT)",
+      "eta_half": "ETA=0.5 MAKES Q=0.5 FOR EVERY RATING__LIKELIHOOD FLAT__RATING NONUNIQUE.",
+      "eta_above_half_all_wins": "FOR AN ADMISSIBLE SUBJECT-VS-ANCHOR ALL-WINS GRAPH AND ETA>0.5__Q(r) IS STRICTLY INCREASING FOR ALL FINITE r AND APPROACHES ETA AS r->INFINITY__SO THE UNREGULARIZED LIKELIHOOD HAS A SUPREMUM BUT NO FINITE MAXIMIZER.",
+      "eta_below_half": "INCREASING LATENT STRENGTH DECREASES OBSERVED PREFERENCE__PUBLIC ETA RANGE ALONE DOES NOT SUPPLY MONOTONICITY.",
+      "consequence": "PUBLIC_CROWD_BT_SEMANTICS_PLUS_ANCHOR_DO_NOT_ENTAIL A UNIQUE FINITE SUBJECT RATING OR OWNER IMPLEMENTATION EQUIVARIANCE; ADDITIONAL FIT GRAPH REGULARIZATION INITIALIZATION OR EQUIVARIANCE FACTS ARE LOAD_BEARING."
+    }
+  },
+  "current_internal_only_projection": {
+    "exact_target_identity": true,
+    "score_bearing_sufficient_statistic": true,
+    "frozen_reference_1822": true,
+    "complete_reference_candidate_trace_equivalence": false,
+    "scorer_implementation_equivariance_or_unique_fit": false,
+    "score_trace_route_closed": false,
+    "complete_outcome_superdomain": true,
+    "top_support_route_closed": false,
+    "exact_1822_certified": false
+  },
+  "implementation": {
+    "runtime": "canonical/runtime/aa_briefcase_trace_scorer_nonidentifiability_v1.py",
+    "tests": "canonical/tests/test_aa_briefcase_trace_scorer_nonidentifiability_v1.py"
+  },
+  "scheduler_effect": {
+    "delete": [
+      "TRY_TO_PROVE_SCORER_UNIQUENESS_FROM_PUBLIC_CROWD_BT_NAME_AND_ANCHOR_ALONE",
+      "TRY_TO_INFER_PRIVATE_REFERENCE_SCORE_TRACE_FROM_PUBLIC_INTERFACE_TYPES",
+      "TRY_TO_CLOSE_SCORE_TRACE_SUBSTITUTION_WITH_CALLER_ASSERTED_TRACE_EQUALITY"
+    ],
+    "remaining_internal_reopen_classes": [
+      "NEW_INTERNAL_PROOF_THAT_BINDS_THE_ACTUAL_FROZEN_SCORE_TRACE_WITHOUT_PRIVATE_FACT_ASSUMPTION",
+      "NEW_INTERNAL_PROOF_OF_ACTUAL_OWNER_FIT_EQUIVARIANCE_OR_UNIQUENESS_FOR_THE_FROZEN_GRAPH",
+      "COMPLETE_UNIVERSAL_TOP_SUPPORT_ROUTE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ACTUAL_FROZEN_ETA_EQUALS_0.5",
+    "NO_CLAIM_ACTUAL_FROZEN_GRAPH_IS_ALL_WINS",
+    "COUNTEREXAMPLES_PROVE_NONENTAILMENT_FROM_CURRENT_PUBLIC_CONTRACT__NOT_ACTUAL_SCORER_STATE",
+    "NO_CLAIM_BRAIN_SCORE_IS_BELOW_OR_ABOVE_1822",
+    "NO_SCORE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
