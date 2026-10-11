@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_CURRENT_CLOSURE_FIXED_POINT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "SAME_INFORMATION_INTERNAL_ROUTES_EXHAUSTED__DONOR_FREE_CAPABILITY_VERIFIED__TARGET_SCORE_STILL_UNDECIDED__ZERO_CREDIT",
+  "target": {
+    "predicate": "FINANCE_AGENT_V2_GE_58_59",
+    "run_score_mass_threshold": 175.77
+  },
+  "canonical_capability_state": {
+    "donor_free_native_finance_core_on_main": true,
+    "current_main_native_core_independent_verification": "62/62 PASS",
+    "brain_native_vals_llm_boundary_exists": true,
+    "brain_native_vals_llm_external_general_purpose_model_runtime_cognition": 0,
+    "private_benchmark_score_credit": 0
+  },
+  "first_party_public_boundary": {
+    "vals_benchmark_updated": "2026-10-07",
+    "public_tasks": 27,
+    "private_validation_tasks": 450,
+    "test_tasks": 450,
+    "reported_results_use_test_only": true,
+    "runs_per_model": 3,
+    "reported_score_rule": "MEAN_OF_RUNS",
+    "within_run_equal_task_averaging_explicitly_bound": false,
+    "private_test_suite_id_publicly_published": false,
+    "public_runner_contains_private_scorer": false,
+    "public_runner_contains_test_suite_id": false,
+    "public_trajectory_surface_exposes_aggregation_contract": false,
+    "platform_access_requires_approval": true
+  },
+  "user_owned_authority_checks": {
+    "gmail_vals_reply_found": false,
+    "gmail_vals_api_key_or_suite_id_found": false,
+    "authorized_workstation_vals_api_key_process_env_present": false,
+    "authorized_workstation_vals_api_key_user_env_present": false,
+    "authorized_workstation_vals_api_key_machine_env_present": false,
+    "authorized_workstation_standard_user_directories_suite_config_found": false,
+    "scope_note": "LOCAL_SCAN_IS_BOUNDED_AND_DOES_NOT_PROVE_GLOBAL_CREDENTIAL_ABSENCE"
+  },
+  "proof_state": {
+    "public_only_nonidentifiability_cut": "canonical/governance/FINANCE_AGENT_V2_PUBLIC_ONLY_NONIDENTIFIABILITY_CUT_20261011_V1.json",
+    "public_only_evidence_decides_target": false,
+    "complete_hidden_semantics_required": false,
+    "unconditional_certificate_shape": "ANY_VALID_RUN_SCORE_LOWER_BOUNDS_L1_L2_L3_WITH_SUM_GE_175_77",
+    "task_mass_791_shortcut_authoritative": false,
+    "reason_task_mass_shortcut_not_authoritative": "WITHIN_RUN_EQUAL_TASK_AVERAGING_NOT_EXPLICITLY_BOUND",
+    "same_information_internal_target_closure_available": false
+  },
+  "remaining_admissible_wake_conditions": [
+    "AUTHENTIC_VALS_TEST_SCORE_RECEIPT_FOR_BRAIN",
+    "AUTHORIZED_PRIVATE_TEST_RUN_SCORE_RECEIPTS_WITH_LOWER_BOUND_SUM_GE_175_77",
+    "NEW_FIRST_PARTY_SCORER_OR_AGGREGATION_AUTHORITY_PLUS_SUFFICIENT_PRIVATE_SCORE_MASS",
+    "NEW_SCOPE_COMPLETE_HIDDEN_TASK_CLASS_THEOREM_THAT_ENTAILS_RUN_SCORE_LOWER_BOUND_SUM_GE_175_77"
+  ],
+  "explicitly_do_not_repeat_without_new_evidence": [
+    "SEARCH_PUBLIC_27_FOR_MORE_CANARIES_AS_PRIVATE_SCORE_PROOF",
+    "ASSUME_50_TEST_TASKS_PER_CATEGORY",
+    "ASSUME_EQUAL_TASK_AVERAGING_WITHIN_RUN",
+    "SEARCH_PUBLIC_FINANCE_AGENT_V2_REPO_FOR_SUITES_JSON_OR_TEST_SUITE_ID_AGAIN",
+    "REINTERPRET_ZERO_STEP_CREDENTIAL_PROBE_AS_SECRET_ABSENCE",
+    "USE_EXTERNAL_OR_GENERAL_PURPOSE_MODEL_RUNTIME_COGNITION_AND_CALL_IT_BRAIN_CAPABILITY",
+    "USE_UNOFFICIAL_SURROGATE_SCORE_AS_VALS_TEST_SCORE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_BRAIN_PASSES_FINANCE_AGENT_V2",
+    "NO_CLAIM_BRAIN_FAILS_FINANCE_AGENT_V2",
+    "NO_PRIVATE_TASK_OR_RUBRIC_CONTENT_ACCESSED",
+    "NO_CLAIM_NO_VALS_CREDENTIAL_EXISTS_ANYWHERE",
+    "NO_BENCHMARK_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "private_cases_exposed": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
