@@ -380,6 +380,7 @@ class BrainOSWorldAgent:
                 guest_verified = (
                     "ASSERT_PATH_EXISTS:PASS:" in output
                     or "ASSERT_TEXT_EQUALS:PASS:" in output
+                    or "ASSERT_TEXT_CONTAINS:PASS:" in output
                 )
 
             browser_verified = False
