@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_NATIVE_RESEARCH_SOLVER_V3_PUBLIC_RUNNER_VERIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_COMPOSITION__SYNTHETIC_ONLY__ZERO_HLE_SCORE_CREDIT",
+  "subject": {
+    "preexposure": {
+      "path": "canonical/governance/HLE_NATIVE_RESEARCH_SOLVER_V3_PREEXPOSURE_20261011_V1.json",
+      "git_blob_sha": "a6f83a98095e66c64df8e751043709d956e5c7dd"
+    },
+    "runtime": {
+      "path": "canonical/runtime/hle_native_research_solver_v3.py",
+      "git_blob_sha": "d719d1eb4d288e2c1062c43d74dd83ad1ba50684"
+    },
+    "tests": {
+      "path": "canonical/tests/test_hle_native_research_solver_v3.py",
+      "git_blob_sha": "551830b7c239f0176fe09c320162a1cc818dec44"
+    },
+    "question_contract_blob": "7acc064d880f266a28855eefe518ae40ff8ae49b",
+    "mcq_semantic_dependency_blob": "238ebf2ffe23e527fceae919cbc30453a290fdd2",
+    "evidence_candidate_blob": "4cd588212d12fdff726b6e153631dbef1282e14e"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2667,
+    "head_commit": "fac76421594889d547ae626d935f28466c9255d6",
+    "workflow_name": "Verify HLE Brain-native research solver V3",
+    "workflow_run_id": 38138872453,
+    "conclusion": "success"
+  },
+  "verified": [
+    "QUESTION_CONTRACT_TO_BOUNDED_QUERY_COMPOSITION",
+    "DISTINCT_HOST_DEDUPLICATION",
+    "RELATION_BOUND_CANDIDATE_AGGREGATION",
+    "TWO_HOST_AGREEMENT",
+    "CONFLICT_TIE_FAIL_CLOSED",
+    "SINGLE_HOST_FULL_COVERAGE_BOUNDED_ADMISSION",
+    "NEGATIVE_AND_MCQ_AND_SYMBOLIC_DEFER",
+    "ZERO_MODEL_ZERO_GOLD_ACCOUNTING"
+  ],
+  "hard_nonclaims": [
+    "NO_REAL_HLE_TASK_EXECUTED",
+    "NO_OPEN_WORLD_ANSWER_ADEQUACY_PROOF",
+    "NO_HLE_SCORE_CREDIT",
+    "NO_TARGET_GRADER_EQUIVALENCE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
