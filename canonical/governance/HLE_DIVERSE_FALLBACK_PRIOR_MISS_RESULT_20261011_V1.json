@@ -1,0 +1,120 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_DIVERSE_FALLBACK_PRIOR_MISS_RESULT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "DIVERSIFIED_SOURCE_FALLBACK_NO_RECALL_GAIN__BRANCH_DEMOTED",
+  "subject": {
+    "fallback_runtime_blob": "3d320fcb8899d1fe6d380bf1b4663a77b8f8833c",
+    "diagnostic_script_blob": "0a063cf9306d8d04c9bdf99d28d225e4df47df6c",
+    "baseline_run_id": 38145869751,
+    "baseline_hit_count": 15,
+    "baseline_sample_size": 25,
+    "prior_miss_rows": [
+      27,
+      32,
+      36,
+      37,
+      38,
+      39,
+      41,
+      43,
+      44,
+      45
+    ]
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "diag-hle-diverse-fallback-prior-misses-20261011-v1",
+    "head_sha": "9abb923f32eb770ccbf64932050925e4bcfa0b0f",
+    "workflow_run_id": 38155177042,
+    "workflow_job_id": 114516565210,
+    "conclusion": "success",
+    "artifact_id": 11708132197,
+    "artifact_digest": "sha256:08778299751612dc405c1d0a3b095c3b5a1cd604b0fd60fabc67732228e9dff4",
+    "trace_manifest_sha256": "34f3ae288902111b29b4d86bebc2bb605877e58243f58a27152851ce0f10415b"
+  },
+  "result": {
+    "fallback_recovered_prior_misses": 0,
+    "fallback_recovery_rate_on_prior_misses": 0,
+    "combined_union_hit_count": 15,
+    "combined_union_retrieval_any_hit_rate": 0.6,
+    "absolute_recall_gain": 0,
+    "diversified_backend_recovered_count": 0,
+    "diversified_backend_recovered_row_indices": [],
+    "backend_hit_counts": {},
+    "backend_health_counts": {
+      "BING_RSS:HEALTHY": 10,
+      "CROSSREF:DEGRADED": 7,
+      "CROSSREF:UNAVAILABLE_RETRYABLE": 3,
+      "DUCKDUCKGO_HTML:HEALTHY_EMPTY_ON_THIS_SAMPLE": 10
+    },
+    "retrieved_candidate_record_count": 231,
+    "prior_miss_gold_surfaces": [
+      {
+        "row_idx": 27,
+        "gold": "Brisbane",
+        "record_count": 36
+      },
+      {
+        "row_idx": 32,
+        "gold": "Nephew",
+        "record_count": 21
+      },
+      {
+        "row_idx": 36,
+        "gold": "Bunion",
+        "record_count": 13
+      },
+      {
+        "row_idx": 37,
+        "gold": "HENRI TOULOUSE LAUTREC",
+        "record_count": 36
+      },
+      {
+        "row_idx": 38,
+        "gold": "Krupp family",
+        "record_count": 28
+      },
+      {
+        "row_idx": 39,
+        "gold": "Isosceles",
+        "record_count": 8
+      },
+      {
+        "row_idx": 41,
+        "gold": "Harvard University",
+        "record_count": 31
+      },
+      {
+        "row_idx": 43,
+        "gold": "Reinhold Messner",
+        "record_count": 18
+      },
+      {
+        "row_idx": 44,
+        "gold": "Abraham Lincoln",
+        "record_count": 9
+      },
+      {
+        "row_idx": 45,
+        "gold": "Ilium",
+        "record_count": 31
+      }
+    ]
+  },
+  "causal_conclusion": [
+    "BACKEND_DIVERSIFICATION_ALONE_DOES_NOT_IMPROVE_RECALL_ON_THE_PRIOR_MISS_SET",
+    "BING_SEARCH_TRANSPORT_REMAINS_HEALTHY_BUT_RESULT_TITLE_SNIPPET_SURFACES_DO_NOT_CONTAIN_THE_GOLD_ON_THESE_TEN_CASES",
+    "DUCKDUCKGO_ADDS_NO_USABLE_SURFACE_ON_THIS_EPOCH",
+    "CROSSREF_IS_NOT_A_GENERAL_FACTUAL_RESCUE_ROUTE_AND_IS_PARTLY_UNAVAILABLE",
+    "NEXT_LAYER_TO_TEST_IS_ANSWER_BLIND_CANDIDATE_PAGE_MATERIALIZATION_AND_EVIDENCE_EXTRACTION_NOT_MORE_QUERY_SOURCE_TUNING"
+  ],
+  "protected_state": {
+    "hle_questions_consumed": 0,
+    "hle_gold_consumed": 0,
+    "external_model_calls_total": 0,
+    "model_dependency_count_total": 0,
+    "hle_score_credit": 0
+  },
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
