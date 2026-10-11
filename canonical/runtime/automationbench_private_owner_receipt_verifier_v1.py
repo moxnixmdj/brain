@@ -1,10 +1,14 @@
-"""Fail-closed verifier for an official AutomationBench private result receipt.
+"""Fail-closed verifier for the frozen AutomationBench >= 40 predicate.
 
-The frozen target is the 40.0% Claude Opus 5.5 AutomationBench result run by
-Zapier without fallback models. The public Opus source does not itself bind that
-result to an exact benchmark version or denominator, so this verifier requires an
-owner-attested exact reference match or comparability bridge instead of assuming
-that the current public v1.0.6 harness or a 657-task partner split is identical.
+The canonical acceptance contract requires an official AutomationBench leaderboard
+private-held-out result at or above 40.0%. Current first-party Zapier evidence binds
+the official leaderboard surface to v1.0.6, a 657-task held-out population, API mode,
+50 steps per task, and strict task_completed_correctly scoring.
+
+Fallback use is provenance, not an automatic rejection: Zapier's official leaderboard
+includes fallback configurations. If fallbacks or other components are used, the
+candidate receipt must attest that every execution component is bound into the frozen
+candidate identity.
 """
 from __future__ import annotations
 
@@ -15,6 +19,11 @@ from typing import Any, Mapping
 IN_SCHEMA = "PROJECT_BRAIN_AUTOMATIONBENCH_PRIVATE_OWNER_RECEIPT_V1"
 OUT_SCHEMA = "PROJECT_BRAIN_AUTOMATIONBENCH_PRIVATE_OWNER_RECEIPT_VERDICT_V1"
 TARGET_THRESHOLD_PERCENT = Decimal("40.0")
+TARGET_VERSION = "1.0.6"
+TARGET_DENOMINATOR = 657
+TARGET_TOOL_MODE = "api"
+TARGET_MAX_STEPS = 50
+TARGET_METRIC = "task_completed_correctly"
 _HEX64 = re.compile(r"^[0-9a-fA-F]{64}$")
 _ALLOWED_ISSUERS = {
     "ZAPIER",
@@ -71,10 +80,8 @@ def evaluate(receipt: Mapping[str, Any]) -> dict[str, Any]:
         errors.append("SCHEMA_INVALID")
     if receipt.get("benchmark_name") != "AutomationBench":
         errors.append("BENCHMARK_NAME_MISMATCH")
-
-    benchmark_version = receipt.get("benchmark_version")
-    if not isinstance(benchmark_version, str) or not benchmark_version:
-        errors.append("BENCHMARK_VERSION_REQUIRED")
+    if receipt.get("benchmark_version") != TARGET_VERSION:
+        errors.append("BENCHMARK_VERSION_MISMATCH")
 
     population = receipt.get("population")
     if not isinstance(population, Mapping):
@@ -82,22 +89,24 @@ def evaluate(receipt: Mapping[str, Any]) -> dict[str, Any]:
         population = {}
     if population.get("kind") != "PRIVATE_HELD_OUT":
         errors.append("PRIVATE_HELD_OUT_SCOPE_REQUIRED")
+    if population.get("official_leaderboard_population") is not True:
+        errors.append("OFFICIAL_LEADERBOARD_POPULATION_ATTESTATION_REQUIRED")
     if not _sha256(population.get("population_identity_sha256")):
         errors.append("PRIVATE_POPULATION_IDENTITY_SHA256_REQUIRED")
     denominator = _int(population.get("denominator"))
-    if denominator is None or denominator <= 0:
-        errors.append("DENOMINATOR_INVALID")
+    if denominator != TARGET_DENOMINATOR:
+        errors.append("PRIVATE_POPULATION_DENOMINATOR_MISMATCH")
 
-    tool_mode = receipt.get("tool_mode")
-    if not isinstance(tool_mode, str) or not tool_mode:
-        errors.append("TOOL_MODE_REQUIRED")
-    max_steps = _int(receipt.get("max_steps_per_task"))
-    if max_steps is None or max_steps <= 0:
-        errors.append("MAX_STEPS_REQUIRED")
-    if receipt.get("task_success_metric") != "task_completed_correctly":
+    if receipt.get("tool_mode") != TARGET_TOOL_MODE:
+        errors.append("TOOL_MODE_MISMATCH")
+    if receipt.get("max_steps_per_task") != TARGET_MAX_STEPS:
+        errors.append("MAX_STEPS_MISMATCH")
+    if receipt.get("task_success_metric") != TARGET_METRIC:
         errors.append("TASK_SUCCESS_METRIC_MISMATCH")
-    if receipt.get("fallback_models_used") is not False:
-        errors.append("NO_FALLBACK_MODELS_REQUIRED")
+
+    fallback_used = receipt.get("fallback_models_used")
+    if not isinstance(fallback_used, bool):
+        errors.append("FALLBACK_POLICY_MUST_BE_EXPLICIT_BOOLEAN")
 
     candidate = receipt.get("candidate")
     if not isinstance(candidate, Mapping):
@@ -105,6 +114,8 @@ def evaluate(receipt: Mapping[str, Any]) -> dict[str, Any]:
         candidate = {}
     if not _sha256(candidate.get("content_sha256")):
         errors.append("CANDIDATE_CONTENT_SHA256_REQUIRED")
+    if candidate.get("all_execution_components_bound") is not True:
+        errors.append("ALL_EXECUTION_COMPONENTS_MUST_BE_BOUND")
 
     owner = receipt.get("owner_attestation")
     if not isinstance(owner, Mapping):
@@ -112,6 +123,8 @@ def evaluate(receipt: Mapping[str, Any]) -> dict[str, Any]:
         owner = {}
     if owner.get("issuer_kind") not in _ALLOWED_ISSUERS:
         errors.append("OWNER_ISSUER_NOT_AUTHORIZED")
+    if owner.get("official_v1_0_6_private_leaderboard_surface") is not True:
+        errors.append("OFFICIAL_V1_0_6_PRIVATE_SURFACE_ATTESTATION_REQUIRED")
     if not isinstance(owner.get("receipt_path"), str) or not owner.get("receipt_path"):
         errors.append("OWNER_RECEIPT_PATH_REQUIRED")
     if not _sha256(owner.get("receipt_sha256")):
@@ -121,35 +134,10 @@ def evaluate(receipt: Mapping[str, Any]) -> dict[str, Any]:
     if not isinstance(owner.get("run_epoch"), str) or not owner.get("run_epoch"):
         errors.append("RUN_EPOCH_REQUIRED")
 
-    match = owner.get("target_reference_match")
-    if not isinstance(match, Mapping):
-        errors.append("TARGET_REFERENCE_MATCH_ATTESTATION_MISSING")
-        match = {}
-    if match.get("reference_system") != "Claude Opus 5.5":
-        errors.append("TARGET_REFERENCE_SYSTEM_MISMATCH")
-    if _dec(match.get("reference_score_percent")) != TARGET_THRESHOLD_PERCENT:
-        errors.append("TARGET_REFERENCE_SCORE_MISMATCH")
-    if match.get("reference_origin") != "ZAPIER_RUN_REPORTED_BY_ANTHROPIC":
-        errors.append("TARGET_REFERENCE_ORIGIN_MISMATCH")
-    if match.get("exact_epoch_or_owner_bridge") is not True:
-        errors.append("EXACT_REFERENCE_EPOCH_OR_OWNER_BRIDGE_REQUIRED")
-    if match.get("population_scope_comparable") is not True:
-        errors.append("REFERENCE_POPULATION_SCOPE_MATCH_REQUIRED")
-    if match.get("scoring_semantics_comparable") is not True:
-        errors.append("REFERENCE_SCORING_SEMANTICS_MATCH_REQUIRED")
-    if match.get("tool_protocol_comparable") is not True:
-        errors.append("REFERENCE_TOOL_PROTOCOL_MATCH_REQUIRED")
-    if match.get("step_limit_comparable") is not True:
-        errors.append("REFERENCE_STEP_LIMIT_MATCH_REQUIRED")
-    if match.get("fallback_policy_comparable") is not True:
-        errors.append("REFERENCE_FALLBACK_POLICY_MATCH_REQUIRED")
-    if not _sha256(match.get("binding_sha256")):
-        errors.append("REFERENCE_MATCH_BINDING_SHA256_REQUIRED")
-
     success_count = _int(receipt.get("success_count"))
     if success_count is None or success_count < 0:
         errors.append("SUCCESS_COUNT_INVALID")
-    elif denominator is not None and denominator > 0 and success_count > denominator:
+    elif success_count > TARGET_DENOMINATOR:
         errors.append("SUCCESS_COUNT_EXCEEDS_DENOMINATOR")
 
     reported = _dec(receipt.get("aggregate_score_percent"))
@@ -159,19 +147,16 @@ def evaluate(receipt: Mapping[str, Any]) -> dict[str, Any]:
     if errors:
         return _fail(*errors)
 
-    assert denominator is not None and denominator > 0
     assert success_count is not None
     assert reported is not None
-    assert isinstance(benchmark_version, str)
-    assert isinstance(tool_mode, str)
-    assert max_steps is not None
+    assert isinstance(fallback_used, bool)
 
-    recomputed = (Decimal(success_count) * Decimal(100)) / Decimal(denominator)
+    recomputed = (Decimal(success_count) * Decimal(100)) / Decimal(TARGET_DENOMINATOR)
     if abs(reported - recomputed) > Decimal("0.05"):
         return _fail("REPORTED_SCORE_INCONSISTENT_WITH_SUCCESS_COUNT_AND_DENOMINATOR")
 
     required_successes = _ceil(
-        (TARGET_THRESHOLD_PERCENT * Decimal(denominator)) / Decimal(100)
+        (TARGET_THRESHOLD_PERCENT * Decimal(TARGET_DENOMINATOR)) / Decimal(100)
     )
     predicate_satisfied = success_count >= required_successes
 
@@ -184,30 +169,32 @@ def evaluate(receipt: Mapping[str, Any]) -> dict[str, Any]:
         "decision": "PASS_LOCKED" if predicate_satisfied else "FAIL_LOCKED",
         "predicate_satisfied": predicate_satisfied,
         "benchmark_name": "AutomationBench",
-        "benchmark_version": benchmark_version,
+        "benchmark_version": TARGET_VERSION,
         "population_kind": "PRIVATE_HELD_OUT",
+        "official_leaderboard_population": True,
         "population_identity_sha256": population["population_identity_sha256"],
-        "denominator": denominator,
-        "tool_mode": tool_mode,
-        "max_steps_per_task": max_steps,
-        "task_success_metric": "task_completed_correctly",
-        "fallback_models_used": False,
+        "denominator": TARGET_DENOMINATOR,
+        "tool_mode": TARGET_TOOL_MODE,
+        "max_steps_per_task": TARGET_MAX_STEPS,
+        "task_success_metric": TARGET_METRIC,
+        "fallback_models_used": fallback_used,
         "candidate_content_sha256": candidate["content_sha256"],
+        "all_execution_components_bound": True,
         "owner_issuer_kind": owner["issuer_kind"],
         "owner_receipt_path": owner["receipt_path"],
         "owner_receipt_sha256": owner["receipt_sha256"],
         "owner_run_epoch": owner["run_epoch"],
-        "target_reference_binding_sha256": match["binding_sha256"],
         "success_count": success_count,
         "aggregate_score_percent_reported": str(reported),
         "aggregate_score_percent_recomputed": str(recomputed),
         "threshold_percent": str(TARGET_THRESHOLD_PERCENT),
         "threshold_success_count": required_successes,
         "rule": (
-            "PRIVATE_HELDOUT_ONLY__OWNER_CONTENT_ADDRESSED_RECEIPT__"
-            "EXACT_OPUS55_40_REFERENCE_EPOCH_MATCH_OR_OWNER_BRIDGE__"
-            "NO_PUBLIC_VERSION_OR_657_DENOMINATOR_ASSUMPTION__"
-            "NO_FALLBACK_MODELS__EXACT_SUCCESS_COUNT_ARITHMETIC"
+            "OFFICIAL_AUTOMATIONBENCH_V1_0_6_PRIVATE_LEADERBOARD_ONLY__"
+            "657_SCORE_BEARING_TASKS__API_MODE__50_STEPS__STRICT_TASK_COMPLETED_CORRECTLY__"
+            "FROZEN_CONTENT_ADDRESSED_CANDIDATE_WITH_ALL_EXECUTION_COMPONENTS_BOUND__"
+            "OWNER_CONTENT_ADDRESSED_RECEIPT__EXACT_SUCCESS_COUNT_ARITHMETIC__"
+            "NO_PUBLIC_600_SUBSTITUTION"
         ),
         "execution_authority": False,
         "promotion_authority": False,
