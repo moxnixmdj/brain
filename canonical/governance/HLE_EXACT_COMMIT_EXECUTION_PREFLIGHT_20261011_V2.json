@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_EXACT_COMMIT_EXECUTION_PREFLIGHT_20261011_V2",
+  "date": "2026-10-11",
+  "status": "INTERNAL_EXECUTION_PATH_READY__ONLY_EXTERNAL_BLOCKER_AUTHENTICATED_CAIS_HLE_ACCESS__ZERO_CREDIT",
+  "target_predicate": "HLE_TOOLS_GE_67_7",
+  "target_scope": {
+    "population": "FIXED_ORIGINAL_HLE_2500",
+    "population_scope_closure": "canonical/governance/HLE_TARGET_POPULATION_SCOPE_CLOSURE_20261011_V1.json",
+    "preferred_reproducible_revision": "5a81a4c7271a2a2a312b9a690f0c2fde837e4c29",
+    "excluded_populations": [
+      "HLE_PREVIEW_2700",
+      "HLE_ROLLING",
+      "HLE_DIAMOND_1000",
+      "PRIVATE_HELD_OUT_HLE"
+    ]
+  },
+  "runtime": {
+    "tool_adapter": "canonical/runtime/root2_hle_opus55_tool_adapter_v1.py",
+    "exact_commit_scorer": "canonical/runtime/hle_exact_commit_semantic_certificate_v1.py",
+    "exact_commit_scorer_git_blob_sha": "ee1e84b33cdea09049c7cf5284a357e98624b3f1",
+    "exact_commit_tests": "canonical/tests/test_hle_exact_commit_semantic_certificate_v1.py",
+    "exact_commit_tests_git_blob_sha": "f64185688799e35d5dac537f3764bfa5ea77a992"
+  },
+  "execution_sequence": [
+    "AUTHENTICATE_TO_HUGGINGFACE_AND_ACCEPT_CAIS_HLE_ACCESS_CONDITIONS",
+    "FETCH_FIXED_ORIGINAL_CAIS_HLE__PREFER_PINNED_REVISION_5a81a4c7271a2a2a312b9a690f0c2fde837e4c29",
+    "VERIFY_2500_UNIQUE_TASK_IDS_AND_REQUIRED_TASK_FIELDS",
+    "MATERIALIZE_SOLVER_VIEW_WITH_ANSWER_RATIONALE_AND_RATIONALE_IMAGE_PHYSICALLY_INACCESSIBLE",
+    "RUN_FIVE_COMPLETE_TRIALS_WITH_VERIFIED_HLE_TOOL_AND_CONTAMINATION_POLICY",
+    "FOR_EACH_OF_12500_SLOTS_EMIT_ONE_FINAL_ANSWER_STRING_AND_SHA256_COMMITMENT",
+    "IRREVOCABLY_SEAL_ALL_12500_COMMITMENT_RECORDS",
+    "ONLY_AFTER_GLOBAL_SEAL_ALLOW_SEPARATE_SCORER_PROCESS_TO_READ_HIDDEN_GOLD",
+    "RUN_ZERO_NORMALIZATION_EXACT_COMMIT_SCORER",
+    "PASS_IFF_EXACT_GOLD_IDENTITIES_GE_8463",
+    "CONTENT_ADDRESS_DATASET_IDENTITY_COMMITMENTS_VERDICTS_AND_AGGREGATE_RECEIPT"
+  ],
+  "threshold": {
+    "population": 2500,
+    "trials": 5,
+    "slots": 12500,
+    "minimum_exact_successes": 8463,
+    "certified_percent": 67.704,
+    "target_percent": 67.7
+  },
+  "gold_isolation_invariant": "SOLVER_PROCESS_CANNOT_READ_GOLD_OR_DERIVED_SOLUTION_CONTENT_BEFORE_GLOBAL_COMMITMENT_SEAL",
+  "remaining_external_blockers": [
+    "HUGGINGFACE_AUTHENTICATED_ACCESS_AND_CAIS_HLE_TERMS_ACCEPTANCE"
+  ],
+  "removed_from_critical_path": [
+    "PROPRIETARY_CLAUDE_OPUS_4_6_GRADER_ACCESS",
+    "CROSS_JUDGE_EQUIVALENCE_PROOF",
+    "ANTHROPIC_EXACT_HUGGINGFACE_COMMIT_RECEIPT",
+    "HLE_ROLLING_OR_DIAMOND_POPULATION_AMBIGUITY"
+  ],
+  "hard_nonclaims": [
+    "NO_TERMINAL_HLE_EXECUTION_HAS_OCCURRED",
+    "NO_HLE_SCORE_EXISTS_YET",
+    "NO_BENCHMARK_CONTENT_ACCESSED_BY_THIS_PREFLIGHT",
+    "NO_LLM_JUDGE_EQUIVALENCE_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
