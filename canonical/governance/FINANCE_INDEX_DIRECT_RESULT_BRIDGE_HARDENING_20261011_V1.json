@@ -1,0 +1,108 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_INDEX_DIRECT_RESULT_BRIDGE_HARDENING_20261011_V1",
+  "date": "2026-10-11",
+  "status": "BRIDGE_IMPLEMENTED__LOCAL_8_OF_8_PASS__DIRECT_RAW_SCORE_STILL_MISSING__ZERO_CREDIT",
+  "target": {
+    "predicate_id": "FINANCE_ACCOUNTING_INDEX_GE_61",
+    "benchmark": "Artificial Analysis Finance & Accounting Index",
+    "benchmark_version": "1.1",
+    "evaluator": "Artificial Analysis",
+    "threshold": 61,
+    "unit": "index_points",
+    "required_score_scale": "RAW_CAPABILITY_INDEX_POINTS"
+  },
+  "source_boundary": {
+    "public_identifiability_cut": "canonical/governance/FINANCE_INDEX_PUBLIC_IDENTIFIABILITY_AND_THRESHOLD_SEMANTICS_RECONCILIATION_20261011_V2.json",
+    "direct_threshold_runtime": "canonical/runtime/finance_index_direct_threshold_v1.py"
+  },
+  "implementation": {
+    "runtime": "canonical/runtime/finance_index_direct_result_bridge_v1.py",
+    "tests": "canonical/tests/test_finance_index_direct_result_bridge_v1.py",
+    "branch": "harden/finance-index-direct-result-bridge-20261011-v1"
+  },
+  "subject_contract": {
+    "schema": "PROJECT_BRAIN_FINANCE_INDEX_EVALUATION_SUBJECT_V1",
+    "exact_fields": [
+      "repository",
+      "git_commit_sha",
+      "execution_profile_git_blob_sha",
+      "configuration_git_blob_sha",
+      "execution_bundle_sha256"
+    ],
+    "rule": "RESULT_SUBJECT_SHA256_MUST_EQUAL_CANONICAL_SHA256_OF_THE_EXACT_SUBJECT_MANIFEST"
+  },
+  "result_contract": {
+    "schema": "PROJECT_BRAIN_FINANCE_INDEX_DIRECT_RESULT_V1",
+    "required_bindings": [
+      "EXACT_FINANCE_INDEX_V1_1_IDENTITY",
+      "RAW_CAPABILITY_INDEX_POINTS_SCALE",
+      "LITERAL_THRESHOLD_61",
+      "EXACT_SUBJECT_SHA256",
+      "EXTERNAL_RESULT_EVIDENCE_SHA256",
+      "RESULT_SOURCE_KIND",
+      "HTTPS_RESULT_SOURCE_URI"
+    ],
+    "rounded_display_score_allowed": false,
+    "owner_result_host_allowlist": [
+      "artificialanalysis.ai",
+      "www.artificialanalysis.ai"
+    ]
+  },
+  "authority_contract": {
+    "schema": "PROJECT_BRAIN_EXTERNAL_RESULT_AUTHORITY_RECEIPT_V1",
+    "accepted_source_kinds": [
+      "OWNER_EVALUATOR",
+      "INDEPENDENT_VERIFIER"
+    ],
+    "self_verification_rejected": true,
+    "authority_statement_binds": [
+      "benchmark",
+      "benchmark_version",
+      "evaluator",
+      "unit",
+      "score_scale",
+      "threshold",
+      "subject_sha256",
+      "brain_score",
+      "evidence_sha256",
+      "result_source_kind",
+      "result_source_uri"
+    ]
+  },
+  "local_falsification": {
+    "tests_run": 8,
+    "failures": 0,
+    "cases": [
+      "EXACT_RAW_61_PASSES_MATHEMATICAL_THRESHOLD",
+      "RAW_60_999_FAILS_THRESHOLD",
+      "ROUNDED_DISPLAY_61_REJECTED",
+      "WRONG_SUBJECT_REJECTED",
+      "FORGED_AUTHORITY_RECEIPT_REJECTED",
+      "SELF_VERIFIER_REJECTED",
+      "WRONG_OWNER_HOST_REJECTED",
+      "DISPLAY_ROUNDED_SCORE_SCALE_REJECTED"
+    ],
+    "environment": "LOCAL_PYTHON_REPLAY",
+    "independent_external_verification": false
+  },
+  "exact_remaining_event": {
+    "description": "ONE_AUTHENTICATED_DIRECT_RAW_FINANCE_INDEX_RESULT_BOUND_TO_THE_EXACT_BRAIN_SUBJECT_AT_OR_ABOVE_61__OR_THE_EXISTING_SIX_COMPONENT_DIRECT_THRESHOLD_ROUTE",
+    "direct_result_available": false
+  },
+  "hard_nonclaims": [
+    "NO_BRAIN_FINANCE_INDEX_SCORE_CREATED",
+    "NO_OWNER_RESULT_RECEIVED",
+    "NO_COMPONENT_LOWER_BOUND_CREATED",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT",
+    "NO_CLAIM_DISPLAYED_61_EQUALS_RAW_61"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false
+}
