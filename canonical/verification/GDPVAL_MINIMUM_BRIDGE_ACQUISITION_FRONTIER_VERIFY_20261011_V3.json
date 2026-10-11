@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_MINIMUM_BRIDGE_ACQUISITION_FRONTIER_VERIFY_V3",
+  "date": "2026-10-11",
+  "status": "PASS__PUBLIC_GRADING_PROTOCOL_DELTA_SHRINKS_BUT_DOES_NOT_CLOSE_IRREDUCIBLE_COMPARATIVE_EDGE__ZERO_CREDIT",
+  "subjects": [
+    {
+      "path": "canonical/governance/GDPVAL_V21_PUBLIC_GRADING_PROTOCOL_CLOSURE_20261011_V1.json",
+      "git_blob_sha": "9073cca98109ea85a89715f9f94545a51ceaf2fb"
+    },
+    {
+      "path": "canonical/governance/GDPVAL_MINIMUM_BRIDGE_ACQUISITION_FRONTIER_20261011_V3.json",
+      "git_blob_sha": "c267b2fab86e614ffa2ac946d20efc4128852ff4"
+    }
+  ],
+  "first_party_checks": {
+    "source": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+    "balanced_then_active_sampling_disclosed": true,
+    "random_ab_anonymization_disclosed": true,
+    "judge_panel_and_effort_settings_disclosed": true,
+    "task_reference_and_submission_context_disclosed": true,
+    "document_text_and_image_parsing_disclosed": true,
+    "tie_half_win_rule_disclosed": true,
+    "fixed_anchor_1600_disclosed": true,
+    "maximum_likelihood_bt_or_crowdbt_fit_disclosed": true,
+    "content_addressed_owner_judgement_graph_disclosed": false,
+    "authentic_brain_vs_opus55_owner_outcomes_disclosed": false,
+    "target_opus55_sufficient_scope_artifacts_disclosed": false,
+    "executable_exact_owner_fit_state_disclosed": false
+  },
+  "logical_checks": {
+    "can_rediscovering_public_scoring_architecture_close_target": false,
+    "can_public_rubric_self_scoring_substitute_for_owner_pairwise_quality": false,
+    "can_common_anchor_alone_bridge_frozen_1846_to_live_fit": false,
+    "does_actual_comparative_evidence_remain_load_bearing": true
+  },
+  "verified_frontier": {
+    "MATCHED_SCORE": false,
+    "TARGET_RELATIVE_PAIRWISE": false,
+    "ABSOLUTE_DOMINANCE": false,
+    "primary_unknown": "COMPARATIVE_BRAIN_VS_FROZEN_OPUS55_EVIDENCE_OR_A_THEOREM_THAT_ENTAILS_IT"
+  },
+  "hard_nonclaims": [
+    "NO_GDPVAL_SCORE_CREDIT",
+    "NO_OPUS_NONINFERIORITY",
+    "NO_EXACT_OWNER_SCORER_REPLAY_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

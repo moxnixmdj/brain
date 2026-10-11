@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_MINIMUM_BRIDGE_ACQUISITION_FRONTIER_V3",
+  "date": "2026-10-11",
+  "status": "CURRENT_FRONTIER__SCORING_ARCHITECTURE_BOUND__COMPARATIVE_EVIDENCE_IS_THE_PRIMARY_UNKNOWN__ZERO_CREDIT",
+  "frozen_target": {
+    "predicate": "BRAIN_PROFESSIONAL_WORK_CAPABILITY_GE_CAPABILITY_EVIDENCED_BY_FROZEN_OPUS55_GDPVAL_AA_V2_1_1846",
+    "frozen_reference_elo": 1846,
+    "rebase_forbidden": true
+  },
+  "predecessors": [
+    "canonical/governance/GDPVAL_MINIMUM_BRIDGE_ACQUISITION_FRONTIER_20261011_V2.json",
+    "canonical/governance/GDPVAL_V21_COMMON_ANCHOR_TRANSPORT_FALSIFIER_20261011_V1.json"
+  ],
+  "new_protocol_closure": {
+    "path": "canonical/governance/GDPVAL_V21_PUBLIC_GRADING_PROTOCOL_CLOSURE_20261011_V1.json",
+    "git_blob_sha": "9073cca98109ea85a89715f9f94545a51ceaf2fb",
+    "effect": "DEMOTES_DISCOVERY_OF_PAIRWISE_SAMPLING_JUDGE_PANEL_DOCUMENT_PARSING_AND_HIGH_LEVEL_BT_CROWDBT_AGGREGATION_FROM_CRITICAL_PATH"
+  },
+  "bridge_state": {
+    "MATCHED_SCORE": {
+      "available": false,
+      "remaining_minimum": "Authentic content-addressed Brain owner score receipt, or protocol-equivalent outcome graph plus exact-enough owner fit-state/epoch bridge.",
+      "common_anchor_only_bridge": false
+    },
+    "TARGET_RELATIVE_PAIRWISE": {
+      "available": false,
+      "known_now": [
+        "pairing strategy",
+        "A/B anonymization",
+        "three-judge panel identities and effort settings",
+        "judge context composition",
+        "document parsing modalities",
+        "comparison objective",
+        "high-level BT/Crowd-BT maximum-likelihood aggregation",
+        "tie handling",
+        "1600 fixed anchor"
+      ],
+      "remaining_minimum": [
+        "scope-sufficient authenticated target Opus 5.5 artifacts or owner pairwise outcomes",
+        "Brain artifacts on the same sufficient scope",
+        "owner-equivalent judge outcomes or a proof that a substitute evaluator relation is sufficient",
+        "fit-state information only to the extent required by the chosen certificate"
+      ]
+    },
+    "ABSOLUTE_DOMINANCE": {
+      "available": false,
+      "newly_demoted_missing_item": "NORMATIVE_AGGREGATION_FORMULA_IS_NOT_WHOLLY_OPAQUE",
+      "remaining_minimum": "A scope-complete quality order that entails the disclosed judges' pairwise preference relation across the target scope, including holistic/visual quality and instruction satisfaction."
+    },
+    "any_bridge_available": false
+  },
+  "critical_path": {
+    "primary": "ACQUIRE_OR_ENTAIL_COMPARATIVE_BRAIN_VS_FROZEN_OPUS55_EVIDENCE",
+    "secondary": "MATCHED_OWNER_SCORE_RECEIPT_IF_A_ZERO_SPEND_ROUTE_APPEARS",
+    "tertiary": "SCOPE_COMPLETE_ABSOLUTE_DOMINANCE_THEOREM",
+    "not_on_path": [
+      "remaining public task generation",
+      "rediscovering the disclosed judge panel",
+      "rediscovering balanced versus active sampling",
+      "rediscovering tie handling or the 1600 anchor",
+      "public-rubric self-scoring as owner quality",
+      "common-anchor-only historical score transport"
+    ]
+  },
+  "targeted_wake_conditions": [
+    "FIRST_PARTY_OPUS55_EXAMPLE_DELIVERABLE_OR_OWNER_PAIRWISE_OUTCOME_APPEARS",
+    "AUTHENTIC_BRAIN_OWNER_SCORE_OR_SUBMISSION_ROUTE_APPEARS",
+    "OWNER_JUDGEMENT_GRAPH_OR_EXACT_FIT_RECEIPT_APPEARS",
+    "NEW_THEOREM_ESTABLISHES_SCOPE_COMPLETE_JUDGE_PREFERENCE_DOMINANCE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_EXACT_OWNER_SCORER_STATE_IS_PUBLIC",
+    "NO_CLAIM_GDPVAL_GE_1846",
+    "NO_CLAIM_BRAIN_GE_OPUS55",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
