@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_ARC_AGI2_PUBLIC_EVAL_COMBINED_SOLVER_PREEXPOSURE_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_BEFORE_ANY_VALID_ARC_AGI2_AGGREGATE_RESULT__CONSERVATIVE_INCUMBENT_PLUS_INVENTOR",
+  "dataset": {
+    "repository": "arcprize/ARC-AGI-2",
+    "commit": "f3283f727488ad98fe575ea6a5ac981e4a188e49",
+    "split": "data/evaluation",
+    "declared_public_evaluation_task_count": 120,
+    "role": "ONE_SHOT_UNSEEN_GENERALIZATION_AUDIT"
+  },
+  "subject": {
+    "branch": "successor/general-visual-program-inventor-v1-20261011",
+    "combined_solver_path": "canonical/runtime/arc_conservative_combined_solver_v1.py",
+    "incumbent_path": "canonical/runtime/arc_novelty_compiler_v1.py",
+    "inventor_path": "canonical/runtime/finite_visual_program_inventor_v1.py",
+    "adapter_path": "canonical/runtime/arc_visual_program_invention_adapter_v1.py"
+  },
+  "selection_policy": [
+    "KEEP_DISTINCT_V16_CANDIDATE_OUTPUT_BUNDLES_IN_EXISTING_ORDER",
+    "IF_FEWER_THAN_TWO_DISTINCT_INCUMBENT_BUNDLES_EXIST__FILL_REMAINING_SLOTS_FROM_PROGRAM_INVENTOR",
+    "DO_NOT_EVICT_A_DISTINCT_INCUMBENT_BUNDLE_FOR_INVENTION"
+  ],
+  "frozen_search": {
+    "max_depth": 3,
+    "attempts": 2,
+    "max_semantic_states_per_depth": 4000,
+    "max_equivalent_programs_per_semantics": 4,
+    "max_grid_cells": 10000
+  },
+  "frozen_scoring_semantics": "FOR_EACH_TEST_INPUT__SUCCESS_IF_EITHER_OF_TWO_CANDIDATE_OUTPUTS_EXACTLY_MATCHES__TASK_SUCCESS_REQUIRES_SUCCESS_FOR_ALL_TEST_INPUTS",
+  "information_policy": {
+    "emit_task_ids": false,
+    "emit_task_grids": false,
+    "emit_task_programs": false,
+    "emit_per_task_results": false,
+    "allowed_output": "AGGREGATE_COUNTS_RATES_COSTS_AND_CONTENT_HASHES_ONLY",
+    "post_run_rule": "DO_NOT_SELECT_REPAIRS_FROM_ARC_AGI2_PUBLIC_EVAL_TASK_LEVEL_FAILURES"
+  },
+  "credit_policy": {
+    "positive_increment_role": "UNSEEN_PUBLIC_GENERALIZATION_EVIDENCE_FOR_PROGRAM_INVENTION_ABOVE_FROZEN_V16_INCUMBENT",
+    "no_private_score_claim": true,
+    "no_opus_parity_claim": true,
+    "no_terminal_credit": true
+  },
+  "incremental_spend_usd": 0,
+  "promotion_authority": false,
+  "terminal_credit_delta": 0
+}
