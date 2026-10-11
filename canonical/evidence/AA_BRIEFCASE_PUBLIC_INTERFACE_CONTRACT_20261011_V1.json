@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_PUBLIC_INTERFACE_CONTRACT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PUBLIC_OWNER_CONTRACT_BOUND__TASK_AND_GRADING_INTERFACE_TYPES_ONLY__ZERO_SCORE_CREDIT",
+  "source": {
+    "owner": "Artificial Analysis",
+    "methodology_url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+    "evaluation_url": "https://artificialanalysis.ai/evaluations/aa-briefcase",
+    "methodology_version": "4.3.2",
+    "observed_date": "2026-10-11"
+  },
+  "benchmark": {
+    "name": "AA-Briefcase",
+    "version": "1.1",
+    "official_task_count": 91,
+    "official_project_count": 4,
+    "private_task_contents": true
+  },
+  "execution_contract": {
+    "tasks_run_independently": true,
+    "task_inputs": [
+      "scenario_overview",
+      "week_overview",
+      "task_description",
+      "expected_output_filenames",
+      "shared_source_files",
+      "week_source_files"
+    ],
+    "max_turns": 500,
+    "network": "NO_OUTBOUND_CONNECTIVITY",
+    "tools": [
+      "code_exec",
+      "finish",
+      "abandon_task_finish",
+      "view_image_if_supported"
+    ],
+    "output": "FINAL_DELIVERABLE_FILES_PLUS_FINISH_SUMMARY_OR_ABANDON"
+  },
+  "grading_contract": {
+    "rubric": {
+      "kind": "BINARY_PASS_FAIL_PER_CHECK",
+      "verdicts": [
+        0,
+        1
+      ]
+    },
+    "analytical_quality": {
+      "kind": "PAIRWISE",
+      "verdicts": [
+        "A",
+        "TIE",
+        "B"
+      ]
+    },
+    "presentation": {
+      "kind": "PAIRWISE",
+      "verdicts": [
+        "A",
+        "TIE",
+        "B"
+      ]
+    },
+    "judge_panel_size": 3,
+    "verdict_decision": "ONE_JUDGE_SAMPLED_FROM_PANEL_WITH_BALANCED_SAMPLING",
+    "v1_1_fit": "EACH_SCOPE_FITTED_WITH_CROWD_BT",
+    "crowd_bt_eta_parameter_range": [
+      0,
+      1
+    ],
+    "headline": "COMBINED_ELO_AGGREGATING_RUBRIC_TASK_SUCCESS_ANALYTICAL_QUALITY_AND_PRESENTATION",
+    "anchor_model": "GPT-5.5 (medium)",
+    "anchor_elo": 1000
+  },
+  "proof_role": {
+    "sufficient_for": "DEFINING_A_TARGET_INDEPENDENT_SUPERDOMAIN_THAT_CONTAINS_EVERY_OFFICIAL_TASK_AND_EVERY_PUBLICLY_TYPED_SCORE_BEARING_OUTCOME",
+    "insufficient_for": [
+      "PRIVATE_TASK_CONTENT_ENUMERATION",
+      "PRIVATE_RUBRIC_SEMANTIC_ORDER",
+      "BRAIN_TOP_SUPPORT",
+      "JUDGE_MONOTONICITY",
+      "FROZEN_1822_SCORE_PROOF"
+    ]
+  },
+  "verification": {
+    "verified_against_public_owner_methodology": true,
+    "task_and_grading_interface_scope_complete": true
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
