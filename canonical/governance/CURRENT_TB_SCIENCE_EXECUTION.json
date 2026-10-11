@@ -1,24 +1,24 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_TB_SCIENCE_EXECUTION_POINTER_V2",
   "date": "2026-10-11",
-  "status": "RANK22_ZERO_MODEL_EFFECTIVE__EXACT_ONE_FILE_ACTIVATION_AUTHORIZED__ACTIVATION_ABSENT__UNREAD_UNSTARTED__ZERO_CURRENT_TRIALS",
+  "status": "RANK22_STARTED__ONE_TRIAL_CONSUMED__RESULT_PENDING__NO_RETRY",
   "current_result": {
     "path": "canonical/verification/TB_SCIENCE_RANK21_FINAL_ZERO_NONCREDITABLE_VERIFY_20261011_V1.json",
     "git_blob_sha": "3bbb3f32119e28f152c929a56ed43a70eda28b72"
   },
   "current_ledger": {
-    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V72.json",
-    "git_blob_sha": "a3d5221a0207489a7d42a7524bad8437aab25346"
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V73.json",
+    "git_blob_sha": "43f6a08903897bb28a49d67db1bd262b7b7c79ea"
   },
   "verification": {
-    "path": "canonical/verification/TB_SCIENCE_RANK22_PUBLIC_EFFECTIVE_AUTHORITY_VERIFY_20261011_V1.json",
-    "git_blob_sha": "b60018e161d67de823787d12a0b8903ba3c7419d"
+    "path": "canonical/verification/TB_SCIENCE_RANK22_DURABLE_START_VERIFY_20261011_V1.json",
+    "git_blob_sha": "7aac3fe8eedc2e50e0db6b9b3e41cb23b1cdf388"
   },
   "counts": {
-    "benchmark_trials_consumed": 19,
+    "benchmark_trials_consumed": 20,
     "consumed_successes_final": 0,
     "consumed_failures_final": 19,
-    "started_result_pending": 0,
+    "started_result_pending": 1,
     "finalized_slots": 19
   },
   "stale_parallel_run": {
@@ -29,7 +29,7 @@
   },
   "acceptance_credit_delta": 0,
   "terminal_credit_delta": 0,
-  "next": "CREATE_EXACT_RANK22_ACTIVATION_FILE_ON_BOUND_EXECUTION_BRANCH_AND_OPEN_PR__NO_MANUAL_MERGE",
+  "next": "FINALIZE_CURRENT_RANK22_RUN__NO_RETRY_OR_REPLACEMENT",
   "finalized_rank18": {
     "ledger_schedule_rank": 18,
     "slot_id": "terminal-bench-science/longitudinal-clinical-agent::trial-0",
@@ -622,5 +622,23 @@
     "activation_path": "capsules/tb_science_rank22_20261011_v1/ACTIVATE_RANK22_V1_PR.json",
     "manual_merge_forbidden": true,
     "activation_pr_merge_authority": false
+  },
+  "rank22_started": {
+    "slot_id": "terminal-bench-science/rv-astrometry-fitting::trial-0",
+    "task_digest": "sha256:8e086e1f7245067eaa9a67c259c1519204fa058d8664983066cd582ef258a1ea",
+    "logical_attempt_id": "3d130e1bca77cc5849a1bf40647f1e5c0964c1bffc5a6795069cbc7898afb674",
+    "workflow_run_id": 38142347152,
+    "workflow_job_id": 114478611498,
+    "activation_pull_request": 2681,
+    "durable_start_record_sha256": "669173df4e042551e0042cb45959cd781047a14a09927770efc0437948cbade3",
+    "task_read": true,
+    "task_started": true,
+    "durable_start_cas_acquired": true,
+    "benchmark_trials_consumed": 1,
+    "result_present": false,
+    "reward": null,
+    "retry_authority": false,
+    "replacement_authority": false,
+    "replay_authority": false
   }
 }
