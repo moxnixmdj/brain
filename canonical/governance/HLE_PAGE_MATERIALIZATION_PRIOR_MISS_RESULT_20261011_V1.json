@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_PAGE_MATERIALIZATION_PRIOR_MISS_RESULT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PAGE_MATERIALIZATION_NO_RECALL_GAIN__BRANCH_DEMOTED",
+  "subject": {
+    "baseline_run_id": 38145869751,
+    "baseline_hit_count": 15,
+    "baseline_sample_size": 25,
+    "prior_miss_rows": [
+      27,
+      32,
+      36,
+      37,
+      38,
+      39,
+      41,
+      43,
+      44,
+      45
+    ],
+    "fallback_runtime_blob": "3d320fcb8899d1fe6d380bf1b4663a77b8f8833c",
+    "diagnostic_script_blob": "ebdbe1171a5af9633b99ce782c53e5bd6c6e0fe8"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "diag-hle-materialize-prior-misses-20261011-v1",
+    "head_sha": "5df5b060472b3e93be6ecc52b531f8c28c1e32d1",
+    "workflow_run_id": 38155360459,
+    "workflow_job_id": 114517111159,
+    "conclusion": "success",
+    "artifact_id": 11708481908,
+    "artifact_digest": "sha256:54a32b79154caadd9279e21be2b12385a3e0cf59b3c69392f5ff3a7013acd9e0",
+    "trace_manifest_sha256": "03dd75eff834d6576f1b95a1aa2ed03b372925eaf74b0d28061cc2ba272cf00b"
+  },
+  "result": {
+    "selected_fetch_count": 34,
+    "successful_fetch_count": 26,
+    "failed_fetch_count": 8,
+    "fetch_status_counts": {
+      "FAILED:HTTPError": 8,
+      "PASS": 26
+    },
+    "search_surface_recovered_count": 0,
+    "materialized_body_recovered_count": 0,
+    "materialized_body_only_recovered_count": 0,
+    "new_union_recovered_count": 0,
+    "combined_union_hit_count": 15,
+    "combined_union_retrieval_any_hit_rate": 0.6,
+    "absolute_recall_gain": 0,
+    "backend_body_hit_counts": {}
+  },
+  "causal_conclusion": [
+    "BOUNDED_TOP_CANDIDATE_PAGE_MATERIALIZATION_DOES_NOT_RECOVER_THE_TEN_PRIOR_MISSES",
+    "THE_CURRENT_FAILURE_IS_NOT_EXPLAINED_BY_SEARCH_SNIPPET_TRUNCATION_ALONE",
+    "RETRIEVAL_TRANSPORT_AND_PAGE_FETCH_ARE_NOT_THE_HIGHEST_LEVERAGE_FRONTIER_FOR_THIS_MISS_SET",
+    "NEXT_FRONTIER_IS_QUERY_SEMANTICS_AND_CANDIDATE_SELECTION__THE_SYSTEM_IS_SEARCHING_THE_WRONG_INFORMATION_NEIGHBORHOOD"
+  ],
+  "protected_state": {
+    "hle_questions_consumed": 0,
+    "hle_gold_consumed": 0,
+    "external_model_calls_total": 0,
+    "model_dependency_count_total": 0,
+    "hle_score_credit": 0
+  },
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
