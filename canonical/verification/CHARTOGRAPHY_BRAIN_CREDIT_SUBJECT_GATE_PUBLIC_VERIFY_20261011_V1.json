@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_BRAIN_CREDIT_SUBJECT_GATE_PUBLIC_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS",
+  "brain_source": {
+    "branch": "fix/chartography-brain-ownership-boundary-20261011-v2",
+    "gate_path": "canonical/runtime/chartography_brain_credit_subject_gate_v1.py",
+    "gate_git_blob_sha": "a69d79f8420cbe58de942cefebc1bfef2aba1843",
+    "tests_path": "canonical/tests/test_chartography_brain_credit_subject_gate_v1.py",
+    "tests_git_blob_sha": "2722085ca820aab42f52c6f81a034a3447543594"
+  },
+  "verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2658,
+    "merged_commit_sha": "2cc4323dfd385ad6bd77bc79dcddf74877437aa8",
+    "workflow": "Verify Chartography Brain credit subject gate",
+    "workflow_run_id": 38137123017,
+    "workflow_job_id": 114463168172
+  },
+  "exact_mirror": {
+    "gate_blob_match": true,
+    "tests_blob_match": true
+  },
+  "checks": {
+    "py_compile_gate": "PASS",
+    "py_compile_tests": "PASS",
+    "adversarial_unittest_suite": "PASS",
+    "rejects_qwen_runtime_model_cognition": true,
+    "rejects_minicpm_runtime_model_dependency": true,
+    "rejects_wrapper_laundering": true,
+    "rejects_unknown_cognition_provenance": true,
+    "permits_donor_derived_only_after_zero_runtime_donor_dependency": true
+  },
+  "authority": {
+    "grants_chartography_score": false,
+    "grants_capability_credit": false,
+    "grants_acceptance_credit": false,
+    "grants_ownership_credit": false,
+    "grants_promotion_credit": false,
+    "grants_terminal_credit": false,
+    "purpose": "SUBJECT_ATTRIBUTION_GATE_ONLY"
+  },
+  "incremental_spend_usd": 0
+}
