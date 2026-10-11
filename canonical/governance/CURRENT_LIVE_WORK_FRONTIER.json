@@ -779,12 +779,12 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "36fdbc2fa83c68dbaf232d45134dd1a308869e69",
-    "status": "ACTIVE_RESEARCH__MUL_TOKEN_COMPACT_V79_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1581283,
-    "B_exec_raw_python_source_bytes": 1584043,
-    "qualification": "21160/21160",
-    "next": "Rerank exact V79 using spent NEXT84 only; make a new non-equivalence physical cut before touching QUAL_SUCCESSOR_NEXT85_20261011_V1.",
+    "observed_git_blob_sha": "4f3a5c1015a23d32702ec37a1305290857bca243",
+    "status": "ACTIVE_RESEARCH__V81_REPAIRED_FRONTIER__NEXT87_FROZEN_UNSPENT",
+    "raw_python_source_bytes": 1574321,
+    "B_exec_raw_python_source_bytes": 1577081,
+    "qualification": "NEXT86_21620_OF_21620__NO_ADAPTATION",
+    "next": "Rerank exact V81 using already-spent NEXT86 evidence; make a genuine new physical cut before executing frozen NEXT87.",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   },
