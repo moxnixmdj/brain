@@ -4503,6 +4503,80 @@
         "external_capability_provider_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "chart.raster.curve_x_at_y_query.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "adapter_module": "chart_curve_x_at_y_query_v1",
+      "entrypoint": "run",
+      "cost": 2,
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "chart",
+        "curve",
+        "series",
+        "threshold",
+        "intersection",
+        "axis",
+        "legend",
+        "raster"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "requires": [
+        "image.file.available",
+        "chart.series.label.available",
+        "chart.query.y_value.available"
+      ],
+      "provides": [
+        "chart.raster.curve.x_at_y"
+      ],
+      "limitations": [
+        "Requires a uniquely legend-bound color series and calibrated x/y axes.",
+        "Supports linear and log10 axis transforms with bounded raster segment interpolation only.",
+        "Multiple crossings, a flat curve overlapping the requested y over an interval, same-color multiple polylines, missing labels, out-of-range queries, and large segment gaps fail closed.",
+        "No chart-family/domain semantic interpretation and no Chartography score authority."
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "chart.raster.curve_x_at_y_query.v1",
+          "path": "${input.path}",
+          "label": "${input.label}",
+          "y_value": "${input.y_value}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "pass",
+          "value": true
+        }
+      },
+      "source": {
+        "type": "brain_native_deterministic_composition",
+        "adapter_path": "canonical/runtime/bound_capabilities/chart_curve_x_at_y_query_v1.py",
+        "composed_capabilities": [
+          "chart.raster.curve_value_query.v1",
+          "chart.raster.legend_style_binding.v1",
+          "chart.raster.scene_graph.v1",
+          "image.extract.ocr.tesseract.positioned.tsv"
+        ],
+        "external_general_purpose_model_runtime_dependency_count": 0
+      },
+      "verification": {
+        "independently_verified": true,
+        "exact_runtime_blob_sha": "04866f3aee99d9fd964f13571d8af278dfa6fe5e",
+        "exact_test_blob_sha": "325d125c3e55acab091be139a35ba3b9d1e57c25",
+        "receipt_path": "canonical/verification/CHART_CURVE_X_AT_Y_QUERY_V1_VERIFY_20261011.json",
+        "verifier_repository": "moxnixmdj/verification-capsule-runner",
+        "verifier_pull_request": 2715,
+        "verifier_merge_sha": "ed91f366ea9690bcfb4aa8406887155a51c027c8",
+        "workflow_run_id": 38153488048,
+        "workflow_job_id": 114511585709,
+        "author_tests_passed": 11,
+        "independent_falsification_passed": 6,
+        "heldout_chartography_cases_consumed": 0,
+        "model_dependency_count": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
