@@ -69,16 +69,17 @@ def _singular(token: str) -> str:
     return t
 
 
-_EMAIL = re.compile(r"\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b", re.I)
-_CHANNEL = re.compile(r"(?<!\\w)#([A-Za-z0-9][A-Za-z0-9_-]*)")
+_EMAIL = re.compile(r"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b", re.I)
+_CHANNEL = re.compile(r"(?<!\w)#([A-Za-z0-9][A-Za-z0-9_-]*)")
+_ANAPHOR = re.compile(r"\b(?:it|them|this|that|these|those|one|ones)\b", re.I)
 
 
 def _tokens(value: Any) -> list[str]:
     text = str(value or "")
     # Normalize schema identifiers as language without depending on any vendor:
     # foo.bar, foo_bar, foo-bar and camelCase all expose their lexical atoms.
-    text = re.sub(r"([a-z0-9])([A-Z])", r"\\1 \\2", text)
-    text = re.sub(r"[._/:{}\\[\\]()-]+", " ", text)
+    text = re.sub(r"([a-z0-9])([A-Z])", r"\1 \2", text)
+    text = re.sub(r"[._/:{}\[\]()-]+", " ", text)
     raw = re.findall(r"[A-Za-z][A-Za-z0-9]*", text)
     out: list[str] = []
     for token in raw:
@@ -93,11 +94,14 @@ def _tokens(value: Any) -> list[str]:
 def _resource_terms(value: Any) -> list[str]:
     text = str(value or "")
     out: list[str] = []
-    # Transport semantics matter for routing but should be inferred generically.
+    # Transport semantics matter for routing, but recipient/channel payload
+    # values themselves are grounding data rather than endpoint-selection nouns.
     if _EMAIL.search(text):
         out.append("email")
+        text = _EMAIL.sub(" ", text)
     if _CHANNEL.search(text):
         out.append("channel")
+        text = _CHANNEL.sub(" ", text)
     for t in _tokens(text):
         if t in _ALL_ACTION_TERMS or t in _GENERIC_RESOURCE:
             continue
@@ -180,8 +184,16 @@ def compile_goal_contract(goal: str) -> dict[str, Any]:
     if not isinstance(goal, str) or not goal.strip():
         raise ValueError("GOAL_REQUIRED")
     intents: list[dict[str, Any]] = []
+    pending_context: list[str] = []
     for clause_index, clause in enumerate(_split_clauses(goal)):
         hits = _action_hits(clause)
+        if not hits:
+            for term in _resource_terms(clause):
+                if term not in pending_context:
+                    pending_context.append(term)
+            pending_context = pending_context[-12:]
+            continue
+
         for hit_index, (start, action, trigger, forbidden) in enumerate(hits):
             # Give each action its own lexical scope instead of assigning every
             # noun in a long compound clause to every action.
@@ -189,6 +201,19 @@ def compile_goal_contract(goal: str) -> dict[str, Any]:
             scope_end = hits[hit_index + 1][0] if hit_index + 1 < len(hits) else len(clause)
             scope = clause[scope_start:scope_end]
             terms = _resource_terms(scope)
+
+            # Resolve only shallow, explicit anaphora from the immediately
+            # preceding non-action context. This is lexical carry-forward, not
+            # application-specific reasoning.
+            if hit_index == 0 and pending_context and (
+                _ANAPHOR.search(scope) is not None or len(terms) <= 1
+            ):
+                merged: list[str] = []
+                for term in [*pending_context, *terms]:
+                    if term not in merged:
+                        merged.append(term)
+                terms = merged
+
             intent_id = "intent_" + str(len(intents))
             intents.append({
                 "id": intent_id,
@@ -199,6 +224,7 @@ def compile_goal_contract(goal: str) -> dict[str, Any]:
                 "resource_terms": terms,
                 "forbidden": forbidden,
             })
+        pending_context = []
     if not intents:
         return {
             "schema": SCHEMA,
@@ -236,9 +262,8 @@ def _flatten_schema_text(endpoint: Mapping[str, Any]) -> str:
 
 def _endpoint_action(method: str, text: str, operation_hint: str = "") -> str:
     method = method.upper()
-    low = text.lower()
-    hint = operation_hint.lower()
     hint_tokens = set(_tokens(operation_hint))
+    full_tokens = set(_tokens(text))
 
     if method == "GET":
         return "observe"
@@ -250,13 +275,16 @@ def _endpoint_action(method: str, text: str, operation_hint: str = "") -> str:
     # knowing any application or benchmark vocabulary.
     if hint_tokens & {"search","find","list","get","lookup","query","read","retrieve"}:
         return "observe"
-    if any(x in low for x in ("send", "deliver", "notify", "message", "reply")):
+    if full_tokens & {"send","deliver","notify","message","reply"}:
         return "notify"
-    if any(x in low for x in (
-        "addtask","addtag","addlabel","add task","add tag","add label",
-        "attach","assign","move ","link ","associate","membership","copyto","copy to",
-    )):
+
+    relation_words = {"attach","assign","move","link","associate","membership","copy"}
+    if full_tokens & relation_words or (
+        "add" in full_tokens
+        and bool(full_tokens & {"task","tag","label","member","membership","section"})
+    ):
         return "associate"
+
     if hint_tokens & {"update","patch","edit","set","mark","close","flag"}:
         return "update"
     if hint_tokens & {"create","append","insert","submit","schedule","open"}:
