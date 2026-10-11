@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_LIVE_AUTHORITY_V4_RECONCILIATION_VERIFY_V1",
+  "date": "2026-10-11",
+  "status": "PASS__11_OF_11_EXACT_POINTER_AND_TRUTH_REPLAY__ZERO_CREDIT",
+  "subjects": {
+    "current_terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "e0d03cee8e05f532b4f0e21d7a347c115d1fea35",
+      "pointer_revision": 135
+    },
+    "current_gdpval_capability_information": {
+      "path": "canonical/governance/CURRENT_GDPVAL_CAPABILITY_INFORMATION.json",
+      "git_blob_sha": "5bde2e4a5d435e0bbf11146c927b1af09b8ab605"
+    },
+    "priority_reclassification": {
+      "path": "canonical/governance/GDPVAL_ESCAPE_PROGRESS_V4_PRIORITY_RECLASSIFICATION_20261011_V1.json",
+      "git_blob_sha": "fc2b9e65369f57b4fffaf9ec3a31a33e64f2bd25"
+    }
+  },
+  "checks": {
+    "authority_points_to_current_info": true,
+    "authority_points_to_priority_reclassification": true,
+    "frozen_target_1846": true,
+    "minimum_bridge_frontier_v4_current": true,
+    "old_92_of_220_mechanical_route_not_first_dispatch": true,
+    "old_92_of_220_mechanical_route_reusable_post_candidate": true,
+    "remaining_public_220_generation_default_off": true,
+    "w_cover_still_open": true,
+    "w_quality_still_open": true,
+    "current_info_frozen_target_matches": true,
+    "reclassification_explicitly_demotes_old_gap_b_first_dispatch": true
+  },
+  "result": {
+    "checks_total": 11,
+    "checks_passed": 11,
+    "checks_failed": 0
+  },
+  "hard_nonclaims": [
+    "NO_W_COVER_CREDIT",
+    "NO_W_QUALITY_CREDIT",
+    "NO_GDPVAL_SCORE_CREDIT",
+    "NO_OPUS_NONINFERIORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
