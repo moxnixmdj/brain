@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_PARTITION_13_EQUALS_O10_ACTIVE_PLUS_Q2_ACTIVE_PLUS_TB1_PARKED__ZERO_AUTHORITY_INFLATION__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_CUT_20261011_V1.json",
+    "git_blob_sha": "ee4e082c02b2da84bb029bc0fe92660135aa2b49"
+  },
+  "source_bindings": {
+    "oq": [
+      "canonical/governance/CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1.json",
+      "eb42b8c1c1e506f351ab6ea941b74791fb37894b"
+    ],
+    "manifest": [
+      "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json",
+      "f3a566a982dcd867c583eafd24c6f5dd3baa0530"
+    ]
+  },
+  "independent_verification": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "result": "PASS TWO_ENGINE_PARTITION 13=10O+2Q+1PARKED ZERO_AUTHORITY_INFLATION"
+  },
+  "proved": [
+    "CURRENT_ESCAPE_ROW_SET_PARTITIONS_EXACTLY_INTO_TEN_ACTIVE_OBJECTIVE_ROWS_TWO_ACTIVE_QUALITATIVE_ROWS_AND_ONE_PARKED_TB_SCIENCE_ROW",
+    "THE_TWO_ACTIVE_ENGINE_SETS_ARE_DISJOINT_AND_TOGETHER_WITH_PARKED_TB_COVER_ALL_THIRTEEN_ROWS",
+    "NO_ACTIVE_GAP_B_WORK_IS_SCHEDULED",
+    "NO_NEW_PRIMITIVE_IS_REQUIRED_BY_THE_CURRENT_CUT",
+    "NO_EXECUTION_PROMOTION_ACCEPTANCE_OR_TERMINAL_AUTHORITY_IS_INFLATED"
+  ],
+  "hard_nonclaims": [
+    "NO_ACTIVE_ACCEPTANCE_ROW_CLOSED",
+    "NO_CLAIM_TWO_EXTERNAL_FACTS_SUFFICE",
+    "NO_CC_R3_OR_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
