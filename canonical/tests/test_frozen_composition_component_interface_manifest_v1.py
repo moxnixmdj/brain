@@ -24,7 +24,8 @@ manifest = load(manifest_path)
 derived = evaluate(protocols)
 
 assert derived["status"] == "LITERAL_INTERFACE_MANIFEST_READY__FAMILY_AND_RECEIPT_BINDINGS_OPEN", derived
-assert manifest["status"] == "CANDIDATE_LITERAL_EXTRACTION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT", manifest
+assert manifest["status"] == "INDEPENDENT_PUBLIC_RUNNER_PASS__12_LITERAL_INTERFACES_EXPLICIT__FAMILY_AND_RECEIPT_BINDINGS_OPEN__ZERO_CREDIT", manifest
+assert manifest["independent_verification"]["status"].startswith("INDEPENDENT_PUBLIC_RUNNER_PASS"), manifest
 assert manifest["authority"]["protocols"]["git_blob_sha"] == git_blob_sha(protocol_path), manifest
 
 for key in (
