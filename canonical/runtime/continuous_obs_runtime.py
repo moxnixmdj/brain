@@ -226,6 +226,8 @@ def authorize_information_action(
     tool_kind=str(action.get("tool_kind") or "")
     if kind not in INFORMATION_ACTIONS:
         errors.append("INFORMATION_ACTION_KIND_INVALID")
+    if kind=="PLANNER" or tool_kind=="planner":
+        errors.append("EXTERNAL_MODEL_COGNITION_PLANNER_FORBIDDEN")
     info=context.get("information_policy") if isinstance(context,dict) else None
     if isinstance(info,dict):
         mode=info.get("mode")
