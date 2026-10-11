@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__ZERO_CREDIT_UNTIL_VERIFIED",
+  "action_id": "CHARTOGRAPHY_POSITIONED_OCR_AXIS_BINDING_V1",
+  "mission": "Extend Brain-owned model-independent professional chart capability by composing already-verified positioned Tesseract OCR with the verified raster scene graph and robust linear/log axis calibration.",
+  "source_frontier": "canonical/governance/CHARTOGRAPHY_CAPABILITY_PROOF_FRONTIER_V1.json",
+  "reuses": [
+    "canonical/runtime/bound_capabilities/image_ocr_tesseract_positioned.py",
+    "canonical/runtime/bound_capabilities/chart_raster_scene_graph_v1.py"
+  ],
+  "creates": [
+    "canonical/runtime/bound_capabilities/chart_positioned_ocr_axis_binding_v1.py",
+    "canonical/tests/test_chart_positioned_ocr_axis_binding_v1.py"
+  ],
+  "external_general_purpose_model_runtime_dependency_count": 0,
+  "donor_general_purpose_model_runtime_dependency_count": 0,
+  "hidden_chartography_cases_consumed": 0,
+  "benchmark_score_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "promotion_requires": "INDEPENDENT_POST_FREEZE_VERIFICATION_AND_CAUSAL_SCOPE_BINDING",
+  "hard_nonclaims": [
+    "NO_CHARTOGRAPHY_GE_89_SCORE",
+    "NO_GENERAL_CHART_SEMANTIC_AUTHORITY",
+    "NO_LEGEND_BINDING_AUTHORITY",
+    "NO_HELDOUT_COVERAGE_CLAIM"
+  ]
+}
