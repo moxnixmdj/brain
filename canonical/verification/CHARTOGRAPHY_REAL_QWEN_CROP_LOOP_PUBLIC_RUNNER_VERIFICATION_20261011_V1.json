@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_REAL_QWEN_CROP_LOOP_PUBLIC_RUNNER_VERIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__REAL_QWEN3VL4B_BOUND_IN_BOUNDED_CROP_TOOL_LOOP__PIXEL_EXACT_TOOL_TESTS_PASS__ZERO_BENCHMARK_CASES__ZERO_CREDIT",
+  "subject": {
+    "verifier_repo": "moxnixmdj/verification-capsule-runner",
+    "verifier_head_sha": "eecb90477f555b9ba3ed8b076906a5b5495067bd",
+    "branch": "successor/chartography-real-crop-loop-v1",
+    "workflow": ".github/workflows/chartography-real-qwen-crop-loop-v1.yml",
+    "workflow_run_id": 38110211182,
+    "workflow_job_id": 114384022805,
+    "artifact_id": 11691559007,
+    "artifact_sha256": "79c48a2d0f4d4dcc04c9b10fc9009b38a29412ca64ed07d323db7c66cfa46971"
+  },
+  "model": {
+    "repo": "Qwen/Qwen3-VL-4B-Instruct-GGUF",
+    "model_file": "Qwen3VL-4B-Instruct-Q4_K_M.gguf",
+    "model_sha256": "66358cb18bb6b3b1b6675aa412c7a88ef01d228f481184d13668e5201c730a0a",
+    "projector_file": "mmproj-Qwen3VL-4B-Instruct-Q8_0.gguf",
+    "projector_sha256": "30ba2c7dd3127a4561b6cba9d13d0f711c91bdb38742e2f56d73c8cb596bd06d",
+    "llama_cpp_commit": "a7fb71fab83b474a0892b9a05aaa3a8ddca2729b"
+  },
+  "exact_canonical_mechanism_replay": {
+    "sprite": "brain-pq-p1-v2-independent-verify-20261010",
+    "tests": [
+      "canonical.tests.test_chartography_crop_tool_v1",
+      "canonical.tests.test_chartography_with_tools_adapter_v1"
+    ],
+    "result": "2_TESTS_PASS",
+    "elapsed_s": 0.04
+  },
+  "public_runner_result": {
+    "exact_model_download_hashes_passed": true,
+    "pinned_llama_cpp_build_passed": true,
+    "first_model_action": "BOUNDED_CROP_REQUEST",
+    "crop_calls": 1,
+    "second_model_final_answer": "blue",
+    "expected_answer": "blue",
+    "pass": true
+  },
+  "causal_effect": {
+    "real_visual_model_bound_to_crop_loop": true,
+    "crop_tool_mechanism_gap_closed": true,
+    "chartography_89_score_proved": false,
+    "remaining_delta": "AUTHENTIC_CONTENT_ADDRESSED_BRAIN_SCORE_GE_89_UNDER_BOUND_ANTHROPIC_WITH_TOOLS_PROTOCOL_OR_STRONGER_SCOPE_COMPLETE_ACCEPTANCE_CERTIFICATE"
+  },
+  "hard_nonclaims": [
+    "NO_CHARTOGRAPHY_HELDOUT_BENCHMARK_TASK_WAS_CONSUMED",
+    "NO_CLAIM_QWEN3VL4B_SCORES_89_OR_HIGHER",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "row_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
