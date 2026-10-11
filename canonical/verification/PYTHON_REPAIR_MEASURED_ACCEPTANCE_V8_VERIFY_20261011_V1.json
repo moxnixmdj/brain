@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_PYTHON_REPAIR_MEASURED_ACCEPTANCE_V8_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_TWO_SPRITE_PASS__ATOMIC_REPAIR_REALIZATION_MEASUREMENT_ACCEPTANCE_VERIFIED__ZERO_BENCHMARK_CREDIT",
+  "base_main_commit": "59b143e8b937d96681caf6eb8afd01a1a2a00a94",
+  "branch": "coding-v7-measured-acceptance-current-20261011-v1",
+  "exact_blobs": {
+    "controller_runtime": "0c9578042949e483e00136cd166c9209a110008d",
+    "controller_tests": "7cd60d37aa8e10496fa9ae9a0c73484bd2609d5a",
+    "provenance_guided_repair_runtime": "0b779992f229dbe27f665a8f68c89cbb5a39fc28",
+    "repository_measurement_runtime": "8f5870418de5396b7ae82fbdceb5c51c70f3104c",
+    "measured_objective_acceptance_runtime": "36f4d62e6d7c785e7da7ef90b511eafafc4c9919",
+    "raw_task_objective_acceptance_runtime": "c138171744406edd8e75e4867634febdb596014b",
+    "bound_capability_registry": "d80c1f42eaf84e323afb2c74a02361f892430998"
+  },
+  "replay": {
+    "primary": {
+      "carrier": "SPRITES:brain-capability-first-scheduler-verify-20261008-v1",
+      "passed": 8,
+      "total": 8
+    },
+    "independent": {
+      "carrier": "SPRITES:brain-canonical-apply-slice-verify-20261011-v1",
+      "passed": 8,
+      "total": 8
+    }
+  },
+  "verified": [
+    "SINGLE_EDIT_REPAIR_IS_REALIZED_ONLY_IN_ISOLATED_CANDIDATE_WORKSPACE",
+    "COUPLED_CROSS_FILE_REPAIR_IS_REALIZED_AND_MEASURED",
+    "REALIZED_PATCH_ORIGINAL_AND_CANDIDATE_SHA256_ARE_VERIFIED",
+    "ORIGINAL_SOURCE_BYTES_REMAIN_RESTORED",
+    "REALIZED_CANDIDATE_TESTS_AND_PARSE_STATE_ARE_CONTENT_ADDRESSED_MEASUREMENTS",
+    "OBJECTIVE_ACCEPTANCE_STOP_CAN_CLEAR_ONLY_FROM_MEASUREMENT_RECEIPT",
+    "OBJECTIVELY_FALSE_REQUIREMENT_FALSIFIES_THE_REPAIRED_CANDIDATE",
+    "SEMANTIC_RAW_TASK_RESIDUAL_BLOCKS_STOP_AFTER_OTHERWISE_SUCCESSFUL_REPAIR",
+    "NO_REPAIR_IN_BOUNDED_SEARCH_DOES_NOT_FABRICATE_ACCEPTANCE",
+    "ZERO_EXTERNAL_GENERAL_PURPOSE_MODEL_RUNTIME_COGNITION",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "closes": [
+    "V7_REPAIR_OUTPUT_TO_MEASUREMENT_BOUND_ACCEPTANCE_COMPOSITION_GAP"
+  ],
+  "remaining": [
+    "ARBITRARY_RAW_SOFTWARE_REQUEST_TO_SOUND_EXECUTABLE_ACCEPTANCE_SEMANTICS",
+    "ARBITRARY_DEPTH_AND_ARBITRARY_EDIT_PATCH_CONSTRUCTION",
+    "NON_PYTHON_AND_CROSS_LANGUAGE_GENERALIZATION",
+    "GENERAL_MERGEABILITY_AND_HIDDEN_REQUIREMENT_COVERAGE",
+    "LITERAL_FRONTIERCODE_SCORE_EVIDENCE"
+  ],
+  "authority": {
+    "capability_credit": "BOUNDED_PYTHON_ATOMIC_REPAIR_TO_OBJECTIVE_MEASURED_ACCEPTANCE",
+    "frontiercode_score_credit": 0,
+    "terminal_credit": 0,
+    "general_software_engineering_completeness": false
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_NATURAL_LANGUAGE_SEMANTIC_COMPLETENESS",
+    "NO_ARBITRARY_PATCH_SEARCH_COMPLETENESS",
+    "NO_NON_PYTHON_SUPPORT",
+    "NO_TEST_PASS_EQUALS_GENERAL_MERGEABILITY",
+    "NO_FRONTIERCODE_SCORE_OR_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "verification_origin_branch": "coding-v7-measured-acceptance-current-20261011-v1",
+  "promotion_rebase": {
+    "base_main_commit": "e892c842b549de4467c777d3c378bb988c56dd69",
+    "promotion_branch": "coding-v8-rebased-current-20261011-v1",
+    "promoted_bound_capability_registry_git_blob_sha": "ac73831e319a3af0e6921a0500bd1931b62c4254",
+    "runtime_and_test_blobs_unchanged_from_independent_replay": true,
+    "v6_dependency_blobs_unchanged": true
+  }
+}
