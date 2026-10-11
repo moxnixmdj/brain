@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_REFERENCE_INSTRUCTION_AUTHENTICITY_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_108_TASK_HASH_MANIFEST_IDENTITY_PLUS_RUNTIME_REFERENCE_ATTESTATION_CLOSES_PUBLIC_INSTRUCTION_AUTHENTICITY__HIDDEN_IMPLEMENTATION_AND_EVALUATOR_BYTES_OPEN__ZERO_CREDIT",
+  "subject": {
+    "runtime": [
+      "canonical/runtime/osworld_reference_instruction_authenticity_v1.py",
+      "837ed2b7da8373c6a135786d832a45fba794531b"
+    ],
+    "tests": [
+      "canonical/tests/test_osworld_reference_instruction_authenticity_v1.py",
+      "8df9aa99288b2c748269150bb4562ca2c8119ddd"
+    ]
+  },
+  "evidence": {
+    "official_identity": [
+      "canonical/governance/OSWORLD_V21_PINNED_TASK_UNIVERSE_IDENTITY_20261010_V1.json",
+      "73ba2a1066388e7886b3360f445f3b18fbdbfa3d"
+    ],
+    "public_reference_semantics": [
+      "canonical/governance/OSWORLD_V21_PUBLIC_REFERENCE_SEMANTIC_COVERAGE_20261011_V1.json",
+      "c5b23b765b9d18624b4d2c6af1c56613eae2ad98"
+    ],
+    "independent_reference_replay": [
+      "canonical/verification/OSWORLD_V21_PUBLIC_REFERENCE_SEMANTIC_COVERAGE_INDEPENDENT_VERIFY_20261011_V1.json",
+      "482e9d59fdfe6a624488ae78f9fd461134ed5c00"
+    ],
+    "official_hash_manifest_sha256": "c54d428329be5ca72742a6becd49ee83cf739df5dea429bba182e1f3f21badfb",
+    "public_scorecard_hash_manifest_sha256": "c54d428329be5ca72742a6becd49ee83cf739df5dea429bba182e1f3f21badfb",
+    "official_task_count": 108,
+    "scorecard_matched_task_count": 108,
+    "independent_unique_tasks_replayed": 108,
+    "independent_instruction_task_record_identity_checks": 108
+  },
+  "independent_verification": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "result": "PASS__4_OF_4",
+    "mutation_kills": [
+      "TASK_HASH_MANIFEST_MISMATCH",
+      "INSTRUCTION_TASK_RECORD_IDENTITY_COUNT_107_OF_108",
+      "MISSING_RUNTIME_INTEGRITY_ATTESTATION"
+    ]
+  },
+  "proved": [
+    "THE_PUBLIC_REFERENCE_INSTRUCTION_CORPUS_IS_AUTHENTICATED_AS_RUNTIME_OBSERVATION_FROM_A_RUN_SET_ATTESTING_THE_EXACT_OFFICIAL_OSWORLD_V21_108_FILE_HASH_MANIFEST",
+    "ALL_108_PUBLIC_INSTRUCTION_FILES_HAVE_MATCHED_TASK_RECORD_IDENTITY_CHECKS_ON_AN_INDEPENDENT_SECOND_CARRIER",
+    "BROAD_SEARCH_FOR_OSWORLD_INSTRUCTION_SEMANTICS_IS_CLOSED"
+  ],
+  "remaining": [
+    "PUBLIC_INSTRUCTIONS_DO_NOT_REVEAL_ALL_HIDDEN_TASK_CLASS_OR_EVALUATOR_IMPLEMENTATION_BYTES",
+    "MATCHED_BRAIN_SCORING_STILL_REQUIRES_MATERIAL_OFFICIAL_TASK_AND_ASSET_ACCESS_OR_AN_OWNER_EQUIVALENT_EXECUTION_SCORER",
+    "BRAIN_PROTOCOL_EQUIVALENT_HARNESS_AND_AUTHENTIC_PARTIAL_SCORE_GE_81_8_OR_STRONGER_FIXED_BAR_CERTIFICATE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_PUBLIC_REFERENCE_DATASET_IS_OWNER_SIGNED",
+    "NO_CLAIM_HIDDEN_EVALUATOR_IMPLEMENTATION_IS_RECONSTRUCTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_OSWORLD_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
