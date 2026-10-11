@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_BYTES_ACTIVE_STATE_V1",
-  "status": "ACTIVE_RESEARCH__MPF_POW_INT_SQUARE_ONLY_V52_FRONTIER__SUCCESSOR_READY_WITH_NEXT59_PERSISTENCE_GATE",
+  "status": "ACTIVE_RESEARCH__MPF_POW_INT_SQUARE_ONLY_V52_FRONTIER__SUCCESSOR_READY",
   "date": "2026-10-11",
   "mission_lock": "Find the minimum resource-feasible executable description of the required capability set conditional on already-owned Brain substrate.",
   "governing_laws": [
@@ -27,13 +27,13 @@
     "promotion_credit_from_this_record": 0
   },
   "current_bottleneck": {
-    "subsystem": "POST_V52_NEXT59_DURABILITY_GATE_THEN_RERANK",
+    "subsystem": "POST_V52_RERANK_PENDING",
     "last_structural_cut": "MPF_POW_INT_SQUARE_ONLY_SPECIALIZATION_V52",
     "required_surface": [
       "complete bounded exact-symbolic route"
     ],
-    "next_action": "PERSIST_OR_BYTE_IDENTICALLY_REGENERATE_FROZEN_NEXT59_TO_BOUND_SHA256__THEN_RERANK_EXACT_V52_USING_SPENT_NEXT58_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_SPENDING_NEXT59",
-    "note": "Whole-body mpf_pow_int deletion was falsified by two fresh NEXT57 roots cases. Complete NEXT57 profiling localized the required branch to n=2 square only. Corrected V52 passes spent NEXT57 and fresh NEXT58 completely. NEXT59 definition and generated hash are frozen, but Library persistence failed at the Files/container session boundary."
+    "next_action": "RERANK_EXACT_V52_USING_SPENT_NEXT58_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_SPENDING_QUAL_SUCCESSOR_NEXT59_20261011_V1",
+    "note": "V52 passes spent NEXT57 and fresh NEXT58. NEXT59 is durably frozen by a content-addressed deterministic reconstruction recipe independently reproduced byte-identically. Regenerate and hash-check only after the next physical cut, immediately before spending it."
   },
   "rejected_do_not_reopen_without_new_evidence": [
     "parameter count as terminal metric",
@@ -73,7 +73,7 @@
     "clean_room_execution": "PASS__CLEAN_ARCHIVE_SECOND_EXECUTION_CARRIER_NEXT58_15180_OF_15180",
     "archive_replay": "PASS__CLEAN_ARCHIVE_SECOND_EXECUTION_CARRIER_NEXT58_15180_OF_15180",
     "action_taken": "Rejected whole-function mpf_pow_int fail-close after two fresh NEXT57 roots failures; profiled the complete NEXT57 bounded route, preserved only exact n=2 square behavior with zero/inf/nan handling, and fail-closed all other integer exponents. Rebased this independent cut onto canonical V51. Complete spent NEXT57 and fresh NEXT58 pass.",
-    "physical_next_step": "Close NEXT59 durable persistence without spending it; then continue from 1,717,827 bytes using spent NEXT58 only and make a new physical cut before NEXT59.",
+    "physical_next_step": "Continue from 1,717,827 bytes using spent NEXT58 only; rerank and make a new physical cut before reconstructing/spending NEXT59.",
     "predecessor_v51_superseded": true,
     "spent_NEXT57_replay": "14950/14950",
     "fresh_NEXT58_replay": "15180/15180",
@@ -103,12 +103,15 @@
     "seed_derivation": "FIRST_32_BITS_BIG_ENDIAN_SHA256_OF_QUAL_ID_PIPE_V52_MANIFEST_IDENTITY",
     "per_operation_budget": 1340,
     "corpus_sha256": "5c7cf733614d58648dbe4fbfc855e7451651c652555eb895fcdcef39df780c92",
+    "corpus_bytes": 1822027,
     "generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
-    "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0_EXACT_ROUTE_EXPECTED_OUTPUTS__DETERMINISTIC_PARAMETER_STREAM",
-    "status": "FROZEN_UNSPENT__CONTENT_HASH_BOUND__DURABLE_PERSISTENCE_BLOCKED__MUST_PERSIST_OR_REGENERATE_BYTE_IDENTICAL_BEFORE_NEXT_PHYSICAL_CUT",
-    "spent": false,
-    "library_path": null,
-    "library_file_id": null
+    "deterministic_reconstruction": "canonical/governance/BYTES_QUAL_SUCCESSOR_NEXT59_DETERMINISTIC_RECONSTRUCTION_20261011_V1.json",
+    "deterministic_reconstruction_git_blob_sha": "5f4cb16bc2593384ee61603207fe7a3533b41f22",
+    "reconstruction_verification": "canonical/verification/BYTES_QUAL_SUCCESSOR_NEXT59_DETERMINISTIC_RECONSTRUCTION_VERIFY_20261011_V1.json",
+    "reconstruction_verification_git_blob_sha": "4b70ce32434b2a471e8948d4c66baf5897629145",
+    "generation_provenance": "PINNED_GENERATOR_EXACT_ROUTE_SEMANTIC_DIGEST_SEED_AND_RUNTIME_VERSIONS__TWO_GENERATIONS_CONTENT_HASH_IDENTICAL",
+    "status": "FROZEN_UNSPENT__DURABLE_BY_VERIFIED_CONTENT_ADDRESSED_DETERMINISTIC_RECONSTRUCTION__REGENERATE_AND_REQUIRE_EXACT_HASH_BEFORE_USE",
+    "spent": false
   },
   "durable_artifact_persistence": {
     "candidate_manifest_and_measurements": "PERSISTED_IN_CANONICAL_GITHUB_EVIDENCE",
@@ -117,12 +120,14 @@
     "transform": "canonical/research/bytes/tools/conservative_mpf_pow_int_square_only_prune_v52.py",
     "exact_route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
     "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
-    "v52_archive_status": "VERIFIED_LOCALLY__LIBRARY_UPLOAD_FAILED_CONTAINER_SESSION_BOUNDARY__RECONSTRUCTIBLE_FROM_V51_PLUS_EXACT_GUARDED_TRANSFORM",
+    "v52_archive_status": "RECONSTRUCTIBLE_FROM_DURABLE_V51_PLUS_EXACT_BASE_TARGET_GUARDED_V52_TRANSFORM__LOCAL_SEALED_ARCHIVE_HASH_RECORDED",
     "v52_archive_bytes": 267716,
     "v52_archive_sha256": "51be5680134e60c03a4e0c03a743810364fe640bad31f34d1db7c15dc8aec357",
-    "next59_status": "GENERATED_AND_HASH_BOUND__LIBRARY_UPLOAD_FAILED_CONTAINER_SESSION_BOUNDARY",
+    "next59_status": "DURABLE_BY_VERIFIED_CONTENT_ADDRESSED_DETERMINISTIC_RECONSTRUCTION__TWO_GENERATIONS_BYTE_IDENTICAL",
     "next59_sha256": "5c7cf733614d58648dbe4fbfc855e7451651c652555eb895fcdcef39df780c92",
-    "rule": "V52 is reconstructible from durable V51 plus exact guarded transform. No V53 physical cut or NEXT59 spend until the bound NEXT59 corpus is durably persisted or regenerated byte-identical."
+    "rule": "V52 is reconstructible from durable V51 plus exact guarded transform. NEXT59 is durably frozen by a verified deterministic recipe and precommitted content hash; make the next physical cut using spent NEXT58 only, then regenerate NEXT59 and require exact identity before spending.",
+    "next59_reconstruction": "canonical/governance/BYTES_QUAL_SUCCESSOR_NEXT59_DETERMINISTIC_RECONSTRUCTION_20261011_V1.json",
+    "next59_reconstruction_verification": "canonical/verification/BYTES_QUAL_SUCCESSOR_NEXT59_DETERMINISTIC_RECONSTRUCTION_VERIFY_20261011_V1.json"
   },
   "predecessor_fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RECOVERY_EXECUTION_20261010_V1.json",
   "reserved_predecessor_qualification_qual8": {
@@ -180,5 +185,10 @@
     "independent_second_carrier_verified": false,
     "carrier": "CHATGPT_CONTAINER_PLUS_SEPARATE_PYTHON_EXECUTION_CARRIER_CLEAN_ARCHIVE_EXTRACTION",
     "promotion_credit_delta": 0
+  },
+  "next_frozen_reconstruction_verification": {
+    "path": "canonical/verification/BYTES_QUAL_SUCCESSOR_NEXT59_DETERMINISTIC_RECONSTRUCTION_VERIFY_20261011_V1.json",
+    "git_blob_sha": "4b70ce32434b2a471e8948d4c66baf5897629145",
+    "status": "PASS__INDEPENDENT_REGENERATION_15410_CASES__EXACT_SHA256_MATCH__UNSPENT"
   }
 }
