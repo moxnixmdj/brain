@@ -34,6 +34,7 @@
     "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
     "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
     "canonical/laws/CAPABILITY_TRANSFER_VS_COGNITION_OUTSOURCING_LAW_V1.md",
+    "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
     "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
     "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md"
   ],
@@ -253,7 +254,19 @@
     "donor_derived_skill_verifier_must_not_run_before_transfer_gate_pass": true,
     "transfer_gate_pass_never_grants_reuse_by_itself": true,
     "donor_derived_skill_requires_independent_skill_verification_after_transfer_gate": true,
-    "temporal_provenance_laundering_forbidden": true
+    "temporal_provenance_laundering_forbidden": true,
+    "external_contribution_three_way_classification_required": true,
+    "external_contribution_boundary_law_path": "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+    "external_knowledge_must_be_non_authoritative_observation_or_evidence": true,
+    "external_knowledge_target_solving_policy_or_answer_forbidden": true,
+    "acquisition_donor_must_remain_transfer_gated_until_donor_deletion": true,
+    "runtime_cognition_provider_forbidden_regardless_of_label_hosting_or_cost": true,
+    "ambiguous_external_contribution_classification_fails_closed": true,
+    "external_contribution_classification_precedence": [
+      "TARGET_SOLVING_COGNITION=>K3_FORBIDDEN",
+      "DONOR_DERIVED_LEARNED_MECHANISM=>K2_TRANSFER_GATED",
+      "SOURCE_BOUND_NON_AUTHORITATIVE_FACT_OR_EVIDENCE=>K1_INFORMATION_ONLY"
+    ]
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
