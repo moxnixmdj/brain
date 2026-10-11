@@ -285,12 +285,36 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         self.assertFalse(current["activation_observed_blob_is_load_bearing"])
         self.assertNotIn("git_blob_sha", current)
 
+        drifted = []
         for source_id, row in policy["sources"].items():
             source = ROOT / row["path"]
             self.assertTrue(source.is_file(), row["path"])
             if source_id == "current_r2":
                 continue
-            self.assertEqual(_git_blob_sha(source), row["git_blob_sha"], row["path"])
+            actual = _git_blob_sha(source)
+            if actual != row["git_blob_sha"]:
+                drifted.append(
+                    {
+                        "path": row["path"],
+                        "policy_git_blob_sha": row["git_blob_sha"],
+                        "current_git_blob_sha": actual,
+                    }
+                )
+        self.assertEqual(
+            pointer["scalar_fallback_state"],
+            "BLOCKED_R2_POLICY_SOURCE_LOCK_DRIFT__PRIMARY_V17_ACTIVE",
+        )
+        self.assertEqual(
+            pointer["r2_mechanism_policy"]["currentness_state"],
+            "FAIL_CLOSED_IMMUTABLE_SOURCE_DRIFT",
+        )
+        self.assertEqual(
+            sorted(drifted, key=lambda row: row["path"]),
+            sorted(
+                pointer["r2_mechanism_policy"]["drifted_sources"],
+                key=lambda row: row["path"],
+            ),
+        )
 
         r2 = json.loads(
             (ROOT / "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json").read_text()
@@ -455,7 +479,7 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
             ),
         )
 
-    def test_v7_scalar_contract_preserved_and_v9_is_current_primary(self):
+    def test_v7_scalar_contract_preserved_v9_history_and_v17_is_current_primary(self):
         v7 = json.loads(
             (
                 ROOT
@@ -466,6 +490,12 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
             (
                 ROOT
                 / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V9.json"
+            ).read_text()
+        )
+        v17 = json.loads(
+            (
+                ROOT
+                / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261011_V17.json"
             ).read_text()
         )
         pointer = json.loads(
@@ -490,11 +520,19 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         )
         self.assertEqual(
             pointer["authoritative_activation"],
-            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V9.json",
+            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261011_V17.json",
         )
         self.assertEqual(
             mission["current_development_scheduler"]["activation"],
-            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V9.json",
+            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261011_V17.json",
+        )
+        self.assertEqual(
+            v17["decision_value_authority"]["rule"],
+            "ROWS_WHOSE_CURRENT_MODE_IS_WAKE_GATED_EVENT_DRIVEN_OR_PARKED_MUST_NOT_CONSUME_SAME_INFORMATION_WORK__ONLY_CURRENT_NONWAKE_ROWS_ENTER_GAP_A_EVIDENCE_SCHEDULING",
+        )
+        self.assertEqual(
+            v17["current_projection"]["gap_a_actionable_row_ids"],
+            [],
         )
         self.assertEqual(
             pointer["scalar_fallback_runtime"],
