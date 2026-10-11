@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_V3",
+  "date": "2026-10-11",
+  "status": "ACTIVE_ZERO_REALITY_SEMANTIC_REUSE_REFINEMENT__SEALED_FIELD_PROJECTION_COMPOSITION_INDEPENDENTLY_VERIFIED__PURE_GUARD_REPAIRED_31_OF_31__ZERO_CREDIT",
+  "objective": "PRESERVE_VERIFIED_ZERO_REALITY_SEMANTIC_WORK_ACROSS_UNRELATED_AUTHORITY_CHURN_WITHOUT_ALLOWING_UNDECLARED_AUTHORITY_READS_OR_WEAKENING_LIVE_CONSEQUENTIAL_AUTHORITY",
+  "supersedes_for_current_zero_reality_reuse": {
+    "path": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V2.json",
+    "git_blob_sha": "e8c07cdf964d5aa8872c9f1dfaf3d2b45a32ca8b"
+  },
+  "clocks": {
+    "semantic_validity": "EXACT_WORK_PRODUCT_PLUS_EXPLICIT_SEMANTIC_DEPENDENCIES__DEPENDENCIES_MAY_BE_FIELD_SCOPED_ONLY_THROUGH_A_VERIFIED_PURE_OR_SEALED_PROJECTION_CONSUMER",
+    "scheduler_authority": "LIVE_GLOBAL_AUTHORITY_EPOCH"
+  },
+  "field_scoped_reuse_modes": {
+    "pure_projection_consumer": {
+      "runtime": {
+        "path": "canonical/runtime/pure_projection_consumer_guard_v1.py",
+        "git_blob_sha": "9b623c5219cfe4b6037323fd5e8fc4dbd2b32907"
+      },
+      "rule": "CONSUMER_SOURCE_MUST_PASS_THE_STATIC_PURE_SUBSET__EXECUTION_RECEIVES_JSON_REMATERIALIZED_PROJECTION_AND_FIXED_SAFE_BUILTINS_ONLY"
+    },
+    "sealed_general_consumer": {
+      "projection_gate": {
+        "path": "canonical/runtime/field_scoped_authority_projection_gate_v1.py",
+        "git_blob_sha": "770174d3f70e18d35dfe18449c613df0259c6dd2"
+      },
+      "consumer": {
+        "path": "canonical/runtime/sealed_field_projection_consumer_v1.py",
+        "git_blob_sha": "348cc225d0a114ef73e549e368c6554272fcb598"
+      },
+      "closed_world_manifest": {
+        "path": "canonical/runtime/honesty_closed_world_input_manifest_v1.py",
+        "git_blob_sha": "0b7b84ed9b9cf77558a88b9871209d5d8bf7d8c9"
+      },
+      "zero_ambient_launcher": {
+        "path": "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+        "git_blob_sha": "6e687527e9c4da82fb5d974a729aaa263ee73ea8"
+      },
+      "rule": "CONSUMER_AND_ALL_HELPER_BYTES_MUST_BE_EXPLICIT_MANIFEST_INPUTS__ONLY_DECLARED_FIELD_PROJECTION_IS_MATERIALIZED__HOST_REPOSITORY_IS_NOT_MOUNTED"
+    }
+  },
+  "field_scoped_reuse_requires": [
+    "ZERO_REALITY_DERIVATION_ONLY",
+    "EXPLICIT_RFC6901_POINTER_SET_FOR_EVERY_AUTHORITY_SOURCE",
+    "NO_DUPLICATE_OR_PARENT_CHILD_OVERLAPPING_POINTERS",
+    "DECLARED_VALUES_RESOLVE_AND_CONTENT_HASH_EXACTLY",
+    "CONSUMER_USES_EITHER_VERIFIED_PURE_SUBSET_OR_EXACT_CLOSED_WORLD_SEALED_EXECUTION",
+    "ALL_CONSUMER_HELPER_AND_RUNNER_BYTES_ARE_CONTENT_ADDRESSED",
+    "NO_UNBOUND_DYNAMIC_OR_EXTERNAL_DEPENDENCY",
+    "RESULT_REMAINS_ZERO_AUTHORITY_UNTIL_SEPARATE_LIVE_SCHEDULER_RECHECK"
+  ],
+  "fallback_rule": "IF_FIELD_SCOPED_PROJECTION_OR_CONSUMER_SEAL_CANNOT_BE_PROVED__USE_THE_EXISTING_EXACT_CONTENT_ADDRESSED_DEPENDENCY_CLOSURE_AND_FAIL_CLOSED_ON_SOURCE_DRIFT",
+  "live_authority_boundary": {
+    "fresh_reality_action": "LIVE_GLOBAL_AUTHORITY_RECHECK_REQUIRED",
+    "promotion_or_active_authority_mutation": "LIVE_GLOBAL_AUTHORITY_RECHECK_REQUIRED",
+    "irreversible_external_action": "LIVE_GLOBAL_AUTHORITY_RECHECK_REQUIRED",
+    "execution_authority": "NOT_GRANTED_BY_SEMANTIC_REUSE",
+    "terminal_authority": "NOT_GRANTED_BY_SEMANTIC_REUSE"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/SEALED_FIELD_PROJECTION_STACK_INDEPENDENT_VERIFY_20261011_V1.json",
+    "git_blob_sha": "140d746ec9c61c130db26ba7148980a78bbef570",
+    "unit_tests": "31_OF_31_PASS_AFTER_TDD_REPAIR",
+    "real_namespace_composition": "PASS",
+    "host_repository_visible_to_child": false
+  },
+  "correction_from_v2": "V2_REQUIRED_COMPLETE_CONTENT_ADDRESSED_DEPENDENCY_CLOSURE_BUT_COULD_FALSELY_STALE_ZERO_REALITY_WORK_WHEN_AN_UNRELATED_FIELD_IN_A_MONOLITHIC_AUTHORITY_DOCUMENT_CHANGED__V3_ALLOWS_FIELD_LEVEL_DEPENDENCIES_ONLY_WHEN_UNDECLARED_READS_ARE_STRUCTURALLY_EXCLUDED",
+  "hard_nonclaims": [
+    "NO_CLAIM_ARBITRARY_EXISTING_VERIFIERS_ARE_SAFE_TO_FIELD_SCOPE",
+    "NO_CLAIM_FIELD_SCOPING_CAN_BE_INFERRED_FROM_OBSERVED_READS_ALONE",
+    "NO_REUSE_OF_FRESH_REALITY_RESULTS_ACROSS_AUTHORITY_DRIFT",
+    "NO_AUTOMATIC_PROMOTION_OR_ACTIVE_AUTHORITY_MUTATION",
+    "NO_EXECUTION_FRESH_REALITY_CAPABILITY_ACCEPTANCE_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "execution_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "fresh_reality_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "terminal_authority": false
+}
