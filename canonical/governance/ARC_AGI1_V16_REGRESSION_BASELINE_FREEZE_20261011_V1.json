@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_ARC_AGI1_V16_REGRESSION_BASELINE_FREEZE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_PUBLIC_TRAINING_BASELINE__REGRESSION_AND_ACQUISITION_ONLY__ZERO_GENERALIZATION_CREDIT",
+  "subject": {
+    "branch": "successor/arc-novelty-compiler-v16-20261011",
+    "runtime_path": "canonical/runtime/arc_novelty_compiler_v1.py",
+    "runtime_blob_sha": "f48469c2d54b6698cadabef05f9078dd5902853c",
+    "commit_sha": "dca481885f9cd001bac3c3a56103199896b4ed24",
+    "official_arc_agi1_corpus_commit": "399030444e0ab0cc8b4e199870fb20b863846f34",
+    "public_training_tasks_scored": 400,
+    "two_attempt_tasks_solved": 83,
+    "two_attempt_task_solve_rate": 0.2075,
+    "grammar_oracle_tasks_solved": 83,
+    "grammar_oracle_task_coverage": 0.2075,
+    "result_sha256": "38c467bd68f830ec66c0af2abce18c218438312aa55177a1c23d736f60a4e037"
+  },
+  "role_from_now_on": [
+    "REGRESSION_TEST",
+    "ACQUISITION_CORPUS",
+    "EFFICIENCY_INSTRUMENT",
+    "CAUSAL_FAILURE_DISCOVERY"
+  ],
+  "forbidden_inference": [
+    "NO_FUTURE_SCORE_GAIN_SELECTED_FROM_THESE_400_TASKS_COUNTS_AS_UNSEEN_GENERALIZATION",
+    "NO_ARC_AGI1_PUBLIC_TRAINING_SCORE_COUNTS_AS_PRIVATE_OR_PUBLIC_EVALUATION_SCORE",
+    "NO_OPERATOR_ADDED_AFTER_INSPECTING_A_REMAINING_FAILURE_COUNTS_AS_INDEPENDENT_TRANSFER_EVIDENCE"
+  ],
+  "development_pivot": {
+    "from": "MANUAL_BENCHMARK_FAILURE_TO_OPERATOR_SCORE_HILL_CLIMB",
+    "to": "BRAIN_OWNED_PROGRAM_INVENTION_AND_COUNTEREXAMPLE_GUIDED_REPRESENTATION_EXPANSION",
+    "primary_gap": "PRACTICAL_OPEN_ENDED_PROPOSAL_GENERATION_WHEN_NO_SHORT_VERIFIED_SKILL_FINITE_SEARCH_OR_GOOD_GENERAL_SUBSTRATE_PROPOSAL_EXISTS",
+    "promotion_rule": "REPAIR_MUST_GENERALIZE_TO_PREDECLARED_UNTOUCHED_NEIGHBORING_OR_ADVERSARIAL_CASES_BEFORE_REUSABLE_CAPABILITY_PROMOTION"
+  },
+  "hard_nonclaims": [
+    "NO_ARC_AGI_PARITY_CLAIM",
+    "NO_GENERALIZATION_CREDIT_FROM_THE_83_OF_400_TRAINING_RESULT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0,
+  "promotion_authority": false
+}
