@@ -1,0 +1,120 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_FROZEN_EPOCH_RECEIPT_HARDENING_20261011_V1",
+  "date": "2026-10-11",
+  "status": "BRANCH_IMPLEMENTED__LOCAL_8_OF_8_PASS__EXTERNAL_SCORE_STILL_MISSING__ZERO_CREDIT",
+  "target": {
+    "predicate_ids": [
+      "PROWORK_AA_BRIEFCASE_GE_1822",
+      "ARTIFACT_AA_BRIEFCASE_GE_1822"
+    ],
+    "benchmark": "AA-Briefcase",
+    "benchmark_version": "1.1",
+    "evaluator": "Artificial Analysis",
+    "frozen_rating_epoch": "ANTHROPIC_RELEASE_2026_09_22__AA_BRIEFCASE_V1_1__OPUS55_MAX_DEFAULT_FALLBACK",
+    "threshold_elo": 1822
+  },
+  "causal_repair": {
+    "prior_bridge": "canonical/runtime/aa_briefcase_dual_predicate_result_bridge_v1.py",
+    "defect_classes": [
+      "RESULT_SUBJECT_SHA256_ONLY_SHAPE_CHECKED__NOT_BOUND_TO_EXACT_BRAIN_EVALUATION_SUBJECT",
+      "INDEPENDENT_OR_OWNER_VERIFIED_BOOLEAN_COULD_NOT_BY_ITSELF_PROVE_EXTERNAL_AUTHORITY"
+    ],
+    "new_runtime": {
+      "path": "canonical/runtime/aa_briefcase_frozen_epoch_result_bridge_v2.py",
+      "git_blob_sha": "112c8cc16896857fa57787834dcdc3ff83639ce7"
+    },
+    "new_tests": {
+      "path": "canonical/tests/test_aa_briefcase_frozen_epoch_result_bridge_v2.py",
+      "git_blob_sha": "3bfc94c3ffe39e15d40611baa1d512a365d5b218"
+    },
+    "branch": "successor/aa-briefcase-frozen-receipt-hardening-20261011-v2",
+    "base_main_commit": "3ec2d6cac56c4c8f049940ffa592b56fa53baaec"
+  },
+  "hardened_subject_contract": {
+    "schema": "PROJECT_BRAIN_AA_BRIEFCASE_FROZEN_EVALUATION_SUBJECT_V1",
+    "exact_fields": [
+      "repository",
+      "git_commit_sha",
+      "execution_profile_git_blob_sha",
+      "configuration_git_blob_sha",
+      "execution_bundle_sha256"
+    ],
+    "rule": "RESULT_SUBJECT_SHA256_MUST_EQUAL_CANONICAL_SHA256_OF_THE_EXACT_SUBJECT_MANIFEST"
+  },
+  "hardened_external_result_contract": {
+    "schema": "PROJECT_BRAIN_AA_BRIEFCASE_FROZEN_EPOCH_RESULT_V2",
+    "required_bindings": [
+      "EXACT_AA_BRIEFCASE_V1_1_TARGET_TUPLE",
+      "FROZEN_2026_09_22_RATING_EPOCH",
+      "OPUS55_REFERENCE_1822",
+      "EXACT_SUBJECT_SHA256",
+      "EXTERNAL_RESULT_EVIDENCE_SHA256",
+      "RESULT_SOURCE_KIND",
+      "HTTPS_RESULT_SOURCE_URI"
+    ],
+    "authority_receipt_schema": "PROJECT_BRAIN_EXTERNAL_RESULT_AUTHORITY_RECEIPT_V1",
+    "authority_rules": [
+      "OWNER_EVALUATOR_OR_INDEPENDENT_VERIFIER_ONLY",
+      "SELF_BRAIN_SUBJECT_VERIFIER_IDS_REJECTED",
+      "AUTHORITY_STATEMENT_MUST_BIND_EXACT_SCORE_SUBJECT_EPOCH_AND_EVIDENCE_DIGEST",
+      "AUTHORITY_EVIDENCE_DIGEST_MUST_EQUAL_RESULT_EVIDENCE_DIGEST",
+      "AUTHORITY_RECEIPT_DIGEST_MUST_MATCH_CANONICAL_RECEIPT_PAYLOAD",
+      "OWNER_EVALUATOR_RESULT_URI_MUST_BE_ARTIFICIALANALYSIS_AI",
+      "BRIDGE_HAS_ZERO_PROMOTION_AND_TERMINAL_AUTHORITY"
+    ]
+  },
+  "local_falsification": {
+    "tests_run": 8,
+    "failures": 0,
+    "cases": [
+      "EXACT_SUBJECT_AUTHENTICATED_1822_PASSES_BOTH_SHARED_PREDICATES",
+      "1821_9_FAILS_BOTH",
+      "OTHER_SUBJECT_REJECTED",
+      "FORGED_AUTHORITY_RECEIPT_DIGEST_REJECTED",
+      "AUTHORITY_BOUND_TO_WRONG_STATEMENT_REJECTED",
+      "AUTHORITY_EVIDENCE_MISMATCH_REJECTED",
+      "SELF_VERIFICATION_REJECTED",
+      "BOOLEAN_ONLY_LEGACY_RESULT_REJECTED"
+    ],
+    "environment": "LOCAL_PYTHON_REPLAY",
+    "independent_external_verification": false
+  },
+  "public_owner_surface": {
+    "official_private_dataset": true,
+    "official_task_count": 91,
+    "official_project_count": 4,
+    "public_demo_non_scoring": true,
+    "current_v1_1_rating_fit": "CROWD_BT",
+    "owner_custom_benchmarking_route_publicly_advertised": true,
+    "owner_support_for_models_not_listed_publicly_advertised": true,
+    "contact_route": "https://artificialanalysis.ai/services/",
+    "sources": [
+      "https://artificialanalysis.ai/evaluations/aa-briefcase",
+      "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "https://artificialanalysis.ai/services/"
+    ]
+  },
+  "exact_remaining_external_event": {
+    "description": "ONE_OWNER_OR_INDEPENDENT_AUTHENTICATED_SCORE_OR_DIRECT_MATCHED_COMPARISON_RECEIPT_BOUND_TO_THE_EXACT_FROZEN_BRAIN_SUBJECT_AND_FROZEN_1822_EPOCH",
+    "sufficient_forms": [
+      "OWNER_EVALUATOR_AA_BRIEFCASE_V1_1_SCORE_RECEIPT_AT_OR_ABOVE_1822_ON_FROZEN_EPOCH",
+      "OWNER_OR_INDEPENDENT_DIRECT_MATCHED_COMPARISON_AGAINST_FROZEN_OPUS55_SUBMISSIONS_WITH_SCOPE_SAFE_THRESHOLD_IMPLICATION",
+      "SEPARATELY_VERIFIED_CROSS_EPOCH_TRANSFORM_THAT_SOUNDLY_IMPLIES_FROZEN_1822"
+    ],
+    "unavailable_from_current_internal_bytes": true
+  },
+  "hard_nonclaims": [
+    "NO_BRAIN_AA_BRIEFCASE_SCORE_CREATED",
+    "NO_PRIVATE_TASK_ACCESS_CLAIM",
+    "NO_CLAIM_LOCAL_RECEIPT_HASHING_CRYPTOGRAPHICALLY_AUTHENTICATES_ARTIFICIAL_ANALYSIS_IDENTITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_PUBLIC_AA_BRIEFCASE_LITE_SCORE_INHERITANCE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false,
+  "promotion_authority": false
+}

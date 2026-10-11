@@ -1,0 +1,125 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_STRONGER_SEMANTIC_CERTIFICATE_ROUTE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__GRADER_INDEPENDENT_STRONGER_CERTIFICATE_ROUTE__ZERO_CREDIT_UNTIL_AUTHENTIC_EXECUTION",
+  "target_predicate": "HLE_TOOLS_GE_67_7",
+  "objective": "Replace the proprietary target-grader dependency with a strictly conservative hidden-gold semantic certificate, without reviving the quarantined claim that deterministic exact matching lower-bounds arbitrary LLM-judge outputs.",
+  "target_protocol_facts": {
+    "population_size": 2500,
+    "target_score": 0.677,
+    "standard_trials": 5,
+    "target_total_slots": 12500,
+    "minimum_exact_gold_identity_successes": 8463,
+    "implied_certified_fraction": 0.67704,
+    "single_trial_reference_minimum_if_used_diagnostically": 1693,
+    "anthropic_hle_agent_protocol": [
+      "WEB_SEARCH",
+      "WEB_FETCH",
+      "PROGRAMMATIC_TOOL_CALLING",
+      "CODE_EXECUTION",
+      "THINKING_AUTO",
+      "MAX_EFFORT_STANDARD_CONFIGURATION",
+      "TOTAL_TOKENS_ACROSS_CONTEXTS_CAP_1000000",
+      "NO_CONTEXT_COMPACTION",
+      "HLE_SOURCE_BLOCKLIST",
+      "CORRECT_TRANSCRIPT_CONTAMINATION_SCREENING"
+    ]
+  },
+  "certificate_definition": {
+    "solver_gold_separation": "THE_SOLVER_MUST_NEVER_RECEIVE_OR_RETRIEVE_THE_OFFICIAL_GOLD_ANSWER_BEFORE FINAL_ANSWER_COMMITMENT",
+    "answer_channel": "ONE_DEDICATED_FINAL_ANSWER_STRING_PER_TASK_ATTEMPT",
+    "scoring_rule": "AFTER_FINAL_ANSWER_COMMITMENT__COMPARE_THE_FINAL_ANSWER_STRING_TO_THE_OFFICIAL_HIDDEN_correct_answer_STRING_USING EXACT_UNICODE_STRING_EQUALITY_AFTER_JSON_DECODING_ONLY__NO_CASEFOLD_TRIM_NUMERIC_TOLERANCE_OR_SEMANTIC_NORMALIZATION",
+    "success_bit": "1_IFF_EXACT_STRING_IDENTITY__ELSE_0",
+    "aggregation": "SUM_EXACT_IDENTITY_SUCCESS_BITS_ACROSS_2500_TASKS_X_5_TRIALS_DIVIDED_BY_12500"
+  },
+  "theorem": {
+    "name": "EXACT_GOLD_IDENTITY_IMPLIES_REFERENCE_SEMANTIC_CORRECTNESS",
+    "statement": "For any HLE task whose official reference answer is a and whose solver-committed final answer is r, if r=a by exact string identity, then r denotes exactly the official benchmark answer. Therefore the exact-identity success indicator is a conservative subset of benchmark semantic correctness, independent of any stochastic LLM judge.",
+    "threshold_corollary": "If at least 8463 of 12500 independently committed HLE attempt answers are exact identities to their hidden official gold answers, the certified semantic-correctness mean is at least 8463/12500 = 67.704%, which exceeds 67.7%.",
+    "scope": "SEMANTIC_CORRECTNESS_CERTIFICATE__NOT_A_CLAIM_ABOUT_THE_BIT_OUTPUT_OF_CLAUDE_OPUS_4_6_OR_ANY_OTHER_LLM_JUDGE"
+  },
+  "why_this_does_not_conflict_with_quarantine": {
+    "quarantined_claim": "EXACT_MATCH_MACHINE_IMPLIES_THE_TARGET_LLM_JUDGE_WILL_OUTPUT_CORRECT",
+    "this_route_claim": "EXACT_MATCH_TO_THE_OFFICIAL_HIDDEN_GOLD_IS_DIRECT_EVIDENCE_OF_THE_REFERENCE_ANSWER_ITSELF",
+    "preserved_boundary": "NO_UNIVERSAL_PREDICTION_OF_STOCHASTIC_JUDGE_BEHAVIOR"
+  },
+  "public_evidence_updates": [
+    {
+      "source": "Anthropic Claude Opus 5.5 System Card Table 8.1.A and Section 8.11.1",
+      "facts": [
+        "HLE_WITH_TOOLS_SCORE_67_7",
+        "2500_QUESTIONS",
+        "CLAUDE_OPUS_4_6_MODEL_GRADER",
+        "STANDARD_CONFIG_ADAPTIVE_THINKING_MAX_EFFORT_DEFAULT_SAMPLING_AVERAGED_OVER_FIVE_TRIALS",
+        "WEB_SEARCH_FETCH_PROGRAMMATIC_TOOL_CALLING_CODE_EXECUTION",
+        "1M_TOTAL_TOKEN_CAP_NO_CONTEXT_COMPACTION"
+      ]
+    },
+    {
+      "source": "Center for AI Safety public HLE evaluator prompt",
+      "facts": [
+        "OFFICIAL_CORRECT_ANSWER_IS_DESCRIBED_AS_PRECISE_AND_UNAMBIGUOUS",
+        "PUBLIC_JUDGE_CRITERION_ACCEPTS_MATCH_TO_CORRECT_ANSWER_AND_OPTIONALLY_SMALL_NUMERIC_MARGIN",
+        "PUBLIC_REFERENCE_SCORER_IS_MODEL_JUDGED__SO_THIS_ROUTE_DOES_NOT_TREAT_ITS_OUTPUT_AS_DETERMINISTIC"
+      ]
+    },
+    {
+      "source": "Center for AI Safety HLE repository docs/evaluation-with-tools.md",
+      "facts": [
+        "PUBLIC_TOOL_EVALUATION_SANDBOX_AND_WEB_RESTRICTIONS_NOW_DOCUMENTED_FOR_HLE_DIAMOND",
+        "CLAUDE_OPUS_5_5_PROVIDER_HARNESS_VERSION_CLAUDE_CODE_2_1_280_IS_PUBLIC_FOR_HLE_DIAMOND",
+        "THIS_DOES_NOT_BY_ITSELF_PROVE_FULL_2500_ANTHROPIC_HARNESS_IDENTITY_OR_GRADER_IDENTITY"
+      ]
+    },
+    {
+      "source": "Generality Labs HLE judge comparison 2026-09-06",
+      "facts": [
+        "JUDGE_CHOICE_CAN_CHANGE_INDIVIDUAL_VERDICTS_AND_FINAL_SCORE",
+        "PUBLIC_EVIDENCE_SUPPORTS_KEEPING_LLM_JUDGE_OUTPUT_SEPARATE_FROM_REFERENCE_SEMANTIC_CORRECTNESS",
+        "THIS_ROUTE_AVOIDS_NEEDING_TO_ASSERT_CROSS_JUDGE_EQUIVALENCE"
+      ]
+    }
+  ],
+  "remaining_execution_preconditions": [
+    "AUTHORIZED_MATERIAL_ACCESS_TO_THE_TARGET_2500_HLE_POPULATION_WITHOUT_REDISTRIBUTION",
+    "BIND_THE_ACCESSED_POPULATION_TO_THE_ANTHROPIC_67_7_TARGET_SCOPE_OR_A_STRONGER_SCOPE_COMPLETE_EQUIVALENCE_CERTIFICATE",
+    "KEEP_GOLD_ANSWERS_HIDDEN_FROM_THE_SOLVER_UNTIL_EACH_ATTEMPT_IS IRREVOCABLY_COMMITTED",
+    "USE_THE_ALREADY_VERIFIED_HLE_TOOL_AND_CONTAMINATION_CONTROLS",
+    "RUN_FIVE_TRIALS_OR_AN_EQUIVALENT_12500_SLOT_PROTOCOL_MATCHING_THE_TARGET_AGGREGATION",
+    "CONTENT_ADDRESS_ALL_INPUT_IDENTITIES_OUTPUTS_SUCCESS_BITS_AND_AGGREGATION"
+  ],
+  "scheduler_effect": {
+    "delete_as_mandatory_for_the_stronger_certificate_branch": [
+      "ZERO_COST_CLAUDE_OPUS_4_6_GRADER_ACCESS",
+      "PROVED_CROSS_JUDGE_EQUIVALENCE",
+      "PROVED_ONE_SIDED_LLM_JUDGE_RELATION"
+    ],
+    "preserve": [
+      "TARGET_POPULATION_IDENTITY",
+      "AUTHORIZED_DATASET_ACCESS",
+      "SOLVER_GOLD_SEPARATION",
+      "CONTAMINATION_CONTROL",
+      "FIVE_TRIAL_AGGREGATION",
+      "AUTHENTIC_BRAIN_EXECUTION",
+      "CONTENT_ADDRESSED_RECEIPT"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_AN_EXACT_GOLD_MATCH_FORCES_CLAUDE_OPUS_4_6_TO_EMIT_CORRECT",
+    "NO_CLAIM_CURRENT_BRAIN_SCORE_IS_GE_67_7",
+    "NO_DATASET_CASES_READ_OR_EXPOSED_BY_THIS_ARTIFACT",
+    "NO_TARGET_POPULATION_REVISION_IDENTITY_CLAIM_BEYOND_CURRENT_BOUND_EVIDENCE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT_FROM_THE_THEOREM_ALONE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "independent_verification_required": true
+}

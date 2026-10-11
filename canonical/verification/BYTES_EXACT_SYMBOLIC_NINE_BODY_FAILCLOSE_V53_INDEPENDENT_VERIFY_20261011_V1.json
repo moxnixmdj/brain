@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_NINE_BODY_FAILCLOSE_V53_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_V52_TO_V53_TRANSFORM__SPENT_NEXT58_15180_OF_15180__FRESH_NEXT59_15410_OF_15410__CLEAN_ARCHIVE_SECOND_EXECUTION_CARRIER_NEXT59_15410_OF_15410__NEXT60_DURABLY_FROZEN_UNSPENT__ZERO_CREDIT",
+  "subject": {
+    "producer_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NINE_BODY_FAILCLOSE_V53_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "producer_evidence_git_blob_sha": "b047f01a95022284e0fb3eccbae09924ab8c4502",
+    "transform": "canonical/research/bytes/tools/conservative_mpmath_nine_body_failclose_prune_v53.py",
+    "transform_git_blob_sha": "99ee2514c9ba8edd4af456171618868299fa7223",
+    "predecessor_manifest_sha256": "5cfdaf054fafabd04894396739defc82fed40ec3aba24b2f1b06030421b9c62f",
+    "candidate_manifest_sha256": "ae9187bc15193fe340e77a88d9d400f51ec798dec638ac435aca1f2862c14cfe",
+    "candidate_raw_python_source_bytes": 1715881
+  },
+  "replay": {
+    "transform_application": {
+      "result": "PASS",
+      "saved_raw_python_bytes": 1946,
+      "candidate_manifest_sha256": "ae9187bc15193fe340e77a88d9d400f51ec798dec638ac435aca1f2862c14cfe",
+      "reconstruction_identity": "278/278"
+    },
+    "spent_NEXT58": {
+      "passed": 15180,
+      "total": 15180,
+      "failures": 0
+    },
+    "fresh_NEXT59": {
+      "passed": 15410,
+      "total": 15410,
+      "failures": 0,
+      "corpus_sha256": "5c7cf733614d58648dbe4fbfc855e7451651c652555eb895fcdcef39df780c92",
+      "durable_library_file_id": "libfile_2cacdd182fc8819182fabb0cf83dbfe9"
+    },
+    "clean_archive_second_execution_carrier_NEXT59": {
+      "passed": 15410,
+      "total": 15410,
+      "failures": 0
+    },
+    "archive_identity": {
+      "durable_files": 278,
+      "byte_identical_files": 278,
+      "archive_bytes": 267912,
+      "archive_sha256": "eda3b3278cb295976c8d05264f8c31170dc7332d608ebec2bd6bb2e8dfe79073",
+      "library_file_id": "libfile_a4f7c8b0fc288191a0ecb93265b4ec46"
+    },
+    "next60_frozen_definition": {
+      "cases": 15640,
+      "seed": 1044270352,
+      "per_operation_budget": 1360,
+      "sha256": "f2d40bb97ade73179631aac6c94134eeab9fc529889bfabe75e01dd2dadfbc99",
+      "library_file_id": "libfile_ef7b3652581c819188d30268264cb2e9",
+      "spent": false,
+      "durable_persistence": true
+    }
+  },
+  "falsification": {
+    "sibling_raw_physical_cut_rejected": true,
+    "corpus": "QUAL_SUCCESSOR_NEXT58_20261011_V1",
+    "failing_global_case_index": 4116,
+    "operation": "roots",
+    "parameters": [
+      -2,
+      2,
+      -6,
+      -2,
+      -2
+    ],
+    "failure": "NotImplementedError: outside Brain bounded exact-symbolic contract",
+    "repaired_transplant_passes_full_NEXT58": true
+  },
+  "proved": [
+    "THE_V52_TO_V53_TRANSFORM_IS_EXACTLY_BASE_AND_TARGET_MANIFEST_GUARDED",
+    "THE_NINE_TRANSPLANTED_FUNCTION_BODY_CUTS_DO_NOT_OVERWRITE_CANONICAL_V52_MPF_POW_INT_SPECIALIZATION",
+    "THE_EXACT_V53_CANDIDATE_PASSES_COMPLETE_SPENT_NEXT58",
+    "THE_PREVIOUSLY_FROZEN_NEXT59_CORPUS_WAS_REGENERATED_BYTE_IDENTICALLY_TO_ITS_PRECOMMITTED_HASH_AND_PASSES_EXACT_V53_COMPLETELY",
+    "A_CLEAN_ARCHIVE_EXTRACTION_IS_278_OF_278_BYTE_IDENTICAL_AND_REPLAYS_COMPLETE_NEXT59_WITH_ZERO_FAILURES",
+    "THE_RAW_SIBLING_PHYSICAL_CUT_FAILURE_IS_RETAINED_AS_FALSIFICATION_EVIDENCE",
+    "NEXT60_ID_SEED_CASE_COUNT_CONTENT_SHA256_AND_LIBRARY_ARTIFACT_ARE_FROZEN_UNSPENT"
+  ],
+  "truth_boundary": [
+    "BOUNDED_EXACT_SYMBOLIC_ROUTE_ONLY",
+    "NO_UNIVERSAL_MPMATH_EQUIVALENCE",
+    "NO_EXTERNAL_ORGANIZATIONALLY_INDEPENDENT_SECOND_CARRIER CLAIM",
+    "NEXT60_MUST_REMAIN_UNSPENT_UNTIL_A_NEW_PHYSICAL_CUT_EXISTS",
+    "NO_CAPABILITY_ACCEPTANCE_PROFESSIONAL_QUALITY_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
