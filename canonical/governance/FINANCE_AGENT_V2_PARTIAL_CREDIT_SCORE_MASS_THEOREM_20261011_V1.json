@@ -3,7 +3,7 @@
   "date": "2026-10-11",
   "status": "SOUND_RUN_SCORE_MASS_REDUCTION_CANDIDATE__TASK_MASS_COROLLARY_CONDITIONAL_ON_AGGREGATION_BINDING__ZERO_CREDIT",
   "target_predicate": "FINANCE_AGENT_V2_GE_58_59",
-  "canonical_base_commit": "a4165d25bedd195051c3f6abdfa21da063d8ab87",
+  "canonical_base_commit": "b2b3dfd8309b2c5f15e9692feb8412eb3f06f20c",
   "first_party_bindings": {
     "benchmark_methodology": {
       "url": "https://www.vals.ai/benchmarks/fabv2",
@@ -112,10 +112,14 @@
     "conditional_task_mass_required": "790.965",
     "equal_task_average_authoritatively_bound_here": false,
     "reason": "NO_ADMISSIBLE_PRIVATE_TEST_RUN_SCORE_RECEIPTS_OR_EQUIVALENT_LOWER_BOUNDS_ARE_BOUND_BY_THIS_ARTIFACT",
-    "prior_public_contract_falsifier_preserved": true
+    "prior_public_contract_falsifier_preserved": true,
+    "donor_model_or_external_model_score_substitution_forbidden": true,
+    "brain_score_identity_rule": "ONLY_EXECUTION_CAUSALLY_PRODUCED_BY_BRAIN_NATIVE_CAPABILITY_COUNTS_AS_BRAIN_SCORE"
   },
   "hard_nonclaims": [
     "NO_FINANCE_AGENT_V2_BRAIN_SCORE_IS_CLAIMED",
+    "NO_EXTERNAL_OR_DONOR_MODEL_MAY_BE_USED_AS_THE_COGNITIVE_SOLVER_AND_RELABELED_AS_BRAIN",
+    "MODEL_WRAPPING_ROUTING_OR_ADAPTER_MATERIALITY_DOES_NOT_CONVERT_A_DONOR_MODEL_SCORE_INTO_A_BRAIN_SCORE",
     "NO_PRIVATE_TEST_QUESTION_OR_RUBRIC_IS_INFERRED",
     "NO_CLAIM_THE_450_TEST_QUESTIONS_ARE_50_PER_CATEGORY",
     "NO_CATEGORY_DISTRIBUTION_IS_USED_TO_CREATE_SCORE_CREDIT",
