@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_RUBRIC_ONLY_BYPASS_FALSIFIER_20261011_V1",
+  "date": "2026-10-11",
+  "status": "RUBRIC_ONLY_HEADLINE_SHORTCUT_REJECTED__THREE_SCORE_BEARING_SCOPES_LOAD_BEARING__ZERO_CREDIT",
+  "target": "AA-Briefcase v1.1 >= 1822 Elo",
+  "public_protocol": {
+    "methodology_version": "4.3.2",
+    "headline": "COMBINED_ELO_FROM_RUBRIC_TASK_SUCCESS__ANALYTICAL_QUALITY__PRESENTATION",
+    "rubric_conversion": "RUBRIC_PERFORMANCE_CONVERTED_TO_SYNTHETIC_HEAD_TO_HEAD_MATCHES",
+    "fit": "MAXIMUM_LIKELIHOOD_ELO__EACH_SCOPE_CROWD_BT",
+    "sources": [
+      "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "https://artificialanalysis.ai/evaluations/aa-briefcase"
+    ]
+  },
+  "public_order_counterexample": {
+    "date": "2026-09-22",
+    "reference_model": "Claude Opus 5.5 Max",
+    "frozen_headline_elo": 1822,
+    "reported_relation": [
+      "OPUS55_AHEAD_OF_FABLE51_ON_ANALYTICAL_QUALITY",
+      "OPUS55_AHEAD_OF_FABLE51_ON_PRESENTATION",
+      "OPUS55_BEHIND_FABLE51_ON_RUBRIC_BASED_SCORING"
+    ],
+    "implication": "HEADLINE_ORDER_CANNOT_BE_REPLACED_BY_RUBRIC_ORDER"
+  },
+  "theorem": {
+    "statement": "A_RUBRIC_ONLY_BRAIN_CERTIFICATE_DOES_NOT_ENTAIL_AA_BRIEFCASE_HEADLINE_ELO_GE_1822_UNLESS_A_SEPARATE_SOUND_AGGREGATE_LOWER_BOUND_THEOREM_PROVES_THAT_RESULT_INDEPENDENTLY_OF_THE_UNBOUND_AQ_AND_PRESENTATION_SCORE_BEARING_STATE.",
+    "proof": [
+      "PUBLIC_OWNER_METHODOLOGY_DECLares_ALL_THREE_SCOPES_LOAD_BEARING_IN_HEADLINE_ELO.",
+      "THE_FROZEN_REFERENCE_PUBLIC_REPORT_EXHIBITS_A_MODEL_THAT_IS_BEHIND_ON_RUBRIC_BUT_AHEAD_ON_PAIRWISE_QUALITY_SCOPES_AND_WINS_THE_HEADLINE_RELATION.",
+      "THEREFORE_RUBRIC_ORDER_ALONE_IS_NOT_THE_HEADLINE_ORDER.",
+      "NO_PUBLIC_OWNER_FORMULA_PROVES_A_RUBRIC_ONLY_1822_FLOOR_WHEN_AQ_AND_PRESENTATION_STATE_ARE_LEFT_UNBOUND.",
+      "FAIL_CLOSED_ANY_RUBRIC_ONLY_SHORTCUT_UNLESS_A_NEW_CONTENT_ADDRESSED_AGGREGATE_LOWER_BOUND_THEOREM_IS_ADMITTED."
+    ]
+  },
+  "implementation": {
+    "runtime": "canonical/runtime/aa_briefcase_rubric_only_bypass_gate_v1.py",
+    "tests": "canonical/tests/test_aa_briefcase_rubric_only_bypass_gate_v1.py"
+  },
+  "scheduler_effect": {
+    "delete": [
+      "TRY_TO_CLOSE_1822_FROM_RUBRIC_PERFECTION_ALONE",
+      "INFER_HEADLINE_ORDER_FROM_RUBRIC_ORDER",
+      "ASSUME_EQUAL_WEIGHT_ARITHMETIC_MEAN_OF_PUBLIC_COMPONENT_LABELS_WITHOUT_OWNER_FORMULA"
+    ],
+    "preserve": [
+      "SCORE_BEARING_TRACE_SUBSTITUTION",
+      "UNIVERSAL_TOP_SUPPORT_AS_SECONDARY_ROUTE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_RUBRIC_PERFORMANCE_IS_UNIMPORTANT",
+    "NO_CLAIM_A_FUTURE_FORMAL_RUBRIC_ONLY_HEADLINE_FLOOR_IS_IMPOSSIBLE_IN_PRINCIPLE",
+    "NO_BRAIN_SCORE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
