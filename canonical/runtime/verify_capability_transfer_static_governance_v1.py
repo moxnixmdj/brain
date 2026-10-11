@@ -28,4 +28,8 @@ s=J("canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V3.json")
 assert s["promotion_requires_transfer_gate_pass"] is True
 d=J("canonical/governance/DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_V2.json")
 assert d["fail_closed"] is True
+promotion=(R/"canonical/runtime/ownership_promotion_compiler_v1.py").read_text(encoding="utf-8")
+assert "ownership_promotion_cognition_provenance_gate_v1" in promotion
+assert "cognition_provenance_gate.evaluate(s)" in promotion
+assert "FAIL_CLOSED_K1_K2_K3_COGNITION_PROVENANCE" in promotion
 print("CAPABILITY_TRANSFER_STATIC_GOVERNANCE_PASS")
