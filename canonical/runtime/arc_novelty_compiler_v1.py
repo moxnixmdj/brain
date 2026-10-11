@@ -491,6 +491,65 @@ def _fill_each_color_bbox(grid: Grid) -> Grid | None:
     return tuple(tuple(row) for row in out)
 
 
+def _gap_fill_targets(grid: Grid, mode: str) -> set[tuple[int, int]]:
+    h, w = _shape(grid)
+    targets: set[tuple[int, int]] = set()
+    if mode in ("ROWS", "BOTH"):
+        for r in range(h):
+            cols = [c for c, value in enumerate(grid[r]) if value != 0]
+            if len(cols) >= 2:
+                for c in range(min(cols) + 1, max(cols)):
+                    if grid[r][c] == 0:
+                        targets.add((r, c))
+    if mode in ("COLS", "BOTH"):
+        for c in range(w):
+            rows = [r for r in range(h) if grid[r][c] != 0]
+            if len(rows) >= 2:
+                for r in range(min(rows) + 1, max(rows)):
+                    if grid[r][c] == 0:
+                        targets.add((r, c))
+    if mode not in ("ROWS", "COLS", "BOTH"):
+        raise ARCNoveltyCompilerError("GAP_FILL_MODE_UNSUPPORTED")
+    return targets
+
+
+def _infer_gap_fill(
+    pairs: Sequence[tuple[Grid, Grid]],
+    mode: str,
+) -> int | None:
+    fill: int | None = None
+    for inp, out in pairs:
+        if _shape(inp) != _shape(out):
+            return None
+        targets = _gap_fill_targets(inp, mode)
+        if not targets:
+            return None
+        values: set[int] = set()
+        h, w = _shape(inp)
+        for r in range(h):
+            for c in range(w):
+                if (r, c) in targets:
+                    if out[r][c] == 0:
+                        return None
+                    values.add(out[r][c])
+                elif out[r][c] != inp[r][c]:
+                    return None
+        if len(values) != 1:
+            return None
+        value = next(iter(values))
+        if fill is not None and fill != value:
+            return None
+        fill = value
+    return fill
+
+
+def _gap_fill_predict(grid: Grid, mode: str, fill: int) -> Grid:
+    out = [list(row) for row in grid]
+    for r, c in _gap_fill_targets(grid, mode):
+        out[r][c] = fill
+    return tuple(tuple(row) for row in out)
+
+
 def _connect_same_color_diagonals(grid: Grid) -> Grid | None:
     out = [list(row) for row in grid]
     points: dict[int, list[tuple[int, int]]] = {}
@@ -1155,6 +1214,8 @@ def _predict(h: Mapping[str, Any], grid: Grid) -> Grid | None:
         return _fill_each_color_bbox(grid)
     if kind == "CONNECT_SAME_COLOR_DIAGONALS":
         return _connect_same_color_diagonals(grid)
+    if kind == "LEARNED_GAP_CONNECTION":
+        return _gap_fill_predict(grid, h["mode"], int(h["fill"]))
     if kind == "MARKER_POSITION_ROW_FILL":
         mapping = {int(k): int(v) for k, v in h["mapping"].items()}
         return _marker_position_row_fill_predict(grid, mapping)
@@ -1270,14 +1331,11 @@ def compile_hypotheses(
             if _consistent(h, pairs):
                 candidates.append(h)
 
-    ordered_structural_hypotheses = (
+    for kind, feature in (
         ("LOCAL_NEIGHBORHOOD_RULE", "COLOR_COUNTS"),
         ("OBJECT_PROPERTY_RECOLOR", "BBOX"),
-        ("LOCAL_NEIGHBORHOOD_RULE", "BIN_CROSS"),
         ("OBJECT_PROPERTY_RECOLOR", "DENSITY"),
-        ("LOCAL_NEIGHBORHOOD_RULE", "COLOR_ROWCOL_SETS"),
-    )
-    for kind, feature in ordered_structural_hypotheses:
+    ):
         if kind == "LOCAL_NEIGHBORHOOD_RULE":
             mapping = _infer_local_rule(pairs, feature)
         else:
@@ -1285,6 +1343,24 @@ def compile_hypotheses(
         if mapping is not None:
             h = {
                 "kind": kind,
+                "feature": feature,
+                "mapping": dict(sorted(mapping.items())),
+            }
+            if _consistent(h, pairs):
+                candidates.append(h)
+
+    for mode in ("ROWS", "COLS", "BOTH"):
+        gap_fill = _infer_gap_fill(pairs, mode)
+        if gap_fill is not None:
+            h = {"kind": "LEARNED_GAP_CONNECTION", "mode": mode, "fill": gap_fill}
+            if _consistent(h, pairs):
+                candidates.append(h)
+
+    for feature in ("BIN_CROSS", "COLOR_ROWCOL_SETS"):
+        mapping = _infer_local_rule(pairs, feature)
+        if mapping is not None:
+            h = {
+                "kind": "LOCAL_NEIGHBORHOOD_RULE",
                 "feature": feature,
                 "mapping": dict(sorted(mapping.items())),
             }
