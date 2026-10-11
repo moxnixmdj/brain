@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V74",
+  "date": "2026-10-11",
+  "status": "RANK23_DONOR_FREE_DNA_CAPABILITY_ADMITTED__UNREAD_UNSTARTED__PUBLIC_RESEAL_AND_CLAIM_REQUIRED",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V73.json",
+    "git_blob_sha": "0ffeb04eef5286b70cd351a5b022ca50deba2d3d"
+  },
+  "verification": {
+    "path": "canonical/verification/TB_SCIENCE_DNA_STORAGE_HARBOR_ROUTE_V1_VERIFY_20261011_V1.json",
+    "git_blob_sha": "2a02191d1bcbe04a55c189792739274e50877e5c",
+    "pass": true
+  },
+  "qualification": {
+    "path": "canonical/qualification/TB_SCIENCE_DNA_STORAGE_HARBOR_CAPABILITY_V1.json",
+    "git_blob_sha": "794a57817c8cd8d1471565af16625591b7816219"
+  },
+  "admission": {
+    "path": "canonical/governance/TB_SCIENCE_RANK23_CAPABILITY_FIRST_CHECKPOINT_ADMISSION_20261011_V1.json",
+    "git_blob_sha": "e81506b8f23e12199b1a6079052fe356cf3ef24e",
+    "authorized": true,
+    "decision": "ADMIT_CHECKPOINT_AUDIT_EXECUTION"
+  },
+  "counts": {
+    "benchmark_trials_consumed": 20,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 20,
+    "started_result_pending": 0,
+    "finalized_slots": 20,
+    "active_in_flight_slot_count": 0
+  },
+  "finalized_previous_slot": {
+    "ledger_schedule_rank": 22,
+    "slot_id": "terminal-bench-science/rv-astrometry-fitting::trial-0",
+    "task_digest": "sha256:8e086e1f7245067eaa9a67c259c1519204fa058d8664983066cd582ef258a1ea",
+    "reward": 0,
+    "final_classification": "FINAL_ZERO",
+    "retry_authority": false,
+    "replacement_authority": false,
+    "replay_authority": false
+  },
+  "current_slot": {
+    "ledger_schedule_rank": 23,
+    "frozen_manifest_schedule_order": 22,
+    "task_rank": 22,
+    "slot_id": "terminal-bench-science/dna-storage-codec::trial-0",
+    "task_digest": "sha256:bde6852289db3f5474aedc96c54aca201d11be6c61f4fef019998b2b689e65ac",
+    "task_read": false,
+    "task_started": false,
+    "durable_start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "result_present": false
+  },
+  "scheduler_state": "FROZEN_PENDING_CONTENT_ADDRESSED_RANK23_PUBLIC_RESEAL_AND_CLAIM_BINDING",
+  "checkpoint_dispatch_admission": true,
+  "execution_claim_authority": false,
+  "execution_authority": false,
+  "task_read_authority": false,
+  "activation_authority": false,
+  "retry_authority": false,
+  "replacement_authority": false,
+  "replay_authority": false,
+  "finalization_authority": false,
+  "result_credit_authority": false,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "next": "BUILD_CONTENT_ADDRESSED_RANK23_PUBLIC_RESEAL_AND_CLAIM_BINDING__VERIFY_ZERO_EXPOSURE__THEN_MINT_NON_RETRY_EXECUTION_AUTHORITY"
+}
