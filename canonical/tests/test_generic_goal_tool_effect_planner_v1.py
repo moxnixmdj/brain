@@ -386,5 +386,32 @@ class GenericGoalToolEffectPlannerV1Tests(unittest.TestCase):
         self.assertIn("message", p["operation_terms"])
 
 
+    def test_intra_clause_anaphor_inherits_prior_referent(self):
+        out = compile_goal_contract(
+            "Update the cobalt lead details and mark it as active."
+        )
+        updates = [x for x in out["intents"] if x["action_class"] == "update"]
+        self.assertEqual(len(updates), 2, out)
+        self.assertIn("lead", updates[1]["resource_terms"])
+        self.assertIn("cobalt", updates[1]["resource_terms"])
+
+    def test_intra_clause_shared_object_inherits_prior_context(self):
+        out = compile_goal_contract(
+            "Create the customer case in NovaCRM and set case priority high."
+        )
+        update = next(x for x in out["intents"] if x["action_class"] == "update")
+        self.assertIn("case", update["resource_terms"])
+        self.assertIn("novacrm", update["resource_terms"])
+
+    def test_intra_clause_unrelated_actions_do_not_cross_contaminate(self):
+        out = compile_goal_contract(
+            "Create the cobalt ticket and send the amber summary."
+        )
+        notify = next(x for x in out["intents"] if x["action_class"] == "notify")
+        self.assertIn("amber", notify["resource_terms"])
+        self.assertNotIn("cobalt", notify["resource_terms"])
+        self.assertNotIn("ticket", notify["resource_terms"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
