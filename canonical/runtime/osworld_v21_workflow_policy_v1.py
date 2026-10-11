@@ -121,11 +121,11 @@ def _current_index(state: Mapping[str, Any], workflow_sha: str, count: int) -> i
     return 0
 
 
-_OBSERVE_VERBS = re.compile(r"\\b(check|review|read|inspect|look up|lookup|find|identify|retrieve|list|show|see|examine)\\b", re.I)
+_OBSERVE_VERBS = re.compile(r"\b(check|review|read|inspect|look up|lookup|find|identify|retrieve|list|show|see|examine)\b", re.I)
 _MUTATE_VERBS = re.compile(
-    r"\\b(send|reply|update|change|edit|create|delete|remove|submit|post|like|add|"
+    r"\b(send|reply|update|change|edit|create|delete|remove|submit|post|like|add|"
     r"schedule|book|purchase|buy|pay|attach|upload|download|fill|set|write|replace|"
-    r"install|uninstall|disable|enable|export|save|move|rename)\\b",
+    r"install|uninstall|disable|enable|export|save|move|rename)\b",
     re.I,
 )
 
