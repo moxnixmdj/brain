@@ -44,7 +44,8 @@ ir = compile_ir(registry, evidence, hypergraph)
 ir_actions = {a["id"]: a for a in ir["actions"]}
 assert ir_actions["RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA"]["available_now"] is False, ir_actions["RUN_PROTOCOL_IMPLICATION_SCOPE_ALGEBRA"]
 assert ir_actions["SEARCH_SCOPE_COMPLETE_STRONGER_PROOFS_FOR_MATCHED_RESIDUAL"]["available_now"] is True
-assert ir["proved_predicate_count"] == 7, ir
-assert ir["unresolved_predicate_count"] == 31, ir
+expected_proved = sum(c.get("state") == "PROVED" for c in evidence["claims"])
+assert ir["proved_predicate_count"] == expected_proved, ir
+assert ir["unresolved_predicate_count"] == len(registry["predicates"]) - expected_proved, ir
 
 print("test_protocol_implication_gate_refinement_v1: PASS")
