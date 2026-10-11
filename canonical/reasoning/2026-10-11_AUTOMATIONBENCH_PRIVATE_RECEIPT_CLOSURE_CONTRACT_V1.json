@@ -24,11 +24,20 @@
     "metric_rule": "STRICT_PASS_FAIL__EVERY_SCORED_ASSERTION_MUST_PASS",
     "public_population_size": 600,
     "public_population_is_research_only": true,
-    "run_to_run_variance_statement": "TYPICALLY_WITHIN_1_PERCENT"
+    "run_to_run_variance_statement": "TYPICALLY_WITHIN_1_PERCENT",
+    "denominator_cross_checks": [
+      "30.44_PERCENT_EQUALS_200_OVER_657_ROUNDED_TO_2DP",
+      "28.77_PERCENT_EQUALS_189_OVER_657_ROUNDED_TO_2DP",
+      "26.94_PERCENT_EQUALS_177_OVER_657_ROUNDED_TO_2DP",
+      "26.33_PERCENT_EQUALS_173_OVER_657_ROUNDED_TO_2DP",
+      "23.59_PERCENT_EQUALS_155_OVER_657_ROUNDED_TO_2DP",
+      "22.68_PERCENT_EQUALS_149_OVER_657_ROUNDED_TO_2DP"
+    ],
+    "denominator_cross_check_conclusion": "MULTIPLE_CURRENT_LEADERBOARD_ROWS_INDEPENDENTLY_RECONSTRUCT_FROM_INTEGER_SUCCESS_COUNTS_OVER_657"
   },
   "threshold_arithmetic": {
     "denominator": 657,
-    "threshold_percent": 40.0,
+    "threshold_percent": 40,
     "minimum_successes": 263,
     "proof": "ceil(0.40 * 657) = ceil(262.8) = 263",
     "263_over_657_percent": 40.03044140030441,
