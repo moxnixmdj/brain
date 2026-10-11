@@ -1,7 +1,7 @@
 {
-  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V41",
-  "date": "2026-10-10",
-  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__STRICT_EXTERNALITY_RECONCILED__R3_ZERO_RESIDUAL_RECONCILED__OPUS_5_5_CHECKPOINT_TERMINAL_FALSE__CURRENT_R2_V91_AND_CODING_V4_FIVE_REGION_PROJECTION_BOUND__COVERAGE_R1_R4_LIVE_BINDING_REPAIRED__CLAIM_SCOPED_COMPLETENESS_THEOREM_BOUND__ROOT_NAMESPACE_COLLISION_GUARDED__TB_SCIENCE_DYNAMIC_CURRENT_PATH_BOUND__HISTORICAL_TB_SCIENCE_CURRENTNESS_SUPERSEDED",
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_POINTER_V42",
+  "date": "2026-10-11",
+  "status": "ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__GDPVAL_MINIMUM_PROOF_FRONTIER_V4_RECONCILED__GDPVAL_STALE_MECHANICAL_FIRST_DISPATCH_DEMOTED__TERMINAL_FALSE",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "authoritative_sources": {
     "universal_escape_resolver_v2_active_planning_overlay": {
@@ -1491,6 +1491,24 @@
       "global_identity_authority": false,
       "open_world_candidate_universe_complete": false,
       "terminal_credit_delta": 0
+    },
+    "gdpval_current_capability_information": {
+      "path": "canonical/governance/CURRENT_GDPVAL_CAPABILITY_INFORMATION.json",
+      "git_blob_sha": "5bde2e4a5d435e0bbf11146c927b1af09b8ab605",
+      "note": "CURRENT_GDPVAL_MINIMUM_PROOF_AUTHORITY__FROZEN_1846_CAPABILITY_TARGET__V4_FRONTIER"
+    },
+    "gdpval_minimum_bridge_frontier_v4": {
+      "path": "canonical/governance/GDPVAL_MINIMUM_BRIDGE_ACQUISITION_FRONTIER_20261011_V4.json",
+      "git_blob_sha": "aa6376fdc276c9d9c94731e39ef60811a4e96203"
+    },
+    "gdpval_escape_progress_v4_priority_reclassification": {
+      "path": "canonical/governance/GDPVAL_ESCAPE_PROGRESS_V4_PRIORITY_RECLASSIFICATION_20261011_V1.json",
+      "git_blob_sha": "fc2b9e65369f57b4fffaf9ec3a31a33e64f2bd25",
+      "note": "OLD_92_OF_220_MECHANICAL_ROUTE_IS_POST_CANDIDATE_VERIFICATION_RESOURCE_NOT_CURRENT_FIRST_DISPATCH"
+    },
+    "gdpval_zero_spend_target_opus55_public_probe": {
+      "path": "canonical/verification/GDPVAL_TARGET_OPUS55_ZERO_SPEND_PUBLIC_ARTIFACT_PROBE_20261011_V1.json",
+      "git_blob_sha": "27b4a6efcc2ca917696a22767274791ae51ea05a"
     }
   },
   "live_truth": {
@@ -2443,7 +2461,22 @@
     "r2_generic_unbound_authority_candidate_materialization_mechanism_bound": true,
     "r2_generic_materialization_independent_execution_replay_verified": true,
     "r2_generic_materialization_second_carrier_verification_path": "canonical/verification/R2_GENERIC_AUTHORITY_MATERIALIZATION_SECOND_CARRIER_VERIFY_20261011_V1.json",
-    "r2_generic_materialization_second_carrier_verification_git_blob_sha": "ace18878d4d66a8ceea2d0602d5ccbdceaa19247"
+    "r2_generic_materialization_second_carrier_verification_git_blob_sha": "ace18878d4d66a8ceea2d0602d5ccbdceaa19247",
+    "gdpval_current_capability_information_bound": true,
+    "gdpval_frozen_capability_target_elo": 1846,
+    "gdpval_live_reference_is_target_rebase": false,
+    "gdpval_minimum_bridge_frontier_version": 4,
+    "gdpval_matched_score_route_state": "OPEN_SLEEP",
+    "gdpval_target_relative_pairwise_route_state": "OPEN_SLEEP_CHECKED_PUBLIC_SURFACES",
+    "gdpval_absolute_dominance_route_state": "OPEN_ACTIVE",
+    "gdpval_w_cover_proved": false,
+    "gdpval_w_quality_proved": false,
+    "gdpval_24_of_24_property_truth_sufficient_for_target": false,
+    "gdpval_old_92_of_220_mechanical_route_first_dispatch": false,
+    "gdpval_old_92_of_220_mechanical_route_reusable_post_candidate": true,
+    "gdpval_remaining_public_220_generation_default": false,
+    "gdpval_public_220_structural_semantic_quality_complement_is_serial_critical_path": false,
+    "gdpval_current_active_next_proof_object": "PROVE_OR_FALSIFY_GDPVAL_W_COVER_ESCAPE_PROGRESS_TOTALITY_OR_BIND_A_STRONGER_SCOPE_COMPLETE_POSITIVE_COVER_CERTIFICATE"
   },
   "only_live_ABC_frontier": {
     "U_definition": "TARGET_RELEVANT_CONTEXTS_IN_THE_CLOSED_TRACE_SCOPE_NOT_ALREADY_CACHED_IN_SOUND_D_B_AND_NOT_COVERED_BY_A_SOUND_BRAIN_OWNED_POSITIVE_ADMISSION_PLUS_ADEQUACY_OR_DOMINANCE_CERTIFICATE",
@@ -3151,7 +3184,7 @@
     "task_specific_external_observation_frontier_count": 1,
     "task_specific_external_frontier": "FINANCE_SEMANTIC_ADEQUACY_TAIL"
   },
-  "pointer_revision": 134,
+  "pointer_revision": 135,
   "capability_first_scheduler_20261008_v2": {
     "status": "ACTIVE_PRIMARY_LOAD_BEARING_GOAL_VELOCITY_SCHEDULER",
     "governance": {
