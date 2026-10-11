@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ESCAPE_O11_PROOF_INSTANTIATION_SEARCH_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_CURRENT_O11_CANONICAL_SCAN__170_JSON_FILES__ZERO_CANDIDATES__ZERO_PROVED_ROWS__REUSE_INSTANTIATION_ABSENT__ZERO_CREDIT",
+  "subject_main_commit": "21ce41c63619dec25eb8ca8f34d8add33d1a34ef",
+  "subjects": {
+    "search_runtime": [
+      "canonical/runtime/current_escape_o11_proof_instantiation_search_v1.py",
+      "3c7834fe64e3ac3ce798c9ec13e49dcc4c044bc8"
+    ],
+    "oq_frontier": [
+      "canonical/governance/CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1.json",
+      "eb42b8c1c1e506f351ab6ea941b74791fb37894b"
+    ],
+    "route_manifest": [
+      "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json",
+      "f3a566a982dcd867c583eafd24c6f5dd3baa0530"
+    ],
+    "o_gate": [
+      "canonical/runtime/current_escape_o11_objective_acceptance_law_gate_v1.py",
+      "24ea38682ddef16139e716eb35cda8808555b621"
+    ]
+  },
+  "independent_execution": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "exact_subject_blob_match": true,
+    "command": "PYTHONPATH=/home/sprite/brain python canonical/runtime/current_escape_o11_proof_instantiation_search_v1.py",
+    "result": {
+      "pass": true,
+      "scanned_json_file_count": 170,
+      "scanned_json_bytes": 1486950,
+      "parse_failure_count": 0,
+      "candidate_count": 0,
+      "proved_candidate_count": 0,
+      "proved_obligation_count": 0,
+      "missing_obligation_count": 11,
+      "all_o_rows_have_proved_candidate": false
+    }
+  },
+  "interpretation": {
+    "proved": "NO_EXISTING_CANONICAL_JSON_CLAIM_SPEC_CURRENTLY_INSTANTIATES_THE_VERIFIED_O11_OBJECTIVE_ACCEPTANCE_GATE",
+    "not_proved": "NO_STRONGER_CERTIFICATE_CAN_EXIST_OR_BE_DERIVED_FROM_NON_CLAIM_SPEC_MACHINERY",
+    "scheduler_effect": "STOP_RESCANNING_FOR_READY_MADE_O11_CLAIM_SPECS_UNTIL_CANONICAL_BYTES_CHANGE__USE_EXISTING_O_GATE_AND_V4_KERNEL_TO_BIND_MINIMUM_NEW_OR_DERIVED_EVIDENCE"
+  },
+  "hard_nonclaims": [
+    "NO_O_ROW_ACCEPTANCE_CREDIT",
+    "NO_Q_ROW_RESULT",
+    "NO_CC_R3_OR_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
