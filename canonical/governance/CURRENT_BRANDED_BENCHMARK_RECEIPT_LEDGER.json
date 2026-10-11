@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_CURRENT_BRANDED_BENCHMARK_RECEIPT_LEDGER_V1",
   "date": "2026-10-11",
   "status": "ACTIVE_FAIL_CLOSED__BRANDED_RECEIPTS_SEPARATE_FROM_CAPABILITY_PROOF",
-  "authority_law": "canonical/laws/BENCHMARK_MEASUREMENT_VS_CAPABILITY_PROOF_LAW_V1.md",
+  "authority_law": "canonical/laws/BENCHMARK_MEASUREMENT_VS_CAPABILITY_PROOF_LAW_V2.md",
   "rows": [
     {
       "benchmark_id": "CODING_TB4_GE_66_4",
@@ -117,5 +117,7 @@
     "incremental_spend_usd": 0,
     "benchmark_score_credit_delta": 0,
     "terminal_credit_delta": 0
-  }
+  },
+  "controller": "canonical/runtime/benchmark_capability_dominance_scheduler_v2.py",
+  "post_lattice_wall_clock_optimizer": "canonical/runtime/capability_proof_compression_optimizer_v1.py"
 }
