@@ -1,0 +1,25 @@
+name: capability-transfer-governance
+
+on:
+  pull_request:
+    paths:
+      - 'canonical/**'
+      - '.github/workflows/capability-transfer-governance.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'canonical/**'
+      - '.github/workflows/capability-transfer-governance.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify permanent transfer governance
+        run: |
+          python canonical/runtime/verify_capability_transfer_static_governance_v1.py
+          python -m pytest -q canonical/tests/test_capability_transfer_ownership_gate_v1.py canonical/tests/test_acceptance_capability_source_gate_v2.py
