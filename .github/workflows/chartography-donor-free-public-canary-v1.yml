@@ -40,6 +40,22 @@ jobs:
           PY
       - name: Unit tests
         run: python -m unittest -v canonical.tests.test_chartography_professional_semantics_v1
+      - name: Enforce Brain credit subject attribution gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from canonical.runtime.chartography_brain_credit_subject_gate_v1 import admit_brain_credit_subject
+          p=Path("canonical/governance/CHARTOGRAPHY_BRAIN_NATIVE_PROFESSIONAL_SEMANTIC_SUBJECT_V1.json")
+          out=admit_brain_credit_subject(json.loads(p.read_text()))
+          assert out["brain_credit_subject_admissible"] is True
+          assert out["model_dependency_count"] == 0
+          assert out["external_model_runtime_dependency_count"] == 0
+          assert out["benchmark_score_proved"] is False
+          print("PASS_BRAIN_CREDIT_SUBJECT_ATTRIBUTION_ONLY")
+          PY
       - name: Bind exact Surge public samples
         shell: bash
         run: |
