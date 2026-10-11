@@ -32,7 +32,7 @@
     "primary_entrypoint": "plan_current_post_composition_frontier",
     "scalar_fallback_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
     "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V15__PROFESSIONAL_24_OF_24__CHECKPOINT_ROWS_ALL_WAKE_GATED__GITHUB_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__0_SAME_INFORMATION_CHECKPOINT_RUNS__CAPABILITY_FIRST_PRIMARY__ZERO_GLOBAL_CREDIT",
-    "observed_git_blob_sha": "e4f40eb4992b7cfd5ca570094363714eaad5b817",
+    "observed_git_blob_sha": "653ec4e1faa31697ba4ac4aeed05e991d0bc518f",
     "semantic_reuse_policy": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V4.json",
     "semantic_reuse_policy_git_blob_sha": "f08fd90474aa38f89db171c70e10a6d47e6d7ec5",
     "verified_improvement_loop": "canonical/governance/VERIFIED_IMPROVEMENT_LOOP_V2_ACTIVATION_20261011_V1.json",
@@ -58,7 +58,7 @@
   },
   "current_parallel_frontier_control": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "observed_git_blob_sha": "f3d1ced0efd1070c4312b6a6eeae8eca57b51e22",
+    "observed_git_blob_sha": "07da7f3fcc0a253c995ccb11ab42daf8c845a8b7",
     "status": "CURRENT_PROFESSIONAL_24_OF_24__FULL_PRIVATE_REGRESSION_GATE_OPEN__GITHUB_HOSTED_ACTIONS_BILLING_OR_SPENDING_LIMIT_PRESTART_BLOCK__12_CHECKPOINT_ROWS_WAKE_GATED__CAPABILITY_FIRST_AND_RESOURCE_PARETO_WORK_PRIMARY__ZERO_CREDIT",
     "binding": "MUTABLE_CURRENT_PATH_IDENTITY__SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_PROJECTIONS_REFRESHED_AT_CALL_TIME__OTHER_SOURCE_DRIFT_FAILS_CLOSED",
     "snapshot_is_runtime_authority_for_supported_dynamic_families": false
@@ -245,12 +245,12 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "2a14154a57e14933c6fd7963a744b28f5da95b7d",
-    "status": "ACTIVE_RESEARCH__AST_IDENTICAL_INDENT_V73_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1681196,
-    "B_exec_raw_python_source_bytes": 1683956,
-    "qualification": "20240/20240",
-    "next": "Rerank exact V73 using spent NEXT80 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT81_20261011_V1.",
+    "observed_git_blob_sha": "d22d55f22acb4b670391c62ef53ab63c8764fb60",
+    "status": "ACTIVE_RESEARCH__AST_IDENTICAL_INLINE_V74_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1617066,
+    "B_exec_raw_python_source_bytes": 1619826,
+    "qualification": "20470/20470",
+    "next": "Rerank exact V74 using spent NEXT81 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT82_20261011_V1.",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   },
@@ -265,9 +265,9 @@
   },
   "capability_frontier_currentness_reconciliation": {
     "path": "canonical/governance/CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1.json",
-    "observed_git_blob_sha": "b0e5f6f6d7a40777241ae8d7ac8eeecb1671f063",
-    "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__ESCAPE_WAKE_GATED__BYTES_V73_READY__R2_V91_WAKE_GATED__TB_CURRENT_PATH_DYNAMIC__ZERO_CREDIT",
-    "next": "RERANK_EXACT_V73_USING_SPENT_NEXT80_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_SPENDING_FROZEN_NEXT81__CONTINUE_OTHER_CAPABILITY_FIRST_GENERAL_DEVELOPMENT__DO_NOT_RUN_SAME_INFORMATION_CHECKPOINT_WORK"
+    "observed_git_blob_sha": "5b8fd766c0c5ddf1f803ba8f5f5e91756ee52b37",
+    "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__ESCAPE_WAKE_GATED__BYTES_V74_READY__R2_V91_WAKE_GATED__TB_CURRENT_PATH_DYNAMIC__ZERO_CREDIT",
+    "next": "RERANK_EXACT_V74_USING_SPENT_NEXT81_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_SPENDING_FROZEN_NEXT82__CONTINUE_OTHER_CAPABILITY_FIRST_GENERAL_DEVELOPMENT__DO_NOT_RUN_SAME_INFORMATION_CHECKPOINT_WORK"
   },
   "professional_regression_carrier_diagnosis": {
     "path": "canonical/verification/FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V3.json",
