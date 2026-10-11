@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_CAPABILITY_FIRST_LOCK_V15",
+  "date": "2026-10-11",
+  "status": "ACTIVE__V19_VERIFIED__FINAL_MEASUREMENT_OPEN",
+  "target_reference": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "current_subject": "brain-osworld-v21-model-independent-gui-goal-verification-v19",
+  "subject_path": "canonical/runtime/osworld_v21_brain_subject_v19.py",
+  "verification": [
+    "canonical/verification/OSWORLD_V21_STATE_RECONSTRUCTION_V17_INDEPENDENT_VERIFY_20261011_V1.json",
+    "canonical/verification/OSWORLD_V21_TERMINAL_AUTHORITY_V18_INDEPENDENT_VERIFY_20261011_V1.json",
+    "canonical/verification/OSWORLD_V21_GUI_GOAL_VERIFICATION_V19_INDEPENDENT_VERIFY_20261011_V1.json",
+    "canonical/verification/OSWORLD_V19_POSTFREEZE_ADVERSARIAL_AUDIT_20261011_V1.json"
+  ],
+  "evidence_summary": {
+    "accumulated_synthetic_tests_passed": 72,
+    "postfreeze_adversarial_cases_passed": 1000,
+    "benchmark_cases_consumed": 0
+  },
+  "closed": [
+    "GENERIC_REVERSIBLE_RECOVERY",
+    "BROWSER_AND_MODAL_STATE_RECONSTRUCTION",
+    "SCREEN_CHANGE_ONLY_GUI_TERMINAL_AUTHORITY",
+    "HIGH_CONFIDENCE_CURRENT_GUI_STATE_VERIFICATION"
+  ],
+  "remaining": [
+    "BROADER_CROSS_COMPOSITION_CAPABILITY_MARGIN",
+    "FINAL_MATCHED_OSWORLD_MEASUREMENT"
+  ],
+  "measurement_routes": {
+    "owner_maintainer_run": "AVAILABLE",
+    "self_hosted_gated_bytes": "BLOCKED_ON_CURRENT_PUBLIC_KVM_CARRIER_BUT_NOT_IRREDUCIBLE"
+  },
+  "rule": "CAPABILITY_FIRST__OSWORLD_IS_MEASUREMENT_NOT_DEVELOPMENT_TARGET",
+  "score_claim_allowed": false,
+  "incremental_spend_usd": 0
+}
