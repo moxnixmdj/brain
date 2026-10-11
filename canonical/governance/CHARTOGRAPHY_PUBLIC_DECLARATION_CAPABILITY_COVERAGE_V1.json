@@ -1,0 +1,219 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_PUBLIC_DECLARATION_CAPABILITY_COVERAGE_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE__SCHEDULING_EVIDENCE_ONLY__NO_CAPABILITY_RELATION_CLOSURE",
+  "benchmark": "Chartography",
+  "public_source": {
+    "repository": "surge-ai/chartography",
+    "commit": "3f1bf837232d3918c2cc35c6e2418c9e70d2a57b",
+    "path": "README.md",
+    "declared_task_count": 100,
+    "declared_domains": [
+      "STEM",
+      "FINANCE_INVESTING",
+      "MANUFACTURING_SUPPLY_CHAIN",
+      "HEALTHCARE"
+    ],
+    "explicitly_named_formats": [
+      "KAPLAN_MEIER",
+      "CANDLESTICK",
+      "CONTOUR_MAP",
+      "SANKEY",
+      "BODE_PLOT",
+      "GROWTH_CHART"
+    ],
+    "declared_reasoning_characteristics": [
+      "ESTIMATE_VALUES_AGAINST_SPARSELY_LABELED_AXES",
+      "TRACE_OVERLAPPING_FLOWS",
+      "USE_CHART_PLUS_DOMAIN_KNOWLEDGE"
+    ]
+  },
+  "verified_brain_native_primitives": [
+    {
+      "capability_id": "chart.raster.scene_graph.v1",
+      "verification": "canonical/verification/CHART_RASTER_SCENE_GRAPH_V1_INDEPENDENT_VERIFY_20261011.json"
+    },
+    {
+      "capability_id": "chart.raster.legend_style_binding.v1",
+      "verification": "canonical/verification/CHART_LEGEND_STYLE_BINDING_V1_VERIFY_20261011.json"
+    },
+    {
+      "capability_id": "chart.raster.curve_value_query.v1",
+      "verification": "canonical/verification/CHART_CURVE_VALUE_QUERY_V1_VERIFY_20261011.json"
+    },
+    {
+      "capability_id": "chart.read.legend_linear_intersection.v1",
+      "verification": "canonical/verification/CHARTOGRAPHY_BRAIN_NATIVE_CURRENT_V3_VERIFY_20261011.json"
+    },
+    {
+      "capability_id": "chart.read.binary_phase_solvus.v1",
+      "verification": "canonical/verification/CHARTOGRAPHY_BRAIN_NATIVE_CURRENT_V3_VERIFY_20261011.json"
+    }
+  ],
+  "declared_family_coverage": [
+    {
+      "family": "KAPLAN_MEIER",
+      "state": "PARTIAL_SUPPORT_ONLY",
+      "verified_support": [
+        "CALIBRATED_AXES",
+        "LEGEND_COLOR_BINDING",
+        "UNIQUE_CURVE_Y_AT_X"
+      ],
+      "open": [
+        "CURVE_X_AT_Y_OR_THRESHOLD_INTERSECTION",
+        "SURVIVAL_DOMAIN_SEMANTICS",
+        "SAME_COLOR_OR_STYLE_OVERLAP_WHERE_PRESENT"
+      ]
+    },
+    {
+      "family": "BODE_PLOT",
+      "state": "PARTIAL_SUPPORT_ONLY",
+      "verified_support": [
+        "LINEAR_OR_LOG10_AXES",
+        "LEGEND_COLOR_BINDING",
+        "UNIQUE_CURVE_Y_AT_X"
+      ],
+      "open": [
+        "MULTI_PANEL_OR_MAGNITUDE_PHASE_BINDING",
+        "BODE_DOMAIN_SEMANTICS",
+        "CURVE_X_AT_Y_THRESHOLD_WHERE_REQUIRED"
+      ]
+    },
+    {
+      "family": "GROWTH_CHART",
+      "state": "PARTIAL_SUPPORT_ONLY",
+      "verified_support": [
+        "CALIBRATED_AXES",
+        "RASTER_CURVE_GEOMETRY"
+      ],
+      "open": [
+        "DIRECT_CURVE_LABEL_BINDING",
+        "CURVE_FAMILY_RANK_OR_NEAREST_QUERY",
+        "GROWTH_PERCENTILE_DOMAIN_SEMANTICS"
+      ]
+    },
+    {
+      "family": "CONTOUR_MAP",
+      "state": "OPEN_MAJOR_RESIDUAL",
+      "verified_support": [
+        "OCR_SENSOR",
+        "RASTER_COLOR_COMPONENTS"
+      ],
+      "open": [
+        "ISOLINE_TOPOLOGY",
+        "ISOLINE_LABEL_OR_VALUE_BINDING",
+        "SPATIAL_POINT_QUERY",
+        "CONTOUR_DOMAIN_SEMANTICS"
+      ]
+    },
+    {
+      "family": "SANKEY",
+      "state": "OPEN_MAJOR_RESIDUAL",
+      "verified_support": [
+        "OCR_SENSOR",
+        "RASTER_COLOR_COMPONENTS"
+      ],
+      "open": [
+        "FLOW_BAND_TOPOLOGY",
+        "FLOW_WIDTH_QUANTIFICATION",
+        "NODE_LABEL_BINDING",
+        "SANKEY_DOMAIN_SEMANTICS"
+      ]
+    },
+    {
+      "family": "CANDLESTICK",
+      "state": "OPEN_MAJOR_RESIDUAL",
+      "verified_support": [
+        "OCR_SENSOR",
+        "CALIBRATED_AXES"
+      ],
+      "open": [
+        "CANDLE_BODY_WICK_DETECTION",
+        "OHLC_SEMANTICS",
+        "TIME_AXIS_ITEM_BINDING",
+        "CANDLESTICK_DOMAIN_SEMANTICS"
+      ]
+    }
+  ],
+  "candidate_shared_residuals": [
+    {
+      "id": "CURVE_X_AT_Y_INTERSECTION",
+      "public_declared_family_support": [
+        "KAPLAN_MEIER",
+        "BODE_PLOT",
+        "GROWTH_CHART"
+      ],
+      "estimated_implementation_wall_clock_class": "SMALL",
+      "ownership_route": "BRAIN_NATIVE_DETERMINISTIC_COMPOSITION",
+      "selection_state": "SELECTED_NEXT_BY_REUSE_TO_WALL_CLOCK",
+      "proposition_closure_authority": false
+    },
+    {
+      "id": "DIRECT_CURVE_LABEL_BINDING_AND_FAMILY_RANK",
+      "public_declared_family_support": [
+        "GROWTH_CHART",
+        "KAPLAN_MEIER",
+        "CONTOUR_MAP"
+      ],
+      "estimated_implementation_wall_clock_class": "MEDIUM",
+      "selection_state": "NEXT_CANDIDATE_AFTER_INVERSE_CURVE_QUERY",
+      "proposition_closure_authority": false
+    },
+    {
+      "id": "MULTI_PANEL_PLOT_DECOMPOSITION",
+      "public_declared_family_support": [
+        "BODE_PLOT"
+      ],
+      "estimated_implementation_wall_clock_class": "MEDIUM",
+      "selection_state": "DEFER_UNTIL_REQUIRED",
+      "proposition_closure_authority": false
+    },
+    {
+      "id": "ISOLINE_TOPOLOGY_AND_VALUE_BINDING",
+      "public_declared_family_support": [
+        "CONTOUR_MAP"
+      ],
+      "estimated_implementation_wall_clock_class": "MEDIUM_TO_LARGE",
+      "selection_state": "DEFERRED_BY_LOWER_REUSE_TO_WALL_CLOCK",
+      "proposition_closure_authority": false
+    },
+    {
+      "id": "FLOW_BAND_TOPOLOGY_AND_WIDTH",
+      "public_declared_family_support": [
+        "SANKEY"
+      ],
+      "estimated_implementation_wall_clock_class": "LARGE",
+      "selection_state": "DEFERRED_BY_LOWER_REUSE_TO_WALL_CLOCK",
+      "proposition_closure_authority": false
+    },
+    {
+      "id": "CANDLE_OHLC_GLYPH_SEMANTICS",
+      "public_declared_family_support": [
+        "CANDLESTICK"
+      ],
+      "estimated_implementation_wall_clock_class": "MEDIUM",
+      "selection_state": "DEFERRED_BY_LOWER_REUSE_TO_WALL_CLOCK",
+      "proposition_closure_authority": false
+    }
+  ],
+  "selected_next_action": "BUILD_AND_INDEPENDENTLY_VERIFY_BRAIN_NATIVE_CURVE_X_AT_Y_INTERSECTION",
+  "relation_to_target": {
+    "comparison_predicate": "BRAIN_CAPABILITY_NONINFERIOR_TO_TARGET_ON_BOUND_SCOPE__CHARTOGRAPHY_TOOLS_GE_89",
+    "current_relation": "OPEN_UNBOUND_RELATION",
+    "typed_entailment_to_ge_89": false,
+    "benchmark_score_credit": 0,
+    "capability_comparison_credit": 0
+  },
+  "accounting": {
+    "heldout_chartography_cases_consumed": 0,
+    "external_general_purpose_model_runtime_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_PUBLICLY_NAMED_FORMATS_EXHAUST_THE_100_TASK_SCOPE",
+    "NO_CLAIM_PARTIAL_PRIMITIVE_SUPPORT_IMPLIES_FAMILY_SUCCESS",
+    "NO_CHARTOGRAPHY_GE89_ENTAILMENT",
+    "NO_BRANDED_SCORE_CREATED"
+  ]
+}
