@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_CAPABILITY_FIRST_WORKFLOW_CURRENT_HEAD_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__CURRENT_MODEL_INDEPENDENT_V3_WITH_EXPLICIT_ORDERED_SUBGOAL_COMPOSITION__119_OF_119_SYNTHETIC_TESTS__ZERO_BENCHMARK_CASES__ZERO_SCORE_CREDIT",
+  "target_reference": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "subject": {
+    "branch": "osworld-v21-direct-matched-run-20261011-v1",
+    "head_sha": "ec925e4d15c448c3daba3631834917363d77ca7a",
+    "subject_id": "brain-osworld-v21-model-independent-state-app-web-v3",
+    "general_purpose_model_runtime_cognition": false,
+    "external_generation_provider": false
+  },
+  "independent_carrier": {
+    "type": "SPRITE",
+    "name": "brain-live-runtime-v1-verify-20261008",
+    "id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+    "combined_working_tree": "/home/sprite/osworld-v3-combined-verify",
+    "exact_changed_files_byte_compared_to_github_before_execution": true,
+    "incremental_spend_usd": 0
+  },
+  "replay": {
+    "command": "PYTHONPATH=. python3 -m pytest -q canonical/tests --ignore=canonical/tests/test_osworld_v21_browser_ops_v1.py",
+    "passed": 119,
+    "failed": 0,
+    "elapsed_seconds": 3.64,
+    "benchmark_cases_consumed": 0,
+    "excluded_obsolete_test": "canonical/tests/test_osworld_v21_browser_ops_v1.py",
+    "exclusion_reason": "OBSOLETE_DIRECT_BROWSER_COMPILER_IS_NOT_IN_THE_V3_LOADED_MODULE_GRAPH__CURRENT_BROWSER_CONTROL_IS_HOST_SIDE_BROWSER_OP"
+  },
+  "exact_current_blobs": {
+    "canonical/runtime/osworld_v21_workflow_policy_v1.py": "bea552aef5ed081ef11b3488c7d336e100f7049e",
+    "canonical/runtime/osworld_v21_app_policy_overlay_v2.py": "10e2a9029ed5767d7b4a8679664d6080867388c7",
+    "canonical/runtime/osworld_v21_brain_agent_adapter_v2.py": "ea4bfe91c3167fcb0a443b0d2d0daa7f5c1e9a18",
+    "canonical/runtime/osworld_v21_brain_subject_v3.py": "c1075e2522c4b424d88ee391a121c79e46823ff4",
+    "canonical/runtime/osworld_v21_web_app_policy_overlay_v1.py": "35dfb1065d2b721d94f79cc03e55aa7d38980da9",
+    "canonical/runtime/osworld_v21_generic_policy_v1.py": "1e39aadd4eb03aff91ca1fb71308e518a3bbf82a",
+    "canonical/runtime/osworld_v21_brain_agent_adapter_v3.py": "37078c13ffa512421571baf24e2b30564b00f8d9",
+    "canonical/tests/test_osworld_v21_workflow_policy_v1.py": "bd6cdf45981ebedd7fe5b3fc26c5d8adfb2b22c5",
+    "canonical/tests/test_osworld_v21_app_ops_successor_v1.py": "1293798b60705ef51d9a5f3050dd838b89ec5844",
+    "canonical/tests/test_osworld_v21_brain_subject_v3.py": "272a752f7cb86ad387165e26bb889d33c1d63de9"
+  },
+  "newly_proved": [
+    "EXPLICIT_ORDERED_SUBGOALS_CAN_BE_DECOMPOSED_WITHOUT_SPLITTING_QUOTED_SEPARATORS",
+    "ORDINARY_CONJUNCTION_DOES_NOT_CREATE_INVENTED_SUBGOALS",
+    "INTERMEDIATE_CLAUSE_ADVANCEMENT_REQUIRES_EXPLICIT_BASE_POLICY_COMPLETION_EVIDENCE",
+    "UNVERIFIED_OR_FAILED_CLAUSE_DOES_NOT_ADVANCE",
+    "SUCCESSFUL_TYPED_APP_OPERATION_IS_RECORDED_AS_CLAUSE_COMPLETION_EVIDENCE",
+    "IDENTICAL_COMPLETED_APP_OPERATION_IS_NOT_REPEATED",
+    "CURRENT_V3_IMPORT_GRAPH_REMAINS_MODEL_INDEPENDENT_AND_EXCLUDES_OBSOLETE_DIRECT_BROWSER_COMPILER"
+  ],
+  "remaining_general_residuals": [
+    "SEMANTIC_DECOMPOSITION_OF_VAGUE_OR_UNORDERED_MULTI_CONSTRAINT_GOALS",
+    "CROSS_APP_INFORMATION_SYNTHESIS_WHERE_LATER_ACTION_ARGUMENTS_DEPEND_ON_EARLIER_OBSERVATIONS",
+    "GENERAL_DOCUMENT_SPREADSHEET_PRESENTATION_LAYOUT_AND_FORMULA_TRANSFORMATION",
+    "CODE_WORKSPACE_REPOSITORY_EDIT_EXECUTE_VERIFY",
+    "MEDIA_GEOMETRY_TIMELINE_TRANSFORMATION",
+    "IRREDUCIBLE_VISUAL_ONLY_GROUNDING_AND_RECOVERY"
+  ],
+  "hard_nonclaims": [
+    "NO_OFFICIAL_OSWORLD_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_119_SYNTHETIC_TESTS_IMPLY_81_8",
+    "NO_CLAIM_ALL_MULTI_STEP_GOALS_ARE_SOLVED",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
