@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_TRACE_SCORER_NONIDENTIFIABILITY_LOCAL_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__8_OF_8__TRACE_AND_SCORER_NONENTAILMENT_VERIFIED__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/aa_briefcase_trace_scorer_nonidentifiability_v1.py",
+      "git_blob_sha": "86e023a74c7aa53289ab3b5b292747d9d640279a"
+    },
+    "tests": {
+      "path": "canonical/tests/test_aa_briefcase_trace_scorer_nonidentifiability_v1.py",
+      "git_blob_sha": "025f187b4af699097afc72300f33b5f29eaceced"
+    },
+    "governance": {
+      "path": "canonical/governance/AA_BRIEFCASE_TRACE_SCORER_NONIDENTIFIABILITY_CUT_20261011_V1.json",
+      "git_blob_sha": "200afd8c78c609063dc23fcaddc8cc01cea085c9"
+    }
+  },
+  "replay": {
+    "executor": "LOCAL_ISOLATED_PYTHON_3_UNITTEST",
+    "tests_run": 8,
+    "tests_passed": 8,
+    "tests_failed": 0,
+    "cases": [
+      "ETA_HALF_FLAT_PROBABILITY",
+      "ETA_HALF_NONUNIQUE_FIT_COUNTEREXAMPLE",
+      "ETA_ABOVE_HALF_ALL_WINS_LIKELIHOOD_STRICTLY_INCREASES",
+      "ETA_ABOVE_HALF_NO_FINITE_MLE_COUNTEREXAMPLE",
+      "ETA_BELOW_HALF_REVERSES_SIGNAL",
+      "TWO_HIDDEN_TRACES_SHARE_PUBLIC_STATE_BUT_DIFFER",
+      "SCORE_TRACE_ROUTE_REPORTS_EXACT_TWO_MISSING_PREMISES",
+      "ROUTE_PASSES_ONLY_IF_BOTH_MISSING_PREMISES_ARE_BOUND"
+    ]
+  },
+  "verified_truths": [
+    "PUBLIC_INTERFACE_TYPES_DO_NOT_IDENTIFY_THE_PRIVATE_SCORE_BEARING_TRACE",
+    "PUBLIC_CROWD_BT_SEMANTICS_AND_ANCHOR_DO_NOT_ENTAIL_A_UNIQUE_FINITE_SUBJECT_RATING",
+    "CURRENT_SCORE_TRACE_SUBSTITUTION_ROUTE_STILL_REQUIRES_ACTUAL_TRACE_EQUIVALENCE_AND_FROZEN_SCORER_EQUIVARIANCE_OR_UNIQUENESS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ACTUAL_FROZEN_ETA_EQUALS_ANY_COUNTEREXAMPLE_VALUE",
+    "NO_CLAIM_ACTUAL_FROZEN_GRAPH_EQUALS_THE_COUNTEREXAMPLE_GRAPH",
+    "NO_AA_BRIEFCASE_SCORE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
