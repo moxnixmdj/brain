@@ -41,7 +41,14 @@
     "subject_bound": true,
     "reference_bound": true,
     "same_exact_brain_subject_across_selected_basis": true,
-    "reference_id_exact": "OPUS_5_5_AA_BRIEFCASE_1822_REFERENCE"
+    "reference_id_exact": "OPUS_5_5_AA_BRIEFCASE_1822_REFERENCE",
+    "reference_vector": {
+      "rubric_pass_rate": 0.6121212121212121,
+      "analytical_quality_elo": 2206.92,
+      "presentation_elo": 1709.91,
+      "sha256": "1e542d27e3282755bfba0c33f9cfe1398fb71409df3b543848cada6ce2e94879",
+      "source": "canonical/evidence/AA_BRIEFCASE_PUBLIC_SCORER_CONTRACT_V2_20261011.json"
+    }
   },
   "optimization_rule": {
     "objective": "MINIMIZE_TOTAL_ACTION_COST_THEN_CERTIFICATE_COUNT_THEN_STABLE_ID_ORDER",
@@ -53,11 +60,11 @@
   "implementation": {
     "runtime": {
       "path": "canonical/runtime/aa_briefcase_capability_information_reduction_v1.py",
-      "git_blob_sha": "27c3d6b952a3cdcb458e7f6b40c3aa21f24e283d"
+      "git_blob_sha": "3bc4da3f81cffb86b6e0289e89210a52e772d0ec"
     },
     "tests": {
       "path": "canonical/tests/test_aa_briefcase_capability_information_reduction_v1.py",
-      "git_blob_sha": "184d18e878af0430953ccbfbbeca9df419fcaa73"
+      "git_blob_sha": "322e79301578c101fd2cf33504bdf7ec65de1397"
     }
   },
   "current_evidence_probe": {
