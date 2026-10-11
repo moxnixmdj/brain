@@ -1,0 +1,144 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_TEN_TASK_DECONTAMINATION_READMISSION_CUT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__TEN_ZERO_VERDICT_CPU_TASKS_IDENTIFIED__FIVE_SLOT_READMISSION_PER_TASK_CONDITIONALLY_REOPENS_THRESHOLD_CAPACITY__ZERO_CREDIT",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "capacity_basis": {
+    "corrected_current_cpu_route_upper_bound": 171,
+    "required_success_slots": 219,
+    "ten_tasks_times_five_new_slots": 50,
+    "conditional_readmitted_capacity": 221,
+    "conditional_failure_slack_slots": 2,
+    "arithmetic": "171+10*5=221__AND__221-219=2"
+  },
+  "candidate_tasks": [
+    {
+      "task": "pretrain-shard-corruption",
+      "receipt_path": "canonical/capabilities/opus55/PRETRAIN_SHARD_CORRUPTION_CONTAMINATION_20260930_V1.json",
+      "receipt_git_blob_sha": "bbaa8900dacc975d195730bcdfd61d60b658098a",
+      "prior_state": "CONTAMINATED_BEFORE_SUBMISSION__OFFICIAL_VERIFIER_NOT_RUN",
+      "counted_official_trial_slots": 0
+    },
+    {
+      "task": "nextjs-performance",
+      "receipt_path": "canonical/capabilities/opus55/NEXTJS_PERFORMANCE_CONTAMINATION_20260930_V1.json",
+      "receipt_git_blob_sha": "8c162020d9ff640040cab51a0d504b20b6165c76",
+      "prior_state": "CONTAMINATED_BEFORE_EXECUTION__OFFICIAL_VERIFIER_NOT_RUN",
+      "counted_official_trial_slots": 0
+    },
+    {
+      "task": "hof-topology-interpenetration",
+      "receipt_path": "canonical/capabilities/opus55/HOF_TOPOLOGY_INTERPENETRATION_TB4_CONTAMINATION_20261001_V1.json",
+      "receipt_git_blob_sha": "ff24f42ccb7a07f65985ecf3f63b03816ba97453",
+      "prior_state": "CONTAMINATED__SESSION_ABORTED_BEFORE_TERMINAL_VERIFIER__HIDDEN_VERIFIER_NOT_RUN",
+      "counted_official_trial_slots": 0
+    },
+    {
+      "task": "batched-eval-parity",
+      "receipt_path": "canonical/capabilities/opus55/BATCHED_EVAL_PARITY_TB4_CONTAMINATION_20261001_V1.json",
+      "receipt_git_blob_sha": "7fd70c0b66bd8387c65d2573d46478ed29ed700b",
+      "prior_state": "CONTAMINATED__NO_HIDDEN_VERIFIER_RUN",
+      "counted_official_trial_slots": 0
+    },
+    {
+      "task": "gsea-proteomics",
+      "receipt_path": "canonical/capabilities/opus55/GSEA_PROTEOMICS_TB4_VERIFIER_INFRA_FAILURE_20261001_V1.json",
+      "receipt_git_blob_sha": "5a3051d9c979c7ea22387e53c0dd22a893fe3c50",
+      "prior_state": "VERIFIER_INFRASTRUCTURE_FAILURE_BEFORE_TEST_SCRIPT__REWARD_NOT_OBSERVED_OR_ADJUDICATED",
+      "counted_official_trial_slots": 0
+    },
+    {
+      "task": "intrastat-meldung",
+      "receipt_path": "canonical/capabilities/opus55/INTRASTAT_MELDUNG_TB4_CONTAMINATED_20261001_V1.json",
+      "receipt_git_blob_sha": "198e3d84140da2cedffc5cd1e04e4127b74d258d",
+      "prior_state": "CONTAMINATED__INDEPENDENT_EXECUTION_FAILED_BEFORE_READY__NO_SUCCESS_OR_FAILURE_PROVEN",
+      "counted_official_trial_slots": 0
+    },
+    {
+      "task": "session-window-debug",
+      "receipt_path": "canonical/capabilities/opus55/SESSION_WINDOW_DEBUG_RANK16_CONTAMINATED_20261001_V1.json",
+      "receipt_git_blob_sha": "8769d3b26bd03a56dcfb243edf5f07a4d50f78f8",
+      "prior_state": "CONTAMINATED__NO_TASK_EXECUTION__HIDDEN_VERIFIER_NOT_READ",
+      "counted_official_trial_slots": 0
+    },
+    {
+      "task": "data-anonymization",
+      "receipt_path": "canonical/capabilities/opus55/DATA_ANONYMIZATION_RANK17_SOURCE_BOUNDARY_CONTAMINATED_20261001_V1.json",
+      "receipt_git_blob_sha": "850ed27e74a8fede786345064d688caf9acae358",
+      "prior_state": "SOURCE_BOUNDARY_CONTAMINATED__NO_CANDIDATE__NO_TERMINAL_SUBMISSION__HIDDEN_VERIFIER_NOT_READ",
+      "counted_official_trial_slots": 0
+    },
+    {
+      "task": "vba-userform-port",
+      "receipt_path": "canonical/capabilities/opus55/VBA_USERFORM_PORT_RANK20_CONTAMINATION_LEDGER_V1.json",
+      "receipt_git_blob_sha": "331e50ea0fa4872fa8a738f069e11b3ac4070038",
+      "prior_state": "CONTAMINATED_PRE_STAGE_C__TASK_COMMAND_NOT_EXECUTED__STAGE_C_REVOKED",
+      "counted_official_trial_slots": 0
+    },
+    {
+      "task": "foodstuff-beta-activity",
+      "receipt_path": "canonical/capabilities/opus55/FOODSTUFF_BETA_ACTIVITY_RANK21_POST_EXPOSURE_CONTAMINATION_V1.json",
+      "receipt_git_blob_sha": "22bcef5feeb835a2e97164ecf867a147f7bd75b4",
+      "prior_state": "CONTAMINATED_POST_STAGE_B__TASK_EXECUTION_ZERO__TERMINAL_VERIFIER_COUNT_ZERO",
+      "counted_official_trial_slots": 0
+    }
+  ],
+  "readmission_proof_contract": {
+    "purpose": "PROVE_NEW_TRIALS_ARE_CAUSALLY_INDEPENDENT_OF_PRIOR_TASK_SPECIFIC_FORBIDDEN_INFORMATION__NOT_ERASE_OR_REINTERPRET_PRIOR_EVIDENCE",
+    "mandatory_premises": [
+      "PRIOR_TASK_HAS_ZERO_COUNTED_OFFICIAL_TRIAL_SLOTS_AND_NO_VALID_REWARD_VERDICT",
+      "COMPLETE_CONTENT_ADDRESSED_ACTOR_DEPENDENCY_AND_EFFECT_CLOSURE_IS_INDEPENDENTLY_VERIFIED",
+      "COMPLETE_TASK_SPECIFIC_FORBIDDEN_PROVENANCE_DESCENDANT_CLOSURE_IS_INDEPENDENTLY_VERIFIED",
+      "ACTOR_PROVENANCE_ANCESTOR_SET_IS_DISJOINT_FROM_TASK_SPECIFIC_FORBIDDEN_PROVENANCE_DESCENDANT_SET",
+      "ACTOR_SNAPSHOT_IS_IMMUTABLE_AND_IDENTICAL_ACROSS_THE_FIVE_COUNTED_TRIALS",
+      "ZERO_AMBIENT_PRIOR_TASK_SESSION_STATE__ZERO_PRIOR_VERIFIER_ARTIFACTS__ZERO_PRIOR_TASK_SPECIFIC_REPAIR_ARTIFACTS",
+      "NO_GENERAL_OR_TASK_SPECIFIC_DISCOVERY_SEARCH_DURING_COUNTED_TRIALS",
+      "FIVE_DISTINCT_TRIAL_OUTPUTS_ARE_CONTENT_ADDRESSED_AND_FROZEN_BEFORE_ANY_OF_THE_FIVE_RECEIVE_VERIFIER_FEEDBACK",
+      "NO_CROSS_TRIAL_FEEDBACK__NO_VERIFIER_TO_ACTOR_CHANNEL__NO_CERTIFIER_TO_ACTOR_CHANNEL",
+      "OFFICIAL_FROZEN_TASK_BYTES_AND_OFFICIAL_FROZEN_VERIFIER_SEMANTICS_ONLY"
+    ],
+    "fail_closed_conditions": [
+      "ANY_PROVENANCE_OVERLAP",
+      "INCOMPLETE_OR_SELF_ASSERTED_CLOSURE",
+      "ANY_PRIOR_COUNTED_OFFICIAL_SLOT",
+      "ANY_PRIOR_TASK_SPECIFIC_REPAIR_OR_VERIFIER_ARTIFACT_REACHABLE_BY_ACTOR",
+      "ANY_VERIFIER_FEEDBACK_BEFORE_ALL_FIVE_OUTPUTS_ARE_FROZEN",
+      "ANY_CROSS_TRIAL_FEEDBACK"
+    ],
+    "legal_effect_if_passed": "READMISSION_ELIGIBILITY_FOR_UP_TO_FIVE_DISTINCT_TRIAL_SLOTS_PER_TASK_ONLY",
+    "illegal_effects": [
+      "NO_SUCCESS_CREDIT_FROM_READMISSION_PROOF",
+      "NO_PERMISSION_TO_REPAIR_FROM_PRIOR_HIDDEN_VERIFIER_INFORMATION",
+      "NO_AUTOMATIC_BENCHMARK_EXECUTION_AUTHORITY",
+      "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+    ]
+  },
+  "existing_mechanisms_to_reuse": [
+    "CONTENT_ADDRESSED_DEPENDENCY_EFFECT_CLOSURE",
+    "D_FINALITY_V2_ZERO_AMBIENT_REPLAY_ENVIRONMENT",
+    "D_FINALITY_V2_DONOR_ISOLATION",
+    "CONTAMINATION_ADMISSIBILITY_RECEIPTS",
+    "TB4_POST_FREEZE_CERTIFIER_NONINTERFERENCE"
+  ],
+  "only_missing_mechanical_primitive": "INDEPENDENTLY_VERIFIED_SET_DISJOINTNESS_BETWEEN_COMPLETE_ACTOR_PROVENANCE_ANCESTORS_AND_COMPLETE_TASK_SPECIFIC_FORBIDDEN_PROVENANCE_DESCENDANTS",
+  "current_effect": {
+    "ten_task_identity_and_zero_verdict_minimum_cut_closed": true,
+    "threshold_capacity_reopened": false,
+    "reason": "READMISSION_PROOF_NOT_YET_INDEPENDENTLY_IMPLEMENTED_AND_PASSED_FOR_ALL_TEN_TASKS"
+  },
+  "hard_nonclaims": [
+    "NO_TASK_IS_READMITTED_BY_THIS_CANDIDATE_ALONE",
+    "NO_TB4_SUCCESS_OR_SCORE_CREDIT",
+    "NO_GENUINE_REWARD_ZERO_TASK_IS_ERASED_OR_RETRIED_FOR_CREDIT",
+    "NO_TERMINAL_CASE_EXECUTION",
+    "NO_EXECUTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "independent_verification_required": true,
+  "promotion_authority": false
+}
