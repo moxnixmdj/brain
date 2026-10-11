@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_PUBLIC_Q5_DONOR_FREE_CAGR_CANARY_V1",
+  "date": "2026-10-11",
+  "status": "PUBLIC_MUST_PASS_MATCH__BENCHMARK_IMPLIED_RENT_CONVENTION__INTERMEDIATE_CONVENTION_DISCREPANCY_OPEN__ZERO_BENCHMARK_CREDIT",
+  "target_predicate": "FINANCE_AGENT_V2_GE_58_59",
+  "scope": "PUBLIC_QUESTION_ONLY__GENERAL_QUANTITATIVE_ADJUSTED_EBITDAR_CAGR_MUST_PASS",
+  "benchmark_binding": {
+    "repository": "vals-ai/finance-agent-v2",
+    "commit": "502aab6fdaa3fb9294905c7453f89882baa8d39b",
+    "public_csv_path": "data/public.csv",
+    "public_csv_git_blob_sha": "fca7ec52abce7ca8351d0692d00a4aa74f680855",
+    "public_question_ordinal_1_based": 5,
+    "category": "General Quantitative Analysis",
+    "public_must_pass_criteria": [
+      "Adjusted EBITDAR '21A-'24A Compound Annual Growth Rate (CAGR) growth is 6.89%"
+    ]
+  },
+  "primary_sources": {
+    "caesars_2022_10k": {
+      "url": "https://www.sec.gov/Archives/edgar/data/1590895/000159089523000070/czr-20221231.htm",
+      "adjusted_ebitda_2021_million_usd": "2990"
+    },
+    "vici_q4_2021_supplement": {
+      "url": "https://www.sec.gov/Archives/edgar/data/1705696/000170569622000045/vici4q21financialsupplem.htm",
+      "annual_cash_rent_as_of_feb_2022_million_usd": {
+        "caesars_regional_and_joliet_pre_nci": "649.6",
+        "caesars_las_vegas": "422.2",
+        "total_pre_nci": "1071.8"
+      }
+    },
+    "caesars_2024_10k": {
+      "url": "https://www.sec.gov/Archives/edgar/data/1590895/000159089525000068/czr-20241231.htm",
+      "adjusted_ebitda_2024_million_usd": "3739"
+    },
+    "vici_2024_10k": {
+      "url": "https://www.sec.gov/Archives/edgar/data/1705696/000170569625000033/vici-20241231.htm",
+      "current_annual_rent_million_usd": {
+        "caesars_regional_and_joliet_pre_nci": "725.489",
+        "caesars_las_vegas": "495.418",
+        "total_pre_nci": "1220.907"
+      }
+    }
+  },
+  "recomputation": {
+    "implied_2021_adjusted_ebitdar_million_usd": "4061.8",
+    "implied_2024_adjusted_ebitdar_million_usd": "4959.907",
+    "formula": "((4959.907/4061.8)^(1/3)-1)*100",
+    "unrounded_cagr_percent": "6.885386675525632408308640964837674582900",
+    "display_cagr_percent": "6.89",
+    "public_must_pass_match": true
+  },
+  "convention_diagnostic": {
+    "question_literal_mentions": "GLPI_AND_VICI_LEASES",
+    "must_pass_reproduction_uses": "VICI_CURRENT_ANNUAL_CASH_RENT_PRE_JOLIET_NCI_ADJUSTMENT",
+    "literal_glpi_plus_vici_reconciliation_proved": false,
+    "2022_optional_intermediate_reconciliation_proved": false,
+    "reason": "PUBLIC_MUST_PASS_IS_REPRODUCIBLE_BUT_THE_OPTIONAL_YEAR_BY_YEAR_SERIES_DOES_NOT_FOLLOW_A_SINGLE_PROVED_LITERAL_GLPI_PLUS_VICI_ADDBACK_RULE_FROM_THE_BOUND_FIRST_PARTY_FILINGS"
+  },
+  "brain_route": {
+    "question_compiler": "canonical/runtime/finance_quantitative_question_contract_v1.py",
+    "dependency_compiler": "canonical/runtime/finance_quantitative_dependency_v1.py",
+    "cagr_algebra": "canonical/runtime/finance_quantitative_algebra_v1.py",
+    "runtime_external_model_cognition_required": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_OPTIONAL_Q5_RUBRIC_ITEMS_ARE_CLOSED",
+    "NO_CLAIM_LITERAL_GLPI_PLUS_VICI_SEMANTICS_ARE_RECONCILED",
+    "NO_PRIVATE_TEST_OR_VALIDATION_CASE_WAS_ACCESSED",
+    "NO_CLAIM_FINANCE_AGENT_V2_SCORE_GE_58_59",
+    "NO_ACCEPTANCE_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "private_cases_exposed": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
