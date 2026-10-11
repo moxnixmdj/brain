@@ -375,7 +375,10 @@ def plan_next_v2(history: Sequence[Any], tool_definitions: Sequence[Any]) -> v1.
         "MARKET_SENTIMENT_FROM_RETURN",
         "RANK_COMPARISON",
     }
-    if market is not None and not non_market_ops:
+    explicit_revenue_growth = bool(
+        re.search(r"(?i)\\brevenue growth\\b|growth in revenue|revenue.*growth", question)
+    )
+    if market is not None and not non_market_ops and not explicit_revenue_growth:
         require("submit_final_result")
         return v1.PlannedCall(
             "submit_final_result",
