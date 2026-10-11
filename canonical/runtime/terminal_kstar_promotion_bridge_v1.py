@@ -11,7 +11,9 @@ SEM=("observable_trace_scope_complete","all_useful_target_behaviors_in_scope","e
 REDUCER_SEM=("observable_trace_scope_complete","all_useful_target_behaviors_in_scope","every_admission_sound","residual_complement_unsat","selected_cover_complete","u_empty","abc_closed","all_credited_routes_brain_owned")
 COMMON=("exact_target_family_count_19","every_required_behavior_contracted","every_required_behavior_has_admissible_proof","donor_dependent_required_behaviors_zero","unexplained_required_behaviors_zero","unresolved_verifier_mutations_zero","unresolved_composition_failures_zero","contaminated_evidence_used_for_promotion_zero","resource_or_authority_violations_zero","final_donor_deletion_cleanroom_pass")
 ZERO=("uncontracted_required_behaviors","unproved_required_behaviors","donor_dependent_required_behaviors","unresolved_verifier_mutations","unresolved_composition_failures","contaminated_promotion_evidence","resource_or_authority_violations")
-REQ={"canonical/governance/CURRENT_TERMINAL_AUTHORITY.json","canonical/governance/TERMINAL_ARCHITECTURE_SELF_TOURNAMENT_20261007_V1.json","canonical/governance/CURRENT_PRIMITIVE_U_FRONTIER_20261007_V1.json","canonical/governance/SELECTED_DISCRIMINATOR_POLICY_COVER_BRIDGE_20261007_V1.json","canonical/runtime/terminal_closure_reducer.py"}
+GLOBAL_OWNERSHIP_REDUCER="canonical/runtime/terminal_global_ownership_postconditions_reducer_v1.py"
+GLOBAL_OWNERSHIP_REQUIRED_PREDICATES=("final_donor_deletion_cleanroom_pass","donor_deletion_protocol_v2_bound","runtime_cognition_model_independent","zero_external_model_runtime_cognition_dependencies","copied_or_rehosted_teacher_absent","runtime_dependency_inventory_complete")
+REQ={"canonical/governance/CURRENT_TERMINAL_AUTHORITY.json","canonical/governance/TERMINAL_ARCHITECTURE_SELF_TOURNAMENT_20261007_V1.json","canonical/governance/CURRENT_PRIMITIVE_U_FRONTIER_20261007_V1.json","canonical/governance/SELECTED_DISCRIMINATOR_POLICY_COVER_BRIDGE_20261007_V1.json","canonical/runtime/terminal_closure_reducer.py",GLOBAL_OWNERSHIP_REDUCER}
 RESULT="canonical/astra_runtime/artifacts/TERMINAL_KSTAR_RESULT_20261007_V1.json"
 INDEP="canonical/verification/TERMINAL_KSTAR_INDEPENDENT_VERIFICATION_20261007_V1.json"
 MANIFEST="canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json"
@@ -86,6 +88,30 @@ def promote(root:Path)->int:
         if pr.get(k) is not True: errs.append("COMMON_FINALITY_NOT_TRUE:"+k)
     for k in ZERO:
         if co.get(k)!=0: errs.append("COMMON_COUNTER_NONZERO:"+k)
+
+    gp=m.get("global_ownership_postconditions")
+    if not isinstance(gp,dict):
+        errs.append("GLOBAL_OWNERSHIP_POSTCONDITIONS_MISSING")
+    else:
+        evidence_path=gp.get("evidence"); evidence_sha=gp.get("evidence_blob_sha")
+        evidence_binding={"path":evidence_path,"git_blob_sha":evidence_sha}
+        if not bind(root,evidence_binding):
+            errs.append("GLOBAL_OWNERSHIP_RECEIPT_BINDING_INVALID")
+        else:
+            gov=load(root/evidence_path)
+            current_reducer_blob=gblob((root/GLOBAL_OWNERSHIP_REDUCER).read_bytes())
+            if gov.get("brain_reducer_blob_sha")!=current_reducer_blob:
+                errs.append("GLOBAL_OWNERSHIP_RECEIPT_REDUCER_BLOB_STALE")
+            if "INDEPENDENT_PUBLIC_RUNNER_PASS" not in str(gov.get("status","")):
+                errs.append("GLOBAL_OWNERSHIP_RECEIPT_NOT_INDEPENDENT_PASS")
+            gr=gov.get("result")
+            gpred=(gr.get("terminal_predicates") if isinstance(gr,dict) else None)
+            if not isinstance(gpred,dict):
+                errs.append("GLOBAL_OWNERSHIP_RECEIPT_PREDICATES_MISSING")
+            else:
+                for name in GLOBAL_OWNERSHIP_REQUIRED_PREDICATES:
+                    if gpred.get(name) is not True:
+                        errs.append("GLOBAL_OWNERSHIP_ZERO_MODEL_PREDICATE_NOT_TRUE:"+name)
     if errs: return fail(root,errs)
 
     proof={"schema":"PROJECT_BRAIN_TERMINAL_KSTAR_UNIVERSAL_PROOF_V1","proof_kind":r["proof_kind"],"scope_id":"scope://opus55/observable-trace","conclusion":"success","kstar_result":{"path":RESULT,"sha256":s256(rr)},"runtime_binding":r["runtime_binding"],"source_bindings":bs,"generated_basis":r["generated_basis"],"transforms":r["transforms"],"policy":r["policy"],"falsification":r.get("falsification",{}),"independent_semantic_verification":{"path":INDEP,"sha256":s256(vp.read_bytes())},"incremental_spend_usd":0}

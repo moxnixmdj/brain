@@ -87,6 +87,23 @@ def evaluate_documents(
         e.append("DONOR_CLEANROOM_NOT_PASS")
     if donor.get("behavior_preserved") is not True or donor.get("byte_identical_terminal_result") is not True or donor.get("undeclared_dependency_count") != 0:
         e.append("DONOR_CLEANROOM_SEMANTICS_INVALID")
+    if donor.get("donor_deletion_protocol") != "canonical/governance/DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_V2.json":
+        e.append("DONOR_CLEANROOM_PROTOCOL_V2_NOT_BOUND")
+    if donor.get("external_contribution_census_complete") is not True:
+        e.append("DONOR_CLEANROOM_EXTERNAL_CONTRIBUTION_CENSUS_INCOMPLETE")
+    if donor.get("full_runtime_dependency_inventory_complete") is not True:
+        e.append("DONOR_CLEANROOM_RUNTIME_DEPENDENCY_INVENTORY_INCOMPLETE")
+    if donor.get("runtime_cognition_dependency_class") != "MODEL_INDEPENDENT":
+        e.append("DONOR_CLEANROOM_RUNTIME_COGNITION_NOT_MODEL_INDEPENDENT")
+    for key in ("model_dependency_count","external_model_runtime_dependency_count","online_teacher_call_count","teacher_fallback_path_count"):
+        if donor.get(key) != 0:
+            e.append("DONOR_CLEANROOM_" + key.upper() + "_NOT_ZERO")
+    if donor.get("copied_or_rehosted_teacher_present") is not False:
+        e.append("DONOR_CLEANROOM_COPIED_OR_REHOSTED_TEACHER_NOT_EXPLICITLY_FALSE")
+    if donor.get("brain_owned_operative_artifact") is not True:
+        e.append("DONOR_CLEANROOM_BRAIN_OWNED_OPERATIVE_ARTIFACT_NOT_TRUE")
+    if donor.get("operative_solver_role") not in {"BRAIN_OWNED_NATIVE_MECHANISM","BRAIN_OWNED_DERIVED_MECHANISM"}:
+        e.append("DONOR_CLEANROOM_OPERATIVE_SOLVER_ROLE_NOT_BRAIN_OWNED")
     pre=donor.get("predeletion_result"); post=donor.get("postdeletion_result")
     if not isinstance(pre,Mapping) or not isinstance(post,Mapping) or pre.get("full_result_sha256") != TERMINAL_SHA or post.get("full_result_sha256") != TERMINAL_SHA:
         e.append("DONOR_CLEANROOM_RESULT_SHA_MISMATCH")
@@ -118,9 +135,14 @@ def evaluate_documents(
             "unresolved_verifier_mutations_zero":True,
             "unresolved_composition_failures_zero":True,
             "final_donor_deletion_cleanroom_pass":True,
+            "donor_deletion_protocol_v2_bound":True,
+            "runtime_cognition_model_independent":True,
+            "zero_external_model_runtime_cognition_dependencies":True,
+            "copied_or_rehosted_teacher_absent":True,
+            "runtime_dependency_inventory_complete":True,
         },
         "basis":{
-            "donor":"DONOR_DENIED_BYTE_IDENTICAL_FROZEN_QUALIFICATION_AND_ZERO_UNDECLARED_DEPENDENCIES",
+            "donor":"PROTOCOL_V2_BOUND__MODEL_INDEPENDENT__ZERO_MODEL_DEPENDENCIES__DONOR_DENIED_BYTE_IDENTICAL_FROZEN_QUALIFICATION",
             "verifier":"FROZEN_PACKAGE_AND_MUTATION_PREFLIGHT_PLUS_IMMUTABLE_POSTWAVE_REDUCTION",
             "composition":"PREWAVE_CURRENT_CONTROLLER_COMPOSITION_PASS_PLUS_TERMINAL_PARENT_AND_12_CONTRACT_PASS",
         },
