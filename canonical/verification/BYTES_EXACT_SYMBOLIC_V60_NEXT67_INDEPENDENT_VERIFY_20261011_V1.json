@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_V60_NEXT67_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__PERSISTED_V60_EXACT_MANIFEST__FRESH_NEXT67_17250_OF_17250__NEXT68_DURABLE_UNSPENT__ZERO_GLOBAL_CREDIT",
+  "subject": {
+    "manifest_sha256": "6ab3ad3366fe10d0d081784d61838d097eac1c242cee729453d78d48ede5033e",
+    "raw_python_source_bytes": 1713090,
+    "durable_archive_library_file_id": "libfile_afa0d53808cc8191976782dc3e9ea40a",
+    "durable_archive_sha256": "7ebb193e07a2a1e18265ebf4b1ef76b4c011b665bf100d35550033b894d96dd9"
+  },
+  "checks": {
+    "archive_materialized_from_library": true,
+    "archive_python_file_count": 277,
+    "archive_plus_manifest_member_count": 278,
+    "recomputed_executable_manifest_sha256": "6ab3ad3366fe10d0d081784d61838d097eac1c242cee729453d78d48ede5033e",
+    "recomputed_raw_python_source_bytes": 1713090,
+    "next67_corpus_sha256": "aab6e4fb65f266211585f9d60c88c3dcc2834ca832d91c50357edd7bd2ac20be",
+    "next67_cases": 17250,
+    "next67_passed": 17250,
+    "next67_failed": 0,
+    "next68_corpus_sha256": "ee4eb1b62ce24c1c31e39c19585ce5a04e01fc6099b88c65a7530840a6c15e70",
+    "next68_cases": 17480,
+    "next68_spent": false
+  },
+  "carrier": "CHATGPT_ISOLATED_CONTAINER_AUDIT_REPLAY",
+  "independent_from_original_v60_candidate_builder": true,
+  "promotion_scope": "BYTES_RESEARCH_FRONTIER_ONLY",
+  "hard_nonclaims": [
+    "NO_OPUS_CAPABILITY_CREDIT",
+    "NO_BENCHMARK_ACCEPTANCE_CREDIT",
+    "NO_PROFESSIONAL_QUALITY_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
