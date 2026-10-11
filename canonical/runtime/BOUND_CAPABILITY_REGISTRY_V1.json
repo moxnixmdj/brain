@@ -4664,6 +4664,210 @@
         "benchmark_cases_consumed": 0,
         "external_general_purpose_model_runtime_dependency_count": 0
       }
+    },
+    "python.repository.acceptance.measure.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available"
+      ],
+      "provides": [
+        "python.repository.acceptance.measurement.content_addressed",
+        "python.test.measurement.objective"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "subject",
+        "measurement_program_sha256",
+        "measurement_spec_sha256",
+        "measurement_schema",
+        "measurements",
+        "test_evidence",
+        "python_parse_errors",
+        "model_dependency_count",
+        "external_general_purpose_model_runtime_dependency_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "python",
+        "repository",
+        "measurement",
+        "acceptance",
+        "test",
+        "content-addressed",
+        "objective",
+        "receipt"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.repository.acceptance.measure.v1",
+          "source_root": "${input.source_root}",
+          "test_paths": "${input.test_paths}",
+          "test_argv": "${input.test_argv}",
+          "output_path": "${input.output_path}",
+          "timeout_s": 60
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "python_repository_acceptance_measurement_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Measures an isolated copy of one repository-local source root; test-side mutations do not alter the measured source.",
+        "Produces content-addressed source snapshot, measurement program, measurement specification, and typed objective fields including tests_pass and python_parse_ok.",
+        "Measurement success is not task acceptance; passing declared tests does not establish complete request semantics or mergeability.",
+        "Python test command only; measured tree size/file count and timeout are bounded."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "ast",
+          "hashlib",
+          "json",
+          "os",
+          "pathlib",
+          "re",
+          "shutil",
+          "subprocess",
+          "sys",
+          "tempfile",
+          "time"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/python_repository_acceptance_measurement_v1.py"
+      },
+      "verification": {
+        "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
+        "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+        "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
+        "combined_suite_each_carrier": "28_OF_28_PASS",
+        "focused_measurement_test_count": 7,
+        "runtime_git_blob_sha": "8f5870418de5396b7ae82fbdceb5c51c70f3104c",
+        "test_git_blob_sha": "0c99781622b30b7067063f2be626e0c0f132be73",
+        "model_dependency_count": 0,
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "incremental_spend_usd": 0
+      }
+    },
+    "python.task.acceptance.measured.objective.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "python.repository.acceptance.measurement.content_addressed"
+      ],
+      "provides": [
+        "task.acceptance.objective.measurement_bound"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "candidate_accepted",
+        "acceptance_stop_authorized",
+        "measurement_bound",
+        "measurement_receipt_file_sha256",
+        "measurement_receipt_payload_sha256",
+        "subject_snapshot_sha256",
+        "measurement_program_sha256",
+        "measurement_spec_sha256",
+        "objective_result",
+        "model_dependency_count",
+        "external_general_purpose_model_runtime_dependency_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "python",
+        "task",
+        "acceptance",
+        "measurement",
+        "objective",
+        "raw-task",
+        "receipt",
+        "verification"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.task.acceptance.measured.objective.v1",
+          "task_text": "${input.goal}",
+          "measurement_receipt_path": "${input.measurement_receipt_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "proposal_bindings": {
+        "measurement_receipt_path": {
+          "type": "effect_result",
+          "effect": "python.repository.acceptance.measurement.content_addressed",
+          "field": "output_path",
+          "container": "scalar"
+        }
+      },
+      "adapter_module": "python_measured_objective_acceptance_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Never accepts caller-supplied objective fields; fields come only from a validated content-addressed repository measurement receipt.",
+        "Reuses lossless raw-task obligation accounting and bounded objective acceptance compilation.",
+        "Semantic residuals remain explicit and block acceptance; measurement binding does not create missing natural-language semantics.",
+        "No general software-engineering completeness, hidden-requirement, FrontierCode score, promotion, or terminal authority."
+      ],
+      "source": {
+        "type": "python_stdlib_composition",
+        "modules": [
+          "hashlib",
+          "json",
+          "pathlib"
+        ],
+        "adapter_path": "canonical/runtime/python_measured_objective_acceptance_v1.py",
+        "composed_capabilities": [
+          "python.repository.acceptance.measure.v1"
+        ],
+        "composed_runtime": [
+          "canonical/runtime/raw_task_objective_acceptance_executor_v1.py",
+          "canonical/runtime/lossless_raw_task_contract_v1.py",
+          "canonical/runtime/raw_task_acceptance_residual_localizer_v1.py"
+        ]
+      },
+      "verification": {
+        "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
+        "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+        "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
+        "combined_suite_each_carrier": "28_OF_28_PASS",
+        "focused_measured_acceptance_test_count": 8,
+        "runtime_git_blob_sha": "36f4d62e6d7c785e7da7ef90b511eafafc4c9919",
+        "test_git_blob_sha": "4402a85ca8fc4b6f35c16b76d5b637bdf0d32f5b",
+        "v6_runtime_git_blob_sha": "c138171744406edd8e75e4867634febdb596014b",
+        "v6_independent_replay": "13_OF_13_PASS",
+        "model_dependency_count": 0,
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "incremental_spend_usd": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
