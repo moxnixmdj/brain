@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_LIVE_WORK_FRONTIER_V1",
   "date": "2026-10-10",
-  "status": "CURRENT_PROFESSIONAL_V10_PROPERTY_TRUTH_24_OF_24__FULL_PRIVATE_REGRESSION_GATE_OPEN__REPOSITORY_WIDE_GITHUB_ACTIONS_PRESTEP_CARRIER_FAILURE__PARALLEL_REUSE_FIRST_FRONTIER_CONTINUES__ZERO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT",
+  "status": "CURRENT_PROFESSIONAL_V10_24_OF_24__FULL_PRIVATE_REGRESSION_GATE_OPEN__HOSTED_CARRIER_PRESTEP_BLOCKED__ESCAPE_O11_Q1_CURRENT_PROJECTION_V2_VERIFIED__EXACT_DELTA_V2_BOUND__PARALLEL_REUSE_FIRST_CONTINUES__ZERO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT",
   "frontier_id": "LIVE_WORK_FRONTIER_20261011_PROF_PROPERTY_24_OF_24_V26",
   "scope": {
     "base_main_commit": "8916f4b00768329eb101be88ad6effbfd3704d67",
@@ -9,7 +9,7 @@
     "source_set": [
       {
         "path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
-        "git_blob_sha": "a56af90a3af965d6be7f9bc5aac1312919626b28"
+        "git_blob_sha": "2ea9ecdfa595c951b547a7947ef9b1d46a0e96ac"
       },
       {
         "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
@@ -561,7 +561,7 @@
     "new_primitive_required": false,
     "terminal_credit_delta": 0
   },
-  "exact_next": "PARALLELIZE_NONCONFLICTING_REUSE_FIRST_WORK_NOT_REQUIRING_GITHUB_HOSTED_ACTIONS__DO_NOT_REOPEN_24_OF_24_PROFESSIONAL_LEAVES__DO_NOT_REPEAT_HOSTED_FULL_REGRESSION_OR_RUNNER_LABEL_PROBES_UNTIL_CONTROL_PLANE_STATE_CHANGES_OR_A_REAL_STEP_EXECUTES",
+  "exact_next": "PARALLELIZE_NONCONFLICTING_REUSE_FIRST_WORK_FROM_CURRENT_EXACT_DELTA_V2__O11_OBJECTIVE_AND_Q1_QUALITATIVE_ENGINES__DO_NOT_REOPEN_PROFESSIONAL_24_OF_24__DO_NOT_RETRY_FULL_REGRESSION_UNTIL_CARRIER_STATE_CHANGES__SYNTHESIZE_MISSING_PREMISE_CERTIFICATES_BEFORE_EXTERNAL_ACQUISITION",
   "professional_semantic_v2_successor_claim_batch_current": {
     "status": "INDEPENDENTLY_VERIFIED__CLAIM_AND_SCOPE_GENERATION_COMPLETE__PROPERTY_TRUTH_NEXT",
     "batch": {
@@ -633,5 +633,28 @@
     "path": "canonical/verification/GITHUB_ACTIONS_PRESTEP_EXECUTION_BOUNDARY_20261011_V1.json",
     "binding": "MULTI_WORKFLOW_MULTI_RUNNER_CLASS_ZERO_STEP_LOCALIZATION__EXACT_CONTROL_PLANE_CAUSE_UNBOUND__ZERO_CREDIT",
     "full_regression_carrier_state": "SLEEP_UNTIL_REAL_RUNNER_STEP_EXECUTION_OR_CONTROL_PLANE_CHANGE_OR_AUTHORIZED_ALTERNATE_CARRIER"
+  },
+  "escape_o_projection_current": {
+    "residual_path": "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+    "residual_git_blob_sha": "2ea9ecdfa595c951b547a7947ef9b1d46a0e96ac",
+    "gate_runtime_path": "canonical/runtime/current_escape_o_objective_acceptance_law_gate_v2.py",
+    "gate_runtime_git_blob_sha": "ea584f6d67d75e8c26df5af83005e34a6022d029",
+    "search_runtime_path": "canonical/runtime/current_escape_o_proof_instantiation_search_v2.py",
+    "search_runtime_git_blob_sha": "30ba7cdaab11da93dad7f07dc1ce84dca579a611",
+    "verification_path": "canonical/verification/CURRENT_O_PROJECTION_GATE_V2_CURRENT_AUTHORITY_VERIFY_20261011_V1.json",
+    "verification_git_blob_sha": "59d46a8077e795966717e97ec2643cf10f34d3fa",
+    "active_o_rows": 11,
+    "active_q_rows": 1,
+    "parked_rows": 1,
+    "gdpval_primary_engine": "O_OBJECTIVE_ACCEPTANCE_INSTANTIATION",
+    "aa_briefcase_primary_engine": "Q_ACCEPTANCE_RELATION_ROBUST_COMMON_POLICY",
+    "tb_science_state": "PARKED",
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "current_reuse_frontier_exact_delta_cut": {
+    "path": "canonical/governance/CURRENT_REUSE_FRONTIER_EXACT_DELTA_CUT_20261011_V2.json",
+    "git_blob_sha": "306d1d1a6e5b03e05e8d370cb875ecdc33ab459c",
+    "status": "REUSE_FIRST_EXACT_DELTA_CUT__12_ACTIVE_ROWS__O11_Q1__1_PARKED_TB__ZERO_ACTIVE_GAP_B__NO_NEW_PRIMITIVE_ESTABLISHED__ZERO_CREDIT"
   }
 }
