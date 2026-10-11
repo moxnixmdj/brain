@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime.escape_progress_shared_gap_audit_v3 import GAP_A
+from canonical.runtime import escape_progress_shared_gap_audit_v5 as current_gap_audit
 from canonical.runtime.observable_policy_cover_executor_v1 import (
     _authenticate_cover_binding,
     _bound_json,
@@ -74,10 +75,20 @@ def _base(status: str, *, passed: bool = False, **extra: Any) -> dict[str, Any]:
 
 
 def _manifest_row(obligation_id: str, root: Path) -> Mapping[str, Any]:
-    path = root / "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json"
-    doc = json.loads(path.read_text(encoding="utf-8"))
-    if doc.get("schema") != MANIFEST_SCHEMA:
+    """Resolve one row through the same current projection used by audit V5.
+
+    The successor manifest is historical provenance. Current route-group
+    membership is authority-owned by the mutable current classification ->
+    current shared binding -> verified effective projection chain.
+    """
+    resolved = current_gap_audit._load_current_manifest_binding(repo_root=root)
+    doc = resolved.get("manifest")
+    binding = resolved.get("binding")
+    if not isinstance(doc, Mapping) or doc.get("schema") != MANIFEST_SCHEMA:
         raise ValueError("CURRENT_MANIFEST_SCHEMA_INVALID")
+    if not isinstance(binding, Mapping):
+        raise ValueError("CURRENT_ESCAPE_BINDING_INVALID")
+
     rows = [
         row
         for row in doc.get("rows", [])
@@ -85,9 +96,25 @@ def _manifest_row(obligation_id: str, root: Path) -> Mapping[str, Any]:
     ]
     if len(rows) != 1:
         raise ValueError("OBLIGATION_ID_NOT_UNIQUE_IN_CURRENT_MANIFEST")
-    if rows[0].get("route_group") != GAP_A:
+
+    projection = binding.get("current_effective_projection")
+    if not isinstance(projection, Mapping):
+        raise ValueError("CURRENT_EFFECTIVE_PROJECTION_MISSING")
+    overrides = projection.get("route_group_overrides", {})
+    parked = projection.get("parked_rows", [])
+    if not isinstance(overrides, Mapping):
+        raise ValueError("CURRENT_ROUTE_GROUP_OVERRIDES_INVALID")
+    if not isinstance(parked, list) or any(not isinstance(x, str) for x in parked):
+        raise ValueError("CURRENT_PARKED_ROWS_INVALID")
+    if obligation_id in parked:
+        raise ValueError("OBLIGATION_PARKED_NOT_CURRENT_GAP_A")
+
+    row = dict(rows[0])
+    effective_route_group = overrides.get(obligation_id, row.get("route_group"))
+    if effective_route_group != GAP_A:
         raise ValueError("OBLIGATION_NOT_CURRENT_GAP_A")
-    return rows[0]
+    row["route_group"] = effective_route_group
+    return row
 
 
 def _verify_policy_availability(

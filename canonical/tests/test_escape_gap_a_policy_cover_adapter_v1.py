@@ -121,12 +121,42 @@ def strict_problem():
 class RepoFixture:
     def __init__(self, root: Path, problem: dict):
         self.root = root
-        write_json(
+        manifest_ref = write_json(
             root,
             "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json",
             {
                 "schema": adapter.MANIFEST_SCHEMA,
                 "rows": [{"obligation_id": OID, "route_group": "GAP_A_ACQUISITION_TOTALITY"}],
+            },
+        )
+        binding_path = (
+            "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json"
+        )
+        write_json(
+            root,
+            binding_path,
+            {
+                "current_successor_manifest": manifest_ref,
+                "current_effective_projection": {
+                    "route_group_overrides": {},
+                    "parked_rows": [],
+                },
+            },
+        )
+        write_json(
+            root,
+            "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+            {
+                "classifications": [
+                    {
+                        "residual_id": "ESCAPE_GAP_A_ACQUISITION_TOTALITY",
+                        "existing_binding": binding_path,
+                    },
+                    {
+                        "residual_id": "ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
+                        "existing_binding": binding_path,
+                    },
+                ]
             },
         )
         problem_sha = _digest(problem)
@@ -223,6 +253,80 @@ class RepoFixture:
 
 
 class GapAPolicyCoverAdapterTests(unittest.TestCase):
+    def test_current_projection_promotes_reclassified_historical_gap_b_row(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            oid = "PROWORK_GDPVAL_GE_1846"
+            manifest_ref = write_json(
+                root,
+                "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json",
+                {
+                    "schema": adapter.MANIFEST_SCHEMA,
+                    "rows": [{"obligation_id": oid, "route_group": "GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS"}],
+                },
+            )
+            binding_path = "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json"
+            write_json(
+                root,
+                binding_path,
+                {
+                    "current_successor_manifest": manifest_ref,
+                    "current_effective_projection": {
+                        "route_group_overrides": {oid: "GAP_A_ACQUISITION_TOTALITY"},
+                        "parked_rows": [],
+                    },
+                },
+            )
+            write_json(
+                root,
+                "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+                {
+                    "classifications": [
+                        {"residual_id": "ESCAPE_GAP_A_ACQUISITION_TOTALITY", "existing_binding": binding_path},
+                        {"residual_id": "ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS", "existing_binding": binding_path},
+                    ]
+                },
+            )
+            row = adapter._manifest_row(oid, root)
+            self.assertEqual(row["route_group"], "GAP_A_ACQUISITION_TOTALITY")
+
+    def test_current_projection_keeps_parked_tb_out_of_gap_a(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            oid = "TB_SCIENCE_GE_58_7"
+            manifest_ref = write_json(
+                root,
+                "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json",
+                {
+                    "schema": adapter.MANIFEST_SCHEMA,
+                    "rows": [{"obligation_id": oid, "route_group": "GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS"}],
+                },
+            )
+            binding_path = "canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json"
+            write_json(
+                root,
+                binding_path,
+                {
+                    "current_successor_manifest": manifest_ref,
+                    "current_effective_projection": {
+                        "route_group_overrides": {},
+                        "parked_rows": [oid],
+                    },
+                },
+            )
+            write_json(
+                root,
+                "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+                {
+                    "classifications": [
+                        {"residual_id": "ESCAPE_GAP_A_ACQUISITION_TOTALITY", "existing_binding": binding_path},
+                        {"residual_id": "ESCAPE_GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS", "existing_binding": binding_path},
+                    ]
+                },
+            )
+            with self.assertRaisesRegex(ValueError, "PARKED"):
+                adapter._manifest_row(oid, root)
+
     def test_direct_common_policy_emits_audit_valid_terminal_proof(self):
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
