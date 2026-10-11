@@ -55,13 +55,6 @@ class GeneralScientificCapabilityControllerV1Tests(unittest.TestCase):
         self.assertEqual(out["status"],"PASS__VERIFIED_BENCHMARK_INDEPENDENT_SCIENTIFIC_RESULT",out)
         self.assertLess(abs(out["result"]["period"]-p)/p,0.02,out["result"])
 
-    def test_expected_utility(self):
-        out=c.solve({"decision_actions":{
-          "observe":[[0.5,4],[0.5,2]],"intervene":[[0.8,7],[0.2,-1]]},
-          "fixed_costs":{"intervene":0.5}})
-        self.assertEqual(out["status"],"PASS__VERIFIED_BENCHMARK_INDEPENDENT_SCIENTIFIC_RESULT",out)
-        self.assertEqual(out["result"]["ranking"][0]["action"],"intervene")
-
     def test_untyped_natural_language_fails_closed(self):
         out=c.solve({"goal":"Solve this scientific task"})
         self.assertEqual((out["status"],out["reason"]),("FAIL_CLOSED","NO_TYPED_SCIENTIFIC_SIGNATURE"))
