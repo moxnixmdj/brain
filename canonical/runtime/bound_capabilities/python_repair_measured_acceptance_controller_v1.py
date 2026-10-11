@@ -41,7 +41,7 @@ def _load(path:pathlib.Path,name:str):
 _HERE=pathlib.Path(__file__).resolve()
 _REPAIR=_load(_HERE.with_name("python_provenance_guided_coupled_repair_v1.py"),"_brain_v8_repair")
 _MEASURE=_load(_HERE.with_name("python_repository_acceptance_measurement_v1.py"),"_brain_v8_measure")
-_ACCEPT=_load(_HERE.parent/"python_measured_objective_acceptance_v1.py","_brain_v8_accept")
+_ACCEPT=_load(_HERE.parent.parent/"python_measured_objective_acceptance_v1.py","_brain_v8_accept")
 
 def _sha(data:bytes)->str:
     return hashlib.sha256(data).hexdigest()
