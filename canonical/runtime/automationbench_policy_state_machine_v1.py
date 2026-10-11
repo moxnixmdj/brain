@@ -13,11 +13,13 @@ import json
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime.automationbench_mutation_compiler_v1 import (
+    compile_asana_add_tag,
     compile_asana_add_to_section,
     compile_asana_create_task,
     compile_salesforce_mark_won,
     validate_nonnegative_action,
 )
+from canonical.runtime.automationbench_communication_grounder_v1 import resolve_communication
 from canonical.runtime.automationbench_owned_policy_kernel_v1 import (
     observation_plan,
     rank_source_records,
@@ -140,7 +142,21 @@ def next_policy_action(
                 "calls": [{"tool": action["tool"], "arguments": action["arguments"]}],
             }
 
-    # Typed compiler 2: create an Asana task from the best eligible source record.
+    # Continue a created Asana task with an explicitly grounded tag.
+    if _semantic_done(history, "ASANA_TASK_CREATE") and not _semantic_done(
+        history, "ASANA_TASK_ADD_TAG"
+    ):
+        action = compile_asana_add_tag(prompt, observations)
+        if action is not None and validate_nonnegative_action(prompt, action):
+            return {
+                "schema": SCHEMA,
+                "status": "CALL_TOOLS",
+                "phase": "MUTATE",
+                "semantic": action["semantic"],
+                "calls": [{"tool": action["tool"], "arguments": action["arguments"]}],
+            }
+
+    # Typed compiler 3: create an Asana task from the best eligible source record.
     all_records: list[dict[str, Any]] = []
     for obs in observations:
         all_records.extend(_flatten_records(obs))
@@ -161,17 +177,22 @@ def next_policy_action(
     # in the task prompt. Derived summaries and calculated values stay open.
     workflow_ir = compile_workflow_ir(prompt)
     for communication in workflow_ir.get("communications", []):
-        if communication.get("grounding_complete") is not True:
+        grounded = resolve_communication(
+            communication,
+            prompt=prompt,
+            observations=observations,
+        )
+        if grounded.get("grounding_complete") is not True:
             continue
         compiled = compile_simulated_communication(
             {
                 "surface": SIMULATED_SURFACE,
-                "channel": communication.get("channel"),
-                "destination": communication.get("destination"),
-                "subject": communication.get("subject"),
-                "content": communication.get("content_literal"),
+                "channel": grounded.get("channel"),
+                "destination": grounded.get("destination"),
+                "subject": grounded.get("subject"),
+                "content": grounded.get("content_literal"),
                 "grounding_complete": True,
-                "provenance_bound": True,
+                "provenance_bound": grounded.get("provenance_bound") is True,
             }
         )
         if compiled.get("pass") is not True:
