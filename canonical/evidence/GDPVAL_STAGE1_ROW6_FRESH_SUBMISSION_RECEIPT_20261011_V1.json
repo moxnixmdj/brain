@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_STAGE1_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_BRAIN_SUBMISSION_FROZEN__PROMPT_REQUIREMENTS_AND_RENDER_QA_PASS__NO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "row_idx": 6,
+  "task_id": "a328feea-47db-4856-b4be-2bdc63dd88fb",
+  "sector": "Government",
+  "occupation": "Administrative Services Managers",
+  "freshness": {
+    "precommit_chain": [
+      "canonical/governance/GDPVAL_STAGE1_FRESH_SUBJECT_PRECOMMIT_20261011_V1.json",
+      "canonical/governance/GDPVAL_STAGE1_CONTAMINATION_REPAIR_20261011_V1.json",
+      "canonical/governance/GDPVAL_STAGE1_OFFICIAL_ROW_FIELD_FIREWALL_REPAIR_20261011_V1.json"
+    ],
+    "official_allowed_projection_sha256": "6cdce9e2c3b9cf22e1ca4916eacc1fe56964647f4e1cacdcadea3800dfc26c38",
+    "prompt_sha256": "770525e8242fa19851630e3e5aa57a6bafc14d3265124d7867d500d6067b6beb",
+    "gold_deliverable_read_before_freeze": false,
+    "rubric_read_before_freeze": false,
+    "third_party_model_submission_read_before_freeze": false
+  },
+  "brain_execution_profile": {
+    "path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+    "candidate_id": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+    "cognition_surface": "CURRENT_CHATGPT_GPT_5_6_SOL_SESSION",
+    "incremental_spend_usd": 0
+  },
+  "submission": {
+    "library_path": "/Project Brain/GDPval/stage1/a328feea-47db-4856-b4be-2bdc63dd88fb/GDPval_a328feea_unscheduled_absence_lateness_policy(1).docx",
+    "library_file_id": "libfile_b7d0cff1a3a481919aa722d98797d70d",
+    "bytes": 38728,
+    "sha256": "e917c4130fdff97e24f992837721b3f87fd0e4f10905f82516618b7bd5b74bfa",
+    "format": "docx",
+    "render_page_count": 1,
+    "render_page_1_sha256": "a1ac42dcabce5cfc32e2f7cbb707154e21f09296265bfe4695c7f5a99ac4f139"
+  },
+  "prompt_requirement_checks": {
+    "one_page_word_document": "PASS__RENDERED_1_PAGE",
+    "purpose": "PASS",
+    "scope": "PASS",
+    "relevant_definitions": "PASS",
+    "phone_call_to_appropriate_person": "PASS__LIVE_CONTACT_REQUIRED",
+    "late_no_notification_issue": "PASS__PROMPT_CALL_AND_ESCALATION_RULE",
+    "inconsistent_channel_issue": "PASS__TEXT_EMAIL_VOICEMAIL_COWORKER_NOT_COMPLETE_NOTIFICATION",
+    "late_reporting_coverage_issue": "PASS__BEFORE_START_WHEN_POSSIBLE_PLUS_COVERAGE_HANDOFF",
+    "supervisor_questions_support_issue": "PASS__LIVE_CONFIRM_AND_CLARIFY_STEP",
+    "mfa_hr_information_issue": "PASS__MFA_FLAG_TO_SUPERVISOR_AND_HR_WITH_PRIVACY_LIMIT",
+    "timekeeping_accuracy": "PASS__IMMEDIATE_RECORD_AND_HR_RECONCILIATION"
+  },
+  "verification": {
+    "render_visual_inspection": "PASS__NO_CLIPPING_OVERLAP_OR_BROKEN_TABLE",
+    "library_rematerialized_exact_bytes_sha256_match": true
+  },
+  "hard_nonclaims": [
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_GRADE",
+    "NO_GDPVAL_ELO",
+    "NO_CLAIM_THIS_SINGLE_TASK_IMPLIES_1846",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {"incremental_spend_usd": 0, "acceptance_credit_delta": 0, "terminal_credit_delta": 0}
+}
