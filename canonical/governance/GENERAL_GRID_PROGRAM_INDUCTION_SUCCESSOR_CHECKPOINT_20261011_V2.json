@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_GENERAL_GRID_PROGRAM_INDUCTION_SUCCESSOR_CHECKPOINT_V2",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__GENERIC_SYNTHESIS_BYTES_TRANSPLANTED_TO_CURRENT_MAIN__EXACT_BLOBS_SINGLE_CARRIER_TESTED__INDEPENDENT_CROSS_CARRIER_AUDIT_OPEN",
+  "objective": "Promote only benchmark-neutral Brain-owned program/rule induction machinery onto a current-main successor branch while keeping ARC-specific experimental history outside the clean merge path.",
+  "source_experiment_branch": "successor/general-grid-program-inducer-v1-20261011",
+  "clean_current_main_branch": "successor/general-grid-program-inducer-v1-main-20261011",
+  "included": {
+    "finite_grid_program_inducer_v1": {
+      "runtime": "canonical/runtime/finite_grid_program_inducer_v1.py",
+      "blob_sha": "983022ed39c5ec1292906f3ff18ae55d61be048d",
+      "tests": "canonical/tests/test_finite_grid_program_inducer_v1.py",
+      "tests_blob_sha": "39ff1e76af8019305d266cf8aa4de9ec770bfd6d",
+      "exact_blob_test_result": "PASS_6_OF_6"
+    },
+    "grid_delta_rule_inducer_v1": {
+      "runtime": "canonical/runtime/grid_delta_rule_inducer_v1.py",
+      "blob_sha": "ccdcf2f2cbb87444e57443ff77691aaaaf8181eb",
+      "tests": "canonical/tests/test_grid_delta_rule_inducer_v1.py",
+      "tests_blob_sha": "6cbc7728670ad394f4c525035b10618d2b7ab2b5",
+      "exact_blob_test_result": "PASS_4_OF_4"
+    },
+    "grid_delta_rule_inducer_v2": {
+      "runtime": "canonical/runtime/grid_delta_rule_inducer_v2.py",
+      "blob_sha": "695f309d946d9203e7f83eeab61540a6093c37b3",
+      "tests": "canonical/tests/test_grid_delta_rule_inducer_v2.py",
+      "tests_blob_sha": "b254d89f89634d8ba6230b7dcb6c77ee00fc068d",
+      "exact_blob_test_result": "PASS_4_OF_4"
+    }
+  },
+  "deliberately_excluded_from_clean_pr": [
+    "ARC_NOVELTY_COMPILER_EXPERIMENT_HISTORY",
+    "ARC_PROGRAM_INDUCTION_ADAPTER_V1",
+    "ARC_PUBLIC_TRAINING_PROBE_WORKFLOW",
+    "BENCHMARK_SPECIFIC_SCORE_ARTIFACTS"
+  ],
+  "architecture_effect": {
+    "finite_program_search": "EXHAUSTIVE_WITHIN_DECLARED_OPERATOR_REGISTRY_AND_DEPTH__NO_TARGET_SCORE_BEAM_PRUNING__MINIMUM_COST__AMBIGUITY_PRESERVED",
+    "delta_rule_v1": "REUSE_VERIFIED_G0_FINITE_TYPED_RULE_SYNTHESIS__FULL_TRAINING_REPLAY__MULTI_TARGET_RULE_SETS",
+    "delta_rule_v2": "TASK_DERIVED_ATTRIBUTE_EQUALITY_ATOMS__ALL_ADMISSIBLE_SINGLETON_AND_PAIR_PACKS_BEFORE_TRIPLES_WITHIN_BOUND__FACTORIZED_AMBIGUITY__CONSENSUS_ONLY_UNSEEN_PREDICTION"
+  },
+  "diagnostics": {
+    "arc_v16_baseline_reference": {
+      "solved": 83,
+      "total": 400,
+      "rate": 0.2075,
+      "result_sha256": "38c467bd68f830ec66c0af2abce18c218438312aa55177a1c23d736f60a4e037",
+      "role": "HISTORICAL_CONSUMED_REGRESSION_DIAGNOSTIC_ONLY"
+    },
+    "fixed_depth2_program_induction_retrospective": {
+      "new_exact_consumed_task_solves": 0,
+      "interpretation": "BOUNDED_COMPOSITION_ALONE_DID_NOT LIFT THE V16 MISS SET"
+    },
+    "delta_v1_retrospective": {
+      "new_exact_consumed_task_solves": 1,
+      "interpretation": "AUTOMATIC_TYPED_RULE_INDUCTION PRODUCED A REAL NEW RETROSPECTIVE SOLVE WITHOUT TASK-SPECIFIC OPERATOR CODE"
+    },
+    "adaptive_v2_arc_cross_carrier_audit": {
+      "status": "NOT_EXECUTED",
+      "reason": "VERIFIER_TRANSPORT_FAILURES_BEFORE_RESULT",
+      "score_claim": false
+    }
+  },
+  "next_gate": [
+    "INDEPENDENT_REPLAY_OF_GENERIC TEST SUITES ON A SECOND CARRIER",
+    "FROZEN_UNTOUCHED_GENERALIZATION SET BEFORE CAPABILITY PROMOTION",
+    "NO FURTHER ARC1 TRAINING HILL-CLIMBING AS PRIMARY DEVELOPMENT LOOP"
+  ],
+  "hard_nonclaims": [
+    "NO ARC PARITY CLAIM",
+    "NO NEW OFFICIAL OR HIDDEN ARC SCORE",
+    "NO OPEN_WORLD_PROGRAM_SYNTHESIS CLAIM",
+    "NO ARBITRARY PREDICATE INVENTION CLAIM",
+    "NO CAPABILITY CREDIT FROM THE FAILED CROSS_CARRIER AUDIT",
+    "NO MERGE AUTHORITY FROM THIS CHECKPOINT"
+  ],
+  "accounting": {
+    "external_frontier_model_runtime_cognition": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "capability_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "independent_verification_required": true
+}
