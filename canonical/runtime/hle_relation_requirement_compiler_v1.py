@@ -187,7 +187,7 @@ def compile_requirements(*,task_id:str,question:str,max_queries:int=8)->dict[str
 
     # Definition/name questions: turn the visible descriptive clause into a
     # definition lookup. This is intentionally generic and answer-blind.
-    definition_intent = kind in {"TERM","ENTITY_OR_TERM"} or bool(re.search(r"\\bterm\\b|\\bcalled\\b|\\bwhat name\\b",raw_low))
+    definition_intent = kind in {"TERM","ENTITY_OR_TERM"} or bool(re.search(r"\bterm\b|\bcalled\b|\bwhat name\b",raw_low))
     if definition_intent:
         definition=[x for x in _discriminators(raw_q) if x not in {"term","name"}]
         _add(out,"DEFINITION_RELATION",definition[:12]+["called term definition"],"DEFINITION")
