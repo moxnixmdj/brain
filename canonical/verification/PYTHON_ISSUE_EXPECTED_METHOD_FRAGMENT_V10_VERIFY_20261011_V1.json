@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_PYTHON_ISSUE_EXPECTED_METHOD_FRAGMENT_V10_VERIFY_V1",
+  "date": "2026-10-11",
+  "status": "DEVELOPMENT_CANDIDATE_PASS__REAL_ISSUE_CAUSAL_DIAGNOSTIC__10_OF_10_EXACT_BRANCH_TESTS__NO_POSTFREEZE_POSITIVE_HELDOUT_MATCH_FOUND__ZERO_CAPABILITY_CREDIT",
+  "branch": "coding-v10-real-issue-expected-code-fragment-20261011-v1",
+  "tested_head": "627f4bd20c339156e1fbc439379580ad7b96d3b4",
+  "causal_diagnostic": {
+    "source": "https://github.com/psf/requests/issues/7594",
+    "role": "PRE_IMPLEMENTATION_REAL_NON_BENCHMARK_FAILURE_DIAGNOSTIC__NOT_HELDOUT_QUALIFICATION",
+    "frozen_v9_result": {
+      "status": "OPEN__SEMANTIC_RESIDUALS",
+      "required_obligation_count": 14,
+      "compiled_obligation_count": 0,
+      "residual_obligation_count": 14
+    },
+    "selected_general_cause": "EXPLICIT_REPOSITORY_PATH_PLUS_NAMED_CLASS_METHOD_PLUS_EXPECTED_PYTHON_IMPLEMENTATION_BLOCK_NOT_REPRESENTABLE_AS_EXECUTABLE_ACCEPTANCE_FRAGMENT"
+  },
+  "exact_branch_replay": {
+    "carrier": "connected_windows_python_3_14_7",
+    "tests_passed": 10,
+    "tests_total": 10,
+    "elapsed_seconds": 0.101,
+    "properties": [
+      "REAL_REQUESTS_7594_CAUSAL_DIAGNOSTIC_COMPILES_ONLY_EXPECTED_METHOD_FRAGMENT",
+      "ALL_OTHER_RAW_OBLIGATIONS_REMAIN_RESIDUAL",
+      "PARTIAL_FRAGMENT_NEVER_AUTHORIZES_WHOLE_TASK_STOP",
+      "CORRECT_CLASS_METHOD_AST_PASSES",
+      "WRONG_BODY_FAILS",
+      "WRONG_CLASS_FAILS",
+      "MULTIPLE_PATHS_FAIL_CLOSED",
+      "MULTIPLE_EXPECTED_MARKERS_FAIL_CLOSED",
+      "UNSAFE_PATH_FAILS_CLOSED",
+      "METHOD_NAME_MISMATCH_FAILS_CLOSED",
+      "SOURCE_NOT_MUTATED",
+      "MODEL_DEPENDENCY_COUNT_ZERO",
+      "EXTERNAL_GENERAL_PURPOSE_MODEL_RUNTIME_DEPENDENCY_COUNT_ZERO"
+    ]
+  },
+  "postfreeze_public_search": {
+    "implementation_frozen_before_search": true,
+    "search_goal": "FIND_A_DIFFERENT_PUBLIC_NON_BENCHMARK_PYTHON_ISSUE_MATCHING_THE_EXACT_FROZEN_GRAMMAR",
+    "query_classes": [
+      "THE_ISSUE_LIES_IN_PLUS_IT_SHOULD_BE_PLUS_DEF",
+      "THE_ISSUE_LIES_IN_PATH_PLUS_PYTHON_FENCE",
+      "DOES_NOT_PLUS_IT_SHOULD_BE_PLUS_DEF_PLUS_SRC_PATH",
+      "THE_ISSUE_LIES_IN_PLUS_RETURN_SELF"
+    ],
+    "positive_matching_issue_found": false,
+    "conclusion": "NO_POSITIVE_HELDOUT_QUALIFICATION_AVAILABLE_FROM_SEARCH_WINDOW",
+    "nearby_nonmatching_patterns_observed": [
+      "EXPECTED_BEHAVIOR_WITHOUT_EXACT_CODE",
+      "SUGGESTED_CODE_CHANGE_WITH_FROM_TO_BLOCKS",
+      "EXPLICIT_FUNCTION_OR_LINE_BUT_NO_REPOSITORY_PATH_LINE",
+      "NON_PYTHON_EXPECTED_CODE",
+      "PATH_IN_MARKDOWN_LINK_OR_PROSE_INSTEAD_OF_EXACT_PATH_LINE"
+    ]
+  },
+  "promotion": {
+    "verified_bound_capability": false,
+    "bound_registry_update_authorized": false,
+    "reason": "NO_POSTFREEZE_POSITIVE_HELDOUT_MATCH_AND_NO_INDEPENDENT_SECOND_CARRIER_FOR_THIS_V10_FRAGMENT",
+    "allowed_role": "DEVELOPMENT_CANDIDATE_AND_CAUSAL_FRONTIER_EVIDENCE"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "frontiercode_score_credit_delta": 0,
+    "cursorbench_score_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_GENERAL_ISSUE_UNDERSTANDING",
+    "NO_WHOLE_TASK_ACCEPTANCE",
+    "NO_POSITIVE_HELDOUT_GENERALIZATION_CLAIM",
+    "NO_FRONTIERCODE_OR_CURSORBENCH_SCORE_INFERENCE"
+  ]
+}
