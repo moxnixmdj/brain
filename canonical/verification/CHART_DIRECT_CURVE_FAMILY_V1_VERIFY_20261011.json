@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_CHART_DIRECT_CURVE_FAMILY_V1_VERIFY_20261011",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_BRAIN_BLOBS__AUTHOR_TESTS_PLUS_INDEPENDENT_FALSIFICATION",
+  "capability_id": "chart.raster.direct_curve_family_query.v1",
+  "origin_brain_pr": 4646,
+  "origin_brain_head_commit": "23e1509e4005365c58c19fd718ebc39161e5e99c",
+  "verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "verifier_pr": 2718,
+  "verifier_head_commit": "d9c8ecbcfcff839f7df5c47973bbd183a1f5261d",
+  "workflow_run_id": 38154111546,
+  "workflow_job_id": 114513415035,
+  "artifact_id": 11708320024,
+  "artifact_zip_sha256": "99e1a97019b740d3c59af2865fdec53a1a8e8e09ebeedd033ccb2d9472ab94f9",
+  "exact_blobs": {
+    "runtime": "9f3376334e40e4ec55243ac6aa4f87eb191cfdc4",
+    "tests": "25f0a2e70d78500601dca397b4197d22143cfff9",
+    "curve_value": "107e20dd66840ecaba32e9e9f6cbfc764da1ae0b",
+    "axis_binding": "1ccab094a14ae261a01912ad6e573ffc09fa8b35",
+    "scene_graph": "258999b07287287db2037af777973d5bbb39116d"
+  },
+  "author_test_count": 10,
+  "author_tests_passed": 10,
+  "independent_falsification_count": 6,
+  "independent_falsification_passed": 6,
+  "heldout_chartography_cases_consumed": 0,
+  "external_general_purpose_model_runtime_dependency_count": 0,
+  "donor_general_purpose_model_runtime_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "chartography_score_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "proved": [
+    "RIGHT_ENDPOINT_DIRECT_OCR_LABEL_TO_UNIQUE_COLOR_POLYLINE_BINDING",
+    "NUMERIC_DIRECT_LABELS_ALLOWED_WHEN_ENDPOINT_GEOMETRY_DISAMBIGUATES_FROM_AXIS_TICKS",
+    "ONE_TO_ONE_DIRECT_LABEL_FAMILY_BINDING",
+    "LINEAR_AND_LOG10_Y_FAMILY_RANK_FROM_GEOMETRY",
+    "CURVE_FAMILY_Y_AT_X_QUERY_WITH_BOUNDED_INTERPOLATION",
+    "OPTIONAL_NEAREST_TO_TARGET_Y_SELECTION",
+    "LOW_CONFIDENCE_AMBIGUOUS_DUPLICATE_TIED_GAPPED_OR_NONSPANNING_CASES_FAIL_CLOSED",
+    "ZERO_EXTERNAL_GENERAL_PURPOSE_MODEL_RUNTIME_COGNITION"
+  ],
+  "hard_nonclaims": [
+    "NO_PERCENTILE_SURVIVAL_OR_CONTOUR_DOMAIN_SEMANTICS",
+    "NO_LEFT_ENDPOINT_OR_ROTATED_LABEL_BINDING_AUTHORITY",
+    "NO_BLACK_OR_GRAYSCALE_CURVE_FAMILY_AUTHORITY",
+    "NO_TIED_OR_UNREADABLE_RANK_SELECTION_AUTHORITY",
+    "NO_CHARTOGRAPHY_SCORE",
+    "NO_HELDOUT_COVERAGE_CLAIM"
+  ]
+}
