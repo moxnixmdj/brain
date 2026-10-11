@@ -48,6 +48,31 @@ def _base_manifest(universal_cover_proof=None):
         out["universal_cover_proof"] = universal_cover_proof
     return out
 
+def _bind_current_donor_authority(tmp_path,manifest):
+    reducer=tmp_path/"canonical/runtime/terminal_global_ownership_postconditions_reducer_v1.py"
+    reducer.parent.mkdir(parents=True,exist_ok=True)
+    reducer.write_text("# hardened synthetic reducer\n",encoding="utf-8")
+    receipt_path=tmp_path/"global-ownership.json"
+    receipt={
+        "status":"INDEPENDENT_PUBLIC_RUNNER_PASS__SYNTHETIC",
+        "brain_reducer_blob_sha":_git_blob_sha(reducer),
+        "result":{"terminal_predicates":{
+            "final_donor_deletion_cleanroom_pass":True,
+            "donor_deletion_protocol_v2_bound":True,
+            "runtime_cognition_model_independent":True,
+            "zero_external_model_runtime_cognition_dependencies":True,
+            "copied_or_rehosted_teacher_absent":True,
+            "runtime_dependency_inventory_complete":True,
+        }},
+    }
+    receipt_path.write_text(json.dumps(receipt,sort_keys=True)+"\n",encoding="utf-8")
+    manifest["global_ownership_postconditions"]={
+        "status":"INDEPENDENT_PASS",
+        "evidence":"global-ownership.json",
+        "evidence_blob_sha":_git_blob_sha(receipt_path),
+    }
+    return manifest
+
 
 def _write_valid_bound_proof(tmp_path):
     proof_path = tmp_path / "proof.json"
@@ -131,9 +156,17 @@ def test_fake_hex_bindings_cannot_self_certify():
 
 def test_universal_scope_cover_route_requires_real_bound_bytes(tmp_path):
     declaration = _write_valid_bound_proof(tmp_path)
-    out = evaluate_manifest(_base_manifest(declaration), repo_root=tmp_path)
+    manifest=_bind_current_donor_authority(tmp_path,_base_manifest(declaration))
+    out = evaluate_manifest(manifest, repo_root=tmp_path)
     assert out["achieved"] is True
     assert out["proof_route"] == "UNIVERSAL_SCOPE_COMPLETE_COVER"
+
+
+def test_universal_cover_cannot_bypass_missing_current_donor_authority(tmp_path):
+    declaration=_write_valid_bound_proof(tmp_path)
+    out=evaluate_manifest(_base_manifest(declaration),repo_root=tmp_path)
+    assert out["achieved"] is False
+    assert any(x.startswith("DONOR_AUTHORITY:") for x in out["failed_predicates"])
 
 
 def test_proof_byte_drift_fails_closed(tmp_path):
