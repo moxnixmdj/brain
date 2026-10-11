@@ -1,0 +1,89 @@
+name: Verify Chartography model-independent semantics V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/chartography_positioned_ocr_v1.py"
+      - "canonical/runtime/chartography_axis_calibration_v1.py"
+      - "canonical/runtime/chartography_semantic_utils_v1.py"
+      - "canonical/runtime/chartography_series_intersection_v1.py"
+      - "canonical/runtime/chartography_fixed_x_boundary_v1.py"
+      - "canonical/runtime/chartography_professional_semantic_router_v1.py"
+      - "canonical/tests/test_chartography_positioned_ocr_v1.py"
+      - "canonical/tests/test_chartography_axis_calibration_v1.py"
+      - "canonical/tests/test_chartography_series_intersection_v1.py"
+      - ".github/workflows/verify-chartography-model-independent-semantics-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install exact local sensor/runtime dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends tesseract-ocr tesseract-ocr-eng
+          python -m pip install --disable-pip-version-check --no-input "pillow>=10,<13"
+      - name: Compile and run synthetic/metamorphic tests
+        run: |
+          python -m py_compile             canonical/runtime/chartography_positioned_ocr_v1.py             canonical/runtime/chartography_axis_calibration_v1.py             canonical/runtime/chartography_semantic_utils_v1.py             canonical/runtime/chartography_series_intersection_v1.py             canonical/runtime/chartography_fixed_x_boundary_v1.py             canonical/runtime/chartography_professional_semantic_router_v1.py
+          python -m unittest -v             canonical.tests.test_chartography_positioned_ocr_v1             canonical.tests.test_chartography_axis_calibration_v1             canonical.tests.test_chartography_series_intersection_v1
+      - name: Bind official public non-heldout Surge samples
+        run: |
+          git clone --filter=blob:none https://github.com/surge-ai/chartography.git /tmp/chartography
+          git -C /tmp/chartography checkout --detach 3f1bf837232d3918c2cc35c6e2418c9e70d2a57b
+          test "$(git -C /tmp/chartography rev-parse HEAD)" = "3f1bf837232d3918c2cc35c6e2418c9e70d2a57b"
+      - name: Run Brain-only official development samples
+        shell: bash
+        run: |
+          mkdir -p out
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import yaml
+          from canonical.runtime.chartography_professional_semantic_router_v1 import solve
+
+          root=Path("/tmp/chartography/task_packs/sample_charts")
+          rows=[]
+          for i,(task,image) in enumerate([
+              ("sample_task_1.yaml","sample_chart_1.png"),
+              ("sample_task_2.yaml","sample_chart_2.jpg"),
+          ],1):
+              spec=yaml.safe_load((root/"tasks"/task).read_text())
+              prompt=str(spec["prompt"]).strip()
+              out=solve(root/"charts"/image,prompt)
+              rows.append({"case":i,"answer":out["answer"],"raw_value":out["raw_value"],"route":out["route"]})
+
+          ok1=76.0 <= float(rows[0]["raw_value"]) <= 79.0
+          ok2=330.0 <= float(rows[1]["raw_value"]) <= 370.0
+          receipt={
+              "schema":"PROJECT_BRAIN_CHARTOGRAPHY_MODEL_INDEPENDENT_PUBLIC_SAMPLE_V1",
+              "brain_pr":4519,
+              "official_harness_commit":"3f1bf837232d3918c2cc35c6e2418c9e70d2a57b",
+              "passed":int(ok1)+int(ok2),
+              "total":2,
+              "pass":ok1 and ok2,
+              "rows":rows,
+              "model_dependency_count":0,
+              "external_model_runtime_dependency_count":0,
+              "donor_runtime_dependency_count":0,
+              "heldout_cases_consumed":0,
+              "heldout_gold_consumed":0,
+              "incremental_spend_usd":0,
+          }
+          Path("out/result.json").write_text(json.dumps(receipt,indent=2,sort_keys=True)+"\n")
+          print(json.dumps(receipt,sort_keys=True))
+          raise SystemExit(0 if receipt["pass"] else 1)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: chartography-model-independent-public-sample-v1
+          path: out/result.json
+          if-no-files-found: warn
