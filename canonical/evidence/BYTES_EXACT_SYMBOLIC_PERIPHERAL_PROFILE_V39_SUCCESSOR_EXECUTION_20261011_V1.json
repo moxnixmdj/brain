@@ -1,0 +1,103 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_PERIPHERAL_PROFILE_V39_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__SPENT_NEXT43_AND_FRESH_NEXT44_PASS__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_CROSSPROFILE_V38_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_git_blob_sha": "f137ddba53ca50ba366934490f33b3bbf9f3ee6e",
+    "transform": "canonical/research/bytes/tools/conservative_peripheral_profile_prune_v39.py",
+    "transform_git_blob_sha": "a7660dca863b45e76b03c87730933f6c5688551c",
+    "predecessor_manifest_sha256": "9014f0769d42ca95bc68910e07282789a7075222c4747c6115b85048247a54e6",
+    "manifest_sha256": "c93cd3aabe9fc5d1a66cf3e6090ab1f937c63e1eaa83beb68040a1a8faa99dee",
+    "python_files": 277,
+    "raw_python_source_bytes": 1761507,
+    "router_raw_python_source_bytes": 2760,
+    "B_exec_raw_python_source_bytes": 1764267,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v38_bytes": -7812,
+    "B_exec_delta_vs_v38_bytes": -7812
+  },
+  "selection": {
+    "id": "CONSERVATIVE_PERIPHERAL_PROFILE_SPENT_NEXT43_V39",
+    "method": "SELECT_PERIPHERAL_SET_TRIG_HYPERBOLIC_MATRIX_EXPRESSION_BODIES_WITHOUT_REOPENING_CORE_ROUTE__REQUIRE_FULL_SPENT_NEXT43_REPLAY",
+    "selected_body_count": 27,
+    "behavior": "REPLACE_SELECTED_OUTSIDE_TESTED_BOUNDED_CONTRACT_BODIES_WITH_FAIL_CLOSED_NOTIMPLEMENTEDERROR",
+    "exact_base_guard": true,
+    "exact_target_guard": true,
+    "full_spent_replay_is_load_bearing": true
+  },
+  "falsified_alternative": {
+    "id": "PERIPHERAL_28_BODY_WITH_ORDINAL_NEW",
+    "proposed_raw_delta_bytes": -7947,
+    "result": "IMPORT_FAIL_CLOSED_BEFORE_QUALIFICATION",
+    "causal_localization": "ORDINAL.__NEW___IS_LOAD_BEARING_AT_MODULE_IMPORT_VIA_ORD0_CONSTRUCTION",
+    "repair": "RESTORE_ORDINAL.__NEW___ONLY__RETAIN_OTHER_27_CUTS",
+    "conclusion": "ORDINAL.__NEW___IS_LOAD_BEARING_FOR_IMPORTABLE_BOUND_ROUTE"
+  },
+  "qualification": {
+    "spent_NEXT43": {
+      "id": "QUAL_SUCCESSOR_NEXT43_20261011_V1",
+      "cases": 11730,
+      "corpus_sha256": "b560c43f847cf80a30fdb4b96302a201cea1e7357195b502da00d4c28971e498",
+      "candidate": "11730/11730",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT44": {
+      "id": "QUAL_SUCCESSOR_NEXT44_20261011_V1",
+      "cases": 11960,
+      "corpus_sha256": "5e9bc78d3cf38924765c948efe25873fd11d87420569b71af13c6bff453d25be",
+      "candidate": "11960/11960",
+      "clean_room_reconstruction": "11960/11960",
+      "extracted_archive_replay": "11960/11960",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "clean_room_V38_to_V39_noncache_file_reconstruction": "PASS__278_OF_278_NONCACHE_FILES_BYTE_IDENTICAL__ZERO_MISMATCH",
+    "regenerated_manifest_sha256": "c93cd3aabe9fc5d1a66cf3e6090ab1f937c63e1eaa83beb68040a1a8faa99dee",
+    "route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+    "semantic_digest": "canonical/research/bytes/tools/semantic_digest_v1.py",
+    "replay_carrier": "CHATGPT_CONTAINER_FORKED_8_WORKER_EXACT_ROUTE_REPLAY",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V39_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_caed2aa03a0c8191af2b496d90d3ab96",
+    "bytes": 274460,
+    "sha256": "860c7ef655b545d4af678153789d24fc79b341c373696f84baf434fb342f3e1f",
+    "archive_size_is_not_used_as_B_exec": true
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT45_20261011_V1",
+    "cases": 12190,
+    "seed": 1566031294,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT45_20261011_V1_PIPE_V39_MANIFEST_IDENTITY",
+    "seed_material": "QUAL_SUCCESSOR_NEXT45_20261011_V1|c93cd3aabe9fc5d1a66cf3e6090ab1f937c63e1eaa83beb68040a1a8faa99dee",
+    "per_operation_budget": 1060,
+    "corpus_sha256": "beb3a6a84ea00f6c6d3a84b990b8e96a7e2d808bd91a4f39c1ea2643d073b3a1",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT45_20261011_V1.jsonl",
+    "library_file_id": "libfile_098b49276a5c819197fa20884f308abe",
+    "generation_provenance": "PARALLEL_ACCELERATOR_BYTE_EQUIVALENCE_CROSSCHECKED_AGAINST_CANONICAL_SERIAL_GENERATOR_ON_INDEPENDENT_TEST_CORPUS",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: exact V39 source is 1,761,507 raw Python-source bytes, 7,812 bytes below exact V38.",
+    "MEASURED: V39 passes full spent NEXT43 11,730/11,730 with zero failures.",
+    "MEASURED: previously frozen untouched NEXT44 passes V39 11,960/11,960; clean-room reconstruction and extracted archive also pass.",
+    "MEASURED: a 28-body predecessor cut was falsified at import; restoring only Ordinal.__new__ yields the accepted 27-body cut.",
+    "MEASURED: NEXT45 is frozen only after the V39 physical cut and NEXT44 qualification and remains unspent.",
+    "NOT PROVED: external second-carrier replay of V39.",
+    "NOT PROVED: universal SymPy semantic equivalence outside the bounded exact-symbolic route.",
+    "NOT PROMOTED: no Opus-family capability, acceptance, ownership, quality, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
