@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_UPLOADED_POPULATION_STRICT_SOLVER_BOUNDARY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "LOCAL_POPULATION_VERIFIED_AND_STRICTLY_PROJECTED__TERMINAL_FRESH_PROCESS_REQUIRED",
+  "source": {
+    "filename": "test-00000-of-00001.parquet",
+    "pinned_dataset": "cais/hle",
+    "pinned_revision": "5a81a4c7271a2a2a312b9a690f0c2fde837e4c29",
+    "size_bytes": 274276147,
+    "sha256": "6d0ee0602e8aea6b159509577e884f48ecac7b8e3f6822a35f51335a446c726a",
+    "rows": 2500,
+    "unique_ids": 2500,
+    "row_groups": 25,
+    "arrow_writer_version": "16.1.0",
+    "image_bearing_tasks": 342,
+    "empty_image_tasks": 2158,
+    "null_question_count": 0,
+    "null_answer_count": 0
+  },
+  "strict_solver_projection": {
+    "fields": [
+      "id",
+      "question",
+      "image"
+    ],
+    "local_path": "/mnt/data/hle_solver_inputs.clean.jsonl",
+    "sha256": "ad949c661269472032f09414eeeec19c474eebcb8086855e93b75b31f0ec6b7a",
+    "size_bytes": 117807017,
+    "answers_present": false,
+    "rationale_present": false,
+    "solver_must_not_receive_any_other_dataset_field": true
+  },
+  "sealed_reference_projection": {
+    "fields": [
+      "id",
+      "answer"
+    ],
+    "local_path": "/mnt/data/hle_hidden_refs.sealed.jsonl",
+    "sha256": "03fce90092183bac286826da0ce6a57805a3e019f14b44abaed2a29aa0fd6ff9",
+    "size_bytes": 145436,
+    "solver_access_forbidden": true
+  },
+  "adapter_alignment": {
+    "official_solver_visible_semantics": "system_prompt_plus_question_plus_optional_image",
+    "official_mime_repairs_applied_count": 2,
+    "exact_question_or_answer_content_committed": false
+  },
+  "operator_context_integrity": {
+    "question_strings_accidentally_exposed_during_parquet_footer_statistics_debugging": 2,
+    "answer_strings_exposed_from_hle": 0,
+    "exposed_question_text_not_recorded_in_this_artifact": true,
+    "terminal_solver_must_execute_in_fresh_process_without_operator_chat_context": true,
+    "terminal_commitments_must_be_sealed_before_reference_projection_is_loaded": true
+  },
+  "hard_nonclaims": [
+    "LOCAL_EXTRACTION_IS_NOT_TERMINAL_HLE_EXECUTION",
+    "LOCAL_EXTRACTION_IS_NOT_HLE_SCORE",
+    "NO_HLE_QUESTION_OR_ANSWER_CONTENT_IS STORED_IN_CANONICAL_GITHUB",
+    "STRICT_REFERENCE_EQUALITY_DOES_NOT_FORCE_THE_UNPUBLISHED_TARGET_MODEL_GRADER_LABEL"
+  ],
+  "hle_terminal_cases_executed": 0,
+  "hle_67_7_certified": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
