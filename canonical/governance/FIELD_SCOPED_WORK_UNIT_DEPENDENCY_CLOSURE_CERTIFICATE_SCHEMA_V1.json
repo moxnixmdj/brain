@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_FIELD_SCOPED_WORK_UNIT_DEPENDENCY_CLOSURE_CERTIFICATE_SCHEMA_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE_CONTRACT__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "objective": "Allow an exact independently verified zero-reality work product to remain semantically valid across unrelated same-file authority churn when every actual authority premise is bound by an exact RFC-6901 field manifest and all non-authority dependencies remain exact immutable blobs.",
+  "certificate_schema": "PROJECT_BRAIN_FIELD_SCOPED_WORK_UNIT_DEPENDENCY_CLOSURE_VERIFY_V1",
+  "required_status": "PASS__INDEPENDENTLY_VERIFIED_COMPLETE_FIELD_SCOPED_DEPENDENCY_CLOSURE",
+  "verification_scope": "EXACT_WORK_PRODUCT_STATIC_BLOBS_AND_FIELD_SCOPED_AUTHORITY_PREMISES",
+  "required_fields": [
+    "schema",
+    "status",
+    "independent_verified=true",
+    "dependency_closure_complete=true",
+    "verification_scope",
+    "work_product.path",
+    "work_product.git_blob_sha",
+    "static_dependencies[path]=git_blob_sha",
+    "static_dependency_digest_sha256",
+    "field_dependency_manifests[].source_path",
+    "field_dependency_manifests[].manifest",
+    "external_unbound_dependencies=[]",
+    "dynamic_or_implicit_dependencies=[]",
+    "independent_verifier.independent_or_objective=true",
+    "independent_verifier.method"
+  ],
+  "hard_rules": [
+    "APPLIES_ONLY_TO_ZERO_REALITY_DERIVATION",
+    "WORK_PRODUCT_EXACT_GIT_BLOB_MUST_REMAIN_UNCHANGED",
+    "EVERY_STATIC_DEPENDENCY_GIT_BLOB_MUST_REMAIN_UNCHANGED",
+    "EVERY_FIELD_MANIFEST_MUST_SELF_VALIDATE_AND_RECOMPUTE_CURRENT_ON_THE_LIVE_SOURCE_DOCUMENT",
+    "FIELD_MANIFEST_SOURCE_PATH_MUST_MATCH_ITS_BOUND_SOURCE",
+    "UNDECLARED_FIELDS_IN_THE_SAME_JSON_DOCUMENT_ARE_NON_LOAD_BEARING",
+    "ANY_DECLARED_FIELD_CHANGE_DISAPPEARANCE_OR_MANIFEST_TAMPERING_INVALIDATES_SEMANTIC_REUSE",
+    "ANY_OPEN_DYNAMIC_IMPLICIT_OR_EXTERNAL_UNBOUND_DEPENDENCY_FORBIDS_REUSE",
+    "CERTIFICATE_MUST_BE_AN_EXACT_CANONICAL_VERIFICATION_JSON_BLOB",
+    "CERTIFICATE_CANNOT_SELF_ASSERT_INDEPENDENCE_WITHOUT_REAL_INDEPENDENT_OR_OBJECTIVE_VERIFICATION",
+    "SCHEDULER_EPOCH_DRIFT_REQUIRES_REPLAN_EVEN_WHEN_SEMANTIC_PREMISES_ARE_UNCHANGED",
+    "FRESH_REALITY_EXECUTION_PROMOTION_ACTIVE_AUTHORITY_MUTATION_AND_IRREVERSIBLE_ACTION_REMAIN_OUTSIDE_THIS_ROUTE",
+    "THIS_CONTRACT_GRANTS_ZERO_EXECUTION_PROMOTION_ACCEPTANCE_CAPABILITY_OWNERSHIP_FRESH_REALITY_OR_TERMINAL_AUTHORITY"
+  ],
+  "runtime": "canonical/runtime/field_scoped_work_unit_validity_guard_v1.py",
+  "tests": "canonical/tests/test_field_scoped_work_unit_validity_guard_v1.py",
+  "reused_mechanisms": [
+    "canonical/runtime/field_scoped_authority_projection_gate_v1.py",
+    "canonical/runtime/authority_epoch_guard_v1.py",
+    "canonical/runtime/work_unit_validity_guard_v2.py"
+  ],
+  "activation_state": "INERT_UNTIL_EXACT_RUNTIME_AND_TEST_BYTES_RECEIVE_INDEPENDENT_OR_OBJECTIVE_VERIFICATION",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "terminal_authority": false
+}
