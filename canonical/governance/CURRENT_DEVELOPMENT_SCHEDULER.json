@@ -27,7 +27,7 @@
   "planning_entrypoint": "canonical.runtime.capability_first_scheduler_v1.rank_work",
   "current_live_work_frontier": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "git_blob_sha": "bb2f427bb5aa790e98ffa8d26b02df008827b802",
+    "git_blob_sha": "1c3554caa3cae9bd8a204ef9b477f886d1c3c11a",
     "status": "CURRENT_PROFESSIONAL_24_OF_24__FULL_PRIVATE_REGRESSION_GATE_OPEN__GITHUB_HOSTED_ACTIONS_BILLING_OR_SPENDING_LIMIT_PRESTART_BLOCK__12_CHECKPOINT_ROWS_WAKE_GATED__CAPABILITY_FIRST_AND_RESOURCE_PARETO_WORK_PRIMARY__ZERO_CREDIT",
     "professional_verified_root_subject_binding_count": 12,
     "professional_same_subject_composition_admissible": true,
@@ -126,7 +126,7 @@
     "escape_active_gap_a_count": 0,
     "escape_active_gap_b_count": 0,
     "escape_parked_unresolved_count": 1,
-    "bytes_current_frontier": "V77__1593651_RAW_PYTHON_BYTES__FAILCLOSED_MESSAGE_DECISION_EQUIVALENCE_VERIFIED",
+    "bytes_current_frontier": "V78__1589206_RAW_PYTHON_BYTES__TOKEN_AST_EQUIVALENT_WHITESPACE_COMPACTION",
     "professional_execution_property_truth_closed_count": 12,
     "professional_semantic_property_truth_closed_count": 12,
     "professional_open_execution_leaf_count": 0,
