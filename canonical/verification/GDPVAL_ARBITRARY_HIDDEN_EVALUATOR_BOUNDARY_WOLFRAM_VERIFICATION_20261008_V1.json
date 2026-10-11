@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_ARBITRARY_HIDDEN_EVALUATOR_BOUNDARY_WOLFRAM_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_SEPARATING_EVENT_ALGEBRA_PASS__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/gdpval_arbitrary_hidden_evaluator_boundary_v1.py",
+      "git_blob_sha": "b5fc086510798ac39470834f5c27c309b9646365"
+    },
+    "tests": {
+      "path": "canonical/tests/test_gdpval_arbitrary_hidden_evaluator_boundary_v1.py",
+      "git_blob_sha": "a50af455e456237d049a4ee185b84e5a9cc13fe7"
+    }
+  },
+  "independent_computation": {
+    "engine": "Wolfram Language",
+    "expression": "FullSimplify[pO(1-pB)-pB(1-pO),0<=pB<=1&&0<=pO<=1]",
+    "result": "pO-pB"
+  },
+  "verified": [
+    "FOR_AN_OWNER-VISIBLE_EVENT_A__A_BLIND JUDGE THAT CHOOSES THE UNIQUE SUBMISSION IN_A_AND_TIES OTHERWISE HAS_EXPECTED_OPUS_MINUS_BRAIN_NET_WIN_SCORE_P_OPUS(A)-P_BRAIN(A)",
+    "IF_P_OPUS(A)>P_BRAIN(A)__THAT_BLIND CONTENT-BASED JUDGE STRICTLY FAVORS_OPUS",
+    "FOR_DISTINCT_FINITE_PROBABILITY_LAWS THERE_EXISTS_AN_EVENT WITH_NONZERO_PROBABILITY_DIFFERENCE__AND_CHOOSING_THE_SIGN THAT FAVORS_OPUS PRODUCES_A_SEPARATING_JUDGE"
+  ],
+  "boundary": [
+    "THE_RESULT IS A UNIVERSAL-EVALUATOR NO-GO THEOREM__NOT EVIDENCE ABOUT THE ACTUAL ARTIFICIAL ANALYSIS JUDGE",
+    "EQUAL OWNER-VISIBLE LAWS PLUS SHARED ANONYMIZATION/JUDGE-SAMPLING RANDOMNESS GIVE MODEL-EXCHANGEABILITY; THIS DOES_NOT_REQUIRE LEARNING THE HIDDEN JUDGE SEMANTICS",
+    "NO GDPVAL ACCEPTANCE OR TERMINAL CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}

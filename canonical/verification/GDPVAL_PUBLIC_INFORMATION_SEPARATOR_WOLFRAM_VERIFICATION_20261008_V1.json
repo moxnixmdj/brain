@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_PUBLIC_INFORMATION_SEPARATOR_WOLFRAM_VERIFICATION_20261008_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_ABSTRACT_INFORMATION_BOUND_PASS__EMPIRICAL_GDPVAL_PREMISE_SEPARATELY_BOUND__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/gdpval_public_information_separator_v1.py",
+      "git_blob_sha": "5fc5ed9575cc8ca02364e4edf8e5c96633d02c65"
+    },
+    "tests": {
+      "path": "canonical/tests/test_gdpval_public_information_separator_v1.py",
+      "git_blob_sha": "8c5764f3723e73662d3354eb380fbac042b2956b"
+    }
+  },
+  "independent_computation": {
+    "engine": "Wolfram Language",
+    "expression": "{Maximize[{Min[q,1-q],0<=q<=1},q],Reduce[a==0&&a==1,a,Reals],FullSimplify[Min[q,1-q]<=1/2,0<=q<=1]}",
+    "result": "{{1/2,{q->1/2}},False,True}"
+  },
+  "verified": [
+    "IF_TWO_WORLDS_HAVE_THE_SAME_PREDECISION_OBSERVATION_AND_OPPOSITE_BINARY_TARGET_LABELS__ANY_OBSERVATION_ONLY_RANDOMIZED_DECISION_WITH_BRAIN_CONCLUSION_PROBABILITY_q_HAS_SUCCESS_q_IN_ONE_WORLD_AND_1-q_IN_THE_OTHER",
+    "THE_MAXIMUM_WORST_CASE_SUCCESS_OVER_q_IN_[0,1]_IS_EXACTLY_1/2",
+    "ONE_SINGLE_DETERMINISTIC_ACTION_CANNOT_EQUAL_BOTH_OPPOSITE_TARGET_LABELS",
+    "AN_ADMISSIBLE_SEPARATOR_OR_SOUND_BYPASS_IS_NECESSARY_TO_EXCEED_THIS_CURRENT_TWO_WORLD_INFORMATION_BOUND"
+  ],
+  "empirical_boundary": {
+    "owner_contract_source": {
+      "path": "canonical/evidence/GDPVAL_OWNER_COMPATIBLE_PUBLIC_GRADING_CONTRACT_20261008_V1.json",
+      "git_blob_sha": "3cfcb68f86befaea35efcc981c986877c0f4f4be"
+    },
+    "not_verified_by_wolfram": [
+      "THAT_THE_CURRENT_PUBLIC_GDPVAL_FACTS_REALLY_HAVE_IDENTICAL_PROJECTION_IN_THE_TWO_CONSTRUCTED_COMPLETIONS",
+      "THAT_BRAIN_IS_ABSENT_FROM_EVERY_POSSIBLE_PRIVATE_OWNER_GRAPH",
+      "THAT_E_M_U_ARE_THE_ONLY_CONCEIVABLE_FUTURE_SOUND_PROOF_FORMS"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO CLAIM OF EMPIRICAL GDPVAL NONIDENTIFIABILITY FROM THE WOLFRAM RESULT ALONE",
+    "NO CLAIM THE TARGET IS IMPOSSIBLE TO RESOLVE",
+    "NO GDPVAL ACCEPTANCE OR TERMINAL CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
