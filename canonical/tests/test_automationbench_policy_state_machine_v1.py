@@ -22,7 +22,7 @@ class AutomationBenchPolicyStateMachineV1Tests(unittest.TestCase):
             "name":"api_search",
             "content": json.dumps({
                 "results":[
-                    {"id":"sf.query","method":"GET","url":"https://x.salesforce.com/query","description":"search opportunities","parameters":{}},
+                    {"id":"salesforce.query","method":"GET","url":"https://x.salesforce.com/query","description":"search opportunities","parameters":{"q":{"required":true,"location":"query"}}},
                     {"id":"sf.update","method":"PATCH","url":"https://x.salesforce.com/opportunity/{id}","description":"update opportunity","parameters":{"id":{"required":True}}},
                 ]
             }),
