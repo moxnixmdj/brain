@@ -87,4 +87,14 @@ assert not f(4)
 """})
   with td:
    o=self.runr(r,["test_all.py"]);self.assertEqual(o["model_dependency_count"],0);self.assertEqual(o["external_capability_provider_count"],0);self.assertEqual(o["incremental_spend_usd"],0)
+ def test_crlf_candidate_offsets_match_original_bytes(self):
+  td=tempfile.TemporaryDirectory();r=pathlib.Path(td.name)
+  with td:
+   source=r/"m.py";raw=b"def f(x):\r\n    return x < 3\r\n";source.write_bytes(raw)
+   test=r/"test_all.py";test.write_text("from m import f\nassert f(3)\nassert not f(4)\n")
+   row={"path":source,"symbols":[{"lineno":1,"end_lineno":2,"score":1.0}]}
+   pool=repair._pool(row,[test],16)
+   realized=[repair._candidate({source:raw},[(source,e)]) for e in pool]
+   self.assertTrue(any(c is not None and "x <= 3" in c[source] for c in realized),pool)
+   self.assertEqual(source.read_bytes(),raw)
 if __name__=="__main__":unittest.main(verbosity=2)
