@@ -1,9 +1,9 @@
 {
   "schema": "PROJECT_BRAIN_DECISION_VALUE_SCHEDULER_GATE_INDEPENDENT_VERIFY_20261011_V2",
   "date": "2026-10-11",
-  "status": "PASS__ALL_12_CHECKPOINT_ROWS_WAKE_GATED__0_SAME_INFORMATION_CHECKPOINT_RUNS__BYTES_V48_ONLY_READY_LANE__46_OF_46_SCHEDULER_SLICE_PASS__CURRENT_PLAN_REPLAY_PASS__R2_SCALAR_FALLBACK_DRIFT_FAIL_CLOSED__ZERO_CREDIT",
+  "status": "PASS__LATEST_MAIN_COMPOSITION__FIELD_SCOPED_SEMANTIC_CURRENTNESS_V3_PRESERVED__ALL_12_CHECKPOINT_ROWS_WAKE_GATED__0_SAME_INFORMATION_CHECKPOINT_RUNS__BYTES_V48_ONLY_READY_LANE__46_OF_46_SCHEDULER_SLICE_PASS__CURRENT_PLAN_REPLAY_PASS__ZERO_CREDIT",
   "objective": "VERIFY_CURRENT_MAIN_DECISION_VALUE_PROJECTION_AFTER_ALL_OPEN_CHECKPOINT_WAKE_GATING_AND_BYTES_V48_PROMOTION",
-  "base_main_commit": "7b9912b847f7a647afe034a749b111bfa55fc6d3",
+  "base_main_commit": "6aa734ecc0370ffb0fb62ca1228f5fa635095820",
   "subjects": {
     "runtime": {
       "path": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
@@ -28,6 +28,10 @@
     "capability_first_scheduler_tests": {
       "path": "canonical/tests/test_capability_first_scheduler_v1.py",
       "git_blob_sha": "a9f7c285d72ef2282552ec335de93cab1ad59aab"
+    },
+    "scheduler_pointer": {
+      "path": "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json",
+      "git_blob_sha": "f6bad2b8a4a5557dd88e810b180aed8c75e5595a"
     }
   },
   "independent_replay": {
@@ -40,7 +44,8 @@
     "current_plan_replay": "PASS",
     "scheduler_slice_tests_run": 46,
     "scheduler_slice_tests_passed": 46,
-    "scheduler_slice_tests_failed": 0
+    "scheduler_slice_tests_failed": 0,
+    "latest_main_composition_replay": "PASS"
   },
   "current_plan_truth": {
     "checkpoint_actionable_row_ids": [],
@@ -68,7 +73,8 @@
         "policy_git_blob_sha": "cabe3bd1ec3748a595f3a959718c38accdacfb2f",
         "current_git_blob_sha": "34d62b109b99f38e62995544871460b266d2c7df"
       }
-    ]
+    ],
+    "preserved_orthogonal_authority": "TWO_CLOCK_SEMANTIC_VALIDITY_V3"
   },
   "hard_nonclaims": [
     "NO_CHECKPOINT_ACCEPTANCE_CREDIT",
