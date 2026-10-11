@@ -39,12 +39,18 @@ def _pure_number(text: str) -> float | None:
 
 
 def _fit_affine(points: list[tuple[float, float]]) -> tuple[float, float, list[tuple[float, float]]]:
-    """Robustly fit value = a * pixel + b with pairwise consensus."""
+    """Robustly fit value = a * pixel + b with pairwise consensus.
+
+    Axis ticks are discrete labels. A loose tolerance can accidentally admit
+    plot annotations that repeat a real tick value at a different raster
+    position, so consensus uses a scale-aware tight residual and permits each
+    numeric tick value to vote at most once.
+    """
     if len(points) < 2:
         raise ChartographyProfessionalSemanticError("INSUFFICIENT_AXIS_TICKS")
     vals = [v for _, v in points]
     span = max(vals) - min(vals)
-    tol = max(0.75, 0.025 * max(span, 1.0))
+    tol = max(0.15, 0.01 * max(span, 1.0))
     best: tuple[int, float, float, list[tuple[float, float]]] | None = None
     for i in range(len(points)):
         x1, y1 = points[i]
@@ -54,7 +60,22 @@ def _fit_affine(points: list[tuple[float, float]]) -> tuple[float, float, list[t
                 continue
             a = (y2 - y1) / (x2 - x1)
             b = y1 - a * x1
-            inliers = [(x, y) for x, y in points if abs((a * x + b) - y) <= tol]
+
+            raw = []
+            for x, y in points:
+                err = abs((a * x + b) - y)
+                if err <= tol:
+                    raw.append((x, y, err))
+
+            # One axis value cannot legitimately occur at two distinct tick
+            # positions on a monotone affine axis. Retain only the best
+            # geometric witness for each value.
+            by_value: dict[float, tuple[float, float, float]] = {}
+            for x, y, err in raw:
+                prev = by_value.get(y)
+                if prev is None or err < prev[2]:
+                    by_value[y] = (x, y, err)
+            inliers = [(x, y) for x, y, _ in by_value.values()]
             if len(inliers) < 2:
                 continue
             err = sum(abs((a * x + b) - y) for x, y in inliers) / len(inliers)
