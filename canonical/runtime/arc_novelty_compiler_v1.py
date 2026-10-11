@@ -1818,6 +1818,15 @@ def compile_hypotheses(
         if _consistent(h, pairs):
             candidates.append(h)
 
+    candidate_priority = {"EXTEND_COLUMNS_DOWN": 0}
+    candidates = [
+        h
+        for _, h in sorted(
+            enumerate(candidates),
+            key=lambda item: (candidate_priority.get(item[1]["kind"], 1), item[0]),
+        )
+    ]
+
     seen: set[str] = set()
     emitted: list[dict[str, Any]] = []
     import json
