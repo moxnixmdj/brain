@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_CURRENT_FIXED_BAR_ENGINE_RECLASSIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CURRENT_PRIMARY_ROUTE_RECLASSIFIED__GDPVAL_MOVED_Q_TO_O_FOR_FIXED_BAR_E1__HIDDEN_OWNER_PAIRWISE_RELATION_DORMANT_ALTERNATIVE__MATCHED_EPOCH_BRAIN_SCORE_OR_STRONGER_SCOPE_COMPLETE_CERTIFICATE_REMAINS__ZERO_CREDIT",
+  "target_obligation": "PROWORK_GDPVAL_GE_1846",
+  "problem": "CURRENT_TWO_ENGINE_SCHEDULER_STILL_CLASSIFIED_GDPVAL_AS_Q_QUALITATIVE_RELATION_WORK_EVEN_THOUGH_A_LATER_INDEPENDENTLY_VERIFIED_THEOREM_PROVES_THE_ACTIVE_FIXED_BAR_E1_DECISION_DOES_NOT_DEPEND_ON_THE_HIDDEN_OWNER_PAIRWISE_RELATION.",
+  "source_bindings": {
+    "fixed_bar_nonnecessity": {
+      "path": "canonical/governance/GDPVAL_FIXED_BAR_OWNER_PAIRWISE_NONNECESSITY_20261009_V1.json",
+      "git_blob_sha": "a56313d4c099e293fa7190c6bd60d3fc422c1d3f"
+    },
+    "fixed_bar_nonnecessity_verification": {
+      "path": "canonical/verification/GDPVAL_FIXED_BAR_OWNER_PAIRWISE_NONNECESSITY_VERIFICATION_20261009_V1.json",
+      "git_blob_sha": "0ff348665933ab801fb32b6e37d8c5d8438e5b42",
+      "status": "PASS__SOURCE_BINDINGS_CURRENT__WOLFRAM_SYMBOLIC_NONNECESSITY_TRUE__ZERO_CREDIT"
+    },
+    "historical_fixed_bar_provenance": {
+      "path": "canonical/governance/GDPVAL_OPUS55_FIXED_BAR_PROVENANCE_ACTIVATION_V1.json",
+      "git_blob_sha": "1c2ead2e8c5cd14e109ab9361bc4962bcc1e0c8e"
+    },
+    "target_relative_information_cut": {
+      "path": "canonical/governance/GDPVAL_TARGET_RELATIVE_INFORMATION_CUT_20261007_V2.json",
+      "git_blob_sha": "fc132105663b17b23a38a5f30579657746960349"
+    },
+    "mechanical_route_expansion": {
+      "path": "canonical/governance/GDPVAL_FIRST_RESIDUAL_MECHANICAL_ROUTE_EXPANSION_20261009_V2.json",
+      "git_blob_sha": "c38ca6ee010a63d6dc218aa2c9d85831e39441ed"
+    }
+  },
+  "current_acceptance_shape": {
+    "primary_route_id": "GDPVAL_FIXED_BAR_E1",
+    "decision": "BRAIN_MATCHED_EPOCH_COMPARABLE_SCORE >= PREDECLARED_MATCHED_EPOCH_PUBLIC_OPUS55_BAR",
+    "acceptance_relation_class": "OBJECTIVE_FIXED_BAR",
+    "hidden_owner_pairwise_relation_is_free_variable_of_decision": false,
+    "exact_hidden_owner_prompt_required": false,
+    "raw_owner_pairwise_graph_required": false,
+    "owner_pairwise_necessary_preference_route": "DORMANT_ALTERNATIVE_STRONGER_ROUTE",
+    "public_220_mechanical_routes": "OPTIONAL_STRUCTURAL_SUPPORT__NOT_A_SERIAL_PREREQUISITE_TO_A_DIRECT_MATCHED_SCORE_RECEIPT"
+  },
+  "epoch_rule": {
+    "historical_predicate_label": "PROWORK_GDPVAL_GE_1846",
+    "historical_frozen_bar": 1846,
+    "dynamic_owner_leaderboard_must_not_silently_rebase_historical_predicate": true,
+    "current_terminal_parity_requires_matched_epoch_freeze_before_brain_measurement": true,
+    "cross_epoch_score_comparison_without_sound_bridge": "FORBIDDEN"
+  },
+  "minimum_remaining_information": [
+    "ONE_CONTENT_ADDRESSED_MATCHED_EPOCH_COMPARABLE_BRAIN_GDPVAL_AA_V2_1_SCORE_RECEIPT_WITH_HARNESS_VALIDITY",
+    "OR_ONE_STRONGER_SCOPE_COMPLETE_CERTIFICATE_THAT_SOUNDLY_IMPLIES_FIXED_BAR_NONINFERIORITY_WITHOUT_SCORE_EXECUTION"
+  ],
+  "engine_effect": {
+    "previous": "Q_ACCEPTANCE_RELATION_ROBUST_COMMON_POLICY",
+    "current": "O_OBJECTIVE_ACCEPTANCE_INSTANTIATION",
+    "o_active_count_delta": 1,
+    "q_active_count_delta": -1,
+    "owner_relation_research_primary": false,
+    "new_primitive_required": false
+  },
+  "scheduler_rule": "DO_NOT_RESEARCH_GDPVAL_OWNER_PAIRWISE_PROMPT_ENVELOPE_OR_FULL_220_NECESSARY_PREFERENCE_CERTIFICATE_AS_PRIMARY_WORK_FOR_THE_ACTIVE_FIXED_BAR_E1_ROUTE__FIRST_TRY_EXISTING_O_FIXED_BAR_AND_SCOPE_COMPLETE_PROOF_MACHINERY__OTHERWISE_ACQUIRE_ONLY_A_MATCHED_EPOCH_SCORE_BEARING_FACT.",
+  "hard_nonclaims": [
+    "NO_GDPVAL_SCORE",
+    "NO_GDPVAL_ACCEPTANCE_CREDIT",
+    "NO_CLAIM_OWNER_PAIRWISE_RELATION_IS_GLOBALLY_IRRELEVANT",
+    "NO_CLAIM_THE_HISTORICAL_1846_BAR_EQUALS_ANY_LATER_OWNER_EPOCH",
+    "NO_CLAIM_92_OF_220_MECHANICAL_ROUTES_PROVE_FIXED_BAR_ACCEPTANCE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false
+}
