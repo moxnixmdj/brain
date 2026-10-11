@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1",
   "date": "2026-10-11",
-  "status": "ACTIVE_CAPABILITY_FIRST__BENCHMARK_DEMOTED_TO_AUDIT__MULTI_FILE_TWO_EDIT_REPAIR_VERIFIED__FRONTIERCODE_SCORE_STILL_UNPROVED",
+  "status": "ACTIVE_CAPABILITY_FIRST__BENCHMARK_AUDIT_ONLY__EXPLICIT_TEST_BOUND_ACCEPTANCE_AND_MULTI_FILE_TWO_EDIT_REPAIR_VERIFIED__FRONTIERCODE_SCORE_UNPROVED",
   "mission_lock": {
     "primary_objective": "MAKE_THE_UNDERLYING_SOFTWARE_ENGINEERING_CAPABILITY_REAL_INSIDE_BRAIN",
     "capability_target": "UNSEEN_REPOSITORY_PLUS_SOFTWARE_TASK_TO_INDEPENDENTLY_VERIFIED_MERGEABLE_PATCH",
@@ -40,18 +40,30 @@
       "model_dependency_count": 0,
       "external_capability_provider_count": 0,
       "incremental_spend_usd": 0
+    },
+    "new_verified_acceptance_compiler": {
+      "capability_id": "python.software_task.acceptance.explicit_tests.v1",
+      "runtime_git_blob_sha": "b4fbca159d3ff1a62ecbc7c63d5459a66d91c61f",
+      "runtime_sha256": "0fde73c1094fc9296f58336efb45b49a27ed105907678df26cea6c2d9800277c",
+      "test_git_blob_sha": "fcd6a41ab172d2b86ab1d644cd0a2b90a1984cb0",
+      "verification": "canonical/verification/SOFTWARE_TASK_ACCEPTANCE_COMPILER_V1_VERIFY_20261011.json",
+      "capability_truth": "EXPLICIT_RAW_TASK_CLAUSES_TO_EXACT_TEST_BOUND_ACCEPTANCE_OBLIGATIONS__FAIL_CLOSED_ON_UNBOUND_AMBIGUOUS_OR_PARTIAL_SEMANTICS",
+      "model_dependency_count": 0,
+      "external_capability_provider_count": 0,
+      "incremental_spend_usd": 0
     }
   },
   "capability_chain": [
     {
       "stage": "RAW_TASK_SEMANTICS",
       "target": "RAW_SOFTWARE_REQUEST_TO_SOUND_EXPLICIT_BEHAVIORAL_AND_ACCEPTANCE_CONTRACT",
-      "state": "OPEN_GENERAL_CASE",
+      "state": "PARTIAL_EXPLICIT_TEST_BOUND_VERIFIED",
       "existing_support": [
         "goal_compiler.py",
-        "plain_goal.bound_capability.grounding.stdlib"
+        "plain_goal.bound_capability.grounding.stdlib",
+        "python.software_task.acceptance.explicit_tests.v1"
       ],
-      "residual": "ARBITRARY_SOFTWARE_REQUEST_SEMANTICS_NOT_SCOPE_COMPLETE"
+      "residual": "GENERAL_NATURAL_LANGUAGE_SOFTWARE_SEMANTICS_AND_REQUIREMENTS_NOT_EXACTLY_GROUNDED_IN_TEST_ASSERTIONS_REMAIN_UNBOUND"
     },
     {
       "stage": "REPOSITORY_UNDERSTANDING_AND_LOCALIZATION",
@@ -86,12 +98,14 @@
     {
       "stage": "INDEPENDENT_VERIFICATION",
       "target": "REQUESTED_BEHAVIOR_PLUS_REGRESSION_PLUS_SCOPE_DISCIPLINE_PLUS_CODEBASE_STANDARDS",
-      "state": "PARTIAL",
+      "state": "PARTIAL_EXPLICIT_CONTRACT_PLUS_TEST_REPLAY",
       "existing_support": [
         "python.tests.audit.unittest",
-        "professional quality property stack"
+        "professional quality property stack",
+        "python.software_task.acceptance.explicit_tests.v1",
+        "python.repair.loop.test_guided.ast.v1"
       ],
-      "residual": "PASSING_BOUND_TESTS_DOES_NOT_ESTABLISH_COMPLETE_MERGEABILITY_OR_HIDDEN_REQUIREMENTS"
+      "residual": "EXACT_TEST_BOUND_REQUEST_COVERAGE_IS_VERIFIED_ONLY_FOR_THE_EXPLICIT_SUPPORTED_SUBSET__MERGEABILITY_AND_BROADER_REGRESSIONS_REMAIN"
     },
     {
       "stage": "GENERALIZATION",
@@ -105,14 +119,15 @@
     "primary_work_class": "CAPABILITY_BUILD",
     "benchmark_instrumentation_state": "AUDIT_ONLY",
     "owner_wait_state": "NONBLOCKING_OPTIONAL_WAKE_EVENT",
-    "highest_leverage_next_build": "SOFTWARE_TASK_ACCEPTANCE_COMPILER_V1",
+    "highest_leverage_next_build": "SOFTWARE_TASK_REPAIR_ORCHESTRATOR_V1",
     "next_build_contract": [
-      "RAW_SOFTWARE_REQUEST_PLUS_REPOSITORY_EVIDENCE_TO_EXPLICIT_ATOMIC_ACCEPTANCE_OBLIGATIONS",
-      "BIND_EACH_OBLIGATION_TO_EXISTING_TEST_STATIC_OR_RUNTIME_EVIDENCE_WHERE_POSSIBLE",
-      "MARK_UNBOUND_SEMANTIC_REQUIREMENTS_EXPLICITLY_INSTEAD_OF_GUESSING",
-      "SEPARATE_TEST_PASS_FROM_REQUEST_COMPLETENESS_AND_MERGEABILITY",
-      "OUTPUT_A_TYPED_FAIL_CLOSED_ACCEPTANCE_CONTRACT_CONSUMABLE_BY_REPAIR_AND_VERIFICATION_LOOPS",
-      "NO_EXTERNAL_GENERAL_PURPOSE_MODEL_RUNTIME_COGNITION"
+      "COMPOSE_EXPLICIT_ACCEPTANCE_COMPILER_WITH_MULTI_FILE_REPAIR_LOOP",
+      "REFUSE_REPAIR_EXECUTION_WHEN_ACCEPTANCE_CONTRACT_IS_INCOMPLETE",
+      "RUN_BOUNDED_REPAIR_ONLY_AFTER_EXPLICIT_TASK_TO_TEST_BINDING_PASSES",
+      "REPLAY_WINNING_PATCH_STATE_AGAINST_THE_BOUND_ACCEPTANCE_TESTS",
+      "RETURN_ONE_END_TO_END_RECEIPT_FROM_TASK_TEXT_TO_VERIFIED_CANDIDATE_DIFF",
+      "PRESERVE_SOURCE_BYTES_AND_ZERO_EXTERNAL_MODEL_RUNTIME_COGNITION",
+      "NO_MERGEABILITY_OR_FRONTIERCODE_SCORE_CLAIM"
     ],
     "stop_conditions": [
       "DO_NOT_SPEND_PRIMARY_CYCLES_ON_PRIVATE_BENCHMARK_ARCHAEOLOGY",
