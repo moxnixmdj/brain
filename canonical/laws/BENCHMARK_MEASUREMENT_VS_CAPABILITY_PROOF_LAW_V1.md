@@ -1,6 +1,6 @@
 # Benchmark Measurement vs Capability Proof Law V1
 
-Status: **CANONICAL / MANDATORY / FAIL-CLOSED**
+Status: **CANONICAL CANDIDATE / FAIL-CLOSED**
 
 ## 1. Scope
 
@@ -49,8 +49,6 @@ A benchmark receipt is one admissible evidence type. It is not privileged over a
 
 Proof compression across benchmarks is encouraged only when the shared certificate is causally load-bearing and its scope relation is explicit.
 
-When several admissible evidence routes can close the required proposition set, the scheduler MUST optimize the evidence set in this order: minimum total wall-clock cost; maximum reusable capability coverage at equal wall-clock; minimum external-dependency risk; minimum compute/context/memory/energy cost; deterministic tie-break. The canonical bounded implementation is `canonical/runtime/capability_proof_compression_optimizer_v1.py`. Its output is scheduling authority only and never creates proof credit by itself.
-
 ## 6. Scheduling
 
 Benchmark rows that are wake-gated on new authority, new private scope, new authenticated result, or a stronger certificate MUST NOT receive same-information retries.
@@ -72,10 +70,6 @@ Canonical state MUST maintain:
 - **BRANDED_BENCHMARK_RECEIPT_LEDGER** — exact benchmark results and owner-comparable receipts.
 
 The ledgers may cross-reference each other only through an explicit typed entailment.
-
-Current canonical pointer paths are:
-- `canonical/governance/CURRENT_CAPABILITY_COMPARISON_LEDGER.json`
-- `canonical/governance/CURRENT_BRANDED_BENCHMARK_RECEIPT_LEDGER.json`
 
 ## 8. Optimization order
 
