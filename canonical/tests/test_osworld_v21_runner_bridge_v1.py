@@ -15,24 +15,38 @@ class _Browser:
         return {"type": "OBSERVE"}
 
 
+class _Guest:
+    def __init__(self):
+        self.env = None
+    def bind_environment(self, env):
+        self.env = env
+    def run(self, payload):
+        return {"type": "STATE_OPS", "ok": True}
+
+
 def test_build_and_bind():
     browser = _Browser()
+    guest = _Guest()
     agent = build_agent(
-        lambda _state: {"actions": [{"type": "DONE"}]},
+        lambda _state: {"actions": [{"type": "WAIT"}]},
         policy_id="p",
         browser_controller=browser,
+        guest_controller=guest,
     )
     env = object()
     bind_agent_environment(agent, env)
     assert browser.env is env
+    assert guest.env is env
 
 
 def test_native_runner_is_delegated_without_evaluator_replacement():
     browser = _Browser()
+    guest = _Guest()
     agent = build_agent(
-        lambda _state: {"actions": [{"type": "DONE"}]},
+        lambda _state: {"actions": [{"type": "WAIT"}]},
         policy_id="p",
         browser_controller=browser,
+        guest_controller=guest,
     )
     env = object()
 
@@ -51,11 +65,13 @@ def test_native_runner_is_delegated_without_evaluator_replacement():
         max_steps=500,
         instruction="x",
         args=object(),
-        result_dir="/tmp/result",
+        result_dir="/tmp/result-osworld-runner-bridge-test",
         scores=[],
     )
     assert result == "native-result"
     assert browser.env is env
+    assert guest.env is env
+    assert str(agent.result_dir) == "/tmp/result-osworld-runner-bridge-test"
     assert Native.called[0] is agent
     assert Native.called[1] is env
 
