@@ -231,11 +231,12 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "714995cd13bf216f4c9189d77e33edc87fc326e5",
-    "status": "ACTIVE_RESEARCH__CONSERVATIVE_ZETA_V31_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1909906,
-    "qualification": "10120/10120",
-    "next": "Rerank exact V31 using spent NEXT36 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT37_20261010_V1.",
+    "observed_git_blob_sha": "e6905e355b6ba4fa5a354472bff7c419e40c59b4",
+    "status": "ACTIVE_RESEARCH__CONSERVATIVE_HIGHLEVEL_PROFILE_V35_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1789204,
+    "B_exec_raw_python_source_bytes": 1791964,
+    "qualification": "11040/11040",
+    "next": "Rerank exact V35 using spent NEXT40 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT41_20261011_V1.",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   },
