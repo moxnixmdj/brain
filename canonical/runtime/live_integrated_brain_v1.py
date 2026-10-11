@@ -19,6 +19,7 @@ from canonical.runtime.capability_planner import PlanningFailure, plan_capabilit
 from canonical.runtime import astra_runtime, goal_compiler
 from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
 from canonical.runtime.raw_goal_archive_acceptance_v1 import verify as verify_raw_archive_acceptance
+from canonical.runtime.runtime_cognition_credit_guard_v1 import assert_credit_path_cognition_governance
 
 SCHEMA = "PROJECT_BRAIN_LIVE_INTEGRATED_BRAIN_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -97,6 +98,7 @@ def compile_capability_graph(
 
 
 def run(request: Mapping[str, Any]) -> dict[str, Any]:
+    assert_credit_path_cognition_governance(ROOT)
     started = perf_counter_ns()
     try:
         if not isinstance(request, Mapping):
@@ -295,6 +297,7 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
     authority. V1 supports the existing single-capability compiled shape; richer
     controller/composition shapes fail closed instead of being guessed.
     """
+    assert_credit_path_cognition_governance(ROOT)
     started = perf_counter_ns()
     try:
         if not isinstance(request, Mapping):
