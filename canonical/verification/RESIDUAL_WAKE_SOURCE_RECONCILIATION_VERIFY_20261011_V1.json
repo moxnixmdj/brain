@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_RESIDUAL_WAKE_SOURCE_RECONCILIATION_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__RESIDUAL_SOURCE_RECONCILED_TO_12_WAKE_GATED__0_SAME_INFORMATION_RUNNABLE__ZERO_CREDIT",
+  "base_main_commit": "417858523c9b1e7da20708c77cf0589c1305fa64",
+  "residual_blob_sha": "37f53e8c49933a14fede674f74d10c0d601ab857",
+  "source_locks": {
+    "wake_reconciliation": [
+      "canonical/governance/CURRENT_ALL_OPEN_CHECKPOINT_WAKE_GATE_RECONCILIATION_20261011_V1.json",
+      "e10c7ebe00dac3f60eee2845df16c58a1fdd5791"
+    ],
+    "frontier_specialization": [
+      "canonical/governance/CURRENT_FRONTIER_REUSE_SPECIALIZATION_20261011_V1.json",
+      "fd829dd1f2c959302f346f74c72a65d8d24e7f7e"
+    ],
+    "two_engine_cut": [
+      "canonical/governance/CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_CUT_20261011_V1.json",
+      "c9854de47de50c15d15ff8911eb842edd0833349"
+    ]
+  },
+  "checks": {
+    "logically_open_checkpoint_rows": 12,
+    "wake_gated_checkpoint_rows": 12,
+    "row_specific_same_information_runnable_rows": 0,
+    "active_gap_a_acquisition_rows": 0,
+    "active_gap_b_strict_progress_rows": 0,
+    "parked_unresolved_rows": 1
+  },
+  "proved": [
+    "CURRENT_RESIDUAL_REUSE_CLASSIFICATION_NO_LONGER_CLASSIFIES_WAKE_GATED_ROWS_AS_ACTIVE_ACQUISITION",
+    "O11_Q1_REMAIN_LOGICALLY_OPEN_WITHOUT_ROW_SPECIFIC_SAME_INFORMATION_EXECUTION",
+    "TB_SCIENCE_REMAINS_PARKED"
+  ],
+  "hard_nonclaims": [
+    "NO_CHECKPOINT_CLOSED",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
