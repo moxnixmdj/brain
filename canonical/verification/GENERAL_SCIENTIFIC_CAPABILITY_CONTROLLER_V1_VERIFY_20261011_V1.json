@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_GENERAL_SCIENTIFIC_CAPABILITY_CONTROLLER_V1_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__TWO_ENVIRONMENT_PRIVATE_CLEAN_ROOM_REPLAY__BOUNDED_FOUR_FAMILY_SCOPE",
+  "subject": {
+    "controller_path": "canonical/runtime/general_scientific_capability_controller_v1.py",
+    "controller_git_blob_sha": "992345186cc51fff143a74f1e76f01ae897ac967",
+    "test_path": "canonical/tests/test_general_scientific_capability_controller_v1.py",
+    "test_git_blob_sha": "59892342406c1a22422854e2817885bc83e92d06"
+  },
+  "dependency_closure": [
+    [
+      "canonical/runtime/capability_planner.py",
+      "629766f8a1194fd298e0809b64a5e9c5a39fa3ea"
+    ],
+    [
+      "canonical/runtime/h100_expression_tree_symbolic_regression_v1.py",
+      "14e8f11c73e5fc0439016dbcd5b5a5a8d2c46490"
+    ],
+    [
+      "canonical/runtime/g0_finite_typed_rule_synthesis.py",
+      "5fcd8101d65367f7c0e53bd245979ba01fb73a26"
+    ],
+    [
+      "canonical/runtime/abductive_residual_theorem_v1.py",
+      "aef25c462163170defd9d6c81beec628b350b51f"
+    ],
+    [
+      "canonical/runtime/tb_science_zero_model_scientific_kernel_v1.py",
+      "fae27cd575296d70a160a0c7f72d5a8127d8b9c1"
+    ],
+    [
+      "canonical/runtime/explicit_recovery_planner.py",
+      "6db2913d4da6505e3151829787ce54e348369d4f"
+    ]
+  ],
+  "verification": {
+    "environment_1": {
+      "kind": "PRIVATE_EXISTING_SPRITE",
+      "sprite": "brain-canonical-apply-slice-verify-20261011-v1",
+      "tests_run": 9,
+      "tests_passed": 9,
+      "tests_failed": 0
+    },
+    "environment_2": {
+      "kind": "PRIVATE_EXISTING_SPRITE",
+      "sprite": "brain-live-runtime-v1-verify-20261008",
+      "tests_run": 9,
+      "tests_passed": 9,
+      "tests_failed": 0
+    },
+    "exact_controller_blob_replayed": true,
+    "exact_test_blob_replayed": true,
+    "dependency_blobs_match_current_main": true
+  },
+  "causal_repair": {
+    "initial_failure": "SHARED_PERIOD_FIT_SELECTED_2X_SECOND_HARMONIC_ALIAS",
+    "repair": "BOUNDED_HALF_PERIOD_ALIAS_TEST_WITH_FIT_EQUIVALENCE_GATE",
+    "negative_control": "TRUE_FUNDAMENTAL_WITH_MATERIAL_FIRST_HARMONIC_NOT_HALVED",
+    "post_repair_replays": "9_OF_9_PASS_TWICE"
+  },
+  "verified_scope": [
+    "SYMBOLIC_REGRESSION_WITH_BOUNDED_SEARCH_RECOVERY",
+    "FINITE_TYPED_RULE_SYNTHESIS",
+    "ABDUCTIVE_RESIDUAL_ANALYSIS",
+    "SHARED_PERIOD_FITTING_WITH_SECOND_HARMONIC_ALIAS_DISAMBIGUATION",
+    "AMBIGUOUS_TYPED_STRUCTURE_FAIL_CLOSED",
+    "UNTYPED_INPUT_FAIL_CLOSED"
+  ],
+  "ownership": {
+    "model_dependency_count": 0,
+    "external_model_runtime_calls": 0,
+    "network_dependency_count": 0,
+    "dynamic_code_execution": false
+  },
+  "hard_nonclaims": [
+    "NOT_GENERAL_SCIENTIFIC_INTELLIGENCE",
+    "NO_RAW_NATURAL_LANGUAGE_TASK_UNDERSTANDING_CLAIM",
+    "NO_ARBITRARY_ARTIFACT_MATERIALIZATION_CLAIM",
+    "NO_TB_SCIENCE_BENCHMARK_SCORE_CLAIM",
+    "NO_RANK23_TASK_READ_OR_START",
+    "NO_TERMINAL_OR_BENCHMARK_CREDIT_FROM_THIS_RECEIPT"
+  ],
+  "acceptance_credit_delta": 0,
+  "benchmark_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "execution_authority": false,
+  "activation_authority": false
+}
