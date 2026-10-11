@@ -131,12 +131,27 @@ def _observed_values(
     name: str,
     prompt: str,
     observations: Sequence[Any],
+    *,
+    endpoint_id: str = "",
 ) -> list[str]:
     low = name.lower().replace("-", "_")
     quoted = [q.lower() for q in _quoted_phrases(prompt)]
     scored: list[tuple[int, str]] = []
 
     for rec in _flatten_mappings(list(observations)):
+        ep = endpoint_id.lower()
+        if ep.startswith("gmail.") and low in {"id", "message_id", "messageid"}:
+            if not any(k in rec for k in ("threadId", "thread_id", "labelIds", "label_ids")):
+                continue
+        if ep.startswith("sheets.") and low in {"spreadsheetid", "spreadsheet_id"}:
+            mime = str(rec.get("mimeType") or rec.get("mime_type") or "").lower()
+            if (
+                "spreadsheetId" not in rec
+                and "spreadsheet_id" not in rec
+                and "spreadsheet" not in mime
+            ):
+                continue
+
         label_parts: list[str] = []
         for key in ("name", "title", "subject"):
             value = rec.get(key)
@@ -190,6 +205,11 @@ def _observed_values(
                 scored.append((score, value))
 
     scored.sort(key=lambda item: (-item[0], item[1]))
+    if not scored:
+        return []
+    top_score = scored[0][0]
+    if top_score > 0:
+        scored = [item for item in scored if item[0] == top_score]
     return list(dict.fromkeys(value for _, value in scored))
 
 
@@ -321,7 +341,12 @@ def observation_expansion_plan(
                 prompt_value = _ground_from_prompt(name, prompt)
                 values = [prompt_value] if prompt_value is not None else []
                 if not values:
-                    values = _observed_values(name, prompt, observations)
+                    values = _observed_values(
+                        name,
+                        prompt,
+                        observations,
+                        endpoint_id=endpoint_id,
+                    )
             if not values:
                 valid = False
                 break
