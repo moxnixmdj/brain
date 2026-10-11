@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ESCAPE_O10_MINIMUM_DELTA_FAMILIES_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE_REUSE_FIRST_O10_COMPRESSION__10_ACTIVE_O_ROWS_TO_3_MINIMUM_DELTA_FAMILIES__ZERO_CREDIT",
+  "objective": "REUSE_THE_VERIFIED_O_GATE_AND_V4_PROOF_KERNEL_WITH_THREE_SHARED_MINIMUM_INFORMATION_SHAPES_INSTEAD_OF_TEN_BESPOKE_RESEARCH_PROGRAMS",
+  "source_bindings": {
+    "two_engine": [
+      "canonical/governance/CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_CUT_20261011_V1.json",
+      "ee4e082c02b2da84bb029bc0fe92660135aa2b49"
+    ],
+    "row_specialization": [
+      "canonical/governance/CURRENT_FRONTIER_REUSE_SPECIALIZATION_20261011_V1.json",
+      "8f6682d7217f90e82850173f7dd8231de66b8da5"
+    ]
+  },
+  "compiler": {
+    "path": "canonical/runtime/escape_o10_minimum_delta_family_projection_v1.py",
+    "git_blob_sha": "463cb4b0b1b84cdad9d1894b13755827bca1af06"
+  },
+  "tests": {
+    "path": "canonical/tests/test_escape_o10_minimum_delta_family_projection_v1.py",
+    "initial_git_blob_sha": "3b7cce0e376f6e4481ab9e6c34f56bd826385591"
+  },
+  "partition": {
+    "active_o_rows": 10,
+    "family_count": 3,
+    "families": [
+      {
+        "family_id": "THRESHOLD_OR_DECOMPOSITION_EVIDENCE",
+        "row_count": 3,
+        "obligation_ids": [
+          "CODING_TB4_GE_66_4",
+          "CODING_CURSORBENCH_GE_57_8",
+          "FINANCE_ACCOUNTING_INDEX_GE_61"
+        ],
+        "v4_first_route": "THRESHOLD_LOWER_BOUND",
+        "exact_role": "BIND_SCORE_DECOMPOSITION_OR_PROVED_LOWER_BOUND_FACTS__OR_USE_A_STRONGER_SCOPE_COMPLETE_CERTIFICATE"
+      },
+      {
+        "family_id": "SCOPE_COMPLETENESS",
+        "row_count": 4,
+        "obligation_ids": [
+          "AUTOMATIONBENCH_GE_40",
+          "OSWORLD_2_1_PARTIAL_GE_81_8",
+          "FINANCE_AGENT_V2_GE_58_59",
+          "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER"
+        ],
+        "v4_first_route": "SCOPE_SUPERSET",
+        "exact_role": "BIND_PRIVATE_OR_GATED_SCOPE_SEMANTICS_OR_A_FORMAL_SCOPE_SUPERSET__DO_NOT_ACQUIRE_SCORE_DATA_BEFORE_SCOPE_IS_SOUND"
+      },
+      {
+        "family_id": "OWNER_OR_EVALUATOR_INTERFACE",
+        "row_count": 3,
+        "obligation_ids": [
+          "CODING_FRONTIERCODE_GE_54_4",
+          "HLE_TOOLS_GE_67_7",
+          "CHARTOGRAPHY_TOOLS_GE_89"
+        ],
+        "v4_first_route": "EVALUATOR_OR_IDENTITY_LOCK_THEN_OBJECTIVE_ROUTE",
+        "exact_role": "BIND_OWNER_INTAKE_HARNESS_GRADER_OR_JUDGE_RELATION_AND_RESOURCE_ADMISSIBILITY_BEFORE_ANY_SCORE_BEARING_EXECUTION"
+      }
+    ]
+  },
+  "execution_order": [
+    "FOR_EACH_ROW_TRY_EXISTING_SCOPE_COMPLETE_OR_OBJECTIVE_STRONGER_PROOF_FIRST",
+    "IF_OPEN_ROUTE_TO_ITS_MINIMUM_DELTA_FAMILY",
+    "ACQUIRE_ONLY_A_CONTENT_ADDRESSED_FACT_CAPABLE_OF_CHANGING_THE_FIRST_OPEN_LOCK",
+    "REENTER_EXISTING_V4_O_GATE_AFTER_EACH_FACT",
+    "STOP_ACQUISITION_IMMEDIATELY_WHEN_THE_ROW_VERDICT_CHANGES",
+    "DEDUPLICATE_IDENTICAL_SOURCE_FACTS_ACROSS_ROWS_BEFORE_ACQUISITION"
+  ],
+  "relation_to_q2": "ORTHOGONAL__Q2_REMAINS_ON_EXISTING_ROBUST_COMMON_POLICY_AND_TARGET_RELATION_ENGINE",
+  "new_primitive_required": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "acceptance_authority": false,
+  "ownership_authority": false,
+  "terminal_authority": false,
+  "hard_nonclaims": [
+    "NO_O_ROW_ACCEPTANCE_CLOSED_BY_THIS_COMPRESSION",
+    "NO_CLAIM_ONE_FACT_CLOSES_EVERY_ROW_IN_A_FAMILY",
+    "NO_Q2_RESULT",
+    "NO_CC_R3_U_EMPTY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
