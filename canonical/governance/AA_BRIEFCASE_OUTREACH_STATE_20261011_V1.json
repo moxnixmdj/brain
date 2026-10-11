@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_OUTREACH_STATE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "EXISTING_OWNER_THREAD_CONFIRMED__NO_INBOUND_REPLY__THREADed_FOLLOWUP_DRAFT_PREPARED_NOT_SENT__ZERO_CREDIT",
+  "mission_lock": "PROVE_AA_BRIEFCASE_V1_1_BRAIN_ELO_GE_1822_ONLY",
+  "owner_contact": "contact@artificialanalysis.ai",
+  "existing_thread": {
+    "sent_messages": [
+      {
+        "date": "2026-10-03",
+        "subject": "Research access request: no-cost evaluation route for multiple Artificial Analysis benchmarks",
+        "scope": "Initial no-cost owner/private evaluation route request including AA-Briefcase v1.1."
+      },
+      {
+        "date": "2026-10-05",
+        "subject": "Re: Research access request: no-cost evaluation route for multiple Artificial Analysis benchmarks",
+        "scope": "Narrowed AA-Briefcase request to one owner-side frozen-epoch result or verified current-to-frozen bridge."
+      },
+      {
+        "date": "2026-10-07",
+        "subject": "Re: Research access request: no-cost evaluation route for multiple Artificial Analysis benchmarks",
+        "scope": "Narrowed further to private pairwise semantics or no-cost owner-side pairwise route without requesting private task contents."
+      }
+    ],
+    "inbound_owner_reply_found": false,
+    "checked_through": "2026-10-11"
+  },
+  "new_information_since_last_sent_followup": [
+    "BRAIN_MUST_BE_EVALUATED_AS_FULL_AGENT_SYSTEM_NOT_THIN_MODEL_ENDPOINT",
+    "ARTIFICIAL_ANALYSIS_PUBLICLY_SUPPORTS_BYO_AGENT_OVER_HTTP_IN_OPTIMA",
+    "PUBLIC_OPTIMA_AND_STIRRUP_SURFACES_DO_NOT_PUBLISH_AN_AUTHORITATIVE_OFFICIAL_AA_BRIEFCASE_FULL_AGENT_CONTRACT",
+    "BRAIN_NOW_HAS_FAIL_CLOSED_OWNER_HANDOFF_GATE_AND_CONTENT_ADDRESSED_CALLABLE_SUBJECT_FREEZE",
+    "BRAIN_NOW_REQUIRES_EXACT_OFFICIAL_NO_FEE_FULL_AGENT_AND_FROZEN_1822_BINDINGS_BEFORE_FREEZE"
+  ],
+  "current_outreach_action": {
+    "threaded_followup_draft_prepared": true,
+    "sent": false,
+    "duplicate_disconnected_draft_marked_do_not_send": true,
+    "reason_not_sent": "GMAIL_SEND_DRAFT_REQUIRES_USER_REVIEW_OR_EXPLICIT_SEND_REQUEST"
+  },
+  "exact_followup_asks": [
+    "INDEPENDENT_NO_FEE_OFFICIAL_AA_BRIEFCASE_V1_1_ELIGIBILITY",
+    "FULL_EXTERNAL_AGENT_HTTP_OR_OWNER_RUN_PACKAGE_SUPPORT",
+    "AUTHORITATIVE_INTERFACE_OR_PACKAGE_CONTRACT",
+    "EXACT_EVALUATED_SUBJECT_IDENTITY_BINDING",
+    "FROZEN_2026_09_22_1822_COMPARABILITY_ROUTE"
+  ],
+  "wake_condition": "AUTHENTICATED_ARTIFICIAL_ANALYSIS_REPLY_SATISFYING_OR_PARTIALLY_RESOLVING_THE_CANONICAL_OWNER_DECISION_SCHEMA",
+  "downstream": [
+    "canonical/governance/AA_BRIEFCASE_OWNER_EXECUTION_DECISION_V1.schema.json",
+    "canonical/runtime/aa_briefcase_owner_handoff_gate_v1.py",
+    "canonical/runtime/aa_briefcase_frozen_epoch_result_bridge_v2.py"
+  ],
+  "hard_nonclaims": [
+    "NO_NEW_FOLLOWUP_SENT_ON_2026_10_11",
+    "NO_OWNER_REPLY_RECEIVED",
+    "NO_OFFICIAL_AA_BRIEFCASE_ACCESS_GRANTED",
+    "NO_CALLABLE_CARRIER_CONFIRMED",
+    "NO_SCORE_OR_ACCEPTANCE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
