@@ -3942,6 +3942,116 @@
         "geometry_cases_passed": 40,
         "axis_cases_passed": 13
       }
+    },
+    "python.software.repair.loop.coupled.ast.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 3,
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available"
+      ],
+      "provides": [
+        "python.patch.candidate.atomic_coupled.multi_file.test_verified",
+        "python.failure.localization.traceback_import_symbol.ranked"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "baseline_failure_score",
+        "localization",
+        "accepted_edit_sets",
+        "accepted_edit_set_count",
+        "coupled_pair_event_count",
+        "coupled_pair_events",
+        "tested_single_candidate_count",
+        "tested_pair_candidate_count",
+        "final_verification_replays",
+        "patches",
+        "source_restored",
+        "model_dependency_count",
+        "external_capability_provider_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "python",
+        "software",
+        "repair",
+        "coupled-edit",
+        "atomic-pair",
+        "multi-file",
+        "fault-localization",
+        "traceback",
+        "symbol",
+        "tests",
+        "ast"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.software.repair.loop.coupled.ast.v1",
+          "source_root": "${input.source_root}",
+          "test_paths": "${input.test_paths}",
+          "test_argv": "${input.test_argv}",
+          "output_path": "${input.output_path}",
+          "timeout_s": 30,
+          "max_rounds": 6,
+          "max_files": 10,
+          "max_variants_per_file": 24,
+          "max_single_candidates": 400,
+          "max_pair_candidates": 1200
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "python_coupled_software_repair_loop_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Bounded deterministic Python AST mutation search only.",
+        "Can cross neutral single-edit states only through atomic pairs across two distinct files; arbitrary coupled edits and same-file multi-mutation combinations are not complete.",
+        "Localization ranks traceback frames, test imports and referenced symbol definitions; this is evidence-guided localization, not general semantic causal fault localization.",
+        "Candidate-only: original source bytes are restored before return and no patch is promoted automatically.",
+        "No non-Python completeness, hidden-requirements guarantee, general mergeability proof, FrontierCode score credit, or other branded benchmark score credit."
+      ],
+      "source": {
+        "type": "brain_native_deterministic",
+        "modules": [
+          "ast",
+          "difflib",
+          "hashlib",
+          "json",
+          "pathlib",
+          "re",
+          "subprocess",
+          "sys"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
+        "external_general_purpose_model_runtime_dependency_count": 0
+      },
+      "verification": {
+        "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__6_OF_6_COUPLED_REPAIR_TESTS",
+        "runtime_git_blob_sha": "7ccfe7ec881b17dddf8481cb1951b74d67b570c6",
+        "test_git_blob_sha": "4eedafd4746f69d613479253fb6e0825f25898ba",
+        "receipt_path": "canonical/verification/CAPABILITY_PROOF_COMPRESSION_AND_COUPLED_REPAIR_VERIFY_20261011_V1.json",
+        "public_runner_repository": "moxnixmdj/verification-capsule-runner",
+        "public_runner_pull_request": 2705,
+        "public_runner_workflow_run_id": 38150302747,
+        "public_runner_job_id": 114502188701,
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
