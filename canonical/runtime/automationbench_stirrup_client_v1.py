@@ -2,7 +2,7 @@
 
 This module adds no cognition. It only:
 - converts Stirrup chat/tool history into the deterministic policy state format;
-- invokes automationbench_policy_state_machine_v1;
+- invokes automationbench_policy_state_machine_v2;
 - converts returned calls into Stirrup AssistantMessage ToolCall blocks.
 
 The Stirrup import is lazy so Brain's core repository does not require Stirrup
@@ -13,9 +13,9 @@ from __future__ import annotations
 import json
 from typing import Any, Mapping, Sequence
 
-from canonical.runtime.automationbench_policy_state_machine_v1 import next_policy_action
+from canonical.runtime.automationbench_policy_state_machine_v2 import next_policy_action
 
-MODEL_SLUG = "project-brain/generic-goal-state-tool-effect-v1"
+MODEL_SLUG = "project-brain/general-workflow-field-grounding-v2"
 CONTEXT_WINDOW_TOKENS = 200_000
 _METADATA_KEY = "project_brain/automationbench_semantic"
 
