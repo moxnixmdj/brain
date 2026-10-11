@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_DISPLAY_THRESHOLD_TRUTH_REPAIR_20261011_V1",
+  "date": "2026-10-11",
+  "status": "DISPLAY_SCORE_SEMANTICS_REPAIRED__ZERO_CREDIT",
+  "target": "PUBLISHED_AA_BRIEFCASE_ELO_GE_1822",
+  "prior_rule": "RAW_SCORE_GE_1822_0",
+  "repaired_rule": "IF_RAW_SCORE__PUBLISH_WITH_NONNEGATIVE_HALF_UP_INTEGER_RULE__THEN_COMPARE_DISPLAY_TO_1822",
+  "observed_examples": [
+    {
+      "raw": 1821.85,
+      "display": 1822
+    },
+    {
+      "raw": 1779.5,
+      "display": 1780
+    },
+    {
+      "raw": 1704.5,
+      "display": 1705
+    },
+    {
+      "raw": 1678.37,
+      "display": 1678
+    },
+    {
+      "raw": 1673.33,
+      "display": 1673
+    }
+  ],
+  "raw_boundary_for_display_1822": 1821.5,
+  "implementation": {
+    "runtime": "canonical/runtime/aa_briefcase_display_threshold_v1.py",
+    "tests": "canonical/tests/test_aa_briefcase_display_threshold_v1.py"
+  },
+  "hard_nonclaims": [
+    "NO_BRAIN_SCORE",
+    "NO_THRESHOLD_CLOSURE",
+    "NO_CLAIM_2026_09_23_RAW_COMPONENT_ROW_IS_EXACT_2026_09_22_RAW_STATE"
+  ],
+  "acceptance_credit_delta": 0,
+  "terminal_authority": false
+}
