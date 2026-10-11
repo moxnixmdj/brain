@@ -246,5 +246,48 @@ class GenericToolArgumentBinderV1Tests(unittest.TestCase):
         self.assertEqual(ids.count("x_1"), 1)
 
 
+    def test_descriptive_fields_wrapper_is_structural_not_required(self):
+        endpoint = {
+            "id":"opaque.case.create",
+            "method":"POST",
+            "url":"https://opaque.invalid/cases",
+            "request":"Case fields: {Subject, Description, Priority, Origin}",
+        }
+        contract = endpoint_grounding_contract(
+            goal="Create the case with Origin 'Web'.",
+            endpoint=endpoint,
+        )
+        names = [x["name"] for x in contract["fields"]]
+        self.assertNotIn("fields", [x.lower() for x in names])
+        self.assertNotIn("fields", contract["required_evidence_semantics"])
+        self.assertIn("origin", contract["goal_grounded_semantics"])
+
+        bound = bind_endpoint_call(
+            goal="Create the case with Origin 'Web'.",
+            endpoint=endpoint,
+            observations=[],
+        )
+        self.assertTrue(bound["pass"], bound)
+        body = json.loads(bound["arguments"]["body"])
+        self.assertEqual(body["Origin"], "Web")
+        self.assertNotIn("Subject", body)
+
+    def test_unrelated_single_quoted_value_does_not_become_name(self):
+        endpoint = {
+            "id":"opaque.case.create",
+            "method":"POST",
+            "url":"https://opaque.invalid/cases",
+            "request":"Case fields: {Subject, Origin}",
+        }
+        out = bind_endpoint_call(
+            goal="Create the case with Origin 'Web'.",
+            endpoint=endpoint,
+            observations=[],
+        )
+        self.assertTrue(out["pass"], out)
+        body = json.loads(out["arguments"]["body"])
+        self.assertNotIn("Subject", body)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
