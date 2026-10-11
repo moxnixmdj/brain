@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_INTERNAL_ONLY_STRATEGY_OVERRIDE_20261011_V2",
+  "date": "2026-10-11",
+  "status": "INTERNAL_ONLY_PRECISION_SAFE__RANK1_QUANTITATIVE_SCORE_ROUTE__LITERAL_1822_OPEN__ZERO_CREDIT",
+  "supersedes": "canonical/governance/AA_BRIEFCASE_INTERNAL_ONLY_STRATEGY_OVERRIDE_20261011_V1.json",
+  "user_constraints": {
+    "external_help_allowed": false,
+    "waiting_for_owner_response_allowed": false,
+    "goal_substitution_allowed": false
+  },
+  "exact_target": {
+    "benchmark": "AA-Briefcase",
+    "version": "1.1",
+    "literal_threshold_elo": 1822,
+    "frozen_reference_owner_unrounded_elo": 1821.85,
+    "frozen_reference_vendor_display": 1822,
+    "threshold_relaxation_allowed": false
+  },
+  "precision_truth_repair": "canonical/governance/AA_BRIEFCASE_LITERAL_THRESHOLD_MARGIN_TRUTH_REPAIR_20261011_V1.json",
+  "rank_order": [
+    {
+      "rank": 1,
+      "route": "QUANTITATIVE_SCORE_TRACE_LOWER_BOUND",
+      "proved": [
+        "COMPLETE_SCORE_BEARING_SUFFICIENT_STATISTIC_THEOREM",
+        "FROZEN_REFERENCE_OWNER_UNROUNDED_1821_85_AND_LITERAL_THRESHOLD_1822_IDENTITY"
+      ],
+      "missing": [
+        "OWNER_SCORER_IMPLEMENTATION_EQUIVARIANCE_OR_UNIQUE_FIT_OR_EQUIVALENT_SOUND_SCORER_BINDING",
+        "CONTENT_ADDRESSED_SCOPE_COMPLETE_BRAIN_UNROUNDED_ELO_LOWER_BOUND_GE_1822"
+      ],
+      "demoted_optional_evidence": [
+        "REFERENCE_BRAIN_EXACT_SCORE_TRACE_EQUIVALENCE__PARITY_ONLY_AT_1821_85__NOT_LITERAL_THRESHOLD_CLOSURE"
+      ],
+      "reason": "SHORTEST_SOUND_INTERNAL_ROUTE_AFTER_PRECISION_REPAIR"
+    },
+    {
+      "rank": 2,
+      "route": "UNIVERSAL_TOP_SUPPORT",
+      "proved": [
+        "TARGET_INDEPENDENT_SCOPE_COMPLETE_PUBLIC_INTERFACE_OUTCOME_SUPERDOMAIN"
+      ],
+      "missing": [
+        "SOUND_RESTRICTED_HIDDEN_PREDICATE_OR_UTILITY_CLASS",
+        "SOUND_COMPLETE_MATERIAL_ORDER",
+        "BRAIN_GLOBAL_TOP_SUPPORT",
+        "HIDDEN_JUDGE_MONOTONICITY",
+        "FROZEN_1822_SCORE_MONOTONICITY"
+      ],
+      "structural_cut": "canonical/governance/AA_BRIEFCASE_TOP_SUPPORT_COLLAPSE_20261011_V1.json"
+    }
+  ],
+  "scorer_order_reduction": {
+    "exchange_theorem": "canonical/governance/AA_BRIEFCASE_CROWD_BT_EXCHANGE_DOMINANCE_20261011_V1.json",
+    "valid_effect": "CAN_PROVE_BRAIN_RATING_GT_OPUS_RATING_IN_A_BOUND_SAME_FIT_UNDER_ITS_PREMISES",
+    "insufficient_effect": "STRICT_GREATER_THAN_1821_85_DOES_NOT_ENTAIL_GE_1822",
+    "added_numeric_requirement": "PROVE_AT_LEAST_0_15_ELO_MARGIN_OR_DIRECT_CANDIDATE_FLOOR_GE_1822"
+  },
+  "scheduler": {
+    "deactivate": [
+      "WAIT_FOR_ARTIFICIAL_ANALYSIS_REPLY",
+      "NEW_EXTERNAL_OUTREACH",
+      "EXACT_REFERENCE_TRACE_EQUALITY_AS_LITERAL_1822_CLOSURE",
+      "STRICT_BRAIN_GT_OPUS_ORDER_WITHOUT_NUMERIC_MARGIN_AS_LITERAL_1822_CLOSURE"
+    ],
+    "activate": [
+      "SEARCH_EXISTING_INTERNAL_EVIDENCE_FOR_QUANTITATIVE_BRAIN_SCORE_FLOOR_GE_1822",
+      "SEARCH_EXISTING_INTERNAL_EVIDENCE_FOR_SCORER_BINDING_SUFFICIENT_TO_TURN_BOUND_SCORE_TRACE_INTO_A_NUMERIC_LOWER_BOUND",
+      "ONLY_IF_RANK1_STRUCTURALLY_FAILS__SEARCH_FOR_SOUND_RESTRICTION_OF_PRIVATE_RUBRIC_AND_JUDGE_CLASS"
+    ],
+    "stop_rule": "NO_AA_1822_CREDIT_UNTIL_GATE_V3_PASSES"
+  },
+  "internal_gate": {
+    "path": "canonical/runtime/aa_briefcase_internal_only_certification_gate_v3.py",
+    "version": 3
+  },
+  "exact_truth": {
+    "brain_ge_1822_proved": false,
+    "brain_lt_1822_proved": false,
+    "current_internal_evidence_decides_threshold": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
