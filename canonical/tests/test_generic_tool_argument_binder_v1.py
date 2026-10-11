@@ -137,6 +137,42 @@ class GenericToolArgumentBinderV1Tests(unittest.TestCase):
         self.assertIn("name", out["required_evidence_semantics"])
         self.assertIn("project", out["goal_grounded_semantics"])
 
+    def test_unique_generic_id_literal_binds_path(self):
+        endpoint = {
+            "id":"opaque.modify",
+            "method":"PATCH",
+            "url":"https://opaque.invalid/orders/{id}",
+            "parameters":{
+                "id":{"required":True,"location":"path","type":"string"}
+            },
+            "request":"{status?: string}",
+        }
+        out = bind_endpoint_call(
+            goal="Set order ord_123 status to closed.",
+            endpoint=endpoint,
+            observations=[],
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertIn("/orders/ord_123", out["arguments"]["url"])
+
+    def test_multiple_generic_id_literals_remain_ambiguous(self):
+        endpoint = {
+            "id":"opaque.modify",
+            "method":"PATCH",
+            "url":"https://opaque.invalid/orders/{id}",
+            "parameters":{
+                "id":{"required":True,"location":"path","type":"string"}
+            },
+            "request":"{status?: string}",
+        }
+        out = bind_endpoint_call(
+            goal="Compare ord_123 with ord_456, then set the order status to closed.",
+            endpoint=endpoint,
+            observations=[],
+        )
+        self.assertFalse(out["pass"])
+        self.assertIn("REQUIRED_PARAMETER_UNGROUNDED", out["reason"])
+
     def test_required_unknown_body_field_fails_closed(self):
         endpoint = {
             "id":"opaque.create",
