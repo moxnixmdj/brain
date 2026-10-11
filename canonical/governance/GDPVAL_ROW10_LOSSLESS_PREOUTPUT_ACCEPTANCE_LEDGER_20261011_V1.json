@@ -1,0 +1,55 @@
+{
+  "schema":"PROJECT_BRAIN_GDPVAL_ROW10_LOSSLESS_PREOUTPUT_ACCEPTANCE_LEDGER_20261011_V1",
+  "date":"2026-10-11",
+  "status":"FROZEN_BEFORE_DELIVERABLE_GENERATION__21_RAW_PROMPT_OBLIGATIONS_RETAINED__ZERO_SCORE_CREDIT",
+  "benchmark":"GDPval-AA v2.1",
+  "row_idx":10,
+  "task_id":"99ac6944-4ec6-4848-959c-a460ac705c6f",
+  "task_sha256":"57045d82594fadde9dcc15eed8a2b4ba8411d243f59095db8df01ab35a2846a4",
+  "lossless_task_contract_sha256":"1772b7c8c8527457175a3678dcd8cce1ec82660c599b45d2aa05cf32ee60a19b",
+  "raw_obligation_count":21,
+  "design_lock":{
+    "iem_system":"Shure PSM300 Twin Pack Pro P3TRA215TWP",
+    "iem_price_usd":1539.00,
+    "iem_users":2,
+    "mixer":"Yamaha MG16XU",
+    "mixer_budget_price_usd":739.99,
+    "mixer_type":"ANALOG_WITH_ONBOARD_DIGITAL_EFFECTS",
+    "mixer_features":["4 AUX sends including FX","1-knob channel compression","24 SPX digital effects including reverb/delay class effects"],
+    "signal_topology":[
+      "VOCAL_MIC_1_TO_ISOLATED_SPLITTER_1_TO_FOH_AND_MG16XU_CH1",
+      "VOCAL_MIC_2_TO_ISOLATED_SPLITTER_2_TO_FOH_AND_MG16XU_CH2",
+      "CH1_CH2_COMPRESSION_ON_MG16XU",
+      "AUX1_INDEPENDENT_SINGER_1_MONO_MIX_TO_P3T_LEFT_INPUT",
+      "AUX2_INDEPENDENT_SINGER_2_MONO_MIX_TO_P3T_RIGHT_INPUT",
+      "ONBOARD_SPX_FX_RETURN_ROUTED_TO_AUX1_AND_AUX2",
+      "P3T_STEREO_RF_CARRIES_TWO_MONO_MIX_CHANNELS",
+      "BODYPACK_1_LISTENS_TO_ASSIGNED_LEFT_MONO_CHANNEL",
+      "BODYPACK_2_LISTENS_TO_ASSIGNED_RIGHT_MONO_CHANNEL"
+    ],
+    "existing_user_owned_helical_antennas_excluded":true,
+    "hard_budget_usd":3000.00
+  },
+  "professional_defaults_transferred_from_postfreeze_audit":[
+    "SHOW_LIVE_FORMULAS_FOR_DERIVED_COST_TOTALS",
+    "SHOW_CURRENT_PRICE_QUANTITY_LINE_TOTAL_AND_BUDGET_VARIANCE",
+    "USE_BULLET_FIRST_CONCISE_EXECUTIVE_FORMAT",
+    "INCLUDE_SIGNAL_FLOW_LEGEND_AND_CONNECTOR_TYPES",
+    "MAKE_LAST_PDF_PAGE_THE_COST_ANALYSIS_PNG"
+  ],
+  "deliverable_obligations":[
+    "ONE_FINAL_PDF",
+    "WEB_LINKS_FOR_IEM_SYSTEM_AND_MIXER",
+    "FULL_CABLE_ACCESSORY_TOOL_LIST_WITH_ESTIMATED_PRICES",
+    "TWO_IEM_BODY_PACKS",
+    "ANALOG_MIXING_BOARD",
+    "ONBOARD_COMPRESSION_REVERB_DELAY",
+    "TWO_INDEPENDENT_VOCAL_ONLY_IEM_MIXES",
+    "PORTABLE_SURFACE",
+    "NO_HELICAL_ANTENNA_PURCHASE",
+    "SIGNAL_FLOW_CHART_AS_PNG_EMBEDDED_IN_PDF",
+    "EXCEL_COST_ANALYSIS_RENDERED_TO_PNG_AS_LAST_PAGE",
+    "TOTAL_ESTIMATED_COST_STRICTLY_UNDER_3000_USD"
+  ],
+  "accounting":{"incremental_spend_usd":0,"acceptance_credit_delta":0,"terminal_credit_delta":0}
+}
