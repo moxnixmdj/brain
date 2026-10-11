@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_VERIFIED_IMPROVEMENT_LOOP_V2_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__15_OF_15_ADVERSARIAL__V1_RECEIPT_SPLICING_HOLE_CLOSED__ZERO_CREDIT",
+  "predecessor": {
+    "source": "SOURCE_LOCKED_V3_OFFCANONICAL_DONOR",
+    "runtime_blob_sha": "91673bee29190573c043023ba2b85ca54bed5fad",
+    "test_blob_sha": "825e81c3c843e2e61f43a9ef12c90737430823b8",
+    "disposition": "NOT_PROMOTED_AS_LOAD_BEARING__SUBJECT_AND_SELF_DIGEST_BINDINGS_INSUFFICIENT"
+  },
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/verified_improvement_loop_v2.py",
+      "git_blob_sha": "c5a612d5182489f9f9aeb0d1c03a10e31cc6c24a"
+    },
+    "tests": {
+      "path": "canonical/tests/test_verified_improvement_loop_v2.py",
+      "git_blob_sha": "783d3d9d8bd60ec5684984541798708ac443b1dd"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-field-projection-verify-20261011-v1",
+    "sprite_id": "sprite-f7ddb46b-7a9b-437e-8079-e815b9ab6fb5",
+    "python": "3.13.7",
+    "pytest": "9.1.1",
+    "py_compile": "PASS",
+    "tests_run": 15,
+    "tests_passed": 15,
+    "tests_failed": 0
+  },
+  "proved": [
+    "EVERY_PHASE_RECEIPT_BINDS_EXACT_EPISODE_PHASE_SUBJECT_INPUT_OUTPUT_EVIDENCE_AND_PREDECESSOR_RECEIPT",
+    "EVERY_PHASE_RECEIPT_SELF_DIGESTS_ITS_LOAD_BEARING_FIELDS",
+    "PHASE_OUTPUT_IS_NEXT_PHASE_INPUT",
+    "VERIFY_PHASE_BINDS_AN_INDEPENDENT_VERIFIER_RECEIPT_TO_THE_ACT_OUTPUT",
+    "LEARNED_ROUTE_BINDS_THE_EXACT_LEARN_GENERALIZE_AND_COMPRESS_PHASE_OUTPUTS",
+    "COMPRESSION_RECEIPT_SELF_DIGESTS_QUALITY_RESOURCE_BEHAVIOR_SCOPE_AND_COMPRESSED_ARTIFACT",
+    "REUSE_PHASE_OUTPUT_EQUALS_THE_EXACT_LEARNED_ROUTE_MANIFEST",
+    "NEIGHBOR_REPLAYS_BIND_THE_EXACT_ROUTE_MANIFEST_BEHAVIOR_SCOPE_AND_DISTINCT_NEIGHBOR_SUBJECTS",
+    "NEIGHBOR_REPLAY_RECEIPTS_SELF_DIGEST_AND_REQUIRE_INDEPENDENT_VERIFICATION",
+    "PASS_CREATES_PROMOTION_CANDIDATE_ONLY__NO_PROMOTION_EXECUTION_FRESH_REALITY_OR_TERMINAL_AUTHORITY"
+  ],
+  "falsified": [
+    "V1_OPAQUE_RECEIPT_HASH_CHAIN_IS_SUFFICIENT_TO_EXCLUDE_CROSS_EPISODE_OR_CROSS_SUBJECT_RECEIPT_SPLICING"
+  ],
+  "authority_boundary": "ROUTE_ELIGIBILITY_FOR_SEPARATE_LIVE_PROMOTION_ONLY__ZERO_CONSEQUENTIAL_AUTHORITY",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

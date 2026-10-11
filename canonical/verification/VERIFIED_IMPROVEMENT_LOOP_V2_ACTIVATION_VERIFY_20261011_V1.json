@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_VERIFIED_IMPROVEMENT_LOOP_V2_ACTIVATION_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_CURRENT_MAIN__10_OF_10_POINTER_AND_BINDING_CHECKS__INDEPENDENT_15_OF_15__ZERO_CREDIT",
+  "base_main_commit": "0524851d7c13c39f4dd0a669a3d24ef3f7ad1eb0",
+  "checks": {
+    "runtime_exact": true,
+    "test_exact": true,
+    "independent_verification_exact": true,
+    "activation_runtime_binding": true,
+    "activation_verification_binding": true,
+    "scheduler_activation_binding": true,
+    "scheduler_runtime_binding": true,
+    "mission_scheduler_binding": true,
+    "mission_activation_binding": true,
+    "independent_adversarial_suite_15_of_15": true
+  },
+  "current_bindings": {
+    "runtime": [
+      "canonical/runtime/verified_improvement_loop_v2.py",
+      "c5a612d5182489f9f9aeb0d1c03a10e31cc6c24a"
+    ],
+    "tests": [
+      "canonical/tests/test_verified_improvement_loop_v2.py",
+      "783d3d9d8bd60ec5684984541798708ac443b1dd"
+    ],
+    "verification": [
+      "canonical/verification/VERIFIED_IMPROVEMENT_LOOP_V2_INDEPENDENT_VERIFY_20261011_V1.json",
+      "a2a7b1b941f23b8b5a992d8a9b1217086fa232f4"
+    ],
+    "activation": [
+      "canonical/governance/VERIFIED_IMPROVEMENT_LOOP_V2_ACTIVATION_20261011_V1.json",
+      "117aa82f7541ba98aa33e9d9462204a13dffff29"
+    ],
+    "scheduler": [
+      "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json",
+      "e24897d3864b335abd8a9e3fa67fd06d4cfc1a6b"
+    ],
+    "mission": [
+      "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+      "8a09d7543e7280723539555b29b7dcb965a1218a"
+    ]
+  },
+  "result": {
+    "learned_route_promotion_precondition_load_bearing": true,
+    "v1_load_bearing": false,
+    "v2_pass_grants_promotion_candidate_only": true,
+    "promotion_authority": false,
+    "execution_authority": false,
+    "fresh_reality_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
