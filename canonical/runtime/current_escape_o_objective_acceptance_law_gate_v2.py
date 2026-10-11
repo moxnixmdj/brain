@@ -17,6 +17,13 @@ SCHEMA = "PROJECT_BRAIN_CURRENT_ESCAPE_O_OBJECTIVE_ACCEPTANCE_LAW_GATE_V2"
 CUT_SCHEMA = "PROJECT_BRAIN_CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_CUT_20261011_V1"
 MANIFEST_SCHEMA = "PROJECT_BRAIN_ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_V2"
 CUT_PATH = Path("canonical/governance/CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_CUT_20261011_V1.json")
+CURRENT_RESIDUAL_PATH = Path("canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json")
+CURRENT_RESIDUAL_SCHEMA = "PROJECT_BRAIN_CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1"
+GDPVAL_RECLASS_SCHEMA = "PROJECT_BRAIN_GDPVAL_CURRENT_FIXED_BAR_ENGINE_RECLASSIFICATION_20261011_V1"
+GDPVAL_VERIFY_SCHEMA = "PROJECT_BRAIN_GDPVAL_FIXED_BAR_OWNER_PAIRWISE_NONNECESSITY_VERIFICATION_20261009_V1"
+GDPVAL = "PROWORK_GDPVAL_GE_1846"
+AA_BRIEFCASE = "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT"
+TB_SCIENCE = "TB_SCIENCE_GE_58_7"
 
 
 def _git_blob(path: Path) -> str:
@@ -32,17 +39,56 @@ def _load(path: Path) -> Mapping[str, Any]:
 
 
 def _current_projection(root: Path) -> tuple[set[str], set[str], set[str], Mapping[str, Any]]:
-    cut = _load(root / CUT_PATH)
+    """Resolve O/Q/parked membership through the mutable current residual authority."""
+    current = _load(root / CURRENT_RESIDUAL_PATH)
+    if current.get("schema") != CURRENT_RESIDUAL_SCHEMA:
+        raise ValueError("CURRENT_RESIDUAL_SCHEMA_INVALID")
+
+    topology = current.get("escape_current_topology")
+    if not isinstance(topology, Mapping):
+        raise ValueError("CURRENT_ESCAPE_TOPOLOGY_MISSING")
+    parked_ids = topology.get("parked_obligation_ids")
+    if (
+        topology.get("frozen_obligation_count") != 13
+        or topology.get("active_gap_a_acquisition_rows") != 12
+        or topology.get("active_gap_b_strict_progress_rows") != 0
+        or topology.get("parked_unresolved_rows") != 1
+        or not isinstance(parked_ids, list)
+        or any(not isinstance(x, str) or not x for x in parked_ids)
+        or set(parked_ids) != {TB_SCIENCE}
+    ):
+        raise ValueError("CURRENT_ESCAPE_TOPOLOGY_INVARIANT_FAILED")
+
+    cut_ref = current.get("current_escape_two_engine_minimum_delta_cut")
+    if not isinstance(cut_ref, Mapping):
+        raise ValueError("CURRENT_TWO_ENGINE_CUT_REFERENCE_MISSING")
+    cut_rel = cut_ref.get("path")
+    cut_sha = cut_ref.get("git_blob_sha")
+    if not isinstance(cut_rel, str) or not cut_rel:
+        raise ValueError("CURRENT_TWO_ENGINE_CUT_PATH_INVALID")
+    if not isinstance(cut_sha, str) or len(cut_sha) != 40:
+        raise ValueError("CURRENT_TWO_ENGINE_CUT_SHA_INVALID")
+    cut_path = root / cut_rel
+    if not cut_path.is_file():
+        raise ValueError("CURRENT_TWO_ENGINE_CUT_MISSING")
+    if _git_blob(cut_path) != cut_sha:
+        raise ValueError("CURRENT_TWO_ENGINE_CUT_BLOB_DRIFT")
+    cut = _load(cut_path)
     if cut.get("schema") != CUT_SCHEMA:
         raise ValueError("CURRENT_CUT_SCHEMA_INVALID")
+    if cut.get("status") != cut_ref.get("status"):
+        raise ValueError("CURRENT_TWO_ENGINE_CUT_STATUS_MISMATCH")
 
     bindings = cut.get("source_bindings")
-    manifest_ref = bindings.get("manifest") if isinstance(bindings, Mapping) else None
+    if not isinstance(bindings, Mapping):
+        raise ValueError("CURRENT_CUT_SOURCE_BINDINGS_INVALID")
+    manifest_ref = bindings.get("manifest")
     if (
         not isinstance(manifest_ref, list)
         or len(manifest_ref) != 2
         or not isinstance(manifest_ref[0], str)
         or not isinstance(manifest_ref[1], str)
+        or len(manifest_ref[1]) != 40
     ):
         raise ValueError("CURRENT_CUT_MANIFEST_BINDING_INVALID")
     manifest_path = root / manifest_ref[0]
@@ -55,7 +101,7 @@ def _current_projection(root: Path) -> tuple[set[str], set[str], set[str], Mappi
         raise ValueError("CURRENT_CUT_MANIFEST_SCHEMA_INVALID")
 
     rows = manifest.get("rows")
-    if not isinstance(rows, list):
+    if not isinstance(rows, list) or len(rows) != 13:
         raise ValueError("CURRENT_MANIFEST_ROWS_INVALID")
     all_ids: set[str] = set()
     for row in rows:
@@ -63,6 +109,56 @@ def _current_projection(root: Path) -> tuple[set[str], set[str], set[str], Mappi
         if not isinstance(oid, str) or not oid or oid in all_ids:
             raise ValueError("CURRENT_MANIFEST_ROW_ID_INVALID_OR_DUPLICATE")
         all_ids.add(oid)
+
+    reclass_ref = bindings.get("gdpval_fixed_bar_reclassification")
+    if (
+        not isinstance(reclass_ref, list)
+        or len(reclass_ref) != 2
+        or not isinstance(reclass_ref[0], str)
+        or not reclass_ref[0]
+        or not isinstance(reclass_ref[1], str)
+        or len(reclass_ref[1]) != 40
+    ):
+        raise ValueError("GDPVAL_RECLASSIFICATION_BINDING_INVALID")
+    reclass_path = root / reclass_ref[0]
+    if _git_blob(reclass_path) != reclass_ref[1]:
+        raise ValueError("GDPVAL_RECLASSIFICATION_BLOB_DRIFT")
+    reclass = _load(reclass_path)
+    if reclass.get("schema") != GDPVAL_RECLASS_SCHEMA or reclass.get("target_obligation") != GDPVAL:
+        raise ValueError("GDPVAL_RECLASSIFICATION_IDENTITY_INVALID")
+    shape = reclass.get("current_acceptance_shape")
+    effect = reclass.get("engine_effect")
+    if (
+        not isinstance(shape, Mapping)
+        or shape.get("acceptance_relation_class") != "OBJECTIVE_FIXED_BAR"
+        or shape.get("hidden_owner_pairwise_relation_is_free_variable_of_decision") is not False
+        or not isinstance(effect, Mapping)
+        or effect.get("previous") != "Q_ACCEPTANCE_RELATION_ROBUST_COMMON_POLICY"
+        or effect.get("current") != "O_OBJECTIVE_ACCEPTANCE_INSTANTIATION"
+        or effect.get("new_primitive_required") is not False
+    ):
+        raise ValueError("GDPVAL_RECLASSIFICATION_SEMANTICS_INVALID")
+
+    source_bindings = reclass.get("source_bindings")
+    verify_ref = source_bindings.get("fixed_bar_nonnecessity_verification") if isinstance(source_bindings, Mapping) else None
+    if not isinstance(verify_ref, Mapping):
+        raise ValueError("GDPVAL_RECLASSIFICATION_VERIFICATION_BINDING_MISSING")
+    verify_rel = verify_ref.get("path")
+    verify_sha = verify_ref.get("git_blob_sha")
+    if not isinstance(verify_rel, str) or not verify_rel:
+        raise ValueError("GDPVAL_RECLASSIFICATION_VERIFICATION_PATH_INVALID")
+    if not isinstance(verify_sha, str) or len(verify_sha) != 40:
+        raise ValueError("GDPVAL_RECLASSIFICATION_VERIFICATION_SHA_INVALID")
+    verify_path = root / verify_rel
+    if _git_blob(verify_path) != verify_sha:
+        raise ValueError("GDPVAL_RECLASSIFICATION_VERIFICATION_BLOB_DRIFT")
+    verify = _load(verify_path)
+    if (
+        verify.get("schema") != GDPVAL_VERIFY_SCHEMA
+        or not str(verify.get("status") or "").startswith("PASS__")
+        or "NOT_NECESSARY" not in str(verify.get("conclusion") or "")
+    ):
+        raise ValueError("GDPVAL_RECLASSIFICATION_VERIFICATION_INVALID")
 
     part = cut.get("current_partition")
     if not isinstance(part, Mapping):
@@ -84,18 +180,21 @@ def _current_projection(root: Path) -> tuple[set[str], set[str], set[str], Mappi
         raise ValueError("CURRENT_PARTITION_OVERLAP")
     if o | q | parked != all_ids:
         raise ValueError("CURRENT_PARTITION_NOT_EXHAUSTIVE")
-    if part.get("total_escape_rows") != len(all_ids):
-        raise ValueError("CURRENT_TOTAL_COUNT_MISMATCH")
-    if part.get("active_o_rows") != len(o):
-        raise ValueError("CURRENT_O_COUNT_MISMATCH")
-    if part.get("active_q_rows") != len(q):
-        raise ValueError("CURRENT_Q_COUNT_MISMATCH")
-    if part.get("parked_rows") != len(parked):
-        raise ValueError("CURRENT_PARKED_COUNT_MISMATCH")
-    if part.get("active_rows") != len(o) + len(q):
-        raise ValueError("CURRENT_ACTIVE_COUNT_MISMATCH")
+    if (
+        part.get("total_escape_rows") != 13
+        or part.get("active_rows") != 12
+        or part.get("active_o_rows") != 11
+        or part.get("active_q_rows") != 1
+        or part.get("parked_rows") != 1
+        or part.get("active_gap_b_rows") != 0
+        or len(o) != 11
+        or q != {AA_BRIEFCASE}
+        or parked != set(parked_ids)
+        or parked != {TB_SCIENCE}
+        or GDPVAL not in o
+    ):
+        raise ValueError("CURRENT_PARTITION_INVARIANT_FAILED")
     return o, q, parked, cut
-
 
 def evaluate(
     payload: Mapping[str, Any],
