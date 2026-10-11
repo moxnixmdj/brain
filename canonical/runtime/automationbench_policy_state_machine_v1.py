@@ -121,6 +121,20 @@ def next_policy_action(
                 "calls": [{"tool":action["tool"],"arguments":action["arguments"]}],
             }
 
+    # Continue a created Asana task into the explicitly requested section.
+    if _semantic_done(history, "ASANA_TASK_CREATE") and not _semantic_done(
+        history, "ASANA_TASK_ADD_TO_SECTION"
+    ):
+        action = compile_asana_add_to_section(prompt, observations)
+        if action is not None and validate_nonnegative_action(prompt, action):
+            return {
+                "schema": SCHEMA,
+                "status": "CALL_TOOLS",
+                "phase": "MUTATE",
+                "semantic": action["semantic"],
+                "calls": [{"tool": action["tool"], "arguments": action["arguments"]}],
+            }
+
     # Typed compiler 2: create an Asana task from the best eligible source record.
     all_records: list[dict[str, Any]] = []
     for obs in observations:
