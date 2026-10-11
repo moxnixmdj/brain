@@ -1,0 +1,51 @@
+{
+  "schema":"PROJECT_BRAIN_GDPVAL_STAGE1_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date":"2026-10-11",
+  "status":"PASS__FROZEN_BRAIN_STAGE1_SUBMISSION_EXISTS__ONE_PAGE_RENDER_VERIFIED__ZERO_BENCHMARK_SCORE_CREDIT",
+  "benchmark":"GDPval-AA v2.1",
+  "stage":1,
+  "subject":{"row_idx":6,"task_id":"a328feea-47db-4856-b4be-2bdc63dd88fb","sector":"Government","occupation":"Administrative Services Managers","reference_files_count":0},
+  "freshness_chain":{
+    "initial_precommit":"canonical/governance/GDPVAL_STAGE1_FRESH_SUBJECT_PRECOMMIT_20261011_V1.json",
+    "contamination_repair":"canonical/governance/GDPVAL_STAGE1_CONTAMINATION_REPAIR_20261011_V1.json",
+    "official_row_firewall_repair":"canonical/governance/GDPVAL_STAGE1_OFFICIAL_ROW_FIELD_FIREWALL_REPAIR_20261011_V1.json",
+    "allowed_fields_only_before_submission":true,
+    "human_gold_deliverables_read_before_freeze":false,
+    "third_party_model_submissions_read_before_freeze":false,
+    "task_specific_judge_feedback_read_before_freeze":false
+  },
+  "brain_execution_identity":{
+    "candidate_id":"OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+    "profile":"canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+    "evaluation_protocol":"canonical/capabilities/internalized/professional_work/stirrup_247f24d/EVALUATION_PROTOCOL_V1.json",
+    "cognition_substrate":"CURRENT_CHATGPT_GPT_5_6_SOL_SESSION",
+    "substrate_role":"GENERAL_COGNITION_SUBSTRATE_ONLY",
+    "incremental_spend_usd":0
+  },
+  "deliverable":{
+    "format":"docx",
+    "filename":"GDPval_a328feea_unscheduled_absence_lateness_policy.docx",
+    "sha256":"df5e3104b245b43f72ec6bc7cfddf6c9cb6ffcf0c56b1a4bf254f3244bb3b68a",
+    "library_path":"/Project Brain/GDPval/stage1/a328feea-47db-4856-b4be-2bdc63dd88fb/GDPval_a328feea_unscheduled_absence_lateness_policy.docx",
+    "library_file_id":"libfile_6b797dab884c8191b5feebfdaa427f92",
+    "one_page_requirement":true
+  },
+  "verification":{
+    "docx_rendered_to_png":true,
+    "rendered_page_count":1,
+    "visual_inspection":"PASS__NO_CLIPPING_OVERLAP_OR_BROKEN_LAYOUT_OBSERVED",
+    "rendered_pdf_sha256":"9bd55ab762f217a510dd3f4086880ffff7c34b8e7fd242e5575cb5831a4fa677",
+    "required_sections_present":["Purpose","Scope","Definitions","Required procedure"],
+    "identified_forum_failure_modes_addressed":true
+  },
+  "scope":{
+    "proves":[
+      "SECOND_FRESH_GDPVAL_PUBLIC_TASK_COMPLETED_END_TO_END_BY_BRAIN_OWNED_PROFESSIONAL_WORK_PROFILE",
+      "ONE_PAGE_OPERATIONAL_POLICY_DOCX_PATH_EXECUTABLE_AT_ZERO_INCREMENTAL_SPEND"
+    ],
+    "does_not_prove":[
+      "NO_GDPVAL_AA_OWNER_SCORE","NO_1846_THRESHOLD_CLOSURE","NO_FULL_220_SUBMISSION_MANIFEST","NO_CROSS_ARTIFACT_STAGE1_COMPLETION"
+    ]
+  },
+  "accounting":{"acceptance_credit_delta":0,"terminal_credit_delta":0}
+}
