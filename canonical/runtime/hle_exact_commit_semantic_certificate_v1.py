@@ -187,6 +187,7 @@ def self_test() -> None:
     assert out["supplementary_only"] is True
     assert out["target_model_grader_score_claimed"] is False
 
+    # Content-addressing must represent the logical set/matrix, not incidental list order.
     out_permuted = score_exact_commitments(list(reversed(commits)), list(reversed(refs)))
     for key in ("commitments_manifest_sha256", "references_manifest_sha256", "verdict_manifest_sha256"):
         assert out_permuted[key] == out[key]
