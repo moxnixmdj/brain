@@ -98,8 +98,27 @@ class AutomationBenchOwnedPolicyKernelV1Tests(unittest.TestCase):
         }
         plan = observation_plan(prompt, [payload])
         self.assertEqual(len(plan), 1)
-        params = json.loads(plan[0]["arguments"]["params"])
-        self.assertEqual(params["project"], "proj_facilities")
+        self.assertIn("/projects/proj_facilities", plan[0]["arguments"]["url"])
+        self.assertNotIn("{", plan[0]["arguments"]["url"])
+
+    def test_required_default_path_parameter_is_substituted(self):
+        prompt = "Find Gmail messages."
+        payload = {
+            "results": [
+                {
+                    "id":"gmail.users.messages.list",
+                    "method":"GET",
+                    "url":"https://gmail.googleapis.com/gmail/v1/users/{userId}/messages",
+                    "description":"List messages",
+                    "parameters":{
+                        "userId":{"required":True,"location":"path","default":"me"}
+                    },
+                }
+            ]
+        }
+        plan = observation_plan(prompt, [payload])
+        self.assertEqual(len(plan), 1)
+        self.assertIn("/users/me/messages", plan[0]["arguments"]["url"])
 
     def test_endpoint_ranking_prefers_read_for_observation(self):
         prompt = "Find the invoice messages before updating the tracker."
