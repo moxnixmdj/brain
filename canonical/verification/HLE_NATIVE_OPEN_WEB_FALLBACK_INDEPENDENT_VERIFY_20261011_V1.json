@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_NATIVE_OPEN_WEB_FALLBACK_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BLOBS__ZERO_HLE_CONSUMPTION",
+  "subject": {
+    "runtime_path": "canonical/runtime/hle_native_open_web_fallback_v1.py",
+    "runtime_blob": "f03db468c1b9a1d5425d1eaf49966e6c8484819a",
+    "tests_path": "canonical/tests/test_hle_native_open_web_fallback_v1.py",
+    "tests_blob": "5e64895795f39e4a50e53664167dd0e3ec3bc3c4"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2700,
+    "head_sha": "3393c5de318a738a4162ebbc7f34ac892508bfe3",
+    "workflow_run_id": 38148729566,
+    "workflow_job_id": 114497476556,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_runtime_blob_binding": true,
+    "exact_tests_blob_binding": true,
+    "tests_passed": 4,
+    "mixed_backend_health_and_dedupe": true,
+    "total_outage_retryable": true,
+    "successful_empty_nonexistence_firewall": true,
+    "invalid_plan_fail_closed": true
+  },
+  "hle_cases_consumed": 0,
+  "external_model_calls_total": 0,
+  "model_dependency_count_total": 0,
+  "hle_score_credit": 0,
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
