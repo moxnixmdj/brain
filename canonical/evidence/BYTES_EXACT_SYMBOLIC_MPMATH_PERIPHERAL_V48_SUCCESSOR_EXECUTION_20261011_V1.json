@@ -1,0 +1,143 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_MPMATH_PERIPHERAL_V48_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__13_BODY_MPMATH_PERIPHERAL_FAIL_CLOSED_PRUNE__SPENT_NEXT53_AND_FRESH_NEXT54_PASS__NEXT55_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MPMATH_FDOT_V47_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "65a5f292a0a1bbe64961f02eb84d204391d6aa8cdee1f970c34f648b7615d7f7",
+    "transform": "canonical/research/bytes/tools/conservative_mpmath_peripheral_prune_v48.py",
+    "manifest_sha256": "cbe7d34fc17168b975a9b38097c3b4e75f8ee509c39f84e2c23852347ee0038d",
+    "python_files": 277,
+    "raw_python_source_bytes": 1728741,
+    "B_exec_raw_python_source_bytes": 1731501,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v47_bytes": -9980,
+    "B_exec_delta_vs_v47_bytes": -9980
+  },
+  "selection": {
+    "id": "MPMATH_13_BODY_PERIPHERAL_FAIL_CLOSED_PRUNE_V48",
+    "method": "RANK_MPMATH_FUNCTION_BODY_BYTE_SAVINGS__SMOKE_INDIVIDUAL_CANDIDATES_ON_SPENT_NEXT53__COMPOSE_ONLY_SURVIVORS__FALSIFY_COMBINATIONS_ON_COMPLETE_SPENT_NEXT53__FINAL_STANDARD_FAIL_CLOSED_STUBS__THEN_FRESH_NEXT54",
+    "changed_body_count": 13,
+    "bodies": [
+      "mpmath/ctx_mp_python.py::PythonMPContext.fsum",
+      "mpmath/ctx_mp_python.py::PythonMPContext._convert_param",
+      "mpmath/ctx_mp_python.py::PythonMPContext.isint",
+      "mpmath/ctx_mp_python.py::PythonMPContext.mag",
+      "mpmath/ctx_mp_python.py::PythonMPContext.isnormal",
+      "mpmath/ctx_mp_python.py::_mpf.mpf_convert_arg",
+      "mpmath/ctx_mp_python.py::_mpc.__mul__",
+      "mpmath/libmp/gammazeta.py::khinchin_fixed",
+      "mpmath/libmp/gammazeta.py::twinprime_fixed",
+      "mpmath/libmp/libmpf.py::to_digits_exp",
+      "mpmath/libmp/libmpf.py::mpf_hash",
+      "mpmath/libmp/libmpf.py::mpf_round_int",
+      "mpmath/libmp/libmpf.py::gmpy_mpf_mul"
+    ],
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "discovery_evidence": {
+    "corpus": "QUAL_SUCCESSOR_NEXT53_20261011_V1",
+    "role": "SPENT_DISCOVERY_AND_CALIBRATION_ONLY__NOT_FRESH_QUALIFICATION",
+    "final_candidate_complete_spent_replay": "14030/14030",
+    "intermediate_falsifications": [
+      {
+        "candidate": "PythonMPContext._wrap_libmp_function",
+        "result": "REJECTED__MPMATH_CONTEXT_INITIALIZATION_REQUIRES_BODY"
+      },
+      {
+        "candidate": "_mpf.mpf_convert_rhs",
+        "result": "REJECTED__SERIES_COEFF_CASES_REQUIRE_BODY"
+      },
+      {
+        "candidate": "log_taylor_cached",
+        "result": "REJECTED__ROOTS_CASES_REQUIRE_BODY"
+      },
+      {
+        "candidate": "isqrt_fast_python",
+        "result": "REJECTED__ROOTS_CASES_REQUIRE_BODY"
+      },
+      {
+        "candidate": "python_mpf_mul",
+        "result": "REJECTED__FACTOR_COEFF_ROOTS_AND_OTHER_CASES_REQUIRE_BODY"
+      },
+      {
+        "candidate": "to_float",
+        "result": "REJECTED__MPMATH_IMPORT_EVALF_INITIALIZATION_REQUIRES_BODY"
+      },
+      {
+        "candidate": "mpf_log_hypot",
+        "result": "REJECTED__71_OF_1220_ROOT_CASES_DIVERGE_IN_14_BODY_COMPOSITION"
+      }
+    ],
+    "claim_boundary": "Bodies are removable for the measured bounded exact-symbolic route under current candidate composition; universal mpmath deadness outside the route is not claimed."
+  },
+  "qualification": {
+    "spent_NEXT53": {
+      "id": "QUAL_SUCCESSOR_NEXT53_20261011_V1",
+      "cases": 14030,
+      "corpus_sha256": "7f1dd1549e6df0b47baf56e52c96fd10d11fbb946c6e84bda8c2cb805fedda3c",
+      "candidate": "14030/14030",
+      "failures": 0,
+      "spent": true,
+      "execution_mode": "TEN_BALANCED_SHARDS"
+    },
+    "fresh_NEXT54": {
+      "id": "QUAL_SUCCESSOR_NEXT54_20261011_V1",
+      "cases": 14260,
+      "corpus_sha256": "a429b6448d1a72ccf533b6a89b845561fd6a4b9a2ddb9e61d9dc00d8abedbaad",
+      "candidate": "14260/14260",
+      "failures": 0,
+      "spent": true,
+      "execution_mode": "TEN_BALANCED_SHARDS"
+    }
+  },
+  "reproducibility": {
+    "clean_room_v47_to_v48_reconstruction": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+    "regenerated_manifest_sha256": "cbe7d34fc17168b975a9b38097c3b4e75f8ee509c39f84e2c23852347ee0038d",
+    "runtime_cache_files_excluded_from_durable_comparison": true,
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V48_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_1d11f14446d881919eb594780f8443bb",
+    "file_id": "file_00000000f5048210879ff844c07975bd",
+    "bytes": 266792,
+    "sha256": "c6aab4c6a2c2a265ac9053c8b3c243305689961828839014d36504a7b113c6c9"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT55_20261011_V1",
+    "cases": 14490,
+    "seed": 2708050229,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT55_20261011_V1_PIPE_V48_MANIFEST_IDENTITY",
+    "seed_material": "QUAL_SUCCESSOR_NEXT55_20261011_V1|cbe7d34fc17168b975a9b38097c3b4e75f8ee509c39f84e2c23852347ee0038d",
+    "per_operation_budget": 1260,
+    "corpus_sha256": "dd008ccd38300031ed9839f45c758739af3291fbd6f53fe0f533eafe01c965c3",
+    "bytes": 1713980,
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT55_20261011_V1.jsonl",
+    "library_file_id": "libfile_d1957f056b44819184455112d1fdeb65",
+    "file_id": "file_00000000b8888210a90012f14e060abd",
+    "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0_EXACT_ROUTE_EXPECTED_OUTPUTS__DETERMINISTIC_PARAMETER_STREAM__FIVE_SHARD_EXPECTED_OUTPUT_EVALUATION__CANONICAL_ROW_REASSEMBLY",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V48 is 1,728,741 raw Python-source bytes, 9,980 bytes below V47.",
+    "MEASURED: exact final V48 bytes pass complete spent NEXT53 14,030/14,030 with zero failures.",
+    "MEASURED: previously untouched NEXT54 passes exact V48 14,260/14,260 with zero failures.",
+    "MEASURED: clean-room V47-to-V48 reconstruction is 278/278 durable files byte-identical.",
+    "MEASURED: NEXT55 is durably frozen at 14,490 cases and remains unspent.",
+    "MEASURED: failed mpmath candidates were removed before fresh qualification; mpf_log_hypot caused 71 roots divergences in the larger composition.",
+    "NOT PROVED: universal SymPy/mpmath equivalence outside the bounded exact-symbolic route.",
+    "NOT PROVED: universal deadness of the 13 pruned bodies outside the measured route.",
+    "NOT PROVED: external second-carrier replay.",
+    "NOT PROMOTED: no capability, acceptance, ownership, quality, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
