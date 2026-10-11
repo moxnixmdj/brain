@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "action_id": "CHARTOGRAPHY_CURVE_INVERSE_QUERY_V1",
+  "source_frontier": "canonical/governance/CHARTOGRAPHY_CAPABILITY_PROOF_FRONTIER_V1.json",
+  "mission": "Build the current highest-reuse Brain-native chart residual: calibrated x-value query from a uniquely legend-bound colored raster curve at a requested y value.",
+  "reuse": [
+    "REUSE_VERIFIED_POSITIONED_OCR_AXIS_BINDING",
+    "REUSE_VERIFIED_LEGEND_TO_COLOR_BINDING",
+    "REUSE_VERIFIED_RASTER_POLYLINE_GEOMETRY",
+    "REUSE_VERIFIED_AXIS_TRANSFORMS_FROM_CHART_CURVE_VALUE_QUERY_V1"
+  ],
+  "falsification_contract": [
+    "MULTIPLE_CROSSINGS_FAIL_CLOSED",
+    "HORIZONTAL_PLATEAU_AT_QUERY_FAILS_CLOSED",
+    "SAME_COLOR_MULTISERIES_AMBIGUITY_FAILS_CLOSED",
+    "LARGE_INTERPOLATION_GAP_FAILS_CLOSED",
+    "OUT_OF_PLOT_AND_INVALID_LOG_QUERY_FAILS_CLOSED"
+  ],
+  "external_general_purpose_model_runtime_dependency_count": 0,
+  "donor_general_purpose_model_runtime_dependency_count": 0,
+  "heldout_chartography_cases_consumed": 0,
+  "benchmark_score_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_DOMAIN_SEMANTIC_AUTHORITY",
+    "NO_MULTIPLE_CROSSING_INVERSION_AUTHORITY",
+    "NO_HORIZONTAL_PLATEAU_INVERSION_AUTHORITY",
+    "NO_CHARTOGRAPHY_SCORE",
+    "NO_HELDOUT_COVERAGE_CLAIM"
+  ]
+}
