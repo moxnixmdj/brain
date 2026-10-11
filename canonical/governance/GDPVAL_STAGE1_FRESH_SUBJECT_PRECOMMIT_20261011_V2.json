@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_STAGE1_FRESH_SUBJECT_PRECOMMIT_20261011_V2",
+  "date": "2026-10-11",
+  "status": "FROZEN_BEFORE_PROMPT_REFERENCE_GOLD_RUBRIC_OR_MODEL_OUTPUT_READ__ZERO_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "selection_rule": "NEXT_THREE_ASCENDING_OFFICIAL_OPENAI_GDPVAL_ROWS_AFTER_NONFRESH_ROW_7__TASK_ID_ONLY_PROJECTED_BEFORE_FREEZE",
+  "selected_subjects": [
+    {"row_idx": 8, "task_id": "17111c03-aac7-45c2-857d-c06d8223d6ad"},
+    {"row_idx": 9, "task_id": "c44e9b62-7cd8-4f72-8ad9-f8fbddb94083"},
+    {"row_idx": 10, "task_id": "99ac6944-4ec6-4848-959c-a460ac705c6f"}
+  ],
+  "field_firewall": {
+    "before_freeze_exposed": ["row_idx", "task_id"],
+    "before_freeze_forbidden": ["prompt", "reference_files", "reference_file_urls", "reference_file_hf_uris", "deliverable_files", "deliverable_file_urls", "deliverable_file_hf_uris", "rubric_pretty", "rubric_json", "third_party_model_submissions", "judge_feedback"],
+    "post_freeze_allowed_to_cognition_surface": ["task_id", "sector", "occupation", "prompt", "reference_files", "reference_file_urls", "reference_file_hf_uris"]
+  },
+  "execution_profile": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+  "freshness_boundary": "NO_REPAIR_AND_REPLAY_OF_A_GRADED_OR_CONTAMINATED_SUBJECT_COUNTS_AS_FRESH",
+  "credit": {
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
