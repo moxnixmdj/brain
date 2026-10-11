@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_TOP_SUPPORT_COLLAPSE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "AA_PUBLIC_SUPERDOMAIN_TOP_SUPPORT_COLLAPSES_TO_OBSERVATIONAL_EQUIVALENCE_UNTIL_HIDDEN_PREDICATE_CLASS_IS_SOUNDLY_RESTRICTED__ZERO_CREDIT",
+  "target": "AA-Briefcase v1.1 >= 1822 Elo",
+  "authorities": {
+    "public_superdomain": "canonical/governance/AA_BRIEFCASE_PUBLIC_INTERFACE_OUTCOME_SUPERDOMAIN_20261011_V1.json",
+    "generic_hidden_evaluator_boundary": "canonical/governance/HIDDEN_EVALUATOR_DOMINANCE_BOUNDARY_V1.json",
+    "top_support_theorem": "canonical/governance/HIDDEN_EVALUATOR_TARGET_FREE_TOP_SUPPORT_DOMINANCE_V1.json"
+  },
+  "theorem": {
+    "premise": "CURRENT_SCOPE_COMPLETE_AA_SUPERDOMAIN_REPRESENTS_PRIVATE_RUBRIC_PREDICATES_AS_ARBITRARY_FINITE_BINARY_PREDICATES",
+    "indicator_inclusion": "FOR_EACH_DISTINCT_OUTCOME_y_THE_CLASS_INCLUDES_OR_MUST_COVER_A_BINARY_PREDICATE_THAT_ACCEPTS_y_AND_REJECTS_A_DISTINCT_x",
+    "result": "THE_UNIVERSAL_PREORDER_x_GE_y_IFF_ALL_ADMISSIBLE_HIDDEN_PREDICATES_SCORE_x_AT_LEAST_y_HAS_NO_NONTRIVIAL_CROSS_OUTCOME_DOMINANCE",
+    "proof": [
+      "TAKE_DISTINCT_x_AND_y.",
+      "CHOOSE_THE_INDICATOR_PREDICATE_FOR_y.",
+      "IT_SCORES_y=1_AND_x=0.",
+      "THEREFORE_x_IS_NOT_GE_y.",
+      "SYMMETRICALLY_y_IS_NOT_GE_x_USING_THE_INDICATOR_FOR_x.",
+      "HENCE_ONLY_IDENTICAL_OUTCOMES_CAN_BE_UNIVERSALLY_ORDERED_WHEN_THE_CLASS_REMAINS_UNRESTRICTED.",
+      "A_GLOBAL_TOP_CLASS_EXISTS_ONLY_IN_A_SINGLETON_OUTCOME_DOMAIN_OR_AFTER_A_SOUND_RESTRICTION_OF_THE_HIDDEN_PREDICATE_CLASS."
+    ]
+  },
+  "aa_consequence": {
+    "complete_outcome_superdomain": true,
+    "current_material_order_complete": false,
+    "current_nontrivial_top_support_possible_from_unrestricted_superdomain": false,
+    "required_reopen": "PROVE_FROM_ALREADY_BOUND_INFORMATION_A_SOUND_RESTRICTION_ON_PRIVATE_RUBRIC_AND_PAIRWISE_JUDGE_SEMANTICS_THAT_EXCLUDES_ARBITRARY_OUTPUT_SEPARATING_PREDICATES",
+    "exact_1822_proved": false
+  },
+  "route_status": {
+    "score_trace_substitution": {
+      "structural_state": "CURRENT_PUBLIC_INTERNAL_INFORMATION_DOES_NOT_ENTAIL_REMAINING_TWO_PREMISES",
+      "source": "canonical/governance/AA_BRIEFCASE_TRACE_SCORER_NONIDENTIFIABILITY_CUT_20261011_V1.json"
+    },
+    "universal_top_support": {
+      "structural_state": "CURRENT_SCOPE_COMPLETE_SUPERDOMAIN_TOO_BROAD_FOR_NONTRIVIAL_TOP_SUPPORT",
+      "source": "canonical/runtime/aa_briefcase_top_support_collapse_v1.py"
+    }
+  },
+  "implementation": {
+    "runtime": "canonical/runtime/aa_briefcase_top_support_collapse_v1.py",
+    "tests": "canonical/tests/test_aa_briefcase_top_support_collapse_v1.py"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ACTUAL_PRIVATE_AA_RUBRIC_CLASS_CONTAINS_ARBITRARY_INDICATORS",
+    "THE_RESULT_APPLIES_TO_THE_CURRENT_INTERNAL_SCOPE_COMPLETE_SUPERDOMAIN_USED_WHEN_PRIVATE_SEMANTICS_ARE_LEFT_OPAQUE",
+    "NO_CLAIM_A_NARROWER_SOUND_PUBLICLY_DERIVABLE_UTILITY_CLASS_CANNOT_EXIST",
+    "NO_CLAIM_BRAIN_SCORE_IS_BELOW_OR_ABOVE_1822",
+    "NO_SCORE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
