@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_DNA_TASK_KERNEL_CAPABILITY_V1",
+  "date": "2026-10-11",
+  "status": "QUALIFIED_GENERIC_DNA_STORAGE_TASK_ADAPTER__RANK23_CONTRACT_UNOBSERVED",
+  "runtime": {
+    "path": "canonical/runtime/dna_storage_task_kernel_v1.py",
+    "git_blob_sha": "ade8e7ce619112f8d89d9c83f00d5b7b143e5bb1"
+  },
+  "underlying_codec": {
+    "path": "canonical/runtime/dna_storage_codec_v1.py",
+    "git_blob_sha": "3734ad7c4674d9ebe77dbaf0592ea10d0a6cb451"
+  },
+  "verification": {
+    "path": "canonical/verification/TB_SCIENCE_DNA_TASK_KERNEL_V1_VERIFY_20261011_V1.json",
+    "git_blob_sha": "95d48da28800b2579c3fcb55352b95267b40d848"
+  },
+  "modes": [
+    "encode",
+    "decode",
+    "roundtrip",
+    "implementation"
+  ],
+  "input_formats": [
+    "raw_bytes",
+    "plain_dna",
+    "fasta",
+    "fastq",
+    "json_oligos"
+  ],
+  "deterministic": true,
+  "model_dependency_count": 0,
+  "external_model_runtime_calls": 0,
+  "network_dependency_count": 0,
+  "benchmark_state": {
+    "rank23_task_read": false,
+    "rank23_task_started": false,
+    "rank23_trials_consumed": 0
+  },
+  "promotion_authority": true,
+  "execution_authority": false,
+  "task_read_authority": false,
+  "activation_authority": false
+}
