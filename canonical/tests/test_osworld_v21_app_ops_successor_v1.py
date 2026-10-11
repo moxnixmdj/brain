@@ -173,3 +173,38 @@ def test_calc_unquoted_value_drops_sentence_punctuation():
     out=action(decide(state("Set A1 to 42.", "LibreOffice Calc")))
     assert out["operation"]=="set_cell_value"
     assert out["args"]=={"cell":"A1","value":"42"}
+
+
+def test_successful_identical_app_operation_becomes_completion_evidence():
+    s = state("Pause the video.", "VLC media player")
+    first = decide(s)
+    op = action(first)
+    s2 = state("Pause the video.", "VLC media player")
+    s2["history"] = [{
+        "submitted_operation": {
+            "app": op["app"],
+            "operation": op["operation"],
+            "args": op["args"],
+        },
+        "app_result": {
+            "type": "APP_OP",
+            "ok": True,
+            "app": op["app"],
+            "operation": op["operation"],
+            "status": "success",
+            "output": "ok",
+        },
+    }]
+    second = decide(s2)
+    assert second["actions"] == [{"type": "DONE"}]
+    assert second["_policy_receipt"]["route"] == "GENERIC_APP_OPERATION_VERIFIED_V2"
+
+
+def test_different_app_operation_receipt_does_not_false_complete():
+    s = state("Pause the video.", "VLC media player")
+    s["history"] = [{
+        "submitted_operation": {"app": "vlc", "operation": "play", "args": {}},
+        "app_result": {"type": "APP_OP", "ok": True, "app": "vlc", "operation": "play"},
+    }]
+    out = decide(s)
+    assert action(out)["operation"] == "pause"
