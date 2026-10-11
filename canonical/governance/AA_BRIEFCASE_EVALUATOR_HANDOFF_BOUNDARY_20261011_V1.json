@@ -45,6 +45,11 @@
       "supports_models_not_listed_in_public_benchmarks": true,
       "zero_cost_terms_publicly_confirmed": false,
       "source": "https://artificialanalysis.ai/services/"
+    },
+    "official_independence_policy": {
+      "providers_cannot_pay_for_results_methodology_changes_or_listing": true,
+      "implication": "OFFICIAL_PUBLIC_BENCHMARK_COVERAGE_IS_DISTINCT_FROM_PAID_CUSTOM_SERVICES__ZERO_FEE_OFFICIAL_COVERAGE_IS_PLAUSIBLE_BUT_NOT_GUARANTEED_FOR_BRAIN",
+      "source": "https://artificialanalysis.ai/pricing"
     }
   },
   "current_brain_subject_components": {
@@ -80,9 +85,19 @@
       "Optima's published normal pricing violates the hard zero-incremental-spend constraint."
     ],
     "subject_freeze_ready": false,
-    "reason_subject_not_frozen": "A content-addressed benchmark subject must include its actual evaluator-callable execution carrier/substrate. Freezing before that carrier exists would certify an incomplete/non-invocable subject."
+    "reason_subject_not_frozen": "A content-addressed benchmark subject must include its actual evaluator-callable execution carrier/substrate. Freezing before that carrier exists would certify an incomplete/non-invocable subject.",
+    "zero_cost_interpretation": {
+      "paid_optima_and_paid_custom_services": "INADMISSIBLE_UNDER_CURRENT_HARD_ZERO_SPEND_RULE",
+      "independent_official_benchmark_coverage": "POTENTIALLY_ADMISSIBLE_IF_ARTIFICIAL_ANALYSIS_ACCEPTS_BRAIN_FOR_NO_FEE_INDEPENDENT_COVERAGE",
+      "guarantee": false
+    }
   },
   "admissible_owner_integration_routes": [
+    {
+      "id": "INDEPENDENT_OFFICIAL_AA_BRIEFCASE_COVERAGE",
+      "requirement": "Artificial Analysis independently accepts Brain for official public AA-Briefcase v1.1 coverage under its no-pay-for-results/listing policy, with a full-agent execution route preserving exact Brain semantics.",
+      "zero_cost_required": true
+    },
     {
       "id": "OFFICIAL_AA_BRIEFCASE_CUSTOM_AGENT_HTTP",
       "requirement": "Artificial Analysis explicitly permits the existing bring-your-own-agent HTTP mechanism, or an equivalent full-agent HTTP route, against official private AA-Briefcase v1.1.",
@@ -108,14 +123,14 @@
     "CLAIM_STIRRUP_COMPATIBILITY_IMPLIES_ARTIFICIAL_ANALYSIS_WILL_ACCEPT_THE_CUSTOM_AGENT_ON_OFFICIAL_AA_BRIEFCASE"
   ],
   "exact_owner_questions": [
-    "Can the official private AA-Briefcase v1.1 evaluation accept a custom full agent system over the same or equivalent HTTP mechanism used by Optima bring-your-own-agent?",
-    "If yes, what is the exact request/response/file-delivery contract for the agent endpoint?",
-    "Can Artificial Analysis instead run an exact content-addressed Brain package/full Stirrup configuration inside its benchmark environment?",
-    "Can either route be performed with zero incremental cost to the project?",
-    "Can the result be bound to the exact evaluated subject digest and to the frozen September 22 2026 Opus 5.5 reference epoch at 1822 Elo, or provide an owner-certified matched implication/cross-epoch transform?"
+    "Is Brain eligible for independent no-fee official AA-Briefcase v1.1 coverage under Artificial Analysis's policy that providers cannot pay for results or listing?",
+    "If eligible, can the official private AA-Briefcase v1.1 evaluation accept the full Brain agent over the same or an equivalent HTTP mechanism used by Optima bring-your-own-agent?",
+    "If yes, what is the exact request/response/file-delivery/authentication/timeout/lifecycle contract for the agent endpoint?",
+    "Alternatively, can Artificial Analysis run an exact content-addressed Brain package/full Stirrup agent configuration inside its benchmark environment?",
+    "Can the resulting evidence bind the exact evaluated subject to the frozen September 22 2026 Opus 5.5 reference epoch at 1822 Elo, or provide an owner-certified matched implication/cross-epoch transform?"
   ],
   "wake_condition": {
-    "required": "OWNER_RESPONSE_RESOLVING_AT_LEAST_ONE_ZERO_COST_OFFICIAL_FULL_AGENT_INTEGRATION_ROUTE",
+    "required": "OWNER_RESPONSE_CONFIRMING_INDEPENDENT_NO_FEE_OFFICIAL_COVERAGE_AND_AT_LEAST_ONE_FULL_AGENT_INTEGRATION_ROUTE__OR_EQUIVALENT_ZERO_COST_OFFICIAL_ROUTE",
     "then": [
       "FREEZE_EXACT_CALLABLE_BRAIN_SUBJECT",
       "RUN_OFFICIAL_PRIVATE_AA_BRIEFCASE_V1_1",
