@@ -32,4 +32,9 @@ promotion=(R/"canonical/runtime/ownership_promotion_compiler_v1.py").read_text(e
 assert "ownership_promotion_cognition_provenance_gate_v1" in promotion
 assert "cognition_provenance_gate.evaluate(s)" in promotion
 assert "FAIL_CLOSED_K1_K2_K3_COGNITION_PROVENANCE" in promotion
+cleanroom=(R/"canonical/runtime/final_terminal_cleanroom_gate_v1.py").read_text(encoding="utf-8")
+assert "RUNTIME_COGNITION_NOT_MODEL_INDEPENDENT" in cleanroom
+assert "EXTERNAL_MODEL_RUNTIME_DEPENDENCY_COUNT_NOT_ZERO" in cleanroom
+assert "COPIED_OR_REHOSTED_TEACHER_NOT_EXPLICITLY_FALSE" in cleanroom
+assert "OPERATIVE_SOLVER_ROLE_NOT_BRAIN_OWNED" in cleanroom
 print("CAPABILITY_TRANSFER_STATIC_GOVERNANCE_PASS")
