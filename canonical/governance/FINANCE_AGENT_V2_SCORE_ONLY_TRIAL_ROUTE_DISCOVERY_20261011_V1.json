@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_SCORE_ONLY_TRIAL_ROUTE_DISCOVERY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "LIVE_FIRST_PARTY_SCORE_ONLY_ROUTE_DISCOVERED__AUTHORIZATION_STILL_REQUIRED__ZERO_SCORE_CREDIT",
+  "target": {
+    "predicate": "FINANCE_AGENT_V2_GE_58_59",
+    "required_three_run_score_mass": 175.77
+  },
+  "public_bindings": {
+    "finance_agent_repo": "vals-ai/finance-agent-v2",
+    "finance_agent_repo_commit": "502aab6fdaa3fb9294905c7453f89882baa8d39b",
+    "public_agent_package_repo": "vals-ai/fabv2_agent-v1.0.0",
+    "public_agent_package_commit": "44c6397eb64573dbc4e533faf86fb0e931f6e67c",
+    "published_benchmark_identifier": "fabv2-google",
+    "hosted_service_url": "https://fabv2-google.benchmarks.vals.ai",
+    "vals_framework_repo": "vals-ai/create-benchmark-service",
+    "vals_framework_observed_commit": "1c4c567bbf056ecf6faff75989d19f5409c27126",
+    "framework_trial_mode": "SCORE_ONLY_V1_EVALUATE_AND_V1_SCORE_RESPONSES_FOR_ALLOWLISTED_TRIAL_TENANTS"
+  },
+  "live_public_probe": {
+    "health_http_status": 200,
+    "health_body_status": "ok",
+    "version_http_status": 200,
+    "framework_version": "0.1.0",
+    "unauthenticated_public_dataset_task_list_http_status": 401
+  },
+  "route_reduction": {
+    "service_existence_and_health": "CLOSED",
+    "score_only_evaluation_shape": "PUBLICLY_DOCUMENTED",
+    "current_blocker": "AUTHORIZED_TENANT_ACCESS_TO_THE_REQUIRED_FABV2_GOOGLE_DATASET_OR_EQUIVALENT_OWNER_SCORE_RECEIPT"
+  },
+  "wake_action": [
+    "USE_ONLY_BRAIN_NATIVE_ZERO_EXTERNAL_COGNITION_FINANCE PRODUCER",
+    "PIN_SERVICE_AND_DATASET_VERSION",
+    "RUN_THREE_AUTHORIZED_TEST_RUNS",
+    "BIND_SCORE_RECEIPTS",
+    "CHECK_RUN_SCORE_LOWER_BOUND_SUM_GE_175_77"
+  ],
+  "hard_nonclaims": [
+    "NO_PRIVATE_TASK_LIST_REQUESTED",
+    "NO_PRIVATE_RUBRIC_OR_JUDGE_CONTENT_ACCESSED",
+    "NO_SCORE_CREDIT",
+    "NO_CLAIM_TARGET_GE_58_59",
+    "NO_CLAIM_TRIAL_MODE_IS_ENABLED_FOR_ANY_CURRENT_TENANT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "private_cases_exposed": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
