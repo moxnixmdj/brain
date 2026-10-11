@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_NATIVE_TOTAL_SOLVER_V3_PREEXPOSURE_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_BEFORE_RUNTIME_IMPLEMENTATION__SYNTHETIC_NON_HLE__ZERO_CREDIT",
+  "objective": "Freeze lane priority and hard anti-substitution behavior for the V3 total HLE orchestrator.",
+  "scenarios": [
+    {
+      "id": "MCQ_ONLY",
+      "mcq": true,
+      "expected_lane": "MCQ_RETRIEVAL_VOTE"
+    },
+    {
+      "id": "SYMBOLIC_FIRST",
+      "mcq": false,
+      "lark_candidate": "5",
+      "research_candidate": "Dr. Wrong",
+      "expected_lane": "SYMBOLIC_LARK_V2",
+      "expected_answer": "5"
+    },
+    {
+      "id": "RESEARCH_AFTER_SYMBOLIC_ABSTENTION",
+      "mcq": false,
+      "research_candidate": "Dr. Mira Sol",
+      "expected_lane": "NATIVE_RESEARCH_V3",
+      "expected_answer": "Dr. Mira Sol"
+    },
+    {
+      "id": "LEGACY_AFTER_RESEARCH_ABSTENTION",
+      "mcq": false,
+      "legacy_candidate": "2042",
+      "expected_lane": "EXACT_RETRIEVAL_V2",
+      "expected_answer": "2042"
+    },
+    {
+      "id": "ALL_ABSTAIN",
+      "mcq": false,
+      "expected_lane": null,
+      "expected_answer": "UNKNOWN"
+    },
+    {
+      "id": "EXTERNAL_MODEL_CANDIDATE_REJECTED",
+      "mcq": false,
+      "research_candidate": "Forbidden Answer",
+      "research_model_dependency_count": 1,
+      "legacy_candidate": "Safe Answer",
+      "expected_lane": "EXACT_RETRIEVAL_V2",
+      "expected_answer": "Safe Answer"
+    },
+    {
+      "id": "EXTERNAL_REASONING_CALL_CANDIDATE_REJECTED",
+      "mcq": false,
+      "research_candidate": "Forbidden Answer",
+      "research_external_reasoning_model_calls": 1,
+      "legacy_candidate": "Safe Answer",
+      "expected_lane": "EXACT_RETRIEVAL_V2",
+      "expected_answer": "Safe Answer"
+    }
+  ],
+  "invariants": [
+    "NO_HLE_QUESTION_OR_GOLD_CONTENT",
+    "NO_EXTERNAL_REASONING_MODEL",
+    "CANDIDATE_WITH_EXTERNAL_MODEL_CALLS_NONZERO_IS_INELIGIBLE",
+    "CANDIDATE_WITH_EXTERNAL_REASONING_MODEL_CALLS_NONZERO_IS_INELIGIBLE",
+    "CANDIDATE_WITH_MODEL_DEPENDENCY_COUNT_NONZERO_IS_INELIGIBLE",
+    "MCQ_ROUTE_DOES_NOT_FALL_THROUGH_TO_EXACT_LANES",
+    "NON_MCQ_PRIORITY_SYMBOLIC_LARK_THEN_SYMBOLIC_SURFACE_THEN_NATIVE_RESEARCH_V3_THEN_LEGACY_EXACT_RETRIEVAL",
+    "UNKNOWN_TOTALITY_IS_ZERO_SCORE_EVIDENCE",
+    "NO_ANSWER_TYPE_METADATA"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
