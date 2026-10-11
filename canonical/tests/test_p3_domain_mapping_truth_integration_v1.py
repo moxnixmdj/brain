@@ -12,18 +12,16 @@ SCOPE = "finance:regulatory-capital:2026"
 TARGET = "CCOB"
 
 
-def _install_import_stubs():
+def _build_import_stubs():
     robust = types.ModuleType(
         "canonical.runtime.p3_robust_policy_adequacy_cegar_v1"
     )
     robust.solve = lambda _problem: None
-    sys.modules[robust.__name__] = robust
 
     selection = types.ModuleType(
         "canonical.runtime.p3_source_positive_selection_cell_v1"
     )
     selection.evaluate = lambda _payload, repo_root=None: None
-    sys.modules[selection.__name__] = selection
 
     legacy = types.ModuleType(
         "canonical.runtime.selected_semantic_truth_certificate_v1"
@@ -34,13 +32,23 @@ def _install_import_stubs():
         "predicate_truth": "UNKNOWN",
         "truthful_precommitment_observation": False,
     }
-    sys.modules[legacy.__name__] = legacy
+    return {
+        robust.__name__: robust,
+        selection.__name__: selection,
+        legacy.__name__: legacy,
+    }
 
 
-_install_import_stubs()
-loop = importlib.import_module(
-    "canonical.runtime.p3_bound_relevance_cegar_loop_v1"
-)
+_LOOP_NAME = "canonical.runtime.p3_bound_relevance_cegar_loop_v1"
+_previous_loop = sys.modules.pop(_LOOP_NAME, None)
+try:
+    with patch.dict(sys.modules, _build_import_stubs()):
+        loop = importlib.import_module(_LOOP_NAME)
+finally:
+    if _previous_loop is None:
+        sys.modules.pop(_LOOP_NAME, None)
+    else:
+        sys.modules[_LOOP_NAME] = _previous_loop
 
 
 def selected(atom):
