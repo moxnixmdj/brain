@@ -15,8 +15,6 @@ import re
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
-from canonical.runtime import exact_artifact_materializer as exact
-
 SCHEMA="PROJECT_BRAIN_SCIENTIFIC_ARTIFACT_CONTRACT_V1"
 _PATH_PART=re.compile(r"^[A-Za-z0-9_.-]+$")
 _LABEL=re.compile(r"^[A-Za-z0-9 _./:+()%-]{1,120}$")
@@ -26,6 +24,24 @@ MAX_BYTES=16_000_000
 
 class ScientificArtifactError(ValueError):
     pass
+
+
+def _materialize_exact(output_path:Path,target_bytes:bytes,target_sha256:str)->dict[str,Any]:
+    if not isinstance(target_bytes,bytes) or hashlib.sha256(target_bytes).hexdigest()!=target_sha256:
+        return {"status":"FAIL_CLOSED","reason":"TARGET_BYTES_OR_SHA_INVALID"}
+    output_path.parent.mkdir(parents=True,exist_ok=True)
+    tmp=output_path.with_name(output_path.name+".brain-tmp")
+    try:
+        tmp.write_bytes(target_bytes)
+        observed=tmp.read_bytes()
+        if observed!=target_bytes or hashlib.sha256(observed).hexdigest()!=target_sha256:
+            tmp.unlink(missing_ok=True)
+            return {"status":"FAIL_CLOSED","reason":"ROUNDTRIP_MISMATCH"}
+        tmp.replace(output_path)
+    except Exception as exc:
+        tmp.unlink(missing_ok=True)
+        return {"status":"FAIL_CLOSED","reason":"WRITE_FAILED","error":type(exc).__name__}
+    return {"status":"PASS","output_path":str(output_path),"target_sha256":target_sha256,"byte_count":len(target_bytes)}
 
 
 def _lookup(root:Any,path:str)->Any:
@@ -172,9 +188,7 @@ def materialize_artifacts(verified_result:Mapping[str,Any],specs:Sequence[Mappin
         target=(root/row["relative_path"]).resolve()
         if target==root or root not in target.parents:
             return {"schema":SCHEMA,"status":"FAIL_CLOSED","reason":"OUTPUT_ESCAPE","receipts":receipts}
-        receipt=exact.materialize_exact_artifact(
-            target,target_bytes=row["bytes"],expected_target_sha256=row["sha256"]
-        )
+        receipt=_materialize_exact(target,row["bytes"],row["sha256"])
         if receipt.get("status")!="PASS":
             return {"schema":SCHEMA,"status":"FAIL_CLOSED","reason":"MATERIALIZATION_FAILED","receipts":receipts+[receipt]}
         observed=target.read_bytes()
