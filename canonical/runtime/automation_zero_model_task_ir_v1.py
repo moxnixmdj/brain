@@ -98,7 +98,7 @@ def _action_split(text: str) -> list[str]:
         return []
     out: list[str] = []
     verbs = "|".join(sorted(_ACTION_WORDS, key=len, reverse=True))
-    splitter = re.compile(rf"\s+(?:,?\s*and|;|,)\s+(?=(?:{verbs})\b)", re.I)
+    splitter = re.compile(rf"(?:\\s*,\\s*|\\s*;\\s*|\\s+and\\s+)(?=(?:{verbs})\\b)", re.I)
     for clause in base:
         for part in splitter.split(clause):
             item = part.strip(" .;")
