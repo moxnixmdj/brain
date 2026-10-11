@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_COMPOSED_V53_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__V53_EXACT_ARCHIVE__278_OF_278_DURABLE_FILES_IDENTICAL__SPENT_NEXT58_15180_OF_15180__FRESH_NEXT60_V2_15640_OF_15640__CLEAN_ARCHIVE_NEXT60_V2_15640_OF_15640__NEXT61_FROZEN_UNSPENT__ZERO_CREDIT",
+  "subject": {
+    "producer_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_COMPOSED_V53_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "delta_spec": "canonical/research/bytes/BYTES_V53_COMPOSED_DELTA_20261011_V1.json",
+    "predecessor_manifest_sha256": "5cfdaf054fafabd04894396739defc82fed40ec3aba24b2f1b06030421b9c62f",
+    "candidate_manifest_sha256": "913f83557de29d5ae29aceff38665455173060ed50361fdcbe41140f9675a7fa",
+    "candidate_raw_python_source_bytes": 1715478
+  },
+  "carrier": {
+    "class": "CHATGPT_ISOLATED_CONTAINER_CLEAN_EXTRACTION",
+    "source_materialization": "CHATGPT_LIBRARY",
+    "construction_working_tree_reused_for_clean_archive_replay": false,
+    "external_second_carrier_verified": false,
+    "incremental_spend_usd": 0
+  },
+  "replay": {
+    "local_transform_application": {
+      "result": "PASS",
+      "saved_raw_python_bytes": 2349,
+      "candidate_manifest_sha256": "913f83557de29d5ae29aceff38665455173060ed50361fdcbe41140f9675a7fa",
+      "executable_transform_sha256": "e5227f414ea7d592f622dc21cca2b6cbc0081ed24d8fe3d08d2e8578c5ef10a2"
+    },
+    "durable_file_identity": {
+      "compared": 278,
+      "identical": 278,
+      "mismatched": 0
+    },
+    "spent_NEXT58": {
+      "passed": 15180,
+      "total": 15180,
+      "failures": 0
+    },
+    "fresh_NEXT60_V2": {
+      "passed": 15640,
+      "total": 15640,
+      "failures": 0
+    },
+    "clean_archive_NEXT60_V2": {
+      "passed": 15640,
+      "total": 15640,
+      "failures": 0
+    },
+    "frozen_NEXT61": {
+      "cases": 15870,
+      "sha256": "6555ec7fa2b618ea8e9c286ed77cea8f43bd36b5f20dfee5dea79ab09ff120d8",
+      "spent": false
+    }
+  },
+  "proved": [
+    "THE_COMPOSED_V53_CONTENT_ADDRESSED_ARCHIVE_HAS_THE_BOUND_TARGET_MANIFEST",
+    "THE_SEALED_V53_ARCHIVE_PRESERVES_ALL_278_DURABLE_FILES_BYTE_FOR_BYTE",
+    "THE_EXACT_V53_CANDIDATE_PASSES_COMPLETE_SPENT_NEXT58",
+    "THE_PRECOMMITTED_PREVIOUSLY_UNSPENT_NEXT60_V2_CORPUS_PASSES_EXACT_V53_COMPLETELY",
+    "THE_CLEANLY_EXTRACTED_V53_ARCHIVE_REPLAYS_NEXT60_V2_COMPLETELY",
+    "NEXT61_IS_CONTENT_ADDRESSED_AND_REMAINS_UNSPENT"
+  ],
+  "truth_boundary": [
+    "DECLARATIVE_DELTA_SPEC_IS_NOT_ITSELF_EXECUTABLE_TRANSFORM_AUTHORITY",
+    "CONTENT_ADDRESSED_V53_ARCHIVE_IS_PRIMARY_EXACT_RECONSTRUCTION_AUTHORITY",
+    "BOUNDED_EXACT_SYMBOLIC_ROUTE_ONLY",
+    "NO_UNIVERSAL_MPMATH_EQUIVALENCE",
+    "NO_EXTERNAL_ORGANIZATIONALLY_INDEPENDENT_SECOND_CARRIER CLAIM",
+    "NEXT61_MUST_NOT_BE_EXECUTED_BEFORE_A_NEW_PHYSICAL_CUT",
+    "NO_CAPABILITY_ACCEPTANCE_PROFESSIONAL_QUALITY_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
