@@ -1,0 +1,117 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_CUT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CURRENT_ACTIVE_ESCAPE_COLLAPSED_TO_TWO_REUSE_ENGINES__O10_ACTIVE__Q2_ACTIVE__TB_PARKED__READY_MADE_O_CLAIM_SPECS_EXHAUSTED__ZERO_CREDIT",
+  "objective": "MINIMIZE_WALL_CLOCK_AND_NEW_INFORMATION_BY_REUSING_VERIFIED_SHARED_ACCEPTANCE_MACHINERY_AND_REQUESTING_ONLY_POLICY_CHANGING_REALITY",
+  "source_bindings": {
+    "residual": [
+      "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json",
+      "fbc6d0517869923bbf0ee848d921db1f203a7a39"
+    ],
+    "oq": [
+      "canonical/governance/CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1.json",
+      "eb42b8c1c1e506f351ab6ea941b74791fb37894b"
+    ],
+    "manifest": [
+      "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json",
+      "f3a566a982dcd867c583eafd24c6f5dd3baa0530"
+    ],
+    "o_search_verify": [
+      "canonical/verification/CURRENT_ESCAPE_O11_PROOF_INSTANTIATION_SEARCH_VERIFY_20261011_V1.json",
+      "1c3d782908890aa683968f892e8288360b32bb8d"
+    ],
+    "predecessor_minimum_reality_cut": [
+      "canonical/governance/ABC_MINIMUM_IRREDUCIBLE_REALITY_CUT_20261007_V8.json",
+      "8f328ecf3d69ec67bdb8619758ef733f6d633f4a"
+    ]
+  },
+  "current_partition": {
+    "total_escape_rows": 13,
+    "active_rows": 12,
+    "parked_rows": 1,
+    "active_gap_b_rows": 0,
+    "active_o_rows": 10,
+    "active_q_rows": 2,
+    "parked_obligation_ids": [
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "active_q_obligation_ids": [
+      "PROWORK_GDPVAL_GE_1846",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT"
+    ],
+    "active_o_obligation_ids": [
+      "CODING_TB4_GE_66_4",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_CURSORBENCH_GE_57_8",
+      "AUTOMATIONBENCH_GE_40",
+      "HLE_TOOLS_GE_67_7",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER"
+    ]
+  },
+  "engines": [
+    {
+      "engine_id": "O_OBJECTIVE_ACCEPTANCE_INSTANTIATION",
+      "row_count": 10,
+      "machinery": [
+        "canonical/runtime/current_escape_o11_objective_acceptance_law_gate_v1.py",
+        "canonical/runtime/benchmark_witness_elimination_compiler_v4.py",
+        "canonical/runtime/proof_carrying_scope_cover_v1.py",
+        "canonical/runtime/escape_progress_shared_gap_audit_v5.py"
+      ],
+      "current_truth": "SHARED_LAW_AND_GATE_VERIFIED__ZERO_READY_MADE_CURRENT_CANONICAL_CLAIM_SPECS",
+      "execution_rule": "FOR_EACH_ACTIVE_O_ROW_FIRST_TRY_STRONGER_SCOPE_COMPLETE_PROOF_CARRYING_SUPERSET_OR_OBJECTIVE_RELATION__OTHERWISE_ACQUIRE_ONLY_THE_SMALLEST_MISSING_V4_LOCK_FACT__NEVER_RESEARCH_A_NEW_O_ACCEPTANCE_PRIMITIVE"
+    },
+    {
+      "engine_id": "Q_ACCEPTANCE_RELATION_ROBUST_COMMON_POLICY",
+      "row_count": 2,
+      "machinery": [
+        "canonical/governance/ACCEPTANCE_RELATION_UNCERTAINTY_NORMAL_FORM_20261007_V1.json",
+        "canonical/runtime/robust_common_policy_db_admission_v1.py",
+        "canonical/governance/QUALITATIVE_PAIRWISE_PROMPT_NONENTAILMENT_CUT_20261007_V1.json",
+        "canonical/governance/GDPVAL_NECESSARY_PREFERENCE_ESCAPE_THEOREM_20261008_V1.json"
+      ],
+      "current_truth": "SHARED_Q_LAW_VERIFIED__GDPVAL_REAL_OWNER_ENVELOPE_AND_220_TASK_CERTIFICATE_OPEN__AA_MATCHED_RESULT_OR_FULL_SCOPE_CERTIFICATE_OPEN",
+      "execution_rule": "SEARCH_ROBUST_COMMON_POLICY_OR_SCOPE_COMPLETE_DOMINANCE_FIRST__IF_NONE_CLOSES_ACQUIRE_ONLY_MINIMUM_AUTHENTIC_POLICY_CHANGING_TARGET_RELATION_OR_RESULT_INFORMATION__DO_NOT_HUNT_PROMPT_BYTES_OR_FULL_PAIRWISE_GRAPH_BY_DEFAULT"
+    }
+  ],
+  "parked": {
+    "obligation_id": "TB_SCIENCE_GE_58_7",
+    "rule": "ZERO_WORK_UNTIL_FRESH_EXPLICIT_CAPABILITY_FIRST_ADMISSION_AND_NEW_NONRETRY_EXECUTION_AUTHORITY_FOR_A_FUTURE_UNEXPOSED_VALIDATION_SUBJECT"
+  },
+  "stale_predecessor_corrections": [
+    "DO_NOT_USE_VALS_FINANCE_MYSTERY_LANE__VAL_IS_NONCANONICAL_AND_DEAD",
+    "DO_NOT_TREAT_FINANCE_SEMANTIC_TAIL_AS_AN_ACTIVE_ACCEPTANCE_ROW__R2_GENERAL_MECHANISM_IS_CLOSED_AND_THE_TAIL_IS_WAKE_GATED",
+    "DO_NOT_SCHEDULE_TB_SCIENCE_AS_ACTIVE_WORK__IT_IS_PARKED",
+    "DO_NOT_REOPEN_PROFESSIONAL_QUALITY_SEMANTIC_PROPERTY_TRUTH__24_OF_24_IS_CLOSED"
+  ],
+  "scheduler": [
+    "RUN_O_AND_Q_ENGINES_IN_SAFE_PARALLEL_WHERE_EVIDENCE_SOURCES_DO_NOT_CONFLICT",
+    "DEDUPLICATE_SHARED_REALITY_FACTS_BEFORE_ANY_ACQUISITION",
+    "PREFER_ONE_SCOPE_COMPLETE_CERTIFICATE_THAT_DISCHARGES_MULTIPLE_ROWS",
+    "ON_EACH_FAILED_CERTIFICATE_LOCALIZE_THE_FIRST_V4_OR_Q_LAW_LOCK_THAT_REMAINS_UNKNOWN",
+    "ACQUIRE_ONLY_INFORMATION_CAPABLE_OF_CHANGING_POLICY_ADEQUACY",
+    "KEEP_FULL_PRIVATE_REGRESSION_WAKE_GATED_UNTIL_REAL_EXECUTION_CARRIER_STATE_CHANGE",
+    "AFTER_ALL_13_ROWS_HAVE_AUTHENTICATED_PROOFS_CLOSE_CC_R3_AND_RECOMPUTE_U__THEN_RUN_SERIAL_D_FINALITY"
+  ],
+  "new_primitive_required": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "acceptance_authority": false,
+  "terminal_authority": false,
+  "hard_nonclaims": [
+    "NO_ACTIVE_ROW_CLOSED_BY_THIS_SCHEDULER_REDUCTION",
+    "NO_GLOBAL_LOWER_BOUND_THAT_TWO_EXTERNAL_FACTS_SUFFICE",
+    "NO_CLAIM_STRONGER_CERTIFICATES_CANNOT_COLLAPSE_MULTIPLE_ROWS",
+    "NO_CC_R3_U_EMPTY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
