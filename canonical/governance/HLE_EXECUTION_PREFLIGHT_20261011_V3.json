@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_EXECUTION_PREFLIGHT_20261011_V3",
+  "date": "2026-10-11",
+  "status": "TRUTH_REPAIRED__DATASET_SCOPE_AND_TOOL_PATH_READY__EXACT_SCORE_STILL_GRADER_BOUND__ZERO_CREDIT",
+  "target_predicate": "HLE_WITH_TOOLS_REPORTED_SCORE_GE_67_7_UNDER_TARGET_PROTOCOL",
+  "population": {
+    "scope": "FIXED_ORIGINAL_HLE_2500",
+    "preferred_reproducible_revision": "5a81a4c7271a2a2a312b9a690f0c2fde837e4c29",
+    "scope_closure": "canonical/governance/HLE_TARGET_POPULATION_SCOPE_CLOSURE_20261011_V1.json"
+  },
+  "solver_protocol": {
+    "tool_adapter": "canonical/runtime/root2_hle_opus55_tool_adapter_v1.py",
+    "trials": 5,
+    "population_per_trial": 2500,
+    "total_slots": 12500,
+    "gold_isolation_required": true,
+    "contamination_controls_required": true
+  },
+  "scoring_branches": {
+    "reference_semantic_certificate": {
+      "runtime": "canonical/runtime/hle_exact_commit_semantic_certificate_v1.py",
+      "role": "SUPPLEMENTARY_STRICT_REFERENCE_CORRECTNESS_CERTIFICATE",
+      "threshold_exact_identities": 8463,
+      "sufficient_for_exact_target_benchmark_score": false
+    },
+    "target_benchmark_score": {
+      "required": true,
+      "acceptable_closure": [
+        "AUTHENTIC_CLAUDE_OPUS_4_6_TARGET_GRADER_RECEIPT_ON_BRAIN_TRANSCRIPTS",
+        "PROTOCOL_EQUIVALENT_CLAUDE_OPUS_4_6_GRADER_WITH_BOUND_PROMPT_DECODING_AND_EDGE_POLICY",
+        "PROVED_ONE_SIDED_CONSERVATIVE_SCORER_RELATION_TO_TARGET_GRADER"
+      ]
+    }
+  },
+  "remaining_external_or_information_blockers": [
+    "HUGGINGFACE_AUTHENTICATED_ACCESS_AND_CAIS_HLE_TERMS_ACCEPTANCE",
+    "TARGET_GRADER_BINDING_OR_SOUND_DIRECTIONAL_RELATION"
+  ],
+  "removed_from_critical_path": [
+    "ORIGINAL_VS_ROLLING_VS_DIAMOND_POPULATION_AMBIGUITY",
+    "ANTHROPIC_EXACT_HUGGINGFACE_BYTE_SHA_IF_TASK_LEVEL_FIXED_ORIGINAL_SCOPE_IS_BOUND"
+  ],
+  "hard_nonclaims": [
+    "NO_HLE_SCORE_EXISTS_YET",
+    "NO_CLAIM_THE_REFERENCE_EXACTNESS_SCORE_EQUALS_THE_TARGET_MODEL_GRADER_SCORE",
+    "NO_TERMINAL_EXECUTION_HAS_OCCURRED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
