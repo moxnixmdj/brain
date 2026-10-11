@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-11",
+  "objective": "RECONCILE_CURRENT_R2_POINTER_TO_ALREADY_MERGED_GENERIC_AUTHORITY_CANDIDATE_MATERIALIZATION_WITHOUT_OVERCLAIMING_INDEPENDENT_EXECUTION_OR_FINANCE_TAIL_CLOSURE",
+  "load_bearing_primary": {
+    "open_obligation_ids": [
+      "R2_GENERIC_UNBOUND_RETRIEVAL_CANDIDATE_TO_EXISTING_TRUTH_CHECKER_MATERIALIZATION"
+    ],
+    "constructive_gap_for_open_obligation_ids": [],
+    "scope_complete_discharge": true,
+    "expected_obligation_discharge_lcb": "1",
+    "expected_obligation_unlock_lcb": "0",
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": "1"
+  },
+  "constraints": [
+    "BIND_ONLY_MERGED_EXACT_BLOBS",
+    "DO_NOT_CLAIM_INDEPENDENT_REMOTE_EXECUTION_FOR_GENERIC_PATH",
+    "DO_NOT_CLOSE_FINANCE_SEMANTIC_TAIL_WITHOUT_REAL_AUTHENTICATED_OBSERVATION",
+    "NO_POLICY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY_FROM_MATERIALIZATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
