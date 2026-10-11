@@ -273,5 +273,101 @@ class GenericGoalToolEffectPlannerV2Tests(unittest.TestCase):
         self.assertNotIn("automationbench", blob)
 
 
+    def test_operation_trigger_breaks_same_resource_notify_tie(self):
+        endpoints = [
+            {
+                "id":"opaque.messages.send",
+                "method":"POST",
+                "url":"https://opaque.invalid/messages/send",
+                "description":"Send a message to a channel.",
+            },
+            {
+                "id":"opaque.messages.postMessage",
+                "method":"POST",
+                "url":"https://opaque.invalid/messages/postMessage",
+                "description":"Post a message to a channel.",
+            },
+        ]
+        out = plan_goal_over_tool_schemas(
+            "Post the result to #ops-room.",
+            endpoints,
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(
+            out["mutation_endpoint_ids"],
+            ["opaque.messages.postMessage"],
+        )
+
+    def test_rare_resource_specificity_breaks_generic_overlap_tie(self):
+        endpoints = [
+            {
+                "id":"generic.customer.update",
+                "method":"PATCH",
+                "url":"https://opaque.invalid/customers/{id}",
+                "description":"Update customer alpha status.",
+            },
+            {
+                "id":"specific.customer.update",
+                "method":"PATCH",
+                "url":"https://opaque.invalid/specific/{id}",
+                "description":"Update customer beta status.",
+            },
+            {
+                "id":"generic.customer.extra1",
+                "method":"GET",
+                "url":"https://opaque.invalid/a1",
+                "description":"Read alpha customer.",
+            },
+            {
+                "id":"generic.customer.extra2",
+                "method":"GET",
+                "url":"https://opaque.invalid/a2",
+                "description":"Read alpha customer.",
+            },
+            {
+                "id":"generic.customer.extra3",
+                "method":"GET",
+                "url":"https://opaque.invalid/a3",
+                "description":"Read alpha customer.",
+            },
+        ]
+        out = plan_goal_over_tool_schemas(
+            "Update the customer alpha beta status to active.",
+            endpoints,
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(
+            out["mutation_endpoint_ids"],
+            ["specific.customer.update"],
+        )
+
+    def test_ungrounded_required_read_parameter_is_not_zero_cost_observation(self):
+        endpoints = [
+            {
+                "id":"records.search",
+                "method":"GET",
+                "url":"https://opaque.invalid/records/search",
+                "description":"Search customer records.",
+                "parameters":{
+                    "query":{"required":True,"type":"string"}
+                },
+                "response":"{records:[{id,name}]}",
+            },
+            {
+                "id":"records.list",
+                "method":"GET",
+                "url":"https://opaque.invalid/records",
+                "description":"List customer records.",
+                "response":"{records:[{id,name}]}",
+            },
+        ]
+        out = plan_goal_over_tool_schemas(
+            "Review the customer records.",
+            endpoints,
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["observation_endpoint_ids"], ["records.list"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
