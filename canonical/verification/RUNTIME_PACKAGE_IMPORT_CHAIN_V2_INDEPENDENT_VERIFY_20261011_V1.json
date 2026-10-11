@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_RUNTIME_PACKAGE_IMPORT_CHAIN_V2_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__REUSE_OF_VERIFIED_NPM_PACKAGE_IMPORT_REPAIR_CLASS__PYPI_AND_ASTRA_LAZY_IMPORTS_PACKAGE_QUALIFIED__PYCOMPILE_PASS__3_OF_3_FOCUSED_TESTS__ZERO_GLOBAL_CREDIT",
+  "repository": "moxnixmdj/brain",
+  "base_main_commit": "47ab314c70b7ff4e92749019cbeb54d7357ba973",
+  "repair_branch": "repair/runtime-package-import-chain-v2-20261011",
+  "exact_blobs": {
+    "canonical/runtime/independent_pypi_codec_verifier.py": "8c83302bf645a901bdcedd38e04081ae0ca5f6a5",
+    "canonical/runtime/auto_pypi_library_acquisition.py": "37decef0b7876428b7c4048ea3952888af18d374",
+    "canonical/runtime/astra_runtime.py": "0c613137b9c578c8afadb9482da08e2fc268deb7",
+    "canonical/tests/test_runtime_package_import_chain_v1.py": "210d705a9354fb0f8299fc4a4e938cabc1ac26fe"
+  },
+  "cause": "SAME_INTRA_PACKAGE_IMPORT_IDENTITY_DEFECT_CLASS_ALREADY_PROVED_AND_REPAIRED_FOR_NPM_RUNTIME_CHAIN",
+  "repair": {
+    "independent_pypi_codec_verifier": "PACKAGE_QUALIFY_AUTO_PYPI_AND_CAPABILITY_DISCOVERY_IMPORTS",
+    "auto_pypi_library_acquisition": "PACKAGE_QUALIFY_CAPABILITY_DISCOVERY_IMPORT",
+    "astra_runtime": "PACKAGE_QUALIFY_LAZY_INDEPENDENT_PYPI_AND_NPM_VERIFIER_IMPORTS",
+    "regression": "EXTEND_EXISTING_RUNTIME_PACKAGE_IMPORT_CHAIN_TEST_TO_NPM_PYPI_AND_ASTRA_LAZY_IMPORTS"
+  },
+  "independent_replay": {
+    "carrier_kind": "SPRITE",
+    "carrier_name": "brain-professional-hard-defect-verify-20261010",
+    "carrier_id": "sprite-1bbb86ed-1f7c-409f-8397-fadc4de7a62a",
+    "checkpoint_before_work": "v18",
+    "py_compile": "PASS",
+    "focused_tests_run": 3,
+    "focused_tests_passed": 3,
+    "failures": 0,
+    "errors": 0
+  },
+  "boundaries": [
+    "THIS_VERIFIES_THE_GENERALIZED_RUNTIME_PACKAGE_IMPORT_REPAIR_ONLY",
+    "THE_EXISTING_PARTIAL_SPRITE_REGRESSION_CARRIER_WAS_UNDER_MATERIALIZED_AND_IS_NOT_FULL_CURRENT_MAIN_AUTHORITY",
+    "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION_REMAINS_OWNED_BY_THE_CANONICAL_GITHUB_ACTIONS_GATE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY_FROM_THIS_RECEIPT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
