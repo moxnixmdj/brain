@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_SYMPY_FOUR_BODY_V56_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_V55_TO_V56_TRANSFORM__SPENT_NEXT61_15870_OF_15870__FRESH_NEXT62_16100_OF_16100__CLEAN_ARCHIVE_NEXT62_16100_OF_16100__NEXT63_FROZEN_RECONSTRUCTIBLE_UNSPENT__ZERO_CREDIT",
+  "subject": {
+    "producer_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SYMPY_FOUR_BODY_V56_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "producer_evidence_git_blob_sha": "899d9f8db42a0532c98272b32bff5b9f0e40a361",
+    "transform": "canonical/research/bytes/tools/conservative_sympy_four_body_failclose_prune_v56.py",
+    "transform_git_blob_sha": "7176c1d14f69b8444cfdf43d9a627e5a264d1ffd",
+    "predecessor_manifest_sha256": "a401c2d9595af738a360f9df69da3162c4663e1624917e3d5d6a2b6bcd2ba3ef",
+    "candidate_manifest_sha256": "3e78db30265a76f1f94b666ccc8dd684a3829fcf20f75a7fdd1e6a5209b9b115",
+    "candidate_raw_python_source_bytes": 1710301
+  },
+  "replay": {
+    "transform_application": {
+      "result": "PASS",
+      "saved_raw_python_bytes": 4448,
+      "candidate_manifest_sha256": "3e78db30265a76f1f94b666ccc8dd684a3829fcf20f75a7fdd1e6a5209b9b115",
+      "reconstruction_identity": "278/278"
+    },
+    "spent_NEXT61": {
+      "passed": 15870,
+      "total": 15870,
+      "failures": 0
+    },
+    "fresh_NEXT62": {
+      "passed": 16100,
+      "total": 16100,
+      "failures": 0,
+      "corpus_sha256": "7714d5ed1852f9099f2fd160f9cb6f0a43718c66426bc0a9d0dfafb4742d767f",
+      "durable_library_file_id": "libfile_3e89a90f8724819180239691717ac934"
+    },
+    "clean_archive_NEXT62": {
+      "passed": 16100,
+      "total": 16100,
+      "failures": 0
+    },
+    "archive_identity": {
+      "durable_files": 278,
+      "byte_identical_files": 278,
+      "archive_bytes": 266304,
+      "archive_sha256": "b8b26e66dae2a3767114bf13a7070b9cf3593aa8bf795ddd0f49afd13c858f0e",
+      "library_persisted": false
+    },
+    "next63_frozen_definition": {
+      "cases": 16330,
+      "seed": 1123089459,
+      "per_operation_budget": 1420,
+      "sha256": "bd279cc66bbe60423b764f94737767e89782f43e4d69c3790dee56cb3bacaff4",
+      "generated_bytes": 1930616,
+      "spent": false,
+      "durable_persistence": false,
+      "byte_identical_regeneration_required_before_v57": true
+    }
+  },
+  "proved": [
+    "THE_V55_TO_V56_TRANSFORM_IS_EXACTLY_BASE_AND_TARGET_MANIFEST_GUARDED",
+    "THE_EXACT_V56_CANDIDATE_PASSES_COMPLETE_SPENT_NEXT61",
+    "THE_PREVIOUSLY_UNSPENT_NEXT62_CORPUS_PASSES_EXACT_V56_COMPLETELY",
+    "A_CLEAN_V56_ARCHIVE_EXTRACTION_IS_278_OF_278_BYTE_IDENTICAL_AND_REPLAYS_NEXT62_16100_OF_16100",
+    "NEXT63_ID_SEED_CASE_COUNT_AND_CONTENT_SHA256_ARE_FROZEN_UNSPENT",
+    "V56_IS_STRICTLY_SMALLER_THAN_V55_BY_4448_RAW_PYTHON_BYTES"
+  ],
+  "truth_boundary": [
+    "BOUNDED_EXACT_SYMBOLIC_ROUTE_ONLY",
+    "NO_UNIVERSAL_EQUIVALENCE_CLAIM",
+    "NO_EXTERNAL_ORGANIZATIONALLY_INDEPENDENT_SECOND_CARRIER CLAIM",
+    "V56_ARCHIVE_AND_NEXT63_LIBRARY_UPLOAD_FAILED__NO_PERSISTENCE_CLAIM",
+    "NO_V57_CUT_UNTIL_NEXT63_IS_PERSISTED_OR_REGENERATED_BYTE_IDENTICAL",
+    "NO_CAPABILITY_ACCEPTANCE_PROFESSIONAL_QUALITY_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
