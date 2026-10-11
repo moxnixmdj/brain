@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_SHORT_SEED_QUERY_PLANNER_SYNTHETIC_RESULT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "SYNTHETIC_PREFLIGHT_FAILED_AND_REPAIRED__RETRIEVAL_TRACE_NOT_STARTED",
+  "original_planner_blob": "408e524eba6393ae59fcc37ec5519fe3dfccf544",
+  "test_blob": "4e8dc179fa9ff534b38ce715a81040726c5daccf",
+  "runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2691,
+    "workflow_run_id": 38145444284,
+    "workflow_job_id": 114487688940
+  },
+  "failure": {
+    "test": "test_song_seed",
+    "cause": "GENERIC_STOP_WORD_CLEANER_STRIPPED_SEMANTICALLY_ESSENTIAL_LEADING_WHEN_FROM_QUOTED_WORK_TITLE"
+  },
+  "repair": {
+    "commit": "a563eb1f64c58451e1603018111b98dcd8f79108",
+    "new_planner_blob": "2386db287d08153ffb905f8cd89a76f4ebf19d9f",
+    "rule": "QUOTED_SPANS_USE_SEPARATE_NORMALIZER_WITH_NO_FUNCTION_WORD_STRIPPING"
+  },
+  "exposure": {
+    "consumed_retrieval_trace_executed": 0,
+    "fresh_rows_50_to_74": 0,
+    "hle_cases": 0
+  },
+  "target_score_claimed": false,
+  "hle_67_7_certified": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
