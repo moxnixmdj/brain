@@ -96,7 +96,7 @@
   ],
   "candidates": [
     {
-      "work_id": "CODING_GENERAL_SOFTWARE_REPAIR_LOOP_V6",
+      "work_id": "CODING_GENERAL_SOFTWARE_REPAIR_LOOP_V6B",
       "work_type": "CAPABILITY_BUILD",
       "frontier_class": "GENERAL_SOFTWARE_ENGINEERING",
       "source": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
