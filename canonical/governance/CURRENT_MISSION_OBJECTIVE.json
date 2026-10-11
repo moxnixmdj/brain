@@ -32,7 +32,7 @@
     "primary_entrypoint": "plan_current_post_composition_frontier",
     "scalar_fallback_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
     "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V15__PROFESSIONAL_V10_24_OF_24__REGRESSION_CARRIER_WAKE_GATED__OTHER_REUSE_FIRST_FRONTIERS_CONTINUE__ZERO_GLOBAL_CREDIT",
-    "observed_git_blob_sha": "75fdd47f1e14613f9168b9094b698534ac97a1e7"
+    "observed_git_blob_sha": "6a88376ffa84a5e7b8578408671ffe27b1caa692"
   },
   "scheduler_precedence": "REAL_MISSION_CAPABILITY_RESOURCE_PARETO_LEVERAGE_IS_PRIMARY__SAFE_NONCONFLICTING_PARALLELISM_MINIMIZES_WALL_CLOCK__CURRENTNESS_AND_DEPENDENCY_GATES_PRECEDE_SELECTION__DIMENSIONWISE_PARETO_DOMINANCE_PRECEDES_ANY_SCALAR_TRADEOFF__SCALARIZATION_REQUIRES_PROVED_TRADEOFF_CONTRACT__CURRENT_R2_SHARED_CAUSE_FANOUT_IS_SECONDARY_DISCRIMINATION_SIGNAL__OPUS_5_5_CHECKPOINT_WORK_IS_TERTIARY_AUDIT__EXPLICIT_NEW_PRIMITIVE_CLAIMS_REQUIRE_REUSE_FIRST_EXHAUSTION_PROOF",
   "current_professional_quality_execution": {
@@ -277,7 +277,7 @@
     "verification_path": "canonical/verification/LIVE_FRONTIER_SCHEDULING_CURRENTNESS_RECONCILIATION_20261011_V3.json",
     "source_main_commit": "21ce41c63619dec25eb8ca8f34d8add33d1a34ef",
     "live_frontier_git_blob_sha": "d6745cdd39692308ec8f573be52371f03a5a12a9",
-    "scheduler_git_blob_sha": "75fdd47f1e14613f9168b9094b698534ac97a1e7",
+    "scheduler_git_blob_sha": "6a88376ffa84a5e7b8578408671ffe27b1caa692",
     "capability_frontier_git_blob_sha": "7fb78b746ca52818edd43b9e1a69c3437091e8b1",
     "bytes_git_blob_sha": "22bb42347a8c823f057dc1dcbe38e1e9b2d3c5b1",
     "full_private_regression_passed": false,
