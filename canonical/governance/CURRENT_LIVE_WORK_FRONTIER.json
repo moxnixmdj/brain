@@ -185,13 +185,13 @@
         "qualification": "19320/19320",
         "next_action": "RERANK_EXACT_V69_USING_SPENT_NEXT76_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT77_20261011_V1",
         "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT77_20261011_V1",
-        "next_frozen_library_file_id": "libfile_85e0b9f5a6888191a713951253a7924f",
+        "next_frozen_library_file_id": "libfile_65f5dca72e64819193ca49972668262d",
         "independent_verification": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPF_PERTURB_V55_VERIFY_20261011_V1.json",
         "vector_bounds_complete": false,
         "next_frozen_spent": false
       },
       "ready": "V69_CURRENT_AT_1707938_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT",
-      "source_git_blob_sha": "70e83ed3100860528121d2cef46b20c14a776495"
+      "source_git_blob_sha": "2239c2f2f31e714fe1f9416229cddc79a62eda2e"
     },
     {
       "work_id": "R2_FINANCE_SEMANTIC_ADEQUACY_TAIL",
