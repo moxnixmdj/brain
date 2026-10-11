@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_MCQ_RETRIEVAL_VOTE_VERIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "EXACT_COMMITTED_BYTES_LOCALLY_VERIFIED__BRAIN_OWNED_FALLIBLE_SOLVER_PATH__ZERO_SCORE_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/hle_mcq_retrieval_vote_v1.py",
+    "git_blob_sha1": "600aed54c599dc5541ce1319a5b0a91df8876f41",
+    "sha256": "5b26a18cedba0f27e64e63f4e0fd41696245101ba7948a226abc3ebbeb7ef549",
+    "creation_commit": "bb3b38ab8f048775deeb8854a0a2794d49505c41"
+  },
+  "tests": {
+    "path": "canonical/tests/test_hle_mcq_retrieval_vote_v1.py",
+    "git_blob_sha1": "97148fd21058a4e9766457fd816a9988d058ce5b",
+    "sha256": "00fff13e0ff06ce8473dbae2f8e3d7b0e9e57ee60951142f9b24a5a8561160bd",
+    "synthetic_tests": 4,
+    "synthetic_passed": 4,
+    "repository_ci_claimed": false
+  },
+  "composition": [
+    "canonical/runtime/hle_native_semantic_compiler_v1.py",
+    "canonical/runtime/root2_hle_opus55_tool_adapter_v1.py",
+    "DETERMINISTIC_LEXICAL_EVIDENCE_SCORING",
+    "INDEPENDENT_HOST_DIVERSITY",
+    "SHARED_STEM_AND_OPTION_SPECIFIC_SEARCH",
+    "EXPLICIT_NEGATIVE_QUESTION_INVERSION"
+  ],
+  "authority_boundary": {
+    "brain_owned_candidate_generation": true,
+    "external_model_solver_calls": 0,
+    "gold_access": false,
+    "correctness_proof": false,
+    "benchmark_score_credit": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
