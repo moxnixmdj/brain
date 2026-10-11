@@ -1,0 +1,97 @@
+{
+  "schema": "PROJECT_BRAIN_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V3",
+  "date": "2026-10-11",
+  "status": "EXECUTION_CARRIER_ROOT_CAUSE_IDENTIFIED__GITHUB_HOSTED_ACTIONS_PRESTART_BILLING_OR_SPENDING_LIMIT_BLOCK__EXACT_REGRESSION_NOT_EXECUTED__HARD_ZERO_SPEND_FORBIDS_SPEND_BASED_REMEDIATION__ALTERNATE_EXACT_CARRIER_REQUIRED_OR_ACCOUNT_STATE_MUST_CLEAR_WITH_ZERO_INCREMENTAL_SPEND__GATE_OPEN__ZERO_CREDIT",
+  "observed_current_main_commit": "90e45c46bb3995eda14d25f5ef5867c4939195a2",
+  "required_gate": "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+  "supersedes": {
+    "path": "canonical/verification/FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V2.json",
+    "git_blob_sha": "a7d1d27429de56e533afd9c529919196b6bc8bc3"
+  },
+  "causal_reclassification": {
+    "previous_cause_class": "UNKNOWN__ACTIONS_POLICY_QUOTA_BILLING_OR_PLATFORM_CAUSE_NOT_READABLE_THROUGH_CURRENT_CONNECTOR",
+    "current_cause_class": "GITHUB_HOSTED_ACTIONS_ACCOUNT_BILLING_OR_SPENDING_LIMIT_PRESTART_GATE",
+    "specificity_boundary": "THE_AVAILABLE_EVIDENCE_IDENTIFIES_THE_BILLING_OR_SPENDING_LIMIT_GATE_CLASS_BUT_DOES_NOT_DISTINGUISH_FAILED_PAYMENT_FROM_SPENDING_LIMIT_STATE",
+    "repository_code_failure_as_primary_cause": false,
+    "regression_workflow_specific_failure_as_primary_cause": false,
+    "runner_started": false,
+    "any_workflow_step_started": false,
+    "identical_hosted_actions_retry_value": "ZERO_WHILE_ACCOUNT_GATE_STATE_IS_UNCHANGED"
+  },
+  "evidence": [
+    {
+      "kind": "CANONICAL_PRIOR_DIAGNOSIS",
+      "path": "canonical/verification/FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V2.json",
+      "git_blob_sha": "a7d1d27429de56e533afd9c529919196b6bc8bc3",
+      "proves": [
+        "MULTIPLE_DISTINCT_WORKFLOWS_FAILED_PRESTEP",
+        "FULL_REGRESSION_JOBS_RECORDED_ZERO_STEPS",
+        "NO_ASSIGNED_RUNNER",
+        "NO_REGRESSION_RESULT"
+      ]
+    },
+    {
+      "kind": "IN_REPOSITORY_INDEPENDENT_MEASUREMENT_RECORD",
+      "pull_request": 666,
+      "observed_pr_head_sha": "a2da51bf6b401c32e29a4dd2021383101e9f3bfe",
+      "title": "Repair Stage-A admission and guard mirror rot; restore the authoritative current-state reducer",
+      "observed_annotation": "The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings",
+      "observed_behavior": "MULTIPLE_HEADS__JOBS_COMPLETE_FAILURE_IN_SECONDS__ZERO_STEPS__CHECK_RUN_ANNOTATION_AVAILABLE",
+      "role": "IDENTIFIES_PRESTART_FAILURE_CLASS"
+    },
+    {
+      "kind": "SECOND_IN_REPOSITORY_INDEPENDENT_MEASUREMENT_RECORD",
+      "pull_request": 2631,
+      "observed_pr_head_sha": "7d35a622e5c6fab481668ca96ffeb506345d3d46",
+      "title": "Bind V7 credited transform certificates and repair continuity child seam",
+      "observed_annotation": "The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings",
+      "role": "INDEPENDENT_CORROBORATION_OF_SAME_ACCOUNT_LEVEL_PRESTART_FAILURE_CLASS"
+    }
+  ],
+  "direct_observation_boundary": {
+    "current_github_connector_can_read_zero_step_jobs": true,
+    "current_github_connector_can_read_check_run_annotation_endpoint": false,
+    "sprite_github_cli_authenticated": false,
+    "interpretation": "CAUSE_CLASS_IS_BOUND_FROM_TWO_EXISTING_REPOSITORY_MEASUREMENT_RECORDS_PLUS_CURRENT_ZERO_STEP_JOB_EVIDENCE__NOT_FROM_A_NEW_DIRECT_ANNOTATION_API_READ_IN_THIS_SESSION"
+  },
+  "exact_regression_truth": {
+    "regression_executed": false,
+    "any_test_executed": false,
+    "semantic_failure_observed": false,
+    "regression_pass": false,
+    "regression_fail_proved": false,
+    "professional_property_truth_closed_count": 24,
+    "uvck_v2_live_default_promoted": false
+  },
+  "zero_spend_policy": {
+    "incremental_spend_budget_usd": 0,
+    "increase_spending_limit_as_remediation": "FORBIDDEN_IF_IT_CAUSES_INCREMENTAL_SPEND",
+    "paid_runner_or_paid_hosted_actions_remediation": "FORBIDDEN",
+    "allowed_wake_paths": [
+      "THE_ACCOUNT_LEVEL_HOSTED_ACTIONS_GATE_CLEARS_WITH_ZERO_INCREMENTAL_SPEND_AND_A_JOB_RECORDS_REAL_STEP_EXECUTION",
+      "AN_ALREADY_AUTHORIZED_ZERO_INCREMENTAL_SPEND_CARRIER_GAINS_EXACT_PRIVATE_CURRENT_MAIN_READ_AND_EXECUTION_ACCESS",
+      "A_STRONGER_CONTENT_ADDRESSED_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_RECEIPT_APPEARS"
+    ]
+  },
+  "scheduler_rule": "DO_NOT_RETRY_GITHUB_HOSTED_ACTIONS_WHILE_THE_ACCOUNT_LEVEL_BILLING_OR_SPENDING_LIMIT_PRESTART_GATE_IS_UNCHANGED__DO_NOT_SPEND_TO_CLEAR_IT__DO_NOT_ACCEPT_PARTIAL_OR_STALE_MATERIALIZATIONS_AS_EXACT_CURRENT_MAIN__KEEP_PROFESSIONAL_GATE_OPEN__RETURN_CAPACITY_TO_CAPABILITY_FIRST_GENERAL_DEVELOPMENT_AND_RESOURCE_PARETO_IMPROVEMENT",
+  "wake_conditions": [
+    "ZERO_INCREMENTAL_SPEND_ACCOUNT_STATE_CHANGE_CLEARS_THE_GITHUB_HOSTED_ACTIONS_PRESTART_GATE_AND_REAL_STEPS_EXECUTE",
+    "AUTHORIZED_ZERO_INCREMENTAL_SPEND_EXACT_PRIVATE_MAIN_CARRIER_BECOMES_AVAILABLE",
+    "STRONGER_VALID_CONTENT_ADDRESSED_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_RECEIPT_APPEARS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_WHETHER_THE_ACCOUNT_SUBCAUSE_IS_FAILED_PAYMENT_OR_SPENDING_LIMIT",
+    "NO_REGRESSION_PASS",
+    "NO_REGRESSION_FAIL_FROM_ZERO_STEP_JOBS",
+    "NO_UVCK_V2_PROMOTION",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY",
+    "NO_SPEND_AUTHORIZATION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
