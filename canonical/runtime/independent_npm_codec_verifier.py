@@ -10,9 +10,9 @@ import re
 import subprocess
 import tempfile
 
-import auto_npm_library_acquisition as npm_acq
-import astra_runtime
-import npm_package_utils
+from canonical.runtime import auto_npm_library_acquisition as npm_acq
+from canonical.runtime import astra_runtime
+from canonical.runtime import npm_package_utils
 
 
 class IndependentNpmCodecVerifierFailure(RuntimeError):

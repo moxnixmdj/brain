@@ -1,0 +1,25 @@
+name: Current Main Full Canonical Regression
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/**'
+      - '.github/workflows/current-main-full-canonical-regression.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  full-canonical-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile all canonical Python
+        run: python -m compileall -q canonical
+      - name: Discover and run all canonical unit tests
+        run: python -m unittest discover -s canonical/tests -p 'test_*.py' -v

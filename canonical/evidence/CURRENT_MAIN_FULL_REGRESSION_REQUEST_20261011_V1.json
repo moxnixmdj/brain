@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_MAIN_FULL_REGRESSION_REQUEST_V1",
+  "date": "2026-10-11",
+  "base_main_commit": "6a485303239529d5ced4f20287c4108535c4b6cf",
+  "purpose": "TRIGGER_FRESH_FULL_PRIVATE_CURRENT_MAIN_CANONICAL_REGRESSION_ON_REAL_GITHUB_CHECKOUT",
+  "professional_property_truth_verified_leaf_count": 24,
+  "required_gate": "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+  "evidence_authority": false,
+  "promotion_authority": false,
+  "quality_authority": false,
+  "acceptance_authority": false,
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "hard_nonclaims": [
+    "REQUEST_FILE_IS_NOT_REGRESSION_EVIDENCE",
+    "NO_PASS_CLAIM_UNTIL_REAL_WORKFLOW_STEPS_COMPLETE_SUCCESSFULLY",
+    "NO_PROMOTION_OR_TERMINAL_CREDIT_FROM_TRIGGERING_A_RUN"
+  ]
+}
