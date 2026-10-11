@@ -1,0 +1,114 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_MPF_PERTURB_V54_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__MPF_PERTURB_FONE_ROUND_DOWN_SPECIALIZATION__SPENT_NEXT59_AND_FRESH_NEXT60_PASS__NEXT61_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NINE_BODY_FAILCLOSE_V53_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "ae9187bc15193fe340e77a88d9d400f51ec798dec638ac435aca1f2862c14cfe",
+    "transform": "canonical/research/bytes/tools/conservative_mpf_perturb_fone_round_down_prune_v54.py",
+    "manifest_sha256": "0a4f02588b1058752991ab6156e3f28fe0514eed79ad85292c5aa39d546935f3",
+    "python_files": 277,
+    "raw_python_source_bytes": 1715744,
+    "B_exec_raw_python_source_bytes": 1718504,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v53_bytes": -137,
+    "B_exec_delta_vs_v53_bytes": -137
+  },
+  "selection": {
+    "id": "MPF_PERTURB_FONE_ROUND_DOWN_SPECIALIZATION_V54",
+    "method": "WHOLE_BODY_DELETE_FALSIFICATION__PROFILE_COMPLETE_SPENT_NEXT59_ROOTS__PRESERVE_ONLY_X_FONE_ROUND_DOWN_EPS_SIGN_0_OR_1__VERIFY_COMPLETE_SPENT_NEXT59_THEN_FRESH_NEXT60",
+    "changed_body_count": 1,
+    "body": "mpmath/libmp/libmpf.py::mpf_perturb",
+    "preserved_surface": [
+      "X_EQUALS_FONE",
+      "ROUND_DOWN",
+      "EPS_SIGN_ZERO_OR_ONE"
+    ],
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "falsification_first": {
+    "whole_body_delete": "REJECTED__15408_OF_15410_PASS__TWO_ROOTS_CASES_REQUIRE_MPF_PERTURB",
+    "failing_global_indexes": [
+      5313,
+      5230
+    ]
+  },
+  "discovery_evidence": {
+    "corpus": "QUAL_SUCCESSOR_NEXT59_20261011_V1",
+    "role": "SPENT_DISCOVERY_ONLY",
+    "roots_cases_profiled": 1340,
+    "mpf_perturb_calls": 150,
+    "observed_x": [
+      "fone"
+    ],
+    "observed_rounding": [
+      "round_down"
+    ],
+    "observed_eps_sign": [
+      0,
+      1
+    ],
+    "unobserved_other_call_classes": true
+  },
+  "qualification": {
+    "spent_NEXT59": {
+      "id": "QUAL_SUCCESSOR_NEXT59_20261011_V1",
+      "cases": 15410,
+      "corpus_sha256": "5c7cf733614d58648dbe4fbfc855e7451651c652555eb895fcdcef39df780c92",
+      "candidate": "15410/15410",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT60": {
+      "id": "QUAL_SUCCESSOR_NEXT60_20261011_V1",
+      "cases": 15640,
+      "corpus_sha256": "f2d40bb97ade73179631aac6c94134eeab9fc529889bfabe75e01dd2dadfbc99",
+      "candidate": "15640/15640",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "clean_room_v53_to_v54_reconstruction": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+    "regenerated_manifest_sha256": "0a4f02588b1058752991ab6156e3f28fe0514eed79ad85292c5aa39d546935f3",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V54_SUCCESSOR_20261011_V1.tar(1).xz",
+    "library_file_id": "libfile_59c59223f088819197a40997e5babcf9",
+    "file_id": "file_000000009d2481f4af20cee37d50b1bd",
+    "bytes": 267840,
+    "sha256": "ae47929afaaa0379b51542dac1da1eccbe42ab3a6148011a95d4d2d617ec78d3"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT61_20261011_V1",
+    "cases": 15870,
+    "seed": 1652573262,
+    "per_operation_budget": 1380,
+    "seed_derivation": "FIRST_32_BITS_BIG_ENDIAN_SHA256_OF_QUAL_ID_PIPE_V54_MANIFEST_IDENTITY",
+    "corpus_sha256": "ac6f82939275dff6112fa14041e7ca7fd3be95cc42fc21835c7ba1cef01a8d04",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT61_20261011_V1(2).jsonl",
+    "library_file_id": "libfile_03c075ed7738819199e759bf4e29364f",
+    "file_id": "file_00000000c53881f498fb9dc65f51ac5a",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V54 raw Python bytes are 1,715,744, 137 bytes below V53.",
+    "MEASURED: whole-body mpf_perturb deletion is rejected by two spent NEXT59 roots cases.",
+    "MEASURED: complete NEXT59 roots profiling observed 150 mpf_perturb calls, all x=fone, round_down, eps_sign in {0,1}.",
+    "MEASURED: complete spent NEXT59 passes exact V54 15,410/15,410.",
+    "MEASURED: previously untouched NEXT60 passes exact V54 15,640/15,640.",
+    "MEASURED: clean-room V53-to-V54 reconstruction is 278/278 durable files byte-identical.",
+    "MEASURED: NEXT61 is durably frozen at 15,870 cases and remains unspent.",
+    "NOT PROVED: universal mpmath equivalence outside the bounded exact-symbolic route.",
+    "NOT CLAIMED: external organizationally independent second carrier.",
+    "NOT PROMOTED: zero capability, acceptance, professional-quality, promotion, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
