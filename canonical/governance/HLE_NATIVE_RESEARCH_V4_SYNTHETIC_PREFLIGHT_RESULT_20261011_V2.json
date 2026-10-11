@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_NATIVE_RESEARCH_V4_SYNTHETIC_PREFLIGHT_RESULT_20261011_V2",
+  "date": "2026-10-11",
+  "status": "SECOND_SYNTHETIC_PREFLIGHT_FAILED__DIAGNOSTIC_NOT_STARTED",
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2691,
+    "workflow_run_id": 38144026868,
+    "workflow_job_id": 114483525647
+  },
+  "exact_bind_compile_passed": true,
+  "synthetic_result": {
+    "tests": 9,
+    "failures": 1,
+    "failing_test": "test_person_role_subject"
+  },
+  "cause": "INTENDED_SUBJECT_FIRST_FIRST_ROLE_REGEX_WAS_NOT_PRESENT_IN_FROZEN_BLOB_AFTER_PRIOR_PATCH_ATTEMPT",
+  "repair": {
+    "commit": "f72c055341828abb48a6d6a2cd52c47363b9897e",
+    "new_evidence_synthesis_v2_blob": "55c8cc9224244f883b4c3b706bbd88bc1b3645d1"
+  },
+  "exposure": {
+    "consumed_public_nonhle_rows_executed": 0,
+    "fresh_public_rows_executed": 0,
+    "hle_cases_executed": 0
+  },
+  "target_score_claimed": false,
+  "hle_67_7_certified": false,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
