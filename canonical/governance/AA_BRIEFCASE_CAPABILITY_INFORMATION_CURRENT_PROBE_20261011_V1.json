@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_CAPABILITY_INFORMATION_CURRENT_PROBE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "EXECUTED__NO_COMPLETE_SAME_SUBJECT_REFERENCE_BOUND_CAPABILITY_BASIS__ALL_FOUR_FAILURE_CLASSES_REMAIN__ZERO_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/aa_briefcase_capability_information_reduction_v1.py",
+    "git_blob_sha": "3bc4da3f81cffb86b6e0289e89210a52e772d0ec"
+  },
+  "reference": {
+    "id": "OPUS_5_5_AA_BRIEFCASE_1822_REFERENCE",
+    "vector": {
+      "rubric_pass_rate": 0.6121212121212121,
+      "analytical_quality_elo": 2206.92,
+      "presentation_elo": 1709.91
+    },
+    "vector_sha256": "1e542d27e3282755bfba0c33f9cfe1398fb71409df3b543848cada6ce2e94879",
+    "source": "canonical/evidence/AA_BRIEFCASE_PUBLIC_SCORER_CONTRACT_V2_20261011.json"
+  },
+  "current_candidates": [
+    {
+      "id": "PROFESSIONAL_PROPERTY_TRUTH_24_OF_24",
+      "preserved": true,
+      "rejected_for_primary_capability_decision": true,
+      "reason": "NOT_REFERENCE_BOUND"
+    },
+    {
+      "id": "SELECTED_CELL_TOP_LAW_30_CASE",
+      "preserved": true,
+      "rejected_for_primary_capability_decision": true,
+      "reason": "NOT_REFERENCE_BOUND_AND_NOT_GENERALIZATION_BOUND_FOR_PRIMARY_DECISION"
+    }
+  ],
+  "result": {
+    "capability_noninferiority_proved": false,
+    "selected_certificate_ids": [],
+    "missing_failure_classes": [
+      "ANALYTICAL_QUALITY_INFERIORITY",
+      "EXECUTION_INTERFACE_FAILURE",
+      "PRESENTATION_INFERIORITY",
+      "RUBRIC_INFERIORITY"
+    ],
+    "literal_aa_elo_ge_1822_proved": false
+  },
+  "next_action": {
+    "rank": 1,
+    "action": "SEARCH_EXISTING_BRAIN_EVIDENCE_FOR_REFERENCE_BOUND_SAME_SUBJECT_CERTIFICATES_THAT_ALREADY_ELIMINATE_ONE_OR_MORE_MISSING_FAILURE_CLASSES__THEN_RUN_EXACT_MINIMUM_BASIS_SELECTION",
+    "if_none_exist": "BUILD_ONE_INTEGRATED_REFERENCE_BOUND_CAUSAL_GENERALIZATION_CERTIFICATE_ON_THE_CURRENT_EXACT_BRAIN_SUBJECT_COVERING_ALL_FOUR_FAILURE_CLASSES",
+    "stop_rule": "DO_NOT_RUN_AA_BENCHMARK_MACHINERY_UNLESS_IT_IS_NEEDED_FOR_THE_CAPABILITY_DECISION_OR_THE_SEPARATE_LITERAL_SCORE_AUDIT"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
