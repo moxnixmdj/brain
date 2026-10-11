@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_MPMATH_PERIPHERAL_V50_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__V49_INHERITED_RATIONAL_PRINTER_REPAIR_PLUS_10_BODY_MPMATH_FAIL_CLOSED_PRUNE__NEXT55_AND_NEXT56_PASS__NEXT57_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MPMATH_PERIPHERAL_V49_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "bdc69baf4e75991e6b5abd1ec271886c43a02ac08a422656374f19122ffb9bd0",
+    "transform": "canonical/research/bytes/tools/conservative_mpmath_next56_repair_prune_v50.py",
+    "manifest_sha256": "719e9d956c4b24f54474ebd0dea30fe3e2352e6037743ec5a07b911cdec071e2",
+    "python_files": 277,
+    "raw_python_source_bytes": 1720680,
+    "B_exec_raw_python_source_bytes": 1723440,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v49_bytes": -4384,
+    "B_exec_delta_vs_v49_bytes": -4384
+  },
+  "inherited_repair": {
+    "falsification": "canonical/evidence/BYTES_EXACT_SYMBOLIC_V49_NEXT56_FALSIFICATION_20261011_V1.json",
+    "path": "sympy/printing/str.py",
+    "function": "StrPrinter._print_Rational",
+    "source": "owned stock SymPy 1.14.0 donor body",
+    "reason": "Fresh NEXT56 roots case 4539 requires rational printing during generator ordering.",
+    "added_bytes": 145
+  },
+  "selection": {
+    "id": "MPMATH_10_BODY_POST_NEXT55_NONUSE_FAIL_CLOSED_PRUNE_V50",
+    "changed_body_count": 10,
+    "bodies": [
+      "mpf_sum",
+      "round_int",
+      "from_str",
+      "mpf_mod",
+      "_mpc.__pow__",
+      "PythonMPContext._wrap_specfun",
+      "_mpc.__add__",
+      "_mpc.__sub__",
+      "_mpc.__div__",
+      "to_int"
+    ],
+    "discovery": "Instrumented function-entry trace over all 14,490 spent NEXT55 cases plus fresh-import exclusion.",
+    "gross_saved_bytes": 4529,
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "qualification": {
+    "spent_NEXT55": {
+      "cases": 14490,
+      "corpus_sha256": "dd008ccd38300031ed9839f45c758739af3291fbd6f53fe0f533eafe01c965c3",
+      "candidate": "14490/14490",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT56": {
+      "cases": 14720,
+      "corpus_sha256": "a7c0c40d1d5a587b0434ce7d675b0763b358aff8bbafdd4dc9b1a1559f20fbcb",
+      "predecessor_V49": "14719/14720",
+      "candidate_V50": "14720/14720",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "clean_room_archive_replay": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+    "clean_room_NEXT56": "14720/14720",
+    "regenerated_manifest_sha256": "719e9d956c4b24f54474ebd0dea30fe3e2352e6037743ec5a07b911cdec071e2"
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V50_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_020550c6747c81919e3ec0c3761d86c8",
+    "file_id": "file_000000009bec821099a85309fd4ac6c1",
+    "bytes": 268252,
+    "sha256": "a57376b8f9afb23ae7fd4a6b838045f887856b1503e913ebbb09ba5daea3c68e"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT57_20261011_V1",
+    "cases": 14950,
+    "seed": 296607256,
+    "per_operation_budget": 1300,
+    "corpus_sha256": "874b316cb3cb39d27371195ffbedf2542187e842e383d53bf635e4d42a97e8e4",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT57_20261011_V1.jsonl",
+    "library_file_id": "libfile_837bc87a1410819196006fb3661b6661",
+    "file_id": "file_00000000566082109f2cc672b34863a7",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V50 raw Python bytes 1,720,680, a net 4,384-byte reduction from V49.",
+    "MEASURED: spent NEXT55 14,490/14,490 PASS.",
+    "MEASURED: fresh NEXT56 14,720/14,720 PASS after repairing the inherited V49 rational-printer defect.",
+    "MEASURED: clean-room archive replay has 278/278 durable files byte-identical and NEXT56 14,720/14,720 PASS.",
+    "MEASURED: NEXT57 is frozen at 14,950 cases and remains unspent.",
+    "NOT PROVED: universal equivalence outside the bounded route.",
+    "NOT PROMOTED: zero capability/acceptance/professional/terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
