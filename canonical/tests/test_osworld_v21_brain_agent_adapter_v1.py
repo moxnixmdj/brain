@@ -275,3 +275,35 @@ def test_done_after_receipted_state_verification_is_allowed():
     assert first == ["WAIT"]
     _, second = agent.predict("verify then finish", {"screenshot": b"same"})
     assert second == ["DONE"]
+
+
+def test_browser_op_executes_provider_and_consumes_one_wait_step():
+    class Browser:
+        def __init__(self):
+            self.bound = None
+            self.ops = []
+        def bind_environment(self, env):
+            self.bound = env
+        def snapshot(self):
+            return {"page_count": 1, "pages": [{"page_index": 0, "url": "https://example.test", "title": "X", "elements": []}]}
+        def act(self, op):
+            self.ops.append(dict(op))
+            return {"status": "PASS", "operation": op["type"]}
+
+    browser = Browser()
+    def policy(state):
+        assert state["browser_state"]["page_count"] == 1
+        return {
+            "response": "navigate",
+            "actions": [{"type": "BROWSER_OP", "op": {"type": "NAVIGATE", "url": "https://example.test/x"}}],
+        }
+
+    agent = BrainOSWorldAgent(policy, policy_id="browser-policy", browser_provider=browser)
+    env = object()
+    agent.bind_environment(env)
+    response, actions = agent.predict("navigate", {"screenshot": b"image"})
+    assert response == "navigate"
+    assert actions == ["WAIT"]
+    assert browser.bound is env
+    assert browser.ops == [{"type": "NAVIGATE", "url": "https://example.test/x"}]
+    assert agent.history[-1]["browser_receipt"]["status"] == "PASS"
