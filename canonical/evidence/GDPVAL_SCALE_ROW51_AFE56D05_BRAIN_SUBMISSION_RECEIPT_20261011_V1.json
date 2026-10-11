@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_ROW51_WORLDCAST_SPECIAL_REPORTING_GUIDE_FROZEN__2270_WORDS__FIVE_PAGE_RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "subject": {
+    "row_idx": 51,
+    "task_id": "afe56d05-dac8-47d7-a233-ad1d035ca5bd",
+    "sector": "Information",
+    "occupation": "Editors"
+  },
+  "freshness": {
+    "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS35_219_PRECOMMIT_20261011_V1.json",
+    "precommit_commit": "c604f5006820ce3ca24d6afc2487a95a30886a6c",
+    "task_identity_frozen_before_prompt_reference_rubric_gold_model_output_or_judge_exposure": true,
+    "public_rubric_or_gold_used_before_output_freeze": false
+  },
+  "brain_execution_profile": {
+    "path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+    "cognition_surface": "CURRENT_CHATGPT_GPT_5_6_SOL_SESSION_OR_EQUIVALENT_ZERO_INCREMENTAL_BRAIN_APPROVED_SUBSTRATE",
+    "opaque_target_model_runtime_cognition": false,
+    "incremental_spend_usd": 0
+  },
+  "submission": {
+    "library_path": "/Project Brain/GDPval/scale/row51/GDPval_row51_WorldCast_GUIDANCE_ON_SPECIAL_REPORTING_SITUATIONS.docx",
+    "library_file_id": "libfile_8f9346691c988191a82f6e0d225c3f27",
+    "sha256": "59eb6d66e7ce1b84e8732534565984fe5409b1abb90ed6cb146480636e4388e0",
+    "format": "docx",
+    "word_count": 2270,
+    "render_page_count": 5
+  },
+  "prompt_requirements_qa": {
+    "exact_title_present": true,
+    "opening_supervisor_escalation_note_present": true,
+    "conflicts_and_combat_section_present": true,
+    "terrorism_section_present": true,
+    "hostage_and_barricade_section_present": true,
+    "protests_demonstrations_section_present": true,
+    "criminal_activity_section_present": true,
+    "victims_section_present": true,
+    "mass_shootings_section_present": true,
+    "suicides_section_present": true,
+    "minors_section_present": true,
+    "dos_and_donts_present_in_every_required_section": true,
+    "word_count_between_2200_and_2300": true,
+    "spj_unicef_newsmanual_icfj_poynter_rcfp_reference_links_present": true,
+    "visual_render_inspected_all_pages": true,
+    "clipping_overlap_or_missing_glyphs_observed": false
+  },
+  "boundary": [
+    "NO_ARTIFICIAL_ANALYSIS_PAIRWISE_RESULT",
+    "NO_OWNER_ELO",
+    "NO_MATCHED_EPOCH_SCORE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ]
+}
