@@ -1,0 +1,103 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_LIBMPF_DIV_SQRT_COMPACT_V66_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__SEMANTIC_EQUIVALENT_DIV_SQRT_COMPRESSION__SPENT_NEXT72_AND_FRESH_NEXT73_PASS__NEXT74_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_LIBMPF_CORE_COMPACT_V65_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "4882aba98c4a135453b4e3d5399ef092689c314c075617cf63f1915a54fe3241",
+    "transform": "canonical/research/bytes/tools/conservative_libmpf_div_sqrt_compact_v66.py",
+    "manifest_sha256": "d1952da89ebbc7a8a925979cbf2ff2f9c4401144b4e657fc84c27c42f6c7994b",
+    "python_files": 277,
+    "raw_python_source_bytes": 1710376,
+    "B_exec_raw_python_source_bytes": 1713136,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v65_bytes": -522,
+    "B_exec_delta_vs_v65_bytes": -522
+  },
+  "selection": {
+    "id": "LIBMPF_DIV_SQRT_SEMANTIC_COMPRESSION_V66",
+    "method": "CONTROL_FLOW_PRESERVING_SOURCE_COMPRESSION__NO_INTENTIONAL_BRANCH_REMOVAL",
+    "changed_body_count": 2,
+    "bodies": [
+      "mpf_div",
+      "mpf_sqrt"
+    ],
+    "deltas": [
+      [
+        "mpf_div",
+        -373
+      ],
+      [
+        "mpf_sqrt",
+        -149
+      ]
+    ],
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "qualification": {
+    "spent_NEXT72": {
+      "id": "QUAL_SUCCESSOR_NEXT72_20261011_V1",
+      "cases": 18400,
+      "corpus_sha256": "9a6238d3cd7fae136b00b2c05dd0bd6f1c637823217c3fe65127b577ba1d858e",
+      "candidate": "18400/18400",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT73": {
+      "id": "QUAL_SUCCESSOR_NEXT73_20261011_V1",
+      "cases": 18630,
+      "corpus_sha256": "8bc82dce85f1c91a60a9d40f10be6742969c3232d8fcf68c7b24755d3f085c2f",
+      "candidate": "18630/18630",
+      "failures": 0,
+      "spent": true
+    },
+    "excluded_noncanonical_probe": {
+      "note": "A same-name noncanonical NEXT72 Library object with SHA-256 b42fbba725b459ee34302eb8ee837c8566f6036673d6508aef6eb09f78df2b33 was executed during identity diagnosis and grants zero qualification credit.",
+      "canonical_next72_identity_bound_by_library_file_id": "libfile_5b057bbf68c88191860c9786ca12805d"
+    }
+  },
+  "reproducibility": {
+    "clean_room_v65_to_v66_reconstruction": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+    "regenerated_manifest_sha256": "d1952da89ebbc7a8a925979cbf2ff2f9c4401144b4e657fc84c27c42f6c7994b",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V66_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_dc885a7e0e9081918d6d74ffc4d9243b",
+    "bytes": 266448,
+    "sha256": "2601c4d6d536858b1698b4052a6798a1f14e079e661136d33c4f04cbe899ff7a"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT74_20261011_V1",
+    "cases": 18860,
+    "seed": 2921432375,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT74_20261011_V1_PIPE_V66_MANIFEST_IDENTITY",
+    "seed_material": "QUAL_SUCCESSOR_NEXT74_20261011_V1|d1952da89ebbc7a8a925979cbf2ff2f9c4401144b4e657fc84c27c42f6c7994b",
+    "per_operation_budget": 1640,
+    "corpus_sha256": "fc163b479ea5a040ccb24a8f9c2554aa8f661258e7d1b16fb7dc1d020984234b",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT74_20261011_V1.jsonl",
+    "library_file_id": "libfile_0f0655cf960c81918df586f6456f7c68",
+    "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0__SERIAL_RNG_PARAMETER_STREAM__PARALLEL_EXPECTED_OUTPUT_EVALUATION__CANONICAL_ROW_REASSEMBLY",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V66 is 1,710,376 raw Python bytes, 522 bytes below V65.",
+    "MEASURED: V66 passes canonical spent NEXT72 18,400/18,400 with zero failures.",
+    "MEASURED: previously untouched canonical NEXT73 passes V66 18,630/18,630 with zero failures.",
+    "MEASURED: clean-room V65-to-V66 reconstruction is 278/278 durable files byte-identical.",
+    "MEASURED: NEXT74 is durably frozen at 18,860 cases and remains unspent.",
+    "INFERRED: the two rewrites are control-flow-preserving source compressions intended to preserve prior semantics; finite qualification is not universal proof for arbitrary Python object classes.",
+    "NOT PROVED: universal SymPy/mpmath equivalence outside the bounded exact-symbolic route.",
+    "NOT PROVED: external second-carrier replay.",
+    "NOT PROMOTED: no capability, acceptance, ownership, quality, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
