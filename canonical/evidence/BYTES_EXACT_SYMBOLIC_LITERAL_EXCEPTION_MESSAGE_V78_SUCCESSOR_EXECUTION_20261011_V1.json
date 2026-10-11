@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_LITERAL_EXCEPTION_MESSAGE_V78_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__LITERAL_EXCEPTION_MESSAGE_COMPACTION__SPENT_NEXT82_AND_FRESH_NEXT83_PASS__NEXT84_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_FAILCLOSED_MESSAGE_V77_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "b03d2329afd48ac7f66fa8c90bd52d1bd454cf15547b67e305fabb2e1fb3111a",
+    "transform": "canonical/research/bytes/tools/conservative_literal_exception_message_compact_v78.py",
+    "manifest_sha256": "02c3ebcef2e0f5e50c0807f03ac65c8715b34d998cf427f93d26d4adb3eb807d",
+    "python_files": 277,
+    "raw_python_source_bytes": 1591715,
+    "B_exec_raw_python_source_bytes": 1594475,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v77_bytes": -1936,
+    "B_exec_delta_vs_v77_bytes": -1936
+  },
+  "selection": {
+    "id": "SINGLE_LITERAL_EXCEPTION_ARGUMENT_COMPACTION_V78",
+    "method": "FOR_RAISE_CALLS_WITH_EXACTLY_ONE_NONEMPTY_LITERAL_STRING_ARGUMENT_AND_NO_KEYWORDS__PRESERVE_CALLEE_EXCEPTION_CLASS_AND_RAISE_POINT__REPLACE_WITH_ZERO_ARGUMENT_CONSTRUCTION__COMPILE_EVERY_TOUCHED_FILE__FULL_SPENT_AND_FRESH_EXECUTION",
+    "replacement_count": 56,
+    "changed_python_file_count": 18,
+    "deleted_source_bytes": 1936,
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "qualification": {
+    "spent_corrected_NEXT82": {
+      "id": "QUAL_SUCCESSOR_NEXT82_20261011_V1",
+      "cases": 20700,
+      "corpus_sha256": "a50d77134ca612abaa96a015c055d1a59b9d19f8688d2014dd10ba3a7fa7d71f",
+      "candidate": "20700/20700",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT83": {
+      "id": "QUAL_SUCCESSOR_NEXT83_20261011_V1",
+      "cases": 20930,
+      "corpus_sha256": "31fa9c3a1bde80da7ba8928f784ada57f9761241a938bf9bb7551ebb0d9bb8b8",
+      "candidate": "20930/20930",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "clean_room_v77_to_v78_reconstruction": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+    "regenerated_manifest_sha256": "02c3ebcef2e0f5e50c0807f03ac65c8715b34d998cf427f93d26d4adb3eb807d",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V78_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_cc068ef59d408191aa96211c0e5b3ec3",
+    "bytes": 264484,
+    "sha256": "c3b5035f970d7e0d05f85ab15f4ce5d90061464e894c7477f1e7c609a5348ba6"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT84_20261011_V1",
+    "cases": 21160,
+    "seed": 1069298070,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT84_20261011_V1_PIPE_V78_MANIFEST_IDENTITY",
+    "seed_material": "QUAL_SUCCESSOR_NEXT84_20261011_V1|02c3ebcef2e0f5e50c0807f03ac65c8715b34d998cf427f93d26d4adb3eb807d",
+    "per_operation_budget": 1840,
+    "corpus_sha256": "af216fee46b5759e69726fe8d5281cf27745a56a33baa72bc0683ef217a5506b",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT84_20261011_V1(1).jsonl",
+    "library_file_id": "libfile_b9c8c0cf0d28819195038d9f44e15237",
+    "generation_provenance": "CORRECTED_CANONICAL_GENERATOR_PARAMETER_STREAM__20700_OF_20700_NEXT82_CROSSCHECK__SINGULAR_LINEAR_SOLVE_CONTROL_FLOW_PRESERVED__STOCK_SYMPY_1_14_0_MPMATH_1_3_0_EXPECTED_OUTPUTS__64_SHARD_CANONICAL_REASSEMBLY",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V78 is 1,591,715 raw Python-source bytes, 1,936 bytes below V77.",
+    "MEASURED: 56 single-literal exception argument constructions across 18 files were compacted while preserving callee exception class and raise point.",
+    "MEASURED: V78 passes corrected NEXT82 20,700/20,700 with zero failures.",
+    "MEASURED: previously untouched NEXT83 passes V78 20,930/20,930 with zero failures.",
+    "MEASURED: clean-room V77-to-V78 reconstruction is 278/278 durable files byte-identical.",
+    "MEASURED: V78-derived NEXT84 is durably frozen at 21,160 cases and remains unspent.",
+    "NOT PROVED: external exception-message/introspection equivalence outside the bounded exact-symbolic route.",
+    "NOT PROVED: external second-carrier replay.",
+    "NOT PROMOTED: no capability, acceptance, ownership, professional, quality, promotion, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "professional_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
