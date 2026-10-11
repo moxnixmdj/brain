@@ -1,0 +1,119 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_LIBMPF_SEMANTIC_COMPACT_V61_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__SEMANTIC_EQUIVALENT_COMPRESSION__SPENT_NEXT67_AND_FRESH_NEXT68_PASS__NEXT69_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_REPAIRED_V60_SUCCESSOR_EXECUTION_20261011_V2.json",
+    "predecessor_manifest_sha256": "6ab3ad3366fe10d0d081784d61838d097eac1c242cee729453d78d48ede5033e",
+    "transform": "canonical/research/bytes/tools/conservative_libmpf_semantic_compact_v61.py",
+    "manifest_sha256": "fd5c28fdb77149e30887c68e498580f6f630aba8857ae98e1f53975489d9b6f5",
+    "python_files": 277,
+    "raw_python_source_bytes": 1712858,
+    "B_exec_raw_python_source_bytes": 1715618,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v60_bytes": -232,
+    "B_exec_delta_vs_v60_bytes": -232
+  },
+  "selection": {
+    "id": "LIBMPF_SIX_FUNCTION_SEMANTIC_COMPRESSION_V61",
+    "method": "ALGEBRAIC_FULL_SEMANTICS_COMPRESSION__NO_INTENTIONAL_BRANCH_REMOVAL",
+    "changed_body_count": 6,
+    "bodies": [
+      "mpf_shift",
+      "mpf_pos",
+      "to_fixed",
+      "mpf_le",
+      "mpf_ge",
+      "repr_dps"
+    ],
+    "deltas": [
+      [
+        "mpf_shift",
+        -37
+      ],
+      [
+        "mpf_pos",
+        -31
+      ],
+      [
+        "to_fixed",
+        -119
+      ],
+      [
+        "mpf_le",
+        -15
+      ],
+      [
+        "mpf_ge",
+        -15
+      ],
+      [
+        "repr_dps",
+        -15
+      ]
+    ],
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "qualification": {
+    "spent_NEXT67": {
+      "id": "QUAL_SUCCESSOR_NEXT67_20261011_V1",
+      "cases": 17250,
+      "corpus_sha256": "aab6e4fb65f266211585f9d60c88c3dcc2834ca832d91c50357edd7bd2ac20be",
+      "candidate": "17250/17250",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT68": {
+      "id": "QUAL_SUCCESSOR_NEXT68_20261011_V1",
+      "cases": 17480,
+      "corpus_sha256": "ee4eb1b62ce24c1c31e39c19585ce5a04e01fc6099b88c65a7530840a6c15e70",
+      "candidate": "17480/17480",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "clean_room_v60_to_v61_reconstruction": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+    "regenerated_manifest_sha256": "fd5c28fdb77149e30887c68e498580f6f630aba8857ae98e1f53975489d9b6f5",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V61_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_f20cfb5ef2f881919722857bd2e45804",
+    "bytes": 267344,
+    "sha256": "0ab1dabc03a7dd5e5ee3cc984709125ebdef55aa3260bebeb2f09a8b6faf0c8a"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT69_20261011_V1",
+    "cases": 17710,
+    "seed": 788961595,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT69_20261011_V1_PIPE_V61_MANIFEST_IDENTITY",
+    "seed_material": "QUAL_SUCCESSOR_NEXT69_20261011_V1|fd5c28fdb77149e30887c68e498580f6f630aba8857ae98e1f53975489d9b6f5",
+    "per_operation_budget": 1540,
+    "corpus_sha256": "4021417dacd37954e8890c6d90bf82b3203d1e2c2ed5dc65bd4bb2d337afb7e7",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT69_20261011_V1.jsonl",
+    "library_file_id": "libfile_d20cccd153bc8191871cd3d5deb4c52b",
+    "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0__SERIAL_RNG_PARAMETER_STREAM__PARALLEL_EXPECTED_OUTPUT_EVALUATION__CANONICAL_ROW_REASSEMBLY",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V61 is 1,712,858 raw Python bytes, 232 bytes below V60.",
+    "MEASURED: V61 passes spent NEXT67 17,250/17,250 with zero failures.",
+    "MEASURED: previously untouched NEXT68 passes V61 17,480/17,480 with zero failures.",
+    "MEASURED: clean-room V60-to-V61 reconstruction is 278/278 durable files byte-identical.",
+    "MEASURED: NEXT69 is durably frozen at 17,710 cases and remains unspent.",
+    "INFERRED: the six rewrites are algebraic compressions intended to preserve their previous function semantics; finite qualification is not a universal proof for all Python object classes.",
+    "NOT PROVED: universal SymPy/mpmath equivalence outside the bounded exact-symbolic route.",
+    "NOT PROVED: external second-carrier replay.",
+    "NOT PROMOTED: no capability, acceptance, ownership, quality, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
