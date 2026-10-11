@@ -285,12 +285,36 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         self.assertFalse(current["activation_observed_blob_is_load_bearing"])
         self.assertNotIn("git_blob_sha", current)
 
+        drifted = []
         for source_id, row in policy["sources"].items():
             source = ROOT / row["path"]
             self.assertTrue(source.is_file(), row["path"])
             if source_id == "current_r2":
                 continue
-            self.assertEqual(_git_blob_sha(source), row["git_blob_sha"], row["path"])
+            actual = _git_blob_sha(source)
+            if actual != row["git_blob_sha"]:
+                drifted.append(
+                    {
+                        "path": row["path"],
+                        "policy_git_blob_sha": row["git_blob_sha"],
+                        "current_git_blob_sha": actual,
+                    }
+                )
+        self.assertEqual(
+            pointer["scalar_fallback_state"],
+            "BLOCKED_R2_POLICY_SOURCE_LOCK_DRIFT__PRIMARY_V16_ACTIVE",
+        )
+        self.assertEqual(
+            pointer["r2_mechanism_policy"]["currentness_state"],
+            "FAIL_CLOSED_IMMUTABLE_SOURCE_DRIFT",
+        )
+        self.assertEqual(
+            sorted(drifted, key=lambda row: row["path"]),
+            sorted(
+                pointer["r2_mechanism_policy"]["drifted_sources"],
+                key=lambda row: row["path"],
+            ),
+        )
 
         r2 = json.loads(
             (ROOT / "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json").read_text()
