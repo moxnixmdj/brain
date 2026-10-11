@@ -32,13 +32,13 @@ def test_agent_binds_screenshot_and_history():
     seen = []
     def policy(state):
         seen.append(state)
-        return {"response": "done", "actions": [{"type": "DONE"}]}
+        return {"response": "wait", "actions": [{"type": "WAIT"}]}
 
     agent = BrainOSWorldAgent(policy, policy_id="test-policy")
     agent.reset()
     response, actions = agent.predict("finish the task", {"screenshot": b"image-bytes"})
-    assert response == "done"
-    assert actions == ["DONE"]
+    assert response == "wait"
+    assert actions == ["WAIT"]
     assert len(seen) == 1
     assert seen[0]["instruction"] == "finish the task"
     assert len(seen[0]["screenshot_sha256"]) == 64
@@ -194,3 +194,64 @@ def test_state_ops_execute_host_side_and_receipt_returns_to_next_cycle():
     _, actions2 = agent.predict("write file", {"screenshot": b"two"})
     assert actions2 == ["DONE"]
     assert seen[-1]["history"][-1]["guest_result"]["ok"] is True
+
+
+def test_done_first_cycle_is_rejected_into_recovery():
+    agent = BrainOSWorldAgent(
+        lambda _state: {"response": "done", "actions": [{"type": "DONE"}]},
+        policy_id="finish-guard",
+        browser_controller=_FakeBrowser(),
+        guest_controller=_FakeGuest(),
+    )
+    response, actions = agent.predict("do work", {"screenshot": b"same"})
+    assert response == "done"
+    assert actions == ["WAIT"]
+    assert "DONE_WITHOUT_PRIOR_OBSERVED_ACTION" in agent.history[-1]["operation_error"]
+
+
+def test_done_after_unchanged_gui_state_is_rejected():
+    calls = {"n": 0}
+    def policy(_state):
+        calls["n"] += 1
+        if calls["n"] == 1:
+            return {"response": "click", "actions": [{"type": "CLICK", "x": 10, "y": 10}]}
+        return {"response": "done", "actions": [{"type": "DONE"}]}
+
+    agent = BrainOSWorldAgent(
+        policy,
+        policy_id="finish-guard-gui",
+        browser_controller=_FakeBrowser(),
+        guest_controller=_FakeGuest(),
+    )
+    _, first = agent.predict("click then finish", {"screenshot": b"same"})
+    assert first == ["pyautogui.click(10, 10)"]
+    _, second = agent.predict("click then finish", {"screenshot": b"same"})
+    assert second == ["WAIT"]
+    assert "DONE_WITHOUT_OBSERVABLE_STATE_CHANGE" in agent.history[-1]["operation_error"]
+
+
+def test_done_after_receipted_state_verification_is_allowed():
+    calls = {"n": 0}
+    guest = _FakeGuest()
+    def policy(_state):
+        calls["n"] += 1
+        if calls["n"] == 1:
+            return {
+                "response": "verify",
+                "actions": [{
+                    "type": "STATE_OPS",
+                    "ops": [{"type": "ASSERT_PATH_EXISTS", "path": "/home/oai/share/a.txt"}],
+                }],
+            }
+        return {"response": "done", "actions": [{"type": "DONE"}]}
+
+    agent = BrainOSWorldAgent(
+        policy,
+        policy_id="finish-guard-receipt",
+        browser_controller=_FakeBrowser(),
+        guest_controller=guest,
+    )
+    _, first = agent.predict("verify then finish", {"screenshot": b"same"})
+    assert first == ["WAIT"]
+    _, second = agent.predict("verify then finish", {"screenshot": b"same"})
+    assert second == ["DONE"]
