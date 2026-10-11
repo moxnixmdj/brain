@@ -1,0 +1,99 @@
+name: Full private current-main regression
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/full-private-current-main-regression.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  full-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Record exact subject
+        run: |
+          mkdir -p /tmp/brain-regression
+          git rev-parse HEAD | tee /tmp/brain-regression/subject_sha.txt
+          python --version | tee /tmp/brain-regression/python_version.txt
+
+      - name: Compile assurance and professional load-bearing runtimes
+        run: |
+          python -m py_compile             canonical/runtime/assurance_closure_compiler_v1.py             canonical/runtime/assurance_closure_reference_checker_v1.py             canonical/runtime/assurance_closure_adversary_v1.py             canonical/runtime/professional_semantic_v10_totality_compiler_v1.py
+
+      - name: Full private current-main full-system regression
+        id: full
+        shell: bash
+        run: |
+          set +e
+          python -m pytest -q canonical/tests             --disable-warnings             > /tmp/brain-regression/pytest.txt 2>&1
+          rc=$?
+          printf '%s\n' "$rc" | tee /tmp/brain-regression/pytest_rc.txt
+          tail -n 250 /tmp/brain-regression/pytest.txt
+          exit "$rc"
+
+      - name: Focused assurance differential replay
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          python -m unittest             canonical.tests.test_assurance_closure_compiler_v1             canonical.tests.test_assurance_closure_independent_adversary_v1             -v > /tmp/brain-regression/assurance.txt 2>&1
+          rc=$?
+          printf '%s\n' "$rc" > /tmp/brain-regression/assurance_rc.txt
+          tail -n 100 /tmp/brain-regression/assurance.txt
+          exit "$rc"
+
+      - name: Build regression receipt
+        if: always()
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib, json, pathlib, subprocess
+          root=pathlib.Path("/tmp/brain-regression")
+          def read(name):
+              p=root/name
+              return p.read_text(errors="replace") if p.exists() else ""
+          sha=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
+          pytest_out=read("pytest.txt")
+          assurance_out=read("assurance.txt")
+          pytest_rc=int((read("pytest_rc.txt") or "999").strip())
+          assurance_rc=int((read("assurance_rc.txt") or "999").strip())
+          receipt={
+            "schema":"PROJECT_BRAIN_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION_V1",
+            "subject_commit_sha":sha,
+            "python_version":read("python_version.txt").strip(),
+            "full_pytest_command":"python -m pytest -q canonical/tests --disable-warnings",
+            "pytest_returncode":pytest_rc,
+            "pytest_output_sha256":hashlib.sha256(pytest_out.encode()).hexdigest(),
+            "pytest_tail":pytest_out[-12000:],
+            "assurance_command":"python -m unittest canonical.tests.test_assurance_closure_compiler_v1 canonical.tests.test_assurance_closure_independent_adversary_v1 -v",
+            "assurance_returncode":assurance_rc,
+            "assurance_output_sha256":hashlib.sha256(assurance_out.encode()).hexdigest(),
+            "assurance_tail":assurance_out[-6000:],
+            "full_private_current_main_regression_pass":pytest_rc==0 and assurance_rc==0,
+            "quality_authority":False,
+            "acceptance_authority":False,
+            "terminal_authority":False
+          }
+          (root/"receipt.json").write_text(json.dumps(receipt,indent=2,sort_keys=True)+"\n")
+          print(json.dumps({k:v for k,v in receipt.items() if k not in {"pytest_tail","assurance_tail"}},sort_keys=True))
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: full-private-current-main-regression
+          path: /tmp/brain-regression/
+          if-no-files-found: error
