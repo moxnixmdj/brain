@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_SCIENTIFIC_ARTIFACT_CONTRACT_V1_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__TWO_ENVIRONMENT_PRIVATE_CLEAN_ROOM_REPLAY__DECLARED_ARTIFACT_SCOPE",
+  "subject": {
+    "runtime_path": "canonical/runtime/scientific_artifact_contract_v1.py",
+    "runtime_git_blob_sha": "ada3a42ddce7e6d899cfb9a8fc2c56049e0de583",
+    "test_path": "canonical/tests/test_scientific_artifact_contract_v1.py",
+    "test_git_blob_sha": "af946f34bb92d541e850a9523e485524e2004f39"
+  },
+  "verification": {
+    "environment_1": {
+      "sprite": "brain-canonical-apply-slice-verify-20261011-v1",
+      "tests_run": 6,
+      "tests_passed": 6
+    },
+    "environment_2": {
+      "sprite": "brain-live-runtime-v1-verify-20261008",
+      "tests_run": 6,
+      "tests_passed": 6
+    },
+    "exact_runtime_blob_replayed": true,
+    "exact_test_blob_replayed": true
+  },
+  "verified_scope": [
+    "VERIFIED_RESULT_TO_DECLARED_JSON_BYTES",
+    "VERIFIED_RESULT_TO_DECLARED_CSV_BYTES",
+    "VERIFIED_RESULT_TO_DECLARED_MARKDOWN_BYTES",
+    "SAFE_RELATIVE_OUTPUT_PATH_ENFORCEMENT",
+    "SHA256_BOUND_ATOMIC_WRITE_AND_READBACK",
+    "MISSING_FIELD_DUPLICATE_PATH_AND_UNVERIFIED_SOURCE_FAIL_CLOSED"
+  ],
+  "ownership": {
+    "model_dependency_count": 0,
+    "external_model_runtime_calls": 0,
+    "network_dependency_count": 0,
+    "dynamic_code_execution": false
+  },
+  "hard_nonclaims": [
+    "NO_RAW_TASK_SEMANTIC_UNDERSTANDING_CLAIM",
+    "NO_OUTPUT_SCHEMA_INVENTION_CLAIM",
+    "NO_BENCHMARK_SCORE_CLAIM",
+    "NO_TERMINAL_AUTHORITY"
+  ],
+  "acceptance_credit_delta": 0,
+  "benchmark_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "execution_authority": false,
+  "activation_authority": false
+}
