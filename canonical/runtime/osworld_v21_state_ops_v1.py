@@ -200,6 +200,19 @@ def _compile_op(op: Mapping[str, Any]) -> str:
             f"assert _got=={text!r}, 'TEXT_MISMATCH'; print('ASSERT_TEXT_EQUALS:PASS:{p}')"
         )
 
+    if kind == "ASSERT_TEXT_CONTAINS":
+        p = _path(op.get("path"))
+        text = op.get("text")
+        if not isinstance(text, str) or not text:
+            raise StateOpsError("ASSERT_TEXT_CONTAINS_TEXT_REQUIRED")
+        if len(text.encode("utf-8")) > MAX_TEXT_BYTES:
+            raise StateOpsError("ASSERT_TEXT_CONTAINS_TEXT_TOO_LARGE")
+        return (
+            f"_p=pathlib.Path({p!r}); _got=_p.read_text(encoding='utf-8'); "
+            f"assert {text!r} in _got, 'TEXT_NOT_CONTAINED'; "
+            f"print('ASSERT_TEXT_CONTAINS:PASS:{p}')"
+        )
+
     if kind == "SHA256_FILE":
         p = _path(op.get("path"))
         return (
