@@ -578,7 +578,6 @@ def _candidate_rows(
                 action_id=aid,
                 reason="COVERS_INVALID",
                 error_type=type(exc).__name__,
-                validation_error_code=_candidate_validation_error_code(exc),
                 error_sha256=hashlib.sha256(
                     str(exc).encode("utf-8", "replace")
                 ).hexdigest(),
@@ -664,6 +663,7 @@ def _candidate_rows(
                 action_id=aid,
                 reason="CANDIDATE_FIELD_OR_COMMAND_INVALID",
                 error_type=type(exc).__name__,
+                validation_error_code=_candidate_validation_error_code(exc),
                 error_sha256=hashlib.sha256(
                     str(exc).encode("utf-8", "replace")
                 ).hexdigest(),
