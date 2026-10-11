@@ -244,14 +244,49 @@ def invent(rows:Sequence[LabeledRow])->dict[str,Any]:
         for c in behavior_classes
     ]
     class_by_id={c["class_id"]:c for c in behavior_classes}
-    examples=[]
+    pattern_label={}
+    compressed_rows=[]
     for row_index,row in enumerate(population):
         facts=frozenset(
             c["class_id"]
             for c in behavior_classes
             if c["signature"][row_index]
         )
-        examples.append(RuleExample(row.row_id,facts,row.positive,{"observation_id":row.row_id}))
+        if facts in pattern_label and pattern_label[facts]!=row.positive:
+            return {
+                "schema":SCHEMA,
+                "status":"NO_SYNTHESIZED_DISCRIMINATOR",
+                "reason":"IDENTICAL_PREDICATE_FACTS_HAVE_OPPOSITE_LABELS",
+                "predicate_frontier_complete":frontier_complete,
+                "predicate_count":len(informative),
+                "predicate_behavior_class_count":len(behavior_classes),
+                "population_full_replay_verified":False,
+                "terminal_authority":False,
+            }
+        pattern_label[facts]=row.positive
+        key=(facts,row.positive)
+        if not any(existing[0]==key for existing in compressed_rows):
+            compressed_rows.append((key,row.row_id))
+
+    if len(compressed_rows)>128:
+        return {
+            "schema":SCHEMA,
+            "status":"SEARCH_BOUND_EXCEEDED",
+            "reason":"COMPRESSED_EXAMPLE_PATTERN_COUNT_EXCEEDS_G0_BOUND",
+            "compressed_example_count":len(compressed_rows),
+            "max_examples":128,
+            "terminal_authority":False,
+        }
+
+    examples=[
+        RuleExample(
+            row_id,
+            facts,
+            positive,
+            {"observation_id":row_id},
+        )
+        for ((facts,positive),row_id) in compressed_rows
+    ]
 
     result=synthesize_minimal_conjunctive_rule(
         predicates=specs,
