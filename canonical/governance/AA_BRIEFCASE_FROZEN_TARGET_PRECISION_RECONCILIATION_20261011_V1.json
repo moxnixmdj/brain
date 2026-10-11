@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_FROZEN_TARGET_PRECISION_RECONCILIATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_REFERENCE_PRECISION_RECONCILED__OWNER_MEASURED_1821_85_ROUNDS_TO_VENDOR_1822__LITERAL_BRAIN_THRESHOLD_STAYS_1822__ZERO_CREDIT",
+  "target_predicate": "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+  "authorities": {
+    "new_frozen_owner_row": "canonical/evidence/AA_BRIEFCASE_FROZEN_OWNER_NATIVE_ROW_20261011_V1.json",
+    "prior_comparator_reconciliation": "canonical/governance/AA_BRIEFCASE_OPUS55_COMPARATOR_PROVENANCE_RECONCILIATION_V1.json",
+    "frozen_target_tuple": "canonical/governance/OPUS55_SCORE_TARGET_TUPLE_BINDINGS_20261005_V1.json"
+  },
+  "reconciliation": {
+    "target_day": "2026-09-22",
+    "owner_measured_unrounded_elo": 1821.85,
+    "vendor_displayed_integer": 1822,
+    "vendor_precision_relation": "ROUND_TO_NEAREST_INTEGER",
+    "owner_and_vendor_rows_same_under_vendor_printed_precision": true,
+    "canonical_acceptance_threshold": 1822,
+    "threshold_changed": false
+  },
+  "logical_effect": [
+    "THE_REFERENCE_ORIGIN_OF_1822_IS_NOW_BOUND_TO_A_TARGET_DAY_ARTIFICIAL_ANALYSIS_MEASURED_ROW_RATHER_THAN_ONLY_VENDOR_PRINTED_PRECISION.",
+    "DIRECT_OPUS_NONINFERIORITY_AT_THE_UNROUNDED_REFERENCE_IS_A_DISTINCT_STATEMENT_FROM_THE_LITERAL_CANONICAL_PREDICATE_BRAIN_ELO_GE_1822.",
+    "A_BRAIN_RESULT_IN_[1821.85,1822)_WOULD_BE_AT_LEAST_THE_UNROUNDED_OPUS_REFERENCE_BUT_WOULD_NOT_SATISFY_THE_LITERAL_GE_1822_PREDICATE.",
+    "NO_THRESHOLD_RELAXATION_IS_AUTHORIZED."
+  ],
+  "hard_nonclaims": [
+    "NO_BRAIN_SCORE",
+    "NO_CLAIM_UNROUNDED_OPUS_NONINFERIORITY_ALONE_CLOSES_THE_TARGET",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}

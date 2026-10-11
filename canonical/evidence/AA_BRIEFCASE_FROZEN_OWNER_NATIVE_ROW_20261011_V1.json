@@ -1,0 +1,91 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_FROZEN_OWNER_NATIVE_ROW_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_DAY_OWNER_NATIVE_RESULT_ROW_BOUND_FROM_PUBLIC_HASHED_ARCHIVE__TARGET_1822_PRESERVED__ZERO_BRAIN_SCORE_CREDIT",
+  "mission_lock": "PROVE_AA_BRIEFCASE_V1_1_BRAIN_ELO_GE_1822_ONLY",
+  "target": {
+    "canonical_threshold": 1822,
+    "threshold_preserved": true,
+    "interpretation": "LITERAL_CANONICAL_ACCEPTANCE_BAR_REMAINS_1822__THIS_ARTIFACT_DOES_NOT_LOWER_IT_TO_THE_UNROUNDED_REFERENCE"
+  },
+  "archive": {
+    "repository": "fstandhartinger/model-market-comparison",
+    "ingest_commit": "eb64ebfe60ba2c4e1ecba14c76aed5cf0cde8de0",
+    "ingest_commit_time_utc": "2026-09-22T23:53:56Z",
+    "ingest_commit_message": "CR-128 batch 1: ingest Opus 5.5 scores",
+    "observation_path": "data/raw/benchmarks/manual-board-observations.json",
+    "source_capture_path": "data/raw/benchmarks/daily-evidence/2026-09-22-cr128-third-party/d8fae69000dc9c763a16.gz",
+    "source_capture_git_blob_sha": "427f063e1a97f29b0244f191156705e4075d4577",
+    "source_body_sha256": "d8fae69000dc9c763a16b987995f00530de80a84ed1a0ea92cd4750efc45ccbf",
+    "source_url": "https://artificialanalysis.ai/models/claude-opus-5-5",
+    "retrieved_at": "2026-09-22T22:47:41.526299+00:00"
+  },
+  "exact_measured_row": {
+    "benchmark_id": "aa-briefcase::1.1",
+    "subject_source_id": "2f3c4dc9-a450-4303-8697-0237257cf08f",
+    "subject_name": "Claude Opus 5.5 (max with fallback) [claude-opus-5-5]",
+    "subject_model_id": "claude-opus-5-5::max",
+    "variant": "max",
+    "basis": "measured",
+    "unit": "Elo",
+    "value": 1821.85,
+    "source_locator": "AA-Briefcase v1.1; Claude Opus 5.5 (max with fallback) [claude-opus-5-5]; exact source excerpt: {\"slug\":\"aa-briefcase\",\"score\":1821.85}"
+  },
+  "frozen_day_primary_capture_breakdown": {
+    "overall_elo": 1821.85,
+    "rubric_pass_rate": 0.6121212121212121,
+    "analytical_quality_elo": 2206.92,
+    "presentation_elo": 1709.91,
+    "briefcase_total_cost_usd": 1915.1835171249377,
+    "release_date": "2026-09-22",
+    "extracted_from_same_hashed_capture": true
+  },
+  "integer_vendor_relation": {
+    "vendor_printed_value": 1822,
+    "exact_owner_measured_value": 1821.85,
+    "same_number_under_vendor_printed_precision": true,
+    "archive_test_path": "test/f165a-vendor-reprint.test.mjs",
+    "archive_test_rule": "sameNumber(1822, 1821.85) == true",
+    "later_rescore_note": "Archive test records Artificial Analysis re-scored max on 2026-10-03 from 1821.85 to 1807.81; after that the vendor 1822 row correctly ceased being treated as the same measured result."
+  },
+  "raw_page_exhaustion": {
+    "exact_subject_object_key_count": 137,
+    "exact_subject_object_contains_trace_like_keys": false,
+    "absent_trace_key_classes": [
+      "JUDGE_ASSIGNMENTS",
+      "PAIRWISE_MATCH_ROWS",
+      "CROWD_BT_ETA_STATE",
+      "TASK_IDS",
+      "RUBRIC_ITEMS",
+      "VERDICTS"
+    ],
+    "note": "The exact frozen-day model object exposes score summaries and telemetry, not the complete score-bearing trace."
+  },
+  "consequence": {
+    "newly_closed": [
+      "FROZEN_DAY_UNROUNDED_OWNER_MEASURED_REFERENCE_VALUE",
+      "FROZEN_DAY_REFERENCE_COMPONENT_VECTOR",
+      "ROUNDING_RELATION_BETWEEN_OWNER_1821_85_AND_VENDOR_1822"
+    ],
+    "still_open": [
+      "BRAIN_OFFICIAL_OR_EQUIVALENT_SCORE_BEARING_TRACE",
+      "BRAIN_AA_BRIEFCASE_ELO_GE_1822",
+      "COMPLETE_REFERENCE_BRAIN_SCORE_TRACE_EQUIVALENCE",
+      "OWNER_SCORER_IMPLEMENTATION_EQUIVARIANCE_OR_UNIQUE_FIT"
+    ],
+    "target_effect": "REFERENCE_SIDE_PROVENANCE_STRENGTHENED_ONLY__NO_BRAIN_SCORE_CREATED"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_1821_85_REPLACES_THE_CANONICAL_1822_ACCEPTANCE_THRESHOLD",
+    "NO_CLAIM_THE_ARCHIVE_IS_AN_ARTIFICIAL_ANALYSIS_CRYPTOGRAPHIC_SIGNATURE",
+    "NO_CLAIM_THE_PUBLIC_PAGE_CONTAINS_THE_PRIVATE_91_TASK_TRACE",
+    "NO_BRAIN_AA_BRIEFCASE_SCORE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
