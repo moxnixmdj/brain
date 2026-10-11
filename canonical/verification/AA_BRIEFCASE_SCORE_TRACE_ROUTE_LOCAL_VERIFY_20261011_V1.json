@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_SCORE_TRACE_ROUTE_LOCAL_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__15_OF_15__SCORE_TRACE_SUFFICIENCY_AND_INTERNAL_GATE_V2__ZERO_SCORE_CREDIT",
+  "subject": {
+    "theorem": {
+      "path": "canonical/governance/AA_BRIEFCASE_SCORE_BEARING_SUFFICIENT_STATISTIC_THEOREM_20261011_V1.json",
+      "git_blob_sha": "91e3ddda88f89af862faadf3e31c2022e87e5181"
+    },
+    "runtime": {
+      "path": "canonical/runtime/aa_briefcase_score_bearing_sufficient_statistic_v1.py",
+      "git_blob_sha": "4b5e4292c2051e263da8dbd3a9758f461250d6f0"
+    },
+    "tests": {
+      "path": "canonical/tests/test_aa_briefcase_score_bearing_sufficient_statistic_v1.py",
+      "git_blob_sha": "ee593e7d3ff01330d17dde0e9299d915eb09dae0"
+    },
+    "gate_v2": "canonical/runtime/aa_briefcase_internal_only_certification_gate_v2.py",
+    "gate_v2_tests": "canonical/tests/test_aa_briefcase_internal_only_certification_gate_v2.py"
+  },
+  "local_replay": {
+    "total_checks": 15,
+    "passed": 15,
+    "failed": 0,
+    "score_trace_checks": 8,
+    "gate_v2_checks": 7
+  },
+  "verified_truths": [
+    "COMPLETE_SCORE_BEARING_TRACE_IS_A_SUFFICIENT_SCORER_INPUT_OBJECT_ONCE_ALL_PUBLICLY_SCORE_BEARING_GRADING_AND_FIT_STATE_IS_BOUND",
+    "ORIGINAL_PRIVATE_TASK_TEXT_SOURCE_BYTES_AND_ARTIFACT_BYTES_HAVE_NO_ADDITIONAL_DIRECT_SCORER_INPUT_AFTER_COMPLETE_TRACE_IS_BOUND",
+    "CROWD_BT_OBJECTIVE_IS_MATHEMATICALLY_EQUIVARIANT_UNDER_MODEL_LABEL_PERMUTATION_THAT_FIXES_THE_ANCHOR",
+    "ARGMAX_SET_EQUIVARIANCE_DOES_NOT_BY_ITSELF_PROVE_OWNER_IMPLEMENTATION_OUTPUT_EQUIVARIANCE_WHEN_FIT_CAN_BE_NONUNIQUE_OR_INITIALIZATION_SENSITIVE",
+    "V2_GATE_REPORTS_SCORE_TRACE_ROUTE_PREMISES_SEPARATELY",
+    "V2_GATE_REPORTS_TOP_SUPPORT_ROUTE_PREMISES_SEPARATELY"
+  ],
+  "current_projection": {
+    "score_trace_route": {
+      "proved": [
+        "SCORE_BEARING_SUFFICIENT_STATISTIC",
+        "FROZEN_REFERENCE_1822"
+      ],
+      "missing": [
+        "COMPLETE_REFERENCE_CANDIDATE_SCORE_BEARING_TRACE_EQUIVALENCE",
+        "SCORER_IMPLEMENTATION_EQUIVARIANCE_OR_UNIQUE_FIT"
+      ],
+      "substantive_missing_count": 2
+    },
+    "top_support_route": {
+      "proved": [
+        "COMPLETE_OUTCOME_SUPERDOMAIN"
+      ],
+      "missing": [
+        "SOUND_MATERIAL_ORDER",
+        "BRAIN_GLOBAL_TOP_SUPPORT",
+        "HIDDEN_EVALUATOR_MONOTONICITY",
+        "FROZEN_1822_SCORE_MONOTONICITY"
+      ],
+      "substantive_missing_count": 4
+    }
+  },
+  "hard_nonclaims": [
+    "NO_PRIVATE_REFERENCE_SCORE_TRACE_RECOVERED",
+    "NO_BRAIN_SCORE_TRACE_EQUIVALENCE_PROVED",
+    "NO_OWNER_SCORER_CODE_OR_UNIQUE_FIT_PROVED",
+    "NO_AA_BRIEFCASE_1822_SCORE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
