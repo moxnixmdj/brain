@@ -32,7 +32,7 @@
     "primary_entrypoint": "plan_current_post_composition_frontier",
     "scalar_fallback_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
     "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V15__PROFESSIONAL_24_OF_24__CHECKPOINT_ROWS_ALL_WAKE_GATED__GITHUB_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__0_SAME_INFORMATION_CHECKPOINT_RUNS__CAPABILITY_FIRST_PRIMARY__ZERO_GLOBAL_CREDIT",
-    "observed_git_blob_sha": "d767f794c23b30f3826bc8d2a76a037174f0f797",
+    "observed_git_blob_sha": "7ba238820c621160a8b92dfbeaee92598e459a1c",
     "semantic_reuse_policy": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V4.json",
     "semantic_reuse_policy_git_blob_sha": "f08fd90474aa38f89db171c70e10a6d47e6d7ec5",
     "verified_improvement_loop": "canonical/governance/VERIFIED_IMPROVEMENT_LOOP_V2_ACTIVATION_20261011_V1.json",
@@ -58,7 +58,7 @@
   },
   "current_parallel_frontier_control": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "observed_git_blob_sha": "8a5d515fa0fd706c610b5ce7443810647bcda07f",
+    "observed_git_blob_sha": "0179caf6f2271ea4b5c822143d85342d05e8fc97",
     "status": "CURRENT_PROFESSIONAL_24_OF_24__FULL_PRIVATE_REGRESSION_GATE_OPEN__GITHUB_HOSTED_ACTIONS_BILLING_OR_SPENDING_LIMIT_PRESTART_BLOCK__12_CHECKPOINT_ROWS_WAKE_GATED__CAPABILITY_FIRST_AND_RESOURCE_PARETO_WORK_PRIMARY__ZERO_CREDIT",
     "binding": "MUTABLE_CURRENT_PATH_IDENTITY__SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_PROJECTIONS_REFRESHED_AT_CALL_TIME__OTHER_SOURCE_DRIFT_FAILS_CLOSED",
     "snapshot_is_runtime_authority_for_supported_dynamic_families": false
@@ -245,12 +245,12 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "1ca06da1c13dd9819f1576f64945db0c7a88f095",
-    "status": "ACTIVE_RESEARCH__PROOF_EQUIVALENT_COMMENT_STRIP_V75_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1616922,
-    "B_exec_raw_python_source_bytes": 1619682,
-    "qualification": "20470/20470__TRANSFERRED_BY_STRONG_EXECUTABLE_EQUIVALENCE",
-    "next": "Rerank exact V75 using inherited spent NEXT81 under strong executable equivalence; make a new physical cut before touching corrected QUAL_SUCCESSOR_NEXT82_20261011_V1.",
+    "observed_git_blob_sha": "6fc3b5b57770a5d463351c4fc86b705b84c4d710",
+    "status": "ACTIVE_RESEARCH__DOCSTRING_STRIP_V76_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1615553,
+    "B_exec_raw_python_source_bytes": 1618313,
+    "qualification": "20700/20700__TRANSFERRED_BY_EXECUTABLE_EQUIVALENCE",
+    "next": "Rerank exact V76 using spent corrected NEXT82 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT83_20261011_V1.",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   },
@@ -265,9 +265,9 @@
   },
   "capability_frontier_currentness_reconciliation": {
     "path": "canonical/governance/CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1.json",
-    "observed_git_blob_sha": "e927c65fbd9d2e49950479777346ed9b13986e59",
-    "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__ESCAPE_WAKE_GATED__BYTES_V75_READY__R2_V91_WAKE_GATED__TB_CURRENT_PATH_DYNAMIC__ZERO_CREDIT",
-    "next": "RERANK_EXACT_V75_USING_INHERITED_SPENT_NEXT81_UNDER_STRONG_EXECUTABLE_EQUIVALENCE__MAKE_NEW_PHYSICAL_CUT_BEFORE_SPENDING_CORRECTED_FROZEN_NEXT82__CONTINUE_OTHER_CAPABILITY_FIRST_GENERAL_DEVELOPMENT__DO_NOT_RUN_SAME_INFORMATION_CHECKPOINT_WORK"
+    "observed_git_blob_sha": "4f787d9c283077b5ed585dc8323f72a2e1b5d7b2",
+    "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__ESCAPE_WAKE_GATED__BYTES_V76_READY__R2_V91_WAKE_GATED__TB_CURRENT_PATH_DYNAMIC__ZERO_CREDIT",
+    "next": "RERANK_EXACT_V76_USING_SPENT_CORRECTED_NEXT82_UNDER_EXECUTABLE_EQUIVALENCE__MAKE_NEW_PHYSICAL_CUT_BEFORE_SPENDING_FROZEN_NEXT83__CONTINUE_OTHER_CAPABILITY_FIRST_GENERAL_DEVELOPMENT"
   },
   "professional_regression_carrier_diagnosis": {
     "path": "canonical/verification/FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V3.json",

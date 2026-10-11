@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_V76_QUALIFICATION_TRANSFER_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__QUALIFIED_REFERENCE_TO_V76_EXECUTABLE_EQUIVALENCE__CLEAN_RECONSTRUCTION__NEXT83_UNSPENT__ZERO_CREDIT",
+  "target": "canonical/evidence/BYTES_EXACT_SYMBOLIC_DOCSTRING_STRIP_V76_SUCCESSOR_EXECUTION_20261011_V1.json",
+  "checks": {
+    "v75_base_manifest_exact": true,
+    "v76_target_manifest_exact": true,
+    "clean_reconstruction_durable_files": "278/278",
+    "qualified_reference_durable": true,
+    "qualified_reference_NEXT81": "20470/20470",
+    "qualified_reference_corrected_NEXT82": "20700/20700",
+    "v76_vs_reference_type_comments_ast_identity": "277/277",
+    "v76_vs_reference_recursive_executable_code_identity": "277/277",
+    "differing_source_files": 2,
+    "differing_source_files_ast_identical": "2/2",
+    "next83_cases": 20930,
+    "next83_unspent": true
+  },
+  "transfer_rule": "IF_TWO_WORK_PRODUCTS_HAVE_IDENTICAL_RECURSIVE_EXECUTABLE_CODE_FOR_ALL_277_PYTHON_FILES_THEN_BOUNDED_ROUTE_EXECUTION_RESULTS_TRANSFER; SOURCE_ONLY_COMMENT_OR_TRAILING_WHITESPACE_DIFFERENCES_DO_NOT_CREATE_A_NEW_EXECUTABLE_PATH",
+  "hard_nonclaims": [
+    "NO_SOURCE_INTROSPECTION_EQUIVALENCE",
+    "NO_DOCSTRING_EQUIVALENCE",
+    "NO_UNIVERSAL_SYMPY_EQUIVALENCE",
+    "NO_EXTERNAL_SECOND_CARRIER",
+    "NO_CAPABILITY_ACCEPTANCE_OWNERSHIP_QUALITY_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0
+}
