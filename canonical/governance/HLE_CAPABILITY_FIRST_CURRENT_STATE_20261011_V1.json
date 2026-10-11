@@ -25,59 +25,35 @@
   },
   "current_bottleneck": {
     "prior_consumed_public_retrieval_recall": 0.6,
-    "prior_consumed_public_rich_search_recall": 0.52,
-    "baseline_evidence": {
-      "workflow_run_id": 38145869751,
-      "workflow_job_id": 114488966687,
-      "sample_size": 25,
-      "hits": 15,
-      "hit_rows": [
-        25,
-        26,
-        28,
-        29,
-        30,
-        31,
-        33,
-        34,
-        35,
-        40,
-        42,
-        46,
-        47,
-        48,
-        49
-      ],
-      "miss_rows": [
-        27,
-        32,
-        36,
-        37,
-        38,
-        39,
-        41,
-        43,
-        44,
-        45
-      ]
+    "baseline_hit_count": 15,
+    "baseline_sample_size": 25,
+    "prior_miss_rows": [
+      27,
+      32,
+      36,
+      37,
+      38,
+      39,
+      41,
+      43,
+      44,
+      45
+    ],
+    "diversified_fallback_result": {
+      "workflow_run_id": 38155177042,
+      "recovered_prior_misses": 0,
+      "combined_recall": 0.6,
+      "branch_status": "DEMOTED_NO_GAIN"
     },
-    "source_health": {
-      "workflow_run_id": 38145869850,
-      "bing_nonempty_rate": 1,
-      "wikipedia_concurrent_nonempty_rate": 0.08849557522123894,
-      "wikipedia_sequential_nonempty_rate": 0
-    },
-    "issue": "RETRIEVAL_RECALL_AND_SOURCE_DIVERSITY",
-    "repaired_mechanism": "ANSWER_BLIND_DIVERSITY_PRESERVING_BING_DDG_CROSSREF_FALLBACK_WITH_HLE_BLOCKLIST",
-    "runtime_blob": "3d320fcb8899d1fe6d380bf1b4663a77b8f8833c",
-    "tests_blob": "19971c8ecce3d78b1f782376bd8347dfcd6b9c8b",
-    "independent_replay": "12/12 PASS",
-    "next_action": "RUN_ONLY_ALREADY_CONSUMED_ROWS_25_TO_49_TO_MEASURE_INCREMENTAL_RECALL_ON_THE_TEN_PRIOR_MISS_ROWS"
+    "issue": "SEARCH_RESULT_SURFACE_INSUFFICIENT__CANDIDATE_PAGE_CONTENT_NOT_YET_MATERIALIZED",
+    "evidence": "231 candidate records across ten misses contained zero gold surfaces in titles/snippets",
+    "next_action": "ANSWER_BLIND_FETCH_SELECTED_CANDIDATE_PAGES_BEFORE_GOLD_THEN_SCORE_MATERIALIZED_CONTENT_ON_ONLY_THE_TEN_PRIOR_MISSES"
   },
   "next_admissible_actions": [
-    "RUN_DIVERSITY_FALLBACK_ON_ALREADY_CONSUMED_TRIVIA_QA_ROWS_25_TO_49_WITH_GOLD_ABSENT",
-    "SCORE_ONLY_AFTER_TRACE_SEAL_AND_MEASURE_NEW_HITS_ON_PRIOR_MISS_ROWS",
-    "PROMOTE_ONLY_IF_INCREMENTAL_RECALL_OR_SOURCE_RESILIENCE_IS_OBSERVED",
+    "REUSE_EXISTING_BRAIN_FETCH_AND_SOURCE_MATERIALIZATION_CAPABILITIES",
+    "FETCH_ONLY_CANDIDATE_URLS_SELECTED_WITHOUT_GOLD_ON_THE_TEN_ALREADY_CONSUMED_PUBLIC_MISSES",
+    "SEAL_FETCHED_PAGE_CONTENT_AND_HASHES_BEFORE_LOADING_GOLD",
+    "SCORE_INCREMENTAL_RECALL_AFTER_SEAL",
     "DO_NOT_CONSUME_FRESH_HLE_FOR_DEVELOPMENT"
   ],
   "hard_nonclaims": [
