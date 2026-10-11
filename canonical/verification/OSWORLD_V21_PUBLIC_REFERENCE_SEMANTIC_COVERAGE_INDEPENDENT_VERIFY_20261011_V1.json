@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_PUBLIC_REFERENCE_SEMANTIC_COVERAGE_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_SECOND_CARRIER_REPLAY__108_OF_108_PUBLIC_SEMANTICS__EXACT_CANONICAL_RELEASE_HASH_MATCH__FINITE_SCOPE_COVERAGE_RECOMPUTED__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/OSWORLD_V21_PUBLIC_REFERENCE_SEMANTIC_COVERAGE_20261011_V1.json",
+    "git_blob_sha": "c5b23b765b9d18624b4d2c6af1c56613eae2ad98"
+  },
+  "independent_carrier": {
+    "type": "SPRITE",
+    "name": "brain-v5-audit-cleanroom-20261010",
+    "id": "sprite-679c5189-f043-48df-931c-ba50deee342c",
+    "script": "verify_osworld_public_semantics_independent.py",
+    "incremental_spend_usd": 0
+  },
+  "source_replay": {
+    "dataset": "simular-ai/sai-osworld-v21-reference-runs",
+    "observed_dataset_revision": "abfb5852189f49e81255c38d98287df29ae53658",
+    "public_index_sha256": "5e61c44f94a91a73e40213f55fc9c9b50ae55922bb7c81ffe7eab79523e413ee",
+    "public_scorecard_sha256": "61781c076bd5ce850b35bfeb41b7ca626688c1c4b8f14dab27bf62ca9857df1d",
+    "canonical_official_release_hash_manifest_sha256": "c54d428329be5ca72742a6becd49ee83cf739df5dea429bba182e1f3f21badfb",
+    "scorecard_release": "osworld-v2.1",
+    "scorecard_matched_tasks": 108,
+    "unique_tasks_replayed": 108,
+    "instruction_task_record_identity_checks_passed": 108
+  },
+  "recomputed_coverage": {
+    "task_count": 108,
+    "unique_app_count": 46,
+    "cross_app_tasks": 48,
+    "browser_surface_tasks": 55,
+    "multi_step_observed_tasks": 108,
+    "visual_state_observed_tasks": 108,
+    "planning_semantics_explicit_tasks": 105,
+    "judgment_semantics_explicit_tasks": 77,
+    "instruction_set_sha256": "9975d9f009128ed97e51218c17c1e5a3c7e80c543e2393af5362190b41f2a50d"
+  },
+  "proved": [
+    "A_PUBLIC_CONTENT_ADDRESSED_SEMANTIC_SOURCE_EXISTS_FOR_ALL_108_PINNED_OSWORLD_V21_TASK_IDS",
+    "THE_PUBLIC_REFERENCE_SCORECARD_ATTESTS_THE_SAME_CANONICAL_108_TASK_HASH_MANIFEST_ALREADY_VERIFIED_BY_BRAIN",
+    "THE_FINITE_108_TASK_UNION_EXPLICITLY_SUPPORTS_MULTI_STEP_BROWSER_APPLICATION_BREADTH_PLANNING_VISUAL_STATE_AND_JUDGMENT_ATOMS",
+    "THE_108_ROW_SEMANTIC_COVERAGE_MATRIX_CAN_BE_CONSTRUCTED_WITHOUT_READING_OWNER_GATED_TASK_IMPLEMENTATION_BYTES"
+  ],
+  "remaining": [
+    "NO_OWNER_SIGNATURE_OR_OWNER_BYTE_ACCESS_PROVES_PUBLIC_REFERENCE_INSTRUCTIONS_EQUAL_EVERY_SEMANTIC_DETAIL_OF_GATED_TASK_IMPLEMENTATIONS",
+    "FINITE_108_TASK_46_APP_COVERAGE_DOES_NOT_PROVE_UNIVERSAL_ARBITRARY_APPLICATION_TRANSFER",
+    "ANTHROPIC_EXACT_RUN_POPULATION_AND_HARNESS_EQUIVALENCE_REMAIN_OPEN",
+    "BRAIN_OSWORLD_SCORE_OR_STRONGER_ACCEPTANCE_CERTIFICATE_REMAINS_OPEN"
+  ],
+  "hard_nonclaims": [
+    "NO_OFFICIAL_GATED_TASK_IMPLEMENTATION_BYTES_ACCESSED",
+    "NO_UNIVERSAL_APPLICATION_TRANSFER",
+    "NO_OSWORLD_ACCEPTANCE_OR_SCORE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
