@@ -194,7 +194,9 @@
     "task_specific_external_observation_frontier_count": 1,
     "wake_rule": "WAKE_FINANCE_SEMANTIC_FRONTIER_ONLY_ON_REAL_TASK_LOCAL_COUNTEREXAMPLE_OR_DECISIVE_UNBOUND_EXTERNAL_OBSERVATION_REQUIREMENT",
     "generic_authority_path": "DISCOVER_AUTHORITY_DOMAIN_SOURCE__MATERIALIZE_EXACT_BYTES__REUSE_EXISTING_TRUTH_CHECKER__REENTER_FIXED_POINT",
-    "independent_generic_path_execution_replay_verified": false
+    "independent_generic_path_execution_replay_verified": true,
+    "independent_generic_path_execution_replay_verification_path": "canonical/verification/R2_GENERIC_AUTHORITY_MATERIALIZATION_SECOND_CARRIER_VERIFY_20261011_V1.json",
+    "independent_generic_path_execution_replay_verification_git_blob_sha": "ace18878d4d66a8ceea2d0602d5ccbdceaa19247"
   },
   "escape_oq_partition_current": {
     "active_o_rows": 11,
