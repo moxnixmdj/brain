@@ -1,0 +1,226 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_V44_LARGE_BODY_SCREEN_FALSIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FALSIFICATION_PASS__36_SELECTED_LARGE_BODY_WHOLE_DELETIONS_REJECTED__NO_V44_PHYSICAL_CUT_PROMOTED__NEXT49_UNSPENT__ZERO_CREDIT",
+  "base_frontier": {
+    "version": "V43",
+    "main_commit": "50b49645576311e476a72aaad2e15e324d96fe62",
+    "manifest_sha256": "def0459b04d0bcf848c3c06fb6f954fec7de8c7085fc69fe736936f20fe5b588",
+    "raw_python_source_bytes": 1740113,
+    "spent_screen_corpus": "QUAL_SUCCESSOR_NEXT48_20261011_V1",
+    "next_frozen_corpus": "QUAL_SUCCESSOR_NEXT49_20261011_V1",
+    "next49_spent": false
+  },
+  "screen": {
+    "corpus_source": "QUAL_SUCCESSOR_NEXT48_20261011_V1",
+    "deterministic_smoke_rule": "FIRST_8_CASES_PER_EACH_OF_12_OPERATION_FAMILIES",
+    "smoke_case_count": 96,
+    "deletion_form": "REPLACE_WHOLE_FUNCTION_BODY_WITH_FAIL_CLOSED_NOTIMPLEMENTEDERROR",
+    "claim_scope": "EACH_REJECTED_CANDIDATE_HAS_AT_LEAST_ONE_EFFECT_DISTINGUISHING_COUNTEREXAMPLE_OR_IMPORT_FAILURE__THIS_IS_NOT_GLOBAL_EXHAUSTION_OF_ALL_POSSIBLE_V44_CUTS"
+  },
+  "rejected": [
+    [
+      "sympy/core/evalf.py",
+      "evalf_pow",
+      "ROOTS_COUNTEREXAMPLE"
+    ],
+    [
+      "sympy/core/evalf.py",
+      "evalf_mul",
+      "ROOTS_COUNTEREXAMPLE"
+    ],
+    [
+      "sympy/polys/domains/domain.py",
+      "Domain.unify",
+      "LINEAR_SOLVE_COUNTEREXAMPLE"
+    ],
+    [
+      "sympy/core/symbol.py",
+      "symbols",
+      "IMPORT_TIME_COUNTEREXAMPLE"
+    ],
+    [
+      "sympy/core/mul.py",
+      "Mul._eval_nseries",
+      "SERIES_COEFF_COUNTEREXAMPLE"
+    ],
+    [
+      "sympy/polys/polyoptions.py",
+      "Options.__init__",
+      "FACTOR_COEFF_ROOTS_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/series/order.py",
+      "Order._eval_subs",
+      "SERIES_COEFF_COUNTEREXAMPLE"
+    ],
+    [
+      "sympy/polys/polyutils.py",
+      "_parallel_dict_from_expr_no_gens",
+      "FACTOR_ROOTS_LIMIT_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/core/add.py",
+      "Add.as_content_primitive",
+      "DIFF_COUNTEREXAMPLE"
+    ],
+    [
+      "sympy/core/evalf.py",
+      "_create_evalf_table",
+      "FACTOR_ROOTS_DIFF_SIN_EVEN_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/core/numbers.py",
+      "Rational.__new__",
+      "IMPORT_TIME_COUNTEREXAMPLE"
+    ],
+    [
+      "sympy/core/intfunc.py",
+      "integer_log",
+      "ROOTS_AND_SERIES_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/polys/polytools.py",
+      "_symbolic_factor_list",
+      "FACTOR_ROOTS_SERIES_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/polys/factortools.py",
+      "dup_factor_list",
+      "FACTOR_ROOTS_SERIES_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/core/exprtools.py",
+      "Factors.div",
+      "FACTOR_ROOTS_SERIES_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/external/importtools.py",
+      "import_module",
+      "IMPORT_TIME_COUNTEREXAMPLE"
+    ],
+    [
+      "sympy/polys/rings.py",
+      "PolyRing.__new__",
+      "ROOTS_LIMIT_SERIES_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/ntheory/factor_.py",
+      "_factorint_small",
+      "ROOTS_SERIES_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/polys/polyroots.py",
+      "roots_quartic",
+      "ROOTS_SERIES_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/core/power.py",
+      "Pow._eval_power",
+      "ROOTS_LIMIT_SERIES_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/core/mul.py",
+      "Mul._eval_is_integer",
+      "ROOTS_DIFF_LIMIT_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/polys/polytools.py",
+      "cancel",
+      "ROOTS_AND_LIMIT_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/polys/factortools.py",
+      "dup_zz_zassenhaus",
+      "FACTOR_ROOTS_SERIES_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/polys/factortools.py",
+      "dmp_factor_list",
+      "FACTOR_ROOTS_SERIES_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/core/add.py",
+      "Add.primitive",
+      "FACTOR_ROOTS_DIFF_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/simplify/trigsimp.py",
+      "_futrig",
+      "ROOTS_SIN_EVEN_LIMIT_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/core/basic.py",
+      "Basic._subs",
+      "ROOTS_SIN_EVEN_LIMIT_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/core/expr.py",
+      "Expr.as_ordered_terms",
+      "ROOTS_DIFF_SIN_EVEN_LIMIT_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/polys/polyclasses.py",
+      "DMF._parse",
+      "ROOTS_SIN_EVEN_LIMIT_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/functions/elementary/_trigonometric_special.py",
+      "cos_257",
+      "ROOTS_SIN_EVEN_LIMIT_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/core/expr.py",
+      "Expr._eval_is_extended_positive_negative",
+      "FACTOR_COEFF_ROOTS_DIFF_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/polys/polytools.py",
+      "Poly.eval",
+      "ROOTS_SIN_EVEN_LIMIT_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/utilities/iterables.py",
+      "_strongly_connected_components",
+      "ROOTS_SIN_EVEN_HILBERT_LIMIT_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/utilities/decorator.py",
+      "deprecated",
+      "IMPORT_TIME_COUNTEREXAMPLE"
+    ],
+    [
+      "sympy/core/operations.py",
+      "AssocOp._eval_evalf",
+      "ROOTS_SIN_EVEN_LIMIT_COUNTEREXAMPLES"
+    ],
+    [
+      "sympy/polys/matrices/sdm.py",
+      "SDM.extract",
+      "ROOTS_SIN_EVEN_HILBERT_LIMIT_COUNTEREXAMPLES"
+    ]
+  ],
+  "scheduler_effect": {
+    "delete_research": [
+      "RETRY_THE_36_REJECTED_WHOLE_BODY_DELETIONS_WITHOUT_NEW_EFFECT_DISTINGUISHING_EVIDENCE"
+    ],
+    "preserve": [
+      "SEARCH_OTHER_UNTESTED_BODIES",
+      "SPECIALIZE_LOAD_BEARING_BODIES_ONLY_IF_GENERAL_CAUSAL_BRANCH_CAN_BE_REMOVED_WITHOUT_OVERFITTING",
+      "KEEP_NEXT49_UNSPENT_UNTIL_A_NEW_PHYSICAL_CUT_EXISTS"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_V43_IS_GLOBALLY_MINIMAL",
+    "NO_CLAIM_ALL_REMAINING_FUNCTION_BODIES_ARE_LOAD_BEARING",
+    "NO_NEXT49_EXECUTION",
+    "NO_V44_RESOURCE_CREDIT",
+    "NO_CAPABILITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "resource_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
