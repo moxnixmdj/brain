@@ -89,9 +89,26 @@
     },
     {
       "id": "OSWORLD_2_1_PARTIAL_GE_81_8",
-      "reuse": "O_OBJECTIVE_ACCEPTANCE+EXACT_108_TASK_IDENTITY_HASH_UNIVERSE+SCOPE_COVERAGE_MACHINERY",
-      "delta": "PINNED_TASK_SEMANTICS_OR_STRONGER_SCOPE_COMPLETE_CERTIFICATE",
-      "mode": "MINIMUM_INFORMATION"
+      "reuse": "O_OBJECTIVE_ACCEPTANCE+EXACT_108_TASK_IDENTITY_HASH_UNIVERSE+PUBLIC_REFERENCE_SEMANTICS_108_OF_108+FINITE_SCOPE_COVERAGE_MATRIX+SCOPE_COVERAGE_MACHINERY",
+      "delta": "SEMANTIC_EQUIVALENCE_AUTHENTICATION_PUBLIC_REFERENCE_TO_PINNED_GATED_TASKS__PLUS_SCOPE_SAFE_ARBITRARY_APPLICATION_TRANSFER_CERTIFICATE_OR_FINITE_SCOPE_LIMIT__THEN_MATCHED_ACCEPTANCE_RESULT_OR_STRONGER_CERTIFICATE",
+      "mode": "MINIMUM_INFORMATION__PUBLIC_SEMANTICS_AND_MATRIX_CLOSED",
+      "public_semantic_coverage": {
+        "governance_path": "canonical/governance/OSWORLD_V21_PUBLIC_REFERENCE_SEMANTIC_COVERAGE_20261011_V1.json",
+        "governance_git_blob_sha": "c5b23b765b9d18624b4d2c6af1c56613eae2ad98",
+        "verification_path": "canonical/verification/OSWORLD_V21_PUBLIC_REFERENCE_SEMANTIC_COVERAGE_INDEPENDENT_VERIFY_20261011_V1.json",
+        "verification_git_blob_sha": "482e9d59fdfe6a624488ae78f9fd461134ed5c00",
+        "task_count": 108,
+        "exact_release_hash_match": true,
+        "coverage": {
+          "app_labels": 46,
+          "cross_app": 48,
+          "browser": 55,
+          "multi_step": 108,
+          "visual_state": 108,
+          "planning": 105,
+          "judgment": 77
+        }
+      }
     },
     {
       "id": "FINANCE_ACCOUNTING_INDEX_GE_61",
