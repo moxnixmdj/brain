@@ -5,10 +5,16 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/full-private-current-main-regression.yml"
+      - "canonical/runtime/raw_task_objective_acceptance_executor_v1.py"
+      - "canonical/tests/test_raw_task_objective_acceptance_executor_v1.py"
+      - "canonical/governance/RAW_TASK_OBJECTIVE_ACCEPTANCE_EXECUTOR_20261011_V1.json"
   push:
     branches: [main]
     paths:
       - ".github/workflows/full-private-current-main-regression.yml"
+      - "canonical/runtime/raw_task_objective_acceptance_executor_v1.py"
+      - "canonical/tests/test_raw_task_objective_acceptance_executor_v1.py"
+      - "canonical/governance/RAW_TASK_OBJECTIVE_ACCEPTANCE_EXECUTOR_20261011_V1.json"
   workflow_dispatch:
 
 concurrency:
