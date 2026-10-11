@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_R2_GENERIC_AUTHORITY_CANDIDATE_MATERIALIZATION_FOCUSED_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_MERGED_RUNTIME_BYTES__SECOND_CARRIER_FOCUSED_REPLAY__GENERIC_TEXT_AUTHORITY_CANDIDATE_TO_EXISTING_CHECKER_TEMPLATE_SEAM_VERIFIED__LEGACY_FOUR_WAY_PATH_PRESERVED__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "merged_main_commit": "7e000a2b9f31ee423cb6015ff63b007ac208e754",
+    "runtime_blobs": {
+      "authority_candidate_materialization_v1": "d277f60e454ecf2acbdbc3dc5d47123e02190366",
+      "generic_authority_candidate_checker_adapter_v1": "9862e5089553f44911266e8d710d0f335c5fd1be",
+      "regcap_authority_candidate_adapter_v1": "5b8351dbe7d415bed6b6a4f6c4883ed2a9652281"
+    }
+  },
+  "second_carrier": {
+    "kind": "SPRITE",
+    "name": "brain-cad-proof-clean-20261010",
+    "sprite_id": "sprite-7b47a201-b921-4b69-91c4-8dda8749014e",
+    "python": "3.14.4",
+    "exact_runtime_bytes_materialized_from_merged_git_blobs": true
+  },
+  "checks": {
+    "py_compile_new_generic_modules": "PASS",
+    "checker_owned_exact_byte_materialization": "PASS",
+    "raw_sha256_binding": "PASS",
+    "html_text_extraction": "PASS",
+    "declared_authority_domain_guard": "PASS",
+    "out_of_domain_candidate_fail_closed": "PASS",
+    "existing_checker_template_reuse": "PASS",
+    "downstream_checker_recomputes_predicate_identity_and_truth": "PASS",
+    "provider_semantic_truth_authority_false": "PASS",
+    "generic_fallback_route": "PASS",
+    "legacy_four_way_regcap_path_preserved": "PASS"
+  },
+  "proved": [
+    "DELEGATED_AUTHORITY_DISCOVERY_CANDIDATE_CAN_BE_REFETCHED_BY_CHECKER_OWNED_MATERIALIZER_UNDER_DECLARED_HTTPS_AUTHORITY_DOMAINS",
+    "MATERIALIZED_TEXT_CAN_REUSE_AN_ALREADY_EXISTING_SOURCE_ALIGNED_TRUTH_CHECKER_TEMPLATE_WITHOUT_PROVIDER_TRUTH_AUTHORITY",
+    "REQUESTED_PREDICATE_LABEL_REMAINS_NONAUTHORITATIVE_ON_THE_GENERIC_PATH",
+    "DOWNSTREAM_CHECKER_MUST_RECOMPUTE_CANONICAL_PREDICATE_IDENTITY_AND_TRUTH",
+    "SPECIALIZED_FOUR_WAY_REGCAP_CANDIDATE_PATH_REMAINS_BEHAVIORALLY_PRESERVED"
+  ],
+  "remaining_boundary": [
+    "NON_UTF8_OR_NON_TEXT_AUTHORITY_BYTES_WITHOUT_A_COMPATIBLE_CHECKER_REMAIN_OPEN",
+    "A_PREDICATE_WITHOUT_AN_EXISTING_COMPATIBLE_TRUTH_CHECKER_TEMPLATE_REMAINS_OPEN",
+    "GENERIC_OPEN_WORLD_ONTOLOGY_COMPLETENESS_IS_NOT_PROVED",
+    "PROVIDER_SEMANTIC_TRUTH_AUTHORITY_REMAINS_FALSE"
+  ],
+  "full_private_current_main_regression": {
+    "executed": false,
+    "latest_trigger_commit": "70acbd87408cc79b7935cab4425163fd3acb13b2",
+    "workflow_run_id": 38112113681,
+    "job_id": 114389641541,
+    "runner_id": 0,
+    "runner_name": "",
+    "executed_steps": 0,
+    "conclusion": "failure",
+    "interpretation": "PRESTEP_CARRIER_FAILURE__NOT_A_SEMANTIC_REGRESSION_RESULT"
+  },
+  "hard_nonclaims": [
+    "NO_GLOBAL_R2_OPEN_WORLD_CLOSURE",
+    "NO_CLAIM_ARBITRARY_BINARY_OR_PDF_AUTHORITY_SOURCE_MATERIALIZATION_IS_CLOSED",
+    "NO_CLAIM_MISSING_CHECKER_TEMPLATES_ARE_SYNTHESIZED",
+    "NO_PROVIDER_TRUTH_POLICY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY",
+    "NO_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_PASS",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
