@@ -81,6 +81,19 @@ def decide(state: Mapping[str, Any]) -> dict[str, Any]:
     if "mailhub" in text and _latest_web_app(state, "mailhub") is None:
         return _emit("mailhub", "observe_mail", "inspect Mailhub product state")
 
+    if "budgetwise" in text and _latest_web_app(state, "budgetwise") is None:
+        return _emit("budgetwise", "observe_session", "inspect BudgetWise product state")
+
+    if (
+        ("ds-160" in text or "ds160" in text or "visa application" in text)
+        and _latest_web_app(state, "visaapplication") is None
+    ):
+        return _emit(
+            "visaapplication",
+            "observe_application",
+            "inspect DS-160 application state",
+        )
+
     browser = _latest_browser_observe(state)
     active_url = str((browser or {}).get("active_url") or "").casefold()
     if "mailhub" in active_url and _latest_web_app(state, "mailhub") is None:
