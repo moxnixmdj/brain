@@ -103,4 +103,4 @@ jobs:
           path: /tmp/brain-regression/
           if-no-files-found: error
 
-# trigger: exact-current-main-regression-ubuntu-22-04-carrier-20261011-v1
+# trigger: exact-current-main-regression-ubuntu-22-04-carrier-20261011-v2
