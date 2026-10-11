@@ -2178,6 +2178,27 @@ def compile_hypotheses(
         if _consistent(h, pairs):
             candidates.append(h)
 
+    move_toward = _infer_singleton_move_toward(pairs)
+    if move_toward is not None:
+        source_color, target_color = move_toward
+        h = {
+            "kind": "MOVE_SINGLETON_TOWARD",
+            "source_color": source_color,
+            "target_color": target_color,
+        }
+        if _consistent(h, pairs):
+            candidates.append(h)
+
+    h = {"kind": "COMPLETE_BBOX_QUARTER_TURN_ORBIT"}
+    if _consistent(h, pairs):
+        candidates.append(h)
+
+    cap_marker = _infer_cap_bottom_marker_color(pairs)
+    if cap_marker is not None:
+        h = {"kind": "CAP_BOTTOM_MARKER_PROJECTION", "marker": cap_marker}
+        if _consistent(h, pairs):
+            candidates.append(h)
+
     crop = {"kind": "CROP_NON_BACKGROUND"}
     if _consistent(crop, pairs):
         candidates.append(crop)
@@ -2269,6 +2290,9 @@ def compile_hypotheses(
             "HOLLOW_COMPONENT_RECOLOR",
             "BETWEEN_MATCHING_ENDPOINTS_BACKGROUND_RULE",
             "MOST_FREQUENT_COLOR_CROP",
+            "SINGLETON_MOVE_TOWARD_RELATION",
+            "BOUNDING_BOX_QUARTER_TURN_ORBIT_COMPLETION",
+            "CAP_COMPONENT_BOTTOM_MARKER_PROJECTION",
             "NON_BACKGROUND_BOUNDING_BOX_CROP",
             "UNIQUE_LARGEST_OR_SMALLEST_COMPONENT_CROP",
         ],
