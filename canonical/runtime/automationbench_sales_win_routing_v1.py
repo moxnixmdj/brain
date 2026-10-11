@@ -210,7 +210,7 @@ def _support_recipient(policy: str) -> str | None:
         policy,
         re.IGNORECASE,
     )
-    return match.group(1).strip() if match else None
+    return match.group(1).strip().rstrip(".,;:") if match else None
 
 
 def _subject(policy: str) -> str | None:
