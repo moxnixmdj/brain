@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_OWNER_EXTERNAL_EVALUATION_BOUNDARY_EVIDENCE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "OWNER_SUPPORT_REPLY_BOUND__NO_OWNER_RUN_EXTERNAL_SYSTEM_EVALUATION__NO_PUBLIC_SUBMISSION_INTERFACE__PRIVATE_TASKS_REMAIN_PRIVATE__ZERO_CREDIT",
+  "target_predicate": "CODING_CURSORBENCH_GE_57_8",
+  "source": {
+    "provider": "GMAIL",
+    "publisher": "CURSOR_SUPPORT",
+    "thread_subject": "Research evaluation request: CursorBench 4.0 external-system submission",
+    "support_ticket": "T-G59465",
+    "message_id": "1a103e0ae4bd73ad",
+    "message_timestamp": "2026-10-03T22:26:58Z",
+    "connector_normalized_body_sha256": "50377ff2744e4758aa223c8aa765bb90ba0d30dadbb5f79ecad42840dec11148",
+    "connector_normalized_body_bytes": 2073
+  },
+  "request_scope": [
+    "OWNER_RUN_CURSORBENCH_4_0_EVALUATION_OF_AN_EXTERNAL_SELF_HOSTED_OR_CONFIGURED_AI_SYSTEM",
+    "TECHNICAL_THIRD_PARTY_SUBMISSION_INTERFACE_SUCH_AS_API_CONTAINER_OR_CLI",
+    "ZERO_INCREMENTAL_SPEND",
+    "PRESERVE_PRIVATE_HELD_OUT_TASKS_AND_EXACT_4_0_PROVENANCE"
+  ],
+  "owner_reply_observed_facts": [
+    "CURSORBENCH_IS_AN_INTERNAL_EVALUATION_SUITE",
+    "CURSOR_DOES_NOT_OFFER_OWNER_RUN_EVALUATION_OF_EXTERNAL_SYSTEMS_ON_CURSORBENCH_4_0",
+    "NO_PUBLIC_CURSORBENCH_4_0_THIRD_PARTY_SUBMISSION_INTERFACE_API_CONTAINER_CLI_OR_SIMILAR_IS_OFFERED",
+    "PRIVATE_AND_HELD_OUT_CURSORBENCH_TASKS_REMAIN_PRIVATE",
+    "THE_DOCUMENTED_REVERSE_DIRECTION_CURSOR_AGENT_ON_USER_OWN_EVALS_IS_SEPARATE_FROM_CURSORBENCH",
+    "THE_REVERSE_DIRECTION_PATH_IS_BILLED_THROUGH_THE_ACCOUNT_API_KEY_AND_IS_NOT_A_ZERO_INCREMENTAL_SPEND_CURSORBENCH_ROUTE"
+  ],
+  "deduction": {
+    "owner_run_external_system_cursorbench_4_0_route_available": false,
+    "public_third_party_submission_interface_available": false,
+    "private_task_disclosure_route_available": false,
+    "reverse_direction_cursor_agent_eval_is_cursorbench_equivalent": false,
+    "same_information_owner_run_wait_should_be_scheduled": false,
+    "reactivation_condition": "MATERIAL_CURSOR_POLICY_OR_INTERFACE_CHANGE_OR_NEW_AUTHENTIC_TARGET_RESULT_GRADER_EVIDENCE"
+  },
+  "scope_boundary": "THIS_BINDS_THE_OWNER_STATED_ACCESS_AND_SUBMISSION_BOUNDARY_ONLY__IT_DOES_NOT_PROVE_NONEXISTENCE_OF_PRIVATE_INTERNAL_RESULT_ARTIFACTS_ALREADY_SHARED_WITH MODEL VENDORS OR FUTURE POLICY CHANGES.",
+  "hard_nonclaims": [
+    "NO_CLAIM_CURSOR_WILL_NEVER_CHANGE_POLICY.",
+    "NO_CLAIM_PRIVATE_CURSOR_RESULT_ARTIFACTS_DO_NOT_EXIST.",
+    "NO_CLAIM_THE_OWNER_REPLY_DISCLOSES_SCORING_SEMANTICS.",
+    "NO_BRAIN_CURSORBENCH_SCORE_OR_ACCEPTANCE_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "terminal_authority": false
+}
