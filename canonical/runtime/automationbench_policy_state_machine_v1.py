@@ -23,6 +23,11 @@ from canonical.runtime.automationbench_owned_policy_kernel_v1 import (
     rank_source_records,
     search_queries,
 )
+from canonical.runtime.automationbench_simulated_communication_v1 import (
+    SURFACE as SIMULATED_SURFACE,
+    compile_simulated_communication,
+)
+from canonical.runtime.automationbench_workflow_ir_v1 import compile_workflow_ir
 
 SCHEMA = "PROJECT_BRAIN_AUTOMATIONBENCH_POLICY_STATE_MACHINE_V1"
 
@@ -151,6 +156,40 @@ def next_policy_action(
                     "semantic": action["semantic"],
                     "calls": [{"tool":action["tool"],"arguments":action["arguments"]}],
                 }
+
+    # Generic literal communication: execute only content already grounded
+    # in the task prompt. Derived summaries and calculated values stay open.
+    workflow_ir = compile_workflow_ir(prompt)
+    for communication in workflow_ir.get("communications", []):
+        if communication.get("grounding_complete") is not True:
+            continue
+        compiled = compile_simulated_communication(
+            {
+                "surface": SIMULATED_SURFACE,
+                "channel": communication.get("channel"),
+                "destination": communication.get("destination"),
+                "subject": communication.get("subject"),
+                "content": communication.get("content_literal"),
+                "grounding_complete": True,
+                "provenance_bound": True,
+            }
+        )
+        if compiled.get("pass") is not True:
+            continue
+        semantic = str(compiled.get("semantic") or "")
+        if not semantic or _semantic_done(history, semantic):
+            continue
+        call = compiled.get("tool_call")
+        if not isinstance(call, Mapping):
+            continue
+        return {
+            "schema": SCHEMA,
+            "status": "CALL_TOOLS",
+            "phase": "COMMUNICATE",
+            "semantic": semantic,
+            "semantic_family": compiled.get("semantic_family"),
+            "calls": [{"tool": call["tool"], "arguments": call["arguments"]}],
+        }
 
     return {
         "schema": SCHEMA,
