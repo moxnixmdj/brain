@@ -1,285 +1,203 @@
 from __future__ import annotations
-import ast, difflib, hashlib, json, os, pathlib, re, subprocess, sys
-from typing import Any, Mapping, NamedTuple
-
-SCHEMA = "PROJECT_BRAIN_PYTHON_COUPLED_SOFTWARE_REPAIR_LOOP_V1"
-
-class RepairLoopError(RuntimeError):
-    pass
-
-_COMPARE_SWAPS = {
-    ast.Lt: ast.LtE, ast.LtE: ast.Lt, ast.Gt: ast.GtE, ast.GtE: ast.Gt,
-    ast.Eq: ast.NotEq, ast.NotEq: ast.Eq, ast.Is: ast.IsNot, ast.IsNot: ast.Is,
-}
-_BINOP_SWAPS = {ast.Add: [ast.Sub, ast.Mult], ast.Sub: [ast.Add], ast.Mult: [ast.Add]}
-_BOOLOP_SWAPS = {ast.And: ast.Or, ast.Or: ast.And}
-
-class Variant(NamedTuple):
-    source: pathlib.Path
-    text: str
-    mutation: str
-
-def _sha(b: bytes) -> str:
-    return hashlib.sha256(b).hexdigest()
-
-def _rel(repo: pathlib.Path, p: pathlib.Path) -> str:
-    return str(p.relative_to(repo)).replace("\\", "/")
-
-def _safe_dir(repo: pathlib.Path, raw: Any) -> pathlib.Path:
-    p=(repo/str(raw or "")).resolve()
-    if p != repo and repo not in p.parents:
-        raise RepairLoopError("PATH_OUTSIDE_REPOSITORY")
-    if not p.is_dir() or p.is_symlink():
-        raise RepairLoopError("DIRECTORY_INVALID")
-    return p
-
-def _safe_file(repo: pathlib.Path, raw: Any) -> pathlib.Path:
-    p=(repo/str(raw or "")).resolve()
-    if p == repo or repo not in p.parents or not p.is_file() or p.is_symlink() or p.suffix != ".py":
-        raise RepairLoopError("FILE_INVALID")
-    return p
-
-def _run_tests(repo: pathlib.Path, argv: list[str], timeout: int) -> dict[str, Any]:
-    try:
-        cp=subprocess.run(argv,cwd=repo,text=True,capture_output=True,timeout=timeout)
-        return {"returncode":cp.returncode,"stdout":cp.stdout,"stderr":cp.stderr,"timed_out":False}
-    except subprocess.TimeoutExpired as exc:
-        return {"returncode":None,"stdout":exc.stdout or "","stderr":exc.stderr or "","timed_out":True}
-
-def _text(r: Mapping[str, Any]) -> str:
-    return str(r.get("stdout") or "")+"\n"+str(r.get("stderr") or "")
-
-def _failure_score(r: Mapping[str, Any]) -> int | None:
-    if r.get("timed_out"):
-        return None
-    if r.get("returncode") == 0:
-        return 0
-    t=_text(r)
-    m=re.search(r"FAILED\s*\(([^)]*)\)",t)
-    if m:
-        n=sum(int(v) for _,v in re.findall(r"(failures|errors)=(\d+)",m.group(1)))
-        if n:
-            return n
-    n=len(re.findall(r"(?m)^(?:FAIL|ERROR):\s",t))
-    return n or None
-
-def _purge(paths) -> None:
-    import importlib.util
-    for p in paths:
-        try:
-            pathlib.Path(importlib.util.cache_from_source(str(p))).unlink(missing_ok=True)
-        except Exception:
-            pass
-
-def _test_literals(tests: list[pathlib.Path]) -> tuple[list[Any], list[str]]:
-    nums=[]; strings=[]
-    for test in tests:
-        try:
-            tree=ast.parse(test.read_text(encoding="utf-8"))
-        except Exception:
-            continue
-        for n in ast.walk(tree):
-            if not isinstance(n,ast.Constant):
-                continue
-            v=n.value
-            if isinstance(v,(int,float)) and not isinstance(v,bool) and v not in nums:
-                nums.append(v)
-            elif isinstance(v,str) and v not in strings:
-                strings.append(v)
-    return nums,strings
-
-def _mutation_specs(text: str, nums: list[Any], strings: list[str]):
-    tree=ast.parse(text)
-    nodes=list(ast.walk(tree))
-    for idx,node in enumerate(nodes):
-        if isinstance(node,ast.Compare) and len(node.ops)==1 and type(node.ops[0]) in _COMPARE_SWAPS:
-            nt=_COMPARE_SWAPS[type(node.ops[0])]
-            yield idx, f"COMPARE_SWAP:{type(node.ops[0]).__name__}->{nt.__name__}", ("compare",nt)
-        if isinstance(node,ast.BoolOp) and type(node.op) in _BOOLOP_SWAPS:
-            nt=_BOOLOP_SWAPS[type(node.op)]
-            yield idx, f"BOOL_SWAP:{type(node.op).__name__}->{nt.__name__}", ("bool",nt)
-        if isinstance(node,ast.BinOp) and type(node.op) in _BINOP_SWAPS:
-            for nt in _BINOP_SWAPS[type(node.op)]:
-                yield idx, f"BINOP_SWAP:{type(node.op).__name__}->{nt.__name__}", ("bin",nt)
-        if isinstance(node,ast.Constant):
-            value=node.value
-            reps=[]
-            if isinstance(value,bool):
-                reps=[not value]
-            elif isinstance(value,(int,float)) and not isinstance(value,bool):
-                reps=[]
-                if isinstance(value,int): reps += [value+1,value-1]
-                reps += nums
-                reps += [0,1,-1]
-            elif isinstance(value,str):
-                reps += strings
-            seen=[]
-            for rep in reps:
-                if rep == value or rep in seen: continue
-                if isinstance(value,int) and isinstance(rep,float):
-                    if not rep.is_integer(): continue
-                    rep=int(rep)
-                if isinstance(value,bool) and not isinstance(rep,bool): continue
-                seen.append(rep)
-                yield idx, f"CONSTANT_REPLACE:{value!r}->{rep!r}", ("const",rep)
-        if isinstance(node,ast.UnaryOp) and isinstance(node.op,ast.Not):
-            yield idx, "DROP_NOT", ("dropnot",None)
-        if isinstance(node,(ast.If,ast.While,ast.Assert)) and not isinstance(node.test,ast.UnaryOp):
-            try: tidx=nodes.index(node.test)
-            except ValueError: tidx=-1
-            if tidx >= 0:
-                yield tidx, "ADD_NOT", ("addnot",None)
-
-def _replace_node(tree: ast.AST, target: ast.AST, replacement: ast.AST) -> bool:
-    for parent in ast.walk(tree):
-        for field,val in ast.iter_fields(parent):
-            if val is target:
-                setattr(parent,field,replacement); return True
-            if isinstance(val,list):
-                for i,x in enumerate(val):
-                    if x is target:
-                        val[i]=replacement; return True
-    return False
-
-def _render(text: str, index: int, spec) -> str | None:
-    tree=ast.parse(text)
-    nodes=list(ast.walk(tree))
-    if index < 0 or index >= len(nodes): return None
-    target=nodes[index]; kind,arg=spec
-    if kind=="compare" and isinstance(target,ast.Compare) and len(target.ops)==1:
-        target.ops=[arg()]
-    elif kind=="bool" and isinstance(target,ast.BoolOp): target.op=arg()
-    elif kind=="bin" and isinstance(target,ast.BinOp): target.op=arg()
-    elif kind=="const" and isinstance(target,ast.Constant): target.value=arg
-    elif kind=="dropnot" and isinstance(target,ast.UnaryOp) and isinstance(target.op,ast.Not):
-        if not _replace_node(tree,target,target.operand): return None
-    elif kind=="addnot":
-        if not _replace_node(tree,target,ast.UnaryOp(op=ast.Not(),operand=target)): return None
-    else: return None
-    ast.fix_missing_locations(tree)
-    return ast.unparse(tree)+"\n"
-
-def _variants(source: pathlib.Path, tests: list[pathlib.Path], limit: int) -> list[Variant]:
-    text=source.read_text(encoding="utf-8")
-    nums,strings=_test_literals(tests)
-    out=[]; seen=set()
-    for idx,desc,spec in _mutation_specs(text,nums,strings):
-        cand=_render(text,idx,spec)
-        if not cand or cand==text or cand in seen: continue
-        seen.add(cand); out.append(Variant(source=source,text=cand,mutation=desc))
-        if len(out)>=limit: break
-    return out
-
-def _module_file(root: pathlib.Path, module: str) -> pathlib.Path | None:
-    rel=pathlib.Path(*module.split("."))
-    for p in (root/rel.with_suffix(".py"),root/rel/"__init__.py"):
-        if p.is_file(): return p.resolve()
-    return None
-
-def _rank_sources(repo: pathlib.Path, source_root: pathlib.Path, tests: list[pathlib.Path], failure: str):
-    testset={p.resolve() for p in tests}; scores={}; reasons={}; symbols={}
-    def add(p,score,reason,symbol=None):
-        try:q=p.resolve()
-        except Exception:return
-        if q in testset or not q.is_file() or q.suffix!=".py" or q.name.startswith("test_"): return
-        if q!=source_root and source_root not in q.parents: return
-        scores[q]=scores.get(q,0)+score; reasons.setdefault(q,set()).add(reason)
-        if symbol: symbols.setdefault(q,set()).add(symbol)
-    for raw in re.findall(r'File "([^"]+\.py)"',failure):
-        p=pathlib.Path(raw); add(p if p.is_absolute() else repo/p,1000,"TRACEBACK_FRAME")
-    referenced=set()
-    for test in tests:
-        try: tree=ast.parse(test.read_text(encoding="utf-8"))
-        except Exception: continue
-        for n in ast.walk(tree):
-            if isinstance(n,ast.Import):
-                for a in n.names:
-                    p=_module_file(source_root,a.name)
-                    if p: add(p,300,"TEST_IMPORT_MODULE")
-            elif isinstance(n,ast.ImportFrom) and n.module:
-                p=_module_file(source_root,n.module)
-                if p:
-                    add(p,400,"TEST_IMPORT_FROM")
-                    for a in n.names:
-                        if a.name!="*": referenced.add(a.name); add(p,80,"TEST_REFERENCED_SYMBOL",a.name)
-    for p in sorted(source_root.rglob("*.py")):
-        if p.resolve() in testset or p.name.startswith("test_"): continue
-        try: tree=ast.parse(p.read_text(encoding="utf-8"))
-        except Exception: continue
-        defs={n.name for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef,ast.ClassDef))}
-        overlap=defs & referenced
-        if overlap:
-            add(p,120*len(overlap),"SYMBOL_DEFINITION_OVERLAP")
-            for s in overlap: symbols.setdefault(p,set()).add(s)
-        add(p,1,"BOUNDED_FALLBACK")
-    rows=[]
-    for p in scores:
-        rows.append({"source_path":_rel(repo,p),"score":scores[p],"reasons":sorted(reasons.get(p,set())),"symbols":sorted(symbols.get(p,set())),"_path":p})
-    rows.sort(key=lambda r:(-r["score"],r["source_path"])); return rows
-
+import ast,difflib,hashlib,importlib.util,json,os,pathlib,re,sys
+from typing import Any,Mapping
+SCHEMA="PROJECT_BRAIN_PYTHON_COUPLED_SOFTWARE_REPAIR_LOOP_V1"
+class RepairLoopError(RuntimeError): pass
+def _load(name):
+ p=pathlib.Path(__file__).with_name(name); s=importlib.util.spec_from_file_location("_x_"+name,p)
+ m=importlib.util.module_from_spec(s); s.loader.exec_module(m); return m
+_PATCH=_load("python_test_guided_patch_search_v1.py")
+_STRICT=_load("python_iterative_software_repair_loop_v1.py")
+def _rel(repo,p): return str(p.relative_to(repo)).replace("\\","/")
+def _sha(b): return hashlib.sha256(b).hexdigest()
+def _safe_file(repo,raw):
+ p=(repo/str(raw or "")).resolve()
+ if p==repo or repo not in p.parents or not p.is_file() or p.is_symlink() or p.suffix!=".py": raise RepairLoopError("FILE_INVALID")
+ return p
+def _safe_dir(repo,raw):
+ p=(repo/str(raw or ".")).resolve()
+ if p!=repo and repo not in p.parents: raise RepairLoopError("PATH_OUTSIDE_REPOSITORY")
+ if not p.is_dir() or p.is_symlink(): raise RepairLoopError("DIRECTORY_INVALID")
+ return p
+def _trace_frames(repo,text):
+ out=[]
+ pat=re.compile(r'File "([^"]+\.py)", line (\d+)(?:, in ([A-Za-z_][A-Za-z0-9_]*))?')
+ for raw,line,func in pat.findall(text or ""):
+  p=pathlib.Path(raw); p=p if p.is_absolute() else repo/p
+  try:p=p.resolve()
+  except OSError:continue
+  if p.is_file() and repo in p.parents: out.append((p,int(line),func or ""))
+ return out
+def _test_imports(repo,tests):
+ mods=[]; names=set()
+ for t in tests:
+  try:tree=ast.parse(t.read_text(encoding="utf-8"),filename=str(t))
+  except Exception:continue
+  for n in ast.walk(tree):
+   if isinstance(n,ast.Import):
+    for a in n.names: mods.append(a.name)
+   elif isinstance(n,ast.ImportFrom) and n.module:
+    mods.append(n.module)
+    for a in n.names:
+     if a.name!="*": names.add(a.asname or a.name)
+ out=[]
+ for mod in mods:
+  q=pathlib.Path(*mod.split("."))
+  for p in (repo/(str(q)+".py"),repo/q/"__init__.py"):
+   try:p=p.resolve()
+   except OSError:continue
+   if p.is_file() and repo in p.parents and p not in out: out.append(p)
+ return out,names
+def _defs(path):
+ try:tree=ast.parse(path.read_text(encoding="utf-8"),filename=str(path))
+ except Exception:return []
+ out=[]
+ for n in ast.walk(tree):
+  if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef,ast.ClassDef)):
+   out.append({"name":n.name,"lineno":getattr(n,"lineno",0),"end_lineno":getattr(n,"end_lineno",getattr(n,"lineno",0))})
+ return out
+def _localize(repo,root,tests,failure,max_files,max_symbols):
+ imported,imported_names=_test_imports(repo,tests); frames=_trace_frames(repo,failure)
+ toks={x.lower() for x in re.findall(r"[A-Za-z_][A-Za-z0-9_]{2,}",failure or "")}
+ testset={p.resolve() for p in tests}; files=[]; seen=set()
+ def add(p):
+  try:q=p.resolve()
+  except OSError:return
+  if q in seen or q in testset or not q.is_file() or q.suffix!=".py" or q.name.startswith("test_"):return
+  if q!=root and root not in q.parents:return
+  seen.add(q); files.append(q)
+ for p,_,_ in frames:add(p)
+ for p in imported:add(p)
+ for p in sorted(root.rglob("*.py")):add(p)
+ ranked=[]
+ for p in files:
+  fscore=0; freasons=[]
+  if any(x[0]==p for x in frames):fscore+=10000;freasons.append("TRACEBACK_FILE")
+  if p in imported:fscore+=5000;freasons.append("TEST_IMPORT_FILE")
+  symbols=[]
+  for d in _defs(p):
+   s=0; rs=[]
+   if d["name"] in imported_names:s+=2000;rs.append("TEST_IMPORTED_SYMBOL")
+   if d["name"].lower() in toks:s+=500;rs.append("FAILURE_TEXT_SYMBOL")
+   for fp,line,func in frames:
+    if fp==p and d["lineno"]<=line<=d["end_lineno"]:
+     s+=4000;rs.append("TRACEBACK_LINE_CONTAINS_SYMBOL")
+    if fp==p and func==d["name"]:
+     s+=3000;rs.append("TRACEBACK_FUNCTION")
+   symbols.append({**d,"score":s,"reasons":rs})
+  symbols.sort(key=lambda x:(-x["score"],x["lineno"],x["name"]))
+  if symbols:fscore+=symbols[0]["score"]
+  ranked.append({"path":p,"rel":_rel(repo,p),"score":fscore,"reasons":freasons,"symbols":symbols[:max_symbols]})
+ ranked.sort(key=lambda x:(-x["score"],x["rel"]))
+ return ranked[:max_files]
+def _edit(text,key,desc,replacer):
+ tree=ast.parse(text); target=None
+ for n in ast.walk(tree):
+  if _PATCH._node_key(n)==key:target=n;break
+ if target is None:return None
+ vals=(getattr(target,"lineno",None),getattr(target,"col_offset",None),getattr(target,"end_lineno",None),getattr(target,"end_col_offset",None))
+ if any(v is None for v in vals):return None
+ repl=replacer(target);ast.fix_missing_locations(repl);rb=ast.unparse(repl).encode()
+ raw=text.encode();lines=raw.splitlines(keepends=True)
+ start=_PATCH._byte_offset(lines,target.lineno,target.col_offset);end=_PATCH._byte_offset(lines,target.end_lineno,target.end_col_offset)
+ if raw[start:end]==rb:return None
+ return {"start":start,"end":end,"replacement":rb,"mutation":desc}
+def _pool(row,tests,per_file):
+ p=row["path"]; text=p.read_text(encoding="utf-8");tree=ast.parse(text,filename=str(p));nums,strings=_PATCH._test_literals(tests)
+ ranges=[(s["lineno"],s["end_lineno"],s["score"]) for s in row["symbols"] if s["score"]>0]
+ out=[]
+ for key,desc,replacer in _PATCH._candidate_specs(tree,nums,strings):
+  line=desc.get("lineno") or 0
+  priority=max([score for a,b,score in ranges if a<=line<=b] or [0])
+  e=_edit(text,key,desc,replacer)
+  if e is not None:out.append((priority,e))
+ out.sort(key=lambda x:(-x[0],x[1]["start"],x[1]["end"],str(x[1]["mutation"])))
+ return [e for _,e in out[:per_file]]
+def _apply(text,edits):
+ raw=text.encode(); es=sorted(edits,key=lambda e:(e["start"],e["end"]));last=-1
+ for e in es:
+  if e["start"]<last:return None
+  last=e["end"]
+ for e in sorted(es,key=lambda e:e["start"],reverse=True):
+  raw=raw[:e["start"]]+e["replacement"]+raw[e["end"]:]
+ try:out=raw.decode();ast.parse(out)
+ except Exception:return None
+ return out
+def _candidate(originals,items):
+ grouped={}
+ for p,e in items:grouped.setdefault(p,[]).append(e)
+ out={}
+ for p,es in grouped.items():
+  v=_apply(originals[p].decode(),es)
+  if v is None or v.encode()==originals[p]:return None
+  out[p]=v
+ return out
+def _run_candidate(repo,originals,cand,argv,timeout):
+ try:
+  for p,t in cand.items():p.write_text(t);_PATCH._purge_source_bytecode(p)
+  return _PATCH._run_tests(repo,argv,timeout)
+ finally:
+  for p in cand:p.write_bytes(originals[p]);_PATCH._purge_source_bytecode(p)
 def _diff(repo,p,a,b):
-    return "".join(difflib.unified_diff(a.decode().splitlines(True),b.decode().splitlines(True),fromfile="a/"+_rel(repo,p),tofile="b/"+_rel(repo,p)))
-
-def run(args: Mapping[str,Any], root: str|os.PathLike[str]) -> dict[str,Any]:
-    if not isinstance(args,Mapping): raise RepairLoopError("ARGS_NOT_OBJECT")
-    repo=pathlib.Path(root).resolve(); source_root=_safe_dir(repo,args.get("source_root","."))
-    tests=[_safe_file(repo,x) for x in (args.get("test_paths") or [])]
-    if not tests: raise RepairLoopError("TEST_PATHS_REQUIRED")
-    argv=[str(x) for x in (args.get("test_argv") or [sys.executable]+[_rel(repo,p) for p in tests])]
-    timeout=max(1,min(int(args.get("timeout_s",30)),300)); max_rounds=max(1,min(int(args.get("max_rounds",6)),20)); max_files=max(1,min(int(args.get("max_files",10)),50)); variants_per_file=max(1,min(int(args.get("max_variants_per_file",24)),200)); max_single=max(1,min(int(args.get("max_single_candidates",400)),5000)); max_pairs=max(1,min(int(args.get("max_pair_candidates",1200)),20000))
-    output=(repo/str(args.get("output_path") or "")).resolve()
-    if output==repo or repo not in output.parents: raise RepairLoopError("OUTPUT_PATH_OUTSIDE_REPOSITORY")
-    baseline=_run_tests(repo,argv,timeout); score=_failure_score(baseline)
-    if baseline.get("timed_out"): raise RepairLoopError("BASELINE_TIMEOUT")
-    if baseline.get("returncode")==0: raise RepairLoopError("BASELINE_ALREADY_PASSES")
-    if score is None: raise RepairLoopError("BASELINE_FAILURE_METRIC_UNPARSEABLE")
-    ranked=_rank_sources(repo,source_root,tests,_text(baseline))[:max_files]; sources=[r["_path"] for r in ranked]
-    if not sources: raise RepairLoopError("NO_LOCALIZED_SOURCE_FILES")
-    originals={p:p.read_bytes() for p in sources}; touched=set(); accepted=[]; pair_events=[]; single_tested=0; pair_tested=0; current=baseline; status="OPEN__NO_COMPLETE_REPAIR_IN_BOUNDED_SEARCH"; final_bytes={}; replays=[]
-    try:
-        for round_id in range(1,max_rounds+1):
-            current_score=score; all_variants={p:_variants(p,tests,variants_per_file) for p in sources}; chosen=None
-            for p in sources:
-                cur=p.read_bytes()
-                for v in all_variants[p]:
-                    if single_tested>=max_single: break
-                    single_tested+=1; p.write_text(v.text,encoding="utf-8"); _purge(touched|{p}); rr=_run_tests(repo,argv,timeout); p.write_bytes(cur); _purge(touched|{p}); ns=_failure_score(rr)
-                    if ns is not None and ns < current_score:
-                        chosen=("single",[(p,v)],ns); break
-                if chosen or single_tested>=max_single: break
-            if chosen is None:
-                stop=False
-                for i,p1 in enumerate(sources):
-                    for p2 in sources[i+1:]:
-                        cur1=p1.read_bytes(); cur2=p2.read_bytes()
-                        for v1 in all_variants[p1]:
-                            for v2 in all_variants[p2]:
-                                if pair_tested>=max_pairs: stop=True; break
-                                pair_tested+=1; p1.write_text(v1.text,encoding="utf-8"); p2.write_text(v2.text,encoding="utf-8"); _purge(touched|{p1,p2}); rr=_run_tests(repo,argv,timeout); p1.write_bytes(cur1); p2.write_bytes(cur2); _purge(touched|{p1,p2}); ns=_failure_score(rr)
-                                if ns is not None and ns < current_score:
-                                    chosen=("pair",[(p1,v1),(p2,v2)],ns); stop=True; break
-                            if stop: break
-                        if stop: break
-                    if stop: break
-            if chosen is None:
-                status="OPEN__NO_STRICT_OR_COUPLED_IMPROVING_CANDIDATE"; break
-            kind,edits,ns=chosen; edit_records=[]
-            for p,v in edits:
-                before=p.read_bytes(); p.write_text(v.text,encoding="utf-8"); touched.add(p); edit_records.append({"source_path":_rel(repo,p),"mutation":v.mutation,"before_sha256":_sha(before),"after_sha256":_sha(p.read_bytes())})
-            _purge(touched); current=_run_tests(repo,argv,timeout); replay_score=_failure_score(current)
-            if replay_score is None or replay_score != ns or replay_score >= current_score: raise RepairLoopError("ACCEPTED_EDIT_SET_DID_NOT_REPLAY_IMPROVEMENT")
-            accepted.append({"round":round_id,"edit_kind":kind,"edit_count":len(edits),"score_before":current_score,"score_after":replay_score,"edits":edit_records})
-            if kind=="pair": pair_events.append({"round":round_id,"atomic_pair":True,"score_before":current_score,"score_after":replay_score,"intermediate_single_improvement_required":False})
-            score=replay_score
-            if score==0: status="PASS__BOUNDED_COUPLED_REPAIR_FOUND"; break
-        if score==0:
-            for _ in range(2):
-                _purge(touched); rr=_run_tests(repo,argv,timeout); rs=_failure_score(rr); replays.append({"returncode":rr.get("returncode"),"timed_out":rr.get("timed_out"),"failure_score":rs})
-                if rr.get("returncode")!=0 or rs!=0: raise RepairLoopError("FINAL_REPLAY_FAILED")
-            final_bytes={p:p.read_bytes() for p in touched}
-    finally:
-        for p,b in originals.items(): p.write_bytes(b)
-        _purge(originals)
-    patches=[{"source_path":_rel(repo,p),"original_sha256":_sha(originals[p]),"candidate_sha256":_sha(final_bytes[p]),"unified_diff":_diff(repo,p,originals[p],final_bytes[p])} for p in sorted(final_bytes,key=lambda q:_rel(repo,q))]
-    result={"schema":SCHEMA,"status":status,"pass":status.startswith("PASS__"),"baseline_failure_score":_failure_score(baseline),"localization":[{k:v for k,v in row.items() if k!="_path"} for row in ranked],"accepted_edit_sets":accepted,"accepted_edit_set_count":len(accepted),"coupled_pair_event_count":len(pair_events),"coupled_pair_events":pair_events,"tested_single_candidate_count":single_tested,"tested_pair_candidate_count":pair_tested,"final_verification_replays":replays,"patches":patches,"source_restored":all(p.read_bytes()==b for p,b in originals.items()),"model_dependency_count":0,"external_capability_provider_count":0,"incremental_spend_usd":0,"hard_nonclaims":["NO_GENERAL_SEMANTIC_FAULT_LOCALIZATION_COMPLETENESS","NO_ARBITRARY_SOFTWARE_REPAIR_COMPLETENESS","NO_NON_PYTHON_SUPPORT","NO_HIDDEN_REQUIREMENTS_OR_MERGEABILITY_PROOF","NO_SOURCE_WRITE_OR_PROMOTION_AUTHORITY","NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT"]}
-    output.parent.mkdir(parents=True,exist_ok=True); output.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n",encoding="utf-8"); result["output_path"]=_rel(repo,output); result["output_sha256"]=_sha(output.read_bytes()); result["output_verified"]=True; return result
+ return "".join(difflib.unified_diff(a.decode().splitlines(True),b.splitlines(True),fromfile="a/"+_rel(repo,p),tofile="b/"+_rel(repo,p)))
+def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
+ if not isinstance(args,Mapping):raise RepairLoopError("ARGS_NOT_OBJECT")
+ repo=pathlib.Path(root).resolve();src=_safe_dir(repo,args.get("source_root","."))
+ tests=[_safe_file(repo,x) for x in (args.get("test_paths") or [])]
+ if not tests:raise RepairLoopError("TEST_PATHS_REQUIRED")
+ argv=[str(x) for x in (args.get("test_argv") or [sys.executable]+[_rel(repo,p) for p in tests])]
+ timeout=max(1,min(int(args.get("timeout_s",20)),120));max_files=max(1,min(int(args.get("max_files",8)),32));max_symbols=max(1,min(int(args.get("max_symbols_per_file",8)),64));per=max(1,min(int(args.get("mutations_per_file",24)),128));pair_max=max(1,min(int(args.get("max_pair_candidates",1200)),20000))
+ out=(repo/str(args.get("output_path") or "")).resolve()
+ if out==repo or repo not in out.parents:raise RepairLoopError("OUTPUT_PATH_OUTSIDE_REPOSITORY")
+ strict_probe=out.parent/(".strict_"+out.name)
+ strict_args={"source_root":_rel(repo,src) if src!=repo else ".","test_paths":[_rel(repo,p) for p in tests],"test_argv":argv,"output_path":_rel(repo,strict_probe),"timeout_s":timeout,"max_rounds":args.get("max_strict_rounds",6),"max_files":max_files,"max_candidates_per_file":args.get("max_strict_candidates_per_file",120),"max_total_candidates":args.get("max_strict_total_candidates",1000)}
+ try:
+  strict=_STRICT.run(strict_args,repo)
+ except Exception as exc:
+  strict={"pass":False,"status":"OPEN__STRICT_ROUTE_DECLINED","reason":type(exc).__name__+":"+str(exc)}
+ finally:
+  if strict_probe.exists():strict_probe.unlink()
+ if strict.get("pass"):
+  result={"schema":SCHEMA,"status":"PASS__STRICT_PROGRESS_ROUTE","pass":True,"route":"STRICT_PROGRESS","strict_result":strict,"localization_candidates":[],"crossed_nonmonotonic_valley":False,"model_dependency_count":0,"external_capability_provider_count":0,"incremental_spend_usd":0,"source_restored":strict.get("source_restored") is True,"hard_nonclaims":["NO_UNIVERSAL_SOFTWARE_REPAIR_COMPLETENESS","NO_NON_PYTHON_SUPPORT","NO_HIDDEN_REQUIREMENTS_OR_GENERAL_MERGEABILITY_PROOF","NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT"]}
+ else:
+  base=_PATCH._run_tests(repo,argv,timeout);score=_STRICT._score(base)
+  if score is None and not base.get("timed_out"): score=1
+  if base.get("timed_out"):raise RepairLoopError("BASELINE_TIMEOUT")
+  if base.get("returncode")==0:raise RepairLoopError("BASELINE_ALREADY_PASSES")
+  if score is None:raise RepairLoopError("BASELINE_FAILURE_METRIC_UNPARSEABLE")
+  loc=_localize(repo,src,tests,_STRICT._text(base),max_files,max_symbols)
+  originals={r["path"]:r["path"].read_bytes() for r in loc}
+  pools={r["path"]:_pool(r,tests,per) for r in loc}
+  items=[(r["path"],e) for r in loc for e in pools[r["path"]]]
+  single_scores={};tested_single=0
+  for p,e in items:
+   cand=_candidate(originals,[(p,e)])
+   if cand is None:continue
+   rr=_run_candidate(repo,originals,cand,argv,timeout);ss=_STRICT._score(rr);single_scores[(p,e["start"],e["end"],e["replacement"])]=(1 if ss is None and rr.get("returncode")!=0 and not rr.get("timed_out") else ss);tested_single+=1
+  winner=None;winner_items=None;pair_count=0;crossed=False
+  for i in range(len(items)):
+   if pair_count>=pair_max:break
+   for j in range(i+1,len(items)):
+    if pair_count>=pair_max:break
+    pair_count+=1;a,b=items[i],items[j];cand=_candidate(originals,[a,b])
+    if cand is None:continue
+    rr=_run_candidate(repo,originals,cand,argv,timeout);ps=_STRICT._score(rr)
+    if ps is None and rr.get("returncode")!=0 and not rr.get("timed_out"): ps=1
+    if rr.get("returncode")==0 and ps==0:
+     ka=(a[0],a[1]["start"],a[1]["end"],a[1]["replacement"]);kb=(b[0],b[1]["start"],b[1]["end"],b[1]["replacement"])
+     sa=single_scores.get(ka);sb=single_scores.get(kb);crossed=(sa is None or sa>=score) and (sb is None or sb>=score)
+     winner=cand;winner_items=[a,b];break
+   if winner:break
+  replay=[]
+  if winner:
+   ok=True
+   for _ in range(2):
+    rr=_run_candidate(repo,originals,winner,argv,timeout);rs=_STRICT._score(rr);rs=(0 if rr.get("returncode")==0 else (1 if rs is None and not rr.get("timed_out") else rs));replay.append({"returncode":rr.get("returncode"),"failure_score":rs,"timed_out":rr.get("timed_out")});ok=ok and rr.get("returncode")==0 and rs==0
+   if not ok:winner=None;winner_items=None
+  patches=[]
+  if winner:
+   for p,t in sorted(winner.items(),key=lambda x:_rel(repo,x[0])):patches.append({"source_path":_rel(repo,p),"original_sha256":_sha(originals[p]),"candidate_sha256":_sha(t.encode()),"unified_diff":_diff(repo,p,originals[p],t)})
+  restored=all(p.read_bytes()==b for p,b in originals.items())
+  result={"schema":SCHEMA,"status":"PASS__NONMONOTONIC_COUPLED_PAIR_REPAIR_FOUND" if winner else "OPEN__NO_VERIFIED_REPAIR_IN_STRICT_OR_COUPLED_BOUNDS","pass":winner is not None,"route":"COUPLED_PAIR" if winner else "NONE","baseline_failure_score":score,"strict_result_status":strict.get("status"),"localization_candidates":[{"path":r["rel"],"score":r["score"],"reasons":r["reasons"],"symbols":r["symbols"]} for r in loc],"single_candidates_tested":tested_single,"pair_candidates_tested":pair_count,"crossed_nonmonotonic_valley":crossed if winner else False,"verification_replays":replay,"patches":patches,"source_restored":restored,"model_dependency_count":0,"external_capability_provider_count":0,"incremental_spend_usd":0,"hard_nonclaims":["NO_UNIVERSAL_SOFTWARE_REPAIR_COMPLETENESS","NO_ARBITRARY_EDIT_BASIS_COMPLETENESS","NO_NON_PYTHON_SUPPORT","NO_HIDDEN_REQUIREMENTS_OR_GENERAL_MERGEABILITY_PROOF","NO_CLAIM_LOCALIZATION_IS_COMPLETE_SEMANTIC_CAUSALITY","NO_SOURCE_WRITE_OR_PROMOTION_AUTHORITY","NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT"]}
+ if not result.get("source_restored"):raise RepairLoopError("SOURCE_RESTORATION_FAILED")
+ out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n");result["output_path"]=_rel(repo,out);result["output_sha256"]=_sha(out.read_bytes());result["output_verified"]=True;return result
