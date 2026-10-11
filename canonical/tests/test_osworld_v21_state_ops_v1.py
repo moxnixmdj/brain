@@ -13,7 +13,7 @@ def test_compile_file_ops_and_allowlisted_cli():
             {"type": "RUN_CLI", "argv": ["ffprobe", "-version"], "timeout_s": 5},
         ]
     })
-    assert "pathlib.Path('/home/oai/share/x').mkdir" in src
+    assert "MKDIR:PASS:/home/oai/share/x" in src
     assert "write_text('hello'" in src
     assert "subprocess.run(['ffprobe', '-version']" in src
 
