@@ -130,5 +130,22 @@
     "request_already_sent": true,
     "request_channel": "DIRECT_EMAIL_TO_AUTOMATIONBENCH_AUTHORS",
     "request_requires_private_task_disclosure": false
+  },
+  "submission_readiness": {
+    "status": "WAIT_FOR_PROVIDER_INTERFACE__NO_SPECULATIVE_ADAPTER_BUILD",
+    "private_evaluation_route_exists": true,
+    "request_sent": true,
+    "provider_reply_observed": false,
+    "current_brain_runtime_content_address_exists": true,
+    "current_brain_runtime_package_sha256": "5c5e1d1e79862e71eca9217e3a34d2b1343cb3c7b03d4826fe0f4a56d3400072",
+    "historical_openai_compatible_gateway_pr": 865,
+    "historical_gateway_is_current_canonical_candidate": false,
+    "exact_provider_submission_interface_known": false,
+    "next_if_provider_accepts": "ADAPT_CURRENT_CONTENT_ADDRESSED_RUNTIME_TO_THE_EXACT_PROVIDER_INTERFACE__FREEZE_CANDIDATE__RUN_PRIVATE_EVAL__VERIFY_RECEIPT",
+    "do_not_do": [
+      "DO_NOT_BUILD_UNKNOWN_INTERFACE_IN_ADVANCE",
+      "DO_NOT_CALL_HISTORICAL_UNMERGED_GATEWAY_CURRENT_BRAIN",
+      "DO_NOT_USE_PUBLIC_600_AS_PRIVATE_PROMOTION_EVIDENCE"
+    ]
   }
 }
