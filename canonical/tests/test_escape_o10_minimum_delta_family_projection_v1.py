@@ -1,4 +1,6 @@
 from __future__ import annotations
+import json
+from pathlib import Path
 import unittest
 from canonical.runtime.escape_o10_minimum_delta_family_projection_v1 import compile_projection
 
@@ -14,6 +16,20 @@ class ProjectionTests(unittest.TestCase):
             {f["family_id"]:f["row_count"] for f in out["families"]},
             {"OWNER_OR_EVALUATOR_INTERFACE":3,"SCOPE_COMPLETENESS":4,"THRESHOLD_OR_DECOMPOSITION_EVIDENCE":3},
         )
+
+    def test_governance_projection_matches_compiler(self):
+        out=compile_projection()
+        root=Path(__file__).resolve().parents[2]
+        gov=json.loads((root/"canonical/governance/CURRENT_ESCAPE_O10_MINIMUM_DELTA_FAMILIES_20261011_V1.json").read_text())
+        self.assertEqual(gov["partition"]["active_o_rows"],out["active_o_row_count"])
+        self.assertEqual(gov["partition"]["family_count"],out["minimum_delta_family_count"])
+        got={f["family_id"]:set(r["obligation_id"] for r in f["rows"]) for f in out["families"]}
+        expected={f["family_id"]:set(f["obligation_ids"]) for f in gov["partition"]["families"]}
+        self.assertEqual(got,expected)
+        self.assertFalse(gov["execution_authority"])
+        self.assertFalse(gov["promotion_authority"])
+        self.assertFalse(gov["acceptance_authority"])
+        self.assertFalse(gov["terminal_authority"])
 
     def test_zero_authority(self):
         out=compile_projection()
