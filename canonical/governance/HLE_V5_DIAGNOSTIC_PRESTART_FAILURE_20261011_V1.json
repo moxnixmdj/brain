@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_V5_DIAGNOSTIC_PRESTART_FAILURE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "HARNESS_DEPENDENCY_FAILURE_BEFORE_SOLVER_EXECUTION__ZERO_QUESTIONS_EXECUTED__ZERO_CREDIT",
+  "subject": {
+    "solver_path": "canonical/runtime/hle_native_open_domain_research_v5.py",
+    "solver_blob_sha": "ae6006af1e578b0690357756e0b899a10323a5f4",
+    "verification_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2677,
+    "workflow_run_id": 38141742882,
+    "workflow_job_id": 114476832587
+  },
+  "failure": {
+    "phase": "COMPILE_AND_SELF_TEST_IMPORT",
+    "exception": "ImportError",
+    "missing_dependency": "canonical.runtime.root2_hle_opus55_tool_adapter_v1",
+    "solver_questions_executed": 0,
+    "commitments_sealed": 0,
+    "gold_score_phase_reached": false
+  },
+  "repair": {
+    "dependency_path": "canonical/runtime/root2_hle_opus55_tool_adapter_v1.py",
+    "dependency_blob_sha": "fa955ccc5e4f3d29aa79e2b380f713d30ee46e8f",
+    "solver_bytes_changed": false,
+    "rerun_pull_request": 2683
+  },
+  "benchmark_integrity": {
+    "public_diagnostic_questions_consumed_by_this_failed_run": 0,
+    "fresh_rows_50_to_74_consumed": 0,
+    "hle_questions_consumed": 0,
+    "hle_gold_consumed": 0,
+    "hle_score_credit": 0
+  },
+  "hard_rules": [
+    "DO_NOT_CLASSIFY_THIS_RECEIPT_AS_V5_CAPABILITY_FAILURE",
+    "DO_NOT_CLASSIFY_THIS_RECEIPT_AS_V5_CAPABILITY_SUCCESS",
+    "ONLY_A_RUN_REACHING_SOLVER_EXECUTION_CAN INFORM_V5_CAPABILITY",
+    "EXTERNAL_MODEL_COGNITION_REMAINS_FORBIDDEN"
+  ],
+  "target_score_claimed": false,
+  "hle_67_7_certified": false
+}
