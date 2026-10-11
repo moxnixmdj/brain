@@ -1,0 +1,128 @@
+name: OSWorld v2.1 local Qwen policy synthetic smoke V1
+
+on:
+  push:
+    branches:
+      - osworld-v21-direct-matched-run-20261011-v1
+    paths:
+      - "canonical/runtime/osworld_v21_**"
+      - "canonical/tests/test_osworld_v21_**"
+      - ".github/workflows/osworld-v21-local-qwen-policy-smoke-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run OSWorld zero-case unit tests
+        run: |
+          set -euo pipefail
+          python -m pytest -q             canonical/tests/test_osworld_v21_brain_agent_adapter_v1.py             canonical/tests/test_osworld_v21_state_ops_v1.py             canonical/tests/test_osworld_v21_runner_bridge_v1.py             canonical/tests/test_osworld_v21_local_qwen_policy_v1.py             canonical/tests/test_osworld_v21_brain_subject_v1.py
+
+      - name: Build pinned llama.cpp server
+        run: |
+          set -euo pipefail
+          git init llama.cpp
+          git -C llama.cpp remote add origin https://github.com/ggml-org/llama.cpp.git
+          git -C llama.cpp fetch --depth 1 origin bec4772f6a2527d371557b5d2032641e5ff7619c
+          git -C llama.cpp checkout --detach FETCH_HEAD
+          test "$(git -C llama.cpp rev-parse HEAD)" = "bec4772f6a2527d371557b5d2032641e5ff7619c"
+          cmake -S llama.cpp -B llama.cpp/build -DGGML_CUDA=OFF -DLLAMA_CURL=OFF -DCMAKE_BUILD_TYPE=Release
+          cmake --build llama.cpp/build -j 2 --target llama-server
+
+      - name: Download and verify pinned Brain Qwen bytes
+        run: |
+          set -euo pipefail
+          mkdir -p models
+          curl -L --fail --retry 3 --retry-delay 3 --silent --show-error             -o models/Qwen3.5-9B-M-TS-Q4_K_M.gguf             'https://huggingface.co/TheStageAI/Qwen3.5-9B-GGUF/resolve/main/Qwen3.5-9B-M-TS-Q4_K_M.gguf?download=true'
+          echo 'f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c  models/Qwen3.5-9B-M-TS-Q4_K_M.gguf' | sha256sum -c -
+          test "$(stat -c '%s' models/Qwen3.5-9B-M-TS-Q4_K_M.gguf)" = "5060174144"
+
+      - name: Start loopback-only pinned local endpoint
+        run: |
+          set -euo pipefail
+          EXTRA=()
+          if llama.cpp/build/bin/llama-server --help 2>&1 | grep -q -- '--reasoning'; then EXTRA+=(--reasoning off); fi
+          nohup llama.cpp/build/bin/llama-server             -m models/Qwen3.5-9B-M-TS-Q4_K_M.gguf             --alias brain-qwen3.5-9b             --host 127.0.0.1 --port 8080 -c 8192 -t 4 --parallel 1             --jinja --no-webui "${EXTRA[@]}"             > OSWORLD_QWEN_SERVER.log 2>&1 &
+          ok=0
+          for i in $(seq 1 240); do
+            if curl -fsS http://127.0.0.1:8080/health > OSWORLD_QWEN_HEALTH.json 2>/dev/null; then ok=1; break; fi
+            sleep 1
+          done
+          test "$ok" = 1
+
+      - name: Live two-cycle generic browser policy smoke
+        run: |
+          set -euo pipefail
+          python - <<'PY' | tee OSWORLD_QWEN_POLICY_SMOKE.json
+          import json
+          from canonical.runtime.osworld_v21_brain_agent_adapter_v1 import BrainOSWorldAgent
+          from canonical.runtime.osworld_v21_local_qwen_policy_v1 import plan_state
+
+          class Browser:
+              def __init__(self):
+                  self.ops=[]
+              def bind_environment(self, env):
+                  self.env=env
+              def run(self, op):
+                  op=dict(op)
+                  self.ops.append(op)
+                  if op.get("type")=="OBSERVE":
+                      return {
+                          "type":"OBSERVE",
+                          "active_url":"https://synthetic.invalid/form",
+                          "active_title":"Synthetic Form",
+                          "tabs":[{"title":"Synthetic Form","url":"https://synthetic.invalid/form"}],
+                          "visible_text":"Synthetic page\nSubmit",
+                      }
+                  return {"type":op.get("type"),"status":"synthetic_ok","active_url":"https://synthetic.invalid/form"}
+
+          browser=Browser()
+          agent=BrainOSWorldAgent(
+              plan_state,
+              policy_id="brain-osworld-v21-local-qwen35-9b-state-first-v1",
+              browser_controller=browser,
+              ocr_provider=None,
+          )
+          instruction="Inspect the current browser page first. Then click the visible control named Submit."
+          r1,a1=agent.predict(instruction,{"screenshot":b"synthetic-screen-1"})
+          assert a1==["WAIT"],(r1,a1,browser.ops)
+          assert browser.ops and browser.ops[0].get("type")=="OBSERVE",browser.ops
+
+          r2,a2=agent.predict(instruction,{"screenshot":b"synthetic-screen-2"})
+          assert a2==["WAIT"],(r2,a2,browser.ops)
+          assert len(browser.ops)>=2,browser.ops
+          assert browser.ops[1].get("type") in {"CLICK_TEXT","CLICK_ROLE"},browser.ops
+          if browser.ops[1].get("type")=="CLICK_TEXT":
+              assert browser.ops[1].get("text")=="Submit",browser.ops
+          if browser.ops[1].get("type")=="CLICK_ROLE":
+              assert browser.ops[1].get("name")=="Submit",browser.ops
+
+          print(json.dumps({
+              "schema":"PROJECT_BRAIN_OSWORLD_V21_LOCAL_QWEN_POLICY_SYNTHETIC_SMOKE_V1",
+              "status":"PASS",
+              "cycles":2,
+              "browser_ops":browser.ops,
+              "terminal_cases_consumed":0,
+              "benchmark_task_data_used":False,
+              "reference_trajectories_used":False,
+              "incremental_spend_usd":0,
+          },sort_keys=True))
+          PY
+
+      - name: Preserve zero-case evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: osworld-v21-local-qwen-policy-smoke-v1
+          path: |
+            OSWORLD_QWEN_HEALTH.json
+            OSWORLD_QWEN_SERVER.log
+            OSWORLD_QWEN_POLICY_SMOKE.json
+          if-no-files-found: warn
