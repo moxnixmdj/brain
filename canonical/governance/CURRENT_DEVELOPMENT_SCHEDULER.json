@@ -188,7 +188,7 @@
   },
   "scheduler_projection_reconciliation": {
     "path": "canonical/verification/LIVE_FRONTIER_24_OF_24_CURRENTNESS_RECONCILIATION_20261011_V1.json",
-    "status": "PENDING_RECEIPT_BINDING_ON_BRANCH__NO_EXECUTION_OR_PROMOTION_AUTHORITY",
+    "status": "RECONCILED__RECEIPT_PATH_DECLARED__NO_EXECUTION_OR_PROMOTION_AUTHORITY",
     "source_main_commit": "e0c2627ca80de041569d7af6398298129f82703f",
     "live_frontier_git_blob_sha": "bd8b094b6e65b1bfa60f370d2850dc91b657db0c",
     "professional_git_blob_sha": "65de0b8f8bf7c449f41a0267eba10f8c5164089d",
