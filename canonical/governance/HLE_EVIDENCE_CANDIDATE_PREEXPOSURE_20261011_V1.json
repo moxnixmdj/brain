@@ -1,0 +1,177 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_EVIDENCE_CANDIDATE_PREEXPOSURE_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_BEFORE_RUNTIME_IMPLEMENTATION__SYNTHETIC_NON_HLE__ZERO_CREDIT",
+  "objective": "Test deterministic extraction and relation labeling from source snippets under typed answer contracts, with ambiguity and negation failing closed.",
+  "cases": [
+    {
+      "id": "PERSON_COPULA",
+      "contract": {
+        "kind": "PERSON",
+        "polarity": "POSITIVE"
+      },
+      "focus": [
+        "zephyr",
+        "particle",
+        "alder"
+      ],
+      "evidence": "The synthetic Zephyr particle was discovered by Dr. Mira Sol in the fictional Alder experiment.",
+      "expected_candidates": [
+        "Dr. Mira Sol"
+      ]
+    },
+    {
+      "id": "YEAR_PUBLISHED",
+      "contract": {
+        "kind": "YEAR",
+        "polarity": "POSITIVE"
+      },
+      "focus": [
+        "meridian",
+        "protocol",
+        "published"
+      ],
+      "evidence": "The fictional Meridian protocol was first published in 2042 after a five-year study.",
+      "expected_candidates": [
+        "2042"
+      ]
+    },
+    {
+      "id": "LOCATION_LOCATED",
+      "contract": {
+        "kind": "LOCATION",
+        "polarity": "POSITIVE"
+      },
+      "focus": [
+        "ardent",
+        "observatory",
+        "located"
+      ],
+      "evidence": "The fictional Ardent observatory is located in North Valora near the polar ridge.",
+      "expected_candidates": [
+        "North Valora"
+      ]
+    },
+    {
+      "id": "NUMBER_COUNT",
+      "contract": {
+        "kind": "NUMBER",
+        "polarity": "POSITIVE"
+      },
+      "focus": [
+        "kappa",
+        "assembly",
+        "modules"
+      ],
+      "evidence": "The fictional Kappa assembly contains 17 synthetic modules in its standard configuration.",
+      "expected_candidates": [
+        "17"
+      ]
+    },
+    {
+      "id": "ENTITY_CALLED",
+      "contract": {
+        "kind": "ENTITY_OR_TERM",
+        "polarity": "POSITIVE"
+      },
+      "focus": [
+        "tau",
+        "transformation",
+        "convention"
+      ],
+      "evidence": "In this fictional convention, the transformation is called the Tau inversion.",
+      "expected_candidates": [
+        "Tau inversion"
+      ]
+    },
+    {
+      "id": "BOOLEAN_POSITIVE",
+      "contract": {
+        "kind": "BOOLEAN",
+        "polarity": "POSITIVE"
+      },
+      "focus": [
+        "kappa",
+        "rule",
+        "boundary"
+      ],
+      "evidence": "Under the synthetic boundary condition, the fictional Kappa rule is valid.",
+      "expected_candidates": [
+        "Yes"
+      ]
+    },
+    {
+      "id": "BOOLEAN_NEGATED",
+      "contract": {
+        "kind": "BOOLEAN",
+        "polarity": "POSITIVE"
+      },
+      "focus": [
+        "kappa",
+        "rule",
+        "boundary"
+      ],
+      "evidence": "Under the synthetic boundary condition, the fictional Kappa rule is not valid.",
+      "expected_candidates": [
+        "No"
+      ]
+    },
+    {
+      "id": "EXPLANATION",
+      "contract": {
+        "kind": "EXPLANATION",
+        "polarity": "POSITIVE"
+      },
+      "focus": [
+        "alder",
+        "effect",
+        "threshold"
+      ],
+      "evidence": "The fictional Alder effect disappears above the synthetic threshold because the Zephyr state becomes unstable.",
+      "expected_candidates": [
+        "because the Zephyr state becomes unstable"
+      ]
+    },
+    {
+      "id": "IRRELEVANT",
+      "contract": {
+        "kind": "PERSON",
+        "polarity": "POSITIVE"
+      },
+      "focus": [
+        "zephyr",
+        "particle",
+        "alder"
+      ],
+      "evidence": "North Valora contains several observatories and an unrelated fictional museum.",
+      "expected_candidates": []
+    },
+    {
+      "id": "AMBIGUOUS_PERSON",
+      "contract": {
+        "kind": "PERSON",
+        "polarity": "POSITIVE"
+      },
+      "focus": [
+        "zephyr",
+        "particle",
+        "alder"
+      ],
+      "evidence": "Dr. Mira Sol and Dr. Kian Vey were both discussed in relation to the synthetic Zephyr particle, but the passage does not state who discovered it.",
+      "expected_candidates": []
+    }
+  ],
+  "invariants": [
+    "NO_HLE_QUESTION_OR_GOLD_CONTENT",
+    "NO_EXTERNAL_REASONING_MODEL",
+    "EVIDENCE_MUST_HAVE_OBJECTIVE_ANCHOR_COVERAGE_BEFORE_EXTRACTION",
+    "CANDIDATES_ARE_PROPOSALS_WITH_ZERO_CORRECTNESS_AUTHORITY",
+    "AMBIGUITY_OR_MISSING_RELATION_FAILS_CLOSED",
+    "NO_SUPPORT_LABEL_FROM_MERE_CANDIDATE_OCCURRENCE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
