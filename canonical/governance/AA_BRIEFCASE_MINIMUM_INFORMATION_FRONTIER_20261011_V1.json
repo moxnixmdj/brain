@@ -1,0 +1,134 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_MINIMUM_INFORMATION_FRONTIER_20261011_V1",
+  "date": "2026-10-11",
+  "status": "MINIMUM_PROOF_CARRYING_INFORMATION_DERIVED__CURRENT_COMPLETE_BASIS_ABSENT__ONE_INTEGRATED_DOMINANCE_WITNESS_IS_THE_PREFERRED_ZERO_EXTERNAL_ROUTE__ZERO_CREDIT",
+  "target": {
+    "authority_path": "canonical/governance/AA_BRIEFCASE_MEASUREMENT_SEMANTIC_TARGET_V1.json",
+    "authority_git_blob_sha": "8f24ca30e6cceb8a58f619da1623037c0a4bda0b",
+    "terminal_predicate": "BRAIN_PROFESSIONAL_WORK_CAPABILITY_GE_CAPABILITY_EVIDENCED_BY_FROZEN_OPUS55_AA_BRIEFCASE_1822",
+    "literal_aa_elo_is_separate": true
+  },
+  "inherited_laws": [
+    {
+      "path": "canonical/governance/BENCHMARK_INFORMATION_OUTPUT_EQUIVALENCE_LAW_20261011_V1.json",
+      "git_blob_sha": "2d5eba3382470681b64ddc954792bd4e0387a784"
+    },
+    {
+      "path": "canonical/laws/BENCHMARK_MEASUREMENT_VS_CAPABILITY_PROOF_LAW_V1.md",
+      "git_blob_sha": "8c6087074c5b055da55a0700cc62ef4a042303af"
+    },
+    {
+      "path": "canonical/laws/CAPABILITY_TRANSFER_VS_COGNITION_OUTSOURCING_LAW_V1.md",
+      "git_blob_sha": "86dfbdeb327bf981db6e32f22f460a675df56d57"
+    }
+  ],
+  "capability_components": [
+    "TASK_SPECIFIC_REQUIREMENT_AND_RUBRIC_SATISFACTION",
+    "ANALYTICAL_QUALITY",
+    "PRESENTATION_QUALITY",
+    "RELIABILITY_ACROSS_THE_RELEVANT_PROFESSIONAL_WORK_SCOPE"
+  ],
+  "minimum_information_theorem": {
+    "statement": "THE_TERMINAL_CAPABILITY_RELATION_IS_CLOSED_AS_SOON_AS_A_SAME_SUBJECT_SET_OF_BRAIN_OWNED_VERIFIED_CAUSAL_GENERALIZATION_BOUND_CERTIFICATES_COVERS_ALL_FOUR_CANONICAL_COMPONENTS_AND_BINDS_A_SCOPE_COMPLETE_CREDIT_BEARING_ENTAILMENT_TO_THE_TERMINAL_PREDICATE",
+    "required_information": [
+      "ONE_CONTENT_ADDRESSED_BRAIN_SUBJECT_SHARED_BY_ALL_LOAD_BEARING_CERTIFICATES",
+      "BRAIN_OWNED_DONOR_FREE_RUNTIME_COGNITION",
+      "COMPLETE_COVERAGE_OF_ALL_FOUR_CANONICAL_CAPABILITY_COMPONENTS",
+      "VERIFIED_CAUSAL_AND_GENERALIZATION_BOUND_EVIDENCE",
+      "BOUND_REFERENCE_EVIDENCE_OR_A_TARGET_FREE_STRONGER_TOP_CERTIFICATE",
+      "A_SCOPE_COMPLETE_TYPED_RELATION_IN_EXACT_EQUIVALENCE_CONSERVATIVE_DOMINANCE_OR_OWNER_ACCEPTED_RELATION"
+    ],
+    "not_required_if_the_theorem_is_satisfied": [
+      "PRIVATE_91_TASK_IDENTITY",
+      "REALIZED_CROWD_BT_JUDGE_NOISE",
+      "RECONSTRUCTION_OF_THE_LITERAL_1822_SCORE",
+      "AA_OWNER_SCORER_IMPLEMENTATION"
+    ]
+  },
+  "closure_families": [
+    {
+      "id": "TARGET_FREE_SCOPE_COMPLETE_TOP_SUPPORT",
+      "preferred_under_zero_external_help": true,
+      "sufficient_if": [
+        "RELEVANT_PROFESSIONAL_WORK_SCOPE_IS_COMPLETE",
+        "MATERIAL_ORDER_COVERS_ALL_FOUR_CANONICAL_COMPONENTS",
+        "THE_EXACT_BRAIN_SUBJECT_IS_PROVED_TO_OCCUPY_GLOBAL_TOP_SUPPORT_ON_THE_COMPLETE_SCOPE",
+        "THE_TOP_SUPPORT_RELATION_CONSERVATIVELY_DOMINATES_THE_CAPABILITY_EVIDENCED_BY_THE_REFERENCE"
+      ],
+      "reference_case_level_outputs_required": false
+    },
+    {
+      "id": "MATCHED_REFERENCE_RELATION",
+      "preferred_under_zero_external_help": false,
+      "sufficient_if": [
+        "BRAIN_AND_REFERENCE_ARE_BOUND_ON_A_SCOPE_COMPLETE_SAME_INFORMATION_COMPARISON",
+        "ALL_FOUR_COMPONENT_RELATIONS_ARE_PROVED_NONINFERIOR",
+        "THE_RELATION_ENTAILS_THE_CANONICAL_TERMINAL_PREDICATE"
+      ]
+    }
+  ],
+  "reuse_probe": {
+    "authorities_checked": [
+      {
+        "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
+        "git_blob_sha": "34f2583ae019ec4730f0841cb0b32016ec968645",
+        "reusable_truth": "PROFESSIONAL_PROPERTY_TRUTH_24_OF_24",
+        "why_not_complete": "QUALITY_AUTHORITY_AND_OPUS_NONINFERIORITY_ARE_NOT_PROVED__NO_CREDIT_BEARING_TERMINAL_ENTAILMENT"
+      },
+      {
+        "path": "canonical/governance/P2_STRONG_VISIBLE_QUALITY_SUBREGION_TOP_LAW_20261007_V1.json",
+        "git_blob_sha": "ec0831f086823995b671c33ff24cd76de3b0250e",
+        "reusable_truth": "VISIBLE_SUBREGION_BOOLEAN_TOP_LAW_WITH_ABLATION_RESCUE",
+        "why_not_complete": "NO_GLOBAL_RELEVANT_PROFESSIONAL_SCOPE_MEMBERSHIP_OR_AA_TERMINAL_ENTAILMENT"
+      },
+      {
+        "path": "canonical/governance/HIDDEN_EVALUATOR_TARGET_FREE_TOP_SUPPORT_DOMINANCE_V1.json",
+        "git_blob_sha": "69e3ac04f0158bd2309c926d606d798449633f25",
+        "reusable_truth": "TARGET_FREE_TOP_SUPPORT_DOMINANCE_THEOREM",
+        "why_not_complete": "CONDITIONAL_THEOREM__NO_SCOPE_COMPLETE_BRAIN_TOP_SUPPORT_RECEIPT_FOR_THIS_TERMINAL_PREDICATE"
+      }
+    ],
+    "complete_admissible_basis_found": false,
+    "repeat_same_search_without_new_authority": false,
+    "note": "THIS_IS_A_HIGH_AUTHORITY_REUSE_PROBE_NOT_A_CLAIM_OF_EXHAUSTIVE_REPOSITORY_ENUMERATION"
+  },
+  "public_reference_evidence": {
+    "source": "canonical/evidence/AA_BRIEFCASE_PUBLIC_SCORER_CONTRACT_V2_20261011.json",
+    "git_blob_sha": "622f4fa5707fe80e30659f05f95e9b7208ad3fcd",
+    "frozen_headline_reference": 1822,
+    "observed_component_row": {
+      "rubric_pass_rate": 0.6121212121212121,
+      "analytical_quality_elo": 2206.92,
+      "presentation_elo": 1709.91
+    },
+    "interpretation": "REFERENCE_EVIDENCE_ONLY__THE_COMPONENT_VECTOR_IS_BENCHMARK_CONDITIONED_AND_IS_NOT_DECLARED_TO_BE_AN_INTRINSIC_CAPABILITY_COORDINATE_SYSTEM_OR_AN_INVERTIBLE_HEADLINE_SCORER"
+  },
+  "implementation": {
+    "runtime_path": "canonical/runtime/aa_briefcase_minimum_information_v1.py",
+    "tests_path": "canonical/tests/test_aa_briefcase_minimum_information_v1.py",
+    "selection": "EXACT_MINIMUM_TOTAL_ACTION_COST_SET_COVER_WITH_SAME_SUBJECT_CONSTRAINT"
+  },
+  "current_result": {
+    "capability_relation_proved": false,
+    "literal_aa_briefcase_elo_ge_1822_proved": false,
+    "complete_same_subject_information_set_found": false,
+    "current_missing_decisive_object": "ONE_SCOPE_COMPLETE_CREDIT_BEARING_DOMINANCE_OR_EQUIVALENCE_CERTIFICATE_FOR_THE_CANONICAL_TERMINAL_PREDICATE"
+  },
+  "single_next_action": "ATTEMPT_THE_TARGET_FREE_SCOPE_COMPLETE_TOP_SUPPORT_ROUTE_BY_REUSING_THE_24_OF_24_PROFESSIONAL_PROPERTY_TRUTH_P2_VISIBLE_TOP_LAW_AND_TARGET_FREE_TOP_SUPPORT_THEOREM__THE_ONLY_NEW_WITNESS_WORTH_BUILDING_IS_THE_MISSING_SCOPE_COMPLETE_END_TO_END_QUALITY_AND_RELIABILITY_BINDING__FAIL_CLOSED_IF_THAT_BINDING_CANNOT_BE_PROVED",
+  "forbid": [
+    "RUN_PRIVATE_BENCHMARK_MACHINERY_MERELY_BECAUSE_IT_EXISTS",
+    "TREAT_PUBLIC_COMPONENT_NUMBERS_AS_INTRINSIC_CAPABILITY_COORDINATES",
+    "INFER_LITERAL_1822_FROM_CAPABILITY_RELATION",
+    "STITCH_DIFFERENT_BRAIN_SUBJECTS",
+    "COUNT_EXTERNAL_GENERAL_PURPOSE_RUNTIME_COGNITION_AS_BRAIN_CAPABILITY",
+    "BUILD_NEW_GENERIC_CAPABILITY_MACHINERY_THAT_DOES_NOT_CLOSE_THE_MISSING_SCOPE_COMPLETE_END_TO_END_BINDING"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "benchmark_score_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
