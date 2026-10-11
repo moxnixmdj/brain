@@ -4148,6 +4148,107 @@
         "external_capability_provider_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "python.fault.provenance.interprocedural.value.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available"
+      ],
+      "provides": [
+        "python.fault.provenance.dynamic_call_edges",
+        "python.fault.provenance.interprocedural_value_hypotheses"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "failing_test_count",
+        "passing_test_count",
+        "test_traces",
+        "ranked_call_edges",
+        "interprocedural_hypotheses",
+        "provenance_basis",
+        "model_dependency_count",
+        "external_capability_provider_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "python",
+        "fault",
+        "provenance",
+        "interprocedural",
+        "call",
+        "return",
+        "argument",
+        "value",
+        "dynamic",
+        "dataflow",
+        "callsite"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.fault.provenance.interprocedural.value.v1",
+          "source_root": "${input.source_root}",
+          "test_paths": "${input.test_paths}",
+          "output_path": "${input.output_path}",
+          "timeout_s": 20,
+          "max_trace_events": 100000,
+          "max_value_chars": 120
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "python_interprocedural_value_provenance_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Records bounded repository-local Python call/return observations and primitive-safe argument/return fingerprints from failing and passing test executions.",
+        "Links dynamic call edges to static Python callsite assignment bindings and emits ranked interprocedural value-provenance hypotheses.",
+        "Observed argument/return differences are evidence for localization, not a proof of semantic causality or a complete interprocedural def-use graph.",
+        "Does not inspect arbitrary object internal state, does not edit source, and provides no mergeability, hidden-requirement, FrontierCode score, or acceptance authority."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "ast",
+          "hashlib",
+          "json",
+          "math",
+          "os",
+          "pathlib",
+          "subprocess",
+          "sys"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py"
+      },
+      "verification": {
+        "status": "INDEPENDENT_TWO_CARRIER_FOCUSED_FALSIFICATION_PASS",
+        "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+        "primary_test_count": 7,
+        "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
+        "independent_test_count": 7,
+        "exact_branch_layout_replay_test_count": 7,
+        "runtime_git_blob_sha": "7e9a0201b89b5d2edf4647c868858288fd1a9820",
+        "test_git_blob_sha": "82af855fc384d3d8193cf1426fd58e9a1a1443c8",
+        "runtime_sha256": "cfa9b3f5446a5c88d5d08b699c2af27e1470cb65620e0fae9b62d1d50182d477",
+        "test_sha256": "b4233d1843bdcc911d4ab1f5e24ca48bd28697efb2f3d52e2b86fd14fc790f9f",
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
