@@ -62,6 +62,18 @@ def _flatten_records(value: Any) -> list[dict[str, Any]]:
     return out
 
 
+def _semantic_done(history: Sequence[Mapping[str, Any]], semantic: str) -> bool:
+    for x in history:
+        if not isinstance(x, Mapping):
+            continue
+        if x.get("semantic") == semantic:
+            return True
+        metadata = x.get("metadata")
+        if isinstance(metadata, Mapping) and metadata.get("project_brain/automationbench_semantic") == semantic:
+            return True
+    return False
+
+
 def next_policy_action(
     *,
     prompt: str,
@@ -99,11 +111,7 @@ def next_policy_action(
     # Typed compiler 1: Salesforce mark-won.
     action = compile_salesforce_mark_won(prompt, observations)
     if action is not None and validate_nonnegative_action(prompt, action):
-        if not any(
-            x.get("semantic") == action.get("semantic")
-            for x in history
-            if isinstance(x, Mapping)
-        ):
+        if not _semantic_done(history, str(action.get("semantic") or "")):
             return {
                 "schema": SCHEMA,
                 "status": "CALL_TOOLS",
@@ -117,14 +125,10 @@ def next_policy_action(
     for obs in observations:
         all_records.extend(_flatten_records(obs))
     ranked = rank_source_records(prompt, all_records, record_role="action_candidate")
-    if ranked:
-        action = compile_asana_create_task(prompt, ranked[0])
+    for record in ranked:
+        action = compile_asana_create_task(prompt, record)
         if action is not None and validate_nonnegative_action(prompt, action):
-            if not any(
-                x.get("semantic") == action.get("semantic")
-                for x in history
-                if isinstance(x, Mapping)
-            ):
+            if not _semantic_done(history, str(action.get("semantic") or "")):
                 return {
                     "schema": SCHEMA,
                     "status": "CALL_TOOLS",
