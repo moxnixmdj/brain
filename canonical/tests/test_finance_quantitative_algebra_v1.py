@@ -15,7 +15,9 @@ from canonical.runtime.finance_quantitative_algebra_v1 import (
     dcf_enterprise_value,
     debt_to_total_capital,
     enterprise_value,
+    ebitda_from_operating_income,
     fixed_charge_coverage_ratio,
+    fixed_operating_lease_cost,
     market_sentiment_from_return,
     midpoint,
     moic,
@@ -78,6 +80,21 @@ def test_perpetual_growth_requires_wacc_above_growth():
     assert tv == D("2100")
     with pytest.raises(FinanceAlgebraError, match="DISCOUNT_RATE_NOT_ABOVE_GROWTH"):
         terminal_value_perpetual_growth("100", "5", "5")
+
+
+
+def test_comparables_fccr_convention_matches_operating_income_bridge():
+    tgt_ebitda = ebitda_from_operating_income("5566", "2981")
+    tgt_rent = fixed_operating_lease_cost("641", "132")
+    assert tgt_ebitda == D("8547")
+    assert tgt_rent == D("509")
+    assert adjusted_ebitdar(tgt_ebitda, tgt_rent) == D("9056")
+    assert close(fixed_charge_coverage_ratio("9056", "411", "509"), D("9.843478260869565"))
+
+    wmt_ebitda = ebitda_from_operating_income("29348", "12973")
+    assert wmt_ebitda == D("42321")
+    assert adjusted_ebitdar(wmt_ebitda, "2347") == D("44668")
+    assert close(fixed_charge_coverage_ratio("44668", "2245", "2347"), D("9.727351916376306"))
 
 
 def test_lbo_moic_and_hold_period_irr():
