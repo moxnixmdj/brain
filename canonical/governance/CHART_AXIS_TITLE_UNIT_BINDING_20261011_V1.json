@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_CHART_AXIS_TITLE_UNIT_BINDING_CANDIDATE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__ZERO_CREDIT_UNTIL_INDEPENDENTLY_VERIFIED_AND_PROMOTED",
+  "capability_id": "chart.raster.axis_title_unit_binding.v1",
+  "runtime_path": "canonical/runtime/bound_capabilities/chart_axis_title_unit_binding_v1.py",
+  "test_path": "canonical/tests/test_chart_axis_title_unit_binding_v1.py",
+  "selection_basis": "MAXIMUM_REUSABLE_PROPOSITION_CLOSURE_PER_WALL_CLOCK_AFTER_DIRECT_CURVE_FAMILY_PROMOTION",
+  "reuse_before_invention": {
+    "searched_current_brain": true,
+    "existing_exact_capability_found": false,
+    "reused_verified_architecture": [
+      "image.extract.ocr.tesseract.positioned.tsv",
+      "chart.raster.scene_graph.v1",
+      "finite zero-learned semantic ontology pattern from scientific_semantic_compiler_v1"
+    ]
+  },
+  "scheduler_ranking": [
+    {
+      "candidate": "AXIS_TITLE_AND_UNIT_BINDING",
+      "public_declared_family_support": [
+        "KAPLAN_MEIER",
+        "BODE_PLOT",
+        "GROWTH_CHART",
+        "CONTOUR_MAP",
+        "CANDLESTICK",
+        "SANKEY"
+      ],
+      "prerequisite_value": "HIGH",
+      "estimated_wall_clock": "SMALL_TO_MEDIUM",
+      "selection_state": "SELECTED"
+    },
+    {
+      "candidate": "CURVE_DOMAIN_SEMANTIC_COMPILER",
+      "public_declared_family_support": [
+        "KAPLAN_MEIER",
+        "GROWTH_CHART",
+        "BODE_PLOT"
+      ],
+      "prerequisite_value": "HIGH_BUT_DEPENDS_ON_SOUND_AXIS_UNIT_BINDING",
+      "estimated_wall_clock": "SMALL_TO_MEDIUM",
+      "selection_state": "DEFER_AFTER_AXIS_UNIT_BINDING"
+    },
+    {
+      "candidate": "MULTI_PANEL_PLOT_DECOMPOSITION",
+      "public_declared_family_support": [
+        "BODE_PLOT"
+      ],
+      "prerequisite_value": "MEDIUM",
+      "estimated_wall_clock": "MEDIUM",
+      "selection_state": "DEFERRED_BY_LOWER_CURRENT_REUSE"
+    },
+    {
+      "candidate": "CANDLE_OHLC_GLYPH_SEMANTICS",
+      "public_declared_family_support": [
+        "CANDLESTICK"
+      ],
+      "prerequisite_value": "MEDIUM",
+      "estimated_wall_clock": "MEDIUM",
+      "selection_state": "DEFERRED_BY_LOWER_CURRENT_REUSE"
+    },
+    {
+      "candidate": "ISOLINE_TOPOLOGY_AND_VALUE_BINDING",
+      "public_declared_family_support": [
+        "CONTOUR_MAP"
+      ],
+      "prerequisite_value": "MEDIUM",
+      "estimated_wall_clock": "MEDIUM_TO_LARGE",
+      "selection_state": "DEFERRED_BY_LOWER_CURRENT_REUSE"
+    },
+    {
+      "candidate": "FLOW_BAND_TOPOLOGY_AND_WIDTH",
+      "public_declared_family_support": [
+        "SANKEY"
+      ],
+      "prerequisite_value": "MEDIUM",
+      "estimated_wall_clock": "LARGE",
+      "selection_state": "DEFERRED_BY_LOWER_CURRENT_REUSE"
+    }
+  ],
+  "bounded_scope": [
+    "EXPLICIT_AXIS_TITLE_TEXT_BINDING",
+    "FINITE_EXPLICIT_UNIT_NORMALIZATION",
+    "ROTATED_LEFT_AXIS_OCR_BY_BOUNDED_IMAGE_ROTATION",
+    "AMBIGUOUS_OR_CONFLICTING_TITLE_OR_UNIT_FAIL_CLOSED"
+  ],
+  "ownership": {
+    "brain_owned_candidate": true,
+    "external_general_purpose_model_runtime_dependency_count": 0,
+    "donor_general_purpose_model_runtime_dependency_count": 0,
+    "network_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "accounting": {
+    "heldout_chartography_cases_consumed": 0,
+    "capability_credit_delta": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "SCHEDULER_RANKING_IS_NOT_SCOPE_COMPLETENESS_PROOF",
+    "PUBLICLY_NAMED_CHART_FAMILIES_ARE_NOT_ASSUMED_EXHAUSTIVE",
+    "NO_OPEN_WORLD_AXIS_SEMANTICS",
+    "NO_UNIT_CONVERSION_AUTHORITY",
+    "NO_DOMAIN_SEMANTIC_AUTHORITY",
+    "NO_CHARTOGRAPHY_GE89",
+    "NO_BRANDED_BENCHMARK_SCORE"
+  ],
+  "next_action": "INDEPENDENTLY_VERIFY_EXACT_CANDIDATE_BLOBS_WITH_AUTHORED_AND_VERIFIER_AUTHORED_FALSIFICATION_PLUS_REAL_ROTATED_OCR_SMOKE"
+}
