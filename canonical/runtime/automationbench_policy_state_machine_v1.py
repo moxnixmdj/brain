@@ -13,6 +13,7 @@ import json
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime.automationbench_mutation_compiler_v1 import (
+    compile_asana_add_to_section,
     compile_asana_create_task,
     compile_salesforce_mark_won,
     validate_nonnegative_action,
@@ -120,7 +121,21 @@ def next_policy_action(
                 "calls": [{"tool":action["tool"],"arguments":action["arguments"]}],
             }
 
-    # Typed compiler 2: create an Asana task from the best eligible source record.
+    # Typed compiler 2: continue an already-created Asana task into its requested section.
+    if _semantic_done(history, "ASANA_TASK_CREATE") and not _semantic_done(
+        history, "ASANA_TASK_ADD_TO_SECTION"
+    ):
+        action = compile_asana_add_to_section(prompt, observations)
+        if action is not None and validate_nonnegative_action(prompt, action):
+            return {
+                "schema": SCHEMA,
+                "status": "CALL_TOOLS",
+                "phase": "MUTATE",
+                "semantic": action["semantic"],
+                "calls": [{"tool": action["tool"], "arguments": action["arguments"]}],
+            }
+
+    # Typed compiler 3: create an Asana task from the best eligible source record.
     all_records: list[dict[str, Any]] = []
     for obs in observations:
         all_records.extend(_flatten_records(obs))
