@@ -3942,6 +3942,112 @@
         "geometry_cases_passed": 40,
         "axis_cases_passed": 13
       }
+    },
+    "python.software.repair.loop.coupled.ast.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available"
+      ],
+      "provides": [
+        "python.patch.candidate.test_verified",
+        "python.repair.coupled_pair.nonmonotonic",
+        "python.fault.localization.symbol_ranked"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "route",
+        "baseline_failure_score",
+        "localization_candidates",
+        "single_candidates_tested",
+        "pair_candidates_tested",
+        "crossed_nonmonotonic_valley",
+        "verification_replays",
+        "patches",
+        "source_restored",
+        "model_dependency_count",
+        "external_capability_provider_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "python",
+        "repair",
+        "patch",
+        "coupled",
+        "nonmonotonic",
+        "multi-edit",
+        "fault",
+        "localization",
+        "symbol",
+        "test"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.software.repair.loop.coupled.ast.v1",
+          "source_root": "${input.source_root}",
+          "test_paths": "${input.test_paths}",
+          "test_argv": "${input.test_argv}",
+          "output_path": "${input.output_path}",
+          "timeout_s": 20,
+          "max_files": 8,
+          "max_symbols_per_file": 8,
+          "mutations_per_file": 24,
+          "max_pair_candidates": 1200
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "python_coupled_software_repair_loop_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Reuses the strict-progress repair route first, then searches bounded AST-mutation pairs when no strictly improving route closes the task.",
+        "Can cross a two-edit non-monotonic valley without retaining either unverified intermediate edit.",
+        "Ranks files and function/class symbols from traceback, imports, failure text, and line containment; this is stronger localization evidence but not complete semantic causality.",
+        "Python only; pair depth, candidate count, file count, symbol count, and timeout are explicitly bounded.",
+        "Candidate-only: source bytes are restored before return; no source-write or promotion authority.",
+        "No universal repair completeness, hidden-requirement, mergeability, FrontierCode score, or acceptance claim."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "ast",
+          "difflib",
+          "hashlib",
+          "importlib.util",
+          "json",
+          "os",
+          "pathlib",
+          "re",
+          "sys"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py"
+      },
+      "verification": {
+        "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
+        "primary_test_count": 8,
+        "independent_test_count": 8,
+        "receipt_path": "canonical/verification/PYTHON_COUPLED_REPAIR_LOOP_V1_VERIFY_20261011_V1.json",
+        "runtime_git_blob_sha": "34c3e8deac596c8c8790cfffb0586303159590b5",
+        "test_git_blob_sha": "04f1fb30e99b888fb3cf177e790f50e268ec3e88",
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
