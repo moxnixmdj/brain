@@ -1,8 +1,12 @@
 from pathlib import Path
+import hashlib
 import json
 
 R=Path(__file__).resolve().parents[2]
 def J(p): return json.loads((R/p).read_text())
+def G(p):
+    raw=(R/p).read_bytes()
+    return hashlib.sha1(b"blob "+str(len(raw)).encode("ascii")+b"\\0"+raw).hexdigest()
 
 p=J("canonical/CANONICAL_POINTER.json")
 b=p["boot_requirements"]
@@ -46,4 +50,41 @@ kstar=(R/"canonical/runtime/terminal_kstar_promotion_bridge_v1.py").read_text(en
 assert "GLOBAL_OWNERSHIP_RECEIPT_REDUCER_BLOB_STALE" in kstar
 assert "GLOBAL_OWNERSHIP_ZERO_MODEL_PREDICATE_NOT_TRUE" in kstar
 assert "zero_external_model_runtime_cognition_dependencies" in kstar
+
+manifest=J("canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json")
+mtp=manifest.get("terminal_predicates") or {}
+mgp=manifest.get("global_ownership_postconditions") or {}
+mdc=manifest.get("donor_deletion_cleanroom") or {}
+if mtp.get("final_donor_deletion_cleanroom_pass") is True:
+    evidence=mgp.get("evidence")
+    evidence_blob=mgp.get("evidence_blob_sha")
+    assert isinstance(evidence,str) and evidence
+    assert evidence_blob==G(evidence)
+    receipt=J(evidence)
+    reducer_path="canonical/runtime/terminal_global_ownership_postconditions_reducer_v1.py"
+    assert receipt.get("brain_reducer_blob_sha")==G(reducer_path)
+    result=receipt.get("result") or {}
+    predicates=result.get("terminal_predicates") or {}
+    for name in (
+        "final_donor_deletion_cleanroom_pass",
+        "donor_deletion_protocol_v2_bound",
+        "runtime_cognition_model_independent",
+        "zero_external_model_runtime_cognition_dependencies",
+        "copied_or_rehosted_teacher_absent",
+        "runtime_dependency_inventory_complete",
+    ):
+        assert predicates.get(name) is True
+else:
+    assert mgp.get("current_authority") is False
+    assert mgp.get("requalification_required") is True
+    assert mdc.get("current_authority") is False
+    assert mdc.get("requalification_required") is True
+    assert mdc.get("required_protocol")=="canonical/governance/DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_V2.json"
+    invalidation=mgp.get("invalidation")
+    assert isinstance(invalidation,str) and (R/invalidation).is_file()
+    assert mdc.get("invalidation")==invalidation
+
+legacy=J("canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json")
+if (legacy.get("truth") or {}).get("donor_cleanroom")=="INDEPENDENT_PASS":
+    assert mtp.get("final_donor_deletion_cleanroom_pass") is True
 print("CAPABILITY_TRANSFER_STATIC_GOVERNANCE_PASS")

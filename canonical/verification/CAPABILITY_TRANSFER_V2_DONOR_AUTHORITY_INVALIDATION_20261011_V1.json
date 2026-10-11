@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_TRANSFER_V2_DONOR_AUTHORITY_INVALIDATION_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE_FAIL_CLOSED_INVALIDATION__LEGACY_OFFLINE_ONLY_DONOR_AUTHORITY_REVOKED__REQUALIFICATION_REQUIRED__ZERO_CREDIT",
+  "reason": [
+    "NETWORK_DENIAL_AND_DONOR_UNREACHABILITY_DO_NOT_EXCLUDE_A_LOCAL_COPIED_OR_REHOSTED_GENERAL_PURPOSE_MODEL",
+    "CURRENT_CAPABILITY_TRANSFER_V2_REQUIRES_EXPLICIT_ZERO_MODEL_RUNTIME_COGNITION_AND_COMPLETE_DEPENDENCY_CENSUS",
+    "STALE_BOOLEAN_DONOR_INDEPENDENCE_MUST_NOT_SURVIVE_STRONGER_CURRENT_GOVERNANCE"
+  ],
+  "historical_evidence_invalidated_for_current_authority": {
+    "donor_cleanroom": {
+      "path": "canonical/verification/TERMINAL_V3_DONOR_DELETION_CLEANROOM_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "d3144bf0aa618b15ef594d24de54d55cbdb329fd",
+      "disposition": "HISTORICAL_ONLY__DOES_NOT_PROVE_ZERO_MODEL_RUNTIME_COGNITION"
+    },
+    "global_ownership": {
+      "path": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "e0dbd996c18bdb818693ab0d217d751594a03d0f",
+      "disposition": "HISTORICAL_ONLY__REDUCER_BLOB_PRE_DATES_CURRENT_ZERO_MODEL_GOVERNANCE"
+    }
+  },
+  "current_enforcement": {
+    "global_ownership_reducer": {
+      "path": "canonical/runtime/terminal_global_ownership_postconditions_reducer_v1.py",
+      "git_blob_sha": "8268e340f71c9b93aa154947243612214dd17ce6"
+    },
+    "kstar_bridge": {
+      "path": "canonical/runtime/terminal_kstar_promotion_bridge_v1.py",
+      "git_blob_sha": "4e1d068afdaf73957744a553e7c5101e5c539eef"
+    },
+    "final_terminal_cleanroom_gate": {
+      "path": "canonical/runtime/final_terminal_cleanroom_gate_v1.py",
+      "git_blob_sha": "97be3bd64b9ada5d9c8dd341c0ea635d24c02aee"
+    }
+  },
+  "requalification_requires": [
+    "DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_V2_BOUND",
+    "EXTERNAL_CONTRIBUTION_CENSUS_COMPLETE",
+    "FULL_RUNTIME_DEPENDENCY_INVENTORY_COMPLETE",
+    "RUNTIME_COGNITION_DEPENDENCY_CLASS_MODEL_INDEPENDENT",
+    "MODEL_DEPENDENCY_COUNT_ZERO",
+    "EXTERNAL_MODEL_RUNTIME_DEPENDENCY_COUNT_ZERO",
+    "ONLINE_TEACHER_CALL_COUNT_ZERO",
+    "TEACHER_FALLBACK_PATH_COUNT_ZERO",
+    "COPIED_OR_REHOSTED_TEACHER_ABSENT",
+    "BRAIN_OWNED_OPERATIVE_ARTIFACT",
+    "INDEPENDENT_POST_DONOR_REMOVAL_QUALIFICATION",
+    "CURRENT_HARDENED_REDUCER_BLOB_BOUND"
+  ],
+  "credit": {
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}

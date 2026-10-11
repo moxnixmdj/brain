@@ -7,8 +7,8 @@
     "contracts": "12/12_WHOLE_SCOPE_PASS__P1_SCOPE_RESTORED_BY_INDEPENDENT_ZERO_REALITY_UNIVERSAL_PROOF",
     "behavioral_families": "19/19_PROVISIONAL_BEHAVIORAL_PASS__P1_SCOPE_QUARANTINE_CLEARED__STRICT_OPUS55_ACCEPTANCE_SEPARATE",
     "opus55_acceptance": "7/19_PASS__12/19_OPEN",
-    "global_postconditions": "INDEPENDENT_PASS",
-    "donor_cleanroom": "INDEPENDENT_PASS",
+    "global_postconditions": "INVALIDATED__CAPABILITY_TRANSFER_V2_ZERO_MODEL_REQUALIFICATION_REQUIRED",
+    "donor_cleanroom": "INVALIDATED__OFFLINE_ONLY_RECEIPT_INSUFFICIENT_UNDER_TRANSFER_V2",
     "achieved": false,
     "opus55_verified_owned": "7/19_VERIFIED_OWNED_EQUAL_OR_BETTER__12/19_ACCEPTANCE_OPEN",
     "opus55_atomic_acceptance": "18/38_PROVED__20/38_OPEN__CURRENT_V3_SCOPE_COMPLETE_LEDGER_BOUND",
@@ -37,7 +37,10 @@
     },
     "global_postconditions": {
       "path": "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
-      "git_blob_sha": "e0dbd996c18bdb818693ab0d217d751594a03d0f"
+      "git_blob_sha": "e0dbd996c18bdb818693ab0d217d751594a03d0f",
+      "historical_only": true,
+      "current_authority": false,
+      "invalidation": "canonical/verification/CAPABILITY_TRANSFER_V2_DONOR_AUTHORITY_INVALIDATION_20261011_V1.json"
     },
     "invalidated_bundle": {
       "path": "canonical/verification/FINAL_TERMINAL_PROOF_BUNDLE_INVALIDATION_20261002_V1.json",
@@ -2231,5 +2234,13 @@
       "representative_predicate": "PROWORK_AA_BRIEFCASE_GE_1822",
       "preserves": "BOTH_FAMILIES_STILL_REQUIRE_THE_SAME_FROZEN_AA_BRIEFCASE_GE_1822_TRUTH"
     }
-  ]
+  ],
+  "donor_authority_reconciliation": {
+    "status": "FAIL_CLOSED__CURRENT_DONOR_INDEPENDENCE_NOT_PROVED_UNDER_TRANSFER_V2",
+    "invalidation": "canonical/verification/CAPABILITY_TRANSFER_V2_DONOR_AUTHORITY_INVALIDATION_20261011_V1.json",
+    "historical_global_postconditions_receipt_preserved": true,
+    "historical_donor_cleanroom_receipt_preserved": true,
+    "current_terminal_authority": false,
+    "terminal_credit_delta": 0
+  }
 }
