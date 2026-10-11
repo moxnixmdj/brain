@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_ASSURANCE_CLOSURE_COMPILER_POINTER_V1",
   "date": "2026-10-09",
-  "status": "UVCK_V2_CANDIDATE__PROPERTY_TRUTH_24_OF_24__FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION_OPEN__NOT_LIVE_DEFAULT",
+  "status": "UVCK_V2_CANDIDATE__PROPERTY_TRUTH_24_OF_24__FULL_PRIVATE_CURRENT_MAIN_REGRESSION_GATE_OPEN__EXECUTION_CARRIER_BLOCKED_WITH_ZERO_TEST_STEPS__NOT_LIVE_DEFAULT",
   "governance": {
     "path": "canonical/governance/UVCK_V2_ASSURANCE_CLOSURE_COMPILER_20261009_V1.json",
     "git_blob_sha": "b7197be29b49c55c81e1a18572cd22020510fa5e"
@@ -59,7 +59,8 @@
     "live_default": false,
     "required_before_promotion": [
       "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION"
-    ]
+    ],
+    "carrier_wake_required": true
   },
   "terminal_authority": false,
   "terminal_credit_delta": 0,
@@ -492,5 +493,10 @@
     "quality_authority": false,
     "promotion_authority": false,
     "terminal_authority": false
+  },
+  "regression_carrier_diagnosis": {
+    "path": "canonical/verification/FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V1.json",
+    "git_blob_sha": "47dc643c94bb5e8ce978457f2534d2e42bd3316d",
+    "status": "EXECUTION_CARRIER_BLOCKED__FOUR_ZERO_STEP_ACTIONS_FAILURES__NO_REGRESSION_RESULT__GATE_OPEN__ZERO_CREDIT"
   }
 }
