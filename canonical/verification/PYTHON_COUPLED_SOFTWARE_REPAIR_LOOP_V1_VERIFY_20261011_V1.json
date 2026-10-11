@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_PYTHON_COUPLED_SOFTWARE_REPAIR_LOOP_V1_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__ATOMIC_CROSS_FILE_COUPLED_EDIT_AND_SYMBOL_AWARE_LOCALIZATION__ZERO_MODEL__ZERO_SPEND",
+  "subject": {
+    "runtime_path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
+    "runtime_git_blob_sha": "18fbe4b6f7f84a850d193c6d4fcb5f9555edeb1c",
+    "runtime_sha256": "f6142e21a8572f75a37b9dcc0185c0815ba9d7f2b3c33140a5ed8732f32e7093",
+    "canonical_test_path": "canonical/tests/test_python_coupled_software_repair_loop_v1.py",
+    "canonical_test_git_blob_sha": "ccbe88f0d9a81e6be8b36db2f7e52bab33ba15c5",
+    "canonical_test_sha256": "d5b06e151be710e376dfba781d745943a78f5bdefa5c7797d59455309c4d3399"
+  },
+  "development_falsification": {
+    "carrier": "Sprites",
+    "carrier_name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "initial_result": "5_OF_6__RECEIPT_BOOKKEEPING_DEFECT_FOUND",
+    "defect": "UNTOUCHED_LOCALIZED_DISTRACTOR_WAS_INCORRECTLY_INCLUDED_IN_PATCH_RECEIPT",
+    "repair": "TRACK_TOUCHED_FILES_SEPARATELY_FROM_LOCALIZED_FILES",
+    "post_repair_result": "6_OF_6_PASS"
+  },
+  "independent_replay": {
+    "carrier": "LOCAL_SANDBOX",
+    "exact_runtime_bytes": true,
+    "exact_development_test_bytes": true,
+    "development_test_sha256": "de2671a5f1a65405bf02fe9edb7de474dd2eb7f21e8bc6c3af5e432607bcf844",
+    "result": "6_OF_6_PASS",
+    "proved_cases": [
+      "ATOMIC_TWO_FILE_TWO_EDIT_PAIR_CROSSES_FLAT_FAILURE_SCORE_PLATEAU_1_TO_1_FOR_EITHER_SINGLE_BUT_1_TO_0_FOR_PAIR",
+      "IMPORTED_AND_CALLED_SYMBOL_FILES_RANK_ABOVE_DISTRACTOR",
+      "STRICT_SINGLE_EDIT_PROGRESS_REMAINS_SUPPORTED",
+      "NO_SOLUTION_FAILS_CLOSED_AND_RESTORES_SOURCE",
+      "ALREADY_PASSING_BASELINE_REJECTED",
+      "PATH_ESCAPE_REJECTED"
+    ]
+  },
+  "canonical_path_replay": {
+    "carrier": "LOCAL_SANDBOX",
+    "runtime_git_blob_matches_branch": true,
+    "canonical_test_git_blob_matches_branch": true,
+    "result": "3_OF_3_TEST_METHODS_PASS",
+    "notes": "Focused canonical suite covers coupled plateau repair and restoration, localization ordering, strict single repair, and no-solution restoration."
+  },
+  "proved": [
+    "BOUNDED_ATOMIC_CROSS_FILE_TWO_EDIT_SEARCH_CAN_CROSS_A_NEUTRAL_SINGLE_EDIT_PLATEAU_WITHOUT_RETAINING_INTERMEDIATE_DAMAGE",
+    "FAILURE_TRACEBACK_TEST_IMPORT_CALLED_SYMBOL_AND_FAILURE_TEXT_EVIDENCE_PRODUCE_DETERMINISTIC_FILE_RANKING",
+    "FINAL_SUCCESS_REPLAYED_TWICE",
+    "ONLY_TOUCHED_FILES_APPEAR_IN_PATCH_RECEIPTS",
+    "SOURCE_BYTES_RESTORED_BEFORE_RETURN",
+    "ZERO_MODEL_DEPENDENCY",
+    "ZERO_EXTERNAL_CAPABILITY_PROVIDER_RUNTIME",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "open": [
+    "GENERAL_SEMANTIC_FAULT_LOCALIZATION",
+    "SAME_FILE_COUPLED_EDIT_SEARCH",
+    "COUPLED_GROUPS_LARGER_THAN_TWO",
+    "ARBITRARY_EDIT_BASIS_COMPLETENESS",
+    "RAW_SOFTWARE_REQUEST_TO_SOUND_ACCEPTANCE_CONTRACT",
+    "NON_PYTHON_REPAIR",
+    "HIDDEN_REQUIREMENTS_AND_GENERAL_MERGEABILITY"
+  ],
+  "hard_nonclaims": [
+    "NO_GENERAL_SOFTWARE_ENGINEERING_CLAIM",
+    "NO_GENERAL_SEMANTIC_LOCALIZATION_CLAIM",
+    "NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT",
+    "NO_HIDDEN_FRONTIERCODE_SCOPE_COVERAGE_CLAIM",
+    "NO_SOURCE_WRITE_OR_AUTOMATIC_PROMOTION_AUTHORITY"
+  ],
+  "frontiercode_score_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
