@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_MPF_ADD_ALIAS_COMPACT_V82_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_BRANCH_LOCAL_SUCCESSOR__SPENT_NEXT86_AND_FRESH_NEXT87_PASS__NEXT88_FROZEN_UNSPENT__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor_manifest_sha256": "c06813a7a46bb8dcbd172d4de02a3ba432408efa355971a6373f765b1d99a021",
+    "manifest_sha256": "adb1d0e005f59cfdfbfe3629eabcd95ddc1013ff4f1781c032bd84d25bf22ac7",
+    "python_files": 277,
+    "durable_files": 278,
+    "raw_python_source_bytes": 1574216,
+    "B_exec_raw_python_source_bytes": 1576976,
+    "raw_delta_vs_v81_bytes": -105,
+    "changed_path": "mpmath/libmp/libmpf.py",
+    "changed_function": "mpf_add",
+    "mechanism": "SIGNATURE_PRESERVING_LOCAL_ALIAS_COMPRESSION_OF_PRECISION_ROUNDING_NORMALIZATION_AND_BITCOUNT_BINDINGS"
+  },
+  "transform": {
+    "path": "canonical/research/bytes/tools/conservative_mpf_add_alias_compact_v82.py",
+    "library_path": "/Brain Evidence/Bytes/conservative_mpf_add_alias_compact_v82.py",
+    "library_file_id": "libfile_4a712cda7c7c819194eee2c369fab270",
+    "sha256": "5d4cbc7ea9de37522687e131ec32ed439e56abf9fff025b2d6b42c8643581897",
+    "exact_base_guard": true,
+    "exact_target_guard": true,
+    "signature_preserved": true
+  },
+  "preflight": {
+    "direct_mpf_add_fuzz_cases": 25000,
+    "result": "25000/25000_DIGEST_IDENTICAL_TO_V81"
+  },
+  "qualification": {
+    "spent_NEXT86": {
+      "cases": 21620,
+      "corpus_sha256": "7a57b8aa3b2666e4f107dc1038d9adc6cfcd861a80edbe7914e09b1567ab8a69",
+      "candidate": "21620/21620",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT87": {
+      "cases": 21850,
+      "corpus_sha256": "f63d6eb3d8d556cf61b012e04715f1073a2c3e0a8a6d5f5cd36dc4e99396568f",
+      "candidate": "21850/21850",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "clean_room_v81_to_v82": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V82_CANDIDATE_20261011_V1.tar.xz",
+    "library_file_id": "libfile_a2c9652045a08191ad795330c0fa4820",
+    "bytes": 265696,
+    "sha256": "c11bcfa2c9cd35a49d27e56cef5edcd7276aeab818531061dc43849e55d2c3bd"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT88_20261011_V1",
+    "cases": 22080,
+    "seed": 4070766363,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT88_20261011_V1_PIPE_V82_MANIFEST_IDENTITY",
+    "seed_material": "QUAL_SUCCESSOR_NEXT88_20261011_V1|adb1d0e005f59cfdfbfe3629eabcd95ddc1013ff4f1781c032bd84d25bf22ac7",
+    "per_operation_budget": 1920,
+    "corpus_sha256": "66c80a86067b223552bd59ceef05b1cf3f17d6f6a945bb11b645a8121fade5ff",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT88_20261011_V1.jsonl",
+    "library_file_id": "libfile_4fb6b94b596c8191b5033de8a3938bc4",
+    "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0__PARAM_STREAM_VALIDATED_21850_OF_21850_AGAINST_CANONICAL_NEXT87__PARALLEL_EXPECTED_OUTPUT_EVALUATION__CANONICAL_ROW_REASSEMBLY",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_V83_PHYSICAL_CUT",
+    "spent": false
+  },
+  "hard_nonclaims": [
+    "NO_UNIVERSAL_SYMPY_MPMATH_EQUIVALENCE",
+    "NO_EXTERNAL_SECOND_CARRIER_REPLAY",
+    "NO_CAPABILITY_ACCEPTANCE_OWNERSHIP_QUALITY_OR_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
