@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CHART_AXIS_TITLE_UNIT_BINDING_CANDIDATE_20261011_V1",
   "date": "2026-10-11",
-  "status": "CANDIDATE__ZERO_CREDIT_UNTIL_INDEPENDENTLY_VERIFIED_AND_PROMOTED",
+  "status": "PROMOTED_BOUNDED_CAPABILITY__INDEPENDENT_21_AUTHORED_PLUS_14_FALSIFICATION_WITH_REAL_ROTATED_OCR",
   "capability_id": "chart.raster.axis_title_unit_binding.v1",
   "runtime_path": "canonical/runtime/bound_capabilities/chart_axis_title_unit_binding_v1.py",
   "test_path": "canonical/tests/test_chart_axis_title_unit_binding_v1.py",
@@ -23,12 +23,11 @@
         "BODE_PLOT",
         "GROWTH_CHART",
         "CONTOUR_MAP",
-        "CANDLESTICK",
-        "SANKEY"
+        "CANDLESTICK"
       ],
       "prerequisite_value": "HIGH",
       "estimated_wall_clock": "SMALL_TO_MEDIUM",
-      "selection_state": "SELECTED"
+      "selection_state": "VERIFIED_PROMOTED"
     },
     {
       "candidate": "CURVE_DOMAIN_SEMANTIC_COMPILER",
@@ -37,9 +36,9 @@
         "GROWTH_CHART",
         "BODE_PLOT"
       ],
-      "prerequisite_value": "HIGH_BUT_DEPENDS_ON_SOUND_AXIS_UNIT_BINDING",
+      "prerequisite_value": "HIGH__AXIS_TITLE_UNIT_PREREQUISITE_NOW_VERIFIED",
       "estimated_wall_clock": "SMALL_TO_MEDIUM",
-      "selection_state": "DEFER_AFTER_AXIS_UNIT_BINDING"
+      "selection_state": "SELECTED_NEXT_BY_REUSE_TO_WALL_CLOCK"
     },
     {
       "candidate": "MULTI_PANEL_PLOT_DECOMPOSITION",
@@ -93,7 +92,7 @@
   },
   "accounting": {
     "heldout_chartography_cases_consumed": 0,
-    "capability_credit_delta": 0,
+    "capability_credit_delta": 1,
     "benchmark_score_credit_delta": 0,
     "terminal_credit_delta": 0
   },
@@ -106,5 +105,14 @@
     "NO_CHARTOGRAPHY_GE89",
     "NO_BRANDED_BENCHMARK_SCORE"
   ],
-  "next_action": "INDEPENDENTLY_VERIFY_EXACT_CANDIDATE_BLOBS_WITH_AUTHORED_AND_VERIFIER_AUTHORED_FALSIFICATION_PLUS_REAL_ROTATED_OCR_SMOKE"
+  "next_action": "BUILD_AND_INDEPENDENTLY_VERIFY_BOUNDED_CURVE_DOMAIN_SEMANTIC_COMPILER__NO_GATED_BENCHMARK_EXECUTION",
+  "verification": "canonical/verification/CHART_AXIS_TITLE_UNIT_BINDING_V1_INDEPENDENT_VERIFY_20261011.json",
+  "verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "verifier_pr": 2726,
+  "verifier_run_id": 38169773418,
+  "verifier_job_id": 114559751304,
+  "artifact_id": 11714230479,
+  "artifact_zip_sha256": "f6f81d426011089865be38d2fd37f1cb98883d7c4a9a88e1c9386f79dc37daa0",
+  "exact_runtime_blob_sha": "3203cce00c0f116d51043cdc858c50e483e41f69",
+  "exact_test_blob_sha": "5777a313682ee4a2b319d8aca8f39e3b8a2459ec"
 }
