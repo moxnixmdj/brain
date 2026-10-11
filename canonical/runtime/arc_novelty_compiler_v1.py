@@ -729,6 +729,132 @@ def _compose_simple(grid: Grid, first: str, second: str) -> Grid | None:
     return _apply_simple_transform(mid, second)
 
 
+def _shortest_period(sequence: Sequence[Any]) -> int:
+    n = len(sequence)
+    for p in range(1, n + 1):
+        if all(sequence[i] == sequence[i % p] for i in range(n)):
+            return p
+    return n
+
+
+def _infer_periodic_extension(
+    pairs: Sequence[tuple[Grid, Grid]],
+    axis: str,
+) -> tuple[int, dict[int, int]] | None:
+    target: int | None = None
+    recolor: dict[int, int] = {}
+    for inp, out in pairs:
+        ih, iw = _shape(inp)
+        oh, ow = _shape(out)
+        if axis == "VERTICAL":
+            if ow != iw or oh < ih:
+                return None
+            current_target = oh
+        elif axis == "HORIZONTAL":
+            if oh != ih or ow < iw:
+                return None
+            current_target = ow
+        else:
+            raise ARCNoveltyCompilerError("PERIODIC_AXIS_UNSUPPORTED")
+        if target is not None and target != current_target:
+            return None
+        target = current_target
+
+        for r in range(ih):
+            for c in range(iw):
+                src, dst = inp[r][c], out[r][c]
+                if src in recolor and recolor[src] != dst:
+                    return None
+                recolor[src] = dst
+
+    assert target is not None
+    for inp, expected in pairs:
+        predicted = _periodic_extension_predict(inp, axis, target, recolor)
+        if predicted != expected:
+            return None
+    return target, recolor
+
+
+def _periodic_extension_predict(
+    grid: Grid,
+    axis: str,
+    target: int,
+    recolor: Mapping[int, int],
+) -> Grid | None:
+    x = _apply_recolor(grid, recolor)
+    if axis == "VERTICAL":
+        rows = list(x)
+        period = _shortest_period(rows)
+        return tuple(rows[r % period] for r in range(target))
+    if axis == "HORIZONTAL":
+        h, w = _shape(x)
+        cols = [tuple(x[r][c] for r in range(h)) for c in range(w)]
+        period = _shortest_period(cols)
+        return tuple(
+            tuple(cols[c % period][r] for c in range(target))
+            for r in range(h)
+        )
+    raise ARCNoveltyCompilerError("PERIODIC_AXIS_UNSUPPORTED")
+
+
+def _shift_row(row: Sequence[int], delta: int) -> tuple[int, ...]:
+    w = len(row)
+    out = [0] * w
+    for c, value in enumerate(row):
+        nc = c + delta
+        if 0 <= nc < w:
+            out[nc] = value
+    return tuple(out)
+
+
+def _infer_row_shift_period(grid: Grid) -> tuple[int, int] | None:
+    h, w = _shape(grid)
+    candidates: list[tuple[int, int]] = []
+    for period in range(1, h + 1):
+        for delta in range(-w, w + 1):
+            ok = True
+            for i in range(h):
+                if _shift_row(grid[i % period], (i // period) * delta) != grid[i]:
+                    ok = False
+                    break
+            if ok:
+                candidates.append((period, delta))
+    if not candidates:
+        return None
+    candidates.sort(key=lambda x: (x[0], abs(x[1]), x[1]))
+    return candidates[0]
+
+
+def _row_shift_period_extend(grid: Grid, target_height: int) -> Grid | None:
+    model = _infer_row_shift_period(grid)
+    if model is None:
+        return None
+    period, delta = model
+    return tuple(
+        _shift_row(grid[i % period], (i // period) * delta)
+        for i in range(target_height)
+    )
+
+
+def _infer_row_shift_period_target(
+    pairs: Sequence[tuple[Grid, Grid]],
+) -> int | None:
+    target: int | None = None
+    for inp, out in pairs:
+        ih, iw = _shape(inp)
+        oh, ow = _shape(out)
+        if ow != iw or oh < ih:
+            return None
+        if tuple(out[:ih]) != inp:
+            return None
+        if target is not None and target != oh:
+            return None
+        target = oh
+        if _row_shift_period_extend(inp, oh) != out:
+            return None
+    return target
+
+
 def _shift_grid(grid: Grid, dr: int, dc: int) -> Grid:
     h, w = _shape(grid)
     out = [[0 for _ in range(w)] for _ in range(h)]
@@ -912,6 +1038,11 @@ def _predict(h: Mapping[str, Any], grid: Grid) -> Grid | None:
         return _row_col_gravity(grid, h["direction"])
     if kind == "CARDINAL_VISIBILITY_RULE":
         return _ray_color_predict(grid, h["mapping"])
+    if kind == "PERIODIC_EXTENSION":
+        mapping = {int(k): int(v) for k, v in h["mapping"].items()}
+        return _periodic_extension_predict(grid, h["axis"], int(h["target"]), mapping)
+    if kind == "ROW_SHIFT_PERIODIC_EXTENSION":
+        return _row_shift_period_extend(grid, int(h["target_height"]))
     raise ARCNoveltyCompilerError("HYPOTHESIS_KIND_UNSUPPORTED")
 
 
@@ -1097,6 +1228,25 @@ def compile_hypotheses(
         if _consistent(h, pairs):
             candidates.append(h)
 
+    for axis in ("VERTICAL", "HORIZONTAL"):
+        periodic = _infer_periodic_extension(pairs, axis)
+        if periodic is not None:
+            target, mapping = periodic
+            h = {
+                "kind": "PERIODIC_EXTENSION",
+                "axis": axis,
+                "target": target,
+                "mapping": {str(k): v for k, v in sorted(mapping.items())},
+            }
+            if _consistent(h, pairs):
+                candidates.append(h)
+
+    row_shift_target = _infer_row_shift_period_target(pairs)
+    if row_shift_target is not None:
+        h = {"kind": "ROW_SHIFT_PERIODIC_EXTENSION", "target_height": row_shift_target}
+        if _consistent(h, pairs):
+            candidates.append(h)
+
     crop = {"kind": "CROP_NON_BACKGROUND"}
     if _consistent(crop, pairs):
         candidates.append(crop)
@@ -1159,6 +1309,8 @@ def compile_hypotheses(
             "DEPTH_TWO_SIMPLE_TRANSFORM_COMPOSITION",
             "ROW_COLUMN_GRAVITY",
             "CARDINAL_VISIBILITY_OUTPUT_RULE",
+            "PERIODIC_SEQUENCE_EXTENSION",
+            "TRANSLATING_PERIODIC_ROW_EXTENSION",
             "NON_BACKGROUND_BOUNDING_BOX_CROP",
             "UNIQUE_LARGEST_OR_SMALLEST_COMPONENT_CROP",
         ],
