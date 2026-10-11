@@ -139,9 +139,14 @@ def discover_inputs(roots: Iterable[str], artifact_paths: Iterable[str]) -> list
     outputs=[pathlib.Path(x) for x in artifact_paths]
     seen=set(); found=[]
     for raw in roots:
+        if not isinstance(raw,str):
+            continue
         root=pathlib.Path(raw)
-        if not root.exists(): continue
-        it=[root] if root.is_file() else root.rglob("*")
+        try:
+            if not root.exists(): continue
+            it=[root] if root.is_file() else root.rglob("*")
+        except (OSError,PermissionError):
+            continue
         for p in it:
             if not _safe_file(p,outputs): continue
             key=str(p.resolve())
@@ -235,10 +240,11 @@ def execute(payload:dict[str,Any]) -> dict[str,Any]:
     contract=classify_contract(instruction,artifacts)
     if not contract["supported"]: raise DNAStorageTaskError("CONTRACT_UNSUPPORTED")
     outs=[pathlib.Path(x) for x in output_paths(contract)]
-    roots=payload.get("roots") or ["/root/data","/root","/data","/workspace"]
-    if not isinstance(roots,list): raise DNAStorageTaskError("ROOTS_INVALID")
-    files=discover_inputs(roots,artifacts)
+    roots=payload["roots"] if "roots" in payload else ["/root/data","/root","/data","/workspace"]
+    if not isinstance(roots,list) or any(not isinstance(x,str) for x in roots):
+        raise DNAStorageTaskError("ROOTS_INVALID")
     mode=contract["mode"]
+    files=[] if mode=="implementation" else discover_inputs(roots,artifacts)
     receipts=[]
     if mode=="implementation":
         source=pathlib.Path(codec.__file__).read_bytes()
