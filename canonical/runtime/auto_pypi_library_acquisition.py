@@ -353,8 +353,9 @@ def _infer_codec_contract(candidate,wheel_closure,root):
         probe_helper=pathlib.Path(__file__).with_name("python_codec_probe.py").resolve()
         if not probe_helper.is_file():
             raise AutoPyPIAcquisitionFailure("PYPI_PROBE_HELPER_MISSING",str(probe_helper))
+        probe_code=probe_helper.read_text(encoding="utf-8")
         probe=subprocess.run(
-            [sys.executable,str(probe_helper),str(site),json.dumps(modules)],
+            [sys.executable,"-c",probe_code,str(site),json.dumps(modules)],
             cwd=root,text=True,capture_output=True,timeout=90
         )
         try:
