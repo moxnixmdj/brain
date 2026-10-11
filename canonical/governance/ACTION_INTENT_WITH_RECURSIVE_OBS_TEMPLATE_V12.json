@@ -1,0 +1,279 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V12",
+  "status": "TEMPLATE__MANDATORY__GENERAL_CAPABILITY_FIRST",
+  "authority": [
+    "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+    "canonical/laws/GOAL_HIERARCHY_AND_DRIFT_IMMUNITY_LAW_V2.md",
+    "canonical/governance/CURRENT_DEVELOPMENT_AUTHORITY.json",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+    "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+    "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+    "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
+    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+    "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+    "canonical/laws/BEHAVIORAL_CONTRACT_AND_SEMANTIC_PURGE_LAW_V1.md",
+    "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
+    "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
+    "canonical/laws/CAPABILITY_TRANSFER_VS_COGNITION_OUTSOURCING_LAW_V1.md"
+  ],
+  "required_theory_invariants": {
+    "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "terminal_capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "benchmark_role": "AUDIT_FALSIFIER_CALIBRATION_OR_CAUSAL_PROBE__NOT_PARENT_OBJECTIVE",
+    "external_winner_role": "CAPABILITY_SPECIMEN_OR_TEMPORARY_DONOR_ONLY",
+    "capability_policy": "REUSE_ADAPT_SUBSTITUTE_COMPOSE_CONFIGURE_INTEGRATE_BRAIN_OWNED_MECHANISMS__NEW_PRIMITIVE_ONLY_AFTER_SPECIFIC_INSUFFICIENCY_PROOF",
+    "general_computation_substrate": "NON_MODEL_COMPUTE_MAY_BE_EXTERNAL__ANOTHER_MODEL_MUST_NOT_SUPPLY_BRAIN_CREDITED_PRODUCER_COGNITION",
+    "capability_invention": "LAST_RESORT_ONLY_AFTER_SPECIFIC_REUSE_SPACE_FALSIFICATION",
+    "opus_5_5_role": "MILESTONE_AUDIT_AND_CAPABILITY_SPECIMEN",
+    "provider_access_is_ownership": false,
+    "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_REQUIRED_FOR_HARVEST_PROMOTION",
+    "external_model_cognition_in_creditable_producer_path": "FORBIDDEN_ZERO_TOLERANCE",
+    "unknown_cognition_provenance": "FAIL_CLOSED_ZERO_CREDIT",
+    "donor_derived_capability_rule": "DONOR_ACQUISITION_ONLY__ZERO_DONOR_OR_EXTERNAL_MODEL_COGNITION_AT_QUALIFICATION_AND_DEPLOYMENT",
+    "distillation_rule": "ALLOWED_ONLY_IF_DERIVED_BRAIN_ARTIFACT_SOLVES_AFTER_TEACHER_REMOVAL",
+    "copied_or_rehosted_external_model": "NOT_CAPABILITY_TRANSFER"
+  },
+  "mandatory_ownership_tests": [
+    "BRAIN_ARTIFACT_TEST",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST",
+    "GENERAL_SUBSTRATE_TEST",
+    "SPECIMEN_SEPARATION_TEST",
+    "REEXECUTION_WITHOUT_REDISCOVERY_TEST",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST",
+    "OWNERSHIP_PACKAGE_TEST",
+    "ZERO_EXTERNAL_MODEL_COGNITION_PRODUCER_PATH_TEST",
+    "CAPABILITY_TRANSFER_OWNERSHIP_GATE_PASS_WHEN_DONOR_DERIVED",
+    "POST_DONOR_REMOVAL_HELDOUT_QUALIFICATION_WHEN_DONOR_DERIVED",
+    "ZERO_EXTERNAL_MODEL_RUNTIME_COGNITION"
+  ],
+  "required_reasoning_durability": {
+    "receipt_required": true,
+    "fields": [
+      "real_objective",
+      "governing_invariants",
+      "material_premises",
+      "evidence_refs",
+      "conclusion",
+      "selected_route",
+      "rejected_material_alternatives",
+      "uncertainties",
+      "assumptions",
+      "non_goals",
+      "next_action",
+      "supersession_conditions",
+      "supersedes"
+    ],
+    "chat_only_authority": false
+  },
+  "action_fields": [
+    "action_id",
+    "status",
+    "canonical_generation",
+    "canonical_base_commit",
+    "capability_target",
+    "action_kind",
+    "blocker_lease_key",
+    "expected_parent_frontier_change",
+    "theory_invariants",
+    "ownership_tests",
+    "reasoning_durability",
+    "recursive_obs",
+    "behavioral_contract",
+    "prequalification_controls",
+    "qualification_stage",
+    "terminal_proof_control",
+    "continuous_obs",
+    "reality_query_admission",
+    "global_terminal_proof_cut"
+  ],
+  "supersedes": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V11.json",
+  "required_deletion_first_order": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "ADAPT",
+    "SUBSTITUTE",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE",
+    "SYNTHESIZE_NEW_PRIMITIVE"
+  ],
+  "blocker_lease_identity_fields": [
+    "canonical_generation",
+    "capability_target",
+    "causal_blocker"
+  ],
+  "blocker_lease_serialization": "canonical_generation::capability_target::causal_blocker",
+  "conditional_white_box_harvest_fields": [
+    "residual_capability_contract",
+    "donor_admissibility",
+    "license_and_provenance",
+    "causal_evidence",
+    "heldout_contamination_control",
+    "donor_deletion_plan",
+    "full_dependency_accounting",
+    "capability_capsule_schema_path"
+  ],
+  "required_behavioral_contract": {
+    "required": true,
+    "schema": "canonical/governance/BEHAVIORAL_CONTRACT_SCHEMA_V1.json",
+    "fields": [
+      "behavior_id",
+      "inputs",
+      "environment_state",
+      "allowed_information",
+      "required_output_or_action",
+      "success_condition",
+      "failure_condition",
+      "terminal_consequence",
+      "verification_route",
+      "dependency_boundary",
+      "scope"
+    ],
+    "abstract_label_only_forbidden": true,
+    "builder_only_acceptance_forbidden": true,
+    "fresh_evidence_requires_live_authorization": true
+  },
+  "required_prequalification_controls": {
+    "applies_when": "ACTION_CAN_EXPOSE_OR_SPEND_UNTOUCHED_QUALIFICATION_EVIDENCE_OR_PROMOTE_FRONTIER_LEVEL_OWNERSHIP",
+    "required_fields": [
+      "target_version_lock",
+      "feasibility_certificate",
+      "complete_requirement_graph",
+      "independent_acceptance_evidence",
+      "requirement_mutation_evidence",
+      "verifier_mutation_evidence",
+      "contamination_ledger",
+      "execution_surface_certificate",
+      "statistical_promotion_plan_if_applicable",
+      "donor_deletion_plan_if_applicable",
+      "composition_qualification_plan",
+      "evidence_saturation_and_minimum_reality_cut_receipt",
+      "exact_active_carrier_authority",
+      "post_transition_authority_revalidation"
+    ],
+    "fail_closed_on_unknown": true,
+    "control_matrix": "canonical/governance/PREQUALIFICATION_FAILURE_IMMUNITY_V1.json",
+    "stage_semantics": {
+      "STAGE_A_PRE_EXPOSURE": "No task instruction or task-specific hint may be read. Prove generic route/surface readiness.",
+      "STAGE_B_POST_EXPOSURE_PRE_EXECUTION": "Official instruction may be read. No task command or candidate execution. Compile and falsify task-specific plan.",
+      "STAGE_C_EXECUTION": "Only after A and B pass; execute once and independently verify."
+    },
+    "exact_carrier_authority": {
+      "reducer": "canonical/runtime/execution_authority_reducer.py",
+      "required_receipt_fields": [
+        "active_carrier_binding_sha256",
+        "state_sha256",
+        "can_execute",
+        "can_verify"
+      ],
+      "second_carrier_open_forbidden": true,
+      "static_authority_hash_without_carrier_identity_forbidden": true,
+      "revalidate_after_last_material_transition_before_irreversible_command": true
+    }
+  },
+  "required_terminal_proof_control": {
+    "policy": "canonical/governance/EXECUTION_FIRST_SELF_PROVING_OPTIMIZER_V1.json",
+    "required": true,
+    "required_fields": [
+      "proof_obligation",
+      "hole_type",
+      "expected_certificate_or_receipt",
+      "validator",
+      "maximum_cheap_test_cost",
+      "prerequisites",
+      "contamination_risk",
+      "reversibility",
+      "falsification_condition",
+      "critical_path_relation"
+    ],
+    "specification_before_implementation": true,
+    "dominance_deletion_before_expensive_selection": true,
+    "proof_action_before_meta_optimization": true,
+    "reuse_unaffected_proofs": true,
+    "fail_closed_on_unknown": true,
+    "existing_evidence_before_fresh_generation": true,
+    "minimum_reality_cut_before_fresh_generation": true
+  },
+  "required_continuous_obs": {
+    "required": true,
+    "policy": "canonical/governance/OBS_DEPENDENCY_FRESHNESS_V1.json",
+    "runtime": "canonical/runtime/continuous_obs_runtime.py",
+    "schema": "PROJECT_BRAIN_CONTINUOUS_OBS_CONTEXT_V1",
+    "required_fields": [
+      "canonical_generation",
+      "canonical_state_dependencies",
+      "dependency_inventory_complete",
+      "material_world_state_dependencies_complete",
+      "unknown_material_dependencies",
+      "obs_layers_current",
+      "stale_authority_absent",
+      "valid_proof_action_priority",
+      "information_boundary_complete",
+      "information_policy",
+      "dependencies"
+    ],
+    "material_unknown_fails_closed": true,
+    "post_receipt_revalidation_required": true,
+    "post_exposure_discovery_forbidden": true,
+    "anti_meta_loop": "OBS_MUST_NOT_DELAY_A_VALID_PROOF_PRODUCING_ACTION"
+  },
+  "required_reality_query_admission": {
+    "required_when": "ACTION_GENERATES_NEW_TERMINAL_RELEVANT_EVIDENCE_AFTER_ACTIVATION",
+    "law": "canonical/laws/EVIDENCE_SATURATION_AND_MINIMUM_REALITY_QUERY_LAW_V1.md",
+    "compiler": "canonical/governance/COUNTERFACTUAL_TERMINAL_COMPILER_V1.json",
+    "exact_minimum_cut_runtime": "canonical/runtime/minimum_reality_cut.py",
+    "required_fields": [
+      "proof_obligation",
+      "existing_evidence_search",
+      "evidence_scope_equivalence",
+      "deductive_closure",
+      "counterfactual_terminal_distinctions",
+      "dominated_observations_deleted",
+      "candidate_observations",
+      "minimum_reality_cut",
+      "terminal_decision_value",
+      "admission_verdict",
+      "global_cut_snapshot",
+      "global_cut_membership"
+    ],
+    "allowed_admission_verdicts": [
+      "NO_REALITY_QUERY_REQUIRED",
+      "IRREDUCIBLE_REALITY_QUERY_IN_EXACT_MINIMUM_CUT",
+      "GRANDFATHERED_PREEXISTING_VALID_PROOF_ACTION"
+    ],
+    "simulation_alone_can_promote": false,
+    "fail_closed_on_unknown": true,
+    "current_grandfathered_action": {
+      "task": "freecad-spring-clip",
+      "rank": 22,
+      "rule": "NO_LONGER_ADMISSIBLE",
+      "status": "INVALIDATED_BY_SPENT_BUILDER_FAILURE"
+    }
+  },
+  "required_global_terminal_proof_cut": {
+    "required_for": [
+      "UNTOUCHED_TASK_SELECTION",
+      "UNTOUCHED_OFFICIAL_SOURCE_READ",
+      "TASK_EXECUTION",
+      "TERMINAL_VERIFICATION",
+      "NEW_TERMINAL_RELEVANT_OBSERVATION"
+    ],
+    "law": "canonical/laws/GLOBAL_TERMINAL_PROOF_TREE_COLLAPSE_LAW_V1.md",
+    "cut": "canonical/governance/GLOBAL_TERMINAL_PROOF_CUT_V1.json",
+    "required_fields": [
+      "graph_snapshot",
+      "existing_evidence_saturation",
+      "deductive_closure",
+      "shared_residual_compression",
+      "candidate_observations",
+      "dominance_deletions",
+      "exact_global_minimum_reality_cut",
+      "proposed_action_membership",
+      "terminal_decision_value"
+    ],
+    "stage_a_cleanliness_does_not_imply_membership": true,
+    "fail_closed_on_missing_or_unknown": true
+  }
+}
