@@ -1,0 +1,153 @@
+{
+  "schema": "PROJECT_BRAIN_GENERAL_SCIENTIFIC_RAW_RESOURCE_PIPELINE_V1_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__TWO_ENVIRONMENT_CLEAN_REPLAY__CROSS_FAMILY_SHADOW_GAUNTLET",
+  "subject": {
+    "runtime_path": "canonical/runtime/general_scientific_raw_resource_pipeline_v1.py",
+    "runtime_git_blob_sha": "442feb08dbbae2647af15601e4bb378fb1f2d5e6",
+    "test_path": "canonical/tests/test_general_scientific_raw_resource_pipeline_v1.py",
+    "test_git_blob_sha": "850804631ed7286dfe30b45375b5a56c03dccf90"
+  },
+  "dependency_closure": [
+    [
+      "canonical/runtime/general_scientific_capability_controller_v1.py",
+      "992345186cc51fff143a74f1e76f01ae897ac967"
+    ],
+    [
+      "canonical/runtime/scientific_numeric_resource_pipeline_v1.py",
+      "4025e2664a3919c4ca938923e79a1ffa78262949"
+    ],
+    [
+      "canonical/runtime/scientific_numeric_task_compiler_v1.py",
+      "570f7a4d08ee9c6663111df37c04080ee8f4562f"
+    ],
+    [
+      "canonical/runtime/scientific_numeric_task_pipeline_v1.py",
+      "4844513b3c20381e57da4df8251f5b8fbf4973ff"
+    ],
+    [
+      "canonical/runtime/scientific_artifact_contract_v1.py",
+      "ada3a42ddce7e6d899cfb9a8fc2c56049e0de583"
+    ],
+    [
+      "canonical/runtime/lossless_raw_task_contract_v1.py",
+      "53a440fccf91aa08f18abfff4f283e5fd18d9fcd"
+    ],
+    [
+      "canonical/runtime/explicit_requirement_index_v2.py",
+      "525fac941302254a47710aaae30b0174fab2cb40"
+    ],
+    [
+      "canonical/runtime/instruction_constraint_compiler_v1.py",
+      "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f"
+    ],
+    [
+      "canonical/runtime/bounded_predicate_argument_semantics.py",
+      "c7f190927e31fa2ab32f129b43402e98ea836498"
+    ],
+    [
+      "canonical/runtime/bounded_imperative_directive_semantics_v1.py",
+      "3f08b2703723537e5a146346eead6a387424687f"
+    ],
+    [
+      "canonical/runtime/bounded_task_directive_semantics_v1.py",
+      "e3a4c01cc08e7a569692a5d6f03a6feec69934bf"
+    ],
+    [
+      "canonical/runtime/capability_planner.py",
+      "629766f8a1194fd298e0809b64a5e9c5a39fa3ea"
+    ],
+    [
+      "canonical/runtime/h100_expression_tree_symbolic_regression_v1.py",
+      "14e8f11c73e5fc0439016dbcd5b5a5a8d2c46490"
+    ],
+    [
+      "canonical/runtime/g0_finite_typed_rule_synthesis.py",
+      "5fcd8101d65367f7c0e53bd245979ba01fb73a26"
+    ],
+    [
+      "canonical/runtime/abductive_residual_theorem_v1.py",
+      "aef25c462163170defd9d6c81beec628b350b51f"
+    ],
+    [
+      "canonical/runtime/tb_science_zero_model_scientific_kernel_v1.py",
+      "fae27cd575296d70a160a0c7f72d5a8127d8b9c1"
+    ],
+    [
+      "canonical/runtime/explicit_recovery_planner.py",
+      "6db2913d4da6505e3151829787ce54e348369d4f"
+    ]
+  ],
+  "verification": {
+    "environment_1": {
+      "kind": "PRIVATE_EXISTING_SPRITE",
+      "sprite": "brain-canonical-apply-slice-verify-20261011-v1",
+      "sprite_id": "sprite-03e2d6c1-6a52-4c21-817f-eae043fd842c",
+      "tests_run": 11,
+      "tests_passed": 11,
+      "tests_failed": 0,
+      "errors": 0
+    },
+    "environment_2": {
+      "kind": "PRIVATE_EXISTING_SPRITE",
+      "sprite": "brain-live-runtime-v1-verify-20261008",
+      "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+      "tests_run": 11,
+      "tests_passed": 11,
+      "tests_failed": 0,
+      "errors": 0
+    },
+    "exact_runtime_blob_replayed": true,
+    "exact_test_blob_replayed": true,
+    "exact_dependency_blobs_replayed": true
+  },
+  "shadow_gauntlet": {
+    "cross_family_cases": 10,
+    "families": [
+      "SYMBOLIC_REGRESSION",
+      "SHARED_PERIOD_FITTING",
+      "FINITE_RULE_SYNTHESIS",
+      "ABDUCTIVE_RESIDUAL_ANALYSIS"
+    ],
+    "controls": [
+      "IRRELEVANT_RESOURCE_DOES_NOT_STEAL_ROUTE",
+      "MULTIPLE_SUPPORTED_ROUTES_FAIL_CLOSED",
+      "STRUCTURED_RESOURCE_WITHOUT_MATCHING_SEMANTIC_CUE_FAILS_CLOSED",
+      "DECLARED_ARTIFACTS_ONLY_AFTER_VERIFIED_SOLVE",
+      "DETERMINISTIC_REPLAY_EQUALITY",
+      "ZERO_MODEL_NETWORK_AND_BENCHMARK_ROUTING_AUDIT"
+    ]
+  },
+  "verified_scope": [
+    "LOSSLESS_RAW_TASK_CONTRACT_PRESERVED",
+    "BOUNDED_LOCAL_RESOURCE_DISCOVERY",
+    "UNIQUE_TYPED_ROUTE_REQUIRED",
+    "RAW_NUMERIC_TO_SYMBOLIC_REGRESSION",
+    "RAW_NUMERIC_TO_PERIODIC_FITTING",
+    "STRUCTURED_RESOURCE_TO_FINITE_RULE_SYNTHESIS",
+    "STRUCTURED_RESOURCE_TO_ABDUCTIVE_RESIDUAL_ANALYSIS",
+    "VERIFIED_RESULT_TO_DECLARED_ARTIFACTS",
+    "AMBIGUITY_AND_UNSUPPORTED_CASES_FAIL_CLOSED"
+  ],
+  "ownership": {
+    "model_dependency_count": 0,
+    "external_model_runtime_calls": 0,
+    "network_dependency_count": 0,
+    "dynamic_code_execution": false,
+    "benchmark_identifier_used_for_routing": false
+  },
+  "hard_nonclaims": [
+    "NOT_GENERAL_SCIENTIFIC_INTELLIGENCE",
+    "NOT_ARBITRARY_NATURAL_LANGUAGE_SEMANTIC_UNDERSTANDING",
+    "NOT_ARBITRARY_NONNUMERIC_RESOURCE_SEMANTICS",
+    "NO_BENCHMARK_SCORE_CLAIM",
+    "NO_RANK23_TASK_READ_OR_START",
+    "NO_TERMINAL_AUTHORITY"
+  ],
+  "benchmark_audit_freeze_preserved": true,
+  "acceptance_credit_delta": 0,
+  "benchmark_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "execution_authority": false,
+  "activation_authority": false
+}
