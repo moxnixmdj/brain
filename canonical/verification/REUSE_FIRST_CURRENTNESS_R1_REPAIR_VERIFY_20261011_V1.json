@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_REUSE_FIRST_CURRENTNESS_R1_REPAIR_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__R1_WORKFLOW_SYNTAX_REPAIRED__PROFESSIONAL_24_OF_24_CURRENTNESS_RECONCILED__ESCAPE_REUSE_FIRST_PRIMARY__NO_AUTHORITY_INFLATION",
+  "base_main_commit": "31f82e6ee004cbf2f08a9c9b5ff6c6f45d2fed06",
+  "subjects": {
+    "r1_workflow": {
+      "path": ".github/workflows/verify-unified-live-brain-r1.yml",
+      "git_blob_sha": "03db975927cd6f436d54e1055e3a86dbae738147"
+    },
+    "capability_currentness": {
+      "path": "canonical/governance/CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1.json",
+      "git_blob_sha": "7fb78b746ca52818edd43b9e1a69c3437091e8b1"
+    },
+    "mission": {
+      "path": "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+      "git_blob_sha": "f35f30a883d4e28fc8d47043b21359da741efe54"
+    }
+  },
+  "checks": {
+    "json_parse_2_of_2": true,
+    "workflow_yaml_parse_independent_sprite": true,
+    "workflow_bad_inline_run_scalar_absent": true,
+    "professional_property_truth_closed_count": 24,
+    "professional_execution_property_truth_count": 12,
+    "professional_semantic_property_truth_count": 12,
+    "professional_open_semantic_leaf_count": 0,
+    "solved_professional_semantic_work_reopened": false,
+    "primary_frontier": "ESCAPE_12_ACTIVE_ACQUISITION_ROW_PROOF_INSTANTIATION_REUSE",
+    "regression_carrier_wake_gated": true,
+    "execution_authority": false,
+    "promotion_authority": false,
+    "acceptance_authority": false,
+    "terminal_authority": false
+  },
+  "independent_verification": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "result": "PASS_YAML_PARSE",
+    "note": "Used only as an independent syntax carrier; no benchmark or promotion authority."
+  },
+  "hard_nonclaims": [
+    "NO_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_EXECUTED",
+    "NO_UVCK_V2_PROMOTION",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT",
+    "NO_CLAIM_TWELVE_ESCAPE_EVIDENCE_ROWS_CLOSED",
+    "NO_CLAIM_GITHUB_ACTIONS_EXECUTION_CARRIER_RECOVERED"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "promotion_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
