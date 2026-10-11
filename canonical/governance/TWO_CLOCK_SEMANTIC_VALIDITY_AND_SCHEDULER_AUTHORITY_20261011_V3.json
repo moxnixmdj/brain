@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_V3",
+  "date": "2026-10-11",
+  "status": "ACTIVE_ZERO_REALITY_SEMANTIC_REUSE_REFINEMENT__PURE_CAPSULE_AND_SEALED_GENERAL_CONSUMER_VERIFIED__40_OF_40__ZERO_CREDIT",
+  "objective": "PRESERVE_VERIFIED_ZERO_REALITY_SEMANTIC_WORK_ACROSS_UNRELATED_AUTHORITY_CHURN_WITHOUT_ALLOWING_UNDECLARED_AUTHORITY_READS_OR_WEAKENING_LIVE_CONSEQUENTIAL_AUTHORITY",
+  "supersedes_for_current_zero_reality_reuse": {
+    "path": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V2.json",
+    "git_blob_sha": "e8c07cdf964d5aa8872c9f1dfaf3d2b45a32ca8b"
+  },
+  "clocks": {
+    "semantic_validity": "EXACT_WORK_PRODUCT_PLUS_EXPLICIT_SEMANTIC_DEPENDENCIES__FIELD_SCOPING_ALLOWED_ONLY_THROUGH_VERIFIED_PURE_CAPSULE_OR_SEALED_ZERO_AMBIENT_CONSUMER",
+    "scheduler_authority": "LIVE_GLOBAL_AUTHORITY_EPOCH"
+  },
+  "modes": {
+    "pure_semantic_capsule": {
+      "runtime": {
+        "path": "canonical/runtime/pure_field_projection_capsule_v1.py",
+        "git_blob_sha": "793fcd21d3544ffc6316eb029753fdbc7a9d9a39"
+      },
+      "guard": {
+        "path": "canonical/runtime/pure_projection_consumer_guard_v1.py",
+        "git_blob_sha": "9b623c5219cfe4b6037323fd5e8fc4dbd2b32907"
+      },
+      "rule": "SEMANTIC_IDENTITY_DEPENDS_ONLY_ON_DECLARED_FIELD_VALUES_AND_THE_VERIFIED_PURE_CONSUMER_SOURCE__UNDECLARED_SAME_FILE_CHURN_IS_NONMATERIAL"
+    },
+    "sealed_general_consumer": {
+      "projection_gate": {
+        "path": "canonical/runtime/field_scoped_authority_projection_gate_v1.py",
+        "git_blob_sha": "770174d3f70e18d35dfe18449c613df0259c6dd2"
+      },
+      "consumer": {
+        "path": "canonical/runtime/sealed_field_projection_consumer_v1.py",
+        "git_blob_sha": "348cc225d0a114ef73e549e368c6554272fcb598"
+      },
+      "closed_world_manifest": {
+        "path": "canonical/runtime/honesty_closed_world_input_manifest_v1.py",
+        "git_blob_sha": "0b7b84ed9b9cf77558a88b9871209d5d8bf7d8c9"
+      },
+      "zero_ambient_launcher": {
+        "path": "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+        "git_blob_sha": "6e687527e9c4da82fb5d974a729aaa263ee73ea8"
+      },
+      "rule": "ALL_CONSUMER_HELPER_RUNNER_AND_PROJECTION_BYTES_MUST_BE_EXACT_MANIFEST_INPUTS__HOST_REPOSITORY_NOT_MOUNTED__UNDECLARED_AUTHORITY_FIELDS_NOT_MATERIALIZED"
+    }
+  },
+  "field_scoped_reuse_requires": [
+    "ZERO_REALITY_DERIVATION_ONLY",
+    "EXPLICIT_RFC6901_POINTER_SET_FOR_EVERY_AUTHORITY_SOURCE",
+    "NO_DUPLICATE_OR_PARENT_CHILD_OVERLAPPING_POINTERS",
+    "DECLARED_VALUES_RESOLVE_AND_CONTENT_HASH_EXACTLY",
+    "PURE_ROUTE_REQUIRES_THE_VERIFIED_PURE_CONSUMER_GUARD_AND_CAPSULE",
+    "GENERAL_ROUTE_REQUIRES_EXACT_CLOSED_WORLD_SEALED_EXECUTION",
+    "ZERO_OPEN_DYNAMIC_OR_EXTERNAL_UNBOUND_DEPENDENCIES",
+    "RESULT_REMAINS_ZERO_AUTHORITY_UNTIL_SEPARATE_LIVE_SCHEDULER_RECHECK"
+  ],
+  "fallback_rule": "IF_FIELD_SCOPING_OR_CONSUMER_ISOLATION_CANNOT_BE_PROVED__FALL_BACK_TO_V2_EXACT_CONTENT_ADDRESSED_DEPENDENCY_CLOSURE_AND_FAIL_CLOSED_ON_SOURCE_DRIFT",
+  "live_authority_boundary": {
+    "fresh_reality_action": "LIVE_GLOBAL_AUTHORITY_RECHECK_REQUIRED",
+    "execution_or_irreversible_action": "LIVE_GLOBAL_AUTHORITY_RECHECK_REQUIRED",
+    "promotion_or_active_authority_mutation": "LIVE_GLOBAL_AUTHORITY_RECHECK_REQUIRED",
+    "terminal_authority": "NOT_GRANTED_BY_SEMANTIC_REUSE"
+  },
+  "independent_verification": {
+    "path": "canonical/verification/FIELD_SCOPED_SEMANTIC_REUSE_STACK_INDEPENDENT_VERIFY_20261011_V2.json",
+    "git_blob_sha": "90da41d02765a9748a9d30ecb319501754a5a161",
+    "focused_tests": "40_OF_40_PASS",
+    "real_zero_ambient_composition": "PASS",
+    "host_repository_visible_to_child": false,
+    "pure_guard_tdd_repair": "PASS"
+  },
+  "correction_from_v2": "V2_SOUNDLY_REQUIRED_COMPLETE_CONTENT_ADDRESSED_DEPENDENCY_CLOSURE_BUT_COULD_FALSELY_STALE_ZERO_REALITY_WORK_WHEN_UNRELATED_FIELDS_IN_MONOLITHIC_AUTHORITY_DOCUMENTS_CHANGED__V3_PERMITS_FIELD_LEVEL_SEMANTIC_IDENTITY_ONLY_WHEN_UNDECLARED_READS_ARE_STRUCTURALLY_EXCLUDED",
+  "hard_nonclaims": [
+    "NO_CLAIM_ARBITRARY_EXISTING_VERIFIERS_ARE_SAFE_TO_FIELD_SCOPE",
+    "NO_FIELD_SCOPE_INFERENCE_FROM_DYNAMIC_READ_OBSERVATION_ALONE",
+    "NO_REUSE_OF_FRESH_REALITY_RESULTS_ACROSS_AUTHORITY_DRIFT",
+    "NO_AUTOMATIC_EXECUTION_PROMOTION_OR_ACTIVE_AUTHORITY_MUTATION",
+    "NO_CAPABILITY_ACCEPTANCE_OWNERSHIP_EXECUTION_PROMOTION_FRESH_REALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "execution_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "fresh_reality_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "terminal_authority": false
+}
