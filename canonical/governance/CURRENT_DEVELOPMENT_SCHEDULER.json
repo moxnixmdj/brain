@@ -139,7 +139,7 @@
   },
   "post_composition_currentness_invariant": {
     "runtime_path": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
-    "runtime_git_blob_sha": "b8a86551545a3ecfe8ba8d6fa44d2347703aa42d",
+    "runtime_git_blob_sha": "55dbf003a525a4e35761b934af7957e6417e63f1",
     "focused_test_path": "canonical/tests/test_capability_parallel_frontier_post_composition_v2.py",
     "rule": "SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_CURRENT_POINTERS_ARE_REPROJECTED_ONLY_AFTER_FAMILY_INVARIANTS_PASS__UNMODELED_SOURCE_DRIFT_REMAINS_EXACT_HASH_FAIL_CLOSED",
     "field_scoped_zero_reality_reuse": {
@@ -159,9 +159,9 @@
   },
   "dynamic_post_composition_v2": {
     "runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
-    "runtime_git_blob_sha": "b8a86551545a3ecfe8ba8d6fa44d2347703aa42d",
+    "runtime_git_blob_sha": "55dbf003a525a4e35761b934af7957e6417e63f1",
     "test": "canonical/tests/test_capability_parallel_frontier_post_composition_v2.py",
-    "test_git_blob_sha": "16c46ce3c7f812d7cb9814a07a4683c1b5e5cca3",
+    "test_git_blob_sha": "043fc09deb8e4c979d45170e4c0602e06605b4d9",
     "verification": "canonical/verification/CAPABILITY_PARALLEL_POST_COMPOSITION_V2_VERIFY_20261010_V1.json",
     "verification_git_blob_sha": "e14810a95bd2cfdeecc3fc1737a26c1dd738449d",
     "primary_verification": "PYCOMPILE_PASS__21_OF_21_PASS",
