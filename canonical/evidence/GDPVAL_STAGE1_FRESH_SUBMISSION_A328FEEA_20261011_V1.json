@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_STAGE1_FRESH_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_UNSCORED_BRAIN_SUBMISSION__FORMAT_VERIFIED__ZERO_BENCHMARK_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "task": {
+    "row_idx": 6,
+    "task_id": "a328feea-47db-4856-b4be-2bdc63dd88fb",
+    "sector": "Government",
+    "occupation": "Administrative Services Managers",
+    "requested_artifact": "ONE_PAGE_WORD_UNSCHEDULED_ABSENCE_OR_LATENESS_POLICY",
+    "reference_file_count": 0
+  },
+  "freshness": {
+    "precommit_branch": "gdpval/stage1-fresh-submission-20261011-v1",
+    "field_firewall_commit": "9a76330fe676877156d5d7e7e8cae078563c75cf",
+    "human_gold_read_before_freeze": false,
+    "third_party_model_submission_read_before_freeze": false,
+    "judge_feedback_read_before_freeze": false,
+    "task_specific_rubric_read_before_freeze": false
+  },
+  "brain_execution_profile": {
+    "path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+    "candidate_id": "OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+    "cognition_surface": "CURRENT_CHATGPT_GPT_5_6_SOL_SESSION",
+    "incremental_spend_usd": 0
+  },
+  "deliverable": {
+    "file_name": "GDPval_a328feea_unscheduled_absence_policy.docx",
+    "sha256": "e40c78c8b2b4852f378ef0e958948dd0bc421da506e077c15d40f2f091749263",
+    "library_path": "/Project Brain/GDPval/stage1/a328feea-47db-4856-b4be-2bdc63dd88fb/GDPval_a328feea_unscheduled_absence_policy.docx",
+    "library_file_id": "libfile_ef535097522881919150734d6109cff0"
+  },
+  "format_verification": {
+    "renderer": "/home/oai/skills/docx/render_docx.py",
+    "rendered_page_count": 1,
+    "visual_inspection": "PASS__NO_CLIPPING_OVERLAP_OR_BROKEN_TABLES",
+    "render_pdf_sha256": "3973e45de973d04fa70ed4cc50359a6037bfe4cee5815e4e0b0462aa1cee6b2b"
+  },
+  "content_controls": {
+    "phone_call_is_primary_reporting_channel": true,
+    "text_email_coworker_or_voicemail_alone_is_insufficient": true,
+    "pre_start_or_as_soon_as_safe_reporting": true,
+    "coverage_control": true,
+    "timekeeping_same_day_reconciliation": true,
+    "mfa_confidential_hr_route": true,
+    "medical_diagnosis_not_requested": true,
+    "applicable_hr_rules_not_invented": true
+  },
+  "hard_nonclaims": [
+    "NO_ARTIFICIAL_ANALYSIS_SCORE",
+    "NO_OWNER_PAIRWISE_JUDGMENT",
+    "NO_RUBRIC_SCORE",
+    "NO_CLAIM_THIS_ONE_TASK_PROVES_GDPVAL_GE_1846",
+    "NO_BENCHMARK_ACCEPTANCE_CREDIT",
+    "NO_TERMINAL_CREDIT"
+  ]
+}
