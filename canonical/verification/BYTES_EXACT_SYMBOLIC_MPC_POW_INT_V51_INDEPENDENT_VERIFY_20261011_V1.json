@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_MPC_POW_INT_V51_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__CLEAN_V50_EXTRACTION_REPLAY__V51_278_OF_278_DURABLE_FILES_IDENTICAL__SPENT_NEXT56_14720_OF_14720__FRESH_NEXT57_14950_OF_14950__NEXT58_FROZEN_UNSPENT__ZERO_CREDIT",
+  "subject": {
+    "producer_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MPC_POW_INT_V51_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "transform": "canonical/research/bytes/tools/conservative_mpc_pow_int_n1_n2_prune_v51.py",
+    "predecessor_manifest_sha256": "719e9d956c4b24f54474ebd0dea30fe3e2352e6037743ec5a07b911cdec071e2",
+    "candidate_manifest_sha256": "bab0e710a20ac41743feadf3a979e2c9d8d08fd621a42e4799ba658badb7ef37",
+    "candidate_raw_python_source_bytes": 1719563
+  },
+  "carrier": {
+    "class": "CHATGPT_ISOLATED_CONTAINER_CLEAN_EXTRACTION",
+    "source_materialization": "CHATGPT_LIBRARY",
+    "construction_working_tree_reused_for_replay": false,
+    "external_second_carrier_verified": false,
+    "incremental_spend_usd": 0
+  },
+  "replay": {
+    "transform_application": {
+      "result": "PASS",
+      "saved_raw_python_bytes": 1117,
+      "candidate_manifest_sha256": "bab0e710a20ac41743feadf3a979e2c9d8d08fd621a42e4799ba658badb7ef37"
+    },
+    "durable_file_identity": {
+      "compared": 278,
+      "identical": 278,
+      "mismatched": 0
+    },
+    "archive_identity": {
+      "compared": 278,
+      "identical": 278,
+      "mismatched": 0
+    },
+    "spent_NEXT56": {
+      "passed": 14720,
+      "total": 14720,
+      "failures": 0
+    },
+    "fresh_NEXT57": {
+      "passed": 14950,
+      "total": 14950,
+      "failures": 0
+    },
+    "frozen_NEXT58": {
+      "cases": 15180,
+      "sha256": "fd7a32a07356c87a18e884f851320fd5d87dc316ca2436a4191275e5f3f57e0c",
+      "spent": false
+    }
+  },
+  "proved": [
+    "THE_V50_TO_V51_TRANSFORM_RECONSTRUCTS_THE_EXACT_TARGET_MANIFEST",
+    "THE_RECONSTRUCTED_V51_DURABLE_FILES_MATCH_THE_VERIFIED_CANDIDATE_BYTE_FOR_BYTE",
+    "THE_SEALED_V51_ARCHIVE_MATCHES_THE_VERIFIED_CANDIDATE_BYTE_FOR_BYTE",
+    "THE_EXACT_V51_CANDIDATE_PASSES_COMPLETE_SPENT_NEXT56",
+    "THE_PREVIOUSLY_UNSPENT_NEXT57_CORPUS_PASSES_EXACT_V51_COMPLETELY",
+    "NEXT58_IS_CONTENT_ADDRESSED_AND_REMAINS_UNSPENT"
+  ],
+  "truth_boundary": [
+    "THIS_VERIFIES_THE_BOUNDED_EXACT_SYMBOLIC_ROUTE_ONLY",
+    "NO_UNIVERSAL_MPMATH_EQUIVALENCE_IS_PROVED",
+    "NO_EXTERNAL_SECOND_CARRIER_CLAIM",
+    "NEXT58_MUST_NOT_BE_EXECUTED_BEFORE_A_NEW_PHYSICAL_CUT",
+    "NO_CAPABILITY_ACCEPTANCE_PROFESSIONAL_QUALITY_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
