@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIERCODE_PUBLIC_EVALUATION_INTAKE_REFRESH_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PUBLIC_PARTNER_EVALUATION_INTAKE_IDENTIFIED__FRONTIERCODE_SPECIFIC_OWNER_HANDLER_NOT_YET_CONFIRMED__ZERO_CREDIT",
+  "benchmark": "FrontierCode 1.1 Main",
+  "target_predicate": "CODING_FRONTIERCODE_GE_54_4",
+  "supersedes_for_intake_discovery_only": "canonical/governance/FRONTIERCODE_OWNER_EVALUATION_ACCESS_REFRESH_20261009_V2.json",
+  "public_sources": [
+    {
+      "url": "https://www.mercor.com/apex/",
+      "observed": "MERCOR_APEX_FAQ_STATES_FRONTIER_LABS_AND_MODEL_DEVELOPERS_CAN_REQUEST_EVALUATION_USING_THE_LINKED_PARTNER_FORM"
+    },
+    {
+      "url": "https://www.mercor.com/apex/partner-benchmarks/frontiercode-leaderboard/",
+      "observed": "FRONTIERCODE_PAGE_STATES_PRIVATE_TASKS_CANNOT_BE_SELF_RUN_AND_MODEL_CREATORS_CAN_REQUEST_AN_EVALUATION_FROM_COGNITION"
+    },
+    {
+      "url": "https://huggingface.co/datasets/mercor/APEX-v1-extended",
+      "observed": "MERCOR_PUBLISHES_APEX_AT_MERCOR_DOT_COM_AS_APEX_CONTACT"
+    },
+    {
+      "url": "https://huggingface.co/datasets/mercor/apex-accounting/commit/1e6798d794594662e2b837154f19ac9012513290",
+      "observed": "MERCOR_STATES_CLOSED_LEADERBOARD_EVALS_CAN_BE_RUN_ON_REQUEST_VIA_APEX_AT_MERCOR_DOT_COM"
+    }
+  ],
+  "intake_state": {
+    "public_model_evaluation_request_surface_identified": true,
+    "partner_contact_email_identified": true,
+    "partner_contact": "apex@mercor.com",
+    "cognition_frontiercode_specific_handler_confirmed": false,
+    "brain_configured_system_eligibility_bound": false,
+    "accepted_harness_or_adapter_bound": false,
+    "zero_incremental_cost_terms_bound": false,
+    "current_frontiercode_main_protocol_binding_bound": false,
+    "score_bearing_evaluation_authority": false
+  },
+  "interpretation": [
+    "THE_PREVIOUS_PUBLIC_INTAKE_UNIDENTIFIED_STATE_IS_STALE_AT_THE_PARTNER_MODEL_EVALUATION_LAYER",
+    "THIS_DOES_NOT_YET_PROVE_COGNITION_ACCEPTS_PROJECT_BRAIN_AS_A_CONFIGURED_SYSTEM",
+    "THIS_DOES_NOT_YET_PROVE_THE_ACCEPTED_RUNNER_INTERFACE_OR_HARNESS",
+    "THIS_DOES_NOT_YET_PROVE_THE_EVALUATION_IS_FREE",
+    "THIS_DOES_NOT_YET_PRODUCE_ANY_FRONTIERCODE_SCORE_MASS"
+  ],
+  "remaining_policy_changing_facts": [
+    "BRAIN_CONFIGURED_SYSTEM_ELIGIBILITY",
+    "OWNER_OR_PARTNER_ACCEPTED_RUNNER_INTERFACE_OR_HARNESS",
+    "ZERO_INCREMENTAL_COST_TERMS",
+    "CURRENT_FRONTIERCODE_MAIN_PROTOCOL_AND_RESULT_RECEIPT_BINDING",
+    "OFFICIAL_BRAIN_SCORE_RESULT"
+  ],
+  "scheduler": {
+    "public_intake_search": "CLOSED_AT_PARTNER_LAYER",
+    "same_information_internal_theorem_work": "REMAINS_DEMOTED",
+    "next": "WAIT_FOR_OWNER_OR_PARTNER_REPLY_BINDING_ELIGIBILITY_HARNESS_COST_AND_PROTOCOL__THEN_EXECUTE_ONLY_IF_ZERO_COST_AND_ADMISSIBLE"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_COGNITION_HAS_ACCEPTED_PROJECT_BRAIN",
+    "NO_CLAIM_FRONTIERCODE_EVALUATION_IS_FREE",
+    "NO_CLAIM_AN_OFFICIAL_BRAIN_EVALUATION_HAS_BEEN_SCHEDULED_OR_RUN",
+    "NO_FRONTIERCODE_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
