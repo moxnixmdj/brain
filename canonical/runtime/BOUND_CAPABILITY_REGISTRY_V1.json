@@ -4723,6 +4723,214 @@
         "external_general_purpose_model_runtime_dependency_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "candidate.measurement.independent.content_addressed.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "cost": 1,
+      "incremental_spend_usd": 0,
+      "requires": [
+        "candidate.repository_tree.available",
+        "independent.verifier.available"
+      ],
+      "provides": [
+        "candidate.snapshot.content_addressed",
+        "candidate.measurement.independent.typed_fields"
+      ],
+      "adapter_module": "independent_candidate_measurement_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "keywords": [
+        "candidate",
+        "measurement",
+        "independent",
+        "content-addressed",
+        "verifier",
+        "receipt"
+      ],
+      "limitations": [
+        "Verifier must be repository-local and structurally outside the candidate tree.",
+        "Candidate tree symlinks are rejected; snapshot is regular-file content-addressed.",
+        "Verifier semantic adequacy is a separate source-grounding or proof obligation.",
+        "No general software acceptance, benchmark score, or terminal authority."
+      ],
+      "source": {
+        "type": "brain_owned_python_stdlib",
+        "adapter_path": "canonical/runtime/independent_candidate_measurement_v1.py"
+      },
+      "verification": {
+        "independently_verified": true,
+        "primary_test_count": 10,
+        "independent_test_count": 10,
+        "receipt_path": "canonical/verification/V6B_MEASURED_SEMANTIC_ACCEPTANCE_VERIFY_20261011_V1.json",
+        "runtime_git_blob_sha": "c4264a52f9c9ade5569a18fde9a61721d3a5fd1e",
+        "test_git_blob_sha": "7a3142ba9a31ffee3c4fec838f4a97fc582b2764",
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0
+      }
+    },
+    "task.acceptance.measured.objective.lossless.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "cost": 1,
+      "incremental_spend_usd": 0,
+      "requires": [
+        "raw_task.text.available",
+        "candidate.repository_tree.available",
+        "independent.verifier.available"
+      ],
+      "provides": [
+        "raw_task.objective_acceptance.measured",
+        "acceptance.stop.objective"
+      ],
+      "adapter_module": "measured_raw_task_acceptance_v1",
+      "entrypoint": "evaluate",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "keywords": [
+        "acceptance",
+        "objective",
+        "measurement",
+        "raw task",
+        "independent",
+        "typed fields"
+      ],
+      "limitations": [
+        "Typed candidate fields are accepted only from content-addressed independent verifier receipts.",
+        "Semantic raw-task residuals remain blocking.",
+        "No general natural-language semantic completeness or terminal authority."
+      ],
+      "source": {
+        "type": "brain_owned_python_composition",
+        "adapter_path": "canonical/runtime/measured_raw_task_acceptance_v1.py",
+        "donor_capabilities": [
+          "candidate.measurement.independent.content_addressed.v1",
+          "task.acceptance.objective.lossless.v1"
+        ]
+      },
+      "verification": {
+        "independently_verified": true,
+        "primary_test_count": 10,
+        "independent_test_count": 10,
+        "receipt_path": "canonical/verification/V6B_MEASURED_SEMANTIC_ACCEPTANCE_VERIFY_20261011_V1.json",
+        "runtime_git_blob_sha": "8aa3615418b1b118ec55e9f9bd16c51b1b5a4fd6",
+        "test_git_blob_sha": "e26ea8f3a0356c4f5ee98cbad8ed3e40698cbd7b",
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0
+      }
+    },
+    "python.acceptance.source_grounded.behavior_examples.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "cost": 1,
+      "incremental_spend_usd": 0,
+      "requires": [
+        "raw_task.text.available",
+        "candidate.repository_tree.available"
+      ],
+      "provides": [
+        "python.behavior.acceptance.source_grounded",
+        "acceptance.verifier.generated_from_source"
+      ],
+      "adapter_module": "source_grounded_python_behavior_acceptance_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "keywords": [
+        "python",
+        "behavior",
+        "acceptance",
+        "return",
+        "raise",
+        "source-grounded",
+        "semantic"
+      ],
+      "limitations": [
+        "Verified grammar is limited to top-level Python module functions with JSON argument lists and exact JSON return or builtin exception expectations.",
+        "Unsupported or ambiguous raw-source segments remain blocking residuals.",
+        "No side-effect, async, object-method, CLI/API/file-I/O, non-Python, hidden-requirement, benchmark, or terminal completeness."
+      ],
+      "source": {
+        "type": "brain_owned_python_composition",
+        "adapter_path": "canonical/runtime/source_grounded_python_behavior_acceptance_v1.py",
+        "donor_capabilities": [
+          "candidate.measurement.independent.content_addressed.v1",
+          "lossless_raw_task_contract_v1"
+        ]
+      },
+      "verification": {
+        "independently_verified": true,
+        "primary_test_count": 13,
+        "independent_test_count": 13,
+        "receipt_path": "canonical/verification/V6B_MEASURED_SEMANTIC_ACCEPTANCE_VERIFY_20261011_V1.json",
+        "runtime_git_blob_sha": "230f18380804ed7c4b2598badce20eefe3a73795",
+        "test_git_blob_sha": "8b55f0298e6da3ecab8a3dbf66eab7ff0b8e415a",
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0
+      }
+    },
+    "software.acceptance.composed.lossless.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "cost": 1,
+      "incremental_spend_usd": 0,
+      "requires": [
+        "raw_task.text.available",
+        "candidate.repository_tree.available"
+      ],
+      "provides": [
+        "software.acceptance.composed.lossless",
+        "acceptance.stop.when_all_bound_obligations_pass"
+      ],
+      "adapter_module": "composed_raw_software_acceptance_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "keywords": [
+        "software",
+        "acceptance",
+        "compose",
+        "raw task",
+        "lossless",
+        "measurement",
+        "behavior"
+      ],
+      "limitations": [
+        "Composes current objective routes with the verified explicit Python behavior-example grammar over one lossless raw obligation ledger.",
+        "Acceptance stop is authorized only when every raw obligation is covered and every bound route passes.",
+        "All independent measurements must bind the same candidate snapshot.",
+        "Arbitrary natural-language semantics, hidden requirements, mergeability, non-Python semantics, and direct repair-loop control remain open."
+      ],
+      "source": {
+        "type": "brain_owned_python_composition",
+        "adapter_path": "canonical/runtime/composed_raw_software_acceptance_v1.py",
+        "donor_capabilities": [
+          "candidate.measurement.independent.content_addressed.v1",
+          "task.acceptance.objective.lossless.v1",
+          "python.acceptance.source_grounded.behavior_examples.v1"
+        ]
+      },
+      "verification": {
+        "independently_verified": true,
+        "primary_test_count": 11,
+        "independent_test_count": 11,
+        "combined_primary_test_count": 44,
+        "combined_independent_test_count": 44,
+        "receipt_path": "canonical/verification/V6B_MEASURED_SEMANTIC_ACCEPTANCE_VERIFY_20261011_V1.json",
+        "runtime_git_blob_sha": "d2b59e09824fd57b3dd9139808f4d209dca69559",
+        "test_git_blob_sha": "c0642222e8d1ee0d982daf1a9198d7f139241888",
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
