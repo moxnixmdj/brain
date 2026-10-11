@@ -102,7 +102,7 @@ def solve(
         words = extract_words(image_path, psm=11, min_confidence=0)["words"]
     calibration = infer_linear_axes(words, image_width=image.width, image_height=image.height)
     groups = line_groups(words)
-    numbers = prompt_numbers(prompt)
+    numbers = prompt_numbers(prompt, exclude_formatting=True)
     if len(numbers) < 2:
         raise SeriesIntersectionError("PROMPT_NUMBERS_INSUFFICIENT")
 
