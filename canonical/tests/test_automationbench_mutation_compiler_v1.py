@@ -25,6 +25,24 @@ class AutomationBenchMutationCompilerV1Tests(unittest.TestCase):
         self.assertIn("006xx000004MER1", out["arguments"]["url"])
         self.assertEqual(json.loads(out["arguments"]["body"])["StageName"], "Closed Won")
 
+    def test_sales_public_real_prompt_does_not_need_surface_name(self):
+        prompt = (
+            "We just closed the Meridian Corp Platform Deal! Mark it as won and "
+            "route the win notice to the right team per our routing policy."
+        )
+        observations = [{
+            "records": [
+                {
+                    "Id":"006xx000004MER1",
+                    "Name":"Meridian Corp - Platform Deal",
+                    "StageName":"Negotiation",
+                }
+            ]
+        }]
+        out = compile_salesforce_mark_won(prompt, observations)
+        self.assertIsNotNone(out)
+        self.assertIn("006xx000004MER1", out["arguments"]["url"])
+
     def test_sales_mark_won_fails_closed_without_matching_record(self):
         prompt = "Mark the Meridian Corp Platform Deal as won in Salesforce."
         self.assertIsNone(compile_salesforce_mark_won(prompt, [{"records": []}]))
