@@ -13,6 +13,13 @@ from canonical.runtime.automationbench_stirrup_client_v1 import (
 
 
 @dataclass
+class Block:
+    kind: str
+    name: str = ""
+    arguments: str = "{}"
+
+
+@dataclass
 class Msg:
     role: str
     content: object = ""
@@ -20,6 +27,7 @@ class Msg:
     name: str = ""
     tool_call_id: str = ""
     metadata: dict = field(default_factory=dict)
+    blocks: list = field(default_factory=list)
 
 
 class StirrupAdapterPureTests(unittest.TestCase):
@@ -66,6 +74,31 @@ class StirrupAdapterPureTests(unittest.TestCase):
         )
         self.assertEqual(out[1]["kind"], "tool_result")
         self.assertEqual(out[1]["name"], "api_fetch")
+
+    def test_history_preserves_tool_call_arguments_for_dedupe(self):
+        messages = [
+            Msg(
+                role="assistant",
+                blocks=[
+                    Block(
+                        kind="tool_call",
+                        name="api_fetch",
+                        arguments='{"method":"GET","url":"https://example.test/items"}',
+                    )
+                ],
+            ),
+            Msg(
+                role="tool",
+                name="api_fetch",
+                tool_call_id="call1",
+                content='{"items":[]}',
+            ),
+        ]
+        out = normalize_history(messages)
+        self.assertEqual(out[0]["kind"], "tool_call")
+        self.assertEqual(out[0]["name"], "api_fetch")
+        self.assertIn('"method":"GET"', out[0]["arguments"])
+        self.assertEqual(out[1]["kind"], "tool_result")
 
     def test_summary_does_not_replace_original_task_prompt(self):
         messages = [
