@@ -12,7 +12,7 @@ from __future__ import annotations
 
 from collections import Counter, deque
 from dataclasses import dataclass, fields
-from itertools import combinations, product
+from itertools import combinations
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime.g0_finite_typed_rule_synthesis import (
@@ -24,7 +24,6 @@ from canonical.runtime.g0_finite_typed_rule_synthesis import (
 Grid = tuple[tuple[int, ...], ...]
 SCHEMA = "PROJECT_BRAIN_GRID_DELTA_RULE_INDUCER_V2"
 MAX_PACKS = 96
-MAX_RULE_SET_COMBINATIONS = 512
 
 
 class GridDeltaRuleV2Error(ValueError):
@@ -287,16 +286,35 @@ def _synthesize_for_target(
     return verified
 
 
-def _apply_rule_set(grid: Grid, rule_set: Sequence[Mapping[str, Any]]) -> Grid | None:
+def _selected_positions(grid: Grid, rule: Mapping[str, Any]) -> frozenset[tuple[int, int]]:
     contexts = _contexts(grid)
+    return frozenset(pos for pos, ctx in contexts.items() if _matches(ctx, rule))
+
+
+def _consensus_predict(
+    grid: Grid,
+    target_rule_options: Sequence[Mapping[str, Any]],
+) -> tuple[str, Grid | None]:
+    selected_by_target: dict[int, frozenset[tuple[int, int]]] = {}
+    for group in target_rule_options:
+        target = int(group["target_color"])
+        options = group["rules"]
+        selections = {_selected_positions(grid, rule) for rule in options}
+        if len(selections) != 1:
+            return "AMBIGUOUS_PREDICTION", None
+        selected_by_target[target] = next(iter(selections))
+
+    occupied: dict[tuple[int, int], int] = {}
+    for target, positions in selected_by_target.items():
+        for pos in positions:
+            if pos in occupied and occupied[pos] != target:
+                return "UNDEFINED_CONFLICT", None
+            occupied[pos] = target
+
     out = [list(row) for row in grid]
-    for (r, c), ctx in contexts.items():
-        targets = {int(rule["target_color"]) for rule in rule_set if _matches(ctx, rule)}
-        if len(targets) > 1:
-            return None
-        if targets:
-            out[r][c] = next(iter(targets))
-    return tuple(tuple(row) for row in out)
+    for (r, c), target in occupied.items():
+        out[r][c] = target
+    return "PREDICTED", tuple(tuple(row) for row in out)
 
 
 def induce(training_pairs: Sequence[Mapping[str, Sequence[Sequence[int]]]]) -> dict[str, Any]:
@@ -329,7 +347,7 @@ def induce(training_pairs: Sequence[Mapping[str, Sequence[Sequence[int]]]]) -> d
     if not packs:
         return {"schema": SCHEMA, "status": "FAIL_CLOSED", "reason": "NO_ADMISSIBLE_PREDICATE_PACK"}
 
-    per_target: list[list[dict[str, Any]]] = []
+    target_rule_options: list[dict[str, Any]] = []
     for target in targets:
         rules = _synthesize_for_target(pairs, contexts, target, packs, attribute_values)
         if not rules:
@@ -341,50 +359,55 @@ def induce(training_pairs: Sequence[Mapping[str, Sequence[Sequence[int]]]]) -> d
                 "predicate_pack_count": len(packs),
                 "terminal_authority": False,
             }
-        per_target.append(rules)
+        min_cost = min(float(rule["cost"]) for rule in rules)
+        best = [rule for rule in rules if float(rule["cost"]) == min_cost]
+        # Remove byte-identical rule descriptions without collapsing genuinely
+        # different predicates that only happen to agree on training examples.
+        seen: set[tuple[Any, ...]] = set()
+        deduped: list[dict[str, Any]] = []
+        for rule in sorted(
+            best,
+            key=lambda x: (tuple(x["attributes"]), tuple(x["rule_predicates"])),
+        ):
+            key = (
+                tuple(rule["attributes"]),
+                tuple(rule["predicate_ids"]),
+                tuple(rule["rule_predicates"]),
+                int(rule["target_color"]),
+            )
+            if key not in seen:
+                seen.add(key)
+                deduped.append(rule)
+        target_rule_options.append({
+            "target_color": target,
+            "minimum_cost": min_cost,
+            "rules": deduped,
+            "rule_option_count": len(deduped),
+        })
 
-    examined = 0
-    verified_sets: list[dict[str, Any]] = []
-    for combo in product(*per_target):
-        examined += 1
-        if examined > MAX_RULE_SET_COMBINATIONS:
+    # Every retained rule was already proven to select exactly the target's
+    # changed cells on every training example, so their cross-target union is
+    # training-exact without materializing the Cartesian product.
+    for inp, out in pairs:
+        status, predicted = _consensus_predict(inp, target_rule_options)
+        if status != "PREDICTED" or predicted != out:
             return {
                 "schema": SCHEMA,
-                "status": "SEARCH_BOUND_EXCEEDED",
-                "reason": "RULE_SET_COMBINATION_LIMIT",
-                "limit": MAX_RULE_SET_COMBINATIONS,
+                "status": "INTERNAL_VERIFICATION_FAILURE",
+                "reason": status,
                 "terminal_authority": False,
             }
-        if all(_apply_rule_set(inp, combo) == out for inp, out in pairs):
-            verified_sets.append({
-                "rules": [dict(x) for x in combo],
-                "cost": sum(float(x["cost"]) for x in combo),
-            })
 
-    if not verified_sets:
-        return {
-            "schema": SCHEMA,
-            "status": "NO_VERIFIED_RULE_SET",
-            "changed_target_colors": targets,
-            "terminal_authority": False,
-        }
-
-    best_cost = min(x["cost"] for x in verified_sets)
-    best = [x for x in verified_sets if x["cost"] == best_cost]
-    best.sort(
-        key=lambda x: tuple(
-            (r["target_color"], tuple(r["attributes"]), tuple(r["rule_predicates"]))
-            for r in x["rules"]
-        )
-    )
+    total_min_cost = sum(float(x["minimum_cost"]) for x in target_rule_options)
+    ambiguity_count = sum(int(x["rule_option_count"]) > 1 for x in target_rule_options)
     return {
         "schema": SCHEMA,
-        "status": "VERIFIED_RULE_SETS",
+        "status": "VERIFIED_FACTORIZED_RULE_OPTIONS",
         "changed_target_colors": targets,
-        "minimum_cost": best_cost,
-        "rule_sets": best,
-        "rule_set_count": len(best),
-        "ambiguity_preserved": len(best) > 1,
+        "minimum_cost": total_min_cost,
+        "target_rule_options": target_rule_options,
+        "ambiguous_target_count": ambiguity_count,
+        "ambiguity_preserved": ambiguity_count > 0,
         "training_full_replay_verified": True,
         "predicate_pack_count": len(packs),
         "attribute_universe": list(ATTRIBUTES),
@@ -395,14 +418,14 @@ def induce(training_pairs: Sequence[Mapping[str, Sequence[Sequence[int]]]]) -> d
     }
 
 
-def predict(rule_set: Mapping[str, Any], grid: Sequence[Sequence[int]]) -> dict[str, Any]:
+def predict(result: Mapping[str, Any], grid: Sequence[Sequence[int]]) -> dict[str, Any]:
     try:
         g = _grid(grid, "grid")
-        out = _apply_rule_set(g, rule_set["rules"])
+        status, out = _consensus_predict(g, result["target_rule_options"])
     except (GridDeltaRuleV2Error, KeyError, TypeError, ValueError) as exc:
         return {"schema": SCHEMA, "status": "FAIL_CLOSED", "reason": type(exc).__name__ + ":" + str(exc)}
-    if out is None:
-        return {"schema": SCHEMA, "status": "UNDEFINED_CONFLICT", "prediction": None}
+    if status != "PREDICTED" or out is None:
+        return {"schema": SCHEMA, "status": status, "prediction": None}
     return {
         "schema": SCHEMA,
         "status": "PREDICTED",
