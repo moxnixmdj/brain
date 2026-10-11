@@ -1,0 +1,104 @@
+{
+  "schema": "PROJECT_BRAIN_R2_GENERIC_AUTHORITY_MATERIALIZATION_SECOND_CARRIER_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_MERGED_RUNTIME_AND_DEPENDENCY_BYTES__SECOND_CARRIER__11_OF_11_AUTHORED_TESTS_PASS__GENERIC_UNBOUND_AUTHORITY_CANDIDATE_MATERIALIZATION_EXECUTION_INDEPENDENTLY_REPLAYED__ZERO_CREDIT",
+  "subject": {
+    "source_commit": "7e000a2b9f31ee423cb6015ff63b007ac208e754",
+    "current_main_observed_before_receipt": "5d031277aa597371e513b3cde9055e45e36a7071",
+    "changed_runtime_blobs": {
+      "materializer": [
+        "canonical/runtime/r2_authority_candidate_materialization_v1.py",
+        "d277f60e454ecf2acbdbc3dc5d47123e02190366"
+      ],
+      "checker_adapter": [
+        "canonical/runtime/r2_generic_authority_candidate_checker_adapter_v1.py",
+        "9862e5089553f44911266e8d710d0f335c5fd1be"
+      ],
+      "regcap_adapter": [
+        "canonical/runtime/r2_regcap_authority_candidate_adapter_v1.py",
+        "5b8351dbe7d415bed6b6a4f6c4883ed2a9652281"
+      ]
+    }
+  },
+  "second_carrier": {
+    "kind": "SPRITE",
+    "name": "brain-cad-proof-clean-20261010",
+    "sprite_id": "sprite-7b47a201-b921-4b69-91c4-8dda8749014e",
+    "python": "3.14.4",
+    "private_repo_clone_used": false,
+    "exact_files_materialized_by_content_from_canonical_git": true
+  },
+  "exact_dependency_blobs": {
+    "four_way_discriminator": "9815a4f85fdf7a05ed3c62dd7146af3556ee9d11",
+    "authority_domain_discovery_provider": "c8d3ab11171e6eb7362e024cbbfd9a8159671c57",
+    "https_source_fragment_projection_authority_v2": "08ef858981acaa9f5a350d696086fb01cec31a93",
+    "semantic_relation_entailment_dag_v1": "3e092ba1581f674c1302288b2800771a81b5bb02",
+    "source_assertion_ownership_guard_v1": "c86f390247de214c0f01d4de872800f2d3d9f344",
+    "regcap_necessary_property_authority_v1": "609d2ea525ccb485c01ac76220b503ed22fee2e9",
+    "mrel_necessary_property_authority_v1": "10d91e251c76695368dc77d3370c30e61f31f09d",
+    "tlac_mrel_identity_discriminator_v1": "cc658256abe2b7958c62ae6bc2b55a8872fac147",
+    "regcap_contextual_observation_compiler_v1": "4ae999c1f6805d46d6d18c10c115ebb09c306516",
+    "regcap_contrastive_discriminator_matrix_v1": "0dc36525ffea46f9f0401579fa33dc0d8c1780b4",
+    "regcap_context_signature_v1": "15619eb80ffb2d20e9652e30c8206b89de24eeb4",
+    "regcap_mrel_pair_discriminator_v1": "ba0c06771c183baf14bfe42d28285d9327675e50"
+  },
+  "authored_test_blobs": {
+    "materializer": [
+      "canonical/tests/test_r2_authority_candidate_materialization_v1.py",
+      "b746f20306284001a3b68ee63460d50031306e18"
+    ],
+    "generic_checker_adapter": [
+      "canonical/tests/test_r2_generic_authority_candidate_checker_adapter_v1.py",
+      "69b8ddf9474851e1bb6692251aaa3c7d9efb920e"
+    ],
+    "generic_fallback": [
+      "canonical/tests/test_r2_generic_authority_candidate_fallback_v1.py",
+      "4539a8481fb7e805b383353a0171628c4e198aba"
+    ],
+    "legacy_regcap_adapter": [
+      "canonical/tests/test_r2_regcap_authority_candidate_adapter_v1.py",
+      "d08369129a5f4fd0e3ad8c9c4d0c1c32d1fcb7ca"
+    ]
+  },
+  "replay": {
+    "command": "python3 -m unittest -v canonical.tests.test_r2_authority_candidate_materialization_v1 canonical.tests.test_r2_generic_authority_candidate_checker_adapter_v1 canonical.tests.test_r2_generic_authority_candidate_fallback_v1 canonical.tests.test_r2_regcap_authority_candidate_adapter_v1",
+    "test_count": 11,
+    "passed": 11,
+    "failed": 0,
+    "errors": 0
+  },
+  "verified_behaviors": [
+    "EXACT_BYTE_MATERIALIZATION_WITH_SHA256_BINDING",
+    "NON_UTF8_DOES_NOT_BECOME_TEXT_SEMANTIC_TRUTH",
+    "OUT_OF_DECLARED_AUTHORITY_DOMAIN_FAILS_CLOSED",
+    "NO_CHECKER_TEMPLATE_DOES_NOT_INVENT_ONE",
+    "EXISTING_CHECKER_TEMPLATE_REUSED_ONLY",
+    "GENERIC_MATERIALIZATION_FAILURE_STAYS_FAIL_CLOSED",
+    "NON_REGCAP_REQUEST_REUSES_GENERIC_MATERIALIZATION_AND_CHECKER",
+    "EXACT_FOUR_WAY_REQUEST_PRESERVES_ORIGINAL_PREDICATE_IDENTITY",
+    "FOUR_WAY_OUTCOME_DRIFT_FAILS_CLOSED",
+    "GENERIC_NON_REGCAP_TRUTH_IS_NOT_REWRITTEN",
+    "IDENTICAL_AUTHORITY_CANDIDATE_CANNOT_BE_APPENDED_FOREVER"
+  ],
+  "interpretation": {
+    "generic_unbound_authority_candidate_materialization_mechanism_execution_independently_replayed": true,
+    "independent_external_live_web_fetch_proved": false,
+    "semantic_truth_still_checker_owned": true,
+    "provider_semantic_truth_authority": false,
+    "global_open_world_closure_claimed": false
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_EVERY_EXTERNAL_SITE_IS_FETCHABLE",
+    "NO_CLAIM_NON_TEXT_OR_UNSUPPORTED_FORMATS_HAVE_A_COMPATIBLE_CHECKER",
+    "NO_PROVIDER_SEMANTIC_TRUTH_AUTHORITY",
+    "NO_POLICY_ADEQUACY_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY_FROM_THIS_REPLAY",
+    "NO_GLOBAL_OPEN_WORLD_SEMANTIC_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
