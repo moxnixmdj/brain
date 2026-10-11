@@ -162,6 +162,55 @@
           "required": [
             "zoom_percentage"
           ]
+        },
+        "get_workbook_info": {
+          "required": []
+        },
+        "get_column_data": {
+          "required": [
+            "column_name"
+          ]
+        },
+        "set_column_values": {
+          "required": [
+            "column_name",
+            "data"
+          ]
+        },
+        "set_validation_list": {
+          "required": [
+            "column_name",
+            "values"
+          ]
+        },
+        "reorder_columns": {
+          "required": [
+            "column_order"
+          ]
+        },
+        "create_pivot_table": {
+          "required": [
+            "source_sheet",
+            "table_name",
+            "value_fields"
+          ]
+        },
+        "create_chart": {
+          "required": [
+            "chart_type",
+            "data_range"
+          ]
+        },
+        "reorder_sheets": {
+          "required": [
+            "sheet_name",
+            "position"
+          ]
+        },
+        "set_chart_legend_position": {
+          "required": [
+            "position"
+          ]
         }
       }
     },
@@ -254,6 +303,9 @@
             "file_path",
             "format"
           ]
+        },
+        "get_slide_count": {
+          "required": []
         }
       }
     },
