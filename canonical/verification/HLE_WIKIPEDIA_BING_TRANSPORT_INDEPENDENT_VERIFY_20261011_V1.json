@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_WIKIPEDIA_BING_TRANSPORT_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_HARDENED_BLOBS__ZERO_HLE_CONSUMPTION",
+  "subject": {
+    "runtime_path": "canonical/runtime/hle_wikipedia_bing_transport_v1.py",
+    "runtime_blob": "eace56be88b0047aaebfe713c61ddf6acea59296",
+    "tests_path": "canonical/tests/test_hle_wikipedia_bing_transport_v1.py",
+    "tests_blob": "7ec2a287396b59a77d92d4c1ab4a3a683f36d0fd"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2711,
+    "workflow_run_id": 38152518230,
+    "workflow_job_id": 114508711884,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_runtime_blob_binding": true,
+    "exact_tests_blob_binding": true,
+    "tests_passed": 5,
+    "namespace_filter_preserves_valid_colon_titles": true,
+    "full_bounded_page_body_extraction": true,
+    "search_failure_retryable": true,
+    "page_failure_retryable": true,
+    "empty_result_nonexistence_firewall": true
+  },
+  "hle_cases_consumed": 0,
+  "hle_gold_consumed": 0,
+  "external_model_calls_total": 0,
+  "model_dependency_count_total": 0,
+  "hle_score_credit": 0,
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
