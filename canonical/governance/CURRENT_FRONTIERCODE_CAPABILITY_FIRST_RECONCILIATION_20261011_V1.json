@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1",
   "date": "2026-10-11",
-  "status": "ACTIVE_CAPABILITY_FIRST__BENCHMARK_DEMOTED_TO_AUDIT__BOUNDED_MULTI_EDIT_REPAIR_VERIFIED__FRONTIERCODE_SCORE_STILL_UNPROVED",
+  "status": "ACTIVE_CAPABILITY_FIRST__BENCHMARK_DEMOTED_TO_AUDIT__OBSERVABLE_FAILURE_LOCALIZATION_AND_BOUNDED_COUPLED_MULTI_EDIT_SEARCH_VERIFIED__FRONTIERCODE_SCORE_STILL_UNPROVED",
   "mission_lock": {
     "primary_objective": "MAKE_THE_UNDERLYING_SOFTWARE_ENGINEERING_CAPABILITY_REAL_INSIDE_BRAIN",
     "capability_target": "UNSEEN_REPOSITORY_PLUS_SOFTWARE_TASK_TO_INDEPENDENTLY_VERIFIED_MERGEABLE_PATCH",
@@ -41,6 +41,28 @@
         "model_dependency_count": 0,
         "external_capability_provider_count": 0,
         "incremental_spend_usd": 0
+      },
+      {
+        "capability_id": "python.failure.localize.observable.v1",
+        "runtime_git_blob_sha": "c27528134ab9cbf973d9961297c1843945809277",
+        "test_git_blob_sha": "dc6e2006dcb9878906a44219892b3c651e23e74b",
+        "registry_git_blob_sha": "3227b5537b6d1f559fa0ba028d93df7623ba1fda",
+        "focused_replay": "canonical/verification/PYTHON_CODING_V2_FOCUSED_REPLAY_20261011_V1.json",
+        "capability_truth": "FAILING_PYTHON_TEST_EVIDENCE_TO_REPOSITORY_LOCAL_FILE_LINE_AND_SYMBOL_CANDIDATES__TRACEBACK_AND_LOCAL_IMPORT_EVIDENCE__NO_CAUSAL_CLAIM",
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0
+      },
+      {
+        "capability_id": "python.patch.search.coupled.ast.v1",
+        "runtime_git_blob_sha": "73419e4b3255515ef0477a3f260ccfd9fd265814",
+        "test_git_blob_sha": "16eae044eee4ac2f7ea6f4be7eec6062543dfbb4",
+        "registry_git_blob_sha": "3227b5537b6d1f559fa0ba028d93df7623ba1fda",
+        "focused_replay": "canonical/verification/PYTHON_CODING_V2_FOCUSED_REPLAY_20261011_V1.json",
+        "capability_truth": "BOUNDED_BREADTH_FIRST_PREFIX_OF_COUPLED_PYTHON_AST_EDIT_SEQUENCES__INTERMEDIATE_STATES_MAY_REMAIN_FAILING__FINAL_TEST_PASS_REPLAYED_TWICE__SOURCE_RESTORED",
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0
       }
     ]
   },
@@ -58,31 +80,35 @@
     {
       "stage": "REPOSITORY_UNDERSTANDING_AND_LOCALIZATION",
       "target": "CONTRACT_PLUS_REPOSITORY_TO_CAUSALLY_RELEVANT_FILES_SYMBOLS_AND_EXECUTION_PATHS",
-      "state": "PARTIAL",
+      "state": "PARTIAL_OBSERVABLE_FAILURE_LOCALIZATION_VERIFIED",
       "existing_support": [
         "python.source.audit.ast",
-        "python.tests.audit.unittest"
+        "python.tests.audit.unittest",
+        "python.failure.localize.observable.v1"
       ],
-      "residual": "IMPORT_BASED_TEST_LOCALIZATION_AND_STRUCTURAL_AUDIT_ARE_NOT_GENERAL_SEMANTIC_FAULT_LOCALIZATION"
+      "residual": "TRACEBACK_AND_IMPORT_BASED_CANDIDATE_LOCI_ARE_NOT_CAUSAL_OR_GENERAL_SEMANTIC_FAULT_LOCALIZATION"
     },
     {
       "stage": "PATCH_CONSTRUCTION",
       "target": "RELEVANT_CONTEXT_TO_CORRECT_REPOSITORY_PATCH",
-      "state": "PARTIAL_BOUNDED_MULTI_EDIT_VERIFIED",
+      "state": "PARTIAL_BOUNDED_COUPLED_MULTI_EDIT_VERIFIED",
       "existing_support": [
         "python.patch.search.test_guided.ast.v1",
-        "python.software.repair.loop.test_guided.ast.v1"
+        "python.software.repair.loop.test_guided.ast.v1",
+        "python.patch.search.coupled.ast.v1"
       ],
-      "residual": "SEQUENTIAL_TEST_ISOLATED_MULTI_EDIT_SEARCH_IS_NOT_ARBITRARY_COUPLED_MULTI_EDIT_OR_GENERAL_PATCH_CONSTRUCTION"
+      "residual": "FINITE_BOUNDED_PYTHON_AST_EDIT_SEARCH_IS_NOT_GENERAL_SEMANTIC_PATCH_CONSTRUCTION_OR_SEARCH_COMPLETENESS"
     },
     {
       "stage": "ACTIVE_DIAGNOSIS_AND_REPAIR",
       "target": "FAILURE_EVIDENCE_TO_CAUSAL_HYPOTHESIS_TO_NEXT_PATCH_UNTIL_ACCEPTANCE_OR_FAIL_CLOSED",
-      "state": "PARTIAL_BOUNDED_TEST_COUNTEREXAMPLE_LOOP",
+      "state": "PARTIAL_BOUNDED_OBSERVABLE_LOCALIZE_AND_COUPLED_SEARCH",
       "existing_support": [
-        "python.software.repair.loop.test_guided.ast.v1"
+        "python.software.repair.loop.test_guided.ast.v1",
+        "python.failure.localize.observable.v1",
+        "python.patch.search.coupled.ast.v1"
       ],
-      "residual": "NO_GENERAL_BRAIN_OWNED_CAUSAL_DIAGNOSIS_FOR_COUPLED_FAILURES_OR_SEMANTIC_FAULTS_OUTSIDE_BOUND_TEST_WITNESSES"
+      "residual": "OBSERVABLE_CANDIDATE_LOCI_HAVE_NO_CAUSAL_SUPPORT_AND_THE_REPAIR_LOOP_HAS_NO_GENERAL_HYPOTHESIS_PROBE_FEEDBACK_FOR_SEMANTIC_FAILURES"
     },
     {
       "stage": "INDEPENDENT_VERIFICATION",
@@ -106,14 +132,14 @@
     "primary_work_class": "CAPABILITY_BUILD",
     "benchmark_instrumentation_state": "AUDIT_ONLY",
     "owner_wait_state": "NONBLOCKING_OPTIONAL_WAKE_EVENT",
-    "highest_leverage_next_build": "GENERAL_SOFTWARE_REPAIR_LOOP_V2__FAILURE_LOCALIZATION_AND_COUPLED_DIAGNOSIS",
+    "highest_leverage_next_build": "GENERAL_SOFTWARE_REPAIR_LOOP_V3__CAUSAL_DIAGNOSTIC_PROBES_AND_ACCEPTANCE_MERGEABILITY",
     "next_build_contract": [
-      "FAILING_TEST_EVIDENCE_TO_RANKED_REPOSITORY_LOCAL_FILE_AND_SYMBOL_CANDIDATES",
-      "COUPLED_FAILURE_HYPOTHESIS_STATE_WITH_BOUNDED_MULTI_EDIT_SEARCH",
-      "STRICT_PROGRESS_OR_FAIL_CLOSED__NO_UNEXPLAINED_EDIT_RETENTION",
-      "INDEPENDENT_FINAL_REPLAY_AND_SOURCE_RESTORATION",
+      "TURN_OBSERVABLE_CANDIDATE_LOCI_INTO_FINITE_FALSIFIABLE_CAUSAL_HYPOTHESES_WHEN_A_COMPLETE_BOUNDED_HYPOTHESIS_UNIVERSE_CAN_BE_DECLARED",
+      "SELECT_MINIMUM_DISCRIMINATING_PROBES_USING_EXISTING_FINITE_CAPABILITY_DIAGNOSIS",
+      "RETAIN_AMBIGUITY_OR_FAIL_CLOSED_WHEN_THE_HYPOTHESIS_UNIVERSE_IS_OPEN",
+      "VERIFY_FINAL_PATCH_AGAINST_REQUEST_ACCEPTANCE_PLUS_REGRESSION_AND_SCOPE_DISCIPLINE_NOT_ONLY_BOUND_TESTS",
       "NO_EXTERNAL_GENERAL_PURPOSE_MODEL_RUNTIME_COGNITION",
-      "NO_BENCHMARK_SCORE_INFERENCE"
+      "NO_FRONTIERCODE_SCORE_INFERENCE"
     ],
     "stop_conditions": [
       "DO_NOT_SPEND_PRIMARY_CYCLES_ON_PRIVATE_BENCHMARK_ARCHAEOLOGY",
@@ -130,7 +156,10 @@
     "NO_EXTERNAL_MODEL_COGNITION_CREDIT",
     "NO_CLAIM_BOUNDED_MULTI_EDIT_LOOP_IS_GENERAL_SOFTWARE_ENGINEERING",
     "NO_CLAIM_IMPORT_BASED_LOCALIZATION_IS_SEMANTIC_FAULT_LOCALIZATION",
-    "NO_INDEPENDENT_SEMANTIC_VERIFICATION_OF_NEW_MULTI_EDIT_LOOP"
+    "NO_INDEPENDENT_SEMANTIC_VERIFICATION_OF_NEW_MULTI_EDIT_LOOP",
+    "NO_CAUSAL_DIAGNOSIS_CREDIT_FROM_OBSERVABLE_FAILURE_LOCALIZATION",
+    "NO_SEARCH_COMPLETENESS_BEYOND_DECLARED_COUPLED_SEARCH_BOUNDS",
+    "NO_CLAIM_TEST_PASS_ALONE_ESTABLISHES_REQUEST_LEVEL_MERGEABILITY"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
