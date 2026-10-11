@@ -357,14 +357,37 @@ class BrainOSWorldAgent:
                 return self._recoverable_error(
                     state, raw, AdapterError("DONE_AFTER_UNRECOVERED_OPERATION_ERROR")
                 )
-            has_receipted_state = isinstance(prior.get("browser_result"), Mapping) or isinstance(
-                prior.get("guest_result"), Mapping
+
+            guest_verified = False
+            guest = prior.get("guest_result")
+            if isinstance(guest, Mapping) and guest.get("ok") is True:
+                output = str(guest.get("output") or "")
+                guest_verified = (
+                    "ASSERT_PATH_EXISTS:PASS:" in output
+                    or "ASSERT_TEXT_EQUALS:PASS:" in output
+                )
+
+            browser_verified = False
+            browser = prior.get("browser_result")
+            if isinstance(browser, Mapping) and str(browser.get("type") or "").upper() == "OBSERVE":
+                browser_verified = any(
+                    isinstance(row, Mapping)
+                    and isinstance(row.get("browser_result"), Mapping)
+                    and str(row["browser_result"].get("type") or "").upper()
+                    not in {"", "OBSERVE"}
+                    and not row.get("operation_error")
+                    for row in self.history[:-1]
+                )
+
+            gui_verified = (
+                not isinstance(guest, Mapping)
+                and not isinstance(browser, Mapping)
+                and prior.get("screenshot_sha256") != state.get("screenshot_sha256")
             )
-            prior_sha = prior.get("screenshot_sha256")
-            current_sha = state.get("screenshot_sha256")
-            if not has_receipted_state and prior_sha == current_sha:
+
+            if not (guest_verified or browser_verified or gui_verified):
                 return self._recoverable_error(
-                    state, raw, AdapterError("DONE_WITHOUT_OBSERVABLE_STATE_CHANGE")
+                    state, raw, AdapterError("DONE_WITHOUT_VERIFIED_COMPLETION_EVIDENCE")
                 )
 
         self._record(
