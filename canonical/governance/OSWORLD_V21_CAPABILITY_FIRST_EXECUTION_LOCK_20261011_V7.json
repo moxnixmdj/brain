@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_CAPABILITY_FIRST_EXECUTION_LOCK_20261011_V7",
+  "date": "2026-10-11",
+  "status": "ACTIVE_CAPABILITY_FIRST_LOCK_V7__V9_VERIFIED_FORMULA_WORKFLOW_INDEPENDENTLY_VERIFIED__CODE_WORKSPACE_EDIT_EXECUTE_VERIFY_NEXT__ZERO_SCORE_CREDIT",
+  "supersedes": "canonical/governance/OSWORLD_V21_CAPABILITY_FIRST_EXECUTION_LOCK_20261011_V6.json",
+  "target_reference": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "primary_objective": "MAXIMIZE_GENERAL_RELIABLE_COMPUTER_USE_CAPABILITY_PER_RESOURCE__OSWORLD_IS_FINAL_MEASUREMENT_ONLY",
+  "credited_subject": {
+    "id": "brain-osworld-v21-model-independent-verified-formula-workflow-v9",
+    "runtime": "canonical/runtime/osworld_v21_brain_subject_v9.py",
+    "policy": "canonical/runtime/osworld_v21_workflow_policy_v5.py",
+    "general_purpose_model_runtime_cognition": false
+  },
+  "verification": {
+    "evidence": "canonical/verification/OSWORLD_V21_FORMULA_WORKFLOW_V9_INDEPENDENT_VERIFY_20261011_V1.json",
+    "verified_head": "acc7272f0f0e0628400bc1dcee8fa9da886e0413",
+    "passed": 173,
+    "failed": 0,
+    "benchmark_cases_consumed": 0,
+    "incremental_spend_usd": 0
+  },
+  "ranked_next": [
+    "CODE_WORKSPACE_EDIT_EXECUTE_VERIFY",
+    "MEDIA_GEOMETRY_AND_TIMELINE_TRANSFORMATIONS",
+    "LONG_WORKFLOW_CONSTRAINT_PRESERVATION",
+    "IRREDUCIBLE_VISUAL_ONLY_GROUNDING_AND_RECOVERY"
+  ],
+  "development_rule": "BUILD_GENERAL_MECHANISMS__VERIFY_ON_FRESH_SYNTHETIC_NEIGHBORS__KEEP_OSWORLD_AS_FINAL_MEASUREMENT_ONLY",
+  "score_state": {
+    "authentic_brain_score_observed": false,
+    "threshold_percent": 81.8,
+    "score_claim_allowed": false
+  },
+  "hard_nonclaims": [
+    "NO_OFFICIAL_OSWORLD_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_173_SYNTHETIC_TESTS_IMPLY_81_8",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ]
+}
