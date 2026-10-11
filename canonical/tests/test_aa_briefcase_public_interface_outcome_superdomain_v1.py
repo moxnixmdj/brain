@@ -3,6 +3,8 @@ from __future__ import annotations
 import unittest
 
 from canonical.runtime.aa_briefcase_public_interface_outcome_superdomain_v1 import (
+    EXPECTED_PUBLIC_CONTRACT_BLOB,
+    EXPECTED_PUBLIC_CONTRACT_PATH,
     SuperdomainError,
     verify,
 )
@@ -15,6 +17,12 @@ def valid_payload():
         "official_task_count": 91,
         "official_project_count": 4,
         "max_turns": 500,
+        "public_contract": {
+            "path": EXPECTED_PUBLIC_CONTRACT_PATH,
+            "git_blob_sha": EXPECTED_PUBLIC_CONTRACT_BLOB,
+            "verified_against_owner_methodology": True,
+            "task_and_grading_interface_scope_complete": True,
+        },
         "tasks_run_independently": True,
         "finite_scenario_overview_unrestricted": True,
         "finite_week_overview_unrestricted": True,
@@ -33,7 +41,6 @@ def valid_payload():
         "crowd_bt_eta_full_unit_interval_included": True,
         "all_finite_score_bearing_comparison_graphs_included": True,
         "headline_rating_real_nonnegative_output_included": True,
-        "public_contract_binding_verified": True,
         "documented_tools": [
             "code_exec",
             "finish",
@@ -90,11 +97,19 @@ class Tests(unittest.TestCase):
         ):
             verify(x)
 
-    def test_public_contract_must_be_bound(self):
+    def test_wrong_public_contract_blob_fails(self):
         x = valid_payload()
-        x["public_contract_binding_verified"] = False
+        x["public_contract"]["git_blob_sha"] = "0" * 40
         with self.assertRaisesRegex(
-            SuperdomainError, "PUBLIC_CONTRACT_BINDING_VERIFIED_NOT_BOUND"
+            SuperdomainError, "PUBLIC_CONTRACT_BLOB_MISMATCH"
+        ):
+            verify(x)
+
+    def test_public_contract_scope_must_be_complete(self):
+        x = valid_payload()
+        x["public_contract"]["task_and_grading_interface_scope_complete"] = False
+        with self.assertRaisesRegex(
+            SuperdomainError, "PUBLIC_CONTRACT_SCOPE_NOT_COMPLETE"
         ):
             verify(x)
 
