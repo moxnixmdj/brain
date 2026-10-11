@@ -415,6 +415,181 @@ def _max_frequency_colors_left_right(grid: Grid) -> Grid | None:
     return tuple(row for _ in range(max_count))
 
 
+def _centroid_axis_sequence(grid: Grid) -> Grid | None:
+    positions: dict[int, list[tuple[int, int]]] = {}
+    for r, row in enumerate(grid):
+        for c, value in enumerate(row):
+            if value != 0:
+                positions.setdefault(value, []).append((r, c))
+    if not positions:
+        return None
+    colors = list(positions)
+    means = {
+        color: (
+            sum(r for r, _ in cells) / len(cells),
+            sum(c for _, c in cells) / len(cells),
+        )
+        for color, cells in positions.items()
+    }
+    r_range = max(means[c][0] for c in colors) - min(means[c][0] for c in colors)
+    c_range = max(means[c][1] for c in colors) - min(means[c][1] for c in colors)
+    if c_range >= r_range:
+        colors.sort(key=lambda color: (means[color][1], means[color][0], color))
+        return (tuple(colors),)
+    colors.sort(key=lambda color: (means[color][0], means[color][1], color))
+    return tuple((color,) for color in colors)
+
+
+def _symmetry_signature(grid: Grid) -> str:
+    h, w = _shape(grid)
+    return "|".join(
+        (
+            "1" if grid == _flip_h(grid) else "0",
+            "1" if grid == _flip_v(grid) else "0",
+            "1" if grid == _rot180(grid) else "0",
+            "1" if h == w and grid == _transpose(grid) else "0",
+        )
+    )
+
+
+def _infer_symmetry_scalar(
+    pairs: Sequence[tuple[Grid, Grid]],
+) -> dict[str, int] | None:
+    mapping: dict[str, int] = {}
+    for inp, out in pairs:
+        if _shape(out) != (1, 1):
+            return None
+        key = _symmetry_signature(inp)
+        target = out[0][0]
+        if key in mapping and mapping[key] != target:
+            return None
+        mapping[key] = target
+    return mapping if mapping else None
+
+
+def _symmetry_scalar_predict(grid: Grid, mapping: Mapping[str, int]) -> Grid | None:
+    key = _symmetry_signature(grid)
+    if key not in mapping:
+        return None
+    return ((int(mapping[key]),),)
+
+
+def _color_encloses_zero(grid: Grid, color: int) -> bool:
+    h, w = _shape(grid)
+    pts = [(r, c) for r, row in enumerate(grid) for c, value in enumerate(row) if value == color]
+    if not pts:
+        return False
+    rs = [r for r, _ in pts]
+    cs = [c for _, c in pts]
+    r0, r1, c0, c1 = min(rs), max(rs), min(cs), max(cs)
+    for sr in range(r0 + 1, r1):
+        for sc in range(c0 + 1, c1):
+            if grid[sr][sc] != 0:
+                continue
+            seen = {(sr, sc)}
+            q = deque([(sr, sc)])
+            touches = False
+            while q:
+                r, c = q.popleft()
+                if r in (r0, r1) or c in (c0, c1):
+                    touches = True
+                    break
+                for nr, nc in ((r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)):
+                    if (
+                        r0 <= nr <= r1
+                        and c0 <= nc <= c1
+                        and grid[nr][nc] == 0
+                        and (nr, nc) not in seen
+                    ):
+                        seen.add((nr, nc))
+                        q.append((nr, nc))
+            if not touches:
+                return True
+    return False
+
+
+def _unique_enclosure_color(grid: Grid) -> Grid | None:
+    colors = sorted({v for row in grid for v in row if v != 0})
+    matches = [color for color in colors if _color_encloses_zero(grid, color)]
+    return ((matches[0],),) if len(matches) == 1 else None
+
+
+def _anomaly_dense_region_color(grid: Grid) -> Grid | None:
+    counts = _nonzero_color_counts(grid)
+    if len(counts) < 3:
+        return None
+    minimum = min(counts.values())
+    anomalies = [color for color, count in counts.items() if count == minimum]
+    if len(anomalies) != 1:
+        return None
+    anomaly = anomalies[0]
+    scores: list[tuple[int, int]] = []
+    for color in sorted(c for c in counts if c != anomaly):
+        pts = [(r, c) for r, row in enumerate(grid) for c, v in enumerate(row) if v == color]
+        rs = [r for r, _ in pts]
+        cs = [c for _, c in pts]
+        r0, r1, c0, c1 = min(rs), max(rs), min(cs), max(cs)
+        score = sum(
+            grid[r][c] == anomaly
+            for r in range(r0, r1 + 1)
+            for c in range(c0, c1 + 1)
+        )
+        scores.append((score, color))
+    if not scores:
+        return None
+    best = max(score for score, _ in scores)
+    matches = [color for score, color in scores if score == best and score > 0]
+    return ((matches[0],),) if len(matches) == 1 else None
+
+
+def _periodic_missing_patch(grid: Grid, max_period: int = 5) -> Grid | None:
+    h, w = _shape(grid)
+    candidates: list[tuple[int, int, int, Grid]] = []
+    for pr in range(1, min(max_period, h) + 1):
+        for pc in range(1, min(max_period, w) + 1):
+            residues: dict[tuple[int, int], int] = {}
+            valid = True
+            for r in range(h):
+                for c in range(w):
+                    value = grid[r][c]
+                    if value == 0:
+                        continue
+                    key = (r % pr, c % pc)
+                    if key in residues and residues[key] != value:
+                        valid = False
+                        break
+                    residues[key] = value
+                if not valid:
+                    break
+            if not valid or len(residues) < pr * pc:
+                continue
+            missing: list[tuple[int, int]] = []
+            for r in range(h):
+                for c in range(w):
+                    if grid[r][c] == 0 and residues[(r % pr, c % pc)] != 0:
+                        missing.append((r, c))
+            if not missing:
+                continue
+            rs = [r for r, _ in missing]
+            cs = [c for _, c in missing]
+            r0, r1, c0, c1 = min(rs), max(rs), min(cs), max(cs)
+            coords = set(missing)
+            rect = {(r, c) for r in range(r0, r1 + 1) for c in range(c0, c1 + 1)}
+            if coords != rect:
+                continue
+            patch = tuple(
+                tuple(residues[(r % pr, c % pc)] for c in range(c0, c1 + 1))
+                for r in range(r0, r1 + 1)
+            )
+            candidates.append((pr * pc, pr, pc, patch))
+    if not candidates:
+        return None
+    candidates.sort(key=lambda item: (item[0], item[1], item[2]))
+    simplest_area = candidates[0][0]
+    patches = {candidate[3] for candidate in candidates if candidate[0] == simplest_area}
+    return next(iter(patches)) if len(patches) == 1 else None
+
+
 def _infer_recolor(pairs: Sequence[tuple[Grid, Grid]]) -> dict[int, int] | None:
     mapping: dict[int, int] = {}
     for inp, out in pairs:
@@ -1229,6 +1404,16 @@ def _predict(h: Mapping[str, Any], grid: Grid) -> Grid | None:
         return _dominant_exclusion_count_desc(grid)
     if kind == "MAX_FREQUENCY_COLORS_LEFT_RIGHT":
         return _max_frequency_colors_left_right(grid)
+    if kind == "CENTROID_AXIS_SEQUENCE":
+        return _centroid_axis_sequence(grid)
+    if kind == "SYMMETRY_SCALAR_CLASSIFIER":
+        return _symmetry_scalar_predict(grid, h["mapping"])
+    if kind == "UNIQUE_ENCLOSURE_COLOR":
+        return _unique_enclosure_color(grid)
+    if kind == "ANOMALY_DENSE_REGION_COLOR":
+        return _anomaly_dense_region_color(grid)
+    if kind == "PERIODIC_MISSING_PATCH":
+        return _periodic_missing_patch(grid)
     raise ARCNoveltyCompilerError("HYPOTHESIS_KIND_UNSUPPORTED")
 
 
