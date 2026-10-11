@@ -138,7 +138,10 @@
     "archive_target_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V60_REPAIRED_SUCCESSOR_20261011_V1.tar.xz",
     "next67_target_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT67_20261011_V1.jsonl",
     "files_manage_library_result": "FAILED__container_session_expired",
-    "consequence": "NO_PROMOTION_AND_NO_NEXT67_EXECUTION_UNTIL_DURABLE_LIBRARY_PERSISTENCE_SUCCEEDS"
+    "consequence": "NO_PROMOTION_AND_NO_NEXT67_EXECUTION_UNTIL_DURABLE_LIBRARY_PERSISTENCE_SUCCEEDS",
+    "current_reproduction_status": "ARTIFACTS_REGENERATED_EXACTLY__UPLOAD_STILL_FAILS_WITH_CONTAINER_SESSION_EXPIRED",
+    "current_archive_sha256": "930bae2b01507eea476e08cc5da9eb3dbc2d8555f1c84c13ebb359f142b2b62e",
+    "current_next67_sha256": "aab6e4fb65f266211585f9d60c88c3dcc2834ca832d91c50357edd7bd2ac20be"
   },
   "hard_nonclaims": [
     "NO_V60_CANONICAL_FRONTIER_PROMOTION",
@@ -150,5 +153,9 @@
   "capability_credit_delta": 0,
   "acceptance_credit_delta": 0,
   "promotion_credit_delta": 0,
-  "terminal_credit_delta": 0
+  "terminal_credit_delta": 0,
+  "fresh_reconstruction_verification": {
+    "path": "canonical/verification/BYTES_V60_RECONSTRUCTION_NEXT67_REGEN_VERIFY_20261011_V1.json",
+    "status": "PASS__TARGET_MANIFEST_EXACT__NEXT67_HASH_EXACT__LIBRARY_UPLOAD_TRANSPORT_BLOCKED__ZERO_CREDIT"
+  }
 }
