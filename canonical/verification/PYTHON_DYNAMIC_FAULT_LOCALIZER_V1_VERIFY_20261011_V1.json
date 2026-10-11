@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_PYTHON_DYNAMIC_FAULT_LOCALIZER_V1_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__PRIMARY_7_OF_7__SECOND_SPRITE_7_OF_7__DYNAMIC_SPECTRUM_SYMBOL_OWNERSHIP_BACKWARD_DEF_USE__ZERO_MODEL__ZERO_SPEND",
+  "replay": {
+    "primary": {
+      "carrier": "Sprites:brain-capability-first-scheduler-verify-20261008-v1",
+      "passed": 7,
+      "total": 7,
+      "elapsed_s": 16.452
+    },
+    "independent": {
+      "carrier": "Sprites:brain-frontiercode-route-refresh-verify-20261008-v1",
+      "passed": 7,
+      "total": 7,
+      "elapsed_s": 10.061
+    }
+  },
+  "proved": [
+    "FAILING_ONLY_DYNAMIC_EXECUTION_OUTRANKS_PASSING_ONLY_CODE",
+    "SHARED_EXECUTION_IS_PENALIZED_RELATIVE_TO_FAIL_ONLY_REGION",
+    "AST_FUNCTION_CLASS_SYMBOL_OWNERSHIP_BOUND_TO_DYNAMIC_LINES",
+    "BACKWARD_DEF_USE_NEIGHBORHOOD_RECORDED",
+    "DETERMINISTIC_LOCALIZATION",
+    "NO_FAILING_TEST_FAILS_CLOSED",
+    "PATH_ESCAPE_REJECTED",
+    "ZERO_MODEL_DEPENDENCY",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "open": [
+    "GENERAL_INTERPROCEDURAL_VALUE_PROVENANCE",
+    "GENERAL_SEMANTIC_CAUSALITY_PROOF",
+    "NON_PYTHON_LOCALIZATION",
+    "HIDDEN_REQUIREMENTS_AND_GENERAL_MERGEABILITY"
+  ],
+  "frontiercode_score_credit_delta": 0
+}

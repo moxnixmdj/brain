@@ -4048,6 +4048,106 @@
         "external_capability_provider_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "python.fault.localize.dynamic.dataflow.v1": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available"
+      ],
+      "provides": [
+        "python.fault.localization.dynamic_spectrum",
+        "python.fault.localization.symbol_ranked",
+        "python.fault.localization.backward_def_use"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "failing_test_count",
+        "passing_test_count",
+        "test_traces",
+        "ranked_lines",
+        "ranked_symbols",
+        "localization_basis",
+        "model_dependency_count",
+        "external_capability_provider_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "python",
+        "fault",
+        "localization",
+        "dynamic",
+        "trace",
+        "coverage",
+        "spectrum",
+        "ochiai",
+        "symbol",
+        "dataflow",
+        "def-use"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.fault.localize.dynamic.dataflow.v1",
+          "source_root": "${input.source_root}",
+          "test_paths": "${input.test_paths}",
+          "output_path": "${input.output_path}",
+          "timeout_s": 20,
+          "max_trace_events": 200000,
+          "max_ranked_lines": 100,
+          "max_ranked_symbols": 50
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "python_dynamic_fault_localizer_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Ranks suspicious Python lines from failing-vs-passing dynamic execution spectra, failing traceback frames, AST symbol ownership, and bounded backward def-use.",
+        "Requires repository-local Python tests and source; each test path is executed in an isolated child Python process with bounded trace events and timeout.",
+        "Backward def-use is intra-symbol AST evidence, not a complete interprocedural value-provenance or semantic causality proof.",
+        "Read-only localization capability; it does not write patches or confer mergeability, hidden-requirement, FrontierCode score, or acceptance authority."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "ast",
+          "hashlib",
+          "json",
+          "math",
+          "os",
+          "pathlib",
+          "subprocess",
+          "sys",
+          "textwrap"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py"
+      },
+      "verification": {
+        "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
+        "primary_test_count": 7,
+        "independent_test_count": 7,
+        "receipt_path": "canonical/verification/PYTHON_DYNAMIC_FAULT_LOCALIZER_V1_VERIFY_20261011_V1.json",
+        "runtime_git_blob_sha": "9a3cd924bd7cdaf6918c6072aebc7c344a69324e",
+        "test_git_blob_sha": "cdf43977e170c3b5cd8e0184abcb18967d0ec4da",
+        "model_dependency_count": 0,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
