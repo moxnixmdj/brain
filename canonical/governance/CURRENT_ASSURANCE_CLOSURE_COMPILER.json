@@ -60,7 +60,9 @@
     "required_before_promotion": [
       "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION"
     ],
-    "carrier_wake_required": true
+    "carrier_wake_required": true,
+    "only_remaining_promotion_gate": "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+    "property_truth_closed_count": 24
   },
   "terminal_authority": false,
   "terminal_credit_delta": 0,
@@ -496,7 +498,7 @@
   },
   "regression_carrier_diagnosis": {
     "path": "canonical/verification/FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V1.json",
-    "git_blob_sha": "47dc643c94bb5e8ce978457f2534d2e42bd3316d",
+    "git_blob_sha": "8dec86c9a39fd009ee25b8ca3b8ff7f905474f10",
     "status": "EXECUTION_CARRIER_BLOCKED__FOUR_ZERO_STEP_ACTIONS_FAILURES__NO_REGRESSION_RESULT__GATE_OPEN__ZERO_CREDIT"
   }
 }
