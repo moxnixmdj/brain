@@ -30,7 +30,7 @@
   },
   "frontier": {
     "primary_ready": [
-      "BYTES_V73_RESOURCE_PARETO_CUT"
+      "BYTES_V74_RESOURCE_PARETO_CUT"
     ],
     "safe_parallel_ready": [],
     "blocked": [
