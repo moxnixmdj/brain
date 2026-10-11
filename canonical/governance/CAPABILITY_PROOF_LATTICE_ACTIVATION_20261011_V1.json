@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_PROOF_LATTICE_ACTIVATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE_CONTROLLER_UPGRADE_CANDIDATE__PROPOSITION_FIRST__MINIMUM_PROOF_COVER__ZERO_CREDIT",
+  "branch_base_main_commit": "df18292bdec1df6c2a5fa717fa86f7875b0c9b1f",
+  "mission_correction": "BENCHMARKS_ARE_MEASUREMENT_INSTRUMENTS__REQUIRED_PROPOSITIONS_ARE_THE_OBJECTS_TO_PROVE",
+  "law": "canonical/laws/BENCHMARK_MEASUREMENT_VS_CAPABILITY_PROOF_LAW_V2.md",
+  "runtime": "canonical/runtime/benchmark_capability_dominance_scheduler_v2.py",
+  "minimum_proof_cover_compiler": "canonical/runtime/proof_coverage_compiler.py",
+  "existing_information_equivalence_law": "canonical/laws/BENCHMARK_OUTPUT_INFORMATION_EQUIVALENCE_LAW_V1.md",
+  "selection_order": [
+    "FREEZE_EXACT_REQUIRED_PROPOSITIONS",
+    "SATURATE_EXISTING_EVIDENCE_AND_DEDUCTION",
+    "ADMIT_ONLY_SCOPE_BOUND_PROVED_IMPLICATION_EDGES",
+    "COMPUTE_EXACT_MINIMUM_PROOF_COVER_WHEN_COMPLETE_COVER_EXISTS",
+    "OTHERWISE_SELECT_MAXIMUM_VERIFIED_MARGINAL_PROPOSITION_CLOSURE",
+    "PREFER_REUSABLE_CAPABILITY_COVERAGE",
+    "MINIMIZE_WALL_CLOCK_NEW_REALITY_AND_RESOURCE_COST",
+    "USE_NATIVE_BENCHMARK_ONLY_WHEN_NONDOMINATED_OR_LITERAL_SCORE_IS_REQUIRED"
+  ],
+  "separation": {
+    "B": "EXACT_BRANDED_BENCHMARK_STATISTIC",
+    "C": "CAPABILITY_RELATION",
+    "O": "BRAIN_OWNERSHIP_PREDICATE",
+    "silent_substitution_forbidden": true
+  },
+  "heuristic_rule": "BENCHMARK_FAMILY_INCIDENCE_AND_GRAPH_CENTRALITY_MAY_RANK_INVESTIGATION_ONLY__ZERO_PROPOSITION_CLOSURE_AUTHORITY",
+  "external_wait_rule": "EXTERNAL_WAIT_IS_DOMINATED_WHEN_AN_IMMEDIATE_SOUND_PROOF_OR_CAPABILITY_ROUTE_CAN_ESTABLISH_THE_SAME_REQUIRED_PROPOSITION",
+  "verification": "canonical/verification/BENCHMARK_CAPABILITY_DOMINANCE_V2_LOCAL_VERIFICATION_20261011_V1.json",
+  "execution_authority": false,
+  "promotion_authority": false,
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_score_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "rebase_current_main_commit": "df18292bdec1df6c2a5fa717fa86f7875b0c9b1f",
+  "merged_current_main_commit": "1b220e06ba5f4319d18cdbe26fd78fd6f1111284"
+}
