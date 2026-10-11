@@ -13,6 +13,8 @@ import hashlib
 from dataclasses import dataclass
 from typing import Any, Callable, Mapping, Sequence
 
+from canonical.runtime.osworld_v21_state_ops_v1 import compile_state_ops
+
 SCHEMA = "PROJECT_BRAIN_OSWORLD_V21_AGENT_ADAPTER_V1"
 WIDTH = 1920
 HEIGHT = 1080
@@ -106,6 +108,11 @@ def _compile_one(raw: Mapping[str, Any]) -> str:
                 raise AdapterError("KEY_INVALID")
             normalized.append(key)
         return "pyautogui.hotkey(" + ", ".join(repr(k) for k in normalized) + ")"
+
+    if kind == "STATE_OPS":
+        if set(raw) - {"type", "ops"}:
+            raise AdapterError("STATE_OPS_HAS_UNSUPPORTED_FIELDS")
+        return compile_state_ops({"ops": raw.get("ops")})
 
     if kind == "SCROLL":
         clicks = _int(raw.get("clicks"), "CLICKS", -100, 100)
