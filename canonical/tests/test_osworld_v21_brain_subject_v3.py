@@ -57,3 +57,15 @@ def test_v3_subject_source_has_no_task_id_or_reference_trajectory_lookup():
     )
     for token in forbidden:
         assert token not in source
+
+
+def test_v3_loaded_module_graph_excludes_obsolete_and_model_backed_policy_routes():
+    import sys
+    build_subject()
+    forbidden_modules = (
+        "canonical.runtime.osworld_v21_browser_ops_v1",
+        "canonical.runtime.osworld_v21_local_qwen_policy_v1",
+        "canonical.runtime.osworld_v21_qwen35_planner_v1",
+    )
+    for name in forbidden_modules:
+        assert name not in sys.modules, name
