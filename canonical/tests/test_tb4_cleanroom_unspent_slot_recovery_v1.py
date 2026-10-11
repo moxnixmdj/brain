@@ -18,6 +18,16 @@ def good():
             "independently_verified": True,
             "verification_receipt_sha256": h("a",64),
         },
+        "actor_cognition_isolation": {
+            "mode": "DETERMINISTIC_BRAIN_ACTOR",
+            "postverifier_user_or_chat_state_available": False,
+            "task_specific_postresult_memory_available": False,
+            "context_constructed_only_from_preverifier_root_and_current_trial_surface": True,
+            "independently_verified": True,
+            "verification_receipt_sha256": h("d",64),
+            "actor_program_sha256": h("e",64),
+            "all_trial_relevant_randomness_disabled_or_content_addressed": True,
+        },
         "historical_consumption": {
             "consumed_trial_indices": [1],
             "independently_verified": True,
@@ -94,4 +104,27 @@ def test_cross_trial_adaptation_fails_closed():
 def test_unverified_roots_fail_closed():
     x=good()
     x["preverifier_roots"]["independently_verified"]=False
+    assert evaluate(x)["pass"] is False
+
+
+def test_postverifier_cognitive_state_fails_closed():
+    x=good()
+    x["actor_cognition_isolation"]["postverifier_user_or_chat_state_available"]=True
+    assert evaluate(x)["pass"] is False
+
+
+def test_external_actor_requires_stateless_pinned_session():
+    x=good()
+    x["actor_cognition_isolation"]={
+        "mode":"STATELESS_PINNED_EXTERNAL_COGNITION",
+        "postverifier_user_or_chat_state_available":False,
+        "task_specific_postresult_memory_available":False,
+        "context_constructed_only_from_preverifier_root_and_current_trial_surface":True,
+        "independently_verified":True,
+        "verification_receipt_sha256":h("f",64),
+        "model_id":"MODEL-X",
+        "model_configuration_id":"CONFIG-X",
+        "provider_conversation_memory_disabled":False,
+        "fresh_session_per_trial":True,
+    }
     assert evaluate(x)["pass"] is False
