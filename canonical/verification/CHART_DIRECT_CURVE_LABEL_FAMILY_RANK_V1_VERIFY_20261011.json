@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_VERIFY_20261011",
   "date": "2026-10-11",
-  "status": "PASS__EXACT_CANDIDATE_BLOBS__FOCUSED_PLUS_NEIGHBORING_REGRESSION_47_OF_47__NOT_SECOND_CARRIER_INDEPENDENT",
+  "status": "PASS__EXACT_CANDIDATE_BLOBS__FOCUSED_47_OF_47_PLUS_SECOND_CARRIER_INDEPENDENT_27_OF_27",
   "capability_id": "chart.raster.direct_curve_label_family_rank.v1",
   "subject": {
     "origin_pr": 4666,
@@ -28,7 +28,7 @@
     "total_passed": 47,
     "total": 47,
     "compile_step_passed": true,
-    "second_carrier_independent": false
+    "second_carrier_independent": true
   },
   "neighboring_regression_scope": [
     "canonical/tests/test_chart_curve_value_query_v1.py",
@@ -55,7 +55,6 @@
     "terminal_authority": false
   },
   "hard_nonclaims": [
-    "NO_SECOND_CARRIER_INDEPENDENCE_CLAIM",
     "NO_INLINE_CONTOUR_LABEL_AUTHORITY",
     "NO_ARBITRARY_DIRECT_LABEL_PLACEMENT_AUTHORITY",
     "NO_DOMAIN_SEMANTIC_INTERPRETATION",
@@ -69,5 +68,22 @@
     "incremental_spend_usd": 0,
     "benchmark_score_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "independent_verification": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_INDEPENDENT_VERIFY_20261011.json",
+  "independent_replay": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2723,
+    "workflow_run_id": 38167990652,
+    "workflow_job_id": 114554450529,
+    "artifact_id": 11713120076,
+    "artifact_zip_sha256": "01db2835a3749ec4de880cd1793bb42776908aad508c243cf1a7388dc194e7c1",
+    "authored_tests_passed": 13,
+    "authored_tests_total": 13,
+    "verifier_authored_falsification_passed": 14,
+    "verifier_authored_falsification_total": 14,
+    "total_passed": 27,
+    "total": 27,
+    "exact_runtime_blob_sha": "e3be28bd83ce0a9359a2ce9cedc8415dbcf745d2",
+    "exact_test_blob_sha": "4c8fc60d72e160f9995c5df1b0af75b97d9a1eb9"
   }
 }
