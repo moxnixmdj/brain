@@ -448,6 +448,72 @@ def _connect_both_same_color(grid: Grid) -> Grid:
     return _connect_cols_same_color(_connect_rows_same_color(grid))
 
 
+def _union_grids(a: Grid, b: Grid) -> Grid | None:
+    if _shape(a) != _shape(b):
+        return None
+    out = [list(row) for row in a]
+    h, w = _shape(a)
+    for r in range(h):
+        for c in range(w):
+            x, y = a[r][c], b[r][c]
+            if x == 0:
+                out[r][c] = y
+            elif y == 0 or x == y:
+                out[r][c] = x
+            else:
+                return None
+    return tuple(tuple(row) for row in out)
+
+
+def _complete_symmetry(grid: Grid, mode: str) -> Grid | None:
+    if mode == "VERTICAL":
+        other = _flip_v(grid)
+    elif mode == "ROTATE_180":
+        other = _rot180(grid)
+    else:
+        raise ARCNoveltyCompilerError("SYMMETRY_MODE_UNSUPPORTED")
+    return _union_grids(grid, other)
+
+
+def _fill_each_color_bbox(grid: Grid) -> Grid | None:
+    out = [list(row) for row in grid]
+    colors = sorted({v for row in grid for v in row if v != 0})
+    for color in colors:
+        pts = [(r, c) for r, row in enumerate(grid) for c, v in enumerate(row) if v == color]
+        rs = [r for r, _ in pts]
+        cs = [c for _, c in pts]
+        r0, r1, c0, c1 = min(rs), max(rs), min(cs), max(cs)
+        for r in range(r0, r1 + 1):
+            for c in range(c0, c1 + 1):
+                if out[r][c] not in (0, color):
+                    return None
+                out[r][c] = color
+    return tuple(tuple(row) for row in out)
+
+
+def _connect_same_color_diagonals(grid: Grid) -> Grid | None:
+    out = [list(row) for row in grid]
+    points: dict[int, list[tuple[int, int]]] = {}
+    for r, row in enumerate(grid):
+        for c, value in enumerate(row):
+            if value != 0:
+                points.setdefault(value, []).append((r, c))
+    for color, pts in points.items():
+        for i, (r1, c1) in enumerate(pts):
+            for r2, c2 in pts[i + 1 :]:
+                dr, dc = r2 - r1, c2 - c1
+                if dr == 0 or abs(dr) != abs(dc):
+                    continue
+                sr = 1 if dr > 0 else -1
+                sc = 1 if dc > 0 else -1
+                for k in range(abs(dr) + 1):
+                    r, c = r1 + k * sr, c1 + k * sc
+                    if out[r][c] not in (0, color):
+                        return None
+                    out[r][c] = color
+    return tuple(tuple(row) for row in out)
+
+
 def _enclosed_zero_cells(grid: Grid) -> set[tuple[int, int]]:
     h, w = _shape(grid)
     outside: set[tuple[int, int]] = set()
@@ -1043,6 +1109,12 @@ def _predict(h: Mapping[str, Any], grid: Grid) -> Grid | None:
         return _periodic_extension_predict(grid, h["axis"], int(h["target"]), mapping)
     if kind == "ROW_SHIFT_PERIODIC_EXTENSION":
         return _row_shift_period_extend(grid, int(h["target_height"]))
+    if kind == "COMPLETE_SYMMETRY":
+        return _complete_symmetry(grid, h["mode"])
+    if kind == "FILL_EACH_COLOR_BBOX":
+        return _fill_each_color_bbox(grid)
+    if kind == "CONNECT_SAME_COLOR_DIAGONALS":
+        return _connect_same_color_diagonals(grid)
     raise ARCNoveltyCompilerError("HYPOTHESIS_KIND_UNSUPPORTED")
 
 
@@ -1247,6 +1319,19 @@ def compile_hypotheses(
         if _consistent(h, pairs):
             candidates.append(h)
 
+    for mode in ("VERTICAL", "ROTATE_180"):
+        h = {"kind": "COMPLETE_SYMMETRY", "mode": mode}
+        if _consistent(h, pairs):
+            candidates.append(h)
+
+    h = {"kind": "FILL_EACH_COLOR_BBOX"}
+    if _consistent(h, pairs):
+        candidates.append(h)
+
+    h = {"kind": "CONNECT_SAME_COLOR_DIAGONALS"}
+    if _consistent(h, pairs):
+        candidates.append(h)
+
     crop = {"kind": "CROP_NON_BACKGROUND"}
     if _consistent(crop, pairs):
         candidates.append(crop)
@@ -1311,6 +1396,9 @@ def compile_hypotheses(
             "CARDINAL_VISIBILITY_OUTPUT_RULE",
             "PERIODIC_SEQUENCE_EXTENSION",
             "TRANSLATING_PERIODIC_ROW_EXTENSION",
+            "SYMMETRY_COMPLETION",
+            "PER_COLOR_BOUNDING_BOX_FILL",
+            "SAME_COLOR_DIAGONAL_CONNECTION",
             "NON_BACKGROUND_BOUNDING_BOX_CROP",
             "UNIQUE_LARGEST_OR_SMALLEST_COMPONENT_CROP",
         ],
