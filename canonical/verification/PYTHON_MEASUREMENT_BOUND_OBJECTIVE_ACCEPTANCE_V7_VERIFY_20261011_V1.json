@@ -66,5 +66,13 @@
     "incremental_spend_usd": 0,
     "benchmark_score_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "verification_origin_branch": "coding-v7-measured-acceptance-current-20261011-v1",
+  "promotion_rebase": {
+    "base_main_commit": "e892c842b549de4467c777d3c378bb988c56dd69",
+    "promotion_branch": "coding-v8-rebased-current-20261011-v1",
+    "promoted_bound_capability_registry_git_blob_sha": "ac73831e319a3af0e6921a0500bd1931b62c4254",
+    "runtime_and_test_blobs_unchanged_from_independent_replay": true,
+    "v6_dependency_blobs_unchanged": true
   }
 }
