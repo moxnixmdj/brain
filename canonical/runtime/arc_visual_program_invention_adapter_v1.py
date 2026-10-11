@@ -68,6 +68,8 @@ def solve_task(
     max_depth: int = 3,
     attempts: int = 2,
     max_semantic_states_per_depth: int = 50000,
+    max_equivalent_programs_per_semantics: int = 8,
+    max_grid_cells: int = 10000,
 ) -> dict[str, Any]:
     train = task.get("train")
     test = task.get("test")
@@ -87,6 +89,8 @@ def solve_task(
         max_depth=max_depth,
         attempts=attempts,
         max_semantic_states_per_depth=max_semantic_states_per_depth,
+        max_equivalent_programs_per_semantics=max_equivalent_programs_per_semantics,
+        max_grid_cells=max_grid_cells,
     )
     return {
         "schema": SCHEMA,
@@ -106,12 +110,16 @@ def score_public_task(
     max_depth: int = 3,
     attempts: int = 2,
     max_semantic_states_per_depth: int = 50000,
+    max_equivalent_programs_per_semantics: int = 8,
+    max_grid_cells: int = 10000,
 ) -> dict[str, Any]:
     result = solve_task(
         task,
         max_depth=max_depth,
         attempts=attempts,
         max_semantic_states_per_depth=max_semantic_states_per_depth,
+        max_equivalent_programs_per_semantics=max_equivalent_programs_per_semantics,
+        max_grid_cells=max_grid_cells,
     )
     test = task.get("test", [])
     if result.get("status") != "SOLVED_CANDIDATES":
