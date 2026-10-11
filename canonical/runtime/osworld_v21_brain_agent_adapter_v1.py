@@ -174,6 +174,7 @@ class BrainOSWorldAgent:
         self.history: list[dict[str, Any]] = []
         self.runtime_logger = None
         self.task_current_date = None
+        self.browser_provider = browser_provider
         self.result_dir: Path | None = None
 
     def bind_environment(self, environment: Any) -> None:
@@ -190,6 +191,13 @@ class BrainOSWorldAgent:
         target = Path(path)
         target.mkdir(parents=True, exist_ok=True)
         self.result_dir = target
+
+    def bind_environment(self, environment: Any) -> None:
+        if self.browser_provider is not None:
+            binder = getattr(self.browser_provider, "bind_environment", None)
+            if not callable(binder):
+                raise AdapterError("BROWSER_PROVIDER_BIND_ENVIRONMENT_MISSING")
+            binder(environment)
 
     def reset(self, runtime_logger=None, **_: Any) -> None:
         self.history.clear()
@@ -209,6 +217,14 @@ class BrainOSWorldAgent:
             if not callable(self.ocr_provider):
                 raise AdapterError("OCR_PROVIDER_NOT_CALLABLE")
             ocr = self.ocr_provider(screenshot_bytes)
+        browser_state = None
+        if self.browser_provider is not None:
+            snapshot = getattr(self.browser_provider, "snapshot", None)
+            if callable(snapshot):
+                try:
+                    browser_state = snapshot()
+                except Exception as exc:
+                    browser_state = {"status": "UNAVAILABLE", "reason": type(exc).__name__ + ":" + str(exc)}
         return {
             "schema": SCHEMA,
             "policy_id": self.policy_id,
@@ -220,6 +236,7 @@ class BrainOSWorldAgent:
             "ocr": ocr,
             "a11y_tree": obs.get("accessibility_tree") or obs.get("a11y_tree"),
             "user_response": obs.get("user_response"),
+            "browser_state": browser_state,
             "history": [dict(x) for x in self.history[-MAX_HISTORY:]],
         }
 
