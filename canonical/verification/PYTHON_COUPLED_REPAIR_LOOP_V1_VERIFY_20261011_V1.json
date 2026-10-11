@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_PYTHON_COUPLED_REPAIR_LOOP_V1_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__PRIMARY_8_OF_8__SECOND_SPRITE_8_OF_8__NONMONOTONIC_COUPLED_PAIR_AND_SYMBOL_LOCALIZATION__ZERO_MODEL__ZERO_SPEND",
+  "subject": {
+    "runtime_path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
+    "runtime_git_blob_sha": "34c3e8deac596c8c8790cfffb0586303159590b5",
+    "test_path": "canonical/tests/test_python_coupled_software_repair_loop_v1.py",
+    "test_git_blob_sha": "04f1fb30e99b888fb3cf177e790f50e268ec3e88",
+    "patch_dependency_git_blob_sha": "9bd33aca208fca26270765e18b3563abcf841e0b",
+    "strict_progress_dependency_git_blob_sha": "352867cf8ce00dab65b17b96d098b6ea4b32f40d"
+  },
+  "replay": {
+    "primary": {
+      "carrier": "Sprites:brain-capability-first-scheduler-verify-20261008-v1",
+      "passed": 8,
+      "total": 8,
+      "elapsed_s": 9.382
+    },
+    "independent": {
+      "carrier": "Sprites:brain-frontiercode-route-refresh-verify-20261008-v1",
+      "passed": 8,
+      "total": 8,
+      "elapsed_s": 8.164
+    }
+  },
+  "proved": [
+    "SAME_FILE_TWO_EDIT_NONMONOTONIC_REPAIR_WHERE_NEITHER_SINGLE_EDIT_IMPROVES_FAILURE_SCORE",
+    "CROSS_FILE_TWO_EDIT_NONMONOTONIC_REPAIR_WHERE_NEITHER_SINGLE_EDIT_IMPROVES_FAILURE_SCORE",
+    "STRICT_PROGRESS_ROUTE_REUSED_WHEN_APPLICABLE",
+    "FAILURE_EVIDENCE_RANKS_REPOSITORY_FILES_AND_FUNCTION_CLASS_SYMBOLS",
+    "TEST_IMPORTED_SYMBOL_RANKING_VERIFIED",
+    "FINAL_SUCCESS_REPLAYED_TWICE",
+    "SOURCE_BYTES_RESTORED_BEFORE_RETURN",
+    "NO_SOLUTION_FAILS_CLOSED",
+    "PATH_ESCAPE_REJECTED",
+    "DETERMINISTIC_PATCH_AND_LOCALIZATION_OUTPUT",
+    "ZERO_MODEL_DEPENDENCY",
+    "ZERO_INCREMENTAL_SPEND"
+  ],
+  "open": [
+    "GENERAL_SEMANTIC_FAULT_LOCALIZATION_BEYOND_TRACEBACK_IMPORT_SYMBOL_HEURISTICS",
+    "ARBITRARY_EDIT_BASIS_COMPLETENESS",
+    "COUPLED_EDIT_DEPTH_GREATER_THAN_TWO",
+    "NON_PYTHON_REPAIR",
+    "HIDDEN_REQUIREMENTS_AND_GENERAL_MERGEABILITY"
+  ],
+  "frontiercode_score_credit_delta": 0
+}
