@@ -1,19 +1,19 @@
 {
   "schema": "PROJECT_BRAIN_AUTOMATIONBENCH_CAPABILITY_FIRST_CANDIDATE_BINDING_20261011_V1",
   "date": "2026-10-11",
-  "status": "PASS__CANONICAL_GENERAL_WORKFLOW_V2_PLUS_CAPABILITY_PURITY_V3_BOUND__PRIVATE_SCORE_OPEN__ZERO_ACCEPTANCE_CREDIT",
+  "status": "PASS__CANONICAL_GENERAL_WORKFLOW_NEGATIVE_CONSTRAINT_TRACE_V3_BOUND__PRIVATE_SCORE_OPEN__ZERO_ACCEPTANCE_CREDIT",
   "target_predicate": "AUTOMATIONBENCH_GE_40",
   "mission_lock": "CAPABILITY_FIRST__BENCHMARK_IS_MEASUREMENT_SURFACE",
   "candidate": {
-    "canonical_merge_sha": "840fdbfe3d5de6a267032b9eb50502c3dde36d2a",
-    "model_slug": "project-brain/general-workflow-field-grounding-v2",
+    "canonical_merge_sha": "e72e9750bd9f6c8b708c04fd270b25b3197f2484",
+    "model_slug": "project-brain/general-workflow-negative-constraint-v3",
     "transport_state_machine": {
-      "path": "canonical/runtime/automationbench_policy_state_machine_v2.py",
-      "git_blob_sha": "78ceb000468a5868f51eec922e677be292bd083a"
+      "path": "canonical/runtime/automationbench_policy_state_machine_v3.py",
+      "git_blob_sha": "a83493dbea83430df2b186e9e567b12a4e8b76a1"
     },
     "evaluator_adapter": {
       "path": "canonical/runtime/automationbench_stirrup_client_v1.py",
-      "git_blob_sha": "32a88efaaf10b9459dd3cd3e3bfe7d95b7927bc4"
+      "git_blob_sha": "3f025f719567f618622242b215bba6213392dc3c"
     },
     "general_planner": {
       "path": "canonical/runtime/generic_goal_tool_effect_planner_v2.py",
@@ -24,31 +24,45 @@
       "git_blob_sha": "cb7846d261394265169056bcdd495960e6124636"
     },
     "general_state_verifier": {
-      "path": "canonical/runtime/generic_goal_state_verifier_v2.py",
-      "git_blob_sha": "afba1addef46aca8a2052e7777cb4794a7d02fa1"
+      "path": "canonical/runtime/generic_goal_state_verifier_v3.py",
+      "git_blob_sha": "3bfac0306bfac6d42d28cecba59a4b63b243f104"
     },
     "generic_schema_discovery": {
       "path": "canonical/runtime/generic_tool_schema_discovery_v1.py",
       "git_blob_sha": "c8065f1d481beb6360251b0fcaef1f90da027157"
+    },
+    "general_goal_compiler": {
+      "path": "canonical/runtime/generic_goal_tool_effect_planner_v1.py",
+      "git_blob_sha": "712177982d047f6e0629ed15f65a8b58432c46a5"
+    },
+    "general_constraint_guard": {
+      "path": "canonical/runtime/generic_goal_constraint_guard_v1.py",
+      "git_blob_sha": "7700ee50649d0263ec6564d734efcea886c5bf35"
     }
   },
   "architecture": {
     "loop": [
-      "COMPILE_GOAL_AND_CONSTRAINTS",
+      "COMPILE_POSITIVE_AND_FORBIDDEN_GOAL_INTENTS",
       "DISCOVER_DYNAMIC_TOOL_SCHEMAS",
       "INFER_FIELD_LEVEL_PRECONDITIONS_AND_EFFECTS",
       "PLAN_MINIMUM_COST_CAUSAL_CHAIN",
       "GROUND_ARGUMENTS_FROM_GOAL_AND_OBSERVED_STATE",
+      "GUARD_MUTATION_AGAINST_FORBIDDEN_INTENT_CONFLICTS",
       "EXECUTE_ONE_CAUSAL_STEP",
       "REJECT_TOOL_ERRORS_AND_REPLAN_OR_FAIL_CLOSED",
+      "RECORD_COMPLETE_EXECUTED_MUTATION_TRACE",
       "INDEPENDENTLY_REOBSERVE_POST_STATE",
-      "VERIFY_POSITIVE_GOALS_AND_NEGATIVE_CONSTRAINTS"
+      "VERIFY_POSITIVE_GOALS_AND_NEGATIVE_CONSTRAINTS_FROM_STATE_AND_COMPLETE_TRACE"
     ],
     "benchmark_specific_mutation_compiler_reachable_from_v2": false,
     "vendor_specific_reasoning_load_bearing": false,
     "private_benchmark_content_load_bearing": false,
     "generic_discovery_load_bearing": true,
-    "benchmark_specific_discovery_reasoning_reachable_from_v2": false
+    "benchmark_specific_discovery_reasoning_reachable_from_v2": false,
+    "generic_forbidden_action_guard_load_bearing": true,
+    "complete_execution_trace_load_bearing": true,
+    "benchmark_specific_mutation_compiler_reachable_from_v3": false,
+    "benchmark_specific_discovery_reasoning_reachable_from_v3": false
   },
   "verification": {
     "receipt_path": "canonical/verification/GENERAL_WORKFLOW_FIELD_GROUNDING_V2_INDEPENDENT_REPLAY_20261011_V1.json",
@@ -80,6 +94,13 @@
     "baseline_adjacent_compatibility_replay": {
       "tests": 81,
       "failures": 0
+    },
+    "negative_constraint_trace_v3_receipt": {
+      "path": "canonical/verification/GENERAL_WORKFLOW_NEGATIVE_CONSTRAINT_TRACE_V3_INDEPENDENT_REPLAY_20261011_V1.json",
+      "git_blob_sha": "75324a2ace0eea1b69c47690f35c01a49edda49f",
+      "initial_falsification": "22_TESTS__3_FAILURES__2_ERRORS",
+      "repaired_same_falsifiers": "22_OF_22_PASS",
+      "full_compatibility_replay": "111_OF_111_PASS"
     }
   },
   "private_acceptance": {
@@ -100,7 +121,8 @@
     "public_600_acceptance_credit": 0,
     "repair_rule": "REPAIR_GENERAL_CAUSAL_FAILURE_CLASS__NOT_PUBLIC_TASK_INSTANCE",
     "private_route_rule": "FREEZE_EXACT_CONTENT_ADDRESSED_CANDIDATE_ONLY_WHEN_OWNER_EXECUTION_INTERFACE_IS_AVAILABLE",
-    "discovery_rule": "DERIVE_SCHEMA_SEARCH_QUERIES_ONLY_FROM_GENERIC_ACTION_CLASSES_AND_RESOURCE_TERMS__NO_VENDOR_APP_ALIAS_TABLES_IN_CREDITED_V2_PATH"
+    "discovery_rule": "DERIVE_SCHEMA_SEARCH_QUERIES_ONLY_FROM_GENERIC_ACTION_CLASSES_AND_RESOURCE_TERMS__NO_VENDOR_APP_ALIAS_TABLES_IN_CREDITED_V3_PATH",
+    "negative_constraint_rule": "BLOCK_POTENTIALLY_CONFLICTING_MUTATIONS_BEFORE_EXECUTION__VERIFY_NONEXECUTION_FROM_COMPLETE_TRACE__RETAIN_STRONGER_POST_STATE_PROOFS_WHERE_AVAILABLE"
   },
   "accounting": {
     "incremental_spend_usd": 0,
@@ -118,6 +140,7 @@
     "NO_PRIVATE_TASK_CONTENT_USED",
     "NO_ACCEPTANCE_OR_FAMILY_PROMOTION_FROM_THIS_BINDING",
     "NO_CLAIM_88_TEST_CAPABILITY_PURITY_REPLAY_IS_SCOPE_COMPLETE_FOR_PRIVATE_657",
-    "NO_CLAIM_UNSUPPORTED_NEGATIVE_ACTION_CLASSES_OTHER_THAN_DELETE_ARE_SOLVED"
+    "NO_CLAIM_111_TEST_GENERAL_WORKFLOW_V3_REPLAY_IS_SCOPE_COMPLETE_FOR_PRIVATE_657",
+    "NO_CLAIM_PRIVATE_657_FAILURE_CLASSES_ARE_EXHAUSTED"
   ]
 }
