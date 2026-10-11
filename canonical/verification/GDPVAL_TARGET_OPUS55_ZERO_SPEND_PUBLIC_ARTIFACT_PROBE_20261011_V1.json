@@ -1,0 +1,108 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_TARGET_OPUS55_ZERO_SPEND_PUBLIC_ARTIFACT_PROBE_V1",
+  "date": "2026-10-11",
+  "status": "NO_AUTHENTIC_TARGET_OPUS55_PER_TASK_DELIVERABLE_OR_OWNER_PAIRWISE_OUTCOME_FOUND_ON_CHECKED_ZERO_SPEND_PUBLIC_SURFACES__NARROW_EXHAUSTION_ONLY__ZERO_CREDIT",
+  "frozen_target": {
+    "predicate": "BRAIN_PROFESSIONAL_WORK_CAPABILITY_GE_CAPABILITY_EVIDENCED_BY_FROZEN_OPUS55_GDPVAL_AA_V2_1_1846",
+    "benchmark": "GDPval-AA",
+    "version": "2.1",
+    "reference_model": "Claude Opus 5.5",
+    "frozen_reference_elo": 1846
+  },
+  "probe_scope": {
+    "purpose": "Find decision-changing target-relative evidence without spending money or regenerating non-load-bearing public submissions.",
+    "checked_surfaces": [
+      {
+        "surface": "Artificial Analysis first-party GDPval-AA v2.1 leaderboard and Example Tasks & Submissions",
+        "url": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+        "observed": [
+          "Task 1 Band Stage Plot",
+          "Task 2 Retail Daily Task List",
+          "Task 3 E-Stop Circuit Schematic",
+          "owner-hosted model deliverables for the exposed Task 1 set",
+          "live Claude Opus 5.5 leaderboard entries"
+        ],
+        "decision_changing_target_artifact_found": false
+      },
+      {
+        "surface": "Artificial Analysis owner CDN static asset probing",
+        "namespace_example": "https://artificialanalysiscdn.com/gdpval_example_files/",
+        "method": "zero-spend exact/static fetch attempts derived from exposed task/model naming",
+        "result": "Known Task 1 assets resolved for exposed models; attempted Opus 5.5 Task 2/3 naming variants returned 404.",
+        "nonexistence_inference_authorized": false
+      },
+      {
+        "surface": "Public web exact searches restricted to Artificial Analysis",
+        "queries": [
+          "Claude Opus 5.5 + Band Stage Plot",
+          "Claude Opus 5.5 + Retail Daily Task List",
+          "Claude Opus 5.5 + E-Stop Circuit Schematic"
+        ],
+        "result": "Returned the owner leaderboard/example surface but no authenticated Opus 5.5 per-task deliverable or owner pairwise outcome."
+      },
+      {
+        "surface": "Public GitHub exact searches",
+        "queries": [
+          "gdpval_example_files claude-opus-5-5",
+          "claude-opus-5-5 gdpval",
+          "gdpval-aa claude opus 5.5 1846",
+          "GDPval Crowd-BT judge prompt"
+        ],
+        "result": "Found benchmark-score replicas, protocol copies, and third-party metadata, but no authenticated Artificial Analysis Opus 5.5 task deliverable, Brain-vs-Opus owner outcome, or owner judgment graph."
+      },
+      {
+        "surface": "Anthropic public launch/system material",
+        "result": "Supports the launch-era 1846 benchmark result/configuration context, but no checked per-task GDPval-AA deliverable or owner pairwise outcome was recovered."
+      }
+    ]
+  },
+  "positive_observations_preserved": {
+    "owner_example_submission_surface_exists": true,
+    "owner_grading_architecture_substantially_public": true,
+    "live_opus55_score_surface_exists": true,
+    "score_replication_is_not_target_relative_artifact_evidence": true
+  },
+  "negative_result_semantics": {
+    "proves": "THE_CHECKED_ZERO_SPEND_PUBLIC_SURFACES_DID_NOT_YIELD_THE_TARGET_RELATIVE_OBJECT_NEEDED_BY_FRONTIER_V3",
+    "does_not_prove": [
+      "NO_OPUS55_TASK_DELIVERABLE_EXISTS_ANYWHERE",
+      "NO_PRIVATE_OR_UNINDEXED_OWNER_PAIRWISE_OUTCOME_EXISTS",
+      "NO_FUTURE_FIRST_PARTY_SURFACE_CAN_EXPOSE_THE_OBJECT",
+      "TARGET_RELATIVE_PAIRWISE_IS_IMPOSSIBLE_IN_PRINCIPLE"
+    ]
+  },
+  "frontier_effect": {
+    "MATCHED_SCORE": false,
+    "TARGET_RELATIVE_PAIRWISE": false,
+    "ABSOLUTE_DOMINANCE": false,
+    "repeat_same_public_probe_without_surface_change": false,
+    "wake_conditions": [
+      "ARTIFICIAL_ANALYSIS_EXAMPLE_SURFACE_CHANGES_OR_EXPOSES_NEW_MODEL_TASK_ASSETS",
+      "AUTHENTIC_OWNER_PAIRWISE_OUTCOMES_OR_JUDGEMENT_GRAPH_BECOME_PUBLIC",
+      "A_FIRST_PARTY_ZERO_SPEND_SUBMISSION_OR_SCORING_ROUTE_APPEARS",
+      "A_NEW_SCOPE_COMPLETE_DOMINANCE_CERTIFICATE_ENTAILS_THE_OWNER_PAIRWISE_RELATION"
+    ]
+  },
+  "scheduler_action": {
+    "default": "SLEEP_TARGET_OPUS55_PUBLIC_ARTIFACT_DISCOVERY_UNTIL_A_WAKE_CONDITION",
+    "do_not_repeat": [
+      "same exact model-plus-example-task web searches",
+      "same static CDN filename guesses",
+      "same public GitHub score-replica searches",
+      "remaining-public-task generation as a substitute for comparative evidence"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GDPVAL_GE_1846",
+    "NO_CLAIM_BRAIN_GE_OPUS55",
+    "NO_GLOBAL_NONEXISTENCE_CLAIM",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
