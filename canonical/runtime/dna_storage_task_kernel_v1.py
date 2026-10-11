@@ -274,3 +274,18 @@ def execute(payload:dict[str,Any]) -> dict[str,Any]:
         "contract":contract,"input_file_count":len(files),"artifact_receipts":receipts,
         "model_dependency_count":0,"network_dependency_count":0,"terminal_authority":False,
     }
+
+
+def main(argv=None) -> int:
+    import sys
+    argv=list(sys.argv[1:] if argv is None else argv)
+    if len(argv)!=1:
+        raise SystemExit("usage: dna_storage_task_kernel_v1.py REQUEST.json")
+    payload=json.loads(pathlib.Path(argv[0]).read_text(encoding="utf-8"))
+    result=execute(payload)
+    print(json.dumps(result,sort_keys=True,separators=(",",":")))
+    return 0
+
+
+if __name__=="__main__":
+    raise SystemExit(main())
