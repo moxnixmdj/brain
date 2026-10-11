@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_FROZEN_ERA_COMPONENT_ARCHIVE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PUBLIC_ARCHIVE_RECOVERS_FROZEN_ERA_OPUS55_COMPONENT_BREAKDOWN__EARLIEST_FULL_ROW_2026_09_23__NOT_EXACT_09_22_COMPONENT_TIMESTAMP__ZERO_CREDIT",
+  "target": "AA-Briefcase v1.1 frozen Opus 5.5 max reference displayed as 1822 Elo on 2026-09-22",
+  "frozen_headline_authority": {
+    "displayed_elo": 1822,
+    "date": "2026-09-22",
+    "sources": [
+      "https://artificialanalysis.ai/articles/claude-opus-5-5",
+      "canonical/governance/AA_BRIEFCASE_OPUS55_COMPARATOR_PROVENANCE_RECONCILIATION_V1.json"
+    ]
+  },
+  "archive": {
+    "repository": "Seraphim0916/omnilane",
+    "repository_commit": "e662aba82084579d1660f84d7a36f5265b74edad",
+    "earliest_full_component_snapshot": {
+      "date": "2026-09-23",
+      "path": "docs/reports/aa-v4.3.2-extract-2026-09-23-0903.json",
+      "git_blob_sha": "13cf7a40845c5aa6fb305418a0cfe9c2c80ab9a5",
+      "model": "Claude Opus 5.5 (Adaptive Reasoning, Max Effort, Default Fallback)",
+      "overall": {
+        "elo": 1821.85,
+        "lower95ci": 1810.1,
+        "upper95ci": 1833.6
+      },
+      "rubric_pass_rate": 0.6121212121212121,
+      "analytical_quality": {
+        "elo": 2206.92,
+        "lower95ci": 2182.68,
+        "upper95ci": 2231.16
+      },
+      "presentation": {
+        "elo": 1709.91,
+        "lower95ci": 1689.59,
+        "upper95ci": 1730.23
+      }
+    },
+    "repeated_same_values": [
+      {
+        "date": "2026-09-23",
+        "path": "docs/reports/aa-v4.3.2-extract-2026-09-23.json",
+        "git_blob_sha": "f9b3459175a15acf706ad6f1fbdef7931a3fc0e1"
+      },
+      {
+        "date": "2026-09-27",
+        "path": "docs/reports/aa-v4.3.2-extract-2026-09-27.json",
+        "git_blob_sha": "63d04e34a6c9d249c089df96eb7611dd3459a23f"
+      }
+    ],
+    "september_22_extract_note": "THE_SERAPHIM_2026_09_22_EXTRACT_PREDATES_THE_OPUS55_ROW__A_SEPARATE_2026_09_22_PUBLIC_CAPTURE_PRESERVES_THE_1822_HEADLINE_BUT_NOT_COMPONENT_NUMBERS"
+  },
+  "facts_now_bound": [
+    "THE_DISPLAYED_1822_REFERENCE_CORRESPONDS_IN_THE_EARLIEST_FULL_POST_LAUNCH_ARCHIVE_TO_UNROUNDED_OVERALL_1821_85",
+    "FROZEN_ERA_RUBRIC_PASS_RATE_61_212121_PERCENT",
+    "FROZEN_ERA_ANALYTICAL_QUALITY_ELO_2206_92",
+    "FROZEN_ERA_PRESENTATION_ELO_1709_91",
+    "THE_FULL_COMPONENT_ROW_IS_STABLE_ACROSS_MULTIPLE_ARCHIVES_FROM_2026_09_23_THROUGH_2026_09_27"
+  ],
+  "proof_effect": {
+    "previous_reference_state": "HEADLINE_1822_PLUS_QUALITATIVE_COMPONENT_ORDER",
+    "new_reference_state": "HEADLINE_1822_PLUS_NUMERIC_FROZEN_ERA_COMPONENT_BREAKDOWN",
+    "deletes": [
+      "SEARCH_FOR_FROZEN_ERA_OPUS55_COMPONENT_MAGNITUDES",
+      "TREAT_REFERENCE_COMPONENT_VALUES_AS_COMPLETELY_UNKNOWN"
+    ],
+    "does_not_delete": [
+      "BRAIN_SCORE_BEARING_TRACE_OR_COMPONENT_RESULTS",
+      "EXACT_2026_09_22_COMPONENT_TIMESTAMP_EQUIVALENCE",
+      "RUBRIC_SYNTHETIC_MATCH_TRACE",
+      "PAIRWISE_JUDGE_ASSIGNMENTS_AND_VERDICTS",
+      "FROZEN_SCORER_IMPLEMENTATION_EQUIVARIANCE_OR_UNIQUE_FIT"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_2026_09_23_COMPONENT_ROW_WAS_BYTE_IDENTICAL_ON_2026_09_22",
+    "NO_CLAIM_COMPONENTWISE_MATCH_ALONE_ENTAILS_HEADLINE_1822_WITHOUT_A_BOUND_MONOTONICITY_OR_AGGREGATION_THEOREM",
+    "NO_BRAIN_AA_BRIEFCASE_SCORE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
