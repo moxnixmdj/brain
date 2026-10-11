@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_ROW71_EXCHANGE_PROGRAM_DOCX_AND_XLSX_FROZEN__VISUAL_AND_FORM_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "subject": {
+    "row_idx": 71,
+    "task_id": "62f04c2f-e0f7-4710-876c-54ee9c2e8256",
+    "sector": "Wholesale Trade",
+    "occupation": "First-Line Supervisors of Non-Retail Sales Workers"
+  },
+  "freshness": {
+    "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS35_219_PRECOMMIT_20261011_V1.json",
+    "precommit_commit": "c604f5006820ce3ca24d6afc2487a95a30886a6c",
+    "task_identity_frozen_before_prompt_reference_rubric_gold_model_output_or_judge_exposure": true,
+    "public_rubric_or_gold_used_before_output_freeze": false
+  },
+  "brain_execution_profile": {
+    "path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+    "cognition_surface": "CURRENT_CHATGPT_GPT_5_6_SOL_SESSION_OR_EQUIVALENT_ZERO_INCREMENTAL_BRAIN_APPROVED_SUBSTRATE",
+    "opaque_target_model_runtime_cognition": false,
+    "incremental_spend_usd": 0
+  },
+  "submissions": [
+    {
+      "library_path": "/Project Brain/GDPval/scale/row71/GDPval_row71_Gravon_Exchange_Program_Overview.docx",
+      "library_file_id": "libfile_a489355a6ba481918eb636ee01c66355",
+      "sha256": "94548485eac5a65a314aa12bc0f04de7493b43a042e0cc32d56989b0829ad48a",
+      "format": "docx",
+      "render_page_count": 1
+    },
+    {
+      "library_path": "/Project Brain/GDPval/scale/row71/GDPval_row71_Gravon_Exchange_Authorization_Form.xlsx",
+      "library_file_id": "libfile_4c845809426081919096fa6046087759",
+      "sha256": "94e11f89d7af99da54b9ad741f66c6525d59d6da984fecaf5e7181710fe0a49a",
+      "format": "xlsx"
+    }
+  ],
+  "prompt_requirements_qa": {
+    "one_page_program_overview": true,
+    "exchange_not_return_distinction": true,
+    "replacement_merchandise_only_credit": true,
+    "replacement_order_at_authorization": true,
+    "credit_worthy_only": true,
+    "one_exchange_per_season": true,
+    "authorization_workflow_present": true,
+    "form_inside_shipment_instruction": true,
+    "authorization_number_on_box_instruction": true,
+    "customer_prepays_freight": true,
+    "five_dollar_per_pair_restocking_fee": true,
+    "warehouse_address_and_phone": true,
+    "effective_date_2025_07_01": true,
+    "excel_customer_contact_fields": true,
+    "excel_style_color_style_name_pairs_shipped_pairs_returned_fields": true,
+    "excel_sales_rep_gm_sales_manager_name_signature_date_spaces": true,
+    "excel_status_dropdowns": true,
+    "docx_visual_render_inspected": true,
+    "xlsx_render_preview_inspected": true,
+    "formula_error_scan_clear": true
+  },
+  "boundary": [
+    "NO_ARTIFICIAL_ANALYSIS_PAIRWISE_RESULT",
+    "NO_OWNER_ELO",
+    "NO_MATCHED_EPOCH_SCORE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ]
+}
