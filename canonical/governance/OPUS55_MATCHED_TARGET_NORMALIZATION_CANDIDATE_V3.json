@@ -1,12 +1,12 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_MATCHED_TARGET_NORMALIZATION_CANDIDATE_V3",
-  "date": "2026-10-03",
+  "date": "2026-10-11",
   "status": "CANDIDATE_CURRENT_8_LIVE_MATCHED_SCOPE_TARGETS__CURRENT_SOURCE_BLOBS__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
   "objective": "Normalize only the 8 currently live matched/scope Opus 5.5 acceptance targets after Tool Discovery and Recovery closure, binding the target set to the current evidence ledger and matched-scope residual input. No Brain evidence mapping, semantic implication, scope relation, acceptance, or ownership credit is asserted.",
   "authority": {
     "protocols": {
       "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
-      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+      "git_blob_sha": "f8b661abf7cb1b628aa14d966658394b80093879"
     },
     "predicate_registry": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
@@ -14,7 +14,7 @@
     },
     "evidence_bindings": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
-      "git_blob_sha": "f99b00e6dca735ffa7a790a414155b4f69856cf0"
+      "git_blob_sha": "cb7bf612ab443c84d3db3b6183682cf53399003c"
     },
     "matched_scope_residual": {
       "path": "canonical/governance/MATCHED_SCOPE_ABDUCTIVE_RESIDUAL_INPUT_V2.json",
