@@ -208,3 +208,36 @@ def test_different_app_operation_receipt_does_not_false_complete():
     }]
     out = decide(s)
     assert action(out)["operation"] == "pause"
+
+
+def test_adapter_v2_accepts_receipted_app_operation_as_final_completion():
+    fake=FakeAppController()
+    calls={"n":0}
+    def policy(_state):
+        calls["n"] += 1
+        if calls["n"] == 1:
+            return {
+                "response":"pause",
+                "actions":[{"type":"APP_OP","app":"vlc","operation":"pause","args":{}}],
+                "_policy_receipt":{"route":"test"},
+            }
+        return {
+            "response":"complete",
+            "actions":[{"type":"DONE"}],
+            "_policy_receipt":{"route":"test"},
+        }
+
+    agent=BrainOSWorldAgentV2(
+        policy, policy_id="test",
+        browser_controller=FakeBrowser(), guest_controller=FakeGuest(),
+        app_controller=fake, ocr_provider=None,
+    )
+    env=FakeEnv()
+    agent.bind_environment(env)
+    first=agent.predict("Pause the video.",{"screenshot":b"same"})
+    assert first[1]==["WAIT"]
+    second=agent.predict("Pause the video.",{"screenshot":b"same"})
+    assert second==("complete",["DONE"])
+    assert agent.history[-1]["completion_evidence"] == {
+        "kind":"APP_OP_SUCCESS_RECEIPT","app":"vlc","operation":"pause"
+    }
