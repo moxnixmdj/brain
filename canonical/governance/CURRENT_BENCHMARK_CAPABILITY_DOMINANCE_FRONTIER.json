@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_BENCHMARK_CAPABILITY_DOMINANCE_FRONTIER_V1",
   "date": "2026-10-11",
-  "status": "ACTIVE_CANDIDATE__CAPABILITY_FIRST__12_CHECKPOINT_ROWS_WAKE_GATED__1_TB_SCIENCE_PARKED__ZERO_SCORE_OR_CAPABILITY_CREDIT_FROM_PROJECTION",
+  "status": "ACTIVE_CANONICAL__CAPABILITY_FIRST__EXACT_PROOF_COMPRESSION_OPTIMIZER_BOUND__12_CHECKPOINT_ROWS_WAKE_GATED__1_TB_SCIENCE_PARKED__ZERO_SCORE_OR_CAPABILITY_CREDIT_FROM_PROJECTION",
   "mission": {
     "terminal_goal": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
     "benchmark_role": "MILESTONE_MEASUREMENT_AND_AUDIT",
@@ -220,14 +220,16 @@
   "current_expected_plan": {
     "benchmark_specific_same_information_selected": false,
     "capability_work_selected_from_benchmark_projection_only": false,
-    "actual_execution_selection": "DERIVE_FROM_CURRENT_LIVE_WORK_FRONTIER_AT_PLAN_TIME"
+    "actual_execution_selection": "DERIVE_FROM_CURRENT_LIVE_WORK_FRONTIER_AT_PLAN_TIME_THEN_USE_EXACT_BOUNDED_PROOF_COMPRESSION_WHEN_MULTIPLE_ADMISSIBLE_EVIDENCE_ROUTES_COVER_REQUIRED_PROPOSITIONS"
   },
   "ledgers": {
     "CAPABILITY_COMPARISON_LEDGER": {
+      "path": "canonical/governance/CURRENT_CAPABILITY_COMPARISON_LEDGER.json",
       "closed_by_this_projection": [],
       "open_relations_require_typed_entailment": true
     },
     "BRANDED_BENCHMARK_RECEIPT_LEDGER": {
+      "path": "canonical/governance/CURRENT_BRANDED_BENCHMARK_RECEIPT_LEDGER.json",
       "closed_by_this_projection": [],
       "open_checkpoint_rows": 12,
       "parked_checkpoint_rows": 1
@@ -246,5 +248,18 @@
     "capability_credit_delta": 0,
     "ownership_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "optimization_policy": {
+    "runtime": "canonical/runtime/capability_proof_compression_optimizer_v1.py",
+    "objective_order": [
+      "MINIMUM_TOTAL_WALL_CLOCK_TO_REQUIRED_PROPOSITION_SET",
+      "MAXIMUM_REUSABLE_CAPABILITY_COVERAGE_AT_EQUAL_WALL_CLOCK",
+      "MINIMUM_EXTERNAL_DEPENDENCY_RISK",
+      "MINIMUM_COMPUTE_CONTEXT_MEMORY_ENERGY_COST",
+      "DETERMINISTIC_ID_TIEBREAK"
+    ],
+    "exact_bounded_set_cover": true,
+    "optimizer_credit_authority": false,
+    "evidence_options_must_pass_own_proof_and_ownership_gates": true
   }
 }
