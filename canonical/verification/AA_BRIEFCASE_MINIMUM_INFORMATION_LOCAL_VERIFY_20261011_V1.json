@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_MINIMUM_INFORMATION_LOCAL_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "LOCAL_ISOLATED_LOGIC_REPLAY_PASS__10_OF_10__NOT_INDEPENDENT__ZERO_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/aa_briefcase_minimum_information_v1.py",
+      "git_blob_sha": "cbc756e86f8818ca60c45033e1a076af9aa6848c"
+    },
+    "tests": {
+      "path": "canonical/tests/test_aa_briefcase_minimum_information_v1.py",
+      "git_blob_sha": "06b75624ca0cf6a68ffb614f24a587c1351f7a25"
+    },
+    "target_authority": {
+      "path": "canonical/governance/AA_BRIEFCASE_MEASUREMENT_SEMANTIC_TARGET_V1.json",
+      "git_blob_sha": "8f24ca30e6cceb8a58f619da1623037c0a4bda0b"
+    }
+  },
+  "replay": {
+    "carrier": "LOCAL_ISOLATED_PYTHON_LOGIC_REPLAY",
+    "tests_run": 10,
+    "tests_passed": 10,
+    "tests_failed": 0,
+    "tests_errored": 0,
+    "independent_second_carrier": false
+  },
+  "verified_behaviors": [
+    "ONE_INTEGRATED_COMPLETE_CERTIFICATE_CAN_CLOSE_THE_CAPABILITY_RELATION",
+    "LOWEST_TOTAL_ACTION_COST_SAME_SUBJECT_BASIS_IS_SELECTED",
+    "MIXED_SUBJECT_COMPOSITION_IS_REJECTED",
+    "SCHEDULING_HEURISTIC_ONLY_RELATION_IS_REJECTED_FOR_CAPABILITY_CREDIT",
+    "WRONG_TARGET_AUTHORITY_IS_REJECTED",
+    "EXTERNAL_RUNTIME_COGNITION_CANNOT_RECEIVE_BRAIN_CAPABILITY_CREDIT",
+    "TERMINAL_PREDICATE_ENTAILMENT_IS_MANDATORY",
+    "INCOMPLETE_COMPONENT_COVERAGE_REMAINS_OPEN",
+    "CURRENT_HIGH_AUTHORITY_REUSE_PROBE_FAILS_CLOSED",
+    "CAPABILITY_RELATION_NEVER_BACKPROPAGATES_TO_LITERAL_AA_ELO"
+  ],
+  "hard_nonclaims": [
+    "NO_INDEPENDENT_VERIFICATION_CLAIM",
+    "NO_CURRENT_CAPABILITY_NONINFERIORITY_CLAIM",
+    "NO_LITERAL_AA_SCORE_CLAIM",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
