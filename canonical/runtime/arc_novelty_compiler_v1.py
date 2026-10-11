@@ -21,6 +21,7 @@ from __future__ import annotations
 
 from collections import Counter, deque
 from dataclasses import dataclass
+from itertools import permutations
 from typing import Any, Mapping, Sequence
 
 SCHEMA = "PROJECT_BRAIN_ARC_NOVELTY_COMPILER_V1"
@@ -1307,6 +1308,127 @@ def _select_largest_frame_interior(grid: Grid) -> Grid | None:
     return tuple(tuple(grid[r][c0 + 1 : c1]) for r in range(r0 + 1, r1))
 
 
+def _exact_solid_2x2_components(grid: Grid) -> list[Component]:
+    out: list[Component] = []
+    for component in _zero_components(grid):
+        r0, c0, r1, c1 = component.bbox
+        if component.area == 4 and r1 - r0 + 1 == 2 and c1 - c0 + 1 == 2:
+            out.append(component)
+    return out
+
+
+def _infer_top_k_square_labels(
+    pairs: Sequence[tuple[Grid, Grid]],
+) -> tuple[int, dict[int, int]] | None:
+    width: int | None = None
+    input_colors: set[int] = set()
+    labels: set[int] = set()
+    observed: list[tuple[list[int], tuple[int, ...]]] = []
+    for inp, out in pairs:
+        if len(out) != 1 or not out[0]:
+            return None
+        if width is not None and width != len(out[0]):
+            return None
+        width = len(out[0])
+        colors = [component.color for component in _exact_solid_2x2_components(inp)]
+        if not colors:
+            return None
+        input_colors.update(colors)
+        labels.update(out[0])
+        observed.append((colors, out[0]))
+    if width is None or len(input_colors) != len(labels) or len(input_colors) > 7:
+        return None
+
+    colors_sorted = sorted(input_colors)
+    labels_sorted = sorted(labels)
+    matches: list[dict[int, int]] = []
+    for perm in permutations(labels_sorted):
+        mapping = dict(zip(colors_sorted, perm))
+        ok = True
+        for colors, expected in observed:
+            predicted = tuple(sorted((mapping[color] for color in colors), reverse=True)[:width])
+            if predicted != expected:
+                ok = False
+                break
+        if ok:
+            matches.append(mapping)
+    return (width, matches[0]) if len(matches) == 1 else None
+
+
+def _top_k_square_labels_predict(
+    grid: Grid,
+    width: int,
+    mapping: Mapping[int, int],
+) -> Grid | None:
+    colors = [component.color for component in _exact_solid_2x2_components(grid)]
+    if not colors or any(color not in mapping for color in colors):
+        return None
+    labels = sorted((int(mapping[color]) for color in colors), reverse=True)[:width]
+    if len(labels) < width:
+        return None
+    return (tuple(labels),)
+
+
+def _adjacent_4(a: set[tuple[int, int]], b: set[tuple[int, int]]) -> bool:
+    return any(
+        (r + dr, c + dc) in b
+        for r, c in a
+        for dr, dc in ((-1, 0), (1, 0), (0, -1), (0, 1))
+    )
+
+
+def _bridge_component_scalar(grid: Grid) -> Grid | None:
+    components = _zero_components(grid)
+    by_color: dict[int, list[Component]] = {}
+    for component in components:
+        by_color.setdefault(component.color, []).append(component)
+
+    target_colors: list[int] = []
+    for color, comps in by_color.items():
+        if len(comps) == 2 and all(
+            comp.area == 4
+            and comp.bbox[2] - comp.bbox[0] + 1 == 2
+            and comp.bbox[3] - comp.bbox[1] + 1 == 2
+            for comp in comps
+        ):
+            target_colors.append(color)
+    if len(target_colors) != 1:
+        return None
+
+    target = target_colors[0]
+    targets = [set(comp.cells) for comp in by_color[target]]
+    connector_colors: set[int] = set()
+    for color, comps in by_color.items():
+        if color == target:
+            continue
+        for component in comps:
+            cells = set(component.cells)
+            if all(_adjacent_4(cells, target_cells) for target_cells in targets):
+                connector_colors.add(color)
+    if len(connector_colors) == 1:
+        return ((next(iter(connector_colors)),),)
+    if not connector_colors:
+        return ((0,),)
+    return None
+
+
+def _extend_columns_down(grid: Grid) -> Grid | None:
+    h, w = _shape(grid)
+    out = [list(row) for row in grid]
+    for c in range(w):
+        positions: dict[int, list[int]] = {}
+        for r in range(h):
+            value = grid[r][c]
+            if value != 0:
+                positions.setdefault(value, []).append(r)
+        for color, rows in positions.items():
+            for r in range(min(rows), h):
+                if out[r][c] not in (0, color):
+                    return None
+                out[r][c] = color
+    return tuple(tuple(row) for row in out)
+
+
 def _component_crop(grid: Grid, which: str) -> Grid | None:
     comps = _components(grid)
     if not comps:
@@ -1414,6 +1536,13 @@ def _predict(h: Mapping[str, Any], grid: Grid) -> Grid | None:
         return _anomaly_dense_region_color(grid)
     if kind == "PERIODIC_MISSING_PATCH":
         return _periodic_missing_patch(grid)
+    if kind == "TOP_K_SQUARE_COMPONENT_LABELS":
+        mapping = {int(k): int(v) for k, v in h["mapping"].items()}
+        return _top_k_square_labels_predict(grid, int(h["width"]), mapping)
+    if kind == "BRIDGE_COMPONENT_SCALAR":
+        return _bridge_component_scalar(grid)
+    if kind == "EXTEND_COLUMNS_DOWN":
+        return _extend_columns_down(grid)
     raise ARCNoveltyCompilerError("HYPOTHESIS_KIND_UNSUPPORTED")
 
 
