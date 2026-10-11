@@ -86,6 +86,16 @@ class ContinuousObsRuntimeTests(unittest.TestCase):
         )
         self.assertTrue(allowed["pass"])
 
+    def test_planner_information_action_is_always_forbidden(self):
+        c=make_context(self.root,self.now)
+        from canonical.runtime.continuous_obs_runtime import authorize_information_action
+        out=authorize_information_action(
+            c,{"kind":"PLANNER","source":"planner","tool_kind":"planner"},
+            root=self.root,now=self.now,
+        )
+        self.assertFalse(out["pass"])
+        self.assertIn("EXTERNAL_MODEL_COGNITION_PLANNER_FORBIDDEN",out["errors"])
+
     def test_incomplete_world_inventory_fails(self):
         c=make_context(self.root,self.now)
         c["material_world_state_dependencies_complete"]=False
