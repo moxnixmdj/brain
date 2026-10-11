@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_QWEN3VL4B_ADAPTER_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_RUNTIME_AND_TEST_BLOBS__6_OF_6_REMOTE_UNIT_REPLAY__TRANSPORT_ONLY__ZERO_CREDIT",
+  "subject": {
+    "runtime": [
+      "canonical/runtime/chartography_qwen3vl4b_adapter_v1.py",
+      "6c94b712b09d54dd3087d4f78a58bd2ca126c588"
+    ],
+    "tests": [
+      "canonical/tests/test_chartography_qwen3vl4b_adapter_v1.py",
+      "57eedd9859ff03f393400fbfd9a0c87acf0952b1"
+    ]
+  },
+  "exact_subject": {
+    "model_sha256": "66358cb18bb6b3b1b6675aa412c7a88ef01d228f481184d13668e5201c730a0a",
+    "projector_sha256": "30ba2c7dd3127a4561b6cba9d13d0f711c91bdb38742e2f56d73c8cb596bd06d",
+    "llama_cpp_commit": "a7fb71fab83b474a0892b9a05aaa3a8ddca2729b"
+  },
+  "independent_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "sprite_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "command": "PYTHONPATH=/home/sprite/brain python -m unittest -v canonical.tests.test_chartography_qwen3vl4b_adapter_v1",
+    "tests_run": 6,
+    "failures": 0,
+    "errors": 0,
+    "result": "PASS"
+  },
+  "verified": [
+    "COMMAND_BINDS_IMAGE_AND_PROMPT_WITHOUT_GOLDEN_ANSWER",
+    "UNMODELED_OR_GOLDEN_ANSWER_FIELDS_FAIL_CLOSED",
+    "EXACT_MODEL_AND_PROJECTOR_SHA256_REQUIRED",
+    "NONZERO_EXIT_TIMEOUT_AND_EMPTY_COMPLETION_FAIL_CLOSED",
+    "EXECUTION_RECEIPT_CONTENT_ADDRESSES_INPUT_AND_OUTPUT",
+    "NO_SCORE_ACCEPTANCE_PROMOTION_OR_TERMINAL_AUTHORITY"
+  ],
+  "still_open": [
+    "REAL_PINNED_SUBJECT_END_TO_END_OFFICIAL_DUMMY_TASK_REPLAY",
+    "NONTERMINAL_SCOPE_RELEVANT_CHART_REASONING_QUALIFICATION",
+    "PROJECT_SPECIFIC_GEMINI_3_5_FLASH_JUDGE_CAPACITY_RECEIPT",
+    "CHARTOGRAPHY_THRESHOLD_CERTIFICATE_GE_89"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
