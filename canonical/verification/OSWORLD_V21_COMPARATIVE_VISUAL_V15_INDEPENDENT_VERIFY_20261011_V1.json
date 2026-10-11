@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_COMPARATIVE_VISUAL_V15_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__V15_COMPARATIVE_VISUAL_DISAMBIGUATION__25_OF_25_CURRENT_POLICY_TESTS__ZERO_BENCHMARK_CASES__ZERO_SCORE_CREDIT",
+  "target_reference": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "subject_id": "brain-osworld-v21-model-independent-comparative-visual-v15",
+  "predecessor_evidence": "canonical/verification/OSWORLD_V21_SEMANTIC_NORMALIZATION_V14_INDEPENDENT_VERIFY_20261011_V1.json",
+  "independent_carrier": {
+    "type": "SPRITE",
+    "name": "brain-capability-first-scheduler-verify-20261008-v1",
+    "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "working_tree": "/tmp/osworld-v14-closure",
+    "incremental_spend_usd": 0
+  },
+  "exact_changed_blobs": {
+    "canonical/runtime/osworld_v21_visual_relational_grounding_v1.py": "4f2822647664d04108fa1c1c4b3e02efb1bdd75d",
+    "canonical/runtime/osworld_v21_unified_policy_v15.py": "14bb5e2cb96bd215f5d98f9462544488faacf343",
+    "canonical/runtime/osworld_v21_workflow_policy_v10.py": "d168e0ab1df9c99af54a7cccfce8d1f36a17299f",
+    "canonical/runtime/osworld_v21_brain_subject_v15.py": "d23b538920b2aa36b344faa7617eae4cb5c26281",
+    "canonical/tests/test_osworld_v21_comparative_visual_v15.py": "1c2f4de35184cce503bedfe80b2161322f024c5e"
+  },
+  "replay": {
+    "command": "PYTHONPATH=. python3 -m pytest -q canonical/tests/test_osworld_v21_comparative_visual_v15.py canonical/tests/test_osworld_v21_semantic_normalization_v14.py canonical/tests/test_osworld_v21_generic_policy_v1.py",
+    "passed": 25,
+    "failed": 0,
+    "elapsed_seconds": 1.01,
+    "warnings": 10,
+    "changed_blob_hashes_match_github": true,
+    "benchmark_cases_consumed": 0
+  },
+  "newly_proved": [
+    "UNIQUE_LARGEST_AND_SMALLEST_VISUAL_REGION_SELECTION",
+    "UNIQUE_LEFTMOST_RIGHTMOST_TOPMOST_BOTTOMMOST_VISUAL_REGION_SELECTION",
+    "COMPARATIVE_TIES_FAIL_CLOSED",
+    "MULTIPLE_SIMULTANEOUS_COMPARATIVE_RELATIONS_FAIL_CLOSED",
+    "COMPARATIVE_VISUAL_FALLBACK_PRESERVES_V14_AND_GENERIC_GROUNDING"
+  ],
+  "remaining_general_residuals": [
+    "GENERIC_RECOVERY_FROM_UNMODELED_DIALOGS_OR_STATE_MISMATCHES",
+    "VISUAL_SEMANTICS_BEYOND_EXPLICIT_COLOR_SHAPE_POSITION_AND_SIMPLE_EXTREMA",
+    "AUTHENTIC_FINAL_OSWORLD_MEASUREMENT_ONLY_AFTER_CAPABILITY_MARGIN"
+  ],
+  "hard_nonclaims": [
+    "NO_OFFICIAL_OSWORLD_TASK_EXECUTED",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_25_POLICY_TESTS_IMPLY_81_8",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_cases_consumed": 0
+  }
+}
