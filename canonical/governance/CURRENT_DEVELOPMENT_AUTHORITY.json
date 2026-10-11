@@ -17,7 +17,7 @@
       "binding": "MUTABLE_CURRENT_POINTER_PATH_IDENTITY__OBSERVED_BLOB_DIAGNOSTIC",
       "observed_blob_is_load_bearing": false
     },
-    "goal_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V12.json",
+    "goal_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V13.json",
     "optimizer": "canonical/governance/EXECUTION_FIRST_SELF_PROVING_OPTIMIZER_V2.json"
   },
   "development_scheduler": {
@@ -118,5 +118,11 @@
     "capability_credit_delta": 0,
     "acceptance_credit_delta": 0,
     "terminal_credit_delta": 0
+  },
+  "control_contracts": {
+    "goal_hierarchy_law": "canonical/laws/GOAL_HIERARCHY_AND_DRIFT_IMMUNITY_LAW_V2.md",
+    "recursive_obs_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V7.json",
+    "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V12.json",
+    "goal_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V13.json"
   }
 }
