@@ -98,6 +98,41 @@ _API_NATIVE = {
     "file": "files",
 }
 
+_APP_SEARCH_HINTS = {
+    "gmail": "messages list get search",
+    "google_sheets": "spreadsheets worksheets values rows get",
+    "google_drive": "files list get search",
+    "slack": "conversations channels messages history search",
+    "salesforce": "records query get opportunities leads contacts",
+    "asana": "tasks projects sections get",
+    "trello": "boards lists cards get",
+    "hubspot": "contacts companies deals tickets get",
+    "jira": "issues projects search get",
+    "quickbooks": "customers invoices bills query get",
+    "xero": "contacts invoices bills payments get",
+    "wave": "customers invoices products get",
+    "airtable": "records tables bases get",
+    "monday": "boards items get",
+    "notion": "pages databases search get",
+    "google_calendar": "events calendars list get",
+    "zoom": "meetings registrants recordings get",
+    "docusign": "envelopes recipients templates get",
+    "mailchimp": "members lists campaigns get",
+    "zendesk": "tickets users organizations get",
+    "freshdesk": "tickets contacts get",
+    "intercom": "conversations contacts tickets get",
+    "helpscout": "conversations mailboxes get",
+    "hiver": "conversations get",
+    "buffer": "posts get",
+    "twitter": "tweets users get",
+    "linkedin": "posts messages invitations get",
+    "instagram": "media get",
+    "facebook_pages": "posts photos get",
+    "twilio": "messages calls get",
+    "bamboohr": "employees time off get",
+    "recruitee": "candidates jobs get",
+}
+
 
 def _tokens(text: str) -> list[str]:
     return [x.lower() for x in _WORD.findall(str(text or ""))]
@@ -164,7 +199,10 @@ def search_queries(prompt: str, *, max_queries: int = 6) -> list[str]:
     apps = cls["apps"] or [""]
     for app in apps[:4]:
         app_terms = app.replace("_", " ")
-        q = " ".join(x for x in [app_terms, *action_words[:3], *keep[:5]] if x)
+        hint = _APP_SEARCH_HINTS.get(app, "")
+        q = " ".join(
+            x for x in [app_terms, hint, *action_words[:2], *keep[:3]] if x
+        )
         if q and q not in queries:
             queries.append(q)
 
