@@ -209,7 +209,9 @@ def _observed_values(
             if value:
                 scored.append((score, value))
 
-    scored.sort(key=lambda item: (-item[0], item[1]))
+    # Python sort is stable: preserve encounter order among equal-confidence
+    # candidates instead of lexicographically reordering resource IDs.
+    scored.sort(key=lambda item: -item[0])
     if not scored:
         return []
     top_score = scored[0][0]
@@ -272,7 +274,6 @@ def _endpoint_allowed(endpoint_id: str, prompt: str) -> bool:
     if low_id.startswith("sheets."):
         return endpoint_id in {
             "sheets.spreadsheets.get",
-            "sheets.spreadsheets.values.get",
             "sheets.spreadsheets.values.batchGet",
         }
     if low_id.startswith("gmail."):
@@ -290,7 +291,33 @@ def _endpoint_allowed(endpoint_id: str, prompt: str) -> bool:
             "gmail.users.messages.list",
             "gmail.users.messages.get",
         }
-    return True
+
+    # Search can return semantically adjacent endpoints from unrelated services.
+    # Reject known app families that are not actually implied by this task.
+    apps = set(classify(prompt)["apps"])
+    if "google_sheets" in apps:
+        apps.add("google_drive")
+    family_to_app = {
+        "asana": "asana",
+        "recruitee": "recruitee",
+        "hubspot": "hubspot",
+        "jira": "jira",
+        "trello": "trello",
+        "airtable": "airtable",
+        "notion": "notion",
+        "monday": "monday",
+        "quickbooks": "quickbooks",
+        "xero": "xero",
+        "wave": "wave",
+        "slack": "slack",
+        "zoom": "zoom",
+        "docusign": "docusign",
+        "mailchimp": "mailchimp",
+    }
+    family = low_id.split(".", 1)[0]
+    if family in family_to_app:
+        return family_to_app[family] in apps
+    return False
 
 
 def observation_expansion_plan(
@@ -395,7 +422,9 @@ def observation_expansion_plan(
                 )
                 prompt_value = _ground_from_prompt(name, prompt)
                 if observed_first:
-                    values = observed or ([prompt_value] if prompt_value is not None else [])
+                    # Generic resource IDs are never inferred from arbitrary prompt
+                    # tokens such as mailbox names. They must come from prior reads.
+                    values = observed
                 else:
                     values = ([prompt_value] if prompt_value is not None else []) or observed
             if not values:
