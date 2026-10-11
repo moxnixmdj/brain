@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__ZERO_CREDIT_UNTIL_INDEPENDENTLY_VERIFIED",
+  "action_id": "CODING_V5_INTERPROCEDURAL_VALUE_PROVENANCE_V1",
+  "source_frontier": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
+  "mission": "Close the next general coding capability residual with bounded model-independent interprocedural direct value provenance activated by failing dynamic execution and composed with the verified dynamic fault localizer.",
+  "mechanism": [
+    "resolve local repository top-level direct function calls through explicit imports and same-module names",
+    "bind producer call return assigned to a simple local name",
+    "bind later simple-name argument use to a resolved consumer parameter",
+    "activate static flows only when producer/caller/consumer execute on failing tests",
+    "corroborate producer-return and consumer-bound-parameter summaries at runtime without promoting this to general taint identity",
+    "expand dynamically suspicious symbols through activated provenance flows into a bounded repair region"
+  ],
+  "external_general_purpose_model_runtime_dependency_count": 0,
+  "donor_general_purpose_model_runtime_dependency_count": 0,
+  "benchmark_specific_data_used": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "benchmark_score_credit_delta": 0,
+  "hard_nonclaims": [
+    "NO_GENERAL_DYNAMIC_TAINT_IDENTITY",
+    "NO_HEAP_ALIAS_PROVENANCE_COMPLETENESS",
+    "NO_DYNAMIC_DISPATCH_COMPLETENESS",
+    "NO_GENERAL_SOFTWARE_REPAIR_COMPLETENESS",
+    "NO_FRONTIERCODE_SCORE"
+  ]
+}
