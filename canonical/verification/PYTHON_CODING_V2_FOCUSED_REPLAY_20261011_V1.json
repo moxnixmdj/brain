@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_PYTHON_CODING_V2_FOCUSED_REPLAY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_GIT_BLOBS__15_OF_15__ZERO_MODEL__ZERO_SPEND",
+  "subject": {
+    "head": "d6c26070faad6ca70079ac9e3ad7e713e1a0f353",
+    "localizer_runtime": {
+      "path": "canonical/runtime/bound_capabilities/python_failure_localizer_v1.py",
+      "git_blob_sha": "c27528134ab9cbf973d9961297c1843945809277"
+    },
+    "localizer_tests": {
+      "path": "canonical/tests/test_python_failure_localizer_v1.py",
+      "git_blob_sha": "dc6e2006dcb9878906a44219892b3c651e23e74b"
+    },
+    "coupled_runtime": {
+      "path": "canonical/runtime/bound_capabilities/python_coupled_patch_search_v1.py",
+      "git_blob_sha": "73419e4b3255515ef0477a3f260ccfd9fd265814"
+    },
+    "coupled_tests": {
+      "path": "canonical/tests/test_python_coupled_patch_search_v1.py",
+      "git_blob_sha": "16eae044eee4ac2f7ea6f4be7eec6062543dfbb4"
+    }
+  },
+  "replay": {
+    "python_version": "3.14.7",
+    "localizer_tests_executed": 7,
+    "localizer_tests_passed": 7,
+    "coupled_tests_executed": 8,
+    "coupled_tests_passed": 8,
+    "total_tests_executed": 15,
+    "total_tests_passed": 15,
+    "total_tests_failed": 0
+  },
+  "repaired_defects": [
+    "COUPLED_SEARCH_BASELINE_VALIDATION_PRECEDED_BY_AUTO_LOCALIZATION",
+    "FAILURE_EVIDENCE_DIGEST_INCLUDED_VOLATILE_UNITTEST_DURATION"
+  ],
+  "authority": {
+    "observable_repository_local_failure_candidates_verified": true,
+    "bounded_coupled_python_ast_search_verified": true,
+    "causal_localization_authority": false,
+    "search_completeness_beyond_declared_bounds": false,
+    "semantic_correctness_beyond_supplied_tests": false,
+    "non_python_authority": false,
+    "mergeability_authority": false,
+    "frontiercode_score_authority": false,
+    "independent_semantic_verification": false
+  },
+  "accounting": {
+    "model_dependency_count": 0,
+    "external_capability_provider_count": 0,
+    "incremental_spend_usd": 0,
+    "benchmark_score_credit_delta": 0
+  }
+}
