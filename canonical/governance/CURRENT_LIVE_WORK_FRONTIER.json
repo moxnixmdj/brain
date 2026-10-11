@@ -25,7 +25,7 @@
       },
       {
         "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "git_blob_sha": "2239c2f2f31e714fe1f9416229cddc79a62eda2e"
+        "git_blob_sha": "ef714a88c7192ddd650d253c7af946e25b03407a"
       },
       {
         "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
@@ -156,11 +156,11 @@
       "ready": "BLOCKED_ONLY_BY_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION"
     },
     {
-      "work_id": "BYTES_EXACT_SYMBOLIC_V69_NEXT_PHYSICAL_CUT",
+      "work_id": "BYTES_EXACT_SYMBOLIC_V70_NEXT_PHYSICAL_CUT",
       "work_type": "EFFICIENCY_IMPROVEMENT",
       "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1707938_RAW_PYTHON_BYTES_USING_SPENT_NEXT76_ONLY__RERANK_BEFORE_NEW_PHYSICAL_CUT__DO_NOT_TOUCH_FROZEN_NEXT77_BEFORE_CUT",
-      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V69_CURRENT__SIGNATURE_SAFE_LOCAL_ALIAS_COMPRESSION_VERIFIED",
+      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1707801_RAW_PYTHON_BYTES_USING_SPENT_NEXT77_ONLY__RERANK_BEFORE_NEW_PHYSICAL_CUT__DO_NOT_TOUCH_FROZEN_NEXT78_BEFORE_CUT",
+      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V70_CURRENT__COMPOSED_STRONGER_BINDING_COMPRESSION_VERIFIED",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
       "scheduler_state": "READY_EXECUTION",
@@ -179,19 +179,19 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "source_git_blob_sha": "2239c2f2f31e714fe1f9416229cddc79a62eda2e",
-        "raw_python_source_bytes": 1707938,
-        "B_exec_raw_python_source_bytes": 1710698,
-        "qualification": "19320/19320",
-        "next_action": "RERANK_EXACT_V69_USING_SPENT_NEXT76_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT77_20261011_V1",
-        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT77_20261011_V1",
-        "next_frozen_library_file_id": "libfile_65f5dca72e64819193ca49972668262d",
+        "source_git_blob_sha": "ef714a88c7192ddd650d253c7af946e25b03407a",
+        "raw_python_source_bytes": 1707801,
+        "B_exec_raw_python_source_bytes": 1710561,
+        "qualification": "19550/19550",
+        "next_action": "RERANK_EXACT_V70_USING_SPENT_NEXT77_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT78_20261011_V1",
+        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT78_20261011_V1",
+        "next_frozen_library_file_id": "libfile_c62b3ff36d948191ac17dc909bb2a7b5",
         "independent_verification": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPF_PERTURB_V55_VERIFY_20261011_V1.json",
         "vector_bounds_complete": false,
         "next_frozen_spent": false
       },
-      "ready": "V69_CURRENT_AT_1707938_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT",
-      "source_git_blob_sha": "2239c2f2f31e714fe1f9416229cddc79a62eda2e"
+      "ready": "V70_CURRENT_AT_1707801_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT",
+      "source_git_blob_sha": "70e83ed3100860528121d2cef46b20c14a776495"
     },
     {
       "work_id": "R2_FINANCE_SEMANTIC_ADEQUACY_TAIL",
@@ -645,12 +645,12 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "2239c2f2f31e714fe1f9416229cddc79a62eda2e",
-    "status": "ACTIVE_RESEARCH__LIBMPF_LOCAL_ALIAS_COMPACT_V69_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1707938,
-    "B_exec_raw_python_source_bytes": 1710698,
-    "qualification": "19320/19320",
-    "next": "Rerank exact V69 using spent NEXT76 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT77_20261011_V1.",
+    "observed_git_blob_sha": "ef714a88c7192ddd650d253c7af946e25b03407a",
+    "status": "ACTIVE_RESEARCH__LIBMPF_COMPOSED_V70_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1707801,
+    "B_exec_raw_python_source_bytes": 1710561,
+    "qualification": "19550/19550",
+    "next": "Rerank exact V70 using spent NEXT77 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT78_20261011_V1.",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   }
