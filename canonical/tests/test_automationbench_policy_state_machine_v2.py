@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+import inspect
 import json
 import unittest
 
+import canonical.runtime.automationbench_policy_state_machine_v2 as state_machine_v2
 from canonical.runtime.automationbench_policy_state_machine_v2 import next_policy_action
 
 
@@ -189,6 +191,12 @@ class AutomationBenchPolicyStateMachineV2Tests(unittest.TestCase):
         done = next_policy_action(prompt=goal, history=history)
         self.assertEqual(done["status"], "DONE_VERIFIED")
         self.assertTrue(done["verification"]["constraint_results"][0]["verified"])
+
+    def test_v2_source_has_no_legacy_app_specific_compiler_import(self):
+        source = inspect.getsource(state_machine_v2)
+        self.assertNotIn("automationbench_mutation_compiler_v1", source)
+        self.assertNotIn("compile_salesforce", source)
+        self.assertNotIn("compile_asana", source)
 
     def test_no_application_specific_fallback_is_used(self):
         history = search_history([
