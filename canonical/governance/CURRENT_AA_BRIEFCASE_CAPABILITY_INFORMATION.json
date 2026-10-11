@@ -1,29 +1,42 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_AA_BRIEFCASE_CAPABILITY_INFORMATION_V1",
   "date": "2026-10-11",
-  "status": "ACTIVE__MINIMUM_INFORMATION_BOUND__ABSTENTION_COUNTERMODEL_PROVED__TWO_WITNESS_CLASSES_REMAIN__ZERO_CREDIT",
+  "status": "ACTIVE__MINIMUM_INFORMATION_V2__RAW_SUPERDOMAIN_TOP_SUPPORT_CUT__W_IDENTIFY_FIRST__ZERO_CREDIT",
   "target": {
     "path": "canonical/governance/AA_BRIEFCASE_MEASUREMENT_SEMANTIC_TARGET_V1.json",
     "git_blob_sha": "8f24ca30e6cceb8a58f619da1623037c0a4bda0b"
   },
   "minimum_information_frontier": {
-    "path": "canonical/governance/AA_BRIEFCASE_MINIMUM_INFORMATION_FRONTIER_20261011_V1.json",
-    "git_blob_sha": "b9e262163c872b34b3b261a96f71e20cd35e5f7a"
+    "path": "canonical/governance/AA_BRIEFCASE_MINIMUM_INFORMATION_FRONTIER_20261011_V2.json",
+    "git_blob_sha": "49378e8af4cd215015b23a210240a658d1527ba6"
   },
   "abstention_countermodel": {
     "path": "canonical/governance/AA_BRIEFCASE_24_OF_24_ABSTENTION_COUNTERMODEL_CUT_20261011_V1.json",
     "git_blob_sha": "6513dc07e005ef6674cb2bf28834251f63984c3a"
   },
+  "raw_superdomain_top_support_cut": {
+    "path": "canonical/governance/AA_BRIEFCASE_RAW_SUPERDOMAIN_TOP_SUPPORT_CUT_20261011_V1.json",
+    "git_blob_sha": "f8ce8ddbf1740066a6e2241a75c6c46de11b29d3",
+    "local_verification": {
+      "path": "canonical/verification/AA_BRIEFCASE_HIDDEN_RUBRIC_INDISTINGUISHABILITY_LOCAL_VERIFY_20261011_V1.json",
+      "git_blob_sha": "420d29e292854326341c700308e49c1d533e97a5",
+      "status": "LOCAL_8_OF_8_PASS__NOT_INDEPENDENT"
+    }
+  },
   "truth": {
     "capability_relation_proved": false,
     "literal_aa_briefcase_elo_ge_1822_proved": false,
     "property_truth_24_of_24_sufficient": false,
-    "remaining_witness_classes": [
+    "raw_public_superdomain_global_top_support_route_valid": false,
+    "current_public_information_identifies_hidden_material_rubric_order": false,
+    "remaining_witness_order": [
+      "W_IDENTIFY",
       "W_COVER",
       "W_QUALITY"
-    ]
+    ],
+    "w_cover_and_w_quality_terminal_credit_blocked_until_w_identify": true
   },
-  "next": "PROVE_OR_FALSIFY_W_COVER_ESCAPE_PROGRESS_TOTALITY_FIRST__THEN_CLOSE_W_QUALITY_WITH_A_SCOPE_COMPLETE_SOUND_QUALITY_ORDER_COVER__COMPOSE_ON_ONE_EXACT_BRAIN_SUBJECT",
+  "next": "FIND_OR_PROVE_THE_MINIMUM_CAPABILITY_COMPARISON_IDENTIFICATION_BRIDGE__DO_NOT_RUN_GLOBAL_ESCAPE_PROGRESS_OR_RAW_SUPERDOMAIN_TOP_SUPPORT_FOR_AA_UNTIL_THE_IDENTIFIED_SCOPE_AND_ORDER_EXIST",
   "accounting": {
     "incremental_spend_usd": 0,
     "capability_credit_delta": 0,
