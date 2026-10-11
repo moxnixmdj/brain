@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_CODING_V6B_INDEPENDENT_MEASUREMENT_RECONCILIATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_BOUNDED_INDEPENDENT_REQUEST_MEASUREMENT_SUBREGION__GENERAL_SEMANTIC_ACCEPTANCE_AND_REPAIR_COMPOSITION_REMAIN_OPEN__ZERO_BENCHMARK_TERMINAL_CREDIT",
+  "capability_id": "python.software.request.acceptance.independent.v1",
+  "predecessor_capability": "task.acceptance.objective.lossless.v1",
+  "verified_runtime": {
+    "path": "canonical/runtime/bound_capabilities/python_request_acceptance_model_v3.py",
+    "git_blob_sha": "e0e2e5e2fd5c34e5a9b79dcada24a63f84123249"
+  },
+  "verification": {
+    "path": "canonical/verification/PYTHON_REQUEST_ACCEPTANCE_MODEL_V3_VERIFY_20261011_V1.json",
+    "heldout": "10/10",
+    "verifier_adversarial": "5/5",
+    "model_dependency_count": 0,
+    "external_general_purpose_model_runtime_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "closes": [
+    "BOUNDED_REQUEST_PREDICATE_TO_EXECUTABLE_OR_EXPLICIT_UNBOUND_ACCEPTANCE_PLAN",
+    "CONTENT_ADDRESSED_REPOSITORY_BASELINE_DIFF_FOR_CHANGED_PATH_SCOPE",
+    "UNCHANGED_BASELINE_TEST_VERIFIER_BINDING",
+    "TEST_VERIFIER_REPOSITORY_SIDE_EFFECT_REJECTION",
+    "PASSING_EXISTING_TESTS_CANNOT_BIND_UNBOUND_REQUEST_SEMANTICS",
+    "REPAIR_STOP_FALSE_UNLESS_ALL_RAW_OBLIGATIONS_ARE_BOUND_AND_PASS"
+  ],
+  "preserves_open": [
+    "ARBITRARY_NATURAL_LANGUAGE_SEMANTIC_ACCEPTANCE",
+    "PRE_REPAIR_BASELINE_CAPTURE_TIME_OR_FRESHNESS_AUTHORITY",
+    "COMPOSITION_OF_V5_REPAIR_SEARCH_WITH_V6B_REQUEST_ACCEPTANCE_AS_ONE_TRANSACTION",
+    "ARBITRARY_PATCH_DEPTH_AND_CROSS_LANGUAGE_GENERALIZATION"
+  ],
+  "exact_next": "GENERAL_SOFTWARE_REPAIR_LOOP_V6C__COMPOSE_V5_PROVENANCE_GUIDED_REPAIR_WITH_V6_OBJECTIVE_ACCEPTANCE_AND_V6B_INDEPENDENT_MEASUREMENT__CAPTURE_BASELINE_BEFORE_REPAIR__STOP_ONLY_ON_COMPLETE_BOUND_REQUEST_ACCEPTANCE",
+  "hard_nonclaims": [
+    "NO_FRONTIERCODE_SCORE_CREDIT",
+    "NO_GENERAL_V6_CLOSURE",
+    "NO_ARBITRARY_NATURAL_LANGUAGE_COMPLETENESS",
+    "NO_BASELINE_PRE_REPAIR_FRESHNESS_SELF_CERTIFICATION",
+    "NO_TERMINAL_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": "BOUNDED_V6B_SUBREGION_ONLY",
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
