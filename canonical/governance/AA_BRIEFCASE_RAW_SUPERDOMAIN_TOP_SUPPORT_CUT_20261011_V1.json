@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_RAW_SUPERDOMAIN_TOP_SUPPORT_CUT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PROVED__RAW_PUBLIC_SUPERDOMAIN_GLOBAL_TOP_SUPPORT_ROUTE_INVALID_WITH_OPAQUE_HIDDEN_RUBRICS__CAPABILITY_COMPARISON_IDENTIFICATION_BRIDGE_REQUIRED__ZERO_CREDIT",
+  "target": {
+    "path": "canonical/governance/AA_BRIEFCASE_MEASUREMENT_SEMANTIC_TARGET_V1.json",
+    "git_blob_sha": "8f24ca30e6cceb8a58f619da1623037c0a4bda0b",
+    "terminal_predicate": "BRAIN_PROFESSIONAL_WORK_CAPABILITY_GE_CAPABILITY_EVIDENCED_BY_FROZEN_OPUS55_AA_BRIEFCASE_1822"
+  },
+  "public_interface": {
+    "contract": {
+      "path": "canonical/evidence/AA_BRIEFCASE_PUBLIC_INTERFACE_CONTRACT_20261011_V1.json",
+      "git_blob_sha": "32b44233529221ac6aa21132782690a1fbf0f748"
+    },
+    "superdomain": {
+      "path": "canonical/governance/AA_BRIEFCASE_PUBLIC_INTERFACE_OUTCOME_SUPERDOMAIN_20261011_V1.json",
+      "git_blob_sha": "cf612adf37da0cf5d7d1940b4656fd72e483481e",
+      "scope_complete": true,
+      "hidden_rubric_representation": "ANY_FINITE_TASK_SPECIFIC_BINARY_RUBRIC_PREDICATE_FAMILY_AS_OPAQUE_PREDICATES"
+    }
+  },
+  "implementation": {
+    "runtime": {
+      "path": "canonical/runtime/aa_briefcase_hidden_rubric_indistinguishability_v1.py",
+      "git_blob_sha": "5372ef55d9ef048d898468830ce90654a625169a"
+    },
+    "tests": {
+      "path": "canonical/tests/test_aa_briefcase_hidden_rubric_indistinguishability_v1.py",
+      "git_blob_sha": "3c9248e046f375506480970eeeffb2c45aee6f3e"
+    }
+  },
+  "countermodel": {
+    "visible_task_input": "IDENTICAL_IN_BOTH_WORLDS",
+    "world_a": "HIDDEN_RUBRIC_PASSES_EXACTLY_DISTINCT_OUTPUT_A",
+    "world_b": "HIDDEN_RUBRIC_PASSES_EXACTLY_DISTINCT_OUTPUT_B",
+    "admissible_under_public_superdomain": true,
+    "rubric_hidden_from_policy": true,
+    "result": "NO_NONEMPTY_DETERMINISTIC_OR_RANDOMIZED_POLICY_OUTPUT_SUPPORT_CAN_BE_CONFINED_TO_GLOBAL_TOP_SUPPORT_IN_BOTH_WORLDS"
+  },
+  "proof": [
+    "THE_PUBLIC_SUPERDOMAIN_INCLUDES_ARBITRARY_FINITE_HIDDEN_BINARY_RUBRIC_PREDICATES_AND_ALL_FINITE_SUBMISSION_BYTES.",
+    "CHOOSE_TWO_DISTINCT_ADMISSIBLE_OUTPUTS_A_AND_B_FOR_THE_SAME_VISIBLE_TASK_INPUT.",
+    "OPAQUE_RUBRIC_WORLD_A_REWARDS_ONLY_A_AND_OPAQUE_RUBRIC_WORLD_B_REWARDS_ONLY_B.",
+    "THE_POLICY_OBSERVES_THE_SAME_VISIBLE_INPUT_IN_BOTH_WORLDS_BECAUSE_THE_HIDDEN_RUBRIC_IS_NOT_AN_INPUT.",
+    "A_NONEMPTY_POLICY_SUPPORT_CANNOT_BE_A_SUBSET_OF_BOTH_DISJOINT_SINGLETON_TOP_SETS.",
+    "THEREFORE_CURRENT_PUBLIC_INFORMATION_CANNOT_SUPPORT_A_TARGET_INDEPENDENT_GLOBAL_TOP_SUPPORT_PROOF_OVER_THE_RAW_SUPERDOMAIN."
+  ],
+  "consequence_for_capability_information": {
+    "deleted_route": "RAW_PUBLIC_SUPERDOMAIN_UNIVERSAL_TOP_SUPPORT_WITHOUT_RUBRIC_SEMANTIC_RESTRICTION",
+    "minimum_new_information_class": "CAPABILITY_COMPARISON_IDENTIFICATION_BRIDGE",
+    "bridge_may_be_any_one_of": [
+      "PROVED_RESTRICTION_OF_ACTUAL_HIDDEN_RUBRICS_TO_A_SOUND_MATERIAL_QUALITY_ORDER_CLASS_PLUS_BRAIN_DOMINANCE_ON_THAT_CLASS",
+      "MATCHED_REFERENCE_RELATION_ON_THE_ACTUAL_SCORE_BEARING_TASK_SCOPE",
+      "OWNER_ACCEPTED_OR_PROTOCOL_EQUIVALENT_RELATION_THAT_ENTAILS_THE_CAPABILITY_COMPARISON"
+    ],
+    "after_bridge": [
+      "PROVE_SUFFICIENT_BRAIN_COVERAGE_ON_THE_IDENTIFIED_SCOPE",
+      "PROVE_SUFFICIENT_OUTPUT_QUALITY_DOMINANCE_ON_THE_IDENTIFIED_ORDER"
+    ]
+  },
+  "truth": {
+    "actual_private_rubrics_are_adversarial": false,
+    "actual_aa_noninferiority_disproved": false,
+    "current_public_information_identifies_the_material_rubric_order": false,
+    "raw_superdomain_global_top_support_route_survives": false,
+    "capability_relation_proved": false,
+    "literal_aa_elo_ge_1822_proved": false
+  },
+  "forbid": [
+    "TREAT_OPAQUE_RUBRIC_TYPE_COVERAGE_AS_MATERIAL_ORDER_COVERAGE",
+    "PROVE_GLOBAL_TOP_SUPPORT_AGAINST_ALL_OPAQUE_PREDICATES",
+    "ASSUME_HIDDEN_RUBRICS_ARE_MONOTONE_IN_OUR_PREFERRED_QUALITY_ORDER_WITHOUT_A_BOUND_BRIDGE",
+    "CLAIM_THE_COUNTERMODEL_DESCRIBES_THE_ACTUAL_PRIVATE_RUBRICS",
+    "BACKPROPAGATE_ANY_CAPABILITY_RESULT_TO_LITERAL_AA_ELO"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
