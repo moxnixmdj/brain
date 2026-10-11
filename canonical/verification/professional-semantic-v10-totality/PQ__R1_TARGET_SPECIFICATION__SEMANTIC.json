@@ -1,0 +1,37 @@
+{
+  "acceptance_authority": false,
+  "bounded_positive_witness": {
+    "claim_kind": "EXACT_PARAMETERIZED_PROFESSIONAL_ARTIFACT_TARGET_SEMANTICS",
+    "git_blob_sha": "dfffdd6eff129ce7498c4e4aa8a822cd4a5cda22",
+    "path": "canonical/verification/PROFESSIONAL_QUALITY_R1_TARGET_SEMANTIC_VERIFY_20261010_V1.json"
+  },
+  "bounded_witness_global_scope_transport": false,
+  "cc_r1_reality_containment_proved": true,
+  "cc_r2_mission_soundness_proved": true,
+  "cc_r3_terminal_closure_proved": true,
+  "claim_scoped_totality_proved": true,
+  "incremental_spend_usd": 0,
+  "independent_verified": true,
+  "leaf_id": "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
+  "pass": true,
+  "promotion_authority": false,
+  "proof_decomposition": {
+    "cc_r1": "EXACT_WHOLE_ADMISSIBLE_V10_LEAF_DOMAIN__NO_FILTERS_OR_EXCLUSIONS",
+    "cc_r2": "TARGET_PREDICATE_IS_EXACT_V2_MANIFEST_ACCEPTANCE_FOR_THIS_ROOT_AND_EXACT_V10_SUBJECT",
+    "cc_r3": "V10_DECLARED_SEMANTIC_AUTHORITY_IS_BINDER_V3__UNKNOWN_STALE_MISMATCHED_OR_INCOMPLETE_RECEIPTS_FAIL_CLOSED__POSITIVE_ADMISSION_REQUIRES_EXACT_CURRENT_CLAIM_PLUS_CONTENT_ADDRESSED_INDEPENDENT_TOTALITY_BASIS",
+    "nonvacuity": "EXISTING_CONTENT_ADDRESSED_BOUNDED_SEMANTIC_WITNESS_IS_PASSING_AND_IS_USED_ONLY_TO_PROVE_POSITIVE_BRANCH_NONVACUITY",
+    "r4": "BINDER_V3_IS_CONTENT_ADDRESSED_COMPONENT_OF_EXACT_V10_DECLARED_SYSTEM_SUBJECT"
+  },
+  "quality_authority": false,
+  "r4_proof_realization_authority": true,
+  "root_id": "R1_TARGET_SPECIFICATION",
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_SEMANTIC_V10_CLAIM_TOTALITY_VERIFY_V1",
+  "semantic_claim_id": "e4956b485f12be3edcd4d9723604683d4fb7f04899dccb129c2234a41ff7d689",
+  "semantic_property_truth_authority": true,
+  "semantic_scope_sha256": "c36ef2f73ed5339234e9f6c154d7ac88809da8b1bda402fc51ee162b090304ef",
+  "semantic_semantics_sha256": "cf82fd3d8c39abeeaa907de5a44e42d272ed40aca97c507c5267545559a5537e",
+  "semantic_target_predicate_sha256": "630ee7e848b2a7306f23bd995840d8613d76441919fc79d3ef7a0035201bcb88",
+  "status": "PASS__EXACT_V10_CLAIM__UNIVERSAL_FAIL_CLOSED_AUTHORITY__BOUNDED_POSITIVE_NONVACUITY",
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
