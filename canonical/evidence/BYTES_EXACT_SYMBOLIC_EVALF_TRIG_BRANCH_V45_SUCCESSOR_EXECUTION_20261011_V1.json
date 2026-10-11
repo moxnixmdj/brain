@@ -1,0 +1,127 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_EVALF_TRIG_BRANCH_V45_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__BRANCH_LEVEL_SPECIALIZATION__SPENT_NEXT50_AND_FRESH_NEXT51_PASS__NEXT52_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SUBS_ONLY_V44_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "0a7f6fdc38cd3db7a265ac74181e4367b3b88c98c66950c2c0ed2ae3d355a5d5",
+    "transform": "canonical/research/bytes/tools/conservative_evalf_trig_real_small_prune_v45.py",
+    "manifest_sha256": "3d7c21fdebe1db363cc3e4c5fdf57a2ddb76c5219cd832c34eab9a99d60f9576",
+    "python_files": 277,
+    "raw_python_source_bytes": 1740656,
+    "B_exec_raw_python_source_bytes": 1743416,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v44_bytes": -974,
+    "B_exec_delta_vs_v44_bytes": -974
+  },
+  "selection": {
+    "id": "EVALF_TRIG_REAL_SMALL_BRANCH_SPECIALIZATION_V45",
+    "method": "PRESERVE_THE_FRESH_NEXT49_LOAD_BEARING_SIN_COS_REAL_XSIZE_LT1_PATH__FAIL_CLOSE_UNOBSERVED_TRIG_COMPLEX_ZERO_REAL_LARGE_ARGUMENT_AND_RETRY_BRANCHES__VERIFY_ON_SPENT_NEXT50_THEN_FRESH_NEXT51",
+    "changed_body_count": 1,
+    "body": "sympy/core/evalf.py::evalf_trig",
+    "preserved_branches": [
+      "SIN",
+      "COS",
+      "REAL_ARGUMENT",
+      "NONZERO_REAL",
+      "FASTLOG_RE_LT_1",
+      "DIRECT_MPF_TRIG_RETURN"
+    ],
+    "fail_closed_branches": [
+      "TAN_OR_OTHER_TRIG",
+      "COMPLEX_ARGUMENT",
+      "ZERO_REAL_RESULT_SPECIAL_CASES",
+      "XSIZE_GE_1_LARGE_ARGUMENT_AND_PRECISION_ESCALATION",
+      "RETRY_LOOP",
+      "VERBOSE_DIAGNOSTIC",
+      "MAXPREC_EXIT"
+    ],
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "discovery_evidence": {
+    "corpus": "QUAL_SUCCESSOR_NEXT49_20261011_V1",
+    "role": "SPENT_HISTORICAL_DISCOVERY_ONLY__NOT_FRESH_QUALIFICATION",
+    "roots_cases_profiled": 1140,
+    "evalf_trig_calls": 8,
+    "observed_branch_counts": {
+      "func_cos": 4,
+      "func_sin": 4,
+      "im_false": 8,
+      "re_true": 8,
+      "xsize_lt1": 8
+    },
+    "unobserved_branch_counts": {
+      "func_tan": 0,
+      "func_other": 0,
+      "im_true": 0,
+      "re_false": 0,
+      "xsize_ge1": 0,
+      "xsize_ge10": 0,
+      "retry": 0,
+      "maxprec_exit": 0
+    },
+    "motivating_falsifier": "NEXT49_ROOTS_INDEX_560__[-2,0,-1,0,-5]"
+  },
+  "qualification": {
+    "spent_NEXT50": {
+      "id": "QUAL_SUCCESSOR_NEXT50_20261011_V1",
+      "cases": 13340,
+      "corpus_sha256": "93c0ea4bebb7f794db1a674b22ee6fc35df3ab4822afb34c205c78d5f16efd82",
+      "candidate": "13340/13340",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT51": {
+      "id": "QUAL_SUCCESSOR_NEXT51_20261011_V1",
+      "cases": 13570,
+      "corpus_sha256": "451f0b3f885c05d7d939b143bfe638b9e034283c0398c9ae80aac234775a90e5",
+      "candidate": "13570/13570",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "clean_room_v44_to_v45_reconstruction": "PASS__278_OF_278_FILES_BYTE_IDENTICAL",
+    "regenerated_manifest_sha256": "3d7c21fdebe1db363cc3e4c5fdf57a2ddb76c5219cd832c34eab9a99d60f9576",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V45_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_81e136f073dc8191bbe9c220d7470310",
+    "bytes": 271456,
+    "sha256": "6bcde180d2151f83eddeff90c521f0a0df6392af6d8100eb59d8cb7a54443d40"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT52_20261011_V1",
+    "cases": 13800,
+    "seed": 1983107509,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT52_20261011_V1_PIPE_V45_MANIFEST_IDENTITY",
+    "seed_material": "QUAL_SUCCESSOR_NEXT52_20261011_V1|3d7c21fdebe1db363cc3e4c5fdf57a2ddb76c5219cd832c34eab9a99d60f9576",
+    "per_operation_budget": 1200,
+    "corpus_sha256": "30ea78acca28b10a42b24726fcc6c33ac592ce821de859f63faf1978100d2529",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT52_20261011_V1.jsonl",
+    "library_file_id": "libfile_4a1ad217de788191b9df4cc311060a8d",
+    "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0_EXACT_ROUTE_EXPECTED_OUTPUTS__DETERMINISTIC_PARAMETER_STREAM__CHUNKED_EXPECTED_OUTPUT_EVALUATION__CANONICAL_ROW_REASSEMBLY",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V45 is 1,740,656 raw Python-source bytes, 974 bytes below verified V44.",
+    "MEASURED: historical NEXT49 profiling observed exactly eight evalf_trig calls, all sin/cos real nonzero arguments with fastlog(re)<1; this profile was discovery evidence, not fresh qualification.",
+    "MEASURED: V45 passes spent NEXT50 13,340/13,340 with zero failures.",
+    "MEASURED: previously untouched NEXT51 passes V45 13,570/13,570 with zero failures.",
+    "MEASURED: clean-room V44-to-V45 reconstruction is 278/278 files byte-identical.",
+    "MEASURED: NEXT52 is durably frozen at 13,800 cases and remains unspent.",
+    "NOT PROVED: universal SymPy equivalence outside the bounded exact-symbolic route.",
+    "NOT PROVED: external second-carrier replay.",
+    "NOT PROMOTED: no capability, acceptance, ownership, quality, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
