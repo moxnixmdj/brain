@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_BENCHMARK_MEASUREMENT_MINIMUM_PROOF_COVER_POSTMERGE_VERIFICATION_V1",
+  "date": "2026-10-11",
+  "status": "PASS__MAIN_BYTES_REPLAYED__ZERO_CREDIT",
+  "merge_commit": "c38cde95f9065b061ca55b5e32f4f0d75fec2972",
+  "replay_ref": "main",
+  "verified_paths": [
+    "canonical/runtime/minimum_capability_certificate_cover_v1.py",
+    "canonical/tests/test_minimum_capability_certificate_cover_v1.py",
+    "canonical/governance/CURRENT_DEVELOPMENT_AUTHORITY.json"
+  ],
+  "result": {
+    "tests_run": 9,
+    "failures": 0,
+    "errors": 0,
+    "exit_code": 0,
+    "development_authority_status": "ACTIVE_FAIL_CLOSED__GENERAL_CAPABILITY_FIRST__BENCHMARKS_AUDIT_ONLY__MINIMUM_PROOF_COVER_REQUIRED__REUSE_FIRST",
+    "development_authority_policy_path": "canonical/governance/BENCHMARK_MEASUREMENT_MINIMUM_PROOF_COVER_POLICY_20261011_V1.json",
+    "development_authority_runtime_path": "canonical/runtime/minimum_capability_certificate_cover_v1.py"
+  },
+  "ci_context": {
+    "pr": 4653,
+    "github_checks": [
+      "capability-transfer-governance",
+      "verify-reached-escape-no-bypass"
+    ],
+    "observed_failure_class": "PRESTART_OR_CARRIER_FAILURE__ZERO_STEPS__NO_LOGS",
+    "rerun_same_failure_class": true,
+    "code_failure_evidence": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "benchmark_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_BENCHMARK_SCORE_PROVED",
+    "NO_CAPABILITY_RELATION_PROVED_BY_THE_POLICY_RUNTIME_ITSELF",
+    "NO_TERMINAL_GOAL_ACHIEVED_CLAIM"
+  ]
+}
