@@ -16,23 +16,29 @@ permissions:
 
 jobs:
   full-regression:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted, linux, x64]
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.sha }}
           fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
+      - name: Install exact test runner
+        run: |
+          python -m pip install --disable-pip-version-check pytest==9.1.1
+
       - name: Record exact subject
         run: |
           mkdir -p /tmp/brain-regression
           git rev-parse HEAD | tee /tmp/brain-regression/subject_sha.txt
+          test "$(git rev-parse HEAD)" = "${GITHUB_SHA}"
           python --version | tee /tmp/brain-regression/python_version.txt
+          python -m pytest --version | tee /tmp/brain-regression/pytest_version.txt
 
       - name: Compile assurance and professional load-bearing runtimes
         run: |
@@ -103,4 +109,4 @@ jobs:
           path: /tmp/brain-regression/
           if-no-files-found: error
 
-# trigger: exact-current-main-regression-ubuntu-22-04-carrier-20261011-v2
+# carrier: self-hosted-linux-x64-low-ram-exact-sha-20261011-v2
