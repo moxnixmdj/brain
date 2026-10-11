@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_HLE_WIKIPEDIA_BING_TRANSPORT_PREFLIGHT_20261011_V1",
   "date": "2026-10-11",
-  "status": "HARDENED_IMPLEMENTATION__EXACT_INDEPENDENT_RUNS_QUEUED__ZERO_CREDIT_PENDING_CAUSAL_RESULT",
+  "status": "HARDENED_IMPLEMENTATION__LOCAL_EXACT_5_OF_5_PASS__INDEPENDENT_AND_CAUSAL_RUNS_QUEUED__ZERO_CREDIT",
   "causal_target": {
     "prior_result_commit": "e36e3ac08a27be40c367ec718a9b711bb600b080",
     "shared_miss_ids": [
@@ -60,5 +60,14 @@
     38152274577,
     38152274534
   ],
-  "truth_repair": "EARLIER_PREFLIGHT_BLOBS_F544.../07A9... ARE SUPERSEDED_AND_MUST_NOT_RECEIVE CREDIT"
+  "truth_repair": "EARLIER_PREFLIGHT_BLOBS_F544.../07A9... ARE SUPERSEDED_AND_MUST_NOT_RECEIVE CREDIT",
+  "local_exact_replay": {
+    "runtime_blob": "eace56be88b0047aaebfe713c61ddf6acea59296",
+    "tests_blob": "7ec2a287396b59a77d92d4c1ab4a3a683f36d0fd",
+    "git_blob_hashes_matched": true,
+    "tests_executed": 5,
+    "tests_passed": 5,
+    "tests_failed": 0,
+    "independent": false
+  }
 }
