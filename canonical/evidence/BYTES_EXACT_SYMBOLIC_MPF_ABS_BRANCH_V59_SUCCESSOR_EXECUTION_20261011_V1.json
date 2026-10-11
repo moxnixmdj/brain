@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_V59_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED",
+  "predecessor_manifest": "409dd682c47e2a25acc2915af689650757f02cf828826a9854d06c0e386bb1c1",
+  "transform": "canonical/research/bytes/tools/conservative_mpf_abs_negative_prune_v59.py",
+  "manifest": "694f9c52e40530f4c41fe46e4ba01001f8d0a672c8e1cf2024d2cee15bda757c",
+  "raw_python_bytes": 1713085,
+  "B_exec_bytes": 1715845,
+  "delta_bytes": -127,
+  "changed_body": "mpmath/libmp/libmpf.py::mpf_abs",
+  "discovery": {
+    "roots_cases": 1440,
+    "calls": 1756,
+    "observed": "negative finite, no precision override"
+  },
+  "spent": {
+    "id": "NEXT64",
+    "cases": 16560,
+    "sha256": "2b010659915163dd631b761329671874754f9c28999ff26cff03646c2afa6706",
+    "passed": 16560
+  },
+  "fresh": {
+    "id": "NEXT65",
+    "cases": 16790,
+    "sha256": "441ebf4a345f13eb8a4b8f9e3cac1ba6f03d8afc7234563e159c75ca3e755d6f",
+    "passed": 16790
+  },
+  "clean_room": "278/278",
+  "archive": {
+    "sha256": "09f651ba9d38870c1b9f28536a9d30ccd07adcdb8fbe1ea38452257188ee546c",
+    "bytes": 269016,
+    "library_file_id": "libfile_708521dbd4348191a0a5c48228684218"
+  },
+  "next": {
+    "id": "NEXT66",
+    "cases": 17020,
+    "seed": 2911867069,
+    "per": 1480,
+    "sha256": "6721df00b28a1d18d5efb16ae8a270b4dde24ebca33ded0e1d55d6655114e7f4",
+    "library_file_id": "libfile_a302cc7eab4081919d74cc4abdc29178",
+    "spent": false
+  },
+  "spend_usd": 0,
+  "credit_delta": 0
+}
