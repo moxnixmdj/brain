@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_DEVELOPMENT_SCHEDULER_POINTER_V1",
   "date": "2026-10-10",
-  "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V15__PROFESSIONAL_V10_24_OF_24__REGRESSION_CARRIER_WAKE_GATED__OTHER_REUSE_FIRST_FRONTIERS_CONTINUE__ZERO_GLOBAL_CREDIT",
+  "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V15__PROFESSIONAL_24_OF_24__CHECKPOINT_ROWS_ALL_WAKE_GATED__0_SAME_INFORMATION_CHECKPOINT_RUNS__CAPABILITY_FIRST_PRIMARY__ZERO_GLOBAL_CREDIT",
   "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V15.json",
   "runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
   "primary_entrypoint": "canonical.runtime.capability_parallel_frontier_post_composition_v2.plan_current_post_composition_frontier",
@@ -45,7 +45,7 @@
     "git_blob_sha": "1b8a9cbb14dc70de35c0acd12573593488978670",
     "status": "ACTIVE_FAIL_CLOSED_CONTRACT__NO_CALIBRATED_COMPLETE_FRONTIER_BOUND_YET"
   },
-  "live_selection_rule": "CURRENTNESS_AND_DEPENDENCY_FIRST__PARETO_DOMINANCE_WITH_COMPLETE_PER_DIMENSION_EVIDENCE__SAFE_PARALLEL_NONCONFLICTING_WORK__PARKED_AUTHORITY_LIMITED_ROWS_INELIGIBLE__INCOMPLETE_VECTORS_READ_ONLY_EVIDENCE_ONLY__NO_INVENTED_SCALAR_WEIGHTS",
+  "live_selection_rule": "CURRENTNESS_AND_DEPENDENCY_FIRST__CHECKPOINT_ROWS_EVENT_DRIVEN_WAKE_ONLY__NO_SAME_INFORMATION_CHECKPOINT_RETRY__CAPABILITY_AND_RESOURCE_PARETO_FRONTIER_PRIMARY_WHEN_NO_WAKE_EVENT__NO_INVENTED_SCALAR_WEIGHTS",
   "independent_live_scheduler_verification": {
     "path": "canonical/verification/CAPABILITY_FIRST_LIVE_SCHEDULER_V7_INDEPENDENT_VERIFY_20261010_V1.json",
     "git_blob_sha": "9b6a17d38a9285db63a6a760648a0567aa8a47ef",
@@ -132,7 +132,10 @@
     "professional_open_execution_leaf_count": 0,
     "professional_open_semantic_leaf_count": 0,
     "full_private_regression_execution_carrier_blocked": true,
-    "professional_parallel_policy": "WHILE_CARRIER_BLOCKED__CONTINUE_ESCAPE_O11_Q1_R2_AND_OTHER_NONCONFLICTING_REUSE_FIRST_FRONTIER_WORK"
+    "professional_parallel_policy": "WHILE_REGRESSION_CARRIER_BLOCKED_AND_NO_CHECKPOINT_WAKE_EVENT__RUN_CAPABILITY_FIRST_GENERAL_DEVELOPMENT_AND_RESOURCE_PARETO_IMPROVEMENT__DO_NOT_SPIN_ON_O11_Q1",
+    "escape_open_checkpoint_count": 12,
+    "escape_row_specific_same_information_runnable_count": 0,
+    "escape_wake_gated_open_count": 12
   },
   "post_composition_currentness_invariant": {
     "runtime_path": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
@@ -205,5 +208,14 @@
     "parked_tb_rows": 1,
     "active_gap_b_rows": 0,
     "source": "canonical/governance/CURRENT_REUSE_FRONTIER_EXACT_DELTA_CUT_20261011_V2.json"
+  },
+  "checkpoint_execution_reconciliation": {
+    "path": "canonical/governance/CURRENT_ALL_OPEN_CHECKPOINT_WAKE_GATE_RECONCILIATION_20261011_V1.json",
+    "git_blob_sha": "e10c7ebe00dac3f60eee2845df16c58a1fdd5791",
+    "open_checkpoint_obligations": 12,
+    "row_specific_same_information_runnable_count": 0,
+    "wake_gated_open_checkpoint_count": 12,
+    "parked_checkpoint_count": 1,
+    "primary_without_wake_event": "CAPABILITY_FIRST_GENERAL_DEVELOPMENT_AND_RESOURCE_PARETO_IMPROVEMENT"
   }
 }
