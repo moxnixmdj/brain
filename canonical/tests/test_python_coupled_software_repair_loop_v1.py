@@ -77,7 +77,9 @@ class CoupledSoftwareRepairLoopV1Tests(unittest.TestCase):
             self.assertEqual(out["baseline_failure_score"], 1)
             self.assertEqual(out["final_failure_score"], 0)
             self.assertGreaterEqual(out["coupled_pair_count"], 1)
-            self.assertEqual(len(out["patches"]), 2)
+            pair = next(x for x in out["accepted_actions"] if x["kind"] == "NEUTRAL_INTERMEDIATE_COUPLED_PAIR")
+            self.assertEqual(len({e["source_path"] for e in pair["edits"]}), 2)
+            self.assertEqual({p["source_path"] for p in out["patches"]}, {"a.py", "b.py"})
             self.assertEqual([x["failure_score"] for x in out["final_verification_replays"]], [0, 0])
             self.assertTrue(out["source_restored"])
             for p in (root/"a.py", root/"b.py"):
