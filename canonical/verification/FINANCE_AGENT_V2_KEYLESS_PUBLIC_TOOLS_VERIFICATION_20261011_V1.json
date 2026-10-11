@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_KEYLESS_PUBLIC_TOOLS_VERIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_EXACT_BLOB_PASS__COMPILE_PASS__8_OF_8_TESTS_PASS__KEYLESS_PUBLIC_BACKENDS__ZERO_BENCHMARK_CREDIT",
+  "target": "FINANCE_AGENT_V2_GE_58_59",
+  "subject": {
+    "runtime_path": "canonical/runtime/finance_agent_v2_keyless_public_tools_v1.py",
+    "runtime_blob": "e393d2cb6d0a02b8e6976417e4a5e41264c9c263",
+    "test_path": "canonical/tests/test_finance_agent_v2_keyless_public_tools_v1.py",
+    "test_blob": "910fd28d8ccbc12620d32255b1f9f9be2e02f15d"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2697,
+    "head_commit": "7e8394a71b5565440945bc456bc45e27fa58a1ce",
+    "workflow_name": "Verify Finance Brain-native core",
+    "workflow_run_id": 38147088966,
+    "job_id": 114492615781,
+    "exact_blob_binding": "PASS",
+    "compile": "PASS",
+    "tests_passed": 8,
+    "tests_failed": 0,
+    "warnings_observed": 0
+  },
+  "backends": {
+    "web_search": {
+      "primary": "SEC_EFTS_WHEN_RESULTS_EXIST",
+      "fallback": "BING_PUBLIC_HTML_WITH_CUSTOM_DATE_FILTER",
+      "credential_required": false
+    },
+    "edgar_search": {
+      "backend": "SEC_EFTS_AND_SEC_ARCHIVES",
+      "credential_required": false
+    },
+    "price_history": {
+      "backend": "YAHOO_PUBLIC_CHART",
+      "credential_required": false
+    }
+  },
+  "live_public_observations": {
+    "sec_efts_http_200_observed": true,
+    "bing_public_html_http_200_observed": true,
+    "yahoo_chart_http_200_observed": true,
+    "stooq_rejected_due_browser_challenge": true
+  },
+  "ownership_and_cost_boundary": {
+    "provider_api_key_dependency_count": 0,
+    "provider_billing_account_dependency_count": 0,
+    "external_general_purpose_model_runtime_cognition": 0,
+    "incremental_spend_usd": 0
+  },
+  "comparability_boundary": {
+    "vals_public_methodology": "PUBLISHED_MODEL_RESULTS_USE_A_SHARED_DEFAULT_SIX_TOOL_HARNESS",
+    "keyless_backends_are_identical_to_default_provider_backends": false,
+    "may_replace_matched_harness_v1_for_strict_opus_comparison": false,
+    "role": "ZERO_AUTH_CAPABILITY_ROUTE_AND_FALLBACK__NOT_TERMINAL_COMPARABILITY_CERTIFICATE"
+  },
+  "proved": [
+    "THREE_CREDENTIAL_BOUND_TOOL_CLASSES_CAN_BE_REPLACED_WITH_BRAIN_CONTROLLED_KEYLESS_PUBLIC_BACKENDS",
+    "TOOL_NAMES_DESCRIPTIONS_AND_PARAMETER_SCHEMAS_ARE_PRESERVED_FROM_THE_PINNED_VALS_HARNESS_AT_INSTALL_TIME",
+    "NO_TAVILY_SEC_API_OR_TIINGO_CREDENTIAL_IS_REQUIRED_BY_THIS_MODULE",
+    "STATIC_DATE_CUTOFF_AND_PRICE_SYMBOL_PROJECTIONS_ARE_DETERMINISTIC",
+    "EXACT_RUNTIME_AND_TEST_BLOBS_COMPILE_AND_PASS_8_OF_8_INDEPENDENT_TESTS"
+  ],
+  "hard_nonclaims": [
+    "NO_PRIVATE_FINANCE_AGENT_V2_TASK_EXECUTED",
+    "NO_CLAIM_BING_DATE_FILTER_IS_SEMANTICALLY_IDENTICAL_TO_TAVILY_DATE_FILTER",
+    "NO_CLAIM_YAHOO_PRICE_DATA_IS_BYTE_OR_SOURCE_EQUIVALENT_TO_TIINGO",
+    "NO_CLAIM_SEC_EFTS_OUTPUT_IS IDENTICAL_TO_SEC_API_IO",
+    "NO_MATCHED_HARNESS_SCORE_CREDIT",
+    "NO_FINANCE_AGENT_V2_SCORE_CREDIT",
+    "NO_CLAIM_FINANCE_AGENT_V2_GE_58_59"
+  ],
+  "accounting": {
+    "private_cases_exposed": 0,
+    "benchmark_score_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
