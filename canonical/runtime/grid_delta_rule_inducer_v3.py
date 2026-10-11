@@ -1,8 +1,9 @@
 """Grid delta rule inducer V3 with representation-invention fallback.
 
-V3 first reuses V2's cheaper adaptive equality-atom synthesis. Only when V2
-cannot produce a verified rule does it escalate to the generic finite feature-
-expression inventor, which can synthesize relations between structural features
+V3 first reuses V2's cheaper adaptive equality-atom synthesis. It escalates
+when V2 either cannot produce a verified rule or preserves genuinely distinct
+training-exact selector explanations. The generic finite feature-expression
+inventor can synthesize relations between structural features
 such as equality, ordering, differences, sums, and observed thresholds.
 
 Every invented selector is exact-replayed against every training cell. On a new
@@ -85,14 +86,45 @@ def _invented_predict(grid,target_options):
     return "PREDICTED",tuple(tuple(row) for row in out)
 
 
+def _baseline_selector_ambiguity(baseline:Mapping[str,Any])->dict[str,Any]:
+    groups=[]
+    distinct_total=0
+    for group in baseline.get("target_rule_options",[]):
+        signatures=sorted({
+            tuple(sorted(rule.get("rule_predicates",[])))
+            for rule in group.get("rules",[])
+        })
+        groups.append({
+            "target_color":group.get("target_color"),
+            "distinct_selector_signatures":[list(x) for x in signatures],
+            "distinct_selector_count":len(signatures),
+        })
+        if len(signatures)>1:
+            distinct_total+=1
+    return {
+        "ambiguous_target_count":distinct_total,
+        "groups":groups,
+        "semantically_ambiguous":distinct_total>0,
+    }
+
+
 def induce(training_pairs:Sequence[Mapping[str,Sequence[Sequence[int]]]])->dict[str,Any]:
     baseline=v2.induce(training_pairs)
-    if baseline.get("status")=="VERIFIED_FACTORIZED_RULE_OPTIONS":
+    baseline_ambiguity=(
+        _baseline_selector_ambiguity(baseline)
+        if baseline.get("status")=="VERIFIED_FACTORIZED_RULE_OPTIONS"
+        else {"semantically_ambiguous":False,"ambiguous_target_count":0,"groups":[]}
+    )
+    if (
+        baseline.get("status")=="VERIFIED_FACTORIZED_RULE_OPTIONS"
+        and not baseline_ambiguity["semantically_ambiguous"]
+    ):
         return {
             "schema":SCHEMA,
             "status":"VERIFIED_RULE_OPTIONS",
             "route":"V2_BASE_ATTRIBUTE_SYNTHESIS",
             "baseline":baseline,
+            "baseline_selector_ambiguity":baseline_ambiguity,
             "training_full_replay_verified":baseline.get("training_full_replay_verified") is True,
             "representation_invention_used":False,
             "terminal_authority":False,
@@ -126,6 +158,22 @@ def induce(training_pairs:Sequence[Mapping[str,Sequence[Sequence[int]]]])->dict[
     for target in targets:
         invented=invent_discriminator(_target_rows(pairs,target),max_pack_size=3,max_packs=1000)
         if invented.get("status")!="INVENTED_DISCRIMINATORS_ACROSS_FEATURE_PACKS":
+            if (
+                baseline.get("status")=="VERIFIED_FACTORIZED_RULE_OPTIONS"
+                and baseline_ambiguity["semantically_ambiguous"]
+            ):
+                return {
+                    "schema":SCHEMA,
+                    "status":"AMBIGUOUS_REPRESENTATION",
+                    "failed_target_color":target,
+                    "baseline":baseline,
+                    "baseline_selector_ambiguity":baseline_ambiguity,
+                    "inventor_status":invented.get("status"),
+                    "inventor_reason":invented.get("reason"),
+                    "representation_invention_used":True,
+                    "prediction_authority":False,
+                    "terminal_authority":False,
+                }
             return {
                 "schema":SCHEMA,
                 "status":"REPRESENTATION_INVENTION_FAILED",
@@ -164,6 +212,8 @@ def induce(training_pairs:Sequence[Mapping[str,Sequence[Sequence[int]]]])->dict[
         "training_full_replay_verified":True,
         "representation_invention_used":True,
         "inventor":"PROJECT_BRAIN_FINITE_FEATURE_EXPRESSION_INVENTOR_V1",
+        "escalated_from_ambiguous_v2":baseline.get("status")=="VERIFIED_FACTORIZED_RULE_OPTIONS",
+        "baseline_selector_ambiguity":baseline_ambiguity,
         "open_world_representation_invention_claimed":False,
         "terminal_authority":False,
         "promotion_authority":False,
