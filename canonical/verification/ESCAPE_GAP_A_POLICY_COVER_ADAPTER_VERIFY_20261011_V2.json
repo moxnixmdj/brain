@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_ESCAPE_GAP_A_POLICY_COVER_ADAPTER_VERIFY_20261011_V2",
+  "date": "2026-10-11",
+  "status": "PASS__CURRENT_PROJECTION_AWARE_ADAPTER__PYCOMPILE__13_OF_13_FOCUSED__ZERO_ROW_OR_PROMOTION_CREDIT",
+  "subject": {
+    "runtime_path": "canonical/runtime/escape_gap_a_policy_cover_adapter_v1.py",
+    "runtime_git_blob_sha": "3c003f353d74dea26c7053f57dccd5ea5a1244d2",
+    "tests_path": "canonical/tests/test_escape_gap_a_policy_cover_adapter_v1.py",
+    "tests_git_blob_sha": "0e55c93011a0c25a545cef62f82a651b2002a7da"
+  },
+  "replay": {
+    "carrier": "EXISTING_BRAIN_VERIFICATION_SPRITE",
+    "sprite": "brain-professional-hard-defect-verify-20261010",
+    "py_compile": true,
+    "focused_unittest": "13_OF_13_PASS",
+    "verifies": [
+      "CURRENT_V7_ROUTE_GROUP_OVERRIDE_ADMITS_RECLASSIFIED_GDPVAL_AS_GAP_A",
+      "PARKED_TB_REMAINS_INELIGIBLE_FOR_GAP_A",
+      "EXISTING_DIRECT_COMMON_POLICY_AND_STRICT_DISCRIMINATOR_BEHAVIOR_PRESERVED"
+    ]
+  },
+  "boundaries": {
+    "full_private_current_main_regression": false,
+    "all_existing_seam_regressions_replayed": false,
+    "real_gap_a_row_proof_created": false,
+    "acceptance_authority": false,
+    "promotion_authority": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "row_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
