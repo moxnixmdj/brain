@@ -84,5 +84,3 @@ class AgentV13ClaimBoundIdentityTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
-
-# TB-Science diagnostic trigger: baseline V13 verifier only.
