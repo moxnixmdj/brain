@@ -32,7 +32,7 @@
     "primary_entrypoint": "plan_current_post_composition_frontier",
     "scalar_fallback_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
     "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V15__PROFESSIONAL_24_OF_24__CHECKPOINT_ROWS_ALL_WAKE_GATED__GITHUB_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__0_SAME_INFORMATION_CHECKPOINT_RUNS__CAPABILITY_FIRST_PRIMARY__ZERO_GLOBAL_CREDIT",
-    "observed_git_blob_sha": "151889277e6b24cade1a8a535580315e863abb47",
+    "observed_git_blob_sha": "c60e54fca9ffd3650ec28e187833e7f3f32e80e5",
     "semantic_reuse_policy": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V4.json",
     "semantic_reuse_policy_git_blob_sha": "f08fd90474aa38f89db171c70e10a6d47e6d7ec5",
     "verified_improvement_loop": "canonical/governance/VERIFIED_IMPROVEMENT_LOOP_V2_ACTIVATION_20261011_V1.json",
@@ -58,7 +58,7 @@
   },
   "current_parallel_frontier_control": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "observed_git_blob_sha": "ec8e08d3cc13c26e835602f99f9e13088a1c7c05",
+    "observed_git_blob_sha": "d80686bc49124f74af7cc50e0ddba5f3f5279cc0",
     "status": "CURRENT_PROFESSIONAL_24_OF_24__FULL_PRIVATE_REGRESSION_GATE_OPEN__GITHUB_HOSTED_ACTIONS_BILLING_OR_SPENDING_LIMIT_PRESTART_BLOCK__12_CHECKPOINT_ROWS_WAKE_GATED__CAPABILITY_FIRST_AND_RESOURCE_PARETO_WORK_PRIMARY__ZERO_CREDIT",
     "binding": "MUTABLE_CURRENT_PATH_IDENTITY__SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_PROJECTIONS_REFRESHED_AT_CALL_TIME__OTHER_SOURCE_DRIFT_FAILS_CLOSED",
     "snapshot_is_runtime_authority_for_supported_dynamic_families": false
@@ -265,7 +265,7 @@
   },
   "capability_frontier_currentness_reconciliation": {
     "path": "canonical/governance/CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1.json",
-    "observed_git_blob_sha": "0e613ef97f1601371396784710019b19ea4831b1",
+    "observed_git_blob_sha": "edd5b2d6a11237a376835c14b3f437288d2f1df2",
     "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__ESCAPE_WAKE_GATED__BYTES_V74_READY__R2_V91_WAKE_GATED__TB_CURRENT_PATH_DYNAMIC__ZERO_CREDIT",
     "next": "RERANK_EXACT_V73_USING_SPENT_NEXT80_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_SPENDING_FROZEN_NEXT81__CONTINUE_OTHER_CAPABILITY_FIRST_GENERAL_DEVELOPMENT__DO_NOT_RUN_SAME_INFORMATION_CHECKPOINT_WORK"
   },
