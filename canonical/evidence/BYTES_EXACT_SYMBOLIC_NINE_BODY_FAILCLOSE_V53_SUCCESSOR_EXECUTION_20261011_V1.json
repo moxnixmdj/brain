@@ -1,0 +1,132 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_NINE_BODY_FAILCLOSE_V53_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__SOURCE_LOCKED_NINE_BODY_FAILCLOSE_TRANSPLANT__SPENT_NEXT58_AND_FRESH_NEXT59_PASS__CLEAN_ARCHIVE_NEXT59_PASS__NEXT60_FROZEN_DURABLE__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "source_lock": {
+    "canonical_base_commit": "3ec2d6cac56c4c8f049940ffa592b56fa53baaec",
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MPF_POW_INT_V52_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "5cfdaf054fafabd04894396739defc82fed40ec3aba24b2f1b06030421b9c62f"
+  },
+  "subject": {
+    "transform": "canonical/research/bytes/tools/conservative_mpmath_nine_body_failclose_prune_v53.py",
+    "transform_git_blob_sha": "99ee2514c9ba8edd4af456171618868299fa7223",
+    "manifest_sha256": "ae9187bc15193fe340e77a88d9d400f51ec798dec638ac435aca1f2862c14cfe",
+    "python_files": 277,
+    "raw_python_source_bytes": 1715881,
+    "B_exec_raw_python_source_bytes": 1718641,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v52_bytes": -1946,
+    "B_exec_delta_vs_v52_bytes": -1946
+  },
+  "reuse_first_discovery": {
+    "donor_library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V52_SUCCESSOR_20261011_V1.tar(2).xz",
+    "donor_library_file_id": "libfile_fd63aef9f29c81919500b3a876694928",
+    "donor_file_id": "file_00000000a1508210b120909c8e7e5d39",
+    "donor_archive_sha256": "73fb6f2e5818ca107894ce84c605b482eb5db0a0536d9c59f9b2a5b73d2a4498",
+    "donor_role": "NONCANONICAL_SIBLING_CANDIDATE_USED_ONLY_AS_EFFECT_DISTINGUISHING_REUSE_SPECIMEN",
+    "transplant_rule": "COPY_ONLY_NONOVERLAPPING_FUNCTION_BODY_FAIL_CLOSE_DELTAS_ONTO_CANONICAL_V52__PRESERVE_CANONICAL_MPF_POW_INT_V52_SPECIALIZATION__REVERIFY_COMBINED_SUBJECT",
+    "raw_sibling_candidate_next58": "15180/15180",
+    "raw_physical_cut_falsification": {
+      "corpus": "QUAL_SUCCESSOR_NEXT58_20261011_V1",
+      "failing_global_case_index": 4116,
+      "operation": "roots",
+      "parameters": [
+        -2,
+        2,
+        -6,
+        -2,
+        -2
+      ],
+      "failure": "NotImplementedError: outside Brain bounded exact-symbolic contract",
+      "conclusion": "RAW_SIBLING_PHYSICAL_CUT_REJECTED__REPAIR_REQUIRED"
+    }
+  },
+  "selection": {
+    "id": "MPMATH_NINE_BODY_FAILCLOSE_TRANSPLANT_V53",
+    "changed_body_count": 9,
+    "bodies": [
+      "mpmath/ctx_mp_python.py::_mpc.__eq__",
+      "mpmath/ctx_mp_python.py::_mpc.__new__",
+      "mpmath/ctx_mp_python.py::_mpc.__rmul__",
+      "mpmath/ctx_mp_python.py::_mpf.__rdiv__",
+      "mpmath/ctx_mp_python.py::_mpf.__rsub__",
+      "mpmath/libmp/libmpf.py::gmpy_mpf_mul_int",
+      "mpmath/libmp/libmpf.py::python_mpf_mul_int",
+      "mpmath/libmp/libmpf.py::str_to_man_exp",
+      "mpmath/libmp/libmpf.py::strict_normalize1"
+    ],
+    "saved_raw_python_bytes": 1946,
+    "exact_base_guard": true,
+    "exact_target_guard": true,
+    "nonoverlap_with_v52_mpf_pow_int_specialization": true
+  },
+  "qualification": {
+    "spent_NEXT58": {
+      "id": "QUAL_SUCCESSOR_NEXT58_20261011_V1",
+      "cases": 15180,
+      "corpus_sha256": "fd7a32a07356c87a18e884f851320fd5d87dc316ca2436a4191275e5f3f57e0c",
+      "candidate": "15180/15180",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT59": {
+      "id": "QUAL_SUCCESSOR_NEXT59_20261011_V1",
+      "cases": 15410,
+      "seed": 1601787694,
+      "corpus_sha256": "5c7cf733614d58648dbe4fbfc855e7451651c652555eb895fcdcef39df780c92",
+      "durable_library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT59_20261011_V1_CANONICAL(1).jsonl",
+      "durable_library_file_id": "libfile_2cacdd182fc8819182fabb0cf83dbfe9",
+      "durable_file_id": "file_00000000be8c8210951515da1f2e93f3",
+      "candidate": "15410/15410",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "v52_to_v53_transform_target_manifest_exact": true,
+    "clean_reconstruction_identity": "278/278",
+    "sealed_archive_files": 278,
+    "sealed_archive_bytes": 267912,
+    "sealed_archive_sha256": "eda3b3278cb295976c8d05264f8c31170dc7332d608ebec2bd6bb2e8dfe79073",
+    "clean_archive_second_execution_carrier_NEXT59": "15410/15410",
+    "external_organizational_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V53_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_a4f7c8b0fc288191a0ecb93265b4ec46",
+    "file_id": "file_000000005af88210a987aa05a997b433",
+    "persistence_status": "PERSISTED",
+    "bytes": 267912,
+    "sha256": "eda3b3278cb295976c8d05264f8c31170dc7332d608ebec2bd6bb2e8dfe79073"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT60_20261011_V1",
+    "cases": 15640,
+    "seed": 1044270352,
+    "seed_derivation": "FIRST_32_BITS_BIG_ENDIAN_SHA256_OF_QUAL_ID_PIPE_V53_MANIFEST_IDENTITY",
+    "per_operation_budget": 1360,
+    "corpus_sha256": "f2d40bb97ade73179631aac6c94134eeab9fc529889bfabe75e01dd2dadfbc99",
+    "generated_bytes": 1848168,
+    "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0_EXACT_ROUTE_EXPECTED_OUTPUTS__DETERMINISTIC_PARAMETER_STREAM",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT60_20261011_V1(2).jsonl",
+    "library_file_id": "libfile_ef7b3652581c819188d30268264cb2e9",
+    "file_id": "file_00000000f7ac82109d6413f85de7ce2a",
+    "status": "FROZEN_UNSPENT__DURABLY_PERSISTED__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: exact V53 raw Python bytes are 1,715,881, 1,946 bytes below canonical V52.",
+    "MEASURED: complete spent NEXT58 passes exact V53 15,180/15,180.",
+    "MEASURED: previously frozen NEXT59 was regenerated byte-identically to its canonical bound hash and passes exact V53 15,410/15,410.",
+    "MEASURED: a clean archive extraction is 278/278 byte-identical and independently replays NEXT59 15,410/15,410.",
+    "MEASURED: NEXT60 is durably frozen unspent at 15,640 cases.",
+    "NOT PROVED: universal mpmath equivalence outside the bounded exact-symbolic route.",
+    "NOT CLAIMED: external organizationally independent second carrier.",
+    "NOT PROMOTED: zero capability, acceptance, professional-quality, promotion, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
