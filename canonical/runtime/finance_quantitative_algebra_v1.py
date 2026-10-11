@@ -261,6 +261,47 @@ def same_rank_order(a: Mapping[str, object], b: Mapping[str, object]) -> bool:
     return rank_desc(a) == rank_desc(b)
 
 
+
+def signed_direction(value: object) -> str:
+    x = decimal(value)
+    if x > 0:
+        return "POSITIVE"
+    if x < 0:
+        return "NEGATIVE"
+    return "FLAT"
+
+
+def market_sentiment_from_return(return_percent: object) -> str:
+    """Deterministic benchmark-compatible sign interpretation only."""
+    direction = signed_direction(return_percent)
+    if direction == "POSITIVE":
+        return "POSITIVE"
+    if direction == "NEGATIVE":
+        return "NEGATIVE"
+    return "NEUTRAL"
+
+
+def conservative_guidance_dominance(
+    a_beat_miss_percents: Sequence[object],
+    b_beat_miss_percents: Sequence[object],
+) -> str:
+    """Return the unambiguous more-conservative guidance series, else AMBIGUOUS.
+
+    Higher actual-vs-guidance beat/miss percentages mean actual results exceeded
+    guidance by more. We claim dominance only when every observation in one
+    series is strictly above every observation in the other series.
+    """
+    if not a_beat_miss_percents or not b_beat_miss_percents:
+        raise FinanceAlgebraError("GUIDANCE_SERIES_EMPTY")
+    a = [decimal(x) for x in a_beat_miss_percents]
+    b = [decimal(x) for x in b_beat_miss_percents]
+    if min(a) > max(b):
+        return "A"
+    if min(b) > max(a):
+        return "B"
+    return "AMBIGUOUS"
+
+
 __all__ = [
     "FinanceAlgebraError",
     "adjusted_ebitda",
@@ -270,6 +311,7 @@ __all__ = [
     "basis_points_from_percent_delta",
     "beat_miss_percent",
     "cagr",
+    "conservative_guidance_dominance",
     "days_inventory_outstanding",
     "dcf_enterprise_value",
     "debt_to_equity",
@@ -281,6 +323,7 @@ __all__ = [
     "ev_to_ebitda",
     "fixed_charge_coverage_ratio",
     "intensity",
+    "market_sentiment_from_return",
     "midpoint",
     "moic",
     "percent_change",
@@ -290,6 +333,7 @@ __all__ = [
     "rank_desc",
     "ratio",
     "same_rank_order",
+    "signed_direction",
     "simple_hold_period_irr_percent",
     "terminal_value_exit_multiple",
     "terminal_value_perpetual_growth",
