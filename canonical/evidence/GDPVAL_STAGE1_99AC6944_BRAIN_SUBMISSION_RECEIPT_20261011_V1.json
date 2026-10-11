@@ -1,0 +1,58 @@
+{
+  "schema":"PROJECT_BRAIN_GDPVAL_STAGE1_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date":"2026-10-11",
+  "status":"PASS__FRESH_CROSS_DOMAIN_AUDIO_PDF_SUBMISSION_FROZEN__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark":"GDPval-AA v2.1",
+  "stage":1,
+  "subject":{"row_idx":10,"task_id":"99ac6944-4ec6-4848-959c-a460ac705c6f","sector":"Information","occupation":"Audio and Video Technicians"},
+  "precommit":"canonical/governance/GDPVAL_STAGE1_FRESH_BATCH_PRECOMMIT_20261011_V2.json",
+  "preoutput_contract":"canonical/governance/GDPVAL_ROW10_LOSSLESS_PREOUTPUT_ACCEPTANCE_LEDGER_20261011_V1.json",
+  "lossless_contract":{"task_sha256":"57045d82594fadde9dcc15eed8a2b4ba8411d243f59095db8df01ab35a2846a4","task_contract_sha256":"1772b7c8c8527457175a3678dcd8cce1ec82660c599b45d2aa05cf32ee60a19b","raw_obligation_count":21},
+  "freshness":{
+    "task_id_frozen_before_prompt_read":true,
+    "public_rubric_read_before_output_freeze":false,
+    "human_gold_deliverables_read_before_output_freeze":false,
+    "third_party_model_submissions_read_before_output_freeze":false,
+    "judge_feedback_read_before_output_freeze":false
+  },
+  "design":{
+    "iem":"Shure PSM300 Twin Pack Pro P3TRA215TWP",
+    "mixer":"Yamaha MG16XU",
+    "independent_vocal_mix_count":2,
+    "total_estimated_cost_usd":2822.57,
+    "budget_usd":3000,
+    "headroom_usd":177.43,
+    "existing_helical_antennas_excluded":true
+  },
+  "primary_deliverable":{
+    "format":"pdf",
+    "filename":"GDPval_99ac6944_mobile_IEM_setup.pdf",
+    "sha256":"80203408c8806803914074d295b22142aec818f19bb124f2954611e5992314d6",
+    "library_file_id":"libfile_2c2d837458e081918af79e7f0d2982a3",
+    "rendered_page_count":4,
+    "visual_inspection":"PASS__NO_CLIPPING_OVERLAP_OR_BROKEN_LAYOUT",
+    "last_page_is_excel_cost_analysis_png":true,
+    "retailer_link_annotations":3
+  },
+  "supporting_artifacts":[
+    {"format":"xlsx","filename":"GDPval_99ac6944_IEM_cost_analysis.xlsx","sha256":"d1fc54f238be0164b0d689276f4101d7bd33fa9e63bfea1e8eb77d33b3a78522","library_file_id":"libfile_f872c7029d6881918a2521c0fd14d0ba","formula_error_scan":"PASS_ZERO_ERRORS"},
+    {"format":"png","filename":"GDPval_99ac6944_IEM_cost_analysis.png","sha256":"6a013a0647b086fb574669ab86c7e2e5b6b182489282896fdd78c2198ef36fe9","library_file_id":"libfile_f7b78d5324f88191a2dbc2378952ca73"},
+    {"format":"png","filename":"GDPval_99ac6944_IEM_signal_flow.png","sha256":"2c30be56621524f38313a93315d1af6ec604be9634bbd7c40c4f3155eac61699","library_file_id":"libfile_65faf52935b08191b1ed22938c4add81"}
+  ],
+  "pre_output_obligation_check":{
+    "two_iem_bodypacks":true,
+    "analog_mixing_board":true,
+    "onboard_compression":true,
+    "onboard_reverb_delay":true,
+    "two_independent_vocal_only_iem_mixes":true,
+    "portable_surface":true,
+    "existing_helical_antennas_not_purchased":true,
+    "retailer_links_for_core_gear":true,
+    "full_cables_accessories_tools_list":true,
+    "signal_flow_png_embedded":true,
+    "excel_cost_analysis_png_is_last_pdf_page":true,
+    "estimated_cost_strictly_under_3000":true
+  },
+  "hard_nonclaims":["NO_ARTIFICIAL_ANALYSIS_OWNER_SCORE","NO_GDPVAL_1846_CLOSURE","NO_FULL_220_SUBMISSION_MANIFEST"],
+  "accounting":{"incremental_spend_usd":0,"acceptance_credit_delta":0,"terminal_credit_delta":0}
+}
