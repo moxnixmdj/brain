@@ -24,18 +24,60 @@
     "brain_terminal_cases_consumed": 0
   },
   "current_bottleneck": {
-    "prior_consumed_public_retrieval_recall": 0.52,
-    "issue": "SOURCE_HEALTH_AND_RETRIEVAL_RECALL",
-    "repaired_mechanism": "ANSWER_BLIND_SEQUENTIAL_MULTI_BACKEND_OPEN_WEB_FALLBACK_WITH_EXPLICIT_BACKEND_HEALTH",
-    "runtime_blob": "f03db468c1b9a1d5425d1eaf49966e6c8484819a",
-    "tests_blob": "5e64895795f39e4a50e53664167dd0e3ec3bc3c4",
-    "local_tests": "4/4 PASS",
-    "independent_replay": "NOT_YET_OBSERVED"
+    "prior_consumed_public_retrieval_recall": 0.6,
+    "prior_consumed_public_rich_search_recall": 0.52,
+    "baseline_evidence": {
+      "workflow_run_id": 38145869751,
+      "workflow_job_id": 114488966687,
+      "sample_size": 25,
+      "hits": 15,
+      "hit_rows": [
+        25,
+        26,
+        28,
+        29,
+        30,
+        31,
+        33,
+        34,
+        35,
+        40,
+        42,
+        46,
+        47,
+        48,
+        49
+      ],
+      "miss_rows": [
+        27,
+        32,
+        36,
+        37,
+        38,
+        39,
+        41,
+        43,
+        44,
+        45
+      ]
+    },
+    "source_health": {
+      "workflow_run_id": 38145869850,
+      "bing_nonempty_rate": 1,
+      "wikipedia_concurrent_nonempty_rate": 0.08849557522123894,
+      "wikipedia_sequential_nonempty_rate": 0
+    },
+    "issue": "RETRIEVAL_RECALL_AND_SOURCE_DIVERSITY",
+    "repaired_mechanism": "ANSWER_BLIND_DIVERSITY_PRESERVING_BING_DDG_CROSSREF_FALLBACK_WITH_HLE_BLOCKLIST",
+    "runtime_blob": "3d320fcb8899d1fe6d380bf1b4663a77b8f8833c",
+    "tests_blob": "19971c8ecce3d78b1f782376bd8347dfcd6b9c8b",
+    "independent_replay": "12/12 PASS",
+    "next_action": "RUN_ONLY_ALREADY_CONSUMED_ROWS_25_TO_49_TO_MEASURE_INCREMENTAL_RECALL_ON_THE_TEN_PRIOR_MISS_ROWS"
   },
   "next_admissible_actions": [
-    "INDEPENDENTLY_REPLAY_EXACT_RUNTIME_AND_TEST_BLOBS_AT_ZERO_INCREMENTAL_SPEND",
-    "IF_PASS_RUN_ONLY_ALREADY_CONSUMED_TRIVIA_QA_ROWS_25_TO_49_TO_MEASURE_RETRIEVAL_RECALL_AND_BACKEND_HEALTH",
-    "PROMOTE_ONLY_IF_CAUSAL_IMPROVEMENT_IS_OBSERVED",
+    "RUN_DIVERSITY_FALLBACK_ON_ALREADY_CONSUMED_TRIVIA_QA_ROWS_25_TO_49_WITH_GOLD_ABSENT",
+    "SCORE_ONLY_AFTER_TRACE_SEAL_AND_MEASURE_NEW_HITS_ON_PRIOR_MISS_ROWS",
+    "PROMOTE_ONLY_IF_INCREMENTAL_RECALL_OR_SOURCE_RESILIENCE_IS_OBSERVED",
     "DO_NOT_CONSUME_FRESH_HLE_FOR_DEVELOPMENT"
   ],
   "hard_nonclaims": [
