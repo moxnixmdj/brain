@@ -32,7 +32,7 @@
     "primary_entrypoint": "plan_current_post_composition_frontier",
     "scalar_fallback_runtime": "canonical/runtime/capability_first_live_scheduler_v1.py",
     "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V15__PROFESSIONAL_24_OF_24__CHECKPOINT_ROWS_ALL_WAKE_GATED__GITHUB_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__0_SAME_INFORMATION_CHECKPOINT_RUNS__CAPABILITY_FIRST_PRIMARY__ZERO_GLOBAL_CREDIT",
-    "observed_git_blob_sha": "b0d4e75a5a2f784080ad09fd8fe51ee30223008a",
+    "observed_git_blob_sha": "fefe8a9759a93bf9b7253b54760cce22978fe037",
     "semantic_reuse_policy": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V4.json",
     "semantic_reuse_policy_git_blob_sha": "f08fd90474aa38f89db171c70e10a6d47e6d7ec5",
     "verified_improvement_loop": "canonical/governance/VERIFIED_IMPROVEMENT_LOOP_V2_ACTIVATION_20261011_V1.json",
@@ -58,7 +58,7 @@
   },
   "current_parallel_frontier_control": {
     "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
-    "observed_git_blob_sha": "5d562f020fceffda8bf1b60f7b4cf591d9fd19c2",
+    "observed_git_blob_sha": "b28c195d365f079f9bffd43f36d2d7a4ecc42814",
     "status": "PROFESSIONAL_24_OF_24__HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__12_CHECKPOINT_ROWS_WAKE_GATED__0_SAME_INFORMATION_CHECKPOINT_RUNS__CAPABILITY_FIRST_AND_RESOURCE_PARETO_WORK_PRIMARY__ZERO_TERMINAL_CREDIT",
     "binding": "MUTABLE_CURRENT_PATH_IDENTITY__SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_PROJECTIONS_REFRESHED_AT_CALL_TIME__OTHER_SOURCE_DRIFT_FAILS_CLOSED",
     "snapshot_is_runtime_authority_for_supported_dynamic_families": false
@@ -245,12 +245,13 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "bd8ba8200c5bc59ee9b1bcc76f1f0abaf35bf806",
-    "status": "ACTIVE_RESEARCH__MPMATH_PERIPHERAL_V50_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1720680,
-    "B_exec_raw_python_source_bytes": 1727824,
-    "qualification": "14490/14490",
-    "next": "Rerank exact V50 using spent NEXT56 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT57_20261011_V1.",
+    "observed_git_blob_sha": "46f0274dfb44b09a7b6ecd149f69f702ecaa3c4b",
+    "status": "ACTIVE_RESEARCH__MPC_POW_INT_V51_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1719563,
+    "B_exec_raw_python_source_bytes": 1722323,
+    "qualification": "14950/14950",
+    "next": "Rerank exact V51 using spent NEXT57 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT58_20261011_V1.",
+    "independent_verification_path": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPC_POW_INT_V51_INDEPENDENT_VERIFY_20261011_V1.json",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   },
@@ -265,9 +266,9 @@
   },
   "capability_frontier_currentness_reconciliation": {
     "path": "canonical/governance/CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1.json",
-    "observed_git_blob_sha": "75b98646de035abe707180acc6f53d8868700e20",
-    "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__ESCAPE_12_WAKE_GATED__BYTES_V50__R2_V91_WAKE_GATED__TB_PARKED__ZERO_CREDIT",
-    "next": "NO_SAME_INFORMATION_CHECKPOINT_RUNS__DO_NOT_REOPEN_PROFESSIONAL_PROPERTY_TRUTH__WAKE_REGRESSION_ONLY_ON_ZERO_SPEND_CARRIER_STATE_CHANGE__PRIMARY_CAPACITY_TO_CAPABILITY_FIRST_GENERAL_DEVELOPMENT_AND_BYTES_V50_RESOURCE_PARETO_WORK"
+    "observed_git_blob_sha": "6efac84fce0131ec5fda98194970831469d6095f",
+    "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__ESCAPE_12_WAKE_GATED__BYTES_V51__R2_V91_WAKE_GATED__TB_PARKED__ZERO_CREDIT",
+    "next": "NO_SAME_INFORMATION_CHECKPOINT_RUNS__DO_NOT_REOPEN_PROFESSIONAL_PROPERTY_TRUTH__WAKE_REGRESSION_ONLY_ON_ZERO_SPEND_CARRIER_STATE_CHANGE__PRIMARY_CAPACITY_TO_CAPABILITY_FIRST_GENERAL_DEVELOPMENT_AND_BYTES_V51_RESOURCE_PARETO_WORK"
   },
   "professional_regression_carrier_diagnosis": {
     "path": "canonical/verification/FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V3.json",
