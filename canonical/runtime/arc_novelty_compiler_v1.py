@@ -1793,6 +1793,22 @@ def compile_hypotheses(
         if _consistent(h, pairs):
             candidates.append(h)
 
+    square_labels = _infer_top_k_square_labels(pairs)
+    if square_labels is not None:
+        width, mapping = square_labels
+        h = {
+            "kind": "TOP_K_SQUARE_COMPONENT_LABELS",
+            "width": width,
+            "mapping": {str(k): v for k, v in sorted(mapping.items())},
+        }
+        if _consistent(h, pairs):
+            candidates.append(h)
+
+    for kind in ("BRIDGE_COMPONENT_SCALAR", "EXTEND_COLUMNS_DOWN"):
+        h = {"kind": kind}
+        if _consistent(h, pairs):
+            candidates.append(h)
+
     crop = {"kind": "CROP_NON_BACKGROUND"}
     if _consistent(crop, pairs):
         candidates.append(crop)
@@ -1868,6 +1884,9 @@ def compile_hypotheses(
             "UNIQUE_ENCLOSURE_COLOR_SELECTION",
             "ANOMALY_DENSE_REGION_SELECTION",
             "PERIODIC_MISSING_PATCH_RECONSTRUCTION",
+            "TOP_K_SQUARE_COMPONENT_LABEL_REDUCTION",
+            "BRIDGE_COMPONENT_RELATION_CLASSIFICATION",
+            "DOWNWARD_COLUMN_EXTENSION",
             "NON_BACKGROUND_BOUNDING_BOX_CROP",
             "UNIQUE_LARGEST_OR_SMALLEST_COMPONENT_CROP",
         ],
