@@ -60,6 +60,11 @@ class OwnershipPostconditionsTests(unittest.TestCase):
         self.assertEqual(out["counters"]["donor_dependent_required_behaviors"],0)
         self.assertEqual(out["counters"]["unresolved_verifier_mutations"],0)
         self.assertEqual(out["counters"]["unresolved_composition_failures"],0)
+        self.assertTrue(out["terminal_predicates"]["donor_deletion_protocol_v2_bound"])
+        self.assertTrue(out["terminal_predicates"]["runtime_cognition_model_independent"])
+        self.assertTrue(out["terminal_predicates"]["zero_external_model_runtime_cognition_dependencies"])
+        self.assertTrue(out["terminal_predicates"]["copied_or_rehosted_teacher_absent"])
+        self.assertTrue(out["terminal_predicates"]["runtime_dependency_inventory_complete"])
 
     def test_donor_result_drift_fails_closed(self):
         args=list(self.fixture())
