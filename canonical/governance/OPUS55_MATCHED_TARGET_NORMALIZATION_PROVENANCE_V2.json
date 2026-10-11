@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V2",
-  "date": "2026-10-02",
+  "date": "2026-10-11",
   "status": "CANDIDATE_PROVENANCE__13_TARGETS__62_ATOMS__13_METRICS__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
   "objective": "Bind every normalized atom and metric requirement for the 13 currently open matched/scope targets to exact frozen protocol or predicate literals after scope-completeness reopening.",
   "authority": {
@@ -10,7 +10,7 @@
     },
     "protocols": {
       "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
-      "git_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9"
+      "git_blob_sha": "f8b661abf7cb1b628aa14d966658394b80093879"
     },
     "predicate_registry": {
       "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
