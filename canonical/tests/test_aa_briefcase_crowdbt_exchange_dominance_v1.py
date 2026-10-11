@@ -13,6 +13,7 @@ def base():
         "no_unmatched_brain_or_opus_incident_comparisons": True,
         "comparison_roles_normalized_to_candidate_win": True,
         "brain_opus_symmetric_regularization": True,
+        "finite_global_mle_exists": True,
         "matched_comparisons": [
             {
                 "opponent": "Model-X",
@@ -47,6 +48,12 @@ class AACrowdBTExchangeDominanceV1Tests(unittest.TestCase):
         out = ex.verify_exchange_dominance(cert)
         self.assertTrue(out["brain_rating_strictly_greater_than_opus_in_same_bound_fit"])
         self.assertFalse(out["aa_briefcase_ge_1822_implied"])
+
+    def test_missing_finite_global_mle_rejected(self):
+        cert = base()
+        cert["finite_global_mle_exists"] = False
+        with self.assertRaisesRegex(ex.ExchangeError, "FINITE_GLOBAL_MLE_EXISTS_NOT_PROVED"):
+            ex.verify_exchange_dominance(cert)
 
     def test_brain_worse_row_rejected(self):
         cert = base()
