@@ -132,6 +132,18 @@ class GenericGoalToolEffectPlannerV1Tests(unittest.TestCase):
         self.assertEqual(out["mutation_endpoint_ids"], [])
         self.assertEqual(out["observation_endpoint_ids"], ["ledger.read"])
 
+    def test_status_is_not_mangled_by_singularizer(self):
+        p = profile_endpoint({
+            "id":"x.read",
+            "method":"GET",
+            "url":"https://x.invalid/orders",
+            "description":"Read order status analysis and shipments.",
+        })
+        self.assertIn("status", p["resource_terms"])
+        self.assertIn("analysis", p["resource_terms"])
+        self.assertIn("shipment", p["resource_terms"])
+        self.assertNotIn("statu", p["resource_terms"])
+
     def test_missing_required_effect_fails_closed(self):
         endpoints = [
             {
