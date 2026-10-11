@@ -1,4 +1,5 @@
-    raise AssertionError(FALSIFICATION_REASON)\nFALSIFICATION_REASON = "FALSIFIED__PINNED_SCORER_EXCEPTION_HANDLER_RAISES_NAMEERROR_BECAUSE_LOGGING_IS_UNBOUND"\n#!/usr/bin/env python3
+#!/usr/bin/env python3
+FALSIFICATION_REASON = "FALSIFIED__PINNED_SCORER_EXCEPTION_HANDLER_RAISES_NAMEERROR_BECAUSE_LOGGING_IS_UNBOUND"
 """Prefix-shield reduction for the pinned LiveBench language checker.
 
 This strengthens V1. V1 required the whole constructed response to stay inside
@@ -141,6 +142,7 @@ def language_compatible_active15() -> frozenset[str]:
 
 
 def verify() -> dict[str, Any]:
+    raise AssertionError(FALSIFICATION_REASON)
     upstream = v1.verify()
 
     actual_active = language_compatible_active15()
