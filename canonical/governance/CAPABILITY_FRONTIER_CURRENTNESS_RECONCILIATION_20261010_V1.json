@@ -1,15 +1,15 @@
 {
   "schema": "PROJECT_BRAIN_CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1",
   "date": "2026-10-10",
-  "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_12_OF_24__ALL_12_EXECUTION_LEAVES_CLOSED__TWELVE_SEMANTIC_TOTALITY_REUSE__BYTES_V32__R2_V87_WAKE_GATED__TB_PARKED__ZERO_CREDIT",
+  "status": "CURRENTNESS_RECONCILED__PROFESSIONAL_24_OF_24__EXECUTION_12_OF_12__SEMANTIC_12_OF_12__REGRESSION_CARRIER_WAKE_GATED__ESCAPE_12_ACTIVE_ACQUISITION__BYTES_V32__R2_V87_WAKE_GATED__TB_PARKED__ZERO_CREDIT",
   "sources": {
     "professional": {
       "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-      "git_blob_sha": "baa5e04e066b98838cb610ea1fad941c713ca57a"
+      "git_blob_sha": "219fcd3aab318bde5d64e955a430ea7e60d7bf8e"
     },
     "assurance": {
       "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
-      "git_blob_sha": "df8f3bb7cf92df516c896c783bbf41fa5cc5f1c0"
+      "git_blob_sha": "27acc7e80c0b85a778b8f8dbbd77aefe312ceef8"
     },
     "bytes": {
       "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
@@ -17,7 +17,7 @@
     },
     "r2": {
       "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-      "git_blob_sha": "ee03f3fe71383d1bf12e0797bf568e6b5eeeaca4"
+      "git_blob_sha": "91a2000e0972bc5ce4c03f9a2dcaed13a822ad58"
     },
     "tb_science": {
       "path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
@@ -30,13 +30,13 @@
   },
   "frontier": {
     "primary_ready": [
-      "PROFESSIONAL_TWELVE_SEMANTIC_CLAIM_SCOPED_TOTALITY_REUSE"
+      "ESCAPE_12_ACTIVE_ACQUISITION_ROW_PROOF_INSTANTIATION_REUSE"
     ],
     "safe_parallel_ready": [
       "BYTES_V32_RESOURCE_PARETO_CUT"
     ],
     "blocked": [
-      "ASSURANCE_PROMOTION_UNTIL_PROFESSIONAL_AND_FULL_CURRENT_MAIN_REGRESSION"
+      "ASSURANCE_UVCK_V2_PROMOTION_UNTIL_REAL_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_EXECUTES_AND_PASSES"
     ],
     "sleeping": [
       "R2_FINANCE_SEMANTIC_ADEQUACY_TAIL_UNTIL_TASK_LOCAL_COUNTEREXAMPLE_OR_VERIFIED_DEFECT"
@@ -47,9 +47,14 @@
   },
   "professional": {
     "scope_complete": 24,
-    "property_truth_closed": 12,
+    "property_truth_closed": 24,
     "open_execution_leaf_ids": [],
-    "semantic_totality_reuse_leaf_count": 12
+    "semantic_totality_reuse_leaf_count": 0,
+    "verified_execution_leaf_count": 12,
+    "verified_semantic_leaf_count": 12,
+    "open_semantic_leaf_count": 0,
+    "regression_gate_open": true,
+    "regression_carrier_wake_gated": true
   },
   "authority": {
     "planning": true,
@@ -58,7 +63,7 @@
     "acceptance": false,
     "terminal": false
   },
-  "next": "INSTANTIATE_CURRENT_MISSION_BOUND_SHARED_SEMANTIC_TOTALITY_PROOFS__PARALLELIZE_NONCONFLICTING_RESOURCE_WORK__RUN_FULL_CURRENT_MAIN_REGRESSION__THEN_REEVALUATE_PROMOTION",
+  "next": "INSTANTIATE_EXISTING_AUTHENTICATED_POLICY_COVER_AND_ROW_PROOF_MACHINERY_FOR_12_ACTIVE_ESCAPE_ACQUISITION_ROWS__DO_NOT_REOPEN_24_OF_24_PROFESSIONAL_PROPERTY_TRUTH__WAKE_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_ONLY_ON_REAL_CARRIER_STATE_CHANGE__PARALLELIZE_NONCONFLICTING_BYTES_RESOURCE_WORK",
   "acceptance_credit_delta": 0,
   "capability_credit_delta": 0,
   "terminal_credit_delta": 0
