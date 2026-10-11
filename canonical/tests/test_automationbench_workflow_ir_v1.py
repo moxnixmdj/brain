@@ -75,6 +75,23 @@ class AutomationBenchWorkflowIRV1Tests(unittest.TestCase):
         self.assertTrue(msg["grounding_complete"])
         self.assertEqual(msg["content_literal"], "Reconciliation complete")
 
+    def test_quoted_worksheet_name_is_not_message_content(self):
+        out = compile_workflow_ir(
+            "Email ops@example.com with data from worksheet 'Pending Invoices'."
+        )
+        msg = out["communications"][0]
+        self.assertIsNone(msg["content_literal"])
+        self.assertFalse(msg["grounding_complete"])
+
+    def test_explicit_subject_is_separate_from_message_body(self):
+        out = compile_workflow_ir(
+            "Email ops@example.com with the message 'Ready' subject 'Daily Status'."
+        )
+        msg = out["communications"][0]
+        self.assertEqual(msg["content_literal"], "Ready")
+        self.assertEqual(msg["subject"], "Daily Status")
+        self.assertTrue(msg["grounding_complete"])
+
     def test_rubric_and_private_information_are_never_inputs(self):
         out = compile_workflow_ir("Create a task and notify #ops with 'done'.")
         self.assertFalse(out["private_task_information_used"])
