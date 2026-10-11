@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_NATIVE_OPEN_WEB_FALLBACK_INDEPENDENT_VERIFY_20261011_V2",
+  "date": "2026-10-11",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__DIVERSITY_AND_HLE_BLOCKLIST_REPAIRED__TWELVE_OF_TWELVE",
+  "supersedes_for_current_runtime": "HLE_NATIVE_OPEN_WEB_FALLBACK_INDEPENDENT_VERIFY_20261011_V1",
+  "subject": {
+    "runtime_path": "canonical/runtime/hle_native_open_web_fallback_v1.py",
+    "runtime_blob": "3d320fcb8899d1fe6d380bf1b4663a77b8f8833c",
+    "tests_path": "canonical/tests/test_hle_native_open_web_fallback_v1.py",
+    "tests_blob": "19971c8ecce3d78b1f782376bd8347dfcd6b9c8b",
+    "open_web_discovery_blob": "81f73bca882d35603e5be43e8c40dd57e73ffce0",
+    "hle_tool_adapter_blob": "fa955ccc5e4f3d29aa79e2b380f713d30ee46e8f",
+    "hle_policy_blob": "d2a2427b483fe1c06c6b1e6bc98d72bf07e7a730",
+    "independent_tests_blob": "34b62b2b44e9865b976bdc5eda2583db64fd1888"
+  },
+  "independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify-hle-open-web-fallback-v2-20261011-v1",
+    "head_sha": "5898fbfa9806d50d3198c9f8462fb823a5fba8d6",
+    "workflow_run_id": 38154950128,
+    "workflow_job_id": 114515900107,
+    "conclusion": "success"
+  },
+  "verified": {
+    "exact_blob_binding": true,
+    "candidate_tests": "6/6 PASS",
+    "independent_falsification": "6/6 PASS",
+    "total_tests": "12/12 PASS",
+    "backend_diversity_before_truncation": true,
+    "hle_blocklist_before_candidate_admission": true,
+    "one_backend_failure_preserves_other_backends": true,
+    "known_hle_surface_blocked_by_actual_policy": true,
+    "authority_smuggling_overwritten": true,
+    "failed_discovery_retryable": true,
+    "static_safety_invariants": true
+  },
+  "protected_state": {
+    "hle_cases_consumed": 0,
+    "hle_gold_consumed": 0,
+    "external_model_calls": 0,
+    "benchmark_score_credit": 0
+  },
+  "hle_67_7_certified": false,
+  "incremental_spend_usd": 0
+}
