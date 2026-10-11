@@ -1,0 +1,32 @@
+{
+  "schema":"PROJECT_BRAIN_GDPVAL_STAGE1_ROW8_FRESH_PRECOMMIT_20261011_V1",
+  "date":"2026-10-11",
+  "status":"FROZEN_BEFORE_ROW8_PROMPT_REFERENCE_RUBRIC_OR_GOLD_READ__ZERO_SCORE_CREDIT",
+  "benchmark":"GDPval-AA v2.1",
+  "dataset":{
+    "owner":"openai",
+    "name":"gdpval",
+    "revision_sha":"11e7900cdcac61bc4daf59e65feb238acda98fbf",
+    "split":"train",
+    "row_idx":8,
+    "population_count":220
+  },
+  "execution_profile":{
+    "path":"canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+    "candidate_id":"OPUS55_PROFESSIONAL_KNOWLEDGE_WORK_STIRRUP_CONFIGURATION_V1",
+    "approved_cognition_surface":"CURRENT_CHATGPT_GPT_5_6_SOL_SESSION_OR_EQUIVALENT_ZERO_INCREMENTAL_BRAIN_APPROVED_SUBSTRATE",
+    "incremental_spend_usd":0
+  },
+  "field_firewall":{
+    "allowed_after_freeze":["task_id","sector","occupation","prompt","reference_files","reference_file_urls","reference_file_hf_uris"],
+    "forbidden_until_output_freeze":["deliverable_files","deliverable_file_urls","deliverable_file_hf_uris","rubric_pretty","rubric_json","third_party_model_submissions","judge_feedback"]
+  },
+  "hard_nonclaims":[
+    "ROW8_TASK_ID_NOT_READ_AT_FREEZE_TIME",
+    "ROW8_PROMPT_NOT_READ_AT_FREEZE_TIME",
+    "ROW8_REFERENCE_FILES_NOT_READ_AT_FREEZE_TIME",
+    "NO_ROW8_SUBMISSION_EXISTS",
+    "NO_GDPVAL_SCORE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ]
+}

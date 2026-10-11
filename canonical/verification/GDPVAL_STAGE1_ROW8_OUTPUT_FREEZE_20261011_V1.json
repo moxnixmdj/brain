@@ -1,0 +1,38 @@
+{
+  "schema":"PROJECT_BRAIN_GDPVAL_STAGE1_ROW8_OUTPUT_FREEZE_20261011_V1",
+  "date":"2026-10-11",
+  "status":"OUTPUTS_FROZEN_BEFORE_RUBRIC_OR_GOLD_READ__ZERO_ELO_CREDIT",
+  "benchmark":"GDPval-AA v2.1",
+  "row_idx":8,
+  "task_id":"17111c03-aac7-45c2-857d-c06d8223d6ad",
+  "execution_profile":"canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+  "outputs":[
+    {
+      "role":"MEMO_PDF",
+      "name":"GDPval_17111c03_cleanup_memo.pdf",
+      "sha256":"5df1f0724cdf1a7850626edda52aef8aee2330513f0b204474b60bae1df74641",
+      "bytes":61237,
+      "render_page_count":1,
+      "visual_render_check":"PASS__ONE_PAGE__NO_CLIPPING_OR_OVERFLOW_OBSERVED"
+    },
+    {
+      "role":"ACCESSIBLE_EXCEL_SCHEDULE",
+      "name":"GDPval_17111c03_cleanup_schedule.xlsx",
+      "sha256":"56264b240ba27113d69d9d0728f0132bdd491284bf5069f94305c1aac38dd5a2",
+      "bytes":6240,
+      "schedule_rows":51,
+      "source_schedule_identity_preserved":true,
+      "formula_error_scan":"PASS__0_MATCHES",
+      "visual_render_check":"PASS__HEAD_AND_TAIL_RANGES_RENDERED_CLEANLY"
+    }
+  ],
+  "rubric_exposure_at_freeze":false,
+  "gold_deliverable_exposure_at_freeze":false,
+  "third_party_submission_exposure_at_freeze":false,
+  "hard_nonclaims":[
+    "NO_PUBLIC_RUBRIC_SCORE_YET",
+    "NO_ARTIFICIAL_ANALYSIS_PAIRWISE_SCORE",
+    "NO_MATCHED_EPOCH_ELO",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ]
+}

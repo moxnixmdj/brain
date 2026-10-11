@@ -1,0 +1,22 @@
+{
+  "schema":"PROJECT_BRAIN_GDPVAL_STAGE1_ROW20_OUTPUT_FREEZE_20261011_V1",
+  "date":"2026-10-11",
+  "status":"OUTPUT_FROZEN_BEFORE_RUBRIC_OR_GOLD_READ__ZERO_ELO_CREDIT",
+  "benchmark":"GDPval-AA v2.1",
+  "row_idx":20,
+  "task_id":"575f8679-b4c1-47a2-8e96-d570d4ed9269",
+  "precommit":"canonical/governance/GDPVAL_STAGE1_BATCH_ROWS9_24_FRESH_PRECOMMIT_20261011_V1.json",
+  "execution_profile":"canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+  "output":{
+    "role":"WORD_PROGRAM_EVALUATION_PLAN",
+    "name":"GDPval_575f8679_evaluation_plan.docx",
+    "sha256":"4d9041ef4efc15ef794c43214510cf7e0620089d8853a0b769f98fd7365037d5",
+    "bytes":42284,
+    "render_page_count":3,
+    "visual_render_check":"PASS__FRESH_EMPTY_RENDER_DIR__ALL_3_PAGES_INSPECTED__NO_CLIPPING_OR_OVERFLOW"
+  },
+  "rubric_exposure_at_freeze":false,
+  "gold_deliverable_exposure_at_freeze":false,
+  "third_party_submission_exposure_at_freeze":false,
+  "hard_nonclaims":["NO_PUBLIC_RUBRIC_SCORE_YET","NO_OWNER_PAIRWISE_SCORE","NO_MATCHED_EPOCH_ELO","NO_ACCEPTANCE_OR_TERMINAL_CREDIT"]
+}

@@ -1,0 +1,21 @@
+{
+  "schema":"PROJECT_BRAIN_GDPVAL_STAGE1_BATCH_ROWS9_24_FRESH_PRECOMMIT_20261011_V1",
+  "date":"2026-10-11",
+  "status":"FROZEN_BEFORE_PROMPT_REFERENCE_RUBRIC_OR_GOLD_READ__ZERO_SCORE_CREDIT",
+  "benchmark":"GDPval-AA v2.1",
+  "dataset":{
+    "owner":"openai",
+    "name":"gdpval",
+    "revision_sha":"11e7900cdcac61bc4daf59e65feb238acda98fbf",
+    "split":"train",
+    "population_count":220,
+    "row_indices":[9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
+  },
+  "execution_profile":"canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+  "field_firewall":{
+    "allowed_after_freeze":["task_id","sector","occupation","prompt","reference_files","reference_file_urls","reference_file_hf_uris"],
+    "forbidden_until_each_subject_output_freeze":["deliverable_files","deliverable_file_urls","deliverable_file_hf_uris","rubric_pretty","rubric_json","third_party_model_submissions","judge_feedback"]
+  },
+  "selection_law":"AFTER_ALLOWED_FIELD_REVEAL_PRIORITIZE_MINIMUM_WALL_CLOCK_SUBJECTS_THAT_INCREASE_ARTIFACT_AND_REASONING_BREADTH__NO_RUBRIC_OR_GOLD_LOOKAHEAD",
+  "hard_nonclaims":["NO_BATCH_PROMPTS_READ_AT_FREEZE_TIME","NO_BATCH_REFERENCE_FILES_READ_AT_FREEZE_TIME","NO_BATCH_OUTPUTS_EXIST","NO_GDPVAL_SCORE","NO_ACCEPTANCE_OR_TERMINAL_CREDIT"]
+}

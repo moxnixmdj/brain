@@ -1,0 +1,75 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_STAGE1_ROWS5_6_POSTFREEZE_PUBLIC_RUBRIC_VERIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__TWO_FRESH_STAGE1_OUTPUTS_POSTFREEZE_GRADED__ZERO_GDPVAL_ELO_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "execution_profile": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+  "contamination_boundary": {
+    "rubrics_revealed_only_after_output_freeze": true,
+    "rows_0_4": "SPENT_OR_EXCLUDED_BY_CURRENT_THREAD_CONTAMINATION_HISTORY",
+    "rows_5_6": "FRESH_AT_OUTPUT_FREEZE"
+  },
+  "subjects": [
+    {
+      "row_idx": 5,
+      "task_id": "f84ea6ac-8f9f-428c-b96c-d0884e30f7c7",
+      "artifact_class": "DOCX_RESEARCH_SUMMARY_TABLE",
+      "output_sha256": "a0b9b445c50394e43ea4c2b41cdcfb2b0ffa9212b5301dd5b82a44b8c94bf56a",
+      "output_bytes": 39738,
+      "render_page_count": 1,
+      "visual_render_check": "PASS__ONE_PAGE__NO_CLIPPING_OR_OVERFLOW_OBSERVED",
+      "public_rubric_positive_points_total": 58,
+      "public_rubric_points_supported": 56,
+      "public_rubric_points_not_supported": 2,
+      "public_rubric_penalty_points_triggered": 0,
+      "public_rubric_fraction": 0.9655172413793104,
+      "known_miss": [
+        "FORMAL_APA_CITATION_STYLE_NOT_FULLY_SATISFIED__AUTHOR_YEAR_TITLE_AND_OPEN_ACCESS_LOCATION_PRESENT_BUT_NOT_FULL_APA_REFERENCE_FORMAT"
+      ],
+      "evidence_boundary": "PUBLIC_HUMAN_RUBRIC_TASK_SCORE_ONLY__NOT_ARTIFICIAL_ANALYSIS_PAIRWISE_OWNER_SCORE"
+    },
+    {
+      "row_idx": 6,
+      "task_id": "a328feea-47db-4856-b4be-2bdc63dd88fb",
+      "artifact_class": "DOCX_POLICY_PROCEDURE",
+      "output_sha256": "984e2cc6eba30d3c1c233f3450292f52c9b29c7a537d7b5d32dff6e10d925fe3",
+      "output_bytes": 39741,
+      "render_page_count": 1,
+      "visual_render_check": "PASS__ONE_PAGE__NO_CLIPPING_OR_OVERFLOW_OBSERVED",
+      "public_rubric_points_total": 24,
+      "public_rubric_points_supported": 22,
+      "public_rubric_points_not_supported": 2,
+      "public_rubric_fraction": 0.9166666666666666,
+      "known_misses": [
+        "LATENESS_DEFINITION_DOES_NOT_EXPLICITLY_INCLUDE_WITHOUT_PRIOR_APPROVAL",
+        "UNSCHEDULED_ABSENCE_DEFINITION_DOES_NOT_EXPLICITLY_INCLUDE_FULL_OR_PARTIAL_DAY_AND_NOT_PREAPPROVED_BEFORE_SHIFT"
+      ],
+      "evidence_boundary": "PUBLIC_HUMAN_RUBRIC_TASK_SCORE_ONLY__NOT_ARTIFICIAL_ANALYSIS_PAIRWISE_OWNER_SCORE"
+    }
+  ],
+  "aggregate": {
+    "public_rubric_points_total": 82,
+    "public_rubric_points_supported": 78,
+    "public_rubric_fraction": 0.9512195121951219,
+    "tasks": 2
+  },
+  "proved": [
+    "CURRENT_BRAIN_PROFESSIONAL_WORK_PROFILE_CAN_COMPLETE_AT_LEAST_TWO_FRESH_PUBLIC_GDPVAL_TASKS_ACROSS_RESEARCH_SYNTHESIS_AND_POLICY_WRITING",
+    "BOTH_FROZEN_OUTPUTS_MEET_ONE_PAGE_WORD_DELIVERABLE_REQUIREMENTS",
+    "POSTFREEZE_PUBLIC_RUBRIC_INSPECTION_LOCALIZES_SMALL_EXPLICIT_DEFECTS_INSTEAD_OF_SYSTEMIC_FAILURE"
+  ],
+  "not_proved": [
+    "NO_COMPLETE_220_BRAIN_SUBMISSION_MANIFEST",
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_PAIRWISE_SCORE",
+    "NO_MATCHED_EPOCH_BRAIN_ELO",
+    "NO_PROOF_BRAIN_GDPVAL_GE_1846",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

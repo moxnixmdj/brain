@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_MATCHED_EPOCH_RECEIPT_GATE_BINDING_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__FAIL_CLOSED_MEASUREMENT_ACCEPTANCE_GATE__ZERO_CREDIT_PENDING_AUTHENTIC_SCORE_RECEIPT_AND_INDEPENDENT_REPLAY",
+  "target_predicate": "PROWORK_GDPVAL_GE_1846",
+  "benchmark": "GDPval-AA v2.1",
+  "objective": "MAKE_THE_CURRENT_GDPVAL_FIXED_BAR_E1_ROW_CLOSE_MECHANICALLY_FROM_ONE_AUTHENTIC_CONTENT_ADDRESSED_MATCHED_MEASUREMENT_WITHOUT_REOPENING_OWNER_PROMPT_OR_CROWDBT_RESEARCH",
+  "source_bindings": {
+    "current_reclassification": {
+      "path": "canonical/governance/GDPVAL_CURRENT_FIXED_BAR_ENGINE_RECLASSIFICATION_20261011_V1.json",
+      "git_blob_sha": "c16a49726507d6611a24bde323e0436a65870b59"
+    },
+    "fixed_bar_nonnecessity": {
+      "path": "canonical/governance/GDPVAL_FIXED_BAR_OWNER_PAIRWISE_NONNECESSITY_20261009_V1.json",
+      "git_blob_sha": "a56313d4c099e293fa7190c6bd60d3fc422c1d3f"
+    },
+    "submission_protocol": {
+      "path": "canonical/governance/GDPVAL_AA_V21_PUBLIC_SUBMISSION_PROTOCOL_20261007_V1.json"
+    }
+  },
+  "runtime": {
+    "path": "canonical/runtime/gdpval_matched_epoch_receipt_gate_v1.py",
+    "role": "VALIDATE_ONLY__NEVER_MINT_SCORE_EPOCH_EQUIVALENCE_OR_OWNER_AUTHORITY"
+  },
+  "tests": {
+    "path": "canonical/tests/test_gdpval_matched_epoch_receipt_gate_v1.py"
+  },
+  "admissible_routes": [
+    {
+      "id": "MATCHED_HISTORICAL_FIXED_BAR",
+      "decision": "BRAIN_SCORE_GE_1846",
+      "required": [
+        "EXACT_GDPVAL_AA_V2_1",
+        "220_TASK_POPULATION",
+        "ARTIFICIAL_ANALYSIS_SCORE_OWNER",
+        "BRAIN_AND_TARGET_EPOCH_IDS_EQUAL",
+        "SAME_HARNESS_AS_TARGET_EPOCH",
+        "CONTENT_ADDRESSED_BRAIN_SUBJECT_TASK_POPULATION_HARNESS_SUBMISSION_MANIFEST_SCORE_RECEIPT_TARGET_COMPARATOR_RECEIPT_EPOCH_EQUIVALENCE_AND_INDEPENDENT_VERIFICATION"
+      ]
+    },
+    {
+      "id": "SAME_FIT_OPUS55_NONINFERIORITY",
+      "decision": "BRAIN_SCORE_GE_OPUS55_SCORE_AND_OPUS55_SCORE_GE_1846_IN_THE_SAME_FIT",
+      "required": [
+        "EXACT_GDPVAL_AA_V2_1",
+        "220_TASK_POPULATION",
+        "ARTIFICIAL_ANALYSIS_SCORE_OWNER",
+        "CLAUDE_OPUS_5_5_MAX_DEFAULT_FALLBACK_COMPARATOR",
+        "BRAIN_AND_OPUS_SAME_FIT_ID",
+        "BRAIN_AND_OPUS_SAME_HARNESS",
+        "CONTENT_ADDRESSED_BRAIN_AND_COMPARATOR_SCORE_RECEIPTS_AND_INDEPENDENT_VERIFICATION"
+      ],
+      "theorem": "IF_BRAIN_GE_OPUS55_IN_ONE_OWNER_FIT_AND_OPUS55_GE_1846_IN_THAT_SAME_FIT__THEN_BRAIN_GE_1846_IN_THAT_FIT__NO_CROSS_EPOCH_ELO_TRANSPORT_IS_USED"
+    }
+  ],
+  "current_reality": {
+    "authentic_brain_gdpval_score_receipt_bound": false,
+    "brain_complete_220_submission_manifest_bound": false,
+    "public_owner_write_or_scoring_endpoint_bound": false,
+    "row_closed": false
+  },
+  "scheduler_effect": [
+    "DO_NOT_REOPEN_GENERIC_GDPVAL_RUBRIC_CROWDBT_OR_OWNER_PROMPT_RESEARCH_FOR_THE_PRIMARY_FIXED_BAR_ROUTE",
+    "ON_THE_FIRST_AUTHENTIC_ARTIFICIAL_ANALYSIS_SCORE_RECEIPT_RUN_THIS_GATE_BEFORE_ANY_HUMAN_INTERPRETATION",
+    "IF_THE_GATE_PASSES_PACKAGE_THE_EXACT_RECEIPT_AND_GATE_OUTPUT_INTO_THE_CURRENT_O_V4_ROW_PROOF_AND_INDEPENDENTLY_VERIFY",
+    "IF_THE_GATE_FAILS_LOCALIZE_ONLY_THE_FIRST_REPORTED_MEASUREMENT_IDENTITY_EPOCH_HARNESS_SCORE_OR_CONTENT_ADDRESS_DEFECT"
+  ],
+  "hard_nonclaims": [
+    "NO_BRAIN_GDPVAL_SCORE",
+    "NO_220_SUBMISSION_MANIFEST",
+    "NO_OWNER_EVALUATION_ACCESS",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_PROMOTION_AUTHORITY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
