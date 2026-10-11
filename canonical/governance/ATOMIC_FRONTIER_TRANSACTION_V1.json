@@ -11,6 +11,7 @@
     "FIX_LOCAL_DETERMINISTIC_FAILURES_BEFORE_INDEPENDENT_CI",
     "LAUNCH_ONLY_RELEVANT_INDEPENDENT_VERIFICATION_JOBS_IN_PARALLEL",
     "INGEST_RECEIPTS",
+    "REVALIDATE_AUTHORITY_EPOCH_AND_DECLARED_PATH_CONFLICTS_AGAINST_CURRENT_MAIN",
     "RECOMPUTE_RESIDUAL_UNIVERSE_AND_AUTHORITY",
     "REGENERATE_ALL_MIRRORS_FROM_AUTHORITY",
     "RUN_FRONTIER_STATE_CONSISTENCY_CHECK",
@@ -23,7 +24,8 @@
     "HAND_MAINTAINED_MIRROR_DIVERGENCE",
     "REPEATED_ACQUISITION_OF_ALREADY_OBSERVED_INFORMATION_WITHOUT_INVALIDATION",
     "RETRY_PRIVATE_CI_AFTER_RUNNER_ID_ZERO_WITHOUT_HEALTH_CHANGE",
-    "PROMOTION_FROM_RECEIPT_BOUND_TO_SUPERSEDED_ARTIFACT_BYTES"
+    "PROMOTION_FROM_RECEIPT_BOUND_TO_SUPERSEDED_ARTIFACT_BYTES",
+    "DISCARDING_VERIFIED_WORK_SOLELY_BECAUSE_MAIN_SHA_ADVANCED_WITHOUT_AUTHORITY_OR_DECLARED_PATH_CONFLICT"
   ],
   "retained_nonnegotiable_costs": [
     "INDEPENDENT_VERIFICATION",
@@ -54,6 +56,30 @@
     "repeated_known_information": "FORBIDDEN_UNLESS_EXPLICITLY_INVALIDATED",
     "terminal_route_evidence_freshness_guard": "canonical/runtime/terminal_route_evidence_freshness.py",
     "promotion_requires_current_exact_blob_binding": true,
-    "stale_evidence_action": "REVERIFY_CHANGED_BYTES_BEFORE_ANY_SCOPE_OR_ACCEPTANCE_PROMOTION"
+    "stale_evidence_action": "REVERIFY_CHANGED_BYTES_BEFORE_ANY_SCOPE_OR_ACCEPTANCE_PROMOTION",
+    "transaction_guard_required_before_canonical_integration": true,
+    "main_sha_drift_alone_invalidates_work": false,
+    "reverify_only_invalidated_delta": true
+  },
+  "runtime_guard": {
+    "path": "canonical/runtime/atomic_frontier_transaction_guard_v1.py",
+    "tests": "canonical/tests/test_atomic_frontier_transaction_guard_v1.py",
+    "required_before_canonical_integration": true,
+    "authority_epoch_guard": "canonical/runtime/authority_epoch_guard_v1.py"
+  },
+  "semantic_currentness": {
+    "rule": "MAIN_SHA_DRIFT_ALONE_IS_NOT_SEMANTIC_STALENESS",
+    "preserve_verified_work_when": [
+      "AUTHORITY_EPOCH_UNCHANGED",
+      "NO_INTERVENING_OVERLAP_WITH_DECLARED_MUTATION_PATHS",
+      "NO_INTERVENING_OVERLAP_WITH_DECLARED_DEPENDENCY_PATHS"
+    ],
+    "invalidate_only": [
+      "AUTHORITY_EPOCH_CHANGED",
+      "DECLARED_MUTATION_OR_DEPENDENCY_PATH_CONFLICT",
+      "BASE_DIVERGED_FROM_CURRENT_MAIN"
+    ],
+    "nonconflicting_advance_action": "REBIND_ON_CURRENT_MAIN__PRESERVE_UNCHANGED_VERIFICATION",
+    "conflict_action": "RECOMPUTE_ONLY_INVALIDATED_DELTA"
   }
 }
