@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_STRPRINTER_V34_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_V33_POINTER_20261010.txt",
+    "transform": "canonical/research/bytes/tools/conservative_strprinter_prune_v34.py",
+    "transform_git_blob_sha": "ab920e64d0287ca39c833448e486582a3cad9824",
+    "predecessor_manifest_sha256": "8bd85a2a0d7fb314a37115aa625b9d56965e1abf3dd8dffa4b46b549781eb91f",
+    "manifest_sha256": "fb7bc2ff8650b69a2a3e20a2d9c227c516ef34448903aa11a5f55a6a23e8a555",
+    "python_files": 277,
+    "raw_python_source_bytes": 1799848,
+    "B_exec_raw_python_source_bytes": 1802608,
+    "raw_delta_vs_v33_bytes": -6889
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V34_SUCCESSOR_20261010_V1.tar.xz",
+    "library_file_id": "libfile_6af8e71ce8ec81919603b3d50a420c9b",
+    "bytes": 276224,
+    "sha256": "aab185a2d2039b81dfa831813c36006fbb68221e5bc376e370867135b7542543"
+  },
+  "spent_qualification": {
+    "id": "QUAL_SUCCESSOR_NEXT39_20261010_V1",
+    "cases": 10810,
+    "corpus_sha256": "1f86166f00a99a77e409f31fdd14448143bcf7767f4ed2eee7e7b5e025c6bf9b",
+    "candidate_result": "10810/10810",
+    "fresh_archive_extraction_replay_1": "10810/10810",
+    "fresh_archive_extraction_replay_2": "10810/10810",
+    "failures": 0,
+    "independence_scope": "TWO_SEPARATE_FRESH_EXTRACTIONS_AND_PROCESS_SHARDINGS_IN_ONE_CLOUD_EXECUTION_ENVIRONMENT__NOT_A_SECOND_EXTERNAL_CARRIER",
+    "spent": true
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT40_20261011_V1",
+    "cases": 11040,
+    "seed": 2377298925,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT40_20261011_V1_PIPE_V34_MANIFEST_IDENTITY",
+    "per_operation_budget": 960,
+    "corpus_sha256": "11dd26dc5a271fc77bdb3c2659d52b86599a98fd6a736f0d20d10532d2174694",
+    "generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT40_20261011_V1.jsonl",
+    "library_file_id": "libfile_500c6a5c501c81918a218b6bca0a97ca",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "causal_cut": {
+    "id": "CONSERVATIVE_STRPRINTER_SPENT_NEXT38_V34",
+    "changed_payload_files": [
+      "sympy/printing/str.py"
+    ],
+    "selected_fail_closed_method_bodies": 52,
+    "behavior": "REPLACE_SELECTED_OUTSIDE_BOUNDED_CONTRACT_STRPRINTER_BODIES_WITH_FAIL_CLOSED_NOTIMPLEMENTEDERROR",
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "truth_boundary": [
+    "MEASURED: exact V34 archive is 1,799,848 raw Python-source bytes, 6,889 bytes below exact V33.",
+    "MEASURED: V33 and V34 manifest identities exactly match the frozen V34 transform BASE and TARGET.",
+    "MEASURED: frozen NEXT39 passes 10,810/10,810 twice from separate fresh V34 archive extractions with zero mismatches.",
+    "MEASURED: NEXT40 was frozen before any V35 physical cut and remains unspent.",
+    "NOT PROVED: external second-carrier replay of V34.",
+    "NOT PROVED: universal SymPy semantic equivalence outside the bounded exact-symbolic route.",
+    "NOT PROMOTED: no Opus-family capability, acceptance, ownership, quality, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
