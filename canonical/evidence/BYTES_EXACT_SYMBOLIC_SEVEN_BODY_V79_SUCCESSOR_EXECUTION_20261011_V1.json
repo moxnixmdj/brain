@@ -1,0 +1,108 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_SEVEN_BODY_V79_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__SEVEN_FAIL_CLOSED_BODY_CUTS__SPENT_CORRECTED_NEXT82_AND_FRESH_NEXT83_PASS__NEXT84_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_OPERATOR_WHITESPACE_V78_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "e4e5e57c5c41f738ced105271d4e4bb907eaa1afe33e01788204009d49315f60",
+    "transform": "canonical/research/bytes/tools/conservative_seven_body_prune_v79.py",
+    "manifest_sha256": "70c71d7e67f60e83663bf780ed44302db38db760b24f2d8a65d0246408ddb3bd",
+    "python_files": 277,
+    "raw_python_source_bytes": 1582702,
+    "B_exec_raw_python_source_bytes": 1585462,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v78_bytes": -6504,
+    "B_exec_delta_vs_v78_bytes": -6504
+  },
+  "selection": {
+    "id": "SEVEN_FAIL_CLOSED_UNUSED_BODY_COMPOSITION_V79",
+    "method": "PARALLEL_NOVEL_BODY_SCREEN__RARE_COUNTEREXAMPLE_DELTA_DEBUG__FULL_SPENT_GATE__FRESH_GATE",
+    "changed_body_count": 7,
+    "bodies": [
+      "sympy/series/gruntz.py::mrv_leadterm",
+      "sympy/functions/elementary/exponential.py::log._eval_as_leading_term",
+      "sympy/matrices/repmatrix.py::RepMatrix._unify_element_sympy",
+      "sympy/polys/polytools.py::reduced",
+      "sympy/polys/polytools.py::intervals",
+      "sympy/simplify/simplify.py::nthroot",
+      "sympy/series/gruntz.py::limitinf"
+    ],
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "falsification_history": {
+    "sympy/functions/elementary/exponential.py::exp.eval": "REJECTED__FULL_SPENT_ROOTS_COUNTEREXAMPLES",
+    "sympy/polys/constructor.py::_construct_composite": "REJECTED__FULL_SPENT_ROOTS_COUNTEREXAMPLES",
+    "sympy/polys/polytools.py::Poly._unify": "REJECTED__RARE_SPREAD_ROOTS_COUNTEREXAMPLE",
+    "sympy/core/function.py::Function._eval_evalf": "REJECTED__FIVE_FULL_SPENT_ROOTS_COUNTEREXAMPLES",
+    "mpmath/libmp/libelefun.py::mpf_atan2": "REJECTED__RARE_ROOTS_COUNTEREXAMPLES",
+    "sympy/functions/elementary/trigonometric.py::atan2.eval": "REJECTED__SERIES_COEFF_COUNTEREXAMPLE",
+    "sympy/functions/elementary/complexes.py::arg.eval": "REJECTED__RARE_FULL_SPENT_ROOTS_COUNTEREXAMPLES",
+    "sympy/core/evalf.py::EvalfMixin._to_mpmath": "REJECTED__RARE_FULL_SPENT_ROOTS_COUNTEREXAMPLES",
+    "sympy/core/numbers.py::Number.__divmod__": "REJECTED__RARE_FULL_SPENT_ROOTS_COUNTEREXAMPLE"
+  },
+  "qualification": {
+    "spent_corrected_NEXT82": {
+      "id": "QUAL_SUCCESSOR_NEXT82_20261011_V1",
+      "cases": 20700,
+      "corpus_sha256": "a50d77134ca612abaa96a015c055d1a59b9d19f8688d2014dd10ba3a7fa7d71f",
+      "candidate": "20700/20700",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT83": {
+      "id": "QUAL_SUCCESSOR_NEXT83_20261011_V1",
+      "cases": 20930,
+      "corpus_sha256": "31fa9c3a1bde80da7ba8928f784ada57f9761241a938bf9bb7551ebb0d9bb8b8",
+      "candidate": "20930/20930",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "clean_room_v78_to_v79_reconstruction": "PASS__278_OF_278_FILES_BYTE_IDENTICAL_AFTER_MANIFEST_RESEAL",
+    "regenerated_manifest_sha256": "70c71d7e67f60e83663bf780ed44302db38db760b24f2d8a65d0246408ddb3bd",
+    "stale_manifest_packaging_defect_detected_and_repaired_before_persistence": true,
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V79_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_9df793b6d030819180e646e3203e5a1e",
+    "bytes": 259816,
+    "sha256": "fdb5077574aaf373b40b99c114130a82f75a15718ade9f1a31c06c6c6f3d5404"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT84_V79_70C71D7E_20261011_V1",
+    "canonical_family_id": "QUAL_SUCCESSOR_NEXT84_20261011_V1",
+    "candidate_manifest_sha256": "70c71d7e67f60e83663bf780ed44302db38db760b24f2d8a65d0246408ddb3bd",
+    "cases": 21160,
+    "seed": 2130712841,
+    "seed_derivation": "FIRST_32_BITS_SHA256_OF_QUAL_SUCCESSOR_NEXT84_20261011_V1_PIPE_V79_MANIFEST_IDENTITY",
+    "seed_material": "QUAL_SUCCESSOR_NEXT84_20261011_V1|70c71d7e67f60e83663bf780ed44302db38db760b24f2d8a65d0246408ddb3bd",
+    "per_operation_budget": 1840,
+    "corpus_sha256": "45ec3201c3adfbd42d63f347dad756bee8bc75438e4e1fd8dfb66a0d0e07c2f9",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT84_V79_70C71D7E_20261011_V1.jsonl",
+    "library_file_id": "libfile_c85976b31bcc8191845149da8b7a3113",
+    "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0__DETERMINISTIC_CANONICAL_PARAMETER_STREAM__PARALLEL_EXPECTED_OUTPUT_EVALUATION__CANONICAL_ROW_REASSEMBLY",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_NON_EQUIVALENCE_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: V79 is 1,582,702 raw Python-source bytes, 6,504 bytes below V78.",
+    "MEASURED: V79 passes spent corrected NEXT82 20,700/20,700 with zero failures.",
+    "MEASURED: previously untouched NEXT83 passes V79 20,930/20,930 with zero failures.",
+    "MEASURED: clean-room V78-to-V79 reconstruction is byte-identical across all 278 persisted files after resealing the manifest.",
+    "MEASURED: NEXT84 bound to V79 manifest is frozen at 21,160 cases and remains unspent.",
+    "MEASURED: pre-existing differently-named NEXT84 artifacts are different candidate-bound corpora and are not used as V79 authority.",
+    "NOT PROVED: universal SymPy equivalence outside the bounded exact-symbolic route.",
+    "NOT PROVED: external second-carrier replay.",
+    "NOT PROMOTED: no capability, acceptance, ownership, quality, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
