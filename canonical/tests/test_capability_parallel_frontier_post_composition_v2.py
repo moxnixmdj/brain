@@ -90,5 +90,34 @@ class PostCompositionFrontierV2Tests(unittest.TestCase):
   with self.assertRaisesRegex(core.ParallelFrontierError,"LIVE_WORK_FRONTIER_STALE"):
    core.plan_parallel_frontier(f)
 
+ def test_v10_24_of_24_professional_and_assurance_are_regression_blocked(self):
+  f=p.refresh_post_composition_currentness(core.load_current_frontier())
+  prow=next(x for x in f["candidates"] if x.get("work_id")==p.PROF_WORK)
+  arow=next(x for x in f["candidates"] if x.get("work_id")==p.ASSURANCE_WORK)
+  self.assertEqual(prow["scheduler_state"],"BLOCKED")
+  self.assertIn("24_OF_24_COMPLETE",prow["readiness"])
+  pev=prow["read_only_evidence"]
+  self.assertEqual(pev["property_truth_closed_count"],24)
+  self.assertEqual(pev["verified_execution_leaf_count"],12)
+  self.assertEqual(pev["verified_semantic_leaf_count"],12)
+  self.assertEqual(pev["open_execution_leaf_count"],0)
+  self.assertEqual(pev["open_semantic_leaf_count"],0)
+  self.assertEqual(arow["scheduler_state"],"BLOCKED")
+  self.assertIn("FULL_PRIVATE_CURRENT_MAIN_REGRESSION_WAKE_GATED",arow["readiness"])
+  aev=arow["read_only_evidence"]
+  self.assertTrue(aev["professional_live_counts_reconciled"])
+  self.assertEqual(aev["professional_property_truth_closed_count"],24)
+  self.assertEqual(aev["professional_verified_semantic_leaf_count"],12)
+
+ def test_assurance_live_professional_count_mismatch_fails_closed(self):
+  with tempfile.TemporaryDirectory() as td:
+   root=Path(td); _copy_sources(root)
+   q=root/p.ASSURANCE
+   d=json.loads(q.read_text())
+   d["professional_property_truth_current"]["verified_semantic_leaf_count"]=11
+   q.write_text(json.dumps(d))
+   with self.assertRaisesRegex(p.PostCompositionFrontierV2Error,"ASSURANCE_PROFESSIONAL_BINDING"):
+    p.refresh_post_composition_currentness(core.load_current_frontier(),root=root)
+
 if __name__=="__main__":
  unittest.main(verbosity=2)
