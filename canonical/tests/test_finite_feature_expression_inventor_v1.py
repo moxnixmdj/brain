@@ -2,6 +2,7 @@ from canonical.runtime.finite_feature_expression_inventor_v1 import (
     LabeledRow,
     evaluate,
     invent,
+    invent_across_feature_packs,
 )
 
 
@@ -72,3 +73,25 @@ def test_requires_both_classes():
     ])
     assert result["status"]=="UNSUPPORTED"
     assert result["reason"]=="BOTH_CLASSES_REQUIRED"
+
+
+def test_feature_pack_search_escapes_global_predicate_bound_without_heuristic_pruning():
+    rows=[]
+    for i in range(6):
+        base={"a":i,"b":i}
+        for j in range(8):
+            base[f"noise{j}"]=(i+j)%5
+        rows.append(LabeledRow(f"p{i}",base,True))
+    for i in range(6):
+        base={"a":i,"b":i+1}
+        for j in range(8):
+            base[f"noise{j}"]=(i*2+j)%5
+        rows.append(LabeledRow(f"n{i}",base,False))
+    direct=invent(rows)
+    assert direct["status"] in {"SEARCH_BOUND_EXCEEDED","INVENTED_DISCRIMINATORS"}
+    packed=invent_across_feature_packs(rows,max_pack_size=2,max_packs=1000)
+    assert packed["status"]=="INVENTED_DISCRIMINATORS_ACROSS_FEATURE_PACKS", packed
+    assert any(
+        any(p["expr"][0]=="EQ" and set(p["expr"][1:])=={"a","b"} for p in d["predicates"])
+        for d in packed["discriminators"]
+    ), packed
