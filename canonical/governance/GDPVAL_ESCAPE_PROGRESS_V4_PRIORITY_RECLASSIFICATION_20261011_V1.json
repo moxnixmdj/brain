@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_ESCAPE_PROGRESS_V4_PRIORITY_RECLASSIFICATION_V1",
+  "date": "2026-10-11",
+  "status": "CURRENT_PRIORITY_REPAIR__OLD_92_OF_220_MECHANICAL_ROUTE_DEMOTED_TO_POST_CANDIDATE_VERIFIER__W_COVER_THEN_W_QUALITY_IS_ACTIVE_ABSOLUTE_ROUTE__ZERO_CREDIT",
+  "target": {
+    "predicate": "BRAIN_PROFESSIONAL_WORK_CAPABILITY_GE_CAPABILITY_EVIDENCED_BY_FROZEN_OPUS55_GDPVAL_AA_V2_1_1846",
+    "frozen_reference_elo": 1846
+  },
+  "stale_row": {
+    "manifest": "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json",
+    "obligation_id": "PROWORK_GDPVAL_GE_1846",
+    "old_route_group": "GAP_B_INTERNAL_ROUTE_STRICT_PROGRESS",
+    "old_route_class": "INTERNAL_PARTIAL_MECHANICAL_VERIFIER_ROUTE",
+    "old_evidence": {
+      "path": "canonical/governance/GDPVAL_FIRST_RESIDUAL_MECHANICAL_ROUTE_EXPANSION_20261009_V2.json",
+      "load_bearing_status": "ROUTE_AVAILABILITY_ONLY"
+    }
+  },
+  "demotion_proof": {
+    "facts_from_old_evidence": [
+      "92_OF_220_CURRENT_FIRST_RESIDUAL_CRITERIA_HAVE_MACHINE_VERIFIER_PROGRAMS",
+      "THIS_IS_ROUTE_AVAILABILITY_NOT_CRITERION_SATISFACTION",
+      "128_FIRST_RESIDUALS_REMAIN_UNCOMPILED",
+      "SCHEDULER_RULE_EXECUTES_COMPILED_VERIFIERS_WHEN_A_GDPVAL_CANDIDATE_OR_SCOPE_COMPLETE_CONSTRUCTIVE_PROOF_IS_AVAILABLE"
+    ],
+    "conclusion": "THE_92_OF_220_COMPILER_ROUTE_IS_A_POST_CANDIDATE_VERIFICATION_RESOURCE__IT_DOES_NOT_BY_ITSELF_BIND_A_CURRENT_EXECUTABLE_ACTION_WHOSE_EVERY_OUTCOME_TERMINALIZES_OR_STRICTLY_DECREASES_A_FINITE_ACCEPTANCE_RELEVANT_MEASURE",
+    "therefore_old_gap_b_first_dispatch_is_current": false
+  },
+  "current_frontier": {
+    "path": "canonical/governance/GDPVAL_MINIMUM_BRIDGE_ACQUISITION_FRONTIER_20261011_V4.json",
+    "git_blob_sha": "aa6376fdc276c9d9c94731e39ef60811a4e96203",
+    "matched_score_state": "SLEEP_UNTIL_AUTHENTIC_SCORE_OR_ZERO_SPEND_OWNER_ROUTE_OR_EXACT_ENOUGH_COMPARABILITY_RECEIPT",
+    "target_relative_pairwise_state": "SLEEP_CHECKED_PUBLIC_DISCOVERY_UNTIL_FIRST_PARTY_TARGET_ARTIFACT_OR_OWNER_OUTCOME_OR_EQUIVALENT_RECEIPT",
+    "absolute_dominance_state": "ACTIVE",
+    "absolute_dominance_factorization": [
+      "W_COVER__POSITIVE_PROFESSIONAL_TASK_COVERAGE_OR_REFERENCE_RELATIVE_COVERAGE_DOMINANCE",
+      "W_QUALITY__SCOPE_COMPLETE_POSITIVE_OUTPUT_QUALITY_DOMINANCE"
+    ],
+    "first_dispatch": "PROVE_OR_FALSIFY_GDPVAL_W_COVER_ESCAPE_PROGRESS_TOTALITY_OR_BIND_A_STRONGER_SCOPE_COMPLETE_POSITIVE_COVER_CERTIFICATE"
+  },
+  "scheduler_override": {
+    "old_92_of_220_mechanical_route_first_dispatch": false,
+    "old_92_of_220_mechanical_route_reusable_after_candidate_exists": true,
+    "generate_remaining_public_220_by_default": false,
+    "repeat_same_public_opus55_artifact_search": false,
+    "repeat_scoring_formula_discovery": false,
+    "active_next": "GDPVAL_W_COVER",
+    "after_w_cover": "GDPVAL_W_QUALITY",
+    "first_sound_bridge_wins": true
+  },
+  "historical_manifest_policy": {
+    "mutate_20261010_v2_manifest_in_place": false,
+    "reason": "PRESERVE_HISTORICAL_CONTENT_ADDRESS_AND_APPLY_CURRENT_PRIORITY_OVERRIDE_THROUGH_CURRENT_AUTHORITY",
+    "future_shared_manifest_successor_may_reclassify_row": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_W_COVER_IS_PROVED",
+    "NO_CLAIM_W_QUALITY_IS_PROVED",
+    "NO_CLAIM_ESCAPE_PROGRESS_TOTALITY_IS_PROVED",
+    "NO_CLAIM_OLD_MECHANICAL_VERIFIERS_ARE_INVALID",
+    "NO_CLAIM_GDPVAL_GE_1846",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
