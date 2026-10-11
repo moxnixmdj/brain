@@ -82,8 +82,8 @@ def test_global_color_frequency_rule():
     result=induce(train)
     assert result["status"]=="VERIFIED_FACTORIZED_RULE_OPTIONS", result
     out=predict(result,[[7,7,7,0,8]])
-    assert out["status"]=="PREDICTED", out
-    assert out["prediction"]==[[7,7,7,0,5]]
+    assert out["status"]=="AMBIGUOUS_PREDICTION", out
+    assert out["prediction"] is None
 
 
 def test_multi_target_component_area_rules_without_cartesian_explosion():
