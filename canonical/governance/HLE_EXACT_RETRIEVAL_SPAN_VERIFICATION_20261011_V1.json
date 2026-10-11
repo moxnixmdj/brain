@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_EXACT_RETRIEVAL_SPAN_VERIFICATION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "EXACT_COMMITTED_BYTES_LOCALLY_VERIFIED__BRAIN_OWNED_FALLIBLE_EXACT_ANSWER_RETRIEVAL_PATH__ZERO_SCORE_CREDIT",
+  "runtime": {
+    "path": "canonical/runtime/hle_exact_retrieval_span_v1.py",
+    "git_blob_sha1": "44c6bd46a4ba238d1c62fbc973b89d8ab071fd91",
+    "sha256": "4caabfae86faae28fc8f8f01fbd8ee07bdc23014b52250e5253e5c07027074f9",
+    "creation_commit": "f3fa0b999dd4ac5ff06aebeeeea15a8ed2f54a0e"
+  },
+  "tests": {
+    "path": "canonical/tests/test_hle_exact_retrieval_span_v1.py",
+    "git_blob_sha1": "99f94db8d0fefb09344a177df108607534c76e64",
+    "sha256": "011632552c3d18ce5622309eb455f258b3a5845c0991a9b6cb74cdefbf61178e",
+    "synthetic_tests": 4,
+    "synthetic_passed": 4,
+    "repository_ci_claimed": false
+  },
+  "covered_candidate_kinds": [
+    "ENTITY_TERM",
+    "TEMPORAL",
+    "NUMERIC",
+    "OPEN_SPAN"
+  ],
+  "composition": [
+    "canonical/runtime/hle_question_shape_router_v1.py",
+    "canonical/runtime/root2_hle_opus55_tool_adapter_v1.py",
+    "BOUNDED_NONVERBATIM_QUERY_FOCUS",
+    "TYPED_SPAN_EXTRACTION",
+    "QUESTION_ANCHOR_COOCCURRENCE",
+    "SOURCE_DIVERSITY_AND_RECURRENCE"
+  ],
+  "authority_boundary": {
+    "brain_owned_candidate_generation": true,
+    "external_model_solver_calls": 0,
+    "gold_access": false,
+    "correctness_proof": false,
+    "benchmark_score_credit": false,
+    "terminal_authority": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
