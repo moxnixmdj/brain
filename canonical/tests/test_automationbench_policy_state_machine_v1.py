@@ -74,6 +74,57 @@ class AutomationBenchPolicyStateMachineV1Tests(unittest.TestCase):
         body = json.loads(out["calls"][0]["arguments"]["body"])
         self.assertEqual(body["name"], "Monthly Fire Drill Checklist - February")
 
+    def test_asana_scans_past_relevant_non_action_record(self):
+        prompt = "Add the fire drill task to Asana project proj_facilities."
+        history = [
+            {"kind":"tool_result","name":"api_search","content":'{"results":[]}'},
+            {
+                "kind":"tool_result",
+                "name":"api_fetch",
+                "content": json.dumps({
+                    "records":[
+                        {
+                            "id":"policy",
+                            "title":"Fire Drill Policy",
+                            "description":"Fire drill task policy for facilities",
+                            "date":"2026-02-03T00:00:00Z"
+                        },
+                        {
+                            "id":"good",
+                            "subject":"Fire drill",
+                            "body_plain":"Create task: Monthly Fire Drill Checklist - February. Due: 2026-02-18. Tag: Compliance.",
+                            "date":"2026-02-01T00:00:00Z"
+                        }
+                    ]
+                }),
+            },
+        ]
+        out = next_policy_action(prompt=prompt, history=history)
+        self.assertEqual(out["semantic"], "ASANA_TASK_CREATE")
+
+    def test_semantic_metadata_prevents_repeat_mutation(self):
+        prompt = "We just closed the Meridian Corp Platform Deal! Mark it as won in Salesforce."
+        history = [
+            {"kind":"tool_result","name":"api_search","content":'{"results":[]}'},
+            {
+                "kind":"tool_result",
+                "name":"api_fetch",
+                "content":json.dumps({
+                    "records":[
+                        {"Id":"006xx000004MER1","Name":"Meridian Corp - Platform Deal"}
+                    ]
+                })
+            },
+            {
+                "kind":"assistant_state",
+                "metadata":{
+                    "project_brain/automationbench_semantic":"SALESFORCE_OPPORTUNITY_MARK_WON"
+                }
+            },
+        ]
+        out = next_policy_action(prompt=prompt, history=history)
+        self.assertNotEqual(out.get("semantic"), "SALESFORCE_OPPORTUNITY_MARK_WON")
+
     def test_unsupported_semantics_fail_closed(self):
         history = [
             {"kind":"tool_result","name":"api_search","content":'{"results":[]}'},
