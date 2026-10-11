@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK21_DURABLE_START_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__RANK21_STARTED__ONE_TRIAL_CONSUMED__RESULT_PENDING__NO_RETRY",
+  "slot_id": "terminal-bench-science/ode-law-discovery::trial-0",
+  "task_digest": "sha256:767d16a0a6226f391208b1b4bb126a6f957e5d0c8156342b5c9410a755142d65",
+  "logical_attempt_id": "7eb619d40a65597b2b2dccbcf409c143aa47e1663ca4c0d8f098167cb252811a",
+  "activation_pr": 2651,
+  "workflow_run_id": 38127556325,
+  "workflow_job_id": 114434971313,
+  "durable_start_record_sha256": "2b67d8e78ad60561b1f0ead3def11bbd56c4acc34481a06f1b20f786de3277ca",
+  "durable_start_committed_at": "2026-10-11T09:20:56Z",
+  "task_read": true,
+  "task_started": true,
+  "durable_start_cas_acquired": true,
+  "benchmark_trials_consumed": 1,
+  "result_present": false,
+  "reward": null,
+  "retry_authority": false,
+  "replacement_authority": false,
+  "replay_authority": false,
+  "pass": true
+}
