@@ -263,6 +263,12 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         )
 
     def test_r2_mechanism_policy_binds_mutable_current_r2_by_path_and_rechecks_invariants(self):
+        v16 = json.loads(
+            (
+                ROOT
+                / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261011_V16.json"
+            ).read_text()
+        )
         pointer = json.loads(
             (ROOT / "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json").read_text()
         )
@@ -455,7 +461,7 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
             ),
         )
 
-    def test_v7_scalar_contract_preserved_and_v9_is_current_primary(self):
+    def test_v7_scalar_contract_preserved_v9_history_and_v16_is_current_primary(self):
         v7 = json.loads(
             (
                 ROOT
@@ -490,11 +496,19 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         )
         self.assertEqual(
             pointer["authoritative_activation"],
-            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V9.json",
+            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261011_V16.json",
         )
         self.assertEqual(
             mission["current_development_scheduler"]["activation"],
-            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V9.json",
+            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261011_V16.json",
+        )
+        self.assertEqual(
+            v16["decision_value_authority"]["rule"],
+            "ROWS_WHOSE_CURRENT_MODE_IS_WAKE_GATED_EVENT_DRIVEN_OR_PARKED_MUST_NOT_CONSUME_SAME_INFORMATION_WORK__ONLY_CURRENT_NONWAKE_ROWS_ENTER_GAP_A_EVIDENCE_SCHEDULING",
+        )
+        self.assertEqual(
+            v16["current_projection"]["gap_a_actionable_row_ids"],
+            ["PROWORK_GDPVAL_GE_1846", "HLE_TOOLS_GE_67_7"],
         )
         self.assertEqual(
             pointer["scalar_fallback_runtime"],
