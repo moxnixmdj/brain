@@ -120,7 +120,8 @@ class PureFieldProjectionCapsuleTests(unittest.TestCase):
 
     def test_all_authority_remains_false(self):
         out=self.compile()
-        self.assertNotIn("pass",out)
+        self.assertTrue(out["pass"])
+        self.assertEqual(out["status"],"PASS__PURE_FIELD_PROJECTION_SEMANTIC_CAPSULE")
         self.assertFalse(out["execution_authority"])
         self.assertFalse(out["promotion_authority"])
         self.assertFalse(out["fresh_reality_authority"])
