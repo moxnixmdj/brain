@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_PUBLIC_REVISION_LOCK_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PUBLIC_ORIGINAL_HLE_REVISION_STRONGLY_BOUND__ANTHROPIC_USE_OF_EXACT_SHA_NOT_FIRST_PARTY_CONFIRMED__ZERO_CREDIT",
+  "target_predicate": "HLE_TOOLS_GE_67_7",
+  "official_public_dataset": {
+    "repository": "cais/hle",
+    "revision_sha": "5a81a4c7271a2a2a312b9a690f0c2fde837e4c29",
+    "huggingface_last_modified": "2026-01-20T22:42:17.000Z",
+    "question_count": 2500,
+    "download_size_bytes_public_metadata": 274276147,
+    "file": "data/test-00000-of-00001.parquet",
+    "gated": "auto"
+  },
+  "timeline_evidence": [
+    {
+      "date": "2026-08-29",
+      "source": "public hle-flowbench reproducibility artifact",
+      "bound_revision": "5a81a4c7271a2a2a312b9a690f0c2fde837e4c29",
+      "question_manifest_sha256": "d85d078892a9fd7b1eccda435b6cdefa0a8004ae8a5bd6253f86e808233c33cf",
+      "gold_manifest_sha256": "996fe43db9f560e38922152e1638d35723b9e827999e84f61453a1e1e30c25f1"
+    },
+    {
+      "date": "2026-09-22",
+      "source": "Anthropic Claude Opus 5.5 launch",
+      "fact": "TARGET_67_7_REPORTED_ON_2500_QUESTION_HLE_WITH_TOOLS"
+    },
+    {
+      "date": "2026-10-11",
+      "source": "Hugging Face public dataset metadata API",
+      "fact": "CURRENT_CAIS_HLE_SHA_STILL_EQUALS_5a81a4c7271a2a2a312b9a690f0c2fde837e4c29__LAST_MODIFIED_2026_01_20"
+    }
+  ],
+  "cross_ecosystem_corroboration": [
+    "UKGovernmentBEIS_INSPECT_EVALS_PINS_THE_SAME_HLE_REVISION",
+    "PERPLEXITY_SEARCH_EVALS_PINS_THE_SAME_HLE_REVISION",
+    "ALLENAI_OLMO_EVAL_PINS_THE_SAME_HLE_REVISION",
+    "OPENROUTER_BENCHMARK_HARNESS_PINS_THE_SAME_HLE_REVISION",
+    "MULTIPLE_REPRODUCIBILITY_ARTIFACTS_LABEL_THIS_AS_THE_CANONICAL_FIXED_HLE_REVISION"
+  ],
+  "deduction": {
+    "proved": [
+      "THE_PUBLIC_FIXED_2500_QUESTION_CAIS_HLE_POPULATION_IS_CURRENTLY_CONTENT_ADDRESSED_BY_5a81a4c7271a2a2a312b9a690f0c2fde837e4c29",
+      "THIS_SAME_REVISION_WAS_IN_ACTIVE_PUBLIC_EVALUATION_USE_BEFORE_THE_OPUS_5_5_LAUNCH_AND_REMAINS_CURRENT_AFTER_THE_LAUNCH"
+    ],
+    "not_proved": [
+      "ANTHROPIC_EXPLICITLY_LOADED_THIS_EXACT_HUGGINGFACE_SHA",
+      "ANTHROPIC_DID_NOT_USE_A_PRIVATE_OR_OLDER_BYTE_COPY_WITH_THE_SAME_2500_QUESTION_LABEL"
+    ],
+    "conditional_closure": "IF_THE_TARGET_OPUS_5_5_RUN_USED_THE_OFFICIAL_FIXED_CAIS_HLE_POPULATION_AVAILABLE_DURING_ITS_EVALUATION_WINDOW__THEN_THE_TARGET_REVISION_IS_5a81a4c7271a2a2a312b9a690f0c2fde837e4c29"
+  },
+  "execution_rule": "AUTHORIZED_DATASET_ACCESS_MUST_REQUIRE_REVISION_SHA_5a81a4c7271a2a2a312b9a690f0c2fde837e4c29_AND_FAIL_CLOSED_ON_ANY_OTHER_REVISION",
+  "hard_nonclaims": [
+    "NO_BENCHMARK_CONTENT_READ",
+    "NO_CLAIM_OF_FIRST_PARTY_ANTHROPIC_REVISION_RECEIPT",
+    "NO_HLE_SCORE_OR_ACCEPTANCE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}

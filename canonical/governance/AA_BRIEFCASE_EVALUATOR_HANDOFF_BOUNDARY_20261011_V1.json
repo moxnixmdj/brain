@@ -1,0 +1,158 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_EVALUATOR_HANDOFF_BOUNDARY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "EXACT_HANDOFF_BOUNDARY_IDENTIFIED__OFFICIAL_OWNER_ACCESS_AND_CALLABLE_BRAIN_CARRIER_UNRESOLVED__ZERO_CREDIT",
+  "mission_lock": "PROVE_AA_BRIEFCASE_V1_1_BRAIN_ELO_GE_1822_ONLY",
+  "frozen_target": {
+    "benchmark": "AA-Briefcase",
+    "benchmark_version": "1.1",
+    "evaluator": "Artificial Analysis",
+    "reference_model": "Claude Opus 5.5",
+    "reference_effort": "max",
+    "frozen_reference_elo": 1822,
+    "rating_epoch": "ANTHROPIC_RELEASE_2026_09_22__AA_BRIEFCASE_V1_1__OPUS55_MAX_DEFAULT_FALLBACK"
+  },
+  "verified_public_owner_facts": {
+    "aa_briefcase": {
+      "private_official_dataset": true,
+      "task_count": 91,
+      "project_count": 4,
+      "runs_on_stirrup": true,
+      "public_demo_official_score": false,
+      "sources": [
+        "https://artificialanalysis.ai/evaluations/aa-briefcase",
+        "https://artificialanalysis.ai/articles/aa-briefcase"
+      ]
+    },
+    "stirrup": {
+      "custom_client_supported": true,
+      "client_protocol": [
+        "async generate(messages, tools) -> AssistantMessage",
+        "model_slug property",
+        "context_window_tokens property"
+      ],
+      "full_agent_customization_supported": true,
+      "source": "https://stirrup.artificialanalysis.ai/extending/clients/"
+    },
+    "optima": {
+      "bring_your_own_agent_over_http_supported": true,
+      "official_aa_briefcase_equivalence": false,
+      "normal_route_zero_cost": false,
+      "pricing_fact": "Creating/running is charged at raw token cost; grading is priced per criterion or match.",
+      "source": "https://artificialanalysis.ai/optima"
+    },
+    "custom_benchmarking_service": {
+      "supports_models_not_listed_in_public_benchmarks": true,
+      "zero_cost_terms_publicly_confirmed": false,
+      "source": "https://artificialanalysis.ai/services/"
+    },
+    "official_independence_policy": {
+      "providers_cannot_pay_for_results_methodology_changes_or_listing": true,
+      "implication": "OFFICIAL_PUBLIC_BENCHMARK_COVERAGE_IS_DISTINCT_FROM_PAID_CUSTOM_SERVICES__ZERO_FEE_OFFICIAL_COVERAGE_IS_PLAUSIBLE_BUT_NOT_GUARANTEED_FOR_BRAIN",
+      "source": "https://artificialanalysis.ai/pricing"
+    }
+  },
+  "current_brain_subject_components": {
+    "execution_profile": {
+      "path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/BRAIN_EXECUTION_PROFILE_V1.json",
+      "git_blob_sha": "7b31ed7d2b5a559c43392f371d56ab3405b8df29"
+    },
+    "evaluation_protocol": {
+      "path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/EVALUATION_PROTOCOL_V1.json",
+      "git_blob_sha": "5741d5c8e3958d4caf19e316c5d9f34776105d9a"
+    },
+    "configuration": {
+      "path": "canonical/capabilities/opus55/OPUS55_PROFESSIONAL_WORK_STIRRUP_CONFIGURATION_V1.json",
+      "git_blob_sha": "d245eb5779dd97d69e624687c1bf6bbb019473d7"
+    },
+    "internalization_manifest": {
+      "path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/INTERNALIZATION_MANIFEST.json",
+      "git_blob_sha": "c7468196cc9442bdeb7e88af884182594b14bc5e"
+    },
+    "frozen_stirrup_upstream_commit": "247f24d56b2108235880ed2a2baea5d35b5a67ee",
+    "current_profile_substrate": "CURRENT_CHATGPT_GPT_5_6_SOL_SESSION_OR_EQUIVALENT_ZERO_INCREMENTAL_BRAIN_APPROVED_SUBSTRATE"
+  },
+  "causal_boundary": {
+    "exact_problem": "CURRENT_BRAIN_PROFESSIONAL_WORK_CONFIGURATION_IS_A_FULL_AGENT_SYSTEM_AND_ITS_APPROVED_COGNITION_SUBSTRATE_IS_NOT_PRESENTLY_EXPOSED_AS_AN_ARTIFICIAL_ANALYSIS_CALLABLE_OFFICIAL_AA_BRIEFCASE_SUBJECT",
+    "why_custom_llm_client_alone_is_insufficient": [
+      "A Stirrup LLMClient only supplies model-turn generation.",
+      "Brain's claimed subject includes agent-loop policy, tool selection/execution, durable state, context compaction, verification and completion policy.",
+      "Replacing the full Brain configuration with a thin LLMClient would silently change the evaluated subject."
+    ],
+    "why_optima_alone_is_insufficient": [
+      "Optima proves Artificial Analysis can ingest a custom agent over HTTP.",
+      "Optima custom-benchmark results are not automatically official AA-Briefcase v1.1 results.",
+      "Optima's published normal pricing violates the hard zero-incremental-spend constraint."
+    ],
+    "subject_freeze_ready": false,
+    "reason_subject_not_frozen": "A content-addressed benchmark subject must include its actual evaluator-callable execution carrier/substrate. Freezing before that carrier exists would certify an incomplete/non-invocable subject.",
+    "zero_cost_interpretation": {
+      "paid_optima_and_paid_custom_services": "INADMISSIBLE_UNDER_CURRENT_HARD_ZERO_SPEND_RULE",
+      "independent_official_benchmark_coverage": "POTENTIALLY_ADMISSIBLE_IF_ARTIFICIAL_ANALYSIS_ACCEPTS_BRAIN_FOR_NO_FEE_INDEPENDENT_COVERAGE",
+      "guarantee": false
+    }
+  },
+  "admissible_owner_integration_routes": [
+    {
+      "id": "INDEPENDENT_OFFICIAL_AA_BRIEFCASE_COVERAGE",
+      "requirement": "Artificial Analysis independently accepts Brain for official public AA-Briefcase v1.1 coverage under its no-pay-for-results/listing policy, with a full-agent execution route preserving exact Brain semantics.",
+      "zero_cost_required": true
+    },
+    {
+      "id": "OFFICIAL_AA_BRIEFCASE_CUSTOM_AGENT_HTTP",
+      "requirement": "Artificial Analysis explicitly permits the existing bring-your-own-agent HTTP mechanism, or an equivalent full-agent HTTP route, against official private AA-Briefcase v1.1.",
+      "zero_cost_required": true
+    },
+    {
+      "id": "OFFICIAL_AA_BRIEFCASE_OWNER_RUNS_BRAIN_PACKAGE",
+      "requirement": "Artificial Analysis runs the exact content-addressed Brain package/configuration directly inside its controlled benchmark environment while preserving the full Brain agent semantics.",
+      "zero_cost_required": true
+    },
+    {
+      "id": "OFFICIAL_AA_BRIEFCASE_OWNER_APPROVED_FULL_STIRRUP_CONFIGURATION",
+      "requirement": "Artificial Analysis accepts a custom full Stirrup agent configuration rather than merely substituting an LLMClient/model endpoint.",
+      "zero_cost_required": true
+    }
+  ],
+  "inadmissible_shortcuts": [
+    "TREAT_OPTIMA_CUSTOM_BENCHMARK_SCORE_AS_OFFICIAL_AA_BRIEFCASE_ELO",
+    "TREAT_PUBLIC_AA_BRIEFCASE_LITE_AS_OFFICIAL_PRIVATE_SCOPE",
+    "FREEZE_A_SUBJECT_WITHOUT_A_REAL_EVALUATOR_CALLABLE_CARRIER",
+    "REPLACE_BRAIN_FULL_AGENT_CONFIGURATION_WITH_A_THIN_MODEL_CLIENT_AND_CALL_IT_THE_SAME_SUBJECT",
+    "PAY_FOR_OPTIMA_OR_CUSTOM_BENCHMARKING_UNDER_THE_HARD_ZERO_SPEND_RULE",
+    "CLAIM_STIRRUP_COMPATIBILITY_IMPLIES_ARTIFICIAL_ANALYSIS_WILL_ACCEPT_THE_CUSTOM_AGENT_ON_OFFICIAL_AA_BRIEFCASE"
+  ],
+  "exact_owner_questions": [
+    "Is Brain eligible for independent no-fee official AA-Briefcase v1.1 coverage under Artificial Analysis's policy that providers cannot pay for results or listing?",
+    "If eligible, can the official private AA-Briefcase v1.1 evaluation accept the full Brain agent over the same or an equivalent HTTP mechanism used by Optima bring-your-own-agent?",
+    "If yes, what is the exact request/response/file-delivery/authentication/timeout/lifecycle contract for the agent endpoint?",
+    "Alternatively, can Artificial Analysis run an exact content-addressed Brain package/full Stirrup agent configuration inside its benchmark environment?",
+    "Can the resulting evidence bind the exact evaluated subject to the frozen September 22 2026 Opus 5.5 reference epoch at 1822 Elo, or provide an owner-certified matched implication/cross-epoch transform?"
+  ],
+  "wake_condition": {
+    "required": "OWNER_RESPONSE_CONFIRMING_INDEPENDENT_NO_FEE_OFFICIAL_COVERAGE_AND_AT_LEAST_ONE_FULL_AGENT_INTEGRATION_ROUTE__OR_EQUIVALENT_ZERO_COST_OFFICIAL_ROUTE",
+    "then": [
+      "FREEZE_EXACT_CALLABLE_BRAIN_SUBJECT",
+      "RUN_OFFICIAL_PRIVATE_AA_BRIEFCASE_V1_1",
+      "INGEST_AUTHENTICATED_RESULT_THROUGH_CANONICAL_V2_FROZEN_EPOCH_BRIDGE"
+    ]
+  },
+  "hardened_result_bridge": {
+    "path": "canonical/runtime/aa_briefcase_frozen_epoch_result_bridge_v2.py",
+    "git_blob_sha": "112c8cc16896857fa57787834dcdc3ff83639ce7"
+  },
+  "hard_nonclaims": [
+    "NO_OWNER_PERMISSION_RECEIVED",
+    "NO_ZERO_COST_OWNER_ROUTE_CONFIRMED",
+    "NO_EVALUATOR_CALLABLE_BRAIN_SUBJECT_EXISTS_YET",
+    "NO_OFFICIAL_AA_BRIEFCASE_RUN_EXECUTED",
+    "NO_BRAIN_AA_BRIEFCASE_SCORE",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}

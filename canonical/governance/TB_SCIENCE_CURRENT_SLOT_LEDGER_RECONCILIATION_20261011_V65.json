@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V65",
+  "date": "2026-10-11",
+  "status": "CURRENT_RANK21_FRESH_ONE_SHOT__EXECUTION_AND_TASK_READ_AUTHORITY_EFFECTIVE__EXACT_ONE_FILE_ACTIVATION_AUTHORIZED__ACTIVATION_ABSENT__ZERO_EXPOSURE__EIGHTEEN_CONSUMED",
+  "predecessor": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V64.json",
+    "git_blob_sha": "0b78e231c0273cf672de8db53efca9c0185ddd53"
+  },
+  "verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK21_PUBLIC_EFFECTIVE_AUTHORITY_VERIFY_20261011_V1.json",
+    "git_blob_sha": "06c0cbb101d5ca7795699300b96bcd44e3ce7fb9",
+    "pass": true
+  },
+  "authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK21_ONE_SLOT_EXECUTION_AUTHORITY_20261011_V1.json",
+    "git_blob_sha": "cc056211011df95034c6da8ff383eb3305f18782"
+  },
+  "activation_authority": true,
+  "counts": {
+    "benchmark_trials_consumed": 18,
+    "consumed_successes_final": 0,
+    "consumed_failures_final": 18,
+    "started_result_pending": 0,
+    "finalized_slots": 18,
+    "active_in_flight_slot_count": 0
+  },
+  "current_slot": {
+    "ledger_schedule_rank": 21,
+    "frozen_manifest_schedule_order": 20,
+    "task_rank": 20,
+    "slot_id": "terminal-bench-science/ode-law-discovery::trial-0",
+    "task_digest": "sha256:767d16a0a6226f391208b1b4bb126a6f957e5d0c8156342b5c9410a755142d65"
+  },
+  "logical_attempt_id": "7eb619d40a65597b2b2dccbcf409c143aa47e1663ca4c0d8f098167cb252811a",
+  "execution_claim_binding_digest": "sha256:fb99e7f9d8d23a789c57506dc61e31c2abd25c442245f0309d94d65b29421697",
+  "public_effective_authority": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "merge_commit_sha": "231ad9835f90c16955076b6e40d52b09b60ce959",
+    "execution_surface_git_blob_sha": "d83d9400a2d5f1f34d9b69d41b89cc1dcfa2d9c8",
+    "execution_authority_effective": true,
+    "task_read_authority_effective": true
+  },
+  "exact_activation": {
+    "head_branch": "execute/tb-science-rank21-20261011-v1",
+    "activation_path": "capsules/tb_science_rank21_20261011_v1/ACTIVATE_RANK21_V1_PR.json",
+    "activation_present": false,
+    "only_changed_path_allowed": "capsules/tb_science_rank21_20261011_v1/ACTIVATE_RANK21_V1_PR.json"
+  },
+  "state": {
+    "task_read_history": false,
+    "task_started": false,
+    "start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "result_present": false
+  },
+  "scheduler": {
+    "frozen": true,
+    "reason": "RANK21_READY_FOR_EXACT_ONE_FILE_ACTIVATION__NO_ACTIVATION_PRESENT",
+    "only_authorized_transition": "CREATE_EXACT_RANK21_ACTIVATION_FILE_AND_OPEN_PR__NO_MANUAL_MERGE"
+  },
+  "execution_authority": true,
+  "execution_authority_effective": true,
+  "task_read_authority": true,
+  "task_read_authority_effective": true,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0
+}

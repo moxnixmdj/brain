@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_TARGET_POPULATION_SCOPE_CLOSURE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "TARGET_POPULATION_SCOPE_CLOSED_AT_FIXED_ORIGINAL_HLE_TASK_LEVEL__BYTE_REVISION_NOT_LOAD_BEARING__ZERO_CREDIT_UNTIL_EXECUTION",
+  "target_predicate": "HLE_TOOLS_GE_67_7",
+  "first_party_facts": [
+    {
+      "source": "Scale Labs Humanity's Last Exam leaderboard",
+      "fact": "ON_2025_04_03_HLE_WAS_FINALIZED_TO_2500_QUESTIONS"
+    },
+    {
+      "source": "Scale Labs Humanity's Last Exam leaderboard",
+      "fact": "ON_2026_09_17_HLE_ROLLING_WAS_RELEASED_AS_A_SEPARATE_FORK_AND_MIGRATION_PATH__NOT_AS_A_MUTATION_OF_THE_ORIGINAL_FIXED_HLE"
+    },
+    {
+      "source": "Anthropic Claude Opus 5.5 System Card",
+      "fact": "TARGET_67_7_IS_REPORTED_ON_2500_QUESTION_HLE_WITH_TOOLS__NOT_HLE_ROLLING_OR_HLE_DIAMOND"
+    },
+    {
+      "source": "CAIS Hugging Face cais/hle dataset card and API metadata",
+      "fact": "CAIS_HLE_IS_THE_OFFICIAL_PUBLIC_2500_QUESTION_ORIGINAL_HLE_DATASET__CURRENT_PUBLIC_REVISION_5a81a4c7271a2a2a312b9a690f0c2fde837e4c29"
+    }
+  ],
+  "theorem": {
+    "name": "FIXED_ORIGINAL_HLE_SCOPE_IDENTITY",
+    "statement": "Once the benchmark owner finalized original HLE at 2500 questions and later introduced HLE-Rolling as a separate fork rather than mutating original HLE, a target explicitly reported as 2500-question HLE refers to the fixed original HLE task population. Exact repository byte identity is not required for score-scope transfer when the evaluated task IDs, questions, media, and gold answers are the fixed original population.",
+    "consequence": "THE_ANTHROPIC_TARGET_POPULATION_SCOPE_CAN_BE_MATCHED_BY_AUTHORIZED_ACCESS_TO_OFFICIAL_CAIS_HLE_FIXED_ORIGINAL__A_FIRST_PARTY_ANTHROPIC_HUGGINGFACE_COMMIT_SHA_RECEIPT_IS_NO_LONGER_REQUIRED"
+  },
+  "execution_binding": {
+    "preferred_reproducible_public_revision": "5a81a4c7271a2a2a312b9a690f0c2fde837e4c29",
+    "required_population": "FIXED_ORIGINAL_HLE_2500",
+    "must_exclude": [
+      "HLE_PREVIEW_2700",
+      "HLE_ROLLING",
+      "HLE_DIAMOND_1000",
+      "PRIVATE_HELD_OUT_HLE"
+    ],
+    "task_level_fields_that_must_be_from_original_hle": [
+      "id",
+      "question",
+      "image_or_image_preview",
+      "answer"
+    ]
+  },
+  "remaining_target_scope_uncertainty": [],
+  "remaining_external_blocker": "AUTHORIZED_HUGGINGFACE_CAIS_HLE_ACCESS_AND_TERMS_ACCEPTANCE",
+  "hard_nonclaims": [
+    "NO_CLAIM_ANTHROPIC_DOWNLOADED_HUGGINGFACE_COMMIT_5a81a4c_BYTE_FOR_BYTE",
+    "NO_PRIVATE_HELD_OUT_SET_EQUIVALENCE_CLAIM",
+    "NO_HLE_SCORE_OR_ACCEPTANCE_CREDIT",
+    "NO_DATASET_CASES_READ"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false
+}

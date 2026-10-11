@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_EXACT_COMMIT_EXECUTION_PREFLIGHT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "READY_EXCEPT_AUTHENTICATED_DATASET_ACCESS_AND_TARGET_REVISION_FIRST_PARTY_RECEIPT_OR_ACCEPTED_CONDITIONAL_BINDING__ZERO_CREDIT",
+  "target_predicate": "HLE_TOOLS_GE_67_7",
+  "dataset_lock": {
+    "repository": "cais/hle",
+    "required_revision": "5a81a4c7271a2a2a312b9a690f0c2fde837e4c29",
+    "required_rows": 2500,
+    "question_manifest_sha256_reference": "d85d078892a9fd7b1eccda435b6cdefa0a8004ae8a5bd6253f86e808233c33cf",
+    "gold_manifest_sha256_reference": "996fe43db9f560e38922152e1638d35723b9e827999e84f61453a1e1e30c25f1"
+  },
+  "runtime": {
+    "tool_adapter": "canonical/runtime/root2_hle_opus55_tool_adapter_v1.py",
+    "exact_commit_scorer": "canonical/runtime/hle_exact_commit_semantic_certificate_v1.py",
+    "exact_commit_scorer_git_blob_sha": "ee1e84b33cdea09049c7cf5284a357e98624b3f1",
+    "exact_commit_tests": "canonical/tests/test_hle_exact_commit_semantic_certificate_v1.py",
+    "exact_commit_tests_git_blob_sha": "f64185688799e35d5dac537f3764bfa5ea77a992"
+  },
+  "execution_sequence": [
+    "AUTHENTICATE_TO_HUGGINGFACE_AND_ACCEPT_CAIS_HLE_ACCESS_CONDITIONS",
+    "FETCH_ONLY_REVISION_5a81a4c7271a2a2a312b9a690f0c2fde837e4c29__FAIL_CLOSED_ON_DRIFT",
+    "VERIFY_2500_ROWS_AND_CONTENT_MANIFESTS",
+    "MATERIALIZE_SOLVER_VIEW_WITH_GOLD_ANSWER_AND_RATIONALE_FIELDS_PHYSICALLY_INACCESSIBLE",
+    "RUN_TRIALS_1_THROUGH_5_WITH_EXISTING_VERIFIED_HLE_TOOL_AND_CONTAMINATION_POLICY",
+    "FOR_EACH_SLOT_EMIT_ONE_FINAL_ANSWER_STRING_AND_SHA256_COMMITMENT",
+    "IRREVOCABLY_SEAL_ALL_12500_COMMITMENT_RECORDS",
+    "ONLY_AFTER_GLOBAL_SEAL_ALLOW_SCORER_PROCESS_TO_READ_HIDDEN_GOLD",
+    "RUN_EXACT_COMMIT_SCORER_WITH_ZERO_NORMALIZATION_AND_ZERO_LLM_JUDGE",
+    "REQUIRE_CORRECT_EXACT_GOLD_IDENTITIES_GE_8463",
+    "CONTENT_ADDRESS_DATASET_IDENTITY_COMMITMENTS_VERDICTS_AND_AGGREGATE_RECEIPT"
+  ],
+  "gold_isolation_invariant": {
+    "solver_may_read": [
+      "id",
+      "question",
+      "image_or_image_preview_as_required",
+      "non_gold_metadata_needed_for_task_delivery"
+    ],
+    "solver_must_not_read": [
+      "answer",
+      "rationale",
+      "rationale_image",
+      "any_derived_gold_or_solution_artifact"
+    ],
+    "scorer_may_read_gold": "ONLY_AFTER_ALL_12500_FINAL_ANSWER_COMMITMENTS_ARE_SEALED"
+  },
+  "threshold": {
+    "slots": 12500,
+    "minimum_exact_successes": 8463,
+    "certified_fraction": 0.67704,
+    "target_fraction": 0.677
+  },
+  "remaining_external_blockers": [
+    "HUGGINGFACE_AUTHENTICATED_ACCESS_AND_TERMS_ACCEPTANCE",
+    "FIRST_PARTY_ANTHROPIC_EXACT_REVISION_RECEIPT_OR_EXPLICIT_ACCEPTANCE_OF_THE_STRONG_PUBLIC_REVISION_BINDING_AS_COMPARABILITY_SUFFICIENT"
+  ],
+  "hard_nonclaims": [
+    "NO_DATASET_CONTENT_ACCESSED_BY_THIS_PREFLIGHT",
+    "NO_TERMINAL_EXECUTION_HAS_OCCURRED",
+    "NO_HLE_SCORE_EXISTS_YET",
+    "NO_PROPRIETARY_GRADER_EQUIVALENCE_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
