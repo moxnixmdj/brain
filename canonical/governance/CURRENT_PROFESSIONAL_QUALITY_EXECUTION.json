@@ -260,7 +260,9 @@
     "holistic_visual_quality_measured": false,
     "global_r4_semantic_leaf_closed": false,
     "quality_authority": false,
-    "terminal_credit_delta": 0
+    "terminal_credit_delta": 0,
+    "bounded_rendered_page_technical_observation_available": true,
+    "visual_technical_observation_extension": "canonical/governance/PROFESSIONAL_QUALITY_R4_VISUAL_TECHNICAL_OBSERVATION_EXTENSION_20261011_V1.json"
   },
   "r1_target_bound_router_v4_candidate": {
     "runtime_path": "canonical/runtime/professional_quality_p1_router_v4.py",
@@ -972,5 +974,30 @@
     "path": "canonical/verification/GITHUB_ACTIONS_PRESTEP_EXECUTION_BOUNDARY_20261011_V1.json",
     "binding": "MULTI_WORKFLOW_MULTI_RUNNER_CLASS_ZERO_STEP_LOCALIZATION__EXACT_CONTROL_PLANE_CAUSE_UNBOUND__ZERO_CREDIT",
     "full_regression_carrier_state": "SLEEP_UNTIL_REAL_RUNNER_STEP_EXECUTION_OR_CONTROL_PLANE_CHANGE_OR_AUTHORIZED_ALTERNATE_CARRIER"
+  },
+  "r4_visual_technical_observation_extension": {
+    "path": "canonical/governance/PROFESSIONAL_QUALITY_R4_VISUAL_TECHNICAL_OBSERVATION_EXTENSION_20261011_V1.json",
+    "git_blob_sha": "651f5d70f92b348f5e71bf6030bdbe07b2c385cf",
+    "status": "VERIFIED_BOUNDED_RENDERED_PAGE_TECHNICAL_OBSERVATION__PDF_DOCX_PPTX_XLSX_REAL_COMPOSITION_PASS",
+    "capability_id": "professional.artifact.visual_observer.v1",
+    "independent_workflow_run_id": 38153807927,
+    "measurement_kinds": [
+      "PAGE_NOT_BLANK",
+      "TEXT_PRESENT_WHEN_REQUIRED",
+      "OCR_LINE_CONFIDENCE_BOUNDED",
+      "TEXT_NOT_TOUCHING_HARD_CROP",
+      "NO_MAJOR_OCR_LINE_OVERLAP",
+      "PAGE_CONTENT_SHA256",
+      "SOURCE_CONTENT_SHA256"
+    ],
+    "bounded_rendered_page_technical_observation_available": true,
+    "caller_visual_self_attestation_authority": false,
+    "holistic_visual_quality_measured": false,
+    "semantic_relevance_or_correctness_measured": false,
+    "owner_evaluator_containment_proved": false,
+    "normative_aggregation_closure_proved": false,
+    "global_r4_root_closed": false,
+    "quality_authority": false,
+    "terminal_credit_delta": 0
   }
 }
