@@ -25,7 +25,7 @@
       },
       {
         "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "git_blob_sha": "70e83ed3100860528121d2cef46b20c14a776495"
+        "git_blob_sha": "e9a3a78e614906d344d1c5dfbcfdcf8365b2f323"
       },
       {
         "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
@@ -156,11 +156,11 @@
       "ready": "BLOCKED_ONLY_BY_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION"
     },
     {
-      "work_id": "BYTES_EXACT_SYMBOLIC_V68_NEXT_PHYSICAL_CUT",
+      "work_id": "BYTES_EXACT_SYMBOLIC_V69_NEXT_PHYSICAL_CUT",
       "work_type": "EFFICIENCY_IMPROVEMENT",
       "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1708229_RAW_PYTHON_BYTES_USING_SPENT_NEXT75_ONLY__RERANK_BEFORE_NEW_PHYSICAL_CUT__DO_NOT_TOUCH_FROZEN_NEXT76_BEFORE_CUT",
-      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V68_CURRENT__LOCAL_BINDING_SEMANTIC_COMPRESSION_VERIFIED",
+      "causal_role": "CONTINUE_RESOURCE_REDUCTION_FROM_1707804_RAW_PYTHON_BYTES_USING_SPENT_NEXT76_ONLY__RERANK_BEFORE_NEW_PHYSICAL_CUT__DO_NOT_TOUCH_FROZEN_NEXT77_BEFORE_CUT",
+      "readiness": "ACTIONABLE_WITH_EXISTING_RECONSTRUCTION_AND_QUALIFICATION_MACHINERY__V69_CURRENT__EIGHT_FUNCTION_LOCAL_BINDING_SEMANTIC_COMPRESSION_VERIFIED",
       "claims_new_primitive": false,
       "score_state": "UNBOUND",
       "scheduler_state": "READY_EXECUTION",
@@ -179,18 +179,18 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "source_git_blob_sha": "70e83ed3100860528121d2cef46b20c14a776495",
-        "raw_python_source_bytes": 1708229,
-        "B_exec_raw_python_source_bytes": 1710989,
-        "qualification": "19090/19090",
-        "next_action": "RERANK_EXACT_V68_USING_SPENT_NEXT75_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT76_20261011_V1",
-        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT76_20261011_V1",
-        "next_frozen_library_file_id": "libfile_85e0b9f5a6888191a713951253a7924f",
+        "source_git_blob_sha": "e9a3a78e614906d344d1c5dfbcfdcf8365b2f323",
+        "raw_python_source_bytes": 1707804,
+        "B_exec_raw_python_source_bytes": 1710564,
+        "qualification": "19320/19320",
+        "next_action": "RERANK_EXACT_V69_USING_SPENT_NEXT76_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_QUAL_SUCCESSOR_NEXT77_20261011_V1",
+        "next_frozen_qualification": "QUAL_SUCCESSOR_NEXT77_20261011_V1",
+        "next_frozen_library_file_id": "libfile_1c17ca4a5ea88191a666a5958fdfacef",
         "independent_verification": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPF_PERTURB_V55_VERIFY_20261011_V1.json",
         "vector_bounds_complete": false,
         "next_frozen_spent": false
       },
-      "ready": "V68_CURRENT_AT_1708229_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT",
+      "ready": "V69_CURRENT_AT_1707804_BYTES__CONTINUE_ONLY_NONCONFLICTING_RESOURCE_PARETO_CUT",
       "source_git_blob_sha": "70e83ed3100860528121d2cef46b20c14a776495"
     },
     {
@@ -645,12 +645,12 @@
   },
   "bytes_current_frontier": {
     "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-    "observed_git_blob_sha": "70e83ed3100860528121d2cef46b20c14a776495",
-    "status": "ACTIVE_RESEARCH__LIBMPF_LOCAL_BINDINGS_COMPACT_V68_FRONTIER__SUCCESSOR_READY",
-    "raw_python_source_bytes": 1708229,
-    "B_exec_raw_python_source_bytes": 1710989,
-    "qualification": "19090/19090",
-    "next": "Rerank exact V68 using spent NEXT75 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT76_20261011_V1.",
+    "observed_git_blob_sha": "e9a3a78e614906d344d1c5dfbcfdcf8365b2f323",
+    "status": "ACTIVE_RESEARCH__LIBMPF_CORE_BINDINGS_COMPACT_V69_FRONTIER__SUCCESSOR_READY",
+    "raw_python_source_bytes": 1707804,
+    "B_exec_raw_python_source_bytes": 1710564,
+    "qualification": "19320/19320",
+    "next": "Rerank exact V69 using spent NEXT76 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT77_20261011_V1.",
     "promotion_credit": 0,
     "observed_snapshot_is_non_authoritative_for_v15_runtime": true
   }
