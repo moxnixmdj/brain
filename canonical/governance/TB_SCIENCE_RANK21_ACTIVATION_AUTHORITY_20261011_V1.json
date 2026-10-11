@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK21_ACTIVATION_AUTHORITY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "AUTHORIZED_EXACT_ONE_FILE_ACTIVATION__RANK21_PUBLIC_EFFECTIVE_AUTHORITY_VERIFIED__FRESH_EXECUTION_BRANCH__ZERO_EXPOSURE",
+  "slot_id": "terminal-bench-science/ode-law-discovery::trial-0",
+  "task_digest": "sha256:767d16a0a6226f391208b1b4bb126a6f957e5d0c8156342b5c9410a755142d65",
+  "logical_attempt_id": "7eb619d40a65597b2b2dccbcf409c143aa47e1663ca4c0d8f098167cb252811a",
+  "execution_claim_binding_digest": "sha256:fb99e7f9d8d23a789c57506dc61e31c2abd25c442245f0309d94d65b29421697",
+  "claim_epoch_id": "RANK21_V1_BOUND_RUNTIME_CALLER_REPAIR_VALIDATION_20261011_V1",
+  "current_ledger": {
+    "path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V64.json",
+    "git_blob_sha": "0b78e231c0273cf672de8db53efca9c0185ddd53"
+  },
+  "effective_authority_verification": {
+    "path": "canonical/verification/TB_SCIENCE_RANK21_PUBLIC_EFFECTIVE_AUTHORITY_VERIFY_20261011_V1.json",
+    "git_blob_sha": "06c0cbb101d5ca7795699300b96bcd44e3ce7fb9"
+  },
+  "canonical_authority": {
+    "path": "canonical/governance/TB_SCIENCE_RANK21_ONE_SLOT_EXECUTION_AUTHORITY_20261011_V1.json",
+    "git_blob_sha": "cc056211011df95034c6da8ff383eb3305f18782"
+  },
+  "public_surface": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "base_branch": "terminal-execution-v1",
+    "base_commit_sha": "231ad9835f90c16955076b6e40d52b09b60ce959",
+    "surface_git_blob_sha": "d83d9400a2d5f1f34d9b69d41b89cc1dcfa2d9c8",
+    "authority_git_blob_sha": "009e5be596023e64ad7e0e7cd5cc1bf1b8547042",
+    "ledger_git_blob_sha": "7f991f231fb135bdfe8ccc502305d5ffa08f0d2e",
+    "epoch_git_blob_sha": "8a492bb575ae4a0c097b95194541932962b5cc7d",
+    "execution_claim_git_blob_sha": "46e035081fa05c7264f732c12acbac6bd62ee42b",
+    "workflow_git_blob_sha": "1950ebf30e1431ba9e23c97491ecf9b7d9ae0480",
+    "behavior_git_blob_sha": "54011a7b4005ca8998a5987892b7ecaa9bf3f884"
+  },
+  "exact_public_activation": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "base_branch": "terminal-execution-v1",
+    "head_branch": "execute/tb-science-rank21-20261011-v1",
+    "head_branch_created_from_base_commit": "231ad9835f90c16955076b6e40d52b09b60ce959",
+    "workflow_path": ".github/workflows/execute-tb-science-rank21-20261011-v1.yml",
+    "workflow_git_blob_sha": "1950ebf30e1431ba9e23c97491ecf9b7d9ae0480",
+    "activation_path": "capsules/tb_science_rank21_20261011_v1/ACTIVATE_RANK21_V1_PR.json",
+    "only_changed_path_allowed": "capsules/tb_science_rank21_20261011_v1/ACTIVATE_RANK21_V1_PR.json",
+    "activation_payload": {
+      "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK21_ACTIVATION_V6",
+      "activate": true,
+      "slot_id": "terminal-bench-science/ode-law-discovery::trial-0",
+      "task_digest": "sha256:767d16a0a6226f391208b1b4bb126a6f957e5d0c8156342b5c9410a755142d65",
+      "logical_attempt_id": "7eb619d40a65597b2b2dccbcf409c143aa47e1663ca4c0d8f098167cb252811a",
+      "execution_claim_binding_digest": "sha256:fb99e7f9d8d23a789c57506dc61e31c2abd25c442245f0309d94d65b29421697"
+    }
+  },
+  "effective_authority": {
+    "branch_creation_authority": true,
+    "activation_file_creation_authority": true,
+    "pull_request_creation_authority": true,
+    "activation_pr_merge_authority": false,
+    "direct_task_read_authority": false,
+    "direct_benchmark_execution_authority": false,
+    "workflow_task_read_authority_only_after_live_preflight": true,
+    "retries_authorized": 0,
+    "replacement_allowed": false
+  },
+  "state_at_authorization": {
+    "activation_present": false,
+    "task_read_history": false,
+    "task_started": false,
+    "durable_start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "result_present": false
+  },
+  "authorized": true,
+  "hard_nonclaims": [
+    "NO_TASK_READ_FROM_THIS_AUTHORITY_DOCUMENT",
+    "NO_DURABLE_START_FROM_THIS_AUTHORITY_DOCUMENT",
+    "NO_BENCHMARK_RESULT",
+    "NO_RETRY_OR_REPLACEMENT_AUTHORITY",
+    "NO_AUTHORITY_TO_MERGE_THE_ACTIVATION_PR",
+    "NO_RANK20_REPLAY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "benchmark_trials_consumed_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "next": "CREATE_ONLY_THE_EXACT_ACTIVATION_FILE_ON_THE_ALREADY_FRESH_EXECUTION_BRANCH__OPEN_PR_TO_TERMINAL_EXECUTION_V1__DO_NOT_MERGE_MANUALLY"
+}
