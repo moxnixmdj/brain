@@ -16,23 +16,30 @@ permissions:
 
 jobs:
   full-regression:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted, Linux, X64, brain-low-ram]
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.sha }}
           fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
+      - name: Install exact test runner
+        run: |
+          python -m pip install --disable-pip-version-check pytest==9.1.1
+
       - name: Record exact subject
         run: |
           mkdir -p /tmp/brain-regression
           git rev-parse HEAD | tee /tmp/brain-regression/subject_sha.txt
+          test "$(git rev-parse HEAD)" = "${GITHUB_SHA}"
           python --version | tee /tmp/brain-regression/python_version.txt
+          python -m pytest --version | tee /tmp/brain-regression/pytest_version.txt
+          printf '%s\n' "${RUNNER_NAME}" | tee /tmp/brain-regression/runner_name.txt
 
       - name: Compile assurance and professional load-bearing runtimes
         run: |
@@ -43,7 +50,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          python -m pytest -q canonical/tests             --disable-warnings             > /tmp/brain-regression/pytest.txt 2>&1
+          python -m pytest -q canonical/tests             --disable-warnings             --junitxml=/tmp/brain-regression/pytest.xml             > /tmp/brain-regression/pytest.txt 2>&1
           rc=$?
           printf '%s\n' "$rc" | tee /tmp/brain-regression/pytest_rc.txt
           tail -n 250 /tmp/brain-regression/pytest.txt
@@ -65,7 +72,7 @@ jobs:
         shell: bash
         run: |
           python - <<'PY'
-          import hashlib, json, pathlib, subprocess
+          import hashlib, json, pathlib, subprocess, xml.etree.ElementTree as ET
           root=pathlib.Path("/tmp/brain-regression")
           def read(name):
               p=root/name
@@ -75,11 +82,20 @@ jobs:
           assurance_out=read("assurance.txt")
           pytest_rc=int((read("pytest_rc.txt") or "999").strip())
           assurance_rc=int((read("assurance_rc.txt") or "999").strip())
+          tests_executed=0
+          xml_path=root/"pytest.xml"
+          if xml_path.exists():
+              doc=ET.parse(xml_path).getroot()
+              suites=[doc] if doc.tag=="testsuite" else list(doc.findall("testsuite"))
+              tests_executed=sum(int(s.attrib.get("tests","0")) for s in suites)
           receipt={
             "schema":"PROJECT_BRAIN_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION_V1",
             "subject_commit_sha":sha,
             "python_version":read("python_version.txt").strip(),
-            "full_pytest_command":"python -m pytest -q canonical/tests --disable-warnings",
+            "pytest_version":read("pytest_version.txt").strip(),
+            "runner_name":read("runner_name.txt").strip(),
+            "full_pytest_command":"python -m pytest -q canonical/tests --disable-warnings --junitxml=/tmp/brain-regression/pytest.xml",
+            "pytest_tests_executed":tests_executed,
             "pytest_returncode":pytest_rc,
             "pytest_output_sha256":hashlib.sha256(pytest_out.encode()).hexdigest(),
             "pytest_tail":pytest_out[-12000:],
@@ -87,7 +103,7 @@ jobs:
             "assurance_returncode":assurance_rc,
             "assurance_output_sha256":hashlib.sha256(assurance_out.encode()).hexdigest(),
             "assurance_tail":assurance_out[-6000:],
-            "full_private_current_main_regression_pass":pytest_rc==0 and assurance_rc==0,
+            "full_private_current_main_regression_pass":tests_executed>0 and pytest_rc==0 and assurance_rc==0,
             "quality_authority":False,
             "acceptance_authority":False,
             "terminal_authority":False
@@ -103,4 +119,4 @@ jobs:
           path: /tmp/brain-regression/
           if-no-files-found: error
 
-# trigger: exact-current-main-regression-ubuntu-22-04-carrier-20261011-v2
+# carrier: self-hosted-linux-x64-low-ram-exact-sha-20261011-v3
