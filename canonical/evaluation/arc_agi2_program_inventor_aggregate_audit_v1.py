@@ -11,6 +11,7 @@ import hashlib
 import json
 import time
 from collections import Counter
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 from typing import Any
 
@@ -29,6 +30,29 @@ def _corpus_sha256(files: list[Path]) -> str:
     return h.hexdigest()
 
 
+def _score_one(args: tuple[str, int, int, int, int, int]) -> dict[str, Any]:
+    path_s, max_depth, attempts, max_states, max_equiv, max_cells = args
+    path = Path(path_s)
+    task = json.loads(path.read_text(encoding="utf-8"))
+    result = score_public_task(
+        task,
+        max_depth=max_depth,
+        attempts=attempts,
+        max_semantic_states_per_depth=max_states,
+        max_equivalent_programs_per_semantics=max_equiv,
+        max_grid_cells=max_cells,
+    )
+    outer = result.get("program_invention", {})
+    invention = outer.get("invention", {}) if isinstance(outer, dict) else {}
+    return {
+        "status": str(result.get("status")),
+        "solved": result.get("exact_task_solved") is True,
+        "invention_status": str(invention.get("status")),
+        "generated_program_count": int(invention.get("generated_program_count", 0) or 0),
+        "semantic_states_by_depth": dict(invention.get("semantic_states_by_depth", {}) or {}),
+    }
+
+
 def run(
     data_dir: Path,
     *,
@@ -37,10 +61,13 @@ def run(
     max_semantic_states_per_depth: int = 4000,
     max_equivalent_programs_per_semantics: int = 4,
     max_grid_cells: int = 10000,
+    workers: int = 8,
 ) -> dict[str, Any]:
     files = sorted(data_dir.glob("*.json"))
     if not files:
         raise SystemExit("NO_TASK_FILES")
+    if isinstance(workers, bool) or not isinstance(workers, int) or workers < 1:
+        raise SystemExit("WORKERS_INVALID")
 
     status_counts: Counter[str] = Counter()
     invention_status_counts: Counter[str] = Counter()
@@ -52,31 +79,23 @@ def run(
     state_totals: Counter[str] = Counter()
     start = time.perf_counter()
 
-    for path in files:
-        task = json.loads(path.read_text(encoding="utf-8"))
-        result = score_public_task(
-            task,
-            max_depth=max_depth,
-            attempts=attempts,
-            max_semantic_states_per_depth=max_semantic_states_per_depth,
-            max_equivalent_programs_per_semantics=max_equivalent_programs_per_semantics,
-            max_grid_cells=max_grid_cells,
-        )
-        scored += 1
-        status_counts[str(result.get("status"))] += 1
-        solved += int(result.get("exact_task_solved") is True)
-
-        outer = result.get("program_invention", {})
-        invention = outer.get("invention", {}) if isinstance(outer, dict) else {}
-        istatus = str(invention.get("status"))
-        invention_status_counts[istatus] += 1
-        exact_training_program += int(istatus == "EXACT_PROGRAMS_FOUND")
-
-        n = int(invention.get("generated_program_count", 0) or 0)
-        generated_programs += n
-        max_generated = max(max_generated, n)
-        for depth, count in (invention.get("semantic_states_by_depth", {}) or {}).items():
-            state_totals[str(depth)] += int(count)
+    args = [
+        (str(path), max_depth, attempts, max_semantic_states_per_depth, max_equivalent_programs_per_semantics, max_grid_cells)
+        for path in files
+    ]
+    with ProcessPoolExecutor(max_workers=workers) as pool:
+        for row in pool.map(_score_one, args):
+            scored += 1
+            status_counts[row["status"]] += 1
+            solved += int(row["solved"])
+            istatus = row["invention_status"]
+            invention_status_counts[istatus] += 1
+            exact_training_program += int(istatus == "EXACT_PROGRAMS_FOUND")
+            n = row["generated_program_count"]
+            generated_programs += n
+            max_generated = max(max_generated, n)
+            for depth, count in row["semantic_states_by_depth"].items():
+                state_totals[str(depth)] += int(count)
 
     elapsed = time.perf_counter() - start
     return {
@@ -93,6 +112,7 @@ def run(
         "max_generated_program_count_single_task": max_generated,
         "aggregate_semantic_states_by_depth": dict(sorted(state_totals.items())),
         "wall_clock_seconds": elapsed,
+        "workers": workers,
         "corpus_sha256": _corpus_sha256(files),
         "search_config": {
             "max_depth": max_depth,
