@@ -263,12 +263,6 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         )
 
     def test_r2_mechanism_policy_binds_mutable_current_r2_by_path_and_rechecks_invariants(self):
-        v16 = json.loads(
-            (
-                ROOT
-                / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261011_V16.json"
-            ).read_text()
-        )
         pointer = json.loads(
             (ROOT / "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json").read_text()
         )
@@ -472,6 +466,12 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
             (
                 ROOT
                 / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V9.json"
+            ).read_text()
+        )
+        v16 = json.loads(
+            (
+                ROOT
+                / "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261011_V16.json"
             ).read_text()
         )
         pointer = json.loads(
