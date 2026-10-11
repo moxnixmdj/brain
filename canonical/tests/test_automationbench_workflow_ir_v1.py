@@ -92,6 +92,16 @@ class AutomationBenchWorkflowIRV1Tests(unittest.TestCase):
         self.assertEqual(msg["subject"], "Daily Status")
         self.assertTrue(msg["grounding_complete"])
 
+    def test_let_channel_know_is_communication_intent(self):
+        out = compile_workflow_ir(
+            "Let #ops-updates know once it's created."
+        )
+        self.assertEqual(len(out["communications"]), 1)
+        msg = out["communications"][0]
+        self.assertEqual(msg["channel"], "SLACK")
+        self.assertEqual(msg["destination"], "#ops-updates")
+        self.assertFalse(msg["grounding_complete"])
+
     def test_rubric_and_private_information_are_never_inputs(self):
         out = compile_workflow_ir("Create a task and notify #ops with 'done'.")
         self.assertFalse(out["private_task_information_used"])
