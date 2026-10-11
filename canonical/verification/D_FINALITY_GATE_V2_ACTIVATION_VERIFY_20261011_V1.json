@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_D_FINALITY_GATE_V2_ACTIVATION_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_CURRENT_MAIN__12_OF_12_BINDINGS__INDEPENDENT_15_OF_15__CURRENT_D_FINALITY_OPEN__ZERO_CREDIT",
+  "base_main_commit": "269a4cc5786912520655739116d789e4de31bdfd",
+  "checks": {
+    "runtime_exact": true,
+    "test_exact": true,
+    "independent_verification_exact": true,
+    "activation_runtime_binding": true,
+    "activation_verification_binding": true,
+    "scheduler_activation_binding": true,
+    "scheduler_runtime_binding": true,
+    "scheduler_downstream_only": true,
+    "mission_scheduler_binding": true,
+    "mission_activation_binding": true,
+    "independent_adversarial_15_of_15": true,
+    "current_d_finality_and_terminal_authority_not_claimed": true
+  },
+  "current_bindings": {
+    "runtime": [
+      "canonical/runtime/finality_gate_v2.py",
+      "b4210fbca85d40756471e534d3cbb4a9af24cac3"
+    ],
+    "tests": [
+      "canonical/tests/test_finality_gate_v2.py",
+      "0f4a5b6883e0cba8d7727d5a56b3fb4b2932198a"
+    ],
+    "verification": [
+      "canonical/verification/D_FINALITY_GATE_V2_INDEPENDENT_VERIFY_20261011_V1.json",
+      "1806a419fe7090c5101f07900c0951395ce6624e"
+    ],
+    "activation": [
+      "canonical/governance/D_FINALITY_GATE_V2_ACTIVATION_20261011_V1.json",
+      "df07a961f7bbe4baba6f5c3f78ddbb19d71196d4"
+    ],
+    "scheduler": [
+      "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json",
+      "8c787430e46ed3afa6b9956cd1a55b362fc4eb66"
+    ],
+    "mission": [
+      "canonical/governance/CURRENT_MISSION_OBJECTIVE.json",
+      "68cac224c796dd9e2bb153c11c9631dde9a629a5"
+    ]
+  },
+  "result": {
+    "d_finality_gate_load_bearing_when_reachable": true,
+    "current_d_finality": false,
+    "terminal_authority": false,
+    "terminal_credit_delta": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
