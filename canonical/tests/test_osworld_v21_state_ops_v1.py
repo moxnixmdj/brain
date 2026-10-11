@@ -44,7 +44,7 @@ def test_shell_and_interpreter_escape_hatches_rejected():
 
 def test_cli_absolute_args_respect_protected_paths():
     try:
-        compile_state_ops({"ops": [{"type": "RUN_CLI", "argv": ["unzip", "/benchmark_releases/x.zip"]}]})
+        compile_state_ops({"ops": [{"type": "RUN_CLI", "argv": ["pdftotext", "/benchmark_releases/x.pdf", "/home/oai/share/x.txt"]}]})
     except StateOpsError as exc:
         assert str(exc) == "PROTECTED_PATH_FORBIDDEN"
     else:
