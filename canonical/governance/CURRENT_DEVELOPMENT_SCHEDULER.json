@@ -194,7 +194,7 @@
   },
   "live_frontier_residual_currentness_20261011": {
     "status": "RECONCILED__SOLVED_PROFESSIONAL_DEPLETION_REMOVED__ASSURANCE_SINGLE_GATE__BYTES_V32__NO_EXECUTION_OR_PROMOTION_AUTHORITY",
-    "path": "canonical/verification/LIVE_FRONTIER_SCHEDULING_CURRENTNESS_RECONCILIATION_20261011_V2.json",
+    "path": "canonical/verification/LIVE_FRONTIER_SCHEDULING_CURRENTNESS_RECONCILIATION_20261011_V3.json",
     "source_main_commit": "21ce41c63619dec25eb8ca8f34d8add33d1a34ef",
     "live_frontier_git_blob_sha": "d6745cdd39692308ec8f573be52371f03a5a12a9",
     "execution_authority": false,
