@@ -224,3 +224,82 @@ def test_generic_search_workflow_observe_fill_press_observe_done():
     )
     fifth = decide(_state(instruction, history=[observed, filled, pressed, post], screenshot="s2"))
     assert fifth["actions"] == [{"type": "DONE"}]
+
+
+def _guest_receipt(ops, output, screenshot="old"):
+    return {
+        "screenshot_sha256": screenshot,
+        "actions": ["WAIT"],
+        "submitted_operations": ops,
+        "guest_result": {"type": "STATE_OPS", "ok": True, "status": "ok", "output": output},
+    }
+
+
+def test_create_explicit_text_file_write_verify_done():
+    instruction = 'Create "notes.txt" containing "hello world"'
+    first = decide(_state(instruction, screenshot="s0"))
+    assert first["actions"] == [{
+        "type": "STATE_OPS",
+        "ops": [
+            {"type": "WRITE_TEXT", "path": "/home/oai/share/notes.txt", "text": "hello world"},
+            {"type": "ASSERT_TEXT_EQUALS", "path": "/home/oai/share/notes.txt", "text": "hello world"},
+        ],
+    }]
+
+    verified = _guest_receipt(
+        first["actions"][0]["ops"],
+        "WRITE_TEXT:PASS:/home/oai/share/notes.txt:chars=11\n"
+        "ASSERT_TEXT_EQUALS:PASS:/home/oai/share/notes.txt",
+        screenshot="s0",
+    )
+    second = decide(_state(instruction, history=[verified], screenshot="s0"))
+    assert second["actions"] == [{"type": "DONE"}]
+
+
+def test_replace_existing_text_file_discover_replace_verify_done():
+    instruction = 'Replace "alpha" with "omega" in notes.txt'
+
+    first = decide(_state(instruction, screenshot="s0"))
+    assert first["actions"] == [{
+        "type": "STATE_OPS",
+        "ops": [{"type": "LIST_DIR", "path": "/home/oai/share", "max_entries": 200}],
+    }]
+
+    listing_output = (
+        'LIST_DIR:PASS:/home/oai/share:'
+        '[{"name":"notes.txt","path":"/home/oai/share/notes.txt",'
+        '"is_file":true,"is_dir":false,"size":20}]'
+    )
+    listed = _guest_receipt(first["actions"][0]["ops"], listing_output, screenshot="s0")
+    second = decide(_state(instruction, history=[listed], screenshot="s0"))
+    assert second["actions"] == [{
+        "type": "STATE_OPS",
+        "ops": [
+            {
+                "type": "TEXT_REPLACE",
+                "path": "/home/oai/share/notes.txt",
+                "old": "alpha",
+                "new": "omega",
+                "replace_all": True,
+            },
+            {
+                "type": "ASSERT_TEXT_CONTAINS",
+                "path": "/home/oai/share/notes.txt",
+                "text": "omega",
+            },
+        ],
+    }]
+
+    verified = _guest_receipt(
+        second["actions"][0]["ops"],
+        "TEXT_REPLACE:PASS:/home/oai/share/notes.txt:chars=20\n"
+        "ASSERT_TEXT_CONTAINS:PASS:/home/oai/share/notes.txt",
+        screenshot="s0",
+    )
+    third = decide(_state(instruction, history=[listed, verified], screenshot="s0"))
+    assert third["actions"] == [{"type": "DONE"}]
+
+
+def test_create_file_without_explicit_content_does_not_invent_data():
+    out = decide(_state("Create notes.txt with the appropriate content", screenshot="s0"))
+    assert out["actions"] == [{"type": "WAIT"}]
