@@ -164,6 +164,59 @@ def _non_background_bbox(grid: Grid) -> tuple[int, int, int, int] | None:
     return min(rs), min(cs), max(rs), max(cs)
 
 
+def _top_left_bbox_quadrant(grid: Grid) -> Grid | None:
+    bbox = _non_background_bbox(grid)
+    if bbox is None:
+        return None
+    cropped = _crop_bbox(grid, bbox)
+    h, w = _shape(cropped)
+    return tuple(tuple(row[: (w + 1) // 2]) for row in cropped[: (h + 1) // 2])
+
+
+def _spans(flags: list[bool]) -> list[tuple[int, int]]:
+    out: list[tuple[int, int]] = []
+    start: int | None = None
+    for i, flag in enumerate([*flags, False]):
+        if flag and start is None:
+            start = i
+        elif not flag and start is not None:
+            out.append((start, i))
+            start = None
+    return out
+
+
+def _separator_panels(grid: Grid) -> list[Grid]:
+    bg = _background(grid)
+    h, w = _shape(grid)
+    row_spans = _spans([not all(v == bg for v in grid[r]) for r in range(h)])
+    col_spans = _spans([not all(grid[r][c] == bg for r in range(h)) for c in range(w)])
+    if len(row_spans) * len(col_spans) <= 1:
+        return []
+    panels: list[Grid] = []
+    for r0, r1 in row_spans:
+        for c0, c1 in col_spans:
+            panels.append(tuple(tuple(grid[r][c0:c1]) for r in range(r0, r1)))
+    return panels
+
+
+def _select_unique_color_panel(grid: Grid) -> Grid | None:
+    panels = _separator_panels(grid)
+    if not panels:
+        return None
+    bg = _background(grid)
+    palettes = [
+        {v for row in panel for v in row if v != bg}
+        for panel in panels
+    ]
+    color_frequency = Counter(color for palette in palettes for color in palette)
+    candidates = [
+        panel
+        for panel, palette in zip(panels, palettes)
+        if any(color_frequency[color] == 1 for color in palette)
+    ]
+    return candidates[0] if len(candidates) == 1 else None
+
+
 def describe_scene(value: Sequence[Sequence[int]]) -> dict[str, Any]:
     grid = _grid(value)
     bg = _background(grid)
@@ -277,6 +330,10 @@ def _predict(h: Mapping[str, Any], grid: Grid) -> Grid | None:
         return None if bbox is None else _crop_bbox(grid, bbox)
     if kind == "SELECT_COMPONENT_CROP":
         return _component_crop(grid, h["selector"])
+    if kind == "BBOX_TOP_LEFT_QUADRANT":
+        return _top_left_bbox_quadrant(grid)
+    if kind == "SELECT_SEPARATOR_PANEL_UNIQUE_COLOR":
+        return _select_unique_color_panel(grid)
     raise ARCNoveltyCompilerError("HYPOTHESIS_KIND_UNSUPPORTED")
 
 
@@ -362,6 +419,14 @@ def compile_hypotheses(
     if _consistent(h, pairs):
         candidates.append(h)
 
+    h = {"kind": "BBOX_TOP_LEFT_QUADRANT"}
+    if _consistent(h, pairs):
+        candidates.append(h)
+
+    h = {"kind": "SELECT_SEPARATOR_PANEL_UNIQUE_COLOR"}
+    if _consistent(h, pairs):
+        candidates.append(h)
+
     crop = {"kind": "CROP_NON_BACKGROUND"}
     if _consistent(crop, pairs):
         candidates.append(crop)
@@ -407,6 +472,8 @@ def compile_hypotheses(
             "HORIZONTAL_MIRROR_EXTENSION",
             "VERTICAL_MIRROR_EXTENSION",
             "TWO_AXIS_MIRROR_QUADRANT_EXTENSION",
+            "BOUNDING_BOX_TOP_LEFT_QUADRANT_EXTRACTION",
+            "SEPARATOR_PANEL_UNIQUE_COLOR_SELECTION",
             "NON_BACKGROUND_BOUNDING_BOX_CROP",
             "UNIQUE_LARGEST_OR_SMALLEST_COMPONENT_CROP",
         ],
