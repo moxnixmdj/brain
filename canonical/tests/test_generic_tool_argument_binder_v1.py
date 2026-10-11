@@ -7,6 +7,7 @@ from canonical.runtime.generic_tool_argument_binder_v1 import (
     bind_endpoint_call,
     canonical_field,
     extract_records,
+    endpoint_grounding_contract,
 )
 
 
@@ -104,6 +105,37 @@ class GenericToolArgumentBinderV1Tests(unittest.TestCase):
         self.assertTrue(out["pass"], out)
         self.assertIn("/sections/sec_feb/addTask", out["arguments"]["url"])
         self.assertEqual(json.loads(out["arguments"]["body"])["task"], "task_new")
+
+    def test_grounding_contract_exposes_only_missing_required_evidence(self):
+        endpoint = {
+            "id":"opaque.modify",
+            "method":"PATCH",
+            "url":"https://opaque.invalid/orders/{id}",
+            "parameters":{
+                "id":{"required":True,"location":"path","type":"string"}
+            },
+            "request":"{status?: string}",
+        }
+        out = endpoint_grounding_contract(
+            goal="Set the Acme order status to closed.",
+            endpoint=endpoint,
+        )
+        self.assertEqual(out["required_evidence_semantics"], ["id"])
+        self.assertIn("status", out["goal_grounded_semantics"])
+
+    def test_create_optional_name_becomes_identity_grounding_obligation(self):
+        endpoint = {
+            "id":"opaque.create",
+            "method":"POST",
+            "url":"https://opaque.invalid/tasks",
+            "request":"{name?: string, due_on?: string, project?: string}",
+        }
+        out = endpoint_grounding_contract(
+            goal="Create the task in project proj_blue.",
+            endpoint=endpoint,
+        )
+        self.assertIn("name", out["required_evidence_semantics"])
+        self.assertIn("project", out["goal_grounded_semantics"])
 
     def test_required_unknown_body_field_fails_closed(self):
         endpoint = {
