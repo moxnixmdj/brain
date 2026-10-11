@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_MUL_TOKEN_COMPACT_V79_SUCCESSOR_EXECUTION_20261011_V2",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__MUL_TOKEN_INDENT_COMPACTION__SPENT_NEXT83_AND_FRESH_NEXT84_PASS__NEXT85_FROZEN_UNSPENT__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "subject": {
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_OPERATOR_WHITESPACE_V78_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "e4e5e57c5c41f738ced105271d4e4bb907eaa1afe33e01788204009d49315f60",
+    "manifest_sha256": "0a646be1990d7ed4cfe0b8cc918d2fae3856be6bdca0cec9e65a7002b434dea5",
+    "python_files": 277,
+    "raw_python_source_bytes": 1581283,
+    "B_exec_raw_python_source_bytes": 1584043,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v78_bytes": -7923
+  },
+  "selection": {
+    "id": "MUL_TOKEN_INDENT_COMPACTION_V79",
+    "changed_path": "sympy/core/mul.py",
+    "old_bytes": 44522,
+    "new_bytes": 36599,
+    "saved_bytes": 7923,
+    "method": "PYTHON_TOKENIZE_UNTOKENIZE__DROP_COMMENT_TOKENS__REDUCE_INDENT_TOKEN_STRING_TO_ONE_SPACE_PER_ACTIVE_DEPTH",
+    "ast_equivalence": true,
+    "semantic_token_equivalence": true
+  },
+  "qualification": {
+    "spent_NEXT83": {
+      "cases": 20930,
+      "corpus_sha256": "31fa9c3a1bde80da7ba8928f784ada57f9761241a938bf9bb7551ebb0d9bb8b8",
+      "candidate": "20930/20930",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT84": {
+      "cases": 21160,
+      "seed": 1963279586,
+      "per_operation_budget": 1840,
+      "corpus_sha256": "1720d092cbbec8d5a2dbd1a64800f83f8563752d8cd211015e824d38a2d879cf",
+      "candidate": "21160/21160",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "independent_reconstruction": {
+    "carrier": "CHATGPT_CONTAINER_SECOND_CARRIER",
+    "result": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
+    "transform_reproduction": "EXACT__MUL_PY_BYTE_IDENTICAL",
+    "ast_equivalence": "PASS",
+    "semantic_token_equivalence": "PASS",
+    "external_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V79_MUL_TOKEN_COMPACT_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_f60ea31bcd34819184719cf523b11054",
+    "bytes": 265064,
+    "sha256": "a38f32b4ca57a22eefc35c04d10a0950011c1dc2b841ab38929de1d0e9bcb931"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT85_20261011_V1",
+    "cases": 21390,
+    "seed": 3302894977,
+    "per_operation_budget": 1860,
+    "corpus_sha256": "0b614af5518c736a62faf04ea05f04438b005e8a7fb0c2b10e099840327d764f",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT85_20261011_V1.jsonl",
+    "library_file_id": "libfile_bc094485a9d0819188182941e801df4b",
+    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_NON_EQUIVALENCE_PHYSICAL_CUT",
+    "spent": false
+  },
+  "transform_durability": {
+    "status": "VERIFIED_RECONSTRUCTIBLE_FROM_ALGORITHM_AND_CONTENT_ADDRESSED_PREDECESSOR__GITHUB_SOURCE_FILE_WRITE_BLOCKED_BY_HOST_SAFETY_LAYER",
+    "local_transform_sha256": "f21d972753723a8f6ccc4d066c94dc3c9416f1dec3fe5e6d82795b145dd0a22e"
+  },
+  "hard_nonclaims": [
+    "NO_UNIVERSAL_EQUIVALENCE_OUTSIDE_BOUNDED_ROUTE",
+    "NO_EXTERNAL_SECOND_CARRIER_REPLAY",
+    "NO_CAPABILITY_ACCEPTANCE_OWNERSHIP_QUALITY_OR_TERMINAL_CREDIT"
+  ],
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "quality_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
