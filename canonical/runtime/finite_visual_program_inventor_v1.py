@@ -175,6 +175,7 @@ def invent(
     max_depth: int = 3,
     max_semantic_states_per_depth: int = 50000,
     max_equivalent_programs_per_semantics: int = 8,
+    max_grid_cells: int = 10000,
     top_k: int = 16,
 ) -> dict[str, Any]:
     try:
@@ -195,6 +196,8 @@ def invent(
             or max_equivalent_programs_per_semantics > 128
         ):
             raise ProgramInventionError("MAX_EQUIVALENT_PROGRAMS_INVALID")
+        if isinstance(max_grid_cells, bool) or not isinstance(max_grid_cells, int) or max_grid_cells < 1:
+            raise ProgramInventionError("MAX_GRID_CELLS_INVALID")
         if isinstance(top_k, bool) or not isinstance(top_k, int) or top_k < 1 or top_k > 128:
             raise ProgramInventionError("TOP_K_INVALID")
     except ProgramInventionError as exc:
@@ -257,6 +260,9 @@ def invent(
                     if not isinstance(out, tuple) or not out or not isinstance(out[0], tuple):
                         valid = False
                         break
+                    if len(out) * len(out[0]) > max_grid_cells:
+                        valid = False
+                        break
                     outputs.append(out)
                 if not valid:
                     continue
@@ -304,6 +310,7 @@ def invent(
         "example_count": len(inputs),
         "primitive_count": len(primitive_map),
         "max_depth": max_depth,
+        "max_grid_cells": max_grid_cells,
         "generated_program_count": generated_programs,
         "semantic_states_by_depth": state_counts,
         "structural_representatives_by_depth": representative_counts,
@@ -380,6 +387,7 @@ def solve(
     attempts: int = 2,
     max_semantic_states_per_depth: int = 50000,
     max_equivalent_programs_per_semantics: int = 8,
+    max_grid_cells: int = 10000,
 ) -> dict[str, Any]:
     result = invent(
         examples,
@@ -387,6 +395,7 @@ def solve(
         max_depth=max_depth,
         max_semantic_states_per_depth=max_semantic_states_per_depth,
         max_equivalent_programs_per_semantics=max_equivalent_programs_per_semantics,
+        max_grid_cells=max_grid_cells,
         top_k=128,
     )
     if result.get("status") != "EXACT_PROGRAMS_FOUND":
