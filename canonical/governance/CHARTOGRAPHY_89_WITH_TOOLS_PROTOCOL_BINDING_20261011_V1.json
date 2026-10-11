@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_CHARTOGRAPHY_89_WITH_TOOLS_PROTOCOL_BINDING_20261011_V1",
   "date": "2026-10-11",
-  "status": "PUBLIC_PROTOCOL_SUBSTANTIALLY_BOUND__DISCLOSED_TOOL_SURFACE_IMPLEMENTED__REAL_QWEN_INTEGRATION_REPLAY_PENDING__SCORE_GE_89_UNPROVED__ZERO_CREDIT",
+  "status": "PUBLIC_PROTOCOL_SUBSTANTIALLY_BOUND__DISCLOSED_TOOL_SURFACE_IMPLEMENTED__REAL_QWEN_INTEGRATION_PASS__ONLY_AUTHENTIC_GE_89_SCORE_OR_STRONGER_SCOPE_COMPLETE_CERTIFICATE_REMAINS__ZERO_CREDIT",
   "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
   "objective": "Replace protocol-identity uncertainty with the smallest truthful remaining Chartography acceptance delta.",
   "public_methodology_observations": [
@@ -37,7 +37,18 @@
     "crop_runtime": "canonical/runtime/chartography_crop_tool_v1.py",
     "tool_loop_runtime": "canonical/runtime/chartography_with_tools_adapter_v1.py",
     "isolated_sprite_mechanism_test": "PASS__PIXEL_EXACT_BOUNDED_CROP__PASS__BOUNDED_CROP_TOOL_LOOP",
-    "real_qwen_crop_loop_external_replay": "PENDING_PUBLIC_RUNNER_RECEIPT"
+    "real_qwen_crop_loop_external_replay": {
+      "status": "PASS",
+      "verification_path": "canonical/verification/CHARTOGRAPHY_REAL_QWEN_CROP_LOOP_PUBLIC_RUNNER_VERIFICATION_20261011_V1.json",
+      "verifier_repo": "moxnixmdj/verification-capsule-runner",
+      "verifier_head_sha": "eecb90477f555b9ba3ed8b076906a5b5495067bd",
+      "workflow_run_id": 38110211182,
+      "workflow_job_id": 114384022805,
+      "artifact_id": 11691559007,
+      "artifact_sha256": "79c48a2d0f4d4dcc04c9b10fc9009b38a29412ca64ed07d323db7c66cfa46971",
+      "result": "ONE_BOUNDED_CROP__FINAL_BLUE__PASS",
+      "terminal_cases_consumed": 0
+    }
   },
   "causal_reduction": {
     "deleted_unknowns": [
@@ -46,11 +57,11 @@
       "HIGH_LEVEL_WITH_TOOLS_SURFACE_UNKNOWN",
       "TARGET_MODEL_EFFORT_CONFIG_UNKNOWN",
       "JUDGE_IDENTITY_UNKNOWN",
-      "RUN_AGGREGATION_UNKNOWN"
+      "RUN_AGGREGATION_UNKNOWN",
+      "REAL_BRAIN_VISUAL_SUBJECT_CANNOT_USE_DISCLOSED_CROP_TOOL_LOOP"
     ],
     "still_open": [
-      "REAL_BRAIN_VISUAL_SUBJECT_BOUND_IN_THE_DISCLOSED_CROP_TOOL_LOOP",
-      "AUTHENTIC_SCORE_EVIDENCE_ESTABLISHING_BRAIN_GE_89_UNDER_THE_BOUND_PROTOCOL_OR_STRONGER_SCOPE_COMPLETE_CERTIFICATE"
+      "AUTHENTIC_CONTENT_ADDRESSED_BRAIN_SCORE_GE_89_UNDER_THE_BOUND_WITH_TOOLS_PROTOCOL_OR_STRONGER_SCOPE_COMPLETE_ACCEPTANCE_CERTIFICATE"
     ],
     "new_primitive_required": false
   },
