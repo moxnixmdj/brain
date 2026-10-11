@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_RUNTIME_COGNITION_CREDIT_GUARD_REMOTE_VERIFICATION_V1",
+  "date": "2026-10-11",
+  "status": "REMOTE_ZERO_SPEND_REPLAY_PASS__ENFORCEMENT_ONLY__ZERO_CAPABILITY_BENCHMARK_ACCEPTANCE_OWNERSHIP_PROMOTION_TERMINAL_CREDIT",
+  "branch": "governance/runtime-cognition-credit-guard-20261011-v1",
+  "subject_commit_sha": "6e74d8a069261229cc4fb64f7cf9a11657ccf506",
+  "verifier": {
+    "provider": "Sprites",
+    "sprite_name": "brain-canonical-apply-slice-verify-20261011-v1",
+    "sprite_id": "sprite-03e2d6c1-6a52-4c21-817f-eae043fd842c",
+    "local_laptop_or_wsl_used": false,
+    "incremental_spend_usd": 0
+  },
+  "exact_material": {
+    "canonical/runtime/runtime_cognition_credit_guard_v1.py": "cb750ad908a9a48eb35d1f3df10b90763b129c6d",
+    "canonical/tests/test_runtime_cognition_credit_guard_v1.py": "401f29df765b2e612a2459d1e48f9237ef449b1f",
+    "canonical/runtime/live_integrated_brain_v1.py": "a78a32919668c7fdfe48cd3c9cddfa9e4e220f32",
+    "canonical/runtime/autonomous_verified_self_improvement_v1.py": "cdee841c90f819105877537447ade60abfba4126",
+    "canonical/runtime/terminal_closure_reducer.py": "bb852cd7541ee895aabc1a85a06b1e4b5ef7ae9c",
+    ".github/workflows/capability-transfer-governance.yml": "98b59bfc8e3400dbbea4dd7ba3530731d91ea4ba",
+    "canonical/CANONICAL_POINTER.json": "880e1579f78af16aa720256e2a47301c257a9325",
+    "sitecustomize.py": "34913e43f108a5874e983d0e878925f1523cd090",
+    "canonical/runtime/acceptance_capability_source_gate_v2.py": "4ce3fde56117b5665109d8ce4281d69fae52b1be",
+    "canonical/runtime/capability_transfer_ownership_gate_v1.py": "00745fc91ff576cd90f5c57497eb03e244475599",
+    "canonical/runtime/astra_runtime.py": "0c613137b9c578c8afadb9482da08e2fc268deb7"
+  },
+  "checks": [
+    {
+      "id": "REMOTE_PY_COMPILE",
+      "pass": true,
+      "files": [
+        "runtime_cognition_credit_guard_v1.py",
+        "live_integrated_brain_v1.py",
+        "terminal_closure_reducer.py",
+        "autonomous_verified_self_improvement_v1.py",
+        "test_runtime_cognition_credit_guard_v1.py"
+      ],
+      "evidence": "CPYTHON_3_13_PYC_CREATED_FOR_ALL_5_FILES"
+    },
+    {
+      "id": "EXACT_GOVERNANCE_SLICE_BASELINE",
+      "pass": true,
+      "observed_status": "PASS__COGNITION_GOVERNANCE_INTACT",
+      "errors": []
+    },
+    {
+      "id": "ADVERSARIAL_WEAKEN_K3_PROHIBITION",
+      "pass": true,
+      "expected_guard_status": "FAIL_CLOSED__COGNITION_GOVERNANCE_WEAKENED"
+    },
+    {
+      "id": "ADVERSARIAL_REMOVE_STARTUP_KILL_SWITCH",
+      "pass": true,
+      "expected_guard_status": "FAIL_CLOSED__COGNITION_GOVERNANCE_WEAKENED"
+    },
+    {
+      "id": "ADVERSARIAL_REMOVE_ASTRA_RUNTIME_KILL_SWITCH_CHECK",
+      "pass": true,
+      "expected_guard_status": "FAIL_CLOSED__COGNITION_GOVERNANCE_WEAKENED"
+    }
+  ],
+  "enforcement_bindings": [
+    "LIVE_INTEGRATED_BRAIN_RUN",
+    "LIVE_INTEGRATED_BRAIN_RUN_RAW_GOAL",
+    "SELF_IMPROVEMENT_ADVANCE_VERIFICATION_QUEUE",
+    "SELF_IMPROVEMENT_INTEGRATE_SOLVER_OUTPUT",
+    "SELF_IMPROVEMENT_RUN_LEARNING_EPISODE",
+    "TERMINAL_CLOSURE_EVALUATE_MANIFEST",
+    "TERMINAL_CLOSURE_EVALUATE_FRONTIER_STATE"
+  ],
+  "hard_nonclaims": [
+    "THIS_RECEIPT_DOES_NOT_PROVE_GLOBAL_BRAIN_CAPABILITY",
+    "THIS_RECEIPT_DOES_NOT_GRANT_BENCHMARK_ACCEPTANCE_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT",
+    "THIS_RECEIPT_DOES_NOT_PROVE_NO_FUTURE_CODE_CAN_INTRODUCE_A_NEW_PATH",
+    "CONTINUOUS_DRIFT_MONITOR_AND_FAIL_CLOSED_RUNTIME_GUARD_REMAIN_REQUIRED"
+  ],
+  "capability_credit_delta": 0,
+  "benchmark_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
