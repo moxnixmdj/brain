@@ -1,0 +1,112 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_ROW23_SINGLE_PDF_SUBMISSION_FROZEN__ELEVEN_PAGE_TEMPLATE_ALIGNED_REPORT_AND_RENDER_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "subject": {
+    "row_idx": 23,
+    "task_id": "85d95ce5-b20c-41e2-834e-e788ce9622b6",
+    "sector": "Educational Services",
+    "occupation": "Child, Family, and School Social Workers"
+  },
+  "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS15_24_PRECOMMIT_20261011_V1.json",
+  "packet": {
+    "manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8",
+    "prompt_sha256": "cea6144a55768b34134d730bd258f5acec03976a050db6f219ba391caa54533d",
+    "reference_count": 3,
+    "references": [
+      {
+        "filename": "Notes for Terry Hartsdale.docx",
+        "sha256": "63cf55cb55bc06cf874c2032262336ce9eeb6ad97c8bb87ab32d2fe732c8eca9",
+        "bytes": 26838
+      },
+      {
+        "filename": "Recommendation Bank T.H..docx",
+        "sha256": "b364c0332945bce060995866464768cb2a3e3e914e0d1ac0c45075a006666179",
+        "bytes": 18330
+      },
+      {
+        "filename": "Social Developmental History Template.docx",
+        "sha256": "00877d6da3a0fe43f1577973899328ec044318892482948af853dc6674e80583",
+        "bytes": 135328
+      }
+    ]
+  },
+  "freshness": {
+    "task_id_frozen_before_prompt_read": true,
+    "rubric_read_before_output_freeze": false,
+    "human_gold_read_before_output_freeze": false,
+    "third_party_model_submission_read_before_output_freeze": false,
+    "judge_feedback_read_before_output_freeze": false
+  },
+  "deliverable": {
+    "format": "pdf",
+    "filename": "GDPval_85d95ce5_Terry_Hartsdale_Social_Developmental_History.pdf",
+    "sha256": "510236866e73e3adaed66742245251657684fd3da5783d3c0a2df4e34e37b292",
+    "pages": 11,
+    "requested_page_range": "8_TO_15",
+    "library_path": "/Project Brain/GDPval/scale/85d95ce5-b20c-41e2-834e-e788ce9622b6/GDPval_85d95ce5_Terry_Hartsdale_Social_Developmental_History.pdf",
+    "library_file_id": "libfile_94c273e513388191b48fbeba455f49f0"
+  },
+  "content_contract": {
+    "template_sections_preserved": [
+      "reason_for_referral",
+      "sources_of_information",
+      "medical_information",
+      "birth_information",
+      "developmental_information",
+      "student_psychosocial_functioning",
+      "student_observations_staff_interview",
+      "current_adjustment_of_the_child",
+      "family_information",
+      "history_and_dynamics_of_the_family",
+      "parent_perception_of_student_needs",
+      "agencies_community_services",
+      "school_information",
+      "attendance",
+      "school_social_work_impressions",
+      "school_social_work_recommendations_plans"
+    ],
+    "author_identity": "School Social Worker J.S.",
+    "recommendations_tailored_from_supplied_bank_only_when_supported_by_student_record": true,
+    "medical_diagnoses_reported_as_source_record_facts_not_newly_diagnosed": true,
+    "source_conflicts_preserved_not_silently_rewritten": true,
+    "attendance_conflict_preserved": "NARRATIVE_SAYS_TWO_EXCUSED_ABSENCES_WITH_29_PRESENT__SUPPLIED_TABLE_SAYS_29_PRESENT_AND_ONE_ABSENT_FOR_2023_2024",
+    "student_strengths_integrated": [
+      "technology_and_coding",
+      "science_and_math_interest",
+      "strong_reading_and_number_skills_reported",
+      "high_prior_math_and_reading_percentiles",
+      "ability_to_accept_redirection_and_transition",
+      "helper_role_motivation"
+    ],
+    "primary_need_domains_integrated": [
+      "attention_and_task_engagement",
+      "sensory_regulation",
+      "voice_and_behavioral_regulation",
+      "social_communication_and_friendship",
+      "adaptive_independence",
+      "context_specific_reading_writing_behavior",
+      "home_school_coordination"
+    ]
+  },
+  "verification": {
+    "all_11_pages_rendered_and_visually_inspected": true,
+    "no_clipping_overlap_or_broken_tables_observed": true,
+    "requested_page_range_satisfied": true,
+    "identifying_referral_medical_birth_developmental_family_school_attendance_and_recommendation_tables_present": true,
+    "confidential_educational_record_footer_and_page_numbers_present": true
+  },
+  "hard_nonclaims": [
+    "NO_NEW_MEDICAL_OR_PSYCHOLOGICAL_DIAGNOSIS",
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_SCORE",
+    "NO_GDPVAL_ELO",
+    "NO_1846_THRESHOLD_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
