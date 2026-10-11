@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-11",
+  "objective": "CORRECT_CHARTOGRAPHY_TO_BRAIN_OWNED_ZERO_MODEL_CAPABILITY_ROUTE",
+  "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+  "constraints": [
+    "ZERO_INCREMENTAL_SPEND",
+    "ZERO_EXTERNAL_GENERAL_PURPOSE_MODEL_COGNITION_IN_CREDITED_PRODUCER_PATH",
+    "NO_HELDOUT_CHARTOGRAPHY_TUNING",
+    "DONOR_USE_ACQUISITION_ONLY_IF_USED",
+    "DONOR_REMOVED_BEFORE_QUALIFICATION_AND_DEPLOYMENT",
+    "FAIL_CLOSED_OWNERSHIP_GATE_BEFORE_SCORE"
+  ],
+  "verified_reuse": [
+    "canonical/runtime/chartography_deterministic_geometry_v1.py",
+    "canonical/runtime/chartography_deterministic_relation_router_v1.py",
+    "canonical/runtime/chartography_crop_tool_v1.py",
+    "canonical/runtime/chartography_deterministic_lower_bound_scorer_v1.py"
+  ],
+  "current_effect_distinguishing_delta": "BROADER_REAL_WORLD_PROFESSIONAL_CHART_SEMANTIC_RECOGNITION_BY_BRAIN_OWNED_MODEL_INDEPENDENT_MECHANISM",
+  "prohibited_shortcut": "GENERAL_PURPOSE_MODEL_AT_TARGET_INFERENCE",
+  "exact_next": "EXTEND_INTERNAL_MODEL_INDEPENDENT_CHART_SEMANTICS__VERIFY_ON_NON_HELDOUT_DIAGNOSTICS__PASS_CREDIT_SUBJECT_GATE__FREEZE_SUBJECT__THEN_WAKE_OFFICIAL_HELDOUT_ACCESS",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
