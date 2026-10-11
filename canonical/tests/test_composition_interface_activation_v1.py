@@ -46,11 +46,11 @@ ir = compile_ir(
     load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json"),
     hypergraph,
 )
-assert ir["proved_predicate_count"] == 9, ir
-assert ir["unresolved_predicate_count"] == 29, ir
+assert ir["proved_predicate_count"] == 16, ir
+assert ir["unresolved_predicate_count"] == 22, ir
 cut = cut_evaluate(ir)
 assert cut["status"] == "EXACT_TERMINAL_ACTION_CUT_COMPUTED", cut
-assert cut["covered_predicate_count"] == 29, cut
+assert cut["covered_predicate_count"] == 22, cut
 assert cut["uncovered_predicates"] == [], cut
 assert "RUN_COMPOSITION_COMPONENT_PROOF_SLICER" in cut["selected_actions"], cut
 assert cut["selected_new_reality_units"] == 0, cut
