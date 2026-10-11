@@ -175,7 +175,7 @@
   "classifications": [
     {
       "residual_id": "R2_PRIMARY_FINANCE_SEMANTIC_TAIL",
-      "source_truth": "ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS__GENERAL_MECHANISM_CLOSED__R2_V86_BOUND_TRUTH_REENTRY_CONSUMPTION_VERIFIED",
+      "source_truth": "ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS__GENERAL_MECHANISM_CLOSED__R2_V91_GENERIC_TEXT_AUTHORITY_CANDIDATE_TO_EXISTING_CHECKER_TEMPLATE_MATERIALIZATION_BOUND",
       "default_resolution_modes": [
         "ADAPT_EXISTING",
         "ACQUIRE_EVIDENCE"
@@ -193,12 +193,18 @@
         "DEFINITE_BUFFER_REFERENCE",
         "SPREAD_RELATION_IDENTITY",
         "MINIMUM_POLICY_CHANGING_EVIDENCE_ROUTING",
-        "REGCAP_MREL_NO_DESCRIPTOR_PAIR_DOMAIN_TRUTH"
+        "REGCAP_MREL_NO_DESCRIPTOR_PAIR_DOMAIN_TRUTH",
+        "CHECKER_OWNED_AUTHORITY_CANDIDATE_EXACT_BYTE_MATERIALIZATION",
+        "EXISTING_SOURCE_ALIGNED_TRUTH_CHECKER_TEMPLATE_REUSE"
       ],
-      "exact_remaining_class": "UNPROVED_COMPLETE_MENTION_OR_TERMINAL_SIGNATURE_OR_DECISIVE_OBSERVATION_OR_OTHER_OPEN_WORLD_SOURCE_BOUND_SEMANTIC_CASE",
+      "exact_remaining_class": "NON_TEXT_OR_NO_COMPATIBLE_CHECKER_TEMPLATE_OR_UNPROVED_COMPLETE_MENTION_TERMINAL_SIGNATURE_DECISIVE_OBSERVATION_OR_OTHER_OPEN_WORLD_SOURCE_BOUND_SEMANTIC_CASE",
       "new_primitive_status": "NOT_ESTABLISHED",
       "source_current_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-      "observed_summary_is_load_bearing": false
+      "observed_summary_is_load_bearing": false,
+      "r2_current_version": "V91",
+      "generic_text_authority_candidate_to_existing_checker_template_materialization_closed": true,
+      "generic_unbound_materialization_globally_closed": false,
+      "verification_path": "canonical/verification/R2_GENERIC_AUTHORITY_CANDIDATE_MATERIALIZATION_FOCUSED_VERIFY_20261011_V1.json"
     },
     {
       "residual_id": "ESCAPE_OQ_SHARED_ACCEPTANCE_LAWS",
