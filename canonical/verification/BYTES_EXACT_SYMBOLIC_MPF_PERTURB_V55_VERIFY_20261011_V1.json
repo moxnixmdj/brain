@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_MPF_PERTURB_V55_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_V54_TO_V55_TRANSFORM__SPENT_NEXT60_15640_OF_15640__FRESH_NEXT61_15870_OF_15870__NEXT62_DURABLY_FROZEN_UNSPENT__ZERO_CREDIT",
+  "subject": {
+    "producer_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MPF_PERTURB_V55_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "producer_evidence_git_blob_sha": "605a7a991148aa30c0dae6a2f146c2e93e980caf",
+    "transform": "canonical/research/bytes/tools/conservative_mpf_perturb_fone_rounddown_prune_v55.py",
+    "transform_git_blob_sha": "d30a67b54488f7b3354ce1f8608fa7c7b38701d4",
+    "predecessor_manifest_sha256": "0580cb1632eed1142a6b01580898c3736a1d7c9a65b4dbdf277699fd821dc803",
+    "candidate_manifest_sha256": "a401c2d9595af738a360f9df69da3162c4663e1624917e3d5d6a2b6bcd2ba3ef",
+    "candidate_raw_python_source_bytes": 1714749
+  },
+  "replay": {
+    "transform_application": {
+      "result": "PASS",
+      "saved_raw_python_bytes": 137,
+      "candidate_manifest_sha256": "a401c2d9595af738a360f9df69da3162c4663e1624917e3d5d6a2b6bcd2ba3ef",
+      "reconstruction_identity": "278/278"
+    },
+    "spent_NEXT60": {
+      "passed": 15640,
+      "total": 15640,
+      "failures": 0
+    },
+    "fresh_NEXT61": {
+      "passed": 15870,
+      "total": 15870,
+      "failures": 0,
+      "corpus_sha256": "dd5fbbf9c9aced49b1280d31202af14c4797b21baf3b35b7c0e61decc8157df6",
+      "durable_library_file_id": "libfile_2c04b66a336c8191ab8c784f3ae8bc15"
+    },
+    "archive_identity": {
+      "durable_files": 278,
+      "byte_identical_files": 278,
+      "archive_bytes": 267656,
+      "archive_sha256": "99adc7f84100783a90e41a0509d7d3728028fffb52f30dae95fc622bef729be1",
+      "library_file_id": "libfile_0149760d6cdc8191adc2d8b013598c53"
+    },
+    "next62_frozen_definition": {
+      "cases": 16100,
+      "seed": 197819161,
+      "per_operation_budget": 1400,
+      "sha256": "7714d5ed1852f9099f2fd160f9cb6f0a43718c66426bc0a9d0dfafb4742d767f",
+      "library_file_id": "libfile_3e89a90f8724819180239691717ac934",
+      "spent": false,
+      "durable_persistence": true
+    }
+  },
+  "falsification": {
+    "observed_spent_NEXT60_roots_call_class": {
+      "calls": 6,
+      "x": "fone",
+      "rounding": "round_down",
+      "prec": 61,
+      "eps_sign_counts": {
+        "0": 3,
+        "1": 3
+      }
+    },
+    "guarded_unobserved_routes_fail_closed": true,
+    "universal_equivalence_claimed": false
+  },
+  "proved": [
+    "THE_V54_TO_V55_TRANSFORM_IS_EXACTLY_BASE_AND_TARGET_MANIFEST_GUARDED",
+    "THE_EXACT_V55_CANDIDATE_PASSES_COMPLETE_SPENT_NEXT60",
+    "THE_PREVIOUSLY_UNSPENT_NEXT61_CORPUS_PASSES_EXACT_V55_COMPLETELY",
+    "THE_V55_DURABLE_ARCHIVE_IS_278_OF_278_BYTE_IDENTICAL_TO_THE_VERIFIED_CANDIDATE",
+    "NEXT62_ID_SEED_CASE_COUNT_CONTENT_SHA256_AND_LIBRARY_ARTIFACT_ARE_FROZEN_UNSPENT"
+  ],
+  "truth_boundary": [
+    "BOUNDED_EXACT_SYMBOLIC_ROUTE_ONLY",
+    "NO_UNIVERSAL_MPMATH_EQUIVALENCE",
+    "NO_EXTERNAL_ORGANIZATIONALLY_INDEPENDENT_SECOND_CARRIER CLAIM",
+    "NEXT62_MUST_REMAIN_UNSPENT_UNTIL_A_NEW_PHYSICAL_CUT_EXISTS",
+    "NO_CAPABILITY_ACCEPTANCE_PROFESSIONAL_QUALITY_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "capability_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
