@@ -120,3 +120,4 @@ jobs:
           if-no-files-found: error
 
 # carrier: self-hosted-linux-x64-low-ram-exact-sha-20261011-v3
+# trigger: observable-self-hosted-regression-20261011-v4
