@@ -346,10 +346,10 @@ class GenericGoalToolEffectPlannerV2Tests(unittest.TestCase):
             {
                 "id":"records.search",
                 "method":"GET",
-                "url":"https://opaque.invalid/records/search",
+                "url":"https://opaque.invalid/tenants/{tenant_id}/records",
                 "description":"Search customer records.",
                 "parameters":{
-                    "query":{"required":True,"type":"string"}
+                    "tenant_id":{"required":True,"location":"path","type":"string"}
                 },
                 "response":"{records:[{id,name}]}",
             },
@@ -367,6 +367,26 @@ class GenericGoalToolEffectPlannerV2Tests(unittest.TestCase):
         )
         self.assertTrue(out["pass"], out)
         self.assertEqual(out["observation_endpoint_ids"], ["records.list"])
+
+    def test_required_search_query_is_a_groundable_read_semantic(self):
+        endpoints = [
+            {
+                "id":"records.search",
+                "method":"GET",
+                "url":"https://opaque.invalid/records/search",
+                "description":"Search customer records.",
+                "parameters":{
+                    "q":{"required":True,"type":"string"}
+                },
+                "response":"{records:[{id,name}]}",
+            },
+        ]
+        out = plan_goal_over_tool_schemas(
+            "Find the cobalt customer record.",
+            endpoints,
+        )
+        self.assertTrue(out["pass"], out)
+        self.assertEqual(out["observation_endpoint_ids"], ["records.search"])
 
 
     def test_endpoint_object_identity_beats_incidental_field_vocabulary(self):
