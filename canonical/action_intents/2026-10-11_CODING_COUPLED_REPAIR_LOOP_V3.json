@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE__ZERO_CREDIT_UNTIL_INDEPENDENTLY_VERIFIED",
+  "action_id": "CODING_GENERAL_SOFTWARE_REPAIR_LOOP_V3_COUPLED_NEUTRAL",
+  "source_frontier": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
+  "capability_target": "BOUNDED_NEUTRAL_INTERMEDIATE_COUPLED_EDIT_SEARCH_PLUS_EVIDENCE_RANKED_LOCALIZATION",
+  "mechanism": [
+    "deterministic AST/literal mutation basis reused from existing Brain primitive",
+    "ranked source localization from traceback, test imports, and symbol evidence",
+    "strict single-edit search first",
+    "atomic two-edit search only when first edit is failure-score neutral",
+    "pair retained only if aggregate oracle strictly improves",
+    "all probes restored and final winner replayed twice"
+  ],
+  "external_general_purpose_model_runtime_dependency_count": 0,
+  "donor_general_purpose_model_runtime_dependency_count": 0,
+  "benchmark_specific_data_used": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "benchmark_score_credit_delta": 0,
+  "hard_nonclaims": [
+    "NO_GENERAL_SOFTWARE_ENGINEERING_COMPLETENESS",
+    "NO_GENERAL_SEMANTIC_LOCALIZATION_COMPLETENESS",
+    "NO_FRONTIERCODE_SCORE",
+    "NO_NON_PYTHON_SUPPORT"
+  ]
+}
