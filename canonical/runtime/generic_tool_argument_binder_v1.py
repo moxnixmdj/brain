@@ -389,10 +389,16 @@ def _literal_id_for_semantic(semantic: str, goal: str, facts: Mapping[str, list[
         )
         if m and ("_" in m.group(1) or "-" in m.group(1) or any(ch.isdigit() for ch in m.group(1))):
             return m.group(1)
-    for value in facts.get("id_literal", []):
+    literals = list(facts.get("id_literal", []))
+    for value in literals:
         low = value.lower()
         if low.startswith(semantic[:4]) or low.startswith(semantic):
             return value
+    # A schema-level generic id/key parameter has no entity-specific prefix.
+    # If the goal contains exactly one identifier-shaped literal, binding it is
+    # deterministic. Multiple literals remain ambiguous and therefore unbound.
+    if semantic == "id" and len(literals) == 1:
+        return literals[0]
     return None
 
 
