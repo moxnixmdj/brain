@@ -145,24 +145,25 @@
   "recursive_obs": {
     "required": true,
     "law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
-    "receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V6.json",
+    "receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V7.json",
     "deletion_first_order": [
       "DELETE",
       "BYPASS",
       "REUSE",
+      "ADAPT",
       "SUBSTITUTE",
-      "WHITE_BOX_HARVEST",
       "COMPOSE",
       "CONFIGURE",
-      "INTEGRATE"
+      "INTEGRATE",
+      "SYNTHESIZE_NEW_PRIMITIVE"
     ],
     "exact_base_commit_binding_required": true,
-    "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V11.json",
+    "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V12.json",
     "live_challenger_frontier_required": true,
     "selected_route_execution_preflight_required": true,
     "max_route_frontier_age_hours": 24,
     "max_selected_route_preflight_age_hours": 2,
-    "hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V12.json"
+    "hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V13.json"
   },
   "last_real_output_event": {
     "event_id": "FIN_SACCR_RWA_TB4_VERIFIED_FAILURE_20261001",
@@ -1195,7 +1196,7 @@
     ]
   },
   "development_authority": "canonical/governance/CURRENT_DEVELOPMENT_AUTHORITY.json",
-  "goal_hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V12.json",
+  "goal_hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V13.json",
   "execution_first_optimizer": "canonical/governance/EXECUTION_FIRST_SELF_PROVING_OPTIMIZER_V2.json",
   "development_loop": [
     "UNDERSTAND",
