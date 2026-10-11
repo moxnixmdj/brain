@@ -1,0 +1,346 @@
+{
+  "schema": "PROJECT_BRAIN_RECURSIVE_OBS_RECEIPT_V7",
+  "status": "SCHEMA_TEMPLATE__GENERAL_CAPABILITY_FIRST__NOT_PROGRESS_ARTIFACT",
+  "supersedes": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V6.json",
+  "authority": [
+    "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+    "canonical/laws/GOAL_HIERARCHY_AND_DRIFT_IMMUNITY_LAW_V2.md",
+    "canonical/governance/CURRENT_DEVELOPMENT_AUTHORITY.json",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+    "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+    "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
+    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+    "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+    "canonical/laws/CAPABILITY_TRANSFER_VS_COGNITION_OUTSOURCING_LAW_V1.md"
+  ],
+  "required_fields": [
+    "reasoning_durability",
+    "theory_invariants",
+    "canonical_generation_or_commit",
+    "canonical_base_commit",
+    "real_outcome",
+    "required_capability",
+    "obs_goal",
+    "obs_capability",
+    "obs_blocker",
+    "obs_solution",
+    "obs_verification",
+    "obs_inherited_system",
+    "obs_obs",
+    "routes_considered",
+    "deleted_or_bypassed_paths",
+    "selected_surviving_route",
+    "why_selected_route_is_fastest_sufficient",
+    "expected_parent_level_state_change",
+    "stop_condition",
+    "route_frontier"
+  ],
+  "exact_base_binding": {
+    "required": true,
+    "field": "canonical_base_commit",
+    "rule": "MUST_EQUAL_EXACT_PR_BASE_COMMIT_EVALUATED_BY_TRUSTED_GUARD"
+  },
+  "live_challenger_frontier": {
+    "required_for_consequential_externalizable_actions": true,
+    "max_freshness_hours": 24,
+    "required_source_classes": [
+      "BRAIN_INHERITED",
+      "OFFICIAL_PRIMARY",
+      "CODE_OR_PACKAGE_REGISTRY",
+      "BROAD_WEB_OR_COMMUNITY"
+    ],
+    "minimum_distinct_query_families": 4,
+    "required_query_intents": [
+      "CAPABILITY_VECTOR",
+      "SUPPLIER_OR_PRODUCT",
+      "IMPLEMENTATION_FORM",
+      "RECENCY_OR_NEW_RELEASE"
+    ],
+    "required_comparison_dimensions": [
+      "CORRECTNESS",
+      "CAPABILITY_STRENGTH",
+      "WALL_CLOCK",
+      "INCREMENTAL_COST",
+      "RELIABILITY",
+      "VERIFIABILITY"
+    ],
+    "required_refresh_triggers": [
+      "BEFORE_EXPENSIVE_EXECUTION",
+      "AFTER_MATERIAL_ROUTE_FAILURE",
+      "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+      "BEFORE_SCARCE_GATE_SPEND"
+    ],
+    "unresolved_plausible_dominators_must_be_empty": true,
+    "selected_route_must_match_top_level": true,
+    "challenger_item_required_fields": [
+      "route",
+      "evidence",
+      "qualification_evidence",
+      "qualification_evidence_classes",
+      "resolution",
+      "comparison"
+    ],
+    "challenger_resolution_values": [
+      "SELECTED",
+      "NON_DOMINATING",
+      "DISQUALIFIED"
+    ],
+    "no_challenger_rule": "EMPTY_CHALLENGER_LIST_REQUIRES_NONEMPTY_NEGATIVE_SEARCH_SUMMARY",
+    "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY",
+      "CODE_OR_PACKAGE_REGISTRY",
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER"
+    ],
+    "community_or_social_role": "DISCOVERY_SENSOR_ONLY__CANNOT_ALONE_QUALIFY_OR_DISQUALIFY_ROUTE",
+    "selected_route_preflight": {
+      "required_for_discovery_required_actions": true,
+      "max_freshness_hours": 2,
+      "required_status": "READY",
+      "selected_route_must_match": true,
+      "all_required_dependencies_ready_must_be_true": true,
+      "failed_dependencies_must_be_empty": true,
+      "volatile_dependency_required_evidence_classes": [
+        "DIRECT_PROBE",
+        "INDEPENDENT_VERIFIER"
+      ],
+      "account_specific_required_evidence_classes": [
+        "DIRECT_PROBE",
+        "INDEPENDENT_VERIFIER"
+      ],
+      "generic_public_status_alone_insufficient_for_account_specific_or_capacity_scoped_dependencies": true,
+      "execution_dependencies_complete_must_be_true": true,
+      "required_execution_substrate_kinds": [
+        "CARRIER",
+        "LOCAL_RUNTIME",
+        "MODEL_API",
+        "REMOTE_SERVICE"
+      ]
+    }
+  },
+  "route_frontier_types": {
+    "discovery_required": "BOOLEAN",
+    "checked_at_utc": "RFC3339_UTC_TIMESTAMP_WHEN_REQUIRED",
+    "max_age_hours": "NUMBER_1_TO_24_WHEN_REQUIRED",
+    "incumbent_route": "NONEMPTY_STRING_OR_NONE_WHEN_REQUIRED",
+    "source_classes_checked": "LIST_WHEN_REQUIRED",
+    "source_evidence": "OBJECT_WHEN_REQUIRED",
+    "query_families": "NONEMPTY_LIST_WHEN_REQUIRED",
+    "challenger_routes": "LIST_WHEN_REQUIRED",
+    "unresolved_plausible_dominators": "LIST_WHEN_REQUIRED",
+    "comparison_dimensions": "LIST_WHEN_REQUIRED",
+    "selected_route": "NONEMPTY_STRING_WHEN_REQUIRED",
+    "refresh_triggers": "LIST_WHEN_REQUIRED",
+    "negative_search_summary": "NONEMPTY_STRING_ALLOWED_WHEN_NO_CHALLENGER_FOUND",
+    "not_applicable_reason": "NONEMPTY_STRING_ONLY_WHEN_DISCOVERY_REQUIRED_FALSE",
+    "selected_route_preflight": "OBJECT_REQUIRED_WHEN_DISCOVERY_REQUIRED_TRUE"
+  },
+  "layer_requirements": {
+    "obs_goal": [
+      "real_outcome",
+      "proxy_goals_deleted",
+      "surviving_necessity"
+    ],
+    "obs_capability": [
+      "existing_inherited_routes_checked",
+      "external_existing_routes_checked",
+      "capability_work_deleted",
+      "surviving_gap"
+    ],
+    "obs_blocker": [
+      "intrinsic_or_path_specific",
+      "delete_bypass_substitute_options",
+      "surviving_causal_blocker"
+    ],
+    "obs_solution": [
+      "deletion_first_order_applied",
+      "routes_ranked",
+      "losing_routes_reason",
+      "implementation_still_necessary"
+    ],
+    "obs_verification": [
+      "direct_real_effect_verification_considered",
+      "existing_oracle_considered",
+      "synthetic_verification_necessity"
+    ],
+    "obs_inherited_system": [
+      "downstream_work_to_delete_or_supersede",
+      "adjacent_capabilities_absorbed",
+      "fresh_reuse_plan"
+    ],
+    "obs_obs": [
+      "analysis_steps_deleted_or_cached",
+      "search_stop_decision",
+      "affected_layers_only_on_revalidation"
+    ]
+  },
+  "deletion_first_order": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "ADAPT",
+    "SUBSTITUTE",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE",
+    "SYNTHESIZE_NEW_PRIMITIVE"
+  ],
+  "invalidation_triggers": [
+    "CANONICAL_BASE_COMMIT_CHANGED",
+    "CANONICAL_GENERATION_CHANGED",
+    "REAL_TASK_MATERIALLY_CHANGED",
+    "CAPABILITY_STATE_MATERIALLY_CHANGED",
+    "NEW_ADEQUATE_ROUTE_DISCOVERED",
+    "SELECTED_ROUTE_FALSIFIED",
+    "ROUTE_FRONTIER_LEASE_EXPIRED",
+    "MATERIAL_EXTERNAL_RELEASE_OR_ACCESS_CHANGE",
+    "VERIFICATION_REQUIREMENT_MATERIALLY_CHANGED",
+    "SELECTED_ROUTE_PREFLIGHT_EXPIRED",
+    "REQUIRED_VOLATILE_DEPENDENCY_FAILED_OR_CHANGED"
+  ],
+  "exemption_rule": {
+    "discovery_required_false_allowed_action_kinds": [
+      "GOVERNANCE_GUARD",
+      "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+      "RECONCILE_FRONTIER",
+      "EVIDENCE_PRESERVATION"
+    ],
+    "reason_required": true
+  },
+  "reuse_rule": "MAY_BE_EMBEDDED_IN_ACTION_INTENT__SEPARATE_FILE_NOT_REQUIRED",
+  "progress_credit": false,
+  "selected_route_preflight_types": {
+    "checked_at_utc": "RFC3339_UTC_TIMESTAMP",
+    "max_age_hours": "NUMBER_GT_0_AND_LTE_2",
+    "selected_route": "NONEMPTY_STRING_MATCHING_ROUTE_FRONTIER_SELECTED_ROUTE",
+    "status": "READY",
+    "all_required_dependencies_ready": "BOOLEAN_TRUE",
+    "failed_dependencies": "EMPTY_LIST",
+    "execution_dependencies": "NONEMPTY_LIST",
+    "execution_dependencies_complete": "BOOLEAN_TRUE"
+  },
+  "execution_dependency_types": {
+    "dependency": "NONEMPTY_STRING",
+    "kind": "ENUM",
+    "required": "BOOLEAN",
+    "volatility": "STATIC_OR_VOLATILE",
+    "scope": "GLOBAL_OR_ACCOUNT_SPECIFIC_OR_LOCAL_OR_REGION_SPECIFIC",
+    "status": "READY_FOR_REQUIRED_DEPENDENCIES",
+    "observed_at_utc": "RFC3339_UTC_TIMESTAMP_FOR_VOLATILE_DEPENDENCIES",
+    "evidence": "NONEMPTY_LIST",
+    "evidence_classes": "NONEMPTY_LIST",
+    "allowed_evidence_classes": [
+      "OFFICIAL_PRIMARY",
+      "CODE_OR_PACKAGE_REGISTRY",
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER",
+      "BRAIN_INHERITED"
+    ],
+    "allowed_kinds": [
+      "CARRIER",
+      "ACCOUNT_ENTITLEMENT",
+      "MODEL_API",
+      "NETWORK_ENDPOINT",
+      "REMOTE_SERVICE",
+      "CAPACITY_POOL",
+      "AUTH_CREDENTIAL",
+      "LOCAL_RUNTIME",
+      "LOCAL_MODEL",
+      "CODE_ARTIFACT",
+      "DATA_SOURCE",
+      "STORAGE",
+      "PACKAGE_REGISTRY",
+      "MODEL_ARTIFACT"
+    ],
+    "evidence_scope": "GLOBAL_OR_ACCOUNT_SPECIFIC_OR_LOCAL_OR_REGION_SPECIFIC",
+    "account_or_region_specific_evidence_scope_rule": "MUST_EQUAL_DEPENDENCY_SCOPE"
+  },
+  "theory_invariants": {
+    "terminal_capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "benchmark_role": "AUDIT_FALSIFIER_CALIBRATION_OR_CAUSAL_PROBE__NOT_PARENT_OBJECTIVE",
+    "external_winner_role": "SPECIMEN_OR_TEMPORARY_DONOR_ONLY__NO_RUNTIME_COGNITION_CREDIT",
+    "capability_policy": "REUSE_ADAPT_SUBSTITUTE_COMPOSE_CONFIGURE_INTEGRATE_VERIFIED_BRAIN_OWNED_MECHANISMS__SYNTHESIZE_NEW_PRIMITIVE_ONLY_AFTER_SPECIFIC_INSUFFICIENCY_PROOF",
+    "general_computation_substrate": "MAY_BE_EXTERNAL_NON_MODEL_COMPUTE__OPAQUE_MODEL_COGNITION_FOR_CREDITED_PRODUCER_PATH_FORBIDDEN",
+    "underlying_capability_invention": "LAST_RESORT_ONLY_AFTER_RELEVANT_REUSE_AND_TRANSFORM_SPACE_IS_SPECIFICALLY_FALSIFIED_OR_PROVED_INSUFFICIENT",
+    "opus_5_5_role": "MILESTONE_CHECKPOINT_AND_CAPABILITY_SPECIMEN__NOT_PARENT_OPTIMIZATION_TARGET",
+    "white_box_donor_role": "TEMPORARY_CAUSAL_SOURCE__DONOR_DELETION_AND_POST_DELETION_QUALIFICATION_REQUIRED"
+  },
+  "reasoning_durability": {
+    "receipt_required": true,
+    "law": "canonical/laws/REASONING_DURABILITY_AND_DECISION_RECEIPT_LAW_V1.md",
+    "required_fields": [
+      "real_objective",
+      "governing_invariants",
+      "material_premises",
+      "evidence_refs",
+      "conclusion",
+      "selected_route",
+      "rejected_material_alternatives",
+      "uncertainties",
+      "next_action",
+      "supersession_conditions",
+      "supersedes"
+    ]
+  },
+  "build_interpretation": "DELETE_BYPASS_REUSE_ADAPT_SUBSTITUTE_COMPOSE_CONFIGURE_INTEGRATE_FIRST__SYNTHESIZE_NEW_PRIMITIVE_ONLY_AFTER_SPECIFIC_REUSE_SPACE_FALSIFICATION",
+  "ownership_tests": {
+    "required_for_capability_promotion": true,
+    "required": [
+      "BRAIN_ARTIFACT_TEST",
+      "NO_HIDDEN_CAPABILITY_PROVIDER_TEST",
+      "GENERAL_SUBSTRATE_TEST",
+      "SPECIMEN_SEPARATION_TEST",
+      "REEXECUTION_WITHOUT_REDISCOVERY_TEST",
+      "BRAIN_CONFIGURED_VERIFICATION_TEST",
+      "OWNERSHIP_PACKAGE_TEST"
+    ]
+  },
+  "v6_internalization_semantics": {
+    "underlying_capability_invention_forbidden": true,
+    "allowed_terminal_route_classes": [
+      "CONFIGURE",
+      "INTEGRATE"
+    ],
+    "repair_build_interpretation": "HISTORICAL_ONLY__CURRENT_ACTIONS_USE_CONFIGURE_INTEGRATE",
+    "blocker_lease_identity_fields": [
+      "canonical_generation",
+      "capability_target",
+      "causal_blocker"
+    ]
+  },
+  "white_box_harvest": {
+    "conditional_required_when_route_selected": true,
+    "required_evidence": [
+      "residual_capability_contract",
+      "donor_admissibility",
+      "license_and_provenance",
+      "causal_ablation_and_rescue",
+      "specificity_controls",
+      "heldout_contamination_control",
+      "donor_deletion_plan",
+      "full_dependency_accounting",
+      "capsule_schema_path"
+    ],
+    "capsule_schema": "canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V3.json",
+    "untouched_qualification_tasks_must_remain_unconsumed": true
+  },
+  "v7_development_semantics": {
+    "parent_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "route_order": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "ADAPT",
+      "SUBSTITUTE",
+      "COMPOSE",
+      "CONFIGURE",
+      "INTEGRATE",
+      "SYNTHESIZE_NEW_PRIMITIVE"
+    ],
+    "benchmark_parent_authority": false,
+    "exact_benchmark_predicates_remain_independent_when_explicit": true,
+    "new_primitive_default_authorized": false
+  }
+}
