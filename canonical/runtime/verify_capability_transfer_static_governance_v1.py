@@ -37,4 +37,9 @@ assert "RUNTIME_COGNITION_NOT_MODEL_INDEPENDENT" in cleanroom
 assert "EXTERNAL_MODEL_RUNTIME_DEPENDENCY_COUNT_NOT_ZERO" in cleanroom
 assert "COPIED_OR_REHOSTED_TEACHER_NOT_EXPLICITLY_FALSE" in cleanroom
 assert "OPERATIVE_SOLVER_ROLE_NOT_BRAIN_OWNED" in cleanroom
+global_ownership=(R/"canonical/runtime/terminal_global_ownership_postconditions_reducer_v1.py").read_text(encoding="utf-8")
+assert "DONOR_CLEANROOM_PROTOCOL_V2_NOT_BOUND" in global_ownership
+assert "DONOR_CLEANROOM_RUNTIME_COGNITION_NOT_MODEL_INDEPENDENT" in global_ownership
+assert "DONOR_CLEANROOM_EXTERNAL_MODEL_RUNTIME_DEPENDENCY_COUNT_NOT_ZERO" in global_ownership
+assert "DONOR_CLEANROOM_COPIED_OR_REHOSTED_TEACHER_NOT_EXPLICITLY_FALSE" in global_ownership
 print("CAPABILITY_TRANSFER_STATIC_GOVERNANCE_PASS")
