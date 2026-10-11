@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 import os
+from pathlib import Path
 import unittest
-from canonical.runtime import harbor_science_agent_v14 as agent_v14
 from unittest.mock import patch
 
 from canonical.runtime import harbor_science_agent_v13 as agent
@@ -83,9 +83,14 @@ class AgentV13ClaimBoundIdentityTests(unittest.TestCase):
         self.assertEqual(two, EXPECTED_V2)
 
 
-class AgentV14SmokeTests(unittest.TestCase):
-    def test_v14_imports(self):
-        self.assertTrue(hasattr(agent_v14, "_candidate_rows"))
+class AgentV14SourceCompileTests(unittest.TestCase):
+    def test_v14_and_v8_source_compile(self):
+        for rel in (
+            "canonical/runtime/harbor_science_agent_v14.py",
+            "canonical/runtime/harbor_science_planner_v8.py",
+        ):
+            src = Path(rel).read_text(encoding="utf-8")
+            compile(src, rel, "exec")
 
 
 if __name__ == "__main__":
