@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_OWNER_EXAMPLE_SUBMISSION_SURFACE_DELTA_V1",
+  "date": "2026-10-11",
+  "status": "NEW_OWNER_HOSTED_EXAMPLE_SUBMISSION_SURFACE_BOUND__TARGET_OPUS55_ARTIFACT_NOT_OBSERVED__THREE_ROUTE_FRONTIER_REMAINS_OPEN__ZERO_CREDIT",
+  "frozen_target": {
+    "predicate": "BRAIN_PROFESSIONAL_WORK_CAPABILITY_GE_CAPABILITY_EVIDENCED_BY_FROZEN_OPUS55_GDPVAL_AA_V2_1_1846",
+    "benchmark": "GDPval-AA",
+    "version": "2.1",
+    "reference_model": "Claude Opus 5.5",
+    "frozen_reference_elo": 1846,
+    "rebase_to_live_score_forbidden": true
+  },
+  "supersedes_only_this_surface_claim": {
+    "prior_artifact": "canonical/governance/GDPVAL_MINIMUM_BRIDGE_ACQUISITION_FRONTIER_20261011_V1.json",
+    "prior_commit": "574e0b0c556d4eb100398ab54a93488de2327b20",
+    "narrowed_statement": "The truthful current statement is not that owner-hosted GDPval submissions are absent. Artificial Analysis exposes a first-party Example Tasks & Submissions surface with owner-hosted CDN deliverables. The missing item is a scope-sufficient target-relative Opus 5.5 relation or another admissible bridge."
+  },
+  "first_party_observation": {
+    "page": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+    "section": "Example Tasks & Submissions",
+    "page_description": "Browse representative GDPval tasks: the reference files each model was given and the deliverables it produced.",
+    "visible_example_task_tabs": [
+      "Task 1 Band Stage Plot",
+      "Task 2 Retail Daily Task List",
+      "Task 3 E-Stop Circuit Schematic"
+    ],
+    "task_1": {
+      "occupation": "Audio and Video Technicians",
+      "deliverable_type": "PDF",
+      "owner_hosted_submission_namespace": "https://artificialanalysiscdn.com/gdpval_example_files/band-stage-plot-foh-io/",
+      "observed_model_submissions": [
+        "Claude Fable 5 (with fallback).pdf",
+        "Claude Fable 5.1 (max).pdf",
+        "Gemini 3.1 Pro Preview.pdf",
+        "GPT-6 Astra (max).pdf",
+        "GPT-5.6 Sol (max).pdf",
+        "Grok 4.3 (high).pdf",
+        "Llama 4 Maverick.pdf",
+        "GLM-5.2.pdf"
+      ],
+      "one_observed_owner_cdn_asset": "https://artificialanalysiscdn.com/gdpval_example_files/band-stage-plot-foh-io/claude-fable-5.pdf",
+      "claude_opus_5_5_submission_observed": false
+    },
+    "static_zero_spend_task_2_or_3_opus_asset_recovered": false,
+    "failed_zero_spend_asset_guesses_are_not_evidence_of_nonexistence": true
+  },
+  "live_score_freshness_observation": {
+    "page": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+    "observed_live_leader": "Claude Opus 5.5 (Max, Default Fallback)",
+    "observed_live_elo": 1866,
+    "observed_live_anchor": "DeepSeek V4.1 Flash (max) at 1600",
+    "role": "FRESHNESS_ONLY",
+    "changes_frozen_1846_target": false,
+    "cross_epoch_transport_claimed": false
+  },
+  "route_effect": {
+    "MATCHED_SCORE": {
+      "available_now": false,
+      "reason": "Example deliverables are not a content-addressed Brain owner-score receipt and expose no public zero-spend submission/grading path."
+    },
+    "TARGET_RELATIVE_PAIRWISE": {
+      "available_now": false,
+      "progress": "OWNER_HOSTED_MODEL_DELIVERABLE_SURFACE_NOW_BOUND",
+      "remaining_minimum": "A scope-sufficient authenticated frozen-Opus-5.5 deliverable/outcome relation plus a sound judge/aggregation bridge, or authentic owner pairwise outcomes sufficient to entail noninferiority.",
+      "reason": "Task 1 exposes several model deliverables but no Claude Opus 5.5 deliverable; no sufficient owner pairwise outcomes or owner-evaluator containment are exposed."
+    },
+    "ABSOLUTE_DOMINANCE": {
+      "available_now": false,
+      "reason": "The new surface does not close holistic quality measurement, owner evaluator containment, normative aggregation, or global pairwise equivalence."
+    },
+    "any_admissible_bridge_available_now": false
+  },
+  "scheduler_delta": {
+    "bulk_public_submission_generation_default": "OFF",
+    "unchanged_broad_owner_surface_search_default": "OFF",
+    "targeted_zero_spend_surface_action": "Only inspect the exact first-party Example Tasks & Submissions surface when it yields a new task/model asset, owner pairwise result, judge relation, scoring endpoint, or stable noninteractive selector/path that can change one of the three bridge booleans.",
+    "first_sound_route_wins": true,
+    "do_not_repeat": [
+      "remaining public GDPval submission generation without a bridge",
+      "public-rubric self-scoring as owner quality",
+      "guessed CDN path enumeration after unchanged 404 results",
+      "cross-epoch score transport without a proved bridge"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GDPVAL_GE_1846",
+    "NO_CLAIM_BRAIN_GE_OPUS55",
+    "NO_CLAIM_TASK_1_EXAMPLES_ARE_SCOPE_SUFFICIENT",
+    "NO_CLAIM_OPUS55_EXAMPLE_ARTIFACTS_DO_NOT_EXIST",
+    "NO_CLAIM_1866_REPLACES_THE_FROZEN_1846_BAR",
+    "NO_CLAIM_FIRST_PARTY_EXAMPLE_DELIVERABLES_REVEAL_OWNER_JUDGE_OR_CROWDBT_STATE",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
