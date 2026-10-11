@@ -212,44 +212,15 @@
       }
     }
   ],
-  "current_execution_candidates": [
-    {
-      "id": "RETRY_WAKE_GATED_CHECKPOINT_ROWS",
-      "type": "BENCHMARK_SPECIFIC",
-      "benchmark_row_id": "FINANCE_AGENT_V2_GE_58_59",
-      "new_policy_changing_evidence": false,
-      "waits_for_external_event": false,
-      "incremental_spend_usd": 0,
-      "external_runtime_cognition": 0
-    },
-    {
-      "id": "GLOBAL_M0_BUILD_FROM_PROJECTED_CENTRALITY",
-      "type": "CAPABILITY",
-      "proved_live_defect": false,
-      "verified_counterexample": false,
-      "authorized_discriminating_experiment": false,
-      "reusable_family_count": 7,
-      "projected_benchmark_row_count": 9,
-      "waits_for_external_event": false,
-      "incremental_spend_usd": 0,
-      "external_runtime_cognition": 0
-    },
-    {
-      "id": "BYTES_V77_RESOURCE_PARETO_CUT",
-      "type": "RESOURCE_PARETO",
-      "proof_preserving": true,
-      "reusable_family_count": 0,
-      "projected_benchmark_row_count": 0,
-      "wall_clock_rank": 1,
-      "waits_for_external_event": false,
-      "incremental_spend_usd": 0,
-      "external_runtime_cognition": 0
-    }
-  ],
+  "candidate_source_policy": {
+    "source_path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "rule": "DERIVE_READY_EXECUTION_CANDIDATES_FROM_THE_LIVE_POINTER_AT_PLAN_TIME__DO_NOT_PIN_VERSIONED_WORK_IDS_HERE",
+    "priority": "CAUSALLY_ADMITTED_CAPABILITY_WORK_BEFORE_RESOURCE_PARETO__BENCHMARK_WORK_ONLY_WHEN_RUNNABLE_AND_NONDOMINATED"
+  },
   "current_expected_plan": {
-    "benchmark_specific_selected": false,
+    "benchmark_specific_same_information_selected": false,
     "capability_work_selected_from_benchmark_projection_only": false,
-    "selected_existing_frontier_work": "BYTES_V77_RESOURCE_PARETO_CUT"
+    "actual_execution_selection": "DERIVE_FROM_CURRENT_LIVE_WORK_FRONTIER_AT_PLAN_TIME"
   },
   "ledgers": {
     "CAPABILITY_COMPARISON_LEDGER": {
@@ -266,7 +237,8 @@
     "NO_BENCHMARK_SCORE_CREATED",
     "NO_CAPABILITY_PARITY_CREATED_FROM_HEURISTIC_PROJECTION",
     "NO_CLAIM_THE_PROJECTED_FAMILY_LISTS_ARE_SCOPE_COMPLETE",
-    "NO_GLOBAL_M0_WORK_AUTHORIZED_BY_GRAPH_CENTRALITY"
+    "NO_GLOBAL_M0_WORK_AUTHORIZED_BY_GRAPH_CENTRALITY",
+    "NO_VERSIONED_WORK_ID_IS_PINNED_AS_CURRENT_EXECUTION_AUTHORITY_IN_THIS_PROJECTION"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
