@@ -1,0 +1,29 @@
+{
+  "acceptance_sha256": "630ee7e848b2a7306f23bd995840d8613d76441919fc79d3ef7a0035201bcb88",
+  "cc_r1_reality_containment_proved": true,
+  "cc_r2_mission_soundness_proved": true,
+  "cc_r3_terminal_closure_proved": true,
+  "claim_scoped_totality_proved": true,
+  "closure_scope": "EXACT_LEAF",
+  "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+  "leaf_kind": "SEMANTIC",
+  "leaf_semantic_satisfied": true,
+  "manifest_git_blob_sha": "8ae72d7d44047ac9dec1b014c34a44f9933f0215",
+  "r4_proof_realization_authority": true,
+  "root_contract_sha256": "25eb91e82bc238444aa0df064b23ad23768e8213340ae5c3640b297020761b85",
+  "root_id": "R12_META_COMPOSITION_CLOSURE",
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_LEAF_VERIFICATION_RECEIPT_V1",
+  "semantic_claim_id": "a6b0d4f8e1cdb4d65a168b5df927390f6d24085fab7eb1b2aa43b4a028780b26",
+  "semantic_scope_sha256": "b2ed917d27f962ba89eb72c0185deae0e1f84aadd70df4bea1eea94e1055247f",
+  "semantic_semantics_sha256": "e8cef08e5ab5b3f0077f37512cf3ea48c5e0db83f1a904f40d2a7525ed42765d",
+  "semantic_target_predicate_sha256": "630ee7e848b2a7306f23bd995840d8613d76441919fc79d3ef7a0035201bcb88",
+  "terminal_authority": false,
+  "terminal_credit_delta": 0,
+  "verdict": "PASS",
+  "verification_basis": [
+    {
+      "git_blob_sha": "9930dedcbb6f9026448b749e5dff10032291e73a",
+      "path": "canonical/verification/professional-semantic-v10-totality/PQ__R12_META_COMPOSITION_CLOSURE__SEMANTIC.json"
+    }
+  ]
+}
