@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_HLE_SHORT_SEED_QUERY_PLANNER_PREEXPOSURE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_AFTER_SYNTHETIC_ONLY_QUOTED_TITLE_REPAIR",
+  "subject": {
+    "planner_blob": "2386db287d08153ffb905f8cd89a76f4ebf19d9f",
+    "planner_tests_blob": "4e8dc179fa9ff534b38ce715a81040726c5daccf",
+    "question_contract_v3_blob": "0865d6baf59b465cf121963dbadd5409a1702671",
+    "retrieval_helpers_v5_blob": "ae6006af1e578b0690357756e0b899a10323a5f4"
+  },
+  "next_gate": "SYNTHETIC_TESTS_THEN_CONSUMED_ROWS_25_TO_49_RETRIEVAL_RECALL_ONLY",
+  "current_baseline_retrieval_any_hit_rate": 0.32,
+  "protected_state": {
+    "fresh_rows_50_to_74": 0,
+    "hle_cases": 0
+  },
+  "target_score_claimed": false,
+  "incremental_spend_usd": 0
+}
