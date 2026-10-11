@@ -9,7 +9,9 @@
     "teamchat_web": "9c50b43bb7c1b03deba31eef234ed805f8014603",
     "calendar_web": "5c96a0c57265e173ef3434f1667e2523ade1ed57",
     "cloudcrm_web": "44c1d8650a9b262d2e903dcc31ff827d1120297c",
-    "vaultbank_web": "51dca9c6346ffa15095cfde5c1d87380cbc3bc79"
+    "vaultbank_web": "51dca9c6346ffa15095cfde5c1d87380cbc3bc79",
+    "budgetwise_web": "d7450221ba688ab50f0abb74fa1bf1dbcf8bc601",
+    "visaapplication_web": "9db18412b25f56d586d619205d32da0b72be21f6"
   },
   "apps": {
     "mailhub": {
@@ -166,6 +168,129 @@
           "path_params": [],
           "body_mode": "none",
           "required": [],
+          "optional": []
+        }
+      }
+    },
+    "budgetwise": {
+      "url_hints": [
+        "budgetwise"
+      ],
+      "operations": {
+        "observe_session": {
+          "method": "GET",
+          "path": "/api/budgetwise/session",
+          "path_params": [],
+          "body_mode": "none",
+          "required": [],
+          "optional": []
+        },
+        "save_preferences": {
+          "method": "PUT",
+          "path": "/api/budgetwise/preferences",
+          "path_params": [],
+          "body_mode": "object_arg",
+          "body_arg": "request",
+          "required": [
+            "request"
+          ],
+          "optional": []
+        },
+        "save_family": {
+          "method": "PUT",
+          "path": "/api/budgetwise/family",
+          "path_params": [],
+          "body_mode": "object_arg",
+          "body_arg": "request",
+          "required": [
+            "request"
+          ],
+          "optional": []
+        },
+        "check_device": {
+          "method": "POST",
+          "path": "/api/budgetwise/devices/check",
+          "path_params": [],
+          "body_mode": "object_arg",
+          "body_arg": "request",
+          "required": [
+            "request"
+          ],
+          "optional": []
+        },
+        "add_plan": {
+          "method": "POST",
+          "path": "/api/budgetwise/cart/plans",
+          "path_params": [],
+          "body_mode": "object_arg",
+          "body_arg": "request",
+          "required": [
+            "request"
+          ],
+          "optional": []
+        },
+        "add_family_plan": {
+          "method": "POST",
+          "path": "/api/budgetwise/cart/family",
+          "path_params": [],
+          "body_mode": "object_arg",
+          "body_arg": "request",
+          "required": [
+            "request"
+          ],
+          "optional": []
+        },
+        "apply_promo": {
+          "method": "POST",
+          "path": "/api/budgetwise/promo/apply",
+          "path_params": [],
+          "body_mode": "object_arg",
+          "body_arg": "request",
+          "required": [
+            "request"
+          ],
+          "optional": []
+        }
+      }
+    },
+    "visaapplication": {
+      "url_hints": [
+        "visaapplication",
+        "visa-application",
+        "ds160",
+        "ds-160"
+      ],
+      "operations": {
+        "observe_application": {
+          "method": "GET",
+          "path": "/api/visa-application",
+          "path_params": [],
+          "body_mode": "none",
+          "required": [],
+          "optional": []
+        },
+        "save_section": {
+          "method": "PUT",
+          "path": "/api/visa-application/sections/{section}",
+          "path_params": [
+            "section"
+          ],
+          "body_mode": "fields",
+          "required": [
+            "section",
+            "fields"
+          ],
+          "optional": []
+        },
+        "navigate": {
+          "method": "PATCH",
+          "path": "/api/visa-application/navigation",
+          "path_params": [],
+          "body_mode": "object_arg",
+          "body_arg": "request",
+          "required": [
+            "request"
+          ],
           "optional": []
         }
       }
