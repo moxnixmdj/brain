@@ -153,6 +153,7 @@ class BrainOSWorldAgent:
         screen_width: int = WIDTH,
         screen_height: int = HEIGHT,
         browser_controller: Any | None = None,
+        ocr_provider: Any | None = None,
     ) -> None:
         if not callable(policy_provider):
             raise AdapterError("POLICY_PROVIDER_NOT_CALLABLE")
@@ -163,6 +164,7 @@ class BrainOSWorldAgent:
         self.policy_provider = policy_provider
         self.policy_id = policy_id.strip()
         self.browser_controller = browser_controller if browser_controller is not None else OSWorldHostBrowser()
+        self.ocr_provider = ocr_provider
         self.history: list[dict[str, Any]] = []
         self.runtime_logger = None
         self.task_current_date = None
@@ -186,6 +188,11 @@ class BrainOSWorldAgent:
         if not isinstance(screenshot, (bytes, bytearray)) or not screenshot:
             raise AdapterError("SCREENSHOT_BYTES_REQUIRED")
         screenshot_bytes = bytes(screenshot)
+        ocr = None
+        if self.ocr_provider is not None:
+            if not callable(self.ocr_provider):
+                raise AdapterError("OCR_PROVIDER_NOT_CALLABLE")
+            ocr = self.ocr_provider(screenshot_bytes)
         return {
             "schema": SCHEMA,
             "policy_id": self.policy_id,
@@ -194,6 +201,7 @@ class BrainOSWorldAgent:
             "screen": {"width": WIDTH, "height": HEIGHT},
             "screenshot_bytes": screenshot_bytes,
             "screenshot_sha256": hashlib.sha256(screenshot_bytes).hexdigest(),
+            "ocr": ocr,
             "a11y_tree": obs.get("accessibility_tree") or obs.get("a11y_tree"),
             "user_response": obs.get("user_response"),
             "history": [dict(x) for x in self.history[-MAX_HISTORY:]],
