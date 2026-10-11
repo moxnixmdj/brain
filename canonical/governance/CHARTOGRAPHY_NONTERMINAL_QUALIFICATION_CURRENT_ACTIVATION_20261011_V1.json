@@ -177,7 +177,11 @@
     "required": true,
     "cognition_dependency_class": "MODEL_INDEPENDENT",
     "model_dependency_count": 0,
-    "external_model_runtime_dependency_count": 0
+    "external_model_runtime_dependency_count": 0,
+    "verification_path": "canonical/verification/CHARTOGRAPHY_BRAIN_CREDIT_SUBJECT_GATE_PUBLIC_VERIFY_20261011_V1.json",
+    "verification_status": "INDEPENDENT_PUBLIC_RUNNER_PASS",
+    "verifier_run_id": 38137123017,
+    "verifier_job_id": 114463168172
   },
   "protocol_binding_v2": "canonical/governance/CHARTOGRAPHY_89_WITH_TOOLS_PROTOCOL_BINDING_20261011_V2.json"
 }
