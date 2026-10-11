@@ -135,7 +135,24 @@ class OSWorldHostAppOps:
         if error or status in {"error", "failed", "failure"}:
             raise AppOpsError("APP_OP_EXECUTION_FAILED:" + str(error or status)[:MAX_ERROR])
         output = str(result.get("output") or "")
-        return {
+        structured = None
+        for line in reversed(output.splitlines()):
+            try:
+                parsed = json.loads(line)
+            except Exception:
+                continue
+            if isinstance(parsed, Mapping) and "result" in parsed:
+                candidate = parsed.get("result")
+                try:
+                    _validate_data(candidate)
+                    encoded_candidate = json.dumps(candidate, ensure_ascii=False, default=str)
+                except Exception:
+                    break
+                if len(encoded_candidate.encode("utf-8")) <= MAX_ARGS_BYTES:
+                    structured = candidate
+                break
+
+        receipt = {
             "type": "APP_OP",
             "ok": True,
             "app": app,
@@ -143,3 +160,6 @@ class OSWorldHostAppOps:
             "status": status or "ok",
             "output": output[:MAX_OUTPUT],
         }
+        if structured is not None:
+            receipt["result"] = structured
+        return receipt
