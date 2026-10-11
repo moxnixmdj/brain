@@ -66,6 +66,8 @@ REQUIRED_TRUE = (
     "runtime_cognition_credit_guard_terminal_closure_binding_required",
     "runtime_cognition_credit_guard_ownership_promotion_binding_required",
     "runtime_cognition_credit_guard_final_cleanroom_binding_required",
+    "runtime_cognition_credit_guard_kstar_promotion_binding_required",
+    "runtime_cognition_credit_guard_global_ownership_binding_required",
     "local_runner_for_cognition_governance_forbidden",
 )
 
@@ -80,6 +82,8 @@ REQUIRED_BINDINGS = {
     "canonical/runtime/terminal_closure_reducer.py": 2,
     "canonical/runtime/ownership_promotion_compiler_v1.py": 1,
     "canonical/runtime/final_terminal_cleanroom_gate_v1.py": 1,
+    "canonical/runtime/terminal_global_ownership_postconditions_reducer_v1.py": 1,
+    "canonical/runtime/terminal_kstar_promotion_bridge_v1.py": 1,
 }
 
 REQUIRED_PRECEDENCE = [
@@ -164,6 +168,38 @@ def evaluate_materials(
     for key, expected in REQUIRED_PATHS.items():
         if boot.get(key) != expected:
             errors.append("BOOT_PATH_MISMATCH:" + key)
+    current_frontier = pointer.get("current_frontier")
+    current_frontier = current_frontier if isinstance(current_frontier, Mapping) else {}
+    harvest = current_frontier.get("white_box_capability_harvest")
+    harvest = harvest if isinstance(harvest, Mapping) else {}
+    execution_governance = pointer.get("execution_governance")
+    execution_governance = execution_governance if isinstance(execution_governance, Mapping) else {}
+    mission_lock = pointer.get("mission_lock")
+    mission_lock = mission_lock if isinstance(mission_lock, Mapping) else {}
+
+    nested_expected = (
+        ("CURRENT_FRONTIER_MISSION_LOCK", current_frontier.get("frontier_capability_mission_lock_path"), "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md"),
+        ("CURRENT_FRONTIER_HARVEST_LAW", harvest.get("law_path"), "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md"),
+        ("CURRENT_FRONTIER_CAPSULE_SCHEMA", harvest.get("capsule_schema_path"), "canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V3.json"),
+        ("EXECUTION_MISSION_LOCK", execution_governance.get("capability_realization_mission_lock"), "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md"),
+        ("EXECUTION_FRONTIER_MISSION_LOCK", execution_governance.get("frontier_capability_mission_lock"), "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md"),
+        ("EXECUTION_HARVEST_LAW", execution_governance.get("white_box_capability_harvesting_law"), "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md"),
+        ("EXECUTION_CAPSULE_SCHEMA", execution_governance.get("white_box_capability_capsule_schema"), "canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V3.json"),
+        ("MISSION_AUTHORITY", mission_lock.get("authority_path"), "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md"),
+        ("MISSION_MODEL_OWNERSHIP_LAW", mission_lock.get("model_substrate_law"), "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md"),
+        ("MISSION_TRANSFER_BOUNDARY_LAW", mission_lock.get("capability_transfer_boundary_law"), "canonical/laws/CAPABILITY_TRANSFER_VS_COGNITION_OUTSOURCING_LAW_V1.md"),
+        ("MISSION_EXTERNAL_CONTRIBUTION_BOUNDARY_LAW", mission_lock.get("external_contribution_boundary_law"), "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md"),
+        ("MISSION_HARVEST_LAW", mission_lock.get("white_box_harvesting_law"), "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md"),
+        ("MISSION_CAPSULE_SCHEMA", mission_lock.get("capability_capsule_schema"), "canonical/governance/WHITE_BOX_CAPABILITY_CAPSULE_SCHEMA_V3.json"),
+    )
+    for label, actual, expected in nested_expected:
+        if actual != expected:
+            errors.append("STALE_OR_CONTRADICTORY_POINTER_AUTHORITY:" + label)
+
+    if "MODEL_BASED" in str(execution_governance.get("frontier_comparison_rule") or ""):
+        errors.append("STALE_MODEL_BASED_FRONTIER_COMPARISON_RULE")
+    if mission_lock.get("general_computation_substrate") != "NON_MODEL_GENERAL_COMPUTATION_MAY_BE_EXTERNAL__TARGET_SOLVING_MODEL_COGNITION_FORBIDDEN_IN_CREDITED_PRODUCER_PATH":
+        errors.append("MISSION_GENERAL_COMPUTATION_SUBSTRATE_BOUNDARY_INVALID")
 
     if binding_sources is not None:
         for path, minimum_calls in REQUIRED_BINDINGS.items():

@@ -1,6 +1,11 @@
 """Fail-closed reducer for Project Brain post-wave global ownership conditions."""
 from __future__ import annotations
 from typing import Any, Mapping
+from pathlib import Path
+
+from canonical.runtime.runtime_cognition_credit_guard_v1 import assert_credit_path_cognition_governance
+
+ROOT=Path(__file__).resolve().parents[2]
 
 SCHEMA="PROJECT_BRAIN_GLOBAL_OWNERSHIP_POSTCONDITIONS_V1"
 TERMINAL_SHA="f4bec690aa0580cb532dbfd5985705bae8d153c9df31ffdf460b02f8b152e0f2"
@@ -28,6 +33,7 @@ def evaluate_documents(
     donor:Mapping[str,Any],
     closure:Mapping[str,Any],
 )->dict[str,Any]:
+    assert_credit_path_cognition_governance(ROOT)
     e:list[str]=[]
 
     if "ONE_SHOT_TERMINAL_WAVE_PASS" not in str(terminal.get("status","")):
