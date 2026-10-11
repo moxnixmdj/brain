@@ -90,6 +90,20 @@ class FiniteVisualProgramInventorTests(unittest.TestCase):
         )
         self.assertEqual(out["residual_summary"]["shape_relations"], {"SAME_SHAPE": 1})
 
+
+    def test_arc_two_attempt_scoring_is_per_test_input(self):
+        task = {
+            "train": [
+                {"input": [[1, 2, 1]], "output": [[1, 2, 1]]},
+            ],
+            "test": [
+                {"input": [[1, 2, 3]], "output": [[1, 2, 3]]},
+                {"input": [[4, 5, 6]], "output": [[6, 5, 4]]},
+            ],
+        }
+        out = score_public_task(task, max_depth=1)
+        self.assertTrue(out["exact_task_solved"])
+
     def test_arc_adapter_discovers_composed_program_on_fresh_synthetic_case(self):
         task = {
             "train": [
