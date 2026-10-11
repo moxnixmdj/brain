@@ -19,7 +19,7 @@ ir = compile_ir(
 r = evaluate(ir)
 
 assert r["status"] == "EXACT_TERMINAL_ACTION_CUT_COMPUTED", r
-assert r["unresolved_predicate_count"] == 29, r
+assert r["unresolved_predicate_count"] == 22, r
 assert r["new_reality_units_consumed"] == 0
 assert r["capability_credit_delta"] == 0
 assert r["family_credit_delta"] == 0
@@ -28,8 +28,9 @@ assert r["promotion_authority"] is False
 
 gaps = {x["precondition_id"]: x["blocked_target_predicates"] for x in r["blocked_preconditions"]}
 assert "EXPLICIT_FINITE_WORLD_OR_HYPOTHESIS_SET_AVAILABLE" in gaps, r
-assert "FROZEN_COMPOSITION_COMPONENT_INTERFACES_EXPLICIT" in gaps, r
-assert "COMPOSITION_COMPONENT_SCOPED_PROOFS" in r["uncovered_predicates"], r
+assert "FROZEN_COMPOSITION_COMPONENT_INTERFACES_EXPLICIT" not in gaps, r
+assert "ALL_COMPONENT_ACCEPTANCE_PROOFS_COMPLETE" in gaps, r
+assert r["uncovered_predicates"] == [], r
 
 synthetic = {
     "status": "PASS",
