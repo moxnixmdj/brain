@@ -89,6 +89,7 @@ def _relation_candidates(kind: str, evidence: str, focus_terms: Sequence[str]) -
             r"\b(?:written|composed|created|painted|founded|invented|discovered|directed|performed|recorded)\s+by\s+(" + _PERSON + r")",
             r"\b(?:author|composer|creator|founder|inventor|discoverer|director|artist)\s+(?:was|is)\s+(" + _PERSON + r")",
             r"\b(" + _PERSON + r")\s+(?:was|is)\s+(?:an?\s+|the\s+)?(?:composer|author|artist|mountaineer|president|inventor|discoverer|explorer|writer|poet)\b",
+            r"\\b(" + _PERSON + r")\\s+(?:was|is)\\s+the\\s+first\\s+(?:person|man|woman|mountaineer|president|explorer|inventor|discoverer)\\b",
             r"\bfirst\s+(?:person|man|woman|mountaineer|president|explorer)\s+[^.;]{0,90}?\b(?:was|is)\s+(" + _PERSON + r")",
         ]
         for p in patterns:
