@@ -1,0 +1,104 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_MINIMUM_BRIDGE_ACQUISITION_FRONTIER_V5",
+  "date": "2026-10-11",
+  "status": "CURRENT_FRONTIER__ALL_THREE_DIRECT_BENCHMARK_BRIDGES_OPEN__ABSOLUTE_ROUTE_BLOCKED_FIRST_BY_W_QUALITY_IDENTIFICATION_OR_SCOPE_COMPLETE_DOMINANCE__GDPVAL_SPECIFIC_SAME_INFORMATION_EXECUTION_SLEEP__ZERO_CREDIT",
+  "frozen_target": {
+    "predicate": "BRAIN_PROFESSIONAL_WORK_CAPABILITY_GE_CAPABILITY_EVIDENCED_BY_FROZEN_OPUS55_GDPVAL_AA_V2_1_1846",
+    "benchmark": "GDPval-AA",
+    "version": "2.1",
+    "reference_model": "Claude Opus 5.5",
+    "frozen_reference_elo": 1846,
+    "rebase_forbidden": true
+  },
+  "predecessor": {
+    "path": "canonical/governance/GDPVAL_MINIMUM_BRIDGE_ACQUISITION_FRONTIER_20261011_V4.json",
+    "git_blob_sha": "aa6376fdc276c9d9c94731e39ef60811a4e96203"
+  },
+  "new_boundary": {
+    "path": "canonical/governance/GDPVAL_W_QUALITY_CURRENT_INFORMATION_BOUNDARY_20261011_V1.json",
+    "git_blob_sha": "aef2c50554622ae4f62b220d09b40bc22afb2a70",
+    "effect": "FALSIFIES_CURRENT_SAME_INFORMATION_SHORTCUTS_FROM_24_OF_24_PROPERTY_TRUTH_P2_SIX_GATE_TOP_SUPPORT_80_DEFEATER_REPRESENTATION_OR_PUBLIC_HIGH_LEVEL_OWNER_CONTRACT_TO_SCOPE_COMPLETE_W_QUALITY"
+  },
+  "route_state": {
+    "MATCHED_SCORE": {
+      "available": false,
+      "state": "OPEN_SLEEP",
+      "wake": [
+        "AUTHENTIC_COMPARABLE_BRAIN_OWNER_SCORE",
+        "ZERO_SPEND_OWNER_SUBMISSION_OR_SCORING_ROUTE",
+        "EXACT_ENOUGH_OWNER_FIT_OR_COMPARABILITY_RECEIPT"
+      ]
+    },
+    "TARGET_RELATIVE_PAIRWISE": {
+      "available": false,
+      "state": "OPEN_SLEEP_CHECKED_PUBLIC_SURFACES",
+      "wake": [
+        "FIRST_PARTY_OPUS55_TASK_ARTIFACT",
+        "AUTHENTIC_OWNER_PAIRWISE_OUTCOME",
+        "OWNER_JUDGEMENT_GRAPH_OR_EQUIVALENT_TARGET_RELATIVE_RECEIPT",
+        "NEW_OWNER_SURFACE_CHANGE_WITH_DIRECT_DECISION_VALUE"
+      ]
+    },
+    "ABSOLUTE_DOMINANCE": {
+      "available": false,
+      "state": "OPEN_BLOCKED_BY_SCOPE_COMPLETE_QUALITY_IDENTIFICATION_OR_DOMINANCE",
+      "W_COVER": {
+        "proved": false,
+        "current_internal_routes_exist": true,
+        "serial_terminal_priority": false,
+        "reason": "W_COVER_IS_NECESSARY_BUT_CANNOT_CLOSE_THE_ABSOLUTE_ROUTE_WHILE_W_QUALITY_OR_ITS_SOUND_ORDER_REMAINS_UNBOUND"
+      },
+      "W_QUALITY": {
+        "proved": false,
+        "current_same_information_shortcuts_exhausted": true,
+        "minimum_reopen": [
+          "SOUND_SCOPE_COMPLETE_CURRENT_OWNER_PREFERENCE_RESTRICTION",
+          "EXACT_OR_EXTENSIONALLY_EQUIVALENT_OWNER_PREFERENCE_SEMANTICS",
+          "AUTHENTIC_TARGET_RELATIVE_OUTCOME_EVIDENCE",
+          "NEW_EVALUATOR_INDEPENDENT_SCOPE_COMPLETE_MATERIAL_ORDER_PLUS_BRAIN_TOP_SUPPORT",
+          "STRONGER_GENERAL_PROFESSIONAL_CAPABILITY_CERTIFICATE_DIRECTLY_ENTAILING_THE_FROZEN_RELATION"
+        ]
+      }
+    },
+    "any_admissible_bridge_available": false
+  },
+  "identification_cut": {
+    "current_public_contract_fixes_owner_outcome_on_every_possible_brain_vs_opus_pair": false,
+    "two_world_nonidentifiability_source": "canonical/governance/GDPVAL_EVALUATION_LAW_MINIMUM_INFORMATION_CUT_20261008_V1.json",
+    "two_world_nonidentifiability_git_blob_sha": "7bf8b2ffc8186e14380da080e5a9832a2fd9a2a8",
+    "current_existing_scope_complete_quality_order_bound": false,
+    "therefore": "BEFORE_ANY_ABSOLUTE_ROUTE_CAN_BEAR_TERMINAL_WEIGHT__BIND_A_SOUND_SCOPE_COMPLETE_QUALITY_ORDER_OR_AN_EVALUATOR_INDEPENDENT_DOMINANCE_CERTIFICATE_STRONG_ENOUGH_TO_EXCLUDE_THE_OPPOSITE_OWNER_RELATION_WORLD"
+  },
+  "scheduler": {
+    "gdpval_specific_same_information_default": "SLEEP",
+    "do_not_dispatch": [
+      "GENERATE_REMAINING_PUBLIC_220_SUBMISSIONS_BY_DEFAULT",
+      "REPEAT_PUBLIC_RUBRIC_SELF_SCORING",
+      "REPEAT_SAME_OPUS55_PUBLIC_ARTIFACT_SEARCH_WITHOUT_SURFACE_CHANGE",
+      "REPEAT_SCORING_FORMULA_DISCOVERY",
+      "WORK_W_COVER_AS_IF_IT_ALONE_CAN_CLOSE_GDPVAL",
+      "TREAT_24_OF_24_PROPERTY_TRUTH_AS_QUALITY",
+      "TREAT_P2_SIX_GATE_TOP_AS_GLOBAL_GDPVAL_TOP",
+      "TREAT_80_DEFEATER_REPRESENTABILITY_AS_SCOPE_COMPLETE_QUALITY"
+    ],
+    "allowed_high_leverage_work": [
+      "A_GENERAL_PROFESSIONAL_QUALITY_BREAKTHROUGH_THAT_PRODUCES_A_SCOPE_COMPLETE_SOUND_MATERIAL_ORDER_OR_TOP_SUPPORT_CERTIFICATE",
+      "A_NEW_AUTHENTIC_OWNER_OR_TARGET_RELATIVE_SEPARATOR",
+      "A_MATCHED_SCORE_ROUTE_WAKE"
+    ],
+    "first_sound_route_wins": true
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_GDPVAL_GE_1846",
+    "NO_CLAIM_BRAIN_GE_OPUS55",
+    "NO_CLAIM_W_COVER_OR_W_QUALITY_IS_IMPOSSIBLE_IN_PRINCIPLE",
+    "NO_CLAIM_FUTURE_INTERNAL_GENERAL_CAPABILITY_WORK_HAS_ZERO_VALUE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
