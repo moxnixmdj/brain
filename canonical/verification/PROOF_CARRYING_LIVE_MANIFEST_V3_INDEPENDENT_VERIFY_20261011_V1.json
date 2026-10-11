@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_PROOF_CARRYING_LIVE_MANIFEST_V3_INDEPENDENT_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__18_OF_18_ADVERSARIAL_AND_CROSS_LAYER__V2_FORGED_ACTIVATION_HOLES_CLOSED__ZERO_CREDIT",
+  "predecessor": {
+    "source": "SOURCE_LOCKED_V3_BUNDLE_PROOF_CARRYING_LIVE_MANIFEST_V2",
+    "expected_blob_sha": "5bfa51a3030ffb5b63786c0d6fa7a9b38d9541ea",
+    "load_bearing": false,
+    "falsified": [
+      "CALLER_SUPPLIED_MANIFEST_SHA_WAS_NOT_RECOMPUTED_DURING_ACTIVATION",
+      "CANARY_RUNTIME_ACK_AND_REPLAY_SHA_FIELDS_WERE_OPAQUE_NOT_SELF_DIGESTED",
+      "SUCCESS_GRANTED_PROMOTION_AUTHORITY_WITHOUT_SEPARATE_LIVE_GLOBAL_AUTHORITY_RECHECK"
+    ],
+    "disposition": "REUSED_AS_DESIGN_DONOR_ONLY__SUPERSEDED_BY_V3"
+  },
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/proof_carrying_live_manifest_v3.py",
+      "git_blob_sha": "7f53a86e4fb5ee8794674fb97adabe8858b7f9d2"
+    },
+    "tests": {
+      "path": "canonical/tests/test_proof_carrying_live_manifest_v3.py",
+      "git_blob_sha": "225a042989cd253fb22d70e8950337898ab0ad4a"
+    }
+  },
+  "independent_replay": {
+    "carrier": "SPRITE",
+    "sprite_name": "brain-field-projection-verify-20261011-v1",
+    "sprite_id": "sprite-f7ddb46b-7a9b-437e-8079-e815b9ab6fb5",
+    "python": "3.13.7",
+    "pytest": "9.1.1",
+    "py_compile": "PASS",
+    "tests_run": 18,
+    "tests_passed": 18,
+    "tests_failed": 0
+  },
+  "proved": [
+    "CANDIDATE_MANIFEST_DIGEST_IS_RECOMPUTED_FROM_EXACT_ROUTE_RECORDS_BEFORE_ACTIVATION_CANDIDACY",
+    "ROUTE_VERIFICATION_RECEIPTS_SELF_DIGEST_AND_BIND_EXACT_ROUTE_SUBJECT",
+    "MANIFEST_CANDIDACY_AUTHORITY_SELF_DIGESTS_AND_BINDS_EXACT_ROUTE_SUBJECT",
+    "LEARNED_V2_ROUTES_REQUIRE_A_SELF_BOUND_VERIFIED_IMPROVEMENT_LOOP_V2_RECEIPT_FOR_THE_SAME_ROUTE",
+    "CANARY_RECEIPTS_SELF_DIGEST_AND_BIND_EXACT_MANIFEST_AND_ROUTE_RECORD",
+    "RUNTIME_ACK_SELF_DIGESTS_EXACT_MANIFEST_ROUTE_SET_RUNTIME_INSTANCE_AND_DEPLOYMENT_ARTIFACT",
+    "FRONT_DOOR_REPLAY_RECEIPTS_SELF_DIGEST_AND_BIND_EXACT_MANIFEST_AND_ROUTE_RECORD",
+    "CANARY_AND_REPLAY_ROUTE_SETS_MUST_EQUAL_THE_CANDIDATE_ROUTE_SET_EXACTLY",
+    "LAST_KNOWN_GOOD_ROLLBACK_MANIFEST_IS_REQUIRED",
+    "PASS_GRANTS_ACTIVATION_CANDIDACY_ONLY__SEPARATE_LIVE_GLOBAL_AUTHORITY_REMAINS_REQUIRED"
+  ],
+  "hard_nonclaims": [
+    "NO_ACTIVATION_OR_PROMOTION_AUTHORITY",
+    "NO_EXECUTION_OR_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
