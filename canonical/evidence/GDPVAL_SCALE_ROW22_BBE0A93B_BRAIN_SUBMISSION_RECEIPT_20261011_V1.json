@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_ROW22_THREE_PDF_KENT_COUNTY_NEEDS_ASSESSMENT_AND_RESOURCE_GUIDE_FROZEN__VISUAL_AND_CONTENT_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "subject": {
+    "row_idx": 22,
+    "task_id": "bbe0a93b-ebf0-40b0-98dc-8d9243099034",
+    "sector": "Government",
+    "occupation": "Child, Family, and School Social Workers"
+  },
+  "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS15_24_PRECOMMIT_20261011_V1.json",
+  "packet": {
+    "manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8",
+    "prompt_sha256": "c3ebd854303295f387629d7cf396b973ab5bd292fa7fe87e807d47825bff6039",
+    "allowed_projection_sha256": "7a5e195c354ce8e9aa919097cc665f844877f235ce8b93cdbe0dffbc82ffe56f",
+    "reference_count": 0
+  },
+  "freshness": {
+    "task_id_frozen_before_prompt_read": true,
+    "official_dataset_field_firewall_used": true,
+    "rubric_read_before_output_freeze": false,
+    "human_gold_read_before_output_freeze": false,
+    "third_party_model_submission_read_before_output_freeze": false,
+    "judge_feedback_read_before_output_freeze": false
+  },
+  "public_sources_used": [
+    "MICHIGAN_211_AND_HEART_OF_WEST_MICHIGAN_UNITED_WAY",
+    "KENT_COUNTY_COMMUNITY_ACTION",
+    "THE_RAPID",
+    "FEEDING_AMERICA_WEST_MICHIGAN",
+    "WEST_MICHIGAN_WORKS",
+    "IN_THE_IMAGE",
+    "LITERACY_CENTER_OF_WEST_MICHIGAN",
+    "GRAND_RAPIDS_COMMUNITY_COLLEGE_ADULT_EDUCATION",
+    "KENT_COUNTY_HEALTH_DEPARTMENT",
+    "NETWORK180",
+    "LEGAL_AID_OF_WESTERN_MICHIGAN",
+    "KENT_COUNTY_PREGNANCY_PARENTING_AND_WIC",
+    "DIOCESE_OF_GRAND_RAPIDS_IMMIGRATION_LEGAL_SERVICES",
+    "MICHIGAN_IMMIGRANT_RIGHTS_CENTER",
+    "C_SNIP"
+  ],
+  "deliverables": [
+    {
+      "format": "pdf",
+      "filename": "Kent_County_Needs_Assessment_English.pdf",
+      "sha256": "074a2b45f55028513830274b4876206560989247570d51a9f75840e15d1f7c85",
+      "library_path": "/Project Brain/GDPval/scale/bbe0a93b-ebf0-40b0-98dc-8d9243099034/Kent_County_Needs_Assessment_English.pdf",
+      "library_file_id": "libfile_0ee37b06ef1e3d13c2c1a6f1e5f09527",
+      "rendered_page_count": 1
+    },
+    {
+      "format": "pdf",
+      "filename": "Kent_County_Needs_Assessment_Spanish.pdf",
+      "sha256": "f6c7c5cb45cebf1a0fdc706a49cd521843d70ea6804798d7bcff1edcd229ff62",
+      "library_path": "/Project Brain/GDPval/scale/bbe0a93b-ebf0-40b0-98dc-8d9243099034/Kent_County_Needs_Assessment_Spanish.pdf",
+      "library_file_id": "libfile_7a7cf58feb797170397377137cee1010",
+      "rendered_page_count": 1
+    },
+    {
+      "format": "pdf",
+      "filename": "Kent_County_Resource_Guide.pdf",
+      "sha256": "ba535465341b5b91ecc5d2453e2635cca748cc06e8bd89db7f8adb399aad14a2",
+      "library_path": "/Project Brain/GDPval/scale/bbe0a93b-ebf0-40b0-98dc-8d9243099034/Kent_County_Resource_Guide.pdf",
+      "library_file_id": "libfile_e58d486196ceb405031d78a5531cb579",
+      "rendered_page_count": 2
+    }
+  ],
+  "verification": {
+    "english_assessment_visual_inspection": "PASS__1_OF_1__NO_CLIPPING_OVERLAP_OR_BROKEN_GLYPHS",
+    "spanish_assessment_visual_inspection": "PASS__1_OF_1__NO_CLIPPING_OVERLAP_OR_BROKEN_GLYPHS",
+    "resource_guide_visual_inspection": "PASS__2_OF_2__NO_CLIPPING_OVERLAP_OR_BROKEN_GLYPHS",
+    "pre_freeze_header_contrast_defect_detected": true,
+    "pre_freeze_header_contrast_defect_repaired": true,
+    "english_and_spanish_are_separate_pdfs": true,
+    "assessment_three_column_question_yes_no_structure": true,
+    "assessment_required_need_domains_covered": true,
+    "assessment_followup_table_present": true,
+    "resource_guide_grouped_by_need_category": true,
+    "resource_guide_current_local_contact_information_source_grounded": true,
+    "eligibility_waitlist_and_availability_verification_disclaimer_present": true
+  },
+  "hard_nonclaims": [
+    "RESOURCE_AVAILABILITY_ELIGIBILITY_AND_WAITLISTS_MAY_CHANGE_AND_MUST_BE_REVERIFIED_AT_REFERRAL_TIME",
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_SCORE",
+    "NO_GDPVAL_ELO",
+    "NO_1846_THRESHOLD_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
