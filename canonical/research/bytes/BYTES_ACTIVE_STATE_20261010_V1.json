@@ -1,38 +1,39 @@
 {
   "schema": "PROJECT_BRAIN_BYTES_ACTIVE_STATE_V1",
-  "status": "ACTIVE_RESEARCH__MPC_POW_INT_V51_FRONTIER__SUCCESSOR_READY",
+  "status": "ACTIVE_RESEARCH__MPF_POW_INT_SQUARE_ONLY_V52_FRONTIER__SUCCESSOR_READY_WITH_NEXT59_PERSISTENCE_GATE",
   "date": "2026-10-11",
   "mission_lock": "Find the minimum resource-feasible executable description of the required capability set conditional on already-owned Brain substrate.",
   "governing_laws": [
     "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
     "canonical/laws/BYTES_RESOURCE_BOUNDED_MINIMUM_MECHANISM_LAW_V1.md"
   ],
-  "source_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MPC_POW_INT_V51_SUCCESSOR_EXECUTION_20261011_V1.json",
+  "source_checkpoint": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MPF_POW_INT_V52_SUCCESSOR_EXECUTION_20261011_V1.json",
   "exact_symbolic_state": {
-    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MPC_POW_INT_V51_SUCCESSOR_EXECUTION_20261011_V1.json",
-    "evidence_git_blob_sha": "60dbeb3ce4372acd028cb9ef7baf1717392be7b0",
-    "status": "CURRENT_VERIFIED_BYTES_RESEARCH_FRONTIER__MPC_POW_INT_N_MINUS_1_OR_2_SPECIALIZATION__NOT_PROMOTED_TO_OPUS_CAPABILITY",
-    "raw_python_source_bytes": 1719563,
-    "B_exec_raw_python_source_bytes": 1722323,
+    "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MPF_POW_INT_V52_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "evidence_git_blob_sha": "e3c55bc650d656fefb5a4cca7b4728f25e419dc8",
+    "status": "CURRENT_VERIFIED_BYTES_RESEARCH_FRONTIER__MPF_POW_INT_SQUARE_ONLY_SPECIALIZATION__NOT_PROMOTED_TO_OPUS_CAPABILITY",
+    "raw_python_source_bytes": 1717827,
+    "B_exec_raw_python_source_bytes": 1720587,
     "B_verify_semantic_digest_raw_bytes": 1358,
     "python_files": 277,
-    "final_untouched_qualification": "14950/14950",
-    "clean_room_execution": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
-    "archive_replay": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
-    "manifest_sha256": "bab0e710a20ac41743feadf3a979e2c9d8d08fd621a42e4799ba658badb7ef37",
-    "durable_archive_bytes": 268588,
-    "durable_archive_sha256": "0a8136c5abf38f76f67c429a8cd4e5123249e06e861e69f9650b8f49c721412a",
-    "raw_improvement_vs_previous_frontier_bytes": 1117,
+    "final_untouched_qualification": "15180/15180",
+    "clean_room_execution": "PASS__CLEAN_ARCHIVE_SECOND_EXECUTION_CARRIER_NEXT58_15180_OF_15180",
+    "archive_replay": "PASS__CLEAN_ARCHIVE_SECOND_EXECUTION_CARRIER_NEXT58_15180_OF_15180",
+    "manifest_sha256": "5cfdaf054fafabd04894396739defc82fed40ec3aba24b2f1b06030421b9c62f",
+    "durable_archive_bytes": 267716,
+    "durable_archive_sha256": "51be5680134e60c03a4e0c03a743810364fe640bad31f34d1db7c15dc8aec357",
+    "durable_archive_persisted": false,
+    "raw_improvement_vs_previous_frontier_bytes": 1736,
     "promotion_credit_from_this_record": 0
   },
   "current_bottleneck": {
-    "subsystem": "POST_V51_RERANK_PENDING",
-    "last_structural_cut": "MPC_POW_INT_N_MINUS_1_OR_2_SPECIALIZATION_V51",
+    "subsystem": "POST_V52_NEXT59_DURABILITY_GATE_THEN_RERANK",
+    "last_structural_cut": "MPF_POW_INT_SQUARE_ONLY_SPECIALIZATION_V52",
     "required_surface": [
       "complete bounded exact-symbolic route"
     ],
-    "next_action": "Rerank exact V51 using spent NEXT57 only; make a new physical cut before touching QUAL_SUCCESSOR_NEXT58_20261011_V1.",
-    "note": "Complete spent NEXT56 roots profiling observed only n=-1 reciprocal and n=2 square calls in mpc_pow_int. Exact V51 passes complete NEXT56 and previously untouched NEXT57; NEXT58 is frozen unspent."
+    "next_action": "PERSIST_OR_BYTE_IDENTICALLY_REGENERATE_FROZEN_NEXT59_TO_BOUND_SHA256__THEN_RERANK_EXACT_V52_USING_SPENT_NEXT58_ONLY__MAKE_NEW_PHYSICAL_CUT_BEFORE_SPENDING_NEXT59",
+    "note": "Whole-body mpf_pow_int deletion was falsified by two fresh NEXT57 roots cases. Complete NEXT57 profiling localized the required branch to n=2 square only. Corrected V52 passes spent NEXT57 and fresh NEXT58 completely. NEXT59 definition and generated hash are frozen, but Library persistence failed at the Files/container session boundary."
   },
   "rejected_do_not_reopen_without_new_evidence": [
     "parameter count as terminal metric",
@@ -66,16 +67,26 @@
   "fresh_local_donor_evidence": "canonical/evidence/BYTES_SYMPY_1_14_DEPENDENCY_CENSUS_20261010_V1.json",
   "execution_reconciliation": {
     "stock_donor_available_in_current_runtime": "SymPy 1.14.0 plus mpmath 1.3.0",
-    "fresh_candidate_raw_python_source_bytes": 1719563,
-    "fresh_candidate_B_exec_raw_python_source_bytes": 1722323,
-    "untouched_qualification": "14950/14950",
-    "clean_room_execution": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
-    "archive_replay": "PASS__278_OF_278_DURABLE_FILES_BYTE_IDENTICAL",
-    "action_taken": "Specialized mpmath.libmp.libmpc.mpc_pow_int to the only two call classes observed across the complete spent NEXT56 roots population: n=-1 reciprocal and n=2 square; all other integer-power branches fail closed. Complete spent NEXT56 and fresh NEXT57 pass.",
-    "physical_next_step": "Continue from 1,719,563 bytes using spent NEXT57 only; rerank before the next physical cut.",
-    "predecessor_v50_superseded": true,
-    "spent_NEXT56_replay": "14720/14720",
-    "fresh_NEXT57_replay": "14950/14950"
+    "fresh_candidate_raw_python_source_bytes": 1717827,
+    "fresh_candidate_B_exec_raw_python_source_bytes": 1720587,
+    "untouched_qualification": "15180/15180",
+    "clean_room_execution": "PASS__CLEAN_ARCHIVE_SECOND_EXECUTION_CARRIER_NEXT58_15180_OF_15180",
+    "archive_replay": "PASS__CLEAN_ARCHIVE_SECOND_EXECUTION_CARRIER_NEXT58_15180_OF_15180",
+    "action_taken": "Rejected whole-function mpf_pow_int fail-close after two fresh NEXT57 roots failures; profiled the complete NEXT57 bounded route, preserved only exact n=2 square behavior with zero/inf/nan handling, and fail-closed all other integer exponents. Rebased this independent cut onto canonical V51. Complete spent NEXT57 and fresh NEXT58 pass.",
+    "physical_next_step": "Close NEXT59 durable persistence without spending it; then continue from 1,717,827 bytes using spent NEXT58 only and make a new physical cut before NEXT59.",
+    "predecessor_v51_superseded": true,
+    "spent_NEXT57_replay": "14950/14950",
+    "fresh_NEXT58_replay": "15180/15180",
+    "clean_archive_second_execution_carrier_NEXT58": "15180/15180",
+    "rejected_whole_body_cut": {
+      "raw_saved_bytes": 2131,
+      "fresh_NEXT57_result": "14948/14950",
+      "failing_global_case_indexes": [
+        4678,
+        4962
+      ],
+      "disposition": "REJECTED"
+    }
   },
   "historical_reported_predecessor": {
     "evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_DONOR_SLICE_CHECKPOINT_20261010_V1.json",
@@ -84,34 +95,34 @@
     "qualification": "1854/1854",
     "provenance": "USER_SUPPLIED_TRANSCRIPT_CHECKPOINT"
   },
-  "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MPC_POW_INT_V51_SUCCESSOR_EXECUTION_20261011_V1.json",
+  "fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_MPF_POW_INT_V52_SUCCESSOR_EXECUTION_20261011_V1.json",
   "next_frozen_qualification": {
-    "id": "QUAL_SUCCESSOR_NEXT58_20261011_V1",
-    "cases": 15180,
-    "seed": 2664458636,
-    "seed_derivation": "FIRST_32_BITS_BIG_ENDIAN_SHA256_OF_QUAL_ID_PIPE_V51_MANIFEST_IDENTITY",
-    "per_operation_budget": 1320,
-    "corpus_sha256": "fd7a32a07356c87a18e884f851320fd5d87dc316ca2436a4191275e5f3f57e0c",
+    "id": "QUAL_SUCCESSOR_NEXT59_20261011_V1",
+    "cases": 15410,
+    "seed": 1601787694,
+    "seed_derivation": "FIRST_32_BITS_BIG_ENDIAN_SHA256_OF_QUAL_ID_PIPE_V52_MANIFEST_IDENTITY",
+    "per_operation_budget": 1340,
+    "corpus_sha256": "5c7cf733614d58648dbe4fbfc855e7451651c652555eb895fcdcef39df780c92",
     "generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
-    "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0_EXACT_ROUTE_EXPECTED_OUTPUTS__DETERMINISTIC_PARAMETER_STREAM__LOW_CONCURRENCY_CHUNKED_EXPECTED_OUTPUT_EVALUATION__CANONICAL_ROW_REASSEMBLY",
-    "status": "FROZEN_UNSPENT__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0_EXACT_ROUTE_EXPECTED_OUTPUTS__DETERMINISTIC_PARAMETER_STREAM",
+    "status": "FROZEN_UNSPENT__CONTENT_HASH_BOUND__DURABLE_PERSISTENCE_BLOCKED__MUST_PERSIST_OR_REGENERATE_BYTE_IDENTICAL_BEFORE_NEXT_PHYSICAL_CUT",
     "spent": false,
-    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT58_20261011_V1(1).jsonl",
-    "library_file_id": "libfile_338e1f305de081918a776371feeb99d6"
+    "library_path": null,
+    "library_file_id": null
   },
   "durable_artifact_persistence": {
     "candidate_manifest_and_measurements": "PERSISTED_IN_CANONICAL_GITHUB_EVIDENCE",
-    "predecessor_reconstruction": "canonical/research/bytes/tools/conservative_mpmath_next56_repair_prune_v50.py",
-    "transform": "canonical/research/bytes/tools/conservative_mpc_pow_int_n1_n2_prune_v51.py",
+    "predecessor_archive": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V51_SUCCESSOR_20261011_V1.tar.xz",
+    "predecessor_library_file_id": "libfile_08f45f3ff7ac8191855d2736db134114",
+    "transform": "canonical/research/bytes/tools/conservative_mpf_pow_int_square_only_prune_v52.py",
     "exact_route": "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
     "qualification_generator": "canonical/research/bytes/tools/generate_qualification_v1.py",
-    "library_binary_status": "PERSISTED_IN_CHATGPT_LIBRARY",
-    "library_file_id": "libfile_08f45f3ff7ac8191855d2736db134114",
-    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V51_SUCCESSOR_20261011_V1.tar.xz",
-    "library_binary_bytes": 268588,
-    "library_binary_sha256": "0a8136c5abf38f76f67c429a8cd4e5123249e06e861e69f9650b8f49c721412a",
-    "next_frozen_corpus_library_file_id": "libfile_338e1f305de081918a776371feeb99d6",
-    "rule": "GitHub V51 evidence, exact V51 archive, clean-room verification, and frozen NEXT58 corpus are durable; capability promotion credit remains zero."
+    "v52_archive_status": "VERIFIED_LOCALLY__LIBRARY_UPLOAD_FAILED_CONTAINER_SESSION_BOUNDARY__RECONSTRUCTIBLE_FROM_V51_PLUS_EXACT_GUARDED_TRANSFORM",
+    "v52_archive_bytes": 267716,
+    "v52_archive_sha256": "51be5680134e60c03a4e0c03a743810364fe640bad31f34d1db7c15dc8aec357",
+    "next59_status": "GENERATED_AND_HASH_BOUND__LIBRARY_UPLOAD_FAILED_CONTAINER_SESSION_BOUNDARY",
+    "next59_sha256": "5c7cf733614d58648dbe4fbfc855e7451651c652555eb895fcdcef39df780c92",
+    "rule": "V52 is reconstructible from durable V51 plus exact guarded transform. No V53 physical cut or NEXT59 spend until the bound NEXT59 corpus is durably persisted or regenerated byte-identical."
   },
   "predecessor_fresh_execution_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_RECOVERY_EXECUTION_20261010_V1.json",
   "reserved_predecessor_qualification_qual8": {
@@ -123,11 +134,12 @@
   },
   "previous_fresh_execution_evidence": "canonical/evidence/BYTES_V33_POINTER_20261010.txt",
   "spent_successor_qualification": {
-    "id": "QUAL_SUCCESSOR_NEXT57_20261011_V1",
-    "cases": 14950,
-    "corpus_sha256": "874b316cb3cb39d27371195ffbedf2542187e842e383d53bf635e4d42a97e8e4",
-    "candidate_result": "14950/14950",
+    "id": "QUAL_SUCCESSOR_NEXT58_20261011_V1",
+    "cases": 15180,
+    "corpus_sha256": "fd7a32a07356c87a18e884f851320fd5d87dc316ca2436a4191275e5f3f57e0c",
+    "candidate_result": "15180/15180",
     "failures": 0,
+    "clean_archive_second_execution_carrier_result": "15180/15180",
     "external_second_carrier_verified": false,
     "spent": true
   },
@@ -162,11 +174,11 @@
   "independent_verification_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_SECONDARY_PROFILE_V25_INDEPENDENT_VERIFICATION_20261010_V1.json",
   "prior_fresh_falsification_evidence": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NEXT25_FALSIFICATION_20261010_V1.json",
   "current_frontier_independent_verification": {
-    "path": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPC_POW_INT_V51_INDEPENDENT_VERIFY_20261011_V1.json",
-    "git_blob_sha": "e67ac15f7933811968bb0081c7ac17331dbbd0f4",
-    "status": "PASS__CLEAN_V50_EXTRACTION_REPLAY__V51_278_OF_278_DURABLE_FILES_IDENTICAL__SPENT_NEXT56_14720_OF_14720__FRESH_NEXT57_14950_OF_14950__NEXT58_FROZEN_UNSPENT",
+    "path": "canonical/verification/BYTES_EXACT_SYMBOLIC_MPF_POW_INT_V52_INDEPENDENT_VERIFY_20261011_V1.json",
+    "git_blob_sha": "e191da6e41f7189991a447cf76356af42ef73c88",
+    "status": "PASS__EXACT_V51_TO_V52_TRANSFORM__SPENT_NEXT57_14950_OF_14950__FRESH_NEXT58_15180_OF_15180__CLEAN_ARCHIVE_SECOND_EXECUTION_CARRIER_NEXT58_15180_OF_15180__NEXT59_HASH_FROZEN_PERSISTENCE_GATED",
     "independent_second_carrier_verified": false,
-    "carrier": "CHATGPT_ISOLATED_CONTAINER_CLEAN_EXTRACTION",
+    "carrier": "CHATGPT_CONTAINER_PLUS_SEPARATE_PYTHON_EXECUTION_CARRIER_CLEAN_ARCHIVE_EXTRACTION",
     "promotion_credit_delta": 0
   }
 }
