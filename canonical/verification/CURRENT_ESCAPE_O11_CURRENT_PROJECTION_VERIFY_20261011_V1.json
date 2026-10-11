@@ -1,0 +1,119 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_ESCAPE_O11_CURRENT_PROJECTION_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_CHANGED_BYTES__PYCOMPILE__11_OF_11_FOCUSED__56_OF_56_INHERITED_SEAM__CURRENT_BRANCH_PROJECTION_O11_Q1_TB_PARKED__173_JSON_RESCAN_ZERO_CANDIDATES__ZERO_CREDIT",
+  "subject": {
+    "repository": "moxnixmdj/brain",
+    "branch": "repair/o11-current-projection-20261011-v1",
+    "base_main_sha": "8916f4b00768329eb101be88ad6effbfd3704d67",
+    "tested_branch_head": "128cf0bdbdf614a84bf2d801b8aebfef6874977b",
+    "changed_blobs": {
+      "canonical/runtime/current_escape_o11_objective_acceptance_law_gate_v1.py": "e5148c302087f0840424a99bab965001944911e1",
+      "canonical/tests/test_current_escape_o11_objective_acceptance_law_gate_v1.py": "8f647ff5e168ae00871994636552613e59b21aec"
+    },
+    "current_inputs": {
+      "canonical/governance/CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1.json": "eb42b8c1c1e506f351ab6ea941b74791fb37894b",
+      "canonical/governance/ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2.json": "f3a566a982dcd867c583eafd24c6f5dd3baa0530",
+      "canonical/governance/CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1.json": "a56af90a3af965d6be7f9bc5aac1312919626b28",
+      "canonical/governance/CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_CUT_20261011_V1.json": "07b3ca1b623209d224ade26b174da3f6247fefaf",
+      "canonical/governance/GDPVAL_CURRENT_FIXED_BAR_ENGINE_RECLASSIFICATION_20261011_V1.json": "c16a49726507d6611a24bde323e0436a65870b59",
+      "canonical/verification/GDPVAL_FIXED_BAR_OWNER_PAIRWISE_NONNECESSITY_VERIFICATION_20261009_V1.json": "0ff348665933ab801fb32b6e37d8c5d8438e5b42"
+    },
+    "unchanged_reused_kernel_blobs": {
+      "canonical/runtime/benchmark_witness_elimination_compiler_v4.py": "1da07329d3bf35f598a5716c80519afe6b07dd64",
+      "canonical/runtime/benchmark_witness_elimination_compiler_v3.py": "ace06caa1a8680a0a52d5341345dd5413b0620aa",
+      "canonical/runtime/proof_carrying_scope_cover_v1.py": "3143bd707d51d4d66b2171396b3d596c9a26adf8"
+    }
+  },
+  "independent_execution": {
+    "carrier": {
+      "kind": "SPRITE",
+      "name": "brain-capability-first-scheduler-verify-20261008-v1",
+      "id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+      "isolated_path": "/home/sprite/o11-current-projection-v1"
+    },
+    "exact_changed_blob_match": true,
+    "exact_reused_kernel_blob_match": true,
+    "py_compile": {
+      "pass": true,
+      "file": "canonical/runtime/current_escape_o11_objective_acceptance_law_gate_v1.py"
+    },
+    "focused_behavioral_tests": {
+      "tests_run": 11,
+      "passed": 11,
+      "failed": 0,
+      "errors": 0
+    },
+    "inherited_seam_tests": {
+      "execution_method": "DIRECT_ZERO_ARGUMENT_TEST_FUNCTION_HARNESS__EXACT_TEST_FILES__PYTEST_RUNTIME_NOT_REQUIRED",
+      "tests_run": 56,
+      "passed": 56,
+      "failed": 0,
+      "errors": 0,
+      "files": [
+        "canonical/tests/test_benchmark_witness_elimination_compiler_v4.py",
+        "canonical/tests/test_benchmark_witness_elimination_compiler_v3.py",
+        "canonical/tests/test_proof_carrying_scope_cover_v1.py"
+      ]
+    },
+    "exact_current_projection_replay": {
+      "pass": true,
+      "active_o_count": 11,
+      "active_q_count": 1,
+      "parked_count": 1,
+      "gdpval_engine": "O_OBJECTIVE_ACCEPTANCE_INSTANTIATION",
+      "aa_briefcase_engine": "Q_ACCEPTANCE_RELATION_ROBUST_COMMON_POLICY",
+      "tb_science_state": "PARKED"
+    },
+    "refreshed_o_claim_search": {
+      "pass": true,
+      "scanned_json_file_count": 173,
+      "scanned_json_bytes": 1505061,
+      "parse_failure_count": 0,
+      "candidate_count": 0,
+      "proved_candidate_count": 0,
+      "proved_obligation_count": 0,
+      "missing_obligation_count": 11,
+      "current_o_count": 11,
+      "current_q_count": 1
+    }
+  },
+  "repaired_defect": {
+    "prior_behavior": "O_GATE_MEMBERSHIP_DERIVED_FROM_STALE_O11_Q2_BASE_REDUCTION__GDPVAL_REJECTED_AS_Q__PARKED_TB_SCIENCE_STILL_INCLUDED_AS_O",
+    "current_behavior": "MUTABLE_CURRENT_RESIDUAL_POINTER_CONTENT_ADDRESSES_THE_TWO_ENGINE_CUT__GDPVAL_Q_TO_O_RECLASSIFICATION_IS_BOUND_TO_INDEPENDENT_NONNECESSITY_VERIFICATION__TB_PARKING_IS_BOUND_TO_CURRENT_ESCAPE_TOPOLOGY__PARTITION_MUST_EXACTLY_COVER_ALL_13_ROWS",
+    "semantic_kernel_changed": false,
+    "acceptance_thresholds_changed": false,
+    "scope_law_changed": false,
+    "new_primitive_required": false
+  },
+  "proved": [
+    "CURRENT_O_GATE_MEMBERSHIP_NOW_FOLLOWS_THE_CONTENT_ADDRESSED_TWO_ENGINE_PROJECTION_REFERENCED_BY_THE_MUTABLE_CURRENT_RESIDUAL_AUTHORITY",
+    "GDPVAL_FIXED_BAR_E1_IS_ROUTED_TO_THE_EXISTING_O_OBJECTIVE_ACCEPTANCE_KERNEL_ONLY_AFTER_THE_BOUND_INDEPENDENT_NONNECESSITY_VERIFICATION_PASSES",
+    "AA_BRIEFCASE_REMAINS_THE_SINGLE_CURRENT_Q_ROW",
+    "TB_SCIENCE_IS_EXPLICITLY_PARKED_AND_CANNOT_ENTER_CURRENT_O_PROCESSING",
+    "O_Q_AND_PARKED_SETS_ARE_PAIRWISE_DISJOINT_AND_EXACTLY_PARTITION_THE_13_ROW_ESCAPE_MANIFEST",
+    "CURRENT_TWO_ENGINE_CUT_BYTE_DRIFT_FAILS_CLOSED",
+    "UNCHANGED_V4_V3_AND_SCOPE_COVER_KERNELS_PASS_56_OF_56_INHERITED_SEAM_TESTS",
+    "REFRESHED_READY_MADE_CLAIM_SCAN_FINDS_ZERO_CURRENT_O11_CANDIDATES__SO_EVIDENCE_ACQUISITION_OR_DERIVED_PREMISE_SYNTHESIS_REMAINS_REQUIRED"
+  ],
+  "hard_nonclaims": [
+    "NO_O_ROW_ACCEPTANCE_CREDIT",
+    "NO_GDPVAL_SCORE_OR_FIXED_BAR_ACCEPTANCE",
+    "NO_AA_BRIEFCASE_RESULT",
+    "NO_TB_SCIENCE_REACTIVATION",
+    "NO_FULL_PRIVATE_CURRENT_MAIN_REGRESSION",
+    "NO_QUALITY_PROMOTION_OR_TERMINAL_AUTHORITY",
+    "NO_NEW_PRIMITIVE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "quality_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "acceptance_authority": false,
+  "promotion_authority": false,
+  "terminal_authority": false
+}
