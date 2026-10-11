@@ -92,6 +92,12 @@ def _ambiguous_word_is_verb(low: str, start: int) -> bool:
     prefix = low[:start].strip()
     if not prefix:
         return True
+    # A negation phrase immediately before an ambiguous action word is itself
+    # strong verb evidence: "do not update", "never record", etc. Without this,
+    # the noun-vs-verb ambiguity filter can erase the forbidden intent before
+    # the negation detector gets a chance to classify it.
+    if _NEGATION.search(prefix):
+        return True
     words = re.findall(r"[a-z]+", prefix)
     if not words:
         return True
