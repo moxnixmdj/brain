@@ -36,10 +36,12 @@ def test_raw_javascript_action_is_not_supported():
         raise AssertionError("expected raw javascript rejection")
 
 
-def test_adapter_accepts_semantic_browser_action():
-    _, actions = compile_actions({
-        "actions": [{"type": "BROWSER_FILL", "label": "Email", "value": "a@example.com"}]
-    })
-    assert len(actions) == 1
-    assert "FIELD_NOT_FOUND" in actions[0]
-    assert "a@example.com" in actions[0]
+def test_adapter_does_not_compile_host_browser_op_as_guest_pyautogui():
+    try:
+        compile_actions({
+            "actions": [{"type": "BROWSER_FILL", "label": "Email", "value": "a@example.com"}]
+        })
+    except Exception as exc:
+        assert "HOST_OPERATION_MUST_BE_SINGLETON_RUNTIME_ACTION" in str(exc)
+    else:
+        raise AssertionError("expected host browser operation to stay outside guest action compiler")
