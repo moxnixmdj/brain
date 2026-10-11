@@ -18,7 +18,7 @@ class ConstraintGuardError(RuntimeError):
     pass
 
 _PATTERNS=(
-    re.compile(r"(?:[,;]\s*)?(?:while\s+)?(?:keep|leave|preserve)\s+(/home/oai/[^\s,;]+)\s+(?:unchanged|intact|as[- ]is)",re.I),
+    re.compile(r"(?:[,;]\s*)?(?:while\s+)?(?:keep|leave|preserve|keeping|leaving|preserving)\s+(/home/oai/[^\s,;]+)\s+(?:unchanged|intact|as[- ]is)",re.I),
     re.compile(r"(?:[,;]\s*)?(?:and\s+)?(?:do\s+not|don't|never)\s+(?:modify|change|edit|delete|remove|overwrite|touch)\s+(/home/oai/[^\s,;]+)",re.I),
     re.compile(r"(?:[,;]\s*)?without\s+(?:changing|modifying|editing|deleting|removing|overwriting|touching)\s+(/home/oai/[^\s,;]+)",re.I),
 )
