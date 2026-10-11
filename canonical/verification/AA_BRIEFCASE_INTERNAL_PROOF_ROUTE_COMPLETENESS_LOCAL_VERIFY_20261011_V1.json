@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_INTERNAL_PROOF_ROUTE_COMPLETENESS_LOCAL_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__7_OF_7_DECLARED_CASES__REPRESENTATIVE_LOCAL_REPLAY__ZERO_CREDIT",
+  "subject": {
+    "runtime": "canonical/runtime/aa_briefcase_internal_proof_route_completeness_v1.py",
+    "tests": "canonical/tests/test_aa_briefcase_internal_proof_route_completeness_v1.py",
+    "governance": "canonical/governance/AA_BRIEFCASE_INTERNAL_PROOF_ROUTE_COMPLETENESS_20261011_V1.json"
+  },
+  "verified": [
+    "IDENTIFIED_PASSING_WORLD_CLOSES_BY_IDENTIFICATION",
+    "IDENTIFIED_FAILING_WORLD_DOES_NOT_PROVE_THRESHOLD",
+    "ALL_CONSISTENT_WORLDS_PASS_CLOSES_ROBUSTLY",
+    "ALL_CONSISTENT_WORLDS_FAIL_IS_ROBUST_FAILURE",
+    "MIXED_UNIDENTIFIED_WORLDS_GENERATE_COUNTERMODEL_PAIR",
+    "INCOMPLETE_WORLD_MAP_REJECTED",
+    "DUPLICATE_WORLD_UNIVERSE_REJECTED"
+  ],
+  "truth": {
+    "logical_route_family_count": 2,
+    "route_families": [
+      "IDENTIFY_SCORE_RELEVANT_HIDDEN_STATE_OR_SUFFICIENT_STATISTIC",
+      "PROVE_THRESHOLD_INVARIANT_OVER_ALL_HIDDEN_STATES_CONSISTENT_WITH_BOUND_INFORMATION"
+    ],
+    "exact_1822_certified": false
+  },
+  "hard_nonclaims": [
+    "NO_OFFICIAL_AA_BRIEFCASE_SCORE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  },
+  "terminal_authority": false
+}
