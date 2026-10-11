@@ -591,7 +591,18 @@
     },
     "terminal_candidate_donor_independence_audit": {
       "path": "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py",
-      "git_blob_sha": "0ed69641693538f15b7e1658f5ac5e80031afb26"
+      "git_blob_sha": "2c368172b65220104f51b56c3a4352be624ddca6",
+      "authority_scope": "STATIC_SOURCE_CLOSURE_PREFLIGHT_ONLY",
+      "donor_independence_authority": false,
+      "runtime_cognition_provenance_authority": false,
+      "complete_runtime_dependency_inventory_authority": false,
+      "requires_current_runtime_evidence": [
+        "DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_V2",
+        "COMPLETE_RUNTIME_DEPENDENCY_CENSUS",
+        "MODEL_INDEPENDENT_RUNTIME_COGNITION",
+        "POST_DONOR_REMOVAL_CLEANROOM"
+      ],
+      "hard_nonclaim": "STATIC_IMPORT_AND_CALL_GRAPH_PREFLIGHT_IS_NOT_FINAL_DONOR_INDEPENDENCE_PROOF"
     },
     "adaptive_positive_cover_fixed_point_v2": {
       "path": "canonical/governance/ADAPTIVE_ABSTRACT_POSITIVE_COVER_FIXED_POINT_THEOREM_20261007_V2.json"
