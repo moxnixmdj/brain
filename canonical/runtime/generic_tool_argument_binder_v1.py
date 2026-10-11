@@ -161,6 +161,15 @@ def _cue_facts(goal: str, observations: Sequence[Any]) -> dict[str, list[str]]:
         for date in _DATE.findall(text):
             add("date", date)
 
+        # Generic quoted field assignment, e.g. Origin 'Web' or Type "Bug".
+        # The key is schema-neutral and is canonicalized exactly like any
+        # request field; no application vocabulary is embedded here.
+        for m in re.finditer(
+            r"\b([A-Za-z][A-Za-z0-9_]*)\s+['\"]([^'\"]{1,120})['\"]",
+            text,
+        ):
+            add(canonical_field(m.group(1)), m.group(2))
+
     # Explicit field assignments in the goal.
     for m in re.finditer(
         r"\b(?:set|change|update|mark)\s+(?:the\s+)?(.{1,80}?)\s+(?:to|as)\s+([^,.;]+)",
@@ -266,6 +275,38 @@ def _request_fields(endpoint: Mapping[str, Any]) -> list[dict[str, Any]]:
         from_mapping(raw)
     elif isinstance(raw, str):
         text = raw
+
+        # Descriptive wrappers such as
+        #   "Case fields: {Subject, Priority, Origin}"
+        #   "Contact fields to update: {Email, Title}"
+        # describe optional object members. "fields" is structure, not a
+        # required user semantic. Parse the members and erase the wrapper before
+        # the generic key:type parser runs.
+        wrapper = re.compile(
+            r"\b(?:[A-Za-z][A-Za-z0-9]*\s+)?fields"
+            r"(?:\s+to\s+[A-Za-z]+)?\s*:\s*\{([^}]*)\}",
+            flags=re.I,
+        )
+        spans: list[tuple[int, int]] = []
+        for m in wrapper.finditer(text):
+            spans.append((m.start(), m.end()))
+            for raw_member in m.group(1).split(","):
+                member = raw_member.strip()
+                name_match = re.match(r"([A-Za-z_][A-Za-z0-9_]*)", member)
+                if not name_match:
+                    continue
+                put(
+                    name_match.group(1),
+                    required=False,
+                    is_array="array" in member.lower() or "list" in member.lower(),
+                    raw_spec=member,
+                )
+        if spans:
+            chars = list(text)
+            for start, end in spans:
+                chars[start:end] = " " * (end - start)
+            text = "".join(chars)
+
         for m in re.finditer(
             r"\b([A-Za-z_][A-Za-z0-9_]*)\s*\((required|optional)[^)]*\)",
             text,
