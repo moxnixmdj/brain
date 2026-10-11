@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_CHART_CURVE_VALUE_QUERY_V1_VERIFY_20261011",
+  "date": "2026-10-11",
+  "status": "PASS__EXACT_BRAIN_BLOBS__AUTHOR_TESTS_PLUS_INDEPENDENT_FALSIFICATION",
+  "capability_id": "chart.raster.curve_value_query.v1",
+  "origin_brain_pr": 4626,
+  "origin_brain_head_commit": "bffabd4b7ab34d084175d9549900cf4b1e776d66",
+  "verifier_repository": "moxnixmdj/verification-capsule-runner",
+  "verifier_pr": 2713,
+  "verifier_merge_sha": "757a8a9648c82953238aec6c0e481de99ab98ad4",
+  "workflow_run_id": 38152570909,
+  "workflow_job_id": 114508865515,
+  "artifact_id": 11707242338,
+  "artifact_zip_sha256": "464afe6d8c01206ec830f1b391b7b8bb9d06d385a9a967d7b8776cf2d4357363",
+  "exact_blobs": {
+    "runtime": "107e20dd66840ecaba32e9e9f6cbfc764da1ae0b",
+    "tests": "21870c05e9a8533305168cad65edd1977aeb047b",
+    "legend_binding": "aeed8dc4dc231d1d1a794188974930e9457c7ecb",
+    "axis_binding": "1ccab094a14ae261a01912ad6e573ffc09fa8b35",
+    "scene_graph": "258999b07287287db2037af777973d5bbb39116d"
+  },
+  "author_test_count": 10,
+  "author_tests_passed": 10,
+  "independent_falsification_count": 6,
+  "independent_falsification_passed": 6,
+  "heldout_chartography_cases_consumed": 0,
+  "external_general_purpose_model_runtime_dependency_count": 0,
+  "donor_general_purpose_model_runtime_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "chartography_score_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "proved": [
+    "UNIQUE_LEGEND_BOUND_COLOR_CURVE_Y_AT_X_QUERY",
+    "LINEAR_X_Y_AXIS_QUERY",
+    "LOG10_X_AXIS_QUERY",
+    "LOG10_Y_AXIS_QUERY",
+    "NONMATCHING_COLOR_REJECTION",
+    "DUPLICATE_LABEL_FAIL_CLOSED",
+    "SAME_COLOR_MULTI_SERIES_AMBIGUITY_FAIL_CLOSED",
+    "LARGE_INTERPOLATION_GAP_FAIL_CLOSED",
+    "VERTICAL_OVERLAP_AT_QUERY_FAIL_CLOSED",
+    "OUT_OF_RANGE_AND_NONPOSITIVE_LOG_QUERY_FAIL_CLOSED",
+    "ONE_PIXEL_VALUE_RESOLUTION_RECEIPT",
+    "ZERO_MODEL_NO_DOMAIN_AUTHORITY"
+  ],
+  "hard_nonclaims": [
+    "NO_DOMAIN_SEMANTIC_AUTHORITY",
+    "NO_OVERLAPPING_SAME_COLOR_MULTI_SERIES_AUTHORITY",
+    "NO_UNBRACKETED_OR_LARGE_GAP_INTERPOLATION",
+    "NO_CHARTOGRAPHY_SCORE",
+    "NO_HELDOUT_COVERAGE_CLAIM"
+  ]
+}
