@@ -1,0 +1,126 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_MPF_POW_INT_EXPONENTIAL_SERIES_V54_SUCCESSOR_EXECUTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__SOURCE_LOCKED_TWO_BODY_REUSE_TRANSPLANT__SPENT_NEXT59_AND_FRESH_NEXT60_PASS__CLEAN_ARCHIVE_NEXT60_PASS__NEXT61_FROZEN_DURABLE__CURRENT_POINTER_ELIGIBLE__ZERO_PROMOTION_CREDIT",
+  "source_lock": {
+    "canonical_base_commit": "dbe67ebf0c09d75293dfacf2adc62e390daa9f00",
+    "predecessor": "canonical/evidence/BYTES_EXACT_SYMBOLIC_NINE_BODY_FAILCLOSE_V53_SUCCESSOR_EXECUTION_20261011_V1.json",
+    "predecessor_manifest_sha256": "ae9187bc15193fe340e77a88d9d400f51ec798dec638ac435aca1f2862c14cfe"
+  },
+  "subject": {
+    "transform": "canonical/research/bytes/tools/conservative_mpf_pow_int_and_exponential_series_prune_v54.py",
+    "transform_git_blob_sha": "e8d0ca4a09bb31a094e40fae9a1f854f08e1165d",
+    "manifest_sha256": "7c52fd9d44d688c6fc10fd7797a5ba33da5c6b34ee54860cabb318bb2b00fb01",
+    "python_files": 277,
+    "raw_python_source_bytes": 1714808,
+    "B_exec_raw_python_source_bytes": 1717568,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "raw_delta_vs_v53_bytes": -1073,
+    "B_exec_delta_vs_v53_bytes": -1073
+  },
+  "reuse_first_discovery": {
+    "donor_specimens": [
+      {
+        "role": "TIGHTER_MPF_POW_INT_SQUARE_ONLY_BODY_SPECIMEN",
+        "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V52_SUCCESSOR_20261011_V1.tar(1).xz",
+        "library_file_id": "libfile_ea02c325a55c8191bd81a8be76ac41c3",
+        "file_id": "file_0000000009fc82108ff699aa4271aedc",
+        "archive_sha256": "46cd0cf4146ce1535e195b14a191eab44aadc1247c63bcb78b249db2354778ff",
+        "transplanted_body": "mpmath/libmp/libmpf.py::mpf_pow_int",
+        "saved_bytes": 78
+      },
+      {
+        "role": "BOUNDED_EXPONENTIAL_SERIES_BODY_SPECIMEN",
+        "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V52_SUCCESSOR_20261011_V1.tar.xz",
+        "library_file_id": "libfile_18da50f303ec81918cd2fd2c1b4f9f9b",
+        "file_id": "file_0000000070cc82108cc9d093b7a73d31",
+        "archive_sha256": "bc92b556102a8095e17611f268fa1573a577970d29a539104f666c3e05900565",
+        "transplanted_body": "mpmath/libmp/libelefun.py::exponential_series",
+        "saved_bytes": 995
+      }
+    ],
+    "donor_authority": "NONCANONICAL_SIBLING_CANDIDATES_USED_ONLY_AS_REUSE_SPECIMENS",
+    "transplant_rule": "COPY_ONLY_EFFECT_DISTINGUISHING_NONOVERLAPPING_BODIES_ONTO_CANONICAL_V53__EXACT_BASE_TARGET_GUARD__REVERIFY_COMBINED_SUBJECT"
+  },
+  "selection": {
+    "id": "MPF_POW_INT_PLUS_EXPONENTIAL_SERIES_SPECIALIZATION_V54",
+    "changed_body_count": 2,
+    "bodies": [
+      "mpmath/libmp/libmpf.py::mpf_pow_int",
+      "mpmath/libmp/libelefun.py::exponential_series"
+    ],
+    "saved_raw_python_bytes": 1073,
+    "exact_base_guard": true,
+    "exact_target_guard": true
+  },
+  "qualification": {
+    "spent_NEXT59": {
+      "id": "QUAL_SUCCESSOR_NEXT59_20261011_V1",
+      "cases": 15410,
+      "corpus_sha256": "5c7cf733614d58648dbe4fbfc855e7451651c652555eb895fcdcef39df780c92",
+      "candidate": "15410/15410",
+      "failures": 0,
+      "spent": true
+    },
+    "fresh_NEXT60": {
+      "id": "QUAL_SUCCESSOR_NEXT60_20261011_V1",
+      "cases": 15640,
+      "seed": 1044270352,
+      "corpus_sha256": "f2d40bb97ade73179631aac6c94134eeab9fc529889bfabe75e01dd2dadfbc99",
+      "durable_library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT60_20261011_V1(2).jsonl",
+      "durable_library_file_id": "libfile_ef7b3652581c819188d30268264cb2e9",
+      "durable_file_id": "file_00000000f7ac82109d6413f85de7ce2a",
+      "candidate": "15640/15640",
+      "failures": 0,
+      "spent": true
+    }
+  },
+  "reproducibility": {
+    "v53_to_v54_transform_target_manifest_exact": true,
+    "clean_reconstruction_identity": "278/278",
+    "sealed_archive_files": 278,
+    "sealed_archive_bytes": 267696,
+    "sealed_archive_sha256": "db84699edd26791cba67dd5c73b4e89db023907b6924a031e211644fbea9a953",
+    "clean_archive_second_execution_carrier_NEXT60": "15640/15640",
+    "external_organizational_second_carrier_verified": false
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V54_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_2f26f03e0bf88191bc69b7f9d91049a9",
+    "file_id": "file_0000000038c08210b9639462082be552",
+    "persistence_status": "PERSISTED",
+    "bytes": 267696,
+    "sha256": "db84699edd26791cba67dd5c73b4e89db023907b6924a031e211644fbea9a953"
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT61_20261011_V1",
+    "cases": 15870,
+    "seed": 3282019426,
+    "seed_derivation": "FIRST_32_BITS_BIG_ENDIAN_SHA256_OF_QUAL_ID_PIPE_V54_MANIFEST_IDENTITY",
+    "per_operation_budget": 1380,
+    "corpus_sha256": "5fbc4ebe40ed50c27f322adaf64c0703e96f29a88ed76c055ed6b8f6ce80c8cc",
+    "generated_bytes": 1876211,
+    "generation_provenance": "STOCK_SYMPY_1_14_0_MPMATH_1_3_0_EXACT_ROUTE_EXPECTED_OUTPUTS__DETERMINISTIC_PARAMETER_STREAM",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT61_20261011_V1(1).jsonl",
+    "library_file_id": "libfile_7b499ff50314819192f6c5a8fd334e51",
+    "file_id": "file_00000000b714820a8cc7e6d41b012a42",
+    "status": "FROZEN_UNSPENT__DURABLY_PERSISTED__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: exact V54 raw Python bytes are 1,714,808, 1,073 bytes below canonical V53.",
+    "MEASURED: complete spent NEXT59 passes exact V54 15,410/15,410.",
+    "MEASURED: previously frozen NEXT60 passes exact V54 15,640/15,640.",
+    "MEASURED: clean V53-to-V54 reconstruction and archive extraction are 278/278 durable files byte-identical.",
+    "MEASURED: a clean archive extraction independently replays NEXT60 15,640/15,640.",
+    "MEASURED: NEXT61 is durably frozen unspent at 15,870 cases.",
+    "NOT PROVED: universal mpmath equivalence outside the bounded exact-symbolic route.",
+    "NOT CLAIMED: external organizationally independent second carrier.",
+    "NOT PROMOTED: zero capability, acceptance, professional-quality, promotion, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "promotion_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
