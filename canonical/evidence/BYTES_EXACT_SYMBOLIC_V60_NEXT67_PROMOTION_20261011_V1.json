@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_BYTES_EXACT_SYMBOLIC_V60_NEXT67_PROMOTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "VERIFIED_RESEARCH_FRONTIER__V60_REPAIRED_EIGHT_DELTA__NEXT66_REPAIR_PASS__FRESH_NEXT67_17250_OF_17250_PASS__NEXT68_FROZEN_UNSPENT__ZERO_CAPABILITY_OR_TERMINAL_CREDIT",
+  "objective": "Promote the exact repaired V60 bounded exact-symbolic resource frontier only after durable artifact persistence and one fresh execution of the previously unspent NEXT67 corpus.",
+  "predecessor": {
+    "version": "V58",
+    "manifest_sha256": "409dd682c47e2a25acc2915af689650757f02cf828826a9854d06c0e386bb1c1",
+    "raw_python_source_bytes": 1713212
+  },
+  "candidate": {
+    "version": "V60",
+    "transform": "canonical/research/bytes/tools/conservative_repaired_eight_delta_v60.py",
+    "manifest_sha256": "6ab3ad3366fe10d0d081784d61838d097eac1c242cee729453d78d48ede5033e",
+    "raw_python_source_bytes": 1713090,
+    "B_exec_raw_python_source_bytes": 1715850,
+    "B_verify_semantic_digest_raw_bytes": 1358,
+    "python_files": 277,
+    "raw_improvement_vs_v58_bytes": 122
+  },
+  "repaired_spent_next66": {
+    "cases": 17020,
+    "result": "17020/17020",
+    "failures": 0,
+    "source": "canonical/evidence/BYTES_EXACT_SYMBOLIC_V60_REPAIR_CANDIDATE_20261011_V1.json"
+  },
+  "durable_archive": {
+    "library_path": "/Brain Evidence/Bytes/BYTES_EXACT_SYMBOLIC_V60_REPAIRED_SUCCESSOR_20261011_V1.tar.xz",
+    "library_file_id": "libfile_afa0d53808cc8191976782dc3e9ea40a",
+    "file_id": "file_000000009ddc8210a589136090305c6f",
+    "bytes": 267260,
+    "sha256": "7ebb193e07a2a1e18265ebf4b1ef76b4c011b665bf100d35550033b894d96dd9",
+    "executable_content_manifest_sha256": "6ab3ad3366fe10d0d081784d61838d097eac1c242cee729453d78d48ede5033e",
+    "note": "Persisted tar transport differs bytewise from the expired-container historical tar, but expands to the exact preserved V60 executable manifest and 277 Python-file content set."
+  },
+  "fresh_next67": {
+    "id": "QUAL_SUCCESSOR_NEXT67_20261011_V1",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT67_20261011_V1.jsonl",
+    "library_file_id": "libfile_f6aae9e669348191ac8c057faff368fd",
+    "file_id": "file_000000007cc48210afee1c45fe58feeb",
+    "cases": 17250,
+    "seed": 3765437090,
+    "per_operation_budget": 1500,
+    "corpus_sha256": "aab6e4fb65f266211585f9d60c88c3dcc2834ca832d91c50357edd7bd2ac20be",
+    "candidate_result": "17250/17250",
+    "failures": 0,
+    "spent": true,
+    "execution_carrier": "CHATGPT_ISOLATED_CONTAINER_PARALLEL_EXACT_CASE_REPLAY",
+    "each_case_executed_once": true
+  },
+  "next_frozen": {
+    "id": "QUAL_SUCCESSOR_NEXT68_20261011_V1",
+    "library_path": "/Brain Evidence/Bytes/QUAL_SUCCESSOR_NEXT68_20261011_V1.jsonl",
+    "library_file_id": "libfile_3f5ba0e0123481919cc240491ebd5cb2",
+    "file_id": "file_00000000e8808210ab9d03f597427c80",
+    "cases": 17480,
+    "seed": 1452486686,
+    "seed_derivation": "FIRST_32_BITS_BIG_ENDIAN_SHA256_OF_QUAL_ID_PIPE_V60_MANIFEST_IDENTITY",
+    "per_operation_budget": 1520,
+    "corpus_sha256": "ee4eb1b62ce24c1c31e39c19585ce5a04e01fc6099b88c65a7530840a6c15e70",
+    "status": "FROZEN_UNSPENT__DURABLY_PERSISTED__DO_NOT_EXECUTE_BEFORE_NEXT_PHYSICAL_CUT",
+    "spent": false
+  },
+  "truth_boundary": [
+    "MEASURED: persisted V60 expands to exact target manifest 6ab3ad3366fe10d0d081784d61838d097eac1c242cee729453d78d48ede5033e.",
+    "MEASURED: V60 raw Python source is 1,713,090 bytes, 122 bytes smaller than canonical V58.",
+    "MEASURED: repaired spent NEXT66 replay is 17,020/17,020 PASS.",
+    "MEASURED: previously unspent durable NEXT67 executed once on persisted exact V60 and passed 17,250/17,250 with zero failures.",
+    "MEASURED: NEXT68 is durably persisted, content-addressed, and remains unspent.",
+    "NOT PROVED: universal semantic equivalence outside the bounded exact-symbolic route.",
+    "NOT CLAIMED: Opus capability, benchmark acceptance, ownership, professional-quality, or terminal credit."
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "acceptance_credit_delta": 0,
+  "professional_quality_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0
+}
