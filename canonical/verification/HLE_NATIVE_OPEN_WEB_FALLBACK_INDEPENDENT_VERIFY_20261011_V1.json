@@ -1,33 +1,60 @@
 {
   "schema": "PROJECT_BRAIN_HLE_NATIVE_OPEN_WEB_FALLBACK_INDEPENDENT_VERIFY_20261011_V1",
   "date": "2026-10-11",
-  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BLOBS__ZERO_HLE_CONSUMPTION",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BLOBS__NINE_OF_NINE__ZERO_HLE_CONSUMPTION",
   "subject": {
     "runtime_path": "canonical/runtime/hle_native_open_web_fallback_v1.py",
     "runtime_blob": "f03db468c1b9a1d5425d1eaf49966e6c8484819a",
     "tests_path": "canonical/tests/test_hle_native_open_web_fallback_v1.py",
-    "tests_blob": "5e64895795f39e4a50e53664167dd0e3ec3bc3c4"
+    "tests_blob": "5e64895795f39e4a50e53664167dd0e3ec3bc3c4",
+    "independent_tests_blob": "bbe1b90632a68e63f516821f227f28e5fe80c3f7"
   },
-  "independent_runner": {
+  "prior_independent_runner": {
     "repository": "moxnixmdj/verification-capsule-runner",
     "pull_request": 2700,
     "head_sha": "3393c5de318a738a4162ebbc7f34ac892508bfe3",
     "workflow_run_id": 38148729566,
     "workflow_job_id": 114497476556,
-    "conclusion": "success"
+    "conclusion": "success",
+    "tests": "4/4 PASS"
+  },
+  "stronger_independent_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2720,
+    "branch": "verify-hle-open-web-fallback-20261011-v1",
+    "head_sha": "d540a2874859cefbbec0086f3df987cd5bde4e60",
+    "workflow_run_id": 38154400253,
+    "workflow_job_id": 114514265266,
+    "conclusion": "success",
+    "candidate_tests": "4/4 PASS",
+    "verifier_authored_falsification": "5/5 PASS",
+    "total_tests": "9/9 PASS",
+    "static_firewall": "PASS"
   },
   "verified": {
     "exact_runtime_blob_binding": true,
     "exact_tests_blob_binding": true,
-    "tests_passed": 4,
+    "exact_independent_tests_blob_binding": true,
+    "compile_pass": true,
     "mixed_backend_health_and_dedupe": true,
     "total_outage_retryable": true,
     "successful_empty_nonexistence_firewall": true,
-    "invalid_plan_fail_closed": true
+    "invalid_plan_fail_closed": true,
+    "candidate_authority_smuggling_blocked": true,
+    "partial_backend_failure_classified_degraded": true,
+    "resource_limits_clamped": true,
+    "discovery_exception_retryable": true,
+    "model_and_gold_authority_fields_fail_closed": true,
+    "static_gold_model_firewall": true
   },
-  "hle_cases_consumed": 0,
-  "external_model_calls_total": 0,
-  "model_dependency_count_total": 0,
+  "protected_state": {
+    "hle_cases_consumed": 0,
+    "hle_gold_consumed": 0,
+    "external_model_calls_total": 0,
+    "model_dependency_count_total": 0,
+    "benchmark_score_credit": 0
+  },
+  "next_gate": "RUN_ALREADY_CONSUMED_TRIVIA_QA_ROWS_25_TO_49_RETRIEVAL_RECALL_ONLY_AND_COMPARE_TO_0_52_BASELINE",
   "hle_score_credit": 0,
   "hle_67_7_certified": false,
   "incremental_spend_usd": 0
