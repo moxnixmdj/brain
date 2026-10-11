@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_SCALE_BRAIN_SUBMISSION_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "PASS__FRESH_ROW20_FIVE_PAGE_PROGRAM_EVALUATION_PLAN_FROZEN__RENDER_SAFETY_AND_METHOD_QA_PASS__ZERO_OWNER_SCORE_CREDIT",
+  "benchmark": "GDPval-AA v2.1",
+  "subject": {
+    "row_idx": 20,
+    "task_id": "575f8679-b4c1-47a2-8e96-d570d4ed9269",
+    "sector": "Government",
+    "occupation": "Child, Family, and School Social Workers"
+  },
+  "precommit": "canonical/governance/GDPVAL_SCALE_FRESH_BATCH_ROWS15_24_PRECOMMIT_20261011_V1.json",
+  "packet": {
+    "manifest_root_sha256": "f69af30fcea243ccb25d44c4a5380be0cdcac621287568525065034ce6cedae8",
+    "packet_sha256": "ea0fe7d9593f01d4327c60d6faccd83138b8a4ef2ffd99f811fcd89b9b7b7780",
+    "prompt_sha256": "45bc03c1abd89d546f1e7aadfcae8bbcdbd62e35c9fa51f6241116f6e8d96ed0",
+    "raw_obligation_count": 66,
+    "reference_count": 0
+  },
+  "freshness": {
+    "task_id_frozen_before_prompt_read": true,
+    "rubric_read_before_output_freeze": false,
+    "human_gold_read_before_output_freeze": false,
+    "third_party_model_submission_read_before_output_freeze": false,
+    "judge_feedback_read_before_output_freeze": false
+  },
+  "public_sources_used": [
+    "AAP_2008_EVALUATING_YOUR_COMMUNITY_BASED_PROGRAM_PART_II",
+    "KROENKE_SPITZER_WILLIAMS_2001_PHQ9_VALIDATION",
+    "SPITZER_KROENKE_WILLIAMS_LOWE_2006_GAD7_VALIDATION",
+    "CORC_GAD7_ADMINISTRATION_SCORING_AND_TRANSLATIONS",
+    "988_SUICIDE_AND_CRISIS_LIFELINE"
+  ],
+  "deliverable": {
+    "format":"docx",
+    "filename":"GDPval_575f8679_immigrant_family_mental_health_evaluation_plan.docx",
+    "sha256":"35ae1063098861bf999495a70424a8b9a3514aa5755619eec77823d686500bb7",
+    "library_path":"/Project Brain/GDPval/scale/575f8679-b4c1-47a2-8e96-d570d4ed9269/GDPval_575f8679_immigrant_family_mental_health_evaluation_plan.docx",
+    "library_file_id":"libfile_0c1d2e9e01d481919afad96d5e85ac6a",
+    "rendered_page_count":5
+  },
+  "verification": {
+    "first_render_detected_blank_page": true,
+    "blank_page_repaired_before_freeze": true,
+    "final_all_pages_visual_inspection":"PASS__5_OF_5__NO_BLANK_PAGES_CLIPPING_OVERLAP_OR_BROKEN_GLYPHS",
+    "program_overview_and_target_population":true,
+    "formative_and_summative_rationale":true,
+    "data_collection_tools_sources_quantitative_and_qualitative_methods":true,
+    "analysis_plan_includes_change_over_time_missingness_equity_and_qualitative_framework":true,
+    "appendices_include_instrument_summaries_sample_questions_fidelity_interview_and_analysis_tools":true,
+    "phq9_and_gad7_scoring_summaries_source_grounded":true,
+    "language_access_and_small_community_confidentiality_controls":true,
+    "screening_not_diagnosis_boundary":true,
+    "self_harm_signal_same_day_safety_escalation":true,
+    "crisis_resources_988_and_911_bound":true,
+    "causal_nonclaim_without_comparison_group":true
+  },
+  "hard_nonclaims": [
+    "MANAGEMENT_TARGETS_IN_PLAN_ARE_STARTING_OPERATIONAL_THRESHOLDS_NOT_VALIDATED_CLINICAL_BENCHMARKS",
+    "NO_ARTIFICIAL_ANALYSIS_OWNER_SCORE",
+    "NO_GDPVAL_ELO",
+    "NO_1846_THRESHOLD_CLOSURE",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting":{"incremental_spend_usd":0,"acceptance_credit_delta":0,"terminal_credit_delta":0}
+}
