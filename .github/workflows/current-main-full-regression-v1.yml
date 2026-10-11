@@ -1,0 +1,37 @@
+name: current-main-full-regression-v1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/current-main-full-regression-v1.yml'
+permissions:
+  contents: read
+jobs:
+  full-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 6a485303239529d5ced4f20287c4108535c4b6cf
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Bind exact current-main subject
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "6a485303239529d5ced4f20287c4108535c4b6cf"
+          echo "SUBJECT_SHA=$(git rev-parse HEAD)"
+          echo "SUBJECT_TREE=$(git rev-parse HEAD^{tree})"
+      - name: Compile all Python execution and test surfaces
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m compileall -q canonical/runtime canonical/tests tests
+      - name: Run full private current-main regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pytest -q canonical/tests tests
