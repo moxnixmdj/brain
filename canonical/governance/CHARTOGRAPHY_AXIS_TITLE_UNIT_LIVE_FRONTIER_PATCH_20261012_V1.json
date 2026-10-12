@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_CHARTOGRAPHY_AXIS_TITLE_UNIT_LIVE_FRONTIER_PATCH_V1",
+  "date": "2026-10-12",
+  "status": "HANDOFF_ONLY__NOT_A_CURRENT_AUTHORITY_POINTER__EXISTING_FILE_MUTATION_GATE_BLOCKED",
+  "target_path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+  "required_base_blob_sha": "755898d31e102ae4ffbf548ebd40820ede86701d",
+  "promotion_pr": 4687,
+  "verified_receipt": "canonical/verification/CHART_AXIS_TITLE_UNIT_BINDING_V1_INDEPENDENT_VERIFY_20261012.json",
+  "exact_patch": {
+    "date": "2026-10-12",
+    "frontier_id": "LIVE_WORK_FRONTIER_20261012_CHARTOGRAPHY_AXIS_TITLE_UNIT_PROMOTION_V32",
+    "status": "CURRENT__BENCHMARK_CAPABILITY_DOMINANCE_CONTROLLER_ACTIVE__CHARTOGRAPHY_AXIS_TITLE_UNIT_BINDING_VERIFIED__RESIDUAL_ACTIVE__ZERO_SCORE_CREDIT",
+    "chartography_work_id": "CHARTOGRAPHY_BRAIN_NATIVE_PROFESSIONAL_SEMANTICS_V2",
+    "causal_role": "RECOMPUTE_COVERAGE_AFTER_VERIFIED_AXIS_TITLE_UNIT_BINDING__SEARCH_CURRENT_BRAIN_FOR_REUSABLE_CURVE_DOMAIN_SEMANTICS__BENCHMARK_SCORE_REMAINS_LATER_AUDIT",
+    "readiness": "READY_RERANK__BIDIRECTIONAL_CURVE_QUERY__DIRECT_FAMILY_RANK__EXPLICIT_AXIS_TITLE_UNIT_BINDING_VERIFIED",
+    "ready": "SEARCH_CURRENT_BRAIN_FOR_REUSABLE_SURVIVAL_BODE_AND_GROWTH_DOMAIN_SEMANTICS_THEN_BUILD_ONLY_UNCOVERED_RESIDUAL",
+    "evidence": {
+      "capability_frontier_path": "canonical/governance/CHARTOGRAPHY_CAPABILITY_PROOF_FRONTIER_V1.json",
+      "capability_frontier_blob_sha": "e54fe2c3d191a2a3d85213503942d1a39b8c6318",
+      "public_declaration_coverage_path": "canonical/governance/CHARTOGRAPHY_PUBLIC_DECLARATION_CAPABILITY_COVERAGE_V1.json",
+      "public_declaration_coverage_blob_sha": "ffb25120ede65c36492aa4b73023ccd7eac0eccb",
+      "axis_title_unit_verification": "canonical/verification/CHART_AXIS_TITLE_UNIT_BINDING_V1_INDEPENDENT_VERIFY_20261012.json",
+      "runtime_blob_sha": "3203cce00c0f116d51043cdc858c50e483e41f69",
+      "authored_tests": "21_OF_21_PASS",
+      "independent_tests": "14_OF_14_PASS",
+      "real_rotated_ocr_smoke": "PASS",
+      "verifier_run_id": 38212267960,
+      "verifier_job_id": 114688871759,
+      "heldout_cases_consumed": 0,
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "chartography_score_credit": 0
+    },
+    "currentness_finding": {
+      "id": "CHARTOGRAPHY_AXIS_TITLE_UNIT_BINDING_CURRENT",
+      "truth": "INDEPENDENT_REPLAY_PASS__21_OF_21_AUTHORED__14_OF_14_INDEPENDENT__REAL_ROTATED_OCR_PASS__ZERO_HELDOUT__ZERO_SCORE_CREDIT",
+      "source": "canonical/verification/CHART_AXIS_TITLE_UNIT_BINDING_V1_INDEPENDENT_VERIFY_20261012.json",
+      "dynamic_current_pointer_follow": false
+    }
+  },
+  "explicit_nonclaim": "This file is only a handoff manifest. It does not update or supersede CURRENT_LIVE_WORK_FRONTIER.json and grants no capability or benchmark credit by itself."
+}
