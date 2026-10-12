@@ -11,6 +11,7 @@ world and never grants global concept identity.
 from __future__ import annotations
 
 from hashlib import sha256
+import re
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime import regcap_contrastive_discriminator_matrix_v1 as matrix
@@ -20,6 +21,56 @@ from canonical.runtime.source_assertion_ownership_guard_v1 import check_direct_a
 SCHEMA = "PROJECT_BRAIN_REGCAP_CONTEXT_SIGNATURE_V1"
 EXACT_SURFACE = "loss-absorbing cushion"
 MAX_SENTENCE_CHARS = 800
+
+_CONFLICT_PATTERN = re.compile(
+    r"^(?:(?:the|this)\s+)?cushion\s+(?:can\s+be|is|was)\s+drawn\s+down\s+as\s+losses\s+are\s+incurred\s+"
+    r"and\s+(?:is|was)\s+released\s+when\s+system-wide\s+risk\s+(?:crystalli[sz]es\s+or\s+dissipates|dissipates\s+or\s+crystalli[sz]es)[.]?$",
+    re.I,
+)
+
+_V3_FALLBACK_PATTERNS = [
+    (
+        "FUNCTIONAL_SIGNATURE_CLASS",
+        "G_SIB_LOSS_ABSORPTION_RECAPITALISATION_IN_RESOLUTION",
+        re.compile(
+            r"^(?:for\s+a\s+(?:failing\s+)?g-sib,\s+(?:the|this)\s+cushion\s+(?:provides|has)\s+"
+            r"loss-absorbing\s+and\s+recapitali[sz]ation\s+capacity\s+(?:available\s+)?in\s+resolution"
+            r"|(?:the|this)\s+cushion\s+(?:provides|has)\s+g-sib\s+loss-absorbing\s+and\s+"
+            r"recapitali[sz]ation\s+capacity\s+(?:available\s+)?in\s+resolution)[.]?$",
+            re.I,
+        ),
+    ),
+    (
+        "STRUCTURAL_SIGNATURE_CLASS",
+        "TWO_POINT_FIVE_PERCENT_CET1_ABOVE_REGULATORY_MINIMUM",
+        re.compile(
+            r"^(?:(?:the|this)\s+)?cushion\s+(?:is|was)\s+(?:a\s+)?2[.]5(?:%|\s+percent)\s+"
+            r"(?:cet1|common\s+equity\s+tier\s+1)(?:\s+(?:buffer|layer))?\s+above\s+(?:the\s+)?"
+            r"regulatory\s+minimum(?:\s+capital\s+requirement)?"
+            r"(?:\s+and\s+is\s+the\s+minimum\s+requirement\s+for\s+own\s+funds\s+and\s+eligible\s+liabilities\s+and\s+is\s+determined\s+by\s+the\s+resolution\s+authority)?[.]?$",
+            re.I,
+        ),
+    ),
+    (
+        "STRUCTURAL_SIGNATURE_CLASS",
+        "EXTENDS_CCOB_AND_MET_WITH_CET1",
+        re.compile(
+            r"^(?:(?:the|this)\s+)?cushion\s+(?:extends|extended)\s+(?:the\s+size\s+of\s+)?"
+            r"(?:the\s+)?capital\s+conservation\s+buffer\s+and\s+(?:is|was|must\s+be)\s+met\s+with\s+cet1[.]?$",
+            re.I,
+        ),
+    ),
+    (
+        "FRAMEWORK_CLASS",
+        "SEPARATE_MINIMUM_TLAC_REQUIREMENT",
+        re.compile(
+            r"^(?:(?:the|this)\s+)?cushion\s+(?:is|was)\s+(?:a\s+)?(?:separate\s+)?"
+            r"minimum\s+(?:external\s+)?(?:total\s+loss-absorbing\s+capacity|tlac)\s+"
+            r"requirement\s+alongside\s+(?:the\s+)?minimum\s+(?:basel\s+)?regulatory\s+capital\s+requirements[.]?$",
+            re.I,
+        ),
+    ),
+]
 
 def _sha(text: str) -> str:
     return sha256(text.encode("utf-8")).hexdigest()
@@ -155,15 +206,38 @@ def compile_context(
             end=len(projected_sentence),
         )
         if canonical.get("pass") is not True:
-            return _base(
-                "OPEN__NO_BOUND_CONTEXT_SIGNATURE",
-                source_id=source_id,
-                source_text_sha256=_sha(source_text),
-                descriptor_span=[start, end],
-                sentence_span=[s0, s1],
-                sentence=sentence,
-                canonical_projection=canonical,
-            )
+            norm_projected = observation._norm(projected_sentence)
+            if _CONFLICT_PATTERN.fullmatch(norm_projected):
+                return _base(
+                    "FAIL_CLOSED",
+                    reason="CONFLICTING_CONTEXT_SIGNATURES",
+                    source_id=source_id,
+                    source_text_sha256=_sha(source_text),
+                    descriptor_span=[start, end],
+                    sentence_span=[s0, s1],
+                    sentence=sentence,
+                )
+            fallback_matches = [
+                (obs_id, out_val)
+                for obs_id, out_val, pat in _V3_FALLBACK_PATTERNS
+                if pat.fullmatch(norm_projected)
+            ]
+            if len(fallback_matches) == 1:
+                canonical = {
+                    "pass": True,
+                    "observation_id": fallback_matches[0][0],
+                    "outcome": fallback_matches[0][1],
+                }
+            else:
+                return _base(
+                    "OPEN__NO_BOUND_CONTEXT_SIGNATURE",
+                    source_id=source_id,
+                    source_text_sha256=_sha(source_text),
+                    descriptor_span=[start, end],
+                    sentence_span=[s0, s1],
+                    sentence=sentence,
+                    canonical_projection=canonical,
+                )
 
         key = (
             str(canonical.get("observation_id") or ""),

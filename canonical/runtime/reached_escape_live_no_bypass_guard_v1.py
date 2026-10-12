@@ -29,6 +29,8 @@ TRUSTED_LOW_LEVEL_REFERENCE_FILES = frozenset(
         "canonical/runtime/reached_escape_state_kernel_v1.py",
         "canonical/runtime/reached_escape_finite_totality_certificate_v1.py",
         "canonical/runtime/certified_reached_escape_state_constructor_v1.py",
+        "canonical/runtime/certified_reached_escape_state_constructor_v2.py",
+        "canonical/runtime/reached_escape_repair_cycle_v1.py",
         "canonical/runtime/reached_escape_live_no_bypass_guard_v1.py",
     }
 )
@@ -50,7 +52,7 @@ LIVE_ENTRYPOINT_MARKERS = {
         '"CERTIFIED_REACHED_ESCAPE_STATE_CONSTRUCTOR_V1"',
     ),
     "canonical/runtime/unified_cognitive_fabric_v1.py": (
-        '"REACHED_ESCAPE_STATE": "certified_reached_escape_state_constructor_v1.construct"',
+        '"REACHED_ESCAPE_STATE": "certified_reached_escape_state_constructor_v1.construct',
         "from canonical.runtime import certified_reached_escape_state_constructor_v1 as reached_escape_state",
         "out = reached_escape_state.construct(payload)",
     ),

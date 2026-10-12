@@ -11,7 +11,7 @@ WRAPPER = "canonical/runtime/astra_mediated_runtime_v1.py"
 MONITOR = "canonical/runtime/material_effect_reference_monitor_v1.py"
 
 EXPECTED_BLOBS = {
-    ASTRA: "efd4b70d9c656f1bc9d2c7b5ccdd5fcd3dc5e32f",
+    ASTRA: "0c613137b9c578c8afadb9482da08e2fc268deb7",
     WRAPPER: "eec2aaf7076e3bd2374ee581e498554d08a8dcce",
     MONITOR: "5abf7d4ee927c9b8084eaee08b9e86e28d88aa54",
 }

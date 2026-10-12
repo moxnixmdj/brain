@@ -78,15 +78,25 @@ def solve_prompt(
         return _fail("OUTSIDE_FROZEN_ACTIVE15:" + ",".join(outside))
 
     try:
-        search = pointwise.solve_with_pinned_livebench(
-            contracts,
-            str(livebench_root),
-            nltk_wheel_path=None if nltk_wheel_path is None else str(nltk_wheel_path),
-            nltk_data_root=None if nltk_data_root is None else str(nltk_data_root),
-            max_per_subset=max_per_subset,
-            max_total=max_total,
-        )
-        source_binding = dict(search.get("exact_checker_binding") or {})
+        if nltk_wheel_path is not None or nltk_data_root is not None or Path(livebench_root).is_dir():
+            search = pointwise.solve_with_pinned_livebench(
+                contracts,
+                str(livebench_root),
+                nltk_wheel_path=None if nltk_wheel_path is None else str(nltk_wheel_path),
+                nltk_data_root=None if nltk_data_root is None else str(nltk_data_root),
+                max_per_subset=max_per_subset,
+                max_total=max_total,
+            )
+            source_binding = dict(search.get("exact_checker_binding") or {})
+        else:
+            source_binding = dict(exact_checker.verify_pinned_source(livebench_root) or {})
+            checker = exact_checker.checker_for_root(livebench_root)
+            search = pointwise.solve_with_checker(
+                contracts,
+                checker,
+                max_per_subset=max_per_subset,
+                max_total=max_total,
+            )
     except (
         exact_checker.ExactPostvalidationError,
         pointwise.PointwiseSearchError,

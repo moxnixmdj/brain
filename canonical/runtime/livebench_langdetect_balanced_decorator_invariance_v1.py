@@ -53,7 +53,7 @@ MAX_HIGHLIGHTS = 4
 
 EM_SPACE = "\u2003"
 PLACEHOLDER_UNIT = "[" + EM_SPACE * 4 + "]"
-HIGHLIGHT_UNIT = "*-*"
+HIGHLIGHT_UNIT = "+*-*"
 
 URL_RE = re.compile(r"https?://[-_.?&~;+=/#0-9A-Za-z]{1,2076}")
 MAIL_RE = re.compile(

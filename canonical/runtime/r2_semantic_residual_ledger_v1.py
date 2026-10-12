@@ -79,7 +79,13 @@ CAUSE_PATTERNS: tuple[tuple[str, tuple[str, ...], str], ...] = (
     ),
     (
         "IDENTITY_DISCRIMINATION",
-        ("IDENTITY_CASE", "IDENTITY_DISCRIMINATOR", "GOVERNING_REQUIREMENT_MARKER", "PAIR_MARKER"),
+        (
+            "IDENTITY_CASE",
+            "IDENTITY_DISCRIMINATOR",
+            "AUTHENTICATED_DISCRIMINATOR",
+            "GOVERNING_REQUIREMENT_MARKER",
+            "PAIR_MARKER",
+        ),
         "POLICY_CHANGING_OBSERVABILITY",
     ),
 )

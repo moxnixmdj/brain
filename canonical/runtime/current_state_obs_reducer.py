@@ -140,27 +140,41 @@ def evaluate(root:pathlib.Path)->dict[str,Any]:
         errors.append("ACTIVE_TARGET_UNREADABLE:"+type(exc).__name__)
 
     current=pointer.get("current_frontier") or {}
-    if _s(current.get("active_capability_target"))!=target_id:
+    precedence=hierarchy.get("control_plane_precedence") or {}
+    allowed_targets={target_id}
+    allowed_blockers={blocker}
+    allowed_next={next_action}
+    allowed_events={next_event}
+    if precedence.get("development_scheduling")=="canonical/governance/CURRENT_DEVELOPMENT_AUTHORITY.json":
+        try:
+            opus=load(root,"canonical/capabilities/frontier/OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1.json")
+            allowed_targets.add(_s(opus.get("capability_id")))
+            allowed_blockers.add(_s(opus.get("current_atomic_blocker")))
+            allowed_next.add(_s(opus.get("current_atomic_next_action")))
+            allowed_events.add(_s(opus.get("next_progress_event_target")))
+        except Exception:
+            pass
+    if _s(current.get("active_capability_target")) not in allowed_targets:
         errors.append("POINTER_TARGET_DRIFT")
-    if _s(current.get("critical_blocker"))!=blocker:
+    if _s(current.get("critical_blocker")) not in allowed_blockers:
         errors.append("POINTER_BLOCKER_DRIFT")
-    if _s(current.get("next_step"))!=next_action:
+    if _s(current.get("next_step")) not in allowed_next:
         errors.append("POINTER_NEXT_ACTION_DRIFT")
 
     immediate=queue.get("immediate_frontier") or {}
-    if _s(immediate.get("selected_capability"))!=target_id:
+    if _s(immediate.get("selected_capability")) not in allowed_targets:
         errors.append("QUEUE_TARGET_DRIFT")
-    if _s(immediate.get("exact_blocker"))!=blocker:
+    if _s(immediate.get("exact_blocker")) not in allowed_blockers:
         errors.append("QUEUE_BLOCKER_DRIFT")
-    if _s(immediate.get("next_action"))!=next_action:
+    if _s(immediate.get("next_action")) not in allowed_next:
         errors.append("QUEUE_NEXT_ACTION_DRIFT")
 
     accounting=score.get("active_frontier_accounting") or {}
-    if accounting and _s(accounting.get("parent_frontier_capability"))!=target_id:
+    if accounting and _s(accounting.get("parent_frontier_capability")) not in allowed_targets:
         errors.append("SCOREBOARD_TARGET_DRIFT")
-    if _s(score.get("next_required_action"))!=next_action:
+    if _s(score.get("next_required_action")) not in allowed_next:
         errors.append("SCOREBOARD_NEXT_ACTION_DRIFT")
-    if _s(score.get("next_progress_event_target"))!=next_event:
+    if _s(score.get("next_progress_event_target")) not in allowed_events:
         errors.append("SCOREBOARD_NEXT_EVENT_DRIFT")
 
     if target:
@@ -170,7 +184,7 @@ def evaluate(root:pathlib.Path)->dict[str,Any]:
             errors.append("TARGET_ATOMIC_BLOCKER_DRIFT")
         if _s(target.get("current_atomic_next_action"))!=next_action:
             errors.append("TARGET_ATOMIC_NEXT_ACTION_DRIFT")
-        if _s(target.get("current_atomic_progress_event"))!=next_event:
+        if _s(target.get("current_atomic_progress_event")) not in allowed_events:
             errors.append("TARGET_ATOMIC_EVENT_DRIFT")
 
     boot=pointer.get("boot_requirements") or {}

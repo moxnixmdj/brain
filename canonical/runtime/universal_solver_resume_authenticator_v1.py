@@ -193,7 +193,6 @@ def _revalidate_effect(
         key = _safe_rel(str(sandbox_rel), "SANDBOX_REL").as_posix() + "/" + rel.as_posix()
         if key in seen_targets:
             raise ResumeAuthenticationError("EFFECT_TARGET_MUTATED_MULTIPLE_TIMES:" + key)
-        seen_targets.add(key)
         target = (sandbox / Path(*rel.parts)).resolve(strict=True)
         try:
             target.relative_to(sandbox)
@@ -210,6 +209,7 @@ def _revalidate_effect(
             "sha256": actual,
             "bytes": len(raw),
         })
+    seen_targets.update(r["path"] for r in checked)
     return {
         "capability_id": cap.get("id"),
         "tool_id": tool_id,

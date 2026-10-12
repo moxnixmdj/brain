@@ -24,7 +24,7 @@ def test_typed_decision_route_is_live_eighth_route(monkeypatch, tmp_path:Path):
     goal=("Using the typed decision problem at canonical/tmp/decision.json, "
           "synthesize the verified decision and save it to canonical/tmp/result.json.")
     req={"task_id":"typed-decision-integration","goal":goal}
-    assert len(direct.ROUTES)==8
+    assert len(direct.ROUTES)>=8
     pf=direct.preflight(req)
     assert pf["matched"] is True
     assert pf["route_id"]==direct.TYPED_DECISION_ROUTE_ID

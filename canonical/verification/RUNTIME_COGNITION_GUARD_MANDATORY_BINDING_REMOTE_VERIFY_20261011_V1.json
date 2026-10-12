@@ -18,7 +18,7 @@
     "canonical/runtime/verify_capability_transfer_static_governance_v1.py": "42e57e7d810cae7a2f45247ff7874e3d28e65273",
     "canonical/runtime/live_integrated_brain_v1.py": "a78a32919668c7fdfe48cd3c9cddfa9e4e220f32",
     "canonical/runtime/autonomous_verified_self_improvement_v1.py": "cdee841c90f819105877537447ade60abfba4126",
-    "canonical/runtime/terminal_closure_reducer.py": "bb852cd7541ee895aabc1a85a06b1e4b5ef7ae9c"
+    "canonical/runtime/terminal_closure_reducer.py": "5c198f5f0a1cbc80cf183b12940870917afaf9b9"
   },
   "checks": [
     {

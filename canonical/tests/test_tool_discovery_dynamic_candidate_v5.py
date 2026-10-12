@@ -6,33 +6,41 @@ from canonical.runtime import tool_discovery_dynamic_candidate_v4 as v4
 from canonical.runtime import tool_discovery_dynamic_candidate_v5 as v5
 
 
-def source():
+def source(tools=None):
+    digest=v5._tools_digest(list(tools or [])) if tools is not None else "sha256:source7"
     return {
         "source_id":"AUTH","cost":0.1,"available":True,"authorized":True,
-        "authoritative":True,"source_epoch":7,"source_digest":"sha256:source7",
+        "authoritative":True,"source_epoch":7,"source_digest":digest,
     }
 
 
-def base():
+def base(tools=None):
+    src=source(tools)
     return {
         "required_capabilities":["CAP_A"],
         "constraint":None,
         "visible_tools":[],
         "prior_probe_receipts":[],
-        "discovery_sources":[source()],
+        "discovery_sources":[src],
         "discovery_receipts":[],
         "version_events":[],
         "decision_epoch":3,
-        "source_set_digest":"sha256:set3",
+        "source_set_digest":v5._source_set_digest([src]),
     }
 
 
 def complete_receipt(*, tools=None, **overrides):
+    tools_list=list(tools or [])
+    src_digest=v5._tools_digest(tools_list)
+    src={
+        "source_id":"AUTH","cost":0.1,"available":True,"authorized":True,
+        "authoritative":True,"source_epoch":7,"source_digest":src_digest,
+    }
     rec={
         "kind":"DISCOVERY_RESULT","source_id":"AUTH","complete":True,
-        "decision_epoch":3,"source_epoch":7,"source_digest":"sha256:source7",
-        "source_set_digest":"sha256:set3","query":"CAP_A",
-        "tools":list(tools or []),
+        "decision_epoch":3,"source_epoch":7,"source_digest":src_digest,
+        "source_set_digest":v5._source_set_digest([src]),"query":"CAP_A",
+        "tools":tools_list,
     }
     rec.update(overrides)
     return rec
@@ -71,7 +79,11 @@ class Tests(unittest.TestCase):
             )
 
     def test_discovered_tools_are_merged_and_cheapest_is_probed_first(self):
-        p=base()
+        cheap={
+            "tool_id":"CHEAP","cost":1.0,"available":True,
+            "authorized":True,"epoch":0,"safe_probe_capabilities":["CAP_A"],
+        }
+        p=base(tools=[cheap])
         p["visible_tools"]=[{
             "tool_id":"EXPENSIVE","cost":10.0,"available":True,
             "authorized":True,"epoch":0,"safe_probe_capabilities":["CAP_A"],
@@ -80,10 +92,6 @@ class Tests(unittest.TestCase):
             "kind":"SAFE_CAPABILITY_PROBE","tool_id":"EXPENSIVE",
             "capability":"CAP_A","epoch":0,"supported":True,
         }]
-        cheap={
-            "tool_id":"CHEAP","cost":1.0,"available":True,
-            "authorized":True,"epoch":0,"safe_probe_capabilities":["CAP_A"],
-        }
         p["discovery_receipts"]=[complete_receipt(tools=[cheap])]
         self.assertEqual(v5.next_action(p),{"action":"PROBE","tool_id":"CHEAP","capability":"CAP_A"})
         p["prior_probe_receipts"].append({
@@ -93,15 +101,16 @@ class Tests(unittest.TestCase):
         self.assertEqual(v5.next_action(p),{"action":"SELECT","tool_id":"CHEAP"})
 
     def test_conflicting_identity_metadata_fails_closed(self):
-        p=base()
+        conflict_tool={
+            "tool_id":"T","cost":1.0,"available":True,"authorized":True,
+            "epoch":0,"safe_probe_capabilities":["CAP_A"],
+        }
+        p=base(tools=[conflict_tool])
         p["visible_tools"]=[{
             "tool_id":"T","cost":2.0,"available":True,"authorized":True,
             "epoch":0,"safe_probe_capabilities":["CAP_A"],
         }]
-        p["discovery_receipts"]=[complete_receipt(tools=[{
-            "tool_id":"T","cost":1.0,"available":True,"authorized":True,
-            "epoch":0,"safe_probe_capabilities":["CAP_A"],
-        }])]
+        p["discovery_receipts"]=[complete_receipt(tools=[conflict_tool])]
         self.assertEqual(v5.next_action(p),{"action":"ESCALATE","reason":"DISCOVERY_METADATA_CONFLICT"})
 
     def test_unprobeable_cheaper_unknown_blocks_more_expensive_selection(self):
@@ -162,7 +171,7 @@ class Tests(unittest.TestCase):
         p=base()
         p["discovery_sources"]=[
             {"source_id":"NO","cost":0.0,"available":True,"authorized":False,"authoritative":True,"source_epoch":0,"source_digest":"x"},
-            {"source_id":"HINT","cost":0.0,"available":True,"authorized":True,"authoritative":False},
+            {"source_id":"HINT","cost":0.0,"available":True,"authorized":True,"authoritative":False,"source_epoch":0,"source_digest":"y"},
         ]
         p["source_set_digest"]=""
         p["visible_tools"]=[{
@@ -175,14 +184,14 @@ class Tests(unittest.TestCase):
         self.assertEqual(v5.next_action(p),{"action":"SELECT","tool_id":"T"})
 
     def test_no_route_only_after_complete_discovery(self):
-        p=base(); p["discovery_receipts"]=[complete_receipt(tools=[])]
+        p=base(tools=[]); p["discovery_receipts"]=[complete_receipt(tools=[])]
         self.assertEqual(v5.next_action(p),{
             "action":"ESCALATE","reason":"NO_VERIFIED_ADMISSIBLE_TOOL_AFTER_COMPLETE_DISCOVERY"
         })
 
 
     def test_exact_current_v4_stale_receipt_suppresses_required_rediscovery(self):
-        p=base()
+        p=base(tools=[])
         p["visible_tools"]=[{
             "tool_id":"EXPENSIVE","cost":10.0,"available":True,
             "authorized":True,"epoch":0,"safe_probe_capabilities":["CAP_A"],
@@ -191,12 +200,16 @@ class Tests(unittest.TestCase):
             "kind":"SAFE_CAPABILITY_PROBE","tool_id":"EXPENSIVE",
             "capability":"CAP_A","epoch":0,"supported":True,
         }]
-        p["discovery_receipts"]=[complete_receipt(decision_epoch=2)]
+        p["discovery_receipts"]=[complete_receipt(tools=[], decision_epoch=2)]
         self.assertEqual(v4.next_action(p),{"action":"SELECT","tool_id":"EXPENSIVE"})
         self.assertEqual(v5.next_action(p),{"action":"DISCOVER","source_id":"AUTH","query":"CAP_A"})
 
     def test_exact_current_v4_does_not_merge_discovered_cheaper_identity(self):
-        p=base()
+        cheap={
+            "tool_id":"CHEAP","cost":1.0,"available":True,
+            "authorized":True,"epoch":0,"safe_probe_capabilities":["CAP_A"],
+        }
+        p=base(tools=[cheap])
         p["visible_tools"]=[{
             "tool_id":"EXPENSIVE","cost":10.0,"available":True,
             "authorized":True,"epoch":0,"safe_probe_capabilities":["CAP_A"],
@@ -205,10 +218,6 @@ class Tests(unittest.TestCase):
             "kind":"SAFE_CAPABILITY_PROBE","tool_id":"EXPENSIVE",
             "capability":"CAP_A","epoch":0,"supported":True,
         }]
-        cheap={
-            "tool_id":"CHEAP","cost":1.0,"available":True,
-            "authorized":True,"epoch":0,"safe_probe_capabilities":["CAP_A"],
-        }
         p["discovery_receipts"]=[complete_receipt(tools=[cheap])]
         self.assertEqual(v4.next_action(p),{"action":"SELECT","tool_id":"EXPENSIVE"})
         self.assertEqual(v5.next_action(p),{"action":"PROBE","tool_id":"CHEAP","capability":"CAP_A"})
@@ -221,7 +230,7 @@ class Tests(unittest.TestCase):
             "tool_id":"CHEAP","cost":1.0,"available":True,
             "authorized":True,"epoch":0,"safe_probe_capabilities":[],
         }]
-        self.assertEqual(v4.next_action(p),{"action":"PROBE","tool_id":"CHEAP","capability":"CAP_A"})
+        self.assertEqual(v3.next_action(p),{"action":"PROBE","tool_id":"CHEAP","capability":"CAP_A"})
         self.assertEqual(v5.next_action(p),{
             "action":"ESCALATE",
             "reason":"CHEAPER_ADMISSIBLE_ROUTE_UNRESOLVED_NO_SAFE_PROBE",

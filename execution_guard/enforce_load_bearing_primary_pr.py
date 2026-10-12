@@ -5,6 +5,11 @@ import argparse
 import json
 import pathlib
 import subprocess
+import sys
+
+_REPO_ROOT = str(pathlib.Path(__file__).resolve().parents[1])
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
 
 try:
     from trusted_load_bearing_primary_admission import admission_errors

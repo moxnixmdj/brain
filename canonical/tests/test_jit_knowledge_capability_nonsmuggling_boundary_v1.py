@@ -12,19 +12,19 @@ def test_goal_unchanged():
 
 def test_opaque_dynamic_solver_not_knowledge():
     d=load()
-    assert any("DYNAMICALLY_SOLVING_THE_TARGET_TASK" in x for x in d["not_admissible_as_mere_knowledge"])
+    assert any("DYNAMICALLY SOLVING THE TARGET TASK" in x or "DYNAMICALLY_SOLVING_THE_TARGET_TASK" in x for x in d["not_admissible_as_mere_knowledge"])
 
 def test_exogenous_discriminator_remains_allowed():
     d=load()
-    assert any("EXOGENOUS_WORLD_STATE" in x for x in d["admissible_jit_knowledge"])
+    assert any("EXOGENOUS WORLD STATE" in x or "EXOGENOUS_WORLD_STATE" in x for x in d["admissible_jit_knowledge"])
 
 def test_counterfactual_provider_test_present():
     d=load()
-    assert "GENERIC_INSTRUCTION_FOLLOW_EXTERNAL_OUTPUT" in d["ownership_counterfactual_test"]["rule"]
+    assert "GENERIC_INSTRUCTION_FOLLOW_EXTERNAL_OUTPUT" in d["ownership_counterfactual_test"]["rule"] or "GENERIC INSTRUCTION FOLLOW EXTERNAL OUTPUT" in d["ownership_counterfactual_test"]["rule"]
 
 def test_pstar_zero_cannot_outsource_policy():
     d=load()
-    assert "OPAQUE_EXTERNAL_JIT_CALL" in d["relation_to_p_star"]["disallowed_shortcut"]
+    assert "OPAQUE EXTERNAL JIT CALL" in d["relation_to_p_star"]["disallowed_shortcut"] or "OPAQUE_EXTERNAL_JIT_CALL" in d["relation_to_p_star"]["disallowed_shortcut"]
 
 def test_zero_credit():
     d=load()

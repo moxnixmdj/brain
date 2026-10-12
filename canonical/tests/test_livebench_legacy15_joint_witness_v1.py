@@ -1,3 +1,5 @@
+import re
+
 from canonical.runtime.livebench_legacy15_joint_witness_v1 import solve
 
 
@@ -92,7 +94,7 @@ def test_quotation_preserves_exact_bullet_count():
     assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
     response = out["response"]
     assert response[0] == response[-1] == '"'
-    bullets = re.findall(r"^\\s*\\*[^\\*].*$", response, flags=re.MULTILINE)
+    bullets = re.findall(r"^\s*\*[^\*].*$", response, flags=re.MULTILINE)
     assert len(bullets) == 5
 
 
@@ -106,5 +108,5 @@ def test_quotation_bullets_and_end_all_compose():
     out = solve(_env(prompt))
     assert out["status"] == "PASS_CANDIDATE_JOINT_LEGACY15_WITNESS"
     response = out["response"]
-    assert len(re.findall(r"^\\s*\\*[^\\*].*$", response, flags=re.MULTILINE)) == 2
+    assert len(re.findall(r"^\s*\*[^\*].*$", response, flags=re.MULTILINE)) == 2
     assert response.strip().strip('"').lower().endswith("any other questions?")

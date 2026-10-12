@@ -4,7 +4,7 @@ import unittest
 from unittest.mock import patch
 
 from canonical.runtime import semantic_truth_dispatch_v1 as dispatch
-from canonical.runtime import regcap_loss_cushion_truth_certificate_v4 as cert4
+from canonical.runtime import regcap_loss_cushion_truth_certificate_v6 as cert4
 
 
 class Tests(unittest.TestCase):
@@ -16,7 +16,7 @@ class Tests(unittest.TestCase):
         }
         with patch.object(cert4, "evaluate", return_value=expected) as fn:
             with patch(
-                "canonical.runtime.regcap_loss_cushion_truth_certificate_v4.evaluate",
+                "canonical.runtime.regcap_loss_cushion_truth_certificate_v6.evaluate",
                 return_value=expected,
             ) as routed:
                 out = dispatch.evaluate({

@@ -211,6 +211,7 @@ class ProfessionalQualitySameSubjectCompositionGateV2Tests(unittest.TestCase):
 
 
     def test_current_v17_receipt_family_normalizes_all_11_verified_rows(self):
+        from canonical.runtime import professional_quality_same_subject_composition_gate_v4 as v4
         worklist = json.loads(
             (ROOT / "canonical/governance/PROFESSIONAL_QUALITY_P1_V7_SAME_SUBJECT_ROOT_BINDING_WORKLIST_20261010_V17.json").read_text(encoding="utf-8")
         )
@@ -224,7 +225,7 @@ class ProfessionalQualitySameSubjectCompositionGateV2Tests(unittest.TestCase):
             verification = json.loads(verify_path.read_text(encoding="utf-8"))
             self.assertEqual(gate._git_blob_sha(binding_path), row["binding"]["git_blob_sha"])
             self.assertEqual(gate._git_blob_sha(verify_path), row["verification"]["git_blob_sha"])
-            err = gate._verification_receipt_error(
+            err = v4._verification_receipt_error(
                 root_id=row["root_id"],
                 verification=verification,
                 binding_blob=row["binding"]["git_blob_sha"],

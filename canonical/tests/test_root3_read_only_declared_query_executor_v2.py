@@ -26,8 +26,8 @@ class ReadOnlyDeclaredQueryExecutorV2Tests(unittest.TestCase):
 
     def test_supported_set_is_exact_current_read_only_class(self):
         current = {k for k,v in EXPECTED.items() if v == "READ_ONLY_DECLARED_QUERY"}
-        self.assertEqual(len(current), 8)
-        self.assertEqual(set(ro.SUPPORTED), current)
+        self.assertEqual(len(current), 5)
+        self.assertEqual(set(ro.SUPPORTED), current | set(ro.APT_SUPPORTED))
 
     def _ctx(self, line, argv, timeout):
         return {

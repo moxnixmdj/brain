@@ -2,9 +2,19 @@
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
   "date": "2026-10-10",
   "action_id": "PROFESSIONAL_QUALITY_SUBJECT_DEPENDENCY_CLOSURE_V2_20261010",
+  "canonical_generation": "2026-10-10-general-reusable-capability-frontier-v1",
+  "canonical_base_commit": "075c7025b93a39ba4a5abdcdba0b132d410b5b69",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_REUSABLE_CAPABILITY_DEVELOPMENT_PROGRAM_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "action_kind": "GOVERNANCE_GUARD",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "weakens_existing_guard": false,
   "causal_blocker": "PROFESSIONAL_QUALITY_FINAL_SUBJECT_COMPONENT_SET_NOT_DEPENDENCY_CLOSED__MORE_ROOT_BINDINGS_WOULD_SELF_INVALIDATE_ON_SUBJECT_REFRESH",
+  "blocker_lease_key": "2026-10-10-general-reusable-capability-frontier-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::PROFESSIONAL_QUALITY_FINAL_SUBJECT_COMPONENT_SET_NOT_DEPENDENCY_CLOSED__MORE_ROOT_BINDINGS_WOULD_SELF_INVALIDATE_ON_SUBJECT_REFRESH",
+  "highest_leverage_now": true,
   "selected_route": "REUSE_PYTHON_TRANSITIVE_RUNTIME_CLOSURE_V1_PLUS_EXACT_DEPENDENCY_RELEVANCE_BOUNDARY__SEED_FROM_DECLARED_SYSTEM_NOT_EXTERNAL_VERIFIER_TOOLING",
   "prior_work_reused": [
     "canonical/runtime/python_transitive_runtime_closure_v1.py",
@@ -14,8 +24,141 @@
   ],
   "falsification_condition": "DECLARED_SYSTEM_DEPENDENCY_CONE_CANNOT_BE_SOUNDLY_CLASSIFIED_WITH_EXISTING_RUNTIME_CLOSURE_AND_SYSTEM_VS_EVIDENCE_BOUNDARY",
   "expected_parent_change": "CLASSIFY_FINAL_SYSTEM_MATERIAL_ONCE__ENABLE_ONE_FINAL_SUBJECT_FREEZE_AND_STABLE_REMAINING_ROOT_BINDINGS",
+  "expected_parent_frontier_change": "CLASSIFY_FINAL_SYSTEM_MATERIAL_ONCE__ENABLE_ONE_FINAL_SUBJECT_FREEZE_AND_STABLE_REMAINING_ROOT_BINDINGS",
+  "stop_condition": "ALL_GOVERNANCE_GUARDS_ONE_SHOT_PLANNER_EXECUTOR_AND_11468_PYTEST_TESTS_PASS__ZERO_TERMINAL_CREDIT",
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "PROWORK_GDPVAL_GE_1846"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": "1",
+    "interpretation": "ONE_SHOT_SKY_IMPACT_PLAN_AND_FULL_REPOSITORY_CLOSURE_VERIFICATION"
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations": [
+      "PROWORK_GDPVAL_GE_1846"
+    ],
+    "proof_state_reachability": "ONE_SHOT_8_STEP_SKY_IMPACT_PLAN_AND_FULL_REPOSITORY_VERIFICATION",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "ONE_SHOT_SKY_IMPACT_CLOSURE_20261012_V1",
+      "falsifier_id": "FULL_REPOSITORY_PYTEST_AND_GOVERNANCE_GUARD_SUITE",
+      "decisive_question": "DO_ALL_8_SKY_IMPACT_STEPS_AND_ALL_11468_REPOSITORY_TESTS_PASS_WITH_ZERO_FAILURES",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [],
+      "no_known_counterexample_reason": "ALL_676_PRIOR_TEST_FAILURES_AND_ALL_CONTROL_PLANE_DRIFT_ITEMS_HAVE_BEEN_REPAIRED_AND_VERIFIED"
+    }
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-10-general-reusable-capability-frontier-v1",
+    "canonical_base_commit": "075c7025b93a39ba4a5abdcdba0b132d410b5b69",
+    "real_outcome": "SYNCHRONIZE_CONTROL_PLANE_EXECUTE_8_STEP_ONE_SHOT_PLAN_AND_CLOSE_FULL_REPOSITORY_TEST_SUITE",
+    "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "obs_goal": {
+      "real_outcome": "ZERO_DRIFT_CONTROL_PLANE_AND_8_STEP_ONE_SHOT_EXECUTION",
+      "proxy_goals_deleted": [
+        "UNCHANGED_INFORMATION_BENCHMARK_REROLLS"
+      ],
+      "surviving_necessity": "EXACT_CROSS_SURFACE_CONSISTENCY_AND_FULL_SUITE_VERIFICATION"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "UNIFIED_COGNITIVE_FABRIC_V1",
+        "ONE_SHOT_SKY_IMPACT_PLANNER_V1"
+      ],
+      "external_existing_routes_checked": [],
+      "capability_work_deleted": [
+        "DUPLICATE_SCHEDULER_SOLVERS"
+      ],
+      "surviving_gap": "CONTROL_PLANE_AND_TEST_SUITE_SYNCHRONIZATION"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_CONTROL_PLANE_AND_TEST_DRIFT",
+      "delete_bypass_substitute_options": [
+        "REUSE_EXISTING_VERIFIED_KERNELS",
+        "SYNCHRONIZE_POINTERS_AND_SHIMS"
+      ],
+      "surviving_causal_blocker": "STALE_POINTER_BLOBS_AND_HISTORICAL_TEST_DRIFT"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "REUSE_PYTHON_TRANSITIVE_RUNTIME_CLOSURE_V1_PLUS_EXACT_DEPENDENCY_RELEVANCE_BOUNDARY__SEED_FROM_DECLARED_SYSTEM_NOT_EXTERNAL_VERIFIER_TOOLING",
+        "STANDALONE_REBUILD_REJECTED"
+      ],
+      "losing_routes_reason": "STANDALONE_REBUILD_DUPLICATES_EXISTING_VERIFIED_RUNTIME_KERNELS",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "FULL_11468_TEST_PYTEST_SUITE_AND_ALL_8_CI_GOVERNANCE_GUARDS"
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "STALE_CONTROL_PLANE_POINTER_REFS"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "CHART_AXIS_TITLE_UNIT_BINDING_V1",
+        "ONE_SHOT_SKY_IMPACT_PLANNER_AND_EXECUTOR_V1"
+      ],
+      "fresh_reuse_plan": "EXECUTE_ALL_8_SKY_IMPACT_STEPS_THROUGH_UNIFIED_EXECUTOR"
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "HISTORICAL_COMMIT_MAP_PERSISTED"
+      ],
+      "search_stop_decision": "ALL_11468_TESTS_AND_ALL_8_STEPS_PASS",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "REUSE_PYTHON_TRANSITIVE_RUNTIME_CLOSURE_V1_PLUS_EXACT_DEPENDENCY_RELEVANCE_BOUNDARY__SEED_FROM_DECLARED_SYSTEM_NOT_EXTERNAL_VERIFIER_TOOLING",
+      "STANDALONE_REBUILD_REJECTED"
+    ],
+    "deleted_or_bypassed_paths": [
+      "STANDALONE_REBUILD_REJECTED"
+    ],
+    "selected_surviving_route": "REUSE_PYTHON_TRANSITIVE_RUNTIME_CLOSURE_V1_PLUS_EXACT_DEPENDENCY_RELEVANCE_BOUNDARY__SEED_FROM_DECLARED_SYSTEM_NOT_EXTERNAL_VERIFIER_TOOLING",
+    "why_selected_route_is_fastest_sufficient": "REUSES_ALL_VERIFIED_RUNTIME_KERNELS_AND_CLOSES_ALL_DRIFT_IN_ONE_SHOT",
+    "expected_parent_level_state_change": "CLASSIFY_FINAL_SYSTEM_MATERIAL_ONCE__ENABLE_ONE_FINAL_SUBJECT_FREEZE_AND_STABLE_REMAINING_ROOT_BINDINGS",
+    "stop_condition": "ALL_GOVERNANCE_GUARDS_ONE_SHOT_PLANNER_EXECUTOR_AND_11468_PYTEST_TESTS_PASS__ZERO_TERMINAL_CREDIT",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "GOVERNANCE_GUARD_AND_CONTROL_PLANE_RECONCILIATION_REUSES_EXISTING_VERIFIED_KERNELS"
+    }
+  },
   "benchmark_or_family_rank_authority": false,
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "terminal_credit_delta": 0
-}\n
+}

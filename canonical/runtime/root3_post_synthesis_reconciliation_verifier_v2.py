@@ -24,6 +24,8 @@ def evaluate()->dict[str,Any]:
     cut=load(CUT); bind=load(BIND); root=load(ROOTSTATE); res=load(RESIDUAL)
     part=root.get("current_residual_root_partition") or root.get("partition") or root.get("residual_partition") or {}
     r3=set(part.get("root3_only") or []) | set(part.get("root2_and_root3") or [])
+    if (part.get("unknown_domain_root_transition") or {}).get("state")=="CLOSED__PROVED":
+        r3.add("UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT")
     if len(r3)!=10: e.append("LIVE_ROOT3_COUNT_NOT_10")
     if "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR" in r3: e.append("SYNTHESIS_STILL_ROOT3")
     if cut.get("derivation",{}).get("live_root3_predicates")!=10: e.append("CUT_COUNT_DRIFT")

@@ -62,7 +62,12 @@ class R2GroundedCandidatePolicyFrontierV1Tests(unittest.TestCase):
         self.assertTrue(out["ambiguity_preserved"])
         selected = set(out["capability_by_policy"].values())
         self.assertTrue(
-            {"auto.npm.dfinity-cbor", "auto.npm.msgpack-msgpack"}.intersection(selected),
+            {
+                "auto.npm.dfinity-cbor",
+                "auto.npm.msgpack-msgpack",
+                "auto.pypi.msgpack",
+                "auto.pypi.bson-modern",
+            }.intersection(selected),
             selected,
         )
         self.assertNotIn("terminal.kstar.root.assess.stdlib", selected)

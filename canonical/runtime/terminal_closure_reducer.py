@@ -12,7 +12,11 @@ import argparse
 from hashlib import sha1
 import json
 from pathlib import Path
+import sys
 from typing import Any
+
+if str(Path(__file__).resolve().parents[2]) not in sys.path:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from canonical.runtime.runtime_cognition_credit_guard_v1 import assert_credit_path_cognition_governance
 
@@ -497,6 +501,9 @@ def evaluate_frontier_state(
     preq_authority = prequalification.get("execution_authority")
     if type(preq_authority) is not bool:
         failures.append("PREQUALIFICATION_EXECUTION_AUTHORITY_INVALID")
+    frozen_preq = global_universe.get("terminal_prequalification")
+    if isinstance(frozen_preq, dict) and type(frozen_preq.get("execution_authority")) is bool:
+        preq_authority = bool(preq_authority and frozen_preq["execution_authority"])
 
     global_fresh = global_exec.get("fresh_terminal_evidence_allowed")
     if type(global_fresh) is not bool:

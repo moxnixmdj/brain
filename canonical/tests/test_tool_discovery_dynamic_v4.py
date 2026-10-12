@@ -7,13 +7,14 @@ from canonical.runtime import tool_discovery_dynamic_candidate_v3 as v3
 from canonical.runtime import tool_discovery_dynamic_candidate_v4 as v4
 
 
-def tool(tid, cost, *, available=True, authorized=True, epoch=0):
+def tool(tid, cost, *, available=True, authorized=True, epoch=0, safe_probe_capabilities=("CAP_A",)):
     return {
         "tool_id": tid,
         "cost": float(cost),
         "available": available,
         "authorized": authorized,
         "epoch": epoch,
+        "safe_probe_capabilities": list(safe_probe_capabilities),
         "meta": {"region": "X", "risk": 0, "tags": ["prod"], "provider": "P"},
     }
 

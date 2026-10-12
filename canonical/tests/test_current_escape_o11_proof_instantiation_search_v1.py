@@ -39,10 +39,11 @@ class SearchTests(unittest.TestCase):
                 return {"pass":ok,"status":"PROVEN" if ok else "OPEN","reason":None if ok else "MISSING","proof_mode":"THRESHOLD_LOWER_BOUND"}
             with patch.object(search.gate,"evaluate",side_effect=verdict):
                 out=search.scan(repo_root=root)
+            expected_blob=blob(e)
         self.assertEqual(out["candidate_count"],2); self.assertEqual(out["proved_obligation_ids"],[O1])
         self.assertIn(O2,out["missing_obligation_ids"]); self.assertEqual(out["near_misses"][O2][0]["gate_reason"],"MISSING")
         row=next(r for r in out["candidates"] if r["obligation_id"]==O1)
-        self.assertEqual(row["source_git_blob_sha"],blob(e)); self.assertFalse(out["acceptance_authority"])
+        self.assertEqual(row["source_git_blob_sha"],expected_blob); self.assertFalse(out["acceptance_authority"])
 
     def test_groups_multirow_source(self):
         with tempfile.TemporaryDirectory() as d:

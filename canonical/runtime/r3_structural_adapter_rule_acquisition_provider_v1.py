@@ -100,7 +100,7 @@ def make_provider(
     state_path: str | Path,
 ) -> Callable[[Mapping[str, Any]], Mapping[str, Any] | None]:
     root = Path(repo_root).resolve(strict=True)
-    state_target = Path(state_path).resolve(strict=True)
+    raw_state_path = Path(state_path)
 
     def provider(request: Mapping[str, Any]) -> Mapping[str, Any] | None:
         if not isinstance(request, Mapping):
@@ -122,6 +122,7 @@ def make_provider(
             return _fail("REQUEST_IDENTITY_INCOMPLETE")
 
         try:
+            state_target = raw_state_path.resolve(strict=True)
             state = learning.load_state(state_target)
             queue = state.get("improvement_queue")
             observations = state.get("observations")

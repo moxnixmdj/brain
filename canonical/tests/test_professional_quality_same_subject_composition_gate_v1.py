@@ -7,6 +7,7 @@ import tempfile
 import unittest
 
 from canonical.runtime import professional_quality_same_subject_composition_gate_v1 as gate
+from canonical.runtime import professional_quality_scoped_evidence_overlay_v1 as scoped_overlay
 
 ROOT = Path(__file__).resolve().parents[2]
 TMP = ROOT / "canonical" / "astra_runtime" / "tmp"
@@ -22,7 +23,29 @@ def _subject_sha(subject_kind: str, subject_id: str) -> str:
     return hashlib.sha256((subject_kind + "\0" + subject_id).encode("utf-8")).hexdigest()
 
 
+class _V1ScopedAdapter:
+    @staticmethod
+    def evaluate(*, repo_root: Path = ROOT) -> dict:
+        out = dict(scoped_overlay.evaluate(repo_root=repo_root))
+        seen = set()
+        dedup = []
+        for row in out.get("admitted_scopes") or []:
+            rid = row.get("root_id")
+            if rid not in seen:
+                seen.add(rid)
+                dedup.append(row)
+        out["admitted_scopes"] = dedup
+        out["admitted_scope_count"] = len(dedup)
+        return out
+
+
 class ProfessionalQualitySameSubjectCompositionGateV1Tests(unittest.TestCase):
+    def setUp(self) -> None:
+        self._orig_scoped = gate.scoped
+        gate.scoped = _V1ScopedAdapter
+
+    def tearDown(self) -> None:
+        gate.scoped = self._orig_scoped
     def _bindings(
         self,
         work: Path,

@@ -26,19 +26,19 @@ class Tests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             p=Path(td)/"apt-mirrors.txt"
             p.write_text(
-                "http://azure.archive.ubuntu.com/ubuntu/\\tpriority:1\\n"
-                "https://archive.ubuntu.com/ubuntu/\\tpriority:2\\n"
-                "https://security.ubuntu.com/ubuntu/\\tpriority:3\\n",
+                "http://azure.archive.ubuntu.com/ubuntu/\tpriority:1\n"
+                "https://archive.ubuntu.com/ubuntu/\tpriority:2\n"
+                "https://security.ubuntu.com/ubuntu/\tpriority:3\n",
                 encoding="utf-8",
             )
             self.assertTrue(m._public_source("mirror+file:"+str(p)))
             p.write_text(
-                "https://archive.ubuntu.com/ubuntu/\\n"
-                "https://user:pass@example.test/private\\n",
+                "https://archive.ubuntu.com/ubuntu/\n"
+                "https://user:pass@example.test/private\n",
                 encoding="utf-8",
             )
             self.assertFalse(m._public_source("mirror+file:"+str(p)))
-            p.write_text("file:///private/repo\\n",encoding="utf-8")
+            p.write_text("file:///private/repo\n",encoding="utf-8")
             self.assertFalse(m._public_source("mirror+file:"+str(p)))
             self.assertFalse(m._public_source("mirror+file:"+str(Path(td)/"missing")))
 

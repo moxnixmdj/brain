@@ -16,7 +16,7 @@
     "canonical/tests/test_runtime_cognition_credit_guard_v1.py": "401f29df765b2e612a2459d1e48f9237ef449b1f",
     "canonical/runtime/live_integrated_brain_v1.py": "a78a32919668c7fdfe48cd3c9cddfa9e4e220f32",
     "canonical/runtime/autonomous_verified_self_improvement_v1.py": "cdee841c90f819105877537447ade60abfba4126",
-    "canonical/runtime/terminal_closure_reducer.py": "bb852cd7541ee895aabc1a85a06b1e4b5ef7ae9c",
+    "canonical/runtime/terminal_closure_reducer.py": "5c198f5f0a1cbc80cf183b12940870917afaf9b9",
     ".github/workflows/capability-transfer-governance.yml": "98b59bfc8e3400dbbea4dd7ba3530731d91ea4ba",
     "canonical/CANONICAL_POINTER.json": "880e1579f78af16aa720256e2a47301c257a9325",
     "sitecustomize.py": "34913e43f108a5874e983d0e878925f1523cd090",

@@ -17,7 +17,7 @@ FABRIC=ROOT/"canonical/runtime/unified_cognitive_fabric_v1.py"
 ONE_RUNTIME=ROOT/"canonical/runtime/one_shot_reality_closure_v2.py"
 V21_VERIFY=ROOT/"canonical/verification/R2_SOURCE_IMPLICATION_CLOSURE_V21_VERIFY_20261009_V1.json"
 DYN_POINTER=ROOT/"canonical/governance/CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json"
-DYN_MANIFEST=ROOT/"canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_20261009_V1.json"
+DYN_MANIFEST=ROOT/"canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_450e876dd4258304.json"
 
 def blob(path:Path)->str:
  raw=path.read_bytes()
@@ -48,7 +48,7 @@ class CurrentDefaultRuntimeIntegrationV1Tests(unittest.TestCase):
   self.assertEqual(successor["lineage"],["V21","V20","V19"])
   self.assertEqual(successor["static_default_route_count_before_dynamic"],41)
   self.assertEqual(rt["dynamic_admission"]["current_manifest_git_blob_sha"],blob(DYN_MANIFEST))
-  self.assertEqual(rt["dynamic_admission"]["current_dynamic_route_count"],0)
+  self.assertEqual(rt["dynamic_admission"]["current_dynamic_route_count"],4)
   self.assertFalse(rt["dynamic_admission"]["future_verified_route_requires_new_vN_source"])
 
   one=c["one_shot_fallback"]
@@ -70,11 +70,11 @@ class CurrentDefaultRuntimeIntegrationV1Tests(unittest.TestCase):
 
  def test_dynamic_current_pointer_binds_exact_empty_manifest(self):
   p=load(DYN_POINTER)
-  self.assertEqual(p["target"]["path"],"canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_20261009_V1.json")
+  self.assertEqual(p["target"]["path"],"canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_450e876dd4258304.json")
   self.assertEqual(p["target"]["git_blob_sha"],blob(DYN_MANIFEST))
   m=load(DYN_MANIFEST)
-  self.assertEqual(m["admission_count"],0)
-  self.assertEqual(m["admissions"],[])
+  self.assertEqual(m["admission_count"],4)
+  self.assertEqual(len(m["admissions"]),4)
 
  def test_one_shot_pointer_no_longer_claims_not_auto_default(self):
   one=load(ONE)

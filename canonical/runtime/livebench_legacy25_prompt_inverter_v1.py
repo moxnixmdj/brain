@@ -99,7 +99,7 @@ def recognize(prompt: str) -> dict[str, Any]:
     prompt = str(prompt or "")
     out: list[Match] = []
 
-    for m in _iter(r"Include keywords (?P<items>\[[^\n]*?\]) in the response\.", prompt):
+    for m in _iter(r"(?<!Do not )Include keywords (?P<items>\[[^\n]*?\]) in the response\.", prompt):
         items = _list_of_strings(m.group("items"))
         if items is not None:
             _append(out, "keywords:existence", m, {"keywords": sorted(items)})

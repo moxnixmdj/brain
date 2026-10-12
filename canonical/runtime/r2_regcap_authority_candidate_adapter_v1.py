@@ -76,6 +76,15 @@ def _generic_fallback(
     request_packet: Mapping[str, Any],
     candidate: Mapping[str, Any],
 ) -> dict[str, Any]:
+    if (
+        isinstance(candidate, Mapping)
+        and candidate.get("authority_domains") is None
+        and bool(candidate.get("chosen_url"))
+        and not _existing_payloads(decision_payload, predicate_id)
+    ):
+        return _base(
+            "NOT_APPLICABLE__NO_GENERIC_SELECTED_SEMANTIC_TRUTH_CHECKER_TEMPLATE"
+        )
     materialized = generic_materialization.materialize(request_packet, candidate)
     material_status = str(materialized.get("status") or "")
     if material_status == "FAIL_CLOSED":

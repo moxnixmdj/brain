@@ -14,7 +14,7 @@ def _load(rel: str):
 
 
 def _git_blob_sha(data: bytes) -> str:
-    header = f"blob {len(data)}\\0".encode()
+    header = f"blob {len(data)}\0".encode()
     return hashlib.sha1(header + data).hexdigest()
 
 

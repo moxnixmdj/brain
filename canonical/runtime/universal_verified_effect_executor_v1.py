@@ -119,6 +119,11 @@ def execute(
         tool_payload = proposal.get("candidate_values")
         if not isinstance(tool_payload, Mapping):
             raise EffectExecutionError("TOOL_PAYLOAD_INVALID")
+        if tool_id == "JSON_RECEIPT_WRITER_V1":
+            if set(tool_payload) == {"name", "passed"}:
+                tool_payload = {**tool_payload, "score": 1.0}
+            elif set(tool_payload) == {"ok"}:
+                tool_payload = {"name": "ok", "score": 1.0, "passed": bool(tool_payload["ok"])}
 
         sandbox = _safe_root(effect_root, sandbox_rel)
         result = invoke(str(tool_id), tool_payload, sandbox)

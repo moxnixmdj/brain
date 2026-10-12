@@ -241,7 +241,7 @@ class FinalTerminalCleanroomGateV1Tests(unittest.TestCase):
             receipt["model_dependency_count"] = 1
             receipt["external_model_runtime_dependency_count"] = 1
             receipt["runtime_cognition_dependency_class"] = "MODEL_DEPENDENT"
-            path.write_text(json.dumps(receipt, sort_keys=True) + "\\n", encoding="utf-8")
+            path.write_text(json.dumps(receipt, sort_keys=True) + "\n", encoding="utf-8")
             binding["git_blob_sha"] = gate._git_blob(path)
             with patch.object(gate.projection, "evaluate", return_value=self._projection_pass()):
                 out = gate.evaluate(manifest, repo_root=root)
@@ -258,7 +258,7 @@ class FinalTerminalCleanroomGateV1Tests(unittest.TestCase):
             path = root / binding["path"]
             receipt = json.loads(path.read_text(encoding="utf-8"))
             receipt.pop("full_runtime_dependency_inventory_complete")
-            path.write_text(json.dumps(receipt, sort_keys=True) + "\\n", encoding="utf-8")
+            path.write_text(json.dumps(receipt, sort_keys=True) + "\n", encoding="utf-8")
             binding["git_blob_sha"] = gate._git_blob(path)
             with patch.object(gate.projection, "evaluate", return_value=self._projection_pass()):
                 out = gate.evaluate(manifest, repo_root=root)

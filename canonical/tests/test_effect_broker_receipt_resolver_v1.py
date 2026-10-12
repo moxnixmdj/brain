@@ -19,7 +19,7 @@ class ReceiptResolverTests(unittest.TestCase):
     def _write(self, root: Path, rel: str, obj: dict):
         p = root / rel
         p.parent.mkdir(parents=True, exist_ok=True)
-        data = (json.dumps(obj, sort_keys=True) + "\\n").encode()
+        data = (json.dumps(obj, sort_keys=True) + "\n").encode()
         p.write_bytes(data)
         return {"path": rel, "git_blob_sha": git_blob_sha1(data)}
 

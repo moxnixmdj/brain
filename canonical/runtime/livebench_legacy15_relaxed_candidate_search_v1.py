@@ -107,7 +107,8 @@ def generate_relaxed(
                 add(
                     str(v2["response"]),
                     {
-                        "kind": "RELAXED_SUBSET_COMPOSER_V2",
+                        "kind": "RELAXED_SUBSET",
+                        "generator": "RELAXED_SUBSET_COMPOSER_V2",
                         "subset_indices": list(subset),
                         "instruction_ids": subset_ids,
                         "mode": v2.get("route"),
@@ -118,7 +119,8 @@ def generate_relaxed(
             out = base.generate(subrows, max_candidates=max_per_subset)
             if out.get("status") == "PASS_CANDIDATES":
                 provenance = {
-                    "kind": "RELAXED_SUBSET_GENERATOR_V1",
+                    "kind": "RELAXED_SUBSET",
+                    "generator": "RELAXED_SUBSET_GENERATOR_V1",
                     "subset_indices": list(subset),
                     "instruction_ids": subset_ids,
                     "mode": out.get("mode"),

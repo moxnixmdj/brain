@@ -43,6 +43,9 @@ def _scope_quarantine_error()->str|None:
     blocked=q.get("quarantine_pending_independent_verification")
     if isinstance(blocked,list) and "P1_TO_RECOVERY_ACCEPTANCE_SEMANTIC_TRANSPORT" in blocked:
         return "P1_EXECUTED_TERMINAL_SCOPE_MISMATCH_QUARANTINE_ACTIVE"
+    active=q.get("quarantine_active")
+    if isinstance(active,list) and "P1_WITNESS_TRANSPORT_INTO_RECOVERY_ACCEPTANCE" in active:
+        return "P1_EXECUTED_TERMINAL_SCOPE_MISMATCH_QUARANTINE_ACTIVE"
     return None
 
 def _fail(errors:list[str])->dict[str,Any]:

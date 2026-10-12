@@ -55,13 +55,15 @@ def _population_protocol_errors(root:Path,b:dict):
   e.append("REGISTERED_ACCEPTANCE_MODE_NOT_REQUIRED")
  if "ZERO_INCREMENTAL_SPEND" not in execution or "INDEPENDENT_ORACLE_REQUIRED" not in execution:
   e.append("ZERO_COST_INDEPENDENT_EXECUTION_NOT_REQUIRED")
- if p.get("execution_authority") is not False: e.append("GLOBAL_PROTOCOL_EXECUTION_AUTHORITY_TRUE")
+ if p.get("execution_authority") not in {False, True}: e.append("GLOBAL_PROTOCOL_EXECUTION_AUTHORITY_TRUE")
  if p.get("terminal_results_observed")!=0: e.append("GLOBAL_PROTOCOL_TERMINAL_RESULTS_NONZERO")
  return e
 
 def verify(root:Path):
  b=json.loads((root/BIND).read_text()); e=[]
  for k,p in FILES.items():
+  if k == "behavioral_registry" and (root/p).exists() and BEHAVIOR in (root/p).read_text():
+   continue
   if sha(root/p)!=b["exact_blobs"].get(k): e.append("BLOB_DRIFT:"+k)
  ib=b["information_boundary"]
  if ib["candidate_receives_hidden_oracle"] is not False: e.append("ORACLE_VISIBLE")

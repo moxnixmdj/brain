@@ -130,6 +130,8 @@ def enumerate_signatures(words: Iterable[str]) -> tuple[dict[str, Any], ...]:
 
                 forbidden = list(sorted(required_forbidden))
                 for word in neutral:
+                    if len(forbidden) >= KEYWORD_COUNT:
+                        break
                     if word in required_forbidden or word in excluded:
                         continue
                     forbidden.append(word)

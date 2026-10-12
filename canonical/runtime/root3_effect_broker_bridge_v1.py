@@ -157,7 +157,10 @@ def admit(
 
         cross = _verify_cross_contract_binding(generic_request, root3_request)
 
-        root3_verdict = root3.verify_effect_request(root3_request, root3_policy)
+        root3_verdict = root3.verify_effect_request(
+            {**root3_request, "request_id": root3_request.get("request_id", request_id)},
+            root3_policy,
+        )
         if root3_verdict.get("status") != "PASS_STRUCTURAL_PRECOMMIT":
             raise BridgeError(
                 "ROOT3_GUARD_DENIED:" + str(root3_verdict.get("reason") or "UNKNOWN")

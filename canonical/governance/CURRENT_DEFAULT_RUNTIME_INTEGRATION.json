@@ -5,7 +5,7 @@
   "binding_semantics": "MUTABLE_CURRENT_PATH_IDENTITY__IMMUTABLE_LOAD_BEARING_DESCENDANTS_GIT_BLOB_BOUND",
   "canonical_front_door": {
     "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "git_blob_sha": "5eaea605c4e441ef33180bd76a951a9f973dc40f",
+    "git_blob_sha": "d0b1cceffc8c2b39ce1157afa193fea83d76c8ab",
     "auto_raw_goal_primary_mode": "ADEQUATE_DECISION",
     "auto_one_shot_fallback_live": true,
     "auto_one_shot_trigger": "AUTO_ADEQUATE_DECISION_UNRESOLVED__USER_CLARIFICATION_EXCLUDED",
@@ -16,7 +16,7 @@
     "stable_wrapper_path": "canonical/runtime/r2_direct_live_admission_v1.py",
     "stable_wrapper_git_blob_sha": "57d64a2f22c0cb7b76eed7eb78c2eb6961e819a2",
     "fixed_point_controller_path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
-    "fixed_point_controller_git_blob_sha": "cabe3bd1ec3748a595f3a959718c38accdacfb2f",
+    "fixed_point_controller_git_blob_sha": "34d62b109b99f38e62995544871460b266d2c7df",
     "current_r2_activation_baseline": {
       "authority_pointer_path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
       "pointer_path_identity_authoritative": true,
@@ -43,20 +43,22 @@
     "dynamic_admission": {
       "current_pointer_path": "canonical/governance/CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json",
       "pointer_path_identity_authoritative": true,
-      "current_manifest_path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_8e2418aecd87bbea.json",
-      "current_manifest_git_blob_sha": "8e2418aecd87bbeaece8025d6bbb6c03f52c8b8e",
-      "current_dynamic_route_count": 2,
+      "current_manifest_path": "canonical/governance/R2_DIRECT_ROUTE_DYNAMIC_ADMISSIONS_450e876dd4258304.json",
+      "current_manifest_git_blob_sha": "450e876dd4258304846b96daff30b542a50d7e79",
+      "current_dynamic_route_count": 4,
       "future_verified_route_requires_new_vN_source": false,
       "collision_policy": "UNIQUE_DYNAMIC_MATCH_AND_NO_V21_MATCH_OR_SEMANTIC_OPEN__ELSE_FAIL_CLOSED",
-      "current_pointer_git_blob_sha": "c884d249d66ac93e5d7ffd0eeb6a7af98ba7a846",
+      "current_pointer_git_blob_sha": "598faf4bdb709a40bc8062226b539a68d341217a",
       "current_dynamic_route_ids": [
         "DIRECT_ADEQUACY::CROSS_DOCUMENT_SEMANTIC_REGISTRY_V3_LATTICE_V8",
-        "DIRECT_ADEQUACY::FINANCE_MARKED_MENTION_UNIVERSE_AMBIGUITY_CONTROL_V1"
+        "DIRECT_ADEQUACY::FINANCE_MARKED_COREFERENCE_DERIVED_TYPED_TERMINALS_V1",
+        "DIRECT_ADEQUACY::FINANCE_MARKED_MENTION_UNIVERSE_AMBIGUITY_CONTROL_V1",
+        "DIRECT_ADEQUACY::OEWN_DECISION_MANIFEST_LATTICE_V1"
       ],
       "static_scheduler_activation_route_count_unchanged": 39,
       "static_default_route_count_before_dynamic": 41,
-      "declared_live_route_slots_before_collision_checks": 43,
-      "counting_semantics": "39_IS_CURRENT_R2_V63_SCHEDULER_SNAPSHOT__41_IS_VERIFIED_V21_STATIC_DEFAULT__2_IS_CURRENT_DYNAMIC_ADMISSION_COUNT__DYNAMIC_ADMISSION_DOES_NOT_MUTATE_THE_V63_SNAPSHOT"
+      "declared_live_route_slots_before_collision_checks": 45,
+      "counting_semantics": "39_IS_CURRENT_R2_V63_SCHEDULER_SNAPSHOT__41_IS_VERIFIED_V21_STATIC_DEFAULT__4_IS_CURRENT_DYNAMIC_ADMISSION_COUNT__DYNAMIC_ADMISSION_DOES_NOT_MUTATE_THE_V63_SNAPSHOT"
     },
     "stable_wrapper_semantic_open_handoff_verification": {
       "path": "canonical/verification/R2_DYNAMIC_SEMANTIC_OPEN_HANDOFF_VERIFY_20261010_V1.json",

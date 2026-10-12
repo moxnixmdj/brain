@@ -103,8 +103,8 @@ def test_dynamic_projection_exposes_exact_default_runtime_separately_from_r2_bas
     )
     assert live["effective_static_backend"]["static_route_count"] == 41
     assert live["effective_static_backend"]["lineage"] == ["V21", "V20", "V19"]
-    assert live["dynamic_admission"]["dynamic_route_count"] == 0
-    assert live["effective_known_direct_route_count"] == 41
+    assert live["dynamic_admission"]["dynamic_route_count"] == 4
+    assert live["effective_known_direct_route_count"] == 45
     assert live["scheduler_snapshot_is_default_runtime_source_selector"] is False
     assert live["semantic_truth_authority"] is False
     assert live["terminal_authority"] is False

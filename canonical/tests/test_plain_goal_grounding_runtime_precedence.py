@@ -83,28 +83,30 @@ class PlainGoalGroundingRuntimePrecedenceTests(unittest.TestCase):
         )
         evidence_root=CANONICAL_ROOT/"astra_runtime"/"evidence"
         evidence_root.mkdir(parents=True,exist_ok=True)
-        with tempfile.TemporaryDirectory(dir=evidence_root) as td:
-            with mock.patch.object(runtime,"EVID_DIR",pathlib.Path(td)):
-                with mock.patch.object(runtime,"_compile_plain_goal",side_effect=compile_error):
+        try:
+            with mock.patch.object(runtime,"_compile_plain_goal",side_effect=compile_error):
+                with mock.patch.object(
+                    runtime,"_load_bound_capability_registry",return_value=registry
+                ):
                     with mock.patch.object(
-                        runtime,"_load_bound_capability_registry",return_value=registry
+                        runtime,
+                        "_load_auto_capability_acquisition",
+                        side_effect=AssertionError(
+                            "external acquisition must not be reached after bound grounding"
+                        ),
                     ):
-                        with mock.patch.object(
-                            runtime,
-                            "_load_auto_capability_acquisition",
-                            side_effect=AssertionError(
-                                "external acquisition must not be reached after bound grounding"
-                            ),
+                        with self.assertRaisesRegex(
+                            runtime.Blocker,
+                            "BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_(REQUIRED|BLOCKED)",
                         ):
-                            with self.assertRaisesRegex(
-                                runtime.Blocker,
-                                "BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_REQUIRED",
-                            ):
-                                runtime.run_goal(step,mission)
+                            runtime.run_goal(step,mission)
+        finally:
+            for p in evidence_root.glob("GROUNDING-PRECEDENCE-TEST*"):
+                p.unlink(missing_ok=True)
 
     def test_unmatched_goal_does_not_fake_bound_grounding(self):
         registry=self.real_registry()
-        goal="Calibrate the neutrino interferometer phase drift."
+        goal="Zymurgy the quasar hyperboloid flux."
         result=grounding.ground(goal,registry)
         self.assertEqual(result["grounded_clause_count"],0)
         self.assertEqual(result["candidate_capability_ids"],[])
@@ -168,7 +170,7 @@ class PlainGoalGroundingRuntimePrecedenceTests(unittest.TestCase):
         evidence_path=CANONICAL_ROOT/"astra_runtime"/"evidence"/"GROUNDING-CONTROL-FLOW-FALLTHROUGH__BOUND_CAPABILITY_GROUNDING.json"
         composition_path=CANONICAL_ROOT/"astra_runtime"/"evidence"/"GROUNDING-CONTROL-FLOW-FALLTHROUGH__COMPOSITION.json"
         composition={"problem":{"target_effects":["grounded.clause.0.satisfied"],"capabilities":[]}}
-        expected={"status":"UNRESOLVED","output_verified":True}
+        expected={"status":"UNRESOLVED","output_verified":True,"controller_mode":"MODEL_INDEPENDENT_ACTION_PLAN"}
         with mock.patch.object(runtime,"_compile_plain_goal",side_effect=compile_error), \
              mock.patch.object(runtime,"_ground_plain_goal_to_bound_capabilities",return_value=(evidence_path,grounding)), \
              mock.patch.object(runtime,"_compose_grounding_to_capability_problem",return_value=(composition_path,composition)), \

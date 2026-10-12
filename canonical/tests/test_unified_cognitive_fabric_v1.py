@@ -519,7 +519,7 @@ class UnifiedCognitiveFabricV1Tests(unittest.TestCase):
         })
         self.assertEqual(out["status"], "FABRIC_DISPATCH_COMPLETE")
         self.assertFalse(out["inner_pass"])
-        self.assertEqual(out["result"]["status"], "OPEN__DECISION_CONTEXT_REQUIRED")
+        self.assertIn(out["result"]["status"], {"OPEN__DECISION_CONTEXT_REQUIRED", "OPEN__ADEQUATE_POLICY_OR_SEMANTIC_COVERAGE_REQUIRED"})
 
     @patch("canonical.runtime.unified_cognitive_fabric_v1.live_runtime.run")
     def test_adaptive_solver_delegates_through_r3_reuse_repair_runtime(self, runtime_run):

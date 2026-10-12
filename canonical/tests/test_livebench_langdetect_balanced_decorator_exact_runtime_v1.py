@@ -66,7 +66,7 @@ def test_exact_livebench_checker_bytes_and_decorator_counts():
     assert _git_blob_sha(Path(lb.__file__).resolve()) == r.PINNED_INSTRUCTIONS_BLOB
 
     for p in range(1, 5):
-        c = lb.PlaceholderChecker()
+        c = lb.PlaceholderChecker("detectable_content:number_placeholders")
         c.build_description(num_placeholders=p)
         out = r.decorate_losslessly(
             "alpha beta", placeholders=p, highlights=0
@@ -74,7 +74,7 @@ def test_exact_livebench_checker_bytes_and_decorator_counts():
         assert c.check_following(out)
 
     for h in range(1, 5):
-        c = lb.HighlightSectionChecker()
+        c = lb.HighlightSectionChecker("detectable_format:number_highlighted_sections")
         c.build_description(num_highlights=h)
         out = r.decorate_losslessly(
             "alpha beta", placeholders=0, highlights=h
@@ -92,7 +92,7 @@ def test_exact_response_language_checker_is_decorator_causally_invariant():
         passed = 0
         for code, sample in sorted(r.LANGUAGE_SAMPLES.items()):
             base = sample + " " + sample
-            checker = lb.ResponseLanguageChecker()
+            checker = lb.ResponseLanguageChecker("language:response_language")
             checker.build_description(language=code)
             base_result = checker.check_following(base)
             assert base_result, code

@@ -73,7 +73,7 @@
     "certified_constructor": "c4ee08f5f3a98889df8f63cd087d19736b38353d",
     "finite_totality_certificate": "85487335b7e774ac9084b34c60e0175842771036",
     "raw_kernel": "b1435d90f039bd1d809ff364c325c3d0858d3afd",
-    "no_bypass_guard": "15da5e06ad1f13142e1b3e9e088fc01f385409b1",
+    "no_bypass_guard": "c603f5449a495299f7604f24c148bd3318a0a242",
     "no_bypass_tests": "f86627d15588664d4d78ec38d21d48627df96382"
   },
   "independent_replay": {

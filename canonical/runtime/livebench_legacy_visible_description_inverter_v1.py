@@ -49,7 +49,7 @@ FLAGS = re.IGNORECASE | re.MULTILINE | re.DOTALL
 
 _PATTERN_SOURCE: dict[str, str] = {
     "keywords:existence":
-        r"Include keywords (?P<keywords>\[[^\n]*?\]) in the response\.",
+        r"(?<!Do not )Include keywords (?P<keywords>\[[^\n]*?\]) in the response\.",
     "keywords:frequency":
         r"In your response, the word (?P<keyword>.+?) should appear "
         r"(?P<relation>less than|at least) (?P<frequency>\d+) times\.",

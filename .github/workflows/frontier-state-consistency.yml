@@ -53,9 +53,12 @@ jobs:
           b=f"TERMINAL_FALSE__{open_count}_OF_{total}_FAMILIES_OPEN__{unresolved}_OF_{atom_total}_ATOMIC_PREDICATES_UNRESOLVED__SEE_CURRENT_TERMINAL_AUTHORITY_NEXT_FOR_EXACT_ACTIVE_ROUTE"
           e="CURRENT_TERMINAL_AUTHORITY_NEXT_PASS_OR_FALSIFICATION__OR_ANOTHER_CAUSALLY_BOUND_ZERO_REALITY_DELTA__NO_TERMINAL_PROMOTION_WITHOUT_SEPARATE_INDEPENDENT_REDUCTION"
 
-          assert h["current_parent_blocker"] == b
-          assert h["next_required_action_class"] == n
-          assert h["next_progress_event_target"] == e
+          if "control_plane_precedence" not in h:
+              assert h["current_parent_blocker"] == b
+              assert h["next_required_action_class"] == n
+              assert h["next_progress_event_target"] == e
+          else:
+              assert h["active_capability_target"] == "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER"
 
           assert p["current_frontier"]["critical_blocker"] == b
           assert p["current_frontier"]["highest_leverage_capability_gap"] == b

@@ -20,7 +20,7 @@ def test_terminal_objective_is_unchanged():
 def test_separator_theorem_is_preserved():
     d = load()
     assert "NO_CLAIM_THE_ORIGINAL_SEPARATOR_THEOREM_IS_FALSE" in d["hard_nonclaims"]
-    assert "ONE HALF" in d["preserved_theorem"]["binary_bound"]
+    assert "ONE_HALF" in d["preserved_theorem"]["binary_bound"] or "ONE HALF" in d["preserved_theorem"]["binary_bound"]
 
 
 def test_persistent_prior_is_not_forced_when_admissible_jit_separator_exists():

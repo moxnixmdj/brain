@@ -81,15 +81,28 @@ def _producer_payload(
     source_id: str,
     source_path: str,
 ) -> dict[str, Any]:
-    claims = [
-        {
-            "claim_id": "context-" + str(i),
-            "kind": kind,
-            "start": 0,
-            "end": len(source_text),
-        }
-        for i, kind in enumerate(_KINDS)
-    ]
+    spans: list[tuple[int, int]] = [(0, len(source_text))]
+    for m in re.finditer(r"(?:[0-9]+\.[0-9]+|[^.!?\n])+[.!?]?", source_text):
+        s, e = m.span()
+        while s < e and source_text[s].isspace():
+            s += 1
+        while e > s and source_text[e - 1].isspace():
+            e -= 1
+        if e > s and (s, e) not in spans:
+            spans.append((s, e))
+    claims = []
+    idx = 0
+    for s, e in spans:
+        for kind in _KINDS:
+            claims.append(
+                {
+                    "claim_id": "context-" + str(idx),
+                    "kind": kind,
+                    "start": s,
+                    "end": e,
+                }
+            )
+            idx += 1
     proof = producer.verify_proof(
         source_text,
         source_id=source_id,

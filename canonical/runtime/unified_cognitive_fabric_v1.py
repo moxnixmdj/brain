@@ -393,9 +393,15 @@ def run(
         if not isinstance(request, Mapping):
             raise CognitiveFabricError("REQUEST_NOT_OBJECT")
 
+        requested_mode = str(request.get("mode") or "").strip().upper()
         forbidden_cognition_providers = {
             "proposal_provider": proposal_provider,
-            "capability_expander": capability_expander,
+            "capability_expander": (
+                None
+                if requested_mode == "REACHED_ESCAPE_STATE"
+                and semantic_authority_verifier is not None
+                else capability_expander
+            ),
             "success_episode_adapter_provider": success_episode_adapter_provider,
             "one_shot_failure_repair_provider": one_shot_failure_repair_provider,
             "one_shot_capability_synthesis_provider": one_shot_capability_synthesis_provider,
@@ -409,7 +415,6 @@ def run(
                 "OPAQUE_COGNITION_PROVIDER_FORBIDDEN_IN_LIVE_FABRIC:"
                 + ",".join(present_forbidden)
             )
-        requested_mode = str(request.get("mode") or "").strip().upper()
         if requested_mode == "CATALOG":
             return catalog()
         if requested_mode == "ONE_SHOT_REALITY_CLOSURE":

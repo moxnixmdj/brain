@@ -778,7 +778,7 @@
       {
         "path": "canonical/runtime/terminal_closure_reducer.py",
         "from_git_blob_sha": "27b51e53db5063756ff3046f978c0087fd4a9256",
-        "to_git_blob_sha": "bb852cd7541ee895aabc1a85a06b1e4b5ef7ae9c",
+        "to_git_blob_sha": "5c198f5f0a1cbc80cf183b12940870917afaf9b9",
         "size": 22521
       },
       {
@@ -808,7 +808,7 @@
       {
         "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
         "from_git_blob_sha": "c3dbea74679450273bd07689251499bcd9609212",
-        "to_git_blob_sha": "f0586c433fb98896610d11c029ad32b26b899856",
+        "to_git_blob_sha": "d0b1cceffc8c2b39ce1157afa193fea83d76c8ab",
         "size": 50770
       },
       {

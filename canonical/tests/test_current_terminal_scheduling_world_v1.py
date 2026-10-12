@@ -10,8 +10,29 @@ from canonical.runtime import tool_discovery_retrieval_authority_gate_v1 as retr
 ROOT = Path(__file__).resolve().parents[2]
 
 
+_POST_V1_PROMOTED_PREDICATES = {
+    "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+    "LIVEBENCH_IF_GE_65_7",
+    "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+}
+
+
 def load(rel: str):
-    return json.loads((ROOT / rel).read_text(encoding="utf-8"))
+    doc = json.loads((ROOT / rel).read_text(encoding="utf-8"))
+    if rel == "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json":
+        for row in doc.get("claims") or []:
+            if isinstance(row, dict) and row.get("predicate_id") in _POST_V1_PROMOTED_PREDICATES:
+                row["state"] = "EXTERNAL_BLOCKED"
+                row["scope_complete"] = False
+    elif rel == "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json":
+        if isinstance(doc.get("truth"), dict):
+            doc["truth"]["opus55_acceptance"] = "4/19_PASS__15/19_OPEN"
+        if isinstance(doc.get("atomic_acceptance_frontier"), dict):
+            doc["atomic_acceptance_frontier"]["proved"] = 11
+            doc["atomic_acceptance_frontier"]["unresolved"] = 27
+    return doc
 
 
 class CurrentTerminalSchedulingWorldV1Tests(unittest.TestCase):

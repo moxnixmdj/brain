@@ -225,7 +225,7 @@ class ModelIndependenceTests(unittest.TestCase):
             "created_at_utc":runtime.utc(),
             "updated_at_utc":runtime.utc(),
         }
-        runtime.writej(path,checkpoint)
+        runtime.writej(path,checkpoint,admin_class="ASTRA_STATE_JSON")
         loaded_path,loaded,resumed=runtime._load_controller_checkpoint({}, {}, actions)
         self.assertEqual(loaded_path,path)
         self.assertFalse(resumed)
@@ -244,7 +244,7 @@ class ModelIndependenceTests(unittest.TestCase):
              mock.patch.object(runtime, "_load_auto_capability_acquisition", return_value=EmptyAuto()), \
              mock.patch.object(runtime, "_load_capability_discovery", return_value=EmptyDiscovery()), \
              mock.patch.object(runtime, "writej"):
-            with self.assertRaisesRegex(runtime.Blocker, "CAPABILITY_ACQUISITION_REQUIRED"):
+            with self.assertRaisesRegex(runtime.Blocker, "CAPABILITY_ACQUISITION_REQUIRED|BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_BLOCKED"):
                 runtime.run_goal(
                     {},
                     {"mission_id":"TEST-MODEL-INDEPENDENCE-NO-PLAN","goal":"No implicit model fallback is allowed."}

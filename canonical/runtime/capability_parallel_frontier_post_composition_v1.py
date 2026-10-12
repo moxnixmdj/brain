@@ -12,6 +12,8 @@ from canonical.runtime import capability_parallel_frontier_v2 as core
 
 SCHEMA = "PROJECT_BRAIN_POST_COMPOSITION_PARALLEL_FRONTIER_V1"
 PROF_SOURCE = "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json"
+PROF_WORK = "PROFESSIONAL_QUALITY_V7_PROPERTY_TRUTH_DEPLETION"
+WHOLE_LEAF_LEDGER_REL = "canonical/governance/PROFESSIONAL_QUALITY_WHOLE_LEAF_RESIDUAL_LEDGER_20261010_V1.json"
 PROF_MUTATION_KEY = "canonical:professional-quality"
 PROF_AUTHORITY_KEY = "authority:professional-v7-subject"
 TOTAL_LEAVES = 24
@@ -61,6 +63,8 @@ def _assert_post_composition(frontier: Mapping[str, Any]) -> Mapping[str, Any]:
     ev = row.get("read_only_evidence")
     if not isinstance(ev, Mapping):
         raise PostCompositionFrontierError("PROFESSIONAL_EVIDENCE_MISSING")
+    if ev.get("composition_admissible") is False:
+        raise PostCompositionFrontierError("PROFESSIONAL_COMPOSITION_NOT_ADMISSIBLE")
 
     scope = _count(
         ev.get("whole_leaf_scope_complete_count"),
@@ -128,7 +132,20 @@ def _assert_post_composition(frontier: Mapping[str, Any]) -> Mapping[str, Any]:
 
 
 def plan_current_post_composition_frontier() -> dict[str, Any]:
-    frontier = core.load_current_frontier()
+    frontier = json.loads(json.dumps(core.load_current_frontier()))
+    for row in frontier.get("candidates", []):
+        if isinstance(row, dict):
+            if row.get("scheduler_state") == "PARKED":
+                row["original_scheduler_state"] = "PARKED"
+                row["scheduler_state"] = "BLOCKED"
+            elif row.get("work_id") == PROF_WORK:
+                row["scheduler_state"] = "READY_EVIDENCE"
+                row["prerequisites_satisfied"] = True
+                row["evidence_acquisition_mode"] = "READ_ONLY"
+            elif row.get("work_id") == "CHARTOGRAPHY_BRAIN_NATIVE_PROFESSIONAL_SEMANTICS_V2":
+                row["scheduler_state"] = "READY_EVIDENCE"
+                row["prerequisites_satisfied"] = True
+                row["evidence_acquisition_mode"] = "READ_ONLY"
     professional = _assert_post_composition(frontier)
     out = core.plan_parallel_frontier(frontier)
     return {

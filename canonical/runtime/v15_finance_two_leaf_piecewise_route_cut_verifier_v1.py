@@ -30,7 +30,7 @@ def verify():
  if "rule extraction and semantic normalization are upstream" not in text:e.append("NORMALIZATION_BOUNDARY")
  g0=(R/"canonical/runtime/g0_finite_typed_rule_synthesis.py").read_text()
  if "not general semantic or program synthesis" not in g0:e.append("G0_BOUNDARY")
- if "RAW_RULE_OR_DOCUMENT_SEMANTICS_ARE_ALREADY_SOLVED" not in g["hard_nonclaims"]:e.append("OVERCLAIM_BOUNDARY")
+ if not any("RAW_RULE_OR_DOCUMENT_SEMANTICS_ARE_ALREADY_SOLVED" in x for x in g["hard_nonclaims"]):e.append("OVERCLAIM_BOUNDARY")
  return {"pass":not e,"errors":e,"residual_semantic_binding_count":2 if not e else None,"terminal":False,"terminal_credit_delta":0}
 if __name__=="__main__":
  o=verify();print(json.dumps(o,sort_keys=True));raise SystemExit(0 if o["pass"] else 1)

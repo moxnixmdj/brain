@@ -5,11 +5,17 @@ import types
 import unittest
 from unittest.mock import patch
 
+_prev_v1 = sys.modules.get("canonical.runtime.one_shot_verified_closure_v1")
 fake_v1 = types.ModuleType("canonical.runtime.one_shot_verified_closure_v1")
 fake_v1.run = lambda **kwargs: {}
 sys.modules["canonical.runtime.one_shot_verified_closure_v1"] = fake_v1
 
 from canonical.runtime import one_shot_reality_closure_v2 as v2
+
+if _prev_v1 is not None:
+    sys.modules["canonical.runtime.one_shot_verified_closure_v1"] = _prev_v1
+else:
+    sys.modules.pop("canonical.runtime.one_shot_verified_closure_v1", None)
 
 
 def closure(

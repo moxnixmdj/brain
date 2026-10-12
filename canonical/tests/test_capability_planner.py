@@ -127,6 +127,7 @@ class CapabilityPlannerTests(unittest.TestCase):
                     "provides": ["knowledge.value.available"],
                     "result_fields": ["value"],
                     "provider_bindings": {},
+                    "requirement_bindings": {},
                 },
                 {
                     "cycle": 1,
@@ -136,6 +137,13 @@ class CapabilityPlannerTests(unittest.TestCase):
                     "result_fields": [],
                     "provider_bindings": {
                         "knowledge.value.available": {
+                            "cycle": 0,
+                            "capability_id": "learn-value",
+                        }
+                    },
+                    "requirement_bindings": {
+                        "knowledge.value.available": {
+                            "source": "capability",
                             "cycle": 0,
                             "capability_id": "learn-value",
                         }
