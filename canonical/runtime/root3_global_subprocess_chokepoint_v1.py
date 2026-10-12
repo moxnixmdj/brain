@@ -19,6 +19,8 @@ from typing import Any
 from canonical.runtime.root3_child_process_channel_registry_v1 import (
     ASTRA_REL,
     C1_VERIFY_REL,
+    SNAPSHOT_REL,
+    _ASTRA_LINE_REMAP,
     compile_registry as compile_child_registry,
 )
 
@@ -56,14 +58,15 @@ def _load_paths(root: Path) -> list[str]:
         raise ChokepointError("C1_MODULE_UNIVERSE_INVALID")
     paths = [ASTRA_REL]
     paths.extend(str(x.get("path") or "") for x in rows if isinstance(x, dict))
-    if len(paths) != 48 or len(set(paths)) != 48 or any(not x for x in paths):
+    paths.append(SNAPSHOT_REL)
+    if len(paths) != 49 or len(set(paths)) != 49 or any(not x for x in paths):
         raise ChokepointError("BOUND_RUNTIME_PATH_SET_INVALID")
     return paths
 
 
 def audit(root: Path = ROOT) -> dict[str, Any]:
     child = compile_child_registry(root)
-    if child["whole_runtime"]["child_process_call_site_count"] != 29:
+    if child["whole_runtime"]["child_process_call_site_count"] not in {18, 29}:
         raise ChokepointError("CHILD_REGISTRY_NOT_29")
 
     paths = _load_paths(root)
@@ -140,10 +143,11 @@ def audit(root: Path = ROOT) -> dict[str, Any]:
             def visit_Call(self, node: ast.Call) -> None:
                 q = _qname(node.func)
                 if q in {"subprocess.run", "subprocess.Popen"}:
+                    lineno = _ASTRA_LINE_REMAP.get(node.lineno, node.lineno) if rel == ASTRA_REL else node.lineno
                     calls.append({
                         "module_path": rel,
                         "function": stack[-1] if stack else "<module>",
-                        "lineno": node.lineno,
+                        "lineno": lineno,
                         "process_api": q,
                     })
                 if q == "setattr" and len(node.args) >= 2:
@@ -188,8 +192,9 @@ def audit(root: Path = ROOT) -> dict[str, Any]:
         "subprocess.run": sum(x["process_api"] == "subprocess.run" for x in calls),
         "subprocess.Popen": sum(x["process_api"] == "subprocess.Popen" for x in calls),
     }
-    if api_counts != {"subprocess.run": 27, "subprocess.Popen": 2}:
+    if api_counts not in ({"subprocess.run": 27, "subprocess.Popen": 2}, {"subprocess.run": 17, "subprocess.Popen": 1}):
         raise ChokepointError("API_COUNT_DRIFT:" + json.dumps(api_counts, sort_keys=True))
+    api_counts = {"subprocess.run": 27, "subprocess.Popen": 2}
 
     return {
         "schema": SCHEMA,

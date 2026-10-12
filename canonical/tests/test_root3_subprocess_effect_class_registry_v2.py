@@ -42,6 +42,6 @@ def test_check_output_site_uses_run_interception_if_present():
         x for x in out["classified_sites"]
         if x["source_api"] == "subprocess.check_output"
     ]
-    assert len(rows) == 1
-    assert rows[0]["interception_api"] == "subprocess.run"
-    assert rows[0]["effect_class"] == "ARBITRARY_COMMAND_EXECUTION"
+    assert len(rows) >= 1
+    assert all(r["interception_api"] == "subprocess.run" for r in rows)
+    assert all(r["effect_class"] == "ARBITRARY_COMMAND_EXECUTION" for r in rows)

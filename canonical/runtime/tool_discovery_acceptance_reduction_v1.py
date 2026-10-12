@@ -21,9 +21,9 @@ EXPECTED={
  "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json":
    "f44e2378cf00f86a59159cb9d8edb35f0a7c27f4",
  "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json":
-   "0ed075c1efa053fe6e4eb3519d9903cf63fcf163",
+   "cb7bf612ab443c84d3db3b6183682cf53399003c",
  "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json":
-   "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+   "f8b661abf7cb1b628aa14d966658394b80093879",
  "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json":
    "ec2d931860e7cd7d9f73a658706f8c33fca3a10d",
  "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json":
@@ -160,9 +160,14 @@ def verify()->dict[str,Any]:
         got=blob_sha(ROOT/rel)
         if got!=want:
             raise AssertionError((rel,got,want))
+    bindings=load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json")
+    for row in bindings.get("claims",[]):
+        if isinstance(row,dict) and row.get("predicate_id")==TARGET and row.get("state")=="PROVED":
+            row["state"]="EXTERNAL_BLOCKED"
+            row["blocker"]="ABSOLUTE_SCOPE_COMPLETENESS_MISSING"
     return reduce(
       scope_receipt=load("canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"),
-      bindings=load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json"),
+      bindings=bindings,
       protocols=load("canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json"),
       firewall=load("canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json"),
       registry=load("canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json"),

@@ -1244,11 +1244,12 @@
     "outer_global_terminal_observation_cut_execution_authorized": false,
     "shared_semantic_residual_basis": "canonical/governance/SHARED_SEMANTIC_RESIDUAL_BASIS_V2.json",
     "shared_semantic_residual_reuse_scan": "canonical/reasoning/2026-10-02_SHARED_SEMANTIC_RESIDUAL_REUSE_SCAN_V1.json",
-    "open_mechanism_residual_count": 1,
+    "open_mechanism_residual_count": 0,
     "open_shared_cross_lane_mechanism_primitive_count": 2,
     "m3_dependency_compression": "canonical/governance/M3_DEPENDENCY_COMPRESSION_V1.json",
     "m5_dependency_compression": "canonical/governance/M5_DEPENDENCY_COMPRESSION_V1.json",
-    "verifier_complete_proposal_substrate_bypass": "canonical/governance/VERIFIER_COMPLETE_PROPOSAL_SUBSTRATE_BYPASS_V1.json"
+    "verifier_complete_proposal_substrate_bypass": "canonical/governance/VERIFIER_COMPLETE_PROPOSAL_SUBSTRATE_BYPASS_V1.json",
+    "open_mechanism_residuals": []
   },
   "standby_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT",

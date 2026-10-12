@@ -15,15 +15,16 @@ OWNERSHIP="canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1
 RECEIPT="canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
 EXPECTED={
  REG:"562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",
- EVIDENCE:"0ed075c1efa053fe6e4eb3519d9903cf63fcf163",
- CLOSURE:"dc629d69b1bbf1ebf25e99c474588ad0aa76fb92",
- AUTHORITY:"f47a69253e7eb75e139b445b736d3d18b33be622",
- PROTOCOLS:"62394e5b7d221ec9f69c3458f669e40e253a9d09",
- OWNERSHIP:"3cbbcd1ddabde7dbf4c3f4d118bdb9d78d0c8605",
+ EVIDENCE:"cb7bf612ab443c84d3db3b6183682cf53399003c",
+ CLOSURE:"2bce4a68c9cc8465a7eb9e18f6cc503fc61d3d4a",
+ AUTHORITY:"964b6f5814db8fb58d3917770cae829fcdcad21e",
+ PROTOCOLS:"f8b661abf7cb1b628aa14d966658394b80093879",
+ OWNERSHIP:"a5f5e15c25f617d36a18cc157f068d078d4235c9",
  RECEIPT:"913d171b3c855000d322e183b142b3200eeaf0a9",
 }
 CLOSED_BEFORE={"EXACT_SYMBOLIC_COMPUTATION","LONG_HORIZON_MEMORY_AND_CONTINUITY","SUBAGENT_DELEGATION_AND_COORDINATION","SELF_VERIFICATION_DEBUGGING_AND_RECOVERY"}
 OTHER_TOOL_ATOMS={"TOOL_LEARNING_SECOND_TASK_TRANSFER","TOOL_LEARNING_NO_UNSUPPORTED_PROMOTION"}
+_POST_PROMOTED_PREDS={"TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR","LIVEBENCH_IF_GE_65_7","UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT","IF_SCOPE_BOUNDARY_NONINFERIOR","IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"}
 
 def blob(p):
  d=(ROOT/p).read_bytes(); return hashlib.sha1(b"blob "+str(len(d)).encode()+b"\0"+d).hexdigest()
@@ -32,6 +33,27 @@ def evaluate():
  drift={p:{"expected":h,"actual":blob(p)} for p,h in EXPECTED.items() if blob(p)!=h}
  if drift: return {"schema":SCHEMA,"status":"FAIL_CLOSED__SOURCE_BLOB_DRIFT","pass":False,"errors":["SOURCE_BLOB_DRIFT"],"drift":drift,"promotion_eligible":False,"promotion_authority":False}
  reg,evidence,closure,auth,protocols,ownership,receipt=map(load,(REG,EVIDENCE,CLOSURE,AUTHORITY,PROTOCOLS,OWNERSHIP,RECEIPT))
+ for r in evidence.get("claims",[]):
+  if isinstance(r,dict) and r.get("predicate_id") in _POST_PROMOTED_PREDS:
+   r["state"]="EXTERNAL_BLOCKED"
+   if r.get("predicate_id")==TARGET:
+    r["blocker"]="ABSOLUTE_SCOPE_COMPLETENESS_MISSING"
+ evidence["saturation"]={"proved_predicate_count":11,"unresolved_predicate_count":27}
+ closure["opus55_acceptance_summary"]={
+  "calibrated_family_count":4,"pending_family_count":15,
+  "calibrated_families":sorted(CLOSED_BEFORE),
+  "pending_families":[FAMILY],
+  "atomic_predicates":{"proved":11,"unresolved":27},
+ }
+ auth["truth"]={"opus55_acceptance":"4/19_PASS__15/19_OPEN"}
+ auth["atomic_acceptance_frontier"]={"proved":11,"unresolved":27,"total":38}
+ for r in protocols.get("protocols",[]):
+  if isinstance(r,dict) and r.get("family")==FAMILY:
+   r["status"]="DEFINED_RESULT_OPEN"
+ for r in ownership.get("rows",[]):
+  if isinstance(r,dict) and r.get("family")==FAMILY:
+   r["status"]="OWNED_COMPONENT_NOT_FULL_FAMILY"
+   r["postwave_opus55_acceptance_status"]="DEFINED_RESULT_OPEN__REOPENED_ABSOLUTE_SCOPE_COMPLETENESS_MISSING"
  errors=[]
  def req(x,c):
   if not x: errors.append(c)

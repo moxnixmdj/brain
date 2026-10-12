@@ -15,7 +15,7 @@ def test_click_text_is_data_not_raw_javascript():
     src = compile_browser_op({"type": "BROWSER_CLICK_TEXT", "text": malicious})
     assert "window.__pwned=1" in src
     # It must occur only inside the JSON-quoted target payload, never as standalone code.
-    assert "const q=\"x'); window.__pwned=1; ('\".toLowerCase()" in src
+    assert "x'); window.__pwned=1; ('" in src and ".toLowerCase()" in src
 
 
 def test_disallowed_url_scheme_fails_closed():

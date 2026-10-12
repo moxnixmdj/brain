@@ -17,7 +17,7 @@
   "sources": {
     "terminal_closure_manifest": {
       "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
-      "git_blob_sha": "b2aae1b51c445ae466e04737e06806801cdc711e",
+      "git_blob_sha": "2bce4a68c9cc8465a7eb9e18f6cc503fc61d3d4a",
       "status": "CURRENT_SCOPE_RECONCILED__7_OF_19_ACCEPTANCE_PASS__7_OF_19_VERIFIED_OWNED__12_OPEN__TERMINAL_FALSE"
     },
     "ownership_matrix": {

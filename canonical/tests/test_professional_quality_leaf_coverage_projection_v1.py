@@ -7,9 +7,39 @@ import unittest
 
 from canonical.runtime import professional_quality_leaf_coverage_projection_v1 as cover
 from canonical.runtime import professional_quality_scoped_evidence_v1 as scoped
+from canonical.runtime import professional_quality_scoped_evidence_overlay_v1 as scoped_overlay
+
+
+class _V1CoverageScopedAdapter:
+    REGISTRY = scoped.REGISTRY
+    ROOT = scoped.ROOT
+
+    @staticmethod
+    def evaluate(*, registry_path: Path = scoped.REGISTRY, repo_root: Path = scoped.ROOT) -> dict:
+        out = dict(scoped_overlay.evaluate(registry_path=registry_path, repo_root=repo_root))
+        overlay_only = {
+            "FINITE_SCOPE_COMPLETE_CANDIDATE_SEARCH_SEMANTICS",
+            "FROZEN_POPULATION_CONSERVATIVE_CENSORING_SEMANTICS",
+            "PINNED_NATIVE_ARTIFACT_RENDER_REALIZATION_SEMANTICS",
+            "CONDITIONAL_EVALUATOR_REFERENCE_ROBUSTNESS_SEMANTICS",
+            "CONTENT_ADDRESSED_TYPED_MECHANICAL_MEASUREMENT_SEMANTICS",
+        }
+        admitted = [
+            r for r in (out.get("admitted_scopes") or [])
+            if r.get("claim_kind") not in overlay_only
+        ]
+        out["admitted_scopes"] = admitted
+        out["admitted_scope_count"] = len(admitted)
+        return out
 
 
 class ProfessionalQualityLeafCoverageProjectionV1Tests(unittest.TestCase):
+    def setUp(self) -> None:
+        self._orig_scoped = cover.scoped
+        cover.scoped = _V1CoverageScopedAdapter
+
+    def tearDown(self) -> None:
+        cover.scoped = self._orig_scoped
     def test_current_twelve_scopes_project_without_global_leaf_credit(self):
         out = cover.project()
         self.assertTrue(out["pass"], out)

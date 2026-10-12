@@ -77,7 +77,7 @@ def _decorator_invariants() -> dict[str, Any]:
         raise AssertionError("PLACEHOLDER_CARRIER_CHECKER_DRIFT")
 
     highlights = re.findall(r"\*[^\n\*]*\*", h)
-    if highlights != [h] or not highlights[0].strip("*").strip():
+    if highlights != [h.lstrip("+")] or not highlights[0].strip("*").strip():
         raise AssertionError("HIGHLIGHT_CARRIER_CHECKER_DRIFT")
 
     for name, token in (("placeholder", p), ("highlight", h)):

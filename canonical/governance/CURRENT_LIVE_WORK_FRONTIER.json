@@ -13,23 +13,23 @@
       },
       {
         "path": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-        "git_blob_sha": "219fcd3aab318bde5d64e955a430ea7e60d7bf8e"
+        "git_blob_sha": "3d3b8f3e42aeb4b3e00c65e8253fa7ececa8ac44"
       },
       {
         "path": "canonical/governance/CURRENT_ASSURANCE_CLOSURE_COMPILER.json",
-        "git_blob_sha": "27acc7e80c0b85a778b8f8dbbd77aefe312ceef8"
+        "git_blob_sha": "e421e0fec8d09f1359bafceb1bf215df8571f501"
       },
       {
         "path": "canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json",
-        "git_blob_sha": "7678d9a56461b121ffd52dd4c9c8df464fda08d2"
+        "git_blob_sha": "31af32bf9a669718545c7c4558a719587e85ada8"
       },
       {
         "path": "canonical/research/bytes/BYTES_ACTIVE_STATE_20261010_V1.json",
-        "git_blob_sha": "1b7fcc5548e4b23d1f048f50bdeabe57106b8691"
+        "git_blob_sha": "4f3a5c1015a23d32702ec37a1305290857bca243"
       },
       {
         "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-        "git_blob_sha": "ae28dee5dd638813f4c42aa6d7c46d4950f1c0f8"
+        "git_blob_sha": "2cc7adbce6630a0fed2f102d4542a18f680cbf49"
       },
       {
         "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
@@ -37,11 +37,11 @@
       },
       {
         "path": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
-        "git_blob_sha": "8f53d085ab2d6aa7e85168f3ede2e18e9d0136ed"
+        "git_blob_sha": "10a2d2b32a3dff87632785a8c933d2059b97e23b"
       },
       {
         "path": "canonical/governance/CHARTOGRAPHY_CAPABILITY_PROOF_FRONTIER_V1.json",
-        "git_blob_sha": "13d434a1de8145c5f141bdd459eba6b23146f776"
+        "git_blob_sha": "e54fe2c3d191a2a3d85213503942d1a39b8c6318"
       }
     ],
     "base_main_commit_role": "OBSERVED_BEFORE_RECONCILIATION_COMMIT__DIAGNOSTIC_ONLY__CURRENT_POINTER_PATHS_WIN_ON_DRIFT"
@@ -143,7 +143,7 @@
         "dynamic_localizer_verification_path": "canonical/verification/PYTHON_DYNAMIC_FAULT_LOCALIZER_V1_VERIFY_20261011_V1.json",
         "dynamic_localizer_replay": "PRIMARY_7_OF_7__SECOND_SPRITE_7_OF_7",
         "proved_localization": "FAILING_ONLY_EXECUTION_OUTRANKS_SHARED_OR_PASSING_ONLY_CODE__AST_SYMBOL_OWNERSHIP__INTRA_SYMBOL_BACKWARD_DEF_USE",
-        "bound_capability_registry_git_blob_sha": "256186c0bc83944e4ff945876835681f3bea22e7",
+        "bound_capability_registry_git_blob_sha": "c2bd8c49af334b122b076d7af4f8e8e12587f9bf",
         "verified_interprocedural_provenance": "python.fault.provenance.interprocedural.value.v1",
         "interprocedural_provenance_verification_path": "canonical/verification/PYTHON_INTERPROCEDURAL_VALUE_PROVENANCE_V1_VERIFY_20261011_V1.json",
         "interprocedural_provenance_replay": "PRIMARY_7_OF_7__SECOND_CARRIER_7_OF_7",
@@ -181,8 +181,8 @@
       "work_type": "CAPABILITY_BUILD",
       "frontier_class": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
       "source": "canonical/governance/CHARTOGRAPHY_CAPABILITY_PROOF_FRONTIER_V1.json",
-      "causal_role": "RECOMPUTE_POST_DIRECT_LABEL_CAPABILITY_COVERAGE_AND_SELECT_NEXT_HIGHEST_REUSE_TO_WALL_CLOCK_BRAIN_NATIVE_RESIDUAL__BENCHMARK_SCORE_REMAINS_LATER_AUDIT",
-      "readiness": "READY_RERANK__BIDIRECTIONAL_CURVE_QUERY_VERIFIED__BOUNDED_DIRECT_ENDPOINT_LABEL_AND_FAMILY_RANK_INDEPENDENT_SECOND_CARRIER_27_OF_27_VERIFIED",
+      "causal_role": "RECOMPUTE_POST_AXIS_TITLE_UNIT_CAPABILITY_COVERAGE_AND_SELECT_NEXT_HIGHEST_REUSE_TO_WALL_CLOCK_BRAIN_NATIVE_RESIDUAL__BENCHMARK_SCORE_REMAINS_LATER_AUDIT",
+      "readiness": "READY_RERANK__AXIS_TITLE_UNIT_BINDING_INDEPENDENT_SECOND_CARRIER_21_PLUS_34_PASS_VERIFIED__SELECT_NEXT_NONREDUNDANT_NATIVE_RESIDUAL",
       "claims_new_primitive": true,
       "score_state": "NOT_A_BENCHMARK_SCORE_TASK",
       "scheduler_state": "READY_EXECUTION",
@@ -201,7 +201,7 @@
       "vector_evidence": {},
       "read_only_evidence": {
         "capability_frontier_path": "canonical/governance/CHARTOGRAPHY_CAPABILITY_PROOF_FRONTIER_V1.json",
-        "capability_frontier_git_blob_sha": "399a5a42a5d9e09c2e76351d62f43938184fcc04",
+        "capability_frontier_git_blob_sha": "e54fe2c3d191a2a3d85213503942d1a39b8c6318",
         "verified_brain_subject": "canonical/governance/CHARTOGRAPHY_BRAIN_NATIVE_DETERMINISTIC_SUBJECT_V3.json",
         "verified_positioned_ocr_axis_binding": "canonical/verification/CHART_POSITIONED_OCR_AXIS_BINDING_V1_VERIFY_20261011.json",
         "verified_runtime_blob_sha": "1ccab094a14ae261a01912ad6e573ffc09fa8b35",
@@ -229,9 +229,17 @@
         "direct_curve_label_family_rank_neighboring_regressions": "34_OF_34_PASS",
         "direct_curve_label_family_rank_independent_tests": "14_OF_14_PASS",
         "direct_curve_label_family_rank_independent_second_carrier": true,
-        "direct_curve_label_family_rank_heldout_cases_consumed": 0
+        "direct_curve_label_family_rank_heldout_cases_consumed": 0,
+        "axis_title_unit_binding_verification": "canonical/verification/CHART_AXIS_TITLE_UNIT_BINDING_V1_INDEPENDENT_VERIFY_20261012.json",
+        "axis_title_unit_binding_verification_git_blob_sha": "7b9e38c56212915791a9b552eb61f4e2f46b976f",
+        "axis_title_unit_binding_runtime_blob_sha": "3203cce09246c1989e8c3ccab7c5b228661d563c",
+        "axis_title_unit_binding_authored_tests": "21_OF_21_PASS",
+        "axis_title_unit_binding_neighboring_regressions": "34_OF_34_PASS",
+        "axis_title_unit_binding_independent_second_carrier": true,
+        "axis_title_unit_binding_verifier_run_id": 38212267960,
+        "axis_title_unit_binding_heldout_cases_consumed": 0
       },
-      "ready": "RECOMPUTE_POST_DIRECT_LABEL_CAPABILITY_COVERAGE__SELECT_NEXT_NONREDUNDANT_NATIVE_RESIDUAL__NO_GATED_BENCHMARK_EXECUTION"
+      "ready": "SELECT_NEXT_NONREDUNDANT_NATIVE_RESIDUAL_AFTER_AXIS_TITLE_UNIT_PROMOTION__NO_GATED_BENCHMARK_EXECUTION"
     },
     {
       "work_id": "PROFESSIONAL_QUALITY_V7_PROPERTY_TRUTH_DEPLETION",
@@ -254,12 +262,12 @@
       ],
       "explicit_conflict_work_ids": [],
       "evidence_conflict_keys": [],
-      "evidence_acquisition_mode": "NONE",
+      "evidence_acquisition_mode": "READ_ONLY",
       "vector_evidence_state": "PARTIAL",
       "vector_evidence": {},
       "read_only_evidence": {
         "source": "canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json",
-        "source_git_blob_sha": "219fcd3aab318bde5d64e955a430ea7e60d7bf8e",
+        "source_git_blob_sha": "3d3b8f3e42aeb4b3e00c65e8253fa7ececa8ac44",
         "whole_leaf_scope_complete_count": 24,
         "property_truth_closed_count": 24,
         "verified_property_truth_leaf_count": 24,
@@ -270,7 +278,36 @@
         "full_current_main_regression_open": true,
         "regression_carrier_blocked_zero_steps": true,
         "new_primitive_required": false,
-        "vector_bounds_complete": false
+        "vector_bounds_complete": false,
+        "composition_admissible": true,
+        "verified_property_truth_leaf_ids": [
+          "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+          "PQ::R10_ANALYSIS_DECISION::SEMANTIC",
+          "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::EXECUTION",
+          "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::SEMANTIC",
+          "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION",
+          "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+          "PQ::R1_TARGET_SPECIFICATION::EXECUTION",
+          "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
+          "PQ::R2_CANDIDATE_SEARCH::EXECUTION",
+          "PQ::R2_CANDIDATE_SEARCH::SEMANTIC",
+          "PQ::R3_REALIZATION_OBSERVATION::EXECUTION",
+          "PQ::R3_REALIZATION_OBSERVATION::SEMANTIC",
+          "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION",
+          "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC",
+          "PQ::R5_EVALUATOR_REFERENCE::EXECUTION",
+          "PQ::R5_EVALUATOR_REFERENCE::SEMANTIC",
+          "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION",
+          "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::SEMANTIC",
+          "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
+          "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC",
+          "PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION",
+          "PQ::R8_POPULATION_CONTEXT_OPERATOR::SEMANTIC",
+          "PQ::R9_TEMPORAL_DEPLOYMENT::EXECUTION",
+          "PQ::R9_TEMPORAL_DEPLOYMENT::SEMANTIC"
+        ],
+        "semantic_shared_blocker_independently_verified": true,
+        "semantic_catalog_alone_can_close": false
       },
       "ready": "BLOCKED_ONLY_BY_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_OR_STRONGER_VALID_RECEIPT"
     },

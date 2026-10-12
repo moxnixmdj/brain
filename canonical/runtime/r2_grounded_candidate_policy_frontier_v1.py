@@ -95,9 +95,10 @@ def _strong_semantic_candidate(row: Mapping[str, Any], semantic_tokens: set[str]
     matched = {a for a, _ in provides_hits + keyword_hits + identity_hits}
     coverage = len(matched) / max(1, len(semantic_tokens))
 
-    # An output/effect match is strong enough by itself. Otherwise require two
-    # independent semantic identity/keyword hits with meaningful goal coverage.
-    return bool(provides_hits) or (
+    # An output/effect match is strong enough when it covers at least a quarter
+    # of the goal tokens. Otherwise require two independent semantic
+    # identity/keyword hits with meaningful goal coverage.
+    return (bool(provides_hits) and coverage >= 0.25) or (
         len(keyword_hits) + len(identity_hits) >= 2 and coverage >= 0.34
     )
 
@@ -109,11 +110,13 @@ def propose(goal: str, *, repo_root: str | Path) -> dict[str, Any]:
         return {**_base("FAIL_CLOSED", passed=False), "reason": "GOAL_REQUIRED"}
 
     try:
-        registry_doc = json.loads(
-            (root / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json").read_text(
-                encoding="utf-8"
+        reg_path = root / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+        if not reg_path.is_file():
+            reg_path = (
+                Path(__file__).resolve().parents[2]
+                / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
             )
-        )
+        registry_doc = json.loads(reg_path.read_text(encoding="utf-8"))
         registry = registry_doc.get("capabilities")
         if not isinstance(registry, Mapping):
             return {
@@ -177,8 +180,21 @@ def propose(goal: str, *, repo_root: str | Path) -> dict[str, Any]:
             and str(row.get("capability_id") or "")
         )
         if not strong_candidates:
+            max_matched = max(
+                (
+                    len((r.get("lexical") or {}).get("matched_goal_tokens") or [])
+                    for r in candidates
+                    if isinstance(r, Mapping)
+                ),
+                default=0,
+            )
+            status = (
+                "NOT_APPLICABLE__NO_GROUNDED_BOUND_CAPABILITY"
+                if max_matched <= 1 and len(semantic_tokens) >= 4
+                else "NOT_APPLICABLE__NO_STRONG_GROUNDED_BOUND_CAPABILITY"
+            )
             return {
-                **_base("NOT_APPLICABLE__NO_STRONG_GROUNDED_BOUND_CAPABILITY", passed=False),
+                **_base(status, passed=False),
                 "grounding": deepcopy(dict(result)),
                 "candidate_policy_count": 0,
                 "discarded_weak_candidate_ids": discarded_weak_candidate_ids,

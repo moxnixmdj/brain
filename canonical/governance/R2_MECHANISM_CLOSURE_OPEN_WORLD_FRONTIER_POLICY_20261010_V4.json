@@ -19,11 +19,11 @@
     },
     "adequate_decision_controller": {
       "path": "canonical/runtime/general_adequate_decision_controller_v1.py",
-      "git_blob_sha": "368c6ac07e8feaf1a0c880de5388b618def912e2"
+      "git_blob_sha": "b5c609eb902cd0ea21d81710588dd538aa05cb4f"
     },
     "adequate_decision_fixed_point": {
       "path": "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
-      "git_blob_sha": "cabe3bd1ec3748a595f3a959718c38accdacfb2f"
+      "git_blob_sha": "34d62b109b99f38e62995544871460b266d2c7df"
     },
     "one_shot_v1": {
       "path": "canonical/runtime/one_shot_verified_closure_v1.py",
@@ -104,7 +104,7 @@
   "policy_cover_safety_controller_rebind": {
     "reason": "R2_POLICY_V3_BOUND_PRE_SAFETY_CONTROLLER_BLOB_AFTER_VERIFIED_POLICY_COVER_HARD_CONSTRAINT_REPAIR",
     "controller_path": "canonical/runtime/general_adequate_decision_controller_v1.py",
-    "controller_git_blob_sha": "368c6ac07e8feaf1a0c880de5388b618def912e2",
+    "controller_git_blob_sha": "b5c609eb902cd0ea21d81710588dd538aa05cb4f",
     "reconciliation_path": "canonical/governance/R2_POLICY_COVER_HARD_CONSTRAINT_SAFETY_RECONCILIATION_20261010_V1.json",
     "reconciliation_git_blob_sha": "9f8aef7837edc9decded63e26f597f12471dd3d3",
     "verification_path": "canonical/verification/R2_POLICY_COVER_SAFETY_REPAIR_INDEPENDENT_REPLAY_VERIFY_20261010_V1.json",

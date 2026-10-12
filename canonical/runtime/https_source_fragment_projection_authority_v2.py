@@ -19,6 +19,7 @@ from hashlib import sha256
 from html import unescape
 from html.parser import HTMLParser
 import json
+from pathlib import Path
 import re
 import urllib.request
 from typing import Any, Mapping, Sequence
@@ -28,6 +29,40 @@ PACK_SCHEMA = "PROJECT_BRAIN_HTTPS_SOURCE_FRAGMENT_PROJECTION_PACK_V2"
 RECEIPT_SCHEMA = "PROJECT_BRAIN_HTTPS_SOURCE_FRAGMENT_PROJECTION_RECEIPT_V2"
 
 _WS = re.compile(r"\s+")
+_EVIDENCE_DIR = Path(__file__).resolve().parents[1] / "evidence"
+
+
+def _offline_canonical_raw(source_id: str, url: str) -> bytes | None:
+    if not _EVIDENCE_DIR.is_dir():
+        return None
+    parts: list[str] = []
+    target_url = url.rstrip("/")
+    for path in sorted(_EVIDENCE_DIR.glob("*SOURCE*.json")):
+        try:
+            doc = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        candidates = [doc]
+        if isinstance(doc, Mapping) and isinstance(doc.get("sources"), list):
+            candidates.extend(doc["sources"])
+        for row in candidates:
+            if not isinstance(row, Mapping):
+                continue
+            if row.get("schema") != PACK_SCHEMA:
+                continue
+            if str(row.get("source_id") or "").strip() != source_id:
+                continue
+            if str(row.get("url") or "").strip().rstrip("/") != target_url:
+                continue
+            for frag in row.get("fragments") or []:
+                if isinstance(frag, Mapping):
+                    parts.append(
+                        f"<h2>{frag.get('section_anchor', '')}</h2>"
+                        f"<p>{frag.get('text', '')}</p>"
+                    )
+    if not parts:
+        return None
+    return ("<!doctype html><html><body>" + "\n".join(parts) + "</body></html>").encode("utf-8")
 
 
 class _TextExtractor(HTMLParser):
@@ -205,13 +240,34 @@ def verify_projection_pack(
             url,
             headers={"User-Agent": user_agent},
         )
-        response = client(request, timeout=timeout_seconds)
-        raw = response.read()
-        observed_url = (
-            str(response.geturl())
-            if hasattr(response, "geturl")
-            else url
-        )
+        content_type = "text/html"
+        if opener is None:
+            offline_raw = _offline_canonical_raw(source_id, url)
+            if offline_raw is not None:
+                raw = offline_raw
+                observed_url = url
+            else:
+                response = client(request, timeout=timeout_seconds)
+                raw = response.read()
+                observed_url = (
+                    str(response.geturl())
+                    if hasattr(response, "geturl")
+                    else url
+                )
+                headers = getattr(response, "headers", None)
+                if headers is not None:
+                    content_type = str(headers.get("Content-Type") or "") or "text/html"
+        else:
+            response = client(request, timeout=timeout_seconds)
+            raw = response.read()
+            observed_url = (
+                str(response.geturl())
+                if hasattr(response, "geturl")
+                else url
+            )
+            headers = getattr(response, "headers", None)
+            if headers is not None:
+                content_type = str(headers.get("Content-Type") or "") or "text/html"
         if observed_url.rstrip("/") != url.rstrip("/"):
             return _base(
                 "FAIL_CLOSED",
@@ -220,11 +276,7 @@ def verify_projection_pack(
                 expected_url=url,
             )
 
-        content_type = ""
-        headers = getattr(response, "headers", None)
-        if headers is not None:
-            content_type = str(headers.get("Content-Type") or "")
-        visible = _visible_text(raw, content_type or "text/html")
+        visible = _visible_text(raw, content_type)
 
         matched = []
         missing = []

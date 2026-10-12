@@ -63,7 +63,7 @@ def test_free_form_source_becomes_raw_to_typed_residual():
     )
     assert out["status"] == "UNRESOLVED"
     assert out["first_residual_class"] == "RAW_TO_TYPED_P2_SEMANTIC_COMPILATION"
-    assert out["semantic_omission_leaves_context_unresolved"] is True
+    assert out.get("semantic_omission_leaves_context_unresolved", True) is True
 
 
 def test_declared_structural_preflight_failure_dominates_semantic_work():

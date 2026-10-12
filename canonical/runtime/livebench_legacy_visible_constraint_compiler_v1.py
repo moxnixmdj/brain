@@ -129,7 +129,7 @@ _SPECS: dict[str, tuple[str, dict[str, Callable[[str], Any]], tuple[str, ...]]] 
         {"num_sections": _int, "section_spliter": _identity}, (),
     ),
     "detectable_format:json_format": (
-        r"Entire output should be wrapped in JSON format\. You can use markdown ticks such as ```\.",
+        r"Entire output should be wrapped in JSON format\. You can use markdown ticks such as (?:```|code fences)\.",
         {}, (),
     ),
     "detectable_format:title": (

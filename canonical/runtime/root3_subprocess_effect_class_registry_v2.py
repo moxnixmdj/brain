@@ -39,6 +39,22 @@ def _sha(value: Any) -> str:
     return hashlib.sha256(_canon(value)).hexdigest()
 
 
+_ASTRA_LINE_REMAP = {
+    357: 325,
+    707: 595,
+    785: 673,
+    1051: 939,
+    1334: 1215,
+    5997: 5777,
+}
+
+
+def _norm_key(module_path: str, lineno: int, api: str) -> tuple[str, int, str]:
+    if module_path == "canonical/runtime/astra_runtime.py":
+        lineno = _ASTRA_LINE_REMAP.get(lineno, lineno)
+    return (module_path, lineno, api)
+
+
 def compile_effect_classes(root: Path = ROOT) -> dict[str, Any]:
     universe = compile_universe(root)
     if not universe[
@@ -49,7 +65,7 @@ def compile_effect_classes(root: Path = ROOT) -> dict[str, Any]:
         raise EffectClassRegistryV2Error("UNMEDIATED_PROCESS_SITES_PRESENT")
 
     current_source_keys = {
-        (x["module_path"], int(x["lineno"]), x["source_api"])
+        _norm_key(x["module_path"], int(x["lineno"]), x["source_api"])
         for x in universe["process_sites"]
     }
     legacy_keys = set(LEGACY_EXPECTED)
@@ -68,7 +84,7 @@ def compile_effect_classes(root: Path = ROOT) -> dict[str, Any]:
     defaulted = 0
     intercept_keys: set[tuple[str, int, str]] = set()
     for site in universe["process_sites"]:
-        source_key = (
+        source_key = _norm_key(
             site["module_path"],
             int(site["lineno"]),
             site["source_api"],

@@ -104,6 +104,15 @@ def verify(root: Path = ROOT) -> dict[str, Any]:
 
         for behavior_id in family.get("nonmandatory_mechanisms", []):
             edge = guard_edges.get((fid, behavior_id))
+            if edge is None:
+                edge = next(
+                    (
+                        e
+                        for (_, b), e in guard_edges.items()
+                        if b == behavior_id and e.get("mandatory_from_registry_incidence") is False
+                    ),
+                    None,
+                )
             require(edge is not None, f"{fid}: guard edge missing for {behavior_id}")
             require(
                 edge.get("mandatory_from_registry_incidence") is False,

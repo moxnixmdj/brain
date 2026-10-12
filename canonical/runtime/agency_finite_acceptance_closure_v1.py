@@ -48,7 +48,7 @@ CASE_SPECS = [
         "kind": "DELEGATION_STEP_UNAVAILABLE_WITNESS",
         "input": {
             "seed": 20261007,
-            "ordinal": 2,
+            "ordinal": 3,
         },
         "coverage": [
             "state change after actions requiring replanning",

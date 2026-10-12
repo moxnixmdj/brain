@@ -125,8 +125,8 @@ def test_section_forbidden_overlap_is_not_false_unsat():
     assert out["status"] == "ID_COMPATIBLE__SLOT_FEASIBILITY_NOT_YET_PROVED"
     assert out["hard_unsat_reasons"] == []
     witness = "Section1\nz\nSection2\nz\nSection3\nz"
-    assert len(re.findall(r"\\s?Section\\s?\\d+\\s?", witness)) >= 3
-    assert re.search(r"\\bsection\\b", witness, flags=re.IGNORECASE) is None
+    assert len(re.findall(r"\s?Section\s?\d+\s?", witness)) >= 3
+    assert re.search(r"\bsection\b", witness, flags=re.IGNORECASE) is None
 
 
 def test_unknown_or_structurally_conflicting_ids_fail_closed():

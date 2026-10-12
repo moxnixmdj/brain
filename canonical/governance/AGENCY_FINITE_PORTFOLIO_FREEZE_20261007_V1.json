@@ -43,7 +43,7 @@
       "kind": "DELEGATION_STEP_UNAVAILABLE_WITNESS",
       "input": {
         "seed": 20261007,
-        "ordinal": 2
+        "ordinal": 3
       },
       "coverage": [
         "state change after actions requiring replanning",
@@ -55,7 +55,7 @@
   "source_bindings": {
     "frozen_protocol": {
       "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
-      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+      "git_blob_sha": "f8b661abf7cb1b628aa14d966658394b80093879"
     },
     "finite_scope_truth_repair": {
       "path": "canonical/governance/AGENCY_MATCHED_FINITE_PROTOCOL_BINDING_TRUTH_REPAIR_20261007_V1.json",
@@ -63,7 +63,7 @@
     },
     "execution_runtime": {
       "path": "canonical/runtime/agency_finite_acceptance_closure_v1.py",
-      "git_blob_sha": "25bd3235fbf6332b4b2fc07c2a4302d509716f3c"
+      "git_blob_sha": "b4a68d472d7115168d995f7af6f33b224bd3b0b4"
     },
     "stateful_runtime": {
       "path": "canonical/runtime/matched_agency_stateful_case_v1.py",

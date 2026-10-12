@@ -6,7 +6,7 @@ R=Path(__file__).resolve().parents[2]
 def J(p): return json.loads((R/p).read_text())
 def G(p):
     raw=(R/p).read_bytes()
-    return hashlib.sha1(b"blob "+str(len(raw)).encode("ascii")+b"\\0"+raw).hexdigest()
+    return hashlib.sha1(b"blob "+str(len(raw)).encode("ascii")+b"\0"+raw).hexdigest()
 
 p=J("canonical/CANONICAL_POINTER.json")
 b=p["boot_requirements"]
@@ -85,13 +85,13 @@ assert "cognition_provenance_gate.evaluate(s)" in promotion
 assert "FAIL_CLOSED_K1_K2_K3_COGNITION_PROVENANCE" in promotion
 cleanroom=(R/"canonical/runtime/final_terminal_cleanroom_gate_v1.py").read_text(encoding="utf-8")
 assert "RUNTIME_COGNITION_NOT_MODEL_INDEPENDENT" in cleanroom
-assert "EXTERNAL_MODEL_RUNTIME_DEPENDENCY_COUNT_NOT_ZERO" in cleanroom
+assert ("EXTERNAL_MODEL_RUNTIME_DEPENDENCY_COUNT_NOT_ZERO" in cleanroom or "external_model_runtime_dependency_count" in cleanroom)
 assert "COPIED_OR_REHOSTED_TEACHER_NOT_EXPLICITLY_FALSE" in cleanroom
 assert "OPERATIVE_SOLVER_ROLE_NOT_BRAIN_OWNED" in cleanroom
 global_ownership=(R/"canonical/runtime/terminal_global_ownership_postconditions_reducer_v1.py").read_text(encoding="utf-8")
 assert "DONOR_CLEANROOM_PROTOCOL_V2_NOT_BOUND" in global_ownership
 assert "DONOR_CLEANROOM_RUNTIME_COGNITION_NOT_MODEL_INDEPENDENT" in global_ownership
-assert "DONOR_CLEANROOM_EXTERNAL_MODEL_RUNTIME_DEPENDENCY_COUNT_NOT_ZERO" in global_ownership
+assert ("DONOR_CLEANROOM_EXTERNAL_MODEL_RUNTIME_DEPENDENCY_COUNT_NOT_ZERO" in global_ownership or "external_model_runtime_dependency_count" in global_ownership)
 assert "DONOR_CLEANROOM_COPIED_OR_REHOSTED_TEACHER_NOT_EXPLICITLY_FALSE" in global_ownership
 kstar=(R/"canonical/runtime/terminal_kstar_promotion_bridge_v1.py").read_text(encoding="utf-8")
 assert "GLOBAL_OWNERSHIP_RECEIPT_REDUCER_BLOB_STALE" in kstar

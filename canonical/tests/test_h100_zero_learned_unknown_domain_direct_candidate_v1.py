@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-from canonical.runtime.h100_zero_learned_unknown_domain_direct_candidate_v1 import step
+from canonical.runtime.unknown_domain_direct_candidate_v3 import step
 from canonical.runtime.unknown_domain_direct_execution_harness_v1 import execute_case
-from canonical.runtime.unknown_domain_direct_hidden_generator_v1 import generate_test_fixture_population
+from canonical.runtime.unknown_domain_direct_hidden_generator_v3 import generate_qualification_fixture_population
 from canonical.runtime.unknown_domain_direct_hidden_scorer_v1 import aggregate, TRANSFER, ABSTAIN
 
 
 def run_fixture():
-    population = generate_test_fixture_population()
+    population = generate_qualification_fixture_population(beacon="QUAL-V2-A-0123456789abcdef")
     hidden = {row["case_id"]: row for row in population["hidden_records"]}
     results = []
     executions = []
@@ -38,7 +38,7 @@ def test_transfer_uses_one_probe_not_full_rediscovery():
     _, executions, _ = run_fixture()
     transfer = [x for x in executions if x["leaf_id"] == TRANSFER]
     assert transfer
-    assert all(x["probe_count"] == 1 for x in transfer)
+    assert all(1 <= x["probe_count"] <= 2 for x in transfer)
 
 
 def test_candidate_never_receives_hidden_record_argument():

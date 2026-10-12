@@ -39,7 +39,7 @@ def test_carrier_is_syntax_and_case_neutral():
 
 def test_static_proof_remains_zero_credit_until_runtime_gate():
     out = c.verify()
-    assert out["status"].endswith("INDEPENDENT_LANGDETECT_PROFILE_AND_EXCEPTION_GATE_PENDING")
+    assert out["status"].endswith("EXCEPTION_ROUTE_UNUSABLE_BECAUSE_LOGGING_GLOBAL_IS_UNBOUND")
     assert out["acceptance_credit"] is False
     assert out["family_credit"] is False
     assert out["capability_credit"] is False

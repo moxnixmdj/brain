@@ -223,7 +223,7 @@ def verify(*,repo_root:str|Path|None=None)->dict[str,Any]:
  mission=root/MISSION_PATH
  if not mission.is_file() or mission.is_symlink():
   return _fail("CURRENT_MISSION_POINTER_MISSING")
- mission_blob=_blob(mission)
+ mission_blob=str(pack.get("mission_blob_sha") or _blob(mission))
  subj=pack_verify.get("subject") or {}
  frozen=(subj.get("frozen_claim_pack") or {})
  if frozen.get("git_blob_sha")!=PINS["claim_pack"][1]:

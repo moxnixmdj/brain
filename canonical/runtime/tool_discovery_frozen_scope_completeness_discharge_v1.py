@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 EXPECTED_BLOBS = {
     "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json":
-        "62394e5b7d221ec9f69c3458f669e40e253a9d09",
+        "f8b661abf7cb1b628aa14d966658394b80093879",
     "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json":
         "ee187f611a0e82b2de495ee377682f39bc31dd31",
     "canonical/governance/TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1.json":

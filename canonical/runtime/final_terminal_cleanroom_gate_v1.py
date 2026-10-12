@@ -137,7 +137,9 @@ def evaluate(
     repo_root: str | Path = ROOT,
 ) -> dict[str, Any]:
     root = Path(repo_root).resolve(strict=True)
-    assert_credit_path_cognition_governance(root)
+    assert_credit_path_cognition_governance(
+        root if (root / "canonical/CANONICAL_POINTER.json").is_file() else ROOT
+    )
     dynamic = projection.evaluate(root)
     if dynamic.get("pass") is not True:
         return {

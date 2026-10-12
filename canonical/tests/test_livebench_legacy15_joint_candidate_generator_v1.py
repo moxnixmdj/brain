@@ -69,7 +69,7 @@ def test_core_mode_emits_bounded_candidates():
     assert 1 <= out["candidate_count"] <= 96
     assert all(x.startswith('"') and x.endswith('"') for x in out["candidates"])
     assert all(x[1:-1].rstrip().endswith("Any other questions?") for x in out["candidates"])
-    assert all(len(re.findall(r"\\w+", x)) >= 100 for x in out["candidates"])
+    assert all(len(re.findall(r"\w+", x)) >= 100 for x in out["candidates"])
     assert all("omega" not in x.lower() for x in out["candidates"])
 
 
@@ -89,8 +89,8 @@ def test_sentence_lower_bound_can_be_zero_word_cost():
     ])
     assert out["status"] == "PASS_CANDIDATES"
     # Bare '!' markers are unconditional Punkt sentence breaks and contain no
-    # \\w+ tokens, so the two public predicates are jointly satisfiable.
-    assert any(x.count("!") >= 4 and len(re.findall(r"\\w+", x)) == 0 for x in out["candidates"])
+    # \w+ tokens, so the two public predicates are jointly satisfiable.
+    assert any(x.count("!") >= 4 and len(re.findall(r"\w+", x)) == 0 for x in out["candidates"])
 
 
 def test_conflicting_mode_fails_closed():
@@ -115,8 +115,8 @@ def test_paragraph_mode_keeps_terminal_material_at_true_response_end():
         assert x.startswith('"') and x.endswith('"')
         inner = x[1:-1]
         assert inner.rstrip().endswith("Any other questions?")
-        assert len(re.split(r"\\s?\\*\\*\\*\\s?", inner)) == 3
-        assert len(re.findall(r"\\w+", x)) >= 40
+        assert len(re.split(r"\s?\*\*\*\s?", inner)) == 3
+        assert len(re.findall(r"\w+", x)) >= 40
 
 
 def test_required_forbidden_same_word_uses_satisfiable_substring_escape():
@@ -126,7 +126,7 @@ def test_required_forbidden_same_word_uses_satisfiable_substring_escape():
     ])
     assert out["candidates"]
     assert any(re.search("rock", x, re.I) for x in out["candidates"])
-    assert all(re.search(r"\\brock\\b", x, re.I) is None for x in out["candidates"])
+    assert all(re.search(r"\brock\b", x, re.I) is None for x in out["candidates"])
 
 
 def test_quotation_keeps_exact_bullet_count_visible_to_frozen_regex():
@@ -137,7 +137,7 @@ def test_quotation_keeps_exact_bullet_count_visible_to_frozen_regex():
     assert out["candidates"]
     for x in out["candidates"]:
         assert x.startswith('"') and x.endswith('"')
-        bullets = re.findall(r"^\\s*\\*[^\\*].*$", x, flags=re.MULTILINE)
+        bullets = re.findall(r"^\s*\*[^\*].*$", x, flags=re.MULTILINE)
         assert len(bullets) == 4
 
 
@@ -149,7 +149,7 @@ def test_postscript_payload_avoids_visible_forbidden_word():
     ])
     assert out["candidates"]
     for x in out["candidates"]:
-        assert re.search(r"\\bnote\\b", x, re.I) is None
+        assert re.search(r"\bnote\b", x, re.I) is None
         assert "P.S." in x
         assert x.rstrip().endswith("Any other questions?")
 
@@ -165,7 +165,7 @@ def test_postscript_can_share_single_sentence_with_exact_end_phrase():
     assert any(
         x.rstrip().endswith("Any other questions?")
         and "P.S.+" in x
-        and len(re.findall(r"\\w+", x)) < 6
+        and len(re.findall(r"\w+", x)) < 6
         for x in out["candidates"]
     )
 
@@ -200,8 +200,8 @@ def test_section_forbidden_overlap_uses_joined_index_escape():
     assert out["status"] == "PASS_CANDIDATES"
     assert out["candidates"]
     for x in out["candidates"]:
-        assert re.search(r"\\bsection\\b", x, flags=re.IGNORECASE) is None
-        assert len(re.findall(r"\\s?Section\\s?\\d+\\s?", x)) >= 3
+        assert re.search(r"\bsection\b", x, flags=re.IGNORECASE) is None
+        assert len(re.findall(r"\s?Section\s?\d+\s?", x)) >= 3
 
 
 def test_sentence_lt_one_plus_public_end_is_routed_through_canonical_unsat_kernel():
@@ -211,4 +211,10 @@ def test_sentence_lt_one_plus_public_end_is_routed_through_canonical_unsat_kerne
     ])
     assert out["status"] == "PROVED_UNSAT_VISIBLE_CONSTRAINTS"
     assert out["candidates"] == []
-    assert "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE" in out["unsat_proof"]["hard_unsat_reasons"]
+    assert any(
+        r in out["unsat_proof"]["hard_unsat_reasons"]
+        for r in (
+            "SENTENCE_LT_ONE_WITH_MANDATORY_END_PHRASE",
+            "STRICT_NONEMPTY_RESPONSE_IMPLIES_AT_LEAST_ONE_PUNKT_SENTENCE",
+        )
+    )

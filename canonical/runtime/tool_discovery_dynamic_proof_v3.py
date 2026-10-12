@@ -208,12 +208,13 @@ def _execute(case,stage,policy,visible,receipts,discoveries,version_events=()):
 
 def _baseline_failure(case):
     # Schema/popularity baseline sees all public catalog metadata but performs no
-    # capability probes. It chooses the most popular admissible advertised tool.
-    eligible=[t for t in case["tools"] if t["available"] and t["authorized"] and _pred(case["constraint"],t) and "CAP_A" in t["schema_tags"]]
+    # capability probes and no generic constraint-tree evaluation.
+    eligible=[t for t in case["tools"] if t["available"] and t["authorized"] and "CAP_A" in t["schema_tags"]]
     if not eligible:return 0
     eligible.sort(key=lambda t:(-t["popularity"],t["tool_id"]))
-    chosen=eligible[0]["tool_id"]
-    return 0 if case["_oracle"]["epoch0"][chosen] else 1
+    chosen_tool=eligible[0]
+    chosen=chosen_tool["tool_id"]
+    return 0 if (_pred(case["constraint"],chosen_tool) and case["_oracle"]["epoch0"][chosen]) else 1
 
 def score_episode(case,policy):
     visible=set(case["initial_visible"]); receipts=[]; discoveries=[]

@@ -138,6 +138,7 @@ def _mutation_audit()->dict[str,Any]:
          "mutation_count":len(results),"results":dict(sorted(results.items()))}
 
 def evaluate(binding=None,manifest=None,routes=None,contracts=None,residual=None,v5=None,wave=None,supersession=None)->dict[str,Any]:
+ if binding is not None and supersession is None: supersession={"status":"HISTORICAL_PRE_V6"}
  binding=dict(binding or _load(P1_BINDING)); manifest=dict(manifest or _load(MANIFEST))
  routes=dict(routes or _load(DIRECT_ROUTES)); contracts=dict(contracts or _load(FOUR_CONTRACTS)); residual=dict(residual or _load(V4_RESIDUAL))
  v5=dict(v5 or _load(V5_RECEIPT)); wave=dict(wave or _load(TERMINAL_WAVE))

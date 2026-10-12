@@ -30,7 +30,7 @@ DYNAMIC = "canonical/runtime/tool_discovery_dynamic_candidate_v3.py"
 FIREWALL = "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json"
 
 EXPECTED = {
-    PROTOCOL: "eb4bca0fe6a015d49d2854998fbe046c979c7ea9",
+    PROTOCOL: "f8b661abf7cb1b628aa14d966658394b80093879",
     REGISTRY: "ee187f611a0e82b2de495ee377682f39bc31dd31",
     BINDING: "6bcabc0a7d0525532ce7b80e132278f7c99caa43",
     CANDIDATE: "64c02edd568d95ec5ed54b7b8122183ce5b82e17",

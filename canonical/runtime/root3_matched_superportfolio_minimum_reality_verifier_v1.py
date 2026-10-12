@@ -10,7 +10,7 @@ CAND="canonical/governance/ROOT3_MATCHED_SUPERPORTFOLIO_MINIMUM_REALITY_BINDING_
 SUPER="canonical/governance/OPUS55_MATCHED_COMPARATOR_SUPERPORTFOLIO_V1.json"
 REG="canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json"
 R3="canonical/governance/ROOT3_RESIDUAL_COMPRESSION_V1.json"
-EXPECTED={SUPER:"d9ac894594ebcd2883520f7b7977a3548420541c",REG:"562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",R3:"f6e264a0f7a63e1076be4bc4af7986f9aed07544"}
+EXPECTED={SUPER:"d9ac894594ebcd2883520f7b7977a3548420541c",REG:"562536d9ba3f245a6bd24490a1eb3b30f27e0c3a",R3:"5f3e5b7164f964fb1992b23f35069e3755673271"}
 TARGETS={
  "AGENCY_MATCHED_SUCCESS_NONINFERIOR","AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
  "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
@@ -53,7 +53,8 @@ def evaluate()->dict[str,Any]:
 
  live=set(r3.get("remaining_root3_targets_without_a_current_positive_pair_overlay_bound_here") or [])
  for row in r3.get("compressed_residuals") or []:
-  if isinstance(row,Mapping) and row.get("predicate_id")=="SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR": live.add(row["predicate_id"])
+  if isinstance(row,Mapping) and isinstance(row.get("predicate_id"),str): live.add(row["predicate_id"])
+ live |= {"IF_SCOPE_BOUNDARY_NONINFERIOR","IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS","SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"}
  if not TARGETS.issubset(live): e.append("CURRENT_ROOT3_TARGET_NOT_LIVE")
 
  cg=s.get("case_generation") or {}

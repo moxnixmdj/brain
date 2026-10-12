@@ -220,7 +220,7 @@ def _build_general(constraints: list[dict[str, Any]]) -> str:
         # outer quotes. Bullet-list and nth-paragraph constraints conflict in
         # the frozen generator, so this does not perturb nth first-word logic.
         if bullets:
-            core = '"\\n' + core.strip('"') + '"'
+            core = '"\n' + core.strip('"') + '"'
         else:
             core = '"' + core.strip('"') + '"'
 

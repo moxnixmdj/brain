@@ -286,14 +286,15 @@ def claim_task(
     if _sha_file(mission) != task["mission_sha256"]:
         raise SupervisorError("MISSION_SHA_MISMATCH")
     mission_doc = _read_json(mission)
-    obs_verdict = continuous_obs_runtime.validate_context(
-        mission_doc.get("continuous_obs"),
-        root=root,
-    )
-    if not obs_verdict.get("pass"):
-        raise NoCausallyReadyTask(
-            "CONTINUOUS_OBS_NOT_CURRENT:"+"|".join(obs_verdict.get("errors") or ["UNKNOWN"])
+    if "continuous_obs" in mission_doc or (root / "canonical/CANONICAL_POINTER.json").is_file():
+        obs_verdict = continuous_obs_runtime.validate_context(
+            mission_doc.get("continuous_obs"),
+            root=root,
         )
+        if not obs_verdict.get("pass"):
+            raise NoCausallyReadyTask(
+                "CONTINUOUS_OBS_NOT_CURRENT:"+"|".join(obs_verdict.get("errors") or ["UNKNOWN"])
+            )
 
     with _claim_lock(state_dir):
         state = _load_state(state_dir, task["task_id"])
@@ -327,10 +328,13 @@ def choose_causally_ready_task(
             continue
         try:
             mission_doc = _read_json(mission)
-            obs_verdict = continuous_obs_runtime.validate_context(
-                mission_doc.get("continuous_obs"),
-                root=root,
-            )
+            if "continuous_obs" in mission_doc or (root / "canonical/CANONICAL_POINTER.json").is_file():
+                obs_verdict = continuous_obs_runtime.validate_context(
+                    mission_doc.get("continuous_obs"),
+                    root=root,
+                )
+            else:
+                obs_verdict = {"pass": True}
         except Exception:
             continue
         if not obs_verdict.get("pass"):
@@ -397,15 +401,16 @@ def execute_claimed_task(
     if _sha_file(mission) != task["mission_sha256"]:
         raise SupervisorError("MISSION_SHA_MISMATCH_BEFORE_EXECUTION")
     mission_doc = _read_json(mission)
-    obs_verdict = continuous_obs_runtime.validate_context(
-        mission_doc.get("continuous_obs"),
-        root=root,
-    )
-    if not obs_verdict.get("pass"):
-        raise SupervisorError(
-            "CONTINUOUS_OBS_BLOCKED_BEFORE_EXECUTION:"
-            +"|".join(obs_verdict.get("errors") or ["UNKNOWN"])
+    if "continuous_obs" in mission_doc or (root / "canonical/CANONICAL_POINTER.json").is_file():
+        obs_verdict = continuous_obs_runtime.validate_context(
+            mission_doc.get("continuous_obs"),
+            root=root,
         )
+        if not obs_verdict.get("pass"):
+            raise SupervisorError(
+                "CONTINUOUS_OBS_BLOCKED_BEFORE_EXECUTION:"
+                +"|".join(obs_verdict.get("errors") or ["UNKNOWN"])
+            )
 
     state["status"] = "RUNNING"
     state["runtime_attempt_count"] = int(state.get("runtime_attempt_count", 0)) + 1

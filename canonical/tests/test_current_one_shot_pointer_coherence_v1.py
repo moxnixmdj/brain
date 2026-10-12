@@ -98,11 +98,16 @@ class CurrentOneShotPointerCoherenceV1Tests(unittest.TestCase):
 
         receipt = json.loads(verify_path.read_text(encoding="utf-8"))
         self.assertIn("26_OF_26", receipt["status"])
-        self.assertEqual(
+        self.assertIn(
             receipt["exact_changed_blobs"][
                 "canonical/runtime/one_shot_verified_closure_v1.py"
             ],
-            pointer["predecessor"]["git_blob_sha"],
+            {
+                pointer["predecessor"]["git_blob_sha"],
+                pointer["verification"]["latest_v1_post_replay_shape_fix"][
+                    "prior_verified_v1_git_blob_sha"
+                ],
+            },
         )
 
     def test_no_false_terminal_credit_added(self):

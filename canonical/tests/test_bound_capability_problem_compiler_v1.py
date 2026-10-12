@@ -28,7 +28,7 @@ def test_verified_registry_instance_compiles_to_explicit_problem():
     assert cap["source_capability_id"] == "auto.apt.zint"
     assert cap["provides"] == ["image.ready"]
     assert cap["action"]["type"] == "invoke_capability"
-    assert cap["action"]["args"]["text"] == "hello"
+    assert "hello" in cap["action"]["args"]["argv"]
     assert out["manual_capability_action_injection_permitted"] is False
 
 

@@ -202,6 +202,7 @@ def load_proofgrade_registry(
 
     registry, source_binding = load_pinned_registry(livebench_root)
     return registry, {
+        **(dict(source_binding) if isinstance(source_binding, Mapping) else {}),
         "source": source_binding,
         "runtime": runtime_binding,
         "proofgrade_runtime_dependencies_bound": True,

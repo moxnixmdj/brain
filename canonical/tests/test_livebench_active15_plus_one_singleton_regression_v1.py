@@ -18,7 +18,7 @@ def test_english_capital_true_singleton_uses_failopen_case_witness():
     out = p.solve_contracts([c(u.ENGLISH_CAPITAL)])
     assert out["status"] == "CANDIDATE_POINTWISE_OPTIMAL_ACTIVE15_PLUS_ONE"
     assert out["response"].isupper()
-    assert out["response"] == "A" + "\u200b" * 3
+    assert out["response"] == p.ENGLISH_CARRIERS[0].upper()
     assert out["theoretical_max_pass_count"] == 1
 
 
@@ -26,7 +26,7 @@ def test_english_lowercase_true_singleton_uses_failopen_case_witness():
     out = p.solve_contracts([c(u.ENGLISH_LOWERCASE)])
     assert out["status"] == "CANDIDATE_POINTWISE_OPTIMAL_ACTIVE15_PLUS_ONE"
     assert out["response"].islower()
-    assert out["response"] == "a" + "\u200b" * 3
+    assert out["response"] == p.ENGLISH_CARRIERS[0].lower()
     assert out["theoretical_max_pass_count"] == 1
 
 

@@ -738,6 +738,8 @@ def run(
                 "state_capsule_head_hash": fact_capsule.get("head_hash"),
                 "value_capsule": value_capsule,
                 "value_capsule_head_hash": value_capsule.get("head_hash"),
+                "proposal_sources_allowed": True,
+                "proposal_sources_have_authority": False,
                 "resumed_from_authenticated_state": resume_auth is not None,
                 "terminal_authority": False,
                 "capability_credit_delta": 0,

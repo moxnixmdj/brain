@@ -22,7 +22,7 @@
   "subject": {
     "branch": "brain/r2-policy-v4-controller-rebind-20261010",
     "exact_git_blobs": {
-      "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V4.json": "617c848f8d803e0b46353e4e83e67b0b04cd55af",
+      "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V4.json": "6c96e3555d467b683114df542a9e0eb1ff480d08",
       "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json": "005a4b13d31a34139df9a1589885f1b3f0c7a218",
       "canonical/tests/test_capability_first_scheduler_v1.py": "9789f3127920d704f76a002accad4d5050bb2ef0",
       "canonical/runtime/capability_first_scheduler_v1.py": "6d2091cc1581b9aa1fd2c74e8a76519a41d9d957",

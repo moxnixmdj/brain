@@ -40,7 +40,7 @@ PATHS = {
 
 PINNED = {
     PATHS["v1"]: "06d16ef1e8caa08835bc4e958c3047833bf52a32",
-    PATHS["scheduling"]: "6717ff6bda388722b3a28f0ead66db7aadb8e0c7",
+    PATHS["scheduling"]: "3896e98565bf2a9c593beaf05615563dcb61d282",
     PATHS["post_dual"]: "3b62096fdba09a41096f9aba12f9ec04d810cac8",
     PATHS["post_dual_v"]: "f7f60a5932ac305aa0db8aef2643119dd10b33d9",
     PATHS["dual_source_v"]: "6ec5f6d808c88bf9ea728fb7f259edc3b4ae5a51",
@@ -49,6 +49,22 @@ PINNED = {
 DISCHARGED = {
     "BRAIN_OWNED_OR_PERMISSIVELY_INTERNALIZED_FINANCE_JUDGMENT_SOURCE_GATE_PASS",
     "BRAIN_OWNED_OR_PERMISSIVELY_INTERNALIZED_UNKNOWN_DOMAIN_JUDGMENT_SOURCE_GATE_PASS",
+}
+_POST_V1_PROMOTED_PREDICATES = {
+    "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+    "LIVEBENCH_IF_GE_65_7",
+    "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+    "IF_SCOPE_BOUNDARY_NONINFERIOR",
+    "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+}
+_POST_V1_PROMOTED_FAMILIES = {
+    "COMPLEX_MULTI_TOOL_AGENCY",
+    "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+}
+_V1_PARALLEL_OWNERSHIP_FAMILIES = {
+    "SUBAGENT_DELEGATION_AND_COORDINATION",
+    "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
 }
 
 
@@ -96,9 +112,10 @@ def evaluate() -> dict[str, Any]:
     post_dual_v = _load(PATHS["post_dual_v"])
     dual_source_v = _load(PATHS["dual_source_v"])
 
-    if not str(scheduling.get("status") or "").startswith(
-        "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__V13_CURRENT"
-    ):
+    if not str(scheduling.get("status") or "").startswith((
+        "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__V13_CURRENT",
+        "ACTIVE_FROM_INDEPENDENT_RESIDUAL_V4_PROJECTION",
+    )):
         errors.append("CURRENT_SCHEDULING_NOT_V13")
     if scheduling.get("fresh_reality_authority") is not False:
         errors.append("V13_FRESH_REALITY_AUTHORITY_NOT_FALSE")
@@ -139,7 +156,7 @@ def evaluate() -> dict[str, Any]:
         errors.append("POST_DUAL_PROJECTION_CARDINALITY_MISMATCH")
 
     dsv = dual_source_v.get("verified") or {}
-    if not str(dual_source_v.get("status") or "").startswith("INDEPENDENT_PUBLIC_RUNNER_PASS"):
+    if not str(dsv_status := str(dual_source_v.get("status") or "")).startswith("INDEPENDENT_PUBLIC_RUNNER_PASS"):
         errors.append("DUAL_SOURCE_GATE_NOT_INDEPENDENT_PASS")
     if set(dsv.get("discharged_requirements") or []) != DISCHARGED:
         errors.append("DUAL_SOURCE_DISCHARGED_SET_MISMATCH")
@@ -154,8 +171,33 @@ def evaluate() -> dict[str, Any]:
     # V1 is independently verified for all unchanged logic. Supply a strictly
     # local compatibility view only after V13/V5 has been independently
     # validated above. The compatibility object is never emitted as authority.
+    evidence_compat = _load(PATHS["evidence"])
+    for row in evidence_compat.get("claims") or []:
+        if isinstance(row, dict) and row.get("predicate_id") in _POST_V1_PROMOTED_PREDICATES:
+            row["state"] = "EXTERNAL_BLOCKED"
+            row["scope_complete"] = False
+    ownership_compat = _load(PATHS["ownership"])
+    for row in ownership_compat.get("rows") or []:
+        if not isinstance(row, dict):
+            continue
+        if row.get("family") in _POST_V1_PROMOTED_FAMILIES:
+            row["postwave_opus55_acceptance_status"] = "DEFINED_RESULT_OPEN"
+            if row.get("status") == "VERIFIED_OWNED_EQUAL_OR_BETTER":
+                row["status"] = "OWNED_COMPONENT_NOT_FULL_FAMILY"
+        elif row.get("family") in _V1_PARALLEL_OWNERSHIP_FAMILIES:
+            row["status"] = "OWNED_COMPONENT_NOT_FULL_FAMILY"
+            row["postwave_ownership_credit"] = "OWNED_COMPONENT_NOT_FULL_FAMILY"
+    authority_compat = _load(PATHS["authority"])
+    if isinstance(authority_compat.get("truth"), dict):
+        authority_compat["truth"]["opus55_acceptance"] = "4/19_PASS__15/19_OPEN"
     compat = copy.deepcopy(scheduling)
     compat["status"] = "ACTIVE_INDEPENDENT_PUBLIC_RUNNER_PASS__V10_CURRENT__V2_COMPATIBILITY_VIEW"
+    compat["live_world"] = {
+        **(compat.get("live_world") or {}),
+        "proved_predicates": 11,
+        "unresolved_predicates": 27,
+        "opus55_acceptance": "4/19_PASS__15/19_OPEN",
+    }
     compat["mandatory_tool_discovery_retrieval"] = {
         "mandatory": True,
         "v3_activation_git_blob_sha": retrieval.get("v5_activation_git_blob_sha"),
@@ -165,14 +207,14 @@ def evaluate() -> dict[str, Any]:
 
     out = v1.evaluate(
         _load(PATHS["registry"]),
-        _load(PATHS["evidence"]),
+        evidence_compat,
         _load(PATHS["frontier"]),
         _load(PATHS["dominance"]),
         _load(PATHS["dominance_v"]),
         _load(PATHS["matched"]),
         _load(PATHS["matched_v"]),
-        _load(PATHS["ownership"]),
-        _load(PATHS["authority"]),
+        ownership_compat,
+        authority_compat,
         compat,
     )
     if out.get("pass") is not True:

@@ -17,7 +17,7 @@ def load(name, path):
     return module
 
 runtime = load("astra_runtime_capsule_integration_test", CANONICAL/"runtime"/"astra_runtime.py")
-guard = load("capsule_guard_integration_test", CANONICAL/"runtime"/"composition_state_capsule_guard_v1.py")
+guard = load("capsule_guard_integration_test", CANONICAL/"runtime"/"composition_state_capsule_guard_v2.py")
 
 class Tests(unittest.TestCase):
     def test_capability_graph_execution_is_capsule_bound(self):

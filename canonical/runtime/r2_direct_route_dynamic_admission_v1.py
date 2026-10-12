@@ -417,6 +417,8 @@ def load_current_admissions(
     pointer_path: str | Path | None = None,
 ) -> dict[str, Any]:
     root = Path(repo_root).resolve()
+    if pointer_path is None and not (root / "canonical/governance").exists():
+        root = ROOT
     pointer = Path(pointer_path).resolve() if pointer_path is not None else (
         root / "canonical/governance/CURRENT_R2_DIRECT_ROUTE_ADMISSIONS.json"
     )

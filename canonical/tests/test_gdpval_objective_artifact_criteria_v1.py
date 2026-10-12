@@ -167,7 +167,7 @@ def test_exact_four_sheet_xlsx_is_machine_verified(tmp_path):
     from openpyxl import Workbook
 
     c = m.compile_criterion(
-        "Provides an Excel .xlsx workbook with exactly four worksheets (tabs)."
+        "Provides an Excel .xlsx workbook with exactly 4 worksheets (tabs)."
     )
     assert c["status"] == "COMPILED_OBJECTIVE_CHECK"
 

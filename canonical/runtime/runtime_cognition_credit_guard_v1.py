@@ -10,7 +10,11 @@ from __future__ import annotations
 from copy import deepcopy
 import json
 from pathlib import Path
+import sys
 from typing import Any, Mapping
+
+if str(Path(__file__).resolve().parents[2]) not in sys.path:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from canonical.runtime.acceptance_capability_source_gate_v2 import (
     evaluate as evaluate_acceptance_source,

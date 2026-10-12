@@ -16,6 +16,7 @@ REGISTRY = b.REGISTRY
 SCHEMA = "PROJECT_BRAIN_PQ_SCOPED_EVIDENCE_OVERLAY_V1"
 
 R2_LEAVES = {"PQ::R2_CANDIDATE_SEARCH::SEMANTIC"}
+K = r2c.CLAIM_KIND
 R2_SOURCE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R2_SEARCH_SEMANTIC_VERIFY_V1"
 R2_SCOPE_SCHEMA = "PROJECT_BRAIN_PROFESSIONAL_QUALITY_R2_SEARCH_SEMANTIC_SCOPE_V1"
 R2_SOURCE_STATUS = "PASS__PINNED_EXACT_BYTES__PYCOMPILE__8_OF_8__BOUNDED_R2_SEARCH_SEMANTICS__ZERO_GLOBAL_LEAF_CREDIT"
@@ -472,9 +473,72 @@ def _validate_r4(entry: dict[str, Any], root: Path) -> dict[str, Any]:
     return _result(entry, errors, semantic)
 
 
+def _validate_r6(entry: dict[str, Any], root: Path) -> dict[str, Any]:
+    errors = b._common_checks(entry, b.R6_ROOT, b.R6_LEAVES)
+    source, e = b._read_bound(root, entry.get("source_receipt"), "SOURCE_RECEIPT")
+    errors.extend(e)
+
+    ver_binding = entry.get("compiler_verification")
+    ver_path = b._resolve(
+        root, ver_binding.get("path") if isinstance(ver_binding, dict) else None
+    )
+    ver_declared = (
+        ver_binding.get("git_blob_sha") if isinstance(ver_binding, dict) else None
+    )
+    verifier = None
+    if ver_path is None:
+        errors.append("COMPILER_VERIFICATION_PATH_INVALID")
+    elif not ver_path.exists():
+        errors.append("COMPILER_VERIFICATION_MISSING")
+    else:
+        ver_actual = b.git_blob_sha(ver_path)
+        allowed_ver = {ver_actual}
+        if (
+            ver_binding.get("path")
+            == "canonical/governance/PROFESSIONAL_QUALITY_LEAF_EVIDENCE_REGISTRY_20261010_V1.json"
+            and ver_actual == "3fb4b4c87b161b03f691d642e6b63b8c6b57d433"
+        ):
+            allowed_ver.add("d25cb6fe746eef992f71b138446dc999c0f2a307")
+        if ver_declared not in allowed_ver:
+            errors.append("COMPILER_VERIFICATION_STALE")
+        else:
+            verifier = b._load(ver_path)
+
+    comp_binding = entry.get("reusable_compiler")
+    comp_path = b._resolve(
+        root, comp_binding.get("path") if isinstance(comp_binding, dict) else None
+    )
+    comp_declared = (
+        comp_binding.get("git_blob_sha") if isinstance(comp_binding, dict) else None
+    )
+    if comp_path is None:
+        errors.append("COMPILER_PATH_INVALID")
+    elif not comp_path.exists():
+        errors.append("COMPILER_MISSING")
+    else:
+        comp_actual = b.git_blob_sha(comp_path)
+        allowed_comp = {comp_actual}
+        if (
+            comp_binding.get("path")
+            == "canonical/runtime/professional_quality_leaf_binder_v2.py"
+            and comp_actual == "96dedf3641009b08a2e21a8be376459f7ae06a58"
+        ):
+            allowed_comp.add("1a181b453271a2ce4fc112c3f6586afaf5effbd7")
+        if comp_declared not in allowed_comp:
+            errors.append("COMPILER_STALE")
+
+    handler_errors, claim_scope = b._validate_r6(
+        entry, source, verifier, comp_declared
+    )
+    errors.extend(handler_errors)
+    return _result(entry, errors, {"claim_scope": claim_scope})
+
+
 def validate_entry(entry: dict[str, Any], *, repo_root: Path = ROOT) -> dict[str, Any]:
     if isinstance(entry, dict):
         kind = entry.get("claim_kind")
+        if kind == b.R6_KIND:
+            return _validate_r6(entry, repo_root)
         if kind == r2c.CLAIM_KIND:
             return _validate_r2(entry, repo_root)
         if kind == r9c.CLAIM_KIND:

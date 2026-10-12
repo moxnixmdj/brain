@@ -14,7 +14,7 @@ EXPECTED={
  "canonical/verification/DUAL_JUDGMENT_GENERAL_SUBSTRATE_ROLE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json":"047b464ff60d4eaf04c31937b1103c8bf8d678fc",
  "canonical/verification/DUAL_JUDGMENT_SOURCE_GATE_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json":"6ec5f6d808c88bf9ea728fb7f259edc3b4ae5a51",
  "canonical/capabilities/opus55/DUAL_JUDGMENT_CONTROL_ENVELOPE_V1.json":"6ea46314887a59de742e56f32893de9efce1103a",
- "canonical/runtime/judgment_control_envelope_v1.py":"5ebfd1e7fa871da89ecca40ffeb8dd6575c21582",
+ "canonical/runtime/judgment_control_envelope_v1.py":"7bcbfc122336a63adc72b57fb0e9077c036a46e1",
  "canonical/verification/SOURCE_CONTRACT_COMPLETENESS_V2_VERIFICATION_20261002_V1.json":"dba285299fda831a8a3bd93ea10f8fb7b7a0cced",
  "canonical/governance/FIVE_PRIMITIVE_ROLE_SINGLE_SEMANTIC_FRONTIER_20261007_V1.json":"eb316b0a674a3542280c71706fffe850d22e44fa",
  "canonical/reasoning/2026-10-02_M0A_SEMANTIC_IDENTIFIABILITY_BOUNDARY_V1.json":"a8b3ca5230e8c1e73fdc0dbe0a4c5ae2a0710a6a",

@@ -4,7 +4,7 @@
   "status": "ACTIVE__SEPARATE_CONNECTOR_RECOMPUTATION_PASS__EXACT_IDENTITY_FRONTIER_SCHEDULING_ONLY__ZERO_CREDIT",
   "subject": {
     "path": "canonical/governance/TERMINAL_FRONTIER_COMPILER_V1.json",
-    "git_blob_sha": "2746ce4c38052dcc2dbb7de24c25728bf06ac31c"
+    "git_blob_sha": "3a69058d05bdfb37edf9b52cba3668f614801ec5"
   },
   "runtime": {
     "path": "canonical/runtime/terminal_frontier_compiler_v1.py",

@@ -13,16 +13,16 @@
   },
   "exact_material": {
     "canonical/CANONICAL_POINTER.json": "4a0e27f85703f4a7f8614eeda4d41dd1539c6200",
-    "canonical/runtime/runtime_cognition_credit_guard_v1.py": "cdc35b663b8411fb8ef293bb9dd7f8a1fed6f5b4",
+    "canonical/runtime/runtime_cognition_credit_guard_v1.py": "985608a53a2c857249548e5e875ed058fff77f37",
     "canonical/tests/test_runtime_cognition_credit_guard_v1.py": "91307f75aa745cae77ad1c8b2845c7fab42bdfd0",
-    "canonical/runtime/verify_capability_transfer_static_governance_v1.py": "affd5b27dfc1caedbcc42819de61158ca8bc1d06",
+    "canonical/runtime/verify_capability_transfer_static_governance_v1.py": "1dba0b392f1ee32ac99142a52e8c530635d92a27",
     "canonical/runtime/terminal_global_ownership_postconditions_reducer_v1.py": "e03557870c183b473dd1708f5c9141fe6dd3a445",
     "canonical/runtime/terminal_kstar_promotion_bridge_v1.py": "e92a3f107ed6ba9d1c41e29ac41d78de30ad191a",
     "canonical/runtime/ownership_promotion_compiler_v1.py": "a887cc686ecda6f5b5408f5621f671d8f882ac16",
     "canonical/runtime/final_terminal_cleanroom_gate_v1.py": "bde4d62bd4f1dc9e949a8631810d76e9a954c96c",
     "canonical/runtime/live_integrated_brain_v1.py": "a78a32919668c7fdfe48cd3c9cddfa9e4e220f32",
     "canonical/runtime/autonomous_verified_self_improvement_v1.py": "cdee841c90f819105877537447ade60abfba4126",
-    "canonical/runtime/terminal_closure_reducer.py": "bb852cd7541ee895aabc1a85a06b1e4b5ef7ae9c"
+    "canonical/runtime/terminal_closure_reducer.py": "5c198f5f0a1cbc80cf183b12940870917afaf9b9"
   },
   "checks": [
     {

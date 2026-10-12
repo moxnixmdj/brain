@@ -113,15 +113,106 @@ def _inertia_eigenvalues(coords:set[tuple[int,int,int]],cell:float):
 
 def _convex_hull(coords:set[tuple[int,int,int]],cell:float):
     import numpy as np
-    from scipy.spatial import ConvexHull
     pts=set()
     for x,y,z in coords:
         for dx in (0,1):
             for dy in (0,1):
                 for dz in (0,1):
                     pts.add(((x+dx)*cell,(y+dy)*cell,(z+dz)*cell))
-    hull=ConvexHull(np.array(sorted(pts),dtype=float))
-    return float(hull.volume),float(hull.area)
+    try:
+        from scipy.spatial import ConvexHull
+        hull=ConvexHull(np.array(sorted(pts),dtype=float))
+        return float(hull.volume),float(hull.area)
+    except ImportError:
+        def _hull2d(points2d):
+            pts2 = sorted(set(points2d))
+            if len(pts2) <= 2:
+                return set(pts2)
+            def cross(o, a, b):
+                return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])
+            lower = []
+            for p in pts2:
+                while len(lower) >= 2 and cross(lower[-2], lower[-1], p) <= 1e-12:
+                    lower.pop()
+                lower.append(p)
+            upper = []
+            for p in reversed(pts2):
+                while len(upper) >= 2 and cross(upper[-2], upper[-1], p) <= 1e-12:
+                    upper.pop()
+                upper.append(p)
+            return set(lower[:-1] + upper[:-1])
+
+        filtered = set(pts)
+        for axis in (0, 1, 2):
+            by_slice: dict[float, list[tuple[float, float]]] = {}
+            for p in filtered:
+                k = p[axis]
+                rem = tuple(p[i] for i in range(3) if i != axis)
+                by_slice.setdefault(k, []).append(rem)
+            keep_axis = set()
+            for k, rem_pts in by_slice.items():
+                for u, v in _hull2d(rem_pts):
+                    if axis == 0:
+                        keep_axis.add((k, u, v))
+                    elif axis == 1:
+                        keep_axis.add((u, k, v))
+                    else:
+                        keep_axis.add((u, v, k))
+            filtered &= keep_axis
+
+        arr = np.array(sorted(filtered), dtype=float)
+        n = len(arr)
+        idx = np.arange(n, dtype=float)
+        p_pts = arr + 1e-11 * np.column_stack([
+            np.sin(idx * 1.1 + 0.3),
+            np.cos(idx * 1.7 + 0.7),
+            np.sin(idx * 2.3 + 1.1),
+        ])
+        i0 = 0
+        i1 = int(np.argmax(np.linalg.norm(p_pts - p_pts[i0], axis=1)))
+        v1 = p_pts[i1] - p_pts[i0]
+        i2 = int(np.argmax(np.linalg.norm(np.cross(p_pts - p_pts[i0], v1), axis=1)))
+        n12 = np.cross(p_pts[i1] - p_pts[i0], p_pts[i2] - p_pts[i0])
+        i3 = int(np.argmax(np.abs((p_pts - p_pts[i0]) @ n12)))
+        init = [i0, i1, i2, i3]
+        faces = [(i0, i1, i2), (i0, i2, i3), (i0, i3, i1), (i1, i3, i2)]
+        center = p_pts[init].mean(axis=0)
+        faces = [
+            (a, c, b)
+            if np.dot(np.cross(p_pts[b] - p_pts[a], p_pts[c] - p_pts[a]), p_pts[a] - center) < 0
+            else (a, b, c)
+            for a, b, c in faces
+        ]
+        used = set(init)
+        for p_idx in range(n):
+            if p_idx in used:
+                continue
+            p = p_pts[p_idx]
+            visible = []
+            keep = []
+            for f in faces:
+                a, b, c = f
+                normal = np.cross(p_pts[b] - p_pts[a], p_pts[c] - p_pts[a])
+                if np.dot(normal, p - p_pts[a]) > 0:
+                    visible.append(f)
+                else:
+                    keep.append(f)
+            if not visible:
+                continue
+            vis_edges = {(x, y) for a, b, c in visible for x, y in ((a, b), (b, c), (c, a))}
+            for a, b in vis_edges:
+                if (b, a) not in vis_edges:
+                    keep.append((a, b, p_idx))
+            faces = keep
+        origin = arr.mean(axis=0)
+        vol = 0.0
+        area = 0.0
+        for a, b, c in faces:
+            pa, pb, pc = arr[a], arr[b], arr[c]
+            cr = np.cross(pb - pa, pc - pa)
+            area += 0.5 * float(np.linalg.norm(cr))
+            vol += float(np.dot(pa - origin, cr)) / 6.0
+        return float(abs(vol)), float(area)
 
 
 def _metrics(coords:set[tuple[int,int,int]],cell:float)->dict[str,Any]:

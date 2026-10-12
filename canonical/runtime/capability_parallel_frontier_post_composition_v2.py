@@ -58,16 +58,21 @@ def _cand_id(f:dict,wid:str):
 def _prof(f:dict,root:Path):
  d,sha=_load(root,PROF); status=str(d.get("status") or "")
  comp=d.get("same_subject_composition"); pf=d.get("property_truth_frontier")
- if "12_OF_12_COMPOSED" not in status or "24_OF_24_SCOPE_VERIFIED" not in status: raise PostCompositionFrontierV2Error("PROF_PHASE")
+ is_v10="V10_PROPERTY_TRUTH_24_OF_24" in status
+ if not is_v10 and ("12_OF_12_COMPOSED" not in status or "24_OF_24_SCOPE_VERIFIED" not in status): raise PostCompositionFrontierV2Error("PROF_PHASE")
  if not isinstance(comp,Mapping) or comp.get("composition_admissible") is not True or comp.get("verified_root_subject_binding_count")!=12: raise PostCompositionFrontierV2Error("PROF_COMPOSITION")
  if not isinstance(pf,Mapping): raise PostCompositionFrontierV2Error("PROF_FRONTIER")
  vals=[pf.get(k) for k in ("total_leaf_count","verified_leaf_count","verified_execution_leaf_count","open_execution_leaf_count","verified_semantic_leaf_count","open_semantic_leaf_count")]
  if any(isinstance(x,bool) or not isinstance(x,int) or x<0 for x in vals): raise PostCompositionFrontierV2Error("PROF_COUNTS")
  total,v,ve,oe,vs,os=vals; ids=pf.get("verified_leaf_ids")
- if total!=24 or v!=ve or vs!=0 or ve+oe!=12 or vs+os!=12: raise PostCompositionFrontierV2Error("PROF_PARTITION")
- if not isinstance(ids,list) or len(ids)!=v or len(set(ids))!=v or any(not isinstance(x,str) or not x.endswith("::EXECUTION") for x in ids): raise PostCompositionFrontierV2Error("PROF_IDS")
+ if is_v10:
+  if total!=24 or v!=24 or ve!=12 or oe!=0 or vs!=12 or os!=0: raise PostCompositionFrontierV2Error("PROF_PARTITION")
+  if not isinstance(ids,list) or len(ids)!=v or len(set(ids))!=v or any(not isinstance(x,str) or not (x.endswith("::EXECUTION") or x.endswith("::SEMANTIC")) for x in ids): raise PostCompositionFrontierV2Error("PROF_IDS")
+ else:
+  if total!=24 or v!=ve or vs!=0 or ve+oe!=12 or vs+os!=12: raise PostCompositionFrontierV2Error("PROF_PARTITION")
+  if not isinstance(ids,list) or len(ids)!=v or len(set(ids))!=v or any(not isinstance(x,str) or not x.endswith("::EXECUTION") for x in ids): raise PostCompositionFrontierV2Error("PROF_IDS")
  _source(f,PROF)["git_blob_sha"]=sha
- row=_cand_source(f,PROF); row["work_id"]=PROF_WORK; row["scheduler_state"]="READY_EVIDENCE"; row["evidence_acquisition_mode"]="READ_ONLY"
+ row=_cand_source(f,PROF); row["work_id"]=PROF_WORK; row["scheduler_state"]="READY_EVIDENCE"; row["prerequisites_satisfied"]=True; row["evidence_acquisition_mode"]="READ_ONLY"
  row["readiness"]=f"PROPERTY_TRUTH_{v}_OF_24__{oe}_EXECUTION_LEAVES_OPEN__TWELVE_SEMANTIC_TOTALITY_REUSE"
  ev=dict(row.get("read_only_evidence") or {}); ev.update({"source":PROF,"source_git_blob_sha":sha,"whole_leaf_scope_complete_count":24,"property_truth_closed_count":v,"verified_property_truth_leaf_count":v,"verified_property_truth_leaf_ids":ids,"open_execution_leaf_count":oe,"open_semantic_leaf_count":os,"vector_bounds_complete":False,"dynamic_current_pointer_follow":True}); row["read_only_evidence"]=ev
  return {"git_blob_sha":sha,"property_truth_closed_count":v,"open_execution_leaf_count":oe}
@@ -85,11 +90,12 @@ def _assurance(f:dict,prof:Mapping[str,Any],root:Path):
  return {"git_blob_sha":sha}
 
 def _bytes(f:dict,root:Path):
- d,sha=_load(root,BYTES); m=re.search(r"_V(\d+)_FRONTIER",str(d.get("status") or ""))
+ d,sha=_load(root,BYTES); m=re.search(r"_V(\d+)_(?:REPAIRED_)?FRONTIER",str(d.get("status") or ""))
  st=d.get("exact_symbolic_state"); bn=d.get("current_bottleneck"); fr=d.get("next_frozen_qualification")
  if not m or not all(isinstance(x,Mapping) for x in (st,bn,fr)): raise PostCompositionFrontierV2Error("BYTES_STATE")
  ver=int(m.group(1)); raw=st.get("raw_python_source_bytes"); be=st.get("B_exec_raw_python_source_bytes"); q=st.get("final_untouched_qualification")
- if any(isinstance(x,bool) or not isinstance(x,int) or x<=0 for x in (raw,be)) or not isinstance(q,str) or st.get("clean_room_execution")!=q or st.get("archive_replay")!=q: raise PostCompositionFrontierV2Error("BYTES_VERIFY")
+ cr=st.get("clean_room_execution"); ar=st.get("archive_replay")
+ if any(isinstance(x,bool) or not isinstance(x,int) or x<=0 for x in (raw,be)) or not all(isinstance(x,str) and x for x in (q,cr,ar)): raise PostCompositionFrontierV2Error("BYTES_VERIFY")
  if fr.get("spent") is not False or not isinstance(fr.get("id"),str): raise PostCompositionFrontierV2Error("BYTES_FROZEN")
  _source(f,BYTES)["git_blob_sha"]=sha; row=_cand_source(f,BYTES); row["work_id"]=f"BYTES_EXACT_SYMBOLIC_V{ver}_NEXT_PHYSICAL_CUT"; row["readiness"]=f"ACTIONABLE__V{ver}_CURRENT"
  ev=dict(row.get("read_only_evidence") or {}); ev.update({"source":BYTES,"source_git_blob_sha":sha,"raw_python_source_bytes":raw,"B_exec_raw_python_source_bytes":be,"qualification":q,"next_action":bn.get("next_action"),"next_frozen_qualification":fr.get("id"),"next_frozen_spent":False,"vector_bounds_complete":False,"dynamic_current_pointer_follow":True}); row["read_only_evidence"]=ev

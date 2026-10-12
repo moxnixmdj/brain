@@ -143,7 +143,7 @@
     "static_projection_snapshots_authoritative": false,
     "dynamic_current_projection": {
       "path": "canonical/runtime/current_one_shot_projection_v1.py",
-      "git_blob_sha": "18ca8958632625c8562e47adca87bfd1d4fdc4b7",
+      "git_blob_sha": "f7978dcd871f40ac5d4a7cea252307aaa889b2c8",
       "authoritative_for_moving_r2_and_terminal": true,
       "stable_v1_v2_pointer_mismatch_fails_closed": true,
       "snapshot_drift_is_observable_not_failure": true,
@@ -274,7 +274,7 @@
   },
   "frontdoor_binding": {
     "path": "canonical/runtime/unified_cognitive_fabric_v1.py",
-    "git_blob_sha": "5eaea605c4e441ef33180bd76a951a9f973dc40f",
+    "git_blob_sha": "d0b1cceffc8c2b39ce1157afa193fea83d76c8ab",
     "mode": "ONE_SHOT_REALITY_CLOSURE",
     "role": "META_ORCHESTRATOR_AUTO_FALLBACK_AFTER_NORMAL_R2__NOT_PRIMARY_ROUTER",
     "verification_path": "canonical/verification/ONE_SHOT_CANONICAL_FRONTDOOR_INTEGRATION_VERIFY_20261009_V2.json",
@@ -374,7 +374,7 @@
   "dynamic_finance_wake_effect_projection_reconciliation": {
     "status": "BOUND_TO_DYNAMIC_CURRENT_PROJECTION__MOVING_R2_RESOLVED_AT_CALL_TIME__UNKNOWN_FUTURE_WAKES_PRESERVED_SEPARATELY__ZERO_CREDIT",
     "runtime_path": "canonical/runtime/current_one_shot_projection_v1.py",
-    "runtime_git_blob_sha": "650079f472955d49ab81f28e3d69c5f1d8d5ef4f",
+    "runtime_git_blob_sha": "f7978dcd871f40ac5d4a7cea252307aaa889b2c8",
     "current_known_finance_wake_count": 11,
     "current_known_decision_effect_class_count": 3,
     "static_r2_snapshot_rebinding_required_after_future_semantic_progress": false,
@@ -386,7 +386,7 @@
     "pointer_semantics": "MUTABLE_CURRENT_PATH_IDENTITY_AUTHORITATIVE",
     "dynamic_projection": {
       "path": "canonical/runtime/current_one_shot_projection_v1.py",
-      "git_blob_sha": "18ca8958632625c8562e47adca87bfd1d4fdc4b7",
+      "git_blob_sha": "f7978dcd871f40ac5d4a7cea252307aaa889b2c8",
       "reads_current_pointer_at_call_time": true,
       "exact_descendant_blob_validation": true,
       "scheduler_baseline_distinguished_from_effective_default_runtime": true,

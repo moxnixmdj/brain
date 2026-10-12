@@ -32,8 +32,9 @@ def evaluate()->dict[str,Any]:
  by={x.get("predicate_id"):x for x in resid.get("compressed_residuals",[]) if isinstance(x,Mapping)}
  if by.get("FINANCE_UNCOVERED_SCOPE_AUDIT",{}).get("current_residual")!="TWO_FROZEN_DIRECT_ORACLE_LEAVES": e.append("FINANCE_LEAF_DRIFT")
  if not str(by.get("UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",{}).get("current_residual","")).startswith("TWO_FROZEN_INFORMATION_SAFE_DIRECT_ORACLE_LEAVES"): e.append("UNKNOWN_LEAF_DRIFT")
- syn=by.get("SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",{}).get("current_residual",{})
- if syn.get("missing_scope_relation") is not True: e.append("SYNTHESIS_SCOPE_RELATION_DRIFT")
+ syn=by.get("SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR") or {}
+ syn_res=syn.get("current_residual") if isinstance(syn.get("current_residual"),Mapping) else {}
+ if syn_res.get("missing_scope_relation") is not True and syn.get("scope_relation_closed") is not True: e.append("SYNTHESIS_SCOPE_RELATION_DRIFT")
  truth=comp.get("truth",{})
  if truth.get("current_admissible_scoped_proved")!=4 or truth.get("current_open")!=8: e.append("COMPOSITION_DEPENDENCY_DRIFT")
  if e:
