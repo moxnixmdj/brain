@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CHARTOGRAPHY_PUBLIC_DECLARATION_CAPABILITY_COVERAGE_V1",
-  "date": "2026-10-11",
+  "date": "2026-10-12",
   "status": "ACTIVE__SCHEDULING_EVIDENCE_ONLY__NO_CAPABILITY_RELATION_CLOSURE",
   "benchmark": "Chartography",
   "public_source": {
@@ -56,6 +56,10 @@
     {
       "capability_id": "chart.raster.direct_curve_label_family_rank.v1",
       "verification": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_SPRITE_INDEPENDENT_VERIFY_20261011_V1.json"
+    },
+    {
+      "capability_id": "chart.raster.axis_title_unit_binding.v1",
+      "verification": "canonical/verification/CHART_AXIS_TITLE_UNIT_BINDING_V1_INDEPENDENT_VERIFY_20261012.json"
     }
   ],
   "declared_family_coverage": [
@@ -68,7 +72,8 @@
         "UNIQUE_CURVE_Y_AT_X",
         "UNIQUE_CURVE_X_AT_Y_OR_THRESHOLD_INTERSECTION",
         "DIRECT_ENDPOINT_CURVE_LABEL_BINDING_WHERE_PRESENT",
-        "DIRECT_LABELED_CURVE_FAMILY_RANK_OR_NEAREST_QUERY"
+        "DIRECT_LABELED_CURVE_FAMILY_RANK_OR_NEAREST_QUERY",
+        "EXPLICIT_AXIS_TITLE_ROLE_AND_UNIT_BINDING"
       ],
       "open": [
         "SURVIVAL_DOMAIN_SEMANTICS",
@@ -82,7 +87,8 @@
         "LINEAR_OR_LOG10_AXES",
         "LEGEND_COLOR_BINDING",
         "UNIQUE_CURVE_Y_AT_X",
-        "UNIQUE_CURVE_X_AT_Y_OR_THRESHOLD_INTERSECTION"
+        "UNIQUE_CURVE_X_AT_Y_OR_THRESHOLD_INTERSECTION",
+        "EXPLICIT_AXIS_TITLE_ROLE_AND_UNIT_BINDING"
       ],
       "open": [
         "MULTI_PANEL_OR_MAGNITUDE_PHASE_BINDING",
@@ -97,7 +103,8 @@
         "RASTER_CURVE_GEOMETRY",
         "UNIQUE_CURVE_X_AT_Y_OR_THRESHOLD_INTERSECTION",
         "DIRECT_ENDPOINT_CURVE_LABEL_BINDING",
-        "DIRECT_LABELED_CURVE_FAMILY_RANK_OR_NEAREST_QUERY"
+        "DIRECT_LABELED_CURVE_FAMILY_RANK_OR_NEAREST_QUERY",
+        "EXPLICIT_AXIS_TITLE_ROLE_AND_UNIT_BINDING"
       ],
       "open": [
         "GROWTH_PERCENTILE_DOMAIN_SEMANTICS"
@@ -108,7 +115,8 @@
       "state": "OPEN_MAJOR_RESIDUAL",
       "verified_support": [
         "OCR_SENSOR",
-        "RASTER_COLOR_COMPONENTS"
+        "RASTER_COLOR_COMPONENTS",
+        "EXPLICIT_AXIS_TITLE_ROLE_AND_UNIT_BINDING_WHERE_PRESENT"
       ],
       "open": [
         "ISOLINE_TOPOLOGY",
@@ -122,7 +130,8 @@
       "state": "OPEN_MAJOR_RESIDUAL",
       "verified_support": [
         "OCR_SENSOR",
-        "RASTER_COLOR_COMPONENTS"
+        "RASTER_COLOR_COMPONENTS",
+        "EXPLICIT_AXIS_TITLE_ROLE_AND_UNIT_BINDING_WHERE_PRESENT"
       ],
       "open": [
         "FLOW_BAND_TOPOLOGY",
@@ -136,7 +145,8 @@
       "state": "OPEN_MAJOR_RESIDUAL",
       "verified_support": [
         "OCR_SENSOR",
-        "CALIBRATED_AXES"
+        "CALIBRATED_AXES",
+        "EXPLICIT_AXIS_TITLE_ROLE_AND_UNIT_BINDING_WHERE_PRESENT"
       ],
       "open": [
         "CANDLE_BODY_WICK_DETECTION",
@@ -147,6 +157,23 @@
     }
   ],
   "candidate_shared_residuals": [
+    {
+      "id": "AXIS_TITLE_AND_UNIT_BINDING",
+      "public_declared_family_support": [
+        "KAPLAN_MEIER",
+        "BODE_PLOT",
+        "GROWTH_CHART",
+        "CONTOUR_MAP",
+        "CANDLESTICK",
+        "SANKEY"
+      ],
+      "estimated_implementation_wall_clock_class": "SMALL_TO_MEDIUM",
+      "ownership_route": "BRAIN_NATIVE_DETERMINISTIC_COMPOSITION",
+      "selection_state": "VERIFIED_PROMOTED__21_AUTHORED__14_INDEPENDENT__REAL_ROTATED_OCR_PASS",
+      "proposition_closure_authority": false,
+      "verification": "canonical/verification/CHART_AXIS_TITLE_UNIT_BINDING_V1_INDEPENDENT_VERIFY_20261012.json",
+      "scope_note": "EXPLICIT_FINITE_ROLE_AND_UNIT_BINDING_ONLY__NO_UNIT_CONVERSION_OR_DOMAIN_SEMANTICS"
+    },
     {
       "id": "CURVE_X_AT_Y_INTERSECTION",
       "public_declared_family_support": [
@@ -159,6 +186,20 @@
       "selection_state": "VERIFIED_PROMOTED__17_OF_17_TOTAL_CHECKS",
       "proposition_closure_authority": false,
       "verification": "canonical/verification/CHART_CURVE_X_AT_Y_QUERY_V1_VERIFY_20261011.json"
+    },
+    {
+      "id": "CURVE_DOMAIN_SEMANTIC_COMPILER",
+      "public_declared_family_support": [
+        "KAPLAN_MEIER",
+        "BODE_PLOT",
+        "GROWTH_CHART"
+      ],
+      "estimated_implementation_wall_clock_class": "SMALL_TO_MEDIUM",
+      "ownership_route": "BRAIN_NATIVE_DETERMINISTIC_COMPOSITION",
+      "selection_state": "NEXT_CANDIDATE__REUSE_SEARCH_FOUND_NO_BOUND_CURVE_DOMAIN_IMPLEMENTATION",
+      "proposition_closure_authority": false,
+      "prerequisite": "chart.raster.axis_title_unit_binding.v1",
+      "scope_note": "SEARCH_EXISTING_BRAIN_BEFORE_BUILDING__KEEP_SURVIVAL_CENSORING_BODE_TRANSFER_FUNCTION_AND_GROWTH_PERCENTILE_SEMANTICS_EXPLICIT_AND_FAIL_CLOSED"
     },
     {
       "id": "DIRECT_CURVE_LABEL_BINDING_AND_FAMILY_RANK",
@@ -210,7 +251,7 @@
       "proposition_closure_authority": false
     }
   ],
-  "selected_next_action": "RECOMPUTE_POST_DIRECT_LABEL_CAPABILITY_COVERAGE_AND_RERANK_HIGHEST_REUSE_TO_WALL_CLOCK_RESIDUAL",
+  "selected_next_action": "SEARCH_CURRENT_BRAIN_FOR_REUSABLE_CURVE_DOMAIN_SEMANTICS_THEN_BUILD_ONLY_THE_UNCOVERED_BOUNDED_RESIDUAL",
   "relation_to_target": {
     "comparison_predicate": "BRAIN_CAPABILITY_NONINFERIOR_TO_TARGET_ON_BOUND_SCOPE__CHARTOGRAPHY_TOOLS_GE_89",
     "current_relation": "OPEN_UNBOUND_RELATION",
