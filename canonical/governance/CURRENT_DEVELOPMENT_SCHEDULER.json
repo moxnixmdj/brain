@@ -1,10 +1,10 @@
 {
   "schema": "PROJECT_BRAIN_CURRENT_DEVELOPMENT_SCHEDULER_POINTER_V1",
-  "date": "2026-10-10",
-  "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V15__PROFESSIONAL_24_OF_24__CHECKPOINT_ROWS_ALL_WAKE_GATED__GITHUB_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__0_SAME_INFORMATION_CHECKPOINT_RUNS__CAPABILITY_FIRST_PRIMARY__ZERO_GLOBAL_CREDIT",
-  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V15.json",
-  "runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
-  "primary_entrypoint": "canonical.runtime.capability_parallel_frontier_post_composition_v2.plan_current_post_composition_frontier",
+  "date": "2026-10-13",
+  "status": "ACTIVE__POST_COMPOSITION_DYNAMIC_CURRENTNESS_V16__PROFESSIONAL_24_OF_24__CHECKPOINT_ROWS_ALL_WAKE_GATED__GITHUB_HOSTED_ACTIONS_BILLING_PRESTART_BLOCK__0_SAME_INFORMATION_CHECKPOINT_RUNS__CAPABILITY_FIRST_PRIMARY__ZERO_GLOBAL_CREDIT__V3_V91_CURRENTNESS_REPAIR_BOUND",
+  "authoritative_activation": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261013_V16.json",
+  "runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v3.py",
+  "primary_entrypoint": "canonical.runtime.capability_parallel_frontier_post_composition_v3.plan_current_post_composition_frontier",
   "objective": "MAXIMIZE_REUSABLE_VERIFIED_CAPABILITY_GENERALIZATION_RELIABILITY_AND_EFFICIENCY_PER_RESOURCE_AND_MINIMIZE_WALL_CLOCK_THROUGH_SAFE_PARALLELISM",
   "checkpoint_policy": "OPUS_5_5_IS_SECONDARY_FRONTIER_AUDIT__NOT_PRIMARY_DEVELOPMENT_GATE",
   "terminal_autopilot_policy": "NEW_CHECKPOINT_DISPATCH_REQUIRES_EXPLICIT_CAPABILITY_FIRST_ADMISSION",
@@ -139,9 +139,9 @@
     "escape_logically_open_checkpoint_count": 12
   },
   "post_composition_currentness_invariant": {
-    "runtime_path": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
-    "runtime_git_blob_sha": "ea467536bb383a2caa2a4f03f75e31d18d871bb3",
-    "focused_test_path": "canonical/tests/test_capability_parallel_frontier_post_composition_v2.py",
+    "runtime_path": "canonical/runtime/capability_parallel_frontier_post_composition_v3.py",
+    "runtime_git_blob_sha": "34d6c54828746d09b22767f3565a1e3893994672",
+    "focused_test_path": "canonical/tests/test_capability_parallel_frontier_post_composition_v3.py",
     "rule": "SUPPORTED_PROFESSIONAL_ASSURANCE_BYTES_R2_CURRENT_POINTERS_ARE_REPROJECTED_ONLY_AFTER_FAMILY_INVARIANTS_PASS__UNMODELED_SOURCE_DRIFT_REMAINS_EXACT_HASH_FAIL_CLOSED",
     "field_scoped_zero_reality_reuse": {
       "authority": "canonical/governance/TWO_CLOCK_SEMANTIC_VALIDITY_AND_SCHEDULER_AUTHORITY_20261011_V4.json",

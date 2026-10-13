@@ -1789,7 +1789,7 @@
     "symbolic_admission_predicate_successor_deployed": true,
     "terminal_execution_root_v1_bound": true,
     "primary_terminal_scheduler_object_count": 1,
-    "primary_terminal_scheduler_object": "PROVE_ONE_SOUND_TERMINAL_ACCEPTANCE_ROUTE",
+    "primary_terminal_scheduler_object": "CLOSE_AGGREGATE_FROZEN_PROTOCOL_AND_OWNERSHIP_PREDICATE",
     "D_finality_is_independent_parallel_research_blocker": false,
     "D_finality_post_ABC_sequence": [
       "FREEZE_FINAL_CREDITED_ROUTE_BYTES",
