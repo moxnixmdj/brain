@@ -1,0 +1,145 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_OPUS_CHECKPOINT_CLAIM_AGGREGATOR_20261013_V1",
+  "date": "2026-10-13",
+  "action_id": "OPUS_CHECKPOINT_CLAIM_AGGREGATOR_20261013_V1",
+  "action_kind": "RECONCILE_FRONTIER",
+  "status": "EXECUTED__LOCAL_VERIFICATION_PASS",
+  "issue_reference": 3743,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "causal_blocker": "CLAIM_SCOPED_OPUS_CHECKPOINT_AGGREGATOR_ABSENT__ISSUE_3743",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::CLAIM_SCOPED_OPUS_CHECKPOINT_AGGREGATOR_ABSENT__ISSUE_3743",
+  "governance_change": false,
+  "probe_specific": false,
+  "highest_leverage_now": true,
+  "expected_parent_frontier_change": "OPUS_CHECKPOINT_COMPLETION_NOW_HAS_A_CLAIM_SCOPED_SCOPE_COMPLETE_AGGREGATION_OBJECT_PER_3730__STALE_CLOSURE_MANIFEST_PIN_REBOUND__PRE_EXISTING_RED_ACCEPTANCE_PROJECTION_SUITE_GREEN__ZERO_CREDIT",
+  "stop_condition": "STOP_AFTER_AGGREGATOR_EMITS_SCOPE_COMPLETE_MANIFEST_AND_ALL_VALIDATING_SUITES_GREEN__NO_FURTHER_AGGREGATOR_OR_POINTER_EDITS_WITHIN_THIS_INTENT",
+  "why_highest_leverage": "THE_CLOSE_AGGREGATE_FROZEN_PROTOCOL_AND_OWNERSHIP_PREDICATE_IS_THE_SINGLE_REMAINING_TERMINAL_BLOCKER_AND_IT_CANNOT_BE_EVALUATED_CLAIM_SCOPED_WITHOUT_THIS_AGGREGATOR__EVERY_FUTURE_FAMILY_CLOSURE_MUST_LAND_AS_A_CLAIM_INSTANCE_UNDER_THE_FROZEN_EPOCH",
+  "mutations_summary": {
+    "canonical/runtime/opus_checkpoint_claim_aggregator_v1.py": "new fail-closed claim-scoped checkpoint aggregator: recomputes the obligation basis from both current pinned sources (TERMINAL_CLOSURE_MANIFEST_V1 + ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V3), verifies every source pin against exact git blobs, compiles 19 CHECKPOINT_ACCEPTANCE claims under the #3730 canonical core with exact claim_ids, deduplicates manifest/residual aliases only with recorded equivalence proofs preserving every requirement, freezes a content-addressed epoch over five bound sources, emits the manifest with an explicit scope-completeness theorem, and aggregates completion iff scope-complete AND every claim sound and satisfied AND reducer closure achieved, with GLOBAL_OPEN_ENDED_MISSION_COMPLETE non-derivable",
+    "canonical/governance/OPUS_CHECKPOINT_CLAIM_MANIFEST_V1.json": "emitted content-addressed manifest: epoch OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c, 19 required claims, 7 satisfied, 12 open, checkpoint_complete false, zero credit",
+    "canonical/tests/test_opus_checkpoint_claim_aggregator_v1.py": "17 fail-closed tests covering basis recomputation, claim-core validity, epoch freezing, alias-proof requirement, credit/epoch/claim-id tamper, bijection, theorem drift, non-derivability, r4 authority binding, and current verify",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "stale terminal_closure_manifest_current pin rebound from 94123f54 (6_OF_19 note) to 2bce4a68 (7_OF_19 note); the aggregator fails closed on stale source pins so the pin was advanced to current bytes",
+    "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json": "v3 adapter refresh after the terminal-authority edit; all 11 source_set rows current",
+    "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json": "current_live_work_frontier observation pin rebound to the refreshed frontier blob",
+    "canonical/tests/test_recovery_acceptance_promotion_v2.py": "21 stale pins advanced to the current acceptance epoch (7/19 families, 18/38 atomic via ledger V3, V2 ledger live at 16/22, SELF_VERIFICATION promoted to VERIFIED_OWNED_EQUAL_OR_BETTER); suite was 3-failure red at base fb7928135 in a clean worktree"
+  },
+  "local_verification": {
+    "aggregator_suite": "17_OF_17_PASS",
+    "unittest_battery": "76_OK_12_SKIPPED_RETIRED_V2",
+    "pytest_battery": "97_PASS",
+    "verify_current": "PASS__EMITTED_MANIFEST_CURRENT_AND_SCOPE_COMPLETE",
+    "terminal_reality_gate": "BLOCKERS_CLOSE_AGGREGATE_ONLY",
+    "live_chain_pin_audit": "ALL_CURRENT"
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "target_truth_obligations": [
+      "OPUS55_ACCEPTANCE:ADVANCED_AGENTIC_CODING",
+      "OPUS55_ACCEPTANCE:PROFESSIONAL_KNOWLEDGE_WORK"
+    ],
+    "proof_state_reachability": "CONTROL_PLANE_AGGREGATION_PREREQUISITE_ONLY__THIS_INTENT_CHANGES_NO_V22_OBLIGATION_STATE__IT_FREEZES_THE_CLAIM_SCOPED_AGGREGATION_OBJECT_UNDER_WHICH_THE_12_OPEN_FAMILY_OBLIGATIONS_MUST_LATER_CLOSE",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "CLAIM_SCOPED_CHECKPOINT_AGGREGATION",
+      "falsifier_id": "FAIL_CLOSED_AGGREGATOR_SUITE_PLUS_VERIFY_CURRENT",
+      "decisive_question": "DOES_THE_AGGREGATOR_RECOMPUTE_THE_BASIS_FROM_CURRENT_AUTHORITIES_BIND_EVERY_CLAIM_UNDER_THE_3730_CORE_AND_FAIL_CLOSED_ON_EVERY_TAMPER",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [],
+      "no_known_counterexample_reason": "17_OF_17_TAMPER_TESTS_FAIL_CLOSED__VERIFY_CURRENT_PASSES_ON_LIVE_BYTES__ALL_PINNED_SOURCES_VERIFIED_EXACT"
+    }
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "canonical_base_commit": "fb7928135034d5b567c6128996199211f36fd18a",
+    "real_outcome": "OPUS_CHECKPOINT_COMPLETION_HAS_A_CLAIM_SCOPED_SCOPE_COMPLETE_AGGREGATION_OBJECT_PER_3730_AND_THE_PRE_EXISTING_RED_ACCEPTANCE_PROJECTION_SUITE_IS_GREEN",
+    "required_capability": "CLAIM_SCOPED_CHECKPOINT_AGGREGATION_CAPABILITY__RECOMPUTE_BASIS_FREEZE_CLAIMS_PROVE_SCOPE_COMPLETENESS_FAIL_CLOSED",
+    "routes_considered": [
+      "REUSE_V22_MINIMUM_CUT_AS_THE_AGGREGATOR_UNCHANGED",
+      "AGGREGATE_ONLY_THE_HISTORICAL_30_TRUTH_BASIS_VERIFICATION",
+      "BUILD_CLAIM_SCOPED_AGGREGATOR_OVER_CURRENT_TERMINAL_AUTHORITY_WITH_ALIAS_PROOFS",
+      "DEFER_UNTIL_CI_UNBLOCKED"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REUSE_V22_UNCHANGED_BYPASSED_IT_PREDATES_CLAIM_ID_SCOPE_SHA256_SEMANTICS_SHA256_BINDING_AND_BINDS_HISTORICAL_ROUTE_STATE",
+      "HISTORICAL_30_TRUTH_BASIS_BYPASSED_IT_PROVES_A_HISTORICAL_BASIS_NOT_CURRENT_CLAIM_INSTANCE_TOTALALITY_UNDER_3730",
+      "DEFER_BYPASSED_AS_TRUTH_DEBT_COMPOUNDING"
+    ],
+    "selected_surviving_route": "BUILD_CLAIM_SCOPED_AGGREGATOR_OVER_CURRENT_TERMINAL_AUTHORITY_WITH_ALIAS_PROOFS",
+    "why_selected_route_is_fastest_sufficient": "THE_ISSUE_EXPLICITLY_FORBIDS_TREATING_THE_EXISTING_BASIS_AS_THE_AGGREGATOR_UNCHANGED_AND_FORBIDS_A_SECOND_PEER_COMPLETENESS_ARCHITECTURE__THE_ONLY_COMPLIANT_ROUTE_IS_THE_CLAIM_SCOPED_AGGREGATOR_REUSING_THE_3730_CORE_THE_3739_REPAIRED_REGISTRY_GUARD_THE_TERMINAL_CLOSURE_REDUCER_AND_BOTH_CURRENT_PINNED_BASIS_SOURCES",
+    "expected_parent_level_state_change": "OPUS_CHECKPOINT_COMPLETION_NOW_HAS_A_CLAIM_SCOPED_SCOPE_COMPLETE_AGGREGATION_OBJECT_PER_3730__STALE_CLOSURE_MANIFEST_PIN_REBOUND__PRE_EXISTING_RED_ACCEPTANCE_PROJECTION_SUITE_GREEN__ZERO_CREDIT",
+    "stop_condition": "STOP_AFTER_AGGREGATOR_EMITS_SCOPE_COMPLETE_MANIFEST_AND_ALL_VALIDATING_SUITES_GREEN__NO_FURTHER_AGGREGATOR_OR_POINTER_EDITS_WITHIN_THIS_INTENT",
+    "obs_goal": {
+      "real_outcome": "CLAIM_SCOPED_CHECKPOINT_AGGREGATION_TRUTH",
+      "proxy_goals_deleted": "NO_PR_COUNT_NO_COMMIT_COUNT_NO_WORKFLOW_COUNT_CREDIT",
+      "surviving_necessity": "THE_CLOSE_AGGREGATE_TERMINAL_BLOCKER_CANNOT_BE_EVALUATED_CLAIM_SCOPED_WITHOUT_THIS_OBJECT"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": "V22_MINIMUM_CUT_TERMINAL_CLOSURE_REDUCER_REALITY_GATE_CLAIM_SCOPE_GUARD_REGISTRY_GUARD_ALL_INSPECTED_AND_REUSED",
+      "external_existing_routes_checked": "NONE_REQUIRED__ALL_SUBSTRATE_IS_REPO_INTERNAL",
+      "capability_work_deleted": "NOTHING_DELETED__NEW_AGGREGATION_CAPABILITY_COMPOSED_FROM_EXISTING_VERIFIED_PARTS",
+      "surviving_gap": "12_OPEN_FAMILY_CLAIMS_REMAIN_UNSATISFIED_AND_REDUCER_CLOSURE_PREDICATES_REMAIN_OPEN"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC__CONTROL_PLANE_OBJECT_ONLY",
+      "delete_bypass_substitute_options": "REUSED_3730_CORE_3739_REGISTRY_GUARD_REDUCER_AND_BOTH_PINNED_BASIS_SOURCES_INSTEAD_OF_NEW_THEORY",
+      "surviving_causal_blocker": "HOSTED_CI_REVERIFICATION_REQUIRES_BILLING_RESOLUTION_USER_ACTION"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": ["DELETE", "BYPASS", "REUSE", "SUBSTITUTE", "WHITE_BOX_HARVEST", "COMPOSE", "CONFIGURE", "INTEGRATE"],
+      "routes_ranked": ["1_BUILD_CLAIM_SCOPED_AGGREGATOR", "2_HISTORICAL_BASIS_ONLY", "3_REUSE_V22_UNCHANGED", "4_DEFER"],
+      "losing_routes_reason": "NON_COMPLIANT_WITH_3730_SCOPE_COMPLETENESS_OR_COMPOUND_TRUTH_DEBT",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "TAMPER_TESTS_ARE_SYNTHETIC_BY_DESIGN_TO_PROVE_FAIL_CLOSED__CURRENT_STATE_VERIFIED_AGAINST_LIVE_BYTES"
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": "NOTHING_SUPERSEDED__V22_MINIMUM_CUT_RETAINS_ITS_SCHEDULING_ROLE",
+      "adjacent_capabilities_absorbed": "3730_CORE_3739_REGISTRY_GUARD_TERMINAL_CLOSURE_REDUCER_REALITY_GATE",
+      "fresh_reuse_plan": "ALL_PARTS_REUSED_FROM_CURRENT_HEAD_WITH_ZERO_NEW_EXTERNAL_REALITY"
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": "ISSUE_3743_ANALYSIS_CACHED_IN_INTENT_AND_RECEIPT",
+      "search_stop_decision": "SEARCH_STOPPED__ALL_SUBSTRATE_IDENTIFIED_AND_CONTENT_ADDRESSED",
+      "affected_layers_only_on_revalidation": true
+    },
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER_ACTION__NO_NEW_ROUTE_DISCOVERY__COMPOSES_EXISTING_VERIFIED_SUBSTRATE_ONLY"
+    }
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_FRESH_REALITY_CONSUMED",
+    "THE_7_SATISFIED_CLAIMS_ARE_PRE_EXISTING_VERIFIED_STATES_NEWLY_FROZEN_AS_CLAIM_INSTANCES_NOT_NEW_PASSES",
+    "CHECKPOINT_COMPLETION_IS_NOT_GLOBAL_OPEN_ENDED_MISSION_COMPLETION"
+  ]
+}

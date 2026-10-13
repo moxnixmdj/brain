@@ -1,0 +1,880 @@
+{
+  "accounting": {
+    "acceptance_credit_delta": 0,
+    "incremental_spend_usd": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "aggregate": {
+    "aggregation_rule": "CHECKPOINT_COMPLETE_IFF_MANIFEST_SCOPE_COMPLETE_AND_EVERY_REQUIRED_CLAIM_SOUND_AND_SATISFIED_UNDER_THE_SAME_FROZEN_CHECKPOINT_EPOCH",
+    "all_required_claims_sound": true,
+    "checkpoint_complete": false,
+    "global_mission_completion_derivable": false,
+    "global_open_ended_mission_complete": false,
+    "open_claim_count": 12,
+    "reducer_closure_achieved": false,
+    "reducer_failed_predicates": [
+      "DONOR_AUTHORITY:GLOBAL_OWNERSHIP_RECEIPT_NOT_INDEPENDENT_PASS",
+      "DONOR_AUTHORITY:GLOBAL_OWNERSHIP_RECEIPT_PREDICATES_MISSING",
+      "DONOR_AUTHORITY:GLOBAL_OWNERSHIP_RECEIPT_REDUCER_BLOB_STALE",
+      "DONOR_AUTHORITY:GLOBAL_OWNERSHIP_RECEIPT_UNBOUND:BINDING_SHAPE_INVALID",
+      "FAMILY_OPEN:ADVANCED_AGENTIC_CODING",
+      "FAMILY_OPEN:AGENTIC_SCIENTIFIC_RESEARCH",
+      "FAMILY_OPEN:ARTIFACT_CREATION",
+      "FAMILY_OPEN:BUSINESS_WORKFLOW_AUTOMATION",
+      "FAMILY_OPEN:COMMUNICATION_AND_SYNTHESIS",
+      "FAMILY_OPEN:COMPUTER_AND_BROWSER_USE",
+      "FAMILY_OPEN:FINANCIAL_ANALYSIS",
+      "FAMILY_OPEN:MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "FAMILY_OPEN:MULTI_CAPABILITY_COMPOSITION",
+      "FAMILY_OPEN:PROFESSIONAL_KNOWLEDGE_WORK",
+      "FAMILY_OPEN:UNKNOWN_DOMAIN_ADAPTATION",
+      "FAMILY_OPEN:VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "PREDICATE_NOT_TRUE:all_frozen_opus_acceptance_predicates_pass",
+      "PREDICATE_NOT_TRUE:donor_dependent_required_behaviors_zero",
+      "PREDICATE_NOT_TRUE:final_donor_deletion_cleanroom_pass",
+      "PREDICATE_NOT_TRUE:proof_bundle_frozen"
+    ],
+    "required_claim_count": 19,
+    "satisfied_claim_count": 7,
+    "scope_complete": true
+  },
+  "checkpoint_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "claims": [
+    {
+      "claim": {
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "claim_id": "a431bc821a97e16b79fd043f83cd5a205f43042c59c2fbdd5e5dd9710a269150",
+        "claim_kind": "CHECKPOINT_ACCEPTANCE",
+        "epoch": "OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c",
+        "mission_blob_sha": "30005d2065d84618c080979eb841e0161035ac2c",
+        "scope_sha256": "7c36334988e5eaa05191787343b7e014ad9dc683e2cba32f822203dd712e04da",
+        "semantics_sha256": "1752fbb8b5b255dec0bb20f257dd5a78a31f2db5dd04bc548dd631c532386bcc",
+        "target_predicate_sha256": "e217c6eadc8d26f99af046ed6b3c4d863775bec0deabfc2980c79858c16472fd",
+        "terminal_credit_delta": 0
+      },
+      "claim_status": "OPEN__OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN",
+      "family_id": "ADVANCED_AGENTIC_CODING",
+      "r4_proof_authority": {
+        "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "r4_closure": "CURRENT_ACYCLIC_CONTENT_ADDRESSED_CHAIN__ACTIVE_FROZEN_PROPERTY_CLAIM_3_OF_3_ROOTS_PROVED__R4_CLOSURE_TRUE__GLOBAL_TERMINAL_STILL_FALSE__ZERO_CREDIT",
+        "root_registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264"
+      },
+      "satisfied": false
+    },
+    {
+      "claim": {
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "claim_id": "148143e53d9e8675b7dbb5ca925b6e8bb34dc61994068297b15792dd8cb92625",
+        "claim_kind": "CHECKPOINT_ACCEPTANCE",
+        "epoch": "OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c",
+        "mission_blob_sha": "30005d2065d84618c080979eb841e0161035ac2c",
+        "scope_sha256": "c40b7959f2a16ce7d3fb7dd0910ef7b8ecd397771e2d40c9b263e2102533a784",
+        "semantics_sha256": "1752fbb8b5b255dec0bb20f257dd5a78a31f2db5dd04bc548dd631c532386bcc",
+        "target_predicate_sha256": "99d077bb585a0ccbc9a9ab0ee17a243749b32727ce582aed0a8584defc3d4b69",
+        "terminal_credit_delta": 0
+      },
+      "claim_status": "OPEN__OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN",
+      "family_id": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "r4_proof_authority": {
+        "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "r4_closure": "CURRENT_ACYCLIC_CONTENT_ADDRESSED_CHAIN__ACTIVE_FROZEN_PROPERTY_CLAIM_3_OF_3_ROOTS_PROVED__R4_CLOSURE_TRUE__GLOBAL_TERMINAL_STILL_FALSE__ZERO_CREDIT",
+        "root_registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264"
+      },
+      "satisfied": false
+    },
+    {
+      "claim": {
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "claim_id": "08cf1b0acc7614f9f59ae0a673d07dddbcc280505edbacdf1c90a57e9d020afc",
+        "claim_kind": "CHECKPOINT_ACCEPTANCE",
+        "epoch": "OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c",
+        "mission_blob_sha": "30005d2065d84618c080979eb841e0161035ac2c",
+        "scope_sha256": "09f6c390ee29fa6575dd54c0fb63b5cb07b73db84c70ca792d3228ab4856d04c",
+        "semantics_sha256": "1752fbb8b5b255dec0bb20f257dd5a78a31f2db5dd04bc548dd631c532386bcc",
+        "target_predicate_sha256": "356d681e4e2b8ec5e5bab382f8ead9297421fbff65322ab20d77d170a1edc089",
+        "terminal_credit_delta": 0
+      },
+      "claim_status": "OPEN__OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN",
+      "family_id": "ARTIFACT_CREATION",
+      "r4_proof_authority": {
+        "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "r4_closure": "CURRENT_ACYCLIC_CONTENT_ADDRESSED_CHAIN__ACTIVE_FROZEN_PROPERTY_CLAIM_3_OF_3_ROOTS_PROVED__R4_CLOSURE_TRUE__GLOBAL_TERMINAL_STILL_FALSE__ZERO_CREDIT",
+        "root_registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264"
+      },
+      "satisfied": false
+    },
+    {
+      "claim": {
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "claim_id": "e416e17bdc00ad1a48903827eb85efef52d496a4fcadb2bda6263adab117a445",
+        "claim_kind": "CHECKPOINT_ACCEPTANCE",
+        "epoch": "OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c",
+        "mission_blob_sha": "30005d2065d84618c080979eb841e0161035ac2c",
+        "scope_sha256": "1ff4bbca7d320fb8c6b386998746714912b38eadcabe756789f5610d95f8a980",
+        "semantics_sha256": "1752fbb8b5b255dec0bb20f257dd5a78a31f2db5dd04bc548dd631c532386bcc",
+        "target_predicate_sha256": "7d09b02f9a19ddb6ed565d17003364c3038934caed3acae6a2a045f324cfbf5f",
+        "terminal_credit_delta": 0
+      },
+      "claim_status": "OPEN__OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN",
+      "family_id": "BUSINESS_WORKFLOW_AUTOMATION",
+      "r4_proof_authority": {
+        "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "r4_closure": "CURRENT_ACYCLIC_CONTENT_ADDRESSED_CHAIN__ACTIVE_FROZEN_PROPERTY_CLAIM_3_OF_3_ROOTS_PROVED__R4_CLOSURE_TRUE__GLOBAL_TERMINAL_STILL_FALSE__ZERO_CREDIT",
+        "root_registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264"
+      },
+      "satisfied": false
+    },
+    {
+      "claim": {
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "claim_id": "cb304eebad70bc59fe09016bb21c56b96951384b4be72836a4aaa2fcf20a2fff",
+        "claim_kind": "CHECKPOINT_ACCEPTANCE",
+        "epoch": "OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c",
+        "mission_blob_sha": "30005d2065d84618c080979eb841e0161035ac2c",
+        "scope_sha256": "21baa642eebcd26929293a46f28d9adba43857caf917a43e498deaf29b0fdb71",
+        "semantics_sha256": "1752fbb8b5b255dec0bb20f257dd5a78a31f2db5dd04bc548dd631c532386bcc",
+        "target_predicate_sha256": "08749b31866cd559c95dc071689da7fe042904ae24fdd6df1b8976426ef256ca",
+        "terminal_credit_delta": 0
+      },
+      "claim_status": "OPEN__OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN",
+      "family_id": "COMMUNICATION_AND_SYNTHESIS",
+      "r4_proof_authority": {
+        "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "r4_closure": "CURRENT_ACYCLIC_CONTENT_ADDRESSED_CHAIN__ACTIVE_FROZEN_PROPERTY_CLAIM_3_OF_3_ROOTS_PROVED__R4_CLOSURE_TRUE__GLOBAL_TERMINAL_STILL_FALSE__ZERO_CREDIT",
+        "root_registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264"
+      },
+      "satisfied": false
+    },
+    {
+      "claim": {
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "claim_id": "2bd437cc139af592a7392a1752c08f23dd2ea44e382f4497afca915c67acdbef",
+        "claim_kind": "CHECKPOINT_ACCEPTANCE",
+        "epoch": "OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c",
+        "mission_blob_sha": "30005d2065d84618c080979eb841e0161035ac2c",
+        "scope_sha256": "d50a754a1ac6eeea5cf9d3082e0fbfade8ccd227174a4f61cfe9bfb7884d3e51",
+        "semantics_sha256": "1752fbb8b5b255dec0bb20f257dd5a78a31f2db5dd04bc548dd631c532386bcc",
+        "target_predicate_sha256": "65ccaaddf4576a52fe3694721094fe79cac6cd58bd75daf7b07808585857328e",
+        "terminal_credit_delta": 0
+      },
+      "claim_status": "SATISFIED__ACCEPTANCE_PASS_AND_TERMINALLY_CLOSED",
+      "family_id": "COMPLEX_MULTI_TOOL_AGENCY",
+      "r4_proof_authority": {
+        "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "r4_closure": "CURRENT_ACYCLIC_CONTENT_ADDRESSED_CHAIN__ACTIVE_FROZEN_PROPERTY_CLAIM_3_OF_3_ROOTS_PROVED__R4_CLOSURE_TRUE__GLOBAL_TERMINAL_STILL_FALSE__ZERO_CREDIT",
+        "root_registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264"
+      },
+      "satisfied": true
+    },
+    {
+      "claim": {
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "claim_id": "25056fd31bb77560921042cb5addd543925a4687fdfc5df62c50c8522037d11f",
+        "claim_kind": "CHECKPOINT_ACCEPTANCE",
+        "epoch": "OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c",
+        "mission_blob_sha": "30005d2065d84618c080979eb841e0161035ac2c",
+        "scope_sha256": "f207ccab0984d6183aa4f54001da928bf676a228708e77860cdbcd76c704443e",
+        "semantics_sha256": "1752fbb8b5b255dec0bb20f257dd5a78a31f2db5dd04bc548dd631c532386bcc",
+        "target_predicate_sha256": "e85f619e583959c0810e9d3f85d26f5551f0d3eba37ad4769d8496416366351a",
+        "terminal_credit_delta": 0
+      },
+      "claim_status": "OPEN__OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN",
+      "family_id": "COMPUTER_AND_BROWSER_USE",
+      "r4_proof_authority": {
+        "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "r4_closure": "CURRENT_ACYCLIC_CONTENT_ADDRESSED_CHAIN__ACTIVE_FROZEN_PROPERTY_CLAIM_3_OF_3_ROOTS_PROVED__R4_CLOSURE_TRUE__GLOBAL_TERMINAL_STILL_FALSE__ZERO_CREDIT",
+        "root_registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264"
+      },
+      "satisfied": false
+    },
+    {
+      "claim": {
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "claim_id": "b5765ecea2026db55398b04aa6c1de47589c0faa728318b9ad3d3c469e33501c",
+        "claim_kind": "CHECKPOINT_ACCEPTANCE",
+        "epoch": "OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c",
+        "mission_blob_sha": "30005d2065d84618c080979eb841e0161035ac2c",
+        "scope_sha256": "1446d58eb7366431435636e43d6339c664c2825252b910b8e4686f8326a92f18",
+        "semantics_sha256": "1752fbb8b5b255dec0bb20f257dd5a78a31f2db5dd04bc548dd631c532386bcc",
+        "target_predicate_sha256": "17b9662589aff96ae41e630f8531cf18f3f210dc2a8b189cdde9507a51fcffa7",
+        "terminal_credit_delta": 0
+      },
+      "claim_status": "SATISFIED__ACCEPTANCE_PASS_AND_TERMINALLY_CLOSED",
+      "family_id": "EXACT_SYMBOLIC_COMPUTATION",
+      "r4_proof_authority": {
+        "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "r4_closure": "CURRENT_ACYCLIC_CONTENT_ADDRESSED_CHAIN__ACTIVE_FROZEN_PROPERTY_CLAIM_3_OF_3_ROOTS_PROVED__R4_CLOSURE_TRUE__GLOBAL_TERMINAL_STILL_FALSE__ZERO_CREDIT",
+        "root_registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264"
+      },
+      "satisfied": true
+    },
+    {
+      "claim": {
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "claim_id": "7a55eebbb4b7ca0a9b4c058a2b888598aaef6e4215b7f2e047a6e9779721f483",
+        "claim_kind": "CHECKPOINT_ACCEPTANCE",
+        "epoch": "OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c",
+        "mission_blob_sha": "30005d2065d84618c080979eb841e0161035ac2c",
+        "scope_sha256": "88c8d4ffea61b85816b6b0fb26269d06b2021da58566fbe53bdb082717f55e17",
+        "semantics_sha256": "1752fbb8b5b255dec0bb20f257dd5a78a31f2db5dd04bc548dd631c532386bcc",
+        "target_predicate_sha256": "8ec38d5b5350a98ad7bb614e15f6259a69312628908d1e6b32be9bb55fb729cf",
+        "terminal_credit_delta": 0
+      },
+      "claim_status": "OPEN__OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN",
+      "family_id": "FINANCIAL_ANALYSIS",
+      "r4_proof_authority": {
+        "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "r4_closure": "CURRENT_ACYCLIC_CONTENT_ADDRESSED_CHAIN__ACTIVE_FROZEN_PROPERTY_CLAIM_3_OF_3_ROOTS_PROVED__R4_CLOSURE_TRUE__GLOBAL_TERMINAL_STILL_FALSE__ZERO_CREDIT",
+        "root_registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264"
+      },
+      "satisfied": false
+    },
+    {
+      "claim": {
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "claim_id": "02122632bfa9a5848dc07206cfe01b7448fd7ede30e4a72b82c2fc6737482709",
+        "claim_kind": "CHECKPOINT_ACCEPTANCE",
+        "epoch": "OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c",
+        "mission_blob_sha": "30005d2065d84618c080979eb841e0161035ac2c",
+        "scope_sha256": "ae38fb95014bde0fefc4cb0ee42301a67a47d265dbe203d95e8f264639e3f344",
+        "semantics_sha256": "1752fbb8b5b255dec0bb20f257dd5a78a31f2db5dd04bc548dd631c532386bcc",
+        "target_predicate_sha256": "f7a82fb4e2cfc34866d5d4c8000ac9b7471d743a2f8bd92aecfd64e814f6b1aa",
+        "terminal_credit_delta": 0
+      },
+      "claim_status": "SATISFIED__ACCEPTANCE_PASS_AND_TERMINALLY_CLOSED",
+      "family_id": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "r4_proof_authority": {
+        "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "r4_closure": "CURRENT_ACYCLIC_CONTENT_ADDRESSED_CHAIN__ACTIVE_FROZEN_PROPERTY_CLAIM_3_OF_3_ROOTS_PROVED__R4_CLOSURE_TRUE__GLOBAL_TERMINAL_STILL_FALSE__ZERO_CREDIT",
+        "root_registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264"
+      },
+      "satisfied": true
+    },
+    {
+      "claim": {
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "claim_id": "12a969616a2539923259136b6ba53c0262f9b7b21c7b97a26305ba24ebca8953",
+        "claim_kind": "CHECKPOINT_ACCEPTANCE",
+        "epoch": "OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c",
+        "mission_blob_sha": "30005d2065d84618c080979eb841e0161035ac2c",
+        "scope_sha256": "f317dff2b2eb6339a431a7a14fcd72ee5323b2e20086e2540d71015986c81d07",
+        "semantics_sha256": "1752fbb8b5b255dec0bb20f257dd5a78a31f2db5dd04bc548dd631c532386bcc",
+        "target_predicate_sha256": "dd97bb0664694a2253ea5e7c3810c1842dbe5b904f9f5e0da1e9ab28422b7459",
+        "terminal_credit_delta": 0
+      },
+      "claim_status": "SATISFIED__ACCEPTANCE_PASS_AND_TERMINALLY_CLOSED",
+      "family_id": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "r4_proof_authority": {
+        "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "r4_closure": "CURRENT_ACYCLIC_CONTENT_ADDRESSED_CHAIN__ACTIVE_FROZEN_PROPERTY_CLAIM_3_OF_3_ROOTS_PROVED__R4_CLOSURE_TRUE__GLOBAL_TERMINAL_STILL_FALSE__ZERO_CREDIT",
+        "root_registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264"
+      },
+      "satisfied": true
+    },
+    {
+      "claim": {
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "claim_id": "bd588867d3016acd8a29d68a3c65855992cddf8709a39aaf30feaf67fdc74e5b",
+        "claim_kind": "CHECKPOINT_ACCEPTANCE",
+        "epoch": "OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c",
+        "mission_blob_sha": "30005d2065d84618c080979eb841e0161035ac2c",
+        "scope_sha256": "d19fdad1c6f7efd067d17c20754dfde0002faece70f26b979d4989ba85b6dd6d",
+        "semantics_sha256": "1752fbb8b5b255dec0bb20f257dd5a78a31f2db5dd04bc548dd631c532386bcc",
+        "target_predicate_sha256": "f2c92edbd3987e993d491c96869515f0ac838abf6aa212394a0ef753fb7e097f",
+        "terminal_credit_delta": 0
+      },
+      "claim_status": "OPEN__OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN",
+      "family_id": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "r4_proof_authority": {
+        "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "r4_closure": "CURRENT_ACYCLIC_CONTENT_ADDRESSED_CHAIN__ACTIVE_FROZEN_PROPERTY_CLAIM_3_OF_3_ROOTS_PROVED__R4_CLOSURE_TRUE__GLOBAL_TERMINAL_STILL_FALSE__ZERO_CREDIT",
+        "root_registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264"
+      },
+      "satisfied": false
+    },
+    {
+      "claim": {
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "claim_id": "79c5a2da64f02d65c830f55230525734c46c44264a8b0cb6ff8cca358a787ccb",
+        "claim_kind": "CHECKPOINT_ACCEPTANCE",
+        "epoch": "OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c",
+        "mission_blob_sha": "30005d2065d84618c080979eb841e0161035ac2c",
+        "scope_sha256": "609b9f5ff8e860d483d96ba145598bee5ccce26f5b6f3ecb73b3f088f3988cbc",
+        "semantics_sha256": "1752fbb8b5b255dec0bb20f257dd5a78a31f2db5dd04bc548dd631c532386bcc",
+        "target_predicate_sha256": "afec0e66b7921e385b7b61db4e93cc3a9a4b231d29a72bfedef203c41ffd254c",
+        "terminal_credit_delta": 0
+      },
+      "claim_status": "OPEN__OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN",
+      "family_id": "MULTI_CAPABILITY_COMPOSITION",
+      "r4_proof_authority": {
+        "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "r4_closure": "CURRENT_ACYCLIC_CONTENT_ADDRESSED_CHAIN__ACTIVE_FROZEN_PROPERTY_CLAIM_3_OF_3_ROOTS_PROVED__R4_CLOSURE_TRUE__GLOBAL_TERMINAL_STILL_FALSE__ZERO_CREDIT",
+        "root_registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264"
+      },
+      "satisfied": false
+    },
+    {
+      "claim": {
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "claim_id": "2dfb2f3ea5c04db7f67642ba7879317a8ac76198ad7850bbdc8263966743775a",
+        "claim_kind": "CHECKPOINT_ACCEPTANCE",
+        "epoch": "OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c",
+        "mission_blob_sha": "30005d2065d84618c080979eb841e0161035ac2c",
+        "scope_sha256": "a68819dd0677854e19a74faf4bc3f2e3b6cda2a1391590e881039c877831beaf",
+        "semantics_sha256": "1752fbb8b5b255dec0bb20f257dd5a78a31f2db5dd04bc548dd631c532386bcc",
+        "target_predicate_sha256": "08a4994f3e6ef23552173c1b5d089681da250cec50e36796e26d4ef77b8973c0",
+        "terminal_credit_delta": 0
+      },
+      "claim_status": "OPEN__OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN",
+      "family_id": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "r4_proof_authority": {
+        "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "r4_closure": "CURRENT_ACYCLIC_CONTENT_ADDRESSED_CHAIN__ACTIVE_FROZEN_PROPERTY_CLAIM_3_OF_3_ROOTS_PROVED__R4_CLOSURE_TRUE__GLOBAL_TERMINAL_STILL_FALSE__ZERO_CREDIT",
+        "root_registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264"
+      },
+      "satisfied": false
+    },
+    {
+      "claim": {
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "claim_id": "00d39daa64ac96f7f8d2ea4062dd6a4948f0140826b89d0671908f6856f9b6c3",
+        "claim_kind": "CHECKPOINT_ACCEPTANCE",
+        "epoch": "OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c",
+        "mission_blob_sha": "30005d2065d84618c080979eb841e0161035ac2c",
+        "scope_sha256": "49b96301476316650314b3aaa34d78e3af71209d4589ce3d898b59a6751bbbe4",
+        "semantics_sha256": "1752fbb8b5b255dec0bb20f257dd5a78a31f2db5dd04bc548dd631c532386bcc",
+        "target_predicate_sha256": "ded46ef771fafece7adbac5ee58ed196dca76fbd170ecc8b23160ef057108171",
+        "terminal_credit_delta": 0
+      },
+      "claim_status": "SATISFIED__ACCEPTANCE_PASS_AND_TERMINALLY_CLOSED",
+      "family_id": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "r4_proof_authority": {
+        "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "r4_closure": "CURRENT_ACYCLIC_CONTENT_ADDRESSED_CHAIN__ACTIVE_FROZEN_PROPERTY_CLAIM_3_OF_3_ROOTS_PROVED__R4_CLOSURE_TRUE__GLOBAL_TERMINAL_STILL_FALSE__ZERO_CREDIT",
+        "root_registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264"
+      },
+      "satisfied": true
+    },
+    {
+      "claim": {
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "claim_id": "22fbf15db4da0e3867f2eb1c799e6fba16893d41c22bda8e1ade98fee4e0710c",
+        "claim_kind": "CHECKPOINT_ACCEPTANCE",
+        "epoch": "OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c",
+        "mission_blob_sha": "30005d2065d84618c080979eb841e0161035ac2c",
+        "scope_sha256": "cc1972d7cf9c958a9ee13ac2b73cb961f7804b3172a107e3b960f5bd30fb2980",
+        "semantics_sha256": "1752fbb8b5b255dec0bb20f257dd5a78a31f2db5dd04bc548dd631c532386bcc",
+        "target_predicate_sha256": "66fdfc2bc34f6e064772ae222757738f71316f9d6c2637232f89f0a32731b018",
+        "terminal_credit_delta": 0
+      },
+      "claim_status": "SATISFIED__ACCEPTANCE_PASS_AND_TERMINALLY_CLOSED",
+      "family_id": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "r4_proof_authority": {
+        "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "r4_closure": "CURRENT_ACYCLIC_CONTENT_ADDRESSED_CHAIN__ACTIVE_FROZEN_PROPERTY_CLAIM_3_OF_3_ROOTS_PROVED__R4_CLOSURE_TRUE__GLOBAL_TERMINAL_STILL_FALSE__ZERO_CREDIT",
+        "root_registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264"
+      },
+      "satisfied": true
+    },
+    {
+      "claim": {
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "claim_id": "2b21187e0c11bfc7c05e4449d4e144985f01012df8e403daecabd6052f190666",
+        "claim_kind": "CHECKPOINT_ACCEPTANCE",
+        "epoch": "OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c",
+        "mission_blob_sha": "30005d2065d84618c080979eb841e0161035ac2c",
+        "scope_sha256": "b34250931bf7bff23844c5deb9faaeb56ceed1630af38dbbe53eb3b221f14e4a",
+        "semantics_sha256": "1752fbb8b5b255dec0bb20f257dd5a78a31f2db5dd04bc548dd631c532386bcc",
+        "target_predicate_sha256": "52b13b82fa9dc38865cda4a5004c7c22c27f362129c98652c01a97fa2455be4b",
+        "terminal_credit_delta": 0
+      },
+      "claim_status": "SATISFIED__ACCEPTANCE_PASS_AND_TERMINALLY_CLOSED",
+      "family_id": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "r4_proof_authority": {
+        "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "r4_closure": "CURRENT_ACYCLIC_CONTENT_ADDRESSED_CHAIN__ACTIVE_FROZEN_PROPERTY_CLAIM_3_OF_3_ROOTS_PROVED__R4_CLOSURE_TRUE__GLOBAL_TERMINAL_STILL_FALSE__ZERO_CREDIT",
+        "root_registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264"
+      },
+      "satisfied": true
+    },
+    {
+      "claim": {
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "claim_id": "18f4cc1a0abcba5461a43844cf0fd5ba48f012fab9faba0d10a850c6daff454d",
+        "claim_kind": "CHECKPOINT_ACCEPTANCE",
+        "epoch": "OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c",
+        "mission_blob_sha": "30005d2065d84618c080979eb841e0161035ac2c",
+        "scope_sha256": "753d692bfdc34e1d0086440886b7053ae3ff90e7b4a592a1f72f744125983f11",
+        "semantics_sha256": "1752fbb8b5b255dec0bb20f257dd5a78a31f2db5dd04bc548dd631c532386bcc",
+        "target_predicate_sha256": "c734e96c86ff97f7e6e7d6a3f9ee49069bc386c34940cebd0dc18b9547df5152",
+        "terminal_credit_delta": 0
+      },
+      "claim_status": "OPEN__OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN",
+      "family_id": "UNKNOWN_DOMAIN_ADAPTATION",
+      "r4_proof_authority": {
+        "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "r4_closure": "CURRENT_ACYCLIC_CONTENT_ADDRESSED_CHAIN__ACTIVE_FROZEN_PROPERTY_CLAIM_3_OF_3_ROOTS_PROVED__R4_CLOSURE_TRUE__GLOBAL_TERMINAL_STILL_FALSE__ZERO_CREDIT",
+        "root_registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264"
+      },
+      "satisfied": false
+    },
+    {
+      "claim": {
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "claim_id": "933bd7cdc131647f7e68f1313614a420548e4aa81b235f43dcbd405cfa3cba72",
+        "claim_kind": "CHECKPOINT_ACCEPTANCE",
+        "epoch": "OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c",
+        "mission_blob_sha": "30005d2065d84618c080979eb841e0161035ac2c",
+        "scope_sha256": "376ddd5847c96c9c2b02cf7a0c6aafd4c986ffe180a238b6d7bf4432bd62963c",
+        "semantics_sha256": "1752fbb8b5b255dec0bb20f257dd5a78a31f2db5dd04bc548dd631c532386bcc",
+        "target_predicate_sha256": "929299b7b15643ca30cdd06f48f48d232ec8c16f5b5435add1d198b7326d7a98",
+        "terminal_credit_delta": 0
+      },
+      "claim_status": "OPEN__OPUS55_ACCEPTANCE_PROTOCOL_RESULT_OPEN",
+      "family_id": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "r4_proof_authority": {
+        "active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+        "authority_id": "TERMINAL_CLOSURE_MANIFEST_V1::CC_R4_PROOF_AUTHORITY_V1__7552290f57d4",
+        "r4_closure": "CURRENT_ACYCLIC_CONTENT_ADDRESSED_CHAIN__ACTIVE_FROZEN_PROPERTY_CLAIM_3_OF_3_ROOTS_PROVED__R4_CLOSURE_TRUE__GLOBAL_TERMINAL_STILL_FALSE__ZERO_CREDIT",
+        "root_registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264"
+      },
+      "satisfied": false
+    }
+  ],
+  "date": "2026-10-13",
+  "epoch": "OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c",
+  "frozen_checkpoint_epoch_sources": {
+    "coverage_root_certificate_registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264",
+    "mission_pointer_git_blob_sha": "30005d2065d84618c080979eb841e0161035ac2c",
+    "residual_map_git_blob_sha": "c73391693f4cbae6efc9fc11f396c3a3be25875a",
+    "terminal_authority_git_blob_sha": "57be54e83f4fdee2f19a7b64d01da3acdce7d940",
+    "terminal_closure_manifest_git_blob_sha": "2bce4a68c9cc8465a7eb9e18f6cc503fc61d3d4a"
+  },
+  "hard_nonclaims": [
+    "CHECKPOINT_COMPLETION_IS_NOT_GLOBAL_OPEN_ENDED_MISSION_COMPLETION",
+    "GLOBAL_OPEN_ENDED_MISSION_COMPLETE_REMAINS_NON_DERIVABLE",
+    "ZERO_TERMINAL_CREDIT_UNTIL_EVERY_CONJUNCT_GENUINELY_CLOSES",
+    "OPEN_CLAIM_STATES_ARE_UNSATISFIFIED_OBLIGATIONS_NOT_PROGRESS"
+  ],
+  "recomputed_obligation_basis": {
+    "alias_deduplication_policy": "LOGICAL_ALIASES_DEDUPLICATED_ONLY_WITH_NECESSITY_EQUIVALENCE_PROOF",
+    "alias_equivalence_proofs": [
+      {
+        "equivalence_proof": "SAME_FAMILY_IDENTITY_ACROSS_BOTH_CURRENT_PINNED_BASIS_SOURCES_AND_SINGLE_FROZEN_SCOPE_CORE_PRESERVING_EVERY_UNDERLYING_ACCEPTANCE_REQUIREMENT_FROM_BOTH_SOURCES",
+        "family_id": "ADVANCED_AGENTIC_CODING",
+        "logical_alias_sources": [
+          "TERMINAL_CLOSURE_MANIFEST_V1",
+          "ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V3"
+        ],
+        "preserved_requirements": {
+          "acceptance_basis": [
+            {
+              "benchmark": "Terminal-Bench 4.0",
+              "opus_5_5": 66.4,
+              "unit": "percent"
+            },
+            {
+              "benchmark": "FrontierCode v1.1 Main",
+              "opus_5_5": 54.4,
+              "unit": "percent"
+            },
+            {
+              "benchmark": "CursorBench 4.0",
+              "opus_5_5": 57.8,
+              "unit": "percent"
+            }
+          ],
+          "mode": "PUBLIC_BAR_WITNESSES_OR_SCOPE_EQUIVALENT_OR_STRONGER_CERTIFICATES",
+          "residuals": [
+            "TB4_SCOPE_NONINFERIOR_OR_STRONGER",
+            "FRONTIERCODE_SCOPE_NONINFERIOR_OR_STRONGER",
+            "CURSORBENCH_SCOPE_NONINFERIOR_OR_STRONGER"
+          ]
+        }
+      },
+      {
+        "equivalence_proof": "SAME_FAMILY_IDENTITY_ACROSS_BOTH_CURRENT_PINNED_BASIS_SOURCES_AND_SINGLE_FROZEN_SCOPE_CORE_PRESERVING_EVERY_UNDERLYING_ACCEPTANCE_REQUIREMENT_FROM_BOTH_SOURCES",
+        "family_id": "AGENTIC_SCIENTIFIC_RESEARCH",
+        "logical_alias_sources": [
+          "TERMINAL_CLOSURE_MANIFEST_V1",
+          "ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V3"
+        ],
+        "preserved_requirements": {
+          "acceptance_basis": [
+            {
+              "benchmark": "Terminal-Bench-Science 0.1",
+              "opus_5_5": 58.7,
+              "unit": "percent"
+            }
+          ],
+          "mode": "PUBLIC_BAR_WITNESS_OR_STRONGER",
+          "residuals": [
+            "TB_SCIENCE_SCOPE_NONINFERIOR_OR_STRONGER"
+          ]
+        }
+      },
+      {
+        "equivalence_proof": "SAME_FAMILY_IDENTITY_ACROSS_BOTH_CURRENT_PINNED_BASIS_SOURCES_AND_SINGLE_FROZEN_SCOPE_CORE_PRESERVING_EVERY_UNDERLYING_ACCEPTANCE_REQUIREMENT_FROM_BOTH_SOURCES",
+        "family_id": "ARTIFACT_CREATION",
+        "logical_alias_sources": [
+          "TERMINAL_CLOSURE_MANIFEST_V1",
+          "ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V3"
+        ],
+        "preserved_requirements": {
+          "acceptance_basis": null,
+          "mode": "SHARED_PROFESSIONAL_DELIVERABLE_QUALITY_RESIDUAL",
+          "residuals": [
+            "AA_BRIEFCASE_GE_1822_OR_STRONGER_SHARED"
+          ]
+        }
+      },
+      {
+        "equivalence_proof": "SAME_FAMILY_IDENTITY_ACROSS_BOTH_CURRENT_PINNED_BASIS_SOURCES_AND_SINGLE_FROZEN_SCOPE_CORE_PRESERVING_EVERY_UNDERLYING_ACCEPTANCE_REQUIREMENT_FROM_BOTH_SOURCES",
+        "family_id": "BUSINESS_WORKFLOW_AUTOMATION",
+        "logical_alias_sources": [
+          "TERMINAL_CLOSURE_MANIFEST_V1",
+          "ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V3"
+        ],
+        "preserved_requirements": {
+          "acceptance_basis": [
+            {
+              "benchmark": "AutomationBench",
+              "opus_5_5": 40,
+              "unit": "percent"
+            }
+          ],
+          "mode": "PUBLIC_BAR_WITNESS_OR_STRONGER",
+          "residuals": [
+            "AUTOMATIONBENCH_SCOPE_NONINFERIOR_OR_STRONGER"
+          ]
+        }
+      },
+      {
+        "equivalence_proof": "SAME_FAMILY_IDENTITY_ACROSS_BOTH_CURRENT_PINNED_BASIS_SOURCES_AND_SINGLE_FROZEN_SCOPE_CORE_PRESERVING_EVERY_UNDERLYING_ACCEPTANCE_REQUIREMENT_FROM_BOTH_SOURCES",
+        "family_id": "COMMUNICATION_AND_SYNTHESIS",
+        "logical_alias_sources": [
+          "TERMINAL_CLOSURE_MANIFEST_V1",
+          "ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V3"
+        ],
+        "preserved_requirements": {
+          "acceptance_basis": null,
+          "mode": "MATCHED_QUALITY_COVERAGE_OR_STRONGER",
+          "residuals": [
+            "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR_OR_STRONGER"
+          ]
+        }
+      },
+      {
+        "equivalence_proof": "SAME_FAMILY_IDENTITY_ACROSS_BOTH_CURRENT_PINNED_BASIS_SOURCES_AND_SINGLE_FROZEN_SCOPE_CORE_PRESERVING_EVERY_UNDERLYING_ACCEPTANCE_REQUIREMENT_FROM_BOTH_SOURCES",
+        "family_id": "COMPLEX_MULTI_TOOL_AGENCY",
+        "logical_alias_sources": [
+          "TERMINAL_CLOSURE_MANIFEST_V1",
+          "ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V3"
+        ],
+        "preserved_requirements": {
+          "acceptance_basis": "SCOPE_COMPLETE_ABSOLUTE_TOP_LAW__THEORETICAL_OPTIMUM_OVER_FROZEN_SIX_DIMENSION_AGENCY_PROTOCOL",
+          "mode": "MATCHED_OR_STRONGER",
+          "residuals": [
+            "MATCHED_MULTI_TOOL_AGENCY_NONINFERIORITY_OR_STRONGER_SELECTED_CONTEXT_ABC"
+          ]
+        }
+      },
+      {
+        "equivalence_proof": "SAME_FAMILY_IDENTITY_ACROSS_BOTH_CURRENT_PINNED_BASIS_SOURCES_AND_SINGLE_FROZEN_SCOPE_CORE_PRESERVING_EVERY_UNDERLYING_ACCEPTANCE_REQUIREMENT_FROM_BOTH_SOURCES",
+        "family_id": "COMPUTER_AND_BROWSER_USE",
+        "logical_alias_sources": [
+          "TERMINAL_CLOSURE_MANIFEST_V1",
+          "ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V3"
+        ],
+        "preserved_requirements": {
+          "acceptance_basis": [
+            {
+              "benchmark": "OSWorld 2.1 partial",
+              "comparison_warning": "Published Astra OSWorld result uses a different evaluation setup; do not compare directly.",
+              "opus_5_5": 81.8,
+              "unit": "percent"
+            }
+          ],
+          "mode": "SAME_HARNESS_OR_MATCHED_STRONGER",
+          "residuals": [
+            "OSWORLD_2_1_PARTIAL_SCOPE_NONINFERIOR_SAME_HARNESS_OR_MATCHED_STRONGER"
+          ]
+        }
+      },
+      {
+        "equivalence_proof": "SAME_FAMILY_IDENTITY_ACROSS_BOTH_CURRENT_PINNED_BASIS_SOURCES_AND_SINGLE_FROZEN_SCOPE_CORE_PRESERVING_EVERY_UNDERLYING_ACCEPTANCE_REQUIREMENT_FROM_BOTH_SOURCES",
+        "family_id": "EXACT_SYMBOLIC_COMPUTATION",
+        "logical_alias_sources": [
+          "TERMINAL_CLOSURE_MANIFEST_V1",
+          "ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V3"
+        ],
+        "preserved_requirements": {
+          "acceptance_basis": {
+            "basis": "THEORETICAL_CEILING",
+            "definition": "100% exact correctness on frozen bounded task class OBS-EXACT-SYMBOLIC-001"
+          },
+          "mode": null,
+          "residuals": null
+        }
+      },
+      {
+        "equivalence_proof": "SAME_FAMILY_IDENTITY_ACROSS_BOTH_CURRENT_PINNED_BASIS_SOURCES_AND_SINGLE_FROZEN_SCOPE_CORE_PRESERVING_EVERY_UNDERLYING_ACCEPTANCE_REQUIREMENT_FROM_BOTH_SOURCES",
+        "family_id": "FINANCIAL_ANALYSIS",
+        "logical_alias_sources": [
+          "TERMINAL_CLOSURE_MANIFEST_V1",
+          "ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V3"
+        ],
+        "preserved_requirements": {
+          "acceptance_basis": null,
+          "mode": "TWO_PUBLIC_SCOPE_WITNESSES_PLUS_ONE_SELECTED_ROUTE_SEMANTIC_ADEQUACY_TAIL",
+          "residuals": [
+            "FINANCE_ACCOUNTING_INDEX_SCOPE_NONINFERIOR_OR_STRONGER",
+            "FINANCE_AGENT_V2_SCOPE_NONINFERIOR_OR_STRONGER",
+            "SOUND_SOURCE_GROUNDED_SEMANTIC_INTERPRETATION_OR_EQUIVALENT_DIRECT_END_TO_END_ADEQUACY"
+          ]
+        }
+      },
+      {
+        "equivalence_proof": "SAME_FAMILY_IDENTITY_ACROSS_BOTH_CURRENT_PINNED_BASIS_SOURCES_AND_SINGLE_FROZEN_SCOPE_CORE_PRESERVING_EVERY_UNDERLYING_ACCEPTANCE_REQUIREMENT_FROM_BOTH_SOURCES",
+        "family_id": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+        "logical_alias_sources": [
+          "TERMINAL_CLOSURE_MANIFEST_V1",
+          "ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V3"
+        ],
+        "preserved_requirements": {
+          "acceptance_basis": {
+            "brain_failure_count": 0,
+            "brain_success_count": 160,
+            "closure_receipt": "canonical/governance/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_20261007_V1.json",
+            "critical_authority_violation_count": 0,
+            "declared_finite_portfolio_cases": 160,
+            "finite_scope_predicates": [
+              "IF_SCOPE_BOUNDARY_NONINFERIOR",
+              "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS"
+            ],
+            "independent_verification": "canonical/verification/IF_SCOPE_COMPLETE_PROTOCOL_CLOSURE_CONNECTOR_VERIFICATION_20261007_V1.json",
+            "livebench_predicate": "LIVEBENCH_IF_GE_65_7",
+            "proof_kind": "SCOPE_COMPLETE_FROZEN_PROTOCOL_CONJUNCTION"
+          },
+          "mode": null,
+          "residuals": null
+        }
+      },
+      {
+        "equivalence_proof": "SAME_FAMILY_IDENTITY_ACROSS_BOTH_CURRENT_PINNED_BASIS_SOURCES_AND_SINGLE_FROZEN_SCOPE_CORE_PRESERVING_EVERY_UNDERLYING_ACCEPTANCE_REQUIREMENT_FROM_BOTH_SOURCES",
+        "family_id": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+        "logical_alias_sources": [
+          "TERMINAL_CLOSURE_MANIFEST_V1",
+          "ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V3"
+        ],
+        "preserved_requirements": {
+          "acceptance_basis": null,
+          "mode": null,
+          "residuals": null
+        }
+      },
+      {
+        "equivalence_proof": "SAME_FAMILY_IDENTITY_ACROSS_BOTH_CURRENT_PINNED_BASIS_SOURCES_AND_SINGLE_FROZEN_SCOPE_CORE_PRESERVING_EVERY_UNDERLYING_ACCEPTANCE_REQUIREMENT_FROM_BOTH_SOURCES",
+        "family_id": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "logical_alias_sources": [
+          "TERMINAL_CLOSURE_MANIFEST_V1",
+          "ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V3"
+        ],
+        "preserved_requirements": {
+          "acceptance_basis": [
+            {
+              "benchmark": "Humanity's Last Exam with tools",
+              "opus_5_5": 67.7,
+              "unit": "percent"
+            }
+          ],
+          "mode": "PUBLIC_BAR_WITNESS_OR_STRONGER",
+          "residuals": [
+            "HLE_WITH_TOOLS_SCOPE_NONINFERIOR_OR_STRONGER"
+          ]
+        }
+      },
+      {
+        "equivalence_proof": "SAME_FAMILY_IDENTITY_ACROSS_BOTH_CURRENT_PINNED_BASIS_SOURCES_AND_SINGLE_FROZEN_SCOPE_CORE_PRESERVING_EVERY_UNDERLYING_ACCEPTANCE_REQUIREMENT_FROM_BOTH_SOURCES",
+        "family_id": "MULTI_CAPABILITY_COMPOSITION",
+        "logical_alias_sources": [
+          "TERMINAL_CLOSURE_MANIFEST_V1",
+          "ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V3"
+        ],
+        "preserved_requirements": {
+          "acceptance_basis": null,
+          "mode": "ROUTE_LOCAL_COMPOSITION_TRANSFORM_CLOSURE__NOT_A_SEPARATE_GENERIC_INTELLIGENCE_FACULTY",
+          "residuals": [
+            "SELECTED_CONTEXT_LOCAL_C_FOR_ALL_REACHED_MIXED_CAPABILITY_TRANSFORMS"
+          ]
+        }
+      },
+      {
+        "equivalence_proof": "SAME_FAMILY_IDENTITY_ACROSS_BOTH_CURRENT_PINNED_BASIS_SOURCES_AND_SINGLE_FROZEN_SCOPE_CORE_PRESERVING_EVERY_UNDERLYING_ACCEPTANCE_REQUIREMENT_FROM_BOTH_SOURCES",
+        "family_id": "PROFESSIONAL_KNOWLEDGE_WORK",
+        "logical_alias_sources": [
+          "TERMINAL_CLOSURE_MANIFEST_V1",
+          "ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V3"
+        ],
+        "preserved_requirements": {
+          "acceptance_basis": [
+            {
+              "benchmark": "GDPval-AA v2.1",
+              "opus_5_5": 1846,
+              "unit": "Elo"
+            },
+            {
+              "benchmark": "AA-Briefcase v1.1",
+              "opus_5_5": 1822,
+              "unit": "Elo"
+            }
+          ],
+          "mode": "PUBLIC_BAR_WITNESSES_OR_STRONGER",
+          "residuals": [
+            "GDPVAL_AA_SCOPE_NONINFERIOR_OR_STRONGER",
+            "AA_BRIEFCASE_GE_1822_OR_STRONGER_SHARED"
+          ]
+        }
+      },
+      {
+        "equivalence_proof": "SAME_FAMILY_IDENTITY_ACROSS_BOTH_CURRENT_PINNED_BASIS_SOURCES_AND_SINGLE_FROZEN_SCOPE_CORE_PRESERVING_EVERY_UNDERLYING_ACCEPTANCE_REQUIREMENT_FROM_BOTH_SOURCES",
+        "family_id": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+        "logical_alias_sources": [
+          "TERMINAL_CLOSURE_MANIFEST_V1",
+          "ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V3"
+        ],
+        "preserved_requirements": {
+          "acceptance_basis": "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json",
+          "mode": null,
+          "residuals": null
+        }
+      },
+      {
+        "equivalence_proof": "SAME_FAMILY_IDENTITY_ACROSS_BOTH_CURRENT_PINNED_BASIS_SOURCES_AND_SINGLE_FROZEN_SCOPE_CORE_PRESERVING_EVERY_UNDERLYING_ACCEPTANCE_REQUIREMENT_FROM_BOTH_SOURCES",
+        "family_id": "SUBAGENT_DELEGATION_AND_COORDINATION",
+        "logical_alias_sources": [
+          "TERMINAL_CLOSURE_MANIFEST_V1",
+          "ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V3"
+        ],
+        "preserved_requirements": {
+          "acceptance_basis": {
+            "acceptance_receipt": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+            "proof_kind": "ABSOLUTE_CEILING_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS",
+            "scope_receipt": "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+          },
+          "mode": null,
+          "residuals": null
+        }
+      },
+      {
+        "equivalence_proof": "SAME_FAMILY_IDENTITY_ACROSS_BOTH_CURRENT_PINNED_BASIS_SOURCES_AND_SINGLE_FROZEN_SCOPE_CORE_PRESERVING_EVERY_UNDERLYING_ACCEPTANCE_REQUIREMENT_FROM_BOTH_SOURCES",
+        "family_id": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+        "logical_alias_sources": [
+          "TERMINAL_CLOSURE_MANIFEST_V1",
+          "ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V3"
+        ],
+        "preserved_requirements": {
+          "acceptance_basis": {
+            "acceptance_receipt": "canonical/verification/TOOL_DISCOVERY_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+            "proof_kind": "ABSOLUTE_CEILING_WITH_UNIVERSAL_FORMAL_SCOPE_COMPLETENESS",
+            "scope_receipt": "canonical/verification/TOOL_DISCOVERY_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+          },
+          "mode": null,
+          "residuals": null
+        }
+      },
+      {
+        "equivalence_proof": "SAME_FAMILY_IDENTITY_ACROSS_BOTH_CURRENT_PINNED_BASIS_SOURCES_AND_SINGLE_FROZEN_SCOPE_CORE_PRESERVING_EVERY_UNDERLYING_ACCEPTANCE_REQUIREMENT_FROM_BOTH_SOURCES",
+        "family_id": "UNKNOWN_DOMAIN_ADAPTATION",
+        "logical_alias_sources": [
+          "TERMINAL_CLOSURE_MANIFEST_V1",
+          "ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V3"
+        ],
+        "preserved_requirements": {
+          "acceptance_basis": null,
+          "mode": "SINGLE_UNKNOWN_MECHANISM_SCOPE_OR_STRONGER",
+          "residuals": [
+            "MYSTERYMECHANISM_SCOPE_NONINFERIOR_OR_STRONGER"
+          ]
+        }
+      },
+      {
+        "equivalence_proof": "SAME_FAMILY_IDENTITY_ACROSS_BOTH_CURRENT_PINNED_BASIS_SOURCES_AND_SINGLE_FROZEN_SCOPE_CORE_PRESERVING_EVERY_UNDERLYING_ACCEPTANCE_REQUIREMENT_FROM_BOTH_SOURCES",
+        "family_id": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "logical_alias_sources": [
+          "TERMINAL_CLOSURE_MANIFEST_V1",
+          "ABC_ZERO_REALITY_FIXED_POINT_RESIDUAL_MAP_V3"
+        ],
+        "preserved_requirements": {
+          "acceptance_basis": [
+            {
+              "benchmark": "Chartography with tools",
+              "opus_5_5": 89,
+              "unit": "percent"
+            }
+          ],
+          "mode": "PUBLIC_BAR_SCOPE_PLUS_NONCHART_SELECTED_CONTEXT",
+          "residuals": [
+            "CHARTOGRAPHY_WITH_TOOLS_SCOPE_NONINFERIOR_OR_STRONGER",
+            "DENSE_DOCUMENT_NONCHART_SELECTED_CONTEXT_SCOPE_AND_DOMINANCE"
+          ]
+        }
+      }
+    ],
+    "basis_family_count": 19,
+    "basis_family_ids": [
+      "ADVANCED_AGENTIC_CODING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "ARTIFACT_CREATION",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "COMMUNICATION_AND_SYNTHESIS",
+      "COMPLEX_MULTI_TOOL_AGENCY",
+      "COMPUTER_AND_BROWSER_USE",
+      "EXACT_SYMBOLIC_COMPUTATION",
+      "FINANCIAL_ANALYSIS",
+      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "MULTI_CAPABILITY_COMPOSITION",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "UNKNOWN_DOMAIN_ADAPTATION",
+      "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
+    ],
+    "basis_partition_equality_proved": true,
+    "consistency_checks": {
+      "closure_manifest_expected_family_count": 19,
+      "live_L1_refinement_partition_count": 19,
+      "terminal_closure_reducer_required_family_count": 19
+    },
+    "manifest_family_count": 19,
+    "residual_map_family_count": 19
+  },
+  "schema": "PROJECT_BRAIN_OPUS_CHECKPOINT_CLAIM_MANIFEST_V1",
+  "scope_completeness_theorem": {
+    "proof_basis": "FAIL_CLOSED_RECOMPUTATION_OF_BASIS_FROM_BOTH_CURRENT_PINNED_SOURCES_WITH_PARTITION_EQUALITY_AND_BIJECTIVE_CLAIM_SET",
+    "proved": true,
+    "statement": "THE_CHECKPOINT_CLAIM_SET_COVERS_EXACTLY_THE_RECOMPUTED_CURRENT_LOAD_BEARING_OPUS_CHECKPOINT_OBLIGATION_BASIS__EVERY_FAMILY_OF_THE_CURRENT_TERMINAL_CLOSURE_MANIFEST_AND_EVERY_REFINEMENT_FAMILY_OF_THE_CURRENT_RESIDUAL_MAP_EACH_EXACTLY_ONCE__NO_EXTRA_CLAIM__NO_MISSING_REQUIREMENT__ALL_ACCEPTANCE_REQUIREMENTS_PRESERVED__PROVED_BY_BASIS_PARTITION_EQUALITY_AND_CLAIM_SET_IDENTITY_UNDER_ONE_FROZEN_CHECKPOINT_EPOCH"
+  }
+}

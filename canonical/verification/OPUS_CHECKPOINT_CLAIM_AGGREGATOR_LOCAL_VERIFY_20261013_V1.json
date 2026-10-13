@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS_CHECKPOINT_CLAIM_AGGREGATOR_LOCAL_VERIFY_20261013_V1",
+  "date": "2026-10-13",
+  "status": "PASS__AGGREGATOR_BUILT_AND_SCOPE_COMPLETE__CHECKPOINT_CORRECTLY_OPEN__ZERO_CREDIT",
+  "issue": 3743,
+  "base": "fb7928135",
+  "artifacts": {
+    "runtime": {
+      "path": "canonical/runtime/opus_checkpoint_claim_aggregator_v1.py",
+      "git_blob_sha": "63ede48b4d5600e1c32dbe5e54e726b92d73ada9"
+    },
+    "tests": {
+      "path": "canonical/tests/test_opus_checkpoint_claim_aggregator_v1.py",
+      "git_blob_sha": "0b973f2834b25d57d2b4396a39547ed6c7dbd757"
+    },
+    "manifest": {
+      "path": "canonical/governance/OPUS_CHECKPOINT_CLAIM_MANIFEST_V1.json",
+      "git_blob_sha": "b6b0847fcddf7df15783a1ce1379cb9f0ee38055"
+    },
+    "terminal": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "57be54e83f4fdee2f19a7b64d01da3acdce7d940"
+    },
+    "frontier": {
+      "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+      "git_blob_sha": "4d321afd0da38609a2386fefed6767349c9dd7da"
+    },
+    "scheduler": {
+      "path": "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json",
+      "git_blob_sha": "1e5aa9621966f90af9ddcc38a069abc04e0eafd4"
+    },
+    "recovery_tests": {
+      "path": "canonical/tests/test_recovery_acceptance_promotion_v2.py",
+      "git_blob_sha": "0beb4286d03246a8d45751bef3bd48ad333745e6"
+    }
+  },
+  "requirement_disposition": {
+    "1_recompute_basis_from_current_terminal_authority": "DONE__19_FAMILIES_RECOMPUTED_FROM_TERMINAL_CLOSURE_MANIFEST_V1_AND_RESIDUAL_MAP_V3_BOTH_PINNED_BY_CURRENT_TERMINAL_AUTHORITY__COUNTS_CONSISTENCY_CHECKED_AGAINST_REDUCER_REQUIRED_COUNT_AND_LIVE_L1_PARTITION_COUNT__NO_HISTORICAL_COUNT_INHERITED_AS_AXIOM",
+    "2_compile_claims_with_3730_core": "DONE__19_CHECKPOINT_ACCEPTANCE_CLAIMS_EACH_WITH_CLAIM_KIND_MISSION_BLOB_SCOPE_SHA256_TARGET_PREDICATE_SHA256_SEMANTICS_SHA256_EPOCH_AUTHORITY_ID_AND_EXACT_CLAIM_ID__ALL_PASS_coverage_claim_scope_guard_v1.validate_claim",
+    "3_alias_dedup_only_with_equivalence_proof": "DONE__19_MANIFEST_RESIDUAL_ALIASES_DEDUPED_WITH_RECORDED_EQUIVALENCE_PROOFS_PRESERVING_RESIDUALS_MODES_AND_ACCEPTANCE_BASES__UNPROVEN_DUPLICATE_CLAIM_IDS_FAIL_CLOSED",
+    "4_content_addressed_manifest_with_scope_completeness_theorem": "DONE__OPUS_CHECKPOINT_CLAIM_MANIFEST_V1.json_EPOCH_OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c_FREEZES_MISSION_TERMINAL_CLOSURE_RESIDUAL_REGISTRY_BLOBS__EXPLICIT_THEOREM_STATEMENT_PROVED_BY_PARTITION_EQUALITY_AND_BIJECTIVE_CLAIM_SET",
+    "5_claim_scoped_CC_R1_R2_R3_and_R4_authority": "DONE__R4_PROOF_AUTHORITY_BOUND_PER_CLAIM_VIA_r4_live_binding_currentness_ROOT_REGISTRY_BLOB_VERIFIED_EXACT_AND_PROPERTY_SCOPED_R4_CLOSURE_TRUE__3739_REGISTRY_GUARD_ENFORCES_CLAIM_BINDING_EQUALITY_SO_CERTIFICATES_CANNOT_CROSS_BIND",
+    "6_aggregate_iff_scope_complete_and_all_satisfied_same_epoch": "DONE__checkpoint_complete_FALSE_NOW__7_SATISFIED_12_OPEN__REDUCER_CLOSURE_ALSO_REQUIRED__ANY_EPOCH_DRIFT_FAILS_CLOSED",
+    "7_global_mission_complete_non_derivable": "DONE__global_mission_completion_derivable_FALSE_CONSTANT__HARD_NONCLAIM_RECORDED__EVEN_ALL_SATISFIED_DOC_WITHOUT_REDUCER_CLOSURE_CANNOT_COMPLETE",
+    "8_zero_spend_zero_terminal_credit": "DONE__ALL_ACCOUNTING_ZERO__AGGREGATOR_CLAIMS_CARRY_terminal_credit_delta_0"
+  },
+  "stale_pin_repaired": {
+    "file": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+    "field": "authoritative_sources.terminal_closure_manifest_current.git_blob_sha",
+    "was": "94123f54f122d146b5ceba734ae40e9b30506a11",
+    "now": "2bce4a68c9cc8465a7eb9e18f6cc503fc61d3d4a",
+    "reason": "PIN_PRE_DATED_THE_7_OF_19_CALIBRATED_ACCEPTANCE_UPDATE__AGGREGATOR_FAILS_CLOSED_ON_STALE_SOURCE_PINS_SO_THE_PIN_WAS_REBOUND_TO_CURRENT_BYTES__NOTE_ADVANCED_6_TO_7"
+  },
+  "chain_reconvergence": {
+    "CURRENT_LIVE_WORK_FRONTIER.json": "V3_REFRESHED__SOURCE_SET_11_ROWS_ALL_CURRENT",
+    "CURRENT_DEVELOPMENT_SCHEDULER.json": "FRONTIER_OBSERVATION_PIN_REBOUND_TO_REFRESHED_FRONTIER_BLOB"
+  },
+  "pre_existing_red_fixed": {
+    "suite": "canonical/tests/test_recovery_acceptance_promotion_v2.py",
+    "base_state": "3_FAILURES_AT_BASE_fb7928135_IDENTICAL_IN_CLEAN_WORKTREE",
+    "repair": "21_STALE_PINS_ADVANCED_TO_CURRENT_ACCEPTANCE_EPOCH_7_OF_19_18_OF_38_ATOMIC_VIA_LEDGER_V3__V2_LEDGER_LIVE_UPDATED_AT_16_22__SELF_VERIFICATION_FAMILY_PROMOTED_TO_VERIFIED_OWNED_EQUAL_OR_BETTER"
+  },
+  "verification_results": {
+    "aggregator_suite": "17_OF_17_PASS",
+    "unittest_battery": "76_TESTS_OK_12_SKIPPED_RETIRED_V2",
+    "pytest_battery": "97_PASS_ACROSS_GATE_CLAIM_SCOPE_REGISTRY_SEMANTIC_RECEIPT_SHARED_CAUSE_SUITES",
+    "verify_current": "PASS__EMITTED_MANIFEST_CURRENT_AND_SCOPE_COMPLETE",
+    "terminal_reality_gate": "BLOCKERS_CLOSE_AGGREGATE_ONLY__19_FAMILIES_7_ACCEPTED_7_OWNED_12_OPEN",
+    "live_chain_pin_audit": "TERMINAL_MISSION_R2_SCHEDULER_FRONTIER_SOURCE_SET_ALL_CURRENT"
+  },
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_CREDIT_AND_NO_TERMINAL_CREDIT",
+    "NO_FRESH_REALITY_CONSUMED",
+    "CHECKPOINT_COMPLETION_IS_NOT_MISSION_COMPLETION",
+    "THE_7_SATISFIED_CLAIMS_ARE_PRE_EXISTING_VERIFIED_STATES_NEWLY_FROZEN_AS_CLAIM_INSTANCES_NOT_NEW_PASSES",
+    "HOSTED_CI_REVERIFICATION_STILL_BLOCKED_BY_ACCOUNT_BILLING_PRESTEP"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

@@ -676,8 +676,8 @@
     },
     "terminal_closure_manifest_current": {
       "path": "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json",
-      "git_blob_sha": "94123f54f122d146b5ceba734ae40e9b30506a11",
-      "note": "6_OF_19_LITERAL_PASS_NORMALIZED_FOR_MANDATORY_TERMINAL_REDUCER"
+      "git_blob_sha": "2bce4a68c9cc8465a7eb9e18f6cc503fc61d3d4a",
+      "note": "7_OF_19_CALIBRATED_ACCEPTANCE_PASS_NORMALIZED_FOR_MANDATORY_TERMINAL_REDUCER__PIN_REBOUND_BY_CLAIM_SCOPED_CHECKPOINT_AGGREGATOR_3743"
     },
     "terminal_proof_route_disjunction_v1": {
       "path": "canonical/governance/TERMINAL_PROOF_ROUTE_DISJUNCTION_TRUTH_REPAIR_20261007_V1.json",
