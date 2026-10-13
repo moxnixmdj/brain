@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_COVERAGE_CC_R3_MISSION_SCOPE_BRIDGE_STATUS_V1",
+  "date": "2026-10-13",
+  "issue": 3732,
+  "status": "NO_MISSION_SCOPE_BRIDGE_PROVED__CC_R3_REAL_MISSION_CONJUNCT_OPEN__ZERO_CREDIT",
+  "defect_record": {
+    "unsound_reduction": "CHECKPOINT_SINGLE_U_EMPTY_DOES_NOT_PROVE_B_PLUS_REAL_SUBSETEQ_G_MINUS_REAL",
+    "historical_carrier": "COMPLETE_SELECTED_ROUTE_COVER_SINGLE_ABC_FRONTIER_20261007_V3.json",
+    "carrier_objective": "OPUS_5_5_CHECKPOINT__NOT_THE_OPEN_ENDED_REAL_MISSION",
+    "countermodel": {
+      "universe": [
+        "a",
+        "b"
+      ],
+      "checkpoint_scope": [
+        "a"
+      ],
+      "B_plus_real": [
+        "a",
+        "b"
+      ],
+      "G_minus_real": [
+        "a"
+      ],
+      "U_checkpoint": "checkpoint_scope MINUS G_minus_real",
+      "U_checkpoint_empty": true,
+      "B_plus_real_subseteq_G_minus_real": false,
+      "witness": [
+        "b"
+      ]
+    }
+  },
+  "cc_r3_real_mission_conjunct": {
+    "statement": "B_plus_real SUBSETEQ G_minus_real",
+    "status": "OPEN__UNKNOWN",
+    "closed_by_checkpoint_u_empty_alone": false
+  },
+  "allowed_bridge_forms": [
+    {
+      "form": "SCOPE_CONTAINMENT",
+      "theorem": "B_plus_real SUBSETEQ S_checkpoint",
+      "requirements": [
+        "CONTENT_ADDRESSED_THEOREM_ARTIFACT",
+        "INDEPENDENT_VERIFICATION",
+        "EXACT_SEMANTIC_UNIVERSE_BINDING"
+      ]
+    },
+    {
+      "form": "REAL_MISSION_U",
+      "theorem": "U_real DEFINED OVER THE SAME EXACT SEMANTIC UNIVERSE AS CC_R3 WITH U_real EMPTY INDEPENDENTLY VERIFIED",
+      "requirements": [
+        "CONTENT_ADDRESSED_THEOREM_ARTIFACT",
+        "INDEPENDENT_VERIFICATION",
+        "EXACT_SEMANTIC_UNIVERSE_BINDING"
+      ]
+    }
+  ],
+  "mission_scope_bridge": {
+    "proved": false,
+    "form": null,
+    "theorem_path": null,
+    "theorem_git_blob_sha": null,
+    "independent_verification_path": null,
+    "independent_verification_git_blob_sha": null
+  },
+  "declared_non_real_mission_closure_claims": [
+    {
+      "claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+      "claim_kind": "PROPERTY_CERTIFICATE",
+      "scope_sha256": "144e629c2e3315abe8e31eb10aaa8edd28ab7799796152484602f88ba0895e51",
+      "semantic_universe": "R3_PROMOTION_SAFETY_TEN_FILE_ACTIVE_CLAIM_SURFACE__NOT_THE_REAL_MISSION_BEHAVIOR_ENVELOPE",
+      "real_mission_closure_claimed": false
+    }
+  ],
+  "bindings": {
+    "root_registry_path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_CERTIFICATE_REGISTRY_V1.json",
+    "root_registry_git_blob_sha": "7552290f57d478d4cf48ba42e392f71a23a91264",
+    "r4_live_binding_root_registry_sha": "7552290f57d478d4cf48ba42e392f71a23a91264",
+    "r4_live_binding_active_claim_id": "e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314",
+    "root_theorem_path": "canonical/governance/COVERAGE_COMPLETENESS_ROOT_THEOREM_V1.json",
+    "root_theorem_git_blob_sha": "3d2c89502d94c045d04af04db4cdecc509a08dd8"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_TERMINAL_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "CC_R3_REAL_MISSION_CONJUNCT_REMAINS_OPEN_UNKNOWN",
+    "CHECKPOINT_U_EMPTY_HAS_ZERO_REAL_MISSION_CC_R3_CLOSURE_AUTHORITY",
+    "THIS_IS_AN_R3_R4_BINDING_CONSTRAINT_NOT_A_NEW_PEER_ROOT"
+  ]
+}

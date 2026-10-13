@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_CC_R3_MISSION_SCOPE_BRIDGE_GUARD_LOCAL_VERIFY_20261013_V1",
+  "date": "2026-10-13",
+  "status": "PASS__SCOPE_BRIDGE_CONSTRAINT_HELD__CC_R3_REAL_MISSION_CONJUNCT_OPEN__ZERO_CREDIT",
+  "issue": 3732,
+  "base": "e5a0e131f6ad18e716e48faf81a4589a7987d241",
+  "artifacts": {
+    "status_artifact": {
+      "path": "canonical/governance/COVERAGE_CC_R3_MISSION_SCOPE_BRIDGE_STATUS_V1.json",
+      "git_blob_sha": "0f46891d30b97982643935ae11b54dff71b8ada1"
+    },
+    "guard": {
+      "path": "canonical/runtime/coverage_cc_r3_mission_scope_bridge_guard_v1.py",
+      "git_blob_sha": "be1024890c784bc374d8a33c696921cf3be9a9f5"
+    },
+    "tests": {
+      "path": "canonical/tests/test_coverage_cc_r3_mission_scope_bridge_guard_v1.py",
+      "git_blob_sha": "c3368d0956a4a79470ed2db201780d14d7bb2c0c"
+    }
+  },
+  "requirement_disposition": {
+    "1_no_checkpoint_u_empty_closure_of_cc_r3_by_itself": "DONE__GUARD_FAILS_CLOSED_IF_cc_r3_real_mission_conjunct.closed_by_checkpoint_u_empty_alone_IS_NOT_FALSE_AND_IF_THE_R3_SLOT_CLAIM_SCOPE_IS_NOT_CLEARED_AS_NON_REAL_MISSION_CLOSURE_AND_NO_PROVED_BRIDGE_EXISTS",
+    "2_content_addressed_bridge_theorem_or_real_mission_u": "DONE__STATUS_ARTIFACT_DEFINES_BOTH_ALLOWED_BRIDGE_FORMS_WITH_CONTENT_ADDRESSED_REQUIREMENTS__CURRENT_STATE_NO_BRIDGE_PROVED__A_PROVED_BRIDGE_REQUIRES_EXACT_BLOB_VERIFIED_THEOREM_PLUS_INDEPENDENT_VERIFICATION",
+    "3_cc_r3_stays_open_until_bridge_plus_u_empty_or_direct_inclusion": "DONE__GUARD_REQUIRES_REAL_MISSION_CONJUNCT_OPEN_AND_LIVE_ABC_CLOSED FALSE AND LIVE_TERMINAL FALSE_WHILE_NO_BRIDGE",
+    "4_zero_credit": "DONE__ALL_ACCOUNTING_ZERO"
+  },
+  "design_note": "DEDICATED_GUARD_PLUS_STATUS_ARTIFACT_INSTEAD_OF_REGISTRY_EDIT__THE_REGISTRY_BLOB_IS_PINNED_BY_SEVEN_GOVERNANCE_FILES_AND_THE_GUARD_READS_THE_REGISTRY_CONTENT_ADDRESSED_WITHOUT_MUTATING_IT__THE_STATUS_ARTIFACT_BINDS_THE_CURRENT_REGISTRY_BLOB_AND_THE_R4_LIVE_BINDING_ACTIVE_CLAIM",
+  "countermodel_embedding": "THE_ISSUE_FINITE_COUNTERMODEL_IS_EMBEDDED_AND_GUARD_VALIDATED_FOR_INTERNAL_CONSISTENCY__TAMPER_TESTS_COVER_WITNESS_AND_U_EMPTINESS",
+  "verification_results": {
+    "bridge_guard_suite": "15_OF_15_PASS",
+    "registry_guard_and_root_theorem_pytest_battery": "58_PASS",
+    "aggregator_and_r2_reconciliation_and_bridge_unittest": "37_OK",
+    "verify_current": "PASS__CHECKPOINT_MANIFEST_EPOCH_UNCHANGED"
+  },
+  "hard_nonclaims": [
+    "NO_TERMINAL_ACCEPTANCE_OR_OWNERSHIP_CREDIT",
+    "CC_R3_REAL_MISSION_CONJUNCT_REMAINS_OPEN_UNKNOWN",
+    "NOT_A_NEW_PEER_ROOT",
+    "HOSTED_CI_REVERIFICATION_STILL_BLOCKED_BY_ACCOUNT_BILLING_PRESTEP"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
