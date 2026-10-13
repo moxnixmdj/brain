@@ -14,6 +14,14 @@ def _copy_sources(tmp:Path):
  for rel in (p.PROF,p.ASSURANCE,p.BYTES,p.R2,p.WAKE):
   src=ROOT/rel; dst=tmp/rel; dst.parent.mkdir(parents=True,exist_ok=True); dst.write_bytes(src.read_bytes())
 
+# POST_COMPOSITION_V2_RETIRED_BY_V3_20261013: the V2 adapter's invariants encode the
+# pre-V91 R2 shape (primary_internal_unsolved == 1) and the retired pre-V10 professional
+# branch. Current canonical truth (R2 zero internal residuals + one task-specific external
+# observation frontier per R2_POST_V91_EXTERNALITY_RECLASSIFICATION_VERIFY_20261011_V1;
+# Professional V10 24/24) is replayed by capability_parallel_frontier_post_composition_v3
+# under CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261013_V16 (issue #4338, issue #3740).
+# This suite is retained as the historical donor test set and skipped against current truth.
+@unittest.skip("V2_ADAPTER_RETIRED_BY_V3__CANNOT_REPLAY_POST_V91_CURRENT_TRUTH__SEE_V3_SUITE")
 class PostCompositionFrontierV2Tests(unittest.TestCase):
  def test_current_stale_snapshot_refreshes_moving_sources_and_plans(self):
   out=p.plan_current_post_composition_frontier()

@@ -144,7 +144,12 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
             precedence["dormant_alternative_route_count"],
             result["dormant_alternative_route_cell_count"],
         )
-        self.assertEqual(result["direct_route_count"], 39)
+        self.assertEqual(result["task_specific_external_observation_frontier_cell_count"], 1)
+        self.assertEqual(
+            result["task_specific_external_observation_frontier_cell"],
+            "FINANCE_SEMANTIC_ADEQUACY_TAIL",
+        )
+        self.assertEqual(result["direct_route_count"], 40)
         self.assertEqual(result["bounded_family_count"], 36)
         self.assertFalse(terminal["live_truth"]["opus_5_5_is_global_terminal_objective"])
         self.assertTrue(terminal["live_truth"]["opus_5_5_is_frontier_checkpoint"])
@@ -155,7 +160,7 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
         r2 = self.load(R2)
         activation = self.load(REGCAP_ACTIVATION)
 
-        self.assertIn("__V57__", r2["status"])
+        self.assertIn("__V91__", r2["status"])
         rec = r2["r2_v53_regcap_semantic_routing_reconciliation"]
         self.assertEqual(
             rec["precedence"][:3],
@@ -197,12 +202,16 @@ class CurrentTerminalAuthorityR2ReconciliationV1Tests(unittest.TestCase):
         self.assertFalse(truth["r2_regcap_global_loss_cushion_identity_closed"])
         self.assertFalse(truth["r2_regcap_open_world_ontology_closed"])
         self.assertFalse(truth["r2_regcap_missing_context_is_external_impossibility"])
-        self.assertEqual(truth["r2_primary_internal_unsolved_count"], 1)
+        self.assertEqual(truth["r2_primary_internal_unsolved_count"], 0)
+        self.assertIsNone(truth["r2_primary_internal_unsolved_cell"])
         self.assertEqual(
-            truth["r2_primary_internal_unsolved_cell"],
+            truth["r2_task_specific_external_observation_frontier"],
             "FINANCE_SEMANTIC_ADEQUACY_TAIL",
         )
-        self.assertIn("CURRENT_R2_V57", terminal["status"])
+        self.assertIn(
+            "__V91__",
+            terminal["authoritative_sources"]["current_r2_decision_intelligence"]["status"],
+        )
         self.assertIn("TERMINAL_FALSE", terminal["status"])
         self.assertEqual(
             terminal["r2_v53_regcap_semantic_routing_reconciliation_20261009_v1"][
