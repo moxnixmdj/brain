@@ -1,7 +1,7 @@
 import json,unittest
 from pathlib import Path
 
-from canonical.runtime import capability_parallel_frontier_post_composition_v2 as adapter
+from canonical.runtime import capability_parallel_frontier_post_composition_v3 as adapter
 from canonical.runtime import capability_parallel_frontier_v2 as core
 
 ROOT=Path(__file__).resolve().parents[2]
@@ -10,7 +10,7 @@ def load(rel):
  return json.loads((ROOT/rel).read_text(encoding="utf-8"))
 
 class T(unittest.TestCase):
- def test_current_scheduler_chain_uses_v15_dynamic_currentness(self):
+ def test_current_scheduler_chain_uses_v16_dynamic_currentness(self):
   sp="canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json"
   mp="canonical/governance/CURRENT_MISSION_OBJECTIVE.json"
   fp="canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json"
@@ -18,23 +18,23 @@ class T(unittest.TestCase):
 
   self.assertEqual(
    s["authoritative_activation"],
-   "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V15.json",
+   "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261013_V16.json",
   )
   self.assertEqual(
    s["runtime"],
-   "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
+   "canonical/runtime/capability_parallel_frontier_post_composition_v3.py",
   )
   self.assertEqual(
    s["primary_entrypoint"],
-   "canonical.runtime.capability_parallel_frontier_post_composition_v2.plan_current_post_composition_frontier",
+   "canonical.runtime.capability_parallel_frontier_post_composition_v3.plan_current_post_composition_frontier",
   )
   self.assertEqual(
    m["current_development_scheduler"]["activation"],
-   "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V15.json",
+   "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261013_V16.json",
   )
   self.assertEqual(
    m["current_development_scheduler"]["primary_runtime"],
-   "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
+   "canonical/runtime/capability_parallel_frontier_post_composition_v3.py",
   )
 
   refreshed=adapter.refresh_post_composition_currentness(f,root=ROOT)
@@ -60,9 +60,19 @@ class T(unittest.TestCase):
 
  def test_unmodeled_source_drift_is_not_silently_followed(self):
   f=core.load_current_frontier()
+  # Unmodeled sources are those the adapter does not validate-and-rebind.
+  # CURRENT_TERMINAL_AUTHORITY and CURRENT_RESIDUAL_REUSE_CLASSIFICATION became
+  # modeled (invariant-validated) sources in the V3 adapter, so unmodeled drift
+  # is injected on a source the adapter never touches.
+  modeled={
+   adapter.PROF,adapter.ASSURANCE,adapter.BYTES,adapter.R2,
+   getattr(adapter,"R2_V91_RECEIPT",""),getattr(adapter,"RESIDUAL",""),
+   "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+   getattr(adapter,"WAKE",""),
+  }
   row=next(
    x for x in f["scope"]["source_set"]
-   if x["path"]=="canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+   if x["path"] not in modeled
   )
   row["git_blob_sha"]="0"*40
   refreshed=adapter.refresh_post_composition_currentness(f,root=ROOT)
