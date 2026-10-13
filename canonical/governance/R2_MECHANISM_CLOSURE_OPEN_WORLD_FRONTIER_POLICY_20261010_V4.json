@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V4",
   "date": "2026-10-10",
-  "status": "ACTIVE__GENERAL_R2_MECHANISM_CLOSED__OPEN_WORLD_EVIDENCE_FRONTIER_WAKE_GATED__MUTABLE_CURRENT_R2_PATH_BOUND__REUSE_FIRST_NEW_PRIMITIVE_ADMISSION_BOUND__POLICY_COVER_SAFETY_CONTROLLER_REBOUND",
+  "status": "ACTIVE__GENERAL_R2_MECHANISM_CLOSED__OPEN_WORLD_EVIDENCE_FRONTIER_WAKE_GATED__MUTABLE_CURRENT_R2_PATH_BOUND__REUSE_FIRST_NEW_PRIMITIVE_ADMISSION_BOUND__POLICY_COVER_SAFETY_CONTROLLER_REBOUND__POST_V91_RECLASSIFIED",
   "mission_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "supersedes": "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V3.json",
   "binding_law": {
@@ -42,10 +42,15 @@
     "status_contains": "GENERAL_MECHANISM_CLOSED",
     "general_mechanism_missing": false,
     "primary_internal_cell": "FINANCE_SEMANTIC_ADEQUACY_TAIL",
-    "primary_internal_cell_state": "INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT",
-    "primary_internal_unsolved_count": 1,
+    "primary_internal_cell_state": "TASK_SPECIFIC_EXTERNAL_OBSERVATION_FRONTIER__WAKE_GATED",
+    "primary_internal_unsolved_count": 0,
     "information_theoretic_externality_proved": false,
-    "global_open_world_closure_claimed": false
+    "global_open_world_closure_claimed": false,
+    "task_specific_external_observation_frontier_count": 1,
+    "post_v91_reclassification_authority": {
+      "path": "canonical/verification/R2_POST_V91_EXTERNALITY_RECLASSIFICATION_VERIFY_20261011_V1.json",
+      "git_blob_sha": "c19e988150384dba5bed9a8a5bf1ecd9721ad98c"
+    }
   },
   "verified_architecture_truth": {
     "task_local_controller_emits_minimum_information_requests": true,

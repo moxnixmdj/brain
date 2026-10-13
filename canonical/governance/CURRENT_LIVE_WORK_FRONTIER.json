@@ -29,11 +29,11 @@
       },
       {
         "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
-        "git_blob_sha": "95c6e56596ef9c8c0325a32764a29322b6799fce"
+        "git_blob_sha": "a1097655fe5045936414ecc63b9b98ff668d2d9a"
       },
       {
         "path": "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
-        "git_blob_sha": "eaeb22cef6a8d85d6bbcad2e06706457cb573d1a"
+        "git_blob_sha": "e208000c7b2a2ca926b4c4f8de3a1c828834aad6"
       },
       {
         "path": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
@@ -445,7 +445,7 @@
         "internal_r2_mechanism_unsolved_count": 0,
         "task_specific_external_observation_frontier_count": 1,
         "verification_path": "canonical/verification/R2_POST_V91_EXTERNALITY_RECLASSIFICATION_VERIFY_20261011_V1.json",
-        "source_git_blob_sha": "eaeb22cef6a8d85d6bbcad2e06706457cb573d1a",
+        "source_git_blob_sha": "e208000c7b2a2ca926b4c4f8de3a1c828834aad6",
         "second_carrier_verification_path": "canonical/verification/R2_GENERIC_AUTHORITY_MATERIALIZATION_SECOND_CARRIER_VERIFY_20261011_V1.json",
         "second_carrier_verification_git_blob_sha": "ace18878d4d66a8ceea2d0602d5ccbdceaa19247",
         "v91_reclassification_receipt": "canonical/verification/R2_POST_V91_EXTERNALITY_RECLASSIFICATION_VERIFY_20261011_V1.json",
@@ -605,7 +605,7 @@
         "required_status_checks_enforcement": "off",
         "settings_mutation_authority_available": false,
         "vector_bounds_complete": false,
-        "source_git_blob_sha": "95c6e56596ef9c8c0325a32764a29322b6799fce",
+        "source_git_blob_sha": "a1097655fe5045936414ecc63b9b98ff668d2d9a",
         "terminal": false,
         "admitted_capability_deficit_count": 0,
         "follow_rule": "FOLLOW_ONLY_WHILE_TERMINAL_FALSE_AND_NO_ADMITTED_CAPABILITY_DEFICIT",
@@ -953,7 +953,7 @@
       "raw_python_source_bytes": 1574321
     },
     "r2": {
-      "git_blob_sha": "eaeb22cef6a8d85d6bbcad2e06706457cb573d1a",
+      "git_blob_sha": "e208000c7b2a2ca926b4c4f8de3a1c828834aad6",
       "version": 91,
       "internal_r2_mechanism_unsolved_count": 0,
       "task_specific_external_observation_frontier_count": 1,
@@ -973,7 +973,7 @@
       "parked_unresolved_rows": 1
     },
     "terminal": {
-      "git_blob_sha": "95c6e56596ef9c8c0325a32764a29322b6799fce",
+      "git_blob_sha": "a1097655fe5045936414ecc63b9b98ff668d2d9a",
       "terminal": false,
       "admitted_capability_deficit_count": 0
     },

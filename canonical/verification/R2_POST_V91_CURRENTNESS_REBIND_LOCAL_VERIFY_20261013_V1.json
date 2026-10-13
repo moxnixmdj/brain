@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_R2_POST_V91_CURRENTNESS_REBIND_LOCAL_VERIFY_20261013_V1",
+  "date": "2026-10-13",
+  "status": "PASS__LIVE_CHAIN_CONVERGED__PRE_EXISTING_RED_SUITE_GREEN__ZERO_CREDIT",
+  "issue": 3740,
+  "base": "adccb36f5037a19ff8effe8870c8d3bdf0c57d66",
+  "truth_key": {
+    "path": "canonical/verification/R2_POST_V91_EXTERNALITY_RECLASSIFICATION_VERIFY_20261011_V1.json",
+    "git_blob_sha": "c19e988150384dba5bed9a8a5bf1ecd9721ad98c"
+  },
+  "mutated_blobs": {
+    "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json": "e208000c7b2a2ca926b4c4f8de3a1c828834aad6",
+    "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json": "a1097655fe5045936414ecc63b9b98ff668d2d9a",
+    "canonical/governance/CURRENT_MISSION_OBJECTIVE.json": "30005d2065d84618c080979eb841e0161035ac2c",
+    "canonical/governance/CURRENT_DEVELOPMENT_SCHEDULER.json": "c0a042ad420340c5758034f305aa403ab95a806b",
+    "canonical/governance/R2_MECHANISM_CLOSURE_OPEN_WORLD_FRONTIER_POLICY_20261010_V4.json": "9eb797fe22ec03f2d8e61bdb4defdc8beb8ec3f4",
+    "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json": "da0f6741d6ef43ade961fcfcff4b9b726b3c6422"
+  },
+  "verification_results": {
+    "pin_audit": "ALL_LIVE_CHAIN_BLOB_PINS_CURRENT__TERMINAL_MISSION_R2_SCHEDULER_FRONTIER_POLICY_SCHEDULER_CUT_FIXED_POINT_V21_BACKEND",
+    "r2_reconciliation_suite": "5_OF_5_PASS__BASE_HAD_4_FAILURES",
+    "scheduler_chain_option_suites": "PASS",
+    "v3_adapter": "9_OF_9_PASS",
+    "v1_post_composition": "4_OF_4_PASS",
+    "currentness_v1": "PASS",
+    "v2_suite": "EXPLICITLY_SKIPPED_RETIRED_HISTORICAL_DONOR__DOCUMENTED_REASON",
+    "terminal_reality_gate": "BLOCKERS_CLOSE_AGGREGATE_ONLY",
+    "terminal_projection_consistency": "PASS"
+  },
+  "hard_nonclaims": [
+    "NO_CREDIT",
+    "NO_FRESH_REALITY",
+    "INDEPENDENT_RUNNER_REVERIFICATION_PENDING_BILLING_RESOLUTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
