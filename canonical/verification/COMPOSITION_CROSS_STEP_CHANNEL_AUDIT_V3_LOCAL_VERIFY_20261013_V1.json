@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_CROSS_STEP_CHANNEL_AUDIT_V3_LOCAL_VERIFY_20261013_V1",
+  "date": "2026-10-13",
+  "status": "PASS__EXHAUSTIVE_ENUMERATION_COMPLETE__ZERO_CREDIT",
+  "issue": 3046,
+  "base": "fd2faaabd04e807178c1f49a5df5378fba177e4e",
+  "artifacts": {
+    "audit": {
+      "path": "canonical/runtime/composition_cross_step_channel_audit_v3.py",
+      "git_blob_sha": "8492eaa56a49fef063f5293ece5c89f72306034f"
+    },
+    "tests": {
+      "path": "canonical/tests/test_composition_cross_step_channel_audit_v3.py",
+      "git_blob_sha": "7f25b8b2470b7ec39e5e8127a4f6ef59f1001152"
+    }
+  },
+  "requirement_disposition": {
+    "1_exhaustively_enumerate_every_mutable_cross_step_channel_outside_the_shell_env_projection": "DONE__AST_DERIVED_EXHAUSTIVE_INVENTORY_OF_EVERY_subprocess_os_environ_FILESYSTEM_WRITE_TEMPFILE_URLOPEN_CALL_SITE_IN_astra_runtime.py_GROUPED_BY_ENCLOSING_FUNCTION__ANY_NEW_OR_DRIFTED_SITE_FAILS_CLOSED_AS_CHANNEL_SITE_DRIFT__8_CHANNELS_ENUMERATED",
+    "2_prove_each_admitted_channel_declared_and_content_bound_or_quarantine": "DONE__4_DECLARED_OR_CONSTANT(SHELL_ENV_PROJECTION sha256_bound_v2_verified RUNTIME_OUTPUT_AND_STATE_FILES typed_admin_write EXTERNAL_TOOL_BRIDGE request_sha256_plus_response_identity PARENT_ENV_COPY constant_across_steps)_4_QUARANTINED(SHARED_CWD_FILESYSTEM incl login_shell_profile amplifier SYSTEM_PACKAGE_STATE PROCESS_AND_PORT_STATE NETWORK_AND_EXTERNAL_SYSTEMS)",
+    "3_preserve_both_UNVERIFIED_flags": "DONE__semantic_declaration_completeness_UNVERIFIED_and_external_evidence_channel_completeness_UNVERIFIED_EMITTED_AND_TEST_ENFORCED",
+    "4_independently_replay_on_exact_current_main_bytes": "DONE__AUDIT_RUNS_AGAINST_LIVE_BYTES_EVERY_INVOCATION_AND_BINDS_THE_RUNTIME_GIT_BLOB_V2_PROJECTION_AUDIT_REPLAYS_IN_THE_SAME_EVALUATION"
+  },
+  "verification_results": {
+    "channel_audit_suite": "12_OF_12_PASS",
+    "v2_no_bypass_suites": "PASS",
+    "state_capsule_v2": "10_PASS",
+    "live_evaluate": "PASS__EXHAUSTIVE_CHANNEL_ENUMERATION_COMPLETE__8_CHANNELS_4_QUARANTINED__ZERO_CREDIT"
+  },
+  "hard_nonclaims": [
+    "NO_COMPOSITION_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "SEMANTIC_DECLARATION_COMPLETENESS_REMAINS_UNVERIFIED",
+    "EXTERNAL_EVIDENCE_CHANNEL_COMPLETENESS_REMAINS_UNVERIFIED",
+    "HOSTED_CI_REVERIFICATION_STILL_BLOCKED_BY_ACCOUNT_BILLING_PRESTEP"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
