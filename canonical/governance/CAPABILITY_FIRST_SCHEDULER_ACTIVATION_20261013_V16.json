@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261013_V16",
+  "date": "2026-10-13",
+  "status": "ACTIVE_POST_COMPOSITION_V16__V91_CURRENTNESS_REPAIR__PROFESSIONAL_V10_24_OF_24__R2_ZERO_INTERNAL_RESIDUALS_ONE_TASK_SPECIFIC_EXTERNAL_OBSERVATION_FRONTIER__RESIDUAL_12_GAP_A_0_ACTIVE_GAP_B_1_PARKED_TB__TERMINAL_FOLLOW_FALSE_ZERO_ADMITTED_DEFICIT__READ_ONLY_ONLY__ZERO_CREDIT",
+  "supersedes_effective": "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V15.json",
+  "repair_basis": {
+    "issue": 4338,
+    "issue_title": "Repair post-composition scheduler currentness for V10 24/24 + R2 V91",
+    "contract": "CURRENTNESS_ADAPTER_REPAIR_ONLY__PRESERVE_INTERVAL_ROBUST_PARETO_CORE__NO_SCALAR_WEIGHTS__ANY_INVARIANT_CHANGE_FAILS_CLOSED"
+  },
+  "runtime": {
+    "path": "canonical/runtime/capability_parallel_frontier_post_composition_v3.py",
+    "git_blob_sha": "34d6c54828746d09b22767f3565a1e3893994672",
+    "entrypoint": "plan_current_post_composition_frontier"
+  },
+  "core_runtime": {
+    "path": "canonical/runtime/capability_parallel_frontier_v2.py",
+    "git_blob_sha": "209d8d11494645432354636a3dc17e7b515abaf8"
+  },
+  "focused_tests": {
+    "path": "canonical/tests/test_capability_parallel_frontier_post_composition_v3.py",
+    "git_blob_sha": "ddd3ca1ee80ebdefda92c3361710bc9b6b0f3672",
+    "result": "9_OF_9_PASS_LOCAL_EXACT_CURRENT_FILES"
+  },
+  "frontier": {
+    "path": "canonical/governance/CURRENT_LIVE_WORK_FRONTIER.json",
+    "binding": "MUTABLE_CURRENT_PATH_IDENTITY__SUPPORTED_MOVING_SOURCE_PROJECTIONS_REFRESHED_IN_MEMORY_BEFORE_CORE_CURRENTNESS_CHECK",
+    "activation_observed_git_blob_sha": "3ff1e755c023b4a1fd994c55358d130b84ec7d7e",
+    "parallel_control_runtime": "canonical/runtime/capability_parallel_frontier_post_composition_v3.py"
+  },
+  "adapted_currentness_invariants": {
+    "professional": "REQUIRE_EXACT_V10_24_OF_24_PARTITION__12_EXECUTION_12_SEMANTIC_ZERO_OPEN__REGRESSION_GATE_ONLY__PRE_V10_BRANCH_DELETED_AS_RETIRED_INVARIANT",
+    "assurance": "REQUIRE_PROPERTY_TRUTH_24_OF_24__ONLY_FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION_BEFORE_PROMOTION__NOT_LIVE_DEFAULT",
+    "r2": "REQUIRE_ZERO_INTERNAL_MECHANISM_RESIDUALS_AND_EXACTLY_ONE_TASK_SPECIFIC_EXTERNAL_OBSERVATION_FRONTIER__KEYED_TO_INDEPENDENTLY_VERIFIED_V91_RECLASSIFICATION_RECEIPT__MECHANISM_MISSING_FALSE__OPEN_WORLD_CLOSURE_FALSE",
+    "residual_reuse": "FOLLOW_ONLY_WHILE_TOPOLOGY_IS_12_GAP_A_0_ACTIVE_GAP_B_1_PARKED_TB__PARKED_IDENTITY_TB_SCIENCE_GE_58_7",
+    "terminal": "FOLLOW_ONLY_WHILE_TERMINAL_FALSE_AND_ZERO_ADMITTED_CAPABILITY_DEFICIT",
+    "tb": "EXACT_HASH_FAIL_CLOSED_UNCHANGED",
+    "bytes": "UNCHANGED_V2_INVARIANTS__V81_CURRENT_AT_ACTIVATION",
+    "checkpoint_wake_gate": "UNCHANGED_V2_INVARIANTS"
+  },
+  "r2_v91_reclassification_receipt": {
+    "path": "canonical/verification/R2_POST_V91_EXTERNALITY_RECLASSIFICATION_VERIFY_20261011_V1.json",
+    "git_blob_sha": "c19e988150384dba5bed9a8a5bf1ecd9721ad98c"
+  },
+  "verification_boundary": {
+    "local_agent_verification": "PY_COMPILE_PASS__9_OF_9_FOCUSED_TESTS_PASS_ON_EXACT_CURRENT_FILES__REALITY_GATE_RE_RUN__NO_RETIRED_SHAPE_ACCEPTED",
+    "independent_public_runner_reverification": "REQUIRED_BEFORE_ANY_PROMOTION_CREDIT__PENDING_GITHUB_HOSTED_ACTIONS_BILLING_BLOCK_RESOLUTION",
+    "prototype_evidence_relation": "ISSUE_4338_SPRITE_PROTOTYPE_9_OF_9_IS_DESIGN_DONOR_ONLY__V3_IS_INDEPENDENTLY_IMPLEMENTED_AND_TESTED_AGAINST_EXACT_CURRENT_CANONICAL_BYTES"
+  },
+  "authority": {
+    "execution_authority": false,
+    "promotion_authority": false,
+    "terminal_credit_delta": 0,
+    "incremental_spend_usd": 0
+  }
+}

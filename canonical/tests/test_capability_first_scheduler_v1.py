@@ -490,11 +490,11 @@ class CapabilityFirstSchedulerV1Tests(unittest.TestCase):
         )
         self.assertEqual(
             pointer["authoritative_activation"],
-            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V15.json",
+            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261013_V16.json",
         )
         self.assertEqual(
             mission["current_development_scheduler"]["activation"],
-            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261010_V15.json",
+            "canonical/governance/CAPABILITY_FIRST_SCHEDULER_ACTIVATION_20261013_V16.json",
         )
         self.assertEqual(
             pointer["scalar_fallback_runtime"],

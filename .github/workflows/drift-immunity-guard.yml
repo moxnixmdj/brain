@@ -46,8 +46,14 @@ jobs:
           fetch-depth: 0
       - name: Preserve trusted validator
         run: |
-          cp canonical/runtime/enforce_goal_hierarchy.py /tmp/trusted_drift_guard.py
-          cp execution_guard/v22_prewrite_admission.py /tmp/trusted_v22_prewrite_admission.py
+          set -euo pipefail
+          # The validator resolves its repo root as Path(__file__).parents[2],
+          # so the trusted copy must sit exactly two directories below the
+          # workspace root (a flat /tmp copy crashes with IndexError and has
+          # silently failed every guard job since this pattern was introduced).
+          mkdir -p "$GITHUB_WORKSPACE/.guard_trusted/runtime"
+          cp canonical/runtime/enforce_goal_hierarchy.py "$GITHUB_WORKSPACE/.guard_trusted/runtime/enforce_goal_hierarchy.py"
+          cp execution_guard/v22_prewrite_admission.py "$GITHUB_WORKSPACE/.guard_trusted/trusted_v22_prewrite_admission.py"
       - name: Resolve comparison
         id: refs
         shell: bash
@@ -70,4 +76,4 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           CURRENT_PR_NUMBER: ${{ github.event.pull_request.number || 0 }}
         run: |
-          PYTHONPATH=/tmp python /tmp/trusted_drift_guard.py --base "${{ steps.refs.outputs.base }}" --head "${{ steps.refs.outputs.head }}"
+          PYTHONPATH="$GITHUB_WORKSPACE/.guard_trusted" python "$GITHUB_WORKSPACE/.guard_trusted/runtime/enforce_goal_hierarchy.py" --base "${{ steps.refs.outputs.base }}" --head "${{ steps.refs.outputs.head }}"
