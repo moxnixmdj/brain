@@ -69,7 +69,7 @@
   },
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-    "canonical_base_commit": "fb7928135",
+    "canonical_base_commit": "fb7928135034d5b567c6128996199211f36fd18a",
     "real_outcome": "OPUS_CHECKPOINT_COMPLETION_HAS_A_CLAIM_SCOPED_SCOPE_COMPLETE_AGGREGATION_OBJECT_PER_3730_AND_THE_PRE_EXISTING_RED_ACCEPTANCE_PROJECTION_SUITE_IS_GREEN",
     "required_capability": "CLAIM_SCOPED_CHECKPOINT_AGGREGATION_CAPABILITY__RECOMPUTE_BASIS_FREEZE_CLAIMS_PROVE_SCOPE_COMPLETENESS_FAIL_CLOSED",
     "routes_considered": [
