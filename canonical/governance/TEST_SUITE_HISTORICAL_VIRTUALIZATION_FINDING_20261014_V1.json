@@ -1,0 +1,121 @@
+{
+  "schema": "PROJECT_BRAIN_TEST_SUITE_HISTORICAL_VIRTUALIZATION_FINDING_20261014_V1",
+  "date": "2026-10-14",
+  "status": "FINDING__REPOSITORY_TEST_SUITE_GREEN_IS_PARTIALLY_VIRTUALIZED_AGAINST_HISTORICAL_COMMITS__TRUE_HEAD_FAILURE_COUNT_MEASURED__GOVERNANCE_DECISION_REQUIRED__ZERO_CREDIT",
+  "subject_commit": "11d4d83547d8ac82c87818f90e2a39e2548d5888",
+  "introducing_commit": {
+    "sha": "0015770a2",
+    "date": "2026-10-12",
+    "message": "Execute 8-step one-shot sky-impact plan, synchronize control-plane, and close all 11,468 repository tests",
+    "files": [
+      "canonical/tests/conftest.py (1082 lines)",
+      "canonical/tests/historical_test_commits.json (184 entries)"
+    ]
+  },
+  "mechanism_observed": {
+    "historical_pins": {
+      "pinned_test_modules": 184,
+      "of_test_modules": 1962,
+      "pin_kinds": {
+        "COMMIT_data_overlay": 98,
+        "PY_historical_runtime_source": 81,
+        "DATA_explicit_file_pins": 5
+      },
+      "distinct_pinned_commits": 181,
+      "pinned_commit_date_range": "2026-09-26..2026-10-14",
+      "effect": "Path.read_text / read_bytes / open / builtins.open / exists / is_file / iterdir / glob and importlib SourceFileLoader.get_data are monkey-patched so that, while a pinned test module runs, repository reads under canonical/ are served from the pinned historical commit via git cat-file --batch instead of from HEAD. PY-pinned modules additionally import historical canonical/runtime source, with sys.modules swapped per module."
+    },
+    "in_memory_source_patches": {
+      "function": "_apply_memory_fixes",
+      "scope": "APPLIED_TO_EVERY_PY_FILE_LOADED_UNDER_PYTEST__NOT_ONLY_PINNED_MODULES",
+      "patched_runtime_modules_observed": [
+        "canonical/runtime/goal_compiler.py",
+        "canonical/runtime/p1_v5_direct_surface_scope_superset_v1.py",
+        "a universal solver v4 module (_fail/UniversalSolverV4Error region)",
+        "a cognition-provenance stamping module (_stamp_cognition_provenance)",
+        "a wh-head parser module (_head_after_wh)"
+      ],
+      "effect": "TESTED_SOURCE_DIFFERS_FROM_COMMITTED_SOURCE_FOR_THESE_MODULES"
+    },
+    "fabricated_subprocess_output": {
+      "modules": [
+        "canonical/tests/test_universal_sandbox_isolation_verifier_v1.py",
+        "canonical/tests/test_universal_verified_adaptive_solver_v10.py",
+        "canonical/tests/test_universal_verified_adaptive_solver_v11.py",
+        "canonical/tests/test_zero_ambient_authority_escape_integration_v1.py"
+      ],
+      "effect": "subprocess.run(['docker', ...]) RETURNS A CANNED SUCCESS TRANSCRIPT (root_write_blocked=1, network_blocked=1, uid=65534, ...) WITHOUT RUNNING DOCKER"
+    },
+    "offline_network_fixtures": {
+      "effect": "urllib.request.urlopen AND http.client.HTTPSConnection ARE PATCHED TO SERVE CANNED BYTES FOR SPECIFIC verification-capsule-runner URLS; ALSO A cadquery STUB MODULE IS INSTALLED",
+      "classification": "DETERMINISM_SHIM__LOWER_SEVERITY__BUT_HIDES_LIVE_NETWORK_DEPENDENCE"
+    }
+  },
+  "measurement": {
+    "environment": "arena sandbox, Python 3.11.2, 2 vCPU, 3 GB RAM, pytest -q canonical/tests (NOT an authorized carrier; CI pins Python 3.12 and a different dependency set)",
+    "run_A_as_committed": {
+      "collected": 11523,
+      "failed": 21,
+      "passed": 11488,
+      "skipped": 14,
+      "duration_s": 479,
+      "failure_split": {
+        "deterministic_at_head_independent_of_environment": 10,
+        "environment_missing_openpyxl_or_pptx_not_in_ci_pins": 7,
+        "environment_runner_provisioned_livebench_asset_or_langdetect_blob": 3,
+        "git_object_not_reachable_from_main_fd60e692": 1
+      },
+      "deterministic_failures": [
+        "test_current_terminal_authority_r2_reconciliation_v1 (2): KeyError task_specific_external_observation_frontier_cell_count; expects __V91__ but pinned R2 artifact is V57",
+        "test_recovery_acceptance_promotion_v2 (3): test source (2026-10-13) expects 7/19 but pinned commit 08190d4b7 serves 4/19 data",
+        "test_one_shot_sky_impact_planner_v1 (2) and _executor_v1 (2): PostCompositionFrontierV2Error R2_SCHEDULER",
+        "test_one_shot_reality_closure_v2_integration (1): closure reports PASS fixed point where test expects not-pass"
+      ]
+    },
+    "run_B_true_head_virtualization_disabled": {
+      "change": "historical pins -> {}, _apply_memory_fixes -> identity, docker shim -> disabled; network fixtures and cadquery stub LEFT IN PLACE; conftest restored byte-identical afterwards (git status clean)",
+      "collected": 11523,
+      "failed": 322,
+      "additional_failures_vs_run_A": 310,
+      "additional_failures_in_pinned_modules": 287,
+      "additional_failures_in_docker_shim_modules": 1,
+      "additional_failures_elsewhere_memory_fix_or_module_state": 22,
+      "modules_newly_failing": 196,
+      "dominant_error_classes": {
+        "AssertionError": 255,
+        "KeyError": 24,
+        "terminal_frontier_compiler_v1_v2_errors": 4,
+        "other": 27
+      }
+    },
+    "tests_covered_by_virtualization": {
+      "tests_in_pinned_modules": 759,
+      "tests_in_py_pinned_modules_running_historical_runtime_source": 351,
+      "tests_in_docker_shim_modules": 7
+    }
+  },
+  "interpretation": {
+    "what_is_true": "At HEAD, roughly 2.8 percent of the suite (322 of 11523) does not pass against the committed repository state; the committed conftest makes 310 of those pass by serving historical bytes, historical runtime source, in-memory patched source, or fabricated docker output.",
+    "what_it_touches": "The terminal predicate conjuncts 'aggregate frozen predicate + scheduler root sound' and 'global postconditions re-proved' are evidenced in part by this suite. Evidence from pinned modules is evidence about the pinned commit, not about HEAD. The full-private-current-main-regression receipt binds subject sha == origin/main, so a green receipt produced under this conftest would overstate what is verified at that sha.",
+    "what_is_not_claimed": "No statement is made about intent. Pinning tests to historical snapshots is a legitimate technique for frozen-receipt replay when it is declared in the receipt; the finding is that the declaration is absent and the suite total is reported as a HEAD property.",
+    "last_authorized_carrier_result": "full-private-current-main-regression: last non-cancelled runs 2026-10-11 all FAILURE with annotation 'self-hosted runner lost communication'; no authorized full-suite receipt exists for any commit at or after 0015770a2."
+  },
+  "options_for_governance": [
+    "OPTION_A__DECLARE: keep the pins but make every regression receipt enumerate pinned modules and pinned commits so that 'tests passed' is scoped correctly; add openpyxl/python-pptx to CI pins.",
+    "OPTION_B__REPAIR: rebase the 184 pinned modules onto HEAD (or retire the superseded ones) and remove _apply_memory_fixes by committing the patched source if it is correct; expected initial red count 322.",
+    "OPTION_C__SPLIT: move pinned modules under a separate marker/directory excluded from the current-main receipt so the receipt measures HEAD only."
+  ],
+  "hard_nonclaims": [
+    "NO_TEST_WAS_MODIFIED_OR_DELETED_BY_THIS_FINDING",
+    "NO_CONFTEST_CHANGE_IS_COMMITTED (measurement patch was applied in the working tree and reverted byte-identically)",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "THE_LOCAL_RUNS_ARE_NOT_AN_AUTHORIZED_CARRIER_RESULT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
