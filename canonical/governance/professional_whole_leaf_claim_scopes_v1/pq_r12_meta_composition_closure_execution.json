@@ -1,0 +1,44 @@
+{
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "claim": {
+    "authority_id": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF",
+    "claim_id": "c69d363ce12ff8a625fdfd5214e31aa198914310c71ec663f7dd5eda45f040f9",
+    "claim_kind": "PROPERTY_CERTIFICATE",
+    "epoch": "2026-10-10T15:55:32Z",
+    "mission_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a",
+    "scope_sha256": "8b1e37a91f1ca7b81c8fa76cade2edcde4e8626219ad031bc85b6ee1e9cedb42",
+    "semantics_sha256": "85eb11766dd743967c8ff4ca7dafa0c873dc2f6307dbc8f39da7d593071d4c0f",
+    "target_predicate_sha256": "fae7b1ccf4f94a91a1fb4caa4a634e6883538a28382991d97c69278e574b67ce",
+    "terminal_credit_delta": 0
+  },
+  "epoch": "2026-10-10T15:55:32Z",
+  "kind": "EXECUTION",
+  "leaf_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT",
+  "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION",
+  "root_id": "R12_META_COMPOSITION_CLOSURE",
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_CLAIM_SCOPE_V1",
+  "scope_definition": {
+    "domain_definition": {
+      "admissibility_basis": "FROZEN_BEHAVIOR_SUBJECT_ROOT_CONTRACT_LEAF_OBLIGATION_AND_ACCEPTANCE",
+      "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "exclusions": [],
+      "filters": [],
+      "kind": "EXECUTION",
+      "leaf_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT",
+      "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION",
+      "leaf_obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R12_META_COMPOSITION_CLOSURE",
+      "quantifier": "FOR_ALL_ADMISSIBLE_LEAF_INPUTS",
+      "root_contract": "Require assumption-guarantee composition, same-subject root conjunction, abstraction soundness, independent defeater search, coverage accounting, proof-search honesty, meta-controller falsification and nonvacuity.",
+      "root_id": "R12_META_COMPOSITION_CLOSURE",
+      "scope_relation": "EXACT_WHOLE_ADMISSIBLE_LEAF_DOMAIN",
+      "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+      "subject_kind": "DECLARED_SYSTEM",
+      "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e"
+    },
+    "domain_schema_id": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_DOMAIN_V1",
+    "entire_admissible_leaf_domain": true
+  },
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e"
+}

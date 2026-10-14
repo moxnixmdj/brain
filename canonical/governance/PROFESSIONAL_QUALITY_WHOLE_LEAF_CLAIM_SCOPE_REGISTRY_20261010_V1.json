@@ -1,0 +1,258 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_CLAIM_SCOPE_REGISTRY_V1",
+  "date": "2026-10-10",
+  "status": "CANDIDATE__24_OF_24_EXACT_WHOLE_DOMAIN_CLAIM_SCOPES_BOUND__23_BATCH_PLUS_1_PREEXISTING_R10__24_OF_24_INDEPENDENT_CLAIM_VERIFICATIONS_BOUND__R10_V2_SCOPE_CHAIN_GATE_PASS__OTHER_SCOPE_CERTIFICATES_PENDING__ZERO_PROPERTY_OR_TERMINAL_CREDIT",
+  "epoch": "2026-10-10T15:55:32Z",
+  "domain_equivalence_verification": {
+    "path": "canonical/verification/PROFESSIONAL_QUALITY_WHOLE_LEAF_DOMAIN_EQUIVALENCE_V1_INDEPENDENT_VERIFY_20261010_V1.json",
+    "git_blob_sha": "b6b826d1658d8a2c88ea80260ee667e86ae99394"
+  },
+  "counts": {
+    "leaf_count": 24,
+    "claim_scope_bound_count": 24,
+    "batch_materialized_claim_scope_count": 23,
+    "preexisting_canonical_claim_scope_count": 1,
+    "independent_claim_verification_count": 24,
+    "v2_scope_chain_gate_pass_count": 1,
+    "scope_certificate_pending_count": 23,
+    "property_truth_ready_count": 0
+  },
+  "rows": [
+    {
+      "leaf_id": "PQ::R10_ANALYSIS_DECISION::EXECUTION",
+      "claim_id": "205a864e7d7a56a14a46bb75923cc9b11126d479676d26d88803831da1197294",
+      "claim_scope_path": "canonical/governance/PROFESSIONAL_QUALITY_R10_EXECUTION_WHOLE_LEAF_CLAIM_SCOPE_20261010_V1.json",
+      "claim_scope_git_blob_sha": "8f95b72c6edc7ff307342f7a0513bb90e908cd4c",
+      "claim_verification_path": "canonical/verification/PROFESSIONAL_QUALITY_R10_EXECUTION_WHOLE_LEAF_CLAIM_SCOPE_VERIFY_20261010_V1.json",
+      "claim_verification_git_blob_sha": "44907b5d106db21e00648a234875ecc9e00e3364",
+      "scope_definition_sha256": "ff37a6457f99c9eafe5bc3f006ebd7c0afe614336089d4004464a5d9a73c4a5f",
+      "source": "PREEXISTING_CANONICAL_R10_REFERENCE_CHAIN"
+    },
+    {
+      "claim_id": "fed65fe30b7ffb56f4cb0c56b82d7a7e217da81c8aa1a2b80ba23b49873c85d5",
+      "claim_scope_git_blob_sha": "7fe300aaa086f3dae0212a95c66ae89527faf749",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r10_analysis_decision_semantic.json",
+      "claim_verification_git_blob_sha": "eeaded644b51407cc7508a770357a588144fc6d3",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r10_analysis_decision_semantic_verify.json",
+      "leaf_id": "PQ::R10_ANALYSIS_DECISION::SEMANTIC",
+      "scope_definition_sha256": "c6de30e6937521bd3b8faf41bcc984e0c5233003ab354fba7079a63057534cd6"
+    },
+    {
+      "claim_id": "799c1ee383850d5175b466fa59927bb64171324ba2d72022b5d995bf5cafbd2a",
+      "claim_scope_git_blob_sha": "e9538d7d0c5bf4b0c27fa897847e12d3a092b9d9",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r11_adaptive_integrity_security_execution.json",
+      "claim_verification_git_blob_sha": "60b12e3210ef26df6a70579f623b1c942e34286f",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r11_adaptive_integrity_security_execution_verify.json",
+      "leaf_id": "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::EXECUTION",
+      "scope_definition_sha256": "957cc98fa244271a3f04958897c8a667d3a7f6ebac26b92aa5e27f48a6b37d07"
+    },
+    {
+      "claim_id": "601d5c30da84cc04f67f80eeb607447b7328174b52ae434e5cd5dbb9bf371a44",
+      "claim_scope_git_blob_sha": "e1d7b4d16bc1339b478bacd486fd379c995343b2",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r11_adaptive_integrity_security_semantic.json",
+      "claim_verification_git_blob_sha": "1623f67fd8febee216c888b08ff65b9b1e40b086",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r11_adaptive_integrity_security_semantic_verify.json",
+      "leaf_id": "PQ::R11_ADAPTIVE_INTEGRITY_SECURITY::SEMANTIC",
+      "scope_definition_sha256": "832e26c6321c8e18ef8d0da6ef455eeca2071b5a218f2752a6b954ff95c5e37b"
+    },
+    {
+      "claim_id": "c69d363ce12ff8a625fdfd5214e31aa198914310c71ec663f7dd5eda45f040f9",
+      "claim_scope_git_blob_sha": "730b46e72126099a6e1c517c3bfe65ffc8a0d725",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r12_meta_composition_closure_execution.json",
+      "claim_verification_git_blob_sha": "d9baf2aa159245809dcd4c9896682716422a505a",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r12_meta_composition_closure_execution_verify.json",
+      "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::EXECUTION",
+      "scope_definition_sha256": "8b1e37a91f1ca7b81c8fa76cade2edcde4e8626219ad031bc85b6ee1e9cedb42"
+    },
+    {
+      "claim_id": "ae4dd2a84a20347797d990f777f5061e8e0081b039f4e30d4e10ceb1aae51003",
+      "claim_scope_git_blob_sha": "4a9dbaa29cbf29366fa73d67e8cdb5b616b0cbc1",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r12_meta_composition_closure_semantic.json",
+      "claim_verification_git_blob_sha": "f131e439627edbbe73ed250bba3a183dffb4291d",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r12_meta_composition_closure_semantic_verify.json",
+      "leaf_id": "PQ::R12_META_COMPOSITION_CLOSURE::SEMANTIC",
+      "scope_definition_sha256": "3958f259dba6bc6d4dfe1dad0b3ec26ecb1b8d92ea4763985f52ce96cfc55a1d"
+    },
+    {
+      "claim_id": "50d9909dd5ed306107e0449745cc4ad20cb80bf22e07bfb80043fe2f7de98644",
+      "claim_scope_git_blob_sha": "6f895a2277c4f521a6aea8b1aadcd9cf57b66797",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r1_target_specification_execution.json",
+      "claim_verification_git_blob_sha": "a4f6ca3dd28bd087d3b08490367a06e5934eab82",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r1_target_specification_execution_verify.json",
+      "leaf_id": "PQ::R1_TARGET_SPECIFICATION::EXECUTION",
+      "scope_definition_sha256": "c80c35421f44596c01e4f2dec8512c33d6633b80c6dfd4dec2021bb5f601641e"
+    },
+    {
+      "claim_id": "79568c8dff305081906606073c1b3a7d3f78d93a4df2cd48a45ca475f3ca5f14",
+      "claim_scope_git_blob_sha": "49feda97dc7d38912bb2a8b08a1d1f4c27a181d1",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r1_target_specification_semantic.json",
+      "claim_verification_git_blob_sha": "22f7ecd129fe2cd32a3470f646f737ba2764b0b1",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r1_target_specification_semantic_verify.json",
+      "leaf_id": "PQ::R1_TARGET_SPECIFICATION::SEMANTIC",
+      "scope_definition_sha256": "d130c980813f2e9572da6bd463c1d3930e9d4d21c0937f78636433277d220b88"
+    },
+    {
+      "claim_id": "d90080be32fab415017f7645484ad7955d89045e8d8c0d3d426542cd442971c5",
+      "claim_scope_git_blob_sha": "e4354e4a4dbff635a598504568ffa9f496fd3eb1",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r2_candidate_search_execution.json",
+      "claim_verification_git_blob_sha": "e5f793ca71b46cd16dfe9137abf9ccf5a4ef1337",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r2_candidate_search_execution_verify.json",
+      "leaf_id": "PQ::R2_CANDIDATE_SEARCH::EXECUTION",
+      "scope_definition_sha256": "af466845209cd88939f6b98236e366dc68df12f4f7d6759148a966493bb8785d"
+    },
+    {
+      "claim_id": "20ac172da0f09141b0a727ca397e1d07267b6a37402d9092a6e5a4abcde04d8c",
+      "claim_scope_git_blob_sha": "d55b3fe765b647e96ef3e722a330164f73de5715",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r2_candidate_search_semantic.json",
+      "claim_verification_git_blob_sha": "91429fed9c18ab29df268793aefeab72b1181ffc",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r2_candidate_search_semantic_verify.json",
+      "leaf_id": "PQ::R2_CANDIDATE_SEARCH::SEMANTIC",
+      "scope_definition_sha256": "c86b7044588a687cbfeece0c7ed679af8ec528c6d3fc6591b79b4204340ebdf7"
+    },
+    {
+      "claim_id": "65e1e5dd7dcee1ace776d58915e22eed69cd653cd7fd5e6282d19e387e13b605",
+      "claim_scope_git_blob_sha": "65c060ed774f0fa3a7b1780751fcfa4600a9fc09",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r3_realization_observation_execution.json",
+      "claim_verification_git_blob_sha": "f8d778ba59056e2b1aec31f052af4e653c96bc99",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r3_realization_observation_execution_verify.json",
+      "leaf_id": "PQ::R3_REALIZATION_OBSERVATION::EXECUTION",
+      "scope_definition_sha256": "33a6dfb9371150552eaf3800572fafd434284206e54a4b0a9d37f6f9da504a4f"
+    },
+    {
+      "claim_id": "24543682eacdb47340fe97c6bd299ed060c4f6b837f11238f84c5bc64b48ec63",
+      "claim_scope_git_blob_sha": "ef157ac9bc982a8f82517f13475d8f53bb478804",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r3_realization_observation_semantic.json",
+      "claim_verification_git_blob_sha": "58a256a3692b0947f3d35dcc5499757f4fc111a7",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r3_realization_observation_semantic_verify.json",
+      "leaf_id": "PQ::R3_REALIZATION_OBSERVATION::SEMANTIC",
+      "scope_definition_sha256": "dd1d3ab45ce3ab6e73ebf961f8d66168f78c4a65ceb4a5e5d655cfcd95b48ab6"
+    },
+    {
+      "claim_id": "e308261f843a3adb7ca78851815d63f2676136d5ea745617a112298c9d0d7066",
+      "claim_scope_git_blob_sha": "dfd9c35619950dd79ef1167a4c4fff1c491b743f",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r4_measurement_construct_execution.json",
+      "claim_verification_git_blob_sha": "a0c3026f7ea3e2f3a389ee010bdf35883ee853bb",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r4_measurement_construct_execution_verify.json",
+      "leaf_id": "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION",
+      "scope_definition_sha256": "07c4086eb212ad4ec357ca95970cbbce8392be192204fa36aaba036f33f97649"
+    },
+    {
+      "claim_id": "dfcb7bfb3869640b5081a40bf227fce63424d1bdfc89b2b0fb1f050b83024cae",
+      "claim_scope_git_blob_sha": "a7b38e5dc9a5dc56f72215a7a6af32d9db7a3eb5",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r4_measurement_construct_semantic.json",
+      "claim_verification_git_blob_sha": "eefcff98e1a3d4f3dfcdd516312e7fa85ea1b0ac",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r4_measurement_construct_semantic_verify.json",
+      "leaf_id": "PQ::R4_MEASUREMENT_CONSTRUCT::SEMANTIC",
+      "scope_definition_sha256": "d8cc8871a198eaf7c047970f97ecd69a80239706b70a7fc4c2ece52ee9429d88"
+    },
+    {
+      "claim_id": "baecb8ebff65707e2f013fccaad58b55fdba71e7fd92dd16cc7d47a87044961c",
+      "claim_scope_git_blob_sha": "d34b6bc5cd8064888688eedf8d5c830e87522cbf",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r5_evaluator_reference_execution.json",
+      "claim_verification_git_blob_sha": "e4e0ee876bdbfc1ec25ff80617925eea6bfebe3c",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r5_evaluator_reference_execution_verify.json",
+      "leaf_id": "PQ::R5_EVALUATOR_REFERENCE::EXECUTION",
+      "scope_definition_sha256": "a2dd7a4ba4be4b01d2e0b69bced59504a6fb8a6654c359ce3f440b78ad5b6556"
+    },
+    {
+      "claim_id": "0cecac0df80ba7be9870f44ba218f28131cbccb3e4b4c3fec83a6485354b1acc",
+      "claim_scope_git_blob_sha": "04f45c3521a583d8b10d1ff43c3c93d600962a35",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r5_evaluator_reference_semantic.json",
+      "claim_verification_git_blob_sha": "a272271fd7a8ebc7bf1fb348a2472cf4135584a6",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r5_evaluator_reference_semantic_verify.json",
+      "leaf_id": "PQ::R5_EVALUATOR_REFERENCE::SEMANTIC",
+      "scope_definition_sha256": "f507627f0ce40ee7384096c64e3648ee8908d84345d8b6f102c7d058241c49d7"
+    },
+    {
+      "claim_id": "462a3767f62bdcb3d9ecb76d4511d7c92a7fe0a71035d6d72c1be5b69519ece9",
+      "claim_scope_git_blob_sha": "63b6624d1699903f85870a63ebfb434c7feda291",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r6_evidence_grounding_dependence_execution.json",
+      "claim_verification_git_blob_sha": "b8d9b84bbf4ec864ef35920a35bc0d44d984d094",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r6_evidence_grounding_dependence_execution_verify.json",
+      "leaf_id": "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::EXECUTION",
+      "scope_definition_sha256": "31fdaf6750d7c2623be0ed4d2dfbd975e3ea2230b5b2e8f48c56964805d0cef2"
+    },
+    {
+      "claim_id": "e0ff8077da0fd56223cec816f18e2e896e4ea779bf3c91aa4b0bbebef053e289",
+      "claim_scope_git_blob_sha": "a3c398bc52d160eefce7304faf73ac548c7eab0e",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r6_evidence_grounding_dependence_semantic.json",
+      "claim_verification_git_blob_sha": "a71525775ab27bc811f7669e67992bb44b240142",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r6_evidence_grounding_dependence_semantic_verify.json",
+      "leaf_id": "PQ::R6_EVIDENCE_GROUNDING_DEPENDENCE::SEMANTIC",
+      "scope_definition_sha256": "abbb83f116062c24a5cfb49f60b60b12880955b14728dda0c472c74a247442c5"
+    },
+    {
+      "claim_id": "f838fcf4506656ebe6580650f1432366d51d14a4ad21ff0c1f38cd6d26022fcd",
+      "claim_scope_git_blob_sha": "5011a59fb0399bcb8cd1ae5fb891145bacfbeb31",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r7_causal_prescriptive_execution.json",
+      "claim_verification_git_blob_sha": "dbc4149275122e7869f0c9f7bd9bbd2c4de4deb1",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r7_causal_prescriptive_execution_verify.json",
+      "leaf_id": "PQ::R7_CAUSAL_PRESCRIPTIVE::EXECUTION",
+      "scope_definition_sha256": "92583ccc86356e1902094f86f635e07beb26fd138f55b073be107c73c2ab7baa"
+    },
+    {
+      "claim_id": "f9ac299dc5374c6c2d4c290481955daba85410c329a1157a3b938f67d590d6ca",
+      "claim_scope_git_blob_sha": "d98a6b788752e4fd14fcdaefdb745e616225dbcb",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r7_causal_prescriptive_semantic.json",
+      "claim_verification_git_blob_sha": "89d50c645b26e14bccda05921a8ab42668f36a98",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r7_causal_prescriptive_semantic_verify.json",
+      "leaf_id": "PQ::R7_CAUSAL_PRESCRIPTIVE::SEMANTIC",
+      "scope_definition_sha256": "6d56cd8e562c1a2a51e511cc6fdbbe3691c07a50c95025420e13772fa8a28a87"
+    },
+    {
+      "claim_id": "04b82ddd605edaf37e8c868f313298145a3f98a61265ed7c430577c6ac309212",
+      "claim_scope_git_blob_sha": "c60daa26a21afe94e1dab885f7b502fe3592849c",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r8_population_context_operator_execution.json",
+      "claim_verification_git_blob_sha": "5ef172ec188e52908a2ba558a70771aa6f2b4b04",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r8_population_context_operator_execution_verify.json",
+      "leaf_id": "PQ::R8_POPULATION_CONTEXT_OPERATOR::EXECUTION",
+      "scope_definition_sha256": "8c384820a043fafd227c8ca1daad9d496245a4eb3341d6f5773ec28a2b6c3ebc"
+    },
+    {
+      "claim_id": "273b00c52a0182f8b22daff7edfa65eed65d12a114168e43dcd85c3980c84f11",
+      "claim_scope_git_blob_sha": "2543d36e5c73c1d5e204b850e76d0993b2709bb5",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r8_population_context_operator_semantic.json",
+      "claim_verification_git_blob_sha": "130df0349791f90ee38c2095939cf333ca128625",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r8_population_context_operator_semantic_verify.json",
+      "leaf_id": "PQ::R8_POPULATION_CONTEXT_OPERATOR::SEMANTIC",
+      "scope_definition_sha256": "d5788d489f8a42ffc892fbb0dcd8b3a34317f37fd6b253903aaf3fad59aa3a88"
+    },
+    {
+      "claim_id": "b1aa8272c6fbf1951b92fdea323a46682dac8aa5e98fac2936164845e624389c",
+      "claim_scope_git_blob_sha": "74ea5ce39e4cfcd24397a97abc39962bacfd3cfb",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r9_temporal_deployment_execution.json",
+      "claim_verification_git_blob_sha": "d23031914f86d21f2f37983921e409e7895c9a74",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r9_temporal_deployment_execution_verify.json",
+      "leaf_id": "PQ::R9_TEMPORAL_DEPLOYMENT::EXECUTION",
+      "scope_definition_sha256": "bdaefa378b6e25398517ec43c98dda6d45fb2c836113ceb429a82aba5be2c602"
+    },
+    {
+      "claim_id": "80e0f7cd50ed5744d6267775fdb11363448becc1940f53810745d76e240fc9be",
+      "claim_scope_git_blob_sha": "27d598dc6e8b781e963a339be72b865cb5c1b747",
+      "claim_scope_path": "canonical/governance/professional_whole_leaf_claim_scopes_v1/pq_r9_temporal_deployment_semantic.json",
+      "claim_verification_git_blob_sha": "b0d355656896b07df2e675147f457464126318a9",
+      "claim_verification_path": "canonical/verification/professional_whole_leaf_claim_scopes_v1/pq_r9_temporal_deployment_semantic_verify.json",
+      "leaf_id": "PQ::R9_TEMPORAL_DEPLOYMENT::SEMANTIC",
+      "scope_definition_sha256": "abcb3e76d4f36d31f043b16ac1ddab81c7546373f20c3fedc471265d979935d9"
+    }
+  ],
+  "hard_nonclaims": [
+    "NO_SCOPE_CERTIFICATE_ADMISSION_YET",
+    "NO_LEAF_PROPERTY_TRUTH",
+    "NO_DOMAIN_SEMANTIC_OR_EXECUTION_CLOSURE",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "r10_reference_chain": {
+    "chain_path": "canonical/governance/PROFESSIONAL_QUALITY_R10_EXECUTION_WHOLE_LEAF_V2_CHAIN_20261010_V1.json",
+    "chain_git_blob_sha": "180234a8eeca62f51737f69db53a83ff2d0fe237",
+    "gate_replay_status": "PASS__CLAIM_SCOPED_WHOLE_LEAF_DOMAIN_AND_SCOPE_COVER_ADMISSIBLE__PROPERTY_TRUTH_SEPARATE",
+    "leaf_property_truth_authority": false
+  }
+}

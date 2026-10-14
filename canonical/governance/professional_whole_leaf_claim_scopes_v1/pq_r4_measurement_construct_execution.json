@@ -1,0 +1,44 @@
+{
+  "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+  "claim": {
+    "authority_id": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF",
+    "claim_id": "e308261f843a3adb7ca78851815d63f2676136d5ea745617a112298c9d0d7066",
+    "claim_kind": "PROPERTY_CERTIFICATE",
+    "epoch": "2026-10-10T15:55:32Z",
+    "mission_blob_sha": "13c470645b037bbb46245c687dd35197b420d51a",
+    "scope_sha256": "07c4086eb212ad4ec357ca95970cbbce8392be192204fa36aaba036f33f97649",
+    "semantics_sha256": "6e10d77ad58faa539191b34a1447971dcae1bf96f01937aba08539d6d860aa98",
+    "target_predicate_sha256": "fae7b1ccf4f94a91a1fb4caa4a634e6883538a28382991d97c69278e574b67ce",
+    "terminal_credit_delta": 0
+  },
+  "epoch": "2026-10-10T15:55:32Z",
+  "kind": "EXECUTION",
+  "leaf_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT",
+  "leaf_id": "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION",
+  "root_id": "R4_MEASUREMENT_CONSTRUCT",
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_CLAIM_SCOPE_V1",
+  "scope_definition": {
+    "domain_definition": {
+      "admissibility_basis": "FROZEN_BEHAVIOR_SUBJECT_ROOT_CONTRACT_LEAF_OBLIGATION_AND_ACCEPTANCE",
+      "behavior_id": "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+      "exclusions": [],
+      "filters": [],
+      "kind": "EXECUTION",
+      "leaf_acceptance": "RUN_ROOT_RELEVANT_POSITIVE_NEAR_MISS_AND_ADVERSARIAL_CASES_ON_EXACT_ARTIFACT_OR_RUNTIME_BYTES_AND_BIND_OBSERVED_OUTCOMES_TO_THE_ROOT_CONTRACT",
+      "leaf_id": "PQ::R4_MEASUREMENT_CONSTRUCT::EXECUTION",
+      "leaf_obligation": "VERIFY_DOMAIN_EXECUTION_FOR_R4_MEASUREMENT_CONSTRUCT",
+      "quantifier": "FOR_ALL_ADMISSIBLE_LEAF_INPUTS",
+      "root_contract": "Establish construct validity, criterion ontology, absolute professional floor, decision resolution and challenge validity; block rubric, scale, normalization and proxy gaming.",
+      "root_id": "R4_MEASUREMENT_CONSTRUCT",
+      "scope_relation": "EXACT_WHOLE_ADMISSIBLE_LEAF_DOMAIN",
+      "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+      "subject_kind": "DECLARED_SYSTEM",
+      "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e"
+    },
+    "domain_schema_id": "PROJECT_BRAIN_PROFESSIONAL_QUALITY_WHOLE_LEAF_DOMAIN_V1",
+    "entire_admissible_leaf_domain": true
+  },
+  "subject_id": "PROFESSIONAL_QUALITY_P1_V7_PROOF_BOUND_EXECUTION_SYSTEM_20261010_V6",
+  "subject_kind": "DECLARED_SYSTEM",
+  "subject_sha256": "d6671b578b3afbf8f6629462f88ae93a1de62b10eef4df7d5bd90ced6118990e"
+}
