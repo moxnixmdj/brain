@@ -19,6 +19,11 @@ concurrency:
   group: terminal-kstar-one-shot-v1
   cancel-in-progress: true
 
+# Landing on main goes through the front door (pull request + signed referee check);
+# .github/scripts/land_on_main.sh needs the Brain Automation app to open that pull request.
+env:
+  AUTOMATION_APP_ID: ${{ secrets.AUTOMATION_APP_ID }}
+  AUTOMATION_APP_PRIVATE_KEY: ${{ secrets.AUTOMATION_APP_PRIVATE_KEY }}
 jobs:
   execute:
     runs-on: ubuntu-24.04
@@ -165,7 +170,7 @@ jobs:
           git commit -m "Record terminal K-star one-shot execution"
           for attempt in 1 2 3 4; do
             git pull --rebase origin main || { git rebase --abort || true; sleep 1; continue; }
-            git push origin HEAD:main && exit 0
+            bash .github/scripts/land_on_main.sh && exit 0
             sleep 1
           done
           exit 1

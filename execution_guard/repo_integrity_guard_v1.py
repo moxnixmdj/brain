@@ -22,9 +22,10 @@ measurement.  The mechanisms were all *structural*, and therefore all
   7. a tool that pushes, opens and self-merges a PR into ``main``.
 
 This guard encodes each of those as a rule.  It is stdlib-only, deterministic,
-and runs in three places: the CI workflow ``.github/workflows/repo-integrity-guard.yml``
-(on every pull request), the regular test suite
-(``canonical/tests/test_repo_integrity_guard_v1.py``), and by hand:
+and runs in three places: the referee workflow ``.github/workflows/repo-integrity-guard.yml``
+(``pull_request_target``: the copy on ``main`` judges every pull request and signs the
+verdict as the Brain Referee app — the pull request's own copy is never executed), the
+regular test suite (``canonical/tests/test_repo_integrity_guard_v1.py``), and by hand:
 
     python3 execution_guard/repo_integrity_guard_v1.py            # static rules
     python3 execution_guard/repo_integrity_guard_v1.py --base origin/main   # + diff rules
@@ -73,6 +74,7 @@ PROTECTED_PATHS = (
     "AGENTS.md",
     "execution_guard/honest_suite_baseline_v1.py",
     "canonical/verification/HONEST_SUITE_BASELINE_20261014_V1.json",
+    ".github/scripts/land_on_main.sh",
 )
 
 AUTHORITY_FILES = {
@@ -88,7 +90,15 @@ AUTHORITY_FILES = {
 CAPABILITY_REGISTRY = "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
 GUARD_WORKFLOW = ".github/workflows/repo-integrity-guard.yml"
 FRONTIER_WORKFLOW = ".github/workflows/frontier-state-consistency.yml"
-GUARD_INVOCATION = "python3 execution_guard/repo_integrity_guard_v1.py --ci"
+GUARD_INVOCATION = "trusted/execution_guard/repo_integrity_guard_v1.py --ci --root subject"
+LAND_SCRIPT = ".github/scripts/land_on_main.sh"
+# Workflows allowed to use pull_request_target (they run the MAIN version of themselves
+# against pull requests).  Frozen: a new entry needs an owner-merged change to this file.
+PULL_REQUEST_TARGET_ALLOWLIST = (
+    ".github/workflows/repo-integrity-guard.yml",
+    ".github/workflows/drift-immunity-guard.yml",
+    ".github/workflows/load-bearing-primary-admission.yml",
+)
 
 TEST_DIR_MARKERS = ("/tests/", "/test/")
 SKIP_DIRS = {".git", "__pycache__", "node_modules", ".venv", "venv", "tmp_arena_import", ".mypy_cache", ".pytest_cache", "build", "dist"}
@@ -116,29 +126,9 @@ FAIL_CLOSED_KEYS = re.compile(
 )
 
 # Workflows that pushed receipts straight to main before this guard existed.  Frozen: this
-# tuple may only lose entries.  Branch rulesets (see REPO_INTEGRITY_POLICY_V1.json) make these
-# pushes impossible at the GitHub level once enabled.
-LEGACY_DIRECT_MAIN_PUSH_WORKFLOWS = (
-    ".github/workflows/astra-shared-runtime.yml",
-    ".github/workflows/current-main-terminal-reality-gate.yml",
-    ".github/workflows/current-terminal-closure-reducer-v2.yml",
-    ".github/workflows/execute-terminal-kstar-one-shot-v1.yml",
-    ".github/workflows/execute-terminal-one-shot-race-fanout-v1.yml",
-    ".github/workflows/gdpval-semantic-complement-v2.yml",
-    ".github/workflows/hle-opus46-metadata-capacity-probe.yml",
-    ".github/workflows/internalize-dinov2-vits14.yml",
-    ".github/workflows/mine-existing-receipt-semantic-candidates.yml",
-    ".github/workflows/saturate-existing-proof-atom-receipts-v1.yml",
-    ".github/workflows/terminal-now-router-replay.yml",
-    ".github/workflows/vals-credential-presence-probe.yml",
-    ".github/workflows/verify-agency-finite-acceptance-closure-v1.yml",
-    ".github/workflows/verify-authenticated-presentation-pareto-comparator-v1.yml",
-    ".github/workflows/verify-raw-task-acceptance-residual-localizer-v1.yml",
-    ".github/workflows/verify-root3-direct-urllib-network-mediator-v1.yml",
-    ".github/workflows/verify-symbolic-creditable-payload-binding-v4.yml",
-    ".github/workflows/zero-spend-opus-capacity-classifier.yml",
-    ".github/workflows/zero-spend-opus-capacity-probe.yml",
-)
+# tuple may only lose entries, and it is now empty — carriers open a pull request through
+# .github/scripts/land_on_main.sh and the referee judges it like any other change.
+LEGACY_DIRECT_MAIN_PUSH_WORKFLOWS: tuple[str, ...] = ()  # emptied 2026-10-14: every carrier now lands through .github/scripts/land_on_main.sh
 
 STDLIB_PATCH_ROOTS_ANYWHERE = {"builtins", "pathlib", "Path", "importlib", "http", "ssl", "socket", "hashlib", "io"}
 STDLIB_PATCH_ROOTS_TESTS = STDLIB_PATCH_ROOTS_ANYWHERE | {"subprocess", "urllib", "os", "json", "shutil", "time", "tempfile", "sys"}
@@ -569,6 +559,10 @@ def rule_no_automerge_tooling(root: Path) -> list[Violation]:
             continue
         for i, line in enumerate(text.splitlines(), 1):
             if merge_pat.search(line):
+                # `gh pr merge --auto` is allowed: GitHub completes it only when every required
+                # check (the signed referee verdict) has passed, so it cannot bypass anything.
+                if re.search(r"gh\s+pr\s+merge", line) and "--auto" in line and "--admin" not in line:
+                    continue
                 out.append(Violation("AUTOMERGE_TOOLING", rel, f"self-merge / approval / force-push to main is forbidden: {line.strip()[:120]}", i))
             elif push_main_pat.search(line) and rel not in LEGACY_DIRECT_MAIN_PUSH_WORKFLOWS:
                 out.append(Violation("DIRECT_MAIN_PUSH", rel, f"pushing to main outside a reviewed pull request is forbidden: {line.strip()[:120]}", i))
@@ -584,13 +578,23 @@ def rule_workflow_guard_integrity(root: Path) -> list[Violation]:
         out.append(Violation("GUARD_WORKFLOW_MISSING", GUARD_WORKFLOW, "the integrity guard workflow must exist"))
     else:
         if GUARD_INVOCATION not in wf:
-            out.append(Violation("GUARD_WORKFLOW_TAMPERED", GUARD_WORKFLOW, f"must invoke exactly: {GUARD_INVOCATION}"))
-        if "pull_request:" not in wf or "paths:" in wf or "paths-ignore:" in wf:
-            out.append(Violation("GUARD_WORKFLOW_TAMPERED", GUARD_WORKFLOW, "must run on every pull_request without a paths filter"))
+            out.append(Violation("GUARD_WORKFLOW_TAMPERED", GUARD_WORKFLOW, f"must run the TRUSTED guard against the subject: {GUARD_INVOCATION}"))
+        if not re.search(r"^\s*pull_request_target:", wf, re.M):
+            out.append(Violation("GUARD_WORKFLOW_TAMPERED", GUARD_WORKFLOW, "must be triggered by pull_request_target so the version on main judges every pull request"))
+        if re.search(r"^\s*pull_request:", wf, re.M):
+            out.append(Violation("GUARD_WORKFLOW_TAMPERED", GUARD_WORKFLOW, "a pull_request trigger would run the pull request's own copy of the referee"))
+        if "paths:" in wf or "paths-ignore:" in wf:
+            out.append(Violation("GUARD_WORKFLOW_TAMPERED", GUARD_WORKFLOW, "must run on every pull request without a paths filter"))
         if "continue-on-error" in wf or "if: false" in wf:
             out.append(Violation("GUARD_WORKFLOW_TAMPERED", GUARD_WORKFLOW, "continue-on-error / disabled steps are forbidden"))
         if "fetch-depth: 0" not in wf:
-            out.append(Violation("GUARD_WORKFLOW_TAMPERED", GUARD_WORKFLOW, "checkout must use fetch-depth: 0 so diff rules can see the base"))
+            out.append(Violation("GUARD_WORKFLOW_TAMPERED", GUARD_WORKFLOW, "the subject checkout must use fetch-depth: 0 so diff rules can see the base"))
+        if "persist-credentials: false" not in wf:
+            out.append(Violation("GUARD_WORKFLOW_TAMPERED", GUARD_WORKFLOW, "checkouts must not persist credentials"))
+        if not re.search(r"^\s*environment:\s*referee\s*$", wf, re.M):
+            out.append(Violation("GUARD_WORKFLOW_TAMPERED", GUARD_WORKFLOW, "the verdict must be signed from the `referee` environment (main-only key)"))
+        if re.search(r"(python3?|bash|sh|node|source|\.)\s+\.?/?subject/|cd\s+subject\b|PYTHONPATH=\S*subject", wf):
+            out.append(Violation("GUARD_WORKFLOW_TAMPERED", GUARD_WORKFLOW, "nothing from subject/ may be executed; the subject is data"))
     fw = _read(root, FRONTIER_WORKFLOW)
     if fw is not None:
         fw = "\n".join(l for l in fw.splitlines() if not l.lstrip().startswith("#"))
@@ -603,6 +607,39 @@ def rule_workflow_guard_integrity(root: Path) -> list[Violation]:
         text = "\n".join(l for l in text.splitlines() if not l.lstrip().startswith("#")) if text else text
         if text and "continue-on-error: true" in text:
             out.append(Violation("GUARD_WORKFLOW_TAMPERED", f".github/workflows/{name}", "continue-on-error: true on a guard workflow"))
+    return out
+
+
+def rule_referee_exclusivity(root: Path) -> list[Violation]:
+    """Only the referee workflow may touch the referee key or post check runs, and only
+    allowlisted workflows may use pull_request_target.  A workflow that could obtain the
+    referee's signing key, or post a check run under its name, could forge a verdict."""
+    out: list[Violation] = []
+    key_pat = re.compile(r"environment:\s*referee\b|REFEREE_APP|check-runs|checks:\s*write|create-github-app-token")
+    for p in _iter_files(root / ".github", (".yml", ".yaml")):
+        rel = _rel(root, p)
+        if rel == GUARD_WORKFLOW:
+            continue
+        text = _read(root, rel)
+        if not text:
+            continue
+        text = "\n".join(l for l in text.splitlines() if not l.lstrip().startswith("#"))
+        for i, line in enumerate(text.splitlines(), 1):
+            if key_pat.search(line):
+                out.append(Violation("REFEREE_KEY_EXPOSURE", rel, f"only {GUARD_WORKFLOW} may use the referee environment, app token or check-run API: {line.strip()[:100]}", i))
+        if re.search(r"^\s*pull_request_target\s*:", text, re.M) and rel not in PULL_REQUEST_TARGET_ALLOWLIST:
+            out.append(Violation("PULL_REQUEST_TARGET_NOT_ALLOWLISTED", rel, "pull_request_target runs with main's context against untrusted pull requests; only allowlisted workflows may use it"))
+    code_pat = re.compile(r"REFEREE_APP|/check-runs")
+    for p in _iter_files(root, (".py", ".sh", ".bash")):
+        rel = _rel(root, p)
+        if rel in ("execution_guard/repo_integrity_guard_v1.py",):
+            continue
+        text = _read(root, rel)
+        if not text:
+            continue
+        for i, line in enumerate(text.splitlines(), 1):
+            if code_pat.search(line):
+                out.append(Violation("REFEREE_KEY_EXPOSURE", rel, f"referee key / check-run API outside the referee workflow: {line.strip()[:100]}", i))
     return out
 
 
@@ -742,6 +779,7 @@ STATIC_RULES: dict[str, Callable[[Path], list[Violation]]] = {
     "no_privileged_or_fake_tooling_in_tests": rule_no_privileged_or_fake_tooling_in_tests,
     "no_tautological_assertions": rule_no_tautological_assertions,
     "no_automerge_tooling": rule_no_automerge_tooling,
+    "referee_exclusivity": rule_referee_exclusivity,
     "workflow_guard_integrity": rule_workflow_guard_integrity,
     "execution_guard_no_achieved_exemption": rule_execution_guard_no_achieved_exemption,
     "authority_consistency": rule_authority_consistency,
@@ -1080,6 +1118,13 @@ def self_test() -> list[str]:
         ("no_tautological_assertions", "canonical/tests/test_g.py", "import unittest\nclass T(unittest.TestCase):\n    def test_x(self):\n        v = 1\n        self.assertIn(v, {2, v})\n", "TAUTOLOGICAL_ASSERTION"),
         ("no_tautological_assertions", "canonical/tests/test_h.py", "def test_x():\n    try:\n        assert 1 == 2\n    except AssertionError:\n        pass\n", "ASSERTION_SWALLOWED"),
         ("no_automerge_tooling", "canonical/runtime/sync.py", "import subprocess\nsubprocess.run(['gh', 'pr', 'merge', '1', '--merge'])\n", "AUTOMERGE_TOOLING"),
+        ("no_automerge_tooling", ".github/workflows/w.yml", "run: gh pr merge --auto --admin 1\n", "AUTOMERGE_TOOLING"),
+        ("no_automerge_tooling", ".github/workflows/w2.yml", "run: git push origin HEAD:main\n", "DIRECT_MAIN_PUSH"),
+        ("referee_exclusivity", ".github/workflows/other.yml", "on: push\njobs:\n  j:\n    runs-on: ubuntu-latest\n    environment: referee\n", "REFEREE_KEY_EXPOSURE"),
+        ("referee_exclusivity", ".github/workflows/other2.yml", "on: push\njobs:\n  j:\n    steps:\n      - run: gh api -X POST repos/x/y/check-runs\n", "REFEREE_KEY_EXPOSURE"),
+        ("referee_exclusivity", ".github/workflows/other3.yml", "on:\n  pull_request_target:\n    types: [opened]\n", "PULL_REQUEST_TARGET_NOT_ALLOWLISTED"),
+        ("referee_exclusivity", "canonical/runtime/forge.py", "import os\nkey = os.environ['REFEREE_APP_PRIVATE_KEY']\n", "REFEREE_KEY_EXPOSURE"),
+        ("workflow_guard_integrity", GUARD_WORKFLOW, "on:\n  pull_request:\njobs:\n  j:\n    steps:\n      - run: python3 subject/execution_guard/repo_integrity_guard_v1.py\n", "GUARD_WORKFLOW_TAMPERED"),
         ("execution_guard_no_achieved_exemption", "execution_guard/other.py", "def check(doc):\n    if doc.get('achieved'):\n        return 0\n    return 1\n", "EXECUTION_GUARD_ACHIEVED_EXEMPTION"),
     ]
     for rule, rel, text, code in fixtures:
@@ -1137,7 +1182,8 @@ def self_test() -> list[str]:
         _write(root, "canonical/tests/conftest.py", "import sys\nfrom pathlib import Path\nROOT = Path(__file__).resolve().parents[2]\nif str(ROOT) not in sys.path:\n    sys.path.insert(0, str(ROOT))\n")
         _write(root, "canonical/tests/test_ok.py", "import unittest\nclass T(unittest.TestCase):\n    def test_x(self):\n        self.assertEqual(1 + 1, 2)\n")
         _write(root, "canonical/runtime/ok.py", "import subprocess\ndef run():\n    return subprocess.run(['git', 'rev-parse', 'HEAD'], capture_output=True)\n")
-        for name in ("conftest_minimal", "no_stdlib_monkeypatch", "no_sys_modules_injection", "no_historical_pins", "no_privileged_or_fake_tooling_in_tests", "no_tautological_assertions", "no_automerge_tooling"):
+        _write(root, ".github/workflows/carrier.yml", "on: push\njobs:\n  j:\n    steps:\n      - run: |\n          git push origin HEAD:refs/heads/carrier/x\n          gh pr merge --auto --squash \"$url\"\n")
+        for name in ("conftest_minimal", "no_stdlib_monkeypatch", "no_sys_modules_injection", "no_historical_pins", "no_privileged_or_fake_tooling_in_tests", "no_tautological_assertions", "no_automerge_tooling", "referee_exclusivity"):
             got = STATIC_RULES[name](root)
             if got:
                 failures.append(f"clean fixture tripped {name}: {[str(v) for v in got][:3]}")

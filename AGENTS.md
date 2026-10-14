@@ -1,7 +1,7 @@
 # Rules for agents working in this repository
 
-These rules are enforced by `execution_guard/repo_integrity_guard_v1.py` (run on every
-pull request and inside the test suite). They exist because a previous session made the
+These rules are enforced by `execution_guard/repo_integrity_guard_v1.py` (run by the referee
+workflow on every pull request — always the version on `main` — and inside the test suite). They exist because a previous session made the
 test suite green by feeding tests historical copies of files, and declared the project's
 terminal goal achieved by editing numbers. Read
 `canonical/governance/REPO_INTEGRITY_POLICY_V1.json` for the full policy.
@@ -28,11 +28,18 @@ terminal goal achieved by editing numbers. Read
    per PR; no `singularity`/`omega`/`ultimate`/`sovereign` naming.
 6. **No tautologies, no weakening floods.** `assertIn(x, {.., x})`, `assert True`,
    swallowed assertions, and more than 10 exact→loose assertion changes per PR fail.
-7. **Nothing merges itself.** No `gh pr merge`, no `--admin`, no force-push to `main`, no
-   new workflow that pushes to `main`. Pull requests are merged by the owner.
-8. **Protected paths** (the guard, its test, its workflow, `frontier-state-consistency.yml`,
-   `CODEOWNERS`, the policy, this file, the honest-baseline tool and document) fail the
-   automated check when changed; only the owner's in-person review can merge such a change.
+7. **Nothing merges over a red referee.** Every pull request is judged by the referee
+   workflow *as it exists on `main`* (`pull_request_target`); your copy of the referee is never
+   run. The verdict is a check signed by the Brain Referee app and required by the branch
+   ruleset with an empty bypass list. `gh pr merge --auto` is fine — GitHub completes it only
+   when that check is green. No plain `gh pr merge`, no `--admin`, no force-push to `main`,
+   no `git push … main`, no workflow that touches the `referee` environment, the referee app
+   secrets or the check-run API, no new `pull_request_target` workflow. Carriers that need to
+   land results on `main` call `.github/scripts/land_on_main.sh`.
+8. **Protected paths** (the guard, its test, the referee workflow, `frontier-state-consistency.yml`,
+   `CODEOWNERS`, the policy, this file, the honest-baseline tool and document, the landing
+   script) fail the referee when changed; only the owner, by relaxing the ruleset in the web
+   UI for that one merge, can land such a change. Say in the PR why it is needed and stop.
 
 ## If you believe a rule is wrong
 

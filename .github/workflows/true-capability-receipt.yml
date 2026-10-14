@@ -1,0 +1,46 @@
+name: true-capability-receipt
+
+# Measures every TRUE_CAPABILITY_SPEC_V1 on fresh instances with a seed derived
+# from this run (GITHUB_RUN_ID:GITHUB_RUN_ATTEMPT:GITHUB_SHA) and uploads the
+# receipts as artifacts.  It never pushes.  Receipts become MEASURED_PUBLIC_RUNNER
+# only when produced here; see canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md.
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "execution_guard/true_capability_harness_v1.py"
+      - "canonical/capabilities/true/**"
+      - "canonical/runtime/saccr_credit_kernel.py"
+      - ".github/workflows/true-capability-receipt.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: harness self-test
+        run: python3 execution_guard/true_capability_harness_v1.py self-test
+      - name: measure every spec on fresh instances
+        run: |
+          set -euo pipefail
+          mkdir -p receipts_out
+          status=0
+          for spec in canonical/capabilities/true/specs/*.json; do
+            python3 execution_guard/true_capability_harness_v1.py run --spec "$spec" --instances 2000 \
+              --receipt-dir receipts_out --ledger receipts_out/TRUE_CAPABILITY_LEDGER_V1.json || status=1
+          done
+          exit $status
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: true-capability-receipts-${{ github.run_id }}-${{ github.run_attempt }}
+          path: receipts_out/
+          if-no-files-found: error

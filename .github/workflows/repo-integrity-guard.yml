@@ -1,48 +1,117 @@
 name: Repo Integrity Guard
-# Fail-closed structural defenses against evidence tampering (see
-# execution_guard/repo_integrity_guard_v1.py for the rule list and the incident
-# that motivated it).  Runs on EVERY pull request and on every push to main —
-# there is deliberately no `paths:` filter, no `continue-on-error`, and no input
-# that can skip it.  Make this check *required* in the branch ruleset for main
-# (canonical/governance/REPO_INTEGRITY_POLICY_V1.json, section github_side).
+# THE REFEREE.
+#
+# Every pull request is judged by the guard version that is on `main` — never by
+# the version inside the pull request.  That is exactly what `pull_request_target`
+# does: GitHub loads THIS file and the trusted checkout from `main`, and the pull
+# request's tree is checked out into `subject/` where it is read as DATA by the
+# trusted guard and never executed.  A pull request can rewrite the guard, this
+# workflow, the tests, the scoreboard — and the referee that judges it is still
+# the untouched one.
+#
+# The verdict is posted as a check run signed by the "Brain Referee" GitHub App.
+# Its key lives only in the `referee` environment, whose deployment-branch
+# policy is `main`, so no workflow running for a branch or a pull request can
+# obtain it.  The branch ruleset on `main` requires that signed check from that
+# app, with an empty bypass list — so a red verdict cannot be merged over by
+# anyone's token, the owner's included.  Until the app exists the job status
+# itself is the (weaker, unsigned) check.
+#
+# Rules this file must keep (enforced by rule_workflow_guard_integrity):
+# pull_request_target trigger, no `pull_request:` trigger, no paths filter,
+# no continue-on-error, fetch-depth 0 for the subject, persist-credentials false,
+# nothing executed from subject/.  See canonical/governance/REPO_INTEGRITY_POLICY_V1.json.
 on:
-  pull_request:
-    branches: [main]
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review]
   push:
     branches: [main]
   workflow_dispatch:
 concurrency:
-  group: repo-integrity-${{ github.event.pull_request.number || github.ref }}
+  group: repo-integrity-${{ github.event.pull_request.number || github.sha }}
   cancel-in-progress: true
 permissions:
   contents: read
 jobs:
-  integrity:
+  referee:
     name: repo-integrity-guard
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
+    environment: referee
+    env:
+      SUBJECT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+      BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || '' }}
+      REFEREE_APP_ID: ${{ secrets.REFEREE_APP_ID }}
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Check out the trusted referee (always the version on main)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
+          ref: main
+          path: trusted
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Check out the subject as data (never executed)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ env.SUBJECT_SHA }}
+          path: subject
           fetch-depth: 0
+          persist-credentials: false
+
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with: {python-version: '3.12'}
-      - name: Guard self-test (the rules must demonstrably fire)
-        run: python3 execution_guard/repo_integrity_guard_v1.py --self-test
-      - name: Static + diff rules against the base branch
-        run: python3 execution_guard/repo_integrity_guard_v1.py --ci --json repo_integrity_report.json
-      - name: Frontier mirrors derive from current terminal authority
+
+      - name: Referee self-test (the rules must demonstrably fire)
+        run: python3 trusted/execution_guard/repo_integrity_guard_v1.py --self-test
+
+      - name: Judge the subject with the trusted referee
+        id: judge
         run: |
-          python3 - <<'PY'
-          import json, re, hashlib
-          from pathlib import Path
-          L=lambda p: json.loads(Path(p).read_text())
-          t=L("canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json")
-          assert t["truth"]["achieved"] is False, "terminal achievement is not claimable through data; see repo_integrity_guard_v1.TERMINAL_ACHIEVED_COUNTERSIGN_SHA256"
-          PY
+          set +e
+          python3 trusted/execution_guard/repo_integrity_guard_v1.py --ci --root subject --base "$BASE_SHA" --json verdict.json | tee verdict.txt
+          code=${PIPESTATUS[0]}
+          set -e
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          echo "## Referee verdict: $([ "$code" = 0 ] && echo PASS || echo FAIL)" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"; tail -n 60 verdict.txt >> "$GITHUB_STEP_SUMMARY"; echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Mint the Brain Referee token (only possible from main)
+        id: referee_app
+        if: always() && env.REFEREE_APP_ID != '' && github.event_name == 'pull_request_target'
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510
+        with:
+          app-id: ${{ secrets.REFEREE_APP_ID }}
+          private-key: ${{ secrets.REFEREE_APP_PRIVATE_KEY }}
+          permission-checks: write
+
+      - name: Post the signed verdict (check run "referee/repo-integrity-guard")
+        if: always() && steps.referee_app.outputs.token != ''
+        env:
+          GH_TOKEN: ${{ steps.referee_app.outputs.token }}
+          EXIT_CODE: ${{ steps.judge.outputs.exit_code }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          if [ "${EXIT_CODE:-1}" = "0" ]; then conclusion=success; title="PASS — judged by the referee on main"; else conclusion=failure; title="FAIL — judged by the referee on main"; fi
+          summary="$(tail -n 80 verdict.txt 2>/dev/null | head -c 60000 || echo 'no verdict output')"
+          gh api -X POST "repos/${GITHUB_REPOSITORY}/check-runs" \
+            -f name="referee/repo-integrity-guard" \
+            -f head_sha="${SUBJECT_SHA}" \
+            -f status=completed \
+            -f conclusion="${conclusion}" \
+            -f details_url="${RUN_URL}" \
+            -f "output[title]=${title}" \
+            -f "output[summary]=${summary}" > /dev/null
+          echo "posted ${conclusion} for ${SUBJECT_SHA}"
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: repo-integrity-report
-          path: repo_integrity_report.json
+          path: verdict.json
           if-no-files-found: ignore
+
+      - name: Enforce the verdict
+        if: always()
+        run: test "${{ steps.judge.outputs.exit_code }}" = "0"

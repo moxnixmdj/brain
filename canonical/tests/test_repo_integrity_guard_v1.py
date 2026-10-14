@@ -54,6 +54,21 @@ class RepoIntegrityGuardV1Tests(unittest.TestCase):
         authority = json.loads((ROOT / "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json").read_text(encoding="utf-8"))
         self.assertIs(authority["truth"]["achieved"], False)
 
+    def test_referee_judges_with_the_copy_on_main(self):
+        """The referee must use pull_request_target (the workflow on main judges), read the
+        pull request as data, and be the only workflow that can sign a verdict."""
+        wf = (ROOT / ".github/workflows/repo-integrity-guard.yml").read_text(encoding="utf-8")
+        body = "\n".join(l for l in wf.splitlines() if not l.lstrip().startswith("#"))
+        self.assertIn("pull_request_target:", body)
+        self.assertNotRegex(body, r"(?m)^\s*pull_request:")
+        self.assertIn(self.guard.GUARD_INVOCATION, body)
+        self.assertIn("environment: referee", body)
+        self.assertIn("persist-credentials: false", body)
+        self.assertNotRegex(body, r"(python3?|bash|sh)\s+subject/")
+        self.assertEqual(self.guard.LEGACY_DIRECT_MAIN_PUSH_WORKFLOWS, (), "no workflow may push straight to main any more")
+        self.assertIn(".github/workflows/repo-integrity-guard.yml", self.guard.PULL_REQUEST_TARGET_ALLOWLIST)
+        self.assertTrue((ROOT / ".github/scripts/land_on_main.sh").is_file(), "carriers land through the front door")
+
     def test_protected_paths_are_covered_by_codeowners(self):
         owners = (ROOT / ".github/CODEOWNERS").read_text(encoding="utf-8")
         for rel in self.guard.PROTECTED_PATHS:

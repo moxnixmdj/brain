@@ -8,6 +8,11 @@ on:
       - "canonical/governance/RECEIPT_SATURATION_REQUEST_V1.json"
   workflow_dispatch:
 
+# Landing on main goes through the front door (pull request + signed referee check);
+# .github/scripts/land_on_main.sh needs the Brain Automation app to open that pull request.
+env:
+  AUTOMATION_APP_ID: ${{ secrets.AUTOMATION_APP_ID }}
+  AUTOMATION_APP_PRIVATE_KEY: ${{ secrets.AUTOMATION_APP_PRIVATE_KEY }}
 jobs:
   mine:
     runs-on: ubuntu-latest
@@ -47,7 +52,7 @@ jobs:
           fi
           git commit -m "Record existing-receipt semantic candidate mining"
           git pull --rebase origin main
-          git push origin HEAD:main
+          bash .github/scripts/land_on_main.sh
       - uses: actions/upload-artifact@v4
         with:
           name: semantic-candidate-mining

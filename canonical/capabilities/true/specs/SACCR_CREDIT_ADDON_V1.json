@@ -1,0 +1,70 @@
+{
+  "schema": "TRUE_CAPABILITY_SPEC_V1",
+  "capability_id": "SACCR_CREDIT_ADDON_V1",
+  "claim": "Given a portfolio of linear single-name and index credit derivatives, compute the Basel SA-CCR credit asset-class add-on (CRE52.34, 52.48, 52.50, 52.55-52.72) with an explicit intermediate trace per trade.",
+  "input_class": "1-8 linear credit trades over 1-4 reference entities (consistent rating per entity); notional 1e4-1e10; start 0-3y; tenor 10 business days-30y; +/-1 direction; margined (MPOR 10bd-0.5y) or unmargined.",
+  "scope_limits": [
+    "NO options or CDO tranche deltas",
+    "NO replacement cost, PFE multiplier or whole netting-set EAD",
+    "NO rating/entity inference from documents; inputs are already structured",
+    "entity with mixed supervisory factor or correlation fails closed (ValueError) by design"
+  ],
+  "solver": {
+    "module": "canonical/runtime/saccr_credit_kernel.py",
+    "entry": "solve_instance"
+  },
+  "generator": {
+    "module": "canonical/capabilities/true/generators/saccr_credit_addon_gen_v1.py",
+    "entry": "generate"
+  },
+  "oracles": {
+    "module": "canonical/capabilities/true/oracles/saccr_credit_addon_oracles_v1.py",
+    "entry": "oracles",
+    "declared": [
+      {
+        "id": "DONOR_DIFFERENTIAL",
+        "class": "DIFFERENTIAL_EXTERNAL",
+        "lineage": "baselkit 52293ef (third party; the kernel was harvested from it, so this catches porting errors but shares lineage)"
+      },
+      {
+        "id": "CRE52_CLOSED_FORM",
+        "class": "ANALYTIC_CLOSED_FORM",
+        "lineage": "Basel CRE52 formulas written directly in the oracle file"
+      },
+      {
+        "id": "OFFSET_CANCELS",
+        "class": "METAMORPHIC",
+        "lineage": "none"
+      },
+      {
+        "id": "NOTIONAL_HOMOGENEITY",
+        "class": "METAMORPHIC",
+        "lineage": "none"
+      },
+      {
+        "id": "SINGLE_ENTITY_BOUNDS",
+        "class": "PROPERTY",
+        "lineage": "none"
+      }
+    ]
+  },
+  "independent_oracle_ids": [
+    "CRE52_CLOSED_FORM",
+    "OFFSET_CANCELS",
+    "NOTIONAL_HOMOGENEITY"
+  ],
+  "published_canaries": [
+    "TB4_FIN_SACCR_RWA_CP_B_ADDON"
+  ],
+  "min_instances": 500,
+  "pass_threshold": 1.0,
+  "falsification_condition": "Any generated portfolio inside the input class on which the kernel's add-on differs from the CRE52 closed form or from the donor by more than 1e-9 relative, or any metamorphic relation broken, or the TB4 canary missed by more than 0.05 USD.",
+  "donor": {
+    "repository": "ankitjha67/baselkit",
+    "revision": "52293ef9dfd9d260a0e954460945a7356843d18d",
+    "license": "Apache-2.0",
+    "runtime_required": false
+  },
+  "model_dependency_count": 0,
+  "history": "Failed the real task fin-saccr-rwa on 2026-10-01 (missing supervisory duration); patched the same day; this spec makes the repair measurable on fresh instances."
+}

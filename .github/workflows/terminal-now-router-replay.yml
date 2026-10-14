@@ -27,6 +27,11 @@ concurrency:
   group: terminal-now-router-replay-${{ github.sha }}
   cancel-in-progress: false
 
+# Landing on main goes through the front door (pull request + signed referee check);
+# .github/scripts/land_on_main.sh needs the Brain Automation app to open that pull request.
+env:
+  AUTOMATION_APP_ID: ${{ secrets.AUTOMATION_APP_ID }}
+  AUTOMATION_APP_PRIVATE_KEY: ${{ secrets.AUTOMATION_APP_PRIVATE_KEY }}
 jobs:
   exact-byte-router-replay:
     runs-on: ubuntu-24.04
@@ -215,4 +220,4 @@ jobs:
           git add "$OUT" "$LATEST"
           git commit -m "Record exact Root3-ASTRA router replay receipt"
           git pull --rebase origin main
-          git push origin HEAD:main
+          bash .github/scripts/land_on_main.sh
