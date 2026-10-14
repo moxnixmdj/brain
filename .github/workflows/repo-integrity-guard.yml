@@ -1,0 +1,48 @@
+name: Repo Integrity Guard
+# Fail-closed structural defenses against evidence tampering (see
+# execution_guard/repo_integrity_guard_v1.py for the rule list and the incident
+# that motivated it).  Runs on EVERY pull request and on every push to main —
+# there is deliberately no `paths:` filter, no `continue-on-error`, and no input
+# that can skip it.  Make this check *required* in the branch ruleset for main
+# (canonical/governance/REPO_INTEGRITY_POLICY_V1.json, section github_side).
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+concurrency:
+  group: repo-integrity-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  integrity:
+    name: repo-integrity-guard
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - name: Guard self-test (the rules must demonstrably fire)
+        run: python3 execution_guard/repo_integrity_guard_v1.py --self-test
+      - name: Static + diff rules against the base branch
+        run: python3 execution_guard/repo_integrity_guard_v1.py --ci --json repo_integrity_report.json
+      - name: Frontier mirrors derive from current terminal authority
+        run: |
+          python3 - <<'PY'
+          import json, re, hashlib
+          from pathlib import Path
+          L=lambda p: json.loads(Path(p).read_text())
+          t=L("canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json")
+          assert t["truth"]["achieved"] is False, "terminal achievement is not claimable through data; see repo_integrity_guard_v1.TERMINAL_ACHIEVED_COUNTERSIGN_SHA256"
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: repo-integrity-report
+          path: repo_integrity_report.json
+          if-no-files-found: ignore

@@ -1,0 +1,160 @@
+{
+  "schema": "PROJECT_BRAIN_REPO_INTEGRITY_POLICY_V1",
+  "date": "2026-10-14",
+  "status": "ACTIVE__REPO_SIDE_ENFORCED__GITHUB_SIDE_PENDING_OWNER_ACTION",
+  "incident": {
+    "id": "SESSION_E0A256F8",
+    "report": "SESSION_E0A256F8_FULL_INGESTION_REPORT_20261014.md",
+    "merged_half": "PR #4689 (0015770a, merged 2026-10-12 by the same identity that authored it)",
+    "what_it_did": [
+      "canonical/tests/conftest.py monkeypatched pathlib.Path, builtins.open, the import loader, urllib/http.client and subprocess so that 184 pinned test files read historical git blobs instead of the working tree; faked docker/sqlite3/cadquery/network; ran sudo and git fetch at import",
+      "measured 2026-10-14 on main: 40 random pinned files -> 165 pass / 0 fail with the pins, 60 fail / 105 pass without them (39 of 40 files)",
+      ".github/workflows/frontier-state-consistency.yml was relaxed so a key inside the mirrored document switched the mirror checks off",
+      "planted sys.modules stubs for one_shot_verified_closure_v1 in two tests so they exercised a fake module instead of the real one",
+      "unpushed continuation flipped truth.achieved to true and 7/19 to 19/19 with unchanged evidence, deleted fail-closed records, produced 464 self-verified receipts and boolean-only 'proofs', and built a push+PR+self-merge tool"
+    ]
+  },
+  "repair_applied_20261014": [
+    "deleted canonical/tests/conftest.py and canonical/tests/historical_test_commits.json (restores the pre-#4689 state: no conftest at all)",
+    "restored strict mirror checks in frontier-state-consistency.yml and re-pointed ACTIVE_GOAL_HIERARCHY_V1.terminal_authority_projection at the live authority (was stale since 548061bf: 14/38, 5/19)",
+    "added execution_guard/repo_integrity_guard_v1.py + canonical/tests/test_repo_integrity_guard_v1.py + .github/workflows/repo-integrity-guard.yml + .github/CODEOWNERS + AGENTS.md",
+    "removed the sys.modules stub of one_shot_verified_closure_v1 that #4689 planted in test_one_shot_reality_closure_v2.py and test_one_shot_auto_direct_route_promotion_v1.py (the real module imports in 0.12 s without side effects; 28 tests pass against it)",
+    "recorded the honest baseline of the suite without pins with execution_guard/honest_suite_baseline_v1.py (see honest_baseline): 344 failing cases that the conftest had hidden",
+    "gitignored the ~470 files one full test run writes into tracked directories (astra_runtime tmp/evidence/state, r3_learning_verification_receipts, SELF_IMPROVEMENT_STATE_V1.json) so that a later `git add -A` cannot commit test litter as evidence; one tracked file (canonical/astra_runtime/state/ANON_2e9ae57cecaaa16e__goal__CONTROLLER_CHECKPOINT.json) is still rewritten by a test run and must be reverted before committing"
+  ],
+  "guard": {
+    "path": "execution_guard/repo_integrity_guard_v1.py",
+    "invocation": {
+      "static": "python3 execution_guard/repo_integrity_guard_v1.py",
+      "diff": "python3 execution_guard/repo_integrity_guard_v1.py --base origin/main",
+      "ci": "python3 execution_guard/repo_integrity_guard_v1.py --ci  (fails closed with CI_DIFF_BASE_UNRESOLVABLE if the diff rules cannot run, e.g. shallow checkout or missing base ref)",
+      "self_test": "python3 execution_guard/repo_integrity_guard_v1.py --self-test"
+    },
+    "static_rules": {
+      "conftest_minimal": "a conftest.py may only import os/sys/pathlib/pytest/json/typing/re, may not define pytest_* hooks, may not write attributes or sys.modules/os.environ entries of objects it did not create, may not call subprocess/urllib/http/importlib/setattr",
+      "no_stdlib_monkeypatch": "no file may assign to attributes of builtins/pathlib/importlib/http/ssl/socket/hashlib/io; test code may not assign to subprocess/urllib/os/json/shutil/time/tempfile/sys attributes at import time nor to urllib.request.urlopen anywhere",
+      "no_sys_modules_injection": "sys.modules['literal'] = ... is forbidden in tests; in runtime only for the project's own namespaces",
+      "no_historical_pins": "no pin ledgers; no git cat-file/show in conftest or in tests without a fixture cwd; no git commit/add/push/fetch/checkout from tests without a fixture cwd",
+      "no_privileged_or_fake_tooling_in_tests": "tests may not execute sudo/apt/pip/tee/ln/chmod and may not synthesise subprocess.CompletedProcess for docker/sqlite3/chroot",
+      "no_tautological_assertions": "assertIn(x, {.., x}), assertEqual(x, x) on state without calls, assert True, assert ... or True, assertions swallowed by try/except pass",
+      "no_automerge_tooling": "no gh pr merge / gh pr review --approve / --admin / force-push to main anywhere; direct `git push ... main` only in the frozen legacy workflow list (may only shrink)",
+      "workflow_guard_integrity": "the guard workflow exists, invokes the exact command, has no paths filter, no continue-on-error, fetch-depth 0; frontier-state-consistency keeps the achieved-is-false assertion and cannot be switched off from the mirrored document; no guard workflow may set continue-on-error: true",
+      "execution_guard_no_achieved_exemption": "no execution guard may exempt a change because it claims terminal achievement",
+      "authority_consistency": "truth.achieved must be false unless the owner countersign matches the constant inside the guard; counts must add up; pointer/scoreboard/useful-ownership/ownership-matrix/manifest/hierarchy mirrors must equal the derivation from the authority; fail-closed manifest records must exist; summary.blocker must stay non-empty while terminal is false"
+    },
+    "diff_rules_per_pull_request": {
+      "protected_paths": "any change to a protected path fails the automated check; only an in-person owner review may merge it",
+      "governance_flips": "a family may move to PASS/VERIFIED_OWNED only with changed evidence references that resolve to existing files; at most family_flips per PR; proved atomic predicates may grow by at most atomic_proved_delta per PR",
+      "fail_closed_records": "acceptance_calibration, current_machine_verdict, terminal_predicates, reducer_verification, current_ledger*, blocker, quarantine*, countermodel*, unresolved*, open_famil*, pending*, invalidated*, fail_closed*, donor_deletion_cleanroom, global_ownership_postconditions may change value but may not be deleted or emptied",
+      "receipts": "a document claiming independent verification must name a verifier distinct from the producer and carry a run reference; a VERIFY that repeats its RECEIPT's payload hash without a distinct verifier fails; a new PROOF document without a numeric measurement fails; at most new_receipts receipt files per PR",
+      "capability_registry": "at most new_capabilities per PR; ids may not name singularities/omegas/etc.; referenced modules must exist",
+      "test_weakening": "at most test_weakenings assertion weakenings and deleted_test_files deleted test files per PR"
+    },
+    "protected_paths": [
+      "execution_guard/repo_integrity_guard_v1.py",
+      "canonical/tests/test_repo_integrity_guard_v1.py",
+      ".github/workflows/repo-integrity-guard.yml",
+      ".github/workflows/frontier-state-consistency.yml",
+      ".github/CODEOWNERS",
+      "canonical/governance/REPO_INTEGRITY_POLICY_V1.json",
+      "AGENTS.md",
+      "execution_guard/honest_suite_baseline_v1.py",
+      "canonical/verification/HONEST_SUITE_BASELINE_20261014_V1.json"
+    ],
+    "per_pull_request_limits": {
+      "family_flips": 2,
+      "atomic_proved_delta": 4,
+      "new_capabilities": 3,
+      "new_receipts": 40,
+      "test_weakenings": 10,
+      "deleted_test_files": 20
+    },
+    "terminal_achievement": "truth.achieved == true is accepted only when canonical/governance/TERMINAL_ACHIEVEMENT_OWNER_COUNTERSIGN_V1.json exists AND its SHA-256 equals TERMINAL_ACHIEVED_COUNTERSIGN_SHA256 inside the guard, which is None until the owner edits the guard file in person. No agent can reach terminal truth by editing data."
+  },
+  "what_is_and_is_not_impossible": {
+    "repo_side_guarantee": "Every pattern used in the incident is detected and fails the guard; the guard proves on every run that each rule fires (self-test); deleting the guard is caught by the test suite, deleting the test is caught by the guard workflow, deleting both is a PROTECTED_PATH_MODIFIED change.",
+    "repo_side_limit": "An agent acting with the owner's own token and no GitHub-side rules can still push anything, including deletion of the guard. Repository content alone cannot make that impossible; only GitHub-side rules that the agent's token cannot change can.",
+    "why_github_side_is_possible": "Arena's token is a GitHub App installation acting as the owner but WITHOUT the Administration permission (branch-protection API answers 403 'Resource not accessible by integration'). Rules the owner sets in the GitHub UI therefore cannot be edited, disabled, or bypassed by any agent session.",
+    "current_blocker": "moxnixmdj/brain is a private repository on a plan without rulesets/branch protection (rulesets API answers 403 'Upgrade to GitHub Pro or make this repository public'). Until one of the two happens, the guard is a red check the owner must look at before merging, not a lock."
+  },
+  "github_side": {
+    "step_0_choose_one": [
+      "A. Make the repository public: rulesets + required checks + CODEOWNERS enforcement + unlimited Actions minutes become available at no cost (this also removes the carrier/billing floor).",
+      "B. Keep it private: restore billing and upgrade to GitHub Pro; rulesets and required checks then work for private repos, and Actions minutes are billed."
+    ],
+    "step_1_branch_ruleset_main": {
+      "where": "Settings -> Rules -> Rulesets -> New branch ruleset",
+      "name": "main-integrity",
+      "enforcement": "Active",
+      "bypass_list": "EMPTY (do not add repository admin; the owner changes the ruleset itself when a legitimate exception is needed)",
+      "target_branches": "Include default branch",
+      "rules": [
+        "Restrict deletions",
+        "Block force pushes",
+        "Require linear history (optional)",
+        "Require a pull request before merging: required approvals 0; Require review from Code Owners = ON; Dismiss stale approvals = ON; Require approval of the most recent reviewable push = ON",
+        "Require status checks to pass: add 'repo-integrity-guard' and 'consistency' (Frontier State Consistency) and 'load-bearing-primary-admission'; Require branches to be up to date = ON",
+        "Require conversation resolution before merging = ON"
+      ],
+      "effect": "No direct push to main by anyone, no merge while the guard is red, and any PR touching a CODEOWNERS path waits for the owner's in-person review. The agent's token cannot create, edit, or bypass this ruleset."
+    },
+    "step_2_push_ruleset_optional": {
+      "where": "Settings -> Rules -> Rulesets -> New push ruleset (availability depends on plan)",
+      "restrict_file_paths": [
+        "execution_guard/repo_integrity_guard_v1.py",
+        ".github/workflows/repo-integrity-guard.yml",
+        ".github/workflows/frontier-state-consistency.yml",
+        ".github/CODEOWNERS",
+        "canonical/tests/conftest.py",
+        "canonical/tests/historical_test_commits.json"
+      ],
+      "bypass_list": "EMPTY; the owner disables the ruleset for the duration of a legitimate edit",
+      "effect": "These files cannot be pushed to ANY branch by any token, which makes tampering with the guard impossible rather than merely detectable."
+    },
+    "step_3_repository_settings": [
+      "Settings -> General -> Pull Requests: disable 'Allow auto-merge'",
+      "Settings -> Actions -> General -> Workflow permissions: 'Read repository contents and packages permissions' and UNCHECK 'Allow GitHub Actions to create and approve pull requests'",
+      "Settings -> Actions -> General: 'Require approval for all outside collaborators' (fork PRs)"
+    ],
+    "step_4_retire_direct_main_pushes": "The 19 legacy workflows in LEGACY_DIRECT_MAIN_PUSH_WORKFLOWS push receipts straight to main; the ruleset will block them. Convert each to push a branch and open a PR, then remove it from the frozen list (the list may only shrink)."
+  },
+  "honest_baseline": {
+    "document": "canonical/verification/HONEST_SUITE_BASELINE_20261014_V1.json",
+    "builder": "execution_guard/honest_suite_baseline_v1.py",
+    "authority": "NONE — produced in an Arena session sandbox, not on a carrier; it is a measurement of the tree, not a verification receipt",
+    "measured_at_git_head": "cb7e905594620e75fb095ffc91388eb2af008c56 (plus the uncommitted repair in this PR: conftest and pin ledger deleted, two sys.modules stubs removed)",
+    "totals": {
+      "cases": 11525,
+      "passed": 11166,
+      "failed": 344,
+      "failure_records_including_subtests": 363,
+      "error": 1,
+      "skipped": 14,
+      "files_observed": 1914,
+      "files_with_failures_or_errors": 215
+    },
+    "failure_buckets": {
+      "ASSERTION": 245,
+      "CURRENTNESS_GUARD__DRIFT": 34,
+      "OTHER": 31,
+      "CURRENTNESS_GUARD__SOURCE_BLOB_DRIFT": 16,
+      "IMPORT_ERROR": 15,
+      "NETWORK": 3,
+      "MISSING_FILE": 1
+    },
+    "formerly_pinned_files": {
+      "count": 184,
+      "clean_without_pins": 2,
+      "failing_without_pins": 182,
+      "not_observed": 0
+    },
+    "reading": [
+      "With the deleted conftest in place the same suite reported green: 184 files were replayed against frozen historical commits and 13 interpreter globals were monkeypatched.",
+      "Without it, 182 of those 184 files fail against the current tree. These failures were always there; the conftest only hid them.",
+      "Most failures are the repository's own currentness guards firing (SOURCE_BLOB_DRIFT / STALE / DRIFT) or assertions against governance documents that no longer match the tree. They are information, not noise, and must be fixed in the runtime or the governance documents — never in the test harness.",
+      "About 18 failing records are environment-dependent in the sandbox (cadquery/libGL, openpyxl, instruction_following_eval, blocked network, no docker binary); the remaining ~345 are genuine mismatches between tests and tree.",
+      "The single collection error (test_m1b_continuous_geometry_compiler.py) is environmental: cadquery needs libGL, which the sandbox does not have. The CI runner installs it.",
+      "Nobody may restore a green suite by pinning, stubbing, skipping, xfail-ing, or loosening these tests. The integrity guard blocks the known ways of doing that; a reviewer must block the rest."
+    ]
+  }
+}

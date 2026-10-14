@@ -1,0 +1,25 @@
+# Integrity-critical paths.  With a branch ruleset on `main` that requires
+# review from Code Owners, no pull request touching these paths can be merged by
+# the author's own token — an in-person review by the owner is mandatory.
+# (See canonical/governance/REPO_INTEGRITY_POLICY_V1.json, section github_side.)
+
+# The guard itself, its test, its workflow, and this file
+/execution_guard/                                   @moxnixmdj
+/canonical/tests/test_repo_integrity_guard_v1.py    @moxnixmdj
+/.github/                                           @moxnixmdj
+/AGENTS.md                                          @moxnixmdj
+
+# Test infrastructure (a conftest.py was used to serve historical bytes to 184 tests)
+/canonical/tests/conftest.py                        @moxnixmdj
+/tests/conftest.py                                  @moxnixmdj
+/conftest.py                                        @moxnixmdj
+
+# Terminal truth and its mirrors
+/canonical/CANONICAL_POINTER.json                   @moxnixmdj
+/canonical/governance/                              @moxnixmdj
+/canonical/capabilities/frontier/                   @moxnixmdj
+/canonical/capabilities/opus55/                     @moxnixmdj
+/canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json @moxnixmdj
+
+# The honest suite baseline and the tool that writes it
+/canonical/verification/HONEST_SUITE_BASELINE_20261014_V1.json @moxnixmdj

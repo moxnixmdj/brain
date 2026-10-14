@@ -1,16 +1,10 @@
 from __future__ import annotations
 
-import sys
-import types
 import unittest
 import json
 import tempfile
 from pathlib import Path
 from unittest.mock import patch
-
-fake_v1 = types.ModuleType("canonical.runtime.one_shot_verified_closure_v1")
-fake_v1.run = lambda **kwargs: {}
-sys.modules["canonical.runtime.one_shot_verified_closure_v1"] = fake_v1
 
 from canonical.runtime import one_shot_reality_closure_v2 as v2
 

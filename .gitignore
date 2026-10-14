@@ -1,2 +1,15 @@
 __pycache__/
 .guard_trusted/
+
+# Litter written by the test suite into tracked directories.  Running
+# `pytest canonical/tests` once creates ~470 of these; `git add -A` afterwards
+# would commit them as if they were evidence.  (Added 2026-10-14, see
+# canonical/governance/REPO_INTEGRITY_POLICY_V1.json.)  Files already tracked
+# under canonical/astra_runtime/tmp/ are unaffected by this rule.
+canonical/astra_runtime/tmp/
+canonical/astra_runtime/evidence/GROUNDING-*
+canonical/astra_runtime/evidence/TEST-BOUND-*
+canonical/astra_runtime/state/LIVE_BRAIN_*
+canonical/astra_runtime/state/probe-*
+canonical/runtime/r3_learning_verification_receipts/
+canonical/runtime/SELF_IMPROVEMENT_STATE_V1.json
