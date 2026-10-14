@@ -116,3 +116,31 @@ Each step names the existing Brain asset it reuses, the gate predicate it moves,
 - The "Astra HLE with tools 82.9" figure in the repo appears to be HLE-Diamond. Public tables list HLE-with-tools for Opus 5.5 at 67.7 and Astra at 57.2. The two must not be mixed.
 - The plan documents cite `main` at `5ec8b7d`; live `main` is `11d4d83`.
 - Issue #3739 is still open despite a repo note that it was repaired; the token lacks `issues:write`.
+
+---
+
+## 7. User decisions received (2026-10-14) — binding on the plan above
+
+1. **Billing:** user does not know the state. Hosted Actions stays blocked until verified. Workaround: a self-hosted runner on the user's laptop (below). This removes the dependency on GitHub billing for the regression gate (G1).
+2. **AA-Briefcase send: NOT approved.** The user has decided not to pursue owner channels: "Forget about connecting to anybody." Consequences, stated plainly:
+   - X1 (owner channels) is removed from the plan. The owner-dependent obligations (AA-Briefcase ≥1822, GDPval-AA ≥1846, FrontierCode ≥54.4, CursorBench ≥57.8, AutomationBench ≥40) can close only through public evidence, the brain's own measurements, or a verified scope reduction. Without a verified reduction they stay open.
+   - Probability of owner-channel contribution in 30 d is now 0 by decision, not by evidence. The earlier 0.748 no longer applies.
+3. **Runner host:** ASUS TUF A15 laptop, AMD Ryzen 7 7435HS (8 cores / 16 threads), 16 GB RAM, RTX 4060 8 GB, Windows 11.
+   - Fit for G1: the regression workflow requires Linux X64, so use WSL2 (Ubuntu) on the laptop. It must stay plugged in and not sleep during a run.
+   - Fit for TB4: 16 GB RAM caps concurrency at about 1–2 trials for 8–16 GB tasks. Using the measured-floor method (A3), TB4 at 15 min/trial and 2-way concurrency is roughly 220 × 15 / 2 ≈ 27.5 h (estimate). Still not "now", and it still depends on per-trial p (A8).
+   - Security: the self-hosted runner executes repository code. Register it only for `main` pushes (the regression workflow is `push: main` only), and do not add it to pull requests from forks.
+
+### Runner setup (user runs these; do not paste tokens into chat)
+
+1. Enable WSL2: `wsl --install -d Ubuntu` (admin PowerShell), reboot, create the Linux user.
+2. Inside Ubuntu: `sudo apt-get update && sudo apt-get install -y python3-venv git curl tar`.
+3. In GitHub: repo `moxnixmdj/brain` → Settings → Actions → Runners → New self-hosted runner → Linux, x64. Copy the registration token shown there and use it only in your local terminal.
+4. Run the commands GitHub shows (download, `./config.sh --url https://github.com/moxnixmdj/brain --token <YOUR_TOKEN> --labels brain-regression`), then `sudo ./svc.sh install && sudo ./svc.sh start`.
+5. Windows power settings: never sleep when plugged in.
+
+### Revised immediate order
+
+1. **Agent (now):** A2 (fix Bytes tests), A3 (measured TB4 floor from per-task CPU metadata), A4 (donor census), A5 (HLE harness binding), A7 (domain mappings).
+2. **User (now):** runner setup above. Once it shows "Idle" in the repo's runner list, the agent re-dispatches the full regression.
+3. **Agent (after runner online):** G1 → G2.
+4. **Continuous:** A8 with exact oracles. No owner channels.
