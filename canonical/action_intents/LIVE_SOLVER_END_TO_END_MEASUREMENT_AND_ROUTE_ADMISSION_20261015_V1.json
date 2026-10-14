@@ -123,7 +123,10 @@
       "decisive_question": "DOES_THE_LIVE_BRAIN_SAY_DONE_ONLY_WHEN_AN_INDEPENDENT_ORACLE_CONFIRMS_THE_REQUESTED_ARTIFACT_EXISTS_AND_IS_EXACT",
       "known_counterexamples_checked": true,
       "counterexample_receipts": [
-        "canonical/capabilities/true/LIVE_SOLVER_END_TO_END_MEASUREMENT_20261015_V1.json"
+        {
+          "path": "canonical/capabilities/true/LIVE_SOLVER_END_TO_END_MEASUREMENT_20261015_V1.json",
+          "git_blob_sha": "df9619626bdf405ce384a84c999b968f82a2e187"
+        }
       ],
       "no_known_counterexample_reason": "NOT_APPLICABLE__COUNTEREXAMPLES_WERE_FOUND_AND_ARE_RECORDED__100_OF_100_FALSE_PASSES_THROUGH_THE_OLD_ENTRY"
     }
