@@ -1,0 +1,136 @@
+{
+ "receipt_type": "CHART_KERNEL_SYNTHETIC_MEASUREMENT_V1",
+ "credit_claimed": 0,
+ "benchmark_data_touched": false,
+ "calibration_source": "renderer_true_transform (tick-OCR cell measured separately)",
+ "seed": 777,
+ "n_per_family": 100,
+ "elapsed_s": 46.88,
+ "families": [
+  {
+   "family": "bar",
+   "charts": 100,
+   "charts_all_bars_found": 100,
+   "values": 576,
+   "within_certificate": 576,
+   "within_5pct_or_0.5": 576,
+   "rate_certificate": 1.0,
+   "rate_tolerance": 1.0,
+   "failures": []
+  },
+  {
+   "family": "barh",
+   "charts": 100,
+   "charts_all_bars_found": 98,
+   "values": 573,
+   "within_certificate": 559,
+   "within_5pct_or_0.5": 559,
+   "rate_certificate": 0.9756,
+   "rate_tolerance": 0.9756,
+   "failures": [
+    "chart67: expected 8 bars, got 7",
+    "chart80: expected 6 bars, got 5"
+   ]
+  },
+  {
+   "family": "line",
+   "charts": 100,
+   "values": 1389,
+   "no_trace": 14,
+   "within_certificate": 978,
+   "within_5pct_or_0.5": 1250,
+   "rate_certificate": 0.7041,
+   "rate_tolerance": 0.8999,
+   "failures": [
+    "chart0: x=19 true 20.60 got 23.38 bound 0.56",
+    "chart3: x=8 true 10.57 got 11.15 bound 0.55",
+    "chart3: x=9 true 11.37 got 12.11 bound 0.55",
+    "chart4: x=9 true 13.16 got 13.90 bound 0.58",
+    "chart5: no trace at x=2",
+    "chart5: x=12 true 21.48 got 23.39 bound 0.57",
+    "chart6: x=5 true 12.51 got 13.65 bound 0.53",
+    "chart8: x=5 true 3.78 got 5.62 bound 0.57",
+    "chart8: x=10 true 10.64 got 12.02 bound 0.57",
+    "chart13: no trace at x=1",
+    "chart13: x=2 true 13.34 got 14.42 bound 0.58",
+    "chart14: x=2 true 3.51 got 4.55 bound 0.56",
+    "chart14: x=15 true 90.00 got 12.91 bound 0.56",
+    "chart16: x=1 true 10.37 got 11.21 bound 0.56",
+    "chart16: x=5 true 2.40 got 3.11 bound 0.56",
+    "chart18: x=2 true 14.34 got 15.88 bound 0.58",
+    "chart18: x=5 true 9.76 got 10.48 bound 0.58",
+    "chart18: x=6 true 3.20 got 4.93 bound 0.58",
+    "chart18: no trace at x=15",
+    "chart18: x=20 true 14.20 got 98.10 bound 0.58"
+   ]
+  },
+  {
+   "family": "line_logy",
+   "charts": 100,
+   "values": 1351,
+   "no_trace": 15,
+   "within_certificate": 1004,
+   "within_5pct_or_0.5": 1137,
+   "rate_certificate": 0.7432,
+   "rate_tolerance": 0.8416,
+   "failures": [
+    "chart0: x=2 true 63.94 got 58.49 bound 2.20",
+    "chart0: x=3 true 81.55 got 73.31 bound 2.76",
+    "chart0: x=8 true 120.47 got 105.83 bound 3.98",
+    "chart0: x=11 true 140.93 got 132.65 bound 4.99",
+    "chart0: x=15 true 98.38 got 92.76 bound 3.49",
+    "chart1: no trace at x=11",
+    "chart3: x=6 true 255.35 got 199.32 bound 8.00",
+    "chart3: x=16 true 391.80 got 339.29 bound 13.62",
+    "chart3: x=17 true 12.50 got 13.81 bound 0.55",
+    "chart6: x=4 true 298.09 got 283.08 bound 10.74",
+    "chart6: x=5 true 101.51 got 96.01 bound 3.64",
+    "chart6: x=6 true 11.48 got 12.14 bound 0.46",
+    "chart6: x=21 true 820.46 got 576.54 bound 21.87",
+    "chart7: x=3 true 330.49 got 307.98 bound 12.26",
+    "chart7: x=4 true 518.67 got 482.02 bound 19.19",
+    "chart9: x=2 true 610.24 got 547.93 bound 18.46",
+    "chart11: x=4 true 661.52 got 588.18 bound 23.94",
+    "chart11: no trace at x=9",
+    "chart11: x=10 true 23.30 got 21.99 bound 0.89",
+    "chart11: x=14 true 339.53 got 271.43 bound 11.05"
+   ]
+  },
+  {
+   "family": "pie",
+   "charts": 100,
+   "charts_all_slices_found": 100,
+   "values": 368,
+   "within_1pct_abs": 368,
+   "rate_tolerance": 1.0,
+   "failures": []
+  }
+ ],
+ "sha256_of_body": "4f241fef5fddc8aff08ec7acc1db5b90737b79113f3d8fad17e91be455171c60",
+ "provenance": {
+  "kernel": "canonical/runtime/chart_deterministic_extraction_kernel_v1.py",
+  "measurement_runtime": "canonical/runtime/chart_kernel_synthetic_measurement_v1.py",
+  "unit_tests": "canonical/tests/test_chart_deterministic_extraction_kernel_v1.py (8 pass)",
+  "algorithm_donor": {
+   "project": "automeris-io/WebPlotDigitizer",
+   "license": "AGPL-3.0",
+   "commit": "3a3ecb11606945d0701c8a488777e6861be70056",
+   "files_read": [
+    "javascript/core/curve_detection/averagingWindowCore.js",
+    "javascript/core/curve_detection/barExtraction.js",
+    "javascript/core/curve_detection/xStepWithInterpolation.js",
+    "javascript/core/axes/xy.js"
+   ],
+   "mode": "algorithm reading + independent numpy re-implementation; no source copied; donor absent at runtime"
+  },
+  "development_seed": 20261014,
+  "held_out_seed": 777,
+  "known_gaps": [
+   "tick-label OCR / axis calibration from pixels not measured here (tesseract only on runner)",
+   "legend swatch of the same colour inside the axes can hijack blob selection",
+   "occluded vertices (legend box / crossing series) are partially detected; remaining line misses are mostly occluded or clipped apexes",
+   "stacked bars, grouped bars with shared colours, scatter, dual axes, donut labels not yet covered"
+  ],
+  "credit_statement": "evidence about a producer on synthetic data; no benchmark case read; no family or atom credit"
+ }
+}
