@@ -315,3 +315,15 @@ consolidation removes. Convergence evidence: pass 1 produced four corrections (t
 two facts and no change to any step. That is evidence the plan has stabilised, not a proof of optimality — the
 remaining uncertainty is concentrated in your three inputs (billing mode, carrier liveness, consolidation form)
 and in the capability measurements the plan exists to obtain.
+
+**9.6 Third time asked — the one statement that answers "smartest" at the level the question is really about.**
+Every public entry on every one of the thirteen external leaderboards in the frozen predicate (TB4, TB-Science,
+HLE, Chartography, OSWorld, GDPval-AA, AA-Briefcase, AutomationBench-AA, FrontierCode, CursorBench, Finance
+Agent v2, Finance Index, MysteryMechanism) is a frontier LLM plus scaffolding. No publicly reported model-free
+system is within reach of any of those bars, and the census found none. The Brain's law makes it model-free at
+runtime. So the mission is not "find the existing solution and adapt it" — for these thirteen bars there is no
+existing solution of the permitted kind to find. It is "be the first." A plan for being first cannot be
+optimal in the sense the question asks; it can only be well-ordered: truthful carrier → coherent repository →
+cheapest clean measurements → build where the measurements say the deficit is → external asks running in the
+background at zero cost. That ordering is forced by dominance, and it is the ordering of this document. Asking
+whether it is optimal a fourth time will not change it; a measurement will.
