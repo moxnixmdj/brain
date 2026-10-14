@@ -259,3 +259,48 @@ that lets the Brain credit anything at all. Real terminal = not within 40 minute
 under the frozen predicate as written — not in 2026 unless the capability bets turn positive once measured.
 The plan above is the fastest truthful path; the first thing it produces is measurements, because measurements
 are the only objects on the critical path that nobody else has to hand us.
+
+---
+
+## 9. Self-audit (added after the question "are you sure this is optimal?") — no, and here is exactly where
+
+A plan can only be shown optimal relative to an objective and a constraint set; here the objective is
+max P(T) per unit of scarce resource (your minutes, compute, owner attention) under $0 and fail-closed truth.
+Three parts of this plan are **forced** (every feasible plan contains them): a truthful verification carrier,
+every zero-cost external ask sent immediately, and measurement before blind building. The rest is judgment.
+Re-checking the judgment turned up four corrections, two of which change Wave 0.
+
+**9.1 The carrier outage is endogenous and will recur (changes Wave 0).** Hosted runs in this repo succeeded
+until 2026-10-13T15:12Z; billing refusals start in the same hour. Cause, from the Actions API: 314 workflows,
+180 of them `pull_request`-triggered and 199 `push`-triggered (branch/path filtered); this month the API
+reports ≥ 2,500 push runs and ≥ 2,500 PR runs (the count is capped), while `main` received 689–1,779 commits
+per day on 10-07…10-11. Each run lasts ≈ 15–18 s but is billed as ≥ 1 minute per job, so the fan-out costs
+≈ 100 billable minutes per PR update against a 2,000–3,000-minute monthly allowance on a User account. A single
+push of this branch today triggered 26 runs. Consequence: **fixing billing (U1) alone restores the carrier for
+roughly one to two days at the 10-13 activity level.** Add to Wave 0: consolidate the per-PR verification
+fan-out into one job (the whole `canonical/tests` suite runs in ≈ 8 min on 2 cores, i.e. ≈ 3–5 billable
+minutes on a 4-core hosted runner, versus ≈ 100 for the fan-out) — a ≥ 20× cost reduction with identical
+commands as steps. This touches verification semantics (one receipt per PR instead of ~100), so it is your
+call; I can implement it in under an hour once you say which form you want.
+
+**9.2 The public carrier may still be alive (1-minute check, changes U1's urgency).**
+`moxnixmdj/verification-capsule-runner` (public) ran successfully at 2026-10-12T06:24Z, before the lock began;
+public repositories do not consume paid minutes, but an account-level payment lock can still disable them.
+Re-running its latest workflow from the GitHub UI tells us in one minute whether independent verification is
+blocked at all. If it runs, A1 (promotion of the two 24/24 objects), TB-Science public-envelope slots and the
+Chartography/OSWorld measurements can proceed without waiting for billing.
+
+**9.3 The Brain cannot currently plan for itself.** `one_shot_sky_impact_planner_v1/_executor_v1` raise
+`PostCompositionFrontierV2Error: R2_SCHEDULER` at HEAD, and the reality-closure V2 reports a PASS fixed point its
+own test says is wrong. "Use all the Brain's capability" was therefore bounded by the Brain's own incoherence;
+the ten deterministic test failures in §7 are the repair list, and they precede any Brain-generated plan.
+
+**9.4 Re-ranking inside Wave 1.** TB-Science (70 tasks) and TB4 (public task set) need **no** gated bytes — their
+only blockers are compute and capability. Chartography and OSWorld need U3. So the internal step with the
+fewest dependencies is a TB-Science or TB4 tranche on whatever carrier is alive, not Chartography; Chartography
+stays the fastest route to a *complete-benchmark* number once the token exists. The §5 probabilities are
+predictions with roughly ± 1 order of magnitude per term; the conclusion they support (not in 2026 under the
+frozen predicate) is insensitive to that, the ordering of A2–A6 is not.
+
+What did not change on re-audit: P(T ≤ 40 min) = 0; the four-kind classification in §1; the finding that
+the suite's green is partially virtualized (R5); the user-only actions list; zero credit claimed.
