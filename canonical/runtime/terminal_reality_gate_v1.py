@@ -128,7 +128,7 @@ def evaluate(pointer: dict, manifest: dict) -> dict:
     if live.get("primary_terminal_scheduler_object") != MANDATORY_ROOT:
         semantic_failures.append("PRIMARY_TERMINAL_SCHEDULER_ROOT_DRIFT")
 
-    closure = evaluate_manifest(manifest if isinstance(manifest, dict) else {}, ROOT)
+    closure = evaluate_manifest(manifest if isinstance(manifest, dict) else {})
     closure_achieved = closure.get("achieved") is True
     
     # Terminal is only real if all checks pass
