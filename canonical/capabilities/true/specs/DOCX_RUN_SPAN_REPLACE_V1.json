@@ -1,0 +1,56 @@
+{
+  "schema": "TRUE_CAPABILITY_SPEC_V1",
+  "capability_id": "DOCX_RUN_SPAN_REPLACE_V1",
+  "claim": "Given a .docx package and a target string that occurs exactly once (counting overlapping occurrences) in the visible text of the paragraphs of word/document.xml - possibly spanning several runs and text nodes - produce a package whose paragraph texts equal the originals with that single span replaced, with the same number of paragraphs and text nodes and every other member byte-identical; when the target occurs zero or several times, fail closed and write nothing.",
+  "input_class": "Structurally real WordprocessingML packages (content types, package/document rels, styles, core properties, optional binary media), 1-12 paragraphs, 1-5 runs each, random run properties, xml:space=preserve, Unicode and XML-special characters, numbered tokens; target cut from the paragraph text (at least 8 characters where the text allows, 70 % across a run boundary) in 68 % of instances, absent in 12 %, planted 1-2 more times in 13 %, self-overlapping periodic target (u*2 inside u*3) in 7 %; short or repeated cuts make further instances non-unique by chance; replacement may be empty, equal (no-op) or longer than the target. Measured mix on a 2000-instance dry run: PASS 65 %, fail-closed non-unique 35 %.",
+  "scope_limits": [
+    "NO targets spanning two paragraphs",
+    "NO visual-layout, tracked-changes, fields or numbering guarantees",
+    "NO headers/footers/footnotes (see DOCX_STORY_PART_REPLACE_V1)",
+    "NO general DOCX editing; one span per call"
+  ],
+  "solver": {
+    "module": "canonical/runtime/docx_true_capability_adapters_v1.py",
+    "entry": "solve_span",
+    "kernels": [
+      "canonical/runtime/docx_run_span_replace.py"
+    ],
+    "note": "the kernel is byte-pinned by a governance record, so the pure adapter lives in a separate module; the receipt records the kernel blob too"
+  },
+  "generator": {
+    "module": "canonical/capabilities/true/generators/docx_span_edit_gen_v1.py",
+    "entry": "generate_span"
+  },
+  "oracles": {
+    "module": "canonical/capabilities/true/oracles/docx_span_edit_oracles_v1.py",
+    "entry": "oracles_span",
+    "declared": [
+      {
+        "id": "EXPECTED_OUTCOME",
+        "class": "ANALYTIC_CLOSED_FORM",
+        "lineage": "derived from the claim; minidom paragraph-text model with overlapping occurrence count, never ElementTree"
+      },
+      {
+        "id": "PACKAGE_INTEGRITY",
+        "class": "PROPERTY",
+        "lineage": "none"
+      },
+      {
+        "id": "INVERSE_EDIT_RESTORES",
+        "class": "METAMORPHIC",
+        "lineage": "none"
+      }
+    ]
+  },
+  "independent_oracle_ids": [
+    "EXPECTED_OUTCOME",
+    "PACKAGE_INTEGRITY",
+    "INVERSE_EDIT_RESTORES"
+  ],
+  "published_canaries": [],
+  "min_instances": 500,
+  "pass_threshold": 1.0,
+  "falsification_condition": "Any generated package on which a unique span is not replaced exactly as the paragraph-text model predicts with all other members byte-identical, or on which an absent or repeated target does not fail closed without output.",
+  "model_dependency_count": 0,
+  "history": "Component of the ARTIFACT_CREATION family route (Brain-owned DOCX skills); kernel byte-pinned by a governance record and never measured on fresh instances before 2026-10-14. Measured through canonical/runtime/docx_true_capability_adapters_v1.py (pure base64/tempfile adapter) so the pinned kernel stays untouched; the receipt records the kernel blob. Measured 2026-10-14: 2000/2000 on first run, no defect found; ten scratch mutants all caught by the oracles."
+}

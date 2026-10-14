@@ -142,7 +142,7 @@
       "matrix_route_quoted": "Brain-owned MIT-0 AWS sample agent skills for XLSX/PPTX",
       "model_in_route": false,
       "classification": "COMPONENT_MEASURED_PASS",
-      "reason": "Brain DOCX exact-text-edit skill is MEASURED_PASS (DOCX_EXACT_TEXT_EDIT_V1, defect found and fixed); the other six docx_* skills and the vendored XLSX/PPTX skills are MEASURABLE_PENDING; the family as a whole remains open"
+      "reason": "Brain DOCX exact-text-edit skill (DOCX_EXACT_TEXT_EDIT_V1, defect found and fixed) and the three span editors (DOCX_RUN_SPAN_REPLACE_V1, DOCX_TEXT_EDIT_TRANSACTION_V1, DOCX_STORY_PART_REPLACE_V1, pinned kernels measured through an adapter) are MEASURED_PASS; the remaining three docx_* skills and the vendored XLSX/PPTX skills are MEASURABLE_PENDING; the family as a whole remains open"
     },
     {
       "family": "COMMUNICATION_AND_SYNTHESIS",
@@ -206,10 +206,22 @@
       "evidence": "ledger row; 3000/3000 sandbox after fixing a real defect (empty replacement always failed closed; 18 % of instances); mutants: empty-replacement bug 413/500, uniqueness defenses removed 424/500 - both caught"
     },
     {
-      "component": "Other DOCX skills",
-      "path": "canonical/runtime/docx_run_span_replace.py, docx_story_part_replace.py, docx_surgical_text_patch.py, docx_text_edit_transaction.py, docx_relationship_image_replace.py, docx_goal_compiler.py",
+      "component": "DOCX span / transaction / story-part editors (run-crossing text replacement)",
+      "path": "canonical/runtime/docx_run_span_replace.py (blob 915cea05), docx_text_edit_transaction.py (blob 5ada9da1), docx_story_part_replace.py (blob d908ef95) - all byte-pinned by governance records, measured unchanged through canonical/runtime/docx_true_capability_adapters_v1.py",
+      "classification": "MEASURED_PASS",
+      "spec": "DOCX_RUN_SPAN_REPLACE_V1",
+      "specs": [
+        "DOCX_RUN_SPAN_REPLACE_V1",
+        "DOCX_TEXT_EDIT_TRANSACTION_V1",
+        "DOCX_STORY_PART_REPLACE_V1"
+      ],
+      "evidence": "ledger rows; 2000/2000 sandbox each on fresh packages whose targets cross run boundaries (3 oracles each: minidom paragraph-text model with overlapping-occurrence uniqueness and strict-overlap rule, package integrity, inverse edit / atomic refusal); no defect found; mutants caught at 500 instances: span non-unique accepted 107, non-overlapping count 34, middle runs kept 35, output left behind on failure 163; transaction overlap unchecked 11, touching spans rejected 24, non-unique accepted 104, best-effort partial apply 487; story any part name 17, non-unique accepted 72; scope limits: no cross-paragraph targets, no tracked changes/fields/numbering, max 64 edits, no part creation"
+    },
+    {
+      "component": "Remaining DOCX skills",
+      "path": "canonical/runtime/docx_surgical_text_patch.py (unpinned, genoffice-derived), docx_relationship_image_replace.py (pinned), docx_goal_compiler.py (regex NL parser)",
       "classification": "MEASURABLE_PENDING",
-      "evidence": "same oracle family as DOCX_EXACT_TEXT_EDIT_V1 applies; not yet specified"
+      "evidence": "surgical patch and image replace: same oracle family (recompute via stdlib zip/xml) applies, not yet specified; goal compiler: regex parser of natural-language goals - a grammar-based generator with ground truth is needed or it stays record-only"
     },
     {
       "component": "Vendored XLSX/PPTX agent skills (AWS sample, MIT-0)",
@@ -283,7 +295,7 @@
       "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
       "EXACT_SYMBOLIC_COMPUTATION"
     ],
-    "components_measured_pass": 4,
+    "components_measured_pass": 5,
     "components_measured_fail": 0,
     "components_measurable_pending": 4,
     "components_checker_gaming": 1,
@@ -292,11 +304,11 @@
       "docx_exact_text_edit: replacement by the empty string always failed closed (fixed 2026-10-14)",
       "same_identity_supervisor: execute_claimed_task had no terminal-state guard, so a caller skipping claim_task could relaunch the runtime on a COMPLETE/FAILED task (fixed 2026-10-14; the frozen credited copy same_identity_supervisor_credited_v1.py still carries it)"
     ],
-    "measured_specs_total": 6
+    "measured_specs_total": 9
   },
   "what_this_audit_does_not_say": "It does not say any family is owned, does not change any matrix status, predicate, scoreboard or pointer, and credits nothing. A MEASURED_PASS component is exactly what its receipt says.",
   "next_in_order": [
-    "DOCX remaining six skills (same oracle family)",
+    "DOCX remaining three skills (surgical text patch, relationship image replace; goal compiler needs a grammar generator or stays record-only)",
     "XLSX/PPTX vendored skills with recompute oracles",
     "fan-in expansion (capability_proposal_generators.py) audit: measurable or record-only",
     "same-identity supervisor: crash/restart continuity (state after kill equals committed checkpoint), inter-process claim lock, continuous-OBS context check",

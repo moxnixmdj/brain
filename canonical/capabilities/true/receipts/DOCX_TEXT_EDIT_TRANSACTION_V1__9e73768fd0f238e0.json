@@ -1,0 +1,92 @@
+{
+  "authority": "NONE",
+  "banned_modules_detected": [],
+  "blobs": {
+    "generator": {
+      "git_blob_sha": "6f495492ce0f9f7e25e326c324581854db29957d",
+      "path": "canonical/capabilities/true/generators/docx_span_edit_gen_v1.py",
+      "sha256": "44310b8ebe8f7538febd52665b6ed8581d664c91f3f841a1e7f6946bb25ee0c5"
+    },
+    "kernels": [
+      {
+        "git_blob_sha": "5ada9da10b7fdc6592373a1ae2eaa579ee7992de",
+        "path": "canonical/runtime/docx_text_edit_transaction.py",
+        "sha256": "a3cc9fb44bd4979e5aaf62a711ecc2645a68af0d88603a67ce1092211c09d00a"
+      }
+    ],
+    "oracles": {
+      "git_blob_sha": "2a9173e4179776c955a9d9a2704de2f0b8613b0d",
+      "path": "canonical/capabilities/true/oracles/docx_span_edit_oracles_v1.py",
+      "sha256": "f627fb6a7d3c942aed257e92aeeb56fe971fdb10f989401028643ff654c36bed"
+    },
+    "solver": {
+      "git_blob_sha": "0008bed08fa3e17587a4af04e5bce04ff81fc8d2",
+      "path": "canonical/runtime/docx_true_capability_adapters_v1.py",
+      "sha256": "a37e3dc6e115c2bf580ef45a7b6b46c0edf58fa75d0f6a9cf96a37e06dd47101"
+    }
+  },
+  "canaries": [],
+  "canary_pass": "0/0",
+  "capability_id": "DOCX_TEXT_EDIT_TRANSACTION_V1",
+  "carrier": "SANDBOX",
+  "claim": "Given a .docx package and 1-64 (old,new) edits, apply all of them to word/document.xml atomically: every target must occur exactly once (overlapping count) in the paragraph texts and no two target spans may overlap (touching spans are allowed); then the output paragraph texts equal the originals with every span replaced and every other member is byte-identical. If any target is absent, repeated or overlaps another, or an edit is impossible, fail closed and write nothing.",
+  "failures_sample": [],
+  "fresh_pass_rate": 1.0,
+  "github": {
+    "GITHUB_REF": null,
+    "GITHUB_REPOSITORY": null,
+    "GITHUB_RUN_ATTEMPT": null,
+    "GITHUB_RUN_ID": null,
+    "GITHUB_SHA": null
+  },
+  "independent_oracle_ids": [
+    "EXPECTED_OUTCOME",
+    "PACKAGE_INTEGRITY",
+    "ATOMICITY_AND_INVERSE"
+  ],
+  "instance_pass": 2000,
+  "instances": 2000,
+  "kind": "FRESH_INSTANCE_MEASUREMENT",
+  "network_blocked": true,
+  "nonstdlib_modules_loaded": [],
+  "oracle_classes": {
+    "ATOMICITY_AND_INVERSE": "METAMORPHIC",
+    "EXPECTED_OUTCOME": "ANALYTIC_CLOSED_FORM",
+    "PACKAGE_INTEGRITY": "PROPERTY"
+  },
+  "pass_threshold": 1.0,
+  "per_oracle": {
+    "ATOMICITY_AND_INVERSE": {
+      "error": 0,
+      "fail": 0,
+      "pass": 2000
+    },
+    "EXPECTED_OUTCOME": {
+      "error": 0,
+      "fail": 0,
+      "pass": 2000
+    },
+    "PACKAGE_INTEGRITY": {
+      "error": 0,
+      "fail": 0,
+      "pass": 2000
+    }
+  },
+  "python": "3.11.2",
+  "replay": false,
+  "schema": "TRUE_CAPABILITY_RECEIPT_V1",
+  "scope_limits": [
+    "NO more than 64 edits per call",
+    "NO targets spanning two paragraphs",
+    "NO headers/footers/footnotes",
+    "NO visual-layout, tracked-changes, fields or numbering guarantees"
+  ],
+  "seed": "9e73768fd0f238e020fba0da4d9ce6cf599e1c28032c1e3814d45f3a533ec488",
+  "seed_source": "OS_URANDOM",
+  "self_description": "Measurement of a solver on instances generated after the solver was frozen, judged by oracles in separate files. authority NONE: it records what was observed on this carrier and grants no credit; only a referee-signed run on a public runner may be cited.",
+  "solver_errors": 0,
+  "spec_path": "canonical/capabilities/true/specs/DOCX_TEXT_EDIT_TRANSACTION_V1.json",
+  "spec_sha256": "c8960aa73a8fc7b375debe0cf2f94bcb3b1d29190eb7cc7236a8b97fab0ab98f",
+  "verdict": "PASS",
+  "wall_seconds": 9.779
+}
