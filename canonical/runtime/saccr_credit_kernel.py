@@ -106,3 +106,24 @@ def credit_addon(trades:list[CreditTrade])->float:
         systematic+=rho*addon_k
         idiosyncratic+=(1-rho*rho)*addon_k*addon_k
     return math.sqrt(systematic*systematic+idiosyncratic)
+
+
+# ---------------------------------------------------------------------------
+# True-capability entry point (canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md).
+# Pure adapter: dict instance -> dict output. No logic beyond the kernel above.
+# ---------------------------------------------------------------------------
+
+def solve_instance(instance: dict) -> dict:
+    """instance = {"trades": [{notional,start,end,direction,reference,credit_rating,is_index,margined_mpor}, ...]}
+
+    Returns the portfolio credit add-on plus the explicit intermediate trace of
+    every trade.  Raises ValueError (fail closed) on inputs outside the kernel's
+    declared scope, exactly as the typed API does.
+    """
+    trades=[CreditTrade(
+        notional=float(t["notional"]),start=float(t["start"]),end=float(t["end"]),
+        direction=int(t.get("direction",1)),reference=str(t.get("reference","default")),
+        credit_rating=str(t.get("credit_rating","BBB")),is_index=bool(t.get("is_index",False)),
+        margined_mpor=(None if t.get("margined_mpor") is None else float(t["margined_mpor"])),
+    ) for t in instance["trades"]]
+    return {"credit_addon":credit_addon(trades),"traces":[trace_trade(t) for t in trades]}

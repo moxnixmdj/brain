@@ -1,0 +1,39 @@
+{
+  "authority": "NONE",
+  "rows": {
+    "SACCR_CREDIT_ADDON_V1": {
+      "canary_pass": "1/1",
+      "carrier": "SANDBOX",
+      "claim": "Given a portfolio of linear single-name and index credit derivatives, compute the Basel SA-CCR credit asset-class add-on (CRE52.34, 52.48, 52.50, 52.55-52.72) with an explicit intermediate trace per trade.",
+      "fresh_pass_rate": 1.0,
+      "independent_oracle_ids": [
+        "CRE52_CLOSED_FORM",
+        "OFFSET_CANCELS",
+        "NOTIONAL_HOMOGENEITY"
+      ],
+      "instances": 2000,
+      "latest_receipt": "canonical/capabilities/true/receipts/SACCR_CREDIT_ADDON_V1__3e600b175e196a2e.json",
+      "measured_utc": "2026-10-14T16:30:19Z",
+      "oracle_classes": {
+        "CRE52_CLOSED_FORM": "ANALYTIC_CLOSED_FORM",
+        "DONOR_DIFFERENTIAL": "DIFFERENTIAL_EXTERNAL",
+        "NOTIONAL_HOMOGENEITY": "METAMORPHIC",
+        "OFFSET_CANCELS": "METAMORPHIC",
+        "SINGLE_ENTITY_BOUNDS": "PROPERTY"
+      },
+      "scope_limits": [
+        "NO options or CDO tranche deltas",
+        "NO replacement cost, PFE multiplier or whole netting-set EAD",
+        "NO rating/entity inference from documents; inputs are already structured",
+        "entity with mixed supervisory factor or correlation fails closed (ValueError) by design"
+      ],
+      "seed_source": "OS_URANDOM",
+      "solver_git_blob_sha": "fb451d4a413ec537321920a5182e717f5079e512",
+      "spec_path": "canonical/capabilities/true/specs/SACCR_CREDIT_ADDON_V1.json",
+      "status": "MEASURED_SANDBOX",
+      "verdict": "PASS"
+    }
+  },
+  "rule": "Rows are written only by execution_guard/true_capability_harness_v1.py from a receipt. A row is a measurement, not a claim; status MEASURED_SANDBOX never counts; status MEASURED_PUBLIC_RUNNER counts only when the receipt is referee-signed.",
+  "schema": "TRUE_CAPABILITY_LEDGER_V1"
+}
