@@ -1,6 +1,75 @@
 {
   "authority": "NONE",
   "rows": {
+    "AUTHENTICATED_PARETO_SCHEDULE_V1": {
+      "canary_pass": "0/0",
+      "carrier": "SANDBOX",
+      "claim": "compile_schedule accepts a candidate list only if every candidate has a non-empty string id (no duplicates), all nine numeric metrics, and a measurement receipt that is independently verified, carries a 64-hex sha256 and whose subject_sha256 equals sha256 of the canonical JSON of {candidate_id, metrics}; any candidate with non-zero cost_usd_ucb, or an empty list, fails closed with the first offending candidate and reason named. On acceptance it returns the nondominated set (five benefit metrics maximised, four cost metrics minimised, textbook dominance) sorted by id and, for every dominated candidate, the sorted ids of its dominators; it never grants promotion or terminal authority and reports zero credit and zero spend.",
+      "fresh_pass_rate": 1.0,
+      "independent_oracle_ids": [
+        "REFERENCE_SCHEDULE",
+        "AUTHORITY_ENVELOPE",
+        "TAMPER_AFTER_RECEIPT_IS_REFUSED",
+        "PERMUTATION_INVARIANCE"
+      ],
+      "instances": 2000,
+      "kernel_git_blob_shas": {
+        "canonical/runtime/authenticated_pareto_scheduler_v1.py": "0d351964d29690e676f116480a69b8c979b8b54a"
+      },
+      "latest_receipt": "canonical/capabilities/true/receipts/AUTHENTICATED_PARETO_SCHEDULE_V1__463480e1295d2068.json",
+      "measured_utc": "2026-10-14T18:50:24Z",
+      "oracle_classes": {
+        "AUTHORITY_ENVELOPE": "PROPERTY",
+        "PERMUTATION_INVARIANCE": "METAMORPHIC",
+        "REFERENCE_SCHEDULE": "ANALYTIC_CLOSED_FORM",
+        "TAMPER_AFTER_RECEIPT_IS_REFUSED": "METAMORPHIC"
+      },
+      "scope_limits": [
+        "NO verification that the receipt sha256 refers to a real measurement; only the binding of metrics to the receipt subject is measured",
+        "NO claim about float rounding beyond exact equality of the supplied numbers"
+      ],
+      "seed_source": "OS_URANDOM",
+      "solver_git_blob_sha": "d7dbd9d320d27587d2dac228e16bc5b4eceba61a",
+      "spec_path": "canonical/capabilities/true/specs/AUTHENTICATED_PARETO_SCHEDULE_V1.json",
+      "status": "MEASURED_SANDBOX",
+      "verdict": "PASS"
+    },
+    "CAPABILITY_FIRST_RANKING_V1": {
+      "canary_pass": "0/0",
+      "carrier": "SANDBOX",
+      "claim": "Given a list of work items (id, work type, benchmark role, frontier class, new-primitive claim with its proof fields, load-bearing obligation references, exact non-negative leverage and cost numbers) and the number of open checkpoint obligations, rank_work returns every item exactly once, ordered by: eligible work before demoted work; then exact-fraction leverage score (capability + efficiency + reliability) x reuse breadth x generalization x success probability / (wall + compute + memory + complexity cost), descending; then checkpoint audit score (discharge + unlock) x success / wall, which is non-zero only while obligations are open and the item references one; then work id. Benchmark instrumentation without an allowed role, new-primitive claims whose six proof requirements are not all present, and open-world evidence frontier work without a concrete counterexample or verified defect are demoted with score 0. Inputs with an unknown work type, duplicate ids, negative numbers, success probability above 1 or zero total cost on eligible work are refused. The result is planning only: no execution authority and zero acceptance, capability, ownership and terminal credit.",
+      "fresh_pass_rate": 1.0,
+      "independent_oracle_ids": [
+        "REFERENCE_RANKING",
+        "ORDER_INVARIANTS",
+        "PERMUTATION_INVARIANCE",
+        "UNIFORM_COST_SCALING_INVARIANCE",
+        "NO_AUTHORITY_GRANTED"
+      ],
+      "instances": 2000,
+      "kernel_git_blob_shas": {
+        "canonical/runtime/capability_first_scheduler_v1.py": "6d2091cc1581b9aa1fd2c74e8a76519a41d9d957"
+      },
+      "latest_receipt": "canonical/capabilities/true/receipts/CAPABILITY_FIRST_RANKING_V1__b588e2cdf071cc62.json",
+      "measured_utc": "2026-10-14T18:50:17Z",
+      "oracle_classes": {
+        "NO_AUTHORITY_GRANTED": "PROPERTY",
+        "ORDER_INVARIANTS": "PROPERTY",
+        "PERMUTATION_INVARIANCE": "METAMORPHIC",
+        "REFERENCE_RANKING": "ANALYTIC_CLOSED_FORM",
+        "UNIFORM_COST_SCALING_INVARIANCE": "METAMORPHIC"
+      },
+      "scope_limits": [
+        "NO shared-residual fan-out tie-break: items never carry shared_residual_cause_ids, so the repository residual ledger is never read",
+        "NO live authority reading: checkpoint_open_obligation_count is always supplied; rank_live_work and the current-authority file are out of scope",
+        "NO validation of malformed id lists or non-string identifiers beyond what the generator emits"
+      ],
+      "seed_source": "OS_URANDOM",
+      "solver_git_blob_sha": "d7dbd9d320d27587d2dac228e16bc5b4eceba61a",
+      "spec_path": "canonical/capabilities/true/specs/CAPABILITY_FIRST_RANKING_V1.json",
+      "status": "MEASURED_SANDBOX",
+      "verdict": "PASS"
+    },
     "DOCX_EXACT_TEXT_EDIT_V1": {
       "canary_pass": "0/0",
       "carrier": "SANDBOX",
@@ -28,6 +97,37 @@
       "seed_source": "OS_URANDOM",
       "solver_git_blob_sha": "c137d9d05de3822a0bac6f2d52d1f4446f2682da",
       "spec_path": "canonical/capabilities/true/specs/DOCX_EXACT_TEXT_EDIT_V1.json",
+      "status": "MEASURED_SANDBOX",
+      "verdict": "PASS"
+    },
+    "PARETO_FRONTIER_UPDATE_V1": {
+      "canary_pass": "0/0",
+      "carrier": "SANDBOX",
+      "claim": "Folding a sequence of candidates into an initially empty frontier with update_pareto_frontier: a candidate without a capability id is refused; a candidate that is not marked reusable, or not independently verified, is not admitted (with the matching reason) and the frontier is unchanged; a candidate with a negative metric is refused; a candidate dominated by an incumbent (no worse on capability, generalization and reliability and on latency, compute, memory and spend, strictly better somewhere, and with the same semantic contract when both declare one) is not admitted and the dominating incumbent is named; otherwise it is admitted, every incumbent it dominates is retired from the active frontier (never deleted, no deletion authority), and the frontier stays sorted by capability id.",
+      "fresh_pass_rate": 1.0,
+      "independent_oracle_ids": [
+        "REFERENCE_FOLD",
+        "FRONTIER_INVARIANTS",
+        "UNIFORM_SCALING_INVARIANCE"
+      ],
+      "instances": 2000,
+      "kernel_git_blob_shas": {
+        "canonical/runtime/capability_first_scheduler_v1.py": "6d2091cc1581b9aa1fd2c74e8a76519a41d9d957"
+      },
+      "latest_receipt": "canonical/capabilities/true/receipts/PARETO_FRONTIER_UPDATE_V1__ded725829226d120.json",
+      "measured_utc": "2026-10-14T18:50:23Z",
+      "oracle_classes": {
+        "FRONTIER_INVARIANTS": "PROPERTY",
+        "REFERENCE_FOLD": "ANALYTIC_CLOSED_FORM",
+        "UNIFORM_SCALING_INVARIANCE": "METAMORPHIC"
+      },
+      "scope_limits": [
+        "NO physical deletion semantics (option_preserving_capability_optimizer is a separate component)",
+        "NO claim about order-independence of the final frontier across differing semantic contracts"
+      ],
+      "seed_source": "OS_URANDOM",
+      "solver_git_blob_sha": "d7dbd9d320d27587d2dac228e16bc5b4eceba61a",
+      "spec_path": "canonical/capabilities/true/specs/PARETO_FRONTIER_UPDATE_V1.json",
       "status": "MEASURED_SANDBOX",
       "verdict": "PASS"
     },

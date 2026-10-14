@@ -1,0 +1,67 @@
+{
+  "schema": "TRUE_CAPABILITY_SPEC_V1",
+  "capability_id": "CAPABILITY_FIRST_RANKING_V1",
+  "claim": "Given a list of work items (id, work type, benchmark role, frontier class, new-primitive claim with its proof fields, load-bearing obligation references, exact non-negative leverage and cost numbers) and the number of open checkpoint obligations, rank_work returns every item exactly once, ordered by: eligible work before demoted work; then exact-fraction leverage score (capability + efficiency + reliability) x reuse breadth x generalization x success probability / (wall + compute + memory + complexity cost), descending; then checkpoint audit score (discharge + unlock) x success / wall, which is non-zero only while obligations are open and the item references one; then work id. Benchmark instrumentation without an allowed role, new-primitive claims whose six proof requirements are not all present, and open-world evidence frontier work without a concrete counterexample or verified defect are demoted with score 0. Inputs with an unknown work type, duplicate ids, negative numbers, success probability above 1 or zero total cost on eligible work are refused. The result is planning only: no execution authority and zero acceptance, capability, ownership and terminal credit.",
+  "input_class": "2-9 items; scores from a small pool, 35 % of items exact leverage twins of an earlier item and 15 % with zero expected gain, so exact ties (including eligible work scored 0 next to demoted work) are common; ints and decimal strings mixed; 30 % zero open obligations; 25 % open-world frontier items (half with a concrete defect id); 25 % new-primitive claims (half with one proof requirement missing, blank or lacking a mechanism reason); 35 % load-bearing references; benchmark items with allowed or disallowed roles; 15 % of instances carry exactly one defect (duplicate id, unknown work type, negative number, success > 1, zero cost) placed on an item that is certainly eligible.",
+  "scope_limits": [
+    "NO shared-residual fan-out tie-break: items never carry shared_residual_cause_ids, so the repository residual ledger is never read",
+    "NO live authority reading: checkpoint_open_obligation_count is always supplied; rank_live_work and the current-authority file are out of scope",
+    "NO validation of malformed id lists or non-string identifiers beyond what the generator emits"
+  ],
+  "solver": {
+    "module": "canonical/runtime/scheduler_true_capability_adapters_v1.py",
+    "entry": "solve_ranking",
+    "kernels": [
+      "canonical/runtime/capability_first_scheduler_v1.py"
+    ],
+    "note": "the kernel is byte-pinned by governance records, so the pure adapter lives in a separate module; the receipt records the kernel blob too"
+  },
+  "generator": {
+    "module": "canonical/capabilities/true/generators/scheduler_gen_v1.py",
+    "entry": "generate_ranking"
+  },
+  "oracles": {
+    "module": "canonical/capabilities/true/oracles/scheduler_oracles_v1.py",
+    "entry": "oracles_ranking",
+    "declared": [
+      {
+        "id": "REFERENCE_RANKING",
+        "class": "ANALYTIC_CLOSED_FORM",
+        "lineage": "exact-fraction re-computation of the published score and sort order with the fractions module; no scheduler code"
+      },
+      {
+        "id": "ORDER_INVARIANTS",
+        "class": "PROPERTY",
+        "lineage": "none"
+      },
+      {
+        "id": "PERMUTATION_INVARIANCE",
+        "class": "METAMORPHIC",
+        "lineage": "none"
+      },
+      {
+        "id": "UNIFORM_COST_SCALING_INVARIANCE",
+        "class": "METAMORPHIC",
+        "lineage": "none"
+      },
+      {
+        "id": "NO_AUTHORITY_GRANTED",
+        "class": "PROPERTY",
+        "lineage": "none"
+      }
+    ]
+  },
+  "independent_oracle_ids": [
+    "REFERENCE_RANKING",
+    "ORDER_INVARIANTS",
+    "PERMUTATION_INVARIANCE",
+    "UNIFORM_COST_SCALING_INVARIANCE",
+    "NO_AUTHORITY_GRANTED"
+  ],
+  "published_canaries": [],
+  "min_instances": 500,
+  "pass_threshold": 1.0,
+  "falsification_condition": "Any generated work list on which the returned order, eligibility label or exact score differs from the contract, a demoted item outranks an eligible one, input order or uniform cost scaling changes the order, a defective input is accepted, or any authority or credit field is non-zero.",
+  "model_dependency_count": 0,
+  "history": "Component named by the audit under 'Authenticated / capability-first schedulers'; previously covered only by hand-written example tests. First fresh-instance measurement 2026-10-14."
+}

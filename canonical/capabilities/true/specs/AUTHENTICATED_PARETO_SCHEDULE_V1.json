@@ -1,0 +1,60 @@
+{
+  "schema": "TRUE_CAPABILITY_SPEC_V1",
+  "capability_id": "AUTHENTICATED_PARETO_SCHEDULE_V1",
+  "claim": "compile_schedule accepts a candidate list only if every candidate has a non-empty string id (no duplicates), all nine numeric metrics, and a measurement receipt that is independently verified, carries a 64-hex sha256 and whose subject_sha256 equals sha256 of the canonical JSON of {candidate_id, metrics}; any candidate with non-zero cost_usd_ucb, or an empty list, fails closed with the first offending candidate and reason named. On acceptance it returns the nondominated set (five benefit metrics maximised, four cost metrics minimised, textbook dominance) sorted by id and, for every dominated candidate, the sorted ids of its dominators; it never grants promotion or terminal authority and reports zero credit and zero spend.",
+  "input_class": "1-9 candidates with integer/float metrics around a common base (30 % exact metric twins of an earlier candidate) and correctly bound receipts; 30 % of instances carry exactly one defect: duplicate id, missing or non-numeric metric, invalid receipt (not verified, bad sha, missing), metrics tampered after the receipt, non-zero spend, invalid id, or an empty list.",
+  "scope_limits": [
+    "NO verification that the receipt sha256 refers to a real measurement; only the binding of metrics to the receipt subject is measured",
+    "NO claim about float rounding beyond exact equality of the supplied numbers"
+  ],
+  "solver": {
+    "module": "canonical/runtime/scheduler_true_capability_adapters_v1.py",
+    "entry": "solve_schedule",
+    "kernels": [
+      "canonical/runtime/authenticated_pareto_scheduler_v1.py"
+    ],
+    "note": "the kernel is byte-pinned by governance records, so the pure adapter lives in a separate module; the receipt records the kernel blob too"
+  },
+  "generator": {
+    "module": "canonical/capabilities/true/generators/scheduler_gen_v1.py",
+    "entry": "generate_schedule"
+  },
+  "oracles": {
+    "module": "canonical/capabilities/true/oracles/scheduler_oracles_v1.py",
+    "entry": "oracles_schedule",
+    "declared": [
+      {
+        "id": "REFERENCE_SCHEDULE",
+        "class": "ANALYTIC_CLOSED_FORM",
+        "lineage": "textbook dominance plus the published receipt binding (sha256 of canonical JSON); no scheduler code"
+      },
+      {
+        "id": "AUTHORITY_ENVELOPE",
+        "class": "PROPERTY",
+        "lineage": "none"
+      },
+      {
+        "id": "TAMPER_AFTER_RECEIPT_IS_REFUSED",
+        "class": "METAMORPHIC",
+        "lineage": "none"
+      },
+      {
+        "id": "PERMUTATION_INVARIANCE",
+        "class": "METAMORPHIC",
+        "lineage": "none"
+      }
+    ]
+  },
+  "independent_oracle_ids": [
+    "REFERENCE_SCHEDULE",
+    "AUTHORITY_ENVELOPE",
+    "TAMPER_AFTER_RECEIPT_IS_REFUSED",
+    "PERMUTATION_INVARIANCE"
+  ],
+  "published_canaries": [],
+  "min_instances": 500,
+  "pass_threshold": 1.0,
+  "falsification_condition": "Any candidate list on which the verdict, first offending candidate, reason, nondominated set or dominator map differs from the contract; any accepted list in which improving a metric after the receipt is not refused with MEASUREMENT_RECEIPT_SUBJECT_MISMATCH; any promotion/terminal authority, credit or spend reported; any order dependence of the accepted frontier.",
+  "model_dependency_count": 0,
+  "history": "Component named by the audit under 'Authenticated / capability-first schedulers'. First fresh-instance measurement 2026-10-14."
+}

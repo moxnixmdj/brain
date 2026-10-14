@@ -192,6 +192,8 @@ def run_spec(spec_path: pathlib.Path, *, root: pathlib.Path, instances: int | No
     if str(root) not in sys.path:  # solvers may use intra-repository imports (never the other way round)
         sys.path.insert(0, str(root))
     solver_path = resolve(root, spec["solver"]["module"])
+    # optional byte-pinned kernels behind a thin adapter: recorded in the receipt like the solver
+    kernel_paths = [resolve(root, rel) for rel in spec["solver"].get("kernels", [])]
     gen_path = resolve(root, spec["generator"]["module"])
     oracle_path = resolve(root, spec["oracles"]["module"])
     if len({solver_path, gen_path, oracle_path}) != 3:
@@ -313,6 +315,7 @@ def run_spec(spec_path: pathlib.Path, *, root: pathlib.Path, instances: int | No
             "solver": {"path": str(solver_path.relative_to(root)), "git_blob_sha": git_blob_sha(solver_path), "sha256": sha256_file(solver_path)},
             "generator": {"path": str(gen_path.relative_to(root)), "git_blob_sha": git_blob_sha(gen_path), "sha256": sha256_file(gen_path)},
             "oracles": {"path": str(oracle_path.relative_to(root)), "git_blob_sha": git_blob_sha(oracle_path), "sha256": sha256_file(oracle_path)},
+            "kernels": [{"path": str(k.relative_to(root)), "git_blob_sha": git_blob_sha(k), "sha256": sha256_file(k)} for k in kernel_paths],
         },
         "python": platform.python_version(),
         "wall_seconds": round(time.time() - t0, 3),
@@ -374,6 +377,7 @@ def update_ledger(ledger_path: pathlib.Path, receipt: dict[str, Any], root: path
         "carrier": receipt["carrier"],
         "seed_source": receipt["seed_source"],
         "solver_git_blob_sha": receipt["blobs"]["solver"]["git_blob_sha"],
+        "kernel_git_blob_shas": {k["path"]: k["git_blob_sha"] for k in receipt["blobs"].get("kernels", [])},
         "oracle_classes": receipt["oracle_classes"],
         "independent_oracle_ids": receipt["independent_oracle_ids"],
         "measured_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
