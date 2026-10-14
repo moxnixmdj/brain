@@ -203,7 +203,8 @@
     "The referee forbids: stdlib attribute assignment, constant-key sys.modules injection, pin ledgers or git show/cat-file in tests, tautological assertions, more than 10 exact-to-loose assertion changes, self-merge tooling in .py/.sh/.yml files, new pull_request_target workflows.",
     "canonical/README.md is orientation prose, not live authority; when it conflicts with the content-addressed authorities (objective JSON, highest-version laws, CURRENT_TERMINAL_AUTHORITY_V1.json) those win and work fails closed until reconciled.",
     "The matrix says 7/19 families owned; the true-capability audit found 15/19 quoted routes contain an external model (zero credit under the law). Read both; cite neither as a capability claim.",
-    "Arena session memory is condensed between turns. It is a retrieval hint. Re-run the brief after any condensation."
+    "Arena session memory is condensed between turns. It is a retrieval hint. Re-run the brief after any condensation.",
+    "Two route lists coexist: the development law's route order for choosing a route (DELETE -> ... -> SYNTHESIZE_NEW_PRIMITIVE, used by agent_orientation.route_class) and the drift guard's fixed recursive_obs.obs_solution.deletion_first_order_applied list (DELETE, BYPASS, REUSE, SUBSTITUTE, WHITE_BOX_HARVEST, COMPOSE, CONFIGURE, INTEGRATE) which must be copied exactly. blocker_lease_key must equal canonical_generation::parent_capability::causal_blocker verbatim."
   ],
   "merge_rule": "AGENTS.md rule 7 governs: nothing merges over a red referee; prefer the auto-merge option, which GitHub completes only when the signed referee check is green. If your platform forbids the auto option, do not merge unless the owner has explicitly instructed you to; then merge only after the referee check-run conclusion is success, and disclose the self-merge in your report.",
   "session_start": [
