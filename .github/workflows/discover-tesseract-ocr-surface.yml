@@ -9,7 +9,7 @@ permissions:
   contents: read
 jobs:
   discover:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - run: |
           set -euxo pipefail

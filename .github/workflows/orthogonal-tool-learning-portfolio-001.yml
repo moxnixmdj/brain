@@ -18,7 +18,7 @@ jobs:
           - ORTHO-GZIP-001
           - ORTHO-SQLITE-001
           - ORTHO-XML-001
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
@@ -48,7 +48,7 @@ jobs:
   reconcile-matrix:
     needs: probe
     if: always()
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4

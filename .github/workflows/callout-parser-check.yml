@@ -6,7 +6,7 @@ on:
     paths: [canonical/runtime/engineering_callout_parser.py, canonical/tests/test_engineering_callout_parser_v1.py]
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

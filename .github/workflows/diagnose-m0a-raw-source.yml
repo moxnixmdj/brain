@@ -12,7 +12,7 @@ permissions:
   contents: read
 jobs:
   diagnose:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       PROJECT_BRAIN_POST_FREEZE_SEED: "8675309"
     steps:

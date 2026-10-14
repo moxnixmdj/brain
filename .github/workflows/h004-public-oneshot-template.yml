@@ -16,7 +16,7 @@ concurrency:
 jobs:
   h004:
     if: github.event.repository.private == false
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container:
       image: debian:trixie
     timeout-minutes: 12
