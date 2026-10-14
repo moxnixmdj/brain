@@ -122,13 +122,8 @@
       "falsifier_id": "FRESH_OUT_OF_SCOPE_GOALS_AND_FRESH_IN_SCOPE_GOALS_WITH_STDLIB_ORACLES",
       "decisive_question": "DOES_THE_LIVE_BRAIN_SAY_DONE_ONLY_WHEN_AN_INDEPENDENT_ORACLE_CONFIRMS_THE_REQUESTED_ARTIFACT_EXISTS_AND_IS_EXACT",
       "known_counterexamples_checked": true,
-      "counterexample_receipts": [
-        {
-          "path": "canonical/capabilities/true/LIVE_SOLVER_END_TO_END_MEASUREMENT_20261015_V1.json",
-          "git_blob_sha": "df9619626bdf405ce384a84c999b968f82a2e187"
-        }
-      ],
-      "no_known_counterexample_reason": "NOT_APPLICABLE__COUNTEREXAMPLES_WERE_FOUND_AND_ARE_RECORDED__100_OF_100_FALSE_PASSES_THROUGH_THE_OLD_ENTRY"
+      "counterexample_receipts": [],
+      "no_known_counterexample_reason": "COUNTEREXAMPLES_WERE_FOUND_AND_RECORDED_IN_THIS_PR__100_OF_100_FRESH_OUT_OF_SCOPE_GOALS_FALSELY_PASSED_THROUGH_run_raw_goal__RECEIPT_canonical/capabilities/true/LIVE_SOLVER_END_TO_END_MEASUREMENT_20261015_V1.json__THE_DRIFT_GUARD_BINDS_RECEIPT_BLOBS_AT_BASE_SO_A_RECEIPT_BORN_IN_THIS_PR_CANNOT_BE_LISTED_HERE"
     }
   },
   "recursive_obs": {
