@@ -116,3 +116,45 @@ Nothing in rows 4–11 closes a family. Under fork A the checkpoint stays at P �
 ## 8. Truth statement
 
 This plan does not close any family, meta obligation, donor conjunct, or the checkpoint. It makes three things real: a content-addressed inventory that the donor conjunct required and did not have; a governance encoding of the owner's no-outreach order with the proof of what it implies; and an honest terminal probability (≈ 0 under fork A) with the exact owner lever that changes it. `terminal_real` remains `false`.
+
+---
+
+## 9. Hypothesis test (2026-10-14, second pass): "the Brain already has perfect solutions, and perfect solutions exist on the internet"
+
+### 9.1 What the Brain actually contains (measured, not assumed)
+`canonical/runtime`: 2,027 Python files. By name class: 890 governance/verification, 662 other, **475 producer-like** (82 osworld, 46 terminal, 41 solver, 40 synth, 28 hle, 26 finance, 12 harbor_science, 6 chartography). What those producers have ever scored on a real bar:
+
+| Producer | Real-bar measurement on record | Zero-model? |
+|---|---|---|
+| `chartography_deterministic_professional_solver_v1` | **2 of 2 official non-held-out samples PASS** (independent public runner, 2026-10-11); explicit non-claim of the 100-task score | yes |
+| `hle_native_total_solver_v1..v3`, `hle_native_research_solver_v3..v5` | synthetic only; `achieved_score: null`; abstention-based totality | yes |
+| `coding_finite_candidate_exact_oracle_solver_v1` | constructive liveness verified; reward 0 on real tasks | yes |
+| OSWorld V21 deterministic app-policy overlay | file did not parse until today; V7 workflow "verified" on fixtures | yes |
+| TB-Science / OSWorld planner lineages | 0/20, 0 | **no** (Qwen) |
+| mini-swe-agent / stirrup (vendored donors) | the only agentic producers | **no** (require a model) |
+
+Verdict on hypothesis 1: the Brain has **prototypes with zero real-bar evidence**, except Chartography (2/2). "Perfect solutions for similar problems" is not supported by any receipt.
+
+### 9.2 What exists on the internet (read-only research, no outreach)
+- **TB4 (bar 66.36 %)**: open-weight models at/above the bar exist — Kimi K2.6 66.7 % (Modified MIT), DeepSeek-V4-Pro 67.9 % — i.e. the "perfect solution" is a 1T-parameter language model plus an agent harness like the one already vendored (`mini_swe_agent`).
+- **OSWorld-Verified (bar 81.8 %)**: best open weights EvoCUA-32B 56.7 %, UI-TARS-2 47.5 %, OpenCUA-72B 45.0 %. **No open solution reaches the bar**; the bar is proprietary-frontier only.
+- **HLE w/ tools (bar 67.7 %)**: open-weight tool agents sit at roughly 30–50 %. No open solution reaches the bar.
+- **Chartography (bar 89 %)**: VLM-based; no published open-weight system at the bar.
+- **Free inference tiers ($0, self-service)**: Cerebras 1M tok/day but **8K context cap** (unusable for 30–100K-token agent trajectories); Groq / NVIDIA NIM / Z.ai ≈ 1,000 req/day; OpenRouter 50 req/day free. TB4 full pass ≈ 330 tasks × ~40 calls = 13,200 calls → ≥ 13 days per pass at 1,000 req/day, if the right model is hosted free at all (Kimi K2.6 free hosting unconfirmed).
+
+Verdict on hypothesis 2: **true, with one catch** — every existing solution that reaches any of these bars is a general-purpose language model. That is exactly the class Mission Lock V10 excludes, and the two best (TB4) solutions are already vendored in this repo in harness form. The thing standing between the Brain and the internet's "perfect solutions" is not discovery; it is V10 plus $0.
+
+### 9.3 Computed scenario matrix — P(checkpoint real) and best reachable row, 30-day horizon, no outreach
+
+| Scenario | 8 owner-private rows | TB4 | OSWorld | HLE | Chartography | **P(checkpoint)** |
+|---|---|---|---|---|---|---|
+| S0: current laws | 0 | ≈0 (no zero-model producer) | ≈0 | ≈0 | 0.03–0.05 (2/2 → posterior under a realistic prior) | **0** |
+| S1: V10 rescinded, $0 kept | 0 | 0.10–0.20 (Kimi-class via free tiers; rate/context limits) | 0 (best open 56.7 < 81.8) | ≈0 | ≈0.05 | **0** |
+| S2: V10 rescinded + paid frontier models | 0 | ~0.9 | ~0.7 | ~0.6 | ~0.6 | **0** (8 rows) |
+
+The checkpoint is 0 in every row of the matrix because of the 8 owner-private measurements. Only a ledger amendment (fork B) or revoking the no-outreach order changes the last column — and in S1/S2 the capability would belong to the model, not the Brain.
+
+### 9.4 The only step that produces a *real new measurement* without any law change
+Owner self-service (not outreach; ~5 minutes): accept the Chartography and HLE dataset terms on a free Hugging Face account and add `HF_TOKEN` as a secret on the public `verification-capsule-runner`. Then run the Brain's zero-model Chartography solver over all 100 tasks and the HLE native stack over 2,500 questions on the public runner with provenance.
+- P(runs complete) ≈ 0.85. P(Chartography ≥ 89) ≈ 0.03–0.05; P(≥ 50) ≈ 0.15. P(HLE ≥ 67.7) ≈ 0.
+- Impact: the first real, zero-model, bar-grade numbers this repository has ever produced for two families — true either way, and the only honest starting line for capability work.
