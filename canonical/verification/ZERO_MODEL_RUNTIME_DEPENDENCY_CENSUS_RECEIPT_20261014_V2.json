@@ -1,0 +1,266 @@
+{
+ "schema": "PROJECT_BRAIN_ZERO_MODEL_RUNTIME_DEPENDENCY_CENSUS_RECEIPT_20261014_V2",
+ "date": "2026-10-14",
+ "status": "EXECUTED_AFTER_F4_F5_REPAIR__PARSE_ERRORS_0__DEAD_CHAT_COMPLETIONS_RUNNER_DELETED__7_PINNED_MODEL_DEPENDENT_FILES_REMAIN__EXIT_2",
+ "supersedes_baseline": "canonical/verification/ZERO_MODEL_RUNTIME_DEPENDENCY_CENSUS_RECEIPT_20261014_V1.json",
+ "census_runtime": {
+  "path": "canonical/runtime/zero_model_runtime_dependency_census_v1.py",
+  "git_blob_sha": "a520b2620b8233f0d143d34efc636181e7c6352a"
+ },
+ "repairs_applied": [
+  {
+   "finding": "F4a",
+   "path": "canonical/runtime/livebench_legacy_predecessor_compiler_audit_v1.py",
+   "repair": "replaced literal backslash-n escape sequences at line 139 with real newlines",
+   "git_blob_sha": "fb131f1fc87570d7ac65fd1b79b87542d29ac5d9"
+  },
+  {
+   "finding": "F4b",
+   "path": "canonical/runtime/osworld_v21_app_policy_overlay_v1.py",
+   "repair": "4 raw regex literals containing unescaped double quotes converted to triple-quoted raw strings (regex bodies byte-identical); module imports",
+   "git_blob_sha": "d839023ad422ef4d9e2b42792dcc89c60a22b154"
+  },
+  {
+   "finding": "F5",
+   "path": "canonical/runtime/root1_contrastive_semantic_candidate_runner_v1.py",
+   "repair": "DELETED together with canonical/tests/test_root1_contrastive_semantic_candidate_runner_v1.py (0 governance references, posted to a chat-completions route)"
+  }
+ ],
+ "remaining_model_dependent_files_and_why_not_removed_in_this_change": [
+  {
+   "path": "canonical/runtime/astra_runtime.py",
+   "blob_pins": "root3_child_process_channel_registry_v1.py, root3_effect_membrane_e1_current_byte_v1.py, test_root3_astra_current_rebind_v1.py, two 2026-10-11 verification receipts",
+   "reachability": "double-gated: step flag allow_optional_model_planner AND env ASTRA_DISABLE_MODEL_PLANNER unset; otherwise Blocker MODEL_INDEPENDENT_CONTROLLER_PLAN_REQUIRED",
+   "required_change": "delete _planner_post and the 4 call sites, then root3 rebind of the new blob"
+  },
+  {
+   "path": "canonical/runtime/harbor_science_planner_v1.py",
+   "blob_pins": 26,
+   "workflows": 1,
+   "importers": 5
+  },
+  {
+   "path": "canonical/runtime/harbor_science_planner_v5.py",
+   "blob_pins": 4,
+   "importers": 2
+  },
+  {
+   "path": "canonical/runtime/harbor_science_planner_v6.py",
+   "blob_pins": 6,
+   "importers": 2
+  },
+  {
+   "path": "canonical/runtime/harbor_science_planner_v7.py",
+   "blob_pins": 25,
+   "workflows": 1,
+   "importers": 2
+  },
+  {
+   "path": "canonical/runtime/osworld_v21_local_qwen_policy_v1.py",
+   "blob_pins": 1,
+   "workflows": 1,
+   "importers": 3
+  },
+  {
+   "path": "canonical/runtime/osworld_v21_qwen35_planner_v1.py",
+   "blob_pins": 0,
+   "importers": 3
+  }
+ ],
+ "census": {
+  "schema": "PROJECT_BRAIN_ZERO_MODEL_RUNTIME_DEPENDENCY_CENSUS_V1",
+  "surfaces": [
+   "canonical/runtime",
+   "execution_guard"
+  ],
+  "file_count": 2115,
+  "classification_counts": {
+   "CALL_LEVEL_MODEL_DEPENDENCY": 7,
+   "CLEAN": 2052,
+   "STRING_REFERENCE_ONLY": 56
+  },
+  "model_dependent_file_count": 7,
+  "model_dependent_files": [
+   {
+    "path": "canonical/runtime/astra_runtime.py",
+    "git_blob_sha": "0c613137b9c578c8afadb9482da08e2fc268deb7",
+    "classification": "CALL_LEVEL_MODEL_DEPENDENCY",
+    "model_module_imports": [],
+    "endpoint_or_route_strings": [],
+    "local_inference_runtime_strings": [
+     {
+      "line": 4398,
+      "match": "PROJECT_BRAIN_TERMINAL_LOCAL_PLANNER_MODEL"
+     }
+    ],
+    "model_call_names": [],
+    "model_identifiers": [],
+    "parse_error": null
+   },
+   {
+    "path": "canonical/runtime/harbor_science_planner_v1.py",
+    "git_blob_sha": "58964dc8d6b5eed5c202081cd800035c791eeb1d",
+    "classification": "CALL_LEVEL_MODEL_DEPENDENCY",
+    "model_module_imports": [],
+    "endpoint_or_route_strings": [
+     {
+      "line": 19,
+      "match": "/v1/chat/completions"
+     },
+     {
+      "line": 20,
+      "match": "/v1/chat/completions"
+     }
+    ],
+    "local_inference_runtime_strings": [
+     {
+      "line": 1,
+      "match": "llama.cpp"
+     }
+    ],
+    "model_call_names": [],
+    "model_identifiers": [],
+    "parse_error": null
+   },
+   {
+    "path": "canonical/runtime/harbor_science_planner_v5.py",
+    "git_blob_sha": "050bbae7c38900023fc4110070a48e8e50c161ee",
+    "classification": "CALL_LEVEL_MODEL_DEPENDENCY",
+    "model_module_imports": [],
+    "endpoint_or_route_strings": [
+     {
+      "line": 21,
+      "match": "/v1/chat/completions"
+     },
+     {
+      "line": 22,
+      "match": "/v1/chat/completions"
+     }
+    ],
+    "local_inference_runtime_strings": [
+     {
+      "line": 1,
+      "match": "llama.cpp"
+     }
+    ],
+    "model_call_names": [],
+    "model_identifiers": [],
+    "parse_error": null
+   },
+   {
+    "path": "canonical/runtime/harbor_science_planner_v6.py",
+    "git_blob_sha": "ecfaa7523347ba0e902baa9d411e333d3e2853e4",
+    "classification": "CALL_LEVEL_MODEL_DEPENDENCY",
+    "model_module_imports": [],
+    "endpoint_or_route_strings": [
+     {
+      "line": 21,
+      "match": "/v1/chat/completions"
+     },
+     {
+      "line": 22,
+      "match": "/v1/chat/completions"
+     }
+    ],
+    "local_inference_runtime_strings": [
+     {
+      "line": 1,
+      "match": "llama.cpp"
+     }
+    ],
+    "model_call_names": [],
+    "model_identifiers": [],
+    "parse_error": null
+   },
+   {
+    "path": "canonical/runtime/harbor_science_planner_v7.py",
+    "git_blob_sha": "e5d6ab78b6cf5bacee568cd3701410a8745b9ce8",
+    "classification": "CALL_LEVEL_MODEL_DEPENDENCY",
+    "model_module_imports": [],
+    "endpoint_or_route_strings": [
+     {
+      "line": 21,
+      "match": "/v1/chat/completions"
+     },
+     {
+      "line": 22,
+      "match": "/v1/chat/completions"
+     }
+    ],
+    "local_inference_runtime_strings": [
+     {
+      "line": 1,
+      "match": "llama.cpp"
+     }
+    ],
+    "model_call_names": [],
+    "model_identifiers": [],
+    "parse_error": null
+   },
+   {
+    "path": "canonical/runtime/osworld_v21_local_qwen_policy_v1.py",
+    "git_blob_sha": "8c852df15c463f347c63ba34e04281e034065c50",
+    "classification": "CALL_LEVEL_MODEL_DEPENDENCY",
+    "model_module_imports": [],
+    "endpoint_or_route_strings": [],
+    "local_inference_runtime_strings": [
+     {
+      "line": 1,
+      "match": "llama.cpp"
+     }
+    ],
+    "model_call_names": [],
+    "model_identifiers": [],
+    "parse_error": null
+   },
+   {
+    "path": "canonical/runtime/osworld_v21_qwen35_planner_v1.py",
+    "git_blob_sha": "d07eed87abeb843fb120574a5759cea5282c1468",
+    "classification": "CALL_LEVEL_MODEL_DEPENDENCY",
+    "model_module_imports": [],
+    "endpoint_or_route_strings": [],
+    "local_inference_runtime_strings": [
+     {
+      "line": 51,
+      "match": "PROJECT_BRAIN_QWEN35_MODEL"
+     }
+    ],
+    "model_call_names": [],
+    "model_identifiers": [
+     {
+      "line": 169,
+      "name": "Qwen35OSWorldPlanner"
+     },
+     {
+      "line": 19,
+      "name": "LLAMA_CPP_REVISION"
+     }
+    ],
+    "parse_error": null
+   }
+  ],
+  "credited_producer_path_rule": "A CREDITED PRODUCER PATH IS ADMISSIBLE ONLY IF EVERY FILE IT TRANSITIVELY IMPORTS IS CLEAN OR STRING_REFERENCE_ONLY__EVERY FILE LISTED IN model_dependent_files IS QUARANTINED FROM CREDITED PRODUCER COGNITION UNTIL DELETED OR PROVED NON-LOAD-BEARING",
+  "census_proves": "RUNTIME_DEPENDENCY_INVENTORY_FOR_THE_SCANNED_SURFACES_ONLY",
+  "census_does_not_prove": [
+   "ZERO_MODEL_COGNITION_IN_HISTORICAL_RECEIPTS",
+   "TRANSITIVE_IMPORT_CLOSURE_OF_ANY_SPECIFIC_CREDITED_ROUTE",
+   "BEHAVIOR_PRESERVATION_AFTER_DONOR_REMOVAL",
+   "ANY_CAPABILITY_ACCEPTANCE_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+   "incremental_spend_usd": 0,
+   "acceptance_credit_delta": 0,
+   "capability_credit_delta": 0,
+   "ownership_credit_delta": 0,
+   "terminal_credit_delta": 0
+  }
+ },
+ "truth_consequence": "UNDER_MISSION_LOCK_V10_THE_BRAIN_HAS_NO_CREDITABLE_PRODUCER_FOR_TB_SCIENCE_OR_OSWORLD__ITS_ONLY_PRODUCERS_FOR_THOSE_FAMILIES_ARE_THE_SEVEN_MODEL_DEPENDENT_FILES_ABOVE",
+ "accounting": {
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0
+ }
+}

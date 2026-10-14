@@ -136,7 +136,10 @@ def audit(parquet_path: Path) -> dict[str, Any]:
         if params_ok:
             kwargs_exact_rows += 1
 
-        complete = (\n            not list(out.get("parameter_incomplete") or [])\n            and all(bool(x.get("parameter_complete")) for x in constraints)\n        )
+        complete = (
+            not list(out.get("parameter_incomplete") or [])
+            and all(bool(x.get("parameter_complete")) for x in constraints)
+        )
         if complete:
             complete_rows += 1
 

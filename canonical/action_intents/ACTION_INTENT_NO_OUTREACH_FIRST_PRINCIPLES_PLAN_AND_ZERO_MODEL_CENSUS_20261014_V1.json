@@ -23,13 +23,18 @@
   "canonical/runtime/zero_model_runtime_dependency_census_v1.py": "new fail-closed AST census of model SDK imports, chat-completion endpoints, local inference runtimes, GGUF/model env identifiers; exit 0 only when the scanned surface has zero model-dependent files",
   "canonical/verification/ZERO_MODEL_RUNTIME_DEPENDENCY_CENSUS_RECEIPT_20261014_V1.json": "executed receipt: 2116 files, 8 call-level dependencies, 2 parse errors, findings F1-F5 with line references",
   "canonical/tests/test_zero_model_runtime_dependency_census_v1.py": "7 tests: clean/exit-zero, import/call/identifier flagging, string-reference-only not dependent, parse error and missing surface fail closed, committed receipt shape",
-  "ONE_SHOT_FRONTIER_EXECUTION_PLAN_20261014.md": "replaced the literal truncation marker with a defect notice and supersession pointer"
+  "ONE_SHOT_FRONTIER_EXECUTION_PLAN_20261014.md": "replaced the literal truncation marker with a defect notice and supersession pointer",
+  "canonical/runtime/livebench_legacy_predecessor_compiler_audit_v1.py": "F4a syntax repair (literal escape sequences -> newlines)",
+  "canonical/runtime/osworld_v21_app_policy_overlay_v1.py": "F4b syntax repair (4 regex literals re-quoted; bodies unchanged)",
+  "canonical/runtime/root1_contrastive_semantic_candidate_runner_v1.py": "DELETED (F5; chat-completions route; 0 governance refs) with its test",
+  "canonical/verification/ZERO_MODEL_RUNTIME_DEPENDENCY_CENSUS_RECEIPT_20261014_V2.json": "post-repair census: 0 parse errors, 7 pinned model-dependent files remain, exit 2"
  },
  "local_verification": {
   "census_suite": "7_OF_7_PASS",
   "census_execution": "EXIT_2__model_dependent_file_count_10_OF_2116",
   "terminal_reality_gate": "terminal_real_false_UNCHANGED",
-  "verify_current": "NOT_RUN__NO_POINTER_OR_MANIFEST_EDITS"
+  "verify_current": "NOT_RUN__NO_POINTER_OR_MANIFEST_EDITS",
+  "census_execution_after_repair": "EXIT_2__model_dependent_file_count_7_OF_2115__PARSE_ERRORS_0"
  },
  "v22_prewrite_admission": {
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",

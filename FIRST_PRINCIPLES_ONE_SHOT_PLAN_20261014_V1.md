@@ -85,7 +85,12 @@ Each step: what it produces, P(success) (calibrated to what the gate actually co
 - `canonical/governance/NO_EXTERNAL_OUTREACH_OWNER_INSTRUCTION_AND_OWNER_PRIVATE_OBLIGATION_RECLASSIFICATION_20261014_V1.json`: encodes §0, proves the measurement-function theorem, moves 8 rows `WAKE_GATED → CLOSED_OFF_UNDER_CURRENT_CONSTRAINTS__OWNER_DECISION_REQUIRED`, keeps 4 rows wake-gated on the capability floor, records the fork.
 - P = 1.0. Terminal impact: 0 credit; prevents every future plan from re-spending effort on routes that cannot produce `S`.
 
-### Step 3 — Truncated-plan repair (EXECUTED)
+### Step 3 — F4/F5 repairs (EXECUTED, second pass)
+- Both parse errors fixed (`livebench_legacy_predecessor_compiler_audit_v1.py`, `osworld_v21_app_policy_overlay_v1.py`; regex bodies byte-identical, module imports). Dead chat-completions runner `root1_contrastive_semantic_candidate_runner_v1.py` deleted with its test. Post-repair census: **0 parse errors, 7 model-dependent files remain** (`ZERO_MODEL_RUNTIME_DEPENDENCY_CENSUS_RECEIPT_20261014_V2.json`).
+- The 7 remaining files are blob-pinned in up to 26 governance artifacts each and used by workflows; removing them is a dedicated rebind change (queue rows 4–5), not a one-shot edit.
+- **Truth this exposes:** under V10 the Brain has *no* creditable producer for TB-Science or OSWorld at all — its only producers for those families are the seven model-dependent files.
+
+### Step 3b — Truncated-plan repair (EXECUTED)
 - `ONE_SHOT_FRONTIER_EXECUTION_PLAN_20261014.md` line 62 carried a literal `[truncated 9113 chars]` marker (Steps 2.5–9 and §§3–5 lost; history is a single shallow commit, unrecoverable). Marker replaced by an explicit supersession note pointing here.
 
 ## 6. The ordered queue after this turn (each $0, no outreach, Brain-executable, with honest numbers)
