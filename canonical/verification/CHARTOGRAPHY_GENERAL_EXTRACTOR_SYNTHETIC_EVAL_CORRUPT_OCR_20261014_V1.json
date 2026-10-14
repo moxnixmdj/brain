@@ -1,0 +1,118 @@
+{
+ "receipt_type": "CHARTOGRAPHY_GENERAL_EXTRACTOR_SYNTHETIC_EVAL_V1",
+ "credit_claimed": 0,
+ "benchmark_data_touched": false,
+ "ocr": "simulated from matplotlib text artists + corruption (one wrong tick label in 50% of charts, +/-2px jitter)",
+ "seed": 9001,
+ "charts": 120,
+ "policy": "best_effort",
+ "elapsed_s": 59.1,
+ "by_certificate": {
+  "certified_correct": 488,
+  "certified_wrong": 9,
+  "uncertified_correct": 46,
+  "uncertified_wrong": 9
+ },
+ "by_question_type": {
+  "AGGREGATE": {
+   "correct": 70,
+   "wrong": 5,
+   "abstain": 0,
+   "total": 75,
+   "wrong_rate": 0.0667,
+   "correct_rate": 0.9333
+  },
+  "DIFFERENCE": {
+   "correct": 70,
+   "wrong": 3,
+   "abstain": 2,
+   "total": 75,
+   "wrong_rate": 0.04,
+   "correct_rate": 0.9333
+  },
+  "EXTREMA_CAT": {
+   "correct": 112,
+   "wrong": 0,
+   "abstain": 8,
+   "total": 120,
+   "wrong_rate": 0.0,
+   "correct_rate": 0.9333
+  },
+  "EXTREMA_VAL": {
+   "correct": 74,
+   "wrong": 1,
+   "abstain": 0,
+   "total": 75,
+   "wrong_rate": 0.0133,
+   "correct_rate": 0.9867
+  },
+  "LOOKUP": {
+   "correct": 85,
+   "wrong": 3,
+   "abstain": 2,
+   "total": 90,
+   "wrong_rate": 0.0333,
+   "correct_rate": 0.9444
+  },
+  "PERCENT_CHANGE": {
+   "correct": 23,
+   "wrong": 3,
+   "abstain": 2,
+   "total": 28,
+   "wrong_rate": 0.1071,
+   "correct_rate": 0.8214
+  },
+  "RATIO": {
+   "correct": 70,
+   "wrong": 3,
+   "abstain": 2,
+   "total": 75,
+   "wrong_rate": 0.04,
+   "correct_rate": 0.9333
+  },
+  "SHARE": {
+   "correct": 30,
+   "wrong": 0,
+   "abstain": 0,
+   "total": 30,
+   "wrong_rate": 0.0,
+   "correct_rate": 1.0
+  }
+ },
+ "overall": {
+  "questions": 568,
+  "correct": 534,
+  "wrong": 18,
+  "abstain": 16
+ },
+ "wrong_examples": [
+  "LOOKUP: gold=78.1 got=455.2 table={'#(31, 119, 180)': {'2010': np.float64(359.4734), '2011': np.float64(455.1806), '2012': np.float64(348.8393), '2013': np.float64(128.1809), '2014': np.float64(-136.7863), '2015': np.float64(128.1809), '2016': np.float64(223.8882)}}",
+  "DIFFERENCE: gold=7.8999999999999915 got=106.3 table={'#(31, 119, 180)': {'2010': np.float64(359.4734), '2011': np.float64(455.1806), '2012': np.float64(348.8393), '2013': np.float64(128.1809), '2014': np.float64(-136.7863), '2015': np.float64(128.1809), '2016': np.float64(223.8882)}}",
+  "RATIO: gold=1.1125356125356125 got=1.305 table={'#(31, 119, 180)': {'2010': np.float64(359.4734), '2011': np.float64(455.1806), '2012': np.float64(348.8393), '2013': np.float64(128.1809), '2014': np.float64(-136.7863), '2015': np.float64(128.1809), '2016': np.float64(223.8882)}}",
+  "AGGREGATE: gold=421.2 got=1507 table={'#(31, 119, 180)': {'2010': np.float64(359.4734), '2011': np.float64(455.1806), '2012': np.float64(348.8393), '2013': np.float64(128.1809), '2014': np.float64(-136.7863), '2015': np.float64(128.1809), '2016': np.float64(223.8882)}}",
+  "EXTREMA_VAL: gold=78.1 got=455.2 table={'#(31, 119, 180)': {'2010': np.float64(359.4734), '2011': np.float64(455.1806), '2012': np.float64(348.8393), '2013': np.float64(128.1809), '2014': np.float64(-136.7863), '2015': np.float64(128.1809), '2016': np.float64(223.8882)}}",
+  "PERCENT_CHANGE: gold=-10.115236875800246 got=-23.36 table={'#(31, 119, 180)': {'2010': np.float64(359.4734), '2011': np.float64(455.1806), '2012': np.float64(348.8393), '2013': np.float64(128.1809), '2014': np.float64(-136.7863), '2015': np.float64(128.1809), '2016': np.float64(223.8882)}}",
+  "AGGREGATE: gold=510.20000000000005 got=436 table={'#(45, 161, 45)': {'2010': np.float64(46.4188), '2011': np.float64(81.5772), '2012': np.float64(48.0362), '2013': np.float64(94.0061), '2014': np.float64(38.0761), '2016': np.float64(80.6408), '2017': np.float64(47.2701)}}",
+  "RATIO: gold=13.73529411764706 got=12.24 table={'#(255, 127, 14)': {'2010': np.float64(37.5817), '2011': np.float64(89.3416), '2012': np.float64(20.9722), '2013': np.float64(92.818), '2014': np.float64(7.5816), '2015': np.float64(44.1483), '2016': np.float64(51.2298)}}",
+  "LOOKUP: gold=9.7 got=10.68 table={'#(148, 104, 189)': {'Fig': np.float64(94.0093), 'Elder': np.float64(84.3793), 'Dates': np.float64(10.6802), 'Cherry': np.float64(50.576), 'Banana': np.float64(7.3392), 'Apple': np.float64(72.1944)}}",
+  "RATIO: gold=1.5396825396825395 got=1.455 table={'#(148, 104, 189)': {'Fig': np.float64(94.0093), 'Elder': np.float64(84.3793), 'Dates': np.float64(10.6802), 'Cherry': np.float64(50.576), 'Banana': np.float64(7.3392), 'Apple': np.float64(72.1944)}}",
+  "AGGREGATE: gold=542.8000000000001 got=454.6 table={'#(255, 127, 14)': {'2010': np.float64(34.8776), '2012': np.float64(71.1519), '2013': np.float64(71.0293), '2014': np.float64(28.26), '2015': np.float64(97.8674), '2016': np.float64(16.0052), '2017': np.float64(92.8429), '2018': np.float64(42.5981)}}",
+  "DIFFERENCE: gold=8.399999999999999 got=7.871 table={'#(45, 161, 45)': {'2010': np.float64(26.5034), '2011': np.float64(77.7289), '2012': np.float64(50.3742), '2013': np.float64(34.3743), '2014': np.float64(97.8579), '2015': np.float64(11.9228), '2016': np.float64(57.729), '2017': np.float64(25.4711)}}",
+  "PERCENT_CHANGE: gold=32.81249999999999 got=29.7 table={'#(45, 161, 45)': {'2010': np.float64(26.5034), '2011': np.float64(77.7289), '2012': np.float64(50.3742), '2013': np.float64(34.3743), '2014': np.float64(97.8579), '2015': np.float64(11.9228), '2016': np.float64(57.729), '2017': np.float64(25.4711)}}",
+  "LOOKUP: gold=6.5 got=7.194 table={'#(255, 127, 14)': {'2010': np.float64(65.105), '2011': np.float64(79.3497), '2012': np.float64(7.1941), '2013': np.float64(96.1239), '2014': np.float64(46.2008), '2015': np.float64(10.6555), '2016': np.float64(54.3216), '2017': np.float64(61.7768)}}",
+  "PERCENT_CHANGE: gold=1383.076923076923 got=1236 table={'#(255, 127, 14)': {'2010': np.float64(65.105), '2011': np.float64(79.3497), '2012': np.float64(7.1941), '2013': np.float64(96.1239), '2014': np.float64(46.2008), '2015': np.float64(10.6555), '2016': np.float64(54.3216), '2017': np.float64(61.7768)}}",
+  "AGGREGATE: gold=610.4 got=567.3 table={'#(255, 127, 14)': {'2010': np.float64(11.7722), '2011': np.float64(95.3165), '2012': np.float64(31.519), '2013': np.float64(81.3924), '2014': np.float64(84.557), '2015': np.float64(76.962), '2016': np.float64(96.5823), '2017': np.float64(89.2405)}}",
+  "DIFFERENCE: gold=1.5999999999999943 got=1.059 table={'#(255, 127, 14)': {'2010': np.float64(93.2948), '2011': np.float64(43.5013), '2012': np.float64(8.6723), '2013': np.float64(83.6275), '2014': np.float64(96.3407), '2015': np.float64(53.9632), '2016': np.float64(84.6869), '2017': np.float64(9.9966), '2018': np.float64(51.9768)}}",
+  "AGGREGATE: gold=310.1 got=284.7 table={'#(148, 103, 189)': {'2010': np.float64(96.7686), '2011': np.float64(81.8296), '2012': np.float64(8.1919), '2013': np.float64(64.5108), '2015': np.float64(33.4429)}}"
+ ],
+ "abstain_reasons": {
+  "line:ABSTAIN__CATEGORY_UNMATCHED_PAIR": 6,
+  "line:ABSTAIN__EXTREMUM_TIE_WITHIN_CERTIFICATE": 4,
+  "grouped:ABSTAIN__ROW_INCOMPLETE_4_of_5": 2,
+  "barh:ABSTAIN__EXTREMUM_TIE_WITHIN_CERTIFICATE": 1,
+  "grouped:ABSTAIN__ROW_INCOMPLETE_3_of_4": 1,
+  "line:ABSTAIN__CATEGORY_UNMATCHED_2018": 1,
+  "line:ABSTAIN__CATEGORY_UNMATCHED_2014": 1
+ },
+ "sha256_of_body": "3a57c4c65116c5bbbc3532fd5ffdd90416b4942e678269ec10976dc992646e99"
+}

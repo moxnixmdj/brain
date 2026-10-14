@@ -1,0 +1,108 @@
+{
+ "receipt_type": "CHARTOGRAPHY_GENERAL_EXTRACTOR_SYNTHETIC_EVAL_V1",
+ "credit_claimed": 0,
+ "benchmark_data_touched": false,
+ "ocr": "simulated from matplotlib text artists",
+ "seed": 9001,
+ "charts": 120,
+ "policy": "best_effort",
+ "elapsed_s": 61.6,
+ "by_certificate": {
+  "certified_correct": 520,
+  "certified_wrong": 0,
+  "uncertified_correct": 55,
+  "uncertified_wrong": 8
+ },
+ "by_question_type": {
+  "AGGREGATE": {
+   "correct": 81,
+   "wrong": 0,
+   "abstain": 0,
+   "total": 81,
+   "wrong_rate": 0.0,
+   "correct_rate": 1.0
+  },
+  "DIFFERENCE": {
+   "correct": 81,
+   "wrong": 0,
+   "abstain": 0,
+   "total": 81,
+   "wrong_rate": 0.0,
+   "correct_rate": 1.0
+  },
+  "EXTREMA_CAT": {
+   "correct": 109,
+   "wrong": 0,
+   "abstain": 11,
+   "total": 120,
+   "wrong_rate": 0.0,
+   "correct_rate": 0.9083
+  },
+  "EXTREMA_VAL": {
+   "correct": 81,
+   "wrong": 0,
+   "abstain": 0,
+   "total": 81,
+   "wrong_rate": 0.0,
+   "correct_rate": 1.0
+  },
+  "LOOKUP": {
+   "correct": 100,
+   "wrong": 0,
+   "abstain": 1,
+   "total": 101,
+   "wrong_rate": 0.0,
+   "correct_rate": 0.9901
+  },
+  "PERCENT_CHANGE": {
+   "correct": 26,
+   "wrong": 5,
+   "abstain": 0,
+   "total": 31,
+   "wrong_rate": 0.1613,
+   "correct_rate": 0.8387
+  },
+  "RATIO": {
+   "correct": 78,
+   "wrong": 3,
+   "abstain": 0,
+   "total": 81,
+   "wrong_rate": 0.037,
+   "correct_rate": 0.963
+  },
+  "SHARE": {
+   "correct": 19,
+   "wrong": 0,
+   "abstain": 0,
+   "total": 19,
+   "wrong_rate": 0.0,
+   "correct_rate": 1.0
+  }
+ },
+ "overall": {
+  "questions": 595,
+  "correct": 575,
+  "wrong": 8,
+  "abstain": 12
+ },
+ "wrong_examples": [
+  "PERCENT_CHANGE: gold=238.3620689655172 got=226.1 table={'#(45, 161, 45)': {'2010': np.float64(87.3307), '2011': np.float64(47.5106), '2012': np.float64(91.6151), '2013': np.float64(24.0722), '2014': np.float64(78.5098), '2015': np.float64(65.9085), '2016': np.float64(8.3206), '2017': np.float64(54.4413), '2018': np.float64(18.5277)}}",
+  "RATIO: gold=4.844262295081967 got=4.591 table={'#(45, 161, 45)': {'2010': np.float64(51.2922), '2011': np.float64(66.3219), '2012': np.float64(12.7901), '2013': np.float64(58.7143), '2014': np.float64(6.9452), '2015': np.float64(68.2702), '2016': np.float64(8.708)}}",
+  "PERCENT_CHANGE: gold=1407.6923076923076 got=1324 table={'#(214, 41, 42)': {'2010': np.float64(59.9158), '2011': np.float64(78.8256), '2012': np.float64(61.6749), '2013': np.float64(5.4953), '2014': np.float64(78.2759), '2015': np.float64(79.2654), '2016': np.float64(75.8572)}}",
+  "PERCENT_CHANGE: gold=270.0 got=253.4 table={'#(31, 119, 180)': {'2010': np.float64(14.8173), '2011': np.float64(12.4884), '2012': np.float64(36.1886), '2013': np.float64(44.1344), '2014': np.float64(6.8715), '2015': np.float64(52.9021), '2016': np.float64(98.3847)}}",
+  "RATIO: gold=17.35185185185185 got=18.6 table={'#(148, 103, 189)': {'Fig': np.float64(93.4116), 'Elder': np.float64(5.0231), 'Dates': np.float64(80.1037), 'Cherry': np.float64(90.8295), 'Banana': np.float64(54.0837), 'Apple': np.float64(90.4322)}}",
+  "PERCENT_CHANGE: gold=553.2467532467532 got=520 table={'#(46, 161, 46)': {'2010': np.float64(88.0595), '2011': np.float64(62.9352), '2012': np.float64(91.2933), '2013': np.float64(74.5023), '2014': np.float64(61.4427), '2015': np.float64(39.3035), '2016': np.float64(50.1244), '2017': np.float64(8.0848)}}",
+  "PERCENT_CHANGE: gold=0.0 got=4.615 table={'#(214, 41, 42)': {'2010': np.float64(69.5331), '2011': np.float64(71.3758), '2012': np.float64(8.3541), '2013': np.float64(34.1524), '2014': np.float64(90.6631), '2015': np.float64(13.8823), '2016': np.float64(7.9855)}}",
+  "RATIO: gold=6.188405797101449 got=5.726 table={'#(148, 103, 189)': {'2010': np.float64(86.6303), '2011': np.float64(64.7302), '2012': np.float64(82.876), '2013': np.float64(42.4547), '2014': np.float64(7.4146), '2015': np.float64(90.5097), '2016': np.float64(90.76), '2017': np.float64(33.9449)}}"
+ ],
+ "abstain_reasons": {
+  "line:ABSTAIN__EXTREMUM_TIE_WITHIN_CERTIFICATE": 5,
+  "grouped:ABSTAIN__ROW_INCOMPLETE_2_of_3": 2,
+  "grouped:ABSTAIN__EXTREMUM_TIE_WITHIN_CERTIFICATE": 1,
+  "grouped:ABSTAIN__ROW_INCOMPLETE_4_of_5": 1,
+  "grouped:ABSTAIN__CATEGORY_UNMATCHED_Cherry": 1,
+  "grouped:ABSTAIN__ROW_INCOMPLETE_3_of_4": 1,
+  "grouped:ABSTAIN__ROW_INCOMPLETE_5_of_6": 1
+ },
+ "sha256_of_body": "63342610a9011f513f234052e6a8b7b393eb9b7c627154021453104eba560304"
+}

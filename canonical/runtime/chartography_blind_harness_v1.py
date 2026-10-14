@@ -186,16 +186,33 @@ def _scrubbed_env() -> dict[str, str]:
 
 
 def solve_one(image: Path, prompt: str) -> dict[str, Any]:
+    """Stage 1: the professional solver's two exact grammars. Stage 2: the
+    kernel-backed general extractor (typed queries over bar/line/pie tables).
+    Both are zero-model; abstention is a first-class, non-credited outcome."""
     from canonical.runtime import chartography_deterministic_professional_solver_v1 as solver
+    stage1_reason = None
     try:
         out = solver.solve(image, prompt)
-        return {"status": str(out.get("status") or "PASS"), "route": out.get("route"),
+        return {"status": str(out.get("status") or "PASS"), "route": out.get("route") or "PROFESSIONAL_GRAMMAR",
                 "answer": out.get("answer"), "raw_value": out.get("raw_value"),
                 "bounded_learned_components": out.get("bounded_learned_components"),
                 "general_purpose_model_dependency_count": out.get("general_purpose_model_dependency_count")}
-    except Exception as exc:  # abstention is a first-class, non-credited outcome
-        return {"status": f"ABSTAIN__{type(exc).__name__}__{str(exc)[:120]}", "route": None,
-                "answer": None, "raw_value": None}
+    except Exception as exc:
+        stage1_reason = f"{type(exc).__name__}__{str(exc)[:80]}"
+    try:
+        from canonical.runtime import chartography_general_extractor_v1 as general
+        res = general.solve(image, prompt)
+    except Exception as exc:  # missing numpy / unexpected failure: still an abstention
+        return {"status": f"ABSTAIN__GENERAL_{type(exc).__name__}__{str(exc)[:80]}", "route": None,
+                "answer": None, "raw_value": None, "stage1": stage1_reason}
+    if res.get("status") == "ANSWER":
+        return {"status": "PASS", "route": f"GENERAL_{res.get('chart_kind')}_{res.get('type')}",
+                "answer": res.get("answer"), "raw_value": res.get("answer_numeric"),
+                "certified": res.get("certified"), "certificate": res.get("certificate"),
+                "bounded_learned_components": ["tesseract_ocr"], "general_purpose_model_dependency_count": 0,
+                "stage1": stage1_reason}
+    return {"status": str(res.get("status")), "route": None, "answer": None, "raw_value": None,
+            "stage1": stage1_reason}
 
 
 def run_solver(views_dir: Path, results_path: Path, solver: Callable[[Path, str], dict[str, Any]] | None = None,

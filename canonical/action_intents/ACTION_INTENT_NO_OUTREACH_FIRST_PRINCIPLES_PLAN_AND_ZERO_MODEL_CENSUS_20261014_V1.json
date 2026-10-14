@@ -44,6 +44,18 @@
    ],
    "nature": "zero-model producer: harvested WebPlotDigitizer algorithms re-implemented in numpy (axis calibration incl. log, averaging-window tracing, X-step column evaluation with vertex correction and occlusion guard, bar extraction, pie palette-run fractions, quantisation certificate)",
    "credit": 0
+  },
+  "track_b3_general_extractor": {
+   "files": [
+    "canonical/runtime/chartography_general_extractor_v1.py",
+    "canonical/tests/test_chartography_general_extractor_v1.py",
+    "canonical/runtime/chartography_general_extractor_synthetic_eval_v1.py",
+    "canonical/verification/CHARTOGRAPHY_GENERAL_EXTRACTOR_SYNTHETIC_EVAL_CLEAN_OCR_20261014_V1.json",
+    "canonical/verification/CHARTOGRAPHY_GENERAL_EXTRACTOR_SYNTHETIC_EVAL_CORRUPT_OCR_20261014_V1.json",
+    "canonical/runtime/chartography_blind_harness_v1.py (two-stage solve_one)",
+    "canonical/runtime/chartography_blind_capsule_bundle_v1.py (ships kernel+extractor, numpy)"
+   ],
+   "credit": 0
   }
  },
  "local_verification": {
@@ -54,7 +66,8 @@
   "census_execution_after_repair": "EXIT_2__model_dependent_file_count_7_OF_2115__PARSE_ERRORS_0",
   "chartography_blind_harness_suite": "5_OF_5_PASS__ALSO_5_OF_5_INSIDE_GENERATED_CAPSULE",
   "chart_kernel_unit_tests": "PYTHONPATH=. python3 -m unittest canonical.tests.test_chart_deterministic_extraction_kernel_v1 -> 8 OK",
-  "chart_kernel_held_out_synthetic": "seed 777 n=100/family (dev seed 20261014): bar 1.000, barh 0.976, line 0.900 (0.704 within certificate), line_logy 0.842 (0.743), pie 1.000; calibration from renderer transform, tick-OCR cell unmeasured"
+  "chart_kernel_held_out_synthetic": "seed 777 n=100/family (dev seed 20261014): bar 1.000, barh 0.976, line 0.900 (0.704 within certificate), line_logy 0.842 (0.743), pie 1.000; calibration from renderer transform, tick-OCR cell unmeasured",
+  "general_extractor": "13 unit tests OK; held-out synthetic e2e seed 9001: clean 575/595 correct, 8 wrong, 12 abstain (certified: 520 correct / 0 wrong); corrupted OCR 534/568, 18 wrong; capsule regenerated, MANIFEST OK, isolated suites OK"
  },
  "v22_prewrite_admission": {
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",

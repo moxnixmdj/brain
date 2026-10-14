@@ -465,8 +465,10 @@ def detect_plot_frame(rgb, dark_thresh: int = 110, min_run_frac: float = 0.4
     y-axis line (left-most long dark vertical run). Returns pixel coordinates
     {"x_axis_row", "y_axis_col", "left", "right", "top", "bottom"} or None."""
     np = _np()
-    gray = rgb.astype(np.int32).sum(axis=2) // 3
-    dark = gray < dark_thresh
+    arr = rgb.astype(np.int32)
+    gray = arr.sum(axis=2) // 3
+    neutral = (arr.max(axis=2) - arr.min(axis=2)) <= 40   # axis lines are gray/black, not slice colours
+    dark = (gray < dark_thresh) & neutral
     H, W = dark.shape
 
     def longest_run(line) -> Tuple[int, int, int]:

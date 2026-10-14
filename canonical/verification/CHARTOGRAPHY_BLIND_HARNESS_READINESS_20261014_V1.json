@@ -60,5 +60,47 @@
   "NO_CHARTOGRAPHY_SCORE_PRODUCED_YET",
   "NO_ATOM_OR_FAMILY_PROMOTION",
   "terminal_real_REMAINS_false"
- ]
+ ],
+ "revision_20261014_v2": {
+  "stage2_general_extractor": {
+   "files": {
+    "canonical/runtime/chart_deterministic_extraction_kernel_v1.py": "d567d2a03b69af3cab51bb5a796f5a903ef53a87",
+    "canonical/runtime/chartography_general_extractor_v1.py": "09f63605f4c2b89fe726eb4b167c7256d9fcde38",
+    "canonical/runtime/chartography_blind_harness_v1.py": "68a72ad025a0d109f84881a0f6f14388f20fb05e",
+    "canonical/runtime/chartography_blind_capsule_bundle_v1.py": "2bebec2aabd6db067df14c18ef7fc0bc489dfe3b"
+   },
+   "capsule_manifest_sha256": "eeabcdc227e5d7e6ab7c50cff9d3ed6384133f8489dded7be757ea435d259083",
+   "workflow_sha256": "b2033b98171ecfcb643622a961edbc604b05ea4e6bb592c6d1dbfb867a9d4669",
+   "runner_pip": "pillow pyarrow numpy matplotlib",
+   "held_out_synthetic_e2e": {
+    "clean_simulated_ocr_seed9001_120charts": {
+     "questions": 595,
+     "correct": 575,
+     "wrong": 8,
+     "abstain": 12,
+     "certified_correct": 520,
+     "certified_wrong": 0
+    },
+    "corrupted_ocr_seed9001_120charts": {
+     "questions": 568,
+     "correct": 534,
+     "wrong": 18,
+     "abstain": 16,
+     "certified_correct": 488,
+     "certified_wrong": 9
+    },
+    "receipts": [
+     "canonical/verification/CHARTOGRAPHY_GENERAL_EXTRACTOR_SYNTHETIC_EVAL_CLEAN_OCR_20261014_V1.json",
+     "canonical/verification/CHARTOGRAPHY_GENERAL_EXTRACTOR_SYNTHETIC_EVAL_CORRUPT_OCR_20261014_V1.json"
+    ],
+    "caveats": [
+     "OCR simulated from renderer text artists; real tesseract cell measured only on the runner",
+     "synthetic chart distribution (matplotlib defaults) is not the Chartography distribution",
+     "question grammar covers LOOKUP/DIFFERENCE/RATIO/AGGREGATE/EXTREMA/PERCENT_CHANGE/COUNT/SHARE only; CAGR, trend, threshold-intersection, multi-step reasoning not covered"
+    ]
+   },
+   "credit_claimed": 0,
+   "owner_prerequisite_unchanged": "HF_TOKEN secret + dataset terms on moxnixmdj/verification-capsule-runner"
+  }
+ }
 }

@@ -25,9 +25,13 @@ FILES = [
     "canonical/runtime/bound_capabilities/__init__.py",
     "canonical/runtime/bound_capabilities/image_ocr_tesseract.py",
     "canonical/runtime/chartography_deterministic_professional_solver_v1.py",
+    "canonical/runtime/chart_deterministic_extraction_kernel_v1.py",
+    "canonical/runtime/chartography_general_extractor_v1.py",
     "canonical/runtime/chartography_blind_harness_v1.py",
     "canonical/tests/__init__.py",
     "canonical/tests/test_chartography_blind_harness_v1.py",
+    "canonical/tests/test_chart_deterministic_extraction_kernel_v1.py",
+    "canonical/tests/test_chartography_general_extractor_v1.py",
 ]
 WORKFLOW_NAME = "run-chartography-blind-zero-model-v1.yml"
 
@@ -64,12 +68,12 @@ jobs:
           set -euo pipefail
           sudo apt-get update -qq
           sudo apt-get install -y -qq tesseract-ocr tesseract-ocr-eng git-lfs
-          python3 -m pip install --quiet --disable-pip-version-check pillow pyarrow
+          python3 -m pip install --quiet --disable-pip-version-check pillow pyarrow numpy matplotlib
           tesseract --version | head -1
       - name: Harness self-test (no dataset)
         shell: bash
         working-directory: capsules/chartography_blind_v1
-        run: PYTHONPATH=. python3 -m unittest canonical.tests.test_chartography_blind_harness_v1
+        run: PYTHONPATH=. python3 -m unittest canonical.tests.test_chartography_blind_harness_v1 canonical.tests.test_chart_deterministic_extraction_kernel_v1 canonical.tests.test_chartography_general_extractor_v1
       - name: Fail closed without credential
         shell: bash
         run: |
@@ -119,7 +123,10 @@ README = """# Chartography blind zero-model capsule V1
 
 Source: moxnixmdj/brain, branch arena/086851e2-brain. Every file is bound by MANIFEST.sha256.
 
-What runs: the Brain's deterministic chart solver (`chartography_deterministic_professional_solver_v1`,
+What runs: stage 1, the Brain's deterministic professional chart solver; stage 2, the kernel-backed
+general extractor (`chart_deterministic_extraction_kernel_v1` + `chartography_general_extractor_v1`:
+tick-mark calibration, palette/legend series discovery, bar/line/pie tables, typed queries, quantisation
+certificates, policy best_effort). Stage 1 (`chartography_deterministic_professional_solver_v1`,
 bounded OCR only, zero general-purpose-model cognition) over all official Chartography tasks, with
 answers held out in a sealed scorer view, in a scrubbed subprocess. Output: a receipt with per-task
 pass/abstain/fail, score under ASSUMED grading semantics, and a question-type taxonomy census.
