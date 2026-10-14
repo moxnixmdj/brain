@@ -1,0 +1,113 @@
+{
+  "schema": "PROJECT_BRAIN_EXTERNAL_WAKE_EVENT_CENSUS_20261014_V1",
+  "date": "2026-10-14",
+  "status": "LIVE_PUBLIC_SURFACE_CENSUS__7_CHANNELS_CHECKED__0_POLICY_CHANGING_WAKE_EVENTS__1_NEW_COMPARATOR_IDENTITY_FACT_FOR_GOVERNANCE_REVIEW__ZERO_CREDIT",
+  "objective": "DISCHARGE_THE_HYPOTHESIS_THAT_A_POLICY_CHANGING_PUBLIC_FACT_ALREADY_EXISTS_FOR_ANY_OPEN_CHECKPOINT_ROW__RECORD_RESULTS_SO_THE_SAME_SURFACES_ARE_NOT_RE_SEARCHED_ON_UNCHANGED_INFORMATION",
+  "method": "LIVE_WEB_SEARCH_PLUS_GITHUB_API_FROM_ARENA_SESSION__CROSS_INDEXED_AGAINST_CANONICAL_KNOWLEDGE_BY_GREP__NO_PRIVATE_OR_GATED_DATA_ACCESSED",
+  "base_commit": "11d4d83547d8ac82c87818f90e2a39e2548d5888",
+  "rows": [
+    {
+      "obligation_id": "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "surface": "artificialanalysis.ai/evaluations/aa-briefcase ; artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "observed": [
+        "91 PRIVATE_TASKS_4_SCENARIOS__PUBLIC_FIFTH_SCENARIO_LITE_IS_DEMONSTRATIVE_ONLY_AND_DOES_NOT_COUNT",
+        "NO_PUBLICLY_AVAILABLE_API_FOR_SUBMISSION",
+        "RUBRIC_JUDGE_PROMPT_IS_PUBLISHED_IN_METHODOLOGY__BINARY_RUBRIC_CHECKS_PLUS_PAIRWISE_ANALYTICAL_AND_PRESENTATION_ELO"
+      ],
+      "already_known_in_canonical": true,
+      "policy_changing": false,
+      "wake_event": false
+    },
+    {
+      "obligation_id": "HLE_TOOLS_GE_67_7",
+      "surface": "klu.ai/benchmarks/humanitys-last-exam (citing Opus 5.5 system card Table 8.1.A) ; anthropic.com/news/claude-opus-4-6 footnotes",
+      "observed": [
+        "OPUS_5_5_67_7_IS_MEAN_OF_FIVE_TRIALS__MAX_EFFORT__WEB_SEARCH_WEB_FETCH_PROGRAMMATIC_TOOL_CALLING_CODE_EXECUTION__OPUS_4_6_LLM_GRADER",
+        "CONTEXT_COMPACTION_50K_UP_TO_3M_TOKENS__DOMAIN_BLOCKLIST_HEADED_BY_HUGGINGFACE__TRANSCRIPT_CHEATING_SCREEN",
+        "NO_TOOLS_OPUS_5_5_SCORE_64_4__BELOW_THE_FROZEN_67_7_BAR",
+        "DATASET_REMAINS_AUTHENTICATED_TERMS_GATED_ON_HUGGING_FACE"
+      ],
+      "already_known_in_canonical": "PARTIAL__HARNESS_COMPONENTS_NOW_MORE_SPECIFIED_THAN_UNDER_SPECIFIED_CLASSIFICATION__GRADER_AND_BLOCKLIST_BYTES_STILL_NOT_PUBLIC",
+      "policy_changing": false,
+      "structural_consequence": "ANY_ZERO_NETWORK_BRAIN_CARRIER_CAN_AT_MOST_MATCH_THE_NO_TOOLS_BAR__THE_WITH_TOOLS_BAR_REQUIRES_A_ZERO_SPEND_LIVE_WEB_SEARCH_AND_FETCH_TOOL_PLUS_CODE_EXECUTION_BOUND_INTO_THE_PROTOCOL",
+      "wake_event": false
+    },
+    {
+      "obligation_id": "CODING_TB4_GE_66_4",
+      "surface": "artificialanalysis.ai Intelligence Index v4.3.2 (Terminal-Bench 4.0 row) as reported by multiple 2026-09-22..10-05 secondary pages",
+      "observed": [
+        "ARTIFICIAL_ANALYSIS_INDEPENDENT_HARNESS_OPUS_5_5_MAX_TERMINAL_BENCH_4_0_59_6_PERCENT__ANTHROPIC_SELF_RUN_CLAUDE_CODE_BARE_XHIGH_66_36_PERCENT",
+        "LEADERBOARD_SUBMISSIONS_REQUIRE_FIVE_TRIALS_PER_TASK_NO_TIMEOUT_OR_RESOURCE_OVERRIDES_PUBLIC_TRAJECTORIES",
+        "NO_FREE_COMPUTE_IS_OFFERED_BY_THE_BENCHMARK_OWNER"
+      ],
+      "already_known_in_canonical": "NO__THE_59_6_INDEPENDENT_HARNESS_FIGURE_IS_ABSENT_FROM_canonical/ (grep 59.6 in TB4 artifacts = 0 hits)",
+      "policy_changing": "GOVERNANCE_REVIEW_REQUIRED__COMPARATOR_IDENTITY_QUESTION_NOT_A_TARGET_REBASE",
+      "comparator_identity_note": "FROZEN_PREDICATE_IS_BOUND_TO_ANTHROPIC_SELF_RUN_PROTOCOL (canonical/evidence/TB4_OPUS55_CURRENT_OWNER_TARGET_REFRESH_20261008_V1.json: harness Claude Code --bare, effort xhigh, 219/330). IF_BRAIN_EXECUTES_UNDER_THE_INDEPENDENT_ARTIFICIAL_ANALYSIS_PROTOCOL_THE_MATCHED_SAME_PROTOCOL_COMPARATOR_IS_59_6_PERCENT = CEIL(0.596*330) = 197_OF_330 (slack 23 on 220 creditable slots) INSTEAD_OF_219 (slack 1). THIS_IS_RECORDED_AS_A_CANDIDATE_TRUTH_REPAIR_FOR_GOVERNANCE_DECISION_ONLY__NOT_APPLIED__ZERO_CREDIT.",
+      "wake_event": false
+    },
+    {
+      "obligation_id": "FINANCE_AGENT_V2_GE_58_59 / FINANCE_ACCOUNTING_INDEX_GE_61 / MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "surface": "vals.ai ; rl-list.com/vendors/vals-ai ; github.com/vals-ai/finance-agent-v2",
+      "observed": [
+        "VALS_SMITH_SELF_SERVE_PRODUCT_BUILDS_CUSTOM_CODING_BENCHMARKS_FROM_A_USERS_OWN_GITHUB_REPO__120_FREE_CREDITS__NOT_A_ROUTE_TO_VALS_PRIVATE_FINANCE_OR_MYSTERYMECHANISM_TEST_SETS",
+        "FINANCE_AGENT_V2_HARNESS_IS_MIT_OPEN_SOURCE_927_QUESTIONS__CORE_TEST_SETS_PRIVATE__PUBLIC_VALIDATION_SPLIT_ONLY",
+        "VALKYRIE_EVAL_INFRASTRUCTURE_AGPL_VALS_HOSTED_OR_SELF_HOSTED_AWS__AGENT_DEFINED_BY_contract.yaml",
+        "CANONICAL_ALREADY_HOLDS_A_VERIFIED_VALKYRIE_NATIVE_ADAPTER (canonical/verification/FINANCE_AGENT_V2_VALKYRIE_NATIVE_ADAPTER_VERIFICATION_20261011_V1.json) WITH_REMAINING_OBLIGATION_VALS_TENANT_AUTHORIZATION"
+      ],
+      "already_known_in_canonical": "PARTIAL__VALKYRIE_KNOWN__VALS_SMITH_NOT_KNOWN_BUT_NOT_RELEVANT",
+      "policy_changing": false,
+      "wake_event": false
+    },
+    {
+      "obligation_id": "CHARTOGRAPHY_TOOLS_GE_89",
+      "surface": "surgehq.ai/blog/chartography ; github.com/surge-ai/chartography (GitHub API tree, HEAD 2026-08-14)",
+      "observed": [
+        "GITHUB_REPOSITORY_CONTAINS_SCORER_DATASET_LOADER_AND_2_SAMPLE_TASKS_ONLY (23 tree entries; task_packs/sample_charts) __THE_100_TASK_PACK_WITH_GOLDEN_ANSWERS_IS_ONLY_ON_THE_GATED_HUGGING_FACE_DATASET",
+        "OPUS_5_5_89_0_IS_A_WITH_TOOLS_SCORE__JULY_2026_BEST_OF_30_CONFIGURATIONS_WAS_45_0_PASS_AT_1"
+      ],
+      "already_known_in_canonical": true,
+      "policy_changing": false,
+      "wake_event": false,
+      "unchanged_remaining_class": "AUTHORIZED_OFFICIAL_HF_BYTE_ACCESS_OR_OWNER_EQUIVALENT_CONTENT_ADDRESSED_100_TASK_PACK"
+    },
+    {
+      "obligation_id": "AUTOMATIONBENCH_GE_40",
+      "surface": "artificialanalysis.ai/evaluations/automationbench-aa",
+      "observed": [
+        "657_TASK_PRIVATE_HELD_OUT_SET_NOT_RELEASED__HEADLINE_METRIC_IS_AVERAGE_OBJECTIVE_SHARE_WITHOUT_GUARDRAIL_VIOLATIONS__PROGRAMMATIC_END_STATE_GRADING",
+        "ZAPIER_HOSTS_A_SEPARATE_PUBLIC_LEADERBOARD_WITH_A_DIFFERENT_FULL_COMPLETION_METRIC"
+      ],
+      "already_known_in_canonical": true,
+      "policy_changing": false,
+      "wake_event": false
+    },
+    {
+      "obligation_id": "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "surface": "published Opus 5.5 benchmark tables (OSWorld 2.0 partial 81.8 / strict 48.7) ; xlang-ai OSWorld-V2 self-service gated route already bound in canonical",
+      "observed": [
+        "NO_CHANGE__GATED_TASK_AND_ASSET_RELEASE_REQUIRES_A_LOGGED_IN_HUGGING_FACE_SESSION_THAT_ACCEPTS_TERMS__AGENT_CANNOT_PERFORM_THE_LOGIN"
+      ],
+      "already_known_in_canonical": true,
+      "policy_changing": false,
+      "wake_event": false
+    }
+  ],
+  "first_principles_result": {
+    "statement": "THE_OBJECTS_MISSING_FOR_THE_20_UNRESOLVED_ATOMS_ARE_NOT_KNOWLEDGE_OR_METHODS__THEY_ARE_(A)_MEASUREMENTS_OF_THIS_SYSTEM_TAKEN_BY_THIRD_PARTIES_ON_PRIVATE_TASK_SETS_(B)_BYTES_BEHIND_LOGINS_THE_AGENT_CANNOT_PERFORM_(C)_COMPUTE_HOURS_THE_ZERO_SPEND_POLICY_CANNOT_BUY_(D)_CAPABILITIES_NOT_YET_BUILT",
+    "consequence": "NO_PUBLIC_SEARCH_CAN_PRODUCE_A_MEASUREMENT_THAT_HAS_NEVER_BEEN_TAKEN__METHOD_HARVESTING_IS_ALREADY_SATURATED_IN_CANONICAL_(HARBOR_STIRRUP_VALKYRIE_CROWD_BT_RUBRIC_MANIFESTS_SCORERS)",
+    "same_surface_retry_authority": false
+  },
+  "hard_nonclaims": [
+    "NO_OPEN_CHECKPOINT_ROW_CLOSED",
+    "NO_TARGET_REBASE_APPLIED",
+    "NO_PRIVATE_OR_GATED_DATA_ACCESSED",
+    "NO_ACCEPTANCE_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
