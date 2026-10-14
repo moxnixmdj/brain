@@ -1,0 +1,253 @@
+{
+  "schema": "PROJECT_BRAIN_AGENT_ORIENTATION_CONTRACT_V1",
+  "date": "2026-10-15",
+  "authority": "ORIENTATION_AND_ADMISSION_CONTRACT__DERIVED_FROM_THE_CITED_SOURCES_WHICH_WIN_ON_ANY_CONFLICT__GRANTS_NO_CREDIT_AND_CHANGES_NO_SCOREBOARD",
+  "why_this_exists": "On 2026-10-14 an agent proposed rewriting the mission objective and admitting a model into the producer path, both of which the laws below forbid, because it worked from a condensed conversation summary instead of the canon. This contract is the fixed, machine-checked minimum every agent must know before any consequential action. execution_guard/agent_orientation_check_v1.py verifies it against the cited sources and the load-bearing admission gate refuses action intents that do not acknowledge it.",
+  "objective": {
+    "source": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+    "field": "real_objective",
+    "verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "terminality_field": "mission_terminality",
+    "terminality_verbatim": "OPEN_ENDED_CAPABILITY_OPTIMIZATION_NO_FINITE_FRONTIER_MODEL_OR_BENCHMARK_DEFINES_FINAL_MISSION_COMPLETION",
+    "opus_5_5_role_field": "opus_5_5_role",
+    "opus_5_5_role_verbatim": "FIRST_FRONTIER_CHECKPOINT_NOT_TERMINAL_OBJECTIVE",
+    "spend_rule_field": "spend_rule",
+    "spend_rule_verbatim": "ZERO_INCREMENTAL_SPEND",
+    "plain": "Make Brain the most capable, general, reliable and resource-efficient problem solver possible. The mission never 'completes'; it is a direction. Opus 5.5 is the first checkpoint to measure against, not the goal. Agents do not rewrite, reinterpret or 'replace as unreachable' this objective; only the owner can change it."
+  },
+  "what_brain_is": [
+    "Theory (canonical/README.md): effective intelligence = Brain-owned capability mechanisms + external just-in-time knowledge + general computation substrate. Knowledge is fetched when needed and never counted as capability; capability is what Brain owns and can run with every outside model deleted.",
+    "Control plane: this repository is the canonical, provider-independent truth (laws, governance JSON, pointers, receipts). Execution providers (CI, browsers, agent platforms, model surfaces) are replaceable and never define truth.",
+    "Execution substrate: the same-identity superworker (canonical/runtime/same_identity_supervisor.py) with checkpoint/relaunch and $0 spend.",
+    "Problem solver as it exists today: canonical/runtime/goal_compiler.py (deterministic plain-goal compiler, fails closed on unknown goals so the missing mechanism stays observable) + canonical/runtime/capability_planner.py (precondition/effect planner) + canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json (the bound tools, e.g. document create/verify, PDF text/OCR, chart reading from pixels, source ranking, a model-free test-guided Python repair loop).",
+    "Capability acquisition engine (laws): for each missing capability race routes in the fixed order, verify the exact Brain-owned route on untouched held-out instances, then minimize its persistent bytes.",
+    "Truth layer: the referee (execution_guard/repo_integrity_guard_v1.py, judged from main on every PR), the true-capability harness and ledger (canonical/capabilities/true/), and the honest test baseline (canonical/verification/HONEST_SUITE_BASELINE_20261014_V1.json).",
+    "Honest state: read it live with `python3 execution_guard/agent_orientation_check_v1.py brief`. Never from a summary."
+  ],
+  "permanent_prohibitions": [
+    {
+      "id": "NO_MODEL_PRODUCER_COGNITION",
+      "law": "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "quote": "A Brain-credited result MUST NOT depend on another model for producer cognition.",
+      "plain": "No AI model may do the thinking for a Brain-credited result: not remote, not local, not open-weight, not wrapped, not 'only on hard cases'."
+    },
+    {
+      "id": "HOSTING_DOES_NOT_LAUNDER",
+      "law": "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "quote": "Local possession, a fixed hash, zero monetary cost, open weights, or a Brain-authored wrapper does not turn another model's cognition into Brain cognition.",
+      "plain": "Owning the weights or paying nothing changes nothing."
+    },
+    {
+      "id": "ONLY_THE_OWNER_CAN_RESCIND",
+      "law": "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "quote": "Only a future explicit owner instruction that directly names this prohibition and explicitly rescinds it may change this rule. Silence, convenience, or a newer theory cannot.",
+      "plain": "Do not put 'allow a model' on any menu of options. It is not an agent's option to offer."
+    },
+    {
+      "id": "UNKNOWN_PROVENANCE_FAILS_CLOSED",
+      "law": "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "quote": "Unknown or incomplete cognition provenance fails closed exactly like a detected model dependency.",
+      "plain": "If you cannot prove no model was involved, treat it as if one was."
+    },
+    {
+      "id": "ZERO_CREDIT_WITH_ANY_MODEL_DEPENDENCY",
+      "law": "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "quote": "Project Brain may claim capability, benchmark, acceptance, ownership, promotion, real-task, or terminal credit only when the producer cognition path has zero dependencies on another general-purpose model.",
+      "plain": "Model-assisted success is a specimen, never 'Brain passed'."
+    },
+    {
+      "id": "K3_FORBIDDEN",
+      "law": "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "quote": "Forbidden in every Brain-credited producer path.",
+      "plain": "External contributions are K1 (untrusted information: allowed), K2 (acquisition-time donor, deleted before qualification: allowed with the transfer gate) or K3 (runtime thinking: forbidden). A label never overrides causal function."
+    },
+    {
+      "id": "OBJECTIVE_CANNOT_BE_REPLACED",
+      "law": "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "quote": "No benchmark, model family, acceptance row, score threshold, leaderboard rank, frozen protocol, or named frontier system may replace this parent objective.",
+      "plain": "Benchmarks are instruments (audit, falsifier, calibration, causal probe), never the product."
+    },
+    {
+      "id": "RED_ROW_IS_NOT_AUTHORITY",
+      "law": "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "quote": "A red benchmark row, score gap, acceptance-family gap, or rank is not by itself development authority.",
+      "plain": "Do not start work because a score is red."
+    },
+    {
+      "id": "DONOR_IS_NEVER_RUNTIME",
+      "law": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "quote": "A donor is acquisition-time evidence and causal source only. It is never a credited runtime cognition provider.",
+      "plain": "Distill, then delete the teacher, then qualify on untouched held-out instances."
+    },
+    {
+      "id": "MEMORY_IS_NOT_AUTHORITY",
+      "law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "quote": "treat conversation memory, summaries, and prior assistant conclusions as retrieval hints only, never current authority;",
+      "plain": "A condensed session summary is a hint. Re-read the canon before any consequential conclusion."
+    },
+    {
+      "id": "NEVER_WIDEN_THE_TOLERANCE",
+      "law": "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "quote": "Never widen the tolerance to pass.",
+      "plain": "When a true test fails, fix the solver or narrow the claim. Never the test."
+    },
+    {
+      "id": "TERMINAL_TRUTH_NOT_EDITABLE",
+      "law": "AGENTS.md",
+      "quote": "Terminal truth is not editable data.",
+      "plain": "truth.achieved stays false until the owner countersigns in person."
+    },
+    {
+      "id": "VERIFICATION_IS_SOMEONE_ELSE",
+      "law": "AGENTS.md",
+      "quote": "Verification means someone else ran it.",
+      "plain": "A receipt that repeats its own hash is not verification."
+    },
+    {
+      "id": "NO_MERGE_OVER_RED_REFEREE",
+      "law": "AGENTS.md",
+      "quote": "Nothing merges over a red referee.",
+      "plain": "Every PR is judged by the referee on main. See merge_rule."
+    }
+  ],
+  "no_longer_true_do_not_repeat": [
+    {
+      "claim": "Underlying capability invention is forbidden.",
+      "status": "SUPERSEDED",
+      "by": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "quote": "The V7 global underlying-capability invention ban is superseded."
+    },
+    {
+      "claim": "Model independence is not a terminal requirement; models may participate in credited capabilities.",
+      "status": "SUPERSEDED",
+      "by": "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "quote": "A Brain-credited result MUST NOT depend on another model for producer cognition."
+    },
+    {
+      "claim": "The mission lock is V7 and the strategy is V7 (older orientation text and summaries).",
+      "status": "STALE_POINTER",
+      "by": "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "quote": "Supersedes V9."
+    },
+    {
+      "claim": "The terminal objective is unreachable and should be rewritten.",
+      "status": "CATEGORY_ERROR",
+      "by": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "quote": "OPEN_ENDED_CAPABILITY_OPTIMIZATION_NO_FINITE_FRONTIER_MODEL_OR_BENCHMARK_DEFINES_FINAL_MISSION_COMPLETION"
+    },
+    {
+      "claim": "External benchmarks are the scarce limiting factor.",
+      "status": "DEMOTED_BY_OWNER_2026_10_14",
+      "by": "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "quote": "External benchmarks are no longer treated as the scarce resource of the project."
+    }
+  ],
+  "progress": {
+    "law": "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+    "classes": {
+      "VERIFIED_REUSABLE_CAPABILITY_GAIN": "Brain can now do something general it could not do before, verified on fresh instances by an independent oracle (name the mechanism files).",
+      "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN": "Same capability, now more reliable, broader or cheaper, with no capability regression (name the measurement).",
+      "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY": "An already-owned capability becomes available through the live Brain (name the integration point).",
+      "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM": "A false claim is removed and the frontier causally narrowed (name the claim and the evidence).",
+      "GOVERNANCE_GUARD_NO_PROGRESS_CLAIM": "Only for action_kind GOVERNANCE_GUARD: a guard, policy or orientation change that claims no development progress."
+    },
+    "not_progress_quote": "Activity, benchmark score movement alone, proof bureaucracy, and repeated certification of unchanged behavior are not progress.",
+    "not_progress_plain": "Measuring again what is already measured, adding receipts about unchanged code, closing certificates, moving a score, or producing more governance files is not progress and must not be presented as a step."
+  },
+  "route_order": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "ADAPT",
+    "SUBSTITUTE",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE",
+    "SYNTHESIZE_NEW_PRIMITIVE"
+  ],
+  "route_order_quote": "DELETE -> BYPASS -> REUSE -> ADAPT -> SUBSTITUTE -> COMPOSE -> CONFIGURE -> INTEGRATE -> SYNTHESIZE_NEW_PRIMITIVE.",
+  "development_loop_quote": "UNDERSTAND -> PLAN -> COMPOSE -> ACT -> VERIFY -> LEARN -> GENERALIZE -> COMPRESS -> REUSE.",
+  "scheduler_objective_plain": "Pick the nondominated action maximizing capability gain x reuse breadth x reliability gain x causal confidence per wall-clock x compute x memory x cost x complexity x evidence risk. Correctness and fail-closed truth are hard constraints, not tradeable.",
+  "current_laws": {
+    "rule": "Within a law family the highest version number is current; lower versions are history even when their own Status line still says CANONICAL. A file whose Status says SUPERSEDED is never cited as authority.",
+    "must_read_before_consequential_action": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ]
+  },
+  "live_state_sources": {
+    "mission_objective": "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+    "terminal_authority": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+    "ownership_matrix": "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json",
+    "true_capability_ledger": "canonical/capabilities/true/TRUE_CAPABILITY_LEDGER_V1.json",
+    "true_capability_audit": "canonical/capabilities/true/TRUE_CAPABILITY_AUDIT_20261014_V1.json",
+    "honest_suite_baseline": "canonical/verification/HONEST_SUITE_BASELINE_20261014_V1.json",
+    "bound_capability_registry": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "open_obligations": "canonical/governance/FROZEN_19_ACCEPTANCE_PROOF_SHAPE_QUOTIENT_20261007_V1.json",
+    "integrity_policy": "canonical/governance/REPO_INTEGRITY_POLICY_V1.json"
+  },
+  "known_traps": [
+    "Protected paths (execution_guard/repo_integrity_guard_v1.py PROTECTED_PATHS) make a PR red; only the owner can land them.",
+    "Several runtime kernels are byte-pinned by capability records (e.g. canonical/capabilities/opus55/M2_DOCX_*.json implementation_blob_sha, scheduler pins). Check `git hash-object <file>` against grep of that blob under canonical/ before editing any runtime module; measure pinned kernels through a separate adapter module.",
+    "Every PR touching canonical/ or execution_guard/ or workflows needs exactly one action intent that passes the drift guard, the load-bearing gate and this orientation contract.",
+    "The referee forbids: stdlib attribute assignment, constant-key sys.modules injection, pin ledgers or git show/cat-file in tests, tautological assertions, more than 10 exact-to-loose assertion changes, self-merge tooling in .py/.sh/.yml files, new pull_request_target workflows.",
+    "canonical/README.md is orientation prose, not live authority; when it conflicts with the content-addressed authorities (objective JSON, highest-version laws, CURRENT_TERMINAL_AUTHORITY_V1.json) those win and work fails closed until reconciled.",
+    "The matrix says 7/19 families owned; the true-capability audit found 15/19 quoted routes contain an external model (zero credit under the law). Read both; cite neither as a capability claim.",
+    "Arena session memory is condensed between turns. It is a retrieval hint. Re-run the brief after any condensation."
+  ],
+  "merge_rule": "AGENTS.md rule 7 governs: nothing merges over a red referee; prefer the auto-merge option, which GitHub completes only when the signed referee check is green. If your platform forbids the auto option, do not merge unless the owner has explicitly instructed you to; then merge only after the referee check-run conclusion is success, and disclose the self-merge in your report.",
+  "session_start": [
+    "python3 execution_guard/agent_orientation_check_v1.py brief",
+    "python3 execution_guard/agent_orientation_check_v1.py verify",
+    "git branch --show-current && git status --short",
+    "Read the must_read list in full once per session; re-read any law you intend to rely on."
+  ],
+  "before_any_consequential_action": [
+    "State the objective verbatim and the progress class your action claims, or say honestly that it is not progress and ask whether to do it at all.",
+    "Walk the route order and write why each earlier route is insufficient before choosing a later one.",
+    "Name the independent oracle that will judge the result on fresh instances.",
+    "Confirm producer_cognition_model_dependency_count is 0 and incremental spend is 0.",
+    "Write the action intent with the agent_orientation block (see intent_block) and run: python3 execution_guard/agent_orientation_check_v1.py intent-check <intent.json>"
+  ],
+  "forbidden_selected_route_markers": [
+    "REWRITE_THE_TERMINAL_OBJECTIVE",
+    "REWRITE_TERMINAL_OBJECTIVE",
+    "REPLACE_THE_OBJECTIVE",
+    "OBJECTIVE_UNREACHABLE_SO_CHANGE_IT",
+    "ALLOW_A_MODEL",
+    "MODEL_AS_A_COMPONENT",
+    "MODEL_AS_PLANNER",
+    "MODEL_AS_PRODUCER",
+    "MODEL_AS_REASONER",
+    "LLM_IN_PRODUCER_PATH",
+    "OPEN_WEIGHT_MODEL_IN_PRODUCER_PATH",
+    "SELF_HOSTED_MODEL_COGNITION",
+    "TEACHER_FALLBACK_AT_RUNTIME",
+    "WIDEN_THE_TOLERANCE"
+  ],
+  "intent_block": {
+    "field": "agent_orientation",
+    "required": {
+      "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+      "contract_sha256": "sha256 of the contract file as it exists on the PR base (printed by `brief`)",
+      "objective_verbatim": "must equal objective.verbatim",
+      "progress_class": "one of progress.classes; GOVERNANCE_GUARD_NO_PROGRESS_CLAIM only when action_kind is GOVERNANCE_GUARD",
+      "progress_evidence_paths": "non-empty list of repository paths that carry the evidence for the class; each must exist at the PR head and at least one must be changed by the PR",
+      "route_class": "one of route_order; SYNTHESIZE_NEW_PRIMITIVE additionally requires earlier_routes_exhausted_reason of at least 40 characters",
+      "producer_cognition_model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "conversation_memory_is_authority": false,
+      "laws_read_this_session": "list containing every path in current_laws.must_read_before_consequential_action"
+    }
+  }
+}

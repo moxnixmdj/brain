@@ -14,6 +14,9 @@ This directory is the provider-independent canonical control plane for Project B
 This README is orientation, not live scheduling authority.
 
 Before consequential work, read:
+- the repository root `README.md` (agent orientation card) and run `python3 execution_guard/agent_orientation_check_v1.py brief`
+- `canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json` (the parent objective, verbatim)
+- `canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json` (machine-checked minimum: objective, permanent prohibitions, progress classes, current law versions)
 - `canonical/CANONICAL_POINTER.json`
 - `canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json`
 - every mandatory law and gate named by the live pointer
@@ -58,21 +61,36 @@ For each useful target capability:
 
 External models/services may be capability specimens. White-box systems may be donors. Neither counts as Brain ownership while the external provider remains the operative target-capability implementation.
 
-Underlying useful capability invention is forbidden by the current mission lock. Allowed creation is integration, extraction/minimization tooling, configuration, packaging, routing, persistence, verification, recovery, and adapters that encode already-existing capability mechanisms.
+Cheap reuse/search precedes expensive construction when it can plausibly close the target faster. This is an optimization preference, not a global invention ban: the earlier V7 invention ban is superseded by `canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md`, whose route order is `DELETE -> BYPASS -> REUSE -> ADAPT -> SUBSTITUTE -> COMPOSE -> CONFIGURE -> INTEGRATE -> SYNTHESIZE_NEW_PRIMITIVE`. Whatever the route, the surviving mechanism must be Brain-owned: a route that reduces to "ask model/service X because X already has C" is not owned.
 
-## Active terminal objective
+## Parent objective and first frontier checkpoint
 
-Terminal target:
+Parent objective (`canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json`, verbatim, open-ended, never rewritten by agents):
+
+`BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE`
+
+First frontier checkpoint (`opus_5_5_role: FIRST_FRONTIER_CHECKPOINT_NOT_TERMINAL_OBJECTIVE`):
 
 `OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1`
 
-Brain must permanently internalize, configure, verify, and own all useful Claude Opus 5.5 capabilities at equal-or-better useful performance, while keeping knowledge external/JIT.
+Brain must permanently internalize, configure, verify, and own all useful Claude Opus 5.5 capabilities at equal-or-better useful performance, while keeping knowledge external/JIT. Reaching the checkpoint does not complete the mission; no finite frontier model or benchmark defines final mission completion.
 
-Authoritative mission lock:
-- `canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V7.md`
+Authoritative mission lock (highest version is current; lower versions are history):
+- `canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md`
+
+Permanent cognition-ownership law (no general-purpose model may supply producer cognition in any Brain-credited path; only the owner can rescind):
+- `canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md`
+- `canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md`
+
+Development and acquisition law:
+- `canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md`
+- `canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md`
 
 Active capability strategy:
-- `canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V7.md`
+- `canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md`
+
+Truth of "Brain can do X":
+- `canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md` and `canonical/capabilities/true/`
 
 Canonical capability queue:
 - `canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json`
