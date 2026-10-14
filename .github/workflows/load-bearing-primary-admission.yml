@@ -27,6 +27,7 @@ jobs:
         run: |
           cp execution_guard/load_bearing_primary_admission.py /tmp/trusted_load_bearing_primary_admission.py
           cp execution_guard/enforce_load_bearing_primary_pr.py /tmp/trusted_load_bearing_primary_pr.py
+          cp execution_guard/agent_orientation_check_v1.py /tmp/trusted_agent_orientation_check_v1.py
       - name: Resolve refs
         id: refs
         shell: bash
