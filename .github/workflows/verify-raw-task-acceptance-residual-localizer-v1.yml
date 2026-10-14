@@ -13,6 +13,11 @@ on:
 permissions:
   contents: write
 
+# Landing on main goes through the front door (pull request + signed referee check);
+# .github/scripts/land_on_main.sh needs the Brain Automation app to open that pull request.
+env:
+  AUTOMATION_APP_ID: ${{ secrets.AUTOMATION_APP_ID }}
+  AUTOMATION_APP_PRIVATE_KEY: ${{ secrets.AUTOMATION_APP_PRIVATE_KEY }}
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -120,7 +125,7 @@ jobs:
             git commit -m "Record raw-task acceptance localizer verification"
             for attempt in 1 2 3; do
               git pull --rebase origin main || { git rebase --abort || true; sleep 2; continue; }
-              git push origin HEAD:main && break
+              bash .github/scripts/land_on_main.sh && break
               sleep 2
             done
           fi

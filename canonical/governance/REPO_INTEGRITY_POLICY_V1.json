@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_REPO_INTEGRITY_POLICY_V1",
   "date": "2026-10-14",
-  "status": "ACTIVE__REPO_SIDE_ENFORCED__GITHUB_SIDE_PENDING_OWNER_ACTION",
+  "status": "ACTIVE__REPO_SIDE_ENFORCED__GITHUB_SIDE_PENDING_OWNER_ACTION | 2026-10-14 (second PR): referee design — the guard on main judges every PR via pull_request_target and signs the verdict as the Brain Referee app; no human review step; 19 direct-main-push carriers converted to land_on_main.sh",
   "incident": {
     "id": "SESSION_E0A256F8",
     "report": "SESSION_E0A256F8_FULL_INGESTION_REPORT_20261014.md",
@@ -20,7 +20,8 @@
     "added execution_guard/repo_integrity_guard_v1.py + canonical/tests/test_repo_integrity_guard_v1.py + .github/workflows/repo-integrity-guard.yml + .github/CODEOWNERS + AGENTS.md",
     "removed the sys.modules stub of one_shot_verified_closure_v1 that #4689 planted in test_one_shot_reality_closure_v2.py and test_one_shot_auto_direct_route_promotion_v1.py (the real module imports in 0.12 s without side effects; 28 tests pass against it)",
     "recorded the honest baseline of the suite without pins with execution_guard/honest_suite_baseline_v1.py (see honest_baseline): 344 failing cases that the conftest had hidden",
-    "gitignored the ~470 files one full test run writes into tracked directories (astra_runtime tmp/evidence/state, r3_learning_verification_receipts, SELF_IMPROVEMENT_STATE_V1.json) so that a later `git add -A` cannot commit test litter as evidence; one tracked file (canonical/astra_runtime/state/ANON_2e9ae57cecaaa16e__goal__CONTROLLER_CHECKPOINT.json) is still rewritten by a test run and must be reverted before committing"
+    "gitignored the ~470 files one full test run writes into tracked directories (astra_runtime tmp/evidence/state, r3_learning_verification_receipts, SELF_IMPROVEMENT_STATE_V1.json) so that a later `git add -A` cannot commit test litter as evidence; one tracked file (canonical/astra_runtime/state/ANON_2e9ae57cecaaa16e__goal__CONTROLLER_CHECKPOINT.json) is still rewritten by a test run and must be reverted before committing",
+    "second PR: referee workflow switched to pull_request_target + signed check run (Brain Referee app, main-only environment); REFEREE_KEY_EXPOSURE and PULL_REQUEST_TARGET_NOT_ALLOWLISTED rules; gh pr merge --auto allowed; the 19 carriers that pushed straight to main now call .github/scripts/land_on_main.sh (branch + pull request as Brain Automation + auto-merge) and the legacy direct-push list is empty; human review requirement dropped"
   ],
   "guard": {
     "path": "execution_guard/repo_integrity_guard_v1.py",
@@ -28,7 +29,8 @@
       "static": "python3 execution_guard/repo_integrity_guard_v1.py",
       "diff": "python3 execution_guard/repo_integrity_guard_v1.py --base origin/main",
       "ci": "python3 execution_guard/repo_integrity_guard_v1.py --ci  (fails closed with CI_DIFF_BASE_UNRESOLVABLE if the diff rules cannot run, e.g. shallow checkout or missing base ref)",
-      "self_test": "python3 execution_guard/repo_integrity_guard_v1.py --self-test"
+      "self_test": "python3 execution_guard/repo_integrity_guard_v1.py --self-test",
+      "referee": "the workflow runs trusted/execution_guard/repo_integrity_guard_v1.py --ci --root subject --base <pr base sha> where trusted/ is main and subject/ is the pull request head checked out as data"
     },
     "static_rules": {
       "conftest_minimal": "a conftest.py may only import os/sys/pathlib/pytest/json/typing/re, may not define pytest_* hooks, may not write attributes or sys.modules/os.environ entries of objects it did not create, may not call subprocess/urllib/http/importlib/setattr",
@@ -37,10 +39,11 @@
       "no_historical_pins": "no pin ledgers; no git cat-file/show in conftest or in tests without a fixture cwd; no git commit/add/push/fetch/checkout from tests without a fixture cwd",
       "no_privileged_or_fake_tooling_in_tests": "tests may not execute sudo/apt/pip/tee/ln/chmod and may not synthesise subprocess.CompletedProcess for docker/sqlite3/chroot",
       "no_tautological_assertions": "assertIn(x, {.., x}), assertEqual(x, x) on state without calls, assert True, assert ... or True, assertions swallowed by try/except pass",
-      "no_automerge_tooling": "no gh pr merge / gh pr review --approve / --admin / force-push to main anywhere; direct `git push ... main` only in the frozen legacy workflow list (may only shrink)",
-      "workflow_guard_integrity": "the guard workflow exists, invokes the exact command, has no paths filter, no continue-on-error, fetch-depth 0; frontier-state-consistency keeps the achieved-is-false assertion and cannot be switched off from the mirrored document; no guard workflow may set continue-on-error: true",
+      "no_automerge_tooling": "no gh pr merge (except with --auto and without --admin: GitHub completes auto-merge only when the required signed check passes), no gh pr review --approve, no --admin, no force-push to main, no direct git push to main anywhere (the legacy list is now empty)",
+      "workflow_guard_integrity": "the referee workflow exists, is triggered by pull_request_target (never pull_request), has no paths filter, no continue-on-error, checks out the subject with fetch-depth 0 and persist-credentials false, runs the TRUSTED guard with --root subject, signs from the referee environment and executes nothing from subject/; frontier-state-consistency keeps the achieved-is-false assertion and cannot be switched off from the mirrored document",
       "execution_guard_no_achieved_exemption": "no execution guard may exempt a change because it claims terminal achievement",
-      "authority_consistency": "truth.achieved must be false unless the owner countersign matches the constant inside the guard; counts must add up; pointer/scoreboard/useful-ownership/ownership-matrix/manifest/hierarchy mirrors must equal the derivation from the authority; fail-closed manifest records must exist; summary.blocker must stay non-empty while terminal is false"
+      "authority_consistency": "truth.achieved must be false unless the owner countersign matches the constant inside the guard; counts must add up; pointer/scoreboard/useful-ownership/ownership-matrix/manifest/hierarchy mirrors must equal the derivation from the authority; fail-closed manifest records must exist; summary.blocker must stay non-empty while terminal is false",
+      "referee_exclusivity": "only the referee workflow may reference environment 'referee', the REFEREE_APP secrets, the check-run API, checks: write or create-github-app-token; pull_request_target is limited to a frozen allowlist (repo-integrity-guard, drift-immunity-guard, load-bearing-primary-admission)"
     },
     "diff_rules_per_pull_request": {
       "protected_paths": "any change to a protected path fails the automated check; only an in-person owner review may merge it",
@@ -59,7 +62,8 @@
       "canonical/governance/REPO_INTEGRITY_POLICY_V1.json",
       "AGENTS.md",
       "execution_guard/honest_suite_baseline_v1.py",
-      "canonical/verification/HONEST_SUITE_BASELINE_20261014_V1.json"
+      "canonical/verification/HONEST_SUITE_BASELINE_20261014_V1.json",
+      ".github/scripts/land_on_main.sh"
     ],
     "per_pull_request_limits": {
       "family_flips": 2,
@@ -72,51 +76,85 @@
     "terminal_achievement": "truth.achieved == true is accepted only when canonical/governance/TERMINAL_ACHIEVEMENT_OWNER_COUNTERSIGN_V1.json exists AND its SHA-256 equals TERMINAL_ACHIEVED_COUNTERSIGN_SHA256 inside the guard, which is None until the owner edits the guard file in person. No agent can reach terminal truth by editing data."
   },
   "what_is_and_is_not_impossible": {
-    "repo_side_guarantee": "Every pattern used in the incident is detected and fails the guard; the guard proves on every run that each rule fires (self-test); deleting the guard is caught by the test suite, deleting the test is caught by the guard workflow, deleting both is a PROTECTED_PATH_MODIFIED change.",
-    "repo_side_limit": "An agent acting with the owner's own token and no GitHub-side rules can still push anything, including deletion of the guard. Repository content alone cannot make that impossible; only GitHub-side rules that the agent's token cannot change can.",
-    "why_github_side_is_possible": "Arena's token is a GitHub App installation acting as the owner but WITHOUT the Administration permission (branch-protection API answers 403 'Resource not accessible by integration'). Rules the owner sets in the GitHub UI therefore cannot be edited, disabled, or bypassed by any agent session.",
-    "current_blocker": "moxnixmdj/brain is a private repository on a plan without rulesets/branch protection (rulesets API answers 403 'Upgrade to GitHub Pro or make this repository public'). Until one of the two happens, the guard is a red check the owner must look at before merging, not a lock."
+    "the_precise_problem": "An agent could change the referee inside the same pull request it asked the referee to judge (rig the test harness, disable the check workflow, post a same-named green check, or simply merge over a red check with the owner's token). Everything else in the incident was a symptom of that.",
+    "repo_side_guarantee": "The referee workflow runs the guard version that is ON MAIN against the pull request's tree as data (pull_request_target; nothing from the subject checkout is executed). Every pattern used in the incident is a rule; --self-test proves on every run that each rule fires; the referee workflow, the guard, its test, the landing script, CODEOWNERS, AGENTS.md and this policy are protected paths whose change fails the verdict.",
+    "signed_verdict": "The verdict is a check run named 'referee/repo-integrity-guard' posted by the 'Brain Referee' GitHub App (permission Checks: write only). Its key lives only in the GitHub environment 'referee' whose deployment-branch policy is 'main', so no workflow run for a branch or pull request can obtain it, and only the referee workflow may reference it (rule REFEREE_KEY_EXPOSURE). GitHub takes the most recent check of a given name, so an unsigned (GitHub Actions) check could be spoofed by a same-named job; the signed one cannot.",
+    "github_side_lock": "A branch ruleset on main with an EMPTY bypass list that requires 'referee/repo-integrity-guard' from the Brain Referee app. Agents act without the Administration permission (rulesets/branch-protection API answers 403), so they cannot edit, disable or bypass it. With the bypass list empty the owner's own token cannot merge over a red verdict either; the owner edits the ruleset in the web UI when the referee itself must change.",
+    "no_human_in_the_loop": "No review requirement. A pull request that passes the referee can be auto-merged by whoever opened it (gh pr merge --auto is allowed; GitHub completes it only after the required signed check is green). Cost per pull request: roughly one minute of referee time.",
+    "residual_honesty": [
+      "This makes the KNOWN class of tricks impossible. A genuinely new trick the guard has no rule for gets through once, is caught by the owner, and becomes a rule.",
+      "It depends on never giving any agent an admin-capable token. Arena's token has none; keep it that way.",
+      "Rulesets, environments and free Actions minutes exist for this repository because it is public (made public 2026-10-14). Making it private again on a free plan removes the lock."
+    ]
   },
   "github_side": {
-    "step_0_choose_one": [
-      "A. Make the repository public: rulesets + required checks + CODEOWNERS enforcement + unlimited Actions minutes become available at no cost (this also removes the carrier/billing floor).",
-      "B. Keep it private: restore billing and upgrade to GitHub Pro; rulesets and required checks then work for private repos, and Actions minutes are billed."
+    "status_2026_10_14": "Repository is PUBLIC (done). Remaining steps are one-time clicks by the owner; agents cannot perform them (no Administration permission).",
+    "step_1_create_the_referee_app": {
+      "where": "Settings (your profile) -> Developer settings -> GitHub Apps -> New GitHub App",
+      "name": "Brain Referee",
+      "homepage_url": "https://github.com/moxnixmdj/brain",
+      "webhook": "Uncheck 'Active' (no webhook needed)",
+      "repository_permissions": "Checks: Read and write. NOTHING else (no Contents write, no Pull requests write) — this app must be unable to push or merge.",
+      "where_can_this_app_be_installed": "Only on this account",
+      "after_creating": [
+        "note the App ID (shown at the top of the app page)",
+        "Generate a private key (downloads a .pem file)",
+        "Install App -> moxnixmdj -> Only select repositories -> brain"
+      ]
+    },
+    "step_2_create_the_referee_environment": {
+      "where": "Repository Settings -> Environments -> New environment",
+      "name": "referee",
+      "deployment_branches_and_tags": "Selected branches and tags -> Add deployment branch or tag rule -> Ref type: Branch, Name pattern: main",
+      "environment_secrets": {
+        "REFEREE_APP_ID": "the App ID",
+        "REFEREE_APP_PRIVATE_KEY": "the full contents of the downloaded .pem file"
+      },
+      "effect": "Only workflow runs whose ref is main (pull_request_target and push-to-main runs) can read these two secrets."
+    },
+    "step_3_create_the_automation_app": {
+      "why": "GitHub does not trigger workflows for pull requests opened with GITHUB_TOKEN, so the carrier workflows need their own identity to open pull requests that the referee will judge. This app can open and auto-merge pull requests but can NOT post checks, so its key cannot forge a verdict.",
+      "where": "Developer settings -> GitHub Apps -> New GitHub App",
+      "name": "Brain Automation",
+      "webhook": "Uncheck 'Active'",
+      "repository_permissions": "Contents: Read and write; Pull requests: Read and write. Nothing else.",
+      "after_creating": [
+        "note the App ID",
+        "Generate a private key",
+        "Install App -> only the brain repository"
+      ],
+      "repository_secrets": {
+        "where": "Repository Settings -> Secrets and variables -> Actions -> New repository secret",
+        "AUTOMATION_APP_ID": "the App ID",
+        "AUTOMATION_APP_PRIVATE_KEY": "the .pem contents"
+      }
+    },
+    "step_4_repository_settings": [
+      "Settings -> General -> Pull Requests: CHECK 'Allow auto-merge' (needed so pull requests merge themselves once the referee is green) and 'Automatically delete head branches'",
+      "Settings -> Actions -> General -> Workflow permissions: 'Read repository contents and packages permissions'; leave 'Allow GitHub Actions to create and approve pull requests' UNCHECKED",
+      "Settings -> Actions -> General -> Fork pull request workflows: 'Require approval for all outside collaborators'"
     ],
-    "step_1_branch_ruleset_main": {
-      "where": "Settings -> Rules -> Rulesets -> New branch ruleset",
-      "name": "main-integrity",
+    "step_5_branch_ruleset_main": {
+      "where": "Repository Settings -> Rules -> Rulesets -> New ruleset -> New branch ruleset",
+      "name": "main-lock",
       "enforcement": "Active",
-      "bypass_list": "EMPTY (do not add repository admin; the owner changes the ruleset itself when a legitimate exception is needed)",
-      "target_branches": "Include default branch",
+      "bypass_list": "EMPTY. Do not add 'Repository admin' or any app. When the referee itself must change, set Enforcement to 'Evaluate' for the duration of that merge and back to 'Active' afterwards.",
+      "target_branches": "Add target -> Include default branch",
       "rules": [
-        "Restrict deletions",
-        "Block force pushes",
-        "Require linear history (optional)",
-        "Require a pull request before merging: required approvals 0; Require review from Code Owners = ON; Dismiss stale approvals = ON; Require approval of the most recent reviewable push = ON",
-        "Require status checks to pass: add 'repo-integrity-guard' and 'consistency' (Frontier State Consistency) and 'load-bearing-primary-admission'; Require branches to be up to date = ON",
-        "Require conversation resolution before merging = ON"
+        "Restrict deletions: ON",
+        "Block force pushes: ON",
+        "Require a pull request before merging: ON; Required approvals: 0; leave 'Require review from Code Owners' OFF (a solo owner cannot approve their own pull requests; the signed check is the gate)",
+        "Require status checks to pass: ON; Add checks -> search 'referee/repo-integrity-guard' and pick the one whose source is 'Brain Referee' (it appears in the list after the first pull request has been judged); 'Require branches to be up to date before merging': ON",
+        "Optionally add 'consistency' (Frontier State Consistency) and 'load-bearing-primary-admission' as further required checks"
       ],
-      "effect": "No direct push to main by anyone, no merge while the guard is red, and any PR touching a CODEOWNERS path waits for the owner's in-person review. The agent's token cannot create, edit, or bypass this ruleset."
+      "effect": "No direct push to main by anyone; nothing merges while the signed verdict is red or missing; agents cannot touch the ruleset."
     },
-    "step_2_push_ruleset_optional": {
-      "where": "Settings -> Rules -> Rulesets -> New push ruleset (availability depends on plan)",
-      "restrict_file_paths": [
-        "execution_guard/repo_integrity_guard_v1.py",
-        ".github/workflows/repo-integrity-guard.yml",
-        ".github/workflows/frontier-state-consistency.yml",
-        ".github/CODEOWNERS",
-        "canonical/tests/conftest.py",
-        "canonical/tests/historical_test_commits.json"
-      ],
-      "bypass_list": "EMPTY; the owner disables the ruleset for the duration of a legitimate edit",
-      "effect": "These files cannot be pushed to ANY branch by any token, which makes tampering with the guard impossible rather than merely detectable."
-    },
-    "step_3_repository_settings": [
-      "Settings -> General -> Pull Requests: disable 'Allow auto-merge'",
-      "Settings -> Actions -> General -> Workflow permissions: 'Read repository contents and packages permissions' and UNCHECK 'Allow GitHub Actions to create and approve pull requests'",
-      "Settings -> Actions -> General: 'Require approval for all outside collaborators' (fork PRs)"
+    "step_6_verify": [
+      "Open any trivial pull request: the referee job runs, and a check 'referee/repo-integrity-guard' from Brain Referee appears on it.",
+      "Try 'gh pr merge <n> --squash' from an agent session while the check is red: GitHub refuses (rule violations).",
+      "Push a carrier change on main (any of the converted workflows): a 'carrier/...' pull request opens as Brain Automation and merges by itself when green."
     ],
-    "step_4_retire_direct_main_pushes": "The 19 legacy workflows in LEGACY_DIRECT_MAIN_PUSH_WORKFLOWS push receipts straight to main; the ruleset will block them. Convert each to push a branch and open a PR, then remove it from the frozen list (the list may only shrink)."
+    "note_on_codeowners": "CODEOWNERS is kept as documentation of who owns integrity-critical paths and so the owner is auto-requested on such pull requests; it is NOT a merge requirement."
   },
   "honest_baseline": {
     "document": "canonical/verification/HONEST_SUITE_BASELINE_20261014_V1.json",

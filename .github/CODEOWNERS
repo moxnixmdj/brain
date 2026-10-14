@@ -1,10 +1,14 @@
-# Integrity-critical paths.  With a branch ruleset on `main` that requires
-# review from Code Owners, no pull request touching these paths can be merged by
-# the author's own token — an in-person review by the owner is mandatory.
+# Integrity-critical paths.  This file documents ownership and makes GitHub
+# auto-request the owner on pull requests that touch these paths.  It is NOT the
+# merge gate: the gate is the signed referee check required by the branch ruleset
+# (a solo owner cannot approve their own pull requests, so Code Owner review is
+# deliberately not required).  Changes to the paths below fail the referee
+# (PROTECTED_PATH_MODIFIED) and need the owner to relax the ruleset for that merge.
 # (See canonical/governance/REPO_INTEGRITY_POLICY_V1.json, section github_side.)
 
-# The guard itself, its test, its workflow, and this file
+# The guard itself, its test, the referee workflow, the landing script, and this file
 /execution_guard/                                   @moxnixmdj
+/.github/scripts/land_on_main.sh                    @moxnixmdj
 /canonical/tests/test_repo_integrity_guard_v1.py    @moxnixmdj
 /.github/                                           @moxnixmdj
 /AGENTS.md                                          @moxnixmdj
