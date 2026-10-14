@@ -82,8 +82,11 @@ def replace_unique_docx_text(
 
     try:
         check=ET.fromstring(after["word/document.xml"])
-        old_count=sum(1 for n in check.iter(TEXT_TAG) if n.text==old)
-        new_count=sum(1 for n in check.iter(TEXT_TAG) if n.text==new)
+        # An emptied text node serialises as <w:t/> and re-parses with text None:
+        # compare against "" so that replacement by the empty string is recognised
+        # (defect found by fresh-instance measurement, 2026-10-14).
+        old_count=sum(1 for n in check.iter(TEXT_TAG) if (n.text or "")==old)
+        new_count=sum(1 for n in check.iter(TEXT_TAG) if (n.text or "")==new)
     except Exception as exc:
         dst.unlink(missing_ok=True)
         return {"status":"FAIL_CLOSED","reason":"ROUNDTRIP_XML_INVALID","error":type(exc).__name__}
@@ -100,3 +103,24 @@ def replace_unique_docx_text(
         "visual_layout_authority":False,
         "terminal_authority":False,
     }
+
+
+# ---------------------------------------------------------------------------
+# True-capability entry point (canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md).
+# Pure adapter: dict instance -> dict output.  No logic beyond the function above.
+# ---------------------------------------------------------------------------
+
+def solve_instance(instance: dict) -> dict:
+    """instance = {"docx_b64": <base64 of a .docx package>, "old": str, "new": str}
+
+    Returns {"status", "reason"?, "changed_members"?, "output_docx_b64"?}.
+    """
+    import base64
+    with tempfile.TemporaryDirectory() as td:
+        src=Path(td)/"in.docx"; dst=Path(td)/"out.docx"
+        src.write_bytes(base64.b64decode(instance["docx_b64"]))
+        res=replace_unique_docx_text(src,dst,old=instance["old"],new=instance["new"])
+        out={k:v for k,v in res.items() if k!="output_path"}
+        out["output_docx_b64"]=base64.b64encode(dst.read_bytes()).decode("ascii") if (res.get("status")=="PASS" and dst.exists()) else None
+        out["output_file_left_behind_on_failure"]=bool(res.get("status")!="PASS" and dst.exists())
+        return out
