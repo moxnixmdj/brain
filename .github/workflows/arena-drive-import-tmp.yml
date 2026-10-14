@@ -1,0 +1,70 @@
+name: arena-drive-import-tmp
+
+# TEMPORARY helper for the Arena session on branch arena/60d45af8-brain.
+# Downloads a link-shared Google Drive file inside a GitHub-hosted runner
+# (the Arena sandbox cannot reach Google), verifies its SHA-256, compresses it
+# and commits it to this branch so the sandbox can `git fetch` it.
+# This workflow and the imported artifact are removed before any PR.
+
+on:
+  workflow_dispatch:
+    inputs:
+      file_id:
+        description: Google Drive file id (anyone-with-link)
+        required: true
+      expected_sha256:
+        description: Expected SHA-256 of the raw file
+        required: true
+      target_branch:
+        description: Branch to commit the compressed artifact to
+        required: true
+        default: arena/60d45af8-brain
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arena-drive-import-${{ inputs.target_branch }}
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.target_branch }}
+          fetch-depth: 1
+
+      - name: Download from Google Drive and verify digest
+        env:
+          FILE_ID: ${{ inputs.file_id }}
+          EXPECTED: ${{ inputs.expected_sha256 }}
+        run: |
+          set -euo pipefail
+          url="https://drive.usercontent.google.com/download?id=${FILE_ID}&export=download"
+          curl -fsSL --retry 3 --max-time 300 -o /tmp/import.bin "$url"
+          actual=$(sha256sum /tmp/import.bin | cut -d' ' -f1)
+          echo "bytes=$(stat -c %s /tmp/import.bin) sha256=$actual"
+          if [ "$actual" != "$EXPECTED" ]; then
+            echo "::error::digest mismatch (got $actual, expected $EXPECTED)"
+            head -c 400 /tmp/import.bin || true
+            exit 1
+          fi
+
+      - name: Compress and commit to branch
+        env:
+          FILE_ID: ${{ inputs.file_id }}
+          TARGET: ${{ inputs.target_branch }}
+        run: |
+          set -euo pipefail
+          mkdir -p tmp_arena_import
+          xz -9 -T0 -c /tmp/import.bin > "tmp_arena_import/${FILE_ID}.xz"
+          sha256sum /tmp/import.bin "tmp_arena_import/${FILE_ID}.xz" > "tmp_arena_import/${FILE_ID}.sha256"
+          ls -la tmp_arena_import
+          git config user.name "arena-drive-import-tmp"
+          git config user.email "arena-drive-import-tmp@users.noreply.github.com"
+          git add tmp_arena_import
+          git commit -m "chore(arena-tmp): import Drive artifact ${FILE_ID} (compressed, temporary)"
+          git push origin "HEAD:refs/heads/${TARGET}"
