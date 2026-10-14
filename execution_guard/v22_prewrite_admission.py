@@ -28,6 +28,152 @@ def _sha1(value: Any) -> bool:
 def _nonempty_list(value: Any) -> bool:
     return isinstance(value, list) and bool(value) and all(_nonempty(x) for x in value)
 
+BENCHMARK_INFORMATION_EQUIVALENCE_LAW_PATH = "canonical/laws/BENCHMARK_OUTPUT_INFORMATION_EQUIVALENCE_LAW_V1.md"
+BENCHMARK_WITNESS_SYNTHESIS_PATH = "canonical/governance/BENCHMARK_WITNESS_ELIMINATION_SYNTHESIS_20261006_V1.json"
+BENCHMARK_WITNESS_PREDICATES = {
+    "CODING_TB4_GE_66_4",
+    "CHARTOGRAPHY_TOOLS_GE_89",
+    "HLE_TOOLS_GE_67_7",
+    "OSWORLD_2_1_PARTIAL_GE_81_8",
+    "FINANCE_AGENT_V2_GE_58_59",
+    "CODING_FRONTIERCODE_GE_54_4",
+    "PROWORK_GDPVAL_GE_1846",
+    "PROWORK_AA_BRIEFCASE_GE_1822",
+    "ARTIFACT_AA_BRIEFCASE_GE_1822",
+    "AUTOMATIONBENCH_GE_40",
+    "MYSTERYMECHANISM_GE_49_55",
+}
+INTERNAL_CERTIFICATE_SEARCH_STATES = {
+    "NONZERO_INFORMATION_GAIN",
+    "EXHAUSTED_OR_FALSIFIED",
+}
+
+
+def _bound_receipt_errors(
+    prefix: str,
+    binding: Any,
+    receipt_blobs: Mapping[str, str],
+) -> list[str]:
+    if not isinstance(binding, Mapping):
+        return [prefix + "_RECEIPT_MISSING"]
+    path = binding.get("path")
+    sha = binding.get("git_blob_sha")
+    if not _nonempty(path) or not _sha1(sha):
+        return [prefix + "_RECEIPT_BINDING_INVALID"]
+    if receipt_blobs.get(str(path)) != sha:
+        return [prefix + "_RECEIPT_BLOB_STALE_OR_MISMATCH"]
+    return []
+
+
+def _benchmark_external_route_errors(
+    admission: Mapping[str, Any],
+    receipt_blobs: Mapping[str, str],
+) -> list[str]:
+    if admission.get("mode") != "ACTIVE_INTERFACE":
+        return []
+    if admission.get("interface") != "EXTERNAL_RESULT_OR_ACCESS":
+        return []
+
+    raw_targets = admission.get("target_truth_obligations")
+    if not isinstance(raw_targets, list):
+        return []
+    benchmark_targets = sorted(
+        {str(x) for x in raw_targets if str(x) in BENCHMARK_WITNESS_PREDICATES}
+    )
+    if not benchmark_targets:
+        return []
+
+    errors: list[str] = []
+    info = admission.get("benchmark_information_equivalence")
+    if not isinstance(info, Mapping):
+        return ["V22_BENCHMARK_INFORMATION_EQUIVALENCE_MISSING"]
+
+    if info.get("law_path") != BENCHMARK_INFORMATION_EQUIVALENCE_LAW_PATH:
+        errors.append("V22_BENCHMARK_INFORMATION_EQUIVALENCE_LAW_MISMATCH")
+    if info.get("witness_synthesis_path") != BENCHMARK_WITNESS_SYNTHESIS_PATH:
+        errors.append("V22_BENCHMARK_WITNESS_SYNTHESIS_PATH_MISMATCH")
+
+    declared = info.get("target_predicates")
+    if (
+        not isinstance(declared, list)
+        or sorted(set(str(x) for x in declared)) != benchmark_targets
+    ):
+        errors.append("V22_BENCHMARK_TARGET_PREDICATE_BINDING_MISMATCH")
+
+    if info.get("current_minimum_information_cut_member") is not True:
+        errors.append("V22_BENCHMARK_ROUTE_NOT_PROVED_IN_CURRENT_MINIMUM_INFORMATION_CUT")
+    if info.get("route_nondominated_proved") is not True:
+        errors.append("V22_BENCHMARK_ROUTE_NONDOMINANCE_UNPROVED")
+
+    search_state = info.get("internal_certificate_search_state")
+    if search_state not in INTERNAL_CERTIFICATE_SEARCH_STATES:
+        errors.append("V22_BENCHMARK_INTERNAL_CERTIFICATE_SEARCH_STATE_INVALID")
+    elif search_state == "NONZERO_INFORMATION_GAIN":
+        if info.get("external_wait_on_critical_path") is not False:
+            errors.append("V22_PROVIDER_WAIT_FORBIDDEN_WHILE_INTERNAL_CERTIFICATE_HAS_INFORMATION_GAIN")
+    else:
+        errors.extend(
+            _bound_receipt_errors(
+                "V22_BENCHMARK_CERTIFICATE_EXHAUSTION",
+                info.get("certificate_exhaustion_receipt"),
+                receipt_blobs,
+            )
+        )
+
+    if info.get("self_service_access_claimed") is True:
+        provisioned = info.get("self_service_provisioning_verified") is True
+        authorized = info.get("existing_authorized_credential_verified") is True
+        if not (provisioned or authorized):
+            errors.append("V22_PROVIDER_UI_IS_NOT_SELF_SERVICE_PROVISIONING_EVIDENCE")
+        if provisioned:
+            errors.extend(
+                _bound_receipt_errors(
+                    "V22_PROVIDER_SELF_SERVICE_PROVISIONING",
+                    info.get("self_service_provisioning_receipt"),
+                    receipt_blobs,
+                )
+            )
+        if authorized:
+            errors.extend(
+                _bound_receipt_errors(
+                    "V22_PROVIDER_AUTHORIZED_CREDENTIAL",
+                    info.get("existing_authorized_credential_receipt"),
+                    receipt_blobs,
+                )
+            )
+
+    return errors
+
+
+def referenced_receipt_paths(admission: Any) -> list[str]:
+    if not isinstance(admission, Mapping):
+        return []
+    refs: list[str] = []
+
+    wake = admission.get("wake_receipt_path")
+    if _nonempty(wake):
+        refs.append(str(wake))
+
+    tournament = admission.get("tournament")
+    if isinstance(tournament, Mapping):
+        for row in tournament.get("counterexample_receipts") or []:
+            if isinstance(row, Mapping) and _nonempty(row.get("path")):
+                refs.append(str(row["path"]))
+
+    info = admission.get("benchmark_information_equivalence")
+    if isinstance(info, Mapping):
+        for field in (
+            "certificate_exhaustion_receipt",
+            "self_service_provisioning_receipt",
+            "existing_authorized_credential_receipt",
+        ):
+            row = info.get(field)
+            if isinstance(row, Mapping) and _nonempty(row.get("path")):
+                refs.append(str(row["path"]))
+
+    return sorted(set(refs))
+
+
 def admission_errors(
     admission: Any,
     pointer: Mapping[str, Any],
@@ -118,4 +264,5 @@ def admission_errors(
                     errors.append(f"V22_COUNTEREXAMPLE_RECEIPT_BINDING_INVALID:{i}")
                 elif receipt_blobs.get(str(path)) != sha:
                     errors.append(f"V22_COUNTEREXAMPLE_RECEIPT_BLOB_STALE_OR_MISMATCH:{i}")
+    errors.extend(_benchmark_external_route_errors(admission, receipt_blobs))
     return sorted(set(errors))

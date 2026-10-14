@@ -9,9 +9,17 @@ if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
 try:
-    from trusted_v22_prewrite_admission import ACTIVE_POINTER_PATH as V22_ACTIVE_POINTER_PATH, admission_errors as v22_admission_errors
+    from trusted_v22_prewrite_admission import (
+        ACTIVE_POINTER_PATH as V22_ACTIVE_POINTER_PATH,
+        admission_errors as v22_admission_errors,
+        referenced_receipt_paths as v22_referenced_receipt_paths,
+    )
 except ImportError:
-    from execution_guard.v22_prewrite_admission import ACTIVE_POINTER_PATH as V22_ACTIVE_POINTER_PATH, admission_errors as v22_admission_errors
+    from execution_guard.v22_prewrite_admission import (
+        ACTIVE_POINTER_PATH as V22_ACTIVE_POINTER_PATH,
+        admission_errors as v22_admission_errors,
+        referenced_receipt_paths as v22_referenced_receipt_paths,
+    )
 
 ROOT=pathlib.Path(os.environ.get("GITHUB_WORKSPACE") or pathlib.Path.cwd()).resolve()
 
@@ -1129,19 +1137,8 @@ def enforce_v22_prewrite_admission(intent,base):
         return
     admission=intent.get("v22_prewrite_admission")
     receipt_blobs={}
-    paths=[]
-    if isinstance(admission,dict):
-        wake=admission.get("wake_receipt_path")
-        if isinstance(wake,str) and wake.strip():
-            paths.append(wake)
-        tournament=admission.get("tournament")
-        if isinstance(tournament,dict):
-            for row in tournament.get("counterexample_receipts") or []:
-                if isinstance(row,dict):
-                    path=row.get("path")
-                    if isinstance(path,str) and path.strip():
-                        paths.append(path)
-    for path in sorted(set(paths)):
+    paths=v22_referenced_receipt_paths(admission)
+    for path in paths:
         pure=pathlib.PurePosixPath(path)
         if path.startswith("/") or ".." in pure.parts:
             continue

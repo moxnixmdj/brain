@@ -3,7 +3,7 @@
 import argparse,hashlib,json,os,pathlib,subprocess,urllib.error,urllib.request
 from actions_admission import FrozenExecution,admit_current_run_once,problem_sha256
 from github_ref_store_live import GitHubRefStore
-from v22_prewrite_admission import ACTIVE_POINTER_PATH, admission_errors as v22_admission_errors
+from v22_prewrite_admission import ACTIVE_POINTER_PATH, admission_errors as v22_admission_errors, referenced_receipt_paths
 
 def request_factory(token,api="https://api.github.com"):
     def req(method,path,payload=None):
@@ -60,19 +60,9 @@ def verify_v22_prewrite(root,plan,checked):
     if plan_admission!=intent_admission:
         raise RuntimeError("V22_PLAN_INTENT_ADMISSION_MISMATCH")
     receipt_blobs={}
-    if isinstance(plan_admission,dict):
-        refs=[]
-        wake=plan_admission.get("wake_receipt_path")
-        if isinstance(wake,str) and wake:
-            refs.append(wake)
-        tournament=plan_admission.get("tournament")
-        if isinstance(tournament,dict):
-            for row in tournament.get("counterexample_receipts") or []:
-                if isinstance(row,dict) and isinstance(row.get("path"),str):
-                    refs.append(row["path"])
-        for rel in sorted(set(refs)):
-            _safe_pinned_json(root,rel,checked)
-            receipt_blobs[rel]=blob_sha(root/rel)
+    for rel in referenced_receipt_paths(plan_admission):
+        _safe_pinned_json(root,rel,checked)
+        receipt_blobs[rel]=blob_sha(root/rel)
     errors=v22_admission_errors(
         plan_admission,pointer,pointer_blob_sha=pointer_blob,
         action_kind=str(intent.get("action_kind") or ""),
