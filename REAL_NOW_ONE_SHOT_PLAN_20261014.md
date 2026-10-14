@@ -304,3 +304,14 @@ frozen predicate) is insensitive to that, the ordering of A2–A6 is not.
 
 What did not change on re-audit: P(T ≤ 40 min) = 0; the four-kind classification in §1; the finding that
 the suite's green is partially virtualized (R5); the user-only actions list; zero credit claimed.
+
+**9.5 Second re-audit (same question asked again) — two small facts, no material change.**
+(i) The session token is scoped to this repository: re-running a workflow in `verification-capsule-runner`
+returns HTTP 403, so the public-carrier liveness check in 9.2 can only be done by you (one click on "Re-run"
+for the 2026-10-12 `Execution Guard Regression` run; a billing refusal appears within seconds if the account is
+locked). (ii) Adding `concurrency`/`cancel-in-progress` to the 288 workflows that lack it is **not** a lever:
+runs last ≈ 15 s, so in-flight overlap is rare; the cost is the per-job one-minute rounding, which only
+consolidation removes. Convergence evidence: pass 1 produced four corrections (two material), pass 2 produced
+two facts and no change to any step. That is evidence the plan has stabilised, not a proof of optimality — the
+remaining uncertainty is concentrated in your three inputs (billing mode, carrier liveness, consolidation form)
+and in the capability measurements the plan exists to obtain.
