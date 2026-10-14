@@ -1,0 +1,197 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "date": "2026-10-14",
+  "action_id": "REPO_INTEGRITY_REFEREE_ON_MAIN_SIGNED_VERDICT_20261014_V1",
+  "canonical_generation": "2026-10-10-general-reusable-capability-frontier-v1",
+  "canonical_base_commit": "53c970ca8566757cf33d9d56ad344ef10545e000",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_REUSABLE_CAPABILITY_DEVELOPMENT_PROGRAM_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "action_kind": "GOVERNANCE_GUARD",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "weakens_existing_guard": false,
+  "causal_blocker": "REFEREE_CHANGEABLE_FROM_THE_PULL_REQUEST_IT_JUDGES__SAME_NAME_CHECK_SPOOFABLE__OWNER_TOKEN_CAN_MERGE_OVER_RED__19_CARRIERS_PUSH_STRAIGHT_TO_MAIN",
+  "blocker_lease_key": "2026-10-10-general-reusable-capability-frontier-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::REFEREE_CHANGEABLE_FROM_THE_PULL_REQUEST_IT_JUDGES__SAME_NAME_CHECK_SPOOFABLE__OWNER_TOKEN_CAN_MERGE_OVER_RED__19_CARRIERS_PUSH_STRAIGHT_TO_MAIN",
+  "highest_leverage_now": true,
+  "selected_route": "PULL_REQUEST_TARGET_REFEREE_FROM_MAIN__SUBJECT_AS_DATA__CHECK_RUN_SIGNED_BY_BRAIN_REFEREE_APP_FROM_MAIN_ONLY_ENVIRONMENT__RULESET_WITH_EMPTY_BYPASS__CARRIERS_LAND_THROUGH_PULL_REQUESTS",
+  "prior_work_reused": [
+    "execution_guard/repo_integrity_guard_v1.py",
+    ".github/workflows/drift-immunity-guard.yml",
+    ".github/workflows/load-bearing-primary-admission.yml",
+    "canonical/governance/REPO_INTEGRITY_POLICY_V1.json"
+  ],
+  "falsification_condition": "A_PULL_REQUEST_CAN_CHANGE_WHICH_GUARD_JUDGES_IT_OR_PRODUCE_THE_REQUIRED_SIGNED_CHECK_WITHOUT_THE_REFEREE_ENVIRONMENT_KEY",
+  "expected_parent_change": "EVERY_PULL_REQUEST_IS_JUDGED_BY_THE_GUARD_ON_MAIN_AND_MERGES_ONLY_ON_A_SIGNED_GREEN_VERDICT__NO_HUMAN_REVIEW_STEP__NO_DIRECT_PUSH_TO_MAIN",
+  "expected_parent_frontier_change": "EVERY_PULL_REQUEST_IS_JUDGED_BY_THE_GUARD_ON_MAIN_AND_MERGES_ONLY_ON_A_SIGNED_GREEN_VERDICT__NO_HUMAN_REVIEW_STEP__NO_DIRECT_PUSH_TO_MAIN",
+  "stop_condition": "GUARD_SELF_TEST_PASS__STATIC_RULES_ZERO_VIOLATIONS__FIVE_ATTACK_REPLAYS_REJECTED__ALL_315_WORKFLOWS_PARSE__ZERO_TERMINAL_CREDIT__ZERO_SCOREBOARD_CHANGE",
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "success_probability_lcb": "1/2",
+    "wall_clock_cost_ub": "1",
+    "interpretation": "DISCHARGES_NOTHING__CLOSES_ONE_CONSTRUCTIVE_GAP_SHARED_BY_ALL_13_OPEN_OBLIGATIONS__NO_PASS_ON_MAIN_CAN_BE_CREDITED_WHILE_ANY_PULL_REQUEST_CAN_REWRITE_EVIDENCE_OR_THE_TEST_HARNESS__UNLOCK_LCB_1_COUNTS_THE_CREDIT_PATH_NOT_A_BENCHMARK_RESULT__SUCCESS_LCB_1_2_BECAUSE_THE_GITHUB_SIDE_STILL_NEEDS_THE_OWNERS_SIX_STEPS"
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "proof_state_reachability": "NOT_APPLICABLE__GOVERNANCE_GUARD",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "REPO_INTEGRITY_REFEREE_ON_MAIN_20261014_V1",
+      "falsifier_id": "TRUSTED_GUARD_VS_SUBJECT_ATTACK_REPLAY",
+      "decisive_question": "CAN_A_PULL_REQUEST_REPLACE_OR_SPOOF_THE_REFEREE_THAT_JUDGES_IT",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [],
+      "no_known_counterexample_reason": "FIVE_ATTACK_SHAPES_REPLAYED_AGAINST_THE_TRUSTED_GUARD__14_VIOLATIONS__ALL_REJECTED"
+    }
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-10-general-reusable-capability-frontier-v1",
+    "canonical_base_commit": "53c970ca8566757cf33d9d56ad344ef10545e000",
+    "real_outcome": "REFEREE_ON_MAIN_WITH_SIGNED_VERDICT_AND_FRONT_DOOR_LANDING_FOR_CARRIERS",
+    "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "obs_goal": {
+      "real_outcome": "NO_PULL_REQUEST_CAN_CHANGE_OR_SPOOF_ITS_OWN_REFEREE",
+      "proxy_goals_deleted": [
+        "HUMAN_REVIEW_ON_EVERY_PULL_REQUEST"
+      ],
+      "surviving_necessity": "SIGNED_VERDICT_FROM_A_KEY_NO_PULL_REQUEST_RUN_CAN_HOLD"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "DRIFT_IMMUNITY_GUARD_TRUSTED_VALIDATOR_PATTERN",
+        "REPO_INTEGRITY_GUARD_V1"
+      ],
+      "external_existing_routes_checked": [
+        "GITHUB_RULESET_REQUIRE_WORKFLOWS__ORGANIZATION_ONLY_NOT_AVAILABLE",
+        "CODE_OWNER_REVIEW__SOLO_OWNER_CANNOT_SELF_APPROVE"
+      ],
+      "capability_work_deleted": [
+        "CODE_OWNER_REVIEW_REQUIREMENT"
+      ],
+      "surviving_gap": "OWNER_ONE_TIME_CLICKS_APP_ENVIRONMENT_RULESET"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_GITHUB_CHECK_SEMANTICS",
+      "delete_bypass_substitute_options": [
+        "PULL_REQUEST_TARGET",
+        "APP_SIGNED_CHECK_RUN",
+        "MAIN_ONLY_ENVIRONMENT"
+      ],
+      "surviving_causal_blocker": "OWNER_MUST_CREATE_TWO_APPS_ONE_ENVIRONMENT_ONE_RULESET"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "PULL_REQUEST_TARGET_REFEREE_WITH_SIGNED_CHECK",
+        "CODE_OWNER_REVIEW_REJECTED_SOLO_OWNER_CANNOT_SELF_APPROVE",
+        "ORG_RULESET_REQUIRED_WORKFLOWS_REJECTED_NOT_AVAILABLE_FOR_PERSONAL_ACCOUNT"
+      ],
+      "losing_routes_reason": "HUMAN_REVIEW_SLOWS_AUTOMATION_AND_DEADLOCKS_FOR_A_SOLO_OWNER__ORG_RULESETS_UNAVAILABLE",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "GUARD_SELF_TEST__STATIC_SCAN__TRUSTED_GUARD_VS_SUBJECT_ATTACK_REPLAY__YAML_PARSE_OF_315_WORKFLOWS__LOCAL_DRIFT_GUARD_RUN"
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "DIRECT_GIT_PUSH_TO_MAIN_IN_19_CARRIER_WORKFLOWS",
+        "CODE_OWNER_REVIEW_REQUIREMENT_FROM_PR_4698_POLICY"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "DRIFT_IMMUNITY_GUARD_TRUSTED_VALIDATOR_PATTERN"
+      ],
+      "fresh_reuse_plan": "REUSE_THE_EXISTING_TRUSTED_COPY_PATTERN_OF_DRIFT_IMMUNITY_GUARD_FOR_THE_REPO_INTEGRITY_GUARD"
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "NONE"
+      ],
+      "search_stop_decision": "FIVE_ATTACK_SHAPES_REJECTED_BY_THE_TRUSTED_GUARD_AND_STATIC_RULES_ZERO_VIOLATIONS",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "PULL_REQUEST_TARGET_REFEREE_FROM_MAIN__SUBJECT_AS_DATA__CHECK_RUN_SIGNED_BY_BRAIN_REFEREE_APP_FROM_MAIN_ONLY_ENVIRONMENT__RULESET_WITH_EMPTY_BYPASS__CARRIERS_LAND_THROUGH_PULL_REQUESTS",
+      "CODE_OWNER_REVIEW_ON_EVERY_PULL_REQUEST__REJECTED_SOLO_OWNER_CANNOT_SELF_APPROVE_AND_IT_SLOWS_AUTOMATION",
+      "ORGANIZATION_RULESET_REQUIRED_WORKFLOWS__REJECTED_NOT_AVAILABLE_FOR_PERSONAL_ACCOUNTS",
+      "UNSIGNED_ACTIONS_JOB_AS_REQUIRED_CHECK__REJECTED_GITHUB_TAKES_THE_MOST_RECENT_SAME_NAMED_CHECK_SO_IT_IS_SPOOFABLE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "CODE_OWNER_REVIEW_REQUIREMENT",
+      "DIRECT_PUSH_TO_MAIN"
+    ],
+    "selected_surviving_route": "PULL_REQUEST_TARGET_REFEREE_FROM_MAIN__SUBJECT_AS_DATA__CHECK_RUN_SIGNED_BY_BRAIN_REFEREE_APP_FROM_MAIN_ONLY_ENVIRONMENT__RULESET_WITH_EMPTY_BYPASS__CARRIERS_LAND_THROUGH_PULL_REQUESTS",
+    "why_selected_route_is_fastest_sufficient": "THE_ONLY_ROUTE_WHERE_NO_PULL_REQUEST_CAN_CHOOSE_OR_SPOOF_ITS_OWN_REFEREE_WITHOUT_ADDING_A_HUMAN_STEP",
+    "expected_parent_level_state_change": "EVERY_PULL_REQUEST_IS_JUDGED_BY_THE_GUARD_ON_MAIN_AND_MERGES_ONLY_ON_A_SIGNED_GREEN_VERDICT__NO_HUMAN_REVIEW_STEP__NO_DIRECT_PUSH_TO_MAIN",
+    "stop_condition": "GUARD_SELF_TEST_PASS__STATIC_RULES_ZERO_VIOLATIONS__FIVE_ATTACK_REPLAYS_REJECTED__ALL_315_WORKFLOWS_PARSE__ZERO_TERMINAL_CREDIT__ZERO_SCOREBOARD_CHANGE",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "GOVERNANCE_GUARD_ONLY__NO_CAPABILITY_ROUTE_IS_DISCOVERED_OR_CLAIMED"
+    }
+  },
+  "benchmark_or_family_rank_authority": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "explicit_user_authorization": "Owner instruction 2026-10-14: 'fix all the sh!t that dmp agent made' and 'make it impossible for any future agent to make this sh!t again or anything similar \u2014 literally make it impossible'; then 'a solution that is precise enough to the problem and also prohibits it totally' without slowing automation; repository made public by the owner for rulesets."
+}
