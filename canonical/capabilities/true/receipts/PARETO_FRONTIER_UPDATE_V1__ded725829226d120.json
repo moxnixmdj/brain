@@ -1,0 +1,90 @@
+{
+  "authority": "NONE",
+  "banned_modules_detected": [],
+  "blobs": {
+    "generator": {
+      "git_blob_sha": "f4bfc2dc1850f6af3ebfe030921ad13365b36891",
+      "path": "canonical/capabilities/true/generators/scheduler_gen_v1.py",
+      "sha256": "6bc8fda3bffb978ca7a56075f257e4a0bd6b69c2cb978df3cb1f701149bb6a07"
+    },
+    "kernels": [
+      {
+        "git_blob_sha": "6d2091cc1581b9aa1fd2c74e8a76519a41d9d957",
+        "path": "canonical/runtime/capability_first_scheduler_v1.py",
+        "sha256": "257d5a73cc0a9c9262cacccb9f9821d5ebff3376a1fa8337fcee48d580f4aad2"
+      }
+    ],
+    "oracles": {
+      "git_blob_sha": "ebd038be0ef132466f13bdb2a9b635dff3c98892",
+      "path": "canonical/capabilities/true/oracles/scheduler_oracles_v1.py",
+      "sha256": "c5d952b92c9054e832df5824bf11c8958f80a4a2edb8a5ecc84f15bac62bf0d2"
+    },
+    "solver": {
+      "git_blob_sha": "d7dbd9d320d27587d2dac228e16bc5b4eceba61a",
+      "path": "canonical/runtime/scheduler_true_capability_adapters_v1.py",
+      "sha256": "3ed847567788e0016d8061836c8fc0c082f804cae985a096a566759e3ce11026"
+    }
+  },
+  "canaries": [],
+  "canary_pass": "0/0",
+  "capability_id": "PARETO_FRONTIER_UPDATE_V1",
+  "carrier": "SANDBOX",
+  "claim": "Folding a sequence of candidates into an initially empty frontier with update_pareto_frontier: a candidate without a capability id is refused; a candidate that is not marked reusable, or not independently verified, is not admitted (with the matching reason) and the frontier is unchanged; a candidate with a negative metric is refused; a candidate dominated by an incumbent (no worse on capability, generalization and reliability and on latency, compute, memory and spend, strictly better somewhere, and with the same semantic contract when both declare one) is not admitted and the dominating incumbent is named; otherwise it is admitted, every incumbent it dominates is retired from the active frontier (never deleted, no deletion authority), and the frontier stays sorted by capability id.",
+  "failures_sample": [],
+  "fresh_pass_rate": 1.0,
+  "github": {
+    "GITHUB_REF": null,
+    "GITHUB_REPOSITORY": null,
+    "GITHUB_RUN_ATTEMPT": null,
+    "GITHUB_RUN_ID": null,
+    "GITHUB_SHA": null
+  },
+  "independent_oracle_ids": [
+    "REFERENCE_FOLD",
+    "FRONTIER_INVARIANTS",
+    "UNIFORM_SCALING_INVARIANCE"
+  ],
+  "instance_pass": 2000,
+  "instances": 2000,
+  "kind": "FRESH_INSTANCE_MEASUREMENT",
+  "network_blocked": true,
+  "nonstdlib_modules_loaded": [],
+  "oracle_classes": {
+    "FRONTIER_INVARIANTS": "PROPERTY",
+    "REFERENCE_FOLD": "ANALYTIC_CLOSED_FORM",
+    "UNIFORM_SCALING_INVARIANCE": "METAMORPHIC"
+  },
+  "pass_threshold": 1.0,
+  "per_oracle": {
+    "FRONTIER_INVARIANTS": {
+      "error": 0,
+      "fail": 0,
+      "pass": 2000
+    },
+    "REFERENCE_FOLD": {
+      "error": 0,
+      "fail": 0,
+      "pass": 2000
+    },
+    "UNIFORM_SCALING_INVARIANCE": {
+      "error": 0,
+      "fail": 0,
+      "pass": 2000
+    }
+  },
+  "python": "3.11.2",
+  "replay": false,
+  "schema": "TRUE_CAPABILITY_RECEIPT_V1",
+  "scope_limits": [
+    "NO physical deletion semantics (option_preserving_capability_optimizer is a separate component)",
+    "NO claim about order-independence of the final frontier across differing semantic contracts"
+  ],
+  "seed": "ded725829226d120561c6ae5a4ee0430cf333c69ad339eae92f8829fb763a840",
+  "seed_source": "OS_URANDOM",
+  "self_description": "Measurement of a solver on instances generated after the solver was frozen, judged by oracles in separate files. authority NONE: it records what was observed on this carrier and grants no credit; only a referee-signed run on a public runner may be cited.",
+  "solver_errors": 0,
+  "spec_path": "canonical/capabilities/true/specs/PARETO_FRONTIER_UPDATE_V1.json",
+  "spec_sha256": "b26b99b16f42b29023777cb5dda09df37989921e5090e6441292cbc566f91225",
+  "verdict": "PASS",
+  "wall_seconds": 5.558
+}

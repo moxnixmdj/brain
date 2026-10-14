@@ -1,0 +1,97 @@
+{
+  "authority": "NONE",
+  "banned_modules_detected": [],
+  "blobs": {
+    "generator": {
+      "git_blob_sha": "f4bfc2dc1850f6af3ebfe030921ad13365b36891",
+      "path": "canonical/capabilities/true/generators/scheduler_gen_v1.py",
+      "sha256": "6bc8fda3bffb978ca7a56075f257e4a0bd6b69c2cb978df3cb1f701149bb6a07"
+    },
+    "kernels": [
+      {
+        "git_blob_sha": "0d351964d29690e676f116480a69b8c979b8b54a",
+        "path": "canonical/runtime/authenticated_pareto_scheduler_v1.py",
+        "sha256": "cb9fd28b54699b5f454590f57641f27f11b4837da6a88585b54f10a4f7d61e71"
+      }
+    ],
+    "oracles": {
+      "git_blob_sha": "ebd038be0ef132466f13bdb2a9b635dff3c98892",
+      "path": "canonical/capabilities/true/oracles/scheduler_oracles_v1.py",
+      "sha256": "c5d952b92c9054e832df5824bf11c8958f80a4a2edb8a5ecc84f15bac62bf0d2"
+    },
+    "solver": {
+      "git_blob_sha": "d7dbd9d320d27587d2dac228e16bc5b4eceba61a",
+      "path": "canonical/runtime/scheduler_true_capability_adapters_v1.py",
+      "sha256": "3ed847567788e0016d8061836c8fc0c082f804cae985a096a566759e3ce11026"
+    }
+  },
+  "canaries": [],
+  "canary_pass": "0/0",
+  "capability_id": "AUTHENTICATED_PARETO_SCHEDULE_V1",
+  "carrier": "SANDBOX",
+  "claim": "compile_schedule accepts a candidate list only if every candidate has a non-empty string id (no duplicates), all nine numeric metrics, and a measurement receipt that is independently verified, carries a 64-hex sha256 and whose subject_sha256 equals sha256 of the canonical JSON of {candidate_id, metrics}; any candidate with non-zero cost_usd_ucb, or an empty list, fails closed with the first offending candidate and reason named. On acceptance it returns the nondominated set (five benefit metrics maximised, four cost metrics minimised, textbook dominance) sorted by id and, for every dominated candidate, the sorted ids of its dominators; it never grants promotion or terminal authority and reports zero credit and zero spend.",
+  "failures_sample": [],
+  "fresh_pass_rate": 1.0,
+  "github": {
+    "GITHUB_REF": null,
+    "GITHUB_REPOSITORY": null,
+    "GITHUB_RUN_ATTEMPT": null,
+    "GITHUB_RUN_ID": null,
+    "GITHUB_SHA": null
+  },
+  "independent_oracle_ids": [
+    "REFERENCE_SCHEDULE",
+    "AUTHORITY_ENVELOPE",
+    "TAMPER_AFTER_RECEIPT_IS_REFUSED",
+    "PERMUTATION_INVARIANCE"
+  ],
+  "instance_pass": 2000,
+  "instances": 2000,
+  "kind": "FRESH_INSTANCE_MEASUREMENT",
+  "network_blocked": true,
+  "nonstdlib_modules_loaded": [],
+  "oracle_classes": {
+    "AUTHORITY_ENVELOPE": "PROPERTY",
+    "PERMUTATION_INVARIANCE": "METAMORPHIC",
+    "REFERENCE_SCHEDULE": "ANALYTIC_CLOSED_FORM",
+    "TAMPER_AFTER_RECEIPT_IS_REFUSED": "METAMORPHIC"
+  },
+  "pass_threshold": 1.0,
+  "per_oracle": {
+    "AUTHORITY_ENVELOPE": {
+      "error": 0,
+      "fail": 0,
+      "pass": 2000
+    },
+    "PERMUTATION_INVARIANCE": {
+      "error": 0,
+      "fail": 0,
+      "pass": 2000
+    },
+    "REFERENCE_SCHEDULE": {
+      "error": 0,
+      "fail": 0,
+      "pass": 2000
+    },
+    "TAMPER_AFTER_RECEIPT_IS_REFUSED": {
+      "error": 0,
+      "fail": 0,
+      "pass": 2000
+    }
+  },
+  "python": "3.11.2",
+  "replay": false,
+  "schema": "TRUE_CAPABILITY_RECEIPT_V1",
+  "scope_limits": [
+    "NO verification that the receipt sha256 refers to a real measurement; only the binding of metrics to the receipt subject is measured",
+    "NO claim about float rounding beyond exact equality of the supplied numbers"
+  ],
+  "seed": "463480e1295d2068267f88ce51d2384b8f615573553ad9e072a8d1efac7298b3",
+  "seed_source": "OS_URANDOM",
+  "self_description": "Measurement of a solver on instances generated after the solver was frozen, judged by oracles in separate files. authority NONE: it records what was observed on this carrier and grants no credit; only a referee-signed run on a public runner may be cited.",
+  "solver_errors": 0,
+  "spec_path": "canonical/capabilities/true/specs/AUTHENTICATED_PARETO_SCHEDULE_V1.json",
+  "spec_sha256": "fbc6ffa8328629bff7b874697a0a40bca2ec4836004a0642028037c0deb2ea51",
+  "verdict": "PASS",
+  "wall_seconds": 1.045
+}

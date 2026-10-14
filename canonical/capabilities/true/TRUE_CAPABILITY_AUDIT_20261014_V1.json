@@ -124,7 +124,7 @@
       "matrix_route_quoted": "Brain-owned same-identity task/lease + two-worker concurrency + fan-in + independent verification",
       "model_in_route": false,
       "classification": "MEASURABLE_PENDING",
-      "reason": "model-free (task lease + two-worker concurrency + fan-in); the single-process lease semantics of the shared supervisor are now MEASURED_PASS under SAME_IDENTITY_SUPERVISOR_V1, but the two-worker concurrency, inter-process claim lock and fan-in completeness still need their own spec; 'ABSOLUTE_CEILING' wording in the matrix is an inference the law forbids"
+      "reason": "model-free (task lease + two-worker concurrency + fan-in); the single-process lease semantics of the shared supervisor are MEASURED_PASS under SAME_IDENTITY_SUPERVISOR_V1 and the ranking/Pareto schedulers are MEASURED_PASS under three specs, but the two-worker concurrency, inter-process claim lock and the fan-in expansion still need their own spec; 'ABSOLUTE_CEILING' wording in the matrix is an inference the law forbids"
     },
     {
       "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
@@ -243,10 +243,16 @@
       "spec": "SAME_IDENTITY_SUPERVISOR_V1"
     },
     {
-      "component": "Authenticated / capability-first schedulers (lease + fan-in)",
-      "path": "canonical/runtime/authenticated_pareto_scheduler_v1.py, capability_first_scheduler_v1.py, capability_first_live_scheduler_v1.py",
-      "classification": "MEASURABLE_PENDING",
-      "evidence": "property oracles (no double grant, every task reaches fan-in exactly once) possible; not yet specified"
+      "component": "Authenticated / capability-first schedulers (ranking + Pareto frontier)",
+      "path": "canonical/runtime/capability_first_scheduler_v1.py (blob 6d2091cc, byte-pinned by governance records) and authenticated_pareto_scheduler_v1.py (blob 0d351964), measured unchanged through canonical/runtime/scheduler_true_capability_adapters_v1.py; capability_first_live_scheduler_v1.py wraps rank_work with live-authority reads: out of scope",
+      "classification": "MEASURED_PASS",
+      "spec": "CAPABILITY_FIRST_RANKING_V1",
+      "specs": [
+        "CAPABILITY_FIRST_RANKING_V1",
+        "PARETO_FRONTIER_UPDATE_V1",
+        "AUTHENTICATED_PARETO_SCHEDULE_V1"
+      ],
+      "evidence": "three ledger rows, 2000/2000 sandbox each: rank_work (exact-fraction reference ranking, eligible-first/score-monotone invariants, permutation and uniform-cost-scaling invariance, no authority granted); update_pareto_frontier folded from empty (textbook dominance reference, antichain/verified/no-deletion invariants, uniform scaling invariance); compile_schedule (reference verdict+frontier, authority envelope, tamper-after-receipt refused, permutation invariance). No defect found. Mutants caught (500 each): demoted work outranking eligible 70, wrong score formula 418, benchmark bookkeeping admitted 136, lost tie-break 65, validation removed 24; weak dominance 180, contract check removed 74, unverified admission 200; receipt binding removed 372, spend check removed 15, wrong dominance 221. Correction: the audit's earlier wording 'lease + fan-in' was wrong - these modules rank and compare, they hold no lease; the lease is the supervisor (measured) and the fan-in lives in capability_proposal_generators.py (not yet audited). Generator coverage had to be raised twice (exact leverage ties, zero-gain eligible items, exact metric twins) before two of the mutants were caught - recorded because a test that cannot catch a bug is not a test."
     },
     {
       "component": "bytes_* microkernels and 'closed proof' kernels",
@@ -277,22 +283,23 @@
       "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
       "EXACT_SYMBOLIC_COMPUTATION"
     ],
-    "components_measured_pass": 3,
+    "components_measured_pass": 4,
     "components_measured_fail": 0,
-    "components_measurable_pending": 5,
+    "components_measurable_pending": 4,
     "components_checker_gaming": 1,
     "components_not_yet_audited": 2,
     "defects_found_by_measurement": [
       "docx_exact_text_edit: replacement by the empty string always failed closed (fixed 2026-10-14)",
       "same_identity_supervisor: execute_claimed_task had no terminal-state guard, so a caller skipping claim_task could relaunch the runtime on a COMPLETE/FAILED task (fixed 2026-10-14; the frozen credited copy same_identity_supervisor_credited_v1.py still carries it)"
-    ]
+    ],
+    "measured_specs_total": 6
   },
   "what_this_audit_does_not_say": "It does not say any family is owned, does not change any matrix status, predicate, scoreboard or pointer, and credits nothing. A MEASURED_PASS component is exactly what its receipt says.",
   "next_in_order": [
     "DOCX remaining six skills (same oracle family)",
     "XLSX/PPTX vendored skills with recompute oracles",
+    "fan-in expansion (capability_proposal_generators.py) audit: measurable or record-only",
     "same-identity supervisor: crash/restart continuity (state after kill equals committed checkpoint), inter-process claim lock, continuous-OBS context check",
-    "lease/fan-in scheduler property spec",
     "CAD T0 on the public runner with closed-form oracles (BOX/CIRCLE/HOLE families) - expect to learn whether the pipeline is broken",
     "file-level audit of bytes_* kernels"
   ]

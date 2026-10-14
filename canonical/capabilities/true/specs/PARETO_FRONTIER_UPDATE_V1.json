@@ -1,0 +1,54 @@
+{
+  "schema": "TRUE_CAPABILITY_SPEC_V1",
+  "capability_id": "PARETO_FRONTIER_UPDATE_V1",
+  "claim": "Folding a sequence of candidates into an initially empty frontier with update_pareto_frontier: a candidate without a capability id is refused; a candidate that is not marked reusable, or not independently verified, is not admitted (with the matching reason) and the frontier is unchanged; a candidate with a negative metric is refused; a candidate dominated by an incumbent (no worse on capability, generalization and reliability and on latency, compute, memory and spend, strictly better somewhere, and with the same semantic contract when both declare one) is not admitted and the dominating incumbent is named; otherwise it is admitted, every incumbent it dominates is retired from the active frontier (never deleted, no deletion authority), and the frontier stays sorted by capability id.",
+  "input_class": "2-10 candidates with small integer or decimal-string metrics around a common base so dominance, incomparability and exact ties all occur; 30 % exact or strictly-worse copies of an earlier candidate; 8 % not reusable, 8 % not verified, 5 % negative metric; 1-2 semantic contracts, 20 % of candidates without one.",
+  "scope_limits": [
+    "NO physical deletion semantics (option_preserving_capability_optimizer is a separate component)",
+    "NO claim about order-independence of the final frontier across differing semantic contracts"
+  ],
+  "solver": {
+    "module": "canonical/runtime/scheduler_true_capability_adapters_v1.py",
+    "entry": "solve_frontier",
+    "kernels": [
+      "canonical/runtime/capability_first_scheduler_v1.py"
+    ],
+    "note": "the kernel is byte-pinned by governance records, so the pure adapter lives in a separate module; the receipt records the kernel blob too"
+  },
+  "generator": {
+    "module": "canonical/capabilities/true/generators/scheduler_gen_v1.py",
+    "entry": "generate_frontier"
+  },
+  "oracles": {
+    "module": "canonical/capabilities/true/oracles/scheduler_oracles_v1.py",
+    "entry": "oracles_frontier",
+    "declared": [
+      {
+        "id": "REFERENCE_FOLD",
+        "class": "ANALYTIC_CLOSED_FORM",
+        "lineage": "textbook Pareto dominance folded step by step with exact fractions; no scheduler code"
+      },
+      {
+        "id": "FRONTIER_INVARIANTS",
+        "class": "PROPERTY",
+        "lineage": "none"
+      },
+      {
+        "id": "UNIFORM_SCALING_INVARIANCE",
+        "class": "METAMORPHIC",
+        "lineage": "none"
+      }
+    ]
+  },
+  "independent_oracle_ids": [
+    "REFERENCE_FOLD",
+    "FRONTIER_INVARIANTS",
+    "UNIFORM_SCALING_INVARIANCE"
+  ],
+  "published_canaries": [],
+  "min_instances": 500,
+  "pass_threshold": 1.0,
+  "falsification_condition": "Any candidate sequence on which an admission decision, named dominator, retired set or final frontier differs from textbook dominance, the final frontier is not an antichain of verified reusable candidates, a rejection names a non-dominating incumbent, deletion authority is claimed, or scaling every metric by the same factor changes a decision.",
+  "model_dependency_count": 0,
+  "history": "Component named by the audit under 'Authenticated / capability-first schedulers'. First fresh-instance measurement 2026-10-14. One oracle correction on the way: the no-deletion-authority check was first applied to every step, including the early 'not reusable / not verified' refusals whose result carries no retirement fields at all; narrowed to admission and dominated-rejection steps, which is what the claim says (recorded because a wrong test is as bad as a wrong solver)."
+}

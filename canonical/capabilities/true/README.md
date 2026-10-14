@@ -86,10 +86,40 @@ oracle alone 59); terminal relaunch guard removed -> 39; manifest drift accepted
 selection order inverted -> 145; checkpoint skipped -> 120. Removing only the two `LeaseConflict` raises is *not* caught,
 and that is correct: inside the contract the agent id is part of the hashed manifest, so the drift check holds the same door.
 
+### Schedulers: CAPABILITY_FIRST_RANKING_V1, PARETO_FRONTIER_UPDATE_V1, AUTHENTICATED_PARETO_SCHEDULE_V1
+
+Solvers `canonical/runtime/capability_first_scheduler_v1.py` (`rank_work`, `update_pareto_frontier`) and
+`canonical/runtime/authenticated_pareto_scheduler_v1.py` (`compile_schedule`). Both files are byte-pinned by governance records
+(blobs `6d2091cc`, `0d351964`), so they are measured **unchanged** through the thin adapter
+`canonical/runtime/scheduler_true_capability_adapters_v1.py`; the harness now records the kernel blobs in the receipt and ledger
+(`solver.kernels`) and the test asserts the pins. The audit had filed these under "lease + fan-in";
+that wording was wrong - they rank and compare, the lease is the supervisor (measured above) and the fan-in expansion lives in
+`capability_proposal_generators.py` (not yet audited). Corrected in the audit file.
+
+Claims (short): exact-fraction leverage ranking with eligible work before demoted work and fixed tie-breaks, refusing malformed
+input, granting no authority; textbook Pareto admission with same-contract dominance, retirement without deletion; receipt-bound
+zero-spend nondominated set that refuses any metric changed after its receipt.
+Scope limits: no shared-residual ledger tie-break, no live-authority reads, no physical deletion semantics, no check that a
+receipt sha refers to a real measurement.
+
+Oracles (independent, stdlib + `fractions`): reference models written from the contracts; eligible-first / score-monotone,
+antichain / verified / no-deletion and authority-envelope properties; permutation, uniform-cost-scaling, uniform-metric-scaling and
+tamper-after-receipt metamorphic relations.
+
+Measured in the sandbox on 2026-10-14: **2000/2000, 2000/2000, 2000/2000** (`MEASURED_SANDBOX`, non-crediting). **No defect found.**
+One oracle correction (the no-deletion check was applied to early refusals that carry no retirement fields) and two generator
+coverage fixes (exact leverage ties and zero-gain eligible items; exact metric twins) were needed before every mutant was caught.
+
+Test of the test (500 instances each, all caught): demoted work allowed to outrank eligible work -> 70 · wrong score formula -> 418 ·
+benchmark bookkeeping admitted -> 136 · tie-break dropped -> 65 · validation removed -> 24 · weak dominance -> 180 · contract check
+removed -> 74 · unverified candidate admitted -> 200 · receipt binding removed -> 372 · zero-spend check removed -> 15 · wrong
+dominance -> 221.
+
 ## Audit of every claimed capability
 
 `TRUE_CAPABILITY_AUDIT_20261014_V1.json` classifies the 19 Opus-5.5 family routes and the components they name.
 Headline: 15 of 19 family routes contain an external model or service and are therefore **not Brain capabilities under the law**,
 including four the matrix marks PASS/VERIFIED; 2 families are model-free and measurable but unmeasured; 2 families have a measured
-component (DOCX; same-identity supervisor). Components: 3 MEASURED_PASS, 5 MEASURABLE_PENDING, 1 CHECKER_GAMING, 2 NOT_YET_AUDITED.
+component (DOCX; same-identity supervisor). Components: 4 MEASURED_PASS (6 specs), 4 MEASURABLE_PENDING, 1 CHECKER_GAMING,
+2 NOT_YET_AUDITED.
 The audit changes no matrix status, predicate or pointer.
