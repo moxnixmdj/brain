@@ -11,6 +11,9 @@ on:
       - "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json"
       - "canonical/governance/RESIDUAL_ACTION_UNIVERSE_V2.json"
       - "canonical/capabilities/frontier/OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1.json"
+      - "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
+      - "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json"
+      - "canonical/governance/TERMINAL_AUTHORITY_EPOCH_V1.json"
       - ".github/workflows/frontier-state-consistency.yml"
   workflow_dispatch:
 concurrency:
@@ -53,12 +56,28 @@ jobs:
           b=f"TERMINAL_FALSE__{open_count}_OF_{total}_FAMILIES_OPEN__{unresolved}_OF_{atom_total}_ATOMIC_PREDICATES_UNRESOLVED__SEE_CURRENT_TERMINAL_AUTHORITY_NEXT_FOR_EXACT_ACTIVE_ROUTE"
           e="CURRENT_TERMINAL_AUTHORITY_NEXT_PASS_OR_FALSIFICATION__OR_ANOTHER_CAUSALLY_BOUND_ZERO_REALITY_DELTA__NO_TERMINAL_PROMOTION_WITHOUT_SEPARATE_INDEPENDENT_REDUCTION"
 
-          if "control_plane_precedence" not in h:
-              assert h["current_parent_blocker"] == b
-              assert h["next_required_action_class"] == n
-              assert h["next_progress_event_target"] == e
-          else:
-              assert h["active_capability_target"] == "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER"
+          # The hierarchy document carries capability-first scheduling in its legacy
+          # mirror keys (since fa9027cf), so terminal truth is mirrored through
+          # terminal_authority_projection / postwave_terminal_state / terminal_closure.
+          # These checks cannot be switched off by any key inside the mirrored document.
+          import hashlib
+          raw=Path("canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json").read_bytes()
+          blob=hashlib.sha1(b"blob %d\0" % len(raw) + raw).hexdigest()
+          proj=h["terminal_authority_projection"]
+          assert proj["authority_path"] == "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json"
+          assert proj["authority_git_blob_sha"] == blob, (proj["authority_git_blob_sha"], blob)
+          assert proj["projected_atomic_acceptance"] == f"{proved}_OF_{atom_total}_PROVED__{unresolved}_OF_{atom_total}_OPEN"
+          assert proj["projected_family_acceptance"] == f"{accepted}_OF_{total}_PASS__{open_count}_OF_{total}_OPEN"
+          assert h["postwave_terminal_state"]["terminal_goal_achieved"] is False
+          assert h["terminal_closure"]["override_allowed"] is False
+          assert h["terminal_closure"]["current_verdict"] == "NOT_ACHIEVED"
+          assert h["terminal_closure"]["manifest"] == "canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json"
+          cm=L("canonical/governance/TERMINAL_CLOSURE_MANIFEST_V1.json")
+          assert cm["current_machine_verdict"]["achieved"] is False
+          assert cm["open_family_count"] == open_count
+          assert cm["verified_closed_family_count"] == accepted
+          assert sum(1 for f in cm["families"] if f["closure_state"] == "PASS") == accepted
+          assert cm["acceptance_calibration"] and cm["reducer_verification"] and cm["terminal_predicates"]
 
           assert p["current_frontier"]["critical_blocker"] == b
           assert p["current_frontier"]["highest_leverage_capability_gap"] == b

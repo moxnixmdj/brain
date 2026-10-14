@@ -1009,11 +1009,12 @@
   },
   "terminal_authority_projection": {
     "authority_path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
-    "authority_git_blob_sha": "b1870974faf1579ea2da3b7000070b3d715fb8e2",
-    "source_commit_sha": "548061bf91476f381e58766e3e363aefb0a6882a",
-    "projected_atomic_acceptance": "14_OF_38_PROVED__24_OF_38_OPEN",
-    "projected_family_acceptance": "5_OF_19_PASS__14_OF_19_OPEN",
-    "rule": "NEXT_AND_ACCEPTANCE_COUNTS_DERIVED_FROM_CURRENT_TERMINAL_AUTHORITY__FAIL_CLOSED_ON_BLOB_OR_COUNT_DRIFT"
+    "authority_git_blob_sha": "964b6f5814db8fb58d3917770cae829fcdcad21e",
+    "source_commit_sha": "11d4d83547d8ac82c87818f90e2a39e2548d5888",
+    "projected_atomic_acceptance": "18_OF_38_PROVED__20_OF_38_OPEN",
+    "projected_family_acceptance": "7_OF_19_PASS__12_OF_19_OPEN",
+    "rule": "NEXT_AND_ACCEPTANCE_COUNTS_DERIVED_FROM_CURRENT_TERMINAL_AUTHORITY__FAIL_CLOSED_ON_BLOB_OR_COUNT_DRIFT",
+    "last_reprojection": "20261014__REPO_INTEGRITY_REPAIR__STALE_SINCE_548061bf__WAS_14_OF_38_AND_5_OF_19"
   },
   "current_acceptance_reconciliation": {
     "status": "CURRENT_TERMINAL_AUTHORITY_RECONCILED__5_OF_19_ACCEPTANCE_PASS__14_OF_38_ATOMIC_PROVED__24_OPEN",
