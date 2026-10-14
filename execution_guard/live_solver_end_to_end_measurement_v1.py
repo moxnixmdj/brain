@@ -309,6 +309,97 @@ NOT_MEASURED_HERE = {
 }
 
 
+# ----------------------------------------------------------------------------- reachability
+
+_FIXTURE_SUFFIX = {
+    "archive": ".tar.gz", "tar": ".tar.gz", "zip": ".zip", "json": ".json", "records": ".json", "manifest": ".json", "spec": ".json",
+    "config": ".json", "pdf": ".pdf", "markdown": ".md", "md": ".md", "docx": ".docx", "xlsx": ".xlsx", "spreadsheet": ".xlsx",
+    "sqlite": ".sqlite", "database": ".sqlite", "yaml": ".yaml", "csv": ".csv", "html": ".html", "image": ".png", "png": ".png",
+    "screenshot": ".png", "text": ".txt", "source": ".py", "python": ".py", "test": ".py",
+}
+_TYPED_EXAMPLE = {
+    "jq_filter": 'jq filter ".a"', "expression": 'expression "2*x+1"', "variables": "variables x=2, y=3", "x_value": "x value 3.5",
+    "y_value": "y value 2", "x_ticks": "x ticks [0, 1, 2]", "y_ticks": "y ticks [0, 5, 10]", "label": 'label "Curve A"',
+    "prompt": 'prompt "which phase is stable"', "pattern": 'pattern "test_*.py"', "test_argv": 'test argv "python3 -m unittest"',
+    "objective": 'objective "A is greater than B"', "spec": 'spec "{\\"relation\\": \\"gt\\"}"', "product": 'product "python"',
+    "major": "major version 3", "version_field": 'version field "version"', "field_name": 'field name "status"',
+    "expected_status": 'expected status "SUPPORTED"', "url_key": 'url key "release_url"', "authoritative": "authoritative true",
+    "max_age_s": "max age seconds 600", "url": "https://example.org/release.json", "text": 'text "hello world"',
+}
+
+
+def _output_suffix(entry: Mapping[str, Any], key: str) -> str:
+    declared = sorted({str(e)[len("structured.binary.encode."):] for e in (entry.get("provides") or [])
+                       if str(e).startswith("structured.binary.encode.") and str(e) != "structured.binary.encode"})
+    if len(declared) == 1:
+        return "." + declared[0].lower().lstrip(".")
+    stem = key[:-5].lower().replace("output_", "")
+    if stem in ("result", "report"):
+        return ".json"
+    if stem != "output" and stem in _FIXTURE_SUFFIX and stem not in ("source", "python", "test"):
+        return _FIXTURE_SUFFIX[stem]
+    blob = " ".join([str(x) for x in entry.get("provides", [])] + [str(x) for x in entry.get("keywords", [])] + [str(entry.get("adapter_module") or "")]).lower()
+    for markers, suffix in ((("xlsx", "spreadsheet", "workbook"), ".xlsx"), (("docx", "word"), ".docx"), (("pdf",), ".pdf"),
+                            (("sqlite", "database"), ".sqlite"), (("markdown",), ".md"), (("png", "qr", "barcode", "image", "screenshot"), ".png")):
+        if any(m in blob for m in markers):
+            return suffix
+    return ".json"
+
+
+def signature_goal(cid: str, entry: Mapping[str, Any], work: Path) -> tuple[str, list[Path]]:
+    """One sentence built ONLY from the capability's own registry declaration: its distinctive
+    words plus one explicitly stated value per declared input (fixture files for input paths)."""
+    from canonical.runtime import goal_compiler as gc
+    from canonical.runtime import goal_front_compiler_v1 as front
+    words = sorted((gc._tokens(entry.get("provides", [])) | gc._tokens(cid) | gc._tokens(entry.get("keywords", []))) - gc.GENERIC_MATCH_TOKENS)
+    parts, fixtures = [], []
+    for key in front.input_keys(entry):
+        if key == "goal":
+            continue
+        if key in _TYPED_EXAMPLE:
+            parts.append(_TYPED_EXAMPLE[key])
+        elif key.endswith("_path") and front._is_output_key(key):
+            parts.append("and save it to " + _rel(work / ("out_" + key + _output_suffix(entry, key))))
+        elif key.endswith("_path") or key in ("path", "source_root") or key.endswith("_paths"):
+            stem = key[:-5].lower() if key.endswith("_path") else key
+            if key == "source_root":
+                d = work / "src"; d.mkdir(exist_ok=True); fixtures.append(d); parts.append(_rel(d)); continue
+            name = {"path": "chart.png", "test_paths": "test_mod.py", "source_paths": "mod.py", "evidence_paths": "evidence.json"}.get(key, stem + _FIXTURE_SUFFIX.get(stem, ".json"))
+            f = work / name
+            f.write_bytes(b"fixture"); fixtures.append(f); parts.append(_rel(f))
+        else:
+            parts.append(key + ' "value"')
+    return "Use " + " ".join(words) + " on " + " ".join(parts), fixtures
+
+
+def reachability(work: Path) -> dict[str, Any]:
+    """Can the one entry reach every bound capability from a sentence? (compile + bind only, no execution)"""
+    from canonical.runtime import goal_compiler as gc
+    from canonical.runtime import goal_front_compiler_v1 as front
+    from canonical.runtime.live_integrated_brain_v1 import load_verified_registry
+    reg = gc._platform_admissible_registry(dict(load_verified_registry()))
+    work.mkdir(parents=True, exist_ok=True)
+    rows = []
+    for cid, entry in sorted(reg.items()):
+        if not front.is_plain_goal_routable(entry):
+            rows.append({"capability_id": cid, "state": "BLOCKED_ZERO_INPUT", "goal": None, "detail": "takes no input; never routable from a sentence"})
+            continue
+        goal, _fixtures = signature_goal(cid, entry, work)
+        try:
+            compiled = front.compile_goal(goal, reg, ROOT)
+            selected = compiled.get("selected_capability")
+            if selected == cid:
+                rows.append({"capability_id": cid, "state": "REACHED_AND_BOUND", "goal": goal, "detail": sorted(compiled.get("inputs") or {})})
+            else:
+                rows.append({"capability_id": cid, "state": "ROUTED_ELSEWHERE", "goal": goal, "detail": str(selected or compiled.get("compiler_mode"))})
+        except gc.GoalCompilationFailure as exc:
+            rows.append({"capability_id": cid, "state": "NOT_REACHABLE", "goal": goal, "detail": exc.code + ":" + str(exc.detail)[:120]})
+    counts: dict[str, int] = {}
+    for row in rows:
+        counts[row["state"]] = counts.get(row["state"], 0) + 1
+    return {"capabilities_total": len(rows), "counts": counts, "rows": rows}
+
+
 def _entry(name: str) -> Callable[[dict[str, Any]], dict[str, Any]]:
     if name == "old":
         from canonical.runtime.live_integrated_brain_v1 import run_raw_goal
@@ -386,6 +477,10 @@ def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], k
     if not kstar_existed and kstar_artifact.exists():
         kstar_artifact.unlink()  # written by the catch-all tool during fail-open runs of the old entry
     liveness = tool_liveness()
+    reach_work = ROOT / WORK / "reachability"
+    reach = reachability(reach_work)
+    if reach_work.exists():
+        shutil.rmtree(reach_work)
     return {
         "schema": SCHEMA,
         "authority": "NONE",
@@ -399,6 +494,7 @@ def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], k
         "python": sys.version.split()[0],
         "machine": {"platform": sys.platform, "network_egress": "allowlisted hosts only"},
         "tool_liveness": liveness,
+        "reachability_from_one_entry": reach,
         "families_not_measured_here": NOT_MEASURED_HERE,
         "measurements": results,
         "how_to_read": [
@@ -431,7 +527,8 @@ def main(argv: list[str] | None = None) -> int:
                       "tools": {"total": live["capabilities_total"], "adapter_missing": len(live["adapter_missing"]),
                                 "adapter_import_failed": len(live["adapter_import_failed"]),
                                 "external_dependency_missing_here": len(live["external_dependency_missing_here"]),
-                                "zero_input_capabilities": live["zero_input_capabilities"]}}, indent=2))
+                                "zero_input_capabilities": live["zero_input_capabilities"]},
+                      "reachability_from_one_entry": receipt["reachability_from_one_entry"]["counts"]}, indent=2))
     return 0
 
 
