@@ -124,7 +124,10 @@ def test_solve_fails_closed_on_out_of_scope_goal_and_writes_nothing():
     finally:
         _cleanup(task_id)
     assert result["pass"] is False
-    assert result["status"] == "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED"
+    # with zero-input tools blocked from plain goals (F4) nothing can match; before F4 the same
+    # goal reached admission and was rejected there - both are fail-closed with nothing written
+    assert result["status"] == "FAIL__RAW_GOAL_COMPILATION_GAP"
+    assert result["compiler_code"] == "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
     assert result["executed"] is False
     assert result["incremental_spend_usd"] == 0
     assert not out.exists()

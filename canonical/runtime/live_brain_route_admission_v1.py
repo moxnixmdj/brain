@@ -22,9 +22,15 @@ not about the goal:
                                non-success status (OPEN__, UNRESOLVED, FAIL...) can never
                                surface as an overall PASS
 
+  R6  PROMISED_ARTIFACT        after execution, every output file the goal named must exist
+                               and be non-empty, independently of what the tool reported
+
 Every rejection is a FAIL_CLOSED result with the evidence attached; nothing is executed,
-so no side effect happens.  ``solve`` is the fail-closed entry: compile, admit, then run
-``live_integrated_brain_v1.run_raw_goal``.  Zero credit, zero spend, zero models.
+so no side effect happens.  ``solve`` is THE live entry (one mouth): front-compile
+(``goal_front_compiler_v1`` - corrects the pinned compiler's measured defects and binds every
+registry input from an explicit grammar) -> admit -> execute through the same controller
+calls ``run_raw_goal`` makes -> tool-truth check -> promised-artifact check.
+Zero credit, zero spend, zero models.
 """
 from __future__ import annotations
 
@@ -33,13 +39,14 @@ import re
 from time import perf_counter_ns
 from typing import Any, Mapping
 
-from canonical.runtime import goal_compiler
+from canonical.runtime import astra_runtime, goal_compiler
+from canonical.runtime import goal_front_compiler_v1 as front
 from canonical.runtime.live_integrated_brain_v1 import (
     ROOT,
     SCHEMA as LIVE_SCHEMA,
     load_verified_registry,
-    run_raw_goal,
 )
+from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
 
 SCHEMA = "PROJECT_BRAIN_LIVE_BRAIN_ROUTE_ADMISSION_V1"
 _PATH_RE = re.compile(r"[A-Za-z0-9_./-]+/[A-Za-z0-9_.-]+")
@@ -125,7 +132,15 @@ def tool_truth_errors(result: Mapping[str, Any]) -> list[str]:
     That must never surface as PASS.
     """
     errors: list[str] = []
-    rows = result.get("execution") if isinstance(result.get("execution"), list) else []
+    rows = list(result.get("execution")) if isinstance(result.get("execution"), list) else []
+    if not rows:
+        controller = result.get("controller_execution")
+        trace = controller.get("trace") if isinstance(controller, Mapping) else None
+        for step in trace if isinstance(trace, list) else []:
+            if isinstance(step, Mapping) and isinstance(step.get("result"), Mapping):
+                action = step.get("action") if isinstance(step.get("action"), Mapping) else {}
+                args = action.get("args") if isinstance(action.get("args"), Mapping) else {}
+                rows.append({"capability_id": args.get("capability_id") or action.get("type"), "result": step.get("result")})
     for row in rows:
         inner = row.get("result") if isinstance(row, Mapping) else None
         if not isinstance(inner, Mapping):
@@ -138,33 +153,118 @@ def tool_truth_errors(result: Mapping[str, Any]) -> list[str]:
     return errors
 
 
+def _fail(task_id: str, status: str, failure_class: str, started: int, **extra: Any) -> dict[str, Any]:
+    out = {"schema": LIVE_SCHEMA, "status": status, "pass": False, "task_id": task_id, "failure_class": failure_class,
+           "executed": extra.pop("executed", False), "elapsed_ns": perf_counter_ns() - started, "incremental_spend_usd": 0}
+    out.update(extra)
+    return out
+
+
+def _controller_passed(controller: Any) -> bool:
+    return (
+        isinstance(controller, Mapping)
+        and controller.get("returncode") == 0
+        and controller.get("controller_mode") == "MODEL_INDEPENDENT_ACTION_PLAN"
+        and controller.get("cognition_dependency_class") == "MODEL_INDEPENDENT"
+        and controller.get("model_dependency_count") == 0
+        and isinstance(controller.get("final_summary"), str)
+        and bool(controller.get("final_summary").strip())
+    )
+
+
+def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: Mapping[str, Mapping[str, Any]], started: int) -> dict[str, Any]:
+    """Execute a compiled plan with the same controller calls ``run_raw_goal`` makes."""
+    controller_actions = compiled.get("controller_actions")
+    selected = str(compiled.get("selected_capability") or "").strip()
+    routing_targets = list(compiled.get("target_effects") or [])
+    if not routing_targets:
+        for part in compiled.get("compiled_parts") or []:
+            if isinstance(part, Mapping):
+                routing_targets.extend(e for e in part.get("target_effects") or [] if isinstance(e, str) and e not in routing_targets)
+    raw_contract = compile_contract(goal, source_id="user", routing_target_effects=routing_targets)
+    if raw_contract.get("pass") is not True:
+        return _fail(task_id, "FAIL__LOSSLESS_RAW_TASK_CONTRACT", "RAW_TASK_OBLIGATION_ENVELOPE_FAILURE", started, errors=raw_contract.get("errors"))
+    execution_rows: list[dict[str, Any]] = []
+    if controller_actions is None:
+        if not selected or selected not in admissible or not isinstance(compiled.get("inputs"), Mapping):
+            return _fail(task_id, "FAIL__COMPILED_SHAPE_NOT_EXECUTABLE", "RAW_GOAL_COMPILED_SHAPE_GAP", started, compiler_mode=compiled.get("compiler_mode"))
+        action = goal_compiler._render_template(admissible[selected]["action_template"], dict(compiled["inputs"]))
+        controller_actions = [action, {"type": "finish", "args": {"summary": "RAW_GOAL_COMPLETE"}}]
+    if not isinstance(controller_actions, list) or not controller_actions or len(controller_actions) > 64 or any(not isinstance(a, Mapping) for a in controller_actions):
+        return _fail(task_id, "FAIL__COMPILED_CONTROL_PLAN_INVALID", "LIVE_RUNTIME_COMPOSITION_CONTRACT_INVALID", started, compiler_mode=compiled.get("compiler_mode"))
+    try:
+        controller = astra_runtime.run_goal(
+            {"id": "live-raw-goal-controller", "controller_actions": [dict(a) for a in controller_actions], "max_controller_actions": 64},
+            {"mission_id": task_id, "goal": goal},
+        )
+    except Exception as exc:
+        return _fail(task_id, "FAIL__LIVE_CONTROLLER_EXECUTION", "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE", started, executed=True,
+                     compiled_capability_id=selected or None, compiler_mode=compiled.get("compiler_mode"), reason=type(exc).__name__ + ":" + str(exc))
+    passed = _controller_passed(controller)
+    trace = controller.get("trace") if isinstance(controller, Mapping) and isinstance(controller.get("trace"), list) else []
+    checkpoint = controller.get("controller_checkpoint") if isinstance(controller, Mapping) and isinstance(controller.get("controller_checkpoint"), Mapping) else {}
+    if selected:
+        first_result = trace[0].get("result") if trace and isinstance(trace[0], Mapping) and isinstance(trace[0].get("result"), Mapping) else None
+        passed = passed and isinstance(first_result, Mapping)
+        execution_rows.append({"capability_id": selected, "pass": passed,
+                               "status": "PASS__MODEL_INDEPENDENT_CONTROLLER_ACTION" if passed else "FAIL__MODEL_INDEPENDENT_CONTROLLER_ACTION",
+                               "result": dict(first_result) if isinstance(first_result, Mapping) else None,
+                               "execution_proof_type": "MODEL_INDEPENDENT_CONTROLLER_TRACE_V1",
+                               "controller_plan_sha256": checkpoint.get("plan_sha256"), "controller_trace": list(trace)})
+    return {
+        "schema": LIVE_SCHEMA,
+        "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED" if passed else "FAIL__LIVE_CONTROLLER_RESULT_INVALID",
+        "pass": passed, "task_id": task_id, "executed": True, "raw_goal": goal,
+        "raw_goal_sha256": raw_contract["task_sha256"], "raw_task_contract_sha256": raw_contract["task_contract_sha256"],
+        "raw_acceptance_obligation_count": len(raw_contract["acceptance_contract"]["obligations"]),
+        "compiler_mode": compiled.get("compiler_mode"), "compiled_capability_id": selected or None,
+        "selected_plan": [selected] if selected else [], "compiled_part_count": len(compiled.get("compiled_parts") or []),
+        "controller_action_count": len(controller_actions), "execution": execution_rows,
+        "controller_execution": dict(controller) if isinstance(controller, Mapping) else controller,
+        "controller_checkpoint": dict(checkpoint),
+        "cognition_dependency_class": controller.get("cognition_dependency_class") if isinstance(controller, Mapping) else None,
+        "model_dependency_count": controller.get("model_dependency_count") if isinstance(controller, Mapping) else None,
+        "routing_success_authority": False, "semantic_acceptance_complete": False, "accepted_raw_obligation_ids": [],
+        "elapsed_ns": perf_counter_ns() - started, "incremental_spend_usd": 0, "benchmark_specific": False, "terminal_credit_delta": 0,
+    }
+
+
+def promised_artifact_errors(goal: str, future_artifacts: list[str]) -> list[str]:
+    """R6: every output file the goal named must now exist and be non-empty."""
+    errors = []
+    for raw in future_artifacts:
+        p = ROOT / raw
+        if not p.is_file():
+            errors.append("PROMISED_ARTIFACT_MISSING:" + raw)
+        elif p.stat().st_size == 0:
+            errors.append("PROMISED_ARTIFACT_EMPTY:" + raw)
+    return errors
+
+
 def solve(request: Mapping[str, Any]) -> dict[str, Any]:
-    """Fail-closed live Brain entry: compile -> admit -> execute (run_raw_goal)."""
+    """THE live Brain entry: front-compile -> admit -> execute -> tool truth -> promised artifacts."""
     started = perf_counter_ns()
     task_id = str((request or {}).get("task_id") or "").strip()
     goal = str((request or {}).get("goal") or "").strip()
     if not task_id or not goal:
-        return {"schema": LIVE_SCHEMA, "status": "FAIL_CLOSED", "pass": False, "task_id": task_id,
-                "failure_class": "REQUEST_INVALID", "elapsed_ns": perf_counter_ns() - started, "incremental_spend_usd": 0}
+        return _fail(task_id, "FAIL_CLOSED", "REQUEST_INVALID", started)
     try:
         registry = load_verified_registry()
         admissible = goal_compiler._platform_admissible_registry(dict(registry))
-        compiled = goal_compiler.compile_goal(goal, admissible, ROOT)
+        compiled = front.compile_goal(goal, admissible, ROOT)
     except goal_compiler.GoalCompilationFailure as exc:
-        return {"schema": LIVE_SCHEMA, "status": "FAIL__RAW_GOAL_COMPILATION_GAP", "pass": False, "task_id": task_id,
-                "failure_class": "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP", "compiler_code": exc.code, "compiler_detail": exc.detail,
-                "route_admission": None, "elapsed_ns": perf_counter_ns() - started, "incremental_spend_usd": 0}
+        return _fail(task_id, "FAIL__RAW_GOAL_COMPILATION_GAP", "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP", started,
+                     compiler_code=exc.code, compiler_detail=exc.detail, route_admission=None)
     except Exception as exc:  # pragma: no cover - defensive, mirrors run_raw_goal
-        return {"schema": LIVE_SCHEMA, "status": "FAIL_CLOSED", "pass": False, "task_id": task_id,
-                "failure_class": "RAW_GOAL_INTEGRATION_RUNTIME_ERROR", "reason": type(exc).__name__ + ":" + str(exc),
-                "elapsed_ns": perf_counter_ns() - started, "incremental_spend_usd": 0}
-    admission = route_admission(goal, compiled, admissible)
+        return _fail(task_id, "FAIL_CLOSED", "RAW_GOAL_INTEGRATION_RUNTIME_ERROR", started, reason=type(exc).__name__ + ":" + str(exc))
+    normalized = front.normalize_goal(goal)
+    future_artifacts = _future_artifacts(normalized)
+    admission = route_admission(normalized, compiled, admissible)
+    admission["front_compiler_rules"] = list((compiled.get("front_compiler") or {}).get("rules_applied") or [])
     if admission.get("admitted") is not True:
-        return {"schema": LIVE_SCHEMA, "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED", "pass": False, "task_id": task_id,
-                "failure_class": "ROUTE_ADMISSION_REJECTED:" + str(admission.get("rule")), "compiled_capability_id": admission.get("selected_capability"),
-                "compiler_mode": compiled.get("compiler_mode"), "route_admission": admission, "executed": False,
-                "elapsed_ns": perf_counter_ns() - started, "incremental_spend_usd": 0}
-    result = run_raw_goal({"task_id": task_id, "goal": goal})
+        return _fail(task_id, "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED", "ROUTE_ADMISSION_REJECTED:" + str(admission.get("rule")), started,
+                     compiled_capability_id=admission.get("selected_capability"), compiler_mode=compiled.get("compiler_mode"), route_admission=admission)
+    result = _execute(task_id, goal, compiled, admissible, started)
     result["route_admission"] = admission
     truth = tool_truth_errors(result)
     if truth and result.get("pass") is True:
@@ -174,4 +274,12 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         result["failure_class"] = "TOOL_REPORTED_NON_SUCCESS"
         result["tool_truth_errors"] = truth
         result["side_effects_may_exist"] = True
+    missing = promised_artifact_errors(goal, future_artifacts) if result.get("pass") is True else []
+    if missing:
+        result["runtime_status_before_artifact_check"] = result.get("status")
+        result["status"] = "FAIL_CLOSED__PROMISED_ARTIFACT_MISSING"
+        result["pass"] = False
+        result["failure_class"] = "PROMISED_ARTIFACT_MISSING"
+        result["promised_artifact_errors"] = missing
+    result["elapsed_ns"] = perf_counter_ns() - started
     return result
