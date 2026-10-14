@@ -1,0 +1,191 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "date": "2026-10-14",
+  "action_id": "TRUE_CAPABILITY_AUDIT_AND_DOCX_MEASUREMENT_20261014_V1",
+  "canonical_generation": "2026-10-10-general-reusable-capability-frontier-v1",
+  "canonical_base_commit": "d99d49d3dcc3a646f07373d28a3a5fe22b4235b9",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_REUSABLE_CAPABILITY_DEVELOPMENT_PROGRAM_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "action_kind": "GOVERNANCE_GUARD",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "weakens_existing_guard": false,
+  "causal_blocker": "CAPABILITY_CLAIMS_WITHOUT_FRESH_INSTANCE_RECEIPTS__15_OF_19_FAMILY_ROUTES_DEPEND_ON_AN_EXTERNAL_MODEL_OR_SERVICE__NO_LEDGER_OF_WHAT_BRAIN_CAN_ACTUALLY_DO",
+  "blocker_lease_key": "2026-10-10-general-reusable-capability-frontier-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::CAPABILITY_CLAIMS_WITHOUT_FRESH_INSTANCE_RECEIPTS__15_OF_19_FAMILY_ROUTES_DEPEND_ON_AN_EXTERNAL_MODEL_OR_SERVICE__NO_LEDGER_OF_WHAT_BRAIN_CAN_ACTUALLY_DO",
+  "highest_leverage_now": true,
+  "selected_route": "CLASSIFY_ALL_19_FAMILY_ROUTES_UNDER_THE_TRUE_CAPABILITY_LAW__MEASURE_DOCX_EXACT_TEXT_EDIT_ON_FRESH_INSTANCES_WITH_INDEPENDENT_STDLIB_ORACLES__FIX_THE_DEFECT_THE_MEASUREMENT_FOUND__RECORD_RECEIPTS_WITH_AUTHORITY_NONE",
+  "prior_work_reused": [
+    "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+    "execution_guard/true_capability_harness_v1.py",
+    "canonical/capabilities/true/specs/SACCR_CREDIT_ADDON_V1.json",
+    "canonical/runtime/docx_exact_text_edit.py",
+    "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
+  ],
+  "falsification_condition": "A_FAMILY_ROUTE_CONTAINING_AN_EXTERNAL_MODEL_IS_CLASSIFIED_AS_A_BRAIN_CAPABILITY__OR_A_MEASURED_PASS_COMPONENT_HAS_NO_LEDGER_ROW_WITH_VERDICT_PASS__OR_THE_DOCX_SPEC_CANNOT_FAIL_ON_A_BROKEN_SOLVER",
+  "expected_parent_change": "EVERY_CAPABILITY_CLAIM_IN_THE_REPOSITORY_HAS_A_CLASSIFICATION_UNDER_THE_LAW__TWO_COMPONENTS_HAVE_FRESH_INSTANCE_RECEIPTS__ZERO_CREDIT",
+  "expected_parent_frontier_change": "EVERY_CAPABILITY_CLAIM_IN_THE_REPOSITORY_HAS_A_CLASSIFICATION_UNDER_THE_LAW__TWO_COMPONENTS_HAVE_FRESH_INSTANCE_RECEIPTS__ZERO_CREDIT",
+  "stop_condition": "AUDIT_COVERS_19_OF_19_FAMILIES__DOCX_SPEC_3000_OF_3000_FRESH_INSTANCES__TWO_MUTANTS_REJECTED__AUDIT_CONSISTENT_WITH_LEDGER_TEST_PASSES__REFEREE_STATIC_AND_DIFF_RULES_ZERO_VIOLATIONS__ZERO_TERMINAL_CREDIT__ZERO_SCOREBOARD_CHANGE",
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "success_probability_lcb": "1/2",
+    "wall_clock_cost_ub": "1",
+    "interpretation": "DISCHARGES_NOTHING__CLOSES_THE_GAP_SHARED_BY_ALL_13_OPEN_OBLIGATIONS_THAT_NO_CLAIM_OF_CAPABILITY_IS_MEASURED_ON_UNSEEN_INSTANCES_BY_AN_INDEPENDENT_ORACLE__UNLOCK_LCB_1_COUNTS_THE_MEASUREMENT_PATH_NOT_A_BENCHMARK_RESULT__SUCCESS_LCB_1_2_BECAUSE_SANDBOX_RECEIPTS_ARE_NON_CREDITING_UNTIL_THE_PUBLIC_RUNNER_REPEATS_THEM"
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "proof_state_reachability": "NOT_APPLICABLE__GOVERNANCE_GUARD",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "TRUE_CAPABILITY_AUDIT_AND_DOCX_MEASUREMENT_20261014_V1",
+      "falsifier_id": "HARNESS_MUTANTS_AND_AUDIT_LEDGER_CONSISTENCY",
+      "decisive_question": "DOES_ANY_CLAIM_SURVIVE_WITHOUT_A_RECEIPT_OR_AN_HONEST_CLASSIFICATION",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [],
+      "no_known_counterexample_reason": "ALL_19_FAMILIES_CLASSIFIED__BOTH_MEASURED_COMPONENTS_HAVE_PASS_LEDGER_ROWS__MUTANTS_REJECTED"
+    }
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-10-general-reusable-capability-frontier-v1",
+    "canonical_base_commit": "d99d49d3dcc3a646f07373d28a3a5fe22b4235b9",
+    "real_outcome": "TRUE_CAPABILITY_AUDIT_OF_ALL_CLAIMS_PLUS_SECOND_MEASURED_COMPONENT",
+    "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "obs_goal": {
+      "real_outcome": "A_LEDGER_THAT_SAYS_ONLY_WHAT_BRAIN_CAN_ACTUALLY_DO",
+      "proxy_goals_deleted": [
+        "MATRIX_STATUS_WORDS_PASS_VERIFIED_CEILING_AS_EVIDENCE"
+      ],
+      "surviving_necessity": "FRESH_INSTANCE_RECEIPT_FROM_AN_INDEPENDENT_ORACLE_PER_COMPONENT"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "TRUE_CAPABILITY_HARNESS_V1",
+        "SACCR_CREDIT_ADDON_V1_SPEC_PATTERN"
+      ],
+      "external_existing_routes_checked": [
+        "PYTHON_DOCX_AS_DIFFERENTIAL_ORACLE__NOT_AVAILABLE_ON_THE_PLAIN_RUNNER_SO_STDLIB_ORACLES_USED"
+      ],
+      "capability_work_deleted": [
+        "NONE"
+      ],
+      "surviving_gap": "SIX_MEASURABLE_COMPONENTS_STILL_UNSPECIFIED__CAD_NEEDS_CADQUERY_ON_THE_PUBLIC_RUNNER"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_MISSING_MEASUREMENTS",
+      "delete_bypass_substitute_options": [
+        "CLASSIFY_FIRST_THEN_MEASURE_IN_ORACLE_STRENGTH_ORDER"
+      ],
+      "surviving_causal_blocker": "ONE_SPEC_PER_COMPONENT_STILL_TO_WRITE"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "AUDIT_PLUS_DOCX_SPEC_NOW",
+        "FILE_LEVEL_AUDIT_OF_2000_RUNTIME_FILES_REJECTED_FOR_THIS_PASS_TOO_SLOW_AND_UNVERIFIABLE_IN_ONE_STEP"
+      ],
+      "losing_routes_reason": "CLAIM_LEVEL_AUDIT_IS_COMPLETE_AND_CHECKABLE_TODAY__FILE_LEVEL_CONTINUES_IN_LATER_PULL_REQUESTS",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "HARNESS_RUN_3000_INSTANCES__TWO_MUTANTS__AUDIT_LEDGER_CONSISTENCY_TEST__REFEREE_RULES"
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "CAPABILITY_WORDING_IN_THE_OWNERSHIP_MATRIX_FOR_MODEL_ROUTES__OWNER_DECISION_PENDING"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "SACCR_SPEC_PATTERN"
+      ],
+      "fresh_reuse_plan": "SAME_ORACLE_FAMILY_FOR_THE_SIX_REMAINING_DOCX_SKILLS"
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "NONE"
+      ],
+      "search_stop_decision": "ALL_19_FAMILIES_CLASSIFIED_AND_DOCX_SPEC_PASSES_WITH_MUTANTS_REJECTED",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "CLASSIFY_ALL_19_FAMILY_ROUTES_UNDER_THE_TRUE_CAPABILITY_LAW__MEASURE_DOCX_EXACT_TEXT_EDIT_ON_FRESH_INSTANCES_WITH_INDEPENDENT_STDLIB_ORACLES__FIX_THE_DEFECT_THE_MEASUREMENT_FOUND__RECORD_RECEIPTS_WITH_AUTHORITY_NONE",
+      "FILE_LEVEL_AUDIT_OF_ALL_RUNTIME_FILES_IN_ONE_PASS__REJECTED_TOO_SLOW",
+      "MEASURE_CAD_FIRST__REJECTED_CADQUERY_UNAVAILABLE_IN_SANDBOX"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MATRIX_STATUS_WORDS_AS_EVIDENCE"
+    ],
+    "selected_surviving_route": "CLASSIFY_ALL_19_FAMILY_ROUTES_UNDER_THE_TRUE_CAPABILITY_LAW__MEASURE_DOCX_EXACT_TEXT_EDIT_ON_FRESH_INSTANCES_WITH_INDEPENDENT_STDLIB_ORACLES__FIX_THE_DEFECT_THE_MEASUREMENT_FOUND__RECORD_RECEIPTS_WITH_AUTHORITY_NONE",
+    "why_selected_route_is_fastest_sufficient": "CLASSIFICATION_IS_COMPLETE_TODAY_AND_THE_DOCX_COMPONENT_HAS_THE_STRONGEST_AVAILABLE_STDLIB_ORACLES",
+    "expected_parent_level_state_change": "EVERY_CAPABILITY_CLAIM_IN_THE_REPOSITORY_HAS_A_CLASSIFICATION_UNDER_THE_LAW__TWO_COMPONENTS_HAVE_FRESH_INSTANCE_RECEIPTS__ZERO_CREDIT",
+    "stop_condition": "AUDIT_COVERS_19_OF_19_FAMILIES__DOCX_SPEC_3000_OF_3000_FRESH_INSTANCES__TWO_MUTANTS_REJECTED__AUDIT_CONSISTENT_WITH_LEDGER_TEST_PASSES__REFEREE_STATIC_AND_DIFF_RULES_ZERO_VIOLATIONS__ZERO_TERMINAL_CREDIT__ZERO_SCOREBOARD_CHANGE",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "GOVERNANCE_GUARD_ONLY__NO_CAPABILITY_ROUTE_IS_DISCOVERED_OR_CLAIMED"
+    }
+  },
+  "benchmark_or_family_rank_authority": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "explicit_user_authorization": "Owner instruction 2026-10-14: 'forget about the benchmarks... focus on the capabilities... our tests must be totally true'; Track B step 1 (audit every claimed capability) acknowledged by the owner ('So what now?' -> plan; 'Forget about the keys' -> proceed)."
+}

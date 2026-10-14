@@ -1,6 +1,36 @@
 {
   "authority": "NONE",
   "rows": {
+    "DOCX_EXACT_TEXT_EDIT_V1": {
+      "canary_pass": "0/0",
+      "carrier": "SANDBOX",
+      "claim": "Given a .docx package and an exact text-node value that occurs exactly once in word/document.xml, produce a package in which that single text node is replaced and every other package member is byte-identical; when the value occurs zero or several times, fail closed and write nothing.",
+      "fresh_pass_rate": 1.0,
+      "independent_oracle_ids": [
+        "EXPECTED_OUTCOME",
+        "PACKAGE_INTEGRITY",
+        "INVERSE_EDIT_RESTORES"
+      ],
+      "instances": 3000,
+      "latest_receipt": "canonical/capabilities/true/receipts/DOCX_EXACT_TEXT_EDIT_V1__1ec1c01b914478ca.json",
+      "measured_utc": "2026-10-14T17:55:14Z",
+      "oracle_classes": {
+        "EXPECTED_OUTCOME": "ANALYTIC_CLOSED_FORM",
+        "INVERSE_EDIT_RESTORES": "METAMORPHIC",
+        "PACKAGE_INTEGRITY": "PROPERTY"
+      },
+      "scope_limits": [
+        "NO replacement of text spanning several runs or text nodes",
+        "NO visual-layout, tracked-changes, comments, headers/footers or numbering guarantees",
+        "NO general DOCX editing; one exact text node per call",
+        "NO no-op edits: new == old fails closed by design and is outside the input class"
+      ],
+      "seed_source": "OS_URANDOM",
+      "solver_git_blob_sha": "c137d9d05de3822a0bac6f2d52d1f4446f2682da",
+      "spec_path": "canonical/capabilities/true/specs/DOCX_EXACT_TEXT_EDIT_V1.json",
+      "status": "MEASURED_SANDBOX",
+      "verdict": "PASS"
+    },
     "SACCR_CREDIT_ADDON_V1": {
       "canary_pass": "1/1",
       "carrier": "SANDBOX",

@@ -1,0 +1,85 @@
+{
+  "authority": "NONE",
+  "banned_modules_detected": [],
+  "blobs": {
+    "generator": {
+      "git_blob_sha": "7caca53ce6a6964221349a59665aa6c1edb0943f",
+      "path": "canonical/capabilities/true/generators/docx_exact_text_edit_gen_v1.py",
+      "sha256": "274d5d3a6f9e98cf4c3fd6e045db0ed3e5727d252cd37431cecabad09c30b2b4"
+    },
+    "oracles": {
+      "git_blob_sha": "97f196fca3956a1b2252779d88fc53ef0a45a52e",
+      "path": "canonical/capabilities/true/oracles/docx_exact_text_edit_oracles_v1.py",
+      "sha256": "1354f63a0fe25e9e843a309ce716c3d7252565d3e4fce94feeef9c88278904b5"
+    },
+    "solver": {
+      "git_blob_sha": "c137d9d05de3822a0bac6f2d52d1f4446f2682da",
+      "path": "canonical/runtime/docx_exact_text_edit.py",
+      "sha256": "5f7667c43064e6a70b3680908def12c3caf78ed6b1a98a252b4e6d84a3cca53e"
+    }
+  },
+  "canaries": [],
+  "canary_pass": "0/0",
+  "capability_id": "DOCX_EXACT_TEXT_EDIT_V1",
+  "carrier": "SANDBOX",
+  "claim": "Given a .docx package and an exact text-node value that occurs exactly once in word/document.xml, produce a package in which that single text node is replaced and every other package member is byte-identical; when the value occurs zero or several times, fail closed and write nothing.",
+  "failures_sample": [],
+  "fresh_pass_rate": 1.0,
+  "github": {
+    "GITHUB_REF": null,
+    "GITHUB_REPOSITORY": null,
+    "GITHUB_RUN_ATTEMPT": null,
+    "GITHUB_RUN_ID": null,
+    "GITHUB_SHA": null
+  },
+  "independent_oracle_ids": [
+    "EXPECTED_OUTCOME",
+    "PACKAGE_INTEGRITY",
+    "INVERSE_EDIT_RESTORES"
+  ],
+  "instance_pass": 3000,
+  "instances": 3000,
+  "kind": "FRESH_INSTANCE_MEASUREMENT",
+  "network_blocked": true,
+  "nonstdlib_modules_loaded": [],
+  "oracle_classes": {
+    "EXPECTED_OUTCOME": "ANALYTIC_CLOSED_FORM",
+    "INVERSE_EDIT_RESTORES": "METAMORPHIC",
+    "PACKAGE_INTEGRITY": "PROPERTY"
+  },
+  "pass_threshold": 1.0,
+  "per_oracle": {
+    "EXPECTED_OUTCOME": {
+      "error": 0,
+      "fail": 0,
+      "pass": 3000
+    },
+    "INVERSE_EDIT_RESTORES": {
+      "error": 0,
+      "fail": 0,
+      "pass": 3000
+    },
+    "PACKAGE_INTEGRITY": {
+      "error": 0,
+      "fail": 0,
+      "pass": 3000
+    }
+  },
+  "python": "3.11.2",
+  "replay": false,
+  "schema": "TRUE_CAPABILITY_RECEIPT_V1",
+  "scope_limits": [
+    "NO replacement of text spanning several runs or text nodes",
+    "NO visual-layout, tracked-changes, comments, headers/footers or numbering guarantees",
+    "NO general DOCX editing; one exact text node per call",
+    "NO no-op edits: new == old fails closed by design and is outside the input class"
+  ],
+  "seed": "1ec1c01b914478ca7571f675e77b80b6420af16fd02601445f801d3cc364fc1e",
+  "seed_source": "OS_URANDOM",
+  "self_description": "Measurement of a solver on instances generated after the solver was frozen, judged by oracles in separate files. authority NONE: it records what was observed on this carrier and grants no credit; only a referee-signed run on a public runner may be cited.",
+  "solver_errors": 0,
+  "spec_path": "canonical/capabilities/true/specs/DOCX_EXACT_TEXT_EDIT_V1.json",
+  "spec_sha256": "d2a47f71f9bf232ff39cf1502f6716bd30e494dbca841242f0fa9b8a0de596f0",
+  "verdict": "PASS",
+  "wall_seconds": 17.035
+}
