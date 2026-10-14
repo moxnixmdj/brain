@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_NECESSITY_COUNTERMODEL_AUDIT_20261014_V1",
+  "date": "2026-10-14",
+  "status": "AUDIT_COMPLETE__CANDIDATES_RANKED__NO_TRUTH_DELETED_BY_THIS_AUDIT__ZERO_CREDIT",
+  "method": "Replicate the only two verified truth-deletion constructions in Brain history (COMPOSITION_COMPONENT_SCOPED_PROOFS and ARTIFACT_AA_BRIEFCASE_GE_1822, both closed by necessity countermodels, 2 attempted / 2 succeeded): a truth is deletable iff a finite countermodel satisfies every other frozen premise while the target truth fails, proving non-necessity or duplication. Score-bearing frozen predicates with owner-refreshed bars are NOT deletable by construction (bar is definitional).",
+  "basis": {"checkpoint_claims": "7_SATISFIED_12_OPEN_OPUS_CHECKPOINT_EPOCH_V1__bb1252961373b59c", "load_bearing_truths": "22_ATOMIC_PLUS_8_META_EQUALS_30", "historical_deletions": 2},
+  "family_audit": [
+    {"family": "MULTI_CAPABILITY_COMPOSITION", "class": "STRONG_COUNTERMODEL_CANDIDATE", "reason": "Direct precedent: composition component-scoped proofs already deleted one composition truth by countermodel (2026-10-06). Residual parent may be implied by 4/12 admissible interfaces plus component truths; countermodel = composed system satisfying all component truths while parent fails only through a quarantined channel (#4694 inventory bounds the failure modes).", "falsifier_packet": "Construct finite composition world: components pass, 4 declared channels sha-bound, 4 quarantined channels disabled; test parent necessity.", "p_deletable": 0.45},
+    {"family": "ARTIFACT_CREATION", "class": "STRONG_COUNTERMODEL_CANDIDATE", "reason": "Alias-duplication precedent: ARTIFACT_AA_BRIEFCASE_GE_1822 already deleted as duplicate truth. Remaining artifact scope may be covered by Professional 24/24 property truth plus CC_R1-R4 claim pack; countermodel = artifact task satisfying professional totality while standalone artifact predicate fails only on alias identity.", "falsifier_packet": "Reuse professional semantic V10 batch (24/24) as satisfying assignment; vary only artifact-alias predicate.", "p_deletable": 0.40},
+    {"family": "UNKNOWN_DOMAIN_ADAPTATION", "class": "MODERATE_CANDIDATE", "reason": "Meta-like family: may be implied by general capability frontier plus quotient/transfer interface; countermodel requires a domain outside existing family transforms (which is also the Wave-5 mapping check; finding one OPENS scope honestly instead).", "falsifier_packet": "Run Wave-5 mapping check first; countermodel only if mapping succeeds for all 5 probe domains.", "p_deletable": 0.30},
+    {"family": "COMMUNICATION_AND_SYNTHESIS", "class": "MODERATE_CANDIDATE", "reason": "Synthesis quality wake already subsumed by scope-complete dimensional top law (sky Step 2 PASS). Residual may duplicate professional synthesis claims.", "falsifier_packet": "Test duplication against professional V10 semantic batch claims before any new construction.", "p_deletable": 0.30},
+    {"family": "ADVANCED_AGENTIC_CODING", "class": "NOT_DELETABLE_CAPABILITY_REAL", "reason": "Frozen score predicates (TB4 66.4 / FrontierCode 54.4 / CursorBench 57.8) are definitional bars; gap is capability breadth (Step 2), not truth necessity.", "p_deletable": 0.02},
+    {"family": "PROFESSIONAL_KNOWLEDGE_WORK", "class": "NOT_DELETABLE_OWNER_GATED", "reason": "Property truth 24/24 closed internally; residual is owner-run Elo (GDPval/AA). No internal countermodel can delete an external measurement definition.", "p_deletable": 0.02},
+    {"family": "FINANCIAL_ANALYSIS", "class": "NOT_DELETABLE_EXTERNAL_OBSERVATION", "reason": "R2 V91 zero internal residuals; residual is one task-specific external observation by construction.", "p_deletable": 0.02},
+    {"family": "AGENTIC_SCIENTIFIC_RESEARCH", "class": "NOT_DELETABLE_CAPABILITY_REAL", "reason": "TB-Science serial slots; capability plus fresh admission required.", "p_deletable": 0.02},
+    {"family": "BUSINESS_WORKFLOW_AUTOMATION", "class": "NOT_DELETABLE_OWNER_GATED", "reason": "AutomationBench owner route (Anthropic) definitional.", "p_deletable": 0.05},
+    {"family": "COMPUTER_AND_BROWSER_USE", "class": "NOT_DELETABLE_CAPABILITY_REAL", "reason": "OSWorld surface + OmniParser harvest qualification outstanding (#4340/#4343).", "p_deletable": 0.02},
+    {"family": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING", "class": "NOT_DELETABLE_CAPABILITY_REAL", "reason": "Chartography residual plus dense non-chart scope; held-out zero.", "p_deletable": 0.02},
+    {"family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING", "class": "NOT_DELETABLE_CAPABILITY_REAL", "reason": "HLE-class bar (67.7) definitional; harness route public (Step 2.5).", "p_deletable": 0.02}
+  ],
+  "meta_audit": [
+    {"obligation": "CYBERSECURITY / BIOLOGY_R&D / AUTOMATED_AI_R&D / HEALTHCARE / ARXIVMATH mapping checks", "class": "EXECUTE_AS_MAPPING_CHECKS", "p_close_each": 0.75, "note": "Mapping closes; genuine counterexample opens a family honestly (check passing either way). Highest certainty yield in system."},
+    {"obligation": "MULTILINGUAL_PARITY", "class": "CONDITION_PARITY_CANDIDATE", "p_close": 0.40},
+    {"obligation": "LONG_CONTEXT_PARITY", "class": "CONDITION_PARITY_CANDIDATE", "p_close": 0.40},
+    {"obligation": "CREATIVE_DIAGRAM", "class": "BASIS_REPAIR_REQUIRED", "p_close": 0.50, "note": "Dormant: no acceptance basis exists; build minimum basis first."}
+  ],
+  "aggregate_predicates": [
+    {"predicate": "donor_dependent_required_behaviors_zero / final_donor_deletion_cleanroom_pass", "class": "NOT_DELETABLE_REQUALIFICATION_REQUIRED", "note": "Wave 6 V2 protocol (10 requirements) only."},
+    {"predicate": "proof_bundle_frozen", "class": "SEQUENCING_BLOCKED", "note": "Freezes only after acceptance predicates close; cannot be countermodelled early."},
+    {"predicate": "CLOSE_AGGREGATE_FROZEN_PROTOCOL_AND_OWNERSHIP_PREDICATE", "class": "DERIVED", "note": "Single gate blocker; discharges automatically when families + donor close. Not independently actionable."}
+  ],
+  "expected_yield": {"deletions_expected": 1.47, "basis": "0.45+0.40+0.30+0.30 plus long-tail 0.02s; consistent with plan estimate 1-2", "meta_expected_14d": 5.05},
+  "next_serialized_intents": ["FALSIFIER_COMPOSITION_PARENT_NECESSITY", "FALSIFIER_ARTIFACT_ALIAS_DUPLICATION", "META_MAPPING_CHECKS_X5", "STEP_2_CODING_V10_COVER", "STEP_1A_CAPSULE_SHARDED_PRE_REGRESSION"],
+  "accounting": {"truths_deleted_by_this_audit": 0, "acceptance_credit_delta": 0, "capability_credit_delta": 0, "terminal_credit_delta": 0, "incremental_spend_usd": 0, "execution_authority": false, "promotion_authority": false}
+}
