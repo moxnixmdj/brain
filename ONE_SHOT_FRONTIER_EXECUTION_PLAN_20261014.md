@@ -59,7 +59,7 @@ Reuse V9 stack + improvement loop k=3 + certificate-cover runtime (`minimum_capa
 - **2a (2 h):** compile V10 target as capability propositions (not scores): NL-spec→patch, cross-language (Python→JS/TS via existing repo tooling), arbitrary multi-file patches. Select minimum cover. *P(sound cover) = 0.90.*
 - **2b (4–8 h):** run branch-and-verify on unseen-task breadth set built from *already-spent/public* repos only (zero untouched-population spend). Each candidate: exact-oracle replay + rollback. Resolution math per sky-impact CERT_C1: single-shot ≥0.985–0.999 per proposition ⇒ k=3 beam lower bound ≥0.99999 for covered propositions. *P(first verified breadth delta ≤24 h) = 0.65; P(general route credible ≤7 d) = 0.45.*
 - **2c:** FrontierCode/CursorBench stay later audits (owner-gated, Step 8). **Impact: targets CODING_TB4/FRONTIERCODE/CURSORBENCH predicates' shared capability root without spending terminal tasks; highest reuse-breadth lane. 
-...[truncated 9113 chars]
+> **DEFECT NOTICE (2026-10-14):** the committed file lost ~9,113 characters here (Steps 2.5–9 and §§3–5). The repository history is a single shallow commit, so the lost text is unrecoverable. This plan is **superseded** by `FIRST_PRINCIPLES_ONE_SHOT_PLAN_20261014_V1.md`, which also withdraws this file's owner-gated steps (Step 8 and any outreach-dependent route) under the standing no-outreach order.
 ---
 
 ## 6. ADVERSARIAL REVIEW (2026-10-14, same session) — this plan was NOT optimal as written; corrections are binding on execution

@@ -1,0 +1,345 @@
+{
+ "schema": "PROJECT_BRAIN_ZERO_MODEL_RUNTIME_DEPENDENCY_CENSUS_RECEIPT_20261014_V1",
+ "date": "2026-10-14",
+ "status": "EXECUTED__INVENTORY_COMPLETE_FOR_SCANNED_SURFACES__MODEL_DEPENDENT_FILE_COUNT_NONZERO__REQUALIFICATION_CONJUNCT_REMAINS_OPEN",
+ "census_runtime": {
+  "path": "canonical/runtime/zero_model_runtime_dependency_census_v1.py",
+  "git_blob_sha": "a520b2620b8233f0d143d34efc636181e7c6352a"
+ },
+ "command": "python3 canonical/runtime/zero_model_runtime_dependency_census_v1.py --out <receipt>",
+ "exit_code": 2,
+ "exit_code_semantics": "0_ONLY_WHEN_model_dependent_file_count_IS_ZERO__2_OTHERWISE",
+ "base_commit": "11d4d83547d8ac82c87818f90e2a39e2548d5888",
+ "governing_requirements": {
+  "source": "canonical/verification/CAPABILITY_TRANSFER_V2_DONOR_AUTHORITY_INVALIDATION_20261011_V1.json",
+  "requirements_this_census_informs": [
+   "FULL_RUNTIME_DEPENDENCY_INVENTORY_COMPLETE",
+   "RUNTIME_COGNITION_DEPENDENCY_CLASS_MODEL_INDEPENDENT",
+   "MODEL_DEPENDENCY_COUNT_ZERO",
+   "EXTERNAL_MODEL_RUNTIME_DEPENDENCY_COUNT_ZERO",
+   "ONLINE_TEACHER_CALL_COUNT_ZERO"
+  ],
+  "laws": [
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/governance/DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_V2.json"
+  ]
+ },
+ "census": {
+  "schema": "PROJECT_BRAIN_ZERO_MODEL_RUNTIME_DEPENDENCY_CENSUS_V1",
+  "surfaces": [
+   "canonical/runtime",
+   "execution_guard"
+  ],
+  "file_count": 2116,
+  "classification_counts": {
+   "CALL_LEVEL_MODEL_DEPENDENCY": 8,
+   "CLEAN": 2050,
+   "PARSE_ERROR_FAILS_CLOSED": 2,
+   "STRING_REFERENCE_ONLY": 56
+  },
+  "model_dependent_file_count": 10,
+  "model_dependent_files": [
+   {
+    "path": "canonical/runtime/astra_runtime.py",
+    "git_blob_sha": "0c613137b9c578c8afadb9482da08e2fc268deb7",
+    "classification": "CALL_LEVEL_MODEL_DEPENDENCY",
+    "model_module_imports": [],
+    "endpoint_or_route_strings": [],
+    "local_inference_runtime_strings": [
+     {
+      "line": 4398,
+      "match": "PROJECT_BRAIN_TERMINAL_LOCAL_PLANNER_MODEL"
+     }
+    ],
+    "model_call_names": [],
+    "model_identifiers": [],
+    "parse_error": null
+   },
+   {
+    "path": "canonical/runtime/harbor_science_planner_v1.py",
+    "git_blob_sha": "58964dc8d6b5eed5c202081cd800035c791eeb1d",
+    "classification": "CALL_LEVEL_MODEL_DEPENDENCY",
+    "model_module_imports": [],
+    "endpoint_or_route_strings": [
+     {
+      "line": 19,
+      "match": "/v1/chat/completions"
+     },
+     {
+      "line": 20,
+      "match": "/v1/chat/completions"
+     }
+    ],
+    "local_inference_runtime_strings": [
+     {
+      "line": 1,
+      "match": "llama.cpp"
+     }
+    ],
+    "model_call_names": [],
+    "model_identifiers": [],
+    "parse_error": null
+   },
+   {
+    "path": "canonical/runtime/harbor_science_planner_v5.py",
+    "git_blob_sha": "050bbae7c38900023fc4110070a48e8e50c161ee",
+    "classification": "CALL_LEVEL_MODEL_DEPENDENCY",
+    "model_module_imports": [],
+    "endpoint_or_route_strings": [
+     {
+      "line": 21,
+      "match": "/v1/chat/completions"
+     },
+     {
+      "line": 22,
+      "match": "/v1/chat/completions"
+     }
+    ],
+    "local_inference_runtime_strings": [
+     {
+      "line": 1,
+      "match": "llama.cpp"
+     }
+    ],
+    "model_call_names": [],
+    "model_identifiers": [],
+    "parse_error": null
+   },
+   {
+    "path": "canonical/runtime/harbor_science_planner_v6.py",
+    "git_blob_sha": "ecfaa7523347ba0e902baa9d411e333d3e2853e4",
+    "classification": "CALL_LEVEL_MODEL_DEPENDENCY",
+    "model_module_imports": [],
+    "endpoint_or_route_strings": [
+     {
+      "line": 21,
+      "match": "/v1/chat/completions"
+     },
+     {
+      "line": 22,
+      "match": "/v1/chat/completions"
+     }
+    ],
+    "local_inference_runtime_strings": [
+     {
+      "line": 1,
+      "match": "llama.cpp"
+     }
+    ],
+    "model_call_names": [],
+    "model_identifiers": [],
+    "parse_error": null
+   },
+   {
+    "path": "canonical/runtime/harbor_science_planner_v7.py",
+    "git_blob_sha": "e5d6ab78b6cf5bacee568cd3701410a8745b9ce8",
+    "classification": "CALL_LEVEL_MODEL_DEPENDENCY",
+    "model_module_imports": [],
+    "endpoint_or_route_strings": [
+     {
+      "line": 21,
+      "match": "/v1/chat/completions"
+     },
+     {
+      "line": 22,
+      "match": "/v1/chat/completions"
+     }
+    ],
+    "local_inference_runtime_strings": [
+     {
+      "line": 1,
+      "match": "llama.cpp"
+     }
+    ],
+    "model_call_names": [],
+    "model_identifiers": [],
+    "parse_error": null
+   },
+   {
+    "path": "canonical/runtime/livebench_legacy_predecessor_compiler_audit_v1.py",
+    "git_blob_sha": "2bd1064f8aabd0456cfeeedb53f14d8c1b4d0542",
+    "classification": "PARSE_ERROR_FAILS_CLOSED",
+    "model_module_imports": [],
+    "endpoint_or_route_strings": [],
+    "local_inference_runtime_strings": [],
+    "model_call_names": [],
+    "model_identifiers": [],
+    "parse_error": "SyntaxError:139"
+   },
+   {
+    "path": "canonical/runtime/osworld_v21_app_policy_overlay_v1.py",
+    "git_blob_sha": "dc36a90d46f73d36c33d34c317523ffbf3be5105",
+    "classification": "PARSE_ERROR_FAILS_CLOSED",
+    "model_module_imports": [],
+    "endpoint_or_route_strings": [],
+    "local_inference_runtime_strings": [],
+    "model_call_names": [],
+    "model_identifiers": [],
+    "parse_error": "SyntaxError:152"
+   },
+   {
+    "path": "canonical/runtime/osworld_v21_local_qwen_policy_v1.py",
+    "git_blob_sha": "8c852df15c463f347c63ba34e04281e034065c50",
+    "classification": "CALL_LEVEL_MODEL_DEPENDENCY",
+    "model_module_imports": [],
+    "endpoint_or_route_strings": [],
+    "local_inference_runtime_strings": [
+     {
+      "line": 1,
+      "match": "llama.cpp"
+     }
+    ],
+    "model_call_names": [],
+    "model_identifiers": [],
+    "parse_error": null
+   },
+   {
+    "path": "canonical/runtime/osworld_v21_qwen35_planner_v1.py",
+    "git_blob_sha": "d07eed87abeb843fb120574a5759cea5282c1468",
+    "classification": "CALL_LEVEL_MODEL_DEPENDENCY",
+    "model_module_imports": [],
+    "endpoint_or_route_strings": [],
+    "local_inference_runtime_strings": [
+     {
+      "line": 51,
+      "match": "PROJECT_BRAIN_QWEN35_MODEL"
+     }
+    ],
+    "model_call_names": [],
+    "model_identifiers": [
+     {
+      "line": 169,
+      "name": "Qwen35OSWorldPlanner"
+     },
+     {
+      "line": 19,
+      "name": "LLAMA_CPP_REVISION"
+     }
+    ],
+    "parse_error": null
+   },
+   {
+    "path": "canonical/runtime/root1_contrastive_semantic_candidate_runner_v1.py",
+    "git_blob_sha": "96638f713bac92d47cae77db441a9d13770e7f1d",
+    "classification": "CALL_LEVEL_MODEL_DEPENDENCY",
+    "model_module_imports": [],
+    "endpoint_or_route_strings": [
+     {
+      "line": 99,
+      "match": "/v1/chat/completions"
+     },
+     {
+      "line": 152,
+      "match": "/v1/chat/completions"
+     }
+    ],
+    "local_inference_runtime_strings": [],
+    "model_call_names": [],
+    "model_identifiers": [],
+    "parse_error": null
+   }
+  ],
+  "credited_producer_path_rule": "A CREDITED PRODUCER PATH IS ADMISSIBLE ONLY IF EVERY FILE IT TRANSITIVELY IMPORTS IS CLEAN OR STRING_REFERENCE_ONLY__EVERY FILE LISTED IN model_dependent_files IS QUARANTINED FROM CREDITED PRODUCER COGNITION UNTIL DELETED OR PROVED NON-LOAD-BEARING",
+  "census_proves": "RUNTIME_DEPENDENCY_INVENTORY_FOR_THE_SCANNED_SURFACES_ONLY",
+  "census_does_not_prove": [
+   "ZERO_MODEL_COGNITION_IN_HISTORICAL_RECEIPTS",
+   "TRANSITIVE_IMPORT_CLOSURE_OF_ANY_SPECIFIC_CREDITED_ROUTE",
+   "BEHAVIOR_PRESERVATION_AFTER_DONOR_REMOVAL",
+   "ANY_CAPABILITY_ACCEPTANCE_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+   "incremental_spend_usd": 0,
+   "acceptance_credit_delta": 0,
+   "capability_credit_delta": 0,
+   "ownership_credit_delta": 0,
+   "terminal_credit_delta": 0
+  }
+ },
+ "material_findings": [
+  {
+   "id": "F1_CENTRAL_RUNTIME_RETAINS_GENERAL_MODEL_PLANNER_CODE_PATH",
+   "file": "canonical/runtime/astra_runtime.py",
+   "git_blob_sha": "0c613137b9c578c8afadb9482da08e2fc268deb7",
+   "evidence": {
+    "_planner_post": "lines 4393-4452 (default expected model 'Qwen3.5-9B-M-Q4_K_M-local', llama.cpp backend)",
+    "call_sites_in__run_goal_unstamped": [
+     6454,
+     6484,
+     6518,
+     6575
+    ],
+    "_run_goal_unstamped_span": "6150-6603, called at 6665",
+    "role_of_model": "next-action selection loop and final-answer composition ('summary')"
+   },
+   "existing_mitigation": {
+    "env_lock": "ASTRA_DISABLE_MODEL_PLANNER must be present in startup scripts",
+    "guards": [
+     "canonical/runtime/runtime_cognition_credit_guard_v1.py:219-231",
+     "canonical/runtime/verify_external_cognition_runtime_lock_v1.py:7-12"
+    ]
+   },
+   "law_consequence": "ENV_GATING_IS_NOT_REMOVAL__DONOR_DELETION_AND_DEPENDENCY_ACCOUNTING_PROTOCOL_V2_REQUIRES_POST_REMOVAL_QUALIFICATION_WITH_MODEL_DEPENDENCY_COUNT_ZERO__THE_CODE_PATH_MUST_BE_DELETED_OR_PROVED_STATICALLY_UNREACHABLE_FROM_EVERY_CREDITED_ENTRY_POINT_BEFORE_ANY_ASTRA_RUNTIME_ROUTE_CAN_REQUALIFY"
+  },
+  {
+   "id": "F2_TB_SCIENCE_PLANNER_LINEAGE_IS_MODEL_DEPENDENT",
+   "files": [
+    "canonical/runtime/harbor_science_planner_v1.py",
+    "canonical/runtime/harbor_science_planner_v5.py",
+    "canonical/runtime/harbor_science_planner_v6.py",
+    "canonical/runtime/harbor_science_planner_v7.py"
+   ],
+   "importers": [
+    "canonical/runtime/harbor_science_agent_v1.py",
+    "canonical/runtime/harbor_science_agent_v10.py",
+    "canonical/runtime/harbor_science_agent_v11.py",
+    "canonical/runtime/harbor_science_agent_v12.py",
+    "canonical/runtime/harbor_science_agent_v13.py"
+   ],
+   "law_consequence": "ANY_TB_SCIENCE_TRIAL_PRODUCED_THROUGH_THIS_LINEAGE_IS_NON_CREDITABLE_UNDER_V10_REGARDLESS_OF_REWARD__THE_RECORDED_0_OF_20_IS_THEREFORE_NOT_EVEN_A_CREDITABLE_FAILURE_BASELINE"
+  },
+  {
+   "id": "F3_OSWORLD_V21_POLICY_LINEAGE_IS_MODEL_DEPENDENT",
+   "files": [
+    "canonical/runtime/osworld_v21_qwen35_planner_v1.py",
+    "canonical/runtime/osworld_v21_local_qwen_policy_v1.py"
+   ],
+   "law_consequence": "SAME_AS_F2_FOR_OSWORLD_VERIFIED"
+  },
+  {
+   "id": "F4_TWO_RUNTIME_FILES_DO_NOT_PARSE",
+   "files": [
+    {
+     "path": "canonical/runtime/livebench_legacy_predecessor_compiler_audit_v1.py",
+     "error": "SyntaxError line 139 (literal backslash-n escape sequences embedded in source)"
+    },
+    {
+     "path": "canonical/runtime/osworld_v21_app_policy_overlay_v1.py",
+     "error": "SyntaxError line 152 (unescaped quotes inside double-quoted raw regex string)"
+    }
+   ],
+   "law_consequence": "UNPARSEABLE_RUNTIME_SURFACES_FAIL_CLOSED__ANY_RECEIPT_CITING_THEM_AS_EXECUTED_IS_SUSPECT"
+  },
+  {
+   "id": "F5_ROOT1_CONTRASTIVE_RUNNER_CALLS_A_CHAT_COMPLETIONS_ROUTE",
+   "file": "canonical/runtime/root1_contrastive_semantic_candidate_runner_v1.py",
+   "governance_refs": 0,
+   "law_consequence": "NON_LOAD_BEARING_TODAY__MUST_BE_DELETED_OR_QUARANTINED_BEFORE_REQUALIFICATION"
+  }
+ ],
+ "what_this_receipt_changes": "ESTABLISHES_A_CONTENT_ADDRESSED_INVENTORY_BASELINE_FOR_THE_DONOR_REQUALIFICATION_CONJUNCT__CONVERTS_FIVE_UNKNOWN_DEPENDENCY_FACTS_INTO_KNOWN_FACTS",
+ "what_this_receipt_does_not_change": [
+  "NO_FAMILY_STATE",
+  "NO_META_OBLIGATION",
+  "NO_DONOR_AUTHORITY",
+  "NO_TERMINAL_PREDICATE",
+  "terminal_real_REMAINS_false"
+ ],
+ "accounting": {
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0
+ }
+}

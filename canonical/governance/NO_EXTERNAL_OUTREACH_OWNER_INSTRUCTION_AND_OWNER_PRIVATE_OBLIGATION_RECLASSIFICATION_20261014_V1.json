@@ -1,0 +1,72 @@
+{
+ "schema": "PROJECT_BRAIN_NO_EXTERNAL_OUTREACH_OWNER_INSTRUCTION_AND_OWNER_PRIVATE_OBLIGATION_RECLASSIFICATION_20261014_V1",
+ "date": "2026-10-14",
+ "status": "ACTIVE__OWNER_INSTRUCTION_ENCODED__OWNER_PRIVATE_OBLIGATIONS_RECLASSIFIED_CLOSED_OFF_UNDER_CURRENT_CONSTRAINTS__ZERO_CREDIT",
+ "supersedes_in_part": {
+  "path": "canonical/governance/EXTERNAL_OUTREACH_VALUE_GATE_V1.json",
+  "superseded_clause": "route_classes.OWNER_EXCLUSIVE.action = ONE_DEDUPLICATED_TRANSACTION_SPECIFIC_OWNER_CHANNEL_MAY_BE_USED",
+  "replacement_clause": "NO_OWNER_CHANNEL_MAY_BE_USED__OUTREACH_IS_NOT_A_VALID_ROUTE",
+  "unchanged_clauses": ["route_classes.SELF_SERVICE", "route_classes.DORMANT_OR_CLOSED", "hard_rules", "accounting"]
+ },
+ "owner_instruction": {
+  "text": "No agent of this repository may call, email, message, or otherwise ask any external person, team, benchmark owner, vendor, or community for help, access, evaluation, credentials, normalization, or results, through Gmail or any other channel. Outreach is not a valid route to any obligation. Nobody will help for free; the plan must not depend on anyone outside the Brain.",
+  "received": "2026-10-14",
+  "channel": "OWNER_SESSION_DIRECTIVE",
+  "scope": "ALL_AGENTS__ALL_OBLIGATIONS__ALL_FUTURE_PLANS_UNTIL_THE_OWNER_EXPLICITLY_REVOKES_IT",
+  "interaction_with_existing_laws": "NARROWS_EXTERNAL_OUTREACH_VALUE_GATE_V1__DOES_NOT_TOUCH_MISSION_LOCK_V10__COGNITION_LAW_V4__OR_THE_FROZEN_ACCEPTANCE_LEDGER"
+ },
+ "measurement_function_theorem": {
+  "statement": "For every obligation whose acceptance score S = M(X, D) requires either (a) a dataset D held privately by a benchmark owner, or (b) a scorer M that only the owner executes (LLM-judge panels, hidden tests, Elo matchmaking, owner normalization), there is no Brain-executable sequence of actions that produces S, because producing S requires the owner's process, and under this instruction the owner's process cannot be requested, and under Mission Lock V10 it cannot be imitated with a general-purpose model, and under the frozen acceptance ledger (NOT_DELETABLE families) it cannot be removed.",
+  "proof_sketch": [
+   "P1: S is defined only as the output of the owner-executed process (M, D); no alternative definition is admitted by the frozen ledger for these rows.",
+   "P2: The owner's process can be triggered only by submission, request, or credential grant; all three are outreach and are forbidden by owner_instruction.",
+   "P3: A Brain-side reproduction of M over public proxies (e.g., GDPval gold-220 on Hugging Face with an OpenAI LLM grader; CursorBench public scope) yields a different function M' with S' != S; the ledger's envelope rule forbids protocol substitution to dodge execution, and the 2026-10-02 reconciliation already recorded that the only admitted substitute is a scope-complete stronger-proof certificate.",
+   "P4: A scope-complete stronger-proof certificate requires proving dominance over the owner's hidden evaluator for every task in the owner's hidden D; with D and M unknown, dominance is unprovable (CursorBench: scope proved, adequacy/dominance unprovable; recorded 2026-10-02).",
+   "P5: Therefore S is unproducible and the obligation is unreachable while P1-P4 hold. QED."
+  ],
+  "what_can_change_the_theorem": [
+   "OWNER_REVOKES_THE_NO_OUTREACH_INSTRUCTION (negates P2)",
+   "OWNER_AMENDS_THE_FROZEN_ACCEPTANCE_LEDGER_TO_ADMIT_A_BRAIN_EXECUTABLE_SCOPE_COMPLETE_PROTOCOL_FOR_THE_ROW (negates P1/P3)",
+   "BENCHMARK_OWNER_PUBLISHES_FULL_D_AND_M_WITH_DETERMINISTIC_SCORING (negates P1 for that row; must be verified by primary source, not assumed)"
+  ]
+ },
+ "reclassification": {
+  "rule": "EVERY_OPEN_ROW_WHOSE_remaining_class_REQUIRES_AN_OWNER_EXECUTED_RESULT_OR_OWNER_GRANTED_ACCESS_MOVES_FROM_WAKE_GATED_TO_CLOSED_OFF_UNDER_CURRENT_CONSTRAINTS__ITS_STRONGER_PROOF_ALTERNATIVE_REMAINS_LISTED_BUT_IS_MARKED_UNPROVABLE_WITHOUT_OWNER_EVALUATOR_INFORMATION",
+  "source_ledger": "canonical/governance/CURRENT_ALL_OPEN_CHECKPOINT_WAKE_GATE_RECONCILIATION_20261011_V1.json",
+  "rows": [
+   {"id": "PROWORK_GDPVAL_GE_1846", "owner_process": "ARTIFICIAL_ANALYSIS_ELO_PANEL_OVER_GDPVAL_AA", "public_proxy_exists": true, "proxy": "GDPVAL_GOLD_220_ON_HUGGING_FACE_WITH_OPENAI_LLM_GRADER__DIFFERENT_M__WIN_RATE_NOT_ELO", "new_state": "CLOSED_OFF_UNDER_CURRENT_CONSTRAINTS__OWNER_DECISION_REQUIRED", "residual_brain_executable_work": "NONE_THAT_MOVES_S"},
+   {"id": "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT", "owner_process": "ARTIFICIAL_ANALYSIS_PRIVATE_BRIEFCASE_SUITE", "public_proxy_exists": false, "new_state": "CLOSED_OFF_UNDER_CURRENT_CONSTRAINTS__OWNER_DECISION_REQUIRED", "residual_brain_executable_work": "ARTIFACT_NECESSITY_COUNTERMODEL_ATTEMPT_ONLY__p_success_0_40__DOES_NOT_MOVE_S"},
+   {"id": "CODING_FRONTIERCODE_GE_54_4", "owner_process": "PRIVATE_HELDOUT_TASKS_OWNER_RUN", "public_proxy_exists": false, "new_state": "CLOSED_OFF_UNDER_CURRENT_CONSTRAINTS__OWNER_DECISION_REQUIRED", "residual_brain_executable_work": "NONE_THAT_MOVES_S"},
+   {"id": "CODING_CURSORBENCH_GE_57_8", "owner_process": "CURSOR_PRIVATE_SUITE", "public_proxy_exists": false, "new_state": "CLOSED_OFF_UNDER_CURRENT_CONSTRAINTS__OWNER_DECISION_REQUIRED", "residual_brain_executable_work": "NONE__SCOPE_ALREADY_PROVED__ADEQUACY_UNPROVABLE"},
+   {"id": "AUTOMATIONBENCH_GE_40", "owner_process": "PRIVATE_SPLIT_OWNER_RUN", "public_proxy_exists": true, "proxy": "PUBLIC_SPLIT__TRANSFER_TO_PRIVATE_UNPROVED", "new_state": "CLOSED_OFF_UNDER_CURRENT_CONSTRAINTS__OWNER_DECISION_REQUIRED", "residual_brain_executable_work": "PUBLIC_SPLIT_RUN_IS_MODEL_COGNITION_BOUND_UNDER_V10__SEE_CAPABILITY_FLOOR"},
+   {"id": "FINANCE_AGENT_V2_GE_58_59", "owner_process": "VALS_AI_PRIVATE_EVALUATION", "public_proxy_exists": false, "new_state": "CLOSED_OFF_UNDER_CURRENT_CONSTRAINTS__OWNER_DECISION_REQUIRED", "residual_brain_executable_work": "NONE_THAT_MOVES_S"},
+   {"id": "FINANCE_ACCOUNTING_INDEX_GE_61", "owner_process": "VALS_AI_INNER_NORMALIZATION", "public_proxy_exists": false, "new_state": "CLOSED_OFF_UNDER_CURRENT_CONSTRAINTS__OWNER_DECISION_REQUIRED", "residual_brain_executable_work": "NONE_THAT_MOVES_S"},
+   {"id": "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER", "owner_process": "ANTHROPIC_INTERNAL_PRIVATE_EVALUATION", "public_proxy_exists": false, "new_state": "CLOSED_OFF_UNDER_CURRENT_CONSTRAINTS__OWNER_DECISION_REQUIRED", "residual_brain_executable_work": "NONE_THAT_MOVES_S"},
+   {"id": "HLE_TOOLS_GE_67_7", "owner_process": "NONE_FOR_SCORING__ACCESS_GATED_BY_FREE_HF_ACCOUNT_ACCEPTANCE", "public_proxy_exists": true, "new_state": "REMAINS_WAKE_GATED__ACCESS_IS_SELF_SERVICE_NOT_OUTREACH__CAPABILITY_FLOOR_IS_THE_BLOCKER", "residual_brain_executable_work": "SELF_SERVICE_HF_ACCESS_THEN_ZERO_MODEL_SOLVER__NO_KNOWN_ZERO_MODEL_SOLVER_EXISTS_FOR_2500_EXPERT_QUESTIONS"},
+   {"id": "CHARTOGRAPHY_TOOLS_GE_89", "owner_process": "NONE_FOR_SCORING__ACCESS_GATED_BY_FREE_HF_ACCOUNT_ACCEPTANCE", "public_proxy_exists": true, "new_state": "REMAINS_WAKE_GATED__ACCESS_IS_SELF_SERVICE_NOT_OUTREACH__CAPABILITY_FLOOR_IS_THE_BLOCKER", "residual_brain_executable_work": "SELF_SERVICE_HF_ACCESS_THEN_DETERMINISTIC_CHART_PARSER__CURRENT_BRAIN_PARSER_0_GOLD_PARSED"},
+   {"id": "OSWORLD_2_1_PARTIAL_GE_81_8", "owner_process": "NONE_FOR_SCORING__PINNED_BYTES_REQUIRE_SELF_SERVICE_FETCH", "public_proxy_exists": true, "new_state": "REMAINS_WAKE_GATED__CAPABILITY_FLOOR_IS_THE_BLOCKER", "residual_brain_executable_work": "CURRENT_OSWORLD_POLICY_LINEAGE_IS_MODEL_DEPENDENT_AND_NON_CREDITABLE_UNDER_V10__SEE_CENSUS_F3"},
+   {"id": "CODING_TB4_GE_66_4", "owner_process": "NONE__PUBLIC_DETERMINISTIC_HARNESS", "public_proxy_exists": true, "new_state": "REMAINS_WAKE_GATED__CAPABILITY_FLOOR_IS_THE_BLOCKER", "residual_brain_executable_work": "1_OF_219_RECORDED_PASS_IS_AUTHORED_PREVERIFICATION_WITH_UNRECORDED_COGNITION_PROVENANCE__NON_CREDITABLE_UNDER_V4_UNKNOWN_PROVENANCE_RULE"}
+  ],
+  "counts": {"closed_off_under_current_constraints": 8, "remaining_wake_gated_capability_floor": 4, "total_open_rows": 12}
+ },
+ "capability_floor_statement": {
+  "text": "For the 4 rows that remain wake-gated, access and carriers are solvable at $0 without outreach (public capsule-runner Actions, free Hugging Face accounts, self-service dataset fetch). The binding blocker is not access; it is that every system that has ever scored on these bars is a general-purpose language-model agent, which Mission Lock V10 and Cognition Law V4 exclude from any credited path, and the Brain's deterministic stacks score 1/219 (authored), 0/20, 0 gold parsed, and 0 respectively.",
+  "evidence": ["canonical/governance/CURRENT_TB_SCIENCE_EXECUTION.json", "canonical/capabilities/opus55/WAL_RECOVERY_ORDERING_TB4_VERIFICATION_PASS_20261001_V1.json", "canonical/verification/CHARTOGRAPHY_HF_TRANSPORT_ACCESS_BOUNDARY_20261011_V2.json", "canonical/verification/ZERO_MODEL_RUNTIME_DEPENDENCY_CENSUS_RECEIPT_20261014_V1.json"]
+ },
+ "owner_decision_fork": {
+  "A_KEEP_ALL_BARS_AND_ALL_LAWS": {"consequence": "CHECKPOINT_OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1_IS_UNREACHABLE__P_APPROX_0_IN_ANY_HORIZON__REPOSITORY_SHOULD_STOP_SCHEDULING_FAMILY_CLOSURE_WORK_AND_REDIRECT_TO_REAL_MISSION_CAPABILITY_BUILDING_WITH_INTERNAL_INSTRUMENTATION", "required_owner_act": "NONE__THIS_IS_THE_DEFAULT"},
+  "B_AMEND_ACCEPTANCE_LEDGER_FOR_THE_12_OPEN_FAMILIES": {"consequence": "EACH_FAMILY_GETS_A_BRAIN_EXECUTABLE_FROZEN_SCOPE_COMPLETE_PROTOCOL_WITH_INDEPENDENT_VERIFICATION__THE_SAME_ROUTE_THAT_CLOSED_THE_7_OWNED_FAMILIES__P_CLOSE_PER_FAMILY_0_45_TO_0_80_OVER_WEEKS_NOT_MINUTES__CHECKPOINT_SEMANTICS_CHANGE_FROM_EXTERNAL_PARITY_TO_INTERNAL_PROTOCOL_PARITY", "required_owner_act": "EXPLICIT_WRITTEN_AMENDMENT_NAMING_EACH_ROW_ITS_NEW_PROTOCOL_AND_THE_ENVELOPE_RULE_EXCEPTION__PER_COGNITION_LAW_V4_PERMANENCE_CLAUSE_STYLE"},
+  "C_RESCIND_MISSION_LOCK_V10": {"consequence": "REJECTED_BY_THIS_ARTIFACT__WOULD_CONVERT_THE_MISSION_INTO_WRAPPING_A_MODEL_AND_DOES_NOT_SOLVE_THE_8_OWNER_PRIVATE_ROWS_ANYWAY", "required_owner_act": "NOT_RECOMMENDED"}
+ },
+ "scheduling_consequence": "NO_FUTURE_PLAN_INTENT_OR_SCHEDULER_CANDIDATE_MAY_LIST_AN_OUTREACH_STEP__ANY_CANDIDATE_WHOSE_ONLY_ROUTE_IS_OWNER_EXECUTED_MEASUREMENT_IS_NON_SCHEDULABLE_AND_MUST_BE_REPORTED_AS_CLOSED_OFF_UNDER_CURRENT_CONSTRAINTS",
+ "hard_nonclaims": [
+  "NO_FAMILY_CLOSES_OR_OPENS_BY_THIS_ARTIFACT",
+  "NO_ACCEPTANCE_ROW_IS_DELETED__RECLASSIFICATION_IS_A_REACHABILITY_LABEL_NOT_A_REQUIREMENT_REMOVAL",
+  "NO_LAW_IS_AMENDED_OR_RESCINDED_HERE",
+  "terminal_real_REMAINS_false"
+ ],
+ "accounting": {"incremental_spend_usd": 0, "acceptance_credit_delta": 0, "capability_credit_delta": 0, "ownership_credit_delta": 0, "terminal_credit_delta": 0},
+ "execution_authority": false,
+ "promotion_authority": false,
+ "fresh_reality_authority": false
+}
