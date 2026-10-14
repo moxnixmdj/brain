@@ -100,6 +100,105 @@
       "status": "MEASURED_SANDBOX",
       "verdict": "PASS"
     },
+    "DOCX_RUN_SPAN_REPLACE_V1": {
+      "canary_pass": "0/0",
+      "carrier": "SANDBOX",
+      "claim": "Given a .docx package and a target string that occurs exactly once (counting overlapping occurrences) in the visible text of the paragraphs of word/document.xml - possibly spanning several runs and text nodes - produce a package whose paragraph texts equal the originals with that single span replaced, with the same number of paragraphs and text nodes and every other member byte-identical; when the target occurs zero or several times, fail closed and write nothing.",
+      "fresh_pass_rate": 1.0,
+      "independent_oracle_ids": [
+        "EXPECTED_OUTCOME",
+        "PACKAGE_INTEGRITY",
+        "INVERSE_EDIT_RESTORES"
+      ],
+      "instances": 2000,
+      "kernel_git_blob_shas": {
+        "canonical/runtime/docx_run_span_replace.py": "915cea0532a1a304f2f08c764135d2f6f44614e5"
+      },
+      "latest_receipt": "canonical/capabilities/true/receipts/DOCX_RUN_SPAN_REPLACE_V1__2890e390b84f468d.json",
+      "measured_utc": "2026-10-14T19:13:36Z",
+      "oracle_classes": {
+        "EXPECTED_OUTCOME": "ANALYTIC_CLOSED_FORM",
+        "INVERSE_EDIT_RESTORES": "METAMORPHIC",
+        "PACKAGE_INTEGRITY": "PROPERTY"
+      },
+      "scope_limits": [
+        "NO targets spanning two paragraphs",
+        "NO visual-layout, tracked-changes, fields or numbering guarantees",
+        "NO headers/footers/footnotes (see DOCX_STORY_PART_REPLACE_V1)",
+        "NO general DOCX editing; one span per call"
+      ],
+      "seed_source": "OS_URANDOM",
+      "solver_git_blob_sha": "0008bed08fa3e17587a4af04e5bce04ff81fc8d2",
+      "spec_path": "canonical/capabilities/true/specs/DOCX_RUN_SPAN_REPLACE_V1.json",
+      "status": "MEASURED_SANDBOX",
+      "verdict": "PASS"
+    },
+    "DOCX_STORY_PART_REPLACE_V1": {
+      "canary_pass": "0/0",
+      "carrier": "SANDBOX",
+      "claim": "Given a .docx package, a story part name (word/headerN.xml, word/footerN.xml, word/footnotes.xml, word/endnotes.xml or word/comments.xml) and a target string that occurs exactly once (overlapping count) in the paragraph texts of that part, produce a package in which only that part is changed, its paragraph texts equal the originals with the span replaced, and every other member - including word/document.xml even when it contains the same text - is byte-identical; when the part name is not a story part, the part is missing, or the target is absent or repeated inside the part, fail closed and write nothing.",
+      "fresh_pass_rate": 1.0,
+      "independent_oracle_ids": [
+        "EXPECTED_OUTCOME",
+        "PACKAGE_INTEGRITY",
+        "INVERSE_EDIT_RESTORES"
+      ],
+      "instances": 2000,
+      "kernel_git_blob_shas": {
+        "canonical/runtime/docx_story_part_replace.py": "d908ef95b4abe7d4d52be5700f94cd65e25de4f6"
+      },
+      "latest_receipt": "canonical/capabilities/true/receipts/DOCX_STORY_PART_REPLACE_V1__e098d8db05ee5d56.json",
+      "measured_utc": "2026-10-14T19:13:54Z",
+      "oracle_classes": {
+        "EXPECTED_OUTCOME": "ANALYTIC_CLOSED_FORM",
+        "INVERSE_EDIT_RESTORES": "METAMORPHIC",
+        "PACKAGE_INTEGRITY": "PROPERTY"
+      },
+      "scope_limits": [
+        "NO body edits through this entry",
+        "NO targets spanning two paragraphs",
+        "NO creation of missing parts",
+        "NO visual-layout, tracked-changes, fields or numbering guarantees"
+      ],
+      "seed_source": "OS_URANDOM",
+      "solver_git_blob_sha": "0008bed08fa3e17587a4af04e5bce04ff81fc8d2",
+      "spec_path": "canonical/capabilities/true/specs/DOCX_STORY_PART_REPLACE_V1.json",
+      "status": "MEASURED_SANDBOX",
+      "verdict": "PASS"
+    },
+    "DOCX_TEXT_EDIT_TRANSACTION_V1": {
+      "canary_pass": "0/0",
+      "carrier": "SANDBOX",
+      "claim": "Given a .docx package and 1-64 (old,new) edits, apply all of them to word/document.xml atomically: every target must occur exactly once (overlapping count) in the paragraph texts and no two target spans may overlap (touching spans are allowed); then the output paragraph texts equal the originals with every span replaced and every other member is byte-identical. If any target is absent, repeated or overlaps another, or an edit is impossible, fail closed and write nothing.",
+      "fresh_pass_rate": 1.0,
+      "independent_oracle_ids": [
+        "EXPECTED_OUTCOME",
+        "PACKAGE_INTEGRITY",
+        "ATOMICITY_AND_INVERSE"
+      ],
+      "instances": 2000,
+      "kernel_git_blob_shas": {
+        "canonical/runtime/docx_text_edit_transaction.py": "5ada9da10b7fdc6592373a1ae2eaa579ee7992de"
+      },
+      "latest_receipt": "canonical/capabilities/true/receipts/DOCX_TEXT_EDIT_TRANSACTION_V1__9e73768fd0f238e0.json",
+      "measured_utc": "2026-10-14T19:13:46Z",
+      "oracle_classes": {
+        "ATOMICITY_AND_INVERSE": "METAMORPHIC",
+        "EXPECTED_OUTCOME": "ANALYTIC_CLOSED_FORM",
+        "PACKAGE_INTEGRITY": "PROPERTY"
+      },
+      "scope_limits": [
+        "NO more than 64 edits per call",
+        "NO targets spanning two paragraphs",
+        "NO headers/footers/footnotes",
+        "NO visual-layout, tracked-changes, fields or numbering guarantees"
+      ],
+      "seed_source": "OS_URANDOM",
+      "solver_git_blob_sha": "0008bed08fa3e17587a4af04e5bce04ff81fc8d2",
+      "spec_path": "canonical/capabilities/true/specs/DOCX_TEXT_EDIT_TRANSACTION_V1.json",
+      "status": "MEASURED_SANDBOX",
+      "verdict": "PASS"
+    },
     "PARETO_FRONTIER_UPDATE_V1": {
       "canary_pass": "0/0",
       "carrier": "SANDBOX",

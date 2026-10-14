@@ -115,11 +115,40 @@ benchmark bookkeeping admitted -> 136 · tie-break dropped -> 65 · validation r
 removed -> 74 · unverified candidate admitted -> 200 · receipt binding removed -> 372 · zero-spend check removed -> 15 · wrong
 dominance -> 221.
 
+### DOCX span editors: DOCX_RUN_SPAN_REPLACE_V1, DOCX_TEXT_EDIT_TRANSACTION_V1, DOCX_STORY_PART_REPLACE_V1
+
+Solvers `canonical/runtime/docx_run_span_replace.py` (`replace_unique_paragraph_span`), `docx_text_edit_transaction.py`
+(`apply_text_edit_transaction`) and `docx_story_part_replace.py` (`replace_unique_story_part_span`). All three are byte-pinned by
+capability records (`canonical/capabilities/opus55/M2_DOCX_*.json`, blobs `915cea05`, `5ada9da1`, `d908ef95`), so they are measured
+**unchanged** through the thin adapter `canonical/runtime/docx_true_capability_adapters_v1.py`; the receipts carry the kernel blobs and
+the test asserts the pins.
+
+Claims (short): replace a target that occurs exactly once in the visible paragraph text - counting overlapping occurrences, possibly
+spanning several runs - leaving every other package member byte-identical, or fail closed and write nothing; apply 1-64 such edits
+atomically (overlapping spans refused, touching spans allowed); do the same inside one named header/footer/footnotes/endnotes/comments
+part and never count or touch the body.
+Scope limits: no cross-paragraph targets, no tracked changes / fields / numbering, no part creation, max 64 edits.
+
+Generator (`generators/docx_span_edit_gen_v1.py`): the same structurally real packages as DOCX_EXACT_TEXT_EDIT_V1 plus story parts
+with content-type overrides and relationships; targets are cut from the paragraph text, 70 % across a run boundary; absent, repeated,
+self-overlapping (`abab` in `ababab`), overlapping, touching and wrong-part cases are planted deliberately.
+Oracles (`oracles/docx_span_edit_oracles_v1.py`, minidom, never ElementTree): an analytic paragraph-text model with its own
+uniqueness and overlap rules (ANALYTIC_CLOSED_FORM), package integrity (PROPERTY), inverse edit restores / appending an impossible edit
+fails the whole transaction without output (METAMORPHIC).
+
+Measured in the sandbox on 2026-10-14: **2000/2000, 2000/2000, 2000/2000** (`MEASURED_SANDBOX`, non-crediting). **No defect found.**
+The generator needed three coverage passes before the mix was honest (short cuts and a small vocabulary made most targets
+non-unique by chance; final dry-run mix: span 65 % PASS, transaction 46 % PASS / 17 % overlap, story 66 % PASS).
+
+Test of the test (500 instances each, all caught): non-unique target accepted -> 107 / 104 / 72 (span / transaction / story) ·
+non-overlapping occurrence count -> 34 · middle runs left in place -> 35 · output file left behind on failure -> 163 · overlap check
+removed -> 11 · touching spans rejected -> 24 · best-effort partial transaction -> 487 · any `word/*` part name accepted -> 17.
+
 ## Audit of every claimed capability
 
 `TRUE_CAPABILITY_AUDIT_20261014_V1.json` classifies the 19 Opus-5.5 family routes and the components they name.
 Headline: 15 of 19 family routes contain an external model or service and are therefore **not Brain capabilities under the law**,
 including four the matrix marks PASS/VERIFIED; 2 families are model-free and measurable but unmeasured; 2 families have a measured
-component (DOCX; same-identity supervisor). Components: 4 MEASURED_PASS (6 specs), 4 MEASURABLE_PENDING, 1 CHECKER_GAMING,
+component (DOCX; same-identity supervisor). Components: 5 MEASURED_PASS (9 specs), 4 MEASURABLE_PENDING, 1 CHECKER_GAMING,
 2 NOT_YET_AUDITED.
 The audit changes no matrix status, predicate or pointer.

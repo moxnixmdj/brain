@@ -1,0 +1,56 @@
+{
+  "schema": "TRUE_CAPABILITY_SPEC_V1",
+  "capability_id": "DOCX_STORY_PART_REPLACE_V1",
+  "claim": "Given a .docx package, a story part name (word/headerN.xml, word/footerN.xml, word/footnotes.xml, word/endnotes.xml or word/comments.xml) and a target string that occurs exactly once (overlapping count) in the paragraph texts of that part, produce a package in which only that part is changed, its paragraph texts equal the originals with the span replaced, and every other member - including word/document.xml even when it contains the same text - is byte-identical; when the part name is not a story part, the part is missing, or the target is absent or repeated inside the part, fail closed and write nothing.",
+  "input_class": "Same body packages plus 1-3 story parts (header/footer numbered 1-3, footnotes, endnotes, comments) with content-type overrides and document relationships; target cut from the chosen part (65 %, with the same text also planted in the body in 30 % of those), absent (10 %), planted twice in the part (10 %), allowed-but-missing part name (5 %), self-overlapping periodic target (4 %), word/document.xml named with a target present in the body (4 %), other non-story names such as word/styles.xml, word/header0.xml, word/Header1.xml (2 %). Measured mix on a 2000-instance dry run: PASS 66 %, fail-closed non-unique 24 %, part not allowed 6 %, part missing 4 %.",
+  "scope_limits": [
+    "NO body edits through this entry",
+    "NO targets spanning two paragraphs",
+    "NO creation of missing parts",
+    "NO visual-layout, tracked-changes, fields or numbering guarantees"
+  ],
+  "solver": {
+    "module": "canonical/runtime/docx_true_capability_adapters_v1.py",
+    "entry": "solve_story",
+    "kernels": [
+      "canonical/runtime/docx_story_part_replace.py"
+    ],
+    "note": "the kernel is byte-pinned by a governance record, so the pure adapter lives in a separate module; the receipt records the kernel blob too"
+  },
+  "generator": {
+    "module": "canonical/capabilities/true/generators/docx_span_edit_gen_v1.py",
+    "entry": "generate_story"
+  },
+  "oracles": {
+    "module": "canonical/capabilities/true/oracles/docx_span_edit_oracles_v1.py",
+    "entry": "oracles_story",
+    "declared": [
+      {
+        "id": "EXPECTED_OUTCOME",
+        "class": "ANALYTIC_CLOSED_FORM",
+        "lineage": "derived from the claim; minidom paragraph-text model restricted to the named part, part-name regex independent of the kernel"
+      },
+      {
+        "id": "PACKAGE_INTEGRITY",
+        "class": "PROPERTY",
+        "lineage": "none"
+      },
+      {
+        "id": "INVERSE_EDIT_RESTORES",
+        "class": "METAMORPHIC",
+        "lineage": "none"
+      }
+    ]
+  },
+  "independent_oracle_ids": [
+    "EXPECTED_OUTCOME",
+    "PACKAGE_INTEGRITY",
+    "INVERSE_EDIT_RESTORES"
+  ],
+  "published_canaries": [],
+  "min_instances": 500,
+  "pass_threshold": 1.0,
+  "falsification_condition": "Any generated package on which a unique in-part span is not replaced exactly as the paragraph-text model predicts with every other member byte-identical, or on which a non-story part name, a missing part, or an absent/repeated target does not fail closed without output.",
+  "model_dependency_count": 0,
+  "history": "Component of the ARTIFACT_CREATION family route (Brain-owned DOCX skills); kernel byte-pinned by a governance record and never measured on fresh instances before 2026-10-14. Measured through canonical/runtime/docx_true_capability_adapters_v1.py (pure base64/tempfile adapter) so the pinned kernel stays untouched; the receipt records the kernel blob. Measured 2026-10-14: 2000/2000 on first run, no defect found; ten scratch mutants all caught by the oracles."
+}

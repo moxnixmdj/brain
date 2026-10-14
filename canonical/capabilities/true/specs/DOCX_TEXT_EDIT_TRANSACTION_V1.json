@@ -1,0 +1,56 @@
+{
+  "schema": "TRUE_CAPABILITY_SPEC_V1",
+  "capability_id": "DOCX_TEXT_EDIT_TRANSACTION_V1",
+  "claim": "Given a .docx package and 1-64 (old,new) edits, apply all of them to word/document.xml atomically: every target must occur exactly once (overlapping count) in the paragraph texts and no two target spans may overlap (touching spans are allowed); then the output paragraph texts equal the originals with every span replaced and every other member is byte-identical. If any target is absent, repeated or overlaps another, or an edit is impossible, fail closed and write nothing.",
+  "input_class": "Same packages as DOCX_RUN_SPAN_REPLACE_V1; 1-6 targets cut from paragraph texts, mostly from distinct paragraphs; then in 12 % a second target is cut from inside an existing target (overlap), in 8 % an absent target is added, in 8 % a target is planted a second time, in 15 % two touching targets text[s:m] and text[m:e] lead the set (touching must be accepted), in 5 % a self-overlapping periodic target is added; replacements may be empty, equal or longer; edit order shuffled. Measured mix on a 2000-instance dry run: PASS 46 %, fail-closed non-unique 38 %, fail-closed overlap 17 %.",
+  "scope_limits": [
+    "NO more than 64 edits per call",
+    "NO targets spanning two paragraphs",
+    "NO headers/footers/footnotes",
+    "NO visual-layout, tracked-changes, fields or numbering guarantees"
+  ],
+  "solver": {
+    "module": "canonical/runtime/docx_true_capability_adapters_v1.py",
+    "entry": "solve_transaction",
+    "kernels": [
+      "canonical/runtime/docx_text_edit_transaction.py"
+    ],
+    "note": "the kernel is byte-pinned by a governance record, so the pure adapter lives in a separate module; the receipt records the kernel blob too"
+  },
+  "generator": {
+    "module": "canonical/capabilities/true/generators/docx_span_edit_gen_v1.py",
+    "entry": "generate_transaction"
+  },
+  "oracles": {
+    "module": "canonical/capabilities/true/oracles/docx_span_edit_oracles_v1.py",
+    "entry": "oracles_transaction",
+    "declared": [
+      {
+        "id": "EXPECTED_OUTCOME",
+        "class": "ANALYTIC_CLOSED_FORM",
+        "lineage": "derived from the claim; minidom paragraph-text model, independent uniqueness and strict-overlap check"
+      },
+      {
+        "id": "PACKAGE_INTEGRITY",
+        "class": "PROPERTY",
+        "lineage": "none"
+      },
+      {
+        "id": "ATOMICITY_AND_INVERSE",
+        "class": "METAMORPHIC",
+        "lineage": "none"
+      }
+    ]
+  },
+  "independent_oracle_ids": [
+    "EXPECTED_OUTCOME",
+    "PACKAGE_INTEGRITY",
+    "ATOMICITY_AND_INVERSE"
+  ],
+  "published_canaries": [],
+  "min_instances": 500,
+  "pass_threshold": 1.0,
+  "falsification_condition": "Any generated package on which a valid edit set is not applied exactly as the paragraph-text model predicts, on which an invalid edit set (absent, repeated or overlapping target) produces output, on which appending an impossible edit does not fail the whole transaction without output, or on which the inverse transaction does not restore the text.",
+  "model_dependency_count": 0,
+  "history": "Component of the ARTIFACT_CREATION family route (Brain-owned DOCX skills); kernel byte-pinned by a governance record and never measured on fresh instances before 2026-10-14. Measured through canonical/runtime/docx_true_capability_adapters_v1.py (pure base64/tempfile adapter) so the pinned kernel stays untouched; the receipt records the kernel blob. Measured 2026-10-14: 2000/2000 on first run, no defect found; ten scratch mutants all caught by the oracles."
+}
