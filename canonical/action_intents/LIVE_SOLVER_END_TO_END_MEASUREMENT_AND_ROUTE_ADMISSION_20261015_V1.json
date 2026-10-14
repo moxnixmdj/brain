@@ -1,0 +1,229 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "date": "2026-10-15",
+  "action_id": "LIVE_SOLVER_END_TO_END_MEASUREMENT_AND_ROUTE_ADMISSION_20261015_V1",
+  "canonical_generation": "2026-10-10-general-reusable-capability-frontier-v1",
+  "canonical_base_commit": "09db6188a93e4f12a4746c523cdd91d5fdc1437d",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_REUSABLE_CAPABILITY_DEVELOPMENT_PROGRAM_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "action_kind": "GOVERNANCE_GUARD",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "weakens_existing_guard": false,
+  "causal_blocker": "THE_LIVE_BRAIN_REPORTED_PASS_ON_100_OF_100_FRESH_OUT_OF_SCOPE_GOALS__PATH_TOKENS_MATCH_A_ZERO_INPUT_CATCH_ALL_TOOL_AND_THE_COMPILER_FALLS_THROUGH_WHEN_THE_RIGHT_TOOL_CANNOT_BIND_ITS_INPUTS__NO_END_TO_END_MEASUREMENT_ON_FRESH_GOALS_EXISTED",
+  "blocker_lease_key": "2026-10-10-general-reusable-capability-frontier-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_LIVE_BRAIN_REPORTED_PASS_ON_100_OF_100_FRESH_OUT_OF_SCOPE_GOALS__PATH_TOKENS_MATCH_A_ZERO_INPUT_CATCH_ALL_TOOL_AND_THE_COMPILER_FALLS_THROUGH_WHEN_THE_RIGHT_TOOL_CANNOT_BIND_ITS_INPUTS__NO_END_TO_END_MEASUREMENT_ON_FRESH_GOALS_EXISTED",
+  "highest_leverage_now": true,
+  "selected_route": "MEASURE_THE_LIVE_ENTRY_ON_FRESH_IN_SCOPE_AND_OUT_OF_SCOPE_GOALS_WITH_STDLIB_ORACLES__ADD_A_FAIL_CLOSED_ROUTE_ADMISSION_MODULE_IN_FRONT_OF_THE_PINNED_COMPILER_AND_RUNTIME__REJECT_PATH_TOKEN_ONLY_MATCHES_UNSERVED_OUTPUT_ARTIFACTS_SINGLE_WORD_EVIDENCE_AND_TOOL_REPORTED_NON_SUCCESS",
+  "prior_work_reused": [
+    "canonical/runtime/live_integrated_brain_v1.py",
+    "canonical/runtime/goal_compiler.py",
+    "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+    "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "falsification_condition": "A_FRESH_OUT_OF_SCOPE_GOAL_PASSES_THROUGH_solve__OR_A_GOAL_THAT_PASSES_THROUGH_run_raw_goal_WITH_A_CORRECT_ARTIFACT_IS_REJECTED_BY_solve__OR_ANY_RULE_DEPENDS_ON_A_MODEL__OR_ANY_CREDIT_FIELD_IS_NON_ZERO",
+  "expected_parent_change": "THE_LIVE_BRAIN_NO_LONGER_CLAIMS_SUCCESS_ON_GOALS_IT_CANNOT_SERVE__FIRST_FRESH_GOAL_END_TO_END_MEASUREMENT_RECORDED_WITH_FOUR_NAMED_COMPILER_DEFECTS__ZERO_CREDIT",
+  "expected_parent_frontier_change": "THE_LIVE_BRAIN_NO_LONGER_CLAIMS_SUCCESS_ON_GOALS_IT_CANNOT_SERVE__FIRST_FRESH_GOAL_END_TO_END_MEASUREMENT_RECORDED_WITH_FOUR_NAMED_COMPILER_DEFECTS__ZERO_CREDIT",
+  "stop_condition": "RECEIPT_SHOWS_OLD_ENTRY_OUT_OF_SCOPE_FAIL_CLOSED_RATE_0_AND_NEW_ENTRY_1_0_ON_100_FRESH_GOALS__IN_SCOPE_RATES_IDENTICAL_THROUGH_BOTH_ENTRIES__TESTS_PASS__REFEREE_ZERO_VIOLATIONS__ZERO_CREDIT__ZERO_SCOREBOARD_CHANGE",
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "success_probability_lcb": "1/2",
+    "wall_clock_cost_ub": "1",
+    "interpretation": "DISCHARGES_NOTHING__EVERY_OPEN_OBLIGATION_REQUIRES_A_SOLVER_THAT_DOES_NOT_CLAIM_SUCCESS_IT_DID_NOT_ACHIEVE__THE_LIVE_ENTRY_NOW_FAILS_CLOSED_ON_UNSERVABLE_GOALS_AND_THE_FIRST_FRESH_GOAL_MEASUREMENT_NAMES_THE_NEXT_COMPILER_DEFECTS__UNLOCK_LCB_1_COUNTS_THE_MEASUREMENT_PATH_NOT_A_BENCHMARK_RESULT"
+  },
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/capabilities/true/LIVE_SOLVER_END_TO_END_MEASUREMENT_20261015_V1.json",
+      "execution_guard/live_solver_end_to_end_measurement_v1.py",
+      "canonical/runtime/live_brain_route_admission_v1.py",
+      "canonical/tests/test_live_brain_route_admission_v1.py"
+    ],
+    "route_class": "COMPOSE",
+    "earlier_routes_exhausted_reason": "DELETE_BYPASS_REUSE_ADAPT_SUBSTITUTE_CANNOT_REMOVE_A_FALSE_PASS_PRODUCED_BY_PINNED_FILES__THE_GUARD_COMPOSES_THE_COMPILERS_OWN_SCORE_EVIDENCE_WITH_THE_RUNTIME_ENTRY_WITHOUT_EDITING_EITHER",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ]
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "proof_state_reachability": "NOT_APPLICABLE__GOVERNANCE_GUARD",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "LIVE_SOLVER_END_TO_END_MEASUREMENT_AND_ROUTE_ADMISSION_20261015_V1",
+      "falsifier_id": "FRESH_OUT_OF_SCOPE_GOALS_AND_FRESH_IN_SCOPE_GOALS_WITH_STDLIB_ORACLES",
+      "decisive_question": "DOES_THE_LIVE_BRAIN_SAY_DONE_ONLY_WHEN_AN_INDEPENDENT_ORACLE_CONFIRMS_THE_REQUESTED_ARTIFACT_EXISTS_AND_IS_EXACT",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [
+        "canonical/capabilities/true/LIVE_SOLVER_END_TO_END_MEASUREMENT_20261015_V1.json"
+      ],
+      "no_known_counterexample_reason": "NOT_APPLICABLE__COUNTEREXAMPLES_WERE_FOUND_AND_ARE_RECORDED__100_OF_100_FALSE_PASSES_THROUGH_THE_OLD_ENTRY"
+    }
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-10-general-reusable-capability-frontier-v1",
+    "canonical_base_commit": "09db6188a93e4f12a4746c523cdd91d5fdc1437d",
+    "real_outcome": "A_LIVE_BRAIN_THAT_FAILS_CLOSED_ON_GOALS_IT_CANNOT_SERVE_AND_A_FRESH_GOAL_MEASUREMENT_THAT_NAMES_ITS_NEXT_DEFECTS",
+    "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "obs_goal": {
+      "real_outcome": "THE_BRAIN_NEVER_SAYS_DONE_WHEN_IT_DID_NOTHING",
+      "proxy_goals_deleted": [
+        "MORE_CERTIFICATION_OF_ALREADY_MEASURED_COMPONENTS",
+        "BENCHMARK_SCORE_MOVEMENT"
+      ],
+      "surviving_necessity": "FRESH_GOAL_END_TO_END_MEASUREMENT_PLUS_FAIL_CLOSED_ADMISSION"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "run_raw_goal",
+        "goal_compiler._score_AND__compile_single_goal",
+        "TRUE_CAPABILITY_HARNESS_V1"
+      ],
+      "external_existing_routes_checked": [
+        "NONE_NEEDED__TOKEN_SETS_AND_FILE_ORACLES_ARE_STDLIB"
+      ],
+      "capability_work_deleted": [
+        "NONE"
+      ],
+      "surviving_gap": "FOUR_COMPILER_DEFECTS_IN_PINNED_goal_compiler_py__SILENT_CANDIDATE_FALLTHROUGH__SENTENCE_FINAL_PERIOD__VERB_SYNONYMS__GENERIC_KEYWORD_CATCH_ALL_TOOL"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_FAIL_OPEN",
+      "delete_bypass_substitute_options": [
+        "GUARD_IN_FRONT_OF_PINNED_FILES_INSTEAD_OF_EDITING_THEM",
+        "STDLIB_ORACLES_ON_THE_REAL_ARTIFACT_INSTEAD_OF_TRUSTING_output_verified"
+      ],
+      "surviving_causal_blocker": "PINNED_COMPILER_BYTES_REQUIRE_AN_OWNER_DECISION_TO_FIX_AT_THE_SOURCE"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "GUARD_MODULE_PLUS_FRESH_GOAL_HARNESS",
+        "EDIT_goal_compiler_py__REJECTED_BYTE_PINNED_IN_74_RECORDS",
+        "EDIT_live_integrated_brain_v1_py__REJECTED_BYTE_PINNED"
+      ],
+      "losing_routes_reason": "PINNED_FILES_CANNOT_CHANGE_WITHOUT_AN_OWNER_REPIN_DECISION",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "FRESH_GOALS_50_PER_FAMILY_AND_100_OUT_OF_SCOPE__STDLIB_ARTIFACT_ORACLES__OLD_VERSUS_NEW_ENTRY__TEN_TESTS"
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "ANY_CLAIM_THAT_THE_LIVE_BRAIN_FAILS_CLOSED_ON_UNKNOWN_GOALS_BEFORE_THIS_CHANGE"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "NONE"
+      ],
+      "fresh_reuse_plan": "RUN_THE_HARNESS_ON_THE_PUBLIC_RUNNER_WITH_APT_BINARIES_TO_MEASURE_THE_REMAINING_FAMILIES"
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "NONE"
+      ],
+      "search_stop_decision": "OUT_OF_SCOPE_FAIL_CLOSED_RATE_1_0_WITH_IN_SCOPE_UNCHANGED",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "MEASURE_THE_LIVE_ENTRY_ON_FRESH_IN_SCOPE_AND_OUT_OF_SCOPE_GOALS_WITH_STDLIB_ORACLES__ADD_A_FAIL_CLOSED_ROUTE_ADMISSION_MODULE_IN_FRONT_OF_THE_PINNED_COMPILER_AND_RUNTIME__REJECT_PATH_TOKEN_ONLY_MATCHES_UNSERVED_OUTPUT_ARTIFACTS_SINGLE_WORD_EVIDENCE_AND_TOOL_REPORTED_NON_SUCCESS",
+      "EDIT_goal_compiler_py__REJECTED_BYTE_PINNED_IN_74_RECORDS",
+      "EDIT_live_integrated_brain_v1_py__REJECTED_BYTE_PINNED",
+      "TRUST_output_verified__REJECTED_TOOLS_SET_IT_TRUE_ON_THEIR_OWN_FAILURE_REPORTS"
+    ],
+    "deleted_or_bypassed_paths": [
+      "TRUSTING_output_verified_AS_SUCCESS"
+    ],
+    "selected_surviving_route": "MEASURE_THE_LIVE_ENTRY_ON_FRESH_IN_SCOPE_AND_OUT_OF_SCOPE_GOALS_WITH_STDLIB_ORACLES__ADD_A_FAIL_CLOSED_ROUTE_ADMISSION_MODULE_IN_FRONT_OF_THE_PINNED_COMPILER_AND_RUNTIME__REJECT_PATH_TOKEN_ONLY_MATCHES_UNSERVED_OUTPUT_ARTIFACTS_SINGLE_WORD_EVIDENCE_AND_TOOL_REPORTED_NON_SUCCESS",
+    "why_selected_route_is_fastest_sufficient": "IT_REMOVES_EVERY_OBSERVED_FALSE_PASS_IN_MILLISECONDS_WITHOUT_TOUCHING_PINNED_BYTES_AND_LEAVES_IN_SCOPE_RESULTS_IDENTICAL",
+    "expected_parent_level_state_change": "THE_LIVE_BRAIN_NO_LONGER_CLAIMS_SUCCESS_ON_GOALS_IT_CANNOT_SERVE__FIRST_FRESH_GOAL_END_TO_END_MEASUREMENT_RECORDED_WITH_FOUR_NAMED_COMPILER_DEFECTS__ZERO_CREDIT",
+    "stop_condition": "RECEIPT_SHOWS_OLD_ENTRY_OUT_OF_SCOPE_FAIL_CLOSED_RATE_0_AND_NEW_ENTRY_1_0_ON_100_FRESH_GOALS__IN_SCOPE_RATES_IDENTICAL_THROUGH_BOTH_ENTRIES__TESTS_PASS__REFEREE_ZERO_VIOLATIONS__ZERO_CREDIT__ZERO_SCOREBOARD_CHANGE",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "GOVERNANCE_GUARD_AND_MEASUREMENT__NO_CAPABILITY_ROUTE_IS_CLAIMED"
+    }
+  },
+  "benchmark_or_family_rank_authority": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "explicit_user_authorization": "Owner instruction 2026-10-15: 'start' (measure the live solver end to end) and 'make everything in the brain work ... as one alive creature'."
+}
