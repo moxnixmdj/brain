@@ -1,0 +1,65 @@
+{
+  "schema": "TRUE_CAPABILITY_SPEC_V1",
+  "capability_id": "SAME_IDENTITY_SUPERVISOR_V1",
+  "claim": "Given a repository root with task manifests (PROJECT_BRAIN_SAME_IDENTITY_TASK_V1), mission files and prerequisite files, and an arbitrary interleaving of choose / claim / execute operations issued by the durable worker identity and by an intruder identity while manifests, missions and prerequisites are edited underneath it, the supervisor (1) chooses only causally-ready tasks (valid manifest for that identity, every prerequisite present and hash-bound, mission file hash-bound, not terminal), highest priority first and smallest task id on ties; (2) lets exactly one identity hold a task lease - a different identity never claims, resumes or executes a leased task and the lease owner never changes; (3) refuses to claim or execute after the manifest or mission drifted from the bound hashes; (4) checkpoints once before the first runtime launch when the manifest asks for it (exit 75, runtime not launched); (5) maps the runtime exit code to COMPLETE (0) / BLOCKED (3,4,5) / FAILED (other) and never launches the runtime again once a task is COMPLETE or FAILED; (6) keeps an append-only, contiguously numbered event log per task and writes one evidence receipt per checkpoint and per runtime attempt.",
+  "input_class": "Fresh worlds of 2-5 tasks and 2-5 prerequisite files (20 % of referenced prerequisites missing), manifests valid for the worker (88 %) or declaring the intruder, 10 % wrong mission hashes, 15 % wrong prerequisite hashes, 5 % non-zero spend, 4 % wrong schema, 30 % checkpoint-before-runtime; scripts of 6-16 operations: choose, run (claim+execute), bare claim, bare execute, by the worker (85 %) or the intruder, with scripted runtime exit codes (0 / 3-5 / other) and interleaved edits of manifest priority or agent id, mission content, prerequisite content or deletion; 40 % of scripts additionally contain a deliberate takeover sequence (worker leases a task, manifest rewritten to name the intruder, intruder tries claim, execute and run, manifest restored, worker resumes).",
+  "scope_limits": [
+    "NO continuous-OBS context validation: instance roots carry no canonical/CANONICAL_POINTER.json and missions carry no continuous_obs block, so continuous_obs_runtime.validate_context is never exercised (separately measurable)",
+    "NO real runtime process: the executor is injected and returns scripted exit codes; the default subprocess executor and the ASTRA launcher are out of scope",
+    "NO concurrent-process lock contention: operations are sequential in one process; the inter-process claim lock is not measured",
+    "NO lease-expiry semantics: lease_seconds is never exceeded inside an instance",
+    "NO guarantee about state files written by anything other than the supervisor itself"
+  ],
+  "solver": {
+    "module": "canonical/runtime/same_identity_supervisor.py",
+    "entry": "solve_instance"
+  },
+  "generator": {
+    "module": "canonical/capabilities/true/generators/same_identity_supervisor_gen_v1.py",
+    "entry": "generate"
+  },
+  "oracles": {
+    "module": "canonical/capabilities/true/oracles/same_identity_supervisor_oracles_v1.py",
+    "entry": "oracles",
+    "declared": [
+      {
+        "id": "REFERENCE_MODEL_TRACE",
+        "class": "ANALYTIC_CLOSED_FORM",
+        "lineage": "dictionary simulation of the published contract (no file system, no locks, no supervisor code); compares every operation outcome, state view, runtime launch, final state and evidence file name"
+      },
+      {
+        "id": "LEASE_EXCLUSIVITY",
+        "class": "PROPERTY",
+        "lineage": "none"
+      },
+      {
+        "id": "NO_TERMINAL_REEXECUTION",
+        "class": "PROPERTY",
+        "lineage": "none"
+      },
+      {
+        "id": "EVENT_LOG_INTEGRITY",
+        "class": "PROPERTY",
+        "lineage": "none"
+      },
+      {
+        "id": "PRIORITY_SHIFT_INVARIANCE",
+        "class": "METAMORPHIC",
+        "lineage": "none"
+      }
+    ]
+  },
+  "independent_oracle_ids": [
+    "REFERENCE_MODEL_TRACE",
+    "LEASE_EXCLUSIVITY",
+    "NO_TERMINAL_REEXECUTION",
+    "EVENT_LOG_INTEGRITY",
+    "PRIORITY_SHIFT_INVARIANCE"
+  ],
+  "published_canaries": [],
+  "min_instances": 500,
+  "pass_threshold": 1.0,
+  "falsification_condition": "Any generated world and script on which an operation outcome, lease owner, runtime launch, state, event log or evidence file differs from the contract: an intruder obtaining a lease, a runtime launch after COMPLETE/FAILED, a claim or execution after manifest or mission drift, a wrong selection order, a missing checkpoint, or an event log that is rewritten or non-contiguous.",
+  "model_dependency_count": 0,
+  "history": "Component of LONG_HORIZON_MEMORY_AND_CONTINUITY (and the durable-worker half of SUBAGENT_DELEGATION); previously 'verified' only by hand-written single-path scripts. First fresh-instance measurement on 2026-10-14 found one real gap: execute_claimed_task had no terminal-state guard, so a caller that skipped claim_task could relaunch the runtime on a COMPLETE or FAILED task; fixed the same day with a TaskAlreadyTerminal check at the execute entry. The measured module is the live supervisor; the frozen credited copy (same_identity_supervisor_credited_v1.py) still carries the gap and is not re-measured here."
+}

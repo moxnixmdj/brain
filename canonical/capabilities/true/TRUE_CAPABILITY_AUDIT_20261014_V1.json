@@ -114,8 +114,8 @@
       "matrix_postwave_status": "PASS",
       "matrix_route_quoted": "Brain same-identity supervisor + canonical Git/checkpoint state + reasoning receipts",
       "model_in_route": false,
-      "classification": "MEASURABLE_PENDING",
-      "reason": "model-free (same-identity supervisor + Git/checkpoint state); needs a spec with a crash/restart property oracle; no fresh-instance receipt exists"
+      "classification": "COMPONENT_MEASURED_PASS",
+      "reason": "the same-identity supervisor (choose/claim/checkpoint/execute, lease exclusivity, drift refusal, exit-code state map, append-only event log) is MEASURED_PASS (SAME_IDENTITY_SUPERVISOR_V1, 2000/2000 sandbox; one real gap found and fixed: execute_claimed_task had no terminal-state guard); the Git/checkpoint state half of the quoted route (kill/restart equals committed checkpoint) and the continuous-OBS context check are not yet measured; the family as a whole remains open"
     },
     {
       "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
@@ -124,7 +124,7 @@
       "matrix_route_quoted": "Brain-owned same-identity task/lease + two-worker concurrency + fan-in + independent verification",
       "model_in_route": false,
       "classification": "MEASURABLE_PENDING",
-      "reason": "model-free (task lease + two-worker concurrency + fan-in); needs a spec with lease-exclusivity and fan-in-completeness property oracles; 'ABSOLUTE_CEILING' wording in the matrix is an inference the law forbids"
+      "reason": "model-free (task lease + two-worker concurrency + fan-in); the single-process lease semantics of the shared supervisor are now MEASURED_PASS under SAME_IDENTITY_SUPERVISOR_V1, but the two-worker concurrency, inter-process claim lock and fan-in completeness still need their own spec; 'ABSOLUTE_CEILING' wording in the matrix is an inference the law forbids"
     },
     {
       "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
@@ -238,8 +238,9 @@
     {
       "component": "Same-identity supervisor / checkpoint continuity",
       "path": "canonical/runtime/same_identity_supervisor.py",
-      "classification": "MEASURABLE_PENDING",
-      "evidence": "property oracle (state after kill/restart equals committed checkpoint) can be written with stdlib; not yet specified"
+      "classification": "MEASURED_PASS",
+      "evidence": "ledger row; 2000/2000 sandbox on fresh worlds + adversarial scripts (5 oracles: reference-model trace, lease exclusivity, no terminal re-execution, event-log integrity, priority-shift invariance); real gap found and fixed first: execute_claimed_task lacked a terminal-state guard (runtime could be relaunched on a COMPLETE/FAILED task by a caller that skipped claim_task); mutants caught: lease takeover 71/500 (lease oracle 59), terminal relaunch 39/500, manifest drift accepted 11/500, mission hash not enforced 132/500, wrong selection order 145/500, missing checkpoint 120/500; scope limits: no OBS context check, injected executor, single process, no lease expiry",
+      "spec": "SAME_IDENTITY_SUPERVISOR_V1"
     },
     {
       "component": "Authenticated / capability-first schedulers (lease + fan-in)",
@@ -265,8 +266,8 @@
     "families_by_classification": {
       "EXTERNAL_MODEL_ROUTE": 12,
       "EXTERNAL_MODEL_ROUTE_WITH_MEASURABLE_COMPONENTS": 2,
-      "MEASURABLE_PENDING": 3,
-      "COMPONENT_MEASURED_PASS": 1,
+      "MEASURABLE_PENDING": 2,
+      "COMPONENT_MEASURED_PASS": 2,
       "EXTERNAL_LIBRARY_IS_THE_CAPABILITY": 1
     },
     "families_with_a_model_in_the_quoted_route": 15,
@@ -276,20 +277,21 @@
       "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
       "EXACT_SYMBOLIC_COMPUTATION"
     ],
-    "components_measured_pass": 2,
+    "components_measured_pass": 3,
     "components_measured_fail": 0,
-    "components_measurable_pending": 6,
+    "components_measurable_pending": 5,
     "components_checker_gaming": 1,
     "components_not_yet_audited": 2,
     "defects_found_by_measurement": [
-      "docx_exact_text_edit: replacement by the empty string always failed closed (fixed 2026-10-14)"
+      "docx_exact_text_edit: replacement by the empty string always failed closed (fixed 2026-10-14)",
+      "same_identity_supervisor: execute_claimed_task had no terminal-state guard, so a caller skipping claim_task could relaunch the runtime on a COMPLETE/FAILED task (fixed 2026-10-14; the frozen credited copy same_identity_supervisor_credited_v1.py still carries it)"
     ]
   },
   "what_this_audit_does_not_say": "It does not say any family is owned, does not change any matrix status, predicate, scoreboard or pointer, and credits nothing. A MEASURED_PASS component is exactly what its receipt says.",
   "next_in_order": [
     "DOCX remaining six skills (same oracle family)",
     "XLSX/PPTX vendored skills with recompute oracles",
-    "same-identity supervisor continuity property spec",
+    "same-identity supervisor: crash/restart continuity (state after kill equals committed checkpoint), inter-process claim lock, continuous-OBS context check",
     "lease/fan-in scheduler property spec",
     "CAD T0 on the public runner with closed-form oracles (BOX/CIRCLE/HOLE families) - expect to learn whether the pipeline is broken",
     "file-level audit of bytes_* kernels"

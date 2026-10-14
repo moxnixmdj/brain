@@ -62,6 +62,41 @@
       "spec_path": "canonical/capabilities/true/specs/SACCR_CREDIT_ADDON_V1.json",
       "status": "MEASURED_SANDBOX",
       "verdict": "PASS"
+    },
+    "SAME_IDENTITY_SUPERVISOR_V1": {
+      "canary_pass": "0/0",
+      "carrier": "SANDBOX",
+      "claim": "Given a repository root with task manifests (PROJECT_BRAIN_SAME_IDENTITY_TASK_V1), mission files and prerequisite files, and an arbitrary interleaving of choose / claim / execute operations issued by the durable worker identity and by an intruder identity while manifests, missions and prerequisites are edited underneath it, the supervisor (1) chooses only causally-ready tasks (valid manifest for that identity, every prerequisite present and hash-bound, mission file hash-bound, not terminal), highest priority first and smallest task id on ties; (2) lets exactly one identity hold a task lease - a different identity never claims, resumes or executes a leased task and the lease owner never changes; (3) refuses to claim or execute after the manifest or mission drifted from the bound hashes; (4) checkpoints once before the first runtime launch when the manifest asks for it (exit 75, runtime not launched); (5) maps the runtime exit code to COMPLETE (0) / BLOCKED (3,4,5) / FAILED (other) and never launches the runtime again once a task is COMPLETE or FAILED; (6) keeps an append-only, contiguously numbered event log per task and writes one evidence receipt per checkpoint and per runtime attempt.",
+      "fresh_pass_rate": 1.0,
+      "independent_oracle_ids": [
+        "REFERENCE_MODEL_TRACE",
+        "LEASE_EXCLUSIVITY",
+        "NO_TERMINAL_REEXECUTION",
+        "EVENT_LOG_INTEGRITY",
+        "PRIORITY_SHIFT_INVARIANCE"
+      ],
+      "instances": 2000,
+      "latest_receipt": "canonical/capabilities/true/receipts/SAME_IDENTITY_SUPERVISOR_V1__c3b3fba957043735.json",
+      "measured_utc": "2026-10-14T18:21:07Z",
+      "oracle_classes": {
+        "EVENT_LOG_INTEGRITY": "PROPERTY",
+        "LEASE_EXCLUSIVITY": "PROPERTY",
+        "NO_TERMINAL_REEXECUTION": "PROPERTY",
+        "PRIORITY_SHIFT_INVARIANCE": "METAMORPHIC",
+        "REFERENCE_MODEL_TRACE": "ANALYTIC_CLOSED_FORM"
+      },
+      "scope_limits": [
+        "NO continuous-OBS context validation: instance roots carry no canonical/CANONICAL_POINTER.json and missions carry no continuous_obs block, so continuous_obs_runtime.validate_context is never exercised (separately measurable)",
+        "NO real runtime process: the executor is injected and returns scripted exit codes; the default subprocess executor and the ASTRA launcher are out of scope",
+        "NO concurrent-process lock contention: operations are sequential in one process; the inter-process claim lock is not measured",
+        "NO lease-expiry semantics: lease_seconds is never exceeded inside an instance",
+        "NO guarantee about state files written by anything other than the supervisor itself"
+      ],
+      "seed_source": "OS_URANDOM",
+      "solver_git_blob_sha": "ce869c9a7261633021c4b2f0e1501243f6faa042",
+      "spec_path": "canonical/capabilities/true/specs/SAME_IDENTITY_SUPERVISOR_V1.json",
+      "status": "MEASURED_SANDBOX",
+      "verdict": "PASS"
     }
   },
   "rule": "Rows are written only by execution_guard/true_capability_harness_v1.py from a receipt. A row is a measurement, not a claim; status MEASURED_SANDBOX never counts; status MEASURED_PUBLIC_RUNNER counts only when the receipt is referee-signed.",

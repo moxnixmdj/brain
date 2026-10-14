@@ -58,10 +58,38 @@ both recorded in the spec history, because a wrong test is as bad as a wrong sol
 
 Test of the test: empty-replacement bug re-introduced -> 413/500; both uniqueness defenses removed -> 424/500; both caught.
 
+### SAME_IDENTITY_SUPERVISOR_V1 (solver `canonical/runtime/same_identity_supervisor.py`)
+
+Claim: on a fresh world of task manifests, missions and prerequisite files, under any interleaving of choose / claim / execute
+by the worker identity and by an intruder while manifests, missions and prerequisites are edited underneath it, the supervisor
+chooses only causally-ready tasks (highest priority, smallest id on ties), lets exactly one identity hold a lease, refuses
+manifest and mission drift, checkpoints once before the first runtime launch when asked, maps exit codes to
+COMPLETE / BLOCKED / FAILED, never relaunches a terminal task, and keeps an append-only numbered event log with one evidence
+receipt per checkpoint and per attempt.
+Scope limits: no continuous-OBS context check, injected (never spawned) runtime, single process (no lock contention), no lease
+expiry.
+
+Oracles (independent, stdlib, no supervisor import): a dictionary reference model of the contract compared op-by-op against
+the trace; lease-exclusivity property; no-terminal-re-execution property; event-log-integrity property; uniform priority shift
+metamorphic relation.
+
+Measured in the sandbox on 2026-10-14: **2000/2000** (`MEASURED_SANDBOX`, non-crediting).
+
+What the first run found: **one real gap** - `execute_claimed_task` had no terminal-state guard, so a caller that skipped
+`claim_task` could relaunch the runtime on a COMPLETE or FAILED task. Fixed the same day (`TaskAlreadyTerminal` at the execute
+entry); the frozen credited copy `same_identity_supervisor_credited_v1.py` still carries the gap and is left as is. One oracle
+bug (aliased event list in the model) and one adapter bug (editing a file in a directory that did not exist yet) were fixed
+before the measurement and are the reason the first two runs read 68 % and 99.7 %.
+
+Test of the test (500 instances each, all caught): intruder takeover with every identity check removed -> 71 failures (lease
+oracle alone 59); terminal relaunch guard removed -> 39; manifest drift accepted -> 11; mission hash not enforced -> 132;
+selection order inverted -> 145; checkpoint skipped -> 120. Removing only the two `LeaseConflict` raises is *not* caught,
+and that is correct: inside the contract the agent id is part of the hashed manifest, so the drift check holds the same door.
+
 ## Audit of every claimed capability
 
 `TRUE_CAPABILITY_AUDIT_20261014_V1.json` classifies the 19 Opus-5.5 family routes and the components they name.
 Headline: 15 of 19 family routes contain an external model or service and are therefore **not Brain capabilities under the law**,
-including four the matrix marks PASS/VERIFIED; 3 families are model-free and measurable but unmeasured; 1 family has a measured
-component (DOCX). Components: 2 MEASURED_PASS, 6 MEASURABLE_PENDING, 1 CHECKER_GAMING, 2 NOT_YET_AUDITED. The audit changes no
-matrix status, predicate or pointer.
+including four the matrix marks PASS/VERIFIED; 2 families are model-free and measurable but unmeasured; 2 families have a measured
+component (DOCX; same-identity supervisor). Components: 3 MEASURED_PASS, 5 MEASURABLE_PENDING, 1 CHECKER_GAMING, 2 NOT_YET_AUDITED.
+The audit changes no matrix status, predicate or pointer.
