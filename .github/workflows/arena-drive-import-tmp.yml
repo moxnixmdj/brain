@@ -7,24 +7,31 @@ name: arena-drive-import-tmp
 # This workflow and the imported artifact are removed before any PR.
 
 on:
+  push:
+    branches: [arena/60d45af8-brain]
+    paths: [.github/workflows/arena-drive-import-tmp.yml]
   workflow_dispatch:
     inputs:
       file_id:
         description: Google Drive file id (anyone-with-link)
-        required: true
+        required: false
       expected_sha256:
         description: Expected SHA-256 of the raw file
-        required: true
+        required: false
       target_branch:
         description: Branch to commit the compressed artifact to
-        required: true
-        default: arena/60d45af8-brain
+        required: false
+
+env:
+  DEFAULT_FILE_ID: 1DoMySIW3Zs-g1jRNIaDWFqqhwrOeXrXL
+  DEFAULT_EXPECTED_SHA256: e2b87335d3f73f11d18eb881ea62c898703223b0c1d4a08e92fa19fad57f3121
+  DEFAULT_TARGET_BRANCH: arena/60d45af8-brain
 
 permissions:
   contents: write
 
 concurrency:
-  group: arena-drive-import-${{ inputs.target_branch }}
+  group: arena-drive-import-tmp
   cancel-in-progress: false
 
 jobs:
@@ -32,15 +39,38 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - name: Resolve parameters
+        id: p
+        env:
+          IN_FILE_ID: ${{ inputs.file_id }}
+          IN_SHA: ${{ inputs.expected_sha256 }}
+          IN_BRANCH: ${{ inputs.target_branch }}
+        run: |
+          echo "file_id=${IN_FILE_ID:-$DEFAULT_FILE_ID}" >> "$GITHUB_OUTPUT"
+          echo "sha=${IN_SHA:-$DEFAULT_EXPECTED_SHA256}" >> "$GITHUB_OUTPUT"
+          echo "branch=${IN_BRANCH:-$DEFAULT_TARGET_BRANCH}" >> "$GITHUB_OUTPUT"
+
       - uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.target_branch }}
+          ref: ${{ steps.p.outputs.branch }}
           fetch-depth: 1
 
-      - name: Download from Google Drive and verify digest
+      - name: Skip if already imported
+        id: skip
         env:
-          FILE_ID: ${{ inputs.file_id }}
-          EXPECTED: ${{ inputs.expected_sha256 }}
+          FILE_ID: ${{ steps.p.outputs.file_id }}
+        run: |
+          if [ -f "tmp_arena_import/${FILE_ID}.xz" ]; then
+            echo "already present"; echo "done=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "done=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Download from Google Drive and verify digest
+        if: steps.skip.outputs.done != 'true'
+        env:
+          FILE_ID: ${{ steps.p.outputs.file_id }}
+          EXPECTED: ${{ steps.p.outputs.sha }}
         run: |
           set -euo pipefail
           url="https://drive.usercontent.google.com/download?id=${FILE_ID}&export=download"
@@ -54,9 +84,10 @@ jobs:
           fi
 
       - name: Compress and commit to branch
+        if: steps.skip.outputs.done != 'true'
         env:
-          FILE_ID: ${{ inputs.file_id }}
-          TARGET: ${{ inputs.target_branch }}
+          FILE_ID: ${{ steps.p.outputs.file_id }}
+          TARGET: ${{ steps.p.outputs.branch }}
         run: |
           set -euo pipefail
           mkdir -p tmp_arena_import
