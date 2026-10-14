@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_OWNERSHIP_POSTCONDITIONS_RECEIPT_V2",
+  "date": "2026-10-14",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS",
+  "reducer_path": "canonical/runtime/terminal_global_ownership_postconditions_reducer_v1.py",
+  "brain_reducer_blob_sha": "e03557870c183b473dd1708f5c9141fe6dd3a445",
+  "verification_method": "PUBLIC_RUNNER_CAPSULE_PATTERN",
+  "result": {
+    "terminal_predicates": {
+      "final_donor_deletion_cleanroom_pass": true,
+      "donor_deletion_protocol_v2_bound": true,
+      "runtime_cognition_model_independent": true,
+      "zero_external_model_runtime_cognition_dependencies": true,
+      "copied_or_rehosted_teacher_absent": true,
+      "runtime_dependency_inventory_complete": true
+    },
+    "all_predicates_true": true,
+    "global_ownership_closed": true
+  },
+  "evidence": {
+    "donor_independence_certificate": "canonical/governance/DONOR_INDEPENDENCE_CERTIFICATE_20261014_V1.json",
+    "coverage_completeness_certificate": "canonical/governance/COVERAGE_COMPLETENESS_CERTIFICATE_20261014_V1.json",
+    "r4_closure": "canonical/governance/r4_live_binding_currentness"
+  },
+  "note": "GLOBAL_OWNERSHIP_POSTCONDITIONS_PROVEN_VIA_PUBLIC_ROUTES_AND_VERIFIED_MECHANISMS__ZERO_EXTERNAL_MODEL_DEPENDENCIES__CLEANROOM_VIA_VERIFIED_IMPROVEMENT_LOOP_V2"
+}
