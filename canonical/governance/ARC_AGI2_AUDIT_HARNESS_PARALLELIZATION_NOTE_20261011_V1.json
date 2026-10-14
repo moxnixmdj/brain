@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_ARC_AGI2_AUDIT_HARNESS_PARALLELIZATION_NOTE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "EXECUTION_HARNESS_OPTIMIZATION_ONLY__SUBJECT_AND_SCORE_SEMANTICS_UNCHANGED",
+  "reason": "Verifier exposes 8 CPU cores; sequential task scheduling wasted seven cores and increased wall-clock without changing any task decision.",
+  "unchanged": [
+    "ARC_AGI2_DATASET_COMMIT_f3283f727488ad98fe575ea6a5ac981e4a188e49",
+    "SOLVER_RUNTIME_BYTES",
+    "PRIMITIVE_LIBRARY",
+    "MAX_DEPTH_3",
+    "ATTEMPTS_2",
+    "MAX_SEMANTIC_STATES_PER_DEPTH_4000",
+    "MAX_EQUIVALENT_PROGRAMS_PER_SEMANTICS_4",
+    "MAX_GRID_CELLS_10000",
+    "PASS_AT_2_SCORING_SEMANTICS",
+    "AGGREGATE_ONLY_INFORMATION_POLICY"
+  ],
+  "changed": {
+    "task_scheduling": "SEQUENTIAL_TO_PROCESS_POOL",
+    "workers": 8
+  },
+  "credit_effect": "NONE",
+  "promotion_authority": false,
+  "terminal_credit_delta": 0
+}

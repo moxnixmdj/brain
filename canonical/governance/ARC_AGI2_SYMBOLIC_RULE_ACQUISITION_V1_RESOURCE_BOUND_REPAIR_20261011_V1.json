@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_ARC_AGI2_SYMBOLIC_RULE_ACQUISITION_V1_RESOURCE_BOUND_REPAIR_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FIRST_ACQUISITION_EXECUTION_ABORTED_BEFORE_RESULT__RESOURCE_BOUND_REPAIR__ZERO_CREDIT",
+  "dataset_policy": "ARC_AGI2_PUBLIC_TRAINING_ACQUISITION_PARTITION__TASK_LEVEL_USE_ALLOWED",
+  "aborted_subject_blob": "f58f9b638269468fe137add377c7bfca7450ec9b",
+  "reason": "EXACT_TREE_SEARCH_HAD_NO_PER_TASK_SUBPROBLEM_OR_GENERATED_NODE_BOUND__ALL_EIGHT_CORES_REMAINED_SATURATED_WITHOUT_COMPLETION_RECEIPT",
+  "result_observed": false,
+  "score_observed": false,
+  "task_level_failure_information_used": false,
+  "repair_class": "SEARCH_RESOURCE_BOUND_AND_HOT_LOOP_OPTIMIZATION_ONLY",
+  "repaired_subject_blob": "b3bcc1cdd3fe246ca734b664c6020d2c47282bbc",
+  "new_fail_closed_bounds": {
+    "max_search_subproblems": 5000,
+    "max_generated_split_nodes": 20000
+  },
+  "semantic_representation_changed": false,
+  "action_language_changed": false,
+  "feature_language_changed": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "promotion_authority": false,
+  "terminal_credit_delta": 0
+}

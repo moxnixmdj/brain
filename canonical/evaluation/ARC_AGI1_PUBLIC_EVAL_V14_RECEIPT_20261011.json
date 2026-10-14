@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_ARC_AGI1_PUBLIC_EVAL_V14_RECEIPT_V1",
+  "generated_at": "2026-10-11",
+  "status": "MEASURED_PUBLIC_EVALUATION_RESULT",
+  "benchmark": "ARC-AGI-1",
+  "split": "public_evaluation",
+  "development_split_used_for_iteration": "public_training",
+  "evaluation_tasks_mined_for_repairs_before_this_measurement": false,
+  "brain_runtime": {
+    "repository": "moxnixmdj/brain",
+    "branch": "successor/arc-novelty-compiler-v14-20261011",
+    "path": "canonical/runtime/arc_novelty_compiler_v1.py",
+    "git_blob_sha": "59f20ef7ae34fc832ac8344fb3d5005fbe84bb52"
+  },
+  "corpus": {
+    "repository": "fchollet/ARC-AGI",
+    "git_commit": "399030444e0ab0cc8b4e199870fb20b863846f34",
+    "evaluation_tree_sha": "4a19f8327d45dda5e1809ee47be08bf1484b493b",
+    "task_count": 400
+  },
+  "result": {
+    "scored_tasks": 400,
+    "two_attempt_tasks_solved": 17,
+    "two_attempt_task_solve_rate": 0.0425,
+    "grammar_oracle_tasks_solved": 17,
+    "grammar_oracle_task_coverage": 0.0425,
+    "tasks_with_no_hypothesis": 357,
+    "result_json_sha256": "bc0ad66cf21659b1282ad734621ba165b226ff14999325a4586c18fe01557e17"
+  },
+  "interpretation": {
+    "achieved": "17 exact task solves out of 400 on the public evaluation split under the V14 two-attempt evaluator",
+    "not_claimed": [
+      "official hidden ARC-AGI score",
+      "ARC-AGI-2 score",
+      "frontier parity",
+      "private benchmark certification"
+    ],
+    "development_training_score_is_not_substituted_for_evaluation_score": true
+  }
+}
