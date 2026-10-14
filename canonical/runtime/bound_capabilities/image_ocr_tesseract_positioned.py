@@ -119,6 +119,7 @@ def parse_tsv_positioned(tsv_text: str) -> dict[str, Any]:
         )
 
     text_items: list[dict[str, Any]] = []
+    word_items: list[dict[str, Any]] = []
     total_words = 0
     for key in sorted(groups):
         words = sorted(
@@ -131,12 +132,28 @@ def parse_tsv_positioned(tsv_text: str) -> dict[str, Any]:
             ),
         )
         total_words += len(words)
+        p, block, par, line = key
+        for w in words:
+            word_items.append(
+                {
+                    "text": str(w["text"]),
+                    "box": {
+                        "x0": int(w["left"]),
+                        "y0": int(w["top"]),
+                        "x1_exclusive": int(w["right"]),
+                        "y1_exclusive": int(w["bottom"]),
+                    },
+                    "source_id": f"ocr:p{p}:b{block}:par{par}:l{line}:w{int(w['word_num'])}",
+                    "line_source_id": f"ocr:p{p}:b{block}:par{par}:l{line}",
+                    "word_num": int(w["word_num"]),
+                    "confidence": float(w["confidence"]),
+                }
+            )
         x0 = min(int(w["left"]) for w in words)
         y0 = min(int(w["top"]) for w in words)
         x1 = max(int(w["right"]) for w in words)
         y1 = max(int(w["bottom"]) for w in words)
         confidences = [float(w["confidence"]) for w in words]
-        p, block, par, line = key
         text_items.append(
             {
                 "text": " ".join(str(w["text"]) for w in words),
@@ -160,6 +177,7 @@ def parse_tsv_positioned(tsv_text: str) -> dict[str, Any]:
         "page_width": page_width,
         "page_height": page_height,
         "text_items": text_items,
+        "word_items": word_items,
         "word_count": total_words,
         "line_count": len(text_items),
         "text": combined,
