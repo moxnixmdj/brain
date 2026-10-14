@@ -1,0 +1,100 @@
+{
+  "authority": "NONE",
+  "banned_modules_detected": [],
+  "blobs": {
+    "generator": {
+      "git_blob_sha": "0a367837621bba075750e78c60c3296706499248",
+      "path": "canonical/capabilities/true/generators/same_identity_supervisor_gen_v1.py",
+      "sha256": "ed4aa42877b21e03329f755b7c4aea8d0f580bc5d9f5d41b882c4301c64a295c"
+    },
+    "oracles": {
+      "git_blob_sha": "f3a60f748cd7a97a2b03683d840a55d7bc07a015",
+      "path": "canonical/capabilities/true/oracles/same_identity_supervisor_oracles_v1.py",
+      "sha256": "1e6babc01d3f3a3b8c5bd4bf54bc24ca9862729c3e177dacad8c5678ab693d2f"
+    },
+    "solver": {
+      "git_blob_sha": "ce869c9a7261633021c4b2f0e1501243f6faa042",
+      "path": "canonical/runtime/same_identity_supervisor.py",
+      "sha256": "10a5e7d90f1ff09bcac839a0d7cd9de1afdad89d0c170b01be65ebf16faf80a1"
+    }
+  },
+  "canaries": [],
+  "canary_pass": "0/0",
+  "capability_id": "SAME_IDENTITY_SUPERVISOR_V1",
+  "carrier": "SANDBOX",
+  "claim": "Given a repository root with task manifests (PROJECT_BRAIN_SAME_IDENTITY_TASK_V1), mission files and prerequisite files, and an arbitrary interleaving of choose / claim / execute operations issued by the durable worker identity and by an intruder identity while manifests, missions and prerequisites are edited underneath it, the supervisor (1) chooses only causally-ready tasks (valid manifest for that identity, every prerequisite present and hash-bound, mission file hash-bound, not terminal), highest priority first and smallest task id on ties; (2) lets exactly one identity hold a task lease - a different identity never claims, resumes or executes a leased task and the lease owner never changes; (3) refuses to claim or execute after the manifest or mission drifted from the bound hashes; (4) checkpoints once before the first runtime launch when the manifest asks for it (exit 75, runtime not launched); (5) maps the runtime exit code to COMPLETE (0) / BLOCKED (3,4,5) / FAILED (other) and never launches the runtime again once a task is COMPLETE or FAILED; (6) keeps an append-only, contiguously numbered event log per task and writes one evidence receipt per checkpoint and per runtime attempt.",
+  "failures_sample": [],
+  "fresh_pass_rate": 1.0,
+  "github": {
+    "GITHUB_REF": null,
+    "GITHUB_REPOSITORY": null,
+    "GITHUB_RUN_ATTEMPT": null,
+    "GITHUB_RUN_ID": null,
+    "GITHUB_SHA": null
+  },
+  "independent_oracle_ids": [
+    "REFERENCE_MODEL_TRACE",
+    "LEASE_EXCLUSIVITY",
+    "NO_TERMINAL_REEXECUTION",
+    "EVENT_LOG_INTEGRITY",
+    "PRIORITY_SHIFT_INVARIANCE"
+  ],
+  "instance_pass": 2000,
+  "instances": 2000,
+  "kind": "FRESH_INSTANCE_MEASUREMENT",
+  "network_blocked": true,
+  "nonstdlib_modules_loaded": [],
+  "oracle_classes": {
+    "EVENT_LOG_INTEGRITY": "PROPERTY",
+    "LEASE_EXCLUSIVITY": "PROPERTY",
+    "NO_TERMINAL_REEXECUTION": "PROPERTY",
+    "PRIORITY_SHIFT_INVARIANCE": "METAMORPHIC",
+    "REFERENCE_MODEL_TRACE": "ANALYTIC_CLOSED_FORM"
+  },
+  "pass_threshold": 1.0,
+  "per_oracle": {
+    "EVENT_LOG_INTEGRITY": {
+      "error": 0,
+      "fail": 0,
+      "pass": 2000
+    },
+    "LEASE_EXCLUSIVITY": {
+      "error": 0,
+      "fail": 0,
+      "pass": 2000
+    },
+    "NO_TERMINAL_REEXECUTION": {
+      "error": 0,
+      "fail": 0,
+      "pass": 2000
+    },
+    "PRIORITY_SHIFT_INVARIANCE": {
+      "error": 0,
+      "fail": 0,
+      "pass": 2000
+    },
+    "REFERENCE_MODEL_TRACE": {
+      "error": 0,
+      "fail": 0,
+      "pass": 2000
+    }
+  },
+  "python": "3.11.2",
+  "replay": false,
+  "schema": "TRUE_CAPABILITY_RECEIPT_V1",
+  "scope_limits": [
+    "NO continuous-OBS context validation: instance roots carry no canonical/CANONICAL_POINTER.json and missions carry no continuous_obs block, so continuous_obs_runtime.validate_context is never exercised (separately measurable)",
+    "NO real runtime process: the executor is injected and returns scripted exit codes; the default subprocess executor and the ASTRA launcher are out of scope",
+    "NO concurrent-process lock contention: operations are sequential in one process; the inter-process claim lock is not measured",
+    "NO lease-expiry semantics: lease_seconds is never exceeded inside an instance",
+    "NO guarantee about state files written by anything other than the supervisor itself"
+  ],
+  "seed": "c3b3fba957043735241ae08031c70a0bbdd567f02f403c8205a3c7fd5a36b951",
+  "seed_source": "OS_URANDOM",
+  "self_description": "Measurement of a solver on instances generated after the solver was frozen, judged by oracles in separate files. authority NONE: it records what was observed on this carrier and grants no credit; only a referee-signed run on a public runner may be cited.",
+  "solver_errors": 0,
+  "spec_path": "canonical/capabilities/true/specs/SAME_IDENTITY_SUPERVISOR_V1.json",
+  "spec_sha256": "d1df4f9bfd4cf714a52932be7d9f4d429a911d2015459b8819ad2b412e599179",
+  "verdict": "PASS",
+  "wall_seconds": 19.856
+}

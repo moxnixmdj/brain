@@ -189,6 +189,8 @@ def run_spec(spec_path: pathlib.Path, *, root: pathlib.Path, instances: int | No
              quiet: bool = False) -> dict[str, Any]:
     spec = load_spec(spec_path)
     cap = spec["capability_id"]
+    if str(root) not in sys.path:  # solvers may use intra-repository imports (never the other way round)
+        sys.path.insert(0, str(root))
     solver_path = resolve(root, spec["solver"]["module"])
     gen_path = resolve(root, spec["generator"]["module"])
     oracle_path = resolve(root, spec["oracles"]["module"])

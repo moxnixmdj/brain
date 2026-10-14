@@ -375,6 +375,10 @@ def execute_claimed_task(
         raise SupervisorError("TASK_NOT_CLAIMED")
     if state.get("agent_id") != agent_id or state.get("task_sha256") != _task_sha(task):
         raise SupervisorError("CLAIM_BINDING_INVALID")
+    if state.get("status") in {"COMPLETE", "FAILED"}:
+        # claim_task already refuses terminal tasks; the execute entry must refuse them too
+        # (gap found by fresh-instance measurement, 2026-10-14).
+        raise TaskAlreadyTerminal(str(state.get("status")))
 
     if bool(task.get("checkpoint_before_runtime_once")) and int(state.get("checkpoint_count", 0)) == 0:
         state["checkpoint_count"] = 1
@@ -545,3 +549,93 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+# ---------------------------------------------------------------------------
+# True-capability entry point (canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md).
+# Pure adapter: materialise a described world in a temporary root, replay a
+# script of supervisor operations through the public functions above with a
+# scripted (never spawning) executor, and report what happened.  No logic
+# beyond the functions above.
+# ---------------------------------------------------------------------------
+
+def solve_instance(instance: dict[str, Any]) -> dict[str, Any]:
+    import tempfile
+
+    def _state_view(state_dir: pathlib.Path, task_id: str) -> dict[str, Any] | None:
+        st = _load_state(state_dir, task_id)
+        if st is None:
+            return None
+        return {
+            "status": st.get("status"),
+            "lease_owner": (st.get("lease") or {}).get("owner"),
+            "claim_count": int(st.get("claim_count", 0)),
+            "checkpoint_count": int(st.get("checkpoint_count", 0)),
+            "runtime_attempt_count": int(st.get("runtime_attempt_count", 0)),
+            "event_types": [e.get("type") for e in st.get("events", [])],
+            "event_seqs": [e.get("seq") for e in st.get("events", [])],
+        }
+
+    with tempfile.TemporaryDirectory() as td:
+        root = pathlib.Path(td).resolve()
+        for rel, content in instance["files"].items():
+            path = root / rel
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(content, encoding="utf-8")
+        tasks_dir = root / "tasks"
+        tasks_dir.mkdir(exist_ok=True)
+        for t in instance["tasks"]:
+            (root / t["manifest_path"]).write_text(json.dumps(t["manifest"], sort_keys=True), encoding="utf-8")
+        state_dir = root / "state"
+        evidence_dir = root / "evidence"
+        agents = {"self": instance["agent_id"], "other": instance["other_agent_id"]}
+        executor_calls: list[dict[str, Any]] = []
+        ops_out: list[dict[str, Any]] = []
+
+        def make_executor(rc: int, task_id: str):
+            def _exec(argv: list[str], cwd: pathlib.Path, env: dict[str, str]) -> RuntimeResult:
+                executor_calls.append({"task_id": task_id, "env_agent": env.get("PROJECT_BRAIN_AGENT_ID"), "env_task": env.get("PROJECT_BRAIN_TASK_ID")})
+                return RuntimeResult(rc, "", "")
+            return _exec
+
+        for op in instance["script"]:
+            kind = op["op"]
+            rec: dict[str, Any] = {"op": kind, "ok": True, "error": None, "selected": None, "returncode": None}
+            try:
+                if kind == "choose":
+                    rec["selected"] = choose_causally_ready_task(root, tasks_dir, state_dir, agents["self"]).stem
+                elif kind in {"claim", "run", "execute"}:
+                    t = instance["tasks"][op["task"]]
+                    agent = agents[op.get("agent", "self")]
+                    if kind in {"claim", "run"}:
+                        task, _st = claim_task(root, root / t["manifest_path"], state_dir, agent)
+                    else:
+                        task = _validate_task(_read_json(root / t["manifest_path"]), agent)
+                    if kind in {"run", "execute"}:
+                        code, _receipt = execute_claimed_task(root, task, state_dir, evidence_dir, agent, make_executor(int(op["rc"]), t["task_id"]))
+                        rec["returncode"] = int(code)
+                elif kind == "edit_manifest":
+                    t = instance["tasks"][op["task"]]
+                    manifest = _read_json(root / t["manifest_path"])
+                    manifest[op["field"]] = op["value"]
+                    (root / t["manifest_path"]).write_text(json.dumps(manifest, sort_keys=True), encoding="utf-8")
+                elif kind == "edit_file":
+                    (root / op["path"]).parent.mkdir(parents=True, exist_ok=True)
+                    (root / op["path"]).write_text(op["content"], encoding="utf-8")
+                elif kind == "delete_file":
+                    (root / op["path"]).unlink(missing_ok=True)
+                else:
+                    raise ValueError("UNKNOWN_OP")
+            except Exception as exc:  # noqa: BLE001 - every rejection is data for the oracle
+                rec["ok"] = False
+                rec["error"] = type(exc).__name__ + ":" + str(exc)
+            if kind in {"claim", "run", "execute"}:
+                rec["state_after"] = _state_view(state_dir, instance["tasks"][op["task"]]["task_id"])
+            ops_out.append(rec)
+
+        return {
+            "ops": ops_out,
+            "executor_calls": executor_calls,
+            "final_states": {t["task_id"]: _state_view(state_dir, t["task_id"]) for t in instance["tasks"]},
+            "evidence_files": sorted(p.name for p in evidence_dir.glob("*.json")) if evidence_dir.exists() else [],
+        }
