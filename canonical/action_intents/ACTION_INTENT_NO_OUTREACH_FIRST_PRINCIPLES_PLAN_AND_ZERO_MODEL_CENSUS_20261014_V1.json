@@ -15,7 +15,7 @@
  "probe_specific": false,
  "highest_leverage_now": true,
  "expected_parent_frontier_change": "EIGHT_OWNER_PRIVATE_ROWS_RELABELED_CLOSED_OFF_UNDER_CURRENT_CONSTRAINTS__FOUR_ROWS_REMAIN_WAKE_GATED_ON_THE_CAPABILITY_FLOOR__DONOR_CONJUNCT_GAINS_A_CONTENT_ADDRESSED_INVENTORY_WITH_FIVE_MATERIAL_FINDINGS__ZERO_CREDIT__terminal_real_REMAINS_false",
- "stop_condition": "STOP_AFTER_PLAN_GOVERNANCE_ARTIFACT_CENSUS_RUNTIME_RECEIPT_AND_TESTS_ARE_EMITTED__NO_DELETION_OF_MODEL_DEPENDENT_RUNTIMES_WITHIN_THIS_INTENT",
+ "stop_condition": "STOP_AFTER_HARNESS_CAPSULE_AND_READINESS_RECEIPT_ARE_EMITTED__BLIND_RUN_REQUIRES_OWNER_HF_TOKEN_ON_THE_PUBLIC_RUNNER",
  "why_highest_leverage": "THE_OWNER_ORDER_REMOVES_THE_ONLY_ROUTE_FOR_EIGHT_ROWS_SO_EVERY_FUTURE_MINUTE_SPENT_ON_THEM_IS_WASTE_UNTIL_THE_OWNER_DECIDES__THE_DONOR_CONJUNCT_IS_REQUIRED_UNDER_EVERY_BRANCH_OF_THAT_DECISION_AND_ITS_INVENTORY_REQUIREMENT_WAS_UNMET",
  "mutations_summary": {
   "FIRST_PRINCIPLES_ONE_SHOT_PLAN_20261014_V1.md": "new plan: standing no-outreach order, per-row measurement-function table, impossibility result, owner decision fork, executed steps with P and impact, ordered zero-cost queue",
@@ -27,14 +27,21 @@
   "canonical/runtime/livebench_legacy_predecessor_compiler_audit_v1.py": "F4a syntax repair (literal escape sequences -> newlines)",
   "canonical/runtime/osworld_v21_app_policy_overlay_v1.py": "F4b syntax repair (4 regex literals re-quoted; bodies unchanged)",
   "canonical/runtime/root1_contrastive_semantic_candidate_runner_v1.py": "DELETED (F5; chat-completions route; 0 governance refs) with its test",
-  "canonical/verification/ZERO_MODEL_RUNTIME_DEPENDENCY_CENSUS_RECEIPT_20261014_V2.json": "post-repair census: 0 parse errors, 7 pinned model-dependent files remain, exit 2"
+  "canonical/verification/ZERO_MODEL_RUNTIME_DEPENDENCY_CENSUS_RECEIPT_20261014_V2.json": "post-repair census: 0 parse errors, 7 pinned model-dependent files remain, exit 2",
+  "canonical/runtime/chartography_blind_harness_v1.py": "new blind held-out harness: parquet->pack->solver/scorer views (fail-closed split), scrubbed-subprocess solver run with scorer view sealed, assumed-semantics scorer, taxonomy census, gold-free receipt",
+  "canonical/tests/test_chartography_blind_harness_v1.py": "5 tests: held-out split, fail-closed without answer column, run+score with stub (range/relative/exact semantics, abstention), question classifier, env scrubbing",
+  "canonical/runtime/chartography_blind_capsule_bundle_v1.py": "capsule generator for the public verification-capsule-runner (manifest-bound files + workflow)",
+  "canonical/verification/CHARTOGRAPHY_BLIND_HARNESS_READINESS_20261014_V1.json": "readiness receipt; blocked only on owner self-service HF_TOKEN",
+  "SCORER_MAXIMUM_ROUTE_APPLICABILITY_20261014_V1.md": "owner doctrine (Output Information Equivalence Law) applied to all open rows; Chartography live, OSWorld long program, 10 rows inapplicable",
+  "LIMITING_FACTORS_COMPLETE_LEDGER_20261014_V1.md": "44 limiting factors with causes and removers"
  },
  "local_verification": {
   "census_suite": "7_OF_7_PASS",
   "census_execution": "EXIT_2__model_dependent_file_count_10_OF_2116",
   "terminal_reality_gate": "terminal_real_false_UNCHANGED",
   "verify_current": "NOT_RUN__NO_POINTER_OR_MANIFEST_EDITS",
-  "census_execution_after_repair": "EXIT_2__model_dependent_file_count_7_OF_2115__PARSE_ERRORS_0"
+  "census_execution_after_repair": "EXIT_2__model_dependent_file_count_7_OF_2115__PARSE_ERRORS_0",
+  "chartography_blind_harness_suite": "5_OF_5_PASS__ALSO_5_OF_5_INSIDE_GENERATED_CAPSULE"
  },
  "v22_prewrite_admission": {
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
@@ -101,7 +108,7 @@
   "selected_surviving_route": "AST_LEVEL_FAIL_CLOSED_CENSUS_PLUS_GOVERNANCE_ENCODING_OF_THE_OWNER_ORDER",
   "why_selected_route_is_fastest_sufficient": "BOTH_ARE_PURELY_ADDITIVE__NEITHER_TOUCHES_A_PINNED_BLOB__THE_CENSUS_IS_RERUNNABLE_IN_FIVE_SECONDS_AND_ITS_EXIT_CODE_IS_THE_REQUALIFICATION_PRECONDITION",
   "expected_parent_level_state_change": "EIGHT_OWNER_PRIVATE_ROWS_RELABELED_CLOSED_OFF_UNDER_CURRENT_CONSTRAINTS__FOUR_ROWS_REMAIN_WAKE_GATED_ON_THE_CAPABILITY_FLOOR__DONOR_CONJUNCT_GAINS_A_CONTENT_ADDRESSED_INVENTORY_WITH_FIVE_MATERIAL_FINDINGS__ZERO_CREDIT__terminal_real_REMAINS_false",
-  "stop_condition": "STOP_AFTER_PLAN_GOVERNANCE_ARTIFACT_CENSUS_RUNTIME_RECEIPT_AND_TESTS_ARE_EMITTED__NO_DELETION_OF_MODEL_DEPENDENT_RUNTIMES_WITHIN_THIS_INTENT",
+  "stop_condition": "STOP_AFTER_HARNESS_CAPSULE_AND_READINESS_RECEIPT_ARE_EMITTED__BLIND_RUN_REQUIRES_OWNER_HF_TOKEN_ON_THE_PUBLIC_RUNNER",
   "obs_goal": {
    "real_outcome": "TRUTHFUL_REACHABILITY_LABELS_AND_A_REAL_INVENTORY",
    "proxy_goals_deleted": "NO_PR_COUNT_NO_COMMIT_COUNT_NO_PLAN_LENGTH_CREDIT",

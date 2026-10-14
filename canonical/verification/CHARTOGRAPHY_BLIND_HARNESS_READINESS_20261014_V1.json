@@ -1,0 +1,64 @@
+{
+ "schema": "PROJECT_BRAIN_CHARTOGRAPHY_BLIND_HARNESS_READINESS_20261014_V1",
+ "date": "2026-10-14",
+ "status": "READY__HARNESS_BUILT_AND_SELF_TESTED__CAPSULE_VALIDATED__BLOCKED_ONLY_ON_OWNER_SELF_SERVICE_HF_TOKEN",
+ "target_predicate": "CHARTOGRAPHY_TOOLS_GE_89",
+ "route": "SCORER_MAXIMUM_ROUTE__BENCHMARK_OUTPUT_INFORMATION_EQUIVALENCE_LAW_V1__BLIND_HELD_OUT_EXECUTION_OF_ZERO_MODEL_SOLVER",
+ "artifacts": {
+  "harness": {
+   "path": "canonical/runtime/chartography_blind_harness_v1.py",
+   "git_blob_sha": "1759fd8ede265d6b2dda2bffb0a85b90401e8e8a"
+  },
+  "tests": {
+   "path": "canonical/tests/test_chartography_blind_harness_v1.py",
+   "git_blob_sha": "31a2934d0efbab8a011860752c4f29b039a8cd21",
+   "result": "5_OF_5_PASS"
+  },
+  "capsule_bundle_generator": {
+   "path": "canonical/runtime/chartography_blind_capsule_bundle_v1.py",
+   "git_blob_sha": "a96ef54c4d2ade2f930ea4cb068cc7c524b76d82"
+  },
+  "solver_under_test": {
+   "path": "canonical/runtime/chartography_deterministic_professional_solver_v1.py",
+   "git_blob_sha": "3c3280b4baf6f77bc4fee32d503114d8b199374d",
+   "known_coverage": "TWO_QUESTION_GRAMMARS_ONLY__THERMAL_GRADIENT_LINE_INTERSECTION__PRECIPITATION_WT_PERCENT__ALL_OTHER_QUESTIONS_ABSTAIN"
+  }
+ },
+ "capsule_validation": {
+  "manifest_check": "sha256sum -c MANIFEST.sha256 OK",
+  "isolated_self_test": "5_OF_5_PASS_INSIDE_CAPSULE",
+  "workflow": "run-chartography-blind-zero-model-v1.yml (embedded in generator)",
+  "runner": "ubuntu-24.04 public verification-capsule-runner; deps: tesseract-ocr, pillow, pyarrow, git-lfs"
+ },
+ "integrity_properties": [
+  "SOLVER_VIEW_CONTAINS_ONLY_id_image_prompt__EVERY_OTHER_COLUMN_HELD_OUT",
+  "SCORER_VIEW_CHMOD_000_DURING_SOLVER_PHASE",
+  "SOLVER_SUBPROCESS_ENV_SCRUBBED_OF_TOKEN_SECRET_KEY_HF_VARIABLES",
+  "RECEIPT_CONTAINS_NO_GOLD_VALUES",
+  "FAIL_CLOSED_WHEN_NO_ANSWER_LIKE_COLUMN_OR_UNRESOLVED_PROMPT_IMAGE_COLUMN",
+  "SCORER_SEMANTICS_LABELED_ASSUMED_UNTIL_OFFICIAL_GRADER_BOUND"
+ ],
+ "expected_first_run_outcome": "MOST_TASKS_ABSTAIN__THE_CURRENT_SOLVER_COVERS_TWO_QUESTION_GRAMMARS__THE_FIRST_RECEIPT_IS_A_TRUE_BASELINE_PLUS_THE_TAXONOMY_CENSUS_NEEDED_FOR_SCOPE_ENUMERATION__NOT_A_SCORE_NEAR_89",
+ "owner_prerequisite": {
+  "action": "ACCEPT surgeai/chartography DATASET TERMS ON A FREE HUGGING FACE ACCOUNT AND ADD HF_TOKEN AS A SECRET ON moxnixmdj/verification-capsule-runner",
+  "classification": "SELF_SERVICE__NOT_OUTREACH",
+  "estimated_minutes": 2
+ },
+ "next_steps_after_token": [
+  "python3 canonical/runtime/chartography_blind_capsule_bundle_v1.py --out <capsule-runner checkout>",
+  "open PR on verification-capsule-runner with capsules/chartography_blind_v1 + workflow; workflow_dispatch",
+  "download receipt artifact; bind as CHARTOGRAPHY_BLIND_ZERO_MODEL_BASELINE receipt; enumerate taxonomy; build extractors per cell"
+ ],
+ "accounting": {
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal_credit_delta": 0
+ },
+ "hard_nonclaims": [
+  "NO_CHARTOGRAPHY_SCORE_PRODUCED_YET",
+  "NO_ATOM_OR_FAMILY_PROMOTION",
+  "terminal_real_REMAINS_false"
+ ]
+}
