@@ -321,7 +321,14 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
         shadow = dict(entry)
         shadow["action_template"] = {"args": {key: "${input." + key + "}"}}
         try:
-            inputs.update(gc._bind_inputs(goal, root, shadow, context_paths=context_paths, future_clauses=future_clauses))
+            bound_val = gc._bind_inputs(goal, root, shadow, context_paths=context_paths, future_clauses=future_clauses)
+            val = bound_val.get(key)
+            if key.endswith("_path") and not _is_output_key(key) and val:
+                stem = key[:-5].lower()
+                wanted = _STEM_SUFFIXES.get(stem)
+                if wanted and pathlib.PurePosixPath(val).suffix.lower() not in wanted:
+                    raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", "type_mismatch:" + key)
+            inputs.update(bound_val)
         except GoalCompilationFailure:
             if key.endswith("_path") and not _is_output_key(key):
                 try:
@@ -515,7 +522,7 @@ def _dag_artifact_edges(steps: list[dict[str, Any]], root: pathlib.Path) -> list
     for index, step in enumerate(steps):
         forwarded: dict[str, Any] = {}
         for key, value in step["inputs"].items():
-            if _is_output_key(key) or not isinstance(value, str) or not value:
+            if _is_output_key(key) or not isinstance(value, str) or not value or not key.endswith("_path"):
                 continue
             producer, field = None, None
             for earlier in range(index):

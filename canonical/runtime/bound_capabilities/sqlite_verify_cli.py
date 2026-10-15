@@ -63,11 +63,21 @@ def _cell(record,key,column):
     return str(value)
 
 def _run_json(db,sql):
-    p=subprocess.run(["sqlite3","-json",str(db),sql],text=True,capture_output=True,timeout=60)
-    if p.returncode!=0:
-        raise RuntimeError("SQLITE_CLI_FAILED:"+p.stderr[-1200:])
-    text=p.stdout.strip()
-    return json.loads(text or "[]")
+    try:
+        p=subprocess.run(["sqlite3","-json",str(db),sql],text=True,capture_output=True,timeout=60)
+        if p.returncode==0:
+            return json.loads(p.stdout.strip() or "[]")
+    except FileNotFoundError:
+        pass
+    import sqlite3 as py_sqlite3
+    conn=py_sqlite3.connect(str(db))
+    conn.row_factory=py_sqlite3.Row
+    try:
+        cur=conn.cursor()
+        cur.execute(sql)
+        return [dict(row) for row in cur.fetchall()]
+    finally:
+        conn.close()
 
 def run(args,root):
     source=_safe(root,args.get("json_path"))

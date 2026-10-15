@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Convert repository-local YAML to canonical JSON using verified Ubuntu yq."""
+"""Convert repository-local YAML to canonical JSON using yq or a safe PyYAML fallback."""
 from __future__ import annotations
 import hashlib,json,pathlib,subprocess
 
@@ -18,17 +18,23 @@ def run(args, root):
         raise RuntimeError("YAML_INPUT_REQUIRED")
     if out.suffix.lower()!=".json":
         raise RuntimeError("JSON_OUTPUT_REQUIRED")
-    proc=subprocess.run(
-        ["yq",".",str(src)],
-        cwd=root,text=True,capture_output=True,
-        timeout=max(1,min(int(args.get("timeout_s",60)),120))
-    )
-    if proc.returncode!=0:
-        raise RuntimeError("YQ_FAILED:"+proc.stderr[-1600:])
+    parsed=None
     try:
-        parsed=json.loads(proc.stdout)
-    except Exception as exc:
-        raise RuntimeError("YQ_OUTPUT_NOT_JSON:"+type(exc).__name__) from exc
+        proc=subprocess.run(
+            ["yq",".",str(src)],
+            cwd=root,text=True,capture_output=True,
+            timeout=max(1,min(int(args.get("timeout_s",60)),120))
+        )
+        if proc.returncode==0:
+            parsed=json.loads(proc.stdout)
+    except FileNotFoundError:
+        pass
+    if parsed is None:
+        try:
+            import yaml
+            parsed=yaml.safe_load(src.read_text(encoding="utf-8"))
+        except Exception as exc:
+            raise RuntimeError("YQ_FAILED:fallback_failed:"+type(exc).__name__) from exc
     # Serialize deterministically so downstream transforms and hashes do not
     # depend on yq whitespace.
     raw=(json.dumps(parsed,indent=2,sort_keys=True,ensure_ascii=False)+"\n").encode("utf-8")
