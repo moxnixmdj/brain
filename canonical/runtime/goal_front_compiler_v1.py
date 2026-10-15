@@ -295,7 +295,28 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
                 raise
     for key in typed_keys:
         inputs[key] = bind_typed_key(goal, key, root)
+    repair_output_collisions(goal, inputs, root)
     return inputs
+
+
+def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Path) -> list[str]:
+    """F10: an output path is never one of the action's own input files.
+
+    The pinned binder can resolve `output_path` to an existing input named in the sentence; the
+    tool then overwrites its input and the promised artifact never appears.  When an output key
+    points at a path that is also bound as an input, or at an existing file while the sentence
+    names exactly one file that does not exist yet, the future artifact wins.  Ambiguity raises
+    (fail closed) instead of guessing.  Returns the keys that were rebound."""
+    rebound = []
+    input_paths = {str(v) for k, v in inputs.items() if k.endswith("_path") and not _is_output_key(k)}
+    for key in [k for k in inputs if k.endswith("_path") and _is_output_key(k)]:
+        value = str(inputs[key])
+        collides = value in input_paths
+        exists = (root / value).exists()
+        if collides or (exists and len(_future_artifacts(goal, root)) == 1):
+            inputs[key] = _bind_output_by_future(goal, key, root)
+            rebound.append(key)
+    return rebound
 
 
 # ----------------------------------------------------------------------------- routing
@@ -440,6 +461,8 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
                 best_error = exc
             else:
                 rules.append("F1_BEST_CANDIDATE_BOUND_INSTEAD_OF_FALLTHROUGH")
+                if any(str(inputs[k]) == str(inputs[j]) for k in inputs if _is_output_key(k) for j in inputs if j != k and j.endswith("_path")):
+                    raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", best[2] + ":output_path_equals_an_input_path")
                 return _single(best[2], entry, inputs, best[0], best[3], rules)
             # the best candidate cannot bind: accept the pinned selection only if it is itself a
             # prose-scored candidate consistent with the goal's artifact; never a fall-through
@@ -454,5 +477,14 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
     if compiled is None:
         raise pinned_failure  # type: ignore[misc]
 
+    if single_shape and isinstance(compiled.get("inputs"), dict):
+        if repair_output_collisions(text, compiled["inputs"], root):
+            rules.append("F10_OUTPUT_NEVER_AN_INPUT_FILE")
+            for action in compiled.get("actions") or []:
+                args = action.get("args") if isinstance(action, dict) else None
+                if isinstance(args, dict):
+                    for k, v in compiled["inputs"].items():
+                        if k in args:
+                            args[k] = v
     compiled["front_compiler"] = {"schema": SCHEMA, "rules_applied": rules}
     return compiled

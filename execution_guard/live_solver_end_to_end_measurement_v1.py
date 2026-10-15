@@ -38,7 +38,7 @@ import sys
 import tarfile
 import time
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any, Callable, Mapping
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -288,6 +288,14 @@ GENERATORS: dict[str, Callable[[random.Random, Path, int], Case]] = {
     "OUT_OF_SCOPE_MUST_FAIL_CLOSED": gen_out_of_scope,
 }
 
+
+def all_generators() -> dict[str, Callable[[random.Random, Path, int], Case]]:
+    """Wave-1 families plus the per-capability execution families of live_solver_families_v2."""
+    from execution_guard.live_solver_families_v2 import GENERATORS_V2
+    merged = dict(GENERATORS)
+    merged.update(GENERATORS_V2)
+    return merged
+
 # Families the compiler advertises but that need binaries / packages this machine lacks, or
 # a goal grammar not yet reproduced here.  Listed so the denominator is honest.
 NOT_MEASURED_HERE = {
@@ -425,9 +433,10 @@ def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], k
         rng = random.Random(seed)
         families: dict[str, dict[str, Any]] = {}
         failures: list[dict[str, Any]] = []
-        for family, gen in GENERATORS.items():
+        for family, gen in all_generators().items():
             n = oos_count if family == "OUT_OF_SCOPE_MUST_FAIL_CLOSED" else per_family
             ok = 0
+            env_blocked = 0
             elapsed = 0
             caps: dict[str, int] = {}
             for i in range(n):
@@ -446,13 +455,19 @@ def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], k
                 cap = str(result.get("compiled_capability_id") or result.get("compiler_mode") or "-")
                 caps[cap] = caps.get(cap, 0) + 1
                 good, why = case.oracle(result)
+                blocker = environment_blocker(result)
                 if good:
                     ok += 1
+                elif blocker and case.expect_pass:
+                    env_blocked += 1
+                    if len(failures) < 60:
+                        failures.append({"family": family, "goal": case.goal[:220], "why": "ENVIRONMENT_BLOCKED_HERE:" + blocker,
+                                         "status": str(result.get("status"))[:120], "capability": cap, "admission_rule": None})
                 elif len(failures) < 60:
-                    failures.append({"family": family, "goal": case.goal[:220], "why": why[:300],
+                    failures.append({"family": family, "goal": case.goal[:220], "why": (why + " | " + str(result.get("reason") or ""))[:400],
                                      "status": str(result.get("status"))[:120], "capability": cap,
                                      "admission_rule": ((result.get("route_admission") or {}).get("rule") if isinstance(result.get("route_admission"), dict) else None)})
-            families[family] = {"instances": n, "oracle_pass": ok, "pass_rate": round(ok / n, 4) if n else None,
+            families[family] = {"instances": n, "oracle_pass": ok, "environment_blocked_here": env_blocked, "pass_rate": round(ok / n, 4) if n else None,
                                 "mean_ms": round(elapsed / n / 1e6, 2) if n else None, "routes_taken": caps,
                                 "expected": "all PASS with exact artifact" if family != "OUT_OF_SCOPE_MUST_FAIL_CLOSED" else "all FAIL closed, no artifact"}
         in_scope = [f for f in families if f != "OUT_OF_SCOPE_MUST_FAIL_CLOSED"]
@@ -514,7 +529,19 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--entries", default="old,new", help="comma list of entries to measure: old,new")
     ap.add_argument("--out", default=None, help="receipt path (default: print only)")
     ap.add_argument("--keep", action="store_true", help="keep generated workspaces")
+    ap.add_argument("--summary-md", default=None, help="write a plain-language markdown summary here (heartbeat job summary)")
+    ap.add_argument("--require-all-alive", action="store_true",
+                    help="exit 1 unless, through the new entry, every measured in-scope family passes 100%%, every out-of-scope goal fails closed, and every routable capability is reachable")
+    ap.add_argument("--environment-blockers-are-failures", action="store_true",
+                    help="count instances blocked by missing apt metadata / refused pip installs as failures (the public runner installs everything)")
+    ap.add_argument("--annotate", metavar="RECEIPT_JSON",
+                    help="print GitHub workflow-command annotations (::error / ::warning / ::notice) for an existing receipt and exit; no measurement is run")
     ns = ap.parse_args(argv)
+    if ns.annotate:
+        receipt = json.loads(Path(ns.annotate).read_text(encoding="utf-8"))
+        for line in annotation_lines(receipt, environment_blockers_are_failures=ns.environment_blockers_are_failures):
+            print(line)
+        return 0
     receipt = run(ns.seed, ns.per_family, ns.oos, [x.strip() for x in ns.entries.split(",") if x.strip()], ns.keep)
     text = json.dumps(receipt, indent=2, sort_keys=True) + "\n"
     if ns.out:
@@ -523,13 +550,122 @@ def main(argv: list[str] | None = None) -> int:
                    "in_scope_families_all_pass": f'{v["in_scope_families_all_pass"]}/{v["in_scope_families_measured"]}',
                    "out_of_scope_fail_closed_rate": v["out_of_scope_fail_closed_rate"]} for k, v in receipt["measurements"].items()}
     live = receipt["tool_liveness"]
-    print(json.dumps({"seed": receipt["seed"], "replay": receipt["replay"], "entries": summary,
+    if ns.summary_md:
+        Path(ns.summary_md).write_text(summary_markdown(receipt, environment_blockers_are_failures=ns.environment_blockers_are_failures), encoding="utf-8")
+    verdict_errors = alive_errors(receipt, environment_blockers_are_failures=ns.environment_blockers_are_failures)
+    print(json.dumps({"seed": receipt["seed"], "replay": receipt["replay"], "entries": summary, "alive_errors": verdict_errors,
                       "tools": {"total": live["capabilities_total"], "adapter_missing": len(live["adapter_missing"]),
                                 "adapter_import_failed": len(live["adapter_import_failed"]),
                                 "external_dependency_missing_here": len(live["external_dependency_missing_here"]),
                                 "zero_input_capabilities": live["zero_input_capabilities"]},
                       "reachability_from_one_entry": receipt["reachability_from_one_entry"]["counts"]}, indent=2))
+    if ns.require_all_alive and verdict_errors:
+        return 1
     return 0
+
+
+_ENVIRONMENT_BLOCKERS = ("BOUND_APT_METADATA_NOT_FOUND", "BOUND_PYPI_INSTALL_FAILED", "BOUND_NPM_INSTALL_FAILED",
+                         "externally-managed-environment", "BOUND_APT_PACKAGE_NOT_INSTALLED")
+
+
+def environment_blocker(result: Mapping[str, Any]) -> str | None:
+    """A failure caused by this machine (no apt metadata, pip refused) rather than by the Brain."""
+    reason = str(result.get("reason") or "")
+    for marker in _ENVIRONMENT_BLOCKERS:
+        if marker in reason:
+            return marker
+    return None
+
+
+def alive_errors(receipt: Mapping[str, Any], environment_blockers_are_failures: bool = False) -> list[str]:
+    """The heartbeat's definition of alive, through the one entry only.
+
+    On the public runner every declared dependency is installed, so an environment blocker IS
+    a failure there (environment_blockers_are_failures=True).  In a sandbox without apt
+    metadata it is reported separately and does not make the verdict NOT ALIVE.
+    """
+    errors = []
+    new = (receipt.get("measurements") or {}).get("new")
+    if not isinstance(new, Mapping):
+        return ["NEW_ENTRY_NOT_MEASURED"]
+    for family, row in sorted((new.get("families") or {}).items()):
+        if family == "OUT_OF_SCOPE_MUST_FAIL_CLOSED":
+            continue
+        excused = 0 if environment_blockers_are_failures else int(row.get("environment_blocked_here") or 0)
+        if (row.get("oracle_pass") or 0) + excused != row.get("instances"):
+            errors.append(f"FAMILY_NOT_FULLY_PASSING:{family}:{row.get('oracle_pass')}/{row.get('instances')}")
+    if new.get("out_of_scope_fail_closed_rate") != 1.0:
+        errors.append(f"OUT_OF_SCOPE_NOT_FAIL_CLOSED:{new.get('out_of_scope_fail_closed_rate')}")
+    counts = (receipt.get("reachability_from_one_entry") or {}).get("counts") or {}
+    for state in ("NOT_REACHABLE", "ROUTED_ELSEWHERE"):
+        if counts.get(state):
+            errors.append(f"CAPABILITY_{state}:{counts[state]}")
+    return errors
+
+
+def _wc(text: str) -> str:
+    """Escape a workflow-command message (GitHub decodes %0A as newline, %0D, %25)."""
+    return str(text).replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+
+
+def annotation_lines(receipt: Mapping[str, Any], environment_blockers_are_failures: bool = False) -> list[str]:
+    """GitHub check annotations carrying the verdict, every family count, and the first failure reasons.
+
+    Annotations are readable through the checks API, unlike job logs and artifacts, so a NOT ALIVE
+    verdict explains itself from outside the runner."""
+    errors = alive_errors(receipt, environment_blockers_are_failures=environment_blockers_are_failures)
+    m = receipt.get("measurements") or {}
+    new = m.get("new") or {}
+    rows = []
+    for fam, row in sorted((new.get("families") or {}).items()):
+        env = row.get("environment_blocked_here") or 0
+        rows.append(f"{fam} {row.get('oracle_pass')}/{row.get('instances')}" + (f" (env-blocked {env})" if env else ""))
+    lines = []
+    verdict = "ALIVE" if not errors else "NOT ALIVE"
+    lines.append(f"::notice title=Live Brain heartbeat {verdict}::" + _wc("; ".join(rows) or "no families measured"))
+    for err in errors[:8]:
+        lines.append("::error title=NOT ALIVE::" + _wc(err))
+    seen: set[str] = set()
+    for f in new.get("failures_sample") or []:
+        fam = str(f.get("family"))
+        if fam in seen:
+            continue
+        seen.add(fam)
+        if len(seen) > 8:
+            break
+        lines.append(f"::warning title=first failure in {fam}::" + _wc(f"{f.get('status')} | {f.get('why')} | goal: {f.get('goal')}")[:1000])
+    return lines
+
+
+def summary_markdown(receipt: Mapping[str, Any], environment_blockers_are_failures: bool = False) -> str:
+    m = receipt["measurements"]; live = receipt["tool_liveness"]; reach = receipt["reachability_from_one_entry"]
+    errors = alive_errors(receipt, environment_blockers_are_failures=environment_blockers_are_failures)
+    lines = ["# Live Brain heartbeat", "",
+             f"**Verdict: {'ALIVE' if not errors else 'NOT ALIVE'}** - seed {receipt['seed']}, python {receipt['python']}, platform {receipt['machine']['platform']}", ""]
+    if errors:
+        lines += ["Why not alive:", ""] + [f"- `{e}`" for e in errors] + [""]
+    lines += ["| Fresh-goal family | " + " | ".join(m.keys()) + " |", "|---|" + "---|" * len(m)]
+    families = sorted({f for e in m.values() for f in e["families"]})
+    for f in families:
+        cells = []
+        for e in m:
+            row = m[e]["families"].get(f)
+            if row is None:
+                cells.append("-")
+            else:
+                env = row.get("environment_blocked_here") or 0
+                cells.append(f"{row['oracle_pass']}/{row['instances']}" + (f" ({env} blocked by this machine)" if env else ""))
+        lines.append(f"| {f} | " + " | ".join(cells) + " |")
+    lines += ["", "Reachability from the one entry: " + ", ".join(f"{k} {v}" for k, v in sorted(reach["counts"].items())) + f" (of {reach['capabilities_total']})", ""]
+    not_runnable = sorted(set(live["adapter_import_failed"]) | set(live["external_dependency_missing_here"]) | set(live["adapter_missing"]))
+    lines += [f"Tools runnable on this machine: {live['capabilities_total'] - len(not_runnable)} of {live['capabilities_total']}", ""]
+    if not_runnable:
+        lines += ["Not runnable here:", ""] + [f"- `{cid}`" for cid in not_runnable] + [""]
+    rows = [r for r in reach["rows"] if r["state"] != "REACHED_AND_BOUND"]
+    if rows:
+        lines += ["Capabilities not reached from a sentence (or blocked by design):", ""] + [f"- `{r['capability_id']}`: {r['state']} - {r['detail']}" for r in rows] + [""]
+    lines += ["Families not measured here: " + ", ".join(sorted(receipt["families_not_measured_here"])), "", "Authority NONE. Credit 0. Nothing here is a capability claim."]
+    return "\n".join(lines) + "\n"
 
 
 if __name__ == "__main__":

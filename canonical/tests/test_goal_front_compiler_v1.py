@@ -3,6 +3,7 @@ measured defects corrected in front of it (goal_front_compiler_v1 F1-F9)."""
 from __future__ import annotations
 
 import json
+import pytest
 import os
 import shutil
 import sys
@@ -180,3 +181,24 @@ def test_solve_r6_promised_artifact_must_exist(monkeypatch):
     assert result["pass"] is False
     assert result["status"] == "FAIL_CLOSED__PROMISED_ARTIFACT_MISSING"
     assert result["promised_artifact_errors"] == ["PROMISED_ARTIFACT_MISSING:" + REL + "/never_written.json"]
+
+
+def test_f10_output_path_is_never_the_input_file():
+    """The pinned binder resolved jq's output_path to the input JSON, so the tool overwrote its
+    input and the promised .txt never appeared (first public-runner heartbeat, 0/50)."""
+    (WORK / "doc_f10.json").write_text(json.dumps({"a": {"b": 7}}), encoding="utf-8")
+    goal = f'Run the jq query with jq filter ".a.b" on {REL}/doc_f10.json and save the output to {REL}/answer_f10.txt.'
+    compiled = front.compile_goal(goal, _registry(), ROOT)
+    assert compiled["selected_capability"] == "json.query.jq"
+    assert compiled["inputs"]["json_path"] == REL + "/doc_f10.json"
+    assert compiled["inputs"]["output_path"] == REL + "/answer_f10.txt"
+    assert compiled["inputs"]["jq_filter"] == ".a.b"
+    # the repair helper itself: a colliding output is rebound to the one future artifact
+    inputs = {"json_path": REL + "/doc_f10.json", "output_path": REL + "/doc_f10.json"}
+    assert front.repair_output_collisions(goal, inputs, ROOT) == ["output_path"]
+    assert inputs["output_path"] == REL + "/answer_f10.txt"
+    # two future artifacts named: no guess, fail closed
+    goal2 = f'Run the jq query with jq filter ".a.b" on {REL}/doc_f10.json and save the output to {REL}/one_f10.txt or {REL}/two_f10.txt.'
+    inputs2 = {"json_path": REL + "/doc_f10.json", "output_path": REL + "/doc_f10.json"}
+    with pytest.raises(gc.GoalCompilationFailure):
+        front.repair_output_collisions(goal2, inputs2, ROOT)

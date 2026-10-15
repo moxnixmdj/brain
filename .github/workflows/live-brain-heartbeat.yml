@@ -1,0 +1,62 @@
+name: live-brain-heartbeat
+
+# The Brain's heartbeat.  Every day (and on demand) the public runner gives the ONE live entry
+# (canonical/runtime/live_brain_route_admission_v1.solve) fresh goals it has never seen, judges
+# the real artifacts with stdlib oracles, checks that every out-of-scope goal fails closed, and
+# checks that every bound capability is reachable from a sentence.  The verdict is ALIVE only
+# when all of that holds; otherwise the run is red and the job summary says exactly why.
+# It installs the apt/pip dependencies the sandbox lacks so every tool's liveness is measured
+# on the public runner.  It never pushes, never merges, never writes to main.
+# Receipts are artifacts; authority NONE; nothing here is a capability credit.
+
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "canonical/runtime/goal_front_compiler_v1.py"
+      - "canonical/runtime/live_brain_route_admission_v1.py"
+      - "execution_guard/live_solver_end_to_end_measurement_v1.py"
+      - ".github/workflows/live-brain-heartbeat.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  heartbeat:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: install the tool dependencies the bound capabilities declare
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq jq pandoc poppler-utils qrencode sqlite3 tesseract-ocr zbar-tools zint weasyprint python3-docx python3-openpyxl python3-xlsxwriter || true
+          python3 -m pip install --quiet pillow sympy python-docx openpyxl xlsxwriter pypdf pyyaml msgpack pymongo yq weasyprint || true
+      - name: heartbeat (fresh goals through the one entry)
+        run: |
+          set -euo pipefail
+          mkdir -p heartbeat_out
+          python3 execution_guard/live_solver_end_to_end_measurement_v1.py \
+            --per-family 50 --oos 100 --entries old,new \
+            --out heartbeat_out/LIVE_BRAIN_HEARTBEAT_RECEIPT.json \
+            --summary-md heartbeat_out/SUMMARY.md \
+            --require-all-alive \
+            --environment-blockers-are-failures
+      - name: publish the verdict
+        if: always()
+        run: |
+          if [ -f heartbeat_out/SUMMARY.md ]; then cat heartbeat_out/SUMMARY.md >> "$GITHUB_STEP_SUMMARY"; else echo "heartbeat produced no summary" >> "$GITHUB_STEP_SUMMARY"; fi
+          # the same verdict as check annotations, so the reasons are readable from the PR and the API without opening logs
+          python3 execution_guard/live_solver_end_to_end_measurement_v1.py --annotate heartbeat_out/LIVE_BRAIN_HEARTBEAT_RECEIPT.json --environment-blockers-are-failures || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: live-brain-heartbeat-${{ github.run_id }}-${{ github.run_attempt }}
+          path: heartbeat_out/
+          if-no-files-found: error
