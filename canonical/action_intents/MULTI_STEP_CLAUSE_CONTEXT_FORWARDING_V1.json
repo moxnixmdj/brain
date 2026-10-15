@@ -1,7 +1,220 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V2",
+  "action_id": "MULTI_STEP_CLAUSE_CONTEXT_FORWARDING_V1",
+  "action_kind": "RECONCILE_FRONTIER",
   "canonical_base_commit": "8d7fa7a26fba834c20fe1d2b83eb11b7b134d1df",
+  "canonical_generation": "2026-10-10-general-reusable-capability-frontier-v1",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "F5_COMPOUND_CLAUSE_COMPILATION_DOES_NOT_FORWARD_OUTPUT_PATHS_TO_LATER_CLAUSES",
+  "blocker_lease_key": "2026-10-10-general-reusable-capability-frontier-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::F5_COMPOUND_CLAUSE_COMPILATION_DOES_NOT_FORWARD_OUTPUT_PATHS_TO_LATER_CLAUSES",
   "target_files": [
     "canonical/runtime/goal_front_compiler_v1.py"
-  ]
+  ],
+  "expected_parent_frontier_change": "The existing F5 multi-clause path forwards earlier output paths to downstream clause binding without replacing the compiler with a capability DAG.",
+  "highest_leverage_now": true,
+  "probe_id": null,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "governance_change": false,
+  "selected_route": "REUSE_THE_EXISTING_FRONT_COMPILER_AND_CONTEXT_BINDER_WITH_ACCUMULATED_OUTPUT_PATHS",
+  "stop_condition": "Stop after the exact F5 context handoff is verified, the requested compiler and repository guards are recorded honestly, and no benchmark or terminal credit is claimed; do not add a DAG rewrite.",
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_CURSORBENCH_GE_57_8",
+      "PROWORK_GDPVAL_GE_1846",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "AUTOMATIONBENCH_GE_40",
+      "HLE_TOOLS_GE_67_7",
+      "TB_SCIENCE_GE_58_7",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "success_probability_lcb": "1/2",
+    "wall_clock_cost_ub": "1",
+    "interpretation": "DISCHARGES_NO_BENCHMARK_OBLIGATION__NARROWLY_RECONCILES_THE_F5_CONTEXT_PATH_BINDING_GAP__EXPECTED_UNLOCK_COUNTS_THE_COMPOSITION_PATH_NOT_BENCHMARK_PROGRESS"
+  },
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "canonical/runtime/goal_front_compiler_v1.py"
+    ],
+    "route_class": "REUSE",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ]
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__GOVERNANCE_GUARD",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [],
+      "decisive_question": "DOES_A_PLAIN_MULTI_STEP_SENTENCE_PRODUCE_AND_EXECUTE_ONE_AUTONOMOUS_CAPABILITY_DAG_WHOSE_LATER_STEP_READS_THE_ARTIFACT_AN_EARLIER_STEP_WROTE",
+      "falsifier_id": "CAPABILITY_DAG_TESTS_AND_RECEIPT_V5_AND_THE_PINNED_BYTE_CHECK",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "THE_DAG_RUNS_END_TO_END_ON_A_FRESH_GOAL_WITH_A_STDLIB_TARFILE_ORACLE_AND_ALL_13_TESTS_PASS__NO_COUNTEREXAMPLE_FOUND",
+      "proposal_id": "PHASE1_CAPABILITY_DAG_LIVE_WIRING_20261015_V1"
+    }
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-10-general-reusable-capability-frontier-v1",
+    "canonical_base_commit": "933b3a593656378dba45323fcc1d0b8efcf2e93c",
+    "real_outcome": "Forward an earlier clause output path into the existing compiler binder for a later clause in the same multi-step sentence.",
+    "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "obs_goal": {
+      "real_outcome": "Later clauses bind artifacts produced by earlier clauses without adding a second composition engine.",
+      "proxy_goals_deleted": [
+        "Rewrite the compiler as a custom DAG planner",
+        "Change the pinned goal compiler"
+      ],
+      "surviving_necessity": "F5 clauses still need a minimal typed context handoff for output paths."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "goal_front_compiler_v1._compile_clauses",
+        "goal_front_compiler_v1.bind_all_inputs",
+        "goal_compiler._bind_inputs context_paths"
+      ],
+      "external_existing_routes_checked": [
+        "No external route is needed for this local compiler binding seam."
+      ],
+      "capability_work_deleted": [
+        "No capability planner rewrite",
+        "No live-admission DAG rewrite",
+        "No pinned goal compiler changes"
+      ],
+      "surviving_gap": "F5 compiles clauses separately but does not pass accumulated producer output paths to the next clause."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific context forwarding omission in the existing F5 clause loop.",
+      "delete_bypass_substitute_options": [
+        "DELETE is invalid because compound clause compilation remains necessary.",
+        "BYPASS is invalid because it would skip the existing compiler route.",
+        "REUSE the context-aware input binder and pass producer output paths."
+      ],
+      "surviving_causal_blocker": "F5_COMPOUND_CLAUSE_COMPILATION_DOES_NOT_FORWARD_OUTPUT_PATHS_TO_LATER_CLAUSES"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "REUSE_THE_EXISTING_FRONT_COMPILER_AND_CONTEXT_BINDER_WITH_ACCUMULATED_OUTPUT_PATHS",
+        "Create a new capability DAG compiler",
+        "Edit the pinned goal compiler"
+      ],
+      "losing_routes_reason": "The selected route reuses the existing clause compiler and context binder; a new DAG rewrite is broader than the identified gap and the pinned compiler is not changed.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "The existing F5/F6 tests and a direct context-path binding check cover the local seam. The full front-compiler pytest file currently has two failures in unrelated zero-input registry/reachability expectations; these are reported rather than counted as passes."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Independent F5 clause compilation without output-path forwarding."
+      ],
+      "adjacent_capabilities_absorbed": [
+        "The existing context-aware goal compiler input binder."
+      ],
+      "fresh_reuse_plan": "Do not claim broader live-task transfer until separately verified; retain the F5 path as the narrow integration point."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse the known F5 clause loop and context-aware binder; no external search is needed."
+      ],
+      "search_stop_decision": "The defect is localized to a repository-local binding seam and the selected change is the minimal reuse path.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "REUSE_THE_EXISTING_FRONT_COMPILER_AND_CONTEXT_BINDER_WITH_ACCUMULATED_OUTPUT_PATHS",
+      "Custom capability DAG rewrite",
+      "Pinned goal compiler modification"
+    ],
+    "deleted_or_bypassed_paths": [
+      "Custom capability DAG rewrite",
+      "Pinned goal compiler modification"
+    ],
+    "selected_surviving_route": "REUSE_THE_EXISTING_FRONT_COMPILER_AND_CONTEXT_BINDER_WITH_ACCUMULATED_OUTPUT_PATHS",
+    "why_selected_route_is_fastest_sufficient": "It forwards existing output paths into the existing binder with no new planner, execution contract, or runtime admission machinery.",
+    "expected_parent_level_state_change": "The existing F5 multi-clause path forwards earlier output paths to downstream clause binding without replacing the compiler with a capability DAG.",
+    "stop_condition": "Stop after the exact F5 context handoff is verified, the requested compiler and repository guards are recorded honestly, and no benchmark or terminal credit is claimed; do not add a DAG rewrite.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "A repository-local RECONCILE_FRONTIER action for a known compiler binding defect; no external execution route is selected."
+    }
+  }
 }
