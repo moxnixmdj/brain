@@ -255,11 +255,11 @@ def _is_output_key(key: str) -> bool:
     return key.startswith("output_") or key.split("_")[0] in _OUTPUT_STEMS
 
 
-def _bind_path_by_type(goal: str, key: str, root: pathlib.Path):
+def _bind_path_by_type(goal: str, key: str, root: pathlib.Path, context_paths: list[str] | None = None):
     """F6: bind an input path by file TYPE when the pinned name-stem binder cannot."""
     stem = key[:-5].lower()
     wanted = _STEM_SUFFIXES.get(stem)
-    existing = [(raw, p) for raw, p in gc._repo_paths(goal, root) if p.is_file()]
+    existing = [(raw, p) for raw, p in gc._repo_paths(goal, root) if p.is_file() or raw in (context_paths or [])]
     if wanted:
         matching = [raw for raw, p in existing if "".join(p.suffixes[-2:]).lower() in wanted or p.suffix.lower() in wanted]
     else:
@@ -325,7 +325,7 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
         except GoalCompilationFailure:
             if key.endswith("_path") and not _is_output_key(key):
                 try:
-                    inputs[key] = _bind_path_by_type(goal, key, root)
+                    inputs[key] = _bind_path_by_type(goal, key, root, context_paths=context_paths)
                 except GoalCompilationFailure as type_failure:
                     if not produced_paths:
                         raise
@@ -676,11 +676,16 @@ def _actions_of(compiled: Mapping[str, Any], registry: Mapping[str, Mapping[str,
 def _compile_clauses(clauses: list[str], admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path, rules: list[str]) -> dict[str, Any]:
     registry = routable_registry(admissible)
     parts, actions, effects = [], [], []
-    for clause in clauses:
-        sub = compile_goal(clause, admissible, root)
+    accumulated_outputs = []
+    for idx, clause in enumerate(clauses):
+        future = clauses[idx + 1:]
+        sub = compile_goal(clause, admissible, root, context_paths=accumulated_outputs, future_clauses=future)
         parts.append(sub)
         actions.extend(_actions_of(sub, registry))
         effects.extend(e for e in (sub.get("target_effects") or []) if e not in effects)
+        for k, v in (sub.get("inputs") or {}).items():
+            if k.endswith("_path") and _is_output_key(k) and isinstance(v, str):
+                accumulated_outputs.append(v)
     if not actions:
         raise GoalCompilationFailure("GOAL_COMPILATION_NO_EXECUTABLE_CLAUSE")
     rules.append("F5_COMPOUND_SENTENCES_COMPILED_SEPARATELY")
@@ -695,7 +700,10 @@ def _compile_clauses(clauses: list[str], admissible: Mapping[str, Mapping[str, A
     }
 
 
-def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path) -> dict[str, Any]:
+def compile_goal(
+    goal: str, admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path,
+    context_paths=None, future_clauses=None,
+) -> dict[str, Any]:
     """Front compile. Returns the pinned compiler's shape plus ``front_compiler`` metadata."""
     rules: list[str] = []
     original = str(goal or "").strip()
@@ -743,7 +751,7 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
         if best is not None and selected != best[2]:
             entry = registry[best[2]]
             try:
-                inputs = bind_all_inputs(text, entry, root)
+                inputs = bind_all_inputs(text, entry, root, context_paths=context_paths, future_clauses=future_clauses)
             except GoalCompilationFailure as exc:
                 best_error = exc
             else:
