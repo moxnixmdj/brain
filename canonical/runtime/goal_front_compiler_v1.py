@@ -251,15 +251,20 @@ _STEM_SUFFIXES: dict[str, set[str]] = {
 _OUTPUT_STEMS = {"output", "result", "report", "screenshot", "image", "artifact", "destination", "dest"}
 
 
-def _is_output_key(key: str) -> bool:
+def _is_output_key(key: str, entry: Mapping[str, Any] | None = None) -> bool:
+    if entry is not None and isinstance(entry, Mapping):
+        pb = entry.get("proposal_bindings")
+        if isinstance(pb, Mapping) and key in pb and pb[key].get("type") == "effect_result":
+            return False
     return key.startswith("output_") or key.split("_")[0] in _OUTPUT_STEMS
 
 
-def _bind_path_by_type(goal: str, key: str, root: pathlib.Path, context_paths: list[str] | None = None):
+def _bind_path_by_type(goal: str, key: str, root: pathlib.Path, exclude=None):
     """F6: bind an input path by file TYPE when the pinned name-stem binder cannot."""
     stem = key[:-5].lower()
     wanted = _STEM_SUFFIXES.get(stem)
-    existing = [(raw, p) for raw, p in gc._repo_paths(goal, root) if p.is_file() or raw in (context_paths or [])]
+    skip = {str(x) for x in (exclude or [])}
+    existing = [(raw, p) for raw, p in gc._repo_paths(goal, root) if p.is_file() and raw not in skip]
     if wanted:
         matching = [raw for raw, p in existing if "".join(p.suffixes[-2:]).lower() in wanted or p.suffix.lower() in wanted]
     else:
@@ -300,9 +305,12 @@ def _bind_produced_artifact(goal: str, key: str, root: pathlib.Path, produced_pa
     stem = key[:-5].lower() if key.endswith("_path") else key.lower()
     wanted = _STEM_SUFFIXES.get(stem.replace("output_", ""))
     if wanted:
-        typed = [p for p in produced if pathlib.PurePosixPath(p).suffix.lower() in wanted or "".join(pathlib.PurePosixPath(p).suffixes[-2:]).lower() in wanted]
+        typed = [p for p in candidates if pathlib.PurePosixPath(p).suffix.lower() in wanted or "".join(pathlib.PurePosixPath(p).suffixes[-2:]).lower() in wanted]
         if len(typed) == 1:
             return typed[0]
+        typed_all = [p for p in produced if pathlib.PurePosixPath(p).suffix.lower() in wanted or "".join(pathlib.PurePosixPath(p).suffixes[-2:]).lower() in wanted]
+        if len(typed_all) == 1:
+            return typed_all[0]
     raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":" + str(len(candidates)) + "_cross_step_artifacts_named")
 
 
@@ -323,34 +331,50 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
         try:
             bound_val = gc._bind_inputs(goal, root, shadow, context_paths=context_paths, future_clauses=future_clauses)
             val = bound_val.get(key)
-            if key.endswith("_path") and not _is_output_key(key) and val:
+            if key.endswith("_path") and not _is_output_key(key, entry) and val:
                 stem = key[:-5].lower()
                 wanted = _STEM_SUFFIXES.get(stem)
                 if wanted and pathlib.PurePosixPath(val).suffix.lower() not in wanted:
                     raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", "type_mismatch:" + key)
             inputs.update(bound_val)
         except GoalCompilationFailure:
-            if key.endswith("_path") and not _is_output_key(key):
-                try:
-                    inputs[key] = _bind_path_by_type(goal, key, root, context_paths=context_paths)
-                except GoalCompilationFailure as type_failure:
-                    if not produced_paths:
-                        raise
+            if key.endswith("_path") and not _is_output_key(key, entry):
+                is_effect_consumer = (
+                    isinstance(entry.get("proposal_bindings"), Mapping)
+                    and entry["proposal_bindings"].get(key, {}).get("type") == "effect_result"
+                )
+                if is_effect_consumer and produced_paths:
                     try:
                         inputs[key] = _bind_produced_artifact(goal, key, root, produced_paths)
                     except GoalCompilationFailure:
-                        raise type_failure
+                        inputs[key] = _bind_path_by_type(goal, key, root, exclude=produced_paths)
+                else:
+                    try:
+                        inputs[key] = _bind_path_by_type(goal, key, root, exclude=produced_paths)
+                    except GoalCompilationFailure as type_failure:
+                        if not produced_paths:
+                            raise
+                        try:
+                            inputs[key] = _bind_produced_artifact(goal, key, root, produced_paths)
+                        except GoalCompilationFailure:
+                            raise type_failure
             elif key.endswith("_path"):
-                inputs[key] = _bind_output_by_future(goal, key, root, exclude=produced_paths)
+                if produced_paths:
+                    try:
+                        inputs[key] = _bind_produced_artifact(goal, key, root, produced_paths)
+                    except GoalCompilationFailure:
+                        inputs[key] = _bind_output_by_future(goal, key, root, exclude=produced_paths)
+                else:
+                    inputs[key] = _bind_output_by_future(goal, key, root, exclude=produced_paths)
             else:
                 raise
     for key in typed_keys:
         inputs[key] = bind_typed_key(goal, key, root)
-    repair_output_collisions(goal, inputs, root, exclude=produced_paths)
+    repair_output_collisions(goal, inputs, root, exclude=produced_paths, entry=entry)
     return inputs
 
 
-def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Path, exclude=None) -> list[str]:
+def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Path, exclude=None, entry: Mapping[str, Any] | None = None) -> list[str]:
     """F10: an output path is never one of the action's own input files.
 
     The pinned binder can resolve `output_path` to an existing input named in the sentence; the
@@ -359,8 +383,8 @@ def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Pa
     names exactly one file that does not exist yet, the future artifact wins.  Ambiguity raises
     (fail closed) instead of guessing.  Returns the keys that were rebound."""
     rebound = []
-    input_paths = {str(v) for k, v in inputs.items() if k.endswith("_path") and not _is_output_key(k)}
-    for key in [k for k in inputs if k.endswith("_path") and _is_output_key(k)]:
+    input_paths = {str(v) for k, v in inputs.items() if k.endswith("_path") and not _is_output_key(k, entry)}
+    for key in [k for k in inputs if k.endswith("_path") and _is_output_key(k, entry)]:
         value = str(inputs[key])
         collides = value in input_paths
         exists = (root / value).exists()
@@ -462,9 +486,9 @@ def _whole_value_placeholder(template: Any, key: str) -> bool:
     return bool(slots) and all(slot == marker for slot in slots)
 
 
-def _claiming_earlier_artifact(inputs: Mapping[str, Any], produced_paths) -> bool:
+def _claiming_earlier_artifact(inputs: Mapping[str, Any], produced_paths, entry: Mapping[str, Any] | None = None) -> bool:
     produced = {str(x) for x in (produced_paths or [])}
-    return any(_is_output_key(key) and isinstance(value, str) and value in produced for key, value in inputs.items())
+    return any(_is_output_key(key, entry) and isinstance(value, str) and value in produced for key, value in inputs.items())
 
 
 def bind_dag_clause(clause: str, admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path, produced_paths=None):
@@ -483,9 +507,9 @@ def bind_dag_clause(clause: str, admissible: Mapping[str, Mapping[str, Any]], ro
             inputs = bind_all_inputs(clause, entry, root, produced_paths=produced_paths)
         except GoalCompilationFailure:
             continue
-        if _claiming_earlier_artifact(inputs, produced_paths):
+        if _claiming_earlier_artifact(inputs, produced_paths, entry):
             continue
-        if any(str(inputs[k]) == str(inputs[j]) for k in inputs if _is_output_key(k) for j in inputs if j != k and j.endswith("_path")):
+        if any(str(inputs[k]) == str(inputs[j]) for k in inputs if _is_output_key(k, entry) for j in inputs if j != k and j.endswith("_path")):
             continue
         return {"capability_id": cid, "inputs": inputs, "score": score, "specificity": specificity, "match_evidence": dict(evidence)}
     return None
@@ -501,7 +525,7 @@ def _dag_steps(clauses: list[str], admissible: Mapping[str, Mapping[str, Any]], 
             return None
         entry = registry[bound["capability_id"]]
         outputs = [(key, str(value)) for key, value in bound["inputs"].items()
-                   if _is_output_key(key) and isinstance(value, str) and value]
+                   if _is_output_key(key, entry) and isinstance(value, str) and value]
         steps.append({**bound, "clause": clause, "entry": entry, "outputs": outputs, "forwarded": {}})
         produced.extend(path for _key, path in outputs)
     return steps
@@ -522,7 +546,7 @@ def _dag_artifact_edges(steps: list[dict[str, Any]], root: pathlib.Path) -> list
     for index, step in enumerate(steps):
         forwarded: dict[str, Any] = {}
         for key, value in step["inputs"].items():
-            if _is_output_key(key) or not isinstance(value, str) or not value or not key.endswith("_path"):
+            if _is_output_key(key, step.get("entry")) or not isinstance(value, str) or not value or not key.endswith("_path"):
                 continue
             producer, field = None, None
             for earlier in range(index):
@@ -683,16 +707,11 @@ def _actions_of(compiled: Mapping[str, Any], registry: Mapping[str, Mapping[str,
 def _compile_clauses(clauses: list[str], admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path, rules: list[str]) -> dict[str, Any]:
     registry = routable_registry(admissible)
     parts, actions, effects = [], [], []
-    accumulated_outputs = []
-    for idx, clause in enumerate(clauses):
-        future = clauses[idx + 1:]
-        sub = compile_goal(clause, admissible, root, context_paths=accumulated_outputs, future_clauses=future)
+    for clause in clauses:
+        sub = compile_goal(clause, admissible, root)
         parts.append(sub)
         actions.extend(_actions_of(sub, registry))
         effects.extend(e for e in (sub.get("target_effects") or []) if e not in effects)
-        for k, v in (sub.get("inputs") or {}).items():
-            if k.endswith("_path") and _is_output_key(k) and isinstance(v, str):
-                accumulated_outputs.append(v)
     if not actions:
         raise GoalCompilationFailure("GOAL_COMPILATION_NO_EXECUTABLE_CLAUSE")
     rules.append("F5_COMPOUND_SENTENCES_COMPILED_SEPARATELY")
@@ -707,10 +726,7 @@ def _compile_clauses(clauses: list[str], admissible: Mapping[str, Mapping[str, A
     }
 
 
-def compile_goal(
-    goal: str, admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path,
-    context_paths=None, future_clauses=None,
-) -> dict[str, Any]:
+def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path) -> dict[str, Any]:
     """Front compile. Returns the pinned compiler's shape plus ``front_compiler`` metadata."""
     rules: list[str] = []
     original = str(goal or "").strip()
@@ -758,12 +774,12 @@ def compile_goal(
         if best is not None and selected != best[2]:
             entry = registry[best[2]]
             try:
-                inputs = bind_all_inputs(text, entry, root, context_paths=context_paths, future_clauses=future_clauses)
+                inputs = bind_all_inputs(text, entry, root)
             except GoalCompilationFailure as exc:
                 best_error = exc
             else:
                 rules.append("F1_BEST_CANDIDATE_BOUND_INSTEAD_OF_FALLTHROUGH")
-                if any(str(inputs[k]) == str(inputs[j]) for k in inputs if _is_output_key(k) for j in inputs if j != k and j.endswith("_path")):
+                if any(str(inputs[k]) == str(inputs[j]) for k in inputs if _is_output_key(k, entry) for j in inputs if j != k and j.endswith("_path")):
                     raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", best[2] + ":output_path_equals_an_input_path")
                 return _single(best[2], entry, inputs, best[0], best[3], rules)
             # the best candidate cannot bind: accept the pinned selection only if it is itself a
@@ -780,7 +796,7 @@ def compile_goal(
         raise pinned_failure  # type: ignore[misc]
 
     if single_shape and isinstance(compiled.get("inputs"), dict):
-        if repair_output_collisions(text, compiled["inputs"], root):
+        if repair_output_collisions(text, compiled["inputs"], root, entry=registry.get(selected)):
             rules.append("F10_OUTPUT_NEVER_AN_INPUT_FILE")
             for action in compiled.get("actions") or []:
                 args = action.get("args") if isinstance(action, dict) else None

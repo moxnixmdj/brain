@@ -1,0 +1,226 @@
+{
+  "action_id": "APPLY_29_FAMILY_RUNTIME_HANDOFF_20261015_V1",
+  "action_kind": "GOVERNANCE_GUARD",
+  "active_program": "GENERAL_REUSABLE_CAPABILITY_DEVELOPMENT_PROGRAM_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "earlier_routes_exhausted_reason": "DELETE_BYPASS_REUSE_ADAPT_SUBSTITUTE_CANNOT_MAKE_THE_PINNED_COMPILER_BYTES_COMPOSE_MULTI_STEP_REQUESTS_AND_THE_PLANNER_IS_ALREADY_BRAIN_OWNED__THE_FRONT_LAYER_COMPOSES_IT_WITHOUT_EDITING_ANY_PINNED_BYTE",
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "execution_guard/live_solver_families_v5.py",
+      "canonical/tests/test_live_solver_families_v5.py",
+      "execution_guard/live_solver_end_to_end_measurement_v1.py"
+    ],
+    "route_class": "COMPOSE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-10-general-reusable-capability-frontier-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::LIVE_SOLVER_MEASUREMENT_COVERED_26_FAMILIES_AND_DID_NOT_INCLUDE_THE_THREE_NEW_FAIL_CLOSED_AND_OBJECTIVE_ACCEPTANCE_FAMILIES_FROM_THE_OWNER_SUPPLIED_HANDOFF",
+  "canonical_base_commit": "3dc78c2a",
+  "canonical_generation": "2026-10-10-general-reusable-capability-frontier-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "LIVE_SOLVER_MEASUREMENT_COVERED_26_FAMILIES_AND_DID_NOT_INCLUDE_THE_THREE_NEW_FAIL_CLOSED_AND_OBJECTIVE_ACCEPTANCE_FAMILIES_FROM_THE_OWNER_SUPPLIED_HANDOFF",
+  "date": "2026-10-15",
+  "expected_parent_change": "DEPENDENCY_COMPLETE_LIVE_HEARTBEAT_EXPANDS_FROM_26_TO_29_IN_SCOPE_FAMILIES_WITH_ALL_29_PASSING_50_OF_50__ZERO_CREDIT",
+  "expected_parent_frontier_change": "DEPENDENCY_COMPLETE_LIVE_HEARTBEAT_EXPANDS_FROM_26_TO_29_IN_SCOPE_FAMILIES_WITH_ALL_29_PASSING_50_OF_50__ZERO_CREDIT",
+  "explicit_user_authorization": "Owner instruction 2026-10-15: \"Implement Phase 1 of the One-Alive-Creature Architecture: wire canonical/runtime/capability_planner.py directly into the live admission entry (live_brain_route_admission_v1.py and goal_front_compiler_v1.py) so multi-step requests automatically generate and execute an autonomous capability DAG with artifact forwarding.\" Same day, earlier: \"make sure that literally all the capabilities function as one alive creature. It must be all the capabilities... Take the fastest right route with the minimal actions.\"",
+  "falsification_condition": "DEPENDENCY_COMPLETE_HEARTBEAT_DOES_NOT_REPORT_ALL_29_IN_SCOPE_FAMILIES_50_OF_50_OR_OUT_OF_SCOPE_100_OF_100__OR_REPO_INTEGRITY_GUARD_FAILS",
+  "governance_change": true,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "interpretation": "DISCHARGES_NOTHING__CLOSES_MORE_OF_THE_GAP_SHARED_BY_ALL_13_OPEN_OBLIGATIONS_THAT_THE_SYSTEM_MUST_COMBINE_ITS_OWN_TOOLS_TO_ANSWER_A_MULTI_STEP_REQUEST_RATHER_THAN_ONE_CALL_PER_SENTENCE__THE_LIVE_ENTRY_NOW_PLANS_AND_EXECUTES_ONE_AUTONOMOUS_DAG_WITH_REAL_ARTIFACT_FORWARDING_AND_REFUSES_A_PLAN_A_STEP_OF_WHICH_ITS_OWN_SENTENCE_DOES_NOT_SUPPORT__UNLOCK_LCB_1_COUNTS_THE_ENTRY_NOT_A_BENCHMARK",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1/2",
+    "wall_clock_cost_ub": "1"
+  },
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/goal_front_compiler_v1.py",
+    "canonical/runtime/live_brain_route_admission_v1.py",
+    "execution_guard/live_solver_end_to_end_measurement_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "3dc78c235ce5ecd97814be133c9035666dd485fb",
+    "canonical_generation_or_commit": "2026-10-10-general-reusable-capability-frontier-v1",
+    "deleted_or_bypassed_paths": [
+      "INDEPENDENT_CLAUSE_CONCATENATION_AS_COMPOSITION",
+      "A_SECOND_COMPOSITION_ENGINE"
+    ],
+    "expected_parent_level_state_change": "DEPENDENCY_COMPLETE_LIVE_HEARTBEAT_EXPANDS_FROM_26_TO_29_IN_SCOPE_FAMILIES_WITH_ALL_29_PASSING_50_OF_50__ZERO_CREDIT",
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "REUSE_THE_OWNED_PLANNER_INSTEAD_OF_WRITING_A_COMPOSER",
+        "COMPILE_THE_ONE_DAG_IN_THE_FRONT_LAYER_INSTEAD_OF_EDITING_BYTE_PINNED_KERNELS"
+      ],
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_WIRING_GAP",
+      "surviving_causal_blocker": "ONE_DAG_COMPILER_AND_ONE_STEP_BY_STEP_ADMISSION_INSIDE_THE_LIVE_ENTRY"
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "NO_NEW_PLANNER_AND_NO_NEW_COMPOSER_WAS_WRITTEN"
+      ],
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/capability_planner.py plan_capabilities/plan_actions",
+        "goal_front_compiler_v1 compound clause compilation (F5)",
+        "astra_runtime._run_capability_planned_goal",
+        "canonical/runtime/live_capability_composition_v1.py"
+      ],
+      "external_existing_routes_checked": [
+        "NONE_NEEDED__THE_PLANNER_IS_ALREADY_BRAIN_OWNED_AND_LOCAL"
+      ],
+      "surviving_gap": "NO_LIVE_ENTRY_REACHED_THE_OWNED_PLANNER_FOR_A_PLAIN_MULTI_STEP_SENTENCE"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "CLAUSE_CONCATENATION_PRESENTED_AS_COMPOSITION",
+        "COUNTING_MORE_RECEIPTS_AS_CAPABILITY"
+      ],
+      "real_outcome": "THE_ENTRY_ANSWERS_A_MULTI_STEP_SENTENCE_AS_ONE_PLAN_AND_NEVER_RUNS_A_STEP_ITS_OWN_SENTENCE_DOES_NOT_SUPPORT",
+      "surviving_necessity": "AN_ORDERED_PROVIDER_CONSUMER_DAG_WHOSE_CONSUMER_READS_THE_RESULT_FIELD_ITS_PRODUCER_WROTE"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": [
+        "FRONT_LAYER_COMPOSITION_OF_BOUND_CAPABILITIES_(live_capability_composition_v1 style $ref chains are subsumed for bound capabilities)"
+      ],
+      "downstream_work_to_delete_or_supersede": [
+        "ANY_CLAIM_THAT_A_COMPOUND_SENTENCE_IS_ONE_CAPABILITY_CALL"
+      ],
+      "fresh_reuse_plan": "THE_PUBLIC_RUNNER_HEARTBEAT_RE_MEASURES_THE_SAME_FAMILIES_ON_EVERY_MERGE_TO_MAIN"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": [
+        "NONE"
+      ],
+      "search_stop_decision": "THE_DAG_RUNS_END_TO_END_WITH_A_REAL_ARCHIVE_AND_ALL_13_CAPABILITY_DAG_TESTS_PASS"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "PINNED_BYTES_CANNOT_CHANGE_AND_A_SECOND_COMPOSER_WOULD_BE_A_SECOND_TRUTH",
+      "routes_ranked": [
+        "FRONT_LAYER_DAG_COMPILED_BY_THE_OWNED_PLANNER_AND_EXECUTED_THROUGH_THE_EXISTING_CONTROLLER_CALLS",
+        "EDIT_goal_compiler_py__REJECTED_BYTE_PINNED_IN_CAPABILITY_RECORDS",
+        "NEW_COMPOSITION_ENGINE__REJECTED_IT_WOULD_DUPLICATE_capability_planner"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "CAPABILITY_DAG_TESTS_13__A_FRESH_MULTI_STEP_GOAL_JUDGED_ON_THE_REAL_ARCHIVE_BY_A_STDLIB_TARFILE_ORACLE__THE_END_TO_END_RECEIPT_V5__REFEREE_RULES"
+    },
+    "real_outcome": "A_PLAIN_MULTI_STEP_SENTENCE_GENERATES_AND_EXECUTES_ONE_AUTONOMOUS_CAPABILITY_DAG_WITH_REAL_ARTIFACT_FORWARDING",
+    "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "GOVERNANCE_GUARD_AND_INTEGRATION__NO_CAPABILITY_ACQUISITION_ROUTE_IS_CLAIMED"
+    },
+    "routes_considered": [
+      "COMPOSE_THE_OWNED_PLANNER_INTO_THE_FRONT_LAYER_AND_THE_LIVE_ENTRY__ONE_PROVIDER_CONSUMER_DAG_PER_MULTI_STEP_SENTENCE__STEP_BY_STEP_ADMISSION__ONE_EXECUTOR_FOR_THE_WHOLE_PLAN",
+      "EDIT_goal_compiler_py__REJECTED_BYTE_PINNED",
+      "WRITE_A_NEW_PLANNER__REJECTED_capability_planner_IS_ALREADY_OWNED",
+      "KEEP_CLAUSE_CONCATENATION__REJECTED_IT_NEVER_FORWARDS_AN_ARTIFACT"
+    ],
+    "selected_surviving_route": "COMPOSE_THE_OWNED_PLANNER_INTO_THE_FRONT_LAYER_AND_THE_LIVE_ENTRY",
+    "stop_condition": "PUBLIC_DEPENDENCY_COMPLETE_HEARTBEAT_REPORTS_ALL_29_IN_SCOPE_FAMILIES_50_OF_50_AND_OUT_OF_SCOPE_100_OF_100__REFEREE_ZERO_VIOLATIONS__ZERO_CREDIT",
+    "why_selected_route_is_fastest_sufficient": "TWO_EXISTING_MODULES_AND_ONE_NEW_TEST_FILE__NO_PINNED_BYTE_TOUCHED__NO_NEW_CAPABILITY_INVENTED__THE_PLAN_IS_ALREADY_THE_PLANNER_S_OWN_OUTPUT"
+  },
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "APPLY_OWNER_SUPPLIED_HANDOFF__REUSE_EXISTING_LIVE_ENTRY_COMPILER_PLANNER_EXECUTOR_AND_MEASUREMENT__ADD_THREE_FRESH_FAMILIES__REMOVE_TRANSFER_ARCHIVE",
+  "stop_condition": "PUBLIC_DEPENDENCY_COMPLETE_HEARTBEAT_REPORTS_ALL_29_IN_SCOPE_FAMILIES_50_OF_50_AND_OUT_OF_SCOPE_100_OF_100__REFEREE_ZERO_VIOLATIONS__ZERO_CREDIT",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": true,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__GOVERNANCE_GUARD",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [],
+      "decisive_question": "DOES_A_PLAIN_MULTI_STEP_SENTENCE_PRODUCE_AND_EXECUTE_ONE_AUTONOMOUS_CAPABILITY_DAG_WHOSE_LATER_STEP_READS_THE_ARTIFACT_AN_EARLIER_STEP_WROTE",
+      "falsifier_id": "CAPABILITY_DAG_TESTS_AND_RECEIPT_V5_AND_THE_PINNED_BYTE_CHECK",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "THE_DAG_RUNS_END_TO_END_ON_A_FRESH_GOAL_WITH_A_STDLIB_TARFILE_ORACLE_AND_ALL_13_TESTS_PASS__NO_COUNTEREXAMPLE_FOUND",
+      "proposal_id": "PHASE1_CAPABILITY_DAG_LIVE_WIRING_20261015_V1"
+    }
+  },
+  "weakens_existing_guard": false
+}

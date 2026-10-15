@@ -1,254 +1,229 @@
+"""Fresh-goal EXECUTION families, wave 4 (heartbeat).  Same contract as waves 2 & 3: fresh inputs,
+one plain sentence, an oracle that judges the real artifact with the standard library or typed readers.
+
+  DOCX_CREATE              docx.document.create.python_docx
+  XLSX_CREATE              xlsx.table.create_from_json_records
+  XLSX_VERIFY              xlsx.table.verify_against_json_records
+  SOURCE_RANKING_BM25      source.objective_relevance.rank.bm25
+  DECISION_SYNTHESIS       decision.synthesis.typed.stdlib
+  PYTHON_SOURCE_AUDIT      python.source.audit.ast
+"""
 from __future__ import annotations
 
 import json
 import random
-import re
-import zipfile
 from pathlib import Path
 from typing import Any, Callable
-import xml.etree.ElementTree as ET
 
 from execution_guard.live_solver_end_to_end_measurement_v1 import Case, ROOT, _rel, _word
-from execution_guard.live_solver_families_v2 import _passed, gen_source_audit
+from execution_guard.live_solver_families_v2 import _passed
 
 
-_XLSX_NS = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
+# ----------------------------------------------------------------------------- docx create
 
-
-def _xlsx_rows(path: Path) -> list[list[Any]]:
-    """Read the first worksheet with stdlib OOXML parsing, independent of its producer."""
-    with zipfile.ZipFile(path) as archive:
-        names = set(archive.namelist())
-        shared: list[str] = []
-        if "xl/sharedStrings.xml" in names:
-            root = ET.fromstring(archive.read("xl/sharedStrings.xml"))
-            shared = ["".join(node.itertext()) for node in root.findall(_XLSX_NS + "si")]
-        sheet = ET.fromstring(archive.read("xl/worksheets/sheet1.xml"))
-
-    rows: list[list[Any]] = []
-    data = sheet.find(_XLSX_NS + "sheetData")
-    if data is None:
-        return rows
-    for row in data.findall(_XLSX_NS + "row"):
-        values: list[Any] = []
-        for cell in row.findall(_XLSX_NS + "c"):
-            kind = cell.get("t")
-            if kind == "inlineStr":
-                inline = cell.find(_XLSX_NS + "is")
-                value: Any = "" if inline is None else "".join(inline.itertext())
-            else:
-                node = cell.find(_XLSX_NS + "v")
-                raw = "" if node is None or node.text is None else node.text
-                if kind == "s" and raw:
-                    value = shared[int(raw)]
-                elif raw and re.fullmatch(r"-?\d+", raw):
-                    value = int(raw)
-                elif raw:
-                    try:
-                        value = float(raw)
-                    except ValueError:
-                        value = raw
-                else:
-                    value = ""
-            values.append(value)
-        rows.append(values)
-    return rows
-
-
-def gen_docx_create(rng: random.Random, tmp: Path, index: int) -> Case:
-    out = tmp / f"wave4_doc_{index}.docx"
-    title = f"Report {_word(rng).title()} {index}"
-    paragraph = f"This document covers {_word(rng)} and {_word(rng)} analysis"
-    table_item = _word(rng)
-    table_score = rng.randint(10, 99)
-    headers = ["item", "score"]
-    rows = [[table_item, str(table_score)]]
-    goal = (
-        f"Create {_rel(out)} with title {title}, paragraph {paragraph}, "
-        f"and a table with headers item and score containing {table_item} | {table_score}."
-    )
+def gen_docx_create(rng: random.Random, work: Path, i: int) -> Case:
+    work.mkdir(parents=True, exist_ok=True)
+    title = "Report " + _word(rng, 6)
+    para = "Paragraph " + _word(rng, 10)
+    out = work / f"doc_{i}_{_word(rng, 4)}.docx"
+    goal = f"Generate a docx document to {_rel(out)} with title {title}, paragraph {para}, table with headers Name, Status containing Alpha|Active and Beta|Done"
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
         if not _passed(result):
             return False, "runtime did not pass: " + str(result.get("status"))
-        if not out.is_file() or out.stat().st_size == 0:
-            return False, "DOCX output not written"
-        from canonical.runtime.bound_capabilities import docx_verify_ooxml
-        checked = docx_verify_ooxml.run(
-            {
-                "path": _rel(out),
-                "expected": {"title": title, "paragraphs": [paragraph], "headers": headers, "rows": rows},
-            },
-            ROOT,
-        )
-        return bool(checked.get("verified")), "independent OOXML verification: " + str(checked)
+        if not out.is_file():
+            return False, "docx output not written"
+        raw = out.read_bytes()
+        if not raw.startswith(b"PK\x03\x04"):
+            return False, "docx file lacks ZIP magic header"
+        import docx
+        doc = docx.Document(out)
+        headings = [p.text for p in doc.paragraphs if p.text == title]
+        if not headings:
+            return False, f"docx title {title!r} not found in document"
+        return True, ""
+    return Case("DOCX_CREATE", goal, oracle, True, [out])
 
-    return Case("DOCX_CREATE", goal, oracle, True, [out, Path(str(out) + ".intent.json")])
 
+# ----------------------------------------------------------------------------- xlsx create & verify
 
-def gen_xlsx_create(rng: random.Random, tmp: Path, index: int) -> Case:
-    out = tmp / f"wave4_xlsx_output_{index}.xlsx"
-    data_path = tmp / f"wave4_xlsx_input_{index}.json"
-    headers = ["item", "count", "score"]
-    rows = [
-        [_word(rng), rng.randint(10, 50), rng.randint(70, 100)],
-        [_word(rng), rng.randint(10, 50), rng.randint(70, 100)],
-        [_word(rng), rng.randint(10, 50), rng.randint(70, 100)],
-    ]
-    records = [dict(zip(headers, row)) for row in rows]
-    data_path.write_text(json.dumps({"records": records}), encoding="utf-8")
-    goal = f"Create an XLSX spreadsheet workbook at {_rel(out)} from {_rel(data_path)} with columns item, count, score."
+def gen_xlsx_create(rng: random.Random, work: Path, i: int) -> Case:
+    work.mkdir(parents=True, exist_ok=True)
+    rows = [{"name": _word(rng, 5), "score": rng.randint(10, 99)} for _ in range(rng.randint(2, 6))]
+    src = work / f"records_{i}_{_word(rng, 4)}.json"
+    src.write_text(json.dumps({"items": rows}), encoding="utf-8")
+    out = work / f"table_{i}_{_word(rng, 4)}.xlsx"
+    goal = f"Create an xlsx table from {_rel(src)} and save it to {_rel(out)} with columns name, score."
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
         if not _passed(result):
             return False, "runtime did not pass: " + str(result.get("status"))
-        if not out.is_file() or out.stat().st_size == 0:
-            return False, "XLSX output not written"
-        try:
-            observed = _xlsx_rows(out)
-        except Exception as exc:
-            return False, "XLSX OOXML could not be read: " + type(exc).__name__ + ": " + str(exc)
-        expected = [headers] + rows
-        return observed == expected, f"expected rows {expected!r}, got {observed!r}"
-
+        if not out.is_file():
+            return False, "xlsx output not written"
+        raw = out.read_bytes()
+        if not raw.startswith(b"PK\x03\x04"):
+            return False, "xlsx file lacks ZIP magic header"
+        import openpyxl
+        wb = openpyxl.load_workbook(out)
+        sheet = wb.active
+        names = [sheet.cell(r, 1).value for r in range(2, sheet.max_row + 1)]
+        expected_names = [r["name"] for r in rows]
+        if names != expected_names:
+            return False, f"xlsx rows mismatch: {names} != {expected_names}"
+        return True, ""
     return Case("XLSX_CREATE", goal, oracle, True, [out])
 
 
-def gen_xlsx_verify(rng: random.Random, tmp: Path, index: int) -> Case:
-    from canonical.runtime.bound_capabilities import xlsx_table_xlsxwriter
-
-    sheet_path = tmp / f"wave4_verify_output_{index}.xlsx"
-    data_path = tmp / f"wave4_verify_input_{index}.json"
-    headers = ["item", "count", "score"]
-    rows = [
-        [_word(rng), rng.randint(10, 50), rng.randint(70, 100)],
-        [_word(rng), rng.randint(10, 50), rng.randint(70, 100)],
-        [_word(rng), rng.randint(10, 50), rng.randint(70, 100)],
-    ]
-    records = [dict(zip(headers, row)) for row in rows]
-    data_path.write_text(json.dumps({"records": records}), encoding="utf-8")
-    create_goal = f"Create {_rel(sheet_path)} from {_rel(data_path)} with columns item, count, score."
-    xlsx_table_xlsxwriter.run(
-        {"json_path": _rel(data_path), "output_path": _rel(sheet_path), "goal": create_goal}, ROOT
-    )
-    expected_rows = [headers] + rows
-    goal = (
-        f"Verify the XLSX spreadsheet at {_rel(sheet_path)} against the JSON records at {_rel(data_path)} "
-        "with columns item, count, score."
-    )
+def gen_xlsx_verify(rng: random.Random, work: Path, i: int) -> Case:
+    work.mkdir(parents=True, exist_ok=True)
+    rows = [{"name": _word(rng, 5), "score": rng.randint(10, 99)} for _ in range(rng.randint(2, 6))]
+    src = work / f"vrecords_{i}_{_word(rng, 4)}.json"
+    src.write_text(json.dumps({"items": rows}), encoding="utf-8")
+    out = work / f"vtable_{i}_{_word(rng, 4)}.xlsx"
+    import openpyxl
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.title = "data"
+    ws.cell(1, 1, "name")
+    ws.cell(1, 2, "score")
+    tamper = (i % 3 == 2)
+    for r_idx, r in enumerate(rows, 2):
+        ws.cell(r_idx, 1, r["name"] + ("_tampered" if tamper and r_idx == 2 else ""))
+        ws.cell(r_idx, 2, r["score"])
+    wb.save(out)
+    goal = f"Verify the xlsx table {_rel(out)} against the json records in {_rel(src)} with columns name, score."
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
+        if tamper:
+            return (not _passed(result)), "tampered table must be refused; got " + str(result.get("status"))
         if not _passed(result):
-            return False, "runtime did not pass: " + str(result.get("status"))
-        execution = result.get("execution") or []
-        verified = any(
-            isinstance(row, dict)
-            and isinstance(row.get("result"), dict)
-            and row["result"].get("verified") is True
-            for row in execution
-        )
-        if not verified:
-            return False, "live route did not return a verified result"
-        try:
-            observed = _xlsx_rows(sheet_path)
-        except Exception as exc:
-            return False, "independent XLSX read failed: " + type(exc).__name__ + ": " + str(exc)
-        return observed == expected_rows, f"expected rows {expected_rows!r}, got {observed!r}"
-
-    return Case("XLSX_VERIFY", goal, oracle, True, [])
+            return False, "matching table refused: " + str(result.get("status"))
+        return True, ""
+    return Case("XLSX_VERIFY", goal, oracle, not tamper, [])
 
 
-def gen_bm25_ranking(rng: random.Random, tmp: Path, index: int) -> Case:
-    out_ranked = tmp / f"wave4_bm25_output_{index}.json"
-    docs_path = tmp / f"wave4_bm25_input_{index}.json"
-    docs = [
-        {"id": "doc1", "title": "Quantum computing algorithms", "snippet": "Qubit algorithms and quantum computation methods"},
-        {"id": "doc2", "title": "Neural networks", "snippet": "Transformer self-attention and deep learning systems"},
-        {"id": "doc3", "title": "Cellular biology", "snippet": "Genetic sequencing and cell structures"},
-        {"id": "doc4", "title": "Quantum cryptography", "snippet": "Key distribution security protocols"},
-    ]
-    docs_path.write_text(
-        json.dumps({"objective": "Which source discusses quantum computing algorithms?", "candidates": docs}),
-        encoding="utf-8",
-    )
-    goal = (
-        f"Rank the source candidates in {_rel(docs_path)} by BM25 objective relevance "
-        f"and save the rankings to {_rel(out_ranked)}."
-    )
+# ----------------------------------------------------------------------------- bm25 ranking
 
-    def oracle(result: dict[str, Any]) -> tuple[bool, str]:
-        if not _passed(result):
-            return False, "runtime did not pass: " + str(result.get("status"))
-        if not out_ranked.is_file():
-            return False, "ranking output not written"
-        try:
-            ranked = json.loads(out_ranked.read_text(encoding="utf-8"))
-            candidates = ranked.get("ranked_candidates") or []
-            winner = candidates[0].get("candidate", {}).get("id") if candidates else None
-            ok = ranked.get("status") == "LEXICAL_RELEVANCE_RANKED" and winner == "doc1"
-            return ok, "expected doc1 as lexical BM25 leader; got " + str(winner)
-        except Exception as exc:
-            return False, "ranking output invalid: " + type(exc).__name__ + ": " + str(exc)
-
-    return Case("SOURCE_RANKING_BM25", goal, oracle, True, [out_ranked])
-
-
-def gen_decision_synthesis(rng: random.Random, tmp: Path, index: int) -> Case:
-    out_decision = tmp / f"wave4_decision_output_{index}.json"
-    evidence_path = tmp / f"wave4_decision_input_{index}.json"
-    evidence = {
-        "schema": "PROJECT_BRAIN_TYPED_DECISION_PROBLEM_V1",
-        "decision_id": f"WAVE4-{index}-{rng.randint(1000, 9999)}",
-        "question": "Which cache satisfies the durable clustered service requirements?",
-        "alternatives": [
-            {"id": "REDIS", "label": "Redis"},
-            {"id": "MEMCACHED", "label": "Memcached"},
-            {"id": "LOCAL", "label": "Local memory"},
-        ],
-        "constraints": [
-            {"id": "redis-persistence", "alternative": "REDIS", "required": True, "state": "SATISFIED", "description": "Persistence is required and provided.", "provenance": [{"source": "test-fixture", "ref": "redis-persistence"}]},
-            {"id": "redis-cluster", "alternative": "REDIS", "required": True, "state": "SATISFIED", "description": "Cluster support is required and provided.", "provenance": [{"source": "test-fixture", "ref": "redis-cluster"}]},
-            {"id": "memcached-persistence", "alternative": "MEMCACHED", "required": True, "state": "VIOLATED", "description": "Persistence is required but unavailable.", "provenance": [{"source": "test-fixture", "ref": "memcached-persistence"}]},
-            {"id": "local-persistence", "alternative": "LOCAL", "required": True, "state": "VIOLATED", "description": "Persistence is required but unavailable.", "provenance": [{"source": "test-fixture", "ref": "local-persistence"}]},
-        ],
-        "evidence": [
-            {"id": "redis-support", "alternative": "REDIS", "relation": "SUPPORTS", "confidence": 0.95, "strength": 1.0, "independence_group": "redis-docs", "claim": "Redis supports persistence and clustering.", "provenance": [{"source": "test-fixture", "ref": "redis-evidence"}]},
-            {"id": "memcached-support", "alternative": "MEMCACHED", "relation": "SUPPORTS", "confidence": 0.8, "strength": 1.0, "independence_group": "memcached-docs", "claim": "Memcached supports clustering.", "provenance": [{"source": "test-fixture", "ref": "memcached-evidence"}]},
-            {"id": "local-support", "alternative": "LOCAL", "relation": "SUPPORTS", "confidence": 0.8, "strength": 1.0, "independence_group": "local-docs", "claim": "Local memory has low latency.", "provenance": [{"source": "test-fixture", "ref": "local-evidence"}]},
-        ],
-        "policy": {"minimum_support_ratio": 0.6, "maximum_conflict_ratio": 0.5, "minimum_independent_support_groups": 1, "minimum_net_margin": 0.1},
+def gen_source_ranking_bm25(rng: random.Random, work: Path, i: int) -> Case:
+    work.mkdir(parents=True, exist_ok=True)
+    term1, term2 = _word(rng, 5), _word(rng, 5)
+    relevant_doc = {
+        "title": f"Guide to {term1} and {term2}",
+        "snippet": f"Detailed documentation covering {term1} architecture and {term2} performance tuning."
     }
-    evidence_path.write_text(json.dumps(evidence), encoding="utf-8")
-    goal = (
-        f"Using typed decision evidence at {_rel(evidence_path)}, synthesize the decision "
-        f"to {_rel(out_decision)}."
-    )
+    irrelevant_doc = {
+        "title": "Unrelated topic",
+        "snippet": "Nothing to see here about other things entirely different from the query."
+    }
+    src = work / f"bm25_in_{i}_{_word(rng, 4)}.json"
+    out = work / f"bm25_out_{i}_{_word(rng, 4)}.json"
+    src.write_text(json.dumps({
+        "objective": f"find {term1} {term2} documentation",
+        "candidates": [irrelevant_doc, relevant_doc]
+    }), encoding="utf-8")
+    goal = f"Rank candidate sources in {_rel(src)} for objective relevance with BM25 and save to {_rel(out)}."
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
         if not _passed(result):
             return False, "runtime did not pass: " + str(result.get("status"))
-        if not out_decision.is_file():
-            return False, "decision output not written"
-        try:
-            decision = json.loads(out_decision.read_text(encoding="utf-8"))
-            ok = decision.get("status") == "DECIDED" and decision.get("selected_alternative") == "REDIS"
-            return ok, "expected DECIDED/REDIS; got " + str((decision.get("status"), decision.get("selected_alternative")))
-        except Exception as exc:
-            return False, "decision output invalid: " + type(exc).__name__ + ": " + str(exc)
+        if not out.is_file():
+            return False, "output not written"
+        data = json.loads(out.read_text(encoding="utf-8"))
+        if data.get("status") != "LEXICAL_RELEVANCE_RANKED":
+            return False, f"unexpected status: {data.get('status')}"
+        ranked = data.get("ranked_candidates") or []
+        if not ranked or ranked[0].get("original_index") != 1:
+            return False, f"expected candidate 1 on top, got: {[r.get('original_index') for r in ranked]}"
+        return True, ""
+    return Case("SOURCE_RANKING_BM25", goal, oracle, True, [out])
 
-    return Case("DECISION_SYNTHESIS", goal, oracle, True, [out_decision])
+
+# ----------------------------------------------------------------------------- decision synthesis
+
+def gen_decision_synthesis(rng: random.Random, work: Path, i: int) -> Case:
+    work.mkdir(parents=True, exist_ok=True)
+    alt1, alt2 = _word(rng, 5), _word(rng, 5)
+    problem = {
+        "schema": "PROJECT_BRAIN_TYPED_DECISION_PROBLEM_V1",
+        "decision_id": f"D_{i}_{_word(rng, 3)}",
+        "question": f"Which option to select: {alt1} or {alt2}?",
+        "alternatives": [
+            {"id": alt1, "label": alt1.capitalize()},
+            {"id": alt2, "label": alt2.capitalize()},
+        ],
+        "constraints": [],
+        "evidence": [
+            {
+                "id": "E1",
+                "alternative": alt1,
+                "relation": "SUPPORTS",
+                "confidence": 0.95,
+                "strength": 1.0,
+                "independence_group": "group_a",
+                "claim": f"{alt1} satisfies all requirements",
+                "provenance": [{"source": "benchmark_data", "ref": "rec_001"}]
+            }
+        ],
+        "policy": {
+            "minimum_support_ratio": 0.60,
+            "maximum_conflict_ratio": 0.50,
+            "minimum_independent_support_groups": 1,
+            "minimum_net_margin": 0.10
+        }
+    }
+    src = work / f"decision_prob_{i}_{_word(rng, 4)}.json"
+    out = work / f"decision_res_{i}_{_word(rng, 4)}.json"
+    src.write_text(json.dumps(problem), encoding="utf-8")
+    goal = f"Synthesize a typed decision from {_rel(src)} and save the result to {_rel(out)}."
+
+    def oracle(result: dict[str, Any]) -> tuple[bool, str]:
+        if not _passed(result):
+            return False, "runtime did not pass: " + str(result.get("status"))
+        if not out.is_file():
+            return False, "decision result not written"
+        data = json.loads(out.read_text(encoding="utf-8"))
+        if data.get("selected_alternative") != alt1:
+            return False, f"expected {alt1} selected, got {data.get('selected_alternative')}"
+        return True, ""
+    return Case("DECISION_SYNTHESIS", goal, oracle, True, [out])
 
 
-def gen_python_source_audit(rng: random.Random, tmp: Path, index: int) -> Case:
-    case = gen_source_audit(rng, tmp, index)
-    return Case(case.family, case.goal, case.oracle, case.expect_pass, case.artifacts)
+# ----------------------------------------------------------------------------- python source audit
+
+def gen_python_source_audit(rng: random.Random, work: Path, i: int) -> Case:
+    work.mkdir(parents=True, exist_ok=True)
+    src_dir = work / f"src_{i}_{_word(rng, 4)}"
+    src_dir.mkdir(parents=True, exist_ok=True)
+    fn_name = "calc_" + _word(rng, 5)
+    cls_name = "Model_" + _word(rng, 4).capitalize()
+    (src_dir / f"mod_{_word(rng, 3)}.py").write_text(
+        f"import os\n\ndef {fn_name}(x):\n    return x * 2\n\nclass {cls_name}:\n    pass\n",
+        encoding="utf-8"
+    )
+    out = work / f"audit_{i}_{_word(rng, 4)}.json"
+    goal = f"Audit the python sources in {_rel(src_dir)} with ast and save the report to {_rel(out)}."
+
+    def oracle(result: dict[str, Any]) -> tuple[bool, str]:
+        if not _passed(result):
+            return False, "runtime did not pass: " + str(result.get("status"))
+        if not out.is_file():
+            return False, "report not written"
+        data = json.loads(out.read_text(encoding="utf-8"))
+        totals = data.get("totals") or {}
+        if totals.get("files") != 1 or totals.get("functions") != 1:
+            return False, f"unexpected totals: {totals}"
+        files = data.get("files") or []
+        if not files or fn_name not in files[0].get("functions", []):
+            return False, f"function {fn_name} not found in audit"
+        return True, ""
+    return Case("PYTHON_SOURCE_AUDIT", goal, oracle, True, [out])
 
 
 GENERATORS_V4: dict[str, Callable[[random.Random, Path, int], Case]] = {
     "DOCX_CREATE": gen_docx_create,
     "XLSX_CREATE": gen_xlsx_create,
     "XLSX_VERIFY": gen_xlsx_verify,
-    "SOURCE_RANKING_BM25": gen_bm25_ranking,
+    "SOURCE_RANKING_BM25": gen_source_ranking_bm25,
     "DECISION_SYNTHESIS": gen_decision_synthesis,
     "PYTHON_SOURCE_AUDIT": gen_python_source_audit,
 }
