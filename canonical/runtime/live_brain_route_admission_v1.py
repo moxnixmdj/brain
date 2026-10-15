@@ -22,6 +22,13 @@ not about the goal:
                                non-success status (OPEN__, UNRESOLVED, FAIL...) can never
                                surface as an overall PASS
 
+  E1  EXECUTOR_GAP_BRIDGE      the pinned kernel refuses six registry source types outright
+                               (``BOUND_CAPABILITY_SOURCE_UNSUPPORTED``: python_stdlib_composition,
+                               brain_native_deterministic[_composition], brain_bound_system_tool,
+                               brain_owned_python_composition).  Those 16 capabilities are run by
+                               this entry itself: same adapter file, same args, same expectation
+                               check as the kernel, declared stdlib modules verified first, and an
+                               execution row that says so (``FRONT_LAYER_LOCAL_ADAPTER_EXECUTION_V1``).
   R6  PROMISED_ARTIFACT        after execution, every output file the goal named must exist
                                and be non-empty, independently of what the tool reported
 
@@ -36,6 +43,8 @@ from __future__ import annotations
 
 import pathlib
 import re
+import importlib.util
+import sys
 from time import perf_counter_ns
 from typing import Any, Mapping
 
@@ -172,6 +181,120 @@ def _controller_passed(controller: Any) -> bool:
     )
 
 
+KERNEL_UNSUPPORTED_SOURCE_TYPES = frozenset({
+    "python_stdlib_composition", "brain_native_deterministic", "brain_native_deterministic_composition",
+    "brain_bound_system_tool", "brain_owned_python_composition",
+})
+LOCAL_EXECUTION_PROOF = "FRONT_LAYER_LOCAL_ADAPTER_EXECUTION_V1"
+
+
+def kernel_refuses(entry: Mapping[str, Any]) -> bool:
+    """True when the pinned kernel would raise BOUND_CAPABILITY_SOURCE_UNSUPPORTED for this entry."""
+    source = entry.get("source") if isinstance(entry.get("source"), Mapping) else {}
+    return str(source.get("type") or "") in KERNEL_UNSUPPORTED_SOURCE_TYPES
+
+
+class LocalExecutionFailure(RuntimeError):
+    pass
+
+
+def _check_expectation(expect: Any, result: Mapping[str, Any]) -> None:
+    """The kernel's expectation semantics (field_nonempty / field_contains / field_equals)."""
+    if expect is None:
+        return
+    if not isinstance(expect, Mapping):
+        raise LocalExecutionFailure("ACTION_EXPECTATION_INVALID")
+    field = str(expect.get("field") or "").strip()
+    if not field:
+        raise LocalExecutionFailure("ACTION_EXPECTATION_FIELD_REQUIRED")
+    value = result.get(field)
+    typ = expect.get("type", "field_nonempty")
+    if typ == "field_nonempty":
+        ok = value not in (None, "", [], {})
+    elif typ == "field_contains":
+        ok = str(expect.get("value", "")) in str(value or "")
+    elif typ == "field_equals":
+        ok = value == expect.get("value")
+    else:
+        raise LocalExecutionFailure("ACTION_EXPECTATION_TYPE_UNKNOWN:" + str(typ))
+    if not ok:
+        observed = json.dumps(value, ensure_ascii=False, sort_keys=True) if isinstance(value, (dict, list)) else repr(value)
+        reason = str(result.get("reason") or result.get("error") or "")[:800]
+        raise LocalExecutionFailure("ACTION_EXPECTATION_FAILED:" + field + ":OBSERVED=" + observed[:800] + ((":REASON=" + reason) if reason else ""))
+
+
+def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> dict[str, Any]:
+    """E1: execute one bound adapter the way the kernel would, for source types the kernel refuses.
+
+    Fails closed on: non-zero declared cost, a declared stdlib module that does not import, an
+    adapter path outside the repository or missing, a missing entrypoint, a non-dict result, or a
+    failed expectation.  Never installs anything and never calls a network.
+    """
+    cid = str(entry.get("capability_id") or (action.get("args") or {}).get("capability_id") or "")
+    if float(entry.get("incremental_spend_usd", 0) or 0) != 0:
+        raise LocalExecutionFailure("BOUND_CAPABILITY_NONZERO_COST_REJECTED:" + cid)
+    source = entry.get("source") if isinstance(entry.get("source"), Mapping) else {}
+    modules = source.get("modules") if isinstance(source.get("modules"), list) else []
+    for name in modules:
+        if not str(name).strip() or importlib.util.find_spec(str(name).split(".")[0]) is None:
+            raise LocalExecutionFailure("FRONT_LOCAL_DEPENDENCY_MISSING:" + str(name))
+    module_name = str(entry.get("adapter_module") or "")
+    if not module_name or any(ch not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_" for ch in module_name):
+        raise LocalExecutionFailure("BOUND_CAPABILITY_ADAPTER_INVALID")
+    declared = str(source.get("adapter_path") or "")
+    path = (ROOT / declared).resolve() if declared else (ROOT / "canonical" / "runtime" / "bound_capabilities" / (module_name + ".py")).resolve()
+    if ROOT.resolve() not in path.parents or not path.is_file() or path.suffix != ".py":
+        raise LocalExecutionFailure("BOUND_CAPABILITY_ADAPTER_MISSING:" + declared)
+    spec = importlib.util.spec_from_file_location("project_brain_front_local_" + module_name, path)
+    if spec is None or spec.loader is None:
+        raise LocalExecutionFailure("BOUND_CAPABILITY_ADAPTER_LOAD_FAILED")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    fn = getattr(module, str(entry.get("entrypoint") or "run"), None)
+    if not callable(fn):
+        raise LocalExecutionFailure("BOUND_CAPABILITY_ENTRYPOINT_MISSING")
+    call_args = dict(action.get("args") or {})
+    call_args.pop("capability_id", None)
+    result = fn(call_args, ROOT)
+    if not isinstance(result, dict):
+        raise LocalExecutionFailure("BOUND_CAPABILITY_RESULT_INVALID")
+    result.setdefault("capability_id", cid)
+    result["dependency"] = {"type": str(source.get("type") or ""), "modules": list(modules), "executor": LOCAL_EXECUTION_PROOF}
+    _check_expectation(action.get("expect"), result)
+    return result
+
+
+def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry: Mapping[str, Any], action: Mapping[str, Any],
+                     raw_contract: Mapping[str, Any], started: int) -> dict[str, Any]:
+    selected = str(compiled.get("selected_capability") or "")
+    try:
+        tool_result = run_adapter_locally(entry, action)
+    except Exception as exc:  # noqa: BLE001 - every adapter failure is a closed failure with its reason
+        return _fail(task_id, "FAIL__LIVE_CONTROLLER_EXECUTION", "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE", started, executed=True,
+                     compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"), reason=type(exc).__name__ + ":" + str(exc),
+                     executor=LOCAL_EXECUTION_PROOF)
+    row = {"capability_id": selected, "pass": True, "status": "PASS__FRONT_LAYER_LOCAL_ADAPTER_ACTION", "result": dict(tool_result),
+           "execution_proof_type": LOCAL_EXECUTION_PROOF, "controller_plan_sha256": None, "controller_trace": [{"action": dict(action), "result": dict(tool_result)}]}
+    return {
+        "schema": LIVE_SCHEMA,
+        "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+        "pass": True, "task_id": task_id, "executed": True, "raw_goal": goal,
+        "raw_goal_sha256": raw_contract["task_sha256"], "raw_task_contract_sha256": raw_contract["task_contract_sha256"],
+        "raw_acceptance_obligation_count": len(raw_contract["acceptance_contract"]["obligations"]),
+        "compiler_mode": compiled.get("compiler_mode"), "compiled_capability_id": selected,
+        "selected_plan": [selected], "compiled_part_count": len(compiled.get("compiled_parts") or []),
+        "controller_action_count": 1, "execution": [row],
+        "controller_execution": {"executor": LOCAL_EXECUTION_PROOF, "reason_kernel_not_used": "BOUND_CAPABILITY_SOURCE_UNSUPPORTED:" + str((entry.get("source") or {}).get("type")),
+                                  "returncode": 0, "controller_mode": "FRONT_LAYER_LOCAL_ADAPTER", "cognition_dependency_class": "MODEL_INDEPENDENT",
+                                  "model_dependency_count": 0, "trace": row["controller_trace"]},
+        "controller_checkpoint": {},
+        "cognition_dependency_class": "MODEL_INDEPENDENT", "model_dependency_count": 0,
+        "routing_success_authority": False, "semantic_acceptance_complete": False, "accepted_raw_obligation_ids": [],
+        "elapsed_ns": perf_counter_ns() - started, "incremental_spend_usd": 0, "benchmark_specific": False, "terminal_credit_delta": 0,
+    }
+
+
 def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: Mapping[str, Mapping[str, Any]], started: int) -> dict[str, Any]:
     """Execute a compiled plan with the same controller calls ``run_raw_goal`` makes."""
     controller_actions = compiled.get("controller_actions")
@@ -189,6 +312,8 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
         if not selected or selected not in admissible or not isinstance(compiled.get("inputs"), Mapping):
             return _fail(task_id, "FAIL__COMPILED_SHAPE_NOT_EXECUTABLE", "RAW_GOAL_COMPILED_SHAPE_GAP", started, compiler_mode=compiled.get("compiler_mode"))
         action = goal_compiler._render_template(admissible[selected]["action_template"], dict(compiled["inputs"]))
+        if kernel_refuses(admissible[selected]):
+            return _execute_locally(task_id, goal, compiled, admissible[selected], action, raw_contract, started)
         controller_actions = [action, {"type": "finish", "args": {"summary": "RAW_GOAL_COMPLETE"}}]
     if not isinstance(controller_actions, list) or not controller_actions or len(controller_actions) > 64 or any(not isinstance(a, Mapping) for a in controller_actions):
         return _fail(task_id, "FAIL__COMPILED_CONTROL_PLAN_INVALID", "LIVE_RUNTIME_COMPOSITION_CONTRACT_INVALID", started, compiler_mode=compiled.get("compiler_mode"))
