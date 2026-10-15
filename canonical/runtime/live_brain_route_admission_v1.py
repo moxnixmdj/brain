@@ -426,9 +426,10 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
     try:
         tool_result = run_adapter_locally(entry, action)
     except Exception as exc:  # noqa: BLE001 - every adapter failure is a closed failure with its reason
-        return _fail(task_id, "FAIL__LIVE_CONTROLLER_EXECUTION", "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE", started, executed=True,
+        tool_executed = not isinstance(exc, LocalExecutionFailure) or "ACTION_EXPECTATION_FAILED" in str(exc)
+        return _fail(task_id, "FAIL__LIVE_CONTROLLER_EXECUTION", "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE", started, executed=tool_executed,
                      compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"), reason=type(exc).__name__ + ":" + str(exc),
-                     executor=LOCAL_EXECUTION_PROOF)
+                     executor=LOCAL_EXECUTION_PROOF, tool_executed=tool_executed)
     row = {"capability_id": selected, "pass": True, "status": "PASS__FRONT_LAYER_LOCAL_ADAPTER_ACTION", "result": dict(tool_result),
            "execution_proof_type": LOCAL_EXECUTION_PROOF, "controller_plan_sha256": None, "controller_trace": [{"action": dict(action), "result": dict(tool_result)}]}
     return {
@@ -668,6 +669,9 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
             return _execute_locally(task_id, goal, compiled, admissible[selected], action, raw_contract, started)
         local_res = _execute_locally(task_id, goal, compiled, admissible[selected], action, raw_contract, started)
         if local_res.get("pass") is True:
+            return local_res
+        reason_str = str(local_res.get("reason") or "")
+        if "MISMATCH" in reason_str or "ACTION_EXPECTATION_FAILED" in reason_str:
             return local_res
         controller_actions = [action, {"type": "finish", "args": {"summary": "RAW_GOAL_COMPLETE"}}]
     if not isinstance(controller_actions, list) or not controller_actions or len(controller_actions) > 64 or any(not isinstance(a, Mapping) for a in controller_actions):
