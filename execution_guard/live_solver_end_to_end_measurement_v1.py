@@ -66,6 +66,11 @@ def _present(kind: str, name: str) -> bool:
     return importlib.util.find_spec(name) is not None
 
 
+def _kernel_refuses(entry) -> bool:
+    from canonical.runtime.live_brain_route_admission_v1 import kernel_refuses
+    return kernel_refuses(entry)
+
+
 def tool_liveness() -> dict[str, Any]:
     doc = json.loads(REGISTRY.read_text(encoding="utf-8"))
     rows = []
@@ -106,9 +111,11 @@ def tool_liveness() -> dict[str, Any]:
             "takes_input_from_goal": bool(placeholders),
             "input_keys": placeholders,
             "platforms": entry.get("platforms"),
+            "executor": "FRONT_LAYER_LOCAL_ADAPTER" if _kernel_refuses(entry) else "PINNED_KERNEL",
         })
     return {
         "capabilities_total": len(rows),
+        "executor_kernel_refuses_source_type": sorted(r["capability_id"] for r in rows if r["executor"] == "FRONT_LAYER_LOCAL_ADAPTER"),
         "adapter_missing": sorted(r["capability_id"] for r in rows if not r["adapter_present"]),
         "adapter_import_failed": sorted(r["capability_id"] for r in rows if r["adapter_imports"] is False),
         "external_dependency_missing_here": sorted(r["capability_id"] for r in rows if not r["all_dependencies_present_here"]),
@@ -292,8 +299,10 @@ GENERATORS: dict[str, Callable[[random.Random, Path, int], Case]] = {
 def all_generators() -> dict[str, Callable[[random.Random, Path, int], Case]]:
     """Wave-1 families plus the per-capability execution families of live_solver_families_v2."""
     from execution_guard.live_solver_families_v2 import GENERATORS_V2
+    from execution_guard.live_solver_families_v3 import GENERATORS_V3
     merged = dict(GENERATORS)
     merged.update(GENERATORS_V2)
+    merged.update(GENERATORS_V3)
     return merged
 
 # Families the compiler advertises but that need binaries / packages this machine lacks, or
@@ -416,7 +425,7 @@ def _entry(name: str) -> Callable[[dict[str, Any]], dict[str, Any]]:
     return solve
 
 
-def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], keep: bool) -> dict[str, Any]:
+def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], keep: bool, only_families: set[str] | None = None) -> dict[str, Any]:
     replay = seed is not None
     if seed is None:
         seed = int.from_bytes(os.urandom(8), "big")
@@ -434,6 +443,8 @@ def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], k
         families: dict[str, dict[str, Any]] = {}
         failures: list[dict[str, Any]] = []
         for family, gen in all_generators().items():
+            if only_families and family not in only_families:
+                continue
             n = oos_count if family == "OUT_OF_SCOPE_MUST_FAIL_CLOSED" else per_family
             ok = 0
             env_blocked = 0
@@ -454,11 +465,11 @@ def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], k
                 elapsed += time.perf_counter_ns() - t0
                 cap = str(result.get("compiled_capability_id") or result.get("compiler_mode") or "-")
                 caps[cap] = caps.get(cap, 0) + 1
-                good, why = case.oracle(result)
                 blocker = environment_blocker(result)
+                good, why = (False, "") if blocker else case.oracle(result)
                 if good:
                     ok += 1
-                elif blocker and case.expect_pass:
+                elif blocker:
                     env_blocked += 1
                     if len(failures) < 60:
                         failures.append({"family": family, "goal": case.goal[:220], "why": "ENVIRONMENT_BLOCKED_HERE:" + blocker,
@@ -477,7 +488,7 @@ def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], k
             "in_scope_families_measured": len(in_scope),
             "in_scope_families_all_pass": sum(1 for f in in_scope if families[f]["oracle_pass"] == families[f]["instances"]),
             "in_scope_instance_pass_rate": round(sum(families[f]["oracle_pass"] for f in in_scope) / max(1, sum(families[f]["instances"] for f in in_scope)), 4),
-            "out_of_scope_fail_closed_rate": families["OUT_OF_SCOPE_MUST_FAIL_CLOSED"]["pass_rate"],
+            "out_of_scope_fail_closed_rate": families["OUT_OF_SCOPE_MUST_FAIL_CLOSED"]["pass_rate"] if "OUT_OF_SCOPE_MUST_FAIL_CLOSED" in families else None,
             "failures_sample": failures,
         }
     if not keep and work.exists():
@@ -534,6 +545,7 @@ def main(argv: list[str] | None = None) -> int:
                     help="exit 1 unless, through the new entry, every measured in-scope family passes 100%%, every out-of-scope goal fails closed, and every routable capability is reachable")
     ap.add_argument("--environment-blockers-are-failures", action="store_true",
                     help="count instances blocked by missing apt metadata / refused pip installs as failures (the public runner installs everything)")
+    ap.add_argument("--families", default="", help="comma-separated family names to measure (default: all); a debugging aid, never used by the heartbeat verdict")
     ap.add_argument("--annotate", metavar="RECEIPT_JSON",
                     help="print GitHub workflow-command annotations (::error / ::warning / ::notice) for an existing receipt and exit; no measurement is run")
     ns = ap.parse_args(argv)
@@ -542,7 +554,8 @@ def main(argv: list[str] | None = None) -> int:
         for line in annotation_lines(receipt, environment_blockers_are_failures=ns.environment_blockers_are_failures):
             print(line)
         return 0
-    receipt = run(ns.seed, ns.per_family, ns.oos, [x.strip() for x in ns.entries.split(",") if x.strip()], ns.keep)
+    receipt = run(ns.seed, ns.per_family, ns.oos, [x.strip() for x in ns.entries.split(",") if x.strip()], ns.keep,
+                  only_families={x.strip() for x in ns.families.split(",") if x.strip()} or None)
     text = json.dumps(receipt, indent=2, sort_keys=True) + "\n"
     if ns.out:
         Path(ns.out).write_text(text, encoding="utf-8")
