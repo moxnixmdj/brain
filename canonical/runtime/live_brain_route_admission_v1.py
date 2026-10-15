@@ -32,6 +32,21 @@ not about the goal:
   R6  PROMISED_ARTIFACT        after execution, every output file the goal named must exist
                                and be non-empty, independently of what the tool reported
 
+  R7  DAG_STEP_WEAK_EVIDENCE   a multi-step request is compiled as ONE capability DAG
+                               (``goal_front_compiler_v1`` F11/F12: each clause is bound to a bound
+                               capability, and an input a later clause names is forwarded from the
+                               result field of the step that writes it) and then judged step by step:
+                               every step's own clause must carry more than one prose token for the
+                               capability chosen for it - a path token or a single word is never a step
+  R8  DAG_ARTIFACT_EDGE_INVALID / DAG_ARTIFACT_FIELD_UNPRODUCED /
+      DAG_COMPOSITION_CONTRACT_INVALID
+                               every cross-step artifact edge must point backwards inside the plan
+                               and name a result field its producer declares, and the planner's
+                               re-derived dependency contract must hold
+  R9  DAG_PROMISED_ARTIFACT_UNPRODUCED
+                               every file the request promises must be written by some step of the
+                               DAG; a promise no step serves is refused before anything runs
+
 Every rejection is a FAIL_CLOSED result with the evidence attached; nothing is executed,
 so no side effect happens.  ``solve`` is THE live entry (one mouth): front-compile
 (``goal_front_compiler_v1`` - corrects the pinned compiler's measured defects and binds every
@@ -45,6 +60,7 @@ import pathlib
 import re
 import importlib.util
 import sys
+from copy import deepcopy
 from time import perf_counter_ns
 from typing import Any, Mapping
 
@@ -90,7 +106,10 @@ def _output_keys(entry: Mapping[str, Any]) -> list[str]:
 
 
 def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
-    """Judge one compiled single-capability route. Returns {"admitted": bool, ...evidence}."""
+    """Judge one compiled route. Returns {"admitted": bool, ...evidence}."""
+    dag = compiled.get("capability_dag")
+    if isinstance(dag, Mapping) and dag.get("schema") == front.DAG_SCHEMA:
+        return dag_admission(goal, compiled, dag, registry)
     selected = str(compiled.get("selected_capability") or "").strip()
     mode = compiled.get("compiler_mode")
     if not selected:
@@ -126,6 +145,142 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     if len(semantic) <= 1:
         return {**base, "admitted": False, "rule": "R3_WEAK_EVIDENCE"}
     return {**base, "admitted": True, "rule": None}
+
+
+def _result_refs(value: Any) -> list[tuple[int, str]]:
+    """Every ``{"$result": {"cycle": n, "field": f}}`` reference inside a planned action."""
+    found: list[tuple[int, str]] = []
+    if isinstance(value, Mapping):
+        if set(value.keys()) == {"$result"}:
+            spec = value["$result"]
+            if isinstance(spec, Mapping):
+                cycle = spec.get("cycle")
+                field = str(spec.get("field") or "").strip()
+                if isinstance(cycle, int) and not isinstance(cycle, bool):
+                    found.append((cycle, field))
+            return found
+        for item in value.values():
+            found.extend(_result_refs(item))
+    elif isinstance(value, list):
+        for item in value:
+            found.extend(_result_refs(item))
+    return found
+
+
+def dag_contract_errors(dag: Mapping[str, Any]) -> list[str]:
+    """The planner's own dependency contract, re-derived from the plan before anything runs.
+
+    Fails closed unless every step is present once, every requirement is bound either to an
+    initial fact or to an EARLIER step, and every ``$result`` read names a field that earlier
+    step declared it returns.  This is what makes "artifact forwarding" an ordering guarantee
+    rather than a hope: a consumer can never read state a producer has not written.
+    """
+    steps = list(dag.get("steps") or [])
+    contract = dag.get("composition_contract")
+    errors: list[str] = []
+    if not isinstance(contract, list) or len(contract) != len(steps):
+        return ["DAG_COMPOSITION_CONTRACT_LENGTH"]
+    for index, step in enumerate(steps):
+        row = contract[index]
+        expected_id = "step:" + str(index) + ":" + str(step.get("capability_id"))
+        if not isinstance(row, Mapping) or row.get("cycle") != index or str(row.get("capability_id")) != expected_id:
+            errors.append("DAG_COMPOSITION_STEP_MISMATCH:" + str(index))
+            continue
+        declared = list(row.get("result_fields") or [])
+        for effect, binding in sorted(dict(row.get("requirement_bindings") or {}).items()):
+            if not isinstance(binding, Mapping):
+                errors.append("DAG_REQUIREMENT_BINDING_INVALID:" + str(index) + ":" + effect)
+                continue
+            if binding.get("source") == "capability":
+                cycle = binding.get("cycle")
+                if not isinstance(cycle, int) or isinstance(cycle, bool) or cycle >= index:
+                    errors.append("DAG_REQUIREMENT_FORWARD_REFERENCE:" + str(index) + ":" + effect)
+            elif binding.get("source") != "initial_fact":
+                errors.append("DAG_REQUIREMENT_SOURCE_UNKNOWN:" + str(index) + ":" + effect)
+        for cycle, field in _result_refs(step.get("action") or {}):
+            if cycle >= index:
+                errors.append("DAG_RESULT_FORWARD_REFERENCE:" + str(index) + ":" + str(cycle))
+                continue
+            producer_row = contract[cycle] if cycle < len(contract) else None
+            producer_fields = list(producer_row.get("result_fields") or []) if isinstance(producer_row, Mapping) else []
+            if not field or field not in producer_fields:
+                errors.append("DAG_RESULT_FIELD_UNDECLARED:" + str(index) + ":" + field)
+        if not isinstance(row.get("provides"), list) or not row.get("provides"):
+            errors.append("DAG_COMPOSITION_PROVIDES_MISSING:" + str(index))
+        if declared != list(step.get("result_fields") or []):
+            errors.append("DAG_COMPOSITION_RESULT_FIELDS_MISMATCH:" + str(index))
+    return errors
+
+
+def dag_admission(goal: str, compiled: Mapping[str, Any], dag: Mapping[str, Any],
+                  registry: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
+    """R7/R8/R9: judge a planned multi-step capability DAG before anything executes.
+
+    R7 every step's own sentence must carry more than one prose token of evidence for the
+    capability chosen for it (a step is never admitted on a path token or a single word).
+    R8 every artifact edge must point backwards inside the plan and name a result field the
+    producer declares, and the planner's dependency contract must hold as re-derived here.
+    R9 every file the request promises must be written by some step of the DAG.
+    """
+    steps = dag.get("steps")
+    base: dict[str, Any] = {
+        "schema": SCHEMA,
+        "compiler_mode": compiled.get("compiler_mode"),
+        "selected_capability": None,
+        "capability_dag_schema": dag.get("schema"),
+        "goal_future_artifacts": sorted(set(_future_artifacts(goal))),
+        "dag_step_count": len(steps) if isinstance(steps, list) else None,
+        "dag_steps": [],
+        "artifact_edges": [],
+    }
+    if not isinstance(steps, list) or not steps:
+        return {**base, "admitted": False, "rule": "DAG_STEPS_MISSING"}
+    rows: list[dict[str, Any]] = []
+    for step in steps:
+        if not isinstance(step, Mapping):
+            return {**base, "admitted": False, "rule": "DAG_STEP_INVALID", "dag_steps": rows}
+        cid = str(step.get("capability_id") or "").strip()
+        clause = str(step.get("clause") or "")
+        if not cid or not clause.strip():
+            return {**base, "admitted": False, "rule": "DAG_STEP_INVALID", "dag_steps": rows}
+        entry = registry.get(cid)
+        if not isinstance(entry, Mapping):
+            return {**base, "admitted": False, "rule": "DAG_CAPABILITY_NOT_ADMISSIBLE", "dag_steps": rows,
+                    "failed_capability_id": cid}
+        score, _specificity, evidence = goal_compiler._score(front.prose_only(clause), cid, entry)
+        matched = set(evidence.get("matched_provides") or []) | set(evidence.get("matched_identity") or []) | set(evidence.get("matched_keywords") or [])
+        semantic = matched & _prose_tokens(clause)
+        rows.append({
+            "cycle": step.get("cycle"), "capability_id": cid, "clause": clause, "score": score,
+            "matched_tokens": sorted(matched), "semantic_matched_tokens": sorted(semantic),
+            "artifacts_produced": sorted(str(x) for x in (step.get("artifacts_produced") or [])),
+        })
+        if len(semantic) <= 1:
+            return {**base, "admitted": False, "rule": "DAG_STEP_WEAK_EVIDENCE", "dag_steps": rows,
+                    "failed_cycle": step.get("cycle"), "failed_capability_id": cid}
+    declared_fields = {str(step.get("cycle")): set(str(x) for x in (step.get("result_fields") or [])) for step in steps}
+    edges: list[dict[str, Any]] = []
+    for edge in dag.get("artifact_edges") or []:
+        if not isinstance(edge, Mapping):
+            return {**base, "admitted": False, "rule": "DAG_ARTIFACT_EDGE_INVALID", "dag_steps": rows}
+        producer, consumer = edge.get("producer_cycle"), edge.get("consumer_cycle")
+        field = str(edge.get("result_field") or "")
+        if (not isinstance(producer, int) or isinstance(producer, bool) or not isinstance(consumer, int)
+                or isinstance(consumer, bool) or producer < 0 or producer >= consumer):
+            return {**base, "admitted": False, "rule": "DAG_ARTIFACT_EDGE_INVALID", "dag_steps": rows, "artifact_edge": dict(edge)}
+        if field not in declared_fields.get(str(producer), set()):
+            return {**base, "admitted": False, "rule": "DAG_ARTIFACT_FIELD_UNPRODUCED", "dag_steps": rows, "artifact_edge": dict(edge)}
+        edges.append(dict(edge))
+    contract_errors = dag_contract_errors(dag)
+    if contract_errors:
+        return {**base, "admitted": False, "rule": "DAG_COMPOSITION_CONTRACT_INVALID", "dag_steps": rows,
+                "contract_errors": contract_errors[:8]}
+    produced = {path for step in steps for path in (step.get("artifacts_produced") or [])}
+    unproduced = sorted(raw for raw in base["goal_future_artifacts"] if raw not in produced)
+    if unproduced:
+        return {**base, "admitted": False, "rule": "DAG_PROMISED_ARTIFACT_UNPRODUCED", "dag_steps": rows,
+                "unproduced_artifacts": unproduced}
+    return {**base, "admitted": True, "rule": None, "dag_steps": rows, "artifact_edges": edges}
 
 
 _NON_SUCCESS_PREFIXES = ("FAIL", "OPEN", "UNRESOLVED", "ERROR", "BLOCKED", "REJECTED", "INCOMPLETE")
@@ -295,6 +450,197 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
     }
 
 
+DAG_KERNEL_EXECUTOR = "PINNED_KERNEL_CAPABILITY_DAG_V1"
+DAG_LOCAL_EXECUTOR = "FRONT_LAYER_LOCAL_CAPABILITY_DAG_V1"
+
+
+def _resolve_plan_refs(value: Any, results: list[Mapping[str, Any]]) -> Any:
+    """Resolve the planner's ``{"$result": {"cycle": n, "field": f}}`` references.
+
+    Identical semantics to the pinned kernel's own resolver (cycle indexes the completed steps of
+    this plan; a dotted field walks into the producer's result).  The local DAG executor needs it
+    because a step the kernel refuses still has to consume what an earlier step wrote.
+    """
+    if isinstance(value, Mapping):
+        if set(value.keys()) == {"$result"}:
+            spec = value["$result"]
+            if not isinstance(spec, Mapping):
+                raise LocalExecutionFailure("RESULT_REFERENCE_INVALID")
+            cycle = int(spec.get("cycle", -1))
+            if cycle < 0 or cycle >= len(results):
+                raise LocalExecutionFailure("RESULT_REFERENCE_CYCLE_INVALID:" + str(cycle))
+            current: Any = results[cycle]
+            field = str(spec.get("field") or "").strip()
+            if field:
+                for part in field.split("."):
+                    if not isinstance(current, Mapping) or part not in current:
+                        raise LocalExecutionFailure("RESULT_REFERENCE_FIELD_MISSING:" + field)
+                    current = current[part]
+            return current
+        return {key: _resolve_plan_refs(item, results) for key, item in value.items()}
+    if isinstance(value, list):
+        return [_resolve_plan_refs(item, results) for item in value]
+    return value
+
+
+def dag_executor(compiled: Mapping[str, Any], admissible: Mapping[str, Mapping[str, Any]]) -> str:
+    """Which executor runs this DAG: the pinned kernel, or this entry's local adapter runner.
+
+    Mirrors the single-capability rule of E1: the kernel is used only when it accepts every step's
+    source type; one step it refuses moves the whole DAG to the local executor, which runs each
+    adapter with the kernel's own argument and expectation semantics (and never installs anything).
+    """
+    steps = (compiled.get("capability_dag") or {}).get("steps") or []
+    for step in steps:
+        entry = admissible.get(str(step.get("capability_id") or "")) if isinstance(step, Mapping) else None
+        if not isinstance(entry, Mapping) or kernel_refuses(entry):
+            return DAG_LOCAL_EXECUTOR
+    return DAG_KERNEL_EXECUTOR
+
+
+def _dag_evidence(compiled: Mapping[str, Any], executor: str) -> dict[str, Any]:
+    dag = compiled.get("capability_dag") or {}
+    return {
+        "schema": dag.get("schema"),
+        "compiler_mode": dag.get("compiler_mode"),
+        "executor": executor,
+        "finish_summary": dag.get("finish_summary"),
+        "steps": [{key: step.get(key) for key in ("cycle", "capability_id", "clause", "artifacts_produced", "artifacts_consumed")}
+                  for step in dag.get("steps") or [] if isinstance(step, Mapping)],
+        "artifact_edges": [dict(edge) for edge in dag.get("artifact_edges") or [] if isinstance(edge, Mapping)],
+        "planning": dict(dag.get("planning") or {}),
+        "composition_contract": [dict(row) for row in dag.get("composition_contract") or [] if isinstance(row, Mapping)],
+    }
+
+
+def _dag_rows(steps: list[Mapping[str, Any]], records: list[Mapping[str, Any]], executor: str, plan_sha256: Any = None) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for index, step in enumerate(steps):
+        record = records[index] if index < len(records) and isinstance(records[index], Mapping) else {}
+        result = record.get("result")
+        rows.append({
+            "cycle": index,
+            "capability_id": step.get("capability_id"),
+            "pass": isinstance(result, Mapping),
+            "status": "PASS__CAPABILITY_DAG_STEP" if isinstance(result, Mapping) else "FAIL__CAPABILITY_DAG_STEP_MISSING",
+            "result": dict(result) if isinstance(result, Mapping) else None,
+            "plan_action": dict(step.get("action") or {}),
+            "artifacts_consumed": [dict(edge) for edge in step.get("artifacts_consumed") or [] if isinstance(edge, Mapping)],
+            "execution_proof_type": executor,
+            "controller_plan_sha256": plan_sha256,
+        })
+    return rows
+
+
+def _dag_result(task_id: str, goal: str, compiled: Mapping[str, Any], raw_contract: Mapping[str, Any], executor: str,
+                rows: list[dict[str, Any]], passed: bool, started: int, controller: Any = None,
+                checkpoint: Mapping[str, Any] | None = None, reason: Any = None) -> dict[str, Any]:
+    cids = [str(step.get("capability_id")) for step in ((compiled.get("capability_dag") or {}).get("steps") or []) if isinstance(step, Mapping)]
+    checkpoint = dict(checkpoint or {})
+    out = {
+        "schema": LIVE_SCHEMA,
+        "status": ("PASS__CAPABILITY_DAG_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED" if passed
+                   else "FAIL__CAPABILITY_DAG_RESULT_INVALID"),
+        "pass": passed, "task_id": task_id, "executed": True, "raw_goal": goal,
+        "raw_goal_sha256": raw_contract["task_sha256"], "raw_task_contract_sha256": raw_contract["task_contract_sha256"],
+        "raw_acceptance_obligation_count": len(raw_contract["acceptance_contract"]["obligations"]),
+        "compiler_mode": compiled.get("compiler_mode"), "compiled_capability_id": None,
+        "selected_plan": cids, "compiled_part_count": len(compiled.get("compiled_parts") or []),
+        "controller_action_count": len(compiled.get("controller_actions") or []), "execution": rows,
+        "capability_dag": _dag_evidence(compiled, executor),
+        "controller_execution": dict(controller) if isinstance(controller, Mapping) else controller,
+        "controller_checkpoint": checkpoint,
+        "cognition_dependency_class": controller.get("cognition_dependency_class") if isinstance(controller, Mapping) else "MODEL_INDEPENDENT",
+        "model_dependency_count": controller.get("model_dependency_count") if isinstance(controller, Mapping) else 0,
+        "routing_success_authority": False, "semantic_acceptance_complete": False, "accepted_raw_obligation_ids": [],
+        "elapsed_ns": perf_counter_ns() - started, "incremental_spend_usd": 0, "benchmark_specific": False, "terminal_credit_delta": 0,
+    }
+    if reason is not None:
+        out["failure_class"] = "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE"
+        out["reason"] = str(reason)[:1600]
+    return out
+
+
+def execute_capability_plan_locally(task_id: str, goal: str, compiled: Mapping[str, Any],
+                                    admissible: Mapping[str, Mapping[str, Any]], raw_contract: Mapping[str, Any],
+                                    started: int) -> dict[str, Any]:
+    """The autonomous DAG executor: run the planned steps in order, forwarding artifacts locally.
+
+    Each step is run with :func:`run_adapter_locally` - the kernel's argument and expectation
+    semantics, a declared-zero incremental cost, declared modules verified importable, an adapter
+    inside the repository, and no dependency installation and no network.  A cross-step
+    ``$result`` reference is resolved from the results of the steps that already ran, so a
+    consumer never reads a path its producer has not written.  Any failure returns a closed
+    failure with the row that caused it; the promised-artifact check still runs afterwards.
+    """
+    dag = compiled.get("capability_dag") or {}
+    steps = [step for step in (dag.get("steps") or []) if isinstance(step, Mapping)]
+    rows: list[dict[str, Any]] = []
+    results: list[Mapping[str, Any]] = []
+    for index, step in enumerate(steps):
+        cid = str(step.get("capability_id") or "")
+        entry = admissible.get(cid)
+        if not isinstance(entry, Mapping):
+            rows.append({"cycle": index, "capability_id": cid, "pass": False, "status": "FAIL__CAPABILITY_DAG_STEP_NOT_ADMISSIBLE",
+                         "result": None, "execution_proof_type": DAG_LOCAL_EXECUTOR})
+            return _dag_result(task_id, goal, compiled, raw_contract, DAG_LOCAL_EXECUTOR, rows, False, started,
+                               reason="DAG_CAPABILITY_NOT_ADMISSIBLE:" + cid)
+        try:
+            action = _resolve_plan_refs(deepcopy(step.get("action") or {}), results)
+            step_result = run_adapter_locally(entry, action)
+        except Exception as exc:  # noqa: BLE001 - every step failure is a closed failure with its reason
+            rows.append({"cycle": index, "capability_id": cid, "pass": False, "status": "FAIL__FRONT_LAYER_LOCAL_CAPABILITY_ACTION",
+                         "result": None, "plan_action": dict(step.get("action") or {}), "execution_proof_type": DAG_LOCAL_EXECUTOR,
+                         "reason": type(exc).__name__ + ":" + str(exc)[:1200]})
+            return _dag_result(task_id, goal, compiled, raw_contract, DAG_LOCAL_EXECUTOR, rows, False, started,
+                               reason=type(exc).__name__ + ":" + str(exc))
+        results.append(step_result)
+        rows.append({"cycle": index, "capability_id": cid, "pass": True, "status": "PASS__FRONT_LAYER_LOCAL_CAPABILITY_ACTION",
+                     "result": dict(step_result), "plan_action": dict(step.get("action") or {}),
+                     "artifacts_consumed": [dict(edge) for edge in step.get("artifacts_consumed") or [] if isinstance(edge, Mapping)],
+                     "execution_proof_type": DAG_LOCAL_EXECUTOR})
+    controller = {
+        "executor": DAG_LOCAL_EXECUTOR,
+        "reason_kernel_not_used": "BOUND_CAPABILITY_SOURCE_UNSUPPORTED_IN_AT_LEAST_ONE_DAG_STEP",
+        "returncode": 0, "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN", "cognition_dependency_class": "MODEL_INDEPENDENT",
+        "model_dependency_count": 0, "final_summary": str(dag.get("finish_summary") or ""),
+        "trace": [{"cycle": row["cycle"], "action": row.get("plan_action"), "result": row["result"]} for row in rows],
+    }
+    return _dag_result(task_id, goal, compiled, raw_contract, DAG_LOCAL_EXECUTOR, rows, True, started, controller=controller)
+
+
+def _execute_capability_dag(task_id: str, goal: str, compiled: Mapping[str, Any],
+                            admissible: Mapping[str, Mapping[str, Any]], raw_contract: Mapping[str, Any],
+                            started: int) -> dict[str, Any]:
+    """Execute a planned multi-step capability DAG (F11) and verify every step's own result."""
+    dag = compiled.get("capability_dag") or {}
+    steps = [step for step in (dag.get("steps") or []) if isinstance(step, Mapping)]
+    executor = dag_executor(compiled, admissible)
+    if executor == DAG_LOCAL_EXECUTOR:
+        return execute_capability_plan_locally(task_id, goal, compiled, admissible, raw_contract, started)
+    actions = [dict(a) for a in compiled.get("controller_actions") or []]
+    try:
+        controller = astra_runtime.run_goal(
+            {"id": "live-capability-dag-controller", "controller_actions": actions,
+             "max_controller_actions": max(16, len(actions))},
+            {"mission_id": task_id, "goal": goal},
+        )
+    except Exception as exc:
+        return _dag_result(task_id, goal, compiled, raw_contract, DAG_KERNEL_EXECUTOR, [], False, started,
+                           reason=type(exc).__name__ + ":" + str(exc))
+    trace = controller.get("trace") if isinstance(controller, Mapping) and isinstance(controller.get("trace"), list) else []
+    checkpoint = controller.get("controller_checkpoint") if isinstance(controller, Mapping) and isinstance(controller.get("controller_checkpoint"), Mapping) else {}
+    rows = _dag_rows(steps, list(trace), DAG_KERNEL_EXECUTOR, checkpoint.get("plan_sha256"))
+    passed = (
+        _controller_passed(controller)
+        and len(trace) == len(actions)
+        and str(controller.get("final_summary") or "") == str(dag.get("finish_summary") or "")
+        and all(row.get("pass") is True for row in rows)
+    )
+    return _dag_result(task_id, goal, compiled, raw_contract, DAG_KERNEL_EXECUTOR, rows, passed, started,
+                       controller=controller, checkpoint=checkpoint)
+
+
 def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: Mapping[str, Mapping[str, Any]], started: int) -> dict[str, Any]:
     """Execute a compiled plan with the same controller calls ``run_raw_goal`` makes."""
     controller_actions = compiled.get("controller_actions")
@@ -307,6 +653,9 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
     raw_contract = compile_contract(goal, source_id="user", routing_target_effects=routing_targets)
     if raw_contract.get("pass") is not True:
         return _fail(task_id, "FAIL__LOSSLESS_RAW_TASK_CONTRACT", "RAW_TASK_OBLIGATION_ENVELOPE_FAILURE", started, errors=raw_contract.get("errors"))
+    dag = compiled.get("capability_dag")
+    if isinstance(dag, Mapping) and dag.get("schema") == front.DAG_SCHEMA:
+        return _execute_capability_dag(task_id, goal, compiled, admissible, raw_contract, started)
     execution_rows: list[dict[str, Any]] = []
     if controller_actions is None:
         if not selected or selected not in admissible or not isinstance(compiled.get("inputs"), Mapping):
