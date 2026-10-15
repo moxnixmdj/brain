@@ -616,12 +616,9 @@ def _execute_capability_dag(task_id: str, goal: str, compiled: Mapping[str, Any]
     """Execute a planned multi-step capability DAG (F11) and verify every step's own result."""
     dag = compiled.get("capability_dag") or {}
     steps = [step for step in (dag.get("steps") or []) if isinstance(step, Mapping)]
-    local_res = execute_capability_plan_locally(task_id, goal, compiled, admissible, raw_contract, started)
-    if local_res.get("pass") is True:
-        return local_res
     executor = dag_executor(compiled, admissible)
     if executor == DAG_LOCAL_EXECUTOR:
-        return local_res
+        return execute_capability_plan_locally(task_id, goal, compiled, admissible, raw_contract, started)
     actions = [dict(a) for a in compiled.get("controller_actions") or []]
     try:
         controller = astra_runtime.run_goal(
