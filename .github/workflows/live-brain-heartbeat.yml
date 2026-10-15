@@ -1,4 +1,5 @@
 name: live-brain-heartbeat
+# Public runner execution
 
 # The Brain's heartbeat.  Every day (and on demand) the public runner gives the ONE live entry
 # (canonical/runtime/live_brain_route_admission_v1.solve) fresh goals it has never seen, judges
