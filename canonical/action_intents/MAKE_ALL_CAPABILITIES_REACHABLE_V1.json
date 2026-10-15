@@ -122,7 +122,7 @@
   },
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-    "canonical_base_commit": "f416ba3012da499836190ebbf0ce6e70f697871b",
+    "canonical_base_commit": "abf054be49f644d704d4f8b2d6d0164d16d6cffc",
     "real_outcome": "ONE_LIVE_ENTRY_THAT_REACHES_EVERY_BOUND_CAPABILITY_FROM_A_SENTENCE_AND_FAILS_CLOSED_ON_EVERYTHING_ELSE",
     "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
     "obs_goal": {
