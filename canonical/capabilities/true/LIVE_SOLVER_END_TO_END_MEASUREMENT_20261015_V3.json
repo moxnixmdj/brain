@@ -1,0 +1,3344 @@
+{
+  "authority": "NONE",
+  "controller_checkpoints_removed": 1008,
+  "credit": 0,
+  "families_not_measured_here": [
+    "BROWSER_CAPTURE",
+    "CHART_RASTER_READERS",
+    "CODEC_MSGPACK (auto.pypi.msgpack): the registry pins a cp312 wheel and this machine runs Python 3.11; measured by the public-runner heartbeat (Python 3.12)",
+    "DOCX_CREATE",
+    "HTTP_JSON_FETCH__PYPI_AUDIT__WEB_RELEASE",
+    "JQ_QUERY (json.query.jq): this machine has no apt package metadata, so the pinned jq binding cannot be verified here; measured by the public-runner heartbeat",
+    "KNOWLEDGE_FETCH_ASSESS_ASSERT",
+    "MARKDOWN_TO_PDF",
+    "NUMERIC_EXPRESSION_SYMPY",
+    "PDF_TEXT_OCR",
+    "PYTHON_REPAIR_LOOPS__FAULT_LOCALIZATION",
+    "PYTHON_SOURCE_TEST_AUDIT",
+    "QR_BARCODE_GENERATE_DECODE",
+    "SOURCE_RANKING_BM25__EVIDENCE_EXTRACT__DECISION_SYNTHESIS",
+    "SQLITE_CREATE_VERIFY",
+    "XLSX_CREATE_VERIFY",
+    "YAML_TO_JSON"
+  ],
+  "findings_plain_language": [
+    "Through the one entry solve(), eight more capability shapes were run end to end on fresh goals and judged by stdlib-only checkers: archive verification (gnu tar, with tampered bundles that must be refused), python source audit, python unittest audit (with failing suites that must be refused), CBOR encoding (decoded by a hand-written CBOR reader), sqlite table creation (rows read back with sqlite3). All were 50/50 here; the old raw entry was 0/50 on three of them.",
+    "Real capability limit found and now measured as a truth test: the bound CBOR library @dfinity/cbor 0.2.3 truncates floats (1.5 encodes as 1). The Brain's own round-trip check catches it, so goals with floats fail closed 50/50 instead of writing a wrong artifact as a PASS.",
+    "Two families cannot run on this machine for environment reasons (no apt metadata for the pinned jq; msgpack pinned to a cp312 wheel on a 3.11 machine). They are reported as 'blocked by this machine', not as passes and not as Brain failures; the public-runner heartbeat counts any such blocker as a failure because the runner installs everything.",
+    "Old-entry comparison on the new families: python source audit 0/50, python tests audit 0/50, jq 0/50 (wrong route or no route), archive verify 34/50, codecs/sqlite equal.",
+    "Nothing here is a capability credit. Authority NONE, credit 0, incremental spend 0, model dependency count 0."
+  ],
+  "how_to_read": [
+    "in_scope_instance_pass_rate is over FRESH goals the compiler has never seen, judged on the real artifact by stdlib oracles.",
+    "out_of_scope_fail_closed_rate must be 1.0: every goal no tool can serve must come back pass=False with nothing written.",
+    "Families in families_not_measured_here are not failures and not passes; they are unmeasured on this machine.",
+    "Nothing here is a capability credit. Authority NONE."
+  ],
+  "incremental_spend_usd": 0,
+  "machine": {
+    "network_egress": "allowlisted hosts only",
+    "platform": "linux"
+  },
+  "measurements": {
+    "new": {
+      "entry": "canonical.runtime.live_brain_route_admission_v1.solve",
+      "failures_sample": [
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".items[0].name\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_0_ilew.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_0_plit.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".tag\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_1_tane.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_1_tgbz.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".items[2].name\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_2_suoe.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_2_uqmq.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".items[1].name\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_3_orxa.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_3_ifca.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".tag\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_4_zisw.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_4_oadq.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".a.b\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_5_acjk.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_5_fxff.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".items | length\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_6_onah.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_6_nvsz.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".tag\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_7_lqye.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_7_fhhv.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".items[1].name\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_8_cnzg.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_8_hyyd.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".items[3].name\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_9_cedq.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_9_hfgd.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".a.b\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_10_gcdn.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_10_mlnh.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".tag\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_11_jfob.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_11_etzs.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".items | length\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_12_ojnc.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_12_ufxr.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".tag\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_13_lofx.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_13_akkv.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".tag\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_14_fbqh.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_14_rums.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".items[3].name\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_15_krkn.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_15_jzxz.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \"[.items[].v] | add\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_16_suhj.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_16_qjhj.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".items | length\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_17_pijs.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_17_bhbe.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".tag\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_18_pdpq.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_18_bigz.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".items | length\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_19_hmya.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_19_ufwv.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \"[.items[].v] | add\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_20_feey.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_20_ldue.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".a.b\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_21_nzjb.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_21_uqrr.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \"[.items[].v] | add\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_22_vlnq.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_22_tfcx.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \"[.items[].v] | add\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_23_daxa.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_23_cvig.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".items | length\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_24_uude.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_24_rktn.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".items[1].name\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_25_gdys.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_25_qvqy.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \"[.items[].v] | add\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_26_jehw.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_26_jwes.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".a.b\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_27_nmvl.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_27_lxrc.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".items | length\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_28_mnyz.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_28_gdup.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \"[.items[].v] | add\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_29_zpcu.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_29_melu.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \"[.items[].v] | add\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_30_sjxb.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_30_qott.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \"[.items[].v] | add\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_31_bsju.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_31_tdiu.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \"[.items[].v] | add\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_32_fplz.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_32_lnew.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".a.b\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_33_avil.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_33_wmct.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \"[.items[].v] | add\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_34_gzng.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_34_lfjr.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".tag\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_35_fgji.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_35_mghg.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".a.b\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_36_ouzl.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_36_hvql.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \"[.items[].v] | add\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_37_mbzp.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_37_eebk.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".items | length\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_38_qjsw.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_38_dhgk.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \"[.items[].v] | add\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_39_jbsz.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_39_ajgi.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".tag\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_40_krmp.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_40_gkeh.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".a.b\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_41_aonz.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_41_iise.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".items | length\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_42_sxlb.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_42_eaoh.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".a.b\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_43_xqdx.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_43_matr.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".items | length\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_44_fzkq.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_44_rjev.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \"[.items[].v] | add\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_45_kkgf.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_45_pavp.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \"[.items[].v] | add\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_46_lkzr.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_46_zdyr.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".items[2].name\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_47_vzse.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_47_fasx.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \".a.b\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_48_wsnf.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_48_xxwq.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "json.query.jq",
+          "family": "JQ_QUERY",
+          "goal": "Run the jq query with jq filter \"[.items[].v] | add\" on canonical/astra_runtime/tmp/live_solver_e2e/new/doc_49_ggfg.json and save the output to canonical/astra_runtime/tmp/live_solver_e2e/new/q_49_fvos.txt.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND"
+        },
+        {
+          "admission_rule": null,
+          "capability": "auto.pypi.msgpack",
+          "family": "CODEC_MSGPACK",
+          "goal": "Encode the JSON records in canonical/astra_runtime/tmp/live_solver_e2e/new/codec_msgpack_0_teum.json with the msgpack python library and save the binary output to canonical/astra_runtime/tmp/live_solver_e2e/new/codec_msg",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_PYPI_INSTALL_FAILED"
+        },
+        {
+          "admission_rule": null,
+          "capability": "auto.pypi.msgpack",
+          "family": "CODEC_MSGPACK",
+          "goal": "Encode the JSON records in canonical/astra_runtime/tmp/live_solver_e2e/new/codec_msgpack_1_dkci.json with the msgpack python library and save the binary output to canonical/astra_runtime/tmp/live_solver_e2e/new/codec_msg",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_PYPI_INSTALL_FAILED"
+        },
+        {
+          "admission_rule": null,
+          "capability": "auto.pypi.msgpack",
+          "family": "CODEC_MSGPACK",
+          "goal": "Encode the JSON records in canonical/astra_runtime/tmp/live_solver_e2e/new/codec_msgpack_2_kjwa.json with the msgpack python library and save the binary output to canonical/astra_runtime/tmp/live_solver_e2e/new/codec_msg",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_PYPI_INSTALL_FAILED"
+        },
+        {
+          "admission_rule": null,
+          "capability": "auto.pypi.msgpack",
+          "family": "CODEC_MSGPACK",
+          "goal": "Encode the JSON records in canonical/astra_runtime/tmp/live_solver_e2e/new/codec_msgpack_3_prqq.json with the msgpack python library and save the binary output to canonical/astra_runtime/tmp/live_solver_e2e/new/codec_msg",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_PYPI_INSTALL_FAILED"
+        },
+        {
+          "admission_rule": null,
+          "capability": "auto.pypi.msgpack",
+          "family": "CODEC_MSGPACK",
+          "goal": "Encode the JSON records in canonical/astra_runtime/tmp/live_solver_e2e/new/codec_msgpack_4_dwab.json with the msgpack python library and save the binary output to canonical/astra_runtime/tmp/live_solver_e2e/new/codec_msg",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_PYPI_INSTALL_FAILED"
+        },
+        {
+          "admission_rule": null,
+          "capability": "auto.pypi.msgpack",
+          "family": "CODEC_MSGPACK",
+          "goal": "Encode the JSON records in canonical/astra_runtime/tmp/live_solver_e2e/new/codec_msgpack_5_iyqs.json with the msgpack python library and save the binary output to canonical/astra_runtime/tmp/live_solver_e2e/new/codec_msg",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_PYPI_INSTALL_FAILED"
+        },
+        {
+          "admission_rule": null,
+          "capability": "auto.pypi.msgpack",
+          "family": "CODEC_MSGPACK",
+          "goal": "Encode the JSON records in canonical/astra_runtime/tmp/live_solver_e2e/new/codec_msgpack_6_rupi.json with the msgpack python library and save the binary output to canonical/astra_runtime/tmp/live_solver_e2e/new/codec_msg",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_PYPI_INSTALL_FAILED"
+        },
+        {
+          "admission_rule": null,
+          "capability": "auto.pypi.msgpack",
+          "family": "CODEC_MSGPACK",
+          "goal": "Encode the JSON records in canonical/astra_runtime/tmp/live_solver_e2e/new/codec_msgpack_7_uzyt.json with the msgpack python library and save the binary output to canonical/astra_runtime/tmp/live_solver_e2e/new/codec_msg",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_PYPI_INSTALL_FAILED"
+        },
+        {
+          "admission_rule": null,
+          "capability": "auto.pypi.msgpack",
+          "family": "CODEC_MSGPACK",
+          "goal": "Encode the JSON records in canonical/astra_runtime/tmp/live_solver_e2e/new/codec_msgpack_8_gkog.json with the msgpack python library and save the binary output to canonical/astra_runtime/tmp/live_solver_e2e/new/codec_msg",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_PYPI_INSTALL_FAILED"
+        },
+        {
+          "admission_rule": null,
+          "capability": "auto.pypi.msgpack",
+          "family": "CODEC_MSGPACK",
+          "goal": "Encode the JSON records in canonical/astra_runtime/tmp/live_solver_e2e/new/codec_msgpack_9_yosc.json with the msgpack python library and save the binary output to canonical/astra_runtime/tmp/live_solver_e2e/new/codec_msg",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_PYPI_INSTALL_FAILED"
+        }
+      ],
+      "families": {
+        "ARCHIVE_TAR_GZ_FROM_MANIFEST": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 20.62,
+          "oracle_pass": 50,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "archive.tar_gz.create_from_manifest": 50
+          }
+        },
+        "ARCHIVE_VERIFY_GNU": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 22.08,
+          "oracle_pass": 50,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "archive.verify.tar_gz.gnu": 50
+          }
+        },
+        "CODEC_CBOR": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 372.94,
+          "oracle_pass": 50,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "auto.npm.dfinity-cbor": 50
+          }
+        },
+        "CODEC_CBOR_FLOATS_FAIL_CLOSED": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 343.75,
+          "oracle_pass": 50,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "auto.npm.dfinity-cbor": 50
+          }
+        },
+        "CODEC_MSGPACK": {
+          "environment_blocked_here": 50,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 476.31,
+          "oracle_pass": 0,
+          "pass_rate": 0.0,
+          "routes_taken": {
+            "auto.pypi.msgpack": 50
+          }
+        },
+        "COMPOUND_TWO_STEP_LITERAL_JSON": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 20.58,
+          "oracle_pass": 50,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "FRONT_COMPOUND_SENTENCES": 50
+          }
+        },
+        "EXACT_LITERAL_RESPONSE": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 8.18,
+          "oracle_pass": 50,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "DETERMINISTIC_EXACT_LITERAL_RESPONSE": 50
+          }
+        },
+        "JQ_QUERY": {
+          "environment_blocked_here": 50,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 11.11,
+          "oracle_pass": 0,
+          "pass_rate": 0.0,
+          "routes_taken": {
+            "json.query.jq": 50
+          }
+        },
+        "LITERAL_JSON_RECORDS": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 11.86,
+          "oracle_pass": 50,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "DETERMINISTIC_LITERAL_JSON_RECORDS": 50
+          }
+        },
+        "OUT_OF_SCOPE_MUST_FAIL_CLOSED": {
+          "environment_blocked_here": 0,
+          "expected": "all FAIL closed, no artifact",
+          "instances": 100,
+          "mean_ms": 6.82,
+          "oracle_pass": 100,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "-": 79,
+            "python.software.request.semantic_behavior.compile.v1": 21
+          }
+        },
+        "PYTHON_SOURCE_AUDIT": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 22.47,
+          "oracle_pass": 50,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "python.source.audit.ast": 50
+          }
+        },
+        "PYTHON_TESTS_AUDIT": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 61.6,
+          "oracle_pass": 50,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "python.tests.audit.unittest": 50
+          }
+        },
+        "SQLITE_FROM_RECORDS": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 22.5,
+          "oracle_pass": 50,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "sqlite.table.create_from_json_records": 50
+          }
+        }
+      },
+      "in_scope_families_all_pass": 10,
+      "in_scope_families_measured": 12,
+      "in_scope_instance_pass_rate": 0.8333,
+      "out_of_scope_fail_closed_rate": 1.0
+    },
+    "old": {
+      "entry": "canonical.runtime.live_integrated_brain_v1.run_raw_goal",
+      "failures_sample": [
+        {
+          "admission_rule": null,
+          "capability": "archive.verify.tar_gz.gnu",
+          "family": "ARCHIVE_TAR_GZ_FROM_MANIFEST",
+          "goal": "Build a tar.gz archive from the manifest canonical/astra_runtime/tmp/live_solver_e2e/old/archive_4/manifest.json and write it to canonical/astra_runtime/tmp/live_solver_e2e/old/archive_4/efvbat.tar.gz.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "archive not written | RuntimeError:GNU_TAR_LIST_FAILED:\ngzip: stdin: not in gzip format\ntar: Child returned status 1\ntar: Error is not recoverable: exiting now\n"
+        },
+        {
+          "admission_rule": null,
+          "capability": "archive.verify.tar_gz.gnu",
+          "family": "ARCHIVE_TAR_GZ_FROM_MANIFEST",
+          "goal": "Build a tar.gz archive from the manifest canonical/astra_runtime/tmp/live_solver_e2e/old/archive_6/manifest.json and write it to canonical/astra_runtime/tmp/live_solver_e2e/old/archive_6/urcjok.tar.gz.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "archive not written | RuntimeError:GNU_TAR_LIST_FAILED:\ngzip: stdin: not in gzip format\ntar: Child returned status 1\ntar: Error is not recoverable: exiting now\n"
+        },
+        {
+          "admission_rule": null,
+          "capability": "archive.verify.tar_gz.gnu",
+          "family": "ARCHIVE_TAR_GZ_FROM_MANIFEST",
+          "goal": "Build a tar.gz archive from the manifest canonical/astra_runtime/tmp/live_solver_e2e/old/archive_9/manifest.json and write it to canonical/astra_runtime/tmp/live_solver_e2e/old/archive_9/zprquo.tar.gz.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "archive not written | RuntimeError:GNU_TAR_LIST_FAILED:\ngzip: stdin: not in gzip format\ntar: Child returned status 1\ntar: Error is not recoverable: exiting now\n"
+        },
+        {
+          "admission_rule": null,
+          "capability": "archive.verify.tar_gz.gnu",
+          "family": "ARCHIVE_TAR_GZ_FROM_MANIFEST",
+          "goal": "Build a tar.gz archive from the manifest canonical/astra_runtime/tmp/live_solver_e2e/old/archive_12/manifest.json and write it to canonical/astra_runtime/tmp/live_solver_e2e/old/archive_12/aorphw.tar.gz.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "archive not written | RuntimeError:GNU_TAR_LIST_FAILED:\ngzip: stdin: not in gzip format\ntar: Child returned status 1\ntar: Error is not recoverable: exiting now\n"
+        },
+        {
+          "admission_rule": null,
+          "capability": "archive.verify.tar_gz.gnu",
+          "family": "ARCHIVE_TAR_GZ_FROM_MANIFEST",
+          "goal": "Build a tar.gz archive from the manifest canonical/astra_runtime/tmp/live_solver_e2e/old/archive_15/manifest.json and write it to canonical/astra_runtime/tmp/live_solver_e2e/old/archive_15/ssmnvd.tar.gz.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "archive not written | RuntimeError:GNU_TAR_LIST_FAILED:\ngzip: stdin: not in gzip format\ntar: Child returned status 1\ntar: Error is not recoverable: exiting now\n"
+        },
+        {
+          "admission_rule": null,
+          "capability": "archive.verify.tar_gz.gnu",
+          "family": "ARCHIVE_TAR_GZ_FROM_MANIFEST",
+          "goal": "Build a tar.gz archive from the manifest canonical/astra_runtime/tmp/live_solver_e2e/old/archive_18/manifest.json and write it to canonical/astra_runtime/tmp/live_solver_e2e/old/archive_18/ltfgmp.tar.gz.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "archive not written | RuntimeError:GNU_TAR_LIST_FAILED:\ngzip: stdin: not in gzip format\ntar: Child returned status 1\ntar: Error is not recoverable: exiting now\n"
+        },
+        {
+          "admission_rule": null,
+          "capability": "archive.verify.tar_gz.gnu",
+          "family": "ARCHIVE_TAR_GZ_FROM_MANIFEST",
+          "goal": "Build a tar.gz archive from the manifest canonical/astra_runtime/tmp/live_solver_e2e/old/archive_21/manifest.json and write it to canonical/astra_runtime/tmp/live_solver_e2e/old/archive_21/xckhdu.tar.gz.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "archive not written | RuntimeError:GNU_TAR_LIST_FAILED:\ngzip: stdin: not in gzip format\ntar: Child returned status 1\ntar: Error is not recoverable: exiting now\n"
+        },
+        {
+          "admission_rule": null,
+          "capability": "archive.verify.tar_gz.gnu",
+          "family": "ARCHIVE_TAR_GZ_FROM_MANIFEST",
+          "goal": "Build a tar.gz archive from the manifest canonical/astra_runtime/tmp/live_solver_e2e/old/archive_27/manifest.json and write it to canonical/astra_runtime/tmp/live_solver_e2e/old/archive_27/uqajvd.tar.gz.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "archive not written | RuntimeError:GNU_TAR_LIST_FAILED:\ngzip: stdin: not in gzip format\ntar: Child returned status 1\ntar: Error is not recoverable: exiting now\n"
+        },
+        {
+          "admission_rule": null,
+          "capability": "archive.verify.tar_gz.gnu",
+          "family": "ARCHIVE_TAR_GZ_FROM_MANIFEST",
+          "goal": "Build a tar.gz archive from the manifest canonical/astra_runtime/tmp/live_solver_e2e/old/archive_31/manifest.json and write it to canonical/astra_runtime/tmp/live_solver_e2e/old/archive_31/dxxlpn.tar.gz.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "archive not written | RuntimeError:GNU_TAR_LIST_FAILED:\ngzip: stdin: not in gzip format\ntar: Child returned status 1\ntar: Error is not recoverable: exiting now\n"
+        },
+        {
+          "admission_rule": null,
+          "capability": "archive.verify.tar_gz.gnu",
+          "family": "ARCHIVE_TAR_GZ_FROM_MANIFEST",
+          "goal": "Build a tar.gz archive from the manifest canonical/astra_runtime/tmp/live_solver_e2e/old/archive_33/manifest.json and write it to canonical/astra_runtime/tmp/live_solver_e2e/old/archive_33/niyrui.tar.gz.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "archive not written | RuntimeError:GNU_TAR_LIST_FAILED:\ngzip: stdin: not in gzip format\ntar: Child returned status 1\ntar: Error is not recoverable: exiting now\n"
+        },
+        {
+          "admission_rule": null,
+          "capability": "archive.verify.tar_gz.gnu",
+          "family": "ARCHIVE_TAR_GZ_FROM_MANIFEST",
+          "goal": "Build a tar.gz archive from the manifest canonical/astra_runtime/tmp/live_solver_e2e/old/archive_39/manifest.json and write it to canonical/astra_runtime/tmp/live_solver_e2e/old/archive_39/yendlq.tar.gz.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "archive not written | RuntimeError:GNU_TAR_LIST_FAILED:\ngzip: stdin: not in gzip format\ntar: Child returned status 1\ntar: Error is not recoverable: exiting now\n"
+        },
+        {
+          "admission_rule": null,
+          "capability": "archive.verify.tar_gz.gnu",
+          "family": "ARCHIVE_TAR_GZ_FROM_MANIFEST",
+          "goal": "Build a tar.gz archive from the manifest canonical/astra_runtime/tmp/live_solver_e2e/old/archive_45/manifest.json and write it to canonical/astra_runtime/tmp/live_solver_e2e/old/archive_45/dabnjd.tar.gz.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "archive not written | RuntimeError:GNU_TAR_LIST_FAILED:\ngzip: stdin: not in gzip format\ntar: Child returned status 1\ntar: Error is not recoverable: exiting now\n"
+        },
+        {
+          "admission_rule": null,
+          "capability": "archive.verify.tar_gz.gnu",
+          "family": "ARCHIVE_TAR_GZ_FROM_MANIFEST",
+          "goal": "Build a tar.gz archive from the manifest canonical/astra_runtime/tmp/live_solver_e2e/old/archive_47/manifest.json and write it to canonical/astra_runtime/tmp/live_solver_e2e/old/archive_47/sfxcva.tar.gz.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "archive not written | RuntimeError:GNU_TAR_LIST_FAILED:\ngzip: stdin: not in gzip format\ntar: Child returned status 1\ntar: Error is not recoverable: exiting now\n"
+        },
+        {
+          "admission_rule": null,
+          "capability": "archive.verify.tar_gz.gnu",
+          "family": "ARCHIVE_TAR_GZ_FROM_MANIFEST",
+          "goal": "Build a tar.gz archive from the manifest canonical/astra_runtime/tmp/live_solver_e2e/old/archive_49/manifest.json and write it to canonical/astra_runtime/tmp/live_solver_e2e/old/archive_49/yprttg.tar.gz.",
+          "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+          "why": "archive not written | RuntimeError:GNU_TAR_LIST_FAILED:\ngzip: stdin: not in gzip format\ntar: Child returned status 1\ntar: Error is not recoverable: exiting now\n"
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_4/lkefmu.json containing exactly two records with fields label and value: tyqhekci 993; nv 713.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'label': 'tyqhekci', 'value': 993}, {'label': 'nv', 'value': 713}] got [{'label': 'tyqhekci', 'value': 993}, {'label': 'nv', 'value': '713.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_5/ydthdv.json containing exactly three records with fields label and id: sxj 399; pmnqhuu 213; sxo 601.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'label': 'sxj', 'id': 399}, {'label': 'pmnqhuu', 'id': 213}, {'label': 'sxo', 'id': 601}] got [{'label': 'sxj', 'id': 399}, {'label': 'pmnqhuu', 'id': 213}, {'label': 'sxo', 'id': '601.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_6/osopyv.json containing exactly one record with fields value and name: kdhcyj 773.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'value': 'kdhcyj', 'name': 773}] got [{'value': 'kdhcyj', 'name': '773.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_8/inbevo.json containing exactly two records with fields count and code: ri 486; yt 673.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'count': 'ri', 'code': 486}, {'count': 'yt', 'code': 673}] got [{'count': 'ri', 'code': 486}, {'count': 'yt', 'code': '673.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_10/mxnhvh.json containing exactly one record with fields label and name: wtctg 473.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'label': 'wtctg', 'name': 473}] got [{'label': 'wtctg', 'name': '473.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_11/cunvmo.json containing exactly three records with fields value and code: zo 595; pytikm 768; pk 298.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'value': 'zo', 'code': 595}, {'value': 'pytikm', 'code': 768}, {'value': 'pk', 'code': 298}] got [{'value': 'zo', 'code': 595}, {'value': 'pytikm', 'code': 768}, {'value': 'pk', 'code': '298.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_12/jdqjec.json containing exactly two records with fields label and count: jr 680; uzheif 258.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'label': 'jr', 'count': 680}, {'label': 'uzheif', 'count': 258}] got [{'label': 'jr', 'count': 680}, {'label': 'uzheif', 'count': '258.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_13/bgcmkd.json containing exactly three records with fields value and label: kmbjt 858; pcmp 748; qsrcivbv 810.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'value': 'kmbjt', 'label': 858}, {'value': 'pcmp', 'label': 748}, {'value': 'qsrcivbv', 'label': 810}] got [{'value': 'kmbjt', 'label': 858}, {'value': 'pcmp', 'label': 748}, {'value': 'qsrcivbv', 'label': '810.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_14/wzwvij.json containing exactly two records with fields count and value: opkxwfc 117; jres 390.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'count': 'opkxwfc', 'value': 117}, {'count': 'jres', 'value': 390}] got [{'count': 'opkxwfc', 'value': 117}, {'count': 'jres', 'value': '390.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_17/wgdewk.json containing exactly one record with fields value and count: louyt 523.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'value': 'louyt', 'count': 523}] got [{'value': 'louyt', 'count': '523.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_19/cvjkcl.json containing exactly two records with fields count and name: xd 48; isjbhfo 911.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'count': 'xd', 'name': 48}, {'count': 'isjbhfo', 'name': 911}] got [{'count': 'xd', 'name': 48}, {'count': 'isjbhfo', 'name': '911.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_21/emklmc.json containing exactly two records with fields value and id: tuqj 377; loulq 600.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'value': 'tuqj', 'id': 377}, {'value': 'loulq', 'id': 600}] got [{'value': 'tuqj', 'id': 377}, {'value': 'loulq', 'id': '600.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_22/atvhwl.json containing exactly one record with fields id and name: vihc 832.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'id': 'vihc', 'name': 832}] got [{'id': 'vihc', 'name': '832.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_23/gbtfmj.json containing exactly three records with fields code and id: dvo 455; aq 47; bdtrab 926.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'code': 'dvo', 'id': 455}, {'code': 'aq', 'id': 47}, {'code': 'bdtrab', 'id': 926}] got [{'code': 'dvo', 'id': 455}, {'code': 'aq', 'id': 47}, {'code': 'bdtrab', 'id': '926.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_25/wqrwmz.json containing exactly two records with fields value and count: jkweuuih 998; na 69.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'value': 'jkweuuih', 'count': 998}, {'value': 'na', 'count': 69}] got [{'value': 'jkweuuih', 'count': 998}, {'value': 'na', 'count': '69.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_28/shryyw.json containing exactly two records with fields count and name: dvyv 943; pkh 553.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'count': 'dvyv', 'name': 943}, {'count': 'pkh', 'name': 553}] got [{'count': 'dvyv', 'name': 943}, {'count': 'pkh', 'name': '553.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_29/vncamw.json containing exactly one record with fields count and label: ieqd 796.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'count': 'ieqd', 'label': 796}] got [{'count': 'ieqd', 'label': '796.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_30/mfdjbx.json containing exactly three records with fields name and label: wgpuaw 480; jgx 498; sbwxw 763.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'name': 'wgpuaw', 'label': 480}, {'name': 'jgx', 'label': 498}, {'name': 'sbwxw', 'label': 763}] got [{'name': 'wgpuaw', 'label': 480}, {'name': 'jgx', 'label': 498}, {'name': 'sbwxw', 'label': '763.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_32/bacgkr.json containing exactly one record with fields name and value: yw 852.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'name': 'yw', 'value': 852}] got [{'name': 'yw', 'value': '852.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_33/vpijif.json containing exactly three records with fields name and id: yd 188; fgbbxtsp 448; qsjhxr 672.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'name': 'yd', 'id': 188}, {'name': 'fgbbxtsp', 'id': 448}, {'name': 'qsjhxr', 'id': 672}] got [{'name': 'yd', 'id': 188}, {'name': 'fgbbxtsp', 'id': 448}, {'name': 'qsjhxr', 'id': '672.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_34/brjonf.json containing exactly two records with fields count and name: xass 927; ox 432.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'count': 'xass', 'name': 927}, {'count': 'ox', 'name': 432}] got [{'count': 'xass', 'name': 927}, {'count': 'ox', 'name': '432.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_39/pldwdu.json containing exactly one record with fields code and value: hn 419.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'code': 'hn', 'value': 419}] got [{'code': 'hn', 'value': '419.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_40/zyjank.json containing exactly three records with fields id and value: vix 480; yq 380; zf 710.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'id': 'vix', 'value': 480}, {'id': 'yq', 'value': 380}, {'id': 'zf', 'value': 710}] got [{'id': 'vix', 'value': 480}, {'id': 'yq', 'value': 380}, {'id': 'zf', 'value': '710.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_41/szepvk.json containing exactly three records with fields name and id: pjrodju 914; ewe 215; qfojarcl 260.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'name': 'pjrodju', 'id': 914}, {'name': 'ewe', 'id': 215}, {'name': 'qfojarcl', 'id': 260}] got [{'name': 'pjrodju', 'id': 914}, {'name': 'ewe', 'id': 215}, {'name': 'qfojarcl', 'id': '260.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_43/wpzxmp.json containing exactly two records with fields value and id: pr 214; kknyixzl 189.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'value': 'pr', 'id': 214}, {'value': 'kknyixzl', 'id': 189}] got [{'value': 'pr', 'id': 214}, {'value': 'kknyixzl', 'id': '189.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_44/edeuaa.json containing exactly two records with fields code and id: piwdrj 376; hvxoptx 424.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'code': 'piwdrj', 'id': 376}, {'code': 'hvxoptx', 'id': 424}] got [{'code': 'piwdrj', 'id': 376}, {'code': 'hvxoptx', 'id': '424.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_45/ckmfqd.json containing exactly two records with fields count and code: fwhpwtn 673; sagt 98.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'count': 'fwhpwtn', 'code': 673}, {'count': 'sagt', 'code': 98}] got [{'count': 'fwhpwtn', 'code': 673}, {'count': 'sagt', 'code': '98.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_47/izgajl.json containing exactly two records with fields count and id: vzd 457; og 878.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'count': 'vzd', 'id': 457}, {'count': 'og', 'id': 878}] got [{'count': 'vzd', 'id': 457}, {'count': 'og', 'id': '878.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "LITERAL_JSON_RECORDS",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/literal_49/yoyxjf.json containing exactly one record with fields name and label: bclrci 638.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "expected [{'name': 'bclrci', 'label': 638}] got [{'name': 'bclrci', 'label': '638.'}] | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "COMPOUND_TWO_STEP_LITERAL_JSON",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_0/hydqjj.json containing exactly one record with fields id and value: pcft 84. Then create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_0/xjortf",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "hydqjj.json content differs | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "COMPOUND_TWO_STEP_LITERAL_JSON",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_1/xegdmo.json containing exactly one record with fields id and value: bajf 17. Then create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_1/xdmklb",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "xegdmo.json content differs | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "COMPOUND_TWO_STEP_LITERAL_JSON",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_2/chdzhe.json containing exactly one record with fields id and value: vofg 37. Then create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_2/vzbyfe",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "chdzhe.json content differs | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "COMPOUND_TWO_STEP_LITERAL_JSON",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_3/hkqols.json containing exactly one record with fields id and value: yrpz 10. Then create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_3/nnmhgf",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "hkqols.json content differs | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "COMPOUND_TWO_STEP_LITERAL_JSON",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_4/aoemys.json containing exactly one record with fields id and value: tvbq 44. Then create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_4/eovdxu",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "aoemys.json content differs | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "COMPOUND_TWO_STEP_LITERAL_JSON",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_5/ekuzij.json containing exactly one record with fields id and value: mlfw 83. Then create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_5/gjwbat",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "ekuzij.json content differs | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "COMPOUND_TWO_STEP_LITERAL_JSON",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_6/bkchxa.json containing exactly one record with fields id and value: kdrq 68. Then create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_6/kwyqwm",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "bkchxa.json content differs | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "COMPOUND_TWO_STEP_LITERAL_JSON",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_7/zssmht.json containing exactly one record with fields id and value: bcfn 37. Then create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_7/xqlzyc",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "zssmht.json content differs | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "COMPOUND_TWO_STEP_LITERAL_JSON",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_8/ljvvhr.json containing exactly one record with fields id and value: gxks 4. Then create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_8/iljzsf.",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "ljvvhr.json content differs | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "COMPOUND_TWO_STEP_LITERAL_JSON",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_9/liixas.json containing exactly one record with fields id and value: zkle 21. Then create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_9/yhlmbt",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "liixas.json content differs | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "COMPOUND_TWO_STEP_LITERAL_JSON",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_10/qmaodi.json containing exactly one record with fields id and value: ctld 48. Then create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_10/tmyo",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "qmaodi.json content differs | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "COMPOUND_TWO_STEP_LITERAL_JSON",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_11/baoeoh.json containing exactly one record with fields id and value: zxhy 91. Then create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_11/wmok",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "baoeoh.json content differs | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "COMPOUND_TWO_STEP_LITERAL_JSON",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_12/acseid.json containing exactly one record with fields id and value: tqtn 63. Then create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_12/jtxv",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "acseid.json content differs | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "COMPOUND_TWO_STEP_LITERAL_JSON",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_13/cxirtt.json containing exactly one record with fields id and value: twqk 7. Then create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_13/qqbku",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "cxirtt.json content differs | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "COMPOUND_TWO_STEP_LITERAL_JSON",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_14/moreps.json containing exactly one record with fields id and value: wshf 85. Then create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_14/atyv",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "moreps.json content differs | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "COMPOUND_TWO_STEP_LITERAL_JSON",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_15/rjuaqn.json containing exactly one record with fields id and value: ohgv 24. Then create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_15/kvfk",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "rjuaqn.json content differs | "
+        },
+        {
+          "admission_rule": null,
+          "capability": "DETERMINISTIC_LITERAL_JSON_RECORDS",
+          "family": "COMPOUND_TWO_STEP_LITERAL_JSON",
+          "goal": "Create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_16/sfeggs.json containing exactly one record with fields id and value: bivo 39. Then create canonical/astra_runtime/tmp/live_solver_e2e/old/compound_16/hrrg",
+          "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+          "why": "sfeggs.json content differs | "
+        }
+      ],
+      "families": {
+        "ARCHIVE_TAR_GZ_FROM_MANIFEST": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 17.92,
+          "oracle_pass": 36,
+          "pass_rate": 0.72,
+          "routes_taken": {
+            "archive.tar_gz.create_from_manifest": 36,
+            "archive.verify.tar_gz.gnu": 14
+          }
+        },
+        "ARCHIVE_VERIFY_GNU": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 17.76,
+          "oracle_pass": 34,
+          "pass_rate": 0.68,
+          "routes_taken": {
+            "terminal.kstar.root.assess.stdlib": 50
+          }
+        },
+        "CODEC_CBOR": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 356.57,
+          "oracle_pass": 50,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "auto.npm.dfinity-cbor": 50
+          }
+        },
+        "CODEC_CBOR_FLOATS_FAIL_CLOSED": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 337.33,
+          "oracle_pass": 50,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "auto.npm.dfinity-cbor": 50
+          }
+        },
+        "CODEC_MSGPACK": {
+          "environment_blocked_here": 50,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 551.39,
+          "oracle_pass": 0,
+          "pass_rate": 0.0,
+          "routes_taken": {
+            "auto.pypi.msgpack": 50
+          }
+        },
+        "COMPOUND_TWO_STEP_LITERAL_JSON": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 9.02,
+          "oracle_pass": 0,
+          "pass_rate": 0.0,
+          "routes_taken": {
+            "DETERMINISTIC_LITERAL_JSON_RECORDS": 50
+          }
+        },
+        "EXACT_LITERAL_RESPONSE": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 6.63,
+          "oracle_pass": 50,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "DETERMINISTIC_EXACT_LITERAL_RESPONSE": 50
+          }
+        },
+        "JQ_QUERY": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 17.22,
+          "oracle_pass": 0,
+          "pass_rate": 0.0,
+          "routes_taken": {
+            "terminal.kstar.root.assess.stdlib": 50
+          }
+        },
+        "LITERAL_JSON_RECORDS": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 9.53,
+          "oracle_pass": 21,
+          "pass_rate": 0.42,
+          "routes_taken": {
+            "DETERMINISTIC_LITERAL_JSON_RECORDS": 50
+          }
+        },
+        "OUT_OF_SCOPE_MUST_FAIL_CLOSED": {
+          "environment_blocked_here": 0,
+          "expected": "all FAIL closed, no artifact",
+          "instances": 100,
+          "mean_ms": 15.69,
+          "oracle_pass": 0,
+          "pass_rate": 0.0,
+          "routes_taken": {
+            "python.software.request.semantic_behavior.compile.v1": 21,
+            "terminal.kstar.root.assess.stdlib": 79
+          }
+        },
+        "PYTHON_SOURCE_AUDIT": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 21.47,
+          "oracle_pass": 0,
+          "pass_rate": 0.0,
+          "routes_taken": {
+            "python.software.request.semantic_behavior.compile.v1": 50
+          }
+        },
+        "PYTHON_TESTS_AUDIT": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 21.37,
+          "oracle_pass": 0,
+          "pass_rate": 0.0,
+          "routes_taken": {
+            "terminal.kstar.root.assess.stdlib": 50
+          }
+        },
+        "SQLITE_FROM_RECORDS": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 50,
+          "mean_ms": 19.53,
+          "oracle_pass": 50,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "sqlite.table.create_from_json_records": 50
+          }
+        }
+      },
+      "in_scope_families_all_pass": 4,
+      "in_scope_families_measured": 12,
+      "in_scope_instance_pass_rate": 0.485,
+      "out_of_scope_fail_closed_rate": 0.0
+    }
+  },
+  "model_dependency_count": 0,
+  "python": "3.11.2",
+  "reachability_from_one_entry": {
+    "capabilities_total": 66,
+    "counts": {
+      "BLOCKED_ZERO_INPUT": 3,
+      "REACHED_AND_BOUND": 63
+    },
+    "rows": [
+      {
+        "capability_id": "archive.tar_gz.create_from_manifest",
+        "detail": [
+          "manifest_path",
+          "output_path"
+        ],
+        "goal": "Use archive bundle gz manifest package tar on canonical/astra_runtime/tmp/live_solver_e2e/reachability/manifest.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "archive.verify.tar_gz.gnu",
+        "detail": [
+          "archive_path",
+          "manifest_path"
+        ],
+        "goal": "Use archive bundle gnu gz hash manifest members tar verify on canonical/astra_runtime/tmp/live_solver_e2e/reachability/archive.tar.gz canonical/astra_runtime/tmp/live_solver_e2e/reachability/manifest.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "auto.apt.zint",
+        "detail": [
+          "output_path",
+          "text"
+        ],
+        "goal": "Use 128 apt auto barcode effect zint on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.png text \"hello world\"",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "auto.npm.dfinity-cbor",
+        "detail": [
+          "json_path",
+          "output_path"
+        ],
+        "goal": "Use auto binary cbor dfinity encode javascript node npm structured on canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.cbor",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "auto.npm.msgpack-msgpack",
+        "detail": [
+          "json_path",
+          "output_path"
+        ],
+        "goal": "Use auto binary encode javascript msgpack node npm structured on canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.msgpack",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "auto.pypi.bson-modern",
+        "detail": [
+          "json_path",
+          "output_path"
+        ],
+        "goal": "Use auto binary bson encode modern pypi structured on canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.bson",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "auto.pypi.msgpack",
+        "detail": [
+          "json_path",
+          "output_path"
+        ],
+        "goal": "Use auto binary encode exact messagepack msgpack pypi records structured those on canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.msgpack",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "chart.raster.axis_title_unit_binding.v1",
+        "detail": [
+          "path"
+        ],
+        "goal": "Use axis binding chart dimension explicit frequency raster role rotated semantic survival temperature time title unit v1 on canonical/astra_runtime/tmp/live_solver_e2e/reachability/chart.png",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "chart.raster.curve_value_query.v1",
+        "detail": [
+          "label",
+          "path",
+          "x_value"
+        ],
+        "goal": "Use at axis chart curve interpolation legend query raster series v1 value on label \"Curve A\" canonical/astra_runtime/tmp/live_solver_e2e/reachability/chart.png x value 3.5",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "chart.raster.curve_x_at_y_query.v1",
+        "detail": [
+          "label",
+          "path",
+          "y_value"
+        ],
+        "goal": "Use at axis chart curve intersection legend query raster series threshold v1 on label \"Curve A\" canonical/astra_runtime/tmp/live_solver_e2e/reachability/chart.png y value 2",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "chart.raster.direct_curve_label_family_rank.v1",
+        "detail": [
+          "path",
+          "x_value"
+        ],
+        "goal": "Use at binding chart curve direct family growth label nearest rank raster series survival v1 on canonical/astra_runtime/tmp/live_solver_e2e/reachability/chart.png x value 3.5",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "chart.raster.legend_style_binding.v1",
+        "detail": [
+          "path"
+        ],
+        "goal": "Use binding chart color label legend raster series style v1 on canonical/astra_runtime/tmp/live_solver_e2e/reachability/chart.png",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "chart.raster.scene_graph.v1",
+        "detail": [
+          "path",
+          "x_ticks",
+          "y_ticks"
+        ],
+        "goal": "Use axis box calibration chart color component components geometry graph linear log plot polyline polylines raster scene v1 on canonical/astra_runtime/tmp/live_solver_e2e/reachability/chart.png x ticks [0, 1, 2] y ticks [0, 5, 10]",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "chart.read.binary_phase_solvus.v1",
+        "detail": [
+          "path",
+          "prompt"
+        ],
+        "goal": "Use answer binary chart composition diagram phase precipitation solvus v1 on canonical/astra_runtime/tmp/live_solver_e2e/reachability/chart.png prompt \"which phase is stable\"",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "chart.read.legend_linear_intersection.v1",
+        "detail": [
+          "path",
+          "prompt"
+        ],
+        "goal": "Use answer axis chart intersection legend line linear series v1 on canonical/astra_runtime/tmp/live_solver_e2e/reachability/chart.png prompt \"which phase is stable\"",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "decision.synthesis.typed.stdlib",
+        "detail": [
+          "input_path",
+          "output_path"
+        ],
+        "goal": "Use conflict constraint contradiction decision evidence provenance rank stdlib support synthesis terminal trace typed uncertainty on canonical/astra_runtime/tmp/live_solver_e2e/reachability/input.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "decision.synthesis.verify.stdlib",
+        "detail": [
+          "input_path",
+          "result_path"
+        ],
+        "goal": "Use audit decision evidence independent stdlib synthesis trace verified verify on canonical/astra_runtime/tmp/live_solver_e2e/reachability/input.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_result_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "document.convert.markdown_pdf.pandoc_weasyprint",
+        "detail": [
+          "markdown_path",
+          "output_path"
+        ],
+        "goal": "Use document markdown pandoc pdf report weasyprint on canonical/astra_runtime/tmp/live_solver_e2e/reachability/markdown.md and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.pdf",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "docx.document.create.python_docx",
+        "detail": [
+          "goal",
+          "output_path"
+        ],
+        "goal": "Use document docx paragraph python table title word on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.docx",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "docx.document.create_from_json_record",
+        "detail": [
+          "goal",
+          "json_path",
+          "output_path"
+        ],
+        "goal": "Use document docx field json normalized record report table value on canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.docx",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "docx.document.verify.intent_ooxml",
+        "detail": [
+          "docx_path"
+        ],
+        "goal": "Use content document docx exact independent intent ooxml reopen verify word on canonical/astra_runtime/tmp/live_solver_e2e/reachability/docx.docx",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "docx.document.verify.ooxml",
+        "detail": "takes no input; never routable from a sentence",
+        "goal": null,
+        "state": "BLOCKED_ZERO_INPUT"
+      },
+      {
+        "capability_id": "evidence.claim_relation.generic_units.stdlib",
+        "detail": [
+          "extraction_path",
+          "output_path",
+          "spec"
+        ],
+        "goal": "Use claim compare evidence exact explicit generic grounded numeric objective predicate relation stdlib support unit units verbatim on canonical/astra_runtime/tmp/live_solver_e2e/reachability/extraction.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json spec \"{\\\"relation\\\": \\\"gt\\\"}\"",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+        "detail": [
+          "extraction_path",
+          "objective",
+          "output_path"
+        ],
+        "goal": "Use at bind binding bound bounded claim compare comparison differ different equal evidence exact exceed explicit greater higher least less lower most numeric objective operand quoted relation spec stdlib threshold on canonical/astra_runtime/tmp/live_solver_e2e/reachability/extraction.json objective \"A is greater than B\" and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "http.json.fetch_from_state",
+        "detail": [
+          "output_path",
+          "source_json_path",
+          "url_key"
+        ],
+        "goal": "Use authoritative fetch http https json live metadata state url on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/source_json.json url key \"release_url\"",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "image.code.decode.zbarimg",
+        "detail": [
+          "path"
+        ],
+        "goal": "Use barcode code code128 decode qr zbar zbarimg on canonical/astra_runtime/tmp/live_solver_e2e/reachability/chart.png",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "image.extract.ocr.tesseract",
+        "detail": [
+          "path"
+        ],
+        "goal": "Use english ocr raster tesseract on canonical/astra_runtime/tmp/live_solver_e2e/reachability/chart.png",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "image.qr.generate.qrencode",
+        "detail": [
+          "output_path",
+          "text"
+        ],
+        "goal": "Use qr qrencode on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.png text \"hello world\"",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "json.query.jq",
+        "detail": [
+          "jq_filter",
+          "json_path",
+          "output_path"
+        ],
+        "goal": "Use jq json query structured table transform on jq filter \".a\" canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "knowledge.consistency.assess",
+        "detail": [
+          "evidence_paths",
+          "max_age_s",
+          "output_path"
+        ],
+        "goal": "Use assess assessment available conflict consistency corroboration freshness knowledge on canonical/astra_runtime/tmp/live_solver_e2e/reachability/evidence.json max age seconds 600 and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "knowledge.json.fetch.external",
+        "detail": [
+          "authoritative",
+          "json_path",
+          "output_path",
+          "url"
+        ],
+        "goal": "Use available evidence external fetch json knowledge observation on authoritative true canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json https://example.org/release.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "knowledge.status.assert",
+        "detail": [
+          "assessment_path",
+          "expected_status"
+        ],
+        "goal": "Use assert epistemic knowledge status verified verify on canonical/astra_runtime/tmp/live_solver_e2e/reachability/assessment.json expected status \"SUPPORTED\"",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "knowledge.support.materialize",
+        "detail": [
+          "assessment_path",
+          "field_name",
+          "output_path"
+        ],
+        "goal": "Use actionable fact knowledge materialize materialized support supported on canonical/astra_runtime/tmp/live_solver_e2e/reachability/assessment.json field name \"status\" and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "math.numeric_expression.sympy",
+        "detail": [
+          "expression",
+          "output_path",
+          "variables"
+        ],
+        "goal": "Use arithmetic calculate compute evaluate exponent exponentiation expression math multiplication multiply numeric power scalar sympy on expression \"2*x+1\" and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json variables x=2, y=3",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "pdf.extract.ocr.tesseract",
+        "detail": [
+          "pdf_path"
+        ],
+        "goal": "Use ocr pdf tesseract on canonical/astra_runtime/tmp/live_solver_e2e/reachability/pdf.pdf",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "pdf.extract.text.pypdf",
+        "detail": [
+          "pdf_path"
+        ],
+        "goal": "Use pdf pypdf on canonical/astra_runtime/tmp/live_solver_e2e/reachability/pdf.pdf",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+        "detail": [
+          "goal",
+          "output_path"
+        ],
+        "goal": "Use ambiguity bound capability existing goal grounding plain registry reuse semantic stdlib on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+        "detail": [
+          "goal",
+          "result_path"
+        ],
+        "goal": "Use bound capability evidence goal grounding independent plain registry stdlib verified verify on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_result_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "professional.artifact.visual_observer.v1",
+        "detail": [
+          "path"
+        ],
+        "goal": "Use artifact blank crop docx observation observer overlap pdf pptx professional readability render technical v1 visual xlsx on canonical/astra_runtime/tmp/live_solver_e2e/reachability/chart.png",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "pypi.provenance.audit_live_artifact",
+        "detail": [
+          "metadata_path",
+          "report_path",
+          "selection_path"
+        ],
+        "goal": "Use artifact audit download hash live metadata provenance pypi sha256 verify wheel on canonical/astra_runtime/tmp/live_solver_e2e/reachability/metadata.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_report_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/selection.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.fault.localize.dynamic.dataflow.v1",
+        "detail": [
+          "output_path",
+          "source_root",
+          "test_paths"
+        ],
+        "goal": "Use backward coverage dataflow def dynamic fault localization localize ochiai python ranked spectrum symbol trace v1 on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/src canonical/astra_runtime/tmp/live_solver_e2e/reachability/test_mod.py",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.fault.provenance.interprocedural.value.v1",
+        "detail": [
+          "output_path",
+          "source_root",
+          "test_paths"
+        ],
+        "goal": "Use argument call callsite dataflow dynamic edges fault hypotheses interprocedural provenance python return v1 value on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/src canonical/astra_runtime/tmp/live_solver_e2e/reachability/test_mod.py",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.patch.search.test_guided.ast.v1",
+        "detail": [
+          "output_path",
+          "source_path",
+          "test_argv",
+          "test_paths"
+        ],
+        "goal": "Use ast bug candidate guided mutation patch python repair repository search test v1 verified on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/source.py test argv \"python3 -m unittest\" canonical/astra_runtime/tmp/live_solver_e2e/reachability/test_mod.py",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.repository.acceptance.measure.v1",
+        "detail": [
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "goal": "Use acceptance addressed content measure measurement objective python receipt repository test v1 on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/src test argv \"python3 -m unittest\" canonical/astra_runtime/tmp/live_solver_e2e/reachability/test_mod.py",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.software.repair.guided.provenance.coupled.v1",
+        "detail": [
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "goal": "Use candidate coupled dynamic fault guided localization patch provenance python repair search software v1 verified on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/src test argv \"python3 -m unittest\" canonical/astra_runtime/tmp/live_solver_e2e/reachability/test_mod.py",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.software.repair.loop.coupled.ast.v1",
+        "detail": [
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "goal": "Use ast candidate coupled edit fault localization loop multi nonmonotonic pair patch python ranked repair software symbol test v1 verified on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/src test argv \"python3 -m unittest\" canonical/astra_runtime/tmp/live_solver_e2e/reachability/test_mod.py",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
+        "detail": [
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "goal": "Use ast candidate counterexample loop multi patch progress python repair round software strict test tests v1 verified on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/src test argv \"python3 -m unittest\" canonical/astra_runtime/tmp/live_solver_e2e/reachability/test_mod.py",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.software.repair.loop.test_guided.ast.v1",
+        "detail": [
+          "output_path",
+          "source_paths",
+          "test_paths"
+        ],
+        "goal": "Use ast candidate counterexample edit guided loop multi patch python repair software test tests v1 verified on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/mod.py canonical/astra_runtime/tmp/live_solver_e2e/reachability/test_mod.py",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.software.repair.measured_acceptance.v1",
+        "detail": [
+          "goal",
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "goal": "Use acceptance addressed atomic candidate content measured objective patch python repair software v1 verification verified on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/src test argv \"python3 -m unittest\" canonical/astra_runtime/tmp/live_solver_e2e/reachability/test_mod.py",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.software.repair.semantic_acceptance.v1",
+        "detail": [
+          "goal",
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "goal": "Use acceptance addressed candidate content patch python raw repair scope semantic software task v1 verification verified on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/src test argv \"python3 -m unittest\" canonical/astra_runtime/tmp/live_solver_e2e/reachability/test_mod.py",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.software.request.semantic_behavior.compile.v1",
+        "detail": [
+          "goal",
+          "output_path"
+        ],
+        "goal": "Use acceptance behavior call class compile compiled compiler exact exception function program python request semantic software v1 on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.source.audit.ast",
+        "detail": [
+          "output_path",
+          "source_root"
+        ],
+        "goal": "Use ast audit classes functions imports python sha256 source on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/src",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.task.acceptance.measured.objective.v1",
+        "detail": [
+          "goal",
+          "measurement_receipt_path",
+          "output_path"
+        ],
+        "goal": "Use acceptance bound measured measurement objective python raw receipt task v1 verification on canonical/astra_runtime/tmp/live_solver_e2e/reachability/measurement_receipt.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.tests.audit.unittest",
+        "detail": [
+          "output_path",
+          "pattern",
+          "source_root"
+        ],
+        "goal": "Use audit failed passed python skipped tests unittest on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json pattern \"test_*.py\" canonical/astra_runtime/tmp/live_solver_e2e/reachability/src",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "source.authority.identity.ror",
+        "detail": [
+          "discovery_path",
+          "output_path"
+        ],
+        "goal": "Use authority domain funding host identity organization provenance research ror source on canonical/astra_runtime/tmp/live_solver_e2e/reachability/discovery.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "source.evidence.extract.objective_grounded.stdlib",
+        "detail": [
+          "input_path",
+          "output_path"
+        ],
+        "goal": "Use bm25 bound evidence grounded hash objective offset provenance relevance research source stdlib units verbatim on canonical/astra_runtime/tmp/live_solver_e2e/reachability/input.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "source.objective_relevance.rank.bm25",
+        "detail": [
+          "input_path",
+          "output_path"
+        ],
+        "goal": "Use bm25 candidate evidence lexical objective rank ranked relevance research source on canonical/astra_runtime/tmp/live_solver_e2e/reachability/input.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "sqlite.table.create_from_json_records",
+        "detail": [
+          "goal",
+          "json_path",
+          "output_path"
+        ],
+        "goal": "Use columns database json records rows sqlite table on canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.sqlite",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "sqlite.table.verify_against_json_records",
+        "detail": [
+          "goal",
+          "json_path",
+          "sqlite_path"
+        ],
+        "goal": "Use against columns database independently json query records rows sqlite table verify on canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/sqlite.sqlite",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "task.acceptance.objective.lossless.v1",
+        "detail": "takes no input; never routable from a sentence",
+        "goal": null,
+        "state": "BLOCKED_ZERO_INPUT"
+      },
+      {
+        "capability_id": "terminal.kstar.root.assess.stdlib",
+        "detail": "takes no input; never routable from a sentence",
+        "goal": null,
+        "state": "BLOCKED_ZERO_INPUT"
+      },
+      {
+        "capability_id": "web.browser.rendered.capture.chromedriver",
+        "detail": [
+          "result_path",
+          "screenshot_path",
+          "url"
+        ],
+        "goal": "Use browser capture check choose chromedriver click enter form interact navigate open page rendered screenshot select submit type url web website on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_result_path.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_screenshot_path.png https://example.org/release.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "web.release.verify.independent_http",
+        "detail": [
+          "major",
+          "product",
+          "result_path",
+          "version_field"
+        ],
+        "goal": "Use current http independent latest official release stable verify version web on major version 3 product \"python\" and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_result_path.json version field \"version\"",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "xlsx.table.create_from_json_records",
+        "detail": [
+          "goal",
+          "json_path",
+          "output_path"
+        ],
+        "goal": "Use columns json records rows spreadsheet table workbook xlsx on canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.xlsx",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "xlsx.table.verify_against_json_records",
+        "detail": [
+          "goal",
+          "json_path",
+          "xlsx_path"
+        ],
+        "goal": "Use against columns independently json records reopen rows spreadsheet table verify workbook xlsx on canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/xlsx.xlsx",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "yaml.to_json.yq",
+        "detail": [
+          "output_path",
+          "yaml_path"
+        ],
+        "goal": "Use json parse structured workflow yaml yml yq on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/yaml.yaml",
+        "state": "REACHED_AND_BOUND"
+      }
+    ]
+  },
+  "replay": false,
+  "run_tag": "E2E_3d097178b5",
+  "schema": "LIVE_SOLVER_END_TO_END_MEASUREMENT_V3",
+  "seed": 10997335618748099407,
+  "supersedes": "canonical/capabilities/true/LIVE_SOLVER_END_TO_END_MEASUREMENT_20261015_V2.json",
+  "tool_liveness": {
+    "adapter_import_failed": [
+      "chart.raster.axis_title_unit_binding.v1",
+      "chart.raster.curve_value_query.v1",
+      "chart.raster.curve_x_at_y_query.v1",
+      "chart.raster.direct_curve_label_family_rank.v1",
+      "chart.raster.legend_style_binding.v1",
+      "chart.raster.scene_graph.v1",
+      "chart.read.binary_phase_solvus.v1",
+      "chart.read.legend_linear_intersection.v1",
+      "math.numeric_expression.sympy",
+      "professional.artifact.visual_observer.v1",
+      "task.acceptance.objective.lossless.v1"
+    ],
+    "adapter_missing": [],
+    "capabilities_total": 66,
+    "external_dependency_missing_here": [
+      "auto.apt.zint",
+      "document.convert.markdown_pdf.pandoc_weasyprint",
+      "docx.document.create.python_docx",
+      "docx.document.create_from_json_record",
+      "image.code.decode.zbarimg",
+      "image.qr.generate.qrencode",
+      "pdf.extract.ocr.tesseract",
+      "sqlite.table.verify_against_json_records",
+      "xlsx.table.create_from_json_records",
+      "xlsx.table.verify_against_json_records",
+      "yaml.to_json.yq"
+    ],
+    "rows": [
+      {
+        "adapter_imports": true,
+        "adapter_module": "archive_tarfile",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "archive.tar_gz.create_from_manifest",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "manifest_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "archive_verify_gnu_tar",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "archive.verify.tar_gz.gnu",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "archive_path",
+          "manifest_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "cli_command",
+        "adapter_present": true,
+        "all_dependencies_present_here": false,
+        "capability_id": "auto.apt.zint",
+        "external_dependencies": [
+          {
+            "package": "zint",
+            "present_here": false,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "text"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "node_library_codec",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "auto.npm.dfinity-cbor",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "json_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "node_library_codec",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "auto.npm.msgpack-msgpack",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "json_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_library_codec",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "auto.pypi.bson-modern",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "json_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_library_codec",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "auto.pypi.msgpack",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "json_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "pandoc_weasyprint",
+        "adapter_present": true,
+        "all_dependencies_present_here": false,
+        "capability_id": "document.convert.markdown_pdf.pandoc_weasyprint",
+        "external_dependencies": [
+          {
+            "package": "pandoc",
+            "present_here": false,
+            "type": "apt"
+          },
+          {
+            "package": "weasyprint",
+            "present_here": false,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "markdown_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "docx_report_from_json",
+        "adapter_present": true,
+        "all_dependencies_present_here": false,
+        "capability_id": "docx.document.create_from_json_record",
+        "external_dependencies": [
+          {
+            "package": "python3-docx",
+            "present_here": false,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "json_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_document_builder",
+        "adapter_present": true,
+        "all_dependencies_present_here": false,
+        "capability_id": "docx.document.create.python_docx",
+        "external_dependencies": [
+          {
+            "package": "python3-docx",
+            "present_here": false,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "docx_verify_ooxml_intent",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "docx.document.verify.intent_ooxml",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "docx_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "docx_verify_ooxml",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "docx.document.verify.ooxml",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": false
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "http_json_fetch",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "http.json.fetch_from_state",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "source_json_path",
+          "url_key"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "cli_command",
+        "adapter_present": true,
+        "all_dependencies_present_here": false,
+        "capability_id": "image.code.decode.zbarimg",
+        "external_dependencies": [
+          {
+            "package": "zbar-tools",
+            "present_here": false,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "cli_command",
+        "adapter_present": true,
+        "all_dependencies_present_here": false,
+        "capability_id": "image.qr.generate.qrencode",
+        "external_dependencies": [
+          {
+            "package": "qrencode",
+            "present_here": false,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "text"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "jq_query",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "json.query.jq",
+        "external_dependencies": [
+          {
+            "package": "jq",
+            "present_here": true,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "jq_filter",
+          "json_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": null,
+        "adapter_module": "runtime_native_action",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "knowledge.consistency.assess",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "evidence_paths",
+          "max_age_s",
+          "output_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": true,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": null,
+        "adapter_module": "runtime_native_action",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "knowledge.json.fetch.external",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "authoritative",
+          "json_path",
+          "output_path",
+          "url"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": true,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": null,
+        "adapter_module": "runtime_native_action",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "knowledge.status.assert",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "assessment_path",
+          "expected_status"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": true,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": null,
+        "adapter_module": "runtime_native_action",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "knowledge.support.materialize",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "assessment_path",
+          "field_name",
+          "output_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": true,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "pdf_ocr_tesseract",
+        "adapter_present": true,
+        "all_dependencies_present_here": false,
+        "capability_id": "pdf.extract.ocr.tesseract",
+        "external_dependencies": [
+          {
+            "package": "tesseract-ocr",
+            "present_here": false,
+            "type": "apt"
+          },
+          {
+            "package": "poppler-utils",
+            "present_here": null,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "pdf_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "pdf_pypdf",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "pdf.extract.text.pypdf",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "pdf_path"
+        ],
+        "platforms": null,
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "pypi_provenance_audit",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "pypi.provenance.audit_live_artifact",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "metadata_path",
+          "report_path",
+          "selection_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_source_audit",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.source.audit.ast",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "source_root"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_test_audit",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.tests.audit.unittest",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "pattern",
+          "source_root"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "sqlite_table_stdlib",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "sqlite.table.create_from_json_records",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "json_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "sqlite_verify_cli",
+        "adapter_present": true,
+        "all_dependencies_present_here": false,
+        "capability_id": "sqlite.table.verify_against_json_records",
+        "external_dependencies": [
+          {
+            "package": "sqlite3",
+            "present_here": false,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "json_path",
+          "sqlite_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "browser_chromedriver",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "web.browser.rendered.capture.chromedriver",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "result_path",
+          "screenshot_path",
+          "url"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "web_release_verify",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "web.release.verify.independent_http",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "major",
+          "product",
+          "result_path",
+          "version_field"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "xlsx_table_xlsxwriter",
+        "adapter_present": true,
+        "all_dependencies_present_here": false,
+        "capability_id": "xlsx.table.create_from_json_records",
+        "external_dependencies": [
+          {
+            "package": "python3-xlsxwriter",
+            "present_here": false,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "json_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "xlsx_verify_openpyxl",
+        "adapter_present": true,
+        "all_dependencies_present_here": false,
+        "capability_id": "xlsx.table.verify_against_json_records",
+        "external_dependencies": [
+          {
+            "package": "python3-openpyxl",
+            "present_here": false,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "json_path",
+          "xlsx_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "yq_yaml_json",
+        "adapter_present": true,
+        "all_dependencies_present_here": false,
+        "capability_id": "yaml.to_json.yq",
+        "external_dependencies": [
+          {
+            "package": "yq",
+            "present_here": false,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "yaml_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "evidence_decision_synthesis",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "decision.synthesis.typed.stdlib",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "input_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "evidence_decision_verify",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "decision.synthesis.verify.stdlib",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "input_path",
+          "result_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "plain_goal_bound_grounding",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "output_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "plain_goal_bound_grounding_verify",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "result_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": false,
+        "adapter_module": "numeric_expression_sympy",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "math.numeric_expression.sympy",
+        "external_dependencies": [],
+        "import_error": "ModuleNotFoundError:No module named 'sympy'",
+        "input_keys": [
+          "expression",
+          "output_path",
+          "variables"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "source_authority_binding_ror",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "source.authority.identity.ror",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "discovery_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "objective_relevance_bm25",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "source.objective_relevance.rank.bm25",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "input_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "objective_evidence_unit_extract",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "source.evidence.extract.objective_grounded.stdlib",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "input_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "generic_evidence_claim_relation",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "evidence.claim_relation.generic_units.stdlib",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "extraction_path",
+          "output_path",
+          "spec"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "objective_claim_operand_binding",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "extraction_path",
+          "objective",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "terminal_kstar_root_assess",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "terminal.kstar.root.assess.stdlib",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": false
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_test_guided_patch_search_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.patch.search.test_guided.ast.v1",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "source_path",
+          "test_argv",
+          "test_paths"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "image_ocr_tesseract",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "image.extract.ocr.tesseract",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": false,
+        "adapter_module": "chartography_deterministic_professional_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "chart.read.legend_linear_intersection.v1",
+        "external_dependencies": [],
+        "import_error": "ModuleNotFoundError:No module named 'PIL'",
+        "input_keys": [
+          "path",
+          "prompt"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": false,
+        "adapter_module": "chartography_deterministic_professional_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "chart.read.binary_phase_solvus.v1",
+        "external_dependencies": [],
+        "import_error": "ModuleNotFoundError:No module named 'PIL'",
+        "input_keys": [
+          "path",
+          "prompt"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_software_repair_loop_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.software.repair.loop.test_guided.ast.v1",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "source_paths",
+          "test_paths"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_iterative_software_repair_loop_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": false,
+        "adapter_module": "chart_raster_scene_graph_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "chart.raster.scene_graph.v1",
+        "external_dependencies": [],
+        "import_error": "ModuleNotFoundError:No module named 'PIL'",
+        "input_keys": [
+          "path",
+          "x_ticks",
+          "y_ticks"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_coupled_software_repair_loop_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.software.repair.loop.coupled.ast.v1",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_dynamic_fault_localizer_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.fault.localize.dynamic.dataflow.v1",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "source_root",
+          "test_paths"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": false,
+        "adapter_module": "chart_legend_style_binding_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "chart.raster.legend_style_binding.v1",
+        "external_dependencies": [],
+        "import_error": "ModuleNotFoundError:No module named 'PIL'",
+        "input_keys": [
+          "path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": false,
+        "adapter_module": "chart_curve_value_query_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "chart.raster.curve_value_query.v1",
+        "external_dependencies": [],
+        "import_error": "ModuleNotFoundError:No module named 'PIL'",
+        "input_keys": [
+          "label",
+          "path",
+          "x_value"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_interprocedural_value_provenance_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.fault.provenance.interprocedural.value.v1",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "source_root",
+          "test_paths"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_provenance_guided_coupled_repair_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.software.repair.guided.provenance.coupled.v1",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": false,
+        "adapter_module": "chart_curve_x_at_y_query_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "chart.raster.curve_x_at_y_query.v1",
+        "external_dependencies": [],
+        "import_error": "ModuleNotFoundError:No module named 'PIL'",
+        "input_keys": [
+          "label",
+          "path",
+          "y_value"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": false,
+        "adapter_module": "professional_artifact_visual_observer_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "professional.artifact.visual_observer.v1",
+        "external_dependencies": [],
+        "import_error": "ModuleNotFoundError:No module named 'PIL'",
+        "input_keys": [
+          "path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": false,
+        "adapter_module": "raw_task_objective_acceptance_executor_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "task.acceptance.objective.lossless.v1",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": false
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_repository_acceptance_measurement_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.repository.acceptance.measure.v1",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_measured_objective_acceptance_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.task.acceptance.measured.objective.v1",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "measurement_receipt_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_repair_measured_acceptance_controller_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.software.repair.measured_acceptance.v1",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": false,
+        "adapter_module": "chart_direct_curve_label_family_rank_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "chart.raster.direct_curve_label_family_rank.v1",
+        "external_dependencies": [],
+        "import_error": "ModuleNotFoundError:No module named 'PIL'",
+        "input_keys": [
+          "path",
+          "x_value"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_repair_semantic_acceptance_controller_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.software.repair.semantic_acceptance.v1",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_software_request_semantic_acceptance_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.software.request.semantic_behavior.compile.v1",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "output_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": false,
+        "adapter_module": "chart_axis_title_unit_binding_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "chart.raster.axis_title_unit_binding.v1",
+        "external_dependencies": [],
+        "import_error": "ModuleNotFoundError:No module named 'PIL'",
+        "input_keys": [
+          "path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      }
+    ],
+    "zero_input_capabilities": [
+      "docx.document.verify.ooxml",
+      "task.acceptance.objective.lossless.v1",
+      "terminal.kstar.root.assess.stdlib"
+    ]
+  }
+}

@@ -31,7 +31,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.12"
       - name: install the tool dependencies the bound capabilities declare
         run: |
           set -euo pipefail
@@ -46,7 +46,8 @@ jobs:
             --per-family 50 --oos 100 --entries old,new \
             --out heartbeat_out/LIVE_BRAIN_HEARTBEAT_RECEIPT.json \
             --summary-md heartbeat_out/SUMMARY.md \
-            --require-all-alive
+            --require-all-alive \
+            --environment-blockers-are-failures
       - name: publish the verdict
         if: always()
         run: |
