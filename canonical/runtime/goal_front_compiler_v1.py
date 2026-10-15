@@ -52,10 +52,16 @@ import re
 import shlex
 from typing import Any, Mapping
 
+from canonical.runtime import capability_planner
 from canonical.runtime import goal_compiler as gc
 
 SCHEMA = "PROJECT_BRAIN_GOAL_FRONT_COMPILER_V1"
 GoalCompilationFailure = gc.GoalCompilationFailure
+# F11: a multi-step sentence is compiled into one capability_planner problem and executed as an
+# autonomous DAG.  The compiled shape below is what the live admission entry executes.
+DAG_SCHEMA = "PROJECT_BRAIN_CAPABILITY_DAG_V1"
+DAG_MODE = "FRONT_CAPABILITY_DAG_PLANNED"
+DAG_FINISH_SUMMARY = "CAPABILITY_DAG_COMPLETE"
 
 _QUOTE_OPEN = "\"'\u201c\u2018`"
 _QUOTE_CLOSE = "\"'\u201d\u2019`"
@@ -263,11 +269,16 @@ def _bind_path_by_type(goal: str, key: str, root: pathlib.Path):
     raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":" + str(len(matching)) + "_type_compatible_existing_files_named")
 
 
-def _bind_output_by_future(goal: str, key: str, root: pathlib.Path):
-    """F7: an output named in the sentence is a file that does not exist yet."""
+def _bind_output_by_future(goal: str, key: str, root: pathlib.Path, exclude=None):
+    """F7: an output named in the sentence is a file that does not exist yet.
+
+    ``exclude`` drops the artifacts earlier steps of the same request produce (F12): a path another
+    step is going to write is not a file THIS step is being asked to create.
+    """
+    skip = {str(x) for x in (exclude or [])}
     stem = key[:-5].lower().replace("output_", "") if key != "output_path" else "output"
     wanted = _STEM_SUFFIXES.get(stem)
-    future = [(raw, p) for raw, p in gc._repo_paths(goal, root) if pathlib.Path(raw).suffix and not p.exists()]
+    future = [(raw, p) for raw, p in gc._repo_paths(goal, root) if pathlib.Path(raw).suffix and not p.exists() and raw not in skip]
     if wanted:
         future = [(raw, p) for raw, p in future if "".join(p.suffixes[-2:]).lower() in wanted or p.suffix.lower() in wanted]
     if len(future) == 1:
@@ -275,8 +286,33 @@ def _bind_output_by_future(goal: str, key: str, root: pathlib.Path):
     raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":" + str(len(future)) + "_future_artifacts_named")
 
 
-def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, context_paths=None, future_clauses=None) -> dict[str, Any]:
-    """Pinned binder for the keys it supports, typed grammar / type binding for the rest. Never guesses."""
+def _bind_produced_artifact(goal: str, key: str, root: pathlib.Path, produced_paths):
+    """F12: an input that an EARLIER step of the same request produces binds to that artifact.
+
+    Only called with the exact set of paths the earlier planned steps will write, so a step never
+    consumes a path nobody in the request produces.  Ambiguity fails closed.
+    """
+    produced = [str(x) for x in (produced_paths or []) if isinstance(x, str) and x]
+    named = [raw for raw, _p in gc._repo_paths(goal, root)]
+    candidates = [raw for raw in named if raw in produced]
+    if len(candidates) == 1:
+        return candidates[0]
+    stem = key[:-5].lower() if key.endswith("_path") else key.lower()
+    wanted = _STEM_SUFFIXES.get(stem.replace("output_", ""))
+    if wanted:
+        typed = [p for p in produced if pathlib.PurePosixPath(p).suffix.lower() in wanted or "".join(pathlib.PurePosixPath(p).suffixes[-2:]).lower() in wanted]
+        if len(typed) == 1:
+            return typed[0]
+    raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":" + str(len(candidates)) + "_cross_step_artifacts_named")
+
+
+def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, context_paths=None, future_clauses=None,
+                    produced_paths=None) -> dict[str, Any]:
+    """Pinned binder for the keys it supports, typed grammar / type binding for the rest. Never guesses.
+
+    ``produced_paths`` (F12) is the set of artifacts earlier steps of the same multi-step request
+    will write; it is the only additional source an input path may bind from.
+    """
     keys = input_keys(entry)
     pinned_keys = [k for k in keys if k in ("text", "goal", "url") or k.endswith("_path")]
     typed_keys = [k for k in keys if k not in pinned_keys]
@@ -288,18 +324,26 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
             inputs.update(gc._bind_inputs(goal, root, shadow, context_paths=context_paths, future_clauses=future_clauses))
         except GoalCompilationFailure:
             if key.endswith("_path") and not _is_output_key(key):
-                inputs[key] = _bind_path_by_type(goal, key, root)
+                try:
+                    inputs[key] = _bind_path_by_type(goal, key, root)
+                except GoalCompilationFailure as type_failure:
+                    if not produced_paths:
+                        raise
+                    try:
+                        inputs[key] = _bind_produced_artifact(goal, key, root, produced_paths)
+                    except GoalCompilationFailure:
+                        raise type_failure
             elif key.endswith("_path"):
-                inputs[key] = _bind_output_by_future(goal, key, root)
+                inputs[key] = _bind_output_by_future(goal, key, root, exclude=produced_paths)
             else:
                 raise
     for key in typed_keys:
         inputs[key] = bind_typed_key(goal, key, root)
-    repair_output_collisions(goal, inputs, root)
+    repair_output_collisions(goal, inputs, root, exclude=produced_paths)
     return inputs
 
 
-def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Path) -> list[str]:
+def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Path, exclude=None) -> list[str]:
     """F10: an output path is never one of the action's own input files.
 
     The pinned binder can resolve `output_path` to an existing input named in the sentence; the
@@ -313,8 +357,8 @@ def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Pa
         value = str(inputs[key])
         collides = value in input_paths
         exists = (root / value).exists()
-        if collides or (exists and len(_future_artifacts(goal, root)) == 1):
-            inputs[key] = _bind_output_by_future(goal, key, root)
+        if collides or (exists and len([p for p in _future_artifacts(goal, root) if p not in {str(x) for x in (exclude or [])}]) == 1):
+            inputs[key] = _bind_output_by_future(goal, key, root, exclude=exclude)
             rebound.append(key)
     return rebound
 
@@ -386,6 +430,239 @@ def sentence_clauses(text: str) -> list[str]:
     return [part.strip(" .,;") for part in parts if part and part.strip(" .,;")]
 
 
+# ----------------------------------------------------------------------------- capability DAG (F11)
+
+def _whole_value_placeholder(template: Any, key: str) -> bool:
+    """True when every ``${input.<key>}`` occurrence in the template is a whole string value.
+
+    Only then can the bound value be replaced by a cross-step reference; a placeholder embedded in
+    a longer string could not carry one, so the caller fails closed instead of rendering it.
+    """
+    marker = "${input." + key + "}"
+    slots: list[str] = []
+
+    def walk(value: Any) -> None:
+        if isinstance(value, dict):
+            for item in value.values():
+                walk(item)
+        elif isinstance(value, list):
+            for item in value:
+                walk(item)
+        elif isinstance(value, str) and marker in value:
+            slots.append(value)
+
+    walk(template)
+    return bool(slots) and all(slot == marker for slot in slots)
+
+
+def _claiming_earlier_artifact(inputs: Mapping[str, Any], produced_paths) -> bool:
+    produced = {str(x) for x in (produced_paths or [])}
+    return any(_is_output_key(key) and isinstance(value, str) and value in produced for key, value in inputs.items())
+
+
+def bind_dag_clause(clause: str, admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path, produced_paths=None):
+    """Bind ONE step of a multi-step request to a bound capability (F11).
+
+    Candidates are ranked on the clause's prose tokens (F8); the best one that can bind every
+    declared input wins, where the artifacts earlier steps will write are the only extra source an
+    input path may bind from (F12).  A candidate that would claim an artifact an earlier step
+    already produces, or name the same path for two of its own inputs, is rejected.  Returns
+    ``None`` when no bound capability serves the clause - never a weaker guess.
+    """
+    registry = routable_registry(admissible)
+    for score, specificity, cid, evidence in ranked_candidates(clause, registry):
+        entry = registry[cid]
+        try:
+            inputs = bind_all_inputs(clause, entry, root, produced_paths=produced_paths)
+        except GoalCompilationFailure:
+            continue
+        if _claiming_earlier_artifact(inputs, produced_paths):
+            continue
+        if any(str(inputs[k]) == str(inputs[j]) for k in inputs if _is_output_key(k) for j in inputs if j != k and j.endswith("_path")):
+            continue
+        return {"capability_id": cid, "inputs": inputs, "score": score, "specificity": specificity, "match_evidence": dict(evidence)}
+    return None
+
+
+def _dag_steps(clauses: list[str], admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path):
+    registry = routable_registry(admissible)
+    steps: list[dict[str, Any]] = []
+    produced: list[str] = []
+    for clause in clauses:
+        bound = bind_dag_clause(clause, admissible, root, produced_paths=produced)
+        if bound is None:
+            return None
+        entry = registry[bound["capability_id"]]
+        outputs = [(key, str(value)) for key, value in bound["inputs"].items()
+                   if _is_output_key(key) and isinstance(value, str) and value]
+        steps.append({**bound, "clause": clause, "entry": entry, "outputs": outputs, "forwarded": {}})
+        produced.extend(path for _key, path in outputs)
+    return steps
+
+
+def _dag_artifact_edges(steps: list[dict[str, Any]], root: pathlib.Path) -> list[dict[str, Any]]:
+    """Every input bound to an artifact an EARLIER step writes, as an explicit forwarding edge."""
+    claimed: dict[str, int] = {}
+    for index, step in enumerate(steps):
+        for _key, path in step["outputs"]:
+            if path in claimed:
+                raise GoalCompilationFailure(
+                    "CAPABILITY_DAG_ARTIFACT_CONFLICT",
+                    path + ":steps:" + str(claimed[path]) + "," + str(index),
+                )
+            claimed[path] = index
+    edges: list[dict[str, Any]] = []
+    for index, step in enumerate(steps):
+        forwarded: dict[str, Any] = {}
+        for key, value in step["inputs"].items():
+            if _is_output_key(key) or not isinstance(value, str) or not value:
+                continue
+            producer, field = None, None
+            for earlier in range(index):
+                match = [k for k, path in steps[earlier]["outputs"] if path == value]
+                if match:
+                    producer, field = earlier, match[0]
+                    break
+            if producer is None:
+                if any(path == value for _k, path in step["outputs"]):
+                    raise GoalCompilationFailure("CAPABILITY_DAG_SELF_ARTIFACT_REFERENCE", step["capability_id"] + ":" + key + ":" + value)
+                if any(path == value for later in range(index + 1, len(steps)) for _k, path in steps[later]["outputs"]):
+                    raise GoalCompilationFailure("CAPABILITY_DAG_REVERSE_ARTIFACT_REFERENCE", step["capability_id"] + ":" + key + ":" + value)
+                if pathlib.PurePosixPath(value).suffix and not (root / value).exists():
+                    raise GoalCompilationFailure("CAPABILITY_DAG_ARTIFACT_UNPRODUCED", step["capability_id"] + ":" + key + ":" + value)
+                continue
+            if not _whole_value_placeholder(step["entry"].get("action_template") or {}, key):
+                raise GoalCompilationFailure("CAPABILITY_DAG_FORWARD_BINDING_UNSUPPORTED", step["capability_id"] + ":" + key)
+            effect = "artifact:" + value
+            forwarded[key] = {"$effect_result": {"effect": effect, "field": field}}
+            edges.append({
+                "consumer_cycle": index, "consumer_capability_id": step["capability_id"], "input_key": key,
+                "producer_cycle": producer, "producer_capability_id": steps[producer]["capability_id"],
+                "produced_path": value, "result_field": field, "effect": effect,
+            })
+        step["forwarded"] = forwarded
+    return edges
+
+
+def _dag_problem(steps: list[dict[str, Any]]) -> dict[str, Any]:
+    """The capability_planner problem for one multi-step request.
+
+    Facts are explicit: ``env:<declared precondition>`` (verified by the binder at compile time),
+    ``order:<i>`` (the sentence order the request states) and ``artifact:<path>`` (a file a step
+    writes).  A step declares the artifact an earlier step writes among its requirements, so the
+    planner is the authority that the consumer never runs before its producer, and ``plan_actions``
+    turns that requirement into a ``$result`` reference the executor resolves.
+    """
+    initial = {"order:0"}
+    capabilities: list[dict[str, Any]] = []
+    for index, step in enumerate(steps):
+        entry = step["entry"]
+        bound = dict(step["inputs"])
+        bound.update(step["forwarded"])
+        try:
+            action = dict(gc._render_template(entry.get("action_template") or {}, bound))
+        except GoalCompilationFailure as exc:
+            raise GoalCompilationFailure("CAPABILITY_DAG_ACTION_RENDER_FAILED", step["capability_id"] + ":" + str(exc.detail)) from exc
+        declared = [str(e) for e in (entry.get("requires") or [])]
+        requires = {"env:" + effect for effect in declared}
+        requires.update(value["$effect_result"]["effect"] for value in step["forwarded"].values())
+        if index:
+            requires.add("order:" + str(index))
+        provides = {"step:" + str(index) + ":executed"}
+        if index < len(steps) - 1:
+            provides.add("order:" + str(index + 1))
+        provides.update("artifact:" + path for _key, path in step["outputs"])
+        initial.update("env:" + effect for effect in declared)
+        result_fields = {str(x) for x in (entry.get("result_fields") or [])} | {key for key, _path in step["outputs"]}
+        capabilities.append({
+            "id": "step:" + str(index) + ":" + str(step["capability_id"]),
+            "source_capability_id": step["capability_id"],
+            "requires": sorted(requires),
+            "provides": sorted(provides),
+            "cost": float(entry.get("cost", 1) or 0),
+            "action": action,
+            "result_fields": sorted(result_fields),
+        })
+    targets = sorted({fact for cap in capabilities for fact in cap["provides"]})
+    return {
+        "initial_facts": sorted(initial),
+        "target_effects": targets,
+        "capabilities": capabilities,
+        "finish_summary": DAG_FINISH_SUMMARY,
+        "max_expansions": 5000,
+    }
+
+
+def plan_capability_dag(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path):
+    """F11: compile a multi-step request into ONE capability DAG and plan it with capability_planner.
+
+    Returns the compiled shape (``compiler_mode`` = ``FRONT_CAPABILITY_DAG_PLANNED``) or ``None``
+    when the request is not a multi-step request whose every step is a bound capability.  A step
+    that cannot be served, an artifact two steps would both claim, a consumer of an artifact no
+    earlier step writes, or a contradiction the planner cannot satisfy all fail closed.
+    """
+    clauses = sentence_clauses(goal)
+    if len(clauses) < 2:
+        return None
+    steps = _dag_steps(clauses, admissible, root)
+    if steps is None or len(steps) < 2:
+        return None
+    rules = ["F11_MULTI_STEP_CAPABILITY_DAG_PLANNED"]
+    edges = _dag_artifact_edges(steps, root)
+    if edges:
+        rules.append("F12_CROSS_STEP_ARTIFACT_BOUND")
+    problem = _dag_problem(steps)
+    try:
+        planned = capability_planner.plan_actions(problem)
+    except capability_planner.PlanningFailure as exc:
+        code = "CAPABILITY_DAG_UNREACHABLE_STEP" if exc.code == "UNREACHABLE_TARGET_EFFECTS" else "CAPABILITY_DAG_PLANNING_FAILED"
+        raise GoalCompilationFailure(code, (str(exc.detail) if exc.detail else str(exc.code))[:300]) from exc
+    expected = ["step:" + str(index) + ":" + str(step["capability_id"]) for index, step in enumerate(steps)]
+    emitted = [str(a.get("capability_id")) for a in planned["actions"] if isinstance(a, Mapping) and a.get("type") != "finish"]
+    if emitted != expected:
+        raise GoalCompilationFailure("CAPABILITY_DAG_PLAN_ORDER_INVALID", ",".join(emitted)[:300])
+    dag_steps = []
+    for index, step in enumerate(steps):
+        action = dict(planned["actions"][index])
+        dag_steps.append({
+            "cycle": index,
+            "capability_id": step["capability_id"],
+            "clause": step["clause"],
+            "action": action,
+            "expect": action.get("expect"),
+            "requires": list(problem["capabilities"][index]["requires"]),
+            "provides": list(problem["capabilities"][index]["provides"]),
+            "result_fields": list(problem["capabilities"][index]["result_fields"]),
+            "artifacts_produced": sorted(path for _key, path in step["outputs"]),
+            "artifacts_consumed": [dict(edge) for edge in edges if edge["consumer_cycle"] == index],
+        })
+    return {
+        "schema": "PROJECT_BRAIN_COMPILED_CAPABILITY_PROBLEM_V1",
+        "compiler_mode": DAG_MODE,
+        "selected_capability": None,
+        "controller_actions": [dict(a) for a in planned["actions"]],
+        "compiled_parts": [{
+            "clause": step["clause"], "selected_capability": step["capability_id"], "inputs": dict(step["inputs"]),
+            "score": step["score"], "match_evidence": dict(step["match_evidence"]),
+            "target_effects": [str(e) for e in (step["entry"].get("provides") or [])],
+        } for step in steps],
+        "target_effects": sorted({str(e) for step in steps for e in (step["entry"].get("provides") or [])}),
+        "clauses": [step["clause"] for step in steps],
+        "capability_dag": {
+            "schema": DAG_SCHEMA,
+            "compiler_mode": DAG_MODE,
+            "finish_summary": DAG_FINISH_SUMMARY,
+            "steps": dag_steps,
+            "artifact_edges": [dict(edge) for edge in edges],
+            "planning": dict(planned["planning"]),
+            "composition_contract": [dict(row) for row in planned["composition_contract"]],
+            "problem": problem,
+            "front_compiler": {"schema": SCHEMA, "rules_applied": list(rules)},
+        },
+        "front_compiler": {"schema": SCHEMA, "rules_applied": list(rules)},
+    }
+
+
 def _actions_of(compiled: Mapping[str, Any], registry: Mapping[str, Mapping[str, Any]]) -> list[dict[str, Any]]:
     actions = compiled.get("controller_actions")
     if isinstance(actions, list):
@@ -441,6 +718,16 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
         clauses = sentence_clauses(text)
         if len(clauses) >= 2:
             return _compile_clauses(clauses, admissible, root, rules)
+
+    # F11: a multi-step request whose every step is a bound capability is planned as one DAG.
+    # The planner (capability_planner) plans it, resolves each cross-step artifact into a
+    # $result reference and emits the composition contract the live entry executes.
+    planned_dag = plan_capability_dag(text, admissible, root)
+    if planned_dag is not None:
+        rules.extend(planned_dag["front_compiler"]["rules_applied"])
+        planned_dag["front_compiler"] = {"schema": SCHEMA, "rules_applied": list(rules)}
+        planned_dag["capability_dag"]["front_compiler"] = {"schema": SCHEMA, "rules_applied": list(rules)}
+        return planned_dag
 
     selected = (compiled or {}).get("selected_capability") if compiled else None
     single_shape = bool(compiled) and compiled.get("compiler_mode") == "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH" and selected
