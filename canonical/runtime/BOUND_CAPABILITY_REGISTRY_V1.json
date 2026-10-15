@@ -3169,6 +3169,18 @@
         "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_REQUALIFICATION_20260930_V1.json",
         "model_dependency_count": 0,
         "incremental_spend_usd": 0
+      },
+      "proposal_bindings": {
+        "input_path": {
+          "type": "effect_result",
+          "effect": "source.objective_relevance.lexical_ranked",
+          "field": "output_path",
+          "container": "scalar"
+        },
+        "output_path": {
+          "type": "auto_path",
+          "suffix": ".json"
+        }
       }
     },
     "evidence.claim_relation.generic_units.stdlib": {
@@ -3240,6 +3252,18 @@
         "exact_producer_blob": "d66a7eb30774f66160b698d8082947776888293d",
         "exact_regression_blob": "590a1e50f11bc2903b56d41a00c5354ec2501c44",
         "independent_fresh_live_generic_v2_status": "PASS"
+      },
+      "proposal_bindings": {
+        "extraction_path": {
+          "type": "effect_result",
+          "effect": "source.evidence.objective_grounded_units",
+          "field": "output_path",
+          "container": "scalar"
+        },
+        "output_path": {
+          "type": "auto_path",
+          "suffix": ".json"
+        }
       }
     },
     "evidence.claim_spec.bind.explicit_comparison.stdlib": {
@@ -3326,6 +3350,18 @@
         "exact_regression_blob": "467a9f4f9b835ca8f65fd19b9335770e7b0ef31b",
         "inherited_relation_blob": "d66a7eb30774f66160b698d8082947776888293d",
         "independent_full_surface_cross_domain_status": "PASS"
+      },
+      "proposal_bindings": {
+        "extraction_path": {
+          "type": "effect_result",
+          "effect": "source.evidence.objective_grounded_units",
+          "field": "output_path",
+          "container": "scalar"
+        },
+        "output_path": {
+          "type": "auto_path",
+          "suffix": ".json"
+        }
       }
     },
     "terminal.kstar.root.assess.stdlib": {
@@ -4908,6 +4944,10 @@
           "effect": "python.repository.acceptance.measurement.content_addressed",
           "field": "output_path",
           "container": "scalar"
+        },
+        "output_path": {
+          "type": "auto_path",
+          "suffix": ".json"
         }
       },
       "adapter_module": "python_measured_objective_acceptance_v1",

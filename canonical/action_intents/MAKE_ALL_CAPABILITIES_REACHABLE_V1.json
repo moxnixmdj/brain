@@ -3,7 +3,7 @@
   "date": "2026-10-15",
   "action_id": "MAKE_ALL_CAPABILITIES_REACHABLE_V1",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "60651c6cc8d805bf5e0e490bcc91121b0c894cd0",
+  "canonical_base_commit": "6e87b0d95af081dd1e14e81fc07e1a86a5202b0a",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "active_program": "GENERAL_REUSABLE_CAPABILITY_DEVELOPMENT_PROGRAM_V1",
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -122,7 +122,7 @@
   },
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-    "canonical_base_commit": "abf054be49f644d704d4f8b2d6d0164d16d6cffc",
+    "canonical_base_commit": "6e87b0d95af081dd1e14e81fc07e1a86a5202b0a",
     "real_outcome": "ONE_LIVE_ENTRY_THAT_REACHES_EVERY_BOUND_CAPABILITY_FROM_A_SENTENCE_AND_FAILS_CLOSED_ON_EVERYTHING_ELSE",
     "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
     "obs_goal": {

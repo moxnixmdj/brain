@@ -297,32 +297,26 @@ GENERATORS: dict[str, Callable[[random.Random, Path, int], Case]] = {
 
 
 def all_generators() -> dict[str, Callable[[random.Random, Path, int], Case]]:
-    """Wave-1 families plus the per-capability execution families of live_solver_families_v2."""
+    """Wave-1 families plus the per-capability execution families of live_solver_families_v2/v3/v4."""
     from execution_guard.live_solver_families_v2 import GENERATORS_V2
     from execution_guard.live_solver_families_v3 import GENERATORS_V3
+    from execution_guard.live_solver_families_v4 import GENERATORS_V4
     merged = dict(GENERATORS)
     merged.update(GENERATORS_V2)
     merged.update(GENERATORS_V3)
+    merged.update(GENERATORS_V4)
     return merged
 
 # Families the compiler advertises but that need binaries / packages this machine lacks, or
 # a goal grammar not yet reproduced here.  Listed so the denominator is honest.
 NOT_MEASURED_HERE = {
-    "DOCX_CREATE": "python3-docx package (apt) not installed here",
-    "XLSX_CREATE_VERIFY": "xlsxwriter/openpyxl (apt) not installed here",
-    "SQLITE_CREATE_VERIFY": "sqlite3 CLI verifier (apt) not installed here",
     "MARKDOWN_TO_PDF": "pandoc + weasyprint (apt) not installed here",
-    "PDF_TEXT_OCR": "tesseract-ocr / pypdf (apt) not installed here",
+    "PDF_TEXT_OCR": "tesseract-ocr (apt) not installed here",
     "QR_BARCODE_GENERATE_DECODE": "qrencode / zbar-tools / zint (apt) not installed here",
     "BROWSER_CAPTURE": "chromedriver (apt) not installed here",
     "HTTP_JSON_FETCH__PYPI_AUDIT__WEB_RELEASE": "network egress blocked in this sandbox",
-    "YAML_TO_JSON": "yq (apt) not installed here",
-    "NUMERIC_EXPRESSION_SYMPY": "python3-sympy (apt) not installed here",
-    "CHART_RASTER_READERS": "PIL (apt) not installed here",
-    "PYTHON_REPAIR_LOOPS__FAULT_LOCALIZATION": "stdlib-only; fresh-bug generator not yet written (next measurement)",
-    "PYTHON_SOURCE_TEST_AUDIT": "stdlib-only; goal grammar needs context manifests; not yet generated",
+    "CHART_RASTER_READERS": "PIL installed; compound goal grammar pending",
     "KNOWLEDGE_FETCH_ASSESS_ASSERT": "network egress blocked in this sandbox",
-    "SOURCE_RANKING_BM25__EVIDENCE_EXTRACT__DECISION_SYNTHESIS": "stdlib-only; compound goal grammar not yet generated",
 }
 
 

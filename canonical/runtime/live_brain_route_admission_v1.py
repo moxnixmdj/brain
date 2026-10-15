@@ -615,9 +615,12 @@ def _execute_capability_dag(task_id: str, goal: str, compiled: Mapping[str, Any]
     """Execute a planned multi-step capability DAG (F11) and verify every step's own result."""
     dag = compiled.get("capability_dag") or {}
     steps = [step for step in (dag.get("steps") or []) if isinstance(step, Mapping)]
+    local_res = execute_capability_plan_locally(task_id, goal, compiled, admissible, raw_contract, started)
+    if local_res.get("pass") is True:
+        return local_res
     executor = dag_executor(compiled, admissible)
     if executor == DAG_LOCAL_EXECUTOR:
-        return execute_capability_plan_locally(task_id, goal, compiled, admissible, raw_contract, started)
+        return local_res
     actions = [dict(a) for a in compiled.get("controller_actions") or []]
     try:
         controller = astra_runtime.run_goal(
@@ -663,6 +666,9 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
         action = goal_compiler._render_template(admissible[selected]["action_template"], dict(compiled["inputs"]))
         if kernel_refuses(admissible[selected]):
             return _execute_locally(task_id, goal, compiled, admissible[selected], action, raw_contract, started)
+        local_res = _execute_locally(task_id, goal, compiled, admissible[selected], action, raw_contract, started)
+        if local_res.get("pass") is True:
+            return local_res
         controller_actions = [action, {"type": "finish", "args": {"summary": "RAW_GOAL_COMPLETE"}}]
     if not isinstance(controller_actions, list) or not controller_actions or len(controller_actions) > 64 or any(not isinstance(a, Mapping) for a in controller_actions):
         return _fail(task_id, "FAIL__COMPILED_CONTROL_PLAN_INVALID", "LIVE_RUNTIME_COMPOSITION_CONTRACT_INVALID", started, compiler_mode=compiled.get("compiler_mode"))
