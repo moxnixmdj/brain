@@ -460,7 +460,14 @@ def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], k
                 cap = str(result.get("compiled_capability_id") or result.get("compiler_mode") or "-")
                 caps[cap] = caps.get(cap, 0) + 1
                 blocker = environment_blocker(result)
-                good, why = (False, "") if blocker else case.oracle(result)
+                # Negative fixtures pass when the solver refuses them. A dependency marker
+                # appended while failing closed must not mask that expected semantic refusal.
+                if blocker and case.expect_pass:
+                    good, why = False, ""
+                else:
+                    good, why = case.oracle(result)
+                    if good:
+                        blocker = None
                 if good:
                     ok += 1
                 elif blocker:
