@@ -61,7 +61,7 @@
    "prerequisite_work_ids": [],
    "prerequisites_satisfied": true,
    "read_only_evidence": {
-    "bound_capability_registry_git_blob_sha": "7febb7c6725674534ac21e52dbaa87efdad2f1cd",
+    "bound_capability_registry_git_blob_sha": "48288e4f3f03530b9c913b3c0ccbe6d84bf27d8a",
     "capability_frontier_git_blob_sha": "8f53d085ab2d6aa7e85168f3ede2e18e9d0136ed",
     "capability_frontier_path": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
     "coupled_replay": "PRIMARY_8_OF_8__SECOND_SPRITE_8_OF_8",

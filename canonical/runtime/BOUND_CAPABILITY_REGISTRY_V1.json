@@ -4701,7 +4701,7 @@
         "semantic residual",
         "software"
       ],
-      "adapter_module": "raw_task_objective_acceptance_executor_v1",
+      "adapter_module": "raw_task_objective_acceptance_executor_v1_run",
       "entrypoint": "run",
       "platforms": [
         "linux",
@@ -4717,7 +4717,7 @@
       ],
       "source": {
         "type": "brain_owned_python_composition",
-        "adapter_path": "canonical/runtime/raw_task_objective_acceptance_executor_v1.py",
+        "adapter_path": "canonical/runtime/bound_capabilities/raw_task_objective_acceptance_executor_v1_run.py",
         "donor_capabilities": [
           "lossless_raw_task_contract_v1",
           "raw_task_acceptance_residual_localizer_v1",
