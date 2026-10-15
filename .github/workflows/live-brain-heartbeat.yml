@@ -1,4 +1,6 @@
 name: live-brain-heartbeat
+# Self-hosted runner: ASUS TUF A15 (WSL2 Ubuntu). See scripts/setup_wsl_runner.sh.
+# Runs on the user laptop — no GitHub billing, no spending limit.
 
 # The Brain's heartbeat.  Every day (and on demand) the public runner gives the ONE live entry
 # (canonical/runtime/live_brain_route_admission_v1.solve) fresh goals it has never seen, judges
@@ -25,7 +27,7 @@ permissions:
 
 jobs:
   heartbeat:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, brain-regression]
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
