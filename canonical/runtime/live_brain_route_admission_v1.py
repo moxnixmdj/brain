@@ -18,9 +18,14 @@ not about the goal:
                                user expects) but the selected capability has no output path
                                input, so it cannot produce it
   R3  WEAK_EVIDENCE            at most one matched prose token: one word is never a goal
-  R5  TOOL_TRUTH               after execution, a tool result saying ``pass: false`` or a
-                               non-success status (OPEN__, UNRESOLVED, FAIL...) can never
-                               surface as an overall PASS
+  R5  TOOL_TRUTH               after execution, ``pass: false``, ``verified: false``,
+                               ``output_verified: false`` or a non-success status (OPEN__,
+                               UNRESOLVED, FAIL...) can never surface as an overall PASS
+  R7  COMPOUND_DAG_REPLAN      compound execution DAGs are recomputed by
+                               ``capability_planner`` and compared byte-for-structure with
+                               the compiled actions, edges, and composition contract
+  R8  FINAL_DELIVERABLE        every produced artifact gets an explicit reopen check and a
+                               post-run non-empty-file check before the result can be PASS
 
   E1  EXECUTOR_GAP_BRIDGE      the pinned kernel refuses six registry source types outright
                                (``BOUND_CAPABILITY_SOURCE_UNSUPPORTED``: python_stdlib_composition,
@@ -33,11 +38,10 @@ not about the goal:
                                and be non-empty, independently of what the tool reported
 
 Every rejection is a FAIL_CLOSED result with the evidence attached; nothing is executed,
-so no side effect happens.  ``solve`` is THE live entry (one mouth): front-compile
-(``goal_front_compiler_v1`` - corrects the pinned compiler's measured defects and binds every
-registry input from an explicit grammar) -> admit -> execute through the same controller
-calls ``run_raw_goal`` makes -> tool-truth check -> promised-artifact check.
-Zero credit, zero spend, zero models.
+so no side effect happens. ``solve`` is THE live entry (one mouth): front-compile (including
+context-forwarded capability DAGs) -> independently re-plan/admit -> execute through the same
+controller with the composition capsule enforced -> tool-truth check -> final artifact reopen
+and non-empty check. Zero credit, zero spend, zero models.
 """
 from __future__ import annotations
 
@@ -48,7 +52,7 @@ import sys
 from time import perf_counter_ns
 from typing import Any, Mapping
 
-from canonical.runtime import astra_runtime, goal_compiler
+from canonical.runtime import astra_runtime, capability_planner, goal_compiler
 from canonical.runtime import goal_front_compiler_v1 as front
 from canonical.runtime.live_integrated_brain_v1 import (
     ROOT,
@@ -89,8 +93,13 @@ def _output_keys(entry: Mapping[str, Any]) -> list[str]:
     )
 
 
-def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
-    """Judge one compiled single-capability route. Returns {"admitted": bool, ...evidence}."""
+def _single_route_admission(
+    goal: str,
+    compiled: Mapping[str, Any],
+    registry: Mapping[str, Mapping[str, Any]],
+    future_artifacts: list[str] | None = None,
+) -> dict[str, Any]:
+    """Judge one compiled capability route. Returns {"admitted": bool, ...evidence}."""
     selected = str(compiled.get("selected_capability") or "").strip()
     mode = compiled.get("compiler_mode")
     if not selected:
@@ -106,7 +115,7 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     semantic = matched & prose
     input_keys = goal_compiler._placeholders(entry.get("action_template") or {})
     output_keys = _output_keys(entry)
-    futures = _future_artifacts(goal)
+    futures = list(future_artifacts) if future_artifacts is not None else _future_artifacts(goal)
     base = {
         "schema": SCHEMA,
         "compiler_mode": mode,
@@ -128,6 +137,223 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     return {**base, "admitted": True, "rule": None}
 
 
+def _compound_dag_admission(
+    goal: str,
+    compiled: Mapping[str, Any],
+    registry: Mapping[str, Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Re-plan and audit a front-compiled DAG before the live controller can execute it."""
+    problem = compiled.get("capability_problem")
+    if not isinstance(problem, Mapping):
+        return {"schema": SCHEMA, "admitted": False, "rule": "COMPOUND_DAG_PROBLEM_MISSING"}
+    try:
+        planned = capability_planner.plan_actions(dict(problem))
+    except Exception as exc:
+        return {
+            "schema": SCHEMA,
+            "admitted": False,
+            "rule": "COMPOUND_DAG_REPLAN_FAILED",
+            "reason": type(exc).__name__ + ":" + str(exc),
+        }
+    if compiled.get("controller_actions") != planned.get("actions"):
+        return {"schema": SCHEMA, "admitted": False, "rule": "COMPOUND_DAG_ACTIONS_MISMATCH"}
+    if compiled.get("composition_contract") != planned.get("composition_contract"):
+        return {"schema": SCHEMA, "admitted": False, "rule": "COMPOUND_DAG_CONTRACT_MISMATCH"}
+    if compiled.get("execution_dag") != planned.get("execution_dag"):
+        return {"schema": SCHEMA, "admitted": False, "rule": "COMPOUND_DAG_GRAPH_MISMATCH"}
+    if compiled.get("capability_plan") != planned.get("planning"):
+        return {"schema": SCHEMA, "admitted": False, "rule": "COMPOUND_DAG_PLAN_MISMATCH"}
+    if compiled.get("composition_initial_facts") != planned.get("planning", {}).get("initial_facts"):
+        return {"schema": SCHEMA, "admitted": False, "rule": "COMPOUND_DAG_INITIAL_FACTS_MISMATCH"}
+
+    raw_caps = problem.get("capabilities")
+    if not isinstance(raw_caps, list) or not raw_caps:
+        return {"schema": SCHEMA, "admitted": False, "rule": "COMPOUND_DAG_CAPABILITIES_MISSING"}
+    routable = front.routable_registry(registry)
+
+    def nested_capability_ids(value):
+        found = []
+        if isinstance(value, Mapping):
+            for key, item in value.items():
+                if key in {"capability_id", "producer_capability_id"} and isinstance(item, str) and item.strip():
+                    found.append(item.strip())
+                else:
+                    found.extend(nested_capability_ids(item))
+        elif isinstance(value, list):
+            for item in value:
+                found.extend(nested_capability_ids(item))
+        return found
+    native_fields = {
+        **{key: set(value) for key, value in front.COMPOUND_NATIVE_RESULT_FIELDS.items()},
+        "assert_file_exists": {"exists", "path", "sha256", "verified"},
+    }
+    raw_by_id = {str(row.get("id")): row for row in raw_caps if isinstance(row, Mapping)}
+    provider_by_effect = {
+        str(effect): str(row.get("id"))
+        for row in raw_caps if isinstance(row, Mapping)
+        for effect in (row.get("provides") or [])
+        if isinstance(effect, str)
+    }
+    referenced_fields = {key: set() for key in raw_by_id}
+
+    def collect_references(value):
+        found = []
+        if isinstance(value, Mapping):
+            if set(value) == {"$result"} and isinstance(value["$result"], Mapping):
+                spec = value["$result"]
+                try:
+                    cycle = int(spec.get("cycle", -1))
+                except (TypeError, ValueError):
+                    cycle = -1
+                field = str(spec.get("field") or "").strip()
+                if 0 <= cycle < len(raw_caps) and field:
+                    found.append((str((raw_caps[cycle] or {}).get("id") or ""), field))
+                return found
+            if set(value) == {"$effect_result"} and isinstance(value["$effect_result"], Mapping):
+                spec = value["$effect_result"]
+                effect = str(spec.get("effect") or "")
+                field = str(spec.get("field") or "").strip()
+                if effect in provider_by_effect and field:
+                    found.append((provider_by_effect[effect], field))
+                return found
+            for item in value.values():
+                found.extend(collect_references(item))
+        elif isinstance(value, list):
+            for item in value:
+                found.extend(collect_references(item))
+        return found
+
+    for raw in raw_caps:
+        if isinstance(raw, Mapping):
+            for provider_id, field in collect_references(raw.get("action")):
+                if provider_id in referenced_fields:
+                    referenced_fields[provider_id].add(field)
+    produced_paths: set[str] = set()
+    verification_by_path: dict[str, str] = {}
+    source_ids: list[str] = []
+    step_admissions = []
+    for raw in raw_caps:
+        if not isinstance(raw, Mapping) or not isinstance(raw.get("action"), Mapping):
+            return {"schema": SCHEMA, "admitted": False, "rule": "COMPOUND_DAG_NODE_INVALID"}
+        action = raw["action"]
+        source_id = str(raw.get("source_capability_id") or "").strip()
+        if source_id:
+            entry = routable.get(source_id)
+            if not isinstance(entry, Mapping) or entry.get("status") != "VERIFIED_BOUND_CAPABILITY":
+                return {
+                    "schema": SCHEMA, "admitted": False,
+                    "rule": "COMPOUND_DAG_SOURCE_NOT_ADMISSIBLE:" + source_id,
+                }
+            args = action.get("args") if isinstance(action.get("args"), Mapping) else {}
+            if str(args.get("capability_id") or "") != source_id:
+                return {
+                    "schema": SCHEMA, "admitted": False,
+                    "rule": "COMPOUND_DAG_SOURCE_ACTION_MISMATCH:" + source_id,
+                }
+            declared_fields = {str(x) for x in (entry.get("result_fields") or []) if isinstance(x, str) and x.strip()}
+            observed_fields = {str(x) for x in (raw.get("result_fields") or [])}
+            if not declared_fields.issubset(observed_fields) or not (observed_fields - declared_fields).issubset(referenced_fields.get(str(raw.get("id")), set())):
+                return {
+                    "schema": SCHEMA, "admitted": False,
+                    "rule": "COMPOUND_DAG_RESULT_FIELDS_MISMATCH:" + source_id,
+                }
+            source_ids.append(source_id)
+            clause = str(raw.get("goal_clause") or "").strip()
+            if clause:
+                context = {str(x) for x in raw.get("context_paths") or []}
+                futures = [p for p in _future_artifacts(clause) if p not in context]
+                verdict = _single_route_admission(
+                    clause,
+                    {"selected_capability": source_id, "compiler_mode": "COMPOUND_DAG_NODE"},
+                    registry,
+                    future_artifacts=futures,
+                )
+                step_admissions.append(verdict)
+                if verdict.get("admitted") is not True:
+                    return {
+                        "schema": SCHEMA,
+                        "admitted": False,
+                        "rule": "COMPOUND_DAG_STEP_ROUTE_REJECTED:" + str(verdict.get("rule")),
+                        "selected_capability": source_id,
+                        "step_route_admission": verdict,
+                    }
+        else:
+            if raw.get("native_action") is not True:
+                return {"schema": SCHEMA, "admitted": False, "rule": "COMPOUND_DAG_NATIVE_ACTION_UNDECLARED"}
+            action_type = str(action.get("type") or "")
+            allowed_fields = native_fields.get(action_type, set())
+            if action_type not in front.COMPOUND_NATIVE_ACTION_TYPES or not set(raw.get("result_fields") or []).issubset(allowed_fields):
+                return {
+                    "schema": SCHEMA, "admitted": False,
+                    "rule": "COMPOUND_DAG_NATIVE_ACTION_NOT_VERIFIED:" + action_type,
+                }
+            if action_type == "invoke_capability":
+                return {"schema": SCHEMA, "admitted": False, "rule": "COMPOUND_DAG_CAPABILITY_ID_REQUIRED"}
+        for nested_id in nested_capability_ids(action):
+            nested_entry = routable.get(nested_id)
+            if not isinstance(nested_entry, Mapping) or nested_entry.get("status") != "VERIFIED_BOUND_CAPABILITY":
+                return {
+                    "schema": SCHEMA, "admitted": False,
+                    "rule": "COMPOUND_DAG_NESTED_CAPABILITY_NOT_ROUTABLE:" + nested_id,
+                }
+        args = action.get("args") if isinstance(action.get("args"), Mapping) else {}
+        if raw.get("role") != "FINAL_DELIVERABLE_VERIFICATION":
+            for key, value in args.items():
+                if isinstance(key, str) and key.endswith("_path") and (
+                    key.startswith("output_") or key[:-5].lower() in {"output", "result", "report", "screenshot", "image", "artifact", "destination", "dest"}
+                ) and isinstance(value, str) and value:
+                    produced_paths.add(value)
+        else:
+            path = str(raw.get("verified_path") or "")
+            if not path or action.get("type") != "assert_file_exists":
+                return {"schema": SCHEMA, "admitted": False, "rule": "COMPOUND_DAG_FINAL_VERIFIER_INVALID"}
+            verification_by_path[path] = str(raw.get("id") or "")
+
+    root_resolved = ROOT.resolve()
+    for raw_path in produced_paths:
+        if pathlib.Path(raw_path).is_absolute():
+            return {"schema": SCHEMA, "admitted": False, "rule": "COMPOUND_DAG_OUTPUT_PATH_ABSOLUTE"}
+        resolved = (ROOT / raw_path).resolve()
+        if resolved == root_resolved or root_resolved not in resolved.parents:
+            return {"schema": SCHEMA, "admitted": False, "rule": "COMPOUND_DAG_OUTPUT_PATH_OUTSIDE_ROOT"}
+
+    final_check = compiled.get("final_deliverable_verification")
+    if not isinstance(final_check, Mapping) or final_check.get("status") != "PLANNED":
+        return {"schema": SCHEMA, "admitted": False, "rule": "COMPOUND_DAG_FINAL_VERIFICATION_MISSING"}
+    final_paths = final_check.get("paths")
+    if not isinstance(final_paths, list) or set(str(x) for x in final_paths) != produced_paths:
+        return {"schema": SCHEMA, "admitted": False, "rule": "COMPOUND_DAG_FINAL_PATHS_MISMATCH"}
+    if set(verification_by_path) != produced_paths:
+        return {"schema": SCHEMA, "admitted": False, "rule": "COMPOUND_DAG_FINAL_DELIVERABLE_UNVERIFIED"}
+    declared_verifiers = final_check.get("verification_capability_ids")
+    if not isinstance(declared_verifiers, list) or set(str(x) for x in declared_verifiers) != set(verification_by_path.values()):
+        return {"schema": SCHEMA, "admitted": False, "rule": "COMPOUND_DAG_FINAL_VERIFIER_IDS_MISMATCH"}
+
+    return {
+        "schema": SCHEMA,
+        "admitted": True,
+        "rule": None,
+        "compiler_mode": compiled.get("compiler_mode"),
+        "selected_capability": None,
+        "planner_recomputed": True,
+        "dag_node_count": len(planned["execution_dag"].get("nodes") or []),
+        "dag_edge_count": len(planned["execution_dag"].get("edges") or []),
+        "selected_plan": list(planned["planning"].get("plan") or []),
+        "source_capability_ids": source_ids,
+        "step_route_admissions": step_admissions,
+        "final_deliverables": sorted(produced_paths),
+        "final_deliverable_verification_planned": True,
+        "final_deliverables_independently_verified": False,
+    }
+
+
+def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
+    """Admit one capability route or independently re-plan a compound execution DAG."""
+    if compiled.get("compiler_mode") == "FRONT_COMPOUND_EXECUTION_DAG":
+        return _compound_dag_admission(goal, compiled, registry)
+    return _single_route_admission(goal, compiled, registry)
+
+
 _NON_SUCCESS_PREFIXES = ("FAIL", "OPEN", "UNRESOLVED", "ERROR", "BLOCKED", "REJECTED", "INCOMPLETE")
 
 
@@ -135,10 +361,9 @@ def tool_truth_errors(result: Mapping[str, Any]) -> list[str]:
     """R5: the executed tool's own verdict wins over the controller's "it returned".
 
     The live runtime marks a raw goal PASS when the controller returned 0 and the first
-    trace step produced a mapping.  Several bound tools write a report that says
-    ``pass: false`` / ``status: OPEN__...`` / ``UNRESOLVED`` while still setting
-    ``output_verified: true`` (they verified that they wrote their own failure report).
-    That must never surface as PASS.
+    trace step produced a mapping. A tool's explicit ``pass: false``, ``verified: false``,
+    ``output_verified: false`` or non-success status (OPEN__, UNRESOLVED, FAIL...) must
+    never surface as PASS, even if it also verified that it wrote its own failure report.
     """
     errors: list[str] = []
     rows = list(result.get("execution")) if isinstance(result.get("execution"), list) else []
@@ -157,6 +382,10 @@ def tool_truth_errors(result: Mapping[str, Any]) -> list[str]:
         status = str(inner.get("status") or inner.get("outcome") or "").upper()
         if inner.get("pass") is False:
             errors.append("TOOL_REPORTED_PASS_FALSE:" + str(row.get("capability_id")))
+        elif inner.get("verified") is False:
+            errors.append("TOOL_REPORTED_VERIFIED_FALSE:" + str(row.get("capability_id")))
+        elif inner.get("output_verified") is False:
+            errors.append("TOOL_REPORTED_OUTPUT_VERIFIED_FALSE:" + str(row.get("capability_id")))
         elif status.startswith(_NON_SUCCESS_PREFIXES):
             errors.append("TOOL_REPORTED_NON_SUCCESS_STATUS:" + str(row.get("capability_id")) + ":" + status[:48])
     return errors
@@ -317,9 +546,20 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
         controller_actions = [action, {"type": "finish", "args": {"summary": "RAW_GOAL_COMPLETE"}}]
     if not isinstance(controller_actions, list) or not controller_actions or len(controller_actions) > 64 or any(not isinstance(a, Mapping) for a in controller_actions):
         return _fail(task_id, "FAIL__COMPILED_CONTROL_PLAN_INVALID", "LIVE_RUNTIME_COMPOSITION_CONTRACT_INVALID", started, compiler_mode=compiled.get("compiler_mode"))
+    execution_spec = {
+        "id": "live-raw-goal-controller",
+        "controller_actions": [dict(a) for a in controller_actions],
+        "max_controller_actions": 64,
+    }
+    if compiled.get("compiler_mode") == "FRONT_COMPOUND_EXECUTION_DAG":
+        execution_spec.update({
+            "_composition_capsule_enforced": True,
+            "_composition_contract": compiled.get("composition_contract"),
+            "_composition_initial_facts": compiled.get("composition_initial_facts"),
+        })
     try:
         controller = astra_runtime.run_goal(
-            {"id": "live-raw-goal-controller", "controller_actions": [dict(a) for a in controller_actions], "max_controller_actions": 64},
+            execution_spec,
             {"mission_id": task_id, "goal": goal},
         )
     except Exception as exc:
@@ -336,6 +576,34 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
                                "result": dict(first_result) if isinstance(first_result, Mapping) else None,
                                "execution_proof_type": "MODEL_INDEPENDENT_CONTROLLER_TRACE_V1",
                                "controller_plan_sha256": checkpoint.get("plan_sha256"), "controller_trace": list(trace)})
+    elif compiled.get("compiler_mode") == "FRONT_COMPOUND_EXECUTION_DAG":
+        for item in trace:
+            if not isinstance(item, Mapping) or not isinstance(item.get("result"), Mapping):
+                continue
+            action = item.get("plan") if isinstance(item.get("plan"), Mapping) else (item.get("action") if isinstance(item.get("action"), Mapping) else {})
+            args = action.get("args") if isinstance(action.get("args"), Mapping) else {}
+            capability_id = args.get("capability_id") or action.get("capability_id") or action.get("type")
+            inner = dict(item["result"])
+            step_pass = inner.get("pass") is not False
+            execution_rows.append({
+                "capability_id": str(capability_id),
+                "pass": step_pass,
+                "status": str(inner.get("status") or ("PASS__COMPOUND_DAG_ACTION" if step_pass else "FAIL__COMPOUND_DAG_ACTION")),
+                "result": inner,
+                "execution_proof_type": "CAPABILITY_PLANNER_DAG_CONTROLLER_TRACE_V1",
+                "cycle": item.get("cycle"),
+            })
+    selected_plan = [selected] if selected else []
+    if compiled.get("compiler_mode") == "FRONT_COMPOUND_EXECUTION_DAG":
+        source_by_plan = {
+            str(row.get("id")): str(row.get("source_capability_id") or row.get("role") or row.get("id"))
+            for row in (compiled.get("capability_problem") or {}).get("capabilities", [])
+            if isinstance(row, Mapping)
+        }
+        selected_plan = [
+            source_by_plan.get(str(cid), str(cid))
+            for cid in ((compiled.get("capability_plan") or {}).get("plan") or [])
+        ]
     return {
         "schema": LIVE_SCHEMA,
         "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED" if passed else "FAIL__LIVE_CONTROLLER_RESULT_INVALID",
@@ -343,8 +611,10 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
         "raw_goal_sha256": raw_contract["task_sha256"], "raw_task_contract_sha256": raw_contract["task_contract_sha256"],
         "raw_acceptance_obligation_count": len(raw_contract["acceptance_contract"]["obligations"]),
         "compiler_mode": compiled.get("compiler_mode"), "compiled_capability_id": selected or None,
-        "selected_plan": [selected] if selected else [], "compiled_part_count": len(compiled.get("compiled_parts") or []),
+        "selected_plan": selected_plan, "compiled_part_count": len(compiled.get("compiled_parts") or []),
         "controller_action_count": len(controller_actions), "execution": execution_rows,
+        "execution_dag": compiled.get("execution_dag") if compiled.get("compiler_mode") == "FRONT_COMPOUND_EXECUTION_DAG" else None,
+        "final_deliverable_verification": compiled.get("final_deliverable_verification") if compiled.get("compiler_mode") == "FRONT_COMPOUND_EXECUTION_DAG" else None,
         "controller_execution": dict(controller) if isinstance(controller, Mapping) else controller,
         "controller_checkpoint": dict(checkpoint),
         "cognition_dependency_class": controller.get("cognition_dependency_class") if isinstance(controller, Mapping) else None,
@@ -357,9 +627,12 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
 def promised_artifact_errors(goal: str, future_artifacts: list[str]) -> list[str]:
     """R6: every output file the goal named must now exist and be non-empty."""
     errors = []
+    root = ROOT.resolve()
     for raw in future_artifacts:
-        p = ROOT / raw
-        if not p.is_file():
+        p = (ROOT / raw).resolve()
+        if p == root or root not in p.parents:
+            errors.append("PROMISED_ARTIFACT_OUTSIDE_ROOT:" + raw)
+        elif not p.is_file():
             errors.append("PROMISED_ARTIFACT_MISSING:" + raw)
         elif p.stat().st_size == 0:
             errors.append("PROMISED_ARTIFACT_EMPTY:" + raw)
@@ -399,12 +672,29 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         result["failure_class"] = "TOOL_REPORTED_NON_SUCCESS"
         result["tool_truth_errors"] = truth
         result["side_effects_may_exist"] = True
-    missing = promised_artifact_errors(goal, future_artifacts) if result.get("pass") is True else []
+    deliverable_paths = list(future_artifacts)
+    if compiled.get("compiler_mode") == "FRONT_COMPOUND_EXECUTION_DAG":
+        final_check = compiled.get("final_deliverable_verification")
+        if isinstance(final_check, Mapping):
+            deliverable_paths.extend(str(path) for path in final_check.get("paths") or [] if isinstance(path, str))
+    deliverable_paths = list(dict.fromkeys(deliverable_paths))
+    missing = promised_artifact_errors(goal, deliverable_paths) if result.get("pass") is True else []
     if missing:
         result["runtime_status_before_artifact_check"] = result.get("status")
         result["status"] = "FAIL_CLOSED__PROMISED_ARTIFACT_MISSING"
         result["pass"] = False
         result["failure_class"] = "PROMISED_ARTIFACT_MISSING"
         result["promised_artifact_errors"] = missing
+    if compiled.get("compiler_mode") == "FRONT_COMPOUND_EXECUTION_DAG":
+        final_check = dict(compiled.get("final_deliverable_verification") or {})
+        final_paths = list(final_check.get("paths") or [])
+        verified = result.get("pass") is True and not missing and bool(final_paths)
+        final_check.update({
+            "status": "PASS" if verified else ("NOT_APPLICABLE" if not final_paths and result.get("pass") is True else "FAIL_CLOSED"),
+            "independent_reopen_completed": bool(verified),
+            "postrun_nonempty_check_completed": bool(verified),
+        })
+        result["final_deliverable_verification"] = final_check
+        result["final_deliverables_independently_verified"] = bool(verified)
     result["elapsed_ns"] = perf_counter_ns() - started
     return result
