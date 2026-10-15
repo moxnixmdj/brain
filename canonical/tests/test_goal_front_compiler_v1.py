@@ -92,8 +92,10 @@ def test_f1_best_candidate_that_cannot_bind_fails_closed_instead_of_falling_thro
 def test_f4_zero_input_tools_are_never_routable_from_a_sentence():
     registry = _registry()
     blocked = front.blocked_zero_input_capabilities(registry)
-    assert "terminal.kstar.root.assess.stdlib" in blocked
-    assert not any(cid in front.routable_registry(registry) for cid in blocked)
+    # The current registry gives the terminal assessor an explicit sentence-bound
+    # assessment_scope; no evolving capability is hidden as a zero-input tool.
+    assert blocked == []
+    assert "terminal.kstar.root.assess.stdlib" in front.routable_registry(registry)
     goal = f"Translate the sentence 'good morning' into French and save it to {REL}/fr.txt."
     try:
         compiled = front.compile_goal(goal, registry, ROOT)
@@ -143,7 +145,7 @@ def test_every_routable_capability_is_reachable_and_bound_from_one_sentence():
     counts = report["counts"]
     assert counts.get("NOT_REACHABLE", 0) == 0, [r for r in report["rows"] if r["state"] == "NOT_REACHABLE"]
     assert counts.get("ROUTED_ELSEWHERE", 0) == 0, [r for r in report["rows"] if r["state"] == "ROUTED_ELSEWHERE"]
-    assert counts["REACHED_AND_BOUND"] + counts["BLOCKED_ZERO_INPUT"] == report["capabilities_total"]
+    assert counts.get("REACHED_AND_BOUND", 0) + counts.get("BLOCKED_ZERO_INPUT", 0) == report["capabilities_total"]
     assert counts["REACHED_AND_BOUND"] >= 63
 
 
@@ -204,100 +206,106 @@ def test_f10_output_path_is_never_the_input_file():
         front.repair_output_collisions(goal2, inputs2, ROOT)
 
 
-def _metabolic_registry(depth: int) -> dict[str, dict]:
-    names = ["alpha", "bravo", "charlie", "delta", "echo", "foxtrot", "golf", "hotel", "india", "juliet"]
-    registry = {}
-    for index, name in enumerate(names[:depth]):
-        args = {"capability_id": f"test.metabolic.{name}"}
-        proposal = {}
-        args["input_path"] = "${input.input_path}"
-        if index != 0:
-            proposal["input_path"] = {"type": "effect_result", "effect": f"test.stage.{index - 1}", "field": "output_path", "container": "scalar"}
-        args["output_path"] = "${input.output_path}"
-        registry[f"test.metabolic.{name}"] = {
-            "status": "VERIFIED_BOUND_CAPABILITY", "incremental_spend_usd": 0, "cost": 1,
-            "requires": [], "provides": [f"test.stage.{index}"],
-            "result_fields": ["output_path", "output_verified"],
-            "keywords": [f"metabolic{name}", "transform"],
-            "proposal_bindings": proposal,
-            "action_template": {"type": "invoke_capability", "args": args,
-                                "expect": {"type": "field_equals", "field": "output_verified", "value": True}},
-            "adapter_module": "synthetic_metabolic_adapter", "entrypoint": "run",
-            "source": {"type": "brain_native_deterministic", "adapter_path": "unused.py"},
-        }
-    # A lower-scoring candidate proves that the selected stages came from ranking, not insertion order.
-    registry["test.metabolic.distractor"] = {
-        **registry["test.metabolic.alpha"], "keywords": ["transform"],
-        "action_template": {**registry["test.metabolic.alpha"]["action_template"],
-                            "args": {**registry["test.metabolic.alpha"]["action_template"]["args"],
-                                     "capability_id": "test.metabolic.distractor"}},
-    }
-    return registry
-
-
-def _run_metabolic_dag(monkeypatch, depth: int):
-    names = ["alpha", "bravo", "charlie", "delta", "echo", "foxtrot", "golf", "hotel", "india", "juliet"]
-    source = WORK / f"metabolic_{depth}_source.txt"
-    source.write_text("seed", encoding="utf-8")
-    paths = [f"{REL}/metabolic_{depth}_{index}.txt" for index in range(depth)]
-    clauses = []
-    for index, name in enumerate(names[:depth]):
-        incoming = f"{REL}/metabolic_{depth}_source.txt" if index == 0 else paths[index - 1]
-        clauses.append(f"Metabolic{name} transform {incoming} and save output to {paths[index]}")
-    goal = ". Then ".join(clauses) + "."
-    registry = _metabolic_registry(depth)
-    compiled = front.plan_capability_dag(goal, registry, ROOT)
-    assert compiled is not None
-    dag = compiled["capability_dag"]
-    assert len(dag["steps"]) == depth
-    assert len(dag["artifact_edges"]) == depth - 1
-    assert [step["cycle"] for step in dag["steps"]] == list(range(depth))
-    assert [step["capability_id"] for step in dag["steps"]] == [f"test.metabolic.{name}" for name in names[:depth]]
-    assert all(edge["producer_cycle"] + 1 == edge["consumer_cycle"] for edge in dag["artifact_edges"])
-    assert all(edge["effect"].startswith("artifact:") for edge in dag["artifact_edges"])
-    assert all("$result" in dag["steps"][index]["action"]["args"]["input_path"] for index in range(1, depth))
-
-    observed_inputs = []
-    def fake_adapter(_entry, action):
-        args = action["args"]
-        incoming = args.get("input_path")
-        assert isinstance(incoming, str)  # dynamic reference was resolved before invocation
-        observed_inputs.append(incoming)
-        output = ROOT / args["output_path"]
-        output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_text((ROOT / incoming).read_text(encoding="utf-8") + f"|{len(observed_inputs)}", encoding="utf-8")
-        return {"output_path": args["output_path"], "output_verified": True}
-
-    monkeypatch.setattr(adm, "run_adapter_locally", fake_adapter)
-    raw = adm.compile_contract(goal, source_id="user", routing_target_effects=compiled["target_effects"])
-    task_id = f"TEST_METABOLIC_DAG_{depth}_{os.getpid()}"
+def _solve_real_dag(task_id: str, goal: str):
+    """Run the public entry; skip only an explicitly reported missing pinned tool environment."""
     try:
-        result = adm._execute_capability_dag(task_id, goal, compiled, registry, raw, 0)
+        result = adm.solve({"task_id": task_id, "goal": goal})
     finally:
         _cleanup(task_id)
-    assert result["pass"] is True, result.get("reason")
-    assert result["selected_plan"] == [f"test.metabolic.{name}" for name in names[:depth]]
-    assert observed_inputs == [f"{REL}/metabolic_{depth}_source.txt"] + paths[:-1]
-    assert (ROOT / paths[-1]).read_text(encoding="utf-8") == "seed" + "".join(f"|{i}" for i in range(1, depth + 1))
-    return compiled, result
+    reason = str(result.get("reason") or "")
+    if reason.startswith("Blocker:BOUND_"):
+        pytest.skip("dependency-complete heartbeat runner required: " + reason)
+    assert result["pass"] is True, result
+    assert result["compiler_mode"] == front.DAG_MODE
+    assert result["model_dependency_count"] == 0
+    return result
 
 
-def test_f11_multi_step_capability_dag_planned_and_executed(monkeypatch):
-    _run_metabolic_dag(monkeypatch, 2)
+def _bm25_metabolic_goal(depth: int):
+    """A real registered BM25 -> JSON transformations -> binary-codec pipeline."""
+    base = WORK / ("metabolic_real_%d" % depth)
+    base.mkdir(parents=True, exist_ok=True)
+    source = base / "candidates.json"
+    source.write_text(json.dumps({
+        "objective": "compare orbital battery endurance evidence",
+        "candidates": [
+            {"title": "Orbital battery endurance evidence", "snippet": "battery endurance in orbit"},
+            {"title": "Garden irrigation", "snippet": "soil and water"},
+        ],
+    }), encoding="utf-8")
+    rel = lambda name: str((base / name).relative_to(ROOT)).replace("\\", "/")
+    json_paths = [rel("stage_%02d.json" % i) for i in range(1, 8)]
+    clauses = [
+        f"Rank source candidates in {rel('candidates.json')} for objective relevance with BM25 and save output to {json_paths[0]}"
+    ]
+    # Explicit clauses exercise the ordinary router and binder; no action plan is injected.
+    for index in range(1, min(depth, 7)):
+        clauses.append(f'Run the jq query with jq filter "." on {json_paths[index - 1]} and save output to {json_paths[index]}')
+    if depth >= 8:
+        clauses.append(f"Encode JSON {json_paths[6]} using msgpack Python and save output to {rel('stage_08.msgpack')}")
+    if depth >= 9:
+        clauses.append(f"Encode JSON {json_paths[6]} using bson modern Python and save output to {rel('stage_09.bson')}")
+    if depth >= 10:
+        clauses.append(f"Encode JSON {json_paths[6]} using CBOR npm and save output to {rel('stage_10.cbor')}")
+    return ". Then ".join(clauses) + ".", base, json_paths
 
 
-def test_f11_multi_step_capability_dag_with_bm25_ranking(monkeypatch):
-    compiled, _result = _run_metabolic_dag(monkeypatch, 3)
-    assert all(part["score"] > 1 for part in compiled["compiled_parts"])
+def _assert_real_metabolic_dag(depth: int):
+    goal, base, json_paths = _bm25_metabolic_goal(depth)
+    task_id = "TEST_F11_REAL_%d_%d" % (depth, os.getpid())
+    result = _solve_real_dag(task_id, goal)
+    dag = result["capability_dag"]
+    assert len(result["selected_plan"]) == depth
+    assert [step["cycle"] for step in dag["steps"]] == list(range(depth))
+    assert len(dag["artifact_edges"]) == depth - 1
+    for edge in dag["artifact_edges"]:
+        assert edge["producer_cycle"] < edge["consumer_cycle"]
+        assert edge["produced_path"] in dag["steps"][edge["producer_cycle"]]["artifacts_produced"]
+    ranked = json.loads((ROOT / json_paths[0]).read_text(encoding="utf-8"))
+    assert ranked["status"] == "LEXICAL_RELEVANCE_RANKED"
+    assert ranked["top_candidate_original_index"] == 0
+    for path in json_paths[:min(depth, 7)]:
+        assert json.loads((ROOT / path).read_text(encoding="utf-8"))["top_candidate_original_index"] == 0
+    if depth >= 8:
+        assert (base / "stage_08.msgpack").read_bytes()
+    if depth >= 9:
+        raw = (base / "stage_09.bson").read_bytes()
+        assert len(raw) >= 5 and int.from_bytes(raw[:4], "little") == len(raw)
+    if depth >= 10:
+        assert (base / "stage_10.cbor").read_bytes()
+    return result
 
 
-def test_f11_five_step_metabolic_dag_executed_and_verified(monkeypatch):
-    _run_metabolic_dag(monkeypatch, 5)
+def test_f11_multi_step_capability_dag_planned_and_executed():
+    source = WORK / "f11_archive_source.txt"
+    manifest = WORK / "f11_archive_manifest.json"
+    archive = WORK / "f11_archive.tar.gz"
+    source.write_text("real cross-format artifact\n", encoding="utf-8")
+    manifest.write_text(json.dumps({"records": [{"verification_paths": [str(source.relative_to(ROOT))]}]}), encoding="utf-8")
+    goal = (f"Build a tar.gz archive from manifest {manifest.relative_to(ROOT)} and write it to {archive.relative_to(ROOT)}. "
+            f"Then verify the tar.gz archive {archive.relative_to(ROOT)} against manifest {manifest.relative_to(ROOT)} with gnu tar.")
+    result = _solve_real_dag("TEST_F11_ARCHIVE_%d" % os.getpid(), goal)
+    assert result["selected_plan"] == ["archive.tar_gz.create_from_manifest", "archive.verify.tar_gz.gnu"]
+    assert len(result["capability_dag"]["artifact_edges"]) == 1
+    import tarfile
+    with tarfile.open(archive, "r:gz") as tf:
+        assert str(source.relative_to(ROOT)) in tf.getnames()
 
 
-def test_f11_eight_step_metabolic_dag_executed_and_verified(monkeypatch):
-    _run_metabolic_dag(monkeypatch, 8)
+def test_f11_multi_step_capability_dag_with_bm25_ranking():
+    result = _assert_real_metabolic_dag(3)
+    assert result["selected_plan"][0] == "source.objective_relevance.rank.bm25"
+    assert result["selected_plan"][1:] == ["json.query.jq", "json.query.jq"]
 
 
-def test_f11_ten_step_metabolic_dag_executed_and_verified(monkeypatch):
-    _run_metabolic_dag(monkeypatch, 10)
+def test_f11_five_step_metabolic_dag_executed_and_verified():
+    _assert_real_metabolic_dag(5)
+
+
+def test_f11_eight_step_metabolic_dag_executed_and_verified():
+    _assert_real_metabolic_dag(8)
+
+
+def test_f11_ten_step_metabolic_dag_executed_and_verified():
+    result = _assert_real_metabolic_dag(10)
+    assert result["selected_plan"][-3:] == ["auto.pypi.msgpack", "auto.pypi.bson-modern", "auto.npm.dfinity-cbor"]
