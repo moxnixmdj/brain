@@ -22,7 +22,6 @@ from execution_guard.live_solver_end_to_end_measurement_v1 import reachability  
 WORK = ROOT / "canonical/astra_runtime/tmp/test_goal_front_compiler"
 REL = "canonical/astra_runtime/tmp/test_goal_front_compiler"
 STATE = ROOT / "canonical/astra_runtime/state"
-EVIDENCE = ROOT / "canonical/astra_runtime/evidence"
 
 
 def _registry():
@@ -39,10 +38,8 @@ def teardown_module(_module=None):
 
 
 def _cleanup(task_id: str) -> None:
-    for directory in (STATE, EVIDENCE):
-        for p in directory.glob(task_id + "__*"):
-            if p.is_file():
-                p.unlink()
+    for p in STATE.glob(task_id + "__*"):
+        p.unlink()
 
 
 def test_f2_sentence_final_period_no_longer_corrupts_the_last_literal_value():
@@ -56,47 +53,15 @@ def test_f2_sentence_final_period_no_longer_corrupts_the_last_literal_value():
     assert pinned["controller_actions"][0]["args"]["records"] == [{"id": "alpha", "value": "1."}]
 
 
-def test_f5_compound_sentences_are_compiled_into_a_dag_and_verified():
+def test_f5_compound_sentences_are_compiled_separately():
     goal = (f"Create {REL}/a.json containing exactly one record with fields id and value: alpha 7. "
             f"Then create {REL}/b.json containing exactly one record with fields id and value: beta 9.")
-    for path in (ROOT / REL / "a.json", ROOT / REL / "b.json"):
-        if path.exists():
-            path.unlink()
     compiled = front.compile_goal(goal, _registry(), ROOT)
-    actions = [a for a in compiled["controller_actions"] if a["type"] == "write_json_records"]
+    actions = [a for a in compiled["controller_actions"] if a["type"] != "finish"]
     assert [a["args"]["records"] for a in actions] == [[{"id": "alpha", "value": 7}], [{"id": "beta", "value": 9}]]
-    assert compiled["compiler_mode"] == "FRONT_COMPOUND_EXECUTION_DAG"
-    assert compiled["execution_dag"]["node_order"][:2] == ["front.compound.action.0", "front.compound.action.1"]
-    assert [a["type"] for a in compiled["controller_actions"]].count("assert_file_exists") == 2
-    assert compiled["final_deliverable_verification"]["paths"] == [REL + "/a.json", REL + "/b.json"]
+    assert compiled["compiler_mode"] == "FRONT_COMPOUND_SENTENCES"
     pinned = gc.compile_goal(goal, _registry(), ROOT)
     assert len([a for a in pinned["controller_actions"] if a["type"] != "finish"]) == 1  # the swallowed clause
-
-
-def test_f11_context_paths_are_forwarded_and_piped_through_the_planner_dag():
-    source = f"{REL}/context_pipe_{os.getpid()}.json"
-    output = f"{REL}/context_pipe_{os.getpid()}.xlsx"
-    for raw in (source, output):
-        path = ROOT / raw
-        if path.exists():
-            path.unlink()
-    goal = (
-        f"Create {source} containing exactly one record with fields id and value: alpha 1. "
-        f"Then create an xlsx spreadsheet from the JSON records {source} and save it to {output}."
-    )
-    compiled = front.compile_goal(goal, _registry(), ROOT)
-    assert compiled["compiler_mode"] == "FRONT_COMPOUND_EXECUTION_DAG"
-    assert compiled["compiled_parts"][1]["inputs"]["json_path"] == source
-    assert compiled["controller_actions"][1]["args"]["json_path"] == {
-        "$result": {"cycle": 0, "field": "output_path"}
-    }
-    bindings = compiled["composition_contract"][1]["provider_bindings"]
-    assert any(binding["cycle"] == 0 for binding in bindings.values())
-    assert compiled["execution_dag"]["edges"]
-    assert compiled["final_deliverable_verification"]["paths"] == [source, output]
-    verdict = adm.route_admission(goal, compiled, _registry())
-    assert verdict["admitted"] is True, verdict
-    assert verdict["planner_recomputed"] is True
 
 
 def test_f3_build_and_write_routes_to_the_archive_creator_not_the_verifier():
@@ -195,13 +160,8 @@ def test_solve_executes_a_compound_literal_goal_end_to_end():
     finally:
         _cleanup(task_id)
     assert result["pass"] is True, result.get("status")
-    assert result["controller_action_count"] == 5
+    assert result["controller_action_count"] == 3
     assert result["model_dependency_count"] == 0
-    assert result["route_admission"]["planner_recomputed"] is True
-    assert result["route_admission"]["final_deliverable_verification_planned"] is True
-    assert result["final_deliverables_independently_verified"] is True
-    trace = result["controller_execution"]["trace"]
-    assert [row["plan"]["type"] for row in trace].count("assert_file_exists") == 2
     assert json.loads(a.read_text(encoding="utf-8")) == [{"id": "alpha", "value": 1}]
     assert json.loads(b.read_text(encoding="utf-8")) == [{"id": "beta", "value": 2}]
 

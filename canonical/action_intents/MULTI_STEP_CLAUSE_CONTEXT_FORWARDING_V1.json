@@ -1,0 +1,7 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V2",
+  "canonical_base_commit": "8d7fa7a26fba834c20fe1d2b83eb11b7b134d1df",
+  "target_files": [
+    "canonical/runtime/goal_front_compiler_v1.py"
+  ]
+}

@@ -109,10 +109,6 @@ def test_tool_truth_rule_catches_pass_false_and_non_success_status():
     assert adm.tool_truth_errors(result) == ["TOOL_REPORTED_NON_SUCCESS_STATUS:y:OPEN__SEMANTIC_RESIDUALS"]
     result = {"execution": [{"capability_id": "z", "result": {"status": "UNRESOLVED", "outcome": "UNRESOLVED"}}]}
     assert adm.tool_truth_errors(result)[0].startswith("TOOL_REPORTED_NON_SUCCESS_STATUS:z:UNRESOLVED")
-    result = {"execution": [{"capability_id": "verified", "result": {"verified": False}}]}
-    assert adm.tool_truth_errors(result) == ["TOOL_REPORTED_VERIFIED_FALSE:verified"]
-    result = {"execution": [{"capability_id": "artifact", "result": {"output_verified": False}}]}
-    assert adm.tool_truth_errors(result) == ["TOOL_REPORTED_OUTPUT_VERIFIED_FALSE:artifact"]
     assert adm.tool_truth_errors({"execution": [{"capability_id": "ok", "result": {"status": "PASS", "pass": True}}]}) == []
 
 

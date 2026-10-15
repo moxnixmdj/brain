@@ -182,43 +182,6 @@ def _resolve_effect_bindings(value, consumer, providers):
     return value
 
 
-def _execution_dag(planning, composition_contract):
-    """Return the explicit dependency graph for the selected action plan."""
-    nodes = []
-    edges = []
-    for row in composition_contract:
-        cycle = row["cycle"]
-        dependencies = []
-        for effect, provider in sorted(row["provider_bindings"].items()):
-            source_cycle = provider["cycle"]
-            source_id = provider["capability_id"]
-            dependencies.append(source_cycle)
-            edges.append({
-                "from_cycle": source_cycle,
-                "from_capability_id": source_id,
-                "to_cycle": cycle,
-                "to_capability_id": row["capability_id"],
-                "effect": effect,
-            })
-        nodes.append({
-            "cycle": cycle,
-            "capability_id": row["capability_id"],
-            "requires": list(row["requires"]),
-            "provides": list(row["provides"]),
-            "result_fields": list(row["result_fields"]),
-            "depends_on": sorted(set(dependencies)),
-        })
-    return {
-        "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_DAG_V1",
-        "status": "PLANNED",
-        "node_order": list(planning.get("plan") or []),
-        "nodes": nodes,
-        "edges": edges,
-        "initial_facts": list(planning.get("initial_facts") or []),
-        "target_effects": list(planning.get("target_effects") or []),
-    }
-
-
 def plan_actions(problem):
     result = plan_capabilities(problem)
     initial, _, caps = _normalize(problem)
@@ -279,5 +242,4 @@ def plan_actions(problem):
         "planning": result,
         "actions": actions,
         "composition_contract": composition_contract,
-        "execution_dag": _execution_dag(result, composition_contract),
     }

@@ -118,21 +118,6 @@ class CapabilityPlannerTests(unittest.TestCase):
             {"$result": {"cycle": 0, "field": "value"}},
         )
         self.assertEqual(
-            out["execution_dag"]["schema"],
-            "PROJECT_BRAIN_CAPABILITY_EXECUTION_DAG_V1",
-        )
-        self.assertEqual(out["execution_dag"]["node_order"], ["learn-value", "write-value"])
-        self.assertEqual(
-            out["execution_dag"]["edges"],
-            [{
-                "from_cycle": 0,
-                "from_capability_id": "learn-value",
-                "to_cycle": 1,
-                "to_capability_id": "write-value",
-                "effect": "knowledge.value.available",
-            }],
-        )
-        self.assertEqual(
             out["composition_contract"],
             [
                 {

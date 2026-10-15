@@ -1,7 +1,7 @@
 """One mouth for every bound capability: a front layer on the byte-pinned goal compiler.
 
 Measured on 2026-10-15 (canonical/capabilities/true/LIVE_SOLVER_END_TO_END_MEASUREMENT_20261015_V1.json)
-the pinned compiler has measured defects and compound-flow gaps that this layer corrects WITHOUT editing a pinned byte:
+the pinned compiler had four defects that this layer corrects WITHOUT editing a pinned byte:
 
 1. Silent candidate fall-through: when the best-scoring tool cannot bind its inputs the pinned
    ``_compile_single_goal`` skips it (``except Exception: continue``) and runs the next scored
@@ -39,13 +39,6 @@ the pinned compiler has measured defects and compound-flow gaps that this layer 
    be reached by its own keyword.  Here: a surface word that is one of the tool's OWN tokens
    (keywords, identity, provides) does not reject it.
 
-10. Multi-step goals need an execution graph, not a flat action list. Here: each explicit clause is
-    compiled with prior produced paths in context, lowered through ``capability_planner.plan_actions``,
-    and connected by declared effect/result edges. Returned artifact paths flow through ``$result``
-    bindings when the producer declares the field; otherwise the explicit path stays static and the
-    dependency edge still orders execution. The live controller enforces the resulting composition
-    capsule, and final outputs are reopened and checked for non-empty bytes.
-
 It also binds the 33 registry inputs the pinned binder cannot (``path``, ``jq_filter``,
 ``expression``, ``x_value``, ``test_paths`` ...) from an explicit typed grammar:
 ``<key words> <quoted string | number | path | list | key=value pairs>``.  Inputs are never
@@ -53,14 +46,12 @@ guessed: a goal that does not state an input fails closed with GOAL_INPUT_BINDIN
 """
 from __future__ import annotations
 
-import hashlib
 import json
 import pathlib
 import re
 import shlex
 from typing import Any, Mapping
 
-from canonical.runtime import capability_planner
 from canonical.runtime import goal_compiler as gc
 
 SCHEMA = "PROJECT_BRAIN_GOAL_FRONT_COMPILER_V1"
@@ -258,11 +249,11 @@ def _is_output_key(key: str) -> bool:
     return key.startswith("output_") or key.split("_")[0] in _OUTPUT_STEMS
 
 
-def _bind_path_by_type(goal: str, key: str, root: pathlib.Path):
+def _bind_path_by_type(goal: str, key: str, root: pathlib.Path, context_paths: list[str] | None = None):
     """F6: bind an input path by file TYPE when the pinned name-stem binder cannot."""
     stem = key[:-5].lower()
     wanted = _STEM_SUFFIXES.get(stem)
-    existing = [(raw, p) for raw, p in gc._repo_paths(goal, root) if p.is_file()]
+    existing = [(raw, p) for raw, p in gc._repo_paths(goal, root) if p.is_file() or raw in (context_paths or [])]
     if wanted:
         matching = [raw for raw, p in existing if "".join(p.suffixes[-2:]).lower() in wanted or p.suffix.lower() in wanted]
     else:
@@ -272,35 +263,11 @@ def _bind_path_by_type(goal: str, key: str, root: pathlib.Path):
     raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":" + str(len(matching)) + "_type_compatible_existing_files_named")
 
 
-def _context_path_for_input(key: str, context_paths) -> str | None:
-    """Return the most recent compatible artifact forwarded from an earlier clause."""
-    if not key.endswith("_path") or _is_output_key(key):
-        return None
-    paths = [str(path) for path in context_paths or [] if isinstance(path, (str, pathlib.Path))]
-    if not paths:
-        return None
-    stem = key[:-5].lower()
-    wanted = _STEM_SUFFIXES.get(stem)
-    if wanted:
-        for raw in reversed(paths):
-            path = pathlib.Path(raw)
-            if "".join(path.suffixes[-2:]).lower() in wanted or path.suffix.lower() in wanted:
-                return raw
-        return None
-    # Match the pinned compiler's typed context lookup for generic input/source
-    # paths, but do not use output paths as inputs.
-    return gc._context_path_for_key(key, paths)
-
-
-def _bind_output_by_future(goal: str, key: str, root: pathlib.Path, context_paths=None):
+def _bind_output_by_future(goal: str, key: str, root: pathlib.Path):
     """F7: an output named in the sentence is a file that does not exist yet."""
     stem = key[:-5].lower().replace("output_", "") if key != "output_path" else "output"
     wanted = _STEM_SUFFIXES.get(stem)
-    context = {str(path) for path in context_paths or []}
-    future = [
-        (raw, p) for raw, p in gc._repo_paths(goal, root)
-        if pathlib.Path(raw).suffix and not p.exists() and raw not in context
-    ]
+    future = [(raw, p) for raw, p in gc._repo_paths(goal, root) if pathlib.Path(raw).suffix and not p.exists()]
     if wanted:
         future = [(raw, p) for raw, p in future if "".join(p.suffixes[-2:]).lower() in wanted or p.suffix.lower() in wanted]
     if len(future) == 1:
@@ -309,35 +276,30 @@ def _bind_output_by_future(goal: str, key: str, root: pathlib.Path, context_path
 
 
 def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, context_paths=None, future_clauses=None) -> dict[str, Any]:
-    """Bind explicit inputs, forwarding produced context artifacts before stale disk matches."""
+    """Pinned binder for the keys it supports, typed grammar / type binding for the rest. Never guesses."""
     keys = input_keys(entry)
     pinned_keys = [k for k in keys if k in ("text", "goal", "url") or k.endswith("_path")]
     typed_keys = [k for k in keys if k not in pinned_keys]
     inputs: dict[str, Any] = {}
     for key in pinned_keys:
-        if key.endswith("_path") and not _is_output_key(key):
-            forwarded = _context_path_for_input(key, context_paths)
-            if forwarded is not None:
-                inputs[key] = forwarded
-                continue
         shadow = dict(entry)
         shadow["action_template"] = {"args": {key: "${input." + key + "}"}}
         try:
             inputs.update(gc._bind_inputs(goal, root, shadow, context_paths=context_paths, future_clauses=future_clauses))
         except GoalCompilationFailure:
             if key.endswith("_path") and not _is_output_key(key):
-                inputs[key] = _bind_path_by_type(goal, key, root)
+                inputs[key] = _bind_path_by_type(goal, key, root, context_paths=context_paths)
             elif key.endswith("_path"):
-                inputs[key] = _bind_output_by_future(goal, key, root, context_paths=context_paths)
+                inputs[key] = _bind_output_by_future(goal, key, root)
             else:
                 raise
     for key in typed_keys:
         inputs[key] = bind_typed_key(goal, key, root)
-    repair_output_collisions(goal, inputs, root, context_paths=context_paths)
+    repair_output_collisions(goal, inputs, root)
     return inputs
 
 
-def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Path, context_paths=None) -> list[str]:
+def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Path) -> list[str]:
     """F10: an output path is never one of the action's own input files.
 
     The pinned binder can resolve `output_path` to an existing input named in the sentence; the
@@ -351,8 +313,8 @@ def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Pa
         value = str(inputs[key])
         collides = value in input_paths
         exists = (root / value).exists()
-        if collides or (exists and len(_future_artifacts(goal, root, context_paths)) == 1):
-            inputs[key] = _bind_output_by_future(goal, key, root, context_paths=context_paths)
+        if collides or (exists and len(_future_artifacts(goal, root)) == 1):
+            inputs[key] = _bind_output_by_future(goal, key, root)
             rebound.append(key)
     return rebound
 
@@ -392,12 +354,8 @@ def ranked_candidates(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> l
     return out
 
 
-def _future_artifacts(goal: str, root: pathlib.Path, context_paths=None) -> list[str]:
-    excluded = {str(path) for path in context_paths or []}
-    return list(dict.fromkeys(
-        raw for raw, p in gc._repo_paths(goal, root)
-        if pathlib.Path(raw).suffix and not p.exists() and raw not in excluded
-    ))
+def _future_artifacts(goal: str, root: pathlib.Path) -> list[str]:
+    return [raw for raw, p in gc._repo_paths(goal, root) if pathlib.Path(raw).suffix and not p.exists()]
 
 
 def _output_keys(entry: Mapping[str, Any]) -> list[str]:
@@ -424,15 +382,8 @@ _LITERAL_MODES = {"DETERMINISTIC_LITERAL_JSON_RECORDS", "DETERMINISTIC_EXACT_LIT
 
 
 def sentence_clauses(text: str) -> list[str]:
-    """Use the compiler's conservative sentence/action connector grammar."""
-    clauses = []
-    for part in gc.decompose_goal(text):
-        clause = str(part).strip(" .,;")
-        clause = re.sub(r"(?i)\s+\b(?:and|then)\s*$", "", clause).strip(" .,;")
-        clause = re.sub(r"(?i)^(?:and|then)\s+", "", clause).strip(" .,;")
-        if clause and clause.lower() not in {"and", "then"}:
-            clauses.append(clause)
-    return clauses
+    parts = re.split(r"(?<=[.!?])\s+(?=[A-Z])|\b[Tt]hen\b", " ".join(str(text or "").split()))
+    return [part.strip(" .,;") for part in parts if part and part.strip(" .,;")]
 
 
 def _actions_of(compiled: Mapping[str, Any], registry: Mapping[str, Mapping[str, Any]]) -> list[dict[str, Any]]:
@@ -445,483 +396,38 @@ def _actions_of(compiled: Mapping[str, Any], registry: Mapping[str, Mapping[str,
     return [gc._render_template(registry[cid]["action_template"], dict(compiled["inputs"]))]
 
 
-def _walk_result_refs(value):
-    if isinstance(value, Mapping):
-        if set(value) == {"$result"}:
-            spec = value["$result"]
-            if not isinstance(spec, Mapping):
-                raise GoalCompilationFailure("COMPOUND_RESULT_REFERENCE_INVALID")
-            try:
-                cycle = int(spec.get("cycle", -1))
-            except (TypeError, ValueError) as exc:
-                raise GoalCompilationFailure("COMPOUND_RESULT_REFERENCE_INVALID") from exc
-            field = str(spec.get("field") or "").strip()
-            if cycle < 0 or not field:
-                raise GoalCompilationFailure("COMPOUND_RESULT_REFERENCE_INVALID")
-            return [{"cycle": cycle, "field": field}]
-        return [ref for item in value.values() for ref in _walk_result_refs(item)]
-    if isinstance(value, list):
-        return [ref for item in value for ref in _walk_result_refs(item)]
-    return []
-
-
-def _offset_result_refs(value, cycle_offset: int):
-    if isinstance(value, Mapping):
-        if set(value) == {"$result"} and isinstance(value["$result"], Mapping):
-            spec = dict(value["$result"])
-            spec["cycle"] = int(spec.get("cycle", -1)) + cycle_offset
-            return {"$result": spec}
-        return {key: _offset_result_refs(item, cycle_offset) for key, item in value.items()}
-    if isinstance(value, list):
-        return [_offset_result_refs(item, cycle_offset) for item in value]
-    return value
-
-
-def _action_capability_id(action: Mapping[str, Any], compiled: Mapping[str, Any], registry) -> str | None:
-    args = action.get("args") if isinstance(action.get("args"), Mapping) else {}
-    argument_id = str(args.get("capability_id") or "").strip()
-    if argument_id:
-        return argument_id
-    action_id = str(action.get("capability_id") or "").strip()
-    if action_id:
-        if action_id in registry:
-            return action_id
-        if not action_id.startswith("front.compound."):
-            return action_id
-    selected = str(compiled.get("selected_capability") or "").strip()
-    return selected or None
-
-
-def _action_output_bindings(action: Mapping[str, Any], result_fields) -> list[tuple[str, str | None]]:
-    args = action.get("args") if isinstance(action.get("args"), Mapping) else {}
-    declared = set(result_fields or [])
-    out = []
-    for key, value in args.items():
-        if isinstance(key, str) and key.endswith("_path") and _is_output_key(key) and isinstance(value, str) and value:
-            out.append((value, key if key in declared else None))
-    return out
-
-
-def _input_path_values(action: Mapping[str, Any], inputs=None) -> set[str]:
-    values = set()
-    for key, value in (inputs or {}).items():
-        if isinstance(key, str) and key.endswith("_path") and not _is_output_key(key):
-            if isinstance(value, str) and value:
-                values.add(value)
-            elif isinstance(value, list):
-                values.update(str(item) for item in value if isinstance(item, str) and item)
-    args = action.get("args") if isinstance(action.get("args"), Mapping) else {}
-    for key, value in args.items():
-        if isinstance(key, str) and (key == "path" or key.endswith("_path") or key.endswith("_paths")) and not _is_output_key(key):
-            if isinstance(value, str) and value:
-                values.add(value)
-            elif isinstance(value, list):
-                values.update(str(item) for item in value if isinstance(item, str) and item)
-    return values
-
-
-def _replace_context_artifact_refs(value, producers, requirements, output_key=False):
-    if isinstance(value, Mapping):
-        out = {}
-        for key, item in value.items():
-            is_output = isinstance(key, str) and key.endswith("_path") and _is_output_key(key)
-            out[key] = _replace_context_artifact_refs(item, producers, requirements, output_key=is_output)
-        return out
-    if isinstance(value, list):
-        return [_replace_context_artifact_refs(item, producers, requirements, output_key=output_key) for item in value]
-    if isinstance(value, str) and not output_key and value in producers:
-        producer = producers[value]
-        requirements.add(producer["effect"])
-        field = producer.get("result_field")
-        if field:
-            return {"$effect_result": {"effect": producer["effect"], "field": field}}
-    return value
-
-
-COMPOUND_NATIVE_RESULT_FIELDS = {
-    "write_json_records": {"output_path", "record_count", "fields", "output_sha256", "output_bytes"},
-    "assert_file_exists": {"path", "exists", "verified", "sha256"},
-    "read_file": {"path", "content", "truncated"},
-    "list_tree": {"items", "truncated"},
-    "search_text": {"query", "hits", "truncated"},
-    "assert_text_contains_json_keys": {"verified", "expected_key_count", "expected_keys", "missing_keys", "json_path", "normalization"},
-}
-COMPOUND_NATIVE_ACTION_TYPES = frozenset({
-    "read_file", "list_tree", "search_text", "http_get",
-    "extract_labeled_fields_from_rendered_source", "assert_labeled_fields_against_fresh_source",
-    "resolve_authority_identity", "assert_authority_identity", "discover_authoritative_web_source",
-    "assert_authoritative_source_discovery", "fetch_json_knowledge", "assess_knowledge_consistency",
-    "materialize_supported_knowledge", "assert_knowledge_status", "assert_json_knowledge",
-    "write_json_records", "invoke_verified_bound_capability_adapter", "invoke_capability",
-    "invoke_capability_by_runtime_value", "invoke_capability_fanout", "invoke_capability_fallback",
-    "invoke_capability_until", "verify_with_independent_pypi_codec", "verify_with_independent_npm_codec",
-    "project_browser_result_json", "join_runtime_json_arrays", "assert_runtime_json_join",
-    "aggregate_runtime_json_arrays", "assert_runtime_json_aggregate", "derive_grouped_records",
-    "assert_grouped_derived_records", "select_ranked_record", "assert_ranked_record",
-    "assert_hex_prefix_bucket", "assert_collection_length_bucket", "assert_runtime_selected_code_decodes",
-    "assert_text_contains_json_keys", "assert_file_exists", "assert_json_fields_equal",
-    "assert_runtime_fanout_decodes", "assert_runtime_fanout_artifacts_decode",
-    "assert_runtime_per_item_fallback_decodes", "assert_runtime_fallback_decision",
-    "assert_runtime_bounded_loop_trace", "assert_workflow_audit_supported_by_source",
-    "assert_python_source_audit_supported_by_source", "assert_python_test_audit_zero",
-    "assert_python_test_audit_supported_by_fresh_execution",
-})
-
-
-def _native_result_fields(action: Mapping[str, Any], referenced_fields) -> list[str]:
-    typ = str(action.get("type") or "")
-    fields = set(COMPOUND_NATIVE_RESULT_FIELDS.get(typ, set()))
-    fields.update(str(field) for field in referenced_fields if str(field))
-    return sorted(fields)
-
-
-def _context_inputs_from(compiled: Mapping[str, Any]) -> dict[str, Any]:
-    inputs = compiled.get("inputs")
-    return dict(inputs) if isinstance(inputs, Mapping) else {}
-
-
-def _build_execution_dag(
-    step_specs: list[dict[str, Any]],
-    registry: Mapping[str, Mapping[str, Any]],
-    root: pathlib.Path,
-    original_goal: str,
-    initial_context_paths=None,
-    *,
-    clauses=None,
-    compiled_parts=None,
-    rules=None,
-    compiler_mode="FRONT_COMPOUND_EXECUTION_DAG",
-    target_effects=None,
-):
-    """Lower the front compiler's explicit action sequence into a validated planner DAG."""
-    if not step_specs:
-        raise GoalCompilationFailure("GOAL_COMPILATION_NO_EXECUTABLE_CLAUSE")
-    if len(step_specs) > 62:
-        raise GoalCompilationFailure("COMPOUND_ACTION_LIMIT_EXCEEDED", str(len(step_specs)))
-
-    producers: dict[str, dict[str, Any]] = {}
-    prepared: list[dict[str, Any]] = []
-    step_effects = [f"compound.step.{i}.completed" for i in range(len(step_specs))]
-    referenced_fields: dict[int, set[str]] = {i: set() for i in range(len(step_specs))}
-
-    # Existing result references in specialized compiled plans use action-cycle indexes.
-    # Rebase clause-local references and prove that they only point backward.
-    for index, spec in enumerate(step_specs):
-        action = _offset_result_refs(dict(spec["action"]), int(spec.get("cycle_offset", 0)))
-        for ref in _walk_result_refs(action):
-            if ref["cycle"] >= index:
-                raise GoalCompilationFailure("COMPOUND_RESULT_REFERENCE_NOT_BACKWARD", f"{index}:{ref['cycle']}")
-            referenced_fields[ref["cycle"]].add(ref["field"])
-        prepared.append({**spec, "action": action})
-
-    raw_capabilities = []
-    user_outputs: list[str] = []
-    for index, spec in enumerate(prepared):
-        action = dict(spec["action"])
-        source_cid = spec.get("source_capability_id")
-        entry = registry.get(source_cid) if source_cid else None
-        if isinstance(entry, Mapping):
-            # Registry-declared fields remain authoritative. Older verified entries
-            # may omit a result_fields list; any compiler-authored cross-step read is
-            # then made an explicit runtime-checked field contract in the capsule.
-            result_fields = sorted(
-                {str(x) for x in (entry.get("result_fields") or []) if isinstance(x, str) and x.strip()}
-                | referenced_fields[index]
-            )
-            native = False
-        else:
-            result_fields = _native_result_fields(action, referenced_fields[index])
-            native = True
-        action_id = f"front.compound.action.{index}"
-        step_effect = step_effects[index]
-        requires = set()
-        if index:
-            requires.add(step_effects[index - 1])
-        for ref in _walk_result_refs(action):
-            requires.add(step_effects[ref["cycle"]])
-
-        # Context paths are provenance edges. When a producer reports its output path,
-        # consumers read that returned path via capability_planner's typed result binding.
-        inputs = _input_path_values(action, spec.get("inputs"))
-        for path in sorted(inputs):
-            provider = producers.get(path)
-            if provider is not None:
-                requires.add(provider["effect"])
-        action = _replace_context_artifact_refs(action, producers, requires)
-
-        provides = [step_effect]
-        output_bindings = _action_output_bindings(action, result_fields)
-        input_paths = _input_path_values(action, spec.get("inputs"))
-        collisions = sorted(input_paths & {path for path, _field in output_bindings})
-        if collisions:
-            raise GoalCompilationFailure("COMPOUND_OUTPUT_EQUALS_INPUT_PATH", collisions[0])
-        for path, result_field in output_bindings:
-            if path in producers:
-                raise GoalCompilationFailure("COMPOUND_ARTIFACT_MULTIPLE_PRODUCERS", path)
-            artifact_effect = "compound.artifact." + hashlib.sha256(path.encode("utf-8")).hexdigest()[:16]
-            provides.append(artifact_effect)
-            producers[path] = {"effect": artifact_effect, "result_field": result_field, "producer_index": index}
-            user_outputs.append(path)
-        raw_capabilities.append({
-            "id": action_id,
-            "requires": sorted(requires),
-            "provides": provides,
-            "cost": float(spec.get("cost", 1.0)),
-            "action": action,
-            "result_fields": result_fields,
-            "source_capability_id": source_cid,
-            "goal_clause": spec.get("goal_clause"),
-            "context_paths": list(spec.get("context_paths") or []),
-            "native_action": native,
-            "step_index": spec.get("step_index", index),
-            "action_index": index,
-            "role": spec.get("role", "COMPOUND_ACTION"),
-        })
-
-    # Anything named as a not-yet-existing artifact must have an actual producer in the DAG.
-    expected_future = [
-        path for path in _future_artifacts(original_goal, root, initial_context_paths)
-        if path not in {str(x) for x in initial_context_paths or []}
-    ]
-    unserved = sorted(set(expected_future) - set(user_outputs))
-    if unserved:
-        raise GoalCompilationFailure("GOAL_OUTPUT_ARTIFACT_UNSERVED", ",".join(unserved))
-
-    # Independently reopen each produced artifact at the end of the plan. The live route
-    # also checks non-empty bytes after execution, so existence alone cannot produce PASS.
-    final_paths = list(dict.fromkeys(user_outputs))
-    final_verifier_ids = []
-    previous_final_effect = step_effects[-1]
-    for offset, path in enumerate(final_paths):
-        verifier_index = len(raw_capabilities)
-        verifier_id = f"front.compound.verify.{offset}"
-        step_effect = f"compound.verification.{offset}.complete"
-        requirements = {previous_final_effect}
-        provider = producers.get(path)
-        if provider is not None:
-            requirements.add(provider["effect"])
-        verify_action = {
-            "type": "assert_file_exists",
-            "args": {"path": path},
-            "expect": {"type": "field_equals", "field": "verified", "value": True},
-            "why": "Independently reopen and verify a produced compound-goal deliverable.",
-        }
-        verify_action = _replace_context_artifact_refs(verify_action, producers, requirements)
-        raw_capabilities.append({
-            "id": verifier_id,
-            "requires": sorted(requirements),
-            "provides": [step_effect],
-            "cost": 1.0,
-            "action": verify_action,
-            "result_fields": ["exists", "path", "sha256", "verified"],
-            "source_capability_id": None,
-            "goal_clause": None,
-            "context_paths": [path],
-            "native_action": True,
-            "step_index": None,
-            "action_index": verifier_index,
-            "role": "FINAL_DELIVERABLE_VERIFICATION",
-            "verified_path": path,
-        })
-        final_verifier_ids.append(verifier_id)
-        previous_final_effect = step_effect
-
-    if len(raw_capabilities) + 1 > 64:
-        raise GoalCompilationFailure("COMPOUND_ACTION_LIMIT_EXCEEDED", str(len(raw_capabilities) + 1))
-    if final_verifier_ids:
-        targets = [f"compound.verification.{i}.complete" for i in range(len(final_verifier_ids))]
-    else:
-        targets = [step_effects[-1]]
-    problem = {
-        "initial_facts": [],
-        "target_effects": targets,
-        "finish_summary": "COMPOUND_GOAL_COMPLETE_AND_DELIVERABLES_VERIFIED",
-        "capabilities": raw_capabilities,
-    }
-    try:
-        planned = capability_planner.plan_actions(problem)
-    except capability_planner.PlanningFailure as exc:
-        raise GoalCompilationFailure("COMPOUND_DAG_PLANNING_FAILED", f"{exc.code}:{exc.detail}") from exc
-
-    output_rules = list(rules or [])
-    output_rules.extend([
-        "F5_COMPOUND_SENTENCES_COMPILED_SEPARATELY",
-        "F11_CONTEXT_PATHS_FORWARDED_BETWEEN_CLAUSES",
-        "F12_CAPABILITY_PLANNER_EXECUTION_DAG",
-    ])
-    if final_paths:
-        output_rules.append("F13_FINAL_DELIVERABLES_INDEPENDENTLY_REOPENED")
-    result = {
-        "schema": "PROJECT_BRAIN_COMPILED_CAPABILITY_PROBLEM_V1",
-        "compiler_mode": compiler_mode,
-        "controller_actions": planned["actions"],
-        "compiled_parts": list(compiled_parts or []),
-        "target_effects": list(target_effects or targets),
-        "clauses": list(clauses or []),
-        "capability_problem": problem,
-        "capability_plan": planned["planning"],
-        "execution_dag": planned["execution_dag"],
-        "composition_contract": planned["composition_contract"],
-        "composition_initial_facts": planned["planning"].get("initial_facts", []),
-        "final_deliverable_verification": {
-            "status": "PLANNED",
-            "paths": final_paths,
-            "verification_capability_ids": final_verifier_ids,
-            "verification_kind": "FILE_REOPEN_EXISTS_AND_POSTRUN_NONEMPTY",
-        },
-        "front_compiler": {"schema": SCHEMA, "rules_applied": list(dict.fromkeys(output_rules))},
-    }
-    return result
-
-
-def _plan_existing_compound(
-    compiled: Mapping[str, Any],
-    admissible: Mapping[str, Mapping[str, Any]],
-    root: pathlib.Path,
-    original_goal: str,
-    rules: list[str],
-    initial_context_paths=None,
-) -> dict[str, Any]:
-    """Add planner DAG/capsule contracts around a specialized pinned compound plan."""
+def _compile_clauses(clauses: list[str], admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path, rules: list[str]) -> dict[str, Any]:
     registry = routable_registry(admissible)
-    raw_actions = compiled.get("controller_actions")
-    if not isinstance(raw_actions, list):
-        raise GoalCompilationFailure("COMPOUND_CONTROLLER_ACTIONS_REQUIRED")
-    actions = [dict(action) for action in raw_actions if isinstance(action, Mapping) and action.get("type") != "finish"]
+    parts, actions, effects = [], [], []
+    accumulated_outputs = []
+    for idx, clause in enumerate(clauses):
+        future = clauses[idx + 1:]
+        sub = compile_goal(clause, admissible, root, context_paths=accumulated_outputs, future_clauses=future)
+        parts.append(sub)
+        actions.extend(_actions_of(sub, registry))
+        effects.extend(e for e in (sub.get("target_effects") or []) if e not in effects)
+        for k, v in (sub.get("inputs") or {}).items():
+            if k.endswith("_path") and _is_output_key(k) and isinstance(v, str):
+                accumulated_outputs.append(v)
     if not actions:
         raise GoalCompilationFailure("GOAL_COMPILATION_NO_EXECUTABLE_CLAUSE")
-    specs = []
-    clauses = list(compiled.get("clauses") or sentence_clauses(original_goal))
-    parts = list(compiled.get("compiled_parts") or [])
-    context_paths = [str(path) for path in initial_context_paths or []]
-    for index, action in enumerate(actions):
-        source_cid = _action_capability_id(action, compiled, registry)
-        if source_cid and source_cid not in registry:
-            raise GoalCompilationFailure("COMPOUND_ACTION_SOURCE_NOT_ADMISSIBLE", source_cid)
-        if source_cid is None and action.get("type") not in COMPOUND_NATIVE_ACTION_TYPES:
-            raise GoalCompilationFailure("COMPOUND_ACTION_SOURCE_UNDECLARED", str(action.get("type")))
-        entry = registry.get(source_cid) if source_cid else None
-        result_fields = (entry.get("result_fields") or []) if isinstance(entry, Mapping) else _native_result_fields(action, [])
-        specs.append({
-            "action": action,
-            "source_capability_id": source_cid,
-            # Specialized pinned compound compilers perform their own literal/structured
-            # grammar checks; the generic token-overlap guard is applied to front-split
-            # capability clauses, not to their internal action lowering.
-            "goal_clause": None,
-            "inputs": {},
-            "context_paths": list(context_paths),
-            "cycle_offset": 0,
-            "step_index": index,
-            "role": "PINNED_COMPOUND_ACTION",
-        })
-        for output_path, _field in _action_output_bindings(action, result_fields):
-            if output_path not in context_paths:
-                context_paths.append(output_path)
-    result = _build_execution_dag(
-        specs,
-        registry,
-        root,
-        original_goal,
-        initial_context_paths=initial_context_paths,
-        clauses=clauses,
-        compiled_parts=parts,
-        rules=rules,
-        compiler_mode="FRONT_COMPOUND_EXECUTION_DAG",
-    )
-    result["source_compiler_mode"] = compiled.get("compiler_mode")
-    result["source_target_effects"] = list(compiled.get("target_effects") or [])
-    output_rules = list((result.get("front_compiler") or {}).get("rules_applied") or [])
-    output_rules.append("F14_PINNED_COMPOUND_PLAN_ROUTED_THROUGH_LIVE_DAG")
-    result["front_compiler"] = {"schema": SCHEMA, "rules_applied": list(dict.fromkeys(output_rules))}
-    return result
-
-
-def _compile_clauses(
-    clauses: list[str],
-    admissible: Mapping[str, Mapping[str, Any]],
-    root: pathlib.Path,
-    rules: list[str],
-    *,
-    original_goal=None,
-    initial_context_paths=None,
-) -> dict[str, Any]:
-    registry = routable_registry(admissible)
-    parts: list[dict[str, Any]] = []
-    step_specs: list[dict[str, Any]] = []
-    context_paths = [str(path) for path in initial_context_paths or []]
-    for clause_index, clause in enumerate(clauses):
-        sub = compile_goal(
-            clause,
-            admissible,
-            root,
-            context_paths=context_paths,
-            future_clauses=clauses[clause_index + 1:],
-        )
-        actions = _actions_of(sub, registry)
-        if not actions:
-            raise GoalCompilationFailure("GOAL_COMPILATION_NO_EXECUTABLE_CLAUSE", str(clause_index))
-        base_cycle = len(step_specs)
-        inputs = _context_inputs_from(sub)
-        part = {
-            "index": clause_index,
-            "subgoal": clause,
-            "mode": sub.get("compiler_mode"),
-            "selected_capability": sub.get("selected_capability"),
-            "inputs": inputs,
-            "output_paths": [],
-            "planner_capability_ids": [],
-        }
-        for local_index, action in enumerate(actions):
-            source_cid = _action_capability_id(action, sub, registry)
-            if source_cid and source_cid not in registry:
-                raise GoalCompilationFailure("COMPOUND_ACTION_SOURCE_NOT_ADMISSIBLE", source_cid)
-            source_entry = registry.get(source_cid) if source_cid else None
-            declared_fields = list(source_entry.get("result_fields") or []) if isinstance(source_entry, Mapping) else []
-            if not source_cid and action.get("type") not in COMPOUND_NATIVE_ACTION_TYPES:
-                raise GoalCompilationFailure("COMPOUND_ACTION_SOURCE_UNDECLARED", str(action.get("type")))
-            spec = {
-                "action": action,
-                "source_capability_id": source_cid,
-                "goal_clause": clause,
-                "inputs": inputs,
-                "context_paths": list(context_paths),
-                "cycle_offset": base_cycle,
-                "step_index": clause_index,
-            }
-            step_specs.append(spec)
-            part["planner_capability_ids"].append(f"front.compound.action.{len(step_specs) - 1}")
-            for output_path, _field in _action_output_bindings(action, declared_fields):
-                if output_path not in part["output_paths"]:
-                    part["output_paths"].append(output_path)
-                if output_path not in context_paths:
-                    context_paths.append(output_path)
-        parts.append(part)
-    full_goal = str(original_goal if original_goal is not None else " ".join(clauses))
-    planned = _build_execution_dag(
-        step_specs,
-        registry,
-        root,
-        full_goal,
-        initial_context_paths=initial_context_paths,
-        clauses=clauses,
-        compiled_parts=parts,
-        rules=rules,
-        compiler_mode="FRONT_COMPOUND_EXECUTION_DAG",
-        target_effects=None,
-    )
-    return planned
+    rules.append("F5_COMPOUND_SENTENCES_COMPILED_SEPARATELY")
+    return {
+        "schema": "PROJECT_BRAIN_COMPILED_CAPABILITY_PROBLEM_V1",
+        "compiler_mode": "FRONT_COMPOUND_SENTENCES",
+        "controller_actions": actions + [{"type": "finish", "args": {"summary": "COMPOUND_GOAL_COMPLETE"}}],
+        "compiled_parts": parts,
+        "target_effects": effects,
+        "clauses": list(clauses),
+        "front_compiler": {"schema": SCHEMA, "rules_applied": list(rules)},
+    }
 
 
 def compile_goal(
-    goal: str,
-    admissible: Mapping[str, Mapping[str, Any]],
-    root: pathlib.Path,
-    *,
-    context_paths=None,
-    future_clauses=None,
+    goal: str, admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path,
+    context_paths=None, future_clauses=None,
 ) -> dict[str, Any]:
-    """Front compile, optionally forwarding artifacts produced by earlier clauses."""
+    """Front compile. Returns the pinned compiler's shape plus ``front_compiler`` metadata."""
     rules: list[str] = []
     original = str(goal or "").strip()
     text = normalize_goal(original)
@@ -938,38 +444,17 @@ def compile_goal(
     except GoalCompilationFailure as exc:
         compiled, pinned_failure = None, exc
 
-    clauses = sentence_clauses(text)
-    # F5: a literal route captured several clauses; compile every clause and preserve
-    # the producer paths instead of allowing a sentence-final literal to swallow them.
-    if compiled is not None and compiled.get("compiler_mode") in _LITERAL_MODES and len(clauses) >= 2:
-        return _compile_clauses(
-            clauses, admissible, root, rules,
-            original_goal=text,
-            initial_context_paths=context_paths,
-        )
+    # F5: a literal route captured several sentences -> compile sentence by sentence
+    if compiled is not None and compiled.get("compiler_mode") in _LITERAL_MODES:
+        clauses = sentence_clauses(text)
+        if len(clauses) >= 2:
+            return _compile_clauses(clauses, admissible, root, rules)
 
     selected = (compiled or {}).get("selected_capability") if compiled else None
     single_shape = bool(compiled) and compiled.get("compiler_mode") == "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH" and selected
 
-    # Any ordinary compound/plain route is decomposed before a whole-goal token match
-    # can hide or swallow later actions. Purpose-built controller plans emitted by the
-    # pinned compiler retain their specialized lowering below.
-    if len(clauses) >= 2 and (compiled is None or single_shape or compiled.get("compiler_mode") in _LITERAL_MODES):
-        return _compile_clauses(
-            clauses, admissible, root, rules,
-            original_goal=text,
-            initial_context_paths=context_paths,
-        )
-    if (
-        compiled is not None
-        and len(clauses) >= 2
-        and isinstance(compiled.get("controller_actions"), list)
-        and compiled.get("compiler_mode") != "FRONT_COMPOUND_EXECUTION_DAG"
-    ):
-        return _plan_existing_compound(compiled, admissible, root, text, rules, context_paths)
-
     if single_shape or compiled is None:
-        future = _future_artifacts(text, root, context_paths)
+        future = _future_artifacts(text, root)
         # F3: a goal that names a file to be produced is served by a tool that can write a file
         preferred = [c for c in ranked if _output_keys(registry[c[2]])] if future else []
         if future and preferred:
@@ -979,11 +464,7 @@ def compile_goal(
         if best is not None and selected != best[2]:
             entry = registry[best[2]]
             try:
-                inputs = bind_all_inputs(
-                    text, entry, root,
-                    context_paths=context_paths,
-                    future_clauses=future_clauses,
-                )
+                inputs = bind_all_inputs(text, entry, root, context_paths=context_paths, future_clauses=future_clauses)
             except GoalCompilationFailure as exc:
                 best_error = exc
             else:
@@ -1005,12 +486,7 @@ def compile_goal(
         raise pinned_failure  # type: ignore[misc]
 
     if single_shape and isinstance(compiled.get("inputs"), dict):
-        if context_paths:
-            for key in input_keys(registry[selected]):
-                forwarded = _context_path_for_input(key, context_paths)
-                if forwarded is not None:
-                    compiled["inputs"][key] = forwarded
-        if repair_output_collisions(text, compiled["inputs"], root, context_paths=context_paths):
+        if repair_output_collisions(text, compiled["inputs"], root):
             rules.append("F10_OUTPUT_NEVER_AN_INPUT_FILE")
             for action in compiled.get("actions") or []:
                 args = action.get("args") if isinstance(action, dict) else None
