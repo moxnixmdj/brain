@@ -28,6 +28,7 @@ jobs:
           python-version: '3.11'
       - name: Verify permanent transfer governance
         run: |
+          python -m pip install pytest
           python canonical/runtime/verify_capability_transfer_static_governance_v1.py
           python canonical/runtime/verify_external_cognition_runtime_lock_v1.py
           python canonical/runtime/runtime_cognition_credit_guard_v1.py
