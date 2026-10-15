@@ -1013,6 +1013,19 @@
         },
         "producer_independent": true,
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-LIBRARY-BINDING-001__RECEIPT.json"
+      },
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "docx.document.verify.ooxml",
+          "path": "${input.document_path}",
+          "expected": "${input.expected_structure}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "verified",
+          "value": true
+        }
       }
     },
     "http.json.fetch_from_state": {
@@ -3367,7 +3380,8 @@
       "action_template": {
         "type": "invoke_capability",
         "args": {
-          "capability_id": "terminal.kstar.root.assess.stdlib"
+          "capability_id": "terminal.kstar.root.assess.stdlib",
+          "assessment_scope": "${input.assessment_scope}"
         },
         "expect": {
           "type": "field_equals",
@@ -4722,6 +4736,19 @@
         "model_dependency_count": 0,
         "external_general_purpose_model_runtime_dependency_count": 0,
         "incremental_spend_usd": 0
+      },
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "task.acceptance.objective.lossless.v1",
+          "raw_task_text": "${input.raw_task_text}",
+          "candidate_response": "${input.candidate_response}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
       }
     },
     "python.repository.acceptance.measure.v1": {
