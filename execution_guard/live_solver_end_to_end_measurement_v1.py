@@ -38,7 +38,7 @@ import sys
 import tarfile
 import time
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any, Callable, Mapping
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -514,6 +514,9 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--entries", default="old,new", help="comma list of entries to measure: old,new")
     ap.add_argument("--out", default=None, help="receipt path (default: print only)")
     ap.add_argument("--keep", action="store_true", help="keep generated workspaces")
+    ap.add_argument("--summary-md", default=None, help="write a plain-language markdown summary here (heartbeat job summary)")
+    ap.add_argument("--require-all-alive", action="store_true",
+                    help="exit 1 unless, through the new entry, every measured in-scope family passes 100%%, every out-of-scope goal fails closed, and every routable capability is reachable")
     ns = ap.parse_args(argv)
     receipt = run(ns.seed, ns.per_family, ns.oos, [x.strip() for x in ns.entries.split(",") if x.strip()], ns.keep)
     text = json.dumps(receipt, indent=2, sort_keys=True) + "\n"
@@ -523,13 +526,61 @@ def main(argv: list[str] | None = None) -> int:
                    "in_scope_families_all_pass": f'{v["in_scope_families_all_pass"]}/{v["in_scope_families_measured"]}',
                    "out_of_scope_fail_closed_rate": v["out_of_scope_fail_closed_rate"]} for k, v in receipt["measurements"].items()}
     live = receipt["tool_liveness"]
-    print(json.dumps({"seed": receipt["seed"], "replay": receipt["replay"], "entries": summary,
+    if ns.summary_md:
+        Path(ns.summary_md).write_text(summary_markdown(receipt), encoding="utf-8")
+    verdict_errors = alive_errors(receipt)
+    print(json.dumps({"seed": receipt["seed"], "replay": receipt["replay"], "entries": summary, "alive_errors": verdict_errors,
                       "tools": {"total": live["capabilities_total"], "adapter_missing": len(live["adapter_missing"]),
                                 "adapter_import_failed": len(live["adapter_import_failed"]),
                                 "external_dependency_missing_here": len(live["external_dependency_missing_here"]),
                                 "zero_input_capabilities": live["zero_input_capabilities"]},
                       "reachability_from_one_entry": receipt["reachability_from_one_entry"]["counts"]}, indent=2))
+    if ns.require_all_alive and verdict_errors:
+        return 1
     return 0
+
+
+def alive_errors(receipt: Mapping[str, Any]) -> list[str]:
+    """The heartbeat's definition of alive, through the one entry only."""
+    errors = []
+    new = (receipt.get("measurements") or {}).get("new")
+    if not isinstance(new, Mapping):
+        return ["NEW_ENTRY_NOT_MEASURED"]
+    for family, row in sorted((new.get("families") or {}).items()):
+        if family == "OUT_OF_SCOPE_MUST_FAIL_CLOSED":
+            continue
+        if row.get("oracle_pass") != row.get("instances"):
+            errors.append(f"FAMILY_NOT_FULLY_PASSING:{family}:{row.get('oracle_pass')}/{row.get('instances')}")
+    if new.get("out_of_scope_fail_closed_rate") != 1.0:
+        errors.append(f"OUT_OF_SCOPE_NOT_FAIL_CLOSED:{new.get('out_of_scope_fail_closed_rate')}")
+    counts = (receipt.get("reachability_from_one_entry") or {}).get("counts") or {}
+    for state in ("NOT_REACHABLE", "ROUTED_ELSEWHERE"):
+        if counts.get(state):
+            errors.append(f"CAPABILITY_{state}:{counts[state]}")
+    return errors
+
+
+def summary_markdown(receipt: Mapping[str, Any]) -> str:
+    m = receipt["measurements"]; live = receipt["tool_liveness"]; reach = receipt["reachability_from_one_entry"]
+    errors = alive_errors(receipt)
+    lines = ["# Live Brain heartbeat", "",
+             f"**Verdict: {'ALIVE' if not errors else 'NOT ALIVE'}** - seed {receipt['seed']}, python {receipt['python']}, platform {receipt['machine']['platform']}", ""]
+    if errors:
+        lines += ["Why not alive:", ""] + [f"- `{e}`" for e in errors] + [""]
+    lines += ["| Fresh-goal family | " + " | ".join(m.keys()) + " |", "|---|" + "---|" * len(m)]
+    families = sorted({f for e in m.values() for f in e["families"]})
+    for f in families:
+        lines.append(f"| {f} | " + " | ".join(f"{m[e]['families'][f]['oracle_pass']}/{m[e]['families'][f]['instances']}" if f in m[e]["families"] else "-" for e in m) + " |")
+    lines += ["", "Reachability from the one entry: " + ", ".join(f"{k} {v}" for k, v in sorted(reach["counts"].items())) + f" (of {reach['capabilities_total']})", ""]
+    not_runnable = sorted(set(live["adapter_import_failed"]) | set(live["external_dependency_missing_here"]) | set(live["adapter_missing"]))
+    lines += [f"Tools runnable on this machine: {live['capabilities_total'] - len(not_runnable)} of {live['capabilities_total']}", ""]
+    if not_runnable:
+        lines += ["Not runnable here:", ""] + [f"- `{cid}`" for cid in not_runnable] + [""]
+    rows = [r for r in reach["rows"] if r["state"] != "REACHED_AND_BOUND"]
+    if rows:
+        lines += ["Capabilities not reached from a sentence (or blocked by design):", ""] + [f"- `{r['capability_id']}`: {r['state']} - {r['detail']}" for r in rows] + [""]
+    lines += ["Families not measured here: " + ", ".join(sorted(receipt["families_not_measured_here"])), "", "Authority NONE. Credit 0. Nothing here is a capability claim."]
+    return "\n".join(lines) + "\n"
 
 
 if __name__ == "__main__":
