@@ -236,3 +236,19 @@ def test_environment_blockers_are_excused_only_when_asked():
     assert h.alive_errors(rec, environment_blockers_are_failures=True) == ["FAMILY_NOT_FULLY_PASSING:JQ_QUERY:0/6"]
     partial = _receipt({"JQ_QUERY": {"instances": 6, "oracle_pass": 3, "environment_blocked_here": 2}})
     assert h.alive_errors(partial) == ["FAMILY_NOT_FULLY_PASSING:JQ_QUERY:3/6"]
+
+
+def test_annotation_lines_carry_verdict_counts_and_reasons():
+    rec = _receipt({"JQ_QUERY": {"instances": 6, "oracle_pass": 0, "environment_blocked_here": 6},
+                    "SQLITE_FROM_RECORDS": {"instances": 6, "oracle_pass": 6, "environment_blocked_here": 0}})
+    rec["measurements"]["new"]["failures_sample"] = [
+        {"family": "JQ_QUERY", "status": "FAIL__X", "why": "ENVIRONMENT_BLOCKED_HERE:BOUND_APT_METADATA_NOT_FOUND", "goal": "Run jq\nline2"}]
+    excused = h.annotation_lines(rec)
+    assert excused[0].startswith("::notice title=Live Brain heartbeat ALIVE::")
+    assert "JQ_QUERY 0/6 (env-blocked 6)" in excused[0] and "SQLITE_FROM_RECORDS 6/6" in excused[0]
+    assert not any(l.startswith("::error") for l in excused)
+    strict = h.annotation_lines(rec, environment_blockers_are_failures=True)
+    assert strict[0].startswith("::notice title=Live Brain heartbeat NOT ALIVE::")
+    assert "::error title=NOT ALIVE::FAMILY_NOT_FULLY_PASSING:JQ_QUERY:0/6" in strict
+    warning = [l for l in strict if l.startswith("::warning title=first failure in JQ_QUERY::")]
+    assert len(warning) == 1 and "%0A" in warning[0] and "\n" not in warning[0]

@@ -534,7 +534,14 @@ def main(argv: list[str] | None = None) -> int:
                     help="exit 1 unless, through the new entry, every measured in-scope family passes 100%%, every out-of-scope goal fails closed, and every routable capability is reachable")
     ap.add_argument("--environment-blockers-are-failures", action="store_true",
                     help="count instances blocked by missing apt metadata / refused pip installs as failures (the public runner installs everything)")
+    ap.add_argument("--annotate", metavar="RECEIPT_JSON",
+                    help="print GitHub workflow-command annotations (::error / ::warning / ::notice) for an existing receipt and exit; no measurement is run")
     ns = ap.parse_args(argv)
+    if ns.annotate:
+        receipt = json.loads(Path(ns.annotate).read_text(encoding="utf-8"))
+        for line in annotation_lines(receipt, environment_blockers_are_failures=ns.environment_blockers_are_failures):
+            print(line)
+        return 0
     receipt = run(ns.seed, ns.per_family, ns.oos, [x.strip() for x in ns.entries.split(",") if x.strip()], ns.keep)
     text = json.dumps(receipt, indent=2, sort_keys=True) + "\n"
     if ns.out:
@@ -594,6 +601,40 @@ def alive_errors(receipt: Mapping[str, Any], environment_blockers_are_failures: 
         if counts.get(state):
             errors.append(f"CAPABILITY_{state}:{counts[state]}")
     return errors
+
+
+def _wc(text: str) -> str:
+    """Escape a workflow-command message (GitHub decodes %0A as newline, %0D, %25)."""
+    return str(text).replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+
+
+def annotation_lines(receipt: Mapping[str, Any], environment_blockers_are_failures: bool = False) -> list[str]:
+    """GitHub check annotations carrying the verdict, every family count, and the first failure reasons.
+
+    Annotations are readable through the checks API, unlike job logs and artifacts, so a NOT ALIVE
+    verdict explains itself from outside the runner."""
+    errors = alive_errors(receipt, environment_blockers_are_failures=environment_blockers_are_failures)
+    m = receipt.get("measurements") or {}
+    new = m.get("new") or {}
+    rows = []
+    for fam, row in sorted((new.get("families") or {}).items()):
+        env = row.get("environment_blocked_here") or 0
+        rows.append(f"{fam} {row.get('oracle_pass')}/{row.get('instances')}" + (f" (env-blocked {env})" if env else ""))
+    lines = []
+    verdict = "ALIVE" if not errors else "NOT ALIVE"
+    lines.append(f"::notice title=Live Brain heartbeat {verdict}::" + _wc("; ".join(rows) or "no families measured"))
+    for err in errors[:8]:
+        lines.append("::error title=NOT ALIVE::" + _wc(err))
+    seen: set[str] = set()
+    for f in new.get("failures_sample") or []:
+        fam = str(f.get("family"))
+        if fam in seen:
+            continue
+        seen.add(fam)
+        if len(seen) > 8:
+            break
+        lines.append(f"::warning title=first failure in {fam}::" + _wc(f"{f.get('status')} | {f.get('why')} | goal: {f.get('goal')}")[:1000])
+    return lines
 
 
 def summary_markdown(receipt: Mapping[str, Any], environment_blockers_are_failures: bool = False) -> str:

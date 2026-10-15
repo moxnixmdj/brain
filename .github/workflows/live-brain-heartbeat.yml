@@ -52,6 +52,8 @@ jobs:
         if: always()
         run: |
           if [ -f heartbeat_out/SUMMARY.md ]; then cat heartbeat_out/SUMMARY.md >> "$GITHUB_STEP_SUMMARY"; else echo "heartbeat produced no summary" >> "$GITHUB_STEP_SUMMARY"; fi
+          # the same verdict as check annotations, so the reasons are readable from the PR and the API without opening logs
+          python3 execution_guard/live_solver_end_to_end_measurement_v1.py --annotate heartbeat_out/LIVE_BRAIN_HEARTBEAT_RECEIPT.json --environment-blockers-are-failures || true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
