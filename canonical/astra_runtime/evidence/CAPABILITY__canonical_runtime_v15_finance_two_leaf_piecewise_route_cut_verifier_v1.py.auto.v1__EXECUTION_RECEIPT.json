@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/v15_finance_two_leaf_piecewise_route_cut_verifier_v1.py.auto.v1",
+ "elapsed_ms": 27.027,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/v15_finance_two_leaf_piecewise_route_cut_verifier_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/v15_finance_two_leaf_piecewise_route_cut_verifier_v1.py",
+ "module_sha256": "2aef3e1021c88ace390d74dd8d2894e8e3f46efe70398b4504151ffc090e6b6f",
+ "observed": {
+  "pass": true,
+  "returncode": 0
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_v15_finance_two_leaf_piecewise_route_cut_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 5,
+ "result_sha256": "c806de97a5447a257390c2c640e3e772bbc96d2ed2ed7be24e1eaf90936c637a",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

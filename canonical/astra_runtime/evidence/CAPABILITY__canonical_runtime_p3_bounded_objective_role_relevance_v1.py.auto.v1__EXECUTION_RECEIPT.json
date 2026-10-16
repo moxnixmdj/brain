@@ -1,0 +1,27 @@
+{
+ "capability_id": "canonical/runtime/p3_bounded_objective_role_relevance_v1.py.auto.v1",
+ "elapsed_ms": 0.252,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/p3_bounded_objective_role_relevance_v1.py",
+ "module_sha256": "021069cbdb1694f5193a7f6a49885d077b3889de8fc0153b9f0622a29b4b4568",
+ "observed": {
+  "pass": false,
+  "status": "FAIL_CLOSED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_bounded_objective_role_relevance_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 12,
+ "result_sha256": "e599b2a02a2e9cfb541304c6c23a395dd195b9b1cc9b75a4e6977d61e955f6bd",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

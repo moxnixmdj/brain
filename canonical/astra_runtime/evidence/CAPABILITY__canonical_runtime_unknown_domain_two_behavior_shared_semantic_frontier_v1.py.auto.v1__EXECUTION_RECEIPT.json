@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/unknown_domain_two_behavior_shared_semantic_frontier_v1.py.auto.v1",
+ "elapsed_ms": 39.781,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/unknown_domain_two_behavior_shared_semantic_frontier_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/unknown_domain_two_behavior_shared_semantic_frontier_v1.py",
+ "module_sha256": "0b1f74215c4883ea89ab3e029e3359d667d7c104792d4ebaed05d160ee09fc24",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__TWO_UNKNOWN_DOMAIN_BEHAVIOR_OUTPUTS_PROJECT_TO_ONE_SHARED_SEMANTIC_FRONTIER__TWO_SEPARATE_ACCEPTANCE_OBLIGATIONS_REMAIN__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_unknown_domain_two_behavior_shared_semantic_frontier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 13,
+ "result_sha256": "7eae183d297d07b0c770bc2f43566b615bebcea527c10041b53350e74b80bcae",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

@@ -1,0 +1,24 @@
+{
+ "capability_id": "canonical/runtime/livebench_if_public_description_inverter_v1.py.auto.v1",
+ "elapsed_ms": 9.024,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/livebench_if_public_description_inverter_v1.py",
+ "module_sha256": "d2093827e4ec432b062bff7b1b21fe5d664d6d773a42ec6ca137a0cb2c6629f0",
+ "observed": {},
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_if_public_description_inverter_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 4,
+ "result_sha256": "f036bae8d17d6e85b2b8a1d981b671d91fc08fc866c9f9fa207ccfb9e86a790e",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

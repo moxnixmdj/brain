@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/k6_decision_refinement_compiler_v1.py.auto.v1",
+ "elapsed_ms": 58.152,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/k6_decision_refinement_compiler_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/k6_decision_refinement_compiler_v1.py",
+ "module_sha256": "90138382f8d1391a2ef053c200ea56b5dd73aaa91a62df04db4df20e4577cfc7",
+ "observed": {
+  "returncode": 0,
+  "status": "SUFFICIENT_DECISION_PARTITION_FOUND"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_k6_decision_refinement_compiler_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 6,
+ "result_sha256": "3ba5a03d2d3e1048f5bbfd907d078fac2758524b655d05a91f56e056f988a312",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

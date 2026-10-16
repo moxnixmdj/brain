@@ -10,10 +10,16 @@ instead of guessed.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 from time import perf_counter_ns
-from typing import Any, Mapping
+from typing import Any
+# isinstance(x, typing.Mapping) routes every check through typing's python-level
+# __instancecheck__ (measured: 6,468 calls, 21 ms of a 39 ms registry load).
+# collections.abc.Mapping is the C-implemented ABC the same objects register with, so
+# the checks stay identical and stop being the dominant cost.
+from collections.abc import Mapping
 
 from canonical.runtime.capability_planner import PlanningFailure, plan_capabilities
 from canonical.runtime import astra_runtime, goal_compiler, goal_front_compiler_v1
@@ -46,7 +52,117 @@ def _tokens(value: Any, label: str, *, allow_empty: bool = True) -> list[str]:
     return out
 
 
+RECEIPT_SCHEMA = "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+VERIFICATION_SCHEMA = "PROJECT_BRAIN_CAPABILITY_INDEPENDENT_VERIFICATION_V1"
+PROJECTION = ROOT / "canonical/runtime/CAPABILITY_RECEIPT_PROJECTION_V1.json"
+
+
+def _sha256_of(path: Path) -> str:
+    digest = hashlib.sha256()
+    with open(path, "rb") as fh:
+        for chunk in iter(lambda: fh.read(1 << 20), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _receipt_admits(entry: Mapping[str, Any], root: Path) -> bool:
+    """Admit a capability on independently reproduced execution evidence — never on a string.
+
+    A `status` field is writable by any program, which is why the extended registry could be
+    mass-flipped to `VERIFIED_BOUND_CAPABILITY` unnoticed.  A receipt alone is not enough
+    either: a receipt this project issues to itself is the SESSION_E0A256F8 failure mode
+    ("produced 464 self-verified receipts").  So admission needs BOTH:
+
+      1. a producer receipt for *this* module at *this* content hash, and
+      2. an independent verification record — a DIFFERENT identity re-ran it, the observed
+         result hash matched, and the run reference carries a platform-attested
+         `github_run_id`.
+
+    (2) is why only a real runner can mint admission, and why nothing admitted here is a
+    status flip. Deliberately ADDITIVE: it never demotes anything.
+    """
+    verification = entry.get("verification")
+    if not isinstance(verification, Mapping):
+        return False
+    receipt_path = verification.get("receipt_path")
+    source = entry.get("source")
+    module_path = (source or {}).get("path") if isinstance(source, Mapping) else None
+    if not isinstance(receipt_path, str) or not isinstance(module_path, str):
+        return False
+    # Imported only now: most of the 2,309 extended entries carry no evidence at all and
+    # return above, so they should not pay an import statement each (2,612 imports/load).
+    from canonical.runtime import capability_receipt_lane_v1 as lane
+
+    receipt_file, module_file = root / receipt_path, root / module_path
+
+    # Cheap gate FIRST.  Independent verification is the rare case; hashing every module on
+    # every load cost 20.5 ms/call (measured) versus 8.4 ms when this check short-circuits.
+    verification_file = root / lane.verification_path_for(receipt_path)
+    if not verification_file.is_file():
+        return False
+    if not receipt_file.is_file() or not module_file.is_file():
+        return False
+    try:
+        receipt = json.loads(receipt_file.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return False
+    if not isinstance(receipt, Mapping) or receipt.get("schema") != RECEIPT_SCHEMA:
+        return False
+    if receipt.get("module_path") != module_path:
+        return False
+    if int(receipt.get("model_dependency_count", 1) or 0) != 0:
+        return False
+    if _sha256_of(module_file) != receipt.get("module_sha256"):
+        return False
+
+    try:
+        record = json.loads(verification_file.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return False
+    if not isinstance(record, Mapping) or record.get("schema") != VERIFICATION_SCHEMA:
+        return False
+    if record.get("reproduced") is not True:
+        return False
+    if record.get("module_sha256") != receipt.get("module_sha256"):
+        return False
+    if record.get("verifier_result_sha256") != receipt.get("result_sha256"):
+        return False
+    verifier = str(record.get("independent_verifier") or "")
+    if not verifier or verifier == str(receipt.get("ran_by") or ""):
+        return False
+    run_reference = record.get("independent_run_reference")
+    if not isinstance(run_reference, Mapping) or not run_reference.get("github_run_id"):
+        return False
+    # And the reference must carry a GitHub-SIGNED OIDC attestation, not a number a local
+    # process typed. `brain-trusted-oidc-receipt.yml` is this repo's own idiom for it:
+    # `id-token: write` yields a token whose `iss` is GitHub's issuer and whose claims name
+    # the repository, workflow and run that produced it.
+    claims = run_reference.get("oidc_claims")
+    if not isinstance(claims, Mapping):
+        return False
+    if claims.get("iss") != "https://token.actions.githubusercontent.com":
+        return False
+    return bool(claims.get("repository"))
+
+
+_REGISTRY_CACHE: dict[tuple[int, int, int], dict[str, Mapping[str, Any]]] = {}
+
+
 def load_verified_registry(include_extended: bool = True) -> dict[str, Mapping[str, Any]]:
+    # Parsing 1.06 MB of JSON on every solve() was the dominant cost (864 KB of it inventory
+    # that is ~98% filtered away).  Memoise on the mtimes that can change the answer.
+    # The evidence directory's mtime is in the token because verification records appear
+    # there long after the projection is written: without it the cache returned a stale
+    # 67 after a record was stamped in-process. One stat, not a directory scan.
+    evidence_dir = ROOT / "canonical/astra_runtime/evidence"
+    token = (REGISTRY.stat().st_mtime_ns,
+             (ROOT / "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json").stat().st_mtime_ns
+             if (ROOT / "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json").is_file() else 0,
+             PROJECTION.stat().st_mtime_ns if PROJECTION.is_file() else 0,
+             evidence_dir.stat().st_mtime_ns if evidence_dir.is_dir() else 0)
+    if include_extended and token in _REGISTRY_CACHE:
+        return dict(_REGISTRY_CACHE[token])
+
     doc = json.loads(REGISTRY.read_text(encoding="utf-8"))
     if doc.get("schema") != "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1":
         raise LiveBrainError("BOUND_CAPABILITY_REGISTRY_SCHEMA_INVALID")
@@ -75,7 +191,14 @@ def load_verified_registry(include_extended: bool = True) -> dict[str, Mapping[s
             for cid, entry in extended.items():
                 if not isinstance(cid, str) or not cid or not isinstance(entry, dict):
                     raise ValueError("invalid extended entry")
-                if cid in out or entry.get("status") != "VERIFIED_BOUND_CAPABILITY":
+                if cid in out:
+                    continue
+                if entry.get("status") != "VERIFIED_BOUND_CAPABILITY":
+                    # A receipt is execution evidence and can admit on its own; a status string
+                    # cannot.  Entries admitted here keep their inventory status, so writing a
+                    # status still grants nothing.
+                    if _receipt_admits(entry, ROOT):
+                        out[cid] = {**entry, "capability_id": cid, "receipt_backed": True}
                     continue
                 verification = entry.get("verification")
                 if not isinstance(verification, dict) or verification.get("verified") is not True:
@@ -86,8 +209,26 @@ def load_verified_registry(include_extended: bool = True) -> dict[str, Mapping[s
                 out[cid] = entry
         except (OSError, ValueError, TypeError) as exc:
             raise LiveBrainError("EXTENDED_CAPABILITY_REGISTRY_INVALID") from exc
+
+        # Third source: receipt-backed capabilities.  The projection is DERIVED evidence
+        # (execution + independent reproduction), not a declaration, so admitting from it
+        # adds no registry entry and therefore declares no new capability.  An entry here
+        # keeps status RECEIPT_BACKED_FROM_PROJECTION and is admitted only if the
+        # independent-verification gate passes.
+        if PROJECTION.is_file():
+            try:
+                projection = json.loads(PROJECTION.read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                projection = {}
+            for cid, entry in (projection.get("entries") or {}).items():
+                if cid in out or not isinstance(entry, dict):
+                    continue
+                if _receipt_admits(entry, ROOT):
+                    out[cid] = {**entry, "capability_id": cid, "capability_source": "receipt_projection"}
     if not out:
         raise LiveBrainError("NO_VERIFIED_ZERO_SPEND_CAPABILITIES")
+    if include_extended:
+        _REGISTRY_CACHE[token] = dict(out)
     return out
 
 

@@ -1,0 +1,26 @@
+{
+ "capability_id": "canonical/runtime/seed_preserving_instruction_postprocessor_v1.py.auto.v1",
+ "elapsed_ms": 0.103,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/seed_preserving_instruction_postprocessor_v1.py",
+ "module_sha256": "e858d1645008f8282086eb9469c48cf6437029b7932246ee2e01ae2690488d54",
+ "observed": {
+  "status": "FAIL_CLOSED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_seed_preserving_instruction_postprocessor_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 8,
+ "result_sha256": "9e5350ff2abd2cebf33e402642f2141c53cea67d8d7a8ea66ba9072b05b1d1b2",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

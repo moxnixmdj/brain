@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/five_primitive_role_single_semantic_frontier_v1.py.auto.v1",
+ "elapsed_ms": 48.421,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/five_primitive_role_single_semantic_frontier_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/five_primitive_role_single_semantic_frontier_v1.py",
+ "module_sha256": "6d8726009a3b131aa16cbc0d5ac5f3905d2e569888eedcbdb43be2ef93073d38",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__CONDITIONAL_ON_C__5_PRIMITIVE_ESCAPE_ROLES_PROJECT_TO_ONE_SHARED_SEMANTIC_CERTIFICATE_FRONTIER__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_five_primitive_role_single_semantic_frontier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 16,
+ "result_sha256": "e451d0534ef3701a017ac631e486f57905ea6399e64ef8dade9dd050d6f9b4e2",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
