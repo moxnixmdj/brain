@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/professional_quality_semantic_shared_blocker_v1.py.auto.v1",
+ "elapsed_ms": 31.03,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/professional_quality_semantic_shared_blocker_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/professional_quality_semantic_shared_blocker_v1.py",
+ "module_sha256": "578359e8cd82ea2c414e8d8c0735dd9b94ab4c71ce106d42e0378ec581b16e33",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__12_SEMANTIC_LEAVES_SHARE_ONE_ACCEPTANCE__CURRENT_80_CHALLENGE_CATALOG_EXPLICITLY_DISCLAIMS_COMPLETENESS__CATALOG_ALONE_CANNOT_CLOSE_SEMANTIC_PROPERTY_TRUTH"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_semantic_shared_blocker_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 23,
+ "result_sha256": "305d047d4621494f634f17efdf08e11958e038bb49c9705aa0947c3848f23442",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

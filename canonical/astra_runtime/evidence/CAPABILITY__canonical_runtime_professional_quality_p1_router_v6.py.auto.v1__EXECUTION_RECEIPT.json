@@ -1,0 +1,26 @@
+{
+ "capability_id": "canonical/runtime/professional_quality_p1_router_v6.py.auto.v1",
+ "elapsed_ms": 0.569,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/professional_quality_p1_router_v6.py",
+ "module_sha256": "15499aa7d71d6cd5ae34a256d79ce96f21d854f36e6ae907dc847fa336cd1e41",
+ "observed": {
+  "status": "ABSTAIN__P1_AUTHENTICATED_TARGET_REQUIRED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_p1_router_v6.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 14,
+ "result_sha256": "20250e5747b52f078c9036f47431976c8f00270c2a441fa2e019afd4a50a0402",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

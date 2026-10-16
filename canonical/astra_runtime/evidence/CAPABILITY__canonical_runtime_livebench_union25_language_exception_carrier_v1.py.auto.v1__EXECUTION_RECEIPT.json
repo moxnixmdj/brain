@@ -1,0 +1,24 @@
+{
+ "capability_id": "canonical/runtime/livebench_union25_language_exception_carrier_v1.py.auto.v1",
+ "elapsed_ms": 1.05,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/livebench_union25_language_exception_carrier_v1.py",
+ "module_sha256": "352ece5bb336160435ceebc4f87ae1eb40d45317ad0e62ae578f91e41a104a13",
+ "observed": {},
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_language_exception_carrier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 2,
+ "result_sha256": "72e84ffa17a0f487984245c0f2690497c338d30531fe8ead892c3e0494344252",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

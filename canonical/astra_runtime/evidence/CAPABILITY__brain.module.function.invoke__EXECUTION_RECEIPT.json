@@ -1,0 +1,28 @@
+{
+ "capability_id": "brain.module.function.invoke",
+ "elapsed_ms": 204.455,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "kind": "contract",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bound_capabilities/brain_module_invoke_v1.py",
+ "module_sha256": "366bd7e909fa2eecb611fd1ad0119c3e6ec9f01d0103fdde997d78068e63da1d",
+ "observed": {
+  "pass": true,
+  "status": "MODULE_FUNCTION_INVOKED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af-brain",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__brain.module.function.invoke__EXECUTION_RECEIPT.json",
+ "result_key_count": 14,
+ "result_sha256": "cde118f98e71246f3e461ab134a8f4a56bb083af707feedb12339ce3c178881a",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

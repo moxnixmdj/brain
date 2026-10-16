@@ -1,0 +1,31 @@
+{
+ "capability_id": "canonical/runtime/professional_quality_r2_root_subject_binding_verify_v2.py.auto.v1",
+ "elapsed_ms": 38.566,
+ "independent_run_reference": {
+  "github_run_id": 38970106345,
+  "oidc_claims": {
+   "actor": "moxnixmdj",
+   "aud": "https://github.com/moxnixmdj/brain",
+   "event_name": "pull_request",
+   "head_ref": "arena/120f25af-brain",
+   "iss": "https://token.actions.githubusercontent.com",
+   "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/pull/4725/merge",
+   "jti": "6e5731b4-a0a7-42cb-b9c7-a02256b62c6c",
+   "repository": "moxnixmdj/brain",
+   "repository_id": "1364778274",
+   "run_attempt": "1",
+   "run_id": "38970106345",
+   "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/pull/4725/merge"
+  }
+ },
+ "independent_verifier": "github-actions:moxnixmdj/brain",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/professional_quality_r2_root_subject_binding_verify_v2.py",
+ "module_sha256": "1a5565f11b6015b254ffb60ac90d09becd7103de78a8c10b87e7f288795910d3",
+ "producer_ran_by": "local-session",
+ "producer_receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_r2_root_subject_binding_verify_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+ "producer_result_sha256": "cf723b4c29ce4cc20e16cd6db81cd4f564cabe3f120e68b395b1a0c8c43c743e",
+ "reproduced": true,
+ "schema": "PROJECT_BRAIN_CAPABILITY_INDEPENDENT_VERIFICATION_V1",
+ "verifier_result_sha256": "cf723b4c29ce4cc20e16cd6db81cd4f564cabe3f120e68b395b1a0c8c43c743e"
+}

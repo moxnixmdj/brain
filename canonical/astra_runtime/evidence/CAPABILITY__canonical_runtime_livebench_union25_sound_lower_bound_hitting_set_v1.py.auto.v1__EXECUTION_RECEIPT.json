@@ -1,0 +1,26 @@
+{
+ "capability_id": "canonical/runtime/livebench_union25_sound_lower_bound_hitting_set_v1.py.auto.v1",
+ "elapsed_ms": 0.358,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/livebench_union25_sound_lower_bound_hitting_set_v1.py",
+ "module_sha256": "e66967dd58543e736e7c97c3b19e2de02cb679467b2128666cf36b319b1263bb",
+ "observed": {
+  "status": "FAIL_CLOSED__POINTWISE_OPTIMALITY_NOT_PROVED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_sound_lower_bound_hitting_set_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 25,
+ "result_sha256": "7a8eee05b7643f205fec853998c95ea4e7e777f71db6443e22baf6a343033d68",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
