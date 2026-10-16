@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/bytes_sequence_characteristic_set_v1.py.auto.v1",
+ "elapsed_ms": 200.805,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/bytes_sequence_characteristic_set_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bytes_sequence_characteristic_set_v1.py",
+ "module_sha256": "dc0d06275bbe0b84513df7d6a200a0c199edfd8d9de7478de3eb404addc9ca32",
+ "observed": {
+  "pass": true,
+  "returncode": 0
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_sequence_characteristic_set_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 10,
+ "result_sha256": "b7a17b8184436ab903f2e308cb85ef2350ab043098ccbeec8bb9ca84e073a83a",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

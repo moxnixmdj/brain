@@ -47,10 +47,12 @@ import importlib.util
 import json
 import os
 import platform
+import shutil
 import signal
+import subprocess
 import sys
 import time
-from typing import Any
+from typing import Any, Mapping
 
 SCHEMA = "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
 VERIFICATION_SCHEMA = "PROJECT_BRAIN_CAPABILITY_INDEPENDENT_VERIFICATION_V1"
@@ -85,6 +87,77 @@ def sha256_canonical(value: Any) -> str:
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
+CLI_ADAPTER = "canonical/runtime/bound_capabilities/cli_command.py"
+CLI_ARGV = ("python3", "-")  # "-" is replaced by the module path; portable across machines
+
+
+def cli_shape(path: str | os.PathLike) -> bool:
+    """True for a module that is executable as a program (has main / __main__)."""
+    try:
+        src = open(path, encoding="utf-8", errors="replace").read()
+        tree = ast.parse(src)
+    except (OSError, SyntaxError):
+        return False
+    if any(isinstance(n, ast.FunctionDef) and n.name == "main" for n in tree.body):
+        return True
+    return "__main__" in src
+
+
+def cli_argv_for(module_path: str) -> list[str]:
+    """Portable argv stored in receipts: `python3` + the module path, never an absolute
+    interpreter path, so a receipt issued here reproduces on the CI runner."""
+    return ["python3", module_path]
+
+
+def _resolve_argv(argv: list[str]) -> list[str]:
+    if argv and argv[0] == "python3":
+        return [sys.executable, *argv[1:]]
+    return list(argv)
+
+
+def run_cli_adapter(module_path: str, root: str, timeout_s: int = 20) -> dict[str, Any] | None:
+    """Execute a CLI-shaped module THROUGH the repository's own generic adapter.
+
+    No subprocess logic is reimplemented here: `bound_capabilities/cli_command.py` is the
+    project's generic zero-shell adapter for exactly this, and it already enforces the
+    timeout, the argv bound and the repository path boundary.  Reusing it means the
+    capability that admission later exposes is executed the same way the creature will
+    execute it.
+    """
+    import importlib.util
+
+    # Resolve the adapter relative to THIS lane's installation, not to `root`. It is part of
+    # the lane, not of the tree being probed; resolving it against `root` made the function
+    # dead for any root that is not the repository itself.
+    adapter = os.path.join(os.path.dirname(os.path.abspath(__file__)), "bound_capabilities", "cli_command.py")
+    if not os.path.isfile(adapter):
+        adapter = os.path.join(root, CLI_ADAPTER)
+    if not os.path.isfile(adapter):
+        return None
+    spec = importlib.util.spec_from_file_location("pb_receipt_lane_cli_adapter", adapter)
+    if spec is None or spec.loader is None:
+        return None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    try:
+        spec.loader.exec_module(module)
+        result = module.run({"argv": _resolve_argv(cli_argv_for(module_path)),
+                             "timeout_s": timeout_s}, root)
+    except BaseException:  # noqa: BLE001 - a failed probe is data, not an error
+        return None
+    if not isinstance(result, dict) or int(result.get("returncode", 1)) != 0:
+        return None
+    stdout = str(result.get("stdout") or "").strip()
+    try:
+        structured = json.loads(stdout)
+    except ValueError:
+        return None
+    if not isinstance(structured, dict) or not structured:
+        return None
+    result["structured_stdout"] = structured
+    return result
+
+
 def contract_shape(path: str | os.PathLike) -> tuple[str, str] | None:
     """(entrypoint, second_param) if the module speaks `fn(args, root) -> dict`."""
     try:
@@ -100,6 +173,66 @@ def contract_shape(path: str | os.PathLike) -> tuple[str, str] | None:
     return None
 
 
+GITHUB_OIDC_ISSUER = "https://token.actions.githubusercontent.com"
+
+
+def run_reference_is_attested(run_reference: Any) -> bool:
+    """True only for a reference carrying GitHub-SIGNED OIDC claims.
+
+    A local process can write `{"github_run_id": 1}`; it cannot obtain a token signed by
+    `token.actions.githubusercontent.com`.  Only the latter is independence.
+    """
+    if not isinstance(run_reference, Mapping):
+        return False
+    claims = run_reference.get("oidc_claims")
+    if not isinstance(claims, Mapping):
+        return False
+    if claims.get("iss") != GITHUB_OIDC_ISSUER:
+        return False
+    return bool(claims.get("repository") and claims.get("run_id"))
+
+
+def _changed_paths(root: str) -> set[str] | None:
+    proc = subprocess.run(["git", "status", "--porcelain", "-uall"], cwd=root,
+                          capture_output=True, text=True)
+    if proc.returncode != 0:
+        return None
+    return {line[3:].strip().strip('"') for line in proc.stdout.splitlines() if len(line) > 3}
+
+
+def restore_tree(root: str, before: set[str] | None, allowed: tuple[str, ...]) -> list[str]:
+    """Undo everything probing wrote, so a probe can never mutate the project.
+
+    Probing executes real modules; some write reports, state files or even registry entries
+    as a side effect.  Measured: a 616-module probe created a file literally named `--help`,
+    `capability_reality_audit.json`, state snapshots, and modified the extended registry.
+    Paths that were already dirty BEFORE the probe are left alone.
+    """
+    if before is None:
+        return []
+    after = _changed_paths(root)
+    if after is None:
+        return []
+    reverted: list[str] = []
+    for path in sorted(after - before):
+        if any(token in path for token in allowed):
+            continue
+        full = os.path.join(root, path)
+        tracked = subprocess.run(["git", "ls-files", "--error-unmatch", path], cwd=root,
+                                 capture_output=True).returncode == 0
+        try:
+            if tracked:
+                subprocess.run(["git", "checkout", "--", path], cwd=root, capture_output=True)
+            elif os.path.isdir(full):
+                shutil.rmtree(full, ignore_errors=True)
+            else:
+                os.remove(full)
+        except OSError:
+            continue
+        reverted.append(path)
+    return reverted
+
+
 def receipt_path_for(capability_id: str) -> str:
     safe = "".join(ch if ch.isalnum() or ch in "._-" else "_" for ch in capability_id)
     return f"{RECEIPT_DIR}/CAPABILITY__{safe}__EXECUTION_RECEIPT.json"
@@ -110,10 +243,40 @@ def verification_path_for(receipt_path: str) -> str:
 
 
 def execute_and_receipt(capability_id: str, module_path: str, entrypoint: str,
-                        root: str, ran_by: str) -> dict[str, Any] | None:
+                        root: str, ran_by: str, kind: str = "contract") -> dict[str, Any] | None:
     """Run one capability and return its receipt. Returns None if it did not run."""
     started = time.perf_counter()
     module_sha = sha256_file(os.path.join(root, module_path))
+    if kind == "cli":
+        cli = run_cli_adapter(module_path, root)
+        if cli is None:
+            return None
+        structured = cli["structured_stdout"]
+        observed = {"returncode": cli.get("returncode")}
+        for field in ("status", "pass", "output_verified"):
+            if field in structured:
+                observed[field] = structured[field]
+        return {
+            "schema": SCHEMA,
+            "capability_id": capability_id,
+            "kind": "cli",
+            "module_path": module_path,
+            "module_sha256": module_sha,
+            "entrypoint": "run",
+            "invoked_args": {"argv": cli_argv_for(module_path)},
+            "outcome": "EXECUTED",
+            "observed": observed,
+            "result_sha256": sha256_canonical(structured),
+            "result_key_count": len(structured),
+            "elapsed_ms": round((time.perf_counter() - started) * 1000, 3),
+            "executor": "bound_capabilities.cli_command",
+            "model_dependency_count": 0,
+            "incremental_spend_usd": 0,
+            "ran_by": ran_by,
+            "runtime": {"python": platform.python_version(), "platform": platform.system().lower()},
+            "independent_verifier": None,
+            "independent_run_reference": None,
+        }
     module_name = "pb_receipt_lane_" + module_sha[:16]
     outcome = "UNKNOWN"
     result: Any = None
@@ -152,6 +315,7 @@ def execute_and_receipt(capability_id: str, module_path: str, entrypoint: str,
     return {
         "schema": SCHEMA,
         "capability_id": capability_id,
+        "kind": "contract",
         "module_path": module_path,
         "module_sha256": module_sha,
         "entrypoint": entrypoint,
@@ -186,6 +350,7 @@ def verify_producer_receipts(root: str, ran_by: str,
     """
     import glob as _glob
 
+    attested = run_reference_is_attested(run_reference)
     produced: list[str] = []
     reproduced: list[str] = []
     mismatched: list[str] = []
@@ -207,9 +372,16 @@ def verify_producer_receipts(root: str, ran_by: str,
             continue
 
         fresh = execute_and_receipt(producer["capability_id"], producer["module_path"],
-                                   producer["entrypoint"], root, ran_by)
+                                   producer["entrypoint"], root, ran_by,
+                                   str(producer.get("kind") or "contract"))
         if fresh is None or fresh.get("result_sha256") != producer.get("result_sha256"):
             mismatched.append(rel)
+            continue
+
+        if not attested:
+            # Reproduction confirmed, but this process cannot attest it. Reporting is honest;
+            # writing would forge independence and overwrite a real runner's record.
+            reproduced.append(producer["capability_id"])
             continue
 
         record = {
@@ -235,14 +407,29 @@ def verify_producer_receipts(root: str, ran_by: str,
 
     return {"producer_receipts": len(produced) + len(mismatched) + len(unreadable),
             "reproduced": len(reproduced), "mismatched": len(mismatched),
-            "unreadable": len(unreadable), "capability_ids": reproduced}
+            "unreadable": len(unreadable), "capability_ids": reproduced,
+            "not_reproduced": sorted(mismatched)[:25],
+            "run_reference_attested": attested,
+            "records_written": len(produced),
+            "note": ("wrote independent verification records" if attested else
+                     "reproduction confirmed but NOT written: a run reference without signed "
+                     "GitHub OIDC claims is not independence")}
 
 
-def discover(root: str) -> list[tuple[str, str, str]]:
-    """Contract-shaped inventory entries not already live in the bound registry."""
+def discover(root: str, kinds: tuple[str, ...] = ("contract", "cli")) -> list[tuple[str, str, str, str]]:
+    """Inventory entries not already live in the bound registry, by invocation kind.
+
+    Returns (capability_id, module_path, kind, entrypoint).  `kind` was previously carried in
+    the entrypoint slot and silently dropped by the caller, so every CLI candidate was
+    executed as a contract module and failed instantly: 25 candidates, 0 receipts, 423/s.
+
+    `contract` - speaks `run(args, root) -> dict` and is called in-process.
+    `cli`      - executable as a program and is run through the repository's own
+                 `bound_capabilities/cli_command.py` adapter.
+    """
     extended = json.load(open(os.path.join(root, EXTENDED), encoding="utf-8"))["capabilities"]
     bound = json.load(open(os.path.join(root, BOUND), encoding="utf-8"))["capabilities"]
-    out: list[tuple[str, str, str]] = []
+    out: list[tuple[str, str, str, str]] = []
     for cid, entry in extended.items():
         if cid in bound:
             continue
@@ -250,9 +437,13 @@ def discover(root: str) -> list[tuple[str, str, str]]:
         if not path or not os.path.isfile(os.path.join(root, path)):
             continue
         shape = contract_shape(os.path.join(root, path))
-        if shape is None:
+        if shape is not None:
+            if "contract" in kinds:
+                out.append((cid, path, "contract", shape[0]))
             continue
-        out.append((cid, path, shape[0]))
+        if "cli" in kinds and cli_shape(os.path.join(root, path)):
+            # entrypoint is the adapter's function; cli_command always exposes `run`
+            out.append((cid, path, "cli", "run"))
     return out
 
 
@@ -268,20 +459,26 @@ def projection_entry(receipt: dict[str, Any]) -> dict[str, Any]:
     for token in stem.split("_"):
         if len(token) > 2 and token not in keywords:
             keywords.append(token)
+    is_cli = receipt.get("kind") == "cli"
     return {
         "status": "RECEIPT_BACKED_PENDING_PROMOTION",
         "incremental_spend_usd": 0,
         "cost": 1,
-        "adapter_module": stem,
+        "adapter_module": "cli_command" if is_cli else stem,
         "entrypoint": receipt["entrypoint"],
         "keywords": keywords[:24],
         "platforms": ["linux"],
         "requires": [],
         "provides": [cid],
         "source": {"type": "repository_python_source", "path": receipt["module_path"],
-                   "adapter_path": receipt["module_path"]},
-        "action_template": {"type": "invoke_capability", "args": {"capability_id": cid},
-                            "expect": {"type": "field_nonempty", "field": "status"}},
+                   "adapter_path": CLI_ADAPTER if is_cli else receipt["module_path"]},
+        "action_template": {
+            "type": "invoke_capability",
+            "args": ({"capability_id": cid, "argv": receipt["invoked_args"]["argv"], "timeout_s": 60}
+                     if is_cli else {"capability_id": cid}),
+            "expect": ({"type": "field_equals", "field": "returncode", "value": 0} if is_cli
+                       else {"type": "field_nonempty", "field": "status"}),
+        },
         "verification": {
             "receipt_path": receipt["receipt_path"],
             "module_sha256": receipt["module_sha256"],
@@ -296,6 +493,8 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="Issue content-addressed capability execution receipts.")
     ap.add_argument("--root", default=".")
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--kinds", default="contract,cli",
+                    help="which invocation kinds to probe (contract, cli)")
     ap.add_argument("--ran-by", default=os.environ.get("BRAIN_RUNNER_IDENTITY", "local-session"))
     ap.add_argument("--verify", action="store_true",
                     help="re-execute producer receipts as this identity and stamp only reproductions")
@@ -314,23 +513,30 @@ def main(argv: list[str] | None = None) -> int:
         run_reference = {}
         if args.run_reference_json.strip():
             run_reference = json.loads(args.run_reference_json)
+        # Verifying re-executes modules, so it mutates the tree exactly like probing does
+        # (measured: a verify run regenerated LONG_HORIZON_CONTINUITY_REPORT.json).
+        verify_before = _changed_paths(root)
         result = verify_producer_receipts(root, args.ran_by, run_reference)
+        reverted = restore_tree(root, verify_before, ("astra_runtime/evidence/CAPABILITY__",))
+        result["probe_side_effects_reverted"] = len(reverted)
+        result["reverted_sample"] = reverted[:10]
         result["independent_verifier"] = args.ran_by
         result["run_reference"] = run_reference
-        result["note"] = ("only reproductions are stamped; a reference without github_run_id "
-                          "cannot admit anything")
+        result["note"] = ("records written only for an attestable run reference; a local "
+                          "process can confirm reproduction but never certify it")
         print(json.dumps(result, indent=1))
         return 0
 
-    candidates = discover(root)
+    before = _changed_paths(root)
+    candidates = discover(root, tuple(k.strip() for k in args.kinds.split(",") if k.strip()))
     if args.limit:
         candidates = candidates[: args.limit]
 
     os.makedirs(os.path.join(root, RECEIPT_DIR), exist_ok=True)
     receipts: list[dict[str, Any]] = []
     started = time.perf_counter()
-    for cid, path, entrypoint in candidates:
-        receipt = execute_and_receipt(cid, path, entrypoint, root, args.ran_by)
+    for cid, path, kind, entrypoint in candidates:
+        receipt = execute_and_receipt(cid, path, entrypoint, root, args.ran_by, kind)
         if receipt is None:
             continue
         receipt["receipt_path"] = receipt_path_for(cid)
@@ -338,6 +544,11 @@ def main(argv: list[str] | None = None) -> int:
             json.dump(receipt, fh, indent=1, sort_keys=True)
         receipts.append(receipt)
     elapsed = time.perf_counter() - started
+
+    # Probing must not mutate the project: some modules write reports, state files or even
+    # registry entries as a side effect.
+    reverted = restore_tree(root, before, ("astra_runtime/evidence/CAPABILITY__",
+                                           "CAPABILITY_RECEIPT_PROJECTION_V1.json"))
 
     entries = {r["capability_id"]: projection_entry(r) for r in receipts}
     with open(os.path.join(root, PROJECTION), "w", encoding="utf-8") as fh:
@@ -352,6 +563,8 @@ def main(argv: list[str] | None = None) -> int:
         "receipt_dir": RECEIPT_DIR,
         "projection": PROJECTION,
         "status_flipped": False,
+        "probe_side_effects_reverted": len(reverted),
+        "reverted_sample": reverted[:10],
         "independent_verifier": None,
         "note": "evidence only; promotion requires a different identity to re-run",
     }, indent=1))

@@ -1,0 +1,32 @@
+{
+ "capability_id": "canonical/experiments/run_pretruncation_candidate_rank_trace_001.py.auto.v1",
+ "elapsed_ms": 1226.74,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/experiments/run_pretruncation_candidate_rank_trace_001.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/experiments/run_pretruncation_candidate_rank_trace_001.py",
+ "module_sha256": "902982efd7d3ace1327025b214b8397403c288c0b1fb1b2fcb2f414377a3411f",
+ "observed": {
+  "returncode": 0
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_experiments_run_pretruncation_candidate_rank_trace_001.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 9,
+ "result_sha256": "906d500d9fcca31d4d106306d940af89fe911ebc023ac8ffbcabc7d70e1a681e",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

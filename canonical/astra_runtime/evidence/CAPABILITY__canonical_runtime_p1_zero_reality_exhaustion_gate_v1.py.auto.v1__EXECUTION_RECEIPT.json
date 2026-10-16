@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/p1_zero_reality_exhaustion_gate_v1.py.auto.v1",
+ "elapsed_ms": 42.916,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/p1_zero_reality_exhaustion_gate_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/p1_zero_reality_exhaustion_gate_v1.py",
+ "module_sha256": "8cca7213d9ae9af22b5cbabba30eb7361418c9597021258d597d687e24fd45a0",
+ "observed": {
+  "returncode": 0,
+  "status": "PASS__P1_ZERO_REALITY_EVIDENCE_EXHAUSTED__TWO_TERMINAL_SCOPE_RESIDUALS_REMAIN"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p1_zero_reality_exhaustion_gate_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 17,
+ "result_sha256": "b89e3e19dbe59fd9e3bf268a0c054691e320c872dfdc511d27f89d295a0df98c",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

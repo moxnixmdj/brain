@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py.auto.v1",
+ "elapsed_ms": 50.801,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py",
+ "module_sha256": "e9146f4b09220947d803ec4d79c478ff3b6fa9d36701d8e9b46f7acf638d764f",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__LIVE_TOOL_DISCOVERY_EDGE_MECHANICALLY_BOUND_TO_VERIFIED_V2_V3_V4_V5_RETRIEVAL_AUTHORITY"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_tool_discovery_retrieval_authority_gate_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 17,
+ "result_sha256": "fd30f1b574b17c3f0b7673fc9fab267928ab7c84d70c9929b10f6d08d16ed337",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

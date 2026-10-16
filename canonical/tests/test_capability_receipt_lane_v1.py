@@ -48,6 +48,76 @@ class ContractShapeTests(unittest.TestCase):
             self.assertIsNone(lane_module.contract_shape(mod))
 
 
+class CliKindTests(unittest.TestCase):
+    """CLI-shaped capabilities run through the repository's own cli_command adapter."""
+
+    def _cli_module(self, tmp, body):
+        root = pathlib.Path(tmp)
+        target = root / "canonical/experiments/probe_cli_v1.py"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(body, encoding="utf-8")
+        return root, "canonical/experiments/probe_cli_v1.py"
+
+    def test_cli_shape_detects_main_and_dunder_main(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, rel = self._cli_module(tmp, "def main():\n    print('{}')\n")
+            self.assertTrue(lane_module.cli_shape(root / rel))
+            root2, rel2 = self._cli_module(tmp, "def helper():\n    return 1\n")
+            self.assertFalse(lane_module.cli_shape(root2 / rel2))
+
+    def test_argv_is_portable_not_an_absolute_interpreter(self):
+        argv = lane_module.cli_argv_for("canonical/experiments/x.py")
+        self.assertEqual(argv, ["python3", "canonical/experiments/x.py"])
+        self.assertNotIn(sys.executable, argv)
+
+    def test_cli_module_printing_json_yields_a_cli_receipt(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, rel = self._cli_module(
+                tmp, "import json\nprint(json.dumps({'status': 'CLI_OK', 'pass': True}))\n")
+            receipt = lane_module.execute_and_receipt("cli.v1", rel, "run", str(root), "me", "cli")
+            self.assertIsNotNone(receipt)
+            self.assertEqual(receipt["kind"], "cli")
+            self.assertEqual(receipt["entrypoint"], "run")
+            self.assertEqual(receipt["invoked_args"]["argv"], ["python3", rel])
+            self.assertEqual(receipt["observed"], {"returncode": 0, "status": "CLI_OK", "pass": True})
+            self.assertIsNone(receipt["independent_verifier"])
+
+    def test_cli_module_requiring_arguments_yields_no_receipt(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, rel = self._cli_module(
+                tmp, "import sys\nsys.exit('Usage: needs <input>')\n")
+            self.assertIsNone(lane_module.execute_and_receipt("cli.v1", rel, "run", str(root), "me", "cli"))
+
+    def test_cli_module_printing_prose_yields_no_receipt(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, rel = self._cli_module(tmp, "print('hello, not structured')\n")
+            self.assertIsNone(lane_module.execute_and_receipt("cli.v1", rel, "run", str(root), "me", "cli"))
+
+    def test_cli_projection_drives_the_repository_adapter(self):
+        receipt = {"capability_id": "canonical/x.py.auto.v1", "kind": "cli",
+                   "module_path": "canonical/x.py", "module_sha256": "a" * 64,
+                   "entrypoint": "run", "invoked_args": {"argv": ["python3", "canonical/x.py"]},
+                   "observed": {"returncode": 0}, "result_sha256": "b" * 64,
+                   "model_dependency_count": 0, "independent_verifier": None,
+                   "receipt_path": "canonical/astra_runtime/evidence/r.json"}
+        entry = lane_module.projection_entry(receipt)
+        self.assertEqual(entry["adapter_module"], "cli_command")
+        self.assertEqual(entry["source"]["adapter_path"], lane_module.CLI_ADAPTER)
+        self.assertEqual(entry["action_template"]["args"]["argv"], ["python3", "canonical/x.py"])
+        self.assertEqual(entry["action_template"]["expect"],
+                         {"type": "field_equals", "field": "returncode", "value": 0})
+
+    def test_contract_projection_still_uses_the_module_directly(self):
+        receipt = {"capability_id": "canonical/y.py.auto.v1", "kind": "contract",
+                   "module_path": "canonical/y.py", "module_sha256": "a" * 64,
+                   "entrypoint": "run", "invoked_args": {}, "observed": {"status": "OK"},
+                   "result_sha256": "b" * 64, "model_dependency_count": 0,
+                   "independent_verifier": None, "receipt_path": "r.json"}
+        entry = lane_module.projection_entry(receipt)
+        self.assertEqual(entry["adapter_module"], "y")
+        self.assertEqual(entry["source"]["adapter_path"], "canonical/y.py")
+
+
 class ReceiptTests(unittest.TestCase):
     def test_receipt_is_content_addressed_and_records_observation(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -89,6 +159,107 @@ def _signed_run_reference(run_id=123):
                             "repository": "moxnixmdj/brain",
                             "run_id": str(run_id),
                             "workflow_ref": "capability-receipt-verification.yml@refs/heads/main"}}
+
+
+class IndependenceProvenanceTests(unittest.TestCase):
+    """Only a GitHub-signed reference may WRITE a verification record."""
+
+    def test_a_local_reference_is_not_attestable(self):
+        self.assertFalse(lane_module.run_reference_is_attested({"github_run_id": 1}))
+        self.assertFalse(lane_module.run_reference_is_attested({"local_replay": True}))
+        self.assertFalse(lane_module.run_reference_is_attested(
+            {"github_run_id": 1, "oidc_claims": {"iss": "https://evil.example", "repository": "x"}}))
+        self.assertFalse(lane_module.run_reference_is_attested(
+            {"oidc_claims": {"iss": lane_module.GITHUB_OIDC_ISSUER}}))
+        self.assertTrue(lane_module.run_reference_is_attested(
+            {"github_run_id": 1, "oidc_claims": {"iss": lane_module.GITHUB_OIDC_ISSUER,
+                                                 "repository": "o/r", "run_id": "1"}}))
+
+    def _producer_root(self, tmp, name):
+        root = pathlib.Path(tmp)
+        (root / "canonical/runtime/bound_capabilities").mkdir(parents=True, exist_ok=True)
+        (root / lane_module.RECEIPT_DIR).mkdir(parents=True, exist_ok=True)
+        module = root / "canonical/runtime/bound_capabilities" / name
+        module.write_text("def run(args, root):\n    return {'status': 'S'}\n", encoding="utf-8")
+        rel = f"canonical/runtime/bound_capabilities/{name}"
+        receipt = lane_module.execute_and_receipt(f"{name}.v1", rel, "run", str(root), "producer")
+        receipt["receipt_path"] = lane_module.receipt_path_for(f"{name}.v1")
+        (root / receipt["receipt_path"]).write_text(json.dumps(receipt), encoding="utf-8")
+        return root, receipt
+
+    def test_local_identity_confirms_reproduction_but_writes_nothing(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, receipt = self._producer_root(tmp, "prod_v1.py")
+            report = lane_module.verify_producer_receipts(
+                str(root), "local-replay", {"local_replay": True})
+            self.assertEqual(report["reproduced"], 1)
+            self.assertIs(report["run_reference_attested"], False)
+            self.assertEqual(report["records_written"], 0)
+            self.assertFalse((root / lane_module.verification_path_for(receipt["receipt_path"])).exists())
+
+    def test_attested_identity_writes_the_record(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, receipt = self._producer_root(tmp, "prod2_v1.py")
+            ref = {"github_run_id": 7, "oidc_claims": {"iss": lane_module.GITHUB_OIDC_ISSUER,
+                                                      "repository": "o/r", "run_id": "7"}}
+            report = lane_module.verify_producer_receipts(str(root), "github-actions:o/r", ref)
+            self.assertEqual(report["records_written"], 1)
+            written = root / lane_module.verification_path_for(receipt["receipt_path"])
+            self.assertTrue(written.is_file())
+            self.assertEqual(json.loads(written.read_text())["independent_verifier"], "github-actions:o/r")
+
+    def test_the_producer_cannot_verify_its_own_receipt(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, _ = self._producer_root(tmp, "prod3_v1.py")
+            ref = {"github_run_id": 7, "oidc_claims": {"iss": lane_module.GITHUB_OIDC_ISSUER,
+                                                      "repository": "o/r", "run_id": "7"}}
+            report = lane_module.verify_producer_receipts(str(root), "producer", ref)
+            self.assertEqual(report["records_written"], 0)
+
+
+class TreeRestorationTests(unittest.TestCase):
+    """Probing executes real modules; it must never leave the project mutated."""
+
+    def test_restores_modified_tracked_files_and_removes_new_ones(self):
+        import subprocess as sp
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            for cmd in (["git", "init", "-q", "."], ["git", "config", "user.email", "t@t"],
+                        ["git", "config", "user.name", "t"]):
+                sp.run(cmd, cwd=root, check=True)
+            (root / "tracked.txt").write_text("original", encoding="utf-8")
+            sp.run(["git", "add", "-A"], cwd=root, check=True)
+            sp.run(["git", "commit", "-qm", "init"], cwd=root, check=True)
+
+            before = lane_module._changed_paths(str(root))
+            (root / "tracked.txt").write_text("TAMPERED", encoding="utf-8")
+            (root / "litter.json").write_text("{}", encoding="utf-8")
+            (root / "--help").write_text("{}", encoding="utf-8")
+
+            reverted = lane_module.restore_tree(str(root), before, ("CAPABILITY__",))
+            self.assertIn("tracked.txt", reverted)
+            self.assertIn("litter.json", reverted)
+            self.assertIn("--help", reverted)
+            self.assertEqual((root / "tracked.txt").read_text(encoding="utf-8"), "original")
+            self.assertFalse((root / "litter.json").exists())
+            self.assertFalse((root / "--help").exists())
+
+    def test_pre_existing_dirt_is_left_alone(self):
+        import subprocess as sp
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            for cmd in (["git", "init", "-q", "."], ["git", "config", "user.email", "t@t"],
+                        ["git", "config", "user.name", "t"]):
+                sp.run(cmd, cwd=root, check=True)
+            (root / "tracked.txt").write_text("original", encoding="utf-8")
+            sp.run(["git", "add", "-A"], cwd=root, check=True)
+            sp.run(["git", "commit", "-qm", "init"], cwd=root, check=True)
+            (root / "tracked.txt").write_text("MINE, pre-existing", encoding="utf-8")
+            before = lane_module._changed_paths(str(root))
+            (root / "litter.json").write_text("{}", encoding="utf-8")
+            reverted = lane_module.restore_tree(str(root), before, ("CAPABILITY__",))
+            self.assertEqual(reverted, ["litter.json"])
+            self.assertEqual((root / "tracked.txt").read_text(encoding="utf-8"), "MINE, pre-existing")
 
 
 class LoaderGateTests(unittest.TestCase):
@@ -239,8 +410,9 @@ class LaneRunTests(unittest.TestCase):
         candidates = lane_module.discover(str(ROOT))
         self.assertGreater(len(candidates), 100)
         bound = json.loads((ROOT / lane_module.BOUND).read_text(encoding="utf-8"))["capabilities"]
-        for cid, _path, _entrypoint in candidates:
+        for cid, _path, kind, _entrypoint in candidates:
             self.assertNotIn(cid, bound)
+            self.assertIn(kind, ("contract", "cli"))
 
     def test_lane_never_claims_independence(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/k6_positive_adequacy_cover_theorem_verifier_v1.py.auto.v1",
+ "elapsed_ms": 49.176,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/k6_positive_adequacy_cover_theorem_verifier_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/k6_positive_adequacy_cover_theorem_verifier_v1.py",
+ "module_sha256": "0264a32171b1c8bf887ab2a8936c6b6a69f98a40b3e22d94ec01c922837a9991",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__K6_POSITIVE_ADEQUACY_COVER_THEOREM_SOURCE_BOUND__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_k6_positive_adequacy_cover_theorem_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 4,
+ "result_sha256": "6c75767a7ac97a7e65cab4719e37a2c56a9ee9be45644424d1ff7b5a9c82104e",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

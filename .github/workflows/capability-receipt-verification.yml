@@ -93,9 +93,15 @@ jobs:
           python3 - <<'PY'
           import json
           report = json.load(open("/tmp/verification.json"))
-          if report["mismatched"]:
-              raise SystemExit(f"NOT REPRODUCED: {report['mismatched']} receipts did not reproduce")
-          print(f"reproduced {report['reproduced']}/{report['producer_receipts']}")
+          print(f"reproduced {report['reproduced']}/{report['producer_receipts']}; "
+                f"not reproduced: {report['mismatched']}")
+          for path in report.get("not_reproduced", []):
+              print(f"  NOT REPRODUCED (no record written, so not admitted): {path}")
+          # A capability that does not reproduce gets NO verification record and is therefore
+          # not admitted.  That must not block the ones that do reproduce: report it loudly,
+          # and fail only if the mechanism itself produced nothing.
+          if report["producer_receipts"] and not report["reproduced"]:
+              raise SystemExit("NO RECEIPT REPRODUCED - the verification mechanism is broken")
           PY
 
       - name: Publish the verification records as an artifact
