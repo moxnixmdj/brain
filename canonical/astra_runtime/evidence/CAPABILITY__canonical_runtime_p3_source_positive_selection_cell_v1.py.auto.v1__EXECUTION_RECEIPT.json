@@ -1,0 +1,27 @@
+{
+ "capability_id": "canonical/runtime/p3_source_positive_selection_cell_v1.py.auto.v1",
+ "elapsed_ms": 0.286,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/p3_source_positive_selection_cell_v1.py",
+ "module_sha256": "4f80b760e112790948fe6e6aa81568d1373b2985fda32aabd1b9c71d3335c1cd",
+ "observed": {
+  "pass": false,
+  "status": "FAIL_CLOSED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_source_positive_selection_cell_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 14,
+ "result_sha256": "3fc1957eabe6de22202bb6c0a7e989658ce84a29f9d08a3bc6189dfc4eb10561",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

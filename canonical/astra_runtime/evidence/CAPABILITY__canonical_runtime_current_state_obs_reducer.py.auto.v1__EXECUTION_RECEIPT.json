@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/current_state_obs_reducer.py.auto.v1",
+ "elapsed_ms": 61.393,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/current_state_obs_reducer.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/current_state_obs_reducer.py",
+ "module_sha256": "ea9b99d5a08c4f1189b50801a419ccd1293ab6670655d87b81bfd674c15e6c03",
+ "observed": {
+  "pass": true,
+  "returncode": 0
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_state_obs_reducer.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 12,
+ "result_sha256": "3da502c1eb0a2b19ed62b6c36c77440c7bf52830882a82b22cc374db05f55a04",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

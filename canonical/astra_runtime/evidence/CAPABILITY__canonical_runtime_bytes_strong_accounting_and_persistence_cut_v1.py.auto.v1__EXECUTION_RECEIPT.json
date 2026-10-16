@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/bytes_strong_accounting_and_persistence_cut_v1.py.auto.v1",
+ "elapsed_ms": 71.375,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/bytes_strong_accounting_and_persistence_cut_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bytes_strong_accounting_and_persistence_cut_v1.py",
+ "module_sha256": "2ecd819d36665d9a4459a4f7948f87f8b8e33a4c10171fddb3954ac88d1e5226",
+ "observed": {
+  "returncode": 0,
+  "status": "PASS"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_strong_accounting_and_persistence_cut_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 7,
+ "result_sha256": "1107c8465b40dd86ee738dd455aa844b3764e960ba1688533246b750755ee80c",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
