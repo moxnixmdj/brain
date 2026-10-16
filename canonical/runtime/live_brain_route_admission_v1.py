@@ -754,16 +754,14 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
         if "MISMATCH" in reason_str or "ACTION_EXPECTATION_FAILED" in reason_str:
             return local_res
         controller_actions = [action, {"type": "finish", "args": {"summary": "RAW_GOAL_COMPLETE"}}]
-    if not isinstance(controller_actions, list) or not controller_actions or len(controller_actions) > 64 or any(not isinstance(a, Mapping) for a in controller_actions):
+    # One driver for both doors: measured, this module carried its own copy of the control-plan
+    # guard and its own `astra_runtime.run_goal` call - the same policy and the same call, twice.
+    controller, controller_error = live_integrated_brain_v1.drive_controller(task_id, goal, controller_actions)
+    if controller_error == "CONTROL_PLAN_INVALID":
         return _fail(task_id, "FAIL__COMPILED_CONTROL_PLAN_INVALID", "LIVE_RUNTIME_COMPOSITION_CONTRACT_INVALID", started, compiler_mode=compiled.get("compiler_mode"))
-    try:
-        controller = astra_runtime.run_goal(
-            {"id": "live-raw-goal-controller", "controller_actions": [dict(a) for a in controller_actions], "max_controller_actions": 64},
-            {"mission_id": task_id, "goal": goal},
-        )
-    except Exception as exc:
+    if controller_error is not None:
         return _fail(task_id, "FAIL__LIVE_CONTROLLER_EXECUTION", "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE", started, executed=True,
-                     compiled_capability_id=selected or None, compiler_mode=compiled.get("compiler_mode"), reason=type(exc).__name__ + ":" + str(exc))
+                     compiled_capability_id=selected or None, compiler_mode=compiled.get("compiler_mode"), reason=controller_error)
     passed = _controller_passed(controller)
     trace = controller.get("trace") if isinstance(controller, Mapping) and isinstance(controller.get("trace"), list) else []
     checkpoint = controller.get("controller_checkpoint") if isinstance(controller, Mapping) and isinstance(controller.get("controller_checkpoint"), Mapping) else {}

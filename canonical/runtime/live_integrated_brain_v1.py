@@ -530,6 +530,43 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
 
 
 
+MAX_CONTROLLER_ACTIONS = 64
+
+
+def controller_actions_permitted(controller_actions: Any) -> bool:
+    """The control-plan contract, in ONE place, because two doors execute it.
+
+    Measured: this predicate existed twice - once here and once in the other live door's executor -
+    with the same rule (a non-empty list of at most 64 action mappings) and two copies of the same
+    `astra_runtime.run_goal` call beneath it.  Duplication of a policy is how two doors come to
+    disagree; the policy is one line long, so there is no reason to own it twice.
+    """
+    return (isinstance(controller_actions, list) and bool(controller_actions)
+            and len(controller_actions) <= MAX_CONTROLLER_ACTIONS
+            and all(isinstance(action, Mapping) for action in controller_actions))
+
+
+def drive_controller(task_id: str, goal: str, controller_actions: Any,
+                     controller_id: str = "live-raw-goal-controller") -> tuple[Any, str | None]:
+    """Drive the pinned kernel with these actions: ONE call site for both live doors.
+
+    Returns ``(controller, None)`` on success and ``(None, detail)`` when the plan is invalid or the
+    kernel raised.  Only the call is shared - each door keeps its own result envelope, because their
+    status vocabularies legitimately differ; what must not differ is HOW the kernel is run.
+    """
+    if not controller_actions_permitted(controller_actions):
+        return None, "CONTROL_PLAN_INVALID"
+    try:
+        controller = astra_runtime.run_goal(
+            {"id": controller_id, "controller_actions": [dict(action) for action in controller_actions],
+             "max_controller_actions": MAX_CONTROLLER_ACTIONS},
+            {"mission_id": task_id, "goal": goal},
+        )
+    except Exception as exc:  # noqa: BLE001 - the caller owns the envelope, this owns the call
+        return None, type(exc).__name__ + ":" + str(exc)
+    return controller, None
+
+
 def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
     """Compile one raw plain-language goal into the live verified runtime.
 
@@ -592,12 +629,7 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
             }
 
         if controller_actions is not None:
-            if (
-                not isinstance(controller_actions, list)
-                or not controller_actions
-                or len(controller_actions) > 64
-                or any(not isinstance(action, Mapping) for action in controller_actions)
-            ):
+            if not controller_actions_permitted(controller_actions):
                 return {
                     "schema": SCHEMA,
                     "status": "FAIL__COMPILED_CONTROL_PLAN_INVALID",
@@ -608,19 +640,8 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
                     "elapsed_ns": perf_counter_ns() - started,
                     "incremental_spend_usd": 0,
                 }
-            try:
-                controller = astra_runtime.run_goal(
-                    {
-                        "id": "live-raw-goal-controller",
-                        "controller_actions": [dict(action) for action in controller_actions],
-                        "max_controller_actions": 64,
-                    },
-                    {
-                        "mission_id": task_id,
-                        "goal": goal,
-                    },
-                )
-            except Exception as exc:
+            controller, controller_error = drive_controller(task_id, goal, controller_actions)
+            if controller_error is not None:
                 return {
                     "schema": SCHEMA,
                     "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
@@ -628,7 +649,7 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
                     "task_id": task_id,
                     "failure_class": "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE",
                     "compiler_mode": compiled.get("compiler_mode"),
-                    "reason": type(exc).__name__ + ":" + str(exc),
+                    "reason": controller_error,
                     "elapsed_ns": perf_counter_ns() - started,
                     "incremental_spend_usd": 0,
                 }
