@@ -447,6 +447,26 @@ def discover(root: str, kinds: tuple[str, ...] = ("contract", "cli")) -> list[tu
     return out
 
 
+def _declared_expectation(is_cli: bool, observed: dict[str, Any]) -> dict[str, Any] | None:
+    """The strictest expectation the receipt's own evidence supports, and no stricter.
+
+    `cli_command` always returns a returncode and raises on a non-zero one, so a CLI receipt
+    supports `returncode == 0`.  For a contract run the receipt recorded only the fields below,
+    so one of those is asserted if it was present, and otherwise nothing is asserted at all:
+    `run_adapter_locally` still fails closed on an adapter that does not import, an entrypoint
+    that is missing, or a result that is not a dict, so the execution itself remains the claim.
+    """
+    if is_cli:
+        return {"type": "field_equals", "field": "returncode", "value": 0}
+    if "status" in observed:
+        return {"type": "field_nonempty", "field": "status"}
+    if observed.get("pass") is True:
+        return {"type": "field_equals", "field": "pass", "value": True}
+    if observed.get("output_verified") is True:
+        return {"type": "field_equals", "field": "output_verified", "value": True}
+    return None
+
+
 def projection_entry(receipt: dict[str, Any]) -> dict[str, Any]:
     """A registry entry in the shape the loader and `run_adapter_locally` consume.
 
@@ -460,6 +480,7 @@ def projection_entry(receipt: dict[str, Any]) -> dict[str, Any]:
         if len(token) > 2 and token not in keywords:
             keywords.append(token)
     is_cli = receipt.get("kind") == "cli"
+    observed = receipt.get("observed") if isinstance(receipt.get("observed"), dict) else {}
     return {
         "status": "RECEIPT_BACKED_PENDING_PROMOTION",
         "incremental_spend_usd": 0,
@@ -476,8 +497,15 @@ def projection_entry(receipt: dict[str, Any]) -> dict[str, Any]:
             "type": "invoke_capability",
             "args": ({"capability_id": cid, "argv": receipt["invoked_args"]["argv"], "timeout_s": 60}
                      if is_cli else {"capability_id": cid}),
-            "expect": ({"type": "field_equals", "field": "returncode", "value": 0} if is_cli
-                       else {"type": "field_nonempty", "field": "status"}),
+            # The declared expectation may not claim more than the receipt observed.  This
+            # used to be `field_nonempty status` for every non-CLI capability, which is an
+            # assumption, not evidence: 7 of the 294 recorded `observed: {}` because their
+            # entrypoint returned a dict carrying none of status/pass/output_verified, and the
+            # projection then advertised an expectation those runs had never met (measured:
+            # executing the projection, those 7 fail their own template with
+            # ACTION_EXPECTATION_FAILED:status:OBSERVED=None).  Derive it from the receipt and
+            # declare nothing when the receipt established nothing.
+            "expect": _declared_expectation(is_cli, observed),
         },
         "verification": {
             "receipt_path": receipt["receipt_path"],

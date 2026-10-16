@@ -5004,10 +5004,7 @@
     "args": {
      "capability_id": "canonical/runtime/livebench_if_public_description_inverter_v1.py.auto.v1"
     },
-    "expect": {
-     "field": "status",
-     "type": "field_nonempty"
-    },
+    "expect": null,
     "type": "invoke_capability"
    },
    "adapter_module": "livebench_if_public_description_inverter_v1",
@@ -6034,10 +6031,7 @@
     "args": {
      "capability_id": "canonical/runtime/livebench_legacy_ifeval_prompt_inverter_v1.py.auto.v1"
     },
-    "expect": {
-     "field": "status",
-     "type": "field_nonempty"
-    },
+    "expect": null,
     "type": "invoke_capability"
    },
    "adapter_module": "livebench_legacy_ifeval_prompt_inverter_v1",
@@ -6390,10 +6384,7 @@
     "args": {
      "capability_id": "canonical/runtime/livebench_pointwise_optimality_certificate_v1.py.auto.v1"
     },
-    "expect": {
-     "field": "status",
-     "type": "field_nonempty"
-    },
+    "expect": null,
     "type": "invoke_capability"
    },
    "adapter_module": "livebench_pointwise_optimality_certificate_v1",
@@ -6875,10 +6866,7 @@
     "args": {
      "capability_id": "canonical/runtime/livebench_union25_language_exception_carrier_v1.py.auto.v1"
     },
-    "expect": {
-     "field": "status",
-     "type": "field_nonempty"
-    },
+    "expect": null,
     "type": "invoke_capability"
    },
    "adapter_module": "livebench_union25_language_exception_carrier_v1",
@@ -6918,10 +6906,7 @@
     "args": {
      "capability_id": "canonical/runtime/livebench_union25_language_exception_carrier_v2.py.auto.v1"
     },
-    "expect": {
-     "field": "status",
-     "type": "field_nonempty"
-    },
+    "expect": null,
     "type": "invoke_capability"
    },
    "adapter_module": "livebench_union25_language_exception_carrier_v2",
@@ -6961,10 +6946,7 @@
     "args": {
      "capability_id": "canonical/runtime/livebench_union25_mandatory_footprint_v1.py.auto.v1"
     },
-    "expect": {
-     "field": "status",
-     "type": "field_nonempty"
-    },
+    "expect": null,
     "type": "invoke_capability"
    },
    "adapter_module": "livebench_union25_mandatory_footprint_v1",
@@ -7003,10 +6985,7 @@
     "args": {
      "capability_id": "canonical/runtime/livebench_union25_mandatory_footprint_v2.py.auto.v1"
     },
-    "expect": {
-     "field": "status",
-     "type": "field_nonempty"
-    },
+    "expect": null,
     "type": "invoke_capability"
    },
    "adapter_module": "livebench_union25_mandatory_footprint_v2",

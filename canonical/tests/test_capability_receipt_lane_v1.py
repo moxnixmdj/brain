@@ -262,6 +262,39 @@ class TreeRestorationTests(unittest.TestCase):
             self.assertEqual((root / "tracked.txt").read_text(encoding="utf-8"), "MINE, pre-existing")
 
 
+class DeclaredExpectationTests(unittest.TestCase):
+    """The projection may not advertise an expectation the receipt never observed."""
+
+    def test_cli_always_supports_returncode_zero(self):
+        self.assertEqual(lane_module._declared_expectation(True, {}),
+                         {"type": "field_equals", "field": "returncode", "value": 0})
+
+    def test_contract_asserts_only_what_the_receipt_observed(self):
+        self.assertEqual(lane_module._declared_expectation(False, {"status": "OK"}),
+                         {"type": "field_nonempty", "field": "status"})
+        self.assertEqual(lane_module._declared_expectation(False, {"pass": True}),
+                         {"type": "field_equals", "field": "pass", "value": True})
+        self.assertEqual(lane_module._declared_expectation(False, {"output_verified": True}),
+                         {"type": "field_equals", "field": "output_verified", "value": True})
+        # observed nothing -> assert nothing. This is the defect that was found by executing
+        # the projection: 7 capabilities recorded `observed: {}` and were still advertised as
+        # `field_nonempty status`, so they failed their own declared template.
+        self.assertIsNone(lane_module._declared_expectation(False, {}))
+        # a field recorded as False is NOT evidence for asserting it True
+        self.assertIsNone(lane_module._declared_expectation(False, {"pass": False}))
+
+    def test_projection_entry_never_overclaims(self):
+        for observed in ({}, {"status": "OK"}, {"pass": True}, {"output_verified": True}):
+            receipt = {"capability_id": "x.v1", "module_path": "m.py", "entrypoint": "run",
+                       "kind": "contract", "observed": observed, "receipt_path": "r.json",
+                       "module_sha256": "0" * 64, "independent_verifier": None}
+            exp = lane_module.projection_entry(receipt)["action_template"]["expect"]
+            if observed:
+                self.assertIsNotNone(exp)
+            else:
+                self.assertIsNone(exp)
+
+
 class LoaderGateTests(unittest.TestCase):
     """The gate must admit on INDEPENDENT reproduction, and demote nothing."""
 
