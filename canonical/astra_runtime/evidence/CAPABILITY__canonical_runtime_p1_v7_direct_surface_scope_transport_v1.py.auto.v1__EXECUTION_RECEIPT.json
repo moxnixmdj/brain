@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/p1_v7_direct_surface_scope_transport_v1.py.auto.v1",
+ "elapsed_ms": 48.984,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/p1_v7_direct_surface_scope_transport_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/p1_v7_direct_surface_scope_transport_v1.py",
+ "module_sha256": "a1543f8a05cd0adcfa823e5e9febeacec5e9a4c453738090343d830355e8756f",
+ "observed": {
+  "pass": false,
+  "returncode": 0,
+  "status": "FAIL_CLOSED__V7_DIRECT_SURFACE_FAILURE_SEMANTICS_TRANSPORT_NOT_PROVED__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p1_v7_direct_surface_scope_transport_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 24,
+ "result_sha256": "138a893e10c0857aae0756976215460af9076c619a0e4eea278bf0719cd1f8d0",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

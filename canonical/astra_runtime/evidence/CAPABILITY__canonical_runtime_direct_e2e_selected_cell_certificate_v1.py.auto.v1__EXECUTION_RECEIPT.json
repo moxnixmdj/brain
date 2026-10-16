@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/direct_e2e_selected_cell_certificate_v1.py.auto.v1",
+ "elapsed_ms": 63.099,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/direct_e2e_selected_cell_certificate_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/direct_e2e_selected_cell_certificate_v1.py",
+ "module_sha256": "eabe2318222d7f1ddf55563b624cdd5a9f0a2237082e09d8a41e0caa30a0e85f",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__DIRECT_E2E_OR_PRIMITIVE_PLUS_LOCAL_C__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_direct_e2e_selected_cell_certificate_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 4,
+ "result_sha256": "86358777f71f8b586acbc993e2e6a1a0cdb3b9e4d716a19b8be96c672871a388",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

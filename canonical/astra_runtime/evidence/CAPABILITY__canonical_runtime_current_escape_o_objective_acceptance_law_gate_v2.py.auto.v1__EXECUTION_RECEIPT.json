@@ -1,0 +1,27 @@
+{
+ "capability_id": "canonical/runtime/current_escape_o_objective_acceptance_law_gate_v2.py.auto.v1",
+ "elapsed_ms": 0.345,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/current_escape_o_objective_acceptance_law_gate_v2.py",
+ "module_sha256": "7ac0906e80326d4d9844ff4d91e96c5c4611191aafd4bed2c6daa6ee6fe79d8b",
+ "observed": {
+  "pass": false,
+  "status": "FAIL_CLOSED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_escape_o_objective_acceptance_law_gate_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 12,
+ "result_sha256": "d839307afa46f05b8e88d46220654d855a305079f6e8e4ea66fca2f8cc28f532",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

@@ -1,0 +1,26 @@
+{
+ "capability_id": "canonical/runtime/livebench_prompt_contract_synthesizer_v1.py.auto.v1",
+ "elapsed_ms": 0.85,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/livebench_prompt_contract_synthesizer_v1.py",
+ "module_sha256": "332024ff19105f2af6c49f861ff4f5fc6cc938ce728a2fbbb58da62ab715c911",
+ "observed": {
+  "status": "BLOCKED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_prompt_contract_synthesizer_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 10,
+ "result_sha256": "e03aaf7e5bbfcd62e4a097343282b21b8e8f4e2d48108d478e29e9040449c5e5",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

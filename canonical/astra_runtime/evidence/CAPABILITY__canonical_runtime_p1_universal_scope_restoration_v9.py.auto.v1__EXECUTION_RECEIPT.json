@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/p1_universal_scope_restoration_v9.py.auto.v1",
+ "elapsed_ms": 57.684,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/p1_universal_scope_restoration_v9.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/p1_universal_scope_restoration_v9.py",
+ "module_sha256": "2cd59895a0de306cdfa3c86523e06fb3d422c729009e7e5f4b5c74ec9562c3ca",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__P1_WHOLE_FROZEN_SCOPE_RESTORED__12_OF_12_CONTRACTS__19_OF_19_PROVISIONAL_BEHAVIORAL_ROWS__ZERO_OPUS55_ACCEPTANCE_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p1_universal_scope_restoration_v9.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 20,
+ "result_sha256": "aff9b519e0987bde8416e43766a3e9ea0e9b189df814117684091fb54349863c",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

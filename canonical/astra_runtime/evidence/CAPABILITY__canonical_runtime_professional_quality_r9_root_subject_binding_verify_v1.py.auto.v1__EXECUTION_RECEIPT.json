@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/professional_quality_r9_root_subject_binding_verify_v1.py.auto.v1",
+ "elapsed_ms": 23.565,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/professional_quality_r9_root_subject_binding_verify_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/professional_quality_r9_root_subject_binding_verify_v1.py",
+ "module_sha256": "9f30f413c4390d9c6a7fef74dc8b91d8a5fc9025b6dc1ec8de615ca0525b45ea",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__R9_BOUND_TO_V7_FROZEN_210_SLOT_TEMPORAL_ACCOUNTING_SCOPE"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_r9_root_subject_binding_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 15,
+ "result_sha256": "f3976b4c625927fd30e577c5b11a3649223c82906639d82a7622d4869cc34897",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

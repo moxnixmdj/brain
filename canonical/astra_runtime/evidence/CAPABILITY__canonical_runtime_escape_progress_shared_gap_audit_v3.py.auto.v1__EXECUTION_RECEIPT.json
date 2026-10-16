@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/escape_progress_shared_gap_audit_v3.py.auto.v1",
+ "elapsed_ms": 43.543,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/escape_progress_shared_gap_audit_v3.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
+ "module_sha256": "45eb0f3f511dad8fc944e80009f6aa4b68c0422a5d4a0955f4d8865d9829496d",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__EXECUTABLE_AUDIT_CURRENT__CC_R3_OPEN"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_escape_progress_shared_gap_audit_v3.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 15,
+ "result_sha256": "1b07465fa0e756c9f0d1981d571c5f02d4ed513a46bdff5a7615476de5e65f83",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

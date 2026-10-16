@@ -161,12 +161,15 @@ def test_inputs_are_never_guessed():
         raise AssertionError("a missing input must fail closed")
 
 
-def test_every_routable_capability_is_reachable_and_bound_from_one_sentence():
+def test_every_capability_is_reachable_from_one_sentence_by_prose_or_by_name():
     report = reachability(WORK / "reach")
     counts = report["counts"]
     assert counts.get("NOT_REACHABLE", 0) == 0, [r for r in report["rows"] if r["state"] == "NOT_REACHABLE"]
     assert counts.get("ROUTED_ELSEWHERE", 0) == 0, [r for r in report["rows"] if r["state"] == "ROUTED_ELSEWHERE"]
-    assert counts["REACHED_AND_BOUND"] + counts["BLOCKED_ZERO_INPUT"] == report["capabilities_total"]
+    # prose binding reaches the input-bearing capabilities (F1..F13); explicit naming (F15)
+    # reaches the input-free ones. No capability is structurally unreachable any more.
+    assert counts.get("BLOCKED_ZERO_INPUT", 0) == 0
+    assert counts["REACHED_AND_BOUND"] + counts.get("REACHED_BY_EXPLICIT_NAME", 0) == report["capabilities_total"]
     assert counts["REACHED_AND_BOUND"] >= 63
 
 
@@ -597,3 +600,101 @@ def test_f13_ambiguity_still_fails_closed():
     )
     with pytest.raises(gc.GoalCompilationFailure):
         front.repair_output_collisions(goal, inputs, ROOT, cycle=0, spool=set())
+
+
+def _zero_input_cid() -> str:
+    return next(c for c, e in sorted(_registry().items()) if not front.is_plain_goal_routable(e))
+
+
+def _input_bearing_cid() -> str:
+    return next(c for c, e in sorted(_registry().items()) if front.is_plain_goal_routable(e))
+
+
+def test_f15_a_goal_that_names_a_capability_selects_that_capability_and_not_a_catch_all():
+    """F15: an id in the sentence is the caller choosing, and defect 8 strips paths, so the
+    pinned compiler cannot see the choice - it answered with a generic candidate instead."""
+    reg = _registry()
+    cid = _zero_input_cid()
+    compiled = front.compile_goal(f"run {cid}", reg, ROOT)
+    assert compiled["selected_capability"] == cid
+    assert compiled["inputs"] == {}
+    assert compiled["target_effects"] == list(reg[cid]["provides"])
+    assert "F15_EXPLICIT_CAPABILITY_ID_NAMED" in compiled["front_compiler"]["rules_applied"]
+    # what the creature would execute is the named capability, with its own frozen argv
+    action = gc._render_template(reg[cid]["action_template"], dict(compiled["inputs"]))
+    assert action["type"] == "invoke_capability"
+    assert action["args"]["capability_id"] == cid
+    # the defect being corrected: without F15 the id selects something else, never itself
+    try:
+        pinned = gc.compile_goal(f"run {cid}", front.routable_registry(reg), ROOT)
+    except gc.GoalCompilationFailure:
+        pinned = None
+    assert (pinned or {}).get("selected_capability") != cid
+
+
+def test_f15_composition_is_never_stolen_by_a_named_capability():
+    """F15 is naming, not routing: a sentence that keeps asking for more still fails closed."""
+    cid = _zero_input_cid()
+    try:
+        compiled = front.compile_goal(f"run {cid} and then summarize the outcome", _registry(), ROOT)
+    except gc.GoalCompilationFailure:
+        return  # the normal machinery decided - F15 did not claim the request
+    assert "F15_EXPLICIT_CAPABILITY_ID_NAMED" not in compiled["front_compiler"]["rules_applied"]
+
+
+def test_f15_two_named_capabilities_are_not_a_single_naming():
+    """Two ids are a composition, not a choice; the decision stays with the normal machinery."""
+    zero = [c for c, e in sorted(_registry().items()) if not front.is_plain_goal_routable(e)]
+    assert len(zero) >= 2
+    try:
+        compiled = front.compile_goal(f"run {zero[0]} and run {zero[1]}", _registry(), ROOT)
+    except gc.GoalCompilationFailure:
+        return
+    assert "F15_EXPLICIT_CAPABILITY_ID_NAMED" not in compiled["front_compiler"]["rules_applied"]
+
+
+def test_f15_a_named_capability_that_needs_inputs_still_fails_closed():
+    """Naming never fabricates inputs: the missing binding is reported, not guessed."""
+    cid = _input_bearing_cid()
+    with pytest.raises(gc.GoalCompilationFailure) as excinfo:
+        front.compile_goal(f"run {cid}", _registry(), ROOT)
+    assert excinfo.value.code == "GOAL_INPUT_BINDING_REQUIRED"
+
+
+def test_f15_identifier_boundaries_and_a_sentence_final_period():
+    """A longer identifier is a different identifier; a sentence-final period is not."""
+    reg = _registry()
+    cid = _zero_input_cid()
+    assert front.explicitly_named_capabilities(f"run {cid}", reg) == [cid]
+    assert front.explicitly_named_capabilities(f"run {cid}.", reg) == [cid]
+    assert front.explicitly_named_capabilities(f"run {cid}x", reg) == []
+    assert front.explicitly_named_capabilities("run something else entirely", reg) == []
+
+
+def test_f16_an_id_shaped_path_that_no_capability_answers_to_fails_closed():
+    """F16: an id-shaped token is an identity, not an artifact.
+
+    The defect, shown first: the pinned compiler binds the named path as `output_path` for a
+    generic candidate, which then reports `output_verified: true` by writing a file at the
+    capability's own id path - so asking for a capability that does not exist produced a
+    success and a fabricated artifact.  Measured on the real registry: 224 of 294 goals that
+    named a real capability "succeeded" that way."""
+    reg = _registry()
+    cid = _zero_input_cid()
+    ghost = cid.rsplit(".py.auto.v1", 1)[0] + "_renamed.py.auto.v1"
+    goal = f"run {ghost}"
+    pinned = gc.compile_goal(goal, front.routable_registry(reg), ROOT)
+    assert pinned["inputs"]["output_path"] == ghost
+    assert pinned["selected_capability"] != ghost
+    with pytest.raises(gc.GoalCompilationFailure) as excinfo:
+        front.compile_goal(goal, reg, ROOT)
+    assert excinfo.value.code == "GOAL_NAMES_UNKNOWN_CAPABILITY"
+
+
+def test_f16_a_registered_capability_inside_a_longer_request_is_not_an_artifact():
+    """A registered id inside a longer sentence is a composition this layer does not claim;
+    it fails closed instead of being handed to another capability as an output artifact."""
+    cid = _zero_input_cid()
+    with pytest.raises(gc.GoalCompilationFailure) as excinfo:
+        front.compile_goal(f"run {cid} and then report the outcome to me", _registry(), ROOT)
+    assert excinfo.value.code == "GOAL_NAMES_CAPABILITY_IN_COMPOUND_REQUEST"
