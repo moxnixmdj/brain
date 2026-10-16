@@ -1,0 +1,26 @@
+{
+ "capability_id": "canonical/runtime/livebench_langdetect_balanced_decorator_invariance_v1.py.auto.v1",
+ "elapsed_ms": 23.123,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/livebench_langdetect_balanced_decorator_invariance_v1.py",
+ "module_sha256": "b4f46c39e13cee80c56acb16713950fbb8821b1884640059ce76107a3bfaefbc",
+ "observed": {
+  "status": "PASS__SOURCE_BOUND_BALANCED_DECORATOR_TRANSFORM_PRESERVES_LANGDETECT_CLEANING_BRANCH_AND_NGRAM_SEPARATOR_STREAM"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_langdetect_balanced_decorator_invariance_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 14,
+ "result_sha256": "cc4a1d89208797f6bbf792327167d1c243d1702b0c8ebcca2c7d0085626a5676",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

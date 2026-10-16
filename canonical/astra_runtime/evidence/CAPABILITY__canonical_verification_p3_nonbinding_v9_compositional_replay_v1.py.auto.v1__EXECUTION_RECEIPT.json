@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/verification/p3_nonbinding_v9_compositional_replay_v1.py.auto.v1",
+ "elapsed_ms": 43.153,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/verification/p3_nonbinding_v9_compositional_replay_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/verification/p3_nonbinding_v9_compositional_replay_v1.py",
+ "module_sha256": "efc3dd1fc42e56629ec286049909ed7cfe98d1dc31f61e587496d553550609a2",
+ "observed": {
+  "returncode": 0,
+  "status": "PASS"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_verification_p3_nonbinding_v9_compositional_replay_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 8,
+ "result_sha256": "c40404eecd92dc7183e61638a48e5cf6f36b751319fcceb15b007b2cc8eef367",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

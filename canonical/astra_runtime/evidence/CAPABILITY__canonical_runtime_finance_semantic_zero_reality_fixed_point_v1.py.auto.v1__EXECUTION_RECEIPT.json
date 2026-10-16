@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/finance_semantic_zero_reality_fixed_point_v1.py.auto.v1",
+ "elapsed_ms": 50.32,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/finance_semantic_zero_reality_fixed_point_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/finance_semantic_zero_reality_fixed_point_v1.py",
+ "module_sha256": "e0720eb3189b35cde236db9f9f2b6e29653f210944dd5999bb445af5945d20f1",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__FINANCE_SEMANTIC_ZERO_REALITY_FIXED_POINT__STRICT_EXTERNALITY_RECONCILED__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_finance_semantic_zero_reality_fixed_point_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 14,
+ "result_sha256": "fc0832dd533f2776d39312ce5c167532a75c308b3feef088c048e9e5ebbaff50",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

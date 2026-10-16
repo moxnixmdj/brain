@@ -1,0 +1,26 @@
+{
+ "capability_id": "canonical/runtime/livebench_active15_plus_one_noarg_pointwise_v1.py.auto.v1",
+ "elapsed_ms": 1.11,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/livebench_active15_plus_one_noarg_pointwise_v1.py",
+ "module_sha256": "a6bc738731e2be3f13f16b6f20c46e8a0b8f42e1538c6e8df59dda1311125143",
+ "observed": {
+  "status": "FAIL_CLOSED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_active15_plus_one_noarg_pointwise_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 4,
+ "result_sha256": "1c4342a7226bb20c25fc6b5e035bfcf5f9c8ca85a0fa08d3a86b1b66eff8a996",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

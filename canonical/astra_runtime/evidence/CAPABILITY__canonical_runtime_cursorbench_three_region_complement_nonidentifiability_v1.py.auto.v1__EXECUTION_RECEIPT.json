@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/cursorbench_three_region_complement_nonidentifiability_v1.py.auto.v1",
+ "elapsed_ms": 63.871,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/cursorbench_three_region_complement_nonidentifiability_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/cursorbench_three_region_complement_nonidentifiability_v1.py",
+ "module_sha256": "f0fb32d770c4f3e47daaf65797e471a05d0897d38ff40bba2b345546e0ba2286",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__THREE_REGION_COMPLEMENT_EMPTINESS_NOT_IDENTIFIED_BY_CURRENT_EVIDENCE__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_cursorbench_three_region_complement_nonidentifiability_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 14,
+ "result_sha256": "9ffe219e212ccefaad8ff521bcf512f60b3f93ea28af60ed7e444a0f14b4305e",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

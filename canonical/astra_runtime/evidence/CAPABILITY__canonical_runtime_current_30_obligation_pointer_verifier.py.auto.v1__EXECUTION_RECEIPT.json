@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/current_30_obligation_pointer_verifier.py.auto.v1",
+ "elapsed_ms": 26.576,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/current_30_obligation_pointer_verifier.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/current_30_obligation_pointer_verifier.py",
+ "module_sha256": "3789b08fbbf1976c68563a50c3307dd618bb26c84bc2fcf17ddeabb21ba03695",
+ "observed": {
+  "returncode": 0,
+  "status": "PASS__CURRENT_AUTHORITY_REBOUND_TO_VERIFIED_30_OBLIGATION_BASIS"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_30_obligation_pointer_verifier.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 10,
+ "result_sha256": "302c14d0c706658f0c30a5f2de657e6b1a3fa3b3a0b92a4819727b1965a142e6",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

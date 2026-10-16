@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/abc_observable_trace_scope_rebind_verifier_v1.py.auto.v1",
+ "elapsed_ms": 54.145,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/abc_observable_trace_scope_rebind_verifier_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/abc_observable_trace_scope_rebind_verifier_v1.py",
+ "module_sha256": "0d1b6d260573f435b8cb0ad863455d89782b09b8539f9406fee00537133c538c",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__TARGET_SCOPE_SUPERSET_CLOSED__DOMINANCE_AND_UNDOMINATED_ESCAPE_REMAIN_OPEN__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_abc_observable_trace_scope_rebind_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 8,
+ "result_sha256": "87456cc328daf812a525875c3a8b92afdbf1b6a430d0faa1c4882cb647fc51ef",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
