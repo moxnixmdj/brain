@@ -111,9 +111,12 @@ def source_sha256(root: Any, rel: str) -> str:
     return hashlib.sha256(resolve(root, rel).read_bytes()).hexdigest()
 
 
-def load_symbol(root: Any, rel: str, name: str) -> Any:
+def load_symbol(root: Any, rel: str, name: str, allow_import_effects: bool = False) -> Any:
+    """``allow_import_effects`` is ONLY for callers that already run inside a sandbox enforcing the
+    same refusal at runtime (brain_module_invoke_runner_v1's audit hook); everyone else keeps the
+    static screen."""
     path = resolve(root, rel)
-    effects = import_time_effects(ast.parse(path.read_text(encoding="utf-8")))
+    effects = [] if allow_import_effects else import_time_effects(ast.parse(path.read_text(encoding="utf-8")))
     if effects:
         raise ResearchToolUnsafe("RESEARCH_TOOL_IMPORT_TIME_EFFECTS:" + rel + ":" + effects[0])
     module_name = "project_brain_research_tool_" + hashlib.sha256(str(path).encode()).hexdigest()[:16]

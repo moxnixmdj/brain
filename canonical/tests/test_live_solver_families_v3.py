@@ -203,6 +203,7 @@ def test_kernel_refuses_exactly_the_registry_source_types_the_kernel_rejects():
     # verified extended-registry entries run through run_adapter_locally, never the kernel
     assert [c for c in refused if c not in canonical] == [
         "brain.module.function.invoke",
+        "brain.module.function.solve",
         "math.exact_symbolic.compute.sympy",
         "python.source.docstrings.strip",
         "python.source_tree.manifest.sha256",

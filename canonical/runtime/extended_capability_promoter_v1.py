@@ -665,7 +665,8 @@ BATCHES: dict[str, dict[str, Any]] = {
                 "modules": STDLIB_ADAPTER_MODULES,
                 "requires": ["python.source_tree.available"],
                 "provides": ["python.source_tree.manifest_sha256"],
-                "keywords": ["manifest", "fingerprint", "sha256", "python", "source", "tree", "directory", "snapshot", "hash"],
+                # distinctive words only: "python source tree" alone must not out-score the ast audit
+                "keywords": ["manifest", "fingerprint", "sha256", "directory", "snapshot", "hash"],
                 "result_fields": ["status", "manifest_sha256", "file_count", "total_bytes", "output_path", "output_sha256", "output_verified"],
                 "limitations": ["Covers *.py files only; other files never affect the digest.",
                                 "Paths are relative to the given directory, so the same tree elsewhere gives the same digest.",

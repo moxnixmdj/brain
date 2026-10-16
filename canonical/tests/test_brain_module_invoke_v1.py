@@ -1,4 +1,4 @@
-"""brain.module.function.invoke: test-evidenced repository modules callable read-only from a sentence."""
+"""brain.module.function.invoke: every importable Brain module function callable read-only from a sentence, tiered by its test evidence."""
 from __future__ import annotations
 
 import json
@@ -27,15 +27,28 @@ class EvidenceTests(unittest.TestCase):
     def test_check_mode_finds_no_drift(self):
         self.assertEqual(evidence.check(), [])
 
-    def test_every_admitted_module_came_from_the_unverified_inventory(self):
+    def test_every_admitted_function_came_from_the_inventory_with_an_honest_tier(self):
         data = invoker.load_evidence(ROOT)
         inventory = set(evidence.inventory_paths())
         self.assertGreater(len(data["modules"]), 0)
         self.assertEqual(set(data["modules"]) - inventory, set())
         for rel, row in data["modules"].items():
-            self.assertGreater(row["test_cases_passed"], 0, rel)
-            self.assertTrue(row["tests"], rel)
             self.assertTrue(row["functions"], rel)
+            for fname, fn in row["functions"].items():
+                self.assertIn(fn["tier"], invoker.CORRECTNESS, (rel, fname))
+                self.assertFalse(fname.startswith("_"), (rel, fname))
+                if fn["tier"] == invoker.TIER_TESTED:
+                    self.assertGreater(fn["passing_cases"], 0, (rel, fname))
+                    self.assertTrue(row["tests"], rel)
+                else:
+                    self.assertEqual(fn.get("passing_cases", 0), 0, (rel, fname))
+
+    def test_functions_named_by_a_failing_test_case_are_never_admitted(self):
+        data = invoker.load_evidence(ROOT)
+        self.assertTrue(data["refused"])
+        for rel, fns in data["refused"].items():
+            admitted = set((data["modules"].get(rel) or {}).get("functions") or {})
+            self.assertEqual(admitted & set(fns), set(), rel)
 
     def test_inventory_rows_themselves_stay_unexecutable(self):
         caps = _registry()
@@ -65,11 +78,11 @@ class LiveRouteTests(unittest.TestCase):
     def tearDown(self):
         shutil.rmtree(SCRATCH, ignore_errors=True)
 
-    def _solve(self, function: str, payload, name: str) -> tuple[dict, dict | None]:
+    def _solve(self, function: str, payload, name: str, module: str = CLAIM_MODULE) -> tuple[dict, dict | None]:
         rel = SCRATCH.relative_to(ROOT).as_posix()
         (SCRATCH / (name + ".json")).write_text(json.dumps(payload), encoding="utf-8")
         goal = ("Invoke function %s of module %s with the payload %s/%s.json and save the result to %s/%s_out.json."
-                % (function, CLAIM_MODULE, rel, name, rel, name))
+                % (function, module, rel, name, rel, name))
         result = adm.solve({"task_id": "test-invoke-" + name, "goal": goal})
         out = SCRATCH / (name + "_out.json")
         return result, (json.loads(out.read_text(encoding="utf-8")) if out.exists() else None)
@@ -86,7 +99,19 @@ class LiveRouteTests(unittest.TestCase):
                 self.assertTrue(result["status"].startswith("PASS"), result["status"])
                 self.assertEqual(record["result"], classify_support(claim, ev))
                 self.assertEqual(record["result"]["relation"], relation)
-                self.assertEqual(record["result_correctness"], "NOT_INDEPENDENTLY_VERIFIED__MODULE_TESTS_PASSED_AT_THIS_SHA")
+                self.assertEqual(record["tier"], invoker.TIER_TESTED)
+                self.assertEqual(record["result_correctness"], invoker.CORRECTNESS[invoker.TIER_TESTED])
+                self.assertGreater(record["evidence"]["passing_test_cases"], 0)
+
+    def test_untested_function_runs_and_says_it_has_no_test_evidence(self):
+        from canonical.runtime.goal_front_compiler_v1 import sentence_clauses
+        text = "Hash the file. Then write the report; finally stop."
+        result, record = self._solve("sentence_clauses", {"text": text}, "untested",
+                                     module="canonical/runtime/goal_front_compiler_v1.py")
+        self.assertTrue(result["status"].startswith("PASS"), result["status"])
+        self.assertEqual(record["tier"], invoker.TIER_UNTESTED)
+        self.assertEqual(record["result_correctness"], invoker.CORRECTNESS[invoker.TIER_UNTESTED])
+        self.assertEqual(record["result"], json.loads(json.dumps(sentence_clauses(text))))
 
     def test_sentence_naming_an_unadmitted_function_fails_closed(self):
         result, record = self._solve("compile_goal_not_here", {"x": 1}, "neg")
