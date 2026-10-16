@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_union25_mandatory_loss_v1.py.auto.v1",
- "elapsed_ms": 0.96,
+ "elapsed_ms": 1.237,
  "independent_run_reference": {
-  "github_run_id": 38974039178,
+  "github_run_id": 38978751577,
   "oidc_claims": {
    "actor": "moxnixmdj",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "arena/120f25af-brain",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/pull/4725/merge",
-   "jti": "bdbfc056-058d-4542-832a-63b08d633a15",
+   "jti": "0bedf95b-6174-4258-acef-37374d2eb479",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "38974039178",
+   "run_id": "38978751577",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/pull/4725/merge"
   }
  },
