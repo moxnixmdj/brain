@@ -141,6 +141,44 @@ class LiveIntegratedBrainV1Tests(unittest.TestCase):
         manifest.unlink()
         source.unlink()
 
+    def test_a_receipt_backed_capability_is_planned_executed_and_reverified(self):
+        """The 294 receipt-backed capabilities must stay real in this entry too, and not
+        only behind the invoker: this is the planner -> controller -> adapter -> reverify
+        loop.
+
+        Measured for the first time on 2026-10-16, all 294 driven through run() with their
+        empty input contracts: 221 PASS__REAL_TASK_PLANNED_EXECUTED_AND_REVERIFIED / 73
+        FAIL__VERIFIED_CAPABILITY_EXECUTION, each on the capability's own non-success
+        verdict, 8.0/s.  This guard is deliberately not a guard of the `bound:` key
+        normalization: this entry passes bare capability ids to the adapter, so it was
+        already able to run them - an earlier 0-of-175 measurement of this entry was an
+        artifact of omitting `capability_inputs`, not a property of the entry.
+        """
+        registry = lib.load_verified_registry()
+        cid = next(c for c, e in sorted(registry.items())
+                   if e.get("capability_source") == "receipt_projection")
+        before = lane._changed_paths(str(ROOT))
+        task_id = "LIVE_BRAIN_RECEIPT_BACKED_CAPABILITY"
+        result = run({
+            "task_id": task_id,
+            "mission_id": task_id,
+            "target_effects": [cid],
+            "capability_inputs": {cid: {}},
+            "registry": registry,
+        })
+        try:
+            self.assertTrue(result["pass"], result.get("status"))
+            self.assertEqual(result["status"], "PASS__REAL_TASK_PLANNED_EXECUTED_AND_REVERIFIED")
+            self.assertEqual(result["selected_plan"], [cid])
+            self.assertEqual(result["execution"][0]["capability_id"], cid)
+            self.assertTrue(result["execution"][0]["pass"])
+            self.assertEqual(result["model_dependency_count"], 0)
+        finally:
+            checkpoint = (result.get("controller_checkpoint") or {}).get("path")
+            if checkpoint and (ROOT / checkpoint).is_file():
+                (ROOT / checkpoint).unlink()
+            lane.restore_tree(str(ROOT), before, ())
+
     def test_model_assisted_controller_cannot_be_laundered_by_mode_label(self):
         cid = "archive.tar_gz.create_from_manifest"
         fake = {
