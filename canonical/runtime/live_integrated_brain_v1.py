@@ -16,7 +16,7 @@ from time import perf_counter_ns
 from typing import Any, Mapping
 
 from canonical.runtime.capability_planner import PlanningFailure, plan_capabilities
-from canonical.runtime import astra_runtime, goal_compiler
+from canonical.runtime import astra_runtime, goal_compiler, goal_front_compiler_v1
 from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
 from canonical.runtime.raw_goal_archive_acceptance_v1 import verify as verify_raw_archive_acceptance
 from canonical.runtime.runtime_cognition_credit_guard_v1 import assert_credit_path_cognition_governance
@@ -336,7 +336,7 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
         registry = load_verified_registry()
         admissible = goal_compiler._platform_admissible_registry(dict(registry))
         try:
-            compiled = goal_compiler.compile_goal(goal, admissible, ROOT)
+            compiled = goal_front_compiler_v1.compile_goal(goal, admissible, ROOT)
         except goal_compiler.GoalCompilationFailure as exc:
             return {
                 "schema": SCHEMA,
