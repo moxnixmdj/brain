@@ -159,6 +159,16 @@ def _child(root: pathlib.Path, req: dict[str, Any]) -> Any:
     return reply["result"]
 
 
+def _canonical(value: Any) -> str:
+    """Canonical JSON of a result, so two runs compare by content and not by repr."""
+    return json.dumps(value, sort_keys=True, default=str)
+
+
+def _code(exc: BaseException) -> str:
+    """A stable machine-readable skip code: the exception's own code, never its free text."""
+    return str(exc).split(":", 1)[0][:64]
+
+
 def _zero_argument_tested(evidence: dict[str, Any]) -> list[tuple[str, str]]:
     """Every TEST_EVIDENCED function that requires no argument, in deterministic order."""
     out: list[tuple[str, str]] = []
@@ -205,19 +215,23 @@ def self_test(root: pathlib.Path, max_attempts: int = 8) -> dict[str, Any]:
         try:
             adm = admitted(root, rel, function, data)
         except ModuleInvokeRefused as exc:
-            attempts.append({"source_path": rel, "function": function, "skipped": str(exc)[:120]})
+            attempts.append({"source_path": rel, "function": function, "skipped": _code(exc)})
             continue
-        started = time.perf_counter()
         try:
-            guarded = invoke(root, rel, function, {})
+            first = invoke(root, rel, function, {})
+            second = invoke(root, rel, function, {})
         except ModuleInvokeRefused as exc:
-            attempts.append({"source_path": rel, "function": function, "skipped": str(exc)[:120]})
+            attempts.append({"source_path": rel, "function": function, "skipped": _code(exc)})
             continue
-        guarded_ms = round((time.perf_counter() - started) * 1000, 3)
+        if _canonical(first) != _canonical(second):
+            # The runner re-executes this and compares result hashes, so a candidate that does
+            # not reproduce on THIS machine cannot be the one the capability is admitted on.
+            attempts.append({"source_path": rel, "function": function, "skipped": "NON_DETERMINISTIC"})
+            continue
         direct = evidence._oracle_direct(root, rel, function)
-        agreed = evidence._canon(guarded) == evidence._canon(direct)
+        agreed = _canonical(first) == _canonical(direct)
         attempts.append({"source_path": rel, "function": function, "tier": adm["function"]["tier"],
-                         "result_type": type(guarded).__name__ if guarded is not None else "null",
+                         "result_type": type(first).__name__ if first is not None else "null",
                          "agreed": agreed})
         return {
             "status": "MODULE_FUNCTION_INVOKED" if agreed else "FAIL_CLOSED__SELF_TEST_DIFFERENTIAL_DISAGREEMENT",
@@ -226,13 +240,13 @@ def self_test(root: pathlib.Path, max_attempts: int = 8) -> dict[str, Any]:
             "source_path": rel,
             "function": function,
             "tier": adm["function"]["tier"],
-            "result_type": type(guarded).__name__ if guarded is not None else "null",
-            "result_sha256": hashlib.sha256(json.dumps(guarded, sort_keys=True, default=str).encode("utf-8")).hexdigest(),
+            "result_type": type(first).__name__ if first is not None else "null",
+            "result_sha256": hashlib.sha256(_canonical(first).encode("utf-8")).hexdigest(),
             "differential": {
                 "compared": 1,
                 "agreed": 1 if agreed else 0,
                 "oracle": "module_invocation_evidence_v1._oracle_direct (separate child, no audit hook)",
-                "guarded_child_ms": guarded_ms,
+                "repeatable": True,
             },
             "attempts": attempts,
             "result_correctness": "ZERO_ARGUMENT_SELF_TEST__DIFFERENTIAL_AGREEMENT__NOT_PER_CALL_CORRECTNESS",

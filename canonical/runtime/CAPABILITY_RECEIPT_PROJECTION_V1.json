@@ -36,7 +36,7 @@
    "status": "RECEIPT_BACKED_PENDING_PROMOTION",
    "verification": {
     "model_dependency_count": 0,
-    "module_sha256": "86858643bb1a0f3676de9aa769cd30299591d1cf28d755d85738929f96ac69ac",
+    "module_sha256": "366bd7e909fa2eecb611fd1ad0119c3e6ec9f01d0103fdde997d78068e63da1d",
     "observed_effect": {
      "pass": true,
      "status": "MODULE_FUNCTION_INVOKED"
