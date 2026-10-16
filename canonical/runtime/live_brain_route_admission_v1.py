@@ -725,6 +725,38 @@ def promised_artifact_errors(goal: str, future_artifacts: list[str]) -> list[str
     return errors
 
 
+_REGISTRY_FILES = (
+    ROOT / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    ROOT / "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json",
+)
+_registry_cache: tuple[tuple[tuple[int, int] | None, ...], dict[str, Any]] | None = None
+
+
+def _registry_stamp() -> tuple[tuple[int, int] | None, ...]:
+    """Cheap change detector: each registry file's (size, mtime_ns). Any edit invalidates."""
+    out = []
+    for path in _REGISTRY_FILES:
+        try:
+            st = path.stat()
+            out.append((st.st_size, st.st_mtime_ns))
+        except OSError:
+            out.append(None)
+    return tuple(out)
+
+
+def verified_registry() -> Mapping[str, Mapping[str, Any]]:
+    """The verified registry, parsed once per content change instead of once per solve.
+
+    Measured 2026-10-16: registry parse was ~8 ms of a ~14 ms solve.  Callers must treat the
+    result as read-only; ``solve`` takes a shallow copy before any filtering.
+    """
+    global _registry_cache
+    stamp = _registry_stamp()
+    if _registry_cache is None or _registry_cache[0] != stamp:
+        _registry_cache = (stamp, load_verified_registry(include_extended=True))
+    return _registry_cache[1]
+
+
 def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     """THE live Brain entry: front-compile -> admit -> execute -> tool truth -> promised artifacts."""
     started = perf_counter_ns()
@@ -733,7 +765,7 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     if not task_id or not goal:
         return _fail(task_id, "FAIL_CLOSED", "REQUEST_INVALID", started)
     try:
-        registry = load_verified_registry(include_extended=True)
+        registry = verified_registry()
         admissible = goal_compiler._platform_admissible_registry(dict(registry))
         compiled = front.compile_goal(goal, admissible, ROOT)
     except goal_compiler.GoalCompilationFailure as exc:
