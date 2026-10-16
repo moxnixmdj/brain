@@ -1,0 +1,26 @@
+{
+ "capability_id": "canonical/runtime/livebench_union25_mandatory_loss_v1.py.auto.v1",
+ "elapsed_ms": 0.219,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/livebench_union25_mandatory_loss_v1.py",
+ "module_sha256": "8b8373655c355ed7fbda5022682a97906c08e47c272e3d1c7206a97f3f247fcd",
+ "observed": {
+  "status": "PASS__EXACT_NEW_UNION25_MANDATORY_LOSS_LOWER_BOUND"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_mandatory_loss_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 10,
+ "result_sha256": "42b2a5bd32d1593b3d88ef240faf38be39f4cea717ae464b4f17b635f470238e",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

@@ -1,0 +1,5334 @@
+{
+ "count": 119,
+ "entries": {
+  "canonical/runtime/bounded_explicit_categorical_support_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/bounded_explicit_categorical_support_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "bounded_explicit_categorical_support_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "bounded",
+    "explicit",
+    "categorical",
+    "support"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/bounded_explicit_categorical_support_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bounded_explicit_categorical_support_v1.py",
+    "path": "canonical/runtime/bounded_explicit_categorical_support_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "f53594712ae0a416b3f12c15ffdc4e271cd8da78e1c930775e8659494232bb25",
+    "observed_effect": {
+     "status": "UNRESOLVED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bounded_explicit_categorical_support_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/current_escape_o11_objective_acceptance_law_gate_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/current_escape_o11_objective_acceptance_law_gate_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "current_escape_o11_objective_acceptance_law_gate_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "current",
+    "escape",
+    "o11",
+    "objective",
+    "acceptance",
+    "law",
+    "gate"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/current_escape_o11_objective_acceptance_law_gate_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/current_escape_o11_objective_acceptance_law_gate_v1.py",
+    "path": "canonical/runtime/current_escape_o11_objective_acceptance_law_gate_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "5b0d8e793276888e4c91de37042a28d66e279b29098b90866e312d98b64ec405",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_escape_o11_objective_acceptance_law_gate_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/current_escape_o11_proof_instantiation_search_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/current_escape_o11_proof_instantiation_search_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "current_escape_o11_proof_instantiation_search_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "current",
+    "escape",
+    "o11",
+    "proof",
+    "instantiation",
+    "search"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/current_escape_o11_proof_instantiation_search_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/current_escape_o11_proof_instantiation_search_v1.py",
+    "path": "canonical/runtime/current_escape_o11_proof_instantiation_search_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "2402e93229941abbc0c5cc5151ebe05831bbadf9ce7baf68720cc8e45942e31c",
+    "observed_effect": {
+     "pass": true,
+     "status": "PASS__CURRENT_O11_PROOF_INSTANTIATION_SEARCH_COMPLETE"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_escape_o11_proof_instantiation_search_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/current_escape_o_objective_acceptance_law_gate_v2.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/current_escape_o_objective_acceptance_law_gate_v2.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "current_escape_o_objective_acceptance_law_gate_v2",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "current",
+    "escape",
+    "objective",
+    "acceptance",
+    "law",
+    "gate"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/current_escape_o_objective_acceptance_law_gate_v2.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/current_escape_o_objective_acceptance_law_gate_v2.py",
+    "path": "canonical/runtime/current_escape_o_objective_acceptance_law_gate_v2.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "7ac0906e80326d4d9844ff4d91e96c5c4611191aafd4bed2c6daa6ee6fe79d8b",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_escape_o_objective_acceptance_law_gate_v2.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/current_escape_o_proof_instantiation_search_v2.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/current_escape_o_proof_instantiation_search_v2.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "current_escape_o_proof_instantiation_search_v2",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "current",
+    "escape",
+    "proof",
+    "instantiation",
+    "search"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/current_escape_o_proof_instantiation_search_v2.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/current_escape_o_proof_instantiation_search_v2.py",
+    "path": "canonical/runtime/current_escape_o_proof_instantiation_search_v2.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "c9f154393c3204404fb480ed75cefc10c9a8a23f5d8f7ff913db9f98ed424160",
+    "observed_effect": {
+     "pass": true,
+     "status": "PASS__CURRENT_O_PROOF_INSTANTIATION_SEARCH_COMPLETE"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_escape_o_proof_instantiation_search_v2.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "current_escape_o_reuse_transmutation_bridge_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "current",
+    "escape",
+    "reuse",
+    "transmutation",
+    "bridge"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v1.py",
+    "path": "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "7ae7029b3999d7d1d7883e8b343a30eef64715b7981c147c7f85e5b4a36678f1",
+    "observed_effect": {
+     "pass": true,
+     "status": "PASS__CURRENT_O_REUSE_TRANSMUTATION_DISCOVERY"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_escape_o_reuse_transmutation_bridge_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v2.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v2.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "current_escape_o_reuse_transmutation_bridge_v2",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "current",
+    "escape",
+    "reuse",
+    "transmutation",
+    "bridge"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v2.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v2.py",
+    "path": "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v2.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "f18516db47409cf4e639461e08fa63f2ef64305f1b845e8c85c7ce4f89560abb",
+    "observed_effect": {
+     "pass": true,
+     "status": "PASS__STRICT_TRANSMUTATION_PLUS_LEGACY_ADAPTATION_DISCOVERY__ZERO_CREDIT"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_escape_o_reuse_transmutation_bridge_v2.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/escape_gap_a_policy_cover_adapter_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/escape_gap_a_policy_cover_adapter_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "escape_gap_a_policy_cover_adapter_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "escape",
+    "gap",
+    "policy",
+    "cover",
+    "adapter"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/escape_gap_a_policy_cover_adapter_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/escape_gap_a_policy_cover_adapter_v1.py",
+    "path": "canonical/runtime/escape_gap_a_policy_cover_adapter_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "67418350dd1f9ba85d27ee43da892a4d24262d336a9cdbff9587ed4a4cdada7e",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_escape_gap_a_policy_cover_adapter_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_active15_plus_one_noarg_pointwise_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_active15_plus_one_noarg_pointwise_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_active15_plus_one_noarg_pointwise_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "active15",
+    "plus",
+    "one",
+    "noarg",
+    "pointwise"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_active15_plus_one_noarg_pointwise_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_active15_plus_one_noarg_pointwise_v1.py",
+    "path": "canonical/runtime/livebench_active15_plus_one_noarg_pointwise_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "a6bc738731e2be3f13f16b6f20c46e8a0b8f42e1538c6e8df59dda1311125143",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_active15_plus_one_noarg_pointwise_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_frozen_schema19_envelope_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_frozen_schema19_envelope_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_frozen_schema19_envelope_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "frozen",
+    "schema19",
+    "envelope"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_frozen_schema19_envelope_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_frozen_schema19_envelope_v1.py",
+    "path": "canonical/runtime/livebench_frozen_schema19_envelope_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "c84181190b18c49fafdfaacdef0cc2093dc21cf53a9bcec56d5908740cdf4f2d",
+    "observed_effect": {
+     "status": "PASS__ASSUMPTION_FREE_FROZEN_SCHEMA19_ENVELOPE__REGISTRY25_14559_TO_SCHEMA19_3108__EXTRA156_TO6"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_frozen_schema19_envelope_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_generator24_extra_parametric_reduction_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_generator24_extra_parametric_reduction_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_generator24_extra_parametric_reduction_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "generator24",
+    "extra",
+    "parametric",
+    "reduction"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_generator24_extra_parametric_reduction_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_generator24_extra_parametric_reduction_v1.py",
+    "path": "canonical/runtime/livebench_generator24_extra_parametric_reduction_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "edbab5d3225f7e019f9ac711d72f326991003735e85b7ae8ae52782919480518",
+    "observed_effect": {
+     "status": "PASS__GENERATOR24_EXTRA_RAW_PARAMETER_AXES_REDUCED_TO_FORCED_COUNTS_PLUS_TWO_STRUCTURAL_BITS__INDEPENDENT_SOURCE_AUDIT_AND_ENGLISH_CARRIER_BANK_REMAIN"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_generator24_extra_parametric_reduction_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_if_public_description_inverter_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_if_public_description_inverter_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_if_public_description_inverter_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "public",
+    "description",
+    "inverter"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_if_public_description_inverter_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_if_public_description_inverter_v1.py",
+    "path": "canonical/runtime/livebench_if_public_description_inverter_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "d2093827e4ec432b062bff7b1b21fe5d664d6d773a42ec6ca137a0cb2c6629f0",
+    "observed_effect": {},
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_if_public_description_inverter_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_if_reference_free_compound_witness_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_if_reference_free_compound_witness_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_if_reference_free_compound_witness_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "reference",
+    "free",
+    "compound",
+    "witness"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_if_reference_free_compound_witness_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_if_reference_free_compound_witness_v1.py",
+    "path": "canonical/runtime/livebench_if_reference_free_compound_witness_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "ac7b9ef521de9dd3da741516517b7ca054b800d5279f7e8369985d26a79fb1a2",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_if_reference_free_compound_witness_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_if_single_checker_solver_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_if_single_checker_solver_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_if_single_checker_solver_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "single",
+    "checker",
+    "solver"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_if_single_checker_solver_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_if_single_checker_solver_v1.py",
+    "path": "canonical/runtime/livebench_if_single_checker_solver_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "9c9d199f10961f4ffbe9075846a626dee9f723b8297761a4fd290dfafcc8556d",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_if_single_checker_solver_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_langdetect_balanced_decorator_invariance_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_langdetect_balanced_decorator_invariance_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_langdetect_balanced_decorator_invariance_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "langdetect",
+    "balanced",
+    "decorator",
+    "invariance"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_langdetect_balanced_decorator_invariance_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_langdetect_balanced_decorator_invariance_v1.py",
+    "path": "canonical/runtime/livebench_langdetect_balanced_decorator_invariance_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "b4f46c39e13cee80c56acb16713950fbb8821b1884640059ce76107a3bfaefbc",
+    "observed_effect": {
+     "status": "PASS__SOURCE_BOUND_BALANCED_DECORATOR_TRANSFORM_PRESERVES_LANGDETECT_CLEANING_BRANCH_AND_NGRAM_SEPARATOR_STREAM"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_langdetect_balanced_decorator_invariance_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy15_composition_archetypes_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy15",
+    "composition",
+    "archetypes"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py",
+    "path": "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "d85c47fc3f0660d8611d7d308217ca6b8ccfca0483aa2341dd321e5cc5dddfeb",
+    "observed_effect": {
+     "status": "PASS__928_COMPATIBLE_ACTIVE15_SETS_PARTITION_TO_7_ARCHETYPES"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_composition_archetypes_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy15_contract_composer_v2.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy15_contract_composer_v2.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy15_contract_composer_v2",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy15",
+    "contract",
+    "composer"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy15_contract_composer_v2.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy15_contract_composer_v2.py",
+    "path": "canonical/runtime/livebench_legacy15_contract_composer_v2.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "2d332f615e8fc34564efacae3b7fd06db6462b60901995e72ef6e8f8b6bb0212",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_contract_composer_v2.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy15_contract_composer_v3.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy15_contract_composer_v3.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy15_contract_composer_v3",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy15",
+    "contract",
+    "composer"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy15_contract_composer_v3.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy15_contract_composer_v3.py",
+    "path": "canonical/runtime/livebench_legacy15_contract_composer_v3.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "41b464fc4412f489453171eb11b9d8e021701b71bf1b55215d74bf7651d16adc",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_contract_composer_v3.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy15_general_composer_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy15_general_composer_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy15_general_composer_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy15",
+    "general",
+    "composer"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy15_general_composer_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy15_general_composer_v1.py",
+    "path": "canonical/runtime/livebench_legacy15_general_composer_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "43fb2baceffcd6b0ebd744b4007b99b84e160e88c23e8f779ef989463073a9c0",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_general_composer_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy15_joint_candidate_generator_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy15_joint_candidate_generator_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy15_joint_candidate_generator_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy15",
+    "joint",
+    "candidate",
+    "generator"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy15_joint_candidate_generator_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy15_joint_candidate_generator_v1.py",
+    "path": "canonical/runtime/livebench_legacy15_joint_candidate_generator_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "b1214c63fe67666a695684c6658ea84b2a3ba7b63e544a265bf8a8d297f8c376",
+    "observed_effect": {
+     "status": "PASS_CANDIDATES"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_joint_candidate_generator_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy15_joint_witness_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy15_joint_witness_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy15_joint_witness_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy15",
+    "joint",
+    "witness"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy15_joint_witness_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy15_joint_witness_v1.py",
+    "path": "canonical/runtime/livebench_legacy15_joint_witness_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "52651aa202f483fe2bcf4304efab40aa248c95f0b1deff35f2a3913df0a17969",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_joint_witness_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy15_lexical_slot_quotient_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy15_lexical_slot_quotient_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy15_lexical_slot_quotient_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy15",
+    "lexical",
+    "slot",
+    "quotient"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy15_lexical_slot_quotient_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy15_lexical_slot_quotient_v1.py",
+    "path": "canonical/runtime/livebench_legacy15_lexical_slot_quotient_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "d548a89c33c59565bdb104265b1c07feb918090075e4058cd80b361d1acf86d6",
+    "observed_effect": {
+     "status": "PASS__EXACT_192_REACHABLE_LEXICAL_SIGNATURES__RAW_1525_WORD_IDENTITY_ENUMERATION_DELETED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_lexical_slot_quotient_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy15_numeric_quotient_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy15_numeric_quotient_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy15_numeric_quotient_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy15",
+    "numeric",
+    "quotient"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy15_numeric_quotient_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy15_numeric_quotient_v1.py",
+    "path": "canonical/runtime/livebench_legacy15_numeric_quotient_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "0bce42193ad97d716f84357aacd2d28c4d78f646ac87657cdd9e9262cbcd4e0f",
+    "observed_effect": {
+     "status": "PASS__PARAMETRIC_NUMERIC_REDUCTION"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_numeric_quotient_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy15_pointwise_optimal_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy15",
+    "pointwise",
+    "optimal"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py",
+    "path": "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "7d24af0cfcbb7272816868872c516b90b974c324b77662cca9f8c29b721f3f7e",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_pointwise_optimal_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy15_pointwise_solver_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy15_pointwise_solver_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy15_pointwise_solver_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy15",
+    "pointwise",
+    "solver"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy15_pointwise_solver_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy15_pointwise_solver_v1.py",
+    "path": "canonical/runtime/livebench_legacy15_pointwise_solver_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "f766837d921c9df733fe3e25609e885cf5bb8857ac0c01864c2bf592b81e600c",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_pointwise_solver_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy15_punkt_context_quotient_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy15_punkt_context_quotient_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy15_punkt_context_quotient_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy15",
+    "punkt",
+    "context",
+    "quotient"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy15_punkt_context_quotient_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy15_punkt_context_quotient_v1.py",
+    "path": "canonical/runtime/livebench_legacy15_punkt_context_quotient_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "8c41914e081415cee082a848ffe22dd1bf06b1195510c08f0be0ffbda67d6bb5",
+    "observed_effect": {
+     "status": "PASS__RAW_SENTENCE_SLOT_PRODUCT_REDUCED_TO_FINITE_PUNKT_CONTEXT_QUOTIENT"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_punkt_context_quotient_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy15_slot_feasibility_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy15",
+    "slot",
+    "feasibility"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
+    "path": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "3eda8fb12b2bd7e7be4cac1d0905001018dea87674f204521d291aa4de6ea7e9",
+    "observed_effect": {
+     "status": "PASS__ID_COMPATIBILITY_STRICTLY_WEAKER_THAN_SLOT_SATISFIABILITY"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_slot_feasibility_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy15_special_composer_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy15_special_composer_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy15_special_composer_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy15",
+    "special",
+    "composer"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy15_special_composer_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy15_special_composer_v1.py",
+    "path": "canonical/runtime/livebench_legacy15_special_composer_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "919fe7851f71099eff490bd38774713f6f3c0c7d38498504c7205b153c9806b8",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_special_composer_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy15_universal_semantic_reduction_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy15_universal_semantic_reduction_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy15_universal_semantic_reduction_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy15",
+    "universal",
+    "semantic",
+    "reduction"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy15_universal_semantic_reduction_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy15_universal_semantic_reduction_v1.py",
+    "path": "canonical/runtime/livebench_legacy15_universal_semantic_reduction_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "9327d695140864a1ac80b1001ba6799dae6872e9252056ed43289ab35a2614ef",
+    "observed_effect": {
+     "status": "PASS__RAW_SLOT_CARTESIAN_PRODUCT_COLLAPSED_TO_SYMBOLIC_LEMMAS_PLUS_EXACT_PUNKT_RESIDUAL"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_universal_semantic_reduction_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy25_prompt_contract_compiler_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy25_prompt_contract_compiler_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy25_prompt_contract_compiler_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy25",
+    "prompt",
+    "contract",
+    "compiler"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy25_prompt_contract_compiler_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy25_prompt_contract_compiler_v1.py",
+    "path": "canonical/runtime/livebench_legacy25_prompt_contract_compiler_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "683593ac518865a519288940f0e07b9a4a40c69d74439d9cf66802b90a1744f4",
+    "observed_effect": {
+     "status": "NO_LEGACY_CONTRACT_RECOGNIZED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy25_prompt_contract_compiler_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy25_prompt_inverter_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy25_prompt_inverter_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy25_prompt_inverter_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy25",
+    "prompt",
+    "inverter"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy25_prompt_inverter_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy25_prompt_inverter_v1.py",
+    "path": "canonical/runtime/livebench_legacy25_prompt_inverter_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "9fbb9f36703279cdc7428834182831b857e75c75093ce17cfa929bce80089cbc",
+    "observed_effect": {
+     "status": "PASS"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy25_prompt_inverter_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy_composition_shape_reduction_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy_composition_shape_reduction_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy_composition_shape_reduction_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy",
+    "composition",
+    "shape",
+    "reduction"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy_composition_shape_reduction_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy_composition_shape_reduction_v1.py",
+    "path": "canonical/runtime/livebench_legacy_composition_shape_reduction_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "f29d2845a5e36426835d790025480e2867518ff1c27ce73f777b9352e8c1267b",
+    "observed_effect": {
+     "status": "PASS__EXACT_CONFLICT_COMPATIBLE_IDENTITY_SHAPE_REDUCTION"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy_composition_shape_reduction_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy_ifeval_prompt_inverter_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy_ifeval_prompt_inverter_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy_ifeval_prompt_inverter_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy",
+    "ifeval",
+    "prompt",
+    "inverter"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy_ifeval_prompt_inverter_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy_ifeval_prompt_inverter_v1.py",
+    "path": "canonical/runtime/livebench_legacy_ifeval_prompt_inverter_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "a94d0ba049f46cb5830c0b35813855a5559905e0abc162ff4ddfd65382b7539b",
+    "observed_effect": {},
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy_ifeval_prompt_inverter_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy_single_constraint_witness_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy_single_constraint_witness_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy_single_constraint_witness_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy",
+    "single",
+    "constraint",
+    "witness"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy_single_constraint_witness_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy_single_constraint_witness_v1.py",
+    "path": "canonical/runtime/livebench_legacy_single_constraint_witness_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "7069d52f744a50bc6a7e93e74da820f3dfeebcf5f5e06a43d685560f276c925c",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy_single_constraint_witness_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy_visible_constraint_compiler_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy_visible_constraint_compiler_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy",
+    "visible",
+    "constraint",
+    "compiler"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy_visible_constraint_compiler_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v1.py",
+    "path": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "8316c9713b98b92d0c1307bc85dba55ede0175ce7845c3d001f107cd7ebaba58",
+    "observed_effect": {
+     "status": "PASS"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy_visible_constraint_compiler_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy_visible_constraint_compiler_v2.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v2.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy_visible_constraint_compiler_v2",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy",
+    "visible",
+    "constraint",
+    "compiler"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy_visible_constraint_compiler_v2.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v2.py",
+    "path": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v2.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "e662873de4775857e9b96d838a2543bbcf78de41c073eaa41088edd70b8b1315",
+    "observed_effect": {
+     "status": "PASS"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy_visible_constraint_compiler_v2.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy_visible_constraint_compiler_v3.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v3.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy_visible_constraint_compiler_v3",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy",
+    "visible",
+    "constraint",
+    "compiler"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy_visible_constraint_compiler_v3.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v3.py",
+    "path": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v3.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "b00f4dd3d4e60884d7b440bd28ad6d9434c0402d62c57d730a54dc06f9941451",
+    "observed_effect": {
+     "status": "PASS"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy_visible_constraint_compiler_v3.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_legacy_visible_constraint_compiler_v4.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v4.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_legacy_visible_constraint_compiler_v4",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "legacy",
+    "visible",
+    "constraint",
+    "compiler"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_legacy_visible_constraint_compiler_v4.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v4.py",
+    "path": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v4.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "11e72aab0a8d143bebff0e5d2021c5802ce7d459c70136908fd8b92f2fbdac47",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy_visible_constraint_compiler_v4.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_ngram_reference_free_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_ngram_reference_free_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_ngram_reference_free_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "ngram",
+    "reference",
+    "free"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_ngram_reference_free_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_ngram_reference_free_v1.py",
+    "path": "canonical/runtime/livebench_ngram_reference_free_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "73e9a8d29fcbda72a112f2aba6b41f45ecf4fccd86b06fbe21b8d7bccc4483c8",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_ngram_reference_free_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_pointwise_minimum_cut_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_pointwise_minimum_cut_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_pointwise_minimum_cut_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "pointwise",
+    "minimum",
+    "cut"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_pointwise_minimum_cut_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_pointwise_minimum_cut_v1.py",
+    "path": "canonical/runtime/livebench_pointwise_minimum_cut_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "87f407dfd2c049a72346562fc65d16f252edcf014e30f1877e8fc8a9d3549c86",
+    "observed_effect": {
+     "status": "PASS__EXACT_STRUCTURAL_X_LEXICAL_X_SENTENCE_PARTITION__ONLY_TWO_MANDATORY_LOSS_COORDINATES"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_pointwise_minimum_cut_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_pointwise_optimality_certificate_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_pointwise_optimality_certificate_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_pointwise_optimality_certificate_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "pointwise",
+    "optimality",
+    "certificate"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_pointwise_optimality_certificate_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_pointwise_optimality_certificate_v1.py",
+    "path": "canonical/runtime/livebench_pointwise_optimality_certificate_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "823f104dea3499914cb2effcbaecf8324292488296ea2f0d5b23929060c255e3",
+    "observed_effect": {},
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_pointwise_optimality_certificate_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_post_sacrifice_parametric_reduction_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_post_sacrifice_parametric_reduction_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_post_sacrifice_parametric_reduction_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "post",
+    "sacrifice",
+    "parametric",
+    "reduction"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_post_sacrifice_parametric_reduction_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_post_sacrifice_parametric_reduction_v1.py",
+    "path": "canonical/runtime/livebench_post_sacrifice_parametric_reduction_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "057dd32bbbe1ecebff78107717eb0c3e8748fe1488c9e3b7f37d3a574cd4fbd8",
+    "observed_effect": {
+     "status": "PASS__NON_SENTENCE_POST_SACRIFICE_CONSTRUCTION_REDUCED_PARAMETRICALLY__ONLY_PINNED_PUNKT_CONTEXT_REMAINS"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_post_sacrifice_parametric_reduction_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_prompt_contract_synthesizer_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_prompt_contract_synthesizer_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_prompt_contract_synthesizer_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "prompt",
+    "contract",
+    "synthesizer"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_prompt_contract_synthesizer_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_prompt_contract_synthesizer_v1.py",
+    "path": "canonical/runtime/livebench_prompt_contract_synthesizer_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "332024ff19105f2af6c49f861ff4f5fc6cc938ce728a2fbbb58da62ab715c911",
+    "observed_effect": {
+     "status": "BLOCKED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_prompt_contract_synthesizer_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_punkt_parameter_independence_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_punkt_parameter_independence_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_punkt_parameter_independence_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "punkt",
+    "parameter",
+    "independence"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_punkt_parameter_independence_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_punkt_parameter_independence_v1.py",
+    "path": "canonical/runtime/livebench_punkt_parameter_independence_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "13ba82c16c4415e18c89d5a748ead565702b2d835a9d7c1964ab1f13163e9889",
+    "observed_effect": {
+     "status": "PASS__PUNKT_LEARNED_PARAMETER_DEPENDENCY_ELIMINATED_BY_CONSTRUCTION__PENDING_INDEPENDENT_SOURCE_AUDIT"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_punkt_parameter_independence_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_release_schema_scope_bridge_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_release_schema_scope_bridge_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_release_schema_scope_bridge_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "release",
+    "schema",
+    "scope",
+    "bridge"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_release_schema_scope_bridge_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_release_schema_scope_bridge_v1.py",
+    "path": "canonical/runtime/livebench_release_schema_scope_bridge_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "b68ece5456ea40041fbe29ad1cefd2838b1b8f7a9148bec0f4177237d2b8888b",
+    "observed_effect": {
+     "status": "PASS__FROZEN_PARQUET_SCHEMA_EXCLUDES_SIX_ARGUMENT_BEARING_EXTRAS__PUBLIC_15_VS_16_DISAGREEMENT_REDUCED_TO_FOUR_ACTIVE15_PLUS_ONE_SUPERSETS"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_release_schema_scope_bridge_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_release_unconditional_schema_envelope_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_release_unconditional_schema_envelope_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_release_unconditional_schema_envelope_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "release",
+    "unconditional",
+    "schema",
+    "envelope"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_release_unconditional_schema_envelope_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_release_unconditional_schema_envelope_v1.py",
+    "path": "canonical/runtime/livebench_release_unconditional_schema_envelope_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "c5ec6e6cd0527b5660ac955f1cc7ac988066edc84edf5a2288c184ebe0f0ca3f",
+    "observed_effect": {
+     "status": "PASS__FROZEN_SCHEMA_UNCONDITIONALLY_REDUCES_RELEASE_SCOPE_TO_ACTIVE15_PLUS_COMPATIBLE_SUBSETS_OF_FOUR_NOARG_EXTRAS__3108_STRUCTURES__7_EXTRA_SIGNATURES"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_release_unconditional_schema_envelope_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_root1_reused_core_selector_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_root1_reused_core_selector_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_root1_reused_core_selector_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "root1",
+    "reused",
+    "core",
+    "selector"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_root1_reused_core_selector_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_root1_reused_core_selector_v1.py",
+    "path": "canonical/runtime/livebench_root1_reused_core_selector_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "00ec9581266404b4f102b6cfc956ec3b655e91289a66d04977a79f76aed4a129",
+    "observed_effect": {
+     "status": "QUALIFICATION_REQUIRED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_root1_reused_core_selector_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_schema19_pointwise_candidate_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_schema19_pointwise_candidate_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_schema19_pointwise_candidate_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "schema19",
+    "pointwise",
+    "candidate"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_schema19_pointwise_candidate_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_schema19_pointwise_candidate_v1.py",
+    "path": "canonical/runtime/livebench_schema19_pointwise_candidate_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "e1a79d3339f9ffefe8371528aaef5d13c10bdc9baae1226959787b033a41cb20",
+    "observed_effect": {
+     "status": "PASS__SCHEMA19_EXTRA_SURFACE_REDUCED_TO_FOUR_PLUS_ONE_DELEGATIONS_AND_TWO_CASE_X_NO_COMMA_COMPOSITIONS"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_schema19_pointwise_candidate_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_union25_archetypes_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_union25_archetypes_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_union25_archetypes_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "union25",
+    "archetypes"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_union25_archetypes_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_union25_archetypes_v1.py",
+    "path": "canonical/runtime/livebench_union25_archetypes_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "54cd24925bedf6937bc5c6893a034a95fad3cb2154e3c99160dbf3749c930afb",
+    "observed_effect": {
+     "status": "PASS__UNION25_STRUCTURAL_EXPLOSION_REDUCED_EXACTLY"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_archetypes_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_union25_channel_factorization_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_union25_channel_factorization_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_union25_channel_factorization_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "union25",
+    "channel",
+    "factorization"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_union25_channel_factorization_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_union25_channel_factorization_v1.py",
+    "path": "canonical/runtime/livebench_union25_channel_factorization_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "d06da359c947ac42854b3294ac8be5d780fa0ff1d41e80768d0cca90392417c1",
+    "observed_effect": {
+     "status": "PASS__21_HARD_SIGNATURES_FACTOR_EXACTLY_INTO_5_CHASSIS_PLUS_3_COUNT_OVERLAYS"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_channel_factorization_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_union25_extension_kernel_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_union25_extension_kernel_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_union25_extension_kernel_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "union25",
+    "extension",
+    "kernel"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_union25_extension_kernel_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_union25_extension_kernel_v1.py",
+    "path": "canonical/runtime/livebench_union25_extension_kernel_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "90e1f8245bb64cf47e0e44f42cd903e5bd72f56471f20a56d0fd5636b0ed62cb",
+    "observed_effect": {
+     "status": "PASS__UNION25_DELTA156_PROJECTS_TO_20_HARD_EXTENSION_SIGNATURES_WIDTH_LE_3"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_extension_kernel_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_union25_language_exception_carrier_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_union25_language_exception_carrier_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_union25_language_exception_carrier_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "union25",
+    "language",
+    "exception",
+    "carrier"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_union25_language_exception_carrier_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_union25_language_exception_carrier_v1.py",
+    "path": "canonical/runtime/livebench_union25_language_exception_carrier_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "352ece5bb336160435ceebc4f87ae1eb40d45317ad0e62ae578f91e41a104a13",
+    "observed_effect": {},
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_language_exception_carrier_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_union25_language_exception_carrier_v2.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_union25_language_exception_carrier_v2.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_union25_language_exception_carrier_v2",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "union25",
+    "language",
+    "exception",
+    "carrier"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_union25_language_exception_carrier_v2.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_union25_language_exception_carrier_v2.py",
+    "path": "canonical/runtime/livebench_union25_language_exception_carrier_v2.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "2b6bdd5f8688ca715ff9e73e820d978cdad66a6da9b2cce8c142daa764e0cb38",
+    "observed_effect": {},
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_language_exception_carrier_v2.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_union25_mandatory_footprint_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_union25_mandatory_footprint_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_union25_mandatory_footprint_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "union25",
+    "mandatory",
+    "footprint"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_union25_mandatory_footprint_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_union25_mandatory_footprint_v1.py",
+    "path": "canonical/runtime/livebench_union25_mandatory_footprint_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "160715ea1aeadedb4a925e7a78b59c9a5993d2dd1e2e66ac7d157a40755ac561",
+    "observed_effect": {},
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_mandatory_footprint_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_union25_mandatory_footprint_v2.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_union25_mandatory_footprint_v2.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_union25_mandatory_footprint_v2",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "union25",
+    "mandatory",
+    "footprint"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_union25_mandatory_footprint_v2.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_union25_mandatory_footprint_v2.py",
+    "path": "canonical/runtime/livebench_union25_mandatory_footprint_v2.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "74115d1baa3e48b9690df2c8075dcaf0c2e4a4f1a0a8f5d18d35a7c04a80aa56",
+    "observed_effect": {},
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_mandatory_footprint_v2.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_union25_mandatory_loss_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_union25_mandatory_loss_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_union25_mandatory_loss_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "union25",
+    "mandatory",
+    "loss"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_union25_mandatory_loss_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_union25_mandatory_loss_v1.py",
+    "path": "canonical/runtime/livebench_union25_mandatory_loss_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "8b8373655c355ed7fbda5022682a97906c08e47c272e3d1c7206a97f3f247fcd",
+    "observed_effect": {
+     "status": "PASS__EXACT_NEW_UNION25_MANDATORY_LOSS_LOWER_BOUND"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_mandatory_loss_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_union25_semantic_kernel_reduction_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_union25_semantic_kernel_reduction_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_union25_semantic_kernel_reduction_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "union25",
+    "semantic",
+    "kernel",
+    "reduction"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_union25_semantic_kernel_reduction_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_union25_semantic_kernel_reduction_v1.py",
+    "path": "canonical/runtime/livebench_union25_semantic_kernel_reduction_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "6d05bbf01eddfae4826a8d774c66bd2156f26794e68bec8832ce9afc6ac55d2f",
+    "observed_effect": {
+     "status": "PASS__UNION25_156_STRUCTURAL_SIGNATURES_REDUCED_TO_64_EXACT_CONSERVATIVE_SEMANTIC_KERNELS"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_semantic_kernel_reduction_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_union25_semantic_unsat_kernel_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_union25_semantic_unsat_kernel_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_union25_semantic_unsat_kernel_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "union25",
+    "semantic",
+    "unsat",
+    "kernel"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_union25_semantic_unsat_kernel_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_union25_semantic_unsat_kernel_v1.py",
+    "path": "canonical/runtime/livebench_union25_semantic_unsat_kernel_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "16b23a88f4985ea3556a5bf95930ac00200db47f0513a3cdf9f2b024eab190bc",
+    "observed_effect": {
+     "status": "UNKNOWN__NO_SOUND_UNSAT_CERTIFICATE"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_semantic_unsat_kernel_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/livebench_union25_sound_lower_bound_hitting_set_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/livebench_union25_sound_lower_bound_hitting_set_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "livebench_union25_sound_lower_bound_hitting_set_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "livebench",
+    "union25",
+    "sound",
+    "lower",
+    "bound",
+    "hitting",
+    "set"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/livebench_union25_sound_lower_bound_hitting_set_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/livebench_union25_sound_lower_bound_hitting_set_v1.py",
+    "path": "canonical/runtime/livebench_union25_sound_lower_bound_hitting_set_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "e66967dd58543e736e7c97c3b19e2de02cb679467b2128666cf36b319b1263bb",
+    "observed_effect": {
+     "status": "FAIL_CLOSED__POINTWISE_OPTIMALITY_NOT_PROVED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_sound_lower_bound_hitting_set_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/observable_policy_cover_executor_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/observable_policy_cover_executor_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "observable_policy_cover_executor_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "observable",
+    "policy",
+    "cover",
+    "executor"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/observable_policy_cover_executor_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/observable_policy_cover_executor_v1.py",
+    "path": "canonical/runtime/observable_policy_cover_executor_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "f557836d6a60edc14f464ceb1717927492d7fa2b4d65a8105e5cb0272b33e59a",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_observable_policy_cover_executor_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_binary_decision_grounded_expression_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_binary_decision_grounded_expression_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_binary_decision_grounded_expression_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "binary",
+    "decision",
+    "grounded",
+    "expression"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_binary_decision_grounded_expression_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_binary_decision_grounded_expression_v1.py",
+    "path": "canonical/runtime/p3_binary_decision_grounded_expression_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "a0f93275d0cd484c3421ebc01c9179772cbfaf1aa6515a5cbd23294f6701bf29",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_binary_decision_grounded_expression_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_binary_explicit_source_membership_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_binary_explicit_source_membership_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_binary_explicit_source_membership_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "binary",
+    "explicit",
+    "source",
+    "membership"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_binary_explicit_source_membership_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_binary_explicit_source_membership_v1.py",
+    "path": "canonical/runtime/p3_binary_explicit_source_membership_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "6451fa1d8a2d245de27895c55d6235b765cf140859f6c366a555729ee416e910",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_binary_explicit_source_membership_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_binary_objective_decision_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_binary_objective_decision_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_binary_objective_decision_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "binary",
+    "objective",
+    "decision"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_binary_objective_decision_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_binary_objective_decision_v1.py",
+    "path": "canonical/runtime/p3_binary_objective_decision_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "4d92564181b96a2f9850e6d0c63fa7cf80a3440f0a22a87840de3d1e0bf7f9b2",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_binary_objective_decision_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_bound_binary_real_context_membership_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_bound_binary_real_context_membership_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_bound_binary_real_context_membership_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "bound",
+    "binary",
+    "real",
+    "context",
+    "membership"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_bound_binary_real_context_membership_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_bound_binary_real_context_membership_v1.py",
+    "path": "canonical/runtime/p3_bound_binary_real_context_membership_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "37b0428b0fdcee159c4facd611def7b7eeddeb78918719791f57bbd1ee9db464",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_bound_binary_real_context_membership_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_bound_relevance_cegar_loop_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_bound_relevance_cegar_loop_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_bound_relevance_cegar_loop_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "bound",
+    "relevance",
+    "cegar",
+    "loop"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_bound_relevance_cegar_loop_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_bound_relevance_cegar_loop_v1.py",
+    "path": "canonical/runtime/p3_bound_relevance_cegar_loop_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "8df8b005c4d1c38b1867da554d80315de9c68b5d2c8fb9fa8e17eacb9099644a",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_bound_relevance_cegar_loop_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_bounded_objective_role_presentation_compiler_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_bounded_objective_role_presentation_compiler_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_bounded_objective_role_presentation_compiler_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "bounded",
+    "objective",
+    "role",
+    "presentation",
+    "compiler"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_bounded_objective_role_presentation_compiler_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_bounded_objective_role_presentation_compiler_v1.py",
+    "path": "canonical/runtime/p3_bounded_objective_role_presentation_compiler_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "c4955579055034753ac658e9ed961ee3ef685e50ed42b36f46f1485bd1677552",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_bounded_objective_role_presentation_compiler_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_bounded_objective_role_relevance_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_bounded_objective_role_relevance_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_bounded_objective_role_relevance_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "bounded",
+    "objective",
+    "role",
+    "relevance"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_bounded_objective_role_relevance_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_bounded_objective_role_relevance_v1.py",
+    "path": "canonical/runtime/p3_bounded_objective_role_relevance_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "021069cbdb1694f5193a7f6a49885d077b3889de8fc0153b9f0622a29b4b4568",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_bounded_objective_role_relevance_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_exact_dependency_relevance_cell_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_exact_dependency_relevance_cell_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_exact_dependency_relevance_cell_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "exact",
+    "dependency",
+    "relevance",
+    "cell"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_exact_dependency_relevance_cell_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_exact_dependency_relevance_cell_v1.py",
+    "path": "canonical/runtime/p3_exact_dependency_relevance_cell_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "280d5f40603fe9275c9c173532f926ed69624b0396a49720384b8ef63197dcd9",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_exact_dependency_relevance_cell_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_explicit_weighted_salience_cell_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_explicit_weighted_salience_cell_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_explicit_weighted_salience_cell_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "explicit",
+    "weighted",
+    "salience",
+    "cell"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_explicit_weighted_salience_cell_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_explicit_weighted_salience_cell_v1.py",
+    "path": "canonical/runtime/p3_explicit_weighted_salience_cell_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "4489adbbf2de22b80bd9ab1783c42226e3b6f16c42884c6cdad6bc91cb7cdfc3",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_explicit_weighted_salience_cell_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_mechanically_closed_common_policy_cell_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_mechanically_closed_common_policy_cell_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_mechanically_closed_common_policy_cell_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "mechanically",
+    "closed",
+    "common",
+    "policy",
+    "cell"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_mechanically_closed_common_policy_cell_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_mechanically_closed_common_policy_cell_v1.py",
+    "path": "canonical/runtime/p3_mechanically_closed_common_policy_cell_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "9bfebdff7756a4588748b40aeb30074ae1c0939e241286538ba09e429d942ffb",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_mechanically_closed_common_policy_cell_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_nonbinding_capacity_common_policy_cell_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_nonbinding_capacity_common_policy_cell_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_nonbinding_capacity_common_policy_cell_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "nonbinding",
+    "capacity",
+    "common",
+    "policy",
+    "cell"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_nonbinding_capacity_common_policy_cell_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_nonbinding_capacity_common_policy_cell_v1.py",
+    "path": "canonical/runtime/p3_nonbinding_capacity_common_policy_cell_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "4240de3c1f04540681c0db4d28d95e15afddcf82bd71fc02a562d68b534b5707",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_nonbinding_capacity_common_policy_cell_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_policy_influence_relevance_cell_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_policy_influence_relevance_cell_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_policy_influence_relevance_cell_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "policy",
+    "influence",
+    "relevance",
+    "cell"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_policy_influence_relevance_cell_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_policy_influence_relevance_cell_v1.py",
+    "path": "canonical/runtime/p3_policy_influence_relevance_cell_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "800cd6ac6ddaa5b87d259c02fbfa9e72604ebb1c40f6a234588d5cadd2061434",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_policy_influence_relevance_cell_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_real_context_v3_admission_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_real_context_v3_admission_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_real_context_v3_admission_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "real",
+    "context",
+    "admission"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_real_context_v3_admission_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_real_context_v3_admission_v1.py",
+    "path": "canonical/runtime/p3_real_context_v3_admission_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "6af8a0c5132c490d308161e2d930b4c0a97e84e8ee0f70af80a793c2c883bd4c",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_real_context_v3_admission_v10.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_real_context_v3_admission_v10.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_real_context_v3_admission_v10",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "real",
+    "context",
+    "admission",
+    "v10"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_real_context_v3_admission_v10.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_real_context_v3_admission_v10.py",
+    "path": "canonical/runtime/p3_real_context_v3_admission_v10.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "f2389e0bd1769853b33df871e981bcd9bd642ee4465721dd807261509b1432dd",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v10.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_real_context_v3_admission_v11.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_real_context_v3_admission_v11.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_real_context_v3_admission_v11",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "real",
+    "context",
+    "admission",
+    "v11"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_real_context_v3_admission_v11.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_real_context_v3_admission_v11.py",
+    "path": "canonical/runtime/p3_real_context_v3_admission_v11.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "ca385c17a63abea38ffd413983ce479df7b3a7b80e4577f2c10afef6f50d12ce",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v11.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_real_context_v3_admission_v12.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_real_context_v3_admission_v12.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_real_context_v3_admission_v12",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "real",
+    "context",
+    "admission",
+    "v12"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_real_context_v3_admission_v12.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_real_context_v3_admission_v12.py",
+    "path": "canonical/runtime/p3_real_context_v3_admission_v12.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "ff5b453fc58403dd663ec17be1df0c156db463f2fe0df131ec439a0411fee668",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v12.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_real_context_v3_admission_v2.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_real_context_v3_admission_v2.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_real_context_v3_admission_v2",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "real",
+    "context",
+    "admission"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_real_context_v3_admission_v2.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_real_context_v3_admission_v2.py",
+    "path": "canonical/runtime/p3_real_context_v3_admission_v2.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "35838305362ff2c51942552de227e947189d715d6e102d61730c1e11c5bf61c5",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v2.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_real_context_v3_admission_v3.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_real_context_v3_admission_v3.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_real_context_v3_admission_v3",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "real",
+    "context",
+    "admission"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_real_context_v3_admission_v3.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_real_context_v3_admission_v3.py",
+    "path": "canonical/runtime/p3_real_context_v3_admission_v3.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "f7a70e3a3edc6f5f9d8cc84050b30b064412bad5d10b7ee4e40e56cab9b77129",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v3.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_real_context_v3_admission_v4.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_real_context_v3_admission_v4.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_real_context_v3_admission_v4",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "real",
+    "context",
+    "admission"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_real_context_v3_admission_v4.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_real_context_v3_admission_v4.py",
+    "path": "canonical/runtime/p3_real_context_v3_admission_v4.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "86d54456dd9fb932882044c7e488f0658fb6912413bd5f066533ec11b17496c1",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v4.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_real_context_v3_admission_v5.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_real_context_v3_admission_v5.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_real_context_v3_admission_v5",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "real",
+    "context",
+    "admission"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_real_context_v3_admission_v5.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_real_context_v3_admission_v5.py",
+    "path": "canonical/runtime/p3_real_context_v3_admission_v5.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "66b20e3228b57e05b51a076e86404f8c537c875b816ab29204e4310e5b3a0d81",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v5.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_real_context_v3_admission_v6.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_real_context_v3_admission_v6.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_real_context_v3_admission_v6",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "real",
+    "context",
+    "admission"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_real_context_v3_admission_v6.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_real_context_v3_admission_v6.py",
+    "path": "canonical/runtime/p3_real_context_v3_admission_v6.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "15830ce0394cb8ea0ab02a740d95a3971900612046739446220b77c50169790d",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v6.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_real_context_v3_admission_v7.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_real_context_v3_admission_v7.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_real_context_v3_admission_v7",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "real",
+    "context",
+    "admission"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_real_context_v3_admission_v7.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_real_context_v3_admission_v7.py",
+    "path": "canonical/runtime/p3_real_context_v3_admission_v7.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "9cf01d7af80d2fac9a6f54a941ac23700b9d2fb42946b6c2cc652e7ee8c6c179",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v7.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_real_context_v3_admission_v8.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_real_context_v3_admission_v8.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_real_context_v3_admission_v8",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "real",
+    "context",
+    "admission"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_real_context_v3_admission_v8.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_real_context_v3_admission_v8.py",
+    "path": "canonical/runtime/p3_real_context_v3_admission_v8.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "512741693872ffe534c22cb64bffffd9829a46177cf6b944a284b513eb3af310",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v8.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_real_context_v3_admission_v9.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_real_context_v3_admission_v9.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_real_context_v3_admission_v9",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "real",
+    "context",
+    "admission"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_real_context_v3_admission_v9.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_real_context_v3_admission_v9.py",
+    "path": "canonical/runtime/p3_real_context_v3_admission_v9.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "32624c6f05620bdd260434a6c72d4fc9220c164bd5e1b6690630fde3bb4ca4e6",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v9.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_required_claim_grounded_realization_cell_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_required_claim_grounded_realization_cell_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_required_claim_grounded_realization_cell_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "required",
+    "claim",
+    "grounded",
+    "realization",
+    "cell"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_required_claim_grounded_realization_cell_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_required_claim_grounded_realization_cell_v1.py",
+    "path": "canonical/runtime/p3_required_claim_grounded_realization_cell_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "90c8bf0950d99a8c575e2d66058d6f0c1b87cc1d5c692210122cf945c1547d0c",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_required_claim_grounded_realization_cell_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_required_claim_grounded_realization_cell_v2.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_required_claim_grounded_realization_cell_v2.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_required_claim_grounded_realization_cell_v2",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "required",
+    "claim",
+    "grounded",
+    "realization",
+    "cell"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_required_claim_grounded_realization_cell_v2.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_required_claim_grounded_realization_cell_v2.py",
+    "path": "canonical/runtime/p3_required_claim_grounded_realization_cell_v2.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "ecd1dada8f622af47b53eb8e67fb44d68387aa9fb30cb5d25a50d5f675fb3d5d",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_required_claim_grounded_realization_cell_v2.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_required_claim_grounded_realization_cell_v3.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_required_claim_grounded_realization_cell_v3.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_required_claim_grounded_realization_cell_v3",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "required",
+    "claim",
+    "grounded",
+    "realization",
+    "cell"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_required_claim_grounded_realization_cell_v3.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_required_claim_grounded_realization_cell_v3.py",
+    "path": "canonical/runtime/p3_required_claim_grounded_realization_cell_v3.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "37f0b4bd613c92fe996ee758f3d737209cce0893a44ae65dd1a3d92004a15847",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_required_claim_grounded_realization_cell_v3.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_robust_policy_adequacy_cegar_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "robust",
+    "policy",
+    "adequacy",
+    "cegar"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py",
+    "path": "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "9b8d8cc1b40d267d85235c76f204afcc02580ca5776bdda56970640980a55edd",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_robust_policy_adequacy_cegar_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/p3_source_positive_selection_cell_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/p3_source_positive_selection_cell_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "p3_source_positive_selection_cell_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "source",
+    "positive",
+    "selection",
+    "cell"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/p3_source_positive_selection_cell_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/p3_source_positive_selection_cell_v1.py",
+    "path": "canonical/runtime/p3_source_positive_selection_cell_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "4f80b760e112790948fe6e6aa81568d1373b2985fda32aabd1b9c71d3335c1cd",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_source_positive_selection_cell_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/professional_quality_p1_router_v5.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/professional_quality_p1_router_v5.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "professional_quality_p1_router_v5",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "professional",
+    "quality",
+    "router"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/professional_quality_p1_router_v5.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/professional_quality_p1_router_v5.py",
+    "path": "canonical/runtime/professional_quality_p1_router_v5.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "3aed3ba72124199b4793c6cf9f08e2aea80698b72011fda2d6156ab8ad174518",
+    "observed_effect": {
+     "status": "ABSTAIN__P1_AUTHENTICATED_TARGET_REQUIRED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_p1_router_v5.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/professional_quality_p1_router_v6.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/professional_quality_p1_router_v6.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "professional_quality_p1_router_v6",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "professional",
+    "quality",
+    "router"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/professional_quality_p1_router_v6.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/professional_quality_p1_router_v6.py",
+    "path": "canonical/runtime/professional_quality_p1_router_v6.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "15499aa7d71d6cd5ae34a256d79ce96f21d854f36e6ae907dc847fa336cd1e41",
+    "observed_effect": {
+     "status": "ABSTAIN__P1_AUTHENTICATED_TARGET_REQUIRED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_p1_router_v6.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/professional_quality_p1_router_v7.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/professional_quality_p1_router_v7.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "professional_quality_p1_router_v7",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "professional",
+    "quality",
+    "router"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/professional_quality_p1_router_v7.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/professional_quality_p1_router_v7.py",
+    "path": "canonical/runtime/professional_quality_p1_router_v7.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "59ca4b34a456bf5e0dc212a118542c923fd4394da94b760f8d6111b8b810db52",
+    "observed_effect": {
+     "status": "ABSTAIN__P1_VERIFIED_STEP_BINDINGS_REQUIRED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_p1_router_v7.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/professional_quality_p1_router_v8.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/professional_quality_p1_router_v8.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "professional_quality_p1_router_v8",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "professional",
+    "quality",
+    "router"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/professional_quality_p1_router_v8.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/professional_quality_p1_router_v8.py",
+    "path": "canonical/runtime/professional_quality_p1_router_v8.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "f81cbb77672d3b778bab5322f3155437db0df900a821339824bc0caa0dcadd06",
+    "observed_effect": {
+     "status": "ABSTAIN__P1_VERIFIED_STEP_BINDINGS_REQUIRED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_p1_router_v8.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/professional_quality_p1_router_v9.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/professional_quality_p1_router_v9.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "professional_quality_p1_router_v9",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "professional",
+    "quality",
+    "router"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/professional_quality_p1_router_v9.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/professional_quality_p1_router_v9.py",
+    "path": "canonical/runtime/professional_quality_p1_router_v9.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "c623afc13d7bfd97ad5746d16fe7c2fbd4adb25847a7bf06273e3b54a111e73c",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_p1_router_v9.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/professional_quality_r2_candidate_branch_basis_v2.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/professional_quality_r2_candidate_branch_basis_v2.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "professional_quality_r2_candidate_branch_basis_v2",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "professional",
+    "quality",
+    "candidate",
+    "branch",
+    "basis"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/professional_quality_r2_candidate_branch_basis_v2.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/professional_quality_r2_candidate_branch_basis_v2.py",
+    "path": "canonical/runtime/professional_quality_r2_candidate_branch_basis_v2.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "d9234ffb757cf12d68435dd0242d868d1903c9281aece9adce14e0622ac034a2",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_r2_candidate_branch_basis_v2.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/professional_r12_safe_meta_composition_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/professional_r12_safe_meta_composition_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "professional_r12_safe_meta_composition_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "professional",
+    "r12",
+    "safe",
+    "meta",
+    "composition"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/professional_r12_safe_meta_composition_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/professional_r12_safe_meta_composition_v1.py",
+    "path": "canonical/runtime/professional_r12_safe_meta_composition_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "3ac4a8115e0860a382cab80af7ff033bdc569cdee0eeaa2590182d6ef987ec1d",
+    "observed_effect": {
+     "status": "SAFE_NONPOSITIVE_FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_r12_safe_meta_composition_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/python_measured_objective_acceptance_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/python_measured_objective_acceptance_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_measured_objective_acceptance_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "python",
+    "measured",
+    "objective",
+    "acceptance"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/python_measured_objective_acceptance_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/python_measured_objective_acceptance_v1.py",
+    "path": "canonical/runtime/python_measured_objective_acceptance_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "8b5cdc98a784f215d436e4bbd997f90750984d66fb06ded2c1b9425a742781f8",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_python_measured_objective_acceptance_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/python_request_acceptance_union_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/python_request_acceptance_union_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_request_acceptance_union_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "python",
+    "request",
+    "acceptance",
+    "union"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/python_request_acceptance_union_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/python_request_acceptance_union_v1.py",
+    "path": "canonical/runtime/python_request_acceptance_union_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "8e6b2d8eca35962dde2f8cf3ecb3d9d9132b85a264e12ff8af2e4a90225812d9",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_python_request_acceptance_union_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/r2_finance_normalized_source_universe_direct_adequacy_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/r2_finance_normalized_source_universe_direct_adequacy_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "r2_finance_normalized_source_universe_direct_adequacy_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "finance",
+    "normalized",
+    "source",
+    "universe",
+    "direct",
+    "adequacy"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/r2_finance_normalized_source_universe_direct_adequacy_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/r2_finance_normalized_source_universe_direct_adequacy_v1.py",
+    "path": "canonical/runtime/r2_finance_normalized_source_universe_direct_adequacy_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "fce823e581dd57c85f2cc538cc17fbcfc129dc30e6b550133747f2aceb927b6b",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_r2_finance_normalized_source_universe_direct_adequacy_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/root1_contrastive_semantic_gate_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/root1_contrastive_semantic_gate_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "root1_contrastive_semantic_gate_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "root1",
+    "contrastive",
+    "semantic",
+    "gate"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/root1_contrastive_semantic_gate_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/root1_contrastive_semantic_gate_v1.py",
+    "path": "canonical/runtime/root1_contrastive_semantic_gate_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "bacb449927faf0680224df8e6ded13f72187345f13be856c336272cacdf0b538",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_root1_contrastive_semantic_gate_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/sec_extracted_xbrl_instance_source_native_verify_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/sec_extracted_xbrl_instance_source_native_verify_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "sec_extracted_xbrl_instance_source_native_verify_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "sec",
+    "extracted",
+    "xbrl",
+    "instance",
+    "source",
+    "native",
+    "verify"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/sec_extracted_xbrl_instance_source_native_verify_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/sec_extracted_xbrl_instance_source_native_verify_v1.py",
+    "path": "canonical/runtime/sec_extracted_xbrl_instance_source_native_verify_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "3d5341a8c11235b385fd365c33eb5a525f34edd7c33214f71b8035d968f3b9f1",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_sec_extracted_xbrl_instance_source_native_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/sec_inline_xbrl_fasb_release_metadata_verify_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/sec_inline_xbrl_fasb_release_metadata_verify_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "sec_inline_xbrl_fasb_release_metadata_verify_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "sec",
+    "inline",
+    "xbrl",
+    "fasb",
+    "release",
+    "metadata",
+    "verify"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/sec_inline_xbrl_fasb_release_metadata_verify_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/sec_inline_xbrl_fasb_release_metadata_verify_v1.py",
+    "path": "canonical/runtime/sec_inline_xbrl_fasb_release_metadata_verify_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "9bc17f22902eb25899210d93cdd7a946a71f8f6477c9ed0e25daa4c2e42a3a6d",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_sec_inline_xbrl_fasb_release_metadata_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/sec_issuer_extension_concept_semantics_verify_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/sec_issuer_extension_concept_semantics_verify_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "sec_issuer_extension_concept_semantics_verify_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "sec",
+    "issuer",
+    "extension",
+    "concept",
+    "semantics",
+    "verify"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/sec_issuer_extension_concept_semantics_verify_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/sec_issuer_extension_concept_semantics_verify_v1.py",
+    "path": "canonical/runtime/sec_issuer_extension_concept_semantics_verify_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "25ec0f39761ebfc892974d7e357c256354e457234c4b3033cfc3b61b19121bd1",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_sec_issuer_extension_concept_semantics_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/sec_issuer_extension_cross_filing_stability_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/sec_issuer_extension_cross_filing_stability_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "sec_issuer_extension_cross_filing_stability_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "sec",
+    "issuer",
+    "extension",
+    "cross",
+    "filing",
+    "stability"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/sec_issuer_extension_cross_filing_stability_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/sec_issuer_extension_cross_filing_stability_v1.py",
+    "path": "canonical/runtime/sec_issuer_extension_cross_filing_stability_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "8d9732195a3c57722be2779ff1ef695716981318f48381001157bded63213c32",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_sec_issuer_extension_cross_filing_stability_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/sec_issuer_extension_cross_filing_stability_v2.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/sec_issuer_extension_cross_filing_stability_v2.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "sec_issuer_extension_cross_filing_stability_v2",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "sec",
+    "issuer",
+    "extension",
+    "cross",
+    "filing",
+    "stability"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/sec_issuer_extension_cross_filing_stability_v2.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/sec_issuer_extension_cross_filing_stability_v2.py",
+    "path": "canonical/runtime/sec_issuer_extension_cross_filing_stability_v2.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "1fad79cd7924ab848de33bb30cc3499b392c0f9789466bdc93e62d817ad5dbdd",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_sec_issuer_extension_cross_filing_stability_v2.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/sec_issuer_extension_fact_semantics_bind_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/sec_issuer_extension_fact_semantics_bind_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "sec_issuer_extension_fact_semantics_bind_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "sec",
+    "issuer",
+    "extension",
+    "fact",
+    "semantics",
+    "bind"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/sec_issuer_extension_fact_semantics_bind_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/sec_issuer_extension_fact_semantics_bind_v1.py",
+    "path": "canonical/runtime/sec_issuer_extension_fact_semantics_bind_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "7be5dd56ca699f17336513d8bd2c1feeeb48f82ed976f47185b35625dfcc95f2",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_sec_issuer_extension_fact_semantics_bind_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/sec_issuer_extension_fact_semantics_bind_verify_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/sec_issuer_extension_fact_semantics_bind_verify_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "sec_issuer_extension_fact_semantics_bind_verify_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "sec",
+    "issuer",
+    "extension",
+    "fact",
+    "semantics",
+    "bind",
+    "verify"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/sec_issuer_extension_fact_semantics_bind_verify_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/sec_issuer_extension_fact_semantics_bind_verify_v1.py",
+    "path": "canonical/runtime/sec_issuer_extension_fact_semantics_bind_verify_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "2ae5e184f6359e1b4725df5571b05fdd8a4aef65e98ad1569e8c669aca0f5894",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_sec_issuer_extension_fact_semantics_bind_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/seed_preserving_instruction_postprocessor_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/seed_preserving_instruction_postprocessor_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "seed_preserving_instruction_postprocessor_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "seed",
+    "preserving",
+    "instruction",
+    "postprocessor"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/seed_preserving_instruction_postprocessor_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/seed_preserving_instruction_postprocessor_v1.py",
+    "path": "canonical/runtime/seed_preserving_instruction_postprocessor_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "e858d1645008f8282086eb9469c48cf6437029b7932246ee2e01ae2690488d54",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_seed_preserving_instruction_postprocessor_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/seed_preserving_instruction_postprocessor_v2.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/seed_preserving_instruction_postprocessor_v2.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "seed_preserving_instruction_postprocessor_v2",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "seed",
+    "preserving",
+    "instruction",
+    "postprocessor"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/seed_preserving_instruction_postprocessor_v2.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/seed_preserving_instruction_postprocessor_v2.py",
+    "path": "canonical/runtime/seed_preserving_instruction_postprocessor_v2.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "bb1324b9c4ff03ebf3e8fcbeab494112f05bc57b4a4141750dc47f8349b6ae63",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_seed_preserving_instruction_postprocessor_v2.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/selected_bounded_support_truth_certificate_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/selected_bounded_support_truth_certificate_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "selected_bounded_support_truth_certificate_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "selected",
+    "bounded",
+    "support",
+    "truth",
+    "certificate"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/selected_bounded_support_truth_certificate_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/selected_bounded_support_truth_certificate_v1.py",
+    "path": "canonical/runtime/selected_bounded_support_truth_certificate_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "92764c510770a0c1cf1cb7cc7d65af6eb1080377e353ea1d8688bfd29efe838a",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_selected_bounded_support_truth_certificate_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/selected_support_truth_certificate_v2.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/selected_support_truth_certificate_v2.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "selected_support_truth_certificate_v2",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "selected",
+    "support",
+    "truth",
+    "certificate"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/selected_support_truth_certificate_v2.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/selected_support_truth_certificate_v2.py",
+    "path": "canonical/runtime/selected_support_truth_certificate_v2.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "80cbf2713e3da52667345e183c03a04cf2c6800e1ffe81fdabeee5c649b94a98",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_selected_support_truth_certificate_v2.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/selected_support_truth_certificate_v3.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/selected_support_truth_certificate_v3.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "selected_support_truth_certificate_v3",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "selected",
+    "support",
+    "truth",
+    "certificate"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/selected_support_truth_certificate_v3.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/selected_support_truth_certificate_v3.py",
+    "path": "canonical/runtime/selected_support_truth_certificate_v3.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "eda412a243c141e0541fa4b574586c5731c721163a8df971538127331ae7aa55",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_selected_support_truth_certificate_v3.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/selected_support_truth_certificate_v4.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/selected_support_truth_certificate_v4.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "selected_support_truth_certificate_v4",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "selected",
+    "support",
+    "truth",
+    "certificate"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/selected_support_truth_certificate_v4.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/selected_support_truth_certificate_v4.py",
+    "path": "canonical/runtime/selected_support_truth_certificate_v4.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "df6cac50b1d0f076a4551a4d9a53858cb28f5030295be6b327f277d6a2f1e130",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_selected_support_truth_certificate_v4.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/selected_support_truth_certificate_v5.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/selected_support_truth_certificate_v5.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "selected_support_truth_certificate_v5",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "selected",
+    "support",
+    "truth",
+    "certificate"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/selected_support_truth_certificate_v5.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/selected_support_truth_certificate_v5.py",
+    "path": "canonical/runtime/selected_support_truth_certificate_v5.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "da6e88d10f8108c592cb5bc8961f680753ba24f97564838f5e1b758af205bfbb",
+    "observed_effect": {
+     "pass": false,
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_selected_support_truth_certificate_v5.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/synthesis_certified_visible_support_policy_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/synthesis_certified_visible_support_policy_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "synthesis_certified_visible_support_policy_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "synthesis",
+    "certified",
+    "visible",
+    "support",
+    "policy"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/synthesis_certified_visible_support_policy_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/synthesis_certified_visible_support_policy_v1.py",
+    "path": "canonical/runtime/synthesis_certified_visible_support_policy_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "cf54cd4a59c03f0a8321e7b05b8351773dcb21ed0b03b77a51fab1411460dc33",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_synthesis_certified_visible_support_policy_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/synthesis_certified_visible_support_policy_v2.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/synthesis_certified_visible_support_policy_v2.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "synthesis_certified_visible_support_policy_v2",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "synthesis",
+    "certified",
+    "visible",
+    "support",
+    "policy"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/synthesis_certified_visible_support_policy_v2.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/synthesis_certified_visible_support_policy_v2.py",
+    "path": "canonical/runtime/synthesis_certified_visible_support_policy_v2.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "380cb65634e9c95eafc38c0f0610335843f6beb28ac362d51d847787b39c4fa6",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_synthesis_certified_visible_support_policy_v2.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/synthesis_certified_visible_support_policy_v3.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/synthesis_certified_visible_support_policy_v3.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "synthesis_certified_visible_support_policy_v3",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "synthesis",
+    "certified",
+    "visible",
+    "support",
+    "policy"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/synthesis_certified_visible_support_policy_v3.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/synthesis_certified_visible_support_policy_v3.py",
+    "path": "canonical/runtime/synthesis_certified_visible_support_policy_v3.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "2f42150d51735d80119fbbcfc67dff920f16742c959a61f28c40d074f05f204b",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_synthesis_certified_visible_support_policy_v3.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/synthesis_zero_required_uncertainty_policy_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/synthesis_zero_required_uncertainty_policy_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "synthesis_zero_required_uncertainty_policy_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "synthesis",
+    "zero",
+    "required",
+    "uncertainty",
+    "policy"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/synthesis_zero_required_uncertainty_policy_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/synthesis_zero_required_uncertainty_policy_v1.py",
+    "path": "canonical/runtime/synthesis_zero_required_uncertainty_policy_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "8d20c163638da7b70e25500debccc23cb490ffcde95536034eaa6945a24e83dd",
+    "observed_effect": {
+     "status": "FAIL_CLOSED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_synthesis_zero_required_uncertainty_policy_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical/runtime/terminal_authority_epoch_guard_v1.py.auto.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical/runtime/terminal_authority_epoch_guard_v1.py.auto.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "terminal_authority_epoch_guard_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "terminal",
+    "authority",
+    "epoch",
+    "guard"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical/runtime/terminal_authority_epoch_guard_v1.py.auto.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/terminal_authority_epoch_guard_v1.py",
+    "path": "canonical/runtime/terminal_authority_epoch_guard_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "d54e89f71ab64d9287d6e91d9f173ea104b9b839018df751a10894027959e9a7",
+    "observed_effect": {
+     "status": "STALE_ABORT__SOURCE_AUTHORITY_CHANGED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_terminal_authority_epoch_guard_v1.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  }
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_RECEIPT_PROJECTION_V1"
+}

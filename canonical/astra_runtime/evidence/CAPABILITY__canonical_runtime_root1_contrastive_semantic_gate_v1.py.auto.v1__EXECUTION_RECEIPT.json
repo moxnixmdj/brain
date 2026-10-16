@@ -1,0 +1,27 @@
+{
+ "capability_id": "canonical/runtime/root1_contrastive_semantic_gate_v1.py.auto.v1",
+ "elapsed_ms": 2.299,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/root1_contrastive_semantic_gate_v1.py",
+ "module_sha256": "bacb449927faf0680224df8e6ded13f72187345f13be856c336272cacdf0b538",
+ "observed": {
+  "pass": false,
+  "status": "FAIL"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_root1_contrastive_semantic_gate_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 11,
+ "result_sha256": "434b0f8d8c7580bf7a7bb45102d2024a711b503aa54b3a5898894c6f0840bc13",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
