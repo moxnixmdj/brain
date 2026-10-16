@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/domain_behavior_universe_anchor_v1.py.auto.v1",
+ "elapsed_ms": 57.01,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/domain_behavior_universe_anchor_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/domain_behavior_universe_anchor_v1.py",
+ "module_sha256": "3255a67e88f9bf0a7fc287d2f4a6f294478e127c615bf36ef8ec308be6d06424",
+ "observed": {
+  "returncode": 0,
+  "status": "PASS__AUTHORITATIVE_SOURCE_ANCHOR_BOUND__ALL_DOMAIN_CLOSURE_REMAINS_FAIL_CLOSED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_domain_behavior_universe_anchor_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 6,
+ "result_sha256": "2b1f41011389d9d80f4579b353f13b655b397e8e48f42ed93982fad3b1d6a751",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

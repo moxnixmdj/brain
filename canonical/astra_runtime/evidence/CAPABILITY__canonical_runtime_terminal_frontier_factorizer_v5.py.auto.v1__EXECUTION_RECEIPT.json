@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/terminal_frontier_factorizer_v5.py.auto.v1",
+ "elapsed_ms": 20.069,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/terminal_frontier_factorizer_v5.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/terminal_frontier_factorizer_v5.py",
+ "module_sha256": "15ee16b2c206004950a5400fd282db3f37d28622435178a5f177604e0c2c6c4c",
+ "observed": {
+  "returncode": 0,
+  "status": "PASS__20_INDEPENDENT_TERMINAL_CONJUNCTS__META8_ABSORBED_AS_ABC_REFINEMENTS__IF_ZERO_DELETED_AS_INDEPENDENT_TRUTH__D15_U5__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_terminal_frontier_factorizer_v5.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 13,
+ "result_sha256": "c20fc0523600d5fcfd3fe6c27ce0a1c65bb3fdd5b4df9b3367b31ad4ed966544",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

@@ -183,3 +183,48 @@ def test_solve_compilation_gap_is_reported_as_before():
         _cleanup(task_id)
     assert result["pass"] is False
     assert result["failure_class"] == "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP"
+
+
+def _a_receipt_backed_capability_id() -> str:
+    return next(c for c, e in sorted(load_verified_registry().items())
+                if e.get("capability_source") == "receipt_projection")
+
+
+def test_an_explicitly_named_capability_is_admitted_and_executed():
+    """The other half of this file's contract: never refuse a goal the compiler really serves.
+
+    Measured before: all 294 receipt-backed capabilities were selected by the front layer and
+    then refused here with R1_PATH_TOKENS_ONLY, and the R6 gate then demanded the capability
+    write a file named after itself.  None of the 294 could pass through this entry."""
+    cid = _a_receipt_backed_capability_id()
+    task_id = "TEST_NAMED_CAPABILITY_%d" % os.getpid()
+    try:
+        result = adm.solve({"task_id": task_id, "goal": f"run {cid}"})
+    finally:
+        _cleanup(task_id)
+    assert result["status"] == (
+        "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED"
+        "__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED"
+    ), result.get("status")
+    assert result["pass"] is True, result.get("status")
+    assert result["compiled_capability_id"] == cid
+    assert result["route_admission"]["admission_basis"] == "EXPLICIT_CAPABILITY_ID_IN_GOAL"
+    # the R6 gate reports only what is missing; the capability's own id is not a promised file
+    assert "promised_artifact_errors" not in result
+    assert result["routing_success_authority"] is False
+    assert result["model_dependency_count"] == 0
+
+
+def test_a_capability_identity_is_never_a_promised_artifact():
+    """F16's rule at the R6 gate: the id is an identity, and the artifact check still works."""
+    cid = _a_receipt_backed_capability_id()
+    assert adm._future_artifacts(f"run {cid}") == []
+    assert adm._future_artifacts("save it to canonical/astra_runtime/tmp/real_future_artifact.md")
+
+
+def test_a_ghost_capability_id_is_refused_before_anything_executes():
+    cid = _a_receipt_backed_capability_id()
+    ghost = cid.rsplit(".py.auto.v1", 1)[0] + "_renamed.py.auto.v1"
+    result = adm.solve({"task_id": "TEST_GHOST_ID", "goal": f"run {ghost}"})
+    assert result["status"] == "FAIL__RAW_GOAL_COMPILATION_GAP"
+    assert result["compiler_code"] == "GOAL_NAMES_UNKNOWN_CAPABILITY"

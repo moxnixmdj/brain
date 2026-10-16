@@ -1,0 +1,31 @@
+{
+ "capability_id": "canonical/runtime/current_accepted_five_d_reduction_verifier_v1.py.auto.v1",
+ "elapsed_ms": 33.63,
+ "independent_run_reference": {
+  "github_run_id": 38952767168,
+  "oidc_claims": {
+   "actor": "moxnixmdj",
+   "aud": "https://github.com/moxnixmdj/brain",
+   "event_name": "pull_request",
+   "head_ref": "arena/120f25af-brain",
+   "iss": "https://token.actions.githubusercontent.com",
+   "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/pull/4725/merge",
+   "jti": "0fb96921-0495-4bd4-8c10-0bcfcb36df69",
+   "repository": "moxnixmdj/brain",
+   "repository_id": "1364778274",
+   "run_attempt": "1",
+   "run_id": "38952767168",
+   "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/pull/4725/merge"
+  }
+ },
+ "independent_verifier": "github-actions:moxnixmdj/brain",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/current_accepted_five_d_reduction_verifier_v1.py",
+ "module_sha256": "8f9c073258f663bb1538de9becc7af400cf88c853fc09740c1d9a854fe3be65e",
+ "producer_ran_by": "local-session",
+ "producer_receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_accepted_five_d_reduction_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "producer_result_sha256": "4508ff1d700e538bdee1f1b26471256d8472bc215c88aa12cf55e0b9b2ee19ec",
+ "reproduced": true,
+ "schema": "PROJECT_BRAIN_CAPABILITY_INDEPENDENT_VERIFICATION_V1",
+ "verifier_result_sha256": "4508ff1d700e538bdee1f1b26471256d8472bc215c88aa12cf55e0b9b2ee19ec"
+}

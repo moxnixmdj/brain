@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/h100_non_synthetic_verifier_cost_v1.py.auto.v1",
+ "elapsed_ms": 1989.128,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/h100_non_synthetic_verifier_cost_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/h100_non_synthetic_verifier_cost_v1.py",
+ "module_sha256": "aa493c82fa35e3856d11cc28ecf546fb55433d691e83b2a233f921918bf2a5b9",
+ "observed": {
+  "returncode": 0,
+  "status": "NON_SYNTHETIC_VERIFIER_COSTS_MEASURED__FOUR_CAPABILITY_CLASSES__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_h100_non_synthetic_verifier_cost_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 8,
+ "result_sha256": "bcb3dce9aa49f8dc8a2960292792c1f56305ba1a5ed3fa9acace3d2343089f79",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

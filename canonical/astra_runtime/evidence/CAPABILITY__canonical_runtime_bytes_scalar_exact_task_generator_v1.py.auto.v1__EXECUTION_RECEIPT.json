@@ -1,0 +1,32 @@
+{
+ "capability_id": "canonical/runtime/bytes_scalar_exact_task_generator_v1.py.auto.v1",
+ "elapsed_ms": 35.784,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/bytes_scalar_exact_task_generator_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bytes_scalar_exact_task_generator_v1.py",
+ "module_sha256": "fd74fb12721bdf9ef1c92c27c745756ad053de910342282f932e499469676733",
+ "observed": {
+  "returncode": 0
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_scalar_exact_task_generator_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 8,
+ "result_sha256": "a8d1bd5848547196e211e30ea9ff35ff294f5a6df71798d41f98cdba3d28385d",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

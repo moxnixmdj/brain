@@ -39,6 +39,14 @@ the pinned compiler had four defects that this layer corrects WITHOUT editing a 
    be reached by its own keyword.  Here: a surface word that is one of the tool's OWN tokens
    (keywords, identity, provides) does not reject it.
 
+10. The caller's own choice is discarded.  Candidates are ranked on PROSE tokens and paths are
+   removed (defect 8), so a goal whose content IS a capability id collapses to its verbs and is
+   absorbed by a generic candidate - measured: ``run <zero-input capability id>`` selected
+   ``python.software.request.semantic_behavior.compile.v1`` for 217 of 294 receipt-backed
+   capabilities and reported success.  Here: an id that appears verbatim in the goal selects
+   that capability and nothing else (F15).  Naming is not guessing - it is the caller choosing -
+   and composition is never stolen: a sentence that keeps asking for more still routes normally.
+
 It also binds the 33 registry inputs the pinned binder cannot (``path``, ``jq_filter``,
 ``expression``, ``x_value``, ``test_paths`` ...) from an explicit typed grammar:
 ``<key words> <quoted string | number | path | list | key=value pairs>``.  Inputs are never
@@ -126,6 +134,63 @@ def routable_registry(admissible: Mapping[str, Mapping[str, Any]]) -> dict[str, 
 
 def blocked_zero_input_capabilities(admissible: Mapping[str, Mapping[str, Any]]) -> list[str]:
     return sorted(cid for cid, entry in admissible.items() if isinstance(entry, Mapping) and not is_plain_goal_routable(entry))
+
+
+# ------------------------------------------------------------------------- F15: naming as choosing
+
+_IDENTITY_CHARS = set("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-/")
+_COMPOSITION_MARKERS = (" and ", " then ", " also ", " plus ", " after ", " before ", ",", ";", "\n")
+_MAX_NAMING_WORDS = 4
+_EXPLICIT_NAME_SCORE = 10 ** 6
+_CAPABILITY_ID_SHAPE = re.compile(r"[A-Za-z0-9_./-]+\.py\.auto\.v1")
+
+
+def explicitly_named_capabilities(goal: str, admissible: Mapping[str, Mapping[str, Any]]) -> list[str]:
+    """Every capability whose id appears verbatim in ``goal``, on identifier boundaries.
+
+    ``.`` is deliberately NOT an identity character: ids end in ``.v1``, so a sentence-final
+    period must not stop an id from being recognised, while ``.../a_v1.py.auto.v1x`` still is
+    a different identifier and does not match.
+    """
+    text = str(goal or "")
+    hits: list[str] = []
+    for cid in admissible:
+        idx = text.find(cid)
+        while idx != -1:
+            end = idx + len(cid)
+            before = text[idx - 1] if idx else ""
+            after = text[end] if end < len(text) else ""
+            if before not in _IDENTITY_CHARS and after not in _IDENTITY_CHARS:
+                hits.append(cid)
+                break
+            idx = text.find(cid, idx + 1)
+    return sorted(set(hits))
+
+
+def capability_id_shaped_tokens(goal: str) -> list[str]:
+    """Tokens in the goal that have the shape of a receipt-backed capability identity.
+
+    Measured: a goal naming a capability was previously bound as an *output artifact* - the id
+    handed to a generic candidate as ``output_path`` - which then reported
+    ``output_verified: true`` by writing a file at the capability's own id path.  224 of 294
+    naming goals "succeeded" that way.  An id-shaped token is an identity, never an artifact.
+    """
+    return sorted(set(_CAPABILITY_ID_SHAPE.findall(str(goal or ""))))
+
+
+def naming_is_the_whole_request(goal: str, cid: str) -> bool:
+    """Defect 10: a goal that only names ``cid`` is the caller choosing it, not an input to guess.
+
+    Composition is never stolen: a second clause, a continuation, or more than a naming phrase
+    leaves the decision to the normal machinery.  A named capability is also where its own
+    verdict is written, so a sentence that says nothing but the id is read as naming the
+    capability; routing never becomes success authority either way - the raw goal keeps its
+    acceptance obligations ("receipts still required") until they are met by evidence.
+    """
+    rest = str(goal or "").replace(cid, " ").lower()
+    if any(marker in rest for marker in _COMPOSITION_MARKERS):
+        return False
+    return len([w for w in re.split(r"[^0-9a-z]+", rest) if w]) <= _MAX_NAMING_WORDS
 
 
 # ----------------------------------------------------------------------------- typed grammar
@@ -521,6 +586,47 @@ def _single(cid: str, entry: Mapping[str, Any], inputs: Mapping[str, Any], score
     }
 
 
+def _retrieval_first_selection(goal: str, admissible: Mapping[str, Mapping[str, Any]],
+                               root: pathlib.Path, rules: list[str]) -> dict[str, Any] | None:
+    """F17: retrieval proposes k=3, typed admission disposes.  Returns None to keep the failure.
+
+    Called ONLY after the pinned prose scorer has failed to deliver a bound single capability, so
+    it can turn a failure into a selection and can never override a selection that already bound
+    (that discipline is what keeps every earlier rule's evidence intact).  Selection quality is
+    therefore bounded by admission, not by the ranker: a lexical near-miss whose declared inputs
+    the sentence does not state is refused, and an ambiguous shortlist selects nothing at all.
+    """
+    from canonical.runtime import capability_selection_retrieval_v1 as selection
+
+    decision = selection.select(goal, admissible, root, selection.DEFAULT_K)
+    if decision.get("status") != "SELECTED":
+        return None
+    cid = decision["selected_capability"]
+    entry = admissible.get(cid) or {}
+    if not entry:
+        return None
+    # SCOPED, and this is the whole reason F17 exists: a receipt-backed capability is invisible to
+    # the pinned scorer (it skips anything whose status is not VERIFIED_BOUND_CAPABILITY), so no
+    # earlier rule can ever select one from a sentence.  Everything the pinned scorer CAN see stays
+    # its decision: measured, an unscoped version of this hook displaced `grounding.stdlib` from its
+    # own signature sentence in favour of a specific sibling, which is a misroute, not a fix.  So a
+    # retrieved selection is accepted only when it is DERIVED EVIDENCE - a capability the pinned
+    # path structurally cannot propose.
+    if entry.get("capability_source") != "receipt_projection":
+        return None
+    proposals = decision.get("proposals") or []
+    score = int(round(float((proposals[0] if proposals else {}).get("lexical_relevance_score") or 0)))
+    rules.append("F17_RETRIEVAL_FIRST_TYPED_ADMISSION")
+    return _single(cid, entry, decision["inputs"], score, {
+        "rule": "F17_RETRIEVAL_FIRST_TYPED_ADMISSION",
+        "retrieval": decision.get("authority"),
+        "k": decision.get("k"),
+        "proposals": [p["capability_id"] for p in proposals],
+        "admissions": [{k: v for k, v in row.items() if k in ("capability_id", "admitted", "reason")}
+                       for row in decision.get("admissions") or []],
+    }, rules)
+
+
 _LITERAL_MODES = {"DETERMINISTIC_LITERAL_JSON_RECORDS", "DETERMINISTIC_EXACT_LITERAL_RESPONSE"}
 
 
@@ -807,6 +913,51 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
     text = normalize_goal(original)
     if text != original:
         rules.append("F2_SENTENCE_FINAL_PERIOD_REMOVED")
+
+    # F15: an id that appears verbatim in the goal is the caller choosing that capability.
+    # Defect 10 - without this, the id is stripped as a path and the goal is absorbed by a
+    # generic candidate that reports success for work it was never asked to do.
+    named = explicitly_named_capabilities(text, admissible)
+    if len(named) == 1 and naming_is_the_whole_request(text, named[0]):
+        cid = named[0]
+        entry = admissible[cid]
+        inputs = (
+            bind_all_inputs(text, entry, root, cycle=0, spool=set())
+            if is_plain_goal_routable(entry)
+            else {}
+        )
+        rules.append("F15_EXPLICIT_CAPABILITY_ID_NAMED")
+        return _single(
+            cid,
+            entry,
+            inputs,
+            _EXPLICIT_NAME_SCORE,
+            {
+                "rule": "F15_EXPLICIT_CAPABILITY_ID_NAMED",
+                "explicit_capability_id": cid,
+                "named_route": "EXACT_CAPABILITY_ID_IN_GOAL",
+            },
+            rules,
+        )
+
+    # F16: an id-shaped token is an identity.  A registered one inside a longer request is a
+    # composition this layer does not claim; an unregistered one is not a capability at all
+    # and must not become an artifact some other capability can "satisfy" by writing a file.
+    #
+    # Identity is derived from the registry, not from a spelling: the shape regex below only
+    # knows the `*.py.auto.v1` inventory ids, so a registered capability named any other way
+    # (e.g. `brain.module.function.invoke`) used to fall through this rule and reach the
+    # ranker, which answers GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH for a compound
+    # request that names a real capability.  `named` is already computed above and is by
+    # construction a subset of the registry, so this adds identity without adding a lookup.
+    shaped = capability_id_shaped_tokens(text)
+    identities = sorted(set(shaped) | set(named))
+    if identities:
+        unknown = [t for t in identities if t not in admissible]
+        if unknown:
+            raise GoalCompilationFailure("GOAL_NAMES_UNKNOWN_CAPABILITY", ",".join(unknown[:3]))
+        raise GoalCompilationFailure("GOAL_NAMES_CAPABILITY_IN_COMPOUND_REQUEST", ",".join(identities[:3]))
+
     registry = routable_registry(admissible)
     if len(registry) != len(admissible):
         rules.append("F4_ZERO_INPUT_TOOLS_NOT_ROUTABLE")
@@ -863,14 +1014,42 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
             # prose-scored candidate consistent with the goal's artifact; never a fall-through
             consistent = selected in {c[2] for c in pool}
             if not consistent:
+                retrieved = _retrieval_first_selection(text, admissible, root, rules)
+                if retrieved is not None:
+                    return retrieved
                 raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", best[2] + ":" + str(best_error.detail))
         if compiled is None:
+            retrieved = _retrieval_first_selection(text, admissible, root, rules)
+            if retrieved is not None:
+                return retrieved
             raise pinned_failure  # type: ignore[misc]
         if future and not _output_keys(registry[selected]):
             raise GoalCompilationFailure("GOAL_OUTPUT_ARTIFACT_UNSERVED", selected)
 
     if compiled is None:
+        retrieved = _retrieval_first_selection(text, admissible, root, rules)
+        if retrieved is not None:
+            return retrieved
         raise pinned_failure  # type: ignore[misc]
+
+    # F17 (pinned catch-all): the pinned scorer answers a STRUCTURED sentence with a capability
+    # whose only declared inputs are {goal, output_path} - it binds any sentence at all, which is
+    # measured, not hypothetical.  When the pinned winner is such a catch-all and a structurally
+    # SPECIFIC typed admission exists, the specific one is the answer.  This sits after F1 has had
+    # its chance to re-bind a ranked candidate (that is what keeps the reachability results that
+    # depended on F1 intact) and it never fires when admission is ambiguous, so an unclear sentence
+    # still fails closed instead of being guessed.
+    if single_shape and selected:
+        from canonical.runtime import capability_selection_retrieval_v1 as _sel
+
+        _declared = _sel.declarations(root).get(selected)
+        _names = _sel.required_input_names(admissible.get(selected) or {}, _declared)
+        if _names and not _sel.is_specific(_names):
+            displaced = _retrieval_first_selection(text, admissible, root, rules)
+            if displaced is not None:
+                displaced["match_evidence"]["displaced_pinned_selection"] = selected
+                displaced["match_evidence"]["displaced_catch_all_inputs"] = _names
+                return displaced
 
     if single_shape and isinstance(compiled.get("inputs"), dict):
         if repair_output_collisions(text, compiled["inputs"], root, entry=registry.get(selected),
