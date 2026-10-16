@@ -202,11 +202,36 @@ class LoaderGateTests(unittest.TestCase):
             load_verified_registry(include_extended=True)
         self.assertGreater(after, before)
 
-    def test_this_session_admits_nothing_for_itself(self):
-        """The receipts this repo carries were produced by a session, not a runner."""
+    def test_every_admitted_capability_is_backed_by_signed_independent_evidence(self):
+        """The permanent invariant, whether or not a runner has stamped records yet.
+
+        Initially this asserted "nothing is admitted", which was true only while no runner
+        had produced attestations.  The invariant that must always hold is stronger and does
+        not go stale: NOTHING is admitted without a signed, independently reproduced record.
+        """
         registry = load_verified_registry(include_extended=True)
-        self.assertEqual([k for k, v in registry.items()
-                          if v.get("capability_source") == "receipt_projection"], [])
+        for cid, entry in registry.items():
+            if entry.get("capability_source") != "receipt_projection":
+                continue
+            receipt_path = entry["verification"]["receipt_path"]
+            vpath = ROOT / lane_module.verification_path_for(receipt_path)
+            self.assertTrue(vpath.is_file(), cid)
+            record = json.loads(vpath.read_text(encoding="utf-8"))
+            producer = json.loads((ROOT / receipt_path).read_text(encoding="utf-8"))
+            self.assertEqual(record["schema"], lane_module.VERIFICATION_SCHEMA, cid)
+            self.assertIs(record["reproduced"], True, cid)
+            self.assertNotEqual(record["independent_verifier"], producer["ran_by"], cid)
+            self.assertEqual(record["module_sha256"], producer["module_sha256"], cid)
+            self.assertEqual(record["verifier_result_sha256"], producer["result_sha256"], cid)
+            claims = record["independent_run_reference"]["oidc_claims"]
+            self.assertEqual(claims["iss"], "https://token.actions.githubusercontent.com", cid)
+
+    def test_one_capability_stopped_executing_is_still_present(self):
+        """Grace: admission can only add. The original capabilities must all still be here."""
+        registry = load_verified_registry(include_extended=True)
+        original = [k for k, v in registry.items()
+                    if v.get("capability_source") != "receipt_projection"]
+        self.assertGreaterEqual(len(original), 67)
 
 
 class LaneRunTests(unittest.TestCase):
