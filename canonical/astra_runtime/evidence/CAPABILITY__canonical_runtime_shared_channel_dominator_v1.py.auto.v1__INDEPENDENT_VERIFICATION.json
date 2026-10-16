@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/shared_channel_dominator_v1.py.auto.v1",
- "elapsed_ms": 25.897,
+ "elapsed_ms": 38.935,
  "independent_run_reference": {
-  "github_run_id": 38932836836,
+  "github_run_id": 38933435967,
   "oidc_claims": {
    "actor": "moxnixmdj",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "arena/120f25af-brain",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/pull/4725/merge",
-   "jti": "9bfc3735-9a57-4d41-b4b8-45dcbd1b3a92",
+   "jti": "b9f26687-5baa-46e5-9478-69bcd8eeb5c4",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "38932836836",
+   "run_id": "38933435967",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/pull/4725/merge"
   }
  },
