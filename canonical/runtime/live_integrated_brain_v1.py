@@ -135,10 +135,15 @@ _REGISTRY_CACHE: dict[tuple[int, int, int], dict[str, Mapping[str, Any]]] = {}
 def load_verified_registry(include_extended: bool = True) -> dict[str, Mapping[str, Any]]:
     # Parsing 1.06 MB of JSON on every solve() was the dominant cost (864 KB of it inventory
     # that is ~98% filtered away).  Memoise on the mtimes that can change the answer.
+    # The evidence directory's mtime is in the token because verification records appear
+    # there long after the projection is written: without it the cache returned a stale
+    # 67 after a record was stamped in-process. One stat, not a directory scan.
+    evidence_dir = ROOT / "canonical/astra_runtime/evidence"
     token = (REGISTRY.stat().st_mtime_ns,
              (ROOT / "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json").stat().st_mtime_ns
              if (ROOT / "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json").is_file() else 0,
-             PROJECTION.stat().st_mtime_ns if PROJECTION.is_file() else 0)
+             PROJECTION.stat().st_mtime_ns if PROJECTION.is_file() else 0,
+             evidence_dir.stat().st_mtime_ns if evidence_dir.is_dir() else 0)
     if include_extended and token in _REGISTRY_CACHE:
         return dict(_REGISTRY_CACHE[token])
 

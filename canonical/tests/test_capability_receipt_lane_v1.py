@@ -159,6 +159,27 @@ class LoaderGateTests(unittest.TestCase):
         registry = load_verified_registry(include_extended=True)
         self.assertGreaterEqual(len(registry), 67)
 
+    def test_cache_invalidates_when_evidence_directory_changes(self):
+        """A stamped verification record must be visible to the next load in the same process.
+
+        The first version of the cache keyed only on registry/projection mtimes, so a record
+        stamped after a load was invisible until the process restarted.  This probe changes
+        the directory mtime WITHOUT creating any attestation, so it cannot fabricate one.
+        """
+        from canonical.runtime import live_integrated_brain_v1 as lib
+
+        load_verified_registry(include_extended=True)
+        before = len(lib._REGISTRY_CACHE)
+        probe = ROOT / "canonical/astra_runtime/evidence/__cache_probe__.tmp"
+        try:
+            probe.write_text("probe", encoding="utf-8")
+            load_verified_registry(include_extended=True)
+            after = len(lib._REGISTRY_CACHE)
+        finally:
+            probe.unlink(missing_ok=True)
+            load_verified_registry(include_extended=True)
+        self.assertGreater(after, before)
+
     def test_this_session_admits_nothing_for_itself(self):
         """The receipts this repo carries were produced by a session, not a runner."""
         registry = load_verified_registry(include_extended=True)
