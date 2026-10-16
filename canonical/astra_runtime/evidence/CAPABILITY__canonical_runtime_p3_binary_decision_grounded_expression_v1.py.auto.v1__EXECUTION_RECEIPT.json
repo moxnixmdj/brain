@@ -1,0 +1,27 @@
+{
+ "capability_id": "canonical/runtime/p3_binary_decision_grounded_expression_v1.py.auto.v1",
+ "elapsed_ms": 10.301,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/p3_binary_decision_grounded_expression_v1.py",
+ "module_sha256": "a0f93275d0cd484c3421ebc01c9179772cbfaf1aa6515a5cbd23294f6701bf29",
+ "observed": {
+  "pass": false,
+  "status": "FAIL_CLOSED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_binary_decision_grounded_expression_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 12,
+ "result_sha256": "a5e5093ad208ad393f7045f32ff8047fa292bd850a815c795f9fa6688c4d99d9",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
