@@ -139,3 +139,25 @@ reconciliation records, historical cuts. Deleting the inventory deletes no mecha
 5. Extended-registry noise removal (after promotable-inventory replacement + 1 test move).
 6. Re-measure honest suite + heartbeat wall-clock; report suite-time delta as the
    efficiency evidence for the DELETE batches.
+
+## §8 — Heartbeat timeout episode (same day, same PR)
+
+PR #4727's first heartbeat run TIMED OUT at the 30-minute job limit. Three
+concurrent PR heartbeats timed out in the same window; a fourth (perf-only,
+zero new families) passed at 29m06s with 54s of margin. Root cause: the base
+heartbeat sits at ~29 minutes (50 instances × 29 families × 2 entries + 100
+OOS × 2 = ~3100 real tool executions) and ANY family-adding PR tips it over.
+Without a fix, no binding PR can ever prove itself on the runner again, and
+the "regression turns red within a day" mechanism dies exactly when growth
+starts. Binding PRs are the future; the heartbeat must carry 100+ families.
+
+Rejected: raising the timeout (papers over sloth, dies at 100 families);
+shrinking the matrix (weakens the one regression signal).
+
+Fix (this PR, commit 2): `--jobs N` on the measurement tool. Generation stays
+serial in RNG order (fixed seeds replay identical goals); case execution fans
+out to worker processes; oracles judge in the original order. Verdicts are
+order-free by construction (unique task ids, owned artifact paths). Proof:
+fixed-seed serial vs 4-worker receipts are verdict-identical (32/32, OOS 1.0
+both). Same goals, same oracles, same entries, same verdicts — only wall
+clock changes. Receipt records `jobs`. Heartbeat workflow passes `--jobs 4`.

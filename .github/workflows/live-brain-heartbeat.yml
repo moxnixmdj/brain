@@ -44,7 +44,7 @@ jobs:
           set -euo pipefail
           mkdir -p heartbeat_out
           python3 execution_guard/live_solver_end_to_end_measurement_v1.py \
-            --per-family 50 --oos 100 --entries old,new \
+            --per-family 50 --oos 100 --entries old,new --jobs 4 \
             --out heartbeat_out/LIVE_BRAIN_HEARTBEAT_RECEIPT.json \
             --summary-md heartbeat_out/SUMMARY.md \
             --require-all-alive \
