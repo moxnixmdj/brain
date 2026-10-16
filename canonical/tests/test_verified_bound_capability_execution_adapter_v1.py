@@ -138,3 +138,26 @@ def test_caller_inputs_cannot_change_the_capability_id(monkeypatch):
     assert out["pass"] is True
     assert seen["entry"]["capability_id"] == cid
     assert seen["action"]["args"]["capability_id"] == cid
+
+
+def test_the_advertised_bound_prefix_reaches_the_same_execution():
+    """catalog() advertises live-owned ids in the invoker's `bound:` spelling, and the fabric's
+    {capability_id, inputs} route passes that spelling through unstripped.  Measured before:
+    both the 294 receipt-backed and the 67 promoted capabilities answered
+    BOUND_CAPABILITY_UNKNOWN through that door - 408 advertised ids, 0 dispatched."""
+    cid = _a_receipt_backed_capability_id()
+    bare = execute(cid, inputs={})
+    prefixed = execute("bound:" + cid, inputs={})
+    assert bare["pass"] is True
+    assert prefixed["status"] == bare["status"]
+    assert prefixed["pass"] == bare["pass"]
+    assert prefixed["receipt_path"] == bare["receipt_path"]
+
+
+def test_another_capability_kind_is_never_silently_treated_as_bound():
+    """Only `bound:` is this adapter's kind; an engine id must not be looked up in the
+    promoted registry as if it were a bound capability."""
+    out = execute("engine:ADAPTIVE_SOLVER", inputs={})
+    assert out["pass"] is False
+    assert out["status"] == "FAIL_CLOSED"
+    assert "BOUND_CAPABILITY_UNKNOWN" in str(out["errors"])

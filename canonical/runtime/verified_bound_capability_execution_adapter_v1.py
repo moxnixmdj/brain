@@ -249,6 +249,23 @@ def _receipt_backed_execution(
     }
 
 
+def _registry_key(capability_id: str) -> str:
+    """Registry keys are bare; the advertised live-owned ids carry the invoker's ``bound:`` kind.
+
+    Measured: the fabric's ``{capability_id, inputs}`` route hands the advertised spelling
+    straight to this adapter (the invoker's own route strips it first), so BOTH the 294
+    receipt-backed and the 67 promoted capabilities answered BOUND_CAPABILITY_UNKNOWN through
+    that door - 408 advertised ids, 0 dispatched.  The registry is consulted here, so both
+    spellings are accepted here.  Only ``bound:`` is stripped: ``engine:``, ``h100:``,
+    ``skill:`` and ``certified_route:`` are different kinds this adapter must never pretend
+    to execute.
+    """
+    cid = str(capability_id or "").strip()
+    if cid.startswith("bound:") and len(cid) > len("bound:"):
+        return cid[len("bound:"):]
+    return cid
+
+
 def execute(
     capability_id: str,
     *,
@@ -262,6 +279,7 @@ def execute(
     expected_rendered_action_sha256: str | None = None,
 ) -> dict[str, Any]:
     try:
+        capability_id = _registry_key(capability_id)
         # Receipt-backed capabilities first: they are admitted by the loader on execution
         # evidence, and the promoted-registry path below cannot see them. None means "not
         # one of those", so every promoted id keeps the strict path unchanged.
