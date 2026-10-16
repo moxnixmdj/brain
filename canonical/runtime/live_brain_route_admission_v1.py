@@ -59,6 +59,7 @@ from __future__ import annotations
 import pathlib
 import re
 import importlib.util
+import inspect
 import sys
 from copy import deepcopy
 from time import perf_counter_ns
@@ -353,6 +354,42 @@ class LocalExecutionFailure(RuntimeError):
     pass
 
 
+_ROOT_PARAM_NAMES = frozenset({"root", "repo_root", "repository_root", "project_root", "brain_root", "runtime_root"})
+_DIRECT_ENTRYPOINT_CANDIDATES = ("evaluate", "verify", "run", "manifest")
+
+
+def _invoke_entrypoint(fn: Any, call_args: Mapping[str, Any], root: Any) -> Any:
+    """Universal direct invocation by standard signature inspection.
+
+    A bound adapter follows the kernel convention ``fn(args, root)``; a plain repository
+    module's entrypoint may take just the payload, just the repository root, or nothing at
+    all.  Every declared positional parameter is fed from what it names: a root-named
+    parameter receives the repository root, the first other required parameter receives
+    the payload mapping.  A second payload parameter, or payload handed to an entrypoint
+    that takes none, fails closed.  No wrapper file is written: the repository module is
+    called directly.
+    """
+    try:
+        sig = inspect.signature(fn)
+    except (TypeError, ValueError):
+        return fn(dict(call_args), root)
+    args: list[Any] = []
+    payload_seen = False
+    for param in sig.parameters.values():
+        if param.kind not in (param.POSITIONAL_ONLY, param.POSITIONAL_OR_KEYWORD):
+            continue
+        if param.name in _ROOT_PARAM_NAMES:
+            args.append(root)
+        elif param.default is param.empty:
+            if payload_seen:
+                raise LocalExecutionFailure("BOUND_CAPABILITY_ENTRYPOINT_SIGNATURE_UNSUPPORTED")
+            payload_seen = True
+            args.append(dict(call_args))
+    if not payload_seen and call_args:
+        raise LocalExecutionFailure("BOUND_CAPABILITY_ENTRYPOINT_TAKES_NO_PAYLOAD")
+    return fn(*args)
+
+
 def _check_expectation(expect: Any, result: Mapping[str, Any]) -> None:
     """The kernel's expectation semantics (field_nonempty / field_contains / field_equals)."""
     if expect is None:
@@ -381,9 +418,13 @@ def _check_expectation(expect: Any, result: Mapping[str, Any]) -> None:
 def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> dict[str, Any]:
     """E1: execute one bound adapter the way the kernel would, for source types the kernel refuses.
 
-    Fails closed on: non-zero declared cost, a declared stdlib module that does not import, an
-    adapter path outside the repository or missing, a missing entrypoint, a non-dict result, or a
-    failed expectation.  Never installs anything and never calls a network.
+    Also the universal direct-invocation entry for plain repository modules: when the entry
+    names a repository source (or derives the module from its adapter path), the module is
+    imported and its entrypoint (``evaluate`` / ``verify`` / ``run`` / ``manifest``, or the
+    declared name) is called directly per its own signature - zero wrapper files.  Fails
+    closed on: non-zero declared cost, a declared stdlib module that does not import, an
+    adapter path outside the repository or missing, a missing entrypoint, a non-dict result,
+    or a failed expectation.  Never installs anything and never calls a network.
     """
     cid = str(entry.get("capability_id") or (action.get("args") or {}).get("capability_id") or "")
     if float(entry.get("incremental_spend_usd", 0) or 0) != 0:
@@ -393,10 +434,12 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
     for name in modules:
         if not str(name).strip() or importlib.util.find_spec(str(name).split(".")[0]) is None:
             raise LocalExecutionFailure("FRONT_LOCAL_DEPENDENCY_MISSING:" + str(name))
+    declared = str(source.get("adapter_path") or "")
     module_name = str(entry.get("adapter_module") or "")
+    if not module_name and declared:
+        module_name = pathlib.Path(declared).stem
     if not module_name or any(ch not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_" for ch in module_name):
         raise LocalExecutionFailure("BOUND_CAPABILITY_ADAPTER_INVALID")
-    declared = str(source.get("adapter_path") or "")
     path = (ROOT / declared).resolve() if declared else (ROOT / "canonical" / "runtime" / "bound_capabilities" / (module_name + ".py")).resolve()
     if ROOT.resolve() not in path.parents or not path.is_file() or path.suffix != ".py":
         raise LocalExecutionFailure("BOUND_CAPABILITY_ADAPTER_MISSING:" + declared)
@@ -406,12 +449,18 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
     module = importlib.util.module_from_spec(spec)
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
-    fn = getattr(module, str(entry.get("entrypoint") or "run"), None)
+    entrypoint_name = str(entry.get("entrypoint") or "")
+    fn = getattr(module, entrypoint_name or "run", None)
+    if not callable(fn) and not entrypoint_name:
+        for candidate in _DIRECT_ENTRYPOINT_CANDIDATES:
+            fn = getattr(module, candidate, None)
+            if callable(fn):
+                break
     if not callable(fn):
         raise LocalExecutionFailure("BOUND_CAPABILITY_ENTRYPOINT_MISSING")
     call_args = dict(action.get("args") or {})
     call_args.pop("capability_id", None)
-    result = fn(call_args, ROOT)
+    result = _invoke_entrypoint(fn, call_args, ROOT)
     if not isinstance(result, dict):
         raise LocalExecutionFailure("BOUND_CAPABILITY_RESULT_INVALID")
     result.setdefault("capability_id", cid)
