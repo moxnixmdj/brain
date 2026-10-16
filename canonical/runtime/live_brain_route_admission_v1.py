@@ -184,6 +184,25 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
         return {**base, "admitted": True, "rule": None,
                 "admission_basis": "DECLARED_INPUT_CONTRACT_FULLY_STATED_IN_GOAL",
                 "typed_admission": {"required_inputs": typed.get("required_inputs"), "specific": True}}
+    # Decisive lexical margin (F18), the third way a caller can be explicit without this layer
+    # inventing anything: the sentence names one capability so much better than any other that the
+    # ranker separates them.  Measured before it was trusted - 295 name-derived goals, threshold
+    # 0.05 relative margin: 222 decisions, 222 correct, and all 46 wrong first choices sat below
+    # it.  Re-verified HERE by recomputing the margin from the goal and the live registry, exactly
+    # as F15 and the typed rule are, and only when the front layer selected this same capability:
+    # the rule string is never the evidence.
+    try:
+        from canonical.runtime import capability_selection_retrieval_v1 as _margin
+        verdict = _margin.margin_verdict(goal, registry, ROOT)
+    except Exception:  # noqa: BLE001 - any failure to re-verify is simply no admission here
+        verdict = None
+    if (isinstance(verdict, Mapping) and verdict.get("status") == "DECISIVE"
+            and verdict.get("capability_id") == selected
+            and _margin.runs_as_stated(registry, selected, ROOT)):
+        return {**base, "admitted": True, "rule": None,
+                "admission_basis": "DECISIVE_LEXICAL_MARGIN",
+                "lexical_margin": verdict.get("lexical_margin"),
+                "margin_runner_up": verdict.get("runner_up")}
     if matched and not semantic:
         return {**base, "admitted": False, "rule": "R1_PATH_TOKENS_ONLY"}
     if futures and not output_keys:

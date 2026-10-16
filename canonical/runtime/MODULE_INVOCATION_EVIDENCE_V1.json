@@ -110,7 +110,7 @@
   "canonical/verification/p3_policy_influence_v10_compositional_replay_v1.py": "SystemExit:1",
   "canonical/verification/run_scoped_self_verification_guard_v1.py": "ModuleNotFoundError:No module named 'v22_prewrite_admission'"
  },
- "junit_cases": 11634,
+ "junit_cases": 11754,
  "measured_platform": "linux",
  "measured_python": "3.11",
  "modules": {
@@ -5004,31 +5004,6 @@
    },
    "sha256": "f45f10c2384f46a2169b673242d114659e7ef8cf1756c4415d6a9c8391d1f8ca",
    "tests": {}
-  },
-  "canonical/research/professional_quality_20261009/package/professional_quality_closure_normal_form_v1.py": {
-   "doc": "",
-   "functions": {
-    "verify": {
-     "doc": "",
-     "passing_cases": 5,
-     "signature": {
-      "params": [
-       "normal_form",
-       "matrix"
-      ],
-      "required": [
-       "normal_form",
-       "matrix"
-      ],
-      "var_kw": false
-     },
-     "tier": "TEST_EVIDENCED"
-    }
-   },
-   "sha256": "c1e19de8c609e53ac2a699eae6b02acb9e660bcf5ac58007023e4268916c69c9",
-   "tests": {
-    "canonical/tests/test_professional_quality_closure_normal_form_v1.py": "641711e5c38a1b73bd290ca056b95311937589aa636e927dee1597d1224b6275"
-   }
   },
   "canonical/runtime/aa_briefcase_component_summary_noninversion_v1.py": {
    "doc": "",
@@ -24635,7 +24610,7 @@
    "functions": {
     "authorize_information_action": {
      "doc": "",
-     "passing_cases": 0,
+     "passing_cases": 2,
      "signature": {
       "params": [
        "context",
@@ -24650,7 +24625,7 @@
       ],
       "var_kw": false
      },
-     "tier": "READ_ONLY_UNTESTED"
+     "tier": "TEST_EVIDENCED"
     },
     "context_at_path": {
      "doc": "",
@@ -24680,7 +24655,7 @@
     },
     "validate_context": {
      "doc": "",
-     "passing_cases": 1,
+     "passing_cases": 6,
      "signature": {
       "params": [
        "context",
@@ -24698,6 +24673,7 @@
    },
    "sha256": "16967ee77a4589600c810a75d200b80c28a4efa09b545d5b84a758e899a30227",
    "tests": {
+    "canonical/runtime/test_continuous_obs_runtime.py": "a08ca627b471f50c5a3c81a36082b40a786898b98b969967aa1f4e39b98b8e99",
     "canonical/tests/test_matched_agency_stateful_case_v1.py": "6d37adcbb3b8f01cb3b0448a89440b3e701d0b948a20e21eaecf6b38e2d02d3c"
    }
   },
@@ -27911,20 +27887,6 @@
   "canonical/runtime/data_anonymization_stage_b_gate.py": {
    "doc": "Fail-closed Stage-B gate for TB4 rank17 data-anonymization.",
    "functions": {
-    "evaluate": {
-     "doc": "",
-     "passing_cases": 0,
-     "signature": {
-      "params": [
-       "root"
-      ],
-      "required": [
-       "root"
-      ],
-      "var_kw": false
-     },
-     "tier": "READ_ONLY_UNTESTED"
-    },
     "main": {
      "doc": "",
      "passing_cases": 0,
@@ -32024,26 +31986,6 @@
      },
      "tier": "READ_ONLY_UNTESTED"
     },
-    "derive_authority": {
-     "doc": "",
-     "passing_cases": 0,
-     "signature": {
-      "params": [
-       "events",
-       "task",
-       "execution_budget",
-       "verifier_budget"
-      ],
-      "required": [
-       "events",
-       "task",
-       "execution_budget",
-       "verifier_budget"
-      ],
-      "var_kw": false
-     },
-     "tier": "READ_ONLY_UNTESTED"
-    },
     "validate_event_chain": {
      "doc": "",
      "passing_cases": 0,
@@ -36073,7 +36015,7 @@
    "functions": {
     "exhaustive_acceptance_search": {
      "doc": "",
-     "passing_cases": 0,
+     "passing_cases": 6,
      "signature": {
       "params": [
        "candidates",
@@ -36086,7 +36028,7 @@
       ],
       "var_kw": false
      },
-     "tier": "READ_ONLY_UNTESTED"
+     "tier": "TEST_EVIDENCED"
     },
     "self_test": {
      "doc": "",
@@ -36100,7 +36042,9 @@
     }
    },
    "sha256": "3d97aa3992ee9568b4cf4f80e320a3ced834f97b909d29a249a5d3f122ab74ce",
-   "tests": {}
+   "tests": {
+    "canonical/verification/test_finite_verifier_search.py": "8d6d154d8664e6821b8ad6168acf0d853a2bb57027b979885362825f072a84e9"
+   }
   },
   "canonical/runtime/five_primitive_role_single_semantic_frontier_v1.py": {
    "doc": "",
@@ -45148,7 +45092,7 @@
    "functions": {
     "assess": {
      "doc": "",
-     "passing_cases": 5,
+     "passing_cases": 13,
      "signature": {
       "params": [
        "model"
@@ -45193,7 +45137,9 @@
    },
    "sha256": "54af7f3aa10111b3e38db233becd047ee0bfe833ca0dda45e59f4eb54ac7505c",
    "tests": {
-    "canonical/tests/test_cursorbench_typed_acceptance_plan_policy_adequacy_v1.py": "777009c7cce74f8c4279abd15d4f384946bb3cabfd3d54c51963226464147cb9"
+    "canonical/runtime/test_prequalification_spent_regressions.py": "c3c74780ca0a9a59b734609b6a5bd325d69a1ee3d3d2448d75e3bc4adbdb4b17",
+    "canonical/tests/test_cursorbench_typed_acceptance_plan_policy_adequacy_v1.py": "777009c7cce74f8c4279abd15d4f384946bb3cabfd3d54c51963226464147cb9",
+    "tests/test_independent_acceptance_model.py": "2d907fb6de9dba7191b3f5bb8d64dbb3b13ebce434d555f92b4b35a5370ee004"
    }
   },
   "canonical/runtime/independent_npm_codec_verifier.py": {
@@ -46483,7 +46429,7 @@
      "tier": "TEST_EVIDENCED"
     }
    },
-   "sha256": "ff43e27597aa47cc2ea8795b64f503824f1e9961190cea349906c418d6affa17",
+   "sha256": "1499f949bab02add1e6ceab8fb63ab280bcd0375ce74719ecd496a8b76dab73a",
    "tests": {
     "canonical/tests/test_capability_dag_live_wiring_v1.py": "d02b0f52db77cf97761e9c036d4d5548279fe976b14d36f041b880d294172ffd",
     "canonical/tests/test_goal_front_compiler_v1.py": "04ce39b69af5db9c54aba39e09ff2ce019679aa06f66e9439b13aac7f5f6d230",
@@ -50048,23 +49994,6 @@
      },
      "tier": "READ_ONLY_UNTESTED"
     },
-    "construct": {
-     "doc": "",
-     "passing_cases": 0,
-     "signature": {
-      "params": [
-       "base_text",
-       "percentage",
-       "tolerance"
-      ],
-      "required": [
-       "base_text",
-       "percentage"
-      ],
-      "var_kw": false
-     },
-     "tier": "READ_ONLY_UNTESTED"
-    },
     "extract_pinned_public_ifbench_base": {
      "doc": "Extractor for the exact constraint forms present in the pinned public 12-row audit.",
      "passing_cases": 0,
@@ -50089,22 +50018,6 @@
       ],
       "required": [
        "args"
-      ],
-      "var_kw": false
-     },
-     "tier": "READ_ONLY_UNTESTED"
-    },
-    "score_with_reference_for_audit": {
-     "doc": "Audit-only mirror of the pinned scorer. Never called by construct().",
-     "passing_cases": 0,
-     "signature": {
-      "params": [
-       "response",
-       "reference_text"
-      ],
-      "required": [
-       "response",
-       "reference_text"
       ],
       "var_kw": false
      },
@@ -61973,28 +61886,6 @@
   "canonical/runtime/prequalification_stage_a_generic.py": {
    "doc": "Generic fail-closed Stage-A pre-exposure admission for TB4 tasks.",
    "functions": {
-    "evaluate": {
-     "doc": "",
-     "passing_cases": 0,
-     "signature": {
-      "params": [
-       "root",
-       "ledger_rel",
-       "task",
-       "rank",
-       "identity_sha256"
-      ],
-      "required": [
-       "root",
-       "ledger_rel",
-       "task",
-       "rank",
-       "identity_sha256"
-      ],
-      "var_kw": false
-     },
-     "tier": "READ_ONLY_UNTESTED"
-    },
     "load": {
      "doc": "",
      "passing_cases": 0,
@@ -62030,7 +61921,7 @@
    "functions": {
     "evaluate": {
      "doc": "",
-     "passing_cases": 0,
+     "passing_cases": 4,
      "signature": {
       "params": [
        "root"
@@ -62040,7 +61931,7 @@
       ],
       "var_kw": false
      },
-     "tier": "READ_ONLY_UNTESTED"
+     "tier": "TEST_EVIDENCED"
     },
     "load": {
      "doc": "",
@@ -62070,31 +61961,13 @@
     }
    },
    "sha256": "1c85d9eb1d20c12ce4699ce4088b0426152ffeb66d29db5f4caaa10716490e3a",
-   "tests": {}
+   "tests": {
+    "canonical/runtime/test_prequalification_stage_a_reducer.py": "4dccd34525d84ea64ba0d29ecc9fe764a215b9fc1e663be585b3d80cbe7e1aaf"
+   }
   },
   "canonical/runtime/prequalification_stage_a_reducer_v2.py": {
    "doc": "Generic deterministic Stage-A pre-exposure admission reducer for TB4 V5.",
    "functions": {
-    "evaluate": {
-     "doc": "",
-     "passing_cases": 0,
-     "signature": {
-      "params": [
-       "root",
-       "task",
-       "rank",
-       "ledger_path"
-      ],
-      "required": [
-       "root",
-       "task",
-       "rank",
-       "ledger_path"
-      ],
-      "var_kw": false
-     },
-     "tier": "READ_ONLY_UNTESTED"
-    },
     "load": {
      "doc": "",
      "passing_cases": 0,
@@ -62408,31 +62281,6 @@
    "sha256": "9a92440565e0d48e66003ca2749e97970c25959e3378a6de0d26755124be339d",
    "tests": {
     "canonical/tests/test_professional_positive_adequacy_escape_router_v1.py": "d1736dc25dfb4e7e1098a048bf12612c2a5cd39d0b53f2709a309a40bfd9d83e"
-   }
-  },
-  "canonical/runtime/professional_quality_closure_normal_form_v1.py": {
-   "doc": "",
-   "functions": {
-    "verify": {
-     "doc": "",
-     "passing_cases": 5,
-     "signature": {
-      "params": [
-       "normal_form",
-       "matrix"
-      ],
-      "required": [
-       "normal_form",
-       "matrix"
-      ],
-      "var_kw": false
-     },
-     "tier": "TEST_EVIDENCED"
-    }
-   },
-   "sha256": "c1e19de8c609e53ac2a699eae6b02acb9e660bcf5ac58007023e4268916c69c9",
-   "tests": {
-    "canonical/tests/test_professional_quality_closure_normal_form_v1.py": "641711e5c38a1b73bd290ca056b95311937589aa636e927dee1597d1224b6275"
    }
   },
   "canonical/runtime/professional_quality_declared_system_subject_verify_v1.py": {
@@ -74950,7 +74798,7 @@
     },
     "compile_requirement_contract": {
      "doc": "",
-     "passing_cases": 0,
+     "passing_cases": 5,
      "signature": {
       "params": [
        "requirements",
@@ -74961,11 +74809,11 @@
       ],
       "var_kw": false
      },
-     "tier": "READ_ONLY_UNTESTED"
+     "tier": "TEST_EVIDENCED"
     },
     "compile_structured_method_contract": {
      "doc": "Compose normalized requirement validation with requirement-to-output reachability.",
-     "passing_cases": 0,
+     "passing_cases": 1,
      "signature": {
       "params": [
        "requirements",
@@ -74983,11 +74831,11 @@
       ],
       "var_kw": false
      },
-     "tier": "READ_ONLY_UNTESTED"
+     "tier": "TEST_EVIDENCED"
     },
     "requirement_mutation_score": {
      "doc": "",
-     "passing_cases": 0,
+     "passing_cases": 1,
      "signature": {
       "params": [
        "requirements"
@@ -74997,7 +74845,7 @@
       ],
       "var_kw": false
      },
-     "tier": "READ_ONLY_UNTESTED"
+     "tier": "TEST_EVIDENCED"
     },
     "seeded_requirement_mutations": {
      "doc": "Generate structural mutants that a complete requirement gate must kill.",
@@ -75030,7 +74878,7 @@
     },
     "validate_requirement_output_reachability": {
      "doc": "Fail closed unless every non-excluded requirement reaches a final output.",
-     "passing_cases": 0,
+     "passing_cases": 3,
      "signature": {
       "params": [
        "requirements",
@@ -75047,11 +74895,13 @@
       ],
       "var_kw": false
      },
-     "tier": "READ_ONLY_UNTESTED"
+     "tier": "TEST_EVIDENCED"
     }
    },
    "sha256": "46e1923934350f830b81fb9acf8c379be61eacf6aa4cf69e12198c0d0fdd4b4c",
-   "tests": {}
+   "tests": {
+    "canonical/runtime/test_requirement_graph_kernel.py": "6f9f0611b6a6df261eceb618a048dd445eefcaf0e781b4d71df5a9f6e6818db6"
+   }
   },
   "canonical/runtime/research_control_information_safe_candidate.py": {
    "doc": "Brain policy for bounded information-safe research-loop control.",
@@ -81746,7 +81596,7 @@
     },
     "transform": {
      "doc": "",
-     "passing_cases": 0,
+     "passing_cases": 10,
      "signature": {
       "params": [
        "seed",
@@ -81758,11 +81608,13 @@
       ],
       "var_kw": false
      },
-     "tier": "READ_ONLY_UNTESTED"
+     "tier": "TEST_EVIDENCED"
     }
    },
    "sha256": "e858d1645008f8282086eb9469c48cf6437029b7932246ee2e01ae2690488d54",
-   "tests": {}
+   "tests": {
+    "canonical/runtime/test_seed_preserving_instruction_postprocessor_v1.py": "4031344e3fbced909be0d3977bd59ce01a3a7a635af160fd479929ff78cafc1f"
+   }
   },
   "canonical/runtime/seed_preserving_instruction_postprocessor_v2.py": {
    "doc": "Strict seed-preserving public-IFBench structural postprocessor v2.",
@@ -81784,7 +81636,7 @@
     },
     "transform": {
      "doc": "",
-     "passing_cases": 0,
+     "passing_cases": 11,
      "signature": {
       "params": [
        "seed",
@@ -81796,11 +81648,13 @@
       ],
       "var_kw": false
      },
-     "tier": "READ_ONLY_UNTESTED"
+     "tier": "TEST_EVIDENCED"
     }
    },
    "sha256": "bb1324b9c4ff03ebf3e8fcbeab494112f05bc57b4a4141750dc47f8349b6ae63",
-   "tests": {}
+   "tests": {
+    "canonical/runtime/test_seed_preserving_instruction_postprocessor_v2.py": "0c9c6fd814a91b26e483aa9a470fd420a1add6fcb6a071158724926393e08b27"
+   }
   },
   "canonical/runtime/selected_bounded_support_truth_certificate_v1.py": {
    "doc": "Selected required-claim bounded-support truth certificate v1.",
@@ -84646,7 +84500,7 @@
    "functions": {
     "assess_consensus": {
      "doc": "",
-     "passing_cases": 0,
+     "passing_cases": 6,
      "signature": {
       "params": [
        "source_text",
@@ -84658,11 +84512,11 @@
       ],
       "var_kw": false
      },
-     "tier": "READ_ONLY_UNTESTED"
+     "tier": "TEST_EVIDENCED"
     },
     "source_sentences": {
      "doc": "Return stable source units without splitting decimals or dotted code tokens.",
-     "passing_cases": 0,
+     "passing_cases": 1,
      "signature": {
       "params": [
        "text"
@@ -84672,11 +84526,13 @@
       ],
       "var_kw": false
      },
-     "tier": "READ_ONLY_UNTESTED"
+     "tier": "TEST_EVIDENCED"
     }
    },
    "sha256": "08366de78490c4011e5c34e3ec78c4d6f7ea8279a98243a61dd54f2d852cc584",
-   "tests": {}
+   "tests": {
+    "canonical/runtime/test_specification_consensus_gate.py": "33f17b807cd26f43751b2302601945db40e785763ce8ae3193190834c1736217"
+   }
   },
   "canonical/runtime/specification_multiplex_instrumentation_validator.py": {
    "doc": "Fail-closed validator for portfolio-multiplexed specification instrumentation.",
@@ -87682,7 +87538,7 @@
     },
     "evaluate_manifest": {
      "doc": "",
-     "passing_cases": 6,
+     "passing_cases": 14,
      "signature": {
       "params": [
        "manifest",
@@ -87708,6 +87564,7 @@
    },
    "sha256": "666f755717dd6ccd6fe1b95b3a1ff0f8975abc09f1a1815263873d3ab72d6660",
    "tests": {
+    "canonical/runtime/test_terminal_closure_reducer.py": "1a9213339fb17cf6c43788c33b5aa6bb108382f70c12bfbd752c5aa3fa85252a",
     "canonical/tests/test_terminal_closure_reducer_v2.py": "3d31fcdbb1d6bab78938ef4530cba3b609308ac90fd6171459bd87063a387b0b",
     "canonical/tests/test_terminal_frontier_reducer.py": "381991314f129b220901121226ded829e4255c4d398e88ef759e95662481e61c"
    }
@@ -95548,7 +95405,7 @@
     },
     "solve": {
      "doc": "",
-     "passing_cases": 0,
+     "passing_cases": 6,
      "signature": {
       "params": [
        "spec"
@@ -95558,11 +95415,13 @@
       ],
       "var_kw": false
      },
-     "tier": "READ_ONLY_UNTESTED"
+     "tier": "TEST_EVIDENCED"
     }
    },
    "sha256": "38e03b85128e390367421c1ac3ab4941e0382e8d7e3aef40faf0ac8daf73ef40",
-   "tests": {}
+   "tests": {
+    "tests/test_verified_mechanism_cover_optimizer.py": "46c5d7f2c809f6de21523e602b16b9d937a44bfbfcc43c0d9808d9e7db9e1bd8"
+   }
   },
   "canonical/runtime/verified_skill_macro_planner_v1.py": {
    "doc": "Planner adapter for verified executable skills.",
@@ -96872,6 +96731,9 @@
   }
  },
  "refused": {
+  "canonical/research/professional_quality_20261009/package/professional_quality_closure_normal_form_v1.py": {
+   "verify": "FAILING_TEST_CASES:5"
+  },
   "canonical/runtime/acceptance_proof_transmuter_v1.py": {
    "evaluate": "FAILING_TEST_CASES:7"
   },
@@ -96962,6 +96824,9 @@
   "canonical/runtime/current_terminal_information_dominance_v2.py": {
    "evaluate": "FAILING_TEST_CASES:4"
   },
+  "canonical/runtime/data_anonymization_stage_b_gate.py": {
+   "evaluate": "FAILING_TEST_CASES:1"
+  },
   "canonical/runtime/delegation_objective_dominance_reconciler.py": {
    "reconcile": "FAILING_TEST_CASES:1"
   },
@@ -96982,6 +96847,9 @@
   },
   "canonical/runtime/executable_skill_program_v7.py": {
    "verify_candidate": "FAILING_TEST_CASES:2"
+  },
+  "canonical/runtime/execution_authority_reducer.py": {
+   "derive_authority": "FAILING_TEST_CASES:3"
   },
   "canonical/runtime/external_benchmark_dominance_compiler_v1.py": {
    "evaluate": "FAILING_TEST_CASES:1"
@@ -97038,6 +96906,10 @@
   },
   "canonical/runtime/live_integrated_brain_v1.py": {
    "load_verified_registry": "FAILING_TEST_CASES:1"
+  },
+  "canonical/runtime/livebench_ngram_reference_free_v1.py": {
+   "construct": "FAILING_TEST_CASES:1",
+   "score_with_reference_for_audit": "FAILING_TEST_CASES:1"
   },
   "canonical/runtime/m0_requirement_change_case_v1.py": {
    "execute_case": "FAILING_TEST_CASES:1",
@@ -97118,6 +96990,15 @@
   },
   "canonical/runtime/post_dual_judgment_zero_reality_frontier_v1.py": {
    "evaluate": "FAILING_TEST_CASES:3"
+  },
+  "canonical/runtime/prequalification_stage_a_generic.py": {
+   "evaluate": "FAILING_TEST_CASES:7"
+  },
+  "canonical/runtime/prequalification_stage_a_reducer_v2.py": {
+   "evaluate": "FAILING_TEST_CASES:1"
+  },
+  "canonical/runtime/professional_quality_closure_normal_form_v1.py": {
+   "verify": "FAILING_TEST_CASES:5"
   },
   "canonical/runtime/professional_quality_leaf_binder_v2.py": {
    "evaluate": "FAILING_TEST_CASES:1",
@@ -97344,13 +97225,13 @@
  "schema": "PROJECT_BRAIN_MODULE_INVOCATION_EVIDENCE_V1",
  "summary": {
   "functions_by_tier": {
-   "READ_ONLY_UNTESTED": 2561,
-   "REFUSED_FAILING_TEST_CASE": 174,
-   "TEST_EVIDENCED": 2666
+   "READ_ONLY_UNTESTED": 2543,
+   "REFUSED_FAILING_TEST_CASE": 182,
+   "TEST_EVIDENCED": 2676
   },
   "inventory_modules": 2310,
-  "invocable_functions": 5227,
-  "invocable_modules": 2021,
+  "invocable_functions": 5219,
+  "invocable_modules": 2019,
   "modules_excluded": {
    "IMPORT_FAILED": 89,
    "IMPORT_REFUSED_BY_READ_ONLY_GUARD": 11,

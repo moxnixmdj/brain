@@ -52,6 +52,24 @@ SCHEMA = "PROJECT_BRAIN_CAPABILITY_SELECTION_RETRIEVAL_V1"
 CATCH_ALL_INPUTS = {"goal", "text", "task", "objective", "request", "instruction", "description",
                     "prompt", "content", "body", "query", "input"}
 DEFAULT_K = 3
+# The lateral threshold that turns a shortlist into a decision, and it is not a guess.  Measured
+# on 295 name-derived goals (leak-free: the goal is a capability's own distinctive name tokens,
+# never its path and never its document), as a relative margin between the first and second
+# proposal:
+#
+#     t=0.00  295 decided  249 correct   precision 0.844
+#     t=0.05  222 decided  222 correct   precision 1.000
+#     t=0.10  221 decided  221 correct   precision 1.000
+#     t=0.30  181 decided  181 correct   precision 1.000
+#
+# Every one of the 46 wrong first choices had a margin BELOW 0.05, and every decision at or
+# above it was correct: the ranker separates its own confident calls from its own guesses
+# perfectly on this benchmark, so the product reads that separation instead of pretending the
+# ranker is always right (0.844) or never trusted (0.003).  Relative, not absolute, because BM25
+# scores are corpus statistics that do not transfer between registries, while the ratio between
+# the first and second explanation asks exactly the question that decides: is the runner-up a
+# different capability?
+MARGIN_THRESHOLD = 0.05
 DECLARATION_REL = "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json"
 
 # One load per (path, mtime): selection is on the interactive path, and 2,310 declarations are
@@ -137,6 +155,59 @@ def shortlist(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any, k
         "candidate_count": len(docs),
         "proposals": proposals,
     }
+
+
+def runs_as_stated(registry: Mapping[str, Mapping[str, Any]], cid: str, root: Any) -> bool:
+    """May this capability be decided by meaning alone - does it run without arguments?
+
+    Executability, NOT binding, and the distinction is the whole discipline.  A capability that
+    needs argument names is the typed rule's business: it is refused there with
+    `DECLARED_INPUTS_UNBOUND` naming exactly the values the sentence left out, because choosing
+    the right capability does not supply its arguments (the F15 rule, applied to the other way a
+    caller can be explicit).  What this checks is whether the capability's OWN best-known
+    contract requires any of them at all.  Measured on the live registry: 270 of the 295
+    receipt-projected capabilities require nothing (184 CLI adapters and 86 zero-input module
+    entries), which is exactly the set a margin is allowed to decide.
+    """
+    entry = registry.get(cid) or {}
+    if not isinstance(entry.get("action_template"), Mapping) or not entry.get("entrypoint"):
+        return False
+    contract = contract_of(entry, declarations(root).get(cid))
+    return not _arg_names(contract)
+
+
+def margin_verdict(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any,
+                   k: int = DEFAULT_K) -> dict[str, Any]:
+    """The ranker's own separation between its confident call and its guess.
+
+    DECISIVE means the first proposal explains the sentence strictly better than the second by
+    at least MARGIN_THRESHOLD relative margin, and the caller may act on it; THIN_MARGIN means
+    the second-best explanation is nearly as good, which is the situation the product must fail
+    closed in rather than pick the nearest wrong thing.
+    """
+    short = shortlist(goal, registry, root, max(2, int(k)))
+    proposals = list(short.get("proposals") or [])
+    base = {"schema": SCHEMA, "goal": goal, "threshold": MARGIN_THRESHOLD,
+            "proposals": proposals}
+    if not proposals:
+        return {**base, "status": "NO_PROPOSAL", "capability_id": None,
+                "lexical_margin": 0.0, "runner_up": None}
+    score = float(proposals[0].get("lexical_relevance_score") or 0.0)
+    if score <= 0:
+        return {**base, "status": "NO_PROPOSAL__ZERO_SCORE", "capability_id": None,
+                "lexical_margin": 0.0, "runner_up": None}
+    if len(proposals) == 1:
+        # No competing explanation exists, so there is no margin to be thin.
+        return {**base, "status": "DECISIVE", "capability_id": proposals[0]["capability_id"],
+                "lexical_margin": 1.0, "runner_up": None, "runner_up_score": 0.0,
+                "score": score}
+    runner_up = float(proposals[1].get("lexical_relevance_score") or 0.0)
+    margin = (score - runner_up) / score
+    decisive = margin >= MARGIN_THRESHOLD
+    return {**base, "status": "DECISIVE" if decisive else "THIN_MARGIN",
+            "capability_id": proposals[0]["capability_id"] if decisive else None,
+            "score": score, "runner_up_score": runner_up,
+            "runner_up": proposals[1]["capability_id"], "lexical_margin": margin}
 
 
 def is_specific(names: list[str]) -> bool:
@@ -242,6 +313,25 @@ def select(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any,
                    if not any(_required(row) < _required(other) for other in admitted)]
         if len(maximal) == 1:
             admitted = maximal
+    # Decisive lexical margin (F18): shadowing above is structural and stays first, because it
+    # accounts for the values the sentence actually states.  This decides exactly the case
+    # shadowing cannot decide at all - several candidates that are structurally
+    # indistinguishable, or none whose contract is specific because it needs nothing - and only
+    # when the ranker itself is unambiguous about which one the sentence is for.  The margin is
+    # recomputed HERE from the goal and the live registry, so a rule string is never the evidence.
+    if len(admitted) != 1:
+        structural = {row["capability_id"] for row in admits
+                      if runs_as_stated(registry, row["capability_id"], root)}
+        verdict = margin_verdict(goal, registry, root, max(2, int(k)))
+        if (verdict.get("status") == "DECISIVE"
+                and verdict.get("capability_id") in structural):
+            cid = verdict["capability_id"]
+            chosen = next(row for row in admits if row["capability_id"] == cid)
+            return {**short, "status": "SELECTED", "selected_capability": cid,
+                    "inputs": chosen.get("inputs") or {}, "admissions": admits,
+                    "lexical_margin": verdict.get("lexical_margin"),
+                    "margin_runner_up": verdict.get("runner_up"),
+                    "rule": "F18_DECISIVE_LEXICAL_MARGIN"}
     if len(admitted) == 1:
         winner = admitted[0]
         return {**short, "status": "SELECTED", "selected_capability": winner["capability_id"],
