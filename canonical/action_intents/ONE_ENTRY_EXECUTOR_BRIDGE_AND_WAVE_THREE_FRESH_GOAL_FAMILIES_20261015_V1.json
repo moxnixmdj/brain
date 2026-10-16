@@ -3,7 +3,7 @@
   "date": "2026-10-16",
   "action_id": "ONE_ENTRY_EXECUTOR_BRIDGE_AND_WAVE_THREE_FRESH_GOAL_FAMILIES_20261015_V1",
   "canonical_generation": "2026-10-10-general-reusable-capability-frontier-v1",
-  "canonical_base_commit": "3dc78c235ce5ecd97814be133c9035666dd485fb",
+  "canonical_base_commit": "b8c0dd4f5fa54a4d57a4dd94bdea57ca6fc03dd2",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "active_program": "GENERAL_REUSABLE_CAPABILITY_DEVELOPMENT_PROGRAM_V1",
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -26,8 +26,8 @@
     "execution_guard/live_solver_families_v2.py"
   ],
   "falsification_condition": "UNVERIFIED_OR_UNKNOWN_COST_EXTENDED_ENTRY_IS_ADMITTED_OR_CANONICAL_ENTRY_IS_OVERRIDDEN",
-  "expected_parent_change": "UNVERIFIED_SOURCE_INVENTORY_SEPARATED_FROM_EXECUTABLE_REGISTRY__NO_NEW_VERIFIED_CAPABILITY_OR_DAG_RUNTIME_CLAIM",
-  "expected_parent_frontier_change": "UNVERIFIED_SOURCE_INVENTORY_SEPARATED_FROM_EXECUTABLE_REGISTRY__NO_NEW_VERIFIED_CAPABILITY_OR_DAG_RUNTIME_CLAIM",
+  "expected_parent_change": "UNVERIFIED_SOURCE_INVENTORY_SEPARATED_FROM_EXECUTABLE_REGISTRY__NO_NEW_VERIFIED_CAPABILITY_OR_DAG_RUNTIME_CLAIM__ZERO_INPUT_TOOLS_NO_LONGER_ROUTABLE_FROM_A_SENTENCE",
+  "expected_parent_frontier_change": "UNVERIFIED_SOURCE_INVENTORY_SEPARATED_FROM_EXECUTABLE_REGISTRY__NO_NEW_VERIFIED_CAPABILITY_OR_DAG_RUNTIME_CLAIM__ZERO_INPUT_TOOLS_NO_LONGER_ROUTABLE_FROM_A_SENTENCE",
   "stop_condition": "FOCUSED_TESTS_AND_LOCAL_GUARDS_RUN_WITH_ACTUAL_FAILURES_REPORTED_IN_PR",
   "load_bearing_primary": {
     "open_obligation_ids": [],
@@ -61,7 +61,9 @@
     "progress_evidence_paths": [
       "canonical/runtime/autonomous_capability_inventory_v1.py",
       "canonical/runtime/live_integrated_brain_v1.py",
-      "canonical/tests/test_extended_capability_registry_v1.py"
+      "canonical/tests/test_extended_capability_registry_v1.py",
+      "canonical/runtime/goal_front_compiler_v1.py",
+      "canonical/tests/test_goal_front_compiler_v1.py"
     ],
     "route_class": "INTEGRATE",
     "earlier_routes_exhausted_reason": "REUSE_EXISTING_REGISTRY_LOADER_AND_ADD_OPTIONAL_VALIDATED_MERGE_WITHOUT_AUTOMATIC_EXECUTION",
@@ -129,8 +131,8 @@
   },
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-10-10-general-reusable-capability-frontier-v1",
-    "canonical_base_commit": "3dc78c235ce5ecd97814be133c9035666dd485fb",
-    "real_outcome": "UNVERIFIED_SOURCE_INVENTORY_SEPARATED_FROM_EXECUTABLE_REGISTRY__NO_NEW_VERIFIED_CAPABILITY_OR_DAG_RUNTIME_CLAIM",
+    "canonical_base_commit": "b8c0dd4f5fa54a4d57a4dd94bdea57ca6fc03dd2",
+    "real_outcome": "UNVERIFIED_SOURCE_INVENTORY_SEPARATED_FROM_EXECUTABLE_REGISTRY__NO_NEW_VERIFIED_CAPABILITY_OR_DAG_RUNTIME_CLAIM__ZERO_INPUT_TOOLS_NO_LONGER_ROUTABLE_FROM_A_SENTENCE",
     "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
     "obs_goal": {
       "real_outcome": "THE_BRAIN_NEVER_SAYS_DONE_WHEN_IT_DID_NOTHING",
@@ -213,7 +215,7 @@
     ],
     "selected_surviving_route": "REUSE_CANONICAL_REGISTRY_ADD_NONEXECUTING_INVENTORY_AND_FAIL_CLOSED_OPTIONAL_EXTENDED_LOADER",
     "why_selected_route_is_fastest_sufficient": "ONE_FUNCTION_IN_THE_ENTRY_MIRRORS_THE_KERNEL_DISPATCH_FOR_LOCAL_STDLIB_ADAPTERS__NO_PINNED_BYTE_CHANGES__EVERY_FAMILY_IS_JUDGED_BY_AN_INDEPENDENT_STDLIB_CHECKER_ON_FRESH_GOALS",
-    "expected_parent_level_state_change": "UNVERIFIED_SOURCE_INVENTORY_SEPARATED_FROM_EXECUTABLE_REGISTRY__NO_NEW_VERIFIED_CAPABILITY_OR_DAG_RUNTIME_CLAIM",
+    "expected_parent_level_state_change": "UNVERIFIED_SOURCE_INVENTORY_SEPARATED_FROM_EXECUTABLE_REGISTRY__NO_NEW_VERIFIED_CAPABILITY_OR_DAG_RUNTIME_CLAIM__ZERO_INPUT_TOOLS_NO_LONGER_ROUTABLE_FROM_A_SENTENCE",
     "stop_condition": "FOCUSED_TESTS_AND_LOCAL_GUARDS_RUN_WITH_ACTUAL_FAILURES_REPORTED_IN_PR",
     "route_frontier": {
       "discovery_required": false,

@@ -297,14 +297,16 @@ GENERATORS: dict[str, Callable[[random.Random, Path, int], Case]] = {
 
 
 def all_generators() -> dict[str, Callable[[random.Random, Path, int], Case]]:
-    """Wave-1 families plus the per-capability execution families of live_solver_families_v2/v3/v4."""
+    """Wave-1 families plus the per-capability execution families of live_solver_families_v2/v3/v4/v5."""
     from execution_guard.live_solver_families_v2 import GENERATORS_V2
     from execution_guard.live_solver_families_v3 import GENERATORS_V3
     from execution_guard.live_solver_families_v4 import GENERATORS_V4
+    from execution_guard.live_solver_families_v5 import GENERATORS_V5
     merged = dict(GENERATORS)
     merged.update(GENERATORS_V2)
     merged.update(GENERATORS_V3)
     merged.update(GENERATORS_V4)
+    merged.update(GENERATORS_V5)
     return merged
 
 # Families the compiler advertises but that need binaries / packages this machine lacks, or
