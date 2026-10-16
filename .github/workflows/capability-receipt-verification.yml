@@ -20,6 +20,14 @@ name: Capability receipt independent verification
 # so no capability is declared and no capability is deleted.
 
 on:
+  # `pull_request` (never `pull_request_target`, which AGENTS.md rule 7 forbids) so the
+  # independent attestation can be produced and committed on the pull request itself,
+  # without waiting for a merge.
+  pull_request:
+    paths:
+      - ".github/workflows/capability-receipt-verification.yml"
+      - "canonical/runtime/capability_receipt_lane_v1.py"
+      - "canonical/astra_runtime/evidence/CAPABILITY__**"
   push:
     branches: [main]
     paths:
@@ -34,6 +42,9 @@ concurrency:
 
 permissions:
   contents: write
+  # GitHub signs an OIDC token whose claims include run_id, repository, workflow_ref and
+  # actor. That is the attestation: a locally-written `github_run_id` field is not.
+  id-token: write
 
 env:
   AUTOMATION_APP_ID: ${{ secrets.AUTOMATION_APP_ID }}
@@ -55,20 +66,35 @@ jobs:
       - name: Re-execute producer receipts as an independent identity
         shell: bash
         env:
-          RUN_REFERENCE: '{"github_run_id": ${{ github.run_id }}, "github_run_attempt": ${{ github.run_attempt }}, "github_sha": "${{ github.sha }}", "github_workflow": "capability-receipt-verification"}'
+          AUDIENCE: https://github.com/moxnixmdj/brain
         run: |
           set -euo pipefail
+          TOKEN_JSON=$(curl -fsS -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" \
+            "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${AUDIENCE}")
+          export TOKEN_JSON
+          python3 - <<'PY' > /tmp/run_reference.json
+          import base64, json, os, urllib.request
+          token = json.loads(os.environ["TOKEN_JSON"])["value"]
+          part = token.split(".")[1]
+          part += "=" * (-len(part) % 4)
+          claims = json.loads(base64.urlsafe_b64decode(part))
+          keep = ("iss", "aud", "repository", "repository_id", "workflow_ref", "job_workflow_ref",
+                  "run_id", "run_attempt", "event_name", "head_ref", "actor", "jti")
+          print(json.dumps({"github_run_id": int(claims["run_id"]),
+                            "oidc_claims": {k: claims.get(k) for k in keep}}, sort_keys=True))
+          PY
+          cat /tmp/run_reference.json
           python3 canonical/runtime/capability_receipt_lane_v1.py \
             --verify \
             --root . \
             --ran-by "github-actions:${GITHUB_REPOSITORY}" \
-            --run-reference-json "${RUN_REFERENCE}" \
+            --run-reference-json "$(cat /tmp/run_reference.json)" \
             | tee /tmp/verification.json
           python3 - <<'PY'
           import json
           report = json.load(open("/tmp/verification.json"))
           if report["mismatched"]:
-              raise SystemExit(f"NOT REPRODUCED: {report['mismatched']} producer receipts did not reproduce")
+              raise SystemExit(f"NOT REPRODUCED: {report['mismatched']} receipts did not reproduce")
           print(f"reproduced {report['reproduced']}/{report['producer_receipts']}")
           PY
 
@@ -94,6 +120,12 @@ jobs:
           git add canonical/astra_runtime/evidence/CAPABILITY__*__INDEPENDENT_VERIFICATION.json
           git diff --cached --quiet && echo "no new verification records" && exit 0
           git commit -m "Record independent verification of capability execution receipts"
+          if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
+            # Same-repository pull request: publish the records on the branch so the
+            # evidence exists before merge. No need for the automation app.
+            git push origin "HEAD:${GITHUB_HEAD_REF}" && exit 0
+            exit 1
+          fi
           for attempt in 1 2 3; do
             git pull --rebase origin main || { git rebase --abort || true; sleep 2; continue; }
             bash .github/scripts/land_on_main.sh && exit 0

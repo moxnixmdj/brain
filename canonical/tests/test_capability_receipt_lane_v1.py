@@ -82,6 +82,15 @@ class ReceiptTests(unittest.TestCase):
         self.assertEqual(lane_module.sha256_canonical({"a": 1, "b": 2}), lane_module.sha256_canonical({"b": 2, "a": 1}))
 
 
+def _signed_run_reference(run_id=123):
+    """The shape only a GitHub runner can produce: a signed OIDC claim set."""
+    return {"github_run_id": run_id,
+            "oidc_claims": {"iss": "https://token.actions.githubusercontent.com",
+                            "repository": "moxnixmdj/brain",
+                            "run_id": str(run_id),
+                            "workflow_ref": "capability-receipt-verification.yml@refs/heads/main"}}
+
+
 class LoaderGateTests(unittest.TestCase):
     """The gate must admit on INDEPENDENT reproduction, and demote nothing."""
 
@@ -107,7 +116,7 @@ class LoaderGateTests(unittest.TestCase):
                   "module_path": rel_module, "module_sha256": module_sha,
                   "reproduced": True, "independent_verifier": verifier,
                   "verifier_result_sha256": "b" * 64 if result_mismatch else "a" * 64,
-                  "independent_run_reference": run_ref if run_ref is not None else {"github_run_id": 123},
+                  "independent_run_reference": run_ref if run_ref is not None else _signed_run_reference(),
                   "model_dependency_count": 0}
         (root / rel_receipt).write_text(json.dumps(receipt), encoding="utf-8")
         (root / lane_module.verification_path_for(rel_receipt)).write_text(json.dumps(record), encoding="utf-8")
@@ -141,6 +150,19 @@ class LoaderGateTests(unittest.TestCase):
     def test_mismatched_result_cannot_admit(self):
         with tempfile.TemporaryDirectory() as tmp:
             root, entry = self._root(tmp, result_mismatch=True)
+            self.assertFalse(_receipt_admits(entry, root))
+
+    def test_unsigned_run_id_cannot_admit(self):
+        """A bare github_run_id is a number; without GitHub's signed claims it proves nothing."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root, entry = self._root(tmp, run_ref={"github_run_id": 123})
+            self.assertFalse(_receipt_admits(entry, root))
+
+    def test_wrong_oidc_issuer_cannot_admit(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            ref = _signed_run_reference()
+            ref["oidc_claims"] = dict(ref["oidc_claims"], iss="https://evil.example")
+            root, entry = self._root(tmp, run_ref=ref)
             self.assertFalse(_receipt_admits(entry, root))
 
     def test_independent_attested_reproduction_admits(self):

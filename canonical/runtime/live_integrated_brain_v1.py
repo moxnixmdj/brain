@@ -126,7 +126,16 @@ def _receipt_admits(entry: Mapping[str, Any], root: Path) -> bool:
     run_reference = record.get("independent_run_reference")
     if not isinstance(run_reference, Mapping) or not run_reference.get("github_run_id"):
         return False
-    return True
+    # And the reference must carry a GitHub-SIGNED OIDC attestation, not a number a local
+    # process typed. `brain-trusted-oidc-receipt.yml` is this repo's own idiom for it:
+    # `id-token: write` yields a token whose `iss` is GitHub's issuer and whose claims name
+    # the repository, workflow and run that produced it.
+    claims = run_reference.get("oidc_claims")
+    if not isinstance(claims, Mapping):
+        return False
+    if claims.get("iss") != "https://token.actions.githubusercontent.com":
+        return False
+    return bool(claims.get("repository"))
 
 
 _REGISTRY_CACHE: dict[tuple[int, int, int], dict[str, Mapping[str, Any]]] = {}
