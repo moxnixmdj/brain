@@ -1,0 +1,89 @@
+name: Capability receipt independent verification
+
+# WHY THIS WORKFLOW EXISTS
+#
+# `load_verified_registry` admits a capability only when BOTH hold:
+#   1. a producer execution receipt exists for this module at this content hash, and
+#   2. an INDEPENDENT verification record exists — a different identity re-ran the module,
+#      observed the same result hash, and the run reference carries a platform-attested
+#      `github_run_id`.
+#
+# The second condition is the one this workflow satisfies, and it is deliberately the only
+# way to satisfy it: a reference invented by a local process cannot carry `github_run_id`,
+# so no local session — and no agent — can mint admission for itself. That is the whole
+# point (AGENTS.md rule 4: "Verification means someone else ran it").
+#
+# The runner re-executes every producer receipt and stamps a verification record ONLY when
+# the observed result hash matches. A mismatch stamps nothing and fails the job.
+#
+# Nothing here writes a registry: the executable set is derived from reproduced evidence,
+# so no capability is declared and no capability is deleted.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/capability-receipt-verification.yml"
+      - "canonical/runtime/capability_receipt_lane_v1.py"
+      - "canonical/astra_runtime/evidence/CAPABILITY__**"
+  workflow_dispatch:
+
+concurrency:
+  group: capability-receipt-verification-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+env:
+  AUTOMATION_APP_ID: ${{ secrets.AUTOMATION_APP_ID }}
+  AUTOMATION_APP_PRIVATE_KEY: ${{ secrets.AUTOMATION_APP_PRIVATE_KEY }}
+
+jobs:
+  verify-receipts:
+    runs-on: [self-hosted, Linux, X64, brain-regression]
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Re-execute producer receipts as an independent identity
+        shell: bash
+        env:
+          RUN_REFERENCE: '{"github_run_id": ${{ github.run_id }}, "github_run_attempt": ${{ github.run_attempt }}, "github_sha": "${{ github.sha }}", "github_workflow": "capability-receipt-verification"}'
+        run: |
+          set -euo pipefail
+          python3 canonical/runtime/capability_receipt_lane_v1.py \
+            --verify \
+            --root . \
+            --ran-by "github-actions:${GITHUB_REPOSITORY}" \
+            --run-reference-json "${RUN_REFERENCE}" \
+            | tee /tmp/verification.json
+          python3 - <<'PY'
+          import json
+          report = json.load(open("/tmp/verification.json"))
+          if report["mismatched"]:
+              raise SystemExit(f"NOT REPRODUCED: {report['mismatched']} producer receipts did not reproduce")
+          print(f"reproduced {report['reproduced']}/{report['producer_receipts']}")
+          PY
+
+      - name: Land the verification records
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "project-brain-capability-receipt-verification"
+          git config user.email "project-brain-capability-receipt-verification@users.noreply.github.com"
+          git add canonical/astra_runtime/evidence/CAPABILITY__*__INDEPENDENT_VERIFICATION.json
+          git diff --cached --quiet && echo "no new verification records" && exit 0
+          git commit -m "Record independent verification of capability execution receipts"
+          for attempt in 1 2 3; do
+            git pull --rebase origin main || { git rebase --abort || true; sleep 2; continue; }
+            bash .github/scripts/land_on_main.sh && exit 0
+            sleep 2
+          done
+          exit 1

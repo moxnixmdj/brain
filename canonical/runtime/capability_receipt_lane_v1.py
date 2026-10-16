@@ -53,6 +53,7 @@ import time
 from typing import Any
 
 SCHEMA = "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+VERIFICATION_SCHEMA = "PROJECT_BRAIN_CAPABILITY_INDEPENDENT_VERIFICATION_V1"
 RECEIPT_DIR = "canonical/astra_runtime/evidence"
 EXTENDED = "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json"
 BOUND = "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
@@ -102,6 +103,10 @@ def contract_shape(path: str | os.PathLike) -> tuple[str, str] | None:
 def receipt_path_for(capability_id: str) -> str:
     safe = "".join(ch if ch.isalnum() or ch in "._-" else "_" for ch in capability_id)
     return f"{RECEIPT_DIR}/CAPABILITY__{safe}__EXECUTION_RECEIPT.json"
+
+
+def verification_path_for(receipt_path: str) -> str:
+    return receipt_path.replace("__EXECUTION_RECEIPT.json", "__INDEPENDENT_VERIFICATION.json")
 
 
 def execute_and_receipt(capability_id: str, module_path: str, entrypoint: str,
@@ -166,6 +171,73 @@ def execute_and_receipt(capability_id: str, module_path: str, entrypoint: str,
     }
 
 
+def verify_producer_receipts(root: str, ran_by: str,
+                             run_reference: Mapping[str, Any] | None) -> dict[str, Any]:
+    """Re-execute producer receipts as a DIFFERENT identity and stamp only what reproduces.
+
+    Independence is the whole point (AGENTS.md rule 4: "Verification means someone else ran
+    it").  A producer receipt is self-issued and admits nothing on its own.  This runs the
+    same module again, and writes a verification record ONLY when the observed result hash
+    matches the producer's.  Mismatch, crash or timeout writes nothing and is reported.
+
+    `independent_run_reference` must carry a platform-attested run id.  A reference this
+    process invented itself is not independence, and the admission gate refuses references
+    without `github_run_id` for exactly that reason.
+    """
+    import glob as _glob
+
+    produced: list[str] = []
+    reproduced: list[str] = []
+    mismatched: list[str] = []
+    unreadable: list[str] = []
+
+    for receipt_path in sorted(_glob.glob(os.path.join(root, RECEIPT_DIR, "CAPABILITY__*__EXECUTION_RECEIPT.json"))):
+        rel = os.path.relpath(receipt_path, root)
+        try:
+            producer = json.loads(open(receipt_path, encoding="utf-8").read())
+        except (OSError, ValueError):
+            unreadable.append(rel)
+            continue
+        if producer.get("schema") != SCHEMA or not producer.get("capability_id"):
+            unreadable.append(rel)
+            continue
+        if producer.get("ran_by") == ran_by:
+            # Same identity: not an independent run at all. Never count it.
+            mismatched.append(rel)
+            continue
+
+        fresh = execute_and_receipt(producer["capability_id"], producer["module_path"],
+                                   producer["entrypoint"], root, ran_by)
+        if fresh is None or fresh.get("result_sha256") != producer.get("result_sha256"):
+            mismatched.append(rel)
+            continue
+
+        record = {
+            "schema": VERIFICATION_SCHEMA,
+            "capability_id": producer["capability_id"],
+            "module_path": producer["module_path"],
+            "module_sha256": producer["module_sha256"],
+            "producer_receipt_path": rel,
+            "producer_ran_by": producer.get("ran_by"),
+            "producer_result_sha256": producer.get("result_sha256"),
+            "verifier_result_sha256": fresh.get("result_sha256"),
+            "reproduced": True,
+            "independent_verifier": ran_by,
+            "independent_run_reference": dict(run_reference or {}),
+            "elapsed_ms": fresh.get("elapsed_ms"),
+            "model_dependency_count": 0,
+        }
+        out_path = os.path.join(root, verification_path_for(rel))
+        with open(out_path, "w", encoding="utf-8") as fh:
+            json.dump(record, fh, indent=1, sort_keys=True)
+        produced.append(rel)
+        reproduced.append(producer["capability_id"])
+
+    return {"producer_receipts": len(produced) + len(mismatched) + len(unreadable),
+            "reproduced": len(reproduced), "mismatched": len(mismatched),
+            "unreadable": len(unreadable), "capability_ids": reproduced}
+
+
 def discover(root: str) -> list[tuple[str, str, str]]:
     """Contract-shaped inventory entries not already live in the bound registry."""
     extended = json.load(open(os.path.join(root, EXTENDED), encoding="utf-8"))["capabilities"]
@@ -225,6 +297,10 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--root", default=".")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--ran-by", default=os.environ.get("BRAIN_RUNNER_IDENTITY", "local-session"))
+    ap.add_argument("--verify", action="store_true",
+                    help="re-execute producer receipts as this identity and stamp only reproductions")
+    ap.add_argument("--run-reference-json", default=os.environ.get("BRAIN_RUN_REFERENCE", ""),
+                    help='platform-attested run reference, e.g. \'{"github_run_id": 123}\'')
     args = ap.parse_args(argv)
     root = os.path.abspath(args.root)
 
@@ -233,6 +309,18 @@ def main(argv: list[str] | None = None) -> int:
     # receipts without the repository root on sys.path, 119 with it.
     if root not in sys.path:
         sys.path.insert(0, root)
+
+    if args.verify:
+        run_reference = {}
+        if args.run_reference_json.strip():
+            run_reference = json.loads(args.run_reference_json)
+        result = verify_producer_receipts(root, args.ran_by, run_reference)
+        result["independent_verifier"] = args.ran_by
+        result["run_reference"] = run_reference
+        result["note"] = ("only reproductions are stamped; a reference without github_run_id "
+                          "cannot admit anything")
+        print(json.dumps(result, indent=1))
+        return 0
 
     candidates = discover(root)
     if args.limit:
