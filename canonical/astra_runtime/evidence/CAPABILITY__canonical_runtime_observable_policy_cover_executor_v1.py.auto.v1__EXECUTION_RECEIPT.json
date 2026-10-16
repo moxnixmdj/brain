@@ -1,0 +1,27 @@
+{
+ "capability_id": "canonical/runtime/observable_policy_cover_executor_v1.py.auto.v1",
+ "elapsed_ms": 0.611,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/observable_policy_cover_executor_v1.py",
+ "module_sha256": "f557836d6a60edc14f464ceb1717927492d7fa2b4d65a8105e5cb0272b33e59a",
+ "observed": {
+  "pass": false,
+  "status": "FAIL_CLOSED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_observable_policy_cover_executor_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 11,
+ "result_sha256": "380e44df4e37cc927d5797af18f294995e28781d43e604d0c1b1139f5ae3c0bd",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

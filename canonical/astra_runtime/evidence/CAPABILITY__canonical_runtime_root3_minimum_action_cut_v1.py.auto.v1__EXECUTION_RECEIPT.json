@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/root3_minimum_action_cut_v1.py.auto.v1",
+ "elapsed_ms": 26.098,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/root3_minimum_action_cut_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/root3_minimum_action_cut_v1.py",
+ "module_sha256": "f6fb6c7699a54e5187f76f62c384fd10423353fb5f05711d58e260deebd0218a",
+ "observed": {
+  "returncode": 0,
+  "status": "PASS__ROOT3_COMPRESSED_TO_3_EVENT_CLASSES__NO_CURRENT_NONDOMINATED_ROOT3_EXECUTION"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_root3_minimum_action_cut_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 22,
+ "result_sha256": "f7a0ea4b9fd9af5f09589bfb9ff7227217a604dbffad22ed7ee342ed387893d2",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

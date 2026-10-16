@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/v14_db_existing_evidence_saturation_verifier_v3.py.auto.v1",
+ "elapsed_ms": 24.936,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/v14_db_existing_evidence_saturation_verifier_v3.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/v14_db_existing_evidence_saturation_verifier_v3.py",
+ "module_sha256": "b405725707f1fe855af177751b8c4f3645c1bf35c5d2e4588d333ec0283245a6",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__TEN_SOUND_CACHED_D_B_REGIONS__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_v14_db_existing_evidence_saturation_verifier_v3.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 11,
+ "result_sha256": "8276cdb9784195eb8f2e0106bf385ead8adbf8b0062ccd0e3e039a9636d357d4",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

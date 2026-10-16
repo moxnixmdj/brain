@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/current_escape_oq_frontier_reduction_v1.py.auto.v1",
+ "elapsed_ms": 29.973,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/current_escape_oq_frontier_reduction_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/current_escape_oq_frontier_reduction_v1.py",
+ "module_sha256": "27f49ddd25085919c01766789cf5ab79bdf9705f250c3105a8c7cc6909a65e74",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__CURRENT_13_ESCAPE_FRONTIER_EXHAUSTIVELY_REDUCED_TO_O11_Q2"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_escape_oq_frontier_reduction_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 19,
+ "result_sha256": "0a74c8e55ed98e76014231d797136306158903ea2984420a924dfdde5f7c262d",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

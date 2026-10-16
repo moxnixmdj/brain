@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/global_retrieval_authority_guard_v1.py.auto.v1",
+ "elapsed_ms": 88.105,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/global_retrieval_authority_guard_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/global_retrieval_authority_guard_v1.py",
+ "module_sha256": "47a6af2f1d5210df773c5b08c01d099e5ec0495a4ca64c29b8b5ee4074562f28",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__CURRENT_GLOBAL_RETRIEVAL_V6_AUTHORITY_VALIDATED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_global_retrieval_authority_guard_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 17,
+ "result_sha256": "b2f0d62e05b5d110152c1b64b5a818df488b2d6f3500d495863baaba081ac067",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
