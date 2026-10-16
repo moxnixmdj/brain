@@ -513,3 +513,64 @@ def test_f11_ten_step_metabolic_dag_executed_and_verified():
 
 
 
+def test_f13_intermediate_spool_assigned_when_the_sentence_names_no_artifact():
+    """F13: a producer and its consumer agree on an intermediate the sentence never names.
+
+    The pinned behaviour failed closed with ``json_path:0_type_compatible_existing_files_named``
+    because the step-1 artifact did not exist yet and step 2 named no file of its own.  The DAG
+    planner now assigns a deterministic spool path, so the data flows without being invented.
+    """
+    yaml_in = WORK / "f13_source.yaml"
+    yaml_in.write_text("items:\n  - item: Alpha\n    count: 10\n    score: 95\n", encoding="utf-8")
+    # NOTE: the intermediate JSON is deliberately absent from the sentence.
+    goal = (
+        f"Convert the yaml file {REL}/f13_source.yaml to json. "
+        f"Then create an excel spreadsheet from json records with columns item, count, score."
+    )
+    for stale in WORK.glob("spool_*"):
+        if stale.is_file():
+            stale.unlink()
+
+    compiled = front.compile_goal(goal, _registry(), ROOT)
+    assert compiled["compiler_mode"] == "FRONT_CAPABILITY_DAG_PLANNED"
+    assert "F13_INTERMEDIATE_SPOOL_ASSIGNED" in compiled["front_compiler"]["rules_applied"]
+    producer = compiled["compiled_parts"][0]["inputs"]["output_path"]
+    consumer = compiled["compiled_parts"][1]["inputs"]["json_path"]
+    # the consumer reads exactly the artifact the producer writes, and it is a spool
+    assert producer == consumer
+    assert producer.startswith("canonical/astra_runtime/tmp/spool_")
+    assert producer.endswith(".json")
+
+    # ... and the whole thing really executes with zero spend
+    task_id = "TEST_F13_SPOOL_%d" % os.getpid()
+    try:
+        res = adm.solve({"task_id": task_id, "goal": goal})
+    finally:
+        _cleanup(task_id)
+    assert res["pass"] is True, res.get("status")
+    assert res["compiler_mode"] == "FRONT_CAPABILITY_DAG_PLANNED"
+    assert (ROOT / producer).is_file()
+
+
+def test_f13_spooling_never_overrides_an_artifact_the_sentence_names():
+    """A named artifact still wins; spooling only fills a silence, never a stated intent."""
+    (WORK / "named_f13.json").write_text(json.dumps({"a": {"b": 3}}), encoding="utf-8")
+    goal = (
+        f'Run the jq query with jq filter ".a.b" on {REL}/named_f13.json '
+        f"and save the output to {REL}/named_out_f13.json."
+    )
+    compiled = front.compile_goal(goal, _registry(), ROOT)
+    assert compiled["inputs"]["output_path"] == REL + "/named_out_f13.json"
+    assert "F13_INTERMEDIATE_SPOOL_ASSIGNED" not in compiled["front_compiler"]["rules_applied"]
+
+
+def test_f13_ambiguity_still_fails_closed():
+    """Two candidate artifacts are still an ambiguity, not a spooling opportunity."""
+    (WORK / "amb_f13.json").write_text(json.dumps({"a": 1}), encoding="utf-8")
+    inputs = {"json_path": REL + "/amb_f13.json", "output_path": REL + "/amb_f13.json"}
+    goal = (
+        f'Run the jq query with jq filter ".a" on {REL}/amb_f13.json '
+        f"and save the output to {REL}/one_f13.json or {REL}/two_f13.json."
+    )
+    with pytest.raises(gc.GoalCompilationFailure):
+        front.repair_output_collisions(goal, inputs, ROOT, cycle=0, spool=set())
