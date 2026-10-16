@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/tool_discovery_acceptance_promotion_integrator_v1.py.auto.v1",
- "elapsed_ms": 37.527,
+ "elapsed_ms": 23.643,
  "independent_run_reference": {
-  "github_run_id": 38942812444,
+  "github_run_id": 38943935284,
   "oidc_claims": {
    "actor": "moxnixmdj",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "arena/120f25af-brain",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/pull/4725/merge",
-   "jti": "d662aa64-e0ac-4763-8466-8a431ec1daf9",
+   "jti": "ef411b53-109c-484f-b237-6379f440216f",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "38942812444",
+   "run_id": "38943935284",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/pull/4725/merge"
   }
  },
