@@ -5551,6 +5551,203 @@
         "model_dependency_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "research.objective.decompose.broad.v1": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "research.objective.decompose.broad.v1",
+          "objective": "${input.objective}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "broad_objective_decompose",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "decompose",
+        "decomposition",
+        "broad",
+        "objective",
+        "research",
+        "roles",
+        "subobjective",
+        "sub-objectives",
+        "question",
+        "assessment",
+        "investigate",
+        "determine"
+      ],
+      "limitations": [
+        "Broad research objectives only (determine/assess/evaluate/investigate/estimate/quantify/compare/analyse prefix); narrow objectives fail closed.",
+        "Objectives already containing an explicit execution recipe fail closed.",
+        "Emits the fixed research-role graph; it never answers, grounds, or executes anything."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "research.objective.decomposed_roles"
+      ],
+      "requires": [],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "hashlib",
+          "json",
+          "pathlib",
+          "re"
+        ],
+        "algorithm": "Fail-closed prefix/shape decomposition into the fixed research-role graph (no inference, no facts)",
+        "adapter_path": "canonical/runtime/bound_capabilities/broad_objective_decompose.py"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "RESEARCH-REASONING-LIVE-BINDING-001",
+        "live_binding_test": "canonical/tests/test_research_reasoning_cells_live_v1.py",
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0
+      }
+    },
+    "research.query.focus.v1": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "research.query.focus.v1",
+          "objective": "${input.objective}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "research_query_focus",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "focus",
+        "focused",
+        "query",
+        "search",
+        "search query",
+        "keywords",
+        "subject",
+        "decision",
+        "clause",
+        "research subject"
+      ],
+      "limitations": [
+        "Deterministic subject-query extraction only; no source choice, no entailment, no factual claims.",
+        "Empty, oversize, or token-less objectives fail closed as UNRESOLVED."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "research.query.focused"
+      ],
+      "requires": [],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "hashlib",
+          "json",
+          "pathlib",
+          "re",
+          "unicodedata"
+        ],
+        "algorithm": "Orchestration-framing removal plus unicode function-word filter into a bounded search query",
+        "adapter_path": "canonical/runtime/bound_capabilities/research_query_focus.py"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "RESEARCH-REASONING-LIVE-BINDING-001",
+        "live_binding_test": "canonical/tests/test_research_reasoning_cells_live_v1.py",
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0
+      }
+    },
+    "python.software.request.semantic_cells.v1": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.software.request.semantic_cells.v1",
+          "task_path": "${input.task_path}",
+          "source_root": "${input.source_root}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "python_semantic_cells_bind",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "semantic",
+        "cells",
+        "acceptance",
+        "evaluate",
+        "satisfaction",
+        "file",
+        "contain",
+        "exist",
+        "obligation",
+        "request",
+        "grounded",
+        "verdict",
+        "task",
+        "spec"
+      ],
+      "limitations": [
+        "Only explicit bounded source-grounded cells (file must contain/not contain literal; must exist; must not exist).",
+        "Task spec is read from a task file (sentence quotes cannot carry the cell grammar's inner quotes).",
+        "Baseline defaults to the candidate tree (acceptance of the tree as it stands); differential measurement via the direct kernel API.",
+        "Every obligation must be bound and passing; anything unbound or failed fails closed."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.software.request.semantic_cells.evaluated"
+      ],
+      "requires": [],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "hashlib",
+          "json",
+          "pathlib"
+        ],
+        "algorithm": "Bounded semantic-cell compilation plus snapshot-manifest evaluation via the pinned kernel canonical/runtime/bound_capabilities/python_request_semantic_acceptance_cells_v1.py (byte unchanged)",
+        "kernel": "canonical/runtime/bound_capabilities/python_request_semantic_acceptance_cells_v1.py",
+        "adapter_path": "canonical/runtime/bound_capabilities/python_semantic_cells_bind.py"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "RESEARCH-REASONING-LIVE-BINDING-001",
+        "live_binding_test": "canonical/tests/test_research_reasoning_cells_live_v1.py",
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
