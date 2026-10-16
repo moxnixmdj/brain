@@ -46,6 +46,50 @@ def _tokens(value: Any, label: str, *, allow_empty: bool = True) -> list[str]:
     return out
 
 
+RECEIPT_SCHEMA = "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+
+
+def _receipt_admits(entry: Mapping[str, Any], root: Path) -> bool:
+    """Admit a capability on execution evidence rather than on a mutable status string.
+
+    A `status` field is writable by any program, which is why the extended registry could be
+    mass-flipped to `VERIFIED_BOUND_CAPABILITY` without the referee noticing.  A receipt is
+    different: it must exist, it must be about *this* module at *this* content hash, and it
+    must record a real execution with zero model dependency.
+
+    This is deliberately ADDITIVE.  It never demotes anything: an entry that fails this check
+    still falls through to the original status/provenance path.
+    """
+    import hashlib
+
+    verification = entry.get("verification")
+    if not isinstance(verification, Mapping):
+        return False
+    receipt_path = verification.get("receipt_path")
+    if not receipt_path or not isinstance(receipt_path, str):
+        return False
+    source = entry.get("source")
+    module_path = (source or {}).get("path") if isinstance(source, Mapping) else None
+    if not module_path or not isinstance(module_path, str):
+        return False
+    receipt_file = root / receipt_path
+    module_file = root / module_path
+    if not receipt_file.is_file() or not module_file.is_file():
+        return False
+    try:
+        receipt = json.loads(receipt_file.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return False
+    if not isinstance(receipt, Mapping) or receipt.get("schema") != RECEIPT_SCHEMA:
+        return False
+    if receipt.get("module_path") != module_path:
+        return False
+    if int(receipt.get("model_dependency_count", 1) or 0) != 0:
+        return False
+    digest = hashlib.sha256(module_file.read_bytes()).hexdigest()
+    return digest == receipt.get("module_sha256")
+
+
 def load_verified_registry(include_extended: bool = True) -> dict[str, Mapping[str, Any]]:
     doc = json.loads(REGISTRY.read_text(encoding="utf-8"))
     if doc.get("schema") != "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1":
@@ -75,7 +119,14 @@ def load_verified_registry(include_extended: bool = True) -> dict[str, Mapping[s
             for cid, entry in extended.items():
                 if not isinstance(cid, str) or not cid or not isinstance(entry, dict):
                     raise ValueError("invalid extended entry")
-                if cid in out or entry.get("status") != "VERIFIED_BOUND_CAPABILITY":
+                if cid in out:
+                    continue
+                if entry.get("status") != "VERIFIED_BOUND_CAPABILITY":
+                    # A receipt is execution evidence and can admit on its own; a status string
+                    # cannot.  Entries admitted here keep their inventory status, so writing a
+                    # status still grants nothing.
+                    if _receipt_admits(entry, ROOT):
+                        out[cid] = {**entry, "capability_id": cid, "receipt_backed": True}
                     continue
                 verification = entry.get("verification")
                 if not isinstance(verification, dict) or verification.get("verified") is not True:
