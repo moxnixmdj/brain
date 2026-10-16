@@ -8,9 +8,12 @@ grounding/composition can reason about the next real causal gap.
 from __future__ import annotations
 
 import hashlib
+import json
+import pathlib
 import re
 
 SCHEMA="PROJECT_BRAIN_BROAD_OBJECTIVE_DECOMPOSITION_V1"
+CAPABILITY_ID="research.objective.decompose.broad.v1"
 
 _BROAD_PREFIX=re.compile(
     r"^(?:determine|assess|evaluate|investigate|estimate|quantify|compare|analy[sz]e)\b",
@@ -142,4 +145,37 @@ def decompose(objective):
         "invented_facts":[],
         "task_specific_literals_added":[],
         "model_dependency_count":0,
+    }
+
+
+def run(args,root):
+    """Bound-capability entry: decompose a quoted broad objective into research roles.
+
+    ``args``: {"objective": <quoted broad objective>, "output_path": <repo-relative .json>}.
+    Fails closed (raises) unless the objective decomposes: narrow objectives, explicit
+    execution recipes, and empty/oversize input are UNSUPPORTED, never guessed.
+    """
+    if not isinstance(args,dict):
+        raise RuntimeError("ARGS_NOT_OBJECT")
+    objective=args.get("objective")
+    if not isinstance(objective,str) or not objective.strip():
+        raise RuntimeError("OBJECTIVE_REQUIRED")
+    repo=pathlib.Path(root).resolve()
+    out=(repo/str(args.get("output_path") or "")).resolve()
+    if out==repo or repo not in out.parents:
+        raise RuntimeError("OUTPUT_PATH_OUTSIDE_REPOSITORY")
+    if out.suffix.lower()!=".json":
+        raise RuntimeError("OUTPUT_PATH_MUST_BE_JSON")
+    result=decompose(objective)
+    if result.get("status")!="DECOMPOSED":
+        raise RuntimeError("BROAD_OBJECTIVE_NOT_DECOMPOSED:"+str(result.get("reason") or "UNKNOWN"))
+    payload={**result,"capability_id":CAPABILITY_ID,"output_verified":True}
+    out.parent.mkdir(parents=True,exist_ok=True)
+    out.write_text(json.dumps(payload,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+    raw=out.read_bytes()
+    return {
+      **payload,
+      "output_path":str(out.relative_to(repo)).replace("\\","/"),
+      "output_sha256":hashlib.sha256(raw).hexdigest(),
+      "incremental_spend_usd":0,
     }

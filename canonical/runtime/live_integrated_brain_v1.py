@@ -25,6 +25,28 @@ SCHEMA = "PROJECT_BRAIN_LIVE_INTEGRATED_BRAIN_V1"
 ROOT = Path(__file__).resolve().parents[2]
 REGISTRY = ROOT / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
 
+# Hot-path cache for load_verified_registry (measured 2026-10-16: ~5ms per
+# solve re-parsing both registry files, the extended one holding 2309
+# UNVERIFIED inventory rows that contribute zero executable entries).
+# Keyed by (path, size, mtime_ns) of both files plus the include flag, so an
+# edit to either file (or a future VERIFIED extended entry) invalidates it.
+# Callers receive a fresh outer dict; entries themselves are never mutated.
+_REGISTRY_CACHE: dict[tuple, dict[str, Mapping[str, Any]]] = {}
+_REGISTRY_CACHE_KEY: tuple | None = None
+
+
+def _registry_cache_key(include_extended: bool) -> tuple | None:
+    try:
+        bound = REGISTRY.stat()
+        key = [str(REGISTRY), bound.st_size, bound.st_mtime_ns, bool(include_extended)]
+        ext_path = REGISTRY.parent / "AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json"
+        if include_extended and ext_path.is_file():
+            ext = ext_path.stat()
+            key.extend([ext.st_size, ext.st_mtime_ns])
+        return tuple(key)
+    except OSError:
+        return None
+
 
 class LiveBrainError(ValueError):
     pass
@@ -47,6 +69,10 @@ def _tokens(value: Any, label: str, *, allow_empty: bool = True) -> list[str]:
 
 
 def load_verified_registry(include_extended: bool = True) -> dict[str, Mapping[str, Any]]:
+    global _REGISTRY_CACHE_KEY
+    cache_key = _registry_cache_key(include_extended)
+    if cache_key is not None and cache_key == _REGISTRY_CACHE_KEY and cache_key in _REGISTRY_CACHE:
+        return dict(_REGISTRY_CACHE[cache_key])
     doc = json.loads(REGISTRY.read_text(encoding="utf-8"))
     if doc.get("schema") != "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1":
         raise LiveBrainError("BOUND_CAPABILITY_REGISTRY_SCHEMA_INVALID")
@@ -88,6 +114,9 @@ def load_verified_registry(include_extended: bool = True) -> dict[str, Mapping[s
             raise LiveBrainError("EXTENDED_CAPABILITY_REGISTRY_INVALID") from exc
     if not out:
         raise LiveBrainError("NO_VERIFIED_ZERO_SPEND_CAPABILITIES")
+    if cache_key is not None:
+        _REGISTRY_CACHE[cache_key] = dict(out)
+        _REGISTRY_CACHE_KEY = cache_key
     return out
 
 

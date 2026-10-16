@@ -297,16 +297,18 @@ GENERATORS: dict[str, Callable[[random.Random, Path, int], Case]] = {
 
 
 def all_generators() -> dict[str, Callable[[random.Random, Path, int], Case]]:
-    """Wave-1 families plus the per-capability execution families of live_solver_families_v2/v3/v4/v5."""
+    """Wave-1 families plus the per-capability execution families of live_solver_families_v2/v3/v4/v5/v6."""
     from execution_guard.live_solver_families_v2 import GENERATORS_V2
     from execution_guard.live_solver_families_v3 import GENERATORS_V3
     from execution_guard.live_solver_families_v4 import GENERATORS_V4
     from execution_guard.live_solver_families_v5 import GENERATORS_V5
+    from execution_guard.live_solver_families_v6 import GENERATORS_V6
     merged = dict(GENERATORS)
     merged.update(GENERATORS_V2)
     merged.update(GENERATORS_V3)
     merged.update(GENERATORS_V4)
     merged.update(GENERATORS_V5)
+    merged.update(GENERATORS_V6)
     return merged
 
 # Families the compiler advertises but that need binaries / packages this machine lacks, or
@@ -421,7 +423,25 @@ def _entry(name: str) -> Callable[[dict[str, Any]], dict[str, Any]]:
     return solve
 
 
-def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], keep: bool, only_families: set[str] | None = None) -> dict[str, Any]:
+def _execute_one(payload: tuple[str, str, str]) -> dict[str, Any]:
+    """Run one case through one entry. Module-level so worker processes can call it.
+
+    Pure function of (entry_name, task_id, goal): task ids are unique per case and every
+    case owns its artifact paths, so cases are independent and order-free. An exception
+    leak is itself a finding and is returned as a result, exactly like the serial loop.
+    """
+    entry_name, task_id, goal = payload
+    fn = _entry(entry_name)
+    try:
+        result = fn({"task_id": task_id, "goal": goal})
+    except Exception as exc:  # noqa: BLE001 - an exception leak is itself a finding
+        result = {"pass": None, "status": "EXCEPTION_LEAK", "failure_class": type(exc).__name__ + ":" + str(exc)[:200]}
+    if not isinstance(result, dict):
+        result = {"pass": None, "status": "EXCEPTION_LEAK", "failure_class": "RESULT_NOT_A_DICT"}
+    return result
+
+
+def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], keep: bool, only_families: set[str] | None = None, jobs: int | None = None) -> dict[str, Any]:
     replay = seed is not None
     if seed is None:
         seed = int.from_bytes(os.urandom(8), "big")
@@ -434,31 +454,46 @@ def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], k
     run_tag = "E2E_" + hashlib.sha256(f"{seed}:{os.urandom(8).hex()}".encode()).hexdigest()[:10]
     results: dict[str, Any] = {}
     for entry_name in entries:
-        fn = _entry(entry_name)
         rng = random.Random(seed)
         families: dict[str, dict[str, Any]] = {}
         failures: list[dict[str, Any]] = []
+        # Phase 1 (serial, cheap): generate every case in rng order so a fixed seed replays
+        # the identical goals; then all executions run (serially or across worker processes)
+        # and the oracles judge in the original order. Verdicts are order-free: task ids are
+        # unique per case (the live controller checkpoints per task id and refuses to re-run
+        # a finished id) and every case owns its artifact paths.
+        planned: list[tuple[str, Case, str]] = []
+        for family, gen in all_generators().items():
+            if only_families and family not in only_families:
+                continue
+            n = oos_count if family == "OUT_OF_SCOPE_MUST_FAIL_CLOSED" else per_family
+            for i in range(n):
+                case = gen(rng, work / entry_name, i)
+                for a in case.artifacts:
+                    if a.exists():
+                        a.unlink()
+                planned.append((family, case, f"{run_tag}_{entry_name}_{family}_{i}"))
+        t0 = time.perf_counter_ns()
+        if jobs is not None and jobs > 1:
+            from concurrent.futures import ProcessPoolExecutor
+            with ProcessPoolExecutor(max_workers=jobs) as pool:
+                executed = list(pool.map(_execute_one, [(entry_name, tid, c.goal) for _, c, tid in planned], chunksize=1))
+        else:
+            executed = [_execute_one((entry_name, tid, c.goal)) for _, c, tid in planned]
+        elapsed_total = time.perf_counter_ns() - t0
+        per_case_ms = (elapsed_total / len(executed) / 1e6) if executed else 0.0
+        cursor = 0
         for family, gen in all_generators().items():
             if only_families and family not in only_families:
                 continue
             n = oos_count if family == "OUT_OF_SCOPE_MUST_FAIL_CLOSED" else per_family
             ok = 0
             env_blocked = 0
-            elapsed = 0
             caps: dict[str, int] = {}
-            for i in range(n):
-                case = gen(rng, work / entry_name, i)
-                for a in case.artifacts:
-                    if a.exists():
-                        a.unlink()
-                t0 = time.perf_counter_ns()
-                try:
-                    # task ids must be unique: the live controller checkpoints per task id and
-                    # refuses to re-run a finished id (MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH)
-                    result = fn({"task_id": f"{run_tag}_{entry_name}_{family}_{i}", "goal": case.goal})
-                except Exception as exc:  # noqa: BLE001 - an exception leak is itself a finding
-                    result = {"pass": None, "status": "EXCEPTION_LEAK", "failure_class": type(exc).__name__ + ":" + str(exc)[:200]}
-                elapsed += time.perf_counter_ns() - t0
+            for _ in range(n):
+                _, case, _ = planned[cursor]
+                result = executed[cursor]
+                cursor += 1
                 cap = str(result.get("compiled_capability_id") or result.get("compiler_mode") or "-")
                 caps[cap] = caps.get(cap, 0) + 1
                 blocker = environment_blocker(result)
@@ -475,7 +510,7 @@ def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], k
                                      "status": str(result.get("status"))[:120], "capability": cap,
                                      "admission_rule": ((result.get("route_admission") or {}).get("rule") if isinstance(result.get("route_admission"), dict) else None)})
             families[family] = {"instances": n, "oracle_pass": ok, "environment_blocked_here": env_blocked, "pass_rate": round(ok / n, 4) if n else None,
-                                "mean_ms": round(elapsed / n / 1e6, 2) if n else None, "routes_taken": caps,
+                                "mean_ms": round(per_case_ms, 2) if n else None, "routes_taken": caps,
                                 "expected": "all PASS with exact artifact" if family != "OUT_OF_SCOPE_MUST_FAIL_CLOSED" else "all FAIL closed, no artifact"}
         in_scope = [f for f in families if f != "OUT_OF_SCOPE_MUST_FAIL_CLOSED"]
         results[entry_name] = {
@@ -512,6 +547,7 @@ def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], k
         "replay": replay,
         "seed": seed,
         "run_tag": run_tag,
+        "jobs": jobs if (jobs is not None and jobs > 1) else 1,
         "controller_checkpoints_removed": removed,
         "python": sys.version.split()[0],
         "machine": {"platform": sys.platform, "network_egress": "allowlisted hosts only"},
@@ -542,6 +578,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--environment-blockers-are-failures", action="store_true",
                     help="count instances blocked by missing apt metadata / refused pip installs as failures (the public runner installs everything)")
     ap.add_argument("--families", default="", help="comma-separated family names to measure (default: all); a debugging aid, never used by the heartbeat verdict")
+    ap.add_argument("--jobs", type=int, default=1, help="worker processes for case execution (default 1 = serial). Same goals, same oracles, same verdicts; only wall-clock changes.")
     ap.add_argument("--annotate", metavar="RECEIPT_JSON",
                     help="print GitHub workflow-command annotations (::error / ::warning / ::notice) for an existing receipt and exit; no measurement is run")
     ns = ap.parse_args(argv)
@@ -551,7 +588,7 @@ def main(argv: list[str] | None = None) -> int:
             print(line)
         return 0
     receipt = run(ns.seed, ns.per_family, ns.oos, [x.strip() for x in ns.entries.split(",") if x.strip()], ns.keep,
-                  only_families={x.strip() for x in ns.families.split(",") if x.strip()} or None)
+                  only_families={x.strip() for x in ns.families.split(",") if x.strip()} or None, jobs=ns.jobs)
     text = json.dumps(receipt, indent=2, sort_keys=True) + "\n"
     if ns.out:
         Path(ns.out).write_text(text, encoding="utf-8")

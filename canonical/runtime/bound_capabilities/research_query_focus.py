@@ -8,10 +8,13 @@ search/ranking query.
 """
 from __future__ import annotations
 import hashlib
+import json
+import pathlib
 import re
 import unicodedata
 
 SCHEMA="PROJECT_BRAIN_RESEARCH_QUERY_FOCUS_V1"
+CAPABILITY_ID="research.query.focus.v1"
 
 _BROAD_LEAD=re.compile(
     r"^(?:(?:determine|assess|evaluate|investigate|estimate|quantify|compare|analy[sz]e)"
@@ -105,4 +108,41 @@ def focus(objective,max_tokens=32):
         "query_sha256":hashlib.sha256(query.encode("utf-8")).hexdigest(),
         "method":"DECISION_TEXT_UNTIL_EXPLICIT_ORCHESTRATION_BOUNDARY_PLUS_UNICODE_FUNCTION_WORD_FILTER",
         "claim_scope":"DETERMINISTIC_RESEARCH_SUBJECT_QUERY_ONLY",
+    }
+
+
+def run(args,root):
+    """Bound-capability entry: focus a quoted research objective into a search query.
+
+    ``args``: {"objective": <quoted objective>, "output_path": <repo-relative .json>,
+    "max_tokens": <optional int>}. Fails closed (raises) unless the objective focuses:
+    empty/oversize input and token-less subjects are UNRESOLVED, never guessed.
+    """
+    if not isinstance(args,dict):
+        raise RuntimeError("ARGS_NOT_OBJECT")
+    objective=args.get("objective")
+    if not isinstance(objective,str) or not objective.strip():
+        raise RuntimeError("OBJECTIVE_REQUIRED")
+    repo=pathlib.Path(root).resolve()
+    out=(repo/str(args.get("output_path") or "")).resolve()
+    if out==repo or repo not in out.parents:
+        raise RuntimeError("OUTPUT_PATH_OUTSIDE_REPOSITORY")
+    if out.suffix.lower()!=".json":
+        raise RuntimeError("OUTPUT_PATH_MUST_BE_JSON")
+    try:
+        max_tokens=int(args.get("max_tokens",32))
+    except (TypeError,ValueError):
+        raise RuntimeError("MAX_TOKENS_INVALID")
+    result=focus(objective,max_tokens=max_tokens)
+    if result.get("status")!="FOCUSED":
+        raise RuntimeError("RESEARCH_QUERY_NOT_FOCUSED:"+str(result.get("reason") or "UNKNOWN"))
+    payload={**result,"capability_id":CAPABILITY_ID,"output_verified":True}
+    out.parent.mkdir(parents=True,exist_ok=True)
+    out.write_text(json.dumps(payload,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+    raw=out.read_bytes()
+    return {
+      **payload,
+      "output_path":str(out.relative_to(repo)).replace("\\","/"),
+      "output_sha256":hashlib.sha256(raw).hexdigest(),
+      "incremental_spend_usd":0,
     }

@@ -349,6 +349,22 @@ def kernel_refuses(entry: Mapping[str, Any]) -> bool:
     return str(source.get("type") or "") in KERNEL_UNSUPPORTED_SOURCE_TYPES
 
 
+def _is_missing_python_import(reason: str) -> bool:
+    """True when the local failure is a missing Python module (fail closed fast).
+
+    Only import failures bypass the kernel retry: the kernel's unique power on
+    this path is installing packages mid-solve, which is slow, non-hermetic,
+    and fails on PEP 668 machines. Every other failure keeps the retry.
+    """
+    text = str(reason or "")
+    return (
+        "FRONT_LOCAL_DEPENDENCY_MISSING" in text
+        or "ModuleNotFoundError" in text
+        or "ImportError" in text
+        or "No module named" in text
+    )
+
+
 class LocalExecutionFailure(RuntimeError):
     pass
 
@@ -672,6 +688,19 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
             return local_res
         reason_str = str(local_res.get("reason") or "")
         if "MISMATCH" in reason_str or "ACTION_EXPECTATION_FAILED" in reason_str:
+            return local_res
+        if _is_missing_python_import(reason_str):
+            # Fail closed fast (measured 2026-10-16: the kernel fallback burns
+            # ~700ms running pip, which fails on every PEP 668 machine, only to
+            # report the install error instead of the missing import). The
+            # dependency set is declared outside the hot path (the heartbeat
+            # installs it); solve() states the truth instead of mutating its
+            # own environment mid-solve. PASS set unchanged: where the import
+            # exists, local execution already succeeded above.
+            local_res["failure_class"] = "IMPORT_UNAVAILABLE"
+            local_res["import_unavailable_hint"] = (
+                "declare/install the missing Python module in the environment, then retry"
+            )
             return local_res
         controller_actions = [action, {"type": "finish", "args": {"summary": "RAW_GOAL_COMPLETE"}}]
     if not isinstance(controller_actions, list) or not controller_actions or len(controller_actions) > 64 or any(not isinstance(a, Mapping) for a in controller_actions):
