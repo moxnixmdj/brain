@@ -193,20 +193,23 @@ def load_verified_registry(include_extended: bool = True) -> dict[str, Mapping[s
                     raise ValueError("invalid extended entry")
                 if cid in out:
                     continue
-                if entry.get("status") != "VERIFIED_BOUND_CAPABILITY":
-                    # A receipt is execution evidence and can admit on its own; a status string
-                    # cannot.  Entries admitted here keep their inventory status, so writing a
-                    # status still grants nothing.
-                    if _receipt_admits(entry, ROOT):
-                        out[cid] = {**entry, "capability_id": cid, "receipt_backed": True}
-                    continue
-                verification = entry.get("verification")
-                if not isinstance(verification, dict) or verification.get("verified") is not True:
-                    continue
-                spend = entry.get("incremental_spend_usd")
-                if isinstance(spend, bool) or not isinstance(spend, (int, float)) or spend != 0:
-                    continue
-                out[cid] = entry
+                # Admission from inventory is by RECEIPT EVIDENCE ONLY — the status field is
+                # not consulted, because a status is a string any program can write.
+                #
+                # This path used to admit `status == VERIFIED_BOUND_CAPABILITY` with
+                # `verification.verified is True` and zero spend directly, which is exactly
+                # the SESSION_E0A256F8 failure mode ("produced 464 self-verified receipts"):
+                # flipping 500 inventory entries moved this loader from 67 to 567 admitted
+                # with no execution evidence at all.
+                #
+                # Measured before removing it: 0 of the 2,309 inventory entries carried that
+                # status, and 0 of the 361 admitted capabilities came from this path, so the
+                # removal is live-count neutral (361 before and after) and only takes away
+                # the ability to flip one in.  The curated bound registry above keeps its own
+                # gate: that file is where the project's original verified capabilities live,
+                # not user-writable inventory.
+                if _receipt_admits(entry, ROOT):
+                    out[cid] = {**entry, "capability_id": cid, "receipt_backed": True}
         except (OSError, ValueError, TypeError) as exc:
             raise LiveBrainError("EXTENDED_CAPABILITY_REGISTRY_INVALID") from exc
 
