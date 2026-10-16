@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/v14_p2_professional_top_law_selected_cell_verifier_v1.py.auto.v1",
+ "elapsed_ms": 24.902,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/v14_p2_professional_top_law_selected_cell_verifier_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/v14_p2_professional_top_law_selected_cell_verifier_v1.py",
+ "module_sha256": "08a9419b0784a8ba01b993ec1aef42e0c3afab7e4d894623ef3b7fd0b3607a09",
+ "observed": {
+  "pass": true,
+  "returncode": 0
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_v14_p2_professional_top_law_selected_cell_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 7,
+ "result_sha256": "c3bc3421b0021c79f073f89fb998188ec608976ece2d79a9e3320e65a52e7f9e",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

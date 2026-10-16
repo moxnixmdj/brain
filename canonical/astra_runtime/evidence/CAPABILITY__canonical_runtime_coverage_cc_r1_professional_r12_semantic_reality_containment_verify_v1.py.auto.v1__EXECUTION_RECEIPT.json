@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/coverage_cc_r1_professional_r12_semantic_reality_containment_verify_v1.py.auto.v1",
+ "elapsed_ms": 25.884,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/coverage_cc_r1_professional_r12_semantic_reality_containment_verify_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/coverage_cc_r1_professional_r12_semantic_reality_containment_verify_v1.py",
+ "module_sha256": "a03497d141f1ddf03257305f450e73a7c2c4f171f2b9ae078f0f65c24ff80d36",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__CC_R1_R12_SEMANTIC_FORMAL_DEFINITIONAL_REALITY_CONTAINMENT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_coverage_cc_r1_professional_r12_semantic_reality_containment_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 12,
+ "result_sha256": "fd8cce2e8a8a502b18ecfb2d44947a75d8c3fcb0c75e654d13238b31d5980c86",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

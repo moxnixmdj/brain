@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/structured_method_universal_correctness_certificate_v1.py.auto.v1",
+ "elapsed_ms": 42.127,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/structured_method_universal_correctness_certificate_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/structured_method_universal_correctness_certificate_v1.py",
+ "module_sha256": "6a73d3efda9c586099c4c0c6da6c3fa76799c6e6e094c43537e10d159ede56bd",
+ "observed": {
+  "returncode": 0,
+  "status": "PASS__UNIVERSAL_FORMAL_CORRECTNESS_CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_structured_method_universal_correctness_certificate_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 23,
+ "result_sha256": "b1213b80580de2963e4a8f11c95bcbeb92b52247deeda24fe2ea811352ea7f7a",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

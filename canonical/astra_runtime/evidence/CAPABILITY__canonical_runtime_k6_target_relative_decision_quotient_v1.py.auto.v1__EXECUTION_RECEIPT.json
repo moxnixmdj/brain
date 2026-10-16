@@ -1,0 +1,32 @@
+{
+ "capability_id": "canonical/runtime/k6_target_relative_decision_quotient_v1.py.auto.v1",
+ "elapsed_ms": 47.711,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/k6_target_relative_decision_quotient_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/k6_target_relative_decision_quotient_v1.py",
+ "module_sha256": "a7547c5dc39e4c579d6addb1e4817fc3fccb333d09ab5da63230034096622635",
+ "observed": {
+  "returncode": 0
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_k6_target_relative_decision_quotient_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 6,
+ "result_sha256": "8f43c9be49e8cf13390309a584c79713a9dd3ee8c9bda1538fa58889dcc9ce7f",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

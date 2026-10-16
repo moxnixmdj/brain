@@ -1,0 +1,26 @@
+{
+ "capability_id": "canonical/runtime/synthesis_certified_visible_support_policy_v1.py.auto.v1",
+ "elapsed_ms": 0.222,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/synthesis_certified_visible_support_policy_v1.py",
+ "module_sha256": "cf54cd4a59c03f0a8321e7b05b8351773dcb21ed0b03b77a51fab1411460dc33",
+ "observed": {
+  "status": "FAIL_CLOSED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_synthesis_certified_visible_support_policy_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 6,
+ "result_sha256": "754ad7828936e1d5ebbc4572fec968bfe23d55fbd2cd07d6cb42a7efd273a368",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/v13_finance_uncovered_scope_routing_verifier_v1.py.auto.v1",
+ "elapsed_ms": 27.881,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/v13_finance_uncovered_scope_routing_verifier_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/v13_finance_uncovered_scope_routing_verifier_v1.py",
+ "module_sha256": "b421b71e1f3a00c49c522b377f2ac7d315e7e591d5fe535c67971ef2da89a8eb",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__FINANCE_UNCOVERED_SCOPE_ROUTED_TO_OBJECTIVE_ABC_DIRECT_PROOF__TARGETLIKE_14_OBJECTIVE_5__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_v13_finance_uncovered_scope_routing_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 9,
+ "result_sha256": "e0e9e79261b9f58b82af6d311754d0d6ed659afe11a0095f77d62d48196d6b1b",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

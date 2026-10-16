@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/v12_target_law_uncertainty_residual_verifier_v1.py.auto.v1",
+ "elapsed_ms": 24.914,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/v12_target_law_uncertainty_residual_verifier_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/v12_target_law_uncertainty_residual_verifier_v1.py",
+ "module_sha256": "b46f7f9615cd1bfa843fa124f9a12b757040f2de6f37c7fbea0097af0dff924a",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__TARGET_INFORMATION_RESIDUALIZED_TO_UNDOMINATED_LAWS__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_v12_target_law_uncertainty_residual_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 6,
+ "result_sha256": "953171d5812bbf27256096957b11150b93ab75de6b5726809c4e59ba51a59cbb",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

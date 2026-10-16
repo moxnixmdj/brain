@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/k6_positive_cover_semantic_residual_v4_verifier.py.auto.v1",
+ "elapsed_ms": 54.435,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/k6_positive_cover_semantic_residual_v4_verifier.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/k6_positive_cover_semantic_residual_v4_verifier.py",
+ "module_sha256": "d385c744a3506fe5a7817764c9e9f375e0978e490a41e3b0d5341f5dbf16d716",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__K6_V4_POSITIVE_COVER_RESIDUAL"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_k6_positive_cover_semantic_residual_v4_verifier.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 4,
+ "result_sha256": "14578b0f4309a274ec28c1f1a230a301ff6881d8e62376d1f05c2f257161a076",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

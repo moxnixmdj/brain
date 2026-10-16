@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/tool_discovery_frozen_scope_completeness_discharge_v1.py.auto.v1",
+ "elapsed_ms": 63.758,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/tool_discovery_frozen_scope_completeness_discharge_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/tool_discovery_frozen_scope_completeness_discharge_v1.py",
+ "module_sha256": "9b949e6570d1cc5e66c048b3259cacbb62dcafdd7a7cf14d8650a60f3ebe78ab",
+ "observed": {
+  "returncode": 0,
+  "status": "PASS__PREENUMERATED_TOOL_IDS_COMPLETE_FOR_EXACT_FROZEN_TARGET__SCOPE_SEMANTICS_DISCHARGED__INDEPENDENT_PUBLIC_RUNNER_REQUIRED__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_tool_discovery_frozen_scope_completeness_discharge_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 19,
+ "result_sha256": "d102b824ff61d3230de800c68ae81471cb849809f0689679d8cf24a0709b0d65",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
