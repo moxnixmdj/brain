@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/tool_discovery_dynamic_refinement_v1.py.auto.v1",
+ "elapsed_ms": 63.14,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/tool_discovery_dynamic_refinement_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/tool_discovery_dynamic_refinement_v1.py",
+ "module_sha256": "971517dec9f9edb5eb3b4066c7ecfbe355ccf73973fc6af8383c0d5484dd223d",
+ "observed": {
+  "returncode": 0,
+  "status": "PASS__CONDITIONAL_REFINEMENT_OBLIGATIONS_COMPILED__EXTERNAL_INTERFACE_INSTANCE_OPEN__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_tool_discovery_dynamic_refinement_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 25,
+ "result_sha256": "fafd0576bde775e64d0a93262187f0c2991733af545965fb3957f20d117c9722",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

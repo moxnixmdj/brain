@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/escape_active_gap_b_causal_reclassification_verify_v1.py.auto.v1",
+ "elapsed_ms": 73.527,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/escape_active_gap_b_causal_reclassification_verify_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/escape_active_gap_b_causal_reclassification_verify_v1.py",
+ "module_sha256": "2af19af85d8104c867ae662f28d98a715ae7f0af8980e96cedc36954158140cf",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__CURRENT_CAUSAL_RECLASSIFICATION_VERIFIED__ACTIVE_GAP_B_ZERO"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_escape_active_gap_b_causal_reclassification_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 14,
+ "result_sha256": "95edb03421517d95b0eb9e0a8722ec4fe89c9326baf926909a9437f9d6ceffbf",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

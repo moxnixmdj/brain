@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/exact_symbolic_selected_leaf_verifier_v1.py.auto.v1",
+ "elapsed_ms": 68.738,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/exact_symbolic_selected_leaf_verifier_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/exact_symbolic_selected_leaf_verifier_v1.py",
+ "module_sha256": "1111fb4538f7d58b3cd45916ae450e5dd448f4564db2832e6d1bf99d46ce104f",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__ACCEPTED_COMPUTE_LEAF_EXTRACTED_EFFECT_FREE"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_exact_symbolic_selected_leaf_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 9,
+ "result_sha256": "0ebd1aa7e7d7192e76daa2dbb98fe20a0d581843dd5855465488240929f9cce3",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

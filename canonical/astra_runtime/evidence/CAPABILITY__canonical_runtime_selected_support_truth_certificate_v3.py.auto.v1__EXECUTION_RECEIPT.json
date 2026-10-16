@@ -1,0 +1,27 @@
+{
+ "capability_id": "canonical/runtime/selected_support_truth_certificate_v3.py.auto.v1",
+ "elapsed_ms": 0.112,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/selected_support_truth_certificate_v3.py",
+ "module_sha256": "eda412a243c141e0541fa4b574586c5731c721163a8df971538127331ae7aa55",
+ "observed": {
+  "pass": false,
+  "status": "FAIL_CLOSED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_selected_support_truth_certificate_v3.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 13,
+ "result_sha256": "b77b723488bdf80cc30ac3840365d5667ee1630a14f147678ba734d11f8cad1d",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

@@ -1,0 +1,26 @@
+{
+ "capability_id": "canonical/runtime/livebench_if_reference_free_compound_witness_v1.py.auto.v1",
+ "elapsed_ms": 0.826,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/livebench_if_reference_free_compound_witness_v1.py",
+ "module_sha256": "ac7b9ef521de9dd3da741516517b7ca054b800d5279f7e8369985d26a79fb1a2",
+ "observed": {
+  "status": "FAIL_CLOSED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_if_reference_free_compound_witness_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 4,
+ "result_sha256": "def4ffd004e84b989cb936d7ac9105b55cdcf57cf5010130c242eeee8665d9a6",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
