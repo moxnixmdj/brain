@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/root3_seven_class_one_substrate_policy_v1.py.auto.v1",
+ "elapsed_ms": 27.252,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/root3_seven_class_one_substrate_policy_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/root3_seven_class_one_substrate_policy_v1.py",
+ "module_sha256": "6b76a8c09b8931d8feb252ce7e219207bdead3f7bd652f310e0b342791590249",
+ "observed": {
+  "returncode": 0,
+  "status": "PASS__7_EFFECT_CLASSES_SHARE_1_CONFINEMENT_SUBSTRATE_PLUS_3_FAIL_CLOSED_POLICY_MODES__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_root3_seven_class_one_substrate_policy_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 13,
+ "result_sha256": "97603554eb5b4d4d20c1b72a4db792aacee23e720b5be556c3348a4a7bfc1a85",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
