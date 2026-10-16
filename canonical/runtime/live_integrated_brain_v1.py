@@ -265,6 +265,29 @@ def compile_capability_graph(
     }
 
 
+def bound_capability_controller_action(cid: str, entry: Mapping[str, Any], inputs: Mapping[str, Any]) -> dict[str, Any]:
+    """The one controller action shape that executes a verified capability.
+
+    Both entry points build it here: ``run()`` for a planned task and ``run_raw_goal()`` for a
+    raw goal.  A registry ``action_template`` of type ``invoke_capability`` cannot be used for a
+    receipt-backed capability: the controller resolves that type through the BOUND registry,
+    which by design holds only promoted entries, so every receipt-backed capability answered
+    ``Blocker:BOUND_CAPABILITY_UNKNOWN`` (measured: 294 of 294, all before any work was done).
+    """
+    return {
+        "type": "invoke_verified_bound_capability_adapter",
+        "args": {
+            "capability_id": cid,
+            "inputs": dict(inputs),
+            "instance_id": cid,
+            "requires": list(entry.get("requires") or []),
+            "provides": list(entry.get("provides") or []),
+            "result_fields": list(entry.get("result_fields") or []),
+        },
+        "expect": {"type": "field_equals", "field": "pass", "value": True},
+    }
+
+
 def run(request: Mapping[str, Any]) -> dict[str, Any]:
     assert_credit_path_cognition_governance(ROOT)
     started = perf_counter_ns()
@@ -326,18 +349,7 @@ def run(request: Mapping[str, Any]) -> dict[str, Any]:
                     "elapsed_ns": perf_counter_ns() - started,
                     "incremental_spend_usd": 0,
                 }
-            controller_actions.append({
-                "type": "invoke_verified_bound_capability_adapter",
-                "args": {
-                    "capability_id": cid,
-                    "inputs": dict(inputs),
-                    "instance_id": cid,
-                    "requires": list(entry.get("requires") or []),
-                    "provides": list(entry.get("provides") or []),
-                    "result_fields": list(entry.get("result_fields") or []),
-                },
-                "expect": {"type": "field_equals", "field": "pass", "value": True},
-            })
+            controller_actions.append(bound_capability_controller_action(cid, entry, inputs))
         controller_actions.append({
             "type": "finish",
             "args": {"summary": "COMPILED_TASK_COMPLETE"},
@@ -637,7 +649,12 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
             }
 
         entry = admissible[selected]
-        action = goal_compiler._render_template(entry["action_template"], dict(inputs))
+        if entry.get("capability_source") == "receipt_projection":
+            # the registry's own template resolves through the BOUND registry (promoted entries
+            # only) and refuses every receipt-backed capability before any work is done
+            action = bound_capability_controller_action(selected, entry, dict(inputs))
+        else:
+            action = goal_compiler._render_template(entry["action_template"], dict(inputs))
         controller_actions = [
             action,
             {"type": "finish", "args": {"summary": "RAW_GOAL_COMPLETE"}},

@@ -39,6 +39,14 @@ the pinned compiler had four defects that this layer corrects WITHOUT editing a 
    be reached by its own keyword.  Here: a surface word that is one of the tool's OWN tokens
    (keywords, identity, provides) does not reject it.
 
+10. The caller's own choice is discarded.  Candidates are ranked on PROSE tokens and paths are
+   removed (defect 8), so a goal whose content IS a capability id collapses to its verbs and is
+   absorbed by a generic candidate - measured: ``run <zero-input capability id>`` selected
+   ``python.software.request.semantic_behavior.compile.v1`` for 217 of 294 receipt-backed
+   capabilities and reported success.  Here: an id that appears verbatim in the goal selects
+   that capability and nothing else (F15).  Naming is not guessing - it is the caller choosing -
+   and composition is never stolen: a sentence that keeps asking for more still routes normally.
+
 It also binds the 33 registry inputs the pinned binder cannot (``path``, ``jq_filter``,
 ``expression``, ``x_value``, ``test_paths`` ...) from an explicit typed grammar:
 ``<key words> <quoted string | number | path | list | key=value pairs>``.  Inputs are never
@@ -126,6 +134,51 @@ def routable_registry(admissible: Mapping[str, Mapping[str, Any]]) -> dict[str, 
 
 def blocked_zero_input_capabilities(admissible: Mapping[str, Mapping[str, Any]]) -> list[str]:
     return sorted(cid for cid, entry in admissible.items() if isinstance(entry, Mapping) and not is_plain_goal_routable(entry))
+
+
+# ------------------------------------------------------------------------- F15: naming as choosing
+
+_IDENTITY_CHARS = set("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-/")
+_COMPOSITION_MARKERS = (" and ", " then ", " also ", " plus ", " after ", " before ", ",", ";", "\n")
+_MAX_NAMING_WORDS = 4
+_EXPLICIT_NAME_SCORE = 10 ** 6
+
+
+def explicitly_named_capabilities(goal: str, admissible: Mapping[str, Mapping[str, Any]]) -> list[str]:
+    """Every capability whose id appears verbatim in ``goal``, on identifier boundaries.
+
+    ``.`` is deliberately NOT an identity character: ids end in ``.v1``, so a sentence-final
+    period must not stop an id from being recognised, while ``.../a_v1.py.auto.v1x`` still is
+    a different identifier and does not match.
+    """
+    text = str(goal or "")
+    hits: list[str] = []
+    for cid in admissible:
+        idx = text.find(cid)
+        while idx != -1:
+            end = idx + len(cid)
+            before = text[idx - 1] if idx else ""
+            after = text[end] if end < len(text) else ""
+            if before not in _IDENTITY_CHARS and after not in _IDENTITY_CHARS:
+                hits.append(cid)
+                break
+            idx = text.find(cid, idx + 1)
+    return sorted(set(hits))
+
+
+def naming_is_the_whole_request(goal: str, cid: str) -> bool:
+    """Defect 10: a goal that only names ``cid`` is the caller choosing it, not an input to guess.
+
+    Composition is never stolen: a second clause, a continuation, or more than a naming phrase
+    leaves the decision to the normal machinery.  A named capability is also where its own
+    verdict is written, so a sentence that says nothing but the id is read as naming the
+    capability; routing never becomes success authority either way - the raw goal keeps its
+    acceptance obligations ("receipts still required") until they are met by evidence.
+    """
+    rest = str(goal or "").replace(cid, " ").lower()
+    if any(marker in rest for marker in _COMPOSITION_MARKERS):
+        return False
+    return len([w for w in re.split(r"[^0-9a-z]+", rest) if w]) <= _MAX_NAMING_WORDS
 
 
 # ----------------------------------------------------------------------------- typed grammar
@@ -807,6 +860,33 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
     text = normalize_goal(original)
     if text != original:
         rules.append("F2_SENTENCE_FINAL_PERIOD_REMOVED")
+
+    # F15: an id that appears verbatim in the goal is the caller choosing that capability.
+    # Defect 10 - without this, the id is stripped as a path and the goal is absorbed by a
+    # generic candidate that reports success for work it was never asked to do.
+    named = explicitly_named_capabilities(text, admissible)
+    if len(named) == 1 and naming_is_the_whole_request(text, named[0]):
+        cid = named[0]
+        entry = admissible[cid]
+        inputs = (
+            bind_all_inputs(text, entry, root, cycle=0, spool=set())
+            if is_plain_goal_routable(entry)
+            else {}
+        )
+        rules.append("F15_EXPLICIT_CAPABILITY_ID_NAMED")
+        return _single(
+            cid,
+            entry,
+            inputs,
+            _EXPLICIT_NAME_SCORE,
+            {
+                "rule": "F15_EXPLICIT_CAPABILITY_ID_NAMED",
+                "explicit_capability_id": cid,
+                "named_route": "EXACT_CAPABILITY_ID_IN_GOAL",
+            },
+            rules,
+        )
+
     registry = routable_registry(admissible)
     if len(registry) != len(admissible):
         rules.append("F4_ZERO_INPUT_TOOLS_NOT_ROUTABLE")
