@@ -1,0 +1,26 @@
+{
+ "capability_id": "canonical/runtime/livebench_legacy15_contract_composer_v2.py.auto.v1",
+ "elapsed_ms": 0.301,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/livebench_legacy15_contract_composer_v2.py",
+ "module_sha256": "2d332f615e8fc34564efacae3b7fd06db6462b60901995e72ef6e8f8b6bb0212",
+ "observed": {
+  "status": "FAIL_CLOSED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_contract_composer_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 7,
+ "result_sha256": "6e80981c443785826b7eca9c6aaae4028f328096c6e1edcebb66059281ddeaa4",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

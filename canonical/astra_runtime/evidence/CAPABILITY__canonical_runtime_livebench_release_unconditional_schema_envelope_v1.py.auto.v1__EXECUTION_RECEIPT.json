@@ -1,0 +1,26 @@
+{
+ "capability_id": "canonical/runtime/livebench_release_unconditional_schema_envelope_v1.py.auto.v1",
+ "elapsed_ms": 92.069,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/livebench_release_unconditional_schema_envelope_v1.py",
+ "module_sha256": "c5ec6e6cd0527b5660ac955f1cc7ac988066edc84edf5a2288c184ebe0f0ca3f",
+ "observed": {
+  "status": "PASS__FROZEN_SCHEMA_UNCONDITIONALLY_REDUCES_RELEASE_SCOPE_TO_ACTIVE15_PLUS_COMPATIBLE_SUBSETS_OF_FOUR_NOARG_EXTRAS__3108_STRUCTURES__7_EXTRA_SIGNATURES"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_release_unconditional_schema_envelope_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 26,
+ "result_sha256": "cdf10cb9bf1a9fe4b078b04ad8295f4869779de99eaa949a0983613ed721c2ed",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

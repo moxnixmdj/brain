@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/coverage_cc_r3_mission_scope_bridge_guard_v1.py.auto.v1",
+ "elapsed_ms": 27.479,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/coverage_cc_r3_mission_scope_bridge_guard_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/coverage_cc_r3_mission_scope_bridge_guard_v1.py",
+ "module_sha256": "4892154930ab2a1f8b28bd961897f38f4fc272fa74e55ec41465a17b652679d6",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__CC_R3_SCOPE_BRIDGE_CONSTRAINT_HELD"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_coverage_cc_r3_mission_scope_bridge_guard_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 8,
+ "result_sha256": "f12abcf8ebabf5d63b1938ede06c27c689814dbdad7e6c32355fad055b449e3b",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

@@ -1,0 +1,26 @@
+{
+ "capability_id": "canonical/runtime/livebench_ngram_reference_free_v1.py.auto.v1",
+ "elapsed_ms": 0.274,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/livebench_ngram_reference_free_v1.py",
+ "module_sha256": "73e9a8d29fcbda72a112f2aba6b41f45ecf4fccd86b06fbe21b8d7bccc4483c8",
+ "observed": {
+  "status": "FAIL_CLOSED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_ngram_reference_free_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 3,
+ "result_sha256": "a8c5c9a5aa7ec0f53c4df3d3b3945083f0c9e8af76e74c392b6cca6605a8b6b4",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
