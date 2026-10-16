@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/root2_external_task_entrypoint_v1.py.auto.v1",
+ "elapsed_ms": 29.137,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/root2_external_task_entrypoint_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/root2_external_task_entrypoint_v1.py",
+ "module_sha256": "0227c3dd56ec5ed97d2c0e0f9f82a1b651c02e8eddf6a1b2d45f8a5096d40cc5",
+ "observed": {
+  "returncode": 0,
+  "status": "PREFLIGHT_ONLY"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_root2_external_task_entrypoint_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 3,
+ "result_sha256": "47ff681ef435179b42dc84c1a23d3c523ce56eda7029e4069f682db956e6dfb1",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

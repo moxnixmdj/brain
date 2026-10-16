@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/verification/verify_image_ocr_tesseract_reuse.py.auto.v1",
+ "elapsed_ms": 31.349,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/verification/verify_image_ocr_tesseract_reuse.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/verification/verify_image_ocr_tesseract_reuse.py",
+ "module_sha256": "6116bef66cc0d5a6054894553c7b1d08fcee85d9bc5dbcfd9a5c189468092223",
+ "observed": {
+  "pass": true,
+  "returncode": 0
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_verification_verify_image_ocr_tesseract_reuse.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 7,
+ "result_sha256": "7090d379b376bf5c6eebf89886c891b05c4e18443e385114e0e4415fd4026d3b",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

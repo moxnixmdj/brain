@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/retrieval_live_event_ledger_v1.py.auto.v1",
+ "elapsed_ms": 27.238,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/retrieval_live_event_ledger_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/retrieval_live_event_ledger_v1.py",
+ "module_sha256": "88fd246725036dbbd846493853cbb5eb90bd9d824edb8f496a1d0a471232537b",
+ "observed": {
+  "returncode": 0,
+  "status": "CALIBRATED_FROM_LIVE_RETRIEVAL_EVENTS"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_retrieval_live_event_ledger_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 14,
+ "result_sha256": "4f95bba96b089da3a9136e192a742875d7f1a975596faa0cceaed146c776d22c",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

@@ -1,0 +1,32 @@
+{
+ "capability_id": "canonical/runtime/terminal_causal_depth_controller_v1.py.auto.v1",
+ "elapsed_ms": 32.715,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/terminal_causal_depth_controller_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/terminal_causal_depth_controller_v1.py",
+ "module_sha256": "162d012f2001615b55be03dcf78f3e7a9e9f8acb97fb004d6d86deceaf35c1bc",
+ "observed": {
+  "returncode": 0
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_terminal_causal_depth_controller_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 9,
+ "result_sha256": "58af8d2b71351ae7be614539892e03c727ccfa770b8529a130e2bdd07d52e255",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/tool_discovery_acceptance_promotion_integrator_v1.py.auto.v1",
+ "elapsed_ms": 31.666,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/tool_discovery_acceptance_promotion_integrator_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/tool_discovery_acceptance_promotion_integrator_v1.py",
+ "module_sha256": "b61c934432dfb2990ea3e02e319e90a0b49b79c9f759d9b7f9295e922934437a",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__TOOL_DISCOVERY_ONLY_ACCEPTANCE_DELTA_11_TO_12_ATOMIC__4_TO_5_FAMILIES__ZERO_REALITY"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_tool_discovery_acceptance_promotion_integrator_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 17,
+ "result_sha256": "413d00c8b467bb0c65608a173dbbb21c7dff7f931b593f93818829a5e0f4b8e1",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
