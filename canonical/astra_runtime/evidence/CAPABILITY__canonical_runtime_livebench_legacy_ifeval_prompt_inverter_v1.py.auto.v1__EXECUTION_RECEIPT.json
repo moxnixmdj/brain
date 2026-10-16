@@ -1,0 +1,24 @@
+{
+ "capability_id": "canonical/runtime/livebench_legacy_ifeval_prompt_inverter_v1.py.auto.v1",
+ "elapsed_ms": 0.822,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/livebench_legacy_ifeval_prompt_inverter_v1.py",
+ "module_sha256": "a94d0ba049f46cb5830c0b35813855a5559905e0abc162ff4ddfd65382b7539b",
+ "observed": {},
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy_ifeval_prompt_inverter_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 5,
+ "result_sha256": "76f30df1e98b7d0b71bec0be4525ec33a4f05bed673bbc669e6e4a6620eb472b",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

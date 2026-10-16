@@ -1,0 +1,32 @@
+{
+ "capability_id": "canonical/experiments/run_command_manpage_semantics_diagnostic_001.py.auto.v1",
+ "elapsed_ms": 240.16,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/experiments/run_command_manpage_semantics_diagnostic_001.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/experiments/run_command_manpage_semantics_diagnostic_001.py",
+ "module_sha256": "df086adcaabea1c0017c941dae50dc5532140a2910eebf04257a923199014311",
+ "observed": {
+  "returncode": 0
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_experiments_run_command_manpage_semantics_diagnostic_001.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 15,
+ "result_sha256": "32b5abc5160e2015bd6257776dae1545f180530600f6dcab2d1a0395c65e069e",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

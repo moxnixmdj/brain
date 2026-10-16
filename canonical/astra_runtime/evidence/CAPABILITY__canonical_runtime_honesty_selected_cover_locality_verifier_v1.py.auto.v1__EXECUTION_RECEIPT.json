@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/honesty_selected_cover_locality_verifier_v1.py.auto.v1",
+ "elapsed_ms": 61.856,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/honesty_selected_cover_locality_verifier_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/honesty_selected_cover_locality_verifier_v1.py",
+ "module_sha256": "fb5650a77b6add5f5779f267c2d619c9337fd8ebc03c18b2d80a798ee5a7b6b8",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__GLOBAL_HONESTY_ENTRY_DOMINANCE_STRONGER_THAN_NECESSARY__SELECTED_CAUSAL_CLOSURE_HONESTY_REQUIRED__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_honesty_selected_cover_locality_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 7,
+ "result_sha256": "8d6b8ba8b4e3b71404dc8ec7b090fee827cde9b26ed648dd5eaa5c10a29b2ab8",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

@@ -1,0 +1,32 @@
+{
+ "capability_id": "canonical/runtime/bytes_hblind_active_query_task_generator_v1.py.auto.v1",
+ "elapsed_ms": 123.327,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/bytes_hblind_active_query_task_generator_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bytes_hblind_active_query_task_generator_v1.py",
+ "module_sha256": "9529523526652f3d9af1102a507049cba9c262a10f42bee95b8204a31397b013",
+ "observed": {
+  "returncode": 0
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_hblind_active_query_task_generator_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 7,
+ "result_sha256": "4078204a42ed155fd14568897f4f0ae4075eb62111df9c3952bfe2abe67c0a4c",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

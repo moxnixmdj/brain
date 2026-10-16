@@ -1,10 +1,94 @@
 from __future__ import annotations
 
 import json
+import pathlib
+import tempfile
 import unittest
 from unittest.mock import patch
 
+from canonical.runtime import capability_receipt_lane_v1 as lane
+
+from canonical.runtime import live_integrated_brain_v1 as lib
 from canonical.runtime.live_integrated_brain_v1 import ROOT, run, run_raw_goal
+
+
+class InventoryStatusIsNotEvidenceTests(unittest.TestCase):
+    """A writable status string must never admit a capability.
+
+    SESSION_E0A256F8: the extended inventory could be mass-flipped to
+    `VERIFIED_BOUND_CAPABILITY` and this loader admitted every flip (67 -> 567) with no
+    execution evidence. Admission from inventory now requires a producer receipt plus an
+    independent OIDC-attested reproduction, so the flip is inert.
+    """
+
+    def _root(self, tmp, flipped=True):
+        root = pathlib.Path(tmp)
+        (root / "canonical/runtime").mkdir(parents=True, exist_ok=True)
+        (root / "canonical/astra_runtime/evidence").mkdir(parents=True, exist_ok=True)
+        (root / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json").write_text(json.dumps({
+            "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1",
+            "capabilities": {"honest.bound.capability": {
+                "status": "VERIFIED_BOUND_CAPABILITY", "incremental_spend_usd": 0,
+                "provides": ["honest.effect"]}},
+        }), encoding="utf-8")
+        entry = {"status": "VERIFIED_BOUND_CAPABILITY",
+                 "incremental_spend_usd": 0,
+                 "verification": {"verified": True},
+                 "provides": ["flipped.effect"]}
+        if not flipped:
+            entry["status"] = "INVENTORY_ONLY"
+        (root / "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json").write_text(
+            json.dumps({"schema": "PROJECT_BRAIN_AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1",
+                        "capabilities": {"flipped.capability": entry}}), encoding="utf-8")
+        return root
+
+    def test_a_flipped_status_with_no_receipt_is_not_admitted(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._root(tmp)
+            reg = pathlib.Path(root) / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+            with patch.object(lib, "ROOT", pathlib.Path(root)), \
+                 patch.object(lib, "REGISTRY", reg), \
+                 patch.object(lib, "PROJECTION", pathlib.Path(root) / "no_projection.json"):
+                lib._REGISTRY_CACHE.clear()
+                admitted = lib.load_verified_registry()
+        self.assertIn("honest.bound.capability", admitted)
+        self.assertNotIn("flipped.capability", admitted,
+                         "a status string admitted a capability with no execution evidence")
+
+    def test_inventory_entry_with_a_real_receipt_still_admits(self):
+        """The gate must not over-correct: genuine evidence still admits."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            (root / "canonical/runtime/bound_capabilities").mkdir(parents=True, exist_ok=True)
+            (root / "canonical/astra_runtime/evidence").mkdir(parents=True, exist_ok=True)
+            (root / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json").write_text(json.dumps({
+                "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1",
+                "capabilities": {"honest.bound.capability": {
+                    "status": "VERIFIED_BOUND_CAPABILITY", "incremental_spend_usd": 0}}},
+                ), encoding="utf-8")
+            module = root / "canonical/runtime/bound_capabilities/flip_probe_v1.py"
+            module.write_text("def run(args, root):\n    return {'status': 'OK'}\n", encoding="utf-8")
+            rel = "canonical/runtime/bound_capabilities/flip_probe_v1.py"
+            receipt = lane.execute_and_receipt("flip.probe.v1", rel, "run", str(root), "producer")
+            receipt_path = lane.receipt_path_for("flip.probe.v1")
+            (root / receipt_path).write_text(json.dumps(receipt), encoding="utf-8")
+            lane.verify_producer_receipts(str(root), "runner", {
+                "github_run_id": 5,
+                "oidc_claims": {"iss": lane.GITHUB_OIDC_ISSUER, "repository": "o/r", "run_id": "5"}})
+            entry = {"status": "INVENTORY_ONLY", "incremental_spend_usd": 0,
+                     "verification": {"receipt_path": receipt_path},
+                     "source": {"path": rel}}
+            (root / "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json").write_text(
+                json.dumps({"schema": "PROJECT_BRAIN_AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1",
+                            "capabilities": {"receipt.backed.inventory": entry}}), encoding="utf-8")
+            reg = root / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+            with patch.object(lib, "ROOT", root), \
+                 patch.object(lib, "REGISTRY", reg), \
+                 patch.object(lib, "PROJECTION", root / "no_projection.json"):
+                lib._REGISTRY_CACHE.clear()
+                admitted = lib.load_verified_registry()
+            self.assertIn("receipt.backed.inventory", admitted)
+            self.assertTrue(admitted["receipt.backed.inventory"].get("receipt_backed"))
 
 
 class LiveIntegratedBrainV1Tests(unittest.TestCase):

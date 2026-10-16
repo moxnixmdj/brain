@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/unified_trace_policy_generator_v1.py.auto.v1",
+ "elapsed_ms": 33.325,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/unified_trace_policy_generator_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/unified_trace_policy_generator_v1.py",
+ "module_sha256": "763a218ef0145f84a11a3f5d60d815b71103fa1976ac768771ab894b24d2992b",
+ "observed": {
+  "returncode": 0,
+  "status": "PASS__FINITE_MULTIMODAL_BEHAVIORS_ONE_POLICY_INTERFACE"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_unified_trace_policy_generator_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 7,
+ "result_sha256": "e280dc783518d0e1103b884ab8b32f104d6732d75253ab55c561a188813790e5",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/terminal_scope_quarantine_propagation_v1.py.auto.v1",
+ "elapsed_ms": 28.066,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/terminal_scope_quarantine_propagation_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/terminal_scope_quarantine_propagation_v1.py",
+ "module_sha256": "b381a1685e56b5cb179d479006bd94ec43335fd9c5f27ef18ac43671f84b654a",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__P1_WHOLE_SCOPE_QUARANTINE_PROPAGATED__11_UNAFFECTED_FAMILY_PASSES__8_FAMILY_ROWS_QUARANTINED__ZERO_NEW_REALITY"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_terminal_scope_quarantine_propagation_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 15,
+ "result_sha256": "4b5585550050d35a408c63b57a0a3307fea2dc544be0e323f55a0f1d1ce07f0f",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

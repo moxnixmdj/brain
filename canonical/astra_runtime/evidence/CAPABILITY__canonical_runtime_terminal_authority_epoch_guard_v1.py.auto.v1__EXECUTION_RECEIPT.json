@@ -1,0 +1,26 @@
+{
+ "capability_id": "canonical/runtime/terminal_authority_epoch_guard_v1.py.auto.v1",
+ "elapsed_ms": 24.772,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/terminal_authority_epoch_guard_v1.py",
+ "module_sha256": "d54e89f71ab64d9287d6e91d9f173ea104b9b839018df751a10894027959e9a7",
+ "observed": {
+  "status": "STALE_ABORT__SOURCE_AUTHORITY_CHANGED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_terminal_authority_epoch_guard_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 11,
+ "result_sha256": "49aab8814d73989cc4d5f662bc764038261af23d27e0b40d187ce5e64edb0a52",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

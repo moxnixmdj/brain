@@ -395,7 +395,21 @@ def reachability(work: Path) -> dict[str, Any]:
     rows = []
     for cid, entry in sorted(reg.items()):
         if not front.is_plain_goal_routable(entry):
-            rows.append({"capability_id": cid, "state": "BLOCKED_ZERO_INPUT", "goal": None, "detail": "takes no input; never routable from a sentence"})
+            # A capability that takes no input cannot be reached by PROSE (defect 4), but it can
+            # be reached by being NAMED: F15 selects a capability whose id the sentence contains.
+            # Measured before F15: such a sentence was absorbed by a generic candidate that
+            # reported success, so the row is now the truth instead of "never routable".
+            goal = f"run {cid}"
+            try:
+                compiled = front.compile_goal(goal, reg, ROOT)
+            except gc.GoalCompilationFailure as exc:
+                rows.append({"capability_id": cid, "state": "NOT_REACHABLE", "goal": goal, "detail": exc.code + ":" + str(exc.detail)[:120]})
+                continue
+            selected = compiled.get("selected_capability")
+            if selected == cid:
+                rows.append({"capability_id": cid, "state": "REACHED_BY_EXPLICIT_NAME", "goal": goal, "detail": ["F15_EXPLICIT_CAPABILITY_ID_NAMED"]})
+            else:
+                rows.append({"capability_id": cid, "state": "ROUTED_ELSEWHERE", "goal": goal, "detail": str(selected or compiled.get("compiler_mode"))})
             continue
         goal, _fixtures = signature_goal(cid, entry, work)
         try:

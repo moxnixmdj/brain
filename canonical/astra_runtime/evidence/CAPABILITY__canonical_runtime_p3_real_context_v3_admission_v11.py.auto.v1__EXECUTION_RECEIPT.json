@@ -1,0 +1,27 @@
+{
+ "capability_id": "canonical/runtime/p3_real_context_v3_admission_v11.py.auto.v1",
+ "elapsed_ms": 0.582,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/p3_real_context_v3_admission_v11.py",
+ "module_sha256": "ca385c17a63abea38ffd413983ce479df7b3a7b80e4577f2c10afef6f50d12ce",
+ "observed": {
+  "pass": false,
+  "status": "FAIL_CLOSED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v11.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 17,
+ "result_sha256": "805d334e80ad8500ff38be0f4e23946e0e1b06c0844de50cde7c539e56795587",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
