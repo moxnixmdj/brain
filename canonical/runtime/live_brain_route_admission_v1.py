@@ -72,6 +72,7 @@ from canonical.runtime.live_integrated_brain_v1 import (
     load_verified_registry,
 )
 from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
+from canonical.runtime.goal_paraphrase_canonical_v1 import canonicalize as canonicalize_goal
 
 SCHEMA = "PROJECT_BRAIN_LIVE_BRAIN_ROUTE_ADMISSION_V1"
 _PATH_RE = re.compile(r"[A-Za-z0-9_./-]+/[A-Za-z0-9_.-]+")
@@ -764,6 +765,8 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     goal = str((request or {}).get("goal") or "").strip()
     if not task_id or not goal:
         return _fail(task_id, "FAIL_CLOSED", "REQUEST_INVALID", started)
+    raw_goal = goal
+    goal = canonicalize_goal(goal)
     try:
         registry = verified_registry()
         admissible = goal_compiler._platform_admissible_registry(dict(registry))
@@ -797,5 +800,7 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         result["pass"] = False
         result["failure_class"] = "PROMISED_ARTIFACT_MISSING"
         result["promised_artifact_errors"] = missing
+    if goal != raw_goal:
+        result["paraphrase_canonical"] = {"schema": "PROJECT_BRAIN_GOAL_PARAPHRASE_CANONICAL_V1", "raw_goal": raw_goal, "canonical_goal": goal}
     result["elapsed_ns"] = perf_counter_ns() - started
     return result
