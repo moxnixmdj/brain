@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_legacy15_joint_witness_v1.py.auto.v1",
- "elapsed_ms": 3.871,
+ "elapsed_ms": 2.456,
  "independent_run_reference": {
-  "github_run_id": 38930372828,
+  "github_run_id": 38932836836,
   "oidc_claims": {
    "actor": "moxnixmdj",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "arena/120f25af-brain",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/pull/4725/merge",
-   "jti": "16f213d4-b2e2-42ba-86db-029e496f6243",
+   "jti": "9bfc3735-9a57-4d41-b4b8-45dcbd1b3a92",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "38930372828",
+   "run_id": "38932836836",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/pull/4725/merge"
   }
  },
