@@ -25399,6 +25399,82 @@
         "path": "canonical/verification/verify_pinned_image_ocr_surface.py"
       },
       "incremental_spend_usd": null
+    },
+    "brain.module.function.invoke": {
+      "status": "AWAITING_RECEIPT_AND_INDEPENDENT_VERIFICATION",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [],
+      "provides": [
+        "brain.module.function.invoke"
+      ],
+      "result_fields": [
+        "status",
+        "source_path",
+        "function",
+        "tier",
+        "result_type",
+        "output_path",
+        "output_sha256",
+        "differential"
+      ],
+      "keywords": [
+        "invoke",
+        "module",
+        "function",
+        "read-only",
+        "brain module",
+        "call function",
+        "run function"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "brain.module.function.invoke",
+          "source_path": "${input.source_path}",
+          "function": "${input.function}",
+          "json_path": "${input.json_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "status",
+          "value": "MODULE_FUNCTION_INVOKED"
+        }
+      },
+      "adapter_module": "brain_module_invoke_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux"
+      ],
+      "limitations": [
+        "Only the 2,020 modules / 5,218 functions in canonical/runtime/MODULE_INVOCATION_EVIDENCE_V1.json (2,666 TEST_EVIDENCED, 2,552 READ_ONLY_UNTESTED); everything else is refused.",
+        "Result correctness is NOT independently verified per call: TEST_EVIDENCED rests on the module's own passing tests, READ_ONLY_UNTESTED on faithful execution only, and every result says which.",
+        "Read-only: functions that write files, delete, start processes or open sockets are refused at runtime by the child's audit hook.",
+        "The payload must match the function signature; arguments are never guessed.",
+        "This entry's `status` field is decoration: admission is granted only by the independently reproduced receipt, never by this string."
+      ],
+      "source": {
+        "type": "brain_native_deterministic",
+        "modules": [
+          "hashlib",
+          "json",
+          "os",
+          "pathlib",
+          "subprocess",
+          "sys"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/brain_module_invoke_v1.py",
+        "path": "canonical/runtime/bound_capabilities/brain_module_invoke_v1.py",
+        "runner_path": "canonical/runtime/bound_capabilities/brain_module_invoke_runner_v1.py",
+        "evidence_path": "canonical/runtime/MODULE_INVOCATION_EVIDENCE_V1.json",
+        "research_sources": []
+      },
+      "verification": {
+        "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__brain.module.function.invoke__EXECUTION_RECEIPT.json",
+        "independent_verification_path": "canonical/astra_runtime/evidence/CAPABILITY__brain.module.function.invoke__INDEPENDENT_VERIFICATION.json",
+        "note": "Admission requires this receipt to be re-executed by a different identity and stamped with a platform-attested github_run_id; live_integrated_brain_v1._receipt_admits never reads `status`."
+      }
     }
   }
 }

@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/continuity_root3_fixed_entry_verifier_v1.py.auto.v1",
+ "elapsed_ms": 33.196,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/continuity_root3_fixed_entry_verifier_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/continuity_root3_fixed_entry_verifier_v1.py",
+ "module_sha256": "b62134d2720d455ccc7008f99d5db18b34edf64743c152a8da6761717334dc7b",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__FIXED_DEPLOYMENT_ENTRY_NO_DIRECTORY_OR_ROOT_OVERRIDE"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_continuity_root3_fixed_entry_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 9,
+ "result_sha256": "cb1a5e03056890593c8f1b3991c1e5ad9f896632d3d2736ab67335c6954294ad",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

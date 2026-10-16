@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/escape_progress_13_route_manifest_v1.py.auto.v1",
+ "elapsed_ms": 55.914,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/escape_progress_13_route_manifest_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/escape_progress_13_route_manifest_v1.py",
+ "module_sha256": "359a48dae2c4bd5826004ca68d42b6c5938605d8ede373da2f59ce349b4ae73a",
+ "observed": {
+  "pass": false,
+  "returncode": 0,
+  "status": "FAIL_CLOSED__ESCAPE13_ROUTE_MANIFEST_DRIFT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_escape_progress_13_route_manifest_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 10,
+ "result_sha256": "b71a4b1cc86e67e80d83f5dd852738b5de153645a74c858fe31e5db066ea196d",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

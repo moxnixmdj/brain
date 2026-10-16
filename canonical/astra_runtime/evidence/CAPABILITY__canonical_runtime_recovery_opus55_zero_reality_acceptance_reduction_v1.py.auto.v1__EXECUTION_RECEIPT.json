@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/recovery_opus55_zero_reality_acceptance_reduction_v1.py.auto.v1",
+ "elapsed_ms": 31.753,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/recovery_opus55_zero_reality_acceptance_reduction_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/recovery_opus55_zero_reality_acceptance_reduction_v1.py",
+ "module_sha256": "0687f068f8bd6dcd172149a5844cc54da1fff3edad73d31f19c3215a4daf7529",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__RECOVERY_THREE_PREDICATES_ELIGIBLE_BY_SCOPE_COMPLETE_ZERO_REALITY_STRONGER_PROOF"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_recovery_opus55_zero_reality_acceptance_reduction_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 19,
+ "result_sha256": "28464506d2dede0076a10d366871298a18f804045335e3f6d5af03557a4e280b",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

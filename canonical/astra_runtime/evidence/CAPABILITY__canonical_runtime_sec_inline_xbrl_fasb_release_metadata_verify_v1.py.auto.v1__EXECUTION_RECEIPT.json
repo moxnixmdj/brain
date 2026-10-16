@@ -1,0 +1,26 @@
+{
+ "capability_id": "canonical/runtime/sec_inline_xbrl_fasb_release_metadata_verify_v1.py.auto.v1",
+ "elapsed_ms": 0.236,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/sec_inline_xbrl_fasb_release_metadata_verify_v1.py",
+ "module_sha256": "9bc17f22902eb25899210d93cdd7a946a71f8f6477c9ed0e25daa4c2e42a3a6d",
+ "observed": {
+  "status": "FAIL_CLOSED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_sec_inline_xbrl_fasb_release_metadata_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 9,
+ "result_sha256": "d60945eb7b20dd8746ddaddaaf92074e9235126f86f91134e32b5046492d9051",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

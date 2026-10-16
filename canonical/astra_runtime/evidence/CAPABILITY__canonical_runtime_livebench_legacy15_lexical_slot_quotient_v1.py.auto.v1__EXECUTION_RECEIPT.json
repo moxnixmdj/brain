@@ -1,0 +1,26 @@
+{
+ "capability_id": "canonical/runtime/livebench_legacy15_lexical_slot_quotient_v1.py.auto.v1",
+ "elapsed_ms": 3.001,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/livebench_legacy15_lexical_slot_quotient_v1.py",
+ "module_sha256": "d548a89c33c59565bdb104265b1c07feb918090075e4058cd80b361d1acf86d6",
+ "observed": {
+  "status": "PASS__EXACT_192_REACHABLE_LEXICAL_SIGNATURES__RAW_1525_WORD_IDENTITY_ENUMERATION_DELETED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_lexical_slot_quotient_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 21,
+ "result_sha256": "c1af1801226ad76bc57383010dcb9edc52b45bf18f1021db932eb69519afd666",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
