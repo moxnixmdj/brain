@@ -14,7 +14,12 @@ import hashlib
 import json
 from pathlib import Path
 from time import perf_counter_ns
-from typing import Any, Mapping
+from typing import Any
+# isinstance(x, typing.Mapping) routes every check through typing's python-level
+# __instancecheck__ (measured: 6,468 calls, 21 ms of a 39 ms registry load).
+# collections.abc.Mapping is the C-implemented ABC the same objects register with, so
+# the checks stay identical and stop being the dominant cost.
+from collections.abc import Mapping
 
 from canonical.runtime.capability_planner import PlanningFailure, plan_capabilities
 from canonical.runtime import astra_runtime, goal_compiler, goal_front_compiler_v1
@@ -76,8 +81,6 @@ def _receipt_admits(entry: Mapping[str, Any], root: Path) -> bool:
     (2) is why only a real runner can mint admission, and why nothing admitted here is a
     status flip. Deliberately ADDITIVE: it never demotes anything.
     """
-    from canonical.runtime import capability_receipt_lane_v1 as lane
-
     verification = entry.get("verification")
     if not isinstance(verification, Mapping):
         return False
@@ -86,6 +89,10 @@ def _receipt_admits(entry: Mapping[str, Any], root: Path) -> bool:
     module_path = (source or {}).get("path") if isinstance(source, Mapping) else None
     if not isinstance(receipt_path, str) or not isinstance(module_path, str):
         return False
+    # Imported only now: most of the 2,309 extended entries carry no evidence at all and
+    # return above, so they should not pay an import statement each (2,612 imports/load).
+    from canonical.runtime import capability_receipt_lane_v1 as lane
+
     receipt_file, module_file = root / receipt_path, root / module_path
 
     # Cheap gate FIRST.  Independent verification is the rare case; hashing every module on
