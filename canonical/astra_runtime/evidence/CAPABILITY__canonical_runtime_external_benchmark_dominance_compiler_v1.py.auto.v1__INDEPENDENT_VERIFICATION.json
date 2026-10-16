@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/external_benchmark_dominance_compiler_v1.py.auto.v1",
- "elapsed_ms": 31.113,
+ "elapsed_ms": 27.433,
  "independent_run_reference": {
-  "github_run_id": 38970106345,
+  "github_run_id": 38974039178,
   "oidc_claims": {
    "actor": "moxnixmdj",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "arena/120f25af-brain",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/pull/4725/merge",
-   "jti": "6e5731b4-a0a7-42cb-b9c7-a02256b62c6c",
+   "jti": "bdbfc056-058d-4542-832a-63b08d633a15",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "38970106345",
+   "run_id": "38974039178",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/pull/4725/merge"
   }
  },
