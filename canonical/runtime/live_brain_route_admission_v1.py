@@ -729,7 +729,7 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     if not task_id or not goal:
         return _fail(task_id, "FAIL_CLOSED", "REQUEST_INVALID", started)
     try:
-        registry = load_verified_registry()
+        registry = load_verified_registry(include_extended=True)
         admissible = goal_compiler._platform_admissible_registry(dict(registry))
         compiled = front.compile_goal(goal, admissible, ROOT)
     except goal_compiler.GoalCompilationFailure as exc:

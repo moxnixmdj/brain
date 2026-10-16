@@ -1,9 +1,9 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "action_id": "ONE_ENTRY_EXECUTOR_BRIDGE_AND_WAVE_THREE_FRESH_GOAL_FAMILIES_20261015_V1",
   "canonical_generation": "2026-10-10-general-reusable-capability-frontier-v1",
-  "canonical_base_commit": "f416ba3012da499836190ebbf0ce6e70f697871b",
+  "canonical_base_commit": "3dc78c235ce5ecd97814be133c9035666dd485fb",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "active_program": "GENERAL_REUSABLE_CAPABILITY_DEVELOPMENT_PROGRAM_V1",
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -12,10 +12,10 @@
   "governance_change": true,
   "user_authorized_governance_change": true,
   "weakens_existing_guard": false,
-  "causal_blocker": "THE_PINNED_KERNEL_REFUSES_SIX_REGISTRY_SOURCE_TYPES__16_OF_66_BOUND_CAPABILITIES_INCLUDING_EVERY_PYTHON_REPAIR_LOOP_CANNOT_RUN_THROUGH_THE_ONE_ENTRY__AND_50_CAPABILITIES_HAVE_NO_FRESH_GOAL_EXECUTION_ORACLE",
-  "blocker_lease_key": "2026-10-10-general-reusable-capability-frontier-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_PINNED_KERNEL_REFUSES_SIX_REGISTRY_SOURCE_TYPES__16_OF_66_BOUND_CAPABILITIES_INCLUDING_EVERY_PYTHON_REPAIR_LOOP_CANNOT_RUN_THROUGH_THE_ONE_ENTRY__AND_50_CAPABILITIES_HAVE_NO_FRESH_GOAL_EXECUTION_ORACLE",
+  "causal_blocker": "PYTHON_SOURCE_DISCOVERY_IS_NOT_VERIFIED_EXECUTABLE_CAPABILITY",
+  "blocker_lease_key": "2026-10-10-general-reusable-capability-frontier-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::PYTHON_SOURCE_DISCOVERY_IS_NOT_VERIFIED_EXECUTABLE_CAPABILITY",
   "highest_leverage_now": true,
-  "selected_route": "RUN_KERNEL_REFUSED_ADAPTERS_FROM_THE_ONE_ENTRY_WITH_THE_KERNELS_OWN_EXPECTATION_SEMANTICS_E1__PLUS_NINE_FRESH_GOAL_EXECUTION_FAMILIES_WITH_STDLIB_ONLY_ORACLES_MSGPACK_NPM_BSON_SQLITE_VERIFY_YAML_PDF_SYMPY_REPAIR_TEST_GUIDED_REPAIR_STRICT_FAULT_LOCALIZE",
+  "selected_route": "REUSE_CANONICAL_REGISTRY_ADD_NONEXECUTING_INVENTORY_AND_FAIL_CLOSED_OPTIONAL_EXTENDED_LOADER",
   "prior_work_reused": [
     ".github/workflows/true-capability-receipt.yml",
     "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
@@ -25,10 +25,10 @@
     "execution_guard/live_solver_end_to_end_measurement_v1.py",
     "execution_guard/live_solver_families_v2.py"
   ],
-  "falsification_condition": "THE_LOCAL_EXECUTOR_RUNS_AN_ADAPTER_WITH_NONZERO_DECLARED_COST_OR_OUTSIDE_THE_REPOSITORY_OR_PASSES_A_FAILED_EXPECTATION__OR_ANY_FRESH_IN_SCOPE_INSTANCE_FAILS_ON_THE_PUBLIC_RUNNER__OR_ANY_OUT_OF_SCOPE_GOAL_PASSES__OR_A_REPAIR_PATCH_IS_ACCEPTED_WITHOUT_THE_TESTS_PASSING_IN_A_SEPARATE_INTERPRETER",
-  "expected_parent_change": "16_KERNEL_REFUSED_CAPABILITIES_BECOME_EXECUTABLE_THROUGH_THE_ONE_ENTRY__21_IN_SCOPE_FRESH_GOAL_FAMILIES_PLUS_OUT_OF_SCOPE_MEASURED__CODE_REPAIR_AND_FAULT_LOCALIZATION_MEASURED_FOR_THE_FIRST_TIME__ZERO_CREDIT",
-  "expected_parent_frontier_change": "16_KERNEL_REFUSED_CAPABILITIES_BECOME_EXECUTABLE_THROUGH_THE_ONE_ENTRY__21_IN_SCOPE_FRESH_GOAL_FAMILIES_PLUS_OUT_OF_SCOPE_MEASURED__CODE_REPAIR_AND_FAULT_LOCALIZATION_MEASURED_FOR_THE_FIRST_TIME__ZERO_CREDIT",
-  "stop_condition": "THE_ONE_ENTRY_EXECUTES_EVERY_REGISTRY_SOURCE_TYPE_OR_FAILS_CLOSED_WITH_THE_REASON__NINE_NEW_FAMILIES_RUN_50_OF_50_WHERE_THE_MACHINE_ALLOWS__THE_PUBLIC_RUNNER_HEARTBEAT_SAYS_ALIVE__UNIT_TESTS_PASS__REFEREE_ZERO_VIOLATIONS",
+  "falsification_condition": "UNVERIFIED_OR_UNKNOWN_COST_EXTENDED_ENTRY_IS_ADMITTED_OR_CANONICAL_ENTRY_IS_OVERRIDDEN",
+  "expected_parent_change": "UNVERIFIED_SOURCE_INVENTORY_SEPARATED_FROM_EXECUTABLE_REGISTRY__NO_NEW_VERIFIED_CAPABILITY_OR_DAG_RUNTIME_CLAIM",
+  "expected_parent_frontier_change": "UNVERIFIED_SOURCE_INVENTORY_SEPARATED_FROM_EXECUTABLE_REGISTRY__NO_NEW_VERIFIED_CAPABILITY_OR_DAG_RUNTIME_CLAIM",
+  "stop_condition": "FOCUSED_TESTS_AND_LOCAL_GUARDS_RUN_WITH_ACTUAL_FAILURES_REPORTED_IN_PR",
   "load_bearing_primary": {
     "open_obligation_ids": [],
     "constructive_gap_for_open_obligation_ids": [
@@ -59,14 +59,12 @@
     "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
     "progress_class": "GOVERNANCE_GUARD_NO_PROGRESS_CLAIM",
     "progress_evidence_paths": [
-      "canonical/runtime/live_brain_route_admission_v1.py",
-      "execution_guard/live_solver_families_v3.py",
-      "execution_guard/live_solver_end_to_end_measurement_v1.py",
-      "canonical/tests/test_live_solver_families_v3.py",
-      "canonical/capabilities/true/LIVE_SOLVER_END_TO_END_MEASUREMENT_20261015_V4.json"
+      "canonical/runtime/autonomous_capability_inventory_v1.py",
+      "canonical/runtime/live_integrated_brain_v1.py",
+      "canonical/tests/test_extended_capability_registry_v1.py"
     ],
     "route_class": "INTEGRATE",
-    "earlier_routes_exhausted_reason": "DELETE_BYPASS_REUSE_ADAPT_SUBSTITUTE_COMPOSE_CONFIGURE_CANNOT_MAKE_THE_PINNED_KERNEL_ACCEPT_A_SOURCE_TYPE_IT_REFUSES__THE_ENTRY_INTEGRATES_THE_EXISTING_ADAPTERS_DIRECTLY_WITH_THE_KERNELS_OWN_SEMANTICS",
+    "earlier_routes_exhausted_reason": "REUSE_EXISTING_REGISTRY_LOADER_AND_ADD_OPTIONAL_VALIDATED_MERGE_WITHOUT_AUTOMATIC_EXECUTION",
     "producer_cognition_model_dependency_count": 0,
     "incremental_spend_usd": 0,
     "conversation_memory_is_authority": false,
@@ -131,8 +129,8 @@
   },
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-10-10-general-reusable-capability-frontier-v1",
-    "canonical_base_commit": "f416ba3012da499836190ebbf0ce6e70f697871b",
-    "real_outcome": "EVERY_BOUND_CAPABILITY_IS_EXECUTABLE_THROUGH_ONE_ENTRY_AND_MEASURED_ON_FRESH_GOALS_BY_INDEPENDENT_CHECKERS",
+    "canonical_base_commit": "3dc78c235ce5ecd97814be133c9035666dd485fb",
+    "real_outcome": "UNVERIFIED_SOURCE_INVENTORY_SEPARATED_FROM_EXECUTABLE_REGISTRY__NO_NEW_VERIFIED_CAPABILITY_OR_DAG_RUNTIME_CLAIM",
     "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
     "obs_goal": {
       "real_outcome": "THE_BRAIN_NEVER_SAYS_DONE_WHEN_IT_DID_NOTHING",
@@ -177,11 +175,10 @@
         "INTEGRATE"
       ],
       "routes_ranked": [
-        "GUARD_MODULE_PLUS_FRESH_GOAL_HARNESS",
-        "EDIT_goal_compiler_py__REJECTED_BYTE_PINNED_IN_74_RECORDS",
-        "EDIT_live_integrated_brain_v1_py__REJECTED_BYTE_PINNED"
+        "REUSE_LOADER_WITH_VALIDATED_OPTIONAL_MERGE",
+        "BLIND_AUTOMATIC_VERIFICATION_REJECTED"
       ],
-      "losing_routes_reason": "PINNED_FILES_CANNOT_CHANGE_WITHOUT_AN_OWNER_REPIN_DECISION",
+      "losing_routes_reason": "DISCOVERY_DOES_NOT_ESTABLISH_VERIFICATION",
       "implementation_still_necessary": true
     },
     "obs_verification": {
@@ -202,7 +199,7 @@
       "analysis_steps_deleted_or_cached": [
         "NONE"
       ],
-      "search_stop_decision": "LOCAL_50_PER_FAMILY_RUN_ALIVE__95_UNIT_TESTS_PASS__REFEREE_STATIC_ZERO__RUNNER_HEARTBEAT_GREEN_BEFORE_MERGE",
+      "search_stop_decision": "RUN_FOCUSED_TESTS_AND_GUARDS_REPORT_ACTUAL_RESULTS",
       "affected_layers_only_on_revalidation": true
     },
     "routes_considered": [
@@ -214,10 +211,10 @@
     "deleted_or_bypassed_paths": [
       "TRUSTING_output_verified_AS_SUCCESS"
     ],
-    "selected_surviving_route": "RUN_KERNEL_REFUSED_ADAPTERS_FROM_THE_ONE_ENTRY_WITH_THE_KERNELS_OWN_EXPECTATION_SEMANTICS_E1__PLUS_NINE_FRESH_GOAL_EXECUTION_FAMILIES_WITH_STDLIB_ONLY_ORACLES_MSGPACK_NPM_BSON_SQLITE_VERIFY_YAML_PDF_SYMPY_REPAIR_TEST_GUIDED_REPAIR_STRICT_FAULT_LOCALIZE",
+    "selected_surviving_route": "REUSE_CANONICAL_REGISTRY_ADD_NONEXECUTING_INVENTORY_AND_FAIL_CLOSED_OPTIONAL_EXTENDED_LOADER",
     "why_selected_route_is_fastest_sufficient": "ONE_FUNCTION_IN_THE_ENTRY_MIRRORS_THE_KERNEL_DISPATCH_FOR_LOCAL_STDLIB_ADAPTERS__NO_PINNED_BYTE_CHANGES__EVERY_FAMILY_IS_JUDGED_BY_AN_INDEPENDENT_STDLIB_CHECKER_ON_FRESH_GOALS",
-    "expected_parent_level_state_change": "16_KERNEL_REFUSED_CAPABILITIES_BECOME_EXECUTABLE_THROUGH_THE_ONE_ENTRY__21_IN_SCOPE_FRESH_GOAL_FAMILIES_PLUS_OUT_OF_SCOPE_MEASURED__CODE_REPAIR_AND_FAULT_LOCALIZATION_MEASURED_FOR_THE_FIRST_TIME__ZERO_CREDIT",
-    "stop_condition": "THE_ONE_ENTRY_EXECUTES_EVERY_REGISTRY_SOURCE_TYPE_OR_FAILS_CLOSED_WITH_THE_REASON__NINE_NEW_FAMILIES_RUN_50_OF_50_WHERE_THE_MACHINE_ALLOWS__THE_PUBLIC_RUNNER_HEARTBEAT_SAYS_ALIVE__UNIT_TESTS_PASS__REFEREE_ZERO_VIOLATIONS",
+    "expected_parent_level_state_change": "UNVERIFIED_SOURCE_INVENTORY_SEPARATED_FROM_EXECUTABLE_REGISTRY__NO_NEW_VERIFIED_CAPABILITY_OR_DAG_RUNTIME_CLAIM",
+    "stop_condition": "FOCUSED_TESTS_AND_LOCAL_GUARDS_RUN_WITH_ACTUAL_FAILURES_REPORTED_IN_PR",
     "route_frontier": {
       "discovery_required": false,
       "not_applicable_reason": "GOVERNANCE_GUARD_AND_MEASUREMENT__NO_CAPABILITY_ROUTE_IS_CLAIMED"
@@ -228,5 +225,5 @@
   "incremental_spend_usd": 0,
   "capability_credit_delta": 0,
   "terminal_credit_delta": 0,
-  "explicit_user_authorization": "Owner 2026-10-15: 'make sure that literally all the capabilities function as one alive creature. It must be all the capabilities', 'never waste time. Take the fastest right route with the minimal actions but it must be the right actions', then '.' (keep going) after #4708 was disclosed."
+  "explicit_user_authorization": "Owner requested corrected unverified extended inventory and dual-registry loader, canonical registry unchanged, local guards and PR."
 }

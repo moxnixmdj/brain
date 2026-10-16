@@ -46,7 +46,7 @@ def _tokens(value: Any, label: str, *, allow_empty: bool = True) -> list[str]:
     return out
 
 
-def load_verified_registry() -> dict[str, Mapping[str, Any]]:
+def load_verified_registry(include_extended: bool = True) -> dict[str, Mapping[str, Any]]:
     doc = json.loads(REGISTRY.read_text(encoding="utf-8"))
     if doc.get("schema") != "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1":
         raise LiveBrainError("BOUND_CAPABILITY_REGISTRY_SCHEMA_INVALID")
@@ -62,6 +62,30 @@ def load_verified_registry() -> dict[str, Mapping[str, Any]]:
         if float(entry.get("incremental_spend_usd", 0)) != 0:
             continue
         out[cid] = entry
+    # Canonical entries win collisions. Inventory alone is never executable.
+    ext_path = REGISTRY.parent / "AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json"
+    if include_extended and ext_path.is_file():
+        try:
+            ext_doc = json.loads(ext_path.read_text(encoding="utf-8"))
+            if not isinstance(ext_doc, dict) or ext_doc.get("schema") != "PROJECT_BRAIN_AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1":
+                raise ValueError("extended registry schema")
+            extended = ext_doc.get("capabilities")
+            if not isinstance(extended, dict):
+                raise ValueError("extended capabilities must be an object")
+            for cid, entry in extended.items():
+                if not isinstance(cid, str) or not cid or not isinstance(entry, dict):
+                    raise ValueError("invalid extended entry")
+                if cid in out or entry.get("status") != "VERIFIED_BOUND_CAPABILITY":
+                    continue
+                verification = entry.get("verification")
+                if not isinstance(verification, dict) or verification.get("verified") is not True:
+                    continue
+                spend = entry.get("incremental_spend_usd")
+                if isinstance(spend, bool) or not isinstance(spend, (int, float)) or spend != 0:
+                    continue
+                out[cid] = entry
+        except (OSError, ValueError, TypeError) as exc:
+            raise LiveBrainError("EXTENDED_CAPABILITY_REGISTRY_INVALID") from exc
     if not out:
         raise LiveBrainError("NO_VERIFIED_ZERO_SPEND_CAPABILITIES")
     return out
