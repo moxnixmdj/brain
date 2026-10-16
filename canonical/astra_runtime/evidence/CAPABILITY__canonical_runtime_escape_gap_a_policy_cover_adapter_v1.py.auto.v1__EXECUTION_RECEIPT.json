@@ -1,0 +1,27 @@
+{
+ "capability_id": "canonical/runtime/escape_gap_a_policy_cover_adapter_v1.py.auto.v1",
+ "elapsed_ms": 1.614,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/escape_gap_a_policy_cover_adapter_v1.py",
+ "module_sha256": "67418350dd1f9ba85d27ee43da892a4d24262d336a9cdbff9587ed4a4cdada7e",
+ "observed": {
+  "pass": false,
+  "status": "FAIL_CLOSED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_escape_gap_a_policy_cover_adapter_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 11,
+ "result_sha256": "760159bf4b205fc0853fe48f8ac8efb3268d336d3d1d3f8127d19b5d22724f98",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

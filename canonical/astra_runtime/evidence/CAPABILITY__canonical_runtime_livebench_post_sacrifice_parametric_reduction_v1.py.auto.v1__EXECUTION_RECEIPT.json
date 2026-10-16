@@ -1,0 +1,26 @@
+{
+ "capability_id": "canonical/runtime/livebench_post_sacrifice_parametric_reduction_v1.py.auto.v1",
+ "elapsed_ms": 17.923,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/livebench_post_sacrifice_parametric_reduction_v1.py",
+ "module_sha256": "057dd32bbbe1ecebff78107717eb0c3e8748fe1488c9e3b7f37d3a574cd4fbd8",
+ "observed": {
+  "status": "PASS__NON_SENTENCE_POST_SACRIFICE_CONSTRUCTION_REDUCED_PARAMETRICALLY__ONLY_PINNED_PUNKT_CONTEXT_REMAINS"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_post_sacrifice_parametric_reduction_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 21,
+ "result_sha256": "336a4e9e91683bf540f3457f97f38085ba9b54da623142728a0f4fa62e4c0405",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

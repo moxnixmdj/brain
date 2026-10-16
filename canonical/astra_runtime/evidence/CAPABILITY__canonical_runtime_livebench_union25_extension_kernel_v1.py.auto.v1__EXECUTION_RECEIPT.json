@@ -1,0 +1,26 @@
+{
+ "capability_id": "canonical/runtime/livebench_union25_extension_kernel_v1.py.auto.v1",
+ "elapsed_ms": 234.53,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/livebench_union25_extension_kernel_v1.py",
+ "module_sha256": "90e1f8245bb64cf47e0e44f42cd903e5bd72f56471f20a56d0fd5636b0ed62cb",
+ "observed": {
+  "status": "PASS__UNION25_DELTA156_PROJECTS_TO_20_HARD_EXTENSION_SIGNATURES_WIDTH_LE_3"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_extension_kernel_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 17,
+ "result_sha256": "4cc286a06238b30289d4499b2354cfedabdf3cf0297b58c16b2a760436c05044",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
