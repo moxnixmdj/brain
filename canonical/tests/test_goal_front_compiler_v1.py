@@ -606,6 +606,18 @@ def _zero_input_cid() -> str:
     return next(c for c, e in sorted(_registry().items()) if not front.is_plain_goal_routable(e))
 
 
+def _path_shaped_zero_input_cid() -> str:
+    """For the F16 demonstration, deliberately a PATH-shaped id.
+
+    The defect shown below is the pinned compiler binding an id token as `output_path`, which
+    it only does for a token that looks like a path; with a bare-token id it refuses for a
+    different reason and the demonstration would be measuring the wrong thing.  Sorted-first
+    is not a shape, so the shape is asked for explicitly.
+    """
+    return next(c for c, e in sorted(_registry().items())
+                if not front.is_plain_goal_routable(e) and c.endswith(".py.auto.v1"))
+
+
 def _input_bearing_cid() -> str:
     return next(c for c, e in sorted(_registry().items()) if front.is_plain_goal_routable(e))
 
@@ -680,7 +692,7 @@ def test_f16_an_id_shaped_path_that_no_capability_answers_to_fails_closed():
     success and a fabricated artifact.  Measured on the real registry: 224 of 294 goals that
     named a real capability "succeeded" that way."""
     reg = _registry()
-    cid = _zero_input_cid()
+    cid = _path_shaped_zero_input_cid()
     ghost = cid.rsplit(".py.auto.v1", 1)[0] + "_renamed.py.auto.v1"
     goal = f"run {ghost}"
     pinned = gc.compile_goal(goal, front.routable_registry(reg), ROOT)

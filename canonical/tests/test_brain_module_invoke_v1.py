@@ -48,6 +48,11 @@ def _projection() -> dict:
     return json.loads((ROOT / "canonical/runtime/CAPABILITY_RECEIPT_PROJECTION_V1.json").read_text(encoding="utf-8"))
 
 
+def tearDownModule() -> None:
+    """A test run must not leave probe files behind for the next one to trip over."""
+    shutil.rmtree(SCRATCH, ignore_errors=True)
+
+
 class EvidenceTests(unittest.TestCase):
     def test_check_mode_finds_no_drift(self):
         self.assertEqual(evidence.check(), [])

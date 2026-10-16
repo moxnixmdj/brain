@@ -25471,9 +25471,10 @@
         "research_sources": []
       },
       "verification": {
-        "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__brain.module.function.invoke__EXECUTION_RECEIPT.json",
+        "verified": false,
+        "evidence_receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__brain.module.function.invoke__EXECUTION_RECEIPT.json",
         "independent_verification_path": "canonical/astra_runtime/evidence/CAPABILITY__brain.module.function.invoke__INDEPENDENT_VERIFICATION.json",
-        "note": "Admission requires this receipt to be re-executed by a different identity and stamped with a platform-attested github_run_id; live_integrated_brain_v1._receipt_admits never reads `status`."
+        "note": "DECLARATION ONLY, deliberately non-executable: live_integrated_brain_v1._receipt_admits reads verification.receipt_path, and a declaration must never be the thing that admits a capability. The executable entry is the one the receipt lane DERIVED into canonical/runtime/CAPABILITY_RECEIPT_PROJECTION_V1.json from the receipt named above; admission is granted by that evidence plus an independent OIDC-attested reproduction, never by this block and never by `status`."
       }
     }
   }

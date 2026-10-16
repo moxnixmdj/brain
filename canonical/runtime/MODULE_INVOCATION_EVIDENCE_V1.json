@@ -110,7 +110,7 @@
   "canonical/verification/p3_policy_influence_v10_compositional_replay_v1.py": "SystemExit:1",
   "canonical/verification/run_scoped_self_verification_guard_v1.py": "ModuleNotFoundError:No module named 'v22_prewrite_admission'"
  },
- "junit_cases": 11603,
+ "junit_cases": 11621,
  "measured_platform": "linux",
  "measured_python": "3.11",
  "modules": {
@@ -9212,6 +9212,155 @@
    "tests": {
     "canonical/tests/test_blind_threshold_receipt_v1.py": "778458fdd8e60ec3ce105db959a492ae41ffd876aba7bbdcba63cbef4134a043"
    }
+  },
+  "canonical/runtime/bound_capabilities/brain_module_invoke_v1.py": {
+   "doc": "Invoke one test-evidenced function of an existing Brain module, read-only, from a sentence.",
+   "functions": {
+    "admitted": {
+     "doc": "{\"module\": row, \"function\": fn_row} after re-checking every pin, or raise.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "root",
+       "source_rel",
+       "function",
+       "evidence"
+      ],
+      "required": [
+       "root",
+       "source_rel",
+       "function"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "invoke": {
+     "doc": "Run the admitted function in the guarded child process and return its JSON result.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "root",
+       "source_rel",
+       "function",
+       "payload"
+      ],
+      "required": [
+       "root",
+       "source_rel",
+       "function",
+       "payload"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "load_evidence": {
+     "doc": "",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "root"
+      ],
+      "required": [
+       "root"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "probe_import": {
+     "doc": "Import the module under the read-only guard; return its public functions or raise.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "root",
+       "source_rel"
+      ],
+      "required": [
+       "root",
+       "source_rel"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "run": {
+     "doc": "",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "args",
+       "root"
+      ],
+      "required": [
+       "args",
+       "root"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "select_self_test": {
+     "doc": "The first TEST_EVIDENCED function (sorted) that requires no argument.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "root",
+       "evidence"
+      ],
+      "required": [
+       "root"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "self_test": {
+     "doc": "The zero-input form: exercise the whole path once and let it prove itself.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "root",
+       "max_attempts"
+      ],
+      "required": [
+       "root"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
+    "write_record": {
+     "doc": "",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "root",
+       "output",
+       "source_rel",
+       "function",
+       "adm",
+       "payload_path",
+       "result",
+       "extra"
+      ],
+      "required": [
+       "root",
+       "output",
+       "source_rel",
+       "function",
+       "adm",
+       "payload_path",
+       "result"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    }
+   },
+   "sha256": "366bd7e909fa2eecb611fd1ad0119c3e6ec9f01d0103fdde997d78068e63da1d",
+   "tests": {}
   },
   "canonical/runtime/bound_capability_execution_verifier_v1.py": {
    "doc": "Deterministic verifier for concrete capability-plan execution traces.",
@@ -38514,9 +38663,9 @@
      "tier": "READ_ONLY_UNTESTED"
     }
    },
-   "sha256": "fd02b4361c4c9e3e1775edc407ae27a15b1ca423ab7117e0e4259507110bc220",
+   "sha256": "091e2a53a9b7fb5932f90b3a5b6e8544ff8d904dc2f7d6384e55f9af9a444b67",
    "tests": {
-    "canonical/tests/test_goal_front_compiler_v1.py": "beb0c5b787a144d7ca25e917d379594b4cf88be698d0eb51430264cb617872d6"
+    "canonical/tests/test_goal_front_compiler_v1.py": "04ce39b69af5db9c54aba39e09ff2ce019679aa06f66e9439b13aac7f5f6d230"
    }
   },
   "canonical/runtime/goal_to_decision_binding_authority_v1.py": {
@@ -46336,7 +46485,7 @@
    "sha256": "9b276d974c9120ea3fc3c1a64ca0e9daa90562f6388f69889b5a39d52ce213ef",
    "tests": {
     "canonical/tests/test_capability_dag_live_wiring_v1.py": "d02b0f52db77cf97761e9c036d4d5548279fe976b14d36f041b880d294172ffd",
-    "canonical/tests/test_goal_front_compiler_v1.py": "beb0c5b787a144d7ca25e917d379594b4cf88be698d0eb51430264cb617872d6",
+    "canonical/tests/test_goal_front_compiler_v1.py": "04ce39b69af5db9c54aba39e09ff2ce019679aa06f66e9439b13aac7f5f6d230",
     "canonical/tests/test_live_brain_route_admission_v1.py": "bb3dda4cf8924e3bc579878244566c2f030d8d2cea8ac2482749e9d24cc37112",
     "canonical/tests/test_live_solver_families_v3.py": "5bf31fe656407e675b74329360f5e687f92df10d432dbf43ef0419bfc8b8e3a4",
     "canonical/tests/test_verified_bound_capability_execution_adapter_v1.py": "369cc2b500ec8ecc5024ab40d39c3c372daafaac686672f708c6c7ae08b2b24c"
@@ -97177,13 +97326,13 @@
  "schema": "PROJECT_BRAIN_MODULE_INVOCATION_EVIDENCE_V1",
  "summary": {
   "functions_by_tier": {
-   "READ_ONLY_UNTESTED": 2552,
+   "READ_ONLY_UNTESTED": 2560,
    "REFUSED_FAILING_TEST_CASE": 174,
    "TEST_EVIDENCED": 2666
   },
-  "inventory_modules": 2309,
-  "invocable_functions": 5218,
-  "invocable_modules": 2020,
+  "inventory_modules": 2310,
+  "invocable_functions": 5226,
+  "invocable_modules": 2021,
   "modules_excluded": {
    "IMPORT_FAILED": 89,
    "IMPORT_REFUSED_BY_READ_ONLY_GUARD": 11,

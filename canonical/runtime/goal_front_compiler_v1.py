@@ -902,12 +902,20 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
     # F16: an id-shaped token is an identity.  A registered one inside a longer request is a
     # composition this layer does not claim; an unregistered one is not a capability at all
     # and must not become an artifact some other capability can "satisfy" by writing a file.
+    #
+    # Identity is derived from the registry, not from a spelling: the shape regex below only
+    # knows the `*.py.auto.v1` inventory ids, so a registered capability named any other way
+    # (e.g. `brain.module.function.invoke`) used to fall through this rule and reach the
+    # ranker, which answers GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH for a compound
+    # request that names a real capability.  `named` is already computed above and is by
+    # construction a subset of the registry, so this adds identity without adding a lookup.
     shaped = capability_id_shaped_tokens(text)
-    if shaped:
-        unknown = [t for t in shaped if t not in admissible]
+    identities = sorted(set(shaped) | set(named))
+    if identities:
+        unknown = [t for t in identities if t not in admissible]
         if unknown:
             raise GoalCompilationFailure("GOAL_NAMES_UNKNOWN_CAPABILITY", ",".join(unknown[:3]))
-        raise GoalCompilationFailure("GOAL_NAMES_CAPABILITY_IN_COMPOUND_REQUEST", ",".join(shaped[:3]))
+        raise GoalCompilationFailure("GOAL_NAMES_CAPABILITY_IN_COMPOUND_REQUEST", ",".join(identities[:3]))
 
     registry = routable_registry(admissible)
     if len(registry) != len(admissible):
