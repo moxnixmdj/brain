@@ -479,6 +479,15 @@ def ranked_candidates(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> l
             continue
         if not isinstance(entry.get("action_template"), dict):
             continue
+        sentinel = str((entry.get("action_template").get("args") or {}).get("capability_id") or "")
+        if sentinel == "${input.capability_id}" and not _after_key(goal, "capability_id"):
+            # F14: a template carrying the capability_id routing sentinel is a candidate
+            # only when the sentence explicitly states that key.  The sentinel lets
+            # intake-verified modules become plain-goal routable without their generic
+            # stem tokens hijacking unrelated sentences: an unstated sentinel can never
+            # bind, so ranking it would only convert a clean
+            # GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH into a binding error.
+            continue
         scored_text = prose
         surface_ok, surface_evidence = gc._execution_surface_constraint_match(goal, entry)
         if not surface_ok:
