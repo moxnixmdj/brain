@@ -72,6 +72,19 @@ jobs:
           print(f"reproduced {report['reproduced']}/{report['producer_receipts']}")
           PY
 
+      - name: Publish the verification records as an artifact
+        # Always runs. `land_on_main.sh` needs the Brain Automation app
+        # (AUTOMATION_APP_ID / AUTOMATION_APP_PRIVATE_KEY); every workflow in this repo
+        # that calls it is currently failing, so independence must not depend on that one
+        # link. The artifact is the runner's own output, produced under a real
+        # `github_run_id`, and can be committed in one pass if automatic landing is down.
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: capability-independent-verification
+          path: canonical/astra_runtime/evidence/CAPABILITY__*__INDEPENDENT_VERIFICATION.json
+          if-no-files-found: warn
+
       - name: Land the verification records
         shell: bash
         run: |
