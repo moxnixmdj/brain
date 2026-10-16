@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/external_benchmark_dominance_compiler_v1.py.auto.v1",
+ "elapsed_ms": 43.362,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/external_benchmark_dominance_compiler_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/external_benchmark_dominance_compiler_v1.py",
+ "module_sha256": "77b9d6d7fb43febeb76348999ab3b12ba8e1e8ff8326243fa56b5f0b15d15588",
+ "observed": {
+  "pass": false,
+  "returncode": 0,
+  "status": "FAIL_CLOSED__SOURCE_BLOB_DRIFT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_external_benchmark_dominance_compiler_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 4,
+ "result_sha256": "b80adc3f2e5ed44b8b1962d38c88531b24970f17596a9a2f08d5135da3e6ba91",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

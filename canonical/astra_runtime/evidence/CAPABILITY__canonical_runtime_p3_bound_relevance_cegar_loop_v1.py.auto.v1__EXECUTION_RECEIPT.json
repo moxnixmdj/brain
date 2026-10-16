@@ -1,0 +1,27 @@
+{
+ "capability_id": "canonical/runtime/p3_bound_relevance_cegar_loop_v1.py.auto.v1",
+ "elapsed_ms": 21.762,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/p3_bound_relevance_cegar_loop_v1.py",
+ "module_sha256": "8df8b005c4d1c38b1867da554d80315de9c68b5d2c8fb9fa8e17eacb9099644a",
+ "observed": {
+  "pass": false,
+  "status": "FAIL_CLOSED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_bound_relevance_cegar_loop_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 11,
+ "result_sha256": "4d575312faeebb0e61d0f9dfb08128f42e3261232d3f3ac2194580f68dc4e55c",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

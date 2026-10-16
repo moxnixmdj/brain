@@ -1,0 +1,32 @@
+{
+ "capability_id": "canonical/runtime/bytes_v14_zero_overhead_totality_task_generator_v1.py.auto.v1",
+ "elapsed_ms": 166.361,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/bytes_v14_zero_overhead_totality_task_generator_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bytes_v14_zero_overhead_totality_task_generator_v1.py",
+ "module_sha256": "5ec517ccef2e682aa7f1426eb880f51c3b422a88c9a1abb4e1c3c818dbfabdef",
+ "observed": {
+  "returncode": 0
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_v14_zero_overhead_totality_task_generator_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 6,
+ "result_sha256": "8f78a5004f1aa65a10f8dcd1e8dec006fedb4426e39a8e820fcb60de1798330c",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
