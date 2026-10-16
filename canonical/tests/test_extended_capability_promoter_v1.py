@@ -57,7 +57,8 @@ class PromoterTests(unittest.TestCase):
         promoted = {o["capability_id"] for o in report["outcomes"] if o["outcome"] == "PROMOTED"}
         self.assertEqual(len(promoted), report["promoted_count"])
         self.assertGreaterEqual(len(promoted), 1)
-        verified = {cid for cid, e in _extended().items() if e.get("status") == "VERIFIED_BOUND_CAPABILITY"}
+        verified = {cid for cid, e in _extended().items() if e.get("status") == "VERIFIED_BOUND_CAPABILITY"
+                    and (e.get("verification") or {}).get("method", "").startswith("EXTENDED_CAPABILITY_PROMOTER_V1")}
         self.assertEqual(verified, promoted)
         live = load_verified_registry(include_extended=True)
         for cid in promoted:

@@ -198,7 +198,16 @@ def test_kernel_refuses_exactly_the_registry_source_types_the_kernel_rejects():
     assert "python.fault.localize.dynamic.dataflow.v1" not in refused  # python_stdlib: the kernel runs it
     assert "json.query.jq" not in refused
     assert all(str(registry[c]["source"]["type"]) in adm.KERNEL_UNSUPPORTED_SOURCE_TYPES for c in refused)
-    assert len(refused) == 16
+    canonical = set(load_verified_registry(include_extended=False))
+    assert len([c for c in refused if c in canonical]) == 16
+    # verified extended-registry entries run through run_adapter_locally, never the kernel
+    assert [c for c in refused if c not in canonical] == [
+        "brain.module.function.invoke",
+        "math.exact_symbolic.compute.sympy",
+        "python.source.docstrings.strip",
+        "python.source_tree.manifest.sha256",
+        "structured.document.semantic_digest.sha256",
+    ]
 
 
 def test_run_adapter_locally_fails_closed():

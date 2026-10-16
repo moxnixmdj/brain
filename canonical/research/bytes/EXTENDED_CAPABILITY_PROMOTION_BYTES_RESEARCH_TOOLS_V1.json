@@ -10,7 +10,7 @@
   "inventory_reason_counts": {
     "ABSOLUTE_HOST_PATHS": 9,
     "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES": 30,
-    "IMPORT_TIME_SIDE_EFFECTS": 56,
+    "IMPORT_TIME_SIDE_EFFECTS": 55,
     "NO_PUBLIC_ENTRYPOINT": 26,
     "PINNED_TO_ONE_SNAPSHOT_BY_SHA256": 65
   },
@@ -187,7 +187,7 @@
       ]
     },
     "canonical/research/bytes/tools/conservative_ast_identical_inline_compact_v74.py": {
-      "import_time_effects": 1,
+      "import_time_effects": 0,
       "snapshot_hash_pins": 2,
       "absolute_host_paths": false,
       "public_symbols": [
@@ -203,7 +203,6 @@
       "disposition": "REMAINS_INVENTORY",
       "promoted_to": [],
       "inventory_reasons": [
-        "IMPORT_TIME_SIDE_EFFECTS",
         "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
       ]
     },
@@ -1458,7 +1457,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v1.py": {
-      "import_time_effects": 42,
+      "import_time_effects": 33,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": true,
       "public_symbols": [
@@ -1475,7 +1474,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v10.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1487,7 +1486,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v11.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1499,7 +1498,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v12.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1511,7 +1510,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v13.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1523,7 +1522,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v14.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1535,7 +1534,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v15.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1547,7 +1546,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v16.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1559,7 +1558,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v17.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1571,7 +1570,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v18.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1583,7 +1582,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v19.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1595,7 +1594,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v2.py": {
-      "import_time_effects": 45,
+      "import_time_effects": 35,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": true,
       "public_symbols": [
@@ -1613,7 +1612,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v20.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1625,7 +1624,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v21.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1637,7 +1636,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v22.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1649,7 +1648,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v23.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1661,7 +1660,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v24.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1673,7 +1672,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v25.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1685,7 +1684,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v26.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1697,7 +1696,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v27.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1709,7 +1708,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v28.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1721,7 +1720,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v29.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1733,7 +1732,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v3.py": {
-      "import_time_effects": 60,
+      "import_time_effects": 46,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": true,
       "public_symbols": [
@@ -1751,7 +1750,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v30.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1763,7 +1762,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v31.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1775,7 +1774,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v32.py": {
-      "import_time_effects": 4,
+      "import_time_effects": 3,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": false,
       "public_symbols": [],
@@ -1787,7 +1786,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v4.py": {
-      "import_time_effects": 66,
+      "import_time_effects": 50,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": true,
       "public_symbols": [
@@ -1805,7 +1804,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v5.py": {
-      "import_time_effects": 69,
+      "import_time_effects": 52,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": true,
       "public_symbols": [
@@ -1823,7 +1822,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v6.py": {
-      "import_time_effects": 72,
+      "import_time_effects": 54,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": true,
       "public_symbols": [
@@ -1841,7 +1840,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v7.py": {
-      "import_time_effects": 89,
+      "import_time_effects": 67,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": true,
       "public_symbols": [
@@ -1859,7 +1858,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v8.py": {
-      "import_time_effects": 96,
+      "import_time_effects": 72,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": true,
       "public_symbols": [
@@ -1877,7 +1876,7 @@
       ]
     },
     "canonical/research/bytes/tools/rebuild_candidate_v9.py": {
-      "import_time_effects": 154,
+      "import_time_effects": 117,
       "snapshot_hash_pins": 0,
       "absolute_host_paths": true,
       "public_symbols": [

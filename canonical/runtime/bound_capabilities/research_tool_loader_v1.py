@@ -22,28 +22,66 @@ class ResearchToolUnsafe(RuntimeError):
     pass
 
 
-def _pure_value(node: ast.AST) -> bool:
+# Pure path arithmetic that research modules use to locate the repository: no I/O beyond
+# ``resolve()`` reading symlinks, no writes, no network.
+_PATH_ROOTS = frozenset({"Path(__file__)", "pathlib.Path(__file__)"})
+_PATH_METHODS = frozenset({"resolve", "absolute"})
+_PATH_ATTRS = frozenset({"parent", "parents", "name", "stem", "suffix"})
+_PURE_LIBRARY_CALLS = frozenset({"re.compile", "logging.getLogger"})
+_PURE_LIBRARY_ARGS = frozenset({"__name__", "re.I", "re.IGNORECASE", "re.M", "re.MULTILINE", "re.S", "re.DOTALL",
+                                "re.X", "re.VERBOSE", "re.UNICODE", "re.ASCII"})
+
+
+def _pure_value(node: ast.AST, names: frozenset[str] | set[str] = frozenset()) -> bool:
+    """True when evaluating ``node`` at import time can do nothing but compute a value."""
     try:
         ast.literal_eval(node)
         return True
     except (ValueError, TypeError, SyntaxError, RecursionError):
         pass
+    if isinstance(node, ast.Name):
+        return node.id in names or node.id in ("__name__", "__file__")
+    if isinstance(node, (ast.Tuple, ast.List, ast.Set)):
+        return all(_pure_value(e, names) for e in node.elts)
+    if isinstance(node, ast.JoinedStr):
+        return all(isinstance(v, ast.Constant) or (isinstance(v, ast.FormattedValue) and _pure_value(v.value, names)) for v in node.values)
+    if isinstance(node, ast.BinOp) and isinstance(node.op, (ast.Div, ast.Add, ast.BitOr)):
+        return _pure_value(node.left, names) and _pure_value(node.right, names)
+    if isinstance(node, ast.Attribute):
+        text = ast.unparse(node)
+        return text in _PURE_LIBRARY_ARGS or (node.attr in _PATH_ATTRS and _pure_value(node.value, names))
+    if isinstance(node, ast.Subscript):
+        return _pure_value(node.value, names) and _pure_value(node.slice, names)
     if isinstance(node, ast.Call):
-        return ast.unparse(node.func) in PURE_CONSTRUCTORS and all(_pure_value(a) for a in node.args) and not node.keywords
+        func = ast.unparse(node.func)
+        if func in _PATH_ROOTS or ast.unparse(node) in _PATH_ROOTS:
+            return True
+        if isinstance(node.func, ast.Attribute) and node.func.attr in _PATH_METHODS and not node.args and not node.keywords:
+            return _pure_value(node.func.value, names)
+        if func in _PURE_LIBRARY_CALLS:
+            return all(_pure_value(a, names) for a in node.args) and not node.keywords
+        return func in PURE_CONSTRUCTORS and all(_pure_value(a, names) for a in node.args) and not node.keywords
     return False
 
 
 def import_time_effects(tree: ast.Module) -> list[str]:
     """Top-level statements that would execute something other than a definition."""
     effects = []
+    pure_names: set[str] = set()
     for node in tree.body:
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef, ast.Import, ast.ImportFrom)):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            pure_names.add(node.name)
+            continue
+        if isinstance(node, (ast.Import, ast.ImportFrom)):
+            pure_names.update((a.asname or a.name).split(".")[0] for a in node.names)
             continue
         if isinstance(node, ast.Expr) and isinstance(node.value, ast.Constant):
             continue
         if isinstance(node, ast.If) and "__main__" in ast.unparse(node.test):
             continue
-        if isinstance(node, (ast.Assign, ast.AnnAssign)) and node.value is not None and _pure_value(node.value):
+        if isinstance(node, (ast.Assign, ast.AnnAssign)) and node.value is not None and _pure_value(node.value, pure_names):
+            targets = node.targets if isinstance(node, ast.Assign) else [node.target]
+            pure_names.update(t.id for t in targets if isinstance(t, ast.Name))
             continue
         effects.append("line %d: %s" % (getattr(node, "lineno", 0), ast.unparse(node).splitlines()[0][:80]))
     return effects
