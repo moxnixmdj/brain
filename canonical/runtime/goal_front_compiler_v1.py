@@ -586,6 +586,47 @@ def _single(cid: str, entry: Mapping[str, Any], inputs: Mapping[str, Any], score
     }
 
 
+def _retrieval_first_selection(goal: str, admissible: Mapping[str, Mapping[str, Any]],
+                               root: pathlib.Path, rules: list[str]) -> dict[str, Any] | None:
+    """F17: retrieval proposes k=3, typed admission disposes.  Returns None to keep the failure.
+
+    Called ONLY after the pinned prose scorer has failed to deliver a bound single capability, so
+    it can turn a failure into a selection and can never override a selection that already bound
+    (that discipline is what keeps every earlier rule's evidence intact).  Selection quality is
+    therefore bounded by admission, not by the ranker: a lexical near-miss whose declared inputs
+    the sentence does not state is refused, and an ambiguous shortlist selects nothing at all.
+    """
+    from canonical.runtime import capability_selection_retrieval_v1 as selection
+
+    decision = selection.select(goal, admissible, root, selection.DEFAULT_K)
+    if decision.get("status") != "SELECTED":
+        return None
+    cid = decision["selected_capability"]
+    entry = admissible.get(cid) or {}
+    if not entry:
+        return None
+    # SCOPED, and this is the whole reason F17 exists: a receipt-backed capability is invisible to
+    # the pinned scorer (it skips anything whose status is not VERIFIED_BOUND_CAPABILITY), so no
+    # earlier rule can ever select one from a sentence.  Everything the pinned scorer CAN see stays
+    # its decision: measured, an unscoped version of this hook displaced `grounding.stdlib` from its
+    # own signature sentence in favour of a specific sibling, which is a misroute, not a fix.  So a
+    # retrieved selection is accepted only when it is DERIVED EVIDENCE - a capability the pinned
+    # path structurally cannot propose.
+    if entry.get("capability_source") != "receipt_projection":
+        return None
+    proposals = decision.get("proposals") or []
+    score = int(round(float((proposals[0] if proposals else {}).get("lexical_relevance_score") or 0)))
+    rules.append("F17_RETRIEVAL_FIRST_TYPED_ADMISSION")
+    return _single(cid, entry, decision["inputs"], score, {
+        "rule": "F17_RETRIEVAL_FIRST_TYPED_ADMISSION",
+        "retrieval": decision.get("authority"),
+        "k": decision.get("k"),
+        "proposals": [p["capability_id"] for p in proposals],
+        "admissions": [{k: v for k, v in row.items() if k in ("capability_id", "admitted", "reason")}
+                       for row in decision.get("admissions") or []],
+    }, rules)
+
+
 _LITERAL_MODES = {"DETERMINISTIC_LITERAL_JSON_RECORDS", "DETERMINISTIC_EXACT_LITERAL_RESPONSE"}
 
 
@@ -973,14 +1014,42 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
             # prose-scored candidate consistent with the goal's artifact; never a fall-through
             consistent = selected in {c[2] for c in pool}
             if not consistent:
+                retrieved = _retrieval_first_selection(text, admissible, root, rules)
+                if retrieved is not None:
+                    return retrieved
                 raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", best[2] + ":" + str(best_error.detail))
         if compiled is None:
+            retrieved = _retrieval_first_selection(text, admissible, root, rules)
+            if retrieved is not None:
+                return retrieved
             raise pinned_failure  # type: ignore[misc]
         if future and not _output_keys(registry[selected]):
             raise GoalCompilationFailure("GOAL_OUTPUT_ARTIFACT_UNSERVED", selected)
 
     if compiled is None:
+        retrieved = _retrieval_first_selection(text, admissible, root, rules)
+        if retrieved is not None:
+            return retrieved
         raise pinned_failure  # type: ignore[misc]
+
+    # F17 (pinned catch-all): the pinned scorer answers a STRUCTURED sentence with a capability
+    # whose only declared inputs are {goal, output_path} - it binds any sentence at all, which is
+    # measured, not hypothetical.  When the pinned winner is such a catch-all and a structurally
+    # SPECIFIC typed admission exists, the specific one is the answer.  This sits after F1 has had
+    # its chance to re-bind a ranked candidate (that is what keeps the reachability results that
+    # depended on F1 intact) and it never fires when admission is ambiguous, so an unclear sentence
+    # still fails closed instead of being guessed.
+    if single_shape and selected:
+        from canonical.runtime import capability_selection_retrieval_v1 as _sel
+
+        _declared = _sel.declarations(root).get(selected)
+        _names = _sel.required_input_names(admissible.get(selected) or {}, _declared)
+        if _names and not _sel.is_specific(_names):
+            displaced = _retrieval_first_selection(text, admissible, root, rules)
+            if displaced is not None:
+                displaced["match_evidence"]["displaced_pinned_selection"] = selected
+                displaced["match_evidence"]["displaced_catch_all_inputs"] = _names
+                return displaced
 
     if single_shape and isinstance(compiled.get("inputs"), dict):
         if repair_output_collisions(text, compiled["inputs"], root, entry=registry.get(selected),

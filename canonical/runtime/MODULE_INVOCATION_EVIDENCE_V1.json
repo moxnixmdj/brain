@@ -110,7 +110,7 @@
   "canonical/verification/p3_policy_influence_v10_compositional_replay_v1.py": "SystemExit:1",
   "canonical/verification/run_scoped_self_verification_guard_v1.py": "ModuleNotFoundError:No module named 'v22_prewrite_admission'"
  },
- "junit_cases": 11621,
+ "junit_cases": 11633,
  "measured_platform": "linux",
  "measured_python": "3.11",
  "modules": {
@@ -9574,7 +9574,7 @@
     },
     "classify_support": {
      "doc": "",
-     "passing_cases": 3,
+     "passing_cases": 5,
      "signature": {
       "params": [
        "claim_text",
@@ -9607,7 +9607,8 @@
    },
    "sha256": "50f36f7d602247cf210d0d5dd6bf01a0816e1704729afeeec46e536eaf5a7fcc",
    "tests": {
-    "canonical/tests/test_bounded_claim_support.py": "f6d60b0866ea03975da2e2437d6fb498851b89a401fe7454895c9684adc2447c"
+    "canonical/tests/test_bounded_claim_support.py": "f6d60b0866ea03975da2e2437d6fb498851b89a401fe7454895c9684adc2447c",
+    "canonical/tests/test_capability_selection_retrieval_v1.py": "725e68d3ecd8bba97feb12707469104863482a3844665f21e8c5dd63bc06940b"
    }
   },
   "canonical/runtime/bounded_concept_formula_authority_v1.py": {
@@ -38663,7 +38664,7 @@
      "tier": "READ_ONLY_UNTESTED"
     }
    },
-   "sha256": "091e2a53a9b7fb5932f90b3a5b6e8544ff8d904dc2f7d6384e55f9af9a444b67",
+   "sha256": "00d024cf384deee17c91f4bb4c5920fbb9e2a7d4b3ad30fc91712d7c5a3061a6",
    "tests": {
     "canonical/tests/test_goal_front_compiler_v1.py": "04ce39b69af5db9c54aba39e09ff2ce019679aa06f66e9439b13aac7f5f6d230"
    }
@@ -46824,7 +46825,7 @@
     },
     "run_raw_goal": {
      "doc": "Compile one raw plain-language goal into the live verified runtime.",
-     "passing_cases": 4,
+     "passing_cases": 5,
      "signature": {
       "params": [
        "request"
@@ -46841,6 +46842,7 @@
    "tests": {
     "canonical/tests/test_capability_dag_live_wiring_v1.py": "d02b0f52db77cf97761e9c036d4d5548279fe976b14d36f041b880d294172ffd",
     "canonical/tests/test_capability_receipt_lane_v1.py": "09b958de9d6d0d86d0716e1bb71348290269a0c77e3c6c455000741924b7a0d1",
+    "canonical/tests/test_capability_selection_retrieval_v1.py": "725e68d3ecd8bba97feb12707469104863482a3844665f21e8c5dd63bc06940b",
     "canonical/tests/test_live_integrated_brain_v1.py": "9200c32d543aeeeff65f276f422d99029c2bc44fc79c57a705940968f7cf5dfb",
     "canonical/tests/test_live_solver_families_v3.py": "5bf31fe656407e675b74329360f5e687f92df10d432dbf43ef0419bfc8b8e3a4"
    }
@@ -97019,7 +97021,7 @@
    "solve": "FAILING_TEST_CASES:11"
   },
   "canonical/runtime/live_integrated_brain_v1.py": {
-   "load_verified_registry": "FAILING_TEST_CASES:2"
+   "load_verified_registry": "FAILING_TEST_CASES:1"
   },
   "canonical/runtime/m0_requirement_change_case_v1.py": {
    "execute_case": "FAILING_TEST_CASES:1",
