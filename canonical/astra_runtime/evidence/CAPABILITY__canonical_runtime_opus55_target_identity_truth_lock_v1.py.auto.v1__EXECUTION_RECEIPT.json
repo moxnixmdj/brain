@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/opus55_target_identity_truth_lock_v1.py.auto.v1",
+ "elapsed_ms": 48.2,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/opus55_target_identity_truth_lock_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/opus55_target_identity_truth_lock_v1.py",
+ "module_sha256": "6671de6fd3b9ad01cd2508df794dd2109aabe70f45b1cd82b3fa5bed2756e3ac",
+ "observed": {
+  "returncode": 0,
+  "status": "PASS__EXACT_18_ROOT2_TARGETS_FROZEN__LIVE_DRIFT_QUARANTINED__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_opus55_target_identity_truth_lock_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 10,
+ "result_sha256": "c6ab3845548e0851d3b7f2ea781293f3962057a135b4f3d7098a4e47f7451ba8",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

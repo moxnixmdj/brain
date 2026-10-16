@@ -88,9 +88,18 @@ def _prose_tokens(goal: str) -> set[str]:
 
 
 def _future_artifacts(goal: str) -> list[str]:
-    """Repository-relative paths named by the goal that do not exist yet."""
+    """Repository-relative paths named by the goal that do not exist yet.
+
+    A capability IDENTITY is never such a path: the same shape rule the front layer applies
+    (F16) is reused here.  Measured on the real registry: `canonical/runtime/x.py.auto.v1`
+    names a capability, and this check read it as an artifact the goal had promised, so a
+    correctly selected and executed capability ended in FAIL_CLOSED__PROMISED_ARTIFACT_MISSING
+    for 294 of 361 live ids - the R6 gate punishing a capability for the file it must not write.
+    """
     out = []
     for raw, path in goal_compiler._repo_paths(goal, ROOT):
+        if front._CAPABILITY_ID_SHAPE.fullmatch(str(raw)):
+            continue
         if pathlib.Path(raw).suffix and not path.exists():
             out.append(raw)
     return out
@@ -137,7 +146,16 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
         "goal_future_artifacts": futures,
         "capability_input_keys": sorted(input_keys),
         "capability_output_keys": output_keys,
+        "admission_basis": None,
     }
+    # F15 named the capability: an exact identifier in the goal is the caller choosing it, which
+    # is not the weak path evidence this layer exists to refuse.  Measured: every receipt-backed
+    # capability was selected by the front layer and then refused here with R1_PATH_TOKENS_ONLY,
+    # so this entry (the platform's THE live Brain entry) could not execute 294 of its 361
+    # capabilities.  The identifier is re-verified here rather than trusting the rule string.
+    rules = set(((compiled.get("front_compiler") or {}).get("rules_applied")) or [])
+    if "F15_EXPLICIT_CAPABILITY_ID_NAMED" in rules and front.explicitly_named_capabilities(goal, registry) == [selected]:
+        return {**base, "admitted": True, "rule": None, "admission_basis": "EXPLICIT_CAPABILITY_ID_IN_GOAL"}
     if matched and not semantic:
         return {**base, "admitted": False, "rule": "R1_PATH_TOKENS_ONLY"}
     if futures and not output_keys:

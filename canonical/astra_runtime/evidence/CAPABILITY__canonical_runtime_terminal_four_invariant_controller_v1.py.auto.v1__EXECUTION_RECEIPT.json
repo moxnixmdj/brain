@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/terminal_four_invariant_controller_v1.py.auto.v1",
+ "elapsed_ms": 28.077,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/terminal_four_invariant_controller_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/terminal_four_invariant_controller_v1.py",
+ "module_sha256": "25929d7e34639487c0b77b657e136b1ed94987b4d73f44395aba0fb2ec56534e",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__FOUR_INVARIANT_PROJECTION__TERMINAL_FALSE__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_terminal_four_invariant_controller_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 12,
+ "result_sha256": "0a3e14b380135b96f32c257c7fe26d9bb6ebe9db49cb6aee569c4d9b0f393d47",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

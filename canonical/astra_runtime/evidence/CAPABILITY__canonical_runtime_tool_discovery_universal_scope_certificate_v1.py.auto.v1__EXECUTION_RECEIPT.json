@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/tool_discovery_universal_scope_certificate_v1.py.auto.v1",
+ "elapsed_ms": 42.328,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/tool_discovery_universal_scope_certificate_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/tool_discovery_universal_scope_certificate_v1.py",
+ "module_sha256": "d85b2f171617f599e35f72f8ea6d2c68f134dc058ca43733c1bdce4c1c817cf0",
+ "observed": {
+  "returncode": 0,
+  "status": "PASS__UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_FROZEN_HIDDEN_TOOL_PROTOCOL__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_tool_discovery_universal_scope_certificate_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 20,
+ "result_sha256": "f4a4d9d88acc6daa054625e9588b77d3b56cc4d759d20b2b09126c24db8497a9",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/professional_r12_c3_lossless_composition_projection_verify_v1.py.auto.v1",
+ "elapsed_ms": 31.753,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/professional_r12_c3_lossless_composition_projection_verify_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/professional_r12_c3_lossless_composition_projection_verify_v1.py",
+ "module_sha256": "061e4488e86506378ec27e664c8c695c313dc82b89b9bb8a409794d8b68a2e2e",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__R12_C3_ROOT_BINDING_COMPOSITION_PROJECTION_LOSSLESS_AND_SCOPE_PRESERVING"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_r12_c3_lossless_composition_projection_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 22,
+ "result_sha256": "09bafdecba4b7cc94a811583ea0b1204f44b5ae4defb40ab2855e2feb8b07d9c",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
