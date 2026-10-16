@@ -32,21 +32,12 @@ class GenericBM25RouteTests(unittest.TestCase):
             "final_url": candidate["url"],
             "final_host": "example.org",
         }
-        relevance = {
-            "schema": "PROJECT_BRAIN_OBJECTIVE_RELEVANCE_BM25_V1",
-            "objective": objective,
-            "status": "LEXICAL_RELEVANCE_RANKED",
-            "verification_method": "DETERMINISTIC_BM25",
-            "output_verified": True,
-            "top_candidate_original_index": 0,
-            "ranked_candidates": [{
-                "original_index": 0,
-                "candidate": candidate,
-                "lexical_relevance_score": 2.1,
-                "matched_terms": ["sqlite", "checkpoint", "logging"],
-                "term_contributions": {},
-            }],
-        }
+        # Use the real deterministic ranker, so the receipt carries the same admission
+        # contract (top_candidate_admission) that the live frontend emits.
+        import importlib.util as _ilu
+        _spec = _ilu.spec_from_file_location("bm25_real", ROOT / "canonical/runtime/bound_capabilities/objective_relevance_bm25.py")
+        _rel = _ilu.module_from_spec(_spec); _spec.loader.exec_module(_rel)
+        relevance = _rel.rank(objective, [candidate])
         out = self.m.extract(
             objective,
             candidate,

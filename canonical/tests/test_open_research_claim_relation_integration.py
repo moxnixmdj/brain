@@ -120,7 +120,7 @@ class FrontendClaimRelationIntegration(unittest.TestCase):
         modules={
           "open_web_source_candidate_discovery":D,
           "source_candidate_provenance_verify":P,
-          "objective_relevance_bm25":R,
+          "objective_relevance_bm25":load("objective_relevance_bm25"),
           "objective_evidence_unit_extract":E,
           "source_authority_binding_ror":A,
           "objective_claim_operand_binding":self.real_binder,
