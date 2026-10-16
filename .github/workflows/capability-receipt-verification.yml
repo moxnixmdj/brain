@@ -1,0 +1,140 @@
+name: Capability receipt independent verification
+
+# WHY THIS WORKFLOW EXISTS
+#
+# `load_verified_registry` admits a capability only when BOTH hold:
+#   1. a producer execution receipt exists for this module at this content hash, and
+#   2. an INDEPENDENT verification record exists — a different identity re-ran the module,
+#      observed the same result hash, and the run reference carries a platform-attested
+#      `github_run_id`.
+#
+# The second condition is the one this workflow satisfies, and it is deliberately the only
+# way to satisfy it: a reference invented by a local process cannot carry `github_run_id`,
+# so no local session — and no agent — can mint admission for itself. That is the whole
+# point (AGENTS.md rule 4: "Verification means someone else ran it").
+#
+# The runner re-executes every producer receipt and stamps a verification record ONLY when
+# the observed result hash matches. A mismatch stamps nothing and fails the job.
+#
+# Nothing here writes a registry: the executable set is derived from reproduced evidence,
+# so no capability is declared and no capability is deleted.
+
+on:
+  # `pull_request` (never `pull_request_target`, which AGENTS.md rule 7 forbids) so the
+  # independent attestation can be produced and committed on the pull request itself,
+  # without waiting for a merge.
+  pull_request:
+    paths:
+      - ".github/workflows/capability-receipt-verification.yml"
+      - "canonical/runtime/capability_receipt_lane_v1.py"
+      - "canonical/astra_runtime/evidence/CAPABILITY__**"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/capability-receipt-verification.yml"
+      - "canonical/runtime/capability_receipt_lane_v1.py"
+      - "canonical/astra_runtime/evidence/CAPABILITY__**"
+  workflow_dispatch:
+
+concurrency:
+  group: capability-receipt-verification-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  # GitHub signs an OIDC token whose claims include run_id, repository, workflow_ref and
+  # actor. That is the attestation: a locally-written `github_run_id` field is not.
+  id-token: write
+
+env:
+  AUTOMATION_APP_ID: ${{ secrets.AUTOMATION_APP_ID }}
+  AUTOMATION_APP_PRIVATE_KEY: ${{ secrets.AUTOMATION_APP_PRIVATE_KEY }}
+
+jobs:
+  verify-receipts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Re-execute producer receipts as an independent identity
+        shell: bash
+        env:
+          AUDIENCE: https://github.com/moxnixmdj/brain
+        run: |
+          set -euo pipefail
+          TOKEN_JSON=$(curl -fsS -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" \
+            "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${AUDIENCE}")
+          export TOKEN_JSON
+          python3 - <<'PY' > /tmp/run_reference.json
+          import base64, json, os, urllib.request
+          token = json.loads(os.environ["TOKEN_JSON"])["value"]
+          part = token.split(".")[1]
+          part += "=" * (-len(part) % 4)
+          claims = json.loads(base64.urlsafe_b64decode(part))
+          keep = ("iss", "aud", "repository", "repository_id", "workflow_ref", "job_workflow_ref",
+                  "run_id", "run_attempt", "event_name", "head_ref", "actor", "jti")
+          print(json.dumps({"github_run_id": int(claims["run_id"]),
+                            "oidc_claims": {k: claims.get(k) for k in keep}}, sort_keys=True))
+          PY
+          cat /tmp/run_reference.json
+          python3 canonical/runtime/capability_receipt_lane_v1.py \
+            --verify \
+            --root . \
+            --ran-by "github-actions:${GITHUB_REPOSITORY}" \
+            --run-reference-json "$(cat /tmp/run_reference.json)" \
+            | tee /tmp/verification.json
+          python3 - <<'PY'
+          import json
+          report = json.load(open("/tmp/verification.json"))
+          print(f"reproduced {report['reproduced']}/{report['producer_receipts']}; "
+                f"not reproduced: {report['mismatched']}")
+          for path in report.get("not_reproduced", []):
+              print(f"  NOT REPRODUCED (no record written, so not admitted): {path}")
+          # A capability that does not reproduce gets NO verification record and is therefore
+          # not admitted.  That must not block the ones that do reproduce: report it loudly,
+          # and fail only if the mechanism itself produced nothing.
+          if report["producer_receipts"] and not report["reproduced"]:
+              raise SystemExit("NO RECEIPT REPRODUCED - the verification mechanism is broken")
+          PY
+
+      - name: Publish the verification records as an artifact
+        # Always runs. `land_on_main.sh` needs the Brain Automation app
+        # (AUTOMATION_APP_ID / AUTOMATION_APP_PRIVATE_KEY); every workflow in this repo
+        # that calls it is currently failing, so independence must not depend on that one
+        # link. The artifact is the runner's own output, produced under a real
+        # `github_run_id`, and can be committed in one pass if automatic landing is down.
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: capability-independent-verification
+          path: canonical/astra_runtime/evidence/CAPABILITY__*__INDEPENDENT_VERIFICATION.json
+          if-no-files-found: warn
+
+      - name: Land the verification records
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "project-brain-capability-receipt-verification"
+          git config user.email "project-brain-capability-receipt-verification@users.noreply.github.com"
+          git add canonical/astra_runtime/evidence/CAPABILITY__*__INDEPENDENT_VERIFICATION.json
+          git diff --cached --quiet && echo "no new verification records" && exit 0
+          git commit -m "Record independent verification of capability execution receipts"
+          if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
+            # Same-repository pull request: publish the records on the branch so the
+            # evidence exists before merge. No need for the automation app.
+            git push origin "HEAD:${GITHUB_HEAD_REF}" && exit 0
+            exit 1
+          fi
+          for attempt in 1 2 3; do
+            git pull --rebase origin main || { git rebase --abort || true; sleep 2; continue; }
+            bash .github/scripts/land_on_main.sh && exit 0
+            sleep 2
+          done
+          exit 1

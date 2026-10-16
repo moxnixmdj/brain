@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/current_terminal_authority_v6_verifier.py.auto.v1",
+ "elapsed_ms": 58.231,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/current_terminal_authority_v6_verifier.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/current_terminal_authority_v6_verifier.py",
+ "module_sha256": "e4d70bbc7cc1a54fdcc2613fb22105cfaed0dc099f50a17316fab215d817e3cf",
+ "observed": {
+  "pass": true,
+  "returncode": 0
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_terminal_authority_v6_verifier.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 8,
+ "result_sha256": "68e86e9b41b9bf161afebce0e316dc9af1cac8e3bd3562b9e86e6cce403448eb",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

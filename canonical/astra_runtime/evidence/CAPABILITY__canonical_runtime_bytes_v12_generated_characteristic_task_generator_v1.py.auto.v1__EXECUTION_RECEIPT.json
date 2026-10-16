@@ -1,0 +1,32 @@
+{
+ "capability_id": "canonical/runtime/bytes_v12_generated_characteristic_task_generator_v1.py.auto.v1",
+ "elapsed_ms": 165.118,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/bytes_v12_generated_characteristic_task_generator_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bytes_v12_generated_characteristic_task_generator_v1.py",
+ "module_sha256": "111005d3ff35a0e0182498f8931ab4b38ad7426eba4d99b4a4ef9648cad4d11a",
+ "observed": {
+  "returncode": 0
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_v12_generated_characteristic_task_generator_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 6,
+ "result_sha256": "21bda9807323fc23a98f19d65e57a315a1fe1490722f73fe2d139245e17567be",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

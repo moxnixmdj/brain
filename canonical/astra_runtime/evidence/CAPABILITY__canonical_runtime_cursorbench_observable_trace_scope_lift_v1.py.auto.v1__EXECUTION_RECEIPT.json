@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/cursorbench_observable_trace_scope_lift_v1.py.auto.v1",
+ "elapsed_ms": 74.605,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/cursorbench_observable_trace_scope_lift_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/cursorbench_observable_trace_scope_lift_v1.py",
+ "module_sha256": "9a2f9b5d8a9ca6bf12d08129ed046a2a69247dd6f76805c8706ab78f5c99c779",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__CURSORBENCH_4_0_SCOPE_INCLUDED_IN_OBSERVABLE_TRACE_SUPERDOMAIN__POSITIVE_ADEQUACY_AND_DOMINANCE_REMAIN_OPEN__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_cursorbench_observable_trace_scope_lift_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 19,
+ "result_sha256": "3a7aee7d90bc36e8e74da27fac069187ae33d1d84b4233ef549ea7da53e30a6c",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

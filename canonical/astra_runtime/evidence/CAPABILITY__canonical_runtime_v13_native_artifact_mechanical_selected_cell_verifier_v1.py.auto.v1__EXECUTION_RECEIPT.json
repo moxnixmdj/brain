@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/v13_native_artifact_mechanical_selected_cell_verifier_v1.py.auto.v1",
+ "elapsed_ms": 25.398,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/v13_native_artifact_mechanical_selected_cell_verifier_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/v13_native_artifact_mechanical_selected_cell_verifier_v1.py",
+ "module_sha256": "bbae846dbab83707be45720c677746cf0d862c4804a6e4769c7e2d36a34b7c3d",
+ "observed": {
+  "pass": false,
+  "returncode": 0,
+  "status": "FAIL_CLOSED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_v13_native_artifact_mechanical_selected_cell_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 7,
+ "result_sha256": "f6f988a2ea05d42af7073e910c79548702d5d37bc334b1f7e9be70a6273d3881",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

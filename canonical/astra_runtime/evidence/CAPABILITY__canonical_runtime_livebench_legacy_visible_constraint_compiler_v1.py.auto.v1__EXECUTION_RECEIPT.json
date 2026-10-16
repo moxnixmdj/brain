@@ -1,0 +1,26 @@
+{
+ "capability_id": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v1.py.auto.v1",
+ "elapsed_ms": 0.939,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v1.py",
+ "module_sha256": "8316c9713b98b92d0c1307bc85dba55ede0175ce7845c3d001f107cd7ebaba58",
+ "observed": {
+  "status": "PASS"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy_visible_constraint_compiler_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 13,
+ "result_sha256": "b96e66eb96b9e3088597399a44cc5bd051f895a04154bbdab062e1fb651da925",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
