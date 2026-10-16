@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/tool_discovery_universal_scope_formalism_cut_v1.py.auto.v1",
+ "elapsed_ms": 38.368,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/tool_discovery_universal_scope_formalism_cut_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/tool_discovery_universal_scope_formalism_cut_v1.py",
+ "module_sha256": "6ac443ad616a34aa8d789ea15992e501260d9d1049c966970feb07e1e20bc0d5",
+ "observed": {
+  "returncode": 0,
+  "status": "FAIL_CLOSED__UNIVERSAL_SCOPE_CERTIFICATE_BLOCKED_BY_UNKNOWN_TOOL_IDENTITY_DISCOVERY_FORMALISM_GAP__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_tool_discovery_universal_scope_formalism_cut_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 21,
+ "result_sha256": "a0f25cf41271697d5ebf6ac9e5481a102afce4267bd364579c60030fb29ab072",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

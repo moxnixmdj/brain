@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/h100_unichart_storage_feasibility_v1.py.auto.v1",
+ "elapsed_ms": 79.67,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/h100_unichart_storage_feasibility_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/h100_unichart_storage_feasibility_v1.py",
+ "module_sha256": "d6f9f0ccd73ee4cd901e2fdb6663e398455f20930df3f2e9a6203566147401a5",
+ "observed": {
+  "returncode": 0,
+  "status": "CONDITIONAL_STORAGE_FEASIBILITY_PASS"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_h100_unichart_storage_feasibility_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 19,
+ "result_sha256": "44fc00d5aaa9e3b9ee36dac6fa20e27be7aebb4bad5c9410db442ccf25aa5cb8",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/openai_math_frontier_corpus_v1.py.auto.v1",
+ "elapsed_ms": 42.434,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/openai_math_frontier_corpus_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/openai_math_frontier_corpus_v1.py",
+ "module_sha256": "38609326756aa601917bc9b7cb35674a9c70c777e00b9a6bda0d181791b453f6",
+ "observed": {
+  "returncode": 0,
+  "status": "PASS__PINNED_PUBLIC_CORPUS_COMPILED_TO_ZERO_CREDIT_EVALUATOR_FACTORY"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_openai_math_frontier_corpus_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 16,
+ "result_sha256": "f925dc9675930e36a94e962c1198bffca0683c166ea39a929c779b4973f7b153",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

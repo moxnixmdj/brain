@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/professional_r12_cc_r3_truth_reconciliation_v3_verify_v1.py.auto.v1",
+ "elapsed_ms": 29.644,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/professional_r12_cc_r3_truth_reconciliation_v3_verify_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/professional_r12_cc_r3_truth_reconciliation_v3_verify_v1.py",
+ "module_sha256": "812d75ec78a102cf7aa32738219b1683573a0e9ad4993c20c581276ae1037d25",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__R12_CC_R3_V3__8_OF_8_ROOT_CONTRACT_CLAUSES_VERIFIED__STRONGER_MATERIAL_DEFEATER_TOTALITY_OPEN__ZERO_PROPERTY_OR_TERMINAL_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_r12_cc_r3_truth_reconciliation_v3_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 22,
+ "result_sha256": "85143c9cadb189709a278dfd1e4901b4ba9f20117b3d939d4233b5645fe2b6f0",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

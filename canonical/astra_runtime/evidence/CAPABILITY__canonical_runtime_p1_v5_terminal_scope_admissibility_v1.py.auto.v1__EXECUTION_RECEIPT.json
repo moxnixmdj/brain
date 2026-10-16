@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/p1_v5_terminal_scope_admissibility_v1.py.auto.v1",
+ "elapsed_ms": 47.768,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/p1_v5_terminal_scope_admissibility_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/p1_v5_terminal_scope_admissibility_v1.py",
+ "module_sha256": "614512cf3261b6adfb54967b1c124952c6cedc6ff5cb8e52333fbd6bb3870c0a",
+ "observed": {
+  "returncode": 0,
+  "status": "PASS__ALL_THREE_V5_SCOPE_RELATIONS_ADMISSIBLE__COMPOSITE_RESTORATION_STILL_REQUIRED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p1_v5_terminal_scope_admissibility_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 17,
+ "result_sha256": "ab4c6c113fe7ff0e081e9f4d52936173bacbc4da8d9d562a4ee079a0430a1c4e",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

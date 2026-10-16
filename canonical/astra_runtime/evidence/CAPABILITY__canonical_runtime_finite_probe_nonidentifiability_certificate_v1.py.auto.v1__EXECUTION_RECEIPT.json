@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/finite_probe_nonidentifiability_certificate_v1.py.auto.v1",
+ "elapsed_ms": 41.217,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/finite_probe_nonidentifiability_certificate_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/finite_probe_nonidentifiability_certificate_v1.py",
+ "module_sha256": "ed7799199aff394b3cba079f7584d553097540d35d5c17d36249ecd7572dfd80",
+ "observed": {
+  "returncode": 0,
+  "status": "PASS__FINITE_PROBES_CANNOT_UNIVERSALLY_IDENTIFY_UNRESTRICTED_FUNCTION_CLASS"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_finite_probe_nonidentifiability_certificate_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 12,
+ "result_sha256": "87edaafb8ac53cb54631714deaf45f48dbfb6f3236d12c9a56095d409143ee99",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
