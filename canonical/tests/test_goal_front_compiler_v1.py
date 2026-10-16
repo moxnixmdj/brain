@@ -128,6 +128,29 @@ def test_typed_grammar_binds_jq_filter_and_numbers_and_lists():
     assert front.bind_typed_key('run test argv "python3 -m unittest -q"', "test_argv", ROOT) == ["python3", "-m", "unittest", "-q"]
 
 
+def test_an_unstated_key_value_mapping_defaults_to_the_empty_mapping():
+    """No binding was stated for a key/value input, so the only non-guessed value is the
+    empty mapping. The capability that owns the semantics still fails closed on any symbol
+    it cannot resolve, so this must not turn an unanswerable goal into a pass."""
+    assert front.bind_typed_key("evaluate the expression 2**10 + 3*4", "variables", ROOT) == {}
+    # a real binding still wins
+    assert front.bind_typed_key(
+        'expression "2*x+1" with variables x=2, y=3', "variables", ROOT
+    ) == {"x": 2, "y": 3}
+
+
+def test_f14_an_unbound_symbol_still_fails_closed_at_execution():
+    """F14: the {} default must not let a goal with free variables through. The sympy
+    adapter inspects the AST and raises NUMERIC_EXPRESSION_VARIABLE_UNBOUND, so the
+    default only admits expressions that genuinely need no bindings."""
+    closed = adm.solve({"task_id": "F14_SYMBOLIC", "goal": 'Evaluate the expression "x**2 + 2*x + 1".'})
+    assert closed["pass"] is False
+    assert "NUMERIC_EXPRESSION_VARIABLE_UNBOUND" in str(closed["reason"])
+    numeric = adm.solve({"task_id": "F14_NOVARS", "goal": "Evaluate the expression 2**10 + 3*4."})
+    assert numeric["pass"] is True
+    assert numeric["status"].startswith("PASS")
+
+
 def test_inputs_are_never_guessed():
     (WORK / "data2.json").write_text("{}", encoding="utf-8")
     try:

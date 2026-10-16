@@ -202,6 +202,13 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path):
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":no_matching_existing_files_named")
     tails = _after_key(goal, key)
     if not tails:
+        if key in _KV_KEYS:
+            # No bindings were stated. An empty mapping is the identity element for a
+            # key/value input, not a guess: the capability that owns the semantics still
+            # fails closed on any symbol it cannot resolve (the sympy adapter raises
+            # NUMERIC_EXPRESSION_VARIABLE_UNBOUND), so this only lets an expression that
+            # needs no bindings through instead of rejecting it at compile time.
+            return {}
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":not_stated")
     # quoted values win over bare tokens so an alias inside a quoted value ("Curve A") cannot steal it
     for strict in (True, False):
