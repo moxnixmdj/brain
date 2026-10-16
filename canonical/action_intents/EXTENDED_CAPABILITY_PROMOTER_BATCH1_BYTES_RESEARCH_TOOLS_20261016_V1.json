@@ -1,0 +1,222 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "date": "2026-10-16",
+  "action_id": "EXTENDED_CAPABILITY_PROMOTER_BATCH1_BYTES_RESEARCH_TOOLS_20261016_V1",
+  "canonical_generation": "2026-10-10-general-reusable-capability-frontier-v1",
+  "canonical_base_commit": "370005ad198fc7caff1e843909161f48037b42cd",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "action_kind": "GOVERNANCE_GUARD",
+  "governance_change": false,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "causal_blocker": "OWNED_RESEARCH_TOOLS_IN_NONEXECUTING_INVENTORY_UNREACHABLE_FROM_ANY_SENTENCE__2309_INVENTORY_ROWS_ZERO_VERIFIED_PROMOTION_PATH",
+  "blocker_lease_key": "2026-10-10-general-reusable-capability-frontier-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::OWNED_RESEARCH_TOOLS_IN_NONEXECUTING_INVENTORY_UNREACHABLE_FROM_ANY_SENTENCE__2309_INVENTORY_ROWS_ZERO_VERIFIED_PROMOTION_PATH",
+  "highest_leverage_now": true,
+  "selected_route": "REUSE_EXISTING_TESTS_AS_EVIDENCE_PLUS_ONE_GUARDED_GENERIC_INVOKER__PLUS_PER_TOOL_ORACLE_PROMOTER__NO_PER_MODULE_WRAPPERS__RESEARCH_FUNCTIONS_UNCHANGED",
+  "prior_work_reused": [
+    "canonical/runtime/autonomous_capability_inventory_v1.py",
+    "canonical/runtime/live_integrated_brain_v1.py",
+    "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json",
+    "canonical/runtime/goal_front_compiler_v1.py",
+    "canonical/runtime/live_brain_route_admission_v1.py",
+    "canonical/research/bytes/",
+    "canonical/tests/ (existing passing tests reused as per-module evidence)",
+    "canonical/runtime/bound_capabilities/research_tool_loader_v1.py"
+  ],
+  "falsification_condition": "ANY_PROMOTED_ADAPTER_DISAGREEING_WITH_ITS_INDEPENDENT_ORACLE_ON_A_FRESH_INPUT__OR_A_FAIL_CLOSED_INPUT_PRODUCING_OUTPUT__OR_ANY_INVENTORY_ROW_BECOMING_EXECUTABLE__OR_A_NEW_ROUTING_SUITE_FAILURE__OR_check_MODE_NOT_REPRODUCING_THE_REPORT__OR_AN_INVOKED_FUNCTION_WRITING_DELETING_SPAWNING_OR_CONNECTING__OR_A_CALL_SUCCEEDING_AFTER_ITS_MODULE_OR_TEST_PIN_DRIFTED__OR_AN_INVOKER_RESULT_DIFFERING_FROM_A_DIRECT_CALL__OR_THE_SELECTOR_SILENTLY_PICKING_A_DIFFERENT_FAMILY__OR_A_FUNCTION_NAMED_BY_A_FAILING_TEST_CASE_BEING_CALLABLE",
+  "expected_parent_change": "2019_OF_2309_INVENTORY_MODULES_5205_FUNCTIONS_INVOCABLE_READ_ONLY_FROM_A_SENTENCE__2672_TEST_EVIDENCED_2533_LABELLED_UNTESTED_186_REFUSED_BY_THEIR_OWN_FAILING_TESTS__FOUND_BY_TASK_DESCRIPTION_PLUS_PAYLOAD_SIGNATURE__PLUS_4_ORACLE_PROMOTED_TOOLS__LIVE_VERIFIED_REGISTRY_67_TO_73__ZERO_CREDIT",
+  "expected_parent_frontier_change": "2019_OF_2309_INVENTORY_MODULES_5205_FUNCTIONS_INVOCABLE_READ_ONLY_FROM_A_SENTENCE__2672_TEST_EVIDENCED_2533_LABELLED_UNTESTED_186_REFUSED_BY_THEIR_OWN_FAILING_TESTS__FOUND_BY_TASK_DESCRIPTION_PLUS_PAYLOAD_SIGNATURE__PLUS_4_ORACLE_PROMOTED_TOOLS__LIVE_VERIFIED_REGISTRY_67_TO_73__ZERO_CREDIT",
+  "stop_condition": "EVIDENCE_CHECK_OK__ALL_5205_FUNCTIONS_CALLED_UNDER_GUARD__DIFFERENTIAL_750_OF_750__0_GUARD_ESCAPES__SELECTION_SELF_RETRIEVAL_0_WRONG_OF_1525__17_ROUTING_SUITES_FAILURE_SET_IDENTICAL_TO_MAIN__REFEREE_ZERO_VIOLATIONS__ZERO_CREDIT",
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "success_probability_lcb": "1/2",
+    "wall_clock_cost_ub": "1",
+    "interpretation": "DISCHARGES_NOTHING__OWNED_RESEARCH_FUNCTIONS_BECOME_ASKABLE_IN_A_SENTENCE__UNLOCK_LCB_1_COUNTS_THE_LIVE_ROUTE_NOT_A_BENCHMARK"
+  },
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "canonical/action_intents/EXTENDED_CAPABILITY_PROMOTER_BATCH1_BYTES_RESEARCH_TOOLS_20261016_V1.json",
+      "canonical/research/bytes/EXTENDED_CAPABILITY_PROMOTION_BYTES_RESEARCH_TOOLS_V1.json",
+      "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json",
+      "canonical/runtime/MODULE_INVOCATION_EVIDENCE_V1.json",
+      "canonical/runtime/bound_capabilities/brain_module_invoke_runner_v1.py",
+      "canonical/runtime/bound_capabilities/brain_module_invoke_v1.py",
+      "canonical/runtime/bound_capabilities/research_tool_loader_v1.py",
+      "canonical/runtime/extended_capability_promoter_v1.py",
+      "canonical/runtime/module_invocation_evidence_v1.py",
+      "canonical/tests/test_brain_module_invoke_v1.py",
+      "canonical/tests/test_extended_capability_promoter_v1.py"
+    ],
+    "route_class": "INTEGRATE",
+    "earlier_routes_exhausted_reason": "DELETE_BYPASS_CANNOT_MAKE_AN_UNEXECUTABLE_INVENTORY_ROW_ANSWER__REUSE_ALONE_FAILS_BECAUSE_56_OF_106_SOURCE_FILES_HAVE_IMPORT_TIME_SIDE_EFFECTS__ADAPT_SUBSTITUTE_COMPOSE_CONFIGURE_DO_NOT_SUPPLY_A_SAFE_LOAD_PLUS_ORACLE__SAFE_LOADER_PLUS_THIN_ADAPTERS_INTO_THE_EXISTING_EXTENDED_REGISTRY_IS_THE_INTEGRATION__ONE_WRAPPER_PER_MODULE_DOES_NOT_SCALE_AND_BLIND_INVOCATION_IS_UNSAFE_SO_ONE_GUARDED_INVOKER_REUSES_EXISTING_TESTS_AS_EVIDENCE",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ]
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations": [
+      "CODING_TB4_GE_66_4",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "proof_state_reachability": "NOT_APPLICABLE__GOVERNANCE_GUARD__NO_V22_OBLIGATION_STATE_CHANGE__LIVE_BINDING_ONLY",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "EXTENDED_CAPABILITY_PROMOTER_BATCH1_BYTES_RESEARCH_TOOLS_20261016_V1",
+      "falsifier_id": "PER_TOOL_INDEPENDENT_ORACLES_ON_THE_REAL_RESEARCH_TREE_PLUS_300_GENERATED_SYMBOLIC_CASES_PLUS_FAIL_CLOSED_PROBES_PLUS_4_PLANTED_MUTATIONS__PLUS_INVOKER_DIFFERENTIAL_ORACLE_ON_750_FUNCTIONS_AND_9_EFFECT_PROBES_PLUS_6_ADMISSION_PROBES_PLUS_SELECTION_SELF_RETRIEVAL_ON_1525_FUNCTIONS",
+      "decisive_question": "DOES_EACH_PROMOTED_TOOL_ANSWER_FROM_A_SENTENCE_THROUGH_solve_AGREEING_WITH_AN_ORACLE_THAT_DOES_NOT_IMPORT_IT_AND_FAIL_CLOSED_OUTSIDE_SCOPE",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [],
+      "no_known_counterexample_reason": "MEASURED_IN_THIS_PR__COMPACT_CANDIDATE_REJECTED_BY_ITS_OWN_ORACLE_68_OF_106_FILES_GROW__4_OF_4_MUTATIONS_CAUGHT__8_PRE_EXISTING_ENV_FAILURES_UNCHANGED__INVOKER_750_OF_750_AGREE__0_OF_9_EFFECT_PROBES_ESCAPED__SELECTOR_1076_EXACT_72_SAME_FAMILY_377_FAILED_CLOSED_0_WRONG__NONDETERMINISTIC_EXCLUDED_AND_LISTED"
+    }
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-10-general-reusable-capability-frontier-v1",
+    "canonical_base_commit": "370005ad198fc7caff1e843909161f48037b42cd",
+    "real_outcome": "OWNED_RESEARCH_TOOLS_ANSWER_THROUGH_THE_ONE_LIVE_ENTRY_ONLY_AFTER_PASSING_THEIR_OWN_ORACLE",
+    "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "obs_goal": {
+      "real_outcome": "MORE_OF_THE_EXISTING_CODE_ANSWERS_THROUGH_THE_ONE_MOUTH_WITH_INDEPENDENTLY_CHECKED_OUTPUTS",
+      "proxy_goals_deleted": [
+        "INVENTORY_ROW_COUNT_AS_LIVE_CAPABILITY_COUNT",
+        "BENCHMARK_SCORE_MOVEMENT"
+      ],
+      "surviving_necessity": "SAFE_LOAD_PLUS_PER_TOOL_ORACLE_BEFORE_ANY_INVENTORY_ROW_IS_EXECUTABLE"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "live_integrated_brain_v1.load_verified_registry",
+        "autonomous_capability_inventory_v1",
+        "goal_front_compiler_v1",
+        "live_brain_route_admission_v1.solve",
+        "astra_runtime._load_bound_capability_registry"
+      ],
+      "external_existing_routes_checked": [
+        "sympy_1_14_0_AS_PINNED_IN_THE_CANONICAL_REGISTRY"
+      ],
+      "capability_work_deleted": [
+        "NONE__RESEARCH_FUNCTIONS_REUSED_BYTE_UNCHANGED"
+      ],
+      "surviving_gap": "NO_SAFE_LOADER_NO_ORACLE_NO_ROW_FOR_INVENTORY_TOOLS"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_MISSING_ROUTE",
+      "delete_bypass_substitute_options": [
+        "ADAPTER_PLUS_EXTENDED_ROW_INSTEAD_OF_EDITING_RESEARCH_FILES",
+        "AUTO_EXECUTE_INVENTORY__REJECTED_IMPORT_TIME_SIDE_EFFECTS"
+      ],
+      "surviving_causal_blocker": "OWNED_RESEARCH_TOOLS_IN_NONEXECUTING_INVENTORY_UNREACHABLE_FROM_ANY_SENTENCE__2309_INVENTORY_ROWS_ZERO_VERIFIED_PROMOTION_PATH"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "REUSE_EXISTING_TESTS_AS_EVIDENCE_PLUS_ONE_GUARDED_GENERIC_INVOKER__PLUS_PER_TOOL_ORACLE_PROMOTER__NO_PER_MODULE_WRAPPERS__RESEARCH_FUNCTIONS_UNCHANGED",
+        "SIGNATURE_INSPECTION_PLUS_STAMP_NON_DICT_AS_VERIFIED__REJECTED_MEASURED_11_NONE_RESULTS_WOULD_BE_STAMPED_AND_13_WRITES_SUBPROCESSES_NETWORK_RUN_UNGUARDED",
+        "AUTO_EXECUTE_ALL_INVENTORY_ROWS__REJECTED_56_OF_106_HAVE_IMPORT_TIME_SIDE_EFFECTS",
+        "EDIT_astra_runtime_615__REJECTED_NO_OP_RETURNS_THE_SAME_67",
+        "CANONICAL_REGISTRY_ROWS__REJECTED_GUARD_CAP_3_PER_PR"
+      ],
+      "losing_routes_reason": "AUTO_EXECUTION_IS_UNSAFE_AND_THE_RUNTIME_EDIT_CHANGES_NOTHING",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "PER_TOOL_ORACLES_ON_106_REAL_FILES__300_GENERATED_SYMBOLIC_CASES__FAIL_CLOSED_PROBES__4_PLANTED_MUTATIONS__2_STEP_DAG_THROUGH_solve"
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "ANY_CLAIM_THAT_INVENTORY_ROWS_ARE_LIVE_CAPABILITIES"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "NONE"
+      ],
+      "fresh_reuse_plan": "RUN_THE_SAME_PROMOTER_ON_THE_NEXT_RESEARCH_DIRECTORY"
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "NONE"
+      ],
+      "search_stop_decision": "EVIDENCE_CHECK_OK__ALL_5205_FUNCTIONS_CALLED_UNDER_GUARD__DIFFERENTIAL_750_OF_750__0_GUARD_ESCAPES__SELECTION_SELF_RETRIEVAL_0_WRONG_OF_1525__17_ROUTING_SUITES_FAILURE_SET_IDENTICAL_TO_MAIN__REFEREE_ZERO_VIOLATIONS__ZERO_CREDIT",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "REUSE_EXISTING_TESTS_AS_EVIDENCE_PLUS_ONE_GUARDED_GENERIC_INVOKER__PLUS_PER_TOOL_ORACLE_PROMOTER__NO_PER_MODULE_WRAPPERS__RESEARCH_FUNCTIONS_UNCHANGED",
+      "SIGNATURE_INSPECTION_PLUS_STAMP_NON_DICT_AS_VERIFIED__REJECTED_MEASURED_11_NONE_RESULTS_WOULD_BE_STAMPED_AND_13_WRITES_SUBPROCESSES_NETWORK_RUN_UNGUARDED",
+      "AUTO_EXECUTE_ALL_INVENTORY_ROWS__REJECTED_56_OF_106_HAVE_IMPORT_TIME_SIDE_EFFECTS",
+      "EDIT_astra_runtime_615__REJECTED_NO_OP_RETURNS_THE_SAME_67",
+      "CANONICAL_REGISTRY_ROWS__REJECTED_GUARD_CAP_3_PER_PR"
+    ],
+    "deleted_or_bypassed_paths": [
+      "AUTO_EXECUTING_UNVERIFIED_INVENTORY",
+      "EDITING_RESEARCH_SOURCE_FILES",
+      "EDITING_astra_runtime"
+    ],
+    "selected_surviving_route": "REUSE_EXISTING_TESTS_AS_EVIDENCE_PLUS_ONE_GUARDED_GENERIC_INVOKER__PLUS_PER_TOOL_ORACLE_PROMOTER__NO_PER_MODULE_WRAPPERS__RESEARCH_FUNCTIONS_UNCHANGED",
+    "why_selected_route_is_fastest_sufficient": "THE_RUNTIME_GUARD_NOT_A_STATIC_SCREEN_DECIDES_SAFETY__TEST_EVIDENCE_JUDGED_PER_TEST_CASE__ONE_INVOKER_ONE_SELECTOR_ONE_EVIDENCE_FILE_MAKE_2019_MODULES_CALLABLE_WITHOUT_2309_WRAPPERS",
+    "expected_parent_level_state_change": "2019_OF_2309_INVENTORY_MODULES_5205_FUNCTIONS_INVOCABLE_READ_ONLY_FROM_A_SENTENCE__2672_TEST_EVIDENCED_2533_LABELLED_UNTESTED_186_REFUSED_BY_THEIR_OWN_FAILING_TESTS__FOUND_BY_TASK_DESCRIPTION_PLUS_PAYLOAD_SIGNATURE__PLUS_4_ORACLE_PROMOTED_TOOLS__LIVE_VERIFIED_REGISTRY_67_TO_73__ZERO_CREDIT",
+    "stop_condition": "EVIDENCE_CHECK_OK__ALL_5205_FUNCTIONS_CALLED_UNDER_GUARD__DIFFERENTIAL_750_OF_750__0_GUARD_ESCAPES__SELECTION_SELF_RETRIEVAL_0_WRONG_OF_1525__17_ROUTING_SUITES_FAILURE_SET_IDENTICAL_TO_MAIN__REFEREE_ZERO_VIOLATIONS__ZERO_CREDIT",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "GOVERNANCE_GUARD_EXEMPT__NO_NEW_CAPABILITY_ROUTE_IS_CLAIMED_ONLY_THE_LIVE_BINDING_OF_OWNED_RESEARCH_FUNCTIONS"
+    }
+  },
+  "benchmark_or_family_rank_authority": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "explicit_user_authorization": "Operator 2026-10-16 session instruction: make all Brain capabilities alive together fast by reusing what is built, without killing any evolving capability; operator approved the promoter plus Batch 1 (bytes research tools). Operator follow-up 2026-10-16: figure out the optimal way to make them alive and real now."
+}

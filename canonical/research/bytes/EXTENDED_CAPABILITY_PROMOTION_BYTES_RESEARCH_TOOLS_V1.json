@@ -1,0 +1,2073 @@
+{
+  "schema": "PROJECT_BRAIN_EXTENDED_CAPABILITY_PROMOTION_BATCH_REPORT_V1",
+  "batch": "bytes_research_tools",
+  "method": "EXTENDED_CAPABILITY_PROMOTER_V1_ROUTER_CALL_PLUS_STDLIB_ORACLE",
+  "directory": "canonical/research/bytes/tools",
+  "file_count": 106,
+  "public_symbols_total": 173,
+  "distinct_public_symbols": 76,
+  "files_reused_by_promoted_capabilities": 4,
+  "inventory_reason_counts": {
+    "ABSOLUTE_HOST_PATHS": 9,
+    "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES": 30,
+    "IMPORT_TIME_SIDE_EFFECTS": 55,
+    "NO_PUBLIC_ENTRYPOINT": 26,
+    "PINNED_TO_ONE_SNAPSHOT_BY_SHA256": 65
+  },
+  "candidate_count": 5,
+  "promoted_count": 4,
+  "outcomes": [
+    {
+      "capability_id": "python.source_tree.manifest.sha256",
+      "outcome": "PROMOTED",
+      "positive_cases_passed": 6,
+      "bad_inputs_failed_closed": 4
+    },
+    {
+      "capability_id": "python.source.compact.ast_identical",
+      "outcome": "ORACLE_FAILED",
+      "reason": "OracleFailure:COMPACT_CONTRACT_BROKEN_ON_REAL_FILE:build_physical_slice_v1.py:ACTION_EXPECTATION_FAILED:output_verified:OBSERVED=False",
+      "cases_passed_before_failure": 3
+    },
+    {
+      "capability_id": "python.source.docstrings.strip",
+      "outcome": "PROMOTED",
+      "positive_cases_passed": 109,
+      "bad_inputs_failed_closed": 3
+    },
+    {
+      "capability_id": "structured.document.semantic_digest.sha256",
+      "outcome": "PROMOTED",
+      "positive_cases_passed": 13,
+      "bad_inputs_failed_closed": 4
+    },
+    {
+      "capability_id": "math.exact_symbolic.compute.sympy",
+      "outcome": "PROMOTED",
+      "positive_cases_passed": 2,
+      "bad_inputs_failed_closed": 5
+    }
+  ],
+  "files": {
+    "canonical/research/bytes/tools/build_physical_slice_v1.py": {
+      "import_time_effects": 12,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/canonical_ast_serialize_v13.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "StripDocs",
+          "ast_sha256": "376ad599aecc5f1a"
+        },
+        {
+          "name": "manifest",
+          "ast_sha256": "fd8288d7829d6ce4"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "f684676f8c7536b3"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/compact_builtin_errors_v15.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "42a9bfac46afa133"
+        },
+        {
+          "name": "T",
+          "ast_sha256": "ce5b988e1b136a71"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "ed8e5a3aabd6ce52"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/compact_failclosed_stubs_v11.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "apply",
+          "ast_sha256": "ad8e605b0e1fa808"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": []
+    },
+    "canonical/research/bytes/tools/conservative_algebraicnumber_prune_v42.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "b6e3536c06cb6a44"
+        }
+      ],
+      "disposition": "REUSED_BY_PROMOTED_CAPABILITY",
+      "promoted_to": [
+        "python.source_tree.manifest.sha256"
+      ],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_assumption_peripheral_prune_v40.py": {
+      "import_time_effects": 1,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "2495b5d83d1b61a1"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_ast_identical_indent_compact_v73.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "6a0b73247a495929"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_ast_identical_inline_compact_v74.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "7d84decd451af418"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_comment_semantic_compact_v75.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "f8fc9e1a558a1727"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_count_ops_expr_prune_v41.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "4667b72adc82d539"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_crossprofile_delta_prune_v38.py": {
+      "import_time_effects": 1,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "3eab7351ca1cb1e4"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_docstring_strip_v76.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "StripDocstrings",
+          "ast_sha256": "524cc3b3e60babf8"
+        },
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "c1f3c1b83031bce2"
+        }
+      ],
+      "disposition": "REUSED_BY_PROMOTED_CAPABILITY",
+      "promoted_to": [
+        "python.source.docstrings.strip"
+      ],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_evalf_pow_rational_prune_v46.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "6647980338eccaaf"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_evalf_subs_prune_v43.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "d41f5d181827f248"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_evalf_trig_real_small_prune_v45.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "6647980338eccaaf"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_exponential_series_type2_prune_v54.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "de570f258688358b"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_failclosed_message_compact_v77.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "0f65633ac6a37a16"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_highlevel_profile_prune_v35.py": {
+      "import_time_effects": 1,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "6de13eda8866884b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "ab4a2bacea1af0c1"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_hyperexpand_prune_v30.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "6de13eda8866884b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "99f8f67ea06ee637"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_libmpf_add_compact_v67.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "replace",
+          "ast_sha256": "0aea39a826d0269a"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "8820591ab9a78e56"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_libmpf_composed_v70.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "77edd88e2648914e"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_libmpf_core_compact_v65.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "replace",
+          "ast_sha256": "e3566d425dd607a4"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "25ea78155b246d20"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_libmpf_div_sqrt_compact_v66.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "replace",
+          "ast_sha256": "e3566d425dd607a4"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "25ea78155b246d20"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_libmpf_local_alias_compact_v69.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "replace",
+          "ast_sha256": "878a9e73e869626c"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "19517321dac1d79b"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_libmpf_local_bindings_compact_v68.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "34265d1f853e6df9"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_libmpf_semantic_compact_v61.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "replace",
+          "ast_sha256": "e3566d425dd607a4"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "e406d26798e79b0f"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_libmpf_semantic_compact_v62.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "replace",
+          "ast_sha256": "e3566d425dd607a4"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "25ea78155b246d20"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_libmpf_semantic_compact_v64.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "replace",
+          "ast_sha256": "e3566d425dd607a4"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "25ea78155b246d20"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_libmpf_three_function_compact_v63.py": {
+      "import_time_effects": 1,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "replace",
+          "ast_sha256": "e3566d425dd607a4"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "25ea78155b246d20"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_mpc_pow_int_n1_n2_prune_v51.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "de570f258688358b"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_mpf_perturb_fone_rounddown_prune_v55.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "de570f258688358b"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_mpf_pow_int_square_only_prune_v52.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "de570f258688358b"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_mpf_tuple4_prune_v57.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "239efd5a2db6b4d4"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_mpmath_fdot_prune_v47.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "d84041370ed99bc3"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_mpmath_five_utility_failclose_prune_v56.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "fail_close",
+          "ast_sha256": "feffce8718f3da56"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "85fd698b88056428"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_mpmath_next56_repair_prune_v50.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "fail_close",
+          "ast_sha256": "feffce8718f3da56"
+        },
+        {
+          "name": "repair_rational_printer",
+          "ast_sha256": "52066f028c59ffdc"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "ede94fbc43cb7a6f"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_mpmath_nine_body_failclose_prune_v53.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "fail_close",
+          "ast_sha256": "feffce8718f3da56"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "85fd698b88056428"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_mpmath_peripheral_prune_v48.py": {
+      "import_time_effects": 1,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "99ad9d5decc47dfd"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_mpmath_peripheral_prune_v49.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "patch",
+          "ast_sha256": "863fa7e86612a1ad"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "7859942fa3a47d1b"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_normalize1_delegate_v71.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "128784cc3e7f794d"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_operator_whitespace_compact_v78.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "1568f471ba1f1663"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_peripheral_profile_prune_v39.py": {
+      "import_time_effects": 1,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "2495b5d83d1b61a1"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_profile_prune_v23.py": {
+      "import_time_effects": 1,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "d6b3723c744f5447"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "b1f53ba5866ef774"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_profile_prune_v26.py": {
+      "import_time_effects": 1,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "baf3a153e44c6f7f"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "fe87ca36a6754870"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_profile_prune_v27.py": {
+      "import_time_effects": 1,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "baf3a153e44c6f7f"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "fe87ca36a6754870"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_profile_prune_v28.py": {
+      "import_time_effects": 1,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "baf3a153e44c6f7f"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "fe87ca36a6754870"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_profile_prune_v29.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "baf3a153e44c6f7f"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "99f8f67ea06ee637"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_repaired_eight_delta_v60.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "replace_body",
+          "ast_sha256": "af5a5a1f8e20e5a1"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "94f43067123f58fb"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_special_profile_prune_v36.py": {
+      "import_time_effects": 1,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "6de13eda8866884b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "ab4a2bacea1af0c1"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_specialpoly_profile_prune_v37.py": {
+      "import_time_effects": 1,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "6de13eda8866884b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "ab4a2bacea1af0c1"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_strprinter_prune_v32.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "6de13eda8866884b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "99f8f67ea06ee637"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_strprinter_prune_v34.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "6de13eda8866884b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "99f8f67ea06ee637"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_subs_prune_v44.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "0d2d06ad692e9cf1"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_token_safe_blankline_compact_v72.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "abd5b65d4b31d0d5"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_two_utility_prune_v58.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "7f0896578ffa4b31"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/conservative_zeta_prune_v31.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "6de13eda8866884b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "99f8f67ea06ee637"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/core_profile_prune_v18.py": {
+      "import_time_effects": 1,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "d6b3723c744f5447"
+        },
+        {
+          "name": "T",
+          "ast_sha256": "00957158e341d84b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "a302aec00a6f396c"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/core_profile_prune_v19.py": {
+      "import_time_effects": 1,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "d6b3723c744f5447"
+        },
+        {
+          "name": "T",
+          "ast_sha256": "00957158e341d84b"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "a302aec00a6f396c"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/core_profile_repair_v20.py": {
+      "import_time_effects": 2,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "d6b3723c744f5447"
+        },
+        {
+          "name": "Stub",
+          "ast_sha256": "e5cb358c47639267"
+        },
+        {
+          "name": "Restore",
+          "ast_sha256": "045d25f888ef66f9"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "833d671f0b4404c5"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/exact_symbolic_route_v1.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "execute",
+          "ast_sha256": "42c838fd72c0d651"
+        }
+      ],
+      "disposition": "REUSED_BY_PROMOTED_CAPABILITY",
+      "promoted_to": [
+        "math.exact_symbolic.compute.sympy"
+      ],
+      "inventory_reasons": []
+    },
+    "canonical/research/bytes/tools/fresh_quartic_unify_repair_v17.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "42a9bfac46afa133"
+        },
+        {
+          "name": "DomainFix",
+          "ast_sha256": "8b2d710b44117d74"
+        },
+        {
+          "name": "PolyFix",
+          "ast_sha256": "46df651ab5045f63"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "22795fc3bb5dd5bd"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/generate_qualification_v1.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "nonzero",
+          "ast_sha256": "1c32c8d151448784"
+        },
+        {
+          "name": "gen",
+          "ast_sha256": "2fdaea71ad8a558c"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": []
+    },
+    "canonical/research/bytes/tools/intra_module_failclosed_trim_v10.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "apply",
+          "ast_sha256": "3071ba163a5dd04e"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": []
+    },
+    "canonical/research/bytes/tools/noncore_profile_repair_v21.py": {
+      "import_time_effects": 1,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "d6b3723c744f5447"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "271675a312e2deb9"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/profile_prune_v22.py": {
+      "import_time_effects": 1,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "d6b3723c744f5447"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "b1f53ba5866ef774"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v1.py": {
+      "import_time_effects": 33,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": true,
+      "public_symbols": [
+        {
+          "name": "replace_once",
+          "ast_sha256": "1b2d0563e9b6b90c"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "ABSOLUTE_HOST_PATHS"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v10.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v11.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v12.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v13.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v14.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v15.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v16.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v17.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v18.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v19.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v2.py": {
+      "import_time_effects": 35,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": true,
+      "public_symbols": [
+        {
+          "name": "replace_once",
+          "ast_sha256": "1b2d0563e9b6b90c"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "ABSOLUTE_HOST_PATHS",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v20.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v21.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v22.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v23.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v24.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v25.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v26.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v27.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v28.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v29.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v3.py": {
+      "import_time_effects": 46,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": true,
+      "public_symbols": [
+        {
+          "name": "replace_once",
+          "ast_sha256": "1b2d0563e9b6b90c"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "ABSOLUTE_HOST_PATHS",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v30.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v31.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v32.py": {
+      "import_time_effects": 3,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v4.py": {
+      "import_time_effects": 50,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": true,
+      "public_symbols": [
+        {
+          "name": "replace_once",
+          "ast_sha256": "1b2d0563e9b6b90c"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "ABSOLUTE_HOST_PATHS",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v5.py": {
+      "import_time_effects": 52,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": true,
+      "public_symbols": [
+        {
+          "name": "replace_once",
+          "ast_sha256": "1b2d0563e9b6b90c"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "ABSOLUTE_HOST_PATHS",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v6.py": {
+      "import_time_effects": 54,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": true,
+      "public_symbols": [
+        {
+          "name": "replace_once",
+          "ast_sha256": "1b2d0563e9b6b90c"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "ABSOLUTE_HOST_PATHS",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v7.py": {
+      "import_time_effects": 67,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": true,
+      "public_symbols": [
+        {
+          "name": "replace_once",
+          "ast_sha256": "1b2d0563e9b6b90c"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "ABSOLUTE_HOST_PATHS",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v8.py": {
+      "import_time_effects": 72,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": true,
+      "public_symbols": [
+        {
+          "name": "replace_once",
+          "ast_sha256": "1b2d0563e9b6b90c"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "ABSOLUTE_HOST_PATHS",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_candidate_v9.py": {
+      "import_time_effects": 117,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": true,
+      "public_symbols": [
+        {
+          "name": "replace_once",
+          "ast_sha256": "1b2d0563e9b6b90c"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "ABSOLUTE_HOST_PATHS",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/rebuild_v81_from_v78.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 4,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "551bf2acd509b29b"
+        },
+        {
+          "name": "compact",
+          "ast_sha256": "024966e3d936c28e"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "ca3063ac58167c52"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/run_qualification_v1.py": {
+      "import_time_effects": 5,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    },
+    "canonical/research/bytes/tools/secondary_profile_prune_v24.py": {
+      "import_time_effects": 1,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "d6b3723c744f5447"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "b1f53ba5866ef774"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/secondary_profile_prune_v25.py": {
+      "import_time_effects": 1,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "baf3a153e44c6f7f"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "fe87ca36a6754870"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256",
+        "ALL_PUBLIC_SYMBOLS_DUPLICATE_EARLIER_FILES"
+      ]
+    },
+    "canonical/research/bytes/tools/semantic_digest_v1.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "freeze",
+          "ast_sha256": "1a5d8c122f8eb5a2"
+        },
+        {
+          "name": "digest",
+          "ast_sha256": "78b22780cdd53ea1"
+        }
+      ],
+      "disposition": "REUSED_BY_PROMOTED_CAPABILITY",
+      "promoted_to": [
+        "math.exact_symbolic.compute.sympy",
+        "structured.document.semantic_digest.sha256"
+      ],
+      "inventory_reasons": []
+    },
+    "canonical/research/bytes/tools/share_failclosed_stubs_v12.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "apply",
+          "ast_sha256": "79ceba0d0198cff7"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": []
+    },
+    "canonical/research/bytes/tools/spent_profile_deadbody_v16.py": {
+      "import_time_effects": 1,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "d6b3723c744f5447"
+        },
+        {
+          "name": "T",
+          "ast_sha256": "37e2674da4a0abba"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "3a655aaab8e83990"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/strip_runtime_annotations_v14.py": {
+      "import_time_effects": 0,
+      "snapshot_hash_pins": 2,
+      "absolute_host_paths": false,
+      "public_symbols": [
+        {
+          "name": "manifest",
+          "ast_sha256": "42a9bfac46afa133"
+        },
+        {
+          "name": "T",
+          "ast_sha256": "178ebddb1b20c5c5"
+        },
+        {
+          "name": "apply",
+          "ast_sha256": "80b7311ddda6f2cb"
+        }
+      ],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "PINNED_TO_ONE_SNAPSHOT_BY_SHA256"
+      ]
+    },
+    "canonical/research/bytes/tools/trace_loaded_v1.py": {
+      "import_time_effects": 6,
+      "snapshot_hash_pins": 0,
+      "absolute_host_paths": false,
+      "public_symbols": [],
+      "disposition": "REMAINS_INVENTORY",
+      "promoted_to": [],
+      "inventory_reasons": [
+        "IMPORT_TIME_SIDE_EFFECTS",
+        "NO_PUBLIC_ENTRYPOINT"
+      ]
+    }
+  }
+}

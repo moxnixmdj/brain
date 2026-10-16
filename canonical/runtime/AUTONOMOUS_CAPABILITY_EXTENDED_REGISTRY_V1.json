@@ -1,6 +1,257 @@
 {
   "schema": "PROJECT_BRAIN_AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1",
   "capabilities": {
+    "brain.module.function.invoke": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "adapter_module": "brain_module_invoke_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux"
+      ],
+      "limitations": [
+        "Only the 2019 modules / 5205 functions in canonical/runtime/MODULE_INVOCATION_EVIDENCE_V1.json (2672 TEST_EVIDENCED, 2533 READ_ONLY_UNTESTED); everything else is refused.",
+        "Result correctness is NOT independently verified per call: TEST_EVIDENCED rests on the module's own passing tests, READ_ONLY_UNTESTED on nothing but faithful execution. Every result says which.",
+        "Read-only: functions that write files, delete, start processes or open sockets are refused at runtime.",
+        "The payload must match the function signature; arguments are never guessed."
+      ],
+      "source": {
+        "type": "brain_native_deterministic",
+        "modules": [
+          "hashlib",
+          "inspect",
+          "json",
+          "math",
+          "pathlib",
+          "re",
+          "subprocess",
+          "sys"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/brain_module_invoke_v1.py",
+        "runner_path": "canonical/runtime/bound_capabilities/brain_module_invoke_runner_v1.py",
+        "evidence_path": "canonical/runtime/MODULE_INVOCATION_EVIDENCE_V1.json"
+      },
+      "verification": {
+        "verified": true,
+        "method": "MODULE_INVOCATION_EVIDENCE_V1_SELF_VERIFY",
+        "claim": "Faithful read-only invocation of a NAMED admitted function; not per-result correctness.",
+        "report": {
+          "functions_called": 5205,
+          "returned_json_on_empty_payload": 783,
+          "refused_on_empty_payload": {
+            "SIGNATURE_NEEDS_PAYLOAD": 4195,
+            "READ_ONLY_GUARD": 42,
+            "RAISED": 185
+          },
+          "differential_compared": 750,
+          "differential_agreed": 750,
+          "differential_disagreements": [],
+          "differential_oracle_could_not_run": 2,
+          "nondeterministic_excluded_from_differential": [
+            "canonical/runtime/astra_runtime.py:utc",
+            "canonical/runtime/bytes_self_certifying_sequence_checker_v2.py:equations",
+            "canonical/runtime/bytes_unified_typed_equivalence_checker_v3.py:equations",
+            "canonical/runtime/h100_compiled_macro_chain_search_v1.py:run",
+            "canonical/runtime/h100_complete_unary_chain_search_v1.py:run",
+            "canonical/runtime/h100_declarative_operator_pack_acquisition_v1.py:run",
+            "canonical/runtime/h100_empirical_description_length_v1.py:run",
+            "canonical/runtime/h100_finite_grammar_escape_v1.py:run",
+            "canonical/runtime/h100_generic_patch_search_transfer_v1.py:run",
+            "canonical/runtime/h100_jit_primitive_acquisition_v1.py:run",
+            "canonical/runtime/h100_library_first_routing_v1.py:run",
+            "canonical/runtime/h100_minimal_patch_search_v1.py:run",
+            "canonical/runtime/h100_multi_capability_composition_v1.py:run",
+            "canonical/runtime/h100_safe_stdlib_operator_acquisition_v1.py:run",
+            "canonical/runtime/h100_typed_capability_planner_v1.py:run",
+            "canonical/runtime/h100_zero_learned_event_memory_v1.py:run_experiment",
+            "canonical/runtime/h100_zero_learned_novelty_stress_v1.py:run",
+            "canonical/runtime/h100_zero_learned_transfer_v1.py:run",
+            "canonical/runtime/retrieval_live_provider_arena_v1.py:run",
+            "canonical/runtime/retrieval_live_provider_arena_v11.py:run",
+            "canonical/runtime/retrieval_live_provider_arena_v12.py:run",
+            "canonical/runtime/retrieval_live_provider_arena_v13.py:run",
+            "canonical/runtime/retrieval_live_provider_arena_v14.py:run",
+            "canonical/runtime/retrieval_live_provider_arena_v16.py:run",
+            "canonical/runtime/retrieval_live_provider_arena_v18.py:run",
+            "canonical/runtime/retrieval_live_provider_arena_v2.py:run",
+            "canonical/runtime/retrieval_live_provider_arena_v3.py:run",
+            "canonical/runtime/retrieval_live_provider_arena_v4.py:run",
+            "canonical/runtime/retrieval_live_provider_arena_v5.py:run",
+            "canonical/runtime/retrieval_live_provider_arena_v6.py:run",
+            "canonical/runtime/retrieval_registry_repository_bridge_v1.py:run"
+          ],
+          "guard": {
+            "refused": [
+              "delete",
+              "mkdir",
+              "os_system",
+              "pathlib_write",
+              "rmtree",
+              "socket",
+              "subprocess",
+              "write",
+              "import_effects"
+            ],
+            "escaped": [],
+            "binding": {
+              "kwargs": true,
+              "kwargs_default": true,
+              "positional": true,
+              "zero_args": true,
+              "root_filled": true,
+              "unmatched_dict_is_the_single_argument": true,
+              "refuses_f_{}": true,
+              "refuses_r_{\"zz\": 1}": true,
+              "refuses_r_3": true
+            }
+          },
+          "admission": {
+            "admitted_row_passes": true,
+            "unlisted_module": true,
+            "unlisted_function": true,
+            "module_sha_drift": true,
+            "test_sha_drift": true,
+            "own_failing_test_refuses": true
+          }
+        },
+        "adapter_sha256": "3f05036b524a4ec335aab31147124df956c116a147d51c7816c2d11848a653f8",
+        "invoker_sha256": "3f05036b524a4ec335aab31147124df956c116a147d51c7816c2d11848a653f8",
+        "runner_sha256": "bb6233fbfa408ad8899781a9d7c9192e07cf884869f7d2c671c3b6a30039effc",
+        "evidence_sha256": "6429a10308666efedf42c2fcf9e14076f9093d47c8a07c913dc8ca50ff08123f",
+        "measured_platform": "linux",
+        "measured_python": "3.11",
+        "model_dependency_count": 0
+      },
+      "requires": [
+        "python.source_file.available",
+        "json.payload.available"
+      ],
+      "provides": [
+        "python.module.function.result"
+      ],
+      "result_fields": [
+        "status",
+        "source_path",
+        "function",
+        "tier",
+        "result_type",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "invoke",
+        "function",
+        "module"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "brain.module.function.invoke",
+          "source_path": "${input.source_path}",
+          "function": "${input.function}",
+          "json_path": "${input.json_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      }
+    },
+    "brain.module.function.solve": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "adapter_module": "brain_module_solve_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux"
+      ],
+      "limitations": [
+        "Only the 2019 modules / 5205 functions in canonical/runtime/MODULE_INVOCATION_EVIDENCE_V1.json (2672 TEST_EVIDENCED, 2533 READ_ONLY_UNTESTED); everything else is refused.",
+        "Result correctness is NOT independently verified per call: TEST_EVIDENCED rests on the module's own passing tests, READ_ONLY_UNTESTED on nothing but faithful execution. Every result says which.",
+        "Read-only: functions that write files, delete, start processes or open sockets are refused at runtime.",
+        "The payload must match the function signature; arguments are never guessed."
+      ],
+      "source": {
+        "type": "brain_native_deterministic",
+        "modules": [
+          "hashlib",
+          "inspect",
+          "json",
+          "math",
+          "pathlib",
+          "re",
+          "subprocess",
+          "sys"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/brain_module_solve_v1.py",
+        "runner_path": "canonical/runtime/bound_capabilities/brain_module_invoke_runner_v1.py",
+        "evidence_path": "canonical/runtime/MODULE_INVOCATION_EVIDENCE_V1.json"
+      },
+      "verification": {
+        "verified": true,
+        "method": "MODULE_INVOCATION_EVIDENCE_V1_SELECTION_SELF_RETRIEVAL",
+        "claim": "Chooses the admitted function whose signature fits the payload and whose description fits the task, fails closed on cross-family ambiguity, then invokes it read-only.",
+        "report": {
+          "selection_self_retrieval": {
+            "counts": {
+              "EXACT": 1076,
+              "FAILED_CLOSED:AMBIGUOUS_TASK__NAME_THE_MODULE_OR_REFIN": 377,
+              "SAME_FAMILY_OTHER_VERSION": 72
+            },
+            "wrong": []
+          },
+          "invoker": "see brain.module.function.invoke"
+        },
+        "adapter_sha256": "098b63d11fbfafcd3eaca4291af582a2c2a0a93b36cec4d5d5e0cbbd1fd3ca4f",
+        "invoker_sha256": "3f05036b524a4ec335aab31147124df956c116a147d51c7816c2d11848a653f8",
+        "runner_sha256": "bb6233fbfa408ad8899781a9d7c9192e07cf884869f7d2c671c3b6a30039effc",
+        "evidence_sha256": "6429a10308666efedf42c2fcf9e14076f9093d47c8a07c913dc8ca50ff08123f",
+        "measured_platform": "linux",
+        "measured_python": "3.11",
+        "model_dependency_count": 0
+      },
+      "requires": [
+        "json.payload.available",
+        "task.description.available"
+      ],
+      "provides": [
+        "python.module.function.result"
+      ],
+      "result_fields": [
+        "status",
+        "selected",
+        "source_path",
+        "function",
+        "tier",
+        "result_type",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "task",
+        "payload"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "brain.module.function.solve",
+          "task": "${input.task}",
+          "json_path": "${input.json_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      }
+    },
     "canonical/capabilities/internalized/artifact_creation/aws_sample_agent_skills_dd0bdc07/office-excel/scripts/read_excel.py.auto.v1": {
       "status": "UNVERIFIED_INVENTORY",
       "verification": {
@@ -1770,7 +2021,10 @@
         "type": "repository_python_source",
         "path": "canonical/research/bytes/tools/conservative_algebraicnumber_prune_v42.py"
       },
-      "incremental_spend_usd": null
+      "incremental_spend_usd": null,
+      "promoted_to": [
+        "python.source_tree.manifest.sha256"
+      ]
     },
     "canonical/research/bytes/tools/conservative_assumption_peripheral_prune_v40.py.auto.v1": {
       "status": "UNVERIFIED_INVENTORY",
@@ -1847,7 +2101,10 @@
         "type": "repository_python_source",
         "path": "canonical/research/bytes/tools/conservative_docstring_strip_v76.py"
       },
-      "incremental_spend_usd": null
+      "incremental_spend_usd": null,
+      "promoted_to": [
+        "python.source.docstrings.strip"
+      ]
     },
     "canonical/research/bytes/tools/conservative_evalf_pow_rational_prune_v46.py.auto.v1": {
       "status": "UNVERIFIED_INVENTORY",
@@ -2375,7 +2632,10 @@
         "type": "repository_python_source",
         "path": "canonical/research/bytes/tools/exact_symbolic_route_v1.py"
       },
-      "incremental_spend_usd": null
+      "incremental_spend_usd": null,
+      "promoted_to": [
+        "math.exact_symbolic.compute.sympy"
+      ]
     },
     "canonical/research/bytes/tools/fresh_quartic_unify_repair_v17.py.auto.v1": {
       "status": "UNVERIFIED_INVENTORY",
@@ -2837,7 +3097,11 @@
         "type": "repository_python_source",
         "path": "canonical/research/bytes/tools/semantic_digest_v1.py"
       },
-      "incremental_spend_usd": null
+      "incremental_spend_usd": null,
+      "promoted_to": [
+        "math.exact_symbolic.compute.sympy",
+        "structured.document.semantic_digest.sha256"
+      ]
     },
     "canonical/research/bytes/tools/share_failclosed_stubs_v12.py.auto.v1": {
       "status": "UNVERIFIED_INVENTORY",
@@ -25399,6 +25663,392 @@
         "path": "canonical/verification/verify_pinned_image_ocr_surface.py"
       },
       "incremental_spend_usd": null
+    },
+    "math.exact_symbolic.compute.sympy": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "math.exact_symbolic.cases.available"
+      ],
+      "provides": [
+        "math.exact_symbolic.results"
+      ],
+      "result_fields": [
+        "status",
+        "case_count",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "symbolic",
+        "exact",
+        "sympy",
+        "factor",
+        "roots",
+        "polynomial",
+        "derivative",
+        "limit",
+        "determinant",
+        "hilbert",
+        "series",
+        "rational"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "math.exact_symbolic.compute.sympy",
+          "input_path": "${input.input_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "research_exact_symbolic_compute_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux"
+      ],
+      "limitations": [
+        "Only the 12 typed operations of exact_symbolic_route_v1 over the variable x; no free-form expressions.",
+        "Requires SymPy (pinned 1.14.0 by math.numeric_expression.sympy); fails closed when SymPy is absent.",
+        "At most 2000 cases per call; a singular linear system fails the whole call."
+      ],
+      "source": {
+        "type": "brain_owned_python_composition",
+        "modules": [
+          "sympy",
+          "hashlib",
+          "json",
+          "pathlib"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/research_exact_symbolic_compute_v1.py",
+        "research_sources": [
+          "canonical/research/bytes/tools/exact_symbolic_route_v1.py",
+          "canonical/research/bytes/tools/semantic_digest_v1.py"
+        ],
+        "third_party_versions": {
+          "sympy": "1.14.0"
+        }
+      },
+      "verification": {
+        "verified": true,
+        "method": "EXTENDED_CAPABILITY_PROMOTER_V1_ROUTER_CALL_PLUS_STDLIB_ORACLE",
+        "executed_through": "canonical/runtime/live_brain_route_admission_v1.py:run_adapter_locally",
+        "positive_cases_passed": 2,
+        "bad_inputs_failed_closed": 5,
+        "oracle": "canonical/runtime/extended_capability_promoter_v1.py:oracle_exact_symbolic",
+        "oracle_checks": [
+          "exact Fraction arithmetic for rat/coeff/diff/factor/hilbert/binomial/limits/linear/series",
+          "factor and diff compared as polynomials at 10-12 exact rational points",
+          "roots rebuild the polynomial (complex, 1e-7) with multiplicities summing to degree",
+          "sin^2n integral = pi*C(2n,n)/4^n checked by linearity in pi"
+        ],
+        "oracle_detail": {
+          "cases_by_op": {
+            "binomial_identity": 25,
+            "coeff": 25,
+            "diff": 25,
+            "factor": 25,
+            "hilbert_det": 25,
+            "limit_poly_ratio": 25,
+            "limit_sinx": 25,
+            "linear_solve": 25,
+            "rat": 25,
+            "roots": 25,
+            "series_coeff": 25,
+            "sin_even_integral": 25
+          }
+        },
+        "adapter_sha256": "861679d8da2fb25e73a3fbccb2db703f0a793bab0a0aaed58640818ac2abc6c8",
+        "loader_sha256": "16329ee6f21ec864c72a9b218c45c25cb9a48c579a80d6a37dd581544963bcab",
+        "research_source_sha256": {
+          "canonical/research/bytes/tools/exact_symbolic_route_v1.py": "5500e1606a6158312b69d3f9ef8884c525ab345aa9fd8595d92623e9f8e0e884",
+          "canonical/research/bytes/tools/semantic_digest_v1.py": "130200a94f8d7e1c2caf74ecd91f8e553dfa04982756851d177e0d908d7eff10"
+        },
+        "measured_platform": "linux",
+        "measured_python": "3.11",
+        "third_party_versions_measured": {
+          "sympy": "1.14.0"
+        },
+        "model_dependency_count": 0
+      }
+    },
+    "python.source.docstrings.strip": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "python.source_file.available"
+      ],
+      "provides": [
+        "python.source_file.docstrings_stripped"
+      ],
+      "result_fields": [
+        "status",
+        "docstrings_removed",
+        "docstrings_remaining",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "docstring",
+        "docstrings",
+        "strip",
+        "remove",
+        "python",
+        "ast"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.source.docstrings.strip",
+          "input_path": "${input.input_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "research_python_docstring_strip_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux"
+      ],
+      "limitations": [
+        "Output is ast.unparse text: comments and original formatting are dropped.",
+        "Changes behaviour of code that reads __doc__ (argparse descriptions, doctest, help())."
+      ],
+      "source": {
+        "type": "brain_native_deterministic",
+        "modules": [
+          "ast",
+          "hashlib",
+          "importlib",
+          "json",
+          "pathlib"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/research_python_docstring_strip_v1.py",
+        "research_sources": [
+          "canonical/research/bytes/tools/conservative_docstring_strip_v76.py"
+        ]
+      },
+      "verification": {
+        "verified": true,
+        "method": "EXTENDED_CAPABILITY_PROMOTER_V1_ROUTER_CALL_PLUS_STDLIB_ORACLE",
+        "executed_through": "canonical/runtime/live_brain_route_admission_v1.py:run_adapter_locally",
+        "positive_cases_passed": 109,
+        "bad_inputs_failed_closed": 3,
+        "oracle": "canonical/runtime/extended_capability_promoter_v1.py:oracle_docstring_strip",
+        "oracle_checks": [
+          "AST equals oracle's own docstring removal",
+          "no docstring remains",
+          "probe() behaviour identical",
+          "__doc__ is None at runtime",
+          "non-first strings and f-strings kept",
+          "all research tool files"
+        ],
+        "oracle_detail": {
+          "real_corpus_files": 106
+        },
+        "adapter_sha256": "3c471499c4db33895ef6b1508faec28eaa528508f37880c28ada7734bfb0fa67",
+        "loader_sha256": "16329ee6f21ec864c72a9b218c45c25cb9a48c579a80d6a37dd581544963bcab",
+        "research_source_sha256": {
+          "canonical/research/bytes/tools/conservative_docstring_strip_v76.py": "f45dfac759d7ce1f8ca93de974fd9e6160aa0227d09142a5710ecfacf5822f22"
+        },
+        "measured_platform": "linux",
+        "measured_python": "3.11",
+        "third_party_versions_measured": {},
+        "model_dependency_count": 0
+      }
+    },
+    "python.source_tree.manifest.sha256": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "python.source_tree.available"
+      ],
+      "provides": [
+        "python.source_tree.manifest_sha256"
+      ],
+      "result_fields": [
+        "status",
+        "manifest_sha256",
+        "file_count",
+        "total_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "manifest",
+        "fingerprint",
+        "sha256",
+        "directory",
+        "snapshot",
+        "hash"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.source_tree.manifest.sha256",
+          "source_root": "${input.source_root}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "research_python_tree_manifest_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux"
+      ],
+      "limitations": [
+        "Covers *.py files only; other files never affect the digest.",
+        "Paths are relative to the given directory, so the same tree elsewhere gives the same digest.",
+        "Fails closed when the directory holds no Python files."
+      ],
+      "source": {
+        "type": "brain_native_deterministic",
+        "modules": [
+          "ast",
+          "hashlib",
+          "importlib",
+          "json",
+          "pathlib"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/research_python_tree_manifest_v1.py",
+        "research_sources": [
+          "canonical/research/bytes/tools/conservative_algebraicnumber_prune_v42.py"
+        ]
+      },
+      "verification": {
+        "verified": true,
+        "method": "EXTENDED_CAPABILITY_PROMOTER_V1_ROUTER_CALL_PLUS_STDLIB_ORACLE",
+        "executed_through": "canonical/runtime/live_brain_route_admission_v1.py:run_adapter_locally",
+        "positive_cases_passed": 6,
+        "bad_inputs_failed_closed": 4,
+        "oracle": "canonical/runtime/extended_capability_promoter_v1.py:oracle_tree_manifest",
+        "oracle_checks": [
+          "items equal os.walk listing sorted by path components",
+          "digest = sha256(canonical items json)",
+          "deterministic",
+          "non-.py edits ignored",
+          "one-byte edit and rename change the digest",
+          "real 106-file research directory counted"
+        ],
+        "oracle_detail": {},
+        "adapter_sha256": "c0bc5e95d020a06d6911b0c919f097c542a183d6e788803295c80d565df3eefa",
+        "loader_sha256": "16329ee6f21ec864c72a9b218c45c25cb9a48c579a80d6a37dd581544963bcab",
+        "research_source_sha256": {
+          "canonical/research/bytes/tools/conservative_algebraicnumber_prune_v42.py": "3bb9930f78c911daf26f1d531cdcd17355dc1b747744da230f1d66e74126834f"
+        },
+        "measured_platform": "linux",
+        "measured_python": "3.11",
+        "third_party_versions_measured": {},
+        "model_dependency_count": 0
+      }
+    },
+    "structured.document.semantic_digest.sha256": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "structured.document.available"
+      ],
+      "provides": [
+        "structured.document.semantic_digest"
+      ],
+      "result_fields": [
+        "status",
+        "semantic_digest",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "keywords": [
+        "semantic",
+        "digest",
+        "fingerprint",
+        "sha256",
+        "equality",
+        "order",
+        "invariant",
+        "structured",
+        "document"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "structured.document.semantic_digest.sha256",
+          "input_path": "${input.input_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "research_json_semantic_digest_v1",
+      "entrypoint": "run",
+      "platforms": [
+        "linux"
+      ],
+      "limitations": [
+        "Input must be a .json file. Object key order and whitespace are ignored; array order is significant.",
+        "Numbers are typed: 1 and 1.0 differ, and floats compare by exact binary value.",
+        "NaN and Infinity literals are rejected."
+      ],
+      "source": {
+        "type": "brain_native_deterministic",
+        "modules": [
+          "hashlib",
+          "json",
+          "pathlib"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/research_json_semantic_digest_v1.py",
+        "research_sources": [
+          "canonical/research/bytes/tools/semantic_digest_v1.py"
+        ]
+      },
+      "verification": {
+        "verified": true,
+        "method": "EXTENDED_CAPABILITY_PROMOTER_V1_ROUTER_CALL_PLUS_STDLIB_ORACLE",
+        "executed_through": "canonical/runtime/live_brain_route_admission_v1.py:run_adapter_locally",
+        "positive_cases_passed": 13,
+        "bad_inputs_failed_closed": 4,
+        "oracle": "canonical/runtime/extended_capability_promoter_v1.py:oracle_semantic_digest",
+        "oracle_checks": [
+          "key order and whitespace invariant",
+          "int/float/bool/string/null/order distinguished",
+          "exact float bits distinguished",
+          "deterministic"
+        ],
+        "oracle_detail": {
+          "equivalence_classes": 11
+        },
+        "adapter_sha256": "86f78960ab7554927efc0da963da6a69329000333fc0f1dc79f503a4f8113386",
+        "loader_sha256": "16329ee6f21ec864c72a9b218c45c25cb9a48c579a80d6a37dd581544963bcab",
+        "research_source_sha256": {
+          "canonical/research/bytes/tools/semantic_digest_v1.py": "130200a94f8d7e1c2caf74ecd91f8e553dfa04982756851d177e0d908d7eff10"
+        },
+        "measured_platform": "linux",
+        "measured_python": "3.11",
+        "third_party_versions_measured": {},
+        "model_dependency_count": 0
+      }
     }
   }
 }
