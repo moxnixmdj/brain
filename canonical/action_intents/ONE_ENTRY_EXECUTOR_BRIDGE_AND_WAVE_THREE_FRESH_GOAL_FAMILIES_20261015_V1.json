@@ -3,7 +3,7 @@
   "date": "2026-10-15",
   "action_id": "ONE_ENTRY_EXECUTOR_BRIDGE_AND_WAVE_THREE_FRESH_GOAL_FAMILIES_20261015_V1",
   "canonical_generation": "2026-10-10-general-reusable-capability-frontier-v1",
-  "canonical_base_commit": "f416ba3012da499836190ebbf0ce6e70f697871b",
+  "canonical_base_commit": "3dc78c235ce5ecd97814be133c9035666dd485fb",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "active_program": "GENERAL_REUSABLE_CAPABILITY_DEVELOPMENT_PROGRAM_V1",
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -131,7 +131,7 @@
   },
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-10-10-general-reusable-capability-frontier-v1",
-    "canonical_base_commit": "f416ba3012da499836190ebbf0ce6e70f697871b",
+    "canonical_base_commit": "3dc78c235ce5ecd97814be133c9035666dd485fb",
     "real_outcome": "EVERY_BOUND_CAPABILITY_IS_EXECUTABLE_THROUGH_ONE_ENTRY_AND_MEASURED_ON_FRESH_GOALS_BY_INDEPENDENT_CHECKERS",
     "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
     "obs_goal": {

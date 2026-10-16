@@ -3416,8 +3416,7 @@
       "action_template": {
         "type": "invoke_capability",
         "args": {
-          "capability_id": "terminal.kstar.root.assess.stdlib",
-          "assessment_scope": "${input.assessment_scope}"
+          "capability_id": "terminal.kstar.root.assess.stdlib"
         },
         "expect": {
           "type": "field_equals",

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Convert repository-local YAML to canonical JSON using yq or a safe PyYAML fallback."""
+"""Convert repository-local YAML to canonical JSON using verified Ubuntu yq."""
 from __future__ import annotations
 import hashlib,json,pathlib,subprocess
 
@@ -18,7 +18,7 @@ def run(args, root):
         raise RuntimeError("YAML_INPUT_REQUIRED")
     if out.suffix.lower()!=".json":
         raise RuntimeError("JSON_OUTPUT_REQUIRED")
-    parsed=None
+    parsed = None
     try:
         proc=subprocess.run(
             ["yq",".",str(src)],
