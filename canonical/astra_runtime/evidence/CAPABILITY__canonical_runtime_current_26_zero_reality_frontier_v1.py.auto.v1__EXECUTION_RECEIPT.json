@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/current_26_zero_reality_frontier_v1.py.auto.v1",
+ "elapsed_ms": 31.722,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/current_26_zero_reality_frontier_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/current_26_zero_reality_frontier_v1.py",
+ "module_sha256": "e65fc5dd7cf7e540a5451147c4007f9d6b38b00081ec9b7f74923f6e4dd90bd1",
+ "observed": {
+  "pass": false,
+  "returncode": 0,
+  "status": "FAIL_CLOSED__SOURCE_BLOB_DRIFT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_26_zero_reality_frontier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 8,
+ "result_sha256": "d472a84c67462df31f06f94b1895bbfba4a21dba643a880d6fc9f0f966aa3943",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

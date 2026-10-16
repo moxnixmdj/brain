@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/h100_non_synthetic_description_length_v1.py.auto.v1",
+ "elapsed_ms": 113.022,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/h100_non_synthetic_description_length_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/h100_non_synthetic_description_length_v1.py",
+ "module_sha256": "44657187e3070f1da418bea7010f579c766e6f21d87391ac6dcefa7a5f0e5334",
+ "observed": {
+  "returncode": 0,
+  "status": "NON_SYNTHETIC_CANONICAL_AST_DESCRIPTION_LENGTH_MEASURED__FOUR_CAPABILITY_CLASSES__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_h100_non_synthetic_description_length_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 9,
+ "result_sha256": "023ebfc3cac42d254c51dda8342976c30dd76d839b68e9ff53559f8899c5e3bd",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

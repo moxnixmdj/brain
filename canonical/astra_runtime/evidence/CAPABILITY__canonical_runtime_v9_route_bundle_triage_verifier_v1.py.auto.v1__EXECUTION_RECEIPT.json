@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/v9_route_bundle_triage_verifier_v1.py.auto.v1",
+ "elapsed_ms": 26.781,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/v9_route_bundle_triage_verifier_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/v9_route_bundle_triage_verifier_v1.py",
+ "module_sha256": "4c9a3cb530548bdac1b8e4d80a23864500c92b3ca316d1ccbb91b2fbc0537e61",
+ "observed": {
+  "pass": true,
+  "returncode": 0
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_v9_route_bundle_triage_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 5,
+ "result_sha256": "3f466ab975e82cf6f7925d46046d88711578da77961ff747f795fe528da49164",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

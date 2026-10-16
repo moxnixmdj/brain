@@ -1,0 +1,32 @@
+{
+ "capability_id": "canonical/runtime/livebench_if_score_bound_v1.py.auto.v1",
+ "elapsed_ms": 63.261,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/livebench_if_score_bound_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/livebench_if_score_bound_v1.py",
+ "module_sha256": "5dbd09fe8b06e65ea0d8fabba516cc774ad59ee306ff67369da96bbfb28fa9b3",
+ "observed": {
+  "returncode": 0
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_if_score_bound_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 11,
+ "result_sha256": "add3807a1dbc0daa51699e159115fcb030252d836b9cb72bfd30dd9a5877abb2",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

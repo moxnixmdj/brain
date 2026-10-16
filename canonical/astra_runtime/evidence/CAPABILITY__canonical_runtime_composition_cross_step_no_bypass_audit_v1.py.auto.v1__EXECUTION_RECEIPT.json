@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/composition_cross_step_no_bypass_audit_v1.py.auto.v1",
+ "elapsed_ms": 62.837,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/composition_cross_step_no_bypass_audit_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/composition_cross_step_no_bypass_audit_v1.py",
+ "module_sha256": "2b262c69635cf85a71bf376df0990eda8e4c88f8ac5884956fe7b493cce33ade",
+ "observed": {
+  "returncode": 0,
+  "status": "PASS__KNOWN_RAW_CROSS_STEP_BYPASS_CLOSED_BY_DECLARED_CONTENT_BOUND_PROJECTION"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_composition_cross_step_no_bypass_audit_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 22,
+ "result_sha256": "1f92aece2def59c8779f9c63a414e21beaef7a2c1159764c8a7dcc160ce72222",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
