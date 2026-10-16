@@ -153,6 +153,102 @@ def prepare(
     }
 
 
+def _receipt_backed_execution(
+    capability_id: str,
+    *,
+    inputs: Mapping[str, Any],
+    instance_id: str | None,
+    requires: list[str] | None,
+    provides: list[str] | None,
+    result_fields: list[str] | None,
+) -> dict[str, Any] | None:
+    """Execute a loader-admitted receipt-backed capability; None when this id is not one.
+
+    Why this exists, measured: the live capability invoker (the single front door named by
+    the ownership manifest) routes `bound:<id>` here for EVERY admitted bound capability, and
+    the ownership provider for those is VERIFIED_BOUND_CAPABILITIES, whose declared selector is
+    `live_integrated_brain_v1.load_verified_registry`. This adapter, however, only knows
+    BOUND_CAPABILITY_REGISTRY_V1.json, so it answered BOUND_CAPABILITY_UNKNOWN for all 294
+    receipt-backed capabilities. The invocation coverage check was therefore green on their id
+    prefix while dispatch failed in fact, and the manifest invariant
+    EVERY_ADMITTED_LIVE_OWNED_CAPABILITY_IS_EXECUTABLE_OR_COMPOSABLE_THROUGH_ITS_FABRIC_CARRIER
+    did not hold.
+
+    Two differences from the promoted-registry path, both deliberate:
+
+    * AUTHORITY is the loader, not a status string. `load_verified_registry()` re-verifies, at
+      this instant, that the module hash matches the producer receipt AND that a different
+      identity reproduced it under a GitHub-signed OIDC run reference. A promoted-registry
+      entry is admitted on `status == VERIFIED_BOUND_CAPABILITY`; this path is admitted on
+      evidence, and refuses everything the loader refuses.
+    * EXECUTION is `run_adapter_locally` (this repository's kernel argument and expectation
+      semantics, which already runs all 294 with their declared expectations met) rather than
+      `astra_runtime._invoke_bound_capability`, which is by definition confined to the
+      promoted registry.
+
+    Returns None for every id that is not a loader-admitted receipt-backed capability, so the
+    promoted-registry path below is reached unchanged for everything else. Caller inputs may
+    instantiate the frozen action template; they can never change the capability id.
+    """
+    from canonical.runtime import live_brain_route_admission_v1 as route_admission
+    from canonical.runtime import live_integrated_brain_v1 as live_brain
+
+    entry = live_brain.load_verified_registry().get(capability_id)
+    if not isinstance(entry, Mapping) or entry.get("capability_source") != "receipt_projection":
+        return None
+    if float(entry.get("incremental_spend_usd", 0) or 0) != 0:
+        raise BoundExecutionError("RECEIPT_BACKED_NONZERO_COST:" + capability_id)
+    evidence = entry.get("verification")
+    if not isinstance(evidence, Mapping) or not str(evidence.get("receipt_path") or ""):
+        raise BoundExecutionError("RECEIPT_BACKED_EVIDENCE_MISSING:" + capability_id)
+    action = entry.get("action_template")
+    if not isinstance(action, Mapping):
+        raise BoundExecutionError("RECEIPT_BACKED_ACTION_TEMPLATE_MISSING:" + capability_id)
+    args = dict(action.get("args") or {})
+    args.pop("capability_id", None)
+    args.update({k: v for k, v in dict(inputs or {}).items() if k != "capability_id"})
+    args["capability_id"] = capability_id
+    rendered = {**dict(action), "args": args}
+    tool = route_admission.run_adapter_locally(
+        {**dict(entry), "capability_id": capability_id}, rendered)
+    if not isinstance(tool, Mapping):
+        raise BoundExecutionError("RECEIPT_BACKED_RESULT_NOT_AN_OBJECT:" + capability_id)
+    truth = route_admission.tool_truth_errors(
+        {"execution": [{"capability_id": capability_id, "result": dict(tool)}]})
+    if truth:
+        raise BoundExecutionError("RECEIPT_BACKED_TOOL_REPORTED_NON_SUCCESS:" + ";".join(truth))
+    return {
+        "schema": SCHEMA,
+        "status": "PASS__RECEIPT_BACKED_BOUND_CAPABILITY_EXECUTED",
+        "pass": True,
+        "capability_id": capability_id,
+        "instance_id": str(instance_id or capability_id),
+        "requires": list(requires if requires is not None else entry.get("requires") or []),
+        "provides": list(provides if provides is not None else entry.get("provides") or []),
+        "result_fields": list(result_fields or []),
+        "inputs_sha256": _sha(dict(inputs or {})),
+        "receipt_path": evidence.get("receipt_path"),
+        "module_sha256": evidence.get("module_sha256"),
+        "entrypoint": entry.get("entrypoint"),
+        "adapter_module": entry.get("adapter_module"),
+        "rendered_action": deepcopy(rendered),
+        "result_sha256": _sha(dict(tool)),
+        "result": deepcopy(dict(tool)),
+        "execution_authority": (
+            "LOADER_ADMITTED_EXECUTION_RECEIPT_WITH_INDEPENDENT_OIDC_ATTESTED_REPRODUCTION"
+        ),
+        "incremental_spend_usd": 0,
+        "search_or_pending_binding_execution_allowed": False,
+        "terminal_authority": False,
+        "capability_credit_delta": 0,
+        "ownership_credit_delta": 0,
+        "semantic_boundary": (
+            "PROVES_EXECUTION_OF_A_LOADER_ADMITTED_CAPABILITY_AND_ITS_DECLARED_EXPECTATION;"
+            "HIGHER_LEVEL_TASK_EFFECT_MEANING_REQUIRES_SEPARATE_AUTHENTICATION"
+        ),
+    }
+
+
 def execute(
     capability_id: str,
     *,
@@ -166,6 +262,19 @@ def execute(
     expected_rendered_action_sha256: str | None = None,
 ) -> dict[str, Any]:
     try:
+        # Receipt-backed capabilities first: they are admitted by the loader on execution
+        # evidence, and the promoted-registry path below cannot see them. None means "not
+        # one of those", so every promoted id keeps the strict path unchanged.
+        receipt_backed = _receipt_backed_execution(
+            capability_id,
+            inputs=inputs,
+            instance_id=instance_id,
+            requires=requires,
+            provides=provides,
+            result_fields=result_fields,
+        )
+        if receipt_backed is not None:
+            return receipt_backed
         prepared = prepare(
             capability_id,
             inputs=inputs,
