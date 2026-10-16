@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_frozen_schema19_envelope_v1.py.auto.v1",
- "elapsed_ms": 121.037,
+ "elapsed_ms": 155.154,
  "independent_run_reference": {
-  "github_run_id": 38934920589,
+  "github_run_id": 38937221137,
   "oidc_claims": {
    "actor": "moxnixmdj",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "arena/120f25af-brain",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/pull/4725/merge",
-   "jti": "9687eaaa-91e0-4dce-a135-994bd33496f9",
+   "jti": "095e748c-6c41-423b-8b19-1b4ba95bf8ba",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "38934920589",
+   "run_id": "38937221137",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/pull/4725/merge"
   }
  },
