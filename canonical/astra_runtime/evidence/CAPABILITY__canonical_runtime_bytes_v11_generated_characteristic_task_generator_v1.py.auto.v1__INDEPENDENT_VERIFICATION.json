@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/bytes_v11_generated_characteristic_task_generator_v1.py.auto.v1",
- "elapsed_ms": 104.665,
+ "elapsed_ms": 103.037,
  "independent_run_reference": {
-  "github_run_id": 38933435967,
+  "github_run_id": 38933914859,
   "oidc_claims": {
    "actor": "moxnixmdj",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "arena/120f25af-brain",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/pull/4725/merge",
-   "jti": "b9f26687-5baa-46e5-9478-69bcd8eeb5c4",
+   "jti": "7addf332-8625-4656-b643-c1f36a866012",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "38933435967",
+   "run_id": "38933914859",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/pull/4725/merge"
   }
  },
