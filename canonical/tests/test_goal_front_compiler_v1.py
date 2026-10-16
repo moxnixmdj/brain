@@ -669,3 +669,32 @@ def test_f15_identifier_boundaries_and_a_sentence_final_period():
     assert front.explicitly_named_capabilities(f"run {cid}.", reg) == [cid]
     assert front.explicitly_named_capabilities(f"run {cid}x", reg) == []
     assert front.explicitly_named_capabilities("run something else entirely", reg) == []
+
+
+def test_f16_an_id_shaped_path_that_no_capability_answers_to_fails_closed():
+    """F16: an id-shaped token is an identity, not an artifact.
+
+    The defect, shown first: the pinned compiler binds the named path as `output_path` for a
+    generic candidate, which then reports `output_verified: true` by writing a file at the
+    capability's own id path - so asking for a capability that does not exist produced a
+    success and a fabricated artifact.  Measured on the real registry: 224 of 294 goals that
+    named a real capability "succeeded" that way."""
+    reg = _registry()
+    cid = _zero_input_cid()
+    ghost = cid.rsplit(".py.auto.v1", 1)[0] + "_renamed.py.auto.v1"
+    goal = f"run {ghost}"
+    pinned = gc.compile_goal(goal, front.routable_registry(reg), ROOT)
+    assert pinned["inputs"]["output_path"] == ghost
+    assert pinned["selected_capability"] != ghost
+    with pytest.raises(gc.GoalCompilationFailure) as excinfo:
+        front.compile_goal(goal, reg, ROOT)
+    assert excinfo.value.code == "GOAL_NAMES_UNKNOWN_CAPABILITY"
+
+
+def test_f16_a_registered_capability_inside_a_longer_request_is_not_an_artifact():
+    """A registered id inside a longer sentence is a composition this layer does not claim;
+    it fails closed instead of being handed to another capability as an output artifact."""
+    cid = _zero_input_cid()
+    with pytest.raises(gc.GoalCompilationFailure) as excinfo:
+        front.compile_goal(f"run {cid} and then report the outcome to me", _registry(), ROOT)
+    assert excinfo.value.code == "GOAL_NAMES_CAPABILITY_IN_COMPOUND_REQUEST"

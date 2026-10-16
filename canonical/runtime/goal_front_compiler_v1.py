@@ -142,6 +142,7 @@ _IDENTITY_CHARS = set("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234
 _COMPOSITION_MARKERS = (" and ", " then ", " also ", " plus ", " after ", " before ", ",", ";", "\n")
 _MAX_NAMING_WORDS = 4
 _EXPLICIT_NAME_SCORE = 10 ** 6
+_CAPABILITY_ID_SHAPE = re.compile(r"[A-Za-z0-9_./-]+\.py\.auto\.v1")
 
 
 def explicitly_named_capabilities(goal: str, admissible: Mapping[str, Mapping[str, Any]]) -> list[str]:
@@ -164,6 +165,17 @@ def explicitly_named_capabilities(goal: str, admissible: Mapping[str, Mapping[st
                 break
             idx = text.find(cid, idx + 1)
     return sorted(set(hits))
+
+
+def capability_id_shaped_tokens(goal: str) -> list[str]:
+    """Tokens in the goal that have the shape of a receipt-backed capability identity.
+
+    Measured: a goal naming a capability was previously bound as an *output artifact* - the id
+    handed to a generic candidate as ``output_path`` - which then reported
+    ``output_verified: true`` by writing a file at the capability's own id path.  224 of 294
+    naming goals "succeeded" that way.  An id-shaped token is an identity, never an artifact.
+    """
+    return sorted(set(_CAPABILITY_ID_SHAPE.findall(str(goal or ""))))
 
 
 def naming_is_the_whole_request(goal: str, cid: str) -> bool:
@@ -886,6 +898,16 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
             },
             rules,
         )
+
+    # F16: an id-shaped token is an identity.  A registered one inside a longer request is a
+    # composition this layer does not claim; an unregistered one is not a capability at all
+    # and must not become an artifact some other capability can "satisfy" by writing a file.
+    shaped = capability_id_shaped_tokens(text)
+    if shaped:
+        unknown = [t for t in shaped if t not in admissible]
+        if unknown:
+            raise GoalCompilationFailure("GOAL_NAMES_UNKNOWN_CAPABILITY", ",".join(unknown[:3]))
+        raise GoalCompilationFailure("GOAL_NAMES_CAPABILITY_IN_COMPOUND_REQUEST", ",".join(shaped[:3]))
 
     registry = routable_registry(admissible)
     if len(registry) != len(admissible):
