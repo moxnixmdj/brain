@@ -35,6 +35,10 @@ _FRAME = [
     (re.compile(r"\bexactly\s+2\s+records\b", re.I), "exactly two records"),
     (re.compile(r"\bexactly\s+3\s+records\b", re.I), "exactly three records"),
     (re.compile(r"(\.json)\s+with\s+exactly\s+(one|two|three)\s+record", re.I), r"\1 containing exactly \2 record"),
+    (re.compile(r"\b(?:a\s+)?single\s+(?:JSON\s+)?record\b", re.I), "exactly one record"),
+    (re.compile(r"(\.json)\s+that\s+(?:contains|holds)\s+exactly\s+(one|two|three)\s+record", re.I), r"\1 containing exactly \2 record"),
+    (re.compile(r"\bexactly\s+one\s+record,\s+fields\b", re.I), "exactly one record with fields"),
+    (re.compile(r"\bwhose\s+fields\s+are\b", re.I), "with fields"),
 ]
 
 # Rule 3b: an archive request that names a manifest (.json) and a .tar.gz output, in any wording
@@ -45,11 +49,13 @@ _TARGZ = re.compile(r"((?:[A-Za-z0-9_.-]+/)*[A-Za-z0-9_.-]+\.tar\.gz)\b")
 
 # Rule 4: exact literal.  The text before the first quote and after the last quote may only use
 # these words; the verb must be one of the reply verbs.  This is an allow-list, not a free match.
-_REPLY_VERBS = {"say", "reply", "respond", "answer", "print", "return", "output", "give", "write", "provide"}
+_REPLY_VERBS = {"say", "reply", "respond", "answer", "print", "return", "output", "give", "write", "provide", "repeat", "reproduce", "state", "type", "echo"}
 _FILLER = {
     "exactly", "only", "just", "verbatim", "the", "text", "string", "exact", "back", "with",
     "your", "answer", "must", "be", "read", "and", "nothing", "else", "a", "an", "in", "as",
     "reply", "response", "output", "to", "this", "is", "it", "word", "words", "more", "again", "sentence",
+    "should", "precisely", "entire", "whole", "for", "no", "extra", "repeat", "back", "reproduce", "message",
+    "content", "line", "same", "the", "that", "be", "give", "nothing", "else", "only", "please", "text",
 }
 _QUOTED = re.compile(r'"([^"\n]+)"')
 
