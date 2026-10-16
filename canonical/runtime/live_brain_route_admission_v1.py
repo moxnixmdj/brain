@@ -66,6 +66,7 @@ from typing import Any, Mapping
 
 from canonical.runtime import astra_runtime, goal_compiler
 from canonical.runtime import goal_front_compiler_v1 as front
+from canonical.runtime import live_integrated_brain_v1
 from canonical.runtime.live_integrated_brain_v1 import (
     ROOT,
     SCHEMA as LIVE_SCHEMA,
@@ -106,7 +107,16 @@ def _future_artifacts(goal: str) -> list[str]:
 
 
 def _output_keys(entry: Mapping[str, Any]) -> list[str]:
-    keys = goal_compiler._placeholders(entry.get("action_template") or {})
+    """Which declared inputs are output artifacts.
+
+    Reads the DECLARED argument contract when the entry carries one (`declared_action_template`): a
+    derived entry's executable template names only the capability itself, so judging "does this
+    capability serve the file the sentence asks for" against it answered
+    R2_OUTPUT_ARTIFACT_UNSERVED - measured, while `run_raw_goal` executed the same sentence.
+    """
+    declared = entry.get("declared_action_template") if isinstance(entry, Mapping) else None
+    source = declared if isinstance(declared, Mapping) else entry
+    keys = goal_compiler._placeholders(source.get("action_template") if isinstance(source, Mapping) and "action_template" in source else source)
     output_stems = {"output", "result", "report", "screenshot", "image", "artifact", "destination", "dest"}
     return sorted(
         k for k in keys
@@ -156,6 +166,24 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     rules = set(((compiled.get("front_compiler") or {}).get("rules_applied")) or [])
     if "F15_EXPLICIT_CAPABILITY_ID_NAMED" in rules and front.explicitly_named_capabilities(goal, registry) == [selected]:
         return {**base, "admitted": True, "rule": None, "admission_basis": "EXPLICIT_CAPABILITY_ID_IN_GOAL"}
+    # Typed admission: a capability whose DECLARED argument contract the sentence states completely
+    # is not weak path evidence either - the sentence supplies exactly the values this capability
+    # consumes, and the pinned binder never guesses (it binds every declared input or refuses).  This
+    # is the F15 discipline applied to the other way a caller can be explicit: F15 chooses by
+    # identifier, this chooses by stating the contract.  Measured: it is the only reason `solve()`
+    # refused a sentence the live door executed (`FAIL_CLOSED__ROUTE_ADMISSION_REJECTED`,
+    # R3_WEAK_EVIDENCE, one semantic token).  Re-verified HERE rather than trusting a rule string, and
+    # only for a SPECIFIC contract: a capability whose only input is the whole request binds any
+    # sentence at all, so binding it proves nothing about what was asked for.
+    try:
+        from canonical.runtime import capability_selection_retrieval_v1 as _selection
+        typed = _selection.admit(goal, selected, entry, ROOT)
+    except Exception:  # noqa: BLE001 - any failure to re-verify is simply no admission here
+        typed = None
+    if isinstance(typed, Mapping) and typed.get("admitted") is True and typed.get("specific") is True:
+        return {**base, "admitted": True, "rule": None,
+                "admission_basis": "DECLARED_INPUT_CONTRACT_FULLY_STATED_IN_GOAL",
+                "typed_admission": {"required_inputs": typed.get("required_inputs"), "specific": True}}
     if matched and not semantic:
         return {**base, "admitted": False, "rule": "R1_PATH_TOKENS_ONLY"}
     if futures and not output_keys:
@@ -682,7 +710,22 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
     if controller_actions is None:
         if not selected or selected not in admissible or not isinstance(compiled.get("inputs"), Mapping):
             return _fail(task_id, "FAIL__COMPILED_SHAPE_NOT_EXECUTABLE", "RAW_GOAL_COMPILED_SHAPE_GAP", started, compiler_mode=compiled.get("compiler_mode"))
-        action = goal_compiler._render_template(admissible[selected]["action_template"], dict(compiled["inputs"]))
+        _entry = admissible[selected]
+        _inputs = dict(compiled["inputs"])
+        _declared = _entry.get("declared_action_template")
+        try:
+            action = goal_compiler._render_template(_declared or _entry["action_template"], _inputs)
+        except goal_compiler.GoalCompilationFailure:
+            # The capability declares TWO forms and the sentence chose neither of the declared
+            # argument values: fall back to the executable template, which is the zero-input form the
+            # capability's own receipt was minted from.  Measured: without this, naming a capability
+            # whose declaration has inputs stopped reaching it here entirely (the render raised), while
+            # `run_raw_goal` still executed the zero-input form - the same one-sentence-two-verdicts
+            # defect in the other direction.  A render failure is not a licence to guess: no value is
+            # invented, and the capability's own contract still fails closed if it truly needs inputs.
+            if not _declared:
+                raise
+            action = goal_compiler._render_template(_entry["action_template"], _inputs)
         if kernel_refuses(admissible[selected]):
             return _execute_locally(task_id, goal, compiled, admissible[selected], action, raw_contract, started)
         local_res = _execute_locally(task_id, goal, compiled, admissible[selected], action, raw_contract, started)
@@ -751,9 +794,7 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     if not task_id or not goal:
         return _fail(task_id, "FAIL_CLOSED", "REQUEST_INVALID", started)
     try:
-        registry = load_verified_registry(include_extended=True)
-        admissible = goal_compiler._platform_admissible_registry(dict(registry))
-        compiled = front.compile_goal(goal, admissible, ROOT)
+        registry, admissible, compiled = live_integrated_brain_v1.compile_against_live_registry(goal, ROOT)
     except goal_compiler.GoalCompilationFailure as exc:
         return _fail(task_id, "FAIL__RAW_GOAL_COMPILATION_GAP", "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP", started,
                      compiler_code=exc.code, compiler_detail=exc.detail, route_admission=None)

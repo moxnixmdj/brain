@@ -227,12 +227,73 @@ def load_verified_registry(include_extended: bool = True) -> dict[str, Mapping[s
                 if cid in out or not isinstance(entry, dict):
                     continue
                 if _receipt_admits(entry, ROOT):
-                    out[cid] = {**entry, "capability_id": cid, "capability_source": "receipt_projection"}
+                    composed = _with_declared_contract(entry, (extended or {}).get(cid))
+                    out[cid] = {**composed, "capability_id": cid,
+                                "capability_source": "receipt_projection"}
     if not out:
         raise LiveBrainError("NO_VERIFIED_ZERO_SPEND_CAPABILITIES")
     if include_extended:
         _REGISTRY_CACHE[token] = dict(out)
     return out
+
+
+def _with_declared_contract(entry: Mapping[str, Any], declared: Any) -> dict[str, Any]:
+    """Give a derived entry the argument contract its declaration states.
+
+    A receipt-projection entry carries the EXECUTION contract (entrypoint, adapter, expectation) and
+    the evidence paths; the human-written argument contract - the names a sentence must state - lives
+    in the extended declaration.  Measured consequence of leaving the two apart, on one sentence:
+    `run_raw_goal` executed it while `solve()` answered FAIL_CLOSED__ROUTE_ADMISSION_REJECTED with rule
+    `R2_OUTPUT_ARTIFACT_UNSERVED`, because the entry that door read had no `${input.*}` placeholders
+    and was therefore "a tool that takes no input" that cannot serve the output file the sentence
+    names.  Composing here - in the single loader both doors read - is what makes them agree.
+
+    This grants no authority: admission is still the producer receipt plus an independent
+    reproduction, and the composition only makes the DECLARED argument names visible to the executors
+    that have to render them (`_render_template` raises rather than emitting a placeholder, and the
+    adapter drops an unbound one instead of forwarding it).
+    """
+    if not isinstance(declared, Mapping):
+        return dict(entry)
+    template = declared.get("action_template")
+    if not isinstance(template, Mapping):
+        return dict(entry)
+    args = template.get("args")
+    placeholders = [v for v in (args or {}).values()
+                    if isinstance(v, str) and v.startswith("${input.")]
+    if not placeholders:
+        return dict(entry)
+    # ADDITIVE, and that is the whole design: the executable `action_template` the lane derived stays
+    # exactly as it is, because it IS a contract - the zero-input form, which is what the capability's
+    # own receipt was minted from and what `run <cid>` must keep reaching.  The declared argument
+    # contract is exposed beside it for the readers that need argument NAMES (a door judging whether
+    # the sentence serves the output file it names, the binder, and the renderer that has to put the
+    # stated values into the action).  Replacing the template instead was measured to break a real
+    # invariant: `run <cid>` on a capability whose declaration has four inputs stopped being reachable
+    # by name at all.
+    return {**dict(entry), "declared_action_template": dict(template),
+            "declared_contract_sha256": hashlib.sha256(
+                json.dumps(template, sort_keys=True, default=str).encode("utf-8")).hexdigest()}
+
+
+def compile_against_live_registry(goal: str, root: Any = None) -> tuple[
+        dict[str, Mapping[str, Any]], dict[str, Mapping[str, Any]], dict[str, Any]]:
+    """The front-door policy in ONE place: THE verified registry, its platform-admissible
+    projection, and the front compile of the goal.
+
+    Both live doors call this - `run_raw_goal` here and `live_brain_route_admission_v1.solve` - and
+    the reason is a measured one, not tidiness.  Policy in two places has already drifted in this
+    project once in exactly this class: a path that read a *declaration* where the *evidence* was the
+    authority decided whether a capability existed at all.  The two preambles were identical except
+    that one passed `include_extended=True` explicitly and the other relied on a default, so a change
+    to that default would silently have given the two doors different views of which capabilities
+    exist.  It is explicit here, and `GoalCompilationFailure` is raised for each door to map into its
+    own failure shape rather than being swallowed.
+    """
+    base = Path(root) if root is not None else ROOT
+    registry = load_verified_registry(include_extended=True)
+    admissible = goal_compiler._platform_admissible_registry(dict(registry))
+    return registry, admissible, goal_front_compiler_v1.compile_goal(goal, admissible, base)
 
 
 def compile_capability_graph(
@@ -489,10 +550,8 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
         if not goal:
             raise LiveBrainError("RAW_GOAL_REQUIRED")
 
-        registry = load_verified_registry()
-        admissible = goal_compiler._platform_admissible_registry(dict(registry))
         try:
-            compiled = goal_front_compiler_v1.compile_goal(goal, admissible, ROOT)
+            registry, admissible, compiled = compile_against_live_registry(goal)
         except goal_compiler.GoalCompilationFailure as exc:
             return {
                 "schema": SCHEMA,

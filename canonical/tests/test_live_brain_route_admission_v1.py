@@ -215,6 +215,61 @@ def test_an_explicitly_named_capability_is_admitted_and_executed():
     assert result["model_dependency_count"] == 0
 
 
+def test_both_live_doors_give_the_same_verdict_on_one_sentence():
+    """Measured defect, asserted so it cannot come back: ONE sentence, TWO verdicts.
+
+    On the same sentence - "Call the function classify_support ... with the payload ... and save the
+    result to ..." - `solve()` answered `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` while
+    `run_raw_goal` executed it and wrote the real result.  Root cause: a receipt-backed entry's
+    executable template names only the capability itself, so every rule that reads the entry's
+    argument contract (R2's artifact check, the renderer, the binder) saw a tool that takes no input.
+    The loader now composes the DECLARED argument contract onto the derived entry (additively: the
+    zero-input form stays), and both doors read the same entry.
+
+    Both doors are run here and compared, because a statement about "the live Brain" that only holds
+    for one of its doors is the defect this test exists for.
+    """
+    from canonical.runtime import live_integrated_brain_v1 as live_brain
+    from canonical.runtime import capability_receipt_lane_v1 as lane
+
+    WORK.mkdir(parents=True, exist_ok=True)
+    payload = WORK / "door_agreement.json"
+    payload.write_text(json.dumps({"claim_text": "Orion budget is 40.",
+                                   "evidence_text": "The audited ledger reports that Orion budget is 40."}),
+                       encoding="utf-8")
+    out = WORK / "door_agreement_out.json"
+    if out.is_file():
+        out.unlink()
+    rel = payload.relative_to(ROOT).as_posix()
+    goal = (f"Call the function classify_support in canonical/runtime/bounded_claim_support.py with "
+            f"the payload {rel} and save the result to {out.relative_to(ROOT).as_posix()}")
+    before = lane._changed_paths(str(ROOT))
+    try:
+        first = adm.solve({"task_id": "TEST_DOOR_AGREEMENT_SOLVE", "goal": goal})
+        written = json.loads(out.read_text(encoding="utf-8")) if out.is_file() else None
+        if out.is_file():
+            out.unlink()
+        second = live_brain.run_raw_goal({"task_id": "TEST_DOOR_AGREEMENT_RAW", "goal": goal})
+        again = json.loads(out.read_text(encoding="utf-8")) if out.is_file() else None
+    finally:
+        for result in (locals().get("first"), locals().get("second")):
+            checkpoint = ((result or {}).get("controller_checkpoint") or {}).get("path")
+            nested = (((result or {}).get("controller_execution") or {}).get("controller_checkpoint") or {}).get("path")
+            for path in (checkpoint, nested):
+                if path and (ROOT / path).is_file():
+                    (ROOT / path).unlink()
+        if out.is_file():
+            out.unlink()
+        lane.restore_tree(str(ROOT), before, ())
+    assert first["pass"] is True, first.get("status")
+    assert second["pass"] is True, second.get("status")
+    assert first["compiled_capability_id"] == second["compiled_capability_id"] == "brain.module.function.invoke"
+    assert written and again and written["result"] == again["result"]
+    assert written["result"]["relation"] == "SUPPORTS"
+    # the door reports WHY it was admitted: the sentence states the capability's declared contract
+    assert first["route_admission"]["admission_basis"] == "DECLARED_INPUT_CONTRACT_FULLY_STATED_IN_GOAL"
+
+
 def test_a_capability_identity_is_never_a_promised_artifact():
     """F16's rule at the R6 gate: the id is an identity, and the artifact check still works."""
     cid = _a_receipt_backed_capability_id()

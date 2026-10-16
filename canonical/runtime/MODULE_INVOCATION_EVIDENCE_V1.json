@@ -110,7 +110,7 @@
   "canonical/verification/p3_policy_influence_v10_compositional_replay_v1.py": "SystemExit:1",
   "canonical/verification/run_scoped_self_verification_guard_v1.py": "ModuleNotFoundError:No module named 'v22_prewrite_admission'"
  },
- "junit_cases": 11633,
+ "junit_cases": 11634,
  "measured_platform": "linux",
  "measured_python": "3.11",
  "modules": {
@@ -46483,11 +46483,11 @@
      "tier": "TEST_EVIDENCED"
     }
    },
-   "sha256": "9b276d974c9120ea3fc3c1a64ca0e9daa90562f6388f69889b5a39d52ce213ef",
+   "sha256": "ff43e27597aa47cc2ea8795b64f503824f1e9961190cea349906c418d6affa17",
    "tests": {
     "canonical/tests/test_capability_dag_live_wiring_v1.py": "d02b0f52db77cf97761e9c036d4d5548279fe976b14d36f041b880d294172ffd",
     "canonical/tests/test_goal_front_compiler_v1.py": "04ce39b69af5db9c54aba39e09ff2ce019679aa06f66e9439b13aac7f5f6d230",
-    "canonical/tests/test_live_brain_route_admission_v1.py": "bb3dda4cf8924e3bc579878244566c2f030d8d2cea8ac2482749e9d24cc37112",
+    "canonical/tests/test_live_brain_route_admission_v1.py": "fd1f975657557e0866d958f77eb43890158a9c4ab7b0538dea8141eae95cbea3",
     "canonical/tests/test_live_solver_families_v3.py": "5bf31fe656407e675b74329360f5e687f92df10d432dbf43ef0419bfc8b8e3a4",
     "canonical/tests/test_verified_bound_capability_execution_adapter_v1.py": "369cc2b500ec8ecc5024ab40d39c3c372daafaac686672f708c6c7ae08b2b24c"
    }
@@ -46791,6 +46791,21 @@
      },
      "tier": "READ_ONLY_UNTESTED"
     },
+    "compile_against_live_registry": {
+     "doc": "The front-door policy in ONE place: THE verified registry, its platform-admissible",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "goal",
+       "root"
+      ],
+      "required": [
+       "goal"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
+    },
     "compile_capability_graph": {
      "doc": "",
      "passing_cases": 0,
@@ -46825,7 +46840,7 @@
     },
     "run_raw_goal": {
      "doc": "Compile one raw plain-language goal into the live verified runtime.",
-     "passing_cases": 5,
+     "passing_cases": 6,
      "signature": {
       "params": [
        "request"
@@ -46838,11 +46853,12 @@
      "tier": "TEST_EVIDENCED"
     }
    },
-   "sha256": "5fdd1ac0bdb22c7b5839172b338628ebd02bc542a442ecd9bf2685b5c90aed3d",
+   "sha256": "3132436a490f7459fe3210bc5d981da77a2c1b0595fffeb0f95b29e136776e75",
    "tests": {
     "canonical/tests/test_capability_dag_live_wiring_v1.py": "d02b0f52db77cf97761e9c036d4d5548279fe976b14d36f041b880d294172ffd",
     "canonical/tests/test_capability_receipt_lane_v1.py": "09b958de9d6d0d86d0716e1bb71348290269a0c77e3c6c455000741924b7a0d1",
     "canonical/tests/test_capability_selection_retrieval_v1.py": "725e68d3ecd8bba97feb12707469104863482a3844665f21e8c5dd63bc06940b",
+    "canonical/tests/test_live_brain_route_admission_v1.py": "fd1f975657557e0866d958f77eb43890158a9c4ab7b0538dea8141eae95cbea3",
     "canonical/tests/test_live_integrated_brain_v1.py": "9200c32d543aeeeff65f276f422d99029c2bc44fc79c57a705940968f7cf5dfb",
     "canonical/tests/test_live_solver_families_v3.py": "5bf31fe656407e675b74329360f5e687f92df10d432dbf43ef0419bfc8b8e3a4"
    }
@@ -95433,7 +95449,7 @@
      "tier": "READ_ONLY_UNTESTED"
     }
    },
-   "sha256": "d79992c14b5cba689aa64f8c1de94ea9e7263a6c60d6dd484f8d0274aedaac57",
+   "sha256": "2a3abc76844a70e56f6d4e683a9713d3c80c5110dae554a9427efc3d5f11d07f",
    "tests": {
     "canonical/tests/test_verified_bound_capability_execution_adapter_v1.py": "369cc2b500ec8ecc5024ab40d39c3c372daafaac686672f708c6c7ae08b2b24c"
    }
@@ -97328,12 +97344,12 @@
  "schema": "PROJECT_BRAIN_MODULE_INVOCATION_EVIDENCE_V1",
  "summary": {
   "functions_by_tier": {
-   "READ_ONLY_UNTESTED": 2560,
+   "READ_ONLY_UNTESTED": 2561,
    "REFUSED_FAILING_TEST_CASE": 174,
    "TEST_EVIDENCED": 2666
   },
   "inventory_modules": 2310,
-  "invocable_functions": 5226,
+  "invocable_functions": 5227,
   "invocable_modules": 2021,
   "modules_excluded": {
    "IMPORT_FAILED": 89,

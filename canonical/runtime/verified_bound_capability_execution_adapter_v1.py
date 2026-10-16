@@ -207,6 +207,14 @@ def _receipt_backed_execution(
     args = dict(action.get("args") or {})
     args.pop("capability_id", None)
     args.update({k: v for k, v in dict(inputs or {}).items() if k != "capability_id"})
+    # An UNBOUND placeholder is not a value: forwarding the literal string `${input.x}` would make the
+    # capability try to open a file by that name.  Measured reason this matters: a derived entry now
+    # inherits the argument contract its declaration states (`_with_declared_contract`), so the
+    # zero-input form of such a capability arrives here with every placeholder unbound - and the
+    # capability's own contract is what should answer that, not a template artifact.  Supplied inputs
+    # are untouched, so a real call is unaffected.
+    args = {k: v for k, v in args.items()
+            if not (isinstance(v, str) and v.startswith("${input.") and v.endswith("}"))}
     args["capability_id"] = capability_id
     rendered = {**dict(action), "args": args}
     tool = route_admission.run_adapter_locally(

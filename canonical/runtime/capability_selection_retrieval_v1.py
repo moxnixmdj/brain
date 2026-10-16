@@ -145,8 +145,13 @@ def is_specific(names: list[str]) -> bool:
 
 
 def contract_of(entry: Mapping[str, Any], declaration: Mapping[str, Any] | None) -> Any:
-    """The contract a sentence must satisfy: the declared one when it exists, else the entry's."""
-    declared_template = (declaration or {}).get("action_template")
+    """The contract a sentence must satisfy: the declared one when it exists, else the entry's.
+
+    A derived entry keeps the argument contract its declaration states under
+    `declared_action_template`, beside the executable template that carries the zero-input form; a
+    sentence is judged against the argument contract because those are the names it can state.
+    """
+    declared_template = entry.get("declared_action_template") or (declaration or {}).get("action_template")
     if front.is_plain_goal_routable({"action_template": declared_template}):
         return declared_template
     return entry.get("action_template")
@@ -180,11 +185,12 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
     has to be admitted by the loader for anything to execute.
     """
     declared = declaration or {}
-    executable_template = entry.get("action_template")
-    declared_template = declared.get("action_template")
     if not isinstance(entry.get("action_template"), Mapping) or not entry.get("entrypoint"):
         return {"capability_id": cid, "admitted": False, "reason": "EXECUTABLE_ENTRY_INCOMPLETE"}
-    contract = declared_template if front.is_plain_goal_routable(declared) else executable_template
+    # `contract_of` resolves the contract the way every caller must: the declared argument contract
+    # (on the entry when the loader composed it there, else in the declaration) and only then the
+    # executable template, which for a derived entry carries the zero-input form and no argument names.
+    contract = contract_of(entry, declared)
     if not front.is_plain_goal_routable({"action_template": contract}):
         return {"capability_id": cid, "admitted": False, "reason": "NO_DECLARED_INPUT_CONTRACT"}
     conflict = _expectation_compatible(cid, entry, declared)
@@ -220,6 +226,22 @@ def select(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any,
         decision = admit(goal, cid, entry, root, declared.get(cid))
         admits.append({**proposal, **decision})
     admitted = [row for row in admits if row.get("admitted") and row.get("specific")]
+    # Shadowing, measured not assumed.  On one real signature sentence two capabilities both bound:
+    # this surface, which requires {source_path, function, json_path, output_path}, and a document
+    # capability that requires only the json and output paths.  The sentence states all four values,
+    # so the capability that accounts for MORE of them explains it better, while the converse cannot
+    # be said - a sentence that states only a json path and an output does not account for a source
+    # file and a function name.  A candidate whose required inputs are a STRICT SUBSET of another
+    # admitted candidate's is therefore shadowed.  Equal contracts are NOT shadowed: that is genuine
+    # ambiguity and it still selects nothing.
+    if len(admitted) > 1:
+        def _required(row: dict[str, Any]) -> frozenset:
+            return frozenset(row.get("required_inputs") or [])
+
+        maximal = [row for row in admitted
+                   if not any(_required(row) < _required(other) for other in admitted)]
+        if len(maximal) == 1:
+            admitted = maximal
     if len(admitted) == 1:
         winner = admitted[0]
         return {**short, "status": "SELECTED", "selected_capability": winner["capability_id"],
