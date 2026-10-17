@@ -1,21 +1,21 @@
 {
  "capability_id": "canonical/runtime/python_measured_objective_acceptance_v1.py.auto.v1",
- "elapsed_ms": 6.389,
+ "elapsed_ms": 6.088,
  "independent_run_reference": {
-  "github_run_id": 38984844011,
+  "github_run_id": 38987004541,
   "oidc_claims": {
-   "actor": "github-actions[bot]",
+   "actor": "moxnixmdj",
    "aud": "https://github.com/moxnixmdj/brain",
-   "event_name": "pull_request",
-   "head_ref": "arena/120f25af-brain",
+   "event_name": "push",
+   "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
-   "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/pull/4725/merge",
-   "jti": "e09c7283-be1f-49dc-af6f-27a35158ce5e",
+   "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
+   "jti": "27dd98ee-fc8d-4048-991f-f2bfc1ed6582",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
-   "run_attempt": "2",
-   "run_id": "38984844011",
-   "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/pull/4725/merge"
+   "run_attempt": "1",
+   "run_id": "38987004541",
+   "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
  "independent_verifier": "github-actions:moxnixmdj/brain",
