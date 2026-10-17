@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_if_public_description_inverter_v1.py.auto.v1",
- "elapsed_ms": 13.307,
+ "elapsed_ms": 13.374,
  "independent_run_reference": {
-  "github_run_id": 39065168864,
+  "github_run_id": 39065394147,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "6be6fd9b-c925-4a0d-8011-855095aa072e",
+   "jti": "00110a2e-234d-4629-915c-c97e33da1ea1",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39065168864",
+   "run_id": "39065394147",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
