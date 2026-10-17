@@ -2047,7 +2047,13 @@
           {
             "name": "sqlite3",
             "sha256": "78493e56909614ec1d588c9fae1739a704d9e1a6ff65509b1f06c3e4d53ed0c3",
-            "version": "3.45.1-1ubuntu2.8"
+            "version": "3.45.1-1ubuntu2.8",
+            "optional": true,
+            "fallback": {
+              "type": "python_stdlib",
+              "module": "sqlite3"
+            },
+            "optional_reason": "adapter canonical/runtime/bound_capabilities/sqlite_verify_cli.py catches FileNotFoundError for the sqlite3 binary and falls back to the sqlite3 module; the family using this capability passes end to end on this machine with the binary absent."
           }
         ],
         "type": "apt"
@@ -2430,7 +2436,13 @@
           {
             "name": "yq",
             "sha256": "ef935e2b644e6c70ed080396dbe3d93330d1482fd9ce6f34813bdcf3616cb809",
-            "version": "3.1.0-3"
+            "version": "3.1.0-3",
+            "optional": true,
+            "fallback": {
+              "type": "pypi",
+              "module": "yaml"
+            },
+            "optional_reason": "adapter canonical/runtime/bound_capabilities/yq_yaml_json.py catches FileNotFoundError for the yq binary and falls back to the yaml module; the family using this capability passes end to end on this machine with the binary absent."
           }
         ],
         "type": "apt"
@@ -3450,7 +3462,9 @@
         "independent_verification_required_for_any_scope_complete_promotion": true,
         "model_dependency_count": 0,
         "incremental_spend_usd": 0
-      }
+      },
+      "plain_goal_routable": false,
+      "plain_goal_routable_reason": "Takes no input: the assessment is derived entirely from canonical authority files, so no sentence can supply an operand. It is deliberately NOT reachable from a plain goal. Giving it an input placeholder to raise the reachability count was tried and reverted on 2026-10-17: its 30-case keyword set then matched out-of-scope prose and broke the out-of-scope fail-closed rate (1.0 -> 0.967). Fail-closed truth outranks the reachability count. Invoke it directly, or through a multi-step plan that binds it explicitly."
     },
     "python.patch.search.test_guided.ast.v1": {
       "status": "VERIFIED_BOUND_CAPABILITY",

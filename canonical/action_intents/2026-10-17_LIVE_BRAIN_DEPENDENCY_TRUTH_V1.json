@@ -1,0 +1,234 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "date": "2026-10-17",
+  "action_id": "LIVE_BRAIN_DEPENDENCY_TRUTH_20261017_V1",
+  "canonical_generation": "2026-10-10-general-reusable-capability-frontier-v1",
+  "canonical_base_commit": "370005ad198fc7caff1e843909161f48037b42cd",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_REUSABLE_CAPABILITY_DEVELOPMENT_PROGRAM_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "action_kind": "GOVERNANCE_GUARD",
+  "governance_change": true,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "causal_blocker": "THE_HEARTBEAT_DERIVES_CAPABILITY_LIVENESS_FROM_HAND_WRITTEN_REGISTRY_PACKAGE_DECLARATIONS_WHICH_DRIFT_FROM_THE_ADAPTER_IMPORT_GRAPH_SO_THE_RUNNABLE_CAPABILITY_COUNT_IS_WRONG_IN_BOTH_DIRECTIONS_AND_EVERY_PLAN_COMPUTED_FROM_IT_IS_COMPUTED_ON_A_CORRUPTED_DENOMINATOR",
+  "blocker_lease_key": "2026-10-10-general-reusable-capability-frontier-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_HEARTBEAT_DERIVES_CAPABILITY_LIVENESS_FROM_HAND_WRITTEN_REGISTRY_PACKAGE_DECLARATIONS_WHICH_DRIFT_FROM_THE_ADAPTER_IMPORT_GRAPH_SO_THE_RUNNABLE_CAPABILITY_COUNT_IS_WRONG_IN_BOTH_DIRECTIONS_AND_EVERY_PLAN_COMPUTED_FROM_IT_IS_COMPUTED_ON_A_CORRUPTED_DENOMINATOR",
+  "highest_leverage_now": true,
+  "selected_route": "DERIVE_EACH_CAPABILITYS_EXTERNAL_DEPENDENCIES_FROM_ITS_TRANSITIVE_REPO_LOCAL_IMPORT_GRAPH_AS_A_SECOND_INDEPENDENT_WITNESS_ALONGSIDE_THE_DECLARATION__EXPRESS_PROVEN_STDLIB_FALLBACKS_AS_OPTIONAL_PLUS_FALLBACK_MODULE_AND_REQUIRE_THE_FALLBACK_TO_IMPORT_HERE__INSTALL_CHROMIUM_CHROMEDRIVER_ON_THE_PUBLIC_RUNNER",
+  "prior_work_reused": [
+    "execution_guard/live_solver_end_to_end_measurement_v1.py",
+    "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    ".github/workflows/live-brain-heartbeat.yml",
+    "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+    "AGENTS.md",
+    "canonical/runtime/bound_capabilities/sqlite_verify_cli.py",
+    "canonical/runtime/bound_capabilities/yq_yaml_json.py"
+  ],
+  "falsification_condition": "A_BINARY_THE_ADAPTER_IMPORT_GRAPH_REACHES_IS_MISSING_AND_NOT_REPORTED__OR_A_DEPENDENCY_DECLARED_OPTIONAL_HAS_NO_IMPORTABLE_FALLBACK_ON_THIS_MACHINE__OR_THE_OUT_OF_SCOPE_FAIL_CLOSED_RATE_IS_BELOW_ONE__OR_ANY_IN_SCOPE_FRESH_GOAL_FAMILY_STOPS_PASSING__OR_ANY_AUTHORITY_CREDIT_OR_SCOREBOARD_FIELD_MOVES",
+  "expected_parent_change": "FIFTEEN_NOT_SEVEN_CAPABILITIES_REPORTED_AS_NOT_RUNNABLE_ON_THIS_MACHINE__ELEVEN_OF_THEM_FOR_DEPENDENCIES_THE_REGISTRY_NEVER_DECLARED__TWO_FALSE_BLOCKERS_CLEARED__ONE_PUBLIC_RUNNER_GAP_CLOSED__ZERO_CREDIT",
+  "expected_parent_frontier_change": "THE_DENOMINATOR_EVERY_LIVENESS_CLAIM_IS_DIVIDED_BY_IS_NOW_DERIVED_NOT_DECLARED__ZERO_CREDIT",
+  "stop_condition": "IN_SCOPE_29_OF_29_FAMILIES_PASS__OUT_OF_SCOPE_FAIL_CLOSED_RATE_1_0__ADAPTER_IMPORT_FAILED_EMPTY__ADAPTER_MISSING_EMPTY__ZERO_TERMINAL_CREDIT__ZERO_SCOREBOARD_CHANGE__NO_PROTECTED_PATH_TOUCHED__REFEREE_STATIC_AND_DIFF_RULES_ZERO_VIOLATIONS",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/capabilities/true/LIVE_SOLVER_END_TO_END_MEASUREMENT_20261017_V1.json",
+      "canonical/capabilities/true/LIVE_SOLVER_END_TO_END_MEASUREMENT_20261017_BEFORE_DEPENDENCY_FIX_V1.json",
+      "canonical/verification/HONEST_SUITE_BASELINE_20261017_V1.json",
+      "canonical/verification/LIVE_BRAIN_HEARTBEAT_20261017_V1.md"
+    ],
+    "route_class": "REUSE",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "false_claim_removed": "THE_HEARTBEAT_REPORTED_60_OF_67_CAPABILITIES_RUNNABLE_HERE_AND_CHART_RASTER_READERS_AS_BLOCKED_ONLY_BY_A_PENDING_GOAL_GRAMMAR__BOTH_ARE_FALSE__THE_TRUE_COUNT_IS_52_OF_67_AND_THE_CHART_STACK_IS_BLOCKED_BY_AN_UNDECLARED_TESSERACT_OCR_DEPENDENCY",
+    "causal_evidence": "SAME_SEEDLESS_RUN_ON_THE_SAME_COMMIT_BEFORE_AND_AFTER_THE_PROBE_CHANGE_REPORTS_7_THEN_15_BLOCKED_CAPABILITIES",
+    "conversation_memory_is_authority": false,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ]
+  },
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": "1",
+    "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__IT_ONLY_MAKES_THE_INSTRUMENT_THAT_MEASURES_EVERY_OBLIGATION_TELL_THE_TRUTH__THE_CHARTOGRAPHY_OBLIGATION_IS_THE_ONE_MOST_DIRECTLY_AFFECTED_BECAUSE_EIGHT_OF_ITS_CAPABILITIES_WERE_COUNTED_AS_RUNNABLE_WHILE_NEEDING_TESSERACT"
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "proof_state_reachability": "NOT_APPLICABLE__GOVERNANCE_GUARD",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "LIVE_BRAIN_DEPENDENCY_TRUTH_20261017_V1",
+      "falsifier_id": "BEFORE_AND_AFTER_SEEDLESS_HEARTBEAT_RUNS_ON_THE_SAME_COMMIT_PLUS_THE_EXISTING_29_FRESH_GOAL_FAMILIES",
+      "decisive_question": "DOES_THE_LIVENESS_PROBE_REPORT_EVERY_BINARY_THE_ADAPTERS_IMPORT_GRAPH_ACTUALLY_REACHES",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [
+        "canonical/capabilities/true/LIVE_SOLVER_END_TO_END_MEASUREMENT_20261017_BEFORE_DEPENDENCY_FIX_V1.json",
+        "canonical/capabilities/true/LIVE_SOLVER_END_TO_END_MEASUREMENT_20261017_V1.json"
+      ],
+      "no_known_counterexample_reason": "ELEVEN_CAPABILITIES_PROVED_THE_OLD_PROBE_BLIND_BY_BEING_REPORTED_RUNNABLE_WHILE_THEIR_IMPORT_GRAPH_REQUIRES_A_BINARY_THAT_IS_ABSENT_HERE"
+    }
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-10-general-reusable-capability-frontier-v1",
+    "canonical_base_commit": "370005ad198fc7caff1e843909161f48037b42cd",
+    "real_outcome": "THE_HEARTBEATS_RUNNABLE_CAPABILITY_COUNT_IS_NOW_DERIVED_FROM_THE_IMPORT_GRAPH_AND_THE_REGISTRY_AT_ONCE_INSTEAD_OF_FROM_THE_REGISTRY_ALONE",
+    "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "obs_goal": {
+      "real_outcome": "A_LIVENESS_NUMBER_THAT_CANNOT_DRIFT_FROM_THE_CODE",
+      "proxy_goals_deleted": [
+        "HAND_MAINTAINED_SOURCE_PACKAGES_AS_THE_SOLE_SOURCE_OF_DEPENDENCY_TRUTH",
+        "REACHABILITY_AS_PLAN_SELECTION_WHEN_THE_CAPABILITY_CANNOT_EXECUTE_FROM_A_SENTENCE"
+      ],
+      "surviving_necessity": "TWO_INDEPENDENT_WITNESSES_THE_DECLARATION_AND_THE_IMPORT_GRAPH"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "TOOL_LIVENESS_VIA_SHUTIL_WHICH_AND_IMPORTLIB_FIND_SPEC",
+        "SQLITE_VERIFY_CLI_STDLIB_FALLBACK",
+        "YQ_YAML_JSON_PYYAML_FALLBACK"
+      ],
+      "external_existing_routes_checked": [
+        "NONE_NEEDED__STATIC_IMPORT_CLOSURE_IS_A_STDLIB_REGEX_WALK"
+      ],
+      "capability_work_deleted": [
+        "HAND_MAINTAINED_PACKAGE_LISTS_AS_THE_ONLY_WITNESS"
+      ],
+      "surviving_gap": "THE_IMPORT_GRAPH_SEES_STATIC_IMPORTS_ONLY__A_BINARY_LOADED_DYNAMICALLY_THROUGH_IMPORTLIB_AT_RUNTIME_WOULD_STILL_BE_INVISIBLE"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_MEASUREMENT_DEFECT",
+      "delete_bypass_substitute_options": [
+        "DELETE_THE_DECLARATION_AND_USE_ONLY_THE_IMPORT_GRAPH__REJECTED_THE_DECLARATION_ALSO_NAMES_PIP_PACKAGES_AND_VERSIONS_THE_IMPORT_GRAPH_CANNOT_SEE",
+        "KEEP_THE_DECLARATION_ONLY__REJECTED_THAT_IS_THE_DEFECT"
+      ],
+      "surviving_causal_blocker": "NONE_FOR_STATIC_IMPORTS"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "UNION_OF_DECLARATION_AND_IMPORT_GRAPH_WITH_OPTIONAL_PLUS_FALLBACK_FOR_PROVEN_STDLIB_FALLBACKS",
+        "REPLACE_THE_DECLARATION_WITH_THE_IMPORT_GRAPH__REJECTED_IT_CANNOT_SEE_PIP_PACKAGE_VERSIONS",
+        "DECLARE_TESSERACT_ON_EACH_CHART_CAPABILITY_BY_HAND__REJECTED_IT_RECREATES_THE_SAME_DRIFT_THE_NEXT_TIME_AN_ADAPTER_GAINS_AN_IMPORT"
+      ],
+      "losing_routes_reason": "ONLY_THE_UNION_IS_CORRECT_IN_BOTH_DIRECTIONS_AND_ONLY_DERIVATION_IS_DRIFT_FREE",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "SAME_SEEDLESS_HEARTBEAT_ON_THE_SAME_COMMIT_BEFORE_AND_AFTER__29_FRESH_GOAL_FAMILIES_STILL_PASS__OUT_OF_SCOPE_FAIL_CLOSED_STILL_ONE"
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "THE_NOT_MEASURED_HERE_REASON_FOR_CHART_RASTER_READERS_WHICH_SAID_COMPOUND_GOAL_GRAMMAR_PENDING_AND_WAS_FALSE"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "SQLITE_VERIFY_CLI_FALLBACK",
+        "YQ_YAML_JSON_FALLBACK"
+      ],
+      "fresh_reuse_plan": "THE_SAME_IMPORT_GRAPH_WALK_CAN_AUDIT_MODEL_DEPENDENCIES_AND_NETWORK_EGRESS_PER_CAPABILITY"
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "PER_CAPABILITY_MANUAL_DEPENDENCY_INSPECTION"
+      ],
+      "search_stop_decision": "ELEVEN_PREVIOUSLY_INVISIBLE_DEPENDENCIES_FOUND_AND_REPORTED_AND_NO_FAMILY_REGRESSED",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "UNION_OF_DECLARATION_AND_IMPORT_GRAPH_WITH_OPTIONAL_PLUS_FALLBACK_FOR_PROVEN_STDLIB_FALLBACKS",
+      "REPLACE_THE_DECLARATION_WITH_THE_IMPORT_GRAPH__REJECTED_IT_CANNOT_SEE_PIP_PACKAGE_VERSIONS",
+      "DECLARE_TESSERACT_ON_EACH_CHART_CAPABILITY_BY_HAND__REJECTED_IT_RECREATES_THE_SAME_DRIFT",
+      "GIVE_TERMINAL_KSTAR_ROOT_ASSESS_AN_INPUT_PLACEHOLDER_SO_REACHABILITY_READS_67_OF_67__ATTEMPTED_AND_REVERTED_ON_2026_10_17_BECAUSE_ITS_KEYWORD_SET_THEN_MATCHED_OUT_OF_SCOPE_PROSE_AND_DROPPED_FAIL_CLOSED_FROM_1_0_TO_0_967"
+    ],
+    "deleted_or_bypassed_paths": [
+      "HAND_MAINTAINED_PACKAGE_LISTS_AS_THE_ONLY_WITNESS"
+    ],
+    "selected_surviving_route": "UNION_OF_DECLARATION_AND_IMPORT_GRAPH_WITH_OPTIONAL_PLUS_FALLBACK_FOR_PROVEN_STDLIB_FALLBACKS",
+    "why_selected_route_is_fastest_sufficient": "THE_IMPORT_CLOSURE_OF_ALL_67_ADAPTERS_IS_WALKED_AND_SCANNED_IN_UNDER_A_SECOND_SO_THE_WITNESS_IS_FREE_AT_EVERY_HEARTBEAT_AND_CANNOT_STALE",
+    "expected_parent_level_state_change": "FIFTEEN_NOT_SEVEN_CAPABILITIES_REPORTED_AS_NOT_RUNNABLE_ON_THIS_MACHINE__ELEVEN_OF_THEM_FOR_DEPENDENCIES_THE_REGISTRY_NEVER_DECLARED__TWO_FALSE_BLOCKERS_CLEARED__ONE_PUBLIC_RUNNER_GAP_CLOSED__ZERO_CREDIT",
+    "stop_condition": "IN_SCOPE_29_OF_29_FAMILIES_PASS__OUT_OF_SCOPE_FAIL_CLOSED_RATE_1_0__ADAPTER_IMPORT_FAILED_EMPTY__ZERO_TERMINAL_CREDIT__ZERO_SCOREBOARD_CHANGE",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "GOVERNANCE_GUARD_ONLY__NO_CAPABILITY_ROUTE_IS_DISCOVERED_OR_CLAIMED"
+    }
+  },
+  "benchmark_or_family_rank_authority": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "explicit_user_authorization": "Owner instruction 2026-10-17: audit everything from first principles, never accept a plan that is not optimal, kill over-engineering, and make the creature real now."
+}

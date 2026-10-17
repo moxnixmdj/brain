@@ -1,0 +1,2930 @@
+{
+  "schema": "HONEST_SUITE_BASELINE_V1",
+  "generated_utc": "2026-10-17T00:54:46Z",
+  "authority": "NONE",
+  "kind": "MEASUREMENT_NOT_RECEIPT",
+  "producer": "arena session 1e8f091d (sandbox, python 3.11.2, numpy/opencv-headless/langdetect/pydantic/docx/openpyxl/xlsxwriter/pillow/sympy/msgpack/pypdf installed)",
+  "carrier": "arena/1e8f091d-brain",
+  "self_description": "Unverified single-machine measurement of the test suite against the tree as it is, with no conftest, no historical pins and no monkeypatching. It records what was observed; it proves nothing and must not be cited as evidence that a capability works.",
+  "subject": {
+    "git_head": "370005ad198fc7caff1e843909161f48037b42cd",
+    "working_tree_dirty": true,
+    "junit_sha256": "b7dd68cdb5918131c2417fd461df5c924f4d9c7397d817db25111f0555be60a3",
+    "python": "3.11.2"
+  },
+  "totals": {
+    "cases": 11754,
+    "passed": 11360,
+    "failed": 380,
+    "failure_records_including_subtests": 399,
+    "error": 0,
+    "skipped": 14,
+    "files_observed": 1929,
+    "files_with_failures_or_errors": 223
+  },
+  "failure_buckets": {
+    "ASSERTION": 253,
+    "OTHER": 49,
+    "CURRENTNESS_GUARD__DRIFT": 46,
+    "CURRENTNESS_GUARD__SOURCE_BLOB_DRIFT": 16,
+    "IMPORT_ERROR": 10,
+    "NETWORK": 4,
+    "MISSING_FILE": 2
+  },
+  "formerly_pinned_files": {
+    "count": 0,
+    "clean_without_pins": 0,
+    "failing_without_pins": 0,
+    "not_observed": 0,
+    "note": "These 184 files were replayed against frozen historical commits by the deleted conftest; this is how they behave against the current tree."
+  },
+  "files_with_failures_or_errors": [
+    "canonical/tests/test_acceptance_proof_transmuter_v1.py",
+    "canonical/tests/test_acceptance_root_authority_truth_pipeline_v1.py",
+    "canonical/tests/test_action_hypergraph_open_predicate_guard_v1.py",
+    "canonical/tests/test_agency_interaction_subsumption_v1.py",
+    "canonical/tests/test_arena_public_semantics_truth_repair_guard_v1.py",
+    "canonical/tests/test_astra_certificate_gated_route_binding_v1.py",
+    "canonical/tests/test_auto_acquisition_platform_attestation.py",
+    "canonical/tests/test_auto_acquisition_replan.py",
+    "canonical/tests/test_autonomous_verified_self_improvement_v1.py",
+    "canonical/tests/test_bound_goal_plan_adapter_v1.py",
+    "canonical/tests/test_brain_witness_normalization_v1.py",
+    "canonical/tests/test_browser_t2_objective_binding_validator.py",
+    "canonical/tests/test_cad_t0_post_refreeze_binding_v3_validator.py",
+    "canonical/tests/test_cad_t0_post_refreeze_binding_v4_validator.py",
+    "canonical/tests/test_cad_t0_route_specific_candidate_v1.py",
+    "canonical/tests/test_cad_t0_route_specific_terminal_executor_v1.py",
+    "canonical/tests/test_capability_dag_live_wiring_v1.py",
+    "canonical/tests/test_coding_shared_specification_coverage_only_successor_v3.py",
+    "canonical/tests/test_coding_static_verified_capability_route_theorem_v1.py",
+    "canonical/tests/test_coding_typed_specialist_policy_cover_deficit_v1.py",
+    "canonical/tests/test_composition_component_proof_current_authority_v5.py",
+    "canonical/tests/test_composition_v6_terminal_mirror_reconciliation_v1.py",
+    "canonical/tests/test_content_addressed_artifact_measurement_v1.py",
+    "canonical/tests/test_context_dependent_meaning_v63_handoff_v1.py",
+    "canonical/tests/test_context_dependent_meaning_v63_handoff_v2.py",
+    "canonical/tests/test_context_dependent_meaning_v64_mrel_handoff_v1.py",
+    "canonical/tests/test_coverage_active_claim_r3_promotion_safety_v1.py",
+    "canonical/tests/test_coverage_cc_r3_r3_promotion_safety_v1.py",
+    "canonical/tests/test_coverage_root_certificate_registry_guard_v1.py",
+    "canonical/tests/test_coverage_root_snapshot_coherence_v1.py",
+    "canonical/tests/test_current_26_zero_reality_frontier_v1.py",
+    "canonical/tests/test_current_26_zero_reality_frontier_v2.py",
+    "canonical/tests/test_current_authority_chain_provenance_v1.py",
+    "canonical/tests/test_current_escape_o11_objective_acceptance_law_gate_activation_v1.py",
+    "canonical/tests/test_current_main_v51_coding_v3_projection_reconciliation_v1.py",
+    "canonical/tests/test_current_r2_v65_finance_derived_terminal_reconciliation_v1.py",
+    "canonical/tests/test_current_residual_oq_adapter_reconciliation_v1.py",
+    "canonical/tests/test_current_terminal_authority_root_partition_coherence_v2.py",
+    "canonical/tests/test_current_terminal_authority_v5.py",
+    "canonical/tests/test_current_terminal_coding_finite_exact_oracle_region_v1.py",
+    "canonical/tests/test_current_terminal_coding_v5_adequacy_gate_v1.py",
+    "canonical/tests/test_current_terminal_cursorbench_dependency_provenance_atom_v1.py",
+    "canonical/tests/test_current_terminal_cursorbench_information_boundary_wait_state_v1.py",
+    "canonical/tests/test_current_terminal_cursorbench_public_scoring_reduction_v1.py",
+    "canonical/tests/test_current_terminal_cursorbench_route_a_search_saturation_v1.py",
+    "canonical/tests/test_current_terminal_cursorbench_route_disjunction_reconciliation_v1.py",
+    "canonical/tests/test_current_terminal_cursorbench_three_region_frontier_v1.py",
+    "canonical/tests/test_current_terminal_cursorbench_typed_specialist_transfer_falsification_v1.py",
+    "canonical/tests/test_current_terminal_cursorbench_v5_adequacy_boundary_v1.py",
+    "canonical/tests/test_current_terminal_information_dominance_v1.py",
+    "canonical/tests/test_current_terminal_information_dominance_v2.py",
+    "canonical/tests/test_current_witness_target_totalization_v2.py",
+    "canonical/tests/test_current_witness_target_totalization_v3.py",
+    "canonical/tests/test_cursorbench_current_information_boundary_wait_state_v1.py",
+    "canonical/tests/test_debian_full_metadata_xapian.py",
+    "canonical/tests/test_delegation_objective_dominance_reconciler.py",
+    "canonical/tests/test_delegation_t2_objective_binding_validator.py",
+    "canonical/tests/test_delegation_temporal_ceiling_transmutation_v1.py",
+    "canonical/tests/test_delegation_universal_scope_certificate_v2.py",
+    "canonical/tests/test_differential_dominance_activation_v1.py",
+    "canonical/tests/test_dual_judgment_general_substrate_role_v1.py",
+    "canonical/tests/test_dual_judgment_source_gate_activation_v1.py",
+    "canonical/tests/test_escape_gap_a_policy_cover_adapter_activation_v1.py",
+    "canonical/tests/test_escape_progress_13_route_manifest_v1.py",
+    "canonical/tests/test_escape_progress_frozen_13_claim_v3.py",
+    "canonical/tests/test_escape_v3_current_projection_v1.py",
+    "canonical/tests/test_external_acquisition_bridge.py",
+    "canonical/tests/test_external_benchmark_dominance_compiler_v1.py",
+    "canonical/tests/test_final_terminal_cleanroom_gate_v1.py",
+    "canonical/tests/test_finance_certified_unless_evidence_role_gate_v1.py",
+    "canonical/tests/test_finance_direct_source_coverage_audit_v1.py",
+    "canonical/tests/test_g_route_five_generator_dominance_reconciliation_v1.py",
+    "canonical/tests/test_general_cross_document_closure_reconciliation_v1.py",
+    "canonical/tests/test_goal_compiler.py",
+    "canonical/tests/test_grounding_proposal_binding_contract.py",
+    "canonical/tests/test_h100_iterative_depth_escape_v1.py",
+    "canonical/tests/test_h100_pinned_https_tool_acquisition_v1.py",
+    "canonical/tests/test_h100_pinned_https_tool_acquisition_v2.py",
+    "canonical/tests/test_h100_verified_read_only_network_tool_registry_v1.py",
+    "canonical/tests/test_harbor_science_agent_v1.py",
+    "canonical/tests/test_hidden_evaluator_monotone_coupling_v1.py",
+    "canonical/tests/test_hle_native_question_contract_v2.py",
+    "canonical/tests/test_hle_symbolic_lark_solver_v2.py",
+    "canonical/tests/test_honesty_load_bearing_bypass_verifier_v1.py",
+    "canonical/tests/test_judgment_control_envelope_v1.py",
+    "canonical/tests/test_livebench_langdetect_balanced_decorator_exact_runtime_v1.py",
+    "canonical/tests/test_lossless_raw_task_universal_mission_v1.py",
+    "canonical/tests/test_m0_requirement_change_case_v1.py",
+    "canonical/tests/test_m1b_smooth_surface_compiler.py",
+    "canonical/tests/test_matched_success_legacy_t2_reuse_audit_v1.py",
+    "canonical/tests/test_native_artifact_cross_format_preflight_v1.py",
+    "canonical/tests/test_native_artifact_render_preservation_v1.py",
+    "canonical/tests/test_objective_evidence_unit_extract_v2_generic_bm25.py",
+    "canonical/tests/test_objective_relevance_admission_closure.py",
+    "canonical/tests/test_objective_route_certificate_verifier.py",
+    "canonical/tests/test_one_shot_reality_closure_v2_integration.py",
+    "canonical/tests/test_one_shot_sky_impact_executor_v1.py",
+    "canonical/tests/test_one_shot_sky_impact_planner_v1.py",
+    "canonical/tests/test_open_research_claim_relation_integration.py",
+    "canonical/tests/test_open_research_ror_identity_composition.py",
+    "canonical/tests/test_open_research_source_frontend.py",
+    "canonical/tests/test_open_research_source_frontend_generic_extraction.py",
+    "canonical/tests/test_open_web_source_candidate_discovery.py",
+    "canonical/tests/test_opus55_acceptance_calibration_reducer_v2.py",
+    "canonical/tests/test_opus55_acceptance_residual_compiler_v3.py",
+    "canonical/tests/test_opus55_acceptance_residual_compiler_v4_projection.py",
+    "canonical/tests/test_opus55_domain_behavioral_quotient_mapping_v1.py",
+    "canonical/tests/test_osworld_v21_brain_subject_v3.py",
+    "canonical/tests/test_ownership_promotion_compiler_v1.py",
+    "canonical/tests/test_p1_composite_proof_counterexample_audit_v1.py",
+    "canonical/tests/test_p1_composite_proof_role_reconciliation_v1.py",
+    "canonical/tests/test_p1_shared_failure_semantics_batch_preflight_v1.py",
+    "canonical/tests/test_p1_terminal_execution_scope_audit_v1.py",
+    "canonical/tests/test_p1_universal_generator_transport_theorem_v1.py",
+    "canonical/tests/test_p1_v4_scope_safe_residual_discharge_v1.py",
+    "canonical/tests/test_p1_v5_terminal_scope_admissibility_v1.py",
+    "canonical/tests/test_plain_goal_bound_grounding_gate.py",
+    "canonical/tests/test_plain_goal_grounding_bound_registry_integration.py",
+    "canonical/tests/test_post_dual_judgment_zero_reality_frontier_v1.py",
+    "canonical/tests/test_post_unknown_domain_v6_root_authority_reconciliation_v1.py",
+    "canonical/tests/test_professional_quality_leaf_binder_v2.py",
+    "canonical/tests/test_professional_quality_r6_execution_property_truth_verify_v1.py",
+    "canonical/tests/test_protocol_implication_batch_reducer_v1.py",
+    "canonical/tests/test_python_transitive_runtime_closure_v1.py",
+    "canonical/tests/test_r2_fibo_set_relation_wake_load_bearing_v1.py",
+    "canonical/tests/test_r2_oewn_sense_wake_load_bearing_v1.py",
+    "canonical/tests/test_r2_policy_cover_hard_constraint_safety_reconciliation_v1.py",
+    "canonical/tests/test_r2_regcap_context_atom_v2_currentness_v1.py",
+    "canonical/tests/test_r2_sec_inline_xbrl_field_semantics_wake_v1.py",
+    "canonical/tests/test_r2_v43_semantic_stack_reconciliation_v1.py",
+    "canonical/tests/test_r2_v45_residual_top_authority_verify_v1.py",
+    "canonical/tests/test_r2_v56_terminal96_one_shot_coherence_v1.py",
+    "canonical/tests/test_r2_v57_v19_authority_reconciliation_v1.py",
+    "canonical/tests/test_r2_v63_regcap_bounded_context_truth_reconciliation_v1.py",
+    "canonical/tests/test_r2_v69_regcap_no_descriptor_context_reconciliation_v1.py",
+    "canonical/tests/test_r2_v6_authority_coherence_v1.py",
+    "canonical/tests/test_r2_v74_bounded_semantic_positive_reconciliation_v1.py",
+    "canonical/tests/test_r2_v75_bounded_semantic_positive_reconciliation_v1.py",
+    "canonical/tests/test_r2_v77_regcap_context_projection_repair_v1.py",
+    "canonical/tests/test_r2_v77_regcap_mrel_no_descriptor_reconciliation_v1.py",
+    "canonical/tests/test_r2_v78_four_way_loss_absorption_nonseparation_reconciliation_v1.py",
+    "canonical/tests/test_r2_v79_four_way_minimum_information_reconciliation.py",
+    "canonical/tests/test_r2_v80_all_pairs_mrel_context_reconciliation.py",
+    "canonical/tests/test_r2_v81_live_v7_truth_dispatch_reconciliation.py",
+    "canonical/tests/test_r3_deterministic_mapping_guard_patch_author_v1.py",
+    "canonical/tests/test_r3_improvement_cycle_fabric_v1.py",
+    "canonical/tests/test_r3_verified_cross_scope_generalization_v1.py",
+    "canonical/tests/test_recovery_acceptance_integrator_v1.py",
+    "canonical/tests/test_regcap_facet_role_projection_v1.py",
+    "canonical/tests/test_relative_elo_absolute_proof_nontransport_v1.py",
+    "canonical/tests/test_research_t3_objective_binding_validator.py",
+    "canonical/tests/test_residual_reuse_currentness_v2.py",
+    "canonical/tests/test_residual_reuse_oq_currentness_v1.py",
+    "canonical/tests/test_root3_child_process_channel_registry_v1.py",
+    "canonical/tests/test_root3_direct_process_19_to_18_transport_v1.py",
+    "canonical/tests/test_root3_global_subprocess_chokepoint_v1.py",
+    "canonical/tests/test_root3_parent_effect_membrane_hostile_v1.py",
+    "canonical/tests/test_root3_read_only_declared_query_executor_v2.py",
+    "canonical/tests/test_root3_read_only_local_file_query_executor_v1.py",
+    "canonical/tests/test_root3_single_popen_chokepoint_v1.py",
+    "canonical/tests/test_root3_subprocess_effect_class_registry_v1.py",
+    "canonical/tests/test_root3_subprocess_effect_class_registry_v2.py",
+    "canonical/tests/test_root_theorem_falsifier_v1.py",
+    "canonical/tests/test_root_theorem_live_binding_v1.py",
+    "canonical/tests/test_root_theorem_r4_assurance_projection_v1.py",
+    "canonical/tests/test_root_theorem_registry_claim_alignment_v1.py",
+    "canonical/tests/test_rs_archive_clone_stage_b_verifier_v1.py",
+    "canonical/tests/test_saccr_active_contract_proof_v1.py",
+    "canonical/tests/test_saccr_route_specific_terminal_executor_v1.py",
+    "canonical/tests/test_selected_discriminator_policy_cover_bridge_v1.py",
+    "canonical/tests/test_source_aligned_semantic_proof_v3.py",
+    "canonical/tests/test_source_candidate_provenance_verify.py",
+    "canonical/tests/test_specification_acceptance_prewave_v1.py",
+    "canonical/tests/test_structured_method_terminal_binding_v1.py",
+    "canonical/tests/test_synthesis_proof_obligation_delta_verifier_v1.py",
+    "canonical/tests/test_synthesis_scope_certificate_activation_verifier_v1.py",
+    "canonical/tests/test_synthesis_witness_target_binding_v1.py",
+    "canonical/tests/test_target_role_escape_frontier_v1.py",
+    "canonical/tests/test_task_acceptance_quotient_inventory_v1.py",
+    "canonical/tests/test_tb_science_general_substrate_materiality_v1.py",
+    "canonical/tests/test_tb_science_rank19_capability_first_admission_v1.py",
+    "canonical/tests/test_tb_science_rank19_claim_bound_current_pointer_v1.py",
+    "canonical/tests/test_tb_science_rank19_governance_composition_v1.py",
+    "canonical/tests/test_tb_science_rank20_capability_first_admission_v1.py",
+    "canonical/tests/test_tb_science_rank8_authority_v3.py",
+    "canonical/tests/test_temporal_proof_transport_v1.py",
+    "canonical/tests/test_terminal_acceptance_quotient_provenance_v1.py",
+    "canonical/tests/test_terminal_architecture_self_tournament_20261007_v1.py",
+    "canonical/tests/test_terminal_ceiling_witness_residual_v1.py",
+    "canonical/tests/test_terminal_ceiling_witness_transmutation_v1.py",
+    "canonical/tests/test_terminal_coverage_evidence_saturation_v1.py",
+    "canonical/tests/test_terminal_frontier_compiler_v1.py",
+    "canonical/tests/test_terminal_frontier_compiler_v2.py",
+    "canonical/tests/test_terminal_information_dominance_activation_v1.py",
+    "canonical/tests/test_terminal_manifest_unknown_domain_revocation_truth_v1.py",
+    "canonical/tests/test_terminal_minimum_causal_depth_projection_guard_v1.py",
+    "canonical/tests/test_terminal_next_action_compiler_v1.py",
+    "canonical/tests/test_terminal_parent_portfolio_runner_v1.py",
+    "canonical/tests/test_terminal_r2_projection_currentness_v1.py",
+    "canonical/tests/test_terminal_reality_gate_v1.py",
+    "canonical/tests/test_terminal_route_execution_plan_validator.py",
+    "canonical/tests/test_terminal_scheduling_v11_candidate_v1.py",
+    "canonical/tests/test_terminal_scheduling_v12_candidate_v1.py",
+    "canonical/tests/test_terminal_tb_science_dynamic_currentness_v1.py",
+    "canonical/tests/test_toolathlon_brain_owned_selection_adapter_v1.py",
+    "canonical/tests/test_toolathlon_general_substrate_materiality_v1.py",
+    "canonical/tests/test_unified_cognitive_fabric_one_shot_meta_v1.py",
+    "canonical/tests/test_universal_learning_contract_binding_v1.py",
+    "canonical/tests/test_universal_learning_meta_policy_v9.py",
+    "canonical/tests/test_universal_learning_proof_program_binding_v7.py",
+    "canonical/tests/test_universal_owned_execution_v1.py",
+    "canonical/tests/test_universal_structured_task_v1.py",
+    "canonical/tests/test_universal_verified_adaptive_solver_v1.py",
+    "canonical/tests/test_universal_verified_adaptive_solver_v4.py",
+    "canonical/tests/test_v13_db_existing_evidence_saturation_v1.py",
+    "canonical/tests/test_v13_native_artifact_mechanical_selected_cell_v1.py",
+    "canonical/tests/test_v14_synthesis_unsupported_claim_cell_v1.py",
+    "canonical/tests/test_v16_db_existing_evidence_saturation_v5.py",
+    "canonical/tests/test_v16_synthesis_required_claim_coverage_selected_property_cell_v1.py",
+    "canonical/tests/test_verified_witness_target_overlay_activation_v1.py",
+    "canonical/tests/test_vllm_deepseek_streaming_stage_b_verifier_v1.py",
+    "canonical/tests/test_zero_ambient_authority_escape_integration_v1.py",
+    "canonical/tests/test_zero_ambient_namespace_launcher_v1.py"
+  ],
+  "failing_cases": [
+    {
+      "file": "canonical/tests/test_acceptance_proof_transmuter_v1.py",
+      "test": "test_live_repo_stays_2_17_without_typed_witnesses",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: Tuples differ: (19, 4, 15) != (19, 2, 17)"
+    },
+    {
+      "file": "canonical/tests/test_acceptance_root_authority_truth_pipeline_v1.py",
+      "test": "test_acceptance_root_authority_truth_pipeline_is_exact_and_fail_closed",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert 16 == 12"
+    },
+    {
+      "file": "canonical/tests/test_action_hypergraph_open_predicate_guard_v1.py",
+      "test": "test_live_frontier_excludes_closed_tool_learning",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_ACTION_HYPERGRAPH_OPEN_PREDICATE_GUARD_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['STALE_TERMINAL_TARGET:BIND_SHARED_PUBLIC_B"
+    },
+    {
+      "file": "canonical/tests/test_agency_interaction_subsumption_v1.py",
+      "test": "test_exact_repository_premises_close_interaction_residual",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_AGENCY_INTERACTION_SUBSUMPTION_CHECKER_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['RECOVERY_CEILING_NOT_BOUND', 'RECOVERY_SCOPE_NOT_COMPLETE'], ."
+    },
+    {
+      "file": "canonical/tests/test_agency_interaction_subsumption_v1.py",
+      "test": "test_recovery_ceiling_drift_fails_closed",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "KeyError: 'theorem'"
+    },
+    {
+      "file": "canonical/tests/test_arena_public_semantics_truth_repair_guard_v1.py",
+      "test": "test_arena_truth_repair",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError"
+    },
+    {
+      "file": "canonical/tests/test_astra_certificate_gated_route_binding_v1.py",
+      "test": "test_astra_step_selects_only_matching_positive_content_bound_certificate",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "canonical.runtime.astra_runtime.Blocker: CERTIFICATE_GATED_ROUTE_SELECT_BLOCKED:DUPLICATE_RECEIPT"
+    },
+    {
+      "file": "canonical/tests/test_auto_acquisition_platform_attestation.py",
+      "test": "test_pypi_codec_probe_runs_candidate_import_in_child_python",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "project_brain_test_platform_pypi.AutoPyPIAcquisitionFailure: PYPI_PROBE_HELPER_MISSING:/tmp/tmp13h9iopi/canonical/runtime/python_codec_probe.py"
+    },
+    {
+      "file": "canonical/tests/test_auto_acquisition_replan.py",
+      "test": "test_run_goal_continues_after_verified_acquisition_in_same_invocation",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "project_brain_test_auto_acquisition_replan_runtime.Blocker: COGNITION_PROVENANCE_CONTROLLER_MODE_MISSING"
+    },
+    {
+      "file": "canonical/tests/test_autonomous_verified_self_improvement_v1.py",
+      "test": "test_failure_is_causally_classified_and_deduplicated",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 0 != 1"
+    },
+    {
+      "file": "canonical/tests/test_bound_goal_plan_adapter_v1.py",
+      "test": "test_exact_literal_goal_compiles_without_execution_authority",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_BOUND_GOAL_PLAN_ADAPTER_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'reason': 'ValueError:BOUND_BLOB_DRIFT:canonical/runtime/goal_compiler.py:983126e65544efa"
+    },
+    {
+      "file": "canonical/tests/test_bound_goal_plan_adapter_v1.py",
+      "test": "test_unknown_goal_remains_unresolved_not_guessed",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert 'FAIL_CLOSED' == 'UNRESOLVED'"
+    },
+    {
+      "file": "canonical/tests/test_brain_witness_normalization_v1.py",
+      "test": "test_live_passes",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_OPUS55_BRAIN_WITNESS_NORMALIZATION_VERDICT_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['NORMALIZED_WITNESSES_NOT_EXACT_RECOMPU"
+    },
+    {
+      "file": "canonical/tests/test_browser_t2_objective_binding_validator.py",
+      "test": "test_live_binding_passes",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_BROWSER_T2_OBJECTIVE_BINDING_VALIDATION_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['BLOB_SHA_MISMATCH:registry:ee187f611a0e82"
+    },
+    {
+      "file": "canonical/tests/test_cad_t0_post_refreeze_binding_v3_validator.py",
+      "test": "test_live_v3_binding_is_structurally_valid_before_promotion",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_CAD_T0_POST_REFREEZE_BINDING_V3_VALIDATION', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['CANDIDATE_ADAPTER_BLOB_DRIFT', 'CANDIDATE"
+    },
+    {
+      "file": "canonical/tests/test_cad_t0_post_refreeze_binding_v4_validator.py",
+      "test": "test_live_v4_binding_is_structurally_valid_before_promotion",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_CAD_T0_POST_REFREEZE_BINDING_V4_VALIDATION', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['BINDING_MUST_REMAIN_UNADMITTED_BEFORE_IND"
+    },
+    {
+      "file": "canonical/tests/test_cad_t0_route_specific_candidate_v1.py",
+      "test": "test_all_eight_frozen_geometry_families",
+      "status": "failed",
+      "bucket": "IMPORT_ERROR",
+      "message_head": "ImportError: libGL.so.1: cannot open shared object file: No such file or directory"
+    },
+    {
+      "file": "canonical/tests/test_cad_t0_route_specific_candidate_v1.py",
+      "test": "test_second_cycle_all_families",
+      "status": "failed",
+      "bucket": "IMPORT_ERROR",
+      "message_head": "ImportError: libGL.so.1: cannot open shared object file: No such file or directory"
+    },
+    {
+      "file": "canonical/tests/test_cad_t0_route_specific_terminal_executor_v1.py",
+      "test": "test_all_eight_families_execute_information_safely",
+      "status": "failed",
+      "bucket": "IMPORT_ERROR",
+      "message_head": "AssertionError: False is not true : {'case_id': 'CAD_T0_GEOMETRY_V1::slot::0', 'family': 'BOX_EXTRUDE', 'pass': False, 'reason': 'EXCEPTION:ImportError:libGL.so.1: cannot open shared object file: No s"
+    },
+    {
+      "file": "canonical/tests/test_capability_dag_live_wiring_v1.py",
+      "test": "test_solve_executes_a_multi_step_dag_and_forwards_the_artifact",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert 'FRONT_LAYER_...BILITY_DAG_V1' == 'PINNED_KERNE...BILITY_DAG_V1'"
+    },
+    {
+      "file": "canonical/tests/test_coding_shared_specification_coverage_only_successor_v3.py",
+      "test": "test_v3_reconciles_registry_truth_without_closing_v5_or_whole_cover",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "assert 6 == 2"
+    },
+    {
+      "file": "canonical/tests/test_coding_static_verified_capability_route_theorem_v1.py",
+      "test": "test_bound_v12_sources_are_exact",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: {'pass': False, 'errors': ['SOURCE_DRIFT:canonical/runtime/universal_verified_adaptive_solver_v12.py']}"
+    },
+    {
+      "file": "canonical/tests/test_coding_typed_specialist_policy_cover_deficit_v1.py",
+      "test": "test_exact_current_typed_specialist_cover_is_one_of_32",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert '0e6abf778d04...852c1211563fe' == 'f262ee591c3c...ff2cf5acbba67'"
+    },
+    {
+      "file": "canonical/tests/test_composition_component_proof_current_authority_v5.py",
+      "test": "test_terminal_authority_projects_three_of_twelve_without_acceptance_credit",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '7/19_PASS__12/19_OPEN' != '4/19_PASS__15/19_OPEN'"
+    },
+    {
+      "file": "canonical/tests/test_composition_v6_terminal_mirror_reconciliation_v1.py",
+      "test": "test_v6_mirror",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert '7/19_PASS__12/19_OPEN' == '5/19_PASS__14/19_OPEN'"
+    },
+    {
+      "file": "canonical/tests/test_content_addressed_artifact_measurement_v1.py",
+      "test": "test_measured_typed_acceptance_uses_artifact_derived_values_only",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_MEASURED_TYPED_ACCEPTANCE_PROGRAM_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'artifact_path': 'book.xlsx', ...}"
+    },
+    {
+      "file": "canonical/tests/test_context_dependent_meaning_v63_handoff_v1.py",
+      "test": "test_current_authority_is_v63_v59_terminal113",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'ACTIVE_CURRENT_R2_AUTHORITY__V63__' not found in 'ACTIVE_CURRENT_R2_AUTHORITY__V91__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_"
+    },
+    {
+      "file": "canonical/tests/test_context_dependent_meaning_v63_handoff_v1.py",
+      "test": "test_handoff_links_all_successor_controls_by_blob",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '827f7684accc7bcf29fd243db07c487ff1ee2ec5' != 'e208000c7b2a2ca926b4c4f8de3a1c828834aad6'"
+    },
+    {
+      "file": "canonical/tests/test_context_dependent_meaning_v63_handoff_v1.py",
+      "test": "test_ledger_records_v63_merge_and_preserves_nonclaims",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '827f7684accc7bcf29fd243db07c487ff1ee2ec5' != 'e208000c7b2a2ca926b4c4f8de3a1c828834aad6'"
+    },
+    {
+      "file": "canonical/tests/test_context_dependent_meaning_v63_handoff_v1.py",
+      "test": "test_semantic_reconciliation_binds_exact_current_authority",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '827f7684accc7bcf29fd243db07c487ff1ee2ec5' != 'e208000c7b2a2ca926b4c4f8de3a1c828834aad6'"
+    },
+    {
+      "file": "canonical/tests/test_context_dependent_meaning_v63_handoff_v2.py",
+      "test": "test_ledger_records_policy_repair",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '827f7684accc7bcf29fd243db07c487ff1ee2ec5' != 'e208000c7b2a2ca926b4c4f8de3a1c828834aad6'"
+    },
+    {
+      "file": "canonical/tests/test_context_dependent_meaning_v63_handoff_v2.py",
+      "test": "test_load_bearing_r2_root_are_exact",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '827f7684accc7bcf29fd243db07c487ff1ee2ec5' != 'e208000c7b2a2ca926b4c4f8de3a1c828834aad6'"
+    },
+    {
+      "file": "canonical/tests/test_context_dependent_meaning_v63_handoff_v2.py",
+      "test": "test_semantic_reconciliation_declares_mutable_terminal_policy",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '827f7684accc7bcf29fd243db07c487ff1ee2ec5' != 'e208000c7b2a2ca926b4c4f8de3a1c828834aad6'"
+    },
+    {
+      "file": "canonical/tests/test_context_dependent_meaning_v63_handoff_v2.py",
+      "test": "test_terminal_projection_not_terminal_blob_is_required",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '97e40427e90c4e3cc95ec829859b8de31d1c8531' != '907f8ce89c6b7b2591185d5d2922563b1c591df1'"
+    },
+    {
+      "file": "canonical/tests/test_context_dependent_meaning_v64_mrel_handoff_v1.py",
+      "test": "test_all_load_bearing_existing_blobs_are_exact",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: {'can[54 chars]n': 'e208000c7b2a2ca926b4c4f8de3a1c828834aad6'[863 chars]3d3'} != {'can[54 chars]n': 'ae24a56d4de6584c27ab54dcb8e834a98adc1d6e'[863 chars]3d3'}"
+    },
+    {
+      "file": "canonical/tests/test_context_dependent_meaning_v64_mrel_handoff_v1.py",
+      "test": "test_current_r2_and_root_versions_are_v64_v60",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '__V64__' not found in 'ACTIVE_CURRENT_R2_AUTHORITY__V91__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MRE"
+    },
+    {
+      "file": "canonical/tests/test_coverage_active_claim_r3_promotion_safety_v1.py",
+      "test": "test_active_r3_promotion_safety_claim_is_exact_and_zero_credit",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: {'pass': False, 'status': 'FAIL_CLOSED', 'errors': ['MISSION_BINDING_STALE'], 'claim_id': 'e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314', ...}"
+    },
+    {
+      "file": "canonical/tests/test_coverage_active_claim_r3_promotion_safety_v1.py",
+      "test": "test_registry_accepts_frozen_claim_but_keeps_all_roots_open",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: {'pass': False, 'status': 'FAIL_CLOSED', 'errors': ['ACTIVE_CLAIM_MISSION_BINDING_STALE', 'R4_PROOF_CLOSURE_FLAG_DRIFT'], 'open_root_ids': [], ...}"
+    },
+    {
+      "file": "canonical/tests/test_coverage_cc_r3_r3_promotion_safety_v1.py",
+      "test": "test_cc_r3_semantic_certificate_and_canonical_authority_shape",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: {'pass': False, 'status': 'FAIL_CLOSED__CC_R3_R3_PROMOTION_SAFETY_UNPROVED', 'root_id': 'CC_R3_TERMINAL_CLOSURE_V1', 'claim_id': 'e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c4"
+    },
+    {
+      "file": "canonical/tests/test_coverage_root_certificate_registry_guard_v1.py",
+      "test": "test_current_registry_is_valid_and_all_three_certificates_open",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: {'pass': False, 'status': 'FAIL_CLOSED', 'errors': ['ACTIVE_CLAIM_MISSION_BINDING_STALE', 'R4_PROOF_CLOSURE_FLAG_DRIFT'], 'open_root_ids': [], ...}"
+    },
+    {
+      "file": "canonical/tests/test_coverage_root_certificate_registry_guard_v1.py",
+      "test": "test_open_slot_cannot_smuggle_certificate_payload",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: assert 'OPEN_SLOT_HAS_AUTHORITY_PAYLOAD:CC_R1_REALITY_CONTAINMENT_V1' in ['CURRENT_MISSION_POINTER_BLOB_REQUIRED_FOR_ACTIVE_CLAIM', 'PROVED_SLOT_ROOT_ID_MISMATCH:CC_R1_REALITY_CONTAINM"
+    },
+    {
+      "file": "canonical/tests/test_coverage_root_certificate_registry_guard_v1.py",
+      "test": "test_current_registry_has_no_active_claim_and_cannot_close_any_slot",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert {'claim_id': 'e1c519109c4b2c46a9225686fc2c5c5490564d1cc62d5c6ff3c6c436bfca4314', 'claim_kind': 'PROPERTY_CERTIFICATE',...38f9ea327d8e19cb4a5bc76e89df', 'scope_sha256': '144e629c"
+    },
+    {
+      "file": "canonical/tests/test_coverage_root_certificate_registry_guard_v1.py",
+      "test": "test_exact_active_claim_allows_claim_bound_proved_slot_without_closing_r4",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: {'pass': False, 'status': 'FAIL_CLOSED', 'errors': ['PROVED_SLOT_CLAIM_BINDING_MISMATCH:CC_R1_REALITY_CONTAINMENT_V1:c...6', 'PROVED_SLOT_CLAIM_BINDING_MISMATCH:CC_R1_REALITY_CONTAINME"
+    },
+    {
+      "file": "canonical/tests/test_coverage_root_snapshot_coherence_v1.py",
+      "test": "test_root_theorem_snapshot_matches_live_registry_and_mission",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert '6ab2147306a1...b4a5bc76e89df' == '30005d2065d8...1e0161035ac2c'"
+    },
+    {
+      "file": "canonical/tests/test_current_26_zero_reality_frontier_v1.py",
+      "test": "test_live_current_26",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__SOURCE_BLOB_DRIFT",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_CURRENT_26_ZERO_REALITY_FRONTIER_REDUCER_V1', 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'pass': False, 'errors': ['SOURCE_BLOB_DRIFT'], ...}"
+    },
+    {
+      "file": "canonical/tests/test_current_26_zero_reality_frontier_v1.py",
+      "test": "test_tool_discovery_removed_from_frontier",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "KeyError: 'active_nondominated_certificate_ids'"
+    },
+    {
+      "file": "canonical/tests/test_current_26_zero_reality_frontier_v2.py",
+      "test": "test_current",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__SOURCE_BLOB_DRIFT",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_CURRENT_26_ZERO_REALITY_FRONTIER_REDUCER_V2', 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'pass': False, 'errors': ['SOURCE_BLOB_DRIFT'], ...}"
+    },
+    {
+      "file": "canonical/tests/test_current_authority_chain_provenance_v1.py",
+      "test": "test_current_mission_binds_exact_current_assurance_bytes",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "KeyError: 'git_blob_sha'"
+    },
+    {
+      "file": "canonical/tests/test_current_authority_chain_provenance_v1.py",
+      "test": "test_terminal_binds_exact_current_mission_bytes_in_all_live_chain_fields",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert '2b37b3185e03...29202a4b3ab48' == '30005d2065d8...1e0161035ac2c'"
+    },
+    {
+      "file": "canonical/tests/test_current_escape_o11_objective_acceptance_law_gate_activation_v1.py",
+      "test": "test_current_frontier_binding_is_exact_o11_q2",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'eb42b8c1c1e506f351ab6ea941b74791fb37894b' != '06ed743742a919615841a77fc9b1cc4e6fadf7f8'"
+    },
+    {
+      "file": "canonical/tests/test_current_main_v51_coding_v3_projection_reconciliation_v1.py",
+      "test": "test_current_projection_binds_exact_verified_frontier_without_overclaim",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert 'e208000c7b2a...a1c828834aad6' == '8aa893d4eaa8...e0028dd79f754'"
+    },
+    {
+      "file": "canonical/tests/test_current_r2_v65_finance_derived_terminal_reconciliation_v1.py",
+      "test": "test_r2_v65_reconciles_derived_terminal_route_without_overclaim",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert False"
+    },
+    {
+      "file": "canonical/tests/test_current_residual_oq_adapter_reconciliation_v1.py",
+      "test": "test_gap_a_adapter_construction_is_closed_but_rows_remain_open",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json' != 'canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json'"
+    },
+    {
+      "file": "canonical/tests/test_current_residual_oq_adapter_reconciliation_v1.py",
+      "test": "test_gap_b_reuses_v6_binding",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json' != 'canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V6.json'"
+    },
+    {
+      "file": "canonical/tests/test_current_residual_oq_adapter_reconciliation_v1.py",
+      "test": "test_new_exact_sources_are_content_bound",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "KeyError: 'git_blob_sha'"
+    },
+    {
+      "file": "canonical/tests/test_current_residual_oq_adapter_reconciliation_v1.py",
+      "test": "test_oq_is_primary_escape_research_compression",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'PRIM[17 chars]ANCE_INSTANTIATION_COMPRESSION__O11_PLUS_Q1__N[25 chars]AINS' != 'PRIM[17 chars]ANCE_RESEARCH_COMPRESSION'"
+    },
+    {
+      "file": "canonical/tests/test_current_residual_oq_adapter_reconciliation_v1.py",
+      "test": "test_zero_credit_and_reuse_first_are_preserved",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'REAL_GAP_A_ROW_PROOFS_REMAIN_ZERO_OF_TEN' not found in ['SUCCESSOR_ESCAPE_AUDIT_V4_IS_VERIFIED_AUTHORITY_GATE_ONLY__NO_REAL_ROW_PROOF_CREDIT_FROM_GATE_EXISTENCE', 'NO_CLAIM_ALL_FUTURE"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_authority_root_partition_coherence_v2.py",
+      "test": "test_current_authority_is_derived_from_current_root_partition",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert 'LIVEBENCH_IF_GE_65_7' in ['ARTIFACT_AA_BRIEFCASE_GE_1822', 'AUTOMATIONBENCH_GE_40', 'CHARTOGRAPHY_TOOLS_GE_89', 'CODING_CURSORBENCH_GE_57_8', 'CODING_FRONTIERCODE_GE_54_4', 'CO"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_authority_root_partition_coherence_v2.py",
+      "test": "test_stale_root1_and_root2_18_routes_cannot_schedule",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert '19_ROOT2_TOUCHING_PREDICATES' in 'RUN_CURRENT_TERMINAL_COVERAGE_PARTITION_V3__CONTINUE_DEEPEST_NECESSITY_AND_J_G_FALSIFICATION_ON_30_CURRENT_TRUTHS__CO..._ONLY_FOR_IRREDUCIBLE_"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_authority_v5.py",
+      "test": "test_counts_preserved",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: {'pass': False, 'errors': ['DRIFT:m'], 'terminal': False}"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_authority_v5.py",
+      "test": "test_a_blackbox_not_global_finality",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "KeyError: 'A_blackbox_global_finality'"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_authority_v5.py",
+      "test": "test_c_sequence_explosion_removed_not_c_closed",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "KeyError: 'C_arbitrary_sequence_enumeration_required'"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_authority_v5.py",
+      "test": "test_d_compiler_integrated_not_d_closed",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "KeyError: 'D_effect_footprint_compiler_integrated'"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_authority_v5.py",
+      "test": "test_zero_credit",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "KeyError: 'terminal_credit_delta'"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_coding_finite_exact_oracle_region_v1.py",
+      "test": "test_terminal_binds_second_constructive_region_without_target_transfer",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert '0e6abf778d04...852c1211563fe' == 'a19d683f86b0...e2cc96f8f71fa'"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_coding_v5_adequacy_gate_v1.py",
+      "test": "test_terminal_authority_binds_gate_without_promoting_certificate",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert 'EVENT_DRIVEN...ERNAL_JOB_NOW' == 'CODING_V5_AU...ERTIFICATE_V1'"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_cursorbench_dependency_provenance_atom_v1.py",
+      "test": "test_cursorbench_dependency_provenance_mechanism_bound_without_truth_promotion",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "assert 135 == 82"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_cursorbench_information_boundary_wait_state_v1.py",
+      "test": "test_cursorbench_information_boundary_wait_state_is_live_without_credit",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "assert 135 == 128"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_cursorbench_public_scoring_reduction_v1.py",
+      "test": "test_terminal_authority_binds_scoring_reduction_without_promoting_route_a",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "assert 2 == 3"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_cursorbench_route_a_search_saturation_v1.py",
+      "test": "test_bounded_owner_search_saturation_routes_without_credit_or_nonexistence_claim",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert 'DORMANT_INFO..._REACTIVATION' == 'ROUTE_B_SCOP...TRONGER_PROOF'"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_cursorbench_route_disjunction_reconciliation_v1.py",
+      "test": "test_current_terminal_binds_cursorbench_route_disjunction_without_credit",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert 'DORMANT_INFO..._REACTIVATION' == 'ROUTE_B_SCOP...TRONGER_PROOF'"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_cursorbench_three_region_frontier_v1.py",
+      "test": "test_terminal_binds_three_region_frontier_without_target_transfer",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert '0e6abf778d04...852c1211563fe' == 'ede67d5191af...a6b701bf02328'"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_cursorbench_typed_specialist_transfer_falsification_v1.py",
+      "test": "test_terminal_scheduler_advances_only_after_verified_transfer_falsification",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "assert 135 == 99"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_cursorbench_v5_adequacy_boundary_v1.py",
+      "test": "test_current_terminal_authority_binds_cursorbench_v5_version_truth_only",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert 'EVENT_DRIVEN...ERNAL_JOB_NOW' == 'CURSORBENCH_...ACY_REGION_V1'"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_information_dominance_v1.py",
+      "test": "test_closed_targets_are_absent",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "KeyError: 'dominance'"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_information_dominance_v1.py",
+      "test": "test_dominance_is_exact_and_current",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "KeyError: 'dominance'"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_information_dominance_v1.py",
+      "test": "test_exact_live_world",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_CURRENT_TERMINAL_INFORMATION_DOMINANCE_V1', 'status': 'FAIL_CLOSED__CURRENT_SCHEDULING_AUTHORITY_INVALID', 'pass': False, 'execution_autho"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_information_dominance_v1.py",
+      "test": "test_missing_retrieval_gate_fails_closed",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'FAIL_CLOSED__CURRENT_SCHEDULING_AUTHORITY_INVALID' != 'FAIL_CLOSED__LIVE_WORLD_INVALID'"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_information_dominance_v1.py",
+      "test": "test_zero_credit_zero_reality",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "KeyError: 'new_reality_units_consumed'"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_information_dominance_v2.py",
+      "test": "test_authority_count_drift_fails_closed",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'UNRESOLVED_COUNT_NE_AUTHORITY:27:30' not found in ['AUTHORITY_ACCEPTANCE_WORLD_INVALID', 'AUTHORITY_ATOMIC_COUNTS_DO_NOT_PARTITION_REGISTRY', 'PROVED_COUNT_NE_AUTHORITY:16:18', 'UNRES"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_information_dominance_v2.py",
+      "test": "test_evidence_drift_fails_closed_against_authority",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'PROVED_COUNT_NE_AUTHORITY:10:11' not found in ['AUTHORITY_ACCEPTANCE_WORLD_INVALID', 'PROVED_COUNT_NE_AUTHORITY:15:18', 'UNRESOLVED_COUNT_NE_AUTHORITY:23:20']"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_information_dominance_v2.py",
+      "test": "test_live_27_world_and_exact_dominance",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "KeyError: 'pass'"
+    },
+    {
+      "file": "canonical/tests/test_current_terminal_information_dominance_v2.py",
+      "test": "test_recovery_predicates_are_removed_from_live_matched_certificate",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "KeyError: 'dominance'"
+    },
+    {
+      "file": "canonical/tests/test_current_witness_target_totalization_v2.py",
+      "test": "test_current_surface_is_exact_and_zero_direct_reuse",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_current_witness_target_totalization_v3.py",
+      "test": "test_current_8x14_surface_zero_direct_reuse",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_CURRENT_WITNESS_TARGET_TOTALIZATION_V3', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': [...DARY_NONINFERIOR', 'IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS']\", '"
+    },
+    {
+      "file": "canonical/tests/test_cursorbench_current_information_boundary_wait_state_v1.py",
+      "test": "test_cursorbench_wait_state_is_exactly_bound_and_zero_credit",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: {'path': 'canonical/governance/CURRENT_TERMINAL_AUTHORITY.json', 'git_blob_sha': 'bfb1dd28dde466d9d54cf3eb7eb2478b820134cc'}"
+    },
+    {
+      "file": "canonical/tests/test_debian_full_metadata_xapian.py",
+      "test": "test_translation_en_joins_by_description_md5",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "assert 0 == 1"
+    },
+    {
+      "file": "canonical/tests/test_delegation_objective_dominance_reconciler.py",
+      "test": "test_live_repo_is_ready_for_promotion_law",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_DELEGATION_OBJECTIVE_DOMINANCE_RECONCILIATION_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'behavior_id': 'TASK_TO_DELEGATION_GRAPH_001', "
+    },
+    {
+      "file": "canonical/tests/test_delegation_t2_objective_binding_validator.py",
+      "test": "test_live_repo_binding_passes",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_DELEGATION_T2_OBJECTIVE_BINDING_VALIDATION_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'behavior_id': 'TASK_TO_DELEGATION_GRAPH_001', 'di"
+    },
+    {
+      "file": "canonical/tests/test_delegation_temporal_ceiling_transmutation_v1.py",
+      "test": "test_exact_live_integration_closes_delegation_as_fourth_family",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: Items in the first set but not the second:"
+    },
+    {
+      "file": "canonical/tests/test_delegation_temporal_ceiling_transmutation_v1.py",
+      "test": "test_remove_delegation_witness_reverts_to_three_of_nineteen",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: Tuples differ: (4, 15) != (3, 16)"
+    },
+    {
+      "file": "canonical/tests/test_delegation_temporal_ceiling_transmutation_v1.py",
+      "test": "test_unverified_witness_reverts_delegation_to_open",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: Tuples differ: (4, 15) != (3, 16)"
+    },
+    {
+      "file": "canonical/tests/test_delegation_temporal_ceiling_transmutation_v1.py",
+      "test": "test_weaken_full_protocol_flag_reverts_delegation_to_open",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: Tuples differ: (4, 15) != (3, 16)"
+    },
+    {
+      "file": "canonical/tests/test_delegation_universal_scope_certificate_v2.py",
+      "test": "test_live_exact_sources_derive_candidate_universal_scope_proof",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: ('canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json', 'f8b661abf7cb1b628aa14d966658394b80093879', 'eb4bca0fe6a015d49d2854998fbe046c979c7ea9')"
+    },
+    {
+      "file": "canonical/tests/test_differential_dominance_activation_v1.py",
+      "test": "test_activation_is_narrow_zero_credit_and_pre_reality",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: True is not false"
+    },
+    {
+      "file": "canonical/tests/test_dual_judgment_general_substrate_role_v1.py",
+      "test": "test_role_qualification_passes_current_bound_bytes",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__SOURCE_BLOB_DRIFT",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_DUAL_JUDGMENT_GENERAL_SUBSTRATE_ROLE_VERDICT_V1', 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'pass': False, 'errors': ['SOURCE_BLOB_DRIFT'], ...}"
+    },
+    {
+      "file": "canonical/tests/test_dual_judgment_source_gate_activation_v1.py",
+      "test": "test_exact_two_requirement_discharge_only",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__SOURCE_BLOB_DRIFT",
+      "message_head": "AssertionError: {'pass': False, 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'errors': ['SOURCE_BLOB_DRIFT'], 'drift': {'canonical/runt...2.py': {'expected': 'b168b131f6383e158bdc0d931439d14e61f2a5de',"
+    },
+    {
+      "file": "canonical/tests/test_escape_gap_a_policy_cover_adapter_activation_v1.py",
+      "test": "test_current_generation_lease_revalidated_after_oq_update",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'e355f3c168429c96ff0dfa142428ada6c97c47e9' != 'eb42b8c1c1e506f351ab6ea941b74791fb37894b'"
+    },
+    {
+      "file": "canonical/tests/test_escape_gap_a_policy_cover_adapter_activation_v1.py",
+      "test": "test_exact_runtime_test_and_verification_bindings",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '19b0bdf00eb9b8d76cbf7f1a615e1ce6e89ffbf8' != '3c003f353d74dea26c7053f57dccd5ea5a1244d2'"
+    },
+    {
+      "file": "canonical/tests/test_escape_gap_a_policy_cover_adapter_activation_v1.py",
+      "test": "test_oq_reduction_is_primary_research_compression",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true"
+    },
+    {
+      "file": "canonical/tests/test_escape_progress_13_route_manifest_v1.py",
+      "test": "test_current_manifest_passes_but_cc_r3_remains_open",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: False is not true : {'pass': False, 'status': 'FAIL_CLOSED__ESCAPE13_ROUTE_MANIFEST_DRIFT', 'errors': ['TB_SCIENCE_GE_58_7:EVIDENCE_BLOB_STALE', 'TB_SCIENCE_GE_58_7:SUPPORT_STRING_MISS"
+    },
+    {
+      "file": "canonical/tests/test_escape_progress_frozen_13_claim_v3.py",
+      "test": "test_content_addressed_dependencies_and_exact_obligations",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '30005d2065d84618c080979eb841e0161035ac2c' != '5e89fe6ad8b367e31d48b2100691480accb228d4'"
+    },
+    {
+      "file": "canonical/tests/test_escape_progress_frozen_13_claim_v3.py",
+      "test": "test_current_mission_binding_and_claim_id",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'pass': False, 'status': 'FAIL_CLOSED', 'errors': ['MISSION_BINDING_STALE'], 'claim_id': 'd8dec5e454c4cbae50de7a0b23f0cf220e4caeb1c1b620e40dd53c267da1ae28', 'claim"
+    },
+    {
+      "file": "canonical/tests/test_escape_v3_current_projection_v1.py",
+      "test": "test_current_classifier_projects_v3_not_v2",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V7.json' != 'canonical/governance/ESCAPE_PROGRESS_SHARED_GAP_REUSE_BINDING_20261010_V5.json'"
+    },
+    {
+      "file": "canonical/tests/test_external_acquisition_bridge.py",
+      "test": "test_urlopen_bridge_preserves_http_error_semantics",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: \"EXTERNAL_TOOL_REQUEST_PENDING\" does not match \"CONTINUOUS_OBS_INFORMATION_CONTEXT_NOT_BOUND\""
+    },
+    {
+      "file": "canonical/tests/test_external_acquisition_bridge.py",
+      "test": "test_urlopen_bridge_roundtrip_preserves_bytes_and_identity",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: \"EXTERNAL_TOOL_REQUEST_PENDING\" does not match \"CONTINUOUS_OBS_INFORMATION_CONTEXT_NOT_BOUND\""
+    },
+    {
+      "file": "canonical/tests/test_external_benchmark_dominance_compiler_v1.py",
+      "test": "test_external_benchmark_dominance_gate",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__SOURCE_BLOB_DRIFT",
+      "message_head": "AssertionError: {'pass': False, 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'drift': {'canonical/governance/OPUS55_ACCEPTANCE_PREDICAT...bacbd9c0cdb93b155ced0f72558', 'actual': 'd4e06fd50d49342282a320"
+    },
+    {
+      "file": "canonical/tests/test_final_terminal_cleanroom_gate_v1.py",
+      "test": "test_candidate_identity_mismatch_fails",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "KeyError: 'errors'"
+    },
+    {
+      "file": "canonical/tests/test_final_terminal_cleanroom_gate_v1.py",
+      "test": "test_cleanroom_unknown_model_dependency_inventory_fails",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "KeyError: 'errors'"
+    },
+    {
+      "file": "canonical/tests/test_final_terminal_cleanroom_gate_v1.py",
+      "test": "test_cleanroom_with_local_rehosted_model_fails",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "KeyError: 'errors'"
+    },
+    {
+      "file": "canonical/tests/test_final_terminal_cleanroom_gate_v1.py",
+      "test": "test_cleanroom_without_donor_removal_fails",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "KeyError: 'errors'"
+    },
+    {
+      "file": "canonical/tests/test_final_terminal_cleanroom_gate_v1.py",
+      "test": "test_exact_six_part_final_proof_can_pass",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_FINAL_TERMINAL_CLEANROOM_GATE_V1', 'status': 'OPEN__INTERNAL_UNSOLVED__TERMINAL_PRECONDITIONS_NOT_CLOSED', 'pass': False, 'terminal_author"
+    },
+    {
+      "file": "canonical/tests/test_final_terminal_cleanroom_gate_v1.py",
+      "test": "test_self_asserted_conjunct_without_independent_verifier_fails",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "KeyError: 'errors'"
+    },
+    {
+      "file": "canonical/tests/test_final_terminal_cleanroom_gate_v1.py",
+      "test": "test_stale_receipt_blob_fails_closed",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "KeyError: 'errors'"
+    },
+    {
+      "file": "canonical/tests/test_finance_certified_unless_evidence_role_gate_v1.py",
+      "test": "test_full_supervisory_transaction_passes_with_certified_roles",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_JUDGMENT_CONTROL_ENVELOPE_V1', 'accepted': False, 'status': 'TERMINAL_BLOCKED', 'errors': ['EXPLICIT_SEMANTIC_OPERATOR_CONTRACT_FAIL'], ...}"
+    },
+    {
+      "file": "canonical/tests/test_finance_direct_source_coverage_audit_v1.py",
+      "test": "test_finance_source_coverage_gap_is_localized_on_bound_bytes",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__SOURCE_BLOB_DRIFT",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_FINANCE_DIRECT_ROUTE_SOURCE_COVERAGE_AUDIT_V1', 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', ...1.py': {'expected': '5ebfd1e7fa871da89ecca40ffeb8dd6575c21582',"
+    },
+    {
+      "file": "canonical/tests/test_g_route_five_generator_dominance_reconciliation_v1.py",
+      "test": "test_matrix_summary_is_derived_from_current_rows",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert {'COMPLEX_MUL...INATION', ...} == {'EXACT_SYMBO...AND_LEARNING'}"
+    },
+    {
+      "file": "canonical/tests/test_general_cross_document_closure_reconciliation_v1.py",
+      "test": "test_all_exact_bound_files_match_declared_git_blobs",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'e208000c7b2a2ca926b4c4f8de3a1c828834aad6' != '8ed410ab753ca1d86de37b721da30e805a1e4ec9'"
+    },
+    {
+      "file": "canonical/tests/test_goal_compiler.py",
+      "test": "test_barcode_goal_selects_verified_barcode_not_qr",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "goal_compiler_test.GoalCompilationFailure: GOAL_COMPILATION_AMBIGUOUS:{\"candidates\": [\"auto.apt.zint\", \"terminal.kstar.root.assess.stdlib\"], \"score\": 8}"
+    },
+    {
+      "file": "canonical/tests/test_grounding_proposal_binding_contract.py",
+      "test": "test_state_fetch_stays_out_of_generic_grounding_without_prior_context",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 1 != 0 : {'schema': 'PROJECT_BRAIN_PLAIN_GOAL_BOUND_GROUNDING_V1', 'goal': 'Fetch JSON from canonical/astra_runtime/state/example.json using url key source_url.', 'goal_sha256': 'f03db"
+    },
+    {
+      "file": "canonical/tests/test_h100_iterative_depth_escape_v1.py",
+      "test": "test_depth4_escape_and_transfer",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: None != 4"
+    },
+    {
+      "file": "canonical/tests/test_h100_pinned_https_tool_acquisition_v1.py",
+      "test": "test_two_pinned_fetches",
+      "status": "failed",
+      "bucket": "NETWORK",
+      "message_head": "ssl.SSLZeroReturnError: TLS/SSL connection has been closed (EOF) (_ssl.c:992)"
+    },
+    {
+      "file": "canonical/tests/test_h100_pinned_https_tool_acquisition_v2.py",
+      "test": "test_fresh_two_pack_gate",
+      "status": "failed",
+      "bucket": "NETWORK",
+      "message_head": "ssl.SSLZeroReturnError: TLS/SSL connection has been closed (EOF) (_ssl.c:992)"
+    },
+    {
+      "file": "canonical/tests/test_h100_verified_read_only_network_tool_registry_v1.py",
+      "test": "test_both_verified_network_tools_invoke",
+      "status": "failed",
+      "bucket": "NETWORK",
+      "message_head": "ssl.SSLZeroReturnError: TLS/SSL connection has been closed (EOF) (_ssl.c:992)"
+    },
+    {
+      "file": "canonical/tests/test_harbor_science_agent_v1.py",
+      "test": "test_source_gate_projection_is_brain_owned_general_substrate",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_ACCEPTANCE_CAPABILITY_SOURCE_GATE_V2', 'status': 'BLOCKED_BEFORE_CASE_SPEND', 'pass': False, 'errors': ['EXTERNAL_MODEL_COGNITION_DEPENDEN"
+    },
+    {
+      "file": "canonical/tests/test_hidden_evaluator_monotone_coupling_v1.py",
+      "test": "test_inferior_mass_fails_closed",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "canonical.runtime.hidden_evaluator_monotone_coupling_v1.CouplingError: UNKNOWN_TARGET_OUTCOME_IN_EDGE:low"
+    },
+    {
+      "file": "canonical/tests/test_hle_native_question_contract_v2.py",
+      "test": "test_relative_who_does_not_override_leading_city_slot",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'SHORT_TEXT' != 'LOCATION'"
+    },
+    {
+      "file": "canonical/tests/test_hle_symbolic_lark_solver_v2.py",
+      "test": "test_arithmetic",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'FAIL_CLOSED__NO_PARSEABLE_LATEX' != 'CANDIDATE_GENERATED'"
+    },
+    {
+      "file": "canonical/tests/test_hle_symbolic_lark_solver_v2.py",
+      "test": "test_det",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'FAIL_CLOSED__NO_PARSEABLE_LATEX' != 'CANDIDATE_GENERATED'"
+    },
+    {
+      "file": "canonical/tests/test_hle_symbolic_lark_solver_v2.py",
+      "test": "test_integral",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'FAIL_CLOSED__NO_PARSEABLE_LATEX' != 'CANDIDATE_GENERATED'"
+    },
+    {
+      "file": "canonical/tests/test_hle_symbolic_lark_solver_v2.py",
+      "test": "test_limit",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'FAIL_CLOSED__NO_PARSEABLE_LATEX' != 'CANDIDATE_GENERATED'"
+    },
+    {
+      "file": "canonical/tests/test_hle_symbolic_lark_solver_v2.py",
+      "test": "test_linear",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'FAIL_CLOSED__NO_PARSEABLE_LATEX' != 'CANDIDATE_GENERATED'"
+    },
+    {
+      "file": "canonical/tests/test_hle_symbolic_lark_solver_v2.py",
+      "test": "test_positive_root",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'FAIL_CLOSED__NO_PARSEABLE_LATEX' != 'CANDIDATE_GENERATED'"
+    },
+    {
+      "file": "canonical/tests/test_hle_symbolic_lark_solver_v2.py",
+      "test": "test_sum",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'FAIL_CLOSED__NO_PARSEABLE_LATEX' != 'CANDIDATE_GENERATED'"
+    },
+    {
+      "file": "canonical/tests/test_honesty_load_bearing_bypass_verifier_v1.py",
+      "test": "test_current_runtime_has_constructive_bypass_and_zero_credit",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__SOURCE_BLOB_DRIFT",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_HONESTY_LOAD_BEARING_BYPASS_VERIFIER_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['SOURCE_BLOB_DRIFT:canonical/runtime/astra_runtime.py'], ...}"
+    },
+    {
+      "file": "canonical/tests/test_judgment_control_envelope_v1.py",
+      "test": "test_materiality_does_not_launder_general_substrate_qualification",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'GENERAL_SUBSTRATE_TEST_NOT_PROVEN' not found in ['EXTERNAL_MODEL_COGNITION_DEPENDENCY_FORBIDDEN', 'MODEL_PRODUCER_ROLE_FORBIDDEN', 'MODEL_ROLE_UNCLASSIFIED']"
+    },
+    {
+      "file": "canonical/tests/test_livebench_langdetect_balanced_decorator_exact_runtime_v1.py",
+      "test": "test_pinned_langdetect_109_source_bytes_match",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert 'e026161970b5...9da45d4dffe8b' == 'aa5a7b24b46b...cd23f7178a578'"
+    },
+    {
+      "file": "canonical/tests/test_livebench_langdetect_balanced_decorator_exact_runtime_v1.py",
+      "test": "test_exact_livebench_checker_bytes_and_decorator_counts",
+      "status": "failed",
+      "bucket": "IMPORT_ERROR",
+      "message_head": "ModuleNotFoundError: No module named 'instruction_following_eval'"
+    },
+    {
+      "file": "canonical/tests/test_livebench_langdetect_balanced_decorator_exact_runtime_v1.py",
+      "test": "test_exact_response_language_checker_is_decorator_causally_invariant",
+      "status": "failed",
+      "bucket": "IMPORT_ERROR",
+      "message_head": "ModuleNotFoundError: No module named 'instruction_following_eval'"
+    },
+    {
+      "file": "canonical/tests/test_lossless_raw_task_universal_mission_v1.py",
+      "test": "test_every_raw_segment_acceptance_closes_final_task_target",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V6', 'status': 'UNRESOLVED__ALTERNATIVE_ROUTES_EXHAUSTED__DEFERRED_ROUTE_REMAINS', 'pass': False, 'verified_facts': ['CANDI"
+    },
+    {
+      "file": "canonical/tests/test_m0_requirement_change_case_v1.py",
+      "test": "test_requirement_change_batch_passes_fresh_synthetic_cases",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_M0_REQUIREMENT_CHANGE_CASE_V1_BATCH_RESULT', 'case_count': 16, 'passed': 0, 'failed': 16, ...}"
+    },
+    {
+      "file": "canonical/tests/test_m0_requirement_change_case_v1.py",
+      "test": "test_phase2_is_distinct_and_stale_requirements_are_not_retained",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_M0_REQUIREMENT_CHANGE_CASE_V1_RESULT', 'case_id': 'M0-REQ-CHANGE-123456-0', 'pass': False, 'phase1_scorer_pass': False, ...}"
+    },
+    {
+      "file": "canonical/tests/test_m1b_smooth_surface_compiler.py",
+      "test": "test_circle_loft_builds_smooth_variable_radius_solid",
+      "status": "failed",
+      "bucket": "IMPORT_ERROR",
+      "message_head": "ImportError: libGL.so.1: cannot open shared object file: No such file or directory"
+    },
+    {
+      "file": "canonical/tests/test_m1b_smooth_surface_compiler.py",
+      "test": "test_polygon_loft_builds_one_solid",
+      "status": "failed",
+      "bucket": "IMPORT_ERROR",
+      "message_head": "ImportError: libGL.so.1: cannot open shared object file: No such file or directory"
+    },
+    {
+      "file": "canonical/tests/test_m1b_smooth_surface_compiler.py",
+      "test": "test_spline_revolve_builds_one_smooth_solid",
+      "status": "failed",
+      "bucket": "IMPORT_ERROR",
+      "message_head": "ImportError: libGL.so.1: cannot open shared object file: No such file or directory"
+    },
+    {
+      "file": "canonical/tests/test_matched_success_legacy_t2_reuse_audit_v1.py",
+      "test": "test_current_legacy_t2_reuse_partition",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_MATCHED_SUCCESS_LEGACY_T2_REUSE_AUDIT_VERIFIER_V1', 'status': 'FAIL_CLOSED', 'pass': False, ...ical/governance/OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_"
+    },
+    {
+      "file": "canonical/tests/test_native_artifact_cross_format_preflight_v1.py",
+      "test": "test_cross_format_population",
+      "status": "failed",
+      "bucket": "IMPORT_ERROR",
+      "message_head": "ModuleNotFoundError: No module named 'pptx'"
+    },
+    {
+      "file": "canonical/tests/test_native_artifact_render_preservation_v1.py",
+      "test": "test_all_four_formats_preserve_render_envelope",
+      "status": "failed",
+      "bucket": "IMPORT_ERROR",
+      "message_head": "ModuleNotFoundError: No module named 'pptx'"
+    },
+    {
+      "file": "canonical/tests/test_objective_evidence_unit_extract_v2_generic_bm25.py",
+      "test": "test_generic_bm25_relevance_route_requires_no_authority_identity",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'UNVERIFIED' != 'OBJECTIVE_GROUNDED_EVIDENCE_UNITS_EXTRACTED'"
+    },
+    {
+      "file": "canonical/tests/test_objective_relevance_admission_closure.py",
+      "test": "test_frontend_advances_relevance_only_to_extraction",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'FIRST_PARTY_RELEVANT_SOURCE_VERIFIED' not found in '#!/usr/bin/env python3\\n\"\"\"Model-independent source front-end for broad open research objectives.\\n\\nThis composes qualified decomp"
+    },
+    {
+      "file": "canonical/tests/test_objective_route_certificate_verifier.py",
+      "test": "test_live_common_certificate_basis_passes",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_OBJECTIVE_ROUTE_CERTIFICATE_VERIFICATION_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_"
+    },
+    {
+      "file": "canonical/tests/test_one_shot_reality_closure_v2_integration.py",
+      "test": "test_empty_r3_state_does_not_hide_current_r2_internal_gap",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: True is not false : {'schema': 'PROJECT_BRAIN_ONE_SHOT_REALITY_CLOSURE_V2', 'status': 'PASS__PROOF_CARRYING_REALITY_CLOSURE_FIXED_POINT', 'pass': True, 'fixed_point': True, 'repair_rou"
+    },
+    {
+      "file": "canonical/tests/test_one_shot_sky_impact_executor_v1.py",
+      "test": "test_all_eight_steps_execute_and_pass",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "canonical.runtime.capability_parallel_frontier_post_composition_v2.PostCompositionFrontierV2Error: R2_SCHEDULER"
+    },
+    {
+      "file": "canonical/tests/test_one_shot_sky_impact_executor_v1.py",
+      "test": "test_persisted_execution_receipt_matches_live_execution",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "canonical.runtime.capability_parallel_frontier_post_composition_v2.PostCompositionFrontierV2Error: R2_SCHEDULER"
+    },
+    {
+      "file": "canonical/tests/test_one_shot_sky_impact_planner_v1.py",
+      "test": "test_live_plan_compiles_all_eight_steps_and_twenty_four_propositions",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "canonical.runtime.capability_parallel_frontier_post_composition_v2.PostCompositionFrontierV2Error: R2_SCHEDULER"
+    },
+    {
+      "file": "canonical/tests/test_one_shot_sky_impact_planner_v1.py",
+      "test": "test_persisted_governance_plan_matches_live_compilation",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "canonical.runtime.capability_parallel_frontier_post_composition_v2.PostCompositionFrontierV2Error: R2_SCHEDULER"
+    },
+    {
+      "file": "canonical/tests/test_open_research_claim_relation_integration.py",
+      "test": "test_explicit_comparison_reaches_verified_relation",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 0 != 1 : {'schema': 'PROJECT_BRAIN_OPEN_RESEARCH_SOURCE_FRONTEND_V1', 'status': 'SOURCE_FRONTEND_READY', 'objective': 'Determine whether River Alpha annual discharge is higher than Riv"
+    },
+    {
+      "file": "canonical/tests/test_open_research_claim_relation_integration.py",
+      "test": "test_unsupported_objective_stops_at_claim_spec_gap",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 0 != 1 : {'schema': 'PROJECT_BRAIN_OPEN_RESEARCH_SOURCE_FRONTEND_V1', 'status': 'SOURCE_FRONTEND_READY', 'objective': 'Compare River Alpha and River Beta annual discharge.', 'question_"
+    },
+    {
+      "file": "canonical/tests/test_open_research_ror_identity_composition.py",
+      "test": "test_identity_advances_only_to_primary_relevance_frontier",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "KeyError: 'objective_relevance_bm25'"
+    },
+    {
+      "file": "canonical/tests/test_open_research_source_frontend.py",
+      "test": "test_scientific_objective_reaches_provenance_frontier",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'SOURCE_DISCOVERY_BLOCKED' != 'SOURCE_FRONTEND_READY'"
+    },
+    {
+      "file": "canonical/tests/test_open_research_source_frontend.py",
+      "test": "test_standard_objective_reaches_provenance_frontier",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'SOURCE_DISCOVERY_BLOCKED' != 'SOURCE_FRONTEND_READY'"
+    },
+    {
+      "file": "canonical/tests/test_open_research_source_frontend.py",
+      "test": "test_verified_bounded_relevance_advances_only_to_extraction",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "KeyError: 'objective_relevance_bm25'"
+    },
+    {
+      "file": "canonical/tests/test_open_research_source_frontend_generic_extraction.py",
+      "test": "test_non_ror_source_can_reach_evidence_extraction",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'MODE[16 chars]AIM_SPEC_AND_OPERAND_BINDING_FROM_OBJECTIVE_AN[17 chars]E_V1' != 'MODE[16 chars]AIM_SUPPORT_AND_RELATION_EVALUATION_FROM_EXTRACTED_EVIDENCE_V1'"
+    },
+    {
+      "file": "canonical/tests/test_open_web_source_candidate_discovery.py",
+      "test": "test_live_cross_domain_candidate_discovery",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'DISCOVERY_UNAVAILABLE' != 'CANDIDATES_DISCOVERED'"
+    },
+    {
+      "file": "canonical/tests/test_open_web_source_candidate_discovery.py",
+      "test": "test_query_is_objective_not_invented_recipe",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'standards document changed between two editions' != 'Assess whether a standards document changed between two editions'"
+    },
+    {
+      "file": "canonical/tests/test_opus55_acceptance_calibration_reducer_v2.py",
+      "test": "test_behavioral_pass_is_still_required",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 4 != 2"
+    },
+    {
+      "file": "canonical/tests/test_opus55_acceptance_calibration_reducer_v2.py",
+      "test": "test_live_effective_calibration_is_exactly_3_of_19",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 4 != 3"
+    },
+    {
+      "file": "canonical/tests/test_opus55_acceptance_calibration_reducer_v2.py",
+      "test": "test_without_transmutation_witness_reverts_to_2_of_19",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 4 != 2"
+    },
+    {
+      "file": "canonical/tests/test_opus55_acceptance_residual_compiler_v3.py",
+      "test": "test_current_authoritative_proof_forms_compile_without_semantic_downgrade",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_VERDICT_V3', 'status': 'ACTIVE_FAIL_CLOSED', 'pass': Fal...ATIONS', 'INVALID_PROOF_KIND:LIVEBENCH_IF_GE_65_7', 'INVALID_PR"
+    },
+    {
+      "file": "canonical/tests/test_opus55_acceptance_residual_compiler_v4_projection.py",
+      "test": "test_current_post_tool_discovery_projection",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_VERDICT_V3', 'status': 'ACTIVE_FAIL_CLOSED', 'pass': Fal...ATIONS', 'INVALID_PROOF_KIND:LIVEBENCH_IF_GE_65_7', 'INVALID_PR"
+    },
+    {
+      "file": "canonical/tests/test_opus55_domain_behavioral_quotient_mapping_v1.py",
+      "test": "test_current_repository_mapping_passes_structurally",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "canonical.runtime.opus55_domain_behavioral_quotient_mapping_v1.MappingError: AUTHORITY_BLOB_DRIFT:terminal_protocols"
+    },
+    {
+      "file": "canonical/tests/test_osworld_v21_brain_subject_v3.py",
+      "test": "test_v3_loaded_module_graph_excludes_obsolete_and_model_backed_policy_routes",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: canonical.runtime.osworld_v21_browser_ops_v1"
+    },
+    {
+      "file": "canonical/tests/test_ownership_promotion_compiler_v1.py",
+      "test": "test_acceptance_reopen_fails_closed",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'PASS' != 'FAIL_CLOSED'"
+    },
+    {
+      "file": "canonical/tests/test_ownership_promotion_compiler_v1.py",
+      "test": "test_binding_pointer_mutation_fails_closed",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'PASS' != 'FAIL_CLOSED'"
+    },
+    {
+      "file": "canonical/tests/test_ownership_promotion_compiler_v1.py",
+      "test": "test_hash_mutation_fails_closed",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'PASS' != 'FAIL_CLOSED'"
+    },
+    {
+      "file": "canonical/tests/test_ownership_promotion_compiler_v1.py",
+      "test": "test_live_batch_three_eligible",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: {'eligible': 0, 'blocked': 0} != {'eligible': 3, 'blocked': 0}"
+    },
+    {
+      "file": "canonical/tests/test_p1_composite_proof_counterexample_audit_v1.py",
+      "test": "test_live_composite_restoration_stays_quarantined",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_P1_COMPOSITE_PROOF_COUNTEREXAMPLE_AUDIT_V1', 'status': 'FAIL_CLOSED__AUDIT_INPUT_OR_COUNTEREXAMPLE_DRIFT', 'audit_valid': False, 'errors':"
+    },
+    {
+      "file": "canonical/tests/test_p1_composite_proof_counterexample_audit_v1.py",
+      "test": "test_reconciliation_role_drift_fails_closed",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "ValueError: list.remove(x): x not in list"
+    },
+    {
+      "file": "canonical/tests/test_p1_composite_proof_role_reconciliation_v1.py",
+      "test": "test_live_composite_partition_passes_without_credit",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_P1_COMPOSITE_PROOF_ROLE_RECONCILIATION_VERDICT_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['NARROW_TERMINAL_AUDIT_NOT_PRESERVE"
+    },
+    {
+      "file": "canonical/tests/test_p1_shared_failure_semantics_batch_preflight_v1.py",
+      "test": "test_live_exact_freeze_passes",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_P1_SHARED_FAILURE_SEMANTICS_BATCH_PREFLIGHT_VERDICT_V2', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['AUTHORITY_SOURCE_BLOB:source_"
+    },
+    {
+      "file": "canonical/tests/test_p1_terminal_execution_scope_audit_v1.py",
+      "test": "test_exact_executed_route_is_narrower_than_frozen_p1",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_P1_TERMINAL_EXECUTION_SCOPE_AUDIT_V1', 'status': 'FAIL_CLOSED__AUDIT_INPUT_DRIFT', 'audit_valid': False, 'scope_mismatch_proved': False, '"
+    },
+    {
+      "file": "canonical/tests/test_p1_universal_generator_transport_theorem_v1.py",
+      "test": "test_universal_generator_transport_theorem",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_p1_v4_scope_safe_residual_discharge_v1.py",
+      "test": "test_live_v4_compresses_quarantine_but_does_not_clear_it",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_P1_V4_SCOPE_SAFE_RESIDUAL_DISCHARGE_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['P1_SCOPE_MISMATCH_AUDIT_NOT_PROVED'], 'can_cl"
+    },
+    {
+      "file": "canonical/tests/test_p1_v4_scope_safe_residual_discharge_v1.py",
+      "test": "test_unverified_rescue_claim_is_ignored",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_P1_V4_SCOPE_SAFE_RESIDUAL_DISCHARGE_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['P1_SCOPE_MISMATCH_AUDIT_NOT_PROVED'], 'can_cl"
+    },
+    {
+      "file": "canonical/tests/test_p1_v5_terminal_scope_admissibility_v1.py",
+      "test": "test_live_state_has_three_open_relations_and_no_clearance",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 0 != 3"
+    },
+    {
+      "file": "canonical/tests/test_p1_v5_terminal_scope_admissibility_v1.py",
+      "test": "test_relation_without_claim_bound_witness_or_independent_verification_is_not_admissible",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: True is not false"
+    },
+    {
+      "file": "canonical/tests/test_p1_v5_terminal_scope_admissibility_v1.py",
+      "test": "test_synthetic_v5_pass_does_not_imply_surface_relation",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: True is not false"
+    },
+    {
+      "file": "canonical/tests/test_plain_goal_bound_grounding_gate.py",
+      "test": "test_grounding_helper_persists_auditable_evidence",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 0 not greater than or equal to 1"
+    },
+    {
+      "file": "canonical/tests/test_plain_goal_grounding_bound_registry_integration.py",
+      "test": "test_registry_producer_and_independent_verifier_are_callable",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'python.tests.audit.unittest' not found in []"
+    },
+    {
+      "file": "canonical/tests/test_post_dual_judgment_zero_reality_frontier_v1.py",
+      "test": "test_current_post_dual_frontier_is_exact_17_requirement_cut",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__SOURCE_BLOB_DRIFT",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_POST_DUAL_JUDGMENT_ZERO_REALITY_FRONTIER_V1', 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'pass': False, 'errors': ['SOURCE_BLOB_DRIFT'], ...}"
+    },
+    {
+      "file": "canonical/tests/test_post_dual_judgment_zero_reality_frontier_v1.py",
+      "test": "test_source_admission_does_not_close_target_predicates",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__SOURCE_BLOB_DRIFT",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_POST_DUAL_JUDGMENT_ZERO_REALITY_FRONTIER_V1', 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'pass': False, 'errors': ['SOURCE_BLOB_DRIFT'], ...}"
+    },
+    {
+      "file": "canonical/tests/test_post_dual_judgment_zero_reality_frontier_v1.py",
+      "test": "test_global_fresh_reality_remains_false",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__SOURCE_BLOB_DRIFT",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_POST_DUAL_JUDGMENT_ZERO_REALITY_FRONTIER_V1', 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'pass': False, 'errors': ['SOURCE_BLOB_DRIFT'], ...}"
+    },
+    {
+      "file": "canonical/tests/test_post_unknown_domain_v6_root_authority_reconciliation_v1.py",
+      "test": "test_post_unknown_domain_v6_revocation_frontier_is_exact",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "assert 16 == 12"
+    },
+    {
+      "file": "canonical/tests/test_professional_quality_leaf_binder_v2.py",
+      "test": "test_current_manifest_remains_24_open_without_leaf_receipts",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: 12 != 0 : {'schema': 'PROJECT_BRAIN_PROFESSIONAL_QUALITY_LEAF_BINDER_V2', 'status': 'OPEN__LEAF_RECEIPTS_OR_EVIDENCE_REMAIN', 'pass': False, 'structural_errors': [], 'manifest_git_blob"
+    },
+    {
+      "file": "canonical/tests/test_professional_quality_leaf_binder_v2.py",
+      "test": "test_scope_matched_content_addressed_receipt_is_admitted",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'leaf_id': 'PQ::R1_TARGET_SPECIFICATION::SEMANTIC', 'root_id': 'R1_TARGET_SPECIFICATION', 'kind': 'SEMANTIC', 'path': 'canonical/verification/leaf.json', 'declared"
+    },
+    {
+      "file": "canonical/tests/test_professional_quality_r6_execution_property_truth_verify_v1.py",
+      "test": "test_exact_r6_execution_acceptance_passes_one_leaf_only",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_PROFESSIONAL_QUALITY_R6_EXECUTION_PROPERTY_TRUTH_VERIFY_V1', 'pass': False, 'status': 'FAIL_CLOSED', 'reason': 'BINDER_RUNTIME_BLOB_STALE'"
+    },
+    {
+      "file": "canonical/tests/test_protocol_implication_batch_reducer_v1.py",
+      "test": "test_live_batch_exposes_exact_residual_without_claiming_closure",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true"
+    },
+    {
+      "file": "canonical/tests/test_python_transitive_runtime_closure_v1.py",
+      "test": "test_science_closure_exact_14",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "assert 15 == 14"
+    },
+    {
+      "file": "canonical/tests/test_python_transitive_runtime_closure_v1.py",
+      "test": "test_rank8_four_file_overlay_fails_closed",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert 11 == 10"
+    },
+    {
+      "file": "canonical/tests/test_r2_fibo_set_relation_wake_load_bearing_v1.py",
+      "test": "test_v54_pointer_and_v52_scheduler_are_coherent",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'V54' not found in 'ACTIVE_CURRENT_R2_AUTHORITY__V91__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NE"
+    },
+    {
+      "file": "canonical/tests/test_r2_oewn_sense_wake_load_bearing_v1.py",
+      "test": "test_v55_v53_refinement_is_sound",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'V55' not found in 'ACTIVE_CURRENT_R2_AUTHORITY__V91__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NE"
+    },
+    {
+      "file": "canonical/tests/test_r2_policy_cover_hard_constraint_safety_reconciliation_v1.py",
+      "test": "test_frontier_and_counts_do_not_change",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '__V77__' not found in 'ACTIVE_CURRENT_R2_AUTHORITY__V91__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MRE"
+    },
+    {
+      "file": "canonical/tests/test_r2_policy_cover_hard_constraint_safety_reconciliation_v1.py",
+      "test": "test_reconciliation_binds_exact_merged_runtime_and_verification",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '368c6ac07e8feaf1a0c880de5388b618def912e2' != 'b5c609eb902cd0ea21d81710588dd538aa05cb4f'"
+    },
+    {
+      "file": "canonical/tests/test_r2_regcap_context_atom_v2_currentness_v1.py",
+      "test": "test_current_r2_rebinds_only_live_context_atom_binding",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'V77' not found in 'ACTIVE_CURRENT_R2_AUTHORITY__V91__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NE"
+    },
+    {
+      "file": "canonical/tests/test_r2_regcap_context_atom_v2_currentness_v1.py",
+      "test": "test_terminal_pointer_projects_same_v77_v65_truth_and_stays_false",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 135 != 133"
+    },
+    {
+      "file": "canonical/tests/test_r2_sec_inline_xbrl_field_semantics_wake_v1.py",
+      "test": "test_bounded_refinement_preserves_global_residual",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'V56' not found in 'ACTIVE_CURRENT_R2_AUTHORITY__V91__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NE"
+    },
+    {
+      "file": "canonical/tests/test_r2_v43_semantic_stack_reconciliation_v1.py",
+      "test": "test_counts_remain_28_25_10_and_no_credit_is_invented",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 39 != 28"
+    },
+    {
+      "file": "canonical/tests/test_r2_v43_semantic_stack_reconciliation_v1.py",
+      "test": "test_remaining_frontier_is_precisely_narrowed_not_erased",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'MULTIPLE_OEWN_OR_AUTHENTICATED_REGISTRY_CANDIDATES' not found in 'FINANCE_COREFERENCE_CASES_OUTSIDE_VERIFIED_STRUCTURALLY_COMPLETE_TYPED_MARKED_MENTION_UNIVERSE_SCOPE_OR_WITH_MISSING_"
+    },
+    {
+      "file": "canonical/tests/test_r2_v43_semantic_stack_reconciliation_v1.py",
+      "test": "test_v43_scheduler_exactly_bound_in_r2_and_terminal",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '97e40427e90c4e3cc95ec829859b8de31d1c8531' != '4fdc6171f14ce3bff684032db734c8c8bace7992'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v45_residual_top_authority_verify_v1.py",
+      "test": "test_current_branch_authority_is_coherent",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_R2_V45_RESIDUAL_TOP_AUTHORITY_COHERENCE_VERIFY_V1', 'verified': False, 'status': 'FAIL_CLOSED', 'errors': [\"ACTIVATION_CONTROLLER_BINDING_"
+    },
+    {
+      "file": "canonical/tests/test_r2_v56_terminal96_one_shot_coherence_v1.py",
+      "test": "test_exact_pointer_chain_and_zero_credit",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'V56' not found in 'ACTIVE_CURRENT_R2_AUTHORITY__V91__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NE"
+    },
+    {
+      "file": "canonical/tests/test_r2_v57_v19_authority_reconciliation_v1.py",
+      "test": "test_scheduler_and_terminal_are_same_projection",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 40 != 39"
+    },
+    {
+      "file": "canonical/tests/test_r2_v63_regcap_bounded_context_truth_reconciliation_v1.py",
+      "test": "test_current_r2_v63_binds_exact_v59_blob",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'ACTIVE_CURRENT_R2_AUTHORITY__V63__' not found in 'ACTIVE_CURRENT_R2_AUTHORITY__V91__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_"
+    },
+    {
+      "file": "canonical/tests/test_r2_v63_regcap_bounded_context_truth_reconciliation_v1.py",
+      "test": "test_reconciliation_is_content_addressed_and_zero_credit",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '827f7684accc7bcf29fd243db07c487ff1ee2ec5' != 'e208000c7b2a2ca926b4c4f8de3a1c828834aad6'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v63_regcap_bounded_context_truth_reconciliation_v1.py",
+      "test": "test_terminal_revision_113_projects_v63_v59",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 135 != 113"
+    },
+    {
+      "file": "canonical/tests/test_r2_v69_regcap_no_descriptor_context_reconciliation_v1.py",
+      "test": "test_current_r2_v69_binds_exact_root_v63",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'ACTIVE_CURRENT_R2_AUTHORITY__V69__' not found in 'ACTIVE_CURRENT_R2_AUTHORITY__V91__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_"
+    },
+    {
+      "file": "canonical/tests/test_r2_v69_regcap_no_descriptor_context_reconciliation_v1.py",
+      "test": "test_finance_tail_remains_open_and_contains_new_subregion",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'TASK_SPECIFIC_EXTERNAL_OBSERVATION_FRONTIER__WAKE_GATED' != 'INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v69_regcap_no_descriptor_context_reconciliation_v1.py",
+      "test": "test_reconciliation_is_content_addressed_and_zero_credit",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '3f84df22d598809e4a64347eb81a68d7756065a5' != 'e208000c7b2a2ca926b4c4f8de3a1c828834aad6'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v69_regcap_no_descriptor_context_reconciliation_v1.py",
+      "test": "test_terminal_revision_126_projects_v69_v63",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 135 != 126"
+    },
+    {
+      "file": "canonical/tests/test_r2_v6_authority_coherence_v1.py",
+      "test": "test_current_r2_v6_authority_chain_is_content_coherent",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V66.json' != 'canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V6.json'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v6_authority_coherence_v1.py",
+      "test": "test_terminal_authority_binds_v6_without_claiming_omniscience",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V66.json' != 'canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261008_V6.json'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v74_bounded_semantic_positive_reconciliation_v1.py",
+      "test": "test_margin_context_truth_binding_is_exact_and_bounded",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '7670414b0188764c3e72b7f88002e319efee9bb2' != 'fc6d96aabd9735e17a799986950bb4331e7af9a5'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v74_bounded_semantic_positive_reconciliation_v1.py",
+      "test": "test_open_residual_boundary_is_exactly_preserved",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'FINA[1700 chars]NATOR__CCOB_MREL_OR_CCYB_MREL_CASES_OUTSIDE_VE[320 chars]ATOR' != 'FINA[1700 chars]NATOR'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v74_bounded_semantic_positive_reconciliation_v1.py",
+      "test": "test_regcap_facet_role_binding_is_exact_and_nonexclusive",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '7670414b0188764c3e72b7f88002e319efee9bb2' != 'fc6d96aabd9735e17a799986950bb4331e7af9a5'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v74_bounded_semantic_positive_reconciliation_v1.py",
+      "test": "test_scheduler_counts_and_primary_unsolved_count_are_preserved",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 0 != 1"
+    },
+    {
+      "file": "canonical/tests/test_r2_v74_bounded_semantic_positive_reconciliation_v1.py",
+      "test": "test_shared_cause_ledger_still_classifies_current_residual",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'POLICY_CHANGING_OBSERVABILITY' != 'SEMANTIC_SCOPE_AUTHORITY'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v74_bounded_semantic_positive_reconciliation_v1.py",
+      "test": "test_version_advanced_without_claiming_global_closure",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '__V74__' not found in 'ACTIVE_CURRENT_R2_AUTHORITY__V91__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MRE"
+    },
+    {
+      "file": "canonical/tests/test_r2_v75_bounded_semantic_positive_reconciliation_v1.py",
+      "test": "test_definite_buffer_binding_is_exact_and_bounded",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '7670414b0188764c3e72b7f88002e319efee9bb2' != '1bc491032a99f95159b5dc102ed2e0aa70a09c3d'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v75_bounded_semantic_positive_reconciliation_v1.py",
+      "test": "test_open_residual_boundary_is_exactly_preserved",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'FINA[1700 chars]NATOR__CCOB_MREL_OR_CCYB_MREL_CASES_OUTSIDE_VE[320 chars]ATOR' != 'FINA[1700 chars]NATOR'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v75_bounded_semantic_positive_reconciliation_v1.py",
+      "test": "test_scheduler_counts_and_one_primary_unsolved_are_preserved",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 0 != 1"
+    },
+    {
+      "file": "canonical/tests/test_r2_v75_bounded_semantic_positive_reconciliation_v1.py",
+      "test": "test_shared_cause_ledger_is_unchanged_by_positive_reconciliation",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'POLICY_CHANGING_OBSERVABILITY' != 'SEMANTIC_SCOPE_AUTHORITY'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v75_bounded_semantic_positive_reconciliation_v1.py",
+      "test": "test_spread_binding_is_exact_and_bounded",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '7670414b0188764c3e72b7f88002e319efee9bb2' != '1bc491032a99f95159b5dc102ed2e0aa70a09c3d'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v75_bounded_semantic_positive_reconciliation_v1.py",
+      "test": "test_version_advances_only_positive_reuse_authority",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '__V75__' not found in 'ACTIVE_CURRENT_R2_AUTHORITY__V91__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MRE"
+    },
+    {
+      "file": "canonical/tests/test_r2_v77_regcap_context_projection_repair_v1.py",
+      "test": "test_r2_remains_v77_with_same_route_and_residual_shape",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'V77' not found in 'ACTIVE_CURRENT_R2_AUTHORITY__V91__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NE"
+    },
+    {
+      "file": "canonical/tests/test_r2_v77_regcap_context_projection_repair_v1.py",
+      "test": "test_root2_v65_binding_is_exact",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V66.json' != 'canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V65.json'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v77_regcap_context_projection_repair_v1.py",
+      "test": "test_subregion_binds_exact_current_runtime_compiler_resolver_and_v2_receipt",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '128142cafd915c2fc206534fd2bdf557e6d2f1ea' != '4ae999c1f6805d46d6d18c10c115ebb09c306516'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v77_regcap_context_projection_repair_v1.py",
+      "test": "test_terminal_projects_current_r2_v77_and_root2_v65",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V66.json' != 'canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V65.json'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v77_regcap_context_projection_repair_v1.py",
+      "test": "test_terminal_scheduler_precedence_matches_r2",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V66.json' != 'canonical/governance/ROOT2_SINGLE_PRIMITIVE_WAKE_CUT_20261010_V65.json'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v77_regcap_mrel_no_descriptor_reconciliation_v1.py",
+      "test": "test_current_r2_is_v77_and_points_exact_root65",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '__V77__' not found in 'ACTIVE_CURRENT_R2_AUTHORITY__V91__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MRE"
+    },
+    {
+      "file": "canonical/tests/test_r2_v77_regcap_mrel_no_descriptor_reconciliation_v1.py",
+      "test": "test_one_finance_residual_remains",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'ONE_PRIMARY_FINANCE_SEMANTIC_RESIDUAL_REMAINS' not found in 'ACTIVE_CURRENT_R2_AUTHORITY__V91__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPE"
+    },
+    {
+      "file": "canonical/tests/test_r2_v77_regcap_mrel_no_descriptor_reconciliation_v1.py",
+      "test": "test_terminal_authority_is_unchanged",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '57be54e83f4fdee2f19a7b64d01da3acdce7d940' != '8170b237ef6629d83987e9e1709b2c55c08daa16'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v78_four_way_loss_absorption_nonseparation_reconciliation_v1.py",
+      "test": "test_reconciliation_binds_exact_successor_blobs",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '94b6a52b28336030ac7307321ed6796ca003d6ad' != 'e208000c7b2a2ca926b4c4f8de3a1c828834aad6'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v78_four_way_loss_absorption_nonseparation_reconciliation_v1.py",
+      "test": "test_residual_remains_open_and_requires_discriminator",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'TASK_SPECIFIC_EXTERNAL_OBSERVATION_FRONTIER__WAKE_GATED' != 'INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v78_four_way_loss_absorption_nonseparation_reconciliation_v1.py",
+      "test": "test_terminal_projection_matches_v78_v66",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'CURRENT_R2_V78' not found in 'ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__GDPVAL_MINIMUM_PROOF_FRONTIER_V4_RECONCILED__GDPVAL_STALE_MECHANICAL_FIRST_DISPATCH_DEMOTED__TERMINAL_FALSE'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v78_four_way_loss_absorption_nonseparation_reconciliation_v1.py",
+      "test": "test_v78_scheduler_pointer_is_exact_v66_blob",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'V78' not found in 'ACTIVE_CURRENT_R2_AUTHORITY__V91__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MREL_NE"
+    },
+    {
+      "file": "canonical/tests/test_r2_v79_four_way_minimum_information_reconciliation.py",
+      "test": "test_r2_v79_binds_exact_four_way_minimum_information_runtime",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '__V79__' not found in 'ACTIVE_CURRENT_R2_AUTHORITY__V91__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MRE"
+    },
+    {
+      "file": "canonical/tests/test_r2_v79_four_way_minimum_information_reconciliation.py",
+      "test": "test_terminal_authority_projects_v79_without_inflating_closure",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'CURRENT_R2_V79' not found in 'ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__GDPVAL_MINIMUM_PROOF_FRONTIER_V4_RECONCILED__GDPVAL_STALE_MECHANICAL_FIRST_DISPATCH_DEMOTED__TERMINAL_FALSE'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v80_all_pairs_mrel_context_reconciliation.py",
+      "test": "test_r2_v80_binds_exact_v7_runtime_and_keeps_scope_narrow",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '__V80__' not found in 'ACTIVE_CURRENT_R2_AUTHORITY__V91__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MRE"
+    },
+    {
+      "file": "canonical/tests/test_r2_v80_all_pairs_mrel_context_reconciliation.py",
+      "test": "test_terminal_projection_preserves_finance_and_global_openness",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'CURRENT_R2_V80' not found in 'ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__GDPVAL_MINIMUM_PROOF_FRONTIER_V4_RECONCILED__GDPVAL_STALE_MECHANICAL_FIRST_DISPATCH_DEMOTED__TERMINAL_FALSE'"
+    },
+    {
+      "file": "canonical/tests/test_r2_v81_live_v7_truth_dispatch_reconciliation.py",
+      "test": "test_r2_v81_binds_exact_live_truth_path",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '__V81__' not found in 'ACTIVE_CURRENT_R2_AUTHORITY__V91__FORTY_DIRECT_ROUTES__THIRTY_SIX_BOUNDED_FAMILIES__GENERAL_MECHANISM_CLOSED__DERIVED_TYPED_TERMINAL_SIGNATURES_ROUTE_BOUND__MRE"
+    },
+    {
+      "file": "canonical/tests/test_r2_v81_live_v7_truth_dispatch_reconciliation.py",
+      "test": "test_terminal_authority_projects_v81_without_false_closure",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'CURRENT_R2_V81' not found in 'ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__GDPVAL_MINIMUM_PROOF_FRONTIER_V4_RECONCILED__GDPVAL_STALE_MECHANICAL_FIRST_DISPATCH_DEMOTED__TERMINAL_FALSE'"
+    },
+    {
+      "file": "canonical/tests/test_r3_deterministic_mapping_guard_patch_author_v1.py",
+      "test": "test_already_guarded_source_returns_no_candidate",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "KeyError: 'author_packet'"
+    },
+    {
+      "file": "canonical/tests/test_r3_deterministic_mapping_guard_patch_author_v1.py",
+      "test": "test_ambiguous_two_vulnerable_locals_returns_no_candidate",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "KeyError: 'author_packet'"
+    },
+    {
+      "file": "canonical/tests/test_r3_deterministic_mapping_guard_patch_author_v1.py",
+      "test": "test_missing_mapping_symbol_returns_no_candidate",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "KeyError: 'author_packet'"
+    },
+    {
+      "file": "canonical/tests/test_r3_deterministic_mapping_guard_patch_author_v1.py",
+      "test": "test_non_authoritative_packet_is_not_admitted",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "KeyError: 'author_packet'"
+    },
+    {
+      "file": "canonical/tests/test_r3_deterministic_mapping_guard_patch_author_v1.py",
+      "test": "test_vulnerable_mapping_dereference_generates_firewall_valid_candidate",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_R3_SUCCESS_ADAPTER_PATCH_AUTHOR_WRAPPER_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'reason': 'COMPILED_GAP_AUTHOR_CONTEXT_MISSING_OR_INV"
+    },
+    {
+      "file": "canonical/tests/test_r3_improvement_cycle_fabric_v1.py",
+      "test": "test_normal_dispatch_auto_drains_episode_compounding_when_verifier_exists",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "KeyError: 'inner_pass'"
+    },
+    {
+      "file": "canonical/tests/test_r3_improvement_cycle_fabric_v1.py",
+      "test": "test_success_adapter_provider_reaches_driver",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "AttributeError: 'NoneType' object has no attribute 'kwargs'"
+    },
+    {
+      "file": "canonical/tests/test_r3_verified_cross_scope_generalization_v1.py",
+      "test": "test_structural_match_verified_superset_reuses_across_scope",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: unexpectedly None"
+    },
+    {
+      "file": "canonical/tests/test_r3_verified_cross_scope_generalization_v1.py",
+      "test": "test_unbound_proven_superset_stays_source_scope_only",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: unexpectedly None"
+    },
+    {
+      "file": "canonical/tests/test_recovery_acceptance_integrator_v1.py",
+      "test": "test_exact_recovery_delta_only",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__SOURCE_BLOB_DRIFT",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_RECOVERY_ACCEPTANCE_INTEGRATOR_V1', 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'pass': False, 'errors': ['SOURCE_BLOB_DRIFT'], 'drift': {"
+    },
+    {
+      "file": "canonical/tests/test_recovery_acceptance_integrator_v1.py",
+      "test": "test_integrator_cannot_self_promote_or_consume_reality",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__SOURCE_BLOB_DRIFT",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_RECOVERY_ACCEPTANCE_INTEGRATOR_V1', 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'pass': False, 'errors': ['SOURCE_BLOB_DRIFT'], 'drift': {"
+    },
+    {
+      "file": "canonical/tests/test_recovery_acceptance_integrator_v1.py",
+      "test": "test_no_other_family_or_predicate_receives_credit",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__SOURCE_BLOB_DRIFT",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_RECOVERY_ACCEPTANCE_INTEGRATOR_V1', 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'pass': False, 'errors': ['SOURCE_BLOB_DRIFT'], 'drift': {"
+    },
+    {
+      "file": "canonical/tests/test_recovery_acceptance_integrator_v1.py",
+      "test": "test_verified_hardened_receipt_is_only_new_basis",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__SOURCE_BLOB_DRIFT",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_RECOVERY_ACCEPTANCE_INTEGRATOR_V1', 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'pass': False, 'errors': ['SOURCE_BLOB_DRIFT'], 'drift': {"
+    },
+    {
+      "file": "canonical/tests/test_regcap_facet_role_projection_v1.py",
+      "test": "test_tlac_context_preserves_function_regime_and_subject_scope",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_REGCAP_FACET_ROLE_PROJECTION_V1', 'status': 'UNRESOLVED__BOUND_CONTEXT_NOT_CERTIFIED', 'pass': False, 'semantic_truth_authority': False, '"
+    },
+    {
+      "file": "canonical/tests/test_regcap_facet_role_projection_v1.py",
+      "test": "test_true_role_grants_no_single_facet_or_terminal_authority",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_REGCAP_FACET_ROLE_TRUTH_CERTIFICATE_V1', 'pass': False, 'status': 'UNKNOWN__REGCAP_FACET_ROLE_NOT_PROVED', 'reason': 'TARGET_ROLE_NOT_POSI"
+    },
+    {
+      "file": "canonical/tests/test_relative_elo_absolute_proof_nontransport_v1.py",
+      "test": "test_relative_elo_nontransport_candidate",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError"
+    },
+    {
+      "file": "canonical/tests/test_research_t3_objective_binding_validator.py",
+      "test": "test_live_binding_passes_receipt_backed_promotion_transition",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_RESEARCH_T3_OBJECTIVE_BINDING_VALIDATION_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['BLOB_SHA_MISMATCH:registry:ee187f611a0e8"
+    },
+    {
+      "file": "canonical/tests/test_residual_reuse_currentness_v2.py",
+      "test": "test_escape_successor_audit_is_current_v2_not_historical_v1",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'canonical/runtime/escape_progress_shared_gap_audit_v5.py' != 'canonical/runtime/escape_progress_shared_gap_audit_v2.py'"
+    },
+    {
+      "file": "canonical/tests/test_residual_reuse_oq_currentness_v1.py",
+      "test": "test_development_authority_observes_exact_current_reuse_bytes",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'c90f9b8226d2ffa7fb2049614b39286f85403ff8' != '7a68e3fbefc82231f9f6ba2463617b9deaaf352e'"
+    },
+    {
+      "file": "canonical/tests/test_residual_reuse_oq_currentness_v1.py",
+      "test": "test_reuse_classification_tracks_mutable_current_oq_by_path",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'CURR[34 chars]_O11_ACTIVE__Q1_ACTIVE__GDPVAL_FIXED_BAR_E1_RE[148 chars]EDIT' != 'CURR[34 chars]_O11_SHARED_LAW_BOUND__Q2_SHARED_LAW_BOUND__RO[36 chars]EDIT'"
+    },
+    {
+      "file": "canonical/tests/test_root3_child_process_channel_registry_v1.py",
+      "test": "test_current_whole_runtime_child_process_universe_is_exactly_18",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "canonical.runtime.root3_child_process_channel_registry_v1.ChildProcessRegistryError: C1_MODULE_BLOB_DRIFT:canonical/runtime/bound_capabilities/sqlite_verify_cli.py"
+    },
+    {
+      "file": "canonical/tests/test_root3_child_process_channel_registry_v1.py",
+      "test": "test_astra_subset_remains_exactly_six_with_known_partition",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "canonical.runtime.root3_child_process_channel_registry_v1.ChildProcessRegistryError: C1_MODULE_BLOB_DRIFT:canonical/runtime/bound_capabilities/sqlite_verify_cli.py"
+    },
+    {
+      "file": "canonical/tests/test_root3_child_process_channel_registry_v1.py",
+      "test": "test_arbitrary_shell_call_site_is_present_and_explicit",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "canonical.runtime.root3_child_process_channel_registry_v1.ChildProcessRegistryError: C1_MODULE_BLOB_DRIFT:canonical/runtime/bound_capabilities/sqlite_verify_cli.py"
+    },
+    {
+      "file": "canonical/tests/test_root3_direct_process_19_to_18_transport_v1.py",
+      "test": "test_current_repo_transports_old_19_site_dominator_to_18",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "canonical.runtime.root3_direct_process_19_to_18_transport_v1.TransportError: GIT_SHOW_FAILED:fd60e692d08176c8f5cb40cbc915fa46eaea2fa5:canonical/governance/ROOT3_DIRECT_PROCESS_MEDIATION_DOMINATOR_CERT"
+    },
+    {
+      "file": "canonical/tests/test_root3_global_subprocess_chokepoint_v1.py",
+      "test": "test_current_direct_process_mediation_cut_is_two_global_attributes",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "canonical.runtime.root3_child_process_channel_registry_v1.ChildProcessRegistryError: C1_MODULE_BLOB_DRIFT:canonical/runtime/bound_capabilities/sqlite_verify_cli.py"
+    },
+    {
+      "file": "canonical/tests/test_root3_global_subprocess_chokepoint_v1.py",
+      "test": "test_audit_does_not_overclaim_child_internal_effect_control",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "canonical.runtime.root3_child_process_channel_registry_v1.ChildProcessRegistryError: C1_MODULE_BLOB_DRIFT:canonical/runtime/bound_capabilities/sqlite_verify_cli.py"
+    },
+    {
+      "file": "canonical/tests/test_root3_parent_effect_membrane_hostile_v1.py",
+      "test": "test_native_and_nonprocess_host_effects_are_confined",
+      "status": "failed",
+      "bucket": "MISSING_FILE",
+      "message_head": "canonical.runtime.zero_ambient_namespace_launcher_v1.NamespaceConfinementError: HOST_PRIMITIVE_MISSING:chroot"
+    },
+    {
+      "file": "canonical/tests/test_root3_read_only_declared_query_executor_v2.py",
+      "test": "test_confined_policy_and_show_match_host",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "canonical.runtime.root3_read_only_local_file_query_executor_v1.ReadOnlyQueryDenied: HOST_PRIMITIVE_MISSING:chroot"
+    },
+    {
+      "file": "canonical/tests/test_root3_read_only_declared_query_executor_v2.py",
+      "test": "test_confined_search_matches_host",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "canonical.runtime.root3_read_only_local_file_query_executor_v1.ReadOnlyQueryDenied: HOST_PRIMITIVE_MISSING:chroot"
+    },
+    {
+      "file": "canonical/tests/test_root3_read_only_local_file_query_executor_v1.py",
+      "test": "test_real_jq_call_routes_through_mediator_and_namespace",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "canonical.runtime.root3_read_only_local_file_query_executor_v1.ReadOnlyQueryDenied: HOST_PRIMITIVE_MISSING:chroot"
+    },
+    {
+      "file": "canonical/tests/test_root3_read_only_local_file_query_executor_v1.py",
+      "test": "test_real_sqlite_verifier_routes_all_queries_through_namespace",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "canonical.runtime.root3_subprocess_mediator_v2.ProcessEffectDenied: SUBPROCESS_CALLSITE_CLASSIFICATION_DENIED:UNREGISTERED_PROCESS_CALLSITE:[{'module_path': 'canonical/runtime/root3_subprocess_mediato"
+    },
+    {
+      "file": "canonical/tests/test_root3_read_only_local_file_query_executor_v1.py",
+      "test": "test_real_tar_listing_runs_inside_namespace",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "canonical.runtime.root3_read_only_local_file_query_executor_v1.ReadOnlyQueryDenied: HOST_PRIMITIVE_MISSING:chroot"
+    },
+    {
+      "file": "canonical/tests/test_root3_read_only_local_file_query_executor_v1.py",
+      "test": "test_sqlite_update_is_rejected_before_spawn",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: \"MUTATING_OR_UNKNOWN_SQL\" does not match \"EXECUTABLE_UNAVAILABLE:sqlite3\""
+    },
+    {
+      "file": "canonical/tests/test_root3_single_popen_chokepoint_v1.py",
+      "test": "test_current_runtime_reduces_29_sites_to_one",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "canonical.runtime.root3_child_process_channel_registry_v1.ChildProcessRegistryError: C1_MODULE_BLOB_DRIFT:canonical/runtime/bound_capabilities/sqlite_verify_cli.py"
+    },
+    {
+      "file": "canonical/tests/test_root3_single_popen_chokepoint_v1.py",
+      "test": "test_open_residuals_are_preserved",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "canonical.runtime.root3_child_process_channel_registry_v1.ChildProcessRegistryError: C1_MODULE_BLOB_DRIFT:canonical/runtime/bound_capabilities/sqlite_verify_cli.py"
+    },
+    {
+      "file": "canonical/tests/test_root3_subprocess_effect_class_registry_v1.py",
+      "test": "test_classification_does_not_claim_hidden_child_safety",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "canonical.runtime.root3_child_process_channel_registry_v1.ChildProcessRegistryError: C1_MODULE_BLOB_DRIFT:canonical/runtime/bound_capabilities/sqlite_verify_cli.py"
+    },
+    {
+      "file": "canonical/tests/test_root3_subprocess_effect_class_registry_v1.py",
+      "test": "test_every_class_has_explicit_proof_residuals",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "canonical.runtime.root3_child_process_channel_registry_v1.ChildProcessRegistryError: C1_MODULE_BLOB_DRIFT:canonical/runtime/bound_capabilities/sqlite_verify_cli.py"
+    },
+    {
+      "file": "canonical/tests/test_root3_subprocess_effect_class_registry_v1.py",
+      "test": "test_exact_current_18_site_partition",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "canonical.runtime.root3_child_process_channel_registry_v1.ChildProcessRegistryError: C1_MODULE_BLOB_DRIFT:canonical/runtime/bound_capabilities/sqlite_verify_cli.py"
+    },
+    {
+      "file": "canonical/tests/test_root3_subprocess_effect_class_registry_v1.py",
+      "test": "test_missing_site_mapping_fails_closed",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "canonical.runtime.root3_child_process_channel_registry_v1.ChildProcessRegistryError: C1_MODULE_BLOB_DRIFT:canonical/runtime/bound_capabilities/sqlite_verify_cli.py"
+    },
+    {
+      "file": "canonical/tests/test_root3_subprocess_effect_class_registry_v1.py",
+      "test": "test_new_fake_site_mapping_fails_closed",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "canonical.runtime.root3_child_process_channel_registry_v1.ChildProcessRegistryError: C1_MODULE_BLOB_DRIFT:canonical/runtime/bound_capabilities/sqlite_verify_cli.py"
+    },
+    {
+      "file": "canonical/tests/test_root3_subprocess_effect_class_registry_v2.py",
+      "test": "test_current_registry_preserves_legacy_and_defaults_new_sites",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "canonical.runtime.root3_subprocess_effect_class_registry_v2.EffectClassRegistryV2Error: LEGACY_VERIFIED_SITE_DISAPPEARED:[('canonical/runtime/bound_capabilities/sqlite_verify_cli.py', 66, 'subprocess."
+    },
+    {
+      "file": "canonical/tests/test_root3_subprocess_effect_class_registry_v2.py",
+      "test": "test_every_new_site_defaults_to_arbitrary_command_execution",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "canonical.runtime.root3_subprocess_effect_class_registry_v2.EffectClassRegistryV2Error: LEGACY_VERIFIED_SITE_DISAPPEARED:[('canonical/runtime/bound_capabilities/sqlite_verify_cli.py', 66, 'subprocess."
+    },
+    {
+      "file": "canonical/tests/test_root3_subprocess_effect_class_registry_v2.py",
+      "test": "test_registry_digest_is_stable_for_same_tree",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "canonical.runtime.root3_subprocess_effect_class_registry_v2.EffectClassRegistryV2Error: LEGACY_VERIFIED_SITE_DISAPPEARED:[('canonical/runtime/bound_capabilities/sqlite_verify_cli.py', 66, 'subprocess."
+    },
+    {
+      "file": "canonical/tests/test_root3_subprocess_effect_class_registry_v2.py",
+      "test": "test_check_output_site_uses_run_interception_if_present",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "canonical.runtime.root3_subprocess_effect_class_registry_v2.EffectClassRegistryV2Error: LEGACY_VERIFIED_SITE_DISAPPEARED:[('canonical/runtime/bound_capabilities/sqlite_verify_cli.py', 66, 'subprocess."
+    },
+    {
+      "file": "canonical/tests/test_root_theorem_falsifier_v1.py",
+      "test": "test_current_canonical_registry_is_authoritatively_open",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert 'R4_CANONICAL...ISTRY_INVALID' == 'R4_CANONICAL...IFICATES_OPEN'"
+    },
+    {
+      "file": "canonical/tests/test_root_theorem_live_binding_v1.py",
+      "test": "test_current_repo_binding_passes",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: {'pass': False, 'status': 'FAIL_CLOSED__R4_LIVE_BINDING_DRIFT', 'errors': ['ROOT_THEOREM_MISSION_BLOB_STALE', 'CLAIM_SCOPE_MISSION_BLOB_STALE', 'BINDING_MISSION_BLOB_STALE'], 'terminal"
+    },
+    {
+      "file": "canonical/tests/test_root_theorem_r4_assurance_projection_v1.py",
+      "test": "test_current_r4_is_open_not_self_certified",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: {'status': 'FAIL_CLOSED__R4_LIVE_BINDING_INVALID', 'pass': False, 'live_binding': {'pass': False, 'status': 'FAIL_CLOS...IM_SCOPE_MISSION_BLOB_STALE', 'BINDING_MISSION_BLOB_STALE'], 't"
+    },
+    {
+      "file": "canonical/tests/test_root_theorem_r4_assurance_projection_v1.py",
+      "test": "test_current_declared_representation_is_the_only_closed_gate",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "KeyError: 'gates'"
+    },
+    {
+      "file": "canonical/tests/test_root_theorem_r4_assurance_projection_v1.py",
+      "test": "test_current_r4_residual_is_exact_three_gate_tail",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "KeyError: 'open_residuals'"
+    },
+    {
+      "file": "canonical/tests/test_root_theorem_r4_assurance_projection_v1.py",
+      "test": "test_existing_assurance_kernel_is_reused_without_new_primitive",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "KeyError: 'new_primitive_required'"
+    },
+    {
+      "file": "canonical/tests/test_root_theorem_registry_claim_alignment_v1.py",
+      "test": "test_current_open_registry_reports_current_generation",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert 'R4_CANONICAL...ISTRY_INVALID' == 'R4_CANONICAL...IFICATES_OPEN'"
+    },
+    {
+      "file": "canonical/tests/test_rs_archive_clone_stage_b_verifier_v1.py",
+      "test": "test_live_frozen_stage_b_passes",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_RS_ARCHIVE_CLONE_RANK24_STAGE_B_VERDICT_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['LEDGER_FORBIDDEN_TRUE:task_specific_web_o"
+    },
+    {
+      "file": "canonical/tests/test_saccr_active_contract_proof_v1.py",
+      "test": "test_dev_population",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "ValueError: REFERENCE_ENTITY_MIXED_SUPERVISORY_FACTOR"
+    },
+    {
+      "file": "canonical/tests/test_saccr_route_specific_terminal_executor_v1.py",
+      "test": "test_static_preflight_matches_frozen_binding",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_SACCR_ROUTE_SPECIFIC_TERMINAL_EXECUTOR_V1', 'pass': False, 'errors': ['NOT_PRE_BEACON_FROZEN'], 'sample_count': 2000, 'behavior_id': 'SA_C"
+    },
+    {
+      "file": "canonical/tests/test_selected_discriminator_policy_cover_bridge_v1.py",
+      "test": "test_selected_discriminator_bridge_is_bound",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_SELECTED_DISCRIMINATOR_POLICY_COVER_BRIDGE_VERIFY_V1', 'status': 'FAIL_CLOSED', 'pass': Fals...': ['SOURCE_DRIFT:canonical/governance/CURRENT_TERMINAL_AUTHORI"
+    },
+    {
+      "file": "canonical/tests/test_source_aligned_semantic_proof_v3.py",
+      "test": "test_exact_content_addressed_bool_can_certify_policy",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'POLICY_CONDITION_ENTAILED__ADEQUACY_UNAUTHENTICATED' != 'COMMON_POLICY_CERTIFIED'"
+    },
+    {
+      "file": "canonical/tests/test_source_aligned_semantic_proof_v3.py",
+      "test": "test_scope_plus_typed_fact_can_jointly_certify_policy",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'POLICY_CONDITION_ENTAILED__ADEQUACY_UNAUTHENTICATED' != 'COMMON_POLICY_CERTIFIED'"
+    },
+    {
+      "file": "canonical/tests/test_source_candidate_provenance_verify.py",
+      "test": "test_live_crossref_doi_identity",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'UNVERIFIED' != 'BIBLIOGRAPHIC_PROVENANCE_VERIFIED'"
+    },
+    {
+      "file": "canonical/tests/test_source_candidate_provenance_verify.py",
+      "test": "test_live_web_retrieval_identity",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'UNVERIFIED' != 'RETRIEVAL_PROVENANCE_VERIFIED'"
+    },
+    {
+      "file": "canonical/tests/test_specification_acceptance_prewave_v1.py",
+      "test": "test_live_tree_passes",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: 'FAIL_CLOSED' != 'PASS'"
+    },
+    {
+      "file": "canonical/tests/test_structured_method_terminal_binding_v1.py",
+      "test": "test_live",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: 'FAIL_CLOSED' != 'PASS'"
+    },
+    {
+      "file": "canonical/tests/test_synthesis_proof_obligation_delta_verifier_v1.py",
+      "test": "test_live_application_verifies_exact_open_residual",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_OPUS55_SYNTHESIS_PROOF_OBLIGATION_DELTA_VERDICT_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['TARGET_SCOPE_PROVENANCE_MISMATCH'"
+    },
+    {
+      "file": "canonical/tests/test_synthesis_scope_certificate_activation_verifier_v1.py",
+      "test": "test_current_activation_passes",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_SYNTHESIS_SCOPE_CERTIFICATE_ACTIVATION_VERIFIER_V1', 'status': 'FAIL_CLOSED', 'pass': False,...NT_ROOT_COUNTS_DRIFT', 'SYNTHESIS_ALREADY_ROOT2_ONLY', 'SYNTHES"
+    },
+    {
+      "file": "canonical/tests/test_synthesis_scope_certificate_activation_verifier_v1.py",
+      "test": "test_wrong_current_partition_blocks_activation",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "ValueError: list.remove(x): x not in list"
+    },
+    {
+      "file": "canonical/tests/test_synthesis_witness_target_binding_v1.py",
+      "test": "test_live_candidate_passes",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_OPUS55_SYNTHESIS_WITNESS_TARGET_BINDING_VERDICT_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['AUTHORITY_MISMATCH:target_normali"
+    },
+    {
+      "file": "canonical/tests/test_target_role_escape_frontier_v1.py",
+      "test": "test_exact_current_role_escape_frontier",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_TARGET_ROLE_ESCAPE_FRONTIER_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['OWNERSHIP_MATRIX_DRIFT', 'CLOSED_ROLE_SET_DRIFT', 'ESCAPE_ROLE_COUNT_NOT_"
+    },
+    {
+      "file": "canonical/tests/test_task_acceptance_quotient_inventory_v1.py",
+      "test": "test_current_24_open_atoms_partition_exactly",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "canonical.runtime.task_acceptance_quotient_inventory_v1.InventoryError: OPEN_PREDICATE_COUNT_DRIFT:22"
+    },
+    {
+      "file": "canonical/tests/test_tb_science_general_substrate_materiality_v1.py",
+      "test": "test_brain_controller_materially_executes_verifies_and_authorizes_finish",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'SUBMISSION_READY__RAW_TASK_ACCEPTANCE_PENDING_EXTERNAL_INDEPENDENT_VERIFIER' != 'FINISHED'"
+    },
+    {
+      "file": "canonical/tests/test_tb_science_general_substrate_materiality_v1.py",
+      "test": "test_source_gate_accepts_only_the_brain_controlled_projection",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true"
+    },
+    {
+      "file": "canonical/tests/test_tb_science_rank19_capability_first_admission_v1.py",
+      "test": "test_rank19_capability_first_admission_is_exact_and_verified",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_TB_SCIENCE_RANK19_CAPABILITY_FIRST_ADMISSION_VERIFIER_V1', 'status': 'FAIL_CLOSED', 'pass': ...3fde48d96896da9aa165e91f329da271d89e', 'SOURCE_DRIFT:scheduler_"
+    },
+    {
+      "file": "canonical/tests/test_tb_science_rank19_claim_bound_current_pointer_v1.py",
+      "test": "test_current_tb_science_preserves_rank19_identity_and_never_regresses_completed_gates",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert 'canonical/go...1011_V76.json' == 'canonical/go...1010_V40.json'"
+    },
+    {
+      "file": "canonical/tests/test_tb_science_rank19_claim_bound_current_pointer_v1.py",
+      "test": "test_rank19_live_activation_remains_claim_bound_and_single_attempt",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert 'NO_RETRY_OR_REPLACEMENT_AUTHORITY' in ['NO_RANK20_V3_RETRY_OR_REPLACEMENT_AUTHORITY', 'NO_RANK21_RESULT_MAY_RECEIVE_BRAIN_CAPABILITY_BENCHMARK_ACCEPTANCE_OW..._CREDIT_AUTHORITY"
+    },
+    {
+      "file": "canonical/tests/test_tb_science_rank19_governance_composition_v1.py",
+      "test": "test_rank19_governance_composition_is_hash_closed_and_still_zero_exposure",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_TB_SCIENCE_RANK19_CAPABILITY_FIRST_ADMISSION_VERIFIER_V1', 'status': 'FAIL_CLOSED', 'pass': ...3fde48d96896da9aa165e91f329da271d89e', 'SOURCE_DRIFT:scheduler_"
+    },
+    {
+      "file": "canonical/tests/test_tb_science_rank20_capability_first_admission_v1.py",
+      "test": "test_rank20_admission_is_unexposed_preclaim_and_verified",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_TB_SCIENCE_RANK20_CAPABILITY_FIRST_ADMISSION_VERIFIER_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['SOURCE_DRIFT:scheduler_residual_ledger:f3163fde"
+    },
+    {
+      "file": "canonical/tests/test_tb_science_rank8_authority_v3.py",
+      "test": "test_rank8_v3_authority_is_bound_to_current_v5_truth",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: ['DRIFT:agent', 'DRIFT:planner', 'DRIFT:raw_contract']"
+    },
+    {
+      "file": "canonical/tests/test_tb_science_rank8_authority_v3.py",
+      "test": "test_rank8_v3_is_one_shot_zero_spend_and_epoch_gated",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "KeyError: 'fresh_reality_units_authorized'"
+    },
+    {
+      "file": "canonical/tests/test_temporal_proof_transport_v1.py",
+      "test": "test_live_delegation_transport_candidate_is_ready",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_TEMPORAL_PROOF_TRANSPORT_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['FAMILY_PROTOCOL_NOT_OPEN'], 'candidate_witness': None, '"
+    },
+    {
+      "file": "canonical/tests/test_terminal_acceptance_quotient_provenance_v1.py",
+      "test": "test_authoritative_source_duplicate_paths_never_disagree_on_blob_sha",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert {'canonical/r...b701bf02328']} == {}"
+    },
+    {
+      "file": "canonical/tests/test_terminal_architecture_self_tournament_20261007_v1.py",
+      "test": "test_exact_source_bindings",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: ('canonical/governance/CURRENT_TERMINAL_AUTHORITY.json', '57be54e83f4fdee2f19a7b64d01da3acdce7d940', '0cab18a7c3c2b10221cb0a269671f4d374010534')"
+    },
+    {
+      "file": "canonical/tests/test_terminal_ceiling_witness_residual_v1.py",
+      "test": "test_tool_learning_becomes_three_of_three_proved",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: Lists differ: ['INVALID_PROOF_KIND:DELEGATION_TERMINAL_S[473 chars]DIT'] != []"
+    },
+    {
+      "file": "canonical/tests/test_terminal_ceiling_witness_transmutation_v1.py",
+      "test": "test_exact_live_integration_closes_only_tool_discovery",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: Tuples differ: (19, 4, 15) != (19, 3, 16)"
+    },
+    {
+      "file": "canonical/tests/test_terminal_ceiling_witness_transmutation_v1.py",
+      "test": "test_remove_full_protocol_flag_reverts_to_2_of_19",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: Tuples differ: (4, 15) != (2, 17)"
+    },
+    {
+      "file": "canonical/tests/test_terminal_coverage_evidence_saturation_v1.py",
+      "test": "test_missing_scan_state_keeps_projection_partial",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert 30 == 32"
+    },
+    {
+      "file": "canonical/tests/test_terminal_frontier_compiler_v1.py",
+      "test": "test_current_frontier_compiles_from_exact_predicate_identity",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "canonical.runtime.terminal_frontier_compiler_v1.FrontierCompileError: ROOT_PARTITION_IDENTITY_DRIFT:missing=[]:extra=['IF_SCOPE_BOUNDARY_NONINFERIOR', 'IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS']"
+    },
+    {
+      "file": "canonical/tests/test_terminal_frontier_compiler_v1.py",
+      "test": "test_current_activation_verifications_are_epoch_bound",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "canonical.runtime.terminal_frontier_compiler_v1.FrontierCompileError: ROOT_PARTITION_IDENTITY_DRIFT:missing=[]:extra=['IF_SCOPE_BOUNDARY_NONINFERIOR', 'IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS']"
+    },
+    {
+      "file": "canonical/tests/test_terminal_frontier_compiler_v1.py",
+      "test": "test_git_blob_sha_uses_real_nul_separator",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "NameError: name 'hashlib' is not defined"
+    },
+    {
+      "file": "canonical/tests/test_terminal_frontier_compiler_v2.py",
+      "test": "test_current_frontier_compiles_from_exact_predicate_identity",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "canonical.runtime.terminal_frontier_compiler_v2.FrontierCompileError: ROOT_PARTITION_IDENTITY_DRIFT:missing=[]:extra=['IF_SCOPE_BOUNDARY_NONINFERIOR', 'IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS']"
+    },
+    {
+      "file": "canonical/tests/test_terminal_frontier_compiler_v2.py",
+      "test": "test_current_activation_verifications_are_epoch_bound",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "canonical.runtime.terminal_frontier_compiler_v2.FrontierCompileError: ROOT_PARTITION_IDENTITY_DRIFT:missing=[]:extra=['IF_SCOPE_BOUNDARY_NONINFERIOR', 'IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS']"
+    },
+    {
+      "file": "canonical/tests/test_terminal_information_dominance_activation_v1.py",
+      "test": "test_verified_activation_and_parent_pointers",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'canonical/governance/TERMINAL_SCHEDULING_ACTIVATION_V6.json' != 'canonical/governance/TERMINAL_CERTIFICATE_CUT_ACTIVATION_V3.json'"
+    },
+    {
+      "file": "canonical/tests/test_terminal_manifest_unknown_domain_revocation_truth_v1.py",
+      "test": "test_terminal_manifest_fail_closes_on_current_unknown_domain_authority",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert {'proved': 18..., 'total': 38} == {'proved': 12..., 'total': 38}"
+    },
+    {
+      "file": "canonical/tests/test_terminal_minimum_causal_depth_projection_guard_v1.py",
+      "test": "test_projection_guard",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError"
+    },
+    {
+      "file": "canonical/tests/test_terminal_next_action_compiler_v1.py",
+      "test": "test_live_frontier_fails_closed_on_semantic_gate",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 16 != 7"
+    },
+    {
+      "file": "canonical/tests/test_terminal_parent_portfolio_runner_v1.py",
+      "test": "test_all_four_parent_portfolios_pass_nonterminal_rehearsal",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_TERMINAL_PARENT_PORTFOLIO_RUNNER_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'portfolios': {'T0': {'schema': 'PROJECT_BRAIN_TERMINAL_PARE"
+    },
+    {
+      "file": "canonical/tests/test_terminal_parent_portfolio_runner_v1.py",
+      "test": "test_real_entrypoint_is_fail_closed_before_launch_authority",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: ValueError not raised"
+    },
+    {
+      "file": "canonical/tests/test_terminal_parent_portfolio_runner_v1.py",
+      "test": "test_static_preflight_binds_all_seven_multiplex_behaviors",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_TERMINAL_PARENT_PORTFOLIO_RUNNER_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['BOUND_BLOB_DRIFT:canonical/runtime/contract_nati"
+    },
+    {
+      "file": "canonical/tests/test_terminal_r2_projection_currentness_v1.py",
+      "test": "test_terminal_live_truth_binds_exact_current_r2_bytes",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert '__CURRENT_R2_V61_' in 'ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__GDPVAL_MINIMUM_PROOF_FRONTIER_V4_RECONCILED__GDPVAL_STALE_MECHANICAL_FIRST_DISPATCH_DEMOTED__TERMINAL_FALSE'"
+    },
+    {
+      "file": "canonical/tests/test_terminal_r2_projection_currentness_v1.py",
+      "test": "test_terminal_scheduler_precedence_binds_exact_v57_scheduler_bytes",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert 'canonical/go...1010_V66.json' == 'canonical/go...1009_V57.json'"
+    },
+    {
+      "file": "canonical/tests/test_terminal_r2_projection_currentness_v1.py",
+      "test": "test_v61_projection_preserves_open_finance_residual_and_zero_credit",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert 'd8bafc91fac8...6917a8c27a6c9' == 'e208000c7b2a...a1c828834aad6'"
+    },
+    {
+      "file": "canonical/tests/test_terminal_reality_gate_v1.py",
+      "test": "test_full_frozen_protocol_and_ownership_manifest_is_terminal_even_when_optional_u_is_open",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_terminal_reality_gate_v1.py",
+      "test": "test_false_manual_terminal_flag_is_only_metadata_when_exact_gate_is_true",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "assert False is True"
+    },
+    {
+      "file": "canonical/tests/test_terminal_route_execution_plan_validator.py",
+      "test": "test_live_plan_passes_without_generating_cases",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_TERMINAL_ROUTE_EXECUTION_PLAN_VALIDATION_V1', 'status': 'FAIL_CLOSED', 'pass': False, 'launch_authority': False, 'promotion_authority': Fa"
+    },
+    {
+      "file": "canonical/tests/test_terminal_scheduling_v11_candidate_v1.py",
+      "test": "test_v11_exact_current_world",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__SOURCE_BLOB_DRIFT",
+      "message_head": "AssertionError: {'pass': False, 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'errors': ['SOURCE_BLOB_DRIFT'], 'drift': {'canonical/gove...json': {'expected': '54be838a5a0a9698398893ad113641496d5051b8',"
+    },
+    {
+      "file": "canonical/tests/test_terminal_scheduling_v12_candidate_v1.py",
+      "test": "test_v12_exact_current_world",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__SOURCE_BLOB_DRIFT",
+      "message_head": "AssertionError: {'pass': False, 'status': 'FAIL_CLOSED__SOURCE_BLOB_DRIFT', 'errors': ['SOURCE_BLOB_DRIFT'], 'drift': {'canonical/gove...: {'expected': 'b01292c1f198f251b8a9606b4de173541204c2dc', 'act"
+    },
+    {
+      "file": "canonical/tests/test_terminal_tb_science_dynamic_currentness_v1.py",
+      "test": "test_terminal_authority_uses_mutable_tb_science_path_currentness",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'HISTORICAL_TB_SCIENCE_CURRENTNESS_SUPERSEDED' not found in 'ACTIVE_FAIL_CLOSED_REAL_MISSION_BOUND__GDPVAL_MINIMUM_PROOF_FRONTIER_V4_RECONCILED__GDPVAL_STALE_MECHANICAL_FIRST_DISPATCH_"
+    },
+    {
+      "file": "canonical/tests/test_toolathlon_brain_owned_selection_adapter_v1.py",
+      "test": "test_source_gate_v2_candidate_shape_can_pass_after_external_facts",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_ACCEPTANCE_CAPABILITY_SOURCE_GATE_V2', 'status': 'BLOCKED_BEFORE_CASE_SPEND', 'pass': False, 'errors': ['EXTERNAL_MODEL_COGNITION_DEPENDEN"
+    },
+    {
+      "file": "canonical/tests/test_toolathlon_brain_owned_selection_adapter_v1.py",
+      "test": "test_source_gate_v2_remains_blocked_until_materiality",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'GENERAL_SUBSTRATE_TEST_NOT_PROVEN' not found in ['EXTERNAL_MODEL_COGNITION_DEPENDENCY_FORBIDDEN', 'MODEL_PRODUCER_ROLE_FORBIDDEN', 'MODEL_ROLE_UNCLASSIFIED']"
+    },
+    {
+      "file": "canonical/tests/test_toolathlon_general_substrate_materiality_v1.py",
+      "test": "test_brain_control_is_not_provider_routing_only",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: False is not true : {'schema': 'PROJECT_BRAIN_ACCEPTANCE_CAPABILITY_SOURCE_GATE_V2', 'status': 'BLOCKED_BEFORE_CASE_SPEND', 'pass': False, 'errors': ['EXTERNAL_MODEL_COGNITION_DEPENDEN"
+    },
+    {
+      "file": "canonical/tests/test_unified_cognitive_fabric_one_shot_meta_v1.py",
+      "test": "test_one_shot_meta_orchestrator_is_canonical_frontdoor_callable",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: 'FAIL_CLOSED' != 'FABRIC_META_ORCHESTRATOR_COMPLETE'"
+    },
+    {
+      "file": "canonical/tests/test_universal_learning_contract_binding_v1.py",
+      "test": "test_every_bound_component_matches_exact_blob",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '4ce3fde56117b5665109d8ce4281d69fae52b1be' != 'b168b131f6383e158bdc0d931439d14e61f2a5de'"
+    },
+    {
+      "file": "canonical/tests/test_universal_learning_meta_policy_v9.py",
+      "test": "test_common_verified_structure_is_candidate_only",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: Lists differ: ['decompose', 'verify', 'compile'] != ['compile', 'decompose', 'verify']"
+    },
+    {
+      "file": "canonical/tests/test_universal_learning_proof_program_binding_v7.py",
+      "test": "test_every_bound_component_matches_exact_blob",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '38ce771fbf5969f9de63cf5287779dae07076077' != '3cfd5e48b957c6e91fafbf1b9d69ddc624be4764'"
+    },
+    {
+      "file": "canonical/tests/test_universal_owned_execution_v1.py",
+      "test": "test_bound_goal_owned_contract_proves_plan_only_not_task_execution",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_UNIVERSAL_OWNED_EXECUTION_V1', 'status': 'FAIL_CLOSED__OWNED_PROBLEM_AUTHORITY_NOT_PROVED', ...atus': 'FAIL_CLOSED', 'pass': False, 'errors': ['ProblemContrac"
+    },
+    {
+      "file": "canonical/tests/test_universal_structured_task_v1.py",
+      "test": "test_raw_requirements_to_search_verify_effect_readback_and_episode_candidate",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert {'name': 'Ali... 'score': 0.1} == {'name': 'Ali...passed': True}"
+    },
+    {
+      "file": "canonical/tests/test_universal_structured_task_v1.py",
+      "test": "test_no_accepted_candidate_means_no_effect",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "assert True is False"
+    },
+    {
+      "file": "canonical/tests/test_universal_verified_adaptive_solver_v1.py",
+      "test": "test_plain_goal_can_compile_to_bound_plan_as_verified_intermediate_fact",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_UNIVERSAL_VERIFIED_ADAPTIVE_SOLVER_V1', 'status': 'ALL_AVAILABLE_PROPOSALS_FALSIFIED', 'pass': False, 'next_capability_id': 'compile-goal', ...}"
+    },
+    {
+      "file": "canonical/tests/test_universal_verified_adaptive_solver_v1.py",
+      "test": "test_uncompilable_plain_goal_requests_more_information",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: assert 'ALL_AVAILABL...ALS_FALSIFIED' == 'NEED_MORE_INFORMATION'"
+    },
+    {
+      "file": "canonical/tests/test_universal_verified_adaptive_solver_v4.py",
+      "test": "test_missing_effect_semantics_binding_fails_closed",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "NameError: name '_fail' is not defined"
+    },
+    {
+      "file": "canonical/tests/test_v13_db_existing_evidence_saturation_v1.py",
+      "test": "test_current_saturation_manifest",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: {'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['SOURCE_DRIFT:canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json', 'ACCEPTED_FIVE_DRIFT'], 'known_region_cou"
+    },
+    {
+      "file": "canonical/tests/test_v13_native_artifact_mechanical_selected_cell_v1.py",
+      "test": "test_current_cell_verifies",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: {'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['SOURCE_DRIFT:canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json'], 'cell_closed': False, ...}"
+    },
+    {
+      "file": "canonical/tests/test_v14_synthesis_unsupported_claim_cell_v1.py",
+      "test": "test_current_cell_verifies",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: {'status': 'FAIL_CLOSED', 'pass': False, 'errors': ['SOURCE_DRIFT:canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json'], 'cell_closed': False, ...}"
+    },
+    {
+      "file": "canonical/tests/test_v16_db_existing_evidence_saturation_v5.py",
+      "test": "test_unified_v16_db_saturation_is_exact_and_zero_credit",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: {'schema': 'PROJECT_BRAIN_V16_DB_EXISTING_EVIDENCE_SATURATION_VERIFIER_V5', 'pass': False, 'errors': ['DRIFT:canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json'], 'base_certifica"
+    },
+    {
+      "file": "canonical/tests/test_v16_synthesis_required_claim_coverage_selected_property_cell_v1.py",
+      "test": "test_synthesis_required_claim_coverage_top_law",
+      "status": "failed",
+      "bucket": "CURRENTNESS_GUARD__DRIFT",
+      "message_head": "AssertionError: {'pass': False, 'errors': ['DRIFT:canonical/governance/TERMINAL_NOW_V16_RESIDUAL_NORMALIZATION_20261007_V1.json'], 'selected_property_cell': 'SYNTHESIS_TARGET_SCOPE_REQUIRED_CLAIM_COVE"
+    },
+    {
+      "file": "canonical/tests/test_verified_witness_target_overlay_activation_v1.py",
+      "test": "test_overlay_activation_and_scope_safe_v2_are_live_without_credit",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: '7/19_PASS__12/19_OPEN' != '2/19_PASS__17/19_OPEN'"
+    },
+    {
+      "file": "canonical/tests/test_vllm_deepseek_streaming_stage_b_verifier_v1.py",
+      "test": "test_live_stage_b_passes",
+      "status": "failed",
+      "bucket": "ASSERTION",
+      "message_head": "AssertionError: {'pass': False, 'errors': ['LEDGER_STATE_NOT_STAGE_B_FROZEN'], 'capability_credit_delta': 0, 'family_credit_delta': 0, ...}"
+    },
+    {
+      "file": "canonical/tests/test_zero_ambient_authority_escape_integration_v1.py",
+      "test": "test_zero_ambient_authority_negative_canaries",
+      "status": "failed",
+      "bucket": "MISSING_FILE",
+      "message_head": "FileNotFoundError: [Errno 2] No such file or directory: 'docker'"
+    },
+    {
+      "file": "canonical/tests/test_zero_ambient_namespace_launcher_v1.py",
+      "test": "test_basic_one_channel_and_network",
+      "status": "failed",
+      "bucket": "NETWORK",
+      "message_head": "canonical.runtime.zero_ambient_namespace_launcher_v1.NamespaceConfinementError: HOST_PRIMITIVE_MISSING:chroot"
+    },
+    {
+      "file": "canonical/tests/test_zero_ambient_namespace_launcher_v1.py",
+      "test": "test_broker_overflow_fails_closed",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "canonical.runtime.zero_ambient_namespace_launcher_v1.NamespaceConfinementError: HOST_PRIMITIVE_MISSING:chroot"
+    },
+    {
+      "file": "canonical/tests/test_zero_ambient_namespace_launcher_v1.py",
+      "test": "test_caps_nproc_memory_enforced",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "canonical.runtime.zero_ambient_namespace_launcher_v1.NamespaceConfinementError: HOST_PRIMITIVE_MISSING:chroot"
+    },
+    {
+      "file": "canonical/tests/test_zero_ambient_namespace_launcher_v1.py",
+      "test": "test_undeclared_fd_closed_and_stdio_not_returned",
+      "status": "failed",
+      "bucket": "OTHER",
+      "message_head": "canonical.runtime.zero_ambient_namespace_launcher_v1.NamespaceConfinementError: HOST_PRIMITIVE_MISSING:chroot"
+    }
+  ],
+  "formerly_pinned_file_status": {},
+  "note": "Full canonical/tests run excluding test_m1b_continuous_geometry_compiler.py (cadquery needs libGL.so.1, unavailable in this sandbox). Dependency set differs from the 2026-10-14 baseline, so totals are not directly comparable to it."
+}
