@@ -60,8 +60,24 @@ def goal_tokens(goal: str) -> list[str]:
     return [w for w in words if w not in _STOP and len(w) > 1][:12]
 
 
+_VALIDATOR_WORDS = ("test", "tests", "check", "checks", "verify", "validate",
+                    "lint", "audit", "schema", "spec")
+
+
+def find_validators(tasks: list[dict]) -> list[dict]:
+    """Tasks this environment ships as its own oracle."""
+    out = []
+    for t in tasks or []:
+        label = ("%s %s" % (t.get("name") or "",
+                            t.get("command") or "")).lower()
+        if any(w in label for w in _VALIDATOR_WORDS):
+            out.append(t)
+    return out
+
+
 def verify(goal: str, root: str, before: dict, after: dict,
-           produces: dict | None = None) -> dict:
+           produces: dict | None = None,
+           validators: dict | None = None) -> dict:
     """Did the goal actually get met? Ask separately from scoring.
 
     Two routes to an answer:
@@ -115,6 +131,35 @@ def verify(goal: str, root: str, before: dict, after: dict,
                 "matching": sorted(set(bridged))[:10],
                 "new_paths": new[:10], "goal_tokens": tokens}
 
+    # Route three: ASK THE ENVIRONMENT TO JUDGE.
+    #
+    # Whether an artifact is a valid report is semantic, and this system has
+    # no semantics. But projects routinely ship their own oracle: tests,
+    # linters, schema checks. If the environment declares a check and that
+    # check passes, the artifact is valid BY THE ENVIRONMENT'S OWN STANDARD
+    # -- better than any judgement made from outside, because it is the
+    # standard that actually governs here.
+    #
+    # This does not decide correctness. It finds who already did.
+    if validators:
+        failures = sorted(v for v, ok in validators.items() if not ok)
+        if not failures:
+            return {"verified": True,
+                    "reason": "ENVIRONMENT_VALIDATOR_PASSED",
+                    "route": "environment_validator",
+                    "validators_run": sorted(validators),
+                    "new_paths": new[:10],
+                    "modified_paths": changed[:10],
+                    "goal_tokens": tokens}
+        return {"verified": False,
+                "reason": "ENVIRONMENT_VALIDATOR_FAILED",
+                "route": "environment_validator",
+                "failed": failures,
+                "validators_run": sorted(validators),
+                "new_paths": new[:10],
+                "modified_paths": changed[:10],
+                "goal_tokens": tokens}
+
     return {"verified": False, "reason": "NO_MATCHING_ARTIFACT",
             "route": None, "matching": [], "new_paths": new[:10],
             "modified_paths": changed[:10],
@@ -161,7 +206,26 @@ def run(goal: str, root: str, binary_limit: int = 0,
         produces = IA.analyze(root, cmds).get("produces") or {}
     except Exception:
         produces = {}
-    check = verify(goal, root, before, after, produces=produces)
+    # Route three: run the environment's own checks and let them judge.
+    validators: dict = {}
+    try:
+        import subprocess as _sp
+        import taskfile_read_v1 as TF
+        for t in find_validators(TF.read_tasks(root)):
+            cmd = t.get("command")
+            if not cmd:
+                continue
+            try:
+                rc = _sp.run(["sh", "-c", cmd], cwd=root,
+                             capture_output=True, timeout=120).returncode
+                validators[cmd] = (rc == 0)
+            except Exception:
+                validators[cmd] = False
+    except Exception:
+        validators = {}
+
+    check = verify(goal, root, before, after, produces=produces,
+                   validators=validators)
     return {"schema": SCHEMA,
             "goal": goal,
             "goal_tokens": tokens,

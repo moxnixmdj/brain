@@ -1,0 +1,6 @@
+[[task]]
+name = "generate"
+cmd  = "python3 generate.py"
+[[task]]
+name = "check output"
+cmd  = "python3 check.py"
