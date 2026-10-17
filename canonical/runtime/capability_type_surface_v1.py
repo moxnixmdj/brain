@@ -166,6 +166,8 @@ _EXPLICIT: dict[str, str] = {
     "x_ticks": PAIR_LIST, "y_ticks": PAIR_LIST,          # was NUMBER_LIST -- a real type error
     "x_value": NUMBER, "y_value": NUMBER, "major": NUMBER, "max_age_s": NUMBER,
     "authoritative": BOOL, "test_argv": ARGV, "spec": JSON_TEXT, "objective": JSON_TEXT,
+    "actions": JSON_TEXT,          # browser action script, consumed by
+                                   # browser_chromedriver_interact
     "variables": KV, "test_paths": PATH_LIST, "source_paths": PATH_LIST,
     "evidence_paths": PATH_LIST, "source_root": PATH_DIR,
     # declared by the registry, consumed by no adapter -- see unconsumed_slots()
