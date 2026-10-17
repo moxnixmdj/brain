@@ -97,8 +97,13 @@ def run_whole_machine(objective: str, content_url: str) -> dict:
     # was correct behaviour on an empty input.
     rel_in = _w("05_relevance_input.json", {
         "objective": objective,
-        "candidates": [{"id": "retrieved-1", "url": url, "text": text,
-                        "title": "canonical/README.md"}],
+        # `_candidate_text` reads title / record_title / snippet only.  A full
+        # body passed as `text` is silently ignored, which was scoring an empty
+        # document.  Body must go in `snippet`.
+        "candidates": [{"id": "retrieved-1", "url": url,
+                        "title": "canonical/README.md",
+                        "record_title": "canonical/README.md",
+                        "snippet": text}],
     })
     rel = step("establish objective relevance", "CAPABILITY",
                lambda: RELEVANCE.run(
