@@ -133,6 +133,43 @@ def _walk_mapping(obj, out: list) -> None:
                 _walk_mapping(item, out)
 
 
+def _from_yaml(path: Path) -> list[tuple[str, str]]:
+    """Minimal indentation reader for CI workflows. No dependency.
+
+    PyYAML is not available in every environment, and a machine that cannot
+    read a format cannot see the tasks written in it -- .github/workflows
+    held both a real task and a destructive one, and both were invisible.
+
+    Only the shape needed is parsed: a `name:` and a `run:` at the SAME
+    indentation. That is a task. Everything else is ignored rather than
+    guessed at, because a wrong parse here becomes a command that runs.
+    """
+    out: list[tuple[str, str]] = []
+    pending: dict[int, str] = {}          # indent -> most recent name
+    try:
+        lines = path.read_text(errors="replace").splitlines()
+    except OSError:
+        return out
+    for raw in lines:
+        if not raw.strip() or raw.strip().startswith("#"):
+            continue
+        indent = len(raw) - len(raw.lstrip())
+        line = raw.strip()
+        if line.startswith("- "):
+            line = line[2:].strip()
+            indent += 2
+        key, sep, val = line.partition(":")
+        if not sep:
+            continue
+        key, val = key.strip(), val.strip()
+        if key == "name" and val:
+            pending[indent] = val
+        elif key in {"run", "cmd", "command"} and val:
+            label = pending.get(indent) or "step%d" % len(out)
+            out.append((label, val))
+    return [(n_, c) for n_, c in out if _looks_like_command(c)]
+
+
 def read_tasks(root: str) -> list[dict]:
     """Every (name, command) pair this directory declares, however declared."""
     rootp = Path(root)
@@ -145,7 +182,7 @@ def read_tasks(root: str) -> list[dict]:
             return
         seen.add(key)
         found.append({"name": str(name), "command": str(cmd),
-                      "origin": origin})
+                      "origin": origin, "risk": risk_of(str(cmd))})
 
     candidates = []
     for dirpath, dirnames, filenames in __import__("os").walk(rootp):
@@ -192,10 +229,62 @@ def read_tasks(root: str) -> list[dict]:
             _walk_mapping(obj, pairs)
             for n, c in pairs:
                 emit(n, c, rel)
+        elif fp.suffix in {".yaml", ".yml"}:
+            # No YAML parser here -- read the shape directly rather than
+            # deciding the format is unreadable.
+            for n_, c in _from_yaml(fp):
+                emit(n_, c, rel)
     return found
 
 
-def task_commands(root: str) -> list[list[str]]:
+_DESTRUCTIVE = re.compile(
+    r"(?:^|\s)(?:rm\s+-[rRf]|rm\s+-rf|rmdir|dd\s+if=|mkfs|shred|truncate|"
+    r"drop\s+(?:table|database)|delete\s+from|git\s+clean\s+-[fFx]|"
+    r"git\s+reset\s+--hard|git\s+push\s+--force|kubectl\s+delete|"
+    r"terraform\s+destroy|:\s*>|>/dev/|--force|--hard)"
+)
+_WRITEY = re.compile(r"(?:^|\s)(?:rm\s|mv\s|cp\s|tee\s|>\s*[$'\w])")
+
+
+def risk_of(command: str) -> str:
+    """Classify what a command could do, before anyone runs it.
+
+    A self-directing system that executes destructive commands simply
+    because it discovered them is not autonomous, it is dangerous.
+    env_hard2's CI declared `poison: rm -f out/good.txt` -- a real task
+    from the environment's own point of view, and one that destroys the
+    output of another task.
+
+    destructive  can delete or overwrite irrecoverably
+    mutating     writes, moves or removes something specific
+    readonly     nothing here suggests it changes anything
+    """
+    c = (command or "").strip()
+    if not c:
+        return "readonly"
+    if _DESTRUCTIVE.search(c):
+        return "destructive"
+    if _WRITEY.search(c):
+        return "mutating"
+    return "readonly"
+
+
+def task_commands(root: str, allow_destructive: bool = False) -> list[list[str]]:
+    """Run each declared task -- but not the dangerous ones by default.
+
+    Destructive tasks are still DISCOVERED and reported. They are simply not
+    handed to the executor unless the caller explicitly accepts the risk.
+    Seeing a weapon is information; firing it is a decision.
+    """
+    cmds = []
+    for t in read_tasks(root):
+        if t.get("risk") == "destructive" and not allow_destructive:
+            continue
+        try:
+            cmds.append(["sh", "-c", t["command"]])
+        except Exception:
+            continue
+    return cmds
     """Run each declared task through the shell it was written for."""
     cmds = []
     for t in read_tasks(root):
