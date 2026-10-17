@@ -18,7 +18,10 @@ from __future__ import annotations
 
 import re
 
-from canonical.runtime.typed_acceptance_program_v1 import PROGRAM_SCHEMA
+try:  # works both as a package and as a sibling on sys.path
+    from canonical.runtime.typed_acceptance_program_v1 import PROGRAM_SCHEMA
+except ImportError:  # pragma: no cover
+    from typed_acceptance_program_v1 import PROGRAM_SCHEMA
 
 SCHEMA = "PROJECT_BRAIN_REPAIR_PROPOSAL_V1"
 
@@ -85,8 +88,12 @@ def propose(command: str, root: str, min_tests: int = 1, timeout: int = 300) -> 
     repair_v1 proposes how to run it. The observed facts come from what
     actually ran. The decision belongs entirely to the solver.
     """
-    from canonical.runtime import repair_v1
-    from canonical.runtime.universal_verified_adaptive_solver_v1 import run
+    try:
+        from canonical.runtime import repair_v1
+        from canonical.runtime.universal_verified_adaptive_solver_v1 import run
+    except ImportError:  # pragma: no cover
+        import repair_v1
+        from universal_verified_adaptive_solver_v1 import run
 
     res = repair_v1.attempt(command, root, timeout=timeout)
     observed = observe(res.get("output") or "")
@@ -97,6 +104,7 @@ def propose(command: str, root: str, min_tests: int = 1, timeout: int = 300) -> 
         "command": command,
         "repaired_command": res.get("command"),
         "observed": observed,
+        "output": res.get("output") or "",
         "repair_trace": res.get("attempts", []),
         "solver": verdict,
     }

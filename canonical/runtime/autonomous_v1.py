@@ -326,10 +326,30 @@ def run(goal: str, root: str, binary_limit: int = 0,
                         reqs.append(_lit)
         cmd, src, why = EF.best_test_command(root)
         if cmd and reqs:
-            r = _sp.run(cmd, shell=True, cwd=root, capture_output=True, text=True,
-                        timeout=300)
-            out = (r.stdout or "") + (r.stderr or "")
-            fit_info = {"command": cmd, "source": src, "why": why}
+            # VERIFY BEFORE COMMITTING. The fit was previously run and its
+            # output written to the artifact, and only afterwards checked --
+            # plan, execute, verify in the wrong order. The repair is now
+            # offered as a proposal to the universal solver, whose verifier
+            # is immutable, and the file is written only once that verifier
+            # has accepted it. A rejected proposal leaves nothing behind.
+            # The universal solver imports itself as canonical.runtime.*, so
+            # the repo root has to be importable, not just this directory.
+            import sys as _sys
+            _pkg_root = str(Path(__file__).resolve().parents[2])
+            if _pkg_root not in _sys.path:
+                _sys.path.insert(0, _pkg_root)
+            from canonical.runtime import repair_proposal_v1 as RP
+            prop = RP.propose(cmd, root, min_tests=1, timeout=300)
+            verdict = prop.get("solver") or {}
+            fit_info = {"command": prop.get("repaired_command") or cmd,
+                        "source": src, "why": why,
+                        "observed": prop.get("observed"),
+                        "solver": verdict.get("status"),
+                        "verified": bool(verdict.get("pass"))}
+            if not verdict.get("pass"):
+                fit_info["note"] = "solver did not verify; nothing written"
+                raise RuntimeError("SOLVER_DID_NOT_VERIFY")
+            out = prop.get("output") or ""
             for req in reqs:
                 target = Path(root) / req
                 if target.parent.is_dir():
