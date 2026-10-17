@@ -169,7 +169,8 @@ def explore(root: str, commands: list[list[str]],
 
 
 def explore_here(root: str, want_tokens: list[str] | None = None,
-                 binary_limit: int = 12, iterations: int = 12) -> dict:
+                 binary_limit: int = 12, iterations: int = 12,
+                 interaction_aware: bool = False) -> dict:
     """The whole chain, one call: discover -> probe -> search -> credit.
 
     The commands are NOT supplied. They are discovered from the environment.
@@ -181,7 +182,39 @@ def explore_here(root: str, want_tokens: list[str] | None = None,
     out["schema"] = "PROJECT_BRAIN_EXPLORE_HERE_V1"
     out["commands_source"] = "discovered"
     out["commands_discovered"] = len(cmds)
+    if interaction_aware:
+        out.update(_interaction_guard(root, cmds))
     return out
+
+
+def _interaction_guard(root: str, cmds: list[list[str]]) -> dict:
+    """Learn how the discovered actions interact, and refuse proven undoers.
+
+    Reporting a conflict changes nothing. The loop has to ACT on it, or the
+    knowledge is decorative.
+
+    This is evidence-based and separate from the pattern-based risk gate:
+    risk_of() says "rm -f looks destructive"; this says "this exact command
+    was observed deleting out/good.txt, which another discovered action
+    produces". The second is stronger, and it is learned here, on this box.
+    """
+    try:
+        import interaction_v1 as IA
+    except Exception:
+        return {"interaction_checked": False}
+    try:
+        graph = IA.analyze(root, cmds)
+    except Exception as exc:
+        return {"interaction_checked": False,
+                "interaction_error": type(exc).__name__}
+    destroyers = {c["destroyer"] for c in graph.get("conflicts") or []}
+    # Drop only actions PROVEN to undo another discovered action.
+    kept = [c for c in cmds if " ".join(c) not in destroyers]
+    return {"interaction_checked": True,
+            "conflicts_found": graph.get("conflicts") or [],
+            "excluded_as_undoer": sorted(destroyers),
+            "commands_after_guard": len(kept),
+            "suggested_order": graph.get("suggested_order") or []}
 
 
 if __name__ == "__main__":

@@ -91,9 +91,27 @@ def probe_isolated(root: str, commands: list[list[str]],
     return results
 
 
-def analyze(root: str, commands: list[list[str]]) -> dict:
+def analyze(root: str, commands: list[list[str]],
+            two_phase: bool = True) -> dict:
+    """The interaction graph.
+
+    ONE PHASE IS NOT ENOUGH, and env_hard3 proved it. Probing every action
+    from a pristine copy shows what each one PRODUCES -- but a cleaner run
+    against an empty output directory has nothing to delete, so it looks
+    perfectly harmless. `python3 clean.py` deleted out/app.txt and single
+    phase analysis reported no conflict at all.
+
+    You can only observe destruction if the thing destroyed already exists.
+
+    So: phase 1 discovers producers by isolation; phase 2 lets the producers
+    actually run, then probes everything again on that BUILT state, where
+    deletion is finally observable. Isolation finds creation. Composition
+    finds destruction.
+    """
     """The interaction graph, learned from isolated runs."""
     recs = probe_isolated(root, commands)
+    if two_phase:
+        recs = _augment_with_built_state(root, commands, recs)
     produces, destroys, modifies = {}, {}, {}
     for r in recs:
         key = " ".join(r["argv"])
@@ -142,3 +160,54 @@ if __name__ == "__main__":
     r = analyze(root, cmds)
     print(json.dumps({k: v for k, v in r.items() if k != "records"},
                      indent=2)[:1200])
+
+
+def _augment_with_built_state(root: str, commands: list[list[str]],
+                              recs: list[dict]) -> list[dict]:
+    """Phase 2: let the producers run, then probe again on the built state.
+
+    Deletion is only observable where there is something to delete, so build
+    first and look again. Whatever the second pass reveals is merged into the
+    isolation results.
+    """
+    rootp = Path(root).resolve()
+    tmp = Path(tempfile.mkdtemp(prefix="brain_built_"))
+    work = tmp / "work"
+    by_key = {" ".join(r["argv"]): r for r in recs}
+    try:
+        shutil.copytree(rootp, work,
+                        ignore=shutil.ignore_patterns(".git", "__pycache__"))
+        # Phase 1 told us who creates something. Let them run.
+        for r in recs:
+            if r.get("added") or r.get("modified"):
+                try:
+                    subprocess.run(r["argv"], cwd=work, capture_output=True,
+                                   timeout=300)
+                except Exception:
+                    pass
+        built = _snapshot(work)
+        built_paths = _paths(built)
+        # Re-probe on the built state, where deletion finally shows.
+        for i, cmd in enumerate(commands):
+            w2 = tmp / ("probe_%d" % i)
+            try:
+                if w2.exists():
+                    shutil.rmtree(w2)
+                shutil.copytree(work, w2)
+                try:
+                    subprocess.run(cmd, cwd=w2, capture_output=True,
+                                   timeout=300)
+                except Exception:
+                    pass
+                after_paths = _paths(_snapshot(w2))
+                rec = by_key.get(" ".join(cmd))
+                if rec is None:
+                    continue
+                rec["removed"] = sorted(
+                    set(rec.get("removed") or [])
+                    | (built_paths - after_paths))
+            finally:
+                shutil.rmtree(w2, ignore_errors=True)
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+    return recs
