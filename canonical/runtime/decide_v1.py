@@ -56,7 +56,15 @@ def _relevance(cid: str, goal_tokens: list[str], reg: dict) -> float:
     if not goal_tokens:
         return 0.0
     entry = reg.get(cid) or {}
-    hay = (cid + " " + " ".join(entry.get("keywords") or [])).lower()
+    # Search what it is called, what it says about itself, AND what it
+    # produces. A capability that outputs a verified claim is relevant to a
+    # goal about verifying even if the word "verify" never appears in its
+    # name -- judging only by names made those capabilities invisible.
+    hay = " ".join(
+        [cid] + list(entry.get("keywords") or []) + list(entry.get("provides") or [])
+    ).lower()
+    # Tokens are dot-separated in provides; expose them as words too.
+    hay = hay.replace(".", " ").replace("_", " ")
     return sum(1 for t in goal_tokens if t in hay) / len(goal_tokens)
 
 
