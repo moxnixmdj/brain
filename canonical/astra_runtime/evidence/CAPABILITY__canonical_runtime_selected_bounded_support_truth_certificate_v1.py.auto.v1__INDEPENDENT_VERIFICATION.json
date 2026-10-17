@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/selected_bounded_support_truth_certificate_v1.py.auto.v1",
- "elapsed_ms": 1.375,
+ "elapsed_ms": 1.636,
  "independent_run_reference": {
-  "github_run_id": 38984614539,
+  "github_run_id": 38984844011,
   "oidc_claims": {
    "actor": "github-actions[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "arena/120f25af-brain",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/pull/4725/merge",
-   "jti": "2e0999b0-b2d8-4413-bd4a-2950381c6dfc",
+   "jti": "e09c7283-be1f-49dc-af6f-27a35158ce5e",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "2",
-   "run_id": "38984614539",
+   "run_id": "38984844011",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/pull/4725/merge"
   }
  },
