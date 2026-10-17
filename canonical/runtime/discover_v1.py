@@ -103,6 +103,28 @@ def entrypoints(root: str, limit: int = _MAX_ENTRYPOINTS) -> list[str]:
     return uniq[:limit]
 
 
+def entrypoint_commands(root: str) -> list[list[str]]:
+    """Turn discovered entry points into commands that can actually be run.
+
+    Without this, entrypoints() was an inventory -- it found make:greet and
+    npm:ping and never acted on either. Discovery that cannot act is a
+    listing, not a capability.
+
+    Every returned command is one this project or directory advertised about
+    itself, so running it is what the environment is asking for.
+    """
+    cmds: list[list[str]] = []
+    for ep in entrypoints(root):
+        kind, _, name = ep.partition(":")
+        if kind == "make":
+            cmds.append(["make", name])
+        elif kind == "npm":
+            cmds.append(["npm", "run", "--silent", name])
+        elif kind == "run":
+            cmds.append(["sh", name])
+    return cmds
+
+
 def candidates(root: str, binary_limit: int = 40) -> list[list[str]]:
     """Probe commands worth trying here, derived from observation.
 
@@ -112,9 +134,12 @@ def candidates(root: str, binary_limit: int = 40) -> list[list[str]]:
     cmds: list[list[str]] = []
     for b in binaries()[:binary_limit]:
         cmds.append([b, "--version"])
-    cmds.append(["make", "-n", "-f", "Makefile"]) if (Path(root) / "Makefile").is_file() else None
+    if (Path(root) / "Makefile").is_file():
+        cmds.append(["make", "-n", "-f", "Makefile"])
     if (Path(root) / "package.json").is_file():
         cmds.append(["npm", "run"])
+    # The advertised entry points, so discovery leads somewhere.
+    cmds.extend(entrypoint_commands(root))
     return cmds
 
 
