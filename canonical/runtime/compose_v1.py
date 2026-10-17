@@ -31,8 +31,13 @@ from pathlib import Path
 
 SCHEMA = "PROJECT_BRAIN_COMPOSE_V1"
 
-# Quoted paths in error text: 'data/raw.json', "out/x.txt"
-_QUOTED = re.compile(r"""['"]([^'"]*\.[A-Za-z0-9_]+)['"]""")
+# Quoted names in error text: 'data/raw.json', 'fullname', "csrf"
+#
+# The first version required a dot, because it was written for FILE paths
+# during dependency recovery. A GUI field has no extension, so a perfectly
+# explicit complaint -- "field 'fullname' is required" -- taught the system
+# nothing at all. The name of a thing is not always the name of a file.
+_QUOTED = re.compile(r"""['"]([^'"\s]{1,80})['"]""")
 # Bare paths in error text: data/raw.json, /tmp/x/y.txt
 _BARE = re.compile(r"\b([\w.-]+/[\w./-]*[\w.]+)\b")
 
