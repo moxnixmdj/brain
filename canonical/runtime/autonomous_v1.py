@@ -64,14 +64,48 @@ _VALIDATOR_WORDS = ("test", "tests", "check", "checks", "verify", "validate",
                     "lint", "audit", "schema", "spec")
 
 
+# Commands that cannot fail. An oracle's whole job is to be capable of
+# saying no, so a command hardwired to succeed is not an oracle no matter
+# what it is called -- and counting one lets anything pass by declaring a
+# check that always agrees.
+# Failures that are facts about the machine, not verdicts on the work.
+_ENVIRONMENTAL_FAILURE_CLASSES = frozenset({
+    "missing_binary", "missing_python_module", "missing_node_module",
+})
+
+_NEVER_FAILS = (
+    re.compile(r"^\s*(?::|true)\s*$"),
+    re.compile(r"^\s*(echo\b[^&|;]*)?(\s*(?:&&|;)\s*)?exit\s+0\s*$"),
+    re.compile(r"^\s*echo\b[^&|;]*$"),
+)
+
+
+def _can_fail(command: str) -> bool:
+    """Could this command ever report failure? If not it is not a check."""
+    c = (command or "").strip()
+    if not c:
+        return False
+    return not any(p.match(c) for p in _NEVER_FAILS)
+
+
 def find_validators(tasks: list[dict]) -> list[dict]:
-    """Tasks this environment ships as its own oracle."""
+    """Tasks this environment ships as its own oracle.
+
+    Matching the words is not enough. env_toolchain's package.json declares
+    a "test" script -- `echo no tests here && exit 0` -- which matches every
+    validator word and can never fail. Treating it as the environment's
+    oracle meant the decoy was the judge of its own work.
+    """
     out = []
     for t in tasks or []:
-        label = ("%s %s" % (t.get("name") or "",
-                            t.get("command") or "")).lower()
-        if any(w in label for w in _VALIDATOR_WORDS):
-            out.append(t)
+        name = (t.get("name") or "").lower()
+        command = t.get("command") or ""
+        label = "%s %s" % (name, command.lower())
+        if not any(w in label for w in _VALIDATOR_WORDS):
+            continue
+        if not _can_fail(command):
+            continue
+        out.append(t)
     return out
 
 
@@ -391,6 +425,7 @@ def run(goal: str, root: str, binary_limit: int = 0,
         produces = {}
     # Route three: run the environment's own checks and let them judge.
     validators: dict = {}
+    unevaluable: list = []
     try:
         import subprocess as _sp
         import taskfile_read_v1 as TF
@@ -409,9 +444,35 @@ def run(goal: str, root: str, binary_limit: int = 0,
             else:
                 argv = ["sh", "-c", cmd]
             try:
-                rc = _sp.run(argv, cwd=root,
-                             capture_output=True, timeout=180).returncode
-                validators[cmd] = (rc == 0)
+                if argv[:1] == ["npm"]:
+                    rc = _sp.run(argv, cwd=root,
+                                 capture_output=True, timeout=180).returncode
+                    validators[cmd] = (rc == 0)
+                else:
+                    # A validator that fails because a tool is absent here
+                    # is a fact about this machine, not evidence about the
+                    # work. Give the oracle the same adaptation everything
+                    # else gets: only a failure that survives repair is a
+                    # real failure. `pytest -q` in env_toolchain is the
+                    # environment's declared check and pytest does not
+                    # exist -- repaired to unittest, it runs and passes.
+                    import repair_v1 as _RP
+                    res = _RP.attempt(cmd, root, timeout=180)
+                    if res.get("ok"):
+                        validators[cmd] = True
+                    else:
+                        # A check that cannot be RUN is not a check that
+                        # failed. pytest_run.py imports pytest and pytest
+                        # cannot be obtained here; that is a fact about
+                        # this machine, not evidence about the work. Counting
+                        # it as a failure would report our missing tool as
+                        # somebody else's broken build.
+                        classes = {a.get("class") for a in res.get("attempts", [])}
+                        if classes and classes <= _ENVIRONMENTAL_FAILURE_CLASSES:
+                            if cmd not in unevaluable:
+                                unevaluable.append(cmd)
+                        else:
+                            validators[cmd] = False
             except Exception:
                 validators[cmd] = False
     except Exception:
@@ -428,6 +489,10 @@ def run(goal: str, root: str, binary_limit: int = 0,
             "best": result.get("best"),
             "browser": browser,
             "environment_fit": fit_info,
+            # Reported, not dropped: a check we could not run is part of the
+            # honest answer, and hiding it would make the pass look cleaner
+            # than it is.
+            "unevaluable_validators": unevaluable,
             "look_before": {"requirements": look.get("requirements", []),
                             "excluded": look.get("excluded", []),
                             "preferred": [" ".join(c) for c in look.get("preferred", [])],

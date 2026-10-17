@@ -43,6 +43,8 @@ CASES = [
      "fifteen traps at once: destroyer, decoy, chain, liar, phantoms"),
     ("env_monster2", "produce a report",              ["out"],          True,
      "MUST NOT BE POISONED: reads sources before acting"),
+    ("env_toolchain", "run the tests and record the result", ["out"],   True,
+     "declared runner absent: composes one, verified by the solver"),
 ]
 
 
