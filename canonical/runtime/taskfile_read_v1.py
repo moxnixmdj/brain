@@ -305,18 +305,30 @@ def risk_of(command: str) -> str:
 
 
 def task_commands(root: str, allow_destructive: bool = False) -> list[list[str]]:
-    """Run each declared task -- but not the dangerous ones by default.
+    """Run each declared task -- through its own runner where one exists.
 
     Destructive tasks are still DISCOVERED and reported. They are simply not
     handed to the executor unless the caller explicitly accepts the risk.
     Seeing a weapon is information; firing it is a decision.
+
+    package.json scripts go through `npm run`, not through the raw command
+    text. Running "mocha --require ..." directly fails with command-not-found,
+    because mocha lives in node_modules/.bin and only npm puts that on PATH.
+    The declaration is not the invocation: npm sets up the environment the
+    command expects, and re-deriving that by hand is how real projects end
+    up looking broken when they are not.
     """
     cmds = []
     for t in read_tasks(root):
         if t.get("risk") == "destructive" and not allow_destructive:
             continue
+        name = t.get("name") or ""
+        origin = (t.get("origin") or "").lower()
         try:
-            cmds.append(["sh", "-c", t["command"]])
+            if origin.endswith("package.json") and name:
+                cmds.append(["npm", "run", "--silent", name])
+            else:
+                cmds.append(["sh", "-c", t["command"]])
         except Exception:
             continue
     return cmds

@@ -215,9 +215,19 @@ def run(goal: str, root: str, binary_limit: int = 0,
             cmd = t.get("command")
             if not cmd:
                 continue
+            # Use the runner the project would use, not the raw text.
+            # npm scripts need node_modules/.bin on PATH, which only
+            # `npm run` provides -- executing "mocha ..." directly fails
+            # with command-not-found and makes a working project look
+            # broken. Same rationale as taskfile_read_v1.task_commands.
+            origin = (t.get("origin") or "").lower()
+            if origin.endswith("package.json") and t.get("name"):
+                argv = ["npm", "run", "--silent", t["name"]]
+            else:
+                argv = ["sh", "-c", cmd]
             try:
-                rc = _sp.run(["sh", "-c", cmd], cwd=root,
-                             capture_output=True, timeout=120).returncode
+                rc = _sp.run(argv, cwd=root,
+                             capture_output=True, timeout=180).returncode
                 validators[cmd] = (rc == 0)
             except Exception:
                 validators[cmd] = False
