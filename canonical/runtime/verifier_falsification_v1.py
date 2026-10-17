@@ -189,6 +189,22 @@ def _cases() -> list[tuple[str, str, callable]]:
     add("autonomous_v1._can_fail", "a command wired to exit zero",
         validator_that_cannot_fail)
 
+    # --- routing a question -------------------------------------------
+    def is_question_url() -> bool:
+        import autonomous_v1 as A
+        # Asks about somewhere else; answering it from local files would
+        # answer a question that was never asked.
+        return A._is_question(
+            "what does the page at https://github.com/x/y say this is")
+
+    def is_question_empty() -> bool:
+        import autonomous_v1 as A
+        return A._is_question("")
+
+    add("autonomous_v1._is_question", "a question naming a remote url",
+        is_question_url)
+    add("autonomous_v1._is_question", "an empty goal", is_question_empty)
+
     # --- the verdict grounds itself ------------------------------------
     def verdict_grounding_missing() -> bool:
         import autonomous_v1 as A

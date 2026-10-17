@@ -270,6 +270,34 @@ def _ground(root: str, paths: list) -> dict:
 
 
 
+_QUESTION = re.compile(
+    r"^\s*(what|which|who|where|when|why|how|is|are|was|were|do|does|did|"
+    r"can|could|should|would|does|list|show|find|count|tell)\b|\?\s*$",
+    re.I,
+)
+
+
+def _is_question(goal: str) -> bool:
+    """Does this goal ask about the files here, rather than to change them?
+
+    Kept to the shape of the sentence, not a list of phrasings. A
+    template list would only recognise questions someone thought of in
+    advance, which is the brittleness this system exists to avoid.
+
+    A question naming a URL is not this route: it asks about somewhere
+    else, and answering it from the local files would be a confident
+    answer to a question that was never asked. Routing by the shape of
+    the words alone sent "what does the page at https://github.com/...
+    say" to the filesystem, and the browser stopped being used at all.
+    """
+    text = (goal or "").strip()
+    if not text:
+        return False
+    if re.search(r"https?://|\bwww\.", text, re.I):
+        return False
+    return bool(_QUESTION.search(text))
+
+
 def _snapshot(root: str) -> dict:
     """Path -> mtime, so IN-PLACE changes are visible.
 
@@ -317,6 +345,46 @@ def run(goal: str, root: str, binary_limit: int = 0,
     """Plain sentence in, work out, verified outcome out."""
     import explore_v1 as X
     tokens = goal_tokens(goal)
+    # A QUESTION IS NOT A REQUEST TO PRODUCE.
+    #
+    # Every other route here runs something and asks whether the world
+    # changed. Asked "how many test files are in this project", all of
+    # them returned NOTHING_PRODUCED in zero seconds -- not because the
+    # answer was hard, but because there was no route from a question to a
+    # reply. Finding things out is half of what a person does at a
+    # computer, and it had no path.
+    #
+    # So a question is answered by reading, and the answer is made of
+    # evidence: every line names the file and line it came from and is
+    # re-read before it counts. Nothing is interpreted here. The model
+    # reads the grounded evidence and says what it means; the harness
+    # guarantees the evidence is real. That is the division throughout:
+    # perception is grounded, judgement sits on top of it.
+    if _is_question(goal):
+        try:
+            import inspect_v1 as IN
+        except ImportError:
+            from canonical.runtime import inspect_v1 as IN
+        result = IN.answer(goal, root)
+        return {
+            "goal": goal,
+            "root": root,
+            "route": "inspect",
+            "answer": result,
+            "rendered": IN.render(result),
+            "verification": {
+                "verified": result["all_grounded"],
+                "reason": ("ANSWER_GROUNDED" if result["all_grounded"]
+                           else ("UNVERIFIABLE_ANSWER"
+                                 if result["verdict"] == "UNVERIFIABLE"
+                                 else "ANSWER_NOT_GROUNDED")),
+                "grounded": result["grounded"],
+                "total": result["total"],
+                "unverifiable": result["unverifiable"],
+            },
+            "environment_fit": {},
+        }
+
     before = _snapshot(root)
 
     # THE BROWSER, chosen by the goal rather than named by a human.
