@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_generator24_extra_parametric_reduction_v1.py.auto.v1",
- "elapsed_ms": 2.997,
+ "elapsed_ms": 3.219,
  "independent_run_reference": {
-  "github_run_id": 39048503541,
+  "github_run_id": 39048735658,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "115230c2-7e61-4252-bb89-aa939ffd4682",
+   "jti": "26c91edc-c378-4862-958c-375513908e22",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39048503541",
+   "run_id": "39048735658",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
