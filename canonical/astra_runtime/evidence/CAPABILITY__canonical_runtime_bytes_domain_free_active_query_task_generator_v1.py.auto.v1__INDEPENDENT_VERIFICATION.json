@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/bytes_domain_free_active_query_task_generator_v1.py.auto.v1",
- "elapsed_ms": 161.107,
+ "elapsed_ms": 128.956,
  "independent_run_reference": {
-  "github_run_id": 39009359666,
+  "github_run_id": 39009549835,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "d5169d29-c514-4235-a20b-fef01394aaf7",
+   "jti": "d50e076a-08cd-4e62-a45c-b372e10cfa87",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39009359666",
+   "run_id": "39009549835",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
