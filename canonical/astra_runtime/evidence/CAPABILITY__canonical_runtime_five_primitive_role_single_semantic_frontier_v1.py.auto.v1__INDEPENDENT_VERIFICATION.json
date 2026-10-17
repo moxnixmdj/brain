@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/five_primitive_role_single_semantic_frontier_v1.py.auto.v1",
- "elapsed_ms": 34.236,
+ "elapsed_ms": 42.886,
  "independent_run_reference": {
-  "github_run_id": 39057556253,
+  "github_run_id": 39057752563,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "c5970a67-1e4d-4dc8-9bef-c31b05338750",
+   "jti": "de8f111a-43dc-4e94-a227-c5f2a258405b",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39057556253",
+   "run_id": "39057752563",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
