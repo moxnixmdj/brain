@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/terminal_four_invariant_controller_v1.py.auto.v1",
- "elapsed_ms": 31.378,
+ "elapsed_ms": 34.217,
  "independent_run_reference": {
-  "github_run_id": 39045213270,
+  "github_run_id": 39045467839,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "d6afa1b5-b36b-4a71-8aac-97cb0de4d49d",
+   "jti": "df5fa94e-5d1c-425a-8233-b6e8dd52ffb2",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39045213270",
+   "run_id": "39045467839",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
