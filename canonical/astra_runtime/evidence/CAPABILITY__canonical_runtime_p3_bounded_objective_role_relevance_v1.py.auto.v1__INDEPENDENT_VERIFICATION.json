@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/p3_bounded_objective_role_relevance_v1.py.auto.v1",
- "elapsed_ms": 0.191,
+ "elapsed_ms": 0.151,
  "independent_run_reference": {
-  "github_run_id": 39014447089,
+  "github_run_id": 39014614943,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "f33de536-7dd6-4c6b-b675-b4937b2b39fe",
+   "jti": "3149ea6d-318c-4abc-b05f-cfc0dc05624e",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39014447089",
+   "run_id": "39014614943",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
