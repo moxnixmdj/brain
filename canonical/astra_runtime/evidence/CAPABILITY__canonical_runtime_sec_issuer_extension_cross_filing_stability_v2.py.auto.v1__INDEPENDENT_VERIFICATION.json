@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/sec_issuer_extension_cross_filing_stability_v2.py.auto.v1",
- "elapsed_ms": 2.074,
+ "elapsed_ms": 2.164,
  "independent_run_reference": {
-  "github_run_id": 38991250204,
+  "github_run_id": 38991497320,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "38c17a45-08ad-407e-92cc-580e9d0f1697",
+   "jti": "3a8d4c2c-ef6a-49d5-ac72-86466ff44a17",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "38991250204",
+   "run_id": "38991497320",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
