@@ -189,6 +189,54 @@ def _cases() -> list[tuple[str, str, callable]]:
     add("autonomous_v1._can_fail", "a command wired to exit zero",
         validator_that_cannot_fail)
 
+    # --- grounding claims ---------------------------------------------
+    def grounding_missing_file() -> bool:
+        import grounding_v1 as G
+        with tempfile.TemporaryDirectory() as tmp:
+            r = G.check({"file": "nope.py", "contains": "def f"}, tmp)
+            return r["verdict"] == G.GROUNDED
+
+    def grounding_escape() -> bool:
+        import grounding_v1 as G
+        with tempfile.TemporaryDirectory() as tmp:
+            r = G.check({"file": "../outside.py", "contains": "x"}, tmp)
+            return r["verdict"] == G.GROUNDED
+
+    def grounding_malformed() -> bool:
+        import grounding_v1 as G
+        with tempfile.TemporaryDirectory() as tmp:
+            Path(tmp, "a.py").write_text("x = 1\n")
+            # names a file but asserts nothing about it
+            r = G.check({"file": "a.py"}, tmp)
+            return r["verdict"] == G.GROUNDED
+
+    def grounding_contradicted() -> bool:
+        import grounding_v1 as G
+        with tempfile.TemporaryDirectory() as tmp:
+            Path(tmp, "a.py").write_text("def f():\n")
+            r = G.check({"file": "a.py", "contains": "def g()"}, tmp)
+            return r["verdict"] == G.GROUNDED
+
+    def grounding_unverifiable_not_all_grounded() -> bool:
+        import grounding_v1 as G
+        with tempfile.TemporaryDirectory() as tmp:
+            Path(tmp, "a.py").write_text("def f():\n")
+            r = G.check_all([{"file": "a.py", "contains": "def f"},
+                             {"file": "absent.py", "contains": "x"}], tmp)
+            # Nine tenths grounded is not a grounded report.
+            return bool(r["all_grounded"])
+
+    add("grounding_v1.check", "a claim about a file that is not there",
+        grounding_missing_file)
+    add("grounding_v1.check", "a claim citing a path outside the project",
+        grounding_escape)
+    add("grounding_v1.check", "a claim naming a file but asserting nothing",
+        grounding_malformed)
+    add("grounding_v1.check", "a claim the file contradicts",
+        grounding_contradicted)
+    add("grounding_v1.check_all", "one uncheckable claim among grounded ones",
+        grounding_unverifiable_not_all_grounded)
+
     # --- environment fit -------------------------------------------------
     def fit_rejects_empty_project() -> bool:
         import environment_fit_v1 as EF
