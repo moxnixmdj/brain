@@ -170,7 +170,8 @@ def explore(root: str, commands: list[list[str]],
 
 def explore_here(root: str, want_tokens: list[str] | None = None,
                  binary_limit: int = 12, iterations: int = 12,
-                 interaction_aware: bool = False) -> dict:
+                 interaction_aware: bool = False,
+                 compose_aware: bool = False) -> dict:
     """The whole chain, one call: discover -> probe -> search -> credit.
 
     The commands are NOT supplied. They are discovered from the environment.
@@ -193,11 +194,32 @@ def explore_here(root: str, want_tokens: list[str] | None = None,
             cmds = [c for c in cmds if " ".join(c) not in banned]
             guard["commands_removed"] = before - len(cmds)
 
+    # CHAIN BEFORE RANKING.
+    # Actions here are independent, so anything needing a prerequisite fails
+    # and stays failed (env_hard4: transform.py never ran, at any budget).
+    # compose_v1 retries those once their prerequisite exists, which leaves
+    # the environment in a state where ranking means something.
+    chain: dict = {}
+    if compose_aware and cmds:
+        try:
+            import compose_v1 as COMP
+            chain = COMP.compose(root, cmds, want_tokens=want_tokens)
+        except Exception as exc:
+            chain = {"compose_error": type(exc).__name__}
+
     out = explore(root, cmds, want_tokens=want_tokens, iterations=iterations)
     out["schema"] = "PROJECT_BRAIN_EXPLORE_HERE_V1"
     out["commands_source"] = "discovered"
     out["commands_discovered"] = len(cmds)
     out.update(guard)
+    if chain:
+        out["chained"] = {
+            "rounds": chain.get("rounds"),
+            "resolved": [x["argv"] for x in (chain.get("resolved") or [])],
+            "retried": [x["argv"] for x in (chain.get("resolved") or [])
+                        if x.get("after_retry")],
+            "still_failing": chain.get("still_failing") or {},
+        }
     return out
 
 
