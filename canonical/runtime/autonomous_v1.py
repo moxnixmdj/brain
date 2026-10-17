@@ -46,7 +46,7 @@ def goal_tokens(goal: str) -> list[str]:
     return [w for w in words if w not in _STOP and len(w) > 1][:12]
 
 
-def verify(goal: str, root: str, before: set, after: set,
+def verify(goal: str, root: str, before: dict, after: dict,
            produces: dict | None = None) -> dict:
     """Did the goal actually get met? Ask separately from scoring.
 
@@ -66,18 +66,24 @@ def verify(goal: str, root: str, before: set, after: set,
     itself. Bringing a synonym list would only work for words I thought of.
     """
     tokens = goal_tokens(goal)
-    new = sorted(after - before)
+    new = sorted(set(after) - set(before))
+    # In-place edits count as work. A formatter creates nothing.
+    changed = sorted(p for p in set(before) & set(after)
+                     if before[p] != after[p])
+    touched = new + changed
     if not tokens:
-        return {"verified": False, "reason": "NO_GOAL_TOKENS", "new_paths": new}
-    if not new:
+        return {"verified": False, "reason": "NO_GOAL_TOKENS",
+                "new_paths": new, "modified_paths": changed}
+    if not touched:
         return {"verified": False, "reason": "NOTHING_PRODUCED",
-                "new_paths": []}
+                "new_paths": [], "modified_paths": []}
 
-    hits = [p for p in new if any(t in p.lower() for t in tokens)]
+    hits = [p for p in touched if any(t in p.lower() for t in tokens)]
     if hits:
         return {"verified": True, "reason": "GOAL_ARTIFACT_FOUND",
                 "route": "lexical", "matching": hits[:10],
-                "new_paths": new[:10], "goal_tokens": tokens}
+                "new_paths": new[:10], "modified_paths": changed[:10],
+                "goal_tokens": tokens}
 
     # Route two: a task named after the goal tells us what it produced.
     bridged, via = [], None
@@ -86,7 +92,7 @@ def verify(goal: str, root: str, before: set, after: set,
             else str(cmd).lower()
         if any(t in key for t in tokens):
             for path in paths:
-                if path in new:
+                if path in touched:
                     bridged.append(path)
                     via = key
     if bridged:
@@ -97,17 +103,26 @@ def verify(goal: str, root: str, before: set, after: set,
 
     return {"verified": False, "reason": "NO_MATCHING_ARTIFACT",
             "route": None, "matching": [], "new_paths": new[:10],
+            "modified_paths": changed[:10],
             "goal_tokens": tokens}
 
 
-def _snapshot(root: str) -> set:
+def _snapshot(root: str) -> dict:
+    """Path -> mtime, so IN-PLACE changes are visible.
+
+    The first version recorded only path names, so a tool that rewrites
+    existing files -- a formatter, a linter with --fix, any sort of code
+    modification -- looked like it had done nothing at all. Running cobra's
+    `make fmt` returned NOTHING_PRODUCED, which was simply false: the work
+    of a formatter is entirely in-place.
+    """
     rootp = Path(root)
-    out = set()
-    for p in rootp.rglob("*"):
-        if p.is_file():
+    out = {}
+    for fp in rootp.rglob("*"):
+        if fp.is_file():
             try:
-                out.add(str(p.relative_to(rootp)))
-            except Exception:
+                out[str(fp.relative_to(rootp))] = fp.stat().st_mtime_ns
+            except OSError:
                 pass
     return out
 
