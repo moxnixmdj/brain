@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/continuity_root3_fixed_entry_verifier_v1.py.auto.v1",
- "elapsed_ms": 34.094,
+ "elapsed_ms": 38.168,
  "independent_run_reference": {
-  "github_run_id": 39022522385,
+  "github_run_id": 39022702931,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "d564a292-d602-4ef1-9ab5-b97eeff4dc9f",
+   "jti": "eaa9026c-730e-47ce-b6e9-a6f2ead32f1d",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39022522385",
+   "run_id": "39022702931",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
