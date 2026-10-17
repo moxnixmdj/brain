@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/synthesis_lossless_scope_decomposition_verifier_v1.py.auto.v1",
- "elapsed_ms": 36.313,
+ "elapsed_ms": 39.083,
  "independent_run_reference": {
-  "github_run_id": 39075409327,
+  "github_run_id": 39075636378,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "3b18bf5e-1c79-4b52-94d9-3919c953420e",
+   "jti": "c4725fde-4dbf-42f7-8471-c0ee5ca415e7",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39075409327",
+   "run_id": "39075636378",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
