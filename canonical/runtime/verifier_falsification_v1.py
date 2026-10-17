@@ -189,6 +189,35 @@ def _cases() -> list[tuple[str, str, callable]]:
     add("autonomous_v1._can_fail", "a command wired to exit zero",
         validator_that_cannot_fail)
 
+    # --- executing a program ------------------------------------------
+    def execute_no_effect() -> bool:
+        import execute_v1 as X
+        with tempfile.TemporaryDirectory() as tmp:
+            # Exits zero and changes nothing: the oldest lie there is.
+            r = X.run("print('done')", tmp, timeout=30)
+            return r["verdict"] == X.SUCCESS
+
+    def execute_failure() -> bool:
+        import execute_v1 as X
+        with tempfile.TemporaryDirectory() as tmp:
+            r = X.run("raise SystemExit(1)", tmp, timeout=30)
+            return r["verdict"] == X.SUCCESS
+
+    def execute_ungrounded_claim() -> bool:
+        import execute_v1 as X
+        with tempfile.TemporaryDirectory() as tmp:
+            # Writes a file, but not the one the claim says it proves.
+            r = X.run("open('a.txt','w').write('x')", tmp, timeout=30,
+                      claim={"file": "b.txt", "contains": "x"})
+            return r["verdict"] == X.SUCCESS
+
+    add("execute_v1.run", "a program that exits zero and changes nothing",
+        execute_no_effect)
+    add("execute_v1.run", "a program that exits non-zero",
+        execute_failure)
+    add("execute_v1.run", "a program whose claimed result is not grounded",
+        execute_ungrounded_claim)
+
     # --- routing a question -------------------------------------------
     def is_question_url() -> bool:
         import autonomous_v1 as A
