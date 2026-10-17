@@ -218,7 +218,13 @@ def run(goal: str, root: str, binary_limit: int = 0,
     except Exception:
         look = {}
     # Act on what reading revealed: do not run what the sources contradict.
-    exclude = {" ".join(c) for c in look.get("demoted") or []}
+    # Only exclude RIVALS -- demoted commands writing where a preferred one
+    # writes. Excluding all demoted commands dropped fetch.py in
+    # env_monster, which transform.py depends on, breaking a chain the
+    # system already knew how to build. A prerequisite is not a rival.
+    exclude = {" ".join(c) for c in (look.get("rivals") or [])}
+    if exclude:
+        look = dict(look, excluded=[ " ".join(c) for c in (look.get("rivals") or [])])
     result = X.explore_here(root, want_tokens=tokens,
                             binary_limit=binary_limit,
                             iterations=iterations,
@@ -271,6 +277,7 @@ def run(goal: str, root: str, binary_limit: int = 0,
             "retried": (result.get("chained") or {}).get("retried") or [],
             "best": result.get("best"),
             "look_before": {"requirements": look.get("requirements", []),
+                            "excluded": look.get("excluded", []),
                             "preferred": [" ".join(c) for c in look.get("preferred", [])],
                             "demoted": [" ".join(c) for c in look.get("demoted", [])]},
             "verification": check,

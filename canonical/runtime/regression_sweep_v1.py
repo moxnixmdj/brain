@@ -39,6 +39,10 @@ CASES = [
      "REFUSES: task named report produces a decoy"),
     ("env_hard",    "produce a report from the data", ["out"],         False,
      "REFUSES: no report task exists here"),
+    ("env_monster",  "produce a report from the data", ["out", "data"], True,
+     "fifteen traps at once: destroyer, decoy, chain, liar, phantoms"),
+    ("env_monster2", "produce a report",              ["out"],          True,
+     "MUST NOT BE POISONED: reads sources before acting"),
 ]
 
 

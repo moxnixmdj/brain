@@ -144,5 +144,79 @@ def choose(commands: list[list[str]], root: str,
             preferred.append(cmd)
         else:
             demoted.append(cmd)
-    return {"schema": SCHEMA, "requirements": reqs,
-            "preferred": preferred, "demoted": demoted, "unread": unread}
+    out = {"schema": SCHEMA, "requirements": reqs,
+           "preferred": preferred, "demoted": demoted, "unread": unread}
+    out["rivals"] = rivals(out, str(root)) if isinstance(root, (str, Path)) else []
+    return out
+
+
+_PATHY = re.compile(r"[\w./-]*/[\w./-]+|\b[\w-]+\.(?:txt|json|log|out|csv|md|lock|ya?ml|toml)\b")
+
+
+def output_paths(command, root):
+    """Paths the scripts a command names actually WRITE.
+
+    Looking only for path-shaped literals is not enough, and env_monster
+    showed why: transform.py READS data/raw.json, so that path appeared
+    among its outputs, and fetch.py -- which writes exactly that file --
+    was then judged a rival and excluded, breaking the chain that depended
+    on it.
+
+    A read is not a write. So this looks at the line a path appears on and
+    only counts it where the line performs a write: open(...,"w"), .write(
+    ), os.makedirs, or a shell redirection.
+    """
+    rootp = Path(root)
+    found = set()
+
+    for src in scripts_named(command, rootp):
+        try:
+            text = src.read_text(errors="replace")
+        except OSError:
+            continue
+        for line in text.splitlines():
+            stripped = line.strip()
+            if stripped.startswith("#"):
+                continue
+            is_write = (
+                "write(" in line
+                or re.search(r"""open\([^)]*['"][wax]""", line)
+                or ">>" in line
+                or re.search(r"""\b(?:^|\s)>\s*['"$]""", line)
+                or "makedirs" in line
+            )
+            if not is_write:
+                continue
+            for m in _PATHY.findall(line):
+                found.add(m)
+    return found
+
+
+def rivals(choice: dict, root: str) -> list[list[str]]:
+    """Demoted commands that write where a preferred command writes.
+
+    Excluding every demoted command is wrong, and env_monster proved it:
+    fetch.py does not itself satisfy the oracle, so it was demoted -- but
+    transform.py cannot run without its output. Dropping it broke the chain
+    the system had already learned to build.
+
+        A prerequisite is not a rival.
+
+    A demoted command is only excluded when it competes for the SAME output
+    as a chosen one. That is the actual hazard: two commands writing one
+    file, where running the wrong one first is unrecoverable.
+    """
+    preferred = choice.get("preferred") or []
+    demoted = choice.get("demoted") or []
+    if not preferred or not demoted:
+        return []
+    wanted: set = set()
+    for cmd in preferred:
+        wanted |= output_paths(cmd, root)
+    if not wanted:
+        return []
+    out = []
+    for cmd in demoted:
+        if output_paths(cmd, root) & wanted:
+            out.append(cmd)
+    return out
