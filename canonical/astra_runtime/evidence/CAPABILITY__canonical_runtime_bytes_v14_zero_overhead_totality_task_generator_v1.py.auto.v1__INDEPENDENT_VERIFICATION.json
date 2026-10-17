@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/bytes_v14_zero_overhead_totality_task_generator_v1.py.auto.v1",
- "elapsed_ms": 62.127,
+ "elapsed_ms": 86.936,
  "independent_run_reference": {
-  "github_run_id": 39023877851,
+  "github_run_id": 39024078824,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "bcd077c6-3f73-4408-8896-c4d264cd5197",
+   "jti": "34ca2d6c-2e3e-4be8-9022-b70ef7b37ae8",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39023877851",
+   "run_id": "39024078824",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
