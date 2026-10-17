@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/p3_bound_binary_real_context_membership_v1.py.auto.v1",
- "elapsed_ms": 9.707,
+ "elapsed_ms": 9.34,
  "independent_run_reference": {
-  "github_run_id": 39021134578,
+  "github_run_id": 39021334699,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "2ed1fd7f-5dd7-45c6-b50b-968871790269",
+   "jti": "919b9647-3739-4c47-ad05-d0b75c7f8009",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39021134578",
+   "run_id": "39021334699",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
