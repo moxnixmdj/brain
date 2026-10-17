@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/five_public_bar_observable_target_scope_closure_verifier_v1.py.auto.v1",
- "elapsed_ms": 30.418,
+ "elapsed_ms": 33.023,
  "independent_run_reference": {
-  "github_run_id": 39030913995,
+  "github_run_id": 39031109081,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "9889cf0b-4b77-4d34-985e-7b8c20429e76",
+   "jti": "88f0930c-7b03-4f00-9fe3-f804f8b04706",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39030913995",
+   "run_id": "39031109081",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
