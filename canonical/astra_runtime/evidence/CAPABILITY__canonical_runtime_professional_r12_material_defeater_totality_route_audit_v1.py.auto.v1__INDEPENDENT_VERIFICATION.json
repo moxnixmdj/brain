@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/professional_r12_material_defeater_totality_route_audit_v1.py.auto.v1",
- "elapsed_ms": 36.732,
+ "elapsed_ms": 22.313,
  "independent_run_reference": {
-  "github_run_id": 38990384530,
+  "github_run_id": 38990600963,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "8e132f47-4433-4f92-8640-8b9582f13089",
+   "jti": "d6208fa6-3f1f-4898-8557-39402422df3f",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "38990384530",
+   "run_id": "38990600963",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
