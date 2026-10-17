@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/current_26_zero_reality_frontier_v1.py.auto.v1",
- "elapsed_ms": 37.762,
+ "elapsed_ms": 39.815,
  "independent_run_reference": {
-  "github_run_id": 38997789661,
+  "github_run_id": 38997987262,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "8762e854-4017-42fe-97c9-bc1af5656a40",
+   "jti": "6bc1bc65-a4b8-4ecb-b11d-4cd7ebb6df34",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "38997789661",
+   "run_id": "38997987262",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
