@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/professional_quality_leaf_binder_v1.py.auto.v1",
+ "elapsed_ms": 64.149,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/professional_quality_leaf_binder_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/professional_quality_leaf_binder_v1.py",
+ "module_sha256": "a1f0a3fcdc362968d4e50e7a9412dbcb47e76a35f97c40af658cec1d23d91070",
+ "observed": {
+  "pass": false,
+  "returncode": 0,
+  "status": "OPEN__DOMAIN_LEAVES_OR_EVIDENCE_FRESHNESS_REMAIN"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_leaf_binder_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 21,
+ "result_sha256": "e957d1ef0f2afa988dfd988128886ab6f2ecb293aa75cdda0438175d7432980b",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/verify_terminal_scheduling_v12_candidate_v1.py.auto.v1",
+ "elapsed_ms": 29.386,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/verify_terminal_scheduling_v12_candidate_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/verify_terminal_scheduling_v12_candidate_v1.py",
+ "module_sha256": "f97e38a3d7d2d0d9d83022fc55fa6617b3b1af2c72bd31e4117aa76ff2324f86",
+ "observed": {
+  "pass": false,
+  "returncode": 0,
+  "status": "FAIL_CLOSED__SOURCE_BLOB_DRIFT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_verify_terminal_scheduling_v12_candidate_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 7,
+ "result_sha256": "a020f91680c0617c7af6fba4ac298bdbdcb5e6eb381336eec6d41c8599b1d1e4",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

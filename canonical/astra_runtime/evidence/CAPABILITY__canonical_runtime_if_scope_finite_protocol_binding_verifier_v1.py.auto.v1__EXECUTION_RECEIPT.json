@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/if_scope_finite_protocol_binding_verifier_v1.py.auto.v1",
+ "elapsed_ms": 48.137,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/if_scope_finite_protocol_binding_verifier_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/if_scope_finite_protocol_binding_verifier_v1.py",
+ "module_sha256": "64086d2b4667777e4d924dec0529d5e00dfdd28b14b49825387e9c0df0a058b3",
+ "observed": {
+  "pass": true,
+  "returncode": 0
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_if_scope_finite_protocol_binding_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 12,
+ "result_sha256": "c90e6d138daf94cc68358ad9b22e83d083a6086a610b30c795f0e640f6d7eebc",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

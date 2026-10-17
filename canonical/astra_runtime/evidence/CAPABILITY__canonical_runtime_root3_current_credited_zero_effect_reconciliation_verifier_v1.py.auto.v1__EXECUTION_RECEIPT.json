@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/root3_current_credited_zero_effect_reconciliation_verifier_v1.py.auto.v1",
+ "elapsed_ms": 24.925,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/root3_current_credited_zero_effect_reconciliation_verifier_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/root3_current_credited_zero_effect_reconciliation_verifier_v1.py",
+ "module_sha256": "090f92820fb7b000cfdbfebeecfc58ffec3aefc3b0f17032c6b3e42d8584a37a",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__CURRENT_CREDITED_ROOT3_EFFECT_DRIVER_GAP_DELETED__FINAL_D_PRESERVED_OPEN"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_root3_current_credited_zero_effect_reconciliation_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 11,
+ "result_sha256": "b88638caf78271a35110a00b1a5012777b0e4b755ecce456468813b31f8deed2",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

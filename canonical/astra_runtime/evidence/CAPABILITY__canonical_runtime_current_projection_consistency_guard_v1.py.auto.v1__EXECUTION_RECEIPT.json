@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/current_projection_consistency_guard_v1.py.auto.v1",
+ "elapsed_ms": 36.404,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/current_projection_consistency_guard_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/current_projection_consistency_guard_v1.py",
+ "module_sha256": "45bc3e5fa223975d99c6b23d1df22f2b99eb93e742f30f1808de53a496057689",
+ "observed": {
+  "pass": true,
+  "returncode": 0
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_projection_consistency_guard_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 3,
+ "result_sha256": "85b92aac53b0036812083b237416601819c9926e268d3a099e2b1a15590055a5",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
