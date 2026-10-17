@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/professional_quality_p1_router_v7.py.auto.v1",
- "elapsed_ms": 5.39,
+ "elapsed_ms": 3.592,
  "independent_run_reference": {
-  "github_run_id": 39011029030,
+  "github_run_id": 39011206507,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "7843023b-b259-4ff2-bbb3-514b51c78e77",
+   "jti": "d08ba1c1-7699-4be7-bef4-a17341c6c7dd",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39011029030",
+   "run_id": "39011206507",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
