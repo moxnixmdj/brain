@@ -1,0 +1,32 @@
+{
+ "capability_id": "canonical/runtime/authority_epoch_guard_v1.py.auto.v1",
+ "elapsed_ms": 93.719,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/authority_epoch_guard_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/authority_epoch_guard_v1.py",
+ "module_sha256": "27f4e1045c87469fc3e59794c02ba3eb4262a15423f9babfc84e7e9debb7529c",
+ "observed": {
+  "returncode": 0
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_authority_epoch_guard_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 4,
+ "result_sha256": "781b878565c0555352fb58a05c9dac3e8ed82cf205eddc6e38c1c4d26323770f",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

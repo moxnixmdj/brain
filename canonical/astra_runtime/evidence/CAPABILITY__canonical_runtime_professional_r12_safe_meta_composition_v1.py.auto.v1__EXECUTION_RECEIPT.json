@@ -1,0 +1,26 @@
+{
+ "capability_id": "canonical/runtime/professional_r12_safe_meta_composition_v1.py.auto.v1",
+ "elapsed_ms": 0.458,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/professional_r12_safe_meta_composition_v1.py",
+ "module_sha256": "3ac4a8115e0860a382cab80af7ff033bdc569cdee0eeaa2590182d6ef987ec1d",
+ "observed": {
+  "status": "SAFE_NONPOSITIVE_FAIL_CLOSED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_r12_safe_meta_composition_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 19,
+ "result_sha256": "ed9eaab9597b105b0ec291cd6dc4dbc7e742635edf28f1662e0ae115ba8621c1",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

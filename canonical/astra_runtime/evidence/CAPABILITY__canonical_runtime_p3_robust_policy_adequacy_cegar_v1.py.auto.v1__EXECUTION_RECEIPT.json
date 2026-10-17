@@ -1,0 +1,27 @@
+{
+ "capability_id": "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py.auto.v1",
+ "elapsed_ms": 0.657,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py",
+ "module_sha256": "9b8d8cc1b40d267d85235c76f204afcc02580ca5776bdda56970640980a55edd",
+ "observed": {
+  "pass": false,
+  "status": "FAIL_CLOSED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_robust_policy_adequacy_cegar_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 12,
+ "result_sha256": "809561ac216126b24678d8109a2f1bd8125691ad0f063f5c4fb5c5300b92dae7",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

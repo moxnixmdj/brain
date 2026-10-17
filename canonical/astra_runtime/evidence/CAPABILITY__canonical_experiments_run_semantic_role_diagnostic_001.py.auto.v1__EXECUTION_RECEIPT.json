@@ -1,0 +1,32 @@
+{
+ "capability_id": "canonical/experiments/run_semantic_role_diagnostic_001.py.auto.v1",
+ "elapsed_ms": 1282.924,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/experiments/run_semantic_role_diagnostic_001.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/experiments/run_semantic_role_diagnostic_001.py",
+ "module_sha256": "0a2863eb95ace9f8934292ea0628b5f3f581191bd9b7675b1c28396206f46f33",
+ "observed": {
+  "returncode": 0
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_experiments_run_semantic_role_diagnostic_001.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 13,
+ "result_sha256": "83d825402920e911ff46ffe4b0f4c41982456cbb560cda749df22f2e5959e605",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

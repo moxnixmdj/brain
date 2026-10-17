@@ -1,0 +1,27 @@
+{
+ "capability_id": "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v1.py.auto.v1",
+ "elapsed_ms": 1073.876,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v1.py",
+ "module_sha256": "7ae7029b3999d7d1d7883e8b343a30eef64715b7981c147c7f85e5b4a36678f1",
+ "observed": {
+  "pass": true,
+  "status": "PASS__CURRENT_O_REUSE_TRANSMUTATION_DISCOVERY"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-120f25af",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_escape_o_reuse_transmutation_bridge_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 24,
+ "result_sha256": "d896a5a53458731d51df95bf212515a9b146e73344fc33bdb7cd066bd843ee38",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
