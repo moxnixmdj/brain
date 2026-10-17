@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_legacy15_joint_candidate_generator_v1.py.auto.v1",
- "elapsed_ms": 5.41,
+ "elapsed_ms": 5.396,
  "independent_run_reference": {
-  "github_run_id": 38995964525,
+  "github_run_id": 38996171002,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "96cf8709-489f-4068-9c18-a811ee7d136a",
+   "jti": "8c8cacb5-45ef-410e-b930-82a8d150a499",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "38995964525",
+   "run_id": "38996171002",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
