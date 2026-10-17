@@ -235,6 +235,12 @@ def execute_chain(chain: Sequence[str], root: str,
     """
     bindings = dict(bindings or {})
     steps = []
+    # Linear pipeline: when a step writes an artifact to `output_path`, that
+    # path is the input the next step was built to consume -- even though the
+    # templates name the slots differently (`extraction_path` vs the provider
+    # token).  We route the artifact that was actually produced; we never
+    # fabricate one.
+    last_output = None
     for cid in chain:
         try:
             entry, fn = _adapter(cid)
@@ -243,6 +249,13 @@ def execute_chain(chain: Sequence[str], root: str,
                           "reason": f"{type(exc).__name__}: {exc}"})
             break
         args = _bind_args(cid, entry, bindings)
+        if last_output is not None:
+            for key, typ in COMPOSER.signature(cid).items():
+                if typ == "PATH_FILE" and not str(args.get(key, "")).endswith(".json"):
+                    cur = args.get(key)
+                    if not isinstance(cur, str) or (
+                            cur.startswith("${input.") or not cur):
+                        args[key] = last_output
         errs = COMPOSER.call_errors(cid, args)
         if errs:
             steps.append({"capability_id": cid, "status": "TYPE_ERROR",
@@ -256,6 +269,10 @@ def execute_chain(chain: Sequence[str], root: str,
             break
         if isinstance(out, Mapping):
             bindings.update({k: v for k, v in out.items() if not k.startswith("_")})
+            for tok in (entry.get("provides") or []):
+                bindings[tok] = out.get("output_path")
+        if isinstance(args.get("output_path"), str):
+            last_output = args["output_path"]
         steps.append({"capability_id": cid, "status": "EXECUTED",
                       "result_keys": sorted(out) if isinstance(out, Mapping) else None})
     return {"chain": list(chain), "steps": steps,
