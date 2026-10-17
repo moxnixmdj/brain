@@ -85,6 +85,20 @@ def entrypoints(root: str, limit: int = _MAX_ENTRYPOINTS) -> list[str]:
         except Exception:
             pass
 
+    # Python projects advertise their runnable commands here. Without this,
+    # walking into a pyproject-only project surfaced NO declared commands --
+    # an entire class of environment was invisible.
+    pyproject = rootp / "pyproject.toml"
+    if pyproject.is_file():
+        try:
+            import tomllib
+            data = tomllib.loads(pyproject.read_text(errors="replace"))
+            for _name, _target in (((data.get("project") or {})
+                                    .get("scripts") or {}).items()):
+                out.append("python:" + str(_target))
+        except Exception:
+            pass
+
     # Executable scripts this project ships.
     for sub in ("scripts", "bin", "canonical/runtime", "tools"):
         d = rootp / sub
@@ -122,6 +136,13 @@ def entrypoint_commands(root: str) -> list[list[str]]:
             cmds.append(["npm", "run", "--silent", name])
         elif kind == "run":
             cmds.append(["sh", name])
+        elif kind == "python":
+            # name is "module:function" as declared by the project.
+            mod, _, fn = name.partition(":")
+            if mod:
+                cmds.append(["python3", "-c",
+                             "import %s; %s.%s()" % (mod, mod, fn)
+                             if fn else "import %s" % mod])
     return cmds
 
 
