@@ -46,8 +46,25 @@ def goal_tokens(goal: str) -> list[str]:
     return [w for w in words if w not in _STOP and len(w) > 1][:12]
 
 
-def verify(goal: str, root: str, before: set, after: set) -> dict:
-    """Did the goal actually get met? Ask separately from scoring."""
+def verify(goal: str, root: str, before: set, after: set,
+           produces: dict | None = None) -> dict:
+    """Did the goal actually get met? Ask separately from scoring.
+
+    Two routes to an answer:
+
+    LEXICAL  the artifact's own name contains a goal word. Fails when the
+             environment names things differently -- a report saved as
+             summary.txt matches nothing.
+
+    EVIDENCE the environment declares its own vocabulary. If a task is
+             named after the goal, whatever that task demonstrably PRODUCED
+             is the goal artifact, whatever the file is called. The link is
+             observed, not guessed from a synonym list.
+
+    The second is the fix for lexical brittleness, and it needs no model and
+    no hardcoded vocabulary -- it reads the connection out of the place
+    itself. Bringing a synonym list would only work for words I thought of.
+    """
     tokens = goal_tokens(goal)
     new = sorted(after - before)
     if not tokens:
@@ -55,11 +72,31 @@ def verify(goal: str, root: str, before: set, after: set) -> dict:
     if not new:
         return {"verified": False, "reason": "NOTHING_PRODUCED",
                 "new_paths": []}
-    hits = [p for p in new
-            if any(t in p.lower() for t in tokens)]
-    return {"verified": bool(hits),
-            "reason": "GOAL_ARTIFACT_FOUND" if hits else "NO_MATCHING_ARTIFACT",
-            "matching": hits[:10], "new_paths": new[:10],
+
+    hits = [p for p in new if any(t in p.lower() for t in tokens)]
+    if hits:
+        return {"verified": True, "reason": "GOAL_ARTIFACT_FOUND",
+                "route": "lexical", "matching": hits[:10],
+                "new_paths": new[:10], "goal_tokens": tokens}
+
+    # Route two: a task named after the goal tells us what it produced.
+    bridged, via = [], None
+    for cmd, paths in (produces or {}).items():
+        key = " ".join(cmd).lower() if isinstance(cmd, (list, tuple)) \
+            else str(cmd).lower()
+        if any(t in key for t in tokens):
+            for path in paths:
+                if path in new:
+                    bridged.append(path)
+                    via = key
+    if bridged:
+        return {"verified": True, "reason": "GOAL_ARTIFACT_FOUND",
+                "route": "environment_evidence", "via_command": via,
+                "matching": sorted(set(bridged))[:10],
+                "new_paths": new[:10], "goal_tokens": tokens}
+
+    return {"verified": False, "reason": "NO_MATCHING_ARTIFACT",
+            "route": None, "matching": [], "new_paths": new[:10],
             "goal_tokens": tokens}
 
 
@@ -87,7 +124,15 @@ def run(goal: str, root: str, binary_limit: int = 0,
                             interaction_aware=True,
                             compose_aware=True)
     after = _snapshot(root)
-    check = verify(goal, root, before, after)
+    produces = {}
+    try:
+        import interaction_v1 as IA
+        import discover_v1 as DISCOVER
+        cmds = DISCOVER.candidates(root, binary_limit=binary_limit)
+        produces = IA.analyze(root, cmds).get("produces") or {}
+    except Exception:
+        produces = {}
+    check = verify(goal, root, before, after, produces=produces)
     return {"schema": SCHEMA,
             "goal": goal,
             "goal_tokens": tokens,
