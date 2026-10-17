@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/terminal_frontier_factorizer_v3_candidate.py.auto.v1",
- "elapsed_ms": 23.965,
+ "elapsed_ms": 22.824,
  "independent_run_reference": {
-  "github_run_id": 39041645551,
+  "github_run_id": 39041898983,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "68dbecb2-ea3e-4d74-ac6f-e1a4848314e9",
+   "jti": "b3ed9f99-fa09-44a1-83fe-7dca0f42f2cc",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39041645551",
+   "run_id": "39041898983",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
