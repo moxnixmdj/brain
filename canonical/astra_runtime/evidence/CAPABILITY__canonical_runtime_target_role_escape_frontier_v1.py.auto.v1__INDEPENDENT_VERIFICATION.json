@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/target_role_escape_frontier_v1.py.auto.v1",
- "elapsed_ms": 40.576,
+ "elapsed_ms": 33.211,
  "independent_run_reference": {
-  "github_run_id": 39050561741,
+  "github_run_id": 39050805816,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "61185688-8070-4046-83e5-e5d4adc00981",
+   "jti": "a7ec2959-72c3-4db8-bdfd-b6238b1bef69",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39050561741",
+   "run_id": "39050805816",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
