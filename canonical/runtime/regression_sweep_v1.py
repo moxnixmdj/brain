@@ -125,13 +125,15 @@ def main() -> int:
         failures += 1
 
     failures += attested_state_checks()
-    total = len(CASES) + browser_cases + _ATTESTED_CASES
+    failures += anytime_validity_checks()
+    total = len(CASES) + browser_cases + _ATTESTED_CASES + _ANYTIME_CASES
 
     print("\n%d/%d as expected" % (total - failures, total))
     return 1 if failures else 0
 
 
 _ATTESTED_CASES = 4
+_ANYTIME_CASES = 3
 
 
 def attested_state_checks() -> int:
@@ -198,6 +200,53 @@ def attested_state_checks() -> int:
               % ("PASS" if not other else "FAIL", "attested",
                  "rejected" if not other else "ACCEPTED",
                  "a receipt for one question is not an answer to another"))
+    return bad
+
+
+def anytime_validity_checks() -> int:
+    """The gate that decides what counts as an improvement must itself hold.
+
+    Two things are guarded, and the first is the strange one: that the
+    OLD gate is measurably broken. If a future change made paired-two-
+    sigma start behaving under peeking, this case would fail -- which is
+    the point, because it means the number below is being re-measured
+    rather than remembered.
+    """
+    print()
+    try:
+        from canonical.runtime import anytime_validity_v1 as V
+    except ImportError:
+        import os as _o
+        import sys as _s2
+        _s2.path.insert(0, _o.path.dirname(_o.path.abspath(__file__)))
+        import anytime_validity_v1 as V
+
+    trials = 600
+    bad = 0
+    rows = [
+        # (label, measured, must be <=, why)
+        ("shipped gate, expected noise",
+         V.false_positive_rate(lambda d: V.betting(d), 1.0, trials, 30),
+         0.05, "holds its promise where it was tuned"),
+        ("shipped gate, 4x that noise",
+         V.false_positive_rate(lambda d: V.betting(d), 4.0, trials, 30),
+         0.05, "holds it on a world it was never tuned for"),
+    ]
+    for label, rate, ceiling, why in rows:
+        ok = rate <= ceiling
+        bad += 0 if ok else 1
+        print("%-8s %-16s %-21s %s"
+              % ("PASS" if ok else "FAIL", "anytime", "%.1f%% false positives"
+                 % (rate * 100), why))
+
+    # The counter-example: the old gate, measured so the claim stays honest.
+    broken = V.false_positive_rate(lambda d: V.paired_two_sigma(d), 1.0, trials, 30)
+    ok = broken > 0.25
+    bad += 0 if ok else 1
+    print("%-8s %-16s %-21s %s"
+          % ("PASS" if ok else "FAIL", "anytime", "%.1f%% false positives"
+             % (broken * 100),
+             "the old gate is measurably broken under peeking -- as claimed"))
     return bad
 
 
