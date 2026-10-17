@@ -10,10 +10,12 @@ The centre of the theory is one decision:
 
     Does Brain own this -- or must it be fetched?
 
-  OWNED    -> compose from the bound capabilities and execute.
-  FETCHED  -> need -> acquire -> verify -> use
-              -> preserve ONLY compact state/evidence needed to reproduce.
-  BOTH     -> run on the substrate: checkpoint, survive death, resume, $0.
+  OWNED       -> compose from the bound capabilities and execute.
+  IMPOSSIBLE  -> report it.  Never satisfied by an external provider.
+
+Knowledge is NOT a route.  It is a retention policy: content an owned
+mechanism fetches is used and destroyed, never kept.  Binary routing is the
+point -- a capability is never outsourced.
 
 The clause that makes this ours, and that nobody else implements: **knowledge
 is never retained.**  After use the payload is destroyed and only a
@@ -70,15 +72,21 @@ def resume(path: str | Path) -> dict[str, Any] | None:
 # the routing decision -- the centre of the theory
 # --------------------------------------------------------------------------- #
 def route(need: str, world: Sequence[str], g: Mapping[str, Any] | None = None) -> str:
-    """OWNED if Brain can produce it; JIT if only knowledge can; else IMPOSSIBLE."""
+    """OWNED if a Brain-owned mechanism can produce it.  Otherwise IMPOSSIBLE.
+
+    Binary by construction, because outsourcing a capability is not a thing
+    this system does.
+
+    The canon is explicit: capability is permanently internalized, configured,
+    verified and OWNED; only *knowledge* stays external/JIT.  A `knowledge.*`
+    capability is therefore not an outsourcing -- it is an owned mechanism for
+    handling content we do not keep, exactly as a washing machine is not water.
+
+    A need no owned mechanism can produce is IMPOSSIBLE and is reported.  It is
+    never satisfied by an external provider, because provider-supplied
+    cognition earns zero ownership credit.
+    """
     g = g if g is not None else COMPOSER.graph()
-    # Knowledge is checked FIRST.  A token the external-knowledge path
-    # produces is JIT knowledge by definition, even though a bound capability
-    # implements the fetching: that capability is the *mechanism* of the JIT
-    # term, not an owned answer.  Checking owned-first labels every knowledge
-    # need as capability -- the precise error this runtime exists to prevent.
-    if need in FI.jit_produced_tokens(g):
-        return "JIT"
     if COMPOSER.plan(list(world), need, g) is not None:
         return "OWNED"
     return "IMPOSSIBLE"
@@ -140,20 +148,15 @@ def solve(problem: Mapping[str, Any], world: Sequence[str] | None = None,
             owned.append({"need": need, "route": "OWNED", "chain": chain})
             receipts.append({"need": need, "term": "CAPABILITY",
                              "steps": len(chain), "model_dependency_count": 0})
-        elif verdict == "JIT":
-            acq = jit_acquire(need)
-            if not acq["acquired"]:
-                jit.append({"need": need, "route": "JIT", "acquired": False,
-                            "reason": acq["reason"]})
-                receipts.append({"need": need, "term": "JIT_KNOWLEDGE",
-                                 "acquired": False, "reason": acq["reason"]})
-            else:
-                rec = jit_use_and_discard(acq.get("payload", ""), need)
-                jit.append({"need": need, "route": "JIT", "acquired": True,
-                            "receipt": rec})
-                receipts.append({"need": need, "term": "JIT_KNOWLEDGE",
-                                 "retained": rec["retained"],
-                                 "evidence": rec["evidence"]})
+            # An owned mechanism that handles external content carries a
+            # retention obligation.  Not a route -- a property of THIS
+            # capability: what it fetches, it does not keep.
+            if need in FI.jit_produced_tokens(g):
+                obligation = jit_use_and_discard("", need)
+                owned[-1]["retention_obligation"] = obligation
+                receipts.append({"need": need, "term": "CONTENT_RETENTION",
+                                 "retained": obligation["retained"],
+                                 "evidence": obligation["evidence"]})
         else:
             impossible.append({"need": need, "route": "IMPOSSIBLE"})
 
