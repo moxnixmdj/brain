@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/observable_policy_cover_executor_v1.py.auto.v1",
- "elapsed_ms": 0.444,
+ "elapsed_ms": 0.436,
  "independent_run_reference": {
-  "github_run_id": 39065614618,
+  "github_run_id": 39065854072,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "11352fca-606d-4373-8d79-f91cdd7e7e5d",
+   "jti": "d35ae1f6-8886-4867-9370-bcef9aa27bbf",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39065614618",
+   "run_id": "39065854072",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
