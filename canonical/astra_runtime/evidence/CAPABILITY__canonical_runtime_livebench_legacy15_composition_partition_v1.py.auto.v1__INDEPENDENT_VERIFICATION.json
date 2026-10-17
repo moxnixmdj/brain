@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_legacy15_composition_partition_v1.py.auto.v1",
- "elapsed_ms": 54.67,
+ "elapsed_ms": 95.87,
  "independent_run_reference": {
-  "github_run_id": 39052545329,
+  "github_run_id": 39052770568,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "889aa97a-8e5b-46d4-bd91-0fd86bff09a4",
+   "jti": "6def8c59-0038-403d-b9c4-7f76e431d5e2",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39052545329",
+   "run_id": "39052770568",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
