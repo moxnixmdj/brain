@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_if_score_bound_v1.py.auto.v1",
- "elapsed_ms": 43.331,
+ "elapsed_ms": 42.475,
  "independent_run_reference": {
-  "github_run_id": 39051023245,
+  "github_run_id": 39051259977,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "c1406695-5657-4494-b23d-c1fcf5a2f155",
+   "jti": "4833266e-7e7b-4d09-8657-db4badfc0961",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39051023245",
+   "run_id": "39051259977",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
