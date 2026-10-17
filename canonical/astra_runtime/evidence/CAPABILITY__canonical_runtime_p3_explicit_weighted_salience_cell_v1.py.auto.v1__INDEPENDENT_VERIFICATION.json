@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/p3_explicit_weighted_salience_cell_v1.py.auto.v1",
- "elapsed_ms": 3.038,
+ "elapsed_ms": 3.786,
  "independent_run_reference": {
-  "github_run_id": 39074957018,
+  "github_run_id": 39075169627,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "bb21c976-d432-4678-8b72-29fd79a21764",
+   "jti": "5c25bf97-7f2c-4c1f-978e-580f8dd4feaa",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39074957018",
+   "run_id": "39075169627",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
