@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/global_retrieval_authority_guard_v1.py.auto.v1",
- "elapsed_ms": 35.822,
+ "elapsed_ms": 36.917,
  "independent_run_reference": {
-  "github_run_id": 38989061935,
+  "github_run_id": 38989287732,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "65c2d0b5-739d-4f25-949d-ca5303f60809",
+   "jti": "3b7cd65a-68f0-4f35-90b1-ddecf936f43e",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "38989061935",
+   "run_id": "38989287732",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
