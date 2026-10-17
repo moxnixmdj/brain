@@ -85,6 +85,14 @@ def main() -> int:
     # and a machine without one should not be told it is broken.
     browser_cases = 0
     try:
+        # The browser driver lives outside the system interpreter, because
+        # PEP 668 refuses to install into it. Say where, rather than
+        # reporting the browser missing when it is merely unimportable.
+        import os as _osb
+        for _p in ("/home/user/.pylibs",
+                   _osb.path.expanduser("~/.pylibs")):
+            if _osb.path.isdir(_p) and _p not in sys.path:
+                sys.path.insert(0, _p)
         import browser_v1 as B
         ok, why = B.available()
         if not ok:
@@ -107,8 +115,9 @@ def main() -> int:
             print("%-8s %-16s loaded=%-3s %s"
                   % ("PASS" if ok1 else "FAIL", "browser_page", loaded, title[:48]))
 
+            _build = _os.environ.get("BRAIN_BROWSER_BUILD") or "/tmp/browser_build"
             env = dict(_os.environ,
-                       NODE_PATH=_os.path.expanduser("~/browser_build/node_modules"))
+                       NODE_PATH=_os.path.join(_build, "node_modules"))
             p = B.state("https://pypi.org")
             els = (p.get("data") or {}).get("elements") or []
             # The accessible name lives in aria/placeholder/name/text

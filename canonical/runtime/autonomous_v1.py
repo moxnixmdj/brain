@@ -420,6 +420,27 @@ def run(goal: str, root: str, binary_limit: int = 0,
                             iterations=iterations,
                             interaction_aware=True,
                             compose_aware=True, exclude=exclude)
+    # NOTHING YET? GIVE THE DECLARED TASKS THE SAME REPAIR.
+    #
+    # A command that fails because the directory it writes into does not
+    # exist produces no files at all, and a loop that only asks whether
+    # files appeared cannot tell that apart from a command that genuinely
+    # did nothing. Before concluding the goal was not met, the tasks this
+    # environment declares are run through the same repair path the
+    # validators already get. If they still produce nothing, "nothing was
+    # produced" is a fact rather than a guess.
+    try:
+        _now = _snapshot(root)
+        _touched = bool(set(_now) - set(before)) or any(
+            before[p] != _now[p] for p in set(before) & set(_now))
+        if not _touched:
+            import repair_v1 as _RP
+            for _t in (tasks or []):
+                _c = _t.get("command")
+                if _c:
+                    _RP.attempt(_c, root, timeout=180)
+    except Exception:
+        pass
     after = _snapshot(root)
     produces = {}
     try:

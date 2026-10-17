@@ -18,6 +18,7 @@ against signatures and the repair is deterministic.
 """
 from __future__ import annotations
 
+import os
 import re
 import shutil
 import subprocess
@@ -283,6 +284,24 @@ def _tests_use(root: str, module: str) -> bool:
     return False
 
 
+def _parent_dir_inside(path_text: str, root: str) -> str:
+    """The directory a missing path sits in, if creating it is in scope.
+
+    Refuses absolute paths and anything that climbs out of the project.
+    The repair is meant to be a directory the project owns, not a licence
+    to create directories across the filesystem.
+    """
+    if not path_text or not root:
+        return ""
+    text = path_text.strip().strip("'\"")
+    if not text or os.path.isabs(text) or ".." in Path(text).parts:
+        return ""
+    parent = os.path.dirname(text)
+    if not parent or Path(parent).is_absolute():
+        return ""
+    return parent
+
+
 def diagnose(command: str, output: str, exit_code: int, root: str = "") -> dict:
     """What went wrong, and what would fix it here.
 
@@ -307,6 +326,26 @@ def diagnose(command: str, output: str, exit_code: int, root: str = "") -> dict:
                 out["reason"] = f"python module {what} is not installed"
             else:
                 out["reason"] = f"module {what} missing and no pip to install it"
+            return out
+
+        if kind == "no_such_file":
+            # A path that does not exist is usually the directory the
+            # command was about to write into. Creating it is idempotent,
+            # cheap and cannot destroy anything; if the path was an input
+            # rather than an output, the retry fails exactly as before and
+            # no credit is given.
+            #
+            # Scoped to paths inside the project, and to relative ones.
+            # Creating directories anywhere else on the machine would be a
+            # side effect out of all proportion to the failure.
+            parent = _parent_dir_inside(what, root)
+            if parent:
+                out["setup"] = f"mkdir -p {parent}"
+                out["reason"] = (f"the directory {parent} does not exist; "
+                                 f"the command writes into it")
+            else:
+                out["reason"] = (f"path {what!r} is missing and is not a "
+                                 f"directory inside the project")
             return out
 
         if kind == "missing_node_module":
