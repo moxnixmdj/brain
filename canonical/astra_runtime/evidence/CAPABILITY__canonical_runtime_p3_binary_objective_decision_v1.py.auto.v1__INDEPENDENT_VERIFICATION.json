@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/p3_binary_objective_decision_v1.py.auto.v1",
- "elapsed_ms": 0.356,
+ "elapsed_ms": 0.264,
  "independent_run_reference": {
-  "github_run_id": 39048735658,
+  "github_run_id": 39048978005,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "26c91edc-c378-4862-958c-375513908e22",
+   "jti": "6f00cab4-c274-423a-80cf-2c4ced7e51a1",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39048735658",
+   "run_id": "39048978005",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
