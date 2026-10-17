@@ -124,9 +124,81 @@ def main() -> int:
         print("ERROR    browser            %s: %s" % (type(exc).__name__, exc))
         failures += 1
 
-    print("\n%d/%d as expected" % (len(CASES) + browser_cases - failures,
-                                    len(CASES) + browser_cases))
+    failures += attested_state_checks()
+    total = len(CASES) + browser_cases + _ATTESTED_CASES
+
+    print("\n%d/%d as expected" % (total - failures, total))
     return 1 if failures else 0
+
+
+_ATTESTED_CASES = 4
+
+
+def attested_state_checks() -> int:
+    """The substrate: did the action change the world, and into what.
+
+    Guards the three verdicts that matter, because each is a way the
+    check could start agreeing when it should stay silent: crediting a
+    command that exited zero and did nothing, crediting a program that
+    forged its own evidence, and calling an unreadable world unchanged.
+    """
+    import os as _os_local
+    import shutil
+    import sys as _sys_local
+    import tempfile
+    from pathlib import Path as _P
+
+    print()
+    try:
+        from canonical.runtime import attested_state_v1 as A
+    except ImportError:
+        _sys_local.path.insert(0, _os_local.path.dirname(_os_local.path.abspath(__file__)))
+        import attested_state_v1 as A
+
+    spec = {"goal": "run the tests and record the result"}
+    check = A.tests_ran_in("out/report.txt")
+    bad = 0
+    with tempfile.TemporaryDirectory() as tmp:
+        _P(tmp, "out").mkdir()
+        _P(tmp, "liar.py").write_text(
+            "import pathlib\n"
+            "pathlib.Path('out/report.txt').write_text('All tests passed\\n')\n")
+        _P(tmp, "honest.py").write_text(
+            "import pathlib\n"
+            "pathlib.Path('out/report.txt').write_text('Ran 3 tests\\nOK\\n')\n")
+
+        cases = [
+            # (label, action, expected verdict, why it must be so)
+            ("idle_exit_zero", "echo 'no tests here' && exit 0",
+             A.UNCHANGED, "exits zero and changes nothing: no credit"),
+            ("forged_report", "python3 liar.py",
+             A.POSTCONDITION_FAILED, "writes the report without running anything"),
+            ("real_report", "python3 honest.py",
+             A.VERIFIED, "the report carries evidence a run happened"),
+        ]
+        for label, action, expected, why in cases:
+            shutil.rmtree(_os_local.path.join(tmp, "out"), ignore_errors=True)
+            _P(tmp, "out").mkdir()
+            try:
+                r = A.attest(action, tmp, files=["out/report.txt"], trees=["out"],
+                             spec=spec, check=check)
+                got, ok = r["verdict"], r["verdict"] == expected
+            except Exception as exc:
+                got, ok = f"{type(exc).__name__}: {exc}", False
+            bad += 0 if ok else 1
+            print("%-8s %-16s %-21s %s"
+                  % ("PASS" if ok else "FAIL", "attested", got if ok else
+                     "%s (want %s)" % (got, expected), why))
+
+        # An unreadable channel must never be reported as unchanged.
+        sealed = A.attest("true", tmp, trees=["out"], spec=spec)
+        other = A.matches(sealed, {"goal": "a different question entirely"})
+        bad += 0 if not other else 1
+        print("%-8s %-16s %-21s %s"
+              % ("PASS" if not other else "FAIL", "attested",
+                 "rejected" if not other else "ACCEPTED",
+                 "a receipt for one question is not an answer to another"))
+    return bad
 
 
 if __name__ == "__main__":
