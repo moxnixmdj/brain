@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/professional_quality_leaf_binder_v1.py.auto.v1",
- "elapsed_ms": 37.356,
+ "elapsed_ms": 30.778,
  "independent_run_reference": {
-  "github_run_id": 39030498919,
+  "github_run_id": 39030701697,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "5287b3b1-6530-4447-b4a7-1aa673e9db32",
+   "jti": "597f9968-77bf-4e46-8dd6-631dbc43854e",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39030498919",
+   "run_id": "39030701697",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
