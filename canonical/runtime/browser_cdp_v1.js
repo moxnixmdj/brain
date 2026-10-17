@@ -74,6 +74,21 @@ class Browser {
   text(sel) {
     return this.eval(`document.querySelector(${JSON.stringify(sel)})?.textContent`);
   }
+  // Screenshots work over CDP even though the --screenshot CLI hangs:
+  // same compositing problem, different route past it. fromSurface:false
+  // captures from the renderer rather than waiting on a compositor frame.
+  async viewport(w, h) {
+    await this.send('Emulation.setDeviceMetricsOverride',
+      { width: w, height: h, deviceScaleFactor: 1, mobile: false });
+  }
+  async screenshot(path) {
+    const r = await this.send('Page.captureScreenshot',
+      { format: 'png', fromSurface: false });
+    if (!r.result?.data) throw new Error('screenshot returned no data');
+    const buf = Buffer.from(r.result.data, 'base64');
+    if (path) require('fs').writeFileSync(path, buf);
+    return { bytes: buf.length, path };
+  }
 }
 
 async function connect() {
@@ -106,7 +121,11 @@ async function demo(url) {
   await b.click('#f button[type=submit]');
   out.after_submit = await b.text('#done');
 
-  // 4. content that only exists after an async timer -- the SPA case
+  // 4. a screenshot, so the system can see the page and not just read it
+  await b.viewport(800, 600);
+  out.screenshot = await b.screenshot('/tmp/brain_screenshot.png');
+
+  // 5. content that only exists after an async timer -- the SPA case
   out.late_immediately = await b.text('#late');
   await b.waitFor(`()=>document.querySelector('#late')?.textContent!=='NOT_YET'`,
     5000, 'async content');
