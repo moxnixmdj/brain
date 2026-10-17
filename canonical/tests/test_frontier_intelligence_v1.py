@@ -118,6 +118,25 @@ def test_substrate_reports_a_reason_when_it_is_absent(monkeypatch):
 def test_gap_report_is_internally_consistent():
     r = FI.gap_report([], WORLD)
     assert r["schema"] == FI.SCHEMA
-    assert r["reachable_goals"] > 0
-    assert r["reachable_goals"] + r["blocked_goals"] > 0
+    c = r["counts"]
+    assert c["owned"] > 0
+    assert c["borrowed"] > 0
+    assert c["owned"] == len(r["owned_goals"])
+    assert c["borrowed"] == len(r["borrowed_goals"])
+    assert c["blocked"] == len(r["blocked"])
+    assert not set(r["owned_goals"]) & set(r["borrowed_goals"])
     assert r["substrate"]["available"] is True
+
+
+def test_knowledge_goals_are_borrowed_not_blocked():
+    """Reachable through the JIT path is still reachable -- just not owned."""
+    r = FI.gap_report([], WORLD)
+    assert "knowledge.status.verified" in r["borrowed_goals"]
+    assert "knowledge.status.verified" not in r["blocked"]
+
+
+def test_owned_goals_never_depend_on_external_knowledge():
+    r = FI.gap_report([], WORLD)
+    for goal in r["owned_goals"]:
+        out = FI.solve(goal, WORLD, G)
+        assert out["jit_knowledge"] == [], goal

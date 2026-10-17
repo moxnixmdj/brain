@@ -178,23 +178,38 @@ def solve(
 # what is still missing -- the point of building it
 # --------------------------------------------------------------------------- #
 def gap_report(goals: Sequence[str], world: Sequence[str]) -> dict[str, Any]:
-    """Across every goal worth having: what can we do, and what is missing?"""
+    """Across every goal the graph can name: owned, borrowed, or impossible.
+
+    Three buckets, because they cost different things.  `owned` still runs
+    with every outside model deleted.  `borrowed` needs the external JIT
+    knowledge path, so it stops working the moment the network does.
+    `blocked` is what we genuinely still have to build.
+    """
     g = COMPOSER.graph()
     ext = set(COMPOSER.external_tokens(g))
     supplied = set(world) | ext
-    reachable, blocked = [], {}
-    for goal in sorted(set(g[t]["provides"][0] for t in g if g[t]["provides"])):
+    owned: list[str] = []
+    borrowed: list[str] = []
+    blocked: dict[str, list[str]] = {}
+    for goal in sorted({p for spec in g.values() for p in spec["provides"]}):
         out = solve(goal, sorted(supplied), g)
-        if out["owned_capability"]:
-            reachable.append(goal)
-        else:
+        if not (out["owned_capability"] or out["jit_knowledge"]):
             blocked[goal] = out["unresolved_gaps"]
+        elif out["jit_knowledge"]:
+            borrowed.append(goal)
+        else:
+            owned.append(goal)
     return {
         "schema": SCHEMA,
         "world_supplies": sorted(supplied),
-        "reachable_goals": len(reachable),
-        "blocked_goals": len(blocked),
+        "owned_goals": owned,
+        "borrowed_goals": borrowed,
         "blocked": blocked,
+        "counts": {
+            "owned": len(owned),
+            "borrowed": len(borrowed),
+            "blocked": len(blocked),
+        },
         "substrate": substrate(),
     }
 
