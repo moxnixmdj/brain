@@ -31,6 +31,9 @@ import environment_probe_v1 as PROBE  # noqa: E402
 
 SCHEMA = "PROJECT_BRAIN_EXPLORE_V1"
 
+# Score given to a change that matches nothing being looked for.
+IRRELEVANT_CHANGE = 0.2
+
 
 _PATH_CLAIM = re.compile(r"[\w./-]+\.(?:txt|json|log|out|csv|md|ya?ml|toml|py|sh|html|xml|zip|tar(?:\.gz)?)")
 
@@ -63,13 +66,19 @@ def _score_effect(record: dict, want_tokens: list[str]) -> float:
     # --- did it change the world -------------------------------------------
     state = 0.0
     if record.get("effected_change"):
-        state = 0.5
+        # A change is only worth much if it is the RIGHT change. Previously
+        # ANY change scored a flat 0.5, so writing the wrong file counted as
+        # half-progress toward the goal. Irrelevant mutation is not progress;
+        # it is noise, and sometimes damage. No floor for irrelevance.
         if want_tokens:
             touched = ((record.get("added") or [])
                        + (record.get("modified") or []))
             hits = sum(1 for t in want_tokens
                        if any(t in p.lower() for p in touched))
-            state = 0.5 + 0.5 * (hits / len(want_tokens))
+            state = IRRELEVANT_CHANGE + (1.0 - IRRELEVANT_CHANGE) * (
+                hits / len(want_tokens))
+        else:
+            state = 0.5
     # --- did it teach us something -----------------------------------------
     info = 0.0
     out = (record.get("stdout_tail") or "") + (record.get("stderr_tail") or "")
@@ -85,6 +94,14 @@ def _score_effect(record: dict, want_tokens: list[str]) -> float:
         # -- the liar literally outranked the worker in the adversarial env.
         # So: any path an action claims it touched, that the delta did not
         # observe changing, is an uncorroborated claim. Discount it hard.
+        # A command that FAILED is bearing witness to its own failure, not
+        # to the world. env_hard regressed here: `make build` exited 2 having
+        # changed nothing, but its error text contained "build", so its
+        # information score outranked real work. A non-zero exit discounts
+        # what the output claims -- it is a report of what went wrong.
+        rc = record.get("returncode")
+        if rc not in (0, None):
+            info *= 0.5
         claims = _claimed_paths(out)
         if claims:
             touched = set((record.get("added") or [])
@@ -92,7 +109,16 @@ def _score_effect(record: dict, want_tokens: list[str]) -> float:
             unbacked = [c for c in claims if not any(c in t for t in touched)]
             if unbacked:
                 info *= 0.25
-    return max(state, info)
+    # When the action changed the world, OBSERVED REALITY GOVERNS.
+    # Fall back to information only when nothing was observable (state == 0),
+    # which is exactly the read-only probe case.
+    #
+    # max() was wrong here: the wrong-place task scored state=0.467 for
+    # writing the wrong file, but its output said "published OK", scoring
+    # info=0.667 -- so its own CLAIM outranked what it had demonstrably
+    # done. Same credibility failure as the liar, one layer deeper: it was
+    # not lying, it was just wrong, and the system listened to it anyway.
+    return state if state > 0 else info
 
 
 def explore(root: str, commands: list[list[str]],
