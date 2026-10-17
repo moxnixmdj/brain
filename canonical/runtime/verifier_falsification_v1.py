@@ -189,6 +189,37 @@ def _cases() -> list[tuple[str, str, callable]]:
     add("autonomous_v1._can_fail", "a command wired to exit zero",
         validator_that_cannot_fail)
 
+    # --- properties ----------------------------------------------------
+    def property_vacuous() -> bool:
+        import property_v1 as P
+        with tempfile.TemporaryDirectory() as tmp:
+            # `true` certifies everything and therefore nothing.
+            r = P.score("true", "rows: 3\ntotal: 42\n", workdir=tmp)
+            return bool(r["admissible"])
+
+    def property_rejects_truth() -> bool:
+        import property_v1 as P
+        with tempfile.TemporaryDirectory() as tmp:
+            r = P.score("false", "rows: 3\n", workdir=tmp)
+            return bool(r["admissible"])
+
+    def property_accepts_empty() -> bool:
+        import property_v1 as P
+        with tempfile.TemporaryDirectory() as tmp:
+            # Rejects a corruption marker, so it accepts the good artifact
+            # and also accepts the empty one -- which nothing is about.
+            # Disqualified outright, not merely scored down.
+            r = P.score("! grep -q CORRUPTION artifact.txt",
+                        "rows: 3\n", workdir=tmp)
+            return bool(r["admissible"]) or not r["disqualified"]
+
+    add("property_v1.score", "a property that certifies everything",
+        property_vacuous)
+    add("property_v1.score", "a property that rejects the known-good output",
+        property_rejects_truth)
+    add("property_v1.score", "a property accepting the empty artifact",
+        property_accepts_empty)
+
     # --- grounding claims ---------------------------------------------
     def grounding_missing_file() -> bool:
         import grounding_v1 as G
