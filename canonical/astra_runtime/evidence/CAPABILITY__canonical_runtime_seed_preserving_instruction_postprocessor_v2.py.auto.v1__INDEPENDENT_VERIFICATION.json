@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/seed_preserving_instruction_postprocessor_v2.py.auto.v1",
- "elapsed_ms": 2.062,
+ "elapsed_ms": 2.144,
  "independent_run_reference": {
-  "github_run_id": 39062310054,
+  "github_run_id": 39062559397,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "9a0051be-b2aa-4bd7-8bd9-3e3a869d5c5b",
+   "jti": "e6f7763d-e307-457e-81fd-ff9636572cd2",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39062310054",
+   "run_id": "39062559397",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
