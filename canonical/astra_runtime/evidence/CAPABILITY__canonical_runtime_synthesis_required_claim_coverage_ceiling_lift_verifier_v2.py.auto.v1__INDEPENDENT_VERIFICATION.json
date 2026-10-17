@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/synthesis_required_claim_coverage_ceiling_lift_verifier_v2.py.auto.v1",
- "elapsed_ms": 23.92,
+ "elapsed_ms": 38.728,
  "independent_run_reference": {
-  "github_run_id": 39006083636,
+  "github_run_id": 39006261593,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "bd3b1e19-0c8b-48da-8d6f-02eb23f58568",
+   "jti": "0aeff917-daac-4a85-af6e-4765b989b8a9",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39006083636",
+   "run_id": "39006261593",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
