@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/terminal_minimum_causal_depth_guard_v1.py.auto.v1",
- "elapsed_ms": 31.33,
+ "elapsed_ms": 18.121,
  "independent_run_reference": {
-  "github_run_id": 39042555914,
+  "github_run_id": 39042784814,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "c9ec5dd0-66d8-4fde-953e-cab41ff5a641",
+   "jti": "d1383cb0-16d2-405f-821c-491cc111b507",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39042555914",
+   "run_id": "39042784814",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
