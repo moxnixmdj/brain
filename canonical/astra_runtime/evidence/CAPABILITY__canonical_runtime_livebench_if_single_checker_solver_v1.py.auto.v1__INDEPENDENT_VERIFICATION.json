@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_if_single_checker_solver_v1.py.auto.v1",
- "elapsed_ms": 8.189,
+ "elapsed_ms": 6.956,
  "independent_run_reference": {
-  "github_run_id": 39013727928,
+  "github_run_id": 39013918067,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "29e45794-efcf-4daf-9638-6b4857ed1990",
+   "jti": "da85e88b-cc1e-4734-9e74-abfb6e42b053",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39013727928",
+   "run_id": "39013918067",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
