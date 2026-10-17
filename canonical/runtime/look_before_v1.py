@@ -180,6 +180,12 @@ def output_paths(command, root):
                 continue
             is_write = (
                 "write(" in line
+                # Path(...).write_text(...) and friends are writes too, and
+                # missing them was costly: fake_run.py in env_toolchain
+                # writes out/report.txt this way, so it looked like it wrote
+                # nothing and was free to clobber a correct report.
+                or re.search(r"\.write(?:_text|_lines|_bytes)?\s*\(", line)
+                or re.search(r"\.open\s*\([^)]*['\"][wax]", line)
                 or re.search(r"""open\([^)]*['"][wax]""", line)
                 or ">>" in line
                 or re.search(r"""\b(?:^|\s)>\s*['"$]""", line)

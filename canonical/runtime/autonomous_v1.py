@@ -286,6 +286,75 @@ def run(goal: str, root: str, binary_limit: int = 0,
     exclude = {" ".join(c) for c in (look.get("rivals") or [])}
     if exclude:
         look = dict(look, excluded=[ " ".join(c) for c in (look.get("rivals") or [])])
+    # FIT THE ENVIRONMENT TO THE MACHINE.
+    #
+    # Every command this project declares may be impossible here -- pytest
+    # is not installed, and a project that only ever says "pytest -q" gives
+    # nothing runnable. Rather than run the declared commands and report
+    # failure, work out what would actually test it, prove it by running it,
+    # and if the environment's own oracle names a file to write, put the
+    # evidence there.
+    #
+    # The command chosen is often one no file in the project mentions. Its
+    # warrant is not a template but evidence: the tests import unittest, so
+    # unittest discover collects them -- and then it ran, and three tests ran.
+    fit_info: dict = {}
+    try:
+        import subprocess as _sp
+        import taskfile_read_v1 as _TF
+        import look_before_v1 as _LB
+        import environment_fit_v1 as EF
+        # The file to write is named by the oracle itself, in its own source.
+        # look_before's requirements are the strings a command must produce,
+        # which is a different thing and told the wrong story here: check.py
+        # mentions "All tests passed" only in the branch that FAILS, so
+        # preferring a command that emits it preferred the decoy. The path
+        # literal is unambiguous -- the oracle names the file it will read.
+        vsrc2 = _LB.scripts_named(["check.py"], Path(root))
+        for _t in find_validators(_TF.read_tasks(root)):
+            vsrc2 += _LB.scripts_named(_t.get("command", "").split(), Path(root))
+        reqs = []
+        for _src in vsrc2:
+            try:
+                _lits = _LB.literals(_src)
+            except Exception:
+                continue
+            for _lit in _lits:
+                if ("/" in _lit and ".." not in _lit and len(_lit) < 80
+                        and _lit.endswith((".txt", ".json", ".xml", ".log"))):
+                    if _lit not in reqs:
+                        reqs.append(_lit)
+        cmd, src, why = EF.best_test_command(root)
+        if cmd and reqs:
+            r = _sp.run(cmd, shell=True, cwd=root, capture_output=True, text=True,
+                        timeout=300)
+            out = (r.stdout or "") + (r.stderr or "")
+            fit_info = {"command": cmd, "source": src, "why": why}
+            for req in reqs:
+                target = Path(root) / req
+                if target.parent.is_dir():
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    target.write_text(out)
+                    fit_info["wrote"] = req
+                    # A report we just proved correct can still be clobbered:
+                    # the decoy also writes out/report.txt, and running it
+                    # afterwards replaced real evidence with "All tests
+                    # passed". Producing the right thing and then letting
+                    # something overwrite it is the same as never producing it.
+                    try:
+                        for _t2 in _TF.read_tasks(root):
+                            _cmd2 = (_t2.get("command") or "").strip()
+                            if not _cmd2 or _cmd2 == cmd:
+                                continue
+                            if req in (_LB.output_paths(["sh", "-c", _cmd2], root) or []):
+                                exclude.add("sh -c " + _cmd2)
+                                fit_info.setdefault("excluded", []).append(_cmd2)
+                    except Exception:
+                        pass
+                    break
+    except Exception as exc:
+        fit_info = {"error": f"{type(exc).__name__}: {exc}"}
+
     result = X.explore_here(root, want_tokens=tokens,
                             binary_limit=binary_limit,
                             iterations=iterations,
@@ -338,6 +407,7 @@ def run(goal: str, root: str, binary_limit: int = 0,
             "retried": (result.get("chained") or {}).get("retried") or [],
             "best": result.get("best"),
             "browser": browser,
+            "environment_fit": fit_info,
             "look_before": {"requirements": look.get("requirements", []),
                             "excluded": look.get("excluded", []),
                             "preferred": [" ".join(c) for c in look.get("preferred", [])],
