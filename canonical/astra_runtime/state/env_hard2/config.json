@@ -1,0 +1,3 @@
+{ "description": "run make deploy to ship",
+  "notes": "the ci does python3 ops/deep/deeper/publish.py",
+  "version": "2.1.0" }

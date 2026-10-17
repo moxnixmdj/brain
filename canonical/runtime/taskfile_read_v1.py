@@ -49,19 +49,51 @@ _EXTRA_DIRS = (".ci", ".github/workflows", ".buildkite", ".circleci",
                "scripts", "bin", "tools", "tasks", "ci")
 
 
+_TOOLS = {"python3", "python", "sh", "bash", "zsh", "dash", "make", "gmake",
+          "npm", "npx", "yarn", "pnpm", "poetry", "pipenv", "pip", "cargo",
+          "go", "mvn", "gradle", "bundle", "rake", "just", "docker",
+          "docker-compose", "terraform", "ansible", "ruby", "perl", "node",
+          "deno", "echo", "curl", "wget", "git", "sed", "awk", "cp", "mv",
+          "rm", "mkdir", "touch", "tar", "zip", "unzip", "pytest", "tox",
+          "black", "ruff", "mypy", "flake8", "uv"}
+_VERSIONISH = re.compile(r"^v?\d+(?:\.\d+)*[a-z]?$")
+
+
 def _looks_like_command(value: str) -> bool:
-    """The safety property: config values are not tasks."""
+    """The safety property: config values are not tasks.
+
+    The first version ended in a catch-all `[A-Za-z0-9_./-]+`, which matches
+    literally any single word -- so "2.1.0" and "run make deploy to ship"
+    both passed, and every string in every config became a phantom task.
+
+    A value is runnable only if its head is a known tool, or it is a path,
+    or it carries shell structure. A bare unknown word is not a command.
+    """
     v = (value or "").strip()
     if not v or len(v) > 400 or "\n" in v:
         return False
-    return bool(_CMD_HEAD.match(v) or _SHELLISH.search(v))
+    if _VERSIONISH.match(v):
+        return False
+    parts = v.split()
+    head = parts[0]
+    if head in _TOOLS:
+        return True
+    if head.startswith("./") or head.startswith("../") or "/" in head:
+        return True                      # explicit path to a program
+    if len(parts) == 1:
+        return False                     # bare unknown word: not a command
+    return bool(_SHELLISH.search(v))     # multiword: needs shell structure
 
 
 def _from_makefile(path: Path) -> list[tuple[str, str]]:
     out, cur, body = [], None, []
     for line in path.read_text(errors="replace").splitlines():
-        if line.startswith("\t") and cur:
-            body.append(line[1:].strip())
+        # Tabs (make) or 2+ leading spaces (just, Taskfile). One space is
+        # not a recipe -- that is prose wrapping onto a second line.
+        if cur and (line.startswith("\t")
+                    or (line.startswith("  ") and line.strip()
+                        and not line.strip().startswith("#"))):
+            body.append(line.strip())
             continue
         if cur and body:
             out.append((cur, " ".join(b for b in body if b)))
@@ -79,9 +111,11 @@ def _walk_mapping(obj, out: list) -> None:
     """Any dict of name -> command-ish value, at any depth."""
     if isinstance(obj, dict):
         for k, v in obj.items():
+            # The value itself must look runnable. A "sh -c " prefix was
+            # tried here and it made EVERY string match, turning prose into
+            # phantom tasks: env_hard2's config.json yielded
+            # description/notes/version as "tasks". Prose is not a task.
             if isinstance(v, str) and _looks_like_command(v):
-                out.append((str(k), v))
-            elif isinstance(v, str) and _looks_like_command("sh -c " + v):
                 out.append((str(k), v))
             elif isinstance(v, (dict, list)):
                 _walk_mapping(v, out)

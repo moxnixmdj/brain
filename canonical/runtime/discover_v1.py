@@ -101,7 +101,10 @@ def entrypoints(root: str, limit: int = _MAX_ENTRYPOINTS) -> list[str]:
             pass
 
     # Executable scripts this project ships.
-    for sub in ("scripts", "bin", "canonical/runtime", "tools"):
+    # Dot-directories are where CI and automation actually live. Skipping
+    # them meant .ci/run.sh -- real work -- was invisible in env_hard.
+    for sub in ("scripts", "bin", "canonical/runtime", "tools",
+                ".ci", ".github/workflows", ".buildkite", ".circleci", "ci"):
         d = rootp / sub
         if not d.is_dir():
             continue
