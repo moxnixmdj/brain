@@ -133,3 +133,46 @@ and unconnected — which is why depth is 4 and not 40.
   (Fable 5.1 57.9%, Opus 5 53.9%). **Re-source the bar before spending against it.**
 - Chain depth currently measures *declared* `requires`/`provides` edges, not
   executed run length. Depth 4 is a composition ceiling, not a proven run.
+
+---
+
+## 8. THE IDENTITY FOUND (second pass, 2026-10-17)
+
+Reading the owned packages' declared primary mechanisms produced a hard
+identity, from the artifacts themselves and not from inference:
+
+`OPUS55_LONG_HORIZON_MEMORY_AND_CONTINUITY_V1.json`
+  - family: `LONG_HORIZON_MEMORY_AND_CONTINUITY`
+  - status: `VERIFIED_OWNED_EQUAL_OR_BETTER`
+  - `brain_owned_route.primary_mechanism` = **`canonical/runtime/same_identity_supervisor.py`**
+
+`canonical/runtime/frontier_intelligence_v1.py` independently identifies
+`same_identity_supervisor` as the **GENERAL COMPUTATION SUBSTRATE** -- the
+third term of
+
+    EFFECTIVE FRONTIER INTELLIGENCE
+      = CAPABILITY + JIT KNOWLEDGE + COMPUTATION SUBSTRATE
+
+**Therefore: the owned long-horizon capability and the computation substrate
+are the same mechanism.** One artifact, counted in two places, never joined.
+
+This is the keystone connection:
+
+  - The substrate is what makes long chains *survive* (checkpoint/relaunch).
+  - Long-horizon continuity is what makes long chains *cohere*.
+  - They are one thing.  We have been scoring them as two.
+
+So the long-horizon stack does not need to be built.  It needs to be **routed
+through the substrate that already carries it** -- which is precisely why
+composed chain depth is 4 and not 40: nothing in the graph declares that the
+substrate extends it.
+
+**The next action is therefore not construction.**  It is to declare the
+substrate's provides-edge (`long_horizon.continuity`,
+`same_identity.checkpoint`) so the composer may route chains through the
+mechanism that already exists.
+
+Recorded honestly rather than forced: `same_identity_supervisor` exposes no
+`run(args, root)` entrypoint, so it cannot be bound as an ordinary adapter.  It
+must be registered as a substrate node with a declared contract, which is a
+distinct and honest kind of binding.
