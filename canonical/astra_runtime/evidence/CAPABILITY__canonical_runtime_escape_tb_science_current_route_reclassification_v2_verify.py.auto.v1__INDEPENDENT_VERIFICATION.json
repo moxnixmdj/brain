@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/escape_tb_science_current_route_reclassification_v2_verify.py.auto.v1",
- "elapsed_ms": 26.791,
+ "elapsed_ms": 35.012,
  "independent_run_reference": {
-  "github_run_id": 39015173514,
+  "github_run_id": 39015349255,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "e4c6fea1-101d-4089-925d-cae1b2bb749a",
+   "jti": "76a26d8c-47a1-4747-80e9-dc352802161e",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39015173514",
+   "run_id": "39015349255",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
