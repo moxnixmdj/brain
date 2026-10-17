@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v1.py.auto.v1",
- "elapsed_ms": 2060.314,
+ "elapsed_ms": 2039.235,
  "independent_run_reference": {
-  "github_run_id": 39077803446,
+  "github_run_id": 39078026145,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "a7b711bc-13c3-4800-8f77-dca2c25266a3",
+   "jti": "d1a46488-ee79-455d-af6c-8f881f568e30",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39077803446",
+   "run_id": "39078026145",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
