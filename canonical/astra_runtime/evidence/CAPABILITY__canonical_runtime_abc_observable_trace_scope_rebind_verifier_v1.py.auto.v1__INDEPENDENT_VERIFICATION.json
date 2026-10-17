@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/abc_observable_trace_scope_rebind_verifier_v1.py.auto.v1",
- "elapsed_ms": 32.261,
+ "elapsed_ms": 29.445,
  "independent_run_reference": {
-  "github_run_id": 38988595976,
+  "github_run_id": 38988813675,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "9c86aaf3-f8a4-4b62-bb2d-312e340a6c5d",
+   "jti": "438f2e40-46f5-40f1-95f7-7ffe6bc78e9a",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "38988595976",
+   "run_id": "38988813675",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
