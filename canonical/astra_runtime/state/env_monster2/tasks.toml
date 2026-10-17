@@ -1,0 +1,6 @@
+[[task]]
+name = "report"
+cmd  = "python3 wrong.py"
+[[task]]
+name = "generate"
+cmd  = "python3 right.py"
