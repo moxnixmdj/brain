@@ -107,7 +107,10 @@ def main() -> int:
                        NODE_PATH=_os.path.expanduser("~/browser_build/node_modules"))
             p = B.state("https://pypi.org")
             els = (p.get("data") or {}).get("elements") or []
-            named = [e for e in els if (e.get("name") or "").strip()]
+            # The accessible name lives in aria/placeholder/name/text
+            # depending on the control; this is what a person would call it.
+            named = [e for e in els if (e.get("aria") or e.get("placeholder")
+                                        or e.get("name") or e.get("text") or "").strip()]
             ok2 = len(named) >= 3
             failures += 0 if ok2 else 1
             print("%-8s %-16s elements=%-3s named=%-3s %s"

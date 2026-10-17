@@ -1,31 +1,37 @@
 """The browser: one more sense the loop can consult.
 
-Scope, deliberately narrow. This module perceives a page and acts on it. It
-does not decide which element serves a goal -- the loop does that, using
-the same machinery it already uses to choose between commands. Scoring
-fields by keyword overlap inside the driver was tried and removed: it put a
-decision in the wrong layer, and the loop is better placed to make it
-because it knows the goal.
+This is deliberately thin. Three things exist and each has one job:
 
-Everything here is deterministic. No model call describes a page; a page is
-loaded and reported.
+    browser_launch_v1.sh   obtain a Chromium and pin TLS.
+                           Ours, because Playwright's downloader cannot
+                           reach its CDN and this build has no root store.
+    osworld_v21_browser_cdp_v1
+                           drive it -- typed, validated, policy-bound, and
+                           already in this repo. Registered long ago and
+                           unable to run until a browser existed.
+    the loop               decide which element serves the goal.
+
+Earlier versions of this module wrote their own CDP client and their own
+scoring of which field a goal meant. Both were mistakes of the same kind:
+building something that already existed, and deciding something the loop
+should decide. What is left here is only the seam between them.
+
+Nothing here asks a model to describe a page. A page is loaded and reported.
 """
 from __future__ import annotations
 
 import base64
-import json
 import os
 import re
 import shutil
 import subprocess
 from pathlib import Path
 from urllib.parse import urlparse
+from collections.abc import Mapping
 
 SCHEMA = "PROJECT_BRAIN_BROWSER_V1"
 BUILD = os.environ.get("BRAIN_BROWSER_BUILD", os.path.expanduser("~/browser_build"))
-NODE = os.path.join(BUILD, "node_modules")
 HERE = Path(__file__).resolve().parent
-BRIDGE = str(HERE / "browser_bridge_v1.js")
 LAUNCH = str(HERE / "browser_launch_v1.sh")
 PORT = os.environ.get("BRAIN_BROWSER_PORT", "9222")
 _URL = re.compile(r"https?://[^\s\"'<>)\]]+")
@@ -34,13 +40,14 @@ _ACTIVE_PINS: set = set()
 
 
 def urls_in(text: str) -> list[str]:
-    """Every URL a goal or file mentions -- how the loop notices a task is
-    about a page at all."""
+    """Every URL a goal or file mentions -- how the loop notices that a task
+    is about a page at all."""
     seen, out = set(), []
     for u in _URL.findall(text or ""):
         u = u.rstrip(".,;:")
         if u not in seen:
-            seen.add(u); out.append(u)
+            seen.add(u)
+            out.append(u)
     return out
 
 
@@ -49,12 +56,15 @@ def host_of(url: str) -> str:
 
 
 def available() -> tuple[bool, str]:
+    """Answered from the filesystem, not from hope."""
     if not shutil.which("node"):
         return False, "node is not installed"
     if not os.path.exists(os.path.join(BUILD, "chromium")):
         return False, f"no browser built yet (run {LAUNCH})"
-    if not os.path.exists(os.path.join(NODE, "playwright-core")):
-        return False, "playwright-core missing"
+    try:
+        import playwright  # noqa: F401
+    except Exception:
+        return False, "playwright not importable in this interpreter"
     return True, "browser present"
 
 
@@ -77,9 +87,9 @@ def spki_pins(host: str, port: int = 443, timeout: int = 25) -> list[str]:
     instead of not at all.
 
     Trust on first use: the key is read once through openssl, which does
-    validate against the system trust store, and the browser is then held
-    to it. A different key means a different server, and the page fails to
-    load rather than loading quietly from whoever answered.
+    validate against the system trust store, and the browser is held to it
+    afterwards. A different key means a different server, and the page fails
+    to load rather than loading quietly from whoever answered.
     """
     try:
         raw = subprocess.run(
@@ -118,9 +128,9 @@ def stop() -> None:
 def ensure(hosts: list[str], port: str = PORT, timeout: int = 180) -> tuple[bool, str]:
     """A browser running that is pinned to every host named.
 
-    Pins can only be set at launch, so a new host means one restart. Without
+    Pins can only be set at launch, so a new host costs one restart. Without
     the right pins a page cannot load at all, so this is what makes HTTPS
-    work, not a security extra.
+    work, not a security extra bolted on.
     """
     hosts = [h for h in hosts if h]
     if not hosts:
@@ -139,7 +149,8 @@ def ensure(hosts: list[str], port: str = PORT, timeout: int = 180) -> tuple[bool
                        timeout=timeout, env=env)
     if r.returncode != 0 or not running(port):
         return False, (r.stdout + r.stderr).strip()[:300]
-    _ACTIVE_PINS.clear(); _ACTIVE_PINS.update(pins)
+    _ACTIVE_PINS.clear()
+    _ACTIVE_PINS.update(pins)
     named = ", ".join(sorted(set(hosts)))
     return True, f"pinned to {len(pins)} key(s) for {named}"
 
@@ -162,37 +173,51 @@ def start(port: str = PORT, timeout: int = 120, pins: list[str] | None = None) -
     return False, (r.stdout + r.stderr).strip()[:300]
 
 
-def _bridge(args: list[str], timeout: int = 180) -> dict:
-    env = dict(os.environ, NODE_PATH=NODE, BROWSER_PORT=PORT)
-    r = subprocess.run(["node", BRIDGE] + args, capture_output=True, text=True,
-                       timeout=timeout, env=env)
-    if r.returncode != 0:
-        raise RuntimeError((r.stderr or r.stdout or "browser failed").strip()[:400])
-    return json.loads(r.stdout)
+def bind(port: str = PORT):
+    """The repo's own browser capability, pointed at our running Chromium."""
+    import types
+
+    import osworld_v21_browser_cdp_v1 as OC
+    b = OC.BrowserCDP()
+    b.bind_environment(types.SimpleNamespace(vm_ip="127.0.0.1", chromium_port=int(port)))
+    return b
 
 
-def state(url: str) -> dict:
-    """Load a page and report it: text, plus every interactive element with
-    the name a person would call it.
+def state(url: str, timeout: int = 180) -> dict:
+    """Load a page and report it: title, text, and every interactive element
+    with the name a person would call it.
 
     Choosing between those elements is the loop's job, not ours.
     """
     ok, why = ensure([host_of(url)])
     if not ok:
         return {"schema": SCHEMA, "ok": False, "reason": why, "url": url}
-    return {"schema": SCHEMA, "ok": True, "url": url, "data": _bridge(["state", url])}
+    b = bind()
+    b.act({"type": "NAVIGATE", "url": url})
+    snap = b.snapshot()
+    page = (snap.get("pages") or [{}])[0]
+    elements = page.get("elements") or []
+    # The words actually on the page: the title plus the text of every
+    # control and link. Enough to judge whether the page is about the goal.
+    blob = " ".join([page.get("title") or ""] +
+                    [(e.get("text") or "") + " " + (e.get("aria") or "") + " " +
+                     (e.get("name") or "") + " " + (e.get("placeholder") or "")
+                     for e in elements])
+    text = re.sub(r"\s+", " ", blob).strip()
+    return {"schema": SCHEMA, "ok": True, "url": url,
+            "data": {"url": page.get("url") or url, "title": page.get("title") or "",
+                     "chars": len(text), "text": text[:8000], "elements": elements,
+                     "page_count": snap.get("page_count", 0)}}
 
 
-def click(selector: str) -> dict:
-    return _bridge(["click", selector])
+def act(ops, port: str = PORT) -> list[dict]:
+    """Drive the page: NAVIGATE, CLICK_SELECTOR, CLICK_TEXT, FILL, PRESS,
+    SELECT, CHECK, NEW_TAB, CLOSE_TAB. Which ops to run is the loop's call,
+    so this takes them as given and returns what each produced.
 
-
-def type_into(selector: str, text: str, enter: bool = False) -> dict:
-    return _bridge(["type", selector, text] + (["--enter"] if enter else []))
-
-
-def screenshot(url: str, path: str) -> dict:
-    ok, why = ensure([host_of(url)])
-    if not ok:
-        return {"ok": False, "reason": why}
-    return {"ok": True, "data": _bridge(["shot", url, path])}
+    One op or several -- the repo's capability acts on a single mapping.
+    """
+    b = bind(port)
+    single = isinstance(ops, dict)
+    out = [b.act(o) for o in ([ops] if single else ops)]
+    return out[0] if single else out
