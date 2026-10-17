@@ -1,0 +1,31 @@
+{
+  "causal_direction_status": "UNVERIFIED",
+  "claim_relation_status": "UNVERIFIED",
+  "evidence_extraction_status": "UNVERIFIED",
+  "evidence_quality_status": "UNVERIFIED",
+  "evidence_sufficiency_status": "UNVERIFIED",
+  "evidence_units": [],
+  "factual_correctness_status": "UNVERIFIED",
+  "incremental_spend_usd": 0,
+  "model_dependency_count": 0,
+  "objective": "Does this repository own its capability mechanisms and keep knowledge external?",
+  "objective_tokens": [
+    "repository",
+    "own",
+    "its",
+    "capability",
+    "mechanisms",
+    "keep",
+    "knowledge",
+    "external"
+  ],
+  "page_raw_sha256": "00eb593b4025d67be96bc4f92a6d1e606925aa78f4d6d1bc2c9001381aac288c",
+  "reason": "NO_OBJECTIVE_GROUNDED_EVIDENCE_UNITS",
+  "schema": "PROJECT_BRAIN_OBJECTIVE_EVIDENCE_UNIT_EXTRACTION_V2",
+  "semantic_entailment_status": "UNVERIFIED",
+  "source_independence_status": "UNVERIFIED",
+  "source_url": "https://api.github.com/repos/moxnixmdj/brain",
+  "status": "UNVERIFIED",
+  "visible_block_count": 6,
+  "visible_text_sha256": "4aba2e63c6adcf95397537d5e3c48ad9430bf4e7143cfedf05d6e0a9f37c96a1"
+}

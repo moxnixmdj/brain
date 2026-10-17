@@ -1,0 +1,17 @@
+{
+  "causal_direction_status": "UNVERIFIED",
+  "claim_relation_status": "UNVERIFIED",
+  "evidence_extraction_status": "UNVERIFIED",
+  "evidence_quality_status": "UNVERIFIED",
+  "evidence_sufficiency_status": "UNVERIFIED",
+  "evidence_units": [],
+  "factual_correctness_status": "UNVERIFIED",
+  "incremental_spend_usd": 0,
+  "model_dependency_count": 0,
+  "objective": "Does this repository own its capability mechanisms and keep knowledge external?",
+  "reason": "PROVENANCE_CANDIDATE_MISMATCH",
+  "schema": "PROJECT_BRAIN_OBJECTIVE_EVIDENCE_UNIT_EXTRACTION_V2",
+  "semantic_entailment_status": "UNVERIFIED",
+  "source_independence_status": "UNVERIFIED",
+  "status": "UNVERIFIED"
+}

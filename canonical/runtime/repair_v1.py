@@ -43,6 +43,83 @@ _SIGNATURES: list[tuple[str, re.Pattern]] = [
 ]
 
 
+# When a project's declared runner is absent, what are its tests actually
+# written against? Each row is evidence to look for in the project's own
+# sources, and the command that runs that kind of test. This is a table of
+# what test code looks like, not of projects -- which is why a runner that
+# does not exist yet still lands on one of these rows.
+#
+# (evidence regex, command, the tool that must exist here)
+_TEST_EVIDENCE = [
+    (re.compile(r"^\s*import\s+unittest\b|^\s*from\s+unittest\b", re.M),
+     "python3 -m unittest discover -s . -p 'test*.py' -v", "python3"),
+    (re.compile(r"""from\s+['"]node:test['"]|require\(['"]node:test['"]\)""", re.M),
+     "node --test", "node"),
+    (re.compile(r"^\s*import\s+pytest\b|^\s*from\s+pytest\b", re.M),
+     "python3 -m pytest -q", "python3"),
+]
+
+# Tools that are test runners. Only when the missing binary is one of these
+# is it worth asking what the tests are written against.
+_TEST_RUNNERS = frozenset({
+    "pytest", "pytest-3", "py.test", "mocha", "jest", "vitest",
+    "jasmine", "karma", "ava", "tap", "go",
+})
+
+
+_TEST_FILE = re.compile(
+    r"(^|/)(tests?|specs?|__tests__)/"
+    r"|(^|/)(test_.*|.*_test|.*\.test|.*\.spec)\.(py|js|mjs|cjs|ts)$",
+    re.I,
+)
+
+
+def _is_test_file(path: Path) -> bool:
+    """Is this file a test? Decided by its name and where it lives."""
+    try:
+        rel = path.as_posix()
+    except Exception:
+        return False
+    return bool(_TEST_FILE.search(rel))
+
+
+def _find_runner(root: str) -> tuple[str | None, str]:
+    """A command that runs this project's tests with what exists here.
+
+    The declared runner is gone. Rather than map that one tool to one
+    substitute, look at the test sources: they name the framework they were
+    written for, and that framework may well have a runner already present.
+    """
+    base = Path(root)
+    if not base.is_dir():
+        return None, ""
+    files = 0
+    for path in base.rglob("*"):
+        if files > 600:
+            break
+        if not path.is_file() or path.stat().st_size > 400_000:
+            continue
+        if path.suffix.lower() not in {".py", ".js", ".mjs", ".cjs", ".ts"}:
+            continue
+        # ONLY TEST FILES COUNT. Scanning every file matched `import pytest`
+        # inside pytest_run.py -- the one file in env_toolchain that cannot
+        # run -- and so proposed `python3 -m pytest`, which failed at once,
+        # while the real tests sat in tests/test_core.py using unittest.
+        # Evidence about what the tests are written against has to come from
+        # the tests; a runner merely mentioned in a helper proves nothing.
+        if not _is_test_file(path):
+            continue
+        files += 1
+        try:
+            text = path.read_text(errors="ignore")
+        except Exception:
+            continue
+        for pattern, command, needs in _TEST_EVIDENCE:
+            if pattern.search(text) and shutil.which(needs):
+                return command, f"tests use {pattern.pattern[:24]!r}; {needs} is present"
+    return None, ""
+
+
 def _tests_use(root: str, module: str) -> bool:
     """Evidence in the project that its tests target a given module.
 
@@ -114,13 +191,17 @@ def diagnose(command: str, output: str, exit_code: int, root: str = "") -> dict:
         if kind == "missing_binary":
             tool = what
             # ADAPT: is there something on this machine that does the job?
-            if tool == "pytest" and _tests_use(root, "unittest"):
-                out["repair"] = "python3 -m unittest discover -s . -p 'test*.py' -v"
-                out["reason"] = ("pytest absent; project tests import unittest, "
-                                 "so unittest discover collects them")
-                return out
-            if tool == "pytest":
-                out["reason"] = "pytest absent and no unittest-based tests to substitute"
+            if tool in _TEST_RUNNERS:
+                # Not a mapping from one absent tool to one substitute, but a
+                # question put to the project: what are these tests written
+                # against, and is that runner here?
+                runner, why = _find_runner(root)
+                if runner:
+                    out["repair"] = runner
+                    out["reason"] = f"{tool} absent; {why}"
+                    return out
+                out["reason"] = (f"{tool} absent and no runner matching the "
+                                 "project's test sources is available here")
                 return out
             if tool == "jq" and shutil.which("python3"):
                 out["repair"] = "python3 -m json.tool"
@@ -239,3 +320,54 @@ def evaluate(commands: list[str], root: str, timeout: int = 300) -> dict:
             "reason": verdict.get("reason"), "before": before, "after": after,
             "statistics": verdict.get("statistics", {}),
             "traces": {c: detail[c]["attempts"] for c in commands}}
+
+
+def adopt_or_rollback(root: str, commands: list[str], timeout: int = 300) -> dict:
+    """Adopt repairing only if it beats not repairing, else roll back.
+
+    From SEAL (arXiv:2607.24300): self-authored scores drift upward while
+    real performance falls -- in their runs every cell ended with a
+    self-score of at least 0.70 while fifteen of thirty-five policies scored
+    below random. The remedy is an acceptance boundary the agent cannot
+    author: compare candidate against incumbent on a fixed audit, return one
+    bit, and roll the whole state back on a clear regression.
+
+    Here the candidate is "run it with repair", the incumbent is "run it
+    plain", and the audit is the exit status of each command. A repair that
+    cannot beat doing nothing is not adopted, however plausible it looked.
+
+    The evidence is attested, not asserted: exit codes and output come from
+    the machine. Nothing here is a claim the system wrote about itself.
+    """
+    import subprocess
+
+    def plain(cmd: str) -> int:
+        try:
+            return 1 if subprocess.run(cmd, shell=True, cwd=root, timeout=timeout,
+                                       capture_output=True).returncode == 0 else 0
+        except Exception:
+            return 0
+
+    incumbent = {c: plain(c) for c in commands}
+    candidate = {}
+    for c in commands:
+        try:
+            candidate[c] = 1 if attempt(c, root, timeout=timeout)["ok"] else 0
+        except Exception:
+            candidate[c] = 0
+
+    inc_total = sum(incumbent.values())
+    cand_total = sum(candidate.values())
+
+    # One bit. Roll back on a clear regression; adopt only on a clear gain.
+    if cand_total > inc_total:
+        decision, why = "ADOPT", f"{cand_total} vs {inc_total} commands succeed"
+    elif cand_total < inc_total:
+        decision, why = "ROLLBACK", f"worse than doing nothing: {cand_total} vs {inc_total}"
+    else:
+        decision, why = "ROLLBACK", f"no measurable gain: {cand_total} vs {inc_total}"
+
+    return {"schema": SCHEMA, "decision": decision, "reason": why,
+            "incumbent": incumbent, "candidate": candidate,
+            "incumbent_total": inc_total, "candidate_total": cand_total,
+            "adopted": decision == "ADOPT"}

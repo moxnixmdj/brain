@@ -350,6 +350,12 @@ def run(goal: str, root: str, binary_limit: int = 0,
         reqs = []
         for _src in vsrc2:
             try:
+                # literals() reads the file itself, so it takes the path.
+                # Converting to text first (done once, wrongly) made every
+                # call fail with 'str' object has no attribute read_text and
+                # silently yielded no requirements at all -- the kind of
+                # breakage that reports a clean empty result rather than an
+                # error, which is why it survived a full run unnoticed.
                 _lits = _LB.literals(_src)
             except Exception:
                 continue

@@ -1,0 +1,3 @@
+[[task]]
+name = "quarterly report"
+cmd  = "python3 report.py"

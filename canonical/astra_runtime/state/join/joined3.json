@@ -1,0 +1,34 @@
+{
+ "objective": "Does this repository own its capability mechanisms and keep knowledge external?",
+ "candidate": {
+  "url": "https://api.github.com/repos/moxnixmdj/brain"
+ },
+ "provenance": {
+  "schema": "PROJECT_BRAIN_SOURCE_CANDIDATE_PROVENANCE_VERIFICATION_V1",
+  "status": "RETRIEVAL_PROVENANCE_VERIFIED",
+  "verification_method": "LIVE_HTTP_RETRIEVAL",
+  "candidate_url": "https://api.github.com/repos/moxnixmdj/brain",
+  "final_url": "https://api.github.com/repos/moxnixmdj/brain",
+  "final_host": "api.github.com",
+  "http_status": 200,
+  "content_type": "application/json; charset=utf-8",
+  "page_title": null,
+  "authority_status": "RETRIEVABILITY_VERIFIED__FACT_AUTHORITY_UNVERIFIED",
+  "primary_source_status": "UNVERIFIED",
+  "evidence_sufficiency_status": "UNVERIFIED",
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0
+ },
+ "relevance": {
+  "status": "FIRST_PARTY_RELEVANT_SOURCE_VERIFIED",
+  "objective_relevance_status": "VERIFIED",
+  "fresh_url": "https://api.github.com/repos/moxnixmdj/brain"
+ },
+ "documents": [
+  {
+   "id": "live-1",
+   "url": "https://api.github.com/repos/moxnixmdj/brain",
+   "text": "full_name=moxnixmdj/brain description=None"
+  }
+ ]
+}

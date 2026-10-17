@@ -1,0 +1,15 @@
+{
+ "objective": "Does this repository own its capability mechanisms and keep knowledge external?",
+ "provenance": {
+  "status": "RETRIEVAL_PROVENANCE_VERIFIED",
+  "candidate_url": "https://api.github.com/repos/moxnixmdj/brain",
+  "final_url": "https://api.github.com/repos/moxnixmdj/brain"
+ },
+ "documents": [
+  {
+   "id": "live-1",
+   "text": "full_name=moxnixmdj/brain description=None private=False",
+   "url": "https://api.github.com/repos/moxnixmdj/brain"
+  }
+ ]
+}
