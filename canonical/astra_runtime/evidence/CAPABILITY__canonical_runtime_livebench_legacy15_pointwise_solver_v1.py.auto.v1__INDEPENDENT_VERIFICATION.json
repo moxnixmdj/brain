@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_legacy15_pointwise_solver_v1.py.auto.v1",
- "elapsed_ms": 48.955,
+ "elapsed_ms": 76.218,
  "independent_run_reference": {
-  "github_run_id": 39070736017,
+  "github_run_id": 39070961726,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "d0b32148-0840-4bf0-a282-3679d23e3152",
+   "jti": "309e3d8d-411a-4d7d-ba85-d5947b97ac92",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39070736017",
+   "run_id": "39070961726",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
