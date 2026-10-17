@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/retrieval_live_event_ledger_v1.py.auto.v1",
- "elapsed_ms": 38.842,
+ "elapsed_ms": 39.828,
  "independent_run_reference": {
-  "github_run_id": 39072285125,
+  "github_run_id": 39072506756,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "4f34cfd4-9863-40e7-b0ca-40747c3adaaf",
+   "jti": "d100c508-412f-44ea-8fcf-71c143bc2e9c",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39072285125",
+   "run_id": "39072506756",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
