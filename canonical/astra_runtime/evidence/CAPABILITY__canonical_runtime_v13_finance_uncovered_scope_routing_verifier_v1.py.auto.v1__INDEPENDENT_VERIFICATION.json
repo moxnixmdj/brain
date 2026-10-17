@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/v13_finance_uncovered_scope_routing_verifier_v1.py.auto.v1",
- "elapsed_ms": 22.978,
+ "elapsed_ms": 32.869,
  "independent_run_reference": {
-  "github_run_id": 39010279441,
+  "github_run_id": 39010448834,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "8eba9101-952a-4d1a-b9fe-e3aef32ba09d",
+   "jti": "23b8f2f1-9294-4c23-8939-4dc0ba4b21cf",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39010279441",
+   "run_id": "39010448834",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
