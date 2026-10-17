@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/finite_probe_nonidentifiability_certificate_v1.py.auto.v1",
- "elapsed_ms": 59.832,
+ "elapsed_ms": 34.524,
  "independent_run_reference": {
-  "github_run_id": 39035785950,
+  "github_run_id": 39036004471,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "a0f3049d-63be-4d52-a962-57f61ce57a97",
+   "jti": "827ca9a5-7124-47a5-b5a2-4149d1f64bcf",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39035785950",
+   "run_id": "39036004471",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
