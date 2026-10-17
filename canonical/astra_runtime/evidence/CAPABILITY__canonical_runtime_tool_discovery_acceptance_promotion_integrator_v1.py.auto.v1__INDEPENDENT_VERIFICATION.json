@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/tool_discovery_acceptance_promotion_integrator_v1.py.auto.v1",
- "elapsed_ms": 36.479,
+ "elapsed_ms": 37.17,
  "independent_run_reference": {
-  "github_run_id": 39034472139,
+  "github_run_id": 39034684914,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "f6b39917-8108-4957-a49f-3ce73ab246a7",
+   "jti": "e35dae63-ca7b-4438-bd24-6be751b8f5e6",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39034472139",
+   "run_id": "39034684914",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
