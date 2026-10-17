@@ -178,12 +178,26 @@ def explore_here(root: str, want_tokens: list[str] | None = None,
     """
     import discover_v1 as DISCOVER
     cmds = DISCOVER.candidates(root, binary_limit=binary_limit)
+
+    # THE GUARD MUST RUN BEFORE THE ACTIONS, NOT AFTER.
+    # It first filtered after explore() had already executed everything: the
+    # report said "excluded_as_undoer: [clean.py]" while clean.py ran anyway
+    # and deleted out/app.txt. A guard that reports safety without providing
+    # it is worse than no guard -- it manufactures confidence.
+    guard: dict = {}
+    if interaction_aware:
+        guard = _interaction_guard(root, cmds)
+        banned = set(guard.get("excluded_as_undoer") or [])
+        if banned:
+            before = len(cmds)
+            cmds = [c for c in cmds if " ".join(c) not in banned]
+            guard["commands_removed"] = before - len(cmds)
+
     out = explore(root, cmds, want_tokens=want_tokens, iterations=iterations)
     out["schema"] = "PROJECT_BRAIN_EXPLORE_HERE_V1"
     out["commands_source"] = "discovered"
     out["commands_discovered"] = len(cmds)
-    if interaction_aware:
-        out.update(_interaction_guard(root, cmds))
+    out.update(guard)
     return out
 
 
