@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/k6_current_authority_reconciliation_v2.py.auto.v1",
- "elapsed_ms": 32.302,
+ "elapsed_ms": 27.745,
  "independent_run_reference": {
-  "github_run_id": 39073574109,
+  "github_run_id": 39073773454,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "4f3fd803-364a-4070-a163-ed94a778be24",
+   "jti": "f5458a86-6fce-4474-9326-a11c442a051f",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39073574109",
+   "run_id": "39073773454",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
