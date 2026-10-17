@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/composition_cross_step_no_bypass_audit_v2.py.auto.v1",
- "elapsed_ms": 137.385,
+ "elapsed_ms": 92.724,
  "independent_run_reference": {
-  "github_run_id": 38987734113,
+  "github_run_id": 38987961151,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "327bb9d8-a1a3-462b-adbc-4b53a53d053a",
+   "jti": "5edc952d-dca5-47ee-9d37-45697a76fa9a",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "38987734113",
+   "run_id": "38987961151",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
