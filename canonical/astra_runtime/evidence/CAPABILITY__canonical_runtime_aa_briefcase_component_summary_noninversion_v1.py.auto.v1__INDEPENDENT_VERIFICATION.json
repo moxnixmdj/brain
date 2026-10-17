@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/aa_briefcase_component_summary_noninversion_v1.py.auto.v1",
- "elapsed_ms": 31.622,
+ "elapsed_ms": 28.341,
  "independent_run_reference": {
-  "github_run_id": 38993640413,
+  "github_run_id": 38993880014,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "20f45e0d-d00f-4f51-9af0-61f035a809b2",
+   "jti": "b753ae50-9b70-405e-934a-4d566d3b1b00",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "38993640413",
+   "run_id": "38993880014",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
