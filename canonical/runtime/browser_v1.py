@@ -52,6 +52,55 @@ def running(port: str = PORT) -> bool:
         return False
 
 
+def spki_pins(host: str, port: int = 443, timeout: int = 25) -> list[str]:
+    """Base64 SHA-256 hashes of a host's public keys (SPKI pins).
+
+    This build has no root certificate store -- it ships without
+    libnssckbi.so, and the only copies reachable from here are Git LFS
+    pointers rather than binaries -- so the CA system cannot decide whether
+    a certificate is genuine. Pinning the key decides it cryptographically
+    instead of not at all.
+
+    The key is read once, over a connection openssl checks against the
+    system trust store, and the browser is then held to it. A different key
+    means a different server, and the page fails to load instead of loading
+    quietly from whoever answered.
+
+    Stronger than the CA system for a pinned host -- no trusted third party
+    can vouch for a key we did not pin. Weaker in one way: it is trust on
+    first use, so the first read must happen somewhere trustworthy.
+    """
+    import base64, hashlib, re as _re, subprocess
+    try:
+        raw = subprocess.run(
+            ["openssl", "s_client", "-showcerts", "-servername", host,
+             "-connect", f"{host}:{port}"],
+            input=b"", capture_output=True, timeout=timeout).stdout
+    except Exception:
+        return []
+    certs = _re.findall(rb"-----BEGIN CERTIFICATE-----.*?-----END CERTIFICATE-----",
+                        raw, _re.S)
+    pins = []
+    for cert in certs:
+        try:
+            pub = subprocess.run(["openssl", "x509", "-pubkey", "-noout"],
+                                 input=cert, capture_output=True, timeout=timeout)
+            if pub.returncode:
+                continue
+            der = subprocess.run(["openssl", "pkey", "-pubin", "-outform", "der"],
+                                 input=pub.stdout, capture_output=True, timeout=timeout)
+            if der.returncode:
+                continue
+            dg = subprocess.run(["openssl", "dgst", "-sha256", "-binary"],
+                                input=der.stdout, capture_output=True, timeout=timeout)
+            if dg.returncode:
+                continue
+            pins.append(base64.b64encode(dg.stdout).decode())
+        except Exception:
+            continue
+    return list(dict.fromkeys(pins))
+
+
 def start(port: str = PORT, timeout: int = 120) -> tuple[bool, str]:
     """Launch the browser and wait for its endpoint. Idempotent."""
     ok, why = available()

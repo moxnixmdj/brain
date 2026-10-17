@@ -42,14 +42,19 @@ for (const [f,o] of [['swiftshader.tar.br','sw.tar'],['al2023.tar.br','al2023.ta
 [ -d sw ] || { mkdir -p sw al && tar -xf sw.tar -C sw && tar -xf al2023.tar -C al; }
 # Vulkan needs an absolute path to the SwiftShader driver.
 node -e "const fs=require('fs');fs.writeFileSync('sw/vk_swiftshader_icd.json',JSON.stringify({file_format_version:'1.0.0',ICD:{library_path:process.cwd()+'/sw/libvk_swiftshader.so',api_version:'1.0.5'}},null,2))"
-# Delete this line once a real libnssckbi.so sits in al/lib.
-export CHROMIUM_INSECURE=1
+# Certificate handling. There is no root store in this build, so instead of
+# trusting anyone who answers we pin the key of the host we intend to visit.
+# CHROMIUM_SPKI_PINS is a comma-separated list of base64 SHA-256 SPKI hashes;
+# Chromium accepts a certificate only if one of those keys is in the chain.
+# Leaving it empty falls back to CHROMIUM_INSECURE, which trusts everything
+# and should not be used.
 
 LD_LIBRARY_PATH="$PWD/sw:$PWD/al/lib" \
 VK_ICD_FILENAMES="$PWD/sw/vk_swiftshader_icd.json" \
   nohup ./chromium --headless=new --no-sandbox --disable-setuid-sandbox \
     --disable-dev-shm-usage --disable-gpu \
-    ${CHROMIUM_INSECURE:+--ignore-certificate-errors} \
+    ${CHROMIUM_SPKI_PINS:+--ignore-certificate-errors-spki-list=$CHROMIUM_SPKI_PINS} \
+    $( [ -z "$CHROMIUM_SPKI_PINS" ] && [ -n "$CHROMIUM_INSECURE" ] && echo --ignore-certificate-errors ) \
     --remote-debugging-port="$PORT" about:blank >/tmp/chromium_cdp.log 2>&1 &
 # Wait for the endpoint rather than guessing at a sleep.
 i=0; while [ $i -lt 60 ]; do
