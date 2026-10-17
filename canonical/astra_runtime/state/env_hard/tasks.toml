@@ -1,0 +1,3 @@
+[[task]]
+name = "assemble"
+cmd  = "python3 src/deep/nested/tool.py"

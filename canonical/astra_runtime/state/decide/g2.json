@@ -1,0 +1,125 @@
+{
+  "broad_objective_decomposition": null,
+  "broad_objective_decomposition_available": false,
+  "candidate_capability_ids": [
+    "python.software.request.semantic_behavior.compile.v1"
+  ],
+  "clauses": [
+    {
+      "candidates": [
+        {
+          "binding_affordance": {
+            "has_goal_url": false,
+            "proposal_binding_count": 0,
+            "proposal_bindings_cover_all_inputs": false,
+            "url_consumable": false
+          },
+          "capability_id": "python.software.request.semantic_behavior.compile.v1",
+          "combined_score": 9.0,
+          "input_bindability": {
+            "bound_input_keys": [
+              "goal",
+              "output_path"
+            ],
+            "proposal_binding_keys": [],
+            "verified": true
+          },
+          "lexical": {
+            "matched_goal_tokens": [
+              "text"
+            ],
+            "matched_identity": [],
+            "matched_keywords": [
+              [
+                "text",
+                "text"
+              ]
+            ],
+            "matched_provides": [],
+            "score": 4
+          },
+          "matched_distinctive_tokens": [
+            "text"
+          ],
+          "provides": [
+            "python.software.request.semantic_behavior.acceptance_program_compiled"
+          ],
+          "requires": [],
+          "similarity": {
+            "coverage": 0.25,
+            "score": 5.0,
+            "sequence_ratio": 0.25,
+            "shared_tokens": [
+              "text"
+            ]
+          }
+        }
+      ],
+      "constraints": [],
+      "end": 54,
+      "index": 0,
+      "output_contract": {
+        "extensions": [
+          "pdf"
+        ],
+        "paths": [
+          "canonical/in.pdf"
+        ]
+      },
+      "rejected_unbindable_candidates": [
+        {
+          "capability_id": "document.convert.markdown_pdf.pandoc_weasyprint",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:markdown_path"
+        },
+        {
+          "capability_id": "evidence.claim_relation.generic_units.stdlib",
+          "error": "CapabilityProposalFailure:GOAL_LITERAL_BINDING_FAILED:evidence.claim_relation.generic_units.stdlib:GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:spec"
+        },
+        {
+          "capability_id": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+          "error": "CapabilityProposalFailure:GOAL_LITERAL_BINDING_FAILED:evidence.claim_spec.bind.explicit_comparison.stdlib:GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:objective"
+        },
+        {
+          "capability_id": "image.extract.ocr.tesseract",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:path"
+        },
+        {
+          "capability_id": "pdf.extract.ocr.tesseract",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:pdf_path"
+        },
+        {
+          "capability_id": "pdf.extract.text.pypdf",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:pdf_path"
+        },
+        {
+          "capability_id": "professional.artifact.visual_observer.v1",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:path"
+        },
+        {
+          "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:source_root"
+        },
+        {
+          "capability_id": "python.software.repair.loop.test_guided.ast.v1",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:source_paths"
+        },
+        {
+          "capability_id": "python.software.repair.semantic_acceptance.v1",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:source_root"
+        }
+      ],
+      "start": 0,
+      "status": "UNBOUND_INPUTS_NOT_GROUNDED",
+      "text": "Extract the text from the PDF file at canonical/in.pdf"
+    }
+  ],
+  "external_discovery_allowed_for_unresolved_only": true,
+  "goal": "Extract the text from the PDF file at canonical/in.pdf",
+  "goal_sha256": "bac21e45035efaafd6272eda4cec2028cf0c44b4c7b2f6342869b309820c415e",
+  "grounded_clause_count": 1,
+  "input_contract_bindability_enforced": true,
+  "model_dependency_count": 0,
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_BOUND_GROUNDING_V1",
+  "unresolved_clause_indexes": [],
+  "whole_goal_external_discovery_forbidden_if_any_bound_grounding": true
+}

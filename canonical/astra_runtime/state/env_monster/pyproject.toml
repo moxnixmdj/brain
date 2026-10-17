@@ -1,0 +1,4 @@
+[project]
+name="monster"
+[project.scripts]
+monster = "monster:main"

@@ -1,0 +1,2502 @@
+{
+  "authority": "NONE",
+  "controller_checkpoints_removed": 41,
+  "credit": 0,
+  "families_not_measured_here": {
+    "BROWSER_CAPTURE": "chromedriver (apt) not installed here",
+    "CHART_RASTER_READERS": "PIL installed; compound goal grammar pending",
+    "HTTP_JSON_FETCH__PYPI_AUDIT__WEB_RELEASE": "network egress blocked in this sandbox",
+    "KNOWLEDGE_FETCH_ASSESS_ASSERT": "network egress blocked in this sandbox",
+    "MARKDOWN_TO_PDF": "pandoc + weasyprint (apt) not installed here",
+    "PDF_TEXT_OCR": "tesseract-ocr (apt) not installed here",
+    "QR_BARCODE_GENERATE_DECODE": "qrencode / zbar-tools / zint (apt) not installed here"
+  },
+  "how_to_read": [
+    "in_scope_instance_pass_rate is over FRESH goals the compiler has never seen, judged on the real artifact by stdlib oracles.",
+    "out_of_scope_fail_closed_rate must be 1.0: every goal no tool can serve must come back pass=False with nothing written.",
+    "Families in families_not_measured_here are not failures and not passes; they are unmeasured on this machine.",
+    "Nothing here is a capability credit. Authority NONE."
+  ],
+  "incremental_spend_usd": 0,
+  "machine": {
+    "network_egress": "allowlisted hosts only",
+    "platform": "linux"
+  },
+  "measurements": {
+    "new": {
+      "entry": "canonical.runtime.live_brain_route_admission_v1.solve",
+      "failures_sample": [],
+      "families": {
+        "ARCHIVE_TAR_GZ_FROM_MANIFEST": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 16.04,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "archive.tar_gz.create_from_manifest": 8
+          }
+        },
+        "ARCHIVE_VERIFY_GNU": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 17.67,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "archive.verify.tar_gz.gnu": 8
+          }
+        },
+        "CODEC_BSON": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 122.44,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "auto.pypi.bson-modern": 8
+          }
+        },
+        "CODEC_CBOR": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 356.86,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "auto.npm.dfinity-cbor": 8
+          }
+        },
+        "CODEC_CBOR_FLOATS_FAIL_CLOSED": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 313.74,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "auto.npm.dfinity-cbor": 8
+          }
+        },
+        "CODEC_MSGPACK": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 12.93,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "auto.pypi.msgpack": 8
+          }
+        },
+        "CODEC_MSGPACK_NPM": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 347.73,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "auto.npm.msgpack-msgpack": 8
+          }
+        },
+        "COMPOUND_TWO_STEP_LITERAL_JSON": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 24.92,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "FRONT_COMPOUND_SENTENCES": 8
+          }
+        },
+        "DECISION_SYNTHESIS": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 16.63,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "decision.synthesis.typed.stdlib": 8
+          }
+        },
+        "DOCX_CREATE": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 41.67,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "docx.document.create.python_docx": 8
+          }
+        },
+        "EXACT_LITERAL_RESPONSE": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 12.75,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "DETERMINISTIC_EXACT_LITERAL_RESPONSE": 8
+          }
+        },
+        "JQ_QUERY": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 35.15,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "json.query.jq": 8
+          }
+        },
+        "JSON_QUERY_JQ": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 34.26,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "json.query.jq": 8
+          }
+        },
+        "LITERAL_JSON_RECORDS": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 15.99,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "DETERMINISTIC_LITERAL_JSON_RECORDS": 8
+          }
+        },
+        "MATH_NUMERIC_SYMPY": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 15.06,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "math.numeric_expression.sympy": 8
+          }
+        },
+        "NUMERIC_EXPRESSION": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 35.86,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "math.numeric_expression.sympy": 8
+          }
+        },
+        "OUT_OF_SCOPE_MUST_FAIL_CLOSED": {
+          "environment_blocked_here": 0,
+          "expected": "all FAIL closed, no artifact",
+          "instances": 30,
+          "mean_ms": 10.66,
+          "oracle_pass": 30,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "-": 24,
+            "python.software.request.semantic_behavior.compile.v1": 6
+          }
+        },
+        "PDF_TEXT_EXTRACT": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 17.67,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "pdf.extract.text.pypdf": 8
+          }
+        },
+        "PYTHON_AST_PATCH_SEARCH": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 754.59,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "python.software.repair.loop.test_guided.ast.v1": 8
+          }
+        },
+        "PYTHON_FAULT_LOCALIZE": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 1861.0,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "python.fault.localize.dynamic.dataflow.v1": 8
+          }
+        },
+        "PYTHON_REPAIR_STRICT_PROGRESS": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 1306.94,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "python.software.repair.loop.strict_progress.ast.v1": 8
+          }
+        },
+        "PYTHON_REPAIR_TEST_GUIDED": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 412.96,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "python.software.repair.loop.test_guided.ast.v1": 8
+          }
+        },
+        "PYTHON_SOURCE_AUDIT": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 15.39,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "python.source.audit.ast": 8
+          }
+        },
+        "PYTHON_TESTS_AUDIT": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 63.5,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "python.tests.audit.unittest": 8
+          }
+        },
+        "SOURCE_RANKING_BM25": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 16.82,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "source.objective_relevance.rank.bm25": 8
+          }
+        },
+        "SQLITE_FROM_RECORDS": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 17.04,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "sqlite.table.create_from_json_records": 8
+          }
+        },
+        "SQLITE_VERIFY_RECORDS": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 15.5,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "sqlite.table.verify_against_json_records": 8
+          }
+        },
+        "XLSX_CREATE": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 17.27,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "xlsx.table.create_from_json_records": 8
+          }
+        },
+        "XLSX_VERIFY": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 19.9,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "xlsx.table.verify_against_json_records": 8
+          }
+        },
+        "YAML_TO_JSON": {
+          "environment_blocked_here": 0,
+          "expected": "all PASS with exact artifact",
+          "instances": 8,
+          "mean_ms": 18.66,
+          "oracle_pass": 8,
+          "pass_rate": 1.0,
+          "routes_taken": {
+            "yaml.to_json.yq": 8
+          }
+        }
+      },
+      "in_scope_families_all_pass": 29,
+      "in_scope_families_measured": 29,
+      "in_scope_instance_pass_rate": 1.0,
+      "out_of_scope_fail_closed_rate": 1.0
+    }
+  },
+  "model_dependency_count": 0,
+  "python": "3.11.2",
+  "reachability_from_one_entry": {
+    "capabilities_total": 67,
+    "counts": {
+      "BLOCKED_ZERO_INPUT": 1,
+      "REACHED_AND_BOUND": 66
+    },
+    "rows": [
+      {
+        "capability_id": "archive.tar_gz.create_from_manifest",
+        "detail": [
+          "manifest_path",
+          "output_path"
+        ],
+        "goal": "Use archive bundle gz manifest package tar on canonical/astra_runtime/tmp/live_solver_e2e/reachability/manifest.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "archive.verify.tar_gz.gnu",
+        "detail": [
+          "archive_path",
+          "manifest_path"
+        ],
+        "goal": "Use archive bundle gnu gz hash manifest members tar verify on canonical/astra_runtime/tmp/live_solver_e2e/reachability/archive.tar.gz canonical/astra_runtime/tmp/live_solver_e2e/reachability/manifest.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "auto.apt.zint",
+        "detail": [
+          "output_path",
+          "text"
+        ],
+        "goal": "Use 128 apt auto barcode effect zint on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.png text \"hello world\"",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "auto.npm.dfinity-cbor",
+        "detail": [
+          "json_path",
+          "output_path"
+        ],
+        "goal": "Use auto binary cbor dfinity encode javascript node npm structured on canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.cbor",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "auto.npm.msgpack-msgpack",
+        "detail": [
+          "json_path",
+          "output_path"
+        ],
+        "goal": "Use auto binary encode javascript msgpack node npm structured on canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.msgpack",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "auto.pypi.bson-modern",
+        "detail": [
+          "json_path",
+          "output_path"
+        ],
+        "goal": "Use auto binary bson encode modern pypi structured on canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.bson",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "auto.pypi.msgpack",
+        "detail": [
+          "json_path",
+          "output_path"
+        ],
+        "goal": "Use auto binary encode exact messagepack msgpack pypi records structured those on canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.msgpack",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "chart.raster.axis_title_unit_binding.v1",
+        "detail": [
+          "path"
+        ],
+        "goal": "Use axis binding chart dimension explicit frequency raster role rotated semantic survival temperature time title unit v1 on canonical/astra_runtime/tmp/live_solver_e2e/reachability/chart.png",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "chart.raster.curve_value_query.v1",
+        "detail": [
+          "label",
+          "path",
+          "x_value"
+        ],
+        "goal": "Use at axis chart curve interpolation legend query raster series v1 value on label \"Curve A\" canonical/astra_runtime/tmp/live_solver_e2e/reachability/chart.png x value 3.5",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "chart.raster.curve_x_at_y_query.v1",
+        "detail": [
+          "label",
+          "path",
+          "y_value"
+        ],
+        "goal": "Use at axis chart curve intersection legend query raster series threshold v1 on label \"Curve A\" canonical/astra_runtime/tmp/live_solver_e2e/reachability/chart.png y value 2",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "chart.raster.direct_curve_label_family_rank.v1",
+        "detail": [
+          "path",
+          "x_value"
+        ],
+        "goal": "Use at binding chart curve direct family growth label nearest rank raster series survival v1 on canonical/astra_runtime/tmp/live_solver_e2e/reachability/chart.png x value 3.5",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "chart.raster.legend_style_binding.v1",
+        "detail": [
+          "path"
+        ],
+        "goal": "Use binding chart color label legend raster series style v1 on canonical/astra_runtime/tmp/live_solver_e2e/reachability/chart.png",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "chart.raster.scene_graph.v1",
+        "detail": [
+          "path",
+          "x_ticks",
+          "y_ticks"
+        ],
+        "goal": "Use axis box calibration chart color component components geometry graph linear log plot polyline polylines raster scene v1 on canonical/astra_runtime/tmp/live_solver_e2e/reachability/chart.png x ticks [0, 1, 2] y ticks [0, 5, 10]",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "chart.read.binary_phase_solvus.v1",
+        "detail": [
+          "path",
+          "prompt"
+        ],
+        "goal": "Use answer binary chart composition diagram phase precipitation solvus v1 on canonical/astra_runtime/tmp/live_solver_e2e/reachability/chart.png prompt \"which phase is stable\"",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "chart.read.legend_linear_intersection.v1",
+        "detail": [
+          "path",
+          "prompt"
+        ],
+        "goal": "Use answer axis chart intersection legend line linear series v1 on canonical/astra_runtime/tmp/live_solver_e2e/reachability/chart.png prompt \"which phase is stable\"",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "decision.synthesis.typed.stdlib",
+        "detail": [
+          "input_path",
+          "output_path"
+        ],
+        "goal": "Use conflict constraint contradiction decision evidence provenance rank stdlib support synthesis terminal trace typed uncertainty on canonical/astra_runtime/tmp/live_solver_e2e/reachability/input.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "decision.synthesis.verify.stdlib",
+        "detail": [
+          "input_path",
+          "result_path"
+        ],
+        "goal": "Use audit decision evidence independent stdlib synthesis trace verified verify on canonical/astra_runtime/tmp/live_solver_e2e/reachability/input.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_result_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "document.convert.markdown_pdf.pandoc_weasyprint",
+        "detail": [
+          "markdown_path",
+          "output_path"
+        ],
+        "goal": "Use document markdown pandoc pdf report weasyprint on canonical/astra_runtime/tmp/live_solver_e2e/reachability/markdown.md and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.pdf",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "docx.document.create.python_docx",
+        "detail": [
+          "goal",
+          "output_path"
+        ],
+        "goal": "Use document docx paragraph python table title word on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.docx",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "docx.document.create_from_json_record",
+        "detail": [
+          "goal",
+          "json_path",
+          "output_path"
+        ],
+        "goal": "Use document docx field json normalized record report table value on canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.docx",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "docx.document.verify.intent_ooxml",
+        "detail": [
+          "docx_path"
+        ],
+        "goal": "Use content document docx exact independent intent ooxml reopen verify word on canonical/astra_runtime/tmp/live_solver_e2e/reachability/docx.docx",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "docx.document.verify.ooxml",
+        "detail": [
+          "document_path",
+          "expected_structure"
+        ],
+        "goal": "Use document docx independent ooxml reopen table verify word on canonical/astra_runtime/tmp/live_solver_e2e/reachability/document.json expected_structure \"value\"",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "evidence.claim_relation.generic_units.stdlib",
+        "detail": [
+          "extraction_path",
+          "output_path",
+          "spec"
+        ],
+        "goal": "Use claim compare evidence exact explicit generic grounded numeric objective predicate relation stdlib support unit units verbatim on canonical/astra_runtime/tmp/live_solver_e2e/reachability/extraction.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json spec \"{\\\"relation\\\": \\\"gt\\\"}\"",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+        "detail": [
+          "extraction_path",
+          "objective",
+          "output_path"
+        ],
+        "goal": "Use at bind binding bound bounded claim compare comparison differ different equal evidence exact exceed explicit greater higher least less lower most numeric objective operand quoted relation spec stdlib threshold on canonical/astra_runtime/tmp/live_solver_e2e/reachability/extraction.json objective \"A is greater than B\" and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "finance.saccr.credit.addon.v1",
+        "detail": [
+          "json_path",
+          "output_path"
+        ],
+        "goal": "Use add addon basel ccr compute counterparty cre52 credit derivative finance notional portfolio sa saccr trades v1 on canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "http.json.fetch_from_state",
+        "detail": [
+          "output_path",
+          "source_json_path",
+          "url_key"
+        ],
+        "goal": "Use authoritative fetch http https json live metadata state url on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/source_json.json url key \"release_url\"",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "image.code.decode.zbarimg",
+        "detail": [
+          "path"
+        ],
+        "goal": "Use barcode code code128 decode qr zbar zbarimg on canonical/astra_runtime/tmp/live_solver_e2e/reachability/chart.png",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "image.extract.ocr.tesseract",
+        "detail": [
+          "path"
+        ],
+        "goal": "Use english ocr raster tesseract on canonical/astra_runtime/tmp/live_solver_e2e/reachability/chart.png",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "image.qr.generate.qrencode",
+        "detail": [
+          "output_path",
+          "text"
+        ],
+        "goal": "Use qr qrencode on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.png text \"hello world\"",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "json.query.jq",
+        "detail": [
+          "jq_filter",
+          "json_path",
+          "output_path"
+        ],
+        "goal": "Use jq json query structured table transform on jq filter \".a\" canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "knowledge.consistency.assess",
+        "detail": [
+          "evidence_paths",
+          "max_age_s",
+          "output_path"
+        ],
+        "goal": "Use assess assessment available conflict consistency corroboration freshness knowledge on canonical/astra_runtime/tmp/live_solver_e2e/reachability/evidence.json max age seconds 600 and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "knowledge.json.fetch.external",
+        "detail": [
+          "authoritative",
+          "json_path",
+          "output_path",
+          "url"
+        ],
+        "goal": "Use available evidence external fetch json knowledge observation on authoritative true canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json https://example.org/release.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "knowledge.status.assert",
+        "detail": [
+          "assessment_path",
+          "expected_status"
+        ],
+        "goal": "Use assert epistemic knowledge status verified verify on canonical/astra_runtime/tmp/live_solver_e2e/reachability/assessment.json expected status \"SUPPORTED\"",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "knowledge.support.materialize",
+        "detail": [
+          "assessment_path",
+          "field_name",
+          "output_path"
+        ],
+        "goal": "Use actionable fact knowledge materialize materialized support supported on canonical/astra_runtime/tmp/live_solver_e2e/reachability/assessment.json field name \"status\" and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "math.numeric_expression.sympy",
+        "detail": [
+          "expression",
+          "output_path",
+          "variables"
+        ],
+        "goal": "Use arithmetic calculate compute evaluate exponent exponentiation expression math multiplication multiply numeric power scalar sympy on expression \"2*x+1\" and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json variables x=2, y=3",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "pdf.extract.ocr.tesseract",
+        "detail": [
+          "pdf_path"
+        ],
+        "goal": "Use ocr pdf tesseract on canonical/astra_runtime/tmp/live_solver_e2e/reachability/pdf.pdf",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "pdf.extract.text.pypdf",
+        "detail": [
+          "pdf_path"
+        ],
+        "goal": "Use pdf pypdf on canonical/astra_runtime/tmp/live_solver_e2e/reachability/pdf.pdf",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+        "detail": [
+          "goal",
+          "output_path"
+        ],
+        "goal": "Use ambiguity bound capability existing goal grounding plain registry reuse semantic stdlib on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+        "detail": [
+          "goal",
+          "result_path"
+        ],
+        "goal": "Use bound capability evidence goal grounding independent plain registry stdlib verified verify on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_result_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "professional.artifact.visual_observer.v1",
+        "detail": [
+          "path"
+        ],
+        "goal": "Use artifact blank crop docx observation observer overlap pdf pptx professional readability render technical v1 visual xlsx on canonical/astra_runtime/tmp/live_solver_e2e/reachability/chart.png",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "pypi.provenance.audit_live_artifact",
+        "detail": [
+          "metadata_path",
+          "report_path",
+          "selection_path"
+        ],
+        "goal": "Use artifact audit download hash live metadata provenance pypi sha256 verify wheel on canonical/astra_runtime/tmp/live_solver_e2e/reachability/metadata.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_report_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/selection.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.fault.localize.dynamic.dataflow.v1",
+        "detail": [
+          "output_path",
+          "source_root",
+          "test_paths"
+        ],
+        "goal": "Use backward coverage dataflow def dynamic fault localization localize ochiai python ranked spectrum symbol trace v1 on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/src canonical/astra_runtime/tmp/live_solver_e2e/reachability/test_mod.py",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.fault.provenance.interprocedural.value.v1",
+        "detail": [
+          "output_path",
+          "source_root",
+          "test_paths"
+        ],
+        "goal": "Use argument call callsite dataflow dynamic edges fault hypotheses interprocedural provenance python return v1 value on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/src canonical/astra_runtime/tmp/live_solver_e2e/reachability/test_mod.py",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.patch.search.test_guided.ast.v1",
+        "detail": [
+          "output_path",
+          "source_path",
+          "test_argv",
+          "test_paths"
+        ],
+        "goal": "Use ast bug candidate guided mutation patch python repair repository search test v1 verified on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/source.py test argv \"python3 -m unittest\" canonical/astra_runtime/tmp/live_solver_e2e/reachability/test_mod.py",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.repository.acceptance.measure.v1",
+        "detail": [
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "goal": "Use acceptance addressed content measure measurement objective python receipt repository test v1 on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/src test argv \"python3 -m unittest\" canonical/astra_runtime/tmp/live_solver_e2e/reachability/test_mod.py",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.software.repair.guided.provenance.coupled.v1",
+        "detail": [
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "goal": "Use candidate coupled dynamic fault guided localization patch provenance python repair search software v1 verified on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/src test argv \"python3 -m unittest\" canonical/astra_runtime/tmp/live_solver_e2e/reachability/test_mod.py",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.software.repair.loop.coupled.ast.v1",
+        "detail": [
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "goal": "Use ast candidate coupled edit fault localization loop multi nonmonotonic pair patch python ranked repair software symbol test v1 verified on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/src test argv \"python3 -m unittest\" canonical/astra_runtime/tmp/live_solver_e2e/reachability/test_mod.py",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
+        "detail": [
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "goal": "Use ast candidate counterexample loop multi patch progress python repair round software strict test tests v1 verified on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/src test argv \"python3 -m unittest\" canonical/astra_runtime/tmp/live_solver_e2e/reachability/test_mod.py",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.software.repair.loop.test_guided.ast.v1",
+        "detail": [
+          "output_path",
+          "source_paths",
+          "test_paths"
+        ],
+        "goal": "Use ast candidate counterexample edit guided loop multi patch python repair software test tests v1 verified on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/mod.py canonical/astra_runtime/tmp/live_solver_e2e/reachability/test_mod.py",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.software.repair.measured_acceptance.v1",
+        "detail": [
+          "goal",
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "goal": "Use acceptance addressed atomic candidate content measured objective patch python repair software v1 verification verified on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/src test argv \"python3 -m unittest\" canonical/astra_runtime/tmp/live_solver_e2e/reachability/test_mod.py",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.software.repair.semantic_acceptance.v1",
+        "detail": [
+          "goal",
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "goal": "Use acceptance addressed candidate content patch python raw repair scope semantic software task v1 verification verified on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/src test argv \"python3 -m unittest\" canonical/astra_runtime/tmp/live_solver_e2e/reachability/test_mod.py",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.software.request.semantic_behavior.compile.v1",
+        "detail": [
+          "goal",
+          "output_path"
+        ],
+        "goal": "Use acceptance behavior call class compile compiled compiler exact exception function program python request semantic software v1 on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.source.audit.ast",
+        "detail": [
+          "output_path",
+          "source_root"
+        ],
+        "goal": "Use ast audit classes functions imports python sha256 source on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/src",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.task.acceptance.measured.objective.v1",
+        "detail": [
+          "goal",
+          "measurement_receipt_path",
+          "output_path"
+        ],
+        "goal": "Use acceptance bound measured measurement objective python raw receipt task v1 verification on canonical/astra_runtime/tmp/live_solver_e2e/reachability/measurement_receipt.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "python.tests.audit.unittest",
+        "detail": [
+          "output_path",
+          "pattern",
+          "source_root"
+        ],
+        "goal": "Use audit failed passed python skipped tests unittest on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json pattern \"test_*.py\" canonical/astra_runtime/tmp/live_solver_e2e/reachability/src",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "source.authority.identity.ror",
+        "detail": [
+          "discovery_path",
+          "output_path"
+        ],
+        "goal": "Use authority domain funding host identity organization provenance research ror source on canonical/astra_runtime/tmp/live_solver_e2e/reachability/discovery.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "source.evidence.extract.objective_grounded.stdlib",
+        "detail": [
+          "input_path",
+          "output_path"
+        ],
+        "goal": "Use bm25 bound evidence grounded hash objective offset provenance relevance research source stdlib units verbatim on canonical/astra_runtime/tmp/live_solver_e2e/reachability/input.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "source.objective_relevance.rank.bm25",
+        "detail": [
+          "input_path",
+          "output_path"
+        ],
+        "goal": "Use bm25 candidate evidence lexical objective rank ranked relevance research source on canonical/astra_runtime/tmp/live_solver_e2e/reachability/input.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "sqlite.table.create_from_json_records",
+        "detail": [
+          "goal",
+          "json_path",
+          "output_path"
+        ],
+        "goal": "Use columns database json records rows sqlite table on canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.sqlite",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "sqlite.table.verify_against_json_records",
+        "detail": [
+          "goal",
+          "json_path",
+          "sqlite_path"
+        ],
+        "goal": "Use against columns database independently json query records rows sqlite table verify on canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/sqlite.sqlite",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "task.acceptance.objective.lossless.v1",
+        "detail": [
+          "candidate_response",
+          "raw_task_text"
+        ],
+        "goal": "Use acceptance ids lossless model objective raw residual semantic software specification task v1 verdict verifier on candidate_response \"value\" raw_task_text \"value\"",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "terminal.kstar.root.assess.stdlib",
+        "detail": "takes no input; never routable from a sentence",
+        "goal": null,
+        "state": "BLOCKED_ZERO_INPUT"
+      },
+      {
+        "capability_id": "web.browser.rendered.capture.chromedriver",
+        "detail": [
+          "result_path",
+          "screenshot_path",
+          "url"
+        ],
+        "goal": "Use browser capture check choose chromedriver click enter form interact navigate open page rendered screenshot select submit type url web website on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_result_path.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_screenshot_path.png https://example.org/release.json",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "web.release.verify.independent_http",
+        "detail": [
+          "major",
+          "product",
+          "result_path",
+          "version_field"
+        ],
+        "goal": "Use current http independent latest official release stable verify version web on major version 3 product \"python\" and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_result_path.json version field \"version\"",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "xlsx.table.create_from_json_records",
+        "detail": [
+          "goal",
+          "json_path",
+          "output_path"
+        ],
+        "goal": "Use columns json records rows spreadsheet table workbook xlsx on canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.xlsx",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "xlsx.table.verify_against_json_records",
+        "detail": [
+          "goal",
+          "json_path",
+          "xlsx_path"
+        ],
+        "goal": "Use against columns independently json records reopen rows spreadsheet table verify workbook xlsx on canonical/astra_runtime/tmp/live_solver_e2e/reachability/json.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/xlsx.xlsx",
+        "state": "REACHED_AND_BOUND"
+      },
+      {
+        "capability_id": "yaml.to_json.yq",
+        "detail": [
+          "output_path",
+          "yaml_path"
+        ],
+        "goal": "Use json parse structured workflow yaml yml yq on and save it to canonical/astra_runtime/tmp/live_solver_e2e/reachability/out_output_path.json canonical/astra_runtime/tmp/live_solver_e2e/reachability/yaml.yaml",
+        "state": "REACHED_AND_BOUND"
+      }
+    ]
+  },
+  "replay": false,
+  "run_tag": "E2E_8f3061a09c",
+  "schema": "PROJECT_BRAIN_LIVE_SOLVER_END_TO_END_MEASUREMENT_V1",
+  "seed": 7976776144138917007,
+  "tool_liveness": {
+    "adapter_import_failed": [],
+    "adapter_missing": [],
+    "capabilities_total": 67,
+    "executor_kernel_refuses_source_type": [
+      "chart.raster.axis_title_unit_binding.v1",
+      "chart.raster.curve_value_query.v1",
+      "chart.raster.curve_x_at_y_query.v1",
+      "chart.raster.direct_curve_label_family_rank.v1",
+      "chart.raster.legend_style_binding.v1",
+      "chart.raster.scene_graph.v1",
+      "chart.read.binary_phase_solvus.v1",
+      "chart.read.legend_linear_intersection.v1",
+      "image.extract.ocr.tesseract",
+      "python.software.repair.guided.provenance.coupled.v1",
+      "python.software.repair.loop.strict_progress.ast.v1",
+      "python.software.repair.loop.test_guided.ast.v1",
+      "python.software.repair.measured_acceptance.v1",
+      "python.software.repair.semantic_acceptance.v1",
+      "python.task.acceptance.measured.objective.v1",
+      "task.acceptance.objective.lossless.v1"
+    ],
+    "external_dependency_missing_here": [
+      "auto.apt.zint",
+      "document.convert.markdown_pdf.pandoc_weasyprint",
+      "image.code.decode.zbarimg",
+      "image.qr.generate.qrencode",
+      "pdf.extract.ocr.tesseract",
+      "sqlite.table.verify_against_json_records",
+      "yaml.to_json.yq"
+    ],
+    "rows": [
+      {
+        "adapter_imports": true,
+        "adapter_module": "archive_tarfile",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "archive.tar_gz.create_from_manifest",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "manifest_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "archive_verify_gnu_tar",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "archive.verify.tar_gz.gnu",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "archive_path",
+          "manifest_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "cli_command",
+        "adapter_present": true,
+        "all_dependencies_present_here": false,
+        "capability_id": "auto.apt.zint",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [
+          {
+            "package": "zint",
+            "present_here": false,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "text"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "node_library_codec",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "auto.npm.dfinity-cbor",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "json_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "node_library_codec",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "auto.npm.msgpack-msgpack",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "json_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_library_codec",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "auto.pypi.bson-modern",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "json_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_library_codec",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "auto.pypi.msgpack",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "json_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "pandoc_weasyprint",
+        "adapter_present": true,
+        "all_dependencies_present_here": false,
+        "capability_id": "document.convert.markdown_pdf.pandoc_weasyprint",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [
+          {
+            "package": "pandoc",
+            "present_here": false,
+            "type": "apt"
+          },
+          {
+            "package": "weasyprint",
+            "present_here": false,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "markdown_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "docx_report_from_json",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "docx.document.create_from_json_record",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [
+          {
+            "package": "python3-docx",
+            "present_here": true,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "json_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_document_builder",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "docx.document.create.python_docx",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [
+          {
+            "package": "python3-docx",
+            "present_here": true,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "docx_verify_ooxml_intent",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "docx.document.verify.intent_ooxml",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "docx_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "docx_verify_ooxml",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "docx.document.verify.ooxml",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "document_path",
+          "expected_structure"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "http_json_fetch",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "http.json.fetch_from_state",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "source_json_path",
+          "url_key"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "cli_command",
+        "adapter_present": true,
+        "all_dependencies_present_here": false,
+        "capability_id": "image.code.decode.zbarimg",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [
+          {
+            "package": "zbar-tools",
+            "present_here": false,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "cli_command",
+        "adapter_present": true,
+        "all_dependencies_present_here": false,
+        "capability_id": "image.qr.generate.qrencode",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [
+          {
+            "package": "qrencode",
+            "present_here": false,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "text"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "jq_query",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "json.query.jq",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [
+          {
+            "package": "jq",
+            "present_here": true,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "jq_filter",
+          "json_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": null,
+        "adapter_module": "runtime_native_action",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "knowledge.consistency.assess",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "evidence_paths",
+          "max_age_s",
+          "output_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": true,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": null,
+        "adapter_module": "runtime_native_action",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "knowledge.json.fetch.external",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "authoritative",
+          "json_path",
+          "output_path",
+          "url"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": true,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": null,
+        "adapter_module": "runtime_native_action",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "knowledge.status.assert",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "assessment_path",
+          "expected_status"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": true,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": null,
+        "adapter_module": "runtime_native_action",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "knowledge.support.materialize",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "assessment_path",
+          "field_name",
+          "output_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": true,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "pdf_ocr_tesseract",
+        "adapter_present": true,
+        "all_dependencies_present_here": false,
+        "capability_id": "pdf.extract.ocr.tesseract",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [
+          {
+            "package": "tesseract-ocr",
+            "present_here": false,
+            "type": "apt"
+          },
+          {
+            "package": "poppler-utils",
+            "present_here": null,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "pdf_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "pdf_pypdf",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "pdf.extract.text.pypdf",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "pdf_path"
+        ],
+        "platforms": null,
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "pypi_provenance_audit",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "pypi.provenance.audit_live_artifact",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "metadata_path",
+          "report_path",
+          "selection_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_source_audit",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.source.audit.ast",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "source_root"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_test_audit",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.tests.audit.unittest",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "pattern",
+          "source_root"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "sqlite_table_stdlib",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "sqlite.table.create_from_json_records",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "json_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "sqlite_verify_cli",
+        "adapter_present": true,
+        "all_dependencies_present_here": false,
+        "capability_id": "sqlite.table.verify_against_json_records",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [
+          {
+            "package": "sqlite3",
+            "present_here": false,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "json_path",
+          "sqlite_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "browser_chromedriver",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "web.browser.rendered.capture.chromedriver",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "result_path",
+          "screenshot_path",
+          "url"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "web_release_verify",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "web.release.verify.independent_http",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "major",
+          "product",
+          "result_path",
+          "version_field"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "xlsx_table_xlsxwriter",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "xlsx.table.create_from_json_records",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [
+          {
+            "package": "python3-xlsxwriter",
+            "present_here": true,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "json_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "xlsx_verify_openpyxl",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "xlsx.table.verify_against_json_records",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [
+          {
+            "package": "python3-openpyxl",
+            "present_here": true,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "json_path",
+          "xlsx_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "yq_yaml_json",
+        "adapter_present": true,
+        "all_dependencies_present_here": false,
+        "capability_id": "yaml.to_json.yq",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [
+          {
+            "package": "yq",
+            "present_here": false,
+            "type": "apt"
+          }
+        ],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "yaml_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "evidence_decision_synthesis",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "decision.synthesis.typed.stdlib",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "input_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "evidence_decision_verify",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "decision.synthesis.verify.stdlib",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "input_path",
+          "result_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "plain_goal_bound_grounding",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "output_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "plain_goal_bound_grounding_verify",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "result_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "numeric_expression_sympy",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "math.numeric_expression.sympy",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "expression",
+          "output_path",
+          "variables"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "source_authority_binding_ror",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "source.authority.identity.ror",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "discovery_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "objective_relevance_bm25",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "source.objective_relevance.rank.bm25",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "input_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "objective_evidence_unit_extract",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "source.evidence.extract.objective_grounded.stdlib",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "input_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "generic_evidence_claim_relation",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "evidence.claim_relation.generic_units.stdlib",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "extraction_path",
+          "output_path",
+          "spec"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "objective_claim_operand_binding",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "extraction_path",
+          "objective",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "terminal_kstar_root_assess",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "terminal.kstar.root.assess.stdlib",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": false
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_test_guided_patch_search_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.patch.search.test_guided.ast.v1",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "source_path",
+          "test_argv",
+          "test_paths"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "image_ocr_tesseract",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "image.extract.ocr.tesseract",
+        "executor": "FRONT_LAYER_LOCAL_ADAPTER",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "chartography_deterministic_professional_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "chart.read.legend_linear_intersection.v1",
+        "executor": "FRONT_LAYER_LOCAL_ADAPTER",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "path",
+          "prompt"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "chartography_deterministic_professional_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "chart.read.binary_phase_solvus.v1",
+        "executor": "FRONT_LAYER_LOCAL_ADAPTER",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "path",
+          "prompt"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_software_repair_loop_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.software.repair.loop.test_guided.ast.v1",
+        "executor": "FRONT_LAYER_LOCAL_ADAPTER",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "source_paths",
+          "test_paths"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_iterative_software_repair_loop_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
+        "executor": "FRONT_LAYER_LOCAL_ADAPTER",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "chart_raster_scene_graph_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "chart.raster.scene_graph.v1",
+        "executor": "FRONT_LAYER_LOCAL_ADAPTER",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "path",
+          "x_ticks",
+          "y_ticks"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_coupled_software_repair_loop_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.software.repair.loop.coupled.ast.v1",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_dynamic_fault_localizer_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.fault.localize.dynamic.dataflow.v1",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "source_root",
+          "test_paths"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "chart_legend_style_binding_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "chart.raster.legend_style_binding.v1",
+        "executor": "FRONT_LAYER_LOCAL_ADAPTER",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "chart_curve_value_query_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "chart.raster.curve_value_query.v1",
+        "executor": "FRONT_LAYER_LOCAL_ADAPTER",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "label",
+          "path",
+          "x_value"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_interprocedural_value_provenance_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.fault.provenance.interprocedural.value.v1",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "source_root",
+          "test_paths"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_provenance_guided_coupled_repair_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.software.repair.guided.provenance.coupled.v1",
+        "executor": "FRONT_LAYER_LOCAL_ADAPTER",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "chart_curve_x_at_y_query_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "chart.raster.curve_x_at_y_query.v1",
+        "executor": "FRONT_LAYER_LOCAL_ADAPTER",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "label",
+          "path",
+          "y_value"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "professional_artifact_visual_observer_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "professional.artifact.visual_observer.v1",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "raw_task_objective_acceptance_executor_v1_run",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "task.acceptance.objective.lossless.v1",
+        "executor": "FRONT_LAYER_LOCAL_ADAPTER",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "candidate_response",
+          "raw_task_text"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_repository_acceptance_measurement_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.repository.acceptance.measure.v1",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_measured_objective_acceptance_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.task.acceptance.measured.objective.v1",
+        "executor": "FRONT_LAYER_LOCAL_ADAPTER",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "measurement_receipt_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_repair_measured_acceptance_controller_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.software.repair.measured_acceptance.v1",
+        "executor": "FRONT_LAYER_LOCAL_ADAPTER",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "chart_direct_curve_label_family_rank_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "chart.raster.direct_curve_label_family_rank.v1",
+        "executor": "FRONT_LAYER_LOCAL_ADAPTER",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "path",
+          "x_value"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_repair_semantic_acceptance_controller_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.software.repair.semantic_acceptance.v1",
+        "executor": "FRONT_LAYER_LOCAL_ADAPTER",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "output_path",
+          "source_root",
+          "test_argv",
+          "test_paths"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "python_software_request_semantic_acceptance_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "python.software.request.semantic_behavior.compile.v1",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "goal",
+          "output_path"
+        ],
+        "platforms": [
+          "linux",
+          "windows",
+          "darwin"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "chart_axis_title_unit_binding_v1",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "chart.raster.axis_title_unit_binding.v1",
+        "executor": "FRONT_LAYER_LOCAL_ADAPTER",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      },
+      {
+        "adapter_imports": true,
+        "adapter_module": "finance_saccr_addon",
+        "adapter_present": true,
+        "all_dependencies_present_here": true,
+        "capability_id": "finance.saccr.credit.addon.v1",
+        "executor": "PINNED_KERNEL",
+        "external_dependencies": [],
+        "import_error": null,
+        "input_keys": [
+          "json_path",
+          "output_path"
+        ],
+        "platforms": [
+          "linux"
+        ],
+        "runtime_native_action": false,
+        "takes_input_from_goal": true
+      }
+    ],
+    "zero_input_capabilities": [
+      "terminal.kstar.root.assess.stdlib"
+    ]
+  }
+}

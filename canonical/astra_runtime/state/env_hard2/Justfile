@@ -1,0 +1,5 @@
+# no tab-indented body, name: command on ONE line -- different shape again
+deploy:
+    python3 ops/deep/deeper/publish.py
+smoke:
+    python3 ops/deep/deeper/publish.py --wrong-place

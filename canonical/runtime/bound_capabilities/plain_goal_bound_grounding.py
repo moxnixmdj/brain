@@ -440,11 +440,21 @@ def ground(
                     ):
                         prior_paths.append(value)
 
-        status=(
-            "UNRESOLVED" if not kept
-            else "GROUNDED" if len(kept)==1
-            else "AMBIGUOUS_BOUNDED"
-        )
+        if not kept:
+            status="UNRESOLVED"
+        elif len(kept)>1:
+            status="AMBIGUOUS_BOUNDED"
+        elif enforce_bindability and not bool(
+            (kept[0].get("binding_affordance") or {}).get(
+                "proposal_bindings_cover_all_inputs")
+        ):
+            # The selected capability already reported that the proposed
+            # bindings do not cover its declared inputs. Surfacing GROUNDED
+            # here hands back a confident score for a call that cannot be
+            # made, which is worse than admitting it does not fit.
+            status="UNBOUND_INPUTS_NOT_GROUNDED"
+        else:
+            status="GROUNDED"
         output_contract=_output_contract(text)
         records.append({
             "index":index,

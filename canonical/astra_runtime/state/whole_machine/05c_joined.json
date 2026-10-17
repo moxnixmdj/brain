@@ -1,0 +1,108 @@
+{
+  "objective": "Does Brain own its capability mechanisms?",
+  "candidate": {
+    "url": "https://api.github.com/repos/moxnixmdj/brain/issues?state=closed"
+  },
+  "provenance": {
+    "schema": "PROJECT_BRAIN_SOURCE_CANDIDATE_PROVENANCE_VERIFICATION_V1",
+    "status": "RETRIEVAL_PROVENANCE_VERIFIED",
+    "verification_method": "LIVE_HTTP_RETRIEVAL",
+    "candidate_url": "https://api.github.com/repos/moxnixmdj/brain/issues?state=closed",
+    "final_url": "https://api.github.com/repos/moxnixmdj/brain/issues?state=closed",
+    "final_host": "api.github.com",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "page_title": null,
+    "authority_status": "RETRIEVABILITY_VERIFIED__FACT_AUTHORITY_UNVERIFIED",
+    "primary_source_status": "UNVERIFIED",
+    "evidence_sufficiency_status": "UNVERIFIED",
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "relevance": {
+    "schema": "PROJECT_BRAIN_OBJECTIVE_RELEVANCE_BM25_V1",
+    "objective": "Does Brain own its capability mechanisms?",
+    "relevance_claim_scope": "LEXICAL_BM25_OBJECTIVE_RELEVANCE_ONLY",
+    "semantic_entailment_status": "UNVERIFIED",
+    "primary_source_status": "UNVERIFIED",
+    "factual_correctness_status": "UNVERIFIED",
+    "evidence_sufficiency_status": "UNVERIFIED",
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "status": "LEXICAL_RELEVANCE_RANKED",
+    "verification_method": "DETERMINISTIC_BM25",
+    "query_tokens": [
+      "does",
+      "brain",
+      "own",
+      "its",
+      "capability",
+      "mechanisms"
+    ],
+    "query_focus": {
+      "schema": "PROJECT_BRAIN_RESEARCH_QUERY_FOCUS_V1",
+      "objective": "Does Brain own its capability mechanisms?",
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "semantic_entailment_status": "UNVERIFIED",
+      "factual_correctness_status": "UNVERIFIED",
+      "status": "FOCUSED",
+      "decision_clause": "Does Brain own its capability mechanisms",
+      "query": "does brain own its capability mechanisms",
+      "tokens": [
+        "does",
+        "brain",
+        "own",
+        "its",
+        "capability",
+        "mechanisms"
+      ],
+      "query_sha256": "a7af24091c81e9b8c6693110379ee47b0ce3cdf3f3a6c6cc45b1feb3bb915d6e",
+      "method": "DECISION_TEXT_UNTIL_EXPLICIT_ORCHESTRATION_BOUNDARY_PLUS_UNICODE_FUNCTION_WORD_FILTER",
+      "claim_scope": "DETERMINISTIC_RESEARCH_SUBJECT_QUERY_ONLY"
+    },
+    "decision_role_focus": null,
+    "candidate_count": 1,
+    "positive_relevance_count": 1,
+    "ranked_candidates": [
+      {
+        "original_index": 0,
+        "candidate": {
+          "id": "retrieved-1",
+          "url": "https://api.github.com/repos/moxnixmdj/brain/issues?state=closed",
+          "title": "canonical/README.md",
+          "record_title": "canonical/README.md",
+          "snippet": "[{\"url\": \"https://api.github.com/repos/moxnixmdj/brain/issues/4935\", \"repository_url\": \"https://api.github.com/repos/moxnixmdj/brain\", \"labels_url\": \"https://api.github.com/repos/moxnixmdj/brain/issues/4935/labels{/name}\", \"comments_url\": \"https://api.github.com/repos/moxnixmdj/brain/issues/4935/comments\", \"events_url\": \"https://api.github.com/repos/moxnixmdj/brain/issues/4935/events\", \"html_url\": \"https://github.com/moxnixmdj/brain/pull/4935\", \"id\": 5897721193, \"node_id\": \"PR_kwDOUVjdIs8AAAABJAlfwA\", \"number\": 4935, \"title\": \"carrier: Record independent verification of capability execution receipts\", \"user\": {\"login\": \"brain-automation[bot]\", \"id\": 342619146, \"node_id\": \"BOT_kgDOFGv0Cg\", \"avatar_url\": \"https://avatars.githubusercontent.com/u/217246470?v=4\", \"gravatar_id\": \"\", \"url\": \"https://api.github.com/users/brain-automation%5Bbot%5D\", \"html_url\": \"https://github.com/apps/brain-automation\", \"followers_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/followers\", \"following_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/following{/other_user}\", \"gists_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/gists{/gist_id}\", \"starred_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/subscriptions\", \"organizations_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/orgs\", \"repos_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/repos\", \"events_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/events{/privacy}\", \"received_events_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/received_events\", \"type\": \"Bot\", \"user_view_type\": \"public\", \"site_admin\": false}, \"labels\": [], \"state\": \"closed\", \"locked\": false, \"assignees\": [], \"milestone\": null, \"comments\": 0, \"created_at\": \"2026-10-17T11:09:27Z\", \"updated_at\": \"2026-10-17T11:10:41Z\", \"closed_at\": \"2026-10-17T11:10:39Z\", \"assignee\": null, \"author_association\": \"CONTRIBUTOR\", \"active_lock_reason\": null, \"draft\": false, \"pull_request\": {\"url\": \"https://api.github.com/repos/moxnixmdj/brain/pulls/4935\", \"html_url\": \"https://github.com/moxnixmdj/brain/pull/4935\", \"diff_url\": \"https://github.com/moxnixmdj/brain/pull/4935.diff\", \"patch_url\": \"https://github.com/moxnixmdj/brain/pull/4935.patch\", \"merged_at\": \"2026-10-17T11:10:39Z\"}, \"body\": \"Carrier result from workflow **Capability receipt independent verification** (run https://github.com/moxnixmdj/brain/actions/runs/39027501842).\\n\\nProduced on the GitHub-hosted runner for commit ef633cac99a5e7e2c2386dc46611bb750c594f75 and submitted through the front door: it merges automatically only when the referee check is green.\\n\\nFiles:\\n- canonical/astra_runtime/evidence/CAPABILITY__brain.module.function.invoke__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_aa_briefcase_component_summary_noninversion_v1.py.auto.v1__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_abc_observable_trace_scope_rebind_verifier_v1.py.auto.v1__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_accepted_pure_route_static_reachability_v1.py.auto.v1__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_authority_epoch_guard_v1.py.auto.v1__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bounded_explicit_categorical_support_v1.py.auto.v1__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_brain_witness_contamination_admissibility_v1.py.auto.v1__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_active_query_task_generator_v1.py.auto.v1__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_characteristic_activ"
+        },
+        "lexical_relevance_score": 1.31139601329,
+        "matched_terms": [
+          "brain",
+          "capability"
+        ],
+        "term_contributions": {
+          "brain": 0.678495453896,
+          "capability": 0.632900559394
+        }
+      }
+    ],
+    "top_candidate_original_index": 0,
+    "top_candidate_admission": {
+      "method": "FOCUSED_QUERY_TOKEN_COVERAGE_V1",
+      "query_token_count": 6,
+      "matched_term_count": 2,
+      "required_matched_term_count": 2,
+      "matched_term_coverage": 0.333333,
+      "verified": true
+    },
+    "admission_claim_scope": "BOUNDED_FOCUSED_QUERY_TOKEN_COVERAGE_ONLY",
+    "output_verified": true,
+    "output_path": "canonical/astra_runtime/state/whole_machine/05b_relevance.json"
+  },
+  "documents": [
+    {
+      "id": "retrieved-1",
+      "url": "https://api.github.com/repos/moxnixmdj/brain/issues?state=closed",
+      "text": "[{\"url\": \"https://api.github.com/repos/moxnixmdj/brain/issues/4935\", \"repository_url\": \"https://api.github.com/repos/moxnixmdj/brain\", \"labels_url\": \"https://api.github.com/repos/moxnixmdj/brain/issues/4935/labels{/name}\", \"comments_url\": \"https://api.github.com/repos/moxnixmdj/brain/issues/4935/comments\", \"events_url\": \"https://api.github.com/repos/moxnixmdj/brain/issues/4935/events\", \"html_url\": \"https://github.com/moxnixmdj/brain/pull/4935\", \"id\": 5897721193, \"node_id\": \"PR_kwDOUVjdIs8AAAABJAlfwA\", \"number\": 4935, \"title\": \"carrier: Record independent verification of capability execution receipts\", \"user\": {\"login\": \"brain-automation[bot]\", \"id\": 342619146, \"node_id\": \"BOT_kgDOFGv0Cg\", \"avatar_url\": \"https://avatars.githubusercontent.com/u/217246470?v=4\", \"gravatar_id\": \"\", \"url\": \"https://api.github.com/users/brain-automation%5Bbot%5D\", \"html_url\": \"https://github.com/apps/brain-automation\", \"followers_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/followers\", \"following_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/following{/other_user}\", \"gists_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/gists{/gist_id}\", \"starred_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/subscriptions\", \"organizations_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/orgs\", \"repos_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/repos\", \"events_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/events{/privacy}\", \"received_events_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/received_events\", \"type\": \"Bot\", \"user_view_type\": \"public\", \"site_admin\": false}, \"labels\": [], \"state\": \"closed\", \"locked\": false, \"assignees\": [], \"milestone\": null, \"comments\": 0, \"created_at\": \"2026-10-17T11:09:27Z\", \"updated_at\": \"2026-10-17T11:10:41Z\", \"closed_at\": \"2026-10-17T11:10:39Z\", \"assignee\": null, \"author_association\": \"CONTRIBUTOR\", \"active_lock_reason\": null, \"draft\": false, \"pull_request\": {\"url\": \"https://api.github.com/repos/moxnixmdj/brain/pulls/4935\", \"html_url\": \"https://github.com/moxnixmdj/brain/pull/4935\", \"diff_url\": \"https://github.com/moxnixmdj/brain/pull/4935.diff\", \"patch_url\": \"https://github.com/moxnixmdj/brain/pull/4935.patch\", \"merged_at\": \"2026-10-17T11:10:39Z\"}, \"body\": \"Carrier result from workflow **Capability receipt independent verification** (run https://github.com/moxnixmdj/brain/actions/runs/39027501842).\\n\\nProduced on the GitHub-hosted runner for commit ef633cac99a5e7e2c2386dc46611bb750c594f75 and submitted through the front door: it merges automatically only when the referee check is green.\\n\\nFiles:\\n- canonical/astra_runtime/evidence/CAPABILITY__brain.module.function.invoke__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_aa_briefcase_component_summary_noninversion_v1.py.auto.v1__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_abc_observable_trace_scope_rebind_verifier_v1.py.auto.v1__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_accepted_pure_route_static_reachability_v1.py.auto.v1__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_authority_epoch_guard_v1.py.auto.v1__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bounded_explicit_categorical_support_v1.py.auto.v1__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_brain_witness_contamination_admissibility_v1.py.auto.v1__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_active_query_task_generator_v1.py.auto.v1__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_characteristic_activ"
+    }
+  ]
+}

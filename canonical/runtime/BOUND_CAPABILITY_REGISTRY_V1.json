@@ -1476,8 +1476,9 @@
       "action_template": {
         "type": "assert_knowledge_status",
         "args": {
-          "assessment_path": "${input.assessment_path}",
-          "expected_status": "${input.expected_status}"
+          "candidate_path": "${input.candidate_path}",
+          "output_path": "${input.output_path}",
+          "capability_id": "knowledge.status.assert"
         },
         "expect": {
           "type": "field_equals",
@@ -1485,7 +1486,7 @@
           "value": true
         }
       },
-      "adapter_module": "runtime_native_action",
+      "adapter_module": "knowledge_status_adapter",
       "cost": 1,
       "incremental_spend_usd": 0,
       "keywords": [
@@ -1541,15 +1542,17 @@
           "field": "output_path",
           "container": "scalar"
         }
-      }
+      },
+      "entrypoint": "run_assert"
     },
     "knowledge.support.materialize": {
       "action_template": {
         "type": "materialize_supported_knowledge",
         "args": {
-          "assessment_path": "${input.assessment_path}",
-          "field_name": "${input.field_name}",
-          "output_path": "${input.output_path}"
+          "candidate_path": "${input.candidate_path}",
+          "verification_path": "${input.verification_path}",
+          "output_path": "${input.output_path}",
+          "capability_id": "knowledge.support.materialize"
         },
         "expect": {
           "type": "field_equals",
@@ -1557,7 +1560,7 @@
           "value": true
         }
       },
-      "adapter_module": "runtime_native_action",
+      "adapter_module": "knowledge_status_adapter",
       "cost": 1,
       "incremental_spend_usd": 0,
       "keywords": [
@@ -1614,7 +1617,8 @@
           "type": "auto_path",
           "suffix": ".json"
         }
-      }
+      },
+      "entrypoint": "run_materialize"
     },
     "pdf.extract.ocr.tesseract": {
       "action_template": {
@@ -2047,7 +2051,13 @@
           {
             "name": "sqlite3",
             "sha256": "78493e56909614ec1d588c9fae1739a704d9e1a6ff65509b1f06c3e4d53ed0c3",
-            "version": "3.45.1-1ubuntu2.8"
+            "version": "3.45.1-1ubuntu2.8",
+            "optional": true,
+            "fallback": {
+              "type": "python_stdlib",
+              "module": "sqlite3"
+            },
+            "optional_reason": "adapter canonical/runtime/bound_capabilities/sqlite_verify_cli.py catches FileNotFoundError for the sqlite3 binary and falls back to the sqlite3 module; the family using this capability passes end to end on this machine with the binary absent."
           }
         ],
         "type": "apt"
@@ -2430,7 +2440,13 @@
           {
             "name": "yq",
             "sha256": "ef935e2b644e6c70ed080396dbe3d93330d1482fd9ce6f34813bdcf3616cb809",
-            "version": "3.1.0-3"
+            "version": "3.1.0-3",
+            "optional": true,
+            "fallback": {
+              "type": "pypi",
+              "module": "yaml"
+            },
+            "optional_reason": "adapter canonical/runtime/bound_capabilities/yq_yaml_json.py catches FileNotFoundError for the yq binary and falls back to the yaml module; the family using this capability passes end to end on this machine with the binary absent."
           }
         ],
         "type": "apt"
@@ -3450,7 +3466,9 @@
         "independent_verification_required_for_any_scope_complete_promotion": true,
         "model_dependency_count": 0,
         "incremental_spend_usd": 0
-      }
+      },
+      "plain_goal_routable": false,
+      "plain_goal_routable_reason": "Takes no input: the assessment is derived entirely from canonical authority files, so no sentence can supply an operand. It is deliberately NOT reachable from a plain goal. Giving it an input placeholder to raise the reachability count was tried and reverted on 2026-10-17: its 30-case keyword set then matched out-of-scope prose and broke the out-of-scope fail-closed rate (1.0 -> 0.967). Fail-closed truth outranks the reachability count. Invoke it directly, or through a multi-step plan that binds it explicitly."
     },
     "python.patch.search.test_guided.ast.v1": {
       "status": "VERIFIED_BOUND_CAPABILITY",
@@ -5551,6 +5569,149 @@
         "model_dependency_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "python.contract.check.crosshair.v1": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.contract.check.crosshair.v1",
+          "target_path": "${input.target_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        }
+      },
+      "adapter_module": "crosshair_contract_oracle",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "contract",
+        "symbolic",
+        "smt",
+        "oracle",
+        "crosshair",
+        "counterexample",
+        "verification"
+      ],
+      "limitations": [
+        "Requires the crosshair-tool package; reports ORACLE_INCONCLUSIVE when absent.",
+        "Checks declared postconditions only; cannot invent contracts the code does not state.",
+        "Symbolic execution can be slow on code with unbounded loops or heavy I/O."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.contract.verdict"
+      ],
+      "requires": [
+        "python.source.file.available"
+      ],
+      "source": {
+        "project": "crosshair-tool",
+        "type": "pypi",
+        "version": "0.0.109",
+        "license": "MIT"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-CROSSHAIR-CONTRACT-ORACLE-001",
+        "observed_effect": {
+          "violations_found": 2,
+          "model_dependency_count": 0,
+          "status": "CONTRACT_VIOLATION_FOUND"
+        }
+      }
+    },
+    "web.browser.interact.chromedriver": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "url": "${input.url}",
+          "actions": "${input.actions}",
+          "screenshot_path": "${input.screenshot_path}",
+          "result_path": "${input.result_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        }
+      },
+      "adapter_module": "browser_chromedriver_interact",
+      "entrypoint": "run",
+      "cost": 1,
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "browser",
+        "web",
+        "click",
+        "type",
+        "navigate",
+        "interact",
+        "chromedriver",
+        "computer",
+        "use",
+        "page"
+      ],
+      "limitations": [
+        "Requires a reachable URL and a local Chrome/chromedriver."
+      ],
+      "provides": [
+        "web.browser.interact.result"
+      ],
+      "requires_binaries": [
+        "chromedriver",
+        "google-chrome"
+      ]
+    },
+    "shell.command.run": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "argv": "${input.argv}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "returncode",
+          "type": "field_equals",
+          "value": 0
+        }
+      },
+      "adapter_module": "cli_command",
+      "entrypoint": "run",
+      "cost": 1,
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "shell",
+        "command",
+        "exec",
+        "run",
+        "terminal",
+        "bash",
+        "process",
+        "environment",
+        "probe",
+        "cli"
+      ],
+      "limitations": [
+        "Runs with cwd pinned to the repository root.",
+        "Timeout clamped to 1-300 seconds.",
+        "Argv limited to 64 non-empty string elements.",
+        "Non-zero exit raises rather than returning."
+      ],
+      "provides": [
+        "shell.command.result"
+      ],
+      "requires": []
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

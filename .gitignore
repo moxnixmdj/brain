@@ -13,3 +13,7 @@ canonical/astra_runtime/state/LIVE_BRAIN_*
 canonical/astra_runtime/state/probe-*
 canonical/runtime/r3_learning_verification_receipts/
 canonical/runtime/SELF_IMPROVEMENT_STATE_V1.json
+
+# Environments this system created. Never part of the project.
+.brain_venv/
+.venv/

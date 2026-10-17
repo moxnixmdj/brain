@@ -1,0 +1,13 @@
+<!doctype html><html><body>
+<h1 id="h">Interaction probe</h1>
+<button id="btn" onclick="document.getElementById('n').textContent=String(+document.getElementById('n').textContent+1)">click me</button>
+<div>counter=<span id="n">0</span></div>
+<input id="txt" oninput="document.getElementById('rev').textContent=this.value.split('').reverse().join('')">
+<div>reversed=<span id="rev">-</span></div>
+<form id="f" onsubmit="event.preventDefault();document.getElementById('done').textContent='submitted:'+document.getElementById('txt').value;return false">
+  <button type="submit">go</button>
+</form>
+<div id="done">-</div>
+<div id="late">NOT_YET</div>
+<script>setTimeout(function(){document.getElementById('late').textContent='APPEARED_LATER';},800);</script>
+</body></html>

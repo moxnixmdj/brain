@@ -1,0 +1,53 @@
+{
+  "model_dependency_count": 0,
+  "problem": "real end-to-end run",
+  "receipts": [
+    {
+      "chain_completed": false,
+      "executed_steps": 0,
+      "model_dependency_count": 0,
+      "need": "evidence.claim.exact_quoted_bound",
+      "steps": 4,
+      "term": "CAPABILITY"
+    }
+  ],
+  "schema": "PROJECT_BRAIN_THEORY_RUNTIME_V1",
+  "terms": {
+    "CAPABILITY": [
+      {
+        "chain": [
+          "source.objective_relevance.rank.bm25",
+          "source.evidence.extract.objective_grounded.stdlib",
+          "evidence.claim_relation.generic_units.stdlib",
+          "evidence.claim_spec.bind.explicit_comparison.stdlib"
+        ],
+        "executed": {
+          "chain": [
+            "source.objective_relevance.rank.bm25",
+            "source.evidence.extract.objective_grounded.stdlib",
+            "evidence.claim_relation.generic_units.stdlib",
+            "evidence.claim_spec.bind.explicit_comparison.stdlib"
+          ],
+          "completed": false,
+          "steps": [
+            {
+              "capability_id": "source.objective_relevance.rank.bm25",
+              "reason": "ValueError: RELEVANCE_INPUT_MISSING",
+              "status": "RUNTIME_ERROR"
+            }
+          ]
+        },
+        "need": "evidence.claim.exact_quoted_bound",
+        "route": "OWNED"
+      }
+    ],
+    "COMPUTATION_SUBSTRATE": {
+      "available": true,
+      "has_supervise": true,
+      "module": "same_identity_supervisor",
+      "path": "/home/user/brain/canonical/runtime/same_identity_supervisor.py"
+    },
+    "JIT_KNOWLEDGE": []
+  },
+  "unresolved": []
+}
