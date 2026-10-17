@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_union25_channel_factorization_v1.py.auto.v1",
- "elapsed_ms": 356.29,
+ "elapsed_ms": 358.214,
  "independent_run_reference": {
-  "github_run_id": 39075169627,
+  "github_run_id": 39075409327,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "5c25bf97-7f2c-4c1f-978e-580f8dd4feaa",
+   "jti": "3b18bf5e-1c79-4b52-94d9-3919c953420e",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39075169627",
+   "run_id": "39075409327",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
