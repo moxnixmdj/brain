@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/root3_seven_class_one_substrate_policy_v1.py.auto.v1",
- "elapsed_ms": 33.771,
+ "elapsed_ms": 35.174,
  "independent_run_reference": {
-  "github_run_id": 39017930075,
+  "github_run_id": 39018141874,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "57b51121-bf42-447c-8134-c62ded9d400c",
+   "jti": "86878b80-f6ac-49ca-995f-d80ffeec0d2a",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39017930075",
+   "run_id": "39018141874",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
