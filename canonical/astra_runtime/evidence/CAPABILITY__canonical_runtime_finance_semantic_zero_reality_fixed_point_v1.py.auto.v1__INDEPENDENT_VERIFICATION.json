@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/finance_semantic_zero_reality_fixed_point_v1.py.auto.v1",
- "elapsed_ms": 32.362,
+ "elapsed_ms": 21.787,
  "independent_run_reference": {
-  "github_run_id": 39062777212,
+  "github_run_id": 39063010520,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "b95247ae-7fab-4891-97eb-defdab5c630c",
+   "jti": "bc73ca6d-aba6-4ef1-9c63-ce747192dab3",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39062777212",
+   "run_id": "39063010520",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
