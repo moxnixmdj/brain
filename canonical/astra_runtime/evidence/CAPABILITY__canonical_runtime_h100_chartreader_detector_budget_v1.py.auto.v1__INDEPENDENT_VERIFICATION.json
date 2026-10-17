@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/h100_chartreader_detector_budget_v1.py.auto.v1",
- "elapsed_ms": 31.354,
+ "elapsed_ms": 41.336,
  "independent_run_reference": {
-  "github_run_id": 39002424849,
+  "github_run_id": 39002612304,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "eb3fc592-e099-4e1c-8db8-b27136e8a7ec",
+   "jti": "5be909ed-da3a-4f45-b5ee-919323194257",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39002424849",
+   "run_id": "39002612304",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
