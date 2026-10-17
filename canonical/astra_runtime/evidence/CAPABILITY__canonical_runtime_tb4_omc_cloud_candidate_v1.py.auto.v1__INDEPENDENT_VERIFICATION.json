@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/tb4_omc_cloud_candidate_v1.py.auto.v1",
- "elapsed_ms": 23.541,
+ "elapsed_ms": 28.389,
  "independent_run_reference": {
-  "github_run_id": 38990197969,
+  "github_run_id": 38990384530,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "9bff4536-3080-4f34-9564-601b441e6ea6",
+   "jti": "8e132f47-4433-4f92-8640-8b9582f13089",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "38990197969",
+   "run_id": "38990384530",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
