@@ -57,6 +57,7 @@ _TOOLS = {"python3", "python", "sh", "bash", "zsh", "dash", "make", "gmake",
           "rm", "mkdir", "touch", "tar", "zip", "unzip", "pytest", "tox",
           "black", "ruff", "mypy", "flake8", "uv"}
 _VERSIONISH = re.compile(r"^v?\d+(?:\.\d+)*[a-z]?$")
+_URLISH = re.compile(r"^[a-z][a-z0-9+.-]*://|^www\.", re.I)
 
 
 def _looks_like_command(value: str) -> bool:
@@ -73,6 +74,14 @@ def _looks_like_command(value: str) -> bool:
     if not v or len(v) > 400 or "\n" in v:
         return False
     if _VERSIONISH.match(v):
+        return False
+    # A URL is not a command. This was found on a REAL repository, not a
+    # synthetic one: pyproject.toml declares [project.urls], and
+    # "https://requests.readthedocs.io" passed the "contains a slash so it
+    # is a path" test. Two of five "tasks" in psf/requests were web
+    # addresses. Every environment I built myself lacked URLs, so no test
+    # I wrote could have caught it.
+    if _URLISH.match(v):
         return False
     parts = v.split()
     head = parts[0]
