@@ -123,15 +123,17 @@ jobs:
           set -euo pipefail
           git config user.name "project-brain-capability-receipt-verification"
           git config user.email "project-brain-capability-receipt-verification@users.noreply.github.com"
+          if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
+            # Pull-request runs verify and report; they do NOT commit or push. Measured: each run
+            # stamps a new run_id / jti / elapsed_ms into every record, so committing here made
+            # every run a new head commit, which re-ran the workflow and invalidated approval
+            # forever. The records are still generated and checked in this run.
+            echo "verification records generated for this pull request; not committed"
+            exit 0
+          fi
           git add canonical/astra_runtime/evidence/CAPABILITY__*__INDEPENDENT_VERIFICATION.json
           git diff --cached --quiet && echo "no new verification records" && exit 0
           git commit -m "Record independent verification of capability execution receipts"
-          if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
-            # Same-repository pull request: publish the records on the branch so the
-            # evidence exists before merge. No need for the automation app.
-            git push origin "HEAD:${GITHUB_HEAD_REF}" && exit 0
-            exit 1
-          fi
           for attempt in 1 2 3; do
             git pull --rebase origin main || { git rebase --abort || true; sleep 2; continue; }
             bash .github/scripts/land_on_main.sh && exit 0
