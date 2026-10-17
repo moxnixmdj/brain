@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_union25_language_exception_carrier_v1.py.auto.v1",
- "elapsed_ms": 1.825,
+ "elapsed_ms": 2.27,
  "independent_run_reference": {
-  "github_run_id": 39040058523,
+  "github_run_id": 39040281041,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "92fa2eec-ce9f-4ac7-a94e-bae1d408f4f4",
+   "jti": "3b614f89-9e40-4bd0-bd18-ea264320b7ad",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39040058523",
+   "run_id": "39040281041",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
