@@ -42,6 +42,9 @@ for (const [f,o] of [['swiftshader.tar.br','sw.tar'],['al2023.tar.br','al2023.ta
 [ -d sw ] || { mkdir -p sw al && tar -xf sw.tar -C sw && tar -xf al2023.tar -C al; }
 # Vulkan needs an absolute path to the SwiftShader driver.
 node -e "const fs=require('fs');fs.writeFileSync('sw/vk_swiftshader_icd.json',JSON.stringify({file_format_version:'1.0.0',ICD:{library_path:process.cwd()+'/sw/libvk_swiftshader.so',api_version:'1.0.5'}},null,2))"
+# Delete this line once a real libnssckbi.so sits in al/lib.
+export CHROMIUM_INSECURE=1
+
 LD_LIBRARY_PATH="$PWD/sw:$PWD/al/lib" \
 VK_ICD_FILENAMES="$PWD/sw/vk_swiftshader_icd.json" \
   nohup ./chromium --headless=new --no-sandbox --disable-setuid-sandbox \
