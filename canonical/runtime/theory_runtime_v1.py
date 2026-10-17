@@ -145,9 +145,17 @@ def solve(problem: Mapping[str, Any], world: Sequence[str] | None = None,
         verdict = route(need, world, g)
         if verdict == "OWNED":
             chain = COMPOSER.plan(list(world), need, g) or []
-            owned.append({"need": need, "route": "OWNED", "chain": chain})
+            # Plan, then actually run it.  A chain length is not a result.
+            run = execute_chain(chain, str(ROOT))
+            owned.append({"need": need, "route": "OWNED", "chain": chain,
+                          "executed": run})
             receipts.append({"need": need, "term": "CAPABILITY",
-                             "steps": len(chain), "model_dependency_count": 0})
+                             "steps": len(chain),
+                             "executed_steps": sum(
+                                 1 for s in run["steps"]
+                                 if s["status"] == "EXECUTED"),
+                             "chain_completed": run["completed"],
+                             "model_dependency_count": 0})
             # An owned mechanism that handles external content carries a
             # retention obligation.  Not a route -- a property of THIS
             # capability: what it fetches, it does not keep.
@@ -176,6 +184,82 @@ def solve(problem: Mapping[str, Any], world: Sequence[str] | None = None,
     # term 3: every completed problem checkpoints so a longer chain can resume
     result["checkpoint"] = str(checkpoint(result, state_path))
     return result
+
+
+# --------------------------------------------------------------------------- #
+# execution -- the part that was missing
+# --------------------------------------------------------------------------- #
+_ADAPTER_DIR = Path(__file__).resolve().parent / "bound_capabilities"
+
+
+def _adapter(cid: str):
+    """Load the module implementing `cid`.  It lives in Brain, or not at all."""
+    import importlib
+    if str(_ADAPTER_DIR) not in sys.path:
+        sys.path.insert(0, str(_ADAPTER_DIR))
+    entry = COMPOSER.load_registry()[cid]
+    mod = importlib.import_module(entry["adapter_module"])
+    return entry, getattr(mod, entry.get("entrypoint", "run"))
+
+
+def _bind_args(cid: str, entry: Mapping[str, Any], bindings: Mapping[str, Any]) -> dict:
+    """Fill the capability's typed args from what earlier steps produced.
+
+    An arg we cannot fill is left as its literal ``${input.x}`` placeholder.
+    It then fails the type check and the step fails closed.  We never invent a
+    value to make a chain look complete.
+    """
+    tmpl = dict((entry.get("action_template") or {}).get("args") or {})
+    # Keep only the slots the capability actually declares.  Templates carry
+    # bookkeeping (`capability_id`) and optional knobs (`timeout`, `max_units`)
+    # that the typed signature does not declare, and the type checker rightly
+    # rejects them.  Filtering to declared slots is the rule; special-casing
+    # names would be the bug.
+    declared = COMPOSER.signature(cid)
+    args = {}
+    tmpl = {k: v for k, v in tmpl.items() if k in declared}
+    for key, val in tmpl.items():
+        if isinstance(val, str) and val.startswith("${input.") and val.endswith("}"):
+            slot = val[len("${input."):-1]
+            args[key] = bindings.get(slot, val)
+        else:
+            args[key] = val
+    return args
+
+
+def execute_chain(chain: Sequence[str], root: str,
+                  bindings: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    """Run a composed chain.  Each step's outputs feed the next step's inputs.
+
+    Planning alone proved nothing.  This is the machine actually moving.
+    """
+    bindings = dict(bindings or {})
+    steps = []
+    for cid in chain:
+        try:
+            entry, fn = _adapter(cid)
+        except Exception as exc:
+            steps.append({"capability_id": cid, "status": "ADAPTER_UNLOADABLE",
+                          "reason": f"{type(exc).__name__}: {exc}"})
+            break
+        args = _bind_args(cid, entry, bindings)
+        errs = COMPOSER.call_errors(cid, args)
+        if errs:
+            steps.append({"capability_id": cid, "status": "TYPE_ERROR",
+                          "errors": list(errs)})
+            break
+        try:
+            out = fn(args, root)
+        except Exception as exc:
+            steps.append({"capability_id": cid, "status": "RUNTIME_ERROR",
+                          "reason": f"{type(exc).__name__}: {exc}"})
+            break
+        if isinstance(out, Mapping):
+            bindings.update({k: v for k, v in out.items() if not k.startswith("_")})
+        steps.append({"capability_id": cid, "status": "EXECUTED",
+                      "result_keys": sorted(out) if isinstance(out, Mapping) else None})
+    return {"chain": list(chain), "steps": steps,
+            "completed": all(s["status"] == "EXECUTED" for s in steps)}
 
 
 def main() -> None:  # pragma: no cover
