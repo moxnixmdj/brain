@@ -108,30 +108,7 @@ def verify(goal: str, root: str, before: dict, after: dict,
         return {"verified": False, "reason": "NOTHING_PRODUCED",
                 "new_paths": [], "modified_paths": []}
 
-    hits = [p for p in touched if any(t in p.lower() for t in tokens)]
-    if hits:
-        return {"verified": True, "reason": "GOAL_ARTIFACT_FOUND",
-                "route": "lexical", "matching": hits[:10],
-                "new_paths": new[:10], "modified_paths": changed[:10],
-                "goal_tokens": tokens}
-
-    # Route two: a task named after the goal tells us what it produced.
-    bridged, via = [], None
-    for cmd, paths in (produces or {}).items():
-        key = " ".join(cmd).lower() if isinstance(cmd, (list, tuple)) \
-            else str(cmd).lower()
-        if any(t in key for t in tokens):
-            for path in paths:
-                if path in touched:
-                    bridged.append(path)
-                    via = key
-    if bridged:
-        return {"verified": True, "reason": "GOAL_ARTIFACT_FOUND",
-                "route": "environment_evidence", "via_command": via,
-                "matching": sorted(set(bridged))[:10],
-                "new_paths": new[:10], "goal_tokens": tokens}
-
-    # Route three: ASK THE ENVIRONMENT TO JUDGE.
+    # Route ZERO, and it runs FIRST: ASK THE ENVIRONMENT TO JUDGE.
     #
     # Whether an artifact is a valid report is semantic, and this system has
     # no semantics. But projects routinely ship their own oracle: tests,
@@ -159,6 +136,29 @@ def verify(goal: str, root: str, before: dict, after: dict,
                 "new_paths": new[:10],
                 "modified_paths": changed[:10],
                 "goal_tokens": tokens}
+
+    hits = [p for p in touched if any(t in p.lower() for t in tokens)]
+    if hits:
+        return {"verified": True, "reason": "GOAL_ARTIFACT_FOUND",
+                "route": "lexical", "matching": hits[:10],
+                "new_paths": new[:10], "modified_paths": changed[:10],
+                "goal_tokens": tokens}
+
+    # Route two: a task named after the goal tells us what it produced.
+    bridged, via = [], None
+    for cmd, paths in (produces or {}).items():
+        key = " ".join(cmd).lower() if isinstance(cmd, (list, tuple)) \
+            else str(cmd).lower()
+        if any(t in key for t in tokens):
+            for path in paths:
+                if path in touched:
+                    bridged.append(path)
+                    via = key
+    if bridged:
+        return {"verified": True, "reason": "GOAL_ARTIFACT_FOUND",
+                "route": "environment_evidence", "via_command": via,
+                "matching": sorted(set(bridged))[:10],
+                "new_paths": new[:10], "goal_tokens": tokens}
 
     return {"verified": False, "reason": "NO_MATCHING_ARTIFACT",
             "route": None, "matching": [], "new_paths": new[:10],
