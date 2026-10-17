@@ -162,6 +162,8 @@ def candidates(root: str, binary_limit: int = 40) -> list[list[str]]:
         cmds.append(["npm", "run"])
     # The advertised entry points, so discovery leads somewhere.
     cmds.extend(entrypoint_commands(root))
+    # Tasks declared in files we have no prior knowledge of.
+    cmds.extend(task_commands_from_files(root))
     return cmds
 
 
@@ -185,6 +187,19 @@ def services(ports=None, host="127.0.0.1", timeout=0.12) -> list[int]:
         except OSError:
             continue
     return found
+
+
+def task_commands_from_files(root: str) -> list[list[str]]:
+    """Tasks declared in any structured file, whatever it happens to be called.
+
+    Delegates to taskfile_read_v1, which reads by SHAPE -- a name paired with
+    a command -- rather than by filename. Formats never seen before still work.
+    """
+    try:
+        import taskfile_read_v1 as T
+        return T.task_commands(root)
+    except Exception:
+        return []
 
 
 def service_commands(host="127.0.0.1", ports=None) -> list[list[str]]:
