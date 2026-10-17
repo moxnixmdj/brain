@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/professional_quality_declared_system_subject_verify_v1.py.auto.v1",
- "elapsed_ms": 37.297,
+ "elapsed_ms": 29.249,
  "independent_run_reference": {
-  "github_run_id": 39011771912,
+  "github_run_id": 39011971697,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "a17e0e03-4018-4741-af5d-2f0fdf13ad26",
+   "jti": "7a022f07-aba8-447c-846e-1661e538de43",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39011771912",
+   "run_id": "39011971697",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
