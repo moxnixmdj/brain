@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/v14_synthesis_unsupported_claim_cell_verifier_v1.py.auto.v1",
- "elapsed_ms": 29.43,
+ "elapsed_ms": 24.3,
  "independent_run_reference": {
-  "github_run_id": 39024078824,
+  "github_run_id": 39024287697,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "34ca2d6c-2e3e-4be8-9022-b70ef7b37ae8",
+   "jti": "3e82001a-6144-41da-b719-01de0d397159",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39024078824",
+   "run_id": "39024287697",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
