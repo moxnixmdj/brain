@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_release_unconditional_schema_envelope_v1.py.auto.v1",
- "elapsed_ms": 149.956,
+ "elapsed_ms": 146.223,
  "independent_run_reference": {
-  "github_run_id": 39072063318,
+  "github_run_id": 39072285125,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "11f78043-8a11-432e-b677-6bc7e1683c54",
+   "jti": "4f34cfd4-9863-40e7-b0ca-40747c3adaaf",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39072063318",
+   "run_id": "39072285125",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
