@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/exact_symbolic_selected_leaf_verifier_v1.py.auto.v1",
- "elapsed_ms": 38.663,
+ "elapsed_ms": 37.007,
  "independent_run_reference": {
-  "github_run_id": 39004707276,
+  "github_run_id": 39004917536,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "5cf86d90-c2df-4efc-ab97-6a48c8de8084",
+   "jti": "a2409fbf-f1cf-4c62-aed6-1370d093ac80",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39004707276",
+   "run_id": "39004917536",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
