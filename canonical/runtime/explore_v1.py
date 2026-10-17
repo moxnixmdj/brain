@@ -171,7 +171,8 @@ def explore(root: str, commands: list[list[str]],
 def explore_here(root: str, want_tokens: list[str] | None = None,
                  binary_limit: int = 12, iterations: int = 12,
                  interaction_aware: bool = False,
-                 compose_aware: bool = False) -> dict:
+                 compose_aware: bool = False,
+                 exclude: set | None = None) -> dict:
     """The whole chain, one call: discover -> probe -> search -> credit.
 
     The commands are NOT supplied. They are discovered from the environment.
@@ -185,6 +186,9 @@ def explore_here(root: str, want_tokens: list[str] | None = None,
     # report said "excluded_as_undoer: [clean.py]" while clean.py ran anyway
     # and deleted out/app.txt. A guard that reports safety without providing
     # it is worse than no guard -- it manufactures confidence.
+    if exclude:
+        cmds = [c for c in cmds if " ".join(c) not in exclude]
+
     guard: dict = {}
     if interaction_aware:
         guard = _interaction_guard(root, cmds)

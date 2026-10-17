@@ -192,11 +192,38 @@ def run(goal: str, root: str, binary_limit: int = 0,
     import explore_v1 as X
     tokens = goal_tokens(goal)
     before = _snapshot(root)
+
+    # LOOK BEFORE ACTING.
+    # env_monster2 made acting first unrecoverable. The environment's own
+    # check and the scripts themselves are plain text sitting in the
+    # directory; reading them says which command produces what the check
+    # demands. Commands whose source satisfies the oracle are run first;
+    # ones we could read and that contradict it go last. Unreadable ones
+    # keep their place -- unread is not the same as wrong.
+    look: dict = {}
+    try:
+        import taskfile_read_v1 as TF
+        import look_before_v1 as LB
+        tasks = TF.read_tasks(root)
+        vsrc = LB.scripts_named(["check.py"], Path(root))
+        if not vsrc:
+            for t in LB.__dict__.get("find_validators", lambda x: []) (tasks):
+                pass
+        # validator sources: any local script a validator command names
+        for t in find_validators(tasks):
+            vsrc += LB.scripts_named(t.get("command", "").split(), Path(root))
+        cmds0 = [["sh", "-c", t["command"]] for t in tasks if t.get("command")]
+        if vsrc and cmds0:
+            look = LB.choose(cmds0, root, list(dict.fromkeys(vsrc)))
+    except Exception:
+        look = {}
+    # Act on what reading revealed: do not run what the sources contradict.
+    exclude = {" ".join(c) for c in look.get("demoted") or []}
     result = X.explore_here(root, want_tokens=tokens,
                             binary_limit=binary_limit,
                             iterations=iterations,
                             interaction_aware=True,
-                            compose_aware=True)
+                            compose_aware=True, exclude=exclude)
     after = _snapshot(root)
     produces = {}
     try:
@@ -243,6 +270,9 @@ def run(goal: str, root: str, binary_limit: int = 0,
             "excluded_as_undoer": result.get("excluded_as_undoer") or [],
             "retried": (result.get("chained") or {}).get("retried") or [],
             "best": result.get("best"),
+            "look_before": {"requirements": look.get("requirements", []),
+                            "preferred": [" ".join(c) for c in look.get("preferred", [])],
+                            "demoted": [" ".join(c) for c in look.get("demoted", [])]},
             "verification": check,
             "model_dependency_count": 0}
 
