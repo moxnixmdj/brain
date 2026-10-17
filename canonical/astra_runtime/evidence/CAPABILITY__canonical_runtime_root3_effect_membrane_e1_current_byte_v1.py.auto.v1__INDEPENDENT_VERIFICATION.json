@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/root3_effect_membrane_e1_current_byte_v1.py.auto.v1",
- "elapsed_ms": 140.633,
+ "elapsed_ms": 192.37,
  "independent_run_reference": {
-  "github_run_id": 39026360638,
+  "github_run_id": 39026558328,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "fa5d558c-300a-40a9-8d1b-0889be605632",
+   "jti": "14f8bc9b-ffe7-4064-8918-f1eb473bb81b",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39026360638",
+   "run_id": "39026558328",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
