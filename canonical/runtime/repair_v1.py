@@ -52,11 +52,11 @@ _SIGNATURES: list[tuple[str, re.Pattern]] = [
 # (evidence regex, command, the tool that must exist here)
 _TEST_EVIDENCE = [
     (re.compile(r"^\s*import\s+unittest\b|^\s*from\s+unittest\b", re.M),
-     "python3 -m unittest discover -s . -p 'test*.py' -v", "python3"),
+     "python3 -m unittest discover -s . -p 'test*.py' -v"),
     (re.compile(r"""from\s+['"]node:test['"]|require\(['"]node:test['"]\)""", re.M),
-     "node --test", "node"),
+     "node --test"),
     (re.compile(r"^\s*import\s+pytest\b|^\s*from\s+pytest\b", re.M),
-     "python3 -m pytest -q", "python3"),
+     "python3 -m pytest -q"),
 ]
 
 # Tools that are test runners. Only when the missing binary is one of these
@@ -93,7 +93,13 @@ _TEST_FILE = re.compile(
 _TEST_WORD = (r"(?:tests?|specs?|suites?|passed|passing|failed|failing|pass"
               r"|fail|ok|skipped)")
 _FAIL_WORD = r"(?:failed|failing|failures?|errors?|broken)"
-_SEP = r"[\s:=#|/(),.\[\]-]{0,3}"
+# What may sit between the word and the number. Punctuation only -- and
+# deliberately not parentheses or brackets, because a number inside
+# brackets is almost never a count of tests. That exclusion is not
+# cosmetic: a real repository printed "typing: ok (4.65=setup[0.97]+cmd)"
+# and with brackets allowed the detector read it as four tests having run,
+# from a command that type-checks and runs no tests at all.
+_SEP = r"[\s:=#|/.,-]{0,3}"
 _TEST_COUNT_RE = re.compile(
     rf"(?:\b{_TEST_WORD}\b{_SEP}(\d+))|(?:(\d+){_SEP}\b{_TEST_WORD}\b)", re.I)
 _FAIL_COUNT_RE = re.compile(
@@ -132,6 +138,34 @@ def failure_count(output: str) -> int:
     return max((n for n, _ in _counts(output or "", _FAIL_COUNT_RE)), default=0)
 
 
+# Directories that hold other people's code, and code this system itself
+# fetched. Evidence about what a project's tests are written against has
+# to come from the project -- not from the packages installed beside it.
+#
+# This exclusion exists because of a loop, and the loop is worth naming:
+# provisioning creates .brain_venv, the scan then reads the vendored
+# packages inside it, and those packages vote 104 to 45 that the project
+# uses unittest, when in fact every one of its test files uses pytest.
+# Adapting the environment had changed what the environment appeared to
+# be. A mechanism whose own side effects become evidence for its next
+# decision is not learning, it is an echo.
+_NOT_PROJECT = re.compile(
+    r"(^|/)(node_modules|site-packages|\.brain_venv|\.venv|venv|vendor"
+    r"|__pycache__|\.git|\.tox|\.nox|\.mypy_cache|\.pytest_cache"
+    r"|third_party|external|dist|build)/",
+    re.I,
+)
+
+
+def _is_project_file(path: Path) -> bool:
+    """Is this the project's own code, rather than something installed?"""
+    try:
+        rel = path.as_posix()
+    except Exception:
+        return False
+    return not _NOT_PROJECT.search(rel)
+
+
 def _is_test_file(path: Path) -> bool:
     """Is this file a test? Decided by its name and where it lives."""
     try:
@@ -139,6 +173,36 @@ def _is_test_file(path: Path) -> bool:
     except Exception:
         return False
     return bool(_TEST_FILE.search(rel))
+
+
+def command_runnable(command: str) -> tuple[bool, str]:
+    """Can this command actually execute here?
+
+    `python3 -m pytest` does not run because python3 exists. It runs
+    because the pytest module imports. Asking about the first word is
+    the mistake this function exists to prevent: on a real repository it
+    proposed `python3 -m pytest -q` for a machine with no pytest, and the
+    substitute failed on the very first call.
+
+    The question is therefore put to the machine about the command as a
+    whole, not about one token of it.
+    """
+    parts = (command or "").strip().split()
+    if not parts:
+        return False, "empty command"
+    m = re.match(r"^python3?\s+-m\s+([A-Za-z0-9_.-]+)", command)
+    if m:
+        module = m.group(1)
+        try:
+            r = subprocess.run([parts[0], "-c", f"import {module}"],
+                               capture_output=True, timeout=60)
+        except Exception as exc:
+            return False, f"{type(exc).__name__}: {exc}"
+        return ((True, f"module {module} importable") if r.returncode == 0
+                else (False, f"module {module} not importable"))
+    if shutil.which(parts[0]):
+        return True, f"{parts[0]} on PATH"
+    return False, f"{parts[0]} not found"
 
 
 def _find_runner(root: str) -> tuple[str | None, str]:
@@ -152,6 +216,14 @@ def _find_runner(root: str) -> tuple[str | None, str]:
     if not base.is_dir():
         return None, ""
     files = 0
+    # Evidence is counted, not merely found. A repository can mention
+    # several frameworks -- itsdangerous is a pytest project that also
+    # imports unittest somewhere under tests/, and returning whichever
+    # row happened to be listed first proposed unittest for a codebase
+    # whose tests are written for pytest. The question is which framework
+    # the tests are predominantly written against, so the rows are ranked
+    # by how many test files speak for each.
+    tally: dict[int, int] = {}
     for path in base.rglob("*"):
         if files > 600:
             break
@@ -165,16 +237,27 @@ def _find_runner(root: str) -> tuple[str | None, str]:
         # while the real tests sat in tests/test_core.py using unittest.
         # Evidence about what the tests are written against has to come from
         # the tests; a runner merely mentioned in a helper proves nothing.
-        if not _is_test_file(path):
+        if not _is_test_file(path) or not _is_project_file(path):
             continue
         files += 1
         try:
             text = path.read_text(errors="ignore")
         except Exception:
             continue
-        for pattern, command, needs in _TEST_EVIDENCE:
-            if pattern.search(text) and shutil.which(needs):
-                return command, f"tests use {pattern.pattern[:24]!r}; {needs} is present"
+        for index, (pattern, _command) in enumerate(_TEST_EVIDENCE):
+            if pattern.search(text):
+                tally[index] = tally.get(index, 0) + 1
+
+    for index, _ in sorted(tally.items(), key=lambda kv: (-kv[1], kv[0])):
+        pattern, command = _TEST_EVIDENCE[index]
+        # Judge the thing being proposed. A substitute that cannot execute
+        # is not a substitute, however strong the evidence for choosing it
+        # was: proposing `python3 -m pytest` on a machine with no pytest
+        # wasted the substitution on a command that fails immediately.
+        ok, why = command_runnable(command)
+        if ok:
+            return command, (f"{tally[index]} test file(s) use "
+                             f"{pattern.pattern[:24]!r}; {why}")
     return None, ""
 
 

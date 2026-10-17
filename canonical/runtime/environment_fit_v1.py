@@ -34,6 +34,7 @@ observe. Nothing asks a model to guess.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -151,25 +152,18 @@ def declared(root: str) -> list[dict]:
 
 
 def runnable(command: str) -> tuple[bool, str]:
-    """Can this command's first token execute here?
+    """Can this command execute here? Judged by asking the machine.
 
-    Judged by asking the machine, not by remembering a list.
+    Defined once, in repair_v1, and used here too. Two answers to "can
+    this run" would be two chances to disagree about what running means,
+    and the disagreement would surface as a command that one half of the
+    system considers available and the other half cannot start.
     """
-    token = _first_token(command)
-    if not token:
-        return False, "empty command"
-    if token in ("npm",) and shutil.which("npm"):
-        return True, "npm present"
-    if shutil.which(token):
-        return True, f"{token} on PATH"
-    # python -m mod: the binary need not exist for the module to be importable
-    m = re.match(r"^python3?\s+-m\s+([A-Za-z0-9_.-]+)", command)
-    if m:
-        r = subprocess.run(["python3", "-c", f"import {m.group(1)}"],
-                           capture_output=True, timeout=30)
-        return (True, f"module {m.group(1)} importable") if r.returncode == 0 \
-            else (False, f"module {m.group(1)} not importable")
-    return False, f"{token} not found"
+    try:
+        from repair_v1 import command_runnable
+    except ImportError:  # pragma: no cover
+        from canonical.runtime.repair_v1 import command_runnable
+    return command_runnable(command)
 
 
 def _tests_use(root: str, module: str) -> bool:
@@ -324,10 +318,318 @@ def _resolve(command: str, root: str) -> list[str]:
     return []
 
 
-def fit(root: str) -> dict:
-    """Of what this environment declares, what can actually happen here."""
+# Where isolated environments are created: OUTSIDE the project, in a
+# cache keyed by the project's path.
+#
+# Inside the project was tried first and is wrong. Provisioning is a side
+# effect, and a directory of installed packages inside a repository is a
+# side effect that changes what the repository looks like -- to the
+# scanner reading its test files, to the monster environment whose entire
+# purpose is to punish exactly that, and to anyone who later tries to
+# understand what belongs to the project. An environment the system
+# created is not part of the project it was created for.
+def _env_dir(root: str) -> Path:
+    import os as _os
+    import tempfile as _tf
+    key = hashlib.sha256(_os.path.abspath(root).encode("utf-8")).hexdigest()[:16]
+    base = _os.environ.get("BRAIN_ENV_DIR") or _os.path.join(
+        _tf.gettempdir(), "brain_envs")
+    return Path(base) / key
+
+_PY_MODULE = re.compile(r"^python3?\s+-m\s+([A-Za-z0-9_.-]+)")
+
+# Failures that mean "something is missing", as opposed to "the project is
+# broken". Only these justify going to fetch something.
+_DEPENDENCY_CLASSES = frozenset({
+    "missing_binary", "missing_python_module", "missing_node_module",
+})
+
+
+def _requirement(command: str) -> str:
+    """The obtainable thing a command needs, named by the command itself.
+
+    Not a list of tools. `python -m X` names X; anything else names its
+    first word. Whether that name is obtainable is then discovered by
+    trying, which is the only way to know, and works for packages that
+    did not exist when this file was written.
+    """
+    m = _PY_MODULE.match((command or "").strip())
+    if m:
+        return m.group(1)
+    return _first_token(command)
+
+
+def provision(command: str, root: str, timeout: int = 600) -> tuple[str | None, str]:
+    """Obtain what a command needs, in isolation -- then prove it works.
+
+    ADAPT is always tried first, because borrowing what already exists is
+    cheaper and safer than fetching something new. PROVISION is the move
+    for when there is nothing to borrow: the project genuinely needs a
+    tool this machine does not have, and the honest alternatives are to
+    fetch it or to admit the task cannot be done here.
+
+    Two rules, both learned the hard way:
+
+    It happens in a virtual environment inside the project, never against
+    the system interpreter, so a fetched package cannot disturb anything
+    that was already working.
+
+    And it is verified before it is trusted. Installing is not the same as
+    being able to run; the command is executed after the install and only
+    reported as provisioned if it responds. A provision that was assumed
+    rather than checked would fail later, in a way that looked like the
+    project's fault.
+    """
+    name = _requirement(command)
+    if not name:
+        return None, "nothing to obtain"
+
+    import sys as _sys
+    base = Path(root)
+    venv = _env_dir(root) / "venv"
+    python = venv / "bin" / "python"
+
+    if not python.is_file():
+        try:
+            r = subprocess.run([_sys.executable, "-m", "venv", str(venv)],
+                               capture_output=True, text=True, timeout=timeout)
+        except Exception as exc:
+            return None, f"could not create an isolated environment: {exc}"
+        if r.returncode != 0:
+            return None, ("could not create an isolated environment: "
+                          + (r.stderr or "").strip()[:160])
+
+    try:
+        r = subprocess.run([str(python), "-m", "pip", "install", "-q", name],
+                           capture_output=True, text=True, timeout=timeout)
+    except subprocess.TimeoutExpired:
+        return None, f"obtaining {name} timed out"
+    except Exception as exc:
+        return None, f"could not obtain {name}: {exc}"
+    if r.returncode != 0:
+        return None, f"could not obtain {name}: {(r.stderr or '').strip()[:160]}"
+
+    # Prove it, rather than assuming the install took.
+    m = _PY_MODULE.match((command or "").strip())
+    if m:
+        probe = [str(python), "-c", f"import {m.group(1)}"]
+        working = command.replace("python3 -m", f"{python} -m", 1).replace(
+            "python -m", f"{python} -m", 1)
+    else:
+        probe = [str(venv / "bin" / name), "--version"]
+        working = command.replace(_first_token(command),
+                                  str(venv / "bin" / name), 1)
+    try:
+        p = subprocess.run(probe, capture_output=True, timeout=120)
+    except Exception as exc:
+        return None, f"{name} installed but did not run: {exc}"
+    if p.returncode != 0:
+        return None, f"{name} installed but did not run"
+    return working, f"obtained {name} into an isolated environment and verified it runs"
+
+
+def _ensure_venv(root: str, timeout: int = 600):
+    """An isolated interpreter for this project, created if absent."""
+    import sys as _sys
+    venv = _env_dir(root) / "venv"
+    python = venv / "bin" / "python"
+    if python.is_file():
+        return str(python)
+    venv.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        r = subprocess.run([_sys.executable, "-m", "venv", str(venv)],
+                           capture_output=True, text=True, timeout=timeout)
+    except Exception:
+        return None
+    return str(python) if r.returncode == 0 and python.is_file() else None
+
+
+def _declared_python_test_deps(root: Path) -> list[str]:
+    """What the project says its tests need, read from its own manifest.
+
+    Not a guess about which packages are popular. The project states its
+    dependencies; that statement is the most reliable thing available
+    about what has to be present, and it is right for packages that did
+    not exist when this code was written.
+    """
+    found: list[str] = []
+    pp = root / "pyproject.toml"
+    if pp.is_file():
+        try:
+            import tomllib
+            data = tomllib.loads(_read(pp))
+        except Exception:
+            data = {}
+        groups = data.get("dependency-groups") or {}
+        for name, packages in groups.items():
+            if re.search(r"test", str(name), re.I) and isinstance(packages, list):
+                for pkg in packages:
+                    if isinstance(pkg, str):
+                        # drop the environment marker, keep the requirement
+                        found.append(pkg.split(";")[0].strip())
+        optional = ((data.get("project") or {}).get("optional-dependencies") or {})
+        for name, packages in optional.items():
+            if re.search(r"test", str(name), re.I) and isinstance(packages, list):
+                for pkg in packages:
+                    if isinstance(pkg, str):
+                        found.append(pkg.split(";")[0].strip())
+    return [f for f in found if f]
+
+
+def satisfy(root: str, timeout: int = 900) -> tuple[bool, str]:
+    """Install what the project declares it needs.
+
+    Obtaining the test runner is not the same as being able to run the
+    tests, and a real repository made that plain: pytest alone reported
+    five collection errors because the project could not import itself
+    and had no freezegun. The runner is one dependency among several, and
+    the project's own manifest is what lists the rest.
+
+    Everything goes into the project's isolated environment, and every
+    step is run and checked rather than assumed.
+    """
+    base = Path(root)
+    python = _ensure_venv(root, timeout)
+    if not python:
+        return False, "could not create an isolated environment"
+
+    steps: list[str] = []
+    ran = False
+
+    def pip(*args) -> bool:
+        try:
+            r = subprocess.run([python, "-m", "pip", "install", "-q", *args],
+                               cwd=root, capture_output=True, text=True,
+                               timeout=timeout)
+        except subprocess.TimeoutExpired:
+            return False
+        return r.returncode == 0
+
+    if (base / "pyproject.toml").is_file() or (base / "setup.py").is_file():
+        ran = True
+        # A plain install, not an editable one: a src-layout project cannot
+        # import itself until it is installed, but an editable install
+        # writes build artefacts back into the working tree, which is the
+        # project's space and not ours to alter.
+        if pip("."):
+            steps.append("installed the project")
+        deps = _declared_python_test_deps(base)
+        if deps:
+            if pip(*deps):
+                steps.append("installed declared test dependencies: " + ", ".join(deps))
+            else:
+                steps.append("could not install: " + ", ".join(deps))
+
+    for req in sorted(base.glob("requirements*.txt")):
+        ran = True
+        if pip("-r", str(req)):
+            steps.append(f"installed {req.name}")
+
+    if (base / "package.json").is_file() and shutil.which("npm"):
+        ran = True
+        try:
+            r = subprocess.run(["npm", "install"], cwd=root, capture_output=True,
+                               text=True, timeout=timeout)
+        except subprocess.TimeoutExpired:
+            steps.append("npm install timed out")
+        else:
+            steps.append("npm install succeeded" if r.returncode == 0
+                         else "npm install failed")
+
+    if not ran:
+        return False, "no recognised manifest to satisfy"
+    return True, "; ".join(steps)
+
+
+def _looks_obtainable(command: str) -> bool:
+    """Worth trying to fetch? Refuse to chase nonsense.
+
+    A command with globs, shell redirection or a path is not a package
+    name, and asking an index for it wastes a round trip and produces a
+    confusing error. Provisioning is only attempted where the thing being
+    asked for could plausibly be the name of something.
+    """
+    token = _requirement(command)
+    if not token:
+        return False
+    return bool(re.fullmatch(r"[A-Za-z0-9_][A-Za-z0-9_.-]*", token))
+
+
+# Perception is cached, because an environment that has not changed is
+# the same environment. FSD does not re-read the road on every frame; it
+# reads it once and then only tracks what moves. The key is the content
+# of the manifests themselves, so editing any of them invalidates the
+# answer and nothing else does.
+_FIT_CACHE: dict[str, dict] = {}
+
+
+def _fit_key(root: str) -> str:
+    base = Path(root)
+    parts = [os.path.abspath(root)]
+    for name in ("pyproject.toml", "package.json", "Makefile", "Justfile",
+                 "tox.ini", "setup.py", "requirements.txt", "tasks.toml"):
+        path = base / name
+        try:
+            st = path.stat()
+            parts.append(f"{name}:{st.st_mtime_ns}:{st.st_size}")
+        except OSError:
+            parts.append(f"{name}:-")
+    for wf in sorted(base.glob(".github/workflows/*")):
+        try:
+            st = wf.stat()
+            parts.append(f"{wf.name}:{st.st_mtime_ns}")
+        except OSError:
+            continue
+    return hashlib.sha256("|".join(parts).encode()).hexdigest()
+
+
+# ---- 2. Rank candidates by how much evidence calls them a test command.
+#         Trying every candidate in declaration order means running full
+#         builds to discover what the manifest already said.
+_TESTISH = re.compile(
+    r"\b(test|tests|spec|specs|unit|pytest|unittest|vitest|jest|mocha|"
+    r"tap|nose|check|verify)\b", re.I)
+_NOT_A_TEST = re.compile(
+    r"\b(lint|format|typecheck|type|black|ruff|mypy|build|publish|"
+    r"deploy|docs?|pre-?commit|install|clean|release)\b", re.I)
+
+
+def _test_likelihood(command: str, source: str) -> int:
+    """How strongly the evidence says this command runs tests.
+
+    Three grades, and the point is ordering rather than exclusion: the
+    cheap, well-evidenced candidate runs first and, if it works, nothing
+    else runs at all. On a real repository this is the difference between
+    one test run and four -- the other three being a build, a publish
+    step and a type check, none of which anyone needed.
+    """
+    text = f"{command} {source}"
+    if _NOT_A_TEST.search(text) and not _TESTISH.search(command):
+        return 0
+    if re.search(r"\b(test|tests|spec|pytest|unittest|vitest|jest|mocha)\b",
+                 command, re.I):
+        return 3
+    if _TESTISH.search(source):
+        return 2
+    return 1
+
+
+def fit(root: str, provision_allowed: bool = True, use_cache: bool = True) -> dict:
+    """Of what this environment declares, what can actually happen here.
+
+    Provisioning is permitted by default and always reported separately,
+    never folded into "runnable" as though the tool had been there all
+    along. The distinction matters: a command that runs because something
+    was fetched from the network is a different kind of fact from one that
+    runs because it was already installed.
+    """
+    if use_cache:
+        key = _fit_key(root)
+        cached = _FIT_CACHE.get(key)
+        if cached is not None:
+            return dict(cached)
     decls = declared(root)
-    runnable_now, adapted, blocked = [], [], []
+    runnable_now, adapted, blocked, provisioned = [], [], [], []
     seen: set[str] = set()
 
     def evaluate(command: str, source: str, kind: str, original: str = "") -> None:
@@ -344,9 +646,17 @@ def fit(root: str) -> dict:
         if sub:
             adapted.append({"command": sub, "source": source, "kind": kind,
                             "original": original or command, "why": reason})
-        else:
-            blocked.append({"command": command, "source": source, "kind": kind,
-                            "why": reason or why})
+            return
+        if provision_allowed and _looks_obtainable(command):
+            obtained, preason = provision(command, root)
+            if obtained:
+                provisioned.append({"command": obtained, "source": source,
+                                    "kind": kind, "original": command,
+                                    "why": preason})
+                return
+            reason = f"{reason}; provisioning: {preason}"
+        blocked.append({"command": command, "source": source, "kind": kind,
+                        "why": reason or why})
 
     for d in decls:
         evaluate(d["command"], d["source"], d["kind"])
@@ -357,8 +667,12 @@ def fit(root: str) -> dict:
                 evaluate(inner, f"{d['source']} -> {d['command']}",
                          d["kind"], original=d["command"])
 
-    return {"schema": SCHEMA, "root": root, "declared": decls,
-            "runnable": runnable_now, "adapted": adapted, "blocked": blocked}
+    result = {"schema": SCHEMA, "root": root, "declared": decls,
+              "runnable": runnable_now, "adapted": adapted, "blocked": blocked,
+              "provisioned": provisioned}
+    if use_cache:
+        _FIT_CACHE[_fit_key(root)] = dict(result)
+    return result
 
 
 # Evidence, in command output, that tests actually ran. A command that
@@ -391,13 +705,21 @@ def best_test_command(root: str, timeout: int = 120) -> tuple[str | None, str, s
     """
     f = fit(root)
     candidates = []
-    for d in f["runnable"] + f["adapted"]:
+    for d in f["runnable"] + f["adapted"] + f["provisioned"]:
         command = d["command"]
         if re.search(r"\b(lint|format|typecheck|black|ruff|mypy)\b", command, re.I):
             continue
-        candidates.append((command, d.get("source", "?"), d.get("why", "")))
+        source = d.get("source", "?")
+        candidates.append((command, source, d.get("why", "")))
+
+    # Best-evidenced first, so the first survivor is usually the only
+    # command that ever runs. Every candidate executed in full is a test
+    # suite, a build or a publish step that someone has to wait for.
+    candidates.sort(key=lambda c: (-_test_likelihood(c[0], c[1]),
+                                   -len(c[1]), c[0]))
 
     tried = []
+    observed: list[tuple[str, str, str, str]] = []
     for command, source, why in candidates:
         try:
             r = subprocess.run(command, shell=True, cwd=root, timeout=timeout,
@@ -406,12 +728,49 @@ def best_test_command(root: str, timeout: int = 120) -> tuple[str | None, str, s
         except Exception as exc:
             tried.append((command, f"failed to run: {type(exc).__name__}"))
             continue
+        observed.append((command, source, why, out))
         ran, n, kind = _tests_ran(out)
         tried.append((command, f"{'ran' if ran else 'no tests'} ({n}, {kind or '-'})"))
         if ran:
             return command, source, f"{n} tests actually ran via {kind}"
 
+    # Nothing ran tests. Before concluding the project cannot be tested
+    # here, satisfy what the project itself declares it needs and try
+    # once more: a runner with nothing to import reports zero tests for
+    # reasons that have nothing to do with the runner.
+    # Provisioning is a response to an observed failure, never a
+    # precaution. Installing packages on the chance they might be needed
+    # turns every unknown project into a network round trip, and -- worse
+    # -- writes into a repository that was only being inspected. So the
+    # outputs already gathered are classified first, and the dependencies
+    # are satisfied only if something genuinely failed for want of them.
+    needed = False
+    for _command, _source, _why, _out in observed:
+        try:
+            from repair_v1 import diagnose
+        except ImportError:  # pragma: no cover
+            from canonical.runtime.repair_v1 import diagnose
+        if diagnose(_command, _out, 1, root).get("class") in _DEPENDENCY_CLASSES:
+            needed = True
+            break
+
+    ok, what = (satisfy(root) if needed else (False, "no dependency failure seen"))
+    if ok:
+        for command, source, why in candidates:
+            try:
+                r = subprocess.run(command, shell=True, cwd=root, timeout=timeout,
+                                   capture_output=True, text=True)
+                out = (r.stdout or "") + (r.stderr or "")
+            except Exception as exc:
+                continue
+            ran, n, kind = _tests_ran(out)
+            if ran:
+                return command, source, f"{n} tests ran via {kind} after {what}"
+
     # Nothing testable. Say so rather than returning a command that merely
     # executes -- a test command that tests nothing is worse than none,
     # because it reports success.
-    return None, "", "no candidate ran any tests; tried: " +         "; ".join(f"{c} -> {w}" for c, w in tried[:5])
+    detail = "; ".join(f"{c} -> {w}" for c, w in tried[:5])
+    if ok:
+        detail = f"[{what}] " + detail
+    return None, "", "no candidate ran any tests; tried: " + detail
