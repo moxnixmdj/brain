@@ -34,7 +34,33 @@ import plain_goal_bound_grounding as GROUND  # noqa: E402
 SCHEMA = "PROJECT_BRAIN_DECIDE_V1"
 
 
-def _score(cid: str) -> float:
+_STOP = {"the","a","an","and","or","of","to","from","in","on","it","its",
+         "this","that","is","are","be","do","does","with","for","whether"}
+
+
+def _goal_tokens(goal: str) -> list[str]:
+    """Content words from the goal. Deterministic, no model."""
+    out = []
+    for w in "".join(c if c.isalnum() else " " for c in goal.lower()).split():
+        if len(w) > 2 and w not in _STOP:
+            out.append(w)
+    return out
+
+
+def _relevance(cid: str, goal_tokens: list[str], reg: dict) -> float:
+    """Fraction of the goal's content words this capability mentions.
+
+    Zero means it has nothing to do with what was asked, and under a
+    product score that zeroes it out completely no matter how callable it is.
+    """
+    if not goal_tokens:
+        return 0.0
+    entry = reg.get(cid) or {}
+    hay = (cid + " " + " ".join(entry.get("keywords") or [])).lower()
+    return sum(1 for t in goal_tokens if t in hay) / len(goal_tokens)
+
+
+def _callability(cid: str) -> float:
     """Model-free fitness score from what the registry declares."""
     try:
         sig = COMPOSER.signature(cid)
@@ -53,6 +79,16 @@ def _score(cid: str) -> float:
     if sig:
         score += 0.25
     return score
+
+
+def _score(cid: str, goal_tokens: list[str], reg: dict) -> float:
+    """Relevance x callability. A product, not a sum.
+
+    Irrelevant but callable scores zero. Relevant but uncallable scores zero.
+    Both failures were observed separately and each produced confident wrong
+    answers; only the product rejects both.
+    """
+    return _callability(cid) * _relevance(cid, goal_tokens, reg)
 
 
 def decide(goal: str, iterations: int = 40, c: float = 1.4) -> dict:
@@ -92,15 +128,18 @@ def decide(goal: str, iterations: int = 40, c: float = 1.4) -> dict:
 
     root = CORE.Node(state=goal)
     ids = [x["capability_id"] for x in candidates]
+    reg = COMPOSER.load_registry()
+    tokens = _goal_tokens(goal)
 
     def actions(node):
         return [] if node.depth >= 1 else ids
 
     def evaluate(node):
-        return _score(node.action) if node.action else 0.0
+        return _score(node.action, tokens, reg) if node.action else 0.0
 
     def reflect(node):
-        return f"capability {node.action} scored {_score(node.action):.2f}"
+        return (f"{node.action} relevance={_relevance(node.action, tokens, reg):.2f} "
+                f"callability={_callability(node.action):.2f}")
 
     CORE.search(root, actions, evaluate, iterations=iterations, c=c,
                 reflect_fn=reflect)
@@ -108,6 +147,20 @@ def decide(goal: str, iterations: int = 40, c: float = 1.4) -> dict:
     chosen = CORE.best_action(root)
     ranked = sorted(((n.action, n.visits, round(n.mean_value, 4))
                      for n in root.children), key=lambda r: -r[1])
+    # Under a product score, zero means nothing both relevant AND callable was
+    # found. Reporting a decision with score 0 would dress up "I have nothing
+    # useful" as an answer.
+    if (_score(chosen, tokens, reg) if chosen else 0.0) <= 0.0:
+        return {
+            "schema": SCHEMA,
+            "goal": goal,
+            "status": "NOTHING_FITS",
+            "goal_tokens": tokens,
+            "considered": [x["capability_id"] for x in candidates],
+            "decision": None,
+            "model_dependency_count": 0,
+        }
+
     return {
         "schema": SCHEMA,
         "goal": goal,
@@ -115,7 +168,8 @@ def decide(goal: str, iterations: int = 40, c: float = 1.4) -> dict:
         "options_source": source,
         "options_considered": len(candidates),
         "decision": chosen,
-        "decision_score": _score(chosen) if chosen else 0.0,
+        "decision_score": (_score(chosen, tokens, reg) if chosen else 0.0),
+        "goal_tokens": tokens,
         "ranked": ranked,
         "model_dependency_count": 0,
         "incremental_spend_usd": 0,
