@@ -1476,8 +1476,9 @@
       "action_template": {
         "type": "assert_knowledge_status",
         "args": {
-          "assessment_path": "${input.assessment_path}",
-          "expected_status": "${input.expected_status}"
+          "candidate_path": "${input.candidate_path}",
+          "output_path": "${input.output_path}",
+          "capability_id": "knowledge.status.assert"
         },
         "expect": {
           "type": "field_equals",
@@ -1485,7 +1486,7 @@
           "value": true
         }
       },
-      "adapter_module": "runtime_native_action",
+      "adapter_module": "knowledge_status_adapter",
       "cost": 1,
       "incremental_spend_usd": 0,
       "keywords": [
@@ -1541,15 +1542,17 @@
           "field": "output_path",
           "container": "scalar"
         }
-      }
+      },
+      "entrypoint": "run_assert"
     },
     "knowledge.support.materialize": {
       "action_template": {
         "type": "materialize_supported_knowledge",
         "args": {
-          "assessment_path": "${input.assessment_path}",
-          "field_name": "${input.field_name}",
-          "output_path": "${input.output_path}"
+          "candidate_path": "${input.candidate_path}",
+          "verification_path": "${input.verification_path}",
+          "output_path": "${input.output_path}",
+          "capability_id": "knowledge.support.materialize"
         },
         "expect": {
           "type": "field_equals",
@@ -1557,7 +1560,7 @@
           "value": true
         }
       },
-      "adapter_module": "runtime_native_action",
+      "adapter_module": "knowledge_status_adapter",
       "cost": 1,
       "incremental_spend_usd": 0,
       "keywords": [
@@ -1614,7 +1617,8 @@
           "type": "auto_path",
           "suffix": ".json"
         }
-      }
+      },
+      "entrypoint": "run_materialize"
     },
     "pdf.extract.ocr.tesseract": {
       "action_template": {
