@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/root3_minimum_action_cut_v1.py.auto.v1",
- "elapsed_ms": 33.751,
+ "elapsed_ms": 40.388,
  "independent_run_reference": {
-  "github_run_id": 39043652233,
+  "github_run_id": 39043855524,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "cf6f66ad-bb4c-4a75-9acb-7768ebfcb26d",
+   "jti": "a0149334-9f3c-4582-afe2-62b2fba1a311",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39043652233",
+   "run_id": "39043855524",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
