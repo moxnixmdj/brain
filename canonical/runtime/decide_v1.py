@@ -28,6 +28,7 @@ sys.path.insert(0, str(ROOT / "canonical/runtime/bound_capabilities"))
 
 import capability_composer_v1 as COMPOSER  # noqa: E402
 import decision_core_v1 as CORE  # noqa: E402
+import options_v1 as OPTS  # noqa: E402
 import plain_goal_bound_grounding as GROUND  # noqa: E402
 
 SCHEMA = "PROJECT_BRAIN_DECIDE_V1"
@@ -70,6 +71,21 @@ def decide(goal: str, iterations: int = 40, c: float = 1.4) -> dict:
         for cid in grounding.get("candidate_capability_ids") or []:
             candidates.append({"capability_id": cid})
 
+    # The grounding matched on vocabulary and usually yields zero or one
+    # option. With fewer than two the search has nothing to choose between, so
+    # fall back to enumerating what is actually callable. Selecting on
+    # capability rather than wording.
+    source = "grounding"
+    if len(candidates) < 2:
+        held = set()
+        for clause in grounding.get("clauses") or []:
+            for cand in clause.get("candidates") or []:
+                held.update((cand.get("bound_input_keys") or []))
+        for row in OPTS.options(held, limit=8):
+            cid = row["capability_id"]
+            if cid not in [x["capability_id"] for x in candidates]:
+                candidates.append({"capability_id": cid, "from": "options"})
+                source = "grounding+options"
     if not candidates:
         return {"schema": SCHEMA, "goal": goal, "status": "NO_CANDIDATES",
                 "decision": None}
@@ -96,6 +112,8 @@ def decide(goal: str, iterations: int = 40, c: float = 1.4) -> dict:
         "schema": SCHEMA,
         "goal": goal,
         "status": "DECIDED",
+        "options_source": source,
+        "options_considered": len(candidates),
         "decision": chosen,
         "decision_score": _score(chosen) if chosen else 0.0,
         "ranked": ranked,
