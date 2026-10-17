@@ -1,0 +1,6 @@
+[[task]]
+name = "report"
+cmd  = "python3 decoy.py"
+[[task]]
+name = "assemble"
+cmd  = "python3 assemble.py"
