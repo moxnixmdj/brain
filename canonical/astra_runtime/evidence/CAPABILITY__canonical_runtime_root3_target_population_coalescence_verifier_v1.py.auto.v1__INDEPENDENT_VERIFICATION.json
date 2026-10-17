@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/root3_target_population_coalescence_verifier_v1.py.auto.v1",
- "elapsed_ms": 38.035,
+ "elapsed_ms": 37.248,
  "independent_run_reference": {
-  "github_run_id": 39046160524,
+  "github_run_id": 39046393518,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "4504e3b2-2520-442e-8955-e829075f3213",
+   "jti": "6a067793-7f68-4891-932d-804afaac60d0",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39046160524",
+   "run_id": "39046393518",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
