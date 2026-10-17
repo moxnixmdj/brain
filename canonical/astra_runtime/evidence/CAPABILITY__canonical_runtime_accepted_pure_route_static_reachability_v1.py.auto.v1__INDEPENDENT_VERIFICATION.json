@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/accepted_pure_route_static_reachability_v1.py.auto.v1",
- "elapsed_ms": 54.773,
+ "elapsed_ms": 53.919,
  "independent_run_reference": {
-  "github_run_id": 38999958599,
+  "github_run_id": 39000215505,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "1c994214-9044-4cd3-93cc-c7fafb8d4e1a",
+   "jti": "056f9001-6739-4c79-b71f-7eb54eb0b25f",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "38999958599",
+   "run_id": "39000215505",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
