@@ -138,8 +138,93 @@ async function demo(url) {
 (async () => {
   const [a, b] = process.argv.slice(2);
   if (a === '--demo') return demo(b);
+  if (a === '--act') {
+    // --act <url> <query> <comma,separated,words>
+    const [url, q, toks] = [b, process.argv[4], (process.argv[5] || '').split(',').filter(Boolean)];
+    console.log(JSON.stringify(await act(url, q, toks), null, 1)); return;
+  }
   const br = await connect();
   if (a) await br.goto(a);
   console.log(JSON.stringify(await br.eval(b), null, 1));
   br.ws.close();
 })().catch(e => { console.error('ERR', e.message); process.exit(1); });
+
+// ---------------------------------------------------------------------------
+// Acting, not just reading.
+//
+// The point of this mode is that nobody names a selector. Given a page and
+// some words, it decides which control those words refer to, uses it with
+// real events, and reports what the page became. Handing it a CSS selector
+// would be a human doing the part that matters.
+// ---------------------------------------------------------------------------
+async function act(url, query, tokens) {
+  const b = await connect();
+  await b.goto(url);
+  const before = { url: await b.eval('location.href'), chars: await b.eval('document.body.innerText.length') };
+
+  // Score every editable control against the words, using the text a person
+  // would read: its label, placeholder, name, aria-label, and the form it
+  // sits in. The control the words describe is the one to use.
+  const pick = await b.eval(`(()=>{
+    const toks=${JSON.stringify(tokens)}.map(t=>t.toLowerCase()).filter(t=>t.length>2);
+    const vis=e=>{const r=e.getBoundingClientRect();
+      return r.width>0&&r.height>0&&getComputedStyle(e).visibility!=='hidden';};
+    const cands=[...document.querySelectorAll('input,textarea,select')]
+      .filter(e=>vis(e)&&!e.disabled&&!['hidden','submit','button','checkbox','radio','file'].includes((e.type||'').toLowerCase()));
+    const scored=cands.map(e=>{
+      const hay=[e.name,e.id,e.placeholder,e.getAttribute('aria-label'),
+        e.getAttribute('title'),e.type,
+        (e.labels&&e.labels[0]&&e.labels[0].innerText)||'',
+        (e.closest('form')||{}).getAttribute&&e.closest('form')?.getAttribute('aria-label')||'',
+        (e.closest('form')||{}).className||'', e.className||'']
+        .join(' ').toLowerCase();
+      return {sel:e.id?'#'+CSS.escape(e.id):null, idx:[...document.querySelectorAll('input,textarea,select')].indexOf(e),
+        score:toks.filter(t=>hay.includes(t)).length, hay:hay.slice(0,80), tag:e.tagName, type:e.type};
+    }).sort((x,y)=>y.score-x.score);
+    return scored.slice(0,5);
+  })()`);
+
+  const best = pick[0];
+  if (!best) return { error: 'no editable control on the page', before };
+  if (!best.sel) return { error: 'best control has no id', best, before };
+
+  // REFUSE WHEN THERE IS NO EVIDENCE.
+  // On github.com's logged-out homepage the only editable fields are email
+  // signup boxes. Every candidate scored 0, and the first version typed the
+  // query into one of them anyway. Score 0 does not mean "the first one is
+  // as good as any" -- it means the words describe nothing on this page, so
+  // the honest answer is that there is nothing to act on. Typing into the
+  // nearest field is guessing with a keyboard, and it is worse than doing
+  // nothing because it looks like success.
+  if (!best.score) {
+    return { refused: true,
+      reason: 'no control on this page matches the words; refusing to type into the nearest field',
+      considered: pick, before };
+  }
+
+  await b.focus(best.sel);
+  await b.send('Input.insertText', { text: query });       // real key events
+  const typed = await b.eval(`document.querySelector(${JSON.stringify(best.sel)}).value`);
+
+  // Submit the way a person would: press Enter in the field.
+  for (const type of ['keyDown', 'keyUp'])
+    await b.send('Input.dispatchKeyEvent',
+      { type, key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13, nativeVirtualKeyCode: 13, text: type === 'keyDown' ? '\r' : undefined });
+
+  // Wait for the page to actually change rather than assuming it did.
+  let changed = false;
+  try {
+    await b.waitFor(`()=>location.href!==${JSON.stringify(before.url)} || document.body.innerText.length!==${before.chars}`, 15000, 'page to respond');
+    changed = true;
+  } catch (e) { /* report below; a page that did not change is a real answer */ }
+  await b.waitFor(`()=>document.readyState==='complete'`, 15000, 'load');
+
+  const after = {
+    url: await b.eval('location.href'),
+    title: await b.eval('document.title'),
+    chars: await b.eval('document.body.innerText.length'),
+    text: (await b.eval('document.body.innerText')).replace(/\s+/g, ' ').trim().slice(0, 3000),
+  };
+  b.ws.close();
+  return { chose: best, considered: pick, typed, changed, before, after };
+}
