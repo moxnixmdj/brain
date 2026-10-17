@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/opus55_target_identity_truth_lock_v1.py.auto.v1",
- "elapsed_ms": 34.226,
+ "elapsed_ms": 33.938,
  "independent_run_reference": {
-  "github_run_id": 39027895243,
+  "github_run_id": 39028118899,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "4c5e0f7e-7577-4cbd-8ad1-7e58a3f08a7d",
+   "jti": "73969037-c083-4bd9-a29b-27475dc43e14",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39027895243",
+   "run_id": "39028118899",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
