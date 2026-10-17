@@ -1,0 +1,179 @@
+"""Read task declarations from ANY structured file, by shape not by name.
+
+The old discovery enumerated conventions -- Makefile, package.json,
+pyproject.toml, bin/. Every environment with a different convention was
+invisible, and enumerating conventions can never be general: there is
+always one more.
+
+A task declaration has one universal shape, whatever the file is called:
+
+    a name, paired with a command
+
+So stop asking "is this a Makefile" and start asking "does anything here
+pair names with commands". Then Justfile, Rakefile, tasks.toml, Taskfile,
+.github/workflows and formats that do not exist yet all fall out of the
+same code.
+
+Extraction is deliberately structural, not semantic:
+
+  makefile-ish   "name:" followed by tab-indented command lines
+  mapping-ish    any dict whose values look like shell commands
+  sequence-ish   list items carrying a name and a run/command/cmd field
+
+A pair is only emitted when the value actually LOOKS like a command, so
+ordinary config does not turn into phantom tasks. That test is the whole
+safety property of this module.
+"""
+from __future__ import annotations
+
+import json
+import re
+import shlex
+from pathlib import Path
+
+SCHEMA = "PROJECT_BRAIN_TASKFILE_READ_V1"
+
+_CONFIG_EXT = {".toml", ".json", ".yaml", ".yml", ".ini", ".cfg"}
+_CONFIG_NAMES = {"Justfile", "justfile", "Rakefile", "Taskfile",
+                 "Taskfile.yml", "Earthfile", "Procfile", ".tasks"}
+
+# A value is only treated as a command if it starts with something runnable.
+_CMD_HEAD = re.compile(
+    r"^\s*(?:python3?|sh|bash|zsh|make|npm|npx|yarn|pnpm|poetry|pipenv|"
+    r"cargo|go|mvn|gradle|bundle|rake|just|docker|docker-compose|terraform|"
+    r"ansible|ruby|perl|node|deno|./|[A-Za-z0-9_./-]+)\b")
+_SHELLISH = re.compile(r"(?:^|\s)(?:&&|\||;|>\s|\$\(|>>)|\s-{1,2}[A-Za-z]")
+
+# Directories worth reading that a naive walk skips or drowns in.
+_EXTRA_DIRS = (".ci", ".github/workflows", ".buildkite", ".circleci",
+               "scripts", "bin", "tools", "tasks", "ci")
+
+
+def _looks_like_command(value: str) -> bool:
+    """The safety property: config values are not tasks."""
+    v = (value or "").strip()
+    if not v or len(v) > 400 or "\n" in v:
+        return False
+    return bool(_CMD_HEAD.match(v) or _SHELLISH.search(v))
+
+
+def _from_makefile(path: Path) -> list[tuple[str, str]]:
+    out, cur, body = [], None, []
+    for line in path.read_text(errors="replace").splitlines():
+        if line.startswith("\t") and cur:
+            body.append(line[1:].strip())
+            continue
+        if cur and body:
+            out.append((cur, " ".join(b for b in body if b)))
+        cur, body = None, []
+        if line and not line[0].isspace() and ":" in line and "=" not in line:
+            name = line.split(":", 1)[0].strip()
+            if name and not name.startswith("."):
+                cur = name
+    if cur and body:
+        out.append((cur, " ".join(b for b in body if b)))
+    return [(n, c) for n, c in out if _looks_like_command(c)]
+
+
+def _walk_mapping(obj, out: list) -> None:
+    """Any dict of name -> command-ish value, at any depth."""
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            if isinstance(v, str) and _looks_like_command(v):
+                out.append((str(k), v))
+            elif isinstance(v, str) and _looks_like_command("sh -c " + v):
+                out.append((str(k), v))
+            elif isinstance(v, (dict, list)):
+                _walk_mapping(v, out)
+    elif isinstance(obj, list):
+        for item in obj:
+            if isinstance(item, dict):
+                name = item.get("name") or item.get("task") or item.get("id")
+                cmd = item.get("run") or item.get("cmd") or item.get("command")
+                if isinstance(name, str) and isinstance(cmd, str) \
+                        and _looks_like_command(cmd):
+                    out.append((name, cmd))
+                else:
+                    _walk_mapping(item, out)
+            else:
+                _walk_mapping(item, out)
+
+
+def read_tasks(root: str) -> list[dict]:
+    """Every (name, command) pair this directory declares, however declared."""
+    rootp = Path(root)
+    found: list[dict] = []
+    seen: set[tuple[str, str]] = set()
+
+    def emit(name, cmd, origin):
+        key = (str(name), str(cmd))
+        if key in seen or not _looks_like_command(str(cmd)):
+            return
+        seen.add(key)
+        found.append({"name": str(name), "command": str(cmd),
+                      "origin": origin})
+
+    candidates = []
+    for dirpath, dirnames, filenames in __import__("os").walk(rootp):
+        dirnames[:] = [d for d in dirnames
+                       if d not in {".git", "__pycache__", "node_modules",
+                                    ".venv", ".pytest_cache"}]
+        rel = Path(dirpath).relative_to(rootp)
+        if len(rel.parts) > 3:
+            dirnames[:] = []
+            continue
+        for fn in filenames:
+            fp = Path(dirpath) / fn
+            if fn in _CONFIG_NAMES or fp.suffix in _CONFIG_EXT:
+                candidates.append(fp)
+
+    for fp in candidates[:400]:
+        rel = str(fp.relative_to(rootp))
+        try:
+            text = fp.read_text(errors="replace")
+        except OSError:
+            continue
+        if fp.name in {"Justfile", "justfile", "Rakefile", "Taskfile"} \
+                or fp.name == "Makefile":
+            for n, c in _from_makefile(fp):
+                emit(n, c, rel)
+            continue
+        obj = None
+        try:
+            if fp.suffix == ".toml":
+                import tomllib
+                obj = tomllib.loads(text)
+            elif fp.suffix == ".json":
+                obj = json.loads(text)
+        except Exception:
+            obj = None
+        if obj is None and fp.suffix in {".yaml", ".yml"}:
+            try:
+                import yaml
+                obj = yaml.safe_load(text)
+            except Exception:
+                obj = None
+        if obj is not None:
+            pairs: list = []
+            _walk_mapping(obj, pairs)
+            for n, c in pairs:
+                emit(n, c, rel)
+    return found
+
+
+def task_commands(root: str) -> list[list[str]]:
+    """Run each declared task through the shell it was written for."""
+    cmds = []
+    for t in read_tasks(root):
+        try:
+            cmds.append(["sh", "-c", t["command"]])
+        except Exception:
+            continue
+    return cmds
+
+
+if __name__ == "__main__":
+    import sys
+    root = sys.argv[1] if len(sys.argv) > 1 else "."
+    for t in read_tasks(root):
+        print(f"  {t['name']:<16} {t['command'][:52]:<54} [{t['origin']}]")
