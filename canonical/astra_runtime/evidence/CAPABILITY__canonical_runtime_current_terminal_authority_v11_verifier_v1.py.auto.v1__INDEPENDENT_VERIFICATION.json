@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/current_terminal_authority_v11_verifier_v1.py.auto.v1",
- "elapsed_ms": 29.978,
+ "elapsed_ms": 33.18,
  "independent_run_reference": {
-  "github_run_id": 39008022864,
+  "github_run_id": 39008179414,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "5d30a5f1-635f-4b46-a7e2-275937f0dee9",
+   "jti": "35f4c6c0-fd7e-418d-92bd-61b3a20b50bb",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39008022864",
+   "run_id": "39008179414",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
