@@ -1,8 +1,8 @@
 {
  "capability_id": "brain.module.function.invoke",
- "elapsed_ms": 471.867,
+ "elapsed_ms": 415.686,
  "independent_run_reference": {
-  "github_run_id": 39064974472,
+  "github_run_id": 39065168864,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "69ed3d9c-1aba-4aba-97ab-26de0a91980e",
+   "jti": "6be6fd9b-c925-4a0d-8011-855095aa072e",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39064974472",
+   "run_id": "39065168864",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
