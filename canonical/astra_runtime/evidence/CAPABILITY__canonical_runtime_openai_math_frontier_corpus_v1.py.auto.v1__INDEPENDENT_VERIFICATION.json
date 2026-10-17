@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/openai_math_frontier_corpus_v1.py.auto.v1",
- "elapsed_ms": 34.483,
+ "elapsed_ms": 33.357,
  "independent_run_reference": {
-  "github_run_id": 39059353637,
+  "github_run_id": 39059581222,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "d5f8f724-b220-4431-b89a-16f947020d02",
+   "jti": "60e661a7-7f50-4bd8-8ef6-25d40e7fc81e",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39059353637",
+   "run_id": "39059581222",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
