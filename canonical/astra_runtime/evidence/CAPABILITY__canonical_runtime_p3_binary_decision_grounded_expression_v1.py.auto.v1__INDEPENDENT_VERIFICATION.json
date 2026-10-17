@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/p3_binary_decision_grounded_expression_v1.py.auto.v1",
- "elapsed_ms": 22.642,
+ "elapsed_ms": 19.706,
  "independent_run_reference": {
-  "github_run_id": 39063383291,
+  "github_run_id": 39063642402,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "d4601a7b-a151-4889-9d4d-3932a5900f8a",
+   "jti": "4b420d0f-b18a-4d60-91a9-9c6db087e7cd",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39063383291",
+   "run_id": "39063642402",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
