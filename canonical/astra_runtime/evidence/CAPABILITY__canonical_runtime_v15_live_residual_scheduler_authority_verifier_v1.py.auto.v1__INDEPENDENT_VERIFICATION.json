@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/v15_live_residual_scheduler_authority_verifier_v1.py.auto.v1",
- "elapsed_ms": 21.061,
+ "elapsed_ms": 31.958,
  "independent_run_reference": {
-  "github_run_id": 39013918067,
+  "github_run_id": 39014076397,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "da85e88b-cc1e-4734-9e74-abfb6e42b053",
+   "jti": "b73dd660-2546-48fd-b179-9429a0941c8f",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39013918067",
+   "run_id": "39014076397",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
