@@ -186,12 +186,73 @@ def _snapshot(root: str) -> dict:
     return out
 
 
+def _urls_mentioned(root: str, limit: int = 40) -> str:
+    """Text of a project's own small files, so a URL written in a README or
+    a task file counts as part of the task. Binary and huge files skipped."""
+    import re as _re
+    out, n = [], 0
+    names = ("README", "readme", "TASK", "task", "GOAL", "goal", "NOTES", "notes")
+    for path in sorted(Path(root).rglob("*")):
+        if n >= limit or not path.is_file():
+            continue
+        if path.suffix.lower() not in {".md", ".txt", ".rst", ".html", ".json", ".py", ""}:
+            continue
+        if path.stat().st_size > 200_000:
+            continue
+        try:
+            t = path.read_text(errors="ignore")
+        except Exception:
+            continue
+        if any(k in path.name for k in names) or ".md" == path.suffix.lower():
+            out.append(t[:20000]); n += 1
+    return "\n".join(out)
+
+
 def run(goal: str, root: str, binary_limit: int = 0,
         iterations: int = 16) -> dict:
     """Plain sentence in, work out, verified outcome out."""
     import explore_v1 as X
     tokens = goal_tokens(goal)
     before = _snapshot(root)
+
+    # THE BROWSER, chosen by the goal rather than named by a human.
+    # If the task is about a page, no amount of reading the filesystem will
+    # find the answer, because the answer is not on the filesystem. So look
+    # for URLs the goal mentions -- and, if it names none, URLs the project
+    # itself mentions -- and load them in a real browser before deciding
+    # anything. What matters on a page is often written by script after
+    # load, which only a real browser sees.
+    #
+    # This is not a fallback and it is not a pipe. It is one more sense the
+    # loop consults, alongside the directory and the validator.
+    browser: dict = {}
+    try:
+        import browser_v1 as B
+        wanted = B.urls_in(goal)
+        if not wanted:
+            wanted = B.urls_in(_urls_mentioned(root))
+        wanted = wanted[:3]
+        if wanted:
+            ok, why = B.available()
+            if not ok:
+                browser = {"urls": wanted, "unavailable": why}
+            else:
+                pages = []
+                for u in wanted:
+                    try:
+                        r = B.read(u)
+                    except Exception as exc:
+                        pages.append({"url": u, "error": f"{type(exc).__name__}: {exc}"})
+                        continue
+                    if r.get("ok") and r.get("data"):
+                        d = r["data"]
+                        hay = ((d.get("text") or "") + " " + (d.get("title") or "")).lower()
+                        d["goal_words_on_page"] = sorted({t for t in tokens if t in hay})
+                        pages.append(d)
+                browser = {"urls": wanted, "pages": pages,
+                           "loaded": sum(1 for p in pages if p.get("chars"))}
+    except Exception as exc:
+        browser = {"error": f"{type(exc).__name__}: {exc}"}
 
     # LOOK BEFORE ACTING.
     # env_monster2 made acting first unrecoverable. The environment's own
@@ -276,6 +337,7 @@ def run(goal: str, root: str, binary_limit: int = 0,
             "excluded_as_undoer": result.get("excluded_as_undoer") or [],
             "retried": (result.get("chained") or {}).get("retried") or [],
             "best": result.get("best"),
+            "browser": browser,
             "look_before": {"requirements": look.get("requirements", []),
                             "excluded": look.get("excluded", []),
                             "preferred": [" ".join(c) for c in look.get("preferred", [])],
