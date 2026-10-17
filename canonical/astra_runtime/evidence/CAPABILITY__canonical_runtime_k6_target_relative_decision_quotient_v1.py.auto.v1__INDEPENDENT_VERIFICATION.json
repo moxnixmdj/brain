@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/k6_target_relative_decision_quotient_v1.py.auto.v1",
- "elapsed_ms": 30.813,
+ "elapsed_ms": 28.113,
  "independent_run_reference": {
-  "github_run_id": 38991034999,
+  "github_run_id": 38991250204,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "1c6373ca-d0e7-4adf-b9a4-c4c5e6f3cfdc",
+   "jti": "38c17a45-08ad-407e-92cc-580e9d0f1697",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "38991034999",
+   "run_id": "38991250204",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
