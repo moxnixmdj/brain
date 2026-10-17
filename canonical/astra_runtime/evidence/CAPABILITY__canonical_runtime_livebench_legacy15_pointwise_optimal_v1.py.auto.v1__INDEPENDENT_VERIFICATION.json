@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py.auto.v1",
- "elapsed_ms": 0.296,
+ "elapsed_ms": 0.254,
  "independent_run_reference": {
-  "github_run_id": 39025602125,
+  "github_run_id": 39025774523,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "6e8d4977-794d-40d0-a4d3-fb76ce04547a",
+   "jti": "4e407be5-aa0c-471b-bfe0-6d94f6fc2203",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39025602125",
+   "run_id": "39025774523",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
