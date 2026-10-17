@@ -45,6 +45,8 @@ CASES = [
      "MUST NOT BE POISONED: reads sources before acting"),
     ("env_toolchain", "run the tests and record the result", ["out"],   True,
      "declared runner absent: composes one, verified by the solver"),
+    ("env_node_toolchain", "run the tests and record the result", ["out"], True,
+     "other language, no shared code: wrapper -> mocha -> node --test"),
 ]
 
 

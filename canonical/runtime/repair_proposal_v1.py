@@ -28,8 +28,6 @@ SCHEMA = "PROJECT_BRAIN_REPAIR_PROPOSAL_V1"
 # A real test run, stated as a typed acceptance program. Nothing here says
 # how to run tests -- only what counts as having run them. The how is
 # repair_v1's proposal; the whether is the solver's.
-_RAN = re.compile(r"Ran\s+(\d+)\s+tests?")
-_OK = re.compile(r"^OK\s*$", re.M)
 
 
 def program(min_tests: int = 1) -> dict:
@@ -52,11 +50,27 @@ def program(min_tests: int = 1) -> dict:
     }
 
 
-def observe(output: str) -> dict:
-    """Read what a command actually produced. Facts only, no verdict."""
-    m = _RAN.search(output or "")
-    return {"tests_ran": int(m.group(1)) if m else 0,
-            "ok": bool(_OK.search(output or ""))}
+def observe(output: str, exited_zero: bool | None = None) -> dict:
+    """Read what a command actually produced. Facts only, no verdict.
+
+    How many tests ran is read from the output, structurally -- no
+    framework's wording is assumed. Whether the run was sound comes from
+    the exit status when it is known, which the machine attests, rather
+    than from a word in the output, which the program chose to print. When
+    no exit status is available the fallback is that tests ran and none
+    were reported failed; that is weaker, and it is not silently presented
+    as equal to the attested case.
+    """
+    try:
+        from canonical.runtime import repair_v1
+    except ImportError:  # pragma: no cover
+        import repair_v1
+    ran, n, _kind = repair_v1.tests_ran(output)
+    if exited_zero is not None:
+        ok = bool(exited_zero)
+    else:
+        ok = bool(ran) and repair_v1.failure_count(output) == 0
+    return {"tests_ran": n, "ok": ok}
 
 
 def problem(min_tests: int = 1, trusted: dict | None = None) -> dict:
@@ -96,7 +110,7 @@ def propose(command: str, root: str, min_tests: int = 1, timeout: int = 300) -> 
         from universal_verified_adaptive_solver_v1 import run
 
     res = repair_v1.attempt(command, root, timeout=timeout)
-    observed = observe(res.get("output") or "")
+    observed = observe(res.get("output") or "", exited_zero=bool(res.get("ok")))
     pr = problem(min_tests)
     verdict = run(pr, proposal_packets={"tests_were_run": [{"candidate_values": observed}]})
     return {

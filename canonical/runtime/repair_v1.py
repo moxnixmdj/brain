@@ -74,6 +74,64 @@ _TEST_FILE = re.compile(
 )
 
 
+# ---------------------------------------------------------------------------
+# Reading a test run, structurally.
+#
+# Every runner reports the same two facts: how many tests happened, and
+# whether they were fine. It does not report them in the same words --
+# unittest says "Ran 3 tests" / "OK", node says "pass 3" / "fail 0", mocha
+# says "3 passing", jest says "Tests: 3 passed". Recognising those by
+# listing them works until a runner that is not on the list shows up, and
+# then a real test run is reported as having run nothing.
+#
+# So the reading is structural: a number next to a word that means tests
+# happened, in either order, with nothing but punctuation between them.
+# Requiring no letters in the gap is what stops "1 file failed to compile"
+# from being counted as a test result, and rejecting a number that directly
+# follows "path:" is what stops the line number in
+# "make: *** [Makefile:2: test] Error 127" from reading as two tests.
+_TEST_WORD = (r"(?:tests?|specs?|suites?|passed|passing|failed|failing|pass"
+              r"|fail|ok|skipped)")
+_FAIL_WORD = r"(?:failed|failing|failures?|errors?|broken)"
+_SEP = r"[\s:=#|/(),.\[\]-]{0,3}"
+_TEST_COUNT_RE = re.compile(
+    rf"(?:\b{_TEST_WORD}\b{_SEP}(\d+))|(?:(\d+){_SEP}\b{_TEST_WORD}\b)", re.I)
+_FAIL_COUNT_RE = re.compile(
+    rf"(?:\b{_FAIL_WORD}\b{_SEP}(\d+))|(?:(\d+){_SEP}\b{_FAIL_WORD}\b)", re.I)
+_NOT_A_COUNT = re.compile(r"[\w./\\-]{1,80}:$")
+
+
+def _counts(text: str, pattern) -> list[tuple[int, int]]:
+    """(count, position-independent) pairs, minus numbers that are line refs."""
+    out = []
+    for m in pattern.finditer(text or ""):
+        for group_index in (1, 2):
+            g = m.group(group_index)
+            if not g or not g.isdigit():
+                continue
+            if _NOT_A_COUNT.search((text or "")[:m.start(group_index)]):
+                continue
+            out.append((int(g), m.start()))
+    return out
+
+
+def tests_ran(output: str) -> tuple[bool, int, str]:
+    """Did a run of tests happen here, and how many?"""
+    text = output or ""
+    best_n, best_kind = 0, ""
+    for n, pos in _counts(text, _TEST_COUNT_RE):
+        if n > best_n:
+            best_n = n
+            line = text[max(0, text.rfind("\n", 0, pos)):text.find("\n", pos)]
+            best_kind = (line or "").strip().lower()[:40]
+    return (best_n > 0), best_n, best_kind
+
+
+def failure_count(output: str) -> int:
+    """How many tests this output says failed. Zero means none reported."""
+    return max((n for n, _ in _counts(output or "", _FAIL_COUNT_RE)), default=0)
+
+
 def _is_test_file(path: Path) -> bool:
     """Is this file a test? Decided by its name and where it lives."""
     try:
