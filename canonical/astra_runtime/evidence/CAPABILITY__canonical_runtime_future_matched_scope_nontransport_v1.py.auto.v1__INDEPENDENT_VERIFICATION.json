@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/future_matched_scope_nontransport_v1.py.auto.v1",
- "elapsed_ms": 33.454,
+ "elapsed_ms": 32.733,
  "independent_run_reference": {
-  "github_run_id": 39024851641,
+  "github_run_id": 39025047155,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "24ae728d-4450-4fd7-8ee2-91db48295bef",
+   "jti": "00209488-7e5a-4130-8ef9-769ede61ac1f",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39024851641",
+   "run_id": "39025047155",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
