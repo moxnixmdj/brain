@@ -1,0 +1,12 @@
+[[task]]
+name = "transform"
+cmd  = "python3 transform.py"
+[[task]]
+name = "fetch"
+cmd  = "python3 fetch.py"
+[[task]]
+name = "tidy"
+cmd  = "python3 tidy.py"
+[[task]]
+name = "report"
+cmd  = "python3 decoy.py"

@@ -1,0 +1,2 @@
+verify report:
+    python3 check.py
