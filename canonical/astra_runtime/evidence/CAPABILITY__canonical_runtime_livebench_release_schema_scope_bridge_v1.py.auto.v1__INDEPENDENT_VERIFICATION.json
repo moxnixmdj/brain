@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_release_schema_scope_bridge_v1.py.auto.v1",
- "elapsed_ms": 0.267,
+ "elapsed_ms": 0.266,
  "independent_run_reference": {
-  "github_run_id": 38998918515,
+  "github_run_id": 38999137646,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "e14e59c3-c976-4e05-bbfb-a94fd115b6a4",
+   "jti": "21ed9a86-2c53-488a-82c4-71620f62f321",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "38998918515",
+   "run_id": "38999137646",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
