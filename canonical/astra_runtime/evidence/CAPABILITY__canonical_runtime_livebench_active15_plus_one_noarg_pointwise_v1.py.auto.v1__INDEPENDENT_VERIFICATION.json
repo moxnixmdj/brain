@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_active15_plus_one_noarg_pointwise_v1.py.auto.v1",
- "elapsed_ms": 14.633,
+ "elapsed_ms": 10.265,
  "independent_run_reference": {
-  "github_run_id": 38992564450,
+  "github_run_id": 38992777768,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "9a2287ae-d63f-4134-b074-c89dcc5774ab",
+   "jti": "7317bd8f-b4ae-49b5-b069-6bfa012adb03",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "38992564450",
+   "run_id": "38992777768",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
