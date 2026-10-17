@@ -58,6 +58,15 @@ _TOOLS = {"python3", "python", "sh", "bash", "zsh", "dash", "make", "gmake",
           "black", "ruff", "mypy", "flake8", "uv"}
 _VERSIONISH = re.compile(r"^v?\d+(?:\.\d+)*[a-z]?$")
 _URLISH = re.compile(r"^[a-z][a-z0-9+.-]*://|^www\.", re.I)
+_FILE_EXT = re.compile(r"\.[A-Za-z0-9_+~-]{1,10}\b")
+# Extensions that can actually be executed, versus merely compiled
+# or read. .rs/.toml/.md are content, not programs.
+_RUNNABLE_EXT = re.compile(
+    r"\.(?:sh|bash|zsh|py|py3|rb|pl|js|mjs|cjs|ps1|bat|cmd|exe|bin|run)$",
+    re.I)
+_MAKE_KEYWORDS = {"ifeq", "ifneq", "ifdef", "ifndef", "else", "endif",
+                  "include", "-include", "sinclude", "export",
+                  "unexport", "define", "endef", "override", "vpath"}
 
 
 def _looks_like_command(value: str) -> bool:
@@ -87,8 +96,18 @@ def _looks_like_command(value: str) -> bool:
     head = parts[0]
     if head in _TOOLS:
         return True
-    if head.startswith("./") or head.startswith("../") or "/" in head:
-        return True                      # explicit path to a program
+    if head.startswith("./") or head.startswith("../") \
+            or head.startswith("/") or head.startswith("~/"):
+        return True                      # explicitly rooted program path
+    if "/" in head and _RUNNABLE_EXT.search(head):
+        return True                      # a path to something executable
+    # A source file is not a program. mdBook's Cargo.toml names
+    # "examples/remove-emphasis/test.rs", which has an extension and so
+    # passed -- but .rs is compiled, not run. Requiring a runnable
+    # extension is the difference between a script and a source tree.
+    # "crates/mdbook-core" is a LOCATION, not a program, and
+    # "expressjs/express" is a repository slug. Both contain slashes,
+    # which is why the old rule accepted them. Neither can be executed.
     if len(parts) == 1:
         return False                     # bare unknown word: not a command
     return bool(_SHELLISH.search(v))     # multiword: needs shell structure
@@ -109,6 +128,13 @@ def _from_makefile(path: Path) -> list[tuple[str, str]]:
         cur, body = None, []
         if line and not line[0].isspace() and ":" in line and "=" not in line:
             name = line.split(":", 1)[0].strip()
+            # Skip Make's own syntax. cobra's Makefile produced a "target"
+            # called $(warning "could not find golangci-lint in $(PATH)...
+            # because a function call sits at column zero and contains a
+            # colon. Conditionals and directives are not tasks either.
+            if name.startswith("$(") or name.split()[0] in _MAKE_KEYWORDS:
+                cur, body = None, []
+                continue
             if name and not name.startswith("."):
                 cur = name
     if cur and body:
