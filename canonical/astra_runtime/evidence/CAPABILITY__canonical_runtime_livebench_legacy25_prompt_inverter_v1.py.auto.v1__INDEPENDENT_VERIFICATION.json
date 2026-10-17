@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_legacy25_prompt_inverter_v1.py.auto.v1",
- "elapsed_ms": 7.169,
+ "elapsed_ms": 6.984,
  "independent_run_reference": {
-  "github_run_id": 39010641593,
+  "github_run_id": 39010841671,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "f5bdb517-c307-454f-b0b9-e7f37ae596d7",
+   "jti": "234025c6-0eb6-459b-9cae-40390790a4be",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39010641593",
+   "run_id": "39010841671",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
