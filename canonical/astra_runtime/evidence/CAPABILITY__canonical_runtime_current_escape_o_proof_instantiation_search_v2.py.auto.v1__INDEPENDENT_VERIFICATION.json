@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/current_escape_o_proof_instantiation_search_v2.py.auto.v1",
- "elapsed_ms": 1663.735,
+ "elapsed_ms": 1640.332,
  "independent_run_reference": {
-  "github_run_id": 39061625900,
+  "github_run_id": 39061852212,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "7dc5eac1-b430-4c7e-8673-f24d1d31e254",
+   "jti": "9a945927-f98c-464a-b507-8102793e569e",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39061625900",
+   "run_id": "39061852212",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
