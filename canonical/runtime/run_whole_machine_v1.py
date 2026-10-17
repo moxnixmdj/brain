@@ -28,6 +28,7 @@ sys.path.insert(0, str(ROOT / "canonical/capabilities/true/generators"))
 import http_json_fetch as FETCH                      # noqa: E402
 import knowledge_status_adapter as KNOWLEDGE         # noqa: E402
 import objective_evidence_unit_extract as EXTRACT    # noqa: E402
+import objective_relevance_bm25 as RELEVANCE          # noqa: E402
 
 SCHEMA = "PROJECT_BRAIN_WHOLE_MACHINE_RUN_V1"
 STATE = ROOT / "canonical/astra_runtime/state/whole_machine"
@@ -69,7 +70,7 @@ def run_whole_machine(objective: str, content_url: str) -> dict:
                     {"candidate_path": cand, "output_path": _w("04_provenance.json", {}),
                      "timeout": 20}, str(ROOT)))
     if not prov or prov.get("status") != "RETRIEVAL_PROVENANCE_VERIFIED":
-        return _result(objective, trace, prov, None, t0)
+        return _result(objective, trace, prov, None, t0, None, None)
 
     # ---- Build the joined input: real content + verified provenance. ---
     payload = json.loads((STATE / "02_fetched.json").read_text())
@@ -86,12 +87,26 @@ def run_whole_machine(objective: str, content_url: str) -> dict:
         text = json.dumps(payload)[:4000]
 
     url = prov.get("final_url") or content_url
-    joined = _w("05_joined.json", {
+    # ---- TERM 1: CAPABILITY.  Establish relevance for real. ------------
+    # An earlier version of this file hand-wrote the relevance block.  That was
+    # a fabrication: it claimed a status no capability had produced.  Relevance
+    # is now computed by the BM25 ranker and its real verdict is passed through,
+    # whatever it turns out to be.
+    rel_in = _w("05_relevance_input.json", {
+        "objective": objective,
+        "documents": [{"id": "retrieved-1", "url": url, "text": text}],
+    })
+    rel = step("establish objective relevance", "CAPABILITY",
+               lambda: RELEVANCE.run(
+                   {"input_path": rel_in,
+                    "output_path": _w("05b_relevance.json", {})}, str(ROOT))) or {}
+    rel_status = rel.get("status")
+
+    joined = _w("05c_joined.json", {
         "objective": objective,
         "candidate": {"url": url},
         "provenance": prov,
-        "relevance": {"status": "FIRST_PARTY_RELEVANT_SOURCE_VERIFIED",
-                      "objective_relevance_status": "VERIFIED", "fresh_url": url},
+        "relevance": rel,
         "documents": [{"id": "retrieved-1", "url": url, "text": text}],
     })
 
@@ -110,10 +125,10 @@ def run_whole_machine(objective: str, content_url: str) -> dict:
             json.dumps(prov, sort_keys=True).encode()).hexdigest(),
     })
 
-    return _result(objective, trace, prov, extract, t0, discard)
+    return _result(objective, trace, prov, extract, t0, discard, rel_status)
 
 
-def _result(objective, trace, prov, extract, t0, discard=None) -> dict:
+def _result(objective, trace, prov, extract, t0, discard=None, rel_status=None) -> dict:
     units = (extract or {}).get("evidence_units") or []
     out = {
         "schema": SCHEMA,
@@ -121,6 +136,7 @@ def _result(objective, trace, prov, extract, t0, discard=None) -> dict:
         "trace": trace,
         "terms_exercised": sorted({s["term"] for s in trace}),
         "provenance_status": (prov or {}).get("status"),
+        "relevance_status": rel_status,
         "evidence_units": len(units),
         "evidence_sample": units[:2],
         "knowledge_retained": False,
