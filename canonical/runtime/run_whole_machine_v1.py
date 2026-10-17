@@ -92,9 +92,13 @@ def run_whole_machine(objective: str, content_url: str) -> dict:
     # a fabrication: it claimed a status no capability had produced.  Relevance
     # is now computed by the BM25 ranker and its real verdict is passed through,
     # whatever it turns out to be.
+    # The ranker reads `candidates`, not `documents`.  Passing the wrong field
+    # silently ranked an empty list and returned RELEVANCE_UNRESOLVED -- which
+    # was correct behaviour on an empty input.
     rel_in = _w("05_relevance_input.json", {
         "objective": objective,
-        "documents": [{"id": "retrieved-1", "url": url, "text": text}],
+        "candidates": [{"id": "retrieved-1", "url": url, "text": text,
+                        "title": "canonical/README.md"}],
     })
     rel = step("establish objective relevance", "CAPABILITY",
                lambda: RELEVANCE.run(
