@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_legacy15_numeric_quotient_v1.py.auto.v1",
- "elapsed_ms": 35.4,
+ "elapsed_ms": 36.154,
  "independent_run_reference": {
-  "github_run_id": 39079669096,
+  "github_run_id": 39079839385,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "d682c1b0-ba3e-4258-88e4-e2d7e302b357",
+   "jti": "b7cd592a-b662-48f7-be5c-5d4f7a070709",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39079669096",
+   "run_id": "39079839385",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
