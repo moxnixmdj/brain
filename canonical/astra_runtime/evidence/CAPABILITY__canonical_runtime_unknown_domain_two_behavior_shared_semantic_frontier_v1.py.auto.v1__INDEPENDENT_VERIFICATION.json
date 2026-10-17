@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/unknown_domain_two_behavior_shared_semantic_frontier_v1.py.auto.v1",
- "elapsed_ms": 47.215,
+ "elapsed_ms": 51.598,
  "independent_run_reference": {
-  "github_run_id": 38992140221,
+  "github_run_id": 38992343615,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "fad316e5-7ea8-42d2-875d-fc44dbe849c5",
+   "jti": "b55a526e-56af-467b-9f81-392c2c22f131",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "38992140221",
+   "run_id": "38992343615",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
