@@ -9,21 +9,19 @@
 # Usage:  sh browser_launch_v1.sh [port]
 # Stop:   pkill -f remote-debugging-port
 #
-# KNOWN WEAKNESS, stated plainly: this build has no root certificate store.
-# It ships without libnssckbi.so, the NSS module holding the built-in trust
-# anchors, so every HTTPS handshake fails with ERR_CERT_AUTHORITY_INVALID
-# and the page never loads. Without a root store the browser is confined to
-# local files.
+# CERTIFICATES, verified rather than assumed.
 #
-# The only copy of that module we could reach on an allowed host turned out
-# to be a Git LFS pointer, not the binary. So CHROMIUM_INSECURE=1 is
-# exported below and certificate verification is relaxed. That is a real
-# weakening and it is not hidden: it means the browser will accept a
-# certificate it cannot prove belongs to the host.
+# An earlier note here claimed this build has no root certificate store and
+# must relax verification. That was checked on 2026-10-17 and is no longer
+# true. Serving a self-signed certificate to this browser produced
+# ERR_CERT_AUTHORITY_INVALID, and loading https://pypi.org succeeded with no
+# bypass flag on the command line. A stale warning left in place is worse
+# than none: it invites someone to relax TLS for a problem that is gone.
 #
-# Restore real verification by dropping a genuine libnssckbi.so into
-# $BUILD/al/lib and exporting CHROMIUM_INSECURE= (empty). Then the flag is
-# omitted and TLS is validated normally.
+# CHROMIUM_INSECURE is therefore NOT set here. Setting it makes the browser
+# accept a certificate it cannot prove belongs to the host, and should only
+# ever be done knowingly, for a host you are willing to trust blindly.
+# Prefer CHROMIUM_SPKI_PINS below, which pins one host's key instead.
 set -e
 PORT="${1:-9222}"
 BUILD="${BRAIN_BROWSER_BUILD:-$HOME/browser_build}"
