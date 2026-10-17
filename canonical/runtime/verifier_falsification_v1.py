@@ -189,6 +189,18 @@ def _cases() -> list[tuple[str, str, callable]]:
     add("autonomous_v1._can_fail", "a command wired to exit zero",
         validator_that_cannot_fail)
 
+    # --- the verdict grounds itself ------------------------------------
+    def verdict_grounding_missing() -> bool:
+        import autonomous_v1 as A
+        with tempfile.TemporaryDirectory() as tmp:
+            # An artifact that was there a moment ago and is gone now is
+            # not a completed goal; it is work that was undone.
+            r = A._ground(tmp, ["out/report.txt"])
+            return bool(r.get("all_grounded"))
+
+    add("autonomous_v1._ground", "a verdict resting on an artifact that is gone",
+        verdict_grounding_missing)
+
     # --- properties ----------------------------------------------------
     def property_vacuous() -> bool:
         import property_v1 as P

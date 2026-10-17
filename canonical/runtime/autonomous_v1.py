@@ -17,6 +17,7 @@ a system reports success it never achieved.
 """
 from __future__ import annotations
 
+import os
 import re
 import sys
 from pathlib import Path
@@ -78,6 +79,31 @@ _NEVER_FAILS = (
     re.compile(r"^\s*(echo\b[^&|;]*)?(\s*(?:&&|;)\s*)?exit\s+0\s*$"),
     re.compile(r"^\s*echo\b[^&|;]*$"),
 )
+
+
+def _ground(root: str, paths: list) -> dict:
+    """Re-read the artifacts a verdict rests on, and say whether they hold.
+
+    A verdict is a claim about the machine, and a claim that is not
+    re-checked is a claim the machine has not confirmed. The snapshot was
+    taken when the work happened; between then and the verdict, a destroyer
+    task may have removed the file, or a later step may have overwritten
+    it. Reading again at the moment of judgement is what catches that --
+    and it costs one stat per path.
+    """
+    try:
+        import grounding_v1 as G
+    except Exception:
+        return {"verdict": "UNVERIFIABLE", "detail": "grounding unavailable",
+                "total": 0, "grounded": 0, "unverifiable": 0}
+    claims = []
+    for path in paths or []:
+        rel = os.path.relpath(path, root) if os.path.isabs(str(path)) else str(path)
+        claims.append({"path": rel, "exists": True})
+    res = G.check_all(claims, root)
+    return {"verdict": res["verdict"], "grounded": res["grounded"],
+            "unverifiable": res["unverifiable"], "total": res["total"],
+            "all_grounded": res["all_grounded"]}
 
 
 def _can_fail(command: str) -> bool:
@@ -173,8 +199,18 @@ def verify(goal: str, root: str, before: dict, after: dict,
 
     hits = [p for p in touched if any(t in p.lower() for t in tokens)]
     if hits:
+        grounded = _ground(root, hits[:10])
+        if not grounded.get("all_grounded"):
+            # It was there a moment ago and is not now. That is not a
+            # completed goal; it is work that was undone.
+            return {"verified": False, "reason": "ARTIFACT_NOT_GROUNDED",
+                    "route": "lexical", "matching": hits[:10],
+                    "grounding": grounded,
+                    "new_paths": new[:10], "modified_paths": changed[:10],
+                    "goal_tokens": tokens}
         return {"verified": True, "reason": "GOAL_ARTIFACT_FOUND",
                 "route": "lexical", "matching": hits[:10],
+                "grounding": grounded,
                 "new_paths": new[:10], "modified_paths": changed[:10],
                 "goal_tokens": tokens}
 
@@ -189,15 +225,49 @@ def verify(goal: str, root: str, before: dict, after: dict,
                     bridged.append(path)
                     via = key
     if bridged:
+        matched = sorted(set(bridged))[:10]
+        grounded = _ground(root, matched)
+        if not grounded.get("all_grounded"):
+            return {"verified": False, "reason": "ARTIFACT_NOT_GROUNDED",
+                    "route": "environment_evidence", "via_command": via,
+                    "matching": matched, "grounding": grounded,
+                    "new_paths": new[:10], "goal_tokens": tokens}
         return {"verified": True, "reason": "GOAL_ARTIFACT_FOUND",
                 "route": "environment_evidence", "via_command": via,
-                "matching": sorted(set(bridged))[:10],
+                "matching": matched, "grounding": grounded,
                 "new_paths": new[:10], "goal_tokens": tokens}
 
     return {"verified": False, "reason": "NO_MATCHING_ARTIFACT",
             "route": None, "matching": [], "new_paths": new[:10],
             "modified_paths": changed[:10],
             "goal_tokens": tokens}
+
+
+def _ground(root: str, paths: list) -> dict:
+    """Re-read the artifacts a verdict rests on, and say whether they hold.
+
+    A verdict is a claim about the machine, and a claim that is not
+    re-checked is a claim the machine has not confirmed. The snapshot was
+    taken when the work happened; between then and the verdict, a destroyer
+    task may have removed the file, or a later step may have overwritten
+    it. Reading again at the moment of judgement is what catches that --
+    and it costs one stat per path.
+    """
+    try:
+        import grounding_v1 as G
+    except Exception:
+        return {"verdict": "UNVERIFIABLE", "detail": "grounding unavailable",
+                "total": 0, "grounded": 0, "unverifiable": 0}
+    claims = []
+    for path in paths or []:
+        rel = os.path.relpath(path, root) if os.path.isabs(str(path)) else str(path)
+        claims.append({"path": rel, "exists": True})
+    res = G.check_all(claims, root)
+    return {"verdict": res["verdict"], "grounded": res["grounded"],
+            "unverifiable": res["unverifiable"], "total": res["total"],
+            "all_grounded": res["all_grounded"]}
+
+
 
 
 def _snapshot(root: str) -> dict:
