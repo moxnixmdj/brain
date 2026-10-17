@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/external_benchmark_dominance_compiler_v1.py.auto.v1",
- "elapsed_ms": 31.305,
+ "elapsed_ms": 20.542,
  "independent_run_reference": {
-  "github_run_id": 39031552534,
+  "github_run_id": 39031732253,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "bd3a702b-2b83-4e78-ba78-878219313de1",
+   "jti": "d46a4798-3834-4dec-984a-7a4827f40387",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39031552534",
+   "run_id": "39031732253",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
