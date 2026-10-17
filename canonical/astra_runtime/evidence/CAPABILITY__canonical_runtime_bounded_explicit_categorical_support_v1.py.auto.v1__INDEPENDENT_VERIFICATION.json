@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/bounded_explicit_categorical_support_v1.py.auto.v1",
- "elapsed_ms": 3.581,
+ "elapsed_ms": 4.645,
  "independent_run_reference": {
-  "github_run_id": 39009549835,
+  "github_run_id": 39009772994,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "d50e076a-08cd-4e62-a45c-b372e10cfa87",
+   "jti": "01306a71-3f99-4bae-9791-13faf15e5319",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39009549835",
+   "run_id": "39009772994",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
