@@ -240,7 +240,7 @@ def run(goal: str, root: str, binary_limit: int = 0,
                 pages = []
                 for u in wanted:
                     try:
-                        r = B.read(u)
+                        r = B.state(u)
                     except Exception as exc:
                         pages.append({"url": u, "error": f"{type(exc).__name__}: {exc}"})
                         continue
