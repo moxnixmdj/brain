@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/professional_r12_cc_r3_truth_reconciliation_v3_verify_v1.py.auto.v1",
- "elapsed_ms": 36.989,
+ "elapsed_ms": 34.57,
  "independent_run_reference": {
-  "github_run_id": 39017531630,
+  "github_run_id": 39017744810,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "7251c47d-7ea4-4e2b-a798-73d600b9ca84",
+   "jti": "d206e63e-662e-4943-bf89-77bd141fefd2",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39017531630",
+   "run_id": "39017744810",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
