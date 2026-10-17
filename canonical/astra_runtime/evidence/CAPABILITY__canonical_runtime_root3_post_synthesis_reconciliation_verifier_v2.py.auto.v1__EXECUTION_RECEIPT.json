@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/root3_post_synthesis_reconciliation_verifier_v2.py.auto.v1",
+ "elapsed_ms": 28.323,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/root3_post_synthesis_reconciliation_verifier_v2.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/root3_post_synthesis_reconciliation_verifier_v2.py",
+ "module_sha256": "b516bf1a2ed382bb326273a82f04ebb17ef5dbd268020ce88749f3590d4c2f97",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__10_ROOT3_PREDICATES__7_MATCHED_SCOPE_TARGETS__3_EVENT_CLASSES__ZERO_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_root3_post_synthesis_reconciliation_verifier_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 10,
+ "result_sha256": "a6d204731dbc9a41f9c2893ac2e1c5693d79671d95a7db4593a91f7f8e7cd735",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

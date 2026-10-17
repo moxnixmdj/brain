@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/synthesis_lossless_scope_decomposition_verifier_v1.py.auto.v1",
+ "elapsed_ms": 33.957,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/synthesis_lossless_scope_decomposition_verifier_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/synthesis_lossless_scope_decomposition_verifier_v1.py",
+ "module_sha256": "469eab97395b33921d7e8c57dd32d6cf8d8deb739d53a6d3054d47926be1a7a7",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__EXACT_SIX_DIMENSION_LOSSLESS_SCOPE_RELATION__SYNTHESIS_ROOT3_SCOPE_RELATION_ELIGIBLE__ZERO_PERFORMANCE_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_synthesis_lossless_scope_decomposition_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 22,
+ "result_sha256": "8281e50936693051b0abcbfc4ab85139163943a4e13289b54662a8b8a8a2149d",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

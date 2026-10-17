@@ -1,0 +1,34 @@
+{
+ "capability_id": "canonical/runtime/brain_witness_contamination_admissibility_v1.py.auto.v1",
+ "elapsed_ms": 32.71,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/brain_witness_contamination_admissibility_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/brain_witness_contamination_admissibility_v1.py",
+ "module_sha256": "2b45d8b68535d1b3e3c8e63679db2361a6d66c687efb6355047eaa28b4671334",
+ "observed": {
+  "pass": true,
+  "returncode": 0,
+  "status": "PASS__ALL_NORMALIZED_WITNESS_SOURCES_CONTAMINATION_ADMISSIBLE__ZERO_SEMANTIC_CREDIT"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_brain_witness_contamination_admissibility_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 15,
+ "result_sha256": "d2332be0609a0cb06bf1b0bfefb462b825a005160ef628563f185d311e38e350",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

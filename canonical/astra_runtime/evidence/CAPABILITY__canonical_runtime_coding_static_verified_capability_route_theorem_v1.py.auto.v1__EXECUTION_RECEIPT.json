@@ -1,0 +1,33 @@
+{
+ "capability_id": "canonical/runtime/coding_static_verified_capability_route_theorem_v1.py.auto.v1",
+ "elapsed_ms": 66.06,
+ "entrypoint": "run",
+ "executor": "bound_capabilities.cli_command",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "argv": [
+   "python3",
+   "canonical/runtime/coding_static_verified_capability_route_theorem_v1.py"
+  ]
+ },
+ "kind": "cli",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/coding_static_verified_capability_route_theorem_v1.py",
+ "module_sha256": "fe0e917bf79783d385507c24f2c60db4e2a52751288fc0e891eead2a9bb65f8a",
+ "observed": {
+  "pass": false,
+  "returncode": 0
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_coding_static_verified_capability_route_theorem_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 2,
+ "result_sha256": "8e0f351f6053a4544af5b1702a0ad7b8fa89af4b78855383bfd1f23756936637",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
