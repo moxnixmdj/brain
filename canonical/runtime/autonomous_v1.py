@@ -33,6 +33,20 @@ _STOP = {
     "build", "create", "generate", "produce", "please", "then", "so", "we",
     "i", "you", "should", "can", "could", "would", "do", "does", "did",
     "have", "has", "had", "get", "got", "put", "set", "up", "out",
+    # Instruction verbs and filler. "run the formatter" should be about the
+    # formatter, not about running: the cobra run produced
+    # ['run','formatter','over','source','code'], where three of five tokens
+    # were scaffolding. Every noise token dilutes matching and, worse, can
+    # match an unrelated artifact that happens to contain the word "code".
+    "run", "runs", "running", "execute", "exec", "invoke", "call", "start",
+    "over", "under", "onto", "into", "via", "per", "all", "any", "some",
+    "more", "most", "want", "need", "like", "just", "also", "now", "new",
+    "then", "than", "that", "which", "what", "when", "where", "how",
+    "make", "do", "done", "thing", "stuff",
+    # NOT "file" and NOT "data" -- both were added here and both were wrong.
+    # "produce a report from the data" then tokenised to just ['report'],
+    # losing the word that matches data/raw.json. They are content words,
+    # not scaffolding. Stripping them trades real signal for tidiness.
 }
 
 
