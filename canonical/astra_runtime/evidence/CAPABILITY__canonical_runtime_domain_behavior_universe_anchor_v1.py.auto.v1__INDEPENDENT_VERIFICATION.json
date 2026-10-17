@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/domain_behavior_universe_anchor_v1.py.auto.v1",
- "elapsed_ms": 19.908,
+ "elapsed_ms": 23.494,
  "independent_run_reference": {
-  "github_run_id": 38995348293,
+  "github_run_id": 38995556045,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "10248161-bf7c-4331-8d16-57ee0a92b4dc",
+   "jti": "c38c9229-94be-440d-afee-c4d6d9944211",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "38995348293",
+   "run_id": "38995556045",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
