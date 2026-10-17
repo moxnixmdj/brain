@@ -135,7 +135,9 @@ def main() -> int:
 
     failures += attested_state_checks()
     failures += anytime_validity_checks()
-    total = len(CASES) + browser_cases + _ATTESTED_CASES + _ANYTIME_CASES
+    failures += verifier_falsification_checks()
+    total = (len(CASES) + browser_cases + _ATTESTED_CASES + _ANYTIME_CASES
+             + _FALSIFICATION_CASES)
 
     print("\n%d/%d as expected" % (total - failures, total))
     return 1 if failures else 0
@@ -143,6 +145,7 @@ def main() -> int:
 
 _ATTESTED_CASES = 4
 _ANYTIME_CASES = 3
+_FALSIFICATION_CASES = 0
 
 
 def attested_state_checks() -> int:
@@ -256,6 +259,37 @@ def anytime_validity_checks() -> int:
           % ("PASS" if ok else "FAIL", "anytime", "%.1f%% false positives"
              % (broken * 100),
              "the old gate is measurably broken under peeking -- as claimed"))
+    return bad
+
+
+def verifier_falsification_checks() -> int:
+    """Every verifier must be shown able to say no.
+
+    The number of rows is whatever the falsification module defines, so
+    adding a verifier without a counterexample is impossible: the count
+    would not move, and the sweep would quietly cover nothing new.
+    """
+    print()
+    try:
+        from canonical.runtime import verifier_falsification_v1 as V
+    except ImportError:
+        import os as _o2
+        import sys as _s3
+        _s3.path.insert(0, _o2.path.dirname(_o2.path.abspath(__file__)))
+        import verifier_falsification_v1 as V
+
+    bad, results = V.run()
+    # Published, so the running total accounts for them. A fixed count
+    # here would let new verifiers be added without their counterexamples
+    # ever being reflected in "N/N as expected".
+    global _FALSIFICATION_CASES
+    _FALSIFICATION_CASES = len(results)
+    for name, wrong, affirmed in results:
+        print("%-8s %-16s %-42s %s"
+              % ("FAIL" if affirmed else "PASS", "falsify", name[:42], wrong))
+    print("%-8s %-16s %-42s %s"
+          % ("PASS" if not bad else "FAIL", "falsify", "all verifiers",
+             "%d/%d proven able to fail" % (len(results) - bad, len(results))))
     return bad
 
 
