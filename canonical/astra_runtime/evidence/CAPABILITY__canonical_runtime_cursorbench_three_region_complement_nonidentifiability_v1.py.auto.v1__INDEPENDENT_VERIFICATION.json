@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/cursorbench_three_region_complement_nonidentifiability_v1.py.auto.v1",
- "elapsed_ms": 36.051,
+ "elapsed_ms": 38.73,
  "independent_run_reference": {
-  "github_run_id": 39059581222,
+  "github_run_id": 39059790927,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "60e661a7-7f50-4bd8-8ef6-25d40e7fc81e",
+   "jti": "9b25d437-666c-4bcc-9ab4-739b28b31e8b",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39059581222",
+   "run_id": "39059790927",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
