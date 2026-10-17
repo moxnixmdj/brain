@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/p3_bounded_objective_role_presentation_compiler_v1.py.auto.v1",
- "elapsed_ms": 0.257,
+ "elapsed_ms": 0.258,
  "independent_run_reference": {
-  "github_run_id": 39077190050,
+  "github_run_id": 39077395974,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "2ae7aa84-3ded-42bb-852b-8dfa9a62ca7c",
+   "jti": "0046b7c5-6cfa-42c1-9ade-201e512c1158",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39077190050",
+   "run_id": "39077395974",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
