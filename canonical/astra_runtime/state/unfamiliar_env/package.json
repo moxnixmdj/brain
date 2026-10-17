@@ -1,0 +1,1 @@
+{"name":"unfamiliar","scripts":{"ping":"echo pong > out/ping.txt"}}
