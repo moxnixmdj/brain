@@ -5668,6 +5668,45 @@
       "provides": [
         "web.browser.interact.result"
       ]
+    },
+    "shell.command.run": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "argv": "${input.argv}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "returncode",
+          "type": "field_equals",
+          "value": 0
+        }
+      },
+      "adapter_module": "cli_command",
+      "entrypoint": "run",
+      "cost": 1,
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "shell",
+        "command",
+        "exec",
+        "run",
+        "terminal",
+        "bash",
+        "process",
+        "environment",
+        "probe",
+        "cli"
+      ],
+      "limitations": [
+        "Runs with cwd pinned to the repository root.",
+        "Timeout clamped to 1-300 seconds.",
+        "Argv limited to 64 non-empty string elements.",
+        "Non-zero exit raises rather than returning."
+      ],
+      "provides": [
+        "shell.command.result"
+      ]
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
