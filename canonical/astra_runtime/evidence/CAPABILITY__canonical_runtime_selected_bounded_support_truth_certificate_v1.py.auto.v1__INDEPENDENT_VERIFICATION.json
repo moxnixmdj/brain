@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/selected_bounded_support_truth_certificate_v1.py.auto.v1",
- "elapsed_ms": 1.636,
+ "elapsed_ms": 1.699,
  "independent_run_reference": {
-  "github_run_id": 39059790927,
+  "github_run_id": 39060027579,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "9b25d437-666c-4bcc-9ab4-739b28b31e8b",
+   "jti": "44ce1236-38d3-4dbf-afb5-4740cf544a70",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39059790927",
+   "run_id": "39060027579",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
