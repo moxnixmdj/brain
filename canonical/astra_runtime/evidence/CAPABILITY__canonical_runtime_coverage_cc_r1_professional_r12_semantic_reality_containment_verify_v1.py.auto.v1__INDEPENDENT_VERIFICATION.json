@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/coverage_cc_r1_professional_r12_semantic_reality_containment_verify_v1.py.auto.v1",
- "elapsed_ms": 37.651,
+ "elapsed_ms": 33.232,
  "independent_run_reference": {
-  "github_run_id": 39029731073,
+  "github_run_id": 39029929386,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "44256051-57f0-4cf9-8810-7d5e02b4b6ae",
+   "jti": "46e364ef-956d-4589-967a-4fb4751f6b1a",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39029731073",
+   "run_id": "39029929386",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
