@@ -17,6 +17,8 @@ nothing teaches nothing and scores zero.
 """
 from __future__ import annotations
 
+import re
+
 import sys
 from pathlib import Path
 
@@ -28,6 +30,18 @@ import decision_core_v1 as CORE       # noqa: E402
 import environment_probe_v1 as PROBE  # noqa: E402
 
 SCHEMA = "PROJECT_BRAIN_EXPLORE_V1"
+
+
+_PATH_CLAIM = re.compile(r"[\w./-]+\.(?:txt|json|log|out|csv|md|ya?ml|toml|py|sh|html|xml|zip|tar(?:\.gz)?)")
+
+
+def _claimed_paths(text: str) -> list[str]:
+    """Paths an action's output says it produced or touched.
+
+    Exists to catch the gap between saying and doing. Only real-looking
+    paths count, so ordinary prose does not trip it.
+    """
+    return list({m for m in _PATH_CLAIM.findall(text or "")})[:20]
 
 
 def _score_effect(record: dict, want_tokens: list[str]) -> float:
@@ -61,11 +75,23 @@ def _score_effect(record: dict, want_tokens: list[str]) -> float:
     out = (record.get("stdout_tail") or "") + (record.get("stderr_tail") or "")
     out = out.strip()
     if out:
-        info = 0.5
-        if want_tokens:
-            low = out.lower()
-            hits = sum(1 for t in want_tokens if t in low)
-            info = 0.5 + 0.5 * (hits / len(want_tokens))
+        low = out.lower()
+        hits = sum(1 for t in want_tokens if t in low) if want_tokens else 0
+        info = 0.5 + 0.5 * (hits / len(want_tokens)) if want_tokens else 0.5
+        # TRUST THE WORLD OVER THE WORD.
+        # A command that prints "wrote out/build.txt" and wrote nothing is
+        # not informing us, it is deceiving us. Its output scores HIGHER on
+        # raw token match than an honest command that quietly does the work
+        # -- the liar literally outranked the worker in the adversarial env.
+        # So: any path an action claims it touched, that the delta did not
+        # observe changing, is an uncorroborated claim. Discount it hard.
+        claims = _claimed_paths(out)
+        if claims:
+            touched = set((record.get("added") or [])
+                          + (record.get("modified") or []))
+            unbacked = [c for c in claims if not any(c in t for t in touched)]
+            if unbacked:
+                info *= 0.25
     return max(state, info)
 
 
