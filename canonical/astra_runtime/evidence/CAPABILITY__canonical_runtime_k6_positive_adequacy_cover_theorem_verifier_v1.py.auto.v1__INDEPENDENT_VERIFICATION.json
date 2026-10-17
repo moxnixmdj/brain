@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/k6_positive_adequacy_cover_theorem_verifier_v1.py.auto.v1",
- "elapsed_ms": 30.567,
+ "elapsed_ms": 34.147,
  "independent_run_reference": {
-  "github_run_id": 39010448834,
+  "github_run_id": 39010641593,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "23b8f2f1-9294-4c23-8939-4dc0ba4b21cf",
+   "jti": "f5bdb517-c307-454f-b0b9-e7f37ae596d7",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39010448834",
+   "run_id": "39010641593",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
