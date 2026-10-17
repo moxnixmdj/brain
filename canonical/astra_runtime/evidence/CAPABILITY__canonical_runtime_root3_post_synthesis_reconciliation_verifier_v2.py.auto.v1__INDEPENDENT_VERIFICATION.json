@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/root3_post_synthesis_reconciliation_verifier_v2.py.auto.v1",
- "elapsed_ms": 36.549,
+ "elapsed_ms": 33.746,
  "independent_run_reference": {
-  "github_run_id": 39069142906,
+  "github_run_id": 39069381153,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "22da5327-75d7-48f8-bb54-34a1c0b08855",
+   "jti": "1ec483cc-f5fa-40b2-9401-29aea9acc2a9",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39069142906",
+   "run_id": "39069381153",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
