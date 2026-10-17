@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/terminal_selection_kernel_guard.py.auto.v1",
- "elapsed_ms": 41.173,
+ "elapsed_ms": 42.463,
  "independent_run_reference": {
-  "github_run_id": 39003765923,
+  "github_run_id": 39003943650,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "816b71fe-50c6-4111-81ce-2a3be6c8846d",
+   "jti": "0d571258-18ba-46d2-892a-d807be3bbd93",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39003765923",
+   "run_id": "39003943650",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
