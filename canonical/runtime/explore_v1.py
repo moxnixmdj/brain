@@ -31,14 +31,42 @@ SCHEMA = "PROJECT_BRAIN_EXPLORE_V1"
 
 
 def _score_effect(record: dict, want_tokens: list[str]) -> float:
-    """Did it change anything, and did the change look like the goal?"""
-    if not record.get("effected_change"):
-        return 0.0
-    touched = (record.get("added") or []) + (record.get("modified") or [])
-    if not want_tokens:
-        return 0.5
-    hits = sum(1 for t in want_tokens if any(t in p.lower() for p in touched))
-    return 0.5 + 0.5 * (hits / len(want_tokens))
+    """Value of an action = did it change the world, or teach us something.
+
+    These are ALTERNATIVE sources of value, not necessary conditions. A
+    command that mutates state is valuable; a read-only probe that reports
+    back is valuable. Neither is required of the other, so they combine by
+    MAX, never by product and never by sum.
+
+      product -- would demand both, and zero every read-only probe
+      sum     -- would let a loud no-op outrank a quiet real change
+      max     -- credits whichever the action actually delivered
+
+    That distinction is the whole fix. The product rule is right for
+    relevance x callability, where each factor is genuinely required. Here
+    it would have reproduced exactly the blind spot it was meant to cure.
+    """
+    # --- did it change the world -------------------------------------------
+    state = 0.0
+    if record.get("effected_change"):
+        state = 0.5
+        if want_tokens:
+            touched = ((record.get("added") or [])
+                       + (record.get("modified") or []))
+            hits = sum(1 for t in want_tokens
+                       if any(t in p.lower() for p in touched))
+            state = 0.5 + 0.5 * (hits / len(want_tokens))
+    # --- did it teach us something -----------------------------------------
+    info = 0.0
+    out = (record.get("stdout_tail") or "") + (record.get("stderr_tail") or "")
+    out = out.strip()
+    if out:
+        info = 0.5
+        if want_tokens:
+            low = out.lower()
+            hits = sum(1 for t in want_tokens if t in low)
+            info = 0.5 + 0.5 * (hits / len(want_tokens))
+    return max(state, info)
 
 
 def explore(root: str, commands: list[list[str]],
