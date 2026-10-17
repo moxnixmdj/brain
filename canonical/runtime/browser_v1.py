@@ -101,15 +101,78 @@ def spki_pins(host: str, port: int = 443, timeout: int = 25) -> list[str]:
     return list(dict.fromkeys(pins))
 
 
-def start(port: str = PORT, timeout: int = 120) -> tuple[bool, str]:
-    """Launch the browser and wait for its endpoint. Idempotent."""
+# Pins the running browser was launched with, and the port it listens on.
+# A browser can only be told its pins at launch, so visiting a new host
+# means restarting with the accumulated set. Remembering what is active is
+# what keeps that to one restart per new host rather than one per page.
+_ACTIVE_PINS: set = set()
+
+
+def stop() -> None:
+    """Shut the browser down so it can be relaunched with different pins."""
+    import subprocess
+    subprocess.run(["pkill", "-x", "chromium"], capture_output=True)
+    _ACTIVE_PINS.clear()
+
+
+def host_of(url: str) -> str:
+    from urllib.parse import urlparse
+    return (urlparse(url).hostname or "").lower()
+
+
+def ensure(hosts: list[str], port: str = PORT, timeout: int = 180) -> tuple[bool, str]:
+    """Make sure a browser is running that is pinned to every host named.
+
+    Pinning is the only verification available -- there is no root store --
+    so a browser launched without the right pins cannot load the page at
+    all. That makes this the difference between working and not working,
+    not a security nicety bolted on afterwards.
+    """
+    import os, subprocess
+    hosts = [h for h in hosts if h]
+    if not hosts:
+        return start(port=port)
+    pins = set(_ACTIVE_PINS)
+    for h in hosts:
+        pins |= set(spki_pins(h))
+    if not pins:
+        return False, f"could not read a public key for {', '.join(hosts)}"
+    if running(port) and pins <= _ACTIVE_PINS:
+        return True, "already running with these pins"
+    stop()
+    env = dict(os.environ, CHROMIUM_SPKI_PINS=",".join(sorted(pins)))
+    env.pop("CHROMIUM_INSECURE", None)
+    r = subprocess.run(["sh", LAUNCH, port], capture_output=True, text=True,
+                       timeout=timeout, env=env)
+    if r.returncode != 0 or not running(port):
+        return False, (r.stdout + r.stderr).strip()[:300]
+    _ACTIVE_PINS.clear(); _ACTIVE_PINS.update(pins)
+    named = ", ".join(sorted(set(hosts)))
+    return True, f"pinned to {len(pins)} key(s) for {named}"
+
+
+def start(port: str = PORT, timeout: int = 120, pins: list[str] | None = None) -> tuple[bool, str]:
+    """Launch the browser and wait for its endpoint. Idempotent.
+
+    Prefer ensure(): a browser started without pins cannot load HTTPS at
+    all, because there is nothing to verify the certificate against.
+    """
+    import os, subprocess
     ok, why = available()
     if not ok:
         return False, why
     if running(port):
         return True, "already running"
-    r = subprocess.run(["sh", LAUNCH, port], capture_output=True, text=True, timeout=timeout)
-    return (True, "started") if r.returncode == 0 and running(port) else (False, r.stdout + r.stderr)
+    env = None
+    if pins:
+        env = dict(os.environ, CHROMIUM_SPKI_PINS=",".join(pins))
+        env.pop("CHROMIUM_INSECURE", None)
+    r = subprocess.run(["sh", LAUNCH, port], capture_output=True, text=True,
+                       timeout=timeout, env=env)
+    if r.returncode == 0 and running(port):
+        _ACTIVE_PINS.update(pins or [])
+        return True, "started"
+    return False, (r.stdout + r.stderr).strip()[:300]
 
 
 def _driver(args: list[str], timeout: int = 180):
@@ -138,7 +201,7 @@ def read(url: str, wait_for: str | None = None, timeout: int = 180) -> dict:
     wait_for is a JavaScript predicate; the driver polls it rather than
     sleeping, so this returns as soon as the content exists.
     """
-    ok, why = start()
+    ok, why = ensure([host_of(url)])
     if not ok:
         return {"schema": SCHEMA, "ok": False, "reason": why, "url": url}
     args = [url, READ_JS]
