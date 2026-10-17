@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_union25_mandatory_footprint_v2.py.auto.v1",
- "elapsed_ms": 2.245,
+ "elapsed_ms": 2.308,
  "independent_run_reference": {
-  "github_run_id": 39044996013,
+  "github_run_id": 39045213270,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "5ed833d9-6003-4181-b111-b13d12e97719",
+   "jti": "d6afa1b5-b36b-4a71-8aac-97cb0de4d49d",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39044996013",
+   "run_id": "39045213270",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
