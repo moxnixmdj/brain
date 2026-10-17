@@ -5667,6 +5667,10 @@
       ],
       "provides": [
         "web.browser.interact.result"
+      ],
+      "requires_binaries": [
+        "chromedriver",
+        "google-chrome"
       ]
     },
     "shell.command.run": {
@@ -5706,7 +5710,8 @@
       ],
       "provides": [
         "shell.command.result"
-      ]
+      ],
+      "requires": []
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
