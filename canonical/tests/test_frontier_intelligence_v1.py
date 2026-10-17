@@ -29,9 +29,9 @@ WORLD = C.external_tokens(G)
 # --------------------------------------------------------------------------- #
 def test_all_three_terms_are_present():
     t = FI.terms(G)
-    assert len(t["CAPABILITY"]) == 63
+    assert len(t["CAPABILITY"]) == 64
     assert len(t["JIT_KNOWLEDGE"]) == 4
-    assert sum(len(v) for v in t.values()) == 67
+    assert sum(len(v) for v in t.values()) == 68
     assert FI.substrate()["available"] is True
 
 

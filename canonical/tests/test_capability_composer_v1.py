@@ -20,7 +20,7 @@ EXT = C.external_tokens(G)
 # graph shape
 # --------------------------------------------------------------------------- #
 def test_graph_covers_every_bound_capability():
-    assert len(G) == 67
+    assert len(G) == 68
 
 
 def test_external_prerequisites_are_never_produced():
@@ -48,8 +48,8 @@ def test_producers_and_consumers_agree():
 # --------------------------------------------------------------------------- #
 def test_full_closure_fires_every_capability():
     order, have = C.forward_closure(EXT, G)
-    assert len(order) == 67
-    assert len(have) == 120
+    assert len(order) == 68
+    assert len(have) == 121
 
 
 def test_firing_order_is_topologically_valid():
@@ -67,7 +67,7 @@ def test_nothing_is_unreachable_once_the_world_supplies_prerequisites():
 
 def test_starved_closure_leaves_the_rest_unreachable():
     order, _ = C.forward_closure([], G)
-    assert len(C.unreachable([], G)) == 67 - 17
+    assert len(C.unreachable([], G)) == 68 - 17
 
 
 # --------------------------------------------------------------------------- #
@@ -190,7 +190,7 @@ def test_zero_slot_capabilities_are_named_not_hidden():
 def test_report_is_internally_consistent():
     r = C.report(EXT, G)
     assert r["schema"] == C.SCHEMA
-    assert r["capabilities_total"] == 67
-    assert r["capabilities_fired"] == 67
+    assert r["capabilities_total"] == 68
+    assert r["capabilities_fired"] == 68
     assert r["capabilities_unreachable"] == 0
-    assert len(r["firing_order"]) == 67
+    assert len(r["firing_order"]) == 68

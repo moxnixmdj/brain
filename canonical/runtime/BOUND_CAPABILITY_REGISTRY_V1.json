@@ -5565,6 +5565,67 @@
         "model_dependency_count": 0,
         "incremental_spend_usd": 0
       }
+    },
+    "python.contract.check.crosshair.v1": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.contract.check.crosshair.v1",
+          "target_path": "${input.target_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        }
+      },
+      "adapter_module": "crosshair_contract_oracle",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "contract",
+        "symbolic",
+        "smt",
+        "oracle",
+        "crosshair",
+        "counterexample",
+        "verification"
+      ],
+      "limitations": [
+        "Requires the crosshair-tool package; reports ORACLE_INCONCLUSIVE when absent.",
+        "Checks declared postconditions only; cannot invent contracts the code does not state.",
+        "Symbolic execution can be slow on code with unbounded loops or heavy I/O."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.contract.verdict"
+      ],
+      "requires": [
+        "python.source.file.available"
+      ],
+      "source": {
+        "project": "crosshair-tool",
+        "type": "pypi",
+        "version": "0.0.109",
+        "license": "MIT"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-CROSSHAIR-CONTRACT-ORACLE-001",
+        "observed_effect": {
+          "violations_found": 2,
+          "model_dependency_count": 0,
+          "status": "CONTRACT_VIOLATION_FOUND"
+        }
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
