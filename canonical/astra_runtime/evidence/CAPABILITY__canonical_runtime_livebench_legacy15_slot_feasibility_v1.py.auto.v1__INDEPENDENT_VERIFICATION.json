@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py.auto.v1",
- "elapsed_ms": 0.218,
+ "elapsed_ms": 0.308,
  "independent_run_reference": {
-  "github_run_id": 39002807887,
+  "github_run_id": 39002988050,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "e55b3c0f-a389-4cfd-95a2-1422d6e0f185",
+   "jti": "331d94ad-e475-40d8-b9d6-a8cdcda9bfae",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39002807887",
+   "run_id": "39002988050",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
