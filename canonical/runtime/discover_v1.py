@@ -26,6 +26,7 @@ SCHEMA = "PROJECT_BRAIN_DISCOVER_V1"
 
 _MAX_BINARIES = 400
 _MAX_ENTRYPOINTS = 60
+_COMMON_PORTS = tuple(list(range(8000, 8100)) + [80, 443, 3000, 5000, 8080, 8888, 9000])
 _SKIP_DIRS = {".git", "__pycache__", "node_modules", ".venv", ".pytest_cache"}
 
 
@@ -161,6 +162,36 @@ def candidates(root: str, binary_limit: int = 40) -> list[list[str]]:
         cmds.append(["npm", "run"])
     # The advertised entry points, so discovery leads somewhere.
     cmds.extend(entrypoint_commands(root))
+    return cmds
+
+
+def services(ports=None, host="127.0.0.1", timeout=0.12) -> list[int]:
+    """Listening services on this machine.
+
+    Everything else in here reads the FILESYSTEM. But a running service is
+    not in any directory -- it exists only as an open port. A machine that
+    cannot see open ports cannot see most of what a computer is actually
+    doing. This is discovery moving from "read the room" to "read the box".
+
+    Connect-only, short timeout, bounded port set. It never sends a payload
+    and never mutates anything.
+    """
+    import socket
+    found = []
+    for port in (ports or _COMMON_PORTS):
+        try:
+            with socket.create_connection((host, port), timeout=timeout):
+                found.append(port)
+        except OSError:
+            continue
+    return found
+
+
+def service_commands(host="127.0.0.1", ports=None) -> list[list[str]]:
+    """Cheap read-only probes against whatever is listening."""
+    cmds = []
+    for port in services(ports=ports, host=host):
+        cmds.append(["curl", "-s", "-m", "3", "http://%s:%d/" % (host, port)])
     return cmds
 
 
