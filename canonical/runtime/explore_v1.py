@@ -88,12 +88,28 @@ def explore(root: str, commands: list[list[str]],
             "model_dependency_count": 0}
 
 
+def explore_here(root: str, want_tokens: list[str] | None = None,
+                 binary_limit: int = 12, iterations: int = 12) -> dict:
+    """The whole chain, one call: discover -> probe -> search -> credit.
+
+    The commands are NOT supplied. They are discovered from the environment.
+    That is what makes this exploration rather than ranking.
+    """
+    import discover_v1 as DISCOVER
+    cmds = DISCOVER.candidates(root, binary_limit=binary_limit)
+    out = explore(root, cmds, want_tokens=want_tokens, iterations=iterations)
+    out["schema"] = "PROJECT_BRAIN_EXPLORE_HERE_V1"
+    out["commands_source"] = "discovered"
+    out["commands_discovered"] = len(cmds)
+    return out
+
+
 if __name__ == "__main__":
     import json
-    cmds = [["true"],
-            ["ls", "canonical/runtime/"],
-            ["touch", "canonical/astra_runtime/state/explore_marker"],
-            ["python3", "-c",
-             "open('canonical/astra_runtime/state/explore_out.txt','w').write('hi')"]]
-    print(json.dumps(explore(str(ROOT), cmds, want_tokens=["explore"]),
-                     indent=2)[:1600])
+    r = explore_here(str(ROOT), want_tokens=["version"], binary_limit=12)
+    print(json.dumps({k: v for k, v in r.items() if k != "learned"}, indent=2))
+    print("top 5 learned:")
+    for row in r["learned"][:5]:
+        print("   %-28s effect=%-6s changed=%s rc=%s"
+              % (" ".join(row["argv"])[:28], row["effect"],
+                 row["changed"], row["returncode"]))
