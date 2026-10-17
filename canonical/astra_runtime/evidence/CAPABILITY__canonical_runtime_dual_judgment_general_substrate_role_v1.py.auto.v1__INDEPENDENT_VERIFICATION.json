@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/dual_judgment_general_substrate_role_v1.py.auto.v1",
- "elapsed_ms": 28.527,
+ "elapsed_ms": 38.573,
  "independent_run_reference": {
-  "github_run_id": 39003576221,
+  "github_run_id": 39003765923,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "ebef6a57-0f7c-4374-9851-7fb65890f7a1",
+   "jti": "816b71fe-50c6-4111-81ce-2a3be6c8846d",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39003576221",
+   "run_id": "39003765923",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
