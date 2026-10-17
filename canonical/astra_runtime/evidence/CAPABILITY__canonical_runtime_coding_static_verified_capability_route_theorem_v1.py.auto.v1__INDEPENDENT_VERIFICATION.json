@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/coding_static_verified_capability_route_theorem_v1.py.auto.v1",
- "elapsed_ms": 29.86,
+ "elapsed_ms": 33.197,
  "independent_run_reference": {
-  "github_run_id": 39025404753,
+  "github_run_id": 39025602125,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "fc5be48f-8577-40f2-8a11-074b68378b9d",
+   "jti": "6e8d4977-794d-40d0-a4d3-fb76ce04547a",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39025404753",
+   "run_id": "39025602125",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
