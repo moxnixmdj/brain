@@ -170,3 +170,84 @@ Five of six already exist. The missing one is being measured, not invented.
 4. **Only then** consider trace-based synthesis of genuinely new primitives.
 
 Everything above is agent-actionable, model-free, and $0.
+
+---
+
+## 7. Can the machine derive the type table itself? (four attempts, measured)
+
+Hand-authoring the table works but is exactly the slow manual thing to avoid. So I tried to make
+the machine derive it. All four attempts are measured, including the failures.
+
+| # | Approach | Result |
+|---|---|---|
+| 1 | **Lexical token matching** between `provides` and `requires` | 41/67 chains, 403 edges — but **precision 0.06** |
+| 2 | Scan adapter source for file-extension literals | **3/67** |
+| 3 | Scan adapter source for `suffix` / `endswith` assertions | **9/67** |
+| 4 | Hand-authored table (§3) | 44/67 chains, 95 edges, precision assumed 1.0 but unverified |
+
+Approach 1 is the instructive failure. With no filtering it recovers **86% of the hand-written
+mappings** (recall 0.86) but **94% of everything it asserts is false** (precision 0.06). It
+matches on domain words, not meaning — e.g. it bridges
+`chart.raster.color_components` → `chart.query.x_value.available` because both contain "chart".
+Sweeping the document-frequency filter from ≤2 to ∞ moves precision only between 0.00 and 0.07
+(F1 never exceeds 0.12). **Names do not carry this information.** More edges was not better; it
+was noise.
+
+Approaches 2 and 3 fail for a structural reason: most adapters delegate to an external binary
+(pandoc, weasyprint, python-docx, chromedriver) or take `output_path` as a parameter, so the type
+is decided by the caller or the binary, not by the brain's own code.
+
+## 8. The reframe: type is a PARAMETER, not a property
+
+Two measurements change the shape of the problem:
+
+```
+capabilities with an output_path parameter : 41/67
+"X.available" needs in the registry        : 30/38
+```
+
+`output_path` is a `${input.…}` placeholder. So these 41 tools are **polymorphic producers**: the
+caller names the type. `JSON_OUTPUT_REQUIRED` in `yq_yaml_json.py` shows the adapters even
+enforce it.
+
+Which means: **the bridge is decided at plan time, and the candidate space is structural, not
+semantic.** 41 producers × 30 file-like needs = **1230 candidate bridges**, enumerated with no
+understanding at all.
+
+Most of those are false (`image.qr.generate` cannot write a `.docx`). But that no longer matters,
+because there is an oracle that settles each one mechanically.
+
+## 9. The optimal solution: enumerate, then execute. Let running be the oracle.
+
+Do not derive. Do not reason. **Enumerate the candidate space and execute it.**
+
+1. Generate all (producer, type) pairs structurally — 1230 candidates, zero guesswork.
+2. **Run each one** on the public runner, which has the binaries (pandoc, weasyprint,
+   chromedriver, yq, sqlite3 — 67/67 there, and general egress).
+3. Keep the pairs that produce a valid file of the claimed type; discard the rest.
+4. The survivors are the **verified** bridge table.
+
+This is optimal on every axis that matters here:
+
+- **No model.** The oracle is execution, so `NO_MODEL_PRODUCER_COGNITION` is untouched.
+- **No hand-authoring.** The machine writes its own table.
+- **Verified, not asserted.** Every surviving bridge is backed by a run, which is exactly the
+  discipline the rest of the repository demands.
+- **Embarrassingly parallel** and each case is a sub-second subprocess — minutes, not PRs.
+- **It fails closed.** A pair that does not produce the type is simply absent; no false bridge
+  can enter the table, which is the failure lexical matching could not avoid.
+
+The general pattern, worth stating because it generalises past this problem: **when a relation
+cannot be derived from names and is not recorded in code, enumerate the candidate space and let
+execution be the oracle.** Reasoning is the slow path; brute force plus a verifier is the fast
+one, and it is the only one that cannot be wrong.
+
+## 10. Revised next actions
+
+1. **Enumerate the 1230 candidate (producer, type) pairs** and execute them on the public runner.
+   Output: a verified `EMITS` table. Everything else waits on this, because it is what turns
+   67 tools into a composable graph with precision.
+2. Wire `capability_planner.plan_actions` to the bound registry so composition is a runtime
+   operation rather than a measurement script.
+3. Verify the completeness gate on the chase (owner requirement #5).
+4. Only then consider trace-based synthesis of genuinely new primitives.
