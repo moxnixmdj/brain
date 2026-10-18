@@ -238,7 +238,9 @@ def sweep_one(cid: str, entry: dict, instances: int, seed: int, work: Path) -> d
         try:
             # the capability id is what lets content rules be scoped per capability;
             # without it a rule for one capability's output_path would silently not apply
-            filled = samp.sample_args(sig, rng, ws, capability=cid)
+            # the format the adapter PARSES the file as, not what its name suggests
+            formats = ts.parsed_formats(entry) if entry else {}
+            filled = samp.sample_args(sig, rng, ws, capability=cid, formats=formats)
             # the registry omits arguments the adapter nevertheless requires (65 of them
             # across 26 capabilities). Fill them from their names so the call is complete:
             # otherwise we are measuring our own incomplete template, not the capability.

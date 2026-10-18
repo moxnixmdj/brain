@@ -589,3 +589,51 @@ def unresolvable_adapters(registry: Mapping[str, Any] | None = None,
                         or src.get("adapter_module")
                         or "(none declared)")
     return out
+
+
+# How an adapter CONSUMES a slot determines what a valid file for it contains.
+# Guessing from the slot's name is what produced six capabilities failing
+# JSONDecodeError at char 0: input_path and discovery_path contain no "json",
+# so the sampler wrote prose into a file the adapter parses with json.loads.
+_PARSE_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
+    ("json", re.compile(r"json\.loads|json\.load\b")),
+    ("yaml", re.compile(r"yaml\.safe_load|yaml\.load")),
+    ("csv", re.compile(r"csv\.DictReader|csv\.reader")),
+    ("toml", re.compile(r"toml\.load|tomllib\.load")),
+)
+
+
+def parsed_formats(entry: Mapping[str, Any],
+                   registry: Mapping[str, Any] | None = None) -> dict[str, str]:
+    """For each declared slot, the file format the adapter actually parses it as.
+
+    This is a small dataflow, not a guess: bind the variable the adapter reads
+    the slot into, then find how that variable is parsed. A slot the adapter
+    never parses gets no format, and the sampler keeps its name-based default --
+    which is right, because unparsed content is genuinely unconstrained.
+    """
+    path = resolve_adapter(entry)
+    if path is None:
+        return {}
+    text = "\n".join(_closure_source(path))
+    slots = set(signature(entry))
+    out: dict[str, str] = {}
+    for slot in slots:
+        # the variable the adapter reads this slot into
+        bound = re.findall(
+            r"(\w+)\s*=\s*[^=\n]*?args(?:\.get)?\s*[\[(]\s*[\"']" + re.escape(slot) + r"[\"']",
+            text)
+        for var in bound:
+            # how that variable is subsequently parsed
+            for fmt, pat in _PARSE_PATTERNS:
+                for m in pat.finditer(text):
+                    tail = text[m.end():m.end() + 120]
+                    head = text[max(0, m.start() - 120):m.start()]
+                    if re.search(r"\b" + re.escape(var) + r"\b", tail + head):
+                        out.setdefault(slot, fmt)
+                        break
+                if slot in out:
+                    break
+            if slot in out:
+                break
+    return out

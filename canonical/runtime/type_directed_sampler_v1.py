@@ -143,7 +143,8 @@ def clear_content_rules() -> None:
     _CONTENT_RULES.clear()
 
 
-def _content_for(slot: str, rng: random.Random, capability: str | None = None) -> tuple[str, str]:
+def _content_for(slot: str, rng: random.Random, capability: str | None = None,
+                 fmt: str = "") -> tuple[str, str]:
     """Return (suffix, content) appropriate to what `slot` actually names."""
     s = (slot or "").lower()
     cid = (capability or "").lower()
@@ -171,6 +172,16 @@ def _content_for(slot: str, rng: random.Random, capability: str | None = None) -
     i, i2 = rng.randrange(1000), rng.randrange(1000)
     v, v2 = round(rng.uniform(-100, 100), 2), round(rng.uniform(-100, 100), 2)
     fn, fn2 = _word(rng), _word(rng)
+    # An explicit format beats the name. Names lie: input_path and
+    # discovery_path are parsed with json.loads and say nothing about it.
+    if fmt == "json":
+        return ".json", _JSON_DOC.format(i=i, w=w, v=v)
+    if fmt == "yaml":
+        return ".yaml", _YAML_DOC.format(i=i, i2=i2, w=w)
+    if fmt == "csv":
+        return ".csv", _CSV_DOC.format(i=i, w=w, v=v, i2=i2, w2=w2, v2=v2)
+    if fmt == "toml":
+        return ".toml", f"[{w}]\n{w2} = {i}\n"
     if "yaml" in s or "yml" in s:
         return ".yaml", _YAML_DOC.format(i=i, i2=i2, w=w)
     if "json" in s or "manifest" in s:
@@ -193,16 +204,18 @@ def _content_for(slot: str, rng: random.Random, capability: str | None = None) -
     return ".txt", _text(rng, 4)
 
 
-def _new_file(rng: random.Random, ws: Path, slot: str, capability: str = "") -> Path:
+def _new_file(rng: random.Random, ws: Path, slot: str, capability: str = "",
+              fmt: str = "") -> Path:
     ws.mkdir(parents=True, exist_ok=True)
-    suffix, content = _content_for(slot, rng, capability)
+    suffix, content = _content_for(slot, rng, capability, fmt)
     p = ws / f"{slot or 'f'}{rng.randrange(1 << 30)}{suffix}"
     p.write_text(content, encoding="utf-8")
     return p
 
 
-def _s_path_file(rng: random.Random, ws: Path, slot: str = "", capability: str = "") -> str:
-    return str(_new_file(rng, ws, slot, capability))
+def _s_path_file(rng: random.Random, ws: Path, slot: str = "", capability: str = "",
+                 formats: Mapping[str, str] | None = None) -> str:
+    return str(_new_file(rng, ws, slot, capability, (formats or {}).get(slot, "")))
 
 
 def _s_path_dir(rng: random.Random, ws: Path, slot: str = "", capability: str = "") -> str:
@@ -250,7 +263,7 @@ class SamplingFailure(RuntimeError):
 
 
 def sample_args(signature: Mapping[str, str], rng: random.Random, workspace: Path,
-                capability: str = "") -> dict[str, Any]:
+                capability: str = "", formats: Mapping[str, str] | None = None) -> dict[str, Any]:
     """Sample one valid argument mapping for `signature` (slot -> type name).
 
     Raises SamplingFailure if a slot's type has no sampler. UNKNOWN has none by design --
@@ -262,7 +275,8 @@ def sample_args(signature: Mapping[str, str], rng: random.Random, workspace: Pat
         fn = _SAMPLERS.get(want)
         if fn is None:
             raise SamplingFailure("NO_SAMPLER_FOR_TYPE:" + str(want) + ":" + str(slot))
-        out[slot] = fn(rng, workspace, slot, capability)
+        out[slot] = (fn(rng, workspace, slot, capability, formats)
+                      if want == "PATH_FILE" else fn(rng, workspace, slot, capability))
     return out
 
 
