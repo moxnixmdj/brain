@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/terminal_authority_epoch_guard_v1.py.auto.v1",
- "elapsed_ms": 14.716,
+ "elapsed_ms": 11.702,
  "independent_run_reference": {
-  "github_run_id": 39172117236,
+  "github_run_id": 39172334504,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "234902b3-f03a-47a3-867e-e174e63cb116",
+   "jti": "c5572284-55d3-4f1b-98cb-4f5984c11d27",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39172117236",
+   "run_id": "39172334504",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
