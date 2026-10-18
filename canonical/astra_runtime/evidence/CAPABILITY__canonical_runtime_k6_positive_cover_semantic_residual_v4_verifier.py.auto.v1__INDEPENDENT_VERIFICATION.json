@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/k6_positive_cover_semantic_residual_v4_verifier.py.auto.v1",
- "elapsed_ms": 33.079,
+ "elapsed_ms": 33.968,
  "independent_run_reference": {
-  "github_run_id": 39158531988,
+  "github_run_id": 39158791483,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "eb8f54ff-cc58-4396-b947-db537b2e6d2f",
+   "jti": "0050ddf1-3a05-49d8-9a3b-eb5bbfbe9dd6",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39158531988",
+   "run_id": "39158791483",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
