@@ -470,7 +470,13 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
         # `brain_out____329bc7434f.json` for a tar.gz writer, and because it
         # succeeded this module never got to correct the extension. The
         # capability determines its own artifact type; the goal cannot.
-        if "output" in low:
+        roles = (entry or {}).get("_param_roles") or {}
+        # A DESTINATION IS DETERMINED BY WHAT THE MODULE DOES, NOT BY WHAT
+        # THE PARAMETER IS CALLED. `target_path` holds no "output" and so
+        # was searched for in a world where it did not exist yet, leaving
+        # the capability unbindable. The forge watched the module run and
+        # recorded which parameters create files.
+        if "output" in low or roles.get(key) == "output":
             value = named_destination(goal) or synthesize_output_path(cid, key, root)
             filled[key] = value
             continue

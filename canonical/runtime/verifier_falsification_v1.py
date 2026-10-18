@@ -1378,6 +1378,27 @@ def _cases() -> list[tuple[str, str, callable]]:
         "a workbook verified as a docx",
         docx_verifier_given_a_workbook)
 
+    # --- the forge must refuse what it cannot kill ------------------------
+    # Admitting a module is a claim that it can do work. Two ways the
+    # forge nearly made that claim falsely, both found by running it.
+
+    def vacuous_result_not_detected() -> bool:
+        from canonical.runtime import capability_forge_v1 as FG
+        return not FG.is_vacuous({"status": "NO_POSTCONDITION_PARSED",
+                                  "checked": 0, "violations": []})
+
+    def self_reported_failure_not_detected() -> bool:
+        from canonical.runtime import capability_forge_v1 as FG
+        return not FG.self_reported_failure(
+            {"status": "FAIL_CLOSED", "pass": False, "errors": ["x"]})
+
+    add("capability_forge_v1.is_vacuous",
+        "a result that reports finding nothing, admitted as work",
+        vacuous_result_not_detected)
+    add("capability_forge_v1.self_reported_failure",
+        "a run that reports its own failure, admitted as success",
+        self_reported_failure_not_detected)
+
     return out
 
 

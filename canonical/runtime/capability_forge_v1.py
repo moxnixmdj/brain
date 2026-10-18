@@ -185,6 +185,12 @@ def forge(module: str, cases: list[dict], root: Path | None = None,
         if art is False:
             report["reasons"].append("case%d_ARTIFACT_MISMATCH" % i)
             continue
+        if is_vacuous(out):
+            report["reasons"].append("case%d_VACUOUS__FOUND_NOTHING" % i)
+            continue
+        if self_reported_failure(out):
+            report["reasons"].append("case%d_SELF_REPORTED_FAILURE" % i)
+            continue
         runs.append(out)
     report["checks"]["ran_on_inputs"] = "%d/%d" % (len(runs), len(cases))
     if len(runs) < 2:
@@ -311,6 +317,114 @@ def register(module: str, contract: dict, cases: list[dict]) -> dict:
                    encoding="utf-8")
     tmp.replace(STATE)
     return entry
+
+
+_VACUOUS_STATUS = ("no_", "none", "empty", "skipped", "not_found",
+                   "unresolved", "n/a", "nothing")
+
+
+def is_vacuous(result: dict) -> bool:
+    """Did it actually do anything, or just report that it found nothing?
+
+    VACUOUS TRUTH, AND THE FORGE WALKED STRAIGHT INTO IT.
+
+    concrete_execution_oracle returned
+
+        {"status": "NO_POSTCONDITION_PARSED", "checked": 0, "violations": []}
+
+    for every input. Well-formed, honest, and empty. The forge ran it
+    three times, saw a dict come back each time, and admitted it as a
+    capability -- a capability whose entire demonstrated behaviour is
+    "found nothing". A result can be truthful and still be evidence of
+    nothing, which is the same failure as a check that cannot fail, one
+    level up.
+
+    So: a status announcing that nothing was found is vacuous; every
+    count being zero is vacuous; a non-empty artifact or a real value is
+    not.
+    """
+    if not isinstance(result, dict):
+        return True
+    status = str(result.get("status") or "").strip().lower()
+    if status and any(status.startswith(p) or status == p
+                      for p in _VACUOUS_STATUS):
+        return True
+    counts = [v for v in result.values() if isinstance(v, (int, float))
+              and not isinstance(v, bool)]
+    lists = [v for v in result.values() if isinstance(v, list)]
+    if counts and all(v == 0 for v in counts):
+        return True
+    if lists and all(len(v) == 0 for v in lists):
+        return True
+    return False
+
+
+def self_reported_failure(result: dict) -> bool:
+    """Did the module say, in its own result, that it did not succeed?
+
+    THE SECOND HOLE, FOUND IMMEDIATELY AFTER THE FIRST. python_request_
+    semantic_acceptance_cells_v1 returned a busy, non-vacuous result on
+    every input -- and every one of them said pass=false. It had been
+    handed hashes I invented, so refusing was correct, but a run that
+    reports failure is not evidence the module can do the work. A forge
+    that counts failures as successes would happily admit a module whose
+    entire demonstrated behaviour is saying no.
+    """
+    if not isinstance(result, dict):
+        return True
+    for key in ("pass", "ok", "verified", "output_verified", "success"):
+        if key in result and result.get(key) is False:
+            return True
+    status = str(result.get("status") or "").strip().upper()
+    if status and (status.startswith("FAIL") or status.startswith("ERROR")
+                   or status in ("REJECTED", "UNRESOLVED")):
+        return True
+    if isinstance(result.get("errors"), list) and result.get("errors"):
+        return True
+    return False
+
+
+def observe_roles(module: str, case: dict, root: Path | None = None) -> dict:
+    """Which parameters are destinations and which are sources -- observed.
+
+    The binder decides this from the NAME: it treats a parameter as a
+    destination only when "output" appears in it. `target_path` names no
+    output and is therefore searched for in a world where it does not
+    exist yet, so the capability is unbindable and the forged capability
+    was unreachable for a reason that had nothing to do with the module.
+
+    So ask the machine instead of reading the name. Point each path-like
+    parameter at a scratch path that does not exist, run the module, and
+    look: a file that appeared is a destination, one that was already
+    there is a source. Same rule as the feature probe -- the machine
+    knows, the name only guesses.
+    """
+    root = root or ROOT
+    roles: dict[str, str] = {}
+    for key, value in (case or {}).items():
+        if not isinstance(value, str) or not value.strip():
+            continue
+        if not ("/" in value or value.lower().endswith(_FILE_EXT)):
+            continue
+        scratch = "canonical/astra_runtime/tmp/forge_probe_%s_%s" % (
+            hashlib.sha256((module + key).encode("utf-8")).hexdigest()[:10],
+            Path(value).name)
+        target = root / scratch
+        existed_before = target.exists()
+        probe = dict(case)
+        probe[key] = scratch
+        try:
+            ok, _ = _call(module, probe, root)
+        except Exception:
+            ok = False
+        appeared = (not existed_before) and target.is_file()
+        roles[key] = "output" if (ok and appeared) else "input"
+        if appeared:
+            try:
+                target.unlink()
+            except Exception:
+                pass
+    return roles
 
 
 def registered() -> dict:
