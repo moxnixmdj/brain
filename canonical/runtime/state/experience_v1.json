@@ -2,8 +2,9 @@
  "cells": {
   "archive.tar_gz.create_from_manifest|verified": {
    "first_seen": 1792312443.2875447,
-   "last_seen": 1792312443.2875466,
+   "last_seen": 1792313409.0642567,
    "observations": [
+    1,
     1
    ],
    "structural": false,
@@ -12,8 +13,9 @@
   },
   "archive.verify.tar_gz.gnu|runtimeerror": {
    "first_seen": 1792312443.3720834,
-   "last_seen": 1792312443.372086,
+   "last_seen": 1792313409.1424775,
    "observations": [
+    -1,
     -1
    ],
    "structural": false,
@@ -34,13 +36,24 @@
   },
   "docx.document.verify.intent_ooxml|verified": {
    "first_seen": 1792312443.1245909,
-   "last_seen": 1792312443.1245923,
+   "last_seen": 1792313408.8897033,
    "observations": [
+    1,
     1
    ],
    "structural": false,
    "where": "docx.document.verify.intent_ooxml",
    "why": "VERIFIED"
+  },
+  "image.extract.ocr.tesseract|bound_capability_source_unsupported": {
+   "first_seen": 1792313437.9199655,
+   "last_seen": 1792313437.919968,
+   "observations": [
+    -1
+   ],
+   "structural": true,
+   "where": "image.extract.ocr.tesseract",
+   "why": "BOUND_CAPABILITY_SOURCE_UNSUPPORTED"
   },
   "pdf.extract.text.pypdf|bound_pypi_install_failed": {
    "first_seen": 1792312518.9164147,
@@ -52,10 +65,25 @@
    "where": "pdf.extract.text.pypdf",
    "why": "BOUND_PYPI_INSTALL_FAILED"
   },
+  "pdf.extract.text.pypdf|verified": {
+   "first_seen": 1792313436.2314923,
+   "last_seen": 1792313496.601228,
+   "observations": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "structural": false,
+   "where": "pdf.extract.text.pypdf",
+   "why": "VERIFIED"
+  },
   "python.source.audit.ast|runtimeerror": {
    "first_seen": 1792312444.8398008,
-   "last_seen": 1792312444.8398044,
+   "last_seen": 1792313437.8991458,
    "observations": [
+    -1,
+    -1,
     -1
    ],
    "structural": false,
@@ -64,8 +92,9 @@
   },
   "python.source.audit.ast|verified": {
    "first_seen": 1792312443.2595565,
-   "last_seen": 1792312443.2595594,
+   "last_seen": 1792313409.0377328,
    "observations": [
+    1,
     1
    ],
    "structural": false,
@@ -74,8 +103,9 @@
   },
   "sqlite.table.verify_against_json_records|blocker": {
    "first_seen": 1792312443.3051975,
-   "last_seen": 1792312443.3051996,
+   "last_seen": 1792313409.0814402,
    "observations": [
+    -1,
     -1
    ],
    "structural": false,
@@ -84,8 +114,9 @@
   },
   "xlsx.table.create_from_json_records|blocker": {
    "first_seen": 1792312443.3409848,
-   "last_seen": 1792312443.3409874,
+   "last_seen": 1792313409.1123362,
    "observations": [
+    -1,
     -1
    ],
    "structural": false,
@@ -94,8 +125,9 @@
   },
   "xlsx.table.verify_against_json_records|blocker": {
    "first_seen": 1792312443.3242493,
-   "last_seen": 1792312443.3242517,
+   "last_seen": 1792313409.0979545,
    "observations": [
+    -1,
     -1
    ],
    "structural": false,

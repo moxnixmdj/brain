@@ -72,6 +72,7 @@ DEFAULT_STATE = "canonical/runtime/state/experience_v1.json"
 DEFAULT_ALPHA = 0.05           # Ville: promote at e >= 1/alpha = 20
 THRESHOLD = 1.0 / DEFAULT_ALPHA
 MAX_OBSERVATIONS = 500         # the unit is a pathology, so this is plenty
+RECHECK_AFTER_S = 300.0        # see _probe_due: a memory must be re-testable
 
 # Reasons that are FACTS ABOUT A MACHINE rather than statistical claims.
 # One observation settles them. Everything else must earn its gate.
@@ -163,6 +164,25 @@ def _e_value(observations):
             return {"n": len(observations), "e_value": 0.0, "mean": 0.0}
 
 
+def _probe_due(entry) -> bool:
+    """A suppressed memory must be allowed to be wrong.
+
+    THE DEADLOCK THIS BREAKS. Structural suppression fires on one
+    observation and then skips the capability forever -- so it can never
+    gather the successes that would lift it. Install the missing package
+    and the machine would still refuse, permanently, for a reason that
+    stopped being true. That is not memory; it is a grudge.
+
+    So a suppression expires into a single forced retry. Retrying is cheap
+    and being wrong forever is not. One success is enough to lift it,
+    because suppression requires mean < 0 and a single +1 makes it zero.
+    """
+    last = float(entry.get("last_seen") or 0.0)
+    if not last:
+        return False
+    return (time.time() - last) > RECHECK_AFTER_S
+
+
 def status(cell: str, path=None) -> dict:
     state = _load(path)
     entry = state["cells"].get(cell)
@@ -176,12 +196,15 @@ def status(cell: str, path=None) -> dict:
     n = int(e.get("n") or 0)
     # DIRECTION, not just magnitude -- see the module docstring.
     credited = bool(e_value >= THRESHOLD and mean > 0)
-    suppressed = bool(entry.get("structural") and mean < 0) or bool(
+    probe_due = _probe_due(entry)
+    harmful = bool(entry.get("structural") and mean < 0) or bool(
         e_value >= THRESHOLD and mean < 0)
+    suppressed = bool(harmful and not probe_due)
     return {"cell": cell, "n": n, "e_value": round(e_value, 3),
             "mean": round(mean, 3), "threshold": round(THRESHOLD, 1),
             "credited": credited, "suppressed": suppressed,
             "structural": bool(entry.get("structural")),
+            "probe_due": probe_due,
             "last_seen": entry.get("last_seen"),
             "reason": ("consistent success clears the gate" if credited
                        else ("consistently harmful here" if suppressed

@@ -806,10 +806,17 @@ def _cases() -> list[tuple[str, str, callable]]:
         # Memory removes the NEED TO ASK, never the need to CHECK. Teach it
         # that a capability which demonstrably cannot run here is the
         # answer, and it must still report failure rather than success.
+        # This case must fail for a reason that stays true. It first used
+        # the PDF capability, then pypdf was installed and the goal began
+        # succeeding -- at which point the test stopped testing anything,
+        # because it could no longer tell "memory skipped verification"
+        # from "the work genuinely verified". OCR is used instead:
+        # tesseract is a system binary, not a package, so it cannot be
+        # installed away. A test that stops discriminating is decoration.
         E.DEFAULT_STATE = "canonical/runtime/state/_falsify_exp_d.json"
         E._STATE_CACHE.clear()
-        goal = "extract text from canonical/astra_runtime/tmp/BOUND_PDF_TEXT_TEST.pdf"
-        E.teach_resolution(goal, "pdf.extract.text.pypdf")
+        goal = "run ocr on canonical/astra/canary_frames/006-c-final.png"
+        E.teach_resolution(goal, "image.extract.ocr.tesseract")
         r = G.act(goal)
         return bool(r.get("ok"))
 
@@ -918,6 +925,35 @@ def _cases() -> list[tuple[str, str, callable]]:
         inventory_tier_reported_as_verification)
     add("grounded_action_v1.act", "the inventory taking over from a verified capability",
         inventory_displaces_a_verified_capability)
+
+    # --- a memory must be revocable --------------------------------------
+    # Structural suppression fires on ONE observation and then skips the
+    # capability forever -- so it can never gather the successes that would
+    # lift it. Install the missing package and the machine would still
+    # refuse, permanently, for a reason that had stopped being true.
+    #
+    # This actually happened: pypdf was installed, and
+    # pdf.extract.text.pypdf was still recorded as unusable. A memory that
+    # cannot be revoked is a grudge, not knowledge.
+
+    def structural_suppression_never_expires() -> bool:
+        import experience_v1 as E
+        E.DEFAULT_STATE = "canonical/runtime/state/_falsify_exp_e.json"
+        E._STATE_CACHE.clear()
+        E.record("falsify.cap", "BOUND_PYPI_INSTALL_FAILED", False,
+                 structural=True)
+        st = E._load(E.DEFAULT_STATE)
+        for key in st["cells"]:
+            # A real distant past. Zero means "no timestamp recorded",
+            # which is a different and legitimate case -- winding to it
+            # tests nothing, and a test that tests nothing is decoration.
+            st["cells"][key]["last_seen"] = 1.0
+        E._save(st, E.DEFAULT_STATE)
+        return bool(E.is_suppressed("falsify.cap"))
+
+    add("experience_v1.is_suppressed",
+        "a suppression that can never be revoked",
+        structural_suppression_never_expires)
 
     return out
 
