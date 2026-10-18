@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/root3_current_credited_zero_effect_reconciliation_verifier_v1.py.auto.v1",
- "elapsed_ms": 27.79,
+ "elapsed_ms": 33.392,
  "independent_run_reference": {
-  "github_run_id": 39171373940,
+  "github_run_id": 39171630868,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "a00dab33-146d-45b0-a681-b8875ad243f7",
+   "jti": "dbe415ac-9922-4c95-999c-b7435b15571a",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39171373940",
+   "run_id": "39171630868",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
