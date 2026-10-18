@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/professional_r12_c8_nonvacuity_v1.py.auto.v1",
- "elapsed_ms": 36.117,
+ "elapsed_ms": 36.25,
  "independent_run_reference": {
-  "github_run_id": 39130185369,
+  "github_run_id": 39130453187,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "34316837-7dde-454a-a181-1fc3498f9f88",
+   "jti": "013234c9-10b8-4247-acb8-4b2ec050a6e5",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39130185369",
+   "run_id": "39130453187",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
