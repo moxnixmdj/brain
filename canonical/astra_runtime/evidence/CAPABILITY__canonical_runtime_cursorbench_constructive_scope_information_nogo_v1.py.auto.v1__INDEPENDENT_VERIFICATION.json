@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/cursorbench_constructive_scope_information_nogo_v1.py.auto.v1",
- "elapsed_ms": 36.852,
+ "elapsed_ms": 37.198,
  "independent_run_reference": {
-  "github_run_id": 39152492685,
+  "github_run_id": 39152724868,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "77ec4fef-d858-42ed-96d5-82d448a5a519",
+   "jti": "9e5de225-0895-4a3a-bf36-29d4fcfb6d2b",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39152492685",
+   "run_id": "39152724868",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
