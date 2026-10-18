@@ -143,8 +143,41 @@ def clear_content_rules() -> None:
     _CONTENT_RULES.clear()
 
 
+def _value_for_key(key: str, spec: dict, rng: random.Random) -> Any:
+    """A value for one mined key, honouring the constraint the adapter stated.
+
+    A key the validator compares against a literal must take that literal, or
+    the document is well-formed and still rejected -- status has to be
+    OBJECTIVE_GROUNDED_EVIDENCE_UNITS_EXTRACTED, not any old string.
+    """
+    if "equals" in spec:
+        return spec["equals"]
+    if spec.get("type") == "dict":
+        return {_word(rng): rng.randint(1, 100), "kind": _word(rng)}
+    k = key.lower()
+    if k.endswith("_url") or k == "url":
+        return f"https://example.com/{_word(rng)}"
+    if k.endswith("_sha256"):
+        return "".join(rng.choice("0123456789abcdef") for _ in range(64))
+    if k in ("output_verified", "verified", "success"):
+        return True
+    if k in ("threshold", "limit", "count", "offset", "score"):
+        return round(rng.uniform(0.1, 10.0), 3)
+    if k.endswith("_units") or k.endswith("_list") or k in ("alternatives", "constraints", "evidence"):
+        return [{_word(rng): _text(rng, 2), "value": rng.randint(1, 100)}]
+    if k in ("record", "policy", "operator", "mode", "left", "right"):
+        return {"kind": _word(rng), "value": rng.randint(1, 100)}
+    if k == "schema":
+        return "OBJECTIVE_GROUNDED_EVIDENCE_UNITS_V1"
+    return _text(rng, 3)
+
+
+def _json_from_schema(keys: dict, rng: random.Random) -> str:
+    return json.dumps({k: _value_for_key(k, v, rng) for k, v in keys.items()})
+
+
 def _content_for(slot: str, rng: random.Random, capability: str | None = None,
-                 fmt: str = "") -> tuple[str, str]:
+                 fmt: str = "", schema: dict | None = None) -> tuple[str, str]:
     """Return (suffix, content) appropriate to what `slot` actually names."""
     s = (slot or "").lower()
     cid = (capability or "").lower()
@@ -175,6 +208,8 @@ def _content_for(slot: str, rng: random.Random, capability: str | None = None,
     # An explicit format beats the name. Names lie: input_path and
     # discovery_path are parsed with json.loads and say nothing about it.
     if fmt == "json":
+        if schema:
+            return ".json", _json_from_schema(schema, rng)
         return ".json", _JSON_DOC.format(i=i, w=w, v=v)
     if fmt == "yaml":
         return ".yaml", _YAML_DOC.format(i=i, i2=i2, w=w)
@@ -205,17 +240,19 @@ def _content_for(slot: str, rng: random.Random, capability: str | None = None,
 
 
 def _new_file(rng: random.Random, ws: Path, slot: str, capability: str = "",
-              fmt: str = "") -> Path:
+              fmt: str = "", schema: dict | None = None) -> Path:
     ws.mkdir(parents=True, exist_ok=True)
-    suffix, content = _content_for(slot, rng, capability, fmt)
+    suffix, content = _content_for(slot, rng, capability, fmt, schema)
     p = ws / f"{slot or 'f'}{rng.randrange(1 << 30)}{suffix}"
     p.write_text(content, encoding="utf-8")
     return p
 
 
 def _s_path_file(rng: random.Random, ws: Path, slot: str = "", capability: str = "",
-                 formats: Mapping[str, str] | None = None) -> str:
-    return str(_new_file(rng, ws, slot, capability, (formats or {}).get(slot, "")))
+                 formats: Mapping[str, str] | None = None,
+                 schemas: Mapping[str, dict] | None = None) -> str:
+    return str(_new_file(rng, ws, slot, capability, (formats or {}).get(slot, ""),
+                         (schemas or {}).get(slot)))
 
 
 def _s_path_dir(rng: random.Random, ws: Path, slot: str = "", capability: str = "") -> str:
@@ -263,7 +300,8 @@ class SamplingFailure(RuntimeError):
 
 
 def sample_args(signature: Mapping[str, str], rng: random.Random, workspace: Path,
-                capability: str = "", formats: Mapping[str, str] | None = None) -> dict[str, Any]:
+                capability: str = "", formats: Mapping[str, str] | None = None,
+                schemas: Mapping[str, dict] | None = None) -> dict[str, Any]:
     """Sample one valid argument mapping for `signature` (slot -> type name).
 
     Raises SamplingFailure if a slot's type has no sampler. UNKNOWN has none by design --
@@ -275,7 +313,7 @@ def sample_args(signature: Mapping[str, str], rng: random.Random, workspace: Pat
         fn = _SAMPLERS.get(want)
         if fn is None:
             raise SamplingFailure("NO_SAMPLER_FOR_TYPE:" + str(want) + ":" + str(slot))
-        out[slot] = (fn(rng, workspace, slot, capability, formats)
+        out[slot] = (fn(rng, workspace, slot, capability, formats, schemas)
                       if want == "PATH_FILE" else fn(rng, workspace, slot, capability))
     return out
 

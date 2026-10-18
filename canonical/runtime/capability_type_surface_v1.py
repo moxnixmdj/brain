@@ -637,3 +637,57 @@ def parsed_formats(entry: Mapping[str, Any],
             if slot in out:
                 break
     return out
+
+
+def parsed_schema(entry: Mapping[str, Any]) -> dict[str, dict[str, Any]]:
+    """The keys an adapter reads out of a parsed document, and what it demands of them.
+
+    Well-formed JSON is not valid JSON. Three capabilities parse and then reject:
+    DECISION_SCHEMA_INVALID, EXTRACTION_SCHEMA_INVALID. The adapter states what it
+    wants twice over -- in the keys it reads, and in the comparisons it makes on
+    them -- so the schema is mined rather than guessed:
+
+      var["k"]              required key
+      var.get("k")          optional key
+      var.get("k") != "x"   rejected unless equal to x  -> the accepted value
+      var.get("k") == ""    rejected if empty           -> must be non-empty
+
+    This is the same trick as adapter_arg_reads, one level deeper: the consumer
+    of a value is the authority on what that value must be.
+    """
+    path = resolve_adapter(entry)
+    if path is None:
+        return {}
+    text = "\n".join(_closure_source(path))
+    formats = parsed_formats(entry)
+    slots = [s for s, f in formats.items() if f == "json"]
+    out: dict[str, dict[str, Any]] = {}
+    for slot in slots:
+        bound = re.findall(
+            r"(\w+)\s*=\s*[^=\n]*?args(?:\.get)?\s*[\[(]\s*[\"']" + re.escape(slot) + r"[\"']", text)
+        keys: dict[str, Any] = {}
+        for var in bound:
+            # the variable the parsed document lands in
+            m = re.search(r"(\w+)\s*=\s*json\.loads\([^)]*" + re.escape(var), text)
+            doc = m.group(1) if m else var
+            for k in set(re.findall(r"\b" + re.escape(doc) + r"\s*\[\s*[\"']([\w.]+)[\"']", text)):
+                keys.setdefault(k, {"required": True})
+            for k in set(re.findall(r"\b" + re.escape(doc) + r"\.get\(\s*[\"']([\w.]+)[\"']", text)):
+                keys.setdefault(k, {"required": False})
+            # A key fed to dict() must be a mapping. Handing it a string is
+            # what regressed two capabilities that had been clean:
+            # "dictionary update sequence element #0 has length 1".
+            for k in list(keys):
+                if re.search(r"dict\(\s*" + re.escape(k) + r"\b", text) or \
+                   re.search(r"\b" + re.escape(k) + r"\s*\.items\(\)", text) or \
+                   re.search(r"\b" + re.escape(k) + r"\s*\.get\(\s*[\"']", text):
+                    keys[k]["type"] = "dict"
+            # constraints the validator states about those keys
+            for k in list(keys):
+                pat = (r"\b" + re.escape(doc) + r"\.get\(\s*[\"']" + re.escape(k)
+                       + r"[\"']\s*(?:\)|\s*,\s*[^)]*\))\s*(==|!=)\s*[\"']([^\"']*)[\"']")
+                for op, val in re.findall(pat, text):
+                    keys[k]["equals" if op == "!=" else "rejects"] = val
+        if keys:
+            out[slot] = keys
+    return out

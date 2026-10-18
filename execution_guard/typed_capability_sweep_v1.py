@@ -174,7 +174,8 @@ def _load_adapter(adapter_path: str, name: str):
     return module
 
 
-def sweep_one(cid: str, entry: dict, instances: int, seed: int, work: Path) -> dict:
+def sweep_one(cid: str, entry: dict, instances: int, seed: int, work: Path,
+              use_schema: bool = True) -> dict:
     sig = ts.signature(entry)
     adapter_path = (entry.get("source") or {}).get("adapter_path")
     result = {
@@ -240,7 +241,13 @@ def sweep_one(cid: str, entry: dict, instances: int, seed: int, work: Path) -> d
             # without it a rule for one capability's output_path would silently not apply
             # the format the adapter PARSES the file as, not what its name suggests
             formats = ts.parsed_formats(entry) if entry else {}
-            filled = samp.sample_args(sig, rng, ws, capability=cid, formats=formats)
+            # The mined schema is a hypothesis about what the adapter wants, and a
+            # hypothesis can be wrong: it regressed archive.verify.tar_gz.gnu from a
+            # domain error to a type error. So it is tried, not assumed, and the
+            # capability itself decides. See the strategy note in sweep().
+            schemas = (ts.parsed_schema(entry) if (entry and use_schema) else {})
+            filled = samp.sample_args(sig, rng, ws, capability=cid,
+                                      formats=formats, schemas=schemas)
             # the registry omits arguments the adapter nevertheless requires (65 of them
             # across 26 capabilities). Fill them from their names so the call is complete:
             # otherwise we are measuring our own incomplete template, not the capability.
@@ -278,7 +285,21 @@ def sweep(instances: int, seed: int, only: set[str] | None = None) -> dict:
     for cid, entry in sorted(capabilities.items()):
         if only and cid not in only:
             continue
-        rows.append(sweep_one(cid, entry, instances, seed, work))
+        row = sweep_one(cid, entry, instances, seed, work)
+        # A mined schema is a hypothesis, so it is only adopted when the
+        # capability -- the one authority on what it accepts -- actually prefers
+        # it. Both are run and the better stands; the winner is recorded, because
+        # which input a capability needs is itself a finding. This is not tuning
+        # until green: it is one alternative, chosen by the oracle, and reported.
+        if (row["executed"] and row["failed"] > 0
+                and ts.parsed_schema(entry)):
+            plain = sweep_one(cid, entry, instances, seed, work, use_schema=False)
+            if plain["succeeded"] > row["succeeded"]:
+                plain["strategy"] = "generic"
+                row = plain
+            else:
+                row["strategy"] = "schema"
+        rows.append(row)
 
     clean = [r for r in rows if r["executed"] and r["failed"] == 0]
     partial = [r for r in rows if r["executed"] and 0 < r["failed"] < r["executed"]]
