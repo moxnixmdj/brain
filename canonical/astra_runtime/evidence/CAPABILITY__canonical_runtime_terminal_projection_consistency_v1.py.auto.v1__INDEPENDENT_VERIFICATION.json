@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/terminal_projection_consistency_v1.py.auto.v1",
- "elapsed_ms": 68.054,
+ "elapsed_ms": 55.413,
  "independent_run_reference": {
-  "github_run_id": 39089889857,
+  "github_run_id": 39090074314,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "2d3f0a42-9dc7-4316-9ae1-7e2b44c94874",
+   "jti": "3f38514c-59ae-49b3-a808-050870d3c76b",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39089889857",
+   "run_id": "39090074314",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
