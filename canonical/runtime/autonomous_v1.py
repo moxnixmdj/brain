@@ -341,9 +341,47 @@ def _urls_mentioned(root: str, limit: int = 40) -> str:
 
 
 def run(goal: str, root: str, binary_limit: int = 0,
-        iterations: int = 16) -> dict:
-    """Plain sentence in, work out, verified outcome out."""
+        iterations: int = 16, program: str = None,
+        claim: dict = None) -> dict:
+    """Plain sentence in, work out, verified outcome out.
+
+    `program` is the general route: the caller supplies code, this runs
+    it and judges the result by what the machine attests.
+    """
     import explore_v1 as X
+
+    # THE GENERAL ROUTE.
+    #
+    # Every other path here only knows how to run tasks a project
+    # already declared. Asked to do anything else it answered
+    # NOTHING_PRODUCED, because no path existed. Any task on a computer
+    # is expressible as code, so when the caller supplies a program this
+    # runs it and judges the result by what the machine attests, with no
+    # knowledge of what the task was. The program is never trusted: it
+    # runs, and then the world is read.
+    if program:
+        try:
+            import execute_v1 as E
+        except ImportError:
+            from canonical.runtime import execute_v1 as E
+        result = E.run(program, root, claim=claim)
+        ok = result["verdict"] == E.SUCCESS
+        return {
+            "goal": goal, "root": root, "route": "execute",
+            "result": result, "rendered": E.render(result),
+            "verification": {
+                "verified": ok,
+                "reason": ("PROGRAM_EFFECT_GROUNDED" if ok
+                           else "PROGRAM_NOT_CREDITED"),
+                "detail": result["verdict"],
+                "exit_status": result["exit_status"],
+                "changed": (result["diff"] or {}).get("changed", False),
+                "grounded": bool(result["grounding"] is None
+                                 or result["grounding"]["verdict"] == "GROUNDED"),
+                "unverifiable": 0 if ok else 1,
+            },
+            "environment_fit": {},
+        }
     tokens = goal_tokens(goal)
     # A QUESTION IS NOT A REQUEST TO PRODUCE.
     #
