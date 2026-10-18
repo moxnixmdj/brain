@@ -64,15 +64,28 @@ _NOISE = {".git", "node_modules", "__pycache__", ".venv", "venv",
           "site-packages", "vendor", "dist", "build", ".mypy_cache"}
 
 
-def observe(root: str, before: dict | None = None) -> dict:
+def observe(root: str, before: dict | None = None,
+            preview_bytes: int = 600) -> dict:
     """What is true of this tree, read by the kernel.
 
-    One stat() pass. Returns sizes and mtimes, which is enough to know
-    what exists and what moved, and cheap enough to run between every
-    action. Nothing here is reported by the thing being judged.
+    One stat() pass, plus a short preview of any small text file.
+
+    The preview is the difference between a loop that is fast and one
+    that is not. Without it the model knows a file EXISTS but not what
+    is in it, and has to spend an action reading each one before it can
+    decide anything -- so answering a question about six files costs
+    seven steps instead of one. Perception that withholds the obvious
+    pushes the cost into the loop and makes every task slower.
+
+    Capped hard, on size and count, so one pass stays one pass however
+    large the tree. A preview is a hint, never the evidence; when the
+    answer turns on exact contents, read() gets the bytes.
+
+    Nothing here is reported by the thing being judged.
     """
     base = Path(root)
     now: dict[str, tuple[int, int]] = {}
+    previews: dict[str, str] = {}
     if base.is_dir():
         for path in base.rglob("*"):
             rel = path.relative_to(base).as_posix()
@@ -83,11 +96,21 @@ def observe(root: str, before: dict | None = None) -> dict:
                 now[rel] = (st.st_size, st.st_mtime_ns)
             except OSError:
                 continue
+            if (not path.is_file() or st.st_size > 200_000
+                    or len(previews) >= 60):
+                continue
+            try:
+                head = path.read_bytes()[:preview_bytes]
+            except OSError:
+                continue
+            if b"\0" in head:          # binary: a preview would be noise
+                continue
+            previews[rel] = head.decode("utf-8", "replace")
     changed = (sorted(set(now) - set(before)) +
                sorted(k for k in set(now) & set(before or {})
                       if now[k] != before[k])) if before is not None else []
     return {"root": os.path.realpath(root), "files": now, "changed": changed,
-            "count": len(now)}
+            "count": len(now), "previews": previews}
 
 
 def read(root: str, path: str, limit: int = 4000) -> dict:
@@ -147,6 +170,7 @@ def solve(goal: str, root: str, model, steps: int = 6,
             "tree": sorted(state["files"]),
             "count": state["count"],
             "changed": state["changed"],
+            "preview": state.get("previews") or {},
             "last": trace[-1]["result"] if trace else None,
         }
         try:

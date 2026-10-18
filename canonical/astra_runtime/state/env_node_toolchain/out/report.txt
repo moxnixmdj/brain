@@ -2,19 +2,19 @@ TAP version 13
 # Subtest: add works
 ok 1 - add works
   ---
-  duration_ms: 0.728986
+  duration_ms: 0.763317
   type: 'test'
   ...
 # Subtest: mul works
 ok 2 - mul works
   ---
-  duration_ms: 0.12398
+  duration_ms: 0.139972
   type: 'test'
   ...
 # Subtest: tags work
 ok 3 - tags work
   ---
-  duration_ms: 0.126934
+  duration_ms: 0.11705
   type: 'test'
   ...
 1..3
@@ -25,4 +25,4 @@ ok 3 - tags work
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 63.990835
+# duration_ms 62.4557
