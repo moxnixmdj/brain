@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/composition_behavioral_bridge_verifier_v1.py.auto.v1",
- "elapsed_ms": 24.562,
+ "elapsed_ms": 38.753,
  "independent_run_reference": {
-  "github_run_id": 39127909766,
+  "github_run_id": 39128111917,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "38aad2c3-2c92-407a-81b6-e25dade5a69c",
+   "jti": "23f9673b-cc4c-4589-ac5b-9d9122350a4c",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39127909766",
+   "run_id": "39128111917",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
