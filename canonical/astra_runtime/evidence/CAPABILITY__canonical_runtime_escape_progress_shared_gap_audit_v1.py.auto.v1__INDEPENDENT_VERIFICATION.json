@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/escape_progress_shared_gap_audit_v1.py.auto.v1",
- "elapsed_ms": 37.624,
+ "elapsed_ms": 40.384,
  "independent_run_reference": {
-  "github_run_id": 39142126974,
+  "github_run_id": 39142403576,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "d65ff220-564b-4d70-960d-7859b9e38065",
+   "jti": "e34662f6-8880-4f86-8869-c915e0c74a89",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39142126974",
+   "run_id": "39142403576",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
