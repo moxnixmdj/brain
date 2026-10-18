@@ -367,6 +367,18 @@ def _pick_path(name, cid, paths, root):
     return paths[0]
 
 
+_TEXT_PARAM_WORDS = ("source", "code", "text", "sample", "query",
+                     "expression", "program", "data", "input_text")
+
+
+def _quoted_all(goal):
+    """Every quoted string in the goal, in the order it was said."""
+    out = []
+    for pat in (r'"([^"]*)"', r"'([^']*)'"):
+        out.extend(re.findall(pat, str(goal or "")))
+    return out
+
+
 def _quoted(goal):
     m = re.search(r'"([^"]*)"', str(goal or ""))
     if m:
@@ -501,6 +513,22 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
                 if found:
                     value = found
                     from_world[key] = found
+        elif low in _TEXT_PARAM_WORDS:
+            # A CAPABILITY WHOSE INPUT IS CODE, NOT A FILE.
+            #
+            # Binding only ever filled paths, so the first capability the
+            # machine forged for itself -- concrete_execution_oracle, whose
+            # inputs are a function and a sample -- was registered and then
+            # unreachable: correct, admitted, and unusable. Quoted strings
+            # are bound in the order they were said; unquoted, the slot is
+            # left missing rather than guessed.
+            quoted = _quoted_all(goal)
+            if quoted:
+                nth = sum(1 for k in filled
+                          if str(k).lower() in _TEXT_PARAM_WORDS)
+                value = quoted[nth] if nth < len(quoted) else None
+            else:
+                value = None
         elif low in ("pattern", "glob"):
             value = None
         if value:

@@ -2,8 +2,9 @@
  "cells": {
   "archive.tar_gz.create_from_manifest|verified": {
    "first_seen": 1792312443.2875447,
-   "last_seen": 1792319101.2381492,
+   "last_seen": 1792320183.7721646,
    "observations": [
+    1,
     1,
     1,
     1,
@@ -72,8 +73,9 @@
   },
   "archive.verify.tar_gz.gnu|verified": {
    "first_seen": 1792316179.6037304,
-   "last_seen": 1792319079.0093188,
+   "last_seen": 1792320183.9708486,
    "observations": [
+    1,
     1,
     1,
     1,
@@ -123,8 +125,9 @@
   },
   "docx.document.verify.intent_ooxml|verified": {
    "first_seen": 1792312443.1245909,
-   "last_seen": 1792319101.2050505,
+   "last_seen": 1792320183.5671735,
    "observations": [
+    1,
     1,
     1,
     1,
@@ -194,8 +197,9 @@
   },
   "image.extract.ocr.tesseract|bound_capability_source_unsupported": {
    "first_seen": 1792313437.9199655,
-   "last_seen": 1792318976.683451,
+   "last_seen": 1792320199.1845906,
    "observations": [
+    -1,
     -1,
     -1,
     -1,
@@ -224,8 +228,9 @@
   },
   "pdf.extract.text.pypdf|verified": {
    "first_seen": 1792313436.2314923,
-   "last_seen": 1792319082.67153,
+   "last_seen": 1792320188.1717966,
    "observations": [
+    1,
     1,
     1,
     1,
@@ -304,8 +309,10 @@
   },
   "python.source.audit.ast|verified": {
    "first_seen": 1792312443.2595565,
-   "last_seen": 1792319105.0081687,
+   "last_seen": 1792320188.101842,
    "observations": [
+    1,
+    1,
     1,
     1,
     1,
@@ -377,8 +384,9 @@
   },
   "sqlite.table.verify_against_json_records|blocker": {
    "first_seen": 1792312443.3051975,
-   "last_seen": 1792319078.8556912,
+   "last_seen": 1792320183.8006067,
    "observations": [
+    -1,
     -1,
     -1,
     -1,
@@ -423,8 +431,9 @@
   },
   "xlsx.table.create_from_json_records|runtimeerror": {
    "first_seen": 1792315608.6882799,
-   "last_seen": 1792319078.9717183,
+   "last_seen": 1792320183.929559,
    "observations": [
+    -1,
     -1,
     -1,
     -1,
@@ -480,8 +489,9 @@
   },
   "xlsx.table.verify_against_json_records|verified": {
    "first_seen": 1792315902.8224573,
-   "last_seen": 1792319078.9470773,
+   "last_seen": 1792320183.9041994,
    "observations": [
+    1,
     1,
     1,
     1,

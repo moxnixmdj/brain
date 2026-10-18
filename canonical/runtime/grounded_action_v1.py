@@ -102,6 +102,21 @@ def load_registry():
     caps = doc.get("capabilities")
     if not isinstance(caps, dict) or not caps:
         raise RuntimeError("REGISTRY_INVALID")
+    caps = dict(caps)
+    # CAPABILITIES THE MACHINE ADMITTED ITSELF.
+    #
+    # Union, not modification: a forged capability stands or falls on the
+    # same checks as the rest, and its own authority tier says plainly
+    # what it does not prove. A forged capability the planner cannot reach
+    # would be decoration, so it is loaded into the same registry.
+    try:
+        from canonical.runtime import capability_forge_v1 as FG
+        forged = FG.registered()
+        for cid, entry in (forged or {}).items():
+            if cid not in caps:
+                caps[cid] = entry
+    except Exception:
+        pass
     return caps
 
 
@@ -477,6 +492,27 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
         extra = keyword_candidates(goal, admissible)
         if extra:
             merged = merged + [{"candidates": extra}]
+
+    # A FORGED CAPABILITY IS REGISTERED BUT NEVER PROPOSED.
+    #
+    # The same wall the computer-use family hit: the grounder scores
+    # candidates it knows, so a capability added after the fact is in the
+    # registry and out of reach, which is the same as absent. concrete_
+    # execution_oracle was admitted, verified, and never once appeared
+    # among the survivors. Being a candidate is not being chosen -- it
+    # still has to bind, run, and verify like anything else.
+    try:
+        from canonical.runtime import capability_forge_v1 as FG
+        forged_ids = sorted((FG.registered() or {}))
+    except Exception:
+        forged_ids = []
+    if forged_ids:
+        have = {str(c.get("capability_id"))
+                for cl in merged for c in (cl.get("candidates") or [])}
+        pending = [{"capability_id": cid, "combined_score": 0.0}
+                   for cid in forged_ids if cid not in have]
+        if pending:
+            merged = merged + [{"candidates": pending}]
     for clause in merged:
         for cand in (clause.get("candidates") or []):
             cid = str(cand.get("capability_id") or "")
