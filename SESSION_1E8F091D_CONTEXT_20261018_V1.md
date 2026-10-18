@@ -1,5 +1,10 @@
 # Session 1e8f091d — working context (survives condensation)
 
+> **Canonical home of the active goal:** `canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md`.
+> That file is the single source of truth and is printed by `brief` before every
+> consequential action. This session file is a pointer only; if the two disagree,
+> the canonical file wins.
+
 **Classification:** ANALYSIS ARTIFACT — NOT CANONICAL AUTHORITY. Nothing here changes any
 governance JSON. It exists for one reason: session memory is condensed between turns, and the
 objective-level context has now been lost three times. This file is the durable copy.

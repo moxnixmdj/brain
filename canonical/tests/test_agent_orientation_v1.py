@@ -269,3 +269,33 @@ def test_load_bearing_gate_wires_the_orientation_check_from_the_base_tree():
     assert "blob_at(base, CONTRACT_PATH)" in gate
     workflow = (ROOT / ".github/workflows/load-bearing-primary-admission.yml").read_text(encoding="utf-8")
     assert "cp execution_guard/agent_orientation_check_v1.py /tmp/trusted_agent_orientation_check_v1.py" in workflow
+
+
+def test_brief_carries_the_owner_active_goal_in_the_owner_words():
+    """The owner's goal was lost to session condensation four times, and each loss produced
+    misdirected work. `brief` is read before consequential action, so that is where the goal
+    has to live. These phrases are the owner's own, not a paraphrase."""
+    # emphasis markers are presentation; the phrases are what must survive
+    import re
+    # emphasis markers are presentation and the prose wraps; the phrases are what must survive
+    text = re.sub(r"\s+", " ", orient.brief_text(ROOT).replace("**", "").replace("*", ""))
+    assert "CURRENT ACTIVE GOAL" in text
+    assert "OWNER_ACTIVE_GOAL_20261018_V1.md" in text
+    for phrase in ("do anything on the computer by itself",
+                   "Make me a million dollars",
+                   "I don't have the data",
+                   "It can't stop at $100 or whatever",
+                   "hidden opportunities nobody knows about",
+                   "extrapolations must be global all the time",
+                   "I want it sentient and I want everything instantly"):
+        assert phrase in text, phrase
+
+
+def test_a_missing_owner_goal_is_loud_and_never_looks_satisfied(tmp_path):
+    """If the goal file disappears, brief must say so. A missing goal must never read as a
+    satisfied one -- silence here is exactly how the goal got lost before."""
+    rows = orient._owner_active_goal_lines(tmp_path)
+    joined = "\n".join(rows)
+    assert "MISSING" in joined
+    assert "Do not proceed" in joined
+    assert "Make me a million dollars" not in joined
