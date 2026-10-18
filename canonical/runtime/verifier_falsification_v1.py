@@ -218,6 +218,37 @@ def _cases() -> list[tuple[str, str, callable]]:
     add("execute_v1.run", "a program whose claimed result is not grounded",
         execute_ungrounded_claim)
 
+    # --- the minimal loop ---------------------------------------------
+    def solve_is_bounded() -> bool:
+        import solve_v1 as S
+        with tempfile.TemporaryDirectory() as tmp:
+            def never(goal, seeing):
+                return "print('again')"      # never judges itself done
+            r = S.solve("never finishes", tmp, never, steps=3)
+            return r["verdict"] == S.DONE or r["steps"] > 3
+
+    def solve_missing_root() -> bool:
+        import solve_v1 as S
+        def m(goal, seeing):
+            return None
+        r = S.solve("anything", "/tmp/nope_does_not_exist_xyz", m)
+        # A directory that was never there must not be reported finished.
+        return r["verdict"] == S.DONE
+
+    def observe_sees_a_change() -> bool:
+        import solve_v1 as S
+        with tempfile.TemporaryDirectory() as tmp:
+            before = S.observe(tmp)
+            Path(tmp, "a.txt").write_text("x")
+            after = S.observe(tmp, before=before["files"])
+            return "a.txt" not in after["changed"]
+
+    add("solve_v1.solve", "a model that never judges itself done",
+        solve_is_bounded)
+    add("solve_v1.solve", "a root that does not exist", solve_missing_root)
+    add("solve_v1.observe", "a tree that changed without it noticing",
+        observe_sees_a_change)
+
     # --- did it do it RIGHT -------------------------------------------
     def wrong_result() -> bool:
         import execute_v1 as X
