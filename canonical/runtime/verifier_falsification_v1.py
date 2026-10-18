@@ -276,6 +276,39 @@ def _cases() -> list[tuple[str, str, callable]]:
     add("solve_v1.solve", "the flywheel consulted only after a failure",
         solve_primes_before_first_action)
 
+    # --- the model socket ----------------------------------------------
+    def solve_silently_acts_without_a_model() -> bool:
+        import solve_v1 as S
+        import model_v1 as M
+        with tempfile.TemporaryDirectory() as tmp:
+            saved = os.environ.get(M.ENV_VAR)
+            os.environ.pop(M.ENV_VAR, None)
+            try:
+                r = S.solve("anything at all", tmp)
+                # With nothing plugged in, an empty trace and a verdict
+                # of DONE would be indistinguishable from a model that
+                # judged the goal already met. It must say NO_MODEL.
+                return r["verdict"] == S.DONE or r["verdict"] not in (
+                    S.NO_MODEL, S.BOUNDED)
+            finally:
+                if saved is not None:
+                    os.environ[M.ENV_VAR] = saved
+
+    def model_status_claims_ready_unbound() -> bool:
+        import model_v1 as M
+        saved = os.environ.get(M.ENV_VAR)
+        os.environ.pop(M.ENV_VAR, None)
+        try:
+            return bool(M.status()["ready"])
+        finally:
+            if saved is not None:
+                os.environ[M.ENV_VAR] = saved
+
+    add("solve_v1.solve", "the loop acting with no model bound",
+        solve_silently_acts_without_a_model)
+    add("model_v1.status", "reporting ready when nothing is bound",
+        model_status_claims_ready_unbound)
+
     # --- capability is declared, not assumed ---------------------------
     def confine_network_default_closed() -> bool:
         import confine_v1 as C

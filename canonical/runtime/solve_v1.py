@@ -57,6 +57,7 @@ SCHEMA = "PROJECT_BRAIN_SOLVE_V1"
 DONE = "DONE"
 GAVE_UP = "GAVE_UP"
 BOUNDED = "BOUNDED"
+NO_MODEL = "NO_MODEL"
 
 # Directories that are never the subject of a task. Kept to structure,
 # not to any domain: vendored, generated, or someone else's code.
@@ -178,7 +179,7 @@ def act(root: str, program: str, timeout: int = 120,
                     "confined": False}
 
 
-def solve(goal: str, root: str, model, steps: int = 6,
+def solve(goal: str, root: str, model=None, steps: int = 6,
           timeout: int = 120) -> dict:
     """Plain goal in, work out.
 
@@ -188,6 +189,23 @@ def solve(goal: str, root: str, model, steps: int = 6,
     carries the program's own account of itself -- a program is the worst
     possible narrator of what it did.
     """
+    # With no model supplied, bind the one the environment names.
+    # Previously an unbound loop simply could not act and there was no
+    # way to tell "no model" from "model declined" -- both produced an
+    # empty result. Now it is a stated verdict.
+    if model is None:
+        try:
+            import model_v1 as M
+        except Exception:
+            M = None
+        if M is None or not M.status()["ready"]:
+            return {"schema": SCHEMA, "verdict": NO_MODEL, "goal": goal,
+                    "steps": 0, "trace": [], "changed": [],
+                    "final_tree": [],
+                    "detail": (M.status()["detail"] if M else
+                               "model_v1 unavailable")}
+        model = M.bind()
+
     if not Path(root).is_dir():
         return {"schema": SCHEMA, "verdict": BOUNDED, "goal": goal,
                 "steps": 0, "trace": [], "detail": f"{root!r} is not a directory"}
