@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/honesty_selected_cover_locality_verifier_v1.py.auto.v1",
- "elapsed_ms": 23.453,
+ "elapsed_ms": 31.483,
  "independent_run_reference": {
-  "github_run_id": 39092487270,
+  "github_run_id": 39092676842,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "6a115c0d-69ae-4960-97a7-b09565a2c7f1",
+   "jti": "8b894a85-dc80-4e29-8ade-9523d0823b20",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39092487270",
+   "run_id": "39092676842",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
