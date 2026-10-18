@@ -955,6 +955,29 @@ def _cases() -> list[tuple[str, str, callable]]:
         "a suppression that can never be revoked",
         structural_suppression_never_expires)
 
+    # --- offers are not constraints --------------------------------------
+    # In a chain, step one's output path is offered to step two as a
+    # candidate input. It is not something step two was asked to consume.
+    # Treating it as a constraint made a .json from an audit look like a
+    # kind contradiction to a docx capability, and the correct capability
+    # was rejected before it was ever considered -- so a clause saying
+    # "verify the docx" silently ran "create a docx".
+
+    def prior_step_output_treated_as_a_constraint() -> bool:
+        import grounded_action_v1 as G
+        goal = "verify the docx canonical/astra_runtime/tmp/DOCX_INTENT_VERIFY.docx"
+        r = G.act(goal, memory=False,
+                  extra_paths=["canonical/astra_runtime/tmp/brain_out__x__y.json"])
+        for x in (r.get("rejected") or []):
+            if (x.get("capability_id") == "docx.document.verify.intent_ooxml"
+                    and x.get("why") == "INPUT_KIND_CONTRADICTS_GOAL_FILE"):
+                return True
+        return False
+
+    add("grounded_action_v1.act",
+        "a previous step's output treated as a constraint on this one",
+        prior_step_output_treated_as_a_constraint)
+
     return out
 
 

@@ -281,6 +281,11 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
         goal_paths = [str(p[0]) for p in gc._repo_paths(goal, root)]
     except Exception:
         goal_paths = []
+    # Paths this step's OWN words name. Kept separate because a prior
+    # step's output is an OFFER, not a CONSTRAINT: handing a .json from
+    # step one to a docx capability made it look like a kind contradiction
+    # and got the right capability rejected before it could be considered.
+    own_paths = list(goal_paths)
     for extra in (extra_paths or ()):
         if str(extra) not in goal_paths:
             goal_paths.append(str(extra))
@@ -321,10 +326,10 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
             # consumes; the goal names a file of a different known kind.
             # "run ocr on X.png" cannot be served by a PDF-only extractor.
             # This is a fact, so it eliminates; it does not down-rank.
-            if WP.kind_contradiction(cid, WB.placeholders(entry), goal_paths):
+            if WP.kind_contradiction(cid, WB.placeholders(entry), own_paths):
                 rejected.append({"capability_id": cid,
                                  "why": "INPUT_KIND_CONTRADICTS_GOAL_FILE",
-                                 "goal_paths": goal_paths})
+                                 "goal_paths": own_paths})
                 continue
 
             # 1b. PERCEPTION
@@ -395,22 +400,27 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
                         chosen = a
                         why = "MORE_SPECIFIC_EFFECTS"
                         break
-                if chosen is None and margin is not None and margin >= DECISIVE_MARGIN_RATIO:
-                    chosen = top
-                    why = "DECISIVE_MARGIN"
-                # Near-tie: settle it with the goal's OWN words. "create a
-                # sqlite table" vs "verify a sqlite table" score within 0.2%
-                # of each other, but only one of them contains a word the
-                # user actually said. That is evidence, not preference --
-                # and where it does not separate them, we still refuse.
+                # THE USER'S OWN WORDS OUTRANK A SCORE GAP.
+                #
+                # A clause saying "verify the docx" once selected
+                # `docx.document.create_from_json_record`, because a previous
+                # step's output happened to make "create" bindable and it
+                # scored fractionally higher. Scores are a similarity
+                # estimate; the words "verify" and "create" are a statement
+                # of intent. When they disagree, the words win -- and this
+                # runs BEFORE the margin gate, because a margin is only an
+                # argument about which estimate to trust.
                 if chosen is None:
                     tokens = _distinctive_goal_tokens(goal)
                     hits = {id(s): len(tokens & _candidate_tokens(s)) for s in survivors}
-                    best = max(hits.values())
+                    best = max(hits.values()) if hits else 0
                     leaders = [s for s in survivors if hits[id(s)] == best]
                     if best > 0 and len(leaders) == 1:
                         chosen = leaders[0]
                         why = "GOAL_WORD_AGREEMENT"
+                if chosen is None and margin is not None and margin >= DECISIVE_MARGIN_RATIO:
+                    chosen = top
+                    why = "DECISIVE_MARGIN"
                 if chosen is None:
                     why = "AMBIGUOUS__NO_DECISIVE_MARGIN"
 
