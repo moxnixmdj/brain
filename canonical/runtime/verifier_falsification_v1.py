@@ -249,6 +249,35 @@ def _cases() -> list[tuple[str, str, callable]]:
     add("solve_v1.observe", "a tree that changed without it noticing",
         observe_sees_a_change)
 
+    # --- the loop itself is confined -----------------------------------
+    def solve_act_escapes() -> bool:
+        import solve_v1 as S
+        try:
+            import confine_v1 as C
+        except Exception:
+            return True
+        if not C.available():
+            return True
+        with tempfile.TemporaryDirectory() as tmp:
+            # The MAIN loop must be confined, not merely the module that
+            # knows how. A guarantee covering every path except the one
+            # that actually runs is not a guarantee.
+            r = S.act(tmp, "open('/usr/brain_solve_evil.txt','w').write('x')",
+                      timeout=60)
+            return Path("/usr/brain_solve_evil.txt").exists()
+
+    def solve_act_hides_confinement() -> bool:
+        import solve_v1 as S
+        with tempfile.TemporaryDirectory() as tmp:
+            r = S.act(tmp, "print('x')", timeout=60)
+            # Falling back is allowed; falling back SILENTLY is not. The
+            # caller must be able to tell a sandboxed run from a bare one.
+            return "confined" not in r
+
+    add("solve_v1.act", "the main loop running unconfined", solve_act_escapes)
+    add("solve_v1.act", "a fallback that does not say it fell back",
+        solve_act_hides_confinement)
+
     # --- the flywheel --------------------------------------------------
     def flywheel_withholds_uncredited() -> bool:
         import flywheel_v1 as F

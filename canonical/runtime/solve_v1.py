@@ -128,7 +128,33 @@ def read(root: str, path: str, limit: int = 4000) -> dict:
 
 
 def act(root: str, program: str, timeout: int = 120) -> dict:
-    """Run code. The only action there is, because it is all of them."""
+    """Run code. The only action there is, because it is all of them.
+
+    Confined by default.
+
+    This is the system's primary action path, which is exactly why
+    confinement belongs here rather than beside it: a guarantee that
+    applies to every code path except the one that actually runs is not
+    a guarantee. For a while that was the state of things -- confine_v1
+    existed, was measured, and was used by nothing.
+
+    Where confinement is unavailable the run proceeds unconfined and
+    says so in `confined: False`. Silently falling back would let the
+    same code report the same result with and without a sandbox, and
+    the caller could not tell the difference.
+    """
+    try:
+        import confine_v1 as C
+        if C.available():
+            r = C.run(program, root, timeout=timeout)
+            return {"exit": r.get("exit_status"), "out": r.get("output") or "",
+                    "err": "" if r.get("verdict") == "OK"
+                           else (r.get("output") or ""),
+                    "timed_out": r.get("verdict") == "INDETERMINATE",
+                    "confined": True}
+    except Exception:
+        pass
+
     with tempfile.TemporaryDirectory() as tmp:
         script = Path(tmp) / "step.py"
         script.write_text(
@@ -137,13 +163,15 @@ def act(root: str, program: str, timeout: int = 120) -> dict:
             r = subprocess.run(["python3", str(script)], cwd=root,
                                timeout=timeout, capture_output=True, text=True)
             return {"exit": r.returncode, "out": (r.stdout or "")[-2000:],
-                    "err": (r.stderr or "")[-2000:], "timed_out": False}
+                    "err": (r.stderr or "")[-2000:], "timed_out": False,
+                    "confined": False}
         except subprocess.TimeoutExpired:
             return {"exit": None, "out": "", "err": "timed out",
-                    "timed_out": True}
+                    "timed_out": True, "confined": False}
         except Exception as exc:
             return {"exit": None, "out": "",
-                    "err": f"{type(exc).__name__}: {exc}", "timed_out": False}
+                    "err": f"{type(exc).__name__}: {exc}", "timed_out": False,
+                    "confined": False}
 
 
 def solve(goal: str, root: str, model, steps: int = 6,
