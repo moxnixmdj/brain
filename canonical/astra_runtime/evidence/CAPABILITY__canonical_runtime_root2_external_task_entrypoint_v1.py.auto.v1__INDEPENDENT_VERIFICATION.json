@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/root2_external_task_entrypoint_v1.py.auto.v1",
- "elapsed_ms": 23.3,
+ "elapsed_ms": 32.161,
  "independent_run_reference": {
-  "github_run_id": 39171192801,
+  "github_run_id": 39171373940,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "3b321021-00a0-415e-ba78-68ce65d0da37",
+   "jti": "a00dab33-146d-45b0-a681-b8875ad243f7",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39171192801",
+   "run_id": "39171373940",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
