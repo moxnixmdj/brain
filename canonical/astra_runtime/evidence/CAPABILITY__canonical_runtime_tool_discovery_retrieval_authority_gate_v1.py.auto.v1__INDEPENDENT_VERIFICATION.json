@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py.auto.v1",
- "elapsed_ms": 39.154,
+ "elapsed_ms": 24.64,
  "independent_run_reference": {
-  "github_run_id": 39120842307,
+  "github_run_id": 39121021347,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "dd9f7369-fa8d-472c-96a4-ddc299e8e906",
+   "jti": "e8ba4563-bb84-4b2b-a73e-768758029aef",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39120842307",
+   "run_id": "39121021347",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
