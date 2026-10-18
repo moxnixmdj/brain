@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/p3_nonbinding_capacity_common_policy_cell_v1.py.auto.v1",
- "elapsed_ms": 2.493,
+ "elapsed_ms": 1.602,
  "independent_run_reference": {
-  "github_run_id": 39084861923,
+  "github_run_id": 39085082580,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "5761be47-5c10-41bb-9025-cac31642d273",
+   "jti": "ec9e7c3c-af87-4dd3-99f4-c1b1dba7b54b",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39084861923",
+   "run_id": "39085082580",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
