@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/p1_v5_terminal_scope_admissibility_v1.py.auto.v1",
- "elapsed_ms": 31.478,
+ "elapsed_ms": 36.92,
  "independent_run_reference": {
-  "github_run_id": 39082729845,
+  "github_run_id": 39082917991,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "1b71f241-7f05-4112-96e2-6211943f3fd2",
+   "jti": "eb3f3eb5-304a-4b79-b045-687254b1f8a8",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39082729845",
+   "run_id": "39082917991",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
