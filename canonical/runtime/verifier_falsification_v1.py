@@ -668,6 +668,97 @@ def _cases() -> list[tuple[str, str, callable]]:
         "an empty directory yielding a test command",
         fit_rejects_empty_project)
 
+    # --- perceiving the world (world_probe_v1) -------------------------
+    # A capability behind a precondition nobody provides is dead code. The
+    # probe revives it by LOOKING. That only stays honest if the probe can
+    # also say no: an effect it cannot decide must come back NOT
+    # established, because planning on an invented fact produces work no
+    # verifier objected to.
+
+    def probe_undecidable_effect() -> bool:
+        import world_probe_v1 as W
+        # An effect this module has no sensor for. It must not affirm it.
+        d = W.probe_effect("chart.question.legend_linear_intersection.available")
+        return bool(d["true"])
+
+    def probe_empty_world() -> bool:
+        import world_probe_v1 as W
+        # A root with nothing in it. "There is a pdf here" must be false.
+        import tempfile as _tf
+        with _tf.TemporaryDirectory() as tmp:
+            d = W.probe_effect("pdf.file.available", goal="", goal_paths=(),
+                               root=_tf.__name__ and __import__("pathlib").Path(tmp))
+        return bool(d["true"])
+
+    def probe_runtime_absent() -> bool:
+        import world_probe_v1 as W
+        # An executable that has never existed on any machine.
+        W._RUNTIME_KINDS["definitely_not_a_real_binary_xyz"] = "definitely_not_a_real_binary_xyz"
+        try:
+            d = W.probe_effect("definitely_not_a_real_binary_xyz.runtime.available")
+        finally:
+            W._RUNTIME_KINDS.pop("definitely_not_a_real_binary_xyz", None)
+        return bool(d["true"])
+
+    add("world_probe_v1.probe_effect", "an effect it has no sensor for",
+        probe_undecidable_effect)
+    add("world_probe_v1.probe_effect", "a file kind absent from an empty world",
+        probe_empty_world)
+    add("world_probe_v1.probe_effect", "an executable that does not exist",
+        probe_runtime_absent)
+
+    # --- completing inputs (world_binding_v1) --------------------------
+    # Filling arguments the goal only implies is only safe while the module
+    # still refuses the ones nothing justifies. Inventing an input is an
+    # unverifiable act.
+
+    def binding_invents_unjustified_input() -> bool:
+        import world_binding_v1 as WB
+        # A capability needing a glob the goal never states. It must be
+        # reported missing, not filled with a plausible-looking guess.
+        entry = {
+            "capability_id": "falsify.needs.glob",
+            "action_template": {"args": {"pattern": "${input.pattern}",
+                                         "source_root": "${input.source_root}"}},
+        }
+        r = WB.complete_inputs("audit the python source", __import__("pathlib").Path("/tmp"),
+                               entry, compiler=None, goal_paths=[])
+        return "pattern" not in r["missing"]
+
+    def binding_synthesised_output_is_stable() -> bool:
+        import world_binding_v1 as WB
+        # Same capability, same call -> same destination. If it wanders,
+        # nothing downstream can be reproduced or content-addressed.
+        a = WB.synthesize_output_path("some.capability", "output_path")
+        b = WB.synthesize_output_path("some.capability", "output_path")
+        return a != b
+
+    add("world_binding_v1.complete_inputs", "a placeholder nothing can justify",
+        binding_invents_unjustified_input)
+    add("world_binding_v1.synthesize_output_path", "a destination that is not deterministic",
+        binding_synthesised_output_is_stable)
+
+    # --- the joined loop (grounded_action_v1) --------------------------
+    # The loop must refuse when nothing fits, and an unrecognised `expect`
+    # is a FAILED check, never a passed one: an unknown proof proves nothing.
+
+    def unknown_expect_is_not_a_pass() -> bool:
+        import grounded_action_v1 as G
+        ok, _note = G._check_expect(
+            {"field": "verified", "type": "totally_made_up_check"},
+            {"verified": True})
+        return bool(ok)
+
+    def loop_invents_success_on_impossible_goal() -> bool:
+        import grounded_action_v1 as G
+        r = G.act("send an email to the team and book a flight to mars")
+        return bool(r.get("ok"))
+
+    add("grounded_action_v1._check_expect", "an expect type nobody implemented",
+        unknown_expect_is_not_a_pass)
+    add("grounded_action_v1.act", "a goal no capability can serve",
+        loop_invents_success_on_impossible_goal)
+
     return out
 
 
