@@ -249,6 +249,32 @@ def _cases() -> list[tuple[str, str, callable]]:
     add("solve_v1.observe", "a tree that changed without it noticing",
         observe_sees_a_change)
 
+    # --- confinement ---------------------------------------------------
+    def confine_blocks_escape() -> bool:
+        import confine_v1 as C
+        if not C.available():
+            return True          # nothing to falsify where it cannot run
+        with tempfile.TemporaryDirectory() as tmp:
+            r = C.run("open('/usr/brain_evil.txt','w').write('x')",
+                      tmp, timeout=60)
+            # Either the write is refused, or it must not exist after.
+            return r["verdict"] == "OK" and Path("/usr/brain_evil.txt").exists()
+
+    def confine_allows_legitimate_work() -> bool:
+        import confine_v1 as C
+        if not C.available():
+            return True
+        with tempfile.TemporaryDirectory() as tmp:
+            r = C.run("open('legit.txt','w').write('x')", tmp, timeout=60)
+            # Over-blocking is the failure a sandbox is most tempted by:
+            # refusing everything reads as safe and does no work at all.
+            return not Path(tmp, "legit.txt").exists()
+
+    add("confine_v1.run", "a program writing outside the project",
+        confine_blocks_escape)
+    add("confine_v1.run", "confinement so strict it blocks legitimate work",
+        confine_allows_legitimate_work)
+
     # --- did it do it RIGHT -------------------------------------------
     def wrong_result() -> bool:
         import execute_v1 as X
