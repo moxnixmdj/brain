@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/authority_epoch_guard_v1.py.auto.v1",
- "elapsed_ms": 99.792,
+ "elapsed_ms": 95.406,
  "independent_run_reference": {
-  "github_run_id": 39171630868,
+  "github_run_id": 39171888389,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "dbe415ac-9922-4c95-999c-b7435b15571a",
+   "jti": "74590c61-4d22-4392-9de4-ca28a2aef163",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39171630868",
+   "run_id": "39171888389",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
