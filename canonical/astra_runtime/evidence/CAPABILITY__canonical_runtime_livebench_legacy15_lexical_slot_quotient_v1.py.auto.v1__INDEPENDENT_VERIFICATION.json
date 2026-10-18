@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_legacy15_lexical_slot_quotient_v1.py.auto.v1",
- "elapsed_ms": 5.253,
+ "elapsed_ms": 4.543,
  "independent_run_reference": {
-  "github_run_id": 39148678376,
+  "github_run_id": 39148919693,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "c3de3c73-8789-48f5-b4b3-54e44ef6db23",
+   "jti": "6caa57fa-9712-412b-8e11-32456cb0a631",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39148678376",
+   "run_id": "39148919693",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
