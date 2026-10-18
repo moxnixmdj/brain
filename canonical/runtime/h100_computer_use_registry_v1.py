@@ -135,8 +135,17 @@ def resolve(capability_id: str) -> dict[str, Any]:
 # request's word for anything: filesystem routes re-read after acting,
 # and the program route runs confined and reports what changed.
 
+def _arg(payload: Mapping[str, Any], *names: str) -> str:
+    """The path the compiler bound, whichever name it used."""
+    for n in names:
+        v = payload.get(n)
+        if isinstance(v, str) and v:
+            return v
+    return ""
+
+
 def _fs_list(payload: Mapping[str, Any], root: Path) -> dict[str, Any]:
-    rel = str(payload.get("path") or ".")
+    rel = _arg(payload, "path", "input", "output") or "."
     target = (root / rel).resolve()
     if not str(target).startswith(str(root.resolve())):
         raise ComputerUseRegistryError("PATH_ESCAPES_ROOT")
@@ -145,7 +154,7 @@ def _fs_list(payload: Mapping[str, Any], root: Path) -> dict[str, Any]:
 
 
 def _fs_read(payload: Mapping[str, Any], root: Path) -> dict[str, Any]:
-    rel = str(payload.get("path") or "")
+    rel = _arg(payload, "path", "input")
     if not rel:
         raise ComputerUseRegistryError("PATH_REQUIRED")
     target = (root / rel).resolve()
@@ -156,7 +165,7 @@ def _fs_read(payload: Mapping[str, Any], root: Path) -> dict[str, Any]:
 
 
 def _fs_write(payload: Mapping[str, Any], root: Path) -> dict[str, Any]:
-    rel = str(payload.get("path") or "")
+    rel = _arg(payload, "path", "output", "input")
     if not rel:
         raise ComputerUseRegistryError("PATH_REQUIRED")
     target = (root / rel).resolve()
@@ -267,21 +276,21 @@ _ACTION_TEMPLATES = {
     "CAP_FS_LIST_V1": {
         "type": "invoke_capability",
         "args": {"capability_id": "CAP_FS_LIST_V1",
-                 "path": "${input.input}"},
+                 "input": "${input.input}"},
         "expect": {"field": "count", "type": "field_present"},
         "keywords": ["list", "files", "directory", "folder", "show"],
     },
     "CAP_FS_READ_V1": {
         "type": "invoke_capability",
         "args": {"capability_id": "CAP_FS_READ_V1",
-                 "path": "${input.input}"},
+                 "input": "${input.input}"},
         "expect": {"field": "text", "type": "field_present"},
         "keywords": ["read", "open", "contents", "show", "view"],
     },
     "CAP_FS_WRITE_V1": {
         "type": "invoke_capability",
         "args": {"capability_id": "CAP_FS_WRITE_V1",
-                 "path": "${input.input}", "text": "${input.text}"},
+                 "output": "${input.output}", "text": "${input.text}"},
         "expect": {"field": "verified", "type": "field_equals",
                    "value": True},
         "keywords": ["write", "save", "create", "put", "output"],
@@ -289,7 +298,7 @@ _ACTION_TEMPLATES = {
     "CAP_PROGRAM_RUN_V1": {
         "type": "invoke_capability",
         "args": {"capability_id": "CAP_PROGRAM_RUN_V1",
-                 "code": "${input.input}"},
+                 "input": "${input.input}"},
         "expect": {"field": "confined", "type": "field_equals",
                    "value": True},
         "keywords": ["run", "execute", "program", "compute", "script"],
