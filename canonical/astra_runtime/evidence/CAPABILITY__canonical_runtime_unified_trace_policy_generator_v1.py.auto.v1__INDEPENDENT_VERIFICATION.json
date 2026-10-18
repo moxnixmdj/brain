@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/unified_trace_policy_generator_v1.py.auto.v1",
- "elapsed_ms": 41.527,
+ "elapsed_ms": 42.736,
  "independent_run_reference": {
-  "github_run_id": 39107401584,
+  "github_run_id": 39107596276,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "2f077475-bcd3-41ef-aefb-d83c8924950d",
+   "jti": "b867c253-69e9-4ea1-a216-050e45afc84d",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39107401584",
+   "run_id": "39107596276",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
