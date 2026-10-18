@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/verification/run_long_horizon_continuity_v1.py.auto.v1",
- "elapsed_ms": 164.569,
+ "elapsed_ms": 173.872,
  "independent_run_reference": {
-  "github_run_id": 39147710556,
+  "github_run_id": 39147945570,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "afee9dca-bd28-4339-b6cd-6ef7a5b152a5",
+   "jti": "5b26047f-af0c-457c-942f-13793c32b891",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39147710556",
+   "run_id": "39147945570",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
