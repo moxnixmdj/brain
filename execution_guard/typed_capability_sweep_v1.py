@@ -64,6 +64,40 @@ def _substitute(template: Any, filled: Mapping[str, Any]) -> Any:
     return template
 
 
+def _python_repair_args(cid: str, sig: dict, rng, ws: Path) -> dict | None:
+    """Domain generator for the python-repair cluster, reusing a fixture that already works.
+
+    Generic sampling cannot serve these: a repair capability needs a repository with a test
+    that genuinely FAILS, and a file of plausible-looking text is not that. Supplying better
+    plumbing produced BASELINE_ALREADY_PASSES -- nothing to repair -- which is the honest
+    signal that this is a domain problem, not a typing problem.
+
+    The domain is recognised by the SHAPE of the inputs (a source root plus tests), not by a
+    list of capability ids, so it keeps working as the registry grows.
+    """
+    if "source_root" not in sig:
+        return None
+    if not ({"test_paths", "test_argv", "test_path"} & set(sig)):
+        return None
+    from execution_guard import live_solver_families_v6 as v6
+
+    root = ws / f"repo{rng.randrange(1 << 30)}"
+    root.mkdir(parents=True, exist_ok=True)
+    bug = v6.fresh_coupled_bug(rng, root, rng.randrange(1 << 20))
+
+    args: dict = {}
+    for slot, want in sig.items():
+        if want == ts.PATH_DIR and ("source" in slot or "root" in slot):
+            args[slot] = str(root)
+        elif want == ts.PATH_LIST and "test" in slot:
+            args[slot] = [str(p) for p in bug.tests]
+        elif want == ts.ARGV:
+            args[slot] = [sys.executable, "-B", str(sorted(bug.tests)[0])]
+    if "test_paths" not in args and "test_paths" in sig:
+        args["test_paths"] = [str(p) for p in bug.tests]
+    return args or None
+
+
 def _load_adapter(adapter_path: str, name: str):
     path = ROOT / adapter_path
     spec = importlib.util.spec_from_file_location(name, path)
@@ -132,6 +166,8 @@ def sweep_one(cid: str, entry: dict, instances: int, seed: int, work: Path) -> d
     template_args = ((entry.get("action_template") or {}).get("args")) or {}
 
     for _ in range(instances):
+        # a domain generator wins over generic sampling wherever one applies
+        domain = _python_repair_args(cid, sig, rng, ws) or {}
         try:
             # the capability id is what lets content rules be scoped per capability;
             # without it a rule for one capability's output_path would silently not apply
@@ -143,7 +179,8 @@ def sweep_one(cid: str, entry: dict, instances: int, seed: int, work: Path) -> d
                 if key not in filled:
                     filled[key] = samp.sample_args({key: type_of(key)}, rng, ws,
                                                    capability=cid)[key]
-            args = _substitute(template_args, filled) if template_args else dict(filled)
+            merged = {**filled, **domain}
+            args = _substitute(template_args, merged) if template_args else dict(merged)
         except samp.SamplingFailure as exc:
             result["errors"]["SAMPLING_FAILED:" + str(exc)] = \
                 result["errors"].get("SAMPLING_FAILED:" + str(exc), 0) + 1
