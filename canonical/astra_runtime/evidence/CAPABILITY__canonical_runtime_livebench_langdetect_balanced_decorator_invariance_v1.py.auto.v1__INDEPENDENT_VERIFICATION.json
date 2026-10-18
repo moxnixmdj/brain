@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_langdetect_balanced_decorator_invariance_v1.py.auto.v1",
- "elapsed_ms": 41.64,
+ "elapsed_ms": 41.271,
  "independent_run_reference": {
-  "github_run_id": 39143187508,
+  "github_run_id": 39143417833,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "efa0b454-bcb7-4fab-b1f6-82cb91c1ac73",
+   "jti": "d9098745-0b68-46cd-98ec-e28b5dbe22d6",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39143187508",
+   "run_id": "39143417833",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
