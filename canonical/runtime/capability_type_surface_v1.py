@@ -546,3 +546,46 @@ def _closure_source(path: Path) -> tuple[str, ...]:
     out = tuple(p.read_text(encoding="utf-8", errors="replace") for p in seen)
     _CLOSURE_CACHE[key] = out
     return out
+
+
+def resolve_adapter(entry: Mapping[str, Any], root: Path | None = None) -> Path | None:
+    """The adapter file a capability would actually execute, or None.
+
+    A capability can name its implementation two ways, and they live at different
+    levels of the record, which is easy to get wrong and silently under-report:
+      - source.adapter_path                (a path inside the repository)
+      - adapter_module  (TOP LEVEL)        (a module in bound_capabilities/)
+    The second is top-level, not under source. Reading it as source.adapter_module
+    reports 31 of 70 as having no implementation when the true number is 2.
+    """
+    root = Path(root or Path(__file__).resolve().parents[2])
+    src = entry.get("source") or {}
+    p = src.get("adapter_path")
+    if p and (root / p).exists():
+        return root / p
+    m = entry.get("adapter_module") or src.get("adapter_module")
+    if m:
+        cand = Path(__file__).resolve().parents[0] / "bound_capabilities" / f"{m}.py"
+        if cand.exists():
+            return cand
+    return None
+
+
+def unresolvable_adapters(registry: Mapping[str, Any] | None = None,
+                          root: Path | None = None) -> dict[str, str]:
+    """Declared capabilities whose implementation does not exist on disk.
+
+    These are the ones no amount of environment, typing, or domain generator can
+    ever make run: they are counted in the registry and have nothing behind them.
+    Empty is the only acceptable steady state.
+    """
+    reg = registry or load_registry()
+    out: dict[str, str] = {}
+    for cid, entry in reg.items():
+        if resolve_adapter(entry, root) is None:
+            src = entry.get("source") or {}
+            out[cid] = (src.get("adapter_path")
+                        or entry.get("adapter_module")
+                        or src.get("adapter_module")
+                        or "(none declared)")
+    return out

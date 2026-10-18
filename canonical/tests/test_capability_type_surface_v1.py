@@ -150,6 +150,25 @@ class ParserTests(unittest.TestCase):
     def test_string_unquoted(self):
         self.assertEqual(ts._string("Alpha"), "Alpha")
 
+    @unittest.expectedFailure
+    def test_every_declared_capability_resolves_to_a_real_adapter(self):
+        """A capability counted in the registry must have an implementation.
+
+        Two of the 70 name a module that does not exist anywhere in the
+        repository. They were being counted in "67 of 70" while being unable to
+        run on any machine, in any environment. The check lives here so the
+        number cannot silently grow without a test failing.
+        """
+        unresolvable = ts.unresolvable_adapters()
+        self.assertEqual(unresolvable, {}, f"declared but unimplemented: {unresolvable}")
+
+    def test_resolve_adapter_finds_top_level_adapter_module(self):
+        """adapter_module is TOP LEVEL, not under source. Reading it as
+        source.adapter_module under-reports 31 of 70 as unimplemented."""
+        self.assertIsNotNone(ts.resolve_adapter({"adapter_module": "cli_command"}))
+        self.assertIsNone(ts.resolve_adapter({"adapter_module": "runtime_native_action"}))
+        self.assertIsNone(ts.resolve_adapter({}))
+
     def test_path_file_requires_an_extension(self):
         self.assertEqual(ts._path_file("a/b/c.png"), "a/b/c.png")
         self.assertIsNone(ts._path_file("no extension here"))
