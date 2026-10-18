@@ -207,11 +207,13 @@ def solve(goal: str, root: str, model, steps: int = 6,
     # next step of this run and never prevents the next run's mistake,
     # and the measured benefit is exactly zero.
     learned_for_next = None
+    primed_cells: list[str] = []
     try:
         import flywheel_v1 as F
         primed = F.primers()
         if primed:
             learned_for_next = {"primers": primed}
+            primed_cells = [p["cell"] for p in primed]
     except Exception:
         pass
 
@@ -279,6 +281,31 @@ def solve(goal: str, root: str, model, steps: int = 6,
                 trace[-1]["pathology"] = cell
             except Exception:
                 pass
+        elif primed_cells:
+            # EVIDENCE FOR THE PRIMER.
+            #
+            # Before this, the store only ever heard about failures. A
+            # step that succeeded BECAUSE it was primed recorded
+            # nothing, so after credit the evidence stopped growing
+            # entirely -- and a procedure that went stale would have
+            # been handed out forever with nothing noticing it had
+            # stopped working. Credit is not tenure.
+            #
+            # The step succeeded with the primer in hand, so every
+            # primed cell earns a positive observation. Cheap, and it
+            # is the only signal that a credited fix still holds.
+            try:
+                import flywheel_v1 as F
+                for cell in dict.fromkeys(primed_cells):
+                    # cell is "where|why"; record() derives the cell
+                    # itself, so handing it a cell would re-derive a
+                    # nonsense one and the evidence would land in a
+                    # bucket nothing ever reads.
+                    w, _, y = cell.partition("|")
+                    F.record(w, y, True)
+            except Exception:
+                pass
+            primed_cells = []
         elif pending:
             # THE FIX IS THE LESSON.
             #
