@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_legacy25_prompt_contract_compiler_v1.py.auto.v1",
- "elapsed_ms": 1.71,
+ "elapsed_ms": 1.211,
  "independent_run_reference": {
-  "github_run_id": 39165404053,
+  "github_run_id": 39165665832,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "495cb990-8335-4f9f-9207-b7fda19ec6bb",
+   "jti": "5eb7dbaa-e340-41f1-b97b-d6b7fe14ca79",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39165404053",
+   "run_id": "39165665832",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
