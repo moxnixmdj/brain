@@ -262,8 +262,22 @@ def _cases() -> list[tuple[str, str, callable]]:
                 F.record("file access", "no such file", True, path=path)
             F.teach(F.cell_of("file access", "no such file"),
                     "the fix", path=path)
+            # A TEST THAT COULD ONLY EVER FAIL IS NOT A TEST EITHER.
+            #
+            # `flywheel_v1.primers` is declared
+            #     def primers(alpha=DEFAULT_ALPHA, path: str = DEFAULT_STATE)
+            # and Python binds default arguments ONCE, at definition. So
+            # patching `F.DEFAULT_STATE` cannot reach it -- the mock was
+            # inert, `primers()` always read the real store, and this row
+            # reported FAIL for a property the machine actually has. It
+            # has never once verified the thing it names.
+            #
+            # Patch what primers() actually calls, and the property is
+            # visible: solve_v1 hands the primer over at step 1.
             import unittest.mock as mock
-            with mock.patch.object(F, "DEFAULT_STATE", path):
+            real_cells = F.cells
+            with mock.patch.object(F, "cells",
+                                   lambda **kw: real_cells(path=path)):
                 seen = []
                 def model(goal, seeing):
                     if seeing["step"] == 1:
@@ -1326,6 +1340,43 @@ def _cases() -> list[tuple[str, str, callable]]:
     add("grounded_action_v1.act",
         "a remembered preference injecting a capability that cannot run",
         macro_preference_forces_an_impossible_capability)
+
+    # --- the battery needs negative controls ------------------------------
+    # A battery of things the machine can already do cannot detect the
+    # worst failure there is: a machine that verifies everything. So the
+    # completion battery now carries goals whose honest answer is NO.
+    # Three leaked the first time it was run, all reporting VERIFIED.
+
+    def wrong_kind_file_still_verifies() -> bool:
+        from canonical.runtime import grounded_action_v1 as GA
+        r = GA.act("verify the xlsx canonical/astra_runtime/tmp/"
+                   "BOUND_PDF_TEXT_TEST.pdf", memory=False)
+        return bool(r.get("ok"))
+
+    def absent_path_silently_substituted() -> bool:
+        # The instructive one. The nonexistent directory was promoted to
+        # its parent, so the machine audited 2078 files nobody asked
+        # about, did that work perfectly, and reported success.
+        from canonical.runtime import grounded_action_v1 as GA
+        r = GA.act("audit the python source canonical/runtime/"
+                   "NO_SUCH_DIRECTORY_HERE", memory=False)
+        return bool(r.get("ok"))
+
+    def docx_verifier_given_a_workbook() -> bool:
+        from canonical.runtime import grounded_action_v1 as GA
+        r = GA.act("verify the docx canonical/astra_runtime/tmp/"
+                   "FANOUT_JOIN.xlsx", memory=False)
+        return bool(r.get("ok"))
+
+    add("grounded_action_v1.act",
+        "a pdf verified as an xlsx because the goal said so",
+        wrong_kind_file_still_verifies)
+    add("grounded_action_v1.act",
+        "a path that does not exist replaced by one that does",
+        absent_path_silently_substituted)
+    add("grounded_action_v1.act",
+        "a workbook verified as a docx",
+        docx_verifier_given_a_workbook)
 
     return out
 

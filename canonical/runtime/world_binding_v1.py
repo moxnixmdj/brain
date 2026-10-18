@@ -317,6 +317,16 @@ def _pick_path(name, cid, paths, root):
         for rel in paths:
             if (root / rel).is_dir():
                 return rel
+        # A PATH THE GOAL NAMES THAT IS NOT THERE IS A FACT, NOT A GAP.
+        #
+        # `audit the python source canonical/runtime/NO_SUCH_DIRECTORY_HERE`
+        # was promoted to its parent and audited 2078 files the user never
+        # asked about, then reported VERIFIED. The work was real and it was
+        # about the wrong thing, which is worse than refusing: a refusal is
+        # visible, a substitution is not.
+        for rel in paths:
+            if not (root / str(rel)).exists():
+                return None
         return _promote(paths[0], True, root)
 
     # THE SLOT'S OWN NAME OUTRANKS THE CAPABILITY'S.
@@ -349,6 +359,11 @@ def _pick_path(name, cid, paths, root):
             return rel
         if "test" in lowered_all and "test" in low:
             return rel
+    # Same rule for a file: naming one that does not exist is not a reason
+    # to hand back a different one that does.
+    for rel in paths:
+        if not (root / str(rel)).exists():
+            return None
     return paths[0]
 
 

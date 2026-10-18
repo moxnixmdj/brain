@@ -438,6 +438,31 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
         if str(extra) not in goal_paths:
             goal_paths.append(str(extra))
 
+    # THE GOAL'S WORDS AGAINST THE FILE IT NAMES, BEFORE ANYTHING ELSE.
+    #
+    # "verify the xlsx <a.pdf>" names two things that disagree. Every
+    # capability check that follows compares a capability to the file, and
+    # on those terms pdf.extract.text.pypdf is a perfect match -- so the
+    # machine read a PDF and called it a verified xlsx. Neither claim was
+    # ever checked against the other, and both were satisfied.
+    if not extra_paths:
+        clash = WP.goal_kind_contradiction(goal, own_paths)
+        if clash:
+            return {
+                "schema": SCHEMA, "ok": False,
+                "status": "REFUSED__GOAL_KIND_CONTRADICTS_NAMED_FILE",
+                "goal": goal, "capability_id": None,
+                "inputs": None, "selected_because": None,
+                "asserted_kinds": clash["asserted"],
+                "named_path": clash["path"],
+                "provides": [], "expect": None, "result": None,
+                "error": None, "executed": False, "verified": False,
+                "survivors": [], "rejected": [],
+                "why": "GOAL_KIND_CONTRADICTS_NAMED_FILE",
+                "ground_ms": round((time.perf_counter() - started) * 1000.0, 2),
+                "total_ms": round((time.perf_counter() - started) * 1000.0, 2),
+            }
+
     orphans = WP.orphan_preconditions(admissible)
 
     survivors = []

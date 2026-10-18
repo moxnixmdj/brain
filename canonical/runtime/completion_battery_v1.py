@@ -1,15 +1,38 @@
 #!/usr/bin/env python3
-"""Completion rate, measured on goals that have been seen to fail.
+"""Completion rate, with negative controls.
+
+WHY THERE ARE TWO LISTS.
+
+A battery of things the machine can already do cannot detect the worst
+failure there is: a machine that verifies everything. Every goal passes,
+the number goes up, and nothing has been checked. So the second list is
+made of goals whose honest answer is NO -- a pdf handed to an xlsx
+verifier, a directory that does not exist, a workbook handed to a docx
+verifier. A pass there is not a success, it is a leak, and it is reported
+loudly rather than folded into the score.
+
+Both lists were needed. Three leaks were found the first time the
+negative list was run, all of them reporting VERIFIED_ACTION:
+
+    verify the xlsx <a .pdf>        -> pdf.extract.text.pypdf
+    audit the python source <nope>  -> python.source.audit.ast
+    verify the docx <an .xlsx>      -> xlsx.table.verify_against_json_records
+
+Not every refusal is a leak and not every pass is one either: "extract
+text from a .docx" was on this list once and was removed, because the
+machine really can extract the text of a docx and really should say so.
+
+The middle one is the instructive one: the nonexistent directory was
+silently promoted to its parent, so the machine audited 2078 files
+nobody asked about, did that work perfectly, and reported success. Real
+work, wrong target, invisible.
 
 Kept in the repository rather than in /tmp because a measurement that
-disappears between sittings is not a measurement, it is an anecdote. The
-goal list is deliberately biased toward things that broke: a battery of
-things the machine already does proves nothing about whether it improves.
+disappears between sittings is an anecdote.
 """
 from __future__ import annotations
 
 import sys
-import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -17,7 +40,7 @@ sys.path.insert(0, str(ROOT))
 
 from canonical.runtime import grounded_action_v1 as GA  # noqa: E402
 
-GOALS = [
+POSITIVE = [
     "verify the docx canonical/astra_runtime/tmp/DOCX_INTENT_VERIFY.docx",
     "audit the python source canonical/runtime/bound_capabilities",
     "create a tar.gz archive from the manifest",
@@ -29,23 +52,43 @@ GOALS = [
     "extract text from canonical/astra_runtime/tmp/BOUND_PDF_TEXT_TEST.pdf",
 ]
 
+# The honest answer to every one of these is a refusal.
+NEGATIVE = [
+    "verify the xlsx canonical/astra_runtime/tmp/BOUND_PDF_TEXT_TEST.pdf",
+    "verify the docx canonical/astra_runtime/tmp/FANOUT_JOIN.xlsx",
+    "audit the python source canonical/runtime/NO_SUCH_DIRECTORY_HERE",
+    "verify the sqlite table in canonical/astra_runtime/tmp/FANOUT_JOIN.xlsx",
+]
+
 
 def main() -> int:
     ok = 0
-    rows = []
-    for goal in GOALS:
-        t0 = time.perf_counter()
+    print("POSITIVE -- these should verify:")
+    for goal in POSITIVE:
         r = GA.act(goal, memory=True)
-        ms = (time.perf_counter() - t0) * 1000.0
-        rows.append((bool(r["ok"]), goal, r.get("capability_id"),
-                     r.get("status"), str(r.get("error") or "")[:80], ms))
         ok += 1 if r["ok"] else 0
-    for good, goal, cap, status, err, ms in rows:
-        print("%s %-64s %s" % ("OK " if good else "no ", goal[:64], cap))
-        if err:
-            print("      %-60s %s" % (status, err))
+        print("  %s %-62s %s" % ("OK " if r["ok"] else "no ", goal[:62],
+                                 r.get("capability_id")))
+        if not r["ok"] and r.get("error"):
+            print("      %s" % str(r["error"])[:96])
+    print("\nVERIFIED: %d/%d\n" % (ok, len(POSITIVE)))
+
+    leaks = []
+    print("NEGATIVE -- these must NOT verify:")
+    for goal in NEGATIVE:
+        r = GA.act(goal, memory=False)
+        if r["ok"]:
+            leaks.append(goal)
+        print("  %s %-62s %s" % ("LEAK" if r["ok"] else "held", goal[:62],
+                                 r.get("status")))
     print()
-    print("VERIFIED: %d/%d" % (ok, len(GOALS)))
+    if leaks:
+        print("LEAKS: %d -- the machine verified something it should have refused"
+              % len(leaks))
+        for g in leaks:
+            print("   %s" % g)
+        return 1
+    print("NO LEAKS: %d/%d refusals held" % (len(NEGATIVE), len(NEGATIVE)))
     return 0
 
 

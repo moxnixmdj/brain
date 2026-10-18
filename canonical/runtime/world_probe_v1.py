@@ -318,6 +318,72 @@ def _ext_kinds(rel):
     return {k for k, exts in _KIND_TOKENS.items() if low.endswith(tuple(exts))}
 
 
+def _goal_asserted_exts(goal, paths=()):
+    """The file kinds the goal's OWN words demand, by extension.
+
+    The named paths are cut out first. `BOUND_PDF_TEXT_TEST.pdf` contains
+    the word "pdf", so leaving it in made "verify the xlsx <that.pdf>"
+    assert BOTH xlsx and pdf, agree with itself, and verify. A path is
+    evidence about the file; only what is left is evidence about intent.
+    """
+    try:
+        from canonical.runtime.world_binding_v1 import _EXT_BY_TOKEN
+    except Exception:
+        return set()
+    import re as _re
+    text = str(goal or "")
+    for rel in paths or ():
+        text = text.replace(str(rel), " ")
+    tokens = set(_re.findall(r"[a-z]+", text.lower()))
+    return {_EXT_BY_TOKEN[t] for t in tokens if t in _EXT_BY_TOKEN}
+
+
+_INPUT_PREPOSITIONS = ("from", "using", "against", "with", "out", "off")
+
+
+def _is_input_position(goal, rel):
+    """A path introduced by "from" names what goes IN, not what comes out.
+
+    "create an xlsx table from <a.json>" names two kinds and contradicts
+    nothing -- one is the source and one is the product. Checking the
+    assert output kind against the source path refused a perfectly good
+    goal. The token that introduces a path says which one it is.
+    """
+    import re as _re
+    text = str(goal or "")
+    i = text.find(str(rel))
+    if i < 0:
+        return False
+    words = _re.findall(r"[A-Za-z]+", text[:i])
+    return bool(words) and words[-1].lower() in _INPUT_PREPOSITIONS
+
+
+def goal_kind_contradiction(goal, goal_paths=()):
+    """The goal names a kind, and the file it names is a different kind.
+
+    `kind_contradiction` compares a CAPABILITY's declared kind against the
+    goal's file. What it cannot see is the gap this closes: the goal says
+    "verify the xlsx" and names a .pdf. No capability is contradicted --
+    `pdf.extract.text.pypdf` matches that file perfectly -- so the machine
+    extracted the text of a PDF and reported it as a verified xlsx. The
+    two claims disagree with each other, and neither was checked against
+    the other.
+
+    When the goal's words and the goal's file disagree, that is a question
+    for the user, not a choice for the machine.
+    """
+    asserted = _goal_asserted_exts(goal, goal_paths)
+    if not asserted:
+        return None
+    for rel in goal_paths or ():
+        if _is_input_position(goal, rel):
+            continue
+        low = str(rel).lower()
+        if not any(low.endswith(ext) for ext in asserted):
+            return {"asserted": sorted(asserted), "path": str(rel)}
+    return None
+
+
 def kind_contradiction(capability_id, placeholder_names=(), goal_paths=()):
     """True when the capability's declared kind cannot accept the goal's file.
 
