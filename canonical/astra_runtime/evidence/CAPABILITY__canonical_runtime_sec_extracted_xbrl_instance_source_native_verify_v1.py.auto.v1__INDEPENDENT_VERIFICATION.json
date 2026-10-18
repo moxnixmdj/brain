@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/sec_extracted_xbrl_instance_source_native_verify_v1.py.auto.v1",
- "elapsed_ms": 27.735,
+ "elapsed_ms": 201.064,
  "independent_run_reference": {
-  "github_run_id": 39096524150,
+  "github_run_id": 39096727431,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "aa98b452-a2f0-4075-9e39-6c75487f5fff",
+   "jti": "7b1bd5c1-0170-4e64-9b70-295e10ae3896",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39096524150",
+   "run_id": "39096727431",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
