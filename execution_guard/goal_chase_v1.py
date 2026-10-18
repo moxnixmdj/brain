@@ -83,6 +83,59 @@ def live_act(goal: str, *, tag: str | None = None) -> Callable[[Mapping[str, Any
     return act
 
 
+MIN_INDEPENDENT_CHANNELS = 2
+
+
+def completeness_gate_for(goal: str, *, min_channels: int = MIN_INDEPENDENT_CHANNELS):
+    """Decide whether the option set may back a claim of "the fastest way".
+
+    This is the owner's central requirement, encoded as a check rather than a
+    hope. Reading one paper that says "the fastest way is YouTube videos" and
+    ranking YouTube first is the exact failure to prevent, so the gate asks
+    what a complete set would have to look like and refuses otherwise:
+
+      1. INDEPENDENT CHANNELS. Distinct source_id values, not rows. Ten sources
+         repeating one claim are one source, and counting them ten times is how
+         a narrow set looks wide.
+      2. VERIFIED EVIDENCE, NOT CANDIDATES. Every row the global controller
+         returns is CANDIDATE_ONLY by construction. Candidates are leads about
+         where to look; they are not data. A set made only of candidates is
+         never complete, however many there are -- so this fails closed.
+      3. NO NONEXISTENCE FROM A MISS. A row claiming nonexistence is a claim
+         about the whole world drawn from a partial search. It is refused.
+
+    It fails closed on any error. The machine must be able to say "I don't have
+    the data" -- it cannot say that if the gate defaults to permitting.
+    """
+    def gate(ctx: Mapping[str, Any]) -> dict[str, Any]:
+        opts = [o for o in (ctx.get("known_options") or []) if isinstance(o, Mapping)]
+        try:
+            if not opts:
+                return {"complete": False, "reason": "NO_OPTIONS"}
+
+            channels = {str(o.get("source_id")) for o in opts if o.get("source_id") is not None}
+            if len(channels) < min_channels:
+                return {"complete": False, "reason":
+                        f"ONLY_{len(channels)}_INDEPENDENT_CHANNEL(S)_NEED_{min_channels}"}
+
+            for o in opts:
+                if o.get("nonexistence_claim_authorized"):
+                    return {"complete": False, "reason": "NONEXISTENCE_CLAIM_FROM_PARTIAL_SEARCH"}
+
+            verified = [o for o in opts
+                        if o.get("independently_verified_by")
+                        or o.get("candidate_authority") == "VERIFIED"]
+            if not verified:
+                return {"complete": False, "reason":
+                        "ALL_CANDIDATE_ONLY_NO_INDEPENDENTLY_VERIFIED_EVIDENCE"}
+
+            return {"complete": True, "reason": None,
+                    "channels": len(channels), "verified": len(verified)}
+        except Exception as exc:
+            return {"complete": False, "reason": "GATE_ERROR:" + type(exc).__name__}
+    return gate
+
+
 def global_options(
     goal: str,
     *,
@@ -251,6 +304,10 @@ def run(
         flywheel_state_path=flywheel_state_path,
         context=context,
         options_provider=(global_options(goal) if widen_options else None),
+        # Without this the machine can rank a narrow option set and act on it,
+        # which is the "one paper says YouTube" failure. With it, an incomplete
+        # set blocks the action and the chase reports INCOMPLETE_DATA.
+        completeness_gate=(completeness_gate_for(goal) if widen_options else None),
     )
     return {
         "schema": SCHEMA,

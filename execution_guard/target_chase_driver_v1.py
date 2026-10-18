@@ -46,6 +46,12 @@ SCHEMA = "PROJECT_BRAIN_TARGET_CHASE_DRIVER_V1"
 MET = "PASS__TARGET_CHASE_MET"
 STUCK = "OPEN__TARGET_CHASE_NO_MEASURED_PROGRESS"
 BOUND = "OPEN__TARGET_CHASE_ROUND_BOUND_EXHAUSTED"
+# Distinct from STUCK and from BOUND on purpose. "I could not move the number"
+# and "I do not have enough of the world to know which way is fastest" are
+# different failures and must not be reported as the same thing. The owner's
+# requirement is that the machine says, by itself, "I don't have the data" --
+# which it cannot do if the only vocabularies it has are pass and stuck.
+INCOMPLETE_DATA = "OPEN__TARGET_CHASE_DATA_INCOMPLETE"
 NOT_MEASURABLE = "FAIL_CLOSED__TARGET_NOT_MEASURABLE"
 
 DIRECTIONS = ("maximize", "minimize")
@@ -134,6 +140,7 @@ def run(
     context: Mapping[str, Any] | None = None,
     flywheel_state_path: str | None = None,
     options_provider: Callable[[Mapping[str, Any]], Any] | None = None,
+    completeness_gate: Callable[[Mapping[str, Any]], Any] | None = None,
 ) -> dict[str, Any]:
     """Act, measure, re-plan -- until the number arrives or progress dies.
 
@@ -172,7 +179,14 @@ def run(
 
     # Options the actor has already been offered. Shares identity with every
     # round's context, so widening it mid-chase is visible to the next act().
-    options: list[dict[str, Any]] = []
+    #
+    # Seeded from context: the driver previously dropped caller-supplied
+    # options entirely, which silently disabled the completeness gate -- the
+    # set it was asked to judge was always empty, so it never blocked anything
+    # and the chase acted on a single unverified source.
+    options: list[dict[str, Any]] = [
+        dict(o) for o in ((context or {}).get("options") or []) if isinstance(o, Mapping)
+    ]
 
     base = {**(context or {}), "primers": primers, "options": options}
     rounds: list[dict[str, Any]] = []
@@ -185,8 +199,48 @@ def run(
         return _result(MET, goal, target, direction, unit, rounds, best, opening, started, primers, recorded, options)
 
     stale = 0
+    blocked_on_data = 0
     for index in range(max_rounds):
         before = best
+
+        # COMPLETENESS GATE. No route may be acted on as "the fastest way"
+        # unless the option set has a completeness basis behind it. Acting on an
+        # incomplete set is precisely the failure the owner described: read one
+        # paper saying "the fastest way is YouTube", rank YouTube first, and
+        # call it done, when most of the opportunity space was never looked at.
+        # The gate fails closed -- an error or an absent verdict blocks, never
+        # permits -- because the cost of a false pass is acting on a conclusion
+        # the machine had no right to draw.
+        if completeness_gate is not None and options:
+            try:
+                verdict = completeness_gate({
+                    "goal": goal, "round": index, "measured": before,
+                    "target": float(target), "known_options": list(options),
+                })
+                complete = bool(verdict.get("complete")) if isinstance(verdict, Mapping) else bool(verdict)
+                why = (verdict.get("reason") if isinstance(verdict, Mapping) else None) or "no completeness basis"
+            except Exception as exc:
+                complete, why = False, "gate_error:" + type(exc).__name__
+            if not complete:
+                blocked_on_data += 1
+                rounds.append({"round": index, "blocked_on_data": True, "reason": why})
+                # Do not act. Spend the round getting data instead.
+                if options_provider is not None:
+                    try:
+                        found = options_provider({
+                            "goal": goal, "round": index, "measured": before,
+                            "target": float(target), "known_options": list(options),
+                        }) or []
+                        for row in found:
+                            if isinstance(row, Mapping) and dict(row) not in options:
+                                options.append(dict(row))
+                    except Exception:
+                        pass
+                if blocked_on_data >= patience:
+                    return _result(INCOMPLETE_DATA, goal, target, direction, unit,
+                                   rounds, best, opening, started, primers, recorded, options)
+                continue
+
         try:
             action = act({**base, "round": index, "measured": before, "target": target})
         except Exception as exc:
