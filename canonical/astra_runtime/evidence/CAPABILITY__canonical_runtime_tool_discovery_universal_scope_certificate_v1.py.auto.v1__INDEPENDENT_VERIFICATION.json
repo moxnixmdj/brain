@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/tool_discovery_universal_scope_certificate_v1.py.auto.v1",
- "elapsed_ms": 54.414,
+ "elapsed_ms": 54.525,
  "independent_run_reference": {
-  "github_run_id": 39110675252,
+  "github_run_id": 39110887828,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "cf85ae3b-5570-468b-9443-53b9eb2603b1",
+   "jti": "223b19c6-8efd-43df-9be1-9a9814ccfa3c",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39110675252",
+   "run_id": "39110887828",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
