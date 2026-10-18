@@ -243,8 +243,7 @@ def verification_path_for(receipt_path: str) -> str:
 
 
 def execute_and_receipt(capability_id: str, module_path: str, entrypoint: str,
-                        root: str, ran_by: str, kind: str = "contract",
-                        invoked_args: dict[str, Any] | None = None) -> dict[str, Any] | None:
+                        root: str, ran_by: str, kind: str = "contract") -> dict[str, Any] | None:
     """Run one capability and return its receipt. Returns None if it did not run."""
     started = time.perf_counter()
     module_sha = sha256_file(os.path.join(root, module_path))
@@ -295,7 +294,7 @@ def execute_and_receipt(capability_id: str, module_path: str, entrypoint: str,
             fn = getattr(module, entrypoint, None)
             if not callable(fn):
                 return None
-            result = fn(dict(invoked_args or {}), root)
+            result = fn({}, root)
         finally:
             signal.alarm(0)
     except BaseException:  # noqa: BLE001 - a failed probe is data, not an error
@@ -320,7 +319,7 @@ def execute_and_receipt(capability_id: str, module_path: str, entrypoint: str,
         "module_path": module_path,
         "module_sha256": module_sha,
         "entrypoint": entrypoint,
-        "invoked_args": dict(invoked_args or {}),
+        "invoked_args": {},
         "outcome": outcome,
         "observed": observed,
         "result_sha256": sha256_canonical(result),
@@ -497,9 +496,7 @@ def projection_entry(receipt: dict[str, Any]) -> dict[str, Any]:
         "action_template": {
             "type": "invoke_capability",
             "args": ({"capability_id": cid, "argv": receipt["invoked_args"]["argv"], "timeout_s": 60}
-                     if is_cli
-                     else dict({"capability_id": cid},
-                               **dict(receipt.get("invoked_args") or {}))),
+                     if is_cli else {"capability_id": cid}),
             # The declared expectation may not claim more than the receipt observed.  This
             # used to be `field_nonempty status` for every non-CLI capability, which is an
             # assumption, not evidence: 7 of the 294 recorded `observed: {}` because their
