@@ -164,6 +164,67 @@ _GOAL_STOPWORDS = frozenset({
 })
 
 
+
+def _independent_artifact_check(result, root):
+    """Re-read what the capability claims to have produced.
+
+    A MUTATION NO ASSERTION CAN KILL IS NOT A CHECK. Twenty-nine of the
+    seventy-four capabilities declare `expect: output_verified == true`,
+    and their adapters assign that literal at the end of run(). The field
+    observes nothing -- it is the proposer grading its own homework, and it
+    survives every perturbation of the artifact, which is the definition of
+    decoration. Mutation testing calls the alternative a killed mutant: to
+    kill one, an assertion must actually observe the output.
+
+    So this re-reads the artifact from disk. The adapter cannot influence
+    what comes back, which makes it the first check in the chain that is
+    genuinely independent of the proposer. It is not a strong check -- it
+    proves the bytes exist and match the hash the adapter declared, not
+    that the work was right -- but it can fail, and the constant could not.
+    """
+    if not isinstance(result, dict):
+        return None
+    rel = None
+    for key in ("output_path", "result_path"):
+        v = result.get(key)
+        if isinstance(v, str) and v.strip():
+            rel = v.strip()
+            break
+    if rel is None:
+        # Computer-use adapters nest their proof under `receipt`.
+        receipt = result.get("receipt")
+        if isinstance(receipt, dict):
+            for key in ("output_path", "path"):
+                v = receipt.get(key)
+                if isinstance(v, str) and v.strip():
+                    rel = v.strip()
+                    break
+    if rel is None:
+        return None
+    import hashlib as _hashlib
+    from pathlib import Path as _Path
+    target = _Path(root) / rel
+    if not target.is_file():
+        return (False, "ARTIFACT_MISSING:" + rel)
+    try:
+        data = target.read_bytes()
+    except Exception as exc:
+        return (False, "ARTIFACT_UNREADABLE:" + rel + ":" + type(exc).__name__)
+    if not data:
+        return (False, "ARTIFACT_EMPTY:" + rel)
+    claim = result.get("output_sha256")
+    if not isinstance(claim, str) or not claim.strip():
+        receipt = result.get("receipt")
+        if isinstance(receipt, dict):
+            claim = receipt.get("output_sha256")
+    if isinstance(claim, str) and claim.strip():
+        actual = _hashlib.sha256(data).hexdigest()
+        if actual.strip().lower() != claim.strip().lower():
+            return (False, "ARTIFACT_SHA256_MISMATCH:" + rel)
+        return (True, "ARTIFACT_REVERIFIED:" + rel)
+    return (True, "ARTIFACT_PRESENT_UNHASHED:" + rel)
+
+
 def _word_tokens(text):
     import re as _re
     return {t for t in _re.findall(r"[a-z0-9]+", str(text or "").lower())
@@ -563,6 +624,13 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
                 result, invoked, error = None, False, type(exc).__name__ + ":" + str(exc)
         expect = ((chosen["entry"].get("action_template") or {}).get("expect"))
         verified, expect_note = _check_expect(expect, result) if invoked else (False, "NOT_INVOKED")
+        independent = _independent_artifact_check(result, root) if invoked else None
+        if independent is not None:
+            if not independent[0]:
+                verified = False
+                expect_note = independent[1]
+            else:
+                expect_note = "%s+%s" % (expect_note, independent[1])
         return {
             "schema": SCHEMA, "ok": bool(invoked and verified),
             "status": "VERIFIED_ACTION" if (invoked and verified) else "ACTION_FAILED",
@@ -602,6 +670,13 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
 
     expect = ((chosen["entry"].get("action_template") or {}).get("expect"))
     verified, expect_note = _check_expect(expect, result) if invoked else (False, "NOT_INVOKED")
+    independent = _independent_artifact_check(result, root) if invoked else None
+    if independent is not None:
+        if not independent[0]:
+            verified = False
+            expect_note = independent[1]
+        else:
+            expect_note = "%s+%s" % (expect_note, independent[1])
 
     out = {
         "schema": SCHEMA,

@@ -2,8 +2,10 @@
  "cells": {
   "archive.tar_gz.create_from_manifest|verified": {
    "first_seen": 1792312443.2875447,
-   "last_seen": 1792316678.0372808,
+   "last_seen": 1792317216.1114318,
    "observations": [
+    1,
+    1,
     1,
     1,
     1,
@@ -55,8 +57,9 @@
   },
   "archive.verify.tar_gz.gnu|verified": {
    "first_seen": 1792316179.6037304,
-   "last_seen": 1792316657.918601,
+   "last_seen": 1792317125.2879276,
    "observations": [
+    1,
     1,
     1,
     1
@@ -90,8 +93,11 @@
   },
   "docx.document.verify.intent_ooxml|verified": {
    "first_seen": 1792312443.1245909,
-   "last_seen": 1792316678.010675,
+   "last_seen": 1792317216.082117,
    "observations": [
+    1,
+    1,
+    1,
     1,
     1,
     1,
@@ -137,8 +143,9 @@
   },
   "image.extract.ocr.tesseract|bound_capability_source_unsupported": {
    "first_seen": 1792313437.9199655,
-   "last_seen": 1792316670.224923,
+   "last_seen": 1792317139.2370605,
    "observations": [
+    -1,
     -1,
     -1,
     -1,
@@ -239,8 +246,12 @@
   },
   "python.source.audit.ast|verified": {
    "first_seen": 1792312443.2595565,
-   "last_seen": 1792316681.5160172,
+   "last_seen": 1792317219.5239155,
    "observations": [
+    1,
+    1,
+    1,
+    1,
     1,
     1,
     1,
@@ -292,8 +303,9 @@
   },
   "sqlite.table.verify_against_json_records|blocker": {
    "first_seen": 1792312443.3051975,
-   "last_seen": 1792316657.7853827,
+   "last_seen": 1792317125.1529274,
    "observations": [
+    -1,
     -1,
     -1,
     -1,
@@ -332,8 +344,9 @@
   },
   "xlsx.table.create_from_json_records|runtimeerror": {
    "first_seen": 1792315608.6882799,
-   "last_seen": 1792316657.8879657,
+   "last_seen": 1792317125.2548676,
    "observations": [
+    -1,
     -1,
     -1,
     -1,
@@ -385,8 +398,9 @@
   },
   "xlsx.table.verify_against_json_records|verified": {
    "first_seen": 1792315902.8224573,
-   "last_seen": 1792316657.8655465,
+   "last_seen": 1792317125.2331407,
    "observations": [
+    1,
     1,
     1,
     1,

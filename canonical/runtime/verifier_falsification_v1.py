@@ -1195,6 +1195,70 @@ def _cases() -> list[tuple[str, str, callable]]:
         "a workbook whose records were tampered with",
         tampered_xlsx_still_verifies)
 
+    # --- the mutation test -------------------------------------------------
+    # TWENTY-NINE OF SEVENTY-FOUR CAPABILITIES DECLARE `expect: output_
+    # verified == true`, and their adapters assign that literal at the end
+    # of run(). The field observes nothing: it is the proposer grading its
+    # own homework, and it survives every perturbation of the artifact,
+    # which is the definition of decoration. Mutation testing says the same
+    # thing from the other side -- a mutant that no assertion can kill is
+    # not a test. So the mutant is injected here: an adapter that lies
+    # about the hash of the bytes it just wrote.
+
+    def mutant_adapter_hash_survives() -> bool:
+        try:
+            from canonical.runtime import astra_runtime as AR
+        except Exception:
+            return True
+        original = AR._invoke_bound_capability
+
+        def mutant(args):
+            out = original(args)
+            if isinstance(out, dict) and out.get("output_sha256"):
+                out["output_sha256"] = "0" * 64  # the mutation: lie about it
+            return out
+
+        AR._invoke_bound_capability = mutant
+        try:
+            from canonical.runtime import grounded_action_v1 as GA
+            r = GA.act("audit the python source canonical/runtime/bound_capabilities",
+                       memory=False)
+        finally:
+            AR._invoke_bound_capability = original
+        return bool(r.get("verified"))
+
+    def missing_artifact_survives() -> bool:
+        from canonical.runtime import grounded_action_v1 as GA
+        got = GA._independent_artifact_check(
+            {"output_path": "canonical/astra_runtime/tmp/DOES_NOT_EXIST.json",
+             "output_sha256": "0" * 64}, Path("/home/user/brain"))
+        return got is None or bool(got[0])
+
+    def empty_artifact_survives() -> bool:
+        from canonical.runtime import grounded_action_v1 as GA
+        root = Path("/home/user/brain")
+        f = root / "canonical/astra_runtime/tmp/_falsify_empty.bin"
+        try:
+            f.write_bytes(b"")
+            got = GA._independent_artifact_check(
+                {"output_path": "canonical/astra_runtime/tmp/_falsify_empty.bin"}, root)
+        finally:
+            try:
+                f.unlink()
+            except Exception:
+                pass
+        return got is None or bool(got[0])
+
+    add("grounded_action_v1.act",
+        "an adapter that lies about the hash of the bytes it wrote",
+        mutant_adapter_hash_survives)
+    add("grounded_action_v1._independent_artifact_check",
+        "a claimed artifact that was never written",
+        missing_artifact_survives)
+    add("grounded_action_v1._independent_artifact_check",
+        "a claimed artifact that is empty",
+        empty_artifact_survives)
+
     return out
 
 
