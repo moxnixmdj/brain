@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/k6_decision_refinement_compiler_v1.py.auto.v1",
- "elapsed_ms": 24.284,
+ "elapsed_ms": 29.644,
  "independent_run_reference": {
-  "github_run_id": 39113878409,
+  "github_run_id": 39114080503,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "161f2206-da42-4bbd-9fe9-956c171b3245",
+   "jti": "4f647621-3e37-4a35-bfa0-055208e6e501",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39113878409",
+   "run_id": "39114080503",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
