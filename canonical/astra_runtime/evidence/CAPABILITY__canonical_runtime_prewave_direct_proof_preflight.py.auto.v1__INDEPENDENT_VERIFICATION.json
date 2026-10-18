@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/prewave_direct_proof_preflight.py.auto.v1",
- "elapsed_ms": 26.392,
+ "elapsed_ms": 26.14,
  "independent_run_reference": {
-  "github_run_id": 39084072838,
+  "github_run_id": 39084240619,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "9dfdb913-58e6-410e-a894-bc99e99f9a0a",
+   "jti": "ed6f3e83-2d1b-4fb8-8820-8feb2c9f0dac",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39084072838",
+   "run_id": "39084240619",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
