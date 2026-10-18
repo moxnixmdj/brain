@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/direct_e2e_selected_cell_certificate_v1.py.auto.v1",
- "elapsed_ms": 32.089,
+ "elapsed_ms": 19.926,
  "independent_run_reference": {
-  "github_run_id": 39121661056,
+  "github_run_id": 39121898358,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "9efda5f2-1714-4d32-b30f-a8b8312e1676",
+   "jti": "c964bd11-8562-4ae7-9f46-4e0fff04efc1",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39121661056",
+   "run_id": "39121898358",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
