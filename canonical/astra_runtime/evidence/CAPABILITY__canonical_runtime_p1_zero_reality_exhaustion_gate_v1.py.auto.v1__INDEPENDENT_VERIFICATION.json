@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/p1_zero_reality_exhaustion_gate_v1.py.auto.v1",
- "elapsed_ms": 33.668,
+ "elapsed_ms": 37.102,
  "independent_run_reference": {
-  "github_run_id": 39153431140,
+  "github_run_id": 39153687382,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "0ac764d7-441c-42bf-b2d2-b03093663652",
+   "jti": "cd1791e6-6ee1-4fab-85c1-ff85142e3dda",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39153431140",
+   "run_id": "39153687382",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
