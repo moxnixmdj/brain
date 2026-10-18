@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py.auto.v1",
- "elapsed_ms": 178.6,
+ "elapsed_ms": 178.988,
  "independent_run_reference": {
-  "github_run_id": 39128111917,
+  "github_run_id": 39128336304,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "23f9673b-cc4c-4589-ac5b-9d9122350a4c",
+   "jti": "49ae1e7a-5b3d-425c-b6c7-17833e8493d6",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39128111917",
+   "run_id": "39128336304",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
