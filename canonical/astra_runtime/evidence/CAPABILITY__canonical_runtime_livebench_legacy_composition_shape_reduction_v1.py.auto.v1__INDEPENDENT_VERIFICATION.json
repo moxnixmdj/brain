@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_legacy_composition_shape_reduction_v1.py.auto.v1",
- "elapsed_ms": 13.196,
+ "elapsed_ms": 9.552,
  "independent_run_reference": {
-  "github_run_id": 39134954676,
+  "github_run_id": 39135205124,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "edd36c81-d2b0-4cfb-b676-59f8debe9a2b",
+   "jti": "bb0984b8-b4b9-44d4-adb5-64a82311eea6",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39134954676",
+   "run_id": "39135205124",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
