@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/p1_v7_direct_surface_scope_transport_v1.py.auto.v1",
- "elapsed_ms": 31.411,
+ "elapsed_ms": 30.169,
  "independent_run_reference": {
-  "github_run_id": 39114738887,
+  "github_run_id": 39114917117,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "c1d0c827-b76c-4f1b-b1cd-dad48fbd55fa",
+   "jti": "f530da57-08ee-4d1c-87e5-f5095b261c99",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39114738887",
+   "run_id": "39114917117",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
