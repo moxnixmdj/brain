@@ -227,6 +227,33 @@ def teach(cell: str, procedure: str, path: str = DEFAULT_STATE) -> None:
                "procedure": None, "credited": False})
     entry["procedure"] = procedure
     _save(state, path)
+    # Learning filed under one key can only be found by that key. Filed
+    # associatively, it can be REMINDED -- which is the difference between a
+    # lookup table and something that knows what it knows. Memory is an
+    # enhancement here, never a blocker: if it fails, the lesson still lands.
+    try:
+        from canonical.runtime import associative_memory_v1 as mem
+        entry["memory_id"] = mem.remember(
+            procedure, kind="procedure", tags=[cell])
+        _save(state, path)
+    except Exception:
+        pass
+
+
+def relevant(where: str, why: str, k: int = 5,
+             path: str = DEFAULT_STATE) -> list:
+    """Learnings related to this situation, whatever cell they were filed under.
+
+    recall() answers "what do I know about this exact key". This answers "what
+    do I know that bears on this" -- the associative question, which is the one
+    a creature actually asks. Ranked by relevance x earned importance, so what
+    comes back first is what mattered, not merely what matched.
+    """
+    try:
+        from canonical.runtime import associative_memory_v1 as mem
+        return mem.recall(f"{where} {why}", k=k)
+    except Exception:
+        return []
 
 
 def recall(where: str, why: str, path: str = DEFAULT_STATE) -> dict:
