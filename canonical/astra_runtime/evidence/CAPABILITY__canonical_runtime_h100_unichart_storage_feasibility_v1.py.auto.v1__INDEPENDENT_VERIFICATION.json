@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/h100_unichart_storage_feasibility_v1.py.auto.v1",
- "elapsed_ms": 37.942,
+ "elapsed_ms": 38.997,
  "independent_run_reference": {
-  "github_run_id": 39095624315,
+  "github_run_id": 39095806245,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "3a4fc356-190d-4cd2-81ff-7fed3d4e62c8",
+   "jti": "e54c50e9-0196-4dd8-8bff-fc224c776d52",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39095624315",
+   "run_id": "39095806245",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
