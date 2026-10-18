@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_legacy15_punkt_context_quotient_v1.py.auto.v1",
- "elapsed_ms": 50.233,
+ "elapsed_ms": 50.112,
  "independent_run_reference": {
-  "github_run_id": 39118092763,
+  "github_run_id": 39118317644,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "e69301ba-8c56-47d4-9d03-f9bc2ff9b929",
+   "jti": "b1b1eb64-66f3-4859-8658-3f1853f5e413",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39118092763",
+   "run_id": "39118317644",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
