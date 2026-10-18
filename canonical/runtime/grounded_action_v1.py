@@ -374,7 +374,7 @@ def _try_bridge(goal, root, goal_paths, started):
 
 def act(goal, root=None, registry=None, verbose=False, memory=True,
         established_effects=(), extra_paths=(), bridge=True,
-        computer_use=True):
+        computer_use=True, prefer=None):
     """`established_effects` and `extra_paths` are how one step feeds the next.
 
     A caller chaining steps passes what earlier steps PROVIDED and the paths
@@ -530,7 +530,20 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
     chosen = None
     why = None
     margin = None
-    if survivors and EXP is not None and len(survivors) > 1:
+    # A MACRO IS AN OFFER, NEVER A CONSTRAINT.
+    #
+    # `prefer` carries the capability a remembered plan used for this
+    # shape of clause. It is honoured only if that capability is still a
+    # survivor -- still perceived, still bindable, still with its
+    # preconditions met. If the world changed, preference is dropped and
+    # selection proceeds exactly as it would have. It changes which
+    # capability is chosen; it never changes whether the result is checked.
+    if prefer and survivors:
+        for cand in survivors:
+            if cand["capability_id"] == str(prefer):
+                chosen, why = cand, "REMEMBERED_MACRO"
+                break
+    if survivors and chosen is None and EXP is not None and len(survivors) > 1:
         # Asked once, answered once. Memory removes the need to ask, never
         # the need to check -- the action is still verified below.
         remembered = EXP.recall_resolution(goal)

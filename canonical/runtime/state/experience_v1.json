@@ -2,8 +2,19 @@
  "cells": {
   "archive.tar_gz.create_from_manifest|verified": {
    "first_seen": 1792312443.2875447,
-   "last_seen": 1792317216.1114318,
+   "last_seen": 1792317956.9541914,
    "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
     1,
     1,
     1,
@@ -57,8 +68,9 @@
   },
   "archive.verify.tar_gz.gnu|verified": {
    "first_seen": 1792316179.6037304,
-   "last_seen": 1792317125.2879276,
+   "last_seen": 1792317565.384476,
    "observations": [
+    1,
     1,
     1,
     1,
@@ -91,10 +103,37 @@
    "where": "docx.document.create_from_json_record",
    "why": "Blocker"
   },
+  "docx.document.verify.intent_ooxml|runtimeerror": {
+   "first_seen": 1792317865.3490944,
+   "last_seen": 1792317956.9033022,
+   "observations": [
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "docx.document.verify.intent_ooxml",
+   "why": "RuntimeError"
+  },
   "docx.document.verify.intent_ooxml|verified": {
    "first_seen": 1792312443.1245909,
-   "last_seen": 1792317216.082117,
+   "last_seen": 1792317956.9247713,
    "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
     1,
     1,
     1,
@@ -143,8 +182,10 @@
   },
   "image.extract.ocr.tesseract|bound_capability_source_unsupported": {
    "first_seen": 1792313437.9199655,
-   "last_seen": 1792317139.2370605,
+   "last_seen": 1792318316.159087,
    "observations": [
+    -1,
+    -1,
     -1,
     -1,
     -1,
@@ -246,8 +287,16 @@
   },
   "python.source.audit.ast|verified": {
    "first_seen": 1792312443.2595565,
-   "last_seen": 1792317219.5239155,
+   "last_seen": 1792317828.493335,
    "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
     1,
     1,
     1,
@@ -303,8 +352,9 @@
   },
   "sqlite.table.verify_against_json_records|blocker": {
    "first_seen": 1792312443.3051975,
-   "last_seen": 1792317125.1529274,
+   "last_seen": 1792317565.3007138,
    "observations": [
+    -1,
     -1,
     -1,
     -1,
@@ -327,8 +377,9 @@
   },
   "xlsx.table.create_from_json_records|blocker": {
    "first_seen": 1792312443.3409848,
-   "last_seen": 1792315264.868219,
+   "last_seen": 1792317565.345804,
    "observations": [
+    -1,
     -1,
     -1,
     -1,
@@ -360,8 +411,9 @@
   },
   "xlsx.table.verify_against_json_records|blocker": {
    "first_seen": 1792312443.3242493,
-   "last_seen": 1792315264.8559473,
+   "last_seen": 1792317565.3240504,
    "observations": [
+    -1,
     -1,
     -1,
     -1,

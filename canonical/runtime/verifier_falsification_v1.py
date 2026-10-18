@@ -1259,6 +1259,74 @@ def _cases() -> list[tuple[str, str, callable]]:
         "a claimed artifact that is empty",
         empty_artifact_survives)
 
+    # --- a plan learned from doing the work --------------------------------
+    # Everything the machine learned before this was NEGATIVE -- what
+    # failed, what the box lacks. A chain that succeeded was thrown away,
+    # so the same job was re-planned from scratch forever. Macros make
+    # success accumulate. Learned plans are the most dangerous thing added
+    # so far, because a remembered success feels like proof, so each of the
+    # ways it can be wrong is pinned here.
+
+    def one_bad_instance_erases_the_plan() -> bool:
+        # FOURTH SIGHTING OF THE SAME ERROR. A goal-relative file kind
+        # became a permanent ban; a precondition became one; eight audits
+        # of one bad directory disabled auditing everywhere. Here, one
+        # copied .docx failing DOCX_INTENT_SIDECAR_MIXSING -- a fact about
+        # that file, not about the plan -- erased a plan that worked for
+        # every other .docx. A failure is evidence, not a verdict.
+        import tempfile
+        from pathlib import Path as _P
+        try:
+            from canonical.runtime import macro_v1 as MC
+        except Exception:
+            return True
+        fd, tmp = tempfile.mkstemp(suffix=".json")
+        os.close(fd)
+        original = MC.STATE
+        MC.STATE = _P(tmp)
+        try:
+            clauses = ["verify the docx one.docx",
+                       "create a tar.gz archive from the manifest"]
+            steps = [{"capability_id": "a.b", "verified": True},
+                     {"capability_id": "c.d", "verified": True}]
+            for _ in range(3):
+                MC.record(clauses, steps)
+            MC.note_failure(MC.signature(clauses))
+            return MC.lookup(clauses) is None  # wrongly erased
+        finally:
+            MC.STATE = original
+            try:
+                os.unlink(tmp)
+            except Exception:
+                pass
+
+    def macro_shape_ignores_file_kind() -> bool:
+        from canonical.runtime import macro_v1 as MC
+        docx = MC.signature(["verify the docx one.docx",
+                             "create a tar.gz archive from the manifest"])
+        pdf = MC.signature(["verify the docx one.pdf",
+                            "create a tar.gz archive from the manifest"])
+        return docx == pdf  # a .pdf is not the same job as a .docx
+
+    def macro_preference_forces_an_impossible_capability() -> bool:
+        # A MACRO IS AN OFFER, NEVER A CONSTRAINT. It may only choose
+        # among capabilities that already survived perception, binding and
+        # preconditions -- it must never be able to inject one.
+        from canonical.runtime import grounded_action_v1 as GA
+        r = GA.act("audit the python source canonical/runtime/bound_capabilities",
+                   memory=False, prefer="definitely.not.a.capability")
+        return str(r.get("capability_id")) == "definitely.not.a.capability"
+
+    add("macro_v1.note_failure",
+        "one instance's failure erasing a plan that works everywhere else",
+        one_bad_instance_erases_the_plan)
+    add("macro_v1.signature",
+        "a different file kind treated as the same job",
+        macro_shape_ignores_file_kind)
+    add("grounded_action_v1.act",
+        "a remembered preference injecting a capability that cannot run",
+        macro_preference_forces_an_impossible_capability)
+
     return out
 
 

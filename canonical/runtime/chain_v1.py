@@ -99,10 +99,30 @@ def run(goal, root=None, memory=True, max_steps=8):
     steps = []
     failed_at = None
 
+    # A chain that finished once is a plan worth keeping. Looked up by the
+    # SHAPE of the job, honoured only while it still binds, and forgotten
+    # the first time it fails.
+    macro = None
+    if memory and len(clauses) >= 2:
+        try:
+            from canonical.runtime import macro_v1 as MC
+            macro = MC.lookup(clauses)
+        except Exception:
+            macro = None
+    used_macro = False
+
     for index, clause in enumerate(clauses):
+        prefer = None
+        if isinstance(macro, dict):
+            plan = macro.get("plan") or []
+            if index < len(plan) and isinstance(plan[index], dict):
+                prefer = plan[index].get("capability_id")
         receipt = GA.act(clause, root=root, memory=memory,
                          established_effects=sorted(established),
-                         extra_paths=list(prior_outputs))
+                         extra_paths=list(prior_outputs),
+                         prefer=prefer)
+        if prefer and str(receipt.get("capability_id")) == str(prefer):
+            used_macro = True
         steps.append({
             "index": index,
             "clause": clause,
@@ -116,6 +136,15 @@ def run(goal, root=None, memory=True, max_steps=8):
         })
         if not receipt.get("ok"):
             failed_at = index
+            # A failure is counted, not obeyed. The plan is dropped only
+            # when the evidence against it outweighs the evidence for it:
+            # one instance failing says nothing about the shape.
+            if isinstance(macro, dict):
+                try:
+                    from canonical.runtime import macro_v1 as MC
+                    MC.note_failure(str(macro.get("key") or ""))
+                except Exception:
+                    pass
             break
         # Only a VERIFIED step may contribute effects to the rest of the
         # plan. Building on an unverified step would make everything
@@ -125,9 +154,18 @@ def run(goal, root=None, memory=True, max_steps=8):
         prior_outputs.extend(_outputs_of(receipt))
 
     completed = len(steps) if failed_at is None else failed_at
+    learned = None
+    if memory and failed_at is None and len(clauses) >= 2:
+        try:
+            from canonical.runtime import macro_v1 as MC
+            learned = MC.record(clauses, steps)
+        except Exception:
+            learned = None
     return {
         "schema": SCHEMA,
         "ok": failed_at is None and bool(steps),
+        "used_macro": bool(used_macro),
+        "macro_recorded": bool(learned),
         "goal": goal,
         "clause_count": len(clauses),
         "steps": steps,

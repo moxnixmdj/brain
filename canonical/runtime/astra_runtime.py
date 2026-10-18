@@ -661,6 +661,15 @@ def _verified_pypi_wheel_bytes(record):
     return raw
 
 
+# Debian and friends mark the system Python externally managed, so pip
+# refuses to install into it at all -- the capability that needed a wheel
+# was blocked with "externally-managed-environment" while holding a
+# hash-verified wheel in a temporary directory, one flag away from working.
+# Setting this is the difference between "cannot install" and "installs".
+_PIP_ENV = dict(os.environ)
+_PIP_ENV["PIP_BREAK_SYSTEM_PACKAGES"] = "1"
+
+
 def _ensure_pypi_dependency(source):
     name=str(source.get("project") or "").strip()
     version=str(source.get("version") or "").strip()
@@ -706,7 +715,7 @@ def _ensure_pypi_dependency(source):
             wheel.write_bytes(raw)
             proc=subprocess.run(
                 [sys.executable,"-m","pip","install","--disable-pip-version-check","--quiet","--no-deps",str(wheel)],
-                cwd=ROOT,text=True,capture_output=True,timeout=120
+                cwd=ROOT,text=True,capture_output=True,timeout=120,env=_PIP_ENV
             )
             if proc.returncode!=0:
                 raise Blocker("BOUND_PYPI_INSTALL_FAILED:"+proc.stderr[-1200:])
@@ -789,7 +798,7 @@ def _ensure_pypi_dependency(source):
               "--no-index","--no-deps",
               *[str(p) for p in local_wheels],
             ],
-            cwd=ROOT,text=True,capture_output=True,timeout=240
+            cwd=ROOT,text=True,capture_output=True,timeout=240,env=_PIP_ENV
         )
         if proc.returncode!=0:
             raise Blocker("BOUND_PYPI_CLOSURE_INSTALL_FAILED:"+proc.stderr[-1800:])
