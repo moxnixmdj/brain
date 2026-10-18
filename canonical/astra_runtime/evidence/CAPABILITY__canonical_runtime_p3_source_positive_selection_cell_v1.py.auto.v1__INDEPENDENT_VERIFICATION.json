@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/p3_source_positive_selection_cell_v1.py.auto.v1",
- "elapsed_ms": 0.236,
+ "elapsed_ms": 0.263,
  "independent_run_reference": {
-  "github_run_id": 39109344351,
+  "github_run_id": 39109529701,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "ee48c80e-0497-4b92-9e15-a216610e68d2",
+   "jti": "79e6036c-a2ef-47be-9614-11b9f22ccf9a",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39109344351",
+   "run_id": "39109529701",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
