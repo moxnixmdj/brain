@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/v14_p2_professional_top_law_selected_cell_verifier_v1.py.auto.v1",
- "elapsed_ms": 26.404,
+ "elapsed_ms": 30.771,
  "independent_run_reference": {
-  "github_run_id": 39165665832,
+  "github_run_id": 39165904691,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "5eb7dbaa-e340-41f1-b97b-d6b7fe14ca79",
+   "jti": "e9ef10e8-5c1a-4dbc-b4b5-ca192d6f7771",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39165665832",
+   "run_id": "39165904691",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
