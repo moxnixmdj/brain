@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/synthesis_certified_visible_support_policy_v2.py.auto.v1",
- "elapsed_ms": 0.203,
+ "elapsed_ms": 0.245,
  "independent_run_reference": {
-  "github_run_id": 39081094047,
+  "github_run_id": 39081296114,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "23caf1ea-469c-429b-9bd2-01f8518b7d16",
+   "jti": "2c5fe920-18ea-45a2-abc2-a81bd630c79e",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39081094047",
+   "run_id": "39081296114",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
