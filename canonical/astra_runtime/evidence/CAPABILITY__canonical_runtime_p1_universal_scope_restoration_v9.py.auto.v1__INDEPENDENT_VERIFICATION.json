@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/p1_universal_scope_restoration_v9.py.auto.v1",
- "elapsed_ms": 36.676,
+ "elapsed_ms": 36.52,
  "independent_run_reference": {
-  "github_run_id": 39159040234,
+  "github_run_id": 39159304918,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "ef57d12e-0d4a-46a7-96f0-aaa4be4d6a38",
+   "jti": "ccb554f8-e433-4ab1-854d-21c5dd9dfe32",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39159040234",
+   "run_id": "39159304918",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
