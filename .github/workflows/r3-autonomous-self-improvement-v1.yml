@@ -1,6 +1,12 @@
 name: R3 autonomous self-improvement verification
 
 on:
+  # Daily, so the improvement queue turns on its own and the store accumulates.
+  # Without a schedule this only ever ran when a human opened a PR, so nothing
+  # could compound between runs.
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
   pull_request:
     paths:
       - "canonical/runtime/autonomous_verified_self_improvement_v1.py"
@@ -125,6 +131,17 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
+      # The learning store is deliberately gitignored (.gitignore:15), so on an
+      # ephemeral runner it starts empty every run -- the machine could never
+      # differ tomorrow from today. Restore the accumulated state on the way in
+      # and save it on the way out, without ever putting it in git.
+      - name: Restore accumulated self-improvement state
+        uses: actions/cache/restore@v4
+        with:
+          path: canonical/runtime/SELF_IMPROVEMENT_STATE_V1.json
+          key: self-improvement-state-${{ github.run_id }}
+          restore-keys: |
+            self-improvement-state-
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -220,3 +237,33 @@ jobs:
         run: python -m unittest canonical.tests.test_r3_deterministic_mapping_guard_patch_author_v1 -v
       - name: Run R3 mode-guard author dominance truth-repair suite
         run: python -m unittest canonical.tests.test_r3_mode_guard_patch_author_dominance_v1 -v
+      # Everything above verifies the machinery. This is what actually runs it:
+      # advance the improvement queue once against the restored store. Without
+      # this step the cached state would never change and persistence alone
+      # would be pointless.
+      - name: Operate the improvement queue
+        run: |
+          PYTHONPATH="$PWD:$PWD/canonical/runtime" python - <<'PY'
+          import json
+          from canonical.runtime import r3_improvement_queue_driver_v1 as D
+          from canonical.runtime import autonomous_verified_self_improvement_v1 as L
+
+          result = D.drain()
+          state = L.load_state()
+          summary = {
+              "status": result.get("status"),
+              "progress_count": result.get("progress_count"),
+              "failures": len(state.get("failures") or {}),
+              "episodes": len(state.get("episodes") or {}),
+              "skills": len(state.get("skills") or {}),
+              "reuse": len(state.get("reuse") or {}),
+              "terminal_authority": result.get("terminal_authority"),
+          }
+          print(json.dumps(summary, indent=1))
+          PY
+      - name: Persist self-improvement state
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: canonical/runtime/SELF_IMPROVEMENT_STATE_V1.json
+          key: self-improvement-state-${{ github.run_id }}
