@@ -1044,6 +1044,157 @@ def _cases() -> list[tuple[str, str, callable]]:
         "a real structural fact about this box ignored",
         structural_fact_still_suppresses)
 
+    # --- ask the machine before asking the package database --------------
+    # THREE CAPABILITIES SAT BLOCKED BEHIND A GATE GUARDING THE WRONG THING.
+    # The apt gate proves what it is ABOUT TO ACQUIRE -- name, version and
+    # archive hash. That is the right guard on acquisition and the wrong
+    # guard on presence: openpyxl and xlsxwriter were installed the whole
+    # time and the machine refused to touch them. Autoconf's founding rule
+    # is to test for features, not for versions. Proving the probe can fail
+    # matters as much as proving it can affirm -- sqlite3's CLI really is
+    # absent, and it must stay refused.
+
+    def missing_binary_satisfied_by_probe() -> bool:
+        from canonical.runtime.astra_runtime import _already_present_dependency
+        # sqlite_verify_cli shells out to the sqlite3 binary, which is not
+        # on this box. It imports nothing third-party, so the probe has
+        # nothing to affirm and must hand back to the acquisition gate.
+        return _already_present_dependency(
+            {"adapter_module": "sqlite_verify_cli"}) is not None
+
+    def missing_module_satisfied_by_probe() -> bool:
+        from canonical.runtime.astra_runtime import _already_present_dependency
+        # yq_yaml_json imports `yaml`; PyYAML is not installed here.
+        return _already_present_dependency(
+            {"adapter_module": "yq_yaml_json"}) is not None
+
+    def present_module_not_seen_by_probe() -> bool:
+        from canonical.runtime.astra_runtime import _already_present_dependency
+        # The opposite error, and the one that cost three capabilities.
+        got = _already_present_dependency(
+            {"adapter_module": "xlsx_verify_openpyxl"})
+        return not (isinstance(got, dict)
+                    and got.get("status") == "ALREADY_PRESENT_FEATURE_PROBED")
+
+    add("astra_runtime._already_present_dependency",
+        "a missing binary declared satisfied by a feature probe",
+        missing_binary_satisfied_by_probe)
+    add("astra_runtime._already_present_dependency",
+        "a missing module declared satisfied by a feature probe",
+        missing_module_satisfied_by_probe)
+    add("astra_runtime._already_present_dependency",
+        "a module the machine actually holds ignored",
+        present_module_not_seen_by_probe)
+
+    # --- the slot's own name outranks the capability's -------------------
+    # Two differently-typed slots filled with one file is not binding, it is
+    # duplication with the type check removed. It surfaced as json.loads()
+    # being handed a binary spreadsheet, and again as a bundle verified
+    # against a manifest from an unrelated directory.
+
+    def workbook_fills_the_json_slot() -> bool:
+        import world_binding_v1 as WB
+        got = WB._pick_path("json_path", "xlsx.table.verify_against_json_records",
+                            ["canonical/astra_runtime/tmp/FANOUT_JOIN.xlsx"],
+                            Path("/home/user/brain"))
+        return got is not None and str(got).lower().endswith(".xlsx")
+
+    def unrelated_manifest_binds_to_the_bundle() -> bool:
+        import world_binding_v1 as WB
+        from canonical.runtime import grounded_action_v1 as GA
+        root = Path("/home/user/brain")
+        entry = GA.load_registry()["archive.verify.tar_gz.gnu"]
+        got = WB.complete_inputs("verify the archive members against the manifest",
+                                 root, entry, compiler=None, goal_paths=[])
+        bound = str((got["inputs"] or {}).get("manifest_path") or "")
+        return "ARCHIVE_VERIFY_MANIFEST.json" not in bound
+
+    add("world_binding_v1._pick_path",
+        "a workbook handed to the capability's JSON slot",
+        workbook_fills_the_json_slot)
+    add("world_binding_v1.complete_inputs",
+        "a manifest from another directory bound to this bundle",
+        unrelated_manifest_binds_to_the_bundle)
+
+    # --- an audit that cannot finish hides the finding -------------------
+
+    def audit_hides_a_finding() -> bool:
+        import importlib.util, json, shutil
+        root = Path("/home/user/brain")
+        d = root / "canonical/astra_runtime/tmp/_falsify_audit"
+        report = root / "canonical/astra_runtime/tmp/_falsify_audit_report.json"
+        if d.exists():
+            shutil.rmtree(d)
+        d.mkdir(parents=True)
+        try:
+            (d / "good.py").write_text("def f():\n    return 1\n")
+            (d / "bad.py").write_text("def g(:\n    return \\\n")
+            spec = importlib.util.spec_from_file_location(
+                "_falsify_aud",
+                root / "canonical/runtime/bound_capabilities/python_source_audit.py")
+            m = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(m)
+            try:
+                m.run({"source_root": "canonical/astra_runtime/tmp/_falsify_audit",
+                       "output_path": "canonical/astra_runtime/tmp/_falsify_audit_report.json"},
+                      root)
+            except RuntimeError:
+                return True  # aborted: the only finding in the tree is lost
+            rep = json.loads(report.read_text())
+            return not (rep["totals"]["files"] == 1
+                        and rep["totals"]["unparseable"] == 1)
+        finally:
+            shutil.rmtree(d, ignore_errors=True)
+            try:
+                report.unlink()
+            except Exception:
+                pass
+
+    add("bound_capabilities.python_source_audit",
+        "an unparseable file that aborts the audit instead of being reported",
+        audit_hides_a_finding)
+
+    # --- opening the gate must not have opened the verifier --------------
+    # The three capabilities above were unreachable for so long that nothing
+    # had ever tested what happens when they run. A capability that verifies
+    # on wrong data is worse than one that refuses.
+
+    def tampered_xlsx_still_verifies() -> bool:
+        import importlib.util, json, shutil
+        root = Path("/home/user/brain")
+        tmp = root / "canonical/astra_runtime/tmp/_falsify_xlsx"
+        if tmp.exists():
+            shutil.rmtree(tmp)
+        tmp.mkdir(parents=True)
+        try:
+            src_x = root / "canonical/astra_runtime/tmp/FANOUT_JOIN.xlsx"
+            src_j = root / "canonical/astra_runtime/tmp/FANOUT_JOIN_MANIFEST.json"
+            if not (src_x.is_file() and src_j.is_file()):
+                return True
+            shutil.copy(src_x, tmp / "T.xlsx")
+            shutil.copy(src_j, tmp / "T.json")
+            recs = json.loads((tmp / "T.json").read_text())
+            recs[0]["username"] = "TAMPERED_BY_THE_FALSIFIER"
+            (tmp / "T.json").write_text(json.dumps(recs))
+            spec = importlib.util.spec_from_file_location(
+                "_falsify_xv",
+                root / "canonical/runtime/bound_capabilities/xlsx_verify_openpyxl.py")
+            m = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(m)
+            try:
+                m.run({"xlsx_path": "canonical/astra_runtime/tmp/_falsify_xlsx/T.xlsx",
+                       "json_path": "canonical/astra_runtime/tmp/_falsify_xlsx/T.json"},
+                      root)
+            except RuntimeError:
+                return False  # correctly refused
+            return True  # WRONGLY AFFIRMED
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    add("bound_capabilities.xlsx_verify_openpyxl",
+        "a workbook whose records were tampered with",
+        tampered_xlsx_still_verifies)
+
     return out
 
 

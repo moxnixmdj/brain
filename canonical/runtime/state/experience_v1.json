@@ -2,8 +2,18 @@
  "cells": {
   "archive.tar_gz.create_from_manifest|verified": {
    "first_seen": 1792312443.2875447,
-   "last_seen": 1792314953.158723,
+   "last_seen": 1792316678.0372808,
    "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
     1,
     1,
     1,
@@ -24,8 +34,13 @@
   },
   "archive.verify.tar_gz.gnu|runtimeerror": {
    "first_seen": 1792312443.3720834,
-   "last_seen": 1792314951.2034862,
+   "last_seen": 1792316099.1447587,
    "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
     -1,
     -1,
     -1,
@@ -37,6 +52,18 @@
    "structural": false,
    "where": "archive.verify.tar_gz.gnu",
    "why": "RuntimeError"
+  },
+  "archive.verify.tar_gz.gnu|verified": {
+   "first_seen": 1792316179.6037304,
+   "last_seen": 1792316657.918601,
+   "observations": [
+    1,
+    1,
+    1
+   ],
+   "structural": false,
+   "where": "archive.verify.tar_gz.gnu",
+   "why": "VERIFIED"
   },
   "document.convert.markdown_pdf.pandoc_weasyprint|blocker": {
    "first_seen": 1792312537.2174094,
@@ -63,8 +90,21 @@
   },
   "docx.document.verify.intent_ooxml|verified": {
    "first_seen": 1792312443.1245909,
-   "last_seen": 1792314953.1307454,
+   "last_seen": 1792316678.010675,
    "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
     1,
     1,
     1,
@@ -97,8 +137,10 @@
   },
   "image.extract.ocr.tesseract|bound_capability_source_unsupported": {
    "first_seen": 1792313437.9199655,
-   "last_seen": 1792315030.2408707,
+   "last_seen": 1792316670.224923,
    "observations": [
+    -1,
+    -1,
     -1,
     -1,
     -1,
@@ -173,8 +215,13 @@
   },
   "python.source.audit.ast|runtimeerror": {
    "first_seen": 1792312444.8398008,
-   "last_seen": 1792314954.7388165,
+   "last_seen": 1792316181.2872977,
    "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
     -1,
     -1,
     -1,
@@ -192,8 +239,22 @@
   },
   "python.source.audit.ast|verified": {
    "first_seen": 1792312443.2595565,
-   "last_seen": 1792314952.9613173,
+   "last_seen": 1792316681.5160172,
    "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
     1,
     1,
     1,
@@ -231,8 +292,15 @@
   },
   "sqlite.table.verify_against_json_records|blocker": {
    "first_seen": 1792312443.3051975,
-   "last_seen": 1792314951.141409,
+   "last_seen": 1792316657.7853827,
    "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
     -1,
     -1,
     -1,
@@ -247,8 +315,9 @@
   },
   "xlsx.table.create_from_json_records|blocker": {
    "first_seen": 1792312443.3409848,
-   "last_seen": 1792314951.1732259,
+   "last_seen": 1792315264.868219,
    "observations": [
+    -1,
     -1,
     -1,
     -1,
@@ -261,10 +330,26 @@
    "where": "xlsx.table.create_from_json_records",
    "why": "Blocker"
   },
+  "xlsx.table.create_from_json_records|runtimeerror": {
+   "first_seen": 1792315608.6882799,
+   "last_seen": 1792316657.8879657,
+   "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "xlsx.table.create_from_json_records",
+   "why": "RuntimeError"
+  },
   "xlsx.table.verify_against_json_records|blocker": {
    "first_seen": 1792312443.3242493,
-   "last_seen": 1792314951.1583884,
+   "last_seen": 1792315264.8559473,
    "observations": [
+    -1,
     -1,
     -1,
     -1,
@@ -276,6 +361,42 @@
    "structural": false,
    "where": "xlsx.table.verify_against_json_records",
    "why": "Blocker"
+  },
+  "xlsx.table.verify_against_json_records|runtimeerror": {
+   "first_seen": 1792315960.972894,
+   "last_seen": 1792315960.9728954,
+   "observations": [
+    -1
+   ],
+   "structural": false,
+   "where": "xlsx.table.verify_against_json_records",
+   "why": "RuntimeError"
+  },
+  "xlsx.table.verify_against_json_records|unicodedecodeerror": {
+   "first_seen": 1792315608.668318,
+   "last_seen": 1792315682.0914865,
+   "observations": [
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "xlsx.table.verify_against_json_records",
+   "why": "UnicodeDecodeError"
+  },
+  "xlsx.table.verify_against_json_records|verified": {
+   "first_seen": 1792315902.8224573,
+   "last_seen": 1792316657.8655465,
+   "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "structural": false,
+   "where": "xlsx.table.verify_against_json_records",
+   "why": "VERIFIED"
   }
  },
  "resolutions": {}

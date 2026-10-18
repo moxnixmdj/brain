@@ -30,6 +30,7 @@ def run(args, root):
     if output == repo or repo not in output.parents:
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
     files=[]
+    unparseable=[]
     imports=set()
     total_functions=0
     total_classes=0
@@ -40,7 +41,21 @@ def run(args, root):
         try:
             tree=ast.parse(raw.decode("utf-8"),filename=str(path))
         except Exception as exc:
-            raise RuntimeError("PYTHON_PARSE_FAILED:"+str(path.relative_to(repo))+":"+type(exc).__name__) from exc
+            # AN AUDIT THAT CANNOT REPORT A FINDING IS NOT AN AUDIT.
+            #
+            # Aborting on the first unparseable file meant a 2078-file tree
+            # answered "PYTHON_PARSE_FAILED" and named one path -- the audit
+            # had already examined the other 2076 and said nothing about
+            # them. The finding is the product; refusing to finish hides it
+            # behind an exception that reads like a tool failure. Record the
+            # file, keep going, and let the report carry every finding.
+            unparseable.append({
+                "path":str(path.relative_to(repo)).replace("\\","/"),
+                "sha256":hashlib.sha256(raw).hexdigest(),
+                "error":type(exc).__name__,
+                "detail":str(exc)[:400],
+            })
+            continue
         functions=sorted(n.name for n in tree.body if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)))
         classes=sorted(n.name for n in tree.body if isinstance(n,ast.ClassDef))
         mods=_imports(tree)
@@ -54,14 +69,16 @@ def run(args, root):
             "functions":functions,
             "classes":classes,
         })
-    if not files:
+    if not files and not unparseable:
         raise RuntimeError("PYTHON_AUDIT_EMPTY")
     report={
         "schema":"PROJECT_BRAIN_PYTHON_SOURCE_AUDIT_V1",
         "source_root":str(source_root.relative_to(repo)).replace("\\","/"),
         "files":files,
+        "unparseable":unparseable,
         "totals":{
             "files":len(files),
+            "unparseable":len(unparseable),
             "functions":total_functions,
             "classes":total_classes,
             "distinct_imported_modules":len(imports),
@@ -76,6 +93,8 @@ def run(args, root):
         "output_path":str(output.relative_to(repo)).replace("\\","/"),
         "output_sha256":hashlib.sha256(data).hexdigest(),
         "file_count":len(files),
+        "unparseable_count":len(unparseable),
+        "unparseable_paths":[u["path"] for u in unparseable][:20],
         "function_count":total_functions,
         "class_count":total_classes,
         "distinct_imported_module_count":len(imports),

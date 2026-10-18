@@ -170,6 +170,112 @@ def _promote(rel, want_dir, root):
     return rel
 
 
+def _ext_for_placeholder(name):
+    """The file kind a placeholder's OWN name demands, if it names one.
+
+    `json_path` and `xlsx_path` are different slots of the same capability.
+    Binding used to look only at the capability id, and `xlsx.table.verify_
+    against_json_records` mentions xlsx before json -- so the workbook was
+    also handed to the JSON slot, both slots received one file, and the
+    capability tried to json.loads() a binary spreadsheet:
+
+        UnicodeDecodeError: 'utf-8' codec can't decode byte 0x8f
+
+    A slot that names its own kind may only be filled by a file of that
+    kind. Returns None when the name names no kind at all, which leaves
+    every previously working binding exactly as it was.
+    """
+    tokens = set(re.sub(r"[^a-z0-9]+", " ", str(name or "").lower()).split())
+    for hints, ext in _EXT_HINTS:
+        for h in hints:
+            if h in tokens:
+                return ext
+    return None
+
+
+def _role_token(name):
+    """The role a placeholder's name names. `manifest_path` wants a manifest.
+
+    File extensions are not the only signal. `manifest_path` names no
+    extension at all, and the world search duly handed it the first JSON
+    manifest in the repository -- `canonical/action_intents/ACTION_INTENT_
+    ...json`, unrelated to the bundle being verified -- while the manifest
+    that actually described that bundle sat beside it the whole time.
+    """
+    low = re.sub(r"[^a-z0-9]+", "_", str(name or "").lower()).strip("_")
+    for suffix in ("_path", "_file", "_root", "_dir", "_corpus", "_records"):
+        if low.endswith(suffix):
+            low = low[: -len(suffix)]
+            break
+    low = low.strip("_")
+    if not low or low in {"input", "output", "source", "target", "goal", "task"}:
+        return None
+    return low.split("_")[0] or None
+
+
+def _stem(filename):
+    stem = str(filename or "")
+    for sfx in (".tar.gz", ".sqlite", ".xlsx", ".docx", ".json", ".pdf"):
+        if stem.lower().endswith(sfx):
+            return stem[: -len(sfx)]
+    return Path(stem).stem
+
+
+def _stem_prefixes(filename):
+    """Shared prefixes of a filename, longest first.
+
+    `ARCHIVE_VERIFY_BUNDLE` and `ARCHIVE_VERIFY_MANIFEST` share no stem and
+    no extension -- they share a project prefix. Two-token prefixes are the
+    shortest admitted; a single token matches too much of a working
+    directory to be evidence of anything.
+    """
+    stem = _stem(filename)
+    parts = [x for x in re.split(r"[_\-\s]+", stem) if x]
+    out = ["_".join(parts[:n]) for n in range(len(parts), 1, -1)]
+    return out or [stem]
+
+
+def _companion_paths(name, cid, paths, root):
+    """Siblings sharing the named artifact's stem, in deterministic order.
+
+    Artifacts travel with their source data: `FANOUT_JOIN.xlsx` sits in the
+    same directory as `FANOUT_JOIN_MANIFEST.json`, and `ARCHIVE_VERIFY_
+    BUNDLE.tar.gz` beside `ARCHIVE_VERIFY_MANIFEST.json`. Any JSON in the
+    repository would be a guess; a sibling carrying the artifact's own stem
+    is evidence. It still fails closed -- if the records do not contain the
+    workbook's columns, or the members do not match, the verifier refuses --
+    so a wrong companion cannot manufacture a false pass.
+    """
+    ext = _ext_for_placeholder(name)
+    tok = _role_token(name)
+    if not ext and not tok:
+        return []
+    out = []
+    for rel in paths:
+        p = root / str(rel)
+        if not p.is_file():
+            continue
+        # Longest shared prefix first. `ARCHIVE_VERIFY_BUNDLE.tar.gz` and
+        # `ARCHIVE_VERIFY_MANIFEST.json` do not share a stem -- they share a
+        # project prefix, and that is the real signal that they belong to
+        # the same job.
+        candidates = []
+        for prefix in _stem_prefixes(p.name):
+            for cand in sorted(p.parent.glob(prefix + "*")):
+                if cand not in candidates:
+                    candidates.append(cand)
+        for cand in candidates:
+            if not cand.is_file():
+                continue
+            low = cand.name.lower()
+            if not (bool(ext and low.endswith(ext)) or bool(tok and tok in low)):
+                continue
+            rel_cand = str(cand.relative_to(root))
+            if rel_cand != str(rel) and rel_cand not in out:
+                out.append(rel_cand)
+    return out
+
+
 def _kind_key_for(token):
     """Map a token ('manifest', 'archive', 'pdf') onto a probe kind key."""
     from canonical.runtime import world_probe_v1 as WP
@@ -212,6 +318,24 @@ def _pick_path(name, cid, paths, root):
             if (root / rel).is_dir():
                 return rel
         return _promote(paths[0], True, root)
+
+    # THE SLOT'S OWN NAME OUTRANKS THE CAPABILITY'S.
+    #
+    # `_world_path_for` already states the rule -- "the placeholder's own
+    # name is the stronger signal" -- but it was only applied when the goal
+    # named no path at all. When the goal named one, the capability id
+    # decided, and an id mentioning xlsx before json fills both slots with
+    # the same workbook. Two differently-typed slots holding one file is
+    # not binding; it is duplication with the type check removed.
+    wanted = _ext_for_placeholder(name)
+    if wanted:
+        for rel in paths:
+            if str(rel).lower().endswith(wanted):
+                return rel
+        companion = _companion_paths(name, cid, paths, root)
+        if companion:
+            return companion[0]
+        return None
 
     lowered_all = (lowered + " " + str(cid).lower())
     ext = _ext_for(name, cid)
@@ -309,6 +433,7 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
     filled = {}
     missing = []
     from_world = {}
+    from_companion = {}
     for key in keys:
         low = key.lower()
         # A DESTINATION IS DETERMINED, NOT DISCOVERED.
@@ -332,6 +457,28 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
         elif ("path" in low) or ("file" in low) or ("root" in low) \
                 or ("dir" in low) or ("corpus" in low) or low.endswith("_dir"):
             value = _pick_path(key, cid, goal_paths, root)
+            # SLOTS OF ONE CAPABILITY DESCRIBE ONE JOB AND ARE BOUND JOINTLY.
+            #
+            # Binding each slot independently handed `archive_path` the
+            # bundle and `manifest_path` a manifest from an unrelated
+            # directory, then honestly reported a mismatch -- the verifier
+            # was right and the binding was wrong. A slot's companion is
+            # therefore sought next to what the other slots already found.
+            if value is None:
+                already = dict(bound)
+                already.update(filled)
+                pool = list(goal_paths) + [
+                    str(v) for v in already.values()
+                    if isinstance(v, str) and "/" in v and v not in goal_paths]
+                near = _companion_paths(key, cid, pool, root)
+                if near:
+                    value = near[0]
+                    from_companion[key] = value
+            # An inference, however well founded, is shown rather than buried.
+            if value is not None and value not in goal_paths \
+                    and _ext_for_placeholder(key) \
+                    and value in _companion_paths(key, cid, goal_paths, root):
+                from_companion[key] = value
             if value is None:
                 # The goal never named it. The world may already have exactly
                 # one thing of this kind -- use that, and record the evidence.
@@ -354,4 +501,5 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
         "source": "goal_compiler+world_binding" if used_compiler else "world_binding",
         "filled_by_world_binding": sorted(filled),
         "filled_from_world_not_goal": from_world,
+        "filled_from_companion_not_goal": from_companion,
     }

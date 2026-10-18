@@ -184,6 +184,30 @@ def _fs_write(payload: Mapping[str, Any], root: Path) -> dict[str, Any]:
             "bytes": len(data)}
 
 
+def _program_file(payload: Mapping[str, Any], root: Path):
+    """The script on disk that a payload value names, if it names one.
+
+    Checked in binding order -- an explicit `code`/`text` first, then the
+    path names -- because either may carry a path depending on how the
+    goal was written. A value is treated as a file only when it actually
+    resolves to one, so a program containing a slash is still code.
+    """
+    for name in ("code", "text", "input_path", "path", "file", "input"):
+        raw = payload.get(name)
+        if not isinstance(raw, str) or not raw.strip():
+            continue
+        s = raw.strip()
+        if len(s) > 400 or "\n" in s or "\0" in s or s.startswith("/"):
+            continue
+        try:
+            p = (root / s).resolve()
+        except Exception:
+            continue
+        if str(p).startswith(str(root.resolve())) and p.is_file():
+            return p
+    return None
+
+
 def _program_run(payload: Mapping[str, Any], root: Path) -> dict[str, Any]:
     # The goal compiler binds quoted text to whatever key the template
     # names -- here input_path -- so the code arrives under that name,
@@ -193,8 +217,22 @@ def _program_run(payload: Mapping[str, Any], root: Path) -> dict[str, Any]:
     # fallback grabbed input_path and the system tried to EXECUTE A
     # FILENAME as code -- failing closed for a reason that had nothing
     # to do with the program.
-    code = _arg(payload, "code", "text", "input_path", "input")
-    if not isinstance(code, str) or not code.strip():
+    # A VALUE THAT NAMES A FILE ON DISK IS A FILE; ANYTHING ELSE IS CODE.
+    #
+    # Deciding by argument order -- "text" before "input_path" -- meant a
+    # goal naming a script executed the FILENAME as a Python expression:
+    # `canonical/.../mul.py` parsed as an attribute chain, raised NameError,
+    # and the machine reported PROGRAM_NOT_VERIFIED for a reason that had
+    # nothing to do with the program. Inline code and a path are different
+    # things and only the world can tell them apart, so the world is asked.
+    target = _program_file(payload, root)
+    if target is not None:
+        code = target.read_text(errors="replace")
+        origin = str(target.relative_to(root.resolve())).replace("\\", "/")
+    else:
+        code = str(_arg(payload, "code", "text", "input_path", "input") or "")
+        origin = "inline"
+    if not str(code).strip():
         raise ComputerUseRegistryError("CODE_REQUIRED")
     try:
         from canonical.runtime import confine_v1 as C
@@ -208,6 +246,7 @@ def _program_run(payload: Mapping[str, Any], root: Path) -> dict[str, Any]:
         raise ComputerUseRegistryError(
             "PROGRAM_NOT_VERIFIED:" + str(result.get("verdict")))
     return {"confined": True, "network": bool(payload.get("network")),
+            "ran": origin,
             "output": (result.get("output") or "")[-2000:]}
 
 
