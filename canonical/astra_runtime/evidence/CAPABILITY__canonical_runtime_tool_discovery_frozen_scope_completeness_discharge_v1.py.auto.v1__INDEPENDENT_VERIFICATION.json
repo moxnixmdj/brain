@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/tool_discovery_frozen_scope_completeness_discharge_v1.py.auto.v1",
- "elapsed_ms": 31.8,
+ "elapsed_ms": 35.675,
  "independent_run_reference": {
-  "github_run_id": 39108395803,
+  "github_run_id": 39108568510,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "369dd8d8-9355-4b0d-8b48-ba0298b889f8",
+   "jti": "e1a38c39-17a2-4d54-99a9-cd7636d43e53",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39108395803",
+   "run_id": "39108568510",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
