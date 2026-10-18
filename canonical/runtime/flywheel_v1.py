@@ -149,14 +149,31 @@ def status(cell: str, alpha: float = DEFAULT_ALPHA,
         # point: an ungated average would promote almost anything.
         e_value, n = 0.0, len(entry["observations"])
     threshold = 1.0 / alpha if alpha and alpha > 0 else 20.0
-    credited = e_value >= threshold
+    # DIRECTION, not just magnitude.
+    #
+    # The e-process tests "no effect" against ANY consistent deviation,
+    # so a correction that fails every single time also accumulates
+    # evidence -- eight straight failures scored e=31.6, past a
+    # threshold of 20, and would have been promoted as a fix. Wrong in
+    # the most dangerous way: confidently reusing the thing that never
+    # works.
+    #
+    # Strong consistent evidence of HARM is real evidence against the
+    # null, and it is still not grounds for credit. So magnitude alone
+    # is not the gate; the sign is.
+    mean = float(e.get("mean") or 0.0)
+    credited = bool(e_value >= threshold and mean > 0)
     entry["credited"] = credited
     _save(state, path)
     return {"cell": cell, "n": n, "e_value": round(e_value, 3),
             "threshold": round(threshold, 1), "credited": credited,
-            "reason": ("evidence clears the anytime-valid gate" if credited
-                       else f"e={e_value:.2f} < {threshold:.0f} "
-                            f"after {n} observation(s)"),
+            "mean": round(mean, 3),
+            "reason": (
+                "improvement clears the anytime-valid gate" if credited
+                else (f"consistently harmful (mean {mean:+.2f})"
+                      if mean < 0 and e_value >= threshold
+                      else f"e={e_value:.2f} < {threshold:.0f} "
+                           f"after {n} observation(s)")),
             "procedure": entry.get("procedure") if credited else None}
 
 
@@ -178,3 +195,73 @@ def recall(where: str, why: str, path: str = DEFAULT_STATE) -> dict:
 def cells(path: str = DEFAULT_STATE) -> list:
     state = _load(path)
     return [status(k, path=path) for k in sorted(state["cells"])]
+
+
+# ---------------------------------------------------------------------------
+# Naming a failure without knowing the task.
+# ---------------------------------------------------------------------------
+#
+# The cell is (operation x failure mode), and both halves have to come
+# from somewhere that does not involve understanding the task -- if
+# classifying a failure required understanding what the task was, this
+# would be a table of tasks again and nothing would generalise.
+#
+# So it is derived from the error itself. This works because the two
+# sets are completely different sizes:
+#
+#     the ways a program fails      a small, closed set
+#     the tasks a person has        unbounded
+#
+# "No such file" recurs in every domain there is, and it always looks
+# the same in a traceback. A taxonomy of FAILURE is therefore finite and
+# worth writing down; a taxonomy of TASKS is neither.
+
+_PATHOLOGIES = (
+    # (matcher,                operation,        why)
+    ("FileNotFoundError",      "file access",    "no such file"),
+    ("IsADirectoryError",      "file access",    "path is a directory"),
+    ("NotADirectoryError",     "file access",    "path is not a directory"),
+    ("PermissionError",        "file access",    "permission denied"),
+    ("ModuleNotFoundError",    "environment",    "module missing"),
+    ("ImportError",            "environment",    "import failed"),
+    ("TimeoutExpired",         "execution",      "timed out"),
+    ("MemoryError",            "execution",      "out of memory"),
+    ("KeyError",               "data access",    "missing key"),
+    ("IndexError",             "data access",    "index out of range"),
+    ("AttributeError",         "data access",    "missing attribute"),
+    ("ZeroDivisionError",      "computation",    "divided by zero"),
+    ("ValueError",             "computation",    "bad value"),
+    ("TypeError",              "computation",    "wrong type"),
+    ("SyntaxError",            "authorship",     "program will not parse"),
+    ("IndentationError",       "authorship",     "program will not parse"),
+    ("NameError",              "authorship",     "undefined name"),
+)
+
+_MSG = (
+    ("no such file",           "file access",    "no such file"),
+    ("permission denied",      "file access",    "permission denied"),
+    ("read-only file system",  "file access",    "read-only filesystem"),
+    ("timed out",              "execution",      "timed out"),
+    ("connection refused",     "network",        "connection refused"),
+    ("name or service not known", "network",     "no dns"),
+    ("temporary failure in name resolution", "network", "no dns"),
+    ("no space left",          "execution",      "disk full"),
+)
+
+
+def classify(error_text: str) -> tuple:
+    """Name a failure from its error alone. Never from the task."""
+    text = (error_text or "").strip()
+    low = text.lower()
+    for needle, where, why in _MSG:
+        if needle in low:
+            return where, why
+    # The LAST exception named is the one that actually fired; earlier
+    # ones in a traceback are the chain that led there.
+    for needle, where, why in _PATHOLOGIES:
+        if needle in text:
+            return where, why
+    if not text:
+        return "unknown", "no error reported"
+    first = text.splitlines()[-1][:80] if text.splitlines() else text[:80]
+    return "unclassified", first

@@ -279,6 +279,22 @@ def _cases() -> list[tuple[str, str, callable]]:
         return F.cell_of("reading a log file", "No such file") != \
                F.cell_of("reading a config", "No such file")
 
+    def flywheel_credits_consistent_harm() -> bool:
+        import flywheel_v1 as F
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "fw.json")
+            for _ in range(12):
+                F.record("file access", "no such file",
+                         succeeded=False, path=path)
+            # The e-process tests against ANY consistent deviation, so
+            # failing every time also clears the magnitude threshold --
+            # e=107 here against a threshold of 20. Magnitude alone
+            # would promote the one thing that never works.
+            return F.status(F.cell_of("file access", "no such file"),
+                            path=path)["credited"]
+
+    add("flywheel_v1.status", "a correction that fails every single time",
+        flywheel_credits_consistent_harm)
     add("flywheel_v1.status", "a procedure taught but never evidenced",
         flywheel_withholds_uncredited)
     add("flywheel_v1.status", "a correction that only works half the time",

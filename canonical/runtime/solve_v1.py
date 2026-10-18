@@ -163,6 +163,13 @@ def solve(goal: str, root: str, model, steps: int = 6,
     trace: list[dict] = []
     state = observe(root)
     verdict = GAVE_UP
+    # Pathologies hit on the way. Recorded at the END, once it is known
+    # whether the run recovered -- a failure that was later fixed is
+    # evidence, and a failure that was not is evidence too, but they are
+    # not the same evidence and scoring them as you go would flatter the
+    # loop for having struggled.
+    hit: list[str] = []
+    learned_for_next = None
 
     for step in range(1, steps + 1):
         seeing = {
@@ -172,6 +179,9 @@ def solve(goal: str, root: str, model, steps: int = 6,
             "changed": state["changed"],
             "preview": state.get("previews") or {},
             "last": trace[-1]["result"] if trace else None,
+            # What a PREVIOUS run learned about this exact way of
+            # failing, so the model does not have to rediscover it.
+            "learned": learned_for_next,
         }
         try:
             program = model(goal, seeing)
@@ -188,8 +198,40 @@ def solve(goal: str, root: str, model, steps: int = 6,
         trace.append({"step": step, "result": result,
                       "changed": after["changed"]})
         state = after
+
+        # Name the failure from the error alone, then ask what has been
+        # learned about it. Both are keyed on how things break, never on
+        # what the task was.
+        learned_for_next = None
+        if result["exit"] not in (0, None) or result["timed_out"]:
+            try:
+                import flywheel_v1 as F
+                where, why = F.classify(result["err"] or result["out"] or "")
+                cell = F.cell_of(where, why)
+                # The pair, not the cell string: record() derives the
+                # cell itself, and handing it a cell would re-derive a
+                # nonsense one from the joined text.
+                hit.append((where, why))
+                status = F.status(cell)
+                if status["credited"] and status["procedure"]:
+                    learned_for_next = {"cell": cell,
+                                        "procedure": status["procedure"]}
+                trace[-1]["pathology"] = cell
+            except Exception:
+                pass
     else:
         verdict = GAVE_UP
+
+    # The flywheel turns here: every pathology met on the way is scored
+    # by whether the run recovered from it.
+    if hit:
+        try:
+            import flywheel_v1 as F
+            recovered = (verdict == DONE)
+            for where, why in dict.fromkeys(hit):
+                F.record(where, why, recovered)
+        except Exception:
+            pass
 
     return {"schema": SCHEMA, "verdict": verdict, "goal": goal,
             "steps": len(trace), "trace": trace,
