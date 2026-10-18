@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_pointwise_optimality_certificate_v1.py.auto.v1",
- "elapsed_ms": 0.273,
+ "elapsed_ms": 0.34,
  "independent_run_reference": {
-  "github_run_id": 39104152351,
+  "github_run_id": 39104315099,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "8900a097-0fb8-460c-86e9-1e7209f937d2",
+   "jti": "1c49a24f-a1f2-45f0-9292-b8f9eef04ebe",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39104152351",
+   "run_id": "39104315099",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
