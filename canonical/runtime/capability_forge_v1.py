@@ -236,8 +236,37 @@ def mutations(case: dict) -> list[dict]:
     break has no known failure mode, and admitting it would mean being
     unable to tell its working from its breaking.
     """
+    # A NUMBER IS NOT A STRING. Only string values were ever corrupted, so
+    # any function taking an int, a list or a dict produced ZERO mutants,
+    # was recorded as impossible to kill, and was refused -- not because it
+    # could not fail but because nothing had been tried on it. Every JSON
+    # type the invoker can carry now has operators.
     out = []
     for key, value in case.items():
+        if isinstance(value, bool):
+            out.append(dict(case, **{key: not value}))
+            continue
+        if isinstance(value, int):
+            for bad_val in (value + 1, 0, -1, 10 ** 9):
+                if bad_val != value:
+                    out.append(dict(case, **{key: bad_val}))
+            continue
+        if isinstance(value, float):
+            for bad_val in (value + 1.5, 0.0, -1.0):
+                if bad_val != value:
+                    out.append(dict(case, **{key: bad_val}))
+            continue
+        if isinstance(value, list):
+            out.append(dict(case, **{key: []}))
+            out.append(dict(case, **{key: ["\x00not a real value\x00"]}))
+            if value:
+                out.append(dict(case, **{key: [{"__forge__": 1}]}))
+                out.append(dict(case, **{key: list(value) + list(value)}))
+            continue
+        if isinstance(value, dict):
+            out.append(dict(case, **{key: {}}))
+            out.append(dict(case, **{key: {"__forge__": "\x00not real\x00"}}))
+            continue
         if not isinstance(value, str) or not value:
             continue
         low = value.lower()
@@ -275,8 +304,68 @@ def _state():
                 return data
         except Exception:
             pass
-    return {"schema": SCHEMA, "forged": {}}
+    return {"schema": SCHEMA, "forged": {}, "refused": {}}
 
+
+def _save(data: dict) -> dict:
+    STATE.parent.mkdir(parents=True, exist_ok=True)
+    tmp = STATE.with_suffix(".tmp")
+    tmp.write_text(json.dumps(data, indent=1, sort_keys=True) + "\n",
+                   encoding="utf-8")
+    tmp.replace(STATE)
+    return data
+
+
+def _refusal_key(entry) -> str:
+    return "%s::%s" % (str((entry or {}).get("source_rel") or ""),
+                       str((entry or {}).get("function") or ""))
+
+
+def was_refused(entry) -> bool:
+    """Has this function already failed the forge? Then do not pay again."""
+    return _refusal_key(entry) in (_state().get("refused") or {})
+
+
+def forge_and_record(entry, root=None, seed_cases=None) -> dict:
+    """Forge one inventory function and make the outcome permanent either way.
+
+    Admitted, it is registered as a capability. Refused, the refusal is
+    recorded with its reasons, so the next goal that reaches for this
+    function does not repeat an attempt that already failed. Both
+    outcomes are learning; only one of them is a capability.
+    """
+    root = Path(root) if root is not None else ROOT
+    report = forge_function(entry, root, seed_cases=seed_cases)
+    data = _state()
+    data.setdefault("forged", {})
+    data.setdefault("refused", {})
+    key = _refusal_key(entry)
+    if report.get("admitted"):
+        name = str(entry.get("function") or "")
+        src = str(entry.get("source_rel") or "")
+        params = list(entry.get("required") or [])
+        contract = {"module": src, "function": name, "parameters": params}
+        cases = candidate_inputs(params, root,
+                                 annotations=signature_of(src, name, root),
+                                 source_rel=src, function=name)
+        ent = register(src, contract, cases, function=name)
+        report["capability_id"] = ent["capability_id"]
+        data["refused"].pop(key, None)
+    else:
+        # forge_function names a capability_id before it has earned one. A
+        # refused function must not carry an id, or a reader can mistake it
+        # for something registered and reachable.
+        report.pop("capability_id", None)
+        report["capability_id"] = None
+        data["refused"][key] = {
+            "module": str(entry.get("source_rel") or ""),
+            "function": str(entry.get("function") or ""),
+            "reasons": list(report.get("reasons") or [])[:6],
+            "checks": report.get("checks") or {},
+            "refused_at": time.time(),
+        }
+    _save(data)
+    return report
 
 def register(module: str, contract: dict, cases: list[dict],
           function: str | None = None) -> dict:
@@ -566,7 +655,8 @@ _EXT_BY_TOKEN_WORDS = ("json", "yaml", "pdf", "docx", "xlsx", "sqlite",
 
 
 def forge_function(entry: dict, root: Path | None = None,
-                   require_kill: bool = True) -> dict:
+                   require_kill: bool = True,
+                   seed_cases: list | None = None) -> dict:
     """Put one inventoried function through the same six tests.
 
     The 5,221 inventoried functions are pure Python already in this
@@ -606,6 +696,22 @@ def forge_function(entry: dict, root: Path | None = None,
                                 str(entry.get("source_rel") or ""), name, root),
                             source_rel=str(entry.get("source_rel") or ""),
                             function=name)
+    # A CASE THE MACHINE ACTUALLY NEEDED BEATS ONE IT INVENTED.
+    #
+    # When a goal reached into the inventory and this function ran on the
+    # values that goal supplied, those values are real: they came from
+    # something the machine was asked to do, and they are the reason the
+    # forge was consulted at all. Invented values are only a fallback, so
+    # the goal-derived case is tried first, deduplicated against the rest.
+    if seed_cases:
+        merged, seen = [], set()
+        for case in list(seed_cases) + list(cases):
+            key = json.dumps(case, sort_keys=True, default=str)
+            if key in seen:
+                continue
+            seen.add(key)
+            merged.append(case)
+        cases = merged[:3]
     runs = []
     for i, case in enumerate(cases):
         ok, out = call(case)

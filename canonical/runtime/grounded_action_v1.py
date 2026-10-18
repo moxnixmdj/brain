@@ -366,6 +366,42 @@ def _try_bridge(goal, root, goal_paths, started):
             result = MB.invoke(entry, inputs, root)
         except Exception:
             continue
+        # "IT RETURNED" IS NOT "IT WORKED".
+        #
+        # The bridge hands back whatever the inventory produced and calls it
+        # an unverified result. But a run that reports its own failure, or
+        # that reports finding nothing, is not an answer at all -- and the
+        # seed values that produced it came from the goal, so a failing run
+        # was being offered as the machine's response to the goal. The two
+        # predicates the forge already uses decide it; a failing run falls
+        # through to the next candidate instead of being returned.
+        try:
+            from canonical.runtime import capability_forge_v1 as FG
+            if isinstance(result, dict) and (FG.is_vacuous(result)
+                                             or FG.self_reported_failure(result)):
+                continue
+        except Exception:
+            pass
+        # It ran once. That is the moment to make it permanent: either it
+        # survives the forge and becomes a capability this machine holds,
+        # or the refusal is recorded so the next goal does not repeat an
+        # attempt that already failed. Until now the bridge re-derived the
+        # same unverified answer every time and remembered none of it.
+        forge_outcome = None
+        try:
+            from canonical.runtime import capability_forge_v1 as FG
+            if not FG.was_refused(entry):
+                rep = FG.forge_and_record(entry, root, seed_cases=[inputs])
+                forge_outcome = {"admitted": bool(rep.get("admitted")),
+                           "capability_id": rep.get("capability_id"),
+                           "checks": rep.get("checks") or {},
+                           "reasons": list(rep.get("reasons") or [])[:3]}
+            else:
+                forge_outcome = {"admitted": False, "checks": {},
+                                "reasons": ["ALREADY_REFUSED__NOT_RETRIED"]}
+        except Exception as exc:
+            forge_outcome = {"admitted": False, "checks": {},
+                                "reasons": ["FORGE_RAISED:" + type(exc).__name__]}
         return {
             "schema": SCHEMA,
             "ok": False,
@@ -379,6 +415,8 @@ def _try_bridge(goal, root, goal_paths, started):
             "passing_cases": entry.get("passing_cases"),
             "authority": ("NONE__SANDBOX_MEASUREMENT_OF_EXISTING_TESTS"
                           "_NOT_A_TRUE_CAPABILITY_RECEIPT"),
+            "forge_outcome": forge_outcome,
+            "remembered": bool(forge_outcome and forge_outcome.get("admitted")),
             "executed": True,
             "verified": False,
             "expect": "NO_EXPECT_DECLARED__TIER_IS_NOT_VERIFICATION",
