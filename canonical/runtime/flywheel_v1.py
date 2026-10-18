@@ -1,0 +1,180 @@
+"""The part that was missing: the machine gets better for having worked.
+
+Everything before this ran a task, proved what happened, and forgot it.
+The next identical task started from nothing and failed in the same way
+again. That is not how the car works. The car is not valuable because
+one vehicle drives well; it is valuable because every mile driven by
+every car makes the next mile better. The architecture is half of it.
+The accumulation is the other half, and it is the half that compounds.
+
+So this is the flywheel, and the rules it must obey to be one.
+
+KEYED ON PATHOLOGY, NOT ON TASKS.
+    A memory of "how I fixed that one task" is useless the moment the
+    task changes, and this system exists to handle tasks it has never
+    seen. What repeats is not the task; it is the way things break.
+    So the unit of memory is the cell (WHERE x WHY) -- what kind of
+    thing failed, and how it failed. "Reading a file" x "No such file"
+    recurs across every domain there is. That cell is worth remembering.
+    A task is not. Archiving task instances is how you build a memory
+    that grows forever and generalises never.
+
+CREDITED BY ARITHMETIC, NEVER BY ASSERTION.
+    The rule that keeps this honest: a correction is promoted only when
+    evidence clears an ANYTIME-VALID gate. Not "it worked once", and
+    not a mean that drifted upward. A plain mean improves about 60% of
+    the time for a change that does nothing at all, and a fixed-sample
+    test is invalid the moment anyone peeks at it -- which, in a loop
+    that checks constantly, is always. So the evidence is accumulated
+    as an e-process, whose supremum Ville's inequality bounds however
+    often it is inspected. Peeking cannot inflate it.
+
+EVIDENCE, NOT MEMORIES.
+    What is stored per cell is a sequence of +/-1 outcomes and, once
+    credited, one procedure. Not transcripts, not embeddings, not a log
+    to be mined later. The store stays small enough to read in one pass
+    forever, because the unit is a pathology and not an episode.
+
+WHAT IT BUYS IS SPEED.
+    A credited cell means the next run is told, before it acts, how this
+    failure was last resolved -- so it does not have to discover it
+    again by failing. Fewer steps is the only thing that makes a loop
+    faster, and this is the only mechanism here that reduces them.
+"""
+from __future__ import annotations
+
+import json
+import os
+import tempfile
+from pathlib import Path
+
+SCHEMA = "PROJECT_BRAIN_FLYWHEEL_V1"
+
+DEFAULT_STATE = os.environ.get(
+    "BRAIN_FLYWHEEL_STATE",
+    str(Path(tempfile.gettempdir()) / "brain_flywheel.json"))
+
+# Ville's inequality: P(ever crossing 1/alpha) <= alpha, however often
+# the running value is inspected. 1/0.05 = 20.
+DEFAULT_ALPHA = 0.05
+
+
+def _load(path: str = DEFAULT_STATE) -> dict:
+    try:
+        return json.loads(Path(path).read_text())
+    except Exception:
+        return {"schema": SCHEMA, "cells": {}}
+
+
+def _save(state: dict, path: str = DEFAULT_STATE) -> None:
+    try:
+        Path(path).parent.mkdir(parents=True, exist_ok=True)
+        Path(path).write_text(json.dumps(state, indent=1, sort_keys=True))
+    except OSError:
+        pass
+
+
+# The operation, stripped of whatever it was performed on. Getting this
+# wrong is the difference between a flywheel and a diary: keyed on the
+# OBJECT -- "reading a log file", "reading a config", "reading a
+# spreadsheet" -- every task lands in a cell of its own, n stays at 1
+# forever, and nothing is ever learned. Measured, that is exactly what
+# happened on the first run.
+#
+# So the cell records the OPERATION and the WAY IT FAILED. "Reading" x
+# "No such file" recurs in every domain there is. "Reading a log file"
+# happens once.
+_VERBS = ("reading", "writing", "parsing", "opening", "creating",
+          "deleting", "moving", "copying", "listing", "searching",
+          "counting", "summarising", "fetching", "running", "installing",
+          "editing", "formatting", "converting", "downloading")
+
+
+def _operation(where: str) -> str:
+    """Reduce 'reading a log file' to 'reading'."""
+    words = " ".join(str(where or "?").lower().split()).split()
+    if not words:
+        return "?"
+    for w in words:
+        stem = w.rstrip(".,:;")
+        if stem in _VERBS:
+            return stem
+        for v in _VERBS:
+            if stem.startswith(v[:5]):
+                return v
+    return words[0].rstrip(".,:;")
+
+
+def cell_of(where: str, why: str) -> str:
+    """The address of a recurring failure: (operation x failure mode)."""
+    w = _operation(where)
+    y = " ".join(str(why or "?").lower().split())[:60]
+    return f"{w}|{y}"
+
+
+def record(where: str, why: str, succeeded: bool,
+           path: str = DEFAULT_STATE) -> dict:
+    """One more datum: did resolving this pathology work, or not.
+
+    +1 when the correction held, -1 when it did not. The sign is the
+    unit of evidence, and it is deliberately coarse -- anything finer
+    invites a score the caller gets to grade itself on.
+    """
+    state = _load(path)
+    key = cell_of(where, why)
+    entry = state["cells"].setdefault(
+        key, {"where": where, "why": why, "observations": [],
+              "procedure": None, "credited": False})
+    entry["observations"].append(1 if succeeded else -1)
+    _save(state, path)
+    return status(key, path=path)
+
+
+def status(cell: str, alpha: float = DEFAULT_ALPHA,
+           path: str = DEFAULT_STATE) -> dict:
+    """Has this correction earned the right to be reused?"""
+    state = _load(path)
+    entry = state["cells"].get(cell)
+    if not entry:
+        return {"cell": cell, "n": 0, "e_value": 0.0,
+                "credited": False, "reason": "no evidence yet",
+                "procedure": None}
+    try:
+        from credit_gates_v1 import e_process
+        e = e_process(entry["observations"], bound=1.0)
+        e_value = float(e.get("e_value") or 0.0)
+        n = int(e.get("n") or 0)
+    except Exception:
+        # No gate, no credit. Refusing to fall back to a mean is the
+        # point: an ungated average would promote almost anything.
+        e_value, n = 0.0, len(entry["observations"])
+    threshold = 1.0 / alpha if alpha and alpha > 0 else 20.0
+    credited = e_value >= threshold
+    entry["credited"] = credited
+    _save(state, path)
+    return {"cell": cell, "n": n, "e_value": round(e_value, 3),
+            "threshold": round(threshold, 1), "credited": credited,
+            "reason": ("evidence clears the anytime-valid gate" if credited
+                       else f"e={e_value:.2f} < {threshold:.0f} "
+                            f"after {n} observation(s)"),
+            "procedure": entry.get("procedure") if credited else None}
+
+
+def teach(cell: str, procedure: str, path: str = DEFAULT_STATE) -> None:
+    """Attach the resolution. It is only handed back once credited."""
+    state = _load(path)
+    entry = state["cells"].setdefault(
+        cell, {"where": cell, "why": "", "observations": [],
+               "procedure": None, "credited": False})
+    entry["procedure"] = procedure
+    _save(state, path)
+
+
+def recall(where: str, why: str, path: str = DEFAULT_STATE) -> dict:
+    """What has been learned about this failure, if anything."""
+    return status(cell_of(where, why), path=path)
+
+
+def cells(path: str = DEFAULT_STATE) -> list:
+    state = _load(path)
+    return [status(k, path=path) for k in sorted(state["cells"])]

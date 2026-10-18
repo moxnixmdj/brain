@@ -249,6 +249,43 @@ def _cases() -> list[tuple[str, str, callable]]:
     add("solve_v1.observe", "a tree that changed without it noticing",
         observe_sees_a_change)
 
+    # --- the flywheel --------------------------------------------------
+    def flywheel_withholds_uncredited() -> bool:
+        import flywheel_v1 as F
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "fw.json")
+            cell = F.cell_of("writing a report", "disk full")
+            F.teach(cell, "retry after clearing space", path=path)
+            # Taught but never evidenced: it must not be handed back.
+            return F.status(cell, path=path)["procedure"] is not None
+
+    def flywheel_credits_a_coin_flip() -> bool:
+        import flywheel_v1 as F
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "fw.json")
+            cell = F.cell_of("parsing a page", "bad selector")
+            for i in range(40):
+                F.record("parsing a page", "bad selector",
+                         succeeded=(i % 2 == 0), path=path)
+            # A correction that works half the time must never earn
+            # credit, however many times it is tried.
+            return F.status(cell, path=path)["credited"]
+
+    def flywheel_splits_cells() -> bool:
+        import flywheel_v1 as F
+        # The bug that would have killed it: keyed on the object rather
+        # than the operation, every task gets a cell of its own and
+        # nothing ever accumulates.
+        return F.cell_of("reading a log file", "No such file") != \
+               F.cell_of("reading a config", "No such file")
+
+    add("flywheel_v1.status", "a procedure taught but never evidenced",
+        flywheel_withholds_uncredited)
+    add("flywheel_v1.status", "a correction that only works half the time",
+        flywheel_credits_a_coin_flip)
+    add("flywheel_v1.cell_of", "cells keyed on the object rather than the "
+        "operation", flywheel_splits_cells)
+
     # --- confinement ---------------------------------------------------
     def confine_blocks_escape() -> bool:
         import confine_v1 as C
