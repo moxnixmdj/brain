@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/p3_binary_explicit_top_law_region_verifier_v1.py.auto.v1",
- "elapsed_ms": 30.721,
+ "elapsed_ms": 33.93,
  "independent_run_reference": {
-  "github_run_id": 39088600956,
+  "github_run_id": 39088785063,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "52693f39-dd25-4bbe-ac21-7cbb1af24d12",
+   "jti": "bfb97f79-a81d-49c4-9901-12f0a1b3e96a",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39088600956",
+   "run_id": "39088785063",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
