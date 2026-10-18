@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/coverage_cc_r3_mission_scope_bridge_guard_v1.py.auto.v1",
- "elapsed_ms": 31.859,
+ "elapsed_ms": 42.651,
  "independent_run_reference": {
-  "github_run_id": 39113233467,
+  "github_run_id": 39113440973,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "59b0004e-56f2-425f-8762-9d40fc332d84",
+   "jti": "96fb8623-1a44-412f-ba0c-595cf71bbf7c",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39113233467",
+   "run_id": "39113440973",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
