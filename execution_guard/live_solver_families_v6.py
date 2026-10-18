@@ -67,8 +67,17 @@ class _CoupledBug:
         return _rel(sorted(self.tests)[0])
 
 
-def fresh_coupled_bug(rng: random.Random, work: Path, i: int, prefix: str = "coupled") -> _CoupledBug:
-    """Two defects in one module, and one test that needs BOTH fixes."""
+def fresh_coupled_bug(rng: random.Random, work: Path, i: int, prefix: str = "coupled",
+                      mutate: bool = True) -> _CoupledBug:
+    """Two defects in one module, and one test that needs BOTH fixes.
+
+    mutate=False emits the same fixture with the defects NOT applied, so every
+    test passes. The same domain splits by polarity and the two halves want
+    opposite fixtures: repair capabilities need a failing baseline to repair,
+    while python.tests.audit.unittest needs a passing one -- handed the red
+    fixture it reports TEST_FILE_FAILED, which is the fixture's fault, not the
+    capability's. Default True preserves the existing 8/8 measurement.
+    """
     d = work / f"{prefix}_{i}_{_word(rng, 4)}"
     d.mkdir(parents=True, exist_ok=True)
     mod = "calc_" + _word(rng, 5)
@@ -86,7 +95,7 @@ def fresh_coupled_bug(rng: random.Random, work: Path, i: int, prefix: str = "cou
     bad1 = good1.replace("a + b", "a - b")
     bad2 = good2.replace("total + v", "total - v")
 
-    source = "\n".join([bad1, bad2, good3])
+    source = "\n".join([bad1, bad2, good3] if mutate else [good1, good2, good3])
     src = d / f"{mod}.py"
     src.write_text(source, encoding="utf-8")
 

@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import argparse
 import importlib.util
+import base64
 import json
 import random
 import re
@@ -75,27 +76,91 @@ def _python_repair_args(cid: str, sig: dict, rng, ws: Path) -> dict | None:
     The domain is recognised by the SHAPE of the inputs (a source root plus tests), not by a
     list of capability ids, so it keeps working as the registry grows.
     """
-    if "source_root" not in sig:
-        return None
-    if not ({"test_paths", "test_argv", "test_path"} & set(sig)):
+    # The domain is "operates on python source", which is the presence of ANY
+    # source slot -- not source_root plus tests. Requiring tests as well skipped
+    # python.tests.audit.unittest (no test_paths) and patch.search (no
+    # source_root), which are the same domain reached by a different door.
+    if not ({"source_root", "source_path", "source_paths"} & set(sig)):
         return None
     from execution_guard import live_solver_families_v6 as v6
 
     root = ws / f"repo{rng.randrange(1 << 30)}"
     root.mkdir(parents=True, exist_ok=True)
-    bug = v6.fresh_coupled_bug(rng, root, rng.randrange(1 << 20))
+    # polarity: repair needs a failing baseline, an audit needs a passing one.
+    # handing the red fixture to python.tests.audit.unittest produced
+    # TEST_FILE_FAILED -- the fixture contradicting what the capability means.
+    green = ("audit" in cid or "verify" in cid)
+    bug = v6.fresh_coupled_bug(rng, root, rng.randrange(1 << 20), mutate=not green)
 
     args: dict = {}
     for slot, want in sig.items():
         if want == ts.PATH_DIR and ("source" in slot or "root" in slot):
-            args[slot] = str(root)
+            # the fixtures land in a subdirectory of root, and adapters glob
+            # non-recursively, so the root that works is the one holding the
+            # files. Pointing at root found nothing: TEST_AUDIT_EMPTY.
+            args[slot] = str(bug.src.parent)
         elif want == ts.PATH_LIST and "test" in slot:
             args[slot] = [str(p) for p in bug.tests]
         elif want == ts.ARGV:
             args[slot] = [sys.executable, "-B", str(sorted(bug.tests)[0])]
+        # caps that take a single file, or a list of files, rather than a root
+        elif want == ts.PATH_FILE and "source" in slot:
+            args[slot] = str(bug.src)
+        elif want == ts.PATH_LIST and "source" in slot:
+            args[slot] = [str(bug.src)]
     if "test_paths" not in args and "test_paths" in sig:
         args["test_paths"] = [str(p) for p in bug.tests]
+    # a discovery glob is not free text: a random word matches no test file and
+    # the adapter answers TEST_AUDIT_EMPTY, which is the sampler lying again
+    if "pattern" in sig:
+        args["pattern"] = "test_*.py"
     return args or None
+
+
+def _saccr_args(cid: str, sig: dict, rng, ws: Path) -> dict | None:
+    """finance.saccr.credit.addon.v1 rejects anything that is not {"trades": [...]}.
+
+    saccr_credit_addon_gen_v1 emits exactly that, so the fix is to use it rather
+    than to invent a schema the adapter might accept.
+    """
+    if "trades" not in cid and "saccr" not in cid:
+        return None
+    from canonical.capabilities.true.generators import saccr_credit_addon_gen_v1 as gen
+
+    inst = gen.generate(rng, 1)[0]
+    path = ws / f"trades{rng.randrange(1 << 30)}.json"
+    path.write_text(json.dumps(inst), encoding="utf-8")
+    out = {}
+    for slot, want in sig.items():
+        if want == ts.PATH_FILE:
+            out[slot] = str(path)
+    return out or None
+
+
+def _docx_args(cid: str, sig: dict, rng, ws: Path) -> dict | None:
+    """The docx verifiers need a real .docx, not a file of plausible text.
+
+    docx_exact_text_edit_gen_v1 emits one base64-encoded. expected_structure is
+    left to the sampler deliberately: guessing a structure the document does not
+    have would turn a real signal into a false pass.
+    """
+    if not cid.startswith("docx."):
+        return None
+    if not ({"document_path", "docx_path", "path"} & set(sig)):
+        return None
+    from canonical.capabilities.true.generators import docx_exact_text_edit_gen_v1 as gen
+
+    inst = gen.generate(rng, 1)[0]
+    b64 = inst.get("docx_b64")
+    if not b64:
+        return None
+    path = ws / f"doc{rng.randrange(1 << 30)}.docx"
+    path.write_bytes(base64.b64decode(b64))
+    out = {}
+    for slot, want in sig.items():
+        if want == ts.PATH_FILE:
+            out[slot] = str(path)
+    return out or None
 
 
 def _load_adapter(adapter_path: str, name: str):
@@ -167,7 +232,9 @@ def sweep_one(cid: str, entry: dict, instances: int, seed: int, work: Path) -> d
 
     for _ in range(instances):
         # a domain generator wins over generic sampling wherever one applies
-        domain = _python_repair_args(cid, sig, rng, ws) or {}
+        domain = (_python_repair_args(cid, sig, rng, ws)
+                  or _saccr_args(cid, sig, rng, ws)
+                  or _docx_args(cid, sig, rng, ws) or {})
         try:
             # the capability id is what lets content rules be scoped per capability;
             # without it a rule for one capability's output_path would silently not apply
