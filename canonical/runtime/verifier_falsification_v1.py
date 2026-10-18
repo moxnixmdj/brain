@@ -270,6 +270,44 @@ def _cases() -> list[tuple[str, str, callable]]:
             # refusing everything reads as safe and does no work at all.
             return not Path(tmp, "legit.txt").exists()
 
+    def confine_blocks_network() -> bool:
+        import confine_v1 as C
+        if not C.available():
+            return True
+        with tempfile.TemporaryDirectory() as tmp:
+            r = C.run("import socket\n"
+                      "socket.create_connection(('github.com',443),timeout=3)\n"
+                      "print('REACHED')", tmp, timeout=90)
+            return "REACHED" in (r["output"] or "")
+
+    def confine_hides_user_data() -> bool:
+        import confine_v1 as C
+        if not C.available():
+            return True
+        with tempfile.TemporaryDirectory() as tmp:
+            r = C.run("import os\n"
+                      "print('HOME' if os.path.exists('/home') else 'no /home')\n"
+                      "print('ETC' if os.path.exists('/etc') else 'no /etc')",
+                      tmp, timeout=60)
+            out = r["output"] or ""
+            return "HOME" in out or "ETC" in out
+
+    def confine_caps_resources() -> bool:
+        import confine_v1 as C
+        if not C.available():
+            return True
+        with tempfile.TemporaryDirectory() as tmp:
+            # Must not run forever: an uncapped bomb takes the machine.
+            r = C.run("x=[]\nwhile True: x.append(' '*10**7)",
+                      tmp, timeout=45)
+            return r["verdict"] == "INDETERMINATE"   # i.e. it never came back
+
+    add("confine_v1.run", "a program reaching the network",
+        confine_blocks_network)
+    add("confine_v1.run", "a program reading user data outside the project",
+        confine_hides_user_data)
+    add("confine_v1.run", "a program that never stops consuming memory",
+        confine_caps_resources)
     add("confine_v1.run", "a program writing outside the project",
         confine_blocks_escape)
     add("confine_v1.run", "confinement so strict it blocks legitimate work",

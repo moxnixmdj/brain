@@ -42,10 +42,29 @@ Measured:
     /     write     BLOCKED
     /tmp  write     BLOCKED
 
-Limits, stated: this is filesystem confinement, not a syscall filter. A
-program can still read anything bind-mounted, talk to the network, and
-consume the machine. It cannot PERSIST a change anywhere but the
-project, which is the damage that matters.
+What is actually visible inside, measured rather than assumed:
+
+    /home /etc /tmp /var /root /opt /srv /proc   all INVISIBLE
+    /usr /bin /lib /lib64                        read-only
+    /project                                     the only writable place
+
+So reads are confined too, not only writes. An earlier note claimed a
+program could "read anything bind-mounted", which was both trivially
+true and misleading: the only things bind-mounted are the operating
+system itself. User data outside the project is not reachable.
+
+The network is cut with the network namespace (unshare -n), and CPU,
+address space, file size, process count and descriptors are capped with
+rlimits. Without those, filesystem confinement alone would still let
+one program take the whole machine by forking or allocating.
+
+Limits that remain, stated: this is not a syscall filter. A confined
+program can still execute anything the interpreter can do against the
+operating system it can see, and seccomp -- the thing that would
+actually restrict syscalls -- is not attempted here. What is enforced
+is that no change can PERSIST outside the project, no user data
+outside it can be READ, no network can be reached, and no one program
+can consume the machine.
 """
 from __future__ import annotations
 
@@ -100,8 +119,28 @@ import shutil as _sh
 _sh.copyfile(SCRIPT, BASE + "/work" + INSIDE)
 os.chroot(BASE)
 os.chdir("/project")
+
+# Resource limits, so a confined program cannot consume the machine.
+# Confinement of the FILESYSTEM without this would still let one
+# program take everything: fork forever, allocate until swap dies, or
+# write until the disk is full. Set in the child, before exec.
+def _limits():
+    import resource
+    for k, v in (
+        ("RLIMIT_CPU", 60),          # seconds of CPU
+        ("RLIMIT_AS", 2 << 30),      # 2 GiB address space
+        ("RLIMIT_FSIZE", 1 << 30),   # 1 GiB per file
+        ("RLIMIT_NPROC", 512),       # processes
+        ("RLIMIT_NOFILE", 1024),     # descriptors
+    ):
+        try:
+            lim = getattr(resource, k)
+            resource.setrlimit(lim, (v, v))
+        except Exception:
+            pass
+
 r = subprocess.run([sys.executable, "/work" + INSIDE],
-                   capture_output=True, text=True)
+                   capture_output=True, text=True, preexec_fn=_limits)
 sys.stdout.write(r.stdout or "")
 sys.stderr.write(r.stderr or "")
 sys.exit(r.returncode if r.returncode is not None else 91)
@@ -152,7 +191,7 @@ def run(program: str, root: str, timeout: int = 300) -> dict:
         Path(helper_path).write_text(helper)
         try:
             r = subprocess.run(
-                ["unshare", "-r", "-m", sys.executable, helper_path,
+                ["unshare", "-r", "-m", "-n", sys.executable, helper_path,
                  base, os.path.realpath(root), script],
                 timeout=timeout, capture_output=True, text=True)
             return {"schema": SCHEMA,
