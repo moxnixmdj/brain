@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/p3_binary_explicit_source_membership_v1.py.auto.v1",
- "elapsed_ms": 2.629,
+ "elapsed_ms": 2.601,
  "independent_run_reference": {
-  "github_run_id": 39160830706,
+  "github_run_id": 39161075342,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "9751bc61-31c0-4542-ae0b-a1c0a08bc9e3",
+   "jti": "4ea815a9-8724-454c-a291-0fb5e45219f4",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39160830706",
+   "run_id": "39161075342",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
