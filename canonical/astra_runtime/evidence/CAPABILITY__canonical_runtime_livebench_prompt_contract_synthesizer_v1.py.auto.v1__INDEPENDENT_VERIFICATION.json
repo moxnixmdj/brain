@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_prompt_contract_synthesizer_v1.py.auto.v1",
- "elapsed_ms": 4.226,
+ "elapsed_ms": 6.279,
  "independent_run_reference": {
-  "github_run_id": 39101477993,
+  "github_run_id": 39101645083,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "6da91568-19c8-4162-af82-11fdf73157ad",
+   "jti": "5f816b5a-e576-4c60-9bfc-ebac3a9856b7",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39101477993",
+   "run_id": "39101645083",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
