@@ -89,12 +89,40 @@ _VERBS = ("reading", "writing", "parsing", "opening", "creating",
           "counting", "summarising", "fetching", "running", "installing",
           "editing", "formatting", "converting", "downloading")
 
+# The vocabulary classify() speaks. These are categories already, not
+# descriptions, and they pass through whole rather than being trimmed.
+_CATEGORIES = frozenset((
+    "file access", "data access", "computation", "execution",
+    "environment", "network", "authorship", "unknown", "unclassified",
+))
+
 
 def _operation(where: str) -> str:
-    """Reduce 'reading a log file' to 'reading'."""
-    words = " ".join(str(where or "?").lower().split()).split()
+    """Reduce 'reading a log file' to 'reading'.
+
+    Two cases, and conflating them is how cells split apart.
+
+    A free-text description -- "reading a log file" -- must be cut down
+    to the operation, or every object creates its own cell and nothing
+    accumulates. Measured once already: three domains, three cells,
+    n=1 forever.
+
+    But a phrase that is ALREADY a category -- "file access", "network",
+    "computation", the vocabulary classify() emits -- is not prose to be
+    trimmed. Cutting it to its first word turns "file access" into
+    "file" and "data access" into "data": survivable while the wording
+    happens to be fixed, and the moment anyone rewords one, the same
+    pathology lands in two cells and neither ever earns credit.
+
+    So a known category passes through whole, and only genuine prose is
+    trimmed to its verb.
+    """
+    text = " ".join(str(where or "?").lower().split())
+    words = text.split()
     if not words:
         return "?"
+    if text in _CATEGORIES:
+        return text
     for w in words:
         stem = w.rstrip(".,:;")
         if stem in _VERBS:
@@ -102,6 +130,8 @@ def _operation(where: str) -> str:
         for v in _VERBS:
             if stem.startswith(v[:5]):
                 return v
+    # Unrecognised prose: keep the head, but not so much that rewording
+    # it moves the cell.
     return words[0].rstrip(".,:;")
 
 
