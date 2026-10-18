@@ -75,8 +75,9 @@
   },
   "archive.verify.tar_gz.gnu|verified": {
    "first_seen": 1792316179.6037304,
-   "last_seen": 1792322989.9976833,
+   "last_seen": 1792323284.1871977,
    "observations": [
+    1,
     1,
     1,
     1,
@@ -267,6 +268,43 @@
    "where": "image.extract.ocr.tesseract",
    "why": "BOUND_CAPABILITY_SOURCE_UNSUPPORTED"
   },
+  "json.query.jq|verified": {
+   "first_seen": 1792352260.1766033,
+   "last_seen": 1792352610.0267751,
+   "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "structural": false,
+   "where": "json.query.jq",
+   "why": "VERIFIED"
+  },
+  "math.numeric_expression.sympy|live_controller_execution_or_verification_failure": {
+   "first_seen": 1792352260.1185527,
+   "last_seen": 1792352505.5778987,
+   "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "math.numeric_expression.sympy",
+   "why": "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE"
+  },
   "pdf.extract.text.pypdf|bound_pypi_install_failed": {
    "first_seen": 1792312518.9164147,
    "last_seen": 1792312518.916418,
@@ -328,6 +366,23 @@
    "where": "pypi.provenance.audit_live_artifact",
    "why": "pypi.selection.available"
   },
+  "python.fault.localize.dynamic.dataflow.v1|verified": {
+   "first_seen": 1792352262.2900982,
+   "last_seen": 1792352612.1524954,
+   "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "structural": false,
+   "where": "python.fault.localize.dynamic.dataflow.v1",
+   "why": "VERIFIED"
+  },
   "python.software.repair.loop.strict_progress.ast.v1|python.patch.search.test_guided.ast.v1": {
    "first_seen": 1792314707.5759733,
    "last_seen": 1792314707.5759766,
@@ -348,10 +403,29 @@
    "where": "python.software.repair.loop.test_guided.ast.v1",
    "why": "python.patch.search.test_guided.ast.v1"
   },
+  "python.software.repair.loop.test_guided.ast.v1|verified": {
+   "first_seen": 1792352263.075244,
+   "last_seen": 1792352612.9518661,
+   "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "structural": false,
+   "where": "python.software.repair.loop.test_guided.ast.v1",
+   "why": "VERIFIED"
+  },
   "python.software.request.semantic_behavior.compile.v1|failed": {
    "first_seen": 1792322128.690607,
-   "last_seen": 1792322931.837077,
+   "last_seen": 1792323323.598104,
    "observations": [
+    -1,
+    -1,
     -1,
     -1,
     -1
@@ -386,8 +460,9 @@
   },
   "python.source.audit.ast|verified": {
    "first_seen": 1792312443.2595565,
-   "last_seen": 1792322993.4996438,
+   "last_seen": 1792323290.3054066,
    "observations": [
+    1,
     1,
     1,
     1,

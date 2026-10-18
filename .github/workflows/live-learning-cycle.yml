@@ -1,0 +1,86 @@
+name: live-learning-cycle
+# Public runner execution
+
+# The Brain's learning loop, on a schedule.
+#
+# The heartbeat proves the machine is ALIVE on fresh goals and correctly discards
+# every outcome -- it must not learn from its own exam.  Nothing else on a schedule
+# ever ran the learning path, so the machine's verified self-improvement loop,
+# complete and tested, executed exactly never in production.
+#
+# This is the switch.  One run of execution_guard/live_learning_cycle_v1.py:
+#   1. restore  yesterday's durable store from the previous run's artifact
+#   2. promote  drain queued work with the Brain-owned independent verifier
+#   3. attempt  fresh cases through the same live entry the heartbeat uses; each
+#               case's stdlib oracle judges the real artifact, and only that
+#               verdict is written to memory
+#   4. promote  again, so anything newly queued gets independently re-derived
+#   5. carry    the store forward as an artifact, because this workflow never
+#               pushes and the durable store is gitignored on purpose
+#
+# Authority: NONE.  Credit: 0.  It never pushes, never merges, never writes to main.
+
+on:
+  schedule:
+    # after the heartbeat (17 3), so the same day measures liveness and then learns
+    - cron: "43 4 * * *"
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "execution_guard/live_learning_cycle_v1.py"
+      - "execution_guard/live_solver_families_v5.py"
+      - ".github/workflows/live-learning-cycle.yml"
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  cycle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: install the tool dependencies the bound capabilities declare
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq jq pandoc poppler-utils qrencode sqlite3 tesseract-ocr zbar-tools zint weasyprint python3-docx python3-openpyxl python3-xlsxwriter || true
+          python3 -m pip install --quiet pillow sympy python-docx openpyxl xlsxwriter pypdf pyyaml msgpack pymongo yq weasyprint || true
+      - name: restore yesterday's durable store
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          mkdir -p state_in
+          run_id="$(gh run list --workflow live-learning-cycle.yml --status success --limit 1 --json databaseId -q '.[0].databaseId' || true)"
+          if [ -n "$run_id" ] && [ "$run_id" != "null" ]; then
+            echo "restoring store from run $run_id"
+            gh run download "$run_id" -n live-learning-cycle-state -D state_in || echo "no prior store artifact; starting fresh"
+          else
+            echo "no prior successful run; starting fresh"
+          fi
+          ls -la state_in || true
+      - name: run one learning cycle
+        run: |
+          set -euo pipefail
+          mkdir -p cycle_out
+          python3 execution_guard/live_learning_cycle_v1.py \
+            --state-in state_in \
+            --goals 12 \
+            --max-rounds 8 \
+            --max-actions 16 \
+            --out cycle_out
+      - name: publish the cycle verdict
+        if: always()
+        run: |
+          if [ -f cycle_out/SUMMARY.md ]; then cat cycle_out/SUMMARY.md >> "$GITHUB_STEP_SUMMARY"; else echo "the cycle produced no summary" >> "$GITHUB_STEP_SUMMARY"; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: live-learning-cycle-state
+          path: cycle_out/
+          if-no-files-found: error
