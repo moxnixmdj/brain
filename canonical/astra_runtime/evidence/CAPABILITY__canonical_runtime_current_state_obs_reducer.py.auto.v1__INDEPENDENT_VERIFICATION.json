@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/current_state_obs_reducer.py.auto.v1",
- "elapsed_ms": 33.851,
+ "elapsed_ms": 40.875,
  "independent_run_reference": {
-  "github_run_id": 39085082580,
+  "github_run_id": 39085287873,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "ec9e7c3c-af87-4dd3-99f4-c1b1dba7b54b",
+   "jti": "a2a64ce2-4782-49ea-80e8-e20620068f37",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39085082580",
+   "run_id": "39085287873",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
