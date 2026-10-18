@@ -1,4 +1,171 @@
 {
- "forged": {},
+ "forged": {
+  "forged.canonical/runtime/agency_finite_portfolio_generator_v1.py::generate": {
+   "entry": {
+    "action_template": {
+     "args": {
+      "beacon": "${input.beacon}"
+     },
+     "expect": {
+      "field": "adapter",
+      "type": "field_nonempty",
+      "value": null
+     },
+     "type": "invoke_capability"
+    },
+    "adapter_module": "canonical/runtime/agency_finite_portfolio_generator_v1.py::generate",
+    "capability_id": "forged.canonical/runtime/agency_finite_portfolio_generator_v1.py::generate",
+    "cost": 1,
+    "incremental_spend_usd": 0,
+    "keywords": [
+     "agency",
+     "canonical",
+     "finite",
+     "generate",
+     "generator",
+     "portfolio",
+     "py",
+     "runtime",
+     "v1"
+    ],
+    "platforms": [
+     "linux"
+    ],
+    "provides": [
+     "forged.canonical/runtime/agency_finite_portfolio_generator_v1.py::generate"
+    ],
+    "requires": [],
+    "source": {
+     "type": "brain_inventory"
+    },
+    "status": "FORGED__MACHINE_ADMITTED",
+    "verification": {
+     "authority": "MACHINE_ADMITTED__RAN_REPEATEDLY_AND_REFUSED_CORRUPTED_INPUT__NOT_A_SEMANTIC_RECEIPT",
+     "cases": 3,
+     "tier": "FORGED"
+    }
+   },
+   "example_case": {
+    "beacon": "canonical/runtime"
+   },
+   "forged_at": 1792321446.978327,
+   "function": "generate"
+  },
+  "forged.canonical/runtime/automationbench_mutation_compiler_v1.py::compile_sheets_append": {
+   "entry": {
+    "action_template": {
+     "args": {
+      "range_a1": "${input.range_a1}",
+      "row_values": "${input.row_values}",
+      "spreadsheet_id": "${input.spreadsheet_id}"
+     },
+     "expect": {
+      "field": "adapter",
+      "type": "field_nonempty",
+      "value": null
+     },
+     "type": "invoke_capability"
+    },
+    "adapter_module": "canonical/runtime/automationbench_mutation_compiler_v1.py::compile_sheets_append",
+    "capability_id": "forged.canonical/runtime/automationbench_mutation_compiler_v1.py::compile_sheets_append",
+    "cost": 1,
+    "incremental_spend_usd": 0,
+    "keywords": [
+     "append",
+     "automationbench",
+     "canonical",
+     "compile",
+     "compiler",
+     "mutation",
+     "py",
+     "runtime",
+     "sheets",
+     "v1"
+    ],
+    "platforms": [
+     "linux"
+    ],
+    "provides": [
+     "forged.canonical/runtime/automationbench_mutation_compiler_v1.py::compile_sheets_append"
+    ],
+    "requires": [],
+    "source": {
+     "type": "brain_inventory"
+    },
+    "status": "FORGED__MACHINE_ADMITTED",
+    "verification": {
+     "authority": "MACHINE_ADMITTED__RAN_REPEATEDLY_AND_REFUSED_CORRUPTED_INPUT__NOT_A_SEMANTIC_RECEIPT",
+     "cases": 3,
+     "tier": "FORGED"
+    }
+   },
+   "example_case": {
+    "range_a1": "hello",
+    "row_values": [
+     "a",
+     "b",
+     "c"
+    ],
+    "spreadsheet_id": "canonical/runtime"
+   },
+   "forged_at": 1792321448.9705427,
+   "function": "compile_sheets_append"
+  },
+  "forged.canonical/runtime/bounded_contextual_semantics.py::compile_context": {
+   "entry": {
+    "action_template": {
+     "args": {
+      "mentions": "${input.mentions}",
+      "text": "${input.text}"
+     },
+     "expect": {
+      "field": "adapter",
+      "type": "field_nonempty",
+      "value": null
+     },
+     "type": "invoke_capability"
+    },
+    "adapter_module": "canonical/runtime/bounded_contextual_semantics.py::compile_context",
+    "capability_id": "forged.canonical/runtime/bounded_contextual_semantics.py::compile_context",
+    "cost": 1,
+    "incremental_spend_usd": 0,
+    "keywords": [
+     "bounded",
+     "canonical",
+     "compile",
+     "context",
+     "contextual",
+     "py",
+     "runtime",
+     "semantics"
+    ],
+    "platforms": [
+     "linux"
+    ],
+    "provides": [
+     "forged.canonical/runtime/bounded_contextual_semantics.py::compile_context"
+    ],
+    "requires": [],
+    "source": {
+     "type": "brain_inventory"
+    },
+    "status": "FORGED__MACHINE_ADMITTED",
+    "verification": {
+     "authority": "MACHINE_ADMITTED__RAN_REPEATEDLY_AND_REFUSED_CORRUPTED_INPUT__NOT_A_SEMANTIC_RECEIPT",
+     "cases": 3,
+     "tier": "FORGED"
+    }
+   },
+   "example_case": {
+    "mentions": [
+     "a",
+     "b"
+    ],
+    "text": "canonical/runtime"
+   },
+   "forged_at": 1792321450.540209,
+   "function": "compile_context"
+  }
+ },
  "schema": "PROJECT_BRAIN_CAPABILITY_FORGE_V1"
 }

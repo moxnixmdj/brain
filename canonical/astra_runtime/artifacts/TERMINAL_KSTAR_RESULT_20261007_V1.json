@@ -1,0 +1,74 @@
+{
+  "abc_closed": false,
+  "conclusion": "unresolved",
+  "incremental_spend_usd": 0,
+  "missing_premises": [
+    "complete_declared_discriminator_quotient_scope_proved",
+    "reachable_target_supported_unsplittable_policy_conflict_empty_proved",
+    "scope_complete_parameterized_terminal_or_refinement_binding_proved"
+  ],
+  "model_dependency_count": 0,
+  "outcome": "UNRESOLVED",
+  "schema": "PROJECT_BRAIN_TERMINAL_KSTAR_RESULT_V1",
+  "smallest_constructive_residual_witness": {
+    "current_smallest_verified_constructive_residual": {
+      "architectures_evaluated": 256,
+      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "causal_cut": {
+        "git_blob_sha": "37c0246a4b9a231d3e5b0a306816077f55fcf8a9",
+        "path": "canonical/governance/P3_SCOPE_COMPLETE_CAUSAL_CUT_20261007_V1.json"
+      },
+      "classification": "SMALLEST_VERIFIED_CONSTRUCTIVE_RESIDUAL_OVER_EXHAUSTED_CURRENT_P3_FRONTIER",
+      "frontier_component_count": 8,
+      "independent_verification": {
+        "git_blob_sha": "537d9fdea9a5df4b82a989feff2b7437ed6a4daa",
+        "path": "canonical/verification/P3_SCOPE_COMPLETE_CAUSAL_CUT_SPRITE_VERIFICATION_20261008_V1.json"
+      },
+      "next_rule": "TOURNAMENT_COMMON_POLICY_FIRST__ELSE_MINIMUM_TRUTHFUL_POLICY_CHANGING_DISCRIMINATOR__THEN_COUNTEREXAMPLE_GUIDED_SYNTHESIS",
+      "scope_boundary": "EXACT_OVER_DECLARED_EIGHT_COMPONENT_VERIFIED_FRONTIER__NOT_GLOBAL_NECESSITY_OVER_ALL_POSSIBLE_BRAIN_MECHANISMS",
+      "unified_missing_effect": "P3_SCOPE_COMPLETE_GROUNDED_AUDIENCE_CONDITIONED_POLICY_DOMINANCE"
+    },
+    "primitive": "SCOPE_COMPLETE_OBSERVATIONAL_QUOTIENT_WITH_NO_TARGET_SUPPORTED_UNSPLITTABLE_POLICY_CONFLICT_CLASS",
+    "question": "OVER_EVERY_REACHABLE_TARGET_SUPPORTED_ESCAPE_STATE__DOES_THE_COMPLETE_DECLARED_SAFE_TRUTHFUL_DISCRIMINATOR_QUOTIENT_EITHER_SPLIT_THE_STATE_OR_PLACE_IT_IN_A_FULL_EQUIVALENCE_CLASS_WITH_ONE_COMMON_AUTHENTICATED_SAFE_ADEQUATE_BRAIN_POLICY",
+    "rule": "DO_NOT_BUILD_CAPABILITY_WITHOUT_POLICY_DIVERGENCE_WITNESS__CLOSE_SCOPE_COMPLETENESS_AND_UNSPLITTABLE_CONFLICT_SUPPORT_FIRST",
+    "tournament_capability_deficit_count": 0
+  },
+  "source_bindings": [
+    {
+      "git_blob_sha": "57be54e83f4fdee2f19a7b64d01da3acdce7d940",
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
+    },
+    {
+      "git_blob_sha": "70999148eeb9b7f7c1ad3eabbffb7002cb58e52e",
+      "path": "canonical/governance/TERMINAL_ARCHITECTURE_SELF_TOURNAMENT_20261007_V1.json"
+    },
+    {
+      "git_blob_sha": "8340829830dc81095abd4d643a8be6894a39f2f3",
+      "path": "canonical/governance/CURRENT_PRIMITIVE_U_FRONTIER_20261007_V1.json"
+    },
+    {
+      "git_blob_sha": "32caf066826ca6ffe37dc7fa2b6b0af2c3fe38be",
+      "path": "canonical/governance/SELECTED_DISCRIMINATOR_POLICY_COVER_BRIDGE_20261007_V1.json"
+    },
+    {
+      "git_blob_sha": "5c198f5f0a1cbc80cf183b12940870917afaf9b9",
+      "path": "canonical/runtime/terminal_closure_reducer.py"
+    },
+    {
+      "git_blob_sha": "37c0246a4b9a231d3e5b0a306816077f55fcf8a9",
+      "path": "canonical/governance/P3_SCOPE_COMPLETE_CAUSAL_CUT_20261007_V1.json"
+    },
+    {
+      "git_blob_sha": "537d9fdea9a5df4b82a989feff2b7437ed6a4daa",
+      "path": "canonical/verification/P3_SCOPE_COMPLETE_CAUSAL_CUT_SPRITE_VERIFICATION_20261008_V1.json"
+    }
+  ],
+  "terminal": false,
+  "terminal_credit_claim": false,
+  "u_empty": false,
+  "unresolved": [
+    "complete_declared_discriminator_quotient_scope_proved",
+    "reachable_target_supported_unsplittable_policy_conflict_empty_proved",
+    "scope_complete_parameterized_terminal_or_refinement_binding_proved"
+  ]
+}

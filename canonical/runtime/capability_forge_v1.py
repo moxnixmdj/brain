@@ -427,6 +427,236 @@ def observe_roles(module: str, case: dict, root: Path | None = None) -> dict:
     return roles
 
 
+# --- forging from the inventory -----------------------------------------
+
+_PATHY = ("path", "file", "dir", "root", "src", "dst", "source", "target",
+          "input", "output", "filename", "folder")
+_VOCAB = ("canonical/runtime", "hello", "test", "1,2,3", "a b c", "42")
+
+
+def _path_pool(root: Path, hint: str | None = None) -> list[str]:
+    """Real files to hand a path-shaped parameter, by the kind it names."""
+    try:
+        from canonical.runtime.world_binding_v1 import _EXT_BY_TOKEN
+    except Exception:
+        _EXT_BY_TOKEN = {}
+    ext = None
+    if hint:
+        ext = _EXT_BY_TOKEN.get(hint)
+    out = []
+    for base in ("canonical/runtime", "canonical/astra_runtime/tmp",
+                 "canonical/tests"):
+        d = root / base
+        if not d.is_dir():
+            continue
+        try:
+            names = sorted(d.iterdir())
+        except Exception:
+            continue
+        for p in names:
+            if not p.is_file():
+                continue
+            if ext and not p.name.lower().endswith(ext):
+                continue
+            rel = str(p.relative_to(root))
+            out.append(rel)
+            if len(out) >= 6:
+                return out
+    return out or ["canonical/runtime/grounded_action_v1.py"]
+
+
+def signature_of(source_rel: str, function: str, root: Path) -> dict:
+    """Each parameter's declared type, read from the function's own source.
+
+    Type-blind input generation is not generation, it is noise: `generate
+    (rng, n)` was handed a string for `n` and refused with a TypeError,
+    which says nothing about the function and everything about the guess.
+    The annotation is right there in the file, so it is read rather than
+    inferred from the parameter's name.
+    """
+    path = root / str(source_rel or "")
+    if not path.is_file():
+        return {}
+    try:
+        tree = ast.parse(path.read_text(errors="replace"))
+    except Exception:
+        return {}
+    out: dict[str, str] = {}
+    for node in ast.walk(tree):
+        if isinstance(node, ast.FunctionDef) and node.name == function:
+            for arg in list(node.args.args) + list(node.args.kwonlyargs):
+                ann = ""
+                if arg.annotation is not None:
+                    try:
+                        ann = ast.unparse(arg.annotation)
+                    except Exception:
+                        ann = ""
+                out[arg.arg] = ann
+            break
+    return out
+
+
+def _values_for(param: str, ann: str, root: Path, count: int) -> list:
+    """A few plausible values of the declared type."""
+    low = str(param).lower()
+    a = str(ann or "").lower()
+    pathy = any(t in low for t in _PATHY)
+    if pathy and not any(t in a for t in ("int", "float", "bool")):
+        hint = next((t for t in _EXT_BY_TOKEN_WORDS if t in low), None)
+        return _path_pool(root, hint)[:count]
+    if "int" in a:
+        return [1, 2, 3][:count]
+    if "float" in a:
+        return [1.0, 2.5, 3.0][:count]
+    if "bool" in a:
+        return [True, False][:count]
+    if "list" in a or "sequence" in a or "tuple" in a:
+        return [["a"], ["a", "b"], ["a", "b", "c"]][:count]
+    if "dict" in a or "mapping" in a:
+        return [{"a": 1}, {"a": 1, "b": 2}][:count]
+    return list(_VOCAB)[:count]
+
+
+def candidate_inputs(params, root: Path, count: int = 3,
+                     annotations: dict | None = None,
+                     source_rel: str = "", function: str = "") -> list[dict]:
+    """Plausible inputs for a function the forge was never told about.
+
+    Invented inputs are an unverifiable act, so these are not invented:
+    path-shaped parameters get real files of the kind their name asks
+    for, and the rest get short ordinary strings. Nothing here has to be
+    right -- a wrong input simply fails a case, and two successes are
+    required before anything is admitted.
+    """
+    params = [str(p) for p in (params or [])]
+    if annotations is None and source_rel and function:
+        annotations = signature_of(source_rel, function, root)
+    annotations = annotations or {}
+    pools: dict[str, list] = {}
+    for name in params:
+        pools[name] = _values_for(name, annotations.get(name, ""), root, count) \
+            or list(_VOCAB)
+    cases = []
+    for i in range(count):
+        case = {}
+        for name, pool in pools.items():
+            case[name] = pool[i % len(pool)]
+        cases.append(case)
+    # make the cases actually differ
+    for i, case in enumerate(cases):
+        for name, pool in pools.items():
+            if len(pool) > 1:
+                case[name] = pool[(i + list(pools).index(name)) % len(pool)]
+    return cases
+
+
+_EXT_BY_TOKEN_WORDS = ("json", "yaml", "pdf", "docx", "xlsx", "sqlite",
+                       "csv", "markdown", "md", "png", "html", "tar",
+                       "archive", "db", "database", "sheet", "workbook")
+
+
+def forge_function(entry: dict, root: Path | None = None,
+                   require_kill: bool = True) -> dict:
+    """Put one inventoried function through the same six tests.
+
+    The 5,221 inventoried functions are pure Python already in this
+    repository: no binary to install, no network to reach. They are the
+    seam the dormant modules turned out not to be. The inventory calls
+    them a measurement of existing tests and not a capability receipt;
+    surviving determinism, non-vacuity, honest success and attempted
+    killing is a stronger claim than that, and it is the claim that
+    admits one.
+    """
+    root = root or ROOT
+    from canonical.runtime import module_bridge_v1 as MB
+    name = str(entry.get("function") or "")
+    cid = "forged.fn." + re.sub(r"[^a-z0-9]+", "_",
+                                str(entry.get("source_rel") or "").lower()) \
+        + "." + name
+    report = {"capability_id": cid[:150], "function": name,
+              "source_rel": entry.get("source_rel"), "admitted": False,
+              "checks": {}, "reasons": []}
+
+    params = [p for p in (entry.get("params") or []) if not str(p).startswith("_")]
+    required = [str(p) for p in (entry.get("required") or [])]
+    if not required:
+        required = params[:1]
+
+    def call(case):
+        try:
+            out = MB.invoke(entry, case, root)
+        except Exception as exc:
+            return False, type(exc).__name__ + ":" + str(exc)[:160]
+        if not isinstance(out, dict):
+            return False, "RESULT_NOT_A_DICT"
+        return True, out
+
+    cases = candidate_inputs(required, root,
+                            annotations=signature_of(
+                                str(entry.get("source_rel") or ""), name, root),
+                            source_rel=str(entry.get("source_rel") or ""),
+                            function=name)
+    runs = []
+    for i, case in enumerate(cases):
+        ok, out = call(case)
+        if not ok:
+            report["reasons"].append("case%d_FAILED:%s" % (i, str(out)[:80]))
+            continue
+        ok2, out2 = call(case)
+        if not ok2 or json.dumps(out, sort_keys=True, default=str) != \
+                json.dumps(out2, sort_keys=True, default=str):
+            report["reasons"].append("case%d_NOT_DETERMINISTIC" % i)
+            continue
+        if is_vacuous(out):
+            report["reasons"].append("case%d_VACUOUS" % i)
+            continue
+        if self_reported_failure(out):
+            report["reasons"].append("case%d_SELF_REPORTED_FAILURE" % i)
+            continue
+        runs.append((case, out))
+    report["checks"]["ran"] = "%d/%d" % (len(runs), len(cases))
+    if len(runs) < 2:
+        report["reasons"].append("NOT_GENERAL")
+        return report
+
+    if require_kill:
+        kills = 0
+        tried = 0
+        for case, _ in runs:
+            for bad in mutations(case):
+                tried += 1
+                ok, _ = call(bad)
+                if not ok:
+                    kills += 1
+        report["checks"]["killed"] = "%d/%d" % (kills, tried)
+        if kills == 0:
+            report["reasons"].append(
+                "NO_MUTATION_COULD_KILL_IT" if tried
+                else "NO_MUTATION_WAS_POSSIBLE__UNEVIDENCED")
+            return report
+
+    report["admitted"] = True
+    return report
+
+
+def sweep_inventory(limit: int = 60, root: Path | None = None,
+                    min_passing_cases: int = 1) -> dict:
+    """Try to forge from the inventory. Most will fail; that is the point."""
+    root = root or ROOT
+    from canonical.runtime import module_bridge_v1 as MB
+    entries = (MB._index() or {}).get("entries") or []
+    pool = [e for e in entries
+            if int(e.get("passing_cases") or 0) >= min_passing_cases
+            and str(e.get("tier") or "") == "TEST_EVIDENCED"]
+    tried, admitted = 0, []
+    for e in pool[:limit]:
+        tried += 1
+        r = forge_function(e, root)
+        if r.get("admitted"):
+            admitted.append(r)
+    return {"tried": tried, "admitted": len(admitted), "results": admitted}
+
+
 def registered() -> dict:
     """The forged capabilities that were admitted, keyed by capability id."""
     data = _state()
