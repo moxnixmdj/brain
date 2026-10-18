@@ -39,7 +39,11 @@ _PATTERNS = (
 
 def _segments(text: str) -> list[tuple[int, int, str]]:
     out = []
-    for m in re.finditer(r"[^.!?\n]+(?:[.!?]+|\n|$)", text):
+    # A '.' immediately followed by a digit is a decimal point, not a sentence
+    # terminator.  Splitting there silently truncates every decimal requirement
+    # to its integer part ("at least 0.5" -> "at least 0"), which weakens the
+    # acceptance program instead of failing closed.
+    for m in re.finditer(r"(?:[^.!?\n]|\.(?=\d))+(?:[.!?]+|\n|$)", text):
         s, e = m.span()
         while s < e and text[s].isspace():
             s += 1
