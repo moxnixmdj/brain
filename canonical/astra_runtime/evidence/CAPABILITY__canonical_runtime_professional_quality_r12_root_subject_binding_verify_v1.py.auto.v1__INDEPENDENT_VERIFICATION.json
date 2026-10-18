@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/professional_quality_r12_root_subject_binding_verify_v1.py.auto.v1",
- "elapsed_ms": 38.336,
+ "elapsed_ms": 35.548,
  "independent_run_reference": {
-  "github_run_id": 39082322151,
+  "github_run_id": 39082536608,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "02b25fb2-4596-4532-8da2-c453ff991a4c",
+   "jti": "bd897b8f-07d6-4da7-bb54-6f74adbd5ae1",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39082322151",
+   "run_id": "39082536608",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
