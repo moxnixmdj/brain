@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/terminal_causal_depth_controller_v1.py.auto.v1",
- "elapsed_ms": 35.2,
+ "elapsed_ms": 35.012,
  "independent_run_reference": {
-  "github_run_id": 39087504241,
+  "github_run_id": 39087708278,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "73ee758b-1168-4650-a897-bdaab7b1b5c8",
+   "jti": "173a9ffa-64f8-46f5-8531-19a2b62741ec",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39087504241",
+   "run_id": "39087708278",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
