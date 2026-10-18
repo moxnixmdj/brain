@@ -133,6 +133,7 @@ def run(
     patience: int = 3,
     context: Mapping[str, Any] | None = None,
     flywheel_state_path: str | None = None,
+    options_provider: Callable[[Mapping[str, Any]], Any] | None = None,
 ) -> dict[str, Any]:
     """Act, measure, re-plan -- until the number arrives or progress dies.
 
@@ -169,15 +170,19 @@ def run(
     except Exception:
         fly = None
 
-    base = {**(context or {}), "primers": primers}
+    # Options the actor has already been offered. Shares identity with every
+    # round's context, so widening it mid-chase is visible to the next act().
+    options: list[dict[str, Any]] = []
+
+    base = {**(context or {}), "primers": primers, "options": options}
     rounds: list[dict[str, Any]] = []
 
     opening = measure()
     if opening is None:
-        return _result(NOT_MEASURABLE, goal, target, direction, unit, [], None, opening, started, primers, recorded)
+        return _result(NOT_MEASURABLE, goal, target, direction, unit, [], None, opening, started, primers, recorded, options)
     best = float(opening)
     if _on_target(best, float(target), direction):
-        return _result(MET, goal, target, direction, unit, rounds, best, opening, started, primers, recorded)
+        return _result(MET, goal, target, direction, unit, rounds, best, opening, started, primers, recorded, options)
 
     stale = 0
     for index in range(max_rounds):
@@ -191,7 +196,7 @@ def run(
                 _turn_flywheel(fly, message, False, recorded, flywheel_state_path)
             stale += 1
             if stale >= patience:
-                return _result(STUCK, goal, target, direction, unit, rounds, best, opening, started, primers, recorded)
+                return _result(STUCK, goal, target, direction, unit, rounds, best, opening, started, primers, recorded, options)
             continue
 
         measured = measure()
@@ -201,7 +206,7 @@ def run(
                 _turn_flywheel(fly, "MEASURE_RETURNED_NONE", False, recorded, flywheel_state_path)
             stale += 1
             if stale >= patience:
-                return _result(STUCK, goal, target, direction, unit, rounds, best, opening, started, primers, recorded)
+                return _result(STUCK, goal, target, direction, unit, rounds, best, opening, started, primers, recorded, options)
             continue
 
         measured = float(measured)
@@ -218,7 +223,7 @@ def run(
 
         if _on_target(measured, float(target), direction):
             best = measured
-            return _result(MET, goal, target, direction, unit, rounds, best, opening, started, primers, recorded)
+            return _result(MET, goal, target, direction, unit, rounds, best, opening, started, primers, recorded, options)
 
         improved = _improved(best, measured, direction)
         if fly is not None:
@@ -234,15 +239,35 @@ def run(
             best = measured
             stale = 0
         else:
+            # A round that failed to move the number is the signal that the
+            # machine is missing something -- a route, a source, a datum it has
+            # never seen. That is the moment to widen the option set, and only
+            # that moment: asking every round would cost time and buy nothing.
+            if options_provider is not None:
+                try:
+                    found = options_provider(
+                        {
+                            "goal": goal,
+                            "round": index,
+                            "measured": measured,
+                            "target": float(target),
+                            "known_options": list(options),
+                        }
+                    ) or []
+                    for row in found:
+                        if isinstance(row, Mapping) and dict(row) not in options:
+                            options.append(dict(row))
+                except Exception:
+                    pass  # widening must never break the chase
             stale += 1
             if stale >= patience:
-                return _result(STUCK, goal, target, direction, unit, rounds, best, opening, started, primers, recorded)
+                return _result(STUCK, goal, target, direction, unit, rounds, best, opening, started, primers, recorded, options)
 
-    return _result(BOUND, goal, target, direction, unit, rounds, best, opening, started, primers, recorded)
+    return _result(BOUND, goal, target, direction, unit, rounds, best, opening, started, primers, recorded, options)
 
 
 def _result(status, goal, target, direction, unit, rounds, best, opening, started,
-            primers=None, recorded=None) -> dict[str, Any]:
+            primers=None, recorded=None, options=None) -> dict[str, Any]:
     met = status == MET
     return {
         "schema": SCHEMA,
@@ -262,6 +287,7 @@ def _result(status, goal, target, direction, unit, rounds, best, opening, starte
         "learning": {
             "primers_handed_to_actor_before_round_0": list(primers or []),
             "pathologies_recorded": list(recorded or []),
+            "options_discovered": list(options or []),
         },
         "goal_reached": met,
         "elapsed_ms": round((time.perf_counter() - started) * 1000.0, 3),

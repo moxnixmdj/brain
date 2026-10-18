@@ -83,6 +83,109 @@ def live_act(goal: str, *, tag: str | None = None) -> Callable[[Mapping[str, Any
     return act
 
 
+def global_options(
+    goal: str,
+    *,
+    root: Path = ROOT,
+    queries: list[str] | None = None,
+    sources: list[Mapping[str, Any]] | None = None,
+    limit: int = 8,
+) -> Callable[[Mapping[str, Any]], list[dict[str, Any]]]:
+    """Widen the option set from the global anti-blind-spot controller.
+
+    This is the defence against the failure the owner described: read one paper
+    saying "the fastest way is YouTube videos" and conclude YouTube, when the
+    opportunity space is enormously larger and most of it is not written down
+    anywhere obvious.
+
+    The controller discounts CORRELATED channels rather than counting them as
+    independent evidence -- ten sources repeating one claim are one source --
+    and it ranks what to fetch by expected recovery per unit latency. It also
+    never authorizes a claim of nonexistence: `a miss in an open world never
+    authorizes nonexistence`. Nothing it returns is truth; every row is
+    CANDIDATE_ONLY until independently verified.
+
+    If the authority gate fails closed, this returns nothing rather than
+    inventing options.
+    """
+    from canonical.runtime import global_retrieval_entrypoint_v4 as entry
+
+    def provider(ctx: Mapping[str, Any]) -> list[dict[str, Any]]:
+        known = {str(o) for o in ctx.get("known_options", [])}
+        query_actions = [
+            {"kind": "QUERY", "query": q, "source": "web"}
+            for q in (queries or _queries_for(goal, ctx))
+        ]
+        try:
+            out = entry.compile_authorized_plan(
+                root=root,
+                query_actions=query_actions,
+                sources=list(sources or _DEFAULT_SOURCES),
+                state=None,
+            )
+        except Exception:
+            return []
+        if out.get("status") != "PASS__AUTHORIZED_EMPIRICAL_PLAN_WITH_VERIFIED_RECOVERY_PORTFOLIO":
+            return []
+        plan = out.get("plan")
+        if not isinstance(plan, Mapping):
+            return []
+        rows: list[dict[str, Any]] = []
+        for action in plan.get("actions") or []:
+            if not isinstance(action, Mapping):
+                continue
+            priority = action.get("retrieval_priority_v3") or {}
+            row = {
+                "kind": action.get("kind"),
+                "query": action.get("query"),
+                "source_id": action.get("source_id"),
+                "expected_recovery_factor": priority.get("expected_recovery_factor"),
+                "latency_seconds": priority.get("latency_seconds"),
+                "mean_request_count": priority.get("mean_request_count"),
+                "candidate_authority": action.get("candidate_authority"),
+                "nonexistence_claim_authorized": action.get("nonexistence_claim_authorized"),
+            }
+            if str(row) in known:
+                continue
+            rows.append(row)
+        # Best expected recovery per unit latency first: the fastest way to new
+        # data is the whole requirement.
+        rows.sort(
+            key=lambda r: -(
+                float(r["expected_recovery_factor"] or 0.0)
+                / max(float(r["latency_seconds"] or 0.0), 1e-6)
+            )
+        )
+        return rows[:limit]
+
+    return provider
+
+
+_DEFAULT_SOURCES = ({"source_id": "web", "kind": "EXTERNAL_INDEX", "enumeration_interface": False},)
+
+
+# The trap is not having too few answers; it is asking the same question in one
+# voice and treating agreement as confirmation. These framings probe DIFFERENT
+# regions of the space, mechanically and with no model. Where independent
+# sources genuinely agree the controller counts them once; where only one voice
+# answers, that single voice is visible as one channel and not as the world.
+_PROBE_FRAMINGS = (
+    "ways to {goal}",
+    "fastest way to {goal}",
+    "unconventional or overlooked ways to {goal}",
+    "alternatives to the most common way to {goal}",
+    "what does not work when trying to {goal}",
+    "hidden or non-obvious opportunities to {goal}",
+    "measured evidence on how long it takes to {goal}",
+)
+
+
+def _queries_for(goal: str, ctx: Mapping[str, Any]) -> list[str]:
+    """Probe what is NOT yet known, in several voices, never one."""
+    text = str(goal).strip().rstrip(".")
+    return [f.format(goal=text) for f in _PROBE_FRAMINGS]
+
+
 def run(
     goal: str,
     *,
@@ -95,6 +198,7 @@ def run(
     patience: int = 3,
     flywheel_state_path: str | None = None,
     context: Mapping[str, Any] | None = None,
+    widen_options: bool = True,
 ) -> dict[str, Any]:
     """Bind the sentence, then chase it. Or refuse, without inventing anything.
 
@@ -146,6 +250,7 @@ def run(
         patience=patience,
         flywheel_state_path=flywheel_state_path,
         context=context,
+        options_provider=(global_options(goal) if widen_options else None),
     )
     return {
         "schema": SCHEMA,
