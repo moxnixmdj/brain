@@ -59,9 +59,27 @@ def infer_contract(probe, goal):
     usage_line=next((x.strip() for x in lines if x.strip().lower().startswith("usage:")),None)
     lower_help=help_text.lower()
 
-    paths=re.findall(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+",str(goal or ""))
-    paths=[x.rstrip(".,;:!?)]}") for x in paths]
-    output_path=paths[-1] if len(paths)==1 else None
+    # A destination is named with or without a directory, and the old pattern
+    # demanded a slash — so "write to out.txt" matched nothing, output_path came
+    # back None, and the machine could not learn to use the program at all. That
+    # is the most natural way to state a task, so this failed on the common case
+    # of "turn an unknown binary into a capability", which is what makes the
+    # machine able to do anything rather than only the 70 things it was born with.
+    _path=r"(?:[A-Za-z0-9_.-]+/)*[A-Za-z0-9_-]+\.[A-Za-z0-9]{1,6}"
+    goal_text=str(goal or "")
+    paths=[m.group(0).rstrip(".,;:!?)]}") for m in re.finditer(_path,goal_text)]
+
+    # The destination, not merely the last path: prefer one named after a cue.
+    # Two paths with no cue stays unresolved rather than guessing, because a
+    # wrong output path produces a confident contract for the wrong thing.
+    output_path=None
+    for cue in ("to","into","as","output","outfile","write","save","->"):
+        m=re.search(re.escape(cue)+r"\s+("+_path+r")",goal_text,re.I)
+        if m:
+            output_path=m.group(1).rstrip(".,;:!?)]}")
+            break
+    if output_path is None and len(paths)==1:
+        output_path=paths[0]
     suffix=pathlib.Path(output_path).suffix.lower() if output_path else ""
     magic=MAGIC_BY_SUFFIX.get(suffix)
     text_output=suffix in TEXT_SUFFIXES
