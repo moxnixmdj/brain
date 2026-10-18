@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/brain_witness_contamination_admissibility_v1.py.auto.v1",
- "elapsed_ms": 39.486,
+ "elapsed_ms": 37.821,
  "independent_run_reference": {
-  "github_run_id": 39177770911,
+  "github_run_id": 39177986913,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "2576fc1e-2099-4f72-9af6-aead5e7c0305",
+   "jti": "8bfafc90-8b73-4261-9a8f-43be6d33f494",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39177770911",
+   "run_id": "39177986913",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
