@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/current_escape_oq_frontier_reduction_v1.py.auto.v1",
- "elapsed_ms": 28.853,
+ "elapsed_ms": 34.414,
  "independent_run_reference": {
-  "github_run_id": 39145095772,
+  "github_run_id": 39145349351,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "b15c4c4b-71c8-4139-9f20-b646dc2fb53f",
+   "jti": "8f71658e-317a-4e72-a5f6-5ff4fdcba875",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39145095772",
+   "run_id": "39145349351",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
