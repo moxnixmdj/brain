@@ -145,16 +145,21 @@ def _arg(payload: Mapping[str, Any], *names: str) -> str:
 
 
 def _fs_list(payload: Mapping[str, Any], root: Path) -> dict[str, Any]:
-    rel = _arg(payload, "path", "input", "output") or "."
+    rel = _arg(payload, "path", "input_path", "input", "output", "output_path") or "."
     target = (root / rel).resolve()
     if not str(target).startswith(str(root.resolve())):
         raise ComputerUseRegistryError("PATH_ESCAPES_ROOT")
+    # A path that names a file lists its directory. Pointing at a file
+    # and being told "nothing here" is a lie about the directory, and
+    # it is why the first end-to-end run reported count 0.
+    if target.is_file():
+        target = target.parent
     names = sorted(p.name for p in target.iterdir()) if target.is_dir() else []
-    return {"files": names, "count": len(names)}
+    return {"files": names, "count": len(names), "listed": str(target)}
 
 
 def _fs_read(payload: Mapping[str, Any], root: Path) -> dict[str, Any]:
-    rel = _arg(payload, "path", "input")
+    rel = _arg(payload, "path", "input_path", "input")
     if not rel:
         raise ComputerUseRegistryError("PATH_REQUIRED")
     target = (root / rel).resolve()
@@ -165,7 +170,7 @@ def _fs_read(payload: Mapping[str, Any], root: Path) -> dict[str, Any]:
 
 
 def _fs_write(payload: Mapping[str, Any], root: Path) -> dict[str, Any]:
-    rel = _arg(payload, "path", "output", "input")
+    rel = _arg(payload, "path", "output_path", "output", "input")
     if not rel:
         raise ComputerUseRegistryError("PATH_REQUIRED")
     target = (root / rel).resolve()
@@ -180,7 +185,15 @@ def _fs_write(payload: Mapping[str, Any], root: Path) -> dict[str, Any]:
 
 
 def _program_run(payload: Mapping[str, Any], root: Path) -> dict[str, Any]:
-    code = payload.get("code")
+    # The goal compiler binds quoted text to whatever key the template
+    # names -- here input_path -- so the code arrives under that name,
+    # not under "code". Reading only "code" made the general capability
+    # the one thing that never ran.
+    # "text" must come BEFORE the path names. It did not, so the
+    # fallback grabbed input_path and the system tried to EXECUTE A
+    # FILENAME as code -- failing closed for a reason that had nothing
+    # to do with the program.
+    code = _arg(payload, "code", "text", "input_path", "input")
     if not isinstance(code, str) or not code.strip():
         raise ComputerUseRegistryError("CODE_REQUIRED")
     try:
@@ -276,21 +289,21 @@ _ACTION_TEMPLATES = {
     "CAP_FS_LIST_V1": {
         "type": "invoke_capability",
         "args": {"capability_id": "CAP_FS_LIST_V1",
-                 "input": "${input.input}"},
+                 "input_path": "${input.input_path}"},
         "expect": {"field": "count", "type": "field_present"},
         "keywords": ["list", "files", "directory", "folder", "show"],
     },
     "CAP_FS_READ_V1": {
         "type": "invoke_capability",
         "args": {"capability_id": "CAP_FS_READ_V1",
-                 "input": "${input.input}"},
+                 "input_path": "${input.input_path}"},
         "expect": {"field": "text", "type": "field_present"},
         "keywords": ["read", "open", "contents", "show", "view"],
     },
     "CAP_FS_WRITE_V1": {
         "type": "invoke_capability",
         "args": {"capability_id": "CAP_FS_WRITE_V1",
-                 "output": "${input.output}", "text": "${input.text}"},
+                 "output_path": "${input.output_path}", "text": "${input.text}"},
         "expect": {"field": "verified", "type": "field_equals",
                    "value": True},
         "keywords": ["write", "save", "create", "put", "output"],
@@ -298,7 +311,8 @@ _ACTION_TEMPLATES = {
     "CAP_PROGRAM_RUN_V1": {
         "type": "invoke_capability",
         "args": {"capability_id": "CAP_PROGRAM_RUN_V1",
-                 "input": "${input.input}"},
+                 "text": "${input.text}",
+                 "input_path": "${input.input_path}"},
         "expect": {"field": "confined", "type": "field_equals",
                    "value": True},
         "keywords": ["run", "execute", "program", "compute", "script"],
