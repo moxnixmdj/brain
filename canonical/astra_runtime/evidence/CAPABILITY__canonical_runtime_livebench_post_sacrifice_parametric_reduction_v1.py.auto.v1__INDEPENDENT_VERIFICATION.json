@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_post_sacrifice_parametric_reduction_v1.py.auto.v1",
- "elapsed_ms": 28.968,
+ "elapsed_ms": 16.434,
  "independent_run_reference": {
-  "github_run_id": 39152724868,
+  "github_run_id": 39152937360,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "9e5de225-0895-4a3a-bf36-29d4fcfb6d2b",
+   "jti": "bbd20617-544e-4b62-bad6-4031234019fe",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39152724868",
+   "run_id": "39152937360",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
