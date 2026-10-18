@@ -249,6 +249,33 @@ def _cases() -> list[tuple[str, str, callable]]:
     add("solve_v1.observe", "a tree that changed without it noticing",
         observe_sees_a_change)
 
+    # --- capability is declared, not assumed ---------------------------
+    def confine_network_default_closed() -> bool:
+        import confine_v1 as C
+        if not C.available():
+            return True
+        with tempfile.TemporaryDirectory() as tmp:
+            r = C.run("import socket\n"
+                      "socket.create_connection(('github.com',443),timeout=4)\n"
+                      "print('REACHED')", tmp, timeout=90)
+            return "REACHED" in (r.get("output") or "")
+
+    def confine_network_when_declared() -> bool:
+        import confine_v1 as C
+        if not C.available():
+            return True
+        with tempfile.TemporaryDirectory() as tmp:
+            r = C.run("import socket\n"
+                      "socket.create_connection(('github.com',443),timeout=4)\n"
+                      "print('REACHED')", tmp, timeout=90, network=True)
+            # A sandbox that prevents the work is amputation, not safety.
+            return "REACHED" not in (r.get("output") or "")
+
+    add("confine_v1.run", "network reachable without being declared",
+        confine_network_default_closed)
+    add("confine_v1.run", "network unreachable even when declared",
+        confine_network_when_declared)
+
     # --- the loop itself is confined -----------------------------------
     def solve_act_escapes() -> bool:
         import solve_v1 as S

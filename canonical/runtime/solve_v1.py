@@ -127,7 +127,8 @@ def read(root: str, path: str, limit: int = 4000) -> dict:
             "truncated": len(text) > limit}
 
 
-def act(root: str, program: str, timeout: int = 120) -> dict:
+def act(root: str, program: str, timeout: int = 120,
+        network: bool = False) -> dict:
     """Run code. The only action there is, because it is all of them.
 
     Confined by default.
@@ -146,12 +147,15 @@ def act(root: str, program: str, timeout: int = 120) -> dict:
     try:
         import confine_v1 as C
         if C.available():
-            r = C.run(program, root, timeout=timeout)
+            r = C.run(program, root, timeout=timeout, network=network)
             return {"exit": r.get("exit_status"), "out": r.get("output") or "",
                     "err": "" if r.get("verdict") == "OK"
                            else (r.get("output") or ""),
                     "timed_out": r.get("verdict") == "INDETERMINATE",
-                    "confined": True}
+                    "confined": True,
+                    # Propagated, or the receipt cannot answer "which
+                    # runs could talk to the outside".
+                    "network": bool(r.get("network", network))}
     except Exception:
         pass
 

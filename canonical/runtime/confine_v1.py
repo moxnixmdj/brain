@@ -82,6 +82,7 @@ _MOUNTS = ("/usr", "/bin", "/lib", "/lib64")
 _HELPER = r'''
 import os, subprocess, sys
 BASE = sys.argv[1]; PROJ = os.path.realpath(sys.argv[2]); SCRIPT = sys.argv[3]
+NETWORK = len(sys.argv) > 4 and sys.argv[4] == "1"
 # The program must live INSIDE the chroot. Referencing it by its real
 # path fails: after chroot that path no longer exists, and the run dies
 # with "can't open file" -- which reads like the program failing rather
@@ -103,6 +104,21 @@ for s in {s for s in __MOUNTS__ if os.path.isdir(s)}:
     subprocess.run(["mount", "-o", "remount,ro,bind", BASE + s],
                    capture_output=True)
 m("--bind", PROJ, BASE + "/project")
+# A network namespace is not enough on its own. With no /etc in the
+# chroot there is no resolv.conf, so every name fails to resolve and a
+# program with perfectly good connectivity reports it has none --
+# measured: 'NETWORK BLOCKED gaierror' even with the namespace left
+# open. Reaching the network requires the means to resolve names.
+if NETWORK:
+    os.makedirs(BASE + "/etc", exist_ok=True)
+    for f in ("/etc/resolv.conf", "/etc/hosts"):
+        if os.path.exists(f):
+            tgt = BASE + f
+            try:
+                open(tgt, "w").close()
+            except OSError:
+                continue
+            m("--bind", f, tgt)
 # Only now, with the project separately mounted, is the root made
 # read-only. Order matters: doing it earlier would freeze the project
 # too, which is exactly how the withdrawn version destroyed work.
@@ -168,8 +184,24 @@ def available() -> bool:
         return False
 
 
-def run(program: str, root: str, timeout: int = 300) -> dict:
-    """Run a program confined to the project. Only the project is writable."""
+def run(program: str, root: str, timeout: int = 300,
+        network: bool = False) -> dict:
+    """Run a program confined to the project. Only the project is writable.
+
+    `network` is off by default and must be ASKED FOR.
+
+    Least privilege, not maximum restriction. Cutting the network
+    outright was the easy call and it was wrong: a system meant to do
+    anything on a computer that cannot reach one cannot fetch a page,
+    download a file, or send anything -- which is a large share of what
+    people actually do there. A sandbox that prevents the work is not
+    safety, it is amputation.
+
+    So the default is closed and the escalation is explicit. The caller
+    declares that this task needs the network, and that declaration is
+    recorded in the receipt, so "which runs could talk to the outside"
+    is answerable afterwards rather than inferred.
+    """
     if not Path(root).is_dir():
         return {"schema": SCHEMA, "verdict": "INDETERMINATE",
                 "detail": f"{root!r} is not a directory", "exit_status": None}
@@ -191,14 +223,15 @@ def run(program: str, root: str, timeout: int = 300) -> dict:
         Path(helper_path).write_text(helper)
         try:
             r = subprocess.run(
-                ["unshare", "-r", "-m", "-n", sys.executable, helper_path,
-                 base, os.path.realpath(root), script],
+                ["unshare", "-r", "-m"] + ([] if network else ["-n"]) + \
+                [sys.executable, helper_path, base,
+                 os.path.realpath(root), script, "1" if network else "0"],
                 timeout=timeout, capture_output=True, text=True)
             return {"schema": SCHEMA,
                     "verdict": "OK" if r.returncode == 0 else "FAILED",
                     "exit_status": r.returncode,
                     "output": ((r.stdout or "") + (r.stderr or ""))[-3000:],
-                    "confined": True}
+                    "confined": True, "network": bool(network)}
         except subprocess.TimeoutExpired:
             return {"schema": SCHEMA, "verdict": "INDETERMINATE",
                     "exit_status": None, "output": "timed out",
