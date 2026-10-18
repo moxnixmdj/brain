@@ -85,7 +85,9 @@ def sweep_one(cid: str, entry: dict, instances: int, seed: int, work: Path) -> d
 
     for _ in range(instances):
         try:
-            args = samp.sample_args(sig, rng, ws)
+            # the capability id is what lets content rules be scoped per capability;
+            # without it a rule for one capability's output_path would silently not apply
+            args = samp.sample_args(sig, rng, ws, capability=cid)
         except samp.SamplingFailure as exc:
             result["errors"]["SAMPLING_FAILED:" + str(exc)] = \
                 result["errors"].get("SAMPLING_FAILED:" + str(exc), 0) + 1

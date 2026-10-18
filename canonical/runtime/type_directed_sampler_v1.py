@@ -50,15 +50,15 @@ def _text(rng: random.Random, n: int = 3) -> str:
 # per-type samplers.  Each returns a value the surface's _accepts() will approve.
 # --------------------------------------------------------------------------------------
 
-def _s_number(rng: random.Random, ws: Path, slot: str = "") -> float:
+def _s_number(rng: random.Random, ws: Path, slot: str = "", capability: str = "") -> float:
     return round(rng.uniform(-1000.0, 1000.0), rng.choice([0, 1, 2]))
 
 
-def _s_number_list(rng: random.Random, ws: Path, slot: str = "") -> list[float]:
+def _s_number_list(rng: random.Random, ws: Path, slot: str = "", capability: str = "") -> list[float]:
     return [_s_number(rng, ws) for _ in range(rng.randint(1, 5))]
 
 
-def _s_pair_list(rng: random.Random, ws: Path, slot: str = "") -> list[list[float]]:
+def _s_pair_list(rng: random.Random, ws: Path, slot: str = "", capability: str = "") -> list[list[float]]:
     """(pixel, value) anchors, never scalars.
 
     Two constraints come from the surface, not from taste:
@@ -71,25 +71,25 @@ def _s_pair_list(rng: random.Random, ws: Path, slot: str = "") -> list[list[floa
             for _ in range(rng.randint(3, 6))]
 
 
-def _s_bool(rng: random.Random, ws: Path, slot: str = "") -> bool:
+def _s_bool(rng: random.Random, ws: Path, slot: str = "", capability: str = "") -> bool:
     return rng.choice([True, False])
 
 
-def _s_string(rng: random.Random, ws: Path, slot: str = "") -> str:
+def _s_string(rng: random.Random, ws: Path, slot: str = "", capability: str = "") -> str:
     return _word(rng)
 
 
-def _s_json_text(rng: random.Random, ws: Path, slot: str = "") -> str:
+def _s_json_text(rng: random.Random, ws: Path, slot: str = "", capability: str = "") -> str:
     obj: dict[str, Any] = {_word(rng): rng.choice([_s_number(rng, ws), _text(rng, 1), _s_bool(rng, ws)])
                            for _ in range(rng.randint(1, 3))}
     return json.dumps(obj, sort_keys=True)
 
 
-def _s_kv(rng: random.Random, ws: Path, slot: str = "") -> dict[str, Any]:
+def _s_kv(rng: random.Random, ws: Path, slot: str = "", capability: str = "") -> dict[str, Any]:
     return {_word(rng): _s_number(rng, ws) for _ in range(rng.randint(1, 3))}
 
 
-def _s_argv(rng: random.Random, ws: Path, slot: str = "") -> list[str]:
+def _s_argv(rng: random.Random, ws: Path, slot: str = "", capability: str = "") -> list[str]:
     return [rng.choice(["python", "-B", "pytest", _word(rng)])
             for _ in range(rng.randint(1, 4))]
 
@@ -118,9 +118,55 @@ _PY_TEST = ("import {mod}\n\n\ndef test_{fn}_adds():\n"
 _MANIFEST = '{{"files": ["a.txt", "b.txt"], "root": ".", "name": "{w}"}}'
 
 
-def _content_for(slot: str, rng: random.Random) -> tuple[str, str]:
+# Rules the machine itself may extend. Kept as data, not code, precisely so a chase can
+# improve them: an act() that edits a dict is safe to run unattended, an act() that rewrites
+# this module is not. `set_content_rule` is the seam, and the typed sweep is the oracle that
+# says whether a new rule actually helped.
+_CONTENT_RULES: dict[str, tuple[str, str]] = {}
+
+
+def set_content_rule(slot_key: str, suffix: str, template: str, capability: str | None = None) -> None:
+    """Declare (or replace) the content rule for slots containing `slot_key`.
+
+    `template` is a str.format template over {i},{i2},{w},{w2},{v},{v2},{fn},{fn2},{mod}.
+    Pass `capability` to scope the rule to one capability: a rule forcing .tar.gz on every
+    output_path would break the capabilities that need .json, so scope is not optional in
+    practice. Capability-scoped rules are checked before generic ones.
+    """
+    if not slot_key:
+        raise ValueError("EMPTY_SLOT_KEY")
+    key = f"{capability}|{slot_key}".lower() if capability else str(slot_key).lower()
+    _CONTENT_RULES[key] = (str(suffix), str(template))
+
+
+def clear_content_rules() -> None:
+    _CONTENT_RULES.clear()
+
+
+def _content_for(slot: str, rng: random.Random, capability: str | None = None) -> tuple[str, str]:
     """Return (suffix, content) appropriate to what `slot` actually names."""
     s = (slot or "").lower()
+    cid = (capability or "").lower()
+    ordered = sorted(_CONTENT_RULES.items(),
+                     key=lambda kv: (not kv[0].startswith(cid + "|"), len(kv[0])), reverse=False)
+    for key, (suffix, template) in ordered:
+        needle = key.split("|", 1)[1] if "|" in key else key
+        scoped = "|" in key
+        if scoped and not cid:
+            continue
+        if scoped and not key.startswith(cid + "|"):
+            continue
+        if needle not in s:
+            continue
+        w, w2 = _word(rng), _word(rng)
+        i, i2 = rng.randrange(1000), rng.randrange(1000)
+        v, v2 = round(rng.uniform(-100, 100), 2), round(rng.uniform(-100, 100), 2)
+        fn, fn2, mod = _word(rng), _word(rng), "subject"
+        try:
+            return suffix, template.format(i=i, i2=i2, w=w, w2=w2, v=v, v2=v2,
+                                           fn=fn, fn2=fn2, mod=mod)
+        except (KeyError, IndexError, ValueError):
+            continue  # a malformed rule must not crash sampling; try the next one
     w, w2 = _word(rng), _word(rng)
     i, i2 = rng.randrange(1000), rng.randrange(1000)
     v, v2 = round(rng.uniform(-100, 100), 2), round(rng.uniform(-100, 100), 2)
@@ -147,19 +193,19 @@ def _content_for(slot: str, rng: random.Random) -> tuple[str, str]:
     return ".txt", _text(rng, 4)
 
 
-def _new_file(rng: random.Random, ws: Path, slot: str) -> Path:
+def _new_file(rng: random.Random, ws: Path, slot: str, capability: str = "") -> Path:
     ws.mkdir(parents=True, exist_ok=True)
-    suffix, content = _content_for(slot, rng)
+    suffix, content = _content_for(slot, rng, capability)
     p = ws / f"{slot or 'f'}{rng.randrange(1 << 30)}{suffix}"
     p.write_text(content, encoding="utf-8")
     return p
 
 
-def _s_path_file(rng: random.Random, ws: Path, slot: str = "") -> str:
-    return str(_new_file(rng, ws, slot))
+def _s_path_file(rng: random.Random, ws: Path, slot: str = "", capability: str = "") -> str:
+    return str(_new_file(rng, ws, slot, capability))
 
 
-def _s_path_dir(rng: random.Random, ws: Path, slot: str = "") -> str:
+def _s_path_dir(rng: random.Random, ws: Path, slot: str = "", capability: str = "") -> str:
     ws.mkdir(parents=True, exist_ok=True)
     d = ws / f"{(slot or 'd')[:12]}{rng.randrange(1 << 30)}"
     d.mkdir(parents=True, exist_ok=True)
@@ -172,15 +218,15 @@ def _s_path_dir(rng: random.Random, ws: Path, slot: str = "") -> str:
     return str(d)
 
 
-def _s_path_output(rng: random.Random, ws: Path, slot: str = "") -> str:
+def _s_path_output(rng: random.Random, ws: Path, slot: str = "", capability: str = "") -> str:
     ws.mkdir(parents=True, exist_ok=True)
-    suffix, _ = _content_for(slot, rng)
+    suffix, _ = _content_for(slot, rng, capability)
     # an output must not exist yet; keep the declared type so parsers downstream accept it
     return str(ws / f"o{rng.randrange(1 << 30)}{suffix}")
 
 
-def _s_path_list(rng: random.Random, ws: Path, slot: str = "") -> list[str]:
-    return [_s_path_file(rng, ws, slot) for _ in range(rng.randint(1, 3))]
+def _s_path_list(rng: random.Random, ws: Path, slot: str = "", capability: str = "") -> list[str]:
+    return [_s_path_file(rng, ws, slot, capability) for _ in range(rng.randint(1, 3))]
 
 
 _SAMPLERS = {
@@ -203,7 +249,8 @@ class SamplingFailure(RuntimeError):
     pass
 
 
-def sample_args(signature: Mapping[str, str], rng: random.Random, workspace: Path) -> dict[str, Any]:
+def sample_args(signature: Mapping[str, str], rng: random.Random, workspace: Path,
+                capability: str = "") -> dict[str, Any]:
     """Sample one valid argument mapping for `signature` (slot -> type name).
 
     Raises SamplingFailure if a slot's type has no sampler. UNKNOWN has none by design --
@@ -215,7 +262,7 @@ def sample_args(signature: Mapping[str, str], rng: random.Random, workspace: Pat
         fn = _SAMPLERS.get(want)
         if fn is None:
             raise SamplingFailure("NO_SAMPLER_FOR_TYPE:" + str(want) + ":" + str(slot))
-        out[slot] = fn(rng, workspace, slot)
+        out[slot] = fn(rng, workspace, slot, capability)
     return out
 
 
