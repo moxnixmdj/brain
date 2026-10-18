@@ -218,6 +218,36 @@ def _cases() -> list[tuple[str, str, callable]]:
     add("execute_v1.run", "a program whose claimed result is not grounded",
         execute_ungrounded_claim)
 
+    # --- did it do it RIGHT -------------------------------------------
+    def wrong_result() -> bool:
+        import execute_v1 as X
+        with tempfile.TemporaryDirectory() as tmp:
+            Path(tmp, "nums.txt").write_text("1\n2\n3\n4\n")
+            Path(tmp, "out").mkdir()
+            # Asked for a mean, writes a sum. Runs clean, changes the
+            # tree, satisfies its claim -- and is wrong.
+            prog = ("vals=[int(l) for l in open('nums.txt') if l.strip()]\n"
+                    "open('out/r.txt','w').write(str(sum(vals)))")
+            chk = ("from pathlib import Path\n"
+                   "vals=[int(l) for l in open('nums.txt') if l.strip()]\n"
+                   "got=float(Path('out/r.txt').read_text().strip())\n"
+                   "raise SystemExit(0 if abs(got-sum(vals)/len(vals))<1e-9 else 1)")
+            r = X.run(prog, tmp, check=chk)
+            return r["verdict"] == X.SUCCESS
+
+    def vacuous_check() -> bool:
+        import execute_v1 as X
+        with tempfile.TemporaryDirectory() as tmp:
+            Path(tmp, "out").mkdir()
+            prog = "open('out/a.txt','w').write('x')"
+            r = X.run(prog, tmp, check="raise SystemExit(0)")
+            return r["verdict"] == X.SUCCESS
+
+    add("execute_v1.run", "a program that runs and changes the tree but "
+        "produces the wrong value", wrong_result)
+    add("execute_v1.run", "a check that accepts a corrupted result",
+        vacuous_check)
+
     # --- correction: the account handed back to the author ------------
     def why_reports_the_cause() -> bool:
         import execute_v1 as X

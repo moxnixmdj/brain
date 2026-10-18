@@ -49,6 +49,7 @@ from __future__ import annotations
 
 import os
 import subprocess
+import shutil
 import tempfile
 from pathlib import Path
 
@@ -59,6 +60,8 @@ NO_EFFECT = "NO_EFFECT"
 FAILED = "FAILED"
 INDETERMINATE = "INDETERMINATE"
 OUT_OF_BOUNDS = "OUT_OF_BOUNDS"
+WRONG_RESULT = "WRONG_RESULT"
+VACUOUS_CHECK = "VACUOUS_CHECK"
 
 
 def _snapshot(root: str) -> dict[str, tuple[int, int]]:
@@ -106,7 +109,8 @@ def _outside(root: str, paths) -> list[str]:
 
 def run(program: str, root: str, language: str = "python",
         timeout: int = 300, expect_change: bool = True,
-        claim: dict | None = None, workdir: str | None = None) -> dict:
+        claim: dict | None = None, workdir: str | None = None,
+        check: str | None = None) -> dict:
     """Execute a program against a project and say what it actually did.
 
     `claim` is an optional grounding claim about the result -- a file that
@@ -137,6 +141,50 @@ def run(program: str, root: str, language: str = "python",
 
     after = _snapshot(root)
     d = _diff(before, after)
+
+    # DID IT DO IT RIGHT.
+    #
+    # Everything above proves the world changed and that a stated claim
+    # about it holds. None of it proves the result was CORRECT. A program
+    # can run, change the tree, satisfy its claim and be plainly wrong --
+    # writing the sum of a column when it was asked for the mean is
+    # successful on every measure so far.
+    #
+    # So the caller may supply a check: a program that exits zero only if
+    # the result is right.
+    #
+    # And the check is not trusted either. A check that accepts anything
+    # -- "true", or one that never looks -- would pass every run and
+    # certify nothing, which is the exact failure SEAL recorded: agents
+    # whose self-tests saturated while certifying policies that scored
+    # below random. So it must also REJECT a deliberately broken result.
+    # A check that cannot tell a wrong answer from a right one is not a
+    # check, and it disqualifies rather than passes.
+    checked = None
+    if check:
+        good = _check_holds(check, root, timeout=timeout)
+        broken = _check_rejects_broken(check, root, timeout=timeout)
+        vacuous = good and not broken
+        checked = {"holds": good, "rejects_broken": broken, "vacuous": vacuous}
+        if vacuous:
+            # It accepted a result that was emptied or corrupted.
+            return {
+                "schema": SCHEMA, "verdict": VACUOUS_CHECK,
+                "exit_status": code, "timed_out": timed_out, "diff": d,
+                "grounding": None, "check": checked, "escaped_paths": [],
+                "output": "the check accepted a result that was emptied or "
+                          "corrupted, so it certifies nothing",
+                "root": root, "language": language,
+            }
+        if not good:
+            return {
+                "schema": SCHEMA, "verdict": WRONG_RESULT,
+                "exit_status": code, "timed_out": timed_out, "diff": d,
+                "grounding": None, "check": checked, "escaped_paths": [],
+                "output": "the program ran and changed the tree, but the "
+                          "check says the result is not right",
+                "root": root, "language": language,
+            }
 
     grounding = None
     if claim is not None:
@@ -171,6 +219,9 @@ def run(program: str, root: str, language: str = "python",
         "timed_out": timed_out,
         "diff": d,
         "grounding": grounding,
+        # Recorded on the success path too. A receipt that omits the
+        # evidence is indistinguishable from one that never checked.
+        "check": checked,
         "escaped_paths": escaped,
         "output": out[-3000:],
         "root": root,
@@ -295,3 +346,51 @@ def _why(result: dict) -> str:
                     f"hold ({g['verdict']})")
         return err[-300:] or f"exit {result['exit_status']}"
     return v
+
+
+def _check_holds(check: str, root: str, timeout: int = 60) -> bool:
+    """Does the check accept the result as it actually stands?"""
+    with tempfile.TemporaryDirectory() as tmp:
+        script = Path(tmp) / "check.py"
+        script.write_text(check if check.endswith("\n") else check + "\n")
+        try:
+            r = subprocess.run(["python3", str(script)], cwd=root,
+                               timeout=timeout, capture_output=True, text=True)
+            return r.returncode == 0
+        except Exception:
+            return False
+
+
+def _check_rejects_broken(check: str, root: str, timeout: int = 60) -> bool:
+    """Does the check reject the result once it has been broken?
+
+    This is the mutation insight, applied at the point of credit. A check
+    is only evidence if it can tell a wrong answer from a right one, so
+    the tree is spoilt -- every output file emptied -- and the check must
+    now fail. If it still passes, it was never looking, and the run it
+    would have certified means nothing.
+    """
+    with tempfile.TemporaryDirectory() as tmp:
+        work = Path(tmp) / "work"
+        shutil.copytree(root, work, symlinks=True,
+                        ignore=shutil.ignore_patterns(".git"))
+        spoilt = 0
+        for out in list(work.rglob("out/*")):
+            if out.is_file():
+                try:
+                    out.write_text("CORRUPTION")
+                    spoilt += 1
+                except OSError:
+                    continue
+        if not spoilt:
+            # Nothing to spoil: the check cannot be shown to discriminate,
+            # so it is not evidence, and absence of evidence is not a pass.
+            return False
+        script = work / "_check.py"
+        script.write_text(check if check.endswith("\n") else check + "\n")
+        try:
+            r = subprocess.run(["python3", "_check.py"], cwd=str(work),
+                               timeout=timeout, capture_output=True, text=True)
+            return r.returncode != 0
+        except Exception:
+            return False
