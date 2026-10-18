@@ -22,9 +22,11 @@ import argparse
 import importlib.util
 import json
 import random
+import re
 import shutil
 import sys
 import traceback
+from typing import Any, Mapping
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -36,6 +38,29 @@ from canonical.runtime import type_directed_sampler_v1 as samp  # noqa: E402
 
 SCHEMA = "PROJECT_BRAIN_TYPED_CAPABILITY_SWEEP_V1"
 WORK = ROOT / "canonical/astra_runtime/tmp/typed_sweep"
+
+
+def _substitute(template: Any, filled: Mapping[str, Any]) -> Any:
+    """Fill ${input.X} placeholders inside an action_template, at any depth.
+
+    A template value is usually a bare "${input.path}" but is sometimes embedded in a list
+    (argv) or a dict, so the walk has to be recursive. Keys that are literal configuration
+    -- argv, decode_callable, package_root, timeout_s -- are passed through untouched.
+    """
+    if isinstance(template, str):
+        m = re.fullmatch(r"\$\{input\.([A-Za-z_][A-Za-z0-9_]*)\}", template.strip())
+        if m:
+            name = m.group(1)
+            return filled[name] if name in filled else template
+        out = template
+        for key, val in filled.items():
+            out = out.replace("${input." + key + "}", str(val))
+        return out
+    if isinstance(template, Mapping):
+        return {k: _substitute(v, filled) for k, v in template.items()}
+    if isinstance(template, list):
+        return [_substitute(v, filled) for v in template]
+    return template
 
 
 def _load_adapter(adapter_path: str, name: str):
@@ -62,8 +87,20 @@ def sweep_one(cid: str, entry: dict, instances: int, seed: int, work: Path) -> d
         "errors": {},
         "sample_error": None,
     }
+    # 31 of 70 declare no source.adapter_path, but every one of them names an
+    # adapter_module that exists on disk. Falling back to it is the difference between
+    # "unrunnable" and "runnable" for a third of the registry -- and it matters because the
+    # ones that then fail on a MISSING BINARY are failing on this sandbox, not on the
+    # public runner, which has apt. Conflating those is the mistake of calling the
+    # sandbox the machine.
     if not adapter_path:
-        result["errors"]["NO_ADAPTER_PATH"] = instances
+        module_name = entry.get("adapter_module")
+        if module_name:
+            candidate = ROOT / "canonical/runtime/bound_capabilities" / f"{module_name}.py"
+            if candidate.is_file():
+                adapter_path = f"canonical/runtime/bound_capabilities/{module_name}.py"
+    if not adapter_path:
+        result["errors"]["NO_ADAPTER_RESOLVABLE"] = instances
         return result
 
     ws = work / cid.replace(".", "_")[:60]
@@ -83,11 +120,19 @@ def sweep_one(cid: str, entry: dict, instances: int, seed: int, work: Path) -> d
         result["errors"]["NO_ENTRYPOINT"] = instances
         return result
 
+    # The action_template IS the call. Placeholders are the inputs to fill; everything else
+    # (argv, decode_callable, package_root, timeout_s) is literal configuration the adapter
+    # also requires. Sampling only the placeholder-derived slots and handing those over was
+    # the wrong model and produced 22 failures of the form CLI_ARGV_REQUIRED /
+    # PYTHON_CODEC_CONTRACT_INCOMPLETE: adapters demanding arguments the call never carried.
+    template_args = ((entry.get("action_template") or {}).get("args")) or {}
+
     for _ in range(instances):
         try:
             # the capability id is what lets content rules be scoped per capability;
             # without it a rule for one capability's output_path would silently not apply
-            args = samp.sample_args(sig, rng, ws, capability=cid)
+            filled = samp.sample_args(sig, rng, ws, capability=cid)
+            args = _substitute(template_args, filled) if template_args else dict(filled)
         except samp.SamplingFailure as exc:
             result["errors"]["SAMPLING_FAILED:" + str(exc)] = \
                 result["errors"].get("SAMPLING_FAILED:" + str(exc), 0) + 1

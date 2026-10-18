@@ -259,6 +259,31 @@ def type_of(key: str) -> str:
 _PLACEHOLDER = re.compile(r"\$\{input\.([A-Za-z_][A-Za-z0-9_]*)\}")
 
 
+def _placeholders_in(value: Any) -> list[str]:
+    """Every `${input.X}` mentioned anywhere inside `value`, including nested containers.
+
+    Only looking at top-level strings loses real slots: `auto.apt.zint` passes
+    `argv: ["zint", "-o", "${input.output_path}", "-d", "${input.text}"]`, which is a list,
+    so the whole argument was skipped and BOTH argv and the ${input.text} inside it became
+    invisible to the surface. Measured consequence: 22 of 45 capabilities that fail every
+    instance do so because the adapter demands an argument the signature never carried --
+    CLI_ARGV_REQUIRED, PYTHON_CODEC_CONTRACT_INCOMPLETE, NODE_CODEC_PACKAGE_ROOT_REQUIRED.
+    The name of the argument key and the placeholders inside it are different things, so
+    both are collected.
+    """
+    found: list[str] = []
+    if isinstance(value, str):
+        for m in _PLACEHOLDER.finditer(value):
+            found.append(m.group(1))
+    elif isinstance(value, Mapping):
+        for item in value.values():
+            found.extend(_placeholders_in(item))
+    elif isinstance(value, (list, tuple)):
+        for item in value:
+            found.extend(_placeholders_in(item))
+    return found
+
+
 def slots_of(entry: Mapping[str, Any]) -> list[str]:
     """The typed input slots a capability declares, in registry order."""
     args = ((entry.get("action_template") or {}).get("args")) or {}
@@ -268,6 +293,8 @@ def slots_of(entry: Mapping[str, Any]) -> list[str]:
             m = _PLACEHOLDER.fullmatch(value.strip())
             if m:
                 found.append(m.group(1))
+        # a container may carry placeholders even when the argument itself is not one
+        found.extend(_placeholders_in(value))
     return sorted(set(found))
 
 
