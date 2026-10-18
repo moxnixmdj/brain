@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/structured_method_universal_correctness_certificate_v1.py.auto.v1",
- "elapsed_ms": 47.783,
+ "elapsed_ms": 50.368,
  "independent_run_reference": {
-  "github_run_id": 39141883409,
+  "github_run_id": 39142126974,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "a3b2f8ae-0578-4f71-b841-af573838448e",
+   "jti": "d65ff220-564b-4d70-960d-7859b9e38065",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39141883409",
+   "run_id": "39142126974",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
