@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/v12_target_law_uncertainty_residual_verifier_v1.py.auto.v1",
- "elapsed_ms": 32.593,
+ "elapsed_ms": 25.995,
  "independent_run_reference": {
-  "github_run_id": 39140691013,
+  "github_run_id": 39140942932,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "d6263746-6b97-4104-8842-176955b9b295",
+   "jti": "60211400-44a7-43bd-8663-47f3557f388c",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39140691013",
+   "run_id": "39140942932",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
