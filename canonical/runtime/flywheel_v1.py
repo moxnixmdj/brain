@@ -293,8 +293,51 @@ def classify(error_text: str) -> tuple:
             return where, why
     if not text:
         return "unknown", "no error reported"
+
+    # What the table cannot name, a calibrated classifier may be able
+    # to. This is the one place the loop still held hand-written domain
+    # knowledge, and it is the reason unanticipated failures landed in
+    # "unclassified" forever.
+    #
+    # The table runs FIRST, not second: it is free, deterministic and
+    # instant, and a classifier is none of those. The judge is asked
+    # only about what the table could not name -- so the common path
+    # pays nothing for having the capability.
+    #
+    # Its answer is ADVICE. It is admitted only above a confidence
+    # threshold, and anything below escalates to "unclassified",
+    # because a guess filed as a category is worse than no category:
+    # it silently merges two different failures into one cell.
+    try:
+        import judge_v1 as J
+        if J.configured():
+            # Both tables are (matcher, operation, why) triples. The
+            # _PATHOLOGIES arm was unpacked as pairs, which raised
+            # ValueError straight into the except below and silently
+            # disabled the judge -- the failure this system keeps
+            # meeting: an error swallowed so the feature quietly does
+            # nothing, with no signal anywhere.
+            cats = sorted({w for _, w, _ in _PATHOLOGIES}
+                          | {w for _, w, _ in _MSG})
+            r = J.choose(text, "which kind of failure is this?",
+                         {c: c for c in cats})
+            if r["admitted"] and r["choice"] in cats:
+                return r["choice"], _why_for_operation(r["choice"])
+    except Exception:
+        pass
+
     first = text.splitlines()[-1][:80] if text.splitlines() else text[:80]
     return "unclassified", first
+
+
+def _why_for_operation(operation: str) -> str:
+    """A stable 'why' for a category the classifier chose.
+
+    The classifier names WHAT broke, not HOW. Pairing it with a fixed
+    why keeps the cell addressable and stops one category from
+    fragmenting into a cell per error message.
+    """
+    return "judged:" + operation
 
 
 def primers(alpha: float = DEFAULT_ALPHA,
