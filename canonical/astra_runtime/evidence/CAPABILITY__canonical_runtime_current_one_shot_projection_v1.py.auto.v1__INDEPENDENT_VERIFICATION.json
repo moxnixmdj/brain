@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/current_one_shot_projection_v1.py.auto.v1",
- "elapsed_ms": 43.962,
+ "elapsed_ms": 30.793,
  "independent_run_reference": {
-  "github_run_id": 39099482757,
+  "github_run_id": 39099660559,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "aac068b2-fc1b-4161-8ed9-8aa9778d65eb",
+   "jti": "eae2a692-3ed1-4048-92db-e067113460cc",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39099482757",
+   "run_id": "39099660559",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
