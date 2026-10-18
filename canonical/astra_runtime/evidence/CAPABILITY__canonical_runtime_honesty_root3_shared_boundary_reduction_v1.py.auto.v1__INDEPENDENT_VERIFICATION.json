@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/honesty_root3_shared_boundary_reduction_v1.py.auto.v1",
- "elapsed_ms": 22.36,
+ "elapsed_ms": 36.651,
  "independent_run_reference": {
-  "github_run_id": 39163777773,
+  "github_run_id": 39163965313,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "cb488984-fcad-4779-92d4-9a938c51c11d",
+   "jti": "3a9259c1-b75b-47f0-a59a-073665e76b59",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39163777773",
+   "run_id": "39163965313",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
