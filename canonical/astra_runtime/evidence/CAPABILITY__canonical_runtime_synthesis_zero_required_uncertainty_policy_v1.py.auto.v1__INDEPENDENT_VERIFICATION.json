@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/synthesis_zero_required_uncertainty_policy_v1.py.auto.v1",
- "elapsed_ms": 0.725,
+ "elapsed_ms": 0.655,
  "independent_run_reference": {
-  "github_run_id": 39170754858,
+  "github_run_id": 39170976177,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "de83faed-5d19-4bab-9591-77ac5a3d9f94",
+   "jti": "ca0e6eca-0477-429c-8bbb-2d470b351da3",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39170754858",
+   "run_id": "39170976177",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
