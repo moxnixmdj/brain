@@ -105,13 +105,47 @@ def load_registry():
     return caps
 
 
+# A capability that reports its own outcome as unresolved or failed cannot
+# be verified by any field it also carries. terminal.kstar.root.assess
+# declared `output_verified == true` while returning status UNRESOLVED, and
+# the machine reported VERIFIED_ACTION. Checking a declared field while
+# ignoring the verdict sitting next to it is not verification.
+def _lookup(result, path):
+    """Read a possibly nested field: "receipt.verified".
+
+    The computer-use adapters nest their proof under `receipt`, while the
+    declared expects named top-level fields -- so a write that genuinely
+    succeeded reported failure because `verified` was one level down.
+    """
+    cur = result
+    for part in str(path or "").split("."):
+        if isinstance(cur, dict) and part in cur:
+            cur = cur[part]
+        else:
+            return None
+    return cur
+
+
+_SELF_REPORTED_FAILURE = frozenset({
+    "UNRESOLVED", "FAILED", "FAILURE", "ERROR", "REFUSED", "BLOCKED",
+    "FAIL_CLOSED", "NOT_VERIFIED", "INVALID",
+})
+
+
 def _check_expect(expect, result):
     """Apply the template's own proof. Unknown check types FAIL, never pass."""
+    if isinstance(result, dict):
+        if "pass" in result and not result.get("pass"):
+            return False, "SELF_REPORTED_FAILURE:pass=false"
+        for key in ("status", "outcome", "result_status"):
+            value = str(result.get(key) or "").strip().upper()
+            if value in _SELF_REPORTED_FAILURE:
+                return False, "SELF_REPORTED_FAILURE:%s=%s" % (key, value)
     if not isinstance(expect, dict) or not expect:
         return True, "NO_EXPECT_DECLARED"
     field = str(expect.get("field") or "")
     kind = str(expect.get("type") or "")
-    value = (result or {}).get(field) if isinstance(result, dict) else None
+    value = _lookup(result, field) if isinstance(result, dict) else None
     if kind == "field_nonempty":
         ok = value is not None and str(value).strip() != ""
         return ok, f"{kind}:{field}"
@@ -128,6 +162,43 @@ _GOAL_STOPWORDS = frozenset({
     "for", "this", "that", "into", "on", "in", "by", "as", "at", "its", "it",
     "then", "into", "canonical", "runtime", "tmp",
 })
+
+
+def _word_tokens(text):
+    import re as _re
+    return {t for t in _re.findall(r"[a-z0-9]+", str(text or "").lower())
+            if len(t) >= 3}
+
+
+def keyword_candidates(goal, registry, k=8):
+    """Route on the words the grounder is structurally blind to.
+
+    plain_goal_bound_grounding strips GENERIC ACTION VERBS -- write, read,
+    create, save -- as non-distinctive, then requires a distinctive token
+    to match. So a capability whose keywords ARE those words can never be
+    proposed. `CAP_FS_WRITE_V1` has keywords ["write","save","create",
+    "put","output"] and was unreachable: asking the machine to write a
+    file returned a capability that does something else entirely.
+
+    This is additive -- it does not replace the grounder, it sees the
+    words the grounder discards.
+    """
+    tokens = _distinctive_goal_tokens(goal)
+    if not tokens:
+        return []
+    scored = []
+    for cid, entry in (registry or {}).items():
+        words = set(_word_tokens(cid))
+        for kw in (entry.get("keywords") or ()):
+            words |= _word_tokens(kw)
+        for eff in (entry.get("provides") or ()):
+            words |= _word_tokens(eff)
+        hits = tokens & words
+        if hits:
+            scored.append((len(hits), str(cid)))
+    scored.sort(key=lambda t: (-t[0], t[1]))
+    return [{"capability_id": cid, "combined_score": float(hits) * 10.0}
+            for hits, cid in scored[:k]]
 
 
 def _distinctive_goal_tokens(goal):
@@ -241,7 +312,8 @@ def _try_bridge(goal, root, goal_paths, started):
 
 
 def act(goal, root=None, registry=None, verbose=False, memory=True,
-        established_effects=(), extra_paths=(), bridge=True):
+        established_effects=(), extra_paths=(), bridge=True,
+        computer_use=True):
     """`established_effects` and `extra_paths` are how one step feeds the next.
 
     A caller chaining steps passes what earlier steps PROVIDED and the paths
@@ -258,7 +330,22 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
             from canonical.runtime import experience_v1 as EXP
         except Exception:
             EXP = None
-    registry = registry if registry is not None else load_registry()
+    registry = dict(registry if registry is not None else load_registry())
+    # ENGINEERING WAS WALLED OFF. The 70-capability registry contains no
+    # CAP_* entries at all, so the loop could inspect the machine but
+    # could not write a file or run a program. The computer-use family
+    # already existed, verified and zero-spend; it simply had not been
+    # joined to the planner. Union, not modification.
+    if computer_use:
+        try:
+            from canonical.runtime import h100_computer_use_registry_v1 as CU
+            for cid, entry in (CU.bound_entries() or {}).items():
+                if isinstance(entry, dict) and cid not in registry:
+                    merged = dict(entry)
+                    merged.setdefault("platforms", ["linux"])
+                    registry[cid] = merged
+        except Exception:
+            pass
 
     from canonical.runtime import world_probe_v1 as WP
     from canonical.runtime import world_binding_v1 as WB
@@ -295,7 +382,16 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
     survivors = []
     rejected = []
     seen = set()
-    for clause in (grounding.get("clauses") or []):
+    merged = list(grounding.get("clauses") or [])
+    # Escalate to the keyword route only when the primary one is thin.
+    # Running it unconditionally added candidates everywhere and cost a
+    # completed chain to fresh ambiguity -- a second opinion is for when
+    # the first has little to say, not a permanent extra voice.
+    if sum(len(c.get("candidates") or []) for c in merged) < 2:
+        extra = keyword_candidates(goal, admissible)
+        if extra:
+            merged = merged + [{"candidates": extra}]
+    for clause in merged:
         for cand in (clause.get("candidates") or []):
             cid = str(cand.get("capability_id") or "")
             if not cid or cid in seen:
@@ -450,8 +546,37 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
         }
 
     # EXECUTE through the Brain's own invoker: unknown routes fail closed.
-    from canonical.runtime.astra_runtime import _invoke_bound_capability
     from canonical.runtime import world_binding_v1 as _WB
+    if str(chosen["capability_id"]).startswith("CAP_"):
+        from canonical.runtime import h100_computer_use_registry_v1 as CU
+        try:
+            call = _WB.render_args(chosen["entry"], chosen["inputs"])
+        except KeyError as exc:
+            call, error = None, "TEMPLATE_ARGUMENT_UNBOUND:" + str(exc)
+            result, invoked = None, False
+        if call is not None:
+            call.pop("capability_id", None)
+            try:
+                result = CU.invoke(chosen["capability_id"], call, root)
+                invoked, error = True, None
+            except Exception as exc:
+                result, invoked, error = None, False, type(exc).__name__ + ":" + str(exc)
+        expect = ((chosen["entry"].get("action_template") or {}).get("expect"))
+        verified, expect_note = _check_expect(expect, result) if invoked else (False, "NOT_INVOKED")
+        return {
+            "schema": SCHEMA, "ok": bool(invoked and verified),
+            "status": "VERIFIED_ACTION" if (invoked and verified) else "ACTION_FAILED",
+            "goal": goal, "capability_id": chosen["capability_id"],
+            "inputs": chosen["inputs"], "selected_because": why,
+            "provides": chosen["provides"], "expect": expect_note,
+            "result": result if isinstance(result, dict) else repr(result),
+            "error": error, "executed": invoked, "verified": verified,
+            "ground_ms": round(ground_ms, 2), "exec_ms": 0.0,
+            "survivors": [{k: v for k, v in s.items() if k != "entry"} for s in survivors],
+            "rejected": rejected if verbose else rejected,
+            "total_ms": round((time.perf_counter() - started) * 1000.0, 2),
+        }
+    from canonical.runtime.astra_runtime import _invoke_bound_capability
     try:
         args = _WB.render_args(chosen["entry"], chosen["inputs"])
     except KeyError as exc:

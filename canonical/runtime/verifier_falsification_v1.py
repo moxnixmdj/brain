@@ -978,6 +978,72 @@ def _cases() -> list[tuple[str, str, callable]]:
         "a previous step's output treated as a constraint on this one",
         prior_step_output_treated_as_a_constraint)
 
+    # --- three ways a result can verify itself falsely -------------------
+    # Each of these actually happened. A check that reads one declared
+    # field while ignoring the verdict sitting beside it is not
+    # verification; it is a field lookup with better manners.
+
+    def result_saying_pass_false_still_verifies() -> bool:
+        import grounded_action_v1 as G
+        ok, _note = G._check_expect(
+            {"field": "coverage_complete", "type": "field_equals", "value": True},
+            {"pass": False, "coverage_complete": True})
+        return bool(ok)
+
+    def result_saying_unresolved_still_verifies() -> bool:
+        import grounded_action_v1 as G
+        # terminal.kstar.root.assess declared output_verified == true while
+        # returning status UNRESOLVED, and was reported VERIFIED_ACTION.
+        ok, _note = G._check_expect(
+            {"field": "output_verified", "type": "field_equals", "value": True},
+            {"status": "UNRESOLVED", "output_verified": True})
+        return bool(ok)
+
+    def named_destination_ignored() -> bool:
+        import world_binding_v1 as WB
+        got = WB.named_destination(
+            'write "x" to canonical/astra_runtime/tmp/thing.txt')
+        return got != "canonical/astra_runtime/tmp/thing.txt"
+
+    add("grounded_action_v1._check_expect", "a result reporting pass=false",
+        result_saying_pass_false_still_verifies)
+    add("grounded_action_v1._check_expect", "a result reporting status UNRESOLVED",
+        result_saying_unresolved_still_verifies)
+    add("world_binding_v1.named_destination", "a destination the user actually named",
+        named_destination_ignored)
+
+    # --- only a fact about the machine may disable a capability ----------
+    # THIRD SIGHTING OF THE SAME ERROR. A memory keyed on the wrong context
+    # generalises past the situation that made it true: first a goal-relative
+    # file kind became a permanent ban, then a precondition, and now eight
+    # audits of ONE directory containing an unparseable file disabled
+    # python.source.audit.ast everywhere, including targets that audit fine.
+    # The unit of memory keeps needing to include what made the fact true.
+
+    def statistical_failures_disable_a_capability() -> bool:
+        import experience_v1 as E
+        E.DEFAULT_STATE = "canonical/runtime/state/_falsify_exp_f.json"
+        E._STATE_CACHE.clear()
+        for _ in range(8):
+            E.record("falsify.cap", "RuntimeError", False, structural=False)
+        return bool(E.is_suppressed("falsify.cap"))
+
+    def structural_fact_still_suppresses() -> bool:
+        import experience_v1 as E
+        # The opposite error: refusing to act on a real fact about the box.
+        E.DEFAULT_STATE = "canonical/runtime/state/_falsify_exp_g.json"
+        E._STATE_CACHE.clear()
+        E.record("falsify.cap2", "BOUND_CAPABILITY_SOURCE_UNSUPPORTED",
+                 False, structural=True)
+        return not E.is_suppressed("falsify.cap2")
+
+    add("experience_v1.is_suppressed",
+        "a run of failures treated as a fact about the machine",
+        statistical_failures_disable_a_capability)
+    add("experience_v1.is_suppressed",
+        "a real structural fact about this box ignored",
+        structural_fact_still_suppresses)
+
     return out
 
 

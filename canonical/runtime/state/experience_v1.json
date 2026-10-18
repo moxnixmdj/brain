@@ -2,8 +2,15 @@
  "cells": {
   "archive.tar_gz.create_from_manifest|verified": {
    "first_seen": 1792312443.2875447,
-   "last_seen": 1792313997.255119,
+   "last_seen": 1792314953.158723,
    "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
     1,
     1,
     1,
@@ -17,8 +24,12 @@
   },
   "archive.verify.tar_gz.gnu|runtimeerror": {
    "first_seen": 1792312443.3720834,
-   "last_seen": 1792313997.3341954,
+   "last_seen": 1792314951.2034862,
    "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
     -1,
     -1,
     -1
@@ -52,8 +63,16 @@
   },
   "docx.document.verify.intent_ooxml|verified": {
    "first_seen": 1792312443.1245909,
-   "last_seen": 1792313997.0815,
+   "last_seen": 1792314953.1307454,
    "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
     1,
     1,
     1,
@@ -66,10 +85,22 @@
    "where": "docx.document.verify.intent_ooxml",
    "why": "VERIFIED"
   },
+  "evidence.claim_spec.bind.explicit_comparison.stdlib|jsondecodeerror": {
+   "first_seen": 1792314707.727418,
+   "last_seen": 1792314707.7274203,
+   "observations": [
+    -1
+   ],
+   "structural": false,
+   "where": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+   "why": "JSONDecodeError"
+  },
   "image.extract.ocr.tesseract|bound_capability_source_unsupported": {
    "first_seen": 1792313437.9199655,
-   "last_seen": 1792314001.8240016,
+   "last_seen": 1792315030.2408707,
    "observations": [
+    -1,
+    -1,
     -1,
     -1
    ],
@@ -100,10 +131,53 @@
    "where": "pdf.extract.text.pypdf",
    "why": "VERIFIED"
   },
+  "pypi.provenance.audit_live_artifact|pypi.live_metadata.available": {
+   "first_seen": 1792314707.5770307,
+   "last_seen": 1792314707.5770314,
+   "observations": [
+    -1
+   ],
+   "structural": false,
+   "where": "pypi.provenance.audit_live_artifact",
+   "why": "pypi.live_metadata.available"
+  },
+  "pypi.provenance.audit_live_artifact|pypi.selection.available": {
+   "first_seen": 1792314707.5773926,
+   "last_seen": 1792314707.5773938,
+   "observations": [
+    -1
+   ],
+   "structural": false,
+   "where": "pypi.provenance.audit_live_artifact",
+   "why": "pypi.selection.available"
+  },
+  "python.software.repair.loop.strict_progress.ast.v1|python.patch.search.test_guided.ast.v1": {
+   "first_seen": 1792314707.5759733,
+   "last_seen": 1792314707.5759766,
+   "observations": [
+    -1
+   ],
+   "structural": false,
+   "where": "python.software.repair.loop.strict_progress.ast.v1",
+   "why": "python.patch.search.test_guided.ast.v1"
+  },
+  "python.software.repair.loop.test_guided.ast.v1|python.patch.search.test_guided.ast.v1": {
+   "first_seen": 1792314707.5766072,
+   "last_seen": 1792314707.5766084,
+   "observations": [
+    -1
+   ],
+   "structural": false,
+   "where": "python.software.repair.loop.test_guided.ast.v1",
+   "why": "python.patch.search.test_guided.ast.v1"
+  },
   "python.source.audit.ast|runtimeerror": {
    "first_seen": 1792312444.8398008,
-   "last_seen": 1792313998.7235374,
+   "last_seen": 1792314954.7388165,
    "observations": [
+    -1,
+    -1,
+    -1,
     -1,
     -1,
     -1,
@@ -118,8 +192,11 @@
   },
   "python.source.audit.ast|verified": {
    "first_seen": 1792312443.2595565,
-   "last_seen": 1792313997.228489,
+   "last_seen": 1792314952.9613173,
    "observations": [
+    1,
+    1,
+    1,
     1,
     1,
     1,
@@ -131,10 +208,35 @@
    "where": "python.source.audit.ast",
    "why": "VERIFIED"
   },
+  "python.task.acceptance.measured.objective.v1|bound_capability_source_unsupported": {
+   "first_seen": 1792314707.6911466,
+   "last_seen": 1792314707.6911483,
+   "observations": [
+    -1
+   ],
+   "structural": true,
+   "where": "python.task.acceptance.measured.objective.v1",
+   "why": "BOUND_CAPABILITY_SOURCE_UNSUPPORTED"
+  },
+  "source.evidence.extract.objective_grounded.stdlib|source.candidate.provenance.verified": {
+   "first_seen": 1792314706.0934482,
+   "last_seen": 1792314707.6905208,
+   "observations": [
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "source.evidence.extract.objective_grounded.stdlib",
+   "why": "source.candidate.provenance.verified"
+  },
   "sqlite.table.verify_against_json_records|blocker": {
    "first_seen": 1792312443.3051975,
-   "last_seen": 1792313997.273135,
+   "last_seen": 1792314951.141409,
    "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
     -1,
     -1,
     -1
@@ -145,8 +247,12 @@
   },
   "xlsx.table.create_from_json_records|blocker": {
    "first_seen": 1792312443.3409848,
-   "last_seen": 1792313997.3038008,
+   "last_seen": 1792314951.1732259,
    "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
     -1,
     -1,
     -1
@@ -157,8 +263,12 @@
   },
   "xlsx.table.verify_against_json_records|blocker": {
    "first_seen": 1792312443.3242493,
-   "last_seen": 1792313997.289722,
+   "last_seen": 1792314951.1583884,
    "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
     -1,
     -1,
     -1

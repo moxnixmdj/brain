@@ -128,6 +128,23 @@ def _ext_for(name, cid):
     return best[1] if best else ".json"
 
 
+_DESTINATION_RE = re.compile(
+    r"\b(?:to|into|onto|as)\s+([A-Za-z0-9_./-]*/[A-Za-z0-9_./-]+)", re.I)
+
+
+def named_destination(goal):
+    """The destination the user actually said, if they said one.
+
+    "write X to canonical/tmp/hello.txt" names where it should go.
+    Synthesising a path anyway sent the output somewhere else entirely and
+    the file never appeared -- the machine looked like it had worked.
+    A destination the user names always wins over one we invent; we only
+    invent when they did not say.
+    """
+    matches = _DESTINATION_RE.findall(str(goal or ""))
+    return matches[-1].strip("./") if matches else None
+
+
 def synthesize_output_path(cid, name="output_path", root=None):
     """A deterministic destination for work that does not exist yet.
 
@@ -302,7 +319,7 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
         # succeeded this module never got to correct the extension. The
         # capability determines its own artifact type; the goal cannot.
         if "output" in low:
-            value = synthesize_output_path(cid, key, root)
+            value = named_destination(goal) or synthesize_output_path(cid, key, root)
             filled[key] = value
             continue
         if key in bound and str(bound[key]).strip():

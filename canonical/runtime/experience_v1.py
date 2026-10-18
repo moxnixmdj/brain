@@ -197,8 +197,22 @@ def status(cell: str, path=None) -> dict:
     # DIRECTION, not just magnitude -- see the module docstring.
     credited = bool(e_value >= THRESHOLD and mean > 0)
     probe_due = _probe_due(entry)
-    harmful = bool(entry.get("structural") and mean < 0) or bool(
-        e_value >= THRESHOLD and mean < 0)
+    # ONLY A FACT ABOUT THE MACHINE MAY DISABLE A CAPABILITY.
+    #
+    # Suppression used to fire on any consistent run of failures. It then
+    # learned, from eight audits of ONE directory that contains an
+    # unparseable file, that python.source.audit.ast fails -- and disabled
+    # auditing everywhere, including targets that audit perfectly well.
+    # The cell was keyed (capability x error) while the truth was
+    # (capability x error x TARGET).
+    #
+    # A statistical run of failures is usually a fact about WHAT WAS ASKED,
+    # not about the machine, so it must not disable anything. Suppression
+    # is a claim that this box cannot do the thing; only structural
+    # evidence -- no such adapter, unsupported source, absent binary --
+    # supports that claim. The e-process keeps its proper job: crediting a
+    # correction, never banning a capability.
+    harmful = bool(entry.get("structural") and mean < 0)
     suppressed = bool(harmful and not probe_due)
     return {"cell": cell, "n": n, "e_value": round(e_value, 3),
             "mean": round(mean, 3), "threshold": round(THRESHOLD, 1),

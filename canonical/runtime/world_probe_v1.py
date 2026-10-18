@@ -96,6 +96,28 @@ _RUNTIME_KINDS = {
     "sqlite3": "sqlite3",
 }
 
+# Facts so basic they are easy to overlook and fatal to miss. The
+# computer-use capabilities require `project_present` and `files_known`,
+# and nothing in the registry PROVIDES either -- so without deciding them
+# here, the machine could see that a file-write capability existed and
+# still conclude it was not allowed to use it.
+_BOOTSTRAP = {
+    "project_present": lambda root, paths: bool(root) and Path(root).is_dir(),
+    "files_known":     lambda root, paths: bool(paths) or any(Path(root).iterdir()),
+}
+
+
+def _decide_bootstrap(effect, root, goal_paths):
+    rule = _BOOTSTRAP.get(str(effect or "").strip().lower())
+    if rule is None:
+        return None
+    try:
+        ok = bool(rule(root, goal_paths))
+    except Exception:
+        return {"true": False, "how": "bootstrap_probe_failed", "evidence": None}
+    return {"true": ok, "how": "bootstrap_observed", "evidence": None}
+
+
 _INDEX_CACHE: dict[str, list[str]] = {}
 
 
@@ -203,6 +225,9 @@ def probe_effect(effect, goal="", goal_paths=(), root=None):
         return {"true": False, "how": "empty_effect", "evidence": None}
 
     decided = _decide_task_scalar(e, goal, goal_paths, root)
+    if decided is not None:
+        return decided
+    decided = _decide_bootstrap(e, root, goal_paths)
     if decided is not None:
         return decided
 
