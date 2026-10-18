@@ -80,8 +80,19 @@ def inspect(capability_id: str) -> dict[str, Any]:
     verification = entry.get("verification")
     if not isinstance(verification, Mapping) or not verification:
         raise BoundExecutionError("BOUND_CAPABILITY_VERIFICATION_MISSING:" + cid)
+    # `independently_verified` (with -ly) is the spelling the verification
+    # missions actually write; 14 of 70 entries carry it as boolean True with
+    # real mission ids and observed effects on file, and this predicate did not
+    # read it, so the machine was told it had no proof for work it had done.
+    #
+    # Still `is True`, never truthiness, deliberately. The adversarial
+    # scheduler generator writes "true" as a STRING (rng.choice([False,
+    # "true", None])) specifically to model a capability claiming verification
+    # it does not have, and the oracle rejects exactly that (is not True).
+    # Accepting a synonym must not become accepting a weaker claim.
     independently_verified = (
         verification.get("independent_verified") is True
+        or verification.get("independently_verified") is True
         or isinstance(verification.get("independently_verified_by"), str)
         or verification.get("producer_independent") is True
     )
