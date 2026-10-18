@@ -251,6 +251,20 @@ def type_of(key: str) -> str:
         return BOOL
     if key in _STRING_KEYS:
         return STRING
+    # Suffixes observed on arguments the registry never declares but adapters read anyway.
+    # Each is a real derivation from the name, not a guess: a thing called *_text_utf8 holds
+    # text, a thing called *_sha256 holds a digest, a thing called *_key holds a name.
+    if any(key.endswith(sfx) for sfx in ("_text", "_utf8", "_key", "_id", "_sha256",
+                                         "_hash", "_hex", "_mode", "_label")):
+        return STRING
+    if key in {"timeout", "limit", "count", "offset", "width", "height", "dpi"}:
+        return NUMBER
+    if key in {"mode", "kind"}:
+        return STRING
+    if key == "evidence":
+        return PATH_LIST
+    if key == "actions":
+        return JSON_TEXT
     return UNKNOWN
 
 
@@ -438,6 +452,57 @@ def unconsumed_slots(registry: Mapping[str, Any] | None = None,
         dead = sorted(slot for slot, key in mapping.items() if key not in source)
         if dead:
             out[cid] = dead
+    return out
+
+
+# `args.get("x")` with no second argument is a required read: the caller must supply it or the
+# adapter sees None. `args.get("x", default)` is optional. `args["x"]` is required and stricter.
+_RE_READ_REQUIRED = re.compile(r"""\bargs\.get\(\s*["']([A-Za-z_]\w*)["']\s*\)""")
+_RE_READ_OPTIONAL = re.compile(r"""\bargs\.get\(\s*["']([A-Za-z_]\w*)["']\s*,""")
+_RE_READ_SUBSCRIPT = re.compile(r"""\bargs\[\s*["']([A-Za-z_]\w*)["']\s*\]""")
+
+
+def adapter_arg_reads(entry: Mapping[str, Any],
+                      adapters_dir: str | None = None) -> dict[str, list[str]]:
+    """Argument keys the adapter reads that the action_template never declares.
+
+    This is the exact complement of `dead_slots`. That function proves every DECLARED slot is
+    read; this one finds what is read but never DECLARED. Shipping only the first half is how
+    15 capabilities came to fail every single instance with CLI_ARGV_REQUIRED,
+    PYTHON_CODEC_CONTRACT_INCOMPLETE and NODE_CODEC_PACKAGE_ROOT_REQUIRED while the surface
+    reported "dead slots: 0" and all its tests passed.
+
+    `required` means the adapter reads it with no default, so a call that omits it is
+    incomplete. `optional` means a default exists and omitting it is legitimate.
+    """
+    import pathlib
+    base = pathlib.Path(adapters_dir or (Path(__file__).resolve().parents[0] / "bound_capabilities"))
+    adapter = str(entry.get("adapter_module") or "")
+    path = base / (adapter + ".py")
+    if not path.is_file():
+        return {"required": [], "optional": []}
+    source = "\n".join(_closure_source(path))
+
+    req = set(_RE_READ_REQUIRED.findall(source)) | set(_RE_READ_SUBSCRIPT.findall(source))
+    opt = set(_RE_READ_OPTIONAL.findall(source))
+    req -= opt  # a default anywhere makes it optional
+
+    declared = set(((entry.get("action_template") or {}).get("args")) or {})
+    return {
+        "required": sorted(req - declared),
+        "optional": sorted(opt - declared),
+    }
+
+
+def undeclared_required(registry: Mapping[str, Any] | None = None,
+                        adapters_dir: str | None = None) -> dict[str, list[str]]:
+    """Per capability: argument keys the adapter requires but the registry never declares."""
+    registry = registry if registry is not None else load_registry()
+    out: dict[str, list[str]] = {}
+    for cid, entry in registry.items():
+        reads = adapter_arg_reads(entry, adapters_dir)
+        if reads["required"]:
+            out[cid] = reads["required"]
     return out
 
 

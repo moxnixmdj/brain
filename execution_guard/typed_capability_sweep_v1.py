@@ -35,6 +35,7 @@ if str(ROOT) not in sys.path:
 
 from canonical.runtime import capability_type_surface_v1 as ts  # noqa: E402
 from canonical.runtime import type_directed_sampler_v1 as samp  # noqa: E402
+from canonical.runtime.capability_type_surface_v1 import type_of  # noqa: E402
 
 SCHEMA = "PROJECT_BRAIN_TYPED_CAPABILITY_SWEEP_V1"
 WORK = ROOT / "canonical/astra_runtime/tmp/typed_sweep"
@@ -115,6 +116,9 @@ def sweep_one(cid: str, entry: dict, instances: int, seed: int, work: Path) -> d
         result["sample_error"] = str(exc)[:300]
         return result
 
+    # arguments the adapter requires that the registry never declared
+    extra_slots = ts.adapter_arg_reads(entry).get("required") or []
+
     fn = getattr(module, (entry.get("entrypoint") or "run"), None)
     if fn is None:
         result["errors"]["NO_ENTRYPOINT"] = instances
@@ -132,6 +136,13 @@ def sweep_one(cid: str, entry: dict, instances: int, seed: int, work: Path) -> d
             # the capability id is what lets content rules be scoped per capability;
             # without it a rule for one capability's output_path would silently not apply
             filled = samp.sample_args(sig, rng, ws, capability=cid)
+            # the registry omits arguments the adapter nevertheless requires (65 of them
+            # across 26 capabilities). Fill them from their names so the call is complete:
+            # otherwise we are measuring our own incomplete template, not the capability.
+            for key in extra_slots:
+                if key not in filled:
+                    filled[key] = samp.sample_args({key: type_of(key)}, rng, ws,
+                                                   capability=cid)[key]
             args = _substitute(template_args, filled) if template_args else dict(filled)
         except samp.SamplingFailure as exc:
             result["errors"]["SAMPLING_FAILED:" + str(exc)] = \
