@@ -1,9 +1,20 @@
 {
  "forged": {
-  "forged.canonical/runtime/agency_finite_portfolio_generator_v1.py::generate": {
+  "forged.agency_finite_portfolio_generator_v1.generate": {
+   "contract": {
+    "function": "generate",
+    "module": "canonical/runtime/agency_finite_portfolio_generator_v1.py",
+    "parameters": [
+     "beacon"
+    ]
+   },
    "entry": {
+    "_forged_defaults": {
+     "beacon": "canonical/runtime"
+    },
     "action_template": {
      "args": {
+      "_forged_id": "forged.agency_finite_portfolio_generator_v1.generate",
       "beacon": "${input.beacon}"
      },
      "expect": {
@@ -13,9 +24,10 @@
      },
      "type": "invoke_capability"
     },
-    "adapter_module": "canonical/runtime/agency_finite_portfolio_generator_v1.py::generate",
-    "capability_id": "forged.canonical/runtime/agency_finite_portfolio_generator_v1.py::generate",
+    "adapter_module": "forged_invoker",
+    "capability_id": "forged.agency_finite_portfolio_generator_v1.generate",
     "cost": 1,
+    "entrypoint": "run",
     "incremental_spend_usd": 0,
     "keywords": [
      "agency",
@@ -32,11 +44,11 @@
      "linux"
     ],
     "provides": [
-     "forged.canonical/runtime/agency_finite_portfolio_generator_v1.py::generate"
+     "forged.canonical/runtime/agency_finite_portfolio_generator_v1.py"
     ],
     "requires": [],
     "source": {
-     "type": "brain_inventory"
+     "origin": "brain_inventory"
     },
     "status": "FORGED__MACHINE_ADMITTED",
     "verification": {
@@ -48,13 +60,33 @@
    "example_case": {
     "beacon": "canonical/runtime"
    },
-   "forged_at": 1792321446.978327,
-   "function": "generate"
+   "forged_at": 1792322219.7725813,
+   "function": "generate",
+   "module": "canonical/runtime/agency_finite_portfolio_generator_v1.py"
   },
-  "forged.canonical/runtime/automationbench_mutation_compiler_v1.py::compile_sheets_append": {
+  "forged.automationbench_mutation_compiler_v1.compile_sheets_append": {
+   "contract": {
+    "function": "compile_sheets_append",
+    "module": "canonical/runtime/automationbench_mutation_compiler_v1.py",
+    "parameters": [
+     "spreadsheet_id",
+     "range_a1",
+     "row_values"
+    ]
+   },
    "entry": {
+    "_forged_defaults": {
+     "range_a1": "hello",
+     "row_values": [
+      "a",
+      "b",
+      "c"
+     ],
+     "spreadsheet_id": "canonical/runtime"
+    },
     "action_template": {
      "args": {
+      "_forged_id": "forged.automationbench_mutation_compiler_v1.compile_sheets_append",
       "range_a1": "${input.range_a1}",
       "row_values": "${input.row_values}",
       "spreadsheet_id": "${input.spreadsheet_id}"
@@ -66,9 +98,10 @@
      },
      "type": "invoke_capability"
     },
-    "adapter_module": "canonical/runtime/automationbench_mutation_compiler_v1.py::compile_sheets_append",
-    "capability_id": "forged.canonical/runtime/automationbench_mutation_compiler_v1.py::compile_sheets_append",
+    "adapter_module": "forged_invoker",
+    "capability_id": "forged.automationbench_mutation_compiler_v1.compile_sheets_append",
     "cost": 1,
+    "entrypoint": "run",
     "incremental_spend_usd": 0,
     "keywords": [
      "append",
@@ -86,11 +119,11 @@
      "linux"
     ],
     "provides": [
-     "forged.canonical/runtime/automationbench_mutation_compiler_v1.py::compile_sheets_append"
+     "forged.canonical/runtime/automationbench_mutation_compiler_v1.py"
     ],
     "requires": [],
     "source": {
-     "type": "brain_inventory"
+     "origin": "brain_inventory"
     },
     "status": "FORGED__MACHINE_ADMITTED",
     "verification": {
@@ -108,13 +141,30 @@
     ],
     "spreadsheet_id": "canonical/runtime"
    },
-   "forged_at": 1792321448.9705427,
-   "function": "compile_sheets_append"
+   "forged_at": 1792322220.747499,
+   "function": "compile_sheets_append",
+   "module": "canonical/runtime/automationbench_mutation_compiler_v1.py"
   },
-  "forged.canonical/runtime/bounded_contextual_semantics.py::compile_context": {
+  "forged.bounded_contextual_semantics.compile_context": {
+   "contract": {
+    "function": "compile_context",
+    "module": "canonical/runtime/bounded_contextual_semantics.py",
+    "parameters": [
+     "text",
+     "mentions"
+    ]
+   },
    "entry": {
+    "_forged_defaults": {
+     "mentions": [
+      "a",
+      "b"
+     ],
+     "text": "canonical/runtime"
+    },
     "action_template": {
      "args": {
+      "_forged_id": "forged.bounded_contextual_semantics.compile_context",
       "mentions": "${input.mentions}",
       "text": "${input.text}"
      },
@@ -125,9 +175,10 @@
      },
      "type": "invoke_capability"
     },
-    "adapter_module": "canonical/runtime/bounded_contextual_semantics.py::compile_context",
-    "capability_id": "forged.canonical/runtime/bounded_contextual_semantics.py::compile_context",
+    "adapter_module": "forged_invoker",
+    "capability_id": "forged.bounded_contextual_semantics.compile_context",
     "cost": 1,
+    "entrypoint": "run",
     "incremental_spend_usd": 0,
     "keywords": [
      "bounded",
@@ -143,11 +194,11 @@
      "linux"
     ],
     "provides": [
-     "forged.canonical/runtime/bounded_contextual_semantics.py::compile_context"
+     "forged.canonical/runtime/bounded_contextual_semantics.py"
     ],
     "requires": [],
     "source": {
-     "type": "brain_inventory"
+     "origin": "brain_inventory"
     },
     "status": "FORGED__MACHINE_ADMITTED",
     "verification": {
@@ -163,9 +214,9 @@
     ],
     "text": "canonical/runtime"
    },
-   "forged_at": 1792321450.540209,
-   "function": "compile_context"
+   "forged_at": 1792322221.4244387,
+   "function": "compile_context",
+   "module": "canonical/runtime/bounded_contextual_semantics.py"
   }
- },
- "schema": "PROJECT_BRAIN_CAPABILITY_FORGE_V1"
+ }
 }

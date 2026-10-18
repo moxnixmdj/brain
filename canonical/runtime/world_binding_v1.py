@@ -461,6 +461,7 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
     missing = []
     from_world = {}
     from_companion = {}
+    from_demonstrated = {}
     for key in keys:
         low = key.lower()
         # A DESTINATION IS DETERMINED, NOT DISCOVERED.
@@ -537,6 +538,21 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
                 value = None
         elif low in ("pattern", "glob"):
             value = None
+        if value is None:
+            # A CAPABILITY ADMITTED BY EVIDENCE CARRIES ITS EVIDENCE.
+            #
+            # The binder looks for a value in the goal, then in the world.
+            # A forged capability was admitted only because concrete values
+            # made it run, and those values are recorded with it. When
+            # neither the goal nor the world offers anything, the
+            # demonstrated case is the only honest witness to what this slot
+            # accepts -- better than refusing a capability that has already
+            # proven it can be called. The value is reported as
+            # demonstrated, never as grounded.
+            demo = (entry or {}).get("_forged_defaults") or {}
+            if isinstance(demo, dict) and demo.get(key) is not None:
+                value = demo[key]
+                from_demonstrated[key] = value
         if value:
             filled[key] = value
         else:
@@ -551,4 +567,5 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
         "filled_by_world_binding": sorted(filled),
         "filled_from_world_not_goal": from_world,
         "filled_from_companion_not_goal": from_companion,
+        "filled_from_demonstrated_case": from_demonstrated,
     }

@@ -620,6 +620,28 @@ def _load_bound_capability_registry():
     caps=data.get("capabilities")
     if not isinstance(caps,dict):
         raise Blocker("BOUND_CAPABILITY_REGISTRY_INVALID")
+    # A capability the forge admitted is already here, so there is nothing
+    # to acquire and no line for it in an acquisition registry. It is
+    # merged at read time from the forged state, which stays its single
+    # source of truth rather than being copied into this file.
+    from canonical.runtime import capability_forge_v1 as _FG
+    for cid, rec in (_FG._state().get("forged") or {}).items():
+        entry = (rec or {}).get("entry")
+        if not isinstance(entry, dict):
+            continue
+        entry = dict(entry)
+        # The caller pops "capability_id" off the args before the adapter
+        # sees them, and a forged adapter has no other way to know which
+        # admitted function to run. The id is written into the template
+        # here so it cannot depend on the caller preserving it.
+        tmpl = entry.get("action_template")
+        if isinstance(tmpl, dict):
+            tmpl = dict(tmpl)
+            merged = dict(tmpl.get("args") or {})
+            merged.setdefault("_forged_id", cid)
+            tmpl["args"] = merged
+            entry["action_template"] = tmpl
+        caps.setdefault(str(cid), entry)
     return caps
 
 def _normalized_project_name(value):

@@ -198,10 +198,51 @@
    "where": "evidence.claim_spec.bind.explicit_comparison.stdlib",
    "why": "JSONDecodeError"
   },
+  "finance.saccr.credit.addon.v1|trades.json.available": {
+   "first_seen": 1792322221.72312,
+   "last_seen": 1792322221.7231228,
+   "observations": [
+    -1
+   ],
+   "structural": false,
+   "where": "finance.saccr.credit.addon.v1",
+   "why": "trades.json.available"
+  },
+  "forged.agency_finite_portfolio_generator_v1.generate|verified": {
+   "first_seen": 1792322221.7239196,
+   "last_seen": 1792322221.723922,
+   "observations": [
+    1
+   ],
+   "structural": false,
+   "where": "forged.agency_finite_portfolio_generator_v1.generate",
+   "why": "VERIFIED"
+  },
+  "forged.automationbench_mutation_compiler_v1.compile_sheets_append|verified": {
+   "first_seen": 1792322221.7919984,
+   "last_seen": 1792322221.7920015,
+   "observations": [
+    1
+   ],
+   "structural": false,
+   "where": "forged.automationbench_mutation_compiler_v1.compile_sheets_append",
+   "why": "VERIFIED"
+  },
+  "forged.bounded_contextual_semantics.compile_context|verified": {
+   "first_seen": 1792322221.6381934,
+   "last_seen": 1792322221.638196,
+   "observations": [
+    1
+   ],
+   "structural": false,
+   "where": "forged.bounded_contextual_semantics.compile_context",
+   "why": "VERIFIED"
+  },
   "image.extract.ocr.tesseract|bound_capability_source_unsupported": {
    "first_seen": 1792313437.9199655,
-   "last_seen": 1792320567.706663,
+   "last_seen": 1792322248.7069094,
    "observations": [
+    -1,
     -1,
     -1,
     -1,
@@ -248,6 +289,18 @@
    "where": "pdf.extract.text.pypdf",
    "why": "VERIFIED"
   },
+  "plain_goal.bound_capability.grounding.stdlib|verified": {
+   "first_seen": 1792322103.3126507,
+   "last_seen": 1792322103.3623152,
+   "observations": [
+    1,
+    1,
+    1
+   ],
+   "structural": false,
+   "where": "plain_goal.bound_capability.grounding.stdlib",
+   "why": "VERIFIED"
+  },
   "pypi.provenance.audit_live_artifact|pypi.live_metadata.available": {
    "first_seen": 1792314707.5770307,
    "last_seen": 1792314707.5770314,
@@ -287,6 +340,16 @@
    "structural": false,
    "where": "python.software.repair.loop.test_guided.ast.v1",
    "why": "python.patch.search.test_guided.ast.v1"
+  },
+  "python.software.request.semantic_behavior.compile.v1|failed": {
+   "first_seen": 1792322128.690607,
+   "last_seen": 1792322128.6906097,
+   "observations": [
+    -1
+   ],
+   "structural": false,
+   "where": "python.software.request.semantic_behavior.compile.v1",
+   "why": "FAILED"
   },
   "python.source.audit.ast|runtimeerror": {
    "first_seen": 1792312444.8398008,

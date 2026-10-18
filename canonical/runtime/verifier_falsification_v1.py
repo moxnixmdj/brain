@@ -1399,6 +1399,20 @@ def _cases() -> list[tuple[str, str, callable]]:
         "a run that reports its own failure, admitted as success",
         self_reported_failure_not_detected)
 
+    # --- a forged capability may only be the one that was admitted --------
+    # The invoker is one adapter for every capability the forge produces, so
+    # it is the one place where a name from outside could reach a call. The
+    # forged registry is the allowlist; a leaf must prove it refuses.
+
+    def unadmitted_capability_accepted() -> bool:
+        from canonical.runtime.bound_capabilities import forged_invoker as FI
+        out = FI.run({"_forged_id": "forged.never.admitted.anything"})
+        return not (isinstance(out, dict) and out.get("ok") is False)
+
+    add("bound_capabilities.forged_invoker.run",
+        "a capability_id that was never admitted, executed anyway",
+        unadmitted_capability_accepted)
+
     return out
 
 

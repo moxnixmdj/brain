@@ -278,27 +278,36 @@ def _state():
     return {"schema": SCHEMA, "forged": {}}
 
 
-def register(module: str, contract: dict, cases: list[dict]) -> dict:
+def register(module: str, contract: dict, cases: list[dict],
+          function: str | None = None) -> dict:
     """Shape an admitted module like a registry capability."""
-    cid = "forged." + module
+    stem = Path(module).stem if module else ""
+    cid = "forged." + ("%s.%s" % (stem, function) if function else (stem or module))
     entry = {
         "capability_id": cid,
         "status": "FORGED__MACHINE_ADMITTED",
         "incremental_spend_usd": 0,
         "platforms": ["linux"],
         "cost": 1,
-        "adapter_module": module,
-        "keywords": sorted(set(re.findall(r"[a-z0-9]+", module.lower()))),
+        "adapter_module": "forged_invoker",
+        "entrypoint": "run",
+        "keywords": sorted(set(re.findall(
+            r"[a-z0-9]+", (module + " " + (function or "")).lower()))),
         # Forged capabilities declare nothing about shared effects:
         # inventing an effect would let them chain on claims nobody made.
         "provides": ["forged." + module],
         "requires": [],
         "action_template": {
             "type": "invoke_capability",
-            "args": {p: "${input.%s}" % p for p in contract.get("parameters") or []},
+            "args": dict({"_forged_id": cid},
+                         **{p: "${input.%s}" % p
+                            for p in contract.get("parameters") or []}),
             "expect": {"field": "adapter", "type": "field_nonempty", "value": None},
         },
-        "source": {"type": "brain_inventory"},
+        "source": {"origin": "brain_inventory"},
+        # The values that made this run. Carried so the binder can accept
+        # the capability when the goal and the world offer nothing.
+        "_forged_defaults": dict(cases[0]) if cases else {},
         "verification": {
             "tier": "FORGED",
             "authority": ("MACHINE_ADMITTED__RAN_REPEATEDLY_AND_REFUSED_"
@@ -310,6 +319,7 @@ def register(module: str, contract: dict, cases: list[dict]) -> dict:
     data["forged"][cid] = {
         "entry": entry, "forged_at": time.time(),
         "example_case": cases[0] if cases else None,
+        "module": module, "function": function, "contract": contract,
     }
     STATE.parent.mkdir(parents=True, exist_ok=True)
     tmp = STATE.with_suffix(".tmp")
