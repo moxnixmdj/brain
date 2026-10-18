@@ -32,6 +32,36 @@ It was finished before V2 was written. Do not re-plan it.
 The creature is genuinely alive — 29/29 fresh-goal families pass, fail-closed is 1.0, no model,
 $0 — but **44 of its 67 capabilities are carried, never exercised.** That is the whole frontier.
 
+### 0.1 UPDATE 2026-10-18 — cluster 1 started: 27 → 29 of 67 (measured, +2)
+
+Cluster 1 (python repair/acceptance) is open. The first two of its eight capabilities now have
+families and are exercised end-to-end:
+
+| Capability | Family | Fresh instances | Routed to |
+|---|---|---|---|
+| `python.software.repair.loop.coupled.ast.v1` | `PYTHON_REPAIR_COUPLED_AST` | 8/8 | the intended capability |
+| `python.software.repair.guided.provenance.coupled.v1` | `PYTHON_REPAIR_COUPLED_PROV` | 8/8 | the intended capability |
+
+Both also pass through the live entry in the heartbeat harness (4/4 each), and the independent
+oracle agrees on every instance. **Each capability is reached by exactly one family — its own —
+so the +2 is exact, not double-counted.**
+
+These two were recorded in §2 as RC-1 ("no family exists"). That diagnosis was **wrong for these
+two**: both route and execute correctly once the goal sentence matches the compiler's binding
+grammar. The friction was goal phrasing, not missing machinery. Four binding rules, learned the
+hard way and now reusable for the rest of cluster 1:
+
+1. `source_root` binds to a **directory**; a file path yields `0_existing_directories_named`.
+2. `test_argv` must appear **quoted** in the sentence; it is `shlex`-split, so unquoted input
+   yields `value_not_parseable`.
+3. `test_argv` is the **entire command including the test file**. A bare `python -B` exits 0, so
+   the adapter raises `BASELINE_ALREADY_PASSES` and the bug looks absent.
+4. Test files must be **on disk before** the goal is compiled, and the goal should name **one**
+   test file; the oracle can still run every test present.
+
+Caveat on local re-measurement: this sandbox blocks 10 families for missing apt/python packages,
+so a local run reports 22 where a full-dependency runner reports 29. Compare like with like.
+
 ---
 
 ## 1. First principles

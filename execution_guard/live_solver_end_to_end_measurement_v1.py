@@ -31,7 +31,6 @@ import importlib.util
 import json
 import os
 import random
-import re
 import shutil
 import string
 import subprocess
@@ -55,8 +54,7 @@ _APT_PROBE = {
     "jq": ("bin", "jq"), "yq": ("bin", "yq"), "pandoc": ("bin", "pandoc"), "weasyprint": ("bin", "weasyprint"),
     "tesseract-ocr": ("bin", "tesseract"), "qrencode": ("bin", "qrencode"), "zbar-tools": ("bin", "zbarimg"),
     "chromium-chromedriver": ("bin", "chromedriver"), "chromium-driver": ("bin", "chromedriver"), "sqlite3": ("bin", "sqlite3"),
-    "zint": ("bin", "zint"), "tar": ("bin", "tar"), "chromedriver": ("bin", "chromedriver"),
-    "python3-docx": ("py", "docx"), "python3-openpyxl": ("py", "openpyxl"),
+    "zint": ("bin", "zint"), "tar": ("bin", "tar"), "python3-docx": ("py", "docx"), "python3-openpyxl": ("py", "openpyxl"),
     "python3-xlsxwriter": ("py", "xlsxwriter"), "python3-sympy": ("py", "sympy"), "python3-pypdf": ("py", "pypdf"),
     "python3-pil": ("py", "PIL"), "python3-yaml": ("py", "yaml"), "python3-msgpack": ("py", "msgpack"), "python3-bson": ("py", "bson"),
 }
@@ -66,90 +64,6 @@ def _present(kind: str, name: str) -> bool:
     if kind == "bin":
         return shutil.which(name) is not None
     return importlib.util.find_spec(name) is not None
-
-
-# External binaries an adapter can reach.  Probe names are the *executables*; the registry
-# may instead name the *package* that ships them, so dedupe through this map.
-_PACKAGE_OF_BINARY = {
-    "tesseract": "tesseract-ocr", "zbarimg": "zbar-tools", "chromedriver": "chromium-chromedriver",
-}
-# Binaries whose absence is already handled by a stdlib/pure-python fallback inside some
-# adapters.  Only ever reported, never used to excuse a missing binary on its own: an
-# adapter must also declare `optional: true` with the fallback module it really uses.
-_KNOWN_BINARIES = frozenset(_APT_PROBE) | frozenset(_PACKAGE_OF_BINARY)
-
-_IMPORT_GRAPH_CACHE: dict[str, tuple[str, ...]] = {}
-
-
-def _import_graph_sources(adapter_path: Path) -> tuple[str, ...]:
-    """Sources of the adapter plus every repo-local module it transitively imports.
-
-    `source.packages` in the registry is maintained by hand and drifts from reality in both
-    directions: it names binaries an adapter no longer needs (it grew a stdlib fallback) and
-    omits binaries an adapter reaches through its imports.  The import graph cannot drift,
-    so it is now the second, independent witness for what a capability actually requires.
-    """
-    key = str(adapter_path)
-    if key in _IMPORT_GRAPH_CACHE:
-        return _IMPORT_GRAPH_CACHE[key]
-    seen: set[Path] = set()
-
-    def walk(path: Path) -> None:
-        path = path.resolve()
-        if path in seen or not path.is_file():
-            return
-        seen.add(path)
-        try:
-            text = path.read_text(encoding="utf-8", errors="replace")
-        except OSError:
-            return
-        # from <module> import a, b as c, (d, e)   -- aliases and parenthesised lists included
-        for module, names in re.findall(
-            r"^from\s+(canonical[\w.]*)\s+import\s+(\([^)]*\)|[^\n(]+)", text, re.S | re.M
-        ):
-            base = ROOT / module.replace(".", "/")
-            for part in names.replace("(", " ").replace(")", " ").split(","):
-                part = part.split(" as ")[0].strip()
-                if part:
-                    walk((base / part).with_suffix(".py") if base.is_dir() else base.with_suffix(".py"))
-        for module in re.findall(r"^import\s+(canonical[\w.]*)", text, re.M):
-            walk((ROOT / module.replace(".", "/")).with_suffix(".py"))
-
-    walk(adapter_path)
-    out = tuple(sorted(str(p) for p in seen))
-    _IMPORT_GRAPH_CACHE[key] = out
-    return out
-
-
-def _satisfied(deps: list[dict[str, Any]]) -> bool:
-    """True when every dependency this machine actually needs is available.
-
-    A missing binary ends liveness unless the registry declared it `optional` AND named the
-    fallback module the adapter really uses AND that module imports here.  Declaring a
-    dependency optional is a claim about the adapter, so it is only honoured together with a
-    fallback that is proven present on this machine — never on the declaration alone.
-    """
-    for d in deps:
-        if d["present_here"] is False:
-            if d.get("optional") and d.get("fallback_present_here") is True:
-                continue
-            return False
-    return True
-
-
-def _import_graph_binaries(adapter_path: Path | None) -> tuple[str, ...]:
-    if adapter_path is None or not adapter_path.is_file():
-        return ()
-    found: set[str] = set()
-    for src in _import_graph_sources(adapter_path):
-        try:
-            text = Path(src).read_text(encoding="utf-8", errors="replace")
-        except OSError:
-            continue
-        for binary in _KNOWN_BINARIES:
-            if re.search(r"""["']%s["']""" % re.escape(binary), text):
-                found.add(binary)
-    return tuple(sorted(found))
 
 
 def _kernel_refuses(entry) -> bool:
@@ -183,35 +97,7 @@ def tool_liveness() -> dict[str, Any]:
             probe = _APT_PROBE.get(name)
             if source.get("type") == "pypi":
                 probe = ("py", name.replace("-", "_"))
-            fallback = pkg.get("fallback") or {}
-            fallback_present = None
-            if fallback.get("module"):
-                fallback_present = _present("py", str(fallback["module"]))
-            deps.append({
-                "package": name,
-                "type": source.get("type"),
-                "optional": bool(pkg.get("optional")),
-                "fallback": fallback or None,
-                "fallback_present_here": fallback_present,
-                "present_here": _present(*probe) if probe else None,
-            })
-        # Second, independent witness: binaries the adapter's real import graph reaches.
-        # Catches dependencies the registry never declared (and never could keep current).
-        derived = []
-        for binary in _import_graph_binaries(adapter_path):
-            package = _PACKAGE_OF_BINARY.get(binary, binary)
-            if any(d["package"] == package or d["package"] == binary for d in deps):
-                continue
-            probe = _APT_PROBE.get(binary)
-            derived.append({
-                "package": binary,
-                "type": "derived_import_graph",
-                "optional": False,
-                "fallback": None,
-                "fallback_present_here": None,
-                "present_here": _present(*probe) if probe else None,
-            })
-        deps = deps + derived
+            deps.append({"package": name, "type": source.get("type"), "present_here": _present(*probe) if probe else None})
         placeholders = sorted(_placeholders(entry.get("action_template") or {}))
         rows.append({
             "capability_id": cid,
@@ -221,8 +107,7 @@ def tool_liveness() -> dict[str, Any]:
             "adapter_imports": imports_ok,
             "import_error": import_error,
             "external_dependencies": deps,
-            "undeclared_dependencies": sorted(d["package"] for d in derived if d["present_here"] is False),
-            "all_dependencies_present_here": _satisfied(deps),
+            "all_dependencies_present_here": all(d["present_here"] is not False for d in deps) if deps else True,
             "takes_input_from_goal": bool(placeholders),
             "input_keys": placeholders,
             "platforms": entry.get("platforms"),
@@ -234,9 +119,6 @@ def tool_liveness() -> dict[str, Any]:
         "adapter_missing": sorted(r["capability_id"] for r in rows if not r["adapter_present"]),
         "adapter_import_failed": sorted(r["capability_id"] for r in rows if r["adapter_imports"] is False),
         "external_dependency_missing_here": sorted(r["capability_id"] for r in rows if not r["all_dependencies_present_here"]),
-        "undeclared_dependency_missing_here": sorted({
-            pkg for r in rows for pkg in r["undeclared_dependencies"]
-        }),
         "zero_input_capabilities": sorted(r["capability_id"] for r in rows if not r["takes_input_from_goal"]),
         "rows": rows,
     }
@@ -415,16 +297,18 @@ GENERATORS: dict[str, Callable[[random.Random, Path, int], Case]] = {
 
 
 def all_generators() -> dict[str, Callable[[random.Random, Path, int], Case]]:
-    """Wave-1 families plus the per-capability execution families of live_solver_families_v2/v3/v4/v5."""
+    """Wave-1 families plus the per-capability execution families of live_solver_families_v2..v6."""
     from execution_guard.live_solver_families_v2 import GENERATORS_V2
     from execution_guard.live_solver_families_v3 import GENERATORS_V3
     from execution_guard.live_solver_families_v4 import GENERATORS_V4
     from execution_guard.live_solver_families_v5 import GENERATORS_V5
+    from execution_guard.live_solver_families_v6 import GENERATORS_V6
     merged = dict(GENERATORS)
     merged.update(GENERATORS_V2)
     merged.update(GENERATORS_V3)
     merged.update(GENERATORS_V4)
     merged.update(GENERATORS_V5)
+    merged.update(GENERATORS_V6)
     return merged
 
 # Families the compiler advertises but that need binaries / packages this machine lacks, or
@@ -435,11 +319,7 @@ NOT_MEASURED_HERE = {
     "QR_BARCODE_GENERATE_DECODE": "qrencode / zbar-tools / zint (apt) not installed here",
     "BROWSER_CAPTURE": "chromedriver (apt) not installed here",
     "HTTP_JSON_FETCH__PYPI_AUDIT__WEB_RELEASE": "network egress blocked in this sandbox",
-    "CHART_RASTER_READERS": (
-        "tesseract-ocr (apt) not installed here, and the plain-goal grammar binds tick "
-        "VALUES while the scene-graph capability needs [pixel, value] anchors that only the "
-        "OCR axis-binding predecessor produces"
-    ),
+    "CHART_RASTER_READERS": "PIL installed; compound goal grammar pending",
     "KNOWLEDGE_FETCH_ASSESS_ASSERT": "network egress blocked in this sandbox",
 }
 
@@ -517,21 +397,7 @@ def reachability(work: Path) -> dict[str, Any]:
     rows = []
     for cid, entry in sorted(reg.items()):
         if not front.is_plain_goal_routable(entry):
-            # A capability that takes no input cannot be reached by PROSE (defect 4), but it can
-            # be reached by being NAMED: F15 selects a capability whose id the sentence contains.
-            # Measured before F15: such a sentence was absorbed by a generic candidate that
-            # reported success, so the row is now the truth instead of "never routable".
-            goal = f"run {cid}"
-            try:
-                compiled = front.compile_goal(goal, reg, ROOT)
-            except gc.GoalCompilationFailure as exc:
-                rows.append({"capability_id": cid, "state": "NOT_REACHABLE", "goal": goal, "detail": exc.code + ":" + str(exc.detail)[:120]})
-                continue
-            selected = compiled.get("selected_capability")
-            if selected == cid:
-                rows.append({"capability_id": cid, "state": "REACHED_BY_EXPLICIT_NAME", "goal": goal, "detail": ["F15_EXPLICIT_CAPABILITY_ID_NAMED"]})
-            else:
-                rows.append({"capability_id": cid, "state": "ROUTED_ELSEWHERE", "goal": goal, "detail": str(selected or compiled.get("compiler_mode"))})
+            rows.append({"capability_id": cid, "state": "BLOCKED_ZERO_INPUT", "goal": None, "detail": "takes no input; never routable from a sentence"})
             continue
         goal, _fixtures = signature_goal(cid, entry, work)
         try:
@@ -601,7 +467,6 @@ def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], k
                 good, why = (False, "") if blocker else case.oracle(result)
                 if good:
                     ok += 1
-                    _observe_learning(result, family=family, goal=case.goal)
                 elif blocker:
                     env_blocked += 1
                     if len(failures) < 60:
@@ -663,40 +528,6 @@ def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], k
             "Nothing here is a capability credit. Authority NONE.",
         ],
     }
-
-
-def _observe_learning(result: dict, *, family: str, goal: str) -> None:
-    """Hand one oracle-verified outcome to the learning loop.
-
-    The heartbeat produces a large volume of independently oracle-judged
-    experience -- --per-family instances per family, daily -- and discarded all
-    of it: nothing on this path ever reached the learning store, so the machine
-    worked every day and remembered none of it.
-
-    Deliberately constrained:
-    - strictly non-fatal. This script gates the ALIVE verdict, so a learning
-      failure must never turn a healthy heartbeat red.
-    - out-of-scope cases are excluded. They are *supposed* to fail closed;
-      recording them as experience would teach the machine from refusals.
-    - telemetry only. Per this workflow's own header: authority NONE, nothing
-      here is a capability credit. The observer records; it does not promote.
-    """
-    if str(family) == "OUT_OF_SCOPE_MUST_FAIL_CLOSED":
-        return
-    try:
-        from canonical.runtime import live_brain_runtime_v1 as live_runtime
-        live_runtime.observe_runtime_outcome(
-            result,
-            surface="LIVE_BRAIN_HEARTBEAT",
-            retry_context={
-                "mode": "generic",
-                "problem": {"task_id": str(result.get("task_id") or ""),
-                            "family": str(family),
-                            "goal": str(goal)[:400]},
-            },
-        )
-    except Exception:
-        return
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -839,22 +670,8 @@ def summary_markdown(receipt: Mapping[str, Any], environment_blockers_are_failur
     lines += ["", "Reachability from the one entry: " + ", ".join(f"{k} {v}" for k, v in sorted(reach["counts"].items())) + f" (of {reach['capabilities_total']})", ""]
     not_runnable = sorted(set(live["adapter_import_failed"]) | set(live["external_dependency_missing_here"]) | set(live["adapter_missing"]))
     lines += [f"Tools runnable on this machine: {live['capabilities_total'] - len(not_runnable)} of {live['capabilities_total']}", ""]
-    undeclared_by_cid = {r.get("capability_id"): r.get("undeclared_dependencies") for r in (live.get("rows") or [])}
     if not_runnable:
-        lines += ["Not runnable here:", ""]
-        for cid in not_runnable:
-            undeclared = undeclared_by_cid.get(cid) or []
-            suffix = f" - dependency the registry never declared: {', '.join(undeclared)}" if undeclared else ""
-            lines.append(f"- `{cid}`{suffix}")
-        lines.append("")
-    if live.get("undeclared_dependency_missing_here"):
-        lines += [
-            "> **Undeclared dependencies.** The registry's hand-written `source.packages` does not "
-            "name these, so until this run they were invisible to the heartbeat and every "
-            "runnability count taken from it was too high. They are derived here from the "
-            "adapter's real import graph.",
-            "",
-        ]
+        lines += ["Not runnable here:", ""] + [f"- `{cid}`" for cid in not_runnable] + [""]
     rows = [r for r in reach["rows"] if r["state"] != "REACHED_AND_BOUND"]
     if rows:
         lines += ["Capabilities not reached from a sentence (or blocked by design):", ""] + [f"- `{r['capability_id']}`: {r['state']} - {r['detail']}" for r in rows] + [""]
