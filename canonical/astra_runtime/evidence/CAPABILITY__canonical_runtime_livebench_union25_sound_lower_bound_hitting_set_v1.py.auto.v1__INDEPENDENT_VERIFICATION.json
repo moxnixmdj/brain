@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_union25_sound_lower_bound_hitting_set_v1.py.auto.v1",
- "elapsed_ms": 1.765,
+ "elapsed_ms": 1.523,
  "independent_run_reference": {
-  "github_run_id": 39083303187,
+  "github_run_id": 39083498170,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "0a669b04-a0b6-4de2-b902-1f1bb56503ce",
+   "jti": "7aca4486-eeb2-4273-8da4-9ddc6467810e",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39083303187",
+   "run_id": "39083498170",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
