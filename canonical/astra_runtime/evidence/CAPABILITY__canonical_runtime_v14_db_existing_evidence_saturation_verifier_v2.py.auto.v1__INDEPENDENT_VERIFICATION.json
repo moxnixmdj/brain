@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/v14_db_existing_evidence_saturation_verifier_v2.py.auto.v1",
- "elapsed_ms": 31.231,
+ "elapsed_ms": 32.06,
  "independent_run_reference": {
-  "github_run_id": 39121433034,
+  "github_run_id": 39121661056,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "35794a2e-689c-4344-9b05-fd45fef09afa",
+   "jti": "9efda5f2-1714-4d32-b30f-a8b8312e1676",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39121433034",
+   "run_id": "39121661056",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
