@@ -234,3 +234,84 @@ def invoke(capability_id: str, payload: Mapping[str, Any],
         "persistent_learned_bytes": 0,
         "external_learned_capability_calls": 0,
     }
+
+
+# ---------------------------------------------------------------------------
+# The shape the Brain's own proposal generator consumes.
+# ---------------------------------------------------------------------------
+#
+# capability_proposal_generators.single_verified_capability_v1 proposes by
+# choosing among REGISTERED capabilities and binding their inputs. It
+# needs entries with status VERIFIED_BOUND_CAPABILITY, `requires`,
+# `provides`, an `action_template`, and zero incremental spend.
+#
+# That matters more than it looks. The open question has been what
+# fills the proposal packets, and the answer is not a language model:
+# the Brain already contains a fail-closed generator that composes
+# capabilities it can verify. Given capabilities to choose from, it
+# proposes without any external mind.
+#
+# So this adapter is the bridge. Registered here is not enough -- the
+# field names differ, and a capability the generator cannot read is one
+# it can never propose.
+
+_BOUND_STATUS = "VERIFIED_BOUND_CAPABILITY"
+
+# Real shape, read out of BOUND_CAPABILITY_REGISTRY_V1 rather than
+# invented: an action_template carries `args` with ${input.x}
+# placeholders AND an `expect` predicate. Action and its proof are
+# declared as one unit -- the capability says what must be true of
+# its own result, and the runtime checks it. `keywords` is what lets
+# the goal compiler bind the goal's words to the inputs.
+_ACTION_TEMPLATES = {
+    "CAP_FS_LIST_V1": {
+        "type": "invoke_capability",
+        "args": {"capability_id": "CAP_FS_LIST_V1",
+                 "path": "${input.input}"},
+        "expect": {"field": "count", "type": "field_present"},
+        "keywords": ["list", "files", "directory", "folder", "show"],
+    },
+    "CAP_FS_READ_V1": {
+        "type": "invoke_capability",
+        "args": {"capability_id": "CAP_FS_READ_V1",
+                 "path": "${input.input}"},
+        "expect": {"field": "text", "type": "field_present"},
+        "keywords": ["read", "open", "contents", "show", "view"],
+    },
+    "CAP_FS_WRITE_V1": {
+        "type": "invoke_capability",
+        "args": {"capability_id": "CAP_FS_WRITE_V1",
+                 "path": "${input.input}", "text": "${input.text}"},
+        "expect": {"field": "verified", "type": "field_equals",
+                   "value": True},
+        "keywords": ["write", "save", "create", "put", "output"],
+    },
+    "CAP_PROGRAM_RUN_V1": {
+        "type": "invoke_capability",
+        "args": {"capability_id": "CAP_PROGRAM_RUN_V1",
+                 "code": "${input.input}"},
+        "expect": {"field": "confined", "type": "field_equals",
+                   "value": True},
+        "keywords": ["run", "execute", "program", "compute", "script"],
+    },
+}
+
+
+def bound_entries() -> dict:
+    """These capabilities in the shape the generator proposes over."""
+    out = {}
+    for row in REGISTRY:
+        cid = row["capability_id"]
+        out[cid] = {
+            "capability_id": cid,
+            "status": _BOUND_STATUS,
+            "requires": list(row["preconditions"]),
+            "provides": list(row["effects"]),
+            "cost": row["cost"],
+            "action_template": dict(_ACTION_TEMPLATES.get(cid) or {}),
+            "keywords": list(
+                (_ACTION_TEMPLATES.get(cid) or {}).get("keywords") or []),
+            "incremental_spend_usd": 0,
+            "prior_verification": row["prior_verification"],
+        }
+    return out
