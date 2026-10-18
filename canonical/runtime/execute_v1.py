@@ -187,3 +187,111 @@ def render(result: dict) -> str:
     if result.get("escaped_paths"):
         lines.append("  ESCAPED: " + ", ".join(result["escaped_paths"][:5]))
     return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Correction: the loop that makes a single run into an attempt that lands.
+# ---------------------------------------------------------------------------
+#
+# Running a program once is not how anything real works. The car does not
+# plan one trajectory and commit to it; it acts, watches what happened,
+# and corrects, continuously, against observed reality rather than
+# against what it predicted would happen.
+#
+# So the general action is not "run a program". It is: run, observe what
+# the machine says actually happened, hand that observation back to
+# whatever is authoring, and try again -- bounded, and stopping only when
+# the world attests to the change.
+#
+# The author is a callable, not a module. Authorship is the part that
+# understands the task and it is not owned here; owning it would mean
+# hard-coding the very domain knowledge this design exists to avoid. What
+# is owned is the judgement: what counts as failure, what is reported
+# back, and when to stop.
+#
+# Crucially, what goes back to the author is the machine's observation,
+# not the program's opinion of itself. A failing program is the worst
+# possible narrator of why it failed.
+
+HISTORY_SCHEMA = "PROJECT_BRAIN_EXECUTE_HISTORY_V1"
+
+
+def iterate(goal: str, root: str, author, attempts: int = 4,
+            claim: dict = None, timeout: int = 300) -> dict:
+    """Run, observe, correct, repeat -- bounded by what the machine says.
+
+    `author(goal, observation)` returns a program, or None to stop.
+    `observation` is None on the first attempt and the previous verdict
+    plus the machine's own report of the failure thereafter.
+    """
+    history: list[dict] = []
+    observation = None
+
+    for attempt in range(1, attempts + 1):
+        try:
+            program = author(goal, observation)
+        except Exception as exc:
+            history.append({"attempt": attempt, "verdict": INDETERMINATE,
+                            "detail": f"author raised {type(exc).__name__}: {exc}"})
+            break
+        if program is None:
+            history.append({"attempt": attempt, "verdict": INDETERMINATE,
+                            "detail": "author declined to continue"})
+            break
+
+        result = run(program, root, timeout=timeout, claim=claim)
+        entry = {
+            "attempt": attempt,
+            "verdict": result["verdict"],
+            "exit_status": result["exit_status"],
+            "detail": _why(result),
+            "changed": (result["diff"] or {}).get("changed", False),
+        }
+        history.append(entry)
+
+        if result["verdict"] == SUCCESS:
+            return {"schema": HISTORY_SCHEMA, "verdict": SUCCESS,
+                    "goal": goal, "attempts_used": attempt,
+                    "history": history, "result": result,
+                    "corrected": attempt > 1,
+                    "rendered": render(result)}
+
+        # Only the machine's account goes back, never the program's.
+        observation = entry
+
+    return {"schema": HISTORY_SCHEMA, "verdict": FAILED, "goal": goal,
+            "attempts_used": len(history), "history": history,
+            "result": history[-1] if history else None,
+            "corrected": len(history) > 1,
+            "rendered": "no attempt was credited"}
+
+
+def _why(result: dict) -> str:
+    """The machine's account of a failure, for whoever authors next."""
+    v = result["verdict"]
+    if v == NO_EFFECT:
+        return ("the program exited zero but the tree was identical "
+                "before and after: nothing happened")
+    if v == OUT_OF_BOUNDS:
+        return "the program touched paths outside the project: " + ", ".join(
+            (result.get("escaped_paths") or [])[:5])
+    if v == INDETERMINATE:
+        return "the program did not finish: " + (result["output"] or "")[-200:]
+    if v == FAILED:
+        # Order matters, and getting it wrong cost a correction.
+        #
+        # A program that writes an output file and THEN crashes leaves a
+        # truncated file behind. The claim about it reads CONTRADICTED,
+        # and reporting that first buried the FileNotFoundError that
+        # would actually have let the author fix it -- so the author
+        # declined and a fixable task was abandoned. The exception is the
+        # cause; the contradicted claim is a consequence. Causes first.
+        err = (result["output"] or "").strip()
+        if result["exit_status"] not in (0, None) and err:
+            return err[-300:]
+        g = result.get("grounding")
+        if g is not None and g["verdict"] != "GROUNDED":
+            return (f"the program succeeded but its claimed result did not "
+                    f"hold ({g['verdict']})")
+        return err[-300:] or f"exit {result['exit_status']}"
+    return v

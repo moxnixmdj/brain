@@ -218,6 +218,44 @@ def _cases() -> list[tuple[str, str, callable]]:
     add("execute_v1.run", "a program whose claimed result is not grounded",
         execute_ungrounded_claim)
 
+    # --- correction: the account handed back to the author ------------
+    def why_reports_the_cause() -> bool:
+        import execute_v1 as X
+        with tempfile.TemporaryDirectory() as tmp:
+            # Writes the file, THEN crashes. The claim reads
+            # CONTRADICTED; the cause is the missing input. Reporting the
+            # consequence first hid the cause and correction was
+            # abandoned, so this pins the order.
+            r = X.run("open('out.txt','w').write(open('nope.csv').read())",
+                      tmp, timeout=30,
+                      claim={"file": "out.txt", "contains": "x"})
+            return "No such file" not in X._why(r)
+
+    def iterate_is_bounded() -> bool:
+        import execute_v1 as X
+        with tempfile.TemporaryDirectory() as tmp:
+            def stuck(goal, obs):
+                return "print('trying')"
+            r = X.iterate("never lands", tmp, stuck, attempts=3)
+            return r["verdict"] == X.SUCCESS or len(r["history"]) > 3
+
+    def iterate_stopped_when_grounded() -> bool:
+        import execute_v1 as X
+        with tempfile.TemporaryDirectory() as tmp:
+            def good(goal, obs):
+                return None if obs else "open('a.txt','w').write('x')"
+            r = X.iterate("make a file", tmp, good, attempts=5,
+                          claim={"file": "a.txt", "contains": "x"})
+            # Stopping the moment it lands is the point; overshooting
+            # would mean the verdict is not what ends the loop.
+            return r["verdict"] != X.SUCCESS or r["attempts_used"] != 1
+
+    add("execute_v1._why", "a crashed run hiding its exception behind a "
+        "contradicted claim", why_reports_the_cause)
+    add("execute_v1.iterate", "an author that never lands", iterate_is_bounded)
+    add("execute_v1.iterate", "a loop that keeps going after it lands",
+        iterate_stopped_when_grounded)
+
     # --- routing a question -------------------------------------------
     def is_question_url() -> bool:
         import autonomous_v1 as A
