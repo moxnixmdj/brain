@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/finance_direct_source_coverage_audit_v1.py.auto.v1",
- "elapsed_ms": 30.615,
+ "elapsed_ms": 36.09,
  "independent_run_reference": {
-  "github_run_id": 39121206215,
+  "github_run_id": 39121433034,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "2c970c89-5409-4efa-8ff1-f159040ae380",
+   "jti": "35794a2e-689c-4344-9b05-fd45fef09afa",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39121206215",
+   "run_id": "39121433034",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
