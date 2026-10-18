@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/sec_issuer_extension_fact_semantics_bind_verify_v1.py.auto.v1",
- "elapsed_ms": 1.653,
+ "elapsed_ms": 2.158,
  "independent_run_reference": {
-  "github_run_id": 39135205124,
+  "github_run_id": 39135450453,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "bb0984b8-b4b9-44d4-adb5-64a82311eea6",
+   "jti": "9ccf925b-014a-458a-97d9-0c50733d635f",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39135205124",
+   "run_id": "39135450453",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
