@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/terminal_scope_quarantine_propagation_v1.py.auto.v1",
- "elapsed_ms": 33.842,
+ "elapsed_ms": 22.768,
  "independent_run_reference": {
-  "github_run_id": 39108951040,
+  "github_run_id": 39109163220,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "f1e9356e-2b02-498a-8d0e-8ef247d9625c",
+   "jti": "d5bb0465-3f34-44e2-a9f1-183185e09a00",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39108951040",
+   "run_id": "39109163220",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
