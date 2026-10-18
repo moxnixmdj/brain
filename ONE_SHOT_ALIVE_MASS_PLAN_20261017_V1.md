@@ -62,6 +62,41 @@ hard way and now reusable for the rest of cluster 1:
 Caveat on local re-measurement: this sandbox blocks 10 families for missing apt/python packages,
 so a local run reports 22 where a full-dependency runner reports 29. Compare like with like.
 
+### 0.2 Survey of the other six cluster-1 capabilities (2026-10-18, measured)
+
+Before writing a family for each, I read every adapter's required arguments and checked each
+against the set the front compiler can actually bind. That set is closed and small:
+
+```
+authoritative evidence_paths expected_status expression field_name jq_filter label major
+max_age_s objective path pattern prompt source_paths source_root spec test_argv test_paths
+url_key variables version_field x_ticks x_value y_ticks y_value
+```
+
+Two of the six need an argument outside that set. That is a **new root cause (RC-4: a required
+argument is not bindable from any sentence)**, and it is why they were never exercised — not
+because no family existed.
+
+| Capability | Needs | Verdict |
+|---|---|---|
+| `python.software.repair.measured_acceptance.v1` | `task_text` (required, raises `TASK_TEXT_REQUIRED`) | **RC-4** — `task_text` is not bindable |
+| `python.software.repair.semantic_acceptance.v1` | `task_text` (required) | **RC-4** — same |
+| `python.patch.search.test_guided.ast.v1` | `source_path`, a single `.py` file | **RC-4** — not bindable; only `path` is |
+| `python.fault.provenance.interprocedural.value.v1` | `source_root` + `test_paths` | **ready** — both bindable |
+| `python.repository.acceptance.measure.v1` | `source_root` + `test_paths` + `test_argv` | **ready** — all bindable |
+
+`output_path` and `timeout_s` look unbindable too but are not blockers: they have working
+defaults, and `output_path` is supplied by the caller rather than the sentence (proved by the two
+coupled families, which name an output path and route correctly).
+
+**Next pair: the two marked ready.** Both are directly reusable from the fixture the coupled
+families already build (`fresh_coupled_bug`: a source root with defects and failing tests on
+disk), and neither needs a compiler change.
+
+RC-4 is worth its own decision, not a workaround: adding `task_text` to the compiler changes how
+every one of the 67 capabilities binds, so it belongs in its own PR with the referee, not tucked
+into a family PR.
+
 ---
 
 ## 1. First principles
