@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/professional_r12_c3_lossless_composition_projection_verify_v1.py.auto.v1",
- "elapsed_ms": 41.231,
+ "elapsed_ms": 25.611,
  "independent_run_reference": {
-  "github_run_id": 39082917991,
+  "github_run_id": 39083121427,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "eb3f3eb5-304a-4b79-b045-687254b1f8a8",
+   "jti": "a1f9cfbb-96d1-4546-8e4d-3a84c2d6f670",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39082917991",
+   "run_id": "39083121427",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
