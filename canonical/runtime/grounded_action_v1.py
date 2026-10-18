@@ -148,7 +148,15 @@ def _candidate_tokens(survivor):
     return {t for t in _re.findall(r"[a-z0-9]+", text) if len(t) >= 4}
 
 
-def act(goal, root=None, registry=None, verbose=False, memory=True):
+def act(goal, root=None, registry=None, verbose=False, memory=True,
+        established_effects=(), extra_paths=()):
+    """`established_effects` and `extra_paths` are how one step feeds the next.
+
+    A caller chaining steps passes what earlier steps PROVIDED and the paths
+    they wrote. Both are treated as already true, because a plan is allowed
+    to rely on its own earlier steps -- that is what makes a chain plannable
+    before anything runs.
+    """
     """Turn one plain sentence into one executed, verified capability call."""
     root = Path(root) if root is not None else ROOT
     started = time.perf_counter()
@@ -181,6 +189,9 @@ def act(goal, root=None, registry=None, verbose=False, memory=True):
         goal_paths = [str(p[0]) for p in gc._repo_paths(goal, root)]
     except Exception:
         goal_paths = []
+    for extra in (extra_paths or ()):
+        if str(extra) not in goal_paths:
+            goal_paths.append(str(extra))
 
     orphans = WP.orphan_preconditions(admissible)
 
@@ -218,7 +229,8 @@ def act(goal, root=None, registry=None, verbose=False, memory=True):
                 continue
 
             # 1b. PERCEPTION
-            need = [e for e in (orphans.get(cid) or [])]
+            already = set(str(x) for x in (established_effects or ()))
+            need = [e for e in (orphans.get(cid) or []) if e not in already]
             t1 = time.perf_counter()
             facts = WP.established_facts(need, goal=goal,
                                          goal_paths=goal_paths, root=root)
@@ -323,7 +335,18 @@ def act(goal, root=None, registry=None, verbose=False, memory=True):
 
     # EXECUTE through the Brain's own invoker: unknown routes fail closed.
     from canonical.runtime.astra_runtime import _invoke_bound_capability
-    args = dict(chosen["inputs"])
+    from canonical.runtime import world_binding_v1 as _WB
+    try:
+        args = _WB.render_args(chosen["entry"], chosen["inputs"])
+    except KeyError as exc:
+        return {
+            "schema": SCHEMA, "ok": False,
+            "status": "ACTION_FAILED", "goal": goal,
+            "capability_id": chosen["capability_id"],
+            "error": "TEMPLATE_ARGUMENT_UNBOUND:" + str(exc),
+            "executed": False, "verified": False,
+            "total_ms": round((time.perf_counter() - started) * 1000.0, 2),
+        }
     args["capability_id"] = chosen["capability_id"]
     t1 = time.perf_counter()
     try:

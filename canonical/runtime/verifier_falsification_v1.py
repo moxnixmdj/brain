@@ -822,6 +822,45 @@ def _cases() -> list[tuple[str, str, callable]]:
     add("experience_v1.recall_resolution", "a remembered answer that skips verification",
         experience_overrides_verification)
 
+    # --- rendering bound values into the template ------------------------
+    # THE BUG THIS GUARDS SILENTLY DISABLED MOST OF THE REGISTRY.
+    #
+    # `{"args": {"path": "${input.docx_path}"}}` -- the adapter reads `path`,
+    # the placeholder is `docx_path`. Handing over a dict keyed by
+    # placeholder name gave the adapter `path=None`, and every capability
+    # built that way died on a path check that looked like an environment
+    # problem and was actually this one. python.source.audit.ast was the
+    # only thing that worked, purely because its names happened to match.
+
+    def render_uses_placeholder_name_not_arg_key() -> bool:
+        import world_binding_v1 as WB
+        entry = {"action_template": {"args": {"path": "${input.docx_path}"}}}
+        out = WB.render_args(entry, {"docx_path": "a/b.docx"})
+        return out.get("path") != "a/b.docx"
+
+    def render_leaves_a_placeholder_unexpanded() -> bool:
+        import world_binding_v1 as WB
+        entry = {"action_template": {"args": {"path": "${input.docx_path}"}}}
+        out = WB.render_args(entry, {"docx_path": "a/b.docx"})
+        return "${" in str(out.get("path") or "")
+
+    def render_passes_through_an_unbound_argument() -> bool:
+        import world_binding_v1 as WB
+        # A missing argument is a fact to report, not a None to invent.
+        entry = {"action_template": {"args": {"path": "${input.docx_path}"}}}
+        try:
+            WB.render_args(entry, {})
+        except KeyError:
+            return False
+        return True
+
+    add("world_binding_v1.render_args", "the placeholder name where the arg key belongs",
+        render_uses_placeholder_name_not_arg_key)
+    add("world_binding_v1.render_args", "a ${input.x} left unexpanded in the output",
+        render_leaves_a_placeholder_unexpanded)
+    add("world_binding_v1.render_args", "an unbound argument passed through as None",
+        render_passes_through_an_unbound_argument)
+
     return out
 
 

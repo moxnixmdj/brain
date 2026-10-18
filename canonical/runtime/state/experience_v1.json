@@ -1,36 +1,79 @@
 {
  "cells": {
-  "document.convert.markdown_pdf.pandoc_weasyprint|blocker": {
-   "first_seen": 1792311294.9911497,
-   "last_seen": 1792311405.1103446,
+  "archive.tar_gz.create_from_manifest|runtimeerror": {
+   "first_seen": 1792311905.9175966,
+   "last_seen": 1792311923.4771974,
    "observations": [
     -1,
+    -1
+   ],
+   "structural": false,
+   "where": "archive.tar_gz.create_from_manifest",
+   "why": "RuntimeError"
+  },
+  "archive.verify.tar_gz.gnu|runtimeerror": {
+   "first_seen": 1792311905.9474385,
+   "last_seen": 1792311923.505749,
+   "observations": [
     -1,
+    -1
+   ],
+   "structural": false,
+   "where": "archive.verify.tar_gz.gnu",
+   "why": "RuntimeError"
+  },
+  "document.convert.markdown_pdf.pandoc_weasyprint|blocker": {
+   "first_seen": 1792311974.8522816,
+   "last_seen": 1792311974.8522835,
+   "observations": [
     -1
    ],
    "structural": false,
    "where": "document.convert.markdown_pdf.pandoc_weasyprint",
    "why": "Blocker"
   },
-  "image.extract.ocr.tesseract|bound_capability_source_unsupported": {
-   "first_seen": 1792311295.0068846,
-   "last_seen": 1792311295.0068867,
+  "docx.document.verify.intent_ooxml|verified": {
+   "first_seen": 1792311905.7440643,
+   "last_seen": 1792311923.3229873,
    "observations": [
-    -1
+    1,
+    1
    ],
-   "structural": true,
-   "where": "image.extract.ocr.tesseract",
-   "why": "BOUND_CAPABILITY_SOURCE_UNSUPPORTED"
+   "structural": false,
+   "where": "docx.document.verify.intent_ooxml",
+   "why": "VERIFIED"
   },
   "pdf.extract.text.pypdf|bound_pypi_install_failed": {
-   "first_seen": 1792311294.9748387,
-   "last_seen": 1792311294.9748409,
+   "first_seen": 1792311947.1929107,
+   "last_seen": 1792311947.1929164,
    "observations": [
     -1
    ],
    "structural": true,
    "where": "pdf.extract.text.pypdf",
    "why": "BOUND_PYPI_INSTALL_FAILED"
+  },
+  "python.source.audit.ast|verified": {
+   "first_seen": 1792311905.8922238,
+   "last_seen": 1792311923.454805,
+   "observations": [
+    1,
+    1
+   ],
+   "structural": false,
+   "where": "python.source.audit.ast",
+   "why": "VERIFIED"
+  },
+  "sqlite.table.create_from_json_records|runtimeerror": {
+   "first_seen": 1792311905.9844434,
+   "last_seen": 1792311923.536305,
+   "observations": [
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "sqlite.table.create_from_json_records",
+   "why": "RuntimeError"
   }
  },
  "resolutions": {}

@@ -194,6 +194,46 @@ def _quoted(goal):
     return None
 
 
+def render_args(entry, bound):
+    """Substitute bound values into the template, by ARGUMENT KEY.
+
+    The placeholder name and the argument name are NOT the same thing, and
+    conflating them silently disabled most of the registry:
+
+        {"args": {"path": "${input.docx_path}"}}
+
+    Here the adapter reads `path`, while the placeholder is `docx_path`.
+    Handing the adapter a dict keyed by placeholder name gave it `path=None`,
+    and every such capability died on a path check that looked like an
+    environment problem and was actually this. `python.source.audit.ast` was
+    the one thing that worked, purely because its names happened to match.
+
+    Raises on anything unbound rather than passing a None through: a missing
+    argument is a fact to report, not a default to invent.
+    """
+    template = (entry or {}).get("action_template") or {}
+    args = template.get("args")
+    if not isinstance(args, dict) or not args:
+        return dict(bound or {})
+
+    def repl(match):
+        key = match.group(1)
+        if key not in (bound or {}):
+            raise KeyError("UNBOUND_TEMPLATE_ARGUMENT:" + key)
+        return str(bound[key])
+
+    out = {}
+    for key, value in args.items():
+        if isinstance(value, str):
+            out[key] = _PLACEHOLDER_RE.sub(repl, value)
+        elif isinstance(value, (list, tuple)):
+            out[key] = [_PLACEHOLDER_RE.sub(repl, v) if isinstance(v, str) else v
+                        for v in value]
+        else:
+            out[key] = value
+    return out
+
+
 def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
     """Return a full input mapping for `entry`, or report exactly what is missing.
 
