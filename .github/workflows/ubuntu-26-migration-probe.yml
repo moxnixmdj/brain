@@ -1,0 +1,70 @@
+name: Ubuntu 26 migration probe
+
+# ubuntu-latest migrates to Ubuntu 26 on 2026-10-19 and 296 workflows use it.
+# This probes the risky parts on the new image BEFORE that happens, so the
+# migration is measured rather than discovered. It touches no existing workflow.
+#
+# It deliberately uses the explicit ubuntu-26.04 label: if the label is not
+# available yet, this job fails fast and that itself is the finding.
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/ubuntu-26-migration-probe.yml"
+
+jobs:
+  probe:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Report image
+        run: |
+          echo "=== /etc/os-release ==="
+          cat /etc/os-release
+          echo "=== python ==="
+          python3 --version
+          echo "=== node ==="
+          node --version || echo "node absent"
+
+      # The apt set the capabilities depend on. chromium-chromedriver is the
+      # known hazard: it moved to a snap in the 24.04 transition, so a plain
+      # apt install can silently yield a driver that will not run.
+      - name: Probe capability apt dependencies
+        run: |
+          sudo apt-get update -qq
+          for pkg in pandoc poppler-utils qrencode sqlite3 tesseract-ocr \
+                     zbar-tools zint weasyprint python3-docx python3-openpyxl \
+                     python3-xlsxwriter chromium-chromedriver; do
+            if apt-cache show "$pkg" >/dev/null 2>&1; then
+              echo "AVAILABLE   $pkg"
+            else
+              echo "UNAVAILABLE $pkg"
+            fi
+          done
+
+      - name: Probe chromedriver resolution
+        continue-on-error: true
+        run: |
+          sudo apt-get install -y -qq chromium-chromedriver || echo "INSTALL FAILED"
+          which chromedriver || echo "chromedriver NOT ON PATH"
+          chromedriver --version || echo "chromedriver DOES NOT RUN"
+
+      # Representative suites: the receipt lane and the bound execution verifier
+      # exercise the widest slice of the capability surface.
+      - name: Probe receipt lane
+        run: |
+          PYTHONPATH="$PWD:$PWD/canonical/runtime" \
+            python -m unittest canonical.tests.test_capability_receipt_lane_v1 -v
+      - name: Probe bound execution verifier
+        run: |
+          PYTHONPATH="$PWD:$PWD/canonical/runtime" \
+            python -m unittest canonical.tests.test_bound_capability_execution_verifier_v1 -v
+      - name: Probe unified cognitive fabric
+        run: |
+          PYTHONPATH="$PWD:$PWD/canonical/runtime" \
+            python -m unittest canonical.tests.test_unified_cognitive_fabric_v1 -v
