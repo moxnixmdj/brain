@@ -601,6 +601,7 @@ def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], k
                 good, why = (False, "") if blocker else case.oracle(result)
                 if good:
                     ok += 1
+                    _observe_learning(result, family=family, goal=case.goal)
                 elif blocker:
                     env_blocked += 1
                     if len(failures) < 60:
@@ -662,6 +663,40 @@ def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], k
             "Nothing here is a capability credit. Authority NONE.",
         ],
     }
+
+
+def _observe_learning(result: dict, *, family: str, goal: str) -> None:
+    """Hand one oracle-verified outcome to the learning loop.
+
+    The heartbeat produces a large volume of independently oracle-judged
+    experience -- --per-family instances per family, daily -- and discarded all
+    of it: nothing on this path ever reached the learning store, so the machine
+    worked every day and remembered none of it.
+
+    Deliberately constrained:
+    - strictly non-fatal. This script gates the ALIVE verdict, so a learning
+      failure must never turn a healthy heartbeat red.
+    - out-of-scope cases are excluded. They are *supposed* to fail closed;
+      recording them as experience would teach the machine from refusals.
+    - telemetry only. Per this workflow's own header: authority NONE, nothing
+      here is a capability credit. The observer records; it does not promote.
+    """
+    if str(family) == "OUT_OF_SCOPE_MUST_FAIL_CLOSED":
+        return
+    try:
+        from canonical.runtime import live_brain_runtime_v1 as live_runtime
+        live_runtime.observe_runtime_outcome(
+            result,
+            surface="LIVE_BRAIN_HEARTBEAT",
+            retry_context={
+                "mode": "generic",
+                "problem": {"task_id": str(result.get("task_id") or ""),
+                            "family": str(family),
+                            "goal": str(goal)[:400]},
+            },
+        )
+    except Exception:
+        return
 
 
 def main(argv: list[str] | None = None) -> int:
