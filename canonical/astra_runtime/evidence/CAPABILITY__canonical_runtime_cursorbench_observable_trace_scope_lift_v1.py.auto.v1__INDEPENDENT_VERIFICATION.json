@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/cursorbench_observable_trace_scope_lift_v1.py.auto.v1",
- "elapsed_ms": 30.692,
+ "elapsed_ms": 37.991,
  "independent_run_reference": {
-  "github_run_id": 39133990589,
+  "github_run_id": 39134255613,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "f97fd37e-4364-4e72-ba5a-1236956ec900",
+   "jti": "f68a6352-cb85-483c-9c24-37c46ef7ac19",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39133990589",
+   "run_id": "39134255613",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
