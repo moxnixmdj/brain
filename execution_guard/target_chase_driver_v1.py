@@ -55,6 +55,42 @@ class TargetChaseError(ValueError):
     pass
 
 
+def _turn_flywheel(
+    fly: Any,
+    error_text: str,
+    improved: bool,
+    recorded: list[dict[str, Any]],
+    state_path: str | None,
+    procedure: str | None = None,
+) -> None:
+    """One datum per round, keyed on pathology -- never on the task.
+
+    flywheel_v1.classify names the failure from the error alone, so the cell is
+    (WHERE x WHY): "reading a file" x "no such file" recurs across every
+    domain, while "how I fixed that one task" is worthless the moment the task
+    changes. This system exists for tasks it has never seen.
+    """
+    try:
+        where, why = fly.classify(error_text)
+        kwargs = {"path": state_path} if state_path else {}
+        fly.record(where, why, bool(improved), **kwargs)
+        row = {"where": where, "why": why, "succeeded": bool(improved)}
+        # A credited cell with no procedure attached is inert: primers() only
+        # hands over cells that carry their resolution, and a fix that cannot be
+        # handed over cannot be avoided next time. Avoiding a step is worth
+        # strictly more than repairing one.
+        if improved and procedure:
+            cell = fly.cell_of(where, why)
+            status = fly.status(cell, **(dict(kwargs)))
+            if status.get("credited") and not status.get("procedure"):
+                fly.teach(cell, str(procedure), **kwargs)
+                row["taught"] = True
+        recorded.append(row)
+    except Exception:
+        # Learning must never be able to break the chase.
+        pass
+
+
 def _callee_identity(fn: Any) -> tuple[Any, Any]:
     """Who is really being called.
 
@@ -96,6 +132,7 @@ def run(
     max_rounds: int = 16,
     patience: int = 3,
     context: Mapping[str, Any] | None = None,
+    flywheel_state_path: str | None = None,
 ) -> dict[str, Any]:
     """Act, measure, re-plan -- until the number arrives or progress dies.
 
@@ -115,15 +152,32 @@ def run(
         raise TargetChaseError("CHASE_MEASURE_IS_ACT__ACTOR_CANNOT_GRADE_ITSELF")
 
     started = time.perf_counter()
-    base = dict(context or {})
+    recorded: list[dict[str, Any]] = []
+
+    # Instant learning, with the timing that was measured to matter.
+    # flywheel_v1.primers() must be consulted BEFORE the first action, not
+    # after the first failure: consulted late, the store can only repair the
+    # next step of this run and never prevents the next run's mistake. The
+    # owner measured that ordering at a 0% improvement in mean steps.
+    fly = None
+    primers: list[dict[str, Any]] = []
+    try:
+        from canonical.runtime import flywheel_v1 as fly
+        primers = list(fly.primers(
+            **({"path": flywheel_state_path} if flywheel_state_path else {})
+        ) or [])
+    except Exception:
+        fly = None
+
+    base = {**(context or {}), "primers": primers}
     rounds: list[dict[str, Any]] = []
 
     opening = measure()
     if opening is None:
-        return _result(NOT_MEASURABLE, goal, target, direction, unit, [], None, opening, started)
+        return _result(NOT_MEASURABLE, goal, target, direction, unit, [], None, opening, started, primers, recorded)
     best = float(opening)
     if _on_target(best, float(target), direction):
-        return _result(MET, goal, target, direction, unit, rounds, best, opening, started)
+        return _result(MET, goal, target, direction, unit, rounds, best, opening, started, primers, recorded)
 
     stale = 0
     for index in range(max_rounds):
@@ -131,18 +185,23 @@ def run(
         try:
             action = act({**base, "round": index, "measured": before, "target": target})
         except Exception as exc:
-            rounds.append({"round": index, "error": type(exc).__name__ + ":" + str(exc)[:200]})
+            message = type(exc).__name__ + ":" + str(exc)[:200]
+            rounds.append({"round": index, "error": message})
+            if fly is not None:
+                _turn_flywheel(fly, message, False, recorded, flywheel_state_path)
             stale += 1
             if stale >= patience:
-                return _result(STUCK, goal, target, direction, unit, rounds, best, opening, started)
+                return _result(STUCK, goal, target, direction, unit, rounds, best, opening, started, primers, recorded)
             continue
 
         measured = measure()
         if measured is None:
             rounds.append({"round": index, "measure_error": "MEASURE_RETURNED_NONE"})
+            if fly is not None:
+                _turn_flywheel(fly, "MEASURE_RETURNED_NONE", False, recorded, flywheel_state_path)
             stale += 1
             if stale >= patience:
-                return _result(STUCK, goal, target, direction, unit, rounds, best, opening, started)
+                return _result(STUCK, goal, target, direction, unit, rounds, best, opening, started, primers, recorded)
             continue
 
         measured = float(measured)
@@ -159,20 +218,31 @@ def run(
 
         if _on_target(measured, float(target), direction):
             best = measured
-            return _result(MET, goal, target, direction, unit, rounds, best, opening, started)
+            return _result(MET, goal, target, direction, unit, rounds, best, opening, started, primers, recorded)
 
-        if _improved(best, measured, direction):
+        improved = _improved(best, measured, direction)
+        if fly is not None:
+            _turn_flywheel(
+                fly,
+                str((action or {}).get("error") or (action or {}).get("status") or ""),
+                improved,
+                recorded,
+                flywheel_state_path,
+                (action or {}).get("procedure"),
+            )
+        if improved:
             best = measured
             stale = 0
         else:
             stale += 1
             if stale >= patience:
-                return _result(STUCK, goal, target, direction, unit, rounds, best, opening, started)
+                return _result(STUCK, goal, target, direction, unit, rounds, best, opening, started, primers, recorded)
 
-    return _result(BOUND, goal, target, direction, unit, rounds, best, opening, started)
+    return _result(BOUND, goal, target, direction, unit, rounds, best, opening, started, primers, recorded)
 
 
-def _result(status, goal, target, direction, unit, rounds, best, opening, started) -> dict[str, Any]:
+def _result(status, goal, target, direction, unit, rounds, best, opening, started,
+            primers=None, recorded=None) -> dict[str, Any]:
     met = status == MET
     return {
         "schema": SCHEMA,
@@ -189,6 +259,10 @@ def _result(status, goal, target, direction, unit, rounds, best, opening, starte
         ),
         "round_count": len(rounds),
         "rounds": rounds,
+        "learning": {
+            "primers_handed_to_actor_before_round_0": list(primers or []),
+            "pathologies_recorded": list(recorded or []),
+        },
         "goal_reached": met,
         "elapsed_ms": round((time.perf_counter() - started) * 1000.0, 3),
         "execution_authority": False,

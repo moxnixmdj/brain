@@ -169,15 +169,28 @@ def status(cell: str, alpha: float = DEFAULT_ALPHA,
         return {"cell": cell, "n": 0, "e_value": 0.0,
                 "credited": False, "reason": "no evidence yet",
                 "procedure": None}
+    observations = list(entry.get("observations") or [])
     try:
-        from credit_gates_v1 import e_process
-        e = e_process(entry["observations"], bound=1.0)
+        # Imported the way experience_v1._e_value imports it: the module lives
+        # at canonical/runtime/, which is not on sys.path for every caller. A
+        # bare `from credit_gates_v1 import ...` raised ModuleNotFoundError, the
+        # except branch then fell through to a `mean` it had never bound, and
+        # every call to status() -- and therefore every call to record() --
+        # died with UnboundLocalError. Learning was silently doing nothing.
+        try:
+            from canonical.runtime.credit_gates_v1 import e_process
+        except Exception:
+            from credit_gates_v1 import e_process
+        e = e_process(observations, bound=1.0)
         e_value = float(e.get("e_value") or 0.0)
         n = int(e.get("n") or 0)
+        mean = float(e.get("mean") or 0.0)
     except Exception:
         # No gate, no credit. Refusing to fall back to a mean is the
-        # point: an ungated average would promote almost anything.
-        e_value, n = 0.0, len(entry["observations"])
+        # point: an ungated average would promote almost anything. The mean is
+        # still reported so the failure is visible rather than silent.
+        e_value, n = 0.0, len(observations)
+        mean = (sum(observations) / n) if n else 0.0
     threshold = 1.0 / alpha if alpha and alpha > 0 else 20.0
     # DIRECTION, not just magnitude.
     #
@@ -191,7 +204,6 @@ def status(cell: str, alpha: float = DEFAULT_ALPHA,
     # Strong consistent evidence of HARM is real evidence against the
     # null, and it is still not grounds for credit. So magnitude alone
     # is not the gate; the sign is.
-    mean = float(e.get("mean") or 0.0)
     credited = bool(e_value >= threshold and mean > 0)
     entry["credited"] = credited
     _save(state, path)
