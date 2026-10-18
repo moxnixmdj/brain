@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/current_escape_o11_objective_acceptance_law_gate_v1.py.auto.v1",
- "elapsed_ms": 12.637,
+ "elapsed_ms": 15.736,
  "independent_run_reference": {
-  "github_run_id": 39151962395,
+  "github_run_id": 39152240901,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "12e18fe9-c109-4c03-8b0d-f05312a6935b",
+   "jti": "4af9c630-c1c7-4a0f-b66b-6b93f3e6b09b",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39151962395",
+   "run_id": "39152240901",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
