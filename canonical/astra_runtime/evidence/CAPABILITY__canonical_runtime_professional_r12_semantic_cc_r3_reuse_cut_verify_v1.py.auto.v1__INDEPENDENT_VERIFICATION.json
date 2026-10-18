@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/professional_r12_semantic_cc_r3_reuse_cut_verify_v1.py.auto.v1",
- "elapsed_ms": 35.744,
+ "elapsed_ms": 32.236,
  "independent_run_reference": {
-  "github_run_id": 39090822192,
+  "github_run_id": 39091006411,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "9bfc4997-8092-4a3b-9f34-871c3fd3108b",
+   "jti": "9da60e7c-4fe5-444a-9a45-9d67eef32a9f",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39090822192",
+   "run_id": "39091006411",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
