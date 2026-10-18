@@ -93,12 +93,39 @@ def placeholders(entry):
     return sorted(set(_PLACEHOLDER_RE.findall(text)))
 
 
+_EXT_BY_TOKEN = {}
+for _hints, _ext in _EXT_HINTS:
+    for _h in _hints:
+        _EXT_BY_TOKEN.setdefault(_h, _ext)
+
+
 def _ext_for(name, cid):
-    key = (str(name) + " " + str(cid)).lower()
+    """The extension a capability's OUTPUT should carry.
+
+    Two traps, both hit in practice:
+
+    1. AN INPUT NAMING THE OUTPUT. `sqlite.table.create_from_json_records`
+       reads json and writes sqlite, but scanning the name naively finds
+       "json" first and emits a `.json` file from a sqlite writer. Tokens
+       introduced by `from_` name what goes IN, and are stripped.
+
+    2. AN EXPLICIT DESTINATION IGNORED. `yaml.to_json.yq` says where it is
+       going in its own name, and that beats any positional guess.
+    """
+    key = str(cid or "").lower()
+    explicit = re.search(r"\.to_([a-z0-9]+)", key)
+    if explicit:
+        mapped = _EXT_BY_TOKEN.get(explicit.group(1))
+        if mapped:
+            return mapped
+    stripped = re.sub(r"from_[a-z0-9_]+", " ", key)
+    best = None
     for hints, ext in _EXT_HINTS:
-        if any(h in key for h in hints):
-            return ext
-    return ".json"
+        for h in hints:
+            idx = stripped.find(h)
+            if idx >= 0 and (best is None or idx < best[0]):
+                best = (idx, ext)
+    return best[1] if best else ".json"
 
 
 def synthesize_output_path(cid, name="output_path", root=None):
@@ -266,13 +293,22 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
     missing = []
     from_world = {}
     for key in keys:
-        if key in bound and str(bound[key]).strip():
-            continue
         low = key.lower()
-        value = None
+        # A DESTINATION IS DETERMINED, NOT DISCOVERED.
+        #
+        # goal_compiler synthesises its own output_path first, and it has no
+        # way to know what the artifact should be -- it emitted
+        # `brain_out____329bc7434f.json` for a tar.gz writer, and because it
+        # succeeded this module never got to correct the extension. The
+        # capability determines its own artifact type; the goal cannot.
         if "output" in low:
             value = synthesize_output_path(cid, key, root)
-        elif low in ("goal", "task", "objective", "query", "question", "text"):
+            filled[key] = value
+            continue
+        if key in bound and str(bound[key]).strip():
+            continue
+        value = None
+        if low in ("goal", "task", "objective", "query", "question", "text"):
             value = _quoted(goal)
             if value is None:
                 value = str(goal or "").strip()

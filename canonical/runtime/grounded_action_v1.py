@@ -208,6 +208,13 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
             if not isinstance(entry, dict):
                 rejected.append({"capability_id": cid, "why": "NOT_REGISTERED"})
                 continue
+            # The registry keys capabilities by id; the entry itself does not
+            # carry one. Passing the raw entry downstream meant every
+            # synthesised output came out as `brain_out____<hash>.json` --
+            # empty slug, wrong extension -- because the capability id was
+            # never there to derive them from.
+            entry = dict(entry)
+            entry.setdefault("capability_id", cid)
 
             # 1a-prior. MEMORY. A capability this machine has already
             # proved it cannot run is not a candidate. This is the whole

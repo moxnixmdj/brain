@@ -1,21 +1,19 @@
 {
  "cells": {
-  "archive.tar_gz.create_from_manifest|runtimeerror": {
-   "first_seen": 1792311905.9175966,
-   "last_seen": 1792311923.4771974,
+  "archive.tar_gz.create_from_manifest|verified": {
+   "first_seen": 1792312443.2875447,
+   "last_seen": 1792312443.2875466,
    "observations": [
-    -1,
-    -1
+    1
    ],
    "structural": false,
    "where": "archive.tar_gz.create_from_manifest",
-   "why": "RuntimeError"
+   "why": "VERIFIED"
   },
   "archive.verify.tar_gz.gnu|runtimeerror": {
-   "first_seen": 1792311905.9474385,
-   "last_seen": 1792311923.505749,
+   "first_seen": 1792312443.3720834,
+   "last_seen": 1792312443.372086,
    "observations": [
-    -1,
     -1
    ],
    "structural": false,
@@ -23,8 +21,8 @@
    "why": "RuntimeError"
   },
   "document.convert.markdown_pdf.pandoc_weasyprint|blocker": {
-   "first_seen": 1792311974.8522816,
-   "last_seen": 1792311974.8522835,
+   "first_seen": 1792312537.2174094,
+   "last_seen": 1792312537.2174118,
    "observations": [
     -1
    ],
@@ -33,10 +31,9 @@
    "why": "Blocker"
   },
   "docx.document.verify.intent_ooxml|verified": {
-   "first_seen": 1792311905.7440643,
-   "last_seen": 1792311923.3229873,
+   "first_seen": 1792312443.1245909,
+   "last_seen": 1792312443.1245923,
    "observations": [
-    1,
     1
    ],
    "structural": false,
@@ -44,8 +41,8 @@
    "why": "VERIFIED"
   },
   "pdf.extract.text.pypdf|bound_pypi_install_failed": {
-   "first_seen": 1792311947.1929107,
-   "last_seen": 1792311947.1929164,
+   "first_seen": 1792312518.9164147,
+   "last_seen": 1792312518.916418,
    "observations": [
     -1
    ],
@@ -53,27 +50,55 @@
    "where": "pdf.extract.text.pypdf",
    "why": "BOUND_PYPI_INSTALL_FAILED"
   },
-  "python.source.audit.ast|verified": {
-   "first_seen": 1792311905.8922238,
-   "last_seen": 1792311923.454805,
+  "python.source.audit.ast|runtimeerror": {
+   "first_seen": 1792312444.8398008,
+   "last_seen": 1792312444.8398044,
    "observations": [
-    1,
+    -1
+   ],
+   "structural": false,
+   "where": "python.source.audit.ast",
+   "why": "RuntimeError"
+  },
+  "python.source.audit.ast|verified": {
+   "first_seen": 1792312443.2595565,
+   "last_seen": 1792312443.2595594,
+   "observations": [
     1
    ],
    "structural": false,
    "where": "python.source.audit.ast",
    "why": "VERIFIED"
   },
-  "sqlite.table.create_from_json_records|runtimeerror": {
-   "first_seen": 1792311905.9844434,
-   "last_seen": 1792311923.536305,
+  "sqlite.table.verify_against_json_records|blocker": {
+   "first_seen": 1792312443.3051975,
+   "last_seen": 1792312443.3051996,
    "observations": [
-    -1,
     -1
    ],
    "structural": false,
-   "where": "sqlite.table.create_from_json_records",
-   "why": "RuntimeError"
+   "where": "sqlite.table.verify_against_json_records",
+   "why": "Blocker"
+  },
+  "xlsx.table.create_from_json_records|blocker": {
+   "first_seen": 1792312443.3409848,
+   "last_seen": 1792312443.3409874,
+   "observations": [
+    -1
+   ],
+   "structural": false,
+   "where": "xlsx.table.create_from_json_records",
+   "why": "Blocker"
+  },
+  "xlsx.table.verify_against_json_records|blocker": {
+   "first_seen": 1792312443.3242493,
+   "last_seen": 1792312443.3242517,
+   "observations": [
+    -1
+   ],
+   "structural": false,
+   "where": "xlsx.table.verify_against_json_records",
+   "why": "Blocker"
   }
  },
  "resolutions": {}

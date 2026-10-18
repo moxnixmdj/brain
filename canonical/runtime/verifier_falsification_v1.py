@@ -861,6 +861,38 @@ def _cases() -> list[tuple[str, str, callable]]:
     add("world_binding_v1.render_args", "an unbound argument passed through as None",
         render_passes_through_an_unbound_argument)
 
+    # --- synthesising destinations --------------------------------------
+    # A destination's name is determined by the capability, never by the
+    # goal. Two ways this went wrong, both silent:
+    #
+    #   * `sqlite.table.create_from_json_records` emits SQLITE, but "json"
+    #     sits in its name first, so a naive scan wrote `.json` from a
+    #     sqlite writer. Tokens after `from_` name what goes IN.
+    #   * the capability id was never threaded through, so every path came
+    #     out as `brain_out____<hash>.json` -- empty slug, wrong extension,
+    #     for every capability in the registry at once.
+
+    def output_extension_taken_from_the_input_format() -> bool:
+        import world_binding_v1 as WB
+        p = WB.synthesize_output_path("sqlite.table.create_from_json_records",
+                                      "output_path")
+        return not p.endswith(".sqlite")
+
+    def synthesised_output_ignores_which_capability() -> bool:
+        import world_binding_v1 as WB
+        a = WB.synthesize_output_path("sqlite.table.create_from_json_records",
+                                      "output_path")
+        b = WB.synthesize_output_path("xlsx.table.create_from_json_records",
+                                      "output_path")
+        return a == b
+
+    add("world_binding_v1.synthesize_output_path",
+        "an input format naming the output extension",
+        output_extension_taken_from_the_input_format)
+    add("world_binding_v1.synthesize_output_path",
+        "a destination that ignores which capability needs it",
+        synthesised_output_ignores_which_capability)
+
     return out
 
 
