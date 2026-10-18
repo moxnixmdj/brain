@@ -1,0 +1,37 @@
+{
+ "cells": {
+  "document.convert.markdown_pdf.pandoc_weasyprint|blocker": {
+   "first_seen": 1792311294.9911497,
+   "last_seen": 1792311405.1103446,
+   "observations": [
+    -1,
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "document.convert.markdown_pdf.pandoc_weasyprint",
+   "why": "Blocker"
+  },
+  "image.extract.ocr.tesseract|bound_capability_source_unsupported": {
+   "first_seen": 1792311295.0068846,
+   "last_seen": 1792311295.0068867,
+   "observations": [
+    -1
+   ],
+   "structural": true,
+   "where": "image.extract.ocr.tesseract",
+   "why": "BOUND_CAPABILITY_SOURCE_UNSUPPORTED"
+  },
+  "pdf.extract.text.pypdf|bound_pypi_install_failed": {
+   "first_seen": 1792311294.9748387,
+   "last_seen": 1792311294.9748409,
+   "observations": [
+    -1
+   ],
+   "structural": true,
+   "where": "pdf.extract.text.pypdf",
+   "why": "BOUND_PYPI_INSTALL_FAILED"
+  }
+ },
+ "resolutions": {}
+}

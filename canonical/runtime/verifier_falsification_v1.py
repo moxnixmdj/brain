@@ -759,6 +759,69 @@ def _cases() -> list[tuple[str, str, callable]]:
     add("grounded_action_v1.act", "a goal no capability can serve",
         loop_invents_success_on_impossible_goal)
 
+    # --- accumulating experience (experience_v1) ------------------------
+    # Memory is the most dangerous component here, because a wrong memory
+    # looks exactly like a right one from the inside. These are the ways
+    # it can lie, each caught by running it and looking at what came back.
+
+    def experience_credits_consistent_failure() -> bool:
+        import experience_v1 as E
+        # EIGHT STRAIGHT FAILURES SCORE e=31.6, PAST A THRESHOLD OF 20.
+        # Magnitude alone would promote this as a trusted fix -- and then
+        # confidently reuse the thing that never works. The sign is the
+        # gate; a "correction" that always fails is not one.
+        E.DEFAULT_STATE = "canonical/runtime/state/_falsify_exp_a.json"
+        E._STATE_CACHE.clear()
+        st = None
+        for _ in range(8):
+            st = E.record("falsify.cap", "always_fails", False, structural=False)
+        return bool(st["credited"])
+
+    def experience_credits_a_single_lucky_success() -> bool:
+        import experience_v1 as E
+        # One observation is not evidence. A plain mean would call this
+        # 100%; the anytime-valid gate must not.
+        E.DEFAULT_STATE = "canonical/runtime/state/_falsify_exp_b.json"
+        E._STATE_CACHE.clear()
+        st = E.record("falsify.cap", "once_worked", True, structural=False)
+        return bool(st["credited"])
+
+    def experience_generalises_a_goal_fact_into_a_machine_fact() -> bool:
+        import experience_v1 as E
+        # "This capability cannot take a .pdf" is a fact about ONE GOAL.
+        # Promoting it to "never use this capability again" turned one PDF
+        # into a machine that could never do OCR on an image. Memory must
+        # not outlive the context that made it true.
+        E.DEFAULT_STATE = "canonical/runtime/state/_falsify_exp_c.json"
+        E._STATE_CACHE.clear()
+        E.observe("extract text from some.pdf", {
+            "rejected": [{"capability_id": "falsify.ocr",
+                          "why": "INPUT_KIND_CONTRADICTS_GOAL_FILE"}],
+            "capability_id": None, "verified": False, "error": ""})
+        return bool(E.is_suppressed("falsify.ocr"))
+
+    def experience_overrides_verification() -> bool:
+        import experience_v1 as E
+        import grounded_action_v1 as G
+        # Memory removes the NEED TO ASK, never the need to CHECK. Teach it
+        # that a capability which demonstrably cannot run here is the
+        # answer, and it must still report failure rather than success.
+        E.DEFAULT_STATE = "canonical/runtime/state/_falsify_exp_d.json"
+        E._STATE_CACHE.clear()
+        goal = "extract text from canonical/astra_runtime/tmp/BOUND_PDF_TEXT_TEST.pdf"
+        E.teach_resolution(goal, "pdf.extract.text.pypdf")
+        r = G.act(goal)
+        return bool(r.get("ok"))
+
+    add("experience_v1.record", "eight straight failures presented as a fix",
+        experience_credits_consistent_failure)
+    add("experience_v1.record", "one lucky success presented as proof",
+        experience_credits_a_single_lucky_success)
+    add("experience_v1.observe", "a goal-relative fact promoted to a machine fact",
+        experience_generalises_a_goal_fact_into_a_machine_fact)
+    add("experience_v1.recall_resolution", "a remembered answer that skips verification",
+        experience_overrides_verification)
+
     return out
 
 

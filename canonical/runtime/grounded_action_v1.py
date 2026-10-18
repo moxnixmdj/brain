@@ -148,10 +148,16 @@ def _candidate_tokens(survivor):
     return {t for t in _re.findall(r"[a-z0-9]+", text) if len(t) >= 4}
 
 
-def act(goal, root=None, registry=None, verbose=False):
+def act(goal, root=None, registry=None, verbose=False, memory=True):
     """Turn one plain sentence into one executed, verified capability call."""
     root = Path(root) if root is not None else ROOT
     started = time.perf_counter()
+    EXP = None
+    if memory:
+        try:
+            from canonical.runtime import experience_v1 as EXP
+        except Exception:
+            EXP = None
     registry = registry if registry is not None else load_registry()
 
     from canonical.runtime import world_probe_v1 as WP
@@ -190,6 +196,15 @@ def act(goal, root=None, registry=None, verbose=False):
             entry = admissible.get(cid)
             if not isinstance(entry, dict):
                 rejected.append({"capability_id": cid, "why": "NOT_REGISTERED"})
+                continue
+
+            # 1a-prior. MEMORY. A capability this machine has already
+            # proved it cannot run is not a candidate. This is the whole
+            # point of remembering: the second question should not cost
+            # what the first one already paid to find out.
+            if EXP is not None and EXP.is_suppressed(cid):
+                rejected.append({"capability_id": cid,
+                                 "why": "REMEMBERED_HARM_ON_THIS_MACHINE"})
                 continue
 
             # 1a. KIND CONTRADICTION -- the capability announces what it
@@ -242,7 +257,16 @@ def act(goal, root=None, registry=None, verbose=False):
     chosen = None
     why = None
     margin = None
-    if survivors:
+    if survivors and EXP is not None and len(survivors) > 1:
+        # Asked once, answered once. Memory removes the need to ask, never
+        # the need to check -- the action is still verified below.
+        remembered = EXP.recall_resolution(goal)
+        if remembered:
+            for s in survivors:
+                if s["capability_id"] == remembered:
+                    chosen, why = s, "REMEMBERED_RESOLUTION"
+                    break
+    if survivors and chosen is None:
         if len(survivors) == 1:
             chosen = survivors[0]
             why = "UNIQUE_SURVIVOR"
@@ -315,7 +339,7 @@ def act(goal, root=None, registry=None, verbose=False):
     expect = ((chosen["entry"].get("action_template") or {}).get("expect"))
     verified, expect_note = _check_expect(expect, result) if invoked else (False, "NOT_INVOKED")
 
-    return {
+    out = {
         "schema": SCHEMA,
         "ok": bool(invoked and verified),
         "status": "VERIFIED_ACTION" if (invoked and verified) else "ACTION_FAILED",
@@ -339,3 +363,10 @@ def act(goal, root=None, registry=None, verbose=False):
         ],
         "total_ms": round((time.perf_counter() - started) * 1000.0, 2),
     }
+
+    if EXP is not None:
+        try:
+            out["learned"] = EXP.observe(goal, out)
+        except Exception as exc:
+            out["learned"] = {"error": type(exc).__name__ + ":" + str(exc)}
+    return out
