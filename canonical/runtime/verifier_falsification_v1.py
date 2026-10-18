@@ -49,6 +49,26 @@ def _mod(name):
     return __import__(name)
 
 
+def _isolated_experience_state(path: str) -> str:
+    """Give an experience case a genuinely empty state file.
+
+    `experience_v1` persists to disk, and `_STATE_CACHE.clear()` only drops the
+    in-memory copy. Without removing the file, every run of this suite resumes
+    from the previous run's counts, so a case written to prove that "ONE
+    observation is not evidence" is re-run as the 41st observation and flips to
+    a false FAIL. That made the suite non-idempotent: its score drifted with
+    how many times it had been run (94/96 on a clean tree, 93/96 after the
+    state had accumulated) rather than with the code under test.
+    """
+    try:
+        Path(path).unlink()
+    except FileNotFoundError:
+        pass
+    except OSError:
+        pass
+    return path
+
+
 def _cases() -> list[tuple[str, str, callable]]:
     """(verifier name, what the counterexample is, does it wrongly affirm)."""
     out: list[tuple[str, str, callable]] = []
@@ -784,7 +804,7 @@ def _cases() -> list[tuple[str, str, callable]]:
         # Magnitude alone would promote this as a trusted fix -- and then
         # confidently reuse the thing that never works. The sign is the
         # gate; a "correction" that always fails is not one.
-        E.DEFAULT_STATE = "canonical/runtime/state/_falsify_exp_a.json"
+        E.DEFAULT_STATE = _isolated_experience_state("canonical/runtime/state/_falsify_exp_a.json")
         E._STATE_CACHE.clear()
         st = None
         for _ in range(8):
@@ -795,7 +815,7 @@ def _cases() -> list[tuple[str, str, callable]]:
         import experience_v1 as E
         # One observation is not evidence. A plain mean would call this
         # 100%; the anytime-valid gate must not.
-        E.DEFAULT_STATE = "canonical/runtime/state/_falsify_exp_b.json"
+        E.DEFAULT_STATE = _isolated_experience_state("canonical/runtime/state/_falsify_exp_b.json")
         E._STATE_CACHE.clear()
         st = E.record("falsify.cap", "once_worked", True, structural=False)
         return bool(st["credited"])
@@ -806,7 +826,7 @@ def _cases() -> list[tuple[str, str, callable]]:
         # Promoting it to "never use this capability again" turned one PDF
         # into a machine that could never do OCR on an image. Memory must
         # not outlive the context that made it true.
-        E.DEFAULT_STATE = "canonical/runtime/state/_falsify_exp_c.json"
+        E.DEFAULT_STATE = _isolated_experience_state("canonical/runtime/state/_falsify_exp_c.json")
         E._STATE_CACHE.clear()
         E.observe("extract text from some.pdf", {
             "rejected": [{"capability_id": "falsify.ocr",
@@ -827,7 +847,7 @@ def _cases() -> list[tuple[str, str, callable]]:
         # from "the work genuinely verified". OCR is used instead:
         # tesseract is a system binary, not a package, so it cannot be
         # installed away. A test that stops discriminating is decoration.
-        E.DEFAULT_STATE = "canonical/runtime/state/_falsify_exp_d.json"
+        E.DEFAULT_STATE = _isolated_experience_state("canonical/runtime/state/_falsify_exp_d.json")
         E._STATE_CACHE.clear()
         goal = "run ocr on canonical/astra/canary_frames/006-c-final.png"
         E.teach_resolution(goal, "image.extract.ocr.tesseract")
@@ -952,7 +972,7 @@ def _cases() -> list[tuple[str, str, callable]]:
 
     def structural_suppression_never_expires() -> bool:
         import experience_v1 as E
-        E.DEFAULT_STATE = "canonical/runtime/state/_falsify_exp_e.json"
+        E.DEFAULT_STATE = _isolated_experience_state("canonical/runtime/state/_falsify_exp_e.json")
         E._STATE_CACHE.clear()
         E.record("falsify.cap", "BOUND_PYPI_INSTALL_FAILED", False,
                  structural=True)
@@ -1036,7 +1056,7 @@ def _cases() -> list[tuple[str, str, callable]]:
 
     def statistical_failures_disable_a_capability() -> bool:
         import experience_v1 as E
-        E.DEFAULT_STATE = "canonical/runtime/state/_falsify_exp_f.json"
+        E.DEFAULT_STATE = _isolated_experience_state("canonical/runtime/state/_falsify_exp_f.json")
         E._STATE_CACHE.clear()
         for _ in range(8):
             E.record("falsify.cap", "RuntimeError", False, structural=False)
@@ -1045,7 +1065,7 @@ def _cases() -> list[tuple[str, str, callable]]:
     def structural_fact_still_suppresses() -> bool:
         import experience_v1 as E
         # The opposite error: refusing to act on a real fact about the box.
-        E.DEFAULT_STATE = "canonical/runtime/state/_falsify_exp_g.json"
+        E.DEFAULT_STATE = _isolated_experience_state("canonical/runtime/state/_falsify_exp_g.json")
         E._STATE_CACHE.clear()
         E.record("falsify.cap2", "BOUND_CAPABILITY_SOURCE_UNSUPPORTED",
                  False, structural=True)
