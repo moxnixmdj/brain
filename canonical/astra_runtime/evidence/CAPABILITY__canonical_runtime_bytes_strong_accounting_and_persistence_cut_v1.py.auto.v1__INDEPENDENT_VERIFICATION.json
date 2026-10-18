@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/bytes_strong_accounting_and_persistence_cut_v1.py.auto.v1",
- "elapsed_ms": 37.585,
+ "elapsed_ms": 41.547,
  "independent_run_reference": {
-  "github_run_id": 39120221661,
+  "github_run_id": 39120408856,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "781e07e7-8b4c-4554-81fa-ad9fe7520bf6",
+   "jti": "73db5a76-7f7a-4d44-8586-cf0a2cefb8da",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39120221661",
+   "run_id": "39120408856",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
