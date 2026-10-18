@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/p3_real_context_v3_admission_v7.py.auto.v1",
- "elapsed_ms": 0.096,
+ "elapsed_ms": 0.146,
  "independent_run_reference": {
-  "github_run_id": 39159833941,
+  "github_run_id": 39160071860,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "c3267ddb-4fd8-4775-b57b-a222511da6e8",
+   "jti": "666ac787-a736-4dda-b769-d56db49f3f61",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39159833941",
+   "run_id": "39160071860",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
