@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/verification/p3_nonbinding_v9_compositional_replay_v1.py.auto.v1",
- "elapsed_ms": 54.136,
+ "elapsed_ms": 54.522,
  "independent_run_reference": {
-  "github_run_id": 39108740983,
+  "github_run_id": 39108951040,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "f9702697-be45-430c-8b84-b504128079d7",
+   "jti": "f1e9356e-2b02-498a-8d0e-8ef247d9625c",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39108740983",
+   "run_id": "39108951040",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
