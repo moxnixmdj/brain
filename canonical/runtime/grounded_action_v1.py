@@ -148,8 +148,100 @@ def _candidate_tokens(survivor):
     return {t for t in _re.findall(r"[a-z0-9]+", text) if len(t) >= 4}
 
 
+
+_EXT_GUESS = ((".xlsx", "xlsx"), (".docx", "docx"), (".pdf", "pdf"),
+              (".json", "json"), (".yaml", "yaml"), (".yml", "yaml"),
+              (".sqlite", "sqlite"), (".db", "sqlite"), (".md", "markdown"),
+              (".png", "image"), (".jpg", "image"), (".csv", "csv"),
+              (".py", "python"), (".tar.gz", "tar"))
+
+
+def _bind_inventory_param(name, goal_paths, goal):
+    """Fill one required parameter of an inventory function.
+
+    The signature tells us exactly what it needs -- which is more than the
+    registry's templates do. Paths come from the goal, or from the world;
+    anything else falls back to the goal text itself.
+    """
+    low = str(name or "").lower()
+    looks_like_path = any(k in low for k in ("path", "file", "dir", "root", "src"))
+    if looks_like_path:
+        for ext, kind in _EXT_GUESS:
+            if kind in low or ext.lstrip(".") in low:
+                for rel in goal_paths:
+                    if str(rel).lower().endswith(ext):
+                        return rel
+        for rel in goal_paths:
+            return rel
+        try:
+            from canonical.runtime import world_binding_v1 as WB
+            found = WB._world_path_for(name, "", ROOT)
+            if found:
+                return found
+        except Exception:
+            pass
+        return None
+    import re as _re
+    m = _re.search(r'"([^"]*)"', str(goal or ""))
+    if m:
+        return m.group(1)
+    return str(goal or "").strip() or None
+
+
+def _try_bridge(goal, root, goal_paths, started):
+    """Escalate to the inventory. Never replaces a verified capability.
+
+    The result carries its TIER and is never marked verified: the evidence
+    file calls itself "not a true capability receipt", and a tier is a
+    statement about whether a test named the function -- not about whether
+    this answer is right.
+    """
+    try:
+        from canonical.runtime import module_bridge_v1 as MB
+    except Exception:
+        return None
+    try:
+        cands = MB.candidates(goal, k=3)
+    except Exception:
+        return None
+    for entry in cands:
+        inputs = {}
+        missing = []
+        for param in (entry.get("required") or []):
+            value = _bind_inventory_param(param, goal_paths, goal)
+            if value is None or str(value).strip() == "":
+                missing.append(param)
+            else:
+                inputs[param] = value
+        if missing:
+            continue
+        try:
+            result = MB.invoke(entry, inputs, root)
+        except Exception:
+            continue
+        return {
+            "schema": SCHEMA,
+            "ok": False,
+            "status": "UNVERIFIED_INVENTORY_RESULT",
+            "goal": goal,
+            "capability_id": "module_fn." + entry["source_rel"] + "." + entry["function"],
+            "source": "MODULE_INVENTORY",
+            "inputs": inputs,
+            "result": result if isinstance(result, (dict, list, str, int, float, bool)) or result is None else repr(result),
+            "tier": entry.get("tier"),
+            "passing_cases": entry.get("passing_cases"),
+            "authority": ("NONE__SANDBOX_MEASUREMENT_OF_EXISTING_TESTS"
+                          "_NOT_A_TRUE_CAPABILITY_RECEIPT"),
+            "executed": True,
+            "verified": False,
+            "expect": "NO_EXPECT_DECLARED__TIER_IS_NOT_VERIFICATION",
+            "total_ms": round((time.perf_counter() - started) * 1000.0, 2),
+        }
+    return None
+
+
 def act(goal, root=None, registry=None, verbose=False, memory=True,
-        established_effects=(), extra_paths=()):
+        established_effects=(), extra_paths=(), bridge=True):
     """`established_effects` and `extra_paths` are how one step feeds the next.
 
     A caller chaining steps passes what earlier steps PROVIDED and the paths
@@ -321,6 +413,13 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
                         why = "GOAL_WORD_AGREEMENT"
                 if chosen is None:
                     why = "AMBIGUOUS__NO_DECISIVE_MARGIN"
+
+    if chosen is None and bridge:
+        # Escalate, never replace: only when no VERIFIED capability could
+        # act does the inventory get asked.
+        escalated = _try_bridge(goal, root, goal_paths, started)
+        if escalated is not None:
+            return escalated
 
     if chosen is None:
         return {

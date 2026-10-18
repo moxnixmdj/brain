@@ -17,3 +17,6 @@ canonical/runtime/SELF_IMPROVEMENT_STATE_V1.json
 # Environments this system created. Never part of the project.
 .brain_venv/
 .venv/
+
+# derived cache: rebuilt from MODULE_INVOCATION_EVIDENCE_V1.json in ~80ms
+canonical/runtime/state/module_bridge_index_v1.json

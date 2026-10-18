@@ -22,8 +22,10 @@
   },
   "document.convert.markdown_pdf.pandoc_weasyprint|blocker": {
    "first_seen": 1792312537.2174094,
-   "last_seen": 1792312537.2174118,
+   "last_seen": 1792313073.615255,
    "observations": [
+    -1,
+    -1,
     -1
    ],
    "structural": false,

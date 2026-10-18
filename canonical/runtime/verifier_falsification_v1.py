@@ -893,6 +893,32 @@ def _cases() -> list[tuple[str, str, callable]]:
         "a destination that ignores which capability needs it",
         synthesised_output_ignores_which_capability)
 
+    # --- escalating to the 5,221-function inventory ----------------------
+    # The inventory is not verified, and its own evidence file says so:
+    # "NONE__SANDBOX_MEASUREMENT_OF_EXISTING_TESTS_NOT_A_TRUE_CAPABILITY_RECEIPT".
+    # A tier states whether a test named the function, not whether THIS
+    # answer is right. Two ways to lie with it.
+
+    def inventory_tier_reported_as_verification() -> bool:
+        import grounded_action_v1 as G
+        r = G.act("compute the sha256 of canonical/CANONICAL_POINTER.json",
+                  memory=False)
+        if r.get("source") != "MODULE_INVENTORY":
+            return False
+        return bool(r.get("verified")) or bool(r.get("ok"))
+
+    def inventory_displaces_a_verified_capability() -> bool:
+        import grounded_action_v1 as G
+        # Escalate, never replace. A verified capability must always win.
+        r = G.act("audit the python source canonical/runtime/bound_capabilities",
+                  memory=False)
+        return r.get("source") == "MODULE_INVENTORY"
+
+    add("grounded_action_v1.act", "an inventory tier presented as verification",
+        inventory_tier_reported_as_verification)
+    add("grounded_action_v1.act", "the inventory taking over from a verified capability",
+        inventory_displaces_a_verified_capability)
+
     return out
 
 
