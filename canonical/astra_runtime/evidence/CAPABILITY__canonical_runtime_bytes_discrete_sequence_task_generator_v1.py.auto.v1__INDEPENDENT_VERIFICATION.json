@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/bytes_discrete_sequence_task_generator_v1.py.auto.v1",
- "elapsed_ms": 24.083,
+ "elapsed_ms": 19.486,
  "independent_run_reference": {
-  "github_run_id": 39135938495,
+  "github_run_id": 39136154422,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "ba020262-3d9a-4467-bfd5-9649a251ba28",
+   "jti": "af90b045-8a3d-413b-bc73-660151160cb2",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39135938495",
+   "run_id": "39136154422",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
