@@ -200,8 +200,20 @@ def solve(goal: str, root: str, model, steps: int = 6,
     # evidence, and a failure that was not is evidence too, but they are
     # not the same evidence and scoring them as you go would flatter the
     # loop for having struggled.
-    hit: list[str] = []
+    hit: list[tuple] = []
+    pending: list[str] = []   # failures not yet resolved this run
+    # Consulted BEFORE the first action, not after the first failure.
+    # See flywheel_v1.primers: asked too late, the store repairs the
+    # next step of this run and never prevents the next run's mistake,
+    # and the measured benefit is exactly zero.
     learned_for_next = None
+    try:
+        import flywheel_v1 as F
+        primed = F.primers()
+        if primed:
+            learned_for_next = {"primers": primed}
+    except Exception:
+        pass
 
     for step in range(1, steps + 1):
         seeing = {
@@ -222,6 +234,27 @@ def solve(goal: str, root: str, model, steps: int = 6,
                           f"model raised {type(exc).__name__}: {exc}"})
             break
         if program is None:
+            # The model may PROPOSE that it is finished. It may not
+            # CERTIFY it.
+            #
+            # Found by measuring: a run whose only action FAILED was
+            # still reported DONE, because the loop took "I'm done" at
+            # the model's word and never asked the machine whether the
+            # last thing worked. Every run came back DONE in one step
+            # and the failure was invisible.
+            #
+            # That is precisely what the ownership law forbids -- the
+            # model proposes, deterministic code credits. So the machine
+            # gets the last word: stopping is only success if nothing
+            # actually failed on the way.
+            last = trace[-1]["result"] if trace else None
+            failed = bool(last and (last["exit"] not in (0, None)
+                                    or last["timed_out"]))
+            if failed:
+                verdict = GAVE_UP
+                trace.append({"step": step,
+                              "error": "declared done after a failed action"})
+                break
             verdict = DONE
             break
 
@@ -235,22 +268,37 @@ def solve(goal: str, root: str, model, steps: int = 6,
         # learned about it. Both are keyed on how things break, never on
         # what the task was.
         learned_for_next = None
-        if result["exit"] not in (0, None) or result["timed_out"]:
+        failed_now = (result["exit"] not in (0, None)) or result["timed_out"]
+        if failed_now:
             try:
                 import flywheel_v1 as F
                 where, why = F.classify(result["err"] or result["out"] or "")
                 cell = F.cell_of(where, why)
-                # The pair, not the cell string: record() derives the
-                # cell itself, and handing it a cell would re-derive a
-                # nonsense one from the joined text.
                 hit.append((where, why))
-                status = F.status(cell)
-                if status["credited"] and status["procedure"]:
-                    learned_for_next = {"cell": cell,
-                                        "procedure": status["procedure"]}
+                pending.append(cell)
                 trace[-1]["pathology"] = cell
             except Exception:
                 pass
+        elif pending:
+            # THE FIX IS THE LESSON.
+            #
+            # Credit was being granted to cells whose procedure was
+            # permanently None, because outcomes were recorded and the
+            # thing that actually recovered was never captured. So the
+            # store was credited and empty, primers() had nothing to
+            # hand over, and the measured speed gain was exactly zero.
+            #
+            # The program that just succeeded IS the resolution for
+            # every pathology still outstanding. Captured as a
+            # candidate; it is only handed back once credit is earned.
+            try:
+                import flywheel_v1 as F
+                for cell in dict.fromkeys(pending):
+                    if not (F.status(cell)["procedure"]):
+                        F.teach(cell, program)
+                pending.clear()
+            except Exception:
+                pending.clear()
     else:
         verdict = GAVE_UP
 

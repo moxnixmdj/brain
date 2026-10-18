@@ -265,3 +265,29 @@ def classify(error_text: str) -> tuple:
         return "unknown", "no error reported"
     first = text.splitlines()[-1][:80] if text.splitlines() else text[:80]
     return "unclassified", first
+
+
+def primers(alpha: float = DEFAULT_ALPHA,
+            path: str = DEFAULT_STATE) -> list:
+    """Every credited fix, for handing over BEFORE anything fails.
+
+    Timing is the whole mechanism, and getting it wrong cost the entire
+    benefit. Consulted only AFTER a failure, the store can help the next
+    step of the same run but never the first step of the next one -- so
+    the same mistake is made afresh every single time. Measured: credit
+    arrived at the eighth job and mean steps did not move, 2.00 before
+    and 2.00 after. A 0% improvement from a mechanism whose only stated
+    purpose was speed.
+
+    So this is read before the first action. The set is small by
+    construction -- it is keyed on how things break, and there are not
+    many ways to break -- so handing over all of it costs nothing and
+    lets the model avoid the failure instead of recovering from it.
+    Avoiding a step is worth strictly more than repairing one.
+    """
+    out = []
+    for st in cells(path=path):
+        if st["credited"] and st.get("procedure"):
+            out.append({"cell": st["cell"], "procedure": st["procedure"],
+                        "n": st["n"]})
+    return out

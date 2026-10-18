@@ -249,6 +249,33 @@ def _cases() -> list[tuple[str, str, callable]]:
     add("solve_v1.observe", "a tree that changed without it noticing",
         observe_sees_a_change)
 
+    # --- the flywheel is consulted before acting -----------------------
+    def solve_primes_before_first_action() -> bool:
+        import solve_v1 as S
+        import flywheel_v1 as F
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "fw.json")
+            # Force a credited cell with a procedure, then ask whether
+            # the loop hands it over on step 1 rather than after a
+            # failure -- asked too late the benefit measured 0%.
+            for _ in range(10):
+                F.record("file access", "no such file", True, path=path)
+            F.teach(F.cell_of("file access", "no such file"),
+                    "the fix", path=path)
+            import unittest.mock as mock
+            with mock.patch.object(F, "DEFAULT_STATE", path):
+                seen = []
+                def model(goal, seeing):
+                    if seeing["step"] == 1:
+                        seen.append(seeing.get("learned"))
+                    return None
+                S.solve("g", tmp, model, steps=1)
+            return not any(
+                s and (s.get("primers") or []) for s in seen)
+
+    add("solve_v1.solve", "the flywheel consulted only after a failure",
+        solve_primes_before_first_action)
+
     # --- capability is declared, not assumed ---------------------------
     def confine_network_default_closed() -> bool:
         import confine_v1 as C
