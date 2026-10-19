@@ -130,3 +130,63 @@ are, before anyone asks.
   argument, not a flag plus a pattern.
 - Pipelines are capped at two stages and 10 candidate programs.
 - The first question of a kind costs ~37s; reuse is ~0.02s.
+
+---
+
+## Attempted 2026-10-19: the invariant test works, the search cannot reach it
+
+The signature idea was built and measured. Result: **the discrimination is
+correct and the search is too slow to use it.** Reverted to `b7d90471`, which
+is verified passing; the finding is recorded here so it is not rebuilt blind.
+
+### What was proven to work
+
+`repeat_file()` duplicates every line in place. On `b"a\nb\nc\n"` it yields
+`b"a\na\nb\nb\nc\nc\n"` -- 3 lines become 6, and 3 different lines stay 3.
+Testing whether a command's number MOVES under that transformation separates
+the two questions with no file-builder and nothing written down:
+
+```
+sort --unique | wc --lines   invariant -> True    (counts different lines)
+uniq | wc --lines            invariant -> True    (counts different lines)
+wc --lines                   invariant -> False   (counts lines)
+```
+
+That is the whole distinction the `uniquelines` constructor existed to make,
+obtained from behaviour. The constructor was deleted and the tests above
+still passed. The mechanism is sound.
+
+### Why it was reverted
+
+The search cannot find `sort --unique | wc --lines` on the full machine inside
+any usable budget (~340s, and it came back with nothing). The pipeline stage
+tries 10 candidate programs x 7 first-stage shapes x 4 second-stage shapes, and
+the invariance check doubles every measurement -- roughly 10,000 subprocess
+pairs, and `sort` is not near the top of the candidate list for this phrasing.
+
+### The trap that made it worse before it was caught
+
+With the constructor gone, `query_kind("how many unique lines")` returned
+`"lines"`, and the CACHE was consulted under that key -- so a remembered
+line-counting command was handed back and the machine answered **15** where the
+truth was 7. A wrong answer that looks like a right one.
+
+Any future attempt must apply the invariance check to the CACHED path too, not
+only to freshly discovered commands. Reuse is not exempt from the test that
+made the command trustworthy in the first place.
+
+### The defect behind both failures (not yet fixed, and it is the real one)
+
+`PipelineTests` passes an explicit shortlist (`programs=[...]`), so the tests
+pass. **The full-machine path was never covered.** With `programs=None`:
+
+```
+how many unique lines in data.txt  ->  no answer, 370s   (shortlist: 7, in 5s)
+count the lines in data.txt        ->  15, correct, 0.7s
+```
+
+So the distinct-lines capability works only when the machine is handed the
+right eight programs. That gap -- a test that passes because it is given the
+answer's neighbourhood in advance -- is the same class of dishonesty as the
+tests that passed with their feature switched off, and it is the first thing
+to close. **A test that supplies the candidate list is not testing discovery.**
