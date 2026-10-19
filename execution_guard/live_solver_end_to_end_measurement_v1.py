@@ -639,12 +639,17 @@ def main(argv: list[str] | None = None) -> int:
                   only_families={x.strip() for x in ns.families.split(",") if x.strip()} or None)
     text = json.dumps(receipt, indent=2, sort_keys=True) + "\n"
     if ns.out:
+        # The receipt is the ONLY record of a ten-minute measurement.  Measured: the run
+        # completed and then died on `FileNotFoundError` because the output directory did not
+        # exist, so every observation was lost.  The directory is created here.
+        Path(ns.out).parent.mkdir(parents=True, exist_ok=True)
         Path(ns.out).write_text(text, encoding="utf-8")
     summary = {k: {"in_scope_instance_pass_rate": v["in_scope_instance_pass_rate"],
                    "in_scope_families_all_pass": f'{v["in_scope_families_all_pass"]}/{v["in_scope_families_measured"]}',
                    "out_of_scope_fail_closed_rate": v["out_of_scope_fail_closed_rate"]} for k, v in receipt["measurements"].items()}
     live = receipt["tool_liveness"]
     if ns.summary_md:
+        Path(ns.summary_md).parent.mkdir(parents=True, exist_ok=True)
         Path(ns.summary_md).write_text(summary_markdown(receipt, environment_blockers_are_failures=ns.environment_blockers_are_failures), encoding="utf-8")
     verdict_errors = alive_errors(receipt, environment_blockers_are_failures=ns.environment_blockers_are_failures)
     print(json.dumps({"seed": receipt["seed"], "replay": receipt["replay"], "entries": summary, "alive_errors": verdict_errors,
