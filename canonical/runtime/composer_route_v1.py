@@ -100,7 +100,8 @@ def candidate_tokens(goal: str, g: Mapping[str, Any] | None = None) -> list[str]
 
 def route(goal: str, seed: Sequence[str] | None = None,
           g: Mapping[str, Any] | None = None,
-          max_candidates: int = 6) -> dict[str, Any]:
+          max_candidates: int = 6,
+          cwd: str | pathlib.Path | None = None) -> dict[str, Any]:
     """Find the chain this goal asks for, and say which token it was read as.
 
     The chain is not returned as a claim: every candidate is tried until one
@@ -150,6 +151,27 @@ def route(goal: str, seed: Sequence[str] | None = None,
         except Exception:  # noqa: BLE001 - discovery must never break routing
             found = None
         if isinstance(found, Mapping) and found.get("closed"):
+            # Knowing which program could do it is not doing it. If the goal
+            # names a file that is actually there, do the job and leave the
+            # file behind -- otherwise this is a fact about a sandbox.
+            done = None
+            try:
+                from canonical.runtime import computer_env_v1 as cenv
+                done = cenv.perform(goal, cwd=cwd)
+            except Exception:  # noqa: BLE001 - doing must never break routing
+                done = None
+            if isinstance(done, Mapping) and done.get("pass"):
+                return {"schema": SCHEMA, "pass": True, "goal": goal,
+                        "token": None, "chain": [], "tried": tried,
+                        "explored": True, "done": True,
+                        "plan": list(done.get("plan") or []),
+                        "output": done.get("output"),
+                        "output_bytes": done.get("output_bytes"),
+                        "argv": done.get("argv"),
+                        "verification": done.get("verification"),
+                        "suffix": found.get("suffix"),
+                        "status": "PASS__PERFORMED_ON_REAL_FILE",
+                        "authority": "PERFORMED_ON_REAL_FILE_AND_VERIFIED"}
             return {"schema": SCHEMA, "pass": True, "goal": goal,
                     "token": None, "chain": [], "tried": tried,
                     "explored": True, "plan": list(found.get("plan") or []),

@@ -99,6 +99,9 @@ class ComputerEnv:
             tempfile.mkdtemp(prefix="brain-computer-env-"))
         self.root.mkdir(parents=True, exist_ok=True)
         self.seed = dict(seed or {"input.txt": b"brain computer env sample\n"})
+        # what each action actually did, filled in by program_actions when an
+        # action succeeds -- see ComputerEnv.recipes
+        self.recipes: dict[str, dict[str, Any]] = {}
         self.programs = list(programs) if programs is not None else installed_programs()
         self.actions: dict[str, Callable[[ComputerEnv], bool]] = {}
         self.register(file_actions())
@@ -244,9 +247,20 @@ def program_actions(env: ComputerEnv,
                 # AND prints "adding: input.txt" -- writing that chatter over
                 # the archive replaced a good file with a bad one and called
                 # it done.
-                if proc.stdout and not made(before):
+                captured = bool(proc.stdout) and not made(before)
+                if captured:
                     (env.root / target).write_bytes(proc.stdout)
                 if made(before):
+                    # Learning that stays in the sandbox is a party trick.
+                    # The exact argv that worked is the difference between
+                    # "gzip can do this" and a command that can be run on a
+                    # real file, so it is recorded rather than thrown away.
+                    env.recipes["run_" + prog] = {
+                        "program": prog,
+                        "argv": ["{input}" if a == src else a for a in argv],
+                        "stdout_to": target if captured else None,
+                        "target": target,
+                    }
                     return True
             env.reset()
             return False
@@ -338,7 +352,7 @@ def _verify_plan(plan: Sequence[str], suffix: str, target: str,
 
 
 def _single_step(programs: Sequence[str], suffix: str,
-                 target: str) -> tuple[list[str], str] | None:
+                 target: str) -> tuple[list[str], str, dict | None] | None:
     """Try each program on its own before paying for a search over sequences.
 
     One action is the shortest plan that can exist, so it is the first thing
@@ -358,13 +372,156 @@ def _single_step(programs: Sequence[str], suffix: str,
                 continue
             good, why = ps.verify_round_trip(out, suffix)
             if good:
-                return ["run_" + prog], why
+                return ["run_" + prog], why, env.recipes.get("run_" + prog)
+
         except Exception:  # noqa: BLE001 - one broken program is not a failure
             continue
         finally:
             if env is not None:
                 env.close()
     return None
+
+
+def _recipe_of(plan: Sequence[str], suffix: str, target: str,
+               programs: Sequence[str]) -> dict[str, Any] | None:
+    """Replay the winning plan and keep the exact command that did it."""
+    env = None
+    try:
+        env = ComputerEnv()
+        env.register(program_actions(env, programs=list(programs),
+                                     target=target))
+        for step in plan:
+            env.act(step)
+        for step in reversed(plan):
+            if env.recipes.get(step):
+                return env.recipes[step]
+        return None
+    except Exception:  # noqa: BLE001
+        return None
+    finally:
+        if env is not None:
+            env.close()
+
+
+def apply(recipe: Mapping[str, Any], src: str | pathlib.Path,
+          out_dir: str | pathlib.Path | None = None,
+          output_name: str | None = None,
+          timeout: float = 30.0) -> dict[str, Any]:
+    """Run a command the machine taught itself, on a real file.
+
+    A plan that only works on the synthetic file it was learned on is not a
+    capability, it is a fact about one directory. The recipe carries the argv
+    that actually worked, so the same command can be pointed at a file the
+    machine has never seen.
+
+    Nothing is trusted: the output is opened with the library that owns the
+    format before this reports success.
+    """
+    from canonical.runtime import program_synthesis_v1 as ps
+    source = pathlib.Path(src)
+    if not source.is_file():
+        return {"pass": False, "status": "OPEN__NO_SUCH_INPUT_FILE",
+                "detail": str(source)}
+    argv_in = list(recipe.get("argv") or [])
+    if not argv_in:
+        return {"pass": False, "status": "OPEN__RECIPE_HAS_NO_COMMAND",
+                "detail": "nothing to run"}
+
+    target = recipe.get("target")
+    name = (output_name or recipe.get("stdout_to")
+            or (source.name + pathlib.Path(str(target or ".out")).suffix))
+    out_dir = pathlib.Path(out_dir) if out_dir else source.parent
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out = out_dir / name
+
+    # Run in the file's own directory and hand over its name, not an absolute
+    # path: zip and tar store whatever they were given, so an absolute path
+    # bakes /home/user/... into every archive forever.
+    try:
+        handed_over = str(source.relative_to(out_dir))
+    except ValueError:
+        handed_over = str(source)
+
+    argv = []
+    for token in argv_in:
+        if token == "{input}":
+            argv.append(handed_over)
+        elif target and token == target:
+            argv.append(name)          # the output follows the real input
+        else:
+            argv.append(str(token))
+
+    try:
+        proc = subprocess.run(argv, cwd=str(out_dir), capture_output=True,
+                              timeout=timeout)
+    except Exception as exc:  # noqa: BLE001
+        return {"pass": False, "status": "OPEN__COMMAND_FAILED",
+                "detail": type(exc).__name__ + ":" + str(exc)[:200]}
+
+    if recipe.get("stdout_to") and proc.stdout:
+        out.write_bytes(proc.stdout)
+
+    if not out.is_file():
+        return {"pass": False, "status": "OPEN__COMMAND_PRODUCED_NO_FILE",
+                "detail": " ".join(argv), "argv": argv}
+
+    suffix = pathlib.Path(name).suffix
+    good, why = ps.verify_round_trip(out, suffix)
+    return {"pass": bool(good), "status": "PASS__APPLIED_TO_REAL_FILE"
+            if good else "OPEN__OUTPUT_NOT_REALLY_THAT_FORMAT",
+            "argv": argv, "output": str(out),
+            "output_bytes": out.stat().st_size, "verification": why,
+            "returncode": proc.returncode}
+
+
+def perform(gap: str, cwd: str | pathlib.Path | None = None,
+            timeout: float = 30.0) -> dict[str, Any]:
+    """Learn it if it has to, then actually do it to the real file.
+
+    discover() answers "which program could do this" -- knowledge. perform()
+    answers "it is done" -- the file exists, on the machine, where the file
+    being talked about actually lives. Learning that never leaves the sandbox
+    is not the machine doing anything, it is the machine knowing something.
+    """
+    from canonical.runtime import cli_capability_acquisition_v1 as acq
+    if not acq._requested_suffix(gap):
+        return {"pass": False, "status": "OPEN__NO_OUTPUT_FORMAT_IN_GAP",
+                "detail": "nothing in the goal says what to produce"}
+
+    wanted = output_name(gap)
+    base = pathlib.Path(cwd) if cwd else pathlib.Path.cwd()
+
+    # the input is a file the goal names that is actually there; a goal about
+    # a file that does not exist is a gap, not a task
+    src = None
+    for token in _FILENAME.findall(str(gap or "")):
+        if token == wanted:
+            continue
+        cand = (base / token)
+        if cand.is_file():
+            src = cand
+            break
+    if src is None:
+        return {"pass": False, "status": "OPEN__NO_EXISTING_INPUT_FILE_IN_GOAL",
+                "detail": "no file named in the goal exists in %s" % base}
+
+    found = discover(gap)
+    if not found.get("closed"):
+        return {"pass": False, "status": found.get("status")
+                or "OPEN__COULD_NOT_LEARN_IT", "detail": found.get("detail"),
+                "plan": found.get("plan")}
+    recipe = found.get("recipe")
+    if not recipe:
+        return {"pass": False, "status": "OPEN__NO_COMMAND_RECORDED",
+                "detail": "it worked but the command was not kept"}
+
+    done = apply(recipe, src, out_dir=src.parent, output_name=wanted,
+                 timeout=timeout)
+    done["goal"] = gap
+    done["plan"] = found.get("plan")
+    done["learned_by"] = found.get("status")
+    done["from_memory"] = found.get("from_memory")
+    return done
 
 
 def discover(gap: str, budget: int = 120, seed: int = 11) -> dict[str, Any]:
@@ -410,7 +567,7 @@ def discover(gap: str, budget: int = 120, seed: int = 11) -> dict[str, Any]:
         finally:
             env.close()
 
-    def recall() -> tuple[list[str], str] | None:
+    def recall() -> tuple[list[str], str, dict | None] | None:
         try:
             rows = tl.recall(fingerprint_of(), gkey, k=3)
         except Exception:  # noqa: BLE001 - no memory is not a failure
@@ -421,7 +578,7 @@ def discover(gap: str, budget: int = 120, seed: int = 11) -> dict[str, Any]:
                 continue
             good, why = _verify_plan(plan, suffix, target, progs)
             if good:
-                return plan, why
+                return plan, why, _recipe_of(plan, suffix, target, progs)
         return None
 
     def keep(plan: list[str], status: str, why: str) -> None:
@@ -436,7 +593,8 @@ def discover(gap: str, budget: int = 120, seed: int = 11) -> dict[str, Any]:
     if got is not None:
         return {"closed": True, "status": "PASS__RECALLED_AND_REVERIFIED",
                 "plan": got[0], "suffix": suffix, "target": target,
-                "actions_tried": 0, "verification": got[1], "banned": [],
+                "recipe": got[2], "actions_tried": 0,
+                "verification": got[1], "banned": [],
                 "from_memory": True,
                 "detail": "recalled: %s" % ", ".join(got[0])}
 
@@ -446,8 +604,8 @@ def discover(gap: str, budget: int = 120, seed: int = 11) -> dict[str, Any]:
         keep(one[0], "PASS__SINGLE_ACTION_FOUND_AND_VERIFIED", one[1])
         return {"closed": True, "status": "PASS__SINGLE_ACTION_FOUND_AND_VERIFIED",
                 "plan": one[0], "suffix": suffix, "target": target,
-                "actions_tried": len(progs), "verification": one[1],
-                "banned": [], "from_memory": False,
+                "recipe": one[2], "actions_tried": len(progs),
+                "verification": one[1], "banned": [], "from_memory": False,
                 "detail": "found it by acting: %s" % ", ".join(one[0])}
 
     # 3. only now pay for a search over sequences
@@ -484,6 +642,7 @@ def discover(gap: str, budget: int = 120, seed: int = 11) -> dict[str, Any]:
             keep(plan, "PASS__SEARCH_FOUND_AND_VERIFIED", why)
             return {"closed": True, "status": outcome.get("status"),
                     "plan": plan, "suffix": suffix, "target": target,
+                    "recipe": _recipe_of(plan, suffix, target, progs),
                     "actions_tried": tried, "verification": why,
                     "banned": sorted(banned), "from_memory": False,
                     "detail": "found it by acting: %s" % ", ".join(plan)}

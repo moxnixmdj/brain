@@ -13,9 +13,13 @@ ignores content -- must fail here.
 
 from __future__ import annotations
 
+import bz2
+import gzip
+import lzma
 import os
 import pathlib
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -238,3 +242,117 @@ class TransferTests(EnvCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# --------------------------------------------------------------------------- #
+# knowing is not doing: run what was learned on a file never seen before
+# --------------------------------------------------------------------------- #
+class RealFileCase(unittest.TestCase):
+    """A real directory with real files in it, written and read for real.
+
+    These are not fixtures standing in for the world -- the filesystem, the
+    programs and the bytes are the real ones.
+    """
+
+    def setUp(self) -> None:
+        from canonical.runtime import curriculum_v1
+        from canonical.runtime import transfer_learning_v1
+        self.tmp = tempfile.mkdtemp(prefix="brain-perform-")
+        self.work = pathlib.Path(self.tmp) / "work"
+        self.work.mkdir()
+        self.mods = (curriculum_v1, transfer_learning_v1)
+        self.saved = [m.STATE_PATH for m in self.mods]
+        for m in self.mods:
+            m.STATE_PATH = os.path.join(self.tmp, type(m).__name__ + ".json")
+        self.text = ("the machine must do this to a file it has never seen\n"
+                     * 40).encode()
+        (self.work / "notes.txt").write_bytes(self.text)
+
+    def tearDown(self) -> None:
+        for m, path in zip(self.mods, self.saved):
+            m.STATE_PATH = path
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def learn(self, goal: str) -> dict:
+        return cenv.discover(goal)
+
+    def test_a_command_learned_on_a_stand_in_runs_on_a_real_file(self):
+        r = self.learn("compress notes.txt into notes.txt.gz")
+        self.assertTrue(r["closed"], r)
+        done = cenv.apply(r["recipe"], self.work / "notes.txt")
+        self.assertTrue(done["pass"], done)
+        self.assertEqual(pathlib.Path(done["output"]).name, "notes.txt.gz")
+
+    def test_what_it_made_really_contains_the_original_bytes(self):
+        """Not "a file exists" -- the file opens and gives back exactly what
+        went in. Anything less and the machine has only learned a name."""
+        for suf, opener in (("gz", gzip.decompress),
+                            ("bz2", bz2.decompress),
+                            ("xz", lzma.decompress)):
+            with self.subTest(format=suf):
+                r = self.learn("compress notes.txt into notes.txt." + suf)
+                self.assertTrue(r["closed"], r)
+                done = cenv.apply(r["recipe"], self.work / "notes.txt")
+                self.assertTrue(done["pass"], done)
+                back = opener(pathlib.Path(done["output"]).read_bytes())
+                self.assertEqual(back, self.text,
+                                 "%s did not give back the original" % suf)
+
+    def test_the_recipe_is_a_real_command_not_a_description(self):
+        """Run the argv ourselves, with our own subprocess, nowhere near the
+        learner. If it works, the recipe is a command and not a story."""
+        r = self.learn("compress notes.txt into notes.txt.gz")
+        argv = [str(self.work / "notes.txt") if a == "{input}" else a
+                for a in r["recipe"]["argv"]]
+        proc = subprocess.run(argv, cwd=str(self.work), capture_output=True,
+                              timeout=60)
+        self.assertEqual(proc.returncode, 0, proc.stderr[:200])
+        self.assertEqual(gzip.decompress(proc.stdout), self.text)
+
+    def test_it_works_on_a_different_file_than_it_practised_on(self):
+        """It learned on a synthetic stand-in. A second, different file proves
+        the lesson generalised instead of being memorised."""
+        r = self.learn("compress notes.txt into notes.txt.gz")
+        other = self.work / "report.txt"
+        other.write_bytes(b"a completely different file\n" * 300)
+        done = cenv.apply(r["recipe"], other)
+        self.assertTrue(done["pass"], done)
+        self.assertEqual(gzip.decompress(pathlib.Path(done["output"])
+                                         .read_bytes()),
+                         other.read_bytes())
+
+    def test_perform_really_leaves_the_file_behind(self):
+        done = cenv.perform("compress notes.txt into notes.txt.gz",
+                            cwd=str(self.work))
+        self.assertTrue(done["pass"], done)
+        out = self.work / "notes.txt.gz"
+        self.assertTrue(out.is_file(), "the goal was not actually done")
+        self.assertEqual(gzip.decompress(out.read_bytes()), self.text)
+
+    def test_perform_refuses_a_file_that_is_not_there(self):
+        """A goal about a file that does not exist is a gap, not a task.
+        Inventing an input to look capable is worse than stopping."""
+        done = cenv.perform("compress missing.txt into missing.txt.gz",
+                            cwd=str(self.work))
+        self.assertFalse(done["pass"])
+        self.assertEqual(done["status"], "OPEN__NO_EXISTING_INPUT_FILE_IN_GOAL")
+        self.assertFalse((self.work / "missing.txt.gz").exists())
+
+    def test_the_second_time_is_answered_from_memory_and_still_does_it(self):
+        first = cenv.perform("compress notes.txt into notes.txt.gz",
+                             cwd=str(self.work))
+        self.assertTrue(first["pass"], first)
+        (self.work / "notes.txt.gz").unlink()
+        second = cenv.perform("compress notes.txt into notes.txt.gz",
+                              cwd=str(self.work))
+        self.assertTrue(second["pass"], second)
+        self.assertTrue(second.get("from_memory"),
+                        "the same job was learned twice")
+        self.assertTrue((self.work / "notes.txt.gz").is_file())
+
+    def test_apply_reports_a_command_that_produced_nothing(self):
+        broken = {"program": "true", "argv": ["true", "{input}"],
+                  "stdout_to": "out.gz", "target": "out.gz"}
+        done = cenv.apply(broken, self.work / "notes.txt")
+        self.assertFalse(done["pass"])
+        self.assertEqual(done["status"], "OPEN__COMMAND_PRODUCED_NO_FILE")

@@ -268,3 +268,65 @@ class DiscoveryFallbackTests(unittest.TestCase):
         r = croute.route("compress the input into out.gz", seed=[])
         self.assertTrue(r["pass"], r)
         self.assertNotEqual(r["status"], "PASS__DISCOVERED_BY_ACTING")
+
+
+class PerformedTests(unittest.TestCase):
+    """A sentence naming a real file must leave a real file behind.
+
+    Discovering which program could do the job is knowledge. The goal asked
+    for the job.
+    """
+
+    def setUp(self) -> None:
+        self.tmp = tempfile.mkdtemp(prefix="brain-performed-")
+        self.work = pathlib.Path(self.tmp) / "work"
+        self.work.mkdir()
+        (self.work / "notes.txt").write_bytes(b"real content\n" * 200)
+        mods = (curriculum_v1, documentation_mining_v1,
+                program_synthesis_v1, transfer_learning_v1)
+        self.mods = mods
+        self.saved = [m.STATE_PATH for m in mods]
+        for m in mods:
+            m.STATE_PATH = os.path.join(self.tmp, type(m).__name__ + ".json")
+        self.table = dict(program_synthesis_v1.CANDIDATES)
+        for key in (".gz", ".bz2", ".zip"):
+            program_synthesis_v1.CANDIDATES.pop(key, None)
+
+    def tearDown(self) -> None:
+        program_synthesis_v1.CANDIDATES.clear()
+        program_synthesis_v1.CANDIDATES.update(self.table)
+        for m, path in zip(self.mods, self.saved):
+            m.STATE_PATH = path
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def test_a_sentence_about_a_real_file_actually_does_it(self):
+        r = croute.route("compress notes.txt into notes.txt.gz", seed=[],
+                         cwd=str(self.work))
+        self.assertTrue(r["pass"], r)
+        self.assertEqual(r["status"], "PASS__PERFORMED_ON_REAL_FILE")
+        self.assertTrue((self.work / "notes.txt.gz").is_file(),
+                        "the file was not left behind")
+
+    def test_what_is_left_behind_really_is_that_format(self):
+        r = croute.route("compress notes.txt into notes.txt.gz", seed=[],
+                         cwd=str(self.work))
+        self.assertTrue(r["pass"], r)
+        import gzip
+        self.assertEqual(
+            gzip.decompress((self.work / "notes.txt.gz").read_bytes()),
+            (self.work / "notes.txt").read_bytes())
+
+    def test_a_job_named_in_a_zip_is_done_with_zip(self):
+        r = croute.route("archive notes.txt into notes.txt.zip", seed=[],
+                         cwd=str(self.work))
+        self.assertTrue(r["pass"], r)
+        import zipfile
+        with zipfile.ZipFile(self.work / "notes.txt.zip") as z:
+            self.assertEqual(z.read("notes.txt"),
+                             (self.work / "notes.txt").read_bytes())
+
+    def test_a_goal_naming_a_file_that_is_not_there_is_not_performed(self):
+        r = croute.route("compress absent.txt into absent.txt.gz", seed=[],
+                         cwd=str(self.work))
+        self.assertFalse((self.work / "absent.txt.gz").exists(),
+                         "it invented an input to look capable")
