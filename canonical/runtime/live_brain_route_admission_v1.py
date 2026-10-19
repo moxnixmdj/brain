@@ -895,6 +895,16 @@ _LEARNABLE_STATUSES = frozenset({
 })
 
 
+def _is_executable(name: str) -> bool:
+    """Does this program exist on this machine? Checked, never assumed."""
+    import shutil
+    from pathlib import Path
+    try:
+        return bool(Path(name).is_file() or shutil.which(name))
+    except Exception:
+        return False
+
+
 def _named_executable(goal: str) -> str:
     """A program the goal actually names, that exists on this machine.
 
@@ -948,7 +958,44 @@ def solve_or_learn(request: Mapping[str, Any], *, learn: bool = True,
     except Exception:
         pass
 
+    # JIT KNOWLEDGE. The goal named nothing the machine can run, so before
+    # concluding anything it asks the outside world what exists for this job.
+    # A gap is not the end of the road -- it is the question.
+    try:
+        from canonical.runtime import jit_knowledge_v1 as jit
+        known = jit.resolve(goal, min_sources=1, limit=6, timeout=8)
+        learned["knowledge"] = {
+            "status": known.get("status"),
+            "documents": known.get("document_count", 0),
+            "sources_answered": known.get("sources_answered") or [],
+            "complete": known.get("complete", False),
+            "authority": known.get("authority"),
+        }
+        # knowledge that names a program is only useful if that program is
+        # actually HERE -- the machine does not install, and does not invent.
+        candidates: list[str] = []
+        for doc in (known.get("documents") or []):
+            for text in (str(doc.get("id") or ""), str(doc.get("title") or "")):
+                head = text.strip().split()[0] if text.strip() else ""
+                head = head.strip(".,()[]{}'\"")
+                if 2 <= len(head) <= 40 and _is_executable(head):
+                    candidates.append(head)
+        if candidates:
+            learned["knowledge"]["candidates_present"] = candidates[:6]
+            if not _named_executable(goal):
+                exe_guess = candidates[0]
+                learned.setdefault("from_knowledge", exe_guess)
+    except Exception as exc:
+        learned.setdefault("knowledge", {"error": type(exc).__name__ + ":" + str(exc)[:160]})
+
     exe = _named_executable(goal)
+    if not exe:
+        # nothing the goal named -- but knowledge may have named something real
+        exe = str(learned.get("from_knowledge") or "")
+        if exe:
+            learned["attempted"] = True
+            learned["executable"] = exe
+            learned["executable_source"] = "jit_knowledge"
     if exe:
         learned["attempted"] = True
         learned["executable"] = exe
