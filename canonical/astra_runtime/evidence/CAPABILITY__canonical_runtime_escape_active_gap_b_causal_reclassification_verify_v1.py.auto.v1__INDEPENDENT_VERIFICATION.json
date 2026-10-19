@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/escape_active_gap_b_causal_reclassification_verify_v1.py.auto.v1",
- "elapsed_ms": 37.857,
+ "elapsed_ms": 33.051,
  "independent_run_reference": {
-  "github_run_id": 39255092188,
+  "github_run_id": 39255620061,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "31b69a42-567d-4848-95d8-bc886af230f9",
+   "jti": "a5b5ab2f-d57f-43e6-8965-5170aedb1062",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39255092188",
+   "run_id": "39255620061",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
