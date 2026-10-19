@@ -177,19 +177,74 @@ def fresh_cases(rng: random.Random, work: Path, count: int) -> list[Any]:
     """
     from execution_guard import live_solver_families_v5 as fam
 
-    gens = [
-        fam.gen_math_numeric_sympy,
-        fam.gen_json_query_jq,
-        fam.gen_python_fault_localize,
-        fam.gen_python_ast_patch_search,
-    ]
+    gens = {
+        "math_numeric_sympy": fam.gen_math_numeric_sympy,
+        "json_query_jq": fam.gen_json_query_jq,
+        "python_fault_localize": fam.gen_python_fault_localize,
+        "python_ast_patch_search": fam.gen_python_ast_patch_search,
+    }
+    order = _practice_order(list(gens))
     cases: list[Any] = []
     for i in range(max(0, count)):
+        name = order[i % len(order)]
         try:
-            cases.append(gens[i % len(gens)](rng, work, i))
+            cases.append(gens[name](rng, work, i))
         except Exception:
             continue
     return cases
+
+
+def _practice_order(names: list[str]) -> list[str]:
+    """Which to practise first, decided by what practising has been worth.
+
+    This replaces gens[i % len(gens)] -- a fixed rotation through four things
+    in the same order forever, which is a strict program: it practises the same
+    fourth of its repertoire whether or not that is where it is weak.
+
+    The ordering now comes from the ledger, so it is earned. Practising
+    something you fail at is worth more than practising something you have
+    already mastered, and that falls out of the credit signal rather than being
+    written as a rule: see _credit_practice.
+    """
+    try:
+        from canonical.runtime import ignorance_ledger_v1 as led
+        for n in names:
+            led.note("practice:" + n, why="live learning cycle", cost=1.0)
+        ranked = led.rank(limit=len(names))
+        known = [str(r["what"]).split("practice:", 1)[-1] for r in ranked
+                 if str(r.get("what", "")).startswith("practice:")]
+        order = [n for n in known if n in names]
+        for n in names:
+            if n not in order:
+                order.append(n)
+        return order
+    except Exception:
+        return list(names)
+
+
+def _credit_practice(rows: list[dict[str, Any]]) -> None:
+    """Teach the ordering what practising each thing was actually worth.
+
+    A case the oracle REJECTED is where the machine is weak, so time spent
+    there paid off. A case it passes comfortably taught it nothing new. That is
+    the whole signal -- no rule says "spend more time on failures", the ledger
+    simply learns that failing areas are worth more and reorders itself.
+
+    Deliberately not failing the cycle if the ledger is unavailable: practising
+    is more important than keeping score about practising.
+    """
+    try:
+        from canonical.runtime import ignorance_ledger_v1 as led
+        for row in rows:
+            family = str(row.get("family") or "")
+            if not family:
+                continue
+            led.resolve(led.note("practice:" + family,
+                                 why="live learning cycle", cost=1.0),
+                        helped=not bool(row.get("oracle_pass")),
+                        close=False)
+    except Exception:
+        pass
 
 
 # --------------------------------------------------------------------------- steps
@@ -327,6 +382,10 @@ def run(
     run_tag = "llc_" + (str(seed) if seeded else hashlib.sha256(os.urandom(16)).hexdigest()[:12])
     cases = fresh_cases(rng, work, goal_count)
     attempts = attempt(cases, run_tag=run_tag, observe=observe) if cases else []
+    # close the loop on the practice ordering: what the oracle said about these
+    # cases decides what gets practised next run. Without this the order is
+    # fixed and the machine rehearses the same four things forever.
+    _credit_practice(attempts)
     after_attempts = _store_snapshot(state_path)
 
     promote_after = promote(state_path=state_path, max_rounds=max_rounds, max_actions=max_actions)
