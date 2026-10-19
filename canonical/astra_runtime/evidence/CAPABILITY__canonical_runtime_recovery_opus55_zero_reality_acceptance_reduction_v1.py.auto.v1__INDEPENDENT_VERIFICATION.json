@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/recovery_opus55_zero_reality_acceptance_reduction_v1.py.auto.v1",
- "elapsed_ms": 40.989,
+ "elapsed_ms": 30.856,
  "independent_run_reference": {
-  "github_run_id": 39204519259,
+  "github_run_id": 39204814237,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "d4f87364-e908-4007-8da1-419561f2bb71",
+   "jti": "7f23781e-3f66-4813-8293-827e3cddf55f",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39204519259",
+   "run_id": "39204814237",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
