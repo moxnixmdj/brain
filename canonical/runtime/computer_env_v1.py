@@ -93,12 +93,22 @@ class ComputerEnv:
 
     def __init__(self, seed: Mapping[str, bytes] | None = None,
                  root: str | pathlib.Path | None = None,
+                 seed_file: str | pathlib.Path | None = None,
                  programs: Sequence[str] | None = None) -> None:
         self._owned = root is None
         self.root = pathlib.Path(root) if root else pathlib.Path(
             tempfile.mkdtemp(prefix="brain-computer-env-"))
         self.root.mkdir(parents=True, exist_ok=True)
-        self.seed = dict(seed or {"input.txt": b"brain computer env sample\n"})
+        # A sandbox holding a text file cannot teach an image operation:
+        # 'convert -resize 50% input.txt out.png' fails for the same reason
+        # a piano cannot be practised on a picture of one. When the real
+        # input is available, practise on a copy of it -- same bytes, same
+        # name, and never the original.
+        if seed_file:
+            path = pathlib.Path(seed_file)
+            self.seed = {path.name: path.read_bytes()}
+        else:
+            self.seed = dict(seed or {"input.txt": b"brain computer env sample\n"})
         # what each action actually did, filled in by program_actions when an
         # action succeeds -- see ComputerEnv.recipes
         self.recipes: dict[str, dict[str, Any]] = {}
@@ -247,13 +257,21 @@ def output_flags(prog: str, limit: int = 6) -> list[str]:
         return []
 
 
-_FLAG_LINE = re.compile(r"^\s*(-\w,\s+--[\w-]+|--[\w-]+|-\w)\s*(.*)$")
+# Three shapes programs actually use:
+#   '-c, --stdout  write to stdout'   (GNU: short then long)
+#   '--to-stdout   write to stdout'   (GNU: long only)
+#   '-adjoin       join images'       (ImageMagick et al: one dash, full name)
+# The last must take a whole name, not one letter: matching only -\w turned
+# '-adjoin' into the flag '-a' with the description 'djoin', so the machine
+# went looking for a flag that does not exist.
+_FLAG_LINE = re.compile(
+    r"^\s*(-\w,\s+--[\w-]+|--[\w-]+|-[A-Za-z][\w-]*)\s*(.*)$")
 _STOP = {"the", "and", "for", "with", "from", "print", "each", "file", "files",
          "input", "output", "use", "when", "only", "not", "does", "instead",
          "that", "this", "than", "them", "then", "into", "also", "same"}
 
 
-def flag_descriptions(prog: str, limit: int = 80) -> list[tuple[str, str]]:
+def flag_descriptions(prog: str, limit: int = 400) -> list[tuple[str, str]]:
     """Every flag the program documents, next to what it says the flag does.
 
     The program is the only authority here. Nothing about what -l or --lines
@@ -344,6 +362,24 @@ def flags_for_goal(prog: str, goal: str, limit: int = 8) -> list[str]:
     return [f for _, f in scored[:limit]]
 
 
+_VALUE = re.compile(r"(?<![\w.])(\d+(?:\.\d+)?%|\d+x\d+|\d+(?:\.\d+)?)(?![\w])")
+
+
+def goal_values(goal: str, limit: int = 6) -> list[str]:
+    """The numbers the goal mentions, because it brought its own arguments.
+
+    'resize in.png to 50% as out.png' is not asking for a resize by some
+    amount we must guess: it says 50%. Taking the value out of the sentence
+    is the same move as taking the output name out of it.
+    """
+    out: list[str] = []
+    for m in _VALUE.finditer(str(goal or "")):
+        v = m.group(1)
+        if v not in out:
+            out.append(v)
+    return out[:limit]
+
+
 def invocation_shapes(prog: str, src: str, target: str,
                       goal: str | None = None) -> list[list[str]]:
     """How to try calling this program, in the order worth trying.
@@ -367,12 +403,29 @@ def invocation_shapes(prog: str, src: str, target: str,
                 shapes.append(shape)
     # flags the goal itself asked for, by meaning. 'count the lines' needs
     # wc -l, and no positional shape will ever produce that.
-    if goal:
-        for flag in flags_for_goal(prog, goal):
-            for shape in ([prog, flag, src], [prog, flag, target, src]):
-                if shape not in shapes:
-                    shapes.append(shape)
-    return shapes
+    if not goal:
+        return shapes
+    flags = flags_for_goal(prog, goal)[:3]
+    values = goal_values(goal)
+    extra: list[list[str]] = []
+    if values:
+        # a flag that takes a value has to be given one, and the goal named
+        # it: '-resize 50%' is only a command once the 50% is supplied
+        for flag in flags:
+            for v in values[:3]:
+                for shape in ([prog, flag, v, src, target],
+                              [prog, src, flag, v, target],
+                              [prog, flag, v, src]):
+                    if shape not in extra:
+                        extra.append(shape)
+    for flag in flags:
+        for shape in ([prog, flag, src], [prog, flag, target, src]):
+            if shape not in extra:
+                extra.append(shape)
+    # The shapes that USE the goal's value go first. Left in their usual
+    # place, 'convert in.png' wins by dumping the image to stdout into
+    # out.png -- a file that exists, is called .png, and was never resized.
+    return extra + shapes if values else shapes + extra
 
 
 def program_actions(env: ComputerEnv,
@@ -402,6 +455,17 @@ def program_actions(env: ComputerEnv,
             # printing chatter -- 'zip -c input.txt' succeeds and prints
             # "adding: input.txt", which written to out.zip makes a file
             # called .zip that is not one.
+            # A form that eats the input is held back, not thrown away.
+            # 'gzip input.txt' reaches the goal and DELETES input.txt, so
+            # the job cannot be repeated and the file the user had is gone.
+            # 'gzip -c input.txt' reaches exactly the same goal and leaves
+            # it. Preferring the one that keeps the input is not a rule
+            # about gzip -- it is the difference between doing the job and
+            # doing the job by destroying the thing it was asked about.
+            # The destructive form is remembered, because for a goal like
+            # "move a.txt to b.txt" there is no gentler way and refusing
+            # outright would be its own kind of failure.
+            fallback: dict[str, Any] | None = None
             for argv in invocation_shapes(prog, src, target, goal):
                 # Every form starts from the seed. Without this the first
                 # form consumes the input -- 'gzip out.gz input.txt'
@@ -431,13 +495,19 @@ def program_actions(env: ComputerEnv,
                     # The exact argv that worked is the difference between
                     # "gzip can do this" and a command that can be run on a
                     # real file, so it is recorded rather than thrown away.
-                    env.recipes["run_" + prog] = {
+                    recipe = {
                         "program": prog,
                         "argv": ["{input}" if a == src else a for a in argv],
                         "stdout_to": target if captured else None,
                         "target": target,
                     }
-                    return True
+                    if (env.root / src).is_file():
+                        env.recipes["run_" + prog] = recipe
+                        return True
+                    fallback = recipe
+            if fallback is not None:
+                env.recipes["run_" + prog] = fallback
+                return True
             env.reset()
             return False
         return run
@@ -568,8 +638,49 @@ def _input_matters(argv: Sequence[str], src: str, target: str,
             env.close()
 
 
-def _single_step(programs: Sequence[str], suffix: str,
-                 target: str) -> tuple[list[str], str, dict | None] | None:
+def programs_for_goal(goal: str, limit: int = 24) -> list[str]:
+    """Programs whose own manual says they can do what the goal asks.
+
+    Selecting by the letters of a suffix works for gzip and .gz and fails
+    completely for convert and .png -- 'convert' contains no p, n or g, so
+    the one program on the machine that can resize an image was never even
+    tried. The manual is the better index: ask which programs document a
+    flag meaning what the goal said.
+    """
+    from concurrent.futures import ThreadPoolExecutor
+
+    def ask(prog: str) -> tuple[str, int]:
+        try:
+            return prog, len(flags_for_goal(prog, goal))
+        except Exception:  # noqa: BLE001
+            return prog, 0
+
+    with ThreadPoolExecutor(max_workers=24) as pool:
+        hits = [(n, p) for p, n in pool.map(ask, installed_programs()) if n]
+    hits.sort(key=lambda x: (-x[0], x[1]))
+    return [p for _, p in hits[:limit]]
+
+
+def _uses_goal_value(recipe: Mapping[str, Any], goal: str | None) -> bool:
+    """The command must use the numbers the goal gave it.
+
+    'resize in.png to 50% as out.png' is answered just as well by
+    'convert in.png out.png' if all we check is that out.png exists -- the
+    file is there, and it is a real PNG, and it was never resized. If the
+    goal named a value and the winning command does not contain it, the
+    command did not do what was asked.
+    """
+    needed = goal_values(goal) if goal else []
+    if not needed:
+        return True
+    argv = [str(a) for a in (recipe.get("argv") or [])]
+    return any(v in argv for v in needed)
+
+
+def _single_step(programs: Sequence[str], suffix: str, target: str,
+                 goal: str | None = None,
+                 seed_file: str | pathlib.Path | None = None
+                 ) -> tuple[list[str], str, dict | None] | None:
     """Try each program on its own before paying for a search over sequences.
 
     One action is the shortest plan that can exist, so it is the first thing
@@ -581,14 +692,18 @@ def _single_step(programs: Sequence[str], suffix: str,
     for prog in programs:
         env = None
         try:
-            env = ComputerEnv()
-            env.register(program_actions(env, programs=[prog], target=target))
+            env = ComputerEnv(seed_file=seed_file)
+            env.register(program_actions(env, programs=[prog], target=target,
+                                         goal=goal))
             src_name = next(iter(env.seed), "input.txt")
             env.act("run_" + prog)
             out = env.root / target
             if not out.is_file():
                 continue
             good, why = ps.verify_round_trip(out, suffix)
+            if good and not _uses_goal_value(
+                    env.recipes.get("run_" + prog) or {}, goal):
+                good, why = False, "GOAL_VALUE_UNUSED"
             if good and not _input_matters(
                     env.recipes["run_" + prog]["argv"], src_name, target,
                     out.read_bytes()):
@@ -727,7 +842,7 @@ def perform(gap: str, cwd: str | pathlib.Path | None = None,
         return {"pass": False, "status": "OPEN__NO_EXISTING_INPUT_FILE_IN_GOAL",
                 "detail": "no file named in the goal exists in %s" % base}
 
-    found = discover(gap)
+    found = discover(gap, seed_file=src)
     if not found.get("closed"):
         return {"pass": False, "status": found.get("status")
                 or "OPEN__COULD_NOT_LEARN_IT", "detail": found.get("detail"),
@@ -746,7 +861,8 @@ def perform(gap: str, cwd: str | pathlib.Path | None = None,
     return done
 
 
-def discover(gap: str, budget: int = 120, seed: int = 11) -> dict[str, Any]:
+def discover(gap: str, budget: int = 120, seed: int = 11,
+             seed_file: str | pathlib.Path | None = None) -> dict[str, Any]:
     """Find out which program reaches this goal by acting, not by being told.
 
     Nothing here is given a table of what any program does. The programs are
@@ -777,7 +893,11 @@ def discover(gap: str, budget: int = 120, seed: int = 11) -> dict[str, Any]:
 
     named = output_name(gap) or ""
     target = named if named.endswith(suffix) else ("input.txt" + suffix)
+    # candidates by NAME (gzip for .gz) and by MEANING (convert for resize)
     progs = programs_for(suffix)
+    for _p in programs_for_goal(gap):
+        if _p not in progs:
+            progs.append(_p)
     is_goal = lambda snap: target in str(snap)
     gkey = "goal"
 
@@ -821,7 +941,7 @@ def discover(gap: str, budget: int = 120, seed: int = 11) -> dict[str, Any]:
                 "detail": "recalled: %s" % ", ".join(got[0])}
 
     # 2. one action is the shortest plan that can exist
-    one = _single_step(progs, suffix, target)
+    one = _single_step(progs, suffix, target, gap, seed_file)
     if one is not None:
         keep(one[0], "PASS__SINGLE_ACTION_FOUND_AND_VERIFIED", one[1])
         return {"closed": True, "status": "PASS__SINGLE_ACTION_FOUND_AND_VERIFIED",
@@ -871,8 +991,15 @@ def discover(gap: str, budget: int = 120, seed: int = 11) -> dict[str, Any]:
                     "detail": "found it by acting: %s" % ", ".join(plan)}
         banned.add(plan[0])
 
+    # Nothing here was proven to work, so no plan is handed back. The last
+    # thing tried is reported separately: 'ischroot -V out.png' exits 0 and
+    # writes a version banner into out.png, which a caller reading "plan"
+    # would take for an answer that its own "verification" has just called
+    # unreadable. Reporting a plan only after it has been verified is what
+    # keeps "closed" from meaning nothing.
     return {"closed": False, "status": outcome.get("status"),
-            "plan": list(outcome.get("plan") or []), "suffix": suffix,
+            "plan": [], "suffix": suffix,
+            "rejected_plan": list(outcome.get("plan") or []),
             "target": target, "actions_tried": tried, "verification": why,
             "banned": sorted(banned), "from_memory": False,
             "detail": why or (outcome.get("status") or "never reached it")}
