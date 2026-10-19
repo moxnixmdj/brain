@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/if_scope_finite_protocol_binding_verifier_v1.py.auto.v1",
- "elapsed_ms": 30.434,
+ "elapsed_ms": 34.72,
  "independent_run_reference": {
-  "github_run_id": 39247319824,
+  "github_run_id": 39247727091,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "d5e75c32-6c52-45ca-8dd7-ea64af82bbf5",
+   "jti": "e11b8be1-da9b-4e7b-9c48-840060a978ea",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39247319824",
+   "run_id": "39247727091",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
