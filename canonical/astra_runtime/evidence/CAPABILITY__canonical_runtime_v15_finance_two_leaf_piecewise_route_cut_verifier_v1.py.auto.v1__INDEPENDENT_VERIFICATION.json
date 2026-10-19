@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/v15_finance_two_leaf_piecewise_route_cut_verifier_v1.py.auto.v1",
- "elapsed_ms": 32.225,
+ "elapsed_ms": 24.738,
  "independent_run_reference": {
-  "github_run_id": 39238213295,
+  "github_run_id": 39238628607,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "a0d7404e-0a91-46ec-995c-d6593035704b",
+   "jti": "6aec280d-5b2c-4a0b-b1c7-e75a95bc4a49",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39238213295",
+   "run_id": "39238628607",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
