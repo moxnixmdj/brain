@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_schema19_pointwise_candidate_v1.py.auto.v1",
- "elapsed_ms": 149.302,
+ "elapsed_ms": 156.64,
  "independent_run_reference": {
-  "github_run_id": 39223342189,
+  "github_run_id": 39223803408,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "2a7b7a3e-398c-4dc9-9718-2120499d4ebc",
+   "jti": "2bffee66-d0ba-4ab6-b416-a338ed2d9b5b",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39223342189",
+   "run_id": "39223803408",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
