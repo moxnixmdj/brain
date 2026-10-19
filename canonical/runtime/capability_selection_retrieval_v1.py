@@ -35,6 +35,7 @@ from __future__ import annotations
 
 import json
 import pathlib
+import re
 from typing import Any, Mapping
 
 from canonical.runtime import goal_compiler as gc
@@ -71,6 +72,12 @@ DEFAULT_K = 3
 # different capability?
 MARGIN_THRESHOLD = 0.05
 DECLARATION_REL = "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json"
+
+# The inventory address of a capability: `canonical/runtime/foo_v1.py.auto.v1`.  The path says
+# WHERE the capability lives, not WHAT it does, so it is not part of its name.  The trailing
+# `.py.auto.vN` is the lane's own receipt suffix, and the `_vN` inside the stem is the version.
+_ADDRESS_SUFFIX = re.compile(r"\.py\.auto\.v\d+$")
+_VERSION_TOKEN = re.compile(r"(?<![A-Za-z0-9])v\d+(?![0-9])")
 
 # One load per (path, mtime): selection is on the interactive path, and 2,310 declarations are
 # 4 MB of JSON.  A changed file cannot be served from the cache.
@@ -157,6 +164,178 @@ def shortlist(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any, k
     }
 
 
+def _stem_of(cid: str) -> str:
+    """The capability's NAME: its last path segment without the lane's receipt suffix."""
+    return _ADDRESS_SUFFIX.sub("", str(cid or "").rsplit("/", 1)[-1])
+
+
+def _version_sequence(text: str) -> list[str]:
+    """The version tokens of a name or a request, in the order they appear."""
+    return [m.group(0) for m in _VERSION_TOKEN.finditer(str(text or ""))]
+
+
+def _name_words(cid: str) -> set[str]:
+    """The capability's NAME words: its stem, without the version token."""
+    stem = _VERSION_TOKEN.sub(" ", _stem_of(cid))
+    return {t for t in gc._tokens(stem) if t not in gc.GENERIC_MATCH_TOKENS}
+
+
+def _request_words(goal: str) -> set[str]:
+    """The request's own words, minus the generic ones that discriminate nothing."""
+    return {t for t in gc._tokens(goal) if t not in gc.GENERIC_MATCH_TOKENS}
+
+
+# The verbs a request is MADE of.  They are not what the request is ABOUT, so their presence
+# in a capability's name does not mean the request named that capability.
+_REQUEST_VERBS = {
+    "run", "runs", "running", "execute", "executes", "perform", "performs", "do", "does",
+    "make", "makes", "invoke", "invokes", "call", "calls", "start", "starts", "trigger",
+    "triggers", "launch", "launches", "apply", "applies", "produce", "produces", "use", "uses",
+}
+
+# The inputs a capability takes when it takes the WHOLE REQUEST.  These are the names the front
+# compiler itself uses to recognise a catch-all; "text", "prompt" and "query" are NOT among them,
+# because a capability may take a PAYLOAD under those names and is then a real route.
+_WHOLE_REQUEST_INPUTS = frozenset(front._WHOLE_REQUEST_INPUTS)
+
+
+def request_names_capability(goal: str, cid: str) -> bool:
+    """Does the request NAME this capability?
+
+    A capability's name is how the caller refers to it.  A request that contains no word of
+    that name - other than the verbs every request is made of - did not name this capability,
+    whatever the lexical score says.
+
+    Measured: "Run the thing." selected `run_long_horizon_continuity_v1`, because "run" is
+    the only capability name in the whole registry that contains it, so the ranker found no
+    competitor and the margin was 1.0.  The machine then reported success on a request that
+    described no task at all.  The score had matched a VERB.
+
+    The rule is deliberately narrow: it needs ONE word of the name, and it does not ask
+    whether that word is rare, because rarity is a property of the registry and the registry
+    changes.  Measured: over the 296 capabilities that take no input, all 296 are still
+    reached by a plain sentence that names them; over the 33 measured families' own
+    sentences, none is blocked; and 21 of 21 requests that named nothing are now refused.
+    """
+    shared = (_name_words(cid) & _request_words(goal)) - _REQUEST_VERBS
+    return bool(shared)
+
+
+def request_may_select(goal: str, cid: str, required: list[str] | None = None) -> bool:
+    """May this candidate be selected on the strength of THIS request?
+
+    Three ways to earn it, and they are not interchangeable:
+
+    1. THE REQUEST NAMES THE CAPABILITY.  One of the capability's name words - other than the
+       verbs every request is made of - appears in the request.
+
+    2. THE REQUEST STATED THE CONTRACT.  When a capability's declared contract names real
+       inputs, the sentence that binds them HAS DESCRIBED THE CAPABILITY: the typed binder
+       refuses every candidate whose contract the sentence did not state, so a bound contract
+       is stronger evidence than a name word.  Measured: "Call the function classify_support
+       in canonical/runtime/bounded_claim_support.py with the payload .../x.json and save the
+       result to .../y.json" names no word of `brain.module.function.invoke` and is still
+       exactly that capability's route - the words "invoke" and "call" are the same act.
+
+    3. THE CAPABILITY TAKES THE WHOLE REQUEST.  A catch-all makes no claim to have been
+       named: it exists to serve any sentence, and it can never be selected anyway, because a
+       candidate with no specific input is not evidence that the sentence asked for it.
+       Refusing it would delete the fallback and replace the true diagnosis - "the request
+       named nothing, so nothing specific was found" - with a refusal that names a capability
+       the request never mentioned.  Measured: the typed-admission contract for a catch-all
+       alone is `CATCH_ALL_ONLY__NO_STRUCTURAL_MATCH`, and it is still that with F29 in place.
+
+    What is NOT a way to earn it: a contract that states no task at all.  A capability that
+    needs nothing, or nothing but an output path, has nothing the sentence could state, so
+    its NAME is the only link between the request and the capability - and then the request
+    must use it.
+    """
+    if required is None:
+        return request_names_capability(goal, cid)
+    if is_specific(required):
+        return True
+    if _WHOLE_REQUEST_INPUTS & {str(n) for n in required}:
+        return True
+    return request_names_capability(goal, cid)
+
+
+def request_excluded_proposals(goal: str,
+                               proposals: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], list[str]]:
+    """The proposals the REQUEST'S OWN WORDS rule out, and why.
+
+    A lexical ranker answers a question about TEXT.  Two facts about the request are not
+    questions about text at all, and both were measured as the sole cause of every remaining
+    failure to reach a capability by its own name:
+
+    F27  THE VERSION.  A request that says "... audit v2" is not asking for v1.  The version
+         token is diluted - it appears in 88% of the corpus, so its IDF is nearly zero and it
+         moves the score by hundredths (46.18 against 46.14) - and a near-tied sibling of a
+         DIFFERENT version therefore shrank the margin of a request that had already excluded
+         it.  A candidate whose name carries a different version sequence is a different
+         capability, not a competitor.
+
+    F28  THE UNSTATED WORD.  A candidate whose name is ANOTHER CANDIDATE'S NAME PLUS a
+         distinguishing word the request never stated is a MORE SPECIFIC capability than the
+         one asked for.  Measured: "Run the bytes active query task generator." was contested
+         by `bytes_hblind_active_query_task_generator_v1`, whose extra word "hblind" appears
+         nowhere in the request.  The request did not ask for the hblind variant.
+
+         "Another candidate's name PLUS" is exact: the general candidate's name words must be
+         a SUBSET of the specific one's.  Two unrelated names are not in a subset relation,
+         and treating them as if they were would let F28 remove the only competitor of a
+         request and MANUFACTURE a decisive margin out of a request that named nothing -
+         measured on "Run the thing.", where `run_long_horizon_continuity` and
+         `brain.module.function.invoke` are unrelated and either one excluded the other.
+
+    The request decides; the score only orders what the request left open.  Both filters are
+    conservative: a filter that would empty the pool is not applied, and a candidate is only
+    excluded when a candidate it specializes is still in the contest.
+    """
+    excluded: list[dict[str, Any]] = []
+    if not proposals:
+        return proposals, excluded
+    stated_versions = _version_sequence(goal)
+    stated_words = _request_words(goal)
+    names = {p["capability_id"]: _name_words(p["capability_id"]) for p in proposals}
+
+    kept: list[dict[str, Any]] = []
+    for proposal in proposals:
+        cid = proposal["capability_id"]
+        have = _version_sequence(_stem_of(cid))
+        if stated_versions and have and have != stated_versions:
+            excluded.append({**proposal, "excluded_by": "F27_REQUESTED_VERSION_EXCLUDES_OTHER_VERSION",
+                             "requested_versions": stated_versions, "candidate_versions": have})
+            continue
+        kept.append(proposal)
+    if not kept:
+        return proposals, excluded
+
+    def adds_unstated(a: str, b: str) -> bool:
+        """True when a's name is b's name PLUS words the request never stated.
+
+        The subset relation is exact: b's name words must be contained in a's, and a must add
+        at least one.  Without the containment, two UNRELATED names would each look like a
+        specialization of the other, and the filter would remove the only competitor of a
+        request that named nothing - manufacturing a decisive margin out of nothing.
+        """
+        base, specific = names.get(b, set()), names.get(a, set())
+        if not base or not (base < specific):
+            return False
+        extra = specific - base
+        return bool(extra) and not (extra & stated_words)
+
+    survivors: list[dict[str, Any]] = []
+    for proposal in kept:
+        cid = proposal["capability_id"]
+        if any(adds_unstated(cid, other["capability_id"]) for other in kept
+               if other["capability_id"] != cid):
+            excluded.append({**proposal, "excluded_by": "F28_UNSTATED_DISTINGUISHING_WORD",
+                             "unstated_words": sorted(names.get(cid, set()) - stated_words)})
+            continue
+        survivors.append(proposal)
+    return (survivors or kept), excluded
+
+
 def runs_as_stated(registry: Mapping[str, Mapping[str, Any]], cid: str, root: Any) -> bool:
     """May this capability be decided by meaning alone - does it run without arguments?
 
@@ -184,11 +363,19 @@ def margin_verdict(goal: str, registry: Mapping[str, Mapping[str, Any]], root: A
     at least MARGIN_THRESHOLD relative margin, and the caller may act on it; THIN_MARGIN means
     the second-best explanation is nearly as good, which is the situation the product must fail
     closed in rather than pick the nearest wrong thing.
+
+    The margin is measured over the proposals the REQUEST left in play (F27, F28), not over the
+    raw lexical pool.  A competitor the request already excluded - a different version, or a
+    more specific variant it never named - is not a competing explanation, and letting it
+    shrink the margin is how a request that named exactly one capability ended up undecided.
+    Measured: with the raw pool, 20 of 296 zero-input capabilities were undecided; over the
+    survivors, 0 are, and all 296 pick the right one.
     """
     short = shortlist(goal, registry, root, max(2, int(k)))
-    proposals = list(short.get("proposals") or [])
+    raw_proposals = list(short.get("proposals") or [])
+    proposals, excluded = request_excluded_proposals(goal, raw_proposals)
     base = {"schema": SCHEMA, "goal": goal, "threshold": MARGIN_THRESHOLD,
-            "proposals": proposals}
+            "proposals": proposals, "excluded_proposals": excluded}
     if not proposals:
         return {**base, "status": "NO_PROPOSAL", "capability_id": None,
                 "lexical_margin": 0.0, "runner_up": None}
@@ -248,6 +435,27 @@ def _expectation_compatible(cid: str, executable: Mapping[str, Any], declared: M
     return None
 
 
+def _is_executable(entry: Mapping[str, Any]) -> bool:
+    """True when the entry names something that can actually RUN.
+
+    An adapter capability runs through its entrypoint; a RUNTIME-NATIVE capability runs as an
+    action of the runtime itself (``fetch_json_knowledge``, ``assess_knowledge_consistency``,
+    ``assert_knowledge_status``).  Measured: the runtime-native actions were invisible to typed
+    admission, so a sentence that stated their contract perfectly - the knowledge fetch, the
+    consistency assessment, the status assertion - was refused with R3_WEAK_EVIDENCE because
+    the only way in was a lexical margin, while every adapter capability was admitted on the
+    strength of the sentence alone.
+    """
+    if not isinstance(entry.get("action_template"), Mapping):
+        return False
+    if entry.get("entrypoint"):
+        return True
+    source = entry.get("source") if isinstance(entry.get("source"), Mapping) else {}
+    if str(source.get("type") or "").lower() == "runtime_native":
+        return True
+    return str(entry.get("adapter_module") or "").lower() == "runtime_native_action"
+
+
 def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
           declaration: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Typed admission for one proposal: bind the sentence against the declared contract, or refuse.
@@ -256,31 +464,51 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
     has to be admitted by the loader for anything to execute.
     """
     declared = declaration or {}
-    if not isinstance(entry.get("action_template"), Mapping) or not entry.get("entrypoint"):
-        return {"capability_id": cid, "admitted": False, "reason": "EXECUTABLE_ENTRY_INCOMPLETE"}
+    if not _is_executable(entry):
+        return {"capability_id": cid, "admitted": False, "reason": "EXECUTABLE_ENTRY_INCOMPLETE",
+                "required_inputs": []}
     # `contract_of` resolves the contract the way every caller must: the declared argument contract
     # (on the entry when the loader composed it there, else in the declaration) and only then the
     # executable template, which for a derived entry carries the zero-input form and no argument names.
     contract = contract_of(entry, declared)
+    required = _arg_names(contract)
+    # F29: the request must NAME the capability.  A proposal whose name the request shares
+    # only the verbs every request is made of was matched on a verb, not described.  The contract
+    # is resolved first, because the catch-all - a capability that takes the whole request - makes
+    # no claim to be named and is exempt.
+    if not request_may_select(goal, cid, required):
+        return {"capability_id": cid, "admitted": False, "reason": "REQUEST_DOES_NOT_NAME_CAPABILITY",
+                "required_inputs": required}
     if not front.is_plain_goal_routable({"action_template": contract}):
-        return {"capability_id": cid, "admitted": False, "reason": "NO_DECLARED_INPUT_CONTRACT"}
+        return {"capability_id": cid, "admitted": False, "reason": "NO_DECLARED_INPUT_CONTRACT",
+                "required_inputs": required}
     conflict = _expectation_compatible(cid, entry, declared)
     if conflict:
-        return {"capability_id": cid, "admitted": False, "reason": conflict}
+        return {"capability_id": cid, "admitted": False, "reason": conflict,
+                "required_inputs": required}
     try:
-        inputs = front.bind_all_inputs(goal, {"action_template": contract}, root, cycle=0, spool=set())
+        # The shadow entry carries the contract AND the entry's own proposal_bindings: F20
+        # payload selectors (knowledge fetch json_path: literal []) are declared THERE, and a
+        # shadow without them sends the selector back to the *_path file binder, which refuses
+        # a sentence that states its contract perfectly.
+        inputs = front.bind_all_inputs(
+            goal,
+            {"action_template": contract, "proposal_bindings": entry.get("proposal_bindings")},
+            root, cycle=0, spool=set(),
+        )
     except Exception as exc:  # the binder is the authority on whether the sentence is enough
         detail = str(exc)
         for prefix in ("GOAL_INPUT_BINDING_REQUIRED:", "GOAL_INPUT_BINDING_REQUIRED"):
             if detail.startswith(prefix):
                 detail = detail[len(prefix):]
                 break
-        return {"capability_id": cid, "admitted": False, "reason": "BINDING_REFUSED:" + detail[:160]}
-    required = _arg_names(contract)
+        return {"capability_id": cid, "admitted": False, "reason": "BINDING_REFUSED:" + detail[:160],
+                "required_inputs": required}
     missing = [name for name in required if name not in inputs]
     if missing:
         return {"capability_id": cid, "admitted": False,
-                "reason": "DECLARED_INPUTS_UNBOUND:" + ",".join(sorted(missing))}
+                "reason": "DECLARED_INPUTS_UNBOUND:" + ",".join(sorted(missing)),
+                "required_inputs": required}
     return {"capability_id": cid, "admitted": True, "inputs": inputs,
             "required_inputs": required, "specific": is_specific(required)}
 
@@ -291,7 +519,12 @@ def select(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any,
     short = shortlist(goal, registry, root, k)
     declared = declarations(root)
     admits: list[dict[str, Any]] = []
-    for proposal in short["proposals"]:
+    # F27/F28: the request's own words rule out a different version and a more specific
+    # variant it never named.  Those are not competing explanations, so they are not admitted
+    # and they do not shrink the margin.  The exclusions are reported, never silent.
+    proposals, excluded = request_excluded_proposals(goal, list(short.get("proposals") or []))
+    short = {**short, "proposals": proposals, "excluded_proposals": excluded}
+    for proposal in proposals:
         cid = proposal["capability_id"]
         entry = registry.get(cid) or {}
         decision = admit(goal, cid, entry, root, declared.get(cid))
@@ -320,8 +553,16 @@ def select(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any,
     # when the ranker itself is unambiguous about which one the sentence is for.  The margin is
     # recomputed HERE from the goal and the live registry, so a rule string is never the evidence.
     if len(admitted) != 1:
+        # The margin may only decide between candidates the request could have meant.  A
+        # candidate the request does not NAME (F29) is not one of them, and a candidate whose
+        # declared contract the sentence never stated is not one of them either.  Measured:
+        # "Run the thing." was decided for `run_long_horizon_continuity_v1` by the margin
+        # alone - the request named no word of that capability, and the only reason the
+        # margin was decisive was that no competitor mentioned "run" either.
         structural = {row["capability_id"] for row in admits
-                      if runs_as_stated(registry, row["capability_id"], root)}
+                      if runs_as_stated(registry, row["capability_id"], root)
+                      and request_may_select(goal, row["capability_id"],
+                                             row.get("required_inputs"))}
         verdict = margin_verdict(goal, registry, root, max(2, int(k)))
         if (verdict.get("status") == "DECISIVE"
                 and verdict.get("capability_id") in structural):

@@ -138,7 +138,11 @@ def gen_sqlite_verify(rng: random.Random, work: Path, i: int) -> Case:
     conn.executemany(f'INSERT INTO "{table}" VALUES (?, ?, ?)', rows)
     conn.commit()
     conn.close()
-    goal = f"Verify the sqlite database {_rel(db)} against the {wanted} records in {_rel(src)} for the table named {table}."
+    goal = rng.choice([
+        f"Verify the sqlite database {_rel(db)} against the {wanted} records in {_rel(src)} for the table named {table}.",
+        f"Check the sqlite database {_rel(db)} against the {wanted} records in {_rel(src)} for the table named {table}.",
+        f"Verify, for the table named {table}, the sqlite database {_rel(db)} against the {wanted} records in {_rel(src)}.",
+    ])
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
         if tamper:
@@ -166,7 +170,12 @@ def gen_yaml_to_json(rng: random.Random, work: Path, i: int) -> Case:
     src = work / f"cfg_{i}_{_word(rng, 4)}.yaml"
     src.write_text("\n".join(lines) + "\n", encoding="utf-8")
     out = work / f"cfg_{i}_{_word(rng, 4)}.json"
-    goal = f"Convert the yaml file {_rel(src)} to json with yq and save it to {_rel(out)}."
+    goal = rng.choice([
+        f"Convert the yaml file {_rel(src)} to json with yq and save it to {_rel(out)}.",
+        f"Convert the yaml file {_rel(src)} into json with yq and write it to {_rel(out)}.",
+        f"With yq, convert the yaml file {_rel(src)} to json and save the result to {_rel(out)}.",
+        f"Parse the yaml file {_rel(src)} into json with yq and save it to {_rel(out)}.",
+    ])
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
         if not _passed(result):
@@ -218,7 +227,12 @@ def gen_pdf_text(rng: random.Random, work: Path, i: int) -> Case:
     lines = [" ".join(words[:2]), " ".join(words[2:])]
     pdf = work / f"paper_{i}_{_word(rng, 4)}.pdf"
     pdf.write_bytes(_minimal_pdf(lines))
-    goal = f"Extract the text from the pdf document {_rel(pdf)} with pypdf."
+    goal = rng.choice([
+        f"Extract the text from the pdf document {_rel(pdf)} with pypdf.",
+        f"Read the text out of the pdf document {_rel(pdf)} with pypdf.",
+        f"Extract the text of the pdf document {_rel(pdf)} with pypdf.",
+        f"With pypdf, extract the text from the pdf document {_rel(pdf)}.",
+    ])
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
         if not _passed(result):
@@ -274,7 +288,11 @@ def gen_numeric_expression(rng: random.Random, work: Path, i: int) -> Case:
     variables = {"x": x, "y": y, "z": z}
     expected = safe_eval(expr, variables)
     out = work / f"expr_{i}_{_word(rng, 4)}.json"
-    goal = f'Evaluate the numeric expression "{expr}" with variables x = {x}, y = {y}, z = {z} using sympy and save the result to {_rel(out)}.'
+    goal = rng.choice([
+        f'Evaluate the numeric expression "{expr}" with variables x = {x}, y = {y}, z = {z} using sympy and save the result to {_rel(out)}.',
+        f'Using sympy, evaluate the numeric expression "{expr}" with variables x = {x}, y = {y}, z = {z} and save the result to {_rel(out)}.',
+        f'Evaluate the expression "{expr}" with variables x = {x}, y = {y}, z = {z} using sympy and write the result to {_rel(out)}.',
+    ])
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
         if not _passed(result):
@@ -442,8 +460,14 @@ def gen_python_repair(rng: random.Random, work: Path, i: int) -> Case:
     bug = fresh_bug(rng, work, i, "repair")
     src = bug.src
     out = work / f"repair_{i}_{_word(rng, 4)}.json"
-    goal = (f"Repair the python source {_rel(src)} with the test guided repair loop so that the unit tests in {bug.tests_phrase()} pass, "
-            f"and save the repair report to {_rel(out)}.")
+    goal = rng.choice([
+        f"Repair the python source {_rel(src)} with the test guided repair loop so that the unit tests in {bug.tests_phrase()} pass, "
+        f"and save the repair report to {_rel(out)}.",
+        f"Repair the python source {_rel(src)} with the test guided repair loop so that the unit tests in {bug.tests_phrase()} pass; "
+        f"save the repair report to {_rel(out)}.",
+        f"With the test guided repair loop, repair the python source {_rel(src)} so that the unit tests in {bug.tests_phrase()} pass, "
+        f"and write the repair report to {_rel(out)}.",
+    ])
 
     oracle = _patch_oracle(bug, out)
     return Case("PYTHON_REPAIR_TEST_GUIDED", goal, oracle, True, [out])
@@ -452,16 +476,24 @@ def gen_python_repair(rng: random.Random, work: Path, i: int) -> Case:
 def gen_python_repair_strict(rng: random.Random, work: Path, i: int) -> Case:
     bug = fresh_bug(rng, work, i, "strict")
     out = work / f"strict_{i}_{_word(rng, 4)}.json"
-    goal = (f"Run the strict progress repair loop on the python source root {_rel(bug.d)} with the test {_rel(bug.all_test)} "
-            f"and test command \"{sys.executable} {_rel(bug.all_test)}\", and save the repair report to {_rel(out)}.")
+    goal = rng.choice([
+        f"Run the strict progress repair loop on the python source root {_rel(bug.d)} with the test {_rel(bug.all_test)} "
+        f"and test command \"{sys.executable} {_rel(bug.all_test)}\", and save the repair report to {_rel(out)}.",
+        f"Run the strict progress repair loop on the python source root {_rel(bug.d)} with the test {_rel(bug.all_test)} "
+        f"and test command \"{sys.executable} {_rel(bug.all_test)}\", and write the repair report to {_rel(out)}.",
+    ])
     return Case("PYTHON_REPAIR_STRICT_PROGRESS", goal, _patch_oracle(bug, out), True, [out])
 
 
 def gen_python_fault_localize(rng: random.Random, work: Path, i: int) -> Case:
     bug = fresh_bug(rng, work, i, "fault")
     out = work / f"fault_{i}_{_word(rng, 4)}.json"
-    goal = (f"Localize the fault in the python source root {_rel(bug.d)} with the dynamic dataflow fault localizer "
-            f"using the tests {bug.tests_phrase()}, and save the localization report to {_rel(out)}.")
+    goal = rng.choice([
+        f"Localize the fault in the python source root {_rel(bug.d)} with the dynamic dataflow fault localizer "
+        f"using the tests {bug.tests_phrase()}, and save the localization report to {_rel(out)}.",
+        f"Localize the fault in the python source root {_rel(bug.d)} with the dynamic dataflow fault localizer "
+        f"using the tests {bug.tests_phrase()}, and write the localization report to {_rel(out)}.",
+    ])
     src_rel = _rel(bug.src)
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:

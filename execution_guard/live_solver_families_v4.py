@@ -26,7 +26,11 @@ def gen_docx_create(rng: random.Random, work: Path, i: int) -> Case:
     title = "Report " + _word(rng, 6)
     para = "Paragraph " + _word(rng, 10)
     out = work / f"doc_{i}_{_word(rng, 4)}.docx"
-    goal = f"Generate a docx document to {_rel(out)} with title {title}, paragraph {para}, table with headers Name, Status containing Alpha|Active and Beta|Done"
+    goal = rng.choice([
+        f"Generate a docx document to {_rel(out)} with title {title}, paragraph {para}, table with headers Name, Status containing Alpha|Active and Beta|Done",
+        f"Create a docx document at {_rel(out)} with title {title}, paragraph {para}, table with headers Name, Status containing Alpha|Active and Beta|Done",
+        f"Generate a docx document to {_rel(out)} with title {title}, paragraph {para}, table with columns Name, Status containing Alpha|Active and Beta|Done",
+    ])
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
         if not _passed(result):
@@ -53,7 +57,11 @@ def gen_xlsx_create(rng: random.Random, work: Path, i: int) -> Case:
     src = work / f"records_{i}_{_word(rng, 4)}.json"
     src.write_text(json.dumps({"items": rows}), encoding="utf-8")
     out = work / f"table_{i}_{_word(rng, 4)}.xlsx"
-    goal = f"Create an xlsx table from {_rel(src)} and save it to {_rel(out)} with columns name, score."
+    goal = rng.choice([
+        f"Create an xlsx table from {_rel(src)} and save it to {_rel(out)} with columns name, score.",
+        f"Create an xlsx table from {_rel(src)} and write it to {_rel(out)} with columns name, score.",
+        f"Build an xlsx table from {_rel(src)} and save it to {_rel(out)} with columns name, score.",
+    ])
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
         if not _passed(result):
@@ -91,7 +99,11 @@ def gen_xlsx_verify(rng: random.Random, work: Path, i: int) -> Case:
         ws.cell(r_idx, 1, r["name"] + ("_tampered" if tamper and r_idx == 2 else ""))
         ws.cell(r_idx, 2, r["score"])
     wb.save(out)
-    goal = f"Verify the xlsx table {_rel(out)} against the json records in {_rel(src)} with columns name, score."
+    goal = rng.choice([
+        f"Verify the xlsx table {_rel(out)} against the json records in {_rel(src)} with columns name, score.",
+        f"Check the xlsx table {_rel(out)} against the json records in {_rel(src)} with columns name, score.",
+        f"Verify the xlsx table {_rel(out)} against the json records in {_rel(src)}, with columns name, score.",
+    ])
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
         if tamper:
@@ -121,7 +133,11 @@ def gen_source_ranking_bm25(rng: random.Random, work: Path, i: int) -> Case:
         "objective": f"find {term1} {term2} documentation",
         "candidates": [irrelevant_doc, relevant_doc]
     }), encoding="utf-8")
-    goal = f"Rank candidate sources in {_rel(src)} for objective relevance with BM25 and save to {_rel(out)}."
+    goal = rng.choice([
+        f"Rank candidate sources in {_rel(src)} for objective relevance with BM25 and save to {_rel(out)}.",
+        f"Rank the candidate sources in {_rel(src)} for objective relevance with BM25 and save the ranking to {_rel(out)}.",
+        f"With BM25, rank candidate sources in {_rel(src)} for objective relevance and save to {_rel(out)}.",
+    ])
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
         if not _passed(result):
@@ -174,7 +190,11 @@ def gen_decision_synthesis(rng: random.Random, work: Path, i: int) -> Case:
     src = work / f"decision_prob_{i}_{_word(rng, 4)}.json"
     out = work / f"decision_res_{i}_{_word(rng, 4)}.json"
     src.write_text(json.dumps(problem), encoding="utf-8")
-    goal = f"Synthesize a typed decision from {_rel(src)} and save the result to {_rel(out)}."
+    goal = rng.choice([
+        f"Synthesize a typed decision from {_rel(src)} and save the result to {_rel(out)}.",
+        f"Synthesize a typed decision from {_rel(src)} and save it to {_rel(out)}.",
+        f"Derive a typed decision from {_rel(src)} and save the result to {_rel(out)}.",
+    ])
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
         if not _passed(result):
@@ -201,7 +221,11 @@ def gen_python_source_audit(rng: random.Random, work: Path, i: int) -> Case:
         encoding="utf-8"
     )
     out = work / f"audit_{i}_{_word(rng, 4)}.json"
-    goal = f"Audit the python sources in {_rel(src_dir)} with ast and save the report to {_rel(out)}."
+    goal = rng.choice([
+        f"Audit the python sources in {_rel(src_dir)} with ast and save the report to {_rel(out)}.",
+        f"Audit the python sources in {_rel(src_dir)} with the ast audit and save the report to {_rel(out)}.",
+        f"Run the ast audit on the python sources in {_rel(src_dir)} and save the report to {_rel(out)}.",
+    ])
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
         if not _passed(result):
