@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/python_request_acceptance_union_v1.py.auto.v1",
- "elapsed_ms": 9.484,
+ "elapsed_ms": 6.086,
  "independent_run_reference": {
-  "github_run_id": 39243960344,
+  "github_run_id": 39244398811,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "cd0d450d-8ef4-4508-891a-ee2549c15401",
+   "jti": "5f473ad4-963f-47d5-9f3f-acf91afb8bac",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39243960344",
+   "run_id": "39244398811",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
