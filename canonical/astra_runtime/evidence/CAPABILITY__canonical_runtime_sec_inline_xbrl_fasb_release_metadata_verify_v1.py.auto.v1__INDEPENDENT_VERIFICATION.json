@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/sec_inline_xbrl_fasb_release_metadata_verify_v1.py.auto.v1",
- "elapsed_ms": 3.343,
+ "elapsed_ms": 3.228,
  "independent_run_reference": {
-  "github_run_id": 39271472434,
+  "github_run_id": 39271996848,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "83c30720-f2b2-49ab-9816-a409e7cfa888",
+   "jti": "e4ccf492-84e0-4c5e-a8bf-4acc1ad1db18",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39271472434",
+   "run_id": "39271996848",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
