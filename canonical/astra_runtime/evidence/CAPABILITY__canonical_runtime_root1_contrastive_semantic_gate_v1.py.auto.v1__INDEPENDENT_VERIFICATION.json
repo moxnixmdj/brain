@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/root1_contrastive_semantic_gate_v1.py.auto.v1",
- "elapsed_ms": 5.983,
+ "elapsed_ms": 4.999,
  "independent_run_reference": {
-  "github_run_id": 39265441750,
+  "github_run_id": 39265995970,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "7b039b0b-061e-4748-b0bd-93a8cd25ac72",
+   "jti": "7a6e252f-4d9c-44a6-aa0f-f24fed4ec2fb",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39265441750",
+   "run_id": "39265995970",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
