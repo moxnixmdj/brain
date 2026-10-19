@@ -53,6 +53,7 @@ CHANNELS: dict[str, dict[str, Any]] = {
     "solve":     {"cost": 0.4, "note": "maybe it can already do this"},
     # composing is local and needs no network: cheaper than asking the world
     "compose":   {"cost": 0.6, "note": "chain what it already has"},
+    "synthesize": {"cost": 0.8, "note": "write a program that does it"},
     "knowledge": {"cost": 1.0, "note": "go and get the data"},
     "acquire":   {"cost": 1.8, "note": "learn to run a program"},
 }
@@ -254,6 +255,27 @@ def _try_with(gap: str, exe: str) -> dict[str, Any]:
                       else ("%s is here but did not do it" % exe)}
 
 
+def _try_synthesize(gap: str) -> dict[str, Any]:
+    """Write a program that does it, and prove it by running it.
+
+    Composing reaches what is registered; this reaches what is merely
+    possible. The candidate is executed and its output checked, so a program
+    is only accepted once the artifact is really there.
+    """
+    try:
+        from canonical.runtime import program_synthesis_v1 as synth
+        out = synth.synthesize_or_recall(gap)
+    except Exception as exc:  # noqa: BLE001 - a channel never breaks a lesson
+        return {"closed": False, "status": "CHANNEL_ERROR",
+                "detail": type(exc).__name__ + ":" + str(exc)[:200]}
+    ok = out.get("pass") is True
+    return {"closed": ok, "status": out.get("status"),
+            "suffix": out.get("suffix"),
+            "from_memory": bool(out.get("from_memory")),
+            "detail": ("wrote and verified a program producing %s" % out.get("suffix"))
+                      if ok else (out.get("status") or "no candidate worked")}
+
+
 def _try_compose(gap: str) -> dict[str, Any]:
     """Chain the capabilities it already has into one that does the job.
 
@@ -321,6 +343,8 @@ def study(gap: Mapping[str, Any] | str, *, min_sources: int = 2,
         try:
             if name == "solve":
                 outcome = _try_solve(what)
+            elif name == "synthesize":
+                outcome = _try_synthesize(what)
             elif name == "knowledge":
                 outcome = _try_knowledge(what, min_sources, min_kinds)
             elif name == "compose":

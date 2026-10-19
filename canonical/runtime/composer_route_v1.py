@@ -121,6 +121,20 @@ def route(goal: str, seed: Sequence[str] | None = None,
                     "token": token, "chain": list(chain), "tried": tried,
                     "status": "PASS__COMPOSER_ROUTE_FOUND",
                     "authority": "TYPE_LEVEL_COMPOSITION_REACHABLE"}
+    # No chain of registered capabilities reaches it. Before reporting that,
+    # try to WRITE a program that does it -- python3 is here and the stdlib is
+    # free, so "nothing is registered" is not the same as "it cannot be done".
+    try:
+        from canonical.runtime import program_synthesis_v1 as synth
+        made = synth.synthesize_or_recall(goal)
+    except Exception:  # noqa: BLE001 - synthesis must never break routing
+        made = None
+    if isinstance(made, Mapping) and made.get("pass"):
+        return {"schema": SCHEMA, "pass": True, "goal": goal, "token": None,
+                "chain": [], "tried": tried, "synthesised": True,
+                "status": "PASS__SYNTHESISED_PROGRAM",
+                "suffix": made.get("suffix"),
+                "authority": "SYNTHESISED_EXECUTED_AND_EFFECT_VERIFIED"}
     return {"schema": SCHEMA, "pass": False, "goal": goal, "token": None,
             "chain": [], "tried": tried,
             "status": "OPEN__COMPOSER_NO_REACHABLE_TOKEN",
