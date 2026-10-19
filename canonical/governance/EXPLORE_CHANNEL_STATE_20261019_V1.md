@@ -197,3 +197,83 @@ The goal flows into `invocation_shapes`, so the flag the goal asked for becomes 
 
 Both are the same question the last five defects were: stop deciding in advance what the answer
 looks like.
+
+---
+
+## Round 6 and 7 — both frontiers above are now closed
+
+### 2 (closed): programs needing options WITH VALUES
+
+`perform("resize in.png to 50% as out.png", cwd="/home/user/pic")` is measured end to end:
+
+```
+11.3s  pass=True  status=PASS__APPLIED_TO_REAL_FILE
+argv  : convert -resize 50% in.png out.png
+verify: ROUND_TRIP_OK          independent read: 200x100 -> 100x50
+```
+
+Six defects were found by measuring, not by reasoning:
+
+- `_FLAG_LINE` matched `-\w`, i.e. ONE character, so `-adjoin` was read as flag `-a` meaning
+  "djoin". ImageMagick writes `-c, --long`, `--long` and `-fullname`; the regex now takes the
+  whole flag.
+- `flag_descriptions(limit=80)` truncated ImageMagick's 248 flags, so `-resize` was invisible
+  to the machine. Raised to 400.
+- Program selection was by NAME subsequence: `programs_for(".png")` never returns `convert`,
+  because "convert" contains no p, n or g. The one program on this machine that can resize an
+  image was never once tried. `programs_for_goal` now selects by whether a program's manual
+  documents a flag MEANING what the goal said.
+- Value-bearing shapes must be tried BEFORE positional ones. In the usual order
+  `convert in.png` won by dumping the image to stdout into `out.png` — a file that exists, is
+  named `.png`, and was never resized.
+- A sandbox seeded with `input.txt` cannot teach an image operation. `ComputerEnv(seed_file=...)`
+  now practises on a copy of the real input; the original is never touched.
+- `_uses_goal_value` requires the winning command to contain a number from the goal. Without it
+  "resize to 50%" was silently answered by copying the file.
+
+And one defect that was worse than a wrong answer:
+
+- The learner DESTROYED THE USER'S INPUT FILE. "compress notes.txt into notes.txt.gz" was
+  answered with `gzip {input}`, which reaches the goal by deleting notes.txt; `gzip -c {input}`
+  reaches the same goal and leaves it. Forms that consume the input are now held back and
+  returned only when nothing gentler reaches the goal — a preference, not a ban, so
+  "move a.txt to b.txt" still has a route.
+
+### 1 (closed): goals that name no output file
+
+The consensus oracle deleted last round failed at SELECTION. Selection is now behavioural: a file
+is BUILT to hold exactly 7 of the thing the goal names, and a program that prints 7 has proved it
+measures that thing — without anyone reading its documentation. A second file holding 13 must
+also come out 13: printing the right number once can be a coincidence, following the
+construction cannot. The manual is still read, but only to narrow the field, never to decide.
+
+Measured on a real 23-line file, every answer is the true one:
+`lines -> 23` (wc and grep agree), `words -> 138`, `characters -> 566`, `bytes -> 566`.
+
+Four defects found by measuring:
+
+- The probe was built from identical lines, so "how many lines" and "how many runs" were the same
+  question and `uniq --count` passed while counting runs. The probe now holds distinct lines.
+- egrep, fgrep and rgrep are three-line shell scripts that exec grep: three votes from one
+  program. The exec is followed to the program that actually does the work.
+- The proven command was discarded and the real file measured with a different form of it — bare
+  `wc notes.txt` after `wc --lines` was the thing that worked — a different quantity reported as
+  the same answer. The exact argv now carries over.
+- `shuf --repeat` never stops talking. Read without a cap it filled memory until the machine
+  killed the learner: no exception, no traceback, a run that vanished at fifteen seconds and
+  looked like nothing had happened. Output is read on a deadline and capped.
+
+It refuses rather than invents when the goal names no single countable thing, when the input file
+is absent, and when nothing on the machine tracks the constructed answer.
+
+### What is still open
+
+- **`awk`/`sed`-class answers are not reached.** `awk 'END{print NR}'` needs a PROGRAM argument,
+  not a flag plus a pattern, so no shape tried can express it. Agreement is therefore often 2
+  (wc and grep) where a human would name four.
+- **The first question of a kind costs seconds** (9–46s), because the machine has to find out
+  which commands measure at all. It is cached per machine, so the second is instant, but the
+  first is not yet fast.
+- **Words/characters/bytes rest on one instrument.** The value is right and the instrument is
+  tracked, but it would be better to have two.
+- **No path from this repo to a dollar**; nothing here runs while neither of us is typing.
