@@ -25,6 +25,7 @@ from __future__ import annotations
 import os
 import pathlib
 import re
+import json
 import shutil
 import subprocess
 import sys
@@ -1004,3 +1005,404 @@ def discover(gap: str, budget: int = 120, seed: int = 11,
             "banned": sorted(banned), "from_memory": False,
             "detail": why or (outcome.get("status") or "never reached it")}
 
+
+
+# --------------------------------------------------------------------------- #
+# goals that name no output file: measured, never guessed
+# --------------------------------------------------------------------------- #
+# "count the lines in notes.txt" asks for a VALUE, not a file. There is no
+# output format to verify against, so every check above has nothing to bite
+# on. Choosing the program by whether its manual mentions the goal's words
+# was tried and deleted: it answered "count the lines" with a compiler's
+# linker options three times, because every manual mentions everything, and
+# each fix bred a new exclusion rule. A list of exclusions is a strict
+# program.
+#
+# What replaces it is a measurement. If a file is BUILT to contain exactly
+# 7 of the thing the goal names, then a program that prints 7 has proved,
+# by behaviour and without anyone reading its documentation, that it
+# measures that thing. A program that prints a version banner, its own
+# help, or a linker list does not print 7, and is gone before it can
+# mislead anyone. The manual is still read -- but only to NARROW the search,
+# never to decide it.
+
+# What a file can have a known number of. This is a list of things that can
+# be CONSTRUCTED and then COUNTED, not a list of rules about programs: each
+# one is verified by building a file that has exactly n of it.
+_PROBE_KINDS: dict[str, tuple[str, ...]] = {
+    "lines": ("lines", "line", "newlines", "newline", "rows", "row"),
+    "words": ("words", "word"),
+    "bytes": ("bytes", "byte", "size"),
+    "characters": ("characters", "character", "chars", "char"),
+}
+
+
+def query_kind(gap: str) -> str | None:
+    """The one thing the goal asks to be counted, or None if it is not one.
+
+    "how many bytes per line" names two things and is refused rather than
+    guessed at -- answering it would mean picking one and calling the other
+    noise, which is the machine inventing the question.
+    """
+    text = str(gap or "").lower()
+    hits = [kind for kind, words in _PROBE_KINDS.items()
+            if any(w in text for w in words)]
+    return hits[0] if len(hits) == 1 else None
+
+
+def probe_bytes(kind: str, n: int = 7) -> bytes | None:
+    """Bytes holding exactly n of the thing `kind` names -- the ground truth.
+
+    The lines are all DIFFERENT on purpose. A probe of n identical lines
+    holds n lines and one distinct line, and 'uniq --count' answers both
+    questions with the number of lines -- so it sailed through every check
+    while counting runs, not lines. Distinct lines make "how many lines"
+    and "how many different lines" two questions with two answers, and a
+    program that conflates them is caught before it measures anything.
+    """
+    if kind == "lines":
+        return (b"\n".join(b"probe %d" % i for i in range(n))) + b"\n"
+    if kind == "words":
+        return (b" ".join(b"w%d" % i for i in range(n))) + b"\n"
+    if kind in ("bytes", "characters"):
+        return b"z" * n
+    return None
+
+
+def _bare_value(out: bytes, limit: int = 64) -> str | None:
+    """The single value a program printed, if it printed only one.
+
+    'wc -l probe.txt' prints "7 probe.txt": the count and the name it was
+    given. That is one value. A program that prints its own manual prints
+    many lines and is not reporting a measurement at all.
+    """
+    text = out.decode("utf-8", "replace").strip()
+    if not text or "\n" in text or len(text) > limit:
+        return None
+    parts = text.split()
+    if len(parts) > 2:
+        return None
+    return parts[0]
+
+
+def _real_binary(prog: str) -> str:
+    """Which actual file runs. c89, c99 and cc are three names for gcc, and
+    three "independent" programs agreeing is not independence at all."""
+    try:
+        return os.path.realpath(str(shutil.which(prog) or prog))
+    except Exception:  # noqa: BLE001 - an odd name is not a failure
+        return prog
+
+
+# Patterns that match every line. 'grep -c' counts nothing without a
+# pattern, and a counting flag is useless until it is given something to
+# count -- so the search has to supply one. These four are not knowledge
+# about grep; they are the general shape of "match everything", in the two
+# notations programs actually accept.
+_MATCH_ALL = ("", "^", "$", ".")
+
+# Two constructions, so a right answer has to be TRACKED, not
+# merely produced once -- see probe_survivors.
+_PROBE_SIZES = (7, 13)
+
+
+# Which commands measure which kind, once per machine. Kept in memory for
+# this process and on disk for the next one, because "it took 40 seconds to
+# learn how to count" is only forgivable if it is never paid twice.
+_QUERY_CACHE: dict[tuple[str, int], list[dict[str, Any]]] = {}
+_QUERY_LOADED = False
+
+
+def _query_cache_path() -> pathlib.Path:
+    base = os.environ.get("BRAIN_STATE_DIR") or tempfile.gettempdir()
+    return pathlib.Path(base) / "brain_query_probe_v1.json"
+
+
+def _query_cache_load() -> None:
+    global _QUERY_LOADED
+    if _QUERY_LOADED:
+        return
+    _QUERY_LOADED = True
+    try:
+        raw = json.loads(_query_cache_path().read_text())
+        for key, val in raw.items():
+            kind, _, n = str(key).rpartition(":")
+            _QUERY_CACHE[(kind, int(n))] = list(val)
+    except Exception:  # noqa: BLE001 - no cache is not a failure
+        pass
+
+
+def _query_cache_get(kind: str, limit: int) -> list[dict[str, Any]] | None:
+    _query_cache_load()
+    return _QUERY_CACHE.get((kind, limit))
+
+
+def _query_cache_put(kind: str, limit: int,
+                     survivors: Sequence[dict[str, Any]]) -> None:
+    _query_cache_load()
+    _QUERY_CACHE[(kind, limit)] = list(survivors)
+    try:
+        _query_cache_path().write_text(json.dumps(
+            {"%s:%d" % k: v for k, v in _QUERY_CACHE.items()}))
+    except Exception:  # noqa: BLE001 - a failed save must not lose the answer
+        pass
+
+
+def _run_capped(argv: Sequence[str], cwd: str | pathlib.Path,
+                timeout: float = 5.0, max_bytes: int = 1 << 16
+                ) -> tuple[int | None, bytes]:
+    """Run a command and bring back at most `max_bytes` of what it printed.
+
+    'shuf --repeat' never stops: it permutes its input forever. Handed to
+    subprocess.run(capture_output=True) it fills a pipe nobody is draining,
+    the bytes pile up in this process, and the machine kills US -- silently,
+    with no exception and no traceback, which is how a whole run vanishes
+    after fifteen seconds and looks like nothing happened.
+
+    So output is read on a deadline and capped. A program that talks fast
+    is no slower than before; a program that never shuts up is killed
+    instead of being allowed to take the learner down with it.
+    """
+    import threading
+    proc = subprocess.Popen(list(argv), cwd=str(cwd), stdout=subprocess.PIPE,
+                            stderr=subprocess.DEVNULL,
+                            stdin=subprocess.DEVNULL)
+    buf = bytearray()
+
+    def drain() -> None:
+        try:
+            while len(buf) < max_bytes:
+                chunk = proc.stdout.read(4096)
+                if not chunk:
+                    break
+                buf.extend(chunk)
+        except Exception:  # noqa: BLE001 - a closed pipe is the normal end
+            pass
+
+    worker = threading.Thread(target=drain, daemon=True)
+    worker.start()
+    worker.join(timeout)
+    code = proc.poll()
+    if code is None or worker.is_alive():
+        try:
+            proc.kill()
+        except Exception:  # noqa: BLE001 - already gone is fine
+            pass
+        try:
+            proc.wait(timeout=2)
+        except Exception:  # noqa: BLE001
+            pass
+    try:
+        proc.stdout.close()
+    except Exception:  # noqa: BLE001
+        pass
+    return code, bytes(buf[:max_bytes])
+
+
+def _instrument(prog: str, depth: int = 4) -> str:
+    """The program that actually does the work.
+
+    egrep, fgrep and rgrep are three-line shell scripts whose whole body is
+    'exec grep'. Counting them as three independent programs that agree is
+    how one opinion gets called a consensus -- the same mistake that once
+    turned one compiler (c89, c99, cc) into three agreeing sources. The
+    exec is followed to whatever it hands off to, so agreement means
+    agreement between things that really measured separately.
+    """
+    path = _real_binary(prog)
+    for _ in range(depth):
+        try:
+            head = pathlib.Path(path).read_bytes()[:4096]
+        except Exception:  # noqa: BLE001 - unreadable is just the end of it
+            return path
+        if not head.startswith(b"#!"):
+            return path
+        hit = re.search(r"^\s*exec\s+(\S+)",
+                        head.decode("utf-8", "replace"), re.MULTILINE)
+        if not hit:
+            return path
+        nxt = shutil.which(hit.group(1))
+        if not nxt:
+            return path
+        real = os.path.realpath(nxt)
+        if real == path:
+            return path
+        path = real
+    return path
+
+
+def _query_shapes(prog: str, name: str, gap: str) -> list[list[str]]:
+    """Ways to point the program at one file, most specific first."""
+    shapes: list[list[str]] = []
+    # the manual narrows the search; the probe decides it
+    try:
+        flags = flags_for_goal(prog, gap, limit=3)
+    except Exception:  # noqa: BLE001 - no manual is not a failure
+        flags = []
+    for flag in flags:
+        shapes.append([prog, flag, name])
+        for pat in _MATCH_ALL:
+            shapes.append([prog, flag, pat, name])
+    shapes.append([prog, name])
+    return shapes
+
+
+def probe_survivors(kind: str, programs: Sequence[str], gap: str,
+                    n: int = 7, timeout: float = 5.0,
+                    workers: int = 24) -> list[dict[str, Any]]:
+    """Commands that print n on a file built to hold exactly n of `kind`.
+
+    Chosen by what they DID, not by what they say they do. The exact argv
+    is kept: a command that counted the probe is the only command entitled
+    to count the real file, and re-running some OTHER form of it -- the
+    bare `wc notes.txt`, when `wc -l notes.txt` is the one that was proven
+    -- measures a different thing and calls it the same answer.
+    """
+    from concurrent.futures import ThreadPoolExecutor
+    if probe_bytes(kind, n) is None:
+        return []
+    name = "probe.txt"
+
+    def one(prog: str) -> dict[str, Any] | None:
+        root = pathlib.Path(tempfile.mkdtemp(prefix="brain-probe-"))
+        try:
+            for argv in _query_shapes(prog, name, gap):
+                # A file built to hold 7 of the thing, then one built to
+                # hold 13. A program that prints 7 once may be printing 7
+                # for its own reasons -- a version number, a default, a
+                # coincidence. A program that prints 7 for seven and 13
+                # for thirteen is TRACKING the thing, and that is what a
+                # measuring instrument does. Two sizes is the difference
+                # between one right answer and an instrument that can be
+                # trusted with a file it has never seen.
+                reads = []
+                for size in _PROBE_SIZES:
+                    data = probe_bytes(kind, size)
+                    # Every form gets a fresh probe: some programs eat the
+                    # file they are given, and a later form would then be
+                    # measuring nothing and reporting it.
+                    (root / name).write_bytes(data)
+                    try:
+                        code, out = _run_capped(argv, root, timeout=timeout)
+                    except Exception:  # noqa: BLE001 - a program must not break it
+                        break
+                    if code != 0:
+                        break
+                    reads.append(_bare_value(out))
+                if len(reads) == len(_PROBE_SIZES) and all(
+                        got == str(want) for got, want in zip(reads, _PROBE_SIZES)):
+                    return {"program": prog, "argv": list(argv),
+                            "tracked": [str(s) for s in _PROBE_SIZES]}
+        finally:
+            shutil.rmtree(str(root), ignore_errors=True)
+        return None
+
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        return [hit for hit in pool.map(one, list(programs)) if hit]
+
+
+def answer_query(gap: str, input_file: str | pathlib.Path,
+                 programs: Sequence[str] | None = None,
+                 timeout: float = 15.0,
+                 min_agreement: int = 1) -> dict[str, Any]:
+    """Answer a goal that asks for a value by measuring the file.
+
+    Refuses unless genuinely different programs, run on the real file, print
+    the same thing. One program is an opinion; two programs that are the
+    same binary are one opinion wearing a coat.
+    """
+    kind = query_kind(gap)
+    if kind is None:
+        return {"pass": False, "status": "OPEN__NOT_A_COUNTABLE_QUESTION",
+                "detail": "the goal does not name one thing that can be "
+                          "built, counted and checked"}
+    src = pathlib.Path(input_file)
+    if not src.is_file():
+        return {"pass": False, "status": "OPEN__NO_EXISTING_INPUT_FILE_IN_GOAL",
+                "detail": "no such file: %s" % src}
+
+    # How far down the list of candidates to look. The manual is read ONLY
+    # to narrow the field -- it names programs whose flags mean something
+    # like what the goal said. It decides nothing: the probe throws away
+    # every candidate that does not actually print the known answer, which
+    # is why a compiler listing its linker options can no longer be
+    # mistaken for a line count.
+    #
+    # It starts narrow because most questions are answered at once, and
+    # widens only when too few survivors agree to trust -- 'wc' sits at
+    # rank 136 for "how many words", so a narrow search honestly finds
+    # nothing rather than guessing.
+    survivors: list[dict[str, Any]] = []
+    # Which commands measure this kind is a fact about the MACHINE, not
+    # about the file -- 'wc --lines' counts the lines of anything. Once it
+    # has been measured it never has to be measured again, which is what
+    # turns a slow first question into an instant second one.
+    for limit in (24, 96, 200):
+        cached = _query_cache_get(kind, limit)
+        if cached is not None:
+            survivors = cached
+        else:
+            cands = (list(programs) if programs is not None
+                     else programs_for_goal(gap, limit=limit))
+            if not cands:
+                continue
+            survivors = probe_survivors(kind, cands, gap)
+            if programs is None:
+                _query_cache_put(kind, limit, survivors)
+        votes: dict[str, list[str]] = {}
+        # Each survivor is asked the real file in exactly the form it was
+        # proven in, and its answer is recorded against the program that
+        # actually did the work, so three names for one compiler -- or
+        # three shell scripts that exec grep -- cannot gang up and call
+        # themselves independent agreement.
+        for hit in survivors:
+            argv = [hit["argv"][0]] + [str(src) if a == "probe.txt" else a
+                                       for a in hit["argv"][1:]]
+            try:
+                code, out = _run_capped(argv, src.parent, timeout=timeout)
+            except Exception:  # noqa: BLE001 - one failure is data
+                continue
+            if code != 0:
+                continue
+            value = _bare_value(out)
+            if value is None:
+                continue
+            votes.setdefault(value, []).append(_instrument(hit["program"]))
+        if votes:
+            ranked = sorted(votes.items(),
+                            key=lambda kv: (-len(set(kv[1])), kv[0]))
+            value, bins = ranked[0]
+            if len(set(bins)) >= min_agreement:
+                agree = len(set(bins))
+                return {"pass": True,
+                        "status": ("PASS__MEASURED_BY_AGREEMENT" if agree > 1
+                                   else "PASS__MEASURED_BY_ONE_TRACKED_INSTRUMENT"),
+                        "kind": kind, "value": value, "answer": value,
+                        "agreement": agree, "survivors": survivors,
+                        "votes": {k: sorted(set(v)) for k, v in votes.items()},
+                        "detail": ("%d distinct programs agree: %s" % (agree, value))
+                                  if agree > 1 else
+                                  ("one program, but it tracked both probes "
+                                   "(%s) before being trusted with the real "
+                                   "file: %s"
+                                   % (", ".join(str(s) for s in _PROBE_SIZES),
+                                      value))}
+        if programs is not None:
+            break
+
+    if not survivors:
+        return {"pass": False, "status": "OPEN__NOTHING_MEASURED_IT",
+                "kind": kind, "detail":
+                    "no program on this machine printed the known answer on "
+                    "a file built to hold 7 of it"}
+    if not votes:
+        return {"pass": False, "status": "OPEN__NOTHING_MEASURED_IT",
+                "kind": kind, "survivors": survivors,
+                "detail": "every candidate failed on the real file"}
+    best, bins = sorted(votes.items(),
+                        key=lambda kv: (-len(set(kv[1])), kv[0]))[0]
+    return {"pass": False, "status": "OPEN__ONLY_ONE_PROGRAM_AGREES",
+            "kind": kind, "survivors": survivors,
+            "votes": {k: sorted(set(v)) for k, v in votes.items()},
+            "detail": "%d program(s) say %s; refusing to answer on one "
+                      "opinion" % (len(set(bins)), best)}

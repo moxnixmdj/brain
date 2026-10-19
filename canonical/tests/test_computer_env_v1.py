@@ -22,6 +22,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 import unittest
 
 from canonical.runtime import computer_env_v1 as cenv
@@ -452,3 +453,116 @@ class ManualTests(EnvCase):
 
     def test_a_goal_that_mentions_nothing_documented_chooses_nothing(self):
         self.assertEqual(cenv.flags_for_goal("wc", "zzzqqq xxxwww"), [])
+
+
+class MeasuringTests(unittest.TestCase):
+    """Goals that name no output file -- "count the lines in notes.txt".
+
+    There is no file to open afterwards, so nothing can be verified by
+    reading it back. Choosing the program by whether its manual mentions
+    the goal's words was tried and deleted: it answered "count the lines"
+    with a compiler's linker options, three times. What is here instead is
+    measurement against a file BUILT to hold a known number of the thing.
+    """
+
+    def setUp(self) -> None:
+        self.tmp = tempfile.mkdtemp(prefix="brain-measure-")
+        self.work = pathlib.Path(self.tmp)
+        self.lines = ["alpha %d" % i for i in range(1, 24)]
+        self.file = self.work / "notes.txt"
+        self.file.write_text("\n".join(self.lines) + "\n")
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def test_the_line_count_is_measured_and_is_the_true_count(self):
+        r = cenv.answer_query("count the lines in notes.txt", self.file,
+                              programs=["wc", "grep", "uniq", "nl", "cat"])
+        self.assertTrue(r["pass"], r)
+        self.assertEqual(r["value"], "23", r)
+
+    def test_two_genuinely_different_programs_agree(self):
+        """One program is an opinion. Two are a measurement."""
+        r = cenv.answer_query("count the lines in notes.txt", self.file,
+                              programs=["wc", "grep", "uniq"])
+        self.assertTrue(r["pass"], r)
+        self.assertGreaterEqual(r["agreement"], 2, r)
+        voters = r["votes"][r["value"]]
+        self.assertTrue(any(p.endswith("/wc") for p in voters), voters)
+        self.assertTrue(any(p.endswith("/grep") for p in voters), voters)
+
+    def test_a_program_that_counts_runs_is_not_counting_lines(self):
+        """uniq --count says 7 on seven lines -- if all seven are the same
+        line. A probe built from identical lines cannot tell counting lines
+        from counting runs, and lets a program through that is measuring
+        something else entirely."""
+        seven = cenv.probe_bytes("lines", 7)
+        self.assertEqual(len(set(seven.splitlines())), 7,
+                         "the probe must hold 7 DIFFERENT lines, or "
+                         "'number of lines' and 'number of runs' are the "
+                         "same question and the check proves nothing")
+        hits = cenv.probe_survivors("lines", ["uniq"],
+                                    "count the lines in notes.txt")
+        self.assertEqual(hits, [], "uniq counts runs, not lines: %s" % hits)
+
+    def test_it_tracks_the_probe_instead_of_answering_right_once(self):
+        """Printing the right number once is not measuring. The number has
+        to follow the file that was built to produce it."""
+        for prog in ("wc", "grep"):
+            with self.subTest(program=prog):
+                hits = cenv.probe_survivors(
+                    "lines", [prog], "count the lines in notes.txt")
+                self.assertTrue(hits, prog)
+                self.assertEqual(hits[0].get("tracked"), ["7", "13"], hits)
+
+    def test_three_names_for_one_program_are_not_three_agreements(self):
+        """egrep, fgrep and rgrep are shell scripts that exec grep. Left
+        alone they vote three times and turn one opinion into a consensus
+        -- which is exactly how one compiler under three names once passed
+        itself off as three agreeing sources."""
+        self.assertEqual(cenv._instrument("egrep"), cenv._instrument("grep"))
+        self.assertEqual(cenv._instrument("fgrep"), cenv._instrument("grep"))
+        self.assertEqual(cenv._instrument("rgrep"), cenv._instrument("grep"))
+        self.assertNotEqual(cenv._instrument("wc"), cenv._instrument("grep"))
+
+    def test_a_question_that_is_not_countable_is_refused_not_guessed(self):
+        for goal in ("what is the meaning of notes.txt",
+                     "how many bytes per line in notes.txt"):
+            with self.subTest(goal=goal):
+                r = cenv.answer_query(goal, self.file, programs=["wc"])
+                self.assertFalse(r["pass"], r)
+                self.assertEqual(r["status"],
+                                 "OPEN__NOT_A_COUNTABLE_QUESTION")
+
+    def test_a_file_that_is_not_there_is_refused(self):
+        r = cenv.answer_query("count the lines in gone.txt",
+                              self.work / "gone.txt", programs=["wc"])
+        self.assertFalse(r["pass"], r)
+        self.assertEqual(r["status"], "OPEN__NO_EXISTING_INPUT_FILE_IN_GOAL")
+
+    def test_a_program_that_never_stops_talking_does_not_take_us_down(self):
+        """'shuf --repeat' permutes its input forever. Read without a cap it
+        fills memory until the machine kills the learner -- no exception,
+        no traceback, a run that simply disappears."""
+        code, out = cenv._run_capped(["shuf", "--repeat", "/dev/null"],
+                                     self.work, timeout=2.0)
+        self.assertLessEqual(len(out), 1 << 16)
+        self.assertTrue(True)
+
+    def test_the_second_question_of_a_kind_is_answered_faster(self):
+        """Which command measures this is a fact about the machine, not
+        about the file. Paying to find it out twice is not learning."""
+        cenv._QUERY_CACHE.clear()
+        cenv._QUERY_LOADED = False
+        start = time.time()
+        cenv.answer_query("count the lines in notes.txt", self.file,
+                          programs=["wc", "grep"])
+        first = time.time() - start
+        start = time.time()
+        again = cenv.answer_query("count the lines in notes.txt", self.file,
+                                  programs=["wc", "grep"])
+        second = time.time() - start
+        self.assertTrue(again["pass"], again)
+        self.assertLess(second, max(first, 0.05),
+                        "second run %.2fs was not faster than %.2fs"
+                        % (second, first))
