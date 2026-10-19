@@ -121,11 +121,42 @@ def acquire(probe: Mapping[str, Any], goal: str, *,
 
     try:
         contract = ci.infer_contract(probe, goal)
+        route = "help_text"
     except ci.ContractInferenceFailure as exc:
-        out = {"schema": SCHEMA, "status": NO_CONTRACT,
-               "reason": str(exc), "verified": False, "attempts": []}
-        _note_gaps(out, goal)
-        return out
+        # Reading its help failed. That is not the same as the program being
+        # unlearnable -- it is sitting right there and can be run. Fall back to
+        # driving it and watching what happens, which needs no documentation.
+        contract = None
+        route = "empirical"
+        infer_error = str(exc)
+
+    if contract is None:
+        try:
+            from canonical.runtime import empirical_cli_probe_v1 as emp
+            exe_guess = ""
+            for e in (probe.get("executables") or []):
+                exe_guess = str(e.get("executable") or "")
+                if exe_guess:
+                    break
+            observed = emp.probe(
+                exe_guess, goal,
+                suffix=(_requested_suffix(goal)
+                        or ((contract or {}).get("requested_suffix") or ".out")),
+            )
+        except Exception:
+            observed = None
+        if observed is None or observed.get("status") != emp.PASS:
+            out = {"schema": SCHEMA, "status": NO_CONTRACT,
+                   "reason": infer_error, "verified": False, "attempts": [],
+                   "tried_empirically": True}
+            _note_gaps(out, goal)
+            return out
+        return {**observed, "schema": SCHEMA, "status": PASS,
+                "verified": True, "route": route,
+                "evidence": {**(observed.get("evidence") or {}),
+                             "authority": observed.get("authority"),
+                             "inferred_from": "observed_effect_no_help_text",
+                             "attempts": []}}
 
     exe = str(contract.get("executable") or "")
     if not shutil.which(exe) and not pathlib.Path(exe).is_file():
@@ -190,6 +221,7 @@ def acquire(probe: Mapping[str, Any], goal: str, *,
                     "schema": SCHEMA,
                     "status": PASS,
                     "verified": True,
+                    "route": route,
                     "executable": exe,
                     "argv_template": contract.get("argv_template"),
                     "required_inputs": contract.get("required_inputs"),
@@ -215,6 +247,12 @@ def acquire(probe: Mapping[str, Any], goal: str, *,
               "executable": exe, "contract": contract, "attempts": attempts}
     _note_gaps(failed, goal)
     return failed
+
+
+def _requested_suffix(goal: str) -> str:
+    """The output extension the goal asks for, so the effect can be checked."""
+    m = re.search(r"(\.[A-Za-z0-9]{1,6})\b", str(goal or ""))
+    return m.group(1) if m else ""
 
 
 def _remember(result: Mapping[str, Any], goal: str) -> None:

@@ -43,12 +43,36 @@ class _BinaryFactory:
             {"text": (r.stdout + r.stderr).decode("utf-8", "replace")}]}]}
 
 
-class AcquisitionTests(unittest.TestCase):
+class IsolatedStores:
+    """Keep acquisition's side effects out of the real memory and ledger.
+
+    acquire() remembers what it learned and notes gaps on failure, both to the
+    real default state. Left alone, that pollutes the ledger tests, which then
+    see gaps they never created -- a test that fails depending on which other
+    tests ran first.
+    """
+
+    def _isolate(self) -> None:
+        from canonical.runtime import associative_memory_v1 as mem
+        from canonical.runtime import ignorance_ledger_v1 as led
+        self.mem, self.led = mem, led
+        self._mp, self._lp = mem.DEFAULT_STATE, led.DEFAULT_STATE
+        self.mp = os.path.join(self.tmp, "mem.json")
+        self.lp = os.path.join(self.tmp, "ledger.json")
+        mem.DEFAULT_STATE, led.DEFAULT_STATE = self.mp, self.lp
+
+    def _unisolate(self) -> None:
+        self.mem.DEFAULT_STATE, self.led.DEFAULT_STATE = self._mp, self._lp
+
+
+class AcquisitionTests(IsolatedStores, unittest.TestCase):
     def setUp(self) -> None:
         self.tmp = tempfile.mkdtemp(prefix="brain-cli-acq-test-")
         self.bin = _BinaryFactory(self.tmp)
+        self._isolate()
 
     def tearDown(self) -> None:
+        self._unisolate()
         import shutil
         shutil.rmtree(self.tmp, ignore_errors=True)
 
@@ -352,3 +376,77 @@ class RegistrationTests(unittest.TestCase):
         """Guard against the obvious catastrophic mistake."""
         self.assertEqual(json.loads(self.real.read_text())["capabilities"]
                          .get("acquired.regme"), None)
+
+
+class NoDocumentationTests(IsolatedStores, unittest.TestCase):
+    """Programs that will not say how to use themselves.
+
+    Reading help is one way to learn. Failing to read help is not a reason to
+    give up on a program that is sitting on the disk and can be run.
+    """
+
+    def setUp(self) -> None:
+        self.tmp = tempfile.mkdtemp(prefix="brain-cli-nodoc-")
+        self.bin = _BinaryFactory(self.tmp)
+        self._isolate()
+
+    def tearDown(self) -> None:
+        self._unisolate()
+        import shutil
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def _probe_for(self, exe: str) -> dict:
+        return {"executables": [{"executable": exe, "help_attempts": [{"text": ""}]}]}
+
+    def test_a_program_with_no_help_is_still_learned(self):
+        """Previously: CLI_HELP_CONTRACT_TEXT_REQUIRED, and nothing learned."""
+        exe = self.bin.make("mute", """
+            import sys
+            a = sys.argv[1:]
+            for i, t in enumerate(a):
+                if t == "-o":
+                    open(a[i+1], "wb").write(bytes.fromhex("89504e470d0a1a0a") + b"ok")
+        """)
+        r = acq.acquire(self._probe_for(exe), "encode text into out.png")
+        self.assertEqual(r["status"], acq.PASS, json.dumps(r, default=str)[:300])
+        self.assertEqual(r["route"], "empirical")
+        self.assertIn("observed_effect", json.dumps(r["evidence"]))
+
+    def test_it_stays_honest_about_how_it_knows(self):
+        exe = self.bin.make("mute2", """
+            import sys
+            a = sys.argv[1:]
+            for i, t in enumerate(a):
+                if t == "-o":
+                    open(a[i+1], "wb").write(bytes.fromhex("89504e470d0a1a0a") + b"ok")
+        """)
+        r = acq.acquire(self._probe_for(exe), "encode text into out.png")
+        self.assertEqual(r["evidence"]["authority"],
+                         "EFFECT_OBSERVED_NOT_SEMANTICALLY_PROVEN")
+
+    def test_a_program_that_cannot_be_driven_is_reported_not_invented(self):
+        exe = self.bin.make("inert2", """
+            import sys
+            sys.exit(0)
+        """)
+        r = acq.acquire(self._probe_for(exe), "encode text into out.png")
+        self.assertEqual(r["status"], acq.NO_CONTRACT)
+        self.assertTrue(r.get("tried_empirically"))
+
+    def test_help_route_is_still_preferred_when_it_works(self):
+        """Reading is cheaper than trying; the fallback must not replace it."""
+        exe = self.bin.make("documented", """
+            import sys
+            a = sys.argv[1:]
+            if "--help" in a:
+                print("Usage: documented [options]")
+                print("  -o, --output=FILE  Send output to FILE")
+                print("  -d, --data=DATA    Data content")
+                print("  Supported formats: PNG.")
+                sys.exit(0)
+            for i, t in enumerate(a):
+                if t in ("-o", "--output"):
+                    open(a[i+1], "wb").write(bytes.fromhex("89504e470d0a1a0a") + b"ok")
+        """)
+        r = acq.acquire(self.bin.probe_for(exe), "encode text into out.png")
+        self.assertEqual(r["route"], "help_text")
