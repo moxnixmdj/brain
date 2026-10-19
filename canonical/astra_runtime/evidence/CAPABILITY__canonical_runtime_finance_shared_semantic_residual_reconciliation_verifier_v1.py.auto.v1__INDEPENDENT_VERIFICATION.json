@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/finance_shared_semantic_residual_reconciliation_verifier_v1.py.auto.v1",
- "elapsed_ms": 36.713,
+ "elapsed_ms": 31.819,
  "independent_run_reference": {
-  "github_run_id": 39247727091,
+  "github_run_id": 39248245753,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "e11b8be1-da9b-4e7b-9c48-840060a978ea",
+   "jti": "42715951-1c1c-4e72-b0d1-6fa88c3a7b6d",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39247727091",
+   "run_id": "39248245753",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
