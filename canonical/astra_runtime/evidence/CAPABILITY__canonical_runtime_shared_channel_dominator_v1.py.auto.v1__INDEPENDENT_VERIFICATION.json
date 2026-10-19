@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/shared_channel_dominator_v1.py.auto.v1",
- "elapsed_ms": 39.35,
+ "elapsed_ms": 37.479,
  "independent_run_reference": {
-  "github_run_id": 39193599863,
+  "github_run_id": 39193886598,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "47d06f5b-4225-44ed-af19-8bd940b1e882",
+   "jti": "088c91a4-5442-448f-899a-077b46463bc7",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39193599863",
+   "run_id": "39193886598",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
