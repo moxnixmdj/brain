@@ -18,6 +18,7 @@ Without the second half, every memory sits at the 0.5 prior forever and
 from __future__ import annotations
 
 import os
+import pathlib
 import tempfile
 import unittest
 
@@ -105,3 +106,70 @@ class ConsultationTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class LearnOnFailureTests(unittest.TestCase):
+    """'I cannot do this' is the most precise data the machine has about itself."""
+
+    def setUp(self) -> None:
+        from canonical.runtime import ignorance_ledger_v1 as led
+        from canonical.runtime import associative_memory_v1 as mem
+        self.led, self.mem = led, mem
+        self._lp, self._mp = led.DEFAULT_STATE, mem.DEFAULT_STATE
+        self.tmp = tempfile.mkdtemp(prefix="brain-learn-on-fail-")
+        led.DEFAULT_STATE = os.path.join(self.tmp, "ledger.json")
+        mem.DEFAULT_STATE = os.path.join(self.tmp, "mem.json")
+        # acquisition can REGISTER into the registry -- the source of truth of
+        # what the machine can do. A test must never touch the real one.
+        from canonical.runtime import capability_type_surface_v1 as ts
+        self.ts = ts
+        self._rp = ts.REGISTRY
+        self.regp = os.path.join(self.tmp, "REGISTRY.json")
+        pathlib.Path(self.regp).write_text(
+            pathlib.Path(ts.REGISTRY).read_text(encoding="utf-8"), encoding="utf-8")
+        ts.REGISTRY = self.regp
+
+    def tearDown(self) -> None:
+        self.led.DEFAULT_STATE, self.mem.DEFAULT_STATE = self._lp, self._mp
+        self.ts.REGISTRY = self._rp
+        import shutil
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def test_failure_records_the_gap(self):
+        r = ra.solve_or_learn({"task_id": "t", "goal": "write the text hello to out.txt"},
+                              registry_path=self.regp)
+        self.assertEqual(r["status"], "FAIL__RAW_GOAL_COMPILATION_GAP")
+        self.assertTrue(r["learning"]["gap_recorded"])
+        self.assertTrue(r["learning"]["what_to_learn_next"])
+
+    def test_failure_says_what_to_learn_next(self):
+        ra.solve_or_learn({"task_id": "t", "goal": "write the text hello to out.txt"},
+                          registry_path=self.regp)
+        ranked = self.led.rank(limit=3)
+        self.assertTrue(ranked)
+
+    def test_a_goal_naming_a_real_program_is_attempted(self):
+        r = ra.solve_or_learn({"task_id": "t",
+                               "goal": "use base64 to encode text into out.txt"},
+                              registry_path=self.regp)
+        learned = r.get("learning") or {}
+        self.assertTrue(learned.get("attempted"), learned)
+        self.assertEqual(learned.get("executable"), "base64")
+
+    def test_a_success_does_not_trigger_learning(self):
+        r = ra.solve_or_learn({"task_id": "t", "goal": GOAL},
+                              registry_path=self.regp)
+        self.assertTrue(r.get("pass") is True, r.get("status"))
+        self.assertNotIn("learning", r)
+
+    def test_learning_can_be_turned_off(self):
+        r = ra.solve_or_learn({"task_id": "t",
+                               "goal": "write the text hello to out.txt"},
+                              learn=False, registry_path=self.regp)
+        self.assertNotIn("learning", r)
+
+    def test_solve_itself_is_unchanged(self):
+        """The measured path must not move: only the wrapper learns."""
+        r = ra.solve({"task_id": "t", "goal": "write the text hello to out.txt"})
+        self.assertNotIn("learning", r)
+        self.assertEqual(r["status"], "FAIL__RAW_GOAL_COMPILATION_GAP")

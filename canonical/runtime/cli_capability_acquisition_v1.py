@@ -131,6 +131,18 @@ def acquire(probe: Mapping[str, Any], goal: str, *,
         infer_error = str(exc)
 
     if contract is None:
+        # A goal that never says what it wants produced gives us nothing to
+        # check an effect against, so any program that prints anything would
+        # "work" -- ls would be learned as a capability. That is the same
+        # failure mode the help path already refuses as
+        # CLI_OUTPUT_FORMAT_UNVERIFIABLE, and it is refused here too.
+        want_suffix = _requested_suffix(goal)
+        if not want_suffix:
+            out = {"schema": SCHEMA, "status": NO_CONTRACT,
+                   "reason": "NO_OUTPUT_FORMAT_IN_GOAL_CANNOT_VERIFY_EFFECT",
+                   "verified": False, "attempts": [], "tried_empirically": False}
+            _note_gaps(out, goal)
+            return out
         try:
             from canonical.runtime import empirical_cli_probe_v1 as emp
             exe_guess = ""
@@ -138,11 +150,7 @@ def acquire(probe: Mapping[str, Any], goal: str, *,
                 exe_guess = str(e.get("executable") or "")
                 if exe_guess:
                     break
-            observed = emp.probe(
-                exe_guess, goal,
-                suffix=(_requested_suffix(goal)
-                        or ((contract or {}).get("requested_suffix") or ".out")),
-            )
+            observed = emp.probe(exe_guess, goal, suffix=want_suffix)
         except Exception:
             observed = None
         if observed is None or observed.get("status") != emp.PASS:
@@ -313,6 +321,25 @@ def to_registry_entry(acquired: Mapping[str, Any], capability_id: str) -> dict[s
     }
 
 
+def _dump_like(original: str, doc: Mapping[str, Any]) -> str:
+    """Reserialize in the file's own style, so registering does not reformat it.
+
+    Writing json.dumps(indent=1, sort_keys=True) into a registry that is kept at
+    indent=2 rewrites every line of the source of truth to add one capability:
+    5,666 insertions and 5,641 deletions for a single entry, which makes the
+    change unreviewable and buries anything else that happened.
+    """
+    for kwargs in ({"indent": 2}, {"indent": 2, "sort_keys": True},
+                   {"indent": 1, "sort_keys": True}, {"indent": 4}):
+        try:
+            out = json.dumps(doc, **kwargs)
+        except (TypeError, ValueError):
+            continue
+        if out == original or out + "\n" == original:
+            return out
+    return json.dumps(doc, indent=2)
+
+
 def register(acquired: Mapping[str, Any], capability_id: str, *,
              registry_path: str | None = None,
              overwrite: bool = False) -> dict[str, Any]:
@@ -337,7 +364,8 @@ def register(acquired: Mapping[str, Any], capability_id: str, *,
                 "reason": "NOT_VERIFIED_ONLY_VERIFIED_ACQUISITIONS_ARE_REGISTERED"}
 
     try:
-        doc = json.loads(path.read_text(encoding="utf-8"))
+        original = path.read_text(encoding="utf-8")
+        doc = json.loads(original)
     except (OSError, ValueError) as exc:
         return {"registered": False, "reason": "REGISTRY_UNREADABLE:" + type(exc).__name__}
 
@@ -352,7 +380,7 @@ def register(acquired: Mapping[str, Any], capability_id: str, *,
     caps[capability_id] = entry
     # write atomically: a half-written registry is worse than an unchanged one
     tmp = path.with_suffix(path.suffix + ".tmp")
-    tmp.write_text(json.dumps(doc, indent=1, sort_keys=True), encoding="utf-8")
+    tmp.write_text(_dump_like(original, doc), encoding="utf-8")
     tmp.replace(path)
     return {"registered": True, "capability_id": capability_id,
             "count": len(caps)}

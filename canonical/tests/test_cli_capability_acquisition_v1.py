@@ -450,3 +450,39 @@ class NoDocumentationTests(IsolatedStores, unittest.TestCase):
         """)
         r = acq.acquire(self.bin.probe_for(exe), "encode text into out.png")
         self.assertEqual(r["route"], "help_text")
+
+
+class NoOutputFormatTests(IsolatedStores, unittest.TestCase):
+    """A goal that never says what it wants cannot be verified against anything."""
+
+    def setUp(self) -> None:
+        self.tmp = tempfile.mkdtemp(prefix="brain-cli-nofmt-")
+        self.bin = _BinaryFactory(self.tmp)
+        self._isolate()
+
+    def tearDown(self) -> None:
+        self._unisolate()
+        import shutil
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def test_a_goal_naming_no_output_is_refused(self):
+        """Otherwise any program that prints anything counts as learned --
+        ls would be acquired as a capability."""
+        probe_doc = {"executables": [{"executable": "ls",
+                                      "help_attempts": [{"text": ""}]}]}
+        r = acq.acquire(probe_doc, "do something")
+        self.assertEqual(r["status"], acq.NO_CONTRACT)
+        self.assertIn("NO_OUTPUT_FORMAT", r["reason"])
+
+    def test_a_goal_naming_an_output_is_still_learned(self):
+        exe = self.bin.make("quiet", """
+            import sys
+            a = sys.argv[1:]
+            for i, t in enumerate(a):
+                if t == "-o":
+                    open(a[i+1], "wb").write(bytes.fromhex("89504e470d0a1a0a") + b"ok")
+        """)
+        r = acq.acquire({"executables": [{"executable": exe,
+                                          "help_attempts": [{"text": ""}]}]},
+                        "encode text into out.png")
+        self.assertEqual(r["status"], acq.PASS)

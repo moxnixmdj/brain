@@ -886,3 +886,98 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         result["promised_artifact_errors"] = missing
     result["elapsed_ns"] = perf_counter_ns() - started
     return result
+
+
+# ------------------------------------------------------------------ learn on failure
+
+_LEARNABLE_STATUSES = frozenset({
+    "FAIL__RAW_GOAL_COMPILATION_GAP",
+})
+
+
+def _named_executable(goal: str) -> str:
+    """A program the goal actually names, that exists on this machine.
+
+    Only this is acquirable by running it. Inventing an executable that is not
+    there would be guessing, and the machine does not guess -- it checks.
+    """
+    import shutil
+    from pathlib import Path
+    for tok in str(goal or "").replace(",", " ").replace(";", " ").split():
+        t = tok.strip(".,()[]{}\"'")
+        if len(t) < 2 or "/" in t:
+            continue
+        if Path(t).is_file() or shutil.which(t):
+            return t
+    return ""
+
+
+def solve_or_learn(request: Mapping[str, Any], *, learn: bool = True,
+                   registry_path: str | None = None) -> dict[str, Any]:
+    """Try it; if the machine cannot, let that be the signal to learn how.
+
+    solve() answers "can I do this". When the answer is no, the interesting
+    question is what happens next. A strict program reports the failure and
+    stops, and will report the same failure forever. A creature treats
+    "I cannot" as the most precise information it has about what it lacks:
+
+      1. it records the gap, so it now KNOWS it has a hole here -- and the
+         ledger ranks that hole against every other thing it does not know;
+      2. if the goal names a program that exists, it learns to drive that
+         program (by reading its help, or failing that by trying it);
+      3. if that produced something verified, it registers it and RETRIES.
+
+    solve() itself is untouched, so the measured path cannot move.
+    """
+    result = solve(request)
+    if not learn:
+        return result
+    if str(result.get("status") or "") not in _LEARNABLE_STATUSES:
+        return result
+
+    goal = str((request or {}).get("goal") or "").strip()
+    learned: dict[str, Any] = {"attempted": False, "gap_recorded": False}
+
+    try:
+        from canonical.runtime import ignorance_ledger_v1 as led
+        gap_id = led.note(goal or "unmatched goal",
+                          why="raw goal compilation gap", cost=1.0)
+        learned["gap_recorded"] = True
+        learned["gap_id"] = gap_id
+        learned["what_to_learn_next"] = [g["what"] for g in led.rank(limit=3)]
+    except Exception:
+        pass
+
+    exe = _named_executable(goal)
+    if exe:
+        learned["attempted"] = True
+        learned["executable"] = exe
+        try:
+            from canonical.runtime import cli_capability_acquisition_v1 as acq
+            import subprocess, tempfile, json as _json
+            with tempfile.TemporaryDirectory(prefix="brain-learn-") as td:
+                out = subprocess.run([exe, "--help"], capture_output=True,
+                                     timeout=30, cwd=td)
+                text = (out.stdout + out.stderr).decode("utf-8", "replace")
+            probe_doc = {"executables": [{"executable": exe,
+                                          "help_attempts": [{"text": text}]}]}
+            acquired = acq.acquire(probe_doc, goal)
+            learned["acquisition_status"] = acquired.get("status")
+            if acquired.get("verified"):
+                cid = "acquired." + exe.replace(".", "_")
+                reg = acq.register(acquired, cid,
+                                  registry_path=registry_path)
+                learned["registered"] = reg.get("registered") is True
+                learned["capability_id"] = cid
+                if learned["registered"]:
+                    # it can do something now that it could not before
+                    retry = solve(request)
+                    retry["learning"] = learned
+                    retry["learned_this_turn"] = True
+                    return retry
+        except Exception as exc:
+            learned["error"] = type(exc).__name__ + ":" + str(exc)[:200]
+
+    result["learning"] = learned
+    result["learned_this_turn"] = False
+    return result

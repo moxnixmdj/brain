@@ -47,8 +47,14 @@ PATTERNS: tuple[tuple[str, str], ...] = (
     ("-f", "positional"),
     ("--file", "positional"),
     (">", "positional"),          # shell redirection: no output flag at all
+    # reads stdin, writes stdout -- the unix filter convention. base64, sort and
+    # friends work this way and were unlearnable until this pair existed.
+    (">", "stdin"),
     ("-o", "stdin"),
     ("--output", "stdin"),
+    ("--outfile", "stdin"),
+    ("-o", "-i"),
+    ("--output", "--input"),
     ("-o", "-d"),
     ("--output", "--data"),
 )
@@ -117,9 +123,18 @@ def _invoke(exe: str, flag: str, mode: str, out_path: pathlib.Path,
 
     try:
         if flag == ">":
+            # redirection captures stdout, but the input mode still has to be
+            # honoured -- a filter like base64 reads stdin, and piping nothing
+            # into it produces an empty file, which looks identical to a
+            # program that does nothing at all.
             with open(out_path, "wb") as fh:
-                proc = subprocess.run(argv, stdout=fh, stderr=subprocess.PIPE,
-                                      timeout=timeout, cwd=str(workdir))
+                if mode == "stdin":
+                    proc = subprocess.run(argv, input=sample.encode("utf-8"),
+                                          stdout=fh, stderr=subprocess.PIPE,
+                                          timeout=timeout, cwd=str(workdir))
+                else:
+                    proc = subprocess.run(argv, stdout=fh, stderr=subprocess.PIPE,
+                                          timeout=timeout, cwd=str(workdir))
         elif mode == "stdin":
             proc = subprocess.run(argv, input=sample, text=True,
                                   capture_output=True, timeout=timeout,
