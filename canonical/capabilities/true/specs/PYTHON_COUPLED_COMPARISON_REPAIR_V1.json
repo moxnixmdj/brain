@@ -1,0 +1,57 @@
+{
+  "schema": "TRUE_CAPABILITY_SPEC_V1",
+  "capability_id": "PYTHON_COUPLED_COMPARISON_REPAIR_V1",
+  "claim": "Given a fresh disposable two-module Python repository whose two imported pure one-argument boundary predicates use strict comparisons where the declared behavior is inclusive, and a visible test whose first failed assertion requires both boundary edits, the bounded model-free coupled repair loop returns exactly one candidate patch per module that changes the two comparisons, passes two verification replays, restores every source byte after search, and satisfies the independent inclusive-boundary behavior on unseen values.",
+  "input_class": "Declarative, generated two-file Python repositories: one module defines a function value < left_threshold although the intended predicate is value <= left_threshold; the other defines value > right_threshold although the intended predicate is value >= right_threshold. Thresholds range from -80 to 80; module/function names and import order vary. The visible test makes one conjunction at both thresholds fail, so repairing either source alone does not clear the failure.",
+  "scope_limits": [
+    "NO arbitrary Python repair, multi-hunk semantic synthesis, or hidden-requirement guarantee",
+    "NO more than two source modules, one simple comparison per module, or any source imports",
+    "NO candidate promotion, source write, merge, benchmark, FrontierCode, or terminal-credit authority",
+    "NO claim that the coupled search is complete beyond one localized candidate mutation per file and one pair candidate",
+    "NO non-Python, persistent-repository, network, package-installation, model, or external-capability-provider support"
+  ],
+  "solver": {
+    "module": "canonical/runtime/python_coupled_comparison_repair_true_adapter_v1.py",
+    "entry": "solve",
+    "kernels": [
+      "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py"
+    ],
+    "note": "The adapter creates only a disposable source tree and invokes the existing bounded coupled repair kernel. The oracle independently reconstructs source and applies returned diffs; it imports neither adapter nor kernel."
+  },
+  "generator": {
+    "module": "canonical/capabilities/true/generators/python_coupled_comparison_repair_gen_v1.py",
+    "entry": "generate"
+  },
+  "oracles": {
+    "module": "canonical/capabilities/true/oracles/python_coupled_comparison_repair_oracles_v1.py",
+    "entry": "oracles",
+    "declared": [
+      {
+        "id": "ANALYTIC_CLOSED_FORM",
+        "class": "ANALYTIC_CLOSED_FORM",
+        "lineage": "Independent reconstruction of both source files, strict unified-diff application, and direct inclusive-boundary evaluation; no adapter or repair-kernel import."
+      },
+      {
+        "id": "BOUNDARY_METAMORPHIC",
+        "class": "METAMORPHIC",
+        "lineage": "Independent downward/upward closure relations over repaired predicate outputs."
+      },
+      {
+        "id": "PATCH_AND_PROVENANCE_PROPERTIES",
+        "class": "PROPERTY",
+        "lineage": "Independent patch-shape, replay, restoration, dependency, and zero-spend checks."
+      }
+    ]
+  },
+  "independent_oracle_ids": [
+    "ANALYTIC_CLOSED_FORM",
+    "BOUNDARY_METAMORPHIC",
+    "PATCH_AND_PROVENANCE_PROPERTIES"
+  ],
+  "published_canaries": [],
+  "min_instances": 500,
+  "pass_threshold": 1.0,
+  "falsification_condition": "Any fresh instance for which the solver cannot produce the two patch candidate, either returned diff cannot be independently applied to the generated original source, either patched function differs from its inclusive-boundary formula on the held-out neighborhood, the boundary monotonicity relation fails, source restoration/replay/dependency envelope is violated, or a deliberately broken repair-kernel copy is not rejected by this harness.",
+  "model_dependency_count": 0,
+  "history": "First true-capability measurement for the existing model-free bounded coupled Python repair kernel. The live solver measurement identifies Python repair loops as stdlib-only and previously unmeasured because no fresh-bug generator existed."
+}
