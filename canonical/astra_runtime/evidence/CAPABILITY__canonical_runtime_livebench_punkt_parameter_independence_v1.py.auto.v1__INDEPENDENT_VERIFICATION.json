@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_punkt_parameter_independence_v1.py.auto.v1",
- "elapsed_ms": 0.811,
+ "elapsed_ms": 0.866,
  "independent_run_reference": {
-  "github_run_id": 39226675730,
+  "github_run_id": 39227040720,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "c009e428-16b4-4e79-97c7-5c35385c823a",
+   "jti": "22e29639-90c2-4ba2-b4ae-1c7c943c02c7",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39226675730",
+   "run_id": "39227040720",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
