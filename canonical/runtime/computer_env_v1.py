@@ -247,7 +247,105 @@ def output_flags(prog: str, limit: int = 6) -> list[str]:
         return []
 
 
-def invocation_shapes(prog: str, src: str, target: str) -> list[list[str]]:
+_FLAG_LINE = re.compile(r"^\s*(-\w,\s+--[\w-]+|--[\w-]+|-\w)\s*(.*)$")
+_STOP = {"the", "and", "for", "with", "from", "print", "each", "file", "files",
+         "input", "output", "use", "when", "only", "not", "does", "instead",
+         "that", "this", "than", "them", "then", "into", "also", "same"}
+
+
+def flag_descriptions(prog: str, limit: int = 80) -> list[tuple[str, str]]:
+    """Every flag the program documents, next to what it says the flag does.
+
+    The program is the only authority here. Nothing about what -l or --lines
+    means was written down by us; wc says '-l, --lines  print the newline
+    counts' and that is where the knowledge comes from.
+    """
+    out: list[tuple[str, str]] = []
+    seen: set[str] = set()
+    for line in help_text(prog).splitlines():
+        m = _FLAG_LINE.match(line)
+        if not m:
+            continue
+        desc = (m.group(2) or "").strip()
+        if len(desc) < 4:
+            continue
+        for raw in re.split(r",\s*", m.group(1)):
+            raw = raw.strip()
+            if not raw or not raw.startswith("-"):
+                continue
+            if raw in seen:
+                continue
+            seen.add(raw)
+            out.append((raw, desc))
+    return out[:limit]
+
+
+def _stem(word: str) -> set[str]:
+    """Crude but honest: 'lines'/'line'/'newline' must count as the same
+    idea, or the goal's plain words never meet the manual's words."""
+    w = word.lower()
+    out = {w}
+    if w.endswith("s") and len(w) > 3:
+        out.add(w[:-1])
+    else:
+        out.add(w + "s")
+    if w.endswith("es") and len(w) > 4:
+        out.add(w[:-2])
+    if w.endswith("ing") and len(w) > 5:
+        out.add(w[:-3])
+    return out
+
+
+def flags_for_goal(prog: str, goal: str, limit: int = 8) -> list[str]:
+    """Flags whose documented meaning the goal actually mentions.
+
+    'count the lines' picks wc's -l because wc's own help describes -l as
+    'print the newline counts'. The machine is reading the manual and looking
+    for the words it was given -- not reciting a table of what -l does.
+    """
+    text = str(goal or "")
+    # the filenames in the goal are noise: 'count the lines in notes.txt'
+    # must not make every mention of 'notes' look like a match
+    noise: set[str] = set()
+    for name in _FILENAME.findall(text):
+        for tok in re.findall(r"[a-z0-9]+", name.lower()):
+            noise |= _stem(tok)
+    # the program's own name is not a clue about which flag to use:
+    # 'sort in reverse' must not make every flag whose text says 'sort' win
+    noise |= _stem(prog)
+    words: set[str] = set()
+    for tok in re.findall(r"[a-z0-9]+", text.lower()):
+        if len(tok) > 2 and tok not in _STOP and tok not in noise:
+            words |= _stem(tok)
+    if not words:
+        return []
+
+    def score(desc: str) -> int:
+        d: set[str] = set()
+        for tok in re.findall(r"[a-z0-9]+", desc.lower()):
+            d |= _stem(tok)
+        exact = len(words & d)
+        # 'line' lives inside 'newline'. Counting both is what separates
+        # --lines from --bytes: every wc flag says 'counts', so the exact
+        # match alone leaves all of them tied.
+        sub = 0
+        for w in words:
+            if len(w) < 4:
+                continue
+            for t in d:
+                if len(t) >= 4 and (w in t or t in w):
+                    sub += 1
+                    break
+        return 2 * exact + sub
+
+    scored = [(score(desc), flag) for flag, desc in flag_descriptions(prog)]
+    scored = [(n, f) for n, f in scored if n > 0]
+    scored.sort(key=lambda x: (-x[0], x[1]))
+    return [f for _, f in scored[:limit]]
+
+
+def invocation_shapes(prog: str, src: str, target: str,
+                      goal: str | None = None) -> list[list[str]]:
     """How to try calling this program, in the order worth trying.
 
     Six hand-written shapes were a strict program: it decided in advance how
@@ -267,12 +365,20 @@ def invocation_shapes(prog: str, src: str, target: str) -> list[list[str]]:
         for shape in ([prog, flag, target, src], [prog, flag, src]):
             if shape not in shapes:
                 shapes.append(shape)
+    # flags the goal itself asked for, by meaning. 'count the lines' needs
+    # wc -l, and no positional shape will ever produce that.
+    if goal:
+        for flag in flags_for_goal(prog, goal):
+            for shape in ([prog, flag, src], [prog, flag, target, src]):
+                if shape not in shapes:
+                    shapes.append(shape)
     return shapes
 
 
 def program_actions(env: ComputerEnv,
                     programs: Sequence[str] | None = None,
-                    target: str = "out.bin") -> list[tuple[str, Callable[[ComputerEnv], bool]]]:
+                    target: str = "out.bin",
+                    goal: str | None = None) -> list[tuple[str, Callable[[ComputerEnv], bool]]]:
     """One action per program on this machine: run it and keep what it wrote.
 
     The learner is not told which program compresses. It is given all of them
@@ -296,7 +402,7 @@ def program_actions(env: ComputerEnv,
             # printing chatter -- 'zip -c input.txt' succeeds and prints
             # "adding: input.txt", which written to out.zip makes a file
             # called .zip that is not one.
-            for argv in invocation_shapes(prog, src, target):
+            for argv in invocation_shapes(prog, src, target, goal):
                 # Every form starts from the seed. Without this the first
                 # form consumes the input -- 'gzip out.gz input.txt'
                 # compresses input.txt into input.txt.gz and deletes it --
@@ -733,7 +839,8 @@ def discover(gap: str, budget: int = 120, seed: int = 11) -> dict[str, Any]:
         env = None
         try:
             env = ComputerEnv()
-            env.register(program_actions(env, programs=progs, target=target))
+            env.register(program_actions(env, programs=progs, target=target,
+                                         goal=gap))
             usable = [a for a in env.action_names if a not in banned]
             if not usable:
                 break

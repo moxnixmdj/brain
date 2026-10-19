@@ -405,3 +405,50 @@ class AskingTests(EnvCase):
         got = cenv._single_step(["gzip"], ".gz", "out.gz")
         self.assertIsNotNone(got, "gzip reads its input but was rejected")
         self.assertEqual(got[0], ["run_gzip"])
+
+
+# --------------------------------------------------------------------------- #
+# reading the manual to find which flag the goal is asking for
+# --------------------------------------------------------------------------- #
+class ManualTests(EnvCase):
+    """wc documents -l as 'print the newline counts'. That sentence is where
+    the knowledge comes from -- not from us."""
+
+    def test_the_flag_is_chosen_by_what_it_means(self):
+        self.assertIn("--lines",
+                      cenv.flags_for_goal("wc", "count the lines in notes.txt"))
+
+    def test_a_different_question_gets_a_different_flag(self):
+        self.assertIn("-w", cenv.flags_for_goal("wc", "count the words"))
+        self.assertIn("-c", cenv.flags_for_goal("wc", "how many bytes"))
+
+    def test_the_program_name_is_not_mistaken_for_a_clue(self):
+        """'sort in reverse' must not pick a flag merely because its text
+        mentions sorting -- every flag of sort would then look right."""
+        self.assertEqual(cenv.flags_for_goal("sort", "sort in reverse")[0],
+                         "--reverse")
+
+    def test_filenames_in_the_goal_are_not_clues_either(self):
+        self.assertNotIn("--files0-from",
+                         cenv.flags_for_goal("wc", "count the lines in notes.txt")
+                         [:2])
+
+    def test_goal_words_actually_reach_the_invocations(self):
+        shapes = cenv.invocation_shapes("wc", "i.txt", "o.txt",
+                                        goal="count the lines")
+        self.assertTrue(any(s[:3] == ["wc", "--lines", "i.txt"] for s in shapes),
+                        "the flag the goal asked for never got into a command")
+
+    def test_the_chosen_flag_really_does_what_its_documentation_says(self):
+        """Not a claim about scoring: run it and count with our own hands."""
+        with tempfile.TemporaryDirectory() as d:
+            src = pathlib.Path(d) / "notes.txt"
+            src.write_bytes(b"alpha\nbeta\ngamma\ndelta\n")
+            flag = cenv.flags_for_goal("wc", "count the lines in notes.txt")[0]
+            proc = subprocess.run(["wc", flag, "notes.txt"], cwd=d,
+                                  capture_output=True, timeout=30)
+            self.assertEqual(proc.returncode, 0, proc.stderr[:200])
+            self.assertEqual(int(proc.stdout.split()[0]), 4)
+
+    def test_a_goal_that_mentions_nothing_documented_chooses_nothing(self):
+        self.assertEqual(cenv.flags_for_goal("wc", "zzzqqq xxxwww"), [])
