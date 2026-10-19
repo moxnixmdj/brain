@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/verify_terminal_scheduling_v11_candidate_v1.py.auto.v1",
- "elapsed_ms": 32.561,
+ "elapsed_ms": 31.024,
  "independent_run_reference": {
-  "github_run_id": 39248245753,
+  "github_run_id": 39248781413,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "42715951-1c1c-4e72-b0d1-6fa88c3a7b6d",
+   "jti": "064a0317-e4de-4901-a36b-333966563033",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39248245753",
+   "run_id": "39248781413",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
