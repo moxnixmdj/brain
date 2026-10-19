@@ -87,6 +87,21 @@ def _uniq(text: str) -> str:
     return as_text(out)
 
 
+def _dedupe(text: str) -> str:
+    """First occurrence wins; a line seen before is dropped, order preserved.
+
+    This is the *other* meaning of "unique": ``uniq`` only removes adjacent
+    repeats and ``sort -u`` reorders, so neither is an implementation of it.
+    """
+    seen: set[str] = set()
+    out: list[str] = []
+    for line in as_lines(text):
+        if line not in seen:
+            seen.add(line)
+            out.append(line)
+    return as_text(out)
+
+
 def _drop_empty(text: str) -> str:
     return as_text([line for line in as_lines(text) if line != ""])
 
@@ -186,6 +201,7 @@ STAGES: tuple[Stage, ...] = (
     Stage("sort -n", LINES, LINES, _sort_numeric),
     Stage("sort -u", LINES, LINES, _sort_unique),
     Stage("uniq", LINES, LINES, _uniq),
+    Stage("awk '!seen[$0]++'", LINES, LINES, _dedupe),
     Stage("grep -v '^$'", LINES, LINES, _drop_empty),
     Stage("tr -s ' ' '\\n'", TEXT, LINES, _split_words),
     Stage("tr '[:upper:]' '[:lower:]'", TEXT, TEXT, _lower),

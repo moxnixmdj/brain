@@ -12,7 +12,8 @@ receipt, not a terminal claim, and not a capability grant.
 | Living agent | `canonical/runtime/living_agent_v1.py` | Real POSIX computer surface, one-shot skill chunking, canary-based drift detection and repair, word learning, impasse tracking, self-directed practice, consolidating memory, snapshot/restore. |
 | Shell synthesis | `canonical/runtime/shell_synthesis_v1.py` | Learns a stdin→stdout pipeline from (input, expected output) examples: typed beam search over 20 real stages, exact interpreter ordering, real-shell verification. |
 | Benchmark | `canonical/runtime/living_agent_benchmark_v1.py` | Twelve spreadsheet transforms with independently written oracles, plus a projection of the repository's real file tree. |
-| Acceptance | `tests/test_living_agent_v1.py` | 75 tests / 159 subtests. Real processes, real files, exact byte equality. No mocks. |
+| Acceptance | `tests/test_living_agent_v1.py` | 88 tests / 159 subtests. Real processes, real files, exact byte equality. No mocks. |
+| Discovery | `canonical/runtime/living_discovery_v1.py` | Reads what this machine says it can do (`tool --help`, the tool's own definition), turns a goal sentence into an exact expected output, and proves a real command against it before admitting it. |
 | Growth measurement | `canonical/runtime/living_agent_growth_v1.py` | Acquires four real skills at runtime and replays them on three untouched real directories. |
 
 ## Measured results
@@ -118,6 +119,7 @@ and verifies the produced text against it:
 | lowercase the text | lower | `tr '[:upper:]' '[:lower:]'` | 17 ms |
 | list the unique words | unique + sorted + word conservation | `tr -s ' ' '\n' \| sort -u` | 14 ms |
 | count distinct words | count + unique + words | `tr -s ' ' '\n' \| sort -u \| grep -v '^$' \| wc -l` | 206 ms |
+| remove the duplicate lines | unique, order preserved | `awk '!seen[$0]++'` | 16 ms |
 
 The last row is a four-stage composition on a real 19 KB policy file. A count
 target resembles nothing, so line-shaped partial results would normally be
@@ -127,11 +129,84 @@ useful branch alive. That is a search heuristic, not a task rule: the same
 scores are used for every goal.
 
 A goal with no checkable property (`make the file nicer`) fails closed with
-`GOAL_NOT_VERIFIABLE`; a checkable but unsupported combination (order-preserving
-deduplication) fails closed with `GOAL_PROPERTY_COMBINATION_UNSUPPORTED`. The
-property is re-checked on every later solve, so sabotaging the mechanism while
-keeping a valid-looking postcondition yields `FAIL_CLOSED` rather than a silent
-wrong answer.
+`GOAL_NOT_VERIFIABLE`; a checkable combination with no exact mechanism — "keep
+the *last* occurrence of each duplicate", which shares the word "duplicate" but
+names a different function — fails closed with
+`GOAL_PROPERTY_COMBINATION_UNSUPPORTED`. The property is re-checked on every
+later solve, so sabotaging the mechanism while keeping a valid-looking
+postcondition yields `FAIL_CLOSED` rather than a silent wrong answer.
+
+Every candidate is also compared to the deterministic target **byte for byte**
+before it is admitted. The interpreter only nominates; a pipeline that merely
+looks right is rejected. That check earned its place immediately: a word-count
+pipeline whose reference output matched the target produced 1181 instead of 1182
+on the real 19 KB file, and was replaced by one that reproduces the exact bytes.
+
+## Extending the computer's own vocabulary
+
+A creature that may only use binaries someone pre-approved can only do the
+approved things.  `discover()` grows the vocabulary at runtime with no model,
+no network and no table of commands:
+
+1. **The goal is read as a specification.**  `readings()` derives the exact
+   expected bytes from the goal's own words: the verb, the unit it applies to,
+   and whether it applies *inside* each unit ("reverse each line" reverses the
+   characters of every line) or to the units themselves ("reverse the lines"
+   reverses the order of the lines).  A unit-less goal such as "reverse the
+   file" keeps both readings alive.
+2. **The machine describes itself.**  Every executable answers `--help` with a
+   usage line and a one-sentence definition ("Reverse lines characterwise").
+   That text is the machine's own account of its capabilities, written by the
+   tool's authors.
+3. **Four tiers, cheapest first.**  a word the machine already uses as a name
+   (`rev` for "reverse", 25 ms); a differential experiment over the tools whose
+   documentation mentions the goal's words (55 ms warm); the ranked
+   documentation list; and finally every tool on the machine tried on a small
+   probe (2.3 s, last resort).  The first tier that produces the exact bytes
+   wins, and the winner is remembered.
+4. **Nothing is believed on a keyword.**  A candidate is admitted only when the
+   real shell reproduces the expected bytes on the file, twice, *and* on a
+   probe the creature designs against the reading.  A tool whose documentation
+   lies is rejected and the rejection is logged; a test builds exactly that
+   lying tool and checks that it is thrown out.
+5. **Ambiguity is refused, not guessed.**  If two readings are both satisfiable
+   ("reverse the file" is satisfied by both `rev` and `tac`), the creature says
+   `GOAL_AMBIGUOUS` and names both commands instead of silently picking one.
+   An unknown verb is an impasse on the record and admits nothing.
+
+Measured on this machine:
+
+```
+reverse each line   rev notes.txt   25 ms   found by name, verified twice + probe
+reverse the lines   tac notes.txt   55 ms   rev tried first and rejected; differential
+same goal again     from memory     12 ms   no documentation read, no search
+ambiguous goal      refused         --      GOAL_AMBIGUOUS: rev | tac, impasse recorded
+unknown verb        refused         --      GOAL_NOT_VERIFIABLE, nothing admitted
+```
+
+The documentation index is cached per machine and keyed by the parser that
+produced it, so the first contact with a new machine costs ~2.4 s once and
+every later discovery is tens of milliseconds.  State-changing and
+network-capable binaries are never candidates: extending what the creature can
+*read* never extends what it may *do*.
+
+### Trying a stranger without paying for it
+
+Probing a candidate means executing code nobody vetted. Two failures were found
+by watching the tree rather than the code:
+
+- A real sweep left **seventeen empty `gz*` files** in the repository root: an
+  installed tool writes beside its input. Every trial now runs in a private
+  throwaway directory holding its own copy, with `HOME` moved there too, so a
+  candidate can create, rewrite or delete anything it likes and the creature
+  still has its files.
+- A tool that had answered *correctly* was being recorded as failed with code
+  `-9`. The reader killed the child as soon as the pipe drained, racing its exit.
+  EOF now means "wait for it", and only a child that outlives its budget is
+  killed. Both bugs were invisible in aggregate counts and are now covered by
+  real tests (`a_stranger_tool_is_probed_in_a_throwaway_directory`,
+  `a_tool_that_closes_then_exits_is_not_killed`,
+  `an_endless_writer_is_stopped_not_read`).
 
 ## How the learner spends its questions
 
@@ -196,10 +271,18 @@ rather than die mid-loop.
 
 ## Honest limits
 
-- The agent's language layer is a learned word→skill binding, not general
-  natural-language understanding. A goal outside the learned vocabulary is an
-  impasse that currently requires a demonstration (or a taught word), not a
-  web search.
+- The agent's language layer is a learned word→skill binding plus the verb/unit
+  readings above, not general natural-language understanding.  A goal outside
+  those readings ("number the lines" needs `nl`'s exact layout, which is a
+  convention this creature cannot deduce) is an impasse on the record, not a
+  guess.
+- Discovery admits *bare* invocations (`tac FILE`).  A capability that needs a
+  flag or a program argument -- field- and width-parameterised tools -- is not
+  reachable this way even when the tool exists: the search would have to invent
+  arguments, and inventing is not verifying.
+- "Unique" has two readings and only one of them is a function of the data
+  alone: keeping the first occurrence (implemented) and keeping the last
+  (refused, recorded).  Sharing a word is not sharing a meaning.
 - The computer surface admits a fixed binary vocabulary inside one sandbox
   root. It is a real shell, but not a general GUI agent; GUI work remains in
   the existing OSWorld adapters and is not exercised here.

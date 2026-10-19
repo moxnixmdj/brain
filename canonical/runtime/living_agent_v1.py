@@ -35,11 +35,13 @@ import os
 import re
 import shlex
 import subprocess
+import tempfile
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
+from canonical.runtime import living_discovery_v1 as discovery
 from canonical.runtime import shell_synthesis_v1 as synthesis
 from canonical.runtime.living_core_v1 import (
     SCHEMA as CORE_SCHEMA,
@@ -107,6 +109,62 @@ class Computer:
         if bin_dir is not None:
             self.bin_dir = self.path(str(bin_dir))
             self.bin_dir.mkdir(parents=True, exist_ok=True)
+        # The starting vocabulary is a floor, not a ceiling: ``admit`` extends
+        # it with a real binary found on this machine, recording the evidence.
+        self._admitted: set[str] = set(_ALLOWED_BINARIES)
+        self.admissions: dict[str, dict[str, Any]] = {}
+
+    def search_dirs(self) -> list[str]:
+        """The directories this computer will look in, nearest first."""
+        dirs = [str(self.bin_dir)] if self.bin_dir is not None else []
+        return dirs + ["/usr/local/bin", "/usr/bin", "/bin"]
+
+    def admit(self, binary: str, *, evidence: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Admit one real, read-only binary discovered on this machine.
+
+        Admission is an explicit, auditable act: the binary must exist in a
+        directory this computer searches, must not be a state-changing or
+        network tool, and the evidence that justified it (its own help text and
+        the exact result it reproduced) is stored next to it.
+        """
+        name = str(binary)
+        if name in self.admissions:
+            return dict(self.admissions[name])
+        if name in discovery.DENY:
+            raise AgentError("BINARY_REFUSED_STATEFUL:" + name)
+        if not re.fullmatch(r"[a-z][a-z0-9_-]{1,24}", name):
+            raise AgentError("BINARY_NAME_INVALID:" + name)
+        located = None
+        for directory in self.search_dirs():
+            candidate = Path(directory) / name
+            try:
+                if candidate.is_file() and candidate.stat().st_mode & 0o111:
+                    located = candidate
+                    break
+            except OSError:
+                continue
+        if located is None:
+            raise AgentError("BINARY_NOT_ON_THIS_MACHINE:" + name)
+        digest = hashlib.sha256(located.read_bytes()).hexdigest()
+        record = {
+            "binary": name,
+            "path": str(located),
+            "sha256": digest,
+            "evidence": dict(evidence or {}),
+            "admitted_at": time.time(),
+        }
+        self._admitted.add(name)
+        self.admissions[name] = record
+        return dict(record)
+
+    def revoke(self, binary: str) -> None:
+        """Withdraw an admission that did not survive verification."""
+        self.admissions.pop(str(binary), None)
+        if str(binary) not in _ALLOWED_BINARIES:
+            self._admitted.discard(str(binary))
+
+    def admitted(self) -> tuple[str, ...]:
+        return tuple(sorted(self._admitted))
 
     # -- files ------------------------------------------------------------
     def path(self, relative: str | Path) -> Path:
@@ -145,7 +203,7 @@ class Computer:
             if index >= len(words):
                 continue
             binary = words[index]
-            if binary not in _ALLOWED_BINARIES:
+            if binary not in self._admitted:
                 raise AgentError("BINARY_NOT_ADMITTED:" + binary)
         for operator in (">", "<"):
             if operator in command:
@@ -272,7 +330,7 @@ class ShellSkill:
 
 _SORT_WORDS = {"sort", "sorted", "order", "ordered", "alphabetical", "alphabetically"}
 _UNIQUE_WORDS = {"unique", "distinct", "deduplicate", "dedupe", "dedup", "duplicate", "duplicates"}
-_COUNT_WORDS = {"count", "number", "many", "how", "tally", "total"}
+_COUNT_WORDS = {"count", "tally", "total"}
 _LOWER_WORDS = {"lower", "lowercase"}
 _UPPER_WORDS = {"upper", "uppercase"}
 _WORD_WORDS = {"word", "words", "vocabulary", "tokens"}
@@ -286,13 +344,18 @@ def _properties_from_goal(goal: str) -> list[str]:
     instead of inventing an interpretation.
     """
     tokens = _tokens(goal)
+    words = re.findall(r"[a-z]+", goal.lower())
+    pairs = set(zip(words, words[1:]))
     properties: list[str] = []
+    # "the number of lines" is a count; "number the lines" asks for line
+    # numbers.  Sharing the word "number" between them is not a reason to
+    # return a count for a request that never asked for one.
+    if tokens & _COUNT_WORDS or ("how", "many") in pairs or ("number", "of") in pairs:
+        properties.append("count")
     if tokens & _SORT_WORDS:
         properties.append("sorted")
     if tokens & _UNIQUE_WORDS:
         properties.append("unique")
-    if tokens & _COUNT_WORDS:
-        properties.append("count")
     if tokens & _LOWER_WORDS:
         properties.append("lower")
     elif tokens & _UPPER_WORDS:
@@ -396,7 +459,10 @@ def _conserves(properties: Sequence[str], source: str, output: str) -> bool:
     return True
 
 
-def _target_for(properties: Sequence[str], text: str) -> str | None:
+_LAST_WORDS = {"last", "later", "final", "second", "third", "tail"}
+
+
+def _target_for(properties: Sequence[str], text: str, goal: str = "") -> str | None:
     """The unique result the stated properties determine, when there is one."""
     word_mode = "words" in properties
     if word_mode:
@@ -412,7 +478,19 @@ def _target_for(properties: Sequence[str], text: str) -> str | None:
     if "unique" in properties and "sorted" in properties:
         return "\n".join(sorted(set(lines))) + "\n"
     if "unique" in properties:
-        return None  # order-preserving dedupe is not in the stage vocabulary
+        # "the unique lines" means: keep the first of each repeated line, in
+        # the order the lines appear.  "the last occurrence" is a different
+        # goal that shares the word "duplicate"; assuming it would be a wrong
+        # answer to a right reading, so it is not assumed.
+        if _tokens(goal) & _LAST_WORDS:
+            return None
+        seen: set[str] = set()
+        kept: list[str] = []
+        for line in lines:
+            if line not in seen:
+                seen.add(line)
+                kept.append(line)
+        return "\n".join(kept) + "\n"
     if "sorted" in properties:
         return "\n".join(sorted(lines)) + "\n"
     if "lower" in properties:
@@ -446,6 +524,16 @@ class LivingAgent:
         self.practice_log: list[dict[str, Any]] = []
         self.policies: dict[str, DecisionList] = {}
         self.policy_evidence: dict[str, dict[str, list[dict[str, str]]]] = {}
+        # What the creature has learned about *this machine*: which real tools
+        # answer which readings of a goal, and the stage models it built from
+        # them.  None of this is a task table; every entry was verified by
+        # exact bytes before it was recorded.
+        self.capabilities: dict[str, dict[str, Any]] = {}
+        self._stages: dict[str, Any] = {}
+        self._vocabulary: discovery.MachineVocabulary | None = None
+        # An audit trail of what was tried and what survived: a rejected tool
+        # is evidence of a real experiment, not an absence of one.
+        self.discovery_log: list[dict[str, Any]] = []
 
     # -- learning ---------------------------------------------------------
     def learn_shell_skill(
@@ -597,13 +685,22 @@ class LivingAgent:
         """What the creature knows it does not know, oldest first."""
         return self._open_questions()
 
-    def _record_impasse(self, goal: str) -> None:
+    def _record_impasse(self, goal: str, detail: Mapping[str, Any] | None = None) -> None:
+        """Put a gap on the record, with whatever is known about its shape.
+
+        An impasse is not an error message: it is a memory.  It names the goal,
+        what was understood about it, and what was missing, so the same gap is
+        never re-derived from scratch and a single demonstration can close it.
+        """
         if goal in self._open_questions():
             return
+        payload: dict[str, Any] = {"outcome": "impasse", "goal": goal, "resolved": False}
+        if detail:
+            payload.update(dict(detail))
         self.memory.add(
             "episode",
             "do not know how to " + goal,
-            {"outcome": "impasse", "goal": goal, "resolved": False},
+            payload,
             surprise=1.0,
             tags=("impasse",),
         )
@@ -1011,12 +1108,34 @@ class LivingAgent:
             raise AgentError("GOAL_INPUT_EMPTY:" + path)
         properties = _properties_from_goal(goal)
         if not properties:
-            raise AgentError("GOAL_NOT_VERIFIABLE")
-        target = _target_for(properties, source)
+            # No checkable property is named, but the goal may still be exact:
+            # "reverse each line" determines every output byte.  Discovery
+            # reads the goal, finds a real tool that reproduces that reading,
+            # and admits it only after the shell agrees twice.
+            return self.discover(goal, path)
+        target = _target_for(properties, source, goal)
         if target is None:
+            # The goal *is* understood: its properties are checkable.  What is
+            # missing is an exact mechanism -- "keep only the unique lines"
+            # needs order-preserving deduplication, and no stage in the known
+            # grammar does that (`sort -u` reorders, `uniq` only removes
+            # adjacent repeats).  Answering with either would be wrong in a way
+            # the goal itself forbids, so the gap goes on the record instead.
+            self._record_impasse(
+                goal,
+                {
+                    "reason": "no_exact_mechanism",
+                    "properties": list(properties),
+                    "unit": "words" if "words" in properties else "lines",
+                },
+            )
             raise AgentError("GOAL_PROPERTY_COMBINATION_UNSUPPORTED")
+        stages = synthesis.instantiate([(source, target)]) + tuple(self._stages.values())
         candidates, stats = synthesis.search(
-            [(source, target)], max_length=max_length, time_budget_s=time_budget_s
+            [(source, target)],
+            max_length=max_length,
+            time_budget_s=time_budget_s,
+            stages=stages,
         )
         if not candidates:
             raise AgentError("NO_PIPELINE_WITHIN_BUDGET")
@@ -1026,6 +1145,15 @@ class LivingAgent:
             result = self.computer.run(template.replace("{path}", shlex.quote(path)))
             evaluated += 1
             if not result.ok:
+                continue
+            # The target is the exact bytes the goal determines.  A pipeline
+            # that merely *looks* right (an integer, or a sorted list) is not
+            # the answer: the modelling layer only nominates candidates, and
+            # the real shell has to reproduce the target byte for byte or the
+            # candidate is rejected like any other.  This check caught a
+            # word-count pipeline that was off by one on the real file while
+            # its interpreter said it matched.
+            if result.stdout != target:
                 continue
             if not _check_properties(properties, result.stdout):
                 continue
@@ -1096,6 +1224,360 @@ class LivingAgent:
             tags=("learn", "property"),
         )
         return skill
+
+    # -- extending the computer's own vocabulary ---------------------------
+    def _machine(self) -> discovery.MachineVocabulary:
+        """The machine's account of itself, cached across sessions.
+
+        The cache lives outside the sandbox root: it records what the *machine*
+        says about its tools, not what the creature has learned.  Learned
+        capabilities go in the snapshot; documentation is re-derivable.
+        """
+        if self._vocabulary is None:
+            digest = hashlib.sha256("|".join(self.computer.search_dirs()).encode()).hexdigest()[:12]
+            cache = Path(tempfile.gettempdir()) / f"brain-vocabulary-{digest}.json"
+            self._vocabulary = discovery.MachineVocabulary(
+                self.computer.search_dirs(), cache_path=cache
+            )
+        return self._vocabulary
+
+    @property
+    def vocabulary(self) -> discovery.MachineVocabulary:
+        """What this machine says it can do.  Read lazily, cached per machine."""
+        return self._machine()
+
+    @staticmethod
+    def _probe_text(source: str, reading: discovery.Reading) -> str:
+        """A second case any real mechanism must also get right.
+
+        One file is one example, and a file can hide a wrong mechanism
+        completely: if every line is a single character, reversing characters
+        and doing nothing produce the same bytes.  The probe is built *against
+        the reading* -- unsorted order for a sequence, multi-character and
+        non-palindromic lines for characters, several words for words -- so a
+        mechanism that merely fits the sample is rejected by the creature's own
+        test instead of by a user.
+        """
+        distinct = list(dict.fromkeys(line for line in _lines(source) if line.strip()))
+        while len(distinct) < 3:
+            distinct.append(f"probe line {len(distinct)} zz")
+        ordered = sorted(distinct[:4], key=lambda line: line.encode())
+        probe = ordered[1:] + ordered[:1] + ordered[:1]
+        if reading.unit == "character":
+            probe = [line + "yz" if len(set(line)) < 2 else line for line in probe]
+            probe.append("abcabc")
+        elif reading.unit == "word":
+            probe.append("alpha beta gamma")
+        elif reading.unit == "byte":
+            probe.append("abc")
+        return "\n".join(probe) + "\n"
+
+    def _verified_template(
+        self,
+        template: str,
+        path: str,
+        expected: str,
+        reading: discovery.Reading,
+        probe_text: str,
+    ) -> bool:
+        """Exact bytes on the real file, twice, and on an adversarial probe."""
+        command = template.replace("{path}", shlex.quote(path))
+        first = self.computer.run(command)
+        if not first.ok or first.stdout != expected:
+            return False
+        second = self.computer.run(command)
+        if not second.ok or second.stdout != expected:
+            return False
+        probe_expected = reading.expected(probe_text)
+        if probe_expected is None:
+            return False
+        probe_path = ".discovery-probe.txt"
+        self.computer.write(probe_path, probe_text)
+        try:
+            probe = self.computer.run(template.replace("{path}", shlex.quote(probe_path)))
+        finally:
+            self.computer.path(probe_path).unlink(missing_ok=True)
+        return probe.ok and probe.stdout == probe_expected
+
+    def _find_command(
+        self,
+        reading: discovery.Reading,
+        source: str,
+        expected: str,
+        path: str,
+        probe_text: str,
+        *,
+        max_tools: int,
+    ) -> dict[str, Any] | None:
+        """Find a real mechanism for one reading, cheapest source first."""
+        remembered = self.capabilities.get(reading.key())
+        if remembered and self._verified_template(
+            remembered["template"], path, expected, reading, probe_text
+        ):
+            return {
+                "template": remembered["template"],
+                "tool": remembered.get("tool"),
+                "doc": remembered.get("doc", ""),
+                "source": "memory",
+                "stages": list(remembered.get("stages", ())),
+            }
+
+        # A mechanism the creature already speaks.  Only interpreter-exact
+        # candidates are worth a real run, so this costs a handful of processes.
+        examples = [(source, expected)]
+        stages = synthesis.instantiate(examples) + tuple(self._stages.values())
+        candidates, _stats = synthesis.search(
+            examples, max_length=2, beam=80, time_budget_s=0.5, stages=stages
+        )
+        for chosen in candidates[:12]:
+            template = synthesis.command_for(chosen)
+            try:
+                if self._verified_template(template, path, expected, reading, probe_text):
+                    return {
+                        "template": template,
+                        "tool": None,
+                        "doc": "",
+                        "source": "synthesis",
+                        "stages": list(chosen),
+                    }
+            except AgentError:
+                continue
+
+        # A mechanism nameable by a word the machine already uses.  Reading a
+        # name costs nothing and often finds the tool: ``rev`` for "reverse".
+        vocabulary = self._machine()
+        tried: set[str] = set()
+        for name in vocabulary.name_candidates(reading.words, limit=4):
+            tried.add(name)
+            found = self._try_tool(
+                name, reading, expected, path, probe_text, vocabulary, source="name"
+            )
+            if found is not None:
+                return found
+
+        # Ask the machine directly.  Every candidate is tried on a small probe
+        # and only the ones that reproduce it exactly survive; documentation
+        # then only orders them.  A tool nobody would have guessed is still
+        # findable, because the experiment does not depend on vocabulary.
+        probe_expected = reading.expected(probe_text)
+        if probe_expected is None:
+            return None
+        shortlist = [name for name in vocabulary.mentioning(reading.words, limit=48) if name not in tried]
+        for names in (shortlist,):
+            hits = vocabulary.sweep(probe_text, probe_expected, names=names)
+            for name in hits:
+                if name in tried:
+                    continue
+                tried.add(name)
+                found = self._try_tool(
+                    name, reading, expected, path, probe_text, vocabulary, source="differential"
+                )
+                if found is not None:
+                    return found
+
+        for doc in vocabulary.ranked(reading.words, limit=max_tools):
+            if doc.name in tried:
+                continue
+            tried.add(doc.name)
+            found = self._try_tool(
+                doc.name, reading, expected, path, probe_text, vocabulary, source="documentation"
+            )
+            if found is not None:
+                return found
+
+        # Nothing that mentions the goal, and nothing that matches its words:
+        # try every tool on the machine before giving up.
+        hits = vocabulary.sweep(probe_text, probe_expected)
+        for name in hits:
+            if name in tried:
+                continue
+            tried.add(name)
+            found = self._try_tool(
+                name, reading, expected, path, probe_text, vocabulary, source="differential"
+            )
+            if found is not None:
+                return found
+        return None
+
+    def _try_tool(
+        self,
+        name: str,
+        reading: discovery.Reading,
+        expected: str,
+        path: str,
+        probe_text: str,
+        vocabulary: discovery.MachineVocabulary,
+        *,
+        source: str = "documentation",
+    ) -> dict[str, Any] | None:
+        """Admit one real tool, or withdraw the admission if it does not hold.
+
+        Admission happens before the run because the whole point of admission
+        is that the computer surface only executes what it has accepted.  A
+        candidate that fails the exact check is revoked, so a rejected guess
+        leaves no authority behind.
+        """
+        template = f"{name} {{path}}"
+        tags = vocabulary.executables()
+        located = next((where for tool, where in tags if tool == name), "")
+        vocabulary.read([(name, located)])
+        doc = vocabulary.doc(name)
+        try:
+            self.computer.admit(
+                name,
+                evidence={
+                    "summary": doc.summary if doc else "",
+                    "usage": doc.usage if doc else "",
+                    "reading": reading.describe(),
+                    "verified_output_sha256": hashlib.sha256(expected.encode()).hexdigest(),
+                },
+            )
+        except AgentError:
+            return None
+        verified = self._verified_template(template, path, expected, reading, probe_text)
+        self.discovery_log.append(
+            {
+                "tool": name,
+                "reading": reading.key(),
+                "source": source,
+                "verified": verified,
+                "documentation": doc.summary if doc else "",
+            }
+        )
+        if len(self.discovery_log) > 200:
+            del self.discovery_log[: len(self.discovery_log) - 200]
+        if verified:
+            return {
+                "template": template,
+                "tool": name,
+                "doc": doc.summary if doc else "",
+                "source": source,
+                "stages": [name],
+            }
+        self.computer.revoke(name)
+        return None
+
+    def _admit_discovered_skill(
+        self,
+        goal: str,
+        reading: discovery.Reading,
+        found: Mapping[str, Any],
+        path: str,
+        source: str,
+        expected: str,
+    ) -> ShellSkill:
+        template = str(found["template"])
+        skill_id = "D-" + hashlib.sha256(
+            json.dumps(
+                {"goal": goal, "template": template, "reading": reading.key()}, sort_keys=True
+            ).encode()
+        ).hexdigest()[:12]
+        skill = ShellSkill(
+            skill_id=skill_id,
+            description=goal,
+            template=template,
+            slots={"path": path},
+            postcondition=r"\S" if expected.strip() else r"\A\s*\Z",
+            canary_input={path: source},
+            canary_expected=expected,
+            keywords=sorted(set(_tokens(goal)) | set(reading.words)),
+        )
+        if not self._canary_ok(skill):
+            raise AgentError("DISCOVERED_SKILL_FAILS_CANARY")
+        self.skills[skill_id] = skill
+        return skill
+
+    def discover(self, goal: str, path: str, *, max_tools: int = 8) -> dict[str, Any]:
+        """Do a goal the fixed vocabulary cannot express, by extending it.
+
+        The steps are not a script over tasks: read the goal into every exact
+        reading it admits, look for a mechanism in memory, then in the known
+        grammar, then in the machine's own documentation -- and accept only
+        what reproduces the reading exactly on the file *and* on a probe.  If
+        two readings are both satisfiable the goal is ambiguous and the
+        creature says so; if none is, it records an impasse.
+        """
+        started = time.perf_counter()
+        if not self.computer.exists(path):
+            raise AgentError("GOAL_INPUT_MISSING:" + path)
+        source = self.computer.read(path)
+        if not source:
+            raise AgentError("GOAL_INPUT_EMPTY:" + path)
+        options = discovery.readings(goal, path=path)
+        if not options:
+            self._record_impasse(goal)
+            raise AgentError("GOAL_NOT_VERIFIABLE")
+        verified: dict[str, tuple[discovery.Reading, dict[str, Any]]] = {}
+        for reading in options:
+            expected = reading.expected(source)
+            if expected is None:
+                continue
+            probe_text = self._probe_text(source, reading)
+            found = self._find_command(
+                reading, source, expected, path, probe_text, max_tools=max_tools
+            )
+            if found is not None:
+                verified.setdefault(found["template"], (reading, found))
+        if not verified:
+            self._record_impasse(goal)
+            raise AgentError("NO_VERIFIED_CAPABILITY")
+        if len(verified) > 1:
+            self._record_impasse(goal)
+            raise AgentError("GOAL_AMBIGUOUS:" + " | ".join(sorted(verified)))
+        reading, found = next(iter(verified.values()))
+        expected = reading.expected(source) or ""
+        skill = self._admit_discovered_skill(goal, reading, found, path, source, expected)
+        command = skill.bind({"path": path})
+        if found.get("tool"):
+            tool = str(found["tool"])
+            self._stages[tool] = discovery.tool_stage(
+                tool, lambda text, name=tool: self.computer.run(name, stdin=text).stdout
+            )
+        self.capabilities[reading.key()] = {
+            "template": found["template"],
+            "tool": found.get("tool"),
+            "doc": found.get("doc", ""),
+            "stages": list(found.get("stages", ())),
+            "reading": reading.describe(),
+            "goal": goal,
+        }
+        self.memory.add(
+            "skill",
+            " ".join([goal, reading.describe(), *reading.words]),
+            {
+                "skill_id": skill.skill_id,
+                "reading": reading.key(),
+                "template": found["template"],
+                "tool": found.get("tool"),
+                "doc": found.get("doc", ""),
+                "source": found["source"],
+            },
+            confidence=0.9,
+            surprise=0.6,
+            tags=("capability", "discovered"),
+        )
+        self.memory.add(
+            "episode",
+            "extended its own vocabulary: " + goal,
+            {"skill_id": skill.skill_id, "outcome": "learned", "tool": found.get("tool")},
+            surprise=0.6,
+            tags=("learn", "discovered"),
+        )
+        self._resolve_impasse(goal)
+        return {
+            "status": "PASS",
+            "goal": goal,
+            "reading": reading.describe(),
+            "command": command,
+            "stdout": expected,
+            "tool": found.get("tool"),
+            "documentation": found.get("doc", ""),
+            "source": found["source"],
+            "stages": list(found.get("stages", ())),
+            "skill_id": skill.skill_id,
+            "probe_verified": True,
+            "seconds": round(time.perf_counter() - started, 4),
+        }
 
     # -- deciding what to do ----------------------------------------------
     def observe(self, path: str) -> dict[str, str]:
@@ -1266,6 +1748,10 @@ class LivingAgent:
                 for policy_id, by_action in self.policy_evidence.items()
             },
             "open_questions": self.open_questions(),
+            "capabilities": {key: dict(value) for key, value in self.capabilities.items()},
+            "admissions": {key: dict(value) for key, value in self.computer.admissions.items()},
+            "discovered_stages": sorted(self._stages),
+            "discovery_log": list(self.discovery_log),
             "model_dependency_count": 0,
             "network_dependency_count": 0,
             "incremental_spend_usd": 0,
@@ -1326,6 +1812,26 @@ class LivingAgent:
             }
             for policy_id, by_action in (payload.get("policy_evidence") or {}).items()
         }
+        self.capabilities = {
+            str(key): dict(value) for key, value in (payload.get("capabilities") or {}).items()
+        }
+        self.discovery_log = [dict(row) for row in (payload.get("discovery_log") or [])]
+        self._stages = {}
+        for name, record in (payload.get("admissions") or {}).items():
+            try:
+                # Re-admission is verification: the binary must still be where
+                # it was and must still hash the same, or it is not admitted and
+                # the capability that depended on it is not trusted.
+                admitted = self.computer.admit(str(name), evidence=record.get("evidence"))
+            except AgentError:
+                continue
+            if admitted["sha256"] != record.get("sha256"):
+                self.computer.revoke(str(name))
+                continue
+            if str(name) in set(payload.get("discovered_stages") or ()):
+                self._stages[str(name)] = discovery.tool_stage(
+                    str(name), lambda text, tool=str(name): self.computer.run(tool, stdin=text).stdout
+                )
         self.memory.rebuild_index()
         return self
 

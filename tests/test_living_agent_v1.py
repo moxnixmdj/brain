@@ -24,6 +24,8 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from canonical.runtime import living_agent_benchmark_v1 as benchmark  # noqa: E402
+from canonical.runtime import living_discovery_v1 as discovery  # noqa: E402
+from canonical.runtime import shell_synthesis_v1 as synthesis  # noqa: E402
 from canonical.runtime.living_agent_v1 import (  # noqa: E402
     AgentError,
     Computer,
@@ -651,6 +653,235 @@ class ActiveLearningDisciplineTests(unittest.TestCase):
         self.assertIn("ambiguous", payload)
 
 
+class VocabularyExtensionTests(unittest.TestCase):
+    """The computer surface grows by learning what this machine can really do.
+
+    Nothing here is mocked and no command is supplied by the test: the creature
+    reads a goal, finds a mechanism in the machine's own documentation or by
+    differential experiment, and is believed only when the real shell produces
+    the exact bytes -- on the file and on a probe it designs itself.
+    """
+
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name)
+        self.source = "Delta\nalpha\nCharlie\nbravo\n"
+        self.notes = "notes.txt"
+
+    def _agent(self, *, bin_dir: Path | None = None) -> LivingAgent:
+        computer = Computer(self.root, bin_dir=bin_dir) if bin_dir is not None else Computer(self.root)
+        agent = LivingAgent(self.root, computer=computer)
+        if not agent.computer.exists(self.notes):
+            agent.computer.write(self.notes, self.source)
+        return agent
+
+    @staticmethod
+    def _reverse_lines(text: str) -> str:
+        return "\n".join(reversed(text.split("\n")[:-1])) + "\n"
+
+    @staticmethod
+    def _reverse_characters(text: str) -> str:
+        return "\n".join(line[::-1] for line in text.split("\n")[:-1]) + "\n"
+
+    def test_an_unapproved_binary_is_refused_before_it_runs(self) -> None:
+        agent = self._agent()
+        self.assertNotIn("rev", agent.computer.admitted())
+        with self.assertRaises(AgentError) as raised:
+            agent.computer.run(f"rev {self.notes}")
+        self.assertEqual(str(raised.exception), "BINARY_NOT_ADMITTED:rev")
+
+    def test_reverse_each_line_is_found_by_the_name_the_machine_uses(self) -> None:
+        agent = self._agent()
+        started = time.perf_counter()
+        outcome = agent.fulfil("reverse each line of notes.txt", self.notes)
+        elapsed = time.perf_counter() - started
+        self.assertEqual(outcome["status"], "PASS")
+        self.assertEqual(outcome["tool"], "rev")
+        self.assertEqual(outcome["source"], "name")
+        self.assertEqual(outcome["stdout"], self._reverse_characters(self.source))
+        self.assertIn("rev", agent.computer.admitted())
+        self.assertIn("Reverse", outcome["documentation"])
+        self.assertEqual(agent.computer.run(outcome["command"]).stdout, outcome["stdout"])
+        self.assertLess(elapsed, 2.0)
+
+    def test_reverse_the_lines_is_proved_by_experiment_not_by_a_word(self) -> None:
+        agent = self._agent()
+        outcome = agent.discover("reverse the lines of notes.txt", self.notes)
+        self.assertEqual(outcome["stdout"], self._reverse_lines(self.source))
+        self.assertEqual(outcome["tool"], "tac")
+        self.assertEqual(outcome["source"], "differential")
+        # ``rev`` matched the word "reverse" and was tried first; the shell
+        # rejected it, and the record shows the rejection.
+        rejected = [row for row in agent.discovery_log if row["tool"] == "rev" and not row["verified"]]
+        self.assertTrue(rejected)
+        self.assertIn("last line first", outcome["documentation"])
+
+    def test_a_tool_whose_documentation_lies_is_rejected(self) -> None:
+        bin_dir = self.root / "bin"
+        bin_dir.mkdir()
+        decoy = bin_dir / "reverse"
+        decoy.write_text(
+            "#!/bin/sh\n"
+            'if [ "$1" = "--help" ]; then\n'
+            "  echo 'Usage: reverse [FILE]'\n"
+            "  echo\n"
+            "  echo 'Reverse the lines of the file.'\n"
+            "  exit 0\n"
+            "fi\n"
+            "tr '[:lower:]' '[:upper:]' < \"$1\"\n",
+            encoding="utf-8",
+        )
+        decoy.chmod(0o755)
+        agent = self._agent(bin_dir=bin_dir)
+        outcome = agent.discover("reverse each line of notes.txt", self.notes)
+        self.assertEqual(outcome["tool"], "rev")
+        self.assertEqual(outcome["stdout"], self._reverse_characters(self.source))
+        rejected = [row for row in agent.discovery_log if row["tool"] == "reverse"]
+        self.assertEqual(len(rejected), 1)
+        self.assertFalse(rejected[0]["verified"])
+        self.assertEqual(rejected[0]["documentation"], "Reverse the lines of the file")
+        self.assertNotIn("reverse", agent.computer.admitted())
+
+    def test_a_stranger_tool_is_probed_in_a_throwaway_directory(self) -> None:
+        # A real sweep of this machine left seventeen empty `gz*` files in the
+        # tree: some installed tool writes beside its input.  A candidate is
+        # arbitrary code, so trying one must never be able to touch the
+        # creature's files -- nor to blind the trials that come after it.
+        bin_dir = self.root / "bin"
+        bin_dir.mkdir()
+        hostile = bin_dir / "scribble"
+        hostile.write_text(
+            "#!/bin/sh\n"
+            'if [ "$1" = "--help" ]; then\n'
+            "  echo 'Usage: scribble FILE'\n"
+            "  echo\n"
+            "  echo 'Copy the file, scribble beside it, remove it.'\n"
+            "  exit 0\n"
+            "fi\n"
+            'touch "$PWD/leak.txt" "$HOME/leak.txt"\n'
+            'cat "$1"\n'
+            'rm -f "$1"\n',
+            encoding="utf-8",
+        )
+        hostile.chmod(0o755)
+        agent = self._agent(bin_dir=bin_dir)
+        work = self.root / "work"
+        work.mkdir()
+        (work / "keep.txt").write_text("hello\n", encoding="utf-8")
+        before = sorted(path.name for path in work.iterdir())
+        self.assertEqual(
+            agent.vocabulary.trial("scribble", "keep.txt", cwd=str(work)), "hello\n"
+        )
+        self.assertEqual(sorted(path.name for path in work.iterdir()), before)
+        self.assertEqual(
+            sorted(path.name for path in self.root.iterdir()), ["bin", "notes.txt", "work"]
+        )
+        self.assertEqual(list(Path(tempfile.gettempdir()).glob("brain-trial-*")), [])
+        # the hostile tool ate its own copy in its own directory; the honest
+        # tool in the same sweep is unaffected
+        self.assertEqual(
+            agent.vocabulary.sweep("hello\nmoon\n", "moon\nhello\n", names=["scribble", "tac"]),
+            ["tac"],
+        )
+
+    def test_an_endless_writer_is_stopped_not_read(self) -> None:
+        # `yes` never stops.  Reading it without a byte cap is a memory bomb,
+        # so a run that is cut short must be reported as cut short.
+        self.assertTrue(Path("/usr/bin/yes").is_file())
+        code, raw = discovery._run_capped(["/usr/bin/yes"], timeout=0.2, limit=65_536)
+        self.assertEqual(code, 137)
+        self.assertLessEqual(len(raw), 65_536)
+
+    def test_a_tool_that_closes_then_exits_is_not_killed(self) -> None:
+        # Regression: killing the child the instant its pipe drained reported
+        # -9 for tools that had answered correctly, so real caps were dropped
+        # at random from sweeps.  EOF must be followed by a normal wait.
+        for _ in range(25):
+            code, raw = discovery._run_capped(["/bin/sh", "-c", "printf 'x\\n'"], timeout=1.0)
+            self.assertEqual((code, raw), (0, b"x\n"))
+
+    def test_an_ambiguous_goal_is_refused_instead_of_guessed(self) -> None:
+        agent = self._agent()
+        with self.assertRaises(AgentError) as raised:
+            agent.discover("reverse the file", self.notes)
+        message = str(raised.exception)
+        self.assertTrue(message.startswith("GOAL_AMBIGUOUS"), message)
+        self.assertIn("rev", message)
+        self.assertIn("tac", message)
+        self.assertIn("reverse the file", agent.open_questions())
+
+    def test_an_unknown_verb_is_an_impasse_and_admits_nothing(self) -> None:
+        agent = self._agent()
+        before = agent.computer.admitted()
+        with self.assertRaises(AgentError) as raised:
+            agent.fulfil("frobnicate the file thoroughly", self.notes)
+        self.assertEqual(str(raised.exception), "GOAL_NOT_VERIFIABLE")
+        self.assertEqual(agent.computer.admitted(), before)
+        self.assertIn("frobnicate the file thoroughly", agent.open_questions())
+        # State-changing and network tools are not even candidates: extending
+        # the reading vocabulary must never extend the creature's authority.
+        discoverable = {name for name, _ in agent.vocabulary.executables()}
+        self.assertFalse(discoverable & {"rm", "mv", "cp", "curl", "wget", "ssh", "dd", "sh"})
+
+    def test_the_learned_capability_costs_nothing_the_second_time(self) -> None:
+        agent = self._agent()
+        first = agent.discover("reverse each line of notes.txt", self.notes)
+        reads = agent.vocabulary.help_reads
+        agent.computer.write("other.txt", "one\nTwo\nthree\n")
+        started = time.perf_counter()
+        second = agent.discover("reverse each line of other.txt", "other.txt")
+        elapsed = time.perf_counter() - started
+        self.assertEqual(second["source"], "memory")
+        self.assertEqual(second["stdout"], self._reverse_characters("one\nTwo\nthree\n"))
+        self.assertEqual(agent.vocabulary.help_reads, reads)
+        self.assertLess(elapsed, 0.2)
+        self.assertEqual(first["tool"], "rev")
+        self.assertEqual([record["tool"] for record in agent.capabilities.values()], ["rev"])
+
+    def test_a_capability_survives_a_snapshot_and_is_re_verified(self) -> None:
+        agent = self._agent()
+        agent.discover("reverse each line of notes.txt", self.notes)
+        payload = json.loads(json.dumps(agent.snapshot()))
+
+        other_root = Path(self.tmp.name) / "clone"
+        clone = LivingAgent(other_root)
+        clone.restore(payload)
+        self.assertIn("rev", clone.computer.admitted())
+        clone.computer.write("fresh.txt", "ab\ncd\nef\n")
+        started = time.perf_counter()
+        outcome = clone.discover("reverse each line of fresh.txt", "fresh.txt")
+        elapsed = time.perf_counter() - started
+        self.assertEqual(outcome["source"], "memory")
+        self.assertEqual(outcome["stdout"], "ba\ndc\nfe\n")
+        self.assertLess(elapsed, 0.2)
+
+        # A tampered admission record is not trusted: the hash must match the
+        # binary that is actually on this machine.
+        forged = json.loads(json.dumps(payload))
+        forged["admissions"]["rev"]["sha256"] = "0" * 64
+        suspicious = LivingAgent(Path(self.tmp.name) / "suspicious").restore(forged)
+        self.assertNotIn("rev", suspicious.computer.admitted())
+
+    def test_a_discovered_stage_composes_with_the_known_grammar(self) -> None:
+        agent = self._agent()
+        agent.discover("reverse the lines of notes.txt", self.notes)
+        # Last three lines of the file, in their original (unsorted) order:
+        # only tac followed by a head can produce this, and tac was discovered
+        # at runtime rather than written into the grammar.
+        text = "b\na\nd\nc\n"
+        agent.computer.write("order.txt", text)
+        target = "c\nd\na\n"
+        examples = [(text, target)]
+        stages = synthesis.instantiate(examples) + tuple(agent._stages.values())
+        candidates, _stats = synthesis.search(examples, max_length=2, beam=80, stages=stages)
+        self.assertTrue(candidates, "the discovered stage was not available to the synthesiser")
+        composed = [candidate for candidate in candidates if any(stage.startswith("tac") for stage in candidate)]
+        self.assertTrue(composed, candidates[:5])
+        command = synthesis.command_for(composed[0]).replace("{path}", "order.txt")
+        self.assertEqual(agent.computer.run(command).stdout, target)
+
+
 class RealFileTreeTests(unittest.TestCase):
     """Learning over the repository's real file tree, verified on unseen dirs."""
 
@@ -1060,11 +1291,42 @@ class IntentWithoutExamplesTests(unittest.TestCase):
             self.agent.fulfil("make 'doc.txt' nicer", "doc.txt")
         self.assertEqual(str(raised.exception), "GOAL_NOT_VERIFIABLE")
 
-    def test_checkable_but_unsupported_combination_fails_closed(self) -> None:
+    def test_unique_lines_keep_the_first_occurrence_in_place(self) -> None:
+        # "remove the duplicates" has an exact answer: first occurrence stays,
+        # later repeats go, everything else keeps its position.  Neither
+        # `sort -u` (reorders) nor `uniq` (adjacent only) is that function, so
+        # the answer has to come from a mechanism that really computes it.
         self._copy(self.real_files[0], "doc.txt")
+        source = "gamma\nalpha\ngamma\nbeta\nalpha\ndelta\n"
+        self.agent.computer.write("dups.txt", source)
+        outcome = self.agent.fulfil("remove the duplicate lines from 'dups.txt'", "dups.txt")
+        self.assertEqual(outcome["stdout"], "gamma\nalpha\nbeta\ndelta\n")
+        self.assertEqual(outcome["stages"], ["awk '!seen[$0]++'"])
+        # a file whose repeats are not adjacent: `uniq` would return it whole
+        self.agent.computer.write("other.txt", "z\nq\nz\nz\nm\nq\n")
+        result = self.agent.solve("remove the duplicate lines from other.txt")
+        self.assertEqual(result["status"], "PASS", result)
+        self.assertEqual(result["stdout"], "z\nq\nm\n")
+
+    def test_last_occurrence_is_refused_not_approximated(self) -> None:
+        # "last occurrence" shares the word 'duplicate' but asks for a
+        # different function.  Keeping the first occurrence would be a right
+        # answer to the wrong question, so the gap is recorded instead.
+        self._copy(self.real_files[0], "doc.txt")
+        self.agent.computer.write("dups.txt", "b\na\nb\n")
+        goal = "keep the last occurrence of each duplicate line in 'dups.txt'"
         with self.assertRaises(AgentError) as raised:
-            self.agent.fulfil("remove the duplicate lines from 'doc.txt'", "doc.txt")
+            self.agent.fulfil(goal, "dups.txt")
         self.assertEqual(str(raised.exception), "GOAL_PROPERTY_COMBINATION_UNSUPPORTED")
+        self.assertIn(goal, self.agent.open_questions())
+        recorded = [
+            entry.payload
+            for entry in self.agent.memory.active()
+            if entry.payload.get("goal") == goal
+        ]
+        self.assertEqual(recorded[0]["reason"], "no_exact_mechanism")
+        self.assertEqual(recorded[0]["properties"], ["unique"])
+        self.assertEqual(self.agent.computer.read("dups.txt"), "b\na\nb\n")
 
     def test_property_is_rechecked_at_solve_time(self) -> None:
         self._copy(self.real_files[0], "doc.txt")
