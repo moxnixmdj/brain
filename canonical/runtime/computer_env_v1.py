@@ -1128,6 +1128,8 @@ _PROBE_KINDS: dict[str, tuple[str, ...]] = {
     "words": ("words", "word"),
     "bytes": ("bytes", "byte", "size"),
     "characters": ("characters", "character", "chars", "char"),
+    "uniquelines": ("unique lines", "uniquelines", "distinct lines",
+                    "different lines", "unique", "distinct"),
 }
 
 
@@ -1139,9 +1141,33 @@ def query_kind(gap: str) -> str | None:
     noise, which is the machine inventing the question.
     """
     text = str(gap or "").lower()
-    hits = [kind for kind, words in _PROBE_KINDS.items()
-            if any(w in text for w in words)]
-    return hits[0] if len(hits) == 1 else None
+    # The most specific thing named wins. "how many unique lines" mentions
+    # both 'lines' and 'unique lines', and answering it as though 'lines'
+    # were the whole question gives 14 where the asker wants 7 -- so the
+    # longer, more specific phrase is the one built and counted. Two
+    # different things named with equally specific words is a real
+    # ambiguity, and that is refused instead of guessed at.
+    scored = []
+    for kind, words in _PROBE_KINDS.items():
+        matched = [w for w in words if w in text]
+        if matched:
+            phrase = max(matched, key=len)
+            scored.append((len(phrase), phrase, kind))
+    if not scored:
+        return None
+    scored.sort(reverse=True)
+    top_len, top_phrase, top_kind = scored[0]
+    for length, phrase, kind in scored[1:]:
+        if kind == top_kind:
+            continue
+        # The longer phrase only wins when it is a REFINEMENT of the
+        # shorter one -- 'unique lines' contains 'lines', so it is the same
+        # question asked more precisely. 'bytes' and 'per line' are two
+        # unrelated questions in one sentence, and answering either is
+        # picking one and calling the other noise.
+        if top_phrase.count(phrase) == 0 and phrase.count(top_phrase) == 0:
+            return None
+    return top_kind
 
 
 def probe_bytes(kind: str, n: int = 7) -> bytes | None:
@@ -1160,6 +1186,12 @@ def probe_bytes(kind: str, n: int = 7) -> bytes | None:
         return (b" ".join(b"w%d" % i for i in range(n))) + b"\n"
     if kind in ("bytes", "characters"):
         return b"z" * n
+    if kind == "uniquelines":
+        # n lines that are all DIFFERENT from each other, and twice as many
+        # lines altogether. "how many different lines" and "how many lines"
+        # must be two questions with two answers, or the check cannot tell
+        # a program that answered it from one that answered something else.
+        return b"".join(b"row %d\nrow %d\n" % (i, i) for i in range(n))
     return None
 
 
@@ -1242,6 +1274,41 @@ def _query_cache_put(kind: str, limit: int,
         pass
 
 
+def _reap(proc: subprocess.Popen, worker: Any,
+          also: Sequence[subprocess.Popen] = ()) -> int:
+    """The exit status of a command that has been read on a deadline.
+
+    Poll() answers None both for "still running" and for "finished but not
+    yet reaped", and those are opposite things: one must be killed, the
+    other must be believed. Conflating them threw away perfectly good
+    answers -- the same command scored 0 on one run and None on the next,
+    so a correct measurement was skipped depending on nothing but timing.
+
+    So it is waited for briefly. A command that has already finished is
+    simply reaped and its true status returned; only one that is genuinely
+    still running, or still talking, is killed.
+    """
+    code = proc.poll()
+    if code is None:
+        try:
+            code = proc.wait(timeout=0.25)
+        except Exception:  # noqa: BLE001 - still running
+            code = None
+    if code is None or worker.is_alive():
+        for target in tuple(also) + (proc,):
+            try:
+                target.kill()
+            except Exception:  # noqa: BLE001
+                pass
+        for target in tuple(also) + (proc,):
+            try:
+                target.wait(timeout=2)
+            except Exception:  # noqa: BLE001
+                pass
+        return -9
+    return int(code)
+
+
 def _run_capped(argv: Sequence[str], cwd: str | pathlib.Path,
                 timeout: float = 5.0, max_bytes: int = 1 << 16
                 ) -> tuple[int | None, bytes]:
@@ -1276,20 +1343,59 @@ def _run_capped(argv: Sequence[str], cwd: str | pathlib.Path,
     worker = threading.Thread(target=drain, daemon=True)
     worker.start()
     worker.join(timeout)
-    code = proc.poll()
-    if code is None or worker.is_alive():
-        try:
-            proc.kill()
-        except Exception:  # noqa: BLE001 - already gone is fine
-            pass
-        try:
-            proc.wait(timeout=2)
-        except Exception:  # noqa: BLE001
-            pass
+    code = _reap(proc, worker)
     try:
         proc.stdout.close()
     except Exception:  # noqa: BLE001
         pass
+    return code, bytes(buf[:max_bytes])
+
+
+def _run_pipeline(argv1: Sequence[str], argv2: Sequence[str],
+                  cwd: str | pathlib.Path, timeout: float = 5.0,
+                  max_bytes: int = 1 << 16) -> tuple[int | None, bytes]:
+    """Run two commands with the first one's output fed to the second.
+
+    Real work on a computer is almost never one program. "how many
+    different lines are in this file" is 'sort --unique | wc --lines':
+    no single program answers it, and a machine that can only run one
+    thing at a time cannot answer it at all.
+
+    Bounded for the same reason a single command is -- a program in the
+    middle of a pipe that never stops talking takes the learner down just
+    as surely as one on its own.
+    """
+    import threading
+    first = subprocess.Popen(list(argv1), cwd=str(cwd),
+                             stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
+                             stdin=subprocess.DEVNULL)
+    second = subprocess.Popen(list(argv2), cwd=str(cwd), stdin=first.stdout,
+                              stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+    try:
+        first.stdout.close()  # only the second reader may hold it open
+    except Exception:  # noqa: BLE001
+        pass
+    buf = bytearray()
+
+    def drain() -> None:
+        try:
+            while len(buf) < max_bytes:
+                chunk = second.stdout.read(4096)
+                if not chunk:
+                    break
+                buf.extend(chunk)
+        except Exception:  # noqa: BLE001
+            pass
+
+    worker = threading.Thread(target=drain, daemon=True)
+    worker.start()
+    worker.join(timeout)
+    code = _reap(second, worker, also=(first,))
+    for stream in (second.stdout,):
+        try:
+            stream.close()
+        except Exception:  # noqa: BLE001
+            pass
     return code, bytes(buf[:max_bytes])
 
 
@@ -1303,6 +1409,9 @@ def _instrument(prog: str, depth: int = 4) -> str:
     exec is followed to whatever it hands off to, so agreement means
     agreement between things that really measured separately.
     """
+    if "|" in str(prog):
+        # a pipeline is not one file on disk; its identity is its stages
+        return " | ".join(part.strip() for part in str(prog).split("|"))
     path = _real_binary(prog)
     for _ in range(depth):
         try:
@@ -1325,9 +1434,12 @@ def _instrument(prog: str, depth: int = 4) -> str:
     return path
 
 
-def _query_shapes(prog: str, name: str, gap: str) -> list[list[str]]:
+def _query_shapes(prog: str, name: str, gap: str,
+                  patterns: Sequence[str] | None = None
+                  ) -> list[list[str]]:
     """Ways to point the program at one file, most specific first."""
     shapes: list[list[str]] = []
+    patterns = _MATCH_ALL if patterns is None else patterns
     # the manual narrows the search; the probe decides it
     try:
         flags = flags_for_goal(prog, gap, limit=3)
@@ -1335,15 +1447,42 @@ def _query_shapes(prog: str, name: str, gap: str) -> list[list[str]]:
         flags = []
     for flag in flags:
         shapes.append([prog, flag, name])
-        for pat in _MATCH_ALL:
+        for pat in patterns:
             shapes.append([prog, flag, pat, name])
     shapes.append([prog, name])
     return shapes
 
 
+def _stdin_shapes(prog: str, gap: str) -> list[list[str]]:
+    """Forms of a program that read what is piped into it.
+
+    A program at the end of a pipe takes no filename: the text arrives on
+    its input. Offering it a filename anyway would make it read the file
+    and ignore everything the previous stage produced -- a pipeline that
+    looks like it runs and quietly answers a different question.
+    """
+    shapes: list[list[str]] = [[prog]]
+    try:
+        flags = flags_for_goal(prog, gap, limit=3)
+    except Exception:  # noqa: BLE001
+        flags = []
+    for flag in flags:
+        shapes.append([prog, flag])
+    return shapes
+
+
+_MAX_PIPE_PROGRAMS = 10
+
+# The first stage of a pipeline is producing text rather than
+# counting, so the match-everything patterns that matter at the
+# end of a command mostly waste runs here.
+_PIPE_PATTERNS = ("",)
+
+
 def probe_survivors(kind: str, programs: Sequence[str], gap: str,
                     n: int = 7, timeout: float = 5.0,
-                    workers: int = 24) -> list[dict[str, Any]]:
+                    workers: int = 24,
+                    stages: int = 1) -> list[dict[str, Any]]:
     """Commands that print n on a file built to hold exactly n of `kind`.
 
     Chosen by what they DID, not by what they say they do. The exact argv
@@ -1392,7 +1531,54 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
         return None
 
     with ThreadPoolExecutor(max_workers=workers) as pool:
-        return [hit for hit in pool.map(one, list(programs)) if hit]
+        hits = [hit for hit in pool.map(one, list(programs)) if hit]
+    if hits:
+        return hits
+    if stages < 2:
+        return []
+    # A single program found further down the list is still fewer actions
+    # than two programs found at the top, so the whole list is searched for
+    # one before any pair is tried.
+    if len(programs) > _MAX_PIPE_PROGRAMS:
+        programs = list(programs)[:_MAX_PIPE_PROGRAMS]
+
+    def pair(progs: tuple[str, str]) -> dict[str, Any] | None:
+        """Feed one program's output to another and see if the pair tracks
+        the construction. 'sort --unique | wc --lines' answers "how many
+        different lines" -- a question no single program answers."""
+        head, tail = progs
+        if head == tail:
+            return None
+        root = pathlib.Path(tempfile.mkdtemp(prefix="brain-pipe-"))
+        try:
+            for argv1 in _query_shapes(head, name, gap,
+                                      patterns=_PIPE_PATTERNS):
+                for argv2 in _stdin_shapes(tail, gap):
+                    reads = []
+                    for size in _PROBE_SIZES:
+                        (root / name).write_bytes(probe_bytes(kind, size))
+                        try:
+                            code, out = _run_pipeline(argv1, argv2, root,
+                                                      timeout=timeout)
+                        except Exception:  # noqa: BLE001
+                            break
+                        if code != 0:
+                            break
+                        reads.append(_bare_value(out))
+                    if len(reads) == len(_PROBE_SIZES) and all(
+                            got == str(want)
+                            for got, want in zip(reads, _PROBE_SIZES)):
+                        return {"program": "%s | %s" % (head, tail),
+                                "argv": [list(argv1), list(argv2)],
+                                "stages": 2,
+                                "tracked": [str(s) for s in _PROBE_SIZES]}
+        finally:
+            shutil.rmtree(str(root), ignore_errors=True)
+        return None
+
+    pairs = [(a, b) for a in programs for b in programs if a != b]
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        return [hit for hit in pool.map(pair, pairs) if hit]
 
 
 def answer_query(gap: str, input_file: str | pathlib.Path,
@@ -1431,6 +1617,37 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
     # about the file -- 'wc --lines' counts the lines of anything. Once it
     # has been measured it never has to be measured again, which is what
     # turns a slow first question into an instant second one.
+    def measure(found: Sequence[dict[str, Any]]) -> dict[str, list[str]]:
+        """Ask each proven command the real file, in the form it was proven
+        in, and record what it said against the program that did the work --
+        so three names for one compiler, or three shell scripts that exec
+        grep, cannot gang up and call themselves independent agreement."""
+        tally: dict[str, list[str]] = {}
+        for hit in found:
+            try:
+                if hit.get("stages") == 2:
+                    # only the first stage is pointed at the file; the last
+                    # reads what the pipe gives it
+                    first, second = hit["argv"]
+                    argv1 = [first[0]] + [str(src) if a == "probe.txt" else a
+                                          for a in first[1:]]
+                    code, out = _run_pipeline(argv1, list(second), src.parent,
+                                              timeout=timeout)
+                else:
+                    argv = [hit["argv"][0]] + [
+                        str(src) if a == "probe.txt" else a
+                        for a in hit["argv"][1:]]
+                    code, out = _run_capped(argv, src.parent, timeout=timeout)
+            except Exception:  # noqa: BLE001 - one failure is data
+                continue
+            if code != 0:
+                continue
+            value = _bare_value(out)
+            if value is None:
+                continue
+            tally.setdefault(value, []).append(_instrument(hit["program"]))
+        return tally
+
     for limit in (24, 96, 200):
         cached = _query_cache_get(kind, limit)
         if cached is not None:
@@ -1443,25 +1660,9 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
             survivors = probe_survivors(kind, cands, gap)
             if programs is None:
                 _query_cache_put(kind, limit, survivors)
-        votes: dict[str, list[str]] = {}
-        # Each survivor is asked the real file in exactly the form it was
-        # proven in, and its answer is recorded against the program that
-        # actually did the work, so three names for one compiler -- or
-        # three shell scripts that exec grep -- cannot gang up and call
-        # themselves independent agreement.
-        for hit in survivors:
-            argv = [hit["argv"][0]] + [str(src) if a == "probe.txt" else a
-                                       for a in hit["argv"][1:]]
-            try:
-                code, out = _run_capped(argv, src.parent, timeout=timeout)
-            except Exception:  # noqa: BLE001 - one failure is data
-                continue
-            if code != 0:
-                continue
-            value = _bare_value(out)
-            if value is None:
-                continue
-            votes.setdefault(value, []).append(_instrument(hit["program"]))
+        votes = measure(survivors)
+        if survivors and not votes:
+            continue
         if votes:
             ranked = sorted(votes.items(),
                             key=lambda kv: (-len(set(kv[1])), kv[0]))
@@ -1483,6 +1684,35 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
                                       value))}
         if programs is not None:
             break
+
+    # No single program on the machine tracks the construction -- now, and
+    # only now, try two of them joined together. This is the difference
+    # between "how many lines" and "how many DIFFERENT lines": the second
+    # is answered by no single program at all, and a machine that can only
+    # run one thing at a time has to refuse it.
+    if not survivors:
+        cands = (list(programs) if programs is not None
+                 else programs_for_goal(gap, limit=_MAX_PIPE_PROGRAMS * 2))
+        survivors = probe_survivors(kind, cands, gap, stages=2)
+        votes = measure(survivors)
+        if votes:
+            ranked = sorted(votes.items(),
+                            key=lambda kv: (-len(set(kv[1])), kv[0]))
+            value, bins = ranked[0]
+            if len(set(bins)) >= min_agreement:
+                agree = len(set(bins))
+                return {"pass": True,
+                        "status": ("PASS__MEASURED_BY_AGREEMENT" if agree > 1
+                                   else "PASS__MEASURED_BY_ONE_TRACKED_INSTRUMENT"),
+                        "kind": kind, "value": value, "answer": value,
+                        "agreement": agree, "survivors": survivors,
+                        "stages": 2,
+                        "votes": {k: sorted(set(v)) for k, v in votes.items()},
+                        "detail": "two programs joined: %s" % (
+                            " | ".join(str(x) for x in
+                                       (survivors[0]["argv"][0][0],
+                                        survivors[0]["argv"][1][0]))
+                            if survivors else "")}
 
     if not survivors:
         return {"pass": False, "status": "OPEN__NOTHING_MEASURED_IT",

@@ -691,3 +691,123 @@ class RememberingTests(unittest.TestCase):
         self.assertTrue(again["pass"], again)
         self.assertEqual(again["value"], "23", again)
         self.assertLessEqual(second, max(first, 0.02))
+
+
+class PipelineTests(unittest.TestCase):
+    """Work on a computer is almost never one program.
+
+    "how many different lines" is answered by no single program on this
+    machine: sort it, collapse it, then count it. A machine that can only
+    run one thing at a time has to refuse that question, so it is asked
+    to compose -- and composition is only tried when nothing alone works,
+    because one program is fewer actions than two.
+    """
+
+    def setUp(self) -> None:
+        self.tmp = tempfile.mkdtemp(prefix="brain-pipe-")
+        self.work = pathlib.Path(self.tmp)
+        # 22 lines, 7 different ones
+        rows = []
+        for i in range(7):
+            rows += ["kind %d" % i, "kind %d" % i, "kind %d" % i]
+        rows.append("kind 6")
+        self.rows = rows
+        self.file = self.work / "data.txt"
+        self.file.write_text("\n".join(rows) + "\n")
+        self.progs = ["sort", "uniq", "wc", "grep", "cat", "nl", "cut", "tr"]
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def test_a_question_no_single_program_answers_is_answered_by_two(self):
+        r = cenv.answer_query("how many unique lines in data.txt", self.file,
+                              programs=self.progs)
+        self.assertTrue(r["pass"], r)
+        self.assertEqual(r["value"], "7", r)
+        self.assertEqual(len(set(self.rows)), 7, "the fixture is wrong")
+
+    def test_the_composition_is_a_real_command_not_a_description(self):
+        """Run the two stages ourselves, joined with our own pipe, nowhere
+        near the learner. If it works, a pipeline was composed."""
+        r = cenv.answer_query("how many unique lines in data.txt", self.file,
+                              programs=self.progs)
+        self.assertTrue(r["pass"], r)
+        stages = r["survivors"][0]["argv"]
+        self.assertEqual(len(stages), 2, stages)
+        argv1 = [str(self.file) if a == "probe.txt" else a
+                 for a in stages[0]]
+        one = subprocess.run(argv1, cwd=str(self.work),
+                             capture_output=True, timeout=30)
+        self.assertEqual(one.returncode, 0, one.stderr[:200])
+        two = subprocess.run(stages[1], input=one.stdout,
+                             capture_output=True, timeout=30)
+        self.assertEqual(two.returncode, 0, two.stderr[:200])
+        self.assertEqual(two.stdout.decode().strip(), "7")
+
+    def test_the_last_stage_reads_the_pipe_not_the_file(self):
+        """A program at the end of a pipe takes no filename. Hand it one
+        anyway and it reads the file and ignores everything the previous
+        stage produced -- a pipeline that runs, and quietly answers a
+        different question."""
+        shapes = cenv._stdin_shapes("wc", "how many unique lines")
+        self.assertIn(["wc"], shapes)
+        for shape in shapes:
+            self.assertNotIn("data.txt", shape, shape)
+            self.assertNotIn("probe.txt", shape, shape)
+
+    def test_the_more_specific_thing_named_is_the_one_counted(self):
+        """"how many unique lines" also contains the word 'lines'. Answering
+        it as though 'lines' were the whole question gives 22 where 7 is
+        wanted -- so the longer, more specific phrase is what gets built."""
+        self.assertEqual(cenv.query_kind("how many unique lines in data.txt"),
+                         "uniquelines")
+        self.assertEqual(cenv.query_kind("count the lines in data.txt"),
+                         "lines")
+        probe = cenv.probe_bytes("uniquelines", 7)
+        lines = probe.splitlines()
+        self.assertEqual(len(set(lines)), 7, "7 different lines")
+        self.assertGreater(len(lines), 7,
+                           "and more lines than that, or 'how many lines' "
+                           "and 'how many different lines' have the same "
+                           "answer and the check cannot tell them apart")
+
+    def test_one_program_is_preferred_over_two(self):
+        """The shortest plan that reaches the goal is the one wanted. A
+        single program is tried across the whole machine before any pair is
+        considered, so a question one program can answer must not be
+        answered by a pipeline."""
+        src = self.work / "simple.txt"
+        src.write_text("\n".join("row %d" % i for i in range(1, 24)) + "\n")
+        r = cenv.answer_query("count the lines in simple.txt", src,
+                              programs=self.progs)
+        self.assertTrue(r["pass"], r)
+        self.assertNotEqual(r.get("stages"), 2,
+                            "a single program answers this: %s" % r)
+        for hit in r["survivors"]:
+            self.assertNotEqual(hit.get("stages"), 2, hit)
+
+    def test_a_command_that_finishes_is_believed_not_killed(self):
+        """poll() says None both for "still running" and for "finished but
+        not reaped yet", and those are opposite things. Conflating them
+        threw away good answers depending on nothing but timing -- the
+        same command scored 0 on one run and None on the next. Run it
+        until the race would show, because a flake that passes silently
+        is worse than a failure."""
+        for _ in range(25):
+            code, out = cenv._run_capped(["printf", "7\\n"], self.work,
+                                         timeout=5.0)
+            self.assertEqual(code, 0, "a finished command was called dead")
+            self.assertEqual(out.strip(), b"7")
+        for _ in range(5):
+            code, out = cenv._run_pipeline(["printf", "7\\n"], ["wc", "-l"],
+                                           self.work, timeout=5.0)
+            self.assertEqual(code, 0, code)
+            self.assertEqual(out.strip(), b"1")
+
+    def test_a_command_that_never_finishes_is_killed_and_reported_dead(self):
+        """The other half: something that will not stop must not be
+        believed, and must not take the learner down with it."""
+        code, out = cenv._run_capped(["shuf", "--repeat", "/dev/null"],
+                                     self.work, timeout=2.0)
+        self.assertNotEqual(code, 0)
+        self.assertLessEqual(len(out), 1 << 16)
