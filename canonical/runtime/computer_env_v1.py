@@ -1130,6 +1130,8 @@ _PROBE_KINDS: dict[str, tuple[str, ...]] = {
     "characters": ("characters", "character", "chars", "char"),
     "uniquelines": ("unique lines", "uniquelines", "distinct lines",
                     "different lines", "unique", "distinct"),
+    "lineswith": ("containing", "contain", "contains", "mentioning",
+                  "mention", "mentions", "matching", "match", "matches"),
 }
 
 
@@ -1160,17 +1162,56 @@ def query_kind(gap: str) -> str | None:
     for length, phrase, kind in scored[1:]:
         if kind == top_kind:
             continue
-        # The longer phrase only wins when it is a REFINEMENT of the
-        # shorter one -- 'unique lines' contains 'lines', so it is the same
-        # question asked more precisely. 'bytes' and 'per line' are two
-        # unrelated questions in one sentence, and answering either is
-        # picking one and calling the other noise.
-        if top_phrase.count(phrase) == 0 and phrase.count(top_phrase) == 0:
+        # The longer phrase wins when it is a REFINEMENT of the shorter
+        # one: either it literally contains it ('unique lines' holds
+        # 'lines'), or it is one of the questions this machine knows is a
+        # more precise form of it. 'bytes' and 'per line' are two unrelated
+        # questions in one sentence, and answering either would be picking
+        # one and calling the other noise -- so that is refused.
+        refines = (_REFINES.get(top_kind) == kind
+                   or _REFINES.get(kind) == top_kind)
+        contained = (top_phrase.count(phrase) > 0
+                     or phrase.count(top_phrase) > 0)
+        if not refines and not contained:
             return None
     return top_kind
 
 
-def probe_bytes(kind: str, n: int = 7) -> bytes | None:
+def goal_literal(gap: str) -> str | None:
+    """The WORDS the goal is looking for, taken out of the sentence.
+
+    "how many lines contain ERROR" is not answerable by counting anything
+    until ERROR is part of the test -- the goal named the thing to look
+    for, and ignoring it would be answering a different question. The same
+    move as taking '50%' out of 'resize to 50%': the goal brings its own
+    arguments, and the machine's job is to use them rather than guess.
+    """
+    text = " " + " ".join(str(gap or "").split()) + " "
+    low = text.lower()
+    best = ""
+    for trig in _LITERAL_TRIGGERS:
+        at = low.find(" " + trig + " ")
+        if at < 0:
+            continue
+        rest = text[at + len(trig) + 2:].strip()
+        cut = len(rest)
+        for stop in _LITERAL_STOPS:
+            found = rest.lower().find(stop)
+            if found >= 0:
+                cut = min(cut, found)
+        rest = re.sub(r"\b(lines?|rows?|times?)\b", "",
+                      rest[:cut].strip(), flags=re.I).strip().strip('"\'')
+        if len(rest) > len(best):
+            best = rest
+    # a literal that is only a filename is a file, not something to search
+    # for inside one
+    if best and not _FILENAME.fullmatch(best) and not best.endswith(
+            tuple(_FILENAME.findall(best) or [])):
+        return best
+    return None
+
+
+def probe_bytes(kind: str, n: int = 7, literal: str | None = None) -> bytes | None:
     """Bytes holding exactly n of the thing `kind` names -- the ground truth.
 
     The lines are all DIFFERENT on purpose. A probe of n identical lines
@@ -1186,6 +1227,15 @@ def probe_bytes(kind: str, n: int = 7) -> bytes | None:
         return (b" ".join(b"w%d" % i for i in range(n))) + b"\n"
     if kind in ("bytes", "characters"):
         return b"z" * n
+    if kind == "lineswith":
+        # n lines that hold the word and n that do not, so "how many lines
+        # hold this word" and "how many lines are there" are different
+        # questions with different answers. A program that counts every
+        # line reports 2n and is caught out immediately.
+        word = (literal or "NEEDLE").encode("utf8", "replace")
+        with_it = [b"a line %s appears in %d" % (word, i) for i in range(n)]
+        without = [b"a line nothing appears in %d" % i for i in range(n)]
+        return b"\n".join(with_it + without) + b"\n"
     if kind == "uniquelines":
         # n lines that are all DIFFERENT from each other, and twice as many
         # lines altogether. "how many different lines" and "how many lines"
@@ -1230,6 +1280,17 @@ _MATCH_ALL = ("", "^", "$", ".")
 # Two constructions, so a right answer has to be TRACKED, not
 # merely produced once -- see probe_survivors.
 _PROBE_SIZES = (7, 13)
+
+# One question asked more precisely than another. "how many lines hold
+# this word" is a refinement of "how many lines", not a second unrelated
+# question, and the machine is allowed to know that -- otherwise every
+# question containing the word 'lines' would have to be refused.
+_REFINES = {"uniquelines": "lines", "lineswith": "lines"}
+
+_LITERAL_TRIGGERS = ("containing", "contain", "contains", "mentioning",
+                     "mention", "mentions", "matching", "match", "matches",
+                     "that say", "that have")
+_LITERAL_STOPS = (" in ", " of ", " on ", " from ", " inside ", " within ")
 
 
 # Which commands measure which kind, once per machine. Kept in memory for
@@ -1435,14 +1496,29 @@ def _instrument(prog: str, depth: int = 4) -> str:
 
 
 def _query_shapes(prog: str, name: str, gap: str,
-                  patterns: Sequence[str] | None = None
-                  ) -> list[list[str]]:
-    """Ways to point the program at one file, most specific first."""
+                  patterns: Sequence[str] | None = None,
+                  wide: bool = False) -> list[list[str]]:
+    """Ways to point the program at one file, most specific first.
+
+    Normally the manual narrows the search and the probe decides it. But
+    the manual is only a hint about WHICH flags to try, and it reads the
+    goal's words to make that guess -- so a goal that never uses the word
+    'count' gets shown grep's --only-matching and never its --count, and
+    the machine concludes that nothing on the box can count.
+
+    `wide` is what happens when the hint turns out to be wrong: it stops
+    guessing which flags matter and offers the program's own list, letting
+    the measurement do the choosing. Slower, and only paid for when the
+    narrow search came back empty.
+    """
     shapes: list[list[str]] = []
     patterns = _MATCH_ALL if patterns is None else patterns
-    # the manual narrows the search; the probe decides it
+    flags: list[str] = []
     try:
-        flags = flags_for_goal(prog, gap, limit=3)
+        if wide:
+            flags = [f for f, _ in flag_descriptions(prog, limit=_WIDE_FLAGS)]
+        else:
+            flags = flags_for_goal(prog, gap, limit=3)
     except Exception:  # noqa: BLE001 - no manual is not a failure
         flags = []
     for flag in flags:
@@ -1471,7 +1547,51 @@ def _stdin_shapes(prog: str, gap: str) -> list[list[str]]:
     return shapes
 
 
+def _one_wide(prog: str, kind: str, gap: str, patterns: Sequence[str],
+              timeout: float, literal: str | None = None
+              ) -> dict[str, Any] | None:
+    """One program, offered its own flags instead of the ones the goal's
+    words suggested, on files built to hold a known number of the thing.
+    """
+    name = "probe.txt"
+    root = pathlib.Path(tempfile.mkdtemp(prefix="brain-wide-"))
+    try:
+        for argv in _query_shapes(prog, name, gap, patterns=patterns,
+                                  wide=True):
+            reads = []
+            for size in _PROBE_SIZES:
+                # the same literal in the file as in the command: a probe
+                # holding NEEDLE while the command hunts for ERROR finds
+                # nothing, and nothing looks exactly like failure
+                (root / name).write_bytes(probe_bytes(kind, size, literal))
+                try:
+                    code, out = _run_capped(argv, root, timeout=timeout)
+                except Exception:  # noqa: BLE001
+                    break
+                if code != 0:
+                    break
+                reads.append(_bare_value(out))
+            if len(reads) == len(_PROBE_SIZES) and all(
+                    got == str(want)
+                    for got, want in zip(reads, _PROBE_SIZES)):
+                return {"program": prog, "argv": list(argv),
+                        "wide": True,
+                        "tracked": [str(s) for s in _PROBE_SIZES]}
+    finally:
+        shutil.rmtree(str(root), ignore_errors=True)
+    return None
+
+
 _MAX_PIPE_PROGRAMS = 10
+# The whole manual, not its top slice. grep documents 83 flags and
+# '--count' is the 65th of them -- a search that only tries the first few
+# concludes that nothing on the machine can count, when the program that
+# counts is sitting right there. The narrow pass exists to keep this
+# expensive one from running at all.
+_WIDE_FLAGS = 400
+# how far down the candidate list the wide search goes; it is
+# the expensive pass, so it does not run over the whole machine
+_WIDE_PROGRAMS = 14
 
 # The first stage of a pipeline is producing text rather than
 # counting, so the match-everything patterns that matter at the
@@ -1482,7 +1602,8 @@ _PIPE_PATTERNS = ("",)
 def probe_survivors(kind: str, programs: Sequence[str], gap: str,
                     n: int = 7, timeout: float = 5.0,
                     workers: int = 24,
-                    stages: int = 1) -> list[dict[str, Any]]:
+                    stages: int = 1,
+                    literal: str | None = None) -> list[dict[str, Any]]:
     """Commands that print n on a file built to hold exactly n of `kind`.
 
     Chosen by what they DID, not by what they say they do. The exact argv
@@ -1492,14 +1613,20 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
     -- measures a different thing and calls it the same answer.
     """
     from concurrent.futures import ThreadPoolExecutor
-    if probe_bytes(kind, n) is None:
+    if probe_bytes(kind, n, literal) is None:
         return []
+    # what the goal asked to look for is itself a way of looking: 'grep
+    # --count ERROR' needs ERROR given to it, so the literal is offered
+    # alongside the match-everything patterns rather than only being buried
+    # in the file.
+    patterns = tuple(_MATCH_ALL) + ((literal,) if literal else ())
     name = "probe.txt"
 
     def one(prog: str) -> dict[str, Any] | None:
         root = pathlib.Path(tempfile.mkdtemp(prefix="brain-probe-"))
         try:
-            for argv in _query_shapes(prog, name, gap):
+            for argv in _query_shapes(prog, name, gap,
+                                      patterns=patterns):
                 # A file built to hold 7 of the thing, then one built to
                 # hold 13. A program that prints 7 once may be printing 7
                 # for its own reasons -- a version number, a default, a
@@ -1510,7 +1637,7 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
                 # trusted with a file it has never seen.
                 reads = []
                 for size in _PROBE_SIZES:
-                    data = probe_bytes(kind, size)
+                    data = probe_bytes(kind, size, literal)
                     # Every form gets a fresh probe: some programs eat the
                     # file they are given, and a later form would then be
                     # measuring nothing and reporting it.
@@ -1535,6 +1662,22 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
     if hits:
         return hits
     if stages < 2:
+        # The narrow search found nothing. Before deciding that two
+        # programs are needed, admit that the hint about which flags to
+        # try may simply have been wrong.
+        if True:
+            wide = []
+            with ThreadPoolExecutor(max_workers=workers) as pool:
+                for hit in pool.map(
+                        lambda p: _one_wide(
+                            p, kind, gap,
+                            (literal,) if literal else tuple(patterns),
+                            timeout, literal),
+                        list(programs)[:_WIDE_PROGRAMS]):
+                    if hit:
+                        wide.append(hit)
+            if wide:
+                return wide
         return []
     # A single program found further down the list is still fewer actions
     # than two programs found at the top, so the whole list is searched for
@@ -1552,11 +1695,13 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
         root = pathlib.Path(tempfile.mkdtemp(prefix="brain-pipe-"))
         try:
             for argv1 in _query_shapes(head, name, gap,
-                                      patterns=_PIPE_PATTERNS):
+                                      patterns=_PIPE_PATTERNS +
+                                      ((literal,) if literal else ())):
                 for argv2 in _stdin_shapes(tail, gap):
                     reads = []
                     for size in _PROBE_SIZES:
-                        (root / name).write_bytes(probe_bytes(kind, size))
+                        (root / name).write_bytes(
+                            probe_bytes(kind, size, literal))
                         try:
                             code, out = _run_pipeline(argv1, argv2, root,
                                                       timeout=timeout)
@@ -1592,6 +1737,11 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
     same binary are one opinion wearing a coat.
     """
     kind = query_kind(gap)
+    literal = goal_literal(gap) if kind in ("lineswith",) else None
+    if kind == "lineswith" and not literal:
+        return {"pass": False, "status": "OPEN__NOT_A_COUNTABLE_QUESTION",
+                "detail": "the goal says to look for something but does not "
+                          "say what"}
     if kind is None:
         return {"pass": False, "status": "OPEN__NOT_A_COUNTABLE_QUESTION",
                 "detail": "the goal does not name one thing that can be "
@@ -1657,8 +1807,15 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
                      else programs_for_goal(gap, limit=limit))
             if not cands:
                 continue
-            survivors = probe_survivors(kind, cands, gap)
-            if programs is None:
+            survivors = probe_survivors(kind, cands, gap,
+                                        literal=literal)
+            # Only a discovery is remembered, never a failure. A success is
+            # a fact about the machine; an empty result is often a fact
+            # about the SEARCH -- the right program not yet looked at, a
+            # flag not yet offered, a program installed since. Caching the
+            # failure makes it permanent: the machine never looks again and
+            # a question it could have answered stays unanswered forever.
+            if programs is None and survivors:
                 _query_cache_put(kind, limit, survivors)
         votes = measure(survivors)
         if survivors and not votes:
@@ -1693,7 +1850,8 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
     if not survivors:
         cands = (list(programs) if programs is not None
                  else programs_for_goal(gap, limit=_MAX_PIPE_PROGRAMS * 2))
-        survivors = probe_survivors(kind, cands, gap, stages=2)
+        survivors = probe_survivors(kind, cands, gap, stages=2,
+                                    literal=literal)
         votes = measure(survivors)
         if votes:
             ranked = sorted(votes.items(),

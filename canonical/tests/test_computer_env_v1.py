@@ -811,3 +811,114 @@ class PipelineTests(unittest.TestCase):
                                      self.work, timeout=2.0)
         self.assertNotEqual(code, 0)
         self.assertLessEqual(len(out), 1 << 16)
+
+
+class LiteralTests(unittest.TestCase):
+    """Goals that name WHAT to look for, not just how many.
+
+    "how many lines contain ERROR" cannot be answered by counting anything
+    until ERROR is part of the test. The goal brought its own argument --
+    the same as 'resize to 50%' brought 50% -- and the machine has to use
+    it rather than guess.
+    """
+
+    def setUp(self) -> None:
+        self.tmp = tempfile.mkdtemp(prefix="brain-lit-")
+        self.work = pathlib.Path(self.tmp)
+        # its own store, or another test's discovery is still sitting in
+        # the shared cache and the machine appears to know things it was
+        # never told in this test
+        self._saved_state = os.environ.get("BRAIN_STATE_DIR")
+        os.environ["BRAIN_STATE_DIR"] = self.tmp
+        cenv._QUERY_CACHE.clear()
+        cenv._QUERY_LOADED = False
+        rows = []
+        for i in range(23):
+            rows.append("ERROR in row %d" % i if i % 4 == 0
+                        else "all good row %d" % i)
+        self.rows = rows
+        self.file = self.work / "data.txt"
+        self.file.write_text("\n".join(rows) + "\n")
+        self.truth = str(sum(1 for r in rows if "ERROR" in r))
+
+    def tearDown(self) -> None:
+        if self._saved_state is None:
+            os.environ.pop("BRAIN_STATE_DIR", None)
+        else:
+            os.environ["BRAIN_STATE_DIR"] = self._saved_state
+        cenv._QUERY_CACHE.clear()
+        cenv._QUERY_LOADED = False
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def test_the_word_the_goal_named_is_pulled_out_of_it(self):
+        self.assertEqual(cenv.goal_literal(
+            "how many lines contain ERROR in data.txt"), "ERROR")
+        self.assertEqual(cenv.goal_literal(
+            "count the lines mentioning failed login in data.txt"),
+            "failed login")
+        self.assertIsNone(cenv.goal_literal("count the lines in data.txt"))
+
+    def test_the_probe_holds_the_word_and_lines_that_do_not(self):
+        """n lines holding it and n lines not, or "how many lines hold
+        this" and "how many lines are there" are the same question and
+        every line-counting program passes while answering the wrong one."""
+        probe = cenv.probe_bytes("lineswith", 7, "ERROR")
+        lines = probe.splitlines()
+        holding = [x for x in lines if b"ERROR" in x]
+        self.assertEqual(len(holding), 7)
+        self.assertGreater(len(lines), 7)
+
+    def test_the_question_is_answered_and_the_answer_is_true(self):
+        r = cenv.answer_query("how many lines contain ERROR in data.txt",
+                              self.file)
+        self.assertTrue(r["pass"], r)
+        self.assertEqual(r["value"], self.truth, r)
+
+    def test_the_command_that_answered_it_contains_the_word_asked_for(self):
+        """A command that never mentions ERROR has not looked for ERROR,
+        however right its number happens to be."""
+        r = cenv.answer_query("how many lines contain ERROR in data.txt",
+                              self.file)
+        self.assertTrue(r["pass"], r)
+        joined = " ".join(
+            " ".join(hit["argv"]) if hit.get("stages") != 2
+            else " ".join(hit["argv"][0]) + " " + " ".join(hit["argv"][1])
+            for hit in r["survivors"])
+        self.assertIn("ERROR", joined, r["survivors"])
+
+    def test_the_whole_manual_is_searched_when_the_hint_is_wrong(self):
+        """grep documents 83 flags and '--count' is the 65th. A goal that
+        never says the word 'count' gets shown --only-matching instead, so
+        the machine concludes nothing on the box can count. The wide pass
+        stops guessing which flags matter and offers all of them."""
+        self.assertTrue(cenv._one_wide(
+            "grep", "lineswith", "how many lines contain ERROR in data.txt",
+            ("ERROR",), 5.0, "ERROR"))
+
+    def test_the_probe_holds_the_same_word_the_command_hunts_for(self):
+        """A probe holding NEEDLE while the command hunts for ERROR finds
+        nothing -- and nothing looks exactly like failure."""
+        self.assertIsNone(cenv._one_wide(
+            "grep", "lineswith", "how many lines contain ERROR in data.txt",
+            ("ERROR",), 5.0))
+
+    def test_a_failure_is_not_remembered_as_a_fact(self):
+        """A success is a fact about the machine. An empty result is often
+        a fact about the SEARCH -- the right program not looked at yet.
+        Caching it makes the failure permanent and the question stays
+        unanswered forever."""
+        key = ("lineswith", 24)
+        cenv._QUERY_CACHE.pop(key, None)
+        real = cenv.installed_programs
+        try:
+            # a machine with nothing on it that can search, so the search
+            # genuinely fails -- and leaves nothing behind to mislead the
+            # next attempt. (Passing programs= would skip the cache
+            # entirely and prove nothing at all.)
+            cenv.installed_programs = lambda *a, **k: ["cat", "fmt"]
+            cenv.answer_query("how many lines contain ERROR in data.txt",
+                              self.file)
+        finally:
+            cenv.installed_programs = real
+        self.assertNotIn(key, cenv._QUERY_CACHE,
+                         "an empty result was cached as knowledge")
