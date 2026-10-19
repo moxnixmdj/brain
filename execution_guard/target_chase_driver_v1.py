@@ -200,6 +200,8 @@ def run(
 
     stale = 0
     blocked_on_data = 0
+    # gaps closed since the last stall, credited only if the number then moves
+    pending_gaps: list[str] = []
     for index in range(max_rounds):
         before = best
 
@@ -224,6 +226,21 @@ def run(
             if not complete:
                 blocked_on_data += 1
                 rounds.append({"round": index, "blocked_on_data": True, "reason": why})
+                # Being blocked is how the machine finds out what it does not
+                # know. Recording the reason turns a refusal into a gap it can
+                # later decide was worth closing -- which is what lets it learn
+                # WHICH ignorance matters instead of treating every block alike.
+                try:
+                    from canonical.runtime import ignorance_ledger_v1 as led
+                    gap_id = led.note(why, why=str(why), cost=1.0)
+                    if gap_id:
+                        pending_gaps.append(gap_id)
+                    rounds[-1]["gap_id"] = gap_id
+                    rounds[-1]["what_to_learn_next"] = [
+                        g["what"] for g in led.rank(limit=3)
+                    ]
+                except Exception:
+                    pass
                 # Do not act. Spend the round getting data instead.
                 if options_provider is not None:
                     try:
@@ -280,6 +297,18 @@ def run(
             return _result(MET, goal, target, direction, unit, rounds, best, opening, started, primers, recorded, options)
 
         improved = _improved(best, measured, direction)
+        # Closing a gap is only worth anything if the number then moves. That
+        # outcome is what teaches the ledger which ignorance actually blocked
+        # the goal -- without it every gap stays worth the same 0.5 forever.
+        if pending_gaps:
+            try:
+                from canonical.runtime import ignorance_ledger_v1 as led
+                for gid in pending_gaps:
+                    led.resolve(gid, helped=bool(improved), close=bool(improved))
+            except Exception:
+                pass
+            if improved:
+                pending_gaps = []
         if fly is not None:
             _turn_flywheel(
                 fly,

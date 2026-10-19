@@ -22,6 +22,8 @@ correctly; a machine that confidently acts on one source is not.
 
 from __future__ import annotations
 
+import os
+import tempfile
 import unittest
 from typing import Any
 
@@ -158,3 +160,82 @@ class ChaseRefusesToActOnIncompleteData(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class MachineLearnsWhichIgnoranceMatters(unittest.TestCase):
+    """It must not treat every block alike.
+
+    Two different reasons for being blocked. One of them, once closed, lets the
+    number move; the other never does. The machine has to notice the difference
+    and prefer the useful one next time -- with nobody telling it which.
+    """
+
+    def setUp(self) -> None:
+        fd, self.led_path = tempfile.mkstemp(suffix=".json")
+        os.close(fd); os.unlink(self.led_path)
+        fd, self.fly_path = tempfile.mkstemp(suffix=".json")
+        os.close(fd); os.unlink(self.fly_path)
+        from canonical.runtime import ignorance_ledger_v1 as led
+        self.led = led
+        self._real = led.DEFAULT_STATE
+        led.DEFAULT_STATE = self.led_path
+
+    def tearDown(self) -> None:
+        self.led.DEFAULT_STATE = self._real
+        for f in (self.led_path, self.fly_path):
+            try:
+                os.unlink(f)
+            except OSError:
+                pass
+
+    def _chase(self, block_reason: str, progress: bool, rounds: int = 3):
+        """One chase that is blocked, then either moves or does not."""
+        state = {"n": 0}
+
+        def measure():
+            return float(state["n"])
+
+        def act(ctx):
+            if progress:
+                state["n"] += 1
+            return {"did": "try"}
+
+        def gate(ctx):
+            # block only on the first round, so the gap is registered once
+            if ctx.get("round") == 0:
+                return {"complete": False, "reason": block_reason}
+            return {"complete": True, "reason": None}
+
+        return chase.run(
+            goal=GOAL, target=10.0, direction="maximize", unit="u",
+            measure=measure, act=act, max_rounds=rounds, patience=2,
+            completeness_gate=gate,
+            context={"options": [{"source_id": "a"}]},
+        )
+
+    def test_block_records_what_is_missing(self):
+        self._chase("ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2", progress=False)
+        self.assertGreaterEqual(self.led.stats()["gaps"], 1)
+
+    def test_blocked_round_reports_what_to_learn_next(self):
+        r = self._chase("ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2", progress=False)
+        blocked = [x for x in r["rounds"] if x.get("blocked_on_data")]
+        self.assertTrue(blocked)
+        self.assertTrue(blocked[0]["what_to_learn_next"])
+
+    def test_a_gap_that_pays_off_is_remembered_as_paying_off(self):
+        self._chase("GAP_THAT_PAYS", progress=True)
+        gaps = self.led.rank(include_resolved=True)
+        paying = [g for g in gaps if "GAP_THAT_PAYS" in str(g["what"])]
+        self.assertTrue(paying)
+        self.assertGreater(paying[0]["helped"], 0)
+
+    def test_the_machine_prefers_the_gap_that_actually_mattered(self):
+        """Two blocks. One pays, one never does. It must learn to prefer the one
+        that paid -- the ordering is earned by outcome, not written down."""
+        self._chase("GAP_NEVER_USEFUL", progress=False)
+        self._chase("GAP_ALWAYS_USEFUL", progress=True)
+
+        order = [g["what"] for g in self.led.rank(include_resolved=True)]
+        self.assertEqual(order[0], "GAP_ALWAYS_USEFUL", order)
+        self.assertEqual(order[-1], "GAP_NEVER_USEFUL", order)
