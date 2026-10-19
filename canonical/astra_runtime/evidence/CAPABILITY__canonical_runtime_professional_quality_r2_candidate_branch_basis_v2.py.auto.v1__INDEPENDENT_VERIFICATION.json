@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/professional_quality_r2_candidate_branch_basis_v2.py.auto.v1",
- "elapsed_ms": 1.659,
+ "elapsed_ms": 2.05,
  "independent_run_reference": {
-  "github_run_id": 39181079205,
+  "github_run_id": 39181380382,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "af9da69a-a6e1-4fd9-942d-ceaded505b22",
+   "jti": "c54c10d0-7b10-46e7-b770-5f4f2170fefe",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39181079205",
+   "run_id": "39181380382",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
