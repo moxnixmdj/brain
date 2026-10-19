@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/p3_required_claim_grounded_realization_cell_v1.py.auto.v1",
- "elapsed_ms": 3.637,
+ "elapsed_ms": 3.606,
  "independent_run_reference": {
-  "github_run_id": 39188132196,
+  "github_run_id": 39188428676,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "78d4bc3f-044e-43fe-b90a-e35bfaefdbb6",
+   "jti": "0e788489-dc54-4229-acc4-e310a152f907",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39188132196",
+   "run_id": "39188428676",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
