@@ -19,6 +19,10 @@ import tempfile
 import unittest
 
 from canonical.runtime import composer_route_v1 as croute
+from canonical.runtime import curriculum_v1
+from canonical.runtime import documentation_mining_v1
+from canonical.runtime import program_synthesis_v1
+from canonical.runtime import transfer_learning_v1
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 SCRATCH = ROOT / "canonical" / "astra_runtime" / "state" / "composer_route_scratch"
@@ -185,3 +189,82 @@ class SolveIntegrationTests(ScratchCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# --------------------------------------------------------------------------- #
+# the last resort: nothing registered, nothing in a table, nothing documented
+# --------------------------------------------------------------------------- #
+class DiscoveryFallbackTests(unittest.TestCase):
+    """Every earlier fallback is given something. This one is given only a
+    directory to act in, so it is the one that still works when the format
+    was never written down anywhere."""
+
+    def setUp(self) -> None:
+        from canonical.runtime import (curriculum_v1,
+                                       documentation_mining_v1,
+                                       program_synthesis_v1,
+                                       transfer_learning_v1)
+        self.tmp = tempfile.mkdtemp(prefix="brain-route-discover-")
+        self.mods = (curriculum_v1, documentation_mining_v1,
+                     program_synthesis_v1, transfer_learning_v1)
+        # STATE_PATH is bound at import time, so patch the attribute. A test
+        # that writes into the repository's real memory is not a test.
+        self.saved = [m.STATE_PATH for m in self.mods]
+        for m in self.mods:
+            m.STATE_PATH = os.path.join(self.tmp, type(m).__name__ + ".json")
+        # remove the format from the hand-written table so the only way left
+        # is to find out by acting
+        self.table = dict(program_synthesis_v1.CANDIDATES)
+        for key in (".gz", ".bz2"):
+            program_synthesis_v1.CANDIDATES.pop(key, None)
+
+    def tearDown(self) -> None:
+        program_synthesis_v1.CANDIDATES.clear()
+        program_synthesis_v1.CANDIDATES.update(self.table)
+        for m, path in zip(self.mods, self.saved):
+            m.STATE_PATH = path
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def route(self, goal: str) -> dict:
+        # seed=[] -- with nothing to compose from, no registered chain is
+        # reachable, so reaching the goal means it was actually discovered
+        return croute.route(goal, seed=[])
+
+    def test_a_format_no_table_knows_is_still_reached(self):
+        r = self.route("compress the input into out.gz")
+        self.assertTrue(r["pass"], r)
+        self.assertEqual(r["status"], "PASS__DISCOVERED_BY_ACTING")
+
+    def test_what_is_discovered_is_a_real_plan_not_a_guess(self):
+        r = self.route("compress the input into out.gz")
+        self.assertTrue(r["pass"], r)
+        self.assertEqual(r.get("plan"), ["run_gzip"],
+                         "the plan must name the program that worked")
+
+    def test_a_different_format_discovers_a_different_program(self):
+        gz = self.route("compress the input into out.gz")
+        bz2 = self.route("make a bzip2 archive out.bz2 from the input")
+        self.assertTrue(gz["pass"] and bz2["pass"])
+        self.assertEqual(bz2.get("plan"), ["run_bzip2"])
+        self.assertNotEqual(gz.get("plan"), bz2.get("plan"))
+
+    def test_it_really_tried_programs_rather_than_naming_one(self):
+        r = self.route("compress the input into out.gz")
+        self.assertGreater(r.get("actions_tried", 0), 1,
+                           "a single candidate is a guess, not a search")
+
+    def test_the_second_ask_is_answered_from_memory(self):
+        first = self.route("compress the input into out.gz")
+        second = self.route("compress the input into out.gz")
+        self.assertTrue(first["pass"] and second["pass"])
+        self.assertEqual(first.get("plan"), second.get("plan"))
+
+    def test_discovery_is_the_last_resort_not_the_first(self):
+        """When a table does know the format, acting is never reached --
+        it is the slowest way to learn what is already written down."""
+        from canonical.runtime import program_synthesis_v1 as synth
+        synth.CANDIDATES.clear()
+        synth.CANDIDATES.update(self.table)
+        r = croute.route("compress the input into out.gz", seed=[])
+        self.assertTrue(r["pass"], r)
+        self.assertNotEqual(r["status"], "PASS__DISCOVERED_BY_ACTING")

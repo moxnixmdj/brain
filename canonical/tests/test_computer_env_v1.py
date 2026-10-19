@@ -94,6 +94,25 @@ class EnvironmentTests(EnvCase):
         e.restore(token)
         self.assertEqual(e.listing(), before, "restore did not undo it")
 
+    def test_the_environment_reports_the_effect_it_really_had(self):
+        """An action that produced the file must not report failure because
+        the file is not called what we expected. A rule like "look for
+        input.txt.gz" says no for bzip2, xz and every program not yet
+        thought of -- and an environment that lies about its own effects
+        teaches the learner a false model of the computer."""
+        for prog, want in (("gzip", "input.txt.gz"),
+                           ("bzip2", "input.txt.bz2"),
+                           ("xz", "input.txt.xz")):
+            if shutil.which(prog) is None:
+                continue
+            with self.subTest(prog=prog):
+                e = self.env()
+                e.register(cenv.program_actions(e, programs=[prog]))
+                self.assertTrue(e.act("run_" + prog),
+                                "%s produced %s but reported failure"
+                                % (prog, want))
+                self.assertIn(want, e.listing())
+
     def test_an_unknown_action_changes_nothing(self):
         e = self.env()
         before = e.state()

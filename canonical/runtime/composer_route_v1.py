@@ -138,6 +138,25 @@ def route(goal: str, seed: Sequence[str] | None = None,
                 "status": "PASS__SYNTHESISED_PROGRAM",
                 "suffix": made.get("suffix"),
                 "authority": "SYNTHESISED_EXECUTED_AND_EFFECT_VERIFIED"}
+    # Nothing is registered, nothing could be written, and no documentation
+    # showed the way. The last resort is the one that is given nothing: act in
+    # a real directory, watch what changes, and keep the shortest sequence
+    # that reached the goal. It is last because it is the slowest, and last
+    # because it is the only one still standing when every other had nothing.
+    if not (isinstance(made, Mapping) and made.get("pass")):
+        try:
+            from canonical.runtime import computer_env_v1 as cenv
+            found = cenv.discover(goal)
+        except Exception:  # noqa: BLE001 - discovery must never break routing
+            found = None
+        if isinstance(found, Mapping) and found.get("closed"):
+            return {"schema": SCHEMA, "pass": True, "goal": goal,
+                    "token": None, "chain": [], "tried": tried,
+                    "explored": True, "plan": list(found.get("plan") or []),
+                    "suffix": found.get("suffix"),
+                    "actions_tried": found.get("actions_tried"),
+                    "status": "PASS__DISCOVERED_BY_ACTING",
+                    "authority": "DISCOVERED_BY_ACTING_AND_EFFECT_VERIFIED"}
     return {"schema": SCHEMA, "pass": False, "goal": goal, "token": None,
             "chain": [], "tried": tried,
             "status": "OPEN__COMPOSER_NO_REACHABLE_TOKEN",

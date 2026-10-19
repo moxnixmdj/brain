@@ -198,20 +198,28 @@ def program_actions(env: ComputerEnv,
 
     def make(prog: str) -> Callable[[ComputerEnv], bool]:
         def run(env: ComputerEnv) -> bool:
-            # try the forms a filter is usually invoked in. Programs that
+            # Try the forms a filter is usually invoked in. Programs that
             # cannot be driven this way simply produce nothing, and the
             # learner records that as a transition it can use.
+            #
+            # What counts as an effect is decided by what appeared, not by
+            # what name we expected: a rule saying "look for src + '.gz'"
+            # reports failure for bzip2, xz and every program not yet
+            # thought of, and an environment that lies about its own
+            # effects teaches the learner a false model.
+            before = set(env.listing())
             for argv in ([prog, src], [prog, "-c", src], [prog, src, "-k"]):
                 try:
                     proc = subprocess.run(argv, cwd=str(env.root),
                                           capture_output=True, timeout=10)
                 except Exception:  # noqa: BLE001 - a program must never break learning
                     continue
-                if proc.returncode == 0 and proc.stdout:
+                if proc.returncode != 0:
+                    continue
+                if proc.stdout:
                     (env.root / target).write_bytes(proc.stdout)
                     return True
-                produced = (env.root / (src + ".gz"))
-                if proc.returncode == 0 and produced.is_file():
+                if set(env.listing()) - before:
                     return True
             return False
         return run
@@ -219,3 +227,71 @@ def program_actions(env: ComputerEnv,
     for prog in (programs if programs is not None else env.programs):
         actions.append(("run_" + prog, make(prog)))
     return actions
+
+
+# --------------------------------------------------------------------------- #
+# discovering which program does it, by acting
+# --------------------------------------------------------------------------- #
+def programs_for(suffix: str, limit: int = 14) -> list[str]:
+    """Which programs to try. Discovered from PATH, then narrowed by whether
+    their name could plausibly produce this suffix -- 'gzip' for .gz is not
+    a fact anyone wrote down, it is a guess, and the learner proves it by
+    running the program.
+    """
+    letters = [c for c in str(suffix or "").lower().lstrip(".") if c.isalnum()]
+    installed = installed_programs(limit=400)
+    if not letters:
+        return installed[:limit]
+
+    def subsequence(prog: str) -> bool:
+        it = iter(prog)
+        return all(c in it for c in letters)
+
+    hits = [p for p in installed if subsequence(p)]
+    rest = [p for p in installed if p not in hits]
+    return (hits + rest)[:limit]
+
+
+def discover(gap: str, budget: int = 120, seed: int = 11) -> dict[str, Any]:
+    """Find out which program reaches this goal by acting, not by being told.
+
+    Nothing here is given a table of what any program does. The programs are
+    read from PATH, they are run in a scratch directory, and the shortest
+    sequence that produced the goal is what is returned -- and remembered, so
+    the same shape of problem does not have to be learned twice.
+    """
+    from canonical.runtime import cli_capability_acquisition_v1 as acq
+    try:
+        from canonical.runtime import transfer_learning_v1 as tl
+    except Exception as exc:  # noqa: BLE001 - a channel never breaks a caller
+        return {"closed": False, "status": "CHANNEL_ERROR",
+                "detail": type(exc).__name__ + ":" + str(exc)[:200]}
+
+    suffix = acq._requested_suffix(gap)
+    if not suffix:
+        return {"closed": False, "status": "OPEN__NO_OUTPUT_FORMAT_IN_GAP",
+                "detail": "nothing to verify an effect against"}
+
+    env = None
+    try:
+        env = ComputerEnv()
+        env.register(program_actions(env, programs=programs_for(suffix)))
+        target = "input.txt" + suffix
+        outcome = tl.drive(env, env.action_names,
+                           is_goal=lambda snap: target in str(snap),
+                           budget=budget, seed=seed)
+        tried = len(env.action_names)
+    except Exception as exc:  # noqa: BLE001
+        return {"closed": False, "status": "CHANNEL_ERROR",
+                "detail": type(exc).__name__ + ":" + str(exc)[:200]}
+    finally:
+        if env is not None:
+            env.close()
+
+    ok = outcome.get("reached") is True
+    plan = list(outcome.get("plan") or [])
+    return {"closed": ok, "status": outcome.get("status"), "plan": plan,
+            "suffix": suffix, "actions_tried": tried,
+            "from_memory": "RECALLED" in str(outcome.get("status") or ""),
+            "detail": ("found it by acting: %s" % ", ".join(plan)) if ok
+                      else (outcome.get("status") or "never reached it")}

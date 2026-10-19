@@ -284,27 +284,6 @@ def _try_synthesize(gap: str) -> dict[str, Any]:
                       if ok else (out.get("status") or "no candidate worked")}
 
 
-def _programs_for(suffix: str, limit: int = 14) -> list[str]:
-    """Which programs to try. Discovered from PATH, then narrowed by whether
-    their name could plausibly produce this suffix -- 'gzip' for .gz is not
-    a fact anyone wrote down, it is a guess, and the learner proves it by
-    running the program.
-    """
-    from canonical.runtime import computer_env_v1 as cenv
-    letters = [c for c in str(suffix or "").lower().lstrip(".") if c.isalnum()]
-    installed = cenv.installed_programs(limit=400)
-    if not letters:
-        return installed[:limit]
-
-    def subsequence(prog: str) -> bool:
-        it = iter(prog)
-        return all(c in it for c in letters)
-
-    hits = [p for p in installed if subsequence(p)]
-    rest = [p for p in installed if p not in hits]
-    return (hits + rest)[:limit]
-
-
 def _try_explore(gap: str) -> dict[str, Any]:
     """Find out by acting, when nothing else knew the shape of the answer.
 
@@ -315,42 +294,12 @@ def _try_explore(gap: str) -> dict[str, Any]:
     sequence that reaches the goal -- and the model it built is remembered,
     so the same shape of problem is instant next time.
     """
-    from canonical.runtime import cli_capability_acquisition_v1 as acq
+    from canonical.runtime import computer_env_v1 as cenv
     try:
-        from canonical.runtime import computer_env_v1 as cenv
-        from canonical.runtime import transfer_learning_v1 as tl
+        return cenv.discover(gap)
     except Exception as exc:  # noqa: BLE001 - a channel never breaks a lesson
         return {"closed": False, "status": "CHANNEL_ERROR",
                 "detail": type(exc).__name__ + ":" + str(exc)[:200]}
-
-    suffix = acq._requested_suffix(gap)
-    if not suffix:
-        return {"closed": False, "status": "OPEN__NO_OUTPUT_FORMAT_IN_GAP",
-                "detail": "nothing to verify an effect against"}
-
-    env = None
-    try:
-        env = cenv.ComputerEnv()
-        env.register(cenv.program_actions(env, programs=_programs_for(suffix)))
-        target = "input.txt" + suffix
-        outcome = tl.drive(env, env.action_names,
-                           is_goal=lambda snap: target in str(snap),
-                           budget=120, seed=11)
-    except Exception as exc:  # noqa: BLE001
-        return {"closed": False, "status": "CHANNEL_ERROR",
-                "detail": type(exc).__name__ + ":" + str(exc)[:200]}
-    finally:
-        if env is not None:
-            env.close()
-
-    ok = outcome.get("reached") is True
-    return {"closed": ok, "status": outcome.get("status"),
-            "plan": list(outcome.get("plan") or []),
-            "actions_tried": len(env.action_names) if env else 0,
-            "from_memory": "RECALLED" in str(outcome.get("status") or ""),
-            "detail": ("found it by acting: %s" % ", ".join(outcome.get("plan") or []))
-                      if ok else (outcome.get("status") or "never reached it")}
-
 
 def _try_documentation(gap: str) -> dict[str, Any]:
     """Read the manual for it, then really do it.
