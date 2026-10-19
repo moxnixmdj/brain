@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/v13_native_artifact_mechanical_selected_cell_verifier_v1.py.auto.v1",
- "elapsed_ms": 27.68,
+ "elapsed_ms": 21.729,
  "independent_run_reference": {
-  "github_run_id": 39184790157,
+  "github_run_id": 39185021366,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "d8337858-41a8-413e-b625-dd93a9e8cd9a",
+   "jti": "7d61c154-62d8-45aa-a21a-5f78bd60f332",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39184790157",
+   "run_id": "39185021366",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
