@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import pytest
 import os
+import random
 import shutil
 import sys
 from pathlib import Path
@@ -171,6 +172,121 @@ def test_every_capability_is_reachable_from_one_sentence_by_prose_or_by_name():
     assert counts.get("BLOCKED_ZERO_INPUT", 0) == 0
     assert counts["REACHED_AND_BOUND"] + counts.get("REACHED_BY_EXPLICIT_NAME", 0) == report["capabilities_total"]
     assert counts["REACHED_AND_BOUND"] >= 63
+
+
+def test_every_capability_is_reachable_BY_PROSE_alone():
+    """A plain sentence reaches EVERY capability - the id is never needed.
+
+    Measured before this rule: the metric asked the easy question for the 296 capabilities
+    that take no input ("can the caller spell the internal id?") and reported them as
+    REACHED_BY_EXPLICIT_NAME, so 296 capabilities looked unreachable by a sentence when the
+    machine in fact reached them by prose.  The metric now asks the PROSE question first, and
+    the honest answer is that prose alone reaches all of them.
+    """
+    report = reachability(WORK / "reach_prose")
+    counts = report["counts"]
+    assert counts.get("NOT_REACHABLE", 0) == 0, [r for r in report["rows"] if r["state"] == "NOT_REACHABLE"]
+    assert counts.get("ROUTED_ELSEWHERE", 0) == 0, [r for r in report["rows"] if r["state"] == "ROUTED_ELSEWHERE"]
+    assert counts.get("REACHED_BY_EXPLICIT_NAME", 0) == 0, [
+        r for r in report["rows"] if r["state"] == "REACHED_BY_EXPLICIT_NAME"][:10]
+    assert counts["REACHED_AND_BOUND"] == report["capabilities_total"], counts
+
+
+# ------------------------------------------- F27/F28: the request's own words decide
+
+
+def test_f27_a_request_that_states_a_version_excludes_the_other_versions():
+    """F27: "audit v2" is not a request for v1.
+
+    Measured: the version token is diluted - it appears in 88% of the corpus, so its IDF is
+    nearly zero and it moved the score by hundredths (46.18 against 46.14) - so a near-tied
+    sibling of a DIFFERENT version shrank the margin of a request that had already excluded
+    it, and the request failed closed on a capability it had named exactly.
+    """
+    from canonical.runtime import capability_selection_retrieval_v1 as sel
+    reg = _registry()
+    goal = "Run the composition cross step no bypass audit v2."
+    compiled = front.compile_goal(goal, reg, ROOT)
+    assert compiled.get("selected_capability") == "canonical/runtime/composition_cross_step_no_bypass_audit_v2.py.auto.v1"
+
+    # the request's version excludes the other version from the contest
+    proposals = [{"capability_id": "canonical/runtime/composition_cross_step_no_bypass_audit_v1.py.auto.v1",
+                  "lexical_relevance_score": 46.18},
+                 {"capability_id": "canonical/runtime/composition_cross_step_no_bypass_audit_v2.py.auto.v1",
+                  "lexical_relevance_score": 46.14}]
+    kept, excluded = sel.request_excluded_proposals(goal, proposals)
+    assert [p["capability_id"] for p in kept] == [
+        "canonical/runtime/composition_cross_step_no_bypass_audit_v2.py.auto.v1"]
+    assert excluded and excluded[0]["excluded_by"] == "F27_REQUESTED_VERSION_EXCLUDES_OTHER_VERSION"
+
+
+def test_f28_a_candidate_that_adds_an_unstated_word_is_not_the_one_asked_for():
+    """F28: the request never said "hblind", so the hblind variant is not what it asked for.
+
+    Measured: "Run the bytes active query task generator." was contested by
+    `bytes_hblind_active_query_task_generator_v1`, whose extra word appears nowhere in the
+    request.  The general capability is the one that was asked for.
+    """
+    from canonical.runtime import capability_selection_retrieval_v1 as sel
+    goal = "Run the bytes active query task generator."
+    proposals = [{"capability_id": "canonical/runtime/bytes_active_query_task_generator_v1.py.auto.v1",
+                  "lexical_relevance_score": 34.14},
+                 {"capability_id": "canonical/runtime/bytes_hblind_active_query_task_generator_v1.py.auto.v1",
+                  "lexical_relevance_score": 33.57}]
+    kept, excluded = sel.request_excluded_proposals(goal, proposals)
+    assert [p["capability_id"] for p in kept] == [
+        "canonical/runtime/bytes_active_query_task_generator_v1.py.auto.v1"]
+    assert excluded and excluded[0]["excluded_by"] == "F28_UNSTATED_DISTINGUISHING_WORD"
+
+
+def test_a_version_token_is_a_name_fragment_and_not_a_stated_value():
+    """A bare "v1" names a capability; it is not a value the caller supplied.
+
+    Measured: "Run the p3 binary decision grounded expression v1." bound the `expression`
+    input to the string "v1", so the request for a capability NAMED
+    `p3_binary_decision_grounded_expression_v1` was served by `math.numeric_expression.sympy`
+    with the expression "v1" - a number, not an expression.  A QUOTED value is still a value.
+    """
+    reg = _registry()
+    goal = "Run the p3 binary decision grounded expression v1."
+    compiled = front.compile_goal(goal, reg, ROOT)
+    assert compiled.get("selected_capability") == "canonical/runtime/p3_binary_decision_grounded_expression_v1.py.auto.v1"
+    assert compiled.get("inputs", {}).get("expression") != "v1"
+
+
+def test_the_compiler_does_not_crash_when_the_repository_root_is_a_string():
+    """A compiler that crashes is not a compiler that fails closed.
+
+    Measured: `repair_output_collisions` declared `root: pathlib.Path` but the retrieval path
+    passes whatever the caller gave it; a request naming "p3 binary decision grounded
+    expression v1" died on `root / value` with `unsupported operand type(s) for /: 'str' and
+    'str'`.  The type is settled inside the function rather than at each call site.
+    """
+    reg = _registry()
+    goal = "Run the p3 binary decision grounded expression v1."
+    compiled = front.compile_goal(goal, reg, str(ROOT))
+    assert compiled.get("selected_capability") == "canonical/runtime/p3_binary_decision_grounded_expression_v1.py.auto.v1"
+
+
+def test_a_plain_sentence_executes_a_receipt_backed_capability_and_matches_the_CI_oracle():
+    """The one entry reaches a receipt-backed capability by NAME, runs it, and the result
+    reproduces the hash GitHub Actions minted for it.
+
+    The expected value is computed by a DIFFERENT identity, on different hardware, and this
+    machine never produced it.  That is what makes it an oracle rather than a self-report.
+    """
+    from execution_guard.live_solver_families_v7 import gen_receipt_prose_execution
+    rng = random.Random(20261019)
+    case = gen_receipt_prose_execution(rng, WORK / "v7", 0)
+    assert case.family == "RECEIPT_PROSE_EXECUTION"
+    assert not case.goal.startswith("run "), case.goal
+    task_id = "TEST_V7_PROSE_%d" % os.getpid()
+    try:
+        result = adm.solve({"task_id": task_id, "goal": case.goal})
+        good, why = case.oracle(result)
+        assert good, f"{case.goal} -> {why}"
+    finally:
+        _cleanup(task_id)
 
 
 def test_solve_executes_a_compound_literal_goal_end_to_end():

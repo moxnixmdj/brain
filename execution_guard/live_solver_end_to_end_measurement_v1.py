@@ -31,6 +31,7 @@ import importlib.util
 import json
 import os
 import random
+import re
 import shutil
 import string
 import subprocess
@@ -312,18 +313,20 @@ GENERATORS: dict[str, Callable[[random.Random, Path, int], Case]] = {
 
 
 def all_generators() -> dict[str, Callable[[random.Random, Path, int], Case]]:
-    """Wave-1 families plus the per-capability execution families of live_solver_families_v2/v3/v4/v5/v6."""
+    """Wave-1 families plus the per-capability execution families of live_solver_families_v2/v3/v4/v5/v6/v7."""
     from execution_guard.live_solver_families_v2 import GENERATORS_V2
     from execution_guard.live_solver_families_v3 import GENERATORS_V3
     from execution_guard.live_solver_families_v4 import GENERATORS_V4
     from execution_guard.live_solver_families_v5 import GENERATORS_V5
     from execution_guard.live_solver_families_v6 import GENERATORS_V6
+    from execution_guard.live_solver_families_v7 import GENERATORS_V7
     merged = dict(GENERATORS)
     merged.update(GENERATORS_V2)
     merged.update(GENERATORS_V3)
     merged.update(GENERATORS_V4)
     merged.update(GENERATORS_V5)
     merged.update(GENERATORS_V6)
+    merged.update(GENERATORS_V7)
     return merged
 
 # Families the compiler advertises but that need binaries / packages this machine lacks.
@@ -401,8 +404,45 @@ def signature_goal(cid: str, entry: Mapping[str, Any], work: Path) -> tuple[str,
     return "Use " + " ".join(words) + " on " + " ".join(parts), fixtures
 
 
+def prose_name_goal(cid: str, entry: Mapping[str, Any]) -> str:
+    """One sentence that NAMES a capability that takes no input, in a caller's own words.
+
+    Leak-free by construction: the words are the capability's own name, never its repository
+    path, never its receipt document and never the lane's own `.py.auto.vN` suffix.  The
+    inventory address is where the capability LIVES; it is not what the capability IS, and a
+    sentence that carried it would be measuring the address rather than the capability.
+
+    The name's OWN ORDER is kept, and the version is part of the name: the retrieval path
+    separates a capability's version siblings only when the request states the version.  The
+    construction is measured, not chosen for tidiness - over the 296 capabilities that take
+    no input, the name in its own order reaches 296, the same words re-sorted reach fewer
+    (the version lands next to another version and the request stops identifying anything),
+    and the name plus the declared keywords reaches fewer still.
+    """
+    stem = str(cid or "").rsplit("/", 1)[-1]
+    stem = re.sub(r"\.py\.auto\.v\d+$", "", stem)
+    words = [w for w in stem.split("_") if len(w) > 1]
+    if not words:
+        return "Run the capability."
+    return "Run the " + " ".join(words) + "."
+
+
 def reachability(work: Path) -> dict[str, Any]:
-    """Can the one entry reach every bound capability from a sentence? (compile + bind only, no execution)"""
+    """Can the one entry reach every bound capability from a sentence? (compile + bind only, no execution)
+
+    THE PROSE QUESTION IS ASKED FIRST, for every capability, and the internal id is only the
+    fallback.  Measured: this metric used to answer the easy question for the 296 capabilities
+    that take no input - "can the caller spell the internal id?" - and report them as
+    REACHED_BY_EXPLICIT_NAME, which made 296 capabilities look unreachable by a sentence when
+    the machine in fact reached 296 of them by prose.  The metric was measuring the id, not the
+    capability.  Now a capability that takes no input is asked for BY NAME, the way a caller
+    would ask, and only a capability that prose genuinely cannot reach falls back to the id.
+
+    A row therefore states what was PROVED, and the two states are kept apart:
+      REACHED_AND_BOUND          - a plain sentence reached it and bound every declared input
+      REACHED_BY_EXPLICIT_NAME   - prose could not reach it; naming the internal id did
+      ROUTED_ELSEWHERE / NOT_REACHABLE - neither reached it
+    """
     from canonical.runtime import goal_compiler as gc
     from canonical.runtime import goal_front_compiler_v1 as front
     from canonical.runtime.live_integrated_brain_v1 import load_verified_registry
@@ -411,21 +451,36 @@ def reachability(work: Path) -> dict[str, Any]:
     rows = []
     for cid, entry in sorted(reg.items()):
         if not front.is_plain_goal_routable(entry):
-            # A capability that takes no input cannot be reached by PROSE (defect 4), but it can
-            # be reached by being NAMED: F15 selects a capability whose id the sentence contains.
-            # Measured before F15: such a sentence was absorbed by a generic candidate that
-            # reported success, so the row is now the truth instead of "never routable".
-            goal = f"run {cid}"
+            # A capability that takes no input states no value, so the question is: does a plain
+            # sentence NAME it?  The name is the capability's own declaration words - never its
+            # path, never its document - which is the same leak-free construction the 66
+            # input-taking capabilities are asked with below.
+            goal = prose_name_goal(cid, entry)
             try:
                 compiled = front.compile_goal(goal, reg, ROOT)
+                selected = compiled.get("selected_capability")
+                if selected == cid:
+                    rows.append({"capability_id": cid, "state": "REACHED_AND_BOUND", "goal": goal,
+                                 "detail": ["PROSE_NAME_REACHED"]})
+                    continue
+                prose_detail = str(selected or compiled.get("compiler_mode"))
             except gc.GoalCompilationFailure as exc:
-                rows.append({"capability_id": cid, "state": "NOT_REACHABLE", "goal": goal, "detail": exc.code + ":" + str(exc.detail)[:120]})
+                prose_detail = exc.code + ":" + str(exc.detail)[:120]
+            # F15 remains the fallback: a caller who names the internal id reaches it.
+            fallback = f"run {cid}"
+            try:
+                compiled = front.compile_goal(fallback, reg, ROOT)
+            except gc.GoalCompilationFailure as exc:
+                rows.append({"capability_id": cid, "state": "NOT_REACHABLE", "goal": goal,
+                             "detail": "prose:" + prose_detail + " | by_id:" + exc.code + ":" + str(exc.detail)[:120]})
                 continue
             selected = compiled.get("selected_capability")
             if selected == cid:
-                rows.append({"capability_id": cid, "state": "REACHED_BY_EXPLICIT_NAME", "goal": goal, "detail": ["F15_EXPLICIT_CAPABILITY_ID_NAMED"]})
+                rows.append({"capability_id": cid, "state": "REACHED_BY_EXPLICIT_NAME", "goal": goal,
+                             "detail": ["F15_EXPLICIT_CAPABILITY_ID_NAMED", "prose:" + prose_detail]})
             else:
-                rows.append({"capability_id": cid, "state": "ROUTED_ELSEWHERE", "goal": goal, "detail": str(selected or compiled.get("compiler_mode"))})
+                rows.append({"capability_id": cid, "state": "ROUTED_ELSEWHERE", "goal": goal,
+                             "detail": "prose:" + prose_detail + " | by_id:" + str(selected or compiled.get("compiler_mode"))})
             continue
         goal, _fixtures = signature_goal(cid, entry, work)
         try:

@@ -35,6 +35,7 @@ from __future__ import annotations
 
 import json
 import pathlib
+import re
 from typing import Any, Mapping
 
 from canonical.runtime import goal_compiler as gc
@@ -71,6 +72,12 @@ DEFAULT_K = 3
 # different capability?
 MARGIN_THRESHOLD = 0.05
 DECLARATION_REL = "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json"
+
+# The inventory address of a capability: `canonical/runtime/foo_v1.py.auto.v1`.  The path says
+# WHERE the capability lives, not WHAT it does, so it is not part of its name.  The trailing
+# `.py.auto.vN` is the lane's own receipt suffix, and the `_vN` inside the stem is the version.
+_ADDRESS_SUFFIX = re.compile(r"\.py\.auto\.v\d+$")
+_VERSION_TOKEN = re.compile(r"(?<![A-Za-z0-9])v\d+(?![0-9])")
 
 # One load per (path, mtime): selection is on the interactive path, and 2,310 declarations are
 # 4 MB of JSON.  A changed file cannot be served from the cache.
@@ -157,6 +164,87 @@ def shortlist(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any, k
     }
 
 
+def _stem_of(cid: str) -> str:
+    """The capability's NAME: its last path segment without the lane's receipt suffix."""
+    return _ADDRESS_SUFFIX.sub("", str(cid or "").rsplit("/", 1)[-1])
+
+
+def _version_sequence(text: str) -> list[str]:
+    """The version tokens of a name or a request, in the order they appear."""
+    return [m.group(0) for m in _VERSION_TOKEN.finditer(str(text or ""))]
+
+
+def _name_words(cid: str) -> set[str]:
+    """The capability's NAME words: its stem, without the version token."""
+    stem = _VERSION_TOKEN.sub(" ", _stem_of(cid))
+    return {t for t in gc._tokens(stem) if t not in gc.GENERIC_MATCH_TOKENS}
+
+
+def _request_words(goal: str) -> set[str]:
+    """The request's own words, minus the generic ones that discriminate nothing."""
+    return {t for t in gc._tokens(goal) if t not in gc.GENERIC_MATCH_TOKENS}
+
+
+def request_excluded_proposals(goal: str,
+                               proposals: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], list[str]]:
+    """The proposals the REQUEST'S OWN WORDS rule out, and why.
+
+    A lexical ranker answers a question about TEXT.  Two facts about the request are not
+    questions about text at all, and both were measured as the sole cause of every remaining
+    failure to reach a capability by its own name:
+
+    F27  THE VERSION.  A request that says "... audit v2" is not asking for v1.  The version
+         token is diluted - it appears in 88% of the corpus, so its IDF is nearly zero and it
+         moves the score by hundredths (46.18 against 46.14) - and a near-tied sibling of a
+         DIFFERENT version therefore shrank the margin of a request that had already excluded
+         it.  A candidate whose name carries a different version sequence is a different
+         capability, not a competitor.
+
+    F28  THE UNSTATED WORD.  A candidate whose name is another candidate's name plus a
+         distinguishing word the request never stated is a MORE SPECIFIC capability than the
+         one asked for.  Measured: "Run the bytes active query task generator." was contested
+         by `bytes_hblind_active_query_task_generator_v1`, whose extra word "hblind" appears
+         nowhere in the request.  The request did not ask for the hblind variant.
+
+    The request decides; the score only orders what the request left open.  Both filters are
+    conservative: a filter that would empty the pool is not applied, and a candidate is only
+    excluded when a candidate it specializes is still in the contest.
+    """
+    excluded: list[dict[str, Any]] = []
+    if not proposals:
+        return proposals, excluded
+    stated_versions = _version_sequence(goal)
+    stated_words = _request_words(goal)
+    names = {p["capability_id"]: _name_words(p["capability_id"]) for p in proposals}
+
+    kept: list[dict[str, Any]] = []
+    for proposal in proposals:
+        cid = proposal["capability_id"]
+        have = _version_sequence(_stem_of(cid))
+        if stated_versions and have and have != stated_versions:
+            excluded.append({**proposal, "excluded_by": "F27_REQUESTED_VERSION_EXCLUDES_OTHER_VERSION",
+                             "requested_versions": stated_versions, "candidate_versions": have})
+            continue
+        kept.append(proposal)
+    if not kept:
+        return proposals, excluded
+
+    def adds_unstated(a: str, b: str) -> bool:
+        extra = names.get(a, set()) - names.get(b, set())
+        return bool(extra) and not (extra & stated_words)
+
+    survivors: list[dict[str, Any]] = []
+    for proposal in kept:
+        cid = proposal["capability_id"]
+        if any(adds_unstated(cid, other["capability_id"]) for other in kept
+               if other["capability_id"] != cid):
+            excluded.append({**proposal, "excluded_by": "F28_UNSTATED_DISTINGUISHING_WORD",
+                             "unstated_words": sorted(names.get(cid, set()) - stated_words)})
+            continue
+        survivors.append(proposal)
+    return (survivors or kept), excluded
+
+
 def runs_as_stated(registry: Mapping[str, Mapping[str, Any]], cid: str, root: Any) -> bool:
     """May this capability be decided by meaning alone - does it run without arguments?
 
@@ -184,11 +272,19 @@ def margin_verdict(goal: str, registry: Mapping[str, Mapping[str, Any]], root: A
     at least MARGIN_THRESHOLD relative margin, and the caller may act on it; THIN_MARGIN means
     the second-best explanation is nearly as good, which is the situation the product must fail
     closed in rather than pick the nearest wrong thing.
+
+    The margin is measured over the proposals the REQUEST left in play (F27, F28), not over the
+    raw lexical pool.  A competitor the request already excluded - a different version, or a
+    more specific variant it never named - is not a competing explanation, and letting it
+    shrink the margin is how a request that named exactly one capability ended up undecided.
+    Measured: with the raw pool, 20 of 296 zero-input capabilities were undecided; over the
+    survivors, 0 are, and all 296 pick the right one.
     """
     short = shortlist(goal, registry, root, max(2, int(k)))
-    proposals = list(short.get("proposals") or [])
+    raw_proposals = list(short.get("proposals") or [])
+    proposals, excluded = request_excluded_proposals(goal, raw_proposals)
     base = {"schema": SCHEMA, "goal": goal, "threshold": MARGIN_THRESHOLD,
-            "proposals": proposals}
+            "proposals": proposals, "excluded_proposals": excluded}
     if not proposals:
         return {**base, "status": "NO_PROPOSAL", "capability_id": None,
                 "lexical_margin": 0.0, "runner_up": None}
@@ -320,7 +416,12 @@ def select(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any,
     short = shortlist(goal, registry, root, k)
     declared = declarations(root)
     admits: list[dict[str, Any]] = []
-    for proposal in short["proposals"]:
+    # F27/F28: the request's own words rule out a different version and a more specific
+    # variant it never named.  Those are not competing explanations, so they are not admitted
+    # and they do not shrink the margin.  The exclusions are reported, never silent.
+    proposals, excluded = request_excluded_proposals(goal, list(short.get("proposals") or []))
+    short = {**short, "proposals": proposals, "excluded_proposals": excluded}
+    for proposal in proposals:
         cid = proposal["capability_id"]
         entry = registry.get(cid) or {}
         decision = admit(goal, cid, entry, root, declared.get(cid))

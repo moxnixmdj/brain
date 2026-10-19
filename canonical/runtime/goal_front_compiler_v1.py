@@ -196,6 +196,10 @@ _BOOL_KEYS = {"authoritative"}
 _ARGV_KEYS = {"test_argv"}
 _JSON_OR_TEXT_KEYS = {"spec", "objective"}
 _KV_KEYS = {"variables"}
+# The keys that ASK for a version, so a bare version token is their value and not a name
+# fragment.  Measured over the live registry: 55 distinct input keys, and exactly one of
+# them denotes a version - `version_field` on `web.release.verify.independent_http`.
+_VERSION_KEYS = {"version_field", "version"}
 
 
 def normalize_goal(goal: str) -> str:
@@ -404,6 +408,21 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path):
     raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":value_not_parseable")
 
 
+# A bare version token - "v1", "v2", "v10" - is a NAME fragment, not a stated value.
+#
+# Measured: "Run the p3 binary decision grounded expression v1." bound the capability's
+# `expression` input to the string "v1", so the request for a capability NAMED
+# `p3_binary_decision_grounded_expression_v1` was served by `math.numeric_expression.sympy`
+# with the expression "v1" - a number, not an expression.  The words "expression" and "v1"
+# are how the request NAMES the capability; neither is a value the caller supplied.  This is
+# the same discipline as F25 (a quoted literal's words are not the task's words) applied to
+# the inventory's own naming convention.
+#
+# The rule is narrow on purpose: it applies to a BARE token only.  A quoted value is the
+# caller stating it, and a key that denotes a version (`version_field`) is asking for one.
+_VERSION_FRAGMENT = re.compile(r"^v\d+$")
+
+
 def _parse_typed_value(key: str, tail: str, quoted_only: bool = False):
     if key in _NUMERIC_KEYS:
         return _number(tail)
@@ -443,6 +462,9 @@ def _parse_typed_value(key: str, tail: str, quoted_only: bool = False):
     if value is None and not quoted_only:
         m = re.match(r"\s*([A-Za-z0-9_.:/-]+)", tail)
         value = m.group(1) if m else None
+        # a bare version token names a capability; it is not a value the caller stated
+        if value is not None and _VERSION_FRAGMENT.match(value) and key not in _VERSION_KEYS:
+            return None
     return value
 
 
@@ -832,6 +854,13 @@ def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Pa
     closed on it, so this never overrides a stated intent.
     """
     rebound = []
+    # The repository root arrives as a string from some callers (the retrieval path passes
+    # whatever the caller gave it) and as a Path from others.  Measured: a request naming
+    # "p3 binary decision grounded expression v1" reached this function with a str root and
+    # died on `root / value` with `unsupported operand type(s) for /: 'str' and 'str'` - a
+    # crash in the compiler, not a refusal.  A compiler that crashes is not a compiler that
+    # fails closed, so the type is settled here rather than at each call site.
+    root = pathlib.Path(root)
     input_paths = {str(v) for k, v in inputs.items() if k.endswith("_path") and not _is_output_key(k, entry)}
     for key in [k for k in inputs if k.endswith("_path") and _is_output_key(k, entry)]:
         value = str(inputs[key])
