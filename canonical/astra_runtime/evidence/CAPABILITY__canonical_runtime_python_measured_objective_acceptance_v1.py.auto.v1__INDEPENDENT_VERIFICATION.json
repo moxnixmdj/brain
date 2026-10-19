@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/python_measured_objective_acceptance_v1.py.auto.v1",
- "elapsed_ms": 4.596,
+ "elapsed_ms": 5.253,
  "independent_run_reference": {
-  "github_run_id": 39220199152,
+  "github_run_id": 39220657969,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "603ea143-576e-45c2-bb50-cdd17e635f4d",
+   "jti": "86c59e7a-7ec2-4651-b7e0-8414ac23525d",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39220199152",
+   "run_id": "39220657969",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
