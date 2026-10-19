@@ -273,3 +273,48 @@ def to_registry_entry(acquired: Mapping[str, Any], capability_id: str) -> dict[s
             "output_prefix_hex": acquired.get("output_prefix_hex"),
         },
     }
+
+
+def register(acquired: Mapping[str, Any], capability_id: str, *,
+             registry_path: str | None = None,
+             overwrite: bool = False) -> dict[str, Any]:
+    """Make a verified acquisition invocable -- the last mile of learning.
+
+    Until it is in the registry, a learned capability is a souvenir: bankable,
+    inspectable, and unreachable. Nothing can call it. Registering is what lets
+    the machine actually use the thing it just taught itself.
+
+    Refuses by default rather than overwrite. A capability that already exists
+    was proven by whatever means it was proven; replacing it with something
+    learned from one probe run -- which the evidence above explicitly labels
+    EFFECT_VERIFIED_NOT_SEMANTICALLY_PROVEN -- would trade a known quantity for
+    a plausible one. Growth must not be able to destroy what already worked.
+    """
+    from canonical.runtime import capability_type_surface_v1 as ts
+
+    path = pathlib.Path(registry_path or ts.REGISTRY)
+    entry = to_registry_entry(acquired, capability_id)
+    if entry is None:
+        return {"registered": False,
+                "reason": "NOT_VERIFIED_ONLY_VERIFIED_ACQUISITIONS_ARE_REGISTERED"}
+
+    try:
+        doc = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        return {"registered": False, "reason": "REGISTRY_UNREADABLE:" + type(exc).__name__}
+
+    caps = doc.get("capabilities")
+    if not isinstance(caps, dict):
+        return {"registered": False, "reason": "REGISTRY_SHAPE_UNRECOGNISED"}
+
+    if capability_id in caps and not overwrite:
+        return {"registered": False, "reason": "CAPABILITY_ALREADY_EXISTS",
+                "capability_id": capability_id}
+
+    caps[capability_id] = entry
+    # write atomically: a half-written registry is worse than an unchanged one
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(json.dumps(doc, indent=1, sort_keys=True), encoding="utf-8")
+    tmp.replace(path)
+    return {"registered": True, "capability_id": capability_id,
+            "count": len(caps)}

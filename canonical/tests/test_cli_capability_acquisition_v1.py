@@ -271,3 +271,84 @@ class WiringTests(unittest.TestCase):
         """)
         acq.acquire(self.bin.probe_for(exe), "encode into out.png")
         self.assertGreaterEqual(self.led.stats(path=self.lp)["gaps"], 1)
+
+
+class RegistrationTests(unittest.TestCase):
+    """A learned capability has to become reachable, or learning was theatre."""
+
+    def setUp(self) -> None:
+        self.tmp = tempfile.mkdtemp(prefix="brain-cli-reg-")
+        self.bin = _BinaryFactory(self.tmp)
+        # a copy of the real registry shape, never the real registry
+        from canonical.runtime import capability_type_surface_v1 as ts
+        self.real = pathlib.Path(ts.REGISTRY)
+        doc = json.loads(self.real.read_text(encoding="utf-8"))
+        self.reg = pathlib.Path(self.tmp) / "REG.json"
+        self.reg.write_text(json.dumps(doc), encoding="utf-8")
+
+    def tearDown(self) -> None:
+        import shutil
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def _acquired(self, name="regme"):
+        exe = self.bin.make(name, """
+            import sys
+            a = sys.argv[1:]
+            if "--help" in a:
+                print("Usage: REGM [options]")
+                print("  -o, --output=FILE  Send output to FILE")
+                print("  -d, --data=DATA    Data content")
+                print("  Supported formats: PNG.")
+                sys.exit(0)
+            for i, t in enumerate(a):
+                if t in ("-o", "--output"):
+                    open(a[i+1], "wb").write(bytes.fromhex("89504e470d0a1a0a") + b"ok")
+        """.replace("REGM", name))
+        return acq.acquire(self.bin.probe_for(exe), "encode text into out.png")
+
+    def test_verified_acquisition_becomes_reachable(self):
+        """The last mile: it shows up where capabilities are looked up."""
+        from canonical.runtime import capability_type_surface_v1 as ts
+        r = self._acquired()
+        self.assertEqual(r["status"], acq.PASS)
+        out = acq.register(r, "acquired.regme", registry_path=str(self.reg))
+        self.assertTrue(out["registered"], out)
+
+        doc = json.loads(self.reg.read_text())
+        self.assertIn("acquired.regme", doc["capabilities"])
+        # and the surface can now derive a signature for it, which is what
+        # makes it invocable rather than merely present
+        sigs = ts.signatures(doc["capabilities"])
+        self.assertIn("acquired.regme", sigs)
+
+    def test_it_refuses_to_overwrite_an_existing_capability(self):
+        """Growth must not be able to destroy what already worked."""
+        r = self._acquired()
+        acq.register(r, "acquired.regme", registry_path=str(self.reg))
+        again = acq.register(r, "acquired.regme", registry_path=str(self.reg))
+        self.assertFalse(again["registered"])
+        self.assertEqual(again["reason"], "CAPABILITY_ALREADY_EXISTS")
+
+    def test_overwrite_requires_saying_so_explicitly(self):
+        r = self._acquired()
+        acq.register(r, "acquired.regme", registry_path=str(self.reg))
+        out = acq.register(r, "acquired.regme", registry_path=str(self.reg),
+                           overwrite=True)
+        self.assertTrue(out["registered"])
+
+    def test_unverified_is_never_registered(self):
+        out = acq.register({"status": acq.NOT_VERIFIED, "verified": False}, "nope",
+                           registry_path=str(self.reg))
+        self.assertFalse(out["registered"])
+        self.assertIn("NOT_VERIFIED", out["reason"])
+
+    def test_registry_is_left_untouched_on_refusal(self):
+        before = self.reg.read_text(encoding="utf-8")
+        acq.register({"status": acq.NOT_VERIFIED, "verified": False}, "nope",
+                     registry_path=str(self.reg))
+        self.assertEqual(self.reg.read_text(encoding="utf-8"), before)
+
+    def test_the_real_registry_is_not_modified_by_any_test(self):
+        """Guard against the obvious catastrophic mistake."""
+        self.assertEqual(json.loads(self.real.read_text())["capabilities"]
+                         .get("acquired.regme"), None)
