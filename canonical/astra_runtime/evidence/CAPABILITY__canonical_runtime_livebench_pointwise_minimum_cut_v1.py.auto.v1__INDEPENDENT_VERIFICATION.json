@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_pointwise_minimum_cut_v1.py.auto.v1",
- "elapsed_ms": 3266.404,
+ "elapsed_ms": 3279.602,
  "independent_run_reference": {
-  "github_run_id": 39192029028,
+  "github_run_id": 39192276161,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "94a428d2-8ed6-47e9-878b-ec9163e152a7",
+   "jti": "b6c7285f-e649-4165-86bd-54825b6857f1",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39192029028",
+   "run_id": "39192276161",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
