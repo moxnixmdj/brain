@@ -257,6 +257,29 @@ class EfficiencyTests(_Isolated, unittest.TestCase):
         self.assertEqual(cur.CHANNELS["solve"]["cost"],
                          min(c["cost"] for c in cur.CHANNELS.values()))
 
+    def test_the_channel_that_assumes_nothing_costs_the_most(self):
+        """Every other channel is given something: a registered capability,
+        a format in a table, a module the goal named, a source that answered.
+        explore is given only somewhere to act, so it is tried last."""
+        self.assertIn("explore", cur.CHANNELS)
+        self.assertEqual(cur.CHANNELS["explore"]["cost"],
+                         max(c["cost"] for c in cur.CHANNELS.values()))
+
+    def test_the_channel_that_assumes_nothing_is_tried_last(self):
+        """With no evidence to separate them, cost alone orders the channels,
+        and the one that is given the least pays the most."""
+        self.assertEqual(list(cur.ordered_channels())[-1], "explore")
+
+    def test_the_last_resort_is_not_wasted_on_what_is_already_known(self):
+        """explore is the only channel given nothing, so it is also the only
+        one that still works when every other has nothing to offer. Spending
+        it on a format a cheaper channel already knows is pure waste."""
+        r = cur.study("compress the input into out.gz")
+        self.assertTrue(r["pass"], r)
+        self.assertNotEqual(r["closed_by"], "explore")
+        self.assertNotIn("explore", r["channels_tried"])
+
+
     def test_a_gap_already_solvable_is_closed_by_the_cheap_channel(self):
         """No retrieval needed when the machine can already do it."""
         r = cur.study("run shell command echo hello")
