@@ -249,6 +249,9 @@ def gen_exact_literal(rng: random.Random, work: Path, i: int) -> Case:
     return Case("EXACT_LITERAL_RESPONSE", goal, oracle, True, [])
 
 
+# Requests NO bound capability can serve.  The only correct answer is pass=False with nothing
+# written, so every wording here is a fail-closed test: the machine must not stretch a tool
+# it does not have into an answer it cannot give.
 _OOS_TEMPLATES = [
     "Translate the sentence '{s}' into {lang} and save it to {o}.",
     "Write a short poem about {thing} and save it to {o}.",
@@ -264,6 +267,18 @@ _OOS_TEMPLATES = [
     "Convert {n} degrees Celsius to Fahrenheit and save the result to {o}.",
     "Find the capital of {country} and save it to {o}.",
     "Generate a secure password of {n} characters and save it to {o}.",
+    "Translate '{s}' into {lang} and write the translation to {o}.",
+    "Summarize {src} in three sentences and save the summary to {o}.",
+    "Write a Python tutorial for beginners about {thing} and save it to {o}.",
+    "Sort the lines of {src} and save the sorted result to {o}.",
+    "Count the vowels in {src} and save the count to {o}.",
+    "Plan a two week trip to {city} and save the itinerary to {o}.",
+    "Explain the ownership rules of {country} and save the explanation to {o}.",
+    "Recommend a restaurant in {city} and save the recommendation to {o}.",
+    "Predict the closing price of a stock and save the forecast to {o}.",
+    "Negotiate the lease of an apartment in {city} and save the agreement to {o}.",
+    "Compose a limerick about {thing} and save it to {o}.",
+    "Translate the file {src} into {lang} and save the translation to {o}.",
 ]
 
 
@@ -297,28 +312,29 @@ GENERATORS: dict[str, Callable[[random.Random, Path, int], Case]] = {
 
 
 def all_generators() -> dict[str, Callable[[random.Random, Path, int], Case]]:
-    """Wave-1 families plus the per-capability execution families of live_solver_families_v2/v3/v4/v5."""
+    """Wave-1 families plus the per-capability execution families of live_solver_families_v2/v3/v4/v5/v6."""
     from execution_guard.live_solver_families_v2 import GENERATORS_V2
     from execution_guard.live_solver_families_v3 import GENERATORS_V3
     from execution_guard.live_solver_families_v4 import GENERATORS_V4
     from execution_guard.live_solver_families_v5 import GENERATORS_V5
+    from execution_guard.live_solver_families_v6 import GENERATORS_V6
     merged = dict(GENERATORS)
     merged.update(GENERATORS_V2)
     merged.update(GENERATORS_V3)
     merged.update(GENERATORS_V4)
     merged.update(GENERATORS_V5)
+    merged.update(GENERATORS_V6)
     return merged
 
-# Families the compiler advertises but that need binaries / packages this machine lacks, or
-# a goal grammar not yet reproduced here.  Listed so the denominator is honest.
+# Families the compiler advertises but that need binaries / packages this machine lacks.
+# Listed so the denominator is honest.  Wave 6 removed three entries by measuring them here:
+# CHART_RASTER_READERS (PIL + the F21 pair grammar), KNOWLEDGE_FETCH_ASSESS_ASSERT and
+# HTTP_JSON_FETCH__PYPI_AUDIT__WEB_RELEASE (allowlisted https egress to pypi.org/github.com).
 NOT_MEASURED_HERE = {
-    "MARKDOWN_TO_PDF": "pandoc + weasyprint (apt) not installed here",
+    "MARKDOWN_TO_PDF": "pandoc (apt) not installed here",
     "PDF_TEXT_OCR": "tesseract-ocr (apt) not installed here",
     "QR_BARCODE_GENERATE_DECODE": "qrencode / zbar-tools / zint (apt) not installed here",
     "BROWSER_CAPTURE": "chromedriver (apt) not installed here",
-    "HTTP_JSON_FETCH__PYPI_AUDIT__WEB_RELEASE": "network egress blocked in this sandbox",
-    "CHART_RASTER_READERS": "PIL installed; compound goal grammar pending",
-    "KNOWLEDGE_FETCH_ASSESS_ASSERT": "network egress blocked in this sandbox",
 }
 
 
@@ -371,7 +387,7 @@ def signature_goal(cid: str, entry: Mapping[str, Any], work: Path) -> tuple[str,
             continue
         if key in _TYPED_EXAMPLE:
             parts.append(_TYPED_EXAMPLE[key])
-        elif key.endswith("_path") and front._is_output_key(key):
+        elif key.endswith("_path") and front._is_output_key(key, entry):
             parts.append("and save it to " + _rel(work / ("out_" + key + _output_suffix(entry, key))))
         elif key.endswith("_path") or key in ("path", "source_root") or key.endswith("_paths"):
             stem = key[:-5].lower() if key.endswith("_path") else key

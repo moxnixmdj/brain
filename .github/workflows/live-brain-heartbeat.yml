@@ -18,7 +18,15 @@ on:
     paths:
       - "canonical/runtime/goal_front_compiler_v1.py"
       - "canonical/runtime/live_brain_route_admission_v1.py"
+      - "canonical/runtime/capability_selection_retrieval_v1.py"
       - "execution_guard/live_solver_end_to_end_measurement_v1.py"
+      - "execution_guard/live_solver_families_v2.py"
+      - "execution_guard/live_solver_families_v3.py"
+      - "execution_guard/live_solver_families_v4.py"
+      - "execution_guard/live_solver_families_v5.py"
+      - "execution_guard/live_solver_families_v6.py"
+      - "canonical/tests/test_goal_front_compiler_v1.py"
+      - "canonical/tests/test_live_brain_route_admission_v1.py"
       - ".github/workflows/live-brain-heartbeat.yml"
 
 permissions:

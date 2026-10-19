@@ -13,3 +13,10 @@ canonical/astra_runtime/state/LIVE_BRAIN_*
 canonical/astra_runtime/state/probe-*
 canonical/runtime/r3_learning_verification_receipts/
 canonical/runtime/SELF_IMPROVEMENT_STATE_V1.json
+
+# Heartbeat run artifacts: the receipt and the job summary are published by the
+# live-brain-heartbeat workflow (upload-artifact), not versioned as source.  The
+# controller checkpoints one heartbeat run leaves behind are run litter, same as
+# the test-suite litter above.
+heartbeat_out/
+canonical/astra_runtime/state/E2E_*
