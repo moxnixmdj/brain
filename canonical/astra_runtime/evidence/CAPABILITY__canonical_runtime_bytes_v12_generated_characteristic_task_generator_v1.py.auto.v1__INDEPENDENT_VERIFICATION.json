@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/bytes_v12_generated_characteristic_task_generator_v1.py.auto.v1",
- "elapsed_ms": 103.216,
+ "elapsed_ms": 106.911,
  "independent_run_reference": {
-  "github_run_id": 39223803408,
+  "github_run_id": 39224227521,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "2bffee66-d0ba-4ab6-b416-a338ed2d9b5b",
+   "jti": "accdee3c-cb0c-4743-98b2-4905a7e598b6",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39223803408",
+   "run_id": "39224227521",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
