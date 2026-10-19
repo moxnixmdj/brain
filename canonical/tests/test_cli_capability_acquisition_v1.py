@@ -486,3 +486,65 @@ class NoOutputFormatTests(IsolatedStores, unittest.TestCase):
                                           "help_attempts": [{"text": ""}]}]},
                         "encode text into out.png")
         self.assertEqual(r["status"], acq.PASS)
+
+# --------------------------------------------------------------------------- #
+# the OUTPUT is what must be checked, not the input
+# --------------------------------------------------------------------------- #
+class RequestedSuffixTests(unittest.TestCase):
+    """A goal that names an input file before its output must not end up
+    verifying the input. Files that already existed prove nothing."""
+
+    CASES = [
+        ("compress notes.txt into notes.txt.gz with gzip", ".gz"),
+        ("use gzip to compress notes.txt into notes.txt.gz", ".gz"),
+        ("bzip2 notes.txt into notes.txt.bz2", ".bz2"),
+        ("convert a.png to b.jpg", ".jpg"),
+        ("read notes.txt and write summary.md", ".md"),
+        ("extract text from a.pdf into out.txt", ".txt"),
+        ("create notes.txt.tar containing notes.txt", ".tar"),
+        ("write the text hello to out.txt", ".txt"),
+        ("extract text from a pdf file", ""),
+        ("compress notes.txt with gzip", ".txt"),
+    ]
+
+    def test_the_output_extension_is_the_one_the_goal_asks_for(self):
+        for goal, want in self.CASES:
+            self.assertEqual(acq._requested_suffix(goal), want,
+                             "wrong output extension for %r" % goal)
+
+    def test_the_first_extension_is_the_input_and_must_not_be_used(self):
+        """Regression: this returned .txt -- the file that was already there."""
+        goal = "compress notes.txt into notes.txt.gz with gzip"
+        self.assertNotEqual(acq._requested_suffix(goal), ".txt")
+
+
+class RealEffectTests(unittest.TestCase):
+    """Run a real program and check what it really produced."""
+
+    def test_gzip_is_verified_by_its_magic_bytes_not_by_a_file_existing(self):
+        import shutil
+        from canonical.runtime import empirical_cli_probe_v1 as emp
+
+        if not shutil.which("gzip"):
+            self.skipTest("gzip is not installed here")
+        goal = "compress notes.txt into notes.txt.gz with gzip"
+        suffix = acq._requested_suffix(goal)
+        self.assertEqual(suffix, ".gz")
+
+        observed = emp.probe("gzip", goal, suffix=suffix)
+        self.assertTrue(str(observed.get("status") or "").startswith("PASS"))
+        # 1f8b is the gzip magic number. Without checking it the probe is
+        # only asking "does a file exist", which the input already answers.
+        self.assertEqual(observed.get("output_prefix_hex"), "1f8b")
+
+    def test_verifying_against_a_plain_text_output_checks_no_format_at_all(self):
+        """So a .txt goal is only honest if the goal really asks for text."""
+        import shutil
+        from canonical.runtime import empirical_cli_probe_v1 as emp
+
+        if not shutil.which("gzip"):
+            self.skipTest("gzip is not installed here")
+        observed = emp.probe("gzip", "compress notes.txt into notes.txt.gz",
+                             suffix=".txt")
+        self.assertIsNone(observed.get("output_prefix_hex"),
+                          "a .txt output has no format to verify")

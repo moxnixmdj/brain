@@ -837,6 +837,44 @@ def _credit_recall(rows: list, succeeded: bool) -> None:
             continue
 
 
+COMPOSED_EXECUTOR = "TYPE_LEVEL_COMPOSITION_LOCAL_ADAPTER"
+
+
+def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | None:
+    """Close a goal by chaining capabilities, when no single one matches.
+
+    Returns None when composition cannot reach the goal, so the caller still
+    reports the honest gap. Returns a real result only when every step of the
+    chain ran and returned.
+    """
+    try:
+        from canonical.runtime import composer_route_v1 as croute
+        routed = croute.route(goal)
+        if not routed.get("pass"):
+            return None
+        executed = croute.execute_chain(routed["chain"], goal)
+    except Exception:  # noqa: BLE001 - composition must never break routing
+        return None
+    if not executed.get("pass"):
+        return None
+    return {
+        "schema": LIVE_SCHEMA, "status": "PASS__COMPOSED_CAPABILITY_CHAIN",
+        "pass": True, "task_id": task_id, "goal": goal,
+        "executed": True, "execution_proof_type": COMPOSED_EXECUTOR,
+        "composer_route": {k: routed.get(k) for k in ("token", "chain", "tried")},
+        "composer_execution": {k: executed.get(k) for k in
+                               ("steps", "produced", "status")},
+        "capability_id": (routed["chain"] or [None])[-1],
+        "controller": {"executor": COMPOSED_EXECUTOR, "returncode": 0,
+                       "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+                       "cognition_dependency_class": "MODEL_INDEPENDENT",
+                       "model_dependency_count": 0,
+                       "steps_run": len(executed.get("steps") or [])},
+        "incremental_spend_usd": 0,
+        "elapsed_ns": perf_counter_ns() - started,
+    }
+
+
 def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     """THE live Brain entry: front-compile -> admit -> execute -> tool truth -> promised artifacts."""
     started = perf_counter_ns()
@@ -847,6 +885,13 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     try:
         registry, admissible, compiled = live_integrated_brain_v1.compile_against_live_registry(goal, ROOT)
     except goal_compiler.GoalCompilationFailure as exc:
+        # The sentence names no single capability. Before calling that a gap,
+        # ask the composer whether a CHAIN of capabilities reaches it: the
+        # sentence may describe work no one capability does but several do
+        # together. Composition was built and tested and then never called.
+        composed = _try_composed(task_id, goal, started)
+        if composed is not None:
+            return composed
         return _fail(task_id, "FAIL__RAW_GOAL_COMPILATION_GAP", "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP", started,
                      compiler_code=exc.code, compiler_detail=exc.detail, route_admission=None)
     except Exception as exc:  # pragma: no cover - defensive, mirrors run_raw_goal
@@ -879,6 +924,22 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         result["side_effects_may_exist"] = True
     missing = promised_artifact_errors(goal, future_artifacts) if result.get("pass") is True else []
     if missing:
+        # The promised file is not there. That is the only verdict that
+        # matters -- and it is also the moment to try something else, rather
+        # than reporting a gap while a chain of capabilities could have
+        # produced the thing. Composition is tried here, on the evidence.
+        composed = _try_composed(task_id, goal, started)
+        if composed is not None:
+            composed["memory_recalled"] = [
+                {"id": r.get("id"), "content": r.get("content"),
+                 "relevance": r.get("relevance"), "importance": r.get("importance")}
+                for r in recalled]
+            composed["route_admission"] = admission
+            composed["supersedes"] = {
+                "status": result.get("status"),
+                "compiled_capability_id": result.get("compiled_capability_id"),
+                "promised_artifact_errors": list(missing)}
+            return composed
         result["runtime_status_before_artifact_check"] = result.get("status")
         result["status"] = "FAIL_CLOSED__PROMISED_ARTIFACT_MISSING"
         result["pass"] = False

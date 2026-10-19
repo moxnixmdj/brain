@@ -136,14 +136,18 @@ class LearnOnFailureTests(unittest.TestCase):
         shutil.rmtree(self.tmp, ignore_errors=True)
 
     def test_failure_records_the_gap(self):
-        r = ra.solve_or_learn({"task_id": "t", "goal": "write the text hello to out.txt"},
+        # composition now closes "write the text hello to out.txt", so the
+        # failure path is exercised with something nothing here can do
+        r = ra.solve_or_learn({"task_id": "t",
+                               "goal": "extract text from a pdf file"},
                               registry_path=self.regp)
         self.assertEqual(r["status"], "FAIL__RAW_GOAL_COMPILATION_GAP")
         self.assertTrue(r["learning"]["gap_recorded"])
         self.assertTrue(r["learning"]["what_to_learn_next"])
 
     def test_failure_says_what_to_learn_next(self):
-        ra.solve_or_learn({"task_id": "t", "goal": "write the text hello to out.txt"},
+        ra.solve_or_learn({"task_id": "t",
+                           "goal": "extract text from a pdf file"},
                           registry_path=self.regp)
         ranked = self.led.rank(limit=3)
         self.assertTrue(ranked)
@@ -164,12 +168,14 @@ class LearnOnFailureTests(unittest.TestCase):
 
     def test_learning_can_be_turned_off(self):
         r = ra.solve_or_learn({"task_id": "t",
-                               "goal": "write the text hello to out.txt"},
+                               "goal": "extract text from a pdf file"},
                               learn=False, registry_path=self.regp)
         self.assertNotIn("learning", r)
 
     def test_solve_itself_is_unchanged(self):
         """The measured path must not move: only the wrapper learns."""
-        r = ra.solve({"task_id": "t", "goal": "write the text hello to out.txt"})
+        # composition closes "write the text hello to out.txt" now; this
+        # one nothing here can do, so the failure path is still exercised
+        r = ra.solve({"task_id": "t", "goal": "extract text from a pdf file"})
         self.assertNotIn("learning", r)
         self.assertEqual(r["status"], "FAIL__RAW_GOAL_COMPILATION_GAP")

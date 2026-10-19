@@ -258,9 +258,30 @@ def acquire(probe: Mapping[str, Any], goal: str, *,
 
 
 def _requested_suffix(goal: str) -> str:
-    """The output extension the goal asks for, so the effect can be checked."""
-    m = re.search(r"(\.[A-Za-z0-9]{1,6})\b", str(goal or ""))
-    return m.group(1) if m else ""
+    """The OUTPUT extension the goal asks for, so the effect can be checked.
+
+    Taking the first extension in the sentence measures the INPUT. For
+    "compress notes.txt into notes.txt.gz" that is .txt -- a file which
+    already existed before anything was learned. Verifying against it
+    declares success for producing a file that was there all along, and a
+    gap gets closed by doing nothing. The output is the TARGET: what follows
+    into/to/as, or failing that the last extension named.
+    """
+    text = str(goal or "")
+    target = re.search(
+        r"\b(?:into|to|as|named|called|output|produce|producing)\s+"
+        r"[\"']?([^\s\"']+\.([A-Za-z0-9]{1,6}))\b", text, re.I)
+    if target:
+        return "." + target.group(2)
+    # the other way round: "create notes.txt.tar containing notes.txt" makes
+    # the output the thing being built and the input the thing named after
+    source = re.search(r"\b(?:containing|from|using|with)\s+", text, re.I)
+    if source:
+        head = re.findall(r"(\.[A-Za-z0-9]{1,6})\b", text[:source.start()])
+        if head:
+            return head[-1]
+    found = re.findall(r"(\.[A-Za-z0-9]{1,6})\b", text)
+    return found[-1] if found else ""
 
 
 def _remember(result: Mapping[str, Any], goal: str) -> None:

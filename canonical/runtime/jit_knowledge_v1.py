@@ -101,6 +101,24 @@ def _get(url: str, timeout: int = DEFAULT_TIMEOUT_S) -> tuple[int, bytes]:
 
 _GH_SEARCH: dict[str, tuple[float, list[dict[str, Any]]]] = {}
 
+# github allows about ten unauthenticated search requests a minute. Asking
+# faster than that does not get more answers, it gets refused -- and the
+# refusal then reads as "the world has nothing on this", which is a lie about
+# the world caused by bad manners. Spend the allowance; do not exceed it.
+_GH_CALLS: list[float] = []
+_GH_MAX_CALLS = int(os.environ.get("BRAIN_GH_MAX_CALLS", "8"))
+_GH_WINDOW_S = 60.0
+
+
+def _gh_wait() -> None:
+    now = time.time()
+    _GH_CALLS[:] = [t for t in _GH_CALLS if now - t < _GH_WINDOW_S]
+    if len(_GH_CALLS) >= _GH_MAX_CALLS:
+        time.sleep(_GH_WINDOW_S - (now - _GH_CALLS[0]) + 0.2)
+        now = time.time()
+        _GH_CALLS[:] = [t for t in _GH_CALLS if now - t < _GH_WINDOW_S]
+    _GH_CALLS.append(time.time())
+
 
 def _fetch_github(query: str, limit: int, timeout: int) -> list[dict[str, Any]]:
     """One search, shared. github's unauthenticated search allows about ten
@@ -120,6 +138,7 @@ def _fetch_github(query: str, limit: int, timeout: int) -> list[dict[str, Any]]:
 
 
 def _gh_search(query: str, limit: int, timeout: int) -> list[dict[str, Any]]:
+    _gh_wait()
     url = ("https://api.github.com/search/repositories?q="
            + urllib.parse.quote(query) + f"&per_page={max(1, min(limit, 10))}")
     status, body = _get(url, timeout)

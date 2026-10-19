@@ -401,7 +401,10 @@ class StagedRetrievalTests(_Store, unittest.TestCase):
 # --------------------------------------------------------------------------- #
 # the live path, with a real gap
 # --------------------------------------------------------------------------- #
-GAP_GOAL = "write the text hello to out.txt"
+# Composition now closes "write the text hello to out.txt" outright, so
+# it is no longer a gap. This one is still genuinely impossible here:
+# nothing on this machine can open a pdf.
+GAP_GOAL = "extract text from a pdf file"
 
 
 @requires_network
@@ -431,8 +434,10 @@ class LivePathRealTests(_Store, unittest.TestCase):
     def test_a_badly_asked_question_still_reaches_two_kinds(self):
         from canonical.runtime import live_brain_route_admission_v1 as ra
 
+        # awkward on purpose, and still impossible here, so the retrieval
+        # path is really exercised
         r = ra.solve_or_learn({"task_id": "t",
-                               "goal": "write the text hello to out.txt"})
+                               "goal": "get the writing out of that there pdf thing"})
         k = (r.get("learning") or {}).get("knowledge") or {}
         self.assertGreaterEqual(len(k.get("kinds_answered") or []), 2,
                                 "one kind is not knowledge: %s" % k)

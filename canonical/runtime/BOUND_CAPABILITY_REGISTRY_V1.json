@@ -5712,6 +5712,49 @@
         "shell.command.result"
       ],
       "requires": []
+    },
+    "text.file.write": {
+      "action_template": {
+        "args": {
+          "capability_id": "text.file.write",
+          "content": "${input.content}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "file_write_text",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "write",
+        "text",
+        "file",
+        "create",
+        "save",
+        "content",
+        "output"
+      ],
+      "limitations": [
+        "Writes UTF-8 text to one repository-local file.",
+        "The written bytes are read back and compared before the step is reported as done."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "text.file.available"
+      ],
+      "requires": [],
+      "source": {
+        "modules": [],
+        "adapter_path": "canonical/runtime/bound_capabilities/file_write_text.py"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

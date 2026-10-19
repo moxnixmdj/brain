@@ -51,6 +51,8 @@ if not STATE_PATH:
 # cost is what the channel spends, not how good it is
 CHANNELS: dict[str, dict[str, Any]] = {
     "solve":     {"cost": 0.4, "note": "maybe it can already do this"},
+    # composing is local and needs no network: cheaper than asking the world
+    "compose":   {"cost": 0.6, "note": "chain what it already has"},
     "knowledge": {"cost": 1.0, "note": "go and get the data"},
     "acquire":   {"cost": 1.8, "note": "learn to run a program"},
 }
@@ -177,11 +179,36 @@ def _try_knowledge(gap: str, min_sources: int, min_kinds: int = 2,
                     len(out.get("kinds_answered") or []):
                 out = retry
         if out.get("pass") is True:
-            return {"closed": True, "status": out.get("status"), "query": query,
-                    "documents": out.get("document_count", 0),
-                    "sources": out.get("sources_answered") or [],
-                    "kinds": out.get("kinds_answered") or [],
-                    "detail": "independent sources answered"}
+            candidates = _candidates_from(out.get("documents"))
+            # Sources answering is not the gap closing. The world saying
+            # "pypdf exists" does not make this machine able to extract text
+            # from a pdf -- that is the same error as concluding YouTube from
+            # one paper, moved one level up. The gap closes when one of the
+            # programs the world named actually does the job here.
+            for exe in candidates:
+                used = _try_with(gap, exe)
+                if used["closed"]:
+                    return {"closed": True, "status": "PASS__GAP_CLOSED_BY_DOING",
+                            "query": query, "executable": exe,
+                            "documents": out.get("document_count", 0),
+                            "sources": out.get("sources_answered") or [],
+                            "kinds": out.get("kinds_answered") or [],
+                            "detail": used["detail"]}
+            attempt = {"closed": False, "query": query,
+                       "status": "OPEN__KNOWLEDGE_NAMED_NOTHING_USABLE"
+                       if candidates else "OPEN__KNOWLEDGE_NAMED_NO_PROGRAM",
+                       "documents": out.get("document_count", 0),
+                       "sources": out.get("sources_answered") or [],
+                       "kinds": out.get("kinds_answered") or [],
+                       "candidates": candidates,
+                       "detail": ("the world answered but nothing it named "
+                                  "could do the job here"
+                                  % () if candidates else
+                                  "the world answered but named no program "
+                                  "that exists on this machine")}
+            if not best or attempt["documents"] > best.get("documents", 0):
+                best = attempt
+            continue
         if not best or out.get("document_count", 0) > best.get("documents", 0):
             best = {"closed": False, "status": out.get("status"), "query": query,
                     "documents": out.get("document_count", 0),
@@ -189,6 +216,68 @@ def _try_knowledge(gap: str, min_sources: int, min_kinds: int = 2,
                     "kinds": out.get("kinds_answered") or [],
                     "detail": (out.get("gap") or "sources did not answer")}
     return best
+
+
+def _candidates_from(documents: Any) -> list[str]:
+    """Programs the world named that are actually HERE.
+
+    Knowledge naming a package is not knowledge naming a program: the
+    document says "pypdf exists", which is only useful if something by that
+    name runs on this machine.
+    """
+    from canonical.runtime import live_brain_route_admission_v1 as ra
+    out: list[str] = []
+    for doc in (documents or []):
+        if not isinstance(doc, Mapping):
+            continue
+        for text in (str(doc.get("id") or ""), str(doc.get("title") or "")):
+            head = text.strip().split()[0] if text.strip() else ""
+            head = head.strip(".,()[]{}'\"")
+            if (2 <= len(head) <= 40 and head not in out
+                    and ra._is_executable(head)):
+                out.append(head)
+    return out[:6]
+
+
+def _try_with(gap: str, exe: str) -> dict[str, Any]:
+    """Do the thing with this program. Reading is not doing."""
+    from canonical.runtime import empirical_cli_probe_v1 as emp
+    from canonical.runtime import cli_capability_acquisition_v1 as acq
+    suffix = acq._requested_suffix(gap)
+    if not suffix:
+        return {"closed": False, "status": "NO_OUTPUT_FORMAT_IN_GAP",
+                "executable": exe, "detail": "nothing to verify an effect against"}
+    observed = emp.probe(exe, gap, suffix=suffix)
+    ok = str(observed.get("status") or "").startswith("PASS")
+    return {"closed": ok, "status": observed.get("status"), "executable": exe,
+            "detail": ("did it with %s" % exe) if ok
+                      else ("%s is here but did not do it" % exe)}
+
+
+def _try_compose(gap: str) -> dict[str, Any]:
+    """Chain the capabilities it already has into one that does the job.
+
+    Most things a computer does are not one capability, they are several in
+    order. Before going out to the world for data, try doing the work with
+    what is already here -- that is the fastest way to learn, because the
+    answer is already owned.
+    """
+    try:
+        from canonical.runtime import composer_route_v1 as croute
+        routed = croute.route(gap)
+        if not routed.get("pass"):
+            return {"closed": False, "status": "OPEN__COMPOSER_NO_REACHABLE_TOKEN",
+                    "detail": "no chain of capabilities reaches this"}
+        executed = croute.execute_chain(routed["chain"], gap)
+    except Exception as exc:  # noqa: BLE001 - a channel never breaks a lesson
+        return {"closed": False, "status": "CHANNEL_ERROR",
+                "detail": type(exc).__name__ + ":" + str(exc)[:200]}
+    ok = executed.get("pass") is True
+    return {"closed": ok, "status": executed.get("status"),
+            "chain": list(routed.get("chain") or []),
+            "token": routed.get("token"),
+            "detail": ("composed and ran %s" % ", ".join(routed["chain"]))
+                      if ok else str(executed.get("failed_step") or "")[:200]}
 
 
 def _try_acquire(gap: str) -> dict[str, Any]:
@@ -234,6 +323,8 @@ def study(gap: Mapping[str, Any] | str, *, min_sources: int = 2,
                 outcome = _try_solve(what)
             elif name == "knowledge":
                 outcome = _try_knowledge(what, min_sources, min_kinds)
+            elif name == "compose":
+                outcome = _try_compose(what)
             elif name == "acquire":
                 outcome = _try_acquire(what)
             else:
