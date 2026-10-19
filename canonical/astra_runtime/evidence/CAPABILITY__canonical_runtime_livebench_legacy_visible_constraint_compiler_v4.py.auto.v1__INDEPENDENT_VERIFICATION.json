@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v4.py.auto.v1",
- "elapsed_ms": 0.132,
+ "elapsed_ms": 0.195,
  "independent_run_reference": {
-  "github_run_id": 39278436214,
+  "github_run_id": 39281335006,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "5d603990-5c29-4e4d-8ac8-02e1c5c06384",
+   "jti": "5702588c-49c9-40b3-bb88-9682b3ef349b",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39278436214",
+   "run_id": "39281335006",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
