@@ -453,8 +453,11 @@ class SentientComputerAgent:
                 "elapsed_us": (time.perf_counter_ns() - t0) // 1000,
             }
 
-        # Real execution via live brain
+        # Real execution via live brain (ensure repo root is importable even when cwd is not repo root)
         try:
+            import sys
+            if str(self.repo_root) not in sys.path and str(self.repo_root.parent) not in sys.path:
+                sys.path.insert(0, str(self.repo_root))
             from canonical.runtime.live_brain_route_admission_v1 import solve
             import uuid
             result = solve({"task_id": f"sentient-{uuid.uuid4().hex[:8]}", "goal": goal})
