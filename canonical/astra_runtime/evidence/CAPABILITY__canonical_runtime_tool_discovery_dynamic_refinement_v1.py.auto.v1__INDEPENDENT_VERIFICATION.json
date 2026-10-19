@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/tool_discovery_dynamic_refinement_v1.py.auto.v1",
- "elapsed_ms": 29.28,
+ "elapsed_ms": 43.141,
  "independent_run_reference": {
-  "github_run_id": 39201213870,
+  "github_run_id": 39201455799,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "ddbcf993-f6fd-44af-8695-fd4f996ca264",
+   "jti": "fe527296-b56a-4384-89c7-9081225f9d9d",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39201213870",
+   "run_id": "39201455799",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
