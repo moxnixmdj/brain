@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/tool_discovery_observability_partition_v2.py.auto.v1",
- "elapsed_ms": 18.697,
+ "elapsed_ms": 25.622,
  "independent_run_reference": {
-  "github_run_id": 39199304014,
+  "github_run_id": 39199531231,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "09cb528c-010d-49dc-99d0-05cf8c9791b9",
+   "jti": "36e88a60-26cc-434f-9e04-af76f521c4eb",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39199304014",
+   "run_id": "39199531231",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
