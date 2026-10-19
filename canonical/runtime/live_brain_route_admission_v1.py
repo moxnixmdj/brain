@@ -803,6 +803,40 @@ def promised_artifact_errors(goal: str, future_artifacts: list[str]) -> list[str
     return errors
 
 
+
+def _recall_for(goal: str) -> list:
+    """What the machine remembers that bears on this goal, before it acts.
+
+    Memory existed but nothing asked it. Every solve re-derived everything from
+    keyword overlap, so a lesson learned once changed nothing the next time.
+    Consulting is additive: it cannot change what is admitted, only what is
+    known -- and memory failures must never break the live path.
+    """
+    try:
+        from canonical.runtime import flywheel_v1 as fly
+        return list(fly.relevant(goal, "", k=5) or [])
+    except Exception:
+        return []
+
+
+def _credit_recall(rows: list, succeeded: bool) -> None:
+    """Tell memory whether what it dredged up was worth dredging up.
+
+    Without this, importance never differentiates: every memory stays at the
+    0.5 prior and "what is important" is never learned. This is the only thing
+    that separates a memory from a search index.
+    """
+    try:
+        from canonical.runtime import associative_memory_v1 as mem
+    except Exception:
+        return
+    for row in rows:
+        try:
+            mem.credit(str(row.get("id") or ""), helped=bool(succeeded))
+        except Exception:
+            continue
+
+
 def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     """THE live Brain entry: front-compile -> admit -> execute -> tool truth -> promised artifacts."""
     started = perf_counter_ns()
@@ -819,6 +853,8 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         return _fail(task_id, "FAIL_CLOSED", "RAW_GOAL_INTEGRATION_RUNTIME_ERROR", started, reason=type(exc).__name__ + ":" + str(exc))
     normalized = front.normalize_goal(goal)
     future_artifacts = _future_artifacts(normalized)
+    # ask memory what it knows about work like this, before deciding anything
+    recalled = _recall_for(normalized)
     admission = route_admission(normalized, compiled, admissible)
     admission["front_compiler_rules"] = list((compiled.get("front_compiler") or {}).get("rules_applied") or [])
     if admission.get("admitted") is not True:
@@ -826,6 +862,13 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
                      compiled_capability_id=admission.get("selected_capability"), compiler_mode=compiled.get("compiler_mode"), route_admission=admission)
     result = _execute(task_id, goal, compiled, admissible, started)
     result["route_admission"] = admission
+    result["memory_recalled"] = [
+        {"id": r.get("id"), "content": r.get("content"),
+         "relevance": r.get("relevance"), "importance": r.get("importance")}
+        for r in recalled
+    ]
+    # close the loop: what memory offered is judged by what actually happened
+    _credit_recall(recalled, bool(result.get("pass")))
     truth = tool_truth_errors(result)
     if truth and result.get("pass") is True:
         result["runtime_status_before_truth_check"] = result.get("status")
