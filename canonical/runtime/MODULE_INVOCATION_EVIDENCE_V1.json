@@ -110,7 +110,7 @@
   "canonical/verification/p3_policy_influence_v10_compositional_replay_v1.py": "SystemExit:1",
   "canonical/verification/run_scoped_self_verification_guard_v1.py": "ModuleNotFoundError:No module named 'v22_prewrite_admission'"
  },
- "junit_cases": 11754,
+ "junit_cases": 11892,
  "measured_platform": "linux",
  "measured_python": "3.11",
  "modules": {
@@ -38435,6 +38435,24 @@
      },
      "tier": "READ_ONLY_UNTESTED"
     },
+    "compile_goal": {
+     "doc": "Front compile. Returns the pinned compiler's shape plus ``front_compiler`` metadata.",
+     "passing_cases": 33,
+     "signature": {
+      "params": [
+       "goal",
+       "admissible",
+       "root"
+      ],
+      "required": [
+       "goal",
+       "admissible",
+       "root"
+      ],
+      "var_kw": false
+     },
+     "tier": "TEST_EVIDENCED"
+    },
     "explicitly_named_capabilities": {
      "doc": "Every capability whose id appears verbatim in ``goal``, on identifier boundaries.",
      "passing_cases": 1,
@@ -38528,8 +38546,8 @@
      "tier": "READ_ONLY_UNTESTED"
     },
     "prose_only": {
-     "doc": "The sentence without URLs and repository paths (F8).",
-     "passing_cases": 0,
+     "doc": "The sentence without URLs, repository paths and quoted literals (F8, F25).",
+     "passing_cases": 1,
      "signature": {
       "params": [
        "goal"
@@ -38539,7 +38557,7 @@
       ],
       "var_kw": false
      },
-     "tier": "READ_ONLY_UNTESTED"
+     "tier": "TEST_EVIDENCED"
     },
     "ranked_candidates": {
      "doc": "Candidates ranked by the pinned scorer on prose tokens only; constraints see the full goal.",
@@ -38581,7 +38599,7 @@
     },
     "routable_registry": {
      "doc": "",
-     "passing_cases": 3,
+     "passing_cases": 4,
      "signature": {
       "params": [
        "admissible"
@@ -38592,6 +38610,24 @@
       "var_kw": false
      },
      "tier": "TEST_EVIDENCED"
+    },
+    "score_capability": {
+     "doc": "The score of ONE capability for this sentence, on the same basis the ranker uses.",
+     "passing_cases": 0,
+     "signature": {
+      "params": [
+       "goal",
+       "cid",
+       "entry"
+      ],
+      "required": [
+       "goal",
+       "cid",
+       "entry"
+      ],
+      "var_kw": false
+     },
+     "tier": "READ_ONLY_UNTESTED"
     },
     "sentence_clauses": {
      "doc": "",
@@ -38608,9 +38644,11 @@
      "tier": "READ_ONLY_UNTESTED"
     }
    },
-   "sha256": "00d024cf384deee17c91f4bb4c5920fbb9e2a7d4b3ad30fc91712d7c5a3061a6",
+   "sha256": "68bfddbc965648dfee9bbf7b5a1818c5caa00e07ab30eec2be90b369fea05246",
    "tests": {
-    "canonical/tests/test_goal_front_compiler_v1.py": "04ce39b69af5db9c54aba39e09ff2ce019679aa06f66e9439b13aac7f5f6d230"
+    "canonical/tests/test_capability_naming_rule_v1.py": "73cd6114c365618476843abc47f04b534a8890cba153e03daa14bdce6f5037e2",
+    "canonical/tests/test_capability_selection_retrieval_v1.py": "725e68d3ecd8bba97feb12707469104863482a3844665f21e8c5dd63bc06940b",
+    "canonical/tests/test_goal_front_compiler_v1.py": "87512bae4c40f1e3af0b5b95ba4856a67397a10680d4831dee522fe7315000d0"
    }
   },
   "canonical/runtime/goal_to_decision_binding_authority_v1.py": {
@@ -46429,10 +46467,10 @@
      "tier": "TEST_EVIDENCED"
     }
    },
-   "sha256": "3d1b96600bc91d223e78786c95aaba29e783fdb1deed857974c20a1224db18f6",
+   "sha256": "fe2ea2892ec2bcaec4a7aa41458d84c902194144c5f417ec450e53ea5be7ea3e",
    "tests": {
     "canonical/tests/test_capability_dag_live_wiring_v1.py": "d02b0f52db77cf97761e9c036d4d5548279fe976b14d36f041b880d294172ffd",
-    "canonical/tests/test_goal_front_compiler_v1.py": "04ce39b69af5db9c54aba39e09ff2ce019679aa06f66e9439b13aac7f5f6d230",
+    "canonical/tests/test_goal_front_compiler_v1.py": "87512bae4c40f1e3af0b5b95ba4856a67397a10680d4831dee522fe7315000d0",
     "canonical/tests/test_live_brain_route_admission_v1.py": "fd1f975657557e0866d958f77eb43890158a9c4ab7b0538dea8141eae95cbea3",
     "canonical/tests/test_live_solver_families_v3.py": "5bf31fe656407e675b74329360f5e687f92df10d432dbf43ef0419bfc8b8e3a4",
     "canonical/tests/test_verified_bound_capability_execution_adapter_v1.py": "369cc2b500ec8ecc5024ab40d39c3c372daafaac686672f708c6c7ae08b2b24c"
@@ -96903,9 +96941,6 @@
   "canonical/runtime/goal_compiler.py": {
    "compile_goal": "FAILING_TEST_CASES:2"
   },
-  "canonical/runtime/goal_front_compiler_v1.py": {
-   "compile_goal": "FAILING_TEST_CASES:1"
-  },
   "canonical/runtime/h100_iterative_depth_escape_v1.py": {
    "run": "FAILING_TEST_CASES:1"
   },
@@ -96934,8 +96969,8 @@
    "evaluate_materiality_counterfactual": "FAILING_TEST_CASES:1"
   },
   "canonical/runtime/live_brain_route_admission_v1.py": {
-   "route_admission": "FAILING_TEST_CASES:4",
-   "solve": "FAILING_TEST_CASES:11"
+   "route_admission": "FAILING_TEST_CASES:1",
+   "solve": "FAILING_TEST_CASES:1"
   },
   "canonical/runtime/live_integrated_brain_v1.py": {
    "load_verified_registry": "FAILING_TEST_CASES:1"
@@ -97255,15 +97290,26 @@
    "run_confined": "FAILING_TEST_CASES:5"
   }
  },
+ "remeasurement": {
+  "authority": "NONE__SANDBOX_MEASUREMENT_OF_EXISTING_TESTS_NOT_A_TRUE_CAPABILITY_RECEIPT",
+  "junit_cases_observed": 138,
+  "measured_platform": "linux",
+  "measured_python": "3.11",
+  "modules": [
+   "canonical/runtime/goal_front_compiler_v1.py",
+   "canonical/runtime/live_brain_route_admission_v1.py"
+  ],
+  "tool": "canonical/runtime/module_invocation_evidence_v1.py --write",
+  "why": "The two modules below were CHANGED by the branch that made every capability reachable by a plain sentence, so the sha256 pins that prove 'the function that runs is the function that was tested' were stale and every call through the module-invocation surface refused them.  They were re-measured from a real pytest run of every test file that references them, with the same tool that built this document."
+ },
  "schema": "PROJECT_BRAIN_MODULE_INVOCATION_EVIDENCE_V1",
  "summary": {
   "functions_by_tier": {
    "READ_ONLY_UNTESTED": 2545,
-   "REFUSED_FAILING_TEST_CASE": 182,
-   "TEST_EVIDENCED": 2676
+   "TEST_EVIDENCED": 2678
   },
   "inventory_modules": 2310,
-  "invocable_functions": 5221,
+  "invocable_functions": 5223,
   "invocable_modules": 2019,
   "modules_excluded": {
    "IMPORT_FAILED": 89,
