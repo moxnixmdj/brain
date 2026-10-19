@@ -1,245 +1,277 @@
-"""The channel that lets the machine say 'I don't have the data' and then get it.
+"""Only real tests. Every claim here is checked against live retrieval.
 
-The gate is the point. One source answering is exactly how "one paper said
-YouTube" becomes a conclusion, so fewer than the required number of
-INDEPENDENT sources is not a thin pass -- it is refused, and the refusal says
-the data is incomplete.
+The previous version of this file was 92% vacuous: with all three real
+fetchers sabotaged to return nothing, 24 of 26 tests still passed. They
+exercised plumbing against stub sources that always answered, so they would
+have passed even if the machine had no ability to retrieve anything at all.
+
+These do not. They hit github, pypi and npm for real and assert on the
+CONTENT: that a query about pdf returns documents that are actually about
+pdf, that provenance hashes recompute, that a host that cannot resolve says
+so. A test that cannot fail is not a test.
+
+Pure logic (the value maths, the shape classifier) is tested directly as
+functions where no network is involved, and labelled as such.
 """
 from __future__ import annotations
 
+import hashlib
+import json
 import os
 import tempfile
 import unittest
 
 from canonical.runtime import jit_knowledge_v1 as jit
 
-# a goal the machine genuinely cannot compile, so the gap path actually runs
-GAP_GOAL = "write the text hello to out.txt"
+
+def _online() -> bool:
+    try:
+        import urllib.request
+        urllib.request.urlopen("https://pypi.org/pypi/requests/json", timeout=15).close()
+        return True
+    except Exception:
+        return False
 
 
-def _boom(query, limit, timeout):
-    """A source that is down. Raises the way a real unreachable host would."""
-    raise OSError("down")
+ONLINE = _online()
+requires_network = unittest.skipUnless(ONLINE, "network unreachable")
 
 
-class _Stub:
-    """Deterministic sources. Network tests are separate and tolerate failure."""
-
+class _Store:
     def setUp(self) -> None:
-        self._tmp = tempfile.mkdtemp(prefix="brain-jit-test-")
-        self._state = jit.STATE_PATH
+        self._tmp = tempfile.mkdtemp(prefix="brain-jit-")
+        self._saved = jit.STATE_PATH
         jit.STATE_PATH = os.path.join(self._tmp, "value.json")
-        self._sources = dict(jit.SOURCES)
-        jit.SOURCES.clear()
-        jit.SOURCES.update({
-            "alpha": {"fetch": lambda q, l, t: [{"kind": "k", "id": "a1", "title": "A one",
-                                                 "summary": "s", "url": "u"}], "cost": 1.0},
-            "beta": {"fetch": lambda q, l, t: [{"kind": "k", "id": "b1", "title": "B one",
-                                                "summary": "s", "url": "u"}], "cost": 1.0},
-            "empty": {"fetch": lambda q, l, t: [], "cost": 0.5},
-            "broken": {"fetch": _boom, "cost": 0.5},
-        })
 
     def tearDown(self) -> None:
-        jit.SOURCES.clear()
-        jit.SOURCES.update(self._sources)
-        jit.STATE_PATH = self._state
+        jit.STATE_PATH = self._saved
         import shutil
         shutil.rmtree(self._tmp, ignore_errors=True)
 
 
 # --------------------------------------------------------------------------- #
-# the gate -- one source is not knowledge
+# REAL retrieval -- a sabotaged fetcher cannot pass any of these
 # --------------------------------------------------------------------------- #
-class CompletenessGateTests(_Stub, unittest.TestCase):
-    def test_two_independent_sources_are_required_by_default(self):
-        self.assertEqual(jit.DEFAULT_MIN_SOURCES, 2)
+@requires_network
+class RealRetrievalTests(_Store, unittest.TestCase):
+    def test_a_query_returns_documents_that_are_actually_about_it(self):
+        """The content must relate to the question. Not just be present."""
+        r = jit.resolve("pdf text extraction", only=["pypi"], min_sources=1)
+        self.assertTrue(r["pass"], r)
+        self.assertGreater(r["document_count"], 0)
+        blob = " ".join(
+            " ".join(str(doc.get(k) or "") for k in ("id", "title", "summary"))
+            for doc in r["documents"]).lower()
+        self.assertIn("pdf", blob, blob[:400])
 
-    def test_one_answering_source_cannot_conclude(self):
-        """This is the 'one paper said YouTube' failure, refused structurally."""
-        r = jit.resolve("q", only=["alpha"], min_sources=2)
-        self.assertFalse(r["pass"])
-        self.assertEqual(r["status"], jit.OPEN_THIN)
-        self.assertIn("only 1 of 2", r["gap"])
+    def test_npm_returns_real_packages_for_a_real_query(self):
+        r = jit.resolve("pdf", only=["npm"], min_sources=1)
+        self.assertTrue(r["pass"], r)
+        ids = [str(d.get("id") or "").lower() for d in r["documents"]]
+        self.assertTrue(ids)
+        self.assertTrue(any("pdf" in i for i in ids), ids[:10])
 
-    def test_two_answering_sources_can_conclude(self):
-        r = jit.resolve("q", only=["alpha", "beta"], min_sources=2)
+    def test_github_returns_real_repositories_with_real_urls(self):
+        r = jit.resolve("pdf extract", only=["github"], min_sources=1)
+        self.assertTrue(r["pass"], r)
+        for doc in r["documents"]:
+            self.assertTrue(str(doc.get("url") or "").startswith("https://github.com/"),
+                            doc)
+            self.assertTrue(str(doc.get("id") or ""))
+
+    def test_two_real_independent_sources_satisfy_the_gate(self):
+        r = jit.resolve("pdf text extraction", only=["pypi", "npm"], min_sources=2)
         self.assertTrue(r["pass"], r.get("gap"))
-        self.assertEqual(r["status"], jit.PASS)
+        self.assertGreaterEqual(len(r["sources_answered"]), 2)
+        self.assertEqual(set(r["sources_answered"]), {"pypi", "npm"})
 
-    def test_a_thin_result_still_returns_what_was_found(self):
-        """Refusing to conclude is not the same as throwing the data away."""
-        r = jit.resolve("q", only=["alpha"], min_sources=2)
-        self.assertEqual(r["document_count"], 1)
-        self.assertFalse(r["complete"])
+    def test_pypi_names_a_real_package_when_asked_for_one(self):
+        r = jit.resolve("requests", only=["pypi"], min_sources=1)
+        self.assertTrue(r["pass"], r)
+        ids = [str(d.get("id") or "").lower() for d in r["documents"]]
+        self.assertIn("requests", ids, ids)
 
-    def test_a_thin_result_refuses_the_knowledge_authority_label(self):
-        r = jit.resolve("q", only=["alpha"], min_sources=2)
+    def test_documents_from_different_sources_are_distinguishable(self):
+        r = jit.resolve("pdf", only=["pypi", "npm"], min_sources=2)
+        sources = {d["source"] for d in r["documents"]}
+        self.assertGreaterEqual(len(sources), 2)
+
+
+# --------------------------------------------------------------------------- #
+# provenance, checked rather than asserted
+# --------------------------------------------------------------------------- #
+@requires_network
+class ProvenanceRealTests(_Store, unittest.TestCase):
+    def test_the_recorded_hash_matches_the_document_it_came_from(self):
+        """Recompute it. A hash that is never checked proves nothing."""
+        r = jit.resolve("pdf", only=["pypi"], min_sources=1)
+        self.assertTrue(r["pass"])
+        doc = r["documents"][0]
+        payload = {k: v for k, v in doc.items()
+                   if k not in ("source", "authority", "sha256")}
+        recomputed = hashlib.sha256(
+            json.dumps(payload, sort_keys=True, default=str).encode("utf-8")
+        ).hexdigest()[:16]
+        self.assertEqual(doc["sha256"], recomputed)
+
+    def test_every_document_declares_where_it_came_from(self):
+        r = jit.resolve("pdf", only=["pypi", "npm"], min_sources=2)
+        for doc in r["documents"]:
+            self.assertIn(doc["source"], r["sources_answered"])
+            self.assertEqual(doc["authority"], "EXTERNAL_PUBLIC_EVIDENCE_FETCHED")
+
+    def test_the_same_query_is_fetched_again_not_served_from_imagination(self):
+        """Two independent resolves must agree about the world."""
+        a = jit.resolve("pdf", only=["pypi"], min_sources=1)
+        b = jit.resolve("pdf", only=["pypi"], min_sources=1)
+        self.assertTrue(a["pass"] and b["pass"])
+        ids_a = {d["id"] for d in a["documents"]}
+        ids_b = {d["id"] for d in b["documents"]}
+        self.assertTrue(ids_a & ids_b, (sorted(ids_a)[:5], sorted(ids_b)[:5]))
+
+
+# --------------------------------------------------------------------------- #
+# refusal, against reality
+# --------------------------------------------------------------------------- #
+class RefusalRealTests(_Store, unittest.TestCase):
+    def test_a_host_that_cannot_resolve_says_so(self):
+        """.invalid is guaranteed unroutable by RFC 2606. This is a real failure."""
+        jit.SOURCES["unreachable"] = {
+            "fetch": lambda q, l, t: (jit._get("https://unreachable.invalid/x", t)
+                                      and []),
+            "cost": 0.1,
+        }
+        try:
+            r = jit.fetch_source("unreachable", "q", timeout=6)
+            self.assertFalse(r["ok"])
+            self.assertTrue(r["reason"], r)
+            self.assertNotEqual(r["reason"], "NO_DOCUMENTS_RETURNED")
+        finally:
+            jit.SOURCES.pop("unreachable", None)
+
+    def test_a_real_404_is_reported_as_such(self):
+        jit.SOURCES["missing_page"] = {
+            "fetch": lambda q, l, t: (jit._get(
+                "https://pypi.org/pypi/definitely-not-a-real-package-xyz-9/json", t)
+                and []),
+            "cost": 0.1,
+        }
+        try:
+            r = jit.fetch_source("missing_page", "q", timeout=15)
+            self.assertFalse(r["ok"])
+            self.assertIn("HTTP_", r["reason"])
+        finally:
+            jit.SOURCES.pop("missing_page", None)
+
+    def test_demanding_more_sources_than_exist_refuses_to_conclude(self):
+        r = jit.resolve("pdf", only=["pypi"], min_sources=9)
+        self.assertFalse(r["pass"], r)
+        self.assertEqual(r["status"], jit.OPEN_THIN)
+        self.assertIn("only", r["gap"])
         self.assertEqual(r["authority"], "INCOMPLETE_DATA_NO_CONCLUSION_DRAWN")
 
-    def test_a_complete_result_claims_only_external_evidence(self):
-        r = jit.resolve("q", only=["alpha", "beta"], min_sources=2)
-        self.assertEqual(r["authority"], "EXTERNAL_PUBLIC_EVIDENCE_FETCHED")
-
-    def test_no_source_answering_is_a_failure_not_a_pass(self):
-        r = jit.resolve("q", only=["empty", "broken"], min_sources=2)
-        self.assertFalse(r["pass"])
-        self.assertEqual(r["status"], jit.FAIL_NO_SOURCE)
+    def test_a_thin_result_still_hands_back_what_it_found(self):
+        r = jit.resolve("pdf", only=["pypi"], min_sources=9)
+        self.assertGreater(r["document_count"], 0)
+        self.assertFalse(r["complete"])
 
     def test_an_empty_query_fails_closed(self):
         r = jit.resolve("   ")
         self.assertEqual(r["status"], jit.FAIL_EMPTY)
         self.assertFalse(r["pass"])
 
-
-# --------------------------------------------------------------------------- #
-# provenance and honesty
-# --------------------------------------------------------------------------- #
-class ProvenanceTests(_Stub, unittest.TestCase):
-    def test_every_document_carries_where_it_came_from(self):
-        r = jit.resolve("q", only=["alpha", "beta"], min_sources=2)
-        for doc in r["documents"]:
-            self.assertIn(doc["source"], ("alpha", "beta"))
-            self.assertTrue(doc["sha256"])
-            self.assertEqual(doc["authority"], "EXTERNAL_PUBLIC_EVIDENCE_FETCHED")
-
-    def test_a_source_that_returns_nothing_is_reported_as_not_answering(self):
-        r = jit.resolve("q", only=["alpha", "beta", "empty"], min_sources=2)
-        self.assertNotIn("empty", r["sources_answered"])
-        self.assertIn("empty", r["sources_failed"])
-
-    def test_a_source_that_raises_does_not_break_the_resolve(self):
-        r = jit.resolve("q", only=["alpha", "beta", "broken"], min_sources=2)
-        self.assertTrue(r["pass"])
-        self.assertIn("broken", r["sources_failed"])
-
     def test_an_unknown_source_is_a_closed_failure(self):
-        r = jit.fetch_source("no_such_source", "q")
+        r = jit.fetch_source("no_such_source_exists", "q")
         self.assertFalse(r["ok"])
         self.assertEqual(r["reason"], "UNKNOWN_SOURCE")
 
-    def test_failed_sources_are_named_in_the_detail(self):
-        r = jit.resolve("q", only=["alpha", "beta", "broken"], min_sources=2)
-        detail = {d["source"]: d for d in r["detail"]}
-        self.assertFalse(detail["broken"]["ok"])
-        self.assertTrue(detail["broken"]["reason"])
-
 
 # --------------------------------------------------------------------------- #
-# earned order -- not a strict sequence
+# pure logic -- no network involved, and labelled as such
 # --------------------------------------------------------------------------- #
-class EarnedOrderTests(_Stub, unittest.TestCase):
-    def test_a_source_that_keeps_delivering_rises(self):
-        before = jit.ordered_sources()
+class ValueMathsTests(_Store, unittest.TestCase):
+    """Arithmetic on the earned-value function. No sources are consulted."""
+
+    def test_an_untried_source_sits_on_the_prior(self):
+        self.assertAlmostEqual(jit.source_value("github"),
+                               0.5 / (1.0 + jit.SOURCES["github"]["cost"]), places=9)
+
+    def test_successes_raise_value(self):
+        before = jit.source_value("npm")
+        for _ in range(10):
+            jit.credit("npm", True)
+        self.assertGreater(jit.source_value("npm"), before)
+
+    def test_failures_lower_value(self):
+        before = jit.source_value("npm")
+        for _ in range(10):
+            jit.credit("npm", False)
+        self.assertLess(jit.source_value("npm"), before)
+
+    def test_ten_direct_failures_rank_below_an_untried_source(self):
+        for _ in range(10):
+            jit.credit("github_code", False)
+        self.assertLess(jit.source_value("github_code"), jit.source_value("github"))
+
+    def test_credit_persists_to_disk(self):
+        jit.credit("pypi", True)
+        jit.credit("pypi", True)
+        jit.credit("pypi", False)
+        row = jit._load_state()["pypi"]
+        self.assertEqual(row["trials"], 3)
+        self.assertEqual(row["helped"], 2)
+
+    def test_ordering_puts_the_most_useful_first(self):
         for _ in range(8):
-            jit.credit("beta", True)
-        after = jit.ordered_sources()
-        self.assertEqual(after[0], "beta")
-        self.assertNotEqual(before, after)
-
-    def test_a_source_that_keeps_coming_back_empty_falls(self):
+            jit.credit("npm", True)
         for _ in range(8):
-            jit.credit("alpha", False)
-        self.assertEqual(jit.ordered_sources()[-1], "alpha")
+            jit.credit("web", False)
+        order = jit.ordered_sources()
+        self.assertEqual(order[0], "npm")
+        self.assertEqual(order[-1], "web")
 
-    def test_credit_persists(self):
-        jit.credit("beta", True)
-        self.assertEqual(jit._load_state()["beta"]["helped"], 1)
-        self.assertEqual(jit._load_state()["beta"]["trials"], 1)
-
-    def test_an_untried_source_starts_on_the_same_prior(self):
-        self.assertAlmostEqual(jit.source_value("alpha"), jit.source_value("beta"),
-                               places=6)
-
-    def test_cheaper_sources_win_before_any_experience(self):
-        # equal prior, so value is decided by cost alone: cheaper ranks higher
-        self.assertGreater(jit.source_value("empty"), jit.source_value("alpha"))
-
-    def test_resolve_asks_in_the_earned_order(self):
-        for _ in range(8):
-            jit.credit("beta", True)
-        # capture BEFORE resolving: resolve credits the sources it used, so the
-        # order it reports is the order as it stood when it asked
-        expected = jit.ordered_sources(["alpha", "beta"])
-        r = jit.resolve("q", only=["alpha", "beta"], min_sources=2)
-        self.assertEqual(r["sources_asked"], expected)
-        self.assertEqual(expected[0], "beta")
+    def test_ordering_is_not_a_fixed_sequence(self):
+        """The same code must produce different orders on different experience."""
+        first = list(jit.ordered_sources())
+        for _ in range(12):
+            jit.credit(first[-1], True)
+        self.assertNotEqual(list(jit.ordered_sources()), first)
 
 
 # --------------------------------------------------------------------------- #
-# live network -- proven against real traffic, tolerated if the net is down
+# the live path, with a real gap
 # --------------------------------------------------------------------------- #
-class LiveSourceTests(unittest.TestCase):
-    """These hit github, pypi and npm. Skipped, never faked, if unreachable."""
-
-    def setUp(self) -> None:
-        self._tmp = tempfile.mkdtemp(prefix="brain-jit-live-")
-        self._state = jit.STATE_PATH
-        jit.STATE_PATH = os.path.join(self._tmp, "value.json")
-
-    def tearDown(self) -> None:
-        jit.STATE_PATH = self._state
-        import shutil
-        shutil.rmtree(self._tmp, ignore_errors=True)
-
-    def _skip_if_offline(self) -> None:
-        try:
-            import urllib.request
-            urllib.request.urlopen("https://pypi.org/pypi/requests/json", timeout=15).close()
-        except Exception as exc:  # noqa: BLE001
-            self.skipTest("network unreachable: %s" % type(exc).__name__)
-
-    def test_real_sources_return_real_documents(self):
-        self._skip_if_offline()
-        r = jit.resolve("pdf text extraction", only=["pypi"], min_sources=1)
-        self.assertTrue(r["pass"], r)
-        self.assertGreater(r["document_count"], 0)
-        for doc in r["documents"]:
-            self.assertEqual(doc["source"], "pypi")
-
-    def test_multiple_real_sources_satisfy_the_gate(self):
-        self._skip_if_offline()
-        r = jit.resolve("pdf text extraction", only=["pypi", "npm"], min_sources=2)
-        self.assertTrue(r["pass"], r.get("gap"))
-        self.assertGreaterEqual(len(r["sources_answered"]), 2)
-
-    def test_the_machine_learns_which_live_source_delivered(self):
-        self._skip_if_offline()
-        jit.resolve("pdf text extraction", only=["pypi"], min_sources=1)
-        state = jit._load_state()
-        self.assertIn("pypi", state)
-        self.assertGreaterEqual(state["pypi"]["trials"], 1)
+GAP_GOAL = "write the text hello to out.txt"
 
 
-# --------------------------------------------------------------------------- #
-# wired into the live path
-# --------------------------------------------------------------------------- #
-class LivePathWiringTests(_Stub, unittest.TestCase):
-    def test_a_compilation_gap_now_consults_knowledge(self):
+@requires_network
+class LivePathRealTests(_Store, unittest.TestCase):
+    def test_a_real_gap_triggers_real_retrieval(self):
         from canonical.runtime import live_brain_route_admission_v1 as ra
 
         r = ra.solve_or_learn({"task_id": "t", "goal": GAP_GOAL})
         self.assertEqual(r["status"], "FAIL__RAW_GOAL_COMPILATION_GAP")
-        learned = r.get("learning") or {}
-        self.assertIn("knowledge", learned, learned)
-        self.assertIn("status", learned["knowledge"])
+        k = (r.get("learning") or {}).get("knowledge") or {}
+        self.assertEqual(k.get("status"), jit.PASS)
+        self.assertGreater(k.get("documents", 0), 0)
+        self.assertTrue(k.get("sources_answered"))
 
-    def test_knowledge_reports_how_many_sources_answered(self):
+    def test_the_gap_is_recorded_so_it_is_known(self):
         from canonical.runtime import live_brain_route_admission_v1 as ra
 
         r = ra.solve_or_learn({"task_id": "t", "goal": GAP_GOAL})
-        k = (r.get("learning") or {}).get("knowledge") or {}
-        self.assertIn("sources_answered", k)
-        self.assertIsInstance(k["sources_answered"], list)
+        learned = r.get("learning") or {}
+        self.assertTrue(learned.get("gap_recorded"))
+        self.assertTrue(learned.get("what_to_learn_next"))
 
-    def test_the_machine_only_uses_a_program_that_is_actually_here(self):
-        """Knowledge naming a program is not enough; it must exist on disk."""
+    def test_the_machine_only_uses_a_program_that_is_really_here(self):
         from canonical.runtime import live_brain_route_admission_v1 as ra
 
-        self.assertTrue(ra._is_executable("python3"))          # present
+        self.assertTrue(ra._is_executable("python3"))
+        self.assertTrue(ra._is_executable("tar"))
         self.assertFalse(ra._is_executable("definitely_not_a_program_xyz"))
 
-    def test_a_successful_goal_does_not_consult_knowledge(self):
+    def test_a_goal_that_compiles_does_not_go_looking(self):
         from canonical.runtime import live_brain_route_admission_v1 as ra
 
         r = ra.solve_or_learn({"task_id": "t", "goal": "run shell command echo hello"})

@@ -114,7 +114,14 @@ def learn_model(env: Any, actions: Sequence[Any], *, budget: int = 60,
         return key
 
     order = list(actions)
-    best: tuple[float, Any] | None = None
+    # The root is where the environment STARTS, observed once before anything
+    # is done to it. Taking the lexicographically smallest key instead is wrong
+    # and quietly is: every plan is then built from a state the machine is not
+    # in, so plans are executed from nowhere and reach nothing.
+    env.reset()
+    reset_key = observe()
+    model.setdefault(reset_key, {})
+
     while trials < budget:
         trials += 1
         env.reset()
@@ -143,7 +150,7 @@ def learn_model(env: Any, actions: Sequence[Any], *, budget: int = 60,
         "transition_count": sum(len(v) for v in model.values()),
         "trials": trials,
         "steps": steps,
-        "root": state_key(env.state()) if False else sorted(model)[0] if model else None,
+        "root": reset_key,
         "duration_s": round(time.time() - started, 4),
     }
 
