@@ -248,6 +248,27 @@ def _expectation_compatible(cid: str, executable: Mapping[str, Any], declared: M
     return None
 
 
+def _is_executable(entry: Mapping[str, Any]) -> bool:
+    """True when the entry names something that can actually RUN.
+
+    An adapter capability runs through its entrypoint; a RUNTIME-NATIVE capability runs as an
+    action of the runtime itself (``fetch_json_knowledge``, ``assess_knowledge_consistency``,
+    ``assert_knowledge_status``).  Measured: the runtime-native actions were invisible to typed
+    admission, so a sentence that stated their contract perfectly - the knowledge fetch, the
+    consistency assessment, the status assertion - was refused with R3_WEAK_EVIDENCE because
+    the only way in was a lexical margin, while every adapter capability was admitted on the
+    strength of the sentence alone.
+    """
+    if not isinstance(entry.get("action_template"), Mapping):
+        return False
+    if entry.get("entrypoint"):
+        return True
+    source = entry.get("source") if isinstance(entry.get("source"), Mapping) else {}
+    if str(source.get("type") or "").lower() == "runtime_native":
+        return True
+    return str(entry.get("adapter_module") or "").lower() == "runtime_native_action"
+
+
 def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
           declaration: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Typed admission for one proposal: bind the sentence against the declared contract, or refuse.
@@ -256,7 +277,7 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
     has to be admitted by the loader for anything to execute.
     """
     declared = declaration or {}
-    if not isinstance(entry.get("action_template"), Mapping) or not entry.get("entrypoint"):
+    if not _is_executable(entry):
         return {"capability_id": cid, "admitted": False, "reason": "EXECUTABLE_ENTRY_INCOMPLETE"}
     # `contract_of` resolves the contract the way every caller must: the declared argument contract
     # (on the entry when the loader composed it there, else in the declaration) and only then the
@@ -268,7 +289,15 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
     if conflict:
         return {"capability_id": cid, "admitted": False, "reason": conflict}
     try:
-        inputs = front.bind_all_inputs(goal, {"action_template": contract}, root, cycle=0, spool=set())
+        # The shadow entry carries the contract AND the entry's own proposal_bindings: F20
+        # payload selectors (knowledge fetch json_path: literal []) are declared THERE, and a
+        # shadow without them sends the selector back to the *_path file binder, which refuses
+        # a sentence that states its contract perfectly.
+        inputs = front.bind_all_inputs(
+            goal,
+            {"action_template": contract, "proposal_bindings": entry.get("proposal_bindings")},
+            root, cycle=0, spool=set(),
+        )
     except Exception as exc:  # the binder is the authority on whether the sentence is enough
         detail = str(exc)
         for prefix in ("GOAL_INPUT_BINDING_REQUIRED:", "GOAL_INPUT_BINDING_REQUIRED"):

@@ -47,6 +47,66 @@ the pinned compiler had four defects that this layer corrects WITHOUT editing a 
    that capability and nothing else (F15).  Naming is not guessing - it is the caller choosing -
    and composition is never stolen: a sentence that keeps asking for more still routes normally.
 
+11. (F18) The npm/pypi/apt ecosystem surface rule read the HOST of a URL as an ecosystem claim:
+   ``Fetch ... from https://pypi.org/pypi/requests/json ...`` rejected every generic fetch tool
+   (including the knowledge fetcher whose own keywords score 29 on that prose), leaving the
+   sentence to a catch-all.  Here: surface claims are evaluated on prose only; a URL is a value
+   being fetched, while the words of the sentence keep the rule.
+
+12. (F20) ``json_path`` is a selector INSIDE the fetched payload (a list of key/index parts,
+   declared in proposal_bindings as the literal []), but the ``*_path`` file binder bound a
+   real ``*.json`` file to it and the runtime failed closed with KNOWLEDGE_JSON_PATH_INVALID.
+   Here: payload selectors bind from an explicit bracket list ("[]", "["info"]", "["urls", 0]")
+   or default to the declared identity [] exactly like the empty key/value mapping; anything
+   else still fails closed.
+
+13. (F21/F22) Two natural sentences could not reach tools that score them: chart tick
+   observations are (pixel, value) PAIRS which the flat list grammar could never express, so
+   axis calibration through a sentence was impossible; and a same-score tie
+   (``Fetch ... https://pypi.org/...`` scores 29 for both http.json.fetch_from_state and
+   knowledge.json.fetch.external) resolved to whichever sorted first - and failed closed on
+   its unstated inputs even though the sibling was bindable.  Here: pairs state as
+    ``[[80, 0], [233, 1], [400, 2]]``, and a same-score tier is disposed by typed admission in
+    rank order (first tied candidate whose inputs the sentence states wins); a lower-score tier
+    is still never silently entered.
+
+14. (F23) Two input files of the SAME type could never be bound together: the pinned binder
+    refuses a key whose stem matches more than one named file, and the type fallback refuses it
+    too, so a sentence naming a live metadata document AND a selection record could not reach the
+    capability that consumes both (``metadata_path:2_type_compatible_existing_files_named``).
+    Here the SENTENCE decides: the role word that introduces a path ("with selection <file>")
+    claims that file for the key whose stem is that role, and a file left with exactly one
+    unclaimed key is bound by elimination.  Every binding is stated by the sentence or forced by
+    the only remaining assignment; anything else still fails closed.
+
+15. (F24) The lexical score is a hint; the words of the request are the decision.  A candidate
+    whose DECLARED input the sentence never stated was never what was asked - it is skipped and
+    the walk continues down the ranked pool - while a candidate the sentence states AMBIGUOUSLY
+    keeps the request open and the request fails closed.  Measured: ``Collect the external
+    knowledge JSON document <url> with json path [] as authoritative true and store it in <out>``
+    scores 25 for a DOCX creator (the words "json" and "document" are in its very name) against
+    23 for the knowledge fetcher, and the DOCX creator needs a JSON FILE the sentence never
+    states - so the request failed closed on a sentence that states the knowledge fetcher's whole
+    contract.  A capability that can serve ANY sentence (it takes the whole request and writes
+    an artifact) is never the decision: it binds every sentence, so it is the fall-through F1
+    exists to stop.
+
+16. (F25) A URL, a path and a quoted literal are all VALUES the request carries, and none of
+    them says what the task IS.  F8 removed the first two from the ranking; here the third is
+    removed too, because a value's own words were being read as the task's words.  Measured:
+    ``Apply the jq filter "[.items[].v] | add"`` scored the SA-CCR credit add-on capability
+    above the jq capability (the word "add" lives inside the FILTER), and ``with jq filter
+    ".record.tag"`` scored a DOCX creator above jq (the word "record" lives inside the filter).
+    Both sentences ask for jq; both were answered by something else.
+
+17. (F26) A multi-step request is ONE graph, and the artifact an earlier step writes is part
+    of the pool a later step's input may bind from.  Measured: ``Fetch ... and save it to
+    <fetched>. Then audit ... on <fetched> with selection <sel> and save the report to <rep>``
+    was not planned as a DAG at all - the consumer bound the selection record (it was the only
+    file on disk), the producer's artifact was claimed as the consumer's OUTPUT, and the
+    request silently dropped a step.  An OUTPUT is a new artifact and never claims an earlier
+    step's; and the earlier step's artifact is what the sentence points at.
+
 It also binds the 33 registry inputs the pinned binder cannot (``path``, ``jq_filter``,
 ``expression``, ``x_value``, ``test_paths`` ...) from an explicit typed grammar:
 ``<key words> <quoted string | number | path | list | key=value pairs>``.  Inputs are never
@@ -74,6 +134,8 @@ DAG_FINISH_SUMMARY = "CAPABILITY_DAG_COMPLETE"
 _QUOTE_OPEN = "\"'\u201c\u2018`"
 _QUOTE_CLOSE = "\"'\u201d\u2019`"
 _NUM = r"-?\d+(?:\.\d+)?"
+# A quoted literal: the VALUE the request carries (F25).  Its words are not the task's words.
+_QUOTED_LITERAL = re.compile(r"\"[^\"\n]*\"|'[^'\n]*'|“[^”\n]*”|‘[^’\n]*’")
 
 # natural aliases for registry input keys (key -> phrases that may name it in a sentence)
 _KEY_ALIASES: dict[str, tuple[str, ...]] = {
@@ -98,10 +160,36 @@ _KEY_ALIASES: dict[str, tuple[str, ...]] = {
     "url_key": ("url key", "url_key", "state key"),
     "authoritative": ("authoritative",),
     "max_age_s": ("max age seconds", "max age", "max_age_s", "maximum age"),
+    # F23: the ROLE words that may introduce a path in a sentence (see ``_role_phrases``).
+    "metadata_path": ("metadata", "live metadata"),
+    "selection_path": ("selection", "selected", "selection record"),
+    "assessment_path": ("assessment", "assessed", "assessment record"),
+    "result_path": ("result", "claim", "release claim"),
+    "report_path": ("report",),
+    "source_json_path": ("source json", "state json"),
 }
 _PATH_LIST_KEYS = {"test_paths", "source_paths", "evidence_paths"}
 _PATH_DIR_KEYS = {"source_root"}
 _PATH_FILE_KEYS = {"path"}
+# F20: ``json_path`` is a SELECTOR INSIDE the fetched JSON payload (a list of key/index parts,
+# declared in the registry's own proposal_bindings as the literal []), never a file on disk.
+# The pinned ``*_path`` file binder would otherwise bind an existing ``*.json`` file to it and
+# the runtime fails closed with KNOWLEDGE_JSON_PATH_INVALID because the string is not a list.
+# The routing is DECLARATION-DRIVEN, per entry: jq's ``json_path`` carries no literal-list
+# declaration and keeps the file binder.
+_PAYLOAD_SELECTOR_KEYS = {"json_path"}
+
+
+def _declared_literal_selector_keys(entry: Mapping[str, Any]) -> set[str]:
+    """Keys of this entry that the registry itself declares as literal LIST values (F20)."""
+    bindings = entry.get("proposal_bindings") if isinstance(entry, Mapping) else None
+    if not isinstance(bindings, Mapping):
+        return set()
+    return {
+        key for key, binding in bindings.items()
+        if isinstance(binding, Mapping) and binding.get("type") == "literal"
+        and isinstance(binding.get("value"), list) and str(key).endswith("_path")
+    }
 _NUMERIC_KEYS = {"x_value", "y_value", "major", "max_age_s"}
 _LIST_NUMERIC_KEYS = {"x_ticks", "y_ticks"}
 _BOOL_KEYS = {"authoritative"}
@@ -231,6 +319,25 @@ def _number_list(text: str) -> list[float] | None:
     return [float(x) if "." in x else int(x) for x in re.split(r"\s*,\s*", m.group(1))]
 
 
+def _pair_list(text: str) -> list[list[float]] | None:
+    """F21: ``[[pixel, value], ...]`` - the tick-observation pairs ``calibrate_axis`` consumes.
+
+    The flat numeric list grammar could never express them, so axis calibration through a
+    sentence was impossible: every chart reader received bare values, crashed the unpack, and
+    reported AXIS_TICKS_INSUFFICIENT (the documented "compound goal grammar pending" gap).
+    """
+    m = re.match(
+        r"\s*\[\s*((?:\[\s*" + _NUM + r"\s*,\s*" + _NUM + r"\s*\]\s*,?\s*)+)\]",
+        text,
+    )
+    if not m:
+        return None
+    pairs = re.findall(r"\[\s*(" + _NUM + r")\s*,\s*(" + _NUM + r")\s*\]", m.group(1))
+    if not pairs:
+        return None
+    return [[float(a) if "." in a else int(a), float(b) if "." in b else int(b)] for a, b in pairs]
+
+
 def _kv_pairs(text: str) -> dict[str, float] | None:
     m = re.match(r"\s*((?:[A-Za-z_][A-Za-z0-9_]*\s*=\s*" + _NUM + r"\s*(?:,|and|\s)?\s*)+)", text)
     if not m:
@@ -274,13 +381,26 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path):
             # NUMERIC_EXPRESSION_VARIABLE_UNBOUND), so this only lets an expression that
             # needs no bindings through instead of rejecting it at compile time.
             return {}
+        if key in _PAYLOAD_SELECTOR_KEYS:
+            # F20: [] is the declared identity selector (the registry's own proposal_bindings
+            # carry the literal []): select the whole payload.  The capability that owns the
+            # semantics still fails closed on any selector it cannot navigate
+            # (KNOWLEDGE_JSON_PATH_NOT_FOUND), so nothing is guessed here.
+            return []
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":not_stated")
     # quoted values win over bare tokens so an alias inside a quoted value ("Curve A") cannot steal it
     for strict in (True, False):
         for tail in tails:
             value = _parse_typed_value(key, tail, quoted_only=strict)
-            if value is not None and value != [] and value != {}:
-                return value
+            if value is None:
+                continue
+            if value == [] or value == {}:
+                # An empty parse is "nothing matched" for every key EXCEPT the keys whose
+                # stated value legitimately IS the empty collection (F20 json_path "[]").
+                if value == [] and key in _PAYLOAD_SELECTOR_KEYS:
+                    return []
+                continue
+            return value
     raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":value_not_parseable")
 
 
@@ -288,7 +408,21 @@ def _parse_typed_value(key: str, tail: str, quoted_only: bool = False):
     if key in _NUMERIC_KEYS:
         return _number(tail)
     if key in _LIST_NUMERIC_KEYS:
-        return _number_list(tail)
+        # F21: tick observations may be stated as pairs ("[[80, 0], [233, 1], [400, 2]]",
+        # the (pixel, value) form calibrate_axis consumes) or as the original flat list.
+        return _pair_list(tail) if _pair_list(tail) is not None else _number_list(tail)
+    if key in _PAYLOAD_SELECTOR_KEYS:
+        # F20: a JSON bracket list of key/index parts ("[]", "[\"info\"]", "[\"urls\", 0]").
+        # Anything else fails closed: the selector's semantics belong to the capability.
+        m = re.match(r"\s*(\[[^\]]*\])", tail)
+        if m:
+            try:
+                value = json.loads(m.group(1))
+            except ValueError:
+                return None
+            if isinstance(value, list) and all(isinstance(p, (str, int)) for p in value):
+                return value
+        return None
     if key in _BOOL_KEYS:
         m = re.match(r"\s*(true|false|yes|no)\b", tail, re.I)
         return (m.group(1).lower() in ("true", "yes")) if m else None
@@ -329,6 +463,13 @@ def _is_output_key(key: str, entry: Mapping[str, Any] | None = None) -> bool:
         if isinstance(pb, Mapping) and key in pb and pb[key].get("type") == "effect_result":
             return False
     return key.startswith("output_") or key.split("_")[0] in _OUTPUT_STEMS
+
+
+def _excluded(produced_paths, taken) -> set[str]:
+    """The paths a fallback binder may not use: earlier steps' artifacts and claimed files."""
+    skip = {str(x) for x in (produced_paths or []) if isinstance(x, str) and x}
+    skip |= {str(x) for x in (taken or []) if isinstance(x, str) and x}
+    return skip
 
 
 def _bind_path_by_type(goal: str, key: str, root: pathlib.Path, exclude=None):
@@ -421,6 +562,162 @@ def _bind_produced_artifact(goal: str, key: str, root: pathlib.Path, produced_pa
     raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":" + str(len(candidates)) + "_cross_step_artifacts_named")
 
 
+# ------------------------------------------------------------------- F23: role-anchored input binding
+
+# Words that may sit between a role word and the path it introduces ("the selection file X").
+_ROLE_FILLERS = ("the", "a", "an", "file", "document", "record", "records", "input", "artifact")
+# Words of a key stem that never name a role ("source_path" -> "source" alone says nothing).
+_GENERIC_ROLE_WORDS = {"path", "file", "input", "output", "the", "of", "src", "dst", "and", "with", "a", "an"}
+
+
+def _role_phrases(key: str) -> list[str]:
+    """The phrases that may name this key's ROLE immediately before a path in a sentence.
+
+    The key's own stem is the primary role ("selection_path" -> "selection"); the alias table
+    adds the natural words a person actually uses for that role ("with selection <file>").
+    """
+    stem = key[:-5].lower() if key.endswith("_path") else key.lower()
+    words = [w for w in re.split(r"[^a-z0-9]+", stem) if w and w not in _GENERIC_ROLE_WORDS]
+    phrases: list[str] = []
+    if words:
+        phrases.append(" ".join(words))
+    for alias in _KEY_ALIASES.get(key, ()):
+        alias = str(alias).lower().strip()
+        if alias and alias not in phrases:
+            phrases.append(alias)
+    return phrases
+
+
+def _role_anchored(goal: str, raw: str, phrases) -> bool:
+    """True when the sentence introduces this path with one of ``phrases`` right before it."""
+    text = str(goal or "")
+    index = text.find(raw)
+    if index < 0:
+        return False
+    before = text[:index]
+    filler = r"(?:\s+(?:" + "|".join(_ROLE_FILLERS) + r"))?"
+    for phrase in phrases:
+        words = [w for w in re.split(r"[^a-z0-9]+", str(phrase).lower()) if w]
+        if not words:
+            continue
+        pattern = r"(?<![a-z0-9])" + r"[^a-z0-9]+".join(re.escape(w) for w in words) + r"(?![a-z0-9])"
+        if re.search(pattern + filler + r"\s*$", before, flags=re.IGNORECASE):
+            return True
+    return False
+
+
+def _named_existing_paths(goal: str, root: pathlib.Path) -> list[str]:
+    """Existing files the sentence names, in order of appearance."""
+    text = str(goal or "")
+    found: list[str] = []
+    for raw, path in gc._repo_paths(goal, root):
+        if path.is_file() and raw not in found:
+            found.append(raw)
+    found.sort(key=lambda raw: (text.find(raw) if text.find(raw) >= 0 else len(text), raw))
+    return found
+
+
+# Two paths belong to ONE conjunction group when only a conjunction separates them
+# ("the manifest a.json and b.json").  A role word in front of such a group governs ALL of
+# its members, so the role alone cannot say which one the capability must read.
+_CONJUNCTION_ONLY = re.compile(r"^[\s,]*(?:(?:and|plus|as well as)\b[\s,]*)?$", re.IGNORECASE)
+
+
+def _path_groups(goal: str) -> dict[str, list[str]]:
+    """Map every path the sentence names to the paths it names in the SAME conjunction."""
+    text = str(goal or "")
+    matches: list[tuple[str, int, int]] = []
+    for match in re.finditer(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+", text):
+        raw = match.group(0).rstrip(".,;:!?)]}")
+        if raw:
+            matches.append((raw, match.start(), match.end()))
+    groups: dict[str, list[str]] = {}
+    for index, (raw, _start, end) in enumerate(matches):
+        group = [raw]
+        cursor = end
+        for _raw, next_start, next_end in matches[index + 1:]:
+            if not _CONJUNCTION_ONLY.match(text[cursor:next_start]):
+                break
+            group.append(_raw)
+            cursor = next_end
+        groups.setdefault(raw, group)
+    return groups
+
+
+def _joint_role_binding(goal: str, pending: list[str], root: pathlib.Path, taken,
+                        produced_paths=None) -> dict[str, str]:
+    """F23: bind several same-type input files by the roles the sentence gives them.
+
+    The pinned binder refuses a key whose stem matches more than one named file, and the
+    type fallback refuses it as well - so a sentence naming two JSON documents (a live
+    metadata file and a selection record) could never reach the capability that consumes
+    both, even though the sentence says which is which.  Here the SENTENCE decides: the
+    role word that introduces a path ("with selection <file>") claims that file for the key
+    whose stem is that role, and a file left with exactly one unclaimed key is bound by
+    elimination.  Nothing is guessed - every binding is either stated by the sentence or
+    forced by the only remaining assignment; anything else fails closed.
+
+    F26: the pool also holds the artifacts an EARLIER step of the same request writes, when
+    the sentence names them.  That is the whole point of a multi-step request ("fetch it,
+    then audit what you fetched"): the consumer's input IS the producer's artifact, and the
+    role the sentence gives it is the only thing that says so.  Measured before F26: the
+    consumer bound the selection record instead (it was the only file on disk), the producer's
+    artifact was claimed as the consumer's OUTPUT, and the request silently dropped a step.
+    """
+    skip = set(taken or [])
+    pool = [raw for raw in _named_existing_paths(goal, root) if raw not in skip]
+    named = [raw for raw, _p in gc._repo_paths(goal, root)]
+    for produced in (produced_paths or []):
+        produced = str(produced)
+        if produced in named and produced not in skip and produced not in pool:
+            pool.append(produced)
+    if not pending or not pool:
+        return {}
+    remaining_keys = list(pending)
+    remaining_files = list(pool)
+    assignment: dict[str, str] = {}
+    claims: dict[str, tuple[int, str]] = {}
+    groups = _path_groups(goal)
+    existing = set(pool)
+    for key in remaining_keys:
+        phrases = _role_phrases(key)
+        best: tuple[int, str] | None = None
+        ambiguous = False
+        for raw in remaining_files:
+            for phrase in phrases:
+                words = [w for w in re.split(r"[^a-z0-9]+", str(phrase).lower()) if w]
+                if not words:
+                    continue
+                if not _role_anchored(goal, raw, [phrase]):
+                    continue
+                spec = len(words)
+                if best is None or spec > best[0]:
+                    best, ambiguous = (spec, raw), False
+                elif spec == best[0] and raw != best[1]:
+                    ambiguous = True
+        if best is not None:
+            # a role in front of a CONJUNCTION ("the manifest a.json and b.json") governs every
+            # member of the group: the sentence does not say which one to read, so it stays open.
+            group = [p for p in (groups.get(best[1]) or [best[1]]) if p in existing]
+            if len(group) > 1:
+                ambiguous = True
+        if best is not None and not ambiguous:
+            claims[key] = best
+    # a file two roles claim equally is not decided by the sentence
+    for key, (spec, raw) in list(claims.items()):
+        if any(other != key and other_spec >= spec and other_raw == raw
+               for other, (other_spec, other_raw) in claims.items()):
+            claims.pop(key)
+    for key, (_spec, raw) in claims.items():
+        if raw in remaining_files:
+            assignment[key] = raw
+            remaining_files.remove(raw)
+            remaining_keys.remove(key)
+    if len(remaining_keys) == 1 and len(remaining_files) == 1:
+        assignment[remaining_keys[0]] = remaining_files[0]
+    return assignment
+
+
 def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, context_paths=None, future_clauses=None,
                     produced_paths=None, cycle=None, spool=None) -> dict[str, Any]:
     """Pinned binder for the keys it supports, typed grammar / type binding for the rest. Never guesses.
@@ -434,9 +731,15 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
     every caller outside the DAG planner does.
     """
     keys = input_keys(entry)
-    pinned_keys = [k for k in keys if k in ("text", "goal", "url") or k.endswith("_path")]
+    # F20: a ``*_path`` key whose OWN registry entry declares it a literal list value is a
+    # payload selector (knowledge fetch json_path: literal []), not a file; every other
+    # ``*_path`` key (jq json_path ...) keeps the pinned file binder.
+    declared_selectors = _declared_literal_selector_keys(entry)
+    pinned_keys = [k for k in keys if k not in declared_selectors and (k in ("text", "goal", "url") or k.endswith("_path"))]
     typed_keys = [k for k in keys if k not in pinned_keys]
     inputs: dict[str, Any] = {}
+    taken: set[str] = set()
+    pending_input_paths: list[str] = []
     for key in pinned_keys:
         shadow = dict(entry)
         shadow["action_template"] = {"args": {key: "${input." + key + "}"}}
@@ -449,46 +752,64 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
                 if wanted and pathlib.PurePosixPath(val).suffix.lower() not in wanted:
                     raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", "type_mismatch:" + key)
             inputs.update(bound_val)
+            if isinstance(val, str) and val:
+                taken.add(val)
         except GoalCompilationFailure:
             if key.endswith("_path") and not _is_output_key(key, entry):
-                is_effect_consumer = (
-                    isinstance(entry.get("proposal_bindings"), Mapping)
-                    and entry["proposal_bindings"].get(key, {}).get("type") == "effect_result"
-                )
-                if is_effect_consumer and produced_paths:
-                    try:
-                        inputs[key] = _bind_produced_artifact(goal, key, root, produced_paths)
-                    except GoalCompilationFailure:
-                        inputs[key] = _bind_path_by_type(goal, key, root, exclude=produced_paths)
-                else:
-                    try:
-                        inputs[key] = _bind_path_by_type(goal, key, root, exclude=produced_paths)
-                    except GoalCompilationFailure as type_failure:
-                        if not produced_paths:
-                            raise
-                        try:
-                            inputs[key] = _bind_produced_artifact(goal, key, root, produced_paths)
-                        except GoalCompilationFailure:
-                            raise type_failure
-            elif key.endswith("_path"):
+                # F23: a key the pinned binder could not decide is decided with its SIBLINGS,
+                # because the roles the sentence gives the files are only meaningful together.
+                pending_input_paths.append(key)
+                continue
+            if key.endswith("_path"):
+                # F26: an OUTPUT is a new artifact.  It never claims an artifact an earlier
+                # step already writes (that would overwrite the producer's output), so the
+                # produced-artifact binder is not offered here - only the future artifacts the
+                # sentence still names, and then the deterministic spool.
                 bound = None
-                if produced_paths:
-                    try:
-                        bound = _bind_produced_artifact(goal, key, root, produced_paths)
-                    except GoalCompilationFailure:
-                        bound = None
-                if bound is None:
-                    try:
-                        bound = _bind_output_by_future(goal, key, root, exclude=produced_paths)
-                    except GoalCompilationFailure:
-                        bound = None
+                try:
+                    bound = _bind_output_by_future(goal, key, root, exclude=produced_paths)
+                except GoalCompilationFailure:
+                    bound = None
                 if bound is None:
                     if spool is None or cycle is None:
                         raise
                     bound = _spool_path(key, cycle, spool)
                 inputs[key] = bound
-            else:
-                raise
+                if isinstance(bound, str) and bound:
+                    taken.add(bound)
+                continue
+            raise
+    # F23: the roles the sentence states decide the keys the pinned binder left open.
+    if pending_input_paths:
+        joint = _joint_role_binding(goal, pending_input_paths, root, taken, produced_paths=produced_paths)
+        for key in pending_input_paths:
+            if key in joint:
+                inputs[key] = joint[key]
+                taken.add(joint[key])
+    for key in pending_input_paths:
+        if key in inputs:
+            continue
+        is_effect_consumer = (
+            isinstance(entry.get("proposal_bindings"), Mapping)
+            and entry["proposal_bindings"].get(key, {}).get("type") == "effect_result"
+        )
+        if is_effect_consumer and produced_paths:
+            try:
+                inputs[key] = _bind_produced_artifact(goal, key, root, produced_paths)
+            except GoalCompilationFailure:
+                inputs[key] = _bind_path_by_type(goal, key, root, exclude=_excluded(produced_paths, taken))
+        else:
+            try:
+                inputs[key] = _bind_path_by_type(goal, key, root, exclude=_excluded(produced_paths, taken))
+            except GoalCompilationFailure as type_failure:
+                if not produced_paths:
+                    raise
+                try:
+                    inputs[key] = _bind_produced_artifact(goal, key, root, produced_paths)
+                except GoalCompilationFailure:
+                    raise type_failure
+        if isinstance(inputs.get(key), str) and inputs[key]:
+            taken.add(inputs[key])
     for key in typed_keys:
         inputs[key] = bind_typed_key(goal, key, root)
     repair_output_collisions(goal, inputs, root, exclude=produced_paths, entry=entry,
@@ -530,32 +851,73 @@ def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Pa
 # ----------------------------------------------------------------------------- routing
 
 def prose_only(goal: str) -> str:
-    """The sentence without URLs and repository paths (F8)."""
+    """The sentence without URLs, repository paths and quoted literals (F8, F25).
+
+    A URL, a path and a quoted literal are all VALUES the request carries: the address it
+    reads, the file it touches, the text it encodes.  None of them says what the task IS.
+    F8 already removed the first two; F25 removes the third, because a value's own words were
+    being read as the task's words.  Measured: ``Apply the jq filter "[.items[].v] | add"``
+    scored the SA-CCR credit add-on capability above the jq capability (the word "add" lives
+    inside the FILTER, not in the request), and ``with jq filter ".record.tag"`` scored a DOCX
+    creator above jq (the word "record" lives inside the filter too).  The task was right in
+    both sentences; the value was mistaken for the task.
+    """
     text = re.sub(r"https?://[^\s)\]}>]+", " ", str(goal or ""))
+    text = _QUOTED_LITERAL.sub(" ", text)
     return re.sub(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+", " ", text)
+
+
+_ECOSYSTEM_WORD = re.compile(r"(?i)\b(?:pypi|npm|node(?:\.js|js)?|apt)\b|python library|javascript library|ubuntu package|debian package")
+_SURFACE_WORD = {"npm_node": "npm", "pypi_python": "pypi", "apt": "apt"}
+
+
+def score_capability(goal: str, cid: str, entry: Mapping[str, Any]) -> tuple[int, int, dict[str, Any]]:
+    """The score of ONE capability for this sentence, on the same basis the ranker uses.
+
+    F18: the ecosystem surface rule (npm/pypi/apt) is evaluated on PROSE, never on a URL or a
+    path, and an ecosystem word that is one of the capability's OWN tokens is not a claim about
+    which executor may run - the sentence says "pypi" because the capability IS about pypi.
+    Measured: ``Fetch the external knowledge JSON from https://pypi.org/pypi/requests/json ...``
+    rejected every generic fetch tool because the pypi HOST inside the URL was read as an
+    ecosystem claim, leaving zero candidates for a sentence whose own keywords match at score
+    29.  A URL is an input VALUE being fetched (K1 knowledge), not a statement about which
+    ecosystem the executor must come from; the claim words live in the prose, and prose still
+    carries the rule: a sentence that says "pypi package" in words keeps the pypi requirement.
+
+    The route admission re-derives a DAG step's evidence HERE, so a step is judged the way the
+    planner chose it: a pypi step scored 0 under the raw pinned rule and the whole multi-step
+    request was refused with DAG_STEP_WEAK_EVIDENCE.
+    """
+    prose = prose_only(goal)
+    scored_text = prose
+    surface_ok, surface_evidence = gc._execution_surface_constraint_match(prose, entry)
+    if not surface_ok:
+        own = gc._tokens(entry.get("keywords", [])) | gc._tokens(cid) | gc._tokens(entry.get("provides", []))
+        surface_word = _SURFACE_WORD.get(str((surface_evidence or {}).get("required_surface")))
+        if not (surface_word and surface_word in own):
+            return gc._score(prose, cid, entry)
+        scored_text = _ECOSYSTEM_WORD.sub(" ", prose)
+    return gc._score(scored_text, cid, entry)
 
 
 def ranked_candidates(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> list[tuple[int, int, str, dict[str, Any]]]:
     """Candidates ranked by the pinned scorer on prose tokens only; constraints see the full goal."""
-    prose = prose_only(goal)
     out = []
     for cid, entry in sorted(registry.items()):
         if not isinstance(entry, Mapping) or entry.get("status") != "VERIFIED_BOUND_CAPABILITY":
             continue
         if not isinstance(entry.get("action_template"), dict):
             continue
-        scored_text = prose
-        surface_ok, surface_evidence = gc._execution_surface_constraint_match(goal, entry)
+        prose = prose_only(goal)
+        surface_ok, surface_evidence = gc._execution_surface_constraint_match(prose, entry)
         if not surface_ok:
             own = gc._tokens(entry.get("keywords", [])) | gc._tokens(cid) | gc._tokens(entry.get("provides", []))
-            surface_word = {"npm_node": "npm", "pypi_python": "pypi", "apt": "apt"}.get(str((surface_evidence or {}).get("required_surface")))
+            surface_word = _SURFACE_WORD.get(str((surface_evidence or {}).get("required_surface")))
             if not (surface_word and surface_word in own):
                 continue
-            # the pinned scorer re-applies the surface rule: score without the surface word (F9)
-            scored_text = re.sub(r"(?i)\b(?:pypi|npm|node(?:\.js|js)?|apt)\b|python library|javascript library|ubuntu package|debian package", " ", prose)
         if not gc._structured_binary_format_match(goal, entry)[0]:
             continue
-        score, specificity, evidence = gc._score(scored_text, cid, entry)
+        score, specificity, evidence = score_capability(goal, cid, entry)
         if score > 0:
             out.append((score, specificity, cid, evidence))
     out.sort(key=lambda x: (-x[0], -x[1], x[2]))
@@ -570,8 +932,61 @@ def _output_keys(entry: Mapping[str, Any]) -> list[str]:
     return [k for k in input_keys(entry) if k.startswith("output_") or k.split("_")[0] in {"output", "result", "report", "screenshot", "image", "artifact", "destination", "dest"}]
 
 
-def _single(cid: str, entry: Mapping[str, Any], inputs: Mapping[str, Any], score: int, evidence: Mapping[str, Any], rules: list[str]) -> dict[str, Any]:
-    return {
+_WHOLE_REQUEST_INPUTS = {"goal", "task", "objective", "request", "instruction", "description",
+                         "content", "body"}
+# "text", "prompt" and "query" are NOT whole-request markers: a capability may take a PAYLOAD
+# under those names (the content a QR code encodes, the question a chart reader answers), and
+# such a capability is a real route, not an answer-anything fallback.
+
+
+def _is_catch_all(entry: Mapping[str, Any]) -> bool:
+    """True for a capability that can serve ANY sentence.
+
+    It takes the whole request as its input (or nothing at all) and writes an artifact: such a
+    capability binds every sentence, so it can never be the DECISION - it is only ever the
+    last resort the pinned compiler falls through to, which is the defect F1 exists to stop.
+    """
+    names = input_keys(entry)
+    if not names:
+        return True
+    for name in names:
+        if name in _WHOLE_REQUEST_INPUTS:
+            continue
+        if _is_output_key(name, entry):
+            continue
+        return False
+    return True
+
+
+def _score_tiers(pool: list[tuple[int, int, str, dict[str, Any]]]) -> list[list[tuple[int, int, str, dict[str, Any]]]]:
+    """The ranked pool split into equal-score tiers (a tie is one tier, F22)."""
+    tiers: list[list[tuple[int, int, str, dict[str, Any]]]] = []
+    for cand in pool:
+        if tiers and tiers[-1][0][0] == cand[0]:
+            tiers[-1].append(cand)
+        else:
+            tiers.append([cand])
+    return tiers
+
+
+# A binding failure that names ZERO candidates means the sentence never stated that input;
+# a failure that names TWO or more means the sentence stated it ambiguously.  The difference
+# decides whether the route may continue (F24) or must fail closed.
+_UNSTATED_DETAIL = re.compile(r"(?:^|:)(?:not_stated|value_not_parseable|no_matching_existing_files_named)$")
+
+
+def _failure_is_unstated(exc: BaseException) -> bool:
+    """True when the sentence gave the candidate NOTHING for one of its declared inputs."""
+    if getattr(exc, "code", "") != "GOAL_INPUT_BINDING_REQUIRED":
+        return False
+    detail = str(getattr(exc, "detail", "") or "")
+    counted = re.search(r":(\d+)_", detail)
+    if counted:
+        return int(counted.group(1)) == 0
+    return bool(_UNSTATED_DETAIL.search(detail))
+
+
+def _single(cid: str, entry: Mapping[str, Any], inputs: Mapping[str, Any], score: int, evidence: Mapping[str, Any], rules: list[str]) -> dict[str, Any]:    return {
         "schema": "PROJECT_BRAIN_COMPILED_CAPABILITY_PROBLEM_V1",
         "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
         "selected_capability": cid,
@@ -998,26 +1413,67 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
         pool = preferred or ranked
         best = pool[0] if pool else None
         if best is not None and selected != best[2]:
-            entry = registry[best[2]]
-            try:
-                inputs = bind_all_inputs(text, entry, root, cycle=0, spool=spool)
-            except GoalCompilationFailure as exc:
-                best_error = exc
-            else:
-                rules.append("F1_BEST_CANDIDATE_BOUND_INSTEAD_OF_FALLTHROUGH")
+            # F1 binds the best candidate; F22 disposes a same-score TIE by typed admission:
+            # candidates tied with the best are one tier (a genuine ambiguity, not a rank gap),
+            # tried in rank order, and the first whose inputs the sentence actually states wins.
+            #
+            # F24: the route must be EXECUTABLE on the sentence as stated.  A candidate whose
+            # declared input the sentence never stated was never what was asked - the lexical
+            # score is a hint, the words of the request are the decision - so it is skipped and
+            # the walk continues down the ranked pool.  A candidate the sentence states
+            # AMBIGUOUSLY keeps the request open: the walk stops there and the request fails
+            # closed, because two files for one slot is a question, not a choice.  F22's
+            # same-score tier stays a tier: within it a sibling may still bind.
+            bound: tuple[tuple[int, int, str, dict[str, Any]], dict[str, Any], dict[str, Any]] | None = None
+            best_error: GoalCompilationFailure | None = None
+            for tier_index, tier in enumerate(_score_tiers(pool)):
+                tier_error: GoalCompilationFailure | None = None
+                for rank, cand in enumerate(tier):
+                    cand_entry = registry[cand[2]]
+                    if _is_catch_all(cand_entry):
+                        # a capability that binds every sentence is never the decision
+                        continue
+                    try:
+                        cand_inputs = bind_all_inputs(text, cand_entry, root, cycle=0, spool=spool)
+                    except GoalCompilationFailure as exc:
+                        if _failure_is_unstated(exc):
+                            if best_error is None:
+                                best_error = exc
+                            continue
+                        if tier_error is None:
+                            tier_error = exc
+                        if best_error is None:
+                            best_error = exc
+                        continue
+                    bound = (cand, cand_entry, cand_inputs)
+                    if rank == 0 and tier_index == 0:
+                        rules.append("F1_BEST_CANDIDATE_BOUND_INSTEAD_OF_FALLTHROUGH")
+                    elif tier_index == 0:
+                        rules.append("F22_SAME_SCORE_TIE_ADMISSION")
+                    else:
+                        rules.append("F24_UNSTATED_CANDIDATE_SKIPPED")
+                    break
+                if bound is not None:
+                    break
+                if tier_error is not None:
+                    # an ambiguous statement keeps the request open: no lower tier may answer it
+                    break
+            if bound is not None:
+                cand, entry, inputs = bound
                 if any(str(v).startswith(SPOOL_DIR + "/spool_") for v in inputs.values()):
                     rules.append("F13_INTERMEDIATE_SPOOL_ASSIGNED")
                 if any(str(inputs[k]) == str(inputs[j]) for k in inputs if _is_output_key(k, entry) for j in inputs if j != k and j.endswith("_path")):
-                    raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", best[2] + ":output_path_equals_an_input_path")
-                return _single(best[2], entry, inputs, best[0], best[3], rules)
-            # the best candidate cannot bind: accept the pinned selection only if it is itself a
+                    raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", cand[2] + ":output_path_equals_an_input_path")
+                return _single(cand[2], entry, inputs, cand[0], cand[3], rules)
+            # no tied candidate can bind: accept the pinned selection only if it is itself a
             # prose-scored candidate consistent with the goal's artifact; never a fall-through
             consistent = selected in {c[2] for c in pool}
             if not consistent:
                 retrieved = _retrieval_first_selection(text, admissible, root, rules)
                 if retrieved is not None:
                     return retrieved
-                raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", best[2] + ":" + str(best_error.detail))
+                detail = str(getattr(best_error, "detail", "")) if best_error is not None else "no_candidate_binds"
+                raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", best[2] + ":" + detail)
         if compiled is None:
             retrieved = _retrieval_first_selection(text, admissible, root, rules)
             if retrieved is not None:

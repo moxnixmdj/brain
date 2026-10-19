@@ -710,3 +710,215 @@ def test_f16_a_registered_capability_inside_a_longer_request_is_not_an_artifact(
     with pytest.raises(gc.GoalCompilationFailure) as excinfo:
         front.compile_goal(f"run {cid} and then report the outcome to me", _registry(), ROOT)
     assert excinfo.value.code == "GOAL_NAMES_CAPABILITY_IN_COMPOUND_REQUEST"
+
+
+# ------------------------------------------------------------------------------- F23: role-anchored inputs
+
+
+def test_f23_two_same_type_inputs_bind_by_the_roles_the_sentence_states():
+    """F23: two JSON files, two roles, one binding each - and no name ever spells a key.
+
+    The defect, shown here: the pinned binder and the type fallback BOTH refuse this
+    sentence, because two named files share the type of ``metadata_path`` and neither file
+    is called *metadata*::
+
+        GOAL_INPUT_BINDING_REQUIRED:pypi.provenance.audit_live_artifact:
+        metadata_path:2_type_compatible_existing_files_named
+
+    The request states the roles in words ("... on <file> with selection <file>"), so the
+    compiler reads that statement: the selection role names its file, and the one file
+    left for the one key left is a forced assignment, not a guess.
+    """
+    (WORK / "meta23.json").write_text(json.dumps({"info": {"name": "x"}}), encoding="utf-8")
+    (WORK / "sel23.json").write_text(json.dumps({"id": "cap.x", "record": {}}), encoding="utf-8")
+    goal = (f"Audit the pypi wheel artifact provenance and sha256 download hash on {REL}/meta23.json "
+            f"with selection {REL}/sel23.json and save the report to {REL}/rep23.json")
+    # the pinned compiler alone cannot bind this sentence: it falls through to a capability
+    # that has nothing to do with the request (the F1 defect) instead of the pypi audit
+    pinned = gc.compile_goal(goal, front.routable_registry(_registry()), ROOT)
+    assert pinned.get("selected_capability") != "pypi.provenance.audit_live_artifact"
+    compiled = front.compile_goal(goal, _registry(), ROOT)
+    assert compiled["selected_capability"] == "pypi.provenance.audit_live_artifact"
+    assert compiled["inputs"]["metadata_path"] == REL + "/meta23.json"
+    assert compiled["inputs"]["selection_path"] == REL + "/sel23.json"
+    assert compiled["inputs"]["report_path"] == REL + "/rep23.json"
+    # the fail-closed admission layer accepts the plan: nothing was invented
+    assert adm.route_admission(goal, compiled, _registry())["admitted"] is True
+
+
+def test_f23_a_role_in_front_of_a_conjunction_stays_open():
+    """A role word in front of a CONJUNCTION governs every member of the group.
+
+    "the manifest a.json and b.json" does not say which file is the manifest, so the
+    compiler keeps the request open instead of taking the first one it sees.
+    """
+    (WORK / "a23.json").write_text("{}", encoding="utf-8")
+    (WORK / "b23.json").write_text("{}", encoding="utf-8")
+    goal = (f"Create a tar.gz archive from the manifest {REL}/a23.json and {REL}/b23.json "
+            f"and save it to {REL}/bundle23.tar.gz.")
+    with pytest.raises(gc.GoalCompilationFailure) as excinfo:
+        front.compile_goal(goal, _registry(), ROOT)
+    assert excinfo.value.code == "GOAL_INPUT_BINDING_REQUIRED"
+    assert "manifest_path" in str(excinfo.value.detail)
+
+
+def test_f23_a_sentence_without_roles_does_not_get_a_mapping_invented():
+    """Two files, two keys, no role: the mapping is ambiguous, so it fails closed.
+
+    The F23 binder disposes of what the SENTENCE states.  It never completes a mapping the
+    sentence leaves open - a capability that needs two documents cannot be told which is
+    which by the order they happen to appear in.
+    """
+    (WORK / "meta24.json").write_text(json.dumps({"info": {"name": "x"}}), encoding="utf-8")
+    (WORK / "sel24.json").write_text(json.dumps({"id": "cap.x", "record": {}}), encoding="utf-8")
+    goal = (f"Audit the pypi wheel artifact provenance and sha256 download hash on {REL}/meta24.json "
+            f"and {REL}/sel24.json and save the report to {REL}/rep24.json")
+    with pytest.raises(gc.GoalCompilationFailure) as excinfo:
+        front.compile_goal(goal, _registry(), ROOT)
+    assert excinfo.value.code == "GOAL_INPUT_BINDING_REQUIRED"
+
+
+# ------------------------------------------------------------------- F24: the route must be executable
+
+
+def test_f24_a_candidate_the_sentence_never_gave_its_input_is_not_the_route():
+    """F24: the lexical score is a hint; the words of the request are the decision.
+
+    "Collect the external knowledge JSON document <url> with json path [] as authoritative
+    true and store it in <out>" scores HIGHER for a DOCX creator (the words "json" and
+    "document" are in its very name) than for the knowledge fetcher - and the DOCX creator
+    needs a JSON FILE that the sentence never states.  Measured before the fix: the request
+    failed closed with GOAL_INPUT_BINDING_REQUIRED on the DOCX creator's json_path.
+    """
+    goal = (f"Collect the external knowledge JSON document https://pypi.org/pypi/six/1.17.0/json "
+            f"with json path [] as authoritative true and store it in {REL}/know24.json")
+    compiled = front.compile_goal(goal, _registry(), ROOT)
+    assert compiled["selected_capability"] == "knowledge.json.fetch.external"
+    assert compiled["inputs"]["url"] == "https://pypi.org/pypi/six/1.17.0/json"
+    assert compiled["inputs"]["json_path"] == []
+    assert compiled["inputs"]["authoritative"] is True
+    assert compiled["inputs"]["output_path"] == REL + "/know24.json"
+
+
+def test_f24_a_runtime_native_capability_is_admitted_on_the_contract_the_sentence_states():
+    """The knowledge actions run INSIDE the runtime, not through an adapter entrypoint.
+
+    Typed admission used to refuse them for that reason, so a sentence that stated their
+    contract perfectly was rejected R3_WEAK_EVIDENCE while every adapter capability was
+    admitted on the strength of the sentence alone.
+    """
+    record = {
+        "schema": "PROJECT_BRAIN_KNOWLEDGE_EVIDENCE_V1",
+        "source_url": "https://pypi.org/pypi/six/1.17.0/json",
+        "http_status": 200,
+        "json_path": [],
+        "value": "1.17.0",
+        "retrieved_at_utc": "2026-10-19T10:00:00Z",
+        "body_sha256": "a" * 64,
+        "source_type": "authoritative_external_json",
+    }
+    (WORK / "ev24a.json").write_text(json.dumps(record), encoding="utf-8")
+    (WORK / "ev24b.json").write_text(json.dumps(record), encoding="utf-8")
+    goal = (f"Check whether the knowledge in {REL}/ev24a.json and {REL}/ev24b.json is consistent, "
+            f"with max age seconds 600, and save the result to {REL}/assessment24.json")
+    compiled = front.compile_goal(goal, _registry(), ROOT)
+    assert compiled["selected_capability"] == "knowledge.consistency.assess"
+    decision = adm.route_admission(goal, compiled, _registry())
+    assert decision["admitted"] is True, decision
+    assert decision["admission_basis"] == "DECLARED_INPUT_CONTRACT_FULLY_STATED_IN_GOAL"
+
+
+def test_f24_an_ambiguous_statement_still_keeps_the_request_open():
+    """F24 never turns an ambiguous request into a decision.
+
+    The archive creator is the capability the sentence asks for; two named JSON files for
+    one manifest slot is a question the machine must not answer on its own.
+    """
+    (WORK / "a24.json").write_text("{}", encoding="utf-8")
+    (WORK / "b24.json").write_text("{}", encoding="utf-8")
+    goal = (f"Create a tar.gz archive from the manifest {REL}/a24.json and {REL}/b24.json "
+            f"and save it to {REL}/bundle24.tar.gz.")
+    with pytest.raises(gc.GoalCompilationFailure) as excinfo:
+        front.compile_goal(goal, _registry(), ROOT)
+    assert excinfo.value.code == "GOAL_INPUT_BINDING_REQUIRED"
+    assert "manifest_path" in str(excinfo.value.detail)
+
+
+# ------------------------------------------------------- F25: a value's words are not the task's words
+
+
+def test_f25_a_quoted_literal_is_a_value_not_a_description_of_the_task():
+    """F25: the words inside a quoted literal belong to the VALUE, not to the request.
+
+    Measured: ``Apply the jq filter "[.items[].v] | add" to <file> with jq`` scored the SA-CCR
+    credit add-on capability above the jq capability - the word "add" lives inside the FILTER.
+    And ``with jq filter ".record.tag"`` scored a DOCX creator above jq, because the word
+    "record" lives inside the filter too.  Both sentences ask for jq; both were answered by
+    something else.  A URL and a path were already removed from the ranking (F8); a quoted
+    literal is the same kind of thing.
+    """
+    work = WORK / "f25"
+    work.mkdir(parents=True, exist_ok=True)
+    src = work / "doc25.json"
+    src.write_text(json.dumps({"a": {"b": 7}, "items": [{"v": 1}, {"v": 2}]}), encoding="utf-8")
+    out = work / "q25.json"
+    rel = "canonical/astra_runtime/tmp/test_goal_front_compiler/f25"
+    goal = f'Apply the jq filter "[.items[].v] | add" to {rel}/doc25.json with jq and write the output to {rel}/q25.json.'
+    prose = front.prose_only(goal)
+    assert "add" not in prose.lower(), prose
+    compiled = front.compile_goal(goal, _registry(), ROOT)
+    assert compiled["selected_capability"] == "json.query.jq", compiled.get("selected_capability")
+    assert compiled["inputs"]["jq_filter"] == "[.items[].v] | add"
+
+
+def test_f25_the_value_itself_still_binds():
+    """Removing the literal from the RANKING must not remove it from the REQUEST."""
+    work = WORK / "f25b"
+    work.mkdir(parents=True, exist_ok=True)
+    src = work / "doc25b.json"
+    src.write_text(json.dumps({"record": {"tag": "t"}}), encoding="utf-8")
+    out = work / "q25b.json"
+    rel = "canonical/astra_runtime/tmp/test_goal_front_compiler/f25b"
+    goal = f'Apply the jq filter ".record.tag" to the json file {rel}/doc25b.json and save the output to {rel}/q25b.json.'
+    compiled = front.compile_goal(goal, _registry(), ROOT)
+    assert compiled["selected_capability"] == "json.query.jq", compiled.get("selected_capability")
+    assert compiled["inputs"]["jq_filter"] == ".record.tag"
+    assert compiled["inputs"]["json_path"] == rel + "/doc25b.json"
+
+
+# ------------------------------------------- F26: a consumer's input is the producer's artifact
+
+
+def test_f26_a_multi_step_request_forwards_the_producers_artifact():
+    """F26: "fetch it, then audit what you fetched" is ONE graph with an artifact edge.
+
+    Measured before F26: the request was NOT planned as a DAG at all.  The consumer bound
+    the selection record instead (it was the only file on disk), the producer's artifact was
+    claimed as the consumer's OUTPUT, and the request silently dropped a step.  An output is
+    a NEW artifact and never claims an earlier step's; and the earlier step's artifact is
+    part of the pool an input may bind from, because that is what the sentence points at.
+    """
+    work = WORK / "f26"
+    work.mkdir(parents=True, exist_ok=True)
+    (work / "sel26.json").write_text(json.dumps({"id": "cap.six", "record": {}}), encoding="utf-8")
+    (work / "state26.json").write_text(json.dumps({"release_url": "https://pypi.org/pypi/six/1.17.0/json"}), encoding="utf-8")
+    rel = "canonical/astra_runtime/tmp/test_goal_front_compiler/f26"
+    goal = (f'Fetch the HTTP JSON live metadata from the source json {rel}/state26.json with url key '
+            f'"release_url" and save it to {rel}/fetched26.json. Then audit the pypi wheel artifact '
+            f'provenance and sha256 download hash on {rel}/fetched26.json with selection '
+            f'{rel}/sel26.json and save the report to {rel}/rep26.json.')
+    compiled = front.compile_goal(goal, _registry(), ROOT)
+    assert compiled.get("compiler_mode") == front.DAG_MODE
+    dag = compiled["capability_dag"]
+    steps = dag["steps"]
+    assert [s["capability_id"] for s in steps] == ["http.json.fetch_from_state", "pypi.provenance.audit_live_artifact"]
+    # the first step writes the file the second step reads
+    assert steps[0]["action"]["args"]["output_path"] == rel + "/fetched26.json"
+    forwarded = steps[1]["action"]["args"]["metadata_path"]
+    assert forwarded == {"$result": {"cycle": 0, "field": "output_path"}}, forwarded
+    # the consumer's own output is a NEW artifact, not the producer's
+    assert steps[1]["action"]["args"]["report_path"] == rel + "/rep26.json"
+    assert steps[1]["action"]["args"]["selection_path"] == rel + "/sel26.json"
+    edges = dag["artifact_edges"]
+    assert len(edges) == 1 and edges[0]["producer_cycle"] == 0 and edges[0]["consumer_cycle"] == 1
+    assert edges[0]["input_key"] == "metadata_path"
