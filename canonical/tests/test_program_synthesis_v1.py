@@ -172,7 +172,7 @@ class OracleTests(SynthesisCase):
             fh.write("x")
         ok, why = ps.check_effect(good, ".gz")
         self.assertTrue(ok, why)
-        self.assertEqual(why, "MAGIC_OK")
+        self.assertEqual(why, "ROUND_TRIP_OK")
 
     def test_a_broken_candidate_is_skipped_and_the_search_continues(self):
         """Put a candidate that writes nothing at the FRONT. The machine must
@@ -199,6 +199,59 @@ class OracleTests(SynthesisCase):
             self.assertFalse(first["ran"], "a crash was reported as a run")
         finally:
             ps.CANDIDATES[".gz"] = saved
+
+
+class RoundTripTests(SynthesisCase):
+    """A file that merely exists has proved nothing."""
+
+    def test_a_text_file_is_not_accepted_as_a_database(self):
+        fake = pathlib.Path(self.tmp) / "fake.db"
+        fake.write_text("this is not a database")
+        ok, why = ps.check_effect(fake, ".db")
+        self.assertFalse(ok, "a text file was accepted as sqlite")
+        self.assertEqual(why, "NOT_READABLE_AS_.db")
+
+    def test_a_real_sqlite_file_is_accepted(self):
+        import sqlite3
+        real = pathlib.Path(self.tmp) / "real.db"
+        c = sqlite3.connect(real)
+        c.execute("create table t (x)")
+        c.commit()
+        c.close()
+        ok, why = ps.check_effect(real, ".db")
+        self.assertTrue(ok, why)
+
+    def test_malformed_json_is_refused(self):
+        bad = pathlib.Path(self.tmp) / "bad.json"
+        bad.write_text("not json {")
+        ok, why = ps.check_effect(bad, ".json")
+        self.assertFalse(ok, "malformed json was accepted")
+        self.assertEqual(why, "NOT_READABLE_AS_.json")
+
+    def test_malformed_gzip_is_refused_even_without_the_magic(self):
+        bad = pathlib.Path(self.tmp) / "bad.gz"
+        bad.write_bytes(b"\x1f\x8b" + b"garbage that is not deflate")
+        ok, why = ps.check_effect(bad, ".gz")
+        self.assertFalse(ok, "a fake gzip header was accepted")
+
+    def test_a_truncated_png_is_refused(self):
+        r, _ = self.make("render a tiny out.png")
+        self.assertTrue(r["pass"], r)
+        raw = pathlib.Path(r["output_path"]).read_bytes()
+        cut = pathlib.Path(self.tmp) / "cut.png"
+        cut.write_bytes(raw[:20])          # signature, no IEND, bad IHDR
+        ok, why = ps.check_effect(cut, ".png")
+        self.assertFalse(ok, "a truncated PNG was accepted")
+
+    def test_every_format_the_table_claims_has_a_way_to_be_checked(self):
+        """A format with neither a magic number nor a round-trip is a format
+        the machine cannot tell from any other pile of bytes."""
+        for suffix in ps.suffixes():
+            with self.subTest(suffix=suffix):
+                has_magic = ps._magic_for(suffix) is not None
+                has_round = suffix in ps._ROUND_TRIP
+                self.assertTrue(has_magic or has_round,
+                                "%s cannot be verified at all" % suffix)
 
 
 class MemoryTests(SynthesisCase):

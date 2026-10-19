@@ -147,16 +147,92 @@ def run_candidate(source: str, out: pathlib.Path, workdir: pathlib.Path,
             "duration_s": round(time.time() - started, 4)}
 
 
+# A file that merely exists has proved nothing. Where a format can be opened
+# by the very stdlib that writes it, open it: a sqlite file is only a sqlite
+# file if sqlite3 will read it, a tar only if tarfile will list it. Accepting
+# "EXISTS_NO_FORMAT_TO_CHECK" is how a machine writes a text file, calls it a
+# database, and reports the gap closed.
+_SQLITE_CHECK = (
+    "import sys\n"
+    "P=sys.argv[1]\n"
+    "d=open(P,'rb').read(16)\n"
+    "assert d[:15]==b'SQLite format 3', 'not a sqlite header'\n"
+    "import sqlite3\n"
+    "c=sqlite3.connect(P)\n"
+    "c.execute('select name from sqlite_master').fetchall()\n"
+    "c.close()\n")
+
+_PNG_CHECK = (
+    "import sys, struct\n"
+    "P=sys.argv[1]\n"
+    "d=open(P,'rb').read()\n"
+    "assert d[:8]==b'\\x89PNG\\r\\n\\x1a\\n', 'not a png signature'\n"
+    "assert b'IHDR' in d[:32], 'no IHDR chunk'\n"
+    "w,h=struct.unpack('>II', d[16:24])\n"
+    "assert w>0 and h>0, 'zero sized image'\n"
+    "assert b'IEND' in d[-12:], 'no IEND chunk'\n")
+
+_ROUND_TRIP: dict[str, str] = {
+    ".json": "import sys, json; json.load(open(sys.argv[1], encoding='utf-8'))",
+    ".csv": "import sys, csv; [r for r in csv.reader(open(sys.argv[1], newline='', encoding='utf-8'))]",
+    # sqlite3.connect() opens ANY file -- it does not read the header until
+    # you touch a table, so 'select 1' passes on a text file. Check the
+    # signature bytes, then actually read the schema.
+    ".db": _SQLITE_CHECK,
+    ".sqlite": _SQLITE_CHECK,
+    ".sqlite3": _SQLITE_CHECK,
+    ".tar": "import sys, tarfile; tarfile.open(sys.argv[1]).getnames()",
+    ".zip": "import sys, zipfile; zipfile.ZipFile(sys.argv[1]).namelist()",
+    ".gz": "import sys, gzip; gzip.open(sys.argv[1], 'rb').read(1)",
+    ".bz2": "import sys, bz2; bz2.open(sys.argv[1], 'rb').read(1)",
+    ".xz": "import sys, lzma; lzma.open(sys.argv[1], 'rb').read(1)",
+    ".png": _PNG_CHECK,
+    ".txt": "import sys; open(sys.argv[1], encoding='utf-8').read()",
+    ".md": "import sys; open(sys.argv[1], encoding='utf-8').read()",
+}
+
+
+def verify_round_trip(out: pathlib.Path, suffix: str,
+                      timeout: float = 15.0) -> tuple[bool, str]:
+    """Open it with the library that owns the format. If it will not open,
+    it is not that format, however many bytes it has."""
+    import subprocess
+    snippet = _ROUND_TRIP.get(str(suffix or "").lower())
+    if not snippet:
+        return True, "NO_VERIFIER_FOR_FORMAT"
+    script = out.parent / "_verify.py"
+    # the path is an ARGUMENT, never text substituted into the source.
+    # Substituting it replaced the P in b'\\x89PNG...' and turned the
+    # signature check into garbage -- a verifier that corrupts itself fails
+    # everything and the machine reports a real file as not real.
+    script.write_text(snippet, encoding="utf-8")
+    try:
+        proc = subprocess.run([sys.executable, str(script), str(out)],
+                              cwd=str(out.parent), capture_output=True,
+                              timeout=timeout)
+    except Exception:  # noqa: BLE001 - a verifier must never break the search
+        return False, "VERIFIER_ERROR"
+    finally:
+        try:
+            script.unlink()
+        except OSError:
+            pass
+    if proc.returncode == 0:
+        return True, "ROUND_TRIP_OK"
+    return False, "NOT_READABLE_AS_" + (suffix or "?")
+
+
 def check_effect(out: pathlib.Path, suffix: str) -> tuple[bool, str]:
     """Does the artifact exist, and is it really the format claimed?"""
     if not out.is_file() or out.stat().st_size == 0:
         return False, "NO_OUTPUT"
     want = _magic_for(suffix)
-    if not want:
-        return True, "EXISTS_NO_FORMAT_TO_CHECK"
-    head = out.read_bytes()[:16].hex()
-    return head.startswith(want), ("MAGIC_OK" if head.startswith(want)
-                                   else "MAGIC_MISMATCH:" + head)
+    if want:
+        head = out.read_bytes()[:16].hex()
+        if not head.startswith(want):
+            return False, "MAGIC_MISMATCH:" + head
+        return verify_round_trip(out, suffix)
+    return verify_round_trip(out, suffix)
 
 
 # --------------------------------------------------------------------------- #

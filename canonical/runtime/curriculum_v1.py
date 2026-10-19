@@ -54,6 +54,9 @@ CHANNELS: dict[str, dict[str, Any]] = {
     # composing is local and needs no network: cheaper than asking the world
     "compose":   {"cost": 0.6, "note": "chain what it already has"},
     "synthesize": {"cost": 0.8, "note": "write a program that does it"},
+    # dearer than writing it by hand, because it reads the network first --
+    # but it is not limited to what anyone wrote down
+    "documentation": {"cost": 0.9, "note": "read the manual and use it"},
     "knowledge": {"cost": 1.0, "note": "go and get the data"},
     "acquire":   {"cost": 1.8, "note": "learn to run a program"},
 }
@@ -276,6 +279,27 @@ def _try_synthesize(gap: str) -> dict[str, Any]:
                       if ok else (out.get("status") or "no candidate worked")}
 
 
+def _try_documentation(gap: str) -> dict[str, Any]:
+    """Read the manual for it, then really do it.
+
+    The hand-written table only reaches what someone remembered to write
+    down. Documentation reaches the whole standard library, which is already
+    installed and already paid for.
+    """
+    try:
+        from canonical.runtime import documentation_mining_v1 as dm
+        out = dm.learn_or_recall(gap)
+    except Exception as exc:  # noqa: BLE001 - a channel never breaks a lesson
+        return {"closed": False, "status": "CHANNEL_ERROR",
+                "detail": type(exc).__name__ + ":" + str(exc)[:200]}
+    ok = out.get("pass") is True
+    return {"closed": ok, "status": out.get("status"),
+            "module": out.get("module"), "suffix": out.get("suffix"),
+            "from_memory": bool(out.get("from_memory")),
+            "detail": ("read %s's documentation and did it" % out.get("module"))
+                      if ok else (out.get("status") or "the manual did not say")}
+
+
 def _try_compose(gap: str) -> dict[str, Any]:
     """Chain the capabilities it already has into one that does the job.
 
@@ -345,6 +369,8 @@ def study(gap: Mapping[str, Any] | str, *, min_sources: int = 2,
                 outcome = _try_solve(what)
             elif name == "synthesize":
                 outcome = _try_synthesize(what)
+            elif name == "documentation":
+                outcome = _try_documentation(what)
             elif name == "knowledge":
                 outcome = _try_knowledge(what, min_sources, min_kinds)
             elif name == "compose":

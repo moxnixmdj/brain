@@ -126,7 +126,10 @@ def route(goal: str, seed: Sequence[str] | None = None,
     # free, so "nothing is registered" is not the same as "it cannot be done".
     try:
         from canonical.runtime import program_synthesis_v1 as synth
+        from canonical.runtime import documentation_mining_v1 as dm
         made = synth.synthesize_or_recall(goal)
+        if not (isinstance(made, Mapping) and made.get("pass")):
+            made = dm.learn_or_recall(goal)
     except Exception:  # noqa: BLE001 - synthesis must never break routing
         made = None
     if isinstance(made, Mapping) and made.get("pass"):
