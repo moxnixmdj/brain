@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/verification/verify_image_ocr_tesseract_reuse.py.auto.v1",
- "elapsed_ms": 40.713,
+ "elapsed_ms": 32.293,
  "independent_run_reference": {
-  "github_run_id": 39273048844,
+  "github_run_id": 39273598181,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "9360ec63-0f6e-4b5e-b49c-8013d699ee43",
+   "jti": "163ded6d-be36-43e1-ab7a-ba8ce1832c3b",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39273048844",
+   "run_id": "39273598181",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
