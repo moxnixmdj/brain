@@ -89,6 +89,14 @@ def _terms(text: Any) -> set[str]:
         if len(w) < 2 or w in _STOP:
             continue
         out |= _variants(w)
+        # underscore-joined identifiers must also answer to their parts, or a
+        # memory about output_path can never be found by someone saying
+        # "output". This is the same requirement as inflection: related forms
+        # have to meet, or the memory silently has nothing to recall.
+        if "_" in w:
+            for part in w.split("_"):
+                if len(part) >= 2 and part not in _STOP:
+                    out |= _variants(part)
     return out
 
 
@@ -118,8 +126,9 @@ def _save(state: dict, path: str = DEFAULT_STATE) -> None:
 
 
 def remember(content: Any, *, kind: str = "", tags: Iterable[str] = (),
-             path: str = DEFAULT_STATE) -> str:
+             path: str | None = None) -> str:
     """Store something. Returns its id. Nothing is asserted about its worth."""
+    path = path or DEFAULT_STATE
     state = _load(path)
     eid = "m" + str(state["next_id"])
     state["next_id"] += 1
@@ -186,7 +195,7 @@ def importance(entry: Mapping[str, Any], *, now: float | None = None) -> float:
 
 
 def recall(cue: Any, *, k: int = 5, tags: Iterable[str] = (),
-           path: str = DEFAULT_STATE) -> list[dict[str, Any]]:
+           path: str | None = None) -> list[dict[str, Any]]:
     """Bring back what matters AND is relevant.
 
     Ranked by relevance x importance, so a highly relevant entry that never
@@ -194,6 +203,7 @@ def recall(cue: Any, *, k: int = 5, tags: Iterable[str] = (),
     is the whole point: relevance alone is a search engine, importance alone is
     a leaderboard.
     """
+    path = path or DEFAULT_STATE
     state = _load(path)
     cue_terms = _terms(cue)
     cue_tags = {str(t).lower() for t in tags}
@@ -226,12 +236,13 @@ def recall(cue: Any, *, k: int = 5, tags: Iterable[str] = (),
 
 
 def credit(entry_id: str, *, helped: bool = True,
-           path: str = DEFAULT_STATE) -> bool:
+           path: str | None = None) -> bool:
     """The consequence signal: did retrieving this actually help?
 
     This is the only thing that makes something important. Without it the
     memory is a search index.
     """
+    path = path or DEFAULT_STATE
     state = _load(path)
     entry = state["entries"].get(entry_id)
     if entry is None:
@@ -245,13 +256,14 @@ def credit(entry_id: str, *, helped: bool = True,
     return True
 
 
-def forget(*, capacity: int = DEFAULT_CAPACITY, path: str = DEFAULT_STATE) -> list[str]:
+def forget(*, capacity: int = DEFAULT_CAPACITY, path: str | None = None) -> list[str]:
     """Drop the least important entries once capacity is exceeded.
 
     What goes is decided by earned importance, not by age and not by insertion
     order. A memory that evicts oldest-first throws away everything it learned
     early, which is precisely the opposite of what a creature should do.
     """
+    path = path or DEFAULT_STATE
     state = _load(path)
     entries = state["entries"]
     if len(entries) <= max(0, capacity):
@@ -265,8 +277,8 @@ def forget(*, capacity: int = DEFAULT_CAPACITY, path: str = DEFAULT_STATE) -> li
     return drop
 
 
-def stats(path: str = DEFAULT_STATE) -> dict[str, Any]:
-    state = _load(path)
+def stats(path: str | None = None) -> dict[str, Any]:
+    state = _load(path or DEFAULT_STATE)
     entries = list(state["entries"].values())
     now = _now()
     imps = [importance(e, now=now) for e in entries]
