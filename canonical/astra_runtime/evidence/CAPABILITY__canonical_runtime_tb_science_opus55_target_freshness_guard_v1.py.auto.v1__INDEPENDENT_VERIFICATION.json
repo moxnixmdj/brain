@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/tb_science_opus55_target_freshness_guard_v1.py.auto.v1",
- "elapsed_ms": 33.622,
+ "elapsed_ms": 35.172,
  "independent_run_reference": {
-  "github_run_id": 39249609457,
+  "github_run_id": 39250049640,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "220b5a1d-a09e-4a88-8df7-017343b67aa7",
+   "jti": "b62b5eb4-f31f-4b68-b627-a3c972c4dc69",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39249609457",
+   "run_id": "39250049640",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
