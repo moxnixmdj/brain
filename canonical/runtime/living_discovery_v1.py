@@ -46,7 +46,7 @@ SCHEMA = "PROJECT_BRAIN_LIVING_DISCOVERY_V1"
 
 # Bumped whenever help parsing changes: a cache is only valid for the
 # parser that produced it, or stale documentation outlives its reader.
-PARSER_VERSION = 3
+PARSER_VERSION = 4
 
 SYSTEM_DIRS = ("/usr/local/bin", "/usr/bin", "/bin")
 
@@ -155,6 +155,49 @@ def parse_options(text: str) -> tuple[Option, ...]:
     return tuple(options)
 
 
+_ENUM_HEADER = re.compile(r"^([A-Z][A-Z0-9_-]*)\s+(?:is|are)\s+one of:?\s*$")
+_ENUM_ITEM = re.compile(r"^ {1,4}(\S+)\s{2,}(\S.*)$")
+
+
+def parse_enumerations(text: str) -> tuple[tuple[str, tuple[tuple[str, str], ...]], ...]:
+    """Option values a tool lists for itself ("STYLE is one of: a t n ...").
+
+    Some arguments are not quantities but a small closed vocabulary whose
+    meaning the tool defines in its own help.  ``nl -b a`` is the standard
+    example: "a" means "number all lines", and nothing else on the machine
+    says so.  Reading the enumeration is how an argument like that can be
+    bound from evidence instead of guessed.
+    """
+    lines = text.replace("\r", "").split("\n")
+    found: list[tuple[str, tuple[tuple[str, str], ...]]] = []
+    index = 0
+    while index < len(lines):
+        header = _ENUM_HEADER.match(lines[index].strip())
+        if not header:
+            index += 1
+            continue
+        name = header.group(1)
+        values: list[tuple[str, str]] = []
+        cursor = index + 1
+        while cursor < len(lines):
+            line = lines[cursor]
+            if not line.strip():
+                if values:
+                    break
+                cursor += 1
+                continue
+            item = _ENUM_ITEM.match(line)
+            if not item:
+                break
+            value, description = item.groups()
+            values.append((value, re.sub(r"\s+", " ", description).strip()))
+            cursor += 1
+        if values:
+            found.append((name, tuple(values)))
+        index = cursor
+    return tuple(found)
+
+
 @dataclass(frozen=True)
 class ToolDoc:
     """What one executable says about itself, plus where that text came from."""
@@ -166,6 +209,7 @@ class ToolDoc:
     words: frozenset[str]
     seconds: float = 0.0
     options: tuple[Option, ...] = ()
+    enumerations: tuple[tuple[str, tuple[tuple[str, str], ...]], ...] = ()
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -175,7 +219,16 @@ class ToolDoc:
             "summary": self.summary,
             "words": sorted(self.words),
             "options": [option.to_dict() for option in self.options],
+            "enumerations": [[name, [list(pair) for pair in values]] for name, values in self.enumerations],
         }
+
+    def values_for(self, argument: str) -> tuple[tuple[str, str], ...]:
+        """The tool's own list of values for this argument, if it gave one."""
+        wanted = argument.strip("[]").upper()
+        for name, values in self.enumerations:
+            if name == wanted:
+                return values
+        return ()
 
     @classmethod
     def from_dict(cls, payload: Mapping[str, Any]) -> "ToolDoc":
@@ -186,6 +239,10 @@ class ToolDoc:
             summary=str(payload.get("summary", "")),
             words=frozenset(str(w) for w in payload.get("words", ())),
             options=tuple(Option.from_dict(row) for row in payload.get("options", ())),
+            enumerations=tuple(
+                (str(name), tuple((str(value), str(text)) for value, text in values))
+                for name, values in payload.get("enumerations", ())
+            ),
         )
 
 
@@ -344,6 +401,7 @@ def parse_help(name: str, text: str, *, path: str = "", seconds: float = 0.0) ->
         words=_words(name.replace("_", " ").replace("-", " ") + " " + definition),
         seconds=seconds,
         options=parse_options(text),
+        enumerations=parse_enumerations(text),
     )
 
 
@@ -761,10 +819,10 @@ for _word in ("byte", "bytes"):
 _VERBS = {
     "reverse": {"reverse", "reversed", "flip", "flipped", "backward", "backwards", "invert", "inverted"},
     "sort": {"sort", "sorted", "order", "ordered", "arrange", "arranged", "alphabetical", "alphabetically"},
-    # "number" is deliberately absent: "number the lines" asks for line
-    # numbers, not a count.  The count reading is added only for the phrase
-    # "number of", which is partitive and unambiguous.
+    # "number the lines" asks for line numbers; "the number of lines" asks for
+    # a count.  The two are told apart by the partitive "of", not by a guess.
     "count": {"count", "counted", "tally", "total"},
+    "number": {"number", "numbered", "numbering"},
     "unique": {"unique", "distinct", "deduplicate", "deduplicated", "dedupe"},
     "upper": {"upper", "uppercase", "capital", "capitalized", "shout"},
     "lower": {"lower", "lowercase", "downcase"},
@@ -832,6 +890,15 @@ class Reading:
                 kept = [word for word in source.split() if not (word in seen or seen.add(word))]
                 return "\n".join(kept) + ("\n" if kept else "")
             return None
+        if self.verb == "number":
+            # Every line gets a number, right-aligned in six columns and
+            # separated by a tab -- the layout `nl` produces.  The reading says
+            # what the goal means; whether this machine can produce it is a
+            # separate question, answered by running something.
+            if self.unit != "line":
+                return None
+            numbered = [f"{index:>6}\t{line}" for index, line in enumerate(body, start=1)]
+            return "\n".join(numbered) + ("\n" if numbered else "")
         if self.verb == "count":
             if self.unit == "line":
                 return f"{len(body)}\n"
@@ -886,8 +953,11 @@ def readings(goal: str, *, path: str | None = None) -> list[Reading]:
     token_set = set(tokens)
     pairs = set(zip(tokens, tokens[1:]))
     verbs = [verb for verb, words in _VERBS.items() if token_set & words]
-    if ("number", "of") in pairs and "count" not in verbs:
-        verbs.append("count")
+    if ("number", "of") in pairs:
+        # "the number of lines" is a quantity, not an enumeration.
+        verbs = [verb for verb in verbs if verb != "number"]
+        if "count" not in verbs:
+            verbs.append("count")
     if not verbs:
         return []
     unit = next((_UNITS[t] for t in tokens if t in _UNITS), None)
@@ -896,6 +966,21 @@ def readings(goal: str, *, path: str | None = None) -> list[Reading]:
     words = tuple(
         t for t in tokens if not t.isdigit() and (t not in _STOP or t in _UNITS)
     )
+    # Every content word of the sentence must be part of what a reading
+    # explains.  Otherwise the goal says something the creature would silently
+    # drop -- "number the lines in roman numerals" is not answered by Arabic
+    # numerals, and "sort in descending order" is not answered by ascending
+    # order.  Refusing is honest; answering a different question is not.
+    explained: set[str] = set(_STOP)
+    for synonyms in _VERBS.values():
+        explained |= synonyms
+    explained |= set(_UNITS) | _SCOPE_PER
+    uncovered = [
+        token for token in tokens if token not in explained and not token.isdigit()
+    ]
+    if uncovered:
+        return []
+
     found: list[Reading] = []
     for verb in verbs:
         if verb in ("head", "tail"):
@@ -905,7 +990,7 @@ def readings(goal: str, *, path: str | None = None) -> list[Reading]:
         if verb in ("upper", "lower"):
             found.append(Reading(verb, unit or "character", "sequence", words=words))
             continue
-        if verb in ("count", "sort", "unique"):
+        if verb in ("count", "sort", "unique", "number"):
             found.append(Reading(verb, unit or "line", "sequence", words=words))
             continue
         if verb == "squeeze":

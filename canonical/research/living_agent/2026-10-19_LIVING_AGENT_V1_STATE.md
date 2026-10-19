@@ -12,7 +12,7 @@ receipt, not a terminal claim, and not a capability grant.
 | Living agent | `canonical/runtime/living_agent_v1.py` | Real POSIX computer surface, one-shot skill chunking, canary-based drift detection and repair, word learning, impasse tracking, self-directed practice, consolidating memory, snapshot/restore. |
 | Shell synthesis | `canonical/runtime/shell_synthesis_v1.py` | Learns a stdin→stdout pipeline from (input, expected output) examples: typed beam search over 20 real stages, exact interpreter ordering, real-shell verification. |
 | Benchmark | `canonical/runtime/living_agent_benchmark_v1.py` | Twelve spreadsheet transforms with independently written oracles, plus a projection of the repository's real file tree. |
-| Acceptance | `tests/test_living_agent_v1.py` | 98 tests / 159 subtests. Real processes, real files, exact byte equality. No mocks. |
+| Acceptance | `tests/test_living_agent_v1.py` | 101 tests / 159 subtests. Real processes, real files, exact byte equality. No mocks. |
 | Discovery | `canonical/runtime/living_discovery_v1.py` | Reads what this machine says it can do (`tool --help`, the tool's own definition), turns a goal sentence into an exact expected output, and proves a real command against it before admitting it. |
 | Growth measurement | `canonical/runtime/living_agent_growth_v1.py` | Acquires four real skills at runtime and replays them on three untouched real directories. |
 
@@ -182,9 +182,21 @@ reverse the lines   tac notes.txt  106 ms   warm documentation cache; shortlist 
 same goal again     from memory     12 ms   no documentation read, no search
 first goal on a     any             1.5 s   reading 324 self-descriptions, once ever
   new machine
+number the lines    nl notes.txt   107 ms   the numbering layout is part of the reading
+number blank lines  nl -b a        222 ms   the style value comes from nl's own help
 ambiguous goal      refused         --      GOAL_AMBIGUOUS: rev | tac, impasse recorded
 unknown verb        refused         --      GOAL_NOT_VERIFIABLE, nothing admitted
 ```
+
+**A goal is answered only when it is fully understood.**  Every content word
+must be part of what the reading (or the property) explains, or nothing is
+answered.  "number the lines" and "the number of lines" are different
+functions, told apart by the partitive "of"; "sort in descending order" and
+"number in roman numerals" share their words with capabilities the creature has
+and ask for something it does not, so they are refused and the unmodelled words
+("descending", "roman", "numerals") go on the record.  The alternative -- drop
+the words it does not model and answer anyway -- is how a system ends up
+confidently wrong.
 
 Three costs, measured rather than assumed: a name lookup costs one process;
 a documentation question costs a one-time 1.3 s scan of the machine (324
@@ -239,17 +251,28 @@ guessing them is worse.  The creature does neither:
    options: spellings, whether a value is wanted, the placeholder name and the
    sentence the authors wrote.  It is cached with the rest of the documentation,
    and re-parsed when the parser changes.
-2. **A value must be grounded.**  A number the request names binds an option
+2. **A tool may also name its own vocabulary.**  Some arguments are not
+   quantities but a small closed set whose meaning the tool defines itself:
+   `nl` says "STYLE is one of: a — number all lines; t — number only nonempty
+   lines; …".  That list is parsed, and a value whose own sentence matches the
+   request is tried first.  `nl -b a` is reachable this way, and could not be
+   reached any other way.
+3. **A value must be grounded.**  A number the request names binds an option
    that takes a number; a separator the example data actually contains binds an
    option that takes a character; a switch must have a word of the request in
    its own description.  Anything else is not "unlikely" -- it is unjustified,
    and is not tried.  That is also why `--output=FILE` is never bound: a
    filename is not in the evidence.
-3. **The examples decide.**  Every candidate is a real command run by the real
+4. **The examples decide.**  Every candidate is a real command run by the real
    shell on every example; the first that reproduces the bytes exactly wins.
    Bundles are ordered simplest first (the tool alone, then one argument, then
    combinations), so the least machinery that fits is the one admitted.
-4. **Failure is knowledge.**  If no mechanism fits, the goal, the examples and
+5. **Discovery uses the same argument search.**  `discover()` has two exact
+   specifications -- the real file and the probe it designs -- which is exactly
+   what the argument search needs.  That is how a file with blank lines gets
+   `nl -b a`: the bare tool reproduces every non-blank line but not the blank
+   ones, and the missing style is read out of nl's own option list.
+6. **Failure is knowledge.**  If no mechanism fits, the goal, the examples and
    every tool that was tried are recorded as an impasse; a single demonstration
    closes it.  If a tool documents a flag it does not implement, it is rejected
    and revoked like any other guess.
@@ -262,6 +285,7 @@ Measured on this machine (cold documentation cache, first contact):
 | fold each line at 40 characters | exact bytes | `fold -w 40` | 95 ms, 8 runs |
 | fold each line at 12 characters (same creature, later) | exact bytes | `fold -w 12` | 80 ms |
 | number the lines | exact bytes | `nl` | 72 ms |
+| number the lines, blank lines included | exact bytes | `nl -b a` | 84 ms |
 
 The width row is the point: the number came from the request, not from a
 constant, and the second request was answered with a different binding by the
@@ -356,6 +380,10 @@ rather than die mid-loop.
 - Two examples are the minimum for synthesis. When the examples are degenerate
   (identity, single-valued columns) the agent reports the ambiguity; it does not
   claim a unique mechanism it cannot justify.
+- Coverage is lexical.  A goal phrased with a synonym outside the reading or
+  property vocabulary ("flip", "invert", "tidy up") is refused as unverifiable
+  rather than mapped onto the nearest known verb.  Teaching a word
+  (`teach_word`) or demonstrating the command are the two ways through.
 - The property vocabulary is small on purpose. It grows only with checks that
   are decidable from the real output; a property that cannot be checked is not
   admitted.

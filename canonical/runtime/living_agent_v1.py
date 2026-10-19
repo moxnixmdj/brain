@@ -462,6 +462,50 @@ def _conserves(properties: Sequence[str], source: str, output: str) -> bool:
 _LAST_WORDS = {"last", "later", "final", "second", "third", "tail"}
 
 
+_DIRECTIVES = {
+    "list", "show", "print", "display", "give", "keep", "only", "remove", "delete",
+    "make", "get", "produce", "return", "turn", "change", "convert", "put", "want",
+    # "ascending" is what sorting means here; "descending" is a different
+    # mechanism and is not silently ignored.
+    "ascending",
+    # function words that carry no content of their own
+    "how", "many", "are", "is", "there", "does", "do", "its", "into", "than",
+    # generic words for "the thing being worked on"
+    "text", "content", "contents", "data", "file", "files", "input", "output", "result",
+}
+_PROPERTY_WORDS = (
+    _COUNT_WORDS | _SORT_WORDS | _UNIQUE_WORDS | _LOWER_WORDS | _UPPER_WORDS | _WORD_WORDS
+)
+
+
+def _unexplained_words(goal: str, properties: Sequence[str], path: str = "") -> list[str]:
+    """Words the stated properties do not account for.
+
+    A goal is only answered when what it *says* is what the answer *does*.
+    "sort the lines in descending order" names the same property as "sort the
+    lines" and asks for the opposite result; answering ascending order would be
+    a right answer to a different question.
+    """
+    # Units ("lines", "words") and the partitive "number of" are content the
+    # properties already account for.
+    explained = (
+        set(_STOP)
+        | _DIRECTIVES
+        | _PROPERTY_WORDS
+        | set(discovery._UNITS)
+        | set(discovery._SCOPE_PER)
+        | {"number"}
+    )
+    text = goal
+    if path:
+        fragments = {path, Path(path).name, Path(path).stem, Path(path).suffix.lstrip(".")}
+        for fragment in sorted((f for f in fragments if len(f) >= 3), key=len, reverse=True):
+            text = re.sub(
+                r"(?<![A-Za-z0-9_])" + re.escape(fragment) + r"(?![A-Za-z0-9_])", " ", text
+            )
+    return sorted({word for word in _tokens(text) if word not in explained})
+
+
 def _target_for(properties: Sequence[str], text: str, goal: str = "") -> str | None:
     """The unique result the stated properties determine, when there is one."""
     word_mode = "words" in properties
@@ -1077,7 +1121,7 @@ class LivingAgent:
     _CHAR_WORDS = {"delimiter", "separator", "character", "char", "characters", "string"}
 
     @classmethod
-    def _value_kind(cls, option: discovery.Option) -> str:
+    def _value_kind(cls, option: discovery.Option, doc: discovery.ToolDoc | None = None) -> str:
         """What kind of value an option's argument is, read from its own text.
 
         The name the authors gave the placeholder is the strongest evidence
@@ -1086,6 +1130,10 @@ class LivingAgent:
         invented value is not evidence.
         """
         name = option.argument.strip("[]").upper()
+        if doc is not None and doc.values_for(name):
+            # The tool lists the values it accepts, so the argument is a small
+            # closed vocabulary rather than a number or a character.
+            return "enum"
         if cls._INT_NAME.match(name):
             return "int"
         if cls._CHAR_NAME.match(name):
@@ -1157,8 +1205,17 @@ class LivingAgent:
             spelling = option.short or option.long
             if not spelling:
                 continue
-            kind = self._value_kind(option)
+            kind = self._value_kind(option, doc)
             words = set(discovery._words(option.description))
+            if kind == "enum":
+                for value, text in doc.values_for(option.argument):  # type: ignore[union-attr]
+                    # A value whose own sentence matches the request is the
+                    # strongest kind of evidence available; the others stay in
+                    # the space, ordered after it, and are still only believed
+                    # if the bytes agree.
+                    score = 3 if set(discovery._words(text)) & tokens else 2
+                    atoms.append((score, [spelling, value]))
+                continue
             if option.argument:
                 if kind == "int":
                     if digits:
@@ -1174,6 +1231,10 @@ class LivingAgent:
             if tokens & words:
                 atoms.append((1, [spelling]))
         atoms.sort(key=lambda row: (-row[0], row[1]))
+        # Values the tool itself names are cheap to try but easy to over-try:
+        # `nl` lists four styles and two formats, and running all of them on
+        # every example would be a small brute-force search.  Four is enough
+        # for the ones whose own words match, and the rest are never invented.
         return atoms[:4]
 
     def _argument_forms(
@@ -1213,6 +1274,7 @@ class LivingAgent:
         goal: str,
         examples: Sequence[tuple[str, str]],
         *,
+        words: Sequence[str] | None = None,
         max_tools: int = 6,
         max_runs: int = 60,
     ) -> dict[str, Any] | None:
@@ -1270,7 +1332,9 @@ class LivingAgent:
 
         shortlist = [
             doc
-            for doc in vocabulary.ranked(discovery._words(goal), limit=max_tools)
+            for doc in vocabulary.ranked(
+                words if words is not None else discovery._words(goal), limit=max_tools
+            )
             if doc.name not in discovery.DENY
             and any(name == doc.name for name, _ in vocabulary.executables())
         ]
@@ -1444,6 +1508,17 @@ class LivingAgent:
             # reads the goal, finds a real tool that reproduces that reading,
             # and admits it only after the shell agrees twice.
             return self.discover(goal, path)
+        unexplained = _unexplained_words(goal, properties, path)
+        if unexplained:
+            self._record_impasse(
+                goal,
+                {
+                    "reason": "unmodelled_qualifier",
+                    "words": unexplained,
+                    "properties": list(properties),
+                },
+            )
+            raise AgentError("GOAL_NOT_VERIFIABLE")
         target = _target_for(properties, source, goal)
         if target is None:
             # The goal *is* understood: its properties are checkable.  What is
@@ -1719,6 +1794,30 @@ class LivingAgent:
             )
             if found is not None:
                 return found
+
+        # A documented mechanism that needs an argument.  The file and the
+        # probe are two independent exact specifications, which is exactly the
+        # evidence the argument search needs: a bare `nl` leaves blank lines
+        # unnumbered, and `nl -b a` is only reachable through the tool's own
+        # list of styles.
+        probe_path = ".discovery-probe.txt"
+        self.computer.write(probe_path, probe_text)
+        try:
+            found = self._find_documented_mechanism(
+                " ".join(reading.words),
+                [(path, expected), (probe_path, probe_expected)],
+                words=reading.words,
+            )
+        finally:
+            self.computer.path(probe_path).unlink(missing_ok=True)
+        if found is not None:
+            return {
+                "template": found["template"],
+                "tool": found["tool"],
+                "doc": found["doc"],
+                "source": "documentation-options",
+                "stages": [found["tool"]],
+            }
 
         # Nothing that mentions the goal, and nothing that matches its words:
         # try every tool on the machine before giving up.

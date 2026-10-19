@@ -743,6 +743,37 @@ class VocabularyExtensionTests(unittest.TestCase):
         self.assertEqual(rejected[0]["documentation"], "Reverse the lines of the file")
         self.assertNotIn("reverse", agent.computer.admitted())
 
+    def test_number_the_lines_is_numbering_and_number_of_is_counting(self) -> None:
+        # The same word, two functions.  "Number the lines" enumerates them;
+        # "the number of lines" is a quantity.  Both answers are exact, and
+        # they are different answers.
+        agent = self._agent()
+        agent.computer.write("notes.txt", "delta\nalpha\ncharlie\nbravo\nzulu\n")
+        numbered = agent.fulfil("number the lines of notes.txt", "notes.txt")
+        self.assertEqual(
+            numbered["stdout"],
+            "     1\tdelta\n     2\talpha\n     3\tcharlie\n     4\tbravo\n     5\tzulu\n",
+        )
+        counted = agent.fulfil("the number of lines in notes.txt", "notes.txt")
+        self.assertEqual(counted["stdout"], "5\n")
+        self.assertNotEqual(numbered["command"], counted["command"])
+
+    def test_blank_lines_get_numbers_from_a_value_the_tool_documents(self) -> None:
+        # `nl` leaves empty lines unnumbered; numbering them needs `-b a`, and
+        # "a means number all lines" exists only in nl's own help text.  The
+        # goal fixes the bytes, so the bare tool is not good enough and the
+        # document's enumeration is what closes the gap.
+        agent = self._agent()
+        agent.computer.write("notes.txt", "alpha\n\nbeta\ngamma\n")
+        outcome = agent.fulfil("number the lines of notes.txt", "notes.txt")
+        self.assertEqual(outcome["source"], "documentation-options")
+        self.assertIn("-b a", outcome["command"])
+        self.assertEqual(
+            outcome["stdout"], "     1\talpha\n     2\t\n     3\tbeta\n     4\tgamma\n"
+        )
+        rows = [row for row in agent.discovery_log if row["tool"] == "nl"]
+        self.assertTrue(any(row["verified"] and row["argv"] == ["-b", "a"] for row in rows))
+
     def test_a_one_letter_file_name_does_not_mangle_the_goal(self) -> None:
         # Regression: the file stem was stripped from the goal as a *substring*,
         # so `n.txt` deleted every letter "n" and turned "lines" into "lies" --
@@ -1299,7 +1330,7 @@ class DocumentedArgumentTests(unittest.TestCase):
     def _fold_source(self, name: str, agent: LivingAgent) -> str:
         return agent.computer.read(name)
 
-    def test_numbering_is_learned_from_one_demonstration_and_refused_without_one(self) -> None:
+    def test_numbering_is_learned_and_a_layout_it_cannot_express_is_refused(self) -> None:
         agent = self._agent()
         text = "alpha\nbeta\ngamma\n"
         other = "one\ntwo\nthree\nfour\n"
@@ -1308,7 +1339,8 @@ class DocumentedArgumentTests(unittest.TestCase):
 
         def numbered(source: str) -> str:
             return "".join(
-                "%6d\t%s\n" % (index, line) for index, line in enumerate(source.split(), start=1)
+                "%6d\t%s\n" % (index, line)
+                for index, line in enumerate(source.split(), start=1)
             )
 
         outcome = agent.acquire(
@@ -1316,13 +1348,23 @@ class DocumentedArgumentTests(unittest.TestCase):
         )
         self.assertEqual(outcome["tool"], "nl")
         self.assertEqual(outcome["stdout"], numbered(text))
-        # The layout is a convention: without a demonstration it is not guessed.
+        # The layout is part of the reading, so no demonstration is needed for
+        # a second creature: the goal alone fixes the bytes and the machine is
+        # asked for a mechanism that produces them.
         blind = self._agent()
         self._write(blind, "n1.txt", text)
-        with self.assertRaises(AgentError) as raised:
-            blind.fulfil("number the lines of n1.txt", "n1.txt")
-        self.assertEqual(str(raised.exception), "GOAL_NOT_VERIFIABLE")
-        self.assertEqual(blind.skills, {})
+        found = blind.fulfil("number the lines of n1.txt", "n1.txt")
+        self.assertEqual(found["stdout"], numbered(text))
+        # What the reading cannot express is refused, not approximated: the
+        # same words with "roman numerals" are not answered in Arabic digits.
+        for goal in (
+            "number the lines of n1.txt in roman numerals",
+            "sort the lines of n1.txt in descending order",
+        ):
+            with self.assertRaises(AgentError) as raised:
+                blind.fulfil(goal, "n1.txt")
+            self.assertEqual(str(raised.exception), "GOAL_NOT_VERIFIABLE")
+        self.assertIn("number the lines of n1.txt in roman numerals", blind.open_questions())
 
     def test_a_documented_flag_that_is_not_implemented_is_rejected(self) -> None:
         # A tool that documents ``-w, --width=WIDTH`` and ignores it.  It is
@@ -1387,6 +1429,29 @@ class DocumentedArgumentTests(unittest.TestCase):
         # a candidate that failed leaves no new authority behind: only what was
         # already admitted before the search can still be admitted after it
         self.assertEqual(rejected & (set(agent.computer.admitted()) - before), set())
+
+    def test_a_documented_value_vocabulary_is_read_not_guessed(self) -> None:
+        # `nl` numbers only non-empty lines by default.  Numbering the blank
+        # ones needs `-b a`, and the only place on this machine that says "a
+        # means number all lines" is nl's own help text.
+        agent = self._agent()
+        first = "alpha\n\nbeta\ngamma\n"
+        second = "one\n\ntwo\n\nthree\n"
+        self._write(agent, "b1.txt", first)
+        self._write(agent, "b2.txt", second)
+
+        def all_lines(text: str) -> str:
+            return "".join(
+                "%6d\t%s\n" % (index, line)
+                for index, line in enumerate(text.split("\n")[:-1], start=1)
+            )
+
+        outcome = agent.acquire(
+            "number the lines", [("b1.txt", all_lines(first)), ("b2.txt", all_lines(second))]
+        )
+        self.assertEqual(outcome["tool"], "nl")
+        self.assertEqual(outcome["argv"], ["-b", "a"])
+        self.assertEqual(outcome["stdout"], all_lines(first))
 
     def test_a_failed_acquisition_is_a_remembered_gap_one_word_closes(self) -> None:
         # Neither the pipeline vocabulary nor anything the machine documents
@@ -1579,15 +1644,17 @@ class IntentWithoutExamplesTests(unittest.TestCase):
         goal = "keep the last occurrence of each duplicate line in 'dups.txt'"
         with self.assertRaises(AgentError) as raised:
             self.agent.fulfil(goal, "dups.txt")
-        self.assertEqual(str(raised.exception), "GOAL_PROPERTY_COMBINATION_UNSUPPORTED")
+        self.assertEqual(str(raised.exception), "GOAL_NOT_VERIFIABLE")
         self.assertIn(goal, self.agent.open_questions())
         recorded = [
             entry.payload
             for entry in self.agent.memory.active()
             if entry.payload.get("goal") == goal
         ]
-        self.assertEqual(recorded[0]["reason"], "no_exact_mechanism")
-        self.assertEqual(recorded[0]["properties"], ["unique"])
+        # "last" and "occurrence" are exactly what the goal adds beyond
+        # "unique lines", and they are what makes the answer different.
+        self.assertEqual(recorded[0]["reason"], "unmodelled_qualifier")
+        self.assertEqual(recorded[0]["words"], ["last", "occurrence"])
         self.assertEqual(self.agent.computer.read("dups.txt"), "b\na\nb\n")
 
     def test_property_is_rechecked_at_solve_time(self) -> None:
