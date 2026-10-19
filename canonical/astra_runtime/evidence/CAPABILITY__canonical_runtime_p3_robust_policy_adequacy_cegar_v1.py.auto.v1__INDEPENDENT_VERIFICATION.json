@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py.auto.v1",
- "elapsed_ms": 0.377,
+ "elapsed_ms": 0.39,
  "independent_run_reference": {
-  "github_run_id": 39197939652,
+  "github_run_id": 39198204378,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "47236daa-2846-480a-9f4f-551938046924",
+   "jti": "bbe788b1-d45d-49aa-b902-a42a2fbab097",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39197939652",
+   "run_id": "39198204378",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
