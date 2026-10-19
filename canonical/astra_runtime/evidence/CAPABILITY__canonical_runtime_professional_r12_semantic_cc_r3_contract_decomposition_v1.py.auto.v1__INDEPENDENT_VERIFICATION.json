@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/professional_r12_semantic_cc_r3_contract_decomposition_v1.py.auto.v1",
- "elapsed_ms": 32.308,
+ "elapsed_ms": 32.472,
  "independent_run_reference": {
-  "github_run_id": 39271996848,
+  "github_run_id": 39272510261,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "e4ccf492-84e0-4c5e-a8bf-4acc1ad1db18",
+   "jti": "b315a184-b3a8-46fa-836a-baff0b5bebb9",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39271996848",
+   "run_id": "39272510261",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
