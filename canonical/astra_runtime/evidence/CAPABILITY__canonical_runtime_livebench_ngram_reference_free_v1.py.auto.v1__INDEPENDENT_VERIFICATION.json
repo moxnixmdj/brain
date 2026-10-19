@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_ngram_reference_free_v1.py.auto.v1",
- "elapsed_ms": 0.159,
+ "elapsed_ms": 0.239,
  "independent_run_reference": {
-  "github_run_id": 39240123641,
+  "github_run_id": 39240463276,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "8bec633b-a80e-456f-9193-55c7ef2a96bd",
+   "jti": "ab7357b6-90d0-4bb8-ba9f-2f39680ae83d",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39240123641",
+   "run_id": "39240463276",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
