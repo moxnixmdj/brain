@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/verify_cad_zero_reality_blocker_reconciliation_v1.py.auto.v1",
- "elapsed_ms": 27.864,
+ "elapsed_ms": 31.892,
  "independent_run_reference": {
-  "github_run_id": 39212194418,
+  "github_run_id": 39212525226,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "bcedafc3-abeb-4875-86e6-b9aa8f254f1b",
+   "jti": "2631bc8c-abac-4df8-b5dd-68d0723df658",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39212194418",
+   "run_id": "39212525226",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
