@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/professional_r12_safe_meta_composition_v1.py.auto.v1",
- "elapsed_ms": 1.689,
+ "elapsed_ms": 1.337,
  "independent_run_reference": {
-  "github_run_id": 39206496439,
+  "github_run_id": 39206756678,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "119f0d0e-a401-4701-a6ad-848ef1d440be",
+   "jti": "2e87be64-74e5-400b-aacc-d4599173144d",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39206496439",
+   "run_id": "39206756678",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
