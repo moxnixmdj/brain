@@ -884,7 +884,13 @@ class LiteralTests(unittest.TestCase):
             " ".join(hit["argv"]) if hit.get("stages") != 2
             else " ".join(hit["argv"][0]) + " " + " ".join(hit["argv"][1])
             for hit in r["survivors"])
-        self.assertIn("ERROR", joined, r["survivors"])
+        # the word is wired into the command. It is remembered as a hole
+        # waiting for the word (see GeneralisingTests), which is the same
+        # guarantee: a command with no place for ERROR has not looked for
+        # ERROR, however right its number happens to be.
+        self.assertTrue("ERROR" in joined
+                        or cenv._LITERAL_HOLE in joined,
+                        r["survivors"])
 
     def test_the_whole_manual_is_searched_when_the_hint_is_wrong(self):
         """grep documents 83 flags and '--count' is the 65th. A goal that
@@ -922,3 +928,87 @@ class LiteralTests(unittest.TestCase):
             cenv.installed_programs = real
         self.assertNotIn(key, cenv._QUERY_CACHE,
                          "an empty result was cached as knowledge")
+
+
+class GeneralisingTests(unittest.TestCase):
+    """Memorising an answer is not learning a method.
+
+    Remembering 'grep -c ERROR' means thirty-five seconds of searching all
+    over again the moment the word is WARN. What generalises is the SHAPE
+    of the command, with a hole where the goal's own word goes -- and then
+    the second question is not merely faster, it is a different kind of
+    thing: reuse, not repetition.
+    """
+
+    def setUp(self) -> None:
+        self.tmp = tempfile.mkdtemp(prefix="brain-gen-")
+        self.work = pathlib.Path(self.tmp)
+        self._saved_state = os.environ.get("BRAIN_STATE_DIR")
+        os.environ["BRAIN_STATE_DIR"] = self.tmp
+        cenv._QUERY_CACHE.clear()
+        cenv._QUERY_LOADED = False
+        rows = []
+        for i in range(23):
+            rows.append("ERROR in row %d" % i if i % 4 == 0
+                        else "all good row %d" % i)
+            if i % 5 == 0:
+                rows.append("WARN also row %d" % i)
+        self.rows = rows
+        self.file = self.work / "data.txt"
+        self.file.write_text("\n".join(rows) + "\n")
+        self.truth = {
+            "ERROR": str(sum(1 for r in rows if "ERROR" in r)),
+            "WARN": str(sum(1 for r in rows if "WARN" in r)),
+        }
+
+    def tearDown(self) -> None:
+        if self._saved_state is None:
+            os.environ.pop("BRAIN_STATE_DIR", None)
+        else:
+            os.environ["BRAIN_STATE_DIR"] = self._saved_state
+        cenv._QUERY_CACHE.clear()
+        cenv._QUERY_LOADED = False
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def _ask(self, word: str):
+        start = time.time()
+        r = cenv.answer_query("how many lines contain %s in data.txt" % word,
+                              self.file)
+        return r, time.time() - start
+
+    def test_a_word_it_has_never_seen_is_answered_without_searching_again(self):
+        first, first_t = self._ask("ERROR")
+        self.assertTrue(first["pass"], first)
+        self.assertEqual(first["value"], self.truth["ERROR"], first)
+
+        second, second_t = self._ask("WARN")
+        self.assertTrue(second["pass"], second)
+        self.assertEqual(second["value"], self.truth["WARN"], second)
+        # the whole point: not "also fast" -- a different order of thing
+        self.assertLess(second_t, first_t / 10.0,
+                        "second word took %.2fs against %.2fs for the first "
+                        "-- it searched again instead of reusing"
+                        % (second_t, first_t))
+
+    def test_what_is_remembered_is_a_shape_with_a_hole_in_it(self):
+        self._ask("ERROR")
+        remembered = [c for (kind, _), c in cenv._QUERY_CACHE.items()
+                      if kind == "lineswith"]
+        self.assertTrue(remembered, "nothing was remembered")
+        joined = " ".join(" ".join(hit["argv"]) for hit in remembered[0])
+        self.assertNotIn("ERROR", joined,
+                         "the word was baked in, so nothing generalised: "
+                         "%s" % joined)
+        self.assertIn(cenv._LITERAL_HOLE, joined)
+
+    def test_the_hole_is_filled_with_this_goals_word_before_running(self):
+        """A shape cannot be run until it is made specific again -- and it
+        must be filled with THIS word, not the one it was learned on."""
+        self._ask("ERROR")
+        second, _ = self._ask("WARN")
+        self.assertTrue(second["pass"], second)
+        for hit in second["survivors"]:
+            joined = " ".join(hit["argv"])
+            self.assertNotIn(cenv._LITERAL_HOLE, joined,
+                             "the command was run with the hole still in it")
+            self.assertIn("WARN", joined)

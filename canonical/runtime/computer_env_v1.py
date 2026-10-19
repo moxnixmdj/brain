@@ -1335,6 +1335,43 @@ def _query_cache_put(kind: str, limit: int,
         pass
 
 
+def _reverify(hit: dict[str, Any], kind: str, literal: str | None,
+              timeout: float = 5.0) -> bool:
+    """Does a remembered command still measure this, for THIS word?
+
+    What was learned was a shape, so it can be reused for a word it has
+    never seen -- but reuse is not the same as trust. Two runs on files
+    built to hold 7 and 13 of the thing settles it, which is why the
+    second question costs milliseconds instead of thirty-five seconds.
+    """
+    name = "probe.txt"
+    root = pathlib.Path(tempfile.mkdtemp(prefix="brain-recheck-"))
+    try:
+        argv = _concretise(hit.get("argv"), literal)
+        if hit.get("stages") == 2:
+            first, second = argv
+        else:
+            first, second = argv, None
+        reads = []
+        for size in _PROBE_SIZES:
+            (root / name).write_bytes(probe_bytes(kind, size, literal))
+            try:
+                if second is None:
+                    code, out = _run_capped(first, root, timeout=timeout)
+                else:
+                    code, out = _run_pipeline(first, second, root,
+                                              timeout=timeout)
+            except Exception:  # noqa: BLE001
+                return False
+            if code != 0:
+                return False
+            reads.append(_bare_value(out))
+        return len(reads) == len(_PROBE_SIZES) and all(
+            got == str(want) for got, want in zip(reads, _PROBE_SIZES))
+    finally:
+        shutil.rmtree(str(root), ignore_errors=True)
+
+
 def _reap(proc: subprocess.Popen, worker: Any,
           also: Sequence[subprocess.Popen] = ()) -> int:
     """The exit status of a command that has been read on a deadline.
@@ -1547,6 +1584,32 @@ def _stdin_shapes(prog: str, gap: str) -> list[list[str]]:
     return shapes
 
 
+def _abstract(argv: list[str], literal: str | None) -> list[str]:
+    """Replace the goal's own word with a hole, so what was learned is the
+    SHAPE of the command and not one instance of it.
+
+    Remembering 'grep -c ERROR probe.txt' means the machine has to spend
+    thirty-five seconds learning all over again the moment the word is
+    WARN instead -- it memorised an answer rather than learning a method.
+    What generalises is 'grep -c <what was asked for> file'.
+    """
+    if not literal:
+        return list(argv)
+    return [_LITERAL_HOLE if a == literal else a for a in argv]
+
+
+def _concretise(argv, literal: str | None):
+    """Put this goal's word back into the hole left for it."""
+    if literal is None:
+        return argv
+    if isinstance(argv, list) and argv and isinstance(argv[0], list):
+        return [_concretise(part, literal) for part in argv]
+    return [literal if a == _LITERAL_HOLE else a for a in argv]
+
+
+_LITERAL_HOLE = "{asked}"
+
+
 def _one_wide(prog: str, kind: str, gap: str, patterns: Sequence[str],
               timeout: float, literal: str | None = None
               ) -> dict[str, Any] | None:
@@ -1574,7 +1637,8 @@ def _one_wide(prog: str, kind: str, gap: str, patterns: Sequence[str],
             if len(reads) == len(_PROBE_SIZES) and all(
                     got == str(want)
                     for got, want in zip(reads, _PROBE_SIZES)):
-                return {"program": prog, "argv": list(argv),
+                return {"program": prog,
+                        "argv": _abstract(list(argv), literal),
                         "wide": True,
                         "tracked": [str(s) for s in _PROBE_SIZES]}
     finally:
@@ -1651,7 +1715,8 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
                     reads.append(_bare_value(out))
                 if len(reads) == len(_PROBE_SIZES) and all(
                         got == str(want) for got, want in zip(reads, _PROBE_SIZES)):
-                    return {"program": prog, "argv": list(argv),
+                    return {"program": prog,
+                            "argv": _abstract(list(argv), literal),
                             "tracked": [str(s) for s in _PROBE_SIZES]}
         finally:
             shutil.rmtree(str(root), ignore_errors=True)
@@ -1714,7 +1779,8 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
                             got == str(want)
                             for got, want in zip(reads, _PROBE_SIZES)):
                         return {"program": "%s | %s" % (head, tail),
-                                "argv": [list(argv1), list(argv2)],
+                                "argv": [_abstract(list(argv1), literal),
+                                         _abstract(list(argv2), literal)],
                                 "stages": 2,
                                 "tracked": [str(s) for s in _PROBE_SIZES]}
         finally:
@@ -1775,18 +1841,21 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
         tally: dict[str, list[str]] = {}
         for hit in found:
             try:
+                # put this goal's word back into the hole left for it --
+                # what was remembered is the shape of the command, and a
+                # shape cannot be run until it is made specific again
+                argv = _concretise(hit["argv"], literal)
                 if hit.get("stages") == 2:
                     # only the first stage is pointed at the file; the last
                     # reads what the pipe gives it
-                    first, second = hit["argv"]
+                    first, second = argv
                     argv1 = [first[0]] + [str(src) if a == "probe.txt" else a
                                           for a in first[1:]]
                     code, out = _run_pipeline(argv1, list(second), src.parent,
                                               timeout=timeout)
                 else:
-                    argv = [hit["argv"][0]] + [
-                        str(src) if a == "probe.txt" else a
-                        for a in hit["argv"][1:]]
+                    argv = [argv[0]] + [str(src) if a == "probe.txt" else a
+                                        for a in argv[1:]]
                     code, out = _run_capped(argv, src.parent, timeout=timeout)
             except Exception:  # noqa: BLE001 - one failure is data
                 continue
@@ -1801,7 +1870,12 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
     for limit in (24, 96, 200):
         cached = _query_cache_get(kind, limit)
         if cached is not None:
-            survivors = cached
+            # remembered as a shape, so a word it has never seen can reuse
+            # it -- but only after proving it again for that word
+            survivors = [h for h in
+                         (dict(c, argv=_concretise(c.get("argv"), literal))
+                          for c in cached)
+                         if _reverify(h, kind, literal, timeout)]
         else:
             cands = (list(programs) if programs is not None
                      else programs_for_goal(gap, limit=limit))
