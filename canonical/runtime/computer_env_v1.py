@@ -210,6 +210,72 @@ def file_actions() -> list[tuple[str, Callable[[ComputerEnv], bool]]]:
 # asking a program how it wants to be called
 # --------------------------------------------------------------------------- #
 _HELP_CACHE: dict[str, str] = {}
+_HELP_LOADED = False
+_HELP_DIRTY = False
+_HELP_SINCE_FLUSH = 0
+
+
+def _help_store_path() -> pathlib.Path:
+    base = os.environ.get("BRAIN_STATE_DIR") or tempfile.gettempdir()
+    return pathlib.Path(base) / "brain_help_text_v1.json"
+
+
+def _help_signature(prog: str) -> str:
+    """What would make a cached manual a lie.
+
+    A cache is only allowed to remember something that cannot have changed.
+    The manual belongs to a FILE, not to a name -- reinstalling the program
+    or swapping what `python` points at changes the answer while leaving
+    the name identical. So the name alone is never trusted: the real file,
+    its size and its mtime are, and a mismatch is re-read.
+    """
+    try:
+        real = os.path.realpath(str(shutil.which(prog) or prog))
+        st = os.stat(real)
+        return "%s|%d|%d" % (real, st.st_size, int(st.st_mtime))
+    except Exception:  # noqa: BLE001 - an unstatable program is just re-read
+        return ""
+
+
+def _help_load() -> None:
+    global _HELP_LOADED
+    if _HELP_LOADED:
+        return
+    _HELP_LOADED = True
+    try:
+        raw = json.loads(_help_store_path().read_text())
+    except Exception:  # noqa: BLE001 - no store is a cold start, not a fault
+        return
+    for prog, row in raw.items():
+        try:
+            sig, text = row[0], row[1]
+        except Exception:  # noqa: BLE001
+            continue
+        if sig == _help_signature(prog):
+            _HELP_CACHE[prog] = text
+
+
+def _help_flush(force: bool = False) -> None:
+    """Write back what was learned about this machine's programs.
+
+    Asking 603 programs to print their manual costs about nine seconds, and
+    it costs them again in every new process -- which is the difference
+    between a machine that answers at once and one that thinks for nine
+    seconds before it says "23". It is a fact about the machine, so it is
+    kept where the next process can find it.
+    """
+    global _HELP_DIRTY, _HELP_SINCE_FLUSH
+    if not _HELP_DIRTY:
+        return
+    if not force and _HELP_SINCE_FLUSH < 64:
+        return
+    _HELP_DIRTY = False
+    _HELP_SINCE_FLUSH = 0
+    try:
+        payload = {p: [_help_signature(p), t] for p, t in _HELP_CACHE.items()}
+        _help_store_path().write_text(json.dumps(payload))
+    except Exception:  # noqa: BLE001 - a failed save must not lose an answer
+        pass
 
 
 def help_text(prog: str, timeout: float = 3.0) -> str:
@@ -217,22 +283,34 @@ def help_text(prog: str, timeout: float = 3.0) -> str:
 
     Not a table of flags we keep: the program is asked, and it answers. Most
     do. The answer is cached because a program's help does not change while
-    the machine is thinking.
+    the machine is thinking -- and because it does not change between two
+    runs either, it is kept on disk for the next one.
     """
+    global _HELP_DIRTY, _HELP_SINCE_FLUSH
+    if prog in _HELP_CACHE:
+        return _HELP_CACHE[prog]
+    _help_load()
     if prog in _HELP_CACHE:
         return _HELP_CACHE[prog]
     text = ""
     for flag in ("--help", "-h"):
+        # Bounded and fed an empty stdin. A program that ignores --help and
+        # then waits for input would otherwise hang every scan for three
+        # seconds at a time -- and one that prints forever would take the
+        # learner down with it, which is a thing that actually happened.
         try:
-            proc = subprocess.run([prog, flag], capture_output=True,
-                                  timeout=timeout)
+            code, out = _run_capped([prog, flag], os.getcwd(), timeout=timeout)
         except Exception:  # noqa: BLE001
             continue
-        got = (proc.stdout or b"") + (proc.stderr or b"")
-        if got.strip():
-            text = got.decode("utf8", "replace")
+        if out.strip():
+            text = out.decode("utf8", "replace")
+            break
+        if code == 0:
             break
     _HELP_CACHE[prog] = text
+    _HELP_DIRTY = True
+    _HELP_SINCE_FLUSH += 1
+    _help_flush()
     return text
 
 
@@ -658,6 +736,8 @@ def programs_for_goal(goal: str, limit: int = 24) -> list[str]:
 
     with ThreadPoolExecutor(max_workers=24) as pool:
         hits = [(n, p) for p, n in pool.map(ask, installed_programs()) if n]
+    # every manual on the machine has just been read once; never again
+    _help_flush(force=True)
     hits.sort(key=lambda x: (-x[0], x[1]))
     return [p for _, p in hits[:limit]]
 
@@ -902,13 +982,27 @@ def discover(gap: str, budget: int = 120, seed: int = 11,
     is_goal = lambda snap: target in str(snap)
     gkey = "goal"
 
+    _fingerprint: dict[str, Any] | None = None
+
     def fingerprint_of() -> dict[str, Any]:
+        """The shape of this problem, measured once.
+
+        Fingerprinting acts out every action on the machine to see what
+        each one does, and it was being done twice for every discovery --
+        once to ask "have I solved this before?" and again to remember the
+        answer. Remembering costs the same computation as asking, which is
+        not learning twice, it is paying twice.
+        """
+        nonlocal _fingerprint
+        if _fingerprint is not None:
+            return _fingerprint
         env = ComputerEnv()
         try:
             env.register(program_actions(env, programs=progs, target=target))
-            return tl.fingerprint(env, env.action_names)
+            _fingerprint = tl.fingerprint(env, env.action_names)
         finally:
             env.close()
+        return _fingerprint
 
     def recall() -> tuple[list[str], str, dict | None] | None:
         try:

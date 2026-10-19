@@ -17,6 +17,7 @@ import bz2
 import gzip
 import lzma
 import os
+import json
 import pathlib
 import shutil
 import subprocess
@@ -566,3 +567,127 @@ class MeasuringTests(unittest.TestCase):
         self.assertLess(second, max(first, 0.05),
                         "second run %.2fs was not faster than %.2fs"
                         % (second, first))
+
+
+class RememberingTests(unittest.TestCase):
+    """Facts about the machine are learned once, not rediscovered forever.
+
+    "Instant" is not a property of an algorithm, it is a property of what
+    had to be paid to answer. Two things were being paid over and over:
+    every program's manual, and the fingerprint of the problem itself.
+    """
+
+    def setUp(self) -> None:
+        self.tmp = tempfile.mkdtemp(prefix="brain-remember-")
+        self.work = pathlib.Path(self.tmp)
+        # its own store, or one test's planted entry is still sitting there
+        # when the next one runs and the two accuse each other of lying
+        self._saved_state = os.environ.get("BRAIN_STATE_DIR")
+        os.environ["BRAIN_STATE_DIR"] = self.tmp
+        cenv._HELP_CACHE.clear()
+        cenv._HELP_LOADED = False
+
+    def tearDown(self) -> None:
+        if self._saved_state is None:
+            os.environ.pop("BRAIN_STATE_DIR", None)
+        else:
+            os.environ["BRAIN_STATE_DIR"] = self._saved_state
+        cenv._HELP_CACHE.clear()
+        cenv._HELP_LOADED = False
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def test_a_manual_learned_once_is_read_from_disk_not_asked_for_again(self):
+        """Proved by substitution, not by repetition: a manual that was
+        never in this process is placed on disk under a signature that
+        matches, and the machine must hand back exactly that. Checking that
+        the same text comes back twice proves nothing -- re-asking the
+        program gives the same answer, so the test passes just as happily
+        when the cache is switched off entirely.
+
+        What is really at stake is the nine seconds it costs to ask 603
+        programs to describe themselves. Paid once it is learning; paid
+        every time it is amnesia."""
+        prog = "gzip"
+        cenv._HELP_CACHE.pop(prog, None)
+        cenv._HELP_LOADED = False
+        real = cenv.help_text(prog)
+        self.assertTrue(real.strip(), "no manual was read at all")
+        cenv._help_flush(force=True)
+        planted = "PLANTED ON DISK, NEVER ASKED FOR " + str(time.time())
+        try:
+            store = cenv._help_store_path()
+            payload = json.loads(store.read_text())
+            payload[prog] = [cenv._help_signature(prog), planted]
+            store.write_text(json.dumps(payload))
+        except Exception:  # noqa: BLE001
+            self.skipTest("no help store was written")
+        cenv._HELP_CACHE.clear()
+        cenv._HELP_LOADED = False
+        self.assertEqual(cenv.help_text(prog), planted,
+                         "the store was not consulted -- the manual was "
+                         "asked for again instead of remembered")
+
+    def test_a_cache_that_could_be_wrong_is_not_used(self):
+        """A manual belongs to a FILE, not to a name. Reinstalling a
+        program leaves the name identical and the answer different, so the
+        name alone is never trusted -- and a stored entry whose file has
+        changed must be read again rather than believed."""
+        prog = "gzip"
+        cenv._HELP_CACHE.pop(prog, None)
+        cenv._HELP_LOADED = False
+        real = cenv.help_text(prog)
+        cenv._help_flush(force=True)
+        # forge an entry against a signature that is not this file's
+        try:
+            store = cenv._help_store_path()
+            payload = json.loads(store.read_text())
+            payload[prog] = ["definitely-not-this-file|1|1", "STALE LIES"]
+            store.write_text(json.dumps(payload))
+        except Exception:  # noqa: BLE001
+            self.skipTest("no help store was written")
+        cenv._HELP_CACHE.clear()
+        cenv._HELP_LOADED = False
+        self.assertNotEqual(cenv.help_text(prog), "STALE LIES",
+                            "a stale manual was believed")
+        self.assertEqual(cenv.help_text(prog), real)
+
+    def test_the_problem_is_measured_once_not_twice(self):
+        """Fingerprinting acts out every action to see what it does. It was
+        being done once to ask "have I solved this?" and again to remember
+        the answer -- the same computation paid twice, which is not
+        learning twice."""
+        from canonical.runtime import transfer_learning_v1 as tl
+        saved = tl.STATE_PATH
+        calls = [0]
+        real = tl.fingerprint
+        try:
+            tl.STATE_PATH = os.path.join(self.tmp, "tl.json")
+            def counting(env, names, *a, **k):
+                calls[0] += 1
+                return real(env, names, *a, **k)
+            tl.fingerprint = counting
+            r = cenv.discover("compress notes.txt into notes.txt.gz")
+        finally:
+            tl.fingerprint = real
+            tl.STATE_PATH = saved
+        self.assertTrue(r["closed"], r)
+        self.assertEqual(calls[0], 1,
+                         "the problem was fingerprinted %d times" % calls[0])
+
+    def test_the_same_question_is_answered_faster_the_second_time(self):
+        """What each command measures is a fact about the machine. Asking
+        again and paying again is not learning, it is amnesia."""
+        src = self.work / "notes.txt"
+        src.write_text("\n".join("row %d" % i for i in range(1, 24)) + "\n")
+        cenv._QUERY_CACHE.clear()
+        progs = ["wc", "grep"]
+        start = time.time()
+        cenv.answer_query("count the lines in notes.txt", src, programs=progs)
+        first = time.time() - start
+        start = time.time()
+        again = cenv.answer_query("count the lines in notes.txt", src,
+                                  programs=progs)
+        second = time.time() - start
+        self.assertTrue(again["pass"], again)
+        self.assertEqual(again["value"], "23", again)
+        self.assertLessEqual(second, max(first, 0.02))
