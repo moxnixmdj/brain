@@ -319,3 +319,127 @@ def run(
         "terminal_authority": False,
         "terminal_credit_delta": 0,
     }
+
+
+# --------------------------------------------------------------- no stopping short
+
+_TERMINAL_STALLS = frozenset({chase.NOT_MEASURABLE})
+_RESUMABLE_STALLS = frozenset({chase.STUCK, chase.BOUND, chase.INCOMPLETE_DATA})
+
+
+def _record_stall(goal: str, result: Mapping[str, Any], attempt: int) -> dict[str, Any]:
+    """A stall is data about what the machine lacks. Record it where it is ranked."""
+    best = (result.get("chase") or result).get("best_measurement")
+    detail = "%s at %s (learning attempt %d)" % (
+        result.get("status"), "unmeasured" if best is None else best, attempt)
+    try:
+        from canonical.runtime import ignorance_ledger_v1 as led
+        gap_id = led.note(goal, why=detail, cost=1.0 + attempt)
+        return {"recorded": True, "gap_id": gap_id, "detail": detail}
+    except Exception as exc:
+        return {"recorded": False, "detail": detail,
+                "error": type(exc).__name__ + ":" + str(exc)[:160]}
+
+
+def _learn_something_new(goal: str, result: Mapping[str, Any],
+                        registry_path: str | None = None) -> dict[str, Any]:
+    """Do the only thing that can turn a stall into progress: get a new action.
+
+    The same act produced the same number. Repeating it will produce it again,
+    so the stall is not a reason to try harder -- it is a reason to be able to
+    do something else. Whatever is learned registers into the live surface,
+    where live_act will find it on the resumed chase.
+    """
+    learned: dict[str, Any] = {"attempted": False}
+    try:
+        from canonical.runtime import live_brain_route_admission_v1 as entry
+    except Exception as exc:
+        learned["error"] = type(exc).__name__ + ":" + str(exc)[:160]
+        return learned
+    try:
+        out = entry.solve_or_learn({"task_id": "chase", "goal": goal},
+                                 registry_path=registry_path)
+        learned["attempted"] = True
+        learned["status"] = out.get("status")
+        learned["learned_this_turn"] = bool(out.get("learned_this_turn"))
+        learned.update(out.get("learning") or {})
+    except Exception as exc:
+        learned["attempted"] = True
+        learned["error"] = type(exc).__name__ + ":" + str(exc)[:160]
+    return learned
+
+
+def chase_until_met(
+    goal: str,
+    *,
+    measure: Callable[[], float | None],
+    act=None,
+    target: float | None = None,
+    direction: str | None = None,
+    unit: str | None = None,
+    max_rounds: int = 16,
+    patience: int = 3,
+    max_learn_attempts: int = 3,
+    registry_path: str | None = None,
+    context: Mapping[str, Any] | None = None,
+    widen_options: bool = True,
+    flywheel_state_path: str | None = None,
+) -> dict[str, Any]:
+    """Chase it, and when the machine stalls, learn -- then keep chasing.
+
+    The driver alone answers "did I hit the number". When the honest answer is
+    no, a strict program stops and reports STUCK, and the goal is abandoned at
+    whatever was reached: $100 instead of $1,000,000. STUCK is an OPEN status,
+    not a result. It means *this* set of actions has stopped moving the number,
+    which is information about the actions, not about the goal.
+
+    So a stall is handled as the trigger to become able to do something else:
+    record what the stall reveals is missing, learn, then resume the chase with
+    the new ability in the surface. The loop ends on MET, on a stall that is
+    genuinely terminal, or when learning itself has stopped producing anything
+    new -- never because a round counter ran out while progress was possible.
+
+    Honesty is kept by reporting every stall and the final shortfall.
+    """
+    attempts = 0
+    stalls: list[dict[str, Any]] = []
+    result = run(goal, measure=measure, act=act, target=target, direction=direction,
+                 unit=unit, max_rounds=max_rounds, patience=patience,
+                 context=context, widen_options=widen_options,
+                 flywheel_state_path=flywheel_state_path)
+
+    while str(result.get("status") or "") in _RESUMABLE_STALLS \
+            and attempts < max_learn_attempts:
+        attempts += 1
+        entry_log: dict[str, Any] = {
+            "attempt": attempts,
+            "status": result.get("status"),
+            "best_measurement": (result.get("chase") or {}).get("best_measurement"),
+        }
+        entry_log["gap"] = _record_stall(goal, result, attempts)
+        entry_log["learning"] = _learn_something_new(
+            goal, result, registry_path=registry_path)
+        stalls.append(entry_log)
+
+        # resuming re-measures, so it continues from wherever the number is now
+        result = run(goal, measure=measure, act=act, target=target,
+                     direction=direction, unit=unit, max_rounds=max_rounds,
+                     patience=patience, context=context,
+                     widen_options=widen_options,
+                     flywheel_state_path=flywheel_state_path)
+
+    result = dict(result)
+    result["schema"] = SCHEMA + "/chase_until_met"
+    result["learning_attempts"] = attempts
+    result["stalls"] = stalls
+    result["resumed"] = attempts > 0
+    chase_body = result.get("chase") or {}
+    result["shortfall"] = (
+        None
+        if chase_body.get("best_measurement") is None
+        or chase_body.get("target") is None
+        else round(float(chase_body["target"]) - float(chase_body["best_measurement"]), 6)
+    )
+    result["terminal_authority"] = False
+    result["terminal_credit_delta"] = 0
+    return result
