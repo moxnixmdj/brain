@@ -706,14 +706,29 @@ class PipelineTests(unittest.TestCase):
     def setUp(self) -> None:
         self.tmp = tempfile.mkdtemp(prefix="brain-pipe-")
         self.work = pathlib.Path(self.tmp)
-        # 22 lines, 7 different ones
-        rows = []
-        for i in range(7):
-            rows += ["kind %d" % i, "kind %d" % i, "kind %d" % i]
-        rows.append("kind 6")
-        self.rows = rows
+        # 14 lines, 7 different ones, and NO two identical lines next to
+        # each other.
+        #
+        # The repeats used to sit together -- 'kind 0, kind 0, kind 0,
+        # kind 1, kind 1, kind 1'. That is the one arrangement 'uniq' is
+        # built to collapse, so on that file 'uniq | wc --lines' prints 7
+        # and looks exactly like a tool that counts DIFFERENT lines. It is
+        # not: it counts runs. Given a real file whose repeats are apart
+        # it answers 14 where 7 is true -- and this test could not see it,
+        # because it had chosen the single file on which the wrong tool
+        # happens to be right. A fixture that cannot tell the wrong answer
+        # from the right one is not testing anything, so the repeats are
+        # rotated apart and the file is checked for that below.
+        names = ["kind %d" % i for i in range(7)]
+        self.rows = names + names[3:] + names[:3]
+        self.assertEqual(len(set(self.rows)), 7, "fixture must hold 7")
+        self.assertFalse(any(a == b for a, b in
+                             zip(self.rows, self.rows[1:])),
+                         "repeats must not be adjacent: 'uniq' collapses "
+                         "neighbours, so an adjacent-duplicate file is the "
+                         "one file where the wrong tool is right")
         self.file = self.work / "data.txt"
-        self.file.write_text("\n".join(rows) + "\n")
+        self.file.write_text("\n".join(self.rows) + "\n")
         self.progs = ["sort", "uniq", "wc", "grep", "cat", "nl", "cut", "tr"]
 
     def tearDown(self) -> None:
@@ -731,6 +746,11 @@ class PipelineTests(unittest.TestCase):
         self.assertTrue(r["pass"], r)
         self.assertEqual(r["value"], "7", r)
         self.assertEqual(len(set(self.rows)), 7, "the fixture is wrong")
+        # 14 lines answer this question as 14, and the machine must not.
+        self.assertEqual(len(self.rows), 14)
+        self.assertNotEqual(r["value"], str(len(self.rows)),
+                            "counted the lines instead of the different "
+                            "lines: %s" % r)
 
     def test_the_composition_is_a_real_command_not_a_description(self):
         """Run the two stages ourselves, joined with our own pipe, nowhere
@@ -843,7 +863,7 @@ class LiteralTests(unittest.TestCase):
                         else "all good row %d" % i)
         self.rows = rows
         self.file = self.work / "data.txt"
-        self.file.write_text("\n".join(rows) + "\n")
+        self.file.write_text("\n".join(self.rows) + "\n")
         self.truth = str(sum(1 for r in rows if "ERROR" in r))
 
     def tearDown(self) -> None:
@@ -960,7 +980,7 @@ class GeneralisingTests(unittest.TestCase):
                 rows.append("WARN also row %d" % i)
         self.rows = rows
         self.file = self.work / "data.txt"
-        self.file.write_text("\n".join(rows) + "\n")
+        self.file.write_text("\n".join(self.rows) + "\n")
         self.truth = {
             "ERROR": str(sum(1 for r in rows if "ERROR" in r)),
             "WARN": str(sum(1 for r in rows if "WARN" in r)),

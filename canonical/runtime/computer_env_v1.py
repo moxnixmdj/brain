@@ -30,6 +30,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 from typing import Any, Callable, Mapping, Sequence
 
 SCHEMA = "PROJECT_BRAIN_COMPUTER_ENV_V1"
@@ -1238,10 +1239,24 @@ def probe_bytes(kind: str, n: int = 7, literal: str | None = None) -> bytes | No
         return b"\n".join(with_it + without) + b"\n"
     if kind == "uniquelines":
         # n lines that are all DIFFERENT from each other, and twice as many
-        # lines altogether. "how many different lines" and "how many lines"
-        # must be two questions with two answers, or the check cannot tell
-        # a program that answered it from one that answered something else.
-        return b"".join(b"row %d\nrow %d\n" % (i, i) for i in range(n))
+        # lines altogether -- with every repeat kept FAR FROM its twin.
+        #
+        # The repeats used to sit next to their twins, as 'row 0, row 0,
+        # row 1, row 1'. That is the one arrangement 'uniq' is built for:
+        # it collapses NEIGHBOURS, so on that file it prints n and looks
+        # exactly like a tool that counts different lines. It is not. It
+        # counts runs. Given a real file whose repeats are not neighbours
+        # it answered 14 where the truth was 7 -- and the probe had
+        # certified it first, which is the worse of the two faults.
+        #
+        # So the two halves go at opposite ends: every line's twin is n
+        # lines away. Now a program that only collapses neighbours sees 2n
+        # and is rejected, and only something that really compares each
+        # line against every other -- 'sort --unique' -- can print n. A
+        # probe that cannot tell the wrong tool from the right one is not
+        # a test of anything.
+        first = b"".join(b"row %d\n" % i for i in range(n))
+        return first + first
     return None
 
 
@@ -1333,6 +1348,53 @@ def _query_cache_put(kind: str, limit: int,
             {"%s:%d" % k: v for k, v in _QUERY_CACHE.items()}))
     except Exception:  # noqa: BLE001 - a failed save must not lose the answer
         pass
+
+
+def _known_counters(base: str, programs: Sequence[str], gap: str,
+                    literal: str | None, timeout: float = 5.0,
+                    enough: int = 4) -> list[dict[str, Any]]:
+    """Commands already proven to count `base`, remembered or discovered.
+
+    Which commands count lines does not change with the question, so it is
+    a fact about the machine and is learned once. Paying to re-derive it
+    on every question is the same amnesia as walking past a composition
+    the machine already found: the answer was in memory and the machine
+    went and earned it again.
+
+    `enough` is deliberately small. Composing with thirty counters is not
+    thirty times better than composing with four -- it is thirty times
+    slower, because every extra counter is another pipeline to try.
+    """
+    from concurrent.futures import ThreadPoolExecutor
+    found: list[dict[str, Any]] = []
+    for limit in (24, 96, 200, -2):
+        remembered = _query_cache_get(base, limit)
+        if not remembered:
+            continue
+        for c in remembered:
+            if c.get("stages") == 2:
+                continue
+            hit = dict(c, argv=_concretise(c.get("argv"), literal))
+            if hit not in found:
+                found.append(hit)
+        if found:
+            break
+    if found:
+        with ThreadPoolExecutor(max_workers=8) as pool:
+            good = [h for h, ok in zip(
+                found, pool.map(lambda h: _reverify(h, base, literal,
+                                                    timeout), found)) if ok]
+        if good:
+            return good[:enough]
+    if not programs:
+        return []
+    hits = [c for c in probe_survivors(base, list(programs), gap)
+            if c.get("stages") != 2]
+    if hits:
+        # key -2: counters learned for composing, not an answer to a
+        # question, so they must never be confused with one.
+        _query_cache_put(base, -2, hits[:enough])
+    return hits[:enough]
 
 
 def _reverify(hit: dict[str, Any], kind: str, literal: str | None,
@@ -1610,17 +1672,29 @@ def _concretise(argv, literal: str | None):
 _LITERAL_HOLE = "{asked}"
 
 
+# The wide pass walks a program's own manual instead of the goal's hint, so
+# it is allowed more time than the narrow one -- '--count' is the 65th flag
+# grep documents, and a budget that stops at the 20th concludes that
+# nothing on the machine can count. It is still bounded: the point of the
+# pass is to reach the deep flags, not to read all 400 of them on a program
+# that cannot count at all.
+_WIDE_BUDGET = 45.0
+
+
 def _one_wide(prog: str, kind: str, gap: str, patterns: Sequence[str],
-              timeout: float, literal: str | None = None
-              ) -> dict[str, Any] | None:
+              timeout: float, literal: str | None = None,
+              budget: float = _WIDE_BUDGET) -> dict[str, Any] | None:
     """One program, offered its own flags instead of the ones the goal's
     words suggested, on files built to hold a known number of the thing.
     """
     name = "probe.txt"
     root = pathlib.Path(tempfile.mkdtemp(prefix="brain-wide-"))
+    deadline = time.monotonic() + budget
     try:
         for argv in _query_shapes(prog, name, gap, patterns=patterns,
                                   wide=True):
+            if time.monotonic() > deadline:
+                break
             reads = []
             for size in _PROBE_SIZES:
                 # the same literal in the file as in the command: a probe
@@ -1633,10 +1707,11 @@ def _one_wide(prog: str, kind: str, gap: str, patterns: Sequence[str],
                     break
                 if code != 0:
                     break
-                reads.append(_bare_value(out))
-            if len(reads) == len(_PROBE_SIZES) and all(
-                    got == str(want)
-                    for got, want in zip(reads, _PROBE_SIZES)):
+                got = _bare_value(out)
+                if got != str(size):
+                    break
+                reads.append(got)
+            if len(reads) == len(_PROBE_SIZES):
                 return {"program": prog,
                         "argv": _abstract(list(argv), literal),
                         "wide": True,
@@ -1668,11 +1743,23 @@ _WIDE_PROGRAMS = 14
 _PIPE_PATTERNS = ("",)
 
 
+# Seconds one program may spend proving itself before the search moves on.
+# Measured: 'docker-entrypoint.sh' burns 69s and 'node' 69s more, and both
+# are dead ends -- while 'grep', which is a real answer, needs 20. One
+# straggler sets the pace for the whole wave, because every other program
+# finished minutes ago and is waiting behind it. A program that has not
+# shown it can count in this long is not worth more time when hundreds of
+# others are still untried: the fastest way to the answer does not run
+# through the slowest program on the machine.
+_PROGRAM_BUDGET = 20.0
+
+
 def probe_survivors(kind: str, programs: Sequence[str], gap: str,
                     n: int = 7, timeout: float = 5.0,
                     workers: int = 24,
                     stages: int = 1,
-                    literal: str | None = None) -> list[dict[str, Any]]:
+                    literal: str | None = None,
+                    budget: float = _PROGRAM_BUDGET) -> list[dict[str, Any]]:
     """Commands that print n on a file built to hold exactly n of `kind`.
 
     Chosen by what they DID, not by what they say they do. The exact argv
@@ -1693,9 +1780,12 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
 
     def one(prog: str) -> dict[str, Any] | None:
         root = pathlib.Path(tempfile.mkdtemp(prefix="brain-probe-"))
+        deadline = time.monotonic() + budget
         try:
             for argv in _query_shapes(prog, name, gap,
                                       patterns=patterns):
+                if time.monotonic() > deadline:
+                    break
                 # A file built to hold 7 of the thing, then one built to
                 # hold 13. A program that prints 7 once may be printing 7
                 # for its own reasons -- a version number, a default, a
@@ -1717,9 +1807,16 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
                         break
                     if code != 0:
                         break
-                    reads.append(_bare_value(out))
-                if len(reads) == len(_PROBE_SIZES) and all(
-                        got == str(want) for got, want in zip(reads, _PROBE_SIZES)):
+                    got = _bare_value(out)
+                    # Spend the second probe only on a form that survived
+                    # the first. Most forms are wrong, and proving a wrong
+                    # form wrong twice instead of once is the difference
+                    # between two runs and one -- on every form of every
+                    # program on the machine.
+                    if got != str(size):
+                        break
+                    reads.append(got)
+                if len(reads) == len(_PROBE_SIZES):
                     return {"program": prog,
                             "argv": _abstract(list(argv), literal),
                             "tracked": [str(s) for s in _PROBE_SIZES]}
@@ -1762,8 +1859,8 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
     # Composing only with things already proven to count is both the
     # cheaper search and the more sensible one: find out what counts, then
     # find out what to feed it.
-    counters = [c for c in probe_survivors("lines", list(programs), gap)
-                if c.get("stages") != 2]
+    counters = _known_counters("lines", list(programs), gap, literal,
+                               timeout)
     tails = []
     for c in counters:
         # used at the end of a pipe, so it is given no filename of its own
@@ -1782,10 +1879,21 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
         many different lines" -- a question no single program answers."""
         head, tail_argv = job
         root = pathlib.Path(tempfile.mkdtemp(prefix="brain-pipe-"))
+        deadline = time.monotonic() + budget
         try:
+            # The head is offered its OWN flags, not only the ones the
+            # goal's words suggested. This is the same lesson as '--count'
+            # being the 65th flag grep documents: 'sort' does nothing here
+            # until it is given '--unique', and '--unique' is not a flag
+            # the sentence "how many unique lines" knows how to suggest.
+            # The narrow shapes are a subset of the wide ones, so nothing
+            # is given up by asking for the whole manual.
             for argv1 in _query_shapes(head, name, gap,
                                       patterns=_PIPE_PATTERNS +
-                                      ((literal,) if literal else ())):
+                                      ((literal,) if literal else ()),
+                                      wide=True):
+                if time.monotonic() > deadline:
+                    break
                 for argv2 in [tail_argv]:
                     reads = []
                     for size in _PROBE_SIZES:
@@ -1798,10 +1906,11 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
                             break
                         if code != 0:
                             break
-                        reads.append(_bare_value(out))
-                    if len(reads) == len(_PROBE_SIZES) and all(
-                            got == str(want)
-                            for got, want in zip(reads, _PROBE_SIZES)):
+                        got = _bare_value(out)
+                        if got != str(size):
+                            break
+                        reads.append(got)
+                    if len(reads) == len(_PROBE_SIZES):
                         return {"program": "%s | %s" % (head, argv2[0]),
                                 "argv": [_abstract(list(argv1), literal),
                                          _abstract(list(argv2), literal)],
