@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/escape_progress_13_route_manifest_v1.py.auto.v1",
- "elapsed_ms": 39.26,
+ "elapsed_ms": 37.172,
  "independent_run_reference": {
-  "github_run_id": 39231304673,
+  "github_run_id": 39231726617,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "9c574b72-3765-4ff1-b4bc-84c7e3d81544",
+   "jti": "165b67e6-958d-44a4-9cb3-c951df5fe506",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39231304673",
+   "run_id": "39231726617",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
