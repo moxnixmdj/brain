@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_legacy15_universal_semantic_reduction_v1.py.auto.v1",
- "elapsed_ms": 15.396,
+ "elapsed_ms": 16.342,
  "independent_run_reference": {
-  "github_run_id": 39187211183,
+  "github_run_id": 39187437496,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "aa6ba72d-6b99-469e-a92d-328a4a16e66b",
+   "jti": "bc5c3ba7-e3cf-460b-ae34-7167a9deaa6c",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39187211183",
+   "run_id": "39187437496",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
