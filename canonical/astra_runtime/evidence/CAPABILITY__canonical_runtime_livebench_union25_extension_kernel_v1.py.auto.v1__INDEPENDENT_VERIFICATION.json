@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_union25_extension_kernel_v1.py.auto.v1",
- "elapsed_ms": 344.743,
+ "elapsed_ms": 346.855,
  "independent_run_reference": {
-  "github_run_id": 39254646258,
+  "github_run_id": 39255092188,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "bcd72f26-2017-4007-92ff-74315fd1899e",
+   "jti": "31b69a42-567d-4848-95d8-bc886af230f9",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39254646258",
+   "run_id": "39255092188",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
