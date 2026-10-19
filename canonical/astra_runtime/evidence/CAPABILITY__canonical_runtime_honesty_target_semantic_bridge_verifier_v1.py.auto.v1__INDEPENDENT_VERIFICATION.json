@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/honesty_target_semantic_bridge_verifier_v1.py.auto.v1",
- "elapsed_ms": 28.233,
+ "elapsed_ms": 36.595,
  "independent_run_reference": {
-  "github_run_id": 39196392370,
+  "github_run_id": 39196647357,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "cf6400bd-e278-43bc-a6c2-d75a3cdb8029",
+   "jti": "685a01cc-5719-43b8-a357-4f7d7b026fa2",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39196392370",
+   "run_id": "39196647357",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
