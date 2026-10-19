@@ -195,6 +195,81 @@ def file_actions() -> list[tuple[str, Callable[[ComputerEnv], bool]]]:
     return [("copy_input", copy_input), ("copy_to_out", move_copy_to_out)]
 
 
+# --------------------------------------------------------------------------- #
+# asking a program how it wants to be called
+# --------------------------------------------------------------------------- #
+_HELP_CACHE: dict[str, str] = {}
+
+
+def help_text(prog: str, timeout: float = 3.0) -> str:
+    """What the program says about itself, in its own words.
+
+    Not a table of flags we keep: the program is asked, and it answers. Most
+    do. The answer is cached because a program's help does not change while
+    the machine is thinking.
+    """
+    if prog in _HELP_CACHE:
+        return _HELP_CACHE[prog]
+    text = ""
+    for flag in ("--help", "-h"):
+        try:
+            proc = subprocess.run([prog, flag], capture_output=True,
+                                  timeout=timeout)
+        except Exception:  # noqa: BLE001
+            continue
+        got = (proc.stdout or b"") + (proc.stderr or b"")
+        if got.strip():
+            text = got.decode("utf8", "replace")
+            break
+    _HELP_CACHE[prog] = text
+    return text
+
+
+def output_flags(prog: str, limit: int = 6) -> list[str]:
+    """Flags the program's own help suggests for naming an output.
+
+    Reused from the brain rather than rewritten: cli_capability_acquisition
+    already reads help for exactly this. They are hypotheses, not facts --
+    the help for cp offers --version, which is not how you name an output --
+    so every one is tried and only the one that works is believed.
+    """
+    try:
+        from canonical.runtime.cli_capability_acquisition_v1 import (
+            _candidate_output_flags)
+    except Exception:  # noqa: BLE001
+        return []
+    text = help_text(prog)
+    if not text:
+        return []
+    try:
+        return list(_candidate_output_flags(text))[:limit]
+    except Exception:  # noqa: BLE001
+        return []
+
+
+def invocation_shapes(prog: str, src: str, target: str) -> list[list[str]]:
+    """How to try calling this program, in the order worth trying.
+
+    Six hand-written shapes were a strict program: it decided in advance how
+    every program on the machine must be called. The shapes below are the
+    ones that let the output be named, and then whatever the program's own
+    help proposes -- so a program that wants -o, or --stdout, or -O, says so
+    itself and is called the way it asked.
+    """
+    shapes: list[list[str]] = [
+        [prog, target, src],
+        [prog, src, target],
+        [prog, "-c", src],
+        [prog, src],
+        [prog, src, "-k"],
+    ]
+    for flag in output_flags(prog):
+        for shape in ([prog, flag, target, src], [prog, flag, src]):
+            if shape not in shapes:
+                shapes.append(shape)
+    return shapes
+
+
 def program_actions(env: ComputerEnv,
                     programs: Sequence[str] | None = None,
                     target: str = "out.bin") -> list[tuple[str, Callable[[ComputerEnv], bool]]]:
@@ -221,12 +296,7 @@ def program_actions(env: ComputerEnv,
             # printing chatter -- 'zip -c input.txt' succeeds and prints
             # "adding: input.txt", which written to out.zip makes a file
             # called .zip that is not one.
-            for argv in ([prog, target, src],
-                         [prog, src, target],
-                         [prog, "-o", target, src],
-                         [prog, "-c", src],
-                         [prog, src],
-                         [prog, src, "-k"]):
+            for argv in invocation_shapes(prog, src, target):
                 # Every form starts from the seed. Without this the first
                 # form consumes the input -- 'gzip out.gz input.txt'
                 # compresses input.txt into input.txt.gz and deletes it --
@@ -343,9 +413,50 @@ def _verify_plan(plan: Sequence[str], suffix: str, target: str,
         out = env.root / target
         if not out.is_file():
             return False, "PLAN_PRODUCED_NO_FILE"
-        return ps.verify_round_trip(out, suffix)
+        good, why = ps.verify_round_trip(out, suffix)
+        if good and not _input_matters(
+                (env.recipes.get(plan[-1]) or {}).get("argv") or [],
+                next(iter(env.seed), "input.txt"), target, out.read_bytes()):
+            return False, "INPUT_WAS_IGNORED"
+        return good, why
     except Exception as exc:  # noqa: BLE001
         return False, type(exc).__name__ + ":" + str(exc)[:200]
+    finally:
+        if env is not None:
+            env.close()
+
+
+def _input_matters(argv: Sequence[str], src: str, target: str,
+                   produced: bytes) -> bool:
+    """Did this program actually use the input, or ignore it entirely?
+
+    'arch input.txt' prints the machine architecture and exits 0 without
+    ever opening the file, so any goal that merely needs SOME bytes written
+    is 'solved' by it -- the machine reported saving results to out.csv by
+    writing x86_64. The check is causal and needs no knowledge of the task:
+    make the same call with the input taken away, and if nothing changes,
+    the input was never involved.
+    """
+    # the recipe records the input as the token {input}, not as the filename
+    control = [a for a in argv if a != "{input}" and a != src]
+    if control == list(argv):
+        return True                      # no input to remove; cannot judge
+    env = None
+    try:
+        env = ComputerEnv()
+        try:
+            proc = subprocess.run(control, cwd=str(env.root),
+                                  capture_output=True, timeout=5,
+                                  stdin=subprocess.DEVNULL)
+        except Exception:  # noqa: BLE001
+            return True                  # could not compare; do not reject
+        if proc.returncode != 0:
+            return True                  # without the input it fails: it used it
+        got = proc.stdout or b""
+        alt = env.root / target
+        if alt.is_file():
+            got = alt.read_bytes() or got
+        return got != produced
     finally:
         if env is not None:
             env.close()
@@ -366,11 +477,16 @@ def _single_step(programs: Sequence[str], suffix: str,
         try:
             env = ComputerEnv()
             env.register(program_actions(env, programs=[prog], target=target))
+            src_name = next(iter(env.seed), "input.txt")
             env.act("run_" + prog)
             out = env.root / target
             if not out.is_file():
                 continue
             good, why = ps.verify_round_trip(out, suffix)
+            if good and not _input_matters(
+                    env.recipes["run_" + prog]["argv"], src_name, target,
+                    out.read_bytes()):
+                good, why = False, "INPUT_WAS_IGNORED"
             if good:
                 return ["run_" + prog], why, env.recipes.get("run_" + prog)
 

@@ -356,3 +356,52 @@ class RealFileCase(unittest.TestCase):
         done = cenv.apply(broken, self.work / "notes.txt")
         self.assertFalse(done["pass"])
         self.assertEqual(done["status"], "OPEN__COMMAND_PRODUCED_NO_FILE")
+
+
+# --------------------------------------------------------------------------- #
+# asking the program how it wants to be called
+# --------------------------------------------------------------------------- #
+class AskingTests(EnvCase):
+    """Six hand-written argv shapes were a strict program: they decided in
+    advance how every program on the machine must be called."""
+
+    def test_a_program_is_asked_rather_than_assumed(self):
+        text = cenv.help_text("gzip")
+        self.assertTrue(text.strip(), "gzip said nothing about itself")
+        self.assertIn("gzip", text.lower())
+
+    def test_the_flags_come_from_the_program_not_from_us(self):
+        self.assertTrue({"stdout", "to-stdout"} &
+                        {f.lstrip("-") for f in cenv.output_flags("tar")},
+                        "tar's own help names a way to write to stdout")
+
+    def test_the_shapes_go_beyond_the_hand_written_six(self):
+        self.assertGreater(len(cenv.invocation_shapes("tar", "i.txt", "o.tar")),
+                           6, "the program's own flags added nothing")
+
+    def test_a_program_that_ignores_the_input_is_refused(self):
+        """'arch input.txt' prints the machine architecture and exits 0
+        without ever opening the file. Any goal that merely needs SOME bytes
+        written is then 'solved' by it, which is how the machine once
+        reported saving results to out.csv by writing x86_64."""
+        # take what it really prints -- a guessed constant would test nothing
+        printed = subprocess.run(["arch", "--version", "out.csv", "input.txt"],
+                                 capture_output=True, cwd="/").stdout
+        self.assertTrue(printed.strip(), "arch printed nothing")
+        self.assertFalse(
+            cenv._input_matters(["arch", "--version", "out.csv", "{input}"],
+                                "input.txt", "out.csv", printed))
+
+    def test_a_program_that_reads_the_input_is_accepted(self):
+        self.assertTrue(cenv._input_matters(["gzip", "-c", "{input}"],
+                                            "input.txt", "out.gz",
+                                            b"\x1f\x8b\x08\x00real gzip bytes"))
+
+    def test_ignoring_the_input_is_not_learned_as_the_answer(self):
+        self.assertIsNone(cenv._single_step(["arch"], ".csv", "out.csv"),
+                          "a program that never opened the input was accepted")
+
+    def test_reading_the_input_is_learned_as_the_answer(self):
+        got = cenv._single_step(["gzip"], ".gz", "out.gz")
+        self.assertIsNotNone(got, "gzip reads its input but was rejected")
+        self.assertEqual(got[0], ["run_gzip"])
