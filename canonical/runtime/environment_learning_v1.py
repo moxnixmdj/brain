@@ -81,7 +81,8 @@ class Trace:
 def learn_model(env: Any, actions: Sequence[Any], *, budget: int = 60,
                 seed: int | None = None, max_depth: int = 6,
                 reward: Callable[[Any, Any, Any], float] | None = None,
-                heuristic: Callable[[Any], float] | None = None
+                heuristic: Callable[[Any], float] | None = None,
+                prior: Mapping[str, Mapping[str, str]] | None = None
                 ) -> dict[str, Any]:
     """Act, watch what changes, and record it. No model of the world is assumed.
 
@@ -96,7 +97,11 @@ def learn_model(env: Any, actions: Sequence[Any], *, budget: int = 60,
     import random
     rng = random.Random(seed if seed is not None else 0)
 
-    model: dict[str, dict[str, str]] = {}
+    # A model carried over from a similar environment met before. Starting
+    # from nothing every time is amnesiac: the same three-dial lock solved
+    # yesterday would be re-learned from scratch today.
+    model: dict[str, dict[str, str]] = (
+        {k: dict(v) for k, v in (prior or {}).items()})
     observations: dict[str, Any] = {}
     traces: list[Trace] = []
     trials = 0
@@ -131,6 +136,7 @@ def learn_model(env: Any, actions: Sequence[Any], *, budget: int = 60,
         "model": model,
         "observations": observations,
         "guided": heuristic is not None,
+        "prior_states": len(prior or {}),
         "traces": [t.as_dict() for t in traces],
         "states": sorted(model),
         "state_count": len(model),
@@ -257,7 +263,8 @@ def drive(env: Any, actions: Sequence[Any], *,
           is_goal: Callable[[Any], bool],
           budget: int = 60, seed: int | None = None,
           max_depth: int = 6, verify: bool = True,
-          heuristic: Callable[[Any], float] | None = None) -> dict[str, Any]:
+          heuristic: Callable[[Any], float] | None = None,
+          prior: Mapping[str, Mapping[str, str]] | None = None) -> dict[str, Any]:
     """Learn an unknown environment and reach the goal in it. Or say why not.
 
     The plan is executed and the goal is CHECKED afterwards. A plan that was
@@ -265,7 +272,7 @@ def drive(env: Any, actions: Sequence[Any], *,
     """
     started = time.time()
     learned = learn_model(env, actions, budget=budget, seed=seed,
-                          max_depth=max_depth, heuristic=heuristic)
+                          max_depth=max_depth, heuristic=heuristic, prior=prior)
     if not learned["model"] or learned["transition_count"] == 0:
         return {"schema": SCHEMA, "status": FAIL_NO_MODEL, "pass": False,
                 "learned": learned, "plan": None,

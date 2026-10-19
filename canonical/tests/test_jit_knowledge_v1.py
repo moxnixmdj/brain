@@ -158,8 +158,12 @@ class EarnedOrderTests(_Stub, unittest.TestCase):
     def test_resolve_asks_in_the_earned_order(self):
         for _ in range(8):
             jit.credit("beta", True)
+        # capture BEFORE resolving: resolve credits the sources it used, so the
+        # order it reports is the order as it stood when it asked
+        expected = jit.ordered_sources(["alpha", "beta"])
         r = jit.resolve("q", only=["alpha", "beta"], min_sources=2)
-        self.assertEqual(r["sources_asked"], jit.ordered_sources(["alpha", "beta"]))
+        self.assertEqual(r["sources_asked"], expected)
+        self.assertEqual(expected[0], "beta")
 
 
 # --------------------------------------------------------------------------- #
