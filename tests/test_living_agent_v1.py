@@ -743,6 +743,30 @@ class VocabularyExtensionTests(unittest.TestCase):
         self.assertEqual(rejected[0]["documentation"], "Reverse the lines of the file")
         self.assertNotIn("reverse", agent.computer.admitted())
 
+    def test_a_one_letter_file_name_does_not_mangle_the_goal(self) -> None:
+        # Regression: the file stem was stripped from the goal as a *substring*,
+        # so `n.txt` deleted every letter "n" and turned "lines" into "lies" --
+        # which made a clear request ambiguous.  Names are words, not patterns.
+        agent = self._agent()
+        agent.computer.write("n.txt", "delta\nalpha\ncharlie\n")
+        outcome = agent.discover("reverse the lines of n.txt", "n.txt")
+        self.assertEqual(outcome["tool"], "tac")
+        self.assertEqual(outcome["stdout"], "charlie\nalpha\ndelta\n")
+
+    def test_the_second_discovery_does_not_read_the_machine_again(self) -> None:
+        agent = self._agent()
+        agent.computer.write("n.txt", "delta\nalpha\ncharlie\n")
+        agent.discover("reverse the lines of n.txt", "n.txt")
+        reads = agent.vocabulary.help_reads
+        agent.computer.write("m.txt", "zulu\nyankee\nxray\n")
+        started = time.perf_counter()
+        outcome = agent.discover("reverse the lines of m.txt", "m.txt")
+        elapsed = time.perf_counter() - started
+        self.assertEqual(outcome["tool"], "tac")
+        self.assertEqual(outcome["stdout"], "xray\nyankee\nzulu\n")
+        self.assertEqual(agent.vocabulary.help_reads, reads)
+        self.assertLess(elapsed, 1.0)
+
     def test_a_stranger_tool_is_probed_in_a_throwaway_directory(self) -> None:
         # A real sweep of this machine left seventeen empty `gz*` files in the
         # tree: some installed tool writes beside its input.  A candidate is
@@ -1190,6 +1214,244 @@ class PipelineSynthesisTests(unittest.TestCase):
         )
         self.assertTrue(ok, failures)
         self.assertIn("{path}", template)
+
+
+class DocumentedArgumentTests(unittest.TestCase):
+    """Capabilities that need an argument, learned from the machine's own help.
+
+    No test here supplies a command, a flag or a value.  A goal and two real
+    examples are the whole specification; the tool's ``--help`` supplies the
+    space of possible mechanisms; the exact bytes the shell produces decide.
+    """
+
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name)
+
+    def _agent(self, *, bin_dir: Path | None = None) -> LivingAgent:
+        computer = Computer(self.root, bin_dir=bin_dir) if bin_dir is not None else Computer(self.root)
+        return LivingAgent(self.root, computer=computer)
+
+    def _write(self, agent: LivingAgent, name: str, text: str) -> str:
+        agent.computer.write(name, text)
+        return text
+
+    @staticmethod
+    def _fold(text: str, width: int) -> str:
+        """Reference implementation of greedy folding, written for the test."""
+        out: list[str] = []
+        for line in text.split("\n")[:-1]:
+            while len(line) > width:
+                out.append(line[:width])
+                line = line[width:]
+            out.append(line)
+        return "\n".join(out) + "\n"
+
+    def test_a_keyed_sort_is_bound_from_the_data_not_from_a_table(self) -> None:
+        agent = self._agent()
+        self._write(agent, "one.csv", "pear,2\napple,10\nfig,1\n")
+        self._write(agent, "two.csv", "kiwi,7\nbanana,3\ncherry,12\n")
+        goal = "sort the rows by the second column, comma separated"
+        outcome = agent.acquire(
+            goal,
+            [
+                ("one.csv", "fig,1\napple,10\npear,2\n"),
+                ("two.csv", "cherry,12\nbanana,3\nkiwi,7\n"),
+            ],
+        )
+        self.assertEqual(outcome["status"], "PASS")
+        self.assertEqual(outcome["tool"], "sort")
+        # both the key and the separator had to be bound: sorting whole lines
+        # gives a different answer on both examples, so a bare `sort` cannot fit
+        self.assertIn("-k", outcome["argv"])
+        self.assertIn("-t", outcome["argv"])
+        self.assertEqual(outcome["stdout"], "fig,1\napple,10\npear,2\n")
+        self.assertLessEqual(outcome["commands_run"], 60)
+        # a table it has never seen, through memory rather than a new search
+        rows = len(agent.discovery_log)
+        self._write(agent, "held.csv", "zebra,4\nmule,9\nokapi,0\n")
+        again = agent.solve(goal, bindings={"path": "held.csv"})
+        self.assertEqual(again["stdout"], "okapi,0\nzebra,4\nmule,9\n")
+        self.assertEqual(len(agent.discovery_log), rows)
+
+    def test_a_width_comes_from_the_request_not_from_a_constant(self) -> None:
+        narrow = self._agent()
+        text = "the quick brown fox jumps over the lazy dog and keeps running far past" + "\n"
+        self._write(narrow, "a.txt", text)
+        self._write(narrow, "b.txt", "a second line long enough to need wrapping twice over" + "\n")
+        first = narrow.acquire(
+            "fold each line at 40 characters",
+            [("a.txt", self._fold(text, 40)), ("b.txt", self._fold(self._fold_source("b.txt", narrow), 40))],
+        )
+        self.assertEqual(first["tool"], "fold")
+        self.assertEqual(first["argv"], ["-w", "40"])
+        self.assertEqual(first["stdout"], self._fold(text, 40))
+        # the same creature, a different width in the request, on another file
+        self._write(narrow, "c.txt", "short\n")
+        second = narrow.acquire(
+            "fold each line at 12 characters",
+            [("c.txt", self._fold("short\n", 12)), ("a.txt", self._fold(text, 12))],
+        )
+        self.assertEqual(second["argv"], ["-w", "12"])
+        self.assertEqual(second["stdout"], self._fold("short\n", 12))
+
+    def _fold_source(self, name: str, agent: LivingAgent) -> str:
+        return agent.computer.read(name)
+
+    def test_numbering_is_learned_from_one_demonstration_and_refused_without_one(self) -> None:
+        agent = self._agent()
+        text = "alpha\nbeta\ngamma\n"
+        other = "one\ntwo\nthree\nfour\n"
+        self._write(agent, "n1.txt", text)
+        self._write(agent, "n2.txt", other)
+
+        def numbered(source: str) -> str:
+            return "".join(
+                "%6d\t%s\n" % (index, line) for index, line in enumerate(source.split(), start=1)
+            )
+
+        outcome = agent.acquire(
+            "number the lines", [("n1.txt", numbered(text)), ("n2.txt", numbered(other))]
+        )
+        self.assertEqual(outcome["tool"], "nl")
+        self.assertEqual(outcome["stdout"], numbered(text))
+        # The layout is a convention: without a demonstration it is not guessed.
+        blind = self._agent()
+        self._write(blind, "n1.txt", text)
+        with self.assertRaises(AgentError) as raised:
+            blind.fulfil("number the lines of n1.txt", "n1.txt")
+        self.assertEqual(str(raised.exception), "GOAL_NOT_VERIFIABLE")
+        self.assertEqual(blind.skills, {})
+
+    def test_a_documented_flag_that_is_not_implemented_is_rejected(self) -> None:
+        # A tool that documents ``-w, --width=WIDTH`` and ignores it.  It is
+        # first on PATH, so it *is* the mechanism the creature would reach for;
+        # believing its help text would produce a skill that silently does
+        # nothing.  The bytes decide, and the request fails instead.
+        bin_dir = self.root / "bin"
+        bin_dir.mkdir()
+        liar = bin_dir / "fold"
+        liar.write_text(
+            "#!/bin/sh\n"
+            'if [ "$1" = "--help" ]; then\n'
+            "  echo 'Usage: fold [OPTION]... [FILE]...'\n"
+            "  echo\n"
+            "  echo 'Wrap each line of the file at a given width.'\n"
+            "  echo '  -w, --width=WIDTH  wrap at WIDTH columns'\n"
+            "  exit 0\n"
+            "fi\n"
+            'for last; do :; done\n'
+            'cat "$last"\n',
+            encoding="utf-8",
+        )
+        liar.chmod(0o755)
+        agent = self._agent(bin_dir=bin_dir)
+        text = "a line that is definitely longer than forty characters in total" + "\n"
+        self._write(agent, "a.txt", text)
+        self._write(agent, "b.txt", "another line that also runs past forty characters easily" + "\n")
+        with self.assertRaises(AgentError) as raised:
+            agent.acquire(
+                "fold each line at 40 characters",
+                [
+                    ("a.txt", self._fold(text, 40)),
+                    ("b.txt", self._fold(agent.computer.read("b.txt"), 40)),
+                ],
+            )
+        self.assertIn(
+            str(raised.exception), {"NO_PIPELINE_WITHIN_BUDGET", "NO_VERIFIED_PIPELINE"}
+        )
+        rejected = [row for row in agent.discovery_log if row["tool"] == "fold"]
+        self.assertTrue(rejected, "the liar was never even tried")
+        self.assertTrue(all(row["verified"] is False for row in rejected))
+        self.assertIn(["-w", "40"], [row["argv"] for row in rejected])
+        self.assertEqual(agent.skills, {})
+        self.assertNotIn("fold", agent.computer.admitted())
+
+    def test_a_rejected_candidate_leaves_no_authority_behind(self) -> None:
+        agent = self._agent()
+        self._write(agent, "one.csv", "pear,2\napple,10\nfig,1\n")
+        self._write(agent, "two.csv", "kiwi,7\nbanana,3\ncherry,12\n")
+        before = set(agent.computer.admitted())
+        agent.acquire(
+            "sort the rows by the second column, comma separated",
+            [
+                ("one.csv", "fig,1\napple,10\npear,2\n"),
+                ("two.csv", "cherry,12\nbanana,3\nkiwi,7\n"),
+            ],
+        )
+        attempted = {row["tool"] for row in agent.discovery_log}
+        rejected = {row["tool"] for row in agent.discovery_log if not row["verified"]}
+        self.assertTrue(rejected)
+        self.assertTrue(rejected <= attempted)
+        # a candidate that failed leaves no new authority behind: only what was
+        # already admitted before the search can still be admitted after it
+        self.assertEqual(rejected & (set(agent.computer.admitted()) - before), set())
+
+    def test_a_failed_acquisition_is_a_remembered_gap_one_word_closes(self) -> None:
+        # Neither the pipeline vocabulary nor anything the machine documents
+        # can produce these bytes.  The failure is not a dead end: it records
+        # what was asked, what was tried and why it stopped, and a single
+        # demonstration is enough to close the gap.
+        agent = self._agent()
+        self._write(agent, "x.txt", "a\nb\n")
+        self._write(agent, "y.txt", "c\nd\n")
+        goal = "transmogrify each line into its opposite"
+        with self.assertRaises(AgentError) as raised:
+            agent.acquire(goal, [("x.txt", "x\ny\n"), ("y.txt", "z\nw\n")])
+        self.assertEqual(str(raised.exception), "NO_PIPELINE_WITHIN_BUDGET")
+        self.assertIn(goal, agent.open_questions())
+        gap = [entry.payload for entry in agent.memory.active() if entry.payload.get("goal") == goal]
+        self.assertEqual(gap[0]["reason"], "no_verified_mechanism")
+        self.assertEqual(gap[0]["examples"], ["x.txt", "y.txt"])
+        self.assertTrue(gap[0]["tools_tried"])
+        agent.learn_shell_skill(
+            goal,
+            "tr 'abcd' 'xyzw' < x.txt",
+            {"path": "x.txt"},
+            canary=({"x.txt": "a\nb\n"}, "x\ny\n"),
+        )
+        self.assertNotIn(goal, agent.open_questions())
+        self.assertEqual(agent.solve(goal, bindings={"path": "y.txt"})["stdout"], "z\nw\n")
+
+    def test_reading_a_strangers_help_cannot_touch_the_tree(self) -> None:
+        # `tool --help` is still running a stranger's code.  A real scan left
+        # `gz*` files in the repository root because some installed tool writes
+        # beside its working directory even when asked to describe itself.
+        bin_dir = self.root / "bin"
+        bin_dir.mkdir()
+        chatty = bin_dir / "chatty"
+        chatty.write_text(
+            "#!/bin/sh\n"
+            'touch "./leak-$PPID.txt" "$HOME/leak-home.txt"\n'
+            "echo 'Usage: chatty [FILE]'\n"
+            "echo\n"
+            "echo 'Copy the file, writing a note beside it.'\n",
+            encoding="utf-8",
+        )
+        chatty.chmod(0o755)
+        agent = self._agent(bin_dir=bin_dir)
+        before = sorted(path.name for path in self.root.iterdir())
+        repo_before = sorted(path.name for path in Path.cwd().iterdir())
+        docs = agent.vocabulary.read()
+        self.assertTrue(docs)
+        self.assertIsNotNone(agent.vocabulary.doc("chatty"))
+        self.assertEqual(sorted(path.name for path in self.root.iterdir()), before)
+        self.assertEqual(sorted(path.name for path in Path.cwd().iterdir()), repo_before)
+        self.assertEqual(list(Path.cwd().glob("leak-*")), [])
+        self.assertEqual(list(Path(tempfile.gettempdir()).glob("brain-help-*")), [])
+
+    def test_parsed_options_survive_the_documentation_cache(self) -> None:
+        agent = self._agent()
+        docs = agent.vocabulary.read()
+        self.assertTrue(docs)
+        doc = agent.vocabulary.doc("sort")
+        self.assertIsNotNone(doc)
+        keys = {(option.short, option.argument) for option in doc.options}
+        self.assertIn(("-k", "KEYDEF"), keys)
+        self.assertIn(("-t", "SEP"), keys)
+        again = discovery.ToolDoc.from_dict(json.loads(json.dumps(doc.to_dict())))
+        self.assertEqual(again.options, doc.options)
 
 
 class IntentWithoutExamplesTests(unittest.TestCase):

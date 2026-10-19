@@ -12,7 +12,7 @@ receipt, not a terminal claim, and not a capability grant.
 | Living agent | `canonical/runtime/living_agent_v1.py` | Real POSIX computer surface, one-shot skill chunking, canary-based drift detection and repair, word learning, impasse tracking, self-directed practice, consolidating memory, snapshot/restore. |
 | Shell synthesis | `canonical/runtime/shell_synthesis_v1.py` | Learns a stdin→stdout pipeline from (input, expected output) examples: typed beam search over 20 real stages, exact interpreter ordering, real-shell verification. |
 | Benchmark | `canonical/runtime/living_agent_benchmark_v1.py` | Twelve spreadsheet transforms with independently written oracles, plus a projection of the repository's real file tree. |
-| Acceptance | `tests/test_living_agent_v1.py` | 88 tests / 159 subtests. Real processes, real files, exact byte equality. No mocks. |
+| Acceptance | `tests/test_living_agent_v1.py` | 98 tests / 159 subtests. Real processes, real files, exact byte equality. No mocks. |
 | Discovery | `canonical/runtime/living_discovery_v1.py` | Reads what this machine says it can do (`tool --help`, the tool's own definition), turns a goal sentence into an exact expected output, and proves a real command against it before admitting it. |
 | Growth measurement | `canonical/runtime/living_agent_growth_v1.py` | Acquires four real skills at runtime and replays them on three untouched real directories. |
 
@@ -178,11 +178,32 @@ Measured on this machine:
 
 ```
 reverse each line   rev notes.txt   25 ms   found by name, verified twice + probe
-reverse the lines   tac notes.txt   55 ms   rev tried first and rejected; differential
+reverse the lines   tac notes.txt  106 ms   warm documentation cache; shortlist sweep
 same goal again     from memory     12 ms   no documentation read, no search
+first goal on a     any             1.5 s   reading 324 self-descriptions, once ever
+  new machine
 ambiguous goal      refused         --      GOAL_AMBIGUOUS: rev | tac, impasse recorded
 unknown verb        refused         --      GOAL_NOT_VERIFIABLE, nothing admitted
 ```
+
+Three costs, measured rather than assumed: a name lookup costs one process;
+a documentation question costs a one-time 1.3 s scan of the machine (324
+`--help` calls, cached to disk, 10 ms afterwards); the exhaustive sweep of all
+324 tools costs 1.9 s and is only reached when the first two tiers have nothing.
+
+Two defects were found by watching the machine rather than the code:
+
+* `tool --help` is still running a stranger's code. A real scan left `gz*`
+  files in the repository root because one installed tool writes beside its
+  working directory even when asked to describe itself. The whole scan now runs
+  in one throwaway directory with `HOME` moved there.
+* The documentation cache stored only the tools that answered with parseable
+  text, so a third of the inventory was re-asked on every session (0.3 s per
+  agent). A tool that says nothing is a fact about the machine and is cached
+  like any other.
+* The file name was removed from a goal as a *substring*: a file called
+  `n.txt` deleted every letter "n" from the sentence, turning "lines" into
+  "lies" and making a clear request ambiguous. Names are removed as words now.
 
 The documentation index is cached per machine and keyed by the parser that
 produced it, so the first contact with a new machine costs ~2.4 s once and
@@ -207,6 +228,47 @@ by watching the tree rather than the code:
   real tests (`a_stranger_tool_is_probed_in_a_throwaway_directory`,
   `a_tool_that_closes_then_exits_is_not_killed`,
   `an_endless_writer_is_stopped_not_read`).
+
+## Arguments, from the tool's own help
+
+A filter that takes no arguments is a small part of a computer.  The rest needs
+`sort -k 2 -t ,`, `fold -w 40`, `nl -ba`.  Hard-coding those is a task table;
+guessing them is worse.  The creature does neither:
+
+1. **The space is the tool's own option list.**  `tool --help` is parsed into
+   options: spellings, whether a value is wanted, the placeholder name and the
+   sentence the authors wrote.  It is cached with the rest of the documentation,
+   and re-parsed when the parser changes.
+2. **A value must be grounded.**  A number the request names binds an option
+   that takes a number; a separator the example data actually contains binds an
+   option that takes a character; a switch must have a word of the request in
+   its own description.  Anything else is not "unlikely" -- it is unjustified,
+   and is not tried.  That is also why `--output=FILE` is never bound: a
+   filename is not in the evidence.
+3. **The examples decide.**  Every candidate is a real command run by the real
+   shell on every example; the first that reproduces the bytes exactly wins.
+   Bundles are ordered simplest first (the tool alone, then one argument, then
+   combinations), so the least machinery that fits is the one admitted.
+4. **Failure is knowledge.**  If no mechanism fits, the goal, the examples and
+   every tool that was tried are recorded as an impasse; a single demonstration
+   closes it.  If a tool documents a flag it does not implement, it is rejected
+   and revoked like any other guess.
+
+Measured on this machine (cold documentation cache, first contact):
+
+| Request | Two examples say | Learned | Cost |
+|---|---|---|---|
+| sort the rows by the second column, comma separated | exact rows | `sort -k 2 -t ,` | 103 ms, 14 runs |
+| fold each line at 40 characters | exact bytes | `fold -w 40` | 95 ms, 8 runs |
+| fold each line at 12 characters (same creature, later) | exact bytes | `fold -w 12` | 80 ms |
+| number the lines | exact bytes | `nl` | 72 ms |
+
+The width row is the point: the number came from the request, not from a
+constant, and the second request was answered with a different binding by the
+same code.  A decoy named `fold` that documents `-w, --width=WIDTH` and ignores
+it is tried first (it is first on `PATH`) and rejected: the run shows
+`["-w", "40"]` in the discovery log with `verified=false`, nothing admitted, and
+the request fails instead of producing a skill that silently does nothing.
 
 ## How the learner spends its questions
 
@@ -276,10 +338,12 @@ rather than die mid-loop.
   those readings ("number the lines" needs `nl`'s exact layout, which is a
   convention this creature cannot deduce) is an impasse on the record, not a
   guess.
-- Discovery admits *bare* invocations (`tac FILE`).  A capability that needs a
-  flag or a program argument -- field- and width-parameterised tools -- is not
-  reachable this way even when the tool exists: the search would have to invent
-  arguments, and inventing is not verifying.
+- Argument binding is limited to what the evidence can ground: numbers the
+  request names, characters the data contains, switches the request mentions.
+  An option whose value is a word (`nl -b a`, `sort --sort=version`,
+  `-o FILE`) cannot be bound this way and stays an honest failure -- a
+  demonstration is still the only way to teach those, and inventing a value
+  would be a guess dressed as an experiment.
 - "Unique" has two readings and only one of them is a function of the data
   alone: keeping the first occurrence (implemented) and keeping the last
   (refused, recorded).  Sharing a word is not sharing a meaning.

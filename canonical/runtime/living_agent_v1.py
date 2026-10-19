@@ -1004,6 +1004,39 @@ class LivingAgent:
             inputs, max_length=max_length, time_budget_s=time_budget_s
         )
         if not candidates:
+            # The fixed stage vocabulary cannot express the examples.  The
+            # machine's own documentation is the next place to look: a tool
+            # that takes an argument may be exactly the mechanism, and its
+            # help text says which arguments it has.  The examples decide.
+            found = self._find_documented_mechanism(goal, examples)
+            if found is not None:
+                skill = self._admit_documented_skill(goal, found, examples)
+                outcome = self.solve(goal, bindings={"path": examples[0][0]})
+                outcome.update(
+                    {
+                        "learned": True,
+                        "tool": found["tool"],
+                        "argv": list(found["argv"]),
+                        "source": "documentation-options",
+                        "commands_run": found["runs"],
+                        "seconds": round(time.perf_counter() - started, 4),
+                    }
+                )
+                return outcome
+            # Both strategies failed: the pipeline vocabulary cannot express
+            # the examples, and nothing on this machine that documents itself
+            # reproduces them.  That is knowledge -- the goal, the evidence and
+            # the tools that were tried -- and it belongs on the record, not in
+            # a traceback nobody keeps.
+            self._record_impasse(
+                goal,
+                {
+                    "reason": "no_verified_mechanism",
+                    "strategies": ["synthesis", "documentation"],
+                    "examples": [path for path, _ in examples],
+                    "tools_tried": sorted({row["tool"] for row in self.discovery_log}),
+                },
+            )
             raise AgentError("NO_PIPELINE_WITHIN_BUDGET")
 
         evaluated = 0
@@ -1033,6 +1066,304 @@ class LivingAgent:
             )
             return outcome
         raise AgentError("NO_VERIFIED_PIPELINE")
+
+    # -- arguments the machine documents -----------------------------------
+    # ``F`` is a *file* placeholder in the coreutils convention (--files0-from=F), so
+    # it is deliberately absent: binding it to a number would invent a filename.
+    _INT_NAME = re.compile(r"^(?:N|NUM|NUMBER|COUNT|WIDTH|SIZE|LENGTH|LIST|KEYDEF|COLS|LINE|LINES)$")
+    _CHAR_NAME = re.compile(r"^(?:DELIM|SEP|CHAR|CC|STRING|TEXT)$")
+    _INT_WORDS = {"width", "column", "columns", "number", "numbers", "count", "line", "lines",
+                  "byte", "bytes", "size", "length", "digit", "digits", "increment", "key"}
+    _CHAR_WORDS = {"delimiter", "separator", "character", "char", "characters", "string"}
+
+    @classmethod
+    def _value_kind(cls, option: discovery.Option) -> str:
+        """What kind of value an option's argument is, read from its own text.
+
+        The name the authors gave the placeholder is the strongest evidence
+        (``=WIDTH``), the sentence they wrote about it is the second.  If
+        neither says, the option cannot be grounded and is not tried -- an
+        invented value is not evidence.
+        """
+        name = option.argument.strip("[]").upper()
+        if cls._INT_NAME.match(name):
+            return "int"
+        if cls._CHAR_NAME.match(name):
+            return "char"
+        words = set(discovery._words(option.description))
+        if words & cls._INT_WORDS:
+            return "int"
+        if words & cls._CHAR_WORDS:
+            return "char"
+        return ""
+
+    @staticmethod
+    def _grounded_values(kind: str, goal: str, sources: Sequence[str]) -> list[str]:
+        """Values that something real in the request or the data can supply.
+
+        Numbers written in the goal come first, then the small integers any
+        table has; separators are the characters that actually split the
+        example lines.  Nothing is taken from a table of known flags.
+        """
+        if kind == "int":
+            named = [int(match) for match in re.findall(r"\b(\d{1,4})\b", goal)]
+            named = [number for number in named if 1 <= number <= 9999]
+            return [str(number) for number in dict.fromkeys(named + [2, 1, 3, 4])]
+        counts: dict[str, int] = {}
+        for text in sources:
+            for character in text:
+                if character in ",:|; ":
+                    counts[character] = counts.get(character, 0) + 1
+        return [character for character, _ in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))][:3]
+
+    # Descriptions that mark an option as a position or a quantity: exactly the
+    # kind of argument a request about "the second column" or "40 characters"
+    # could be bound to.
+    # A *position* in the data is a different kind of argument from an
+    # *amount*: a key/field takes an index the table itself bounds, while a
+    # width or a count is only meaningful if the request names it.  Treating
+    # them alike is what made the first version try `sort -S 1` and never
+    # `sort -k 2` -- a quantity with nothing to bind it to is not evidence.
+    _POSITION_WORDS = {
+        "key", "keys", "field", "fields", "column", "columns", "position",
+        "location", "list", "range", "index",
+    }
+    _AMOUNT_WORDS = {
+        "number", "width", "line", "lines", "byte", "bytes", "size", "count",
+        "length", "increment", "digit", "digits", "start", "first",
+    }
+
+    def _argument_atoms(
+        self, goal: str, doc: discovery.ToolDoc, sources: Sequence[str]
+    ) -> list[tuple[int, list[str]]]:
+        """Option bindings that something real can justify, with their evidence.
+
+        Three kinds of evidence are accepted, and nothing else:
+
+        * a number the request itself names, bound to an option that takes one;
+        * a separator the example data actually contains, bound to an option
+          that takes a character;
+        * a switch whose own description mentions a word from the request.
+
+        Everything else is not "unlikely" -- it is unjustified, and an unjustified
+        argument would be a guess wearing an experiment's clothes.
+        """
+        digits = [int(match) for match in re.findall(r"\b(\d{1,4})\b", goal)]
+        digits = [number for number in dict.fromkeys(digits) if 1 <= number <= 9999]
+        separators = self._grounded_values("char", goal, sources)
+        tokens = _tokens(goal)
+        atoms: list[tuple[int, list[str]]] = []
+        for option in doc.options:
+            spelling = option.short or option.long
+            if not spelling:
+                continue
+            kind = self._value_kind(option)
+            words = set(discovery._words(option.description))
+            if option.argument:
+                if kind == "int":
+                    if digits:
+                        atoms.append((4, [spelling, str(digits[0])]))
+                    elif words & self._POSITION_WORDS:
+                        atoms.append((3, [spelling, "2"]))
+                        atoms.append((3, [spelling, "1"]))
+                    elif words & self._AMOUNT_WORDS and tokens & words:
+                        atoms.append((2, [spelling, "2"]))
+                elif kind == "char" and separators:
+                    atoms.append((3, [spelling, separators[0]]))
+                continue
+            if tokens & words:
+                atoms.append((1, [spelling]))
+        atoms.sort(key=lambda row: (-row[0], row[1]))
+        return atoms[:4]
+
+    def _argument_forms(
+        self, goal: str, doc: discovery.ToolDoc, sources: Sequence[str]
+    ) -> list[list[str]]:
+        """Candidate option bundles, cheapest explanation first.
+
+        A tool's own option list is the space; the request and the data only
+        *rank* and *bind* it.  The bare tool is always tried first, then each
+        justified argument alone, then their combinations -- so the simplest
+        mechanism that reproduces the examples wins.
+        """
+        atoms = [tokens for _score, tokens in self._argument_atoms(goal, doc, sources)]
+        forms: list[list[str]] = [[]]
+        for atom in atoms:
+            forms.append(list(atom))
+
+        def compatible(indices: Sequence[int]) -> bool:
+            """One bundle cannot say two different things about one flag."""
+            flags = [atoms[index][0] for index in indices]
+            return len(flags) == len(set(flags))
+
+        for first in range(len(atoms)):
+            for second in range(first + 1, len(atoms)):
+                if compatible((first, second)):
+                    forms.append(list(atoms[first]) + list(atoms[second]))
+        if len(atoms) >= 3 and compatible((0, 1, 2)):
+            forms.append(list(atoms[0]) + list(atoms[1]) + list(atoms[2]))
+        unique: list[list[str]] = []
+        for form in forms:
+            if form not in unique:
+                unique.append(form)
+        return unique[:8]
+
+    def _find_documented_mechanism(
+        self,
+        goal: str,
+        examples: Sequence[tuple[str, str]],
+        *,
+        max_tools: int = 6,
+        max_runs: int = 60,
+    ) -> dict[str, Any] | None:
+        """Search the machine's documented surface for a command that fits.
+
+        The examples are the specification: a candidate is admitted only if the
+        real shell reproduces every example byte for byte.  Candidates are the
+        tools whose own documentation mentions the goal -- each one bare first,
+        because the simplest mechanism is usually the right one, and then with
+        the option bundles its help text documents, bound only to values the
+        request or the data supply.
+        """
+        vocabulary = self.vocabulary
+        vocabulary.read()
+        sources = [self.computer.read(path) for path, _ in examples]
+        runs = 0
+        stopped = False
+        attempts: list[dict[str, Any]] = []
+
+        def attempt(doc: discovery.ToolDoc, form: list[str]) -> dict[str, Any] | None:
+            nonlocal runs, stopped
+            if runs >= max_runs:
+                stopped = True
+                return None
+            template = " ".join([doc.name, *form, "{path}"])
+            try:
+                self.computer.admit(
+                    doc.name,
+                    evidence={
+                        "summary": doc.summary,
+                        "usage": doc.usage,
+                        "argv": list(form),
+                        "examples": len(examples),
+                    },
+                )
+            except AgentError:
+                return None
+            for path, expected in examples:
+                if runs >= max_runs:
+                    break
+                result = self.computer.run(template.replace("{path}", shlex.quote(path)))
+                runs += 1
+                if not result.ok or result.stdout != expected:
+                    self.computer.revoke(doc.name)
+                    attempts.append({"tool": doc.name, "argv": list(form), "verified": False})
+                    return None
+            attempts.append({"tool": doc.name, "argv": list(form), "verified": True})
+            return {
+                "template": template,
+                "tool": doc.name,
+                "argv": list(form),
+                "doc": doc.summary,
+                "runs": runs,
+            }
+
+        shortlist = [
+            doc
+            for doc in vocabulary.ranked(discovery._words(goal), limit=max_tools)
+            if doc.name not in discovery.DENY
+            and any(name == doc.name for name, _ in vocabulary.executables())
+        ]
+        found: dict[str, Any] | None = None
+        # Phase 1: the tools themselves, with no arguments at all.
+        for doc in shortlist:
+            if stopped:
+                break
+            found = attempt(doc, [])
+            if found is not None:
+                break
+        # Phase 2: documented arguments, tool by tool, simplest bundle first.
+        while found is None and not stopped:
+            for doc in shortlist:
+                for form in self._argument_forms(goal, doc, sources):
+                    if not form or stopped:
+                        continue
+                    found = attempt(doc, form)
+                    if found is not None or stopped:
+                        break
+                if found is not None or stopped:
+                    break
+            break
+        for row in attempts:
+            self.discovery_log.append(
+                {
+                    "tool": row["tool"],
+                    "reading": "options",
+                    "source": "documentation-options",
+                    "verified": row["verified"],
+                    "documentation": "",
+                    "argv": row["argv"],
+                }
+            )
+        if len(self.discovery_log) > 200:
+            del self.discovery_log[: len(self.discovery_log) - 200]
+        return found
+
+    def _admit_documented_skill(
+        self,
+        goal: str,
+        found: Mapping[str, Any],
+        examples: Sequence[tuple[str, str]],
+    ) -> ShellSkill:
+        template = str(found["template"])
+        canary_path, canary_expected = examples[0]
+        expected = canary_expected.strip()
+        if re.fullmatch(r"-?\d+", expected):
+            postcondition = r"^-?\d+$"
+        elif expected:
+            postcondition = r"\S"
+        else:
+            postcondition = r"\A\s*\Z"
+        skill_id = "A-" + hashlib.sha256(
+            json.dumps({"goal": goal, "template": template}, sort_keys=True).encode()
+        ).hexdigest()[:12]
+        skill = ShellSkill(
+            skill_id=skill_id,
+            description=goal,
+            template=template,
+            slots={"path": canary_path},
+            postcondition=postcondition,
+            canary_input={canary_path: self.computer.read(canary_path)},
+            canary_expected=canary_expected,
+            keywords=sorted(_tokens(goal)),
+        )
+        if not self._canary_ok(skill):
+            raise AgentError("DOCUMENTED_SKILL_FAILS_CANARY")
+        self.skills[skill_id] = skill
+        self.capabilities["argv:" + template] = {
+            "template": template,
+            "tool": found.get("tool"),
+            "argv": list(found.get("argv", ())),
+            "doc": found.get("doc", ""),
+            "goal": goal,
+        }
+        self.memory.add(
+            "skill",
+            " ".join([goal, *sorted(_tokens(goal))]),
+            {"skill_id": skill_id, "kind": "shell", "template": template,
+             "argv": list(found.get("argv", ())), "tool": found.get("tool")},
+            confidence=0.8,
+            tags=("shell", "documented"),
+        )
+        self.memory.add(
+            "episode",
+            "learned from the machine's documentation: " + goal,
+            {"skill_id": skill_id, "outcome": "learned", "tool": found.get("tool")},
+            surprise=0.5,
+            tags=("learn", "documented"),
+        )
+        self._resolve_impasse(goal)
+        return skill
 
     def _admit_synthesized(
         self,
@@ -1362,9 +1693,13 @@ class LivingAgent:
         probe_expected = reading.expected(probe_text)
         if probe_expected is None:
             return None
+        # Reading the machine's self-descriptions is what makes the cheap
+        # questions possible: which tools mention lines, which ones describe
+        # reversing.  One scan, cached on disk, reused by every later goal.
+        vocabulary.read()
         shortlist = [name for name in vocabulary.mentioning(reading.words, limit=48) if name not in tried]
-        for names in (shortlist,):
-            hits = vocabulary.sweep(probe_text, probe_expected, names=names)
+        if shortlist:
+            hits = vocabulary.sweep(probe_text, probe_expected, names=shortlist)
             for name in hits:
                 if name in tried:
                     continue

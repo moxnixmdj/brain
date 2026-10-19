@@ -46,7 +46,7 @@ SCHEMA = "PROJECT_BRAIN_LIVING_DISCOVERY_V1"
 
 # Bumped whenever help parsing changes: a cache is only valid for the
 # parser that produced it, or stale documentation outlives its reader.
-PARSER_VERSION = 2
+PARSER_VERSION = 3
 
 SYSTEM_DIRS = ("/usr/local/bin", "/usr/bin", "/bin")
 
@@ -83,6 +83,79 @@ class DiscoveryError(RuntimeError):
 
 
 @dataclass(frozen=True)
+class Option:
+    """One option a tool documents for itself, with what it takes.
+
+    Read from the tool's own ``--help``: the flag spellings, whether the option
+    wants a value, and the sentence the authors wrote about it.  Nothing here
+    is a table of known flags -- a tool the creature has never seen contributes
+    its own options the same way.
+    """
+
+    short: str
+    long: str
+    argument: str
+    description: str
+
+    def spellings(self) -> list[str]:
+        return [spelling for spelling in (self.short, self.long) if spelling]
+
+    def to_dict(self) -> dict[str, str]:
+        return {
+            "short": self.short,
+            "long": self.long,
+            "argument": self.argument,
+            "description": self.description,
+        }
+
+    @classmethod
+    def from_dict(cls, payload: Mapping[str, Any]) -> "Option":
+        return cls(
+            short=str(payload.get("short", "")),
+            long=str(payload.get("long", "")),
+            argument=str(payload.get("argument", "")),
+            description=str(payload.get("description", "")),
+        )
+
+
+_OPTION_LINE = re.compile(
+    r"^\s{2,8}(?:(-[A-Za-z0-9])(?:,\s*)?)?(--[A-Za-z0-9][A-Za-z0-9_-]*)?"
+    r"(?:=\[?-?\]?([A-Za-z][A-Za-z0-9_-]*))?(?:\s{2,}(.*))?$"
+)
+
+
+def parse_options(text: str) -> tuple[Option, ...]:
+    """Every option line in a help text, in the order the tool lists them.
+
+    Coreutils, BSD and hand-written help all put options two-to-eight columns in
+    and describe them two or more spaces later, which is the only structure
+    relied on.  A line that does not start with a flag is not an option.
+    """
+    options: list[Option] = []
+    for raw in text.replace("\r", "").split("\n"):
+        if "-" not in raw or len(raw) > 240:
+            continue
+        match = _OPTION_LINE.match(raw)
+        if not match:
+            continue
+        short, long, argument, description = match.groups()
+        if not short and not long:
+            continue
+        if long and not argument and "=" in raw.split(long, 1)[1][:1]:
+            continue
+        description = re.sub(r"\s+", " ", description or "").strip()
+        options.append(
+            Option(
+                short=short or "",
+                long=long or "",
+                argument=(argument or "").upper(),
+                description=description,
+            )
+        )
+    return tuple(options)
+
+
+@dataclass(frozen=True)
 class ToolDoc:
     """What one executable says about itself, plus where that text came from."""
 
@@ -92,6 +165,7 @@ class ToolDoc:
     summary: str
     words: frozenset[str]
     seconds: float = 0.0
+    options: tuple[Option, ...] = ()
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -100,6 +174,7 @@ class ToolDoc:
             "usage": self.usage,
             "summary": self.summary,
             "words": sorted(self.words),
+            "options": [option.to_dict() for option in self.options],
         }
 
     @classmethod
@@ -110,6 +185,7 @@ class ToolDoc:
             usage=str(payload.get("usage", "")),
             summary=str(payload.get("summary", "")),
             words=frozenset(str(w) for w in payload.get("words", ())),
+            options=tuple(Option.from_dict(row) for row in payload.get("options", ())),
         )
 
 
@@ -267,6 +343,7 @@ def parse_help(name: str, text: str, *, path: str = "", seconds: float = 0.0) ->
         summary=definition,
         words=_words(name.replace("_", " ").replace("-", " ") + " " + definition),
         seconds=seconds,
+        options=parse_options(text),
     )
 
 
@@ -377,8 +454,18 @@ class MachineVocabulary:
                 continue
             pending.append((name, path, stamp))
         if pending:
-            with ThreadPoolExecutor(max_workers=self.workers) as pool:
-                results = list(pool.map(lambda item: self._read_one(item[0], item[1]), pending))
+            # Asking a stranger about itself runs code.  Some tools write next
+            # to their working directory even for `--help` (a real scan left
+            # `gz*` files in the repository root), so the whole scan runs in
+            # one throwaway directory that is removed afterwards.
+            scratch = tempfile.mkdtemp(prefix="brain-help-")
+            try:
+                with ThreadPoolExecutor(max_workers=self.workers) as pool:
+                    results = list(
+                        pool.map(lambda item: self._read_one(item[0], item[1], scratch), pending)
+                    )
+            finally:
+                shutil.rmtree(scratch, ignore_errors=True)
             for (name, _path, stamp), doc in zip(pending, results):
                 self._docs[name] = doc
                 self._stamps[name] = stamp
@@ -386,12 +473,13 @@ class MachineVocabulary:
         self.seconds = time.perf_counter() - started
         return [doc for doc in self._docs.values() if doc is not None]
 
-    def _read_one(self, name: str, path: str) -> ToolDoc | None:
+    def _read_one(self, name: str, path: str, scratch: str) -> ToolDoc | None:
         self.help_reads += 1
         started = time.perf_counter()
         _code, raw = _run_capped(
             [path, "--help"],
-            env={"PATH": ":".join(self.dirs), "LC_ALL": "C", "HOME": "/tmp"},
+            cwd=scratch,
+            env={"PATH": ":".join(self.dirs), "LC_ALL": "C", "HOME": scratch},
             timeout=self.help_timeout,
             limit=131_072,
         )
@@ -419,7 +507,11 @@ class MachineVocabulary:
             return
         for name, record in payload.get("tools", {}).items():
             try:
-                self._docs[name] = ToolDoc.from_dict(record["doc"])
+                # A tool that answered with nothing worth parsing is a fact
+                # too: caching only the successes meant re-asking a third of
+                # the machine every session.
+                doc = record.get("doc")
+                self._docs[name] = ToolDoc.from_dict(doc) if doc else None
                 self._stamps[name] = str(record["stamp"])
             except (KeyError, TypeError, ValueError):
                 continue
@@ -431,9 +523,11 @@ class MachineVocabulary:
             "schema": SCHEMA + "_VOCABULARY",
             "parser": PARSER_VERSION,
             "tools": {
-                name: {"stamp": self._stamps.get(name, ""), "doc": doc.to_dict()}
+                name: {
+                    "stamp": self._stamps.get(name, ""),
+                    "doc": doc.to_dict() if doc is not None else None,
+                }
                 for name, doc in self._docs.items()
-                if doc is not None
             },
         }
         try:
@@ -503,6 +597,7 @@ class MachineVocabulary:
         *,
         names: Sequence[str] | None = None,
         workers: int | None = None,
+        timeout: float = 0.6,
     ) -> list[str]:
         """Every tool on the machine that reproduces ``expected`` on one file.
 
@@ -511,18 +606,39 @@ class MachineVocabulary:
         *which* tools are even candidates; documentation is then used to order
         them and to record why the winner was believed.
 
-        Each trial is already hermetic (its own throwaway directory and its own
-        copy), so a tool that rewrites or removes its input -- ``shred`` will
-        happily eat a file -- cannot blind the search for every tool after it.
+        The whole sweep shares one throwaway directory and gives every trial its
+        own copy, so a tool that rewrites or removes its input -- ``shred`` will
+        happily eat a file -- cannot blind the trials after it, and per-trial
+        directory churn is not paid 300 times.
         """
         wanted = list(names) if names is not None else [name for name, _ in self.executables()]
+        located = {name: str(Path(directory) / name) for directory in reversed(self.dirs)
+                   for name in wanted if (Path(directory) / name).is_file()}
+        scratch = tempfile.mkdtemp(prefix="brain-sweep-")
+        try:
+            def attempt(item: tuple[int, str]) -> str | None:
+                index, name = item
+                binary = located.get(name)
+                if binary is None:
+                    return None
+                relative = f"case-{index}.txt"
+                try:
+                    (Path(scratch) / relative).write_text(payload, encoding="utf-8")
+                except OSError:
+                    return None
+                code, raw = _run_capped(
+                    [binary, relative],
+                    cwd=scratch,
+                    env={"PATH": ":".join(self.dirs), "LC_ALL": "C", "HOME": scratch},
+                    timeout=timeout,
+                    limit=1_048_576,
+                )
+                return name if code == 0 and _decode(raw) == expected else None
 
-        def attempt(name: str) -> str | None:
-            produced = self.trial(name, payload=payload)
-            return name if produced == expected else None
-
-        with ThreadPoolExecutor(max_workers=workers or self.workers) as pool:
-            matched = [name for name in pool.map(attempt, wanted) if name is not None]
+            with ThreadPoolExecutor(max_workers=workers or self.workers) as pool:
+                matched = [name for name in pool.map(attempt, list(enumerate(wanted))) if name]
+        finally:
+            shutil.rmtree(scratch, ignore_errors=True)
         return sorted(matched)
 
     def name_candidates(self, words: Iterable[str], *, limit: int = 4) -> list[str]:
@@ -741,11 +857,20 @@ class Reading:
 
 
 def _goal_tokens(goal: str, path: str | None = None) -> list[str]:
+    """The words of a goal, with the file it names removed.
+
+    The name is removed as a *word*, not as a substring.  Comparing by
+    substring turned the file `n.txt` into the rule "delete every letter n",
+    which silently mangled the goal ("lines" became "lies") and made a
+    perfectly clear request ambiguous.
+    """
     text = goal.lower()
     if path:
-        for fragment in {path, Path(path).name, Path(path).stem, Path(path).suffix.lstrip(".")}:
-            if fragment:
-                text = text.replace(fragment.lower(), " ")
+        fragments = {path, Path(path).name, Path(path).stem, Path(path).suffix.lstrip(".")}
+        for fragment in sorted((f for f in fragments if len(f) >= 3), key=len, reverse=True):
+            text = re.sub(
+                r"(?<![a-z0-9_])" + re.escape(fragment.lower()) + r"(?![a-z0-9_])", " ", text
+            )
     return re.findall(r"[a-z][a-z0-9_]*|\d+", text)
 
 
