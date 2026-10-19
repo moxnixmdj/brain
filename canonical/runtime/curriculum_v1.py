@@ -151,7 +151,8 @@ def query_for(gap: str) -> str:
     return " ".join(terms[:5])
 
 
-def _try_knowledge(gap: str, min_sources: int) -> dict[str, Any]:
+def _try_knowledge(gap: str, min_sources: int, min_kinds: int = 2,
+                   timeout: int = 12) -> dict[str, Any]:
     from canonical.runtime import jit_knowledge_v1 as jit
     # try the phrasing that searches well, not only the one that was written
     queries = [gap, query_for(gap)]
@@ -161,16 +162,31 @@ def _try_knowledge(gap: str, min_sources: int) -> dict[str, Any]:
         if not query or query in seen:
             continue
         seen.add(query)
-        out = jit.resolve(query, min_sources=min_sources)
+        out = jit.resolve(query, min_sources=min_sources,
+                           min_kinds=min_kinds, timeout=timeout)
+        # Partial evidence is a reason to try harder, not to conclude. If some
+        # sources answered but not enough KINDS did, the world has not been
+        # shown to lack data -- one kind of place simply responded. Being
+        # refused for that reason is the machine giving up early.
+        if not out.get("pass") and out.get("sources_answered") \
+                and len(out.get("kinds_answered") or []) < max(1, min_kinds):
+            time.sleep(0.5)
+            retry = jit.resolve(query, min_sources=min_sources,
+                                min_kinds=min_kinds, timeout=timeout + 8)
+            if len(retry.get("kinds_answered") or []) > \
+                    len(out.get("kinds_answered") or []):
+                out = retry
         if out.get("pass") is True:
             return {"closed": True, "status": out.get("status"), "query": query,
                     "documents": out.get("document_count", 0),
                     "sources": out.get("sources_answered") or [],
+                    "kinds": out.get("kinds_answered") or [],
                     "detail": "independent sources answered"}
         if not best or out.get("document_count", 0) > best.get("documents", 0):
             best = {"closed": False, "status": out.get("status"), "query": query,
                     "documents": out.get("document_count", 0),
                     "sources": out.get("sources_answered") or [],
+                    "kinds": out.get("kinds_answered") or [],
                     "detail": (out.get("gap") or "sources did not answer")}
     return best
 
@@ -197,6 +213,7 @@ def _try_acquire(gap: str) -> dict[str, Any]:
 
 
 def study(gap: Mapping[str, Any] | str, *, min_sources: int = 2,
+          min_kinds: int = 2,
           channels: Sequence[str] | None = None) -> dict[str, Any]:
     """Try to close one gap, cheapest promising channel first, and stop when closed."""
     started = time.time()
@@ -216,7 +233,7 @@ def study(gap: Mapping[str, Any] | str, *, min_sources: int = 2,
             if name == "solve":
                 outcome = _try_solve(what)
             elif name == "knowledge":
-                outcome = _try_knowledge(what, min_sources)
+                outcome = _try_knowledge(what, min_sources, min_kinds)
             elif name == "acquire":
                 outcome = _try_acquire(what)
             else:
@@ -260,7 +277,7 @@ def study(gap: Mapping[str, Any] | str, *, min_sources: int = 2,
 
 
 def run(*, max_lessons: int = DEFAULT_MAX_LESSONS, min_sources: int = 2,
-        channels: Sequence[str] | None = None,
+        min_kinds: int = 2, channels: Sequence[str] | None = None,
         on_lesson: Callable[[dict[str, Any]], None] | None = None
         ) -> dict[str, Any]:
     """Study the machine's own backlog, most valuable first, until it is empty."""
@@ -273,7 +290,8 @@ def run(*, max_lessons: int = DEFAULT_MAX_LESSONS, min_sources: int = 2,
                 "duration_s": round(time.time() - started, 4)}
 
     for gap in pending[:max(1, max_lessons)]:
-        result = study(gap, min_sources=min_sources, channels=channels)
+        result = study(gap, min_sources=min_sources,
+                         min_kinds=min_kinds, channels=channels)
         lessons.append(result)
         if on_lesson is not None:
             try:

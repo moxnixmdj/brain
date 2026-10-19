@@ -56,7 +56,8 @@ class _Store:
 class RealRetrievalTests(_Store, unittest.TestCase):
     def test_a_query_returns_documents_that_are_actually_about_it(self):
         """The content must relate to the question. Not just be present."""
-        r = jit.resolve("pdf text extraction", only=["pypi"], min_sources=1)
+        r = jit.resolve("pdf text extraction", only=["pypi"], min_sources=1,
+                       min_kinds=1)
         self.assertTrue(r["pass"], r)
         self.assertGreater(r["document_count"], 0)
         blob = " ".join(
@@ -65,36 +66,63 @@ class RealRetrievalTests(_Store, unittest.TestCase):
         self.assertIn("pdf", blob, blob[:400])
 
     def test_npm_returns_real_packages_for_a_real_query(self):
-        r = jit.resolve("pdf", only=["npm"], min_sources=1)
+        r = jit.resolve("pdf", only=["npm"], min_sources=1, min_kinds=1)
         self.assertTrue(r["pass"], r)
         ids = [str(d.get("id") or "").lower() for d in r["documents"]]
         self.assertTrue(ids)
         self.assertTrue(any("pdf" in i for i in ids), ids[:10])
 
     def test_github_returns_real_repositories_with_real_urls(self):
-        r = jit.resolve("pdf extract", only=["github"], min_sources=1)
+        r = jit.resolve("pdf extract", only=["github"], min_sources=1,
+                       min_kinds=1)
         self.assertTrue(r["pass"], r)
         for doc in r["documents"]:
             self.assertTrue(str(doc.get("url") or "").startswith("https://github.com/"),
                             doc)
             self.assertTrue(str(doc.get("id") or ""))
 
-    def test_two_real_independent_sources_satisfy_the_gate(self):
+    def test_two_package_registries_are_NOT_independent_witnesses(self):
+        """pypi and npm are the same KIND. Counting them as two independent
+        sources was the bug this gate exists to prevent: agreement between two
+        package registries is one opinion, not two."""
         r = jit.resolve("pdf text extraction", only=["pypi", "npm"], min_sources=2)
+        self.assertFalse(r["pass"])
+        self.assertEqual(r["kinds_answered"], ["package_registry"])
+        self.assertIn("KINDS", r["gap"])
+
+    def test_different_kinds_do_satisfy_the_gate(self):
+        """A registry and a code host are genuinely different witnesses."""
+        r = jit.resolve("pdf text extraction", only=["pypi", "github"],
+                        min_sources=2, min_kinds=2)
         self.assertTrue(r["pass"], r.get("gap"))
-        self.assertGreaterEqual(len(r["sources_answered"]), 2)
-        self.assertEqual(set(r["sources_answered"]), {"pypi", "npm"})
+        self.assertGreaterEqual(len(r["kinds_answered"]), 2)
+
+    def test_three_kinds_are_reachable_and_all_answer(self):
+        r = jit.resolve("pdf text extraction", only=["pypi", "github", "docs"],
+                        min_sources=3, min_kinds=3)
+        self.assertTrue(r["pass"], r.get("gap"))
+        self.assertEqual(len(r["kinds_answered"]), 3)
+        self.assertIn("documentation", r["kinds_answered"])
 
     def test_pypi_names_a_real_package_when_asked_for_one(self):
-        r = jit.resolve("requests", only=["pypi"], min_sources=1)
+        r = jit.resolve("requests", only=["pypi"], min_sources=1, min_kinds=1)
         self.assertTrue(r["pass"], r)
         ids = [str(d.get("id") or "").lower() for d in r["documents"]]
         self.assertIn("requests", ids, ids)
 
     def test_documents_from_different_sources_are_distinguishable(self):
-        r = jit.resolve("pdf", only=["pypi", "npm"], min_sources=2)
+        r = jit.resolve("pdf", only=["pypi", "npm"], min_sources=2, min_kinds=1)
         sources = {d["source"] for d in r["documents"]}
         self.assertGreaterEqual(len(sources), 2)
+
+    def test_documentation_says_what_a_thing_is_for_not_just_that_it_exists(self):
+        """A README is a different claim from a registry entry."""
+        r = jit.resolve("pdf text extraction", only=["docs"], min_sources=1,
+                        min_kinds=1)
+        self.assertTrue(r["pass"], r)
+        doc = r["documents"][0]
+        self.assertEqual(doc["kind"], "documentation")
+        self.assertGreater(len(doc.get("summary") or ""), 40)
 
 
 # --------------------------------------------------------------------------- #
@@ -104,7 +132,7 @@ class RealRetrievalTests(_Store, unittest.TestCase):
 class ProvenanceRealTests(_Store, unittest.TestCase):
     def test_the_recorded_hash_matches_the_document_it_came_from(self):
         """Recompute it. A hash that is never checked proves nothing."""
-        r = jit.resolve("pdf", only=["pypi"], min_sources=1)
+        r = jit.resolve("pdf", only=["pypi"], min_sources=1, min_kinds=1)
         self.assertTrue(r["pass"])
         doc = r["documents"][0]
         payload = {k: v for k, v in doc.items()
@@ -122,8 +150,8 @@ class ProvenanceRealTests(_Store, unittest.TestCase):
 
     def test_the_same_query_is_fetched_again_not_served_from_imagination(self):
         """Two independent resolves must agree about the world."""
-        a = jit.resolve("pdf", only=["pypi"], min_sources=1)
-        b = jit.resolve("pdf", only=["pypi"], min_sources=1)
+        a = jit.resolve("pdf", only=["pypi"], min_sources=1, min_kinds=1)
+        b = jit.resolve("pdf", only=["pypi"], min_sources=1, min_kinds=1)
         self.assertTrue(a["pass"] and b["pass"])
         ids_a = {d["id"] for d in a["documents"]}
         ids_b = {d["id"] for d in b["documents"]}
@@ -164,14 +192,14 @@ class RefusalRealTests(_Store, unittest.TestCase):
             jit.SOURCES.pop("missing_page", None)
 
     def test_demanding_more_sources_than_exist_refuses_to_conclude(self):
-        r = jit.resolve("pdf", only=["pypi"], min_sources=9)
+        r = jit.resolve("pdf", only=["pypi"], min_sources=9, min_kinds=1)
         self.assertFalse(r["pass"], r)
         self.assertEqual(r["status"], jit.OPEN_THIN)
         self.assertIn("only", r["gap"])
         self.assertEqual(r["authority"], "INCOMPLETE_DATA_NO_CONCLUSION_DRAWN")
 
     def test_a_thin_result_still_hands_back_what_it_found(self):
-        r = jit.resolve("pdf", only=["pypi"], min_sources=9)
+        r = jit.resolve("pdf", only=["pypi"], min_sources=9, min_kinds=1)
         self.assertGreater(r["document_count"], 0)
         self.assertFalse(r["complete"])
 
@@ -239,6 +267,138 @@ class ValueMathsTests(_Store, unittest.TestCase):
 
 
 # --------------------------------------------------------------------------- #
+# staged retrieval and caching: fast by construction
+# --------------------------------------------------------------------------- #
+@requires_network
+class StagedRetrievalTests(_Store, unittest.TestCase):
+    def setUp(self) -> None:
+        super().setUp()
+        jit.cache_clear()
+
+    def test_cheap_sources_alone_can_satisfy_the_gate(self):
+        """No need to download tarballs when two registries already answered."""
+        r = jit.resolve("pdf text extraction", min_sources=2, min_kinds=2)
+        self.assertTrue(r["pass"], r.get("gap"))
+        self.assertNotIn("docs", r["sources_answered"])
+
+    def test_the_expensive_source_is_only_asked_when_needed(self):
+        """Asking for a third KIND escalates; asking for two does not."""
+        two = jit.resolve("pdf text extraction", min_sources=2, min_kinds=2)
+        self.assertNotIn("docs", two["sources_answered"])
+        three = jit.resolve("pdf text extraction", min_sources=3, min_kinds=3)
+        self.assertIn("docs", three["sources_answered"])
+        self.assertIn("documentation", three["kinds_answered"])
+
+    def test_staging_makes_the_common_case_much_faster(self):
+        import time
+        t = time.time()
+        jit.resolve("pdf text extraction", min_sources=2, min_kinds=2)
+        cheap = time.time() - t
+        jit.cache_clear()
+        t = time.time()
+        jit.resolve("pdf text extraction", min_sources=3, min_kinds=3)
+        expensive = time.time() - t
+        self.assertLess(cheap, expensive)
+
+    def test_the_same_question_is_not_asked_twice(self):
+        jit.cache_clear()
+        a = jit.resolve("pdf text extraction", min_sources=2, min_kinds=2)
+        self.assertFalse(a.get("from_cache"))
+        b = jit.resolve("pdf text extraction", min_sources=2, min_kinds=2)
+        self.assertTrue(b.get("from_cache"))
+        self.assertEqual(a["document_count"], b["document_count"])
+
+    def test_a_cached_answer_is_instant(self):
+        import time
+        jit.resolve("pdf text extraction", min_sources=2, min_kinds=2)
+        t = time.time()
+        jit.resolve("pdf text extraction", min_sources=2, min_kinds=2)
+        self.assertLess(time.time() - t, 0.05)
+
+    def test_different_questions_are_not_confused(self):
+        jit.resolve("pdf text extraction", min_sources=2, min_kinds=2)
+        other = jit.resolve("sqlite database", min_sources=2, min_kinds=2)
+        self.assertFalse(other.get("from_cache"))
+
+    def test_a_failed_resolve_is_not_cached(self):
+        """Caching 'nothing answered' would make a transient outage permanent."""
+        jit.resolve("pdf", only=["pypi"], min_sources=9, min_kinds=9)
+        jit.cache_clear()
+        r1 = jit.resolve("pdf", only=["web"], min_sources=2, min_kinds=2)
+        self.assertEqual(r1["status"], jit.FAIL_NO_SOURCE)
+        self.assertFalse(r1.get("from_cache"))
+
+    def test_a_cached_refusal_still_carries_its_reason(self):
+        """Regression: the result was cached before `gap` was filled in, so a
+        second caller got a refusal with no explanation attached."""
+        jit.cache_clear()
+        first = jit.resolve("pdf", only=["pypi"], min_sources=9, min_kinds=1)
+        self.assertIn("gap", first)
+        second = jit.resolve("pdf", only=["pypi"], min_sources=9, min_kinds=1)
+        self.assertTrue(second.get("from_cache"))
+        self.assertIn("gap", second)
+        self.assertEqual(first["gap"], second["gap"])
+
+    def test_a_refusal_is_NOT_remembered_as_long_as_a_success(self):
+        """Sabotage check: if a refusal were cached for the full lifetime, one
+        busy host would turn into 'the world has no data' for minutes."""
+        import time
+        self.assertLess(jit.CACHE_TTL_REFUSED_S, jit.CACHE_TTL_S,
+                        "a refusal must expire sooner than an answer")
+
+    def test_a_refusal_expires_while_an_answer_endures(self):
+        """Behaviour, not constants: hold both TTLs far apart and watch what
+        actually survives the wait. A refusal must be re-asked; an answer must
+        not. Sabotage check -- caching both for the long lifetime makes one
+        busy host read as 'the world has no data' for minutes."""
+        import time
+        jit.cache_clear()
+        saved_refused, saved_ok = jit.CACHE_TTL_REFUSED_S, jit.CACHE_TTL_S
+        try:
+            jit.CACHE_TTL_S = 60.0        # an answer is remembered
+            jit.CACHE_TTL_REFUSED_S = 0.4  # a refusal is not
+
+            refusal = ("pdf", {"only": ["pypi"], "min_sources": 9,
+                               "min_kinds": 9})
+            answer = ("pdf text extraction", {"min_sources": 2, "min_kinds": 2})
+
+            r1 = jit.resolve(*refusal[0:1], **refusal[1])
+            self.assertFalse(r1["complete"], "this one must be refused")
+            a1 = jit.resolve(*answer[0:1], **answer[1])
+            self.assertTrue(a1["complete"], "this one must succeed")
+
+            time.sleep(0.8)
+
+            r2 = jit.resolve(*refusal[0:1], **refusal[1])
+            self.assertFalse(r2.get("from_cache"),
+                             "the refusal should have expired and be re-asked")
+            a2 = jit.resolve(*answer[0:1], **answer[1])
+            self.assertTrue(a2.get("from_cache"),
+                            "the answer should still be there")
+        finally:
+            jit.CACHE_TTL_REFUSED_S, jit.CACHE_TTL_S = saved_refused, saved_ok
+            jit.cache_clear()
+
+    def test_transient_network_failure_is_retried_before_giving_up(self):
+        """A socket blip is not evidence that the data does not exist."""
+        calls = {"n": 0}
+
+        def flaky(q, l, t):
+            calls["n"] += 1
+            if calls["n"] == 1:
+                raise OSError("transient")
+            return [{"kind": "k", "id": "x", "title": "X", "summary": "s", "url": "u"}]
+
+        jit.SOURCES["flaky"] = {"fetch": flaky, "cost": 0.5, "kind": "test_kind"}
+        try:
+            r = jit.fetch_source("flaky", "q")
+            self.assertTrue(r["ok"], r)
+            self.assertEqual(calls["n"], 2)      # retried once
+        finally:
+            jit.SOURCES.pop("flaky", None)
+
+
+# --------------------------------------------------------------------------- #
 # the live path, with a real gap
 # --------------------------------------------------------------------------- #
 GAP_GOAL = "write the text hello to out.txt"
@@ -255,6 +415,27 @@ class LivePathRealTests(_Store, unittest.TestCase):
         self.assertEqual(k.get("status"), jit.PASS)
         self.assertGreater(k.get("documents", 0), 0)
         self.assertTrue(k.get("sources_answered"))
+
+    def test_the_machine_rephrases_when_the_world_does_not_answer(self):
+        """Asking an instruction verbatim gets nothing; asking it well gets
+        answers. Believing the first silence is how 'no data' gets invented."""
+        from canonical.runtime import jit_knowledge_v1 as J
+        from canonical.runtime.curriculum_v1 import query_for
+
+        verbatim = "write the text hello to out.txt"
+        self.assertEqual(len(J._gh_search(verbatim, 6, 12)), 0,
+                         "expected the verbatim instruction to find nothing")
+        self.assertGreater(len(J._gh_search(query_for(verbatim), 6, 12)), 0,
+                           "expected the rephrased query to find something")
+
+    def test_a_badly_asked_question_still_reaches_two_kinds(self):
+        from canonical.runtime import live_brain_route_admission_v1 as ra
+
+        r = ra.solve_or_learn({"task_id": "t",
+                               "goal": "write the text hello to out.txt"})
+        k = (r.get("learning") or {}).get("knowledge") or {}
+        self.assertGreaterEqual(len(k.get("kinds_answered") or []), 2,
+                                "one kind is not knowledge: %s" % k)
 
     def test_the_gap_is_recorded_so_it_is_known(self):
         from canonical.runtime import live_brain_route_admission_v1 as ra

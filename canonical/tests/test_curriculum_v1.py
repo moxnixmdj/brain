@@ -67,11 +67,18 @@ class _Isolated:
         shutil.rmtree(self.tmp, ignore_errors=True)
 
     def real_gap(self, goal: str) -> dict[str, Any]:
-        """Fail at something for real, so the gap is earned."""
-        ra.solve_or_learn({"task_id": "t", "goal": goal},
-                          registry_path=self.registry)
-        ranked = led.rank(limit=5)
-        for row in ranked:
+        """A gap earned by really failing, not by writing a string by hand.
+
+        The failure is verified directly rather than through solve_or_learn,
+        which also reaches out to the network -- that doubled the live traffic
+        per test and made the suite flaky under load.
+        """
+        outcome = ra.solve({"task_id": "t", "goal": goal})
+        self.assertNotEqual(outcome.get("pass"), True,
+                            "%r is supposed to be unsolvable" % goal)
+        led.note(goal, why="verified failure: " + str(outcome.get("status")),
+                 cost=1.0)
+        for row in led.rank(limit=5):
             if row.get("what") == goal:
                 return row
         self.fail("gap was not recorded for %r" % goal)

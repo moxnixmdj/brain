@@ -964,10 +964,36 @@ def solve_or_learn(request: Mapping[str, Any], *, learn: bool = True,
     try:
         from canonical.runtime import jit_knowledge_v1 as jit
         known = jit.resolve(goal, min_sources=1, limit=6, timeout=8)
+        # Asking the world a badly-phrased question and then concluding the
+        # world has nothing to say is the oldest way to be wrong. A goal like
+        # "write the text hello to out.txt" is an instruction, not a query:
+        # asked verbatim, github returns nothing at all. Rephrase and ask
+        # again before believing the silence.
+        if not known.get("complete"):
+            try:
+                from canonical.runtime.curriculum_v1 import query_for
+                rephrased = query_for(goal)
+                if rephrased and rephrased != goal:
+                    again = jit.resolve(rephrased, min_sources=1, limit=6,
+                                        timeout=8)
+                    if (again.get("complete")
+                            or again.get("document_count", 0)
+                            > known.get("document_count", 0)):
+                        known = again
+                        known["query_was_rephrased_to"] = rephrased
+            except Exception:
+                pass
         learned["knowledge"] = {
             "status": known.get("status"),
             "documents": known.get("document_count", 0),
             "sources_answered": known.get("sources_answered") or [],
+            # a summary that drops the KINDS cannot explain its own refusal:
+            # it says "incomplete" without being able to say that three
+            # registries agreed because they are all registries
+            "kinds_answered": known.get("kinds_answered") or [],
+            "min_kinds_required": known.get("min_kinds_required"),
+            "gap": known.get("gap"),
+            "query_was_rephrased_to": known.get("query_was_rephrased_to"),
             "complete": known.get("complete", False),
             "authority": known.get("authority"),
         }
