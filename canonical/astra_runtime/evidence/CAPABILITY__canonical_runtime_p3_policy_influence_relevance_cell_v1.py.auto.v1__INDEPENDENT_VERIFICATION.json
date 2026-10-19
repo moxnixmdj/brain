@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/p3_policy_influence_relevance_cell_v1.py.auto.v1",
- "elapsed_ms": 2.91,
+ "elapsed_ms": 3.668,
  "independent_run_reference": {
-  "github_run_id": 39194920145,
+  "github_run_id": 39195156004,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "7bdff78d-2f66-41fe-85b0-d0614b9b7ad3",
+   "jti": "751fa863-b4fa-488f-beb8-9cea3e77e469",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39194920145",
+   "run_id": "39195156004",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
