@@ -720,8 +720,14 @@ class PipelineTests(unittest.TestCase):
         shutil.rmtree(self.tmp, ignore_errors=True)
 
     def test_a_question_no_single_program_answers_is_answered_by_two(self):
-        r = cenv.answer_query("how many unique lines in data.txt", self.file,
-                              programs=self.progs)
+        """Discovered on the whole machine, not handed the answer's
+        neighbourhood. Passing programs=[...] here is how this test used to
+        pass while the real path spent eight minutes and found nothing:
+        'uniq' is the 31st candidate for this question and 'sort' the 91st,
+        so a shortlist decides the outcome before the search begins.
+
+        The machine may be slow here once. It may not be spoon-fed."""
+        r = cenv.answer_query("how many unique lines in data.txt", self.file)
         self.assertTrue(r["pass"], r)
         self.assertEqual(r["value"], "7", r)
         self.assertEqual(len(set(self.rows)), 7, "the fixture is wrong")
@@ -729,8 +735,7 @@ class PipelineTests(unittest.TestCase):
     def test_the_composition_is_a_real_command_not_a_description(self):
         """Run the two stages ourselves, joined with our own pipe, nowhere
         near the learner. If it works, a pipeline was composed."""
-        r = cenv.answer_query("how many unique lines in data.txt", self.file,
-                              programs=self.progs)
+        r = cenv.answer_query("how many unique lines in data.txt", self.file)
         self.assertTrue(r["pass"], r)
         stages = r["survivors"][0]["argv"]
         self.assertEqual(len(stages), 2, stages)

@@ -1646,7 +1646,12 @@ def _one_wide(prog: str, kind: str, gap: str, patterns: Sequence[str],
     return None
 
 
-_MAX_PIPE_PROGRAMS = 10
+# How far down the candidate list a pipeline's FIRST stage may come from.
+# 'uniq' is the 31st candidate for "how many unique lines" and 'sort' the
+# 91st -- a budget of 10 looks at busctl, chrt and dmesg and concludes the
+# machine cannot answer. Affordable per head now that the last stage is
+# restricted to commands already proven to count.
+_MAX_PIPE_PROGRAMS = 100
 # The whole manual, not its top slice. grep documents 83 flags and
 # '--count' is the 65th of them -- a search that only tries the first few
 # concludes that nothing on the machine can count, when the program that
@@ -1750,19 +1755,38 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
     if len(programs) > _MAX_PIPE_PROGRAMS:
         programs = list(programs)[:_MAX_PIPE_PROGRAMS]
 
-    def pair(progs: tuple[str, str]) -> dict[str, Any] | None:
-        """Feed one program's output to another and see if the pair tracks
-        the construction. 'sort --unique | wc --lines' answers "how many
-        different lines" -- a question no single program answers."""
-        head, tail = progs
-        if head == tail:
-            return None
+    # The LAST stage of a pipeline that answers "how many" has to count.
+    # The machine already knows which commands count: it proved that on the
+    # plainest probe there is. Searching every pair -- 100 x 100 -- spends
+    # minutes discovering that 'fmt | nl' is not a measuring instrument.
+    # Composing only with things already proven to count is both the
+    # cheaper search and the more sensible one: find out what counts, then
+    # find out what to feed it.
+    counters = [c for c in probe_survivors("lines", list(programs), gap)
+                if c.get("stages") != 2]
+    tails = []
+    for c in counters:
+        # used at the end of a pipe, so it is given no filename of its own
+        argv = [a for a in c["argv"] if a != "probe.txt"]
+        if argv and argv not in tails:
+            tails.append(argv)
+    if not tails:
+        # Nothing here was proven to count, so there is nothing to put at
+        # the end of a pipe. Two programs that both fail to count do not
+        # add up to one that does.
+        return []
+
+    def pair(job: tuple) -> dict[str, Any] | None:
+        """Feed one program's output to something that counts, and see if
+        the pair tracks the construction. 'uniq | wc --lines' answers "how
+        many different lines" -- a question no single program answers."""
+        head, tail_argv = job
         root = pathlib.Path(tempfile.mkdtemp(prefix="brain-pipe-"))
         try:
             for argv1 in _query_shapes(head, name, gap,
                                       patterns=_PIPE_PATTERNS +
                                       ((literal,) if literal else ())):
-                for argv2 in _stdin_shapes(tail, gap):
+                for argv2 in [tail_argv]:
                     reads = []
                     for size in _PROBE_SIZES:
                         (root / name).write_bytes(
@@ -1778,7 +1802,7 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
                     if len(reads) == len(_PROBE_SIZES) and all(
                             got == str(want)
                             for got, want in zip(reads, _PROBE_SIZES)):
-                        return {"program": "%s | %s" % (head, tail),
+                        return {"program": "%s | %s" % (head, argv2[0]),
                                 "argv": [_abstract(list(argv1), literal),
                                          _abstract(list(argv2), literal)],
                                 "stages": 2,
@@ -1787,9 +1811,9 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
             shutil.rmtree(str(root), ignore_errors=True)
         return None
 
-    pairs = [(a, b) for a in programs for b in programs if a != b]
+    jobs = [(head, t) for head in programs for t in tails]
     with ThreadPoolExecutor(max_workers=workers) as pool:
-        return [hit for hit in pool.map(pair, pairs) if hit]
+        return [hit for hit in pool.map(pair, jobs) if hit]
 
 
 def answer_query(gap: str, input_file: str | pathlib.Path,
@@ -1867,6 +1891,37 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
             tally.setdefault(value, []).append(_instrument(hit["program"]))
         return tally
 
+    # What has already been composed is used BEFORE paying to re-prove that
+    # no single program can do it alone. Those tiers are the expensive part
+    # -- minutes -- and for a question only a pipeline can answer they are
+    # guaranteed failures. Walking past what the machine already knows is
+    # not caution, it is amnesia with extra steps.
+    if programs is None:
+        composed = _query_cache_get(kind, -1)
+        if composed:
+            found = [h for h in
+                     (dict(c, argv=_concretise(c.get("argv"), literal))
+                      for c in composed)
+                     if _reverify(h, kind, literal, timeout)]
+            tally = measure(found)
+            if tally:
+                best, bins = sorted(
+                    tally.items(),
+                    key=lambda kv: (-len(set(kv[1])), kv[0]))[0]
+                if len(set(bins)) >= min_agreement:
+                    agree = len(set(bins))
+                    return {"pass": True,
+                            "status": ("PASS__MEASURED_BY_AGREEMENT"
+                                       if agree > 1 else
+                                       "PASS__MEASURED_BY_ONE_TRACKED_INSTRUMENT"),
+                            "kind": kind, "value": best, "answer": best,
+                            "agreement": agree, "survivors": found,
+                            "stages": 2, "from_memory": True,
+                            "votes": {k: sorted(set(v))
+                                      for k, v in tally.items()},
+                            "detail": "remembered composition, re-proven: "
+                                      "%s" % best}
+
     for limit in (24, 96, 200):
         cached = _query_cache_get(kind, limit)
         if cached is not None:
@@ -1922,10 +1977,22 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
     # is answered by no single program at all, and a machine that can only
     # run one thing at a time has to refuse it.
     if not survivors:
-        cands = (list(programs) if programs is not None
-                 else programs_for_goal(gap, limit=_MAX_PIPE_PROGRAMS * 2))
-        survivors = probe_survivors(kind, cands, gap, stages=2,
-                                    literal=literal)
+        # -1 is the key for "found by composing": the tiers above are keyed
+        # by how far down the candidate list they looked, and a composition
+        # has no such number.
+        composed = _query_cache_get(kind, -1)
+        if composed:
+            survivors = [h for h in
+                         (dict(c, argv=_concretise(c.get("argv"), literal))
+                          for c in composed)
+                         if _reverify(h, kind, literal, timeout)]
+        if not survivors:
+            cands = (list(programs) if programs is not None
+                     else programs_for_goal(gap, limit=_MAX_PIPE_PROGRAMS * 2))
+            survivors = probe_survivors(kind, cands, gap, stages=2,
+                                        literal=literal)
+            if programs is None and survivors:
+                _query_cache_put(kind, -1, survivors)
         votes = measure(survivors)
         if votes:
             ranked = sorted(votes.items(),
