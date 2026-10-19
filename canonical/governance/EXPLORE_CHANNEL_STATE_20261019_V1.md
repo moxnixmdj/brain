@@ -132,20 +132,68 @@ Control run (these changes, no new test module): **721 tests, 23 bad, identical 
 `test_extended_capability_registry_v1` are **order-dependent**: they pass in isolation and the
 failing set shifts between runs of identical code. They import nothing this work touches.
 
+## Goals that name no output file — attempted and deliberately cut
+
+`_requested_suffix` is the gate: **no output filename, no attempt at all.** "count the lines",
+"make the picture smaller", "find the largest file" are refused with `OPEN__NO_OUTPUT_FORMAT_IN_GAP`
+before a single program runs. **That refusal is correct and is made twice elsewhere in the brain**
+(`cli_capability_acquisition_v1`, `cli_contract_inference`), with the reason written down:
+
+> A goal that never says what it wants produced gives us nothing to check an effect against, so any
+> program that prints anything would "work" — **`ls` would be learned as a capability.**
+
+**Do not remove that check.** Solve it by supplying something to verify against.
+
+### What was tried, and why it is not in the tree
+
+The model-free oracle — independent implementations agreeing is evidence — is real in principle.
+`wc -l`, `grep -c ''`, `awk 'END{print NR}'` and `sed -n '$='` genuinely all answer `4` for a
+four-line file. But selecting candidate programs by whether their **help text mentions the goal's
+words** selects everything, and it produced three confident wrong answers:
+
+| Asked | Answered | Via |
+|---|---|---|
+| `count the lines in notes.txt` | `Linker options` | `c89`, `c99`, `cc` — **one compiler under three names** |
+| `how many words` | `------>` | `bzless`, `bzmore` — the same script twice |
+| `show the first lines` | `Linker options` | again |
+
+Each was followed by a new filter for the new junk: aliases, pager prompts, help dumps. The last
+cannot be closed — `c89 --target-help` prints a manual that is **not** the one `--help` prints, so
+no "it printed its own help" test catches it. **A growing list of exclusion rules is a strict
+program**, which is exactly what the owner rejects. Deleted, not left weakened: a feature that
+answers "count the lines" with a linker manual is worse than one that says it cannot.
+
+If this is retried, the bar is: agreement must be between **distinct binaries**
+(`real_binary`, already written), the output must not be any manual the program can print, and
+selection must not be lexical alone.
+
+## What was kept from that attempt: choosing a flag by what it means
+
+`flag_descriptions()` parses a program's own help into flag→meaning pairs, and `flags_for_goal()`
+takes the flags whose documented meaning the goal mentions. Measured:
+
+| Goal | Flag chosen |
+|---|---|
+| `count the lines in notes.txt` | `--lines`, `-l` |
+| `count the words` | `--words`, `-w` |
+| `how many bytes` | `--bytes`, `-c` |
+| `sort in reverse` | `--reverse`, `-r` |
+
+Two traps, both now tests: the program's own name is not a clue ("sort in reverse" otherwise lights
+up every flag whose text says sorting), and the filenames in the goal are not clues. `line` must
+match `newline` by containment or every flag of `wc` scores alike, since they all say "counts".
+
+The goal flows into `invocation_shapes`, so the flag the goal asked for becomes a real command.
+
 ## Next frontier
 
-The gate is `_requested_suffix`: **no output filename in the goal, no attempt at all.** So the
-machine cannot yet be asked to *resize an image*, *count the lines*, *find the largest file*, or
-*make the picture smaller* — none of those name an output file. Every one of them is refused with
-`OPEN__NO_OUTPUT_FORMAT_IN_GAP` before a single program is run.
-
-That is the next real limit. Two sub-problems:
-
-1. **Goals with no output filename.** The goal predicate has to come from the sentence rather than
-   from a suffix — "smaller than before", "contains the count", "is a list of files".
-2. **Programs needing options.** `convert in.png -resize 50% out.png` and `gpg --armor --sign`
-   need flags, not just file arguments. Programs will state their own interface when asked
-   (`--help`); reading it is not a table, it is interrogation.
+1. **A verifiable criterion for goals that name no output file.** The refusal is right; what is
+   missing is something to check against that does not come from a suffix — "smaller than before",
+   "contains the count", "is a list of the files". The consensus attempt above failed at
+   *selection*, not at the idea of agreement; a sound version needs candidates chosen by behaviour
+   rather than by help-text word overlap.
+2. **Programs needing options with values.** `convert in.png -resize 50% out.png` needs a flag
+   *and an argument*. `flags_for_goal` now finds the flag; supplying a value for it is open.
 
 Both are the same question the last five defects were: stop deciding in advance what the answer
 looks like.
