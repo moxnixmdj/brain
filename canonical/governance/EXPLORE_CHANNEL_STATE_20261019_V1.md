@@ -13,6 +13,39 @@ The user's restatement that governs this work:
 
 ## What the machine can do now (measured, not asserted)
 
+Give it a sentence naming a real file, and it **does the job** — leaving the real file behind —
+with nobody telling it what any program does.
+
+It practises on a synthetic stand-in, keeps the exact command that worked as a *recipe*, then runs
+that command on the file it was asked about. Measured end to end with `.gz`/`.bz2`/`.zip` deleted
+from the hand-written table and no seed to compose from, so every earlier fallback was empty:
+
+| Sentence | Command it found and ran | Result |
+|---|---|---|
+| `compress notes.txt into notes.txt.gz` | `gzip -c notes.txt` | 99 B |
+| `archive notes.txt into notes.txt.zip` | `zip notes.txt.zip notes.txt` | 239 B |
+| `compress notes.txt into notes.txt.bz2` | `bzip2 -c notes.txt` | 124 B |
+
+Each output was then opened with an **independent** reader (`gzip`, `bz2`, `lzma`, `zipfile`,
+`tarfile`) and compared byte for byte with the original. All match. Archives contain `notes.txt`,
+not an absolute path, because the command runs in the file's own directory and is handed its name.
+
+Entry points: `cenv.apply(recipe, src)` and `cenv.perform(goal, cwd)`;
+`composer_route_v1.route(goal, cwd)` now ends in `PASS__PERFORMED_ON_REAL_FILE`.
+
+The two tests that carry the weight:
+
+- **It generalises rather than memorises.** It learned on a synthetic stand-in, so the test makes
+  it compress a *second, different* file. Memorising the stand-in would fail here.
+- **The recipe is a command, not a story.** The argv is run in an ordinary subprocess with the
+  learner nowhere near it. If that works, the recipe is real.
+
+`perform` refuses a goal naming a file that does not exist
+(`OPEN__NO_EXISTING_INPUT_FILE_IN_GOAL`): inventing an input to look capable is worse than
+stopping.
+
+### Discovery alone (no real file)
+
 Give it a sentence naming an output file, and it finds which program produces that file **with
 nobody telling it what any program does**.
 
