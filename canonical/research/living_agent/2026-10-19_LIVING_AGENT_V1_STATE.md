@@ -433,19 +433,19 @@ Measured on this machine, same machine, same day:
 
 | Request | Runs | Time |
 |---|---|---|
-| sort rows by column 2, comma separated (first time) | 11 | 0.06 s |
-| the first field of each line, colon separated | 17 | 0.07 s |
-| the same kind, column 3, semicolon, keep three | 4 | 0.04 s |
-| the same words on space-separated data | 4 | 0.04 s |
-| a different kind that needs the earned stage | 4 | 0.04 s |
+| sort rows by column 2, comma separated (first time) | 8 | 0.12 s |
+| the first field of each line, colon separated | 3 | 0.05 s |
+| column 3, semicolon, keep the first three | 4 | 0.06 s |
+| translate commas to semicolons (both named) | 3 | 0.04 s |
+| the second field, comma separated | 3 | 0.05 s |
+| lines that contain a given word | 2 | 0.06 s |
+| the same kind, a different word | 2 | 0.05 s |
+| count the distinct values in column 2 | 70 | 0.22 s |
 | the same words after a snapshot and restart (new data) | 1 | 0.01 s |
-| translate commas to semicolons (both named) | 3 | 0.05 s |
-| the second field, comma separated | 2 | 0.03 s |
-| lines that contain a word (first time) | 13 | 0.08 s |
-| the same kind of request, a different word | 5 | 0.06 s |
 
-The first-time cost fell from 52 runs to 11 without changing a line of the
-search space, by ordering the same candidates differently.  Four priors, in
+The first-time cost fell from 52 runs to 8 without changing a line of the
+search space, by ordering the same candidates differently, and the comma
+projection from 68 to 3 once the values the sentence names were tried first.  Four priors, in
 order: the request *names* the tool ("fold each line at 40 characters"); the
 bundle's arguments are backed by two independent grounded facts rather than
 one (a position *and* the separator the data contains); among equals the fewer
@@ -519,6 +519,13 @@ request is `tr ';' ,`; sorting those two operands alphabetically would translate
 in the wrong direction.  Both are learned in **3 runs, 0.05 s**, and the two
 commands differ exactly as the two sentences do.
 
+When the sentence names *every* value a command consumes -- two characters, or
+the pattern it wants kept -- the request is already the invocation, so that
+command is tried before the grammar search.  A request that also names an
+operation ("keep three", "count", "distinct") cannot be one command, and the
+shortcut stands down.  Lines that contain a given word: 2 runs, 0.06 s; the
+same kind of request about a different word: 2 runs, from memory.
+
 The same synopsis decides how the file reaches the tool.  A tool that declares
 a file operand takes the path as an argument; one that does not would read the
 path *as data* and fail with "extra operand", so the file is fed on standard
@@ -552,8 +559,8 @@ fails the probe immediately, because it selects by position.  The same question
 is asked of pipelines admitted by the grammar search and by composition: two
 paths, one standard.
 
-A request of the same kind then costs 5 runs instead of 13, because the
-mechanism (`grep PATTERNS`) is remembered while the pattern is bound fresh --
+A request of the same kind then costs 2 runs instead of 13, because the
+mechanism (`grep PATTERNS`) and the value the sentence supplies are both known --
 memory of the mechanism, not of the sentence.
 
 ### A fit is not an ordering

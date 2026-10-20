@@ -2172,9 +2172,17 @@ class LivingAgent:
             survivors: list[tuple[Any, Any, str]] = []
             # Fingerprinting is one process per candidate: run a chunk in
             # parallel, then test what it produced in evidence order, and stop
-            # as soon as a pipeline is confirmed.
-            for offset in range(0, len(ordered), 8):
-                chunk = ordered[offset:offset + 8]
+            # as soon as a pipeline is confirmed.  The first chunks are small on
+            # purpose.  The candidate order is a prior and the best prior is
+            # usually right, so probing one, then two, then four keeps the
+            # common case at one process while still scanning a wide field
+            # quickly when the prior is wrong.
+            offset = 0
+            width = 1
+            while offset < len(ordered):
+                chunk = ordered[offset:offset + width]
+                offset += width
+                width = min(width * 2, 8)
                 stages = [
                     self._stage_for(doc, form, binary, cwd=scratch)
                     for doc, form, binary, _overlap, _strength in chunk
@@ -2870,41 +2878,60 @@ class LivingAgent:
         # raw text and a line stream; the data, not a declared type, decides.
         return synthesis.Stage(shell, synthesis.LINES, synthesis.TEXT, apply)
 
+    def _named_atoms(
+        self, goal: str, doc: discovery.ToolDoc, sources: Sequence[str]
+    ) -> list[tuple[str, ...]]:
+        """Argument groups of this tool whose *value* the sentence names.
+
+        A pattern the sentence supplies ("the lines that contain error") and a
+        character it names ("comma") are values, not inferences: the request
+        already says what to pass.  A position ("the second column") is not --
+        the value 2 appears nowhere in the sentence -- so it is not included
+        here even though it is perfectly good evidence for ranking.
+        """
+        literal = "\n".join(sources)
+        named_tokens = {word for word in _tokens(goal) if len(word) > 2 and word in literal}
+        named_chars = set(self._named_characters(goal))
+        named: list[tuple[str, ...]] = []
+        for _score, parts, _placeholder in self._argument_atoms(goal, doc, sources):
+            if not parts:
+                continue
+            if parts[-1] in named_tokens or parts[-1] in named_chars:
+                named.append(tuple(parts))
+        return named
+
     def _fully_named_mechanisms(
         self, goal: str, sources: Sequence[str], limit: int = 4
     ) -> list[discovery.ToolDoc]:
-        """Tools that need nothing but the values the sentence already names.
+        """Tools whose arguments the sentence already supplies.
 
-        "Replace every comma with a semicolon" names both the character that is
-        there and the one it becomes.  A command that consumes exactly those two
-        values needs no search at all: the request *is* the invocation.  Every
-        atom counts, so a partially named tool does not qualify -- this shortcut
-        is only for the case where there is genuinely nothing left to infer.
+        "Replace every comma with a semicolon" names both characters; "the
+        lines that contain error" names the pattern.  A command that consumes
+        exactly those values needs no search at all: the request *is* the
+        invocation.  A request that also names an operation -- keep three,
+        count, distinct -- cannot be one command, so the shortcut stands down
+        and leaves it to composition.
         """
-        out: list[tuple[int, str, discovery.ToolDoc]] = []
-        # Only a tool that declares character operands can be *fully* named this
-        # way, and there are usually one or two of those on a machine.  Scanning
-        # every tool's whole option space to discover that would cost more than
-        # the search it is meant to save.
-        if not self._named_characters(goal):
+        if _requested_operations(goal):
             return []
+        literal = "\n".join(sources)
+        if not any(len(word) > 2 and word in literal for word in _tokens(goal)) and not (
+            self._named_characters(goal)
+        ):
+            return []
+        out: list[tuple[int, str, discovery.ToolDoc]] = []
         for doc in self.vocabulary.read():
             if doc.name in discovery.DENY:
                 continue
-            if not any(
-                self._OPERAND_CHARS.match(operand.strip("[]").upper())
-                for operand in doc.operands
-            ):
+            named = self._named_atoms(goal, doc, sources)
+            if not named:
                 continue
-            for strength, form in self._argument_forms(goal, doc, sources):
-                atoms = [row for row in self._argument_atoms(goal, doc, sources) if row[1][0] in form]
-                if len(form) < 2 or len(atoms) < 2:
-                    continue
-                if all(row[0] >= 6 for row in atoms):
-                    out.append((strength, doc.name, doc))
-                    break
+            # Count distinct *values*, not spellings: a tool that offers the
+            # same character under two option names has named one value, and a
+            # translation that names two characters is the stronger candidate.
+            out.append((len({parts[-1] for parts in named}), doc.name, doc))
         out.sort(key=lambda row: (-row[0], row[1]))
-        return [doc for _strength, _name, doc in out[:limit]]
+        return [doc for _count, _name, doc in out[:limit]]
 
     def _find_documented_mechanism(
         self,
@@ -2925,6 +2952,11 @@ class LivingAgent:
         the option bundles its help text documents, bound only to values the
         request or the data supply.
         """
+        # A request that names two operations needs at least three stages: the
+        # mechanism and each named operation.  One command cannot be that, so
+        # searching the single-command space would only spend processes.
+        if len(self._requested_stages(goal)) >= 2:
+            return None
         vocabulary = self.vocabulary
         vocabulary.read()
         sources = [self.computer.read(path) for path, _ in examples]
@@ -2971,6 +3003,18 @@ class LivingAgent:
                     self.computer.revoke(doc.name)
                     attempts.append({"tool": doc.name, "argv": list(form), "verified": False})
                     return None
+            # Exact bytes are necessary, not sufficient: a command that fits the
+            # examples and ignores what the sentence says is the same
+            # coincidence the composed path refuses.  Bare `sort` reproduces two
+            # already-sorted files and answers nothing at all about "by the
+            # third column".
+            stage = [invocation]
+            if self._unexplained_request(goal, stage) or self._sentence_probe_failure(
+                goal, stage, examples
+            ):
+                self.computer.revoke(doc.name)
+                attempts.append({"tool": doc.name, "argv": list(form), "verified": False})
+                return None
             attempts.append({"tool": doc.name, "argv": list(form), "verified": True})
             return {
                 "template": template,
@@ -2995,10 +3039,18 @@ class LivingAgent:
             and any(name == doc.name for name, _ in vocabulary.executables())
         ]
         found: dict[str, Any] | None = None
-        # Phase 1: the tools themselves, with no arguments at all.
+        # Phase 1: the tools themselves, with no arguments at all.  A tool
+        # whose synopsis requires a pattern cannot be run bare: `grep {path}`
+        # makes the file name the pattern and reads nothing, which is not an
+        # experiment worth two processes.
         for doc in shortlist:
             if stopped:
                 break
+            if any(
+                self._OPERAND_PATTERN.match(operand.strip("[]").upper())
+                for operand in doc.operands
+            ):
+                continue
             found = attempt(doc, [])
             if found is not None:
                 break
