@@ -63,7 +63,34 @@ STOPWORDS={
 
 GENERIC_MATCH_TOKENS={
     "generate","image","text","extract","create","save","output","input",
-    "file","read","write","convert","process","data"
+    "file","read","write","convert","process","data",
+    # Repository-self-referential vocabulary. Every goal in this repository
+    # names the project ("PROJECT BRAIN") and cites a scratch destination
+    # under canonical/astra_runtime/tmp/, so these tokens are present in
+    # nearly every goal regardless of what is being asked. Treating them as
+    # distinctive let `terminal.kstar.root.assess.stdlib` -- whose keyword
+    # list includes "brain" and "runtime" -- tie a Code 128 BARCODE goal at
+    # score 8 with `auto.apt.zint`, on the strength of the words "PROJECT
+    # BRAIN" and the directory "astra_runtime" alone, and the goal then died
+    # as GOAL_COMPILATION_AMBIGUOUS. Measured before adding these: no
+    # capability in the live registry loses its last distinctive token, so
+    # this can only remove matches that never had a real basis.
+    "brain","runtime","canonical","astra","tmp","project",
+    # Governance and abstraction vocabulary. `terminal.kstar.root.assess.stdlib`
+    # carries 27 keywords of this kind -- proof, evidence, capability, semantic,
+    # composition, context, reuse, universal, adequacy, discriminator -- which
+    # overlap ordinary technical prose on at least one token almost always. It
+    # was therefore selected for four unrelated goals at base 9554215 (QR
+    # generate, evidence rank, claim bind, knowledge consistency) and is still
+    # selected for two of them, because it binds easily and so survives once
+    # the better-matching candidates prove unbindable. Measured before adding
+    # these: 0 of 363 live capabilities lose their last distinctive token, so
+    # none becomes unmatchable -- a capability that genuinely owns one of these
+    # words still matches through its other tokens.
+    "terminal","kstar","opus","falsify","tournament","adequacy","discriminator",
+    "counterexample","residual","ownership","universal","proof","policy","basis",
+    "scope","complete","capability","reuse","cover","composition","transform",
+    "generator","context","semantic","evidence"
 }
 
 
@@ -313,6 +340,45 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                     continue
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",key)
     return result
+
+
+def _complete_inputs_via_world_binding(goal, root, cid, entry):
+    """Fill placeholders `_bind_inputs` could not ground, or return None.
+
+    `_bind_inputs` binds what the goal SAYS and is authoritative: when it
+    succeeds its answer wins untouched. It fails closed for values the goal
+    merely IMPLIES -- a destination that does not exist yet, or a root one
+    step away from a named file -- which silently disables a capability that
+    was correctly selected.
+
+    `world_binding_v1` closes exactly that gap and reports, per placeholder,
+    whether the value came from the goal, the world, a companion slot, or a
+    demonstrated admission case. This wrapper accepts its answer ONLY when
+    nothing is left missing; a partially justified mapping is still refused,
+    so this widens the bindable set without ever inventing an input.
+    """
+    try:
+        from canonical.runtime import world_binding_v1 as _wb
+    except Exception:
+        return None
+    try:
+        # `synthesize_output_path` and `_ext_for` derive both the deterministic
+        # digest and the artifact extension from the capability identity, and
+        # registry entries do not carry that key. Omitting it would emit a
+        # wrong-extension artifact under an empty slug.
+        wb_entry = dict(entry)
+        wb_entry.setdefault("capability_id", str(cid))
+        completed = _wb.complete_inputs(goal, root, wb_entry, compiler=sys.modules[__name__])
+    except Exception:
+        return None
+    if not isinstance(completed, dict):
+        return None
+    if completed.get("missing"):
+        return None
+    inputs = completed.get("inputs")
+    if not isinstance(inputs, dict):
+        return None
+    return inputs, completed
 
 
 def _execution_surface_constraint_match(goal,entry):
@@ -612,10 +678,22 @@ def _compile_verified_browser_interaction(goal, registry, root):
     }
 
 
-def _compile_single_goal(
+def _rank_bindable_candidates(
     goal, registry, root, context_paths=None, future_clauses=None,
-    proposal_binder=None, effect_providers=None
+    proposal_binder=None, effect_providers=None, allow_world_binding=False
 ):
+    """Score every live capability the goal could select, then try to bind it.
+
+    ``allow_world_binding`` is deliberately OFF on the first pass. A capability
+    bound from the goal's own words is strictly more grounded than one whose
+    slots had to be inferred from the world, and the two must never compete on
+    raw lexical score: admitting inferred candidates into the same ranking let a
+    barcode DECODER outrank the barcode GENERATOR the goal actually asked for,
+    because inference makes almost anything bindable and so destroys the very
+    disambiguation power that bindability provides.
+
+    The inferred pass therefore runs only when nothing grounded survived.
+    """
     ranked=[]
     for cid,entry in sorted((registry or {}).items()):
         if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
@@ -625,6 +703,7 @@ def _compile_single_goal(
         score,specificity,evidence=_score(goal,cid,entry)
         if score<=0:
             continue
+        binding_provenance=None
         try:
             if _uses_effect_result_bindings(entry):
                 if proposal_binder is None:
@@ -645,9 +724,45 @@ def _compile_single_goal(
                     future_clauses=future_clauses
                 )
         except Exception:
-            continue
-        ranked.append((score,specificity,cid,entry,inputs,evidence))
+            inputs=None
+        if inputs is None:
+            if not allow_world_binding or _uses_effect_result_bindings(entry):
+                continue
+            # BIND FIRST, THEN RANK. Ambiguity is frequently an artefact of
+            # ranking unbound candidates: several capabilities match the words,
+            # but only some can actually be called with what the world offers.
+            completed=_complete_inputs_via_world_binding(goal,root,cid,entry)
+            if completed is None:
+                continue
+            inputs,binding_provenance=completed
+        ranked.append((score,specificity,cid,entry,inputs,evidence,binding_provenance))
     ranked.sort(key=lambda x:(-x[0],-x[1],x[2]))
+    return ranked
+
+
+def _compile_single_goal(
+    goal, registry, root, context_paths=None, future_clauses=None,
+    proposal_binder=None, effect_providers=None
+):
+    ranked=_rank_bindable_candidates(
+        goal,registry,root,
+        context_paths=context_paths,
+        future_clauses=future_clauses,
+        proposal_binder=proposal_binder,
+        effect_providers=effect_providers,
+        allow_world_binding=False,
+    )
+    binding_source="GOAL_STATEMENT"
+    if not ranked:
+        ranked=_rank_bindable_candidates(
+            goal,registry,root,
+            context_paths=context_paths,
+            future_clauses=future_clauses,
+            proposal_binder=proposal_binder,
+            effect_providers=effect_providers,
+            allow_world_binding=True,
+        )
+        binding_source="GOAL_STATEMENT+WORLD_BINDING"
     if not ranked:
         raise GoalCompilationFailure("GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH")
     best=ranked[0]
@@ -656,19 +771,30 @@ def _compile_single_goal(
             "GOAL_COMPILATION_AMBIGUOUS",
             json.dumps({"candidates":[best[2],ranked[1][2]],"score":best[0]},sort_keys=True)
         )
-    score,specificity,cid,entry,inputs,evidence=best
-    return {
+    score,specificity,cid,entry,inputs,evidence,binding_provenance=best
+    result={
         "schema":"PROJECT_BRAIN_COMPILED_CAPABILITY_PROBLEM_V1",
         "compiler_mode":"DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
         "selected_capability":cid,
         "score":score,
         "match_evidence":evidence,
         "inputs":inputs,
+        "binding_source":binding_source,
         "initial_facts":list(entry.get("requires") or []),
         "target_effects":list(entry.get("provides") or []),
         "capabilities":[],
         "finish_summary":"PLAIN_GOAL_COMPLETE",
     }
+    if binding_provenance:
+        # Inference is shown, never buried: which slots were filled, and from
+        # where, so a reviewer can see exactly what was not stated.
+        result["binding_provenance"]={
+            "filled_by_world_binding":binding_provenance.get("filled_by_world_binding") or [],
+            "filled_from_world_not_goal":binding_provenance.get("filled_from_world_not_goal") or {},
+            "filled_from_companion_not_goal":binding_provenance.get("filled_from_companion_not_goal") or {},
+            "filled_from_demonstrated_case":binding_provenance.get("filled_from_demonstrated_case") or {},
+        }
+    return result
 
 
 def _find_status_collection(data, wanted, prefix=()):
@@ -4663,6 +4789,15 @@ def _compile_compound_goal(goal, clauses, registry, root):
                     json.dumps({"index":index,"subgoal":clause,"rejected_capability":cid},sort_keys=True)
                 )
         runtime_inputs=part["inputs"]
+        if not isinstance(runtime_inputs,dict):
+            # A compiled part with no input mapping is a compiler defect, not a
+            # missing value. Fail closed with a named reason: dereferencing it
+            # raised AttributeError out of the planner, which is an unhandled
+            # crash rather than a refusal.
+            raise GoalCompilationFailure(
+                "GOAL_COMPILED_PART_INPUTS_MISSING",
+                json.dumps({"index":index,"subgoal":clause,"capability":cid},sort_keys=True)
+            )
         if _uses_effect_result_bindings(entry):
             consumer=_planner_capability(planner,cid,entry)
             try:
