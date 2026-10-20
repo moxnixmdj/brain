@@ -1,0 +1,463 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "date": "2026-10-20",
+ "action_id": "UNIFIED_BRAIN_MODEL_V1_20261020_V1",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "8b742ea7edbdbd5cd827cfece041e8281ced434c",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "action_kind": "CAPABILITY_INHERITANCE",
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "causal_blocker": "NO_SINGLE_ADDRESSABLE_ARTIFACT_UNIFIES_THE_LIVE_OWNED_SURFACE__363_CAPABILITIES_26_ENGINE_MODES_18_SKILLS_AND_168_LAW_AND_RESEARCH_DOCUMENTS_REMAIN_REACHABLE_ONLY_THROUGH_SEPARATE_REGISTRIES_AND_MODULES",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::NO_SINGLE_ADDRESSABLE_ARTIFACT_UNIFIES_THE_LIVE_OWNED_SURFACE__363_CAPABILITIES_26_ENGINE_MODES_18_SKILLS_AND_168_LAW_AND_RESEARCH_DOCUMENTS_REMAIN_REACHABLE_ONLY_THROUGH_SEPARATE_REGISTRIES_AND_MODULES",
+ "highest_leverage_now": true,
+ "selected_route": "COMPILE_ONE_CONTENT_ADDRESSED_UNIFIED_MODEL_ARTIFACT_FROM_THE_LIVE_VERIFIED_REGISTRY_FABRIC_MODE_TABLES_INTERNALIZED_SKILLS_AND_LAW_RESEARCH_INDEX__EXECUTE_CAPABILITIES_THROUGH_THE_EXISTING_VERIFIED_ADAPTER__RETRIEVE_KNOWLEDGE_EXTERNALLY_JIT",
+ "prior_work_reused": [
+  "canonical/runtime/unified_cognitive_fabric_v1.py",
+  "canonical/runtime/live_integrated_brain_v1.py",
+  "canonical/runtime/verified_bound_capability_execution_adapter_v1.py",
+  "canonical/runtime/live_capability_invoker_v1.py",
+  "canonical/runtime/capability_planner.py",
+  "canonical/runtime/bound_capability_execution_verifier_v1.py"
+ ],
+ "falsification_condition": "ANY_LIVE_CAPABILITY_ABSENT_FROM_THE_MODEL__OR_THE_MODEL_EXECUTES_A_CAPABILITY_THE_LIVE_REGISTRY_REJECTS__OR_A_TAMPERED_ARTIFACT_LOADS__OR_AN_OUT_OF_DOMAIN_GOAL_ROUTES_CONFIDENTLY__OR_A_SUPERSEDED_LAW_OUTRANKS_ITS_CURRENT_SIBLING__OR_ANY_MODEL_CLIENT_IMPORT_APPEARS_IN_THE_PRODUCER_PATH__OR_ANY_AUTHORITY_OR_CREDIT_FIELD_IS_NON_ZERO",
+ "expected_parent_change": "EVERY_LIVE_OWNED_CAPABILITY_BECOMES_ADDRESSABLE_AND_EXECUTABLE_THROUGH_ONE_DIGEST_VERIFIED_ARTIFACT_WITH_A_SINGLE_ENTRY_POINT__ZERO_CAPABILITY_AND_TERMINAL_CREDIT",
+ "expected_parent_frontier_change": "EVERY_LIVE_OWNED_CAPABILITY_BECOMES_ADDRESSABLE_AND_EXECUTABLE_THROUGH_ONE_DIGEST_VERIFIED_ARTIFACT_WITH_A_SINGLE_ENTRY_POINT__ZERO_CAPABILITY_AND_TERMINAL_CREDIT",
+ "stop_condition": "MODEL_DIGEST_RECOMPUTES_AND_RECOMPILES_BYTE_IDENTICALLY__363_OF_363_LIVE_CAPABILITIES_MODELLED__33_OF_33_FRESH_INSTANCE_CHECKS_PASS__OUT_OF_DOMAIN_GOALS_FAIL_CLOSED__ZERO_MODEL_CLIENT_IMPORTS_AND_ZERO_SPEND__21_REGRESSION_TESTS_PASS__REFEREE_STATIC_AND_DIFF_RULES_ZERO_VIOLATIONS",
+ "incremental_spend_usd": 0,
+ "capability_credit_delta": 0,
+ "terminal_credit_delta": 0,
+ "benchmark_or_family_rank_authority": false,
+ "explicit_user_authorization": "Owner instruction in this session 2026-10-20: unify every useful capability and all research into one real model; owner selected the compiled executable model, the full capability plus law/research knowledge index, and delivery as a pull request.",
+ "load_bearing_primary": {
+  "open_obligation_ids": [],
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "scope_complete_discharge": false,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/4",
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": "1",
+  "interpretation": "DISCHARGES_NOTHING__DOES_NOT_MOVE_ANY_BENCHMARK__MAKES_THE_ALREADY_OWNED_SURFACE_ADDRESSABLE_AND_EXECUTABLE_THROUGH_ONE_ARTIFACT_SO_EVERY_OPEN_OBLIGATION_CAN_BE_MEASURED_THROUGH_ONE_ENTRY_POINT__UNLOCK_LCB_1_4_BECAUSE_INTEGRATION_IS_REAL_AND_MEASURED_IN_SANDBOX_BUT_EACH_OBLIGATION_STILL_NEEDS_ITS_OWN_INDEPENDENT_RUN"
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "mode": "ACTIVE_INTERFACE",
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "proof_state_reachability": "NOT_APPLICABLE__CAPABILITY_INTEGRATION_WITH_SANDBOX_MEASUREMENT_ONLY",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "proposal_id": "UNIFIED_BRAIN_MODEL_V1_20261020_V1",
+   "falsifier_id": "FRESH_INSTANCE_VERIFIER_AND_NEGATIVE_CONTROLS",
+   "decisive_question": "CAN_ONE_DIGEST_VERIFIED_ARTIFACT_ADDRESS_AND_EXECUTE_THE_ENTIRE_LIVE_OWNED_SURFACE_WITHOUT_ADDING_A_MODEL_OR_WIDENING_ANY_CLAIM",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "33_OF_33_FRESH_INSTANCE_CHECKS_PASS_ACROSS_FIVE_SEEDS__TAMPERING_AND_UNKNOWN_GOALS_FAIL_CLOSED__NO_MODEL_CLIENT_IMPORT_OR_PROVIDER_ROUTE_FOUND"
+  }
+ },
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "8b742ea7edbdbd5cd827cfece041e8281ced434c",
+  "real_outcome": "ONE_CONTENT_ADDRESSED_MODEL_ARTIFACT_THAT_ADDRESSES_AND_EXECUTES_THE_WHOLE_LIVE_OWNED_SURFACE",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "obs_goal": {
+   "real_outcome": "EVERY_USEFUL_THING_BRAIN_OWNS_REACHABLE_THROUGH_ONE_LOADABLE_OBJECT",
+   "proxy_goals_deleted": [
+    "A_NEW_ABSTRACTION_LAYER_THAT_ONLY_RENAMES_THE_EXISTING_ROUTER",
+    "A_TRAINED_MODEL_CLAIM_WITHOUT_WEIGHTS_CORPUS_OR_COMPUTE",
+    "COPYING_KNOWLEDGE_TEXT_INTO_THE_ARTIFACT_AND_CALLING_IT_CAPABILITY"
+   ],
+   "surviving_necessity": "A_SINGLE_DIGEST_VERIFIED_PROJECTION_WITH_ONE_ENTRY_POINT_OVER_THE_LIVE_REGISTRY"
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "unified_cognitive_fabric_v1",
+    "live_capability_invoker_v1",
+    "live_capability_ownership_v1",
+    "live_integrated_brain_v1",
+    "goal_compiler_and_capability_planner"
+   ],
+   "external_existing_routes_checked": [
+    "github_search_capability_registry_agent_model__NO_DOMINATING_UNIFIED_ARTIFACT",
+    "pypi_pypdf_openpyxl_sympy_and_npm_msgpack_reachable__USED_ONLY_AS_DECLARED_DEPENDENCIES",
+    "official_cpython_repository__PYTHON_STDLIB_AUTHORITY"
+   ],
+   "capability_work_deleted": [
+    "A_SECOND_EXECUTION_PATH_THAT_BYPASSES_THE_VERIFIED_ADAPTER",
+    "A_PARALLEL_CAPABILITY_REGISTRY_THAT_COULD_DRIFT_FROM_THE_LIVE_ONE"
+   ],
+   "surviving_gap": "NO_SINGLE_ARTIFACT_CARRIED_THE_OWNED_SURFACE_OR_ITS_LAW_RESEARCH_INDEX"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_SURFACE_IS_COMPLETE_BUT_DISTRIBUTED_ACROSS_REGISTRIES",
+   "delete_bypass_substitute_options": [
+    "DELETE_THE_IDEA_OF_A_NEW_MODEL_AND_KEEP_DOCUMENTING_THE_REGISTRIES__REJECTED_OWNER_ASKED_FOR_ONE_MODEL",
+    "BYPASS_BY_POINTING_AT_THE_FABRIC_ROUTER__REJECTED_IT_HAS_NO_ARTIFACT_NO_DIGEST_AND_NO_KNOWLEDGE_INDEX",
+    "SUBSTITUTE_A_TRAINED_NETWORK__REJECTED_NO_WEIGHTS_CORPUS_COMPUTE_OR_LEGITIMATE_CLAIM"
+   ],
+   "surviving_causal_blocker": "COMPILATION_AND_ADDRESSABILITY_NOT_A_NEW_CAPABILITY"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "COMPILED_CONTENT_ADDRESSED_ARTIFACT_WITH_ONE_ENTRY_POINT",
+    "FABRIC_ROUTER_ALONE__NON_DOMINATING",
+    "SEPARATE_REGISTRIES_AND_DOCUMENTATION__DISQUALIFIED",
+    "TRAIN_A_NEURAL_MODEL_FROM_SCRATCH__DISQUALIFIED"
+   ],
+   "losing_routes_reason": "ONLY_THE_COMPILED_ARTIFACT_IS_ONE_OBJECT_ONE_DIGEST_ONE_ENTRY_POINT_AND_STILL_FAILS_CLOSED",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "FRESH_GENERATED_INSTANCES_WITH_SEPARATELY_WRITTEN_ORACLES__GNU_TAR_AST_SQLITE3_AND_UNITTEST__PLUS_NEGATIVE_CONTROLS_AND_A_STATIC_MODEL_DEPENDENCE_SCAN"
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "NOTHING_DELETED__THE_MODEL_IS_A_PROJECTION_AND_THE_LIVE_REGISTRIES_REMAIN_AUTHORITY"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "CAPABILITY_LOOKUP_AND_ROUTING_ACROSS_THE_LIVE_REGISTRY",
+    "LAW_AND_RESEARCH_RETRIEVAL_WITH_VERSION_AUTHORITY"
+   ],
+   "fresh_reuse_plan": "RECOMPILE_AFTER_ANY_REGISTRY_LAW_OR_FABRIC_CHANGE__THE_DIGEST_CHANGES_AND_THE_VERIFIER_RERUNS"
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "RE_DERIVING_THE_SURFACE_BY_HAND_FOR_EACH_TASK",
+    "SEARCHING_THE_REPOSITORY_TO_FIND_WHICH_MODULE_OWNS_A_CAPABILITY"
+   ],
+   "search_stop_decision": "STOP_WHEN_ALL_363_LIVE_CAPABILITIES_AND_26_ENGINES_ARE_ADDRESSABLE_AND_THE_FRESH_CHECKS_PASS",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "COMPILE_ONE_CONTENT_ADDRESSED_UNIFIED_MODEL_ARTIFACT_FROM_THE_LIVE_VERIFIED_REGISTRY_FABRIC_MODE_TABLES_INTERNALIZED_SKILLS_AND_LAW_RESEARCH_INDEX__EXECUTE_CAPABILITIES_THROUGH_THE_EXISTING_VERIFIED_ADAPTER__RETRIEVE_KNOWLEDGE_EXTERNALLY_JIT",
+   "KEEP_THE_FABRIC_ROUTER_AND_DOCUMENT_ITS_SURFACE__REJECTED_NO_SINGLE_ARTIFACT",
+   "TRAIN_A_SINGLE_NEURAL_MODEL_FROM_THE_REPOSITORY__REJECTED_NO_WEIGHTS_CORPUS_OR_COMPUTE_AND_IT_WOULD_CLAIM_UNVERIFIED_CAPABILITY",
+   "EMBED_ALL_DOCUMENT_TEXT_INSIDE_THE_ARTIFACT__REJECTED_KNOWLEDGE_MUST_STAY_EXTERNAL_AND_JIT"
+  ],
+  "deleted_or_bypassed_paths": [
+   "A_PARALLEL_REGISTRY",
+   "A_SECOND_EXECUTION_PATH",
+   "EMBEDDED_KNOWLEDGE_COPIES"
+  ],
+  "selected_surviving_route": "COMPILE_ONE_CONTENT_ADDRESSED_UNIFIED_MODEL_ARTIFACT_FROM_THE_LIVE_VERIFIED_REGISTRY_FABRIC_MODE_TABLES_INTERNALIZED_SKILLS_AND_LAW_RESEARCH_INDEX__EXECUTE_CAPABILITIES_THROUGH_THE_EXISTING_VERIFIED_ADAPTER__RETRIEVE_KNOWLEDGE_EXTERNALLY_JIT",
+  "why_selected_route_is_fastest_sufficient": "THE_SURFACE_ALREADY_EXISTS_AND_IS_VERIFIED__COMPILING_IT_REUSES_EVERY_ROUTE_AND_NEEDS_NO_NEW_CAPABILITY__NO_MODEL__AND_NO_SPEND",
+  "expected_parent_level_state_change": "EVERY_LIVE_OWNED_CAPABILITY_BECOMES_ADDRESSABLE_AND_EXECUTABLE_THROUGH_ONE_DIGEST_VERIFIED_ARTIFACT_WITH_A_SINGLE_ENTRY_POINT__ZERO_CAPABILITY_AND_TERMINAL_CREDIT",
+  "stop_condition": "MODEL_DIGEST_RECOMPUTES_AND_RECOMPILES_BYTE_IDENTICALLY__363_OF_363_LIVE_CAPABILITIES_MODELLED__33_OF_33_FRESH_INSTANCE_CHECKS_PASS__OUT_OF_DOMAIN_GOALS_FAIL_CLOSED__ZERO_MODEL_CLIENT_IMPORTS_AND_ZERO_SPEND__21_REGRESSION_TESTS_PASS__REFEREE_STATIC_AND_DIFF_RULES_ZERO_VIOLATIONS",
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-10-20T15:16:35Z",
+   "max_age_hours": 24,
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/unified_cognitive_fabric_v1.py",
+     "canonical/runtime/live_integrated_brain_v1.py",
+     "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+     "canonical/capabilities/frontier/GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER.json"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://github.com/python/cpython__OFFICIAL_REPOSITORY_REACHED_2026-10-20_PUSHED_2026-10-20T13:39:18Z"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://pypi.org/pypi/pypdf/json__HTTP_200",
+     "https://pypi.org/pypi/openpyxl/json__HTTP_200",
+     "https://pypi.org/pypi/sympy/json__HTTP_200",
+     "https://registry.npmjs.org/msgpack__HTTP_200"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://api.github.com/search/repositories?q=capability+registry+agent+model__TOP_5_HITS_UNRELATED_SMALL_REPOS__NO_DOMINATING_UNIFIED_ARTIFACT"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "unified model of deterministic agent capabilities"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "single artifact capability registry agent"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "content addressed model manifest execution router"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 unified capability model release"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "negative_search_summary": "GITHUB_SEARCH_FOUND_NO_EXISTING_UNIFIED_CAPABILITY_ARTIFACT_THAT_REUSES_THIS_REPOSITORYS_VERIFIED_ADAPTER__ALL_REACHABLE_PACKAGE_REGISTRIES_ARE_DECLARED_DEPENDENCIES_NOT_ROUTES",
+   "incumbent_route": "UNIFIED_COGNITIVE_FABRIC_V1_ROUTER_PLUS_SEPARATE_REGISTRIES_AND_MODULES",
+   "selected_route": "COMPILE_ONE_CONTENT_ADDRESSED_UNIFIED_MODEL_ARTIFACT_FROM_THE_LIVE_VERIFIED_REGISTRY_FABRIC_MODE_TABLES_INTERNALIZED_SKILLS_AND_LAW_RESEARCH_INDEX__EXECUTE_CAPABILITIES_THROUGH_THE_EXISTING_VERIFIED_ADAPTER__RETRIEVE_KNOWLEDGE_EXTERNALLY_JIT",
+   "challenger_routes": [
+    {
+     "route": "COMPILED_CONTENT_ADDRESSED_UNIFIED_MODEL_ARTIFACT",
+     "evidence": [
+      "canonical/runtime/compile_brain_unified_model_v1.py",
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+      "canonical/verification/BRAIN_UNIFIED_MODEL_V1_VERIFICATION_20261020.json"
+     ],
+     "qualification_evidence": [
+      "33_OF_33_FRESH_INSTANCE_CHECKS_PASS_ON_FIVE_SEEDS",
+      "DIGEST_RECOMPUTES_AND_RECOMPILES_BYTE_IDENTICALLY"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "comparison": {
+      "CORRECTNESS": "EXECUTION_DELEGATED_TO_THE_VERIFIED_ADAPTER__TAMPERING_AND_UNKNOWN_GOALS_FAIL_CLOSED",
+      "CAPABILITY_STRENGTH": "363_OF_363_LIVE_CAPABILITIES_AND_26_OF_26_ENGINES_ADDRESSABLE",
+      "WALL_CLOCK": "COMPILE_ABOUT_1S__LOAD_ABOUT_0_2S__ROUTE_MILLISECONDS",
+      "INCREMENTAL_COST": "ZERO_MONETARY_SPEND__LOCAL_STDLIB_ONLY",
+      "RELIABILITY": "DETERMINISTIC_BYTES__DIGEST_VERIFIED_LOAD__21_REGRESSION_TESTS",
+      "VERIFIABILITY": "EVERY_SOURCE_AND_EVIDENCE_HASH_PINNED__FRESH_INSTANCE_VERIFIER"
+     }
+    },
+    {
+     "route": "UNIFIED_COGNITIVE_FABRIC_ROUTER_ALONE",
+     "evidence": [
+      "canonical/runtime/unified_cognitive_fabric_v1.py"
+     ],
+     "qualification_evidence": [
+      "ROUTES_MODES_BUT_HAS_NO_SINGLE_ARTIFACT_OR_DIGEST"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "ENGINE_CONTRACTS_UNCHANGED_AND_REUSED",
+      "CAPABILITY_STRENGTH": "25_MODES__NO_CAPABILITY_INDEX__NO_KNOWLEDGE_INDEX",
+      "WALL_CLOCK": "FAST_BUT_REQUIRES_CALLER_TO_KNOW_THE_MODE",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "MATURE_BUT_NOT_A_SINGLE_ADDRESSABLE_OBJECT",
+      "VERIFIABILITY": "NO_ARTIFACT_DIGEST_TO_REPRODUCE"
+     }
+    },
+    {
+     "route": "SEPARATE_REGISTRIES_WITH_DOCUMENTATION_ONLY",
+     "evidence": [
+      "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+     ],
+     "qualification_evidence": [
+      "NO_SINGLE_ENTRY_POINT__CALLER_MUST_KNOW_EVERY_MODULE"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "UNCHANGED",
+      "CAPABILITY_STRENGTH": "UNCHANGED_BUT_UNREACHABLE",
+      "WALL_CLOCK": "HUMAN_TIME_PER_TASK",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "DEPENDS_ON_OPERATOR_MEMORY",
+      "VERIFIABILITY": "NO_SINGLE_SURFACE_TO_MEASURE"
+     }
+    },
+    {
+     "route": "TRAIN_A_SINGLE_NEURAL_MODEL_FROM_SCRATCH",
+     "evidence": [
+      "NO_WEIGHTS_CORPUS_OR_COMPUTE_IN_THE_REPOSITORY"
+     ],
+     "qualification_evidence": [
+      "WOULD_PRODUCE_UNVERIFIED_CAPABILITY_CLAIMS_AND_VIOLATE_ZERO_SPEND"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "UNVERIFIABLE_WITHOUT_A_HELD_OUT_CORPUS",
+      "CAPABILITY_STRENGTH": "WOULD_NOT_REACH_THE_OWNED_DETERMINISTIC_SURFACE",
+      "WALL_CLOCK": "WEEKS_TO_MONTHS",
+      "INCREMENTAL_COST": "NONZERO_COMPUTE_SPEND",
+      "RELIABILITY": "UNKNOWN",
+      "VERIFIABILITY": "NO_RECEIPTS"
+     }
+    }
+   ],
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-10-20T15:16:35Z",
+    "max_age_hours": 2,
+    "selected_route": "COMPILE_ONE_CONTENT_ADDRESSED_UNIFIED_MODEL_ARTIFACT_FROM_THE_LIVE_VERIFIED_REGISTRY_FABRIC_MODE_TABLES_INTERNALIZED_SKILLS_AND_LAW_RESEARCH_INDEX__EXECUTE_CAPABILITIES_THROUGH_THE_EXISTING_VERIFIED_ADAPTER__RETRIEVE_KNOWLEDGE_EXTERNALLY_JIT",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "python3_interpreter",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "python3 --version__Python_3.11.2__DIRECT_PROBE_2026-10-20"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "repository_tree",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "1685263_BYTE_ARTIFACT_WRITTEN_AND_RELOADED",
+       "SOURCE_AND_EVIDENCE_HASHES_VERIFIED"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "BRAIN_INHERITED"
+      ]
+     },
+     {
+      "dependency": "gnu_tar",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "tar_tzf_on_fresh_bundle_succeeded__DIRECT_PROBE_2026-10-20"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "sqlite3_module",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "sqlite3_3.40.1_imported_and_queried_fresh_database__DIRECT_PROBE_2026-10-20"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+  "progress_evidence_paths": [
+   "canonical/verification/BRAIN_UNIFIED_MODEL_V1_VERIFICATION_20261020.json",
+   "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+   "canonical/runtime/brain_unified_model_v1.py"
+  ],
+  "route_class": "INTEGRATE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ]
+ }
+}

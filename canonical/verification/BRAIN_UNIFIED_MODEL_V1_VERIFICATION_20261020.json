@@ -1,0 +1,543 @@
+{
+ "artifact_bytes": 1685263,
+ "artifact_path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+ "artifact_sha256": "77211a4fb0e94a540f36249b8964250c291dade6e916a8d70d97c84323eba76b",
+ "authority": "NONE",
+ "capability_credit_delta": 0,
+ "categories": [
+  {
+   "cases": 6,
+   "failed": 0,
+   "failed_cases": [],
+   "name": "ARTIFACT_INTEGRITY",
+   "pass": true,
+   "passed": 6,
+   "rows": [
+    {
+     "detail": {
+      "declared": "4d7e627ea91d88b042cc984865cc777c99f6e40bc27a4d5c7a161c2f70c3b6a9"
+     },
+     "name": "digest_recomputes",
+     "oracle": "SHA256_RECOMPUTATION",
+     "pass": true
+    },
+    {
+     "detail": {
+      "recompiled_digest": "4d7e627ea91d88b042cc984865cc777c99f6e40bc27a4d5c7a161c2f70c3b6a9"
+     },
+     "name": "recompilation_is_byte_identical",
+     "oracle": "DETERMINISTIC_RECOMPILE",
+     "pass": true
+    },
+    {
+     "detail": {
+      "count": 0,
+      "failures": []
+     },
+     "name": "capability_source_hashes_match_tree",
+     "oracle": "SHA256_AGAINST_LIVE_FILES",
+     "pass": true
+    },
+    {
+     "detail": {
+      "count": 0,
+      "failures": []
+     },
+     "name": "capability_evidence_hashes_match_tree",
+     "oracle": "SHA256_AGAINST_LIVE_FILES",
+     "pass": true
+    },
+    {
+     "detail": {
+      "actual": {
+       "capabilities": 363,
+       "engines": 26,
+       "knowledge_documents": 168,
+       "skills": 18
+      },
+      "declared": {
+       "capabilities": 363,
+       "engines": 26,
+       "knowledge_documents": 168,
+       "skills": 18
+      }
+     },
+     "name": "declared_counts_match_content",
+     "oracle": "SELF_CONSISTENCY",
+     "pass": true
+    },
+    {
+     "detail": {
+      "bytes": 1685263
+     },
+     "name": "artifact_bytes_are_the_model",
+     "oracle": "FILE_STAT",
+     "pass": true
+    }
+   ]
+  },
+  {
+   "cases": 3,
+   "failed": 0,
+   "failed_cases": [],
+   "name": "LIVE_REGISTRY_COVERAGE",
+   "pass": true,
+   "passed": 3,
+   "rows": [
+    {
+     "detail": {
+      "missing_count": 0,
+      "missing_sample": []
+     },
+     "name": "every_live_capability_is_in_the_model",
+     "oracle": "LIVE_LOADER_SET_COMPARISON",
+     "pass": true
+    },
+    {
+     "detail": {
+      "extra_count": 0,
+      "extra_sample": []
+     },
+     "name": "model_invents_no_capability",
+     "oracle": "LIVE_LOADER_SET_COMPARISON",
+     "pass": true
+    },
+    {
+     "detail": {
+      "live": 363,
+      "modelled": 363
+     },
+     "name": "no_capability_was_silently_dropped",
+     "oracle": "CARDINALITY_COMPARISON",
+     "pass": true
+    }
+   ]
+  },
+  {
+   "cases": 3,
+   "failed": 0,
+   "failed_cases": [],
+   "name": "ROUTING_FRESH_GOALS",
+   "pass": true,
+   "passed": 3,
+   "rows": [
+    {
+     "detail": {
+      "attempts": 60,
+      "confident": 60,
+      "examples": [
+       {
+        "confident": true,
+        "goal": "call extract text pypdf axis using",
+        "target": "pdf.extract.text.pypdf",
+        "top": [
+         "pdf.extract.text.pypdf",
+         "image.extract.ocr.tesseract",
+         "python.fault.provenance.interprocedural.value.v1"
+        ]
+       },
+       {
+        "confident": true,
+        "goal": "auto compare legacy15 auto composition now",
+        "target": "canonical/runtime/livebench_legacy15_composition_partition_v1.py.auto.v1",
+        "top": [
+         "evidence.claim_relation.generic_units.stdlib",
+         "evidence.claim_spec.bind.explicit_comparison.stdlib",
+         "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py.auto.v1"
+        ]
+       },
+       {
+        "confident": true,
+        "goal": "auto sec_extracted_xbrl_instance_source_native_verify_v1 carefully extracted scheduling verifier",
+        "target": "canonical/runtime/sec_extracted_xbrl_instance_source_native_verify_v1.py.auto.v1",
+        "top": [
+         "canonical/runtime/sec_extracted_xbrl_instance_source_native_verify_v1.py.auto.v1",
+         "canonical/runtime/verify_terminal_scheduling_v11_candidate_v1.py.auto.v1",
+         "canonical/runtime/verify_terminal_scheduling_v12_candidate_v1.py.auto.v1"
+        ]
+       },
+       {
+        "confident": true,
+        "goal": "legacy15 storage exact joint carefully witness",
+        "target": "canonical/runtime/livebench_legacy15_joint_witness_v1.py.auto.v1",
+        "top": [
+         "canonical/runtime/livebench_legacy15_joint_witness_v1.py.auto.v1",
+         "canonical/runtime/h100_unichart_storage_feasibility_v1.py.auto.v1",
+         "canonical/runtime/livebench_legacy15_joint_candidate_generator_v1.py.auto.v1"
+        ]
+       },
+       {
+        "confident": true,
+        "goal": "source please python measurement acceptance repository",
+        "target": "python.repository.acceptance.measure.v1",
+        "top": [
+         "python.repository.acceptance.measure.v1",
+         "python.task.acceptance.measured.objective.v1",
+         "python.patch.search.test_guided.ast.v1"
+        ]
+       },
+       {
+        "confident": true,
+        "goal": "verify verify imports professional_r12_cc_r3_truth_reconciliation_v3_verify_v1 reconciliation check",
+        "target": "canonical/runtime/professional_r12_cc_r3_truth_reconciliation_v3_verify_v1.py.auto.v1",
+        "top": [
+         "canonical/runtime/professional_r12_cc_r3_truth_reconciliation_v3_verify_v1.py.auto.v1",
+         "python.source.audit.ast",
+         "python.contract.check.crosshair.v1"
+        ]
+       },
+       {
+        "confident": true,
+        "goal": "root3 basis frontier please verifier continuity_root3_fixed_entry_verifier_v1",
+        "target": "canonical/runtime/continuity_root3_fixed_entry_verifier_v1.py.auto.v1",
+        "top": [
+         "canonical/runtime/continuity_root3_fixed_entry_verifier_v1.py.auto.v1",
+         "canonical/runtime/professional_quality_r2_candidate_branch_basis_v2.py.auto.v1",
+         "terminal.kstar.root.assess.stdlib"
+        ]
+       },
+       {
+        "confident": true,
+        "goal": "inline metadata influence handle tool xbrl",
+        "target": "canonical/runtime/sec_inline_xbrl_fasb_release_metadata_verify_v1.py.auto.v1",
+        "top": [
+         "canonical/runtime/sec_inline_xbrl_fasb_release_metadata_verify_v1.py.auto.v1",
+         "canonical/runtime/p3_policy_influence_relevance_cell_v1.py.auto.v1",
+         "canonical/runtime/sec_extracted_xbrl_instance_source_native_verify_v1.py.auto.v1"
+        ]
+       }
+      ],
+      "top1": 48,
+      "top3": 55,
+      "top3_rate": 0.9167
+     },
+     "name": "fresh_goals_rank_target_in_top3",
+     "oracle": "SYNTHETIC_GENERATOR_ORACLE",
+     "pass": true
+    },
+    {
+     "detail": {
+      "top1_rate": 0.8
+     },
+     "name": "fresh_goals_are_not_answered_at_random",
+     "oracle": "SYNTHETIC_GENERATOR_ORACLE",
+     "pass": true
+    },
+    {
+     "detail": {
+      "false_positives": []
+     },
+     "name": "out_of_domain_goals_fail_closed",
+     "oracle": "HAND_AUTHORED_NEGATIVE_SET",
+     "pass": true
+    }
+   ]
+  },
+  {
+   "cases": 2,
+   "failed": 0,
+   "failed_cases": [],
+   "name": "KNOWLEDGE_RECALL",
+   "pass": true,
+   "passed": 2,
+   "rows": [
+    {
+     "detail": {
+      "attempts": 40,
+      "hit_at_1": 37,
+      "hit_at_3": 39,
+      "measured": 77,
+      "misses": [
+       {
+        "expected": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V2.md",
+        "got": [
+         "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+         "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+         "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V7.md"
+        ],
+        "query": "accounting operative capsule"
+       }
+      ]
+     },
+     "name": "held_out_term_queries_hit_the_source_document",
+     "oracle": "TERM_GENERATOR_ORACLE",
+     "pass": true
+    },
+    {
+     "detail": {
+      "families_checked": 8,
+      "violations": []
+     },
+     "name": "current_law_outranks_its_own_history",
+     "oracle": "VERSION_RULE_ORACLE",
+     "pass": true
+    }
+   ]
+  },
+  {
+   "cases": 6,
+   "failed": 0,
+   "failed_cases": [],
+   "name": "EXECUTION_FRESH",
+   "pass": true,
+   "passed": 6,
+   "rows": [
+    {
+     "detail": {
+      "expected": {
+       "class_count": 3,
+       "distinct_imported_module_count": 3,
+       "file_count": 1,
+       "function_count": 4
+      },
+      "observed": {
+       "class_count": 3,
+       "distinct_imported_module_count": 3,
+       "file_count": 1,
+       "function_count": 4
+      }
+     },
+     "name": "python_source_audit_matches_independent_ast_oracle",
+     "oracle": "INDEPENDENT",
+     "pass": true
+    },
+    {
+     "detail": {
+      "extracted": true,
+      "listing": [
+       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_2l71g47b/manifest.json",
+       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_2l71g47b/payload/alpha.txt",
+       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_2l71g47b/payload/beta.txt"
+      ]
+     },
+     "name": "tar_creation_matches_gnu_tar_oracle",
+     "oracle": "INDEPENDENT",
+     "pass": true
+    },
+    {
+     "detail": {
+      "status": "PASS__CAPABILITY_EXECUTED_AND_TRACE_VERIFIED",
+      "verified": true
+     },
+     "name": "tar_verification_reports_manifest_members",
+     "oracle": "REFERENCE",
+     "pass": true
+    },
+    {
+     "detail": {
+      "oracle_columns": [
+       "name",
+       "v"
+      ],
+      "oracle_rows": 3,
+      "reported_rows": 3
+     },
+     "name": "sqlite_creation_matches_sqlite3_oracle",
+     "oracle": "INDEPENDENT",
+     "pass": true
+    },
+    {
+     "detail": {
+      "expected_tests": 3,
+      "reported": {
+       "passed_count": 3,
+       "test_count": 3
+      }
+     },
+     "name": "test_audit_matches_generated_case_count",
+     "oracle": "INDEPENDENT",
+     "pass": true
+    },
+    {
+     "detail": {
+      "errors": [
+       "Blocker:BOUND_APT_METADATA_NOT_FOUND:jq"
+      ],
+      "status": "FAIL_CLOSED__CAPABILITY_DID_NOT_PASS"
+     },
+     "name": "substrate_blocked_capability_fails_closed_and_names_the_gap",
+     "oracle": "FAIL_CLOSED_OBSERVATION",
+     "pass": true
+    }
+   ]
+  },
+  {
+   "cases": 5,
+   "failed": 0,
+   "failed_cases": [],
+   "name": "NEGATIVE_CONTROLS",
+   "pass": true,
+   "passed": 5,
+   "rows": [
+    {
+     "detail": {
+      "reason": "GOAL_NOT_REPRESENTED_IN_MODEL__FAIL_CLOSED"
+     },
+     "name": "unknown_goal_fails_closed",
+     "oracle": "NEGATIVE_CONTROL",
+     "pass": true
+    },
+    {
+     "detail": {
+      "reason": "CAPABILITY_INPUTS_MISSING:output_path,source_root"
+     },
+     "name": "missing_inputs_fail_closed",
+     "oracle": "NEGATIVE_CONTROL",
+     "pass": true
+    },
+    {
+     "detail": {
+      "digest_rejected": true,
+      "load_rejected": true
+     },
+     "name": "tampered_artifact_is_rejected",
+     "oracle": "NEGATIVE_CONTROL",
+     "pass": true
+    },
+    {
+     "detail": {
+      "reason": "CAPABILITY_NONZERO_SPEND_REJECTED"
+     },
+     "name": "nonzero_spend_capability_is_refused",
+     "oracle": "NEGATIVE_CONTROL",
+     "pass": true
+    },
+    {
+     "detail": {
+      "reason": "ENGINE_DID_NOT_REPORT_SUCCESS",
+      "status": "FAIL_CLOSED__ENGINE_DID_NOT_REPORT_SUCCESS"
+     },
+     "name": "engine_without_host_providers_fails_closed",
+     "oracle": "NEGATIVE_CONTROL",
+     "pass": true
+    }
+   ]
+  },
+  {
+   "cases": 4,
+   "failed": 0,
+   "failed_cases": [],
+   "name": "MODEL_DEPENDENCE_AUDIT",
+   "pass": true,
+   "passed": 4,
+   "rows": [
+    {
+     "detail": {
+      "findings": {}
+     },
+     "name": "no_model_client_import_in_runtime",
+     "oracle": "STATIC_IMPORT_SCAN",
+     "pass": true
+    },
+    {
+     "detail": {
+      "count": 0,
+      "findings": []
+     },
+     "name": "no_capability_route_names_a_model_provider",
+     "oracle": "STATIC_ROUTE_SCAN",
+     "pass": true
+    },
+    {
+     "detail": {
+      "external_model_calls": 0,
+      "incremental_spend_usd": 0,
+      "network_calls": 0
+     },
+     "name": "compiler_declares_zero_model_and_network_calls",
+     "oracle": "DECLARATION_AND_SOURCE_SCAN",
+     "pass": true
+    },
+    {
+     "detail": {
+      "occurrences": {
+       "anthropic": 5,
+       "claude": 12,
+       "deepseek": 1,
+       "gpt": 6,
+       "openai": 44
+      }
+     },
+     "name": "model_vendor_name_occurrences_are_reported_not_hidden",
+     "oracle": "AUDIT_DISCLOSURE",
+     "pass": true
+    }
+   ]
+  },
+  {
+   "cases": 4,
+   "failed": 0,
+   "failed_cases": [],
+   "name": "ONE_FRONT_DOOR",
+   "pass": true,
+   "passed": 4,
+   "rows": [
+    {
+     "detail": {
+      "count": 0,
+      "failures": []
+     },
+     "name": "every_capability_is_addressable_by_its_own_id",
+     "oracle": "SELF_ADDRESSABILITY",
+     "pass": true
+    },
+    {
+     "detail": {
+      "count": 0,
+      "failures": []
+     },
+     "name": "every_capability_carries_a_trigger_set_and_route",
+     "oracle": "STRUCTURAL_COMPLETENESS",
+     "pass": true
+    },
+    {
+     "detail": {
+      "failures": []
+     },
+     "name": "every_engine_carries_a_route",
+     "oracle": "STRUCTURAL_COMPLETENESS",
+     "pass": true
+    },
+    {
+     "detail": {
+      "failures": []
+     },
+     "name": "every_internalized_skill_carries_a_procedure",
+     "oracle": "STRUCTURAL_COMPLETENESS",
+     "pass": true
+    }
+   ]
+  }
+ ],
+ "generated_utc": "2026-10-20T15:14:55Z",
+ "incremental_spend_usd": 0,
+ "independent_verifier": null,
+ "independent_verifier_run_reference": null,
+ "model_digest": "4d7e627ea91d88b042cc984865cc777c99f6e40bc27a4d5c7a161c2f70c3b6a9",
+ "model_id": "BRAIN-UNIFIED-MODEL-V1",
+ "next_independent_step": "A different identity must re-run `python3 canonical/runtime/verify_brain_unified_model_v1.py --seed <the seed above>` on a clean checkout and sign the result. Until then this document is a sandbox measurement with no authority.",
+ "non_claims": [
+  "THIS_RUN_DID_NOT_HAVE_AN_INDEPENDENT_VERIFIER",
+  "A_SANDBOX_MEASUREMENT_IS_NOT_A_CAPABILITY_RECEIPT",
+  "NO_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT_IS_CLAIMED",
+  "COVERAGE_ACROSS_363_CAPABILITIES_IS_NOT_363_VERIFIED_CAPABILITIES",
+  "ENVIRONMENT_BLOCKED_CAPABILITIES_ARE_NOT_PASSES"
+ ],
+ "ownership_credit_delta": 0,
+ "producer_cognition_model_dependency_count": 0,
+ "schema": "PROJECT_BRAIN_UNIFIED_MODEL_V1_VERIFICATION",
+ "seed": "arena-final-20261020",
+ "summary": {
+  "capabilities_modelled": 363,
+  "cases": 33,
+  "categories": 8,
+  "engines_modelled": 26,
+  "failed": 0,
+  "knowledge_documents_indexed": 168,
+  "pass": true,
+  "passed": 33,
+  "skills_modelled": 18
+ },
+ "terminal_credit_delta": 0,
+ "verification_status": "MEASURED_SANDBOX__NOT_INDEPENDENT"
+}
