@@ -107,6 +107,68 @@ BENCHMARK_GOALS: List[Dict[str, Any]] = [
 ]
 
 
+# Goals that COMPILE but select a capability that merely shares vocabulary with
+# the goal. Both have the SAME root cause, measured rather than guessed:
+#
+#   THE BEST-MATCHING CAPABILITY IS UNBINDABLE, SO THE COMPILER SUBSTITUTES THE
+#   BEST CAPABLE ONE -- however weakly it matches -- and reports success.
+#
+#   BENCH_JSON_FETCH_CONSISTENCY  (pre-existing: also wrong at base 9554215)
+#     knowledge.json.fetch.external    score 12  UNBINDABLE
+#     knowledge.consistency.assess     score  8  UNBINDABLE
+#     terminal.kstar.root.assess.stdlib score 2  bindable  <-- selected
+#     Score 2 beat 12 and 8 purely because it was the only callable candidate.
+#     It matches on the single word "assess" inside its own capability id.
+#
+#   BENCH_MARKDOWN_TO_DECISION
+#     decision.synthesis.typed.stdlib  score 14  UNBINDABLE
+#       (requires structured.decision_evidence.available; none exists)
+#     document.convert.markdown_pdf.pandoc_weasyprint  <-- selected, a CONVERTER
+#     that then reports success for a summary it never performed.
+#
+# Both scoring-level fixes were MEASURED AND REVERTED, which is why this file
+# documents the gap instead of papering over it:
+#
+#   1. Require the goal's head verb to appear in the capability's declared
+#      surface -> benchmark 5/9 fell to 2/9 and four existing tests broke,
+#      because most capabilities do not literally contain the caller's verb.
+#   2. Refuse any match scoring below a minimum (MIN_MATCH_SCORE=4) -> correctly
+#      rejected the score-2 candidate, but the same goal then selected
+#      docx.document.create_from_json_record at score 25. One wrong capability
+#      swapped for another; no measured gain.
+#
+# The real fix is not in the scorer. It is to REFUSE when the best-matching
+# capability exists but cannot be bound, instead of silently downgrading to the
+# best callable one.
+KNOWN_SELECTION_GAPS = {
+    "BENCH_JSON_FETCH_CONSISTENCY": (
+        "BEST_MATCHES_UNBINDABLE__knowledge.json.fetch.external_SCORE_12_AND_"
+        "knowledge.consistency.assess_SCORE_8__SELECTED_terminal.kstar.root.assess.stdlib_"
+        "SCORE_2_ON_ONE_IDENTITY_TOKEN__PRE_EXISTING_AT_BASE_9554215"
+    ),
+    "BENCH_MARKDOWN_TO_DECISION": (
+        "BEST_MATCH_UNBINDABLE__decision.synthesis.typed.stdlib_SCORE_14_REQUIRES_"
+        "structured.decision_evidence.available__SELECTED_A_MARKDOWN_TO_PDF_CONVERTER"
+    ),
+}
+
+# A separate, real COVERAGE gap. Not a wrong selection -- this goal's expected
+# first capability IS selected correctly -- so it is recorded apart from
+# KNOWN_SELECTION_GAPS to keep the two failure modes from being conflated.
+#
+# No capability in the 363-capability live registry declares "insert" in its
+# identity, provides, or keywords (measured: 0 of 363), so the "insert records"
+# clause of BENCH_SQLITE_CREATE_INSERT_QUERY has nothing correct to select and
+# the compiler maps it to sqlite.table.verify_against_json_records instead. The
+# third clause is fine: that capability legitimately declares "query".
+KNOWN_COVERAGE_GAPS = {
+    "BENCH_SQLITE_CREATE_INSERT_QUERY": (
+        "NO_CAPABILITY_IN_THE_LIVE_REGISTRY_DECLARES_INSERT__0_OF_363__"
+        "THE_INSERT_CLAUSE_HAS_NOTHING_CORRECT_TO_SELECT"
+    ),
+}
+
+
 def benchmark_digest(goals: List[Mapping[str, Any]]) -> str:
     """Content address of the benchmark goal set itself."""
     canon = json.dumps(
@@ -226,6 +288,13 @@ def run(goals: List[Mapping[str, Any]] | None = None) -> Dict[str, Any]:
             row["binding_source"] = (
                 plan.get("binding_source") if isinstance(plan, dict) else None
             )
+            # A goal that compiles against the wrong capability is worse than one
+            # that refuses, so it is labelled rather than counted as a success.
+            row["known_selection_gap"] = (
+                KNOWN_SELECTION_GAPS.get(spec["id"])
+                if not row["expected_first_selected"]
+                else None
+            )
         except Exception as exc:  # measurement must survive every failure mode
             row["compiled"] = False
             row["compiler_mode"] = None
@@ -235,11 +304,15 @@ def run(goals: List[Mapping[str, Any]] | None = None) -> Dict[str, Any]:
             row["expected_first_selected"] = False
             row["expected_all_selected"] = False
             row["binding_source"] = None
+            row["known_selection_gap"] = None
         rows.append(row)
 
     compiled = [r for r in rows if r["compiled"]]
     first_ok = [r for r in rows if r["expected_first_selected"]]
     all_ok = [r for r in rows if r["expected_all_selected"]]
+    # Compiled, but against a capability that only shares vocabulary with the
+    # goal. Counted separately so a rising compile rate cannot mask it.
+    gapped = [r for r in rows if r["compiled"] and not r["expected_first_selected"]]
     causes = Counter(
         (r["failure"] or {}).get("cause") for r in rows if not r["compiled"]
     )
@@ -262,6 +335,10 @@ def run(goals: List[Mapping[str, Any]] | None = None) -> Dict[str, Any]:
             "expected_first_capability_selected": len(first_ok),
             "expected_full_chain_selected": len(all_ok),
             "expected_first_rate": round(len(first_ok) / len(rows), 4) if rows else 0.0,
+            "compiled_against_wrong_capability": len(gapped),
+        },
+        "known_selection_gaps": {
+            r["id"]: r["known_selection_gap"] for r in gapped
         },
         "failure_causes": dict(causes),
         "near_miss_drop_reasons": dict(dropped),
@@ -290,6 +367,12 @@ def main() -> int:
             rate=totals["expected_first_rate"],
         )
     )
+    if totals["compiled_against_wrong_capability"]:
+        print(
+            "compiled against the WRONG capability: {n} (see known_selection_gaps)".format(
+                n=totals["compiled_against_wrong_capability"]
+            )
+        )
     if report["failure_causes"]:
         print("failure causes:", json.dumps(report["failure_causes"], sort_keys=True))
     if report["near_miss_drop_reasons"]:

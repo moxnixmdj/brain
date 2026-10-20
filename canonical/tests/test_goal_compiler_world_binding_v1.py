@@ -226,6 +226,103 @@ class FailClosedTests(unittest.TestCase):
                 self.fail(f"AttributeError escaped compile_goal for {goal!r}: {exc}")
 
 
+class KnownSelectionGapTests(unittest.TestCase):
+    """The two goals that compile against the WRONG capability, and why.
+
+    These pin a measured diagnosis, not an opinion. The two causes are
+    different, which is why neither is fixed by improving the scorer -- an
+    attempt to do exactly that was measured and reverted (5/9 -> 2/9).
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        from canonical.runtime import live_integrated_brain_v1 as lb
+
+        cls.registry = dict(lb.load_verified_registry())
+
+    def test_exactly_the_documented_goals_select_wrongly(self):
+        from canonical.runtime import goal_compilation_benchmark_v1 as bench
+
+        report = bench.run()
+        gapped = sorted(report["known_selection_gaps"])
+        self.assertEqual(gapped, sorted(bench.KNOWN_SELECTION_GAPS))
+        self.assertEqual(len(gapped), 2)
+        for goal_id, cause in report["known_selection_gaps"].items():
+            self.assertTrue(cause, f"{goal_id} has no recorded cause")
+
+    def test_decision_synthesizer_exists_but_is_unbindable(self):
+        """The right capability is present; it simply cannot be called.
+
+        So the honest behaviour is to refuse, not to substitute a converter.
+        """
+        cid = "decision.synthesis.typed.stdlib"
+        self.assertIn(cid, self.registry)
+        goal = "Summarize a markdown document into a decision record."
+        score, _spec, _ev = compiler._score(goal, cid, self.registry[cid])
+        self.assertGreater(score, 0, "the correct capability no longer matches")
+        self.assertIn(
+            "structured.decision_evidence.available",
+            self.registry[cid].get("requires") or [],
+        )
+        self.assertIsNone(
+            compiler._complete_inputs_via_world_binding(goal, ROOT, cid, self.registry[cid]),
+            "expected the synthesizer to remain unbindable without decision evidence",
+        )
+
+    def test_best_matching_capabilities_are_unbindable_for_json_goal(self):
+        """The measured cause: 12 and 8 unbindable lose to 2 bindable.
+
+        Pre-existing at base 9554215, verified by checking out the base
+        goal_compiler.py and re-measuring. Score does not lose to score here;
+        bindable beats unbindable regardless of score.
+        """
+        goal = "Fetch a JSON document and assess its internal consistency."
+        for cid in ("knowledge.json.fetch.external", "knowledge.consistency.assess"):
+            self.assertIn(cid, self.registry)
+            score, _spec, _ev = compiler._score(goal, cid, self.registry[cid])
+            self.assertGreaterEqual(score, 8, f"{cid} no longer matches well")
+            self.assertIsNone(
+                compiler._complete_inputs_via_world_binding(
+                    goal, ROOT, cid, self.registry[cid]
+                ),
+                f"{cid} unexpectedly became bindable",
+            )
+
+        # What actually gets selected is far weaker, and binds only because it
+        # can: a single identity token ("assess") is enough to be callable.
+        ranked = compiler._rank_bindable_candidates(
+            goal, self.registry, ROOT, allow_world_binding=False
+        )
+        self.assertTrue(ranked, "expected some bindable candidate")
+        self.assertNotEqual(ranked[0][2], "knowledge.json.fetch.external")
+        self.assertNotEqual(ranked[0][2], "knowledge.consistency.assess")
+
+    def test_coverage_gap_is_recorded_separately_from_selection_gaps(self):
+        """Insert is missing from the registry; that is not a wrong selection."""
+        from canonical.runtime.goal_compilation_benchmark_v1 import (
+            KNOWN_COVERAGE_GAPS,
+            KNOWN_SELECTION_GAPS,
+        )
+
+        self.assertEqual(
+            sorted(KNOWN_COVERAGE_GAPS), ["BENCH_SQLITE_CREATE_INSERT_QUERY"]
+        )
+        self.assertNotIn("BENCH_SQLITE_CREATE_INSERT_QUERY", KNOWN_SELECTION_GAPS)
+
+    def test_no_capability_declares_insert(self):
+        """A real coverage gap, not a selection bug: 0 of the live registry."""
+        matching = []
+        for cid, entry in self.registry.items():
+            blob = " ".join(
+                [str(x) for x in (entry.get("provides") or [])]
+                + [str(x) for x in (entry.get("keywords") or [])]
+                + [cid]
+            ).lower()
+            if "insert" in blob:
+                matching.append(cid)
+        self.assertEqual(matching, [])
+
+
 class BenchmarkFloorTests(unittest.TestCase):
     def test_measured_compile_rate_holds_the_floor(self):
         from canonical.runtime import goal_compilation_benchmark_v1 as bench
