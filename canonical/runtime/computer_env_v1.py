@@ -395,7 +395,8 @@ def _stem(word: str) -> set[str]:
     return out
 
 
-def flags_for_goal(prog: str, goal: str, limit: int = 8) -> list[str]:
+def flags_for_goal(prog: str, goal: str, limit: int = 8,
+                   scores: bool = False) -> list:
     """Flags whose documented meaning the goal actually mentions.
 
     'count the lines' picks wc's -l because wc's own help describes -l as
@@ -419,10 +420,14 @@ def flags_for_goal(prog: str, goal: str, limit: int = 8) -> list[str]:
     if not words:
         return []
 
-    def score(desc: str) -> int:
-        d: set[str] = set()
-        for tok in re.findall(r"[a-z0-9]+", desc.lower()):
-            d |= _stem(tok)
+    def toks(text: str) -> set[str]:
+        out: set[str] = set()
+        for tok in re.findall(r"[a-z0-9]+", text.lower()):
+            out |= _stem(tok)
+        return out
+
+    def score(desc: str, name: str = "") -> int:
+        d = toks(desc)
         exact = len(words & d)
         # 'line' lives inside 'newline'. Counting both is what separates
         # --lines from --bytes: every wc flag says 'counts', so the exact
@@ -435,11 +440,22 @@ def flags_for_goal(prog: str, goal: str, limit: int = 8) -> list[str]:
                 if len(t) >= 4 and (w in t or t in w):
                     sub += 1
                     break
-        return 2 * exact + sub
+        # A flag NAMED after what the goal asked for is the strongest
+        # signal on the machine: --unique means unique, and whoever wrote
+        # the manual chose that word on purpose. Reading descriptions
+        # alone never finds it -- sort describes --unique as "output only
+        # the first of an equal run", which contains neither 'unique' nor
+        # 'line', so sort ranked 91st of 241 for "how many unique lines"
+        # and the one flag that answers the question was never offered.
+        named = len(words & toks(name))
+        return 2 * exact + sub + 3 * named
 
-    scored = [(score(desc), flag) for flag, desc in flag_descriptions(prog)]
+    scored = [(score(desc, flag), flag)
+              for flag, desc in flag_descriptions(prog)]
     scored = [(n, f) for n, f in scored if n > 0]
     scored.sort(key=lambda x: (-x[0], x[1]))
+    if scores:
+        return [n for n, _ in scored[:limit]]
     return [f for _, f in scored[:limit]]
 
 
@@ -732,7 +748,13 @@ def programs_for_goal(goal: str, limit: int = 24) -> list[str]:
 
     def ask(prog: str) -> tuple[str, int]:
         try:
-            return prog, len(flags_for_goal(prog, goal))
+            # Weighted, not counted. A count rewards a program for
+            # MENTIONING the goal's words often: cat says 'lines' in three
+            # separate descriptions and outranked sort, which has the one
+            # flag that answers, because sort says it once. A flag named
+            # after what was asked for outweighs a description that merely
+            # happens to contain the word.
+            return prog, sum(flags_for_goal(prog, goal, scores=True))
         except Exception:  # noqa: BLE001
             return prog, 0
 

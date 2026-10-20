@@ -456,6 +456,42 @@ class ManualTests(EnvCase):
         self.assertEqual(cenv.flags_for_goal("wc", "zzzqqq xxxwww"), [])
 
 
+class RankingTests(unittest.TestCase):
+    """Which programs get tried first decides whether a question is
+    answered in seconds or in minutes."""
+
+    def test_a_flag_named_after_what_was_asked_is_found(self):
+        """sort describes --unique as "output only the first of an equal
+        run" -- which contains neither 'unique' nor 'line'. Reading only
+        descriptions ranks sort 91st of 241 for "how many unique lines"
+        and never offers the one flag that answers the question.
+
+        A flag NAMED after the thing the goal asked for is the strongest
+        signal on the machine: whoever wrote the manual chose that word.
+        """
+        flags = cenv.flags_for_goal("sort",
+                                    "how many unique lines in data.txt")
+        self.assertIn("--unique", flags,
+                      "the flag that answers was never offered: %r" % flags)
+
+    def test_the_tool_that_answers_outranks_one_that_merely_mentions(self):
+        """Mentioning the goal's words is not the same as doing the job.
+        Ranking by how many flags match rewards a program for repeating
+        the words, so a tool that says 'lines' three times outranked the
+        one that can actually deduplicate."""
+        ranked = cenv.programs_for_goal(
+            "how many unique lines in data.txt", limit=120)
+        self.assertIn("sort", ranked)
+        self.assertIn("uniq", ranked)
+        # uniq only collapses NEIGHBOURS and cannot answer this, but it
+        # is the program whose whole manual is about uniqueness; sort is
+        # the one whose --unique does. Both must be near the front, well
+        # inside the budget the search actually spends.
+        self.assertLess(ranked.index("sort"), 100,
+                        "sort ranked %d: %r"
+                        % (ranked.index("sort"), ranked[:12]))
+
+
 class MeasuringTests(unittest.TestCase):
     """Goals that name no output file -- "count the lines in notes.txt".
 
