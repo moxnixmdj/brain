@@ -3,6 +3,7 @@ from __future__ import annotations
 import ast
 import json
 import shutil
+import tarfile
 import sqlite3
 import tempfile
 import unittest
@@ -459,3 +460,110 @@ class DeclaredContextBindingTests(unittest.TestCase):
         self.assertIn("result_path", str(out.get("reason")))
         prov = out.get("binding_provenance") or {}
         self.assertNotIn("result_path", prov.get("filled_from_declared_context") or [])
+
+    def test_a_gate_approved_capability_executes_end_to_end_against_an_independent_oracle(self):
+        """Pin the strongest verification path in the system.
+
+        `archive.verify.tar_gz.gnu` passes the execution gate on its own
+        evidence, and its adapter cross-checks three things that do not share
+        an implementation: GNU `tar -tzf` for the member listing, Python's own
+        `tarfile` for the member set, and a source-vs-archive SHA-256
+        comparison. Nothing else in the suite exercises a real execution that
+        depends on an oracle outside this repository, so a regression in the
+        gate, the adapter, or the trace check would otherwise be invisible.
+
+        The two benchmark goals that reach this capability refuse with
+        MANIFEST_INPUT_REQUIRED because the sentence names no archive. That
+        refusal is correct; this test supplies the resources the sentence
+        omitted and asserts the capability really runs.
+        """
+        cid = "archive.verify.tar_gz.gnu"
+        if cid not in self.model.capabilities:
+            self.skipTest("capability not in model")
+        if shutil.which("tar") is None:
+            self.skipTest("GNU tar not present")
+
+        tmp = ROOT / "canonical" / "astra_runtime" / "tmp"
+        tmp.mkdir(parents=True, exist_ok=True)
+        src = tmp / "_e2e_oracle_src.txt"
+        man = tmp / "_e2e_oracle_manifest.json"
+        arc = tmp / "_e2e_oracle_bundle.tar.gz"
+        rel = [p.relative_to(ROOT).as_posix() for p in (src, man, arc)]
+        try:
+            src.write_text("end-to-end oracle payload\n", encoding="utf-8")
+            man.write_text(
+                json.dumps(
+                    {"records": [{"verification_paths": [rel[0]]}]},
+                    indent=2,
+                    sort_keys=True,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            with tarfile.open(arc, "w:gz") as tf:
+                tf.add(man, arcname=rel[1])
+                tf.add(src, arcname=rel[0])
+
+            out = self.model.solve(
+                "Verify a tar.gz archive against its manifest.",
+                capability_id=cid,
+                inputs={"manifest_path": rel[1], "archive_path": rel[2]},
+                context_paths=[rel[1], rel[2]],
+            )
+
+            self.assertIs(out.get("pass"), True, out.get("reason"))
+            self.assertEqual(
+                out.get("status"), "PASS__CAPABILITY_EXECUTED_AND_TRACE_VERIFIED"
+            )
+        finally:
+            # Leave nothing behind: canonical/astra_runtime/state is tracked, so
+            # a stray artifact would break the next run and the integrity guard.
+            for path in (arc, man, src):
+                path.unlink(missing_ok=True)
+
+    def test_a_tampered_archive_is_rejected_by_the_oracle_not_accepted(self):
+        """The same path must fail when the archive disagrees with its source.
+
+        Without this, the passing test above could be satisfied by a capability
+        that always returns verified. Corrupting one byte of the archived copy
+        must break the SHA-256 comparison and refuse.
+        """
+        cid = "archive.verify.tar_gz.gnu"
+        if cid not in self.model.capabilities or shutil.which("tar") is None:
+            self.skipTest("capability not in model or GNU tar absent")
+
+        tmp = ROOT / "canonical" / "astra_runtime" / "tmp"
+        src = tmp / "_e2e_tamper_src.txt"
+        man = tmp / "_e2e_tamper_manifest.json"
+        arc = tmp / "_e2e_tamper_bundle.tar.gz"
+        rel = [p.relative_to(ROOT).as_posix() for p in (src, man, arc)]
+        try:
+            src.write_text("authoritative source bytes\n", encoding="utf-8")
+            man.write_text(
+                json.dumps(
+                    {"records": [{"verification_paths": [rel[0]]}]},
+                    indent=2,
+                    sort_keys=True,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            # Archive a DIFFERENT payload under the same member name, so the
+            # member set matches but the content hash cannot.
+            decoy = tmp / "_e2e_tamper_decoy.txt"
+            decoy.write_text("substituted bytes\n", encoding="utf-8")
+            with tarfile.open(arc, "w:gz") as tf:
+                tf.add(man, arcname=rel[1])
+                tf.add(decoy, arcname=rel[0])
+            decoy.unlink(missing_ok=True)
+
+            out = self.model.solve(
+                "Verify a tar.gz archive against its manifest.",
+                capability_id=cid,
+                inputs={"manifest_path": rel[1], "archive_path": rel[2]},
+                context_paths=[rel[1], rel[2]],
+            )
+            self.assertIsNot(out.get("pass"), True, out)
+        finally:
+            for path in (arc, man, src):
+                path.unlink(missing_ok=True)
