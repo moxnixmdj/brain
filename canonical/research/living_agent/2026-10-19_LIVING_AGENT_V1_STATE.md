@@ -12,7 +12,7 @@ receipt, not a terminal claim, and not a capability grant.
 | Living agent | `canonical/runtime/living_agent_v1.py` | Real POSIX computer surface, one-shot skill chunking, canary-based drift detection and repair, word learning, impasse tracking, self-directed practice, consolidating memory, snapshot/restore. |
 | Shell synthesis | `canonical/runtime/shell_synthesis_v1.py` | Learns a stdin→stdout pipeline from (input, expected output) examples: typed beam search over 20 real stages, exact interpreter ordering, real-shell verification. |
 | Benchmark | `canonical/runtime/living_agent_benchmark_v1.py` | Twelve spreadsheet transforms with independently written oracles, plus a projection of the repository's real file tree. |
-| Acceptance | `tests/test_living_agent_v1.py` | 116 tests / 162 subtests. Real processes, real files, exact byte equality. No mocks. |
+| Acceptance | `tests/test_living_agent_v1.py` | 120 tests / 162 subtests. Real processes, real files, exact byte equality. No mocks. |
 | Discovery | `canonical/runtime/living_discovery_v1.py` | Reads what this machine says it can do (`tool --help`, the tool's own definition), turns a goal sentence into an exact expected output, and proves a real command against it before admitting it. |
 | Growth measurement | `canonical/runtime/living_agent_growth_v1.py` | Acquires four real skills at runtime and replays them on three untouched real directories. |
 
@@ -100,11 +100,11 @@ caught by real verification rather than shipped.
 two real directory listings and replays them on three untouched directories:
 
 ```
-learn file names          0.053s   cut -d, -f1 | tail -n +2
-learn total bytes         0.024s   awk -F, '{s+=$NF} END {printf "%.0f\n", s}'
-learn distinct extensions 0.102s   cut -d, -f2 | sort -u | tail -n +2
-learn sort a real file    0.033s   sort
-held out 12/12 exact, wall 0.33 s, model dependencies 0, spend $0
+learn file names          0.044s   tail -n +2 | cut -d, -f1
+learn total bytes         0.023s   awk -F, '{s+=$NF} END {printf "%.0f\n", s}'
+learn distinct extensions 0.087s   cut -d, -f2 | tail -n +2 | sort -u
+learn sort a real file    0.093s   sort
+held out 12/12 exact, wall 0.45 s, model dependencies 0, spend $0
 ```
 
 ### Intent without examples
@@ -439,6 +439,8 @@ Measured on this machine, same machine, same day:
 | the same words on space-separated data | 4 | 0.04 s |
 | a different kind that needs the earned stage | 4 | 0.04 s |
 | the same words after a snapshot and restart (new data) | 1 | 0.01 s |
+| translate commas to semicolons (both named) | 3 | 0.05 s |
+| the second field, comma separated | 2 | 0.03 s |
 
 The first-time cost fell from 52 runs to 11 without changing a line of the
 search space, by ordering the same candidates differently.  Four priors, in
@@ -498,6 +500,65 @@ are the kind that look like optimisation but are really the wrong abstraction:
 The shared stage memo is the third piece: one invocation on one text is a pure
 function of the machine, so the same binary with the same arguments on the same
 input is never run twice in a session, whichever part of the search asks.
+
+### Arguments that are not options
+
+Half the machine's mechanisms are not switches.  `tr ',' ';'` translates one
+character into another, `grep error` selects lines by a pattern, and neither
+value appears in any option list -- the only place either tool says it consumes
+them is its usage line, `tr [OPTION]... STRING1 [STRING2]` and
+`grep [OPTION]... PATTERNS [FILE]...`.  The synopsis is the tool's own statement
+of what it eats, so it is read: a placeholder that names a pattern is bound to
+the word the sentence names (only if that word occurs in the data, so it cannot
+be invented), and a placeholder that names a character set is bound to the
+characters the sentence names, *in the order it names them*.  Order is meaning
+here: "replace every comma with a semicolon" is `tr , ';'` and the reverse
+request is `tr ';' ,`; sorting those two operands alphabetically would translate
+in the wrong direction.  Both are learned in **3 runs, 0.05 s**, and the two
+commands differ exactly as the two sentences do.
+
+The same synopsis decides how the file reaches the tool.  A tool that declares
+a file operand takes the path as an argument; one that does not would read the
+path *as data* and fail with "extra operand", so the file is fed on standard
+input instead.  `grep` takes a file, `tr` does not, and nothing has to know
+either fact in advance.
+
+A request that names two characters therefore names every value a command
+needs: no search is required at all, and `_fully_named_mechanisms` tries that
+command before the grammar search -- two runs, and the admitted answer is exact
+on files it never saw.
+
+### What the examples say when the sentence does not
+
+"Sort the rows by the second column" over 1, 2 and 10 is a numeric request even
+though the word is missing: the shown answer is the numeric order, and no
+lexical order of those values produces it.  The examples are half the
+specification, so a demonstrated manner is evidence, exactly like a stated one
+-- `-g` joins the bundle, and the same goal without it finds the plain sort.
+The opposite demonstration must not inherit it: the same words over data whose
+shown answer *is* lexical learn `sort -k 2 -t ,` and answer "20" before "7" as
+text.  Both are measured on held-out files where the two readings disagree.
+
+### A fit is not an ordering
+
+`sort -k 2 -t , | sort -r` reproduces `1, 2, 10` on two examples because
+reversing a lexical sort of those values happens to agree with the numeric
+answer.  Two behavioural questions separate the readings, and both cost one
+process:
+
+* **Row order.**  An answer that claims to order by a column must not change
+  when the same rows arrive in a different order.  A pipeline that depends on
+  the input's row order is answering from the file, not from the column.
+* **The column's values on other rows.**  Move the same values onto different
+  rows and the answer must still be ordered the way the example was.  Reversing
+  a lexical order is still lexical; it cannot survive this question.
+
+The probes only reject: a pipeline that drops the column, a projection, or a
+request that itself selects rows by position ("take the first four") is never
+refused for failing a question that does not apply.  With them in place the
+coincidental pipeline is refused and the numeric key is found instead, and the
+admitted answer is right on a third file whose numeric order is the reverse of
+both its file order and its text order.
 
 ### Where the sentence says an operation happens
 

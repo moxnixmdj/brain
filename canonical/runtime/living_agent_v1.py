@@ -573,6 +573,7 @@ _SEPARATOR_WORDS = {
     "tab": "\t", "tabs": "\t",
     "semicolon": ";", "semicolons": ";",
     "colon": ":", "colons": ":",
+    "space": " ", "spaces": " ", "blank": " ", "blanks": " ",
 }
 
 
@@ -1221,6 +1222,29 @@ class LivingAgent:
             outcome["seconds"] = round(time.perf_counter() - started, 4)
             return outcome
 
+        # 2b. A request that names every value a command consumes has nothing
+        # left to search: try that command before spending the grammar search on
+        # mechanisms that cannot express it at all.
+        sources_now = [self.computer.read(path) for path, _ in examples]
+        for doc in self._fully_named_mechanisms(goal, sources_now):
+            found = self._find_documented_mechanism(goal, examples, docs=[doc], max_runs=4)
+            if found is None:
+                continue
+            skill = self._admit_documented_skill(goal, found, examples)
+            outcome = self.solve(goal, bindings={"path": examples[0][0]})
+            outcome.update(
+                {
+                    "learned": True,
+                    "stages": [found["stage"]],
+                    "tool": found["tool"],
+                    "argv": list(found["argv"]),
+                    "source": "documentation-options",
+                    "commands_run": max(int(found.get("runs") or 0), self._runs - runs_before),
+                    "seconds": round(time.perf_counter() - started, 4),
+                }
+            )
+            return outcome
+
         # 3. synthesize from behaviour
         inputs = [(self.computer.read(path), expected) for path, expected in examples]
         candidates, stats = synthesis.search(
@@ -1308,6 +1332,7 @@ class LivingAgent:
             outcome.update(
                 {
                     "learned": True,
+                    "stages": [found["stage"]],
                     "tool": found["tool"],
                     "argv": list(found["argv"]),
                     "source": "documentation-options",
@@ -1360,13 +1385,27 @@ class LivingAgent:
     _INT_WORDS = {"width", "column", "columns", "number", "numbers", "count", "line", "lines",
                   "byte", "bytes", "size", "length", "digit", "digits", "increment", "key"}
     _CHAR_WORDS = {"delimiter", "separator", "character", "char", "characters", "string"}
+    # Words that mean "this option is about how the data is laid out" rather
+    # than how a result is printed.
+    _STRUCTURE_WORDS = {
+        "field", "fields", "column", "columns", "value", "values", "key", "keys",
+        "delimiter", "delimiters",
+    }
     # A *position* in the data is a different kind of argument from an
     # *amount*: a key or a field takes an index the request can name, while a
     # width or a count is only meaningful if the request names the number.
     _POSITION_WORDS = {
         "key", "keys", "field", "fields", "column", "columns", "position",
-        "location", "list", "range", "index",
+        "location", "list", "range", "index", "character", "characters",
     }
+    # Positional operand names, read off a usage line.  A pattern is a value the
+    # sentence supplies; a set is a translation of characters; the rest are
+    # files or names the pipeline supplies for itself.
+    _OPERAND_PATTERN = re.compile(r"^(?:PATTERN|PATTERNS|REGEXP|REGEXPS|EXPRESSION|EXPRESSIONS)$")
+    _OPERAND_CHARS = re.compile(r"^(?:SET|STRING|ARRAY)\d?$|^(?:FROM|TO)$")
+    _OPERAND_SKIP = re.compile(
+        r"^(?:F|FILE|FILES|FILE\d|INPUT|OUTPUT|INPUT_FILE|NAME|SUFFIX|PROG|PROGRAM|PATH|DIR|DIRECTORY|CMD|COMMAND)$"
+    )
     _AMOUNT_WORDS = {
         "number", "width", "line", "lines", "byte", "bytes", "size", "count",
         "length", "increment", "digit", "digits", "start", "first",
@@ -1398,6 +1437,21 @@ class LivingAgent:
         if words & cls._CHAR_WORDS:
             return "char"
         return ""
+
+    @staticmethod
+    def _named_characters(goal: str) -> list[str]:
+        """Characters the sentence names, in the order it names them.
+
+        ``"replace every comma with a semicolon"`` names two: ``,`` then ``;``.
+        The order is the meaning -- the first is what is there, the second what
+        it becomes -- so this is a list rather than a set.
+        """
+        out: list[str] = []
+        for word in re.findall(r"[a-z]+", goal.lower()):
+            character = _SEPARATOR_WORDS.get(word)
+            if character is not None and character not in out:
+                out.append(character)
+        return out
 
     def _separators(self, sources: Sequence[str]) -> list[str]:
         """Characters that actually separate parts of the data, most common first.
@@ -1472,20 +1526,79 @@ class LivingAgent:
             if option.argument:
                 if kind == "int":
                     if positions and words & self._POSITION_WORDS:
-                        atoms.append((5, [spelling, str(positions[0])], placeholder))
+                        # `-c` says "characters" and the sentence said
+                        # "character"; `-b` says "bytes" and it did not.  Both
+                        # would produce the same bytes on ASCII data, so the
+                        # sentence's own word is what chooses between them.
+                        bonus = 1 if self._shares_words(words, tokens) else 0
+                        atoms.append((5 + bonus, [spelling, str(positions[0])], placeholder))
                     elif quantities and words & (self._POSITION_WORDS | self._AMOUNT_WORDS):
                         atoms.append((4, [spelling, str(quantities[0])], placeholder))
                 elif kind == "char":
-                    if separators and words & (self._CHAR_WORDS | {"field", "fields"}):
+                    # A character the sentence names is the best evidence there
+                    # is: "comma separated" says exactly what `-d ,` needs.
+                    named = self._named_characters(goal)
+                    if named:
+                        # The same evidence as a separator found in the data,
+                        # but a better value: the sentence names this one.
+                        atoms.append((4, [spelling, named[0]], placeholder))
+                    elif separators and words & (self._CHAR_WORDS | {"field", "fields"}) and (
+                        words & self._STRUCTURE_WORDS
+                    ):
+                        # Otherwise a separator the data contains is only this
+                        # option's business if the option is about the *shape of
+                        # the data* -- a delimiter, a field, a key.  grep's
+                        # `--group-separator` also says "separator", but it
+                        # formats output groups the request never mentioned, and
+                        # binding the data's space to it would be a guess dressed
+                        # as evidence.
                         atoms.append((4, [spelling, separators[0]], placeholder))
                 continue
             if tokens & words:
                 atoms.append((1, [spelling], placeholder))
-        atoms.sort(key=lambda row: (-row[0], row[1]))
+        # Some tools take *positional* operands that no option describes:
+        # `tr ',' ';'` translates the first string into the second, and says so
+        # only in its usage line.  The sentence supplies the values -- the
+        # characters it names, or the word whose lines it wants kept -- and the
+        # examples decide whether the reading was right.
+        if doc.operands:
+            named_chars = self._named_characters(goal)
+            literal = "\n".join(sources)
+            kept = [w for w in sorted(tokens - _STOP) if w in literal and len(w) > 2]
+            operand_place = 0
+            for operand in doc.operands:
+                name = operand.strip("[]").upper()
+                if self._OPERAND_SKIP.match(name):
+                    continue
+                if self._OPERAND_PATTERN.match(name):
+                    if kept:
+                        atoms.append((5, [kept[0]], name))
+                elif self._OPERAND_CHARS.match(name):
+                    index = min(operand_place, len(named_chars) - 1)
+                    if named_chars:
+                        # The sentence named this exact character, which is the
+                        # strongest evidence any argument can have.
+                        atoms.append((6, [named_chars[index]], name))
+                        operand_place += 1
+                elif self._INT_NAME.match(name):
+                    if positions:
+                        atoms.append((5, [str(positions[0])], name))
+                    elif quantities:
+                        atoms.append((4, [str(quantities[0])], name))
+        # Strongest evidence first, and otherwise the order the tool itself
+        # declared.  Two named characters are *not* interchangeable: the first
+        # is what the text has and the second is what it becomes, so sorting
+        # them alphabetically would translate in the wrong direction -- `tr , :`
+        # for a request that said "colon with a comma".
+        atoms.sort(key=lambda row: -row[0])
         return atoms
 
     def _argument_forms(
-        self, goal: str, doc: discovery.ToolDoc, sources: Sequence[str]
+        self,
+        goal: str,
+        doc: discovery.ToolDoc,
+        sources: Sequence[str],
+        manners: Sequence[str] = (),
     ) -> list[tuple[int, list[str]]]:
         """Candidate option bundles, strongest evidence and fewest arguments first.
 
@@ -1505,11 +1618,12 @@ class LivingAgent:
         # evidence, because a sort that ignores "numerically" answers a
         # different question.
         qualifiers: list[str] = []
-        for word in sorted(set(re.findall(r"[a-z]+", goal.lower()))):
-            if len(word) >= 6 and word.endswith("ly"):
-                for flag in self._qualifier_flags(word, doc):
-                    if flag not in qualifiers:
-                        qualifiers.append(flag)
+        stated = [word for word in sorted(set(re.findall(r"[a-z]+", goal.lower())))
+                  if len(word) >= 6 and word.endswith("ly")]
+        for word in [*stated, *manners]:
+            for flag in self._qualifier_flags(word, doc):
+                if flag not in qualifiers:
+                    qualifiers.append(flag)
 
         forms: list[tuple[int, list[str]]] = [(0, [])]
         for score, tokens, _placeholder in atoms:
@@ -1543,9 +1657,13 @@ class LivingAgent:
             expanded: list[tuple[int, list[str]]] = []
             for score, form in forms:
                 expanded.append((score, form))
-                for flag in qualifiers[:2]:
-                    if flag not in form:
-                        expanded.append((score + 2, [*form, flag]))
+                attached = [flag for flag in qualifiers[:2] if flag not in form]
+                for flag in attached:
+                    expanded.append((score + 2, [*form, flag]))
+                if len(attached) > 1:
+                    # Numeric *and* reversed is one request, not two: the
+                    # options it needs belong in the same bundle.
+                    expanded.append((score + 2 * len(attached), [*form, *attached]))
             forms = expanded
         unique: list[tuple[int, list[str]]] = []
         seen: set[tuple[str, ...]] = set()
@@ -1765,6 +1883,7 @@ class LivingAgent:
         self,
         goal: str,
         sources: Sequence[str],
+        manners: Sequence[str] = (),
         *,
         limit: int = 64,
     ) -> list[tuple[discovery.ToolDoc, list[str], str, int, int]]:
@@ -1802,14 +1921,23 @@ class LivingAgent:
             # documentation happens to share with the sentence: "fold each line
             # at 40 characters" says "fold", and fold's summary never says
             # "line".  Two shared words is the bar for everything else.
-            if overlap >= 2 or doc.name in named:
+            # A tool whose own usage line consumes the very characters the
+            # sentence names is relevant however little prose it shares: `tr`
+            # never says "comma" or "replace", but `tr STRING1 [STRING2]` is
+            # exactly the translation of two named sets, and no other tool on
+            # this machine declares that shape.
+            names_values = bool(self._named_characters(goal)) and any(
+                self._OPERAND_CHARS.match(operand.strip("[]").upper())
+                for operand in doc.operands
+            )
+            if overlap >= 2 or doc.name in named or names_values:
                 scored.append((overlap, doc.name, doc))
         scored.sort(key=lambda row: (-row[0], row[1]))
         per_tool: list[list[tuple[discovery.ToolDoc, list[str], str, int, int]]] = []
         for overlap, _name, doc in scored:
             forms = [
                 (doc, form, located[doc.name], overlap, strength)
-                for strength, form in self._argument_forms(goal, doc, sources)
+                for strength, form in self._argument_forms(goal, doc, sources, manners)
                 # A first-stage mechanism must be justified by evidence the
                 # request or the data supply -- a number, a position, a
                 # separator -- not by a keyword: switches that merely share a
@@ -1942,7 +2070,7 @@ class LivingAgent:
         expected = [text for _, text in inputs]
         before = set(self.computer.admitted())
         grammar = self._base_grammar(inputs)
-        candidates = self._candidate_stages(goal, sources)
+        candidates = self._candidate_stages(goal, sources, self._demonstrated_manners(goal, examples))
         if not candidates:
             return None
         scratch = tempfile.mkdtemp(prefix="brain-compose-")
@@ -2148,7 +2276,21 @@ class LivingAgent:
                 return False
         except AgentError:
             return False  # not a command this computer will execute
+        if self._order_ignores_input_row_order(goal, pipeline, examples) is False:
+            return False
+        if self._order_holds_on_a_fresh_permutation(goal, pipeline, examples) is False:
+            return False
         return self._depends_only_on_named_column(goal, pipeline, examples) is not False
+
+    @classmethod
+    def _shares_words(cls, option_words: set[str], goal_tokens: set[str]) -> bool:
+        """Does the option describe itself with a word the sentence used?
+
+        "characters" and "character" are the same word; exact set intersection
+        cannot see that, and picking a byte selection for a request about
+        characters is a real difference on non-ASCII data.
+        """
+        return any(cls._word_matches(left, right) for left in option_words for right in goal_tokens)
 
     @staticmethod
     def _word_matches(left: str, right: str) -> bool:
@@ -2328,6 +2470,208 @@ class LivingAgent:
                 missing.append(label + " first")
         return missing
 
+    @staticmethod
+    def _orders_by_named_column(goal: str) -> int | None:
+        """The column an ordering request says to order by, if it says one."""
+        text = goal.lower()
+        if not re.search(r"\b(sort|sorted|sorting|order|ordered|ordering|rank|ranked|arrange|arranged)\b", text):
+            return None
+        positions = _ordinal_positions(goal)
+        return positions[0] if positions else None
+
+    @staticmethod
+    def _numbers(text: str) -> list[float] | None:
+        try:
+            return [float(value) for value in text]
+        except ValueError:
+            return None
+
+    def _demonstrated_manners(
+        self, goal: str, examples: Sequence[tuple[str, str]]
+    ) -> list[str]:
+        """Manners the examples *show*, which the sentence did not spell out.
+
+        "Sort the rows by the second column" over 1, 2 and 10 is a numeric
+        request even without the word: the shown answer is the numeric order,
+        and no lexical order of those values produces it.  Likewise an answer
+        that runs from large to small shows a reversed order.  The examples are
+        half the specification, so what they demonstrate is evidence -- and the
+        same exact-bytes verification still has to agree.
+        """
+        if not examples:
+            return []
+        position = self._orders_by_named_column(goal)
+        if position is None:
+            return []
+        path, expected = examples[0]
+        text = self.computer.read(path)
+        separator = (self._separators([text, expected])[:1] or [""])[0]
+        if not separator:
+            return []
+        source_rows = [row.split(separator) for row in text.splitlines()]
+        answer_rows = [row.split(separator) for row in expected.splitlines()]
+        if not answer_rows or any(
+            len(row) < position for row in [*source_rows, *answer_rows]
+        ):
+            return []
+        values = [row[position - 1] for row in source_rows]
+        shown = [row[position - 1] for row in answer_rows]
+        numbers = self._numbers(shown)
+        manner: list[str] = []
+        if numbers is not None and (
+            numbers == sorted(numbers) or numbers == sorted(numbers, reverse=True)
+        ):
+            if sorted(values) != sorted(values, key=float):
+                # A lexical sort of these values would have produced a
+                # different order, so "numbers" is what the example shows.
+                manner.append("numerically")
+        if shown == sorted(shown, reverse=True) and shown != sorted(shown):
+            manner.append("reverse")
+        elif numbers is not None and numbers == sorted(numbers, reverse=True):
+            if numbers != sorted(numbers):
+                manner.append("reverse")
+        return manner
+
+    def _order_ignores_input_row_order(
+        self, goal: str, stages: Sequence[str], examples: Sequence[tuple[str, str]]
+    ) -> bool | None:
+        """Is the answer the same when the rows arrive in a different order?
+
+        "Sort the rows by the second column" is a statement about the *values*
+        in that column.  A pipeline whose answer changes when the same rows
+        arrive in a different order is answering from the input's row order
+        instead -- `sort -k 2 -t , | sort -r` fits two examples that way and is
+        wrong on the third.  Reversal is the cheapest question that separates
+        the two readings, and it can only reject: a pipeline that genuinely
+        orders by values gives the same answer either way.
+
+        Returns None when the question does not apply (no ordering verb, no
+        named column, fewer than three rows, or a tie that makes reversal a
+        legitimate difference).
+        """
+        position = self._orders_by_named_column(goal)
+        if position is None:
+            return None
+        if any(label.startswith(("first ", "last ")) for label, _p, _r in _requested_operations(goal)):
+            # "Take the first four rows, then sort them" is a statement about
+            # these rows in this order.  Reversing the input legitimately gives
+            # a different answer, so row order is part of the request and this
+            # question cannot be asked.
+            return None
+        path, expected = examples[0]
+        text = self.computer.read(path)
+        rows = text.splitlines()
+        if len(rows) < 3:
+            return None
+        separator = (self._separators([text])[:1] or [""])[0]
+        if not separator:
+            return None
+        fields = [row.split(separator) for row in rows]
+        if any(len(field) < position for field in fields):
+            return None
+        values = [field[position - 1] for field in fields]
+        if len(set(values)) != len(values):
+            return None  # equal keys make a different order in the ties legitimate
+        pipeline = " | ".join(stages)
+
+        def answer(payload: str) -> str | None:
+            self._runs += 1
+            result = self.computer.run(pipeline, stdin=payload)
+            return result.stdout if result.ok else None
+
+        straight = answer(text)
+        if straight is None or straight != expected:
+            return None
+        reversed_text = "\n".join(reversed(rows)) + "\n"
+        return answer(reversed_text) == straight
+
+    @staticmethod
+    def _column_order(text: str, separator: str, position: int) -> tuple[str, bool] | None | bool:
+        """How a column is ordered: (direction, numeric), None if unordered.
+
+        Returns ``True`` when the text has no such column at all -- there is
+        nothing to judge, and a pipeline that drops the column (a projection)
+        must not be refused for it.
+        """
+        rows = text.splitlines()
+        if len(rows) < 2:
+            return None
+        columns = [row.split(separator) for row in rows]
+        if any(len(column) < position for column in columns):
+            return True
+        values = [column[position - 1] for column in columns]
+
+        def direction(sequence: Sequence[Any]) -> str | None:
+            ascending = all(a <= b for a, b in zip(sequence, sequence[1:]))
+            descending = all(a >= b for a, b in zip(sequence, sequence[1:]))
+            return ("ascending" if ascending else "descending") if (ascending or descending) else None
+
+        try:
+            numbers: Sequence[Any] | None = [float(value) for value in values]
+        except ValueError:
+            numbers = None
+        for sequence, numeric in ((numbers, True), (values, False)):
+            if sequence is None:
+                continue
+            found = direction(sequence)
+            if found is not None:
+                return (found, numeric)
+        return None
+
+    def _order_holds_on_a_fresh_permutation(
+        self, goal: str, stages: Sequence[str], examples: Sequence[tuple[str, str]]
+    ) -> bool | None:
+        """Does the ordering claim survive values the examples did not contain?
+
+        `sort -k 2 -t , | sort -r` reproduces "1, 2, 10" because reversing a
+        lexical sort of these two files happens to agree with the numeric
+        answer.  Reversing a *lexical* order is still lexical; the accident is
+        exposed by moving the same values onto different rows and asking
+        whether the answer is ordered the way the example was.  One probe, one
+        run, and only for goals that name an ordering and a column.
+
+        Returns None when the examples do not fix an order, the column is not
+        present, or the probe output has no such column to judge.
+        """
+        position = self._orders_by_named_column(goal)
+        if position is None:
+            return None
+        if stages and re.search(rf"(?<![\d.]){position}(?![\d.])", stages[-1]):
+            # The stage that decides the final order already names the column.
+            # A single `sort -k 2` states its key; there is nothing to test.
+            return None
+        path, expected = examples[0]
+        text = self.computer.read(path)
+        rows = text.splitlines()
+        if len(rows) < 3:
+            return None
+        separator = (self._separators([text])[:1] or [""])[0]
+        if not separator:
+            return None
+        fields = [row.split(separator) for row in rows]
+        if any(len(field) < position for field in fields):
+            return None
+        values = [field[position - 1] for field in fields]
+        if len(set(values)) != len(values):
+            return None
+        wanted = self._column_order(expected, separator, position)
+        if not isinstance(wanted, tuple):
+            return None
+        # The same values on different rows: any answer that really orders by
+        # this column lands in the same order, whatever route it took.
+        rotated = [list(field) for field in fields]
+        for field, value in zip(rotated, values[1:] + values[:1]):
+            field[position - 1] = value
+        probe = "\n".join(separator.join(field) for field in rotated) + "\n"
+        self._runs += 1
+        result = self.computer.run(" | ".join(stages), stdin=probe)
+        if not result.ok:
+            return None
+        observed = self._column_order(result.stdout, separator, position)
+        if observed is True:
+            return None
+        return observed == wanted
+
     def _depends_only_on_named_column(
         self, goal: str, stages: Sequence[str], examples: Sequence[tuple[str, str]]
     ) -> bool | None:
@@ -2460,6 +2804,42 @@ class LivingAgent:
         # raw text and a line stream; the data, not a declared type, decides.
         return synthesis.Stage(shell, synthesis.LINES, synthesis.TEXT, apply)
 
+    def _fully_named_mechanisms(
+        self, goal: str, sources: Sequence[str], limit: int = 4
+    ) -> list[discovery.ToolDoc]:
+        """Tools that need nothing but the values the sentence already names.
+
+        "Replace every comma with a semicolon" names both the character that is
+        there and the one it becomes.  A command that consumes exactly those two
+        values needs no search at all: the request *is* the invocation.  Every
+        atom counts, so a partially named tool does not qualify -- this shortcut
+        is only for the case where there is genuinely nothing left to infer.
+        """
+        out: list[tuple[int, str, discovery.ToolDoc]] = []
+        # Only a tool that declares character operands can be *fully* named this
+        # way, and there are usually one or two of those on a machine.  Scanning
+        # every tool's whole option space to discover that would cost more than
+        # the search it is meant to save.
+        if not self._named_characters(goal):
+            return []
+        for doc in self.vocabulary.read():
+            if doc.name in discovery.DENY:
+                continue
+            if not any(
+                self._OPERAND_CHARS.match(operand.strip("[]").upper())
+                for operand in doc.operands
+            ):
+                continue
+            for strength, form in self._argument_forms(goal, doc, sources):
+                atoms = [row for row in self._argument_atoms(goal, doc, sources) if row[1][0] in form]
+                if len(form) < 2 or len(atoms) < 2:
+                    continue
+                if all(row[0] >= 6 for row in atoms):
+                    out.append((strength, doc.name, doc))
+                    break
+        out.sort(key=lambda row: (-row[0], row[1]))
+        return [doc for _strength, _name, doc in out[:limit]]
+
     def _find_documented_mechanism(
         self,
         goal: str,
@@ -2468,6 +2848,7 @@ class LivingAgent:
         words: Sequence[str] | None = None,
         max_tools: int = 6,
         max_runs: int = 60,
+        docs: Sequence[discovery.ToolDoc] | None = None,
     ) -> dict[str, Any] | None:
         """Search the machine's documented surface for a command that fits.
 
@@ -2493,7 +2874,16 @@ class LivingAgent:
             # Arguments are data, not shell syntax: a separator such as `|`
             # is a pipe unless it is quoted, and then the *file name* becomes
             # the command.  Every part is quoted before it reaches the shell.
-            template = " ".join([doc.name, *(_shell_spelling(part) for part in form), "{path}"])
+            # A tool that declares a file operand takes the path as an
+            # argument; one that does not -- `tr , ';'` translates a stream --
+            # would read the path *as data* and fail with "extra operand".  The
+            # usage line says which kind it is, so the file is fed on standard
+            # input exactly when the tool takes no file of its own.
+            takes_file = any(
+                self._FILE_NAME.match(operand.strip("[]").upper()) for operand in doc.operands
+            )
+            invocation = " ".join([doc.name, *(_shell_spelling(part) for part in form)])
+            template = f"{invocation} {{path}}" if takes_file else f"cat {{path}} | {invocation}"
             try:
                 self.computer.admit(
                     doc.name,
@@ -2518,17 +2908,23 @@ class LivingAgent:
             attempts.append({"tool": doc.name, "argv": list(form), "verified": True})
             return {
                 "template": template,
+                "stage": invocation,
                 "tool": doc.name,
                 "argv": list(form),
                 "doc": doc.summary,
                 "runs": runs,
             }
 
-        shortlist = [
-            doc
-            for doc in vocabulary.ranked(
+        ranked_docs = (
+            list(docs)
+            if docs is not None
+            else vocabulary.ranked(
                 words if words is not None else discovery._words(goal), limit=max_tools
             )
+        )
+        shortlist = [
+            doc
+            for doc in ranked_docs
             if doc.name not in discovery.DENY
             and any(name == doc.name for name, _ in vocabulary.executables())
         ]

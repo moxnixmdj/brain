@@ -1824,6 +1824,125 @@ class DocumentedArgumentTests(unittest.TestCase):
         self.assertEqual(outcome["argv"], ["-b", "a"])
         self.assertEqual(outcome["stdout"], all_lines(first))
 
+    def test_a_translation_learns_its_direction_from_the_sentence(self) -> None:
+        # `tr STRING1 STRING2` is not an option and appears nowhere in tr's
+        # help except its usage line, so both the mechanism and the *order* of
+        # its operands have to be read rather than guessed.  Two requests that
+        # differ only in which character comes first must learn opposite
+        # commands, and each must be right on a file neither saw.
+        forward = self._agent()
+        self._write(forward, "f1.txt", "a,b,c\n")
+        self._write(forward, "f2.txt", "x,y\n")
+        first = forward.acquire(
+            "replace every comma with a semicolon",
+            [("f1.txt", "a;b;c\n"), ("f2.txt", "x;y\n")],
+        )
+        self.assertEqual(first["stages"], ["tr , ';'"])
+        self.assertLessEqual(first["commands_run"], 6)
+
+        backward = self._agent()
+        self._write(backward, "g1.txt", "a;b;c\n")
+        self._write(backward, "g2.txt", "x;y\n")
+        second = backward.acquire(
+            "replace every semicolon with a comma",
+            [("g1.txt", "a,b,c\n"), ("g2.txt", "x,y\n")],
+        )
+        self.assertEqual(second["stages"], ["tr ';' ,"])
+        self.assertLessEqual(second["commands_run"], 6)
+        self.assertNotEqual(first["stages"], second["stages"])
+
+        # Held out from both searches, and written so that neither answer can
+        # be produced by the other command.
+        self._write(forward, "h.txt", "p,q;r\n")
+        self.assertEqual(
+            forward.solve("replace every comma with a semicolon", bindings={"path": "h.txt"})[
+                "stdout"
+            ],
+            "p;q;r\n",
+        )
+        self._write(backward, "h.txt", "p,q;r\n")
+        self.assertEqual(
+            backward.solve("replace every semicolon with a comma", bindings={"path": "h.txt"})[
+                "stdout"
+            ],
+            "p,q,r\n",
+        )
+
+    def test_a_positional_operand_comes_from_the_usage_line(self) -> None:
+        # A filter's pattern is not an option either: `grep [OPTION]... PATTERNS
+        # [FILE]...` is the only place on the machine that says grep consumes a
+        # pattern, and the sentence is the only place that says which one.  The
+        # command must select by the word the request names and nothing else.
+        agent = self._agent()
+        self._write(agent, "one.txt", "ok\nboom error here\nfine\n")
+        self._write(agent, "two.txt", "error\nx\n")
+        goal = "show only the lines that contain error"
+        outcome = agent.acquire(
+            goal, [("one.txt", "boom error here\n"), ("two.txt", "error\n")]
+        )
+        self.assertEqual(outcome["status"], "PASS", outcome)
+        self.assertLessEqual(outcome["commands_run"], 14)
+        self.assertIn("error", " ".join(outcome["stages"]))
+        # Held out: the word appears in the middle of a line, and a file with no
+        # such line must produce nothing rather than everything.
+        self._write(agent, "h1.txt", "fine\nan error at noon\nok\n")
+        self._write(agent, "h2.txt", "all good\n")
+        self.assertEqual(agent.solve(goal, bindings={"path": "h1.txt"})["stdout"], "an error at noon\n")
+        self.assertEqual(agent.solve(goal, bindings={"path": "h2.txt"})["stdout"], "")
+
+    def test_the_examples_can_state_the_manner_the_sentence_omits(self) -> None:
+        # The sentence says only "by the second column".  The shown answer says
+        # 1, 2, 10 -- which no lexical order produces -- so the numeric reading
+        # is demonstrated, not assumed.  The opposite demonstration must not
+        # inherit it: the same words over the same shape of data with a lexical
+        # answer must learn the plain sort.
+        numeric = self._agent()
+        self._write(numeric, "n1.csv", "a,10\nb,2\nc,1\n")
+        self._write(numeric, "n2.csv", "d,20\ne,3\n")
+        goal = "sort the rows by the second column"
+        learned = numeric.acquire(
+            goal, [("n1.csv", "c,1\nb,2\na,10\n"), ("n2.csv", "e,3\nd,20\n")]
+        )
+        self.assertLessEqual(learned["commands_run"], 18)
+        # 100, 9 and 8: numeric order is the reverse of file order and of text
+        # order, so only a numeric key produces this answer.
+        self._write(numeric, "h.csv", "p,100\nq,9\nr,8\n")
+        self.assertEqual(
+            numeric.solve(goal, bindings={"path": "h.csv"})["stdout"], "r,8\nq,9\np,100\n"
+        )
+
+        lexical = self._agent()
+        self._write(lexical, "m1.csv", "a,10\nb,9\nc,8\n")
+        self._write(lexical, "m2.csv", "d,7\ne,6\n")
+        plain = lexical.acquire(
+            goal, [("m1.csv", "a,10\nc,8\nb,9\n"), ("m2.csv", "e,6\nd,7\n")]
+        )
+        self.assertNotIn("-g", plain["argv"])
+        self.assertNotIn("-n", plain["argv"])
+        # text order, held out: "20" sorts before "7" lexically and after it
+        # numerically, so this answer identifies which reading was kept.
+        self._write(lexical, "h.csv", "m,7\nn,20\no,3\n")
+        self.assertEqual(
+            lexical.solve(goal, bindings={"path": "h.csv"})["stdout"], "n,20\no,3\nm,7\n"
+        )
+
+    def test_an_answer_that_depends_on_row_order_is_not_an_ordering(self) -> None:
+        # `sort -k 2 -t , | sort -r` reproduces "1, 2, 10" by reversing a
+        # lexical sort, and on the two examples that is indistinguishable from
+        # the numeric answer.  The question that separates them is what happens
+        # when the same values arrive on different rows; a second real command
+        # shows the same question answered the other way, so the check is a
+        # measurement and not a constant.
+        agent = self._agent()
+        first = "a,10\nb,2\nc,1\n"
+        self._write(agent, "q1.csv", first)
+        self._write(agent, "q2.csv", "d,20\ne,3\n")
+        examples = [("q1.csv", "c,1\nb,2\na,10\n"), ("q2.csv", "e,3\nd,20\n")]
+        goal = "sort the rows by the second column"
+        self.assertFalse(agent._order_holds_on_a_fresh_permutation(goal, ["sort -k 2 -t ,", "sort -r"], examples))
+        true_sort = agent._order_holds_on_a_fresh_permutation(goal, ["sort -k 2 -t , -g"], examples)
+        self.assertIsNot(true_sort, False)
+
     def test_a_stated_manner_is_implemented_not_merely_not_contradicted(self) -> None:
         # "numerically" is a specification, not decoration.  On these files the
         # lexical order (1, 10, 2) and the numeric order (1, 2, 10) disagree, so

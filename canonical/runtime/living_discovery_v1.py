@@ -222,6 +222,28 @@ class ToolDoc:
             "enumerations": [[name, [list(pair) for pair in values]] for name, values in self.enumerations],
         }
 
+    @property
+    def operands(self) -> tuple[str, ...]:
+        """Placeholders the synopsis says this tool consumes, in order.
+
+        ``tr [OPTION]... STRING1 [STRING2]`` takes two positional strings that
+        no option describes -- the tool translates STRING1 into STRING2 and says
+        so nowhere else.  The usage line is the tool's own statement about the
+        values it consumes, so it is read rather than assumed.  Brackets around
+        a placeholder mean optional; the position still counts, because
+        ``tr ','`` reads differently from ``tr ',' ';'``.
+        """
+        if not self.usage:
+            return ()
+        names: list[str] = []
+        for match in re.finditer(r"\[?\b([A-Z][A-Z0-9_]{0,15})\b\]?(?:\.\.\.)?", self.usage):
+            name = match.group(1)
+            if name in {"OPTION", "OPTIONS", "USAGE", "ARG", "ARGS"}:
+                continue
+            if name not in names:
+                names.append(name)
+        return tuple(names)
+
     def values_for(self, argument: str) -> tuple[tuple[str, str], ...]:
         """The tool's own list of values for this argument, if it gave one."""
         wanted = argument.strip("[]").upper()
