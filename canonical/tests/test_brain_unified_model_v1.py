@@ -386,3 +386,41 @@ class DeclaredContextBindingTests(unittest.TestCase):
         self.assertIn("source_root", str(out.get("reason") or ""))
         prov = out.get("binding_provenance") or {}
         self.assertNotIn("source_root", prov.get("filled_from_declared_context") or [])
+
+    def test_a_path_named_in_the_goal_beats_declared_context(self):
+        """A file the caller typed must never be displaced by an invented one.
+
+        `complete_inputs` honours `goal_paths` verbatim, so passing only the
+        declared context used to discard the path the sentence names and let
+        the binder pick some other JSON file in the repository -- while still
+        reporting that nothing was missing. This goal names its own input, so
+        the bound value has to be that path and nothing else.
+        """
+        cid = "xlsx.table.create_from_json_records"
+        if cid not in self.model.capabilities:
+            self.skipTest("capability not in model")
+        named = "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+        if not (ROOT / named).exists():
+            self.skipTest("named fixture not present")
+
+        goal = "Create an xlsx table from the JSON records in " + named + "."
+        out = self.model.solve(goal, capability_id=cid, context_paths=["AGENTS.md"])
+
+        # Binding must have got past the missing-input stage.
+        self.assertFalse(
+            str(out.get("reason") or "").startswith("CAPABILITY_INPUTS_MISSING"),
+            out.get("reason"),
+        )
+        values = (out.get("binding_provenance") or {}).get("values") or {}
+        self.assertEqual(values.get("json_path"), named)
+        # The regression, named explicitly: no other file may be substituted.
+        self.assertNotEqual(values.get("json_path"), "MIGRATION_STATUS_2026-09-10.json")
+
+    def test_declared_context_still_binds_when_the_goal_names_nothing(self):
+        """Widening `allowed` must not weaken the declaration-only path."""
+        if not self.pdf.exists():
+            self.skipTest("fixture pdf not present")
+        rel = self.pdf.relative_to(ROOT).as_posix()
+        out = self.model.solve("Read a PDF and extract its text.", context_paths=[rel])
+        prov = out.get("binding_provenance") or {}
+        self.assertEqual(prov.get("values", {}).get("pdf_path"), rel)
