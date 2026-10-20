@@ -567,3 +567,130 @@ class DeclaredContextBindingTests(unittest.TestCase):
         finally:
             for path in (arc, man, src):
                 path.unlink(missing_ok=True)
+
+    def test_two_gate_approved_capabilities_compose_producer_then_consumer(self):
+        """Pin the composition, not just the parts.
+
+        #5922 pinned `archive.verify.tar_gz.gnu` against an archive the test
+        built itself. That leaves the actual claim of a compiled model untested:
+        that one capability's output is another's input, through the front door,
+        with no hand-built artifact in between.
+
+        Here the producer writes the bundle and the consumer verifies the very
+        bytes the producer wrote. The two share no implementation -- the producer
+        is Python's `tarfile`, the consumer is GNU `tar` cross-checked against
+        `tarfile` and a source SHA-256 -- so agreement between them is real
+        corroboration rather than a capability confirming its own output.
+        """
+        producer = "archive.tar_gz.create_from_manifest"
+        consumer = "archive.verify.tar_gz.gnu"
+        if producer not in self.model.capabilities:
+            self.skipTest("producer not in model")
+        if consumer not in self.model.capabilities:
+            self.skipTest("consumer not in model")
+        if shutil.which("tar") is None:
+            self.skipTest("GNU tar not present")
+
+        tmp = ROOT / "canonical" / "astra_runtime" / "tmp"
+        tmp.mkdir(parents=True, exist_ok=True)
+        src = tmp / "_compose_src.txt"
+        man = tmp / "_compose_manifest.json"
+        arc = tmp / "_compose_bundle.tar.gz"
+        rel = [p.relative_to(ROOT).as_posix() for p in (src, man, arc)]
+        try:
+            src.write_text("producer-consumer payload\n", encoding="utf-8")
+            man.write_text(
+                json.dumps(
+                    {"records": [{"verification_paths": [rel[0]]}]},
+                    indent=2,
+                    sort_keys=True,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            built = self.model.solve(
+                "Create a tar.gz archive from a manifest.",
+                capability_id=producer,
+                inputs={"manifest_path": rel[1], "output_path": rel[2]},
+                context_paths=[rel[1]],
+            )
+            self.assertIs(built.get("pass"), True, built.get("reason"))
+
+            # The consumer reads what the producer wrote. Nothing is built by
+            # the test between the two calls.
+            self.assertTrue((ROOT / rel[2]).is_file(), "producer wrote no archive")
+            verified = self.model.solve(
+                "Verify a tar.gz archive against its manifest.",
+                capability_id=consumer,
+                inputs={"manifest_path": rel[1], "archive_path": rel[2]},
+                context_paths=[rel[1], rel[2]],
+            )
+            self.assertIs(verified.get("pass"), True, verified.get("reason"))
+            self.assertEqual(
+                verified.get("status"), "PASS__CAPABILITY_EXECUTED_AND_TRACE_VERIFIED"
+            )
+        finally:
+            for path in (arc, man, src):
+                path.unlink(missing_ok=True)
+
+    def test_a_corrupted_producer_output_is_caught_by_the_consumer(self):
+        """The composition must fail if the bytes change between the two steps.
+
+        Without this the passing test above could be satisfied by a consumer
+        that trusts the producer. The archive the producer wrote is rewritten
+        with substituted bytes under the same member name, so the member set
+        still matches and only the content hash can catch it.
+        """
+        producer = "archive.tar_gz.create_from_manifest"
+        consumer = "archive.verify.tar_gz.gnu"
+        if (
+            producer not in self.model.capabilities
+            or consumer not in self.model.capabilities
+            or shutil.which("tar") is None
+        ):
+            self.skipTest("pair not in model or GNU tar absent")
+
+        tmp = ROOT / "canonical" / "astra_runtime" / "tmp"
+        src = tmp / "_compose_tamper_src.txt"
+        man = tmp / "_compose_tamper_manifest.json"
+        arc = tmp / "_compose_tamper_bundle.tar.gz"
+        rel = [p.relative_to(ROOT).as_posix() for p in (src, man, arc)]
+        try:
+            src.write_text("authoritative bytes from the producer\n", encoding="utf-8")
+            man.write_text(
+                json.dumps(
+                    {"records": [{"verification_paths": [rel[0]]}]},
+                    indent=2,
+                    sort_keys=True,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            built = self.model.solve(
+                "Create a tar.gz archive from a manifest.",
+                capability_id=producer,
+                inputs={"manifest_path": rel[1], "output_path": rel[2]},
+                context_paths=[rel[1]],
+            )
+            self.assertIs(built.get("pass"), True, built.get("reason"))
+
+            # Rebuild the bundle with substituted bytes under the same member
+            # names, between the producer and the consumer.
+            decoy = tmp / "_compose_tamper_decoy.txt"
+            decoy.write_text("substituted after the producer ran\n", encoding="utf-8")
+            with tarfile.open(arc, "w:gz") as tf:
+                tf.add(man, arcname=rel[1])
+                tf.add(decoy, arcname=rel[0])
+            decoy.unlink(missing_ok=True)
+
+            verified = self.model.solve(
+                "Verify a tar.gz archive against its manifest.",
+                capability_id=consumer,
+                inputs={"manifest_path": rel[1], "archive_path": rel[2]},
+                context_paths=[rel[1], rel[2]],
+            )
+            self.assertIsNot(verified.get("pass"), True, verified)
+        finally:
+            for path in (arc, man, src):
+                path.unlink(missing_ok=True)
