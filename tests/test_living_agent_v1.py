@@ -2600,6 +2600,152 @@ class PolicyLearningTests(unittest.TestCase):
         self.assertEqual(str(raised.exception), "TRACES_REQUIRED")
 
 
+class HeldOutBatteryTests(unittest.TestCase):
+    """One request per kind, taught on two files, answered on a third.
+
+    Every expected output here is computed by an independent implementation
+    written in this file, not by the agent and not by a recorded answer.  The
+    file the agent answers on was never shown to it.  This is the check that
+    catches a pipeline which fits the two demonstrations and means something
+    else: the failure is a wrong byte, not a wrong command line.
+    """
+
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name)
+
+    def _agent(self) -> LivingAgent:
+        return LivingAgent(self.root)
+
+    @staticmethod
+    def _fields(text: str, separator: str) -> list[list[str]]:
+        return [line.split(separator) for line in text.splitlines()]
+
+    @classmethod
+    def _sort_rows(cls, text: str, separator: str, position: int, *, numeric: bool = False,
+                   descending: bool = False) -> str:
+        rows = cls._fields(text, separator)
+        key = (lambda row: float(row[position - 1])) if numeric else (lambda row: row[position - 1])
+        ordered = sorted(rows, key=key, reverse=descending)
+        return "\n".join(separator.join(row) for row in ordered) + "\n"
+
+    def _check(self, goal: str, first: str, second: str, held: str, oracle) -> dict:
+        agent = self._agent()
+        agent.computer.write("one.dat", first)
+        agent.computer.write("two.dat", second)
+        outcome = agent.acquire(
+            goal, [("one.dat", oracle(first)), ("two.dat", oracle(second))]
+        )
+        self.assertEqual(outcome["status"], "PASS", (goal, outcome))
+        agent.computer.write("held.dat", held)
+        answer = agent.solve(goal, bindings={"path": "held.dat"})
+        self.assertEqual(answer["status"], "PASS", (goal, answer))
+        self.assertEqual(answer["stdout"], oracle(held), goal)
+        return outcome
+
+    def test_a_battery_of_requests_is_right_on_files_it_never_saw(self) -> None:
+        cases = [
+            (
+                "show the second field of each line, comma separated",
+                "x,10\ny,2\n",
+                "p,7\nq,9\n",
+                "m,4\nn,100\no,20\n",
+                lambda text: "".join(row[1] + "\n" for row in self._fields(text, ",")),
+            ),
+            (
+                "replace every comma with a semicolon",
+                "x,10\ny,2\n",
+                "p,7\n",
+                "a,b,c\nd,e\n",
+                lambda text: text.replace(",", ";"),
+            ),
+            (
+                "show only the lines that contain error",
+                "ok\nan error\n",
+                "error here\nfine\n",
+                "no match\nan error late\nsecond error\n",
+                lambda text: "".join(line + "\n" for line in text.splitlines() if "error" in line),
+            ),
+            (
+                "the first field of each line, colon separated",
+                "x:1\ny:2\n",
+                "p:9\n",
+                "q:1:2\nw:3\n",
+                lambda text: "".join(row[0] + "\n" for row in self._fields(text, ":")),
+            ),
+            (
+                "sort the rows by the second column, comma separated",
+                "x,10\ny,9\nz,8\n",
+                "p,7\nq,6\n",
+                "k,10\nj,9\ni,8\n",
+                lambda text: self._sort_rows(text, ",", 2),
+            ),
+            (
+                "sort the rows by the second column numerically, comma separated",
+                "x,10\ny,9\nz,8\n",
+                "p,7\nq,6\n",
+                "k,10\nj,9\ni,8\n",
+                lambda text: self._sort_rows(text, ",", 2, numeric=True),
+            ),
+            (
+                "sort the rows by the second column descending, comma separated",
+                "x,10\ny,9\nz,8\n",
+                "p,7\nq,6\n",
+                "k,2\nj,9\ni,8\n",
+                lambda text: self._sort_rows(text, ",", 2, descending=True),
+            ),
+            (
+                "show the last two rows sorted by the second column, comma separated",
+                "x,4\ny,2\nz,9\nw,1\n",
+                "p,5\nq,3\nr,7\n",
+                "m,3\nn,8\no,1\np,6\nq,5\n",
+                lambda text: "\n".join(self._sort_rows(text, ",", 2).splitlines()[-2:]) + "\n",
+            ),
+            (
+                "show the first character of each line",
+                "alpha\nbeta\n",
+                "gamma\n",
+                "zeta\neta\n",
+                lambda text: "".join(line[:1] + "\n" for line in text.splitlines()),
+            ),
+            (
+                "count the lines",
+                "a\nb\n",
+                "c\nd\ne\n",
+                "p\nq\nr\ns\n",
+                lambda text: str(len(text.splitlines())) + "\n",
+            ),
+            (
+                "uppercase every letter",
+                "ab\ncd\n",
+                "ef\n",
+                "hi there\n",
+                lambda text: text.upper(),
+            ),
+            (
+                "remove the duplicate lines",
+                "a\nb\na\nc\n",
+                "z\nz\nq\n",
+                "r\ns\nr\nt\ns\n",
+                self._distinct_lines,
+            ),
+        ]
+        for goal, first, second, held, oracle in cases:
+            with self.subTest(goal=goal):
+                self._check(goal, first, second, held, oracle)
+
+    @staticmethod
+    def _distinct_lines(text: str) -> str:
+        seen: set[str] = set()
+        out: list[str] = []
+        for line in text.splitlines():
+            if line not in seen:
+                seen.add(line)
+                out.append(line)
+        return "".join(line + "\n" for line in out)
+
+
 class EndToEndTests(unittest.TestCase):
     """Two different kinds of knowledge live in one creature."""
 

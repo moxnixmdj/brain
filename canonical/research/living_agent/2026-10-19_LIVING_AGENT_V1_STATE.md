@@ -12,11 +12,19 @@ receipt, not a terminal claim, and not a capability grant.
 | Living agent | `canonical/runtime/living_agent_v1.py` | Real POSIX computer surface, one-shot skill chunking, canary-based drift detection and repair, word learning, impasse tracking, self-directed practice, consolidating memory, snapshot/restore. |
 | Shell synthesis | `canonical/runtime/shell_synthesis_v1.py` | Learns a stdin→stdout pipeline from (input, expected output) examples: typed beam search over 20 real stages, exact interpreter ordering, real-shell verification. |
 | Benchmark | `canonical/runtime/living_agent_benchmark_v1.py` | Twelve spreadsheet transforms with independently written oracles, plus a projection of the repository's real file tree. |
-| Acceptance | `tests/test_living_agent_v1.py` | 121 tests / 162 subtests. Real processes, real files, exact byte equality. No mocks. |
+| Acceptance | `tests/test_living_agent_v1.py` | 122 tests / 174 subtests. Real processes, real files, exact byte equality. No mocks. |
 | Discovery | `canonical/runtime/living_discovery_v1.py` | Reads what this machine says it can do (`tool --help`, the tool's own definition), turns a goal sentence into an exact expected output, and proves a real command against it before admitting it. |
 | Growth measurement | `canonical/runtime/living_agent_growth_v1.py` | Acquires four real skills at runtime and replays them on three untouched real directories. |
 
 ## Measured results
+
+A twelve-request battery (`HeldOutBatteryTests`) teaches each request on two
+files and answers a third that the search never saw; every expected output is
+computed by an independent implementation in the test file.  All twelve are
+byte-exact, including the two that used to be admitted as a plausible-looking
+wrong answer: a positional `tail` standing in for a word filter, and a reversed
+lexical sort standing in for a numeric one.
+
 
 Table induction, one demonstration per family (a demonstration that shows one
 example of every categorical value, numeric values drawn at random), 20
@@ -28,7 +36,7 @@ filter_sort    20/20    raise          20/20    group_sum    20/20
 month_counts   20/20    unit_price     20/20    top2         20/20
 domains        20/20    dedupe         20/20    active       20/20
 tax            20/20    pct            20/20    concat       20/20
-TOTAL 240/240, median 0.21 s per family, max 2.6 s
+TOTAL 240/240, median 0.19-0.26 s per family across runs, max 2.6 s
 ```
 
 A wider robustness sweep — 24 demonstration seeds × 12 families × 10 held-out
