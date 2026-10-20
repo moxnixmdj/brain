@@ -1,0 +1,8 @@
+test_add (tests.test_core.T.test_add) ... ok
+test_mul (tests.test_core.T.test_mul) ... ok
+test_tags (tests.test_core.T.test_tags) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK

@@ -1,0 +1,138 @@
+{
+  "broad_objective_decomposition": null,
+  "broad_objective_decomposition_available": false,
+  "candidate_capability_ids": [
+    "terminal.kstar.root.assess.stdlib"
+  ],
+  "clauses": [
+    {
+      "candidates": [
+        {
+          "binding_affordance": {
+            "has_goal_url": false,
+            "proposal_binding_count": 0,
+            "proposal_bindings_cover_all_inputs": false,
+            "url_consumable": false
+          },
+          "capability_id": "terminal.kstar.root.assess.stdlib",
+          "combined_score": 25.266666666666666,
+          "input_bindability": {
+            "bound_input_keys": [],
+            "proposal_binding_keys": [],
+            "verified": true
+          },
+          "lexical": {
+            "matched_goal_tokens": [
+              "brain",
+              "capability",
+              "evidence"
+            ],
+            "matched_identity": [],
+            "matched_keywords": [
+              [
+                "brain",
+                "brain"
+              ],
+              [
+                "capability",
+                "capability"
+              ],
+              [
+                "evidence",
+                "evidence"
+              ]
+            ],
+            "matched_provides": [],
+            "score": 12
+          },
+          "matched_distinctive_tokens": [
+            "brain",
+            "capability",
+            "evidence"
+          ],
+          "provides": [
+            "terminal.kstar.root.assessment",
+            "terminal.scope_complete.proof_or_minimum_residual",
+            "terminal.tournament.failure.witness"
+          ],
+          "requires": [],
+          "similarity": {
+            "coverage": 0.3333333333333333,
+            "score": 13.266666666666667,
+            "sequence_ratio": 0.26666666666666666,
+            "shared_tokens": [
+              "brain",
+              "capability",
+              "evidence"
+            ]
+          }
+        }
+      ],
+      "constraints": [],
+      "end": 77,
+      "index": 0,
+      "output_contract": {
+        "extensions": [],
+        "paths": []
+      },
+      "rejected_unbindable_candidates": [
+        {
+          "capability_id": "decision.synthesis.typed.stdlib",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:input_path"
+        },
+        {
+          "capability_id": "decision.synthesis.verify.stdlib",
+          "error": "CapabilityProposalFailure:PROPOSAL_EFFECT_PROVIDER_MISSING:decision.synthesis.verify.stdlib:input_path:decision.synthesis.typed"
+        },
+        {
+          "capability_id": "document.convert.markdown_pdf.pandoc_weasyprint",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:markdown_path"
+        },
+        {
+          "capability_id": "docx.document.create_from_json_record",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:json_path"
+        },
+        {
+          "capability_id": "evidence.claim_relation.generic_units.stdlib",
+          "error": "CapabilityProposalFailure:GOAL_LITERAL_BINDING_FAILED:evidence.claim_relation.generic_units.stdlib:GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:spec"
+        },
+        {
+          "capability_id": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+          "error": "CapabilityProposalFailure:GOAL_LITERAL_BINDING_FAILED:evidence.claim_spec.bind.explicit_comparison.stdlib:GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:objective"
+        },
+        {
+          "capability_id": "knowledge.json.fetch.external",
+          "error": "CapabilityProposalFailure:GOAL_URL_BINDING_REQUIRED:knowledge.json.fetch.external:0"
+        },
+        {
+          "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        },
+        {
+          "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+          "error": "CapabilityProposalFailure:PROPOSAL_EFFECT_PROVIDER_MISSING:plain_goal.bound_capability.grounding.verify.stdlib:result_path:plain_goal.bound_capability.grounding"
+        },
+        {
+          "capability_id": "source.evidence.extract.objective_grounded.stdlib",
+          "error": "CapabilityProposalFailure:PROPOSAL_EFFECT_PROVIDER_MISSING:source.evidence.extract.objective_grounded.stdlib:input_path:source.objective_relevance.lexical_ranked"
+        },
+        {
+          "capability_id": "source.objective_relevance.rank.bm25",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:input_path"
+        }
+      ],
+      "start": 0,
+      "status": "UNBOUND_INPUTS_NOT_GROUNDED",
+      "text": "Find out whether Brain owns its capability mechanisms and report the evidence"
+    }
+  ],
+  "external_discovery_allowed_for_unresolved_only": true,
+  "goal": "Find out whether Brain owns its capability mechanisms and report the evidence.",
+  "goal_sha256": "336fe2d1d195f7657dcf479db2ca05322aab8fb72a40ccc4854afe41924b7f03",
+  "grounded_clause_count": 1,
+  "input_contract_bindability_enforced": true,
+  "model_dependency_count": 0,
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_BOUND_GROUNDING_V1",
+  "unresolved_clause_indexes": [],
+  "whole_goal_external_discovery_forbidden_if_any_bound_grounding": true
+}

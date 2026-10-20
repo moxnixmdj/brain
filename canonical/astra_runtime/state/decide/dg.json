@@ -1,0 +1,97 @@
+{
+  "broad_objective_decomposition": null,
+  "broad_objective_decomposition_available": false,
+  "candidate_capability_ids": [],
+  "clauses": [
+    {
+      "candidates": [],
+      "constraints": [],
+      "end": 32,
+      "index": 0,
+      "output_contract": {
+        "extensions": [],
+        "paths": []
+      },
+      "rejected_unbindable_candidates": [
+        {
+          "capability_id": "docx.document.create.python_docx",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        },
+        {
+          "capability_id": "python.contract.check.crosshair.v1",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        },
+        {
+          "capability_id": "python.fault.localize.dynamic.dataflow.v1",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        },
+        {
+          "capability_id": "python.fault.provenance.interprocedural.value.v1",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        },
+        {
+          "capability_id": "python.patch.search.test_guided.ast.v1",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        },
+        {
+          "capability_id": "python.repository.acceptance.measure.v1",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        },
+        {
+          "capability_id": "python.software.repair.guided.provenance.coupled.v1",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        },
+        {
+          "capability_id": "python.software.repair.loop.coupled.ast.v1",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        },
+        {
+          "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        },
+        {
+          "capability_id": "python.software.repair.loop.test_guided.ast.v1",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        },
+        {
+          "capability_id": "python.software.repair.measured_acceptance.v1",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        },
+        {
+          "capability_id": "python.software.repair.semantic_acceptance.v1",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        },
+        {
+          "capability_id": "python.software.request.semantic_behavior.compile.v1",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        },
+        {
+          "capability_id": "python.source.audit.ast",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        },
+        {
+          "capability_id": "python.task.acceptance.measured.objective.v1",
+          "error": "CapabilityProposalFailure:PROPOSAL_EFFECT_PROVIDER_MISSING:python.task.acceptance.measured.objective.v1:measurement_receipt_path:python.repository.acceptance.measurement.content_addressed"
+        },
+        {
+          "capability_id": "python.tests.audit.unittest",
+          "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+        }
+      ],
+      "start": 0,
+      "status": "UNRESOLVED",
+      "text": "Check python contract violations"
+    }
+  ],
+  "external_discovery_allowed_for_unresolved_only": true,
+  "goal": "Check python contract violations",
+  "goal_sha256": "323962c1f87808cea85904ea201629f55ea8ef81ca03ce65430f6643c8e6f57b",
+  "grounded_clause_count": 0,
+  "input_contract_bindability_enforced": true,
+  "model_dependency_count": 0,
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_BOUND_GROUNDING_V1",
+  "unresolved_clause_indexes": [
+    0
+  ],
+  "whole_goal_external_discovery_forbidden_if_any_bound_grounding": false
+}

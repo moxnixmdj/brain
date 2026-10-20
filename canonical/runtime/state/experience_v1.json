@@ -1,0 +1,686 @@
+{
+ "cells": {
+  "archive.tar_gz.create_from_manifest|verified": {
+   "first_seen": 1792312443.2875447,
+   "last_seen": 1792322989.8236697,
+   "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "structural": false,
+   "where": "archive.tar_gz.create_from_manifest",
+   "why": "VERIFIED"
+  },
+  "archive.verify.tar_gz.gnu|runtimeerror": {
+   "first_seen": 1792312443.3720834,
+   "last_seen": 1792316099.1447587,
+   "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "archive.verify.tar_gz.gnu",
+   "why": "RuntimeError"
+  },
+  "archive.verify.tar_gz.gnu|verified": {
+   "first_seen": 1792316179.6037304,
+   "last_seen": 1792323284.1871977,
+   "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "structural": false,
+   "where": "archive.verify.tar_gz.gnu",
+   "why": "VERIFIED"
+  },
+  "document.convert.markdown_pdf.pandoc_weasyprint|blocker": {
+   "first_seen": 1792312537.2174094,
+   "last_seen": 1792313073.615255,
+   "observations": [
+    -1,
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "document.convert.markdown_pdf.pandoc_weasyprint",
+   "why": "Blocker"
+  },
+  "docx.document.create_from_json_record|blocker": {
+   "first_seen": 1792313840.6015184,
+   "last_seen": 1792322722.968732,
+   "observations": [
+    -1,
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "docx.document.create_from_json_record",
+   "why": "Blocker"
+  },
+  "docx.document.verify.intent_ooxml|runtimeerror": {
+   "first_seen": 1792317865.3490944,
+   "last_seen": 1792317956.9033022,
+   "observations": [
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "docx.document.verify.intent_ooxml",
+   "why": "RuntimeError"
+  },
+  "docx.document.verify.intent_ooxml|verified": {
+   "first_seen": 1792312443.1245909,
+   "last_seen": 1792322989.643618,
+   "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "structural": false,
+   "where": "docx.document.verify.intent_ooxml",
+   "why": "VERIFIED"
+  },
+  "evidence.claim_spec.bind.explicit_comparison.stdlib|jsondecodeerror": {
+   "first_seen": 1792314707.727418,
+   "last_seen": 1792314707.7274203,
+   "observations": [
+    -1
+   ],
+   "structural": false,
+   "where": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+   "why": "JSONDecodeError"
+  },
+  "finance.saccr.credit.addon.v1|trades.json.available": {
+   "first_seen": 1792322221.72312,
+   "last_seen": 1792322221.7231228,
+   "observations": [
+    -1
+   ],
+   "structural": false,
+   "where": "finance.saccr.credit.addon.v1",
+   "why": "trades.json.available"
+  },
+  "forged.agency_finite_portfolio_generator_v1.generate|verified": {
+   "first_seen": 1792322221.7239196,
+   "last_seen": 1792322221.723922,
+   "observations": [
+    1
+   ],
+   "structural": false,
+   "where": "forged.agency_finite_portfolio_generator_v1.generate",
+   "why": "VERIFIED"
+  },
+  "forged.automationbench_mutation_compiler_v1.compile_sheets_append|verified": {
+   "first_seen": 1792322221.7919984,
+   "last_seen": 1792322221.7920015,
+   "observations": [
+    1
+   ],
+   "structural": false,
+   "where": "forged.automationbench_mutation_compiler_v1.compile_sheets_append",
+   "why": "VERIFIED"
+  },
+  "forged.bounded_contextual_semantics.compile_context|verified": {
+   "first_seen": 1792322221.6381934,
+   "last_seen": 1792322221.638196,
+   "observations": [
+    1
+   ],
+   "structural": false,
+   "where": "forged.bounded_contextual_semantics.compile_context",
+   "why": "VERIFIED"
+  },
+  "image.extract.ocr.tesseract|bound_capability_source_unsupported": {
+   "first_seen": 1792313437.9199655,
+   "last_seen": 1792322976.5949187,
+   "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+   ],
+   "structural": true,
+   "where": "image.extract.ocr.tesseract",
+   "why": "BOUND_CAPABILITY_SOURCE_UNSUPPORTED"
+  },
+  "json.query.jq|verified": {
+   "first_seen": 1792352260.1766033,
+   "last_seen": 1792352610.0267751,
+   "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "structural": false,
+   "where": "json.query.jq",
+   "why": "VERIFIED"
+  },
+  "math.numeric_expression.sympy|live_controller_execution_or_verification_failure": {
+   "first_seen": 1792352260.1185527,
+   "last_seen": 1792352505.5778987,
+   "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "math.numeric_expression.sympy",
+   "why": "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE"
+  },
+  "pdf.extract.text.pypdf|bound_pypi_install_failed": {
+   "first_seen": 1792312518.9164147,
+   "last_seen": 1792312518.916418,
+   "observations": [
+    -1
+   ],
+   "structural": true,
+   "where": "pdf.extract.text.pypdf",
+   "why": "BOUND_PYPI_INSTALL_FAILED"
+  },
+  "pdf.extract.text.pypdf|verified": {
+   "first_seen": 1792313436.2314923,
+   "last_seen": 1792322993.578042,
+   "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "structural": false,
+   "where": "pdf.extract.text.pypdf",
+   "why": "VERIFIED"
+  },
+  "plain_goal.bound_capability.grounding.stdlib|verified": {
+   "first_seen": 1792322103.3126507,
+   "last_seen": 1792322103.3623152,
+   "observations": [
+    1,
+    1,
+    1
+   ],
+   "structural": false,
+   "where": "plain_goal.bound_capability.grounding.stdlib",
+   "why": "VERIFIED"
+  },
+  "pypi.provenance.audit_live_artifact|pypi.live_metadata.available": {
+   "first_seen": 1792314707.5770307,
+   "last_seen": 1792314707.5770314,
+   "observations": [
+    -1
+   ],
+   "structural": false,
+   "where": "pypi.provenance.audit_live_artifact",
+   "why": "pypi.live_metadata.available"
+  },
+  "pypi.provenance.audit_live_artifact|pypi.selection.available": {
+   "first_seen": 1792314707.5773926,
+   "last_seen": 1792314707.5773938,
+   "observations": [
+    -1
+   ],
+   "structural": false,
+   "where": "pypi.provenance.audit_live_artifact",
+   "why": "pypi.selection.available"
+  },
+  "python.fault.localize.dynamic.dataflow.v1|verified": {
+   "first_seen": 1792352262.2900982,
+   "last_seen": 1792352612.1524954,
+   "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "structural": false,
+   "where": "python.fault.localize.dynamic.dataflow.v1",
+   "why": "VERIFIED"
+  },
+  "python.software.repair.loop.strict_progress.ast.v1|python.patch.search.test_guided.ast.v1": {
+   "first_seen": 1792314707.5759733,
+   "last_seen": 1792314707.5759766,
+   "observations": [
+    -1
+   ],
+   "structural": false,
+   "where": "python.software.repair.loop.strict_progress.ast.v1",
+   "why": "python.patch.search.test_guided.ast.v1"
+  },
+  "python.software.repair.loop.test_guided.ast.v1|python.patch.search.test_guided.ast.v1": {
+   "first_seen": 1792314707.5766072,
+   "last_seen": 1792314707.5766084,
+   "observations": [
+    -1
+   ],
+   "structural": false,
+   "where": "python.software.repair.loop.test_guided.ast.v1",
+   "why": "python.patch.search.test_guided.ast.v1"
+  },
+  "python.software.repair.loop.test_guided.ast.v1|verified": {
+   "first_seen": 1792352263.075244,
+   "last_seen": 1792352612.9518661,
+   "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "structural": false,
+   "where": "python.software.repair.loop.test_guided.ast.v1",
+   "why": "VERIFIED"
+  },
+  "python.software.request.semantic_behavior.compile.v1|failed": {
+   "first_seen": 1792322128.690607,
+   "last_seen": 1792323323.598104,
+   "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "python.software.request.semantic_behavior.compile.v1",
+   "why": "FAILED"
+  },
+  "python.source.audit.ast|runtimeerror": {
+   "first_seen": 1792312444.8398008,
+   "last_seen": 1792316181.2872977,
+   "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "python.source.audit.ast",
+   "why": "RuntimeError"
+  },
+  "python.source.audit.ast|verified": {
+   "first_seen": 1792312443.2595565,
+   "last_seen": 1792323290.3054066,
+   "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "structural": false,
+   "where": "python.source.audit.ast",
+   "why": "VERIFIED"
+  },
+  "python.task.acceptance.measured.objective.v1|bound_capability_source_unsupported": {
+   "first_seen": 1792314707.6911466,
+   "last_seen": 1792322665.8227456,
+   "observations": [
+    -1,
+    -1
+   ],
+   "structural": true,
+   "where": "python.task.acceptance.measured.objective.v1",
+   "why": "BOUND_CAPABILITY_SOURCE_UNSUPPORTED"
+  },
+  "source.evidence.extract.objective_grounded.stdlib|source.candidate.provenance.verified": {
+   "first_seen": 1792314706.0934482,
+   "last_seen": 1792322665.8220468,
+   "observations": [
+    -1,
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "source.evidence.extract.objective_grounded.stdlib",
+   "why": "source.candidate.provenance.verified"
+  },
+  "source.objective_relevance.rank.bm25|source.candidates.available": {
+   "first_seen": 1792322665.8212636,
+   "last_seen": 1792322665.8212662,
+   "observations": [
+    -1
+   ],
+   "structural": false,
+   "where": "source.objective_relevance.rank.bm25",
+   "why": "source.candidates.available"
+  },
+  "sqlite.table.verify_against_json_records|blocker": {
+   "first_seen": 1792312443.3051975,
+   "last_seen": 1792322989.849274,
+   "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "sqlite.table.verify_against_json_records",
+   "why": "Blocker"
+  },
+  "xlsx.table.create_from_json_records|blocker": {
+   "first_seen": 1792312443.3409848,
+   "last_seen": 1792317565.345804,
+   "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "xlsx.table.create_from_json_records",
+   "why": "Blocker"
+  },
+  "xlsx.table.create_from_json_records|runtimeerror": {
+   "first_seen": 1792315608.6882799,
+   "last_seen": 1792322989.961854,
+   "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "xlsx.table.create_from_json_records",
+   "why": "RuntimeError"
+  },
+  "xlsx.table.verify_against_json_records|blocker": {
+   "first_seen": 1792312443.3242493,
+   "last_seen": 1792317565.3240504,
+   "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "xlsx.table.verify_against_json_records",
+   "why": "Blocker"
+  },
+  "xlsx.table.verify_against_json_records|runtimeerror": {
+   "first_seen": 1792315960.972894,
+   "last_seen": 1792315960.9728954,
+   "observations": [
+    -1
+   ],
+   "structural": false,
+   "where": "xlsx.table.verify_against_json_records",
+   "why": "RuntimeError"
+  },
+  "xlsx.table.verify_against_json_records|unicodedecodeerror": {
+   "first_seen": 1792315608.668318,
+   "last_seen": 1792315682.0914865,
+   "observations": [
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "xlsx.table.verify_against_json_records",
+   "why": "UnicodeDecodeError"
+  },
+  "xlsx.table.verify_against_json_records|verified": {
+   "first_seen": 1792315902.8224573,
+   "last_seen": 1792322989.9382899,
+   "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "structural": false,
+   "where": "xlsx.table.verify_against_json_records",
+   "why": "VERIFIED"
+  }
+ },
+ "resolutions": {}
+}

@@ -1,0 +1,13 @@
+{
+ "objective": "Does this repository own its capability mechanisms and keep knowledge external?",
+ "documents": [
+  {
+   "id": "live-github-repo",
+   "text": "{\"full_name\": \"moxnixmdj/brain\", \"description\": null, \"private\": false, \"stargazers_count\": 0, \"license\": null}"
+  }
+ ],
+ "retrieval": {
+  "requested_url": "https://api.github.com/repos/moxnixmdj/brain",
+  "final_url": "https://api.github.com/repos/moxnixmdj/brain"
+ }
+}

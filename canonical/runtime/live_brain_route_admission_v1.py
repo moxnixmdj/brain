@@ -813,6 +813,78 @@ def promised_artifact_errors(goal: str, future_artifacts: list[str]) -> list[str
     return errors
 
 
+
+def _recall_for(goal: str) -> list:
+    """What the machine remembers that bears on this goal, before it acts.
+
+    Memory existed but nothing asked it. Every solve re-derived everything from
+    keyword overlap, so a lesson learned once changed nothing the next time.
+    Consulting is additive: it cannot change what is admitted, only what is
+    known -- and memory failures must never break the live path.
+    """
+    try:
+        from canonical.runtime import flywheel_v1 as fly
+        return list(fly.relevant(goal, "", k=5) or [])
+    except Exception:
+        return []
+
+
+def _credit_recall(rows: list, succeeded: bool) -> None:
+    """Tell memory whether what it dredged up was worth dredging up.
+
+    Without this, importance never differentiates: every memory stays at the
+    0.5 prior and "what is important" is never learned. This is the only thing
+    that separates a memory from a search index.
+    """
+    try:
+        from canonical.runtime import associative_memory_v1 as mem
+    except Exception:
+        return
+    for row in rows:
+        try:
+            mem.credit(str(row.get("id") or ""), helped=bool(succeeded))
+        except Exception:
+            continue
+
+
+COMPOSED_EXECUTOR = "TYPE_LEVEL_COMPOSITION_LOCAL_ADAPTER"
+
+
+def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | None:
+    """Close a goal by chaining capabilities, when no single one matches.
+
+    Returns None when composition cannot reach the goal, so the caller still
+    reports the honest gap. Returns a real result only when every step of the
+    chain ran and returned.
+    """
+    try:
+        from canonical.runtime import composer_route_v1 as croute
+        routed = croute.route(goal)
+        if not routed.get("pass"):
+            return None
+        executed = croute.execute_chain(routed["chain"], goal)
+    except Exception:  # noqa: BLE001 - composition must never break routing
+        return None
+    if not executed.get("pass"):
+        return None
+    return {
+        "schema": LIVE_SCHEMA, "status": "PASS__COMPOSED_CAPABILITY_CHAIN",
+        "pass": True, "task_id": task_id, "goal": goal,
+        "executed": True, "execution_proof_type": COMPOSED_EXECUTOR,
+        "composer_route": {k: routed.get(k) for k in ("token", "chain", "tried")},
+        "composer_execution": {k: executed.get(k) for k in
+                               ("steps", "produced", "status")},
+        "capability_id": (routed["chain"] or [None])[-1],
+        "controller": {"executor": COMPOSED_EXECUTOR, "returncode": 0,
+                       "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+                       "cognition_dependency_class": "MODEL_INDEPENDENT",
+                       "model_dependency_count": 0,
+                       "steps_run": len(executed.get("steps") or [])},
+        "incremental_spend_usd": 0,
+        "elapsed_ns": perf_counter_ns() - started,
+    }
+
+
 def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     """THE live Brain entry: front-compile -> admit -> execute -> tool truth -> promised artifacts."""
     started = perf_counter_ns()
@@ -823,12 +895,21 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     try:
         registry, admissible, compiled = live_integrated_brain_v1.compile_against_live_registry(goal, ROOT)
     except goal_compiler.GoalCompilationFailure as exc:
+        # The sentence names no single capability. Before calling that a gap,
+        # ask the composer whether a CHAIN of capabilities reaches it: the
+        # sentence may describe work no one capability does but several do
+        # together. Composition was built and tested and then never called.
+        composed = _try_composed(task_id, goal, started)
+        if composed is not None:
+            return composed
         return _fail(task_id, "FAIL__RAW_GOAL_COMPILATION_GAP", "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP", started,
                      compiler_code=exc.code, compiler_detail=exc.detail, route_admission=None)
     except Exception as exc:  # pragma: no cover - defensive, mirrors run_raw_goal
         return _fail(task_id, "FAIL_CLOSED", "RAW_GOAL_INTEGRATION_RUNTIME_ERROR", started, reason=type(exc).__name__ + ":" + str(exc))
     normalized = front.normalize_goal(goal)
     future_artifacts = _future_artifacts(normalized)
+    # ask memory what it knows about work like this, before deciding anything
+    recalled = _recall_for(normalized)
     admission = route_admission(normalized, compiled, admissible)
     admission["front_compiler_rules"] = list((compiled.get("front_compiler") or {}).get("rules_applied") or [])
     if admission.get("admitted") is not True:
@@ -836,6 +917,13 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
                      compiled_capability_id=admission.get("selected_capability"), compiler_mode=compiled.get("compiler_mode"), route_admission=admission)
     result = _execute(task_id, goal, compiled, admissible, started)
     result["route_admission"] = admission
+    result["memory_recalled"] = [
+        {"id": r.get("id"), "content": r.get("content"),
+         "relevance": r.get("relevance"), "importance": r.get("importance")}
+        for r in recalled
+    ]
+    # close the loop: what memory offered is judged by what actually happened
+    _credit_recall(recalled, bool(result.get("pass")))
     truth = tool_truth_errors(result)
     if truth and result.get("pass") is True:
         result["runtime_status_before_truth_check"] = result.get("status")
@@ -846,10 +934,194 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         result["side_effects_may_exist"] = True
     missing = promised_artifact_errors(goal, future_artifacts) if result.get("pass") is True else []
     if missing:
+        # The promised file is not there. That is the only verdict that
+        # matters -- and it is also the moment to try something else, rather
+        # than reporting a gap while a chain of capabilities could have
+        # produced the thing. Composition is tried here, on the evidence.
+        composed = _try_composed(task_id, goal, started)
+        if composed is not None:
+            composed["memory_recalled"] = [
+                {"id": r.get("id"), "content": r.get("content"),
+                 "relevance": r.get("relevance"), "importance": r.get("importance")}
+                for r in recalled]
+            composed["route_admission"] = admission
+            composed["supersedes"] = {
+                "status": result.get("status"),
+                "compiled_capability_id": result.get("compiled_capability_id"),
+                "promised_artifact_errors": list(missing)}
+            return composed
         result["runtime_status_before_artifact_check"] = result.get("status")
         result["status"] = "FAIL_CLOSED__PROMISED_ARTIFACT_MISSING"
         result["pass"] = False
         result["failure_class"] = "PROMISED_ARTIFACT_MISSING"
         result["promised_artifact_errors"] = missing
     result["elapsed_ns"] = perf_counter_ns() - started
+    return result
+
+
+# ------------------------------------------------------------------ learn on failure
+
+_LEARNABLE_STATUSES = frozenset({
+    "FAIL__RAW_GOAL_COMPILATION_GAP",
+})
+
+
+def _is_executable(name: str) -> bool:
+    """Does this program exist on this machine? Checked, never assumed."""
+    import shutil
+    from pathlib import Path
+    try:
+        return bool(Path(name).is_file() or shutil.which(name))
+    except Exception:
+        return False
+
+
+def _named_executable(goal: str) -> str:
+    """A program the goal actually names, that exists on this machine.
+
+    Only this is acquirable by running it. Inventing an executable that is not
+    there would be guessing, and the machine does not guess -- it checks.
+    """
+    import shutil
+    from pathlib import Path
+    for tok in str(goal or "").replace(",", " ").replace(";", " ").split():
+        t = tok.strip(".,()[]{}\"'")
+        if len(t) < 2 or "/" in t:
+            continue
+        if Path(t).is_file() or shutil.which(t):
+            return t
+    return ""
+
+
+def solve_or_learn(request: Mapping[str, Any], *, learn: bool = True,
+                   registry_path: str | None = None) -> dict[str, Any]:
+    """Try it; if the machine cannot, let that be the signal to learn how.
+
+    solve() answers "can I do this". When the answer is no, the interesting
+    question is what happens next. A strict program reports the failure and
+    stops, and will report the same failure forever. A creature treats
+    "I cannot" as the most precise information it has about what it lacks:
+
+      1. it records the gap, so it now KNOWS it has a hole here -- and the
+         ledger ranks that hole against every other thing it does not know;
+      2. if the goal names a program that exists, it learns to drive that
+         program (by reading its help, or failing that by trying it);
+      3. if that produced something verified, it registers it and RETRIES.
+
+    solve() itself is untouched, so the measured path cannot move.
+    """
+    result = solve(request)
+    if not learn:
+        return result
+    if str(result.get("status") or "") not in _LEARNABLE_STATUSES:
+        return result
+
+    goal = str((request or {}).get("goal") or "").strip()
+    learned: dict[str, Any] = {"attempted": False, "gap_recorded": False}
+
+    try:
+        from canonical.runtime import ignorance_ledger_v1 as led
+        gap_id = led.note(goal or "unmatched goal",
+                          why="raw goal compilation gap", cost=1.0)
+        learned["gap_recorded"] = True
+        learned["gap_id"] = gap_id
+        learned["what_to_learn_next"] = [g["what"] for g in led.rank(limit=3)]
+    except Exception:
+        pass
+
+    # JIT KNOWLEDGE. The goal named nothing the machine can run, so before
+    # concluding anything it asks the outside world what exists for this job.
+    # A gap is not the end of the road -- it is the question.
+    try:
+        from canonical.runtime import jit_knowledge_v1 as jit
+        known = jit.resolve(goal, min_sources=1, limit=6, timeout=8)
+        # Asking the world a badly-phrased question and then concluding the
+        # world has nothing to say is the oldest way to be wrong. A goal like
+        # "write the text hello to out.txt" is an instruction, not a query:
+        # asked verbatim, github returns nothing at all. Rephrase and ask
+        # again before believing the silence.
+        if not known.get("complete"):
+            try:
+                from canonical.runtime.curriculum_v1 import query_for
+                rephrased = query_for(goal)
+                if rephrased and rephrased != goal:
+                    again = jit.resolve(rephrased, min_sources=1, limit=6,
+                                        timeout=8)
+                    if (again.get("complete")
+                            or again.get("document_count", 0)
+                            > known.get("document_count", 0)):
+                        known = again
+                        known["query_was_rephrased_to"] = rephrased
+            except Exception:
+                pass
+        learned["knowledge"] = {
+            "status": known.get("status"),
+            "documents": known.get("document_count", 0),
+            "sources_answered": known.get("sources_answered") or [],
+            # a summary that drops the KINDS cannot explain its own refusal:
+            # it says "incomplete" without being able to say that three
+            # registries agreed because they are all registries
+            "kinds_answered": known.get("kinds_answered") or [],
+            "min_kinds_required": known.get("min_kinds_required"),
+            "gap": known.get("gap"),
+            "query_was_rephrased_to": known.get("query_was_rephrased_to"),
+            "complete": known.get("complete", False),
+            "authority": known.get("authority"),
+        }
+        # knowledge that names a program is only useful if that program is
+        # actually HERE -- the machine does not install, and does not invent.
+        candidates: list[str] = []
+        for doc in (known.get("documents") or []):
+            for text in (str(doc.get("id") or ""), str(doc.get("title") or "")):
+                head = text.strip().split()[0] if text.strip() else ""
+                head = head.strip(".,()[]{}'\"")
+                if 2 <= len(head) <= 40 and _is_executable(head):
+                    candidates.append(head)
+        if candidates:
+            learned["knowledge"]["candidates_present"] = candidates[:6]
+            if not _named_executable(goal):
+                exe_guess = candidates[0]
+                learned.setdefault("from_knowledge", exe_guess)
+    except Exception as exc:
+        learned.setdefault("knowledge", {"error": type(exc).__name__ + ":" + str(exc)[:160]})
+
+    exe = _named_executable(goal)
+    if not exe:
+        # nothing the goal named -- but knowledge may have named something real
+        exe = str(learned.get("from_knowledge") or "")
+        if exe:
+            learned["attempted"] = True
+            learned["executable"] = exe
+            learned["executable_source"] = "jit_knowledge"
+    if exe:
+        learned["attempted"] = True
+        learned["executable"] = exe
+        try:
+            from canonical.runtime import cli_capability_acquisition_v1 as acq
+            import subprocess, tempfile, json as _json
+            with tempfile.TemporaryDirectory(prefix="brain-learn-") as td:
+                out = subprocess.run([exe, "--help"], capture_output=True,
+                                     timeout=30, cwd=td)
+                text = (out.stdout + out.stderr).decode("utf-8", "replace")
+            probe_doc = {"executables": [{"executable": exe,
+                                          "help_attempts": [{"text": text}]}]}
+            acquired = acq.acquire(probe_doc, goal)
+            learned["acquisition_status"] = acquired.get("status")
+            if acquired.get("verified"):
+                cid = "acquired." + exe.replace(".", "_")
+                reg = acq.register(acquired, cid,
+                                  registry_path=registry_path)
+                learned["registered"] = reg.get("registered") is True
+                learned["capability_id"] = cid
+                if learned["registered"]:
+                    # it can do something now that it could not before
+                    retry = solve(request)
+                    retry["learning"] = learned
+                    retry["learned_this_turn"] = True
+                    return retry
+        except Exception as exc:
+            learned["error"] = type(exc).__name__ + ":" + str(exc)[:200]
+
+    result["learning"] = learned
+    result["learned_this_turn"] = False
     return result

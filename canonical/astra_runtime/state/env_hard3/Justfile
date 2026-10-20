@@ -1,0 +1,4 @@
+build:
+    python3 build.py
+clean:
+    python3 clean.py

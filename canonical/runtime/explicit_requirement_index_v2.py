@@ -44,6 +44,19 @@ def _segments(text: str) -> list[tuple[int, int, str]]:
             i += 1
             continue
         if ch in ".!?":
+            # A '.' between two digits is a decimal point, not a boundary.
+            # Splitting there truncates every decimal requirement to its
+            # integer part ("at least 0.5" -> "at least 0."), which weakens
+            # the obligation instead of failing closed.
+            if (
+                ch == "."
+                and i > 0
+                and text[i - 1].isdigit()
+                and i + 1 < n
+                and text[i + 1].isdigit()
+            ):
+                i += 1
+                continue
             j = i + 1
             while j < n and text[j] in ".!?":
                 j += 1

@@ -1,0 +1,345 @@
+{
+  "objective": "Does Brain own its capability mechanisms?",
+  "trace": [
+    {
+      "step": "retrieve external content",
+      "term": "KNOWLEDGE",
+      "status": "RAN",
+      "out": {
+        "adapter": "http_json_fetch",
+        "source_json_path": "canonical/astra_runtime/state/whole_machine/01_source.json",
+        "url_key": "url",
+        "url_field_path": [
+          "url"
+        ],
+        "requested_url": "https://api.github.com/repos/moxnixmdj/brain/issues?state=closed",
+        "final_url": "https://api.github.com/repos/moxnixmdj/brain/issues?state=closed",
+        "status": 200,
+        "content_type": "application/json; charset=utf-8",
+        "output_path": "canonical/astra_runtime/state/whole_machine/02_fetched.json",
+        "output_bytes": 1456441,
+        "output_sha256": "5244ef7d7ccdc2a3551229c218bb059439a1c598671f02c93adf34e2242b35bf",
+        "json_top_level_type": "list",
+        "output_verified": true
+      }
+    },
+    {
+      "step": "assert retrieval provenance",
+      "term": "KNOWLEDGE",
+      "status": "RAN",
+      "out": {
+        "schema": "PROJECT_BRAIN_SOURCE_CANDIDATE_PROVENANCE_VERIFICATION_V1",
+        "status": "RETRIEVAL_PROVENANCE_VERIFIED",
+        "verification_method": "LIVE_HTTP_RETRIEVAL",
+        "candidate_url": "https://api.github.com/repos/moxnixmdj/brain/issues?state=closed",
+        "final_url": "https://api.github.com/repos/moxnixmdj/brain/issues?state=closed",
+        "final_host": "api.github.com",
+        "http_status": 200,
+        "content_type": "application/json; charset=utf-8",
+        "page_title": null,
+        "authority_status": "RETRIEVABILITY_VERIFIED__FACT_AUTHORITY_UNVERIFIED",
+        "primary_source_status": "UNVERIFIED",
+        "evidence_sufficiency_status": "UNVERIFIED",
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0
+      }
+    },
+    {
+      "step": "establish objective relevance",
+      "term": "CAPABILITY",
+      "status": "RAN",
+      "out": {
+        "schema": "PROJECT_BRAIN_OBJECTIVE_RELEVANCE_BM25_V1",
+        "objective": "Does Brain own its capability mechanisms?",
+        "relevance_claim_scope": "LEXICAL_BM25_OBJECTIVE_RELEVANCE_ONLY",
+        "semantic_entailment_status": "UNVERIFIED",
+        "primary_source_status": "UNVERIFIED",
+        "factual_correctness_status": "UNVERIFIED",
+        "evidence_sufficiency_status": "UNVERIFIED",
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0,
+        "status": "LEXICAL_RELEVANCE_RANKED",
+        "verification_method": "DETERMINISTIC_BM25",
+        "query_tokens": [
+          "does",
+          "brain",
+          "own",
+          "its",
+          "capability",
+          "mechanisms"
+        ],
+        "query_focus": {
+          "schema": "PROJECT_BRAIN_RESEARCH_QUERY_FOCUS_V1",
+          "objective": "Does Brain own its capability mechanisms?",
+          "model_dependency_count": 0,
+          "incremental_spend_usd": 0,
+          "semantic_entailment_status": "UNVERIFIED",
+          "factual_correctness_status": "UNVERIFIED",
+          "status": "FOCUSED",
+          "decision_clause": "Does Brain own its capability mechanisms",
+          "query": "does brain own its capability mechanisms",
+          "tokens": [
+            "does",
+            "brain",
+            "own",
+            "its",
+            "capability",
+            "mechanisms"
+          ],
+          "query_sha256": "a7af24091c81e9b8c6693110379ee47b0ce3cdf3f3a6c6cc45b1feb3bb915d6e",
+          "method": "DECISION_TEXT_UNTIL_EXPLICIT_ORCHESTRATION_BOUNDARY_PLUS_UNICODE_FUNCTION_WORD_FILTER",
+          "claim_scope": "DETERMINISTIC_RESEARCH_SUBJECT_QUERY_ONLY"
+        },
+        "decision_role_focus": null,
+        "candidate_count": 1,
+        "positive_relevance_count": 1,
+        "ranked_candidates": [
+          {
+            "original_index": 0,
+            "candidate": {
+              "id": "retrieved-1",
+              "url": "https://api.github.com/repos/moxnixmdj/brain/issues?state=closed",
+              "title": "canonical/README.md",
+              "record_title": "canonical/README.md",
+              "snippet": "[{\"url\": \"https://api.github.com/repos/moxnixmdj/brain/issues/4935\", \"repository_url\": \"https://api.github.com/repos/moxnixmdj/brain\", \"labels_url\": \"https://api.github.com/repos/moxnixmdj/brain/issues/4935/labels{/name}\", \"comments_url\": \"https://api.github.com/repos/moxnixmdj/brain/issues/4935/comments\", \"events_url\": \"https://api.github.com/repos/moxnixmdj/brain/issues/4935/events\", \"html_url\": \"https://github.com/moxnixmdj/brain/pull/4935\", \"id\": 5897721193, \"node_id\": \"PR_kwDOUVjdIs8AAAABJAlfwA\", \"number\": 4935, \"title\": \"carrier: Record independent verification of capability execution receipts\", \"user\": {\"login\": \"brain-automation[bot]\", \"id\": 342619146, \"node_id\": \"BOT_kgDOFGv0Cg\", \"avatar_url\": \"https://avatars.githubusercontent.com/u/217246470?v=4\", \"gravatar_id\": \"\", \"url\": \"https://api.github.com/users/brain-automation%5Bbot%5D\", \"html_url\": \"https://github.com/apps/brain-automation\", \"followers_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/followers\", \"following_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/following{/other_user}\", \"gists_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/gists{/gist_id}\", \"starred_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/starred{/owner}{/repo}\", \"subscriptions_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/subscriptions\", \"organizations_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/orgs\", \"repos_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/repos\", \"events_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/events{/privacy}\", \"received_events_url\": \"https://api.github.com/users/brain-automation%5Bbot%5D/received_events\", \"type\": \"Bot\", \"user_view_type\": \"public\", \"site_admin\": false}, \"labels\": [], \"state\": \"closed\", \"locked\": false, \"assignees\": [], \"milestone\": null, \"comments\": 0, \"created_at\": \"2026-10-17T11:09:27Z\", \"updated_at\": \"2026-10-17T11:10:41Z\", \"closed_at\": \"2026-10-17T11:10:39Z\", \"assignee\": null, \"author_association\": \"CONTRIBUTOR\", \"active_lock_reason\": null, \"draft\": false, \"pull_request\": {\"url\": \"https://api.github.com/repos/moxnixmdj/brain/pulls/4935\", \"html_url\": \"https://github.com/moxnixmdj/brain/pull/4935\", \"diff_url\": \"https://github.com/moxnixmdj/brain/pull/4935.diff\", \"patch_url\": \"https://github.com/moxnixmdj/brain/pull/4935.patch\", \"merged_at\": \"2026-10-17T11:10:39Z\"}, \"body\": \"Carrier result from workflow **Capability receipt independent verification** (run https://github.com/moxnixmdj/brain/actions/runs/39027501842).\\n\\nProduced on the GitHub-hosted runner for commit ef633cac99a5e7e2c2386dc46611bb750c594f75 and submitted through the front door: it merges automatically only when the referee check is green.\\n\\nFiles:\\n- canonical/astra_runtime/evidence/CAPABILITY__brain.module.function.invoke__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_aa_briefcase_component_summary_noninversion_v1.py.auto.v1__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_abc_observable_trace_scope_rebind_verifier_v1.py.auto.v1__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_accepted_pure_route_static_reachability_v1.py.auto.v1__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_authority_epoch_guard_v1.py.auto.v1__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bounded_explicit_categorical_support_v1.py.auto.v1__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_brain_witness_contamination_admissibility_v1.py.auto.v1__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_active_query_task_generator_v1.py.auto.v1__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_characteristic_activ"
+            },
+            "lexical_relevance_score": 1.31139601329,
+            "matched_terms": [
+              "brain",
+              "capability"
+            ],
+            "term_contributions": {
+              "brain": 0.678495453896,
+              "capability": 0.632900559394
+            }
+          }
+        ],
+        "top_candidate_original_index": 0,
+        "top_candidate_admission": {
+          "method": "FOCUSED_QUERY_TOKEN_COVERAGE_V1",
+          "query_token_count": 6,
+          "matched_term_count": 2,
+          "required_matched_term_count": 2,
+          "matched_term_coverage": 0.333333,
+          "verified": true
+        },
+        "admission_claim_scope": "BOUNDED_FOCUSED_QUERY_TOKEN_COVERAGE_ONLY",
+        "output_verified": true,
+        "output_path": "canonical/astra_runtime/state/whole_machine/05b_relevance.json"
+      }
+    },
+    {
+      "step": "extract objective-grounded evidence",
+      "term": "CAPABILITY",
+      "status": "RAN",
+      "out": {
+        "schema": "PROJECT_BRAIN_OBJECTIVE_EVIDENCE_UNIT_EXTRACTION_V2",
+        "objective": "Does Brain own its capability mechanisms?",
+        "status": "OBJECTIVE_GROUNDED_EVIDENCE_UNITS_EXTRACTED",
+        "evidence_extraction_status": "VERIFIED",
+        "claim_relation_status": "UNVERIFIED",
+        "semantic_entailment_status": "UNVERIFIED",
+        "factual_correctness_status": "UNVERIFIED",
+        "causal_direction_status": "UNVERIFIED",
+        "evidence_quality_status": "UNVERIFIED",
+        "evidence_sufficiency_status": "UNVERIFIED",
+        "source_independence_status": "UNVERIFIED",
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0,
+        "evidence_units": [
+          {
+            "evidence_unit_id": "21fb9c25561773bba7718f37a366282106fa42523b2547602ad5a3b4b780ebbc",
+            "source_url": "https://api.github.com/repos/moxnixmdj/brain/issues?state=closed",
+            "page_raw_sha256": "5244ef7d7ccdc2a3551229c218bb059439a1c598671f02c93adf34e2242b35bf",
+            "visible_text_sha256": "007b959d812ec341ea0908680dd751a407fe02e9e1e32705589f9ff63fa9819a",
+            "block_index": 0,
+            "block_tag": "text",
+            "text": "[{\"url\":\"https://api.github.com/repos/moxnixmdj/brain/issues/4935\",\"repository_url\":\"https://api.github.com/repos/moxnixmdj/brain\",\"labels_url\":\"https://api.github.com/repos/moxnixmdj/brain/issues/4935/labels{/name}\",\"comments_url\":\"https://api.github.com/repos/moxnixmdj/brain/issues/4935/comments\",\"events_url\":\"https://api.github.com/repos/moxnixmdj/brain/issues/4935/events\",\"html_url\":\"https://github.com/moxnixmdj/brain/pull/4935\",\"id\":5897721193,\"node_id\":\"PR_kwDOUVjdIs8AAAABJAlfwA\",\"number\":4935,\"title\":\"carrier: Record independent verification of capability execution receipts\",\"user\":{\"login\":\"brain-automation[bot]\",\"id\":342619146,\"node_id\":\"BOT_kgDOFGv0Cg\",\"avatar_url\":\"https://avatars.githubusercontent.com/u/217246470?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/brain-automation%5Bbot%5D\",\"html_url\":\"https://github.com/apps/brain-automation\",\"followers_url\":\"https://a",
+            "text_sha256": "4a5db47b290ff1c1daa5c1ed70f18fdcc03ebf0f1eaba95a6f0bc1ad27be0479",
+            "matched_objective_tokens": [
+              "brain",
+              "capability"
+            ],
+            "matched_objective_token_count": 2,
+            "visible_text_start": 0,
+            "visible_text_end": 900
+          },
+          {
+            "evidence_unit_id": "083abafc20620facaf32b7945352e970c556ca0d47e75a4b218bbc10cc618338",
+            "source_url": "https://api.github.com/repos/moxnixmdj/brain/issues?state=closed",
+            "page_raw_sha256": "5244ef7d7ccdc2a3551229c218bb059439a1c598671f02c93adf34e2242b35bf",
+            "visible_text_sha256": "007b959d812ec341ea0908680dd751a407fe02e9e1e32705589f9ff63fa9819a",
+            "block_index": 2,
+            "block_tag": "text",
+            "text": "mments\":0,\"created_at\":\"2026-10-17T11:09:27Z\",\"updated_at\":\"2026-10-17T11:10:41Z\",\"closed_at\":\"2026-10-17T11:10:39Z\",\"assignee\":null,\"author_association\":\"CONTRIBUTOR\",\"active_lock_reason\":null,\"draft\":false,\"pull_request\":{\"url\":\"https://api.github.com/repos/moxnixmdj/brain/pulls/4935\",\"html_url\":\"https://github.com/moxnixmdj/brain/pull/4935\",\"diff_url\":\"https://github.com/moxnixmdj/brain/pull/4935.diff\",\"patch_url\":\"https://github.com/moxnixmdj/brain/pull/4935.patch\",\"merged_at\":\"2026-10-17T11:10:39Z\"},\"body\":\"Carrier result from workflow **Capability receipt independent verification** (run https://github.com/moxnixmdj/brain/actions/runs/39027501842).\\n\\nProduced on the GitHub-hosted runner for commit ef633cac99a5e7e2c2386dc46611bb750c594f75 and submitted through the front door: it merges automatically only when the referee check is green.\\n\\nFiles:\\n- canonical/astra_runtime/evidence/",
+            "text_sha256": "23a3d663309338c22ee578a7f3aedff55540948879599bbf5d7d72395638a172",
+            "matched_objective_tokens": [
+              "brain",
+              "capability"
+            ],
+            "matched_objective_token_count": 2,
+            "visible_text_start": 1802,
+            "visible_text_end": 2702
+          },
+          {
+            "evidence_unit_id": "617fb507c1b936f8ffeaf8fce4ff93479fabcc25aff9e4fcb03a3c3950e00a46",
+            "source_url": "https://api.github.com/repos/moxnixmdj/brain/issues?state=closed",
+            "page_raw_sha256": "5244ef7d7ccdc2a3551229c218bb059439a1c598671f02c93adf34e2242b35bf",
+            "visible_text_sha256": "007b959d812ec341ea0908680dd751a407fe02e9e1e32705589f9ff63fa9819a",
+            "block_index": 54,
+            "block_tag": "text",
+            "text": "n/issues/4934\",\"repository_url\":\"https://api.github.com/repos/moxnixmdj/brain\",\"labels_url\":\"https://api.github.com/repos/moxnixmdj/brain/issues/4934/labels{/name}\",\"comments_url\":\"https://api.github.com/repos/moxnixmdj/brain/issues/4934/comments\",\"events_url\":\"https://api.github.com/repos/moxnixmdj/brain/issues/4934/events\",\"html_url\":\"https://github.com/moxnixmdj/brain/pull/4934\",\"id\":5897699310,\"node_id\":\"PR_kwDOUVjdIs8AAAABJAkceg\",\"number\":4934,\"title\":\"carrier: Record independent verification of capability execution receipts\",\"user\":{\"login\":\"brain-automation[bot]\",\"id\":342619146,\"node_id\":\"BOT_kgDOFGv0Cg\",\"avatar_url\":\"https://avatars.githubusercontent.com/u/217246470?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/brain-automation%5Bbot%5D\",\"html_url\":\"https://github.com/apps/brain-automation\",\"followers_url\":\"https://api.github.com/users/brain-automation%5Bbot%5D/follow",
+            "text_sha256": "772681818df0bdd56951c631453aafbb41e8acd09b3c440dccdf9d06bdc5e941",
+            "matched_objective_tokens": [
+              "brain",
+              "capability"
+            ],
+            "matched_objective_token_count": 2,
+            "visible_text_start": 48654,
+            "visible_text_end": 49554
+          },
+          {
+            "evidence_unit_id": "624663568253bb0a34f086becd112618f7ed6e1363b0c97abf6173e87d4f28ca",
+            "source_url": "https://api.github.com/repos/moxnixmdj/brain/issues?state=closed",
+            "page_raw_sha256": "5244ef7d7ccdc2a3551229c218bb059439a1c598671f02c93adf34e2242b35bf",
+            "visible_text_sha256": "007b959d812ec341ea0908680dd751a407fe02e9e1e32705589f9ff63fa9819a",
+            "block_index": 56,
+            "block_tag": "text",
+            "text": "ed_at\":\"2026-10-17T11:07:36Z\",\"closed_at\":\"2026-10-17T11:07:35Z\",\"assignee\":null,\"author_association\":\"CONTRIBUTOR\",\"active_lock_reason\":null,\"draft\":false,\"pull_request\":{\"url\":\"https://api.github.com/repos/moxnixmdj/brain/pulls/4934\",\"html_url\":\"https://github.com/moxnixmdj/brain/pull/4934\",\"diff_url\":\"https://github.com/moxnixmdj/brain/pull/4934.diff\",\"patch_url\":\"https://github.com/moxnixmdj/brain/pull/4934.patch\",\"merged_at\":\"2026-10-17T11:07:34Z\"},\"body\":\"Carrier result from workflow **Capability receipt independent verification** (run https://github.com/moxnixmdj/brain/actions/runs/39027312603).\\n\\nProduced on the GitHub-hosted runner for commit d4d27f2fcdc673cceffa041c2beeb8bae558a750 and submitted through the front door: it merges automatically only when the referee check is green.\\n\\nFiles:\\n- canonical/astra_runtime/evidence/CAPABILITY__brain.module.function.invoke__INDEPENDEN",
+            "text_sha256": "9e6a4a69bffa15a29d1a30ce5b4b1380fd945cd11251b79efb0b3b4c41496a7c",
+            "matched_objective_tokens": [
+              "brain",
+              "capability"
+            ],
+            "matched_objective_token_count": 2,
+            "visible_text_start": 50456,
+            "visible_text_end": 51356
+          },
+          {
+            "evidence_unit_id": "b84feec50a57221f11e635048d536b3a0744dcd0c07717233bfddb515bd7712b",
+            "source_url": "https://api.github.com/repos/moxnixmdj/brain/issues?state=closed",
+            "page_raw_sha256": "5244ef7d7ccdc2a3551229c218bb059439a1c598671f02c93adf34e2242b35bf",
+            "visible_text_sha256": "007b959d812ec341ea0908680dd751a407fe02e9e1e32705589f9ff63fa9819a",
+            "block_index": 108,
+            "block_tag": "text",
+            "text": "com/repos/moxnixmdj/brain\",\"labels_url\":\"https://api.github.com/repos/moxnixmdj/brain/issues/4933/labels{/name}\",\"comments_url\":\"https://api.github.com/repos/moxnixmdj/brain/issues/4933/comments\",\"events_url\":\"https://api.github.com/repos/moxnixmdj/brain/issues/4933/events\",\"html_url\":\"https://github.com/moxnixmdj/brain/pull/4933\",\"id\":5897677781,\"node_id\":\"PR_kwDOUVjdIs8AAAABJAjZFg\",\"number\":4933,\"title\":\"carrier: Record independent verification of capability execution receipts\",\"user\":{\"login\":\"brain-automation[bot]\",\"id\":342619146,\"node_id\":\"BOT_kgDOFGv0Cg\",\"avatar_url\":\"https://avatars.githubusercontent.com/u/217246470?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/brain-automation%5Bbot%5D\",\"html_url\":\"https://github.com/apps/brain-automation\",\"followers_url\":\"https://api.github.com/users/brain-automation%5Bbot%5D/followers\",\"following_url\":\"https://api.github.com/users/b",
+            "text_sha256": "769045474c2b9f9bce70c85a8a42a3bb4026e0b91d9414e0dcdedd840ac9cf54",
+            "matched_objective_tokens": [
+              "brain",
+              "capability"
+            ],
+            "matched_objective_token_count": 2,
+            "visible_text_start": 97307,
+            "visible_text_end": 98207
+          },
+          {
+            "evidence_unit_id": "7620ab32e9de3ff398734492b0e6255cb6ed23f8095553a0473a1621ef7fc4b4",
+            "source_url": "https://api.github.com/repos/moxnixmdj/brain/issues?state=closed",
+            "page_raw_sha256": "5244ef7d7ccdc2a3551229c218bb059439a1c598671f02c93adf34e2242b35bf",
+            "visible_text_sha256": "007b959d812ec341ea0908680dd751a407fe02e9e1e32705589f9ff63fa9819a",
+            "block_index": 110,
+            "block_tag": "text",
+            "text": "7T11:04:35Z\",\"assignee\":null,\"author_association\":\"CONTRIBUTOR\",\"active_lock_reason\":null,\"draft\":false,\"pull_request\":{\"url\":\"https://api.github.com/repos/moxnixmdj/brain/pulls/4933\",\"html_url\":\"https://github.com/moxnixmdj/brain/pull/4933\",\"diff_url\":\"https://github.com/moxnixmdj/brain/pull/4933.diff\",\"patch_url\":\"https://github.com/moxnixmdj/brain/pull/4933.patch\",\"merged_at\":\"2026-10-17T11:04:35Z\"},\"body\":\"Carrier result from workflow **Capability receipt independent verification** (run https://github.com/moxnixmdj/brain/actions/runs/39027133128).\\n\\nProduced on the GitHub-hosted runner for commit 5d605fcf74f823cc1b6daae2976ae5132fb76e85 and submitted through the front door: it merges automatically only when the referee check is green.\\n\\nFiles:\\n- canonical/astra_runtime/evidence/CAPABILITY__brain.module.function.invoke__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evide",
+            "text_sha256": "5afe94ee8488e0c4c31f3f8e48dbce96b5d3382a9bdc637b52ce75e4be6adaf3",
+            "matched_objective_tokens": [
+              "brain",
+              "capability"
+            ],
+            "matched_objective_token_count": 2,
+            "visible_text_start": 99109,
+            "visible_text_end": 100009
+          },
+          {
+            "evidence_unit_id": "8f874b5e2cf0ef776c2b1160e87fac3155b35c24b88cfbe03bc15b792df52961",
+            "source_url": "https://api.github.com/repos/moxnixmdj/brain/issues?state=closed",
+            "page_raw_sha256": "5244ef7d7ccdc2a3551229c218bb059439a1c598671f02c93adf34e2242b35bf",
+            "visible_text_sha256": "007b959d812ec341ea0908680dd751a407fe02e9e1e32705589f9ff63fa9819a",
+            "block_index": 162,
+            "block_tag": "text",
+            "text": ".github.com/repos/moxnixmdj/brain/issues/4932/labels{/name}\",\"comments_url\":\"https://api.github.com/repos/moxnixmdj/brain/issues/4932/comments\",\"events_url\":\"https://api.github.com/repos/moxnixmdj/brain/issues/4932/events\",\"html_url\":\"https://github.com/moxnixmdj/brain/pull/4932\",\"id\":5897658226,\"node_id\":\"PR_kwDOUVjdIs8AAAABJAibaA\",\"number\":4932,\"title\":\"carrier: Record independent verification of capability execution receipts\",\"user\":{\"login\":\"brain-automation[bot]\",\"id\":342619146,\"node_id\":\"BOT_kgDOFGv0Cg\",\"avatar_url\":\"https://avatars.githubusercontent.com/u/217246470?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/brain-automation%5Bbot%5D\",\"html_url\":\"https://github.com/apps/brain-automation\",\"followers_url\":\"https://api.github.com/users/brain-automation%5Bbot%5D/followers\",\"following_url\":\"https://api.github.com/users/brain-automation%5Bbot%5D/following{/other_user}\",\"gi",
+            "text_sha256": "01a3ddb56b6c4c53c92cbafc4aa5131b7e8ac350bf215f5436b6d4924c8a6f73",
+            "matched_objective_tokens": [
+              "brain",
+              "capability"
+            ],
+            "matched_objective_token_count": 2,
+            "visible_text_start": 145961,
+            "visible_text_end": 146861
+          },
+          {
+            "evidence_unit_id": "08b5057140786af13b4e57ee23d755484854936fa8e6b7ba3f27756f8e317f23",
+            "source_url": "https://api.github.com/repos/moxnixmdj/brain/issues?state=closed",
+            "page_raw_sha256": "5244ef7d7ccdc2a3551229c218bb059439a1c598671f02c93adf34e2242b35bf",
+            "visible_text_sha256": "007b959d812ec341ea0908680dd751a407fe02e9e1e32705589f9ff63fa9819a",
+            "block_index": 164,
+            "block_tag": "text",
+            "text": "ONTRIBUTOR\",\"active_lock_reason\":null,\"draft\":false,\"pull_request\":{\"url\":\"https://api.github.com/repos/moxnixmdj/brain/pulls/4932\",\"html_url\":\"https://github.com/moxnixmdj/brain/pull/4932\",\"diff_url\":\"https://github.com/moxnixmdj/brain/pull/4932.diff\",\"patch_url\":\"https://github.com/moxnixmdj/brain/pull/4932.patch\",\"merged_at\":\"2026-10-17T11:01:45Z\"},\"body\":\"Carrier result from workflow **Capability receipt independent verification** (run https://github.com/moxnixmdj/brain/actions/runs/39026922925).\\n\\nProduced on the GitHub-hosted runner for commit fc148e9fc5cadf5be32152e704736bc4d6025d0b and submitted through the front door: it merges automatically only when the referee check is green.\\n\\nFiles:\\n- canonical/astra_runtime/evidence/CAPABILITY__brain.module.function.invoke__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_aa_briefcase_compo",
+            "text_sha256": "74e3b72dc7da16a1f9be66f6908a201b009f930eeb161df0277c56a23e427ffd",
+            "matched_objective_tokens": [
+              "brain",
+              "capability"
+            ],
+            "matched_objective_token_count": 2,
+            "visible_text_start": 147763,
+            "visible_text_end": 148663
+          },
+          {
+            "evidence_unit_id": "503cbe47043d73721d3e70ed9d4f14e808333c01caad5751b670d9a75e670d0e",
+            "source_url": "https://api.github.com/repos/moxnixmdj/brain/issues?state=closed",
+            "page_raw_sha256": "5244ef7d7ccdc2a3551229c218bb059439a1c598671f02c93adf34e2242b35bf",
+            "visible_text_sha256": "007b959d812ec341ea0908680dd751a407fe02e9e1e32705589f9ff63fa9819a",
+            "block_index": 216,
+            "block_tag": "text",
+            "text": "{/name}\",\"comments_url\":\"https://api.github.com/repos/moxnixmdj/brain/issues/4931/comments\",\"events_url\":\"https://api.github.com/repos/moxnixmdj/brain/issues/4931/events\",\"html_url\":\"https://github.com/moxnixmdj/brain/pull/4931\",\"id\":5897634478,\"node_id\":\"PR_kwDOUVjdIs8AAAABJAhPBQ\",\"number\":4931,\"title\":\"carrier: Record independent verification of capability execution receipts\",\"user\":{\"login\":\"brain-automation[bot]\",\"id\":342619146,\"node_id\":\"BOT_kgDOFGv0Cg\",\"avatar_url\":\"https://avatars.githubusercontent.com/u/217246470?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/brain-automation%5Bbot%5D\",\"html_url\":\"https://github.com/apps/brain-automation\",\"followers_url\":\"https://api.github.com/users/brain-automation%5Bbot%5D/followers\",\"following_url\":\"https://api.github.com/users/brain-automation%5Bbot%5D/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/brain-automat",
+            "text_sha256": "e8bf97e0d063e0793a231ae342ab2db396feb9be4503315f9bebbbd1167e7306",
+            "matched_objective_tokens": [
+              "brain",
+              "capability"
+            ],
+            "matched_objective_token_count": 2,
+            "visible_text_start": 194615,
+            "visible_text_end": 195515
+          },
+          {
+            "evidence_unit_id": "22f3350ae49038cc53d15db5084cdd360f36c2aeeec4d9c83fb423fd1b75e802",
+            "source_url": "https://api.github.com/repos/moxnixmdj/brain/issues?state=closed",
+            "page_raw_sha256": "5244ef7d7ccdc2a3551229c218bb059439a1c598671f02c93adf34e2242b35bf",
+            "visible_text_sha256": "007b959d812ec341ea0908680dd751a407fe02e9e1e32705589f9ff63fa9819a",
+            "block_index": 218,
+            "block_tag": "text",
+            "text": "\"pull_request\":{\"url\":\"https://api.github.com/repos/moxnixmdj/brain/pulls/4931\",\"html_url\":\"https://github.com/moxnixmdj/brain/pull/4931\",\"diff_url\":\"https://github.com/moxnixmdj/brain/pull/4931.diff\",\"patch_url\":\"https://github.com/moxnixmdj/brain/pull/4931.patch\",\"merged_at\":\"2026-10-17T10:58:34Z\"},\"body\":\"Carrier result from workflow **Capability receipt independent verification** (run https://github.com/moxnixmdj/brain/actions/runs/39026731103).\\n\\nProduced on the GitHub-hosted runner for commit e47e187a5d52fb7cd12d24b9024ea8a62e7d656f and submitted through the front door: it merges automatically only when the referee check is green.\\n\\nFiles:\\n- canonical/astra_runtime/evidence/CAPABILITY__brain.module.function.invoke__INDEPENDENT_VERIFICATION.json\\n- canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_aa_briefcase_component_summary_noninversion_v1.py.auto.v1__INDEPENDENT",
+            "text_sha256": "20721e1eae0eae7a1deb17e76f8ae4f72a76563f6244f889f4b57f6e8d25a12c",
+            "matched_objective_tokens": [
+              "brain",
+              "capability"
+            ],
+            "matched_objective_token_count": 2,
+            "visible_text_start": 196417,
+            "visible_text_end": 197317
+          }
+        ],
+        "verification_method": "VERIFIED_RELEVANCE_ADMISSION_PLUS_FRESH_EXACT_SOURCE_VISIBLE_BLOCK_EXTRACTION",
+        "source_url": "https://api.github.com/repos/moxnixmdj/brain/issues?state=closed",
+        "source_host": "api.github.com",
+        "http_status": 200,
+        "content_type": "application/json; charset=utf-8",
+        "page_raw_sha256": "5244ef7d7ccdc2a3551229c218bb059439a1c598671f02c93adf34e2242b35bf",
+        "visible_text_sha256": "007b959d812ec341ea0908680dd751a407fe02e9e1e32705589f9ff63fa9819a",
+        "visible_text_length": 1458036,
+        "visible_block_count": 1619,
+        "objective_tokens": [
+          "brain",
+          "own",
+          "its",
+          "capability",
+          "mechanisms"
+        ],
+        "required_unit_match_count": 2,
+        "evidence_unit_count": 10,
+        "scope_note": "Evidence units are verbatim normalized visible-text blocks from the exact freshly refetched admitted source. Organization/ROR identity is not an extraction prerequisite. Support, contradiction, entailment, correctness, causality, quality, sufficiency, and independence remain unverified.",
+        "output_verified": true,
+        "output_path": "canonical/astra_runtime/state/whole_machine/06_evidence.json"
+      }
+    }
+  ]
+}

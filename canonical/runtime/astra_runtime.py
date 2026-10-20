@@ -620,6 +620,28 @@ def _load_bound_capability_registry():
     caps=data.get("capabilities")
     if not isinstance(caps,dict):
         raise Blocker("BOUND_CAPABILITY_REGISTRY_INVALID")
+    # A capability the forge admitted is already here, so there is nothing
+    # to acquire and no line for it in an acquisition registry. It is
+    # merged at read time from the forged state, which stays its single
+    # source of truth rather than being copied into this file.
+    from canonical.runtime import capability_forge_v1 as _FG
+    for cid, rec in (_FG._state().get("forged") or {}).items():
+        entry = (rec or {}).get("entry")
+        if not isinstance(entry, dict):
+            continue
+        entry = dict(entry)
+        # The caller pops "capability_id" off the args before the adapter
+        # sees them, and a forged adapter has no other way to know which
+        # admitted function to run. The id is written into the template
+        # here so it cannot depend on the caller preserving it.
+        tmpl = entry.get("action_template")
+        if isinstance(tmpl, dict):
+            tmpl = dict(tmpl)
+            merged = dict(tmpl.get("args") or {})
+            merged.setdefault("_forged_id", cid)
+            tmpl["args"] = merged
+            entry["action_template"] = tmpl
+        caps.setdefault(str(cid), entry)
     return caps
 
 def _normalized_project_name(value):
@@ -659,6 +681,15 @@ def _verified_pypi_wheel_bytes(record):
     if actual!=expected:
         raise Blocker("BOUND_PYPI_CLOSURE_WHEEL_HASH_MISMATCH:"+name)
     return raw
+
+
+# Debian and friends mark the system Python externally managed, so pip
+# refuses to install into it at all -- the capability that needed a wheel
+# was blocked with "externally-managed-environment" while holding a
+# hash-verified wheel in a temporary directory, one flag away from working.
+# Setting this is the difference between "cannot install" and "installs".
+_PIP_ENV = dict(os.environ)
+_PIP_ENV["PIP_BREAK_SYSTEM_PACKAGES"] = "1"
 
 
 def _ensure_pypi_dependency(source):
@@ -706,7 +737,7 @@ def _ensure_pypi_dependency(source):
             wheel.write_bytes(raw)
             proc=subprocess.run(
                 [sys.executable,"-m","pip","install","--disable-pip-version-check","--quiet","--no-deps",str(wheel)],
-                cwd=ROOT,text=True,capture_output=True,timeout=120
+                cwd=ROOT,text=True,capture_output=True,timeout=120,env=_PIP_ENV
             )
             if proc.returncode!=0:
                 raise Blocker("BOUND_PYPI_INSTALL_FAILED:"+proc.stderr[-1200:])
@@ -789,7 +820,7 @@ def _ensure_pypi_dependency(source):
               "--no-index","--no-deps",
               *[str(p) for p in local_wheels],
             ],
-            cwd=ROOT,text=True,capture_output=True,timeout=240
+            cwd=ROOT,text=True,capture_output=True,timeout=240,env=_PIP_ENV
         )
         if proc.returncode!=0:
             raise Blocker("BOUND_PYPI_CLOSURE_INSTALL_FAILED:"+proc.stderr[-1800:])
@@ -1010,6 +1041,87 @@ def _ensure_local_dependency(source):
     raise Blocker("BOUND_CAPABILITY_SOURCE_UNSUPPORTED:"+typ)
 
 
+def _adapter_required_modules(adapter_module):
+    """Third-party module names the adapter's own source says it needs.
+
+    The adapters import lazily -- `xlsx_verify_openpyxl` reaches for
+    `openpyxl` inside a helper function, not at module scope -- so every
+    Import/ImportFrom node is collected wherever it appears in the tree.
+    """
+    name=str(adapter_module or "").strip()
+    if not name:
+        return []
+    path=ROOT/"canonical"/"runtime"/"bound_capabilities"/(name+".py")
+    if not path.is_file():
+        return []
+    try:
+        tree=ast.parse(path.read_bytes().decode("utf-8","replace"),filename=str(path))
+    except Exception:
+        return []
+    found=set()
+    for node in ast.walk(tree):
+        if isinstance(node,ast.Import):
+            for alias in node.names:
+                found.add(str(alias.name or "").split(".")[0])
+        elif isinstance(node,ast.ImportFrom) and node.module and not node.level:
+            found.add(str(node.module).split(".")[0])
+    stdlib=set(getattr(sys,"stdlib_module_names",()) or ())
+    first_party={"canonical","brain","execution_guard","state","tests"}
+    return sorted(m for m in found
+                  if m and m not in stdlib and m not in first_party and m!=name)
+
+
+def _already_present_dependency(entry):
+    """Ask the machine before asking the package database.
+
+    Autoconf's founding rule is to test for features, not for versions:
+    "a pure version-based approach would not detect the presence of the
+    ISO C compiler, but a feature-testing approach would be able to
+    discover the ISO C compiler the user had installed."
+
+    The apt gate proves what it is ABOUT TO ACQUIRE -- package name,
+    version and archive sha256. That is the right guard on acquisition
+    and the wrong guard on presence. `xlsx.table.verify_against_json_
+    records` declares `python3-openpyxl`; openpyxl is installed and
+    importable. The gate could not see it, so the machine refused to
+    use a tool it was already holding.
+
+    This does not weaken acquisition: if a required module is absent the
+    probe returns None and the apt gate runs exactly as before. A
+    capability that shells out to a binary rather than importing a
+    module -- `sqlite_verify_cli` -- declares no imports, so it stays
+    correctly blocked.
+    """
+    required=_adapter_required_modules(entry.get("adapter_module"))
+    if not required:
+        return None
+    observed=[]
+    for module in required:
+        try:
+            spec=importlib.util.find_spec(module)
+        except Exception:
+            return None
+        if spec is None:
+            return None
+        version=""
+        try:
+            version=str(importlib.metadata.version(module))
+        except Exception:
+            version=""
+        observed.append({
+            "module":module,
+            "version":version,
+            "origin":str(getattr(spec,"origin","") or ""),
+        })
+    return {
+        "status":"ALREADY_PRESENT_FEATURE_PROBED",
+        "acquired":False,
+        "type":"apt",
+        "adapter_module":str(entry.get("adapter_module") or ""),
+        "modules":observed,
+    }
+
+
 def _ensure_apt_dependencies(source):
     if not sys.platform.startswith("linux"):
         raise Blocker("BOUND_APT_PLATFORM_UNSUPPORTED:"+sys.platform)
@@ -1079,7 +1191,10 @@ def _invoke_bound_capability(args):
         dependency=_ensure_npm_dependency(source)
         call_args["_package_root"]=dependency.get("package_root")
     elif source.get("type")=="apt":
-        dependency=_ensure_apt_dependencies(source)
+        # Ask the machine before asking the package database. A dependency
+        # the machine already holds is a fact, not something to acquire,
+        # and a fact about the machine is what may satisfy it.
+        dependency=_already_present_dependency(entry) or _ensure_apt_dependencies(source)
     elif source.get("type")=="git_source_tree":
         dependency=_ensure_git_source_tree_dependency(source)
         call_args["_source_root"]=dependency.get("source_root")

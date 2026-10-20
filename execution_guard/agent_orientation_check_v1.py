@@ -382,6 +382,47 @@ def _open_obligation_ids(quotient: Mapping[str, Any]) -> list[str]:
     return sorted({x.strip() for x in value if isinstance(x, str) and x.strip()})
 
 
+OWNER_GOAL_PATH = "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md"
+
+
+def _owner_active_goal_lines(root: Path) -> list[str]:
+    """The owner's current active goal, in the owner's own words, printed by `brief`.
+
+    The objective was lost to session condensation four times, and each loss produced real
+    misdirected work (most recently: an agent chased the alive-mass instrument reading and
+    presented it as the mission). A summary is not durable; the place the agent is already
+    required to look is. If this file ever goes missing, `brief` says so loudly instead of
+    going quiet -- a missing goal must never look like a satisfied one.
+    """
+    path = root / OWNER_GOAL_PATH
+    if not path.is_file():
+        return [
+            "CURRENT ACTIVE GOAL: MISSING -- " + OWNER_GOAL_PATH,
+            "  The owner's active goal is not in the tree. Do not proceed on a remembered",
+            "  or inferred version of it. Restore the file or ask the owner.",
+            "",
+        ]
+    try:
+        body = path.read_text(encoding="utf-8")
+    except OSError as exc:
+        return ["CURRENT ACTIVE GOAL: UNREADABLE -- " + str(exc), ""]
+    lines = [
+        "CURRENT ACTIVE GOAL (owner's own words, " + OWNER_GOAL_PATH + "):",
+        "  This IS the mission. It is not a benchmark, a task, or an instrument reading.",
+        "  Instrument readings are READ, never CHASED.",
+    ]
+    keep = False
+    for raw in body.splitlines():
+        if raw.startswith("## 1. What I want"):
+            keep = True
+        if raw.startswith("## 5. What this decomposes"):
+            break
+        if keep:
+            lines.append("  " + raw.rstrip())
+    lines.append("")
+    return lines
+
+
 def brief_text(root: Path) -> str:
     contract, sha = load_contract(root)
     lines: list[str] = []
@@ -399,6 +440,8 @@ def brief_text(root: Path) -> str:
     add("  spend rule:  " + str(obj.get("spend_rule_verbatim")))
     add("  plain:       " + str(obj.get("plain")))
     add("")
+    for row in _owner_active_goal_lines(root):
+        add(row)
     add("WHAT BRAIN IS:")
     for row in contract.get("what_brain_is") or []:
         add("  - " + str(row))

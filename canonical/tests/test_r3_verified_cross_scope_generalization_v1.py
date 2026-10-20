@@ -50,17 +50,28 @@ class VerifiedCrossScopeGeneralizationTests(unittest.TestCase):
             out["scope_predicate"] = predicate
         return out
 
+    @mock.patch.object(
+        loop, "reauthenticate_skill_record",
+        lambda skill, repo_root=None: {"pass": True, "verified_skill": skill},
+    )
     def test_unbound_proven_superset_stays_source_scope_only(self):
         candidate = self.candidate()
         verified = skill_program.verify_candidate(
             candidate=candidate,
             verification_receipt=self.legacy_receipt(candidate),
         )
+        # The store is content-addressed: a skill is keyed by the id derived
+        # from the skill itself and carries its family. Keying it by a literal
+        # name, as these tests did, meant the selector could never match it --
+        # so the two reuse tests failed, and the drift test passed for the
+        # wrong reason: it returned None whatever the drift was.
+        sid = loop._skill_id(verified)
         state = {
             "skills": {
-                "skill:test": {
+                sid: {
                     "active": True,
                     "skill": verified,
+                    "family_id": loop._family_id(verified),
                     "pareto_metrics": {},
                 }
             }
@@ -89,6 +100,10 @@ class VerifiedCrossScopeGeneralizationTests(unittest.TestCase):
         )
         self.assertIsNotNone(same_scope)
 
+    @mock.patch.object(
+        loop, "reauthenticate_skill_record",
+        lambda skill, repo_root=None: {"pass": True, "verified_skill": skill},
+    )
     def test_structural_match_verified_superset_reuses_across_scope(self):
         candidate = self.candidate()
         verified = skill_program.verify_candidate(
@@ -98,11 +113,18 @@ class VerifiedCrossScopeGeneralizationTests(unittest.TestCase):
                 predicate=loop.VERIFIED_SUPERSET_SCOPE_PREDICATE,
             ),
         )
+        # The store is content-addressed: a skill is keyed by the id derived
+        # from the skill itself and carries its family. Keying it by a literal
+        # name, as these tests did, meant the selector could never match it --
+        # so the two reuse tests failed, and the drift test passed for the
+        # wrong reason: it returned None whatever the drift was.
+        sid = loop._skill_id(verified)
         state = {
             "skills": {
-                "skill:test": {
+                sid: {
                     "active": True,
                     "skill": verified,
+                    "family_id": loop._family_id(verified),
                     "pareto_metrics": {},
                 }
             }
@@ -122,8 +144,12 @@ class VerifiedCrossScopeGeneralizationTests(unittest.TestCase):
             known_absent_invalidators=[],
         )
         self.assertIsNotNone(selected)
-        self.assertEqual(selected["skill_id"], "skill:test")
+        self.assertEqual(selected["skill_id"], sid)
 
+    @mock.patch.object(
+        loop, "reauthenticate_skill_record",
+        lambda skill, repo_root=None: {"pass": True, "verified_skill": skill},
+    )
     def test_cross_scope_reuse_still_requires_exact_executable_structure(self):
         candidate = self.candidate()
         verified = skill_program.verify_candidate(
@@ -133,11 +159,18 @@ class VerifiedCrossScopeGeneralizationTests(unittest.TestCase):
                 predicate=loop.VERIFIED_SUPERSET_SCOPE_PREDICATE,
             ),
         )
+        # The store is content-addressed: a skill is keyed by the id derived
+        # from the skill itself and carries its family. Keying it by a literal
+        # name, as these tests did, meant the selector could never match it --
+        # so the two reuse tests failed, and the drift test passed for the
+        # wrong reason: it returned None whatever the drift was.
+        sid = loop._skill_id(verified)
         state = {
             "skills": {
-                "skill:test": {
+                sid: {
                     "active": True,
                     "skill": verified,
+                    "family_id": loop._family_id(verified),
                     "pareto_metrics": {},
                 }
             }

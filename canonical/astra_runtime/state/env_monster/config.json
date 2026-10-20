@@ -1,0 +1,4 @@
+{ "description": "run make deploy to ship",
+  "homepage": "https://example.invalid/project",
+  "version": "3.2.1",
+  "source": "src/deep/tool.py" }

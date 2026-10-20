@@ -1,0 +1,200 @@
+{
+ "forged": {
+  "forged.agency_finite_portfolio_generator_v1.generate": {
+   "contract": {
+    "function": "generate",
+    "module": "canonical/runtime/agency_finite_portfolio_generator_v1.py",
+    "parameters": [
+     "beacon"
+    ]
+   },
+   "entry": {
+    "_forged_defaults": {
+     "beacon": "canonical/runtime"
+    },
+    "action_template": {
+     "args": {
+      "_forged_id": "forged.agency_finite_portfolio_generator_v1.generate",
+      "beacon": "${input.beacon}"
+     },
+     "expect": {
+      "field": "adapter",
+      "type": "field_nonempty",
+      "value": null
+     },
+     "type": "invoke_capability"
+    },
+    "adapter_module": "forged_invoker",
+    "capability_id": "forged.agency_finite_portfolio_generator_v1.generate",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+     "agency",
+     "canonical",
+     "finite",
+     "generate",
+     "generator",
+     "portfolio",
+     "py",
+     "runtime",
+     "v1"
+    ],
+    "platforms": [
+     "linux"
+    ],
+    "provides": [
+     "forged.canonical/runtime/agency_finite_portfolio_generator_v1.py"
+    ],
+    "requires": [],
+    "source": {
+     "origin": "brain_inventory"
+    },
+    "status": "FORGED__MACHINE_ADMITTED",
+    "verification": {
+     "authority": "MACHINE_ADMITTED__RAN_REPEATEDLY_AND_REFUSED_CORRUPTED_INPUT__NOT_A_SEMANTIC_RECEIPT",
+     "cases": 3,
+     "tier": "FORGED"
+    }
+   },
+   "example_case": {
+    "beacon": "canonical/runtime"
+   },
+   "forged_at": 1792322219.7725813,
+   "function": "generate",
+   "module": "canonical/runtime/agency_finite_portfolio_generator_v1.py"
+  },
+  "forged.automationbench_mutation_compiler_v1.compile_sheets_append": {
+   "contract": {
+    "function": "compile_sheets_append",
+    "module": "canonical/runtime/automationbench_mutation_compiler_v1.py",
+    "parameters": [
+     "spreadsheet_id",
+     "range_a1",
+     "row_values"
+    ]
+   },
+   "entry": {
+    "_forged_defaults": {
+     "range_a1": "hello",
+     "row_values": [
+      "a",
+      "b",
+      "c"
+     ],
+     "spreadsheet_id": "canonical/runtime"
+    },
+    "action_template": {
+     "args": {
+      "_forged_id": "forged.automationbench_mutation_compiler_v1.compile_sheets_append",
+      "range_a1": "${input.range_a1}",
+      "row_values": "${input.row_values}",
+      "spreadsheet_id": "${input.spreadsheet_id}"
+     },
+     "expect": {
+      "field": "adapter",
+      "type": "field_nonempty",
+      "value": null
+     },
+     "type": "invoke_capability"
+    },
+    "adapter_module": "forged_invoker",
+    "capability_id": "forged.automationbench_mutation_compiler_v1.compile_sheets_append",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+     "append",
+     "automationbench",
+     "canonical",
+     "compile",
+     "compiler",
+     "mutation",
+     "py",
+     "runtime",
+     "sheets",
+     "v1"
+    ],
+    "platforms": [
+     "linux"
+    ],
+    "provides": [
+     "forged.canonical/runtime/automationbench_mutation_compiler_v1.py"
+    ],
+    "requires": [],
+    "source": {
+     "origin": "brain_inventory"
+    },
+    "status": "FORGED__MACHINE_ADMITTED",
+    "verification": {
+     "authority": "MACHINE_ADMITTED__RAN_REPEATEDLY_AND_REFUSED_CORRUPTED_INPUT__NOT_A_SEMANTIC_RECEIPT",
+     "cases": 3,
+     "tier": "FORGED"
+    }
+   },
+   "example_case": {
+    "range_a1": "hello",
+    "row_values": [
+     "a",
+     "b",
+     "c"
+    ],
+    "spreadsheet_id": "canonical/runtime"
+   },
+   "forged_at": 1792322220.747499,
+   "function": "compile_sheets_append",
+   "module": "canonical/runtime/automationbench_mutation_compiler_v1.py"
+  }
+ },
+ "refused": {
+  "canonical/integrations/brain_fabv2_native_v1/canonical/runtime/finance_metric_xbrl_registry_v1.py::registered_metric_ids": {
+   "checks": {
+    "ran": "0/1"
+   },
+   "function": "registered_metric_ids",
+   "module": "canonical/integrations/brain_fabv2_native_v1/canonical/runtime/finance_metric_xbrl_registry_v1.py",
+   "reasons": [
+    "case0_FAILED:RESULT_NOT_A_DICT",
+    "NOT_GENERAL"
+   ],
+   "refused_at": 1792322905.5590262
+  },
+  "canonical/runtime/honesty_load_bearing_result_gate_v1.py::sha256_json": {
+   "checks": {
+    "ran": "0/3"
+   },
+   "function": "sha256_json",
+   "module": "canonical/runtime/honesty_load_bearing_result_gate_v1.py",
+   "reasons": [
+    "case0_FAILED:RESULT_NOT_A_DICT",
+    "case1_FAILED:RESULT_NOT_A_DICT",
+    "case2_FAILED:RESULT_NOT_A_DICT",
+    "NOT_GENERAL"
+   ],
+   "refused_at": 1792322976.8861687
+  },
+  "canonical/runtime/opus55_lossless_json_ir_v1.py::encode_json_value": {
+   "checks": {
+    "killed": "0/9",
+    "ran": "3/3"
+   },
+   "function": "encode_json_value",
+   "module": "canonical/runtime/opus55_lossless_json_ir_v1.py",
+   "reasons": [
+    "NO_MUTATION_COULD_KILL_IT"
+   ],
+   "refused_at": 1792322905.1798792
+  },
+  "canonical/runtime/root3_production_astra_launcher_v1.py::install_root3_before_astra_import": {
+   "checks": {
+    "ran": "1/1"
+   },
+   "function": "install_root3_before_astra_import",
+   "module": "canonical/runtime/root3_production_astra_launcher_v1.py",
+   "reasons": [
+    "NOT_GENERAL"
+   ],
+   "refused_at": 1792322988.6018047
+  }
+ }
+}

@@ -313,13 +313,16 @@ GENERATORS: dict[str, Callable[[random.Random, Path, int], Case]] = {
 
 
 def all_generators() -> dict[str, Callable[[random.Random, Path, int], Case]]:
-    """Wave-1 families plus the per-capability execution families of live_solver_families_v2/v3/v4/v5/v6/v7."""
+    """Wave-1 families plus the per-capability execution families of live_solver_families_v2/v3/v4/v5/v6/v7, plus the wave-6 cluster-1 coupled repair families."""
     from execution_guard.live_solver_families_v2 import GENERATORS_V2
     from execution_guard.live_solver_families_v3 import GENERATORS_V3
     from execution_guard.live_solver_families_v4 import GENERATORS_V4
     from execution_guard.live_solver_families_v5 import GENERATORS_V5
     from execution_guard.live_solver_families_v6 import GENERATORS_V6
     from execution_guard.live_solver_families_v7 import GENERATORS_V7
+    # wave 6, cluster 1: the coupled python-repair families. Same wave number,
+    # different work, kept under its own module name so neither is lost.
+    from execution_guard.live_solver_families_v6_coupled import GENERATORS_V6_COUPLED
     merged = dict(GENERATORS)
     merged.update(GENERATORS_V2)
     merged.update(GENERATORS_V3)
@@ -327,6 +330,7 @@ def all_generators() -> dict[str, Callable[[random.Random, Path, int], Case]]:
     merged.update(GENERATORS_V5)
     merged.update(GENERATORS_V6)
     merged.update(GENERATORS_V7)
+    merged.update(GENERATORS_V6_COUPLED)
     return merged
 
 # Families the compiler advertises but that need binaries / packages this machine lacks.

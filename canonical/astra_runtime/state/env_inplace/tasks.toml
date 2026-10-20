@@ -1,0 +1,3 @@
+[[task]]
+name = "format"
+cmd  = "python3 format.py"

@@ -14,6 +14,17 @@ canonical/astra_runtime/state/probe-*
 canonical/runtime/r3_learning_verification_receipts/
 canonical/runtime/SELF_IMPROVEMENT_STATE_V1.json
 
+# Environments this system created. Never part of the project.
+.brain_venv/
+.venv/
+
+# derived cache: rebuilt from MODULE_INVOCATION_EVIDENCE_V1.json in ~80ms
+canonical/runtime/state/module_bridge_index_v1.json
+
+# Practice environments the machine downloads to work against.
+# Not part of the project, and their own conftest.py is not ours to police.
+canonical/astra_runtime/state/real_env/
+
 # Heartbeat run artifacts: the receipt and the job summary are published by the
 # live-brain-heartbeat workflow (upload-artifact), not versioned as source.  The
 # controller checkpoints one heartbeat run leaves behind are run litter, same as

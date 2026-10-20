@@ -1,0 +1,6 @@
+[[task]]
+name = "test"
+cmd  = "mocha"
+[[task]]
+name = "suite"
+cmd  = "npm test"

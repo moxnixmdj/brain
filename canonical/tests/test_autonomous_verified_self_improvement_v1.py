@@ -128,8 +128,14 @@ class AutonomousVerifiedSelfImprovementV1Tests(unittest.TestCase):
             "failure_class": "MISSING_CAPABILITY_OR_COMPILED_TASK_CONTRACT",
             "attempts": [{"capability_id": "x", "status": "failed"}],
         }
-        first = loop.integrate_solver_output(failure, state_path=path)
-        second = loop.integrate_solver_output(failure, state_path=path)
+        # A failure with no retry context is deliberately orphaned telemetry
+        # and opens no repair obligation, so this test must supply one to be
+        # about repair at all -- the pattern the next test down already uses.
+        retry_context = {"mode": "generic", "problem": {"task_id": "t"}}
+        first = loop.integrate_solver_output(
+            failure, state_path=path, retry_context=retry_context)
+        second = loop.integrate_solver_output(
+            failure, state_path=path, retry_context=retry_context)
 
         self.assertFalse(first["pass"])
         self.assertEqual(

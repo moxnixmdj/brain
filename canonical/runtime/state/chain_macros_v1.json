@@ -1,0 +1,81 @@
+{
+ "macros": {
+  "44f0aa6a8d743f60c0a02f42": {
+   "created": 1792319101.0193655,
+   "example_goal": "audit the python source canonical/runtime/bound_capabilities and verify the docx canonical/astra_runtime/tmp/DOCX_INTENT_VERIFY.docx",
+   "last_used": 1792319101.0193655,
+   "plan": [
+    {
+     "capability_id": "python.source.audit.ast",
+     "clause": "audit the python source canonical/runtime/bound_capabilities"
+    },
+    {
+     "capability_id": "docx.document.verify.intent_ooxml",
+     "clause": "verify the docx canonical/astra_runtime/tmp/DOCX_INTENT_VERIFY.docx"
+    }
+   ],
+   "schema": "PROJECT_BRAIN_MACRO_V1",
+   "signature": [
+    [
+     [
+      "audit",
+      "bound",
+      "capabilities",
+      "python",
+      "source"
+     ],
+     []
+    ],
+    [
+     [
+      "docx",
+      "verify"
+     ],
+     [
+      ".docx"
+     ]
+    ]
+   ],
+   "successes": 1
+  },
+  "6a6db585025513c4339f10f3": {
+   "created": 1792319101.2403827,
+   "example_goal": "verify the docx canonical/astra_runtime/tmp/DOCX_INTENT_VERIFY.docx and create a tar.gz archive from the manifest",
+   "last_used": 1792319101.2403827,
+   "plan": [
+    {
+     "capability_id": "docx.document.verify.intent_ooxml",
+     "clause": "verify the docx canonical/astra_runtime/tmp/DOCX_INTENT_VERIFY.docx"
+    },
+    {
+     "capability_id": "archive.tar_gz.create_from_manifest",
+     "clause": "create a tar.gz archive from the manifest"
+    }
+   ],
+   "schema": "PROJECT_BRAIN_MACRO_V1",
+   "signature": [
+    [
+     [
+      "docx",
+      "verify"
+     ],
+     [
+      ".docx"
+     ]
+    ],
+    [
+     [
+      "archive",
+      "create",
+      "manifest"
+     ],
+     [
+      ".gz"
+     ]
+    ]
+   ],
+   "successes": 1
+  }
+ },
+ "schema": "PROJECT_BRAIN_MACRO_V1"
+}

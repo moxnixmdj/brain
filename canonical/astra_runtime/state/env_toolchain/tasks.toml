@@ -1,0 +1,9 @@
+[[task]]
+name = "test"
+cmd  = "pytest -q"
+[[task]]
+name = "report"
+cmd  = "python3 fake_run.py"
+[[task]]
+name = "suite"
+cmd  = "python3 pytest_run.py"

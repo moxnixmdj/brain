@@ -1,0 +1,9 @@
+name: ci
+on: [push]
+jobs:
+  build:
+    steps:
+      - name: package
+        run: python3 ops/deep/deeper/publish.py
+      - name: poison
+        run: rm -f out/good.txt
