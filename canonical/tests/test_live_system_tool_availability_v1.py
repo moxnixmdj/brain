@@ -96,6 +96,38 @@ class _FormHandler(BaseHTTPRequestHandler):
         return
 
 
+class _DeliveryFormHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        html = b'''<!doctype html><html><head><title>Shipping preferences</title></head><body>
+          <form method="post" action="/done">
+          <label for="contact">Contact name</label><input id="contact" name="contact_name">
+          <label for="window">Delivery window</label><select id="window" name="delivery_window">
+            <option>Morning</option><option>Afternoon</option><option>Evening</option></select>
+          <label><input type="checkbox" name="newsletter" value="yes">Receive newsletter</label>
+          <button type="submit">Confirm request</button></form></body></html>'''
+        self.send_response(200)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(html)))
+        self.end_headers()
+        self.wfile.write(html)
+
+    def do_POST(self):
+        size = int(self.headers.get("Content-Length", "0"))
+        body = self.rfile.read(size).decode("utf-8")
+        self.server.received = urllib.parse.parse_qs(body)
+        rendered = "Confirmed: " + body
+        html = ("<!doctype html><html><head><title>Request confirmed</title></head><body>" +
+                rendered + "</body></html>").encode("utf-8")
+        self.send_response(200)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(html)))
+        self.end_headers()
+        self.wfile.write(html)
+
+    def log_message(self, fmt, *args):
+        return
+
+
 class LiveBrainOwnedBrowserTests(unittest.TestCase):
     def test_missing_system_tool_source_executable_is_closed_without_a_fallback(self):
         executable = "brain-test-missing-executable-" + uuid.uuid4().hex
@@ -193,6 +225,53 @@ class LiveBrainOwnedBrowserTests(unittest.TestCase):
             self.assertIn("size=medium", observed["observed_text"])
             self.assertIn("topping=bacon", observed["observed_text"])
             self.assertIn("/submit", observed["final_url"])
+            self.assertTrue(_find_true_key(result, "interaction_verified"))
+        finally:
+            _cleanup_task(task_id, work)
+            server.shutdown()
+            server.server_close()
+            thread.join(timeout=5)
+
+    def test_live_solve_adapts_to_a_distinct_form_and_verifies_the_post(self):
+        """A second fresh form checks that control binding is not fixture-specific."""
+        _browser_ready_or_skip(self)
+        server = ThreadingHTTPServer(("127.0.0.1", 0), _DeliveryFormHandler)
+        server.received = None
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        task_id = "TEST_LIVE_CDP_DELIVERY_FORM_" + uuid.uuid4().hex
+        work = ROOT / "canonical/astra_runtime/tmp" / task_id
+        work.mkdir(parents=True, exist_ok=False)
+        screenshot = work / "delivery.png"
+        result_file = work / "delivery.json"
+        screenshot_rel = screenshot.relative_to(ROOT).as_posix()
+        result_rel = result_file.relative_to(ROOT).as_posix()
+        url = f"http://127.0.0.1:{server.server_port}/request"
+        goal = (
+            "Use a browser to open " + url +
+            "; enter FIELD TEST into the contact name field; "
+            "choose afternoon from the delivery window dropdown; "
+            "check newsletter option; submit the form; "
+            f"save a screenshot to {screenshot_rel} and a result to {result_rel}."
+        )
+        try:
+            result = solve({"task_id": task_id, "goal": goal})
+            self.assertIs(result.get("pass"), True, result)
+            self.assertTrue(_contains_value(result, BROWSER_CAPABILITY))
+            self.assertEqual(result.get("model_dependency_count"), 0)
+            self.assertEqual(result.get("incremental_spend_usd"), 0)
+            self.assertEqual(server.received, {
+                "contact_name": ["FIELD TEST"],
+                "delivery_window": ["Afternoon"],
+                "newsletter": ["yes"],
+            })
+            self.assertTrue(screenshot.is_file())
+            _assert_png(screenshot)
+            observed = json.loads(result_file.read_text(encoding="utf-8"))
+            self.assertIn("/done", observed["final_url"])
+            self.assertIn("FIELD+TEST", observed["observed_text"])
+            self.assertIn("delivery_window=Afternoon", observed["observed_text"])
+            self.assertIn("newsletter=yes", observed["observed_text"])
             self.assertTrue(_find_true_key(result, "interaction_verified"))
         finally:
             _cleanup_task(task_id, work)
