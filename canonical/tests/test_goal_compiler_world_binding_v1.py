@@ -323,6 +323,85 @@ class KnownSelectionGapTests(unittest.TestCase):
         self.assertEqual(matching, [])
 
 
+class EndToEndExecutionTests(unittest.TestCase):
+    """A goal in, real work out -- not merely a compiled plan.
+
+    Everything else in this file measures compilation. This measures execution,
+    because a plan that compiles proves nothing until it produces an artifact.
+
+    The goal is chosen deliberately: it names no output file, so at base
+    9554215 it did not compile at all -- it failed with
+    GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH after
+    `python.source.audit.ast` was discarded on
+    GOAL_INPUT_BINDING_REQUIRED:output_path. The binding_source assertion below
+    is what ties the passing run to this change rather than to luck.
+    """
+
+    GOAL = "Audit python source structure and write the audit to a JSON file."
+    TASK_ID = "arena-e2e-audit-binding"
+    STATE_DIR = "canonical/astra_runtime/state"
+
+    def _clear_runtime_state(self) -> None:
+        """Remove this task's controller checkpoint.
+
+        Required, not tidy-up: `run_raw_goal` persists a controller checkpoint
+        under canonical/astra_runtime/state/, which is NOT gitignored, and the
+        runtime resumes from it. A second run of the same task_id therefore
+        fails with MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH instead of
+        executing. Without this the test passes once and errors forever after.
+        """
+        state = pathlib.Path(self.STATE_DIR)
+        if not state.is_dir():
+            return
+        for path in state.glob(self.TASK_ID + "__*"):
+            path.unlink()
+
+    def test_goal_without_a_stated_output_executes_and_writes_a_real_artifact(self):
+        from canonical.runtime import live_integrated_brain_v1 as lb
+
+        # The plan must depend on inferred binding, otherwise this test would
+        # still pass with the change reverted and would prove nothing.
+        compiled = compiler.compile_goal(self.GOAL, lb.load_verified_registry(), ROOT)
+        self.assertEqual(compiled["binding_source"], "GOAL_STATEMENT+WORLD_BINDING")
+        self.assertEqual(compiled["selected_capability"], "python.source.audit.ast")
+
+        out_dir = pathlib.Path(world_binding.OUTPUT_DIR)
+        before = set(out_dir.glob("brain_out__python_source_audit_ast__*"))
+        after = set(before)
+        self._clear_runtime_state()
+        try:
+            result = lb.run_raw_goal({"task_id": self.TASK_ID, "goal": self.GOAL})
+            after = set(out_dir.glob("brain_out__python_source_audit_ast__*"))
+            self.assertIs(
+                result.get("pass"),
+                True,
+                f"execution failed: {result.get('status')} / {result.get('failure_class')}"
+                f" / {str(result.get('reason'))[:200]}",
+            )
+            self.assertTrue(
+                str(result.get("status", "")).startswith(
+                    "PASS__RAW_GOAL_COMPILED_PLANNED_EXECUTED"
+                ),
+                result.get("status"),
+            )
+            self.assertEqual(result.get("selected_plan"), ["python.source.audit.ast"])
+
+            self.assertTrue(after, "the capability reported success but wrote no artifact")
+            # Deterministic destination: same capability, same slot, same path.
+            self.assertEqual(compiled["inputs"]["output_path"], str(sorted(after)[0]))
+
+            produced = json.loads(sorted(after)[0].read_text(encoding="utf-8"))
+            self.assertIsInstance(produced, dict)
+            for key in ("schema", "source_root", "files", "totals"):
+                self.assertIn(key, produced)
+        finally:
+            # Leave nothing behind: the artifact is reproducible, and the
+            # checkpoint would otherwise break the next run and is not ignored.
+            for path in after - before:
+                path.unlink()
+            self._clear_runtime_state()
+
+
 class BenchmarkFloorTests(unittest.TestCase):
     def test_measured_compile_rate_holds_the_floor(self):
         from canonical.runtime import goal_compilation_benchmark_v1 as bench
