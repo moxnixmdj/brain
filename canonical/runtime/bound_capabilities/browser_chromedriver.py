@@ -1,6 +1,27 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import base64, hashlib, json, pathlib, socket, subprocess, time, urllib.error, urllib.request
+import base64, hashlib, json, pathlib, shutil, socket, subprocess, time, urllib.error, urllib.request
+
+
+def availability_fallback_missing_executables():
+    """Prerequisites for the real Brain-owned CDP fallback when ChromeDriver is absent."""
+    fallback = pathlib.Path(__file__).resolve().with_name("browser_chromium_cdp.py")
+    if not fallback.is_file():
+        return None
+    required = ["python3", "node", "npm", "openssl", "sh", "curl", "tar", "nohup", "sleep", "mkdir"]
+    return [name for name in required if shutil.which(name) is None]
+
+
+def _run_cdp_fallback(args, root):
+    import importlib.util
+
+    path = pathlib.Path(__file__).resolve().with_name("browser_chromium_cdp.py")
+    spec = importlib.util.spec_from_file_location("brain_browser_chromium_cdp_fallback", path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError("BROWSER_CDP_FALLBACK_LOAD_FAILED")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module.run(args, root)
 
 
 def _safe_path(root, raw):
@@ -24,6 +45,10 @@ def _free_port():
 
 
 def run(args, root):
+    # Keep the registered route usable without the absent ChromeDriver by
+    # reusing Brain's existing pinned Chromium CDP runtime.
+    if not shutil.which("chromedriver"):
+        return _run_cdp_fallback(args, root)
     # Backward-compatible extension: passive capture remains the default.
     # When an explicit declarative action list is supplied, delegate to the
     # separately implemented interaction path. This keeps the verified

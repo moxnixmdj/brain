@@ -487,6 +487,8 @@ class GoalCompilerTests(unittest.TestCase):
         out=compiler.compile_goal(goal,self.registry(),ROOT)
         self.assertEqual(out["compiler_mode"],"DETERMINISTIC_COMPOUND_ACTION_PLAN")
         self.assertEqual(out["compiled_parts"][0]["mode"],"VERIFIED_BROWSER_INTERACTION")
+        self.assertIn("web.browser.rendered.interact",out["target_effects"])
+        self.assertEqual(out["selected_capability"],"web.browser.rendered.capture.chromedriver")
         self.assertEqual(
             out["compiled_parts"][0]["selected_capability"],
             "web.browser.rendered.capture.chromedriver",

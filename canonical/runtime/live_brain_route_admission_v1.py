@@ -733,6 +733,56 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
     raw_contract = compile_contract(goal, source_id="user", routing_target_effects=routing_targets)
     if raw_contract.get("pass") is not True:
         return _fail(task_id, "FAIL__LOSSLESS_RAW_TASK_CONTRACT", "RAW_TASK_OBLIGATION_ENVELOPE_FAILURE", started, errors=raw_contract.get("errors"))
+
+    # A controller plan may name a system_tool whose primary executable is
+    # absent while the registered adapter explicitly exposes a runnable local
+    # fallback. Execute that Brain-owned fallback locally instead of sending
+    # the action to the kernel, which can only report the absent primary tool.
+    if isinstance(controller_actions, list) and controller_actions:
+        action = controller_actions[0]
+        args = action.get("args") if isinstance(action, Mapping) else None
+        cid = str((args or {}).get("capability_id") or "") if isinstance(args, Mapping) else ""
+        entry = admissible.get(cid)
+        source = entry.get("source") if isinstance(entry, Mapping) else None
+        executable = str((source or {}).get("executable") or "") if isinstance(source, Mapping) else ""
+        tail = controller_actions[1:]
+        fallback_route = (
+            isinstance(action, Mapping)
+            and str(action.get("type") or "") in {"invoke_capability", "invoke_verified_bound_capability_adapter"}
+            and cid and executable and not availability.has(executable)
+            and not availability.missing(cid, dict(admissible))
+            and all(isinstance(item, Mapping) and str(item.get("type") or "") in {"assert_file_exists", "finish"} for item in tail)
+        )
+        if fallback_route:
+            local_compiled = dict(compiled)
+            local_compiled["selected_capability"] = cid
+            result = _execute_locally(task_id, goal, local_compiled, entry, action, raw_contract, started)
+            if result.get("pass") is not True:
+                return result
+            output_paths = {
+                str(args.get(key) or "")
+                for key in ("screenshot_path", "result_path", "output_path")
+                if isinstance(args, Mapping) and args.get(key)
+            }
+            verified_assertions = []
+            for item in tail:
+                if item.get("type") == "finish":
+                    continue
+                item_args = item.get("args") if isinstance(item.get("args"), Mapping) else {}
+                raw_path = str(item_args.get("path") or "")
+                target = (ROOT / raw_path).resolve()
+                if raw_path not in output_paths or (ROOT.resolve() not in target.parents) or not target.is_file() or target.stat().st_size == 0:
+                    return _fail(task_id, "FAIL__LOCAL_FALLBACK_ARTIFACT_ASSERTION", "LIVE_FALLBACK_VERIFICATION_FAILURE", started,
+                                 executed=True, compiled_capability_id=cid, path=raw_path)
+                verified_assertions.append({"path": raw_path, "verified": True, "bytes": target.stat().st_size})
+            result["controller_action_count"] = len(controller_actions)
+            result["fallback_artifact_assertions"] = verified_assertions
+            controller = result.get("controller_execution")
+            if isinstance(controller, dict):
+                controller["reason_kernel_not_used"] = "REGISTERED_ADAPTER_CDP_FALLBACK_FOR_ABSENT_PRIMARY_EXECUTABLE"
+                controller["fallback_artifact_assertions"] = verified_assertions
+            return result
+
     dag = compiled.get("capability_dag")
     if isinstance(dag, Mapping) and dag.get("schema") == front.DAG_SCHEMA:
         return _execute_capability_dag(task_id, goal, compiled, admissible, raw_contract, started)

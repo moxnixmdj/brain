@@ -609,6 +609,8 @@ def _compile_verified_browser_interaction(goal, registry, root):
         {"type":"finish","args":{"summary":"PLAIN_GOAL_COMPLETE"}},
       ],
       "finish_summary":"PLAIN_GOAL_COMPLETE",
+      "target_effects":list(entry.get("provides") or []),
+      "selected_capability":"web.browser.rendered.capture.chromedriver",
     }
 
 
