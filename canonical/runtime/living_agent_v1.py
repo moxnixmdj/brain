@@ -788,6 +788,12 @@ def _requested_operations(goal: str) -> list[tuple[str, str, str]]:
         # consulting the data is refused.
         requested.append(("an ordering of the lines by their content", r"\bsort\b", "any"))
     if re.search(r"\b(distinct|unique)\b", text):
+        # *What* is distinct matters: "count the distinct values in the second
+        # column" asks for the column's set, not the set of whole rows.  On the
+        # two taught files those coincide; on a file where the other columns
+        # differ they do not, and deduplicating rows first answers 3 where the
+        # request says 1.  The column is named, so the column is what is made
+        # distinct.
         requested.append(("distinct values", r"\bsort\s+-u\b|\buniq\b", "any"))
     counted = _COUNT_UNIT.search(text)
     distinct_requested = re.search(r"\b(distinct|unique)\b", text) is not None
@@ -2656,6 +2662,66 @@ class LivingAgent:
                     hypotheses.append(candidate)
         return hypotheses
 
+    def _ordered_by_the_request(
+        self, goal: str, stages: Sequence[str], examples: Sequence[tuple[str, str]]
+    ) -> bool | None:
+        """Is the answer what the *request* says, or only what the bytes say?
+
+        "Count the distinct values in the second column" fixes the order: the
+        column is read, then the set is formed.  `sort -u | cut -f 2 | wc -l`
+        reproduces both taught files -- where every repeated value sits in a
+        repeated row -- and answers 3 instead of 1 as soon as two rows share a
+        column value but differ elsewhere.  The sentence is checkable on data
+        the examples never contained: run the pipeline in the order the
+        request specifies and in the order it does not, on a file built from
+        the taught one by appending a row that repeats the first row's column
+        value while differing in every other column.  If the two orders
+        disagree there, only the request's order is an answer.
+
+        Returns None unless the request names both a column and a set.
+        """
+        positions = _ordinal_positions(goal)
+        if not positions or not re.search(r"\b(distinct|unique)\b", goal.lower()):
+            return None
+        path, _expected = examples[0]
+        text = self.computer.read(path)
+        separators = self._separators([text])
+        if not separators:
+            return None
+        separator, position = separators[0], positions[0]
+        rows = [line.split(separator) for line in text.splitlines()]
+        if not rows or any(len(row) < position for row in rows):
+            return None
+        # Append one row that repeats the *first* row's value while differing
+        # in every other column.  Row-deduplication keeps both rows and counts
+        # two distinct values; column-deduplication counts one.  The two orders
+        # that disagreed on the taught files now disagree on this probe, and
+        # only the request's order agrees with the request.
+        repeated = rows[0][position - 1]
+        if not repeated or not separators:
+            return None
+        probe = list(rows)
+        widened = list(rows[0])
+        for index in range(len(widened)):
+            if index != position - 1:
+                widened[index] = f"probe{index}"
+        if widened == rows[0]:
+            return None
+        probe.append(widened)
+        request_order = self._requested_stages(goal)
+        if not request_order:
+            return None
+        payload = "\n".join(separator.join(row) for row in probe) + "\n"
+        self._runs += 1
+        wanted = self.computer.run(" | ".join(request_order), stdin=payload)
+        if not wanted.ok:
+            return None
+        self._runs += 1
+        given = self.computer.run(" | ".join(stages), stdin=payload)
+        if not given.ok:
+            return None
+        return given.stdout == wanted.stdout
+
     def _consider_grammar_fits(
         self,
         candidates: Sequence[Sequence[str]],
@@ -2772,6 +2838,27 @@ class LivingAgent:
                 self._settle_admissions(before, winner=detail["tool"])
                 detail["tested"] = max(1, self._runs - runs_before)
                 return pipeline, detail
+            # Cheapest of all: the sentence may already spell the pipeline.
+            # "Count the distinct values in the second column" names the
+            # column, the set, and the count, in that order -- so that pipeline
+            # is one hypothesis, not a haystack to search.  It is *verified*
+            # like everything else (exact bytes on every example, then the
+            # order probe), because naming an operation is not performing it;
+            # but when it holds, it is the answer the request itself gave, and
+            # finding it costs two processes instead of a documented-tool hunt.
+            requested_pipeline = self._requested_stages(goal)
+            if requested_pipeline and self._confirm(goal, requested_pipeline, examples):
+                pipeline = list(self._minimise(goal, requested_pipeline, examples))
+                self._settle_admissions(before, winner="")
+                return pipeline, {
+                    "documented": [],
+                    "grammar": list(pipeline),
+                    "prefix": "",
+                    "tested": max(1, self._runs - runs_before),
+                    "tool": "",
+                    "argv": [],
+                    "requested": True,
+                }
             # Second cheapest: the vocabulary this creature has already earned.
             # Every entry was verified on real bytes somewhere else; testing it
             # here costs a handful of processes instead of a fresh hunt.
@@ -2959,6 +3046,8 @@ class LivingAgent:
         """
         if self._selection_matches_the_sentence(goal, stages, examples) is False:
             return "the answer does not select the lines the request describes"
+        if self._ordered_by_the_request(goal, stages, examples) is False:
+            return "the answer reduces before reading the column the request names"
         if self._order_ignores_input_row_order(goal, stages, examples) is False:
             return "the answer depends on the order of the rows"
         if self._order_holds_on_a_fresh_permutation(goal, stages, examples) is False:
@@ -3172,7 +3261,12 @@ class LivingAgent:
         """
         stages: list[str] = []
         operations = _requested_operations(goal)
+        positions = _ordinal_positions(goal)
         if any(label == "distinct values" for label, _p, _r in operations):
+            if positions:
+                # "distinct values in the second column": the set is taken of
+                # the column, so the column is read *before* the set is formed.
+                stages.append(f"cut -f {positions[0]} -d ,")
             stages.append("sort -u")
         for label, _pattern, role in operations:
             if role == "prefix":

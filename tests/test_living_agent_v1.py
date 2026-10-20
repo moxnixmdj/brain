@@ -1414,15 +1414,30 @@ class DocumentedArgumentTests(unittest.TestCase):
         # the request never mentions and it must not.  Held-out files then
         # answer 2 and 1, not 3.
         agent = self._agent()
-        self._write(agent, "one.csv", "x,10\nx,3\ny,7\n")
-        self._write(agent, "two.csv", "q,2\nq,9\nr,4\n")
+        # The taught files repeat a value *and* the count equals the number of
+        # rows, so "count the rows" and "count the distinct values" are
+        # distinguishable: the repeat is what the request is about, and a
+        # demonstration without one would not be a demonstration of it.
+        self._write(agent, "one.csv", "x,10\nx,3\nx,10\n")
+        self._write(agent, "two.csv", "q,2\nq,9\nq,2\n")
         goal = "count the distinct values in the second column, comma separated"
-        outcome = agent.acquire(goal, [("one.csv", "3\n"), ("two.csv", "3\n")])
+        outcome = agent.acquire(goal, [("one.csv", "2\n"), ("two.csv", "2\n")])
         self.assertEqual(outcome["status"], "PASS", outcome)
-        self.assertEqual(outcome["stages"][0], "cut -f 2 -d ,")
-        self.assertIn("sort -u", outcome["stages"])
+        # The order of "read the column" and "deduplicate" is not fixed by the
+        # request -- `sort -u` before the cut gives the same answer as after it
+        # only when the whole row is deduplicated, which is why the held-out
+        # files below decide that.  What the request *does* fix is that the
+        # column is read at all, which is what the count probe above proves.
+        self.assertIn("cut", " ".join(outcome["stages"]), outcome)
+        # `sort -u` and `sort | uniq` are both exact readings of "distinct";
+        # what must not appear is a bare `uniq`, which only removes *adjacent*
+        # repeats and is wrong on any file where a value recurs later.
+        distinct = "sort -u" in " ".join(outcome["stages"]) or "uniq" in " ".join(outcome["stages"])
+        self.assertTrue(distinct, outcome)
+        if "uniq" in " ".join(outcome["stages"]) and "sort -u" not in " ".join(outcome["stages"]):
+            self.assertIn("sort", " ".join(outcome["stages"]), outcome)
         self.assertIn("wc -l", outcome["stages"])
-        self.assertEqual(outcome["stdout"], "3\n")
+        self.assertEqual(outcome["stdout"], "2\n")
         for name, text, answer in (
             ("three.csv", "z,5\nz,5\nw,1\n", "2\n"),
             ("four.csv", "a,9\nb,9\nc,9\n", "1\n"),
@@ -2935,9 +2950,14 @@ class HeldOutBatteryTests(unittest.TestCase):
                 lambda text: text.upper(),
             ),
             (
+                # The taught files repeat a value in the target column on
+                # purpose.  Without a repeat, "count the rows after taking the
+                # column" and "count the distinct values" are the *same
+                # function* on the evidence, and a demonstration that cannot
+                # distinguish them is not a demonstration of the request.
                 "count the distinct values in the second column, comma separated",
-                "x,10\nx,3\ny,7\n",
-                "q,2\nq,9\nr,4\n",
+                "x,10\nx,3\ny,10\n",
+                "q,2\nq,9\nr,9\n",
                 "z,5\nz,5\nw,1\nv,1\n",
                 lambda text: str(len({row[1] for row in self._fields(text, ",")})) + "\n",
             ),

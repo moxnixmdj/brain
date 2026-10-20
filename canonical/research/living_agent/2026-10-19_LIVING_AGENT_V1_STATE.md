@@ -728,6 +728,34 @@ before sorting is refused as an answer to a sentence that says to keep them
 afterwards.  `head -n 4 | sort -k 2 -t ,` and `sort -k 2 -t , | head -n 4` are
 different functions, and the request names which one it wants.
 
+### What the set is a set of
+
+"Count the distinct values in the second column" fixes an order as well as a
+function: the column is read, *then* the set is formed.  `sort -u | cut -f 2 |
+wc -l` reproduces the same bytes whenever every repeated value sits in a
+repeated row, and answers 3 instead of 1 the moment two rows share a value but
+differ elsewhere -- which is most real tables.  Three things changed:
+
+* The request's own construction is tried **first**.  A sentence that names the
+  column, the set and the count has already written a pipeline; testing it costs
+  two processes, while reaching the same pipeline through a documented-tool hunt
+  cost 74.  It is still verified exactly like anything else -- naming an
+  operation is not performing it -- so this is a shorter search, not a weaker
+  check.
+* A new order probe builds a row that repeats the first row's column value
+  while differing in every other column, and runs the request's order and the
+  candidate's order on it.  Row-deduplication and column-deduplication now
+  disagree there, so only the reading the sentence describes survives.
+* The demonstrated data itself was wrong: it had *no* repeated value at all, so
+  "count the rows" and "count the distinct values" were the same function on it
+  and `uniq` passed.  A demonstration that does not exhibit the operation is not
+  a demonstration of it; the taught files now repeat a value, and a bare `uniq`
+  (which only removes adjacent repeats) is refused.
+
+The battery's cost did not move (88 runs, median 3), and the count-distinct case
+went from 45 runs to 9 with the answer right on a held-out file where the old
+pipeline was wrong.
+
 ### Two characters with no spelling
 
 A shell command cannot carry a TAB: a literal one is a control character and
@@ -871,6 +899,14 @@ rather than die mid-loop.
   admitted.
 - Pipeline search is bounded at four stages and a few hundred hypotheses. Deeper
   compositions and stages outside the vocabulary are honest failures.
+- A shallow exact fit is not the only fit, so the search keeps descending past
+  the first one: `wc -l` answers "count the distinct values" on a file that
+  happens to have three rows, and stopping there hides the three-stage pipeline
+  that is actually meant.  The extra depth is pure arithmetic over the examples,
+  but on a megabyte of real text each level costs milliseconds, so the descent
+  is bounded by wall time (0.15 s past the first fit) checked inside a level as
+  well as between levels.  A real 248 KB repository file went from 2.33 s to
+  0.35 s; the 0.5 s bound is a test.
 - The repository has one pre-existing test failure unrelated to this work
   (`tests/test_bytes_canonical_wiring.py` asserts MISSION_LOCK_V9/HARVESTING_V2
   while `canonical/CANONICAL_POINTER.json` names V10/V3). It fails identically

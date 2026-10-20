@@ -371,12 +371,23 @@ def search(
     ]
     ordered: list[tuple[str, ...]] = []
     tried = 0
+    fits = 0
+    # How long the search may keep looking *after* it already has a fit.  The
+    # point of looking further is to get past a coincidence, and coincidences
+    # are cheap to expose on small texts; on a megabyte of real file every
+    # apply costs milliseconds, so the exploration is bounded by wall time
+    # rather than by a count of levels.
+    deep_deadline: float | None = None
     for _length in range(1, max_length + 1):
         level: list[tuple[tuple[str, ...], tuple[str, ...], tuple[str, ...], int, float]] = []
         signatures: set[tuple[str, ...]] = set()
         exact_here: list[tuple[tuple[str, ...], tuple[str, ...]]] = []
         for stages, types, texts in frontier:
+            if deep_deadline is not None and time.perf_counter() > deep_deadline:
+                break
             for stage in vocabulary:
+                if deep_deadline is not None and time.perf_counter() > deep_deadline:
+                    break
                 if not all(stage.accepts(kind) for kind in types):
                     continue
                 produced: list[str] = []
@@ -463,8 +474,30 @@ def search(
                     item[0],
                 )
             )
-            ordered.extend(stages for stages, _ in exact_here)
-            break
+            for stages, _produced in exact_here:
+                if stages not in ordered:
+                    ordered.append(stages)
+            # A fit at this depth is not the *only* fit.  "Count the distinct
+            # values in the second column" over a three-row file is answered
+            # exactly by bare `wc -l`, because three rows happen to have three
+            # distinct values -- and if the search stopped here the real
+            # three-stage pipeline would never be offered, leaving the caller
+            # to fall back to a search over the machine's documentation.  The
+            # interpreter is pure computation, so looking one level deeper
+            # costs microseconds while a wrong shallow fit costs process
+            # launches; the caller still stops at the first candidate the real
+            # shell confirms.
+            fits += 1
+            # Explore every depth the caller allowed.  Each level is pure
+            # arithmetic over the examples, and the *caller* refuses the
+            # candidates that ignore what the sentence says before spending a
+            # single process on them -- so the deeper levels cost nothing when
+            # the shallow fit is right, and are the only way the right pipeline
+            # is ever found when the shallow fit is a coincidence.
+            if deep_deadline is None:
+                deep_deadline = time.perf_counter() + 0.15
+            if len(ordered) >= 48:
+                break
         if not level:
             break
         # Keep breadth in every output type, so a COUNT-shaped branch is not
@@ -480,7 +513,10 @@ def search(
             if len(selected) >= beam:
                 break
         frontier = selected
-        if time.perf_counter() - started > time_budget_s:
+        now = time.perf_counter()
+        if now - started > time_budget_s:
+            break
+        if deep_deadline is not None and now > deep_deadline:
             break
     stats = {"candidates": tried, "seconds": round(time.perf_counter() - started, 4)}
     return ordered[:16], stats
