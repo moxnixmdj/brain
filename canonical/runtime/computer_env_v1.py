@@ -2340,59 +2340,73 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
     # between "how many lines" and "how many DIFFERENT lines": the second
     # is answered by no single program at all, and a machine that can only
     # run one thing at a time has to refuse it.
+    # Reaching here means no single program, at any depth, produced an
+    # answer the machine was willing to stand behind. That INCLUDES the
+    # case where programs tracked the probe and then disagreed on the
+    # real file: those survivors are not an answer, and treating them
+    # as one used to stop composition from ever being tried -- the
+    # machine refused questions it could have answered by joining two
+    # programs. So composition is attempted unconditionally here, and
+    # whatever the single programs found is kept only to explain a
+    # refusal honestly.
+    single = list(survivors)
+    survivors = []
+
+    # -1 is the key for "found by composing": the tiers above are keyed
+    # by how far down the candidate list they looked, and a composition
+    # has no such number.
+    composed = _query_cache_get(kind, -1)
+    if composed:
+        survivors = [h for h in
+                     (dict(c, argv=_concretise(c.get("argv"), literal))
+                      for c in composed)
+                     if _reverify(h, kind, literal, timeout)]
     if not survivors:
-        # -1 is the key for "found by composing": the tiers above are keyed
-        # by how far down the candidate list they looked, and a composition
-        # has no such number.
-        composed = _query_cache_get(kind, -1)
-        if composed:
-            survivors = [h for h in
-                         (dict(c, argv=_concretise(c.get("argv"), literal))
-                          for c in composed)
-                         if _reverify(h, kind, literal, timeout)]
+        # Whatever the background composition already found is used
+        # rather than searched for a second time.
+        if comp_thread is not None:
+            comp_thread.join()
+            comp_thread = None
+            survivors = comp.get("survivors") or []
         if not survivors:
-            # Whatever the background composition already found is used
-            # rather than searched for a second time.
-            if comp_thread is not None:
-                comp_thread.join()
-                comp_thread = None
-                survivors = comp.get("survivors") or []
-            if not survivors:
-                # Exactly as many as will be used. probe_survivors truncates
-                # to _MAX_PIPE_PROGRAMS, so asking for twice that ranks
-                # 200 candidates to keep the top 100.
-                cands = (list(programs) if programs is not None
-                         else programs_for_goal(gap, limit=_MAX_PIPE_PROGRAMS))
-                survivors = probe_survivors(kind, cands, gap, stages=2,
-                                            literal=literal)
-            if programs is None and survivors:
-                _query_cache_put(kind, -1, survivors)
-                shapes_remember(survivors)
-        votes = measure(survivors)
-        if votes:
-            ranked = sorted(votes.items(),
-                            key=lambda kv: (-len(set(kv[1])), kv[0]))
-            value, bins = ranked[0]
-            if len(set(bins)) >= min_agreement:
-                agree = len(set(bins))
-                return {"pass": True,
-                        "status": ("PASS__MEASURED_BY_AGREEMENT" if agree > 1
-                                   else "PASS__MEASURED_BY_ONE_TRACKED_INSTRUMENT"),
-                        "kind": kind, "value": value, "answer": value,
-                        "agreement": agree, "survivors": survivors,
-                        "stages": 2,
-                        "votes": {k: sorted(set(v)) for k, v in votes.items()},
-                        "detail": "two programs joined: %s" % (
-                            " | ".join(str(x) for x in
-                                       (survivors[0]["argv"][0][0],
-                                        survivors[0]["argv"][1][0]))
-                            if survivors else "")}
+            # Exactly as many as will be used. probe_survivors truncates
+            # to _MAX_PIPE_PROGRAMS, so asking for twice that ranks
+            # 200 candidates to keep the top 100.
+            cands = (list(programs) if programs is not None
+                     else programs_for_goal(gap, limit=_MAX_PIPE_PROGRAMS))
+            survivors = probe_survivors(kind, cands, gap, stages=2,
+                                        literal=literal)
+        if programs is None and survivors:
+            _query_cache_put(kind, -1, survivors)
+            shapes_remember(survivors)
+    votes = measure(survivors)
+    if votes:
+        ranked = sorted(votes.items(),
+                        key=lambda kv: (-len(set(kv[1])), kv[0]))
+        value, bins = ranked[0]
+        if len(set(bins)) >= min_agreement:
+            agree = len(set(bins))
+            return {"pass": True,
+                    "status": ("PASS__MEASURED_BY_AGREEMENT" if agree > 1
+                               else "PASS__MEASURED_BY_ONE_TRACKED_INSTRUMENT"),
+                    "kind": kind, "value": value, "answer": value,
+                    "agreement": agree, "survivors": survivors,
+                    "stages": 2,
+                    "votes": {k: sorted(set(v)) for k, v in votes.items()},
+                    "detail": "two programs joined: %s" % (
+                        " | ".join(str(x) for x in
+                                   (survivors[0]["argv"][0][0],
+                                    survivors[0]["argv"][1][0]))
+                        if survivors else "")}
 
     if not survivors:
         return {"pass": False, "status": "OPEN__NOTHING_MEASURED_IT",
-                "kind": kind, "detail":
+                "kind": kind, "survivors": single,
+                "detail":
                     "no program on this machine printed the known answer on "
-                    "a file built to hold 7 of it"}
+                    "a file built to hold 7 of it"
+                    + (" (%d single program(s) tracked the probe but no "
+                       "pipeline did)" % len(single) if single else "")}
     if not votes:
         return {"pass": False, "status": "OPEN__NOTHING_MEASURED_IT",
                 "kind": kind, "survivors": survivors,

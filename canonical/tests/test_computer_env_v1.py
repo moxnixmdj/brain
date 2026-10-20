@@ -828,6 +828,28 @@ class PipelineTests(unittest.TestCase):
                              "searched %d single programs for a question "
                              "no single program answers: %r" % (size, asked))
 
+    def test_giving_up_on_one_program_is_not_giving_up(self):
+        """Programs that tracked the probe and then failed to agree on the
+        real file are not an answer. Treating them as one used to stop
+        composition from ever being tried, so the machine refused
+        questions it could have answered by joining two programs.
+
+        Asked to insist on two agreeing programs, one program is found
+        and refused -- and composition must still be attempted."""
+        from unittest import mock
+        stages = []
+        real = cenv.probe_survivors
+
+        def spy(kind, programs, gap, **kw):
+            stages.append(kw.get("stages", 1))
+            return real(kind, programs, gap, **kw)
+
+        with mock.patch.object(cenv, "probe_survivors", side_effect=spy):
+            cenv.answer_query("count the lines in data.txt", self.file,
+                              programs=["wc"], min_agreement=2)
+        self.assertIn(2, stages,
+                      "composition was never attempted: %r" % stages)
+
     def test_the_composition_is_a_real_command_not_a_description(self):
         """Run the two stages ourselves, joined with our own pipe, nowhere
         near the learner. If it works, a pipeline was composed."""
