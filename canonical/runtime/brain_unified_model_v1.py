@@ -377,6 +377,7 @@ class UnifiedModel:
         mode: str = "AUTO",
         capability_id: str | None = None,
         instance_id: str | None = None,
+        context_paths: Iterable[str] | None = None,
     ) -> dict[str, Any]:
         requested = str(mode or "AUTO").strip().upper()
         inputs = dict(inputs or {})
@@ -401,7 +402,9 @@ class UnifiedModel:
 
         if chosen.startswith("engine:") or chosen.startswith("meta:"):
             return self._dispatch_engine(goal, chosen, inputs, routing)
-        return self._execute_capability(goal, chosen, inputs, routing, instance_id)
+        return self._execute_capability(
+            goal, chosen, inputs, routing, instance_id, context_paths
+        )
 
     # --------------------------------------------------------------- internals
 
@@ -437,10 +440,23 @@ class UnifiedModel:
         inputs: Mapping[str, Any],
         routing: Mapping[str, Any] | None,
         instance_id: str | None,
+        context_paths: Iterable[str] | None = None,
     ) -> dict[str, Any]:
         row = self.capabilities[cid]
         required = [str(x) for x in (row.get("input_names") or [])]
+        inputs = dict(inputs)
         missing = [name for name in required if name not in inputs]
+        binding_provenance: dict[str, Any] | None = None
+        declared = [str(p) for p in (context_paths or []) if str(p).strip()]
+        if missing and declared:
+            # Only a caller-declared resource is ever used to fill a slot. With
+            # no declaration this path is not taken at all, so the default
+            # behaviour is unchanged and an unstated input still fails closed:
+            # choosing a file the caller never named would be a choice about
+            # what to operate on, and an unverifiable one.
+            inputs, binding_provenance, missing = self._bind_from_declared_context(
+                goal, cid, required, inputs, missing, declared
+            )
         if missing:
             return self._failure(
                 goal,
@@ -486,11 +502,78 @@ class UnifiedModel:
             reason=None if passed else "CAPABILITY_DID_NOT_PASS",
             routing=routing,
             capability_id=cid,
+            binding_provenance=binding_provenance,
             inputs_sha256=raw.get("inputs_sha256"),
             registry_file_sha256=raw.get("registry_file_sha256"),
             rendered_action_sha256=raw.get("rendered_action_sha256"),
             execution=raw,
         )
+
+    def _bind_from_declared_context(
+        self,
+        goal: str,
+        cid: str,
+        required: list[str],
+        inputs: dict[str, Any],
+        missing: list[str],
+        declared: list[str],
+    ) -> tuple[dict[str, Any], dict[str, Any] | None, list[str]]:
+        """Ground unfilled slots from resources the caller explicitly declared.
+
+        The compiled rows carry ``input_names`` but not the registry's
+        ``action_template``, and ``world_binding_v1`` reads placeholder names
+        from that template, so a minimal one is synthesized here naming exactly
+        the slots this capability declares. All grounding stays in the verified
+        binder, which fails closed and refuses patterns and globs by design.
+
+        ``declared`` is the whole of what may be used. Nothing is discovered
+        from the wider repository, so a slot can only ever be filled with
+        something the caller put in front of the model.
+        """
+        try:
+            from canonical.runtime import world_binding_v1 as wb
+        except Exception:
+            return inputs, None, missing
+
+        entry = {
+            "capability_id": cid,
+            "action_template": {
+                "args": {name: "${input." + name + "}" for name in required}
+            },
+        }
+        try:
+            outcome = wb.complete_inputs(goal, wb.ROOT, entry, goal_paths=declared)
+        except Exception:
+            return inputs, None, missing
+
+        allowed = {str(p) for p in declared}
+        filled: dict[str, Any] = {}
+        for key in missing:
+            value = (outcome.get("inputs") or {}).get(key)
+            if value is None:
+                continue
+            text = str(value)
+            # A destination the binder synthesized is deterministic and carries
+            # no choice. Anything else must be one of the declared resources,
+            # or it is rejected -- this is what stops an invented source.
+            is_destination = "output" in key.lower()
+            if not is_destination and text not in allowed:
+                continue
+            filled[key] = value
+
+        if not filled:
+            return inputs, None, missing
+
+        merged = dict(inputs)
+        merged.update(filled)
+        still_missing = [name for name in required if name not in merged]
+        provenance = {
+            "filled_from_declared_context": sorted(filled),
+            "values": {k: filled[k] for k in sorted(filled)},
+            "declared_context": list(declared),
+            "source": str(outcome.get("source") or ""),
+        }
+        return merged, provenance, still_missing
 
     def _dispatch_engine(
         self,
