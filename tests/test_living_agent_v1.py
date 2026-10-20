@@ -1474,7 +1474,7 @@ class DocumentedArgumentTests(unittest.TestCase):
             ],
         )
         self.assertEqual(first["stages"], ["sort -k 2 -t ,"])
-        self.assertGreaterEqual(first["commands_run"], 20)  # it really searched
+        self.assertGreaterEqual(first["commands_run"], 8)  # it really searched
 
         self._write(agent, "three.csv", "aa;p;9\nbb;q;2\ncc;r;7\ndd;s;4\n")
         self._write(agent, "four.csv", "kk;t;8\nll;u;1\nmm;v;5\n")
@@ -1488,6 +1488,9 @@ class DocumentedArgumentTests(unittest.TestCase):
         self.assertEqual(second["stages"], ["sort -k 3 -t ';'", "head -n 3"])
         self.assertTrue(second["remembered"], second)
         self.assertLessEqual(second["commands_run"], 8)
+        # the second request costs a fraction of the first: that is the whole
+        # point of the memory, and the numbers are measured, not estimated
+        self.assertLess(second["commands_run"] * 2, first["commands_run"])
         self.assertLess(second["seconds"], 0.1)
         # two-digit values in the key, where a numeric reading and the tool's
         # own text order disagree: 1, 10, 2 -- the verified bytes decide, and
@@ -1498,6 +1501,29 @@ class DocumentedArgumentTests(unittest.TestCase):
             bindings={"path": "held.csv"},
         )
         self.assertEqual(again["stdout"], "o;z;1\nm;x;10\nn;y;2\n")
+
+    def test_a_request_that_names_its_tool_finds_it_first(self) -> None:
+        # fold's own summary is "Wrap input lines in each FILE, writing to
+        # standard output" -- it never says "line", so the sentence and the
+        # documentation share one word and the keyword gate used to drop it.
+        # But the sentence names the tool, which is the strongest evidence
+        # there is, and the mechanism is then one process away.
+        agent = self._agent()
+        self._write(agent, "f1.txt", "a" * 45 + "\n")
+        self._write(agent, "f2.txt", "b" * 45 + "\n")
+        outcome = agent.acquire(
+            "fold each line at 40 characters",
+            [("f1.txt", "a" * 40 + "\n" + "a" * 5 + "\n"),
+             ("f2.txt", "b" * 40 + "\n" + "b" * 5 + "\n")],
+        )
+        self.assertEqual(outcome["tool"], "fold")
+        self.assertEqual(outcome["argv"], ["-w", "40"])
+        self.assertLessEqual(outcome["commands_run"], 16)
+        self._write(agent, "f3.txt", "c" * 50 + "\n")
+        self.assertEqual(
+            agent.solve("fold each line at 40 characters", bindings={"path": "f3.txt"})["stdout"],
+            "c" * 40 + "\n" + "c" * 10 + "\n",
+        )
 
     def test_the_same_sentence_on_different_data_rebinds_its_arguments(self) -> None:
         # The same words, a different table: the separator is no longer a
@@ -1765,7 +1791,11 @@ class DocumentedArgumentTests(unittest.TestCase):
         )
         attempted = {row["tool"] for row in agent.discovery_log}
         rejected = {row["tool"] for row in agent.discovery_log if not row["verified"]}
-        self.assertTrue(rejected)
+        # The record always names the winner.  Whether anything was rejected
+        # before it depends on where the winner sat in evidence order -- the
+        # search stops at the first confirmed pipeline -- so the invariant is
+        # checked on whatever was rejected rather than assuming there was one.
+        self.assertIn("sort", attempted)
         self.assertTrue(rejected <= attempted)
         # a candidate that failed leaves no new authority behind: only what was
         # already admitted before the search can still be admitted after it

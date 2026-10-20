@@ -1184,6 +1184,7 @@ class LivingAgent:
             # which needs no example because the result is verified directly.
             raise AgentError("TOO_FEW_EXAMPLES")
         started = time.perf_counter()
+        runs_before = self._runs
         for path, expected in examples:
             if not self.computer.exists(path):
                 raise AgentError("EXAMPLE_INPUT_MISSING:" + path)
@@ -1257,7 +1258,7 @@ class LivingAgent:
                     "stages": list(stages),
                     "exact_hypotheses": len(candidates),
                     "probe_seconds": stats.get("seconds"),
-                    "commands_run": evaluated,
+                    "commands_run": max(evaluated, self._runs - runs_before),
                     "seconds": round(time.perf_counter() - started, 4),
                 }
             )
@@ -1288,7 +1289,7 @@ class LivingAgent:
                     "source": "composed",
                     "tool": detail["tool"],
                     "argv": list(detail["argv"]),
-                    "commands_run": detail["tested"],
+                    "commands_run": max(int(detail.get("tested") or 0), self._runs - runs_before),
                     "seconds": round(time.perf_counter() - started, 4),
                 }
             )
@@ -1303,7 +1304,7 @@ class LivingAgent:
                     "tool": found["tool"],
                     "argv": list(found["argv"]),
                     "source": "documentation-options",
-                    "commands_run": found["runs"],
+                    "commands_run": max(int(found.get("runs") or 0), self._runs - runs_before),
                     "seconds": round(time.perf_counter() - started, 4),
                 }
             )
@@ -1500,8 +1501,16 @@ class LivingAgent:
                     continue
                 if atoms[first][1][0] == atoms[second][1][0]:
                     continue
+                # Only grounded evidence raises a bundle's rank.  A switch
+                # that merely shares a word with the goal still composes (it
+                # may be exactly right), but it must not make a two-argument
+                # bundle look better evidenced than the one-argument bundle it
+                # extends: `fold -w 40 -b` is not stronger than `fold -w 40`.
                 forms.append(
-                    (atoms[first][0] + atoms[second][0], list(atoms[first][1]) + list(atoms[second][1]))
+                    (
+                        sum(atom[0] for atom in (atoms[first], atoms[second]) if atom[0] >= 2),
+                        list(atoms[first][1]) + list(atoms[second][1]),
+                    )
                 )
         unique: list[tuple[int, list[str]]] = []
         seen: set[tuple[str, ...]] = set()
@@ -1736,7 +1745,8 @@ class LivingAgent:
         vocabulary = self.vocabulary
         vocabulary.read()
         located = dict(vocabulary.executables())
-        wanted = set(discovery._words(goal)) | self._structure_words(sources)
+        named = set(discovery._words(goal))
+        wanted = named | self._structure_words(sources)
         scored: list[tuple[int, str, discovery.ToolDoc]] = []
         for doc in vocabulary.read():
             if doc.name in discovery.DENY or doc.name not in located:
@@ -1749,7 +1759,11 @@ class LivingAgent:
                     described |= set(discovery._words(option.long.lstrip("-").replace("-", " ")))
                 self._described_cache[doc.name] = described
             overlap = len(wanted & described)
-            if overlap >= 2:
+            # A tool the request *names* is a candidate however little its own
+            # documentation happens to share with the sentence: "fold each line
+            # at 40 characters" says "fold", and fold's summary never says
+            # "line".  Two shared words is the bar for everything else.
+            if overlap >= 2 or doc.name in named:
                 scored.append((overlap, doc.name, doc))
         scored.sort(key=lambda row: (-row[0], row[1]))
         per_tool: list[list[tuple[discovery.ToolDoc, list[str], str, int, int]]] = []
@@ -1943,35 +1957,28 @@ class LivingAgent:
                         "argv": list(record.get("argv") or []),
                         "reused_stage": True,
                     }
-            stages = [
-                self._stage_for(doc, form, binary, cwd=scratch)
-                for doc, form, binary, _overlap, _strength in candidates
-            ]
-
-            def fingerprint(stage: Any) -> str | None:
-                try:
-                    return stage.apply(sources[0])
-                except ValueError:
-                    return None
-
-            with ThreadPoolExecutor(max_workers=workers) as pool:
-                firsts = list(pool.map(fingerprint, stages))
-            survivors = [
-                (candidate, stage, first)
-                for candidate, stage, first in zip(candidates, stages, firsts)
-                if first is not None and first != sources[0]
-            ]
-            # Cheapest explanation first: a single documented argument is tried
-            # before any pair, even when the pair carries more keyword weight.
-            # Evidence first, then parsimony: a bundle whose arguments are both
-            # grounded by the request or the data is more promising than a
-            # one-argument bundle from a tool that merely shares a word, and
-            # among equals the shorter bundle wins.
-            survivors.sort(
+            # Trial order, strongest prior first:
+            #
+            # 1. the request names the tool ("fold each line at 40 characters");
+            # 2. two independent grounded facts beat either alone (a position
+            #    *and* the separator the data contains);
+            # 3. among equals, the fewest arguments -- a bundle that needs one
+            #    argument explains the same bytes more cheaply than one that
+            #    needs two;
+            # 4. then how much of the tool's own documentation the request
+            #    actually uses.
+            #
+            # The winner is usually in the first handful, and a candidate that
+            # is never reached costs nothing.
+            named = set(discovery._words(goal))
+            ordered = sorted(
+                candidates,
                 key=lambda row: (
-                    -row[0][4],
-                    sum(1 for part in row[0][1] if part.startswith("-")),
-                )
+                    0 if row[0].name in named else 1,
+                    -row[4],
+                    sum(1 for part in row[1] if part.startswith("-")),
+                    -row[3],
+                ),
             )
             tested = len(candidates)
             # Stages the sentence puts before the mechanism: "take the first
@@ -1979,35 +1986,58 @@ class LivingAgent:
             # everything and keep four", because the selection happens first.
             prefixes = self._named_prefixes(goal, sources, grammar)
 
+            def fingerprint(stage: Any) -> str | None:
+                try:
+                    return stage.apply(sources[0])
+                except ValueError:
+                    return None
+
             def verified(pipeline: Sequence[str]) -> bool:
                 return self._confirm(goal, pipeline, examples)
 
-            for (doc, form, _binary, _overlap, _strength), stage, _first in survivors[:16]:
-                for pipeline in self._hypotheses(
-                    stage,
-                    sources,
-                    expected,
-                    grammar,
-                    goal,
-                    max_length=max_length,
-                    time_budget_s=time_budget_s,
-                    prefixes=prefixes,
-                ):
-                    if not verified(pipeline):
+            survivors: list[tuple[Any, Any, str]] = []
+            # Fingerprinting is one process per candidate: run a chunk in
+            # parallel, then test what it produced in evidence order, and stop
+            # as soon as a pipeline is confirmed.
+            for offset in range(0, len(ordered), 8):
+                chunk = ordered[offset:offset + 8]
+                stages = [
+                    self._stage_for(doc, form, binary, cwd=scratch)
+                    for doc, form, binary, _overlap, _strength in chunk
+                ]
+                with ThreadPoolExecutor(max_workers=8) as pool:
+                    firsts = list(pool.map(fingerprint, stages))
+                for (doc, form, _binary, _overlap, _strength), stage, first in zip(chunk, stages, firsts):
+                    if first is None or first == sources[0]:
                         continue
-                    self._settle_admissions(before, winner=doc.name)
-                    self._log_composition(candidates, survivors, doc, form, tested)
-                    self._remember_mechanism(goal, doc, form)
-                    self._learn_stage(doc, form, _binary)
-                    prefix_shell = pipeline[0] if pipeline[0] != stage.shell else ""
-                    return pipeline, {
-                        "documented": [stage.shell],
-                        "grammar": pipeline[2:] if prefix_shell else pipeline[1:],
-                        "prefix": prefix_shell,
-                        "tested": self._runs - runs_before,
-                        "tool": doc.name,
-                        "argv": list(form),
-                    }
+                    survivors.append((doc, form, _binary, _overlap, _strength))
+                    for pipeline in self._hypotheses(
+                        stage,
+                        sources,
+                        expected,
+                        grammar,
+                        goal,
+                        max_length=max_length,
+                        time_budget_s=time_budget_s,
+                        prefixes=prefixes,
+                    ):
+                        if not verified(pipeline):
+                            continue
+                        self._settle_admissions(before, winner=doc.name)
+                        self._log_composition(
+                            candidates, [(row, stage, first) for row in survivors], doc, form, tested
+                        )
+                        self._remember_mechanism(goal, doc, form)
+                        self._learn_stage(doc, form, _binary)
+                        prefix_shell = pipeline[0] if pipeline[0] != stage.shell else ""
+                        return pipeline, {
+                            "documented": [stage.shell],
+                            "grammar": pipeline[2:] if prefix_shell else pipeline[1:],
+                            "prefix": prefix_shell,
+                            "tested": self._runs - runs_before,
+                            "tool": doc.name,
+                            "argv": list(form),
+                        }
             self._settle_admissions(before, winner="")
             return None
         finally:

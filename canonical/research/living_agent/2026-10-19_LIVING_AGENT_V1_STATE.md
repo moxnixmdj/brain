@@ -12,7 +12,7 @@ receipt, not a terminal claim, and not a capability grant.
 | Living agent | `canonical/runtime/living_agent_v1.py` | Real POSIX computer surface, one-shot skill chunking, canary-based drift detection and repair, word learning, impasse tracking, self-directed practice, consolidating memory, snapshot/restore. |
 | Shell synthesis | `canonical/runtime/shell_synthesis_v1.py` | Learns a stdin→stdout pipeline from (input, expected output) examples: typed beam search over 20 real stages, exact interpreter ordering, real-shell verification. |
 | Benchmark | `canonical/runtime/living_agent_benchmark_v1.py` | Twelve spreadsheet transforms with independently written oracles, plus a projection of the repository's real file tree. |
-| Acceptance | `tests/test_living_agent_v1.py` | 113 tests / 162 subtests. Real processes, real files, exact byte equality. No mocks. |
+| Acceptance | `tests/test_living_agent_v1.py` | 114 tests / 162 subtests. Real processes, real files, exact byte equality. No mocks. |
 | Discovery | `canonical/runtime/living_discovery_v1.py` | Reads what this machine says it can do (`tool --help`, the tool's own definition), turns a goal sentence into an exact expected output, and proves a real command against it before admitting it. |
 | Growth measurement | `canonical/runtime/living_agent_growth_v1.py` | Acquires four real skills at runtime and replays them on three untouched real directories. |
 
@@ -433,11 +433,30 @@ Measured on this machine, same machine, same day:
 
 | Request | Runs | Time |
 |---|---|---|
-| sort rows by column 2, comma separated (first time) | 52 | 0.12 s |
+| sort rows by column 2, comma separated (first time) | 11 | 0.06 s |
+| the first field of each line, colon separated | 17 | 0.07 s |
 | the same kind, column 3, semicolon, keep three | 4 | 0.04 s |
 | the same words on space-separated data | 4 | 0.04 s |
 | a different kind that needs the earned stage | 4 | 0.04 s |
 | the same words after a snapshot and restart | 4 | 0.02 s |
+
+The first-time cost fell from 52 runs to 11 without changing a line of the
+search space, by ordering the same candidates differently.  Four priors, in
+order: the request *names* the tool ("fold each line at 40 characters"); the
+bundle's arguments are backed by two independent grounded facts rather than
+one (a position *and* the separator the data contains); among equals the fewer
+arguments; then how much of the tool's own documentation the sentence uses.
+The search stops at the first confirmed pipeline instead of fingerprinting
+every candidate first, so an unexamined candidate costs nothing.
+
+Naming a tool also had to open the recall gate: `fold`'s own summary is "Wrap
+input lines in each FILE, writing to standard output", so a sentence about
+lines shares exactly one word with it, and the two-word bar dropped the one
+tool the request had named.  A named tool is now a candidate however little its
+documentation overlaps, and the same goal costs 11 runs instead of 78.  A switch that merely shares a word with the goal still
+composes, but it no longer makes a two-argument bundle look better evidenced
+than the one-argument bundle it extends -- `fold -w 40 -b` is not stronger than
+`fold -w 40`.
 
 Two design mistakes were paid for in processes before they were fixed, and both
 are the kind that look like optimisation but are really the wrong abstraction:
