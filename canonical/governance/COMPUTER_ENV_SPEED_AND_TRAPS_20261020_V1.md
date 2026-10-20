@@ -250,6 +250,16 @@ slow; it is looking in the wrong order.*
   real file leaves `survivors` non-empty, so **composition is skipped
   entirely** (the `if not survivors:` guard).
 - `awk`/`sed`-class answers unreached; filename gate.
+- **The machine litters.** Five zero-byte files named `gz1702314`,
+  `gz1830081`, `gz2118275`, `gz2432223`, `gz2483866` appeared in the
+  repository root during a measurement run. Not reproduced since: not
+  from `programs_for_goal` (ran it in an empty directory, nothing
+  left), not from the gzip tests (same). The one place that runs
+  programs in the caller's directory rather than a scratch one is
+  `help_text`, which passes `os.getcwd()` when it asks for `--help` —
+  the likely culprit, but **unproven**, so it was not "fixed" on a
+  guess and no test was written, because a test that cannot fail when
+  the bug is present is worse than no test. Reproduce first.
 - No path from this repo to a dollar; no host that runs when neither of
   us is typing.
 
