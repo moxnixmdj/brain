@@ -323,6 +323,82 @@ class LiveBrainOwnedBrowserTests(unittest.TestCase):
             server.server_close()
             thread.join(timeout=5)
 
+    def test_live_solve_routes_browser_search_through_state_policy_and_real_oracles(self):
+        """Prove the primary solve entry uses policy on a fresh page, not a recipe."""
+        _browser_ready_or_skip(self)
+        server = ThreadingHTTPServer(("127.0.0.1", 0), _SearchHandler)
+        server.received_query = None
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        task_id = "TEST_LIVE_SOLVE_STATE_POLICY_SEARCH_" + uuid.uuid4().hex
+        work = ROOT / "canonical/astra_runtime/tmp" / task_id
+        work.mkdir(parents=True, exist_ok=False)
+        screenshot = work / "search.png"
+        result_file = work / "search.json"
+        screenshot_rel = screenshot.relative_to(ROOT).as_posix()
+        result_rel = result_file.relative_to(ROOT).as_posix()
+        url = f"http://127.0.0.1:{server.server_port}/catalog"
+        goal = (
+            f"Use a browser to open {url} and search for cobalt then confirm the result text; "
+            f"save a screenshot to {screenshot_rel} and a result to {result_rel}."
+        )
+        try:
+            result = solve({"task_id": task_id, "goal": goal})
+            self.assertIs(result.get("pass"), True, result)
+            self.assertEqual(result.get("compiler_mode"), "BRAIN_STATE_CONDITIONED_BROWSER_SEARCH")
+            self.assertEqual(_contains_value(result, BROWSER_CAPABILITY), True)
+            self.assertEqual(result.get("model_dependency_count"), 0)
+            self.assertEqual(result.get("incremental_spend_usd"), 0)
+            self.assertEqual(server.received_query, "cobalt", "independent server-side query oracle")
+            self.assertTrue(screenshot.is_file())
+            _assert_png(screenshot)
+            observed = json.loads(result_file.read_text(encoding="utf-8"))
+            self.assertEqual(observed["query"], "cobalt")
+            self.assertIn("COBALT-17", observed["observed_text"])
+            self.assertIn("cobalt", observed["final_url"])
+            self.assertEqual(observed["model_dependency_count"], 0)
+            self.assertEqual(observed["screenshot_sha256"], hashlib.sha256(screenshot.read_bytes()).hexdigest())
+            self.assertTrue(_find_true_key(result, "interaction_verified"))
+            self.assertTrue(_find_true_key(result, "output_verified"))
+        finally:
+            _cleanup_task(task_id, work)
+            server.shutdown()
+            server.server_close()
+            thread.join(timeout=5)
+
+    def test_live_solve_state_policy_fails_closed_on_ambiguous_search_controls(self):
+        """The same primary route must not guess which of two real fields to use."""
+        _browser_ready_or_skip(self)
+        server = ThreadingHTTPServer(("127.0.0.1", 0), _SearchHandler)
+        server.received_query = None
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        task_id = "TEST_LIVE_SOLVE_AMBIGUOUS_SEARCH_" + uuid.uuid4().hex
+        work = ROOT / "canonical/astra_runtime/tmp" / task_id
+        work.mkdir(parents=True, exist_ok=False)
+        screenshot = work / "ambiguous.png"
+        result_file = work / "ambiguous.json"
+        screenshot_rel = screenshot.relative_to(ROOT).as_posix()
+        result_rel = result_file.relative_to(ROOT).as_posix()
+        url = f"http://127.0.0.1:{server.server_port}/ambiguous"
+        goal = (
+            f"Use a browser to open {url} and search for cobalt then confirm the result text; "
+            f"save a screenshot to {screenshot_rel} and a result to {result_rel}."
+        )
+        try:
+            result = solve({"task_id": task_id, "goal": goal})
+            self.assertIs(result.get("pass"), False, result)
+            self.assertEqual(result.get("compiler_mode"), "BRAIN_STATE_CONDITIONED_BROWSER_SEARCH")
+            self.assertIsNone(server.received_query, "no search form may be submitted on ambiguous evidence")
+            self.assertFalse(screenshot.exists())
+            self.assertFalse(result_file.exists())
+            self.assertEqual(result.get("incremental_spend_usd"), 0)
+        finally:
+            _cleanup_task(task_id, work)
+            server.shutdown()
+            server.server_close()
+            thread.join(timeout=5)
+
     def test_state_conditioned_policy_searches_rendered_page_with_search_button(self):
         """Exercise Brain's existing observe-act-observe policy on real Chromium."""
         _browser_ready_or_skip(self)

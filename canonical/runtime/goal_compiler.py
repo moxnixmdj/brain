@@ -489,6 +489,64 @@ def decompose_goal(goal):
     return merged
 
 
+def _compile_state_conditioned_browser_search(goal, registry, root):
+    """Route a browser search goal to Brain's observed-state policy, not a recipe.
+
+    The compiler binds only the browser capability and requested artifacts. The
+    Brain-owned generic policy chooses each next operation from live rendered
+    controls and its receipts; no form labels or action sequence are guessed at
+    compile time.
+    """
+    entry=(registry or {}).get("web.browser.rendered.capture.chromedriver")
+    if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+    lower=str(goal or "").lower()
+    if "browser" not in lower or not re.search(r"\bsearch\b",lower):
+        return None
+    match=re.search(r"https?://[^\s,;]+",str(goal or ""),flags=re.IGNORECASE)
+    if match is None:
+        return None
+    url=match.group(0).rstrip(".)]}>\"'")
+    paths=[raw for raw,_ in _repo_paths(goal,root)]
+    screenshots=[p for p in paths if pathlib.Path(p).suffix.lower()==".png"]
+    results=[p for p in paths if pathlib.Path(p).suffix.lower()==".json"]
+    if len(screenshots)!=1 or len(results)!=1:
+        return None
+    invoke={
+      "type":"invoke_capability",
+      "args":{
+        "capability_id":"web.browser.rendered.capture.chromedriver",
+        "url":url,
+        "adaptive_goal":str(goal or "").strip(),
+        "screenshot_path":screenshots[0],
+        "result_path":results[0],
+      },
+      "expect":{"type":"field_equals","field":"interaction_verified","value":True},
+    }
+    return {
+      "schema":"PROJECT_BRAIN_COMPILED_COMPOUND_GOAL_V1",
+      "compiler_mode":"BRAIN_STATE_CONDITIONED_BROWSER_SEARCH",
+      "clauses":[str(goal or "").strip()],
+      "compiled_parts":[{
+        "index":0,
+        "subgoal":str(goal or "").strip(),
+        "mode":"STATE_CONDITIONED_BROWSER_SEARCH",
+        "selected_capability":"web.browser.rendered.capture.chromedriver",
+        "url":url,
+        "screenshot_path":screenshots[0],
+        "result_path":results[0],
+        "decision_source":"BRAIN_OWNED_GENERIC_POLICY_FROM_LIVE_BROWSER_OBSERVATIONS",
+      }],
+      "controller_actions":[
+        invoke,
+        {"type":"finish","args":{"summary":"STATE_CONDITIONED_BROWSER_SEARCH_VERIFIED"}},
+      ],
+      "finish_summary":"STATE_CONDITIONED_BROWSER_SEARCH_VERIFIED",
+      "target_effects":list(entry.get("provides") or []),
+      "selected_capability":"web.browser.rendered.capture.chromedriver",
+    }
+
+
 def _compile_verified_browser_interaction(goal, registry, root):
     """Compile a verified declarative browser-interaction goal.
 
@@ -5074,6 +5132,9 @@ def compile_goal(goal, registry, root):
     markdown_pdf=_compile_exact_markdown_pdf_goal(goal,registry,root)
     if markdown_pdf is not None:
         return _validate_compiled_clause_coverage(markdown_pdf)
+    state_conditioned_search=_compile_state_conditioned_browser_search(goal,registry,root)
+    if state_conditioned_search is not None:
+        return _validate_compiled_clause_coverage(state_conditioned_search)
     browser_interaction=_compile_verified_browser_interaction(goal,registry,root)
     if browser_interaction is not None:
         return _validate_compiled_clause_coverage(browser_interaction)
