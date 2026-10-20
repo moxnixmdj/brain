@@ -424,3 +424,38 @@ class DeclaredContextBindingTests(unittest.TestCase):
         out = self.model.solve("Read a PDF and extract its text.", context_paths=[rel])
         prov = out.get("binding_provenance") or {}
         self.assertEqual(prov.get("values", {}).get("pdf_path"), rel)
+
+    def test_a_slot_reserved_for_a_produced_artifact_is_never_filled_from_context(self):
+        """A contract-declared `effect_result` slot must not take a caller path.
+
+        `result_path` is declared as an effect_result of
+        `plain_goal.bound_capability.grounding`: the capability reads it from
+        another capability's output. Filling it from a declared file satisfies
+        the letter of the contract while violating its meaning, and the failure
+        only surfaces later as an opaque decode error instead of a refusal.
+        """
+        cid = "plain_goal.bound_capability.grounding.verify.stdlib"
+        if cid not in self.model.capabilities:
+            self.skipTest("capability not in model")
+        try:
+            from canonical.runtime import live_integrated_brain_v1 as lb
+
+            entry = dict(lb.load_verified_registry()).get(cid) or {}
+        except Exception:
+            self.skipTest("registry unavailable")
+        spec = (entry.get("proposal_bindings") or {}).get("result_path") or {}
+        self.assertEqual(spec.get("type"), "effect_result")
+
+        out = self.model.solve(
+            "Compile a plain goal into a bound capability and verify the grounding.",
+            context_paths=["canonical/astra_runtime/tmp/BOUND_PDF_TEXT_TEST.pdf"],
+        )
+
+        self.assertIs(out.get("pass"), False)
+        self.assertTrue(
+            str(out.get("reason") or "").startswith("CAPABILITY_INPUTS_MISSING"),
+            out.get("reason"),
+        )
+        self.assertIn("result_path", str(out.get("reason")))
+        prov = out.get("binding_provenance") or {}
+        self.assertNotIn("result_path", prov.get("filled_from_declared_context") or [])
