@@ -778,6 +778,15 @@ def _requested_operations(goal: str) -> list[tuple[str, str, str]]:
             requested.append((f"first {count}", rf"\bhead\s+-n\s*\+?{count}\b", role))
         else:
             requested.append((f"last {count}", rf"\btail\s+-n\s*{count}\b", role))
+    if re.search(r"\b(sort|sorted|sorting|arrange|arranged|arranging|rank|ranked)\b", text):
+        # A sentence that names an ordering is not satisfied by a *fixed*
+        # permutation of the rows, however well that permutation happens to
+        # fit two files.  "Sort the lines by length" over a three-line file is
+        # exactly a rotation by one, and an induction that read the evidence
+        # alone admitted the rotation and was wrong on the held-out file.  The
+        # verb is part of the request, so a pipeline that reorders without
+        # consulting the data is refused.
+        requested.append(("an ordering of the lines by their content", r"\bsort\b", "any"))
     if re.search(r"\b(distinct|unique)\b", text):
         requested.append(("distinct values", r"\bsort\s+-u\b|\buniq\b", "any"))
     counted = _COUNT_UNIT.search(text)

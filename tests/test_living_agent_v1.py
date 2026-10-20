@@ -3117,6 +3117,38 @@ class EvidenceInductionTests(unittest.TestCase):
             agent.solve(goal, bindings={"path": "h.txt"})["stdout"], self._rotate(held, 1)
         )
 
+    def test_a_permutation_that_fits_a_sorting_example_is_still_not_a_sort(self) -> None:
+        # "Sort the lines by length" over three lines of increasing length is
+        # *exactly* a rotation by one, and the induction -- which reads only
+        # the evidence -- admitted the rotation and was wrong on the held-out
+        # file.  The verb in the sentence is part of the request: a pipeline
+        # that reorders rows without consulting them is not an ordering by
+        # their content, however exactly it reproduces the examples.
+        agent = LivingAgent(self.root)
+        sorting = "sort the lines by length"
+        self.assertTrue(agent._unexplained_request(sorting, ["tac"]))
+        self.assertTrue(agent._unexplained_request(sorting, ["sort"]) == [])
+        # Reversal asks for a permutation, so the same question must not
+        # misfire there.
+        self.assertEqual(agent._unexplained_request("print the lines in reverse order", ["tac"]), [])
+
+        # And with a demonstration where length order and lexical order
+        # disagree, the creature has no mechanism for it: the honest outcome is
+        # a refusal, never a confident wrong answer.
+        first = "zz\naaa\nm\n"
+        second = "qqqq\nyy\nk\n"
+        agent.computer.write("s1.txt", first)
+        agent.computer.write("s2.txt", second)
+        by_length = lambda text: "".join(  # noqa: E731
+            line + "\n" for line in sorted(text.splitlines(), key=len)
+        )
+        self.assertNotEqual(by_length(first), "".join(sorted(first.splitlines()) + ["\n"]))
+        with self.assertRaises(AgentError) as raised:
+            agent.acquire(
+                sorting, [("s1.txt", by_length(first)), ("s2.txt", by_length(second))]
+            )
+        self.assertIn("NO_PIPELINE", str(raised.exception))
+
     def test_two_line_examples_cannot_distinguish_a_reversal_from_a_rotation(self) -> None:
         # On two lines, "reverse" and "rotate by one" are the same function.
         # A creature that picked one anyway would be guessing, and the guess

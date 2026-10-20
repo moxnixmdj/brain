@@ -12,7 +12,7 @@ receipt, not a terminal claim, and not a capability grant.
 | Living agent | `canonical/runtime/living_agent_v1.py` | Real POSIX computer surface, one-shot skill chunking, canary-based drift detection and repair, word learning, impasse tracking, self-directed practice, consolidating memory, snapshot/restore. |
 | Shell synthesis | `canonical/runtime/shell_synthesis_v1.py` | Learns a stdin→stdout pipeline from (input, expected output) examples: typed beam search over 20 real stages, exact interpreter ordering, real-shell verification. |
 | Benchmark | `canonical/runtime/living_agent_benchmark_v1.py` | Twelve spreadsheet transforms with independently written oracles, plus a projection of the repository's real file tree. |
-| Acceptance | `tests/test_living_agent_v1.py` | 130 tests / 185 subtests. Real processes, real files, exact byte equality. No mocks. |
+| Acceptance | `tests/test_living_agent_v1.py` | 131 tests / 185 subtests. Real processes, real files, exact byte equality. No mocks. |
 | Discovery | `canonical/runtime/living_discovery_v1.py` | Reads what this machine says it can do (`tool --help`, the tool's own definition), turns a goal sentence into an exact expected output, and proves a real command against it before admitting it. |
 | Growth measurement | `canonical/runtime/living_agent_growth_v1.py` | Acquires four real skills at runtime and replays them on three untouched real directories. |
 
@@ -440,6 +440,17 @@ candidate as evidence, and the exact bytes still decide.  This is how
 `sort -k 2 -t , -g` and `sort -k 2 -t , -g -r` are learned without the sentence
 ever saying "numerically" or "descending" -- and how "sort the rows by the
 second column, numerically" keeps its stated `-g` when the examples agree.
+
+**An induction that was too eager.**  The evidence induction above read
+"sorted by length" over three lines of increasing length as a rotation by one
+-- which it is, on that file -- and was confidently wrong on the held-out one.
+Reading a transformation off two examples is only sound when the sentence does
+not name a different one, and "sort" is a statement that the order must come
+from the data.  A sorting verb now demands a pipeline that sorts: the rotation
+is refused, and when the demonstration actually distinguishes length order from
+lexical order (where no mechanism this creature has computes length order) the
+answer is an honest refusal rather than a wrong one.  Both halves are asserted,
+because the first is the fix and the second is the invariant.
 
 **A class of characters, not a character.**  "Replace every digit with a
 star" names no literal on either side: `digit` is a set, `star` is a name, and
