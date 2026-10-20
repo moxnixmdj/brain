@@ -596,21 +596,57 @@ _SUFFIX_VERBS = {"keep", "leave", "retain", "show", "output", "print", "return",
 _SKIP_BEFORE = {"the", "only", "just", "and", "then", "a", "an", "of", "these", "those"}
 
 
+_PER_LINE = re.compile(r"\b(each|every|per)\s+line\b")
+_EDGE_CHARS = re.compile(
+    r"\b(first|last|leading|trailing)\s+(\d{1,3}|one|two|three|four|five|six|seven|eight|nine|ten)"
+    r"\s+(?:characters|character|chars|bytes|letters)\b"
+    r"|\b(\d{1,3}|one|two|three|four|five|six|seven|eight|nine|ten)\s+(?:characters|character|chars)"
+    r"\s+from\s+the\s+(start|beginning|end)\b"
+)
+_CHARACTER_NOUNS = ("characters", "character", "chars", "letters", "bytes", "byte")
+# What a request *counts*, when it says so: the noun is the meaning, and every
+# spelling the machine can express that meaning with counts as a match.  A
+# single `wc -l` was standing in for all counting; "the number of characters in
+# each line" is a count of the same kind and had no spelling at all.
+_COUNT_UNIT = re.compile(
+    r"\b(?:count|counts|number\s+of|how\s+many)\b[^.\n]*?\b"
+    r"(characters|character|chars|letters|bytes|byte|words|word|lines|line|values)\b"
+)
+
+
 def _requested_operations(goal: str) -> list[tuple[str, str, str]]:
-    """Operations the sentence names: (label, stage spelling, where it belongs).
+    """Operations the sentence names: (label, stage spellings, where it belongs).
 
     "Keep the first two" fixes an operation no matter what the examples show,
     and it fixes *where* it happens: after the transformation.  On two rows,
     "keep the first two, sorted by the third column" is byte-identical to
     "sort those two by the third column" -- and on a third row it is not.
+    The second element is every spelling of that *meaning* this machine offers,
+    not one chosen command: a count of characters is `wc -m` for the whole text
+    and `awk length` per line, and both are the operation the sentence named.
     Only readings the sentence states outright are listed; anything vaguer is
     left to the bytes.
     """
     text = goal.lower()
+    per_line = bool(_PER_LINE.search(text))
     requested: list[tuple[str, str, str]] = []
     for match in _SELECTION.finditer(text):
         direction, amount = match.group(1), match.group(2)
         count = int(amount) if amount.isdigit() else _NUMBER_WORDS[amount]
+        after = text[match.end(): match.end() + 24]
+        if re.match(r"\s*(?:characters|character|chars|letters|bytes|byte)\b", after):
+            # A slice, not a row selection: the sentence says how much of each
+            # line survives, so the stage belongs wherever the text is a line.
+            side = "first" if direction in {"first", "top"} else "last"
+            # `cut -c 1-3` and `cut -c 3` both keep the first three characters;
+            # `cut -c -3` is the last three, which is a different answer.
+            spelled = (
+                rf"\bcut\s+-c\s*(?:1-)?{count}\b|\bsubstr\s*\("
+                if side == "first"
+                else rf"\bcut\s+-c\s*-{count}\b|\bsubstr\s*\(|\bsed\b[^|]*\b{count}\b"
+            )
+            requested.append((f"{side} {count} characters", spelled, "any"))
+            continue
         before = re.findall(r"[a-z]+", text[max(0, match.start() - 24): match.start()])
         verb = ""
         for word in reversed(before):
@@ -625,8 +661,22 @@ def _requested_operations(goal: str) -> list[tuple[str, str, str]]:
             requested.append((f"last {count}", rf"\btail\s+-n\s*{count}\b", role))
     if re.search(r"\b(distinct|unique)\b", text):
         requested.append(("distinct values", r"\bsort\s+-u\b|\buniq\b", "any"))
+    counted = _COUNT_UNIT.search(text)
     if re.search(r"\b(count|counts|how many|number of)\b", text):
-        requested.append(("a count", r"\bwc\s+-l\b", "any"))
+        unit = counted.group(1) if counted else ""
+        if unit in {"characters", "character", "chars", "letters", "bytes", "byte"}:
+            if per_line:
+                requested.append(("a count of the characters in each line",
+                                  r"\bawk\b[^|]*\blength\s*\(", "any"))
+            else:
+                requested.append(("a count of characters", r"\bwc\s+-[mc]\b", "any"))
+        elif unit in {"words", "word"}:
+            if per_line:
+                requested.append(("a count of the words in each line", r"\bawk\b[^|]*\bNF\b", "any"))
+            else:
+                requested.append(("a count of words", r"\bwc\s+-w\b", "any"))
+        else:
+            requested.append(("a count", r"\bwc\s+-l\b", "any"))
     return requested
 
 
@@ -1186,6 +1236,16 @@ class LivingAgent:
             raise AgentError("TOO_FEW_EXAMPLES")
         started = time.perf_counter()
         runs_before = self._runs
+        # Two demonstrations of the same thing are one demonstration.  A
+        # request taught twice on identical data constrains the answer exactly
+        # as much as a single example does, and admitting a pipeline from it
+        # would be claiming knowledge the evidence does not contain -- the
+        # duplicate is a way of passing one observation past the guard below.
+        distinct = {
+            (self.computer.read(path), expected) for path, expected in examples
+        }
+        if len(distinct) < 2:
+            raise AgentError("TOO_FEW_EXAMPLES")
         for path, expected in examples:
             if not self.computer.exists(path):
                 raise AgentError("EXAMPLE_INPUT_MISSING:" + path)
@@ -1247,9 +1307,22 @@ class LivingAgent:
 
         # 3. synthesize from behaviour
         inputs = [(self.computer.read(path), expected) for path, expected in examples]
-        candidates, stats = synthesis.search(
-            inputs, max_length=max_length, time_budget_s=time_budget_s
-        )
+        # The fixed vocabulary is searched first, because it is small and its
+        # ordering is sharp: a goal the creature already speaks costs two runs
+        # and must not pay for grammar it never asked for.  Only when that
+        # finds nothing exact and explainable is the same search repeated over
+        # the *full* grammar -- the fixed table plus anything the sentence
+        # states (a length filter, a character slice, a per-line length) and
+        # everything already earned.  Searching the full grammar first made
+        # every ordinary request pay for stages it never used, and made "the
+        # number of characters in each line" answerable only by accident of
+        # ordering.
+        searched = [
+            synthesis.search(
+                inputs, max_length=max_length, time_budget_s=time_budget_s
+            )
+        ]
+        first_candidates, first_stats = searched[0]
         evaluated = 0
         # A grammar fit is evidence, not proof.  A pipeline can reproduce every
         # example and still ignore what the sentence says about them: on three
@@ -1257,50 +1330,40 @@ class LivingAgent:
         # column exactly.  Such a fit is kept on the record and the search moves
         # on; only a pipeline that answers both specifications is admitted here.
         contradicted: list[tuple[list[str], list[str]]] = []
-        for stages in candidates:
-            # A pipeline that contradicts the sentence is refused before it
-            # costs a process: reading the request is free, running is not.
-            unexplained = self._unexplained_request(goal, stages)
-            if unexplained:
-                contradicted.append((list(stages), unexplained))
-                continue
-            template = synthesis.command_for(stages)
-            ok = True
-            for index, (_, expected) in enumerate(inputs):
-                command = template.replace("{path}", shlex.quote(examples[index][0]))
-                result = self.computer.run(command)
-                evaluated += 1
-                if not result.ok or result.stdout != expected:
-                    ok = False
-                    break
-            if not ok:
-                continue
-            unexplained = self._unexplained_request(goal, stages)
-            if not unexplained:
-                # The same behavioural questions the composed path asks: a
-                # pipeline that fits the bytes but answers a different question
-                # is a coincidence, not a mechanism.
-                failure = self._sentence_probe_failure(goal, stages, examples)
-                if failure:
-                    unexplained = [failure]
-            if not unexplained and self._depends_only_on_named_column(goal, stages, examples) is False:
-                unexplained = [f"a count that depends on column {_ordinal_positions(goal)[0]}"]
-            if unexplained:
-                contradicted.append((list(stages), unexplained))
-                continue
-            skill = self._admit_synthesized(goal, stages, examples, template)
-            outcome = self.solve(goal, bindings={"path": examples[0][0]})
-            outcome.update(
-                {
-                    "learned": True,
-                    "stages": list(stages),
-                    "exact_hypotheses": len(candidates),
-                    "probe_seconds": stats.get("seconds"),
-                    "commands_run": max(evaluated, self._runs - runs_before),
-                    "seconds": round(time.perf_counter() - started, 4),
-                }
+
+        def consider(
+            candidates: Sequence[Sequence[str]], stats: Mapping[str, Any]
+        ) -> dict[str, Any] | None:
+            nonlocal evaluated
+            outcome, evaluated = self._consider_grammar_fits(
+                candidates,
+                stats,
+                goal=goal,
+                examples=examples,
+                inputs=inputs,
+                contradicted=contradicted,
+                evaluated=evaluated,
+                runs_before=runs_before,
+                started=started,
             )
             return outcome
+
+        outcome = consider(*searched[0])
+        if outcome is not None:
+            return outcome
+        # The wider search is worth its processes only when the *sentence*
+        # supplies a stage the fixed table does not have.  Stages the creature
+        # has already earned are reachable through composition, which is where
+        # a stranger mechanism is looked for anyway; re-running the whole
+        # search over them made every ordinary request pay for its own memory.
+        full = self._grammar(inputs, goal)
+        if self._derived_stages(goal) and len(full) > len(synthesis.STAGES):
+            extra_candidates, extra_stats = synthesis.search(
+                inputs, max_length=max_length, time_budget_s=time_budget_s, stages=full
+            )
+            outcome = consider(extra_candidates, extra_stats)
+            if outcome is not None:
+                return outcome
 
         # Nothing the fixed vocabulary can build is both exact and an answer to
         # the request.  The machine's own documentation is the next place to
@@ -1401,9 +1464,22 @@ class LivingAgent:
     # A *position* in the data is a different kind of argument from an
     # *amount*: a key or a field takes an index the request can name, while a
     # width or a count is only meaningful if the request names the number.
-    _POSITION_WORDS = {
-        "key", "keys", "field", "fields", "column", "columns", "position",
-        "location", "list", "range", "index", "character", "characters",
+    # A *position* is an index into the data: a field, a column, a key.  The
+    # test is deliberately not "the option's prose contains a word that can
+    # mean position" -- `--verify-key` is a cryptographic key, `--interval` is a
+    # time, and `-w` is a width.  Binding the ordinal to any of those produces a
+    # command that runs, fits two small files by luck, and means nothing.
+    _POSITION_WORDS = {"field", "fields", "column", "columns", "position", "positions"}
+    # Placeholders a tool uses when its value is an index into the data.  A
+    # generic LIST or NUMBER is not enough (`expand -t LIST` is a tab width);
+    # KEYDEF and FIELDS are.
+    _POSITION_NAMES = {"KEYDEF", "FIELDS", "FIELD", "POS", "POSITION", "COLUMN", "COLUMNS"}
+    # Words that place a value *in the data* rather than in a display or a clock.
+    # A place in the data: a field, a column, a character, a byte.  Not a time
+    # interval, a checksum key, or a width.
+    _DATA_NOUNS = {
+        "field", "fields", "column", "columns", "value", "values", "location",
+        "character", "characters", "byte", "bytes",
     }
     # Positional operand names, read off a usage line.  A pattern is a value the
     # sentence supplies; a set is a translation of characters; the rest are
@@ -1416,6 +1492,7 @@ class LivingAgent:
     _AMOUNT_WORDS = {
         "number", "width", "line", "lines", "byte", "bytes", "size", "count",
         "length", "increment", "digit", "digits", "start", "first",
+        "character", "characters",
     }
 
     @classmethod
@@ -1459,6 +1536,21 @@ class LivingAgent:
             if character is not None and character not in out:
                 out.append(character)
         return out
+
+    @classmethod
+    def _position_of(cls, option: "discovery.Option", words: set[str], placeholder: str) -> bool:
+        """Is this option's value an index into the data?
+
+        Two independent signals, and either is enough: the tool names the value
+        as a data position (KEYDEF, FIELDS), or the option says in words that it
+        puts the value in the data (a field, a column, a location).  Both are
+        about the data's shape.  ``--verify-key`` names a key and means a
+        checksum; ``-w`` names a width; neither is a place in the text.
+        """
+        if placeholder in cls._POSITION_NAMES and words & cls._DATA_NOUNS:
+            return True
+        return bool(words & cls._DATA_NOUNS) and bool(words & {"select", "sort", "print", "output", "display"})
+
 
     def _separators(self, sources: Sequence[str]) -> list[str]:
         """Characters that actually separate parts of the data, most common first.
@@ -1532,14 +1624,17 @@ class LivingAgent:
                 continue
             if option.argument:
                 if kind == "int":
-                    if positions and words & self._POSITION_WORDS:
+                    if positions and self._position_of(option, words, placeholder):
                         # `-c` says "characters" and the sentence said
                         # "character"; `-b` says "bytes" and it did not.  Both
                         # would produce the same bytes on ASCII data, so the
                         # sentence's own word is what chooses between them.
                         bonus = 1 if self._shares_words(words, tokens) else 0
                         atoms.append((5 + bonus, [spelling, str(positions[0])], placeholder))
-                    elif quantities and words & (self._POSITION_WORDS | self._AMOUNT_WORDS):
+                    elif quantities and (
+                        words & (self._POSITION_WORDS | self._AMOUNT_WORDS)
+                        or placeholder in self._POSITION_NAMES
+                    ):
                         atoms.append((4, [spelling, str(quantities[0])], placeholder))
                 elif kind == "char":
                     # A character the sentence names is the best evidence there
@@ -1578,7 +1673,13 @@ class LivingAgent:
                 if self._OPERAND_SKIP.match(name):
                     continue
                 if self._OPERAND_PATTERN.match(name):
-                    if kept:
+                    pattern = self._affix_pattern(goal)
+                    if pattern:
+                        # The sentence named the shape of the pattern, not just
+                        # a word: "start with a" is anchored, and an unanchored
+                        # `a` would select every line containing the letter.
+                        atoms.append((5, [pattern], name))
+                    elif kept:
                         atoms.append((5, [kept[0]], name))
                 elif self._OPERAND_CHARS.match(name):
                     index = min(operand_place, len(named_chars) - 1)
@@ -1625,10 +1726,15 @@ class LivingAgent:
         # evidence, because a sort that ignores "numerically" answers a
         # different question.
         qualifiers: list[str] = []
+        qualifier_words: list[str] = []
         stated = [word for word in sorted(set(re.findall(r"[a-z]+", goal.lower())))
                   if len(word) >= 6 and word.endswith("ly")]
         for word in [*stated, *manners]:
-            for flag in self._qualifier_flags(word, doc):
+            flags = self._qualifier_flags(word, doc)
+            if not flags or word in qualifier_words:
+                continue
+            qualifier_words.append(word)
+            for flag in flags:
                 if flag not in qualifiers:
                     qualifiers.append(flag)
 
@@ -1657,20 +1763,32 @@ class LivingAgent:
                         list(atoms[first][1]) + list(atoms[second][1]),
                     )
                 )
-        if qualifiers:
+        if qualifier_words:
             # Every bundle this tool could offer is also offered with the
-            # qualifier attached.  It outranks the bare bundle by exactly the
-            # weight of the word it implements.
+            # qualifiers attached.  It outranks the bare bundle by exactly the
+            # weight of the words it implements.  The words are kept apart
+            # rather than pooled, because each one has to contribute its own
+            # flag: taking the first two flags on the whole list would let two
+            # synonyms of "numeric" crowd out "reverse", and then a descending
+            # request could never be spelled.
             expanded: list[tuple[int, list[str]]] = []
             for score, form in forms:
                 expanded.append((score, form))
-                attached = [flag for flag in qualifiers[:2] if flag not in form]
-                for flag in attached:
+                per_word: list[str] = []
+                for word in qualifier_words:
+                    flag = next(
+                        (candidate for candidate in self._qualifier_flags(word, doc)
+                         if candidate not in form and candidate not in per_word),
+                        "",
+                    )
+                    if flag:
+                        per_word.append(flag)
+                for flag in per_word:
                     expanded.append((score + 2, [*form, flag]))
-                if len(attached) > 1:
+                if len(per_word) > 1:
                     # Numeric *and* reversed is one request, not two: the
                     # options it needs belong in the same bundle.
-                    expanded.append((score + 2 * len(attached), [*form, *attached]))
+                    expanded.append((score + 2 * len(per_word), [*form, *per_word]))
             forms = expanded
         unique: list[tuple[int, list[str]]] = []
         seen: set[tuple[str, ...]] = set()
@@ -1702,6 +1820,49 @@ class LivingAgent:
         strong = [row for row in unique if row[0] >= 2][:12]
         weak = [row for row in unique if row[0] < 2][:2]
         return strong + weak
+
+    def _demonstrated_manners(
+        self, goal: str, examples: Sequence[tuple[str, str]]
+    ) -> tuple[str, ...]:
+        """Orderings the examples themselves demonstrate.
+
+        "Sort the rows by the second column" says nothing about how numbers
+        compare, but the numbers in that column are 10, 2 and 1 and the answer
+        is 1, 2, 10: the examples show a numeric ordering, and the tool
+        documents the switch that computes one.  Reading that off the *answers*
+        is different from assuming it -- the bytes the user produced are part
+        of the request.  A descending answer is the same evidence for a reverse
+        switch, so the two are returned as words the tool's own options must
+        match, exactly like an adverb in the sentence.
+        """
+        position = self._orders_by_named_column(goal)
+        if position is None:
+            return ()
+        path, expected = examples[0]
+        text = self.computer.read(path)
+        separators = self._separators([text])
+        if not separators:
+            return ()
+        separator = separators[0]
+        rows = [line.split(separator) for line in text.splitlines()]
+        want = [line.split(separator) for line in expected.splitlines()]
+        if not rows or not want:
+            return ()
+        if any(len(row) < position for row in rows) or any(len(row) < position for row in want):
+            return ()
+        values = [row[position - 1] for row in rows]
+        ordered = [row[position - 1] for row in want]
+        try:
+            numeric = sorted(values, key=float)
+        except ValueError:
+            numeric = []
+        words: list[str] = []
+        if numeric and numeric != sorted(values) and ordered in (numeric, list(reversed(numeric))):
+            words.append("numerically")
+        plain = numeric if numeric else sorted(values)
+        if ordered == list(reversed(plain)) and ordered != plain:
+            words.append("reverse")
+        return tuple(words)
 
     @staticmethod
     def _structure_words(sources: Sequence[str]) -> set[str]:
@@ -1870,7 +2031,114 @@ class LivingAgent:
             out.append(stage)
         return out
 
-    def _base_grammar(self, inputs: Sequence[tuple[str, str]]) -> tuple[Any, ...]:
+    _LINE_LENGTH = re.compile(
+        r"\bnumber\s+of\s+(?:characters|character|chars|bytes|letters)\b"
+        r"|\bhow\s+many\s+(?:characters|character|chars|bytes|letters)\b"
+    )
+    _NUMBER_WORDS = {
+        "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
+        "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10,
+    }
+
+    @classmethod
+    def _small_number(cls, word: str) -> int:
+        word = word.strip().lower()
+        return int(word) if word.isdigit() else cls._NUMBER_WORDS.get(word, 0)
+
+    @classmethod
+    def _derived_stages(cls, goal: str) -> tuple[Any, ...]:
+        """Stages the request states outright, in the words it states them.
+
+        Three requests of this shape are answerable with nothing but a reading:
+        "the lines longer than 20 characters" filters on a length, "the number
+        of characters in each line" *reports* that length, and "the first three
+        characters of each line" keeps a slice of it.  Each stage is built from
+        the sentence's own number and is checked like any other -- an
+        interpreter function plus a real run -- so a misreading costs a probe
+        rather than an answer.
+        """
+        lowered = goal.lower()
+        stages: list[Any] = []
+
+        length = cls._LINE_LENGTH.search(lowered)
+        if length and ("each line" in lowered or "per line" in lowered):
+            stages.append(
+                synthesis.Stage(
+                    "awk '{print length($0)}'",
+                    synthesis.LINES,
+                    synthesis.LINES,
+                    lambda text: synthesis.as_text(
+                        [str(len(line)) for line in synthesis.as_lines(text)]
+                    ),
+                )
+            )
+
+        edge = _EDGE_CHARS.search(lowered)
+        if edge:
+            if edge.group(1):
+                side, amount = edge.group(1), cls._small_number(edge.group(2))
+            else:
+                side, amount = edge.group(4), cls._small_number(edge.group(3))
+            if amount:
+                leading = side in {"first", "leading", "start", "beginning"}
+                if leading:
+                    shell = f"cut -c 1-{amount}"
+                    apply = lambda text, n=amount: synthesis.as_text(  # noqa: E731
+                        [line[:n] for line in synthesis.as_lines(text)]
+                    )
+                else:
+                    # `cut -c -2` is the *first* two characters (a range from
+                    # 1), not the last two.  A stage whose interpreter says one
+                    # thing and whose shell says another would be the worst kind
+                    # of mistake -- the search would believe it and the shell
+                    # would disagree -- so the last-N reading is spelled the way
+                    # it is actually true: `sed` keeps the final N of each line
+                    # and leaves a shorter line alone, exactly like the slice.
+                    shell = "sed 's/.*\\(.\\{" + str(amount) + "\\}\\)$/\\1/'"
+                    apply = lambda text, n=amount: synthesis.as_text(  # noqa: E731
+                        [line[-n:] for line in synthesis.as_lines(text)]
+                    )
+                stages.append(synthesis.Stage(shell, synthesis.LINES, synthesis.LINES, apply))
+
+        stated = cls._length_stage(goal)
+        if stated is not None:
+            stages.append(stated)
+        return tuple(stages)
+
+    @staticmethod
+    def _length_stage(goal: str) -> Any:
+        """A length filter, when the request states one as a comparison.
+
+        "The lines longer than 20 characters" is `awk 'length($0) > 20'` and
+        nothing else in the grammar does it.  The number is read from the
+        sentence, so the stage is a reading of the request rather than a guess
+        over a table of thresholds.
+        """
+        found = LivingAgent._LENGTH_FILTER.search(goal.lower())
+        if not found:
+            return None
+        if found.group(1):
+            relation, amount = found.group(1), int(found.group(2))
+        else:
+            relation, amount = found.group(3).replace(" ", ""), int(found.group(4))
+        operator = {
+            "longer": ">", "more": ">", "greater": ">", "bigger": ">",
+            "shorter": "<", "fewer": "<", "less": "<", "smaller": "<",
+            "atleast": ">=", "atmost": "<=",
+        }[relation]
+
+        def apply(text: str, op: str = operator, n: int = amount) -> str:
+            keep = {
+                ">": lambda size: size > n,
+                "<": lambda size: size < n,
+                ">=": lambda size: size >= n,
+                "<=": lambda size: size <= n,
+            }[op]
+            return synthesis.as_text([line for line in synthesis.as_lines(text) if keep(len(line))])
+
+        return synthesis.Stage(f"awk 'length($0) {operator} {amount}'", synthesis.LINES, synthesis.LINES, apply)
+
+    def _base_grammar(self, inputs: Sequence[tuple[str, str]], goal: str = "") -> tuple[Any, ...]:
         """The grammar whose stages cost nothing to apply.
 
         Every stage here is pure computation, which is what a *search* needs:
@@ -1878,11 +2146,18 @@ class LivingAgent:
         stage would turn each of those into a process.  Earned stages are
         tried deliberately, in their own loop, where each costs one run.
         """
-        return synthesis.instantiate(inputs) + tuple(self._stages.values())
+        stages = synthesis.instantiate(inputs)
+        if goal:
+            own = {stage.shell for stage in stages}
+            for stage in self._derived_stages(goal):
+                if stage.shell not in own:
+                    own.add(stage.shell)
+                    stages = stages + (stage,)
+        return stages + tuple(self._stages.values())
 
-    def _grammar(self, inputs: Sequence[tuple[str, str]]) -> tuple[Any, ...]:
+    def _grammar(self, inputs: Sequence[tuple[str, str]], goal: str = "") -> tuple[Any, ...]:
         """The fixed grammar plus everything this creature has earned."""
-        base = self._base_grammar(inputs)
+        base = self._base_grammar(inputs, goal)
         seen = {stage.shell for stage in base}
         return base + tuple(stage for stage in self._learned_stages() if stage.shell not in seen)
 
@@ -1894,6 +2169,8 @@ class LivingAgent:
         *,
         limit: int = 64,
     ) -> list[tuple[discovery.ToolDoc, list[str], str, int, int]]:
+        # `manners` carries orderings the examples demonstrate ("numerically",
+        # "reverse"); they join the sentence's own adverbs as option evidence.
         """Documented invocations worth *trying*, ordered by evidence strength.
 
         The request's words, plus the words the data itself makes meaningful,
@@ -2050,6 +2327,73 @@ class LivingAgent:
                     hypotheses.append(candidate)
         return hypotheses
 
+    def _consider_grammar_fits(
+        self,
+        candidates: Sequence[Sequence[str]],
+        stats: Mapping[str, Any],
+        *,
+        goal: str,
+        examples: Sequence[tuple[str, str]],
+        inputs: Sequence[tuple[str, str]],
+        contradicted: list[tuple[list[str], list[str]]],
+        evaluated: int,
+        runs_before: int,
+        started: float,
+    ) -> tuple[dict[str, Any] | None, int]:
+        """Admit the first exact, explainable pipeline in this candidate list.
+
+        A fit is evidence, not proof, so each candidate is interrogated the
+        same way the composed path interrogates its own: exact bytes on every
+        example, then the sentence's own probes.  Returns the outcome and the
+        number of commands it cost, or None when this list has nothing worth
+        admitting -- which is the caller's signal to widen the grammar.
+        """
+        for stages in candidates:
+            # A pipeline that contradicts the sentence is refused before it
+            # costs a process: reading the request is free, running is not.
+            unexplained = self._unexplained_request(goal, stages)
+            if unexplained:
+                contradicted.append((list(stages), unexplained))
+                continue
+            template = synthesis.command_for(stages)
+            ok = True
+            for index, (_, expected) in enumerate(inputs):
+                command = template.replace("{path}", shlex.quote(examples[index][0]))
+                result = self.computer.run(command)
+                evaluated += 1
+                if not result.ok or result.stdout != expected:
+                    ok = False
+                    break
+            if not ok:
+                continue
+            unexplained = self._unexplained_request(goal, stages)
+            if not unexplained:
+                # The same behavioural questions the composed path asks: a
+                # pipeline that fits the bytes but answers a different question
+                # is a coincidence, not a mechanism.
+                failure = self._sentence_probe_failure(goal, stages, examples)
+                if failure:
+                    unexplained = [failure]
+            if not unexplained and self._depends_only_on_named_column(goal, stages, examples) is False:
+                unexplained = [f"a count that depends on column {_ordinal_positions(goal)[0]}"]
+            if unexplained:
+                contradicted.append((list(stages), unexplained))
+                continue
+            skill = self._admit_synthesized(goal, stages, examples, template)
+            outcome = self.solve(goal, bindings={"path": examples[0][0]})
+            outcome.update(
+                {
+                    "learned": True,
+                    "stages": list(stages),
+                    "exact_hypotheses": len(candidates),
+                    "probe_seconds": stats.get("seconds"),
+                    "commands_run": max(evaluated, self._runs - runs_before),
+                    "seconds": round(time.perf_counter() - started, 4),
+                }
+            )
+            return outcome, evaluated
+        return None, evaluated
+
     def _compose(
         self,
         goal: str,
@@ -2076,7 +2420,7 @@ class LivingAgent:
         sources = [text for text, _ in inputs]
         expected = [text for _, text in inputs]
         before = set(self.computer.admitted())
-        grammar = self._base_grammar(inputs)
+        grammar = self._base_grammar(inputs, goal)
         candidates = self._candidate_stages(goal, sources, self._demonstrated_manners(goal, examples))
         if not candidates:
             return None
@@ -2208,6 +2552,7 @@ class LivingAgent:
                     ):
                         if not verified(pipeline):
                             continue
+                        pipeline = list(self._minimise(goal, pipeline, examples))
                         self._settle_admissions(before, winner=doc.name)
                         self._log_composition(
                             candidates, [(row, stage, first) for row in survivors], doc, form, tested
@@ -2283,8 +2628,8 @@ class LivingAgent:
         *sentence* determines.  They only ever reject, and each returns None
         (no failure) when the question does not apply.
         """
-        if self._selection_matches_the_named_word(goal, stages, examples) is False:
-            return "the answer does not select by the word the request names"
+        if self._selection_matches_the_sentence(goal, stages, examples) is False:
+            return "the answer does not select the lines the request describes"
         if self._order_ignores_input_row_order(goal, stages, examples) is False:
             return "the answer depends on the order of the rows"
         if self._order_holds_on_a_fresh_permutation(goal, stages, examples) is False:
@@ -2315,6 +2660,41 @@ class LivingAgent:
         if self._sentence_probe_failure(goal, pipeline, examples):
             return False
         return self._depends_only_on_named_column(goal, pipeline, examples) is not False
+
+    def _minimise(
+        self, goal: str, pipeline: Sequence[str], examples: Sequence[tuple[str, str]]
+    ) -> tuple[str, ...]:
+        """The same answer with every stage that earns nothing removed.
+
+        A search that scans a wide field can arrive at a pipeline whose first
+        stage only prepared the text for a stage that turned out not to need
+        it: `pr -N 20 | awk 'length($0) > 20'` answers the length request, but
+        the `pr` is dead weight the pipeline would carry forever.  Each stage is
+        dropped in turn, and the shorter pipeline has to pass the same checks --
+        examples, sentence probes, column dependence -- before the drop stands.
+        So a stage that is load-bearing anywhere on the evidence stays.
+        """
+        best = tuple(pipeline)
+        if len(best) > 1:
+            # The sentence's own stage often does the whole job alone: an
+            # `awk` length filter needs no preamble, even when the search found
+            # one that happened to cancel out.  Try each stage by itself first,
+            # since a single stage is the shortest answer there can be.
+            for stage in best:
+                if self._confirm(goal, [stage], examples):
+                    return (stage,)
+        changed = True
+        while changed and len(best) > 1:
+            changed = False
+            for index in range(len(best)):
+                shorter = best[:index] + best[index + 1:]
+                if not shorter:
+                    continue
+                if self._confirm(goal, shorter, examples):
+                    best = shorter
+                    changed = True
+                    break
+        return best
 
     @classmethod
     def _shares_words(cls, option_words: set[str], goal_tokens: set[str]) -> bool:
@@ -2468,12 +2848,24 @@ class LivingAgent:
         for label, _pattern, role in operations:
             if role == "prefix":
                 continue
-            if label.startswith("first "):
+            if label.endswith(" characters"):
+                size = label.split()[1]
+                stages.append(f"cut -c 1-{size}" if label.startswith("first") else f"cut -c -{size}")
+            elif label.startswith("first "):
                 stages.append("head -n " + label.split()[1])
             elif label.startswith("last "):
                 stages.append("tail -n " + label.split()[1])
-        if any(label == "a count" for label, _p, _r in operations):
-            stages.append("wc -l")
+        for label in (label for label, _p, _r in operations if label.startswith("a count")):
+            if "characters in each line" in label:
+                stages.append("awk '{print length($0)}'")
+            elif "characters" in label:
+                stages.append("wc -m")
+            elif "words in each line" in label:
+                stages.append("awk '{print NF}'")
+            elif "words" in label:
+                stages.append("wc -w")
+            else:
+                stages.append("wc -l")
         return stages
 
     def _unexplained_request(self, goal: str, stages: Sequence[str]) -> list[str]:
@@ -2507,40 +2899,126 @@ class LivingAgent:
     _CONTAINMENT = re.compile(
         r"\b(contain|contains|containing|include|includes|including|with|having|match|matches|matching)\b"
     )
+    _LENGTH_FILTER = re.compile(
+        r"\b(longer|shorter|more|fewer|greater|less|bigger|smaller)\s+than\s+(\d{1,4})\s*"
+        r"(?:character|characters|char|chars|byte|bytes)\b"
+        r"|\b(at\s+least|at\s+most)\s+(\d{1,4})\s*(?:character|characters|char|chars|byte|bytes)\b"
+    )
+    _PREFIX_FILTER = re.compile(
+        r"\b(?:start|starts|starting|begin|begins|beginning)\s+(?:with|by)\s+(\S+)"
+    )
+    _SUFFIX_FILTER = re.compile(r"\b(?:end|ends|ending)\s+with\s+(\S+)")
 
-    def _selection_matches_the_named_word(
+    @classmethod
+    def _affix_pattern(cls, goal: str) -> str:
+        """The regular expression a prefix or suffix request describes.
+
+        "Lines that start with a" is the set of lines matching ``^a`` -- the
+        sentence itself says what the pattern is, and the tool documents that it
+        takes one.  Escaping the token keeps a literal dot or bracket literal.
+        """
+        found = cls._PREFIX_FILTER.search(goal.lower())
+        if found:
+            token = found.group(1).strip("'\"")
+            if token:
+                return "^" + re.escape(token)
+        found = cls._SUFFIX_FILTER.search(goal.lower())
+        if found:
+            token = found.group(1).strip("'\"")
+            if token:
+                return re.escape(token) + "$"
+        return ""
+
+    def _line_predicate(self, goal: str) -> tuple[Any, str] | None:
+        """The per-line test the sentence describes, if it describes one.
+
+        "The lines that contain error", "the lines longer than 20 characters",
+        "the lines that start with a" are all statements about what a line must
+        satisfy.  Each defines a function on any text, which is what lets the
+        answer be checked on a text the examples never contained instead of
+        being taken on faith.
+        """
+        lowered = goal.lower()
+        found = self._LENGTH_FILTER.search(lowered)
+        if found:
+            if found.group(1):
+                relation, amount = found.group(1), int(found.group(2))
+            else:
+                relation, amount = found.group(3).replace(" ", ""), int(found.group(4))
+            if relation in {"longer", "more", "greater", "bigger"}:
+                test = (lambda line, n=amount: len(line) > n)
+            elif relation in {"shorter", "fewer", "less", "smaller"}:
+                test = (lambda line, n=amount: len(line) < n)
+            elif relation == "atleast":
+                test = (lambda line, n=amount: len(line) >= n)
+            else:
+                test = (lambda line, n=amount: len(line) <= n)
+            return test, "length"
+        found = self._PREFIX_FILTER.search(lowered)
+        if found:
+            token = found.group(1).strip("'\"")
+            if token:
+                return (lambda line, t=token: line.startswith(t)), "prefix"
+        found = self._SUFFIX_FILTER.search(lowered)
+        if found:
+            token = found.group(1).strip("'\"")
+            if token:
+                return (lambda line, t=token: line.endswith(t)), "suffix"
+        if self._CONTAINMENT.search(lowered):
+            path, expected = "", ""
+            return None, "containment"
+        return None
+
+    def _selection_matches_the_sentence(
         self, goal: str, stages: Sequence[str], examples: Sequence[tuple[str, str]]
     ) -> bool | None:
-        """Does the answer select by the word the sentence names?
+        """Does the answer select the lines the sentence describes?
 
-        "Show only the lines that contain error" says what the answer is for
-        *any* text: exactly the lines that contain that word.  That is a
-        specification the sentence itself supplies, so it can be checked on a
-        probe the examples never contained.  Without it, `tail -n +2` fits two
-        files where the word happens to sit on every line but the first, and is
-        wrong the moment it does not.
+        A sentence that says what a line must be is a specification for *any*
+        text, so it is checked on a probe the examples never contained.  A
+        positional stand-in (`tail -n +2`) fits two files where the described
+        line happens to come second, and fails immediately here.
 
         Returns None unless the reading applies and the examples already agree
         with it -- a sentence that means something else is not judged by a
         filter it did not ask for.
         """
-        if not self._CONTAINMENT.search(goal.lower()):
+        reading = self._line_predicate(goal)
+        predicate, kind = reading if reading else (None, "")
+        if predicate is None and kind != "containment":
             return None
         path, expected = examples[0]
         text = self.computer.read(path)
-        words = [
-            word
-            for word in sorted(_tokens(goal))
-            if word.isalpha() and len(word) > 2 and word in text and word not in {"line", "lines"}
-        ]
-        if len(words) != 1:
-            return None
-        word = words[0]
-        selected = "".join(line + "\n" for line in text.splitlines() if word in line)
+        if predicate is None:
+            words = [
+                word
+                for word in sorted(_tokens(goal))
+                if word.isalpha() and len(word) > 2 and word in text
+                and word not in {"line", "lines"}
+            ]
+            if len(words) != 1:
+                return None
+            word = words[0]
+            predicate = lambda line, w=word: w in line  # noqa: E731
+        selected = "".join(line + "\n" for line in text.splitlines() if predicate(line))
         if expected != selected:
             return None
-        probe = f"a line with {word} first\n" + text + "nothing to see here\n"
-        oracle = "".join(line + "\n" for line in probe.splitlines() if word in line)
+        # Two probes, both written by the sentence rather than by the examples:
+        # one matching line at the front, one non-matching line at the end.
+        matching = next(
+            (candidate for candidate in ("a line for the test" * 3, "zzzz probe", "x")
+             if predicate(candidate)),
+            None,
+        )
+        missing = next(
+            (candidate for candidate in ("", "q", "~", "###")
+             if not predicate(candidate)),
+            None,
+        )
+        if matching is None or missing is None:
+            return None
+        probe = matching + "\n" + text + missing + "\n"
+        oracle = "".join(line + "\n" for line in probe.splitlines() if predicate(line))
         self._runs += 1
         result = self.computer.run(" | ".join(stages), stdin=probe)
         if not result.ok:
@@ -2767,7 +3245,7 @@ class LivingAgent:
         rejects: it means the stage list has been shown not to use the column
         it claims to use, which is a fact about behaviour, not about wording.
         """
-        if "a count" not in [label for label, _p, _r in _requested_operations(goal)]:
+        if not any(label.startswith("a count") for label, _p, _r in _requested_operations(goal)):
             return None
         positions = _ordinal_positions(goal)
         if not positions:
@@ -3342,7 +3820,7 @@ class LivingAgent:
                 },
             )
             raise AgentError("GOAL_PROPERTY_COMBINATION_UNSUPPORTED")
-        stages = self._grammar([(source, target)])
+        stages = self._grammar([(source, target)], goal)
         candidates, stats = synthesis.search(
             [(source, target)],
             max_length=max_length,
@@ -3537,7 +4015,7 @@ class LivingAgent:
         # A mechanism the creature already speaks.  Only interpreter-exact
         # candidates are worth a real run, so this costs a handful of processes.
         examples = [(source, expected)]
-        stages = self._grammar(examples)
+        stages = self._grammar(examples, str(getattr(reading, "request", "")))
         candidates, _stats = synthesis.search(
             examples, max_length=2, beam=80, time_budget_s=0.5, stages=stages
         )

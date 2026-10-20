@@ -1560,6 +1560,142 @@ class DocumentedArgumentTests(unittest.TestCase):
             "b 2\nm 4\nz 8\n",
         )
 
+    @staticmethod
+    def _sorted_by(text: str, separator: str, position: int) -> str:
+        rows = [line.split(separator) for line in text.splitlines()]
+        rows.sort(key=lambda row: row[position - 1])
+        return "".join(separator.join(row) + "\n" for row in rows)
+
+    def test_a_kind_of_request_learned_once_covers_new_arguments(self) -> None:
+        # One demonstration of "sort the rows by a column" is a *kind*, not a
+        # single command: the next request names a different column and a
+        # different separator, and the creature must find the same mechanism
+        # with the new values rather than start from nothing.
+        agent = self._agent()
+        first = self._write(agent, "one.csv", "pear,2\napple,10\nfig,1\nkiwi,7\n")
+        second = self._write(agent, "two.csv", "zulu,5\nyankee,3\n")
+        taught = [
+            ("one.csv", self._sorted_by(first, ",", 2)),
+            ("two.csv", self._sorted_by(second, ",", 2)),
+        ]
+        self.assertNotEqual(taught[0][1], first)  # the example must show a change
+        learned = agent.acquire("sort the rows by the second column, comma separated", taught)
+        self.assertEqual(learned["stages"], ["sort -k 2 -t ,"], learned)
+
+        third = self._write(agent, "three.csv", "x;9;s\ny;2;q\nz;5;r\n")
+        fourth = self._write(agent, "four.csv", "a;7;f\nb;1;e\n")
+        goal = "sort the rows by the third column, semicolon separated"
+        new = [
+            ("three.csv", self._sorted_by(third, ";", 3)),
+            ("four.csv", self._sorted_by(fourth, ";", 3)),
+        ]
+        self.assertNotEqual(new[0][1], third)
+        outcome = agent.acquire(goal, new)
+        self.assertTrue(outcome["learned"], outcome)
+        self.assertEqual(outcome["stages"], ["sort -k 3 -t ';'"], outcome)
+        # Six processes: two fingerprints, two proofs, and the admission run.
+        self.assertLessEqual(outcome["commands_run"], 8, outcome)
+        held = self._write(agent, "held.csv", "m;3;w\nn;8;u\n")
+        self.assertEqual(
+            agent.solve(goal, bindings={"path": "held.csv"})["stdout"],
+            self._sorted_by(held, ";", 3),
+        )
+
+    def test_the_same_sentence_on_different_data_rebinds_its_arguments(self) -> None:
+        # The words are the same; the data is not.  A mechanism memorised for
+        # comma-separated rows must be re-armed with the separator this file
+        # actually uses -- reusing the old arguments verbatim would sort the
+        # whole line instead of the second column.
+        agent = self._agent()
+        first = self._write(agent, "one.csv", "pear,2\napple,10\nfig,1\nkiwi,7\n")
+        second = self._write(agent, "two.csv", "zulu,5\nyankee,3\n")
+        agent.acquire(
+            "sort the rows by the second column, comma separated",
+            [
+                ("one.csv", self._sorted_by(first, ",", 2)),
+                ("two.csv", self._sorted_by(second, ",", 2)),
+            ],
+        )
+        space_one = self._write(agent, "s1.txt", "pear 2\napple 10\nfig 1\n")
+        space_two = self._write(agent, "s2.txt", "zulu 5\nyankee 3\n")
+        goal = "sort the rows by the second column"
+        outcome = agent.acquire(
+            goal,
+            [
+                ("s1.txt", self._sorted_by(space_one, " ", 2)),
+                ("s2.txt", self._sorted_by(space_two, " ", 2)),
+            ],
+        )
+        self.assertEqual(outcome["stages"], ["sort -k 2 -t ' '"], outcome)
+        held = self._write(agent, "h.txt", "m 4\nb 2\nz 8\n")
+        self.assertEqual(
+            agent.solve(goal, bindings={"path": "h.txt"})["stdout"],
+            self._sorted_by(held, " ", 2),
+        )
+        self.assertLessEqual(outcome["commands_run"], 8, outcome)
+
+    def test_the_rows_the_sentence_selects_are_selected_before_the_ordering(self) -> None:
+        # "Take the first four rows, then sort them" is not "sort everything
+        # and keep four": the fifth row has the smallest key, so the wrong
+        # reading puts it first and the right one never sees it.
+        agent = self._agent()
+        first = self._write(
+            agent, "one.csv", "kiwi,4\napple,2\nfig,3\npear,1\nzebra,0\n"
+        )
+        second = self._write(agent, "two.csv", "b,3\na,1\nc,2\nd,4\ne,0\n")
+        goal = "take the first four rows, sort them by the second column, comma separated"
+        prefix = lambda text: self._sorted_by(  # noqa: E731
+            "\n".join(text.splitlines()[:4]) + "\n", ",", 2
+        )
+        self.assertNotEqual(prefix(first), self._sorted_by(first, ",", 2))
+        outcome = agent.acquire(goal, [("one.csv", prefix(first)), ("two.csv", prefix(second))])
+        self.assertEqual(outcome["stages"], ["head -n 4", "sort -k 2 -t ,"], outcome)
+        held = self._write(agent, "held.csv", "m,9\nb,3\nz,8\na,1\nq,0\n")
+        self.assertEqual(
+            agent.solve(goal, bindings={"path": "held.csv"})["stdout"], prefix(held)
+        )
+
+    def test_an_earned_mechanism_serves_a_new_request_and_survives_a_restart(self) -> None:
+        # The stage learned for one request must be part of the vocabulary for
+        # the next one, and it must still be there after the process ends.
+        # Without the earned stage this request costs a search over the
+        # machine's documentation; with it, a handful of processes.
+        agent = self._agent()
+        first = self._write(agent, "one.csv", "pear,2\napple,10\nfig,1\nkiwi,7\n")
+        second = self._write(agent, "two.csv", "zulu,5\nyankee,3\n")
+        agent.acquire(
+            "sort the rows by the second column, comma separated",
+            [
+                ("one.csv", self._sorted_by(first, ",", 2)),
+                ("two.csv", self._sorted_by(second, ",", 2)),
+            ],
+        )
+        goal = "keep the last two rows of the table sorted by the second column, comma separated"
+        third = self._write(agent, "three.csv", "m,4\nb,2\nz,8\na,1\n")
+        fourth = self._write(agent, "four.csv", "q,7\nc,3\nr,9\n")
+        tail_two = lambda text: "".join(  # noqa: E731
+            line + "\n" for line in self._sorted_by(text, ",", 2).splitlines()[-2:]
+        )
+        self.assertNotEqual(tail_two(third), self._sorted_by(third, ",", 2))
+        outcome = agent.acquire(goal, [("three.csv", tail_two(third)), ("four.csv", tail_two(fourth))])
+        self.assertEqual(outcome["stages"], ["sort -k 2 -t ,", "tail -n 2"], outcome)
+        self.assertLessEqual(outcome["commands_run"], 12, outcome)
+
+        payload = json.loads(json.dumps(agent.snapshot()))
+        restarted = self._agent()
+        restarted.restore(payload)
+        later = "keep the last one row of the table sorted by the second column, comma separated"
+        fifth = self._write(restarted, "five.csv", "k,5\nf,2\ns,9\n")
+        sixth = self._write(restarted, "six.csv", "d,8\nc,4\n")
+        examples = [
+            (name, self._sorted_by(text, ",", 2).splitlines()[-1] + "\n")
+            for name, text in (("five.csv", fifth), ("six.csv", sixth))
+        ]
+        self.assertNotEqual(examples[0][1], fifth)
+        again = restarted.acquire(later, examples)
+        self.assertEqual(again["stdout"], examples[0][1])
+        self.assertLessEqual(again["commands_run"], 12, again)
+
     def test_where_the_selection_happens_is_part_of_the_request(self) -> None:
         # "Take the first four rows, then sort them" and "sort them all, then
         # keep four" agree on five-row files and disagree on the file below.
@@ -2724,11 +2860,76 @@ class HeldOutBatteryTests(unittest.TestCase):
                 lambda text: text.upper(),
             ),
             (
+                "count the distinct values in the second column, comma separated",
+                "x,10\nx,3\ny,7\n",
+                "q,2\nq,9\nr,4\n",
+                "z,5\nz,5\nw,1\nv,1\n",
+                lambda text: str(len({row[1] for row in self._fields(text, ",")})) + "\n",
+            ),
+            (
                 "remove the duplicate lines",
                 "a\nb\na\nc\n",
                 "z\nz\nq\n",
                 "r\ns\nr\nt\ns\n",
                 self._distinct_lines,
+            ),
+            (
+                # The long line is first on one file and second on the other,
+                # and last on the file it is asked about.  A positional
+                # stand-in like `tail -n +2` fits the first file only.
+                "show the lines longer than 20 characters",
+                "x" * 25 + "\nshort\n",
+                "ok\n" + "y" * 30 + "\n",
+                "tiny\n" + "z" * 22 + "\n",
+                lambda text: "".join(line + "\n" for line in text.splitlines()
+                                     if len(line) > 20),
+            ),
+            (
+                "show the lines with fewer than 4 characters",
+                "abcd\nef\n",
+                "ghij\nkl\n",
+                "mnop\nqr\nst\n",
+                lambda text: "".join(line + "\n" for line in text.splitlines()
+                                     if len(line) < 4),
+            ),
+            (
+                # "banana" contains an a; only a line that *starts* with one
+                # belongs in the answer, so an unanchored pattern is wrong here.
+                "show the lines that start with b",
+                "banana\napple\nbrick\n",
+                "cab\nbag\n",
+                "banana\nabacus\ncherry\n",
+                lambda text: "".join(line + "\n" for line in text.splitlines()
+                                     if line.startswith("b")),
+            ),
+            (
+                "show the number of characters in each line",
+                "abc\nde\n",
+                "hello\nhi\n",
+                "xy\nxyz\nlonger line here\n",
+                lambda text: "".join(str(len(line)) + "\n" for line in text.splitlines()),
+            ),
+            (
+                "keep only the first three characters of each line",
+                "abcdef\nxy\n",
+                "qrstu\nz\n",
+                "hello\nworld\nab\n",
+                lambda text: "".join(line[:3] + "\n" for line in text.splitlines()),
+            ),
+            (
+                "show the third character of each line",
+                "abcdef\nxy\n",
+                "qrstu\nz\n",
+                "hello\nworld\nab\n",
+                lambda text: "".join(line[2:3] + "\n" for line in text.splitlines()),
+            ),
+            (
+                "show the lines that end with z",
+                "buzz\ncat\nfizz\n",
+                "zebra\nquiz\n",
+                "fizz\nbanana\nzigzag\n",
+                lambda text: "".join(line + "\n" for line in text.splitlines()
+                                     if line.endswith("z")),
             ),
         ]
         for goal, first, second, held, oracle in cases:

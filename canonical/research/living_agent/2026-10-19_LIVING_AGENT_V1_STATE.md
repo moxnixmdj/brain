@@ -12,18 +12,23 @@ receipt, not a terminal claim, and not a capability grant.
 | Living agent | `canonical/runtime/living_agent_v1.py` | Real POSIX computer surface, one-shot skill chunking, canary-based drift detection and repair, word learning, impasse tracking, self-directed practice, consolidating memory, snapshot/restore. |
 | Shell synthesis | `canonical/runtime/shell_synthesis_v1.py` | Learns a stdin→stdout pipeline from (input, expected output) examples: typed beam search over 20 real stages, exact interpreter ordering, real-shell verification. |
 | Benchmark | `canonical/runtime/living_agent_benchmark_v1.py` | Twelve spreadsheet transforms with independently written oracles, plus a projection of the repository's real file tree. |
-| Acceptance | `tests/test_living_agent_v1.py` | 122 tests / 174 subtests. Real processes, real files, exact byte equality. No mocks. |
+| Acceptance | `tests/test_living_agent_v1.py` | 125 tests / 182 subtests. Real processes, real files, exact byte equality. No mocks. |
 | Discovery | `canonical/runtime/living_discovery_v1.py` | Reads what this machine says it can do (`tool --help`, the tool's own definition), turns a goal sentence into an exact expected output, and proves a real command against it before admitting it. |
 | Growth measurement | `canonical/runtime/living_agent_growth_v1.py` | Acquires four real skills at runtime and replays them on three untouched real directories. |
 
 ## Measured results
 
-A twelve-request battery (`HeldOutBatteryTests`) teaches each request on two
+A twenty-request battery (`HeldOutBatteryTests`) teaches each request on two
 files and answers a third that the search never saw; every expected output is
-computed by an independent implementation in the test file.  All twelve are
-byte-exact, including the two that used to be admitted as a plausible-looking
-wrong answer: a positional `tail` standing in for a word filter, and a reversed
-lexical sort standing in for a numeric one.
+computed by an independent implementation in the test file.  All twenty are
+byte-exact, including four that used to be admitted as a plausible-looking
+wrong answer: a positional `tail` standing in for a word filter, a reversed
+lexical sort standing in for a numeric one, a `tail -n +2` standing in for a
+length filter (correct on both taught files, wrong on the held-out one), and an
+unanchored pattern standing in for "starts with" (it also selects every line
+that merely contains the letter).  The last two are refused now because the
+sentence is read as a *predicate on a line* and the pipeline is run on probe
+lines the examples never contained.
 
 
 Table induction, one demonstration per family (a demonstration that shows one
@@ -36,7 +41,7 @@ filter_sort    20/20    raise          20/20    group_sum    20/20
 month_counts   20/20    unit_price     20/20    top2         20/20
 domains        20/20    dedupe         20/20    active       20/20
 tax            20/20    pct            20/20    concat       20/20
-TOTAL 240/240, median 0.19-0.26 s per family across runs, max 2.6 s
+TOTAL 240/240, median 0.17-0.25 s per family across runs, max 2.6 s
 ```
 
 A wider robustness sweep — 24 demonstration seeds × 12 families × 10 held-out
@@ -396,6 +401,41 @@ change the columns the request never mentions and it must *not*.  `cut` moves
 (3 -> 1, unchanged under the other probe) and `ptx` does not; the coincidence
 is rejected on behaviour, not resemblance.  Held-out files then answer 2 and 1.
 
+**A sentence that describes a property of each line.**  "The lines longer
+than 20 characters" was answered by `tail -n +2`: both taught files happened to
+drop their short first line, and the held-out file did not.  The sentence is
+not a hint about which rows are wanted; it is a *predicate* -- `len(line) > 20`
+-- and a predicate can be evaluated on text nobody supplied.  So the reading is
+turned into a function, checked against the taught examples, and then the
+pipeline is run on probe lines the examples never contained: a matching line at
+the front, a non-matching line at the end.  `tail -n +2` fails the first probe;
+`awk 'length($0) > 20'` passes both.  The same rule covers "start with b"
+(anchored `^b`, since an unanchored `b` also selects every line that merely
+contains one -- caught on a held-out line), "end with z", "at least 3
+characters", and the containment reading that was already checked.
+
+**An ordering that depends on the order the rows arrived in.**  "Sort the rows
+by the second column" was answered by `sort -k 2 -t , | sort -r`: on three rows
+a lexical sort followed by a reversal can equal the numeric order exactly, and
+it stops being right on the fourth row.  The question the sentence settles is
+whether the answer depends on the *column* or on the *arrival order*, and the
+experiment is free of assumptions: reverse the input rows.  A pipeline ordered
+by column 2 returns the same bytes; a pipeline that ends in a reversal returns
+different ones, and is refused.  This caught the false fit above and nothing
+legitimate: `head -n 4 | sort -k 2 -t ,` and `sort -k 2 -t , | tail -n 2` both
+pass, because the selections the sentence names are part of its meaning.
+
+**A qualifier nothing in the sentence spelled out.**  "Sort by the second
+column" over the values 10, 2, 1, answered 1, 2, 10, is a *demonstration* of
+numeric ordering; the words do not say so, but the bytes the user produced do.
+The examples are allowed to state a manner the sentence leaves out: when the
+named column parses as numbers and the demonstrated order is numeric (or
+descending), the tool's own documented switch for that reading joins the
+candidate as evidence, and the exact bytes still decide.  This is how
+`sort -k 2 -t , -g` and `sort -k 2 -t , -g -r` are learned without the sentence
+ever saying "numerically" or "descending" -- and how "sort the rows by the
+second column, numerically" keeps its stated `-g` when the examples agree.
+
 **Arguments that became shell syntax.**  The documented-mechanism path joined
 an option bundle with spaces, so `-t |` became a pipe and the *file name*
 became the next command (`BINARY_NOT_ADMITTED:one.psv`).  Every argument is now
@@ -435,23 +475,31 @@ search, cheapest first, and each one is re-verified before it is believed:
 |---|---|---|---|
 | skill | the exact pipeline that answered this goal | 1 run (canary replay) | the canary bytes |
 | mechanism | a tool with the *kinds* of argument it was given | 4–6 runs | re-bound from the new request and data, re-verified |
-| earned stage | a verified invocation as a word of the grammar | 2–4 runs | rebuilt from the machine, run for real |
+| earned stage | a verified invocation as a word of the grammar | 4–6 runs | rebuilt from the machine, run for real |
 
 Measured on this machine, same machine, same day:
 
 | Request | Runs | Time |
 |---|---|---|
-| sort rows by column 2, comma separated (first time) | 8 | 0.12 s |
+| sort rows by column 2, comma separated (first time) | 6 | 0.05 s |
+| the same kind, new column and new separator (3, semicolon) | 6 | 0.09 s |
+| the same sentence on space-separated data (re-bound) | 4 | 0.06 s |
+| sort rows by column 2 *numerically* (order demonstrated by the examples) | 8 | 0.12 s |
+| sort rows by column 2, descending and numeric (two qualifiers) | 6 | 0.08 s |
 | the first field of each line, colon separated | 3 | 0.05 s |
-| column 3, semicolon, keep the first three | 4 | 0.06 s |
-| translate commas to semicolons (both named) | 3 | 0.04 s |
-| the second field, comma separated | 3 | 0.05 s |
-| lines that contain a given word | 2 | 0.06 s |
-| the same kind, a different word | 2 | 0.05 s |
-| count the distinct values in column 2 | 70 | 0.22 s |
+| lines longer than 20 characters (a length filter) | 6 | 0.04 s |
+| lines that start with a letter (anchored) | 4 | 0.06 s |
+| the number of characters in each line | 2 | 0.02 s |
+| the first three characters of each line | 2 | 0.03 s |
+| the last two characters of each line (a slice, not a range) | 2 | 0.03 s |
+| the third character of each line | 4 | 0.05 s |
+| translate commas to semicolons (both named) | 3 | 0.05 s |
+| lines that contain a given word | 2 | 0.07 s |
+| count the distinct values in column 2 | 50 | 0.21 s |
 | the same words after a snapshot and restart (new data) | 1 | 0.01 s |
+| a new request of a learned kind, after a restart | 4 | 0.07 s |
 
-The first-time cost fell from 52 runs to 8 without changing a line of the
+The first-time cost fell from 52 runs to 6 without changing a line of the
 search space, by ordering the same candidates differently, and the comma
 projection from 68 to 3 once the values the sentence names were tried first.  Four priors, in
 order: the request *names* the tool ("fold each line at 40 characters"); the
@@ -698,8 +746,23 @@ rather than die mid-loop.
   root. It is a real shell, but not a general GUI agent; GUI work remains in
   the existing OSWorld adapters and is not exercised here.
 - Pipeline synthesis covers the stage vocabulary it is given (20 filters over
-  text, lines and counts). A task needing an unmodelled stage is an honest
-  `NO_VERIFIED_PIPELINE`, not a silent wrong answer.
+  text, lines and counts), plus the stages the request itself states (a length
+  filter, a per-line length, a character slice) and the ones already earned.
+  A task needing an unmodelled stage is an honest `NO_VERIFIED_PIPELINE`, not a
+  silent wrong answer.
+- Reverse-of-input is one of those honest refusals.  `tac` writes the last line
+  first; `sort -r` does not -- it reverses a *lexical* order, which agrees with
+  the arrival order only when the file happened to be sorted.  `tac` is not in
+  the agent's admitted binary vocabulary, so "print the lines in reverse order"
+  is refused on an unsorted file rather than answered with `sort -r` (the two
+  are indistinguishable on a sorted one, which is exactly how the wrong answer
+  used to be admitted).  Adding a read-only filter to that vocabulary is a
+  one-line change with an authority decision attached, so it is left as a
+  recorded gap rather than made silently.
+- Two demonstrations that are identical are *one* demonstration, and are
+  refused as `TOO_FEW_EXAMPLES`.  Without that check a single example plus its
+  duplicate admits whatever fits it, which is how a probe of my own learned
+  `sort | tail -n +2` for "lines that start with b".
 - Two examples are the minimum for synthesis. When the examples are degenerate
   (identity, single-valued columns) the agent reports the ambiguity; it does not
   claim a unique mechanism it cannot justify.

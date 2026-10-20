@@ -223,6 +223,24 @@ class ToolDoc:
         }
 
     @property
+    def takes_a_file(self) -> bool:
+        """Does the synopsis say this tool reads a file argument?
+
+        ``tr [OPTION]... STRING1 [STRING2]`` does not: every operand it has is
+        a string to translate, and handing it a path is a different command.
+        ``grep [OPTION]... PATTERNS [FILE]...`` does.  Read from the tool's own
+        usage line, because that is the tool's statement about its own shape --
+        a path can be appended only where the synopsis has a place for it.
+        """
+        for match in re.finditer(r"\[?\b([A-Z][A-Z0-9_]{0,15})\b\]?(?:\.\.\.)?", self.usage):
+            name = match.group(1)
+            if name in {"OPTION", "OPTIONS", "USAGE", "ARG", "ARGS"}:
+                continue
+            if re.fullmatch(r"(?:[A-Z]+_)?(?:FILE|FILES|PATH|INPUT|OUTPUT|DIR|DIRECTORY|SOURCE|TARGET|NAME)S?\d?", name):
+                return True
+        return False
+
+    @property
     def operands(self) -> tuple[str, ...]:
         """Placeholders the synopsis says this tool consumes, in order.
 
