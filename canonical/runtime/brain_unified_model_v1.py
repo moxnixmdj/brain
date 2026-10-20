@@ -581,6 +581,27 @@ class UnifiedModel:
         # Both sources are caller-supplied: the sentence the caller wrote, and
         # the paths the caller declared. Neither is a discovery.
         allowed = {str(p) for p in declared} | set(goal_named)
+
+        # A slot the capability's own contract declares as `effect_result` must
+        # hold an artifact some other capability PRODUCED -- it names the effect
+        # and the field to read it from. Filling it from a resource the caller
+        # merely declared hands the capability an input that violates its own
+        # declared contract, and the failure surfaces much later as an opaque
+        # decode error rather than as the refusal it should have been.
+        #
+        # This is read from the registry contract, not inferred from the slot
+        # name or the file's contents: no capability declares an input type, so
+        # any type-based guess here would itself be an invention.
+        produced_only: set[str] = set()
+        try:
+            from canonical.runtime import live_integrated_brain_v1 as _lb
+
+            reg_entry = dict(_lb.load_verified_registry()).get(cid) or {}
+            for name, spec in (reg_entry.get("proposal_bindings") or {}).items():
+                if isinstance(spec, dict) and spec.get("type") == "effect_result":
+                    produced_only.add(str(name))
+        except Exception:
+            produced_only = set()
         filled: dict[str, Any] = {}
         for key in missing:
             value = (outcome.get("inputs") or {}).get(key)
@@ -601,8 +622,14 @@ class UnifiedModel:
             # Everything else is refused. That is what keeps `source_root`
             # unbound for a goal that never named a root: a default there would
             # be a choice about what to audit, and an unverifiable one.
+            #
+            # A slot the contract reserves for a PRODUCED artifact is refused
+            # even when the caller supplied the path, because the capability
+            # declares it reads that value from another capability's effect.
             is_destination = "output" in low
             is_callers_words = low in _GOAL_TEXT_SLOTS
+            if key in produced_only:
+                continue
             if not (is_destination or is_callers_words or text in allowed):
                 continue
             filled[key] = value
