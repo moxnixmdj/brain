@@ -5631,48 +5631,6 @@
         }
       }
     },
-    "web.browser.interact.chromedriver": {
-      "action_template": {
-        "type": "invoke_capability",
-        "args": {
-          "url": "${input.url}",
-          "actions": "${input.actions}",
-          "screenshot_path": "${input.screenshot_path}",
-          "result_path": "${input.result_path}"
-        },
-        "expect": {
-          "field": "output_verified",
-          "type": "field_equals",
-          "value": true
-        }
-      },
-      "adapter_module": "browser_chromedriver_interact",
-      "entrypoint": "run",
-      "cost": 1,
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "browser",
-        "web",
-        "click",
-        "type",
-        "navigate",
-        "interact",
-        "chromedriver",
-        "computer",
-        "use",
-        "page"
-      ],
-      "limitations": [
-        "Requires a reachable URL and a local Chrome/chromedriver."
-      ],
-      "provides": [
-        "web.browser.interact.result"
-      ],
-      "requires_binaries": [
-        "chromedriver",
-        "google-chrome"
-      ]
-    },
     "shell.command.run": {
       "action_template": {
         "type": "invoke_capability",

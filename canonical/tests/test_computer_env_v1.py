@@ -547,8 +547,14 @@ class MeasuringTests(unittest.TestCase):
         no traceback, a run that simply disappears."""
         code, out = cenv._run_capped(["shuf", "--repeat", "/dev/null"],
                                      self.work, timeout=2.0)
+        # 'assertTrue(True)' stood here. It cannot fail, so it proved
+        # nothing about the cap it sat next to -- which is worse than no
+        # assertion, because it reads like one.
+        self.assertIsInstance(code, int,
+                              "a program that talks forever must still "
+                              "return an exit code instead of taking the "
+                              "learner down with it")
         self.assertLessEqual(len(out), 1 << 16)
-        self.assertTrue(True)
 
     def test_the_second_question_of_a_kind_is_answered_faster(self):
         """Which command measures this is a fact about the machine, not
