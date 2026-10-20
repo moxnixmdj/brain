@@ -491,6 +491,40 @@ class RankingTests(unittest.TestCase):
                         "sort ranked %d: %r"
                         % (ranked.index("sort"), ranked[:12]))
 
+    def test_the_flag_that_answers_is_offered_before_the_45_that_cannot(self):
+        """Ordering decides what a deadline can reach.
+
+        'sort' documents 52 flags and '--unique' is the 46th of them, in
+        the order whoever wrote the manual chose to list them. On a
+        clock, that order is fatal: the machine spent its whole budget
+        trying 45 flags that cannot answer "how many unique lines" and
+        never reached the one that does -- measured, a 2s budget lost
+        'sort' entirely and 8s was needed before it was found, which is
+        why the whole pipeline search used to cost 39s.
+
+        Scored against the goal, '--unique' is 2nd. Nothing is given up
+        -- every flag is still offered, only reordered -- and the
+        search gets 3x cheaper.
+        """
+        goal = "how many unique lines in data.txt"
+        manual = [f for f, _ in cenv.flag_descriptions("sort",
+                                                       limit=cenv._WIDE_FLAGS)]
+        shapes = cenv._query_shapes("sort", "probe.txt", goal,
+                                    patterns=("",), wide=True)
+        # every flag is still there: this is a reordering, not a filter
+        offered = [s[1] for s in shapes if len(s) == 3]
+        self.assertEqual(sorted(offered), sorted(manual),
+                         "reordering dropped flags: %d of %d"
+                         % (len(offered), len(manual)))
+        where = next((i for i, s in enumerate(shapes) if "--unique" in s),
+                     None)
+        self.assertIsNotNone(where, "--unique was never offered")
+        manual_at = manual.index("--unique")
+        self.assertLess(where, manual_at,
+                        "--unique is shape %d, and in the manual's own "
+                        "order it is flag %d: the head will run out of "
+                        "clock before it gets there" % (where, manual_at))
+
 
 class MeasuringTests(unittest.TestCase):
     """Goals that name no output file -- "count the lines in notes.txt".
@@ -887,19 +921,26 @@ class PipelineTests(unittest.TestCase):
                       "composition was never attempted: %r" % stages)
 
     def test_a_pipeline_head_does_not_get_the_budget_a_caller_asks_for(self):
-        """'sort' needs 0.22s on its own but about 5s once 24 heads are
-        competing for the same cores, and at a 4s budget it is lost
-        altogether. Measured: 8.0s finds the pipeline, 12.0s finds it,
-        20.0s finds it a quarter of a minute later.
+        """The seconds a caller asks for are not the seconds a head is
+        given. What costs time in the pipeline search is not the head
+        that works -- it is every head that does not: each one burns
+        its whole budget, and with a hundred of them that budget IS
+        the search. Measured, whole pipeline search:
 
-        So the seconds a caller asks for are not the seconds a head is
-        given. One program that has not shown it can count may not hold
-        up the ninety-nine waiting behind it -- and the budget that was
-        tuned for the single-program sweep, where one straggler stalls
-        one wave, is far too generous here, where a whole wave finishes
-        in the time that straggler was being allowed.
+            1.0s 14.4s | 1.5s 14.4s | 2.0s 12.6s | 2.5s 14.4s
+            4.0s 19.6s | 8.0s 28.8s | 12.0s 41.3s
 
-        Ask for a minute a head. Twelve is what it must get.
+        Two is the floor as well as the peak: the deadline is only
+        checked BETWEEN shapes, so a head already inside a subprocess
+        run finishes it either way, and going below 2s stops buying
+        anything.
+
+        It can be this small only because flags are tried in the order
+        the goal scores them. In the manual's own order 'sort --unique'
+        is the 46th flag of 52 -- a 2s budget lost 'sort' entirely and
+        8s was needed to reach it.
+
+        Ask for a minute a head. Two is what it must get.
         """
         hits = cenv.probe_survivors(
             "uniquelines", self.progs,
@@ -909,13 +950,15 @@ class PipelineTests(unittest.TestCase):
         for hit in hits:
             self.assertEqual(hit.get("stages"), 2, hit)
             self.assertIn("head_budget", hit, hit)
-            self.assertLessEqual(hit["head_budget"], 12.0,
+            self.assertLessEqual(hit["head_budget"], 4.0,
                                  "a caller asked for 60s a head and got "
-                                 "%.1f: the pipeline budget is not capped"
-                                 % hit["head_budget"])
-            self.assertGreaterEqual(hit["head_budget"], 8.0,
-                                    "below 8s the pipeline is not found at "
-                                    "all: %.1f" % hit["head_budget"])
+                                 "%.1f: the pipeline budget is not capped, "
+                                 "and every dead head pays it" %
+                                 hit["head_budget"])
+            self.assertGreaterEqual(hit["head_budget"], 2.0,
+                                    "below 2s nothing is bought: the "
+                                    "deadline is only checked between "
+                                    "shapes: %.1f" % hit["head_budget"])
 
     def test_the_composition_is_a_real_command_not_a_description(self):
         """Run the two stages ourselves, joined with our own pipe, nowhere

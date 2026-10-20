@@ -1789,7 +1789,31 @@ def _query_shapes(prog: str, name: str, gap: str,
     flags: list[str] = []
     try:
         if wide:
-            flags = [f for f, _ in flag_descriptions(prog, limit=_WIDE_FLAGS)]
+            flags = [f for f, _ in flag_descriptions(prog,
+                                                     limit=_WIDE_FLAGS)]
+            # The manual's order is the order its author wrote it in,
+            # and that has nothing to do with what was asked. 'sort'
+            # documents 52 flags and '--unique' is the 46th of them, so
+            # on a deadline the machine spent its whole budget trying
+            # 45 flags that cannot answer "how many unique lines" and
+            # never reached the one that does -- which is why a 4s
+            # budget lost 'sort' entirely even though 'sort' needs
+            # 0.22s.
+            #
+            # The same signal that ranks PROGRAMS for a goal also ranks
+            # their FLAGS. Try the ones this goal named first, then the
+            # rest of the manual: nothing is given up, because every
+            # flag is still offered -- only the order changes, and the
+            # order is the whole thing when the budget is a clock.
+            try:
+                first = flags_for_goal(prog, gap,
+                                       limit=max(len(flags), _WIDE_FLAGS))
+            except Exception:  # noqa: BLE001 - no manual is not a failure
+                first = []
+            if first:
+                seen = set(first)
+                flags = list(first) + [f for f in flags
+                                       if f not in seen]
         else:
             flags = flags_for_goal(prog, gap, limit=3)
     except Exception:  # noqa: BLE001 - no manual is not a failure
@@ -1925,12 +1949,25 @@ _PIPE_PATTERNS = ("",)
 # shown it can count in this long is not worth more time when hundreds of
 # others are still untried: the fastest way to the answer does not run
 # through the slowest program on the machine.
-# Seconds one head may spend inside the pipeline search. 'sort' needs
-# 0.22s alone but about 5s once 24 heads compete for the same cores, and
-# at 4s it is lost entirely. The 20s single-program budget was set when
-# one straggler stalled a wave of cheap programs; here a whole wave
-# finishes in the time one straggler was being allowed.
-_PIPE_HEAD_BUDGET = 12.0
+# Seconds one head may spend inside the pipeline search. This is small
+# because the DEAD heads are what cost time, not the one that works:
+# every head that cannot count burns its whole budget, and with a
+# hundred of them that budget is the search. The 20s single-program
+# figure was set for a different shape of problem, where one straggler
+# stalls one wave and the slowest useful program deserves the wait.
+#
+# It can only be this small because the flags are tried in the order
+# the GOAL scores them (see _query_shapes): with the manual's own
+# order, 'sort --unique' was the 46th flag of 52, so a 2s budget lost
+# 'sort' altogether and it took 8s to find it. Ordered by the goal it
+# is the 2nd, and 2s finds it. Measured, per head:
+#
+#     1.0s 14.4s | 1.5s 14.4s | 2.0s 12.6s | 2.5s 14.4s | 3.0s 16.3s
+#     4.0s 19.6s | 8.0s 28.8s | 12.0s 41.3s
+#
+# Below 2s it stops helping: the deadline is only checked BETWEEN
+# shapes, so a head already inside a subprocess run finishes it anyway.
+_PIPE_HEAD_BUDGET = 2.0
 _PROGRAM_BUDGET = 20.0
 
 
