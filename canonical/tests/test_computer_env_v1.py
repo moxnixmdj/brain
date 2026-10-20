@@ -699,6 +699,44 @@ class RememberingTests(unittest.TestCase):
         self.assertLessEqual(second, max(first, 0.02))
 
 
+class TailTests(unittest.TestCase):
+    """The last stage of a pipeline is what makes it expensive, because
+    every head is tried against every tail. Four names for one instrument
+    is a fourfold slowdown bought with nothing."""
+
+    def test_four_names_for_one_instrument_are_one_instrument(self):
+        """grep, egrep, fgrep and rgrep are four executables that all count
+        lines. Composing with all four runs the same pipeline four times and
+        reports the result as if four programs had agreed."""
+        tails = [["grep", "--count", ""], ["egrep", "--count", ""],
+                 ["fgrep", "--count", ""], ["rgrep", "--count", ""],
+                 ["wc", "--lines"]]
+        kept = cenv._distinct_tails(tails, 10.0)
+        self.assertTrue(kept, "every tail was thrown away")
+        self.assertLess(len(kept), len(tails),
+                        "nothing was merged: %r" % kept)
+        for t in kept:
+            self.assertIn(t, tails, "a tail was invented: %r" % t)
+
+    def test_tails_that_behave_differently_are_both_kept(self):
+        """Merging must be by what a program DOES, not by how many there
+        are. Lines and words are different answers to the same bytes; a
+        dedupe that keeps one of them has decided the question."""
+        kept = cenv._distinct_tails([["wc", "--lines"],
+                                     ["wc", "--words"]], 10.0)
+        self.assertEqual(len(kept), 2,
+                         "two different instruments were merged into one: "
+                         "%r" % kept)
+
+    def test_a_tail_that_cannot_run_is_not_offered(self):
+        """A tail that errors is silently dropped rather than carried into
+        every pipeline as a guaranteed failure."""
+        kept = cenv._distinct_tails([["wc", "--lines"],
+                                     ["definitely-not-a-program", "-x"]],
+                                    10.0)
+        self.assertEqual(kept, [["wc", "--lines"]], kept)
+
+
 class PipelineTests(unittest.TestCase):
     """Work on a computer is almost never one program.
 
@@ -757,6 +795,38 @@ class PipelineTests(unittest.TestCase):
         self.assertNotEqual(r["value"], str(len(self.rows)),
                             "counted the lines instead of the different "
                             "lines: %s" % r)
+
+    def test_the_negative_is_not_proved_before_the_positive_is_found(self):
+        """A question only a pipeline can answer used to cost three sweeps
+        proving that no single program works -- and then discard all three
+        before trying the thing that does.
+
+        Composition now runs alongside the first sweep instead of after
+        the last one. If this question reaches the second or third sweep,
+        the race is gone and the machine is paying minutes to establish
+        what the first sweep already told it.
+
+        The composition fetches its own candidates with
+        _MAX_PIPE_PROGRAMS, which is not a tier size, so a recorded
+        number that is a tier can only have come from a tier."""
+        from unittest import mock
+        tiers = {24, 96, 200}
+        asked: list[int] = []
+        real = cenv.programs_for_goal
+
+        def spy(goal, limit=24):
+            asked.append(limit)
+            return real(goal, limit=limit)
+
+        with mock.patch.object(cenv, "programs_for_goal", side_effect=spy):
+            r = cenv.answer_query("how many unique lines in data.txt",
+                                  self.file)
+        self.assertTrue(r["pass"], r)
+        self.assertEqual(r["value"], "7", r)
+        for size in (96, 200):
+            self.assertNotIn(size, asked,
+                             "searched %d single programs for a question "
+                             "no single program answers: %r" % (size, asked))
 
     def test_the_composition_is_a_real_command_not_a_description(self):
         """Run the two stages ourselves, joined with our own pipe, nowhere

@@ -30,6 +30,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 from typing import Any, Callable, Mapping, Sequence
 
@@ -1350,6 +1351,59 @@ def _query_cache_put(kind: str, limit: int,
         pass
 
 
+def _distinct_tails(tails: Sequence[Sequence[str]], timeout: float
+                    ) -> list[list[str]]:
+    """One tail per distinct BEHAVIOUR, not one per name.
+
+    'grep', 'egrep', 'fgrep' and 'rgrep' are four executables that all
+    count lines the same way. Composing with all four tries the same
+    pipeline four times -- and the pipeline is the expensive part, so
+    four names for one instrument is a fourfold slowdown bought with
+    nothing.
+
+    The test is not what a program is called, or where it lives, but
+    what it prints: every tail is handed the same bytes and the ones
+    that print the same thing are the same tail. If two really do
+    differ, they print differently and both are kept.
+
+    Two inputs, and they must disagree with each other. Four one-word
+    lines make 'wc --lines' and 'wc --words' both print 4, and a first
+    version of this merged a line-counter into a word-counter. That is
+    the same fault as a probe whose repeats sit together: a test that
+    cannot tell two things apart calls them the same thing.
+    """
+    if len(tails) < 2:
+        return [list(t) for t in tails]
+    inputs = (b"alpha beta\ngamma delta\nepsilon\n",
+              b"one\ntwo three\nfour five six\nseven\neight\n")
+    root = pathlib.Path(tempfile.mkdtemp(prefix="brain-tails-"))
+    seen: dict[tuple[bytes, ...], list[str]] = {}
+    try:
+        for argv in tails:
+            reads = []
+            for data in inputs:
+                (root / "probe.txt").write_bytes(data)
+                try:
+                    code, out = _run_pipeline(["cat", "probe.txt"],
+                                              list(argv), root,
+                                              timeout=timeout)
+                except Exception:  # noqa: BLE001
+                    reads = []
+                    break
+                if code != 0:
+                    reads = []
+                    break
+                reads.append(out)
+            if not reads:
+                continue
+            key = tuple(reads)
+            if key not in seen:
+                seen[key] = list(argv)
+    finally:
+        shutil.rmtree(str(root), ignore_errors=True)
+    return list(seen.values())
+
+
 def _known_counters(base: str, programs: Sequence[str], gap: str,
                     literal: str | None, timeout: float = 5.0,
                     enough: int = 4) -> list[dict[str, Any]]:
@@ -1395,6 +1449,104 @@ def _known_counters(base: str, programs: Sequence[str], gap: str,
         # question, so they must never be confused with one.
         _query_cache_put(base, -2, hits[:enough])
     return hits[:enough]
+
+
+def _shapes_path() -> pathlib.Path:
+    base = os.environ.get("BRAIN_STATE_DIR") or tempfile.gettempdir()
+    return pathlib.Path(base) / "brain_known_shapes_v1.json"
+
+
+# Every command this machine has ever PROVEN, on any question, kept so the
+# next question does not have to find it again.
+#
+# The search is expensive because it does not know what anything does: it
+# opens manuals and tries flags until one prints the known answer. That is
+# the part worth never repeating. The measurement itself is cheap -- two
+# files, two runs -- and it is the part that HAS to be repeated, because a
+# command proven on one question may be wrong for another. So the argv is
+# remembered and the evidence is re-taken.
+_KNOWN_SHAPES: list[dict[str, Any]] = []
+_KNOWN_SHAPES_LOADED = False
+_SHAPES_CAP = 400
+
+
+def _shapes_load() -> list[dict[str, Any]]:
+    global _KNOWN_SHAPES, _KNOWN_SHAPES_LOADED
+    if _KNOWN_SHAPES_LOADED:
+        return _KNOWN_SHAPES
+    _KNOWN_SHAPES_LOADED = True
+    try:
+        raw = json.loads(_shapes_path().read_text())
+        if isinstance(raw, list):
+            _KNOWN_SHAPES = [x for x in raw
+                             if isinstance(x, dict) and x.get("argv")]
+    except Exception:  # noqa: BLE001 - no memory is not a failure
+        _KNOWN_SHAPES = []
+    return _KNOWN_SHAPES
+
+
+def shapes_remember(survivors: Sequence[dict[str, Any]]) -> None:
+    """Keep every argv that was proven, so a later question can try it."""
+    global _KNOWN_SHAPES
+    _shapes_load()
+    seen = set()
+    for x in _KNOWN_SHAPES:
+        try:
+            seen.add(json.dumps(x.get("argv"), sort_keys=True))
+        except Exception:  # noqa: BLE001
+            pass
+    added = False
+    for s in survivors or ():
+        argv = s.get("argv")
+        if not argv:
+            continue
+        try:
+            key = json.dumps(argv, sort_keys=True)
+        except Exception:  # noqa: BLE001
+            continue
+        if key in seen:
+            continue
+        seen.add(key)
+        _KNOWN_SHAPES.append({"argv": argv,
+                              "stages": s.get("stages", 1),
+                              "program": s.get("program")
+                              or (argv[0] if argv else None)})
+        added = True
+    if added:
+        try:
+            _shapes_path().write_text(
+                json.dumps(_KNOWN_SHAPES[-_SHAPES_CAP:]))
+        except Exception:  # noqa: BLE001 - a failed save must not lose it
+            pass
+
+
+def shapes_reuse(kind: str, literal: str | None, timeout: float = 5.0,
+                 workers: int = 16) -> list[dict[str, Any]]:
+    """Everything ever proven, re-tested against THIS question's probe.
+
+    Remembering an ANSWER would be guessing. Remembering a COMMAND and
+    then re-proving it on files built to hold 7 and 13 of the thing now
+    being asked about is not guessing -- it is the same test the search
+    applies, run on knowledge the machine already paid for once.
+    """
+    from concurrent.futures import ThreadPoolExecutor
+    known = _shapes_load()
+    if not known:
+        return []
+
+    def ok(shape: dict[str, Any]) -> bool:
+        try:
+            return _reverify(shape, kind, literal, timeout)
+        except Exception:  # noqa: BLE001
+            return False
+
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        good = list(pool.map(ok, known))
+    # The GENERAL form is handed back, not the one that was just run:
+    # _reverify filled the hole to prove it, but a shape with the word
+    # baked in is a shape for one question, and what is worth keeping is
+    # the one that works for every word.
+    return [dict(x) for x, keep in zip(known, good) if keep]
 
 
 def _reverify(hit: dict[str, Any], kind: str, literal: str | None,
@@ -1867,6 +2019,7 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
         argv = [a for a in c["argv"] if a != "probe.txt"]
         if argv and argv not in tails:
             tails.append(argv)
+    tails = _distinct_tails(tails, timeout)
     if not tails:
         # Nothing here was proven to count, so there is nothing to put at
         # the end of a pipe. Two programs that both fail to count do not
@@ -2000,6 +2153,44 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
             tally.setdefault(value, []).append(_instrument(hit["program"]))
         return tally
 
+    # Everything this machine has ever proven anywhere, offered to this
+    # question before a single manual is opened. Not an answer remembered
+    # -- the answers are all for other questions -- but the commands,
+    # which are facts about this machine. Each is re-proved against THIS
+    # question's probe before it counts, so a line-counter asked to count
+    # different lines still fails, and fails in milliseconds.
+    if programs is None and not survivors:
+        recalled = shapes_reuse(kind, literal, timeout)
+        if recalled:
+            # A remembered shape cannot be RUN until the hole is filled
+            # with THIS question's word. Running it with the hole in it is
+            # not reuse, it is a command that never had a chance to work.
+            reused = [dict(c, argv=_concretise(c.get("argv"), literal))
+                      for c in recalled]
+            tally = measure(reused)
+            if tally:
+                best, bins = sorted(
+                    tally.items(),
+                    key=lambda kv: (-len(set(kv[1])), kv[0]))[0]
+                if len(set(bins)) >= min_agreement:
+                    agree = len(set(bins))
+                    # -3: recalled from the library of everything ever
+                    # proven, which is neither a tier nor a composition.
+                    _query_cache_put(kind, -3, recalled)
+                    return {"pass": True,
+                            "status": ("PASS__MEASURED_BY_AGREEMENT"
+                                       if agree > 1 else
+                                       "PASS__MEASURED_BY_ONE_TRACKED_INSTRUMENT"),
+                            "kind": kind, "value": best, "answer": best,
+                            "agreement": agree, "survivors": reused,
+                            "stages": reused[0].get("stages", 1),
+                            "from_memory": True, "reused": True,
+                            "votes": {k: sorted(set(v))
+                                      for k, v in tally.items()},
+                            "detail": "a command learned on another "
+                                      "question, re-proven on this one: %s"
+                                      % best}
+
     # What has already been composed is used BEFORE paying to re-prove that
     # no single program can do it alone. Those tiers are the expensive part
     # -- minutes -- and for a question only a pipeline can answer they are
@@ -2031,6 +2222,38 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
                             "detail": "remembered composition, re-proven: "
                                       "%s" % best}
 
+    # Start composing NOW, alongside the single-program sweep.
+    #
+    # Composition used to be a last resort, tried only after all three
+    # tiers had failed. That means paying to prove that no single program
+    # can answer, before trying the only thing that can. For a question
+    # only a pipeline answers those three tiers are three guaranteed
+    # failures -- minutes spent establishing what the first one already
+    # established, and then thrown away.
+    #
+    # You do not have to prove a negative before finding a positive.
+    comp: dict[str, Any] = {}
+    comp_thread = None
+    # Only when nothing is remembered. A question the machine can already
+    # answer from memory must not spawn a full composition search behind
+    # its back: the answer arrives in milliseconds and the thread keeps
+    # burning cores for minutes on work nobody asked for, which is slow
+    # enough to be measurable on the question it was meant to help.
+    remembered = any(_query_cache_get(kind, lim)
+                     for lim in (24, 96, 200)) if programs is None else True
+    if programs is None and not remembered:
+        def _compose() -> None:
+            try:
+                comp["survivors"] = probe_survivors(
+                    kind,
+                    programs_for_goal(gap, limit=_MAX_PIPE_PROGRAMS),
+                    gap, stages=2, literal=literal)
+            except Exception:  # noqa: BLE001
+                comp["survivors"] = []
+
+        comp_thread = threading.Thread(target=_compose, daemon=True)
+        comp_thread.start()
+
     for limit in (24, 96, 200):
         cached = _query_cache_get(kind, limit)
         if cached is not None:
@@ -2055,6 +2278,7 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
             # a question it could have answered stays unanswered forever.
             if programs is None and survivors:
                 _query_cache_put(kind, limit, survivors)
+                shapes_remember(survivors)
         votes = measure(survivors)
         if survivors and not votes:
             continue
@@ -2077,6 +2301,37 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
                                    "file: %s"
                                    % (", ".join(str(s) for s in _PROBE_SIZES),
                                       value))}
+        # The cheapest sweep has failed. Composition has been running
+        # since before it started, so ask it before paying for two deeper
+        # sweeps that will fail for the same reason this one did.
+        if comp_thread is not None and limit == 24 and not votes:
+            comp_thread.join()
+            comp_thread = None
+            found = comp.get("survivors") or []
+            if found:
+                if programs is None:
+                    _query_cache_put(kind, -1, found)
+                tally = measure(found)
+                if tally:
+                    best, bins = sorted(
+                        tally.items(),
+                        key=lambda kv: (-len(set(kv[1])), kv[0]))[0]
+                    if len(set(bins)) >= min_agreement:
+                        agree = len(set(bins))
+                        return {"pass": True,
+                                "status": ("PASS__MEASURED_BY_AGREEMENT"
+                                           if agree > 1 else
+                                           "PASS__MEASURED_BY_ONE_TRACKED_INSTRUMENT"),
+                                "kind": kind, "value": best, "answer": best,
+                                "agreement": agree, "survivors": found,
+                                "stages": 2,
+                                "votes": {k: sorted(set(v))
+                                          for k, v in tally.items()},
+                                "detail": "two programs joined: %s" % (
+                                    " | ".join(str(x) for x in
+                                               (found[0]["argv"][0][0],
+                                                found[0]["argv"][1][0])))}
+
         if programs is not None:
             break
 
@@ -2096,12 +2351,23 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
                           for c in composed)
                          if _reverify(h, kind, literal, timeout)]
         if not survivors:
-            cands = (list(programs) if programs is not None
-                     else programs_for_goal(gap, limit=_MAX_PIPE_PROGRAMS * 2))
-            survivors = probe_survivors(kind, cands, gap, stages=2,
-                                        literal=literal)
+            # Whatever the background composition already found is used
+            # rather than searched for a second time.
+            if comp_thread is not None:
+                comp_thread.join()
+                comp_thread = None
+                survivors = comp.get("survivors") or []
+            if not survivors:
+                # Exactly as many as will be used. probe_survivors truncates
+                # to _MAX_PIPE_PROGRAMS, so asking for twice that ranks
+                # 200 candidates to keep the top 100.
+                cands = (list(programs) if programs is not None
+                         else programs_for_goal(gap, limit=_MAX_PIPE_PROGRAMS))
+                survivors = probe_survivors(kind, cands, gap, stages=2,
+                                            literal=literal)
             if programs is None and survivors:
                 _query_cache_put(kind, -1, survivors)
+                shapes_remember(survivors)
         votes = measure(survivors)
         if votes:
             ranked = sorted(votes.items(),
