@@ -886,6 +886,37 @@ class PipelineTests(unittest.TestCase):
         self.assertIn(2, stages,
                       "composition was never attempted: %r" % stages)
 
+    def test_a_pipeline_head_does_not_get_the_budget_a_caller_asks_for(self):
+        """'sort' needs 0.22s on its own but about 5s once 24 heads are
+        competing for the same cores, and at a 4s budget it is lost
+        altogether. Measured: 8.0s finds the pipeline, 12.0s finds it,
+        20.0s finds it a quarter of a minute later.
+
+        So the seconds a caller asks for are not the seconds a head is
+        given. One program that has not shown it can count may not hold
+        up the ninety-nine waiting behind it -- and the budget that was
+        tuned for the single-program sweep, where one straggler stalls
+        one wave, is far too generous here, where a whole wave finishes
+        in the time that straggler was being allowed.
+
+        Ask for a minute a head. Twelve is what it must get.
+        """
+        hits = cenv.probe_survivors(
+            "uniquelines", self.progs,
+            "how many unique lines in data.txt",
+            stages=2, budget=60.0)
+        self.assertTrue(hits, "no pipeline was composed at all: %r" % hits)
+        for hit in hits:
+            self.assertEqual(hit.get("stages"), 2, hit)
+            self.assertIn("head_budget", hit, hit)
+            self.assertLessEqual(hit["head_budget"], 12.0,
+                                 "a caller asked for 60s a head and got "
+                                 "%.1f: the pipeline budget is not capped"
+                                 % hit["head_budget"])
+            self.assertGreaterEqual(hit["head_budget"], 8.0,
+                                    "below 8s the pipeline is not found at "
+                                    "all: %.1f" % hit["head_budget"])
+
     def test_the_composition_is_a_real_command_not_a_description(self):
         """Run the two stages ourselves, joined with our own pipe, nowhere
         near the learner. If it works, a pipeline was composed."""

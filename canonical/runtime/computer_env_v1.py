@@ -1925,6 +1925,12 @@ _PIPE_PATTERNS = ("",)
 # shown it can count in this long is not worth more time when hundreds of
 # others are still untried: the fastest way to the answer does not run
 # through the slowest program on the machine.
+# Seconds one head may spend inside the pipeline search. 'sort' needs
+# 0.22s alone but about 5s once 24 heads compete for the same cores, and
+# at 4s it is lost entirely. The 20s single-program budget was set when
+# one straggler stalled a wave of cheap programs; here a whole wave
+# finishes in the time one straggler was being allowed.
+_PIPE_HEAD_BUDGET = 12.0
 _PROGRAM_BUDGET = 20.0
 
 
@@ -2033,6 +2039,7 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
     # Composing only with things already proven to count is both the
     # cheaper search and the more sensible one: find out what counts, then
     # find out what to feed it.
+    budget = min(budget, _PIPE_HEAD_BUDGET)
     counters = _known_counters("lines", list(programs), gap, literal,
                                timeout)
     tails = []
@@ -2090,6 +2097,7 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
                                 "argv": [_abstract(list(argv1), literal),
                                          _abstract(list(argv2), literal)],
                                 "stages": 2,
+                                "head_budget": budget,
                                 "tracked": [str(s) for s in _PROBE_SIZES]}
         finally:
             shutil.rmtree(str(root), ignore_errors=True)
