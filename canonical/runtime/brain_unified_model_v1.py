@@ -531,14 +531,41 @@ class UnifiedModel:
         the slots this capability declares. All grounding stays in the verified
         binder, which fails closed and refuses patterns and globs by design.
 
-        ``declared`` is the whole of what may be used. Nothing is discovered
-        from the wider repository, so a slot can only ever be filled with
-        something the caller put in front of the model.
+        ``declared`` is the whole of what may be used from the surrounding
+        world. Nothing is discovered from the wider repository, so a slot can
+        only ever be filled with something the caller put in front of the
+        model -- or something the caller wrote into the goal sentence itself.
         """
         try:
             from canonical.runtime import world_binding_v1 as wb
         except Exception:
             return inputs, None, missing
+
+        # A path the goal sentence names is the most grounded resource there
+        # is: the caller typed it. Declared context supplements it, it must
+        # never replace it.
+        #
+        # `complete_inputs` uses `goal_paths` verbatim whenever a list is
+        # passed -- an empty list included -- so handing it `declared` alone
+        # used to throw away the named file and let the binder invent another
+        # one, while still reporting `missing: []`. A goal naming
+        # BOUND_CAPABILITY_REGISTRY_V1.json came back bound to
+        # MIGRATION_STATUS_2026-09-10.json. The named paths go first so they
+        # win, and the declared ones are still available behind them.
+        goal_named: list[str] = []
+        try:
+            from canonical.runtime import goal_compiler as _gc
+
+            goal_named = [str(p[0]) for p in _gc._repo_paths(goal, wb.ROOT)]
+        except Exception:
+            goal_named = []
+
+        candidates: list[str] = []
+        seen: set[str] = set()
+        for path in goal_named + [str(p) for p in declared]:
+            if path not in seen:
+                seen.add(path)
+                candidates.append(path)
 
         entry = {
             "capability_id": cid,
@@ -547,11 +574,13 @@ class UnifiedModel:
             },
         }
         try:
-            outcome = wb.complete_inputs(goal, wb.ROOT, entry, goal_paths=declared)
+            outcome = wb.complete_inputs(goal, wb.ROOT, entry, goal_paths=candidates)
         except Exception:
             return inputs, None, missing
 
-        allowed = {str(p) for p in declared}
+        # Both sources are caller-supplied: the sentence the caller wrote, and
+        # the paths the caller declared. Neither is a discovery.
+        allowed = {str(p) for p in declared} | set(goal_named)
         filled: dict[str, Any] = {}
         for key in missing:
             value = (outcome.get("inputs") or {}).get(key)
@@ -566,7 +595,8 @@ class UnifiedModel:
             #      to defend.
             #   2. The caller's own words. A slot named goal/task/objective is
             #      the sentence that was handed in, not a discovered resource.
-            #   3. One of the declared paths.
+            #   3. A path the caller supplied -- either declared as context, or
+            #      written into the goal sentence itself.
             #
             # Everything else is refused. That is what keeps `source_root`
             # unbound for a goal that never named a root: a default there would
