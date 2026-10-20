@@ -12,7 +12,7 @@ receipt, not a terminal claim, and not a capability grant.
 | Living agent | `canonical/runtime/living_agent_v1.py` | Real POSIX computer surface, one-shot skill chunking, canary-based drift detection and repair, word learning, impasse tracking, self-directed practice, consolidating memory, snapshot/restore. |
 | Shell synthesis | `canonical/runtime/shell_synthesis_v1.py` | Learns a stdin→stdout pipeline from (input, expected output) examples: typed beam search over 20 real stages, exact interpreter ordering, real-shell verification. |
 | Benchmark | `canonical/runtime/living_agent_benchmark_v1.py` | Twelve spreadsheet transforms with independently written oracles, plus a projection of the repository's real file tree. |
-| Acceptance | `tests/test_living_agent_v1.py` | 107 tests / 159 subtests. Real processes, real files, exact byte equality. No mocks. |
+| Acceptance | `tests/test_living_agent_v1.py` | 113 tests / 162 subtests. Real processes, real files, exact byte equality. No mocks. |
 | Discovery | `canonical/runtime/living_discovery_v1.py` | Reads what this machine says it can do (`tool --help`, the tool's own definition), turns a goal sentence into an exact expected output, and proves a real command against it before admitting it. |
 | Growth measurement | `canonical/runtime/living_agent_growth_v1.py` | Acquires four real skills at runtime and replays them on three untouched real directories. |
 
@@ -405,11 +405,81 @@ count over a named column is asked for.
 
 ### What is still missing
 
-Composition places one documented mechanism first.  A pipeline with two
-unknown mechanisms, or one whose mechanism sits after a stage, is outside the
-search -- it would need a product over the documented surface at every depth.
-The grammar's suffix search also prunes stages whose output equals their input,
-which is why the count case needs the request's own reading tried alongside it.
+Composition places one documented mechanism first, or one grammar stage that
+the sentence names before it.  A pipeline with two unknown mechanisms, or one
+whose mechanism sits between two arbitrary stages, is outside the search -- it
+would need a product over the documented surface at every depth.
+
+When two verified pipelines both fit every example and disagree on data nobody
+has shown, the creature currently admits the one with more evidence and does
+not ask.  The next step is the one a sentient learner would take: construct the
+input that separates them, and ask for *that* example instead of guessing.  It
+is cheap -- two runs and one comparison -- and it is the difference between
+knowing what needs to be known and assuming it.
+
+## Instant: what is remembered, and why it is remembered that way
+
+A creature that learns quickly is not one that searches quickly; it is one that
+does not search twice.  Three kinds of memory now sit between a request and a
+search, cheapest first, and each one is re-verified before it is believed:
+
+| Memory | What it holds | What it costs to use | Why it cannot lie |
+|---|---|---|---|
+| skill | the exact pipeline that answered this goal | 1 run (canary replay) | the canary bytes |
+| mechanism | a tool with the *kinds* of argument it was given | 4–6 runs | re-bound from the new request and data, re-verified |
+| earned stage | a verified invocation as a word of the grammar | 2–4 runs | rebuilt from the machine, run for real |
+
+Measured on this machine, same machine, same day:
+
+| Request | Runs | Time |
+|---|---|---|
+| sort rows by column 2, comma separated (first time) | 52 | 0.12 s |
+| the same kind, column 3, semicolon, keep three | 4 | 0.04 s |
+| the same words on space-separated data | 4 | 0.04 s |
+| a different kind that needs the earned stage | 4 | 0.04 s |
+| the same words after a snapshot and restart | 4 | 0.02 s |
+
+Two design mistakes were paid for in processes before they were fixed, and both
+are the kind that look like optimisation but are really the wrong abstraction:
+
+* **Remembering the sentence.**  The first memory was keyed by the words of the
+  goal, with numbers and separators removed.  Two requests that need the same
+  mechanism ("sort the rows by the second column, comma separated" and "keep
+  the last two rows of the table, sorted by the second column") share almost no
+  words, while two that share every word may need different arguments.  The
+  record is now keyed by the *mechanism* -- tool plus the kinds of argument it
+  was given -- and the values are bound fresh every time.
+* **Searching with earned stages.**  An earned stage is a real process.  A
+  grammar search applies every stage to every intermediate text, so including
+  earned stages turned one search into seventeen child processes.  The search
+  now uses only stages that cost nothing to apply; earned stages are tried
+  deliberately, one at a time.  First-time composition went from 58 runs to 4
+  on the paths that recall, and the suffix search never spawns a process.
+
+The shared stage memo is the third piece: one invocation on one text is a pure
+function of the machine, so the same binary with the same arguments on the same
+input is never run twice in a session, whichever part of the search asks.
+
+### Where the sentence says an operation happens
+
+"Keep the first two" and "take the first four" are not stylistic variants.  On
+five rows "sort them, then keep two" and "keep two, then sort them" agree; on
+six they do not.  A keep-verb is a *suffix*, a take-verb is a *prefix*, and the
+position is checked against the admitted pipeline -- a pipeline that keeps two
+before sorting is refused as an answer to a sentence that says to keep them
+afterwards.  `head -n 4 | sort -k 2 -t ,` and `sort -k 2 -t , | head -n 4` are
+different functions, and the request names which one it wants.
+
+### Two characters with no spelling
+
+A shell command cannot carry a TAB: a literal one is a control character and
+dash has no escape for it, so tab-separated data -- a very large part of a
+computer -- was unreachable.  The portable spelling `-t "$(printf '\t')"` is
+allowed, and *only* it: a command may contain no other `$(...)` and no
+backticks, because a substitution would run a program the admission check never
+saw.  Both halves are tested against the real shell.  (Before this, `-t |`
+was joined unquoted and became a pipe; every bound argument is now quoted, so
+it stays data.)
 
 ## How the learner spends its questions
 

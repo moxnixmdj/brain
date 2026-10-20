@@ -94,6 +94,25 @@ class ShellComputerTests(unittest.TestCase):
                     self.computer.run(command)
         self.assertTrue(self.computer.exists("data.txt"))
 
+    def test_a_command_substitution_is_not_a_way_around_admission(self) -> None:
+        # `$(...)` runs a program the admission check never saw, and a tab --
+        # the one character a command cannot carry literally -- is the only
+        # substitution allowed.  Both sides are checked against the real shell.
+        for command in (
+            "cat data.txt | sort -t $(date)",
+            "cat data.txt | sort -t `date`",
+            "cat data.txt | sort -t \"$(curl example.com)\"",
+        ):
+            with self.subTest(command=command):
+                with self.assertRaises(AgentError) as raised:
+                    self.computer.run(command)
+                self.assertEqual(str(raised.exception), "COMMAND_SUBSTITUTION_REFUSED")
+        self.computer.admit("sort", evidence={"summary": "", "usage": "", "argv": []})
+        self.computer.write("t.tsv", "b\t2\na\t1\n")
+        result = self.computer.run("cat t.tsv | sort -t \"$(printf '\\t')\" -k 2")
+        self.assertTrue(result.ok, result.stderr)
+        self.assertEqual(result.stdout, "a\t1\nb\t2\n")
+
     def test_control_characters_are_refused(self) -> None:
         with self.assertRaises(AgentError):
             self.computer.run("cat data.txt\ncat data.txt")
@@ -1379,7 +1398,11 @@ class DocumentedArgumentTests(unittest.TestCase):
         self.assertEqual(agent.skills, {})
         gap = [entry.payload for entry in agent.memory.active() if entry.payload.get("goal") == goal]
         self.assertEqual(gap[0]["reason"], "evidence_conflict")
-        self.assertEqual(sorted(gap[0]["unexplained"]), ["position 3", "separator |"])
+        # every way the pipeline contradicts the sentence, recorded at once
+        self.assertEqual(
+            sorted(gap[0]["unexplained"]),
+            ["first 2 last", "position 3", "separator |"],
+        )
         # The rejected search admitted tools to run them; none may survive it.
         self.assertEqual(set(agent.computer.admitted()), before)
 
@@ -1407,6 +1430,179 @@ class DocumentedArgumentTests(unittest.TestCase):
             self._write(agent, name, text)
             self.assertEqual(agent.solve(goal, bindings={"path": name})["stdout"], answer)
         self.assertNotIn("ptx", {row["tool"] for row in agent.discovery_log if row.get("verified")})
+
+    def test_a_tab_separated_table_is_sorted_on_its_column(self) -> None:
+        # A TAB cannot be written into a command at all -- not literally (it is
+        # a control character) and not with a shell escape (dash has none).
+        # If that made tab-separated data unreachable, a very large part of a
+        # computer would be unreachable too, so the creature has to find the
+        # one portable spelling and prove it on real bytes.
+        agent = self._agent()
+        self._write(agent, "t1.tsv", "a\tzap\t9\nb\tyank\t3\nc\txray\t7\n")
+        self._write(agent, "t2.tsv", "k\tmike\t5\nl\tlima\t1\n")
+        goal = "sort the rows by the second column, tab separated, and keep the first two"
+        outcome = agent.acquire(
+            goal,
+            [
+                ("t1.tsv", "c\txray\t7\nb\tyank\t3\n"),
+                ("t2.tsv", "l\tlima\t1\nk\tmike\t5\n"),
+            ],
+        )
+        self.assertEqual(outcome["status"], "PASS", outcome)
+        self.assertEqual(outcome["stages"][0], 'sort -k 2 -t "$(printf \'\\t\')"')
+        self.assertEqual(outcome["argv"], ["-k", "2", "-t", "\t"])
+        self._write(agent, "held.tsv", "q\tquebec\t8\nr\tromeo\t2\ns\tsierra\t6\n")
+        self.assertEqual(
+            agent.solve(goal, bindings={"path": "held.tsv"})["stdout"],
+            "q\tquebec\t8\nr\tromeo\t2\n",
+        )
+
+    def test_a_kind_of_request_is_learned_once_and_then_recalled(self) -> None:
+        # The first request of a kind costs a real search.  The second one is a
+        # different table, a different column, a different separator and a
+        # different count -- and the creature should not search again: the
+        # *kind* of request was learned, the parameters are bound fresh from the
+        # new sentence and the new data, and the new examples still decide.
+        agent = self._agent()
+        self._write(agent, "one.csv", "pear,2\napple,10\nfig,1\nkiwi,7\n")
+        self._write(agent, "two.csv", "zulu,5\nyankee,3\nxray,9\n")
+        first = agent.acquire(
+            "sort the rows by the second column, comma separated",
+            [
+                ("one.csv", "fig,1\napple,10\npear,2\nkiwi,7\n"),
+                ("two.csv", "yankee,3\nzulu,5\nxray,9\n"),
+            ],
+        )
+        self.assertEqual(first["stages"], ["sort -k 2 -t ,"])
+        self.assertGreaterEqual(first["commands_run"], 20)  # it really searched
+
+        self._write(agent, "three.csv", "aa;p;9\nbb;q;2\ncc;r;7\ndd;s;4\n")
+        self._write(agent, "four.csv", "kk;t;8\nll;u;1\nmm;v;5\n")
+        second = agent.acquire(
+            "sort the rows by the third column, semicolon separated, and keep the first three",
+            [
+                ("three.csv", "bb;q;2\ndd;s;4\ncc;r;7\n"),
+                ("four.csv", "ll;u;1\nmm;v;5\nkk;t;8\n"),
+            ],
+        )
+        self.assertEqual(second["stages"], ["sort -k 3 -t ';'", "head -n 3"])
+        self.assertTrue(second["remembered"], second)
+        self.assertLessEqual(second["commands_run"], 8)
+        self.assertLess(second["seconds"], 0.1)
+        # two-digit values in the key, where a numeric reading and the tool's
+        # own text order disagree: 1, 10, 2 -- the verified bytes decide, and
+        # any mechanism sorting numbers instead of text fails here
+        self._write(agent, "held.csv", "m;x;10\nn;y;2\no;z;1\np;w;20\n")
+        again = agent.solve(
+            "sort the rows by the third column, semicolon separated, and keep the first three",
+            bindings={"path": "held.csv"},
+        )
+        self.assertEqual(again["stdout"], "o;z;1\nm;x;10\nn;y;2\n")
+
+    def test_the_same_sentence_on_different_data_rebinds_its_arguments(self) -> None:
+        # The same words, a different table: the separator is no longer a
+        # comma, so the mechanism that worked cannot be reused verbatim.  It
+        # must be re-armed from the new data and re-proven -- and four
+        # processes are enough to do it.
+        agent = self._agent()
+        self._write(agent, "one.csv", "pear,2\napple,10\nfig,1\nkiwi,7\n")
+        self._write(agent, "two.csv", "zulu,5\nyankee,3\nxray,9\n")
+        agent.acquire(
+            "sort the rows by the second column, comma separated",
+            [
+                ("one.csv", "fig,1\napple,10\npear,2\nkiwi,7\n"),
+                ("two.csv", "yankee,3\nzulu,5\nxray,9\n"),
+            ],
+        )
+        self._write(agent, "s1.txt", "pear 2\napple 10\nfig 1\n")
+        self._write(agent, "s2.txt", "zulu 5\nyankee 3\n")
+        outcome = agent.acquire(
+            "sort the rows by the second column",
+            [("s1.txt", "fig 1\napple 10\npear 2\n"), ("s2.txt", "yankee 3\nzulu 5\n")],
+        )
+        self.assertEqual(outcome["stages"], ["sort -k 2 -t ' '"])
+        self.assertTrue(outcome["remembered"], outcome)
+        self.assertLessEqual(outcome["commands_run"], 6)
+        self._write(agent, "held.txt", "m 4\nb 2\nz 8\n")
+        self.assertEqual(
+            agent.solve("sort the rows by the second column", bindings={"path": "held.txt"})["stdout"],
+            "b 2\nm 4\nz 8\n",
+        )
+
+    def test_where_the_selection_happens_is_part_of_the_request(self) -> None:
+        # "Take the first four rows, then sort them" and "sort them all, then
+        # keep four" agree on five-row files and disagree on the file below.
+        # The sentence says which: a take-verb is a prefix, a keep-verb is a
+        # suffix.  Both must be verifiable and they must not be interchangeable.
+        agent = self._agent()
+        self._write(
+            agent, "a.csv", "nine,9\nthree,3\nseven,7\ntwo,2\nfive,5\none,1\nfour,4\n"
+        )
+        self._write(agent, "b.csv", "delta,4\nalpha,1\ncharlie,3\nbravo,2\necho,5\n")
+        goal = "take the first four rows, sort them by the second column, comma separated"
+        outcome = agent.acquire(
+            goal,
+            [
+                ("a.csv", "two,2\nthree,3\nseven,7\nnine,9\n"),
+                ("b.csv", "alpha,1\nbravo,2\ncharlie,3\ndelta,4\n"),
+            ],
+        )
+        self.assertEqual(outcome["prefix"], "head -n 4", outcome)
+        self.assertEqual(outcome["stages"], ["head -n 4", "sort -k 2 -t ,"])
+        # a file where the two readings give different answers
+        self._write(agent, "held.csv", "e,5\nd,4\nc,3\nb,2\na,1\n")
+        self.assertEqual(
+            agent.solve(goal, bindings={"path": "held.csv"})["stdout"],
+            "b,2\nc,3\nd,4\ne,5\n",  # the first four rows, sorted -- not a,1 ... d,4
+        )
+
+    def test_an_earned_stage_serves_a_different_request(self) -> None:
+        # Once a documented invocation has been verified, it is a word in the
+        # grammar, not a one-off answer.  A request of a different kind can then
+        # be composed from it, and the earned word survives a snapshot: the
+        # reborn creature rebuilds the stage by asking the machine again.
+        agent = self._agent()
+        self._write(agent, "one.csv", "pear,2\napple,10\nfig,1\nkiwi,7\n")
+        self._write(agent, "two.csv", "zulu,5\nyankee,3\nxray,9\n")
+        agent.acquire(
+            "sort the rows by the second column, comma separated",
+            [
+                ("one.csv", "fig,1\napple,10\npear,2\nkiwi,7\n"),
+                ("two.csv", "yankee,3\nzulu,5\nxray,9\n"),
+            ],
+        )
+        self.assertIn("sort -k 2 -t ,", agent._learned)
+
+        self._write(agent, "three.csv", "m,4\nb,2\nz,8\n")
+        self._write(agent, "four.csv", "t,9\nk,1\np,5\n")
+        goal = "keep the last two rows of the table sorted by the second column, comma separated"
+        outcome = agent.acquire(
+            goal,
+            [("three.csv", "m,4\nz,8\n"), ("four.csv", "p,5\nt,9\n")],
+        )
+        self.assertEqual(outcome["stages"], ["sort -k 2 -t ,", "tail -n 2"])
+        self.assertLessEqual(outcome["commands_run"], 12)
+        # text order on the key: 1, 3, 7 -- the tool's own semantics, which the
+        # examples pinned, not an assumption about numbers
+        self._write(agent, "held.csv", "q,7\na,3\nw,1\n")
+        self.assertEqual(
+            agent.solve(goal, bindings={"path": "held.csv"})["stdout"], "a,3\nq,7\n"
+        )
+
+        payload = json.loads(json.dumps(agent.snapshot()))
+        reborn = LivingAgent(self.root)
+        reborn.restore(payload)
+        self.assertIn("sort -k 2 -t ,", reborn._learned)
+        # a kind of request the reborn creature has never answered
+        self._write(reborn, "five.csv", "w,6\nc,2\nd,9\n")
+        self._write(reborn, "six.csv", "n,3\ne,1\nf,8\n")
+        fresh = reborn.acquire(
+            "keep the last one row of the table sorted by the second column, comma separated",
+            [("five.csv", "d,9\n"), ("six.csv", "f,8\n")],
+        )
+        self.assertEqual(fresh["stages"], ["sort -k 2 -t ,", "tail -n 1"])
+        self.assertLessEqual(fresh["commands_run"], 16)
+        self.assertEqual(fresh["stdout"], "d,9\n")
 
     def test_a_composition_is_kept_across_a_snapshot(self) -> None:
         agent = self._agent()

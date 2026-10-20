@@ -212,6 +212,14 @@ class Computer:
             raise AgentError("COMMAND_EMPTY")
         if "\x00" in command or "\n" in command:
             raise AgentError("COMMAND_CONTROL_CHARACTER")
+        # The only substitution a command may contain is the literal TAB, which
+        # has no direct spelling in a shell string and no other portable one.
+        # Anything else -- $(...), backticks -- would run a program the
+        # admission check never saw, so it is refused as an escape.
+        if command.count(_TAB_SPELLING) != command.count("$("):
+            raise AgentError("COMMAND_SUBSTITUTION_REFUSED")
+        if "`" in command:
+            raise AgentError("COMMAND_SUBSTITUTION_REFUSED")
         for segment in _segments(command):
             words = shlex.split(segment.strip()) if segment.strip() else []
             index = 0
@@ -541,6 +549,24 @@ _UNIT_NOUNS = (
 # A request can name the character that separates its data.  Naming it is not
 # the same as describing the data: "comma separated" says which character the
 # answer must use, and a pipeline that never mentions a comma has not answered.
+# A TAB cannot be written into a command: a literal one is a control character
+# and a shell has no portable escape for it.  This one substitution is the
+# portable spelling, and it is the only one the machine will execute.
+_TAB_SPELLING = "\"$(printf '\\t')\""
+
+
+def _shell_spelling(part: str) -> str:
+    """How a bound argument is written for the shell.
+
+    A TAB is spelled as the one substitution the admission check allows; every
+    other argument is quoted so it stays data.  `-t |` is a pipe unless it is
+    quoted, and then the file name becomes the next command.
+    """
+    if part == "\t":
+        return _TAB_SPELLING
+    return shlex.quote(part)
+
+
 _SEPARATOR_WORDS = {
     "comma": ",", "commas": ",",
     "pipe": "|", "pipes": "|",
@@ -560,28 +586,46 @@ _SELECTION = re.compile(
 )
 
 
-def _requested_operations(goal: str) -> list[tuple[str, str]]:
-    """Operations the sentence names, with the spelling any stage may use.
+# Where in the pipeline a selection belongs is part of the sentence, not a
+# preference: "keep the first two" happens to what the transformation left,
+# while "take the first four rows" is what the transformation starts from.
+# The verbs the sentence uses are the evidence for which it is.
+_PREFIX_VERBS = {"take", "read", "use", "consider", "starting", "beginning", "from", "among"}
+_SUFFIX_VERBS = {"keep", "leave", "retain", "show", "output", "print", "return", "give", "report"}
+_SKIP_BEFORE = {"the", "only", "just", "and", "then", "a", "an", "of", "these", "those"}
 
-    "Keep the first two" fixes an operation no matter what the examples show:
-    the answer has to take the first two rows.  A pipeline can match every
-    example and still end with "take the last two" -- and then it has answered
-    a different question.  Only readings the sentence states outright are
-    listed here; anything vaguer is left to the bytes.
+
+def _requested_operations(goal: str) -> list[tuple[str, str, str]]:
+    """Operations the sentence names: (label, stage spelling, where it belongs).
+
+    "Keep the first two" fixes an operation no matter what the examples show,
+    and it fixes *where* it happens: after the transformation.  On two rows,
+    "keep the first two, sorted by the third column" is byte-identical to
+    "sort those two by the third column" -- and on a third row it is not.
+    Only readings the sentence states outright are listed; anything vaguer is
+    left to the bytes.
     """
     text = goal.lower()
-    requested: list[tuple[str, str]] = []
+    requested: list[tuple[str, str, str]] = []
     for match in _SELECTION.finditer(text):
         direction, amount = match.group(1), match.group(2)
         count = int(amount) if amount.isdigit() else _NUMBER_WORDS[amount]
+        before = re.findall(r"[a-z]+", text[max(0, match.start() - 24): match.start()])
+        verb = ""
+        for word in reversed(before):
+            if word in _SKIP_BEFORE:
+                continue
+            verb = word
+            break
+        role = "prefix" if verb in _PREFIX_VERBS else "suffix"
         if direction in {"first", "top"}:
-            requested.append((f"first {count}", rf"\bhead\s+-n\s*\+?{count}\b"))
+            requested.append((f"first {count}", rf"\bhead\s+-n\s*\+?{count}\b", role))
         else:
-            requested.append((f"last {count}", rf"\btail\s+-n\s*{count}\b"))
+            requested.append((f"last {count}", rf"\btail\s+-n\s*{count}\b", role))
     if re.search(r"\b(distinct|unique)\b", text):
-        requested.append(("distinct values", r"\bsort\s+-u\b|\buniq\b"))
+        requested.append(("distinct values", r"\bsort\s+-u\b|\buniq\b", "any"))
     if re.search(r"\b(count|counts|how many|number of)\b", text):
-        requested.append(("a count", r"\bwc\s+-l\b"))
+        requested.append(("a count", r"\bwc\s+-l\b", "any"))
     return requested
 
 
@@ -684,6 +728,27 @@ class LivingAgent:
         # the data, never learned, so caching them changes no answer.
         self._separator_cache: dict[str, list[str]] = {}
         self._described_cache: dict[str, set[str]] = {}
+        # One invocation on one text is a pure function of the machine: the
+        # same binary, the same arguments and the same input produce the same
+        # bytes.  Probing it twice is waste, and the search probes the same
+        # invocation from several directions (recall, hypotheses, verification).
+        self._stage_memo: dict[tuple[tuple[str, ...], str], str] = {}
+        # What answered this *kind* of request before: the reading of the
+        # sentence (its content words, with the parameters removed) and the
+        # mechanism that verified against real bytes.  A cache of experience,
+        # never an authority: every reuse is re-verified on the new examples,
+        # and a miss demotes the entry instead of trusting it.
+        self.mechanisms: dict[str, dict[str, Any]] = {}
+        # Stages the creature has *earned*: a documented invocation that was
+        # verified on real bytes becomes a word in its grammar, so later goals
+        # can be composed from it by pure search instead of being searched for
+        # again.  The vocabulary grows from proof, not from configuration.
+        self._learned: dict[str, dict[str, Any]] = {}
+        self._learned_cache: dict[str, Any] = {}
+        self._stage_dir: str | None = None
+        # Real process executions, counted so a claim about cost is measured
+        # rather than estimated.
+        self._runs = 0
 
     # -- learning ---------------------------------------------------------
     def learn_shell_skill(
@@ -1161,6 +1226,12 @@ class LivingAgent:
         # on; only a pipeline that answers both specifications is admitted here.
         contradicted: list[tuple[list[str], list[str]]] = []
         for stages in candidates:
+            # A pipeline that contradicts the sentence is refused before it
+            # costs a process: reading the request is free, running is not.
+            unexplained = self._unexplained_request(goal, stages)
+            if unexplained:
+                contradicted.append((list(stages), unexplained))
+                continue
             template = synthesis.command_for(stages)
             ok = True
             for index, (_, expected) in enumerate(inputs):
@@ -1212,6 +1283,8 @@ class LivingAgent:
                     "stages": pipeline,
                     "documented": detail["documented"],
                     "grammar": detail["grammar"],
+                    "prefix": detail.get("prefix", ""),
+                    "remembered": bool(detail.get("remembered", False)),
                     "source": "composed",
                     "tool": detail["tool"],
                     "argv": list(detail["argv"]),
@@ -1331,7 +1404,7 @@ class LivingAgent:
             return cached
         counts: dict[str, int] = {}
         for character in text:
-            if character in ",:|; ":
+            if character in ",:|; \t":
                 counts[character] = counts.get(character, 0) + 1
         found = [character for character, _ in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))][:3]
         self._separator_cache[text] = found
@@ -1476,6 +1549,170 @@ class LivingAgent:
             words |= {"numeric", "number", "sort"}
         return words
 
+    # -- what answered a request before ------------------------------------
+    @staticmethod
+    def _mechanism_id(doc_name: str, form: Sequence[str]) -> str:
+        return " ".join([doc_name, *(_shell_spelling(part) for part in form)]).strip()
+
+    def _remember_mechanism(self, goal: str, doc: discovery.ToolDoc, form: Sequence[str]) -> None:
+        """Record a mechanism that verified, against the request it answered.
+
+        The record is keyed by the *mechanism*, not by the sentence: two
+        requests that need `sort -k 2 -t ,` can share almost no words ("sort
+        the rows by the second column, comma separated" and "keep the last two
+        rows of the table, sorted by the second column"), and a request that
+        shares every word with an earlier one may still need different
+        arguments.  What carries over is the tool and the kinds of argument it
+        was given; the values are bound fresh every time.
+        """
+        key = self._mechanism_id(doc.name, form)
+        previous = self.mechanisms.get(key) or {}
+        self.mechanisms[key] = {
+            "tool": doc.name,
+            "argv": list(form),
+            "documentation": doc.summary,
+            "goal": goal,
+            "hits": int(previous.get("hits", 0)) + 1,
+            "misses": int(previous.get("misses", 0)),
+        }
+
+    def _recall_mechanism(
+        self,
+        goal: str,
+        examples: Sequence[tuple[str, str]],
+        grammar: Sequence[Any],
+        scratch: str,
+        *,
+        max_length: int,
+        time_budget_s: float,
+    ) -> tuple[list[str], dict[str, Any]] | None:
+        """Try the mechanisms that have worked before, most proven first.
+
+        Each one is re-armed from *this* request and *this* data -- the
+        position it names, the separator the data contains, the quantity the
+        sentence writes -- and then verified on the new examples like anything
+        else.  A mechanism that fails is demoted, so a memory that has gone
+        wrong stops being consulted instead of being trusted.
+        """
+        if not self.mechanisms:
+            return None
+        sources = [self.computer.read(path) for path, _ in examples]
+        expected = [text for _, text in examples]
+        vocabulary = self.vocabulary
+        vocabulary.read()
+        located = dict(vocabulary.executables())
+        grammar_list = list(grammar)
+        prefixes = self._named_prefixes(goal, sources, grammar_list)
+        ranked = sorted(
+            self.mechanisms.items(),
+            key=lambda item: (-int(item[1].get("hits", 0)), item[0]),
+        )[:4]
+        for _key, entry in ranked:
+            if int(entry.get("misses", 0)) >= 2 + int(entry.get("hits", 0)):
+                continue  # this memory has been wrong more often than right
+            tool = str(entry.get("tool", ""))
+            doc = vocabulary.doc(tool)
+            if doc is None or tool not in located or tool in discovery.DENY:
+                continue
+            # The same tool, with arguments bound from the new sentence.  A
+            # mechanism whose kinds of argument the request cannot supply is
+            # skipped before it costs a process.
+            scored = [
+                (strength, list(form))
+                for strength, form in self._argument_forms(goal, doc, sources)
+                if form and strength >= 4
+            ]
+            scored.sort(key=lambda row: (-row[0], len(row[1])))
+            forms: list[list[str]] = [form for _strength, form in scored[:2]]
+            remembered = list(entry.get("argv") or [])
+            if remembered and remembered not in forms:
+                forms.append(remembered)
+            for form in forms:
+                stage = self._stage_for(doc, form, located[tool], cwd=scratch)
+                for pipeline in self._hypotheses(
+                    stage,
+                    sources,
+                    expected,
+                    grammar_list,
+                    goal,
+                    max_length=max_length,
+                    time_budget_s=time_budget_s,
+                    prefixes=prefixes,
+                ):
+                    if not self._confirm(goal, pipeline, examples):
+                        continue
+                    entry["hits"] = int(entry.get("hits", 0)) + 1
+                    self._remember_mechanism(goal, doc, form)
+                    prefix_shell = pipeline[0] if pipeline[0] != stage.shell else ""
+                    return pipeline, {
+                        "documented": [stage.shell],
+                        "grammar": pipeline[2:] if prefix_shell else pipeline[1:],
+                        "prefix": prefix_shell,
+                        "tool": tool,
+                        "argv": list(form),
+                        "remembered": True,
+                    }
+            entry["misses"] = int(entry.get("misses", 0)) + 1
+        return None
+
+    def _learn_stage(self, doc: discovery.ToolDoc, form: Sequence[str], binary: str) -> None:
+        """Admit a verified invocation as a word of the grammar.
+
+        A mechanism that produced the right bytes is a fact about this machine.
+        Keeping it as a *skill* answers the one goal that taught it; keeping it
+        as a *stage* lets every later search use it, so a related request is
+        solved by pure search plus one verification instead of a fresh
+        hunt.  Nothing is trusted: the stage runs the real binary every time.
+        """
+        if not form:
+            return
+        shell = " ".join([doc.name, *(_shell_spelling(part) for part in form)]).strip()
+        self._learned[shell] = {"tool": doc.name, "argv": list(form)}
+        self._learned_cache.pop(shell, None)
+
+    def _earned_dir(self) -> str:
+        """One throwaway directory for every earned stage, made on first use."""
+        if self._stage_dir is None:
+            self._stage_dir = tempfile.mkdtemp(prefix="brain-stages-")
+        return self._stage_dir
+
+    def _learned_stages(self) -> list[Any]:
+        """The earned stages, rebuilt from the machine when first needed.
+
+        A snapshot stores the invocation, not a live object: after a restart the
+        stage is rebuilt by asking the machine for the same tool, so a binary
+        that has changed is re-admitted rather than inherited on trust.
+        """
+        out: list[Any] = []
+        for shell, record in self._learned.items():
+            stage = self._learned_cache.get(shell)
+            if stage is None:
+                tool = str(record.get("tool", ""))
+                doc = self.vocabulary.doc(tool)
+                located = dict(self.vocabulary.executables()) if doc is not None else {}
+                if doc is None or tool not in located:
+                    continue
+                stage = self._stage_for(doc, list(record.get("argv") or []), located[tool], cwd=self._earned_dir())
+                self._learned_cache[shell] = stage
+            out.append(stage)
+        return out
+
+    def _base_grammar(self, inputs: Sequence[tuple[str, str]]) -> tuple[Any, ...]:
+        """The grammar whose stages cost nothing to apply.
+
+        Every stage here is pure computation, which is what a *search* needs:
+        it applies stages to hundreds of intermediate texts, and an earned
+        stage would turn each of those into a process.  Earned stages are
+        tried deliberately, in their own loop, where each costs one run.
+        """
+        return synthesis.instantiate(inputs) + tuple(self._stages.values())
+
+    def _grammar(self, inputs: Sequence[tuple[str, str]]) -> tuple[Any, ...]:
+        """The fixed grammar plus everything this creature has earned."""
+        base = self._base_grammar(inputs)
+        seen = {stage.shell for stage in base}
+        return base + tuple(stage for stage in self._learned_stages() if stage.shell not in seen)
+
     def _candidate_stages(
         self,
         goal: str,
@@ -1538,6 +1775,93 @@ class LivingAgent:
                         return out
         return out
 
+    def _named_prefixes(
+        self, goal: str, sources: Sequence[str], grammar: Sequence[Any]
+    ) -> list[tuple[str, list[str]]]:
+        """Stages the sentence puts before the mechanism, already applied.
+
+        Applying a grammar stage is pure computation, so this costs nothing:
+        the text the mechanism will really see is prepared once and shared by
+        every candidate mechanism.
+        """
+        out: list[tuple[str, list[str]]] = []
+        for prefix_shell in self._requested_prefixes(goal):
+            prefix_stage = next((item for item in grammar if item.shell == prefix_shell), None)
+            if prefix_stage is None:
+                continue
+            try:
+                prefixed = [prefix_stage.apply(text) for text in sources]
+            except ValueError:
+                continue
+            if prefixed != sources:
+                out.append((prefix_shell, prefixed))
+        return out
+
+    def _hypotheses(
+        self,
+        stage: Any,
+        sources: Sequence[str],
+        expected: Sequence[str],
+        grammar: Sequence[Any],
+        goal: str,
+        *,
+        max_length: int,
+        time_budget_s: float,
+        prefixes: Sequence[tuple[str, list[str]]] = (),
+    ) -> list[list[str]]:
+        """Every composition this stage could be part of, computed but not run.
+
+        The grammar is pure computation, so all the shapes worth trying for one
+        mechanism -- alone, with a suffix, or after a stage the sentence names
+        -- are enumerated without a single process.  Only the resulting
+        pipelines cost anything, and each is verified by real bytes.
+        """
+        hypotheses: list[list[str]] = []
+        seen: set[tuple[str, ...]] = set()
+
+        def suffixes(mid: Sequence[str], budget: int, exclude: str = "") -> list[list[str]]:
+            if list(mid) == list(expected):
+                return [[]]
+            pipelines, _stats = synthesis.search(
+                list(zip(mid, expected)),
+                max_length=max(1, budget),
+                beam=64,
+                time_budget_s=time_budget_s,
+                stages=grammar,
+            )
+            attempts = [list(chosen) for chosen in pipelines]
+            # The grammar searches by bytes alone, so a suffix whose
+            # intermediate is unchanged never appears in it (`sort -u` of
+            # already-unique lines, then `wc -l`).  What the sentence names is
+            # the other specification; it is tried and then verified too.
+            requested = [item for item in self._requested_stages(goal) if item != exclude]
+            if requested:
+                attempts.append(requested)
+            return attempts
+
+        try:
+            mid = [stage.apply(text) for text in sources]
+        except ValueError:
+            return hypotheses
+        for chosen in suffixes(mid, max_length - 1):
+            candidate = [stage.shell, *chosen]
+            if tuple(candidate) not in seen:
+                seen.add(tuple(candidate))
+                hypotheses.append(candidate)
+        for prefix_shell, prefixed in prefixes:
+            try:
+                prefixed_mid = [stage.apply(text) for text in prefixed]
+            except ValueError:
+                continue
+            if prefixed_mid == prefixed:
+                continue
+            for chosen in suffixes(prefixed_mid, max_length - 2, exclude=prefix_shell):
+                candidate = [prefix_shell, stage.shell, *chosen]
+                if tuple(candidate) not in seen:
+                    seen.add(tuple(candidate))
+                    hypotheses.append(candidate)
+        return hypotheses
+
     def _compose(
         self,
         goal: str,
@@ -1564,12 +1888,61 @@ class LivingAgent:
         sources = [text for text, _ in inputs]
         expected = [text for _, text in inputs]
         before = set(self.computer.admitted())
-        grammar = synthesis.instantiate(inputs) + tuple(self._stages.values())
+        grammar = self._base_grammar(inputs)
         candidates = self._candidate_stages(goal, sources)
         if not candidates:
             return None
         scratch = tempfile.mkdtemp(prefix="brain-compose-")
         try:
+            runs_before = self._runs
+            # What answered this kind of request before, cheapest first.  A
+            # remembered mechanism is re-verified on these examples like
+            # anything else; the memory only saves the search, never the proof.
+            recalled = self._recall_mechanism(
+                goal,
+                examples,
+                grammar,
+                scratch,
+                max_length=max_length,
+                time_budget_s=time_budget_s,
+            )
+            if recalled is not None:
+                pipeline, detail = recalled
+                self._settle_admissions(before, winner=detail["tool"])
+                detail["tested"] = max(1, self._runs - runs_before)
+                return pipeline, detail
+            # Second cheapest: the vocabulary this creature has already earned.
+            # Every entry was verified on real bytes somewhere else; testing it
+            # here costs a handful of processes instead of a fresh hunt.
+            for stage in self._learned_stages()[:8]:
+                for pipeline in self._hypotheses(
+                    stage,
+                    sources,
+                    expected,
+                    grammar,
+                    goal,
+                    max_length=max_length,
+                    time_budget_s=time_budget_s,
+                    prefixes=self._named_prefixes(goal, sources, grammar),
+                ):
+                    if not self._confirm(goal, pipeline, examples):
+                        continue
+                    record = self._learned.get(stage.shell) or {}
+                    tool = str(record.get("tool", ""))
+                    doc = self.vocabulary.doc(tool)
+                    if doc is not None:
+                        self._remember_mechanism(goal, doc, list(record.get("argv") or []))
+                    self._settle_admissions(before, winner=tool)
+                    prefix_shell = pipeline[0] if pipeline[0] != stage.shell else ""
+                    return pipeline, {
+                        "documented": [stage.shell],
+                        "grammar": pipeline[2:] if prefix_shell else pipeline[1:],
+                        "prefix": prefix_shell,
+                        "tested": max(1, self._runs - runs_before),
+                        "tool": tool,
+                        "argv": list(record.get("argv") or []),
+                        "reused_stage": True,
+                    }
             stages = [
                 self._stage_for(doc, form, binary, cwd=scratch)
                 for doc, form, binary, _overlap, _strength in candidates
@@ -1601,66 +1974,40 @@ class LivingAgent:
                 )
             )
             tested = len(candidates)
-            for (doc, form, _binary, _overlap, _strength), stage, first in survivors[:16]:
-                if first == expected[0]:
-                    # The tool alone reproduces the first example: a pipeline of
-                    # one stage, which the grammar search has no suffix for.
-                    if self._matches_every_example([stage.shell], examples):
-                        if self._unexplained_request(goal, [stage.shell]):
-                            continue
-                        if self._depends_only_on_named_column(goal, [stage.shell], examples) is False:
-                            continue
-                        self._settle_admissions(before, winner=doc.name)
-                        self._log_composition(candidates, survivors, doc, form, tested)
-                        return [stage.shell], {
-                            "documented": [stage.shell],
-                            "grammar": [],
-                            "tested": tested,
-                            "tool": doc.name,
-                            "argv": list(form),
-                        }
-                    continue
-                midway = [first]
-                try:
-                    midway.extend(stage.apply(text) for text in sources[1:])
-                except ValueError:
-                    continue
-                pipelines, _stats = synthesis.search(
-                    list(zip(midway, expected)),
-                    max_length=max(1, max_length - 1),
-                    beam=64,
+            # Stages the sentence puts before the mechanism: "take the first
+            # four rows, then sort them" is a different function from "sort
+            # everything and keep four", because the selection happens first.
+            prefixes = self._named_prefixes(goal, sources, grammar)
+
+            def verified(pipeline: Sequence[str]) -> bool:
+                return self._confirm(goal, pipeline, examples)
+
+            for (doc, form, _binary, _overlap, _strength), stage, _first in survivors[:16]:
+                for pipeline in self._hypotheses(
+                    stage,
+                    sources,
+                    expected,
+                    grammar,
+                    goal,
+                    max_length=max_length,
                     time_budget_s=time_budget_s,
-                    stages=grammar,
-                )
-                attempts = [list(chosen) for chosen in pipelines]
-                requested = self._requested_stages(goal)
-                if requested:
-                    # The grammar searches by bytes alone, so a suffix whose
-                    # intermediate happens to be unchanged never appears in it
-                    # (`sort -u` of already-unique lines, then `wc -l`).  What
-                    # the sentence names is the other specification; it is
-                    # tried and then verified like everything else.
-                    attempts.append(requested)
-                for chosen in attempts:
-                    pipeline = [stage.shell, *chosen]
-                    try:
-                        matched = self._matches_every_example(pipeline, examples)
-                    except AgentError:
-                        continue  # not a command this computer will execute
-                    if matched:
-                        if self._unexplained_request(goal, pipeline):
-                            continue
-                        if self._depends_only_on_named_column(goal, pipeline, examples) is False:
-                            continue
-                        self._settle_admissions(before, winner=doc.name)
-                        self._log_composition(candidates, survivors, doc, form, tested)
-                        return pipeline, {
-                            "documented": [stage.shell],
-                            "grammar": list(chosen),
-                            "tested": tested,
-                            "tool": doc.name,
-                            "argv": list(form),
-                        }
+                    prefixes=prefixes,
+                ):
+                    if not verified(pipeline):
+                        continue
+                    self._settle_admissions(before, winner=doc.name)
+                    self._log_composition(candidates, survivors, doc, form, tested)
+                    self._remember_mechanism(goal, doc, form)
+                    self._learn_stage(doc, form, _binary)
+                    prefix_shell = pipeline[0] if pipeline[0] != stage.shell else ""
+                    return pipeline, {
+                        "documented": [stage.shell],
+                        "grammar": pipeline[2:] if prefix_shell else pipeline[1:],
+                        "prefix": prefix_shell,
+                        "tested": self._runs - runs_before,
+                        "tool": doc.name,
+                        "argv": list(form),
+                    }
             self._settle_admissions(before, winner="")
             return None
         finally:
@@ -1711,6 +2058,29 @@ class LivingAgent:
             )
         del self.discovery_log[: max(0, len(self.discovery_log) - 200)]
 
+    def _confirm(
+        self, goal: str, pipeline: Sequence[str], examples: Sequence[tuple[str, str]]
+    ) -> bool:
+        """Is this pipeline both exactly right and an answer to the request?
+
+        Three gates, in increasing cost: the real shell must reproduce every
+        example byte for byte; the pipeline must do what the sentence says
+        (position, separator, named operations, and where they apply); and,
+        where it is checkable, a count over a named column must actually depend
+        on that column.  Anything less is a coincidence that happens to fit.
+        """
+        # Cheapest first: reading the sentence costs nothing, running the
+        # pipeline costs processes, and the column probe costs three more.  A
+        # pipeline that contradicts the request is refused before it runs.
+        if self._unexplained_request(goal, pipeline):
+            return False
+        try:
+            if not self._matches_every_example(pipeline, examples):
+                return False
+        except AgentError:
+            return False  # not a command this computer will execute
+        return self._depends_only_on_named_column(goal, pipeline, examples) is not False
+
     def _unexplained_structure(self, goal: str, stages: Sequence[str]) -> list[str]:
         """What the request says about the shape of the data that the stages ignore.
 
@@ -1748,6 +2118,26 @@ class LivingAgent:
         return missing
 
     @staticmethod
+    def _requested_prefixes(goal: str) -> list[str]:
+        """Stages the sentence puts *before* the mechanism.
+
+        "Take the first four rows, then sort them by the second column" is not
+        "sort everything and keep four": the selection happens first, so the
+        mechanism sees four rows, not all of them.  Only selections the
+        sentence puts first are returned -- "keep the first two" is what
+        remains *after* the transformation, which is the opposite end.
+        """
+        prefixes: list[str] = []
+        for label, _pattern, role in _requested_operations(goal):
+            if role != "prefix":
+                continue
+            if label.startswith("first "):
+                prefixes.append("head -n " + label.split()[1])
+            elif label.startswith("last "):
+                prefixes.append("tail -n " + label.split()[1])
+        return prefixes
+
+    @staticmethod
     def _requested_stages(goal: str) -> list[str]:
         """The tail of a pipeline the sentence itself specifies, in order.
 
@@ -1755,18 +2145,21 @@ class LivingAgent:
         operations and their order; the bytes only have to agree.  This is the
         same reading ``_requested_operations`` checks against, spelled as the
         stages that perform it.  Nothing here is guessed from the examples --
-        a stage appears only because a phrase in the request asks for it.
+        a stage appears only because a phrase in the request asks for it, and
+        selections the sentence puts first are not part of the tail.
         """
-        labels = [label for label, _pattern in _requested_operations(goal)]
         stages: list[str] = []
-        if "distinct values" in labels:
+        operations = _requested_operations(goal)
+        if any(label == "distinct values" for label, _p, _r in operations):
             stages.append("sort -u")
-        for label in labels:
+        for label, _pattern, role in operations:
+            if role == "prefix":
+                continue
             if label.startswith("first "):
                 stages.append("head -n " + label.split()[1])
             elif label.startswith("last "):
                 stages.append("tail -n " + label.split()[1])
-        if "a count" in labels:
+        if any(label == "a count" for label, _p, _r in operations):
             stages.append("wc -l")
         return stages
 
@@ -1781,9 +2174,20 @@ class LivingAgent:
         """
         text = " ".join(stages)
         missing = self._unexplained_structure(goal, stages)
-        for label, pattern in _requested_operations(goal):
+        first = stages[0] if stages else ""
+        last = stages[-1] if stages else ""
+        for label, pattern, role in _requested_operations(goal):
             if not re.search(pattern, text):
                 missing.append(label)
+                continue
+            # Where the sentence puts an operation is part of what it says.
+            # "Keep the first two" happens to what the sort left; a pipeline
+            # that keeps two *before* sorting has answered a different
+            # question, and on more rows it gives a different answer.
+            if role == "suffix" and not re.search(pattern, last):
+                missing.append(label + " last")
+            elif role == "prefix" and not re.search(pattern, first):
+                missing.append(label + " first")
         return missing
 
     def _depends_only_on_named_column(
@@ -1804,7 +2208,7 @@ class LivingAgent:
         rejects: it means the stage list has been shown not to use the column
         it claims to use, which is a fact about behaviour, not about wording.
         """
-        if "a count" not in [label for label, _ in _requested_operations(goal)]:
+        if "a count" not in [label for label, _p, _r in _requested_operations(goal)]:
             return None
         positions = _ordinal_positions(goal)
         if not positions:
@@ -1836,6 +2240,7 @@ class LivingAgent:
         pipeline = " | ".join(stages)
 
         def answer(payload: str) -> str | None:
+            self._runs += 1
             result = self.computer.run(pipeline, stdin=payload)
             return result.stdout if result.ok else None
 
@@ -1863,6 +2268,7 @@ class LivingAgent:
         """
         template = "cat {path} | " + " | ".join(stages)
         for path, expected in examples:
+            self._runs += 1
             result = self.computer.run(template.replace("{path}", shlex.quote(path)))
             if not result.ok or result.stdout != expected:
                 return False
@@ -1883,7 +2289,7 @@ class LivingAgent:
         directory, because a tool nobody has vetted may write beside itself.
         """
         argv = [binary, *form]
-        shell = " ".join([doc.name, *(shlex.quote(part) for part in form)]).strip()
+        shell = " ".join([doc.name, *(_shell_spelling(part) for part in form)]).strip()
         memo: dict[str, str] = {}
         workdir = cwd or tempfile.mkdtemp(prefix="brain-stage-")
         env = {"PATH": ":".join(self.computer.search_dirs()), "LC_ALL": "C", "HOME": workdir}
@@ -1892,8 +2298,14 @@ class LivingAgent:
             cached = memo.get(text)
             if cached is not None:
                 return cached
+            shared = (tuple(argv), text)
+            cached = self._stage_memo.get(shared)
+            if cached is not None:
+                memo[text] = cached
+                return cached
             if doc.name not in self.computer.admitted():
                 self.computer.admit(doc.name, evidence={"summary": doc.summary, "usage": doc.usage, "argv": list(form)})
+            self._runs += 1
             code, raw = discovery._run_capped(
                 argv, cwd=workdir, env=env, timeout=2.0, limit=1_048_576, stdin_text=text
             )
@@ -1901,6 +2313,9 @@ class LivingAgent:
                 raise ValueError("STAGE_FAILED:" + doc.name)
             produced = discovery._decode(raw)
             memo[text] = produced
+            if len(self._stage_memo) > 4096:
+                self._stage_memo.clear()
+            self._stage_memo[(tuple(argv), text)] = produced
             return produced
 
         # An unmodelled tool may consume or produce anything, so it accepts both
@@ -1940,7 +2355,7 @@ class LivingAgent:
             # Arguments are data, not shell syntax: a separator such as `|`
             # is a pipe unless it is quoted, and then the *file name* becomes
             # the command.  Every part is quoted before it reaches the shell.
-            template = " ".join([doc.name, *(shlex.quote(part) for part in form), "{path}"])
+            template = " ".join([doc.name, *(_shell_spelling(part) for part in form), "{path}"])
             try:
                 self.computer.admit(
                     doc.name,
@@ -2238,7 +2653,7 @@ class LivingAgent:
                 },
             )
             raise AgentError("GOAL_PROPERTY_COMBINATION_UNSUPPORTED")
-        stages = synthesis.instantiate([(source, target)]) + tuple(self._stages.values())
+        stages = self._grammar([(source, target)])
         candidates, stats = synthesis.search(
             [(source, target)],
             max_length=max_length,
@@ -2433,7 +2848,7 @@ class LivingAgent:
         # A mechanism the creature already speaks.  Only interpreter-exact
         # candidates are worth a real run, so this costs a handful of processes.
         examples = [(source, expected)]
-        stages = synthesis.instantiate(examples) + tuple(self._stages.values())
+        stages = self._grammar(examples)
         candidates, _stats = synthesis.search(
             examples, max_length=2, beam=80, time_budget_s=0.5, stages=stages
         )
@@ -2885,6 +3300,8 @@ class LivingAgent:
             },
             "open_questions": self.open_questions(),
             "capabilities": {key: dict(value) for key, value in self.capabilities.items()},
+            "mechanisms": {key: dict(value) for key, value in self.mechanisms.items()},
+            "learned_stages": {key: dict(value) for key, value in self._learned.items()},
             "admissions": {key: dict(value) for key, value in self.computer.admissions.items()},
             "discovered_stages": sorted(self._stages),
             "discovery_log": list(self.discovery_log),
@@ -2951,6 +3368,13 @@ class LivingAgent:
         self.capabilities = {
             str(key): dict(value) for key, value in (payload.get("capabilities") or {}).items()
         }
+        self.mechanisms = {
+            str(key): dict(value) for key, value in (payload.get("mechanisms") or {}).items()
+        }
+        self._learned = {
+            str(key): dict(value) for key, value in (payload.get("learned_stages") or {}).items()
+        }
+        self._learned_cache = {}
         self.discovery_log = [dict(row) for row in (payload.get("discovery_log") or [])]
         self._stages = {}
         for name, record in (payload.get("admissions") or {}).items():
