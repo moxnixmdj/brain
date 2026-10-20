@@ -12,15 +12,15 @@ receipt, not a terminal claim, and not a capability grant.
 | Living agent | `canonical/runtime/living_agent_v1.py` | Real POSIX computer surface, one-shot skill chunking, canary-based drift detection and repair, word learning, impasse tracking, self-directed practice, consolidating memory, snapshot/restore. |
 | Shell synthesis | `canonical/runtime/shell_synthesis_v1.py` | Learns a stdin→stdout pipeline from (input, expected output) examples: typed beam search over 20 real stages, exact interpreter ordering, real-shell verification. |
 | Benchmark | `canonical/runtime/living_agent_benchmark_v1.py` | Twelve spreadsheet transforms with independently written oracles, plus a projection of the repository's real file tree. |
-| Acceptance | `tests/test_living_agent_v1.py` | 130 tests / 183 subtests. Real processes, real files, exact byte equality. No mocks. |
+| Acceptance | `tests/test_living_agent_v1.py` | 130 tests / 185 subtests. Real processes, real files, exact byte equality. No mocks. |
 | Discovery | `canonical/runtime/living_discovery_v1.py` | Reads what this machine says it can do (`tool --help`, the tool's own definition), turns a goal sentence into an exact expected output, and proves a real command against it before admitting it. |
 | Growth measurement | `canonical/runtime/living_agent_growth_v1.py` | Acquires four real skills at runtime and replays them on three untouched real directories. |
 
 ## Measured results
 
-A twenty-one-request battery (`HeldOutBatteryTests`) teaches each request on two
+A twenty-three-request battery (`HeldOutBatteryTests`) teaches each request on two
 files and answers a third that the search never saw; every expected output is
-computed by an independent implementation in the test file.  All twenty-one are
+computed by an independent implementation in the test file.  All twenty-three are
 byte-exact, including four that used to be admitted as a plausible-looking
 wrong answer: a positional `tail` standing in for a word filter, a reversed
 lexical sort standing in for a numeric one, a `tail -n +2` standing in for a
@@ -441,6 +441,22 @@ candidate as evidence, and the exact bytes still decide.  This is how
 ever saying "numerically" or "descending" -- and how "sort the rows by the
 second column, numerically" keeps its stated `-g` when the examples agree.
 
+**A class of characters, not a character.**  "Replace every digit with a
+star" names no literal on either side: `digit` is a set, `star` is a name, and
+no option of any one tool mentions either.  Two pieces of vocabulary make it
+answerable -- the names of character classes (`digit` is `0-9`, `letter` is
+`a-zA-Z`, and so on) and the names of punctuation (`star` is `*`, `dot` is
+`.`) -- and the stage they build is `tr '0-9' '*'`, proved on real bytes like
+everything else.  The set expansion is implemented in the interpreter too, so
+ranges and `tr`'s padding rule agree with the shell; a disagreement there would
+be caught by the same check that caught the `sed` rotation.
+
+The vocabulary has to be words that *cannot* be read as anything else.  An
+earlier version also mapped `at` to `@`, which made the sentence "fold each
+line at 40 characters" name a character it never mentioned, and broke a
+capability that had worked for weeks.  A word earns a place in that table only
+if it has no ordinary English reading.
+
 **A transformation the evidence states, that no tool documents.**  "Print
 the lines in reverse order" used to cost nineteen processes: the examples
 determine the answer completely, but the only way to produce it was to page
@@ -541,6 +557,8 @@ Measured on this machine, same machine, same day:
 | reverse the lines of a named file (discovered `tac`) | 3 | 0.09 s |
 | print the lines in reverse order, read off the examples (`tac`) | 2 | 0.03 s |
 | shift every line up by one, no tool documents it (`awk`) | 2 | 0.03 s |
+| replace every digit with a star (`tr '0-9' '*'`) | 2 | 0.13 s |
+| count the characters (`wc -m`) | 2 | 0.03 s |
 | remove the header line (`tail -n +2`) | 2 | 0.07 s |
 | translate commas to semicolons (both named) | 3 | 0.05 s |
 | lines that contain a given word | 2 | 0.07 s |

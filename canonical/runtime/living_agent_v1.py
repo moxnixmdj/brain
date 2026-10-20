@@ -626,6 +626,21 @@ _SEPARATOR_WORDS = {
     "semicolon": ";", "semicolons": ";",
     "colon": ":", "colons": ":",
     "space": " ", "spaces": " ", "blank": " ", "blanks": " ",
+    # Punctuation has names too, and a request that says "with a star" names
+    # `*` just as exactly as one that says "with a comma" names `,`.  Without
+    # these, a class translation such as "replace every digit with a star" has
+    # nothing to translate *into*.
+    "star": "*", "stars": "*", "asterisk": "*", "asterisks": "*",
+    "dot": ".", "dots": ".", "period": ".", "periods": ".",
+    "dash": "-", "dashes": "-", "hyphen": "-", "hyphens": "-", "minus": "-",
+    "underscore": "_", "underscores": "_",
+    "slash": "/", "slashes": "/", "hash": "#", "pound": "#",
+    "percent": "%", "tilde": "~", "caret": "^",
+    "exclamation": "!",
+    # Words that are also ordinary English are deliberately absent: "at" is a
+    # preposition in "fold each line at 40 characters", and taking it for `@`
+    # made every sentence containing it name a character it never mentioned.
+    # A name earns its place here only if it cannot be read as anything else.
 }
 
 
@@ -656,6 +671,25 @@ _EDGE_CHARS = re.compile(
     r"\s+from\s+the\s+(start|beginning|end)\b"
 )
 _CHARACTER_NOUNS = ("characters", "character", "chars", "letters", "bytes", "byte")
+
+# Names of *sets* of characters, and the sets they name.  "Replace every digit
+# with a star" names no character at all -- it names a class -- and `tr` takes
+# exactly such a set.  This is vocabulary of the same kind as knowing that
+# "comma" is `,`: a fixed, checkable meaning that the bytes still have to
+# confirm.
+_CHARACTER_CLASSES = {
+    "digit": "0-9", "digits": "0-9", "number": "0-9", "numbers": "0-9",
+    "letter": "a-zA-Z", "letters": "a-zA-Z",
+    "lowercase": "a-z", "lowercaseletter": "a-z", "lowercaseletters": "a-z",
+    "uppercase": "A-Z", "uppercaseletter": "A-Z", "uppercaseletters": "A-Z",
+    "space": " ", "spaces": " ", "blank": " ", "blanks": " ", "whitespace": " ",
+    "vowel": "aeiou", "vowels": "aeiou",
+    "consonant": "bcdfghjklmnpqrstvwxyz", "consonants": "bcdfghjklmnpqrstvwxyz",
+}
+_REPLACE_CLASS = re.compile(
+    r"\b(?:replace|change|turn|translate)\s+(?:every|each|all\s+(?:the\s+)?)?"
+    r"\s*([a-z]+)\s+(?:with|by|into|to)\s+(?:a\s+|an\s+|the\s+)?([a-z]+)\b"
+)
 # What a request *counts*, when it says so: the noun is the meaning, and every
 # spelling the machine can express that meaning with counts as a match.  A
 # single `wc -l` was standing in for all counting; "the number of characters in
@@ -664,6 +698,39 @@ _COUNT_UNIT = re.compile(
     r"\b(?:count|counts|number\s+of|how\s+many)\b[^.\n]*?\b"
     r"(characters|character|chars|letters|bytes|byte|words|word|lines|line|values)\b"
 )
+
+
+def _expand_class(specification: str) -> list[str]:
+    """The characters a `tr` set names: ranges, and literal characters.
+
+    `tr` takes sets, not just literals -- `0-9`, `a-z`, and a bare `-` at the
+    end.  The interpreter has to expand them the same way POSIX does or the two
+    halves of the verification would disagree on exactly the interesting cases.
+    """
+    out: list[str] = []
+    index = 0
+    while index < len(specification):
+        if index + 2 < len(specification) and specification[index + 1] == "-":
+            low, high = specification[index], specification[index + 2]
+            out.extend(chr(code) for code in range(ord(low), ord(high) + 1))
+            index += 3
+        else:
+            out.append(specification[index])
+            index += 1
+    return out
+
+
+def _translate_sets(text: str, source: str, target: str) -> str:
+    """`tr SOURCE TARGET`, byte for byte, with the padding rule tr uses."""
+    source_chars = _expand_class(source)
+    target_chars = _expand_class(target)
+    if not source_chars or not target_chars:
+        return text
+    mapping = {
+        char: target_chars[index] if index < len(target_chars) else target_chars[-1]
+        for index, char in enumerate(source_chars)
+    }
+    return "".join(mapping.get(char, char) for char in text)
 
 
 def _requested_operations(goal: str) -> list[tuple[str, str, str]]:
@@ -2229,6 +2296,28 @@ class LivingAgent:
         stages: list[Any] = []
 
         counting = _COUNT_UNIT.search(lowered)
+        if counting and counting.group(1) in {
+            "characters", "character", "chars", "bytes", "byte"
+        } and not (
+            "each line" in lowered or "per line" in lowered
+        ) and re.search(r"\b(count|counts|how many|number of)\b", lowered) and not re.search(
+            r"\b(distinct|unique)\b", lowered
+        ):
+            # `wc -m` counts characters; `wc -c` counts bytes.  They agree on
+            # ASCII and disagree everywhere else, so the noun in the sentence
+            # chooses between them and neither is a stand-in for the other.
+            units = "bytes" if counting.group(1) in {"bytes", "byte"} else "characters"
+            shell = "wc -c" if units == "bytes" else "wc -m"
+            stages.append(
+                synthesis.Stage(
+                    shell,
+                    synthesis.LINES,
+                    synthesis.COUNT,
+                    (lambda text: str(len(text)) + "\n")
+                    if shell == "wc -m"
+                    else (lambda text: str(len(text.encode("utf-8"))) + "\n"),
+                )
+            )
         if counting and counting.group(1) in {"words", "word"} and not (
             "each line" in lowered or "per line" in lowered
         ) and re.search(r"\b(count|counts|how many|number of)\b", lowered) and not re.search(
@@ -2262,6 +2351,35 @@ class LivingAgent:
                     ),
                 )
             )
+        # A class of characters translated into another class or character:
+        # `tr '0-9' '*'`.  Both sides are read from the sentence; the shell
+        # decides whether the reading was right.
+        if "replace" in lowered or "change" in lowered or "turn" in lowered:
+            match = _REPLACE_CLASS.search(lowered)
+            if match:
+                source_set = _CHARACTER_CLASSES.get(match.group(1))
+                target_words = cls._named_characters(match.group(2))
+                target_set = _CHARACTER_CLASSES.get(match.group(2))
+                if source_set and target_words:
+                    replacement = target_words[0]
+                    stages.append(
+                        synthesis.Stage(
+                            f"tr '{source_set}' '{replacement}'",
+                            synthesis.TEXT,
+                            synthesis.TEXT,
+                            lambda text, a=source_set, b=replacement: _translate_sets(text, a, b),
+                        )
+                    )
+                elif source_set and target_set:
+                    stages.append(
+                        synthesis.Stage(
+                            f"tr '{source_set}' '{target_set}'",
+                            synthesis.TEXT,
+                            synthesis.TEXT,
+                            lambda text, a=source_set, b=target_set: _translate_sets(text, a, b),
+                        )
+                    )
+
         length = cls._LINE_LENGTH.search(lowered)
         if length and ("each line" in lowered or "per line" in lowered):
             stages.append(

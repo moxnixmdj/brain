@@ -3010,6 +3010,27 @@ class HeldOutBatteryTests(unittest.TestCase):
                 lambda text: "".join(line + "\n" for line in reversed(text.splitlines())),
             ),
             (
+                # A *class* of characters, not a named one: nothing in the
+                # sentence is a literal `*`, and no option of any single tool
+                # says "digit".  The pair is `tr '0-9' '*'`, and the held-out
+                # file has digits in positions the two taught files never had.
+                "replace every digit with a star",
+                "a1b\nc2d\n",
+                "e3f\n",
+                "g4h\ni5j\nno digits here\n",
+                lambda text: "".join(
+                    "".join("*" if character.isdigit() else character for character in line) + "\n"
+                    for line in text.splitlines()
+                ),
+            ),
+            (
+                "count the characters",
+                "abc\nde\n",
+                "xyz\n",
+                "a longer line here\nand another\n",
+                lambda text: str(len(text)) + "\n",
+            ),
+            (
                 "show the lines that end with z",
                 "buzz\ncat\nfizz\n",
                 "zebra\nquiz\n",
