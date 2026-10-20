@@ -872,12 +872,96 @@ def _content_token(goal: str) -> tuple[str, bool] | None:
     words = re.findall(r"[A-Za-z0-9_'-]+", rest)
     for word in words:
         cleaned = word.strip("'\"")
+        # "The lines that contain a number" names a *class* of characters, not
+        # the literal word "number".  Reading it as a literal made the request
+        # contradict its own examples, which is worse than not reading it.
+        if cleaned in _CHARACTER_CLASSES:
+            return None
         if cleaned and cleaned not in _STOP and cleaned not in {
             "the", "a", "an", "any", "some", "word", "words", "text", "string",
             "line", "lines", "that", "which", "it", "this", "these", "those",
             "only", "just", "all",
         }:
             return cleaned, negated
+    return None
+
+
+_SUBSTITUTE = re.compile(
+    r"\b(?:replace|change|turn)\s+(?:every|each|all(?:\s+the)?)?\s*"
+    r"(?:occurrences?\s+of\s+)?(?:the\s+word\s+|the\s+text\s+|the\s+string\s+)?"
+    r"[\"']?([A-Za-z0-9_./@+-]+)[\"']?\s+(?:with|by|into|to)\s+"
+    r"(?:the\s+word\s+|the\s+text\s+)?[\"']?([A-Za-z0-9_./@+-]*)[\"']?"
+)
+_REMOVE_WORD = re.compile(
+    r"\b(?:remove|delete|drop|strip)\s+(?:every|each|all(?:\s+the)?)?\s*"
+    r"(?:occurrences?\s+of\s+)?(?:the\s+word\s+|the\s+text\s+|the\s+string\s+)?"
+    r"[\"']?([A-Za-z0-9_./@+-]+)[\"']?\s*(?:from\s+(?:every|each|all)\s+lines?\b|$)"
+)
+
+
+def _sed_literal(value: str) -> str:
+    """A literal string read as itself by sed's basic regular expressions.
+
+    The words of a request are data, never syntax: a request that says "replace
+    . with a comma" means a full stop, not "any character".  Slash is escaped
+    because it delimits the expression, and `&` because it means "the match" in
+    the replacement.
+    """
+    out = []
+    for character in value:
+        if character in "\\.*[]^$/&":
+            out.append("\\" + character)
+        else:
+            out.append(character)
+    return "".join(out)
+
+
+def _substitution(goal: str) -> tuple[str, str] | None:
+    """The two strings a replacement sentence names, if it names them."""
+    text = goal.lower()
+    if any(word in _SEPARATOR_WORDS for word in re.findall(r"[a-z]+", text)):
+        return None  # a character translation, not a word substitution
+    found = _SUBSTITUTE.search(text)
+    if found:
+        return found.group(1), found.group(2)
+    removed = _REMOVE_WORD.search(text)
+    if removed:
+        return removed.group(1), ""
+    return None
+
+
+_PER_LINE_COUNT = re.compile(
+    r"\b(?:count|counts)\b[^.]*\b(?:how\s+many\s+times|times)\b|"
+    r"\bhow\s+many\s+times\b[^.]*\b(?:occur|occurs|appear|appears|repeat|repeats)\b"
+)
+_DUPLICATES = re.compile(
+    r"\b(?:appear|appears|occur|occurs|repeat|repeats)\b"
+    r"[^.]*\b(?:more\s+than\s+once|twice|again|several\s+times)\b"
+    r"|\b(?:show|list|keep|find|display)\b[^.]*\b(?:only\s+)?"
+    r"(?:duplicate|duplicates|repeated)\s+(?:lines?|rows?)\b"
+)
+
+
+def _class_filter(goal: str) -> tuple[str, str] | None:
+    """The character class a filter sentence names, and its grep spelling.
+
+    "Show the lines that contain a number" is a statement about characters,
+    not about the word "number": the test is a class membership, and the
+    documented spelling of a class is a bracket expression.
+    """
+    text = goal.lower()
+    if _SUBSTITUTE.search(text) or _REMOVE_WORD.search(text):
+        return None  # a translation, not a selection
+    if not _CONTAINS.search(text):
+        return None
+    for word in re.findall(r"[a-z]+", text):
+        character_class = _CHARACTER_CLASSES.get(word)
+        if character_class:
+            if character_class == " ":
+                # `\s` is a GNU extension; a bracket expression is POSIX and
+                # says the same thing on every grep.
+                return character_class, "[[:space:]]"
+            return character_class, f"[{character_class}]"
     return None
 
 
@@ -926,6 +1010,23 @@ def _requested_operations(goal: str) -> list[tuple[str, str, str]]:
             requested.append((f"first {count}", rf"\bhead\s+-n\s*\+?{count}\b", role))
         else:
             requested.append((f"last {count}", rf"\btail\s+-n\s*{count}\b", role))
+    substitution = _substitution(goal)
+    if substitution is not None:
+        source, target = substitution
+        word = re.escape(source)
+        spelled = rf"\b(?:sed|perl|awk)\b[^|]*{word}"
+        requested.append(
+            (
+                f"every {source} replaced by {target}" if target else f"every {source} removed",
+                spelled,
+                "any",
+            )
+        )
+    character_class = _class_filter(goal)
+    if character_class is not None and _AFFIX_VERB.search(text) is None:
+        _characters, spelled = character_class
+        label = "the lines that contain a number" if _characters == "0-9" else "a character class"
+        requested.append((label if not _negated(goal) else "a negated character class", spelled, "any"))
     content = _content_token(goal)
     if content is not None and _AFFIX_VERB.search(text) is None:
         token, negated = content
@@ -962,7 +1063,13 @@ def _requested_operations(goal: str) -> list[tuple[str, str, str]]:
         # request says 1.  The column is named, so the column is what is made
         # distinct.
         requested.append(("distinct values", r"\bsort\s+-u\b|\buniq\b", "any"))
-    counted = _COUNT_UNIT.search(text)
+    if _PER_LINE_COUNT.search(text):
+        # "Count how many times each line occurs" is a histogram: one number
+        # per *distinct* line, not the number of rows.
+        requested.append(("how many times each line occurs", r"\buniq\s+-c\b", "any"))
+    elif _DUPLICATES.search(text):
+        requested.append(("the lines that occur more than once", r"\buniq\s+-d\b", "any"))
+    counted = _COUNT_UNIT.search(text) if not _PER_LINE_COUNT.search(text) else None
     distinct_requested = re.search(r"\b(distinct|unique)\b", text) is not None
     if re.search(r"\b(count|counts|how many|number of)\b", text):
         # "How many distinct words" counts a *set*: once the stream has one
@@ -982,7 +1089,11 @@ def _requested_operations(goal: str) -> list[tuple[str, str, str]]:
                 requested.append(("a count of the words in each line", r"\bawk\b[^|]*\bNF\b", "any"))
             else:
                 requested.append(("a count of words", r"\bwc\s+-w\b", "any"))
-        else:
+        elif not _PER_LINE_COUNT.search(text):
+            # A histogram counts *each line's occurrences* -- `uniq -c` already
+            # puts a number on every line it emits.  Appending `wc -l` to that
+            # pipeline turns the answer into the number of distinct lines,
+            # which is a different question.
             requested.append(("a count", r"\bwc\s+-l\b", "any"))
     return requested
 
@@ -3550,6 +3661,21 @@ class LivingAgent:
         # hypothesis tried instead of something the option space has to stumble
         # on; the documented reading of `--invert-match` remains as the
         # fallback for any tool the sentence describes in other words.
+        if _PER_LINE_COUNT.search(goal.lower()):
+            # `uniq -c` needs equal lines adjacent, so the order is part of the
+            # construction even though the sentence does not mention it.
+            stages.extend(["sort", "uniq -c"])
+        elif _DUPLICATES.search(goal.lower()):
+            stages.extend(["sort", "uniq -d"])
+        substitution = _substitution(goal)
+        if substitution is not None:
+            source, target = substitution
+            stages.append(f"sed 's/{_sed_literal(source)}/{_sed_literal(target)}/g'")
+        classed = _class_filter(goal)
+        if classed is not None and _AFFIX_VERB.search(goal.lower()) is None:
+            characters, spelled = classed
+            flag = "-v " if _negated(goal) else ""
+            stages.append(f"grep {flag}{shlex.quote(spelled)}")
         content = _content_token(goal)
         if content is not None and _AFFIX_VERB.search(goal.lower()) is None:
             flag = "-v " if content[1] else ""
@@ -3715,6 +3841,14 @@ class LivingAgent:
             token = found.group(1).strip("'\"")
             if token:
                 return polarised(found.start(), lambda line, t=token: line.endswith(t)), "suffix"
+        classed = _class_filter(goal)
+        if classed is not None:
+            characters, _spelling = classed
+            pattern = re.compile("[" + characters + "]")
+            return polarised(
+                lowered.index("contain") if "contain" in lowered else 0,
+                lambda line, p=pattern: bool(p.search(line)),
+            ), "class"
         if self._CONTAINMENT.search(lowered):
             # The word itself is supplied by the caller (it is the word of the
             # sentence that the data actually contains); what is decided here

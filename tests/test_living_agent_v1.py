@@ -3350,6 +3350,116 @@ class ReadingWhatTheSentenceDoesNotHaveTests(unittest.TestCase):
                 agent.solve(smallest, bindings={"path": name})["stdout"], expected, name
             )
 
+    def test_a_class_word_names_a_class_not_a_word(self) -> None:
+        # "Contain a number" is a statement about characters.  Read as a
+        # literal word it made the request contradict its own examples; read as
+        # a class it is a filter that a held-out file can settle -- including
+        # one that says "number" without containing one.
+        agent = self._agent()
+        self._write(agent, "c1.dat", "abc\nx1y\n")
+        self._write(agent, "c2.dat", "plain\n9 lives\n")
+        goal = "show the lines that contain a number"
+        outcome = agent.acquire(goal, [("c1.dat", "x1y\n"), ("c2.dat", "9 lives\n")])
+        self.assertLessEqual(outcome["commands_run"], 4)
+        for name, text in (
+            ("h1.dat", "none here\n7 up\n"),
+            ("h2.dat", "no digits at all\n"),
+            ("h3.dat", "the number three is written out\n"),
+            ("h4.dat", "4\n"),
+        ):
+            self._write(agent, name, text)
+            expected = "".join(
+                line + "\n" for line in text.splitlines()
+                if any(character.isdigit() for character in line)
+            )
+            self.assertEqual(
+                agent.solve(goal, bindings={"path": name})["stdout"], expected, name
+            )
+
+    def test_a_substitution_replaces_the_text_the_sentence_names(self) -> None:
+        agent = self._agent()
+        self._write(agent, "s1.dat", "the cat sat\nno cat\n")
+        self._write(agent, "s2.dat", "a cat here\n")
+        goal = "replace every occurrence of cat with dog"
+        outcome = agent.acquire(
+            goal, [("s1.dat", "the dog sat\nno dog\n"), ("s2.dat", "a dog here\n")]
+        )
+        self.assertLessEqual(outcome["commands_run"], 4)
+        self.assertIn("cat", " ".join(outcome["stages"]))
+        for name, text in (
+            ("h1.dat", "cat\nconcatenate\n"),
+            ("h2.dat", "nothing to change\n"),
+        ):
+            self._write(agent, name, text)
+            self.assertEqual(
+                agent.solve(goal, bindings={"path": name})["stdout"],
+                text.replace("cat", "dog"),
+                name,
+            )
+
+    def test_removing_a_word_is_a_substitution_with_nothing(self) -> None:
+        agent = self._agent()
+        self._write(agent, "r1.dat", "an error here\nclean\n")
+        self._write(agent, "r2.dat", "error error\n")
+        goal = "remove every occurrence of the word error"
+        outcome = agent.acquire(
+            goal, [("r1.dat", "an  here\nclean\n"), ("r2.dat", " \n")]
+        )
+        self.assertLessEqual(outcome["commands_run"], 4)
+        for name, text in (("h1.dat", "no such word\n"), ("h2.dat", "error\n")):
+            self._write(agent, name, text)
+            self.assertEqual(
+                agent.solve(goal, bindings={"path": name})["stdout"],
+                text.replace("error", ""),
+                name,
+            )
+
+    def test_a_histogram_counts_each_line_not_the_lines(self) -> None:
+        # The answer is not the number of rows: it is a number per distinct
+        # line.  A pipeline ending in `wc -l` would answer the other question
+        # and fit nothing here, and a bare `uniq` would lose the counts.
+        agent = self._agent()
+        self._write(agent, "c1.dat", "a\nb\na\na\n")
+        self._write(agent, "c2.dat", "x\ny\nx\n")
+        goal = "count how many times each line occurs"
+        outcome = agent.acquire(
+            goal,
+            [("c1.dat", "      3 a\n      1 b\n"), ("c2.dat", "      2 x\n      1 y\n")],
+        )
+        self.assertLessEqual(outcome["commands_run"], 4)
+        for name, text in (
+            ("h1.dat", "red\nblue\nred\n"),
+            ("h2.dat", "only\n"),
+        ):
+            self._write(agent, name, text)
+            counts: dict[str, int] = {}
+            for line in text.splitlines():
+                counts[line] = counts.get(line, 0) + 1
+            expected = "".join(f"{counts[k]:>7} {k}\n" for k in sorted(counts))
+            self.assertEqual(
+                agent.solve(goal, bindings={"path": name})["stdout"], expected, name
+            )
+
+    def test_a_line_that_occurs_more_than_once_is_not_every_line(self) -> None:
+        agent = self._agent()
+        self._write(agent, "d1.dat", "a\nb\na\n")
+        self._write(agent, "d2.dat", "x\ny\nx\n")
+        goal = "show only the lines that appear more than once"
+        outcome = agent.acquire(goal, [("d1.dat", "a\n"), ("d2.dat", "x\n")])
+        self.assertLessEqual(outcome["commands_run"], 4)
+        for name, text in (
+            ("h1.dat", "p\nq\np\nr\nr\n"),
+            ("h2.dat", "all different\n"),
+        ):
+            self._write(agent, name, text)
+            counts: dict[str, int] = {}
+            for line in text.splitlines():
+                counts[line] = counts.get(line, 0) + 1
+            expected = "".join(k + "\n" for k in sorted(counts) if counts[k] > 1)
+            self.assertEqual(
+                agent.solve(goal, bindings={"path": name})["stdout"], expected, name
+            )
+
     def test_memory_is_not_asked_a_question_it_cannot_answer(self) -> None:
         # After learning "contain error", a request about "warning" cannot be
         # answered by the remembered command: the pattern is a literal operand,

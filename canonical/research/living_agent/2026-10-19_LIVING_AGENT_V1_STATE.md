@@ -787,6 +787,29 @@ on a third file.  All four are readings, not new scripts:
   (or `head -n 1` for the smallest), and the ordering is numeric because over
   3, 10, 7 the lexical order puts 7 last.
 
+### Characters, words, and how often
+
+Four more readings, each a construction the sentence gives and the shell proves:
+
+* **A class word names a class.**  "Show the lines that contain a number" was
+  read as the literal word "number", which made the request contradict its own
+  examples -- worse than not reading it.  The word is now matched against the
+  class vocabulary, the predicate is membership (`[0-9]`, `[[:space:]]`), and
+  the spelling is the documented bracket expression.  A held-out file that says
+  "number" without containing one must not be selected.
+* **Substitution.**  "Replace every occurrence of cat with dog" and "remove the
+  word error" are the most common text operations on a computer and were not
+  expressible at all.  The two strings are read from the sentence and spelled
+  `sed 's/cat/dog/g'`, with the strings escaped so a request that names `.`
+  means a full stop.  Two runs.
+* **A histogram.**  "Count how many times each line occurs" is a number per
+  distinct line, not a number of rows; `sort | uniq -c`.  The generic count
+  reading is suppressed here, because appending `wc -l` would answer a
+  different question.  Two runs.
+* **Which duplicates.**  "Show the lines that appear more than once" selects
+  the repeats (`uniq -d`); "remove the duplicate lines" selects the unique
+  ones.  The verb decides, so the selection reading requires a selection verb.
+
 ### The request's construction, and what a run costs
 
 Trying the sentence's own pipeline first is only sound if it is cheap and
