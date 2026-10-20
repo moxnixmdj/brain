@@ -7,8 +7,8 @@ backup — **record findings in the repo, not in `/tmp`.**
 ## 1. Headline numbers
 
 ```
-cold, "how many unique lines"   355s -> 132.4s   (answer correct: 7)
-full suite, cold                631s -> 249s
+cold, "how many unique lines"   355s -> 50s      (answer correct: 7)
+full suite, cold                631s -> 158s
 warm                            0.01s
 ```
 
@@ -21,9 +21,40 @@ Each step, measured rather than guessed:
 277s  behavioural dedupe of pipeline tails
 132s  race: composition alongside the first sweep
  69s  rank candidates by meaning, not by how often they mention the words
+ 50s  cap the per-head budget inside the pipeline search
 ```
 
-Suite, cold: 631s -> 249s -> 184s.  Warm: 0.01s.  79 tests.
+Suite, cold: 631s -> 249s -> 184s -> 158s.  Warm: 0.01s.  80 tests.
+
+## 1b. Two numbers that did NOT move, and why that mattered
+
+Not everything measured is an improvement. Two changes were built,
+measured, and thrown away; both are recorded here so they are not
+rebuilt.
+
+**IDF weighting (rejected).** Generic words flood the ranking: "line"
+selects `grep diff objdump nm pr lto-dump`, "unique" selects `busctl`
+and the ImageMagick `convert` alongside `sort`. Weighting each word by
+how rare it is across the machine's manuals moved `sort` from 60th to
+**28th** — and the end-to-end question got no faster at all
+(69.2s -> 68.5s), because **rank was not the bottleneck.**
+
+Worse, it moved `wc` *backwards* on the ordinary counting questions
+(`lines` 16->19, `words` 3->5, `bytes` 34->51) and the full suite went
+**184s -> 346s**. One benchmark question does not outweigh 79.
+
+*Lesson: measure the suite, not the single hard query.*
+
+**Wave-level early stop (rejected).** Stopping the pair search at the
+first wave that finds a working pipeline is correct in principle — a
+verified pipeline is the answer, and the remaining candidates cannot
+make it more true. Measured, it earned **nothing**: 48.1s and 53.6s
+without it, 50.2s with it. The reason is instructive — the winning
+pipeline is found *late*, not early, so there is almost nothing left to
+skip. Both changes were reverted; only the head budget was kept.
+
+*A change that measures neutral is not a change that is free: it still
+has to be tested, and it narrows what the search returns.*
 
 ## 2. Profile before you optimise
 
@@ -136,9 +167,42 @@ wc    not in 120 -> 75      cat  2 -> 13
 cold  132.4s -> 69.2s
 ```
 
+## 7b. The budget that was right for one sweep is wrong for the other
+
+The pipeline search inherited `_PROGRAM_BUDGET = 20.0`. That number was
+tuned for a different shape of problem: in the single-program sweep one
+straggler stalls one wave of programs that all finished minutes ago, so
+the budget has to be generous enough for the slowest *useful* program on
+the machine.
+
+Inside the pipeline search the arithmetic is different. A whole wave
+finishes in the time one straggler was being allowed, so the head budget
+sets the pace for **every** wave.
+
+```
+sort alone, any budget   0.22s       four dead heads   0.89s
+compose  10 heads  21.04s  no hit
+compose  30 heads  20.86s  hit ['sort | wc']
+compose 100 heads  56.34s  hit ['sort | wc']   <- 70 heads wasted
+budget sweep:  2.0s -> no hit | 4.0s -> no hit | 8.0s -> hit | 20.0s -> hit
+```
+
+The floor is measured and it is not free to go lower. `sort` needs 0.22s
+alone but about **5s once 24 heads compete for the same cores**; at a 2s
+or 4s budget the pipeline is not found at all. `8.0s` finds it, `12.0s`
+finds it, `20.0s` finds it a quarter of a minute later.
+
+`_PIPE_HEAD_BUDGET = 12.0` — the cheapest number that keeps the answer.
+End to end: `60.8s / 69.2s` -> `48.1s / 53.6s` (~22%), same answer.
+
+The head records the budget it was actually given, so a caller asking
+for a minute a head can be shown to get twelve. Removing the cap fails
+the new test with `60.0 not less than or equal to 12.0`; dropping the
+constant to 4.0 fails it with `4.0 not greater than or equal to 8.0`.
+
 ## 8. Still wrong
 
-- **132s cold is not instant.** Reuse is 0.01s; a genuinely new kind of
+- **50s cold is not instant.** Reuse is 0.01s; a genuinely new kind of
   question still costs real discovery. No evidence → no learning.
 - Latent defect: a tier that finds survivors which then disagree on the
   real file leaves `survivors` non-empty, so **composition is skipped
@@ -150,7 +214,7 @@ cold  132.4s -> 69.2s
 ## 9. Commands
 
 ```bash
-python3 -m unittest canonical.tests.test_computer_env_v1      # 76 tests, ~250s cold
+python3 -m unittest canonical.tests.test_computer_env_v1      # 80 tests, ~160s cold
 rm -f /tmp/brain_query_probe_v1.json /tmp/brain_known_shapes_v1.json   # before cold runs
 ```
 
