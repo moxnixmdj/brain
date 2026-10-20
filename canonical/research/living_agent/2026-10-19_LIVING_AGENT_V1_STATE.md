@@ -12,7 +12,7 @@ receipt, not a terminal claim, and not a capability grant.
 | Living agent | `canonical/runtime/living_agent_v1.py` | Real POSIX computer surface, one-shot skill chunking, canary-based drift detection and repair, word learning, impasse tracking, self-directed practice, consolidating memory, snapshot/restore. |
 | Shell synthesis | `canonical/runtime/shell_synthesis_v1.py` | Learns a stdin→stdout pipeline from (input, expected output) examples: typed beam search over 20 real stages, exact interpreter ordering, real-shell verification. |
 | Benchmark | `canonical/runtime/living_agent_benchmark_v1.py` | Twelve spreadsheet transforms with independently written oracles, plus a projection of the repository's real file tree. |
-| Acceptance | `tests/test_living_agent_v1.py` | 114 tests / 162 subtests. Real processes, real files, exact byte equality. No mocks. |
+| Acceptance | `tests/test_living_agent_v1.py` | 116 tests / 162 subtests. Real processes, real files, exact byte equality. No mocks. |
 | Discovery | `canonical/runtime/living_discovery_v1.py` | Reads what this machine says it can do (`tool --help`, the tool's own definition), turns a goal sentence into an exact expected output, and proves a real command against it before admitting it. |
 | Growth measurement | `canonical/runtime/living_agent_growth_v1.py` | Acquires four real skills at runtime and replays them on three untouched real directories. |
 
@@ -28,7 +28,7 @@ filter_sort    20/20    raise          20/20    group_sum    20/20
 month_counts   20/20    unit_price     20/20    top2         20/20
 domains        20/20    dedupe         20/20    active       20/20
 tax            20/20    pct            20/20    concat       20/20
-TOTAL 240/240, median 0.259 s per family, max 4.9 s
+TOTAL 240/240, median 0.21 s per family, max 2.6 s
 ```
 
 A wider robustness sweep — 24 demonstration seeds × 12 families × 10 held-out
@@ -438,7 +438,7 @@ Measured on this machine, same machine, same day:
 | the same kind, column 3, semicolon, keep three | 4 | 0.04 s |
 | the same words on space-separated data | 4 | 0.04 s |
 | a different kind that needs the earned stage | 4 | 0.04 s |
-| the same words after a snapshot and restart | 4 | 0.02 s |
+| the same words after a snapshot and restart (new data) | 1 | 0.01 s |
 
 The first-time cost fell from 52 runs to 11 without changing a line of the
 search space, by ordering the same candidates differently.  Four priors, in
@@ -448,6 +448,26 @@ one (a position *and* the separator the data contains); among equals the fewer
 arguments; then how much of the tool's own documentation the sentence uses.
 The search stops at the first confirmed pipeline instead of fingerprinting
 every candidate first, so an unexamined candidate costs nothing.
+
+A stated manner is a specification, not decoration.  "Sort them numerically"
+is not satisfied by a sort that happens to fit the examples: on three rows a
+truncated reverse sort can agree with the numeric order and disagree on the
+fourth, which is how a confidently wrong pipeline gets admitted.  A manner
+adverb is now read against the help text of the tool actually in the pipeline
+(`-n, --numeric-sort` is sort's own definition of "numerically"; the same
+letter in `ls` means something else), the resulting switch joins the argument
+bundles as *evidence* rather than as a guess, and evidence now sorts before
+parsimony so that a three-flag bundle implementing a word of the request
+outranks a shorter bundle that ignores it.  The switch is load-bearing in the
+test: removing it from the admitted command turns the numeric answer back into
+the text order.
+
+Recall after a restart used to report a different schema from first-time
+learning -- it had no `commands_run` at all, so an instant answer looked like an
+answer that measured nothing.  Every outcome now carries the same fields.  A
+solution learned by an 11-run search and then restored from a snapshot answers
+the same request on data it has never seen in **1 run, 0.013 s**, and the count
+is the real count.
 
 Naming a tool also had to open the recall gate: `fold`'s own summary is "Wrap
 input lines in each FILE, writing to standard output", so a sentence about

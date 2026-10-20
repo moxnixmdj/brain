@@ -1211,6 +1211,13 @@ class LivingAgent:
                 ranked_entry_id=entry_id,
             )
             outcome["reused"] = True
+            # Every outcome reports the same schema: what was learned, what ran,
+            # and how long it took.  A memorised answer that skips the search
+            # still ran a command, and saying so is what lets a caller compare
+            # instant recall with first-time search on equal terms.
+            outcome["learned"] = False
+            outcome["source"] = "reused"
+            outcome["commands_run"] = max(1, self._runs - runs_before)
             outcome["seconds"] = round(time.perf_counter() - started, 4)
             return outcome
 
@@ -1492,6 +1499,18 @@ class LivingAgent:
             return sum(1 for part in form if part.startswith("-"))
 
         atoms = self._argument_atoms(goal, doc, sources)
+        # A qualifier the sentence states ("numerically") and the tool itself
+        # documents ("-n, --numeric-sort") is not a guess: it is the option
+        # that implements a word of the request.  It joins the bundles below as
+        # evidence, because a sort that ignores "numerically" answers a
+        # different question.
+        qualifiers: list[str] = []
+        for word in sorted(set(re.findall(r"[a-z]+", goal.lower()))):
+            if len(word) >= 6 and word.endswith("ly"):
+                for flag in self._qualifier_flags(word, doc):
+                    if flag not in qualifiers:
+                        qualifiers.append(flag)
+
         forms: list[tuple[int, list[str]]] = [(0, [])]
         for score, tokens, _placeholder in atoms:
             forms.append((score, list(tokens)))
@@ -1508,10 +1527,26 @@ class LivingAgent:
                 # extends: `fold -w 40 -b` is not stronger than `fold -w 40`.
                 forms.append(
                     (
-                        sum(atom[0] for atom in (atoms[first], atoms[second]) if atom[0] >= 2),
+                        # Only *grounded* evidence raises a bundle's rank:
+                        # an enum value the sentence never mentions scores 2
+                        # and must not make `nl -b a` look weaker than
+                        # `nl -b a -n rn`, which fits the same bytes with an
+                        # option nobody asked for.
+                        sum(atom[0] for atom in (atoms[first], atoms[second]) if atom[0] >= 3),
                         list(atoms[first][1]) + list(atoms[second][1]),
                     )
                 )
+        if qualifiers:
+            # Every bundle this tool could offer is also offered with the
+            # qualifier attached.  It outranks the bare bundle by exactly the
+            # weight of the word it implements.
+            expanded: list[tuple[int, list[str]]] = []
+            for score, form in forms:
+                expanded.append((score, form))
+                for flag in qualifiers[:2]:
+                    if flag not in form:
+                        expanded.append((score + 2, [*form, flag]))
+            forms = expanded
         unique: list[tuple[int, list[str]]] = []
         seen: set[tuple[str, ...]] = set()
         for score, form in forms:
@@ -1527,15 +1562,19 @@ class LivingAgent:
         # Among equally strong bundles, the shortest spelling wins: `-d ,` before
         # `--output-delimiter ,`, and `-k 2 -t ,` before `-k 2 --field-separator ,`
         # -- the same option, said the way a person would say it.
+        # Evidence decides first, then parsimony.  A bundle that implements a
+        # word of the request ("-n" for "numerically") carries more evidence
+        # than a shorter one that does not, and ordering by argument count
+        # first would bury it behind every one-flag form on the machine.
         unique.sort(
             key=lambda row: (
-                cls_flags(row[1]),
                 -row[0],
+                cls_flags(row[1]),
                 len(" ".join(row[1])),
                 row[1],
             )
         )
-        strong = [row for row in unique if row[0] >= 2][:8]
+        strong = [row for row in unique if row[0] >= 2][:12]
         weak = [row for row in unique if row[0] < 2][:2]
         return strong + weak
 
@@ -2111,6 +2150,74 @@ class LivingAgent:
             return False  # not a command this computer will execute
         return self._depends_only_on_named_column(goal, pipeline, examples) is not False
 
+    @staticmethod
+    def _word_matches(left: str, right: str) -> bool:
+        """Do two words name the same thing up to inflection?
+
+        "numerically" and "numeric" do; "country" and "count" do not, because
+        the shorter word has to be at least four letters for a prefix to mean
+        anything.
+        """
+        if left == right:
+            return True
+        short, long = (left, right) if len(left) <= len(right) else (right, left)
+        return len(short) >= 4 and long.startswith(short)
+
+    @classmethod
+    def _qualifier_flags(cls, word: str, doc: discovery.ToolDoc) -> list[str]:
+        """Switches of *this* tool whose own wording explains a qualifier.
+
+        "numerically" is explained by sort's `-n, --numeric-sort` ("compare
+        according to string numerical value").  Whatever a *different* tool
+        means by `-n` -- ls's numeric owner IDs, split's numeric suffixes -- is
+        not an explanation of this sentence, so only the tool that will run is
+        consulted.
+        """
+        flags: list[str] = []
+        for option in doc.options:
+            if option.argument:
+                continue  # a switch, not something that takes a value
+            spelling = option.short or option.long
+            if not spelling:
+                continue
+            words = set(discovery._words(option.description))
+            words |= set(discovery._words(option.long.lstrip("-").replace("-", " ")))
+            if any(cls._word_matches(word, candidate) for candidate in words):
+                flags.append(spelling)
+        return flags
+
+    def _unexplained_modifiers(self, goal: str, stages: Sequence[str]) -> list[str]:
+        """Qualifiers the request states that the pipeline does not implement.
+
+        "Sort the rows by the second column, numerically" is not answered by a
+        lexical sort that happens to fit two files: on the third file it is
+        wrong, and the word said so all along.  A manner adverb that the
+        documentation of a tool *in the pipeline* explains must appear as that
+        tool's option; otherwise part of the request has been ignored, which is
+        how a system ends up confidently wrong.
+        """
+        missing: list[str] = []
+        for word in sorted(set(re.findall(r"[a-z]+", goal.lower()))):
+            if len(word) < 6 or not word.endswith("ly"):
+                continue  # manner adverbs only: qualifiers about *how*
+            explained = False
+            relevant = False
+            for stage in stages:
+                parts = shlex.split(stage)
+                doc = self.vocabulary.doc(parts[0]) if parts else None
+                if doc is None:
+                    continue
+                flags = self._qualifier_flags(word, doc)
+                if not flags:
+                    continue
+                relevant = True
+                if any(flag in parts for flag in flags):
+                    explained = True
+                    break
+            if relevant and not explained:
+                missing.append(word)
+        return missing
+
     def _unexplained_structure(self, goal: str, stages: Sequence[str]) -> list[str]:
         """What the request says about the shape of the data that the stages ignore.
 
@@ -2204,6 +2311,7 @@ class LivingAgent:
         """
         text = " ".join(stages)
         missing = self._unexplained_structure(goal, stages)
+        missing.extend(self._unexplained_modifiers(goal, stages))
         first = stages[0] if stages else ""
         last = stages[-1] if stages else ""
         for label, pattern, role in _requested_operations(goal):

@@ -1824,6 +1824,48 @@ class DocumentedArgumentTests(unittest.TestCase):
         self.assertEqual(outcome["argv"], ["-b", "a"])
         self.assertEqual(outcome["stdout"], all_lines(first))
 
+    def test_a_stated_manner_is_implemented_not_merely_not_contradicted(self) -> None:
+        # "numerically" is a specification, not decoration.  On these files the
+        # lexical order (1, 10, 2) and the numeric order (1, 2, 10) disagree, so
+        # a sort that ignores the word answers a different question -- and a
+        # search that stopped at the first fitting pipeline used to admit one.
+        # The option that implements the word is `-n`, and the only place that
+        # connection exists is sort's own help text.
+        agent = self._agent()
+        first = "a,10\nb,2\nc,1\n"
+        second = "d,20\ne,3\n"
+        self._write(agent, "n1.csv", first)
+        self._write(agent, "n2.csv", second)
+        goal = "sort the rows by the second column numerically, comma separated"
+        outcome = agent.acquire(
+            goal, [("n1.csv", "c,1\nb,2\na,10\n"), ("n2.csv", "e,3\nd,20\n")]
+        )
+        self.assertNotIn("sort -r", outcome["stages"])
+        self.assertLessEqual(outcome["commands_run"], 16)
+        # Held-out data the search never saw, with an order that no accidental
+        # coincidence can reproduce: 3, 20, 100 is neither the file order nor
+        # the lexical order.
+        self._write(agent, "n3.csv", "x,100\ny,20\nz,3\n")
+        answer = agent.solve(goal, bindings={"path": "n3.csv"})
+        self.assertEqual(answer["stdout"], "z,3\ny,20\nx,100\n")
+        # The option is load-bearing: remove it and the same command gives the
+        # text order, which is exactly what the sentence ruled out.
+        bare = answer["command"].replace(" -g", "").replace(" -n", "")
+        self.assertNotEqual(agent.computer.run(bare).stdout, answer["stdout"])
+        self.assertEqual(agent.computer.run(bare).stdout, "x,100\ny,20\nz,3\n")
+
+        # The same request without the manner adverb must not smuggle the
+        # option in: the word is what justified it.
+        plain_agent = self._agent()
+        self._write(plain_agent, "n1.csv", first)
+        self._write(plain_agent, "n2.csv", "d,20\ne,3\na,10\n")
+        plain = plain_agent.acquire(
+            "sort the rows by the second column, comma separated",
+            [("n1.csv", "a,10\nb,2\nc,1\n"), ("n2.csv", "a,10\nd,20\ne,3\n")],
+        )
+        self.assertNotIn("-n", plain["argv"])
+        self.assertNotIn("-g", plain["argv"])
+
     def test_a_failed_acquisition_is_a_remembered_gap_one_word_closes(self) -> None:
         # Neither the pipeline vocabulary nor anything the machine documents
         # can produce these bytes.  The failure is not a dead end: it records
@@ -2139,6 +2181,39 @@ class MemoryScaleTests(unittest.TestCase):
             self.assertEqual(len(ranked), 1)
             self.assertEqual(ranked[0][1].payload["skill_id"], skill.skill_id)
             self.assertEqual(other.solve("count the lines in 'a.txt'")["status"], "PASS")
+
+    def test_a_restored_solution_is_recalled_in_one_command(self) -> None:
+        # Memory is only worth having if it survives the process.  A solution
+        # learned by search costs many real commands; the same creature after a
+        # restart must recognise the situation and spend exactly one, and its
+        # outcome must report the same schema either way -- an instant answer is
+        # not allowed to look like an answer that measured nothing.
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            goal = "sort the rows by the second column numerically, comma separated"
+            agent = LivingAgent(root)
+            agent.computer.write("a1.csv", "a,10\nb,2\nc,1\n")
+            agent.computer.write("a2.csv", "d,20\ne,3\n")
+            first = agent.acquire(
+                goal, [("a1.csv", "c,1\nb,2\na,10\n"), ("a2.csv", "e,3\nd,20\n")]
+            )
+            self.assertTrue(first["learned"])
+            self.assertGreater(first["commands_run"], 1)
+            payload = json.loads(json.dumps(agent.snapshot()))
+
+            again = LivingAgent(root)
+            again.restore(payload)
+            again.computer.write("a3.csv", "x,100\ny,20\nz,3\n")
+            again.computer.write("a4.csv", "p,9\nq,8\n")
+            second = again.acquire(
+                goal, [("a3.csv", "z,3\ny,20\nx,100\n"), ("a4.csv", "q,8\np,9\n")]
+            )
+            self.assertTrue(second["reused"])
+            self.assertFalse(second["learned"])
+            self.assertEqual(second["commands_run"], 1)
+            self.assertEqual(second["status"], "PASS")
+            self.assertEqual(second["stdout"], "z,3\ny,20\nx,100\n")
+            self.assertLess(second["commands_run"], first["commands_run"])
 
 
 def word_soup(seed: int, count: int = 400) -> str:
