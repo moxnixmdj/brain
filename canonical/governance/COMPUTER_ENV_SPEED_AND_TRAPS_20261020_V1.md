@@ -67,6 +67,21 @@ skip. Both changes were reverted; only the head budget was kept.
 *A change that measures neutral is not a change that is free: it still
 has to be tested, and it narrows what the search returns.*
 
+### What it costs now, per question (cold, same machine, 2 cores)
+
+```
+count the lines in data.txt         2.63s   15   one program
+how many words in data.txt          3.75s   30   one program
+how many unique lines in data.txt  19.20s    7   no single program can
+```
+
+The first question asked pays 6.6s once to read every manual on the
+machine; after that it is cached on disk. So a question one program can
+answer costs about 3s, and a question that needs a program the machine
+has never composed before costs about 13s of search plus that one-off
+discovery. Warm — the same question again, or one it has generalised to
+— is 0.01s.
+
 ## 2. Profile before you optimise
 
 ```
