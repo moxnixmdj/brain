@@ -263,8 +263,10 @@ def bind(signature: Mapping[str, str], goal: str,
             body = extract_content(goal)
             if body:
                 args[slot] = body
-            elif paths:
-                args[slot] = paths[0]
+            # A filename is not string content. Treating the first path in a
+            # goal as the STRING payload can make a write-only capability
+            # appear to have summarized, translated, or otherwise transformed
+            # that file. Leave the slot unbound so the route fails closed.
     return args
 
 

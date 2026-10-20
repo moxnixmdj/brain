@@ -144,6 +144,14 @@ class ExecutionTests(ScratchCase):
         self.assertEqual(x["status"], "OPEN__COMPOSER_SLOT_UNBOUND")
         self.assertTrue(x["failed_step"]["missing_slots"])
 
+    def test_a_file_path_is_not_inferred_as_string_content(self):
+        """A write-only adapter must not claim it summarized a source file."""
+        goal = "summarize notes.txt into three sentences and save to summary.txt"
+        x = croute.execute_chain(["text.file.write"], goal)
+        self.assertFalse(x["pass"], x)
+        self.assertEqual(x["status"], "OPEN__COMPOSER_SLOT_UNBOUND")
+        self.assertIn("content", x["failed_step"]["missing_slots"])
+
     def test_a_capability_not_in_the_registry_is_a_closed_failure(self):
         x = croute.execute_chain(["no.such.capability"], "write the text hi to a.txt")
         self.assertFalse(x["pass"])

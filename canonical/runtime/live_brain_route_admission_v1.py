@@ -65,6 +65,7 @@ from time import perf_counter_ns
 from typing import Any, Mapping
 
 from canonical.runtime import astra_runtime, goal_compiler
+from canonical.runtime import availability_v1 as availability
 from canonical.runtime import goal_front_compiler_v1 as front
 from canonical.runtime import live_integrated_brain_v1
 from canonical.runtime.live_integrated_brain_v1 import (
@@ -885,8 +886,49 @@ def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | Non
     }
 
 
+def _compiled_capability_ids(compiled: Mapping[str, Any]) -> list[str]:
+    """Return every bound capability the compiled route would invoke."""
+    found: list[str] = []
+
+    def add(value: Any) -> None:
+        cid = str(value or "").strip()
+        if cid and cid not in found:
+            found.append(cid)
+
+    add(compiled.get("selected_capability"))
+    for part in compiled.get("compiled_parts") or []:
+        if isinstance(part, Mapping):
+            add(part.get("selected_capability"))
+    dag = compiled.get("capability_dag")
+    if isinstance(dag, Mapping):
+        for step in dag.get("steps") or []:
+            if isinstance(step, Mapping):
+                add(step.get("capability_id"))
+    for action in compiled.get("controller_actions") or []:
+        if isinstance(action, Mapping):
+            args = action.get("args")
+            if isinstance(args, Mapping) and action.get("type") in {"invoke_capability", "invoke_verified_bound_capability_adapter"}:
+                add(args.get("capability_id"))
+    return found
+
+
+def _missing_compiled_requirements(
+    compiled: Mapping[str, Any], registry: Mapping[str, Mapping[str, Any]]
+) -> list[dict[str, Any]]:
+    """Find unavailable executable prerequisites before any action can run."""
+    blocked = []
+    for cid in _compiled_capability_ids(compiled):
+        entry = registry.get(cid)
+        if not isinstance(entry, Mapping):
+            continue
+        missing = availability.missing(cid, dict(registry))
+        if missing:
+            blocked.append({"capability_id": cid, "missing_executables": missing})
+    return blocked
+
+
 def solve(request: Mapping[str, Any]) -> dict[str, Any]:
-    """THE live Brain entry: front-compile -> admit -> execute -> tool truth -> promised artifacts."""
+    """THE live Brain entry: compile -> check environment -> admit -> execute -> verify."""
     started = perf_counter_ns()
     task_id = str((request or {}).get("task_id") or "").strip()
     goal = str((request or {}).get("goal") or "").strip()
@@ -906,6 +948,18 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
                      compiler_code=exc.code, compiler_detail=exc.detail, route_admission=None)
     except Exception as exc:  # pragma: no cover - defensive, mirrors run_raw_goal
         return _fail(task_id, "FAIL_CLOSED", "RAW_GOAL_INTEGRATION_RUNTIME_ERROR", started, reason=type(exc).__name__ + ":" + str(exc))
+    unavailable = _missing_compiled_requirements(compiled, admissible)
+    if unavailable:
+        return _fail(
+            task_id,
+            "FAIL__CAPABILITY_ENVIRONMENT_PREREQUISITE_MISSING",
+            "CAPABILITY_ENVIRONMENT_DEPENDENCY_MISSING",
+            started,
+            executed=False,
+            compiler_mode=compiled.get("compiler_mode"),
+            unavailable_capabilities=unavailable,
+            model_dependency_count=0,
+        )
     normalized = front.normalize_goal(goal)
     future_artifacts = _future_artifacts(normalized)
     # ask memory what it knows about work like this, before deciding anything

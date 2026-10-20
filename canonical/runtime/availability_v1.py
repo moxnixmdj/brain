@@ -45,14 +45,29 @@ def has(exe: str) -> bool:
 
 
 def missing(capability_id: str, registry: dict | None = None) -> list[str]:
-    """Declared requirements that this environment does not satisfy."""
+    """Executables required by this route but absent from this environment.
+
+    ``requires`` is an abstract capability-precondition list, not a list of
+    executable names.  ``requires_binaries`` is the explicit binary contract;
+    a ``system_tool`` source also has an implicit executable contract.  Include
+    both so a registered system tool cannot appear runnable merely because its
+    author omitted a duplicate ``requires_binaries`` entry.
+    """
     reg = registry if registry is not None else load_registry()
     entry = reg.get(capability_id) or {}
-    # `requires` was already in the registry with a DIFFERENT meaning --
-    # abstract conditions like "node.runtime.available", not executables.
-    # Checking those against PATH would report things blocked that are not.
-    # Binaries get their own field so the two never mix.
-    return [r for r in (entry.get("requires_binaries") or []) if not has(r)]
+    required = list(entry.get("requires_binaries") or [])
+    source = entry.get("source")
+    if isinstance(source, dict) and source.get("type") == "system_tool":
+        executable = source.get("executable")
+        if isinstance(executable, str) and executable.strip():
+            required.append(executable.strip())
+        else:
+            required.append("<invalid-system-tool-executable>")
+    missing = []
+    for executable in required:
+        if executable not in missing and not has(executable):
+            missing.append(executable)
+    return missing
 
 
 def load_registry() -> dict:

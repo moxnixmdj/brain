@@ -1,0 +1,234 @@
+{
+  "action_id": "LIVE_ROUTE_TRUTH_AND_PREREQUISITE_GUARD_20261020_V1",
+  "action_kind": "RECONCILE_FRONTIER",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "earlier_routes_exhausted_reason": "DELETE_OR_BYPASS_DOES_NOT_CORRECT_FALSE_SUCCESS__REUSE_OF_CURRENT_AVAILABILITY_AND_COMPOSER_PATHS_REPRODUCES_THE_TWO_FAILURES__ADAPT_EXISTING_BINDING_TO_REFUSE_PATH_AS_STRING_CONTENT_AND_ADAPT_AVAILABILITY_TO_CHECK_SYSTEM_TOOL_SOURCE_EXECUTABLE__THEN_INTEGRATE_PREREQUISITE_CHECK_BEFORE_LIVE_EXECUTION",
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/runtime/availability_v1.py",
+      "canonical/runtime/live_brain_route_admission_v1.py",
+      "canonical/runtime/composer_route_v1.py",
+      "canonical/tests/test_live_brain_route_admission_v1.py",
+      "canonical/tests/test_composer_route_v1.py"
+    ],
+    "route_class": "ADAPT"
+  },
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::LIVE_GOAL_ENTRY_CLAIMS_PASS_WITH_MISSING_PREREQUISITES_OR_LITERAL_PATH_USED_AS_CONTENT",
+  "canonical_base_commit": "8b742ea7edbdbd5cd827cfece041e8281ced434c",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "LIVE_GOAL_ENTRY_CLAIMS_PASS_WITH_MISSING_PREREQUISITES_OR_LITERAL_PATH_USED_AS_CONTENT",
+  "date": "2026-10-20",
+  "expected_parent_change": "LIVE_GOAL_ENTRY_FAILS_CLOSED_ON_ABSENT_TOOL_PREREQUISITES_AND_UNBOUND_TRANSFORM_CONTENT",
+  "expected_parent_frontier_change": "LIVE_GOAL_ENTRY_FAILS_CLOSED_ON_ABSENT_TOOL_PREREQUISITES_AND_UNBOUND_TRANSFORM_CONTENT",
+  "falsification_condition": "THE_LIVE_ENTRY_REPORTS_PASS_WHEN_A_REQUIRED_SYSTEM_EXECUTABLE_IS_ABSENT_OR_WHEN_A_STRING_INPUT_IS_ONLY_A_PATH_AND_THE_REQUESTED_TRANSFORMATION_DID_NOT_OCCUR",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_CURSORBENCH_GE_57_8",
+      "PROWORK_GDPVAL_GE_1846",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "AUTOMATIONBENCH_GE_40",
+      "HLE_TOOLS_GE_67_7",
+      "TB_SCIENCE_GE_58_7",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER"
+    ],
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "interpretation": "DISCHARGES_NOTHING__EVERY_OPEN_OBLIGATION_REQUIRES_A_SOLVER_THAT_CAN_BE_ASKED_IN_A_SENTENCE_AND_NEVER_CLAIMS_WHAT_IT_DID_NOT_DO__ONE_ENTRY_NOW_REACHES_ALL_362_CAPABILITIES_FROM_A_PLAIN_SENTENCE_AND_A_SENTENCE_THAT_NAMES_NOTHING_FAILS_CLOSED__UNLOCK_LCB_1_COUNTS_THE_ENTRY_NOT_A_BENCHMARK",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1/2",
+    "wall_clock_cost_ub": "1"
+  },
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/availability_v1.py",
+    "canonical/runtime/live_brain_route_admission_v1.py",
+    "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "canonical/runtime/browser_v1.py",
+    "canonical/runtime/browser_launch_v1.sh",
+    "canonical/runtime/composer_route_v1.py",
+    "canonical/runtime/capability_type_surface_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "8b742ea7edbdbd5cd827cfece041e8281ced434c",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "INSTALLATION_FROM_UNAVAILABLE_STORAGE.GOOGLEAPIS.COM"
+    ],
+    "expected_parent_level_state_change": "LIVE_GOAL_ENTRY_FAILS_CLOSED_ON_ABSENT_TOOL_PREREQUISITES_AND_UNBOUND_TRANSFORM_CONTENT",
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "DELETE_NOT_SELECTED__GENERAL_COMPUTER_USE_NEEDS_TOOLS",
+        "BYPASS_NOT_SELECTED__THE_BROADER_GOAL_STILL_REQUIRES_BROWSER_AND_SEMANTIC_TRANSFORMS",
+        "REUSE_CURRENT_EXECUTION_FAILURE_AND_COMPOSER_ADAPTER_REPRODUCES_THE_FAILURES",
+        "SUBSTITUTE_CHROMEDRIVER_INSTALLER_FETCHES_FROM_A_BLOCKED_HOST"
+      ],
+      "intrinsic_or_path_specific": "TWO_PATH_SPECIFIC_FALSE_SUCCESS_ROUTES_IN_LIVE_GOAL_HANDLING",
+      "surviving_causal_blocker": "LIVE_GOAL_ENTRY_CLAIMS_PASS_WITH_MISSING_PREREQUISITES_OR_LITERAL_PATH_USED_AS_CONTENT"
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "NONE"
+      ],
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/availability_v1.py",
+        "canonical/runtime/live_brain_route_admission_v1.py",
+        "canonical/runtime/composer_route_v1.py",
+        "canonical/runtime/capability_type_surface_v1.py"
+      ],
+      "external_existing_routes_checked": [
+        "BRAIN_INHERITED_BROWSER_CDP_RUNTIME",
+        "NPM_CHROMEDRIVER_INSTALLER_METADATA"
+      ],
+      "surviving_gap": "AVAILABILITY_IGNORES_SYSTEM_TOOL_SOURCE_EXECUTABLE__COMPOSER_BINDS_A_PATH_AS_LITERAL_STRING_CONTENT_AND_REPORTS_A_WRITE_AS_SUMMARIZATION"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "MORE_REGISTERED_TOOLS_WITHOUT_USABLE_ENVIRONMENT",
+        "A_FILE_EXISTS_SO_THE_SUMMARY_GOAL_IS_DECLARED_COMPLETE"
+      ],
+      "real_outcome": "BRAIN_CAN_OPERATE_COMPUTER_AND_REPORT_ONLY_THE_OUTCOME_IT_ACTUALLY_ACHIEVED",
+      "surviving_necessity": "REAL_EFFECT_AND_INPUT_SEMANTICS_VERIFIED_BEFORE_A_PASS_IS_RETURNED"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": [
+        "CURRENT_AVAILABILITY_V1",
+        "CURRENT_TYPED_COMPOSER_BINDER",
+        "LIVE_ROUTE_ADMISSION"
+      ],
+      "downstream_work_to_delete_or_supersede": [
+        "ANY_CLAIM_THAT_A_WRITTEN_FILE_ALONE_PROVES_A_TRANSFORMATION_GOAL",
+        "ANY_CLAIM_THAT_A_REGISTERED_SYSTEM_TOOL_IS_AVAILABLE_WITHOUT_ITS_EXECUTABLE"
+      ],
+      "fresh_reuse_plan": "ALL_LIVE_GOALS_USE_PRE-EXECUTION_PREREQUISITE_DISCOVERY_AND_TYPED_INPUT_BINDING"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": [
+        "CHROMEDRIVER_LOCAL_SEARCH_AND_NPM_INSTALLER_SOURCE_CHECK",
+        "LIVE_SUMMARIZATION_FALSE_PASS_REPRODUCED_AND_OUTPUT_BYTES_READ"
+      ],
+      "search_stop_decision": "BOTH_FAILURES_CAUSALLY_REPRODUCED__NO_CHROMEDRIVER_IN_PATH__COMPOSER_OUTPUT_IS_THE_LITERAL_SOURCE_PATH__FIX_THE_TWO_BOUNDARY_CONDITIONS"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "CURRENT_BEHAVIOR_IS_DIRECTLY_FALSIFIED_BY_A_REAL_LIVE_ENTRY_RUN__THE_EXISTING_EXECUTION_FAILURE_IS_TOO_LATE__INSTALL_SOURCE_IS_BLOCKED__SMALLEST_FIXES_PRESERVE_SUPPORTED_EXPLICIT_WRITES_AND_FAIL_CLOSED_ON_UNBOUND_CONTENT",
+      "routes_ranked": [
+        "ADAPT_STRING_BINDER_TO_REFUSE_PATH_AS_UNSTATED_CONTENT_AND_CHECK_REAL_SYSTEM_TOOL_EXECUTABLES_BEFORE_ACTION",
+        "REUSE_CURRENT_COMPOSER_RESULT__REJECTED_IT_CLAIMS_SUMMARIZE_WHEN_IT_WRITES_THE_SOURCE_PATH",
+        "INSTALL_CHROMEDRIVER_FROM_STORAGE.GOOGLEAPIS.COM__REJECTED_NETWORK_HOST_NOT_ALLOWED"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "REAL_LIVE_ENTRY_WITH_AN_EXISTING_TWO_LINE_FILE_AND_A_SUMMARIZE_REQUEST_MUST_NOT_WRITE_THE_PATH_AS_SUMMARY__REAL_ENVIRONMENT_BROWSER_REQUEST_WITH_ABSENT_CHROMEDRIVER_MUST_FAIL_BEFORE_EXECUTION__ORACLES_REREAD_ARTIFACT_BYTES_AND_CHECK_NO_OUTPUT"
+    },
+    "real_outcome": "THE_LIVE_MACHINE_NEVER_CLAIMS_A_GOAL_SUCCEEDED_WHEN_IT_ONLY_COPIED_A_PATH_OR_WHEN_A_REQUIRED_TOOL_IS_ABSENT",
+    "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER_ACTION_FROM_TWO_DIRECTLY_OBSERVED_LIVE_ROUTE_FAILURES__THE_CHEAPEST_EXISTING_MECHANISM_FIX_IS_LOCAL"
+    },
+    "routes_considered": [
+      "ADAPT_STRING_BINDING_AND_SYSTEM_TOOL_AVAILABILITY_AT_LIVE_ROUTE_BOUNDARY",
+      "REUSE_CURRENT_LATE_EXECUTION_FAILURE",
+      "SUBSTITUTE_BROWSER_DRIVER_FROM_BLOCKED_SOURCE"
+    ],
+    "selected_surviving_route": "ADAPT_STRING_BINDING_AND_SYSTEM_TOOL_AVAILABILITY_AT_LIVE_ROUTE_BOUNDARY",
+    "stop_condition": "FOCUSED_LIVE_ROUTE_TESTS_PASS__MISSING_CHROMEDRIVER_IS_NAMED_BEFORE_EXECUTION__SUMMARIZATION_WITHOUT_A_BRAIN_OWNED_SUMMARIZER_FAILS_WITHOUT_WRITING_A_FALSE_SUMMARY__ZERO_MODEL_DEPENDENCY__ZERO_SPEND",
+    "why_selected_route_is_fastest_sufficient": "TWO_SMALL_BOUNDARY_CHECKS_PREVENT_FALSE_SUCCESS_AND_MISSING_PREREQUISITE_ATTEMPTS__NO_MODEL__NO_SPEND__NO_NEW_CAPABILITY_REGISTRATION"
+  },
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "ADAPT_EXISTING_STRING_BINDING_AND_ENVIRONMENT_AVAILABILITY_CHECKS_AT_THE_LIVE_ROUTE_BOUNDARY",
+  "selected_route_execution_preflight_required": true,
+  "status": "PROPOSED__AUTHORIZED_BY_OWNER_CONTINUE",
+  "stop_condition": "FOCUSED_LIVE_ROUTE_TESTS_PASS__MISSING_CHROMEDRIVER_IS_NAMED_BEFORE_EXECUTION__SUMMARIZATION_WITHOUT_A_BRAIN_OWNED_SUMMARIZER_FAILS_WITHOUT_WRITING_A_FALSE_SUMMARY__ZERO_MODEL_DEPENDENCY__ZERO_SPEND",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__EVIDENCE_PRESERVATION",
+    "target_truth_obligations": [
+      "CODING_TB4_GE_66_4",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_CURSORBENCH_GE_57_8",
+      "PROWORK_GDPVAL_GE_1846",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "AUTOMATIONBENCH_GE_40",
+      "HLE_TOOLS_GE_67_7",
+      "TB_SCIENCE_GE_58_7",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [],
+      "decisive_question": "CAN_EVERY_BOUND_CAPABILITY_BE_ASKED_FOR_IN_ONE_PLAIN_SENTENCE_THROUGH_ONE_ENTRY_THAT_SAYS_DONE_ONLY_WHEN_AN_INDEPENDENT_ORACLE_CONFIRMS_ARTIFACT__AND_DOES_A_SENTENCE_THAT_NAMES_NOTHING_FAIL_CLOSED",
+      "falsifier_id": "FRESH_GOALS_50_PER_FAMILY_100_OUT_OF_SCOPE_PLUS_296_NAME_DERIVED_PROSE_SENTENCES_PLUS_THE_CI_MINTED_VERIFIER_HASHES_PLUS_21_NAMELESS_ADVERSARIAL_REQUESTS",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "THE_COUNTEREXAMPLES_WERE_FOUND_AND_FIXED_IN_THIS_PULL_REQUEST__RUN_THE_THING_SELECTED_run_long_horizon_continuity_v1__AND_THE_F28_FILTER_MANUFACTURED_A_MARGIN_OUT_OF_A_NAMELESS_REQUEST__BOTH_ARE_FALSIFIED_BY_THE_21_NAMELESS_REQUESTS_NOW_REFUSED__THE_DRIFT_GUARD_BINDS_RECEIPT_BLOBS_AT_BASE_SO_NO_RECEIPT_PATH_IS_LISTED_HERE__THE_V1_RECEIPT_ON_MAIN_RECORDS_THE_PRIOR_STATE",
+      "proposal_id": "PLAIN_SENTENCE_REACHABILITY_AND_FAIL_CLOSED_NAMING_RULE_20261019_V1"
+    }
+  },
+  "weakens_existing_guard": false
+}
