@@ -43,6 +43,11 @@ SOLUTION_SCHEMA = "PROJECT_BRAIN_UNIFIED_MODEL_SOLUTION_V1"
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_ARTIFACT = "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
 
+# Slot names whose value is the caller's own sentence rather than a resource to
+# be discovered. Mirrors the set world_binding_v1 treats as goal text, so the
+# two never disagree about what counts as the caller's words.
+_GOAL_TEXT_SLOTS = frozenset({"goal", "task", "objective", "query", "question", "text"})
+
 # Kept byte-identical in behaviour to the compiler's tokenizer. A routing table
 # compiled with one segmentation and queried with another silently loses recall;
 # the verifier checks the two tokenizers agree on a sample of terms.
@@ -553,11 +558,22 @@ class UnifiedModel:
             if value is None:
                 continue
             text = str(value)
-            # A destination the binder synthesized is deterministic and carries
-            # no choice. Anything else must be one of the declared resources,
-            # or it is rejected -- this is what stops an invented source.
-            is_destination = "output" in key.lower()
-            if not is_destination and text not in allowed:
+            low = key.lower()
+            # Three kinds of value carry no choice about what to operate on, and
+            # only these three are admissible:
+            #
+            #   1. A destination the binder synthesized. Deterministic; nothing
+            #      to defend.
+            #   2. The caller's own words. A slot named goal/task/objective is
+            #      the sentence that was handed in, not a discovered resource.
+            #   3. One of the declared paths.
+            #
+            # Everything else is refused. That is what keeps `source_root`
+            # unbound for a goal that never named a root: a default there would
+            # be a choice about what to audit, and an unverifiable one.
+            is_destination = "output" in low
+            is_callers_words = low in _GOAL_TEXT_SLOTS
+            if not (is_destination or is_callers_words or text in allowed):
                 continue
             filled[key] = value
 
