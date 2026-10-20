@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ast
+import hashlib
 import json
 import shutil
 import tarfile
@@ -694,3 +695,121 @@ class DeclaredContextBindingTests(unittest.TestCase):
         finally:
             for path in (arc, man, src):
                 path.unlink(missing_ok=True)
+
+    def test_the_grounding_verifier_passes_only_when_grounding_found_nothing(self):
+        """A green check from the grounding verifier certifies emptiness, not success.
+
+        Measured across all 23 benchmark goals: the producer never emits
+        ``GROUNDED`` or ``AMBIGUOUS_BOUNDED``. It emits ``UNRESOLVED`` (found
+        no candidate) or ``UNBOUND_INPUTS_NOT_GROUNDED`` (found exactly one
+        candidate whose proposed bindings do not cover its declared inputs).
+        The verifier's accepted vocabulary is the former plus the two statuses
+        the producer never emits, so the two capabilities line up as:
+
+            verify PASS  <=>  grounded_clause_count == 0
+            grounded >= 1 =>  verify FAIL (STATUS_INVALID)
+
+        That is the opposite of what a passing check looks like from outside.
+        This test pins it so a green grounding verification is never mistaken
+        for a grounded goal, and so the 16/7 split cannot move unnoticed.
+
+        Widening the verifier to accept ``UNBOUND_INPUTS_NOT_GROUNDED`` would
+        invalidate the ``ACQUIRED_VERIFIED`` receipt that pins this adapter's
+        git blob byte-for-byte (see the next test), which is why the gap is
+        pinned rather than closed here.
+        """
+        producer = "plain_goal.bound_capability.grounding.stdlib"
+        verifier = "plain_goal.bound_capability.grounding.verify.stdlib"
+        if not all(c in self.model.capabilities for c in (producer, verifier)):
+            self.skipTest("grounding pair not in model")
+
+        from canonical.runtime import goal_compilation_benchmark_v1 as bench
+
+        tmp = ROOT / "canonical" / "astra_runtime" / "tmp"
+        out = tmp / "_grounding_invariant.json"
+        rel = out.relative_to(ROOT).as_posix()
+        never_emitted = {"GROUNDED", "AMBIGUOUS_BOUNDED"}
+        passed = failed = 0
+        try:
+            for case in list(bench.BENCHMARK_GOALS) + list(bench.EXTENDED_BENCHMARK_GOALS):
+                out.unlink(missing_ok=True)
+                goal = case["goal"]
+                produced = self.model.solve(
+                    goal,
+                    capability_id=producer,
+                    inputs={"goal": goal, "output_path": rel},
+                    context_paths=["AGENTS.md"],
+                )
+                if produced.get("pass") is not True or not out.is_file():
+                    continue
+                record = json.loads(out.read_text(encoding="utf-8"))
+                clauses = record.get("clauses") or []
+                statuses = {clause.get("status") for clause in clauses}
+
+                # The producer never reaches a genuinely grounded clause on
+                # any benchmark goal. If that ever changes, this invariant is
+                # describing a different system and must be re-measured.
+                self.assertFalse(
+                    statuses & never_emitted,
+                    f"{case['id']}: producer now emits {sorted(statuses & never_emitted)}",
+                )
+
+                checked = self.model.solve(
+                    goal,
+                    capability_id=verifier,
+                    inputs={"goal": goal, "result_path": rel},
+                    context_paths=[rel],
+                )
+                ok = checked.get("pass") is True
+                grounded = record.get("grounded_clause_count") or 0
+                if ok:
+                    passed += 1
+                else:
+                    failed += 1
+                # The load-bearing claim: PASS means nothing was grounded.
+                self.assertEqual(
+                    ok,
+                    grounded == 0,
+                    f"{case['id']}: verify={ok} but grounded_clause_count={grounded}",
+                )
+        finally:
+            out.unlink(missing_ok=True)
+
+        self.assertEqual((passed, failed), (16, 7), "the measured split moved")
+
+    def test_the_grounding_verifier_adapter_still_matches_its_acquisition_receipt(self):
+        """The verifier adapter is pinned byte-for-byte by its own receipt.
+
+        ``MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1``
+        records ``status: ACQUIRED_VERIFIED`` against CI run 36646452335 and
+        pins ``exact_candidate_blobs.verifier``. The registry carries the same
+        value as ``verification.verifier_git_blob``, and the adapter on disk
+        hashes to exactly it.
+
+        Any edit to that adapter -- including the tempting one-status widening
+        of its accepted vocabulary -- silently turns that receipt into a claim
+        about code that no longer exists, and the receipt cannot be re-minted
+        without fresh independent CI runs. So the blob is asserted here: a
+        change must arrive with a new receipt, not quietly beside the old one.
+        """
+        cid = "plain_goal.bound_capability.grounding.verify.stdlib"
+        from canonical.runtime import live_integrated_brain_v1 as live_brain
+
+        entry = dict(live_brain.load_verified_registry()).get(cid)
+        if not entry:
+            self.skipTest(f"{cid} not in registry")
+        pinned = (entry.get("verification") or {}).get("verifier_git_blob")
+        adapter = (entry.get("source") or {}).get("adapter_path")
+        if not pinned or not adapter:
+            self.skipTest("receipt does not pin this adapter")
+
+        path = ROOT / adapter
+        self.assertTrue(path.is_file(), f"adapter missing: {adapter}")
+        data = path.read_bytes()
+        actual = hashlib.sha1(b"blob %d\0" % len(data) + data).hexdigest()
+        self.assertEqual(
+            actual,
+            pinned,
+            f"{adapter} no longer matches verifier_git_blob {pinned}; "
+            "the ACQUIRED_VERIFIED receipt describes different code now",
+        )
