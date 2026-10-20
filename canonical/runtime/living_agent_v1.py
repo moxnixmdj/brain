@@ -2189,8 +2189,11 @@ class LivingAgent:
                 ]
                 with ThreadPoolExecutor(max_workers=8) as pool:
                     firsts = list(pool.map(fingerprint, stages))
+                tail = self._requested_stages(goal)
                 for (doc, form, _binary, _overlap, _strength), stage, first in zip(chunk, stages, firsts):
                     if first is None or first == sources[0]:
+                        continue
+                    if self._tail_impossible(first, tail, expected[0]):
                         continue
                     survivors.append((doc, form, _binary, _overlap, _strength))
                     for pipeline in self._hypotheses(
@@ -2877,6 +2880,40 @@ class LivingAgent:
         # An unmodelled tool may consume or produce anything, so it accepts both
         # raw text and a line stream; the data, not a declared type, decides.
         return synthesis.Stage(shell, synthesis.LINES, synthesis.TEXT, apply)
+
+    @staticmethod
+    def _tail_impossible(text: str, tail: Sequence[str], expected: str) -> bool:
+        """Can a known tail of stages turn this text into the expected answer?
+
+        When the sentence names the operations that follow the mechanism --
+        "count", "keep the first three", "the last two rows" -- the tail is
+        fixed, so the answer is a pure function of the mechanism's output.  For
+        a projection and a count that function is arithmetic on lines, and
+        deciding it costs nothing, while deciding it by running the tail costs
+        two processes per candidate.  Only a *definite* disagreement answers
+        True; anything the arithmetic cannot decide is left to the real
+        verification, which is unchanged.
+        """
+        if not tail or not expected:
+            return False
+        try:
+            text.encode("ascii")
+            expected.encode("ascii")
+        except UnicodeEncodeError:
+            return False
+        lines = text.splitlines(keepends=True)
+        if tail == ["sort -u", "wc -l"]:
+            count = expected.strip()
+            if count.isdigit():
+                return len({line.rstrip("\n") for line in lines}) != int(count)
+            return False
+        if len(tail) == 1:
+            match = re.fullmatch(r"(head|tail) -n (\d+)", tail[0])
+            if match:
+                amount = int(match.group(2))
+                part = lines[:amount] if match.group(1) == "head" else lines[-amount:]
+                return "".join(part) != expected
+        return False
 
     def _named_atoms(
         self, goal: str, doc: discovery.ToolDoc, sources: Sequence[str]
