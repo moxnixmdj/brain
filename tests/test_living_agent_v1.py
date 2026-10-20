@@ -1337,6 +1337,77 @@ class DocumentedArgumentTests(unittest.TestCase):
         self.assertEqual(len(agent.discovery_log), rows)
         self.assertLess(time.perf_counter() - started, 0.1)
 
+    def test_a_pipe_separated_table_is_sorted_on_its_column(self) -> None:
+        # `|` is a shell operator, so the separator cannot be written into a
+        # command unquoted: the bound argument has to survive the pipeline as
+        # data.  The third column, not the second, and four rows on the file it
+        # has never seen -- so a pipeline that happens to fit the examples by
+        # reversing the first two rows is not enough.
+        agent = self._agent()
+        self._write(agent, "one.psv", "a|zap|9\nb|yank|3\nc|xray|7\n")
+        self._write(agent, "two.psv", "k|mike|5\nl|lima|1\n")
+        goal = "sort the rows by the third column, pipe separated, and keep the first two"
+        outcome = agent.acquire(
+            goal,
+            [("one.psv", "b|yank|3\nc|xray|7\n"), ("two.psv", "l|lima|1\nk|mike|5\n")],
+        )
+        self.assertEqual(outcome["status"], "PASS", outcome)
+        self.assertEqual(outcome["source"], "composed")
+        self.assertEqual(outcome["stages"][0], "sort -k 3 -t '|'")
+        self.assertEqual(outcome["stdout"], "b|yank|3\nc|xray|7\n")
+        self._write(agent, "held.psv", "q|quebec|8\nr|romeo|2\ns|sierra|6\nt|tango|4\n")
+        again = agent.solve(goal, bindings={"path": "held.psv"})
+        self.assertEqual(again["stdout"], "r|romeo|2\nt|tango|4\n")
+
+    def test_examples_that_contradict_the_named_column_are_not_answered(self) -> None:
+        # Column three is 9, 3, 7, so no sort of that column begins "3, 9".
+        # `head -n 2 | sort -r` reproduces the stated bytes exactly -- and
+        # contradicts every word of the request after the verb.  Two
+        # specifications disagree; the creature must say so instead of
+        # adopting the pipeline that fits the bytes and ignoring the sentence.
+        agent = self._agent()
+        self._write(agent, "one.psv", "a|zap|9\nb|yank|3\nc|xray|7\n")
+        self._write(agent, "two.psv", "k|mike|5\nl|lima|1\n")
+        goal = "sort the rows by the third column, pipe separated, and keep the first two"
+        before = set(agent.computer.admitted())
+        with self.assertRaises(AgentError) as raised:
+            agent.acquire(
+                goal,
+                [("one.psv", "b|yank|3\na|zap|9\n"), ("two.psv", "l|lima|1\nk|mike|5\n")],
+            )
+        self.assertIn("EXAMPLES_CONTRADICT_GOAL", str(raised.exception))
+        self.assertEqual(agent.skills, {})
+        gap = [entry.payload for entry in agent.memory.active() if entry.payload.get("goal") == goal]
+        self.assertEqual(gap[0]["reason"], "evidence_conflict")
+        self.assertEqual(sorted(gap[0]["unexplained"]), ["position 3", "separator |"])
+        # The rejected search admitted tools to run them; none may survive it.
+        self.assertEqual(set(agent.computer.admitted()), before)
+
+    def test_a_count_must_use_the_column_it_names(self) -> None:
+        # `ptx -g 2 -F , | sort -u | wc -l` reproduces "3" on both examples
+        # without ever reading a column: -g is a gap width.  The request says
+        # the count is over the second column, so two real probes decide it:
+        # hold that column constant and a count must move; change the columns
+        # the request never mentions and it must not.  Held-out files then
+        # answer 2 and 1, not 3.
+        agent = self._agent()
+        self._write(agent, "one.csv", "x,10\nx,3\ny,7\n")
+        self._write(agent, "two.csv", "q,2\nq,9\nr,4\n")
+        goal = "count the distinct values in the second column, comma separated"
+        outcome = agent.acquire(goal, [("one.csv", "3\n"), ("two.csv", "3\n")])
+        self.assertEqual(outcome["status"], "PASS", outcome)
+        self.assertEqual(outcome["stages"][0], "cut -f 2 -d ,")
+        self.assertIn("sort -u", outcome["stages"])
+        self.assertIn("wc -l", outcome["stages"])
+        self.assertEqual(outcome["stdout"], "3\n")
+        for name, text, answer in (
+            ("three.csv", "z,5\nz,5\nw,1\n", "2\n"),
+            ("four.csv", "a,9\nb,9\nc,9\n", "1\n"),
+        ):
+            self._write(agent, name, text)
+            self.assertEqual(agent.solve(goal, bindings={"path": name})["stdout"], answer)
+        self.assertNotIn("ptx", {row["tool"] for row in agent.discovery_log if row.get("verified")})
+
     def test_a_composition_is_kept_across_a_snapshot(self) -> None:
         agent = self._agent()
         self._write(agent, "one.csv", "pear,2\napple,10\nfig,1\nkiwi,7\n")

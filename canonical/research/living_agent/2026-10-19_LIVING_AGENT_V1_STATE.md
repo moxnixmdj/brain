@@ -12,7 +12,7 @@ receipt, not a terminal claim, and not a capability grant.
 | Living agent | `canonical/runtime/living_agent_v1.py` | Real POSIX computer surface, one-shot skill chunking, canary-based drift detection and repair, word learning, impasse tracking, self-directed practice, consolidating memory, snapshot/restore. |
 | Shell synthesis | `canonical/runtime/shell_synthesis_v1.py` | Learns a stdin→stdout pipeline from (input, expected output) examples: typed beam search over 20 real stages, exact interpreter ordering, real-shell verification. |
 | Benchmark | `canonical/runtime/living_agent_benchmark_v1.py` | Twelve spreadsheet transforms with independently written oracles, plus a projection of the repository's real file tree. |
-| Acceptance | `tests/test_living_agent_v1.py` | 104 tests / 159 subtests. Real processes, real files, exact byte equality. No mocks. |
+| Acceptance | `tests/test_living_agent_v1.py` | 107 tests / 159 subtests. Real processes, real files, exact byte equality. No mocks. |
 | Discovery | `canonical/runtime/living_discovery_v1.py` | Reads what this machine says it can do (`tool --help`, the tool's own definition), turns a goal sentence into an exact expected output, and proves a real command against it before admitting it. |
 | Growth measurement | `canonical/runtime/living_agent_growth_v1.py` | Acquires four real skills at runtime and replays them on three untouched real directories. |
 
@@ -356,6 +356,60 @@ exact bytes.
   candidates that could never fit.  Pruning to invocations whose arguments are
   *grounded* (strength ≥ 4: a quantity, a position, a separator) cut the
   candidate set from 64 to 52 and the time to 0.12 s.
+
+## Two specifications, and what to do when they disagree
+
+An example is not a demonstration of a goal; it is a *result*.  The request and
+the examples are independent statements about the same transformation, and a
+pipeline can satisfy one while contradicting the other.  Three failures found
+by real probes, and the checks that now make each of them impossible:
+
+**A pipeline that fits the bytes and ignores the sentence.**  Asked to sort
+rows by the third column of a pipe-separated table and keep the first two, with
+two example outputs that do not follow from that request, the creature answered
+`head -n 2 | sort -r` -- both examples exactly, not one word of the request.
+It now extracts what the request *names*: a position beside a unit noun ("the
+third column" -> position 3), a named separator ("pipe separated" -> `|`), and
+the operations stated outright ("keep the first two" -> `head -n 2`, "distinct"
+-> `sort -u`, "count" -> `wc -l`).  A verified pipeline that omits any of them
+is not admitted; the search moves to composition, then to a documented
+mechanism, and then -- if a pipeline fit the bytes and contradicted the
+sentence -- fails with `EXAMPLES_CONTRADICT_GOAL` and records
+`reason: evidence_conflict` with the unexplained items and the pipeline that
+produced them.  Refusing costs an answer; guessing costs the truth.
+
+**A mechanism that never uses the argument it was given.**  `ptx -g 2 -F ,`
+binds a gap width to "position 2" and a flag truncation string to "pipe
+separated".  Followed by `sort -u | wc -l`, it answers "3" on two tables whose
+second column has three distinct values -- and "3" again on a third table whose
+second column has two.  Wording cannot settle this, so the creature runs the
+experiment: hold the named column constant and a count over it must *move*;
+change the columns the request never mentions and it must *not*.  `cut` moves
+(3 -> 1, unchanged under the other probe) and `ptx` does not; the coincidence
+is rejected on behaviour, not resemblance.  Held-out files then answer 2 and 1.
+
+**Arguments that became shell syntax.**  The documented-mechanism path joined
+an option bundle with spaces, so `-t |` became a pipe and the *file name*
+became the next command (`BINARY_NOT_ADMITTED:one.psv`).  Every argument is now
+quoted before it reaches the shell; `sort -k 3 -t '|'` sorts a pipe-separated
+table and survives as data.
+
+### What this costs
+
+The fast paths are untouched: a goal the grammar already answers as stated
+("count the distinct values in the second column, comma separated" ->
+`cut -f 2 -d , | sort -u | wc -l`) is 0.18 s cold and 0.008 s from memory;
+a composed pipeline is 0.14 s (comma) and 0.19 s (pipe, quoted argument), 52
+processes apiece.  The checks themselves are three extra runs, and only when a
+count over a named column is asked for.
+
+### What is still missing
+
+Composition places one documented mechanism first.  A pipeline with two
+unknown mechanisms, or one whose mechanism sits after a stage, is outside the
+search -- it would need a product over the documented surface at every depth.
+The grammar's suffix search also prunes stages whose output equals their input,
+which is why the count case needs the request's own reading tried alongside it.
 
 ## How the learner spends its questions
 

@@ -538,6 +538,53 @@ _UNIT_NOUNS = (
 )
 
 
+# A request can name the character that separates its data.  Naming it is not
+# the same as describing the data: "comma separated" says which character the
+# answer must use, and a pipeline that never mentions a comma has not answered.
+_SEPARATOR_WORDS = {
+    "comma": ",", "commas": ",",
+    "pipe": "|", "pipes": "|",
+    "tab": "\t", "tabs": "\t",
+    "semicolon": ";", "semicolons": ";",
+    "colon": ":", "colons": ":",
+}
+
+
+# What a request *asks for* that a stage can be checked against: a selection of
+# the first or last N rows, a set of distinct values, a count.  Each entry is
+# (the words the request used, how every way of doing it is written).  This is
+# a reading of the sentence, not a task table: the pipeline may satisfy it in
+# any of the spellings the machine offers.
+_SELECTION = re.compile(
+    r"\b(first|top|last|bottom)\s+(\d{1,3}|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)\b"
+)
+
+
+def _requested_operations(goal: str) -> list[tuple[str, str]]:
+    """Operations the sentence names, with the spelling any stage may use.
+
+    "Keep the first two" fixes an operation no matter what the examples show:
+    the answer has to take the first two rows.  A pipeline can match every
+    example and still end with "take the last two" -- and then it has answered
+    a different question.  Only readings the sentence states outright are
+    listed here; anything vaguer is left to the bytes.
+    """
+    text = goal.lower()
+    requested: list[tuple[str, str]] = []
+    for match in _SELECTION.finditer(text):
+        direction, amount = match.group(1), match.group(2)
+        count = int(amount) if amount.isdigit() else _NUMBER_WORDS[amount]
+        if direction in {"first", "top"}:
+            requested.append((f"first {count}", rf"\bhead\s+-n\s*\+?{count}\b"))
+        else:
+            requested.append((f"last {count}", rf"\btail\s+-n\s*{count}\b"))
+    if re.search(r"\b(distinct|unique)\b", text):
+        requested.append(("distinct values", r"\bsort\s+-u\b|\buniq\b"))
+    if re.search(r"\b(count|counts|how many|number of)\b", text):
+        requested.append(("a count", r"\bwc\s+-l\b"))
+    return requested
+
+
 def _ordinal_positions(goal: str) -> list[int]:
     """Positions the sentence names *of* something ("the second column").
 
@@ -1106,69 +1153,13 @@ class LivingAgent:
         candidates, stats = synthesis.search(
             inputs, max_length=max_length, time_budget_s=time_budget_s
         )
-        if not candidates:
-            # The fixed stage vocabulary cannot express the examples.  The
-            # machine's own documentation is the next place to look: a tool
-            # that takes an argument may be exactly the mechanism, and its
-            # help text says which arguments it has.  The examples decide.
-            # The grammar cannot express it -- but a documented tool can, alone
-            # or feeding the grammar.  The composition is the general case: an
-            # unknown mechanism with grounded arguments, followed by stages the
-            # creature already knows.  A pipeline of one stage is the degenerate
-            # case and is found by the same search.
-            composed = self._compose(
-                goal, examples, max_length=max_length, time_budget_s=time_budget_s
-            )
-            if composed is not None:
-                pipeline, detail = composed
-                skill = self._admit_composed(goal, pipeline, examples)
-                outcome = self.solve(goal, bindings={"path": examples[0][0]})
-                outcome.update(
-                    {
-                        "learned": True,
-                        "stages": pipeline,
-                        "documented": detail["documented"],
-                        "grammar": detail["grammar"],
-                        "source": "composed",
-                        "tool": detail["tool"],
-                        "argv": list(detail["argv"]),
-                        "commands_run": detail["tested"],
-                        "seconds": round(time.perf_counter() - started, 4),
-                    }
-                )
-                return outcome
-            found = self._find_documented_mechanism(goal, examples)
-            if found is not None:
-                skill = self._admit_documented_skill(goal, found, examples)
-                outcome = self.solve(goal, bindings={"path": examples[0][0]})
-                outcome.update(
-                    {
-                        "learned": True,
-                        "tool": found["tool"],
-                        "argv": list(found["argv"]),
-                        "source": "documentation-options",
-                        "commands_run": found["runs"],
-                        "seconds": round(time.perf_counter() - started, 4),
-                    }
-                )
-                return outcome
-            # Both strategies failed: the pipeline vocabulary cannot express
-            # the examples, and nothing on this machine that documents itself
-            # reproduces them.  That is knowledge -- the goal, the evidence and
-            # the tools that were tried -- and it belongs on the record, not in
-            # a traceback nobody keeps.
-            self._record_impasse(
-                goal,
-                {
-                    "reason": "no_verified_mechanism",
-                    "strategies": ["synthesis", "documentation"],
-                    "examples": [path for path, _ in examples],
-                    "tools_tried": sorted({row["tool"] for row in self.discovery_log}),
-                },
-            )
-            raise AgentError("NO_PIPELINE_WITHIN_BUDGET")
-
         evaluated = 0
+        # A grammar fit is evidence, not proof.  A pipeline can reproduce every
+        # example and still ignore what the sentence says about them: on three
+        # rows, "reverse the first two" matches a truncated sort by the third
+        # column exactly.  Such a fit is kept on the record and the search moves
+        # on; only a pipeline that answers both specifications is admitted here.
+        contradicted: list[tuple[list[str], list[str]]] = []
         for stages in candidates:
             template = synthesis.command_for(stages)
             ok = True
@@ -1180,6 +1171,12 @@ class LivingAgent:
                     ok = False
                     break
             if not ok:
+                continue
+            unexplained = self._unexplained_request(goal, stages)
+            if not unexplained and self._depends_only_on_named_column(goal, stages, examples) is False:
+                unexplained = [f"a count that depends on column {_ordinal_positions(goal)[0]}"]
+            if unexplained:
+                contradicted.append((list(stages), unexplained))
                 continue
             skill = self._admit_synthesized(goal, stages, examples, template)
             outcome = self.solve(goal, bindings={"path": examples[0][0]})
@@ -1194,7 +1191,82 @@ class LivingAgent:
                 }
             )
             return outcome
-        raise AgentError("NO_VERIFIED_PIPELINE")
+
+        # Nothing the fixed vocabulary can build is both exact and an answer to
+        # the request.  The machine's own documentation is the next place to
+        # look: a tool that takes an argument may be exactly the mechanism the
+        # request names, and its help text says which arguments it has.
+        # Composition is the general case -- an unknown mechanism with grounded
+        # arguments feeding stages the creature already knows; a single stage is
+        # its degenerate case.
+        composed = self._compose(
+            goal, examples, max_length=max_length, time_budget_s=time_budget_s
+        )
+        if composed is not None:
+            pipeline, detail = composed
+            skill = self._admit_composed(goal, pipeline, examples)
+            outcome = self.solve(goal, bindings={"path": examples[0][0]})
+            outcome.update(
+                {
+                    "learned": True,
+                    "stages": pipeline,
+                    "documented": detail["documented"],
+                    "grammar": detail["grammar"],
+                    "source": "composed",
+                    "tool": detail["tool"],
+                    "argv": list(detail["argv"]),
+                    "commands_run": detail["tested"],
+                    "seconds": round(time.perf_counter() - started, 4),
+                }
+            )
+            return outcome
+        found = self._find_documented_mechanism(goal, examples)
+        if found is not None:
+            skill = self._admit_documented_skill(goal, found, examples)
+            outcome = self.solve(goal, bindings={"path": examples[0][0]})
+            outcome.update(
+                {
+                    "learned": True,
+                    "tool": found["tool"],
+                    "argv": list(found["argv"]),
+                    "source": "documentation-options",
+                    "commands_run": found["runs"],
+                    "seconds": round(time.perf_counter() - started, 4),
+                }
+            )
+            return outcome
+        if contradicted:
+            # Something reproduced the bytes and contradicted the sentence.  The
+            # examples and the request are two specifications, and the honest
+            # report is that they disagree -- not the pipeline that fits one and
+            # ignores the other.
+            stages, unexplained = contradicted[0]
+            self._record_impasse(
+                goal,
+                {
+                    "reason": "evidence_conflict",
+                    "unexplained": unexplained,
+                    "contradicted_by": [" ".join(stages)],
+                    "strategies": ["synthesis", "composition", "documentation"],
+                    "examples": [path for path, _ in examples],
+                    "tools_tried": sorted({row["tool"] for row in self.discovery_log}),
+                },
+            )
+            raise AgentError("EXAMPLES_CONTRADICT_GOAL:" + ",".join(unexplained))
+        # The vocabulary cannot express the examples and nothing on this machine
+        # that documents itself reproduces them.  That is knowledge -- the goal,
+        # the evidence and the tools that were tried -- and it belongs on the
+        # record, not in a traceback nobody keeps.
+        self._record_impasse(
+            goal,
+            {
+                "reason": "no_verified_mechanism",
+                "strategies": ["synthesis", "composition", "documentation"],
+                "examples": [path for path, _ in examples],
+                "tools_tried": sorted({row["tool"] for row in self.discovery_log}),
+            },
+        )
+        raise AgentError("NO_PIPELINE_WITHIN_BUDGET")
 
     # -- arguments the machine documents -----------------------------------
     # ``F`` is a *file* placeholder in the coreutils convention (--files0-from=F), so
@@ -1370,7 +1442,17 @@ class LivingAgent:
         # is the simplest explanation, and a pair is only worth a process if the
         # singles cannot do the job.  Keyword-only switches are kept to the last
         # two, because they are the most numerous and the least informative.
-        unique.sort(key=lambda row: (cls_flags(row[1]), -row[0], row[1]))
+        # Among equally strong bundles, the shortest spelling wins: `-d ,` before
+        # `--output-delimiter ,`, and `-k 2 -t ,` before `-k 2 --field-separator ,`
+        # -- the same option, said the way a person would say it.
+        unique.sort(
+            key=lambda row: (
+                cls_flags(row[1]),
+                -row[0],
+                len(" ".join(row[1])),
+                row[1],
+            )
+        )
         strong = [row for row in unique if row[0] >= 2][:8]
         weak = [row for row in unique if row[0] < 2][:2]
         return strong + weak
@@ -1524,6 +1606,10 @@ class LivingAgent:
                     # The tool alone reproduces the first example: a pipeline of
                     # one stage, which the grammar search has no suffix for.
                     if self._matches_every_example([stage.shell], examples):
+                        if self._unexplained_request(goal, [stage.shell]):
+                            continue
+                        if self._depends_only_on_named_column(goal, [stage.shell], examples) is False:
+                            continue
                         self._settle_admissions(before, winner=doc.name)
                         self._log_composition(candidates, survivors, doc, form, tested)
                         return [stage.shell], {
@@ -1546,13 +1632,26 @@ class LivingAgent:
                     time_budget_s=time_budget_s,
                     stages=grammar,
                 )
-                for chosen in pipelines:
+                attempts = [list(chosen) for chosen in pipelines]
+                requested = self._requested_stages(goal)
+                if requested:
+                    # The grammar searches by bytes alone, so a suffix whose
+                    # intermediate happens to be unchanged never appears in it
+                    # (`sort -u` of already-unique lines, then `wc -l`).  What
+                    # the sentence names is the other specification; it is
+                    # tried and then verified like everything else.
+                    attempts.append(requested)
+                for chosen in attempts:
                     pipeline = [stage.shell, *chosen]
                     try:
                         matched = self._matches_every_example(pipeline, examples)
                     except AgentError:
                         continue  # not a command this computer will execute
                     if matched:
+                        if self._unexplained_request(goal, pipeline):
+                            continue
+                        if self._depends_only_on_named_column(goal, pipeline, examples) is False:
+                            continue
                         self._settle_admissions(before, winner=doc.name)
                         self._log_composition(candidates, survivors, doc, form, tested)
                         return pipeline, {
@@ -1611,6 +1710,147 @@ class LivingAgent:
                 }
             )
         del self.discovery_log[: max(0, len(self.discovery_log) - 200)]
+
+    def _unexplained_structure(self, goal: str, stages: Sequence[str]) -> list[str]:
+        """What the request says about the shape of the data that the stages ignore.
+
+        A stage list can reproduce every example and still not be an answer.  On
+        three rows, "reverse the first two" matches a truncated sort by the
+        third column; the bytes agree and the sentence does not.  The request
+        and the examples are two independent specifications, so a pipeline that
+        satisfies one while contradicting the other is a coincidence, not
+        knowledge.
+
+        Only structure the request *names* is checked -- an ordinal beside a
+        unit noun, a named separator -- and only as a necessary condition: the
+        number has to occur, the character has to occur.  This cannot prove a
+        pipeline right; it can prove one cannot be the answer.
+        """
+        text = " ".join(stages)
+        missing: list[str] = []
+        for position in _ordinal_positions(goal):
+            # `-f2` and `-k 2` are the same claim; `-f 12` is not position 2.
+            if not re.search(rf"(?<![\d.]){position}(?![\d.])", text):
+                missing.append(f"position {position}")
+        words = set(re.findall(r"[a-z]+", goal.lower()))
+        for word, character in _SEPARATOR_WORDS.items():
+            if word not in words:
+                continue
+            item = f"separator {character}"
+            if item in missing:
+                continue
+            if character == "\t":
+                present = "\t" in text or "\\t" in text
+            else:
+                present = character in text
+            if not present:
+                missing.append(item)
+        return missing
+
+    @staticmethod
+    def _requested_stages(goal: str) -> list[str]:
+        """The tail of a pipeline the sentence itself specifies, in order.
+
+        When the request says "count the distinct values", it has named two
+        operations and their order; the bytes only have to agree.  This is the
+        same reading ``_requested_operations`` checks against, spelled as the
+        stages that perform it.  Nothing here is guessed from the examples --
+        a stage appears only because a phrase in the request asks for it.
+        """
+        labels = [label for label, _pattern in _requested_operations(goal)]
+        stages: list[str] = []
+        if "distinct values" in labels:
+            stages.append("sort -u")
+        for label in labels:
+            if label.startswith("first "):
+                stages.append("head -n " + label.split()[1])
+            elif label.startswith("last "):
+                stages.append("tail -n " + label.split()[1])
+        if "a count" in labels:
+            stages.append("wc -l")
+        return stages
+
+    def _unexplained_request(self, goal: str, stages: Sequence[str]) -> list[str]:
+        """Everything the request says the stages do not do.
+
+        Two kinds of statement are checked: the *structure* of the data (an
+        ordinal beside a unit noun, a named separator) and the *operations* the
+        sentence names outright ("keep the first two", "distinct", "count").
+        A verified pipeline that ignores either is not an answer to this
+        request, however exactly it reproduces the examples.
+        """
+        text = " ".join(stages)
+        missing = self._unexplained_structure(goal, stages)
+        for label, pattern in _requested_operations(goal):
+            if not re.search(pattern, text):
+                missing.append(label)
+        return missing
+
+    def _depends_only_on_named_column(
+        self, goal: str, stages: Sequence[str], examples: Sequence[tuple[str, str]]
+    ) -> bool | None:
+        """Does the answer use the column the request names -- and nothing else?
+
+        `ptx -g 2 -F , | sort -u | wc -l` reproduces "3" on two tables whose
+        second column has three distinct values, and it does so without ever
+        touching a column: the option is a gap width.  A count over a named
+        column can be interrogated, because the answer must *move* when that
+        column changes and must *not* move when the other columns do.  Two
+        probes, three real runs, and a binding that was never used is exposed.
+
+        Returns None when the question does not apply (no count is asked for,
+        no column is named, the answer is not a single scalar, or the count is
+        already 1 so a constant column cannot move it).  Only a definite False
+        rejects: it means the stage list has been shown not to use the column
+        it claims to use, which is a fact about behaviour, not about wording.
+        """
+        if "a count" not in [label for label, _ in _requested_operations(goal)]:
+            return None
+        positions = _ordinal_positions(goal)
+        if not positions:
+            return None
+        path, expected = examples[0]
+        if len(expected.strip().splitlines()) != 1 or expected.strip() == "1":
+            return None
+        text = self.computer.read(path)
+        separators = self._separators([text])
+        if not separators:
+            return None
+        separator, position = separators[0], positions[0]
+        constant: list[str] = []
+        others: list[str] = []
+        for line in text.splitlines():
+            fields = line.split(separator)
+            if len(fields) < position:
+                return None
+            stable = list(fields)
+            stable[position - 1] = "0"
+            constant.append(separator.join(stable))
+            others.append(
+                separator.join(
+                    field if index + 1 == position
+                    else (field.upper() if field.upper() != field else field.lower())
+                    for index, field in enumerate(fields)
+                )
+            )
+        pipeline = " | ".join(stages)
+
+        def answer(payload: str) -> str | None:
+            result = self.computer.run(pipeline, stdin=payload)
+            return result.stdout if result.ok else None
+
+        original = answer(text)
+        if original is None:
+            return None
+        changed = answer("\n".join(constant) + "\n")
+        untouched = answer("\n".join(others) + "\n")
+        if changed is None or untouched is None:
+            return None
+        if changed == original:
+            return False  # the named column does not move the answer
+        if untouched != original:
+            return False  # columns the request never named move it
+        return True
 
     def _matches_every_example(
         self, stages: Sequence[str], examples: Sequence[tuple[str, str]]
@@ -1697,7 +1937,10 @@ class LivingAgent:
             if runs >= max_runs:
                 stopped = True
                 return None
-            template = " ".join([doc.name, *form, "{path}"])
+            # Arguments are data, not shell syntax: a separator such as `|`
+            # is a pipe unless it is quoted, and then the *file name* becomes
+            # the command.  Every part is quoted before it reaches the shell.
+            template = " ".join([doc.name, *(shlex.quote(part) for part in form), "{path}"])
             try:
                 self.computer.admit(
                     doc.name,
