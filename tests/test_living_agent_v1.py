@@ -3033,6 +3033,82 @@ class HeldOutBatteryTests(unittest.TestCase):
         return "".join(line + "\n" for line in out)
 
 
+class EvidenceInductionTests(unittest.TestCase):
+    """A transformation the examples state exactly is not searched for.
+
+    Two examples can determine a permutation no sentence names and no tool on
+    this machine documents.  When that happens the reading is taken from the
+    evidence -- and then proved against the real shell like anything else.
+    """
+
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name)
+
+    @staticmethod
+    def _reverse(text: str) -> str:
+        return "".join(line + "\n" for line in reversed(text.splitlines()))
+
+    @staticmethod
+    def _rotate(text: str, step: int) -> str:
+        lines = text.splitlines()
+        return "".join(line + "\n" for line in lines[step:] + lines[:step])
+
+    def test_reversal_is_read_off_the_evidence_not_searched_for(self) -> None:
+        # The same capability the battery checks, with the cost asserted: two
+        # real commands instead of a scan of the machine.  The bound is the
+        # claim -- a creature that knows the transformation should not have to
+        # page through nineteen strangers' help text to find it.
+        agent = LivingAgent(self.root)
+        first = "hello\nworld\nagain\n"
+        second = "zeta\nbeta\ngamma\n"
+        agent.computer.write("r1.txt", first)
+        agent.computer.write("r2.txt", second)
+        goal = "print the lines in reverse order"
+        outcome = agent.acquire(
+            goal, [("r1.txt", self._reverse(first)), ("r2.txt", self._reverse(second))]
+        )
+        self.assertEqual(outcome["stages"], ["tac"], outcome)
+        self.assertLessEqual(outcome["commands_run"], 4, outcome)
+        held = "q\np\nr\ns\n"
+        agent.computer.write("h.txt", held)
+        self.assertEqual(
+            agent.solve(goal, bindings={"path": "h.txt"})["stdout"], self._reverse(held)
+        )
+
+    def test_a_rotation_no_tool_documents_is_induced_and_proved(self) -> None:
+        agent = LivingAgent(self.root)
+        first = "a\nb\nc\nd\n"
+        second = "w\nx\ny\nz\n"
+        agent.computer.write("r1.txt", first)
+        agent.computer.write("r2.txt", second)
+        goal = "shift every line up by one, wrapping the last to the end"
+        outcome = agent.acquire(
+            goal, [("r1.txt", self._rotate(first, 1)), ("r2.txt", self._rotate(second, 1))]
+        )
+        self.assertLessEqual(len(outcome["stages"]), 1, outcome)
+        self.assertIn("awk", outcome["stages"][0], outcome)
+        self.assertLessEqual(outcome["commands_run"], 4, outcome)
+        held = "m\nn\no\np\nq\n"
+        agent.computer.write("h.txt", held)
+        self.assertEqual(
+            agent.solve(goal, bindings={"path": "h.txt"})["stdout"], self._rotate(held, 1)
+        )
+
+    def test_two_line_examples_cannot_distinguish_a_reversal_from_a_rotation(self) -> None:
+        # On two lines, "reverse" and "rotate by one" are the same function.
+        # A creature that picked one anyway would be guessing, and the guess
+        # would be wrong on the third line -- so the induction declines and the
+        # search has to find a mechanism whose behaviour is actually known.
+        pairs = [("b\na\n", "a\nb\n"), ("d\nc\n", "c\nd\n")]
+        self.assertEqual(LivingAgent._induced_stages(pairs), ())
+        # Three lines settle it: the reversal fits and the rotation does not.
+        pairs = [("b\na\nc\n", "c\na\nb\n"), ("d\nf\ne\n", "e\nf\nd\n")]
+        stages = LivingAgent._induced_stages(pairs)
+        self.assertEqual([stage.shell for stage in stages], ["tac"])
+
+
 class EndToEndTests(unittest.TestCase):
     """Two different kinds of knowledge live in one creature."""
 

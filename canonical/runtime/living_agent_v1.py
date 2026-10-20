@@ -1375,9 +1375,35 @@ class LivingAgent:
         # every ordinary request pay for stages it never used, and made "the
         # number of characters in each line" answerable only by accident of
         # ordering.
+        # A transformation the evidence states exactly is not searched for: it
+        # is read off the examples and offered to the same search, which then
+        # has to prove it against the real shell like anything else.  This is
+        # what turns "reverse the lines" from a nineteen-process scan of the
+        # machine's documentation into a two-process answer -- and it is the
+        # evidence doing the work, not a word list.
+        induced = self._induced_stages(inputs)
+        induced_tools = (
+            [stage.shell.split()[0] for stage in induced] if induced else []
+        )
+        before_admissions = set(self.computer.admitted())
+        for tool in induced_tools:
+            try:
+                self.computer.admit(
+                    tool,
+                    evidence={
+                        "induced_from": [path for path, _ in examples],
+                        "relation": "the examples are the input's lines in a fixed order",
+                    },
+                )
+            except AgentError:
+                induced = ()
+                break
         searched = [
             synthesis.search(
-                inputs, max_length=max_length, time_budget_s=time_budget_s
+                inputs,
+                max_length=max_length,
+                time_budget_s=time_budget_s,
+                stages=(tuple(synthesis.STAGES) + induced) if induced else None,
             )
         ]
         first_candidates, first_stats = searched[0]
@@ -1407,6 +1433,15 @@ class LivingAgent:
             return outcome
 
         outcome = consider(*searched[0])
+        winner = ""
+        if outcome is not None:
+            # Only a tool the admitted pipeline actually uses keeps its
+            # authority; an induced tool that lost to a known stage is revoked
+            # like any other failed guess.
+            for tool in induced_tools:
+                if any(stage.split()[0] == tool for stage in outcome.get("stages", ())):
+                    winner = tool
+        self._settle_admissions(before_admissions, winner=winner)
         if outcome is not None:
             return outcome
         # The wider search is worth its processes only when the *sentence*
@@ -2113,6 +2148,70 @@ class LivingAgent:
     def _small_number(cls, word: str) -> int:
         word = word.strip().lower()
         return int(word) if word.isdigit() else cls._NUMBER_WORDS.get(word, 0)
+
+    @staticmethod
+    def _induced_stages(inputs: Sequence[tuple[str, str]]) -> tuple[Any, ...]:
+        """Transformations the *evidence* demonstrates as an exact permutation.
+
+        Two examples can say something a sentence never will.  If every
+        example's answer is its input's lines in a fixed order -- the last line
+        first, or shifted by one -- then the transformation is that permutation
+        and no search over the machine's tools can say more about it than the
+        bytes already have.  Reading it off the evidence costs nothing; finding
+        `tac` by scanning nineteen strangers costs nineteen processes.
+
+        Induction from two examples is only honest when it is *unique*: at
+        least one example must have three or more lines (otherwise "reverse"
+        and "rotate by one" are the same function on the evidence), and no
+        second rule may fit.  When two rules fit, this returns nothing and the
+        creature goes on searching -- a guess between two readings is exactly
+        what it must not do.
+        """
+        pairs: list[tuple[list[str], list[str]]] = []
+        for source, expected in inputs:
+            lines = source.splitlines()
+            want = expected.splitlines()
+            if sorted(lines) != sorted(want):
+                return ()  # not a permutation of the lines: a different function
+            pairs.append((lines, want))
+        if len(pairs) < 2 or not any(len(lines) >= 3 for lines, _ in pairs):
+            return ()
+
+        def reverse(lines: list[str]) -> list[str]:
+            return list(reversed(lines))
+
+        def rotate(lines: list[str], k: int) -> list[str]:
+            return lines[k:] + lines[:k]
+
+        fits: list[Any] = []
+        if all(want == reverse(lines) for lines, want in pairs) and any(
+            reverse(lines) != lines for lines, _ in pairs
+        ):
+            fits.append(synthesis.Stage("tac", synthesis.LINES, synthesis.LINES, synthesis.as_text and (lambda text: synthesis.as_text(reverse(synthesis.as_lines(text))))))
+        longest = max(len(lines) for lines, _ in pairs)
+        for k in range(1, longest):
+            if all(want == rotate(lines, k) for lines, want in pairs) and any(
+                rotate(lines, k) != lines for lines, _ in pairs
+            ):
+                # A rotation cannot be spelled in `sed`: sed decides each
+                # line on its own and cannot move it, so a two-address range
+                # prints the file unchanged (the interpreter and the shell
+                # disagreed, and the shell check refused the candidate -- which
+                # is exactly what that check is for).  `awk` can buffer, so the
+                # rotation is written as one indexed pass over the records.
+                shell = (
+                    "awk '{a[NR]=$0} END {for (i=1; i<=NR; i++) "
+                    f"print a[(i+{k}-1)%NR+1]}}'"
+                )
+                fits.append(
+                    synthesis.Stage(
+                        shell,
+                        synthesis.LINES,
+                        synthesis.LINES,
+                        lambda text, step=k: synthesis.as_text(rotate(synthesis.as_lines(text), step)),
+                    )
+                )
+        return tuple(fits) if len(fits) == 1 else ()
 
     @classmethod
     def _derived_stages(cls, goal: str) -> tuple[Any, ...]:

@@ -12,7 +12,7 @@ receipt, not a terminal claim, and not a capability grant.
 | Living agent | `canonical/runtime/living_agent_v1.py` | Real POSIX computer surface, one-shot skill chunking, canary-based drift detection and repair, word learning, impasse tracking, self-directed practice, consolidating memory, snapshot/restore. |
 | Shell synthesis | `canonical/runtime/shell_synthesis_v1.py` | Learns a stdin→stdout pipeline from (input, expected output) examples: typed beam search over 20 real stages, exact interpreter ordering, real-shell verification. |
 | Benchmark | `canonical/runtime/living_agent_benchmark_v1.py` | Twelve spreadsheet transforms with independently written oracles, plus a projection of the repository's real file tree. |
-| Acceptance | `tests/test_living_agent_v1.py` | 127 tests / 183 subtests. Real processes, real files, exact byte equality. No mocks. |
+| Acceptance | `tests/test_living_agent_v1.py` | 130 tests / 183 subtests. Real processes, real files, exact byte equality. No mocks. |
 | Discovery | `canonical/runtime/living_discovery_v1.py` | Reads what this machine says it can do (`tool --help`, the tool's own definition), turns a goal sentence into an exact expected output, and proves a real command against it before admitting it. |
 | Growth measurement | `canonical/runtime/living_agent_growth_v1.py` | Acquires four real skills at runtime and replays them on three untouched real directories. |
 
@@ -441,6 +441,26 @@ candidate as evidence, and the exact bytes still decide.  This is how
 ever saying "numerically" or "descending" -- and how "sort the rows by the
 second column, numerically" keeps its stated `-g` when the examples agree.
 
+**A transformation the evidence states, that no tool documents.**  "Print
+the lines in reverse order" used to cost nineteen processes: the examples
+determine the answer completely, but the only way to produce it was to page
+through the machine's help text until `tac` turned up nineteenth.  Two
+examples can say what no sentence says.  If every example's answer is its
+input's lines in a fixed order -- the last line first, or shifted by one --
+then the transformation *is* that permutation, and it is read off the evidence
+for nothing.  The stage is then proved like any other: `tac` for a reversal,
+and `awk '{a[NR]=$0} END {...}'` for a rotation, which no tool on this machine
+documents at all.  Both answer in two processes.
+
+The discipline is uniqueness.  On two-line examples "reverse" and "rotate by
+one" are literally the same function, so the induction declines and the search
+must find a mechanism whose behaviour is actually known -- a creature that
+picked one anyway would be guessing, and the guess would be wrong on the third
+line.  A stage the induction proposes is still subject to the shell: the first
+rotation spelling used `sed`, whose interpreter agreed and whose shell returned
+the file unchanged (sed cannot move a line), and the real-shell check refused
+it.  That refusal is the reason the interpreter is never trusted on its own.
+
 **A stranger that deletes what it is shown.**  Candidates are chosen by a
 keyword match on text a stranger wrote about itself, and this machine happens
 to contain `unlink`, whose help text is a fine match for "remove the header
@@ -519,7 +539,8 @@ Measured on this machine, same machine, same day:
 | the number of words in each line | 2 | 0.02 s |
 | count the words | 2 | 0.03 s |
 | reverse the lines of a named file (discovered `tac`) | 3 | 0.09 s |
-| print the lines in reverse order, from examples alone (`tac`) | 19 | 0.37 s |
+| print the lines in reverse order, read off the examples (`tac`) | 2 | 0.03 s |
+| shift every line up by one, no tool documents it (`awk`) | 2 | 0.03 s |
 | remove the header line (`tail -n +2`) | 2 | 0.07 s |
 | translate commas to semicolons (both named) | 3 | 0.05 s |
 | lines that contain a given word | 2 | 0.07 s |
