@@ -344,12 +344,57 @@ class BenchmarkFloorTests(unittest.TestCase):
     def test_every_benchmark_goal_is_a_real_live_capability(self):
         """The benchmark must not rot when a capability is renamed or removed."""
         from canonical.runtime import live_integrated_brain_v1 as lb
-        from canonical.runtime.goal_compilation_benchmark_v1 import BENCHMARK_GOALS
+        from canonical.runtime.goal_compilation_benchmark_v1 import (
+            BENCHMARK_GOALS,
+            EXTENDED_BENCHMARK_GOALS,
+        )
 
         registry = dict(lb.load_verified_registry())
-        for spec in BENCHMARK_GOALS:
+        for spec in list(BENCHMARK_GOALS) + list(EXTENDED_BENCHMARK_GOALS):
             for cid in spec["expected"]:
                 self.assertIn(cid, registry, f"{spec['id']} expects missing {cid}")
+
+    def test_extended_tier_holds_its_floor(self):
+        """The gain must generalise beyond the original nine goals.
+
+        Measured at base 9554215 with the same registry and the base
+        goal_compiler.py checked out: 4/14 compiled and 0/14 selected the
+        expected capability. The original nine-goal tier turned out to be the
+        pessimistic sample.
+        """
+        from canonical.runtime import goal_compilation_benchmark_v1 as bench
+
+        report = bench.run(bench.EXTENDED_BENCHMARK_GOALS)
+        totals = report["totals"]
+        base = bench.BASELINE_MEASURED_AT_BASE_9554215["EXTENDED"]
+        self.assertEqual(totals["goals"], base["goals"])
+        self.assertGreaterEqual(
+            totals["compiled"],
+            12,
+            f"extended compile rate regressed to {totals['compiled']}/14: "
+            + json.dumps(report["failure_causes"], sort_keys=True),
+        )
+        self.assertGreaterEqual(totals["expected_first_capability_selected"], 7)
+        # And it must actually beat the recorded baseline, not merely sit on it.
+        self.assertGreater(totals["compiled"], base["compiled"])
+        self.assertGreater(
+            totals["expected_first_capability_selected"],
+            base["expected_first_selected"],
+        )
+
+    def test_overmatching_capability_is_still_documented(self):
+        """The pre-existing catch-all that explains most wrong selections."""
+        from canonical.runtime import live_integrated_brain_v1 as lb
+        from canonical.runtime.goal_compilation_benchmark_v1 import (
+            KNOWN_OVERMATCHING_CAPABILITY,
+        )
+
+        registry = dict(lb.load_verified_registry())
+        cid = KNOWN_OVERMATCHING_CAPABILITY
+        self.assertIn(cid, registry)
+        keywords = registry[cid].get("keywords") or []
+        # The defect is the breadth of its vocabulary, so pin that it is broad.
+        self.assertGreater(len(keywords), 20)
 
 
 if __name__ == "__main__":

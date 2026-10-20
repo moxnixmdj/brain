@@ -169,6 +169,112 @@ KNOWN_COVERAGE_GAPS = {
 }
 
 
+EXTENDED_BENCHMARK_GOALS: List[Dict[str, Any]] = [
+    {
+        "id": "EXT_QR_GENERATE",
+        "goal": "Generate a QR code image for the text PROJECT BRAIN.",
+        "expected": ["image.qr.generate.qrencode"],
+    },
+    {
+        "id": "EXT_BARCODE_DECODE",
+        "goal": "Decode the barcode in an image.",
+        "expected": ["image.code.decode.zbarimg"],
+    },
+    {
+        "id": "EXT_OCR_SCANNED_IMAGE",
+        "goal": "Extract text from a scanned image with OCR.",
+        "expected": ["image.extract.ocr.tesseract"],
+    },
+    {
+        "id": "EXT_TAR_VERIFY",
+        "goal": "Verify a tar.gz archive against its manifest.",
+        "expected": ["archive.verify.tar_gz.gnu"],
+    },
+    {
+        "id": "EXT_XLSX_CREATE",
+        "goal": "Create an xlsx table from JSON records.",
+        "expected": ["xlsx.table.create_from_json_records"],
+    },
+    {
+        "id": "EXT_DOCX_VERIFY",
+        "goal": "Verify a docx document against its intent.",
+        "expected": ["docx.document.verify.intent_ooxml"],
+    },
+    {
+        "id": "EXT_EVIDENCE_RANK",
+        "goal": "Rank source evidence by relevance to the objective.",
+        "expected": ["source.objective_relevance.rank.bm25"],
+    },
+    {
+        "id": "EXT_CLAIM_BIND",
+        "goal": "Bind evidence claims to an explicit comparison.",
+        "expected": ["evidence.claim_spec.bind.explicit_comparison.stdlib"],
+    },
+    {
+        "id": "EXT_KNOWLEDGE_CONSISTENCY",
+        "goal": "Assess the consistency of knowledge observations.",
+        "expected": ["knowledge.consistency.assess"],
+    },
+    {
+        "id": "EXT_JQ_TABLE",
+        "goal": "Query a JSON table and produce a markdown table.",
+        "expected": ["json.query.jq"],
+    },
+    {
+        "id": "EXT_AST_AUDIT",
+        "goal": "Audit the python source tree with an AST.",
+        "expected": ["python.source.audit.ast"],
+    },
+    {
+        "id": "EXT_SQLITE_VERIFY",
+        "goal": "Verify a sqlite table against JSON records.",
+        "expected": ["sqlite.table.verify_against_json_records"],
+    },
+    {
+        "id": "EXT_DECISION_VERIFY",
+        "goal": "Verify a typed decision synthesis.",
+        "expected": ["decision.synthesis.verify.stdlib"],
+    },
+    {
+        "id": "EXT_MD_TO_PDF",
+        "goal": "Convert a markdown document to PDF.",
+        "expected": ["document.convert.markdown_pdf.pandoc_weasyprint"],
+    },
+]
+
+# Measured, not asserted. Both tiers were run against the same registry with
+# `canonical/runtime/goal_compiler.py` checked out at each revision, so the
+# comparison holds the registry constant and varies only the compiler.
+#
+#   git checkout 9554215 -- canonical/runtime/goal_compiler.py   -> baseline
+#   git checkout HEAD    -- canonical/runtime/goal_compiler.py   -> current
+#
+# The extended tier was added precisely because a nine-goal sample is too small
+# to generalise from, and it turned out to be the PESSIMISTIC sample: the gain
+# is larger on fourteen ordinary goals than on the original nine.
+BASELINE_MEASURED_AT_BASE_9554215 = {
+    "PRIMARY": {"goals": 9, "compiled": 1, "expected_first_selected": 0},
+    "EXTENDED": {"goals": 14, "compiled": 4, "expected_first_selected": 0},
+}
+
+# A measured, PRE-EXISTING defect worth recording because it explains most of
+# the remaining wrong selections in both tiers.
+#
+# `terminal.kstar.root.assess.stdlib` carries a 27-keyword list of governance
+# vocabulary -- proof, evidence, capability, semantic, composition, context,
+# reuse, universal, adequacy, discriminator, generator, and so on -- which
+# overlaps ordinary technical prose on at least one token almost always. It was
+# selected for FOUR unrelated goals at base (QR generate, evidence rank, claim
+# bind, knowledge consistency) and is still selected for three of them now. It
+# binds easily, so once the better-matching capabilities prove unbindable it is
+# the candidate that survives.
+#
+# Adding repository-self-referential tokens to GENERIC_MATCH_TOKENS reduced this
+# from four goals to three; it did not eliminate it, and the two scoring-level
+# attempts described above both failed to either.
+KNOWN_OVERMATCHING_CAPABILITY = "terminal.kstar.root.assess.stdlib"
+
+
 def benchmark_digest(goals: List[Mapping[str, Any]]) -> str:
     """Content address of the benchmark goal set itself."""
     canon = json.dumps(
@@ -346,47 +452,142 @@ def run(goals: List[Mapping[str, Any]] | None = None) -> Dict[str, Any]:
     }
 
 
+def run_all() -> Dict[str, Any]:
+    """Measure both tiers, with the base-9554215 baseline shown alongside."""
+    _ensure_repo_root()
+    primary = run(BENCHMARK_GOALS)
+    extended = run(EXTENDED_BENCHMARK_GOALS)
+    combined_goals = primary["totals"]["goals"] + extended["totals"]["goals"]
+    combined_compiled = primary["totals"]["compiled"] + extended["totals"]["compiled"]
+    combined_first = (
+        primary["totals"]["expected_first_capability_selected"]
+        + extended["totals"]["expected_first_capability_selected"]
+    )
+    base = BASELINE_MEASURED_AT_BASE_9554215
+    return {
+        "schema": SCHEMA,
+        "authority": AUTHORITY,
+        "primary": primary,
+        "extended": extended,
+        "combined": {
+            "goals": combined_goals,
+            "compiled": combined_compiled,
+            "expected_first_selected": combined_first,
+            "baseline_compiled": base["PRIMARY"]["compiled"] + base["EXTENDED"]["compiled"],
+            "baseline_expected_first_selected": (
+                base["PRIMARY"]["expected_first_selected"]
+                + base["EXTENDED"]["expected_first_selected"]
+            ),
+        },
+    }
+
+
+def _print_tier(label: str, report: Dict[str, Any], baseline: Dict[str, int]) -> None:
+    totals = report["totals"]
+    print(
+        "{label}: compiled {compiled}/{goals} ({rate:.1%})  [base 9554215: {bc}/{bg}]".format(
+            label=label,
+            compiled=totals["compiled"],
+            goals=totals["goals"],
+            rate=totals["compile_rate"],
+            bc=baseline["compiled"],
+            bg=baseline["goals"],
+        )
+    )
+    print(
+        "    expected capability selected {first}/{goals}  [base 9554215: {bf}/{bg}]"
+        " -- compiling is not selecting correctly".format(
+            first=totals["expected_first_capability_selected"],
+            goals=totals["goals"],
+            bf=baseline["expected_first_selected"],
+            bg=baseline["goals"],
+        )
+    )
+    if totals["compiled_against_wrong_capability"]:
+        print(
+            "    compiled against the WRONG capability: {n}".format(
+                n=totals["compiled_against_wrong_capability"]
+            )
+        )
+    if report["failure_causes"]:
+        print("    failure causes:", json.dumps(report["failure_causes"], sort_keys=True))
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--json", help="write the full measurement to this path")
+    parser.add_argument(
+        "--primary-only",
+        action="store_true",
+        help="measure only the original nine-goal tier",
+    )
     parser.add_argument("--quiet", action="store_true", help="summary only")
     args = parser.parse_args()
 
     report = run()
     totals = report["totals"]
     print(f"GOAL COMPILATION BENCHMARK {report['benchmark_sha256'][:16]}")
-    print(
-        "compiled {compiled}/{goals} ({rate:.1%})".format(
-            compiled=totals["compiled"], goals=totals["goals"], rate=totals["compile_rate"]
+    _print_tier("PRIMARY", report, BASELINE_MEASURED_AT_BASE_9554215["PRIMARY"])
+    if not args.primary_only:
+        extended = run(EXTENDED_BENCHMARK_GOALS)
+        _print_tier("EXTENDED", extended, BASELINE_MEASURED_AT_BASE_9554215["EXTENDED"])
+        pg = totals["goals"] + extended["totals"]["goals"]
+        pc = totals["compiled"] + extended["totals"]["compiled"]
+        pf = (
+            totals["expected_first_capability_selected"]
+            + extended["totals"]["expected_first_capability_selected"]
         )
-    )
-    print(
-        "expected capability selected {first}/{goals} ({rate:.1%}) -- compiling is not selecting correctly".format(
-            first=totals["expected_first_capability_selected"],
-            goals=totals["goals"],
-            rate=totals["expected_first_rate"],
+        base = BASELINE_MEASURED_AT_BASE_9554215
+        bc = base["PRIMARY"]["compiled"] + base["EXTENDED"]["compiled"]
+        bf = (
+            base["PRIMARY"]["expected_first_selected"]
+            + base["EXTENDED"]["expected_first_selected"]
         )
-    )
-    if totals["compiled_against_wrong_capability"]:
+        print(f"COMBINED: compiled {pc}/{pg}  [base 9554215: {bc}/{pg}]")
+        print(f"          expected capability selected {pf}/{pg}  [base 9554215: {bf}/{pg}]")
+        report = {
+            "schema": SCHEMA,
+            "authority": AUTHORITY,
+            "primary": report,
+            "extended": extended,
+        }
+    else:
         print(
-            "compiled against the WRONG capability: {n} (see known_selection_gaps)".format(
-                n=totals["compiled_against_wrong_capability"]
+            "compiled {compiled}/{goals} ({rate:.1%})".format(
+                compiled=totals["compiled"], goals=totals["goals"], rate=totals["compile_rate"]
             )
         )
-    if report["failure_causes"]:
-        print("failure causes:", json.dumps(report["failure_causes"], sort_keys=True))
-    if report["near_miss_drop_reasons"]:
-        print("near-miss drops:", json.dumps(report["near_miss_drop_reasons"], sort_keys=True))
+        print(
+            "expected capability selected {first}/{goals} ({rate:.1%})".format(
+                first=totals["expected_first_capability_selected"],
+                goals=totals["goals"],
+                rate=totals["expected_first_rate"],
+            )
+        )
+    if isinstance(report, dict) and "totals" in report:
+        if report["near_miss_drop_reasons"]:
+            print("near-miss drops:", json.dumps(report["near_miss_drop_reasons"], sort_keys=True))
     if not args.quiet:
-        for row in report["rows"]:
-            mark = "OK  " if row["compiled"] else "FAIL"
-            extra = ""
-            if not row["compiled"]:
-                extra = " <- " + str((row["failure"] or {}).get("cause"))
-                near = row["near_miss"] or {}
-                if near.get("capability_id"):
-                    extra += f" | near-miss {near['capability_id']} ({near.get('drop_reason')})"
-            print(f"  {mark} {row['id']}{extra}")
+        # `report` is a two-tier envelope unless --primary-only, so rows are
+        # read from the tier objects rather than from the envelope.
+        tiers = (
+            [("PRIMARY", report)]
+            if "rows" in report
+            else [("PRIMARY", report["primary"]), ("EXTENDED", report["extended"])]
+        )
+        for tier_name, tier in tiers:
+            print(f"-- {tier_name} --")
+            for row in tier["rows"]:
+                mark = "OK  " if row["compiled"] else "FAIL"
+                extra = ""
+                if not row["compiled"]:
+                    extra = " <- " + str((row["failure"] or {}).get("cause"))
+                    near = row["near_miss"] or {}
+                    if near.get("capability_id"):
+                        extra += f" | near-miss {near['capability_id']} ({near.get('drop_reason')})"
+                elif not row["expected_first_selected"]:
+                    extra = " -> " + ",".join(row["selected"][:2]) + "  WRONG-CAPABILITY"
+                print(f"  {mark} {row['id']}{extra}")
     if args.json:
         out = Path(args.json)
         out.parent.mkdir(parents=True, exist_ok=True)
