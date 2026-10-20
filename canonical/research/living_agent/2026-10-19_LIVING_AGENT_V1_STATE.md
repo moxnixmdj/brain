@@ -12,15 +12,15 @@ receipt, not a terminal claim, and not a capability grant.
 | Living agent | `canonical/runtime/living_agent_v1.py` | Real POSIX computer surface, one-shot skill chunking, canary-based drift detection and repair, word learning, impasse tracking, self-directed practice, consolidating memory, snapshot/restore. |
 | Shell synthesis | `canonical/runtime/shell_synthesis_v1.py` | Learns a stdin→stdout pipeline from (input, expected output) examples: typed beam search over 20 real stages, exact interpreter ordering, real-shell verification. |
 | Benchmark | `canonical/runtime/living_agent_benchmark_v1.py` | Twelve spreadsheet transforms with independently written oracles, plus a projection of the repository's real file tree. |
-| Acceptance | `tests/test_living_agent_v1.py` | 125 tests / 182 subtests. Real processes, real files, exact byte equality. No mocks. |
+| Acceptance | `tests/test_living_agent_v1.py` | 127 tests / 183 subtests. Real processes, real files, exact byte equality. No mocks. |
 | Discovery | `canonical/runtime/living_discovery_v1.py` | Reads what this machine says it can do (`tool --help`, the tool's own definition), turns a goal sentence into an exact expected output, and proves a real command against it before admitting it. |
 | Growth measurement | `canonical/runtime/living_agent_growth_v1.py` | Acquires four real skills at runtime and replays them on three untouched real directories. |
 
 ## Measured results
 
-A twenty-request battery (`HeldOutBatteryTests`) teaches each request on two
+A twenty-one-request battery (`HeldOutBatteryTests`) teaches each request on two
 files and answers a third that the search never saw; every expected output is
-computed by an independent implementation in the test file.  All twenty are
+computed by an independent implementation in the test file.  All twenty-one are
 byte-exact, including four that used to be admitted as a plausible-looking
 wrong answer: a positional `tail` standing in for a word filter, a reversed
 lexical sort standing in for a numeric one, a `tail -n +2` standing in for a
@@ -28,7 +28,12 @@ length filter (correct on both taught files, wrong on the held-out one), and an
 unanchored pattern standing in for "starts with" (it also selects every line
 that merely contains the letter).  The last two are refused now because the
 sentence is read as a *predicate on a line* and the pipeline is run on probe
-lines the examples never contained.
+lines the examples never contained.  The newest case is a capability rather
+than a correction: "print the lines in reverse order", answered by `tac`,
+which the creature finds in this machine's own help text and proves -- the
+examples are unsorted and multi-character on purpose, because `sort -r`
+(characters) and `rev` (characters within a line) both differ from `tac` on the
+very first line.
 
 
 Table induction, one demonstration per family (a demonstration that shows one
@@ -436,6 +441,24 @@ candidate as evidence, and the exact bytes still decide.  This is how
 ever saying "numerically" or "descending" -- and how "sort the rows by the
 second column, numerically" keeps its stated `-g` when the examples agree.
 
+**A stranger that deletes what it is shown.**  Candidates are chosen by a
+keyword match on text a stranger wrote about itself, and this machine happens
+to contain `unlink`, whose help text is a fine match for "remove the header
+line".  During a probe it deleted the demonstration file out from under the
+search, which then failed with `FileNotFoundError` thirty runs later.  Every
+probe, every verification and every documentation attempt now runs on a
+byte-identical copy, and the originals are checked to be intact afterwards.
+The copy is a few hundred bytes; the demonstration is not replaceable.
+
+**A tool that never stops writing.**  `yes` will fill a pipe forever, and a
+candidate is given a process before anything is known about it.  Reading its
+output with `subprocess.run(capture_output=True)` turned one bad guess into a
+memory bomb and the whole process was OOM-killed mid-search.  The reader is
+now bounded: it drains in 64 KiB blocks, keeps at most the cap, kills the
+child the moment the cap is reached, and reports a truncated run as a failure
+rather than as an answer.  A flooding tool costs 2 s instead of the 6 s
+deadline, and an answer can never be built from a stream that was cut off.
+
 **Arguments that became shell syntax.**  The documented-mechanism path joined
 an option bundle with spaces, so `-t |` became a pipe and the *file name*
 became the next command (`BINARY_NOT_ADMITTED:one.psv`).  Every argument is now
@@ -496,6 +519,8 @@ Measured on this machine, same machine, same day:
 | the number of words in each line | 2 | 0.02 s |
 | count the words | 2 | 0.03 s |
 | reverse the lines of a named file (discovered `tac`) | 3 | 0.09 s |
+| print the lines in reverse order, from examples alone (`tac`) | 19 | 0.37 s |
+| remove the header line (`tail -n +2`) | 2 | 0.07 s |
 | translate commas to semicolons (both named) | 3 | 0.05 s |
 | lines that contain a given word | 2 | 0.07 s |
 | count the distinct values in column 2 | 50 | 0.21 s |
@@ -738,6 +763,14 @@ rather than die mid-loop.
   value is a filename or a free-form word (`-o FILE`, `--compress-program=PROG`)
   is never bound -- a demonstration is the only way to teach those, and inventing
   a value would be a guess dressed as an experiment.
+- The documentation search is breadth-first with a narrow ranked shortlist
+  (six tools, bare and then with documented arguments) and escalates to a
+  widened twenty-four-tool pass **without** argument enumeration when the top
+  of the ranking has nothing.  That is how `tac` -- nineteenth for "reverse the
+  lines", behind `rev` -- is reached at all, at the cost of nineteen processes
+  and 0.37 s for a capability the creature did not have.  The widened pass is
+  skipped entirely on requests the narrow pass answers, which is every request
+  the grammar or composition already handles.
 - Composition places the documented mechanism **first** and at most once.  A
   pipeline with two unknown mechanisms, or one in the middle, is outside what
   this search reaches; it would need a product over the documented surface at

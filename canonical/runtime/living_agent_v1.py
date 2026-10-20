@@ -258,28 +258,80 @@ class Computer:
         }
         (self.root / ".tmp").mkdir(exist_ok=True)
         started = time.perf_counter()
+        # A machine contains tools that write forever (`yes`, `seq inf`), and a
+        # candidate is chosen by a keyword match long before anything is known
+        # about it.  Reading its output with an unbounded pipe turns one bad
+        # guess into a memory bomb -- this process was OOM-killed once by
+        # exactly that.  The readers therefore *drain* without keeping more
+        # than a cap, the child is killed at the deadline, and a truncated or
+        # timed-out run is reported as a failure rather than as an answer.
+        import threading
+
+        handle = None
         try:
-            completed = subprocess.run(
+            if stdin is None:
+                source: Any = subprocess.DEVNULL
+            else:
+                handle = tempfile.TemporaryFile()
+                handle.write(stdin.encode("utf-8"))
+                handle.seek(0)
+                source = handle
+            process = subprocess.Popen(
                 ["/bin/sh", "-c", command],
                 cwd=workdir,
                 env=env,
-                input=stdin if stdin is not None else "",
-                text=True,
-                capture_output=True,
-                timeout=self.timeout,
+                stdin=source,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
             )
-            out = completed.stdout
-            err = completed.stderr
-            truncated = len(out) > _STDOUT_CAP or len(err) > _STDERR_CAP
+            sink: dict[str, list[bytes]] = {"out": [], "err": []}
+            overflow = {"out": False, "err": False}
+
+            def drain(stream: Any, key: str, limit: int) -> None:
+                kept = 0
+                for block in iter(lambda: stream.read(65536), b""):
+                    if kept < limit:
+                        take = block[: limit - kept]
+                        sink[key].append(take)
+                        kept += len(take)
+                        if kept >= limit:
+                            # The output is already unusable, and a tool that
+                            # filled the cap will fill it again: stop it now
+                            # rather than waiting out the deadline.  `yes`
+                            # reaches this in microseconds.
+                            overflow[key] = True
+                            process.kill()
+                stream.close()
+
+            readers = [
+                threading.Thread(target=drain, args=(process.stdout, "out", _STDOUT_CAP), daemon=True),
+                threading.Thread(target=drain, args=(process.stderr, "err", _STDERR_CAP), daemon=True),
+            ]
+            for reader in readers:
+                reader.start()
+            timed_out = False
+            try:
+                code = process.wait(timeout=self.timeout)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                timed_out = True
+                code = 124
+            for reader in readers:
+                reader.join(timeout=1.0)
+            out = b"".join(sink["out"]).decode("utf-8", "replace")
+            err = b"".join(sink["err"]).decode("utf-8", "replace")
+            if timed_out:
+                return CommandResult(124, out[-20_000:], "TIMEOUT", time.perf_counter() - started, truncated=True)
             return CommandResult(
-                completed.returncode,
-                out[:_STDOUT_CAP],
-                err[:_STDERR_CAP],
+                code,
+                out,
+                err,
                 time.perf_counter() - started,
-                truncated=truncated,
+                truncated=overflow["out"] or overflow["err"],
             )
-        except subprocess.TimeoutExpired as exc:
-            return CommandResult(124, str(exc.stdout or "")[-20_000:], "TIMEOUT", self.timeout, truncated=True)
+        finally:
+            if handle is not None:
+                handle.close()
 
 
 # --------------------------------------------------------------------------- #
@@ -1411,7 +1463,7 @@ class LivingAgent:
         found = self._find_documented_mechanism(goal, examples)
         if found is None:
             found = self._find_documented_mechanism(
-                goal, examples, max_tools=24, max_runs=60
+                goal, examples, max_tools=24, max_runs=40, arguments=False
             )
         if found is not None:
             skill = self._admit_documented_skill(goal, found, examples)
@@ -3508,6 +3560,7 @@ class LivingAgent:
         max_tools: int = 6,
         max_runs: int = 60,
         docs: Sequence[discovery.ToolDoc] | None = None,
+        arguments: bool = True,
     ) -> dict[str, Any] | None:
         """Search the machine's documented surface for a command that fits.
 
@@ -3560,10 +3613,17 @@ class LivingAgent:
                 )
             except AgentError:
                 return None
-            for path, expected in examples:
+            for index, (_path, expected) in enumerate(examples):
                 if runs >= max_runs:
                     break
-                result = self.computer.run(template.replace("{path}", shlex.quote(path)))
+                # Candidates are tried on *copies*.  A tool that happens to
+                # share a word with the request may well be destructive --
+                # `unlink` matches "remove the header line" -- and a stranger
+                # must never get a chance to modify, truncate or delete the
+                # data it is being tested against.  The copy is a few bytes;
+                # the demonstration is not replaceable.
+                probe = self._example_copy(index, examples)
+                result = self.computer.run(template.replace("{path}", shlex.quote(probe)))
                 runs += 1
                 if not result.ok or result.stdout != expected:
                     self.computer.revoke(doc.name)
@@ -3621,7 +3681,11 @@ class LivingAgent:
             if found is not None:
                 break
         # Phase 2: documented arguments, tool by tool, simplest bundle first.
-        while found is None and not stopped:
+        # A *widened* pass skips this: breadth is what the widening is for, and
+        # enumerating every tool's option bundles over forty tools costs the
+        # search more than the answer is worth.  A tool that needs an argument
+        # is found by the narrow pass, whose ranking was built for it.
+        while found is None and not stopped and arguments:
             for doc in shortlist:
                 for _strength, form in self._argument_forms(goal, doc, sources):
                     if not form or stopped:
@@ -3646,6 +3710,18 @@ class LivingAgent:
         if len(self.discovery_log) > 200:
             del self.discovery_log[: len(self.discovery_log) - 200]
         return found
+
+    def _example_copy(self, index: int, examples: Sequence[tuple[str, str]]) -> str:
+        """A private copy of an example input, for a candidate to touch.
+
+        Every probe runs against one of these, never against the file the user
+        demonstrated with.  A candidate that deletes its input then deletes a
+        copy, and the verification still sees the real bytes.
+        """
+        path, _expected = examples[index]
+        target = f".probe/example{index}.dat"
+        self.computer.write(target, self.computer.read(path))
+        return target
 
     def _admit_documented_skill(
         self,
@@ -4021,8 +4097,17 @@ class LivingAgent:
         reading: discovery.Reading,
         probe_text: str,
     ) -> bool:
-        """Exact bytes on the real file, twice, and on an adversarial probe."""
-        command = template.replace("{path}", shlex.quote(path))
+        """Exact bytes twice, and on an adversarial probe -- never on the original.
+
+        A candidate comes from a keyword match on a stranger's help text, and
+        some tools on this machine destroy what they are given (`unlink` was
+        one).  The verification therefore runs on a byte-identical copy: it
+        proves exactly as much about the bytes and nothing at all about a
+        candidate's right to touch the demonstration.
+        """
+        scratch = ".probe/verify.dat"
+        self.computer.write(scratch, self.computer.read(path))
+        command = template.replace("{path}", shlex.quote(scratch))
         first = self.computer.run(command)
         if not first.ok or first.stdout != expected:
             return False

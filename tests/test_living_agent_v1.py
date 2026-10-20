@@ -1496,7 +1496,12 @@ class DocumentedArgumentTests(unittest.TestCase):
         # margin is small because the first search is now fast, not because the
         # second one searched.
         self.assertLess(second["commands_run"], first["commands_run"])
-        self.assertLess(second["seconds"], 0.1)
+        # Wall-clock is the one number on this machine that moves with the load
+        # of everything else on it, so the bound is coarse on purpose: the
+        # deterministic claim is the run count above, and this only catches a
+        # recall that has turned back into a search (which costs process
+        # launches, not milliseconds).
+        self.assertLess(second["seconds"], 1.0)
         # two-digit values in the key, where a numeric reading and the tool's
         # own text order disagree: 1, 10, 2 -- the verified bytes decide, and
         # any mechanism sorting numbers instead of text fails here
@@ -1565,6 +1570,76 @@ class DocumentedArgumentTests(unittest.TestCase):
         rows = [line.split(separator) for line in text.splitlines()]
         rows.sort(key=lambda row: row[position - 1])
         return "".join(separator.join(row) + "\n" for row in rows)
+
+    def test_a_stranger_that_would_destroy_the_data_never_touches_it(self) -> None:
+        # A candidate is chosen by a keyword match on a stranger's own help
+        # text.  Some tools on a real machine destroy what they are given:
+        # `unlink` matches "remove the header line" perfectly.  Every probe and
+        # every verification must therefore run on a copy, and the files the
+        # user demonstrated with must be byte-identical afterwards.  This was
+        # found by the file disappearing mid-search.
+        bin_dir = self.root / "bin"
+        bin_dir.mkdir()
+        destroyer = bin_dir / "purge"
+        destroyer.write_text(
+            "#!/bin/sh\n"
+            'if [ "$1" = "--help" ]; then\n'
+            "  echo 'Usage: purge [OPTION]... [FILE]...'\n"
+            "  echo\n"
+            "  echo 'Remove the header line and the file that holds it.'\n"
+            "  exit 0\n"
+            "fi\n"
+            "rm -f \"$1\"\n",
+            encoding="utf-8",
+        )
+        destroyer.chmod(0o755)
+        agent = self._agent(bin_dir=bin_dir)
+        first = self._write(agent, "one.csv", "name,age\nalice,30\nbob,20\n")
+        second = self._write(agent, "two.csv", "hdr,x\ny,1\nz,2\n")
+        drop = lambda text: "".join(line + "\n" for line in text.splitlines()[1:])  # noqa: E731
+        outcome = agent.acquire(
+            "remove the header line", [("one.csv", drop(first)), ("two.csv", drop(second))]
+        )
+        self.assertEqual(outcome["stages"], ["tail -n +2"], outcome)
+        self.assertEqual(agent.computer.read("one.csv"), first)
+        self.assertEqual(agent.computer.read("two.csv"), second)
+        # The destroyer either produced no bytes or was refused; either way it
+        # is not the admitted mechanism and it does not keep its authority.
+        self.assertNotEqual(outcome.get("tool"), "purge")
+        self.assertNotIn("purge", agent.computer.admitted())
+
+    def test_a_tool_that_writes_forever_is_stopped_not_absorbed(self) -> None:
+        # A machine contains tools that never stop writing.  Reading such a
+        # tool's output with an unbounded pipe turns one bad guess into a
+        # memory bomb -- this process was OOM-killed by exactly that once, in
+        # the middle of a search.  The reader must cap what it keeps, and the
+        # run must be reported as a failure rather than as an answer.
+        bin_dir = self.root / "bin"
+        bin_dir.mkdir()
+        flooder = bin_dir / "spout"
+        flooder.write_text(
+            "#!/bin/sh\n"
+            'if [ "$1" = "--help" ]; then\n'
+            "  echo 'Usage: spout [FILE]'\n"
+            "  echo\n"
+            "  echo 'Print the lines of the file, again and again.'\n"
+            "  exit 0\n"
+            "fi\n"
+            "exec yes flood\n",
+            encoding="utf-8",
+        )
+        flooder.chmod(0o755)
+        agent = self._agent(bin_dir=bin_dir)
+        self._write(agent, "notes.txt", "a\nb\n")
+        agent.computer.admit("spout", evidence={"test": "flood"})
+        started = time.perf_counter()
+        result = agent.computer.run("spout notes.txt")
+        elapsed = time.perf_counter() - started
+        self.assertFalse(result.ok)
+        self.assertTrue(result.truncated)
+        self.assertLessEqual(len(result.stdout), 4_000_000)
+        # It is stopped by the cap, not waited out to the six-second deadline.
+        self.assertLess(elapsed, 6.0)
 
     def test_a_kind_of_request_learned_once_covers_new_arguments(self) -> None:
         # One demonstration of "sort the rows by a column" is a *kind*, not a
@@ -2922,6 +2997,17 @@ class HeldOutBatteryTests(unittest.TestCase):
                 "qrstu\nz\n",
                 "hello\nworld\nab\n",
                 lambda text: "".join(line[2:3] + "\n" for line in text.splitlines()),
+            ),
+            (
+                # `sort -r` agrees with a reversal only on a file that is
+                # already sorted; these are not, and every line has more than
+                # one character, so `rev` (characters within a line) differs
+                # from `tac` (the lines themselves) on the very first example.
+                "print the lines in reverse order",
+                "hello\nworld\nagain\n",
+                "zeta\nbeta\n",
+                "q\np\nr\n",
+                lambda text: "".join(line + "\n" for line in reversed(text.splitlines())),
             ),
             (
                 "show the lines that end with z",
