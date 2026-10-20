@@ -349,3 +349,40 @@ class DeclaredContextBindingTests(unittest.TestCase):
         # pdf_path was supplied by the caller, so the binder must not touch it.
         if prov:
             self.assertNotIn("pdf_path", prov.get("filled_from_declared_context") or [])
+
+    def test_a_goal_text_slot_binds_from_the_callers_own_words(self):
+        """`goal` is the sentence handed in, not a discovered resource.
+
+        This is what separates the caller's words from an invented resource:
+        filling `goal` from the sentence invents nothing, while filling
+        `source_root` from a default would choose what to operate on. The
+        capability declares only `goal` and `output_path`, both of which are
+        admissible, so it executes end to end from a plain sentence.
+        """
+        cid = "plain_goal.bound_capability.grounding.stdlib"
+        if cid not in self.model.capabilities:
+            self.skipTest("capability not in model")
+        row = self.model.capabilities[cid]
+        self.assertEqual(
+            [str(x) for x in (row.get("input_names") or [])], ["goal", "output_path"]
+        )
+
+        goal = "Ground this plain goal against a bound capability."
+        out = self.model.solve(goal, capability_id=cid, context_paths=["AGENTS.md"])
+
+        self.assertIs(out.get("pass"), True, out.get("reason"))
+        prov = out.get("binding_provenance") or {}
+        self.assertIn("goal", prov.get("filled_from_declared_context") or [])
+        # The value must be the caller's own sentence, verbatim.
+        self.assertEqual(prov.get("values", {}).get("goal"), goal)
+
+    def test_source_root_is_never_filled_by_default(self):
+        """The invention case: a root the goal never named must stay unbound."""
+        out = self.model.solve(
+            "Audit the python source tree with an AST.",
+            context_paths=["AGENTS.md"],
+        )
+        self.assertIs(out.get("pass"), False)
+        self.assertIn("source_root", str(out.get("reason") or ""))
+        prov = out.get("binding_provenance") or {}
+        self.assertNotIn("source_root", prov.get("filled_from_declared_context") or [])
