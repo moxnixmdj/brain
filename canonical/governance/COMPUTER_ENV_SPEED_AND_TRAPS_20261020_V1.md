@@ -20,7 +20,10 @@ Each step, measured rather than guessed:
 355s  probe fix   <- also corrected a WRONG answer (14 where 7 was true)
 277s  behavioural dedupe of pipeline tails
 132s  race: composition alongside the first sweep
+ 69s  rank candidates by meaning, not by how often they mention the words
 ```
+
+Suite, cold: 631s -> 249s -> 184s.  Warm: 0.01s.  79 tests.
 
 ## 2. Profile before you optimise
 
@@ -99,6 +102,39 @@ Each time the fix was the same: **choose inputs that discriminate.**
   answer** (answered 15 where 7 was true).
 - **Do not rank 200 candidates to use the top 100.**
 - `rm -f /tmp/brain_query_probe_v1.json` before every cold measurement.
+
+## 7b. Giving up on one program is not giving up
+
+Composition was guarded by `if not survivors`. Survivors are commands
+that tracked the probe — not commands that answered. When programs
+tracked the probe and then disagreed on the real file, `survivors` was
+non-empty, the guard failed, and **composition was never attempted**. The
+machine refused questions it could have answered by joining two programs,
+and reported the refusal as though it had tried everything.
+
+Now attempted whenever nothing produced an answer. Test:
+`2 not found in [1] : composition was never attempted`.
+
+## 7c. Read the flag's name, and stop counting matches
+
+`sort` documents `--unique` as *"output only the first of an equal run"*
+— containing neither "unique" nor "line". Scoring descriptions only,
+`sort` ranked **91st of 241** for "how many unique lines" and the one
+flag that answers was never offered.
+
+A flag NAMED after what the goal asked for is the strongest signal on
+the machine. Flag names now score above descriptions that merely contain
+the word.
+
+Then counting had to stop: ranking by **how many** flags matched rewards
+a program for repeating the words. `cat` says "lines" in three
+descriptions and outranked `sort`, which says it once and works.
+
+```
+sort   91 -> 60      uniq  31 -> 7
+wc    not in 120 -> 75      cat  2 -> 13
+cold  132.4s -> 69.2s
+```
 
 ## 8. Still wrong
 
