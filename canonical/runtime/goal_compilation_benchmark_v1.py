@@ -126,8 +126,9 @@ BENCHMARK_GOALS: List[Dict[str, Any]] = [
 #     document.convert.markdown_pdf.pandoc_weasyprint  <-- selected, a CONVERTER
 #     that then reports success for a summary it never performed.
 #
-# Both scoring-level fixes were MEASURED AND REVERTED, which is why this file
-# documents the gap instead of papering over it:
+# THREE fixes were implemented, MEASURED, AND REVERTED. They are recorded here
+# so the next reader does not repeat them, and because the third one disproves
+# the obvious conclusion:
 #
 #   1. Require the goal's head verb to appear in the capability's declared
 #      surface -> benchmark 5/9 fell to 2/9 and four existing tests broke,
@@ -136,10 +137,77 @@ BENCHMARK_GOALS: List[Dict[str, Any]] = [
 #      rejected the score-2 candidate, but the same goal then selected
 #      docx.document.create_from_json_record at score 25. One wrong capability
 #      swapped for another; no measured gain.
+#   3. Refuse when the highest-scoring capability is not the selected one
+#      (GOAL_COMPILATION_BEST_MATCH_NOT_SELECTED) -> did fix three wrong
+#      selections, and broke three existing tests.
 #
-# The real fix is not in the scorer. It is to REFUSE when the best-matching
-# capability exists but cannot be bound, instead of silently downgrading to the
-# best callable one.
+# WHY 3 FAILED, AND WHY IT IS NOT A TUNING PROBLEM.
+#
+# The counterexample is the QR goal in test_goal_compiler:
+#
+#     image.code.decode.zbarimg      score 22   a DECODER
+#     image.qr.generate.qrencode     score 21   the GENERATOR the goal asks for
+#
+# The generator is CORRECT and is selected, but only because the decoder cannot
+# be bound. So a correct selection can sit one point BELOW the best match, while
+# a wrong one sat twenty-three points below it. Score rank and correctness are
+# independent, so no threshold separates them. A cut tuned to clear both cases
+# would be fitted to this 23-goal sample, not derived from anything.
+#
+# Note the trap in reading the numbers above: on these 23 goals every correct
+# single-capability selection had a gap of exactly 0, which looks like clean
+# separability. It was an artefact of the sample. The existing suite, which this
+# benchmark does not contain, held the counterexample the whole time.
+#
+# WHAT WOULD ACTUALLY WORK, MEASURED RATHER THAN GUESSED.
+#
+# First, a correction to an earlier reading of this file. These five goals are
+# NOT compound: every one of them expects exactly one capability. A compound
+# planner would fix none of them.
+#
+# The real mechanism is precondition gating, not argument binding. Three of the
+# correct capabilities declare ZERO inputs and are gated on an effect instead:
+#
+#     knowledge.consistency.assess      requires knowledge.observation.available
+#     decision.synthesis.typed.stdlib   requires structured.decision_evidence.available
+#     json.query.jq                     requires json.file.available
+#
+# So "unbindable" here means precondition-gated, which is a different failure
+# from the one world_binding_v1 closes. That is why wiring that binder in never
+# reached these goals.
+#
+# TWO OF THE THREE ARE UNEXECUTABLE, NOT MERELY UNBOUND. Searching every
+# `provides` declaration across all 363 capabilities:
+#
+#     structured.decision_evidence.available  -> NO PRODUCER
+#     json.file.available                     -> NO PRODUCER
+#     knowledge.observation.available         -> knowledge.json.fetch.external
+#
+# For BENCH_MARKDOWN_TO_DECISION and EXT_JQ_TABLE the expected capability cannot
+# run at all, because nothing in the registry produces what it requires.
+# Selecting it would be WORSE than the current wrong selection: it would compile
+# and then fail at execution. The honest fix for those two is to add a capability
+# that produces the missing effect, not to change the compiler.
+#
+# A fourth attempt was made and measured on this basis, and is also a dead end.
+# compile_goal reaches _compile_single_goal without a proposal binder, so
+# _rank_bindable_candidates skips every capability declaring an effect_result
+# binding before it is scored. Passing the binder in is correct but MEASURED AS
+# A NO-OP: rankings are byte-identical with and without it, and the benchmark is
+# unchanged at 17/23. The binder now runs and fails closed with
+# PROPOSAL_EFFECT_PROVIDER_MISSING, because no upstream step produced the effect.
+# The skip was hiding nothing.
+#
+# What is left, and none of it is a scoring change:
+#   1. EXT_QR_GENERATE needs a semantic direction signal, distinguishing
+#      "generate a QR code" from "decode a barcode". Lexical overlap cannot
+#      carry it, which is why all three scoring attempts failed alike.
+#   2. BENCH_MARKDOWN_TO_DECISION and EXT_JQ_TABLE need a capability that
+#      produces structured.decision_evidence.available and json.file.available.
+#      This is a capability gap, and it is the honest bottleneck for both.
+#   3. The remaining two need the goal to ground a resource it never names.
+#      "Query a JSON table" does not say which table, so refusing is arguably
+#      the correct outcome; an invented input is an unverifiable act.
 KNOWN_SELECTION_GAPS = {
     "BENCH_JSON_FETCH_CONSISTENCY": (
         "BEST_MATCHES_UNBINDABLE__knowledge.json.fetch.external_SCORE_12_AND_"

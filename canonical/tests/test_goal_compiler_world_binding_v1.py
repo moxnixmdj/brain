@@ -402,6 +402,96 @@ class EndToEndExecutionTests(unittest.TestCase):
             self._clear_runtime_state()
 
 
+class ScoreRankIsNotCorrectnessTests(unittest.TestCase):
+    """The counterexample that disproved the refusal policy.
+
+    The obvious fix for wrong selections is to refuse whenever the
+    highest-scoring capability is not the one selected. On the 23-goal benchmark
+    that looked safe: every correct single-capability selection there had a gap
+    of exactly 0. It was an artefact of the sample.
+
+    This goal is the counterexample, and it lives in the existing suite rather
+    than in the benchmark. A DECODER outscores the GENERATOR the goal asks for,
+    and the generator is still the right answer -- it wins on bindability, not
+    on score. So a correct selection can sit below the best match while a wrong
+    one sat far below it, and no threshold separates the two.
+
+    Implemented as GOAL_COMPILATION_BEST_MATCH_NOT_SELECTED, measured, and
+    reverted: it fixed three wrong selections and broke three existing tests.
+    """
+
+    GOAL = (
+        "Generate a QR code image for the text PROJECT BRAIN and save it as "
+        "canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png."
+    )
+
+    @classmethod
+    def setUpClass(cls):
+        cls.registry = json.loads(
+            (pathlib.Path("canonical") / "runtime" / "BOUND_CAPABILITY_REGISTRY_V1.json")
+            .read_text(encoding="utf-8")
+        )["capabilities"]
+
+    def test_decoder_outscores_the_generator_it_should_not_replace(self):
+        decoder = "image.code.decode.zbarimg"
+        generator = "image.qr.generate.qrencode"
+        for cid in (decoder, generator):
+            self.assertIn(cid, self.registry)
+
+        decoder_score, _spec, _ev = compiler._score(self.GOAL, decoder, self.registry[decoder])
+        generator_score, _spec, _ev = compiler._score(self.GOAL, generator, self.registry[generator])
+
+        # The premise of the counterexample: rank and correctness disagree.
+        self.assertGreater(
+            decoder_score,
+            generator_score,
+            "the decoder no longer outscores the generator; if scoring changed, "
+            "re-test whether the refusal policy is now viable",
+        )
+
+        out = compiler.compile_goal(self.GOAL, self.registry, ROOT)
+        self.assertEqual(out["selected_capability"], generator)
+        self.assertEqual(out["binding_source"], "GOAL_STATEMENT")
+
+    def test_no_score_gap_threshold_can_separate_correct_from_wrong(self):
+        """Pin the two data points that make any threshold an overfit.
+
+        A correct selection here sits 1 point below the best match. A wrong one
+        (BENCH_JSON_FETCH_CONSISTENCY) sat 23 points below. Any cut between
+        them is fitted to this sample, not derived from the problem.
+        """
+        from canonical.runtime import goal_compilation_benchmark_v1 as bench
+        from canonical.runtime import live_integrated_brain_v1 as lb
+
+        registry = dict(lb.load_verified_registry())
+        goal = "Fetch a JSON document and assess its internal consistency."
+        best_score, best_cid = max(
+            (
+                (compiler._score(goal, cid, entry)[0], cid)
+                for cid, entry in registry.items()
+                if isinstance(entry, dict)
+                and entry.get("status") == "VERIFIED_BOUND_CAPABILITY"
+                and isinstance(entry.get("action_template"), dict)
+            ),
+            default=(0, None),
+        )
+        out = compiler.compile_goal(goal, registry, ROOT)
+        selected_score = compiler._score(
+            goal, out["selected_capability"], registry[out["selected_capability"]]
+        )[0]
+        wrong_gap = best_score - selected_score
+
+        self.assertEqual(out["selected_capability"], bench.KNOWN_OVERMATCHING_CAPABILITY)
+        self.assertGreaterEqual(
+            wrong_gap,
+            10,
+            "wrong selection no longer far below best match; re-test the refusal policy",
+        )
+        # And the correct selection above sits below its own best match, so the
+        # two intervals overlap and no single cut is justified.
+        self.assertLess(1, wrong_gap)
+
+
 class BenchmarkFloorTests(unittest.TestCase):
     def test_measured_compile_rate_holds_the_floor(self):
         from canonical.runtime import goal_compilation_benchmark_v1 as bench

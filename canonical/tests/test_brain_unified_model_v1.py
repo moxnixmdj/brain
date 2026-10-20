@@ -282,3 +282,70 @@ class BrainUnifiedModelV1Tests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class DeclaredContextBindingTests(unittest.TestCase):
+    """``solve()`` may bind from resources the caller explicitly declared.
+
+    The rule that makes this safe: a slot is filled only from the declared
+    list, or by a destination the binder synthesizes deterministically. With no
+    declaration the code path is not entered at all, so an unstated input still
+    fails closed and ``missing_inputs_fail_closed`` cannot regress.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.model = model_runtime.open_model()
+        cls.pdf = ROOT / "canonical" / "astra_runtime" / "tmp" / "BOUND_PDF_TEXT_TEST.pdf"
+
+    def test_no_declared_context_still_fails_closed(self):
+        out = self.model.solve("Read a PDF and extract its text.")
+        self.assertIs(out.get("pass"), False)
+        self.assertTrue(str(out["reason"]).startswith("CAPABILITY_INPUTS_MISSING"))
+        self.assertNotIn("binding_provenance", out)
+
+    def test_declared_context_binds_the_declared_path_only(self):
+        if not self.pdf.exists():
+            self.skipTest("fixture pdf not present")
+        rel = self.pdf.relative_to(ROOT).as_posix()
+        out = self.model.solve("Read a PDF and extract its text.", context_paths=[rel])
+
+        # The refusal must no longer be about a missing input: the slot bound.
+        self.assertFalse(
+            str(out.get("reason") or "").startswith("CAPABILITY_INPUTS_MISSING"),
+            out.get("reason"),
+        )
+        prov = out.get("binding_provenance") or {}
+        self.assertIn("pdf_path", prov.get("filled_from_declared_context") or [])
+        self.assertEqual(prov.get("values", {}).get("pdf_path"), rel)
+        self.assertEqual(prov.get("declared_context"), [rel])
+
+    def test_a_path_outside_the_declaration_is_never_used(self):
+        """The binder may find other files; only declared ones are admissible."""
+        other = "canonical/runtime/brain_unified_model_v1.py"
+        out = self.model.solve(
+            "Read a PDF and extract its text.", context_paths=[other]
+        )
+        # A .py file cannot satisfy pdf_path, so this must stay refused rather
+        # than silently reach into the repository for some other PDF.
+        self.assertIs(out.get("pass"), False)
+        self.assertTrue(
+            str(out.get("reason") or "").startswith("CAPABILITY_INPUTS_MISSING"),
+            out.get("reason"),
+        )
+        self.assertNotIn("binding_provenance", out)
+
+    def test_declaration_cannot_override_an_explicit_input(self):
+        if not self.pdf.exists():
+            self.skipTest("fixture pdf not present")
+        rel = self.pdf.relative_to(ROOT).as_posix()
+        sentinel = "canonical/astra_runtime/tmp/EXPLICIT_SENTINEL.pdf"
+        out = self.model.solve(
+            "Read a PDF and extract its text.",
+            inputs={"pdf_path": sentinel, "output_path": "canonical/astra_runtime/tmp/o.json"},
+            context_paths=[rel],
+        )
+        prov = out.get("binding_provenance")
+        # pdf_path was supplied by the caller, so the binder must not touch it.
+        if prov:
+            self.assertNotIn("pdf_path", prov.get("filled_from_declared_context") or [])
