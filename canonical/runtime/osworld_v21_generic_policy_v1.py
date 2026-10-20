@@ -315,17 +315,41 @@ def _browser_click_action(control: Mapping[str, Any], target: str) -> dict[str, 
 
 
 def _browser_search_control(controls: Any) -> Mapping[str, Any] | None:
+    """Choose a search input from observed structure, not a matching button label.
+
+    A page commonly exposes both ``<input type=search>`` and a button labelled
+    "Search". Treating both strings as equal candidates made the policy
+    escalate despite there being exactly one structurally identified field.
+    Prefer explicit input semantics, then editable controls labelled as search;
+    multiple candidates within either tier remain an ambiguity and fail closed.
+    """
     if not isinstance(controls, list):
         return None
-    hits = []
+    structured = []
     for row in controls:
         if not isinstance(row, Mapping):
             continue
-        label = _norm(_control_label(row))
+        tag = _norm(str(row.get("tag") or ""))
+        role = _norm(str(row.get("role") or ""))
         typ = _norm(str(row.get("type") or ""))
-        if "search" in label or typ == "search":
-            hits.append(row)
-    return hits[0] if len(hits) == 1 else None
+        if (tag in {"input", "textarea"} and typ == "search") or role == "searchbox":
+            structured.append(row)
+    if len(structured) == 1:
+        return structured[0]
+    if structured:
+        return None
+
+    editable = []
+    for row in controls:
+        if not isinstance(row, Mapping):
+            continue
+        tag = _norm(str(row.get("tag") or ""))
+        role = _norm(str(row.get("role") or ""))
+        if tag not in {"input", "textarea"} and role not in {"searchbox", "textbox"}:
+            continue
+        if "search" in _norm(_control_label(row)):
+            editable.append(row)
+    return editable[0] if len(editable) == 1 else None
 
 
 def _browser_fill_action(control: Mapping[str, Any], value: str) -> dict[str, Any] | None:
@@ -359,6 +383,31 @@ def _browser_state_machine(state: Mapping[str, Any], instruction: str) -> dict[s
     url_match = re.search(r"https?://[^\s<>\]\[)(']+", instruction)
     target_url = url_match.group(0) if url_match else None
 
+    # After filling a search field, submitting it is the next step. Do this
+    # before URL reconciliation: pressing Enter may legitimately navigate to
+    # a result URL different from the page where the search began.
+    submitted_type = str((submitted or {}).get("type") or "").upper()
+    if re.search(r"\bsearch\b", instruction, re.I) and submitted_type in {
+        "FILL_LABEL", "FILL_PLACEHOLDER", "FILL_SELECTOR"
+    }:
+        return {
+            "response": "submit filled search",
+            "actions": [{"type": "BROWSER_OP", "op": {"type": "PRESS", "key": "Enter"}}],
+        }
+
+    history = state.get("history")
+    already_navigated_to_target = bool(
+        isinstance(history, list)
+        and target_url
+        and any(
+            isinstance(row, Mapping)
+            and isinstance(row.get("submitted_operation"), Mapping)
+            and str(row["submitted_operation"].get("type") or "").upper() == "NAVIGATE"
+            and _url_equivalent(row["submitted_operation"].get("url"), target_url)
+            for row in history
+        )
+    )
+
     if target_url:
         result_type = str((result or {}).get("type") or "").upper()
         observed_url = (result or {}).get("active_url") or (result or {}).get("url")
@@ -370,7 +419,7 @@ def _browser_state_machine(state: Mapping[str, Any], instruction: str) -> dict[s
                     "response": "observe navigated page",
                     "actions": [{"type": "BROWSER_OP", "op": {"type": "OBSERVE"}}],
                 }
-        elif not (
+        elif not already_navigated_to_target and not (
             isinstance(submitted, Mapping)
             and str(submitted.get("type") or "").upper() == "NAVIGATE"
             and submitted.get("url") == target_url

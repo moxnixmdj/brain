@@ -4,6 +4,7 @@ from __future__ import annotations
 import hashlib
 import json
 import shutil
+import socket
 import threading
 import unittest
 import urllib.parse
@@ -126,6 +127,49 @@ class _DeliveryFormHandler(BaseHTTPRequestHandler):
 
     def log_message(self, fmt, *args):
         return
+
+
+class _SearchHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        parsed = urllib.parse.urlparse(self.path)
+        if parsed.path == "/search":
+            query = urllib.parse.parse_qs(parsed.query).get("q", [""])[0]
+            self.server.received_query = query
+            body = (
+                "<!doctype html><html><head><title>Catalog results</title></head><body>"
+                f"<h1>Found catalog entry COBALT-17 for {query}</h1></body></html>"
+            ).encode("utf-8")
+        elif parsed.path == "/ambiguous":
+            body = b'''<!doctype html><html><head><title>Two search fields</title></head><body>
+              <form action="/search" method="get">
+              <input type="search" name="articles" placeholder="Search articles">
+              <button type="submit">Search articles</button></form>
+              <form action="/search" method="get">
+              <input type="search" name="authors" placeholder="Search authors">
+              <button type="submit">Search authors</button></form>
+              </body></html>'''
+        else:
+            body = b'''<!doctype html><html><head><title>Materials catalog</title></head><body>
+              <h1>Materials catalog</h1><form action="/search" method="get">
+              <label for="query">Catalog query</label>
+              <input id="query" type="search" name="q" placeholder="Search entries">
+              <button type="submit">Search</button></form></body></html>'''
+        self.send_response(200)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+    def log_message(self, fmt, *args):
+        return
+
+
+class _UnusedGuestController:
+    def bind_environment(self, environment):
+        self.environment = environment
+
+    def run(self, operations):
+        raise AssertionError("this browser-only task must not call the guest controller")
 
 
 class LiveBrainOwnedBrowserTests(unittest.TestCase):
@@ -275,6 +319,139 @@ class LiveBrainOwnedBrowserTests(unittest.TestCase):
             self.assertTrue(_find_true_key(result, "interaction_verified"))
         finally:
             _cleanup_task(task_id, work)
+            server.shutdown()
+            server.server_close()
+            thread.join(timeout=5)
+
+    def test_state_conditioned_policy_searches_rendered_page_with_search_button(self):
+        """Exercise Brain's existing observe-act-observe policy on real Chromium."""
+        _browser_ready_or_skip(self)
+        try:
+            from playwright.sync_api import sync_playwright
+        except ImportError:
+            self.skipTest("Playwright is not importable by this test interpreter")
+
+        from types import SimpleNamespace
+        from canonical.runtime import browser_v1
+        from canonical.runtime.osworld_v21_brain_agent_adapter_v1 import BrainOSWorldAgent
+        from canonical.runtime.osworld_v21_generic_policy_v1 import decide
+        from canonical.runtime.osworld_v21_host_browser_ops_v1 import OSWorldHostBrowser
+
+        server = ThreadingHTTPServer(("127.0.0.1", 0), _SearchHandler)
+        server.received_query = None
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        task_id = "TEST_LIVE_STATE_POLICY_SEARCH_" + uuid.uuid4().hex
+        with socket.socket() as sock:
+            sock.bind(("127.0.0.1", 0))
+            cdp_port = sock.getsockname()[1]
+        endpoint = f"http://127.0.0.1:{cdp_port}"
+        url = f"http://127.0.0.1:{server.server_port}/catalog"
+        try:
+            started, reason = browser_v1.start(port=str(cdp_port))
+            if not started:
+                self.skipTest("Brain-owned Chromium could not start: " + reason)
+            agent = BrainOSWorldAgent(
+                decide,
+                policy_id="brain-generic-state-conditioned-browser-v1",
+                browser_controller=OSWorldHostBrowser(),
+                guest_controller=_UnusedGuestController(),
+            )
+            agent.bind_environment(SimpleNamespace(vm_ip="127.0.0.1", chromium_port=cdp_port))
+
+            def current_screenshot():
+                with sync_playwright() as playwright:
+                    browser = playwright.chromium.connect_over_cdp(endpoint)
+                    page = browser.contexts[0].pages[-1]
+                    return page.screenshot(type="png")
+
+            goal = f"Open {url} in a browser and search for cobalt then confirm the result text."
+            final_actions = None
+            for _ in range(10):
+                response, final_actions = agent.predict(goal, {"screenshot": current_screenshot()})
+                if final_actions == ["DONE"]:
+                    break
+            self.assertEqual(final_actions, ["DONE"], agent.history)
+            submitted = [
+                row["submitted_operation"]["type"]
+                for row in agent.history
+                if isinstance(row.get("submitted_operation"), dict)
+            ]
+            self.assertEqual(
+                submitted,
+                ["NAVIGATE", "OBSERVE", "FILL_PLACEHOLDER", "PRESS", "OBSERVE"],
+            )
+            self.assertEqual(server.received_query, "cobalt")
+            final_observation = next(
+                row["browser_result"]
+                for row in reversed(agent.history)
+                if isinstance(row.get("browser_result"), dict)
+                and row["browser_result"].get("type") == "OBSERVE"
+            )
+            self.assertIn("COBALT-17", final_observation["visible_text"])
+            self.assertIn("cobalt", final_observation["active_url"])
+        finally:
+            browser_v1.stop()
+            server.shutdown()
+            server.server_close()
+            thread.join(timeout=5)
+
+    def test_state_conditioned_policy_does_not_guess_between_two_search_fields(self):
+        """The live policy must wait rather than mutate an ambiguous real page."""
+        _browser_ready_or_skip(self)
+        try:
+            from playwright.sync_api import sync_playwright
+        except ImportError:
+            self.skipTest("Playwright is not importable by this test interpreter")
+
+        from types import SimpleNamespace
+        from canonical.runtime import browser_v1
+        from canonical.runtime.osworld_v21_brain_agent_adapter_v1 import BrainOSWorldAgent
+        from canonical.runtime.osworld_v21_generic_policy_v1 import decide
+        from canonical.runtime.osworld_v21_host_browser_ops_v1 import OSWorldHostBrowser
+
+        server = ThreadingHTTPServer(("127.0.0.1", 0), _SearchHandler)
+        server.received_query = None
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        with socket.socket() as sock:
+            sock.bind(("127.0.0.1", 0))
+            cdp_port = sock.getsockname()[1]
+        endpoint = f"http://127.0.0.1:{cdp_port}"
+        url = f"http://127.0.0.1:{server.server_port}/ambiguous"
+        try:
+            started, reason = browser_v1.start(port=str(cdp_port))
+            if not started:
+                self.skipTest("Brain-owned Chromium could not start: " + reason)
+            agent = BrainOSWorldAgent(
+                decide,
+                policy_id="brain-generic-state-conditioned-browser-v1",
+                browser_controller=OSWorldHostBrowser(),
+                guest_controller=_UnusedGuestController(),
+            )
+            agent.bind_environment(SimpleNamespace(vm_ip="127.0.0.1", chromium_port=cdp_port))
+
+            def current_screenshot():
+                with sync_playwright() as playwright:
+                    browser = playwright.chromium.connect_over_cdp(endpoint)
+                    return browser.contexts[0].pages[-1].screenshot(type="png")
+
+            goal = f"Open {url} in a browser and search for cobalt then confirm the result text."
+            final_actions = None
+            for _ in range(4):
+                _, final_actions = agent.predict(goal, {"screenshot": current_screenshot()})
+                if agent.history and agent.history[-1].get("response") == "insufficient grounded evidence":
+                    break
+            self.assertEqual(final_actions, ["WAIT"], agent.history)
+            submitted = [
+                row["submitted_operation"]["type"]
+                for row in agent.history
+                if isinstance(row.get("submitted_operation"), dict)
+            ]
+            self.assertEqual(submitted, ["NAVIGATE", "OBSERVE"])
+            self.assertIsNone(server.received_query)
+        finally:
+            browser_v1.stop()
             server.shutdown()
             server.server_close()
             thread.join(timeout=5)

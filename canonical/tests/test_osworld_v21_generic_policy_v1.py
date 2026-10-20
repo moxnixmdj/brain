@@ -175,7 +175,13 @@ def test_generic_search_workflow_observe_fill_press_observe_done():
                     "type": "search",
                     "placeholder": "Search",
                     "text": "",
-                }
+                },
+                {
+                    "tag": "button",
+                    "role": "button",
+                    "type": "submit",
+                    "text": "Search",
+                },
             ],
         },
         screenshot="s0",
