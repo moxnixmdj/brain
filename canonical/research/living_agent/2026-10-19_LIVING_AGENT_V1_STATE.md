@@ -12,7 +12,7 @@ receipt, not a terminal claim, and not a capability grant.
 | Living agent | `canonical/runtime/living_agent_v1.py` | Real POSIX computer surface, one-shot skill chunking, canary-based drift detection and repair, word learning, impasse tracking, self-directed practice, consolidating memory, snapshot/restore. |
 | Shell synthesis | `canonical/runtime/shell_synthesis_v1.py` | Learns a stdin→stdout pipeline from (input, expected output) examples: typed beam search over 20 real stages, exact interpreter ordering, real-shell verification. |
 | Benchmark | `canonical/runtime/living_agent_benchmark_v1.py` | Twelve spreadsheet transforms with independently written oracles, plus a projection of the repository's real file tree. |
-| Acceptance | `tests/test_living_agent_v1.py` | 101 tests / 159 subtests. Real processes, real files, exact byte equality. No mocks. |
+| Acceptance | `tests/test_living_agent_v1.py` | 104 tests / 159 subtests. Real processes, real files, exact byte equality. No mocks. |
 | Discovery | `canonical/runtime/living_discovery_v1.py` | Reads what this machine says it can do (`tool --help`, the tool's own definition), turns a goal sentence into an exact expected output, and proves a real command against it before admitting it. |
 | Growth measurement | `canonical/runtime/living_agent_growth_v1.py` | Acquires four real skills at runtime and replays them on three untouched real directories. |
 
@@ -294,6 +294,69 @@ it is tried first (it is first on `PATH`) and rejected: the run shows
 `["-w", "40"]` in the discovery log with `verified=false`, nothing admitted, and
 the request fails instead of producing a skill that silently does nothing.
 
+## Composition: an unknown mechanism followed by a known grammar
+
+A single command is a small part of what a computer can do; the useful answers
+are usually a pipeline.  The creature now composes **one documented mechanism**
+with the grammar it already knows, and it chooses both ends of that composition
+by experiment:
+
+1. **Recall by the machine's own words.**  The request's words, plus the words
+   the data itself makes meaningful (a repeated comma makes "field", "column",
+   "delimiter" worth asking about), are matched against each tool's *entire*
+   self-description -- summary and every option line -- because a tool's useful
+   vocabulary usually lives in its options ("select only these fields"), not in
+   its one-line summary.
+2. **Binding by evidence, not by resemblance.**  A written number binds a
+   quantity ("40 characters" → `-w 40`); an ordinal next to a unit noun binds a
+   position ("the second column" → `-k 2`, `-f 2`); a character the data
+   contains binds a delimiter (`-t ,`); a placeholder that names a file is never
+   bound at all.  A pair of arguments is only formed from two *different kinds*
+   of placeholder, because a style and a style compete while a delimiter and a
+   field really do need each other.
+3. **Fingerprinting.**  Every candidate is really run once, in parallel, in a
+   throwaway directory.  A wrong guess costs one process and is discarded before
+   it can influence anything; only invocations that actually change the text
+   are composed.
+4. **The grammar finishes the job.**  From what the document's tool produced,
+   the existing grammar is searched (pure computation, no processes) for a
+   suffix that reproduces every example.  The whole pipeline is then run for
+   real on every example, byte for byte, before it is admitted.
+5. **No authority left behind.**  Trying a stranger means admitting it for one
+   run; when the search ends, every tool that did not win is revoked, so a
+   failed guess cannot widen what the computer may execute.
+
+Measured on this machine (cold documentation cache on first contact):
+
+| Request | Two examples say | Learned | Cost |
+|---|---|---|---|
+| sort the rows by the second column, comma separated, and keep the first two | the exact rows | `sort -k 2 -t , \| head -n 2` | 0.12 s, 52 runs |
+| the same request again, new file | — | from memory | < 1 ms |
+
+Neither `-k 2` nor `-t ,` is in the grammar, and no single documented tool
+produces the answer, so this pipeline exists nowhere in the source: it is
+assembled from the machine's own option list and the grammar, and admitted on
+exact bytes.
+
+### What the experiments changed
+
+* **The grammar had magic counts.**  `head -n 3`, `tail -n 3` and `sed -n '3p'`
+  were fixed stages.  With two examples, `head -n 3 | sort | tail -n +2`
+  reproduced both exactly -- a right answer to a different question that fails on
+  the next file.  Those stages are gone: counts come from the examples
+  (`head -n 2` is instantiated when the target has two lines), never from a
+  constant in the vocabulary.  `test_an_overfit_pipeline_is_not_admitted` builds
+  exactly that coincidence and requires the *keyed* mechanism plus exact
+  behaviour on two held-out tables.
+* **The inventory was recomputed on every tier** (`executables()` walked three
+  directories ten times per goal) and every admission re-hashed the binary.  Both
+  are facts about the machine that do not change while a goal is solved, so both
+  are cached -- keyed by inode and file stamp, so a changed binary is re-hashed.
+* **Composition cost 0.61 s before these fixes**, mostly in grammar searches over
+  candidates that could never fit.  Pruning to invocations whose arguments are
+  *grounded* (strength ≥ 4: a quantity, a position, a separator) cut the
+  candidate set from 64 to 52 and the time to 0.12 s.
+
 ## How the learner spends its questions
 
 Induction is only honest if the questions are chosen well and the stopping rule
@@ -362,12 +425,16 @@ rather than die mid-loop.
   those readings ("number the lines" needs `nl`'s exact layout, which is a
   convention this creature cannot deduce) is an impasse on the record, not a
   guess.
-- Argument binding is limited to what the evidence can ground: numbers the
-  request names, characters the data contains, switches the request mentions.
-  An option whose value is a word (`nl -b a`, `sort --sort=version`,
-  `-o FILE`) cannot be bound this way and stays an honest failure -- a
-  demonstration is still the only way to teach those, and inventing a value
-  would be a guess dressed as an experiment.
+- Argument binding is limited to what the evidence can ground: quantities the
+  request writes, positions it names of a unit, characters the data contains,
+  and closed value lists the tool itself documents (`nl -b a`).  An option whose
+  value is a filename or a free-form word (`-o FILE`, `--compress-program=PROG`)
+  is never bound -- a demonstration is the only way to teach those, and inventing
+  a value would be a guess dressed as an experiment.
+- Composition places the documented mechanism **first** and at most once.  A
+  pipeline with two unknown mechanisms, or one in the middle, is outside what
+  this search reaches; it would need a product over the documented surface at
+  every depth, which costs far more processes than the answer is worth.
 - "Unique" has two readings and only one of them is a function of the data
   alone: keeping the first occurrence (implemented) and keeping the last
   (refused, recorded).  Sharing a word is not sharing a meaning.

@@ -35,7 +35,9 @@ import os
 import re
 import shlex
 import subprocess
+import shutil
 import tempfile
+from concurrent.futures import ThreadPoolExecutor
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -113,6 +115,7 @@ class Computer:
         # it with a real binary found on this machine, recording the evidence.
         self._admitted: set[str] = set(_ALLOWED_BINARIES)
         self.admissions: dict[str, dict[str, Any]] = {}
+        self._digests: dict[tuple[str, str], str] = {}
 
     def search_dirs(self) -> list[str]:
         """The directories this computer will look in, nearest first."""
@@ -145,7 +148,21 @@ class Computer:
                 continue
         if located is None:
             raise AgentError("BINARY_NOT_ON_THIS_MACHINE:" + name)
-        digest = hashlib.sha256(located.read_bytes()).hexdigest()
+        # Hashing a binary is the expensive part of admission, and the same
+        # few tools are admitted over and over while a hypothesis is searched.
+        # The digest is keyed by the file's own identity and is recomputed if
+        # the binary changes, so the cache can never outlive the evidence.
+        try:
+            stat = located.stat()
+            stamp = f"{stat.st_size}:{int(stat.st_mtime)}:{stat.st_ino}"
+        except OSError:
+            stamp = "missing"
+        cached = self._digests.get((str(located), stamp))
+        if cached is not None:
+            digest = cached
+        else:
+            digest = hashlib.sha256(located.read_bytes()).hexdigest()
+            self._digests[(str(located), stamp)] = digest
         record = {
             "binary": name,
             "path": str(located),
@@ -506,6 +523,43 @@ def _unexplained_words(goal: str, properties: Sequence[str], path: str = "") -> 
     return sorted({word for word in _tokens(text) if word not in explained})
 
 
+_NUMBER_WORDS = {
+    "first": 1, "second": 2, "third": 3, "fourth": 4, "fifth": 5, "sixth": 6,
+    "seventh": 7, "eighth": 8, "ninth": 9, "tenth": 10,
+    "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6,
+    "seven": 7, "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve": 12,
+}
+
+
+_UNIT_NOUNS = (
+    "line", "lines", "row", "rows", "column", "columns", "field", "fields",
+    "word", "words", "byte", "bytes", "character", "characters", "char", "chars",
+    "letter", "letters", "digit", "digits", "item", "items", "element", "elements",
+)
+
+
+def _ordinal_positions(goal: str) -> list[int]:
+    """Positions the sentence names *of* something ("the second column").
+
+    An ordinal next to a unit noun is a position; a bare ordinal is usually an
+    enumeration ("the first two rows").  Only the first kind is evidence for a
+    key or a field index.
+    """
+    words = re.findall(r"[a-z]+", goal.lower())
+    found: list[int] = []
+    for index, word in enumerate(words):
+        value = _NUMBER_WORDS.get(word)
+        if value is None or word not in {
+            "first", "second", "third", "fourth", "fifth", "sixth",
+            "seventh", "eighth", "ninth", "tenth",
+        }:
+            continue
+        following = words[index + 1] if index + 1 < len(words) else ""
+        if following in _UNIT_NOUNS:
+            found.append(value)
+    return found
+
+
 def _target_for(properties: Sequence[str], text: str, goal: str = "") -> str | None:
     """The unique result the stated properties determine, when there is one."""
     word_mode = "words" in properties
@@ -578,6 +632,11 @@ class LivingAgent:
         # An audit trail of what was tried and what survived: a rejected tool
         # is evidence of a real experiment, not an absence of one.
         self.discovery_log: list[dict[str, Any]] = []
+        # Pure-derivation caches: separators per text, a tool's whole
+        # self-description per tool.  Both are recomputed from the machine and
+        # the data, never learned, so caching them changes no answer.
+        self._separator_cache: dict[str, list[str]] = {}
+        self._described_cache: dict[str, set[str]] = {}
 
     # -- learning ---------------------------------------------------------
     def learn_shell_skill(
@@ -1052,6 +1111,32 @@ class LivingAgent:
             # machine's own documentation is the next place to look: a tool
             # that takes an argument may be exactly the mechanism, and its
             # help text says which arguments it has.  The examples decide.
+            # The grammar cannot express it -- but a documented tool can, alone
+            # or feeding the grammar.  The composition is the general case: an
+            # unknown mechanism with grounded arguments, followed by stages the
+            # creature already knows.  A pipeline of one stage is the degenerate
+            # case and is found by the same search.
+            composed = self._compose(
+                goal, examples, max_length=max_length, time_budget_s=time_budget_s
+            )
+            if composed is not None:
+                pipeline, detail = composed
+                skill = self._admit_composed(goal, pipeline, examples)
+                outcome = self.solve(goal, bindings={"path": examples[0][0]})
+                outcome.update(
+                    {
+                        "learned": True,
+                        "stages": pipeline,
+                        "documented": detail["documented"],
+                        "grammar": detail["grammar"],
+                        "source": "composed",
+                        "tool": detail["tool"],
+                        "argv": list(detail["argv"]),
+                        "commands_run": detail["tested"],
+                        "seconds": round(time.perf_counter() - started, 4),
+                    }
+                )
+                return outcome
             found = self._find_documented_mechanism(goal, examples)
             if found is not None:
                 skill = self._admit_documented_skill(goal, found, examples)
@@ -1115,10 +1200,24 @@ class LivingAgent:
     # ``F`` is a *file* placeholder in the coreutils convention (--files0-from=F), so
     # it is deliberately absent: binding it to a number would invent a filename.
     _INT_NAME = re.compile(r"^(?:N|NUM|NUMBER|COUNT|WIDTH|SIZE|LENGTH|LIST|KEYDEF|COLS|LINE|LINES)$")
+    # A placeholder that names a file, a program or a directory cannot be bound
+    # by a number or a character: inventing a filename is not evidence.
+    _FILE_NAME = re.compile(r"^(?:F|FILE|FILES|PROG|PROGRAM|PATH|DIR|DIRECTORY|CMD|COMMAND)$")
     _CHAR_NAME = re.compile(r"^(?:DELIM|SEP|CHAR|CC|STRING|TEXT)$")
     _INT_WORDS = {"width", "column", "columns", "number", "numbers", "count", "line", "lines",
                   "byte", "bytes", "size", "length", "digit", "digits", "increment", "key"}
     _CHAR_WORDS = {"delimiter", "separator", "character", "char", "characters", "string"}
+    # A *position* in the data is a different kind of argument from an
+    # *amount*: a key or a field takes an index the request can name, while a
+    # width or a count is only meaningful if the request names the number.
+    _POSITION_WORDS = {
+        "key", "keys", "field", "fields", "column", "columns", "position",
+        "location", "list", "range", "index",
+    }
+    _AMOUNT_WORDS = {
+        "number", "width", "line", "lines", "byte", "bytes", "size", "count",
+        "length", "increment", "digit", "digits", "start", "first",
+    }
 
     @classmethod
     def _value_kind(cls, option: discovery.Option, doc: discovery.ToolDoc | None = None) -> str:
@@ -1130,6 +1229,8 @@ class LivingAgent:
         invented value is not evidence.
         """
         name = option.argument.strip("[]").upper()
+        if cls._FILE_NAME.match(name):
+            return ""
         if doc is not None and doc.values_for(name):
             # The tool lists the values it accepts, so the argument is a small
             # closed vocabulary rather than a number or a character.
@@ -1145,129 +1246,426 @@ class LivingAgent:
             return "char"
         return ""
 
-    @staticmethod
-    def _grounded_values(kind: str, goal: str, sources: Sequence[str]) -> list[str]:
-        """Values that something real in the request or the data can supply.
+    def _separators(self, sources: Sequence[str]) -> list[str]:
+        """Characters that actually separate parts of the data, most common first.
 
-        Numbers written in the goal come first, then the small integers any
-        table has; separators are the characters that actually split the
-        example lines.  Nothing is taken from a table of known flags.
+        Separators depend only on the data, and every option of every tool asks
+        for them: counting characters thousands of times per goal is pure
+        waste, so the answer is kept per text.
         """
-        if kind == "int":
-            named = [int(match) for match in re.findall(r"\b(\d{1,4})\b", goal)]
-            named = [number for number in named if 1 <= number <= 9999]
-            return [str(number) for number in dict.fromkeys(named + [2, 1, 3, 4])]
+        text = "\n".join(sources)
+        cached = self._separator_cache.get(text)
+        if cached is not None:
+            return cached
         counts: dict[str, int] = {}
-        for text in sources:
-            for character in text:
-                if character in ",:|; ":
-                    counts[character] = counts.get(character, 0) + 1
-        return [character for character, _ in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))][:3]
-
-    # Descriptions that mark an option as a position or a quantity: exactly the
-    # kind of argument a request about "the second column" or "40 characters"
-    # could be bound to.
-    # A *position* in the data is a different kind of argument from an
-    # *amount*: a key/field takes an index the table itself bounds, while a
-    # width or a count is only meaningful if the request names it.  Treating
-    # them alike is what made the first version try `sort -S 1` and never
-    # `sort -k 2` -- a quantity with nothing to bind it to is not evidence.
-    _POSITION_WORDS = {
-        "key", "keys", "field", "fields", "column", "columns", "position",
-        "location", "list", "range", "index",
-    }
-    _AMOUNT_WORDS = {
-        "number", "width", "line", "lines", "byte", "bytes", "size", "count",
-        "length", "increment", "digit", "digits", "start", "first",
-    }
+        for character in text:
+            if character in ",:|; ":
+                counts[character] = counts.get(character, 0) + 1
+        found = [character for character, _ in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))][:3]
+        self._separator_cache[text] = found
+        return found
 
     def _argument_atoms(
         self, goal: str, doc: discovery.ToolDoc, sources: Sequence[str]
-    ) -> list[tuple[int, list[str]]]:
-        """Option bindings that something real can justify, with their evidence.
+    ) -> list[tuple[int, list[str], str]]:
+        """Option bindings something real can justify, with the strength of it.
 
-        Three kinds of evidence are accepted, and nothing else:
+        Three kinds of evidence are accepted and nothing else:
 
-        * a number the request itself names, bound to an option that takes one;
-        * a separator the example data actually contains, bound to an option
-          that takes a character;
-        * a switch whose own description mentions a word from the request.
+        * a *position* the sentence names of a unit ("the second column") bound
+          to an option about positions -- a key, a field, a location;
+        * a *quantity* the request names ("at 40 characters") bound to an
+          option about amounts, when the option's own words appear in the goal;
+        * a *separator* the data actually contains, bound to an option about
+          delimiters.
 
-        Everything else is not "unlikely" -- it is unjustified, and an unjustified
-        argument would be a guess wearing an experiment's clothes.
+        An option whose words share nothing with the request, or whose value
+        nothing in the request or the data can supply, is unjustified.  An
+        unjustified argument would be a guess wearing an experiment's clothes.
         """
-        digits = [int(match) for match in re.findall(r"\b(\d{1,4})\b", goal)]
-        digits = [number for number in dict.fromkeys(digits) if 1 <= number <= 9999]
-        separators = self._grounded_values("char", goal, sources)
+        positions = _ordinal_positions(goal)
+        # A written number is a *quantity* ("40 characters"); an ordinal is a
+        # *position* ("the second column").  Binding a quantity to a key or a
+        # position to a buffer size is how a guess disguises itself as a
+        # deduction, so the two are kept apart.
+        quantities = sorted({int(match) for match in re.findall(r"\b(\d{1,4})\b", goal)})
+        separators = self._separators(sources)
         tokens = _tokens(goal)
-        atoms: list[tuple[int, list[str]]] = []
+        atoms: list[tuple[int, list[str], str]] = []
         for option in doc.options:
             spelling = option.short or option.long
             if not spelling:
                 continue
             kind = self._value_kind(option, doc)
-            words = set(discovery._words(option.description))
+            # A tool names itself twice: in the flag and in the sentence.  The
+            # long flag is often the clearer of the two ("--field-separator").
+            labelled = option.long.lstrip("-").replace("-", " ")
+            words = set(discovery._words(option.description)) | set(discovery._words(labelled))
+            placeholder = option.argument.strip("[]").upper() or "SWITCH"
             if kind == "enum":
                 for value, text in doc.values_for(option.argument):  # type: ignore[union-attr]
-                    # A value whose own sentence matches the request is the
-                    # strongest kind of evidence available; the others stay in
-                    # the space, ordered after it, and are still only believed
-                    # if the bytes agree.
-                    score = 3 if set(discovery._words(text)) & tokens else 2
-                    atoms.append((score, [spelling, value]))
+                    value_words = set(discovery._words(text))
+                    if not value_words & tokens:
+                        score = 2
+                    elif value_words & {"no", "not", "none", "skip", "except", "ignore"}:
+                        # A value that excludes things is a different operation
+                        # from the one the request names, even when it shares
+                        # every other word with it.
+                        score = 3
+                    else:
+                        score = 4
+                    atoms.append((score, [spelling, value], placeholder))
                 continue
             if option.argument:
                 if kind == "int":
-                    if digits:
-                        atoms.append((4, [spelling, str(digits[0])]))
-                    elif words & self._POSITION_WORDS:
-                        atoms.append((3, [spelling, "2"]))
-                        atoms.append((3, [spelling, "1"]))
-                    elif words & self._AMOUNT_WORDS and tokens & words:
-                        atoms.append((2, [spelling, "2"]))
-                elif kind == "char" and separators:
-                    atoms.append((3, [spelling, separators[0]]))
+                    if positions and words & self._POSITION_WORDS:
+                        atoms.append((5, [spelling, str(positions[0])], placeholder))
+                    elif quantities and words & (self._POSITION_WORDS | self._AMOUNT_WORDS):
+                        atoms.append((4, [spelling, str(quantities[0])], placeholder))
+                elif kind == "char":
+                    if separators and words & (self._CHAR_WORDS | {"field", "fields"}):
+                        atoms.append((4, [spelling, separators[0]], placeholder))
                 continue
             if tokens & words:
-                atoms.append((1, [spelling]))
+                atoms.append((1, [spelling], placeholder))
         atoms.sort(key=lambda row: (-row[0], row[1]))
-        # Values the tool itself names are cheap to try but easy to over-try:
-        # `nl` lists four styles and two formats, and running all of them on
-        # every example would be a small brute-force search.  Four is enough
-        # for the ones whose own words match, and the rest are never invented.
-        return atoms[:4]
+        return atoms
 
     def _argument_forms(
         self, goal: str, doc: discovery.ToolDoc, sources: Sequence[str]
-    ) -> list[list[str]]:
-        """Candidate option bundles, cheapest explanation first.
+    ) -> list[tuple[int, list[str]]]:
+        """Candidate option bundles, strongest evidence and fewest arguments first.
 
         A tool's own option list is the space; the request and the data only
-        *rank* and *bind* it.  The bare tool is always tried first, then each
-        justified argument alone, then their combinations -- so the simplest
-        mechanism that reproduces the examples wins.
+        *rank* and *bind* it.  Singles come before pairs, and a pair is only
+        formed from two arguments of *different kinds* -- a style and a style,
+        or a width and a width, usually compete for the same job rather than
+        compose, while a delimiter and a field really do need each other.
         """
-        atoms = [tokens for _score, tokens in self._argument_atoms(goal, doc, sources)]
-        forms: list[list[str]] = [[]]
-        for atom in atoms:
-            forms.append(list(atom))
+        def cls_flags(form: Sequence[str]) -> int:
+            return sum(1 for part in form if part.startswith("-"))
 
-        def compatible(indices: Sequence[int]) -> bool:
-            """One bundle cannot say two different things about one flag."""
-            flags = [atoms[index][0] for index in indices]
-            return len(flags) == len(set(flags))
-
+        atoms = self._argument_atoms(goal, doc, sources)
+        forms: list[tuple[int, list[str]]] = [(0, [])]
+        for score, tokens, _placeholder in atoms:
+            forms.append((score, list(tokens)))
         for first in range(len(atoms)):
             for second in range(first + 1, len(atoms)):
-                if compatible((first, second)):
-                    forms.append(list(atoms[first]) + list(atoms[second]))
-        if len(atoms) >= 3 and compatible((0, 1, 2)):
-            forms.append(list(atoms[0]) + list(atoms[1]) + list(atoms[2]))
-        unique: list[list[str]] = []
-        for form in forms:
-            if form not in unique:
-                unique.append(form)
-        return unique[:8]
+                if atoms[first][2] == atoms[second][2]:
+                    continue
+                if atoms[first][1][0] == atoms[second][1][0]:
+                    continue
+                forms.append(
+                    (atoms[first][0] + atoms[second][0], list(atoms[first][1]) + list(atoms[second][1]))
+                )
+        unique: list[tuple[int, list[str]]] = []
+        seen: set[tuple[str, ...]] = set()
+        for score, form in forms:
+            key = tuple(form)
+            if key in seen:
+                continue
+            seen.add(key)
+            unique.append((score, form))
+        # Evidence first, then the fewest arguments: a single grounded argument
+        # is the simplest explanation, and a pair is only worth a process if the
+        # singles cannot do the job.  Keyword-only switches are kept to the last
+        # two, because they are the most numerous and the least informative.
+        unique.sort(key=lambda row: (cls_flags(row[1]), -row[0], row[1]))
+        strong = [row for row in unique if row[0] >= 2][:8]
+        weak = [row for row in unique if row[0] < 2][:2]
+        return strong + weak
+
+    @staticmethod
+    def _structure_words(sources: Sequence[str]) -> set[str]:
+        """Words the *shape of the data* makes meaningful.
+
+        This is not a task rule: it is what the inputs themselves show.  If the
+        data is separated by commas, then "field", "column" and "delimiter" are
+        the descriptions under which an operation on those parts can be
+        documented; if a line is nothing but a number, "numeric" is.  The words
+        are used to *order* documented mechanisms for trial, never to decide
+        anything -- the bytes decide.
+        """
+        text = "\n".join(sources)
+        words: set[str] = set()
+        if re.search(r"[,;:|\t]", text):
+            words |= {"field", "fields", "column", "columns", "delimiter", "separator", "list"}
+        if re.search(r"(?m)^\s*-?\d+(?:\.\d+)?\s*$", text):
+            words |= {"numeric", "number", "sort"}
+        return words
+
+    def _candidate_stages(
+        self,
+        goal: str,
+        sources: Sequence[str],
+        *,
+        limit: int = 64,
+    ) -> list[tuple[discovery.ToolDoc, list[str], str, int, int]]:
+        """Documented invocations worth *trying*, ordered by evidence strength.
+
+        The request's words, plus the words the data itself makes meaningful,
+        are matched against each tool's entire self-description -- summary and
+        every option line -- because a tool's useful vocabulary often lives in
+        its options ("select only these fields") rather than in its one-line
+        summary.  Breadth comes before depth: the first form of every plausible
+        tool is tried before any tool gets a second one, because a keyword score
+        is a prior and a wrong prior about one tool must not crowd out the rest.
+
+        This is recall, not decision: keywords decide what to *try*, and every
+        candidate is executed before anything is believed.
+        """
+        vocabulary = self.vocabulary
+        vocabulary.read()
+        located = dict(vocabulary.executables())
+        wanted = set(discovery._words(goal)) | self._structure_words(sources)
+        scored: list[tuple[int, str, discovery.ToolDoc]] = []
+        for doc in vocabulary.read():
+            if doc.name in discovery.DENY or doc.name not in located:
+                continue
+            described = self._described_cache.get(doc.name)
+            if described is None:
+                described = set(doc.words)
+                for option in doc.options:
+                    described |= set(discovery._words(option.description))
+                    described |= set(discovery._words(option.long.lstrip("-").replace("-", " ")))
+                self._described_cache[doc.name] = described
+            overlap = len(wanted & described)
+            if overlap >= 2:
+                scored.append((overlap, doc.name, doc))
+        scored.sort(key=lambda row: (-row[0], row[1]))
+        per_tool: list[list[tuple[discovery.ToolDoc, list[str], str, int, int]]] = []
+        for overlap, _name, doc in scored:
+            forms = [
+                (doc, form, located[doc.name], overlap, strength)
+                for strength, form in self._argument_forms(goal, doc, sources)
+                # A first-stage mechanism must be justified by evidence the
+                # request or the data supply -- a number, a position, a
+                # separator -- not by a keyword: switches that merely share a
+                # word with the goal are the most numerous candidates and the
+                # least likely to be the missing mechanism.
+                if form and strength >= 4
+            ][:4]
+            if forms:
+                per_tool.append(forms)
+        out: list[tuple[discovery.ToolDoc, list[str], str, int, int]] = []
+        for depth in range(4):
+            for forms in per_tool:
+                if depth < len(forms):
+                    out.append(forms[depth])
+                    if len(out) >= limit:
+                        return out
+        return out
+
+    def _compose(
+        self,
+        goal: str,
+        examples: Sequence[tuple[str, str]],
+        *,
+        max_length: int,
+        time_budget_s: float,
+        workers: int = 16,
+    ) -> tuple[list[str], dict[str, Any]] | None:
+        """One documented mechanism feeding the known grammar.
+
+        The machine's own tools are the mechanisms; the fixed grammar is what
+        can follow them.  Candidate invocations are *fingerprinted* first --
+        each is really run once, in parallel -- and only the ones that actually
+        change the text are composed.  That is what makes an argument bundle
+        found by keywords harmless: a wrong guess costs one process and is
+        discarded before it can influence anything.
+
+        A survivor is then applied to every example, the grammar is searched
+        from what it produced, and the whole pipeline is run for real on every
+        example.  Only exact bytes are admitted.
+        """
+        inputs = [(self.computer.read(path), expected) for path, expected in examples]
+        sources = [text for text, _ in inputs]
+        expected = [text for _, text in inputs]
+        before = set(self.computer.admitted())
+        grammar = synthesis.instantiate(inputs) + tuple(self._stages.values())
+        candidates = self._candidate_stages(goal, sources)
+        if not candidates:
+            return None
+        scratch = tempfile.mkdtemp(prefix="brain-compose-")
+        try:
+            stages = [
+                self._stage_for(doc, form, binary, cwd=scratch)
+                for doc, form, binary, _overlap, _strength in candidates
+            ]
+
+            def fingerprint(stage: Any) -> str | None:
+                try:
+                    return stage.apply(sources[0])
+                except ValueError:
+                    return None
+
+            with ThreadPoolExecutor(max_workers=workers) as pool:
+                firsts = list(pool.map(fingerprint, stages))
+            survivors = [
+                (candidate, stage, first)
+                for candidate, stage, first in zip(candidates, stages, firsts)
+                if first is not None and first != sources[0]
+            ]
+            # Cheapest explanation first: a single documented argument is tried
+            # before any pair, even when the pair carries more keyword weight.
+            # Evidence first, then parsimony: a bundle whose arguments are both
+            # grounded by the request or the data is more promising than a
+            # one-argument bundle from a tool that merely shares a word, and
+            # among equals the shorter bundle wins.
+            survivors.sort(
+                key=lambda row: (
+                    -row[0][4],
+                    sum(1 for part in row[0][1] if part.startswith("-")),
+                )
+            )
+            tested = len(candidates)
+            for (doc, form, _binary, _overlap, _strength), stage, first in survivors[:16]:
+                if first == expected[0]:
+                    # The tool alone reproduces the first example: a pipeline of
+                    # one stage, which the grammar search has no suffix for.
+                    if self._matches_every_example([stage.shell], examples):
+                        self._settle_admissions(before, winner=doc.name)
+                        self._log_composition(candidates, survivors, doc, form, tested)
+                        return [stage.shell], {
+                            "documented": [stage.shell],
+                            "grammar": [],
+                            "tested": tested,
+                            "tool": doc.name,
+                            "argv": list(form),
+                        }
+                    continue
+                midway = [first]
+                try:
+                    midway.extend(stage.apply(text) for text in sources[1:])
+                except ValueError:
+                    continue
+                pipelines, _stats = synthesis.search(
+                    list(zip(midway, expected)),
+                    max_length=max(1, max_length - 1),
+                    beam=64,
+                    time_budget_s=time_budget_s,
+                    stages=grammar,
+                )
+                for chosen in pipelines:
+                    pipeline = [stage.shell, *chosen]
+                    try:
+                        matched = self._matches_every_example(pipeline, examples)
+                    except AgentError:
+                        continue  # not a command this computer will execute
+                    if matched:
+                        self._settle_admissions(before, winner=doc.name)
+                        self._log_composition(candidates, survivors, doc, form, tested)
+                        return pipeline, {
+                            "documented": [stage.shell],
+                            "grammar": list(chosen),
+                            "tested": tested,
+                            "tool": doc.name,
+                            "argv": list(form),
+                        }
+            self._settle_admissions(before, winner="")
+            return None
+        finally:
+            shutil.rmtree(scratch, ignore_errors=True)
+
+    def _settle_admissions(self, before: set[str], *, winner: str) -> None:
+        """Leave no authority behind from a probe.
+
+        Trying a stranger means admitting it for one run.  Keeping it admitted
+        afterwards would let every failed guess widen what the computer may
+        execute, so only the winner of a successful search survives.
+        """
+        for name in set(self.computer.admitted()) - before:
+            if name != winner:
+                self.computer.revoke(name)
+
+    def _log_composition(
+        self,
+        candidates: Sequence[tuple[discovery.ToolDoc, list[str], str, int, int]],
+        survivors: Sequence[Any],
+        winner: discovery.ToolDoc,
+        form: Sequence[str],
+        tested: int,
+    ) -> None:
+        """Record what was composed, and that everything else was rejected."""
+        self.discovery_log.append(
+            {
+                "tool": winner.name,
+                "reading": "composition",
+                "source": "composed",
+                "verified": True,
+                "documentation": winner.summary,
+                "argv": list(form),
+            }
+        )
+        for (doc, _form, _binary, _overlap, _strength), _stage, _first in survivors:
+            if doc.name == winner.name:
+                continue
+            self.discovery_log.append(
+                {
+                    "tool": doc.name,
+                    "reading": "composition",
+                    "source": "composed",
+                    "verified": False,
+                    "documentation": doc.summary,
+                    "argv": [],
+                }
+            )
+        del self.discovery_log[: max(0, len(self.discovery_log) - 200)]
+
+    def _matches_every_example(
+        self, stages: Sequence[str], examples: Sequence[tuple[str, str]]
+    ) -> bool:
+        """Run the whole pipeline for real on every example, byte for byte.
+
+        Stage-by-stage agreement is evidence, not proof: pipes interact, and an
+        exit status can hide a truncated stream.  The admitted command is one the
+        shell actually produces these bytes with.
+        """
+        template = "cat {path} | " + " | ".join(stages)
+        for path, expected in examples:
+            result = self.computer.run(template.replace("{path}", shlex.quote(path)))
+            if not result.ok or result.stdout != expected:
+                return False
+        return True
+
+    def _stage_for(
+        self,
+        doc: discovery.ToolDoc,
+        form: Sequence[str],
+        binary: str,
+        *,
+        cwd: str | None = None,
+    ) -> Any:
+        """One documented invocation as an exact, memoised pipeline stage.
+
+        The stage is hermetic like every other probe: it reads its input from
+        standard input, writes to standard output, and runs in a throwaway
+        directory, because a tool nobody has vetted may write beside itself.
+        """
+        argv = [binary, *form]
+        shell = " ".join([doc.name, *(shlex.quote(part) for part in form)]).strip()
+        memo: dict[str, str] = {}
+        workdir = cwd or tempfile.mkdtemp(prefix="brain-stage-")
+        env = {"PATH": ":".join(self.computer.search_dirs()), "LC_ALL": "C", "HOME": workdir}
+
+        def apply(text: str) -> str:
+            cached = memo.get(text)
+            if cached is not None:
+                return cached
+            if doc.name not in self.computer.admitted():
+                self.computer.admit(doc.name, evidence={"summary": doc.summary, "usage": doc.usage, "argv": list(form)})
+            code, raw = discovery._run_capped(
+                argv, cwd=workdir, env=env, timeout=2.0, limit=1_048_576, stdin_text=text
+            )
+            if code != 0:
+                raise ValueError("STAGE_FAILED:" + doc.name)
+            produced = discovery._decode(raw)
+            memo[text] = produced
+            return produced
+
+        # An unmodelled tool may consume or produce anything, so it accepts both
+        # raw text and a line stream; the data, not a declared type, decides.
+        return synthesis.Stage(shell, synthesis.LINES, synthesis.TEXT, apply)
 
     def _find_documented_mechanism(
         self,
@@ -1349,7 +1747,7 @@ class LivingAgent:
         # Phase 2: documented arguments, tool by tool, simplest bundle first.
         while found is None and not stopped:
             for doc in shortlist:
-                for form in self._argument_forms(goal, doc, sources):
+                for _strength, form in self._argument_forms(goal, doc, sources):
                     if not form or stopped:
                         continue
                     found = attempt(doc, form)
@@ -1425,6 +1823,67 @@ class LivingAgent:
             {"skill_id": skill_id, "outcome": "learned", "tool": found.get("tool")},
             surprise=0.5,
             tags=("learn", "documented"),
+        )
+        self._resolve_impasse(goal)
+        return skill
+
+    def _admit_composed(
+        self,
+        goal: str,
+        pipeline: Sequence[str],
+        examples: Sequence[tuple[str, str]],
+    ) -> ShellSkill:
+        """Admit a composition, having already proved it on real examples.
+
+        The canary is the same proof the search used: the real shell, the real
+        pipeline, exact bytes.  A composed skill that cannot reproduce its own
+        first example is refused like any other unverified mechanism.
+        """
+        stage = pipeline[0]
+        template = "cat {path} | " + " | ".join(pipeline)
+        canary_path, canary_expected = examples[0]
+        expected = canary_expected.strip()
+        if re.fullmatch(r"-?\d+", expected):
+            postcondition = r"^-?\d+$"
+        elif expected:
+            postcondition = r"\S"
+        else:
+            postcondition = r"\A\s*\Z"
+        skill_id = "C-" + hashlib.sha256(
+            json.dumps({"goal": goal, "pipeline": list(pipeline)}, sort_keys=True).encode()
+        ).hexdigest()[:12]
+        skill = ShellSkill(
+            skill_id=skill_id,
+            description=goal,
+            template=template,
+            slots={"path": canary_path},
+            postcondition=postcondition,
+            canary_input={canary_path: self.computer.read(canary_path)},
+            canary_expected=canary_expected,
+            keywords=sorted(_tokens(goal)),
+        )
+        if not self._canary_ok(skill):
+            raise AgentError("COMPOSED_SKILL_FAILS_CANARY")
+        self.skills[skill_id] = skill
+        self.capabilities["pipeline:" + template] = {
+            "template": template,
+            "stages": list(pipeline),
+            "goal": goal,
+            "first_stage": stage,
+        }
+        self.memory.add(
+            "skill",
+            " ".join([goal, *sorted(_tokens(goal))]),
+            {"skill_id": skill_id, "kind": "shell", "template": template, "stages": list(pipeline)},
+            confidence=0.8,
+            tags=("shell", "composed"),
+        )
+        self.memory.add(
+            "episode",
+            "composed a mechanism with the known grammar: " + goal,
+            {"skill_id": skill_id, "outcome": "learned", "stages": list(pipeline)},
+            surprise=0.6,
+            tags=("learn", "composed"),
         )
         self._resolve_impasse(goal)
         return skill

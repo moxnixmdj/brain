@@ -253,6 +253,7 @@ def _run_capped(
     env: Mapping[str, str] | None = None,
     timeout: float = 1.0,
     limit: int = 262_144,
+    stdin_text: str | None = None,
 ) -> tuple[int, bytes]:
     """Run a command and read at most ``limit`` bytes before stopping it.
 
@@ -271,16 +272,29 @@ def _run_capped(
       a flood for a result.
     """
     started = time.perf_counter()
+    # A pipeline stage is fed through a temporary file rather than a pipe: a
+    # writer thread to keep a pipe from filling would cost more than the fork,
+    # and a temp file can never deadlock against the capped reader.
+    handle = None
     try:
+        if stdin_text is None:
+            source: Any = subprocess.DEVNULL
+        else:
+            handle = tempfile.TemporaryFile()
+            handle.write(stdin_text.encode("utf-8"))
+            handle.seek(0)
+            source = handle
         process = subprocess.Popen(
             list(argv),
             cwd=cwd,
             env=dict(env) if env is not None else None,
-            stdin=subprocess.DEVNULL,
+            stdin=source,
             stdout=subprocess.PIPE,
             stderr=subprocess.DEVNULL,
         )
     except (OSError, ValueError):
+        if handle is not None:
+            handle.close()
         return 127, b""
     buffer = bytearray()
     deadline = started + timeout
@@ -327,6 +341,11 @@ def _run_capped(
         if process.stdout is not None:
             try:
                 process.stdout.close()
+            except OSError:
+                pass
+        if handle is not None:
+            try:
+                handle.close()
             except OSError:
                 pass
     code = 137 if stopped_early else (process.returncode if process.returncode is not None else 137)
@@ -447,6 +466,7 @@ class MachineVocabulary:
         self.help_timeout = float(help_timeout)
         self.workers = max(1, int(workers))
         self._docs: dict[str, ToolDoc | None] = {}
+        self._inventory: list[tuple[str, str]] | None = None
         self._stamps: dict[str, str] = {}
         self.help_reads = 0
         self.seconds = 0.0
@@ -456,10 +476,16 @@ class MachineVocabulary:
     def executables(self) -> list[tuple[str, str]]:
         """Executables worth asking, deduplicated by the binary itself.
 
+        The inventory is a fact about the machine that does not change while a
+        goal is being solved, and every tier of every search asks for it, so it
+        is computed once per vocabulary.
+
         ``zcat``, ``gzcat`` and ``zless`` can be the same program; one probe per
         distinct binary is enough to learn what it does, and the alias that is
         asked is the shortest name (the one a person would type).
         """
+        if self._inventory is not None:
+            return list(self._inventory)
         found: dict[str, str] = {}
         seen_inodes: dict[int, str] = {}
         candidates: list[tuple[str, str, int]] = []
@@ -494,7 +520,8 @@ class MachineVocabulary:
                 candidates.append((name, str(entry), inode))
                 if len(found) >= self.limit:
                     break
-        return sorted((name, path) for name, path, _inode in candidates)
+        self._inventory = sorted((name, path) for name, path, _inode in candidates)
+        return list(self._inventory)
 
     # -- documentation ----------------------------------------------------
     def doc(self, name: str) -> ToolDoc | None:

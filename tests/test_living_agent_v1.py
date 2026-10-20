@@ -1306,6 +1306,80 @@ class DocumentedArgumentTests(unittest.TestCase):
         self.assertEqual(again["stdout"], "okapi,0\nzebra,4\nmule,9\n")
         self.assertEqual(len(agent.discovery_log), rows)
 
+    def test_a_documented_mechanism_composes_with_the_known_grammar(self) -> None:
+        # No stage of `sort -k 2 -t , | head -n 2` is in the fixed grammar: the
+        # keyed sort needs a key *and* a delimiter, both bound from the request
+        # and the data.  The creature must find it by composing the machine's
+        # own documented tool with stages it already knows, and prove it.
+        agent = self._agent()
+        self._write(agent, "one.csv", "pear,2\napple,10\nfig,1\nkiwi,7\n")
+        self._write(agent, "two.csv", "zulu,5\nyankee,3\nxray,9\n")
+        goal = "sort the rows by the second column, comma separated, and keep the first two"
+        examples = [
+            ("one.csv", "fig,1\napple,10\n"),
+            ("two.csv", "yankee,3\nzulu,5\n"),
+        ]
+        outcome = agent.acquire(goal, examples)
+        self.assertEqual(outcome["status"], "PASS", outcome)
+        self.assertEqual(outcome["source"], "composed")
+        self.assertEqual(outcome["tool"], "sort")
+        self.assertEqual(len(outcome["stages"]), 2)
+        self.assertEqual(outcome["stages"][0], "sort -k 2 -t ,")
+        self.assertEqual(outcome["stdout"], examples[0][1])
+        self.assertLessEqual(outcome["commands_run"], 64)
+        self.assertLess(outcome["seconds"], 1.5)
+        # a table it has never seen, through memory rather than a new search
+        rows = len(agent.discovery_log)
+        self._write(agent, "held.csv", "mule,4\nokapi,9\nzebra,1\n")
+        started = time.perf_counter()
+        again = agent.solve(goal, bindings={"path": "held.csv"})
+        self.assertEqual(again["stdout"], "zebra,1\nmule,4\n")
+        self.assertEqual(len(agent.discovery_log), rows)
+        self.assertLess(time.perf_counter() - started, 0.1)
+
+    def test_a_composition_is_kept_across_a_snapshot(self) -> None:
+        agent = self._agent()
+        self._write(agent, "one.csv", "pear,2\napple,10\nfig,1\nkiwi,7\n")
+        self._write(agent, "two.csv", "zulu,5\nyankee,3\nxray,9\n")
+        goal = "sort the rows by the second column, comma separated, and keep the first two"
+        agent.acquire(
+            goal,
+            [("one.csv", "fig,1\napple,10\n"), ("two.csv", "yankee,3\nzulu,5\n")],
+        )
+        payload = json.loads(json.dumps(agent.snapshot()))
+        reborn = LivingAgent(self.root)
+        reborn.restore(payload)
+        self._write(reborn, "fresh.csv", "beta,6\nalpha,2\ngamma,8\n")
+        result = reborn.solve(goal, bindings={"path": "fresh.csv"})
+        self.assertEqual(result["stdout"], "alpha,2\nbeta,6\n")
+
+    def test_an_overfit_pipeline_is_not_admitted(self) -> None:
+        # A pipeline of fixed-count stages can reproduce two examples by luck.
+        # The grammar no longer contains magic counts for exactly this reason,
+        # and what is admitted must be the mechanism the request names -- here
+        # the keyed sort -- which then has to work on a table it never saw.
+        agent = self._agent()
+        self._write(agent, "one.csv", "pear,2\napple,10\nfig,1\nkiwi,7\n")
+        self._write(agent, "two.csv", "zulu,5\nyankee,3\nxray,9\n")
+        outcome = agent.acquire(
+            "sort the rows by the second column, comma separated, and keep the first two",
+            [("one.csv", "fig,1\napple,10\n"), ("two.csv", "yankee,3\nzulu,5\n")],
+        )
+        self.assertIn("-k", outcome["argv"])
+        self.assertNotIn("tail -n +2", outcome["stages"])
+        for index, text in enumerate(
+            ("mule,4\nokapi,9\nzebra,1\nemu,6\n", "w,2\nv,8\nu,5\nt,1\ns,9\n")
+        ):
+            self._write(agent, f"held{index}.csv", text)
+            rows = [line.split(",") for line in text.strip().split("\n")]
+            ordered = [row for row in sorted(rows, key=lambda row: row[1])][:2]
+            want = "".join(f"{row[0]},{row[1]}\n" for row in ordered)
+            result = agent.solve(
+                "sort the rows by the second column, comma separated, and keep the first two",
+                bindings={"path": f"held{index}.csv"},
+            )
+            self.assertEqual(result["stdout"], want)
+
     def test_a_width_comes_from_the_request_not_from_a_constant(self) -> None:
         narrow = self._agent()
         text = "the quick brown fox jumps over the lazy dog and keeps running far past" + "\n"
