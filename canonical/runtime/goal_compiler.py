@@ -75,7 +75,22 @@ GENERIC_MATCH_TOKENS={
     # as GOAL_COMPILATION_AMBIGUOUS. Measured before adding these: no
     # capability in the live registry loses its last distinctive token, so
     # this can only remove matches that never had a real basis.
-    "brain","runtime","canonical","astra","tmp","project"
+    "brain","runtime","canonical","astra","tmp","project",
+    # Governance and abstraction vocabulary. `terminal.kstar.root.assess.stdlib`
+    # carries 27 keywords of this kind -- proof, evidence, capability, semantic,
+    # composition, context, reuse, universal, adequacy, discriminator -- which
+    # overlap ordinary technical prose on at least one token almost always. It
+    # was therefore selected for four unrelated goals at base 9554215 (QR
+    # generate, evidence rank, claim bind, knowledge consistency) and is still
+    # selected for two of them, because it binds easily and so survives once
+    # the better-matching candidates prove unbindable. Measured before adding
+    # these: 0 of 363 live capabilities lose their last distinctive token, so
+    # none becomes unmatchable -- a capability that genuinely owns one of these
+    # words still matches through its other tokens.
+    "terminal","kstar","opus","falsify","tournament","adequacy","discriminator",
+    "counterexample","residual","ownership","universal","proof","policy","basis",
+    "scope","complete","capability","reuse","cover","composition","transform",
+    "generator","context","semantic","evidence"
 }
 
 

@@ -37,8 +37,8 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 
 # The goal set whose measured compile rate moved from 1/9 to 5/9. Asserted as a
 # floor so a future change that silently narrows the bindable set fails loudly.
-BENCHMARK_COMPILE_FLOOR = 5
-BENCHMARK_EXPECTED_FIRST_FLOOR = 3
+BENCHMARK_COMPILE_FLOOR = 6
+BENCHMARK_EXPECTED_FIRST_FLOOR = 4
 
 
 def _synthetic_registry():
@@ -368,19 +368,27 @@ class BenchmarkFloorTests(unittest.TestCase):
         totals = report["totals"]
         base = bench.BASELINE_MEASURED_AT_BASE_9554215["EXTENDED"]
         self.assertEqual(totals["goals"], base["goals"])
+        # 11, not 12. Treating governance vocabulary as non-distinctive moved
+        # EXT_CLAIM_BIND from "compiles against terminal.kstar.root.assess" to
+        # an honest refusal, and moved EXT_EVIDENCE_RANK from that same wrong
+        # capability to the correct one. So the compile count fell by one while
+        # correct selections rose by one: a wrong execution traded for a
+        # refusal is a gain, and the assertion below is what actually pins it.
         self.assertGreaterEqual(
             totals["compiled"],
-            12,
+            11,
             f"extended compile rate regressed to {totals['compiled']}/14: "
             + json.dumps(report["failure_causes"], sort_keys=True),
         )
-        self.assertGreaterEqual(totals["expected_first_capability_selected"], 7)
+        self.assertGreaterEqual(totals["expected_first_capability_selected"], 8)
         # And it must actually beat the recorded baseline, not merely sit on it.
         self.assertGreater(totals["compiled"], base["compiled"])
         self.assertGreater(
             totals["expected_first_capability_selected"],
             base["expected_first_selected"],
         )
+        # The point of the change: fewer goals executing the wrong capability.
+        self.assertLessEqual(totals["compiled_against_wrong_capability"], 3)
 
     def test_overmatching_capability_is_still_documented(self):
         """The pre-existing catch-all that explains most wrong selections."""
