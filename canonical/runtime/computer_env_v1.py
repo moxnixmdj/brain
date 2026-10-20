@@ -1968,6 +1968,11 @@ _PIPE_PATTERNS = ("",)
 # Below 2s it stops helping: the deadline is only checked BETWEEN
 # shapes, so a head already inside a subprocess run finishes it anyway.
 _PIPE_HEAD_BUDGET = 2.0
+
+# How many composition searches are running right now. A search that is
+# still running after its answer is known is not idle, it is theft: see
+# _stop_composing.
+_COMPOSE_LIVE = 0
 _PROGRAM_BUDGET = 20.0
 
 
@@ -1976,7 +1981,9 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
                     workers: int = 24,
                     stages: int = 1,
                     literal: str | None = None,
-                    budget: float = _PROGRAM_BUDGET) -> list[dict[str, Any]]:
+                    budget: float = _PROGRAM_BUDGET,
+                    stop: threading.Event | None = None
+                    ) -> list[dict[str, Any]]:
     """Commands that print n on a file built to hold exactly n of `kind`.
 
     Chosen by what they DID, not by what they say they do. The exact argv
@@ -1988,6 +1995,8 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
     from concurrent.futures import ThreadPoolExecutor
     if probe_bytes(kind, n, literal) is None:
         return []
+    if stop is not None and stop.is_set():
+        return []
     # what the goal asked to look for is itself a way of looking: 'grep
     # --count ERROR' needs ERROR given to it, so the literal is offered
     # alongside the match-everything patterns rather than only being buried
@@ -1996,12 +2005,18 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
     name = "probe.txt"
 
     def one(prog: str) -> dict[str, Any] | None:
+        if stop is not None and stop.is_set():
+            return None
         root = pathlib.Path(tempfile.mkdtemp(prefix="brain-probe-"))
         deadline = time.monotonic() + budget
         try:
             for argv in _query_shapes(prog, name, gap,
                                       patterns=patterns):
+                if stop is not None and stop.is_set():
+                    break
                 if time.monotonic() > deadline:
+                    break
+                if stop is not None and stop.is_set():
                     break
                 # A file built to hold 7 of the thing, then one built to
                 # hold 13. A program that prints 7 once may be printing 7
@@ -2076,6 +2091,8 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
     # Composing only with things already proven to count is both the
     # cheaper search and the more sensible one: find out what counts, then
     # find out what to feed it.
+    if stop is not None and stop.is_set():
+        return []
     budget = min(budget, _PIPE_HEAD_BUDGET)
     counters = _known_counters("lines", list(programs), gap, literal,
                                timeout)
@@ -2097,6 +2114,8 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
         the pair tracks the construction. 'uniq | wc --lines' answers "how
         many different lines" -- a question no single program answers."""
         head, tail_argv = job
+        if stop is not None and stop.is_set():
+            return None
         root = pathlib.Path(tempfile.mkdtemp(prefix="brain-pipe-"))
         deadline = time.monotonic() + budget
         try:
@@ -2143,6 +2162,29 @@ def probe_survivors(kind: str, programs: Sequence[str], gap: str,
     jobs = [(head, t) for head in programs for t in tails]
     with ThreadPoolExecutor(max_workers=workers) as pool:
         return [hit for hit in pool.map(pair, jobs) if hit]
+
+
+def _stop_composing(stop: "threading.Event | None",
+                    thread: "threading.Thread | None",
+                    timeout: float = 0.5) -> None:
+    """End a composition search whose answer is no longer wanted.
+
+    Composition is started BEFORE the single-program sweep, because for
+    a question only a pipeline answers that sweep is a guaranteed
+    failure. But when the sweep does answer, the composition is simply
+    abandoned -- and an abandoned thread does not stop working, it
+    only stops being listened to.
+
+    On a two-core machine that was not a small leak. The third question
+    asked in a run cost 37s; the very same question asked first cost
+    19s, because by then two orphaned searches were still burning both
+    cores. A machine that gets slower the more it has learned is
+    learning wrong, so the search is told to stop and then waited for.
+    """
+    if stop is not None:
+        stop.set()
+    if thread is not None:
+        thread.join(timeout=timeout)
 
 
 def answer_query(gap: str, input_file: str | pathlib.Path,
@@ -2301,6 +2343,7 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
     # You do not have to prove a negative before finding a positive.
     comp: dict[str, Any] = {}
     comp_thread = None
+    comp_stop = threading.Event()
     # Only when nothing is remembered. A question the machine can already
     # answer from memory must not spawn a full composition search behind
     # its back: the answer arrives in milliseconds and the thread keeps
@@ -2310,13 +2353,17 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
                      for lim in (24, 96, 200)) if programs is None else True
     if programs is None and not remembered:
         def _compose() -> None:
+            global _COMPOSE_LIVE
+            _COMPOSE_LIVE += 1
             try:
                 comp["survivors"] = probe_survivors(
                     kind,
                     programs_for_goal(gap, limit=_MAX_PIPE_PROGRAMS),
-                    gap, stages=2, literal=literal)
+                    gap, stages=2, literal=literal, stop=comp_stop)
             except Exception:  # noqa: BLE001
                 comp["survivors"] = []
+            finally:
+                _COMPOSE_LIVE -= 1
 
         comp_thread = threading.Thread(target=_compose, daemon=True)
         comp_thread.start()
@@ -2355,6 +2402,10 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
             value, bins = ranked[0]
             if len(set(bins)) >= min_agreement:
                 agree = len(set(bins))
+                # The sweep answered, so the composition running behind
+                # it is answering a question nobody asked any more.
+                _stop_composing(comp_stop, comp_thread)
+                comp_thread = None
                 return {"pass": True,
                         "status": ("PASS__MEASURED_BY_AGREEMENT" if agree > 1
                                    else "PASS__MEASURED_BY_ONE_TRACKED_INSTRUMENT"),
@@ -2416,6 +2467,8 @@ def answer_query(gap: str, input_file: str | pathlib.Path,
     # programs. So composition is attempted unconditionally here, and
     # whatever the single programs found is kept only to explain a
     # refusal honestly.
+    _stop_composing(comp_stop, comp_thread)
+    comp_thread = None
     single = list(survivors)
     survivors = []
 

@@ -960,6 +960,62 @@ class PipelineTests(unittest.TestCase):
                                     "deadline is only checked between "
                                     "shapes: %.1f" % hit["head_budget"])
 
+    def test_a_search_told_to_stop_stops(self):
+        """Composition starts BEFORE the single-program sweep, because for
+        a question only a pipeline answers that sweep is a guaranteed
+        failure. When the sweep does answer, the composition must be
+        droppable -- and a thread that is merely ignored does not stop
+        working, it only stops being listened to.
+
+        One worker, so the order is fixed: the first pipeline run sets
+        the stop, and every job behind it must see it and do nothing.
+        A search that cannot be stopped runs all thirty-two.
+        """
+        from unittest import mock
+        import threading
+        runs: list[int] = []
+        stop = threading.Event()
+        real = cenv._run_pipeline
+
+        def spy(*a, **k):
+            runs.append(1)
+            stop.set()          # the answer is known; stop looking
+            return real(*a, **k)
+
+        with mock.patch.object(cenv, "_run_pipeline", side_effect=spy):
+            cenv.probe_survivors("uniquelines", self.progs,
+                                 "how many unique lines in data.txt",
+                                 stages=2, workers=1, stop=stop)
+        self.assertLess(len(runs), 10,
+                        "a search that was told to stop still ran %d "
+                        "pipelines: it is being ignored, not stopped"
+                        % len(runs))
+
+    def test_no_search_is_left_running_behind_an_answered_question(self):
+        """The point of the previous test, measured where it matters.
+
+        Three questions in a row, and the third is the one only a
+        pipeline answers. With orphaned searches still burning both
+        cores it cost 37s; asked first, the same question cost 19s --
+        the machine was getting SLOWER the more it had learned, which
+        is learning backwards.
+
+        Each search is told to stop and waited for, so nothing is left
+        working on a question that has already been answered.
+        """
+        for goal in ("count the lines in data.txt",
+                     "how many words in data.txt"):
+            r = cenv.answer_query(goal, self.file)
+            self.assertTrue(r["pass"], r)
+            for _ in range(20):
+                if cenv._COMPOSE_LIVE == 0:
+                    break
+                time.sleep(0.05)
+            self.assertEqual(cenv._COMPOSE_LIVE, 0,
+                             "a composition search is still running after "
+                             "%r was answered: it will go on burning every "
+                             "core while the next question is asked" % goal)
+
     def test_the_composition_is_a_real_command_not_a_description(self):
         """Run the two stages ourselves, joined with our own pipe, nowhere
         near the learner. If it works, a pipeline was composed."""
