@@ -1401,7 +1401,18 @@ class LivingAgent:
                 }
             )
             return outcome
+        # The shortlist is a keyword ranking, and a keyword ranking is a prior:
+        # "reverse the lines" puts `rev` (which reverses *characters*) first and
+        # `tac` (which reverses *lines*) nineteenth.  Only the bytes can settle
+        # that, so when the top of the ranking has nothing, the search widens
+        # to the whole documented surface instead of stopping at six.  It runs
+        # only on the path where nothing else answered, and every attempt is
+        # bounded by the run cap inside the search.
         found = self._find_documented_mechanism(goal, examples)
+        if found is None:
+            found = self._find_documented_mechanism(
+                goal, examples, max_tools=24, max_runs=60
+            )
         if found is not None:
             skill = self._admit_documented_skill(goal, found, examples)
             outcome = self.solve(goal, bindings={"path": examples[0][0]})
