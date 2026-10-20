@@ -12,7 +12,7 @@ receipt, not a terminal claim, and not a capability grant.
 | Living agent | `canonical/runtime/living_agent_v1.py` | Real POSIX computer surface, one-shot skill chunking, canary-based drift detection and repair, word learning, impasse tracking, self-directed practice, consolidating memory, snapshot/restore. |
 | Shell synthesis | `canonical/runtime/shell_synthesis_v1.py` | Learns a stdin→stdout pipeline from (input, expected output) examples: typed beam search over 20 real stages, exact interpreter ordering, real-shell verification. |
 | Benchmark | `canonical/runtime/living_agent_benchmark_v1.py` | Twelve spreadsheet transforms with independently written oracles, plus a projection of the repository's real file tree. |
-| Acceptance | `tests/test_living_agent_v1.py` | 120 tests / 162 subtests. Real processes, real files, exact byte equality. No mocks. |
+| Acceptance | `tests/test_living_agent_v1.py` | 121 tests / 162 subtests. Real processes, real files, exact byte equality. No mocks. |
 | Discovery | `canonical/runtime/living_discovery_v1.py` | Reads what this machine says it can do (`tool --help`, the tool's own definition), turns a goal sentence into an exact expected output, and proves a real command against it before admitting it. |
 | Growth measurement | `canonical/runtime/living_agent_growth_v1.py` | Acquires four real skills at runtime and replays them on three untouched real directories. |
 
@@ -441,6 +441,8 @@ Measured on this machine, same machine, same day:
 | the same words after a snapshot and restart (new data) | 1 | 0.01 s |
 | translate commas to semicolons (both named) | 3 | 0.05 s |
 | the second field, comma separated | 2 | 0.03 s |
+| lines that contain a word (first time) | 13 | 0.08 s |
+| the same kind of request, a different word | 5 | 0.06 s |
 
 The first-time cost fell from 52 runs to 11 without changing a line of the
 search space, by ordering the same candidates differently.  Four priors, in
@@ -538,6 +540,21 @@ specification, so a demonstrated manner is evidence, exactly like a stated one
 The opposite demonstration must not inherit it: the same words over data whose
 shown answer *is* lexical learn `sort -k 2 -t ,` and answer "20" before "7" as
 text.  Both are measured on held-out files where the two readings disagree.
+
+### The sentence is an oracle when it defines a function
+
+"Show only the lines that contain error" does not just describe an example: it
+says what the answer is for *any* text.  That is a specification, so it is
+checked on a text the examples never contained -- the source with a matching
+line moved to the front and a non-matching line appended.  `tail -n +2` fits
+both original files by accident (the word sat on the second line of each) and
+fails the probe immediately, because it selects by position.  The same question
+is asked of pipelines admitted by the grammar search and by composition: two
+paths, one standard.
+
+A request of the same kind then costs 5 runs instead of 13, because the
+mechanism (`grep PATTERNS`) is remembered while the pattern is bound fresh --
+memory of the mechanism, not of the sentence.
 
 ### A fit is not an ordering
 

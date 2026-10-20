@@ -1890,6 +1890,48 @@ class DocumentedArgumentTests(unittest.TestCase):
         self.assertEqual(agent.solve(goal, bindings={"path": "h1.txt"})["stdout"], "an error at noon\n")
         self.assertEqual(agent.solve(goal, bindings={"path": "h2.txt"})["stdout"], "")
 
+    def test_a_selection_must_use_the_word_it_names(self) -> None:
+        # `tail -n +2` reproduces both examples because the word happens to sit
+        # on the second line of each file.  The sentence says what the answer is
+        # for *any* text -- the lines containing that word -- so the claim can
+        # be checked on a text the examples never contained, and a positional
+        # stand-in is refused.  A second request of the same kind must then be
+        # answered from memory in a fraction of the first search.
+        agent = self._agent()
+        self._write(agent, "g1.txt", "ok\nerror\n")
+        self._write(agent, "g2.txt", "fine\nerror\n")
+        goal = "show only the lines that contain error"
+        first = agent.acquire(goal, [("g1.txt", "error\n"), ("g2.txt", "error\n")])
+        self.assertEqual(first["status"], "PASS", first)
+        self.assertLessEqual(first["commands_run"], 16)
+        self.assertIn("error", " ".join(first["stages"]))
+        self.assertNotIn("tail", first["stages"][0])
+        self._write(agent, "h1.txt", "early error\nok\nlater error\n")
+        self._write(agent, "h2.txt", "nothing at all\n")
+        self.assertEqual(
+            agent.solve(goal, bindings={"path": "h1.txt"})["stdout"],
+            "early error\nlater error\n",
+        )
+        self.assertEqual(agent.solve(goal, bindings={"path": "h2.txt"})["stdout"], "")
+
+        self._write(agent, "w1.txt", "ok\nwarning here\n")
+        self._write(agent, "w2.txt", "warning\n")
+        second = agent.acquire(
+            "show only the lines that contain warning",
+            [("w1.txt", "warning here\n"), ("w2.txt", "warning\n")],
+        )
+        self.assertIn("warning", " ".join(second["stages"]))
+        self.assertTrue(second["remembered"], second)
+        # the second request costs less than half the first: memory, measured
+        self.assertLess(second["commands_run"] * 2, first["commands_run"])
+        self._write(agent, "h3.txt", "a warning first\nok\n")
+        self.assertEqual(
+            agent.solve("show only the lines that contain warning", bindings={"path": "h3.txt"})[
+                "stdout"
+            ],
+            "a warning first\n",
+        )
+
     def test_the_examples_can_state_the_manner_the_sentence_omits(self) -> None:
         # The sentence says only "by the second column".  The shown answer says
         # 1, 2, 10 -- which no lexical order produces -- so the numeric reading

@@ -1276,6 +1276,13 @@ class LivingAgent:
             if not ok:
                 continue
             unexplained = self._unexplained_request(goal, stages)
+            if not unexplained:
+                # The same behavioural questions the composed path asks: a
+                # pipeline that fits the bytes but answers a different question
+                # is a coincidence, not a mechanism.
+                failure = self._sentence_probe_failure(goal, stages, examples)
+                if failure:
+                    unexplained = [failure]
             if not unexplained and self._depends_only_on_named_column(goal, stages, examples) is False:
                 unexplained = [f"a count that depends on column {_ordinal_positions(goal)[0]}"]
             if unexplained:
@@ -2255,6 +2262,24 @@ class LivingAgent:
             )
         del self.discovery_log[: max(0, len(self.discovery_log) - 200)]
 
+    def _sentence_probe_failure(
+        self, goal: str, stages: Sequence[str], examples: Sequence[tuple[str, str]]
+    ) -> str:
+        """The first behavioural question the pipeline fails, or an empty string.
+
+        These are not style checks: each one runs the pipeline on a text the
+        examples did not contain and compares the answer against something the
+        *sentence* determines.  They only ever reject, and each returns None
+        (no failure) when the question does not apply.
+        """
+        if self._selection_matches_the_named_word(goal, stages, examples) is False:
+            return "the answer does not select by the word the request names"
+        if self._order_ignores_input_row_order(goal, stages, examples) is False:
+            return "the answer depends on the order of the rows"
+        if self._order_holds_on_a_fresh_permutation(goal, stages, examples) is False:
+            return "the answer is not ordered by the column the request names"
+        return ""
+
     def _confirm(
         self, goal: str, pipeline: Sequence[str], examples: Sequence[tuple[str, str]]
     ) -> bool:
@@ -2276,9 +2301,7 @@ class LivingAgent:
                 return False
         except AgentError:
             return False  # not a command this computer will execute
-        if self._order_ignores_input_row_order(goal, pipeline, examples) is False:
-            return False
-        if self._order_holds_on_a_fresh_permutation(goal, pipeline, examples) is False:
+        if self._sentence_probe_failure(goal, pipeline, examples):
             return False
         return self._depends_only_on_named_column(goal, pipeline, examples) is not False
 
@@ -2469,6 +2492,49 @@ class LivingAgent:
             elif role == "prefix" and not re.search(pattern, first):
                 missing.append(label + " first")
         return missing
+
+    _CONTAINMENT = re.compile(
+        r"\b(contain|contains|containing|include|includes|including|with|having|match|matches|matching)\b"
+    )
+
+    def _selection_matches_the_named_word(
+        self, goal: str, stages: Sequence[str], examples: Sequence[tuple[str, str]]
+    ) -> bool | None:
+        """Does the answer select by the word the sentence names?
+
+        "Show only the lines that contain error" says what the answer is for
+        *any* text: exactly the lines that contain that word.  That is a
+        specification the sentence itself supplies, so it can be checked on a
+        probe the examples never contained.  Without it, `tail -n +2` fits two
+        files where the word happens to sit on every line but the first, and is
+        wrong the moment it does not.
+
+        Returns None unless the reading applies and the examples already agree
+        with it -- a sentence that means something else is not judged by a
+        filter it did not ask for.
+        """
+        if not self._CONTAINMENT.search(goal.lower()):
+            return None
+        path, expected = examples[0]
+        text = self.computer.read(path)
+        words = [
+            word
+            for word in sorted(_tokens(goal))
+            if word.isalpha() and len(word) > 2 and word in text and word not in {"line", "lines"}
+        ]
+        if len(words) != 1:
+            return None
+        word = words[0]
+        selected = "".join(line + "\n" for line in text.splitlines() if word in line)
+        if expected != selected:
+            return None
+        probe = f"a line with {word} first\n" + text + "nothing to see here\n"
+        oracle = "".join(line + "\n" for line in probe.splitlines() if word in line)
+        self._runs += 1
+        result = self.computer.run(" | ".join(stages), stdin=probe)
+        if not result.ok:
+            return None
+        return result.stdout == oracle
 
     @staticmethod
     def _orders_by_named_column(goal: str) -> int | None:
