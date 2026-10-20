@@ -273,3 +273,65 @@ rm -f /tmp/brain_query_probe_v1.json /tmp/brain_known_shapes_v1.json   # before 
 Sabotage discipline that caught real bugs: reverting the probe fix fails
 2 tests with `'14' != '7'`; deferring composition to the last tier fails
 the race test; merging `wc -l` into `wc -w` fails `TailTests`.
+
+## 9. The questions the machine refuses without looking
+
+`_PROBE_KINDS` is a hand-written table of six question kinds. "how many
+unique words" is not in it, so the machine answered it with nothing
+instantly, having never looked at a single program -- not a wrong
+answer, not a slow one, just absence. Measured:
+
+```
+count the lines in data.txt         1.8s   15
+how many words in data.txt          3.8s   30
+how many unique lines in data.txt  19.4s    7
+how many unique words in data.txt   0.00s  None   <- refused, instantly
+```
+
+The table is two axes written out by hand: what a file is measured IN
+(`lines`, `words`, `bytes`, `characters`) crossed with what is asked
+ABOUT it (plain count, `unique`, `with`). "unique words" is
+`words x unique` -- a cell nobody typed.
+
+**Built, measured, and reverted.** Crossing the axes generates ten kinds
+instead of six, and turns the refusal into an attempt. The attempt then
+cost **190-286 seconds and still failed**. That is worse than refusing,
+so it was reverted and is recorded here instead.
+
+### What survived the revert
+
+**Breadth and depth are the same budget.** The machine has 2 cores and
+every head fights for them, so what a search costs is
+
+```
+wall clock ~= (number of heads x CPU depth reached) / cores
+```
+
+One hundred heads each reaching 0.17 CPU-seconds and two dozen each
+reaching 1.3 cost about the same. The proof is the same question asked
+two ways: "how many words contain ERROR" -- answerable only by
+`grep --only-matching` -- was **found in 2s with five candidates and not
+found at all with a hundred**, at any budget. It was never a budget
+problem.
+
+**A 2s head budget only finds flags the GOAL names.** Those are tried
+first (`sort --unique` is shape 2, not the 46th), so 2s reaches them. It
+does not reach a flag the goal does not name: `grep --only-matching` is
+about twenty shapes deep, and a shallow search walks straight past the
+only program that answers.
+
+**Searching shallow-then-deep fixes the isolated search.** Rounds of
+`(100 heads, 2s)` then `(24 heads, 16s)` -- shallow across many, deep
+across few -- finds `grep --only-matching ERROR | egrep -c` with a full
+hundred candidates, in **27.9s**. That is the shape of the fix.
+
+### What is still wrong, and is the next thing to attack
+
+The full `answer_query` path still refuses it, and costs **225s** where
+the isolated pair search costs 28s. An 8x gap between the search and the
+path that calls it is not a tuning problem, and it is the thing to find
+next: fix that and the crossed axes can be switched on.
+
+`uniquewords` needs three stages (`tr | sort -u | wc -l`) and the
+machine composes two, so it will stay unanswered until composition is
+recursive.
