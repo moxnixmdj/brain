@@ -1,0 +1,466 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "date": "2026-10-20",
+ "action_id": "GOAL_PLAN_WORLD_BINDING_V1_20261020_V1",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "95542151d41b46076b62429bb1fad902038b210d",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "action_kind": "FRESH_REUSE",
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "causal_blocker": "PLAIN_GOALS_DO_NOT_COMPILE_INTO_EXECUTABLE_PLANS__1_OF_9_MEASURED__THE_CORRECT_CAPABILITY_IS_SELECTED_TOP_1_BUT_THEN_DISCARDED_INSIDE_BIND_INPUTS_WITH_GOAL_INPUT_BINDING_REQUIRED_BECAUSE_A_DESTINATION_DOES_NOT_EXIST_YET_AND_A_ROOT_IS_ONE_STEP_AWAY_FROM_A_NAMED_FILE",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::PLAIN_GOALS_DO_NOT_COMPILE_INTO_EXECUTABLE_PLANS__1_OF_9_MEASURED__THE_CORRECT_CAPABILITY_IS_SELECTED_TOP_1_BUT_THEN_DISCARDED_INSIDE_BIND_INPUTS_WITH_GOAL_INPUT_BINDING_REQUIRED_BECAUSE_A_DESTINATION_DOES_NOT_EXIST_YET_AND_A_ROOT_IS_ONE_STEP_AWAY_FROM_A_NAMED_FILE",
+ "highest_leverage_now": true,
+ "selected_route": "WIRE_THE_ALREADY_VERIFIED_WORLD_BINDING_V1_IN_AS_A_STRICT_SECOND_PASS_BEHIND_BIND_INPUTS__PASS_1_RANKS_ONLY_GOAL_GROUNDED_CANDIDATES__PASS_2_RUNS_ONLY_IF_PASS_1_FOUND_NOTHING__AND_TREAT_REPOSITORY_SELF_REFERENTIAL_TOKENS_AS_NON_DISTINCTIVE_SO_INCIDENTAL_PATH_WORDS_CANNOT_CREATE_A_MATCH",
+ "prior_work_reused": [
+  "canonical/runtime/world_binding_v1.py",
+  "canonical/runtime/goal_compiler.py",
+  "canonical/runtime/live_integrated_brain_v1.py",
+  "canonical/runtime/goal_compilation_benchmark_v1.py"
+ ],
+ "falsification_condition": "ANY_GROUNDED_CANDIDATE_IS_DISPLACED_BY_AN_INFERRED_ONE__OR_A_PLACEHOLDER_IS_INVENTED_RATHER_THAN_REFUSED__OR_THE_BARCODE_QR_OR_OCR_GOALS_SELECT_A_CAPABILITY_OTHER_THAN_THE_ONE_THE_GOAL_NAMES__OR_COMPILE_GOAL_RAISES_ANYTHING_OTHER_THAN_A_NAMED_GOAL_COMPILATION_FAILURE__OR_THE_MEASURED_COMPILE_RATE_FALLS_BELOW_THE_5_OF_9_FLOOR__OR_ANY_MODEL_CLIENT_IMPORT_APPEARS_IN_THE_PRODUCER_PATH__OR_ANY_AUTHORITY_OR_CREDIT_FIELD_IS_NON_ZERO",
+ "expected_parent_change": "ORDINARY_COMPOUND_GOALS_COMPILE_INTO_EXECUTABLE_CAPABILITY_PLANS__MEASURED_1_OF_9_TO_5_OF_9__ZERO_CAPABILITY_AND_TERMINAL_CREDIT",
+ "expected_parent_frontier_change": "ORDINARY_COMPOUND_GOALS_COMPILE_INTO_EXECUTABLE_CAPABILITY_PLANS__MEASURED_1_OF_9_TO_5_OF_9__ZERO_CAPABILITY_AND_TERMINAL_CREDIT",
+ "stop_condition": "GOAL_COMPILER_SUITE_26_OF_26_OK_WAS_26_WITH_1_PRE_EXISTING_ERROR__11_NEW_WORLD_BINDING_TESTS_PASS__BENCHMARK_COMPILED_5_OF_9_AND_EXPECTED_FIRST_SELECTED_3_OF_9__GROUNDED_CANDIDATES_NEVER_OUTBID_BY_INFERRED__UNJUSTIFIABLE_PLACEHOLDERS_STILL_FAIL_CLOSED__ZERO_MODEL_CLIENT_IMPORTS_AND_ZERO_SPEND",
+ "incremental_spend_usd": 0,
+ "capability_credit_delta": 0,
+ "terminal_credit_delta": 0,
+ "benchmark_or_family_rank_authority": false,
+ "explicit_user_authorization": "Owner instruction in this session 2026-10-20: asked what is optimal now and whether to make the model use the most advanced capabilities; owner selected 'Do the optimal' and authorized merging the unified model PR first. Measurement showed the bottleneck is goal-to-plan compilation, not capability richness, so this integrates the already-verified binder rather than adding capabilities.",
+ "load_bearing_primary": {
+  "open_obligation_ids": [],
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "scope_complete_discharge": false,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/8",
+  "success_probability_lcb": "2/3",
+  "wall_clock_cost_ub": "1",
+  "interpretation": "DISCHARGES_NOTHING__DOES_NOT_MOVE_ANY_BENCHMARK__MAKES_ORDINARY_GOALS_COMPILE_INTO_EXECUTABLE_PLANS_SO_ALREADY_OWNED_CAPABILITIES_BECOME_REACHABLE_FROM_A_SENTENCE__UNLOCK_LCB_1_8_BECAUSE_THE_GAIN_IS_REAL_AND_MEASURED_IN_SANDBOX_BUT_4_OF_9_BENCHMARK_GOALS_STILL_FAIL_CLOSED_AND_2_OF_THE_5_THAT_COMPILE_SELECT_A_SEMANTICALLY_QUESTIONABLE_CAPABILITY"
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "mode": "ACTIVE_INTERFACE",
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "proof_state_reachability": "NOT_APPLICABLE__COMPILER_BINDING_INTEGRATION_WITH_SANDBOX_MEASUREMENT_ONLY",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "proposal_id": "GOAL_PLAN_WORLD_BINDING_V1_20261020_V1",
+   "falsifier_id": "FIXED_GOAL_BENCHMARK_AND_TWO_PHASE_BINDING_REGRESSION_TESTS",
+   "decisive_question": "CAN_ORDINARY_GOALS_COMPILE_INTO_EXECUTABLE_PLANS_BY_REUSING_THE_EXISTING_VERIFIED_BINDER_WITHOUT_INVENTING_AN_INPUT_OR_LETTING_INFERENCE_OUTRANK_A_GROUNDED_MATCH",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "FIRST_ATTEMPT_ADMITTED_INFERRED_CANDIDATES_INTO_THE_SAME_RANKING_AND_REGRESSED_THREE_EXISTING_TESTS__BARCODE_DECODER_OUTRANKED_THE_BARCODE_GENERATOR__CORRECTED_BY_STRICT_TWO_PHASE_ORDERING_AND_LOCKED_BY_REGRESSION_TEST"
+  }
+ },
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "95542151d41b46076b62429bb1fad902038b210d",
+  "real_outcome": "ORDINARY_SENTENCES_COMPILE_INTO_EXECUTABLE_VERIFIED_CAPABILITY_PLANS",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "obs_goal": {
+   "real_outcome": "A_GOAL_STATED_IN_PLAIN_WORDS_PRODUCES_A_RUNNABLE_PLAN_OVER_OWNED_CAPABILITIES",
+   "proxy_goals_deleted": [
+    "ADD_MORE_ADVANCED_CAPABILITIES_WHILE_1_OF_9_GOALS_COMPILE",
+    "WRITE_A_SECOND_BINDER_AND_A_PARALLEL_MATCHER_ON_TOP_OF_THE_VERIFIED_ONE",
+    "RELAX_FAIL_CLOSED_AND_GUESS_MISSING_INPUTS_TO_RAISE_THE_COMPILE_RATE"
+   ],
+   "surviving_necessity": "BIND_VALUES_THE_GOAL_IMPLIES_NOT_ONLY_THE_VALUES_IT_SAYS__WITHOUT_EVER_INVENTING_ONE"
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "world_binding_v1",
+    "goal_front_compiler_v1",
+    "goal_compiler",
+    "capability_selection_retrieval_v1",
+    "live_capability_composition_v1"
+   ],
+   "external_existing_routes_checked": [
+    "github_search_deterministic_capability_selection_input_binding__TOTAL_1_HIT_6_STARS__NO_DOMINATOR",
+    "github_search_agent_tool_argument_binding_without_llm__TOTAL_0",
+    "github_search_goal_compiler_effect_graph_planner_python__TOTAL_0",
+    "pypi_jsonschema_and_pydantic__HTTP_200__USED_ONLY_AS_EVIDENCE_REGISTRIES_REACHABLE"
+   ],
+   "capability_work_deleted": [
+    "A_NEW_MATCHER_DUPLICATING_GOAL_COMPILER_SCORING",
+    "A_SECOND_OUTPUT_PATH_SYNTHESIZER_COMPETING_WITH_WORLD_BINDING_V1"
+   ],
+   "surviving_gap": "THE_VERIFIED_BINDER_ALREADY_CLOSED_THE_GAP_BUT_WAS_NEVER_WIRED_INTO_THE_SELECTION_PATH_THE_COMPILER_ACTUALLY_USES"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_BINDER_EXISTS_AND_IS_VERIFIED_IT_IS_UNWIRED",
+   "delete_bypass_substitute_options": [
+    "DELETE_THE_IDEA_AND_LEAVE_1_OF_9__REJECTED_OWNER_ASKED_FOR_THE_OPTIMAL_NEXT_STEP",
+    "BYPASS_BY_GUESSING_MISSING_INPUTS__REJECTED_AN_INVENTED_INPUT_IS_AN_UNVERIFIABLE_ACT",
+    "SUBSTITUTE_A_MODEL_TO_CHOOSE_CAPABILITIES__REJECTED_ZERO_MODEL_COGNITION_AND_ZERO_SPEND"
+   ],
+   "surviving_causal_blocker": "WIRING_AND_ORDERING_NOT_A_NEW_CAPABILITY"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "TWO_PHASE_BINDING_REUSING_THE_EXISTING_VERIFIED_WORLD_BINDING",
+    "SINGLE_SHARED_RANKING_ADMITTING_INFERRED_CANDIDATES__MEASURED_REGRESSION_DISQUALIFIED",
+    "A_NEW_PARALLEL_BINDER__DISQUALIFIED_DUPLICATES_VERIFIED_CODE",
+    "AN_EXTERNAL_MODEL_PLANNER__DISQUALIFIED_SPEND_AND_UNVERIFIABLE"
+   ],
+   "losing_routes_reason": "ONLY_STRICT_TWO_PHASE_ORDERING_PRESERVES_THE_DISAMBIGUATION_POWER_OF_BINDABILITY_WHILE_WIDENING_THE_BINDABLE_SET",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "A_FIXED_NINE_GOAL_BENCHMARK_WITH_EXPECTED_CAPABILITY_IDENTITIES_PLUS_REGRESSION_TESTS_ON_THE_LIVE_REGISTRY"
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "NOTHING_DELETED__BIND_INPUTS_IS_LEFT_EXACTLY_AS_IT_IS_AND_REMAINS_AUTHORITATIVE"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "OUTPUT_DESTINATION_SYNTHESIS",
+    "FILE_TO_ROOT_PROMOTION",
+    "COMPANION_SLOT_BINDING"
+   ],
+   "fresh_reuse_plan": "RERUN_THE_BENCHMARK_AND_BOTH_SUITES_AFTER_ANY_REGISTRY_OR_BINDER_CHANGE__THE_MEASURED_FLOOR_IS_ASSERTED_IN_A_TEST"
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "RE_DIAGNOSING_EACH_FAILED_GOAL_BY_HAND",
+    "GUESSING_WHETHER_A_MATCH_WAS_GROUNDED_OR_INFERRED"
+   ],
+   "search_stop_decision": "STOP_WHEN_THE_BENCHMARK_FLOOR_IS_ASSERTED_IN_A_TEST_AND_THE_GOAL_COMPILER_SUITE_IS_FULLY_GREEN",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "WIRE_THE_ALREADY_VERIFIED_WORLD_BINDING_V1_IN_AS_A_STRICT_SECOND_PASS_BEHIND_BIND_INPUTS__PASS_1_RANKS_ONLY_GOAL_GROUNDED_CANDIDATES__PASS_2_RUNS_ONLY_IF_PASS_1_FOUND_NOTHING__AND_TREAT_REPOSITORY_SELF_REFERENTIAL_TOKENS_AS_NON_DISTINCTIVE_SO_INCIDENTAL_PATH_WORDS_CANNOT_CREATE_A_MATCH",
+   "ADMIT_INFERRED_CANDIDATES_INTO_THE_SAME_RANKING__REJECTED_REGRESSED_THREE_EXISTING_TESTS",
+   "WRITE_A_NEW_BINDER__REJECTED_DUPLICATES_VERIFIED_CODE",
+   "GUESS_MISSING_INPUTS_TO_RAISE_THE_RATE__REJECTED_UNVERIFIABLE_ACT"
+  ],
+  "deleted_or_bypassed_paths": [
+   "A_SECOND_MATCHER",
+   "A_SECOND_OUTPUT_SYNTHESIZER",
+   "GUESSED_INPUTS"
+  ],
+  "selected_surviving_route": "WIRE_THE_ALREADY_VERIFIED_WORLD_BINDING_V1_IN_AS_A_STRICT_SECOND_PASS_BEHIND_BIND_INPUTS__PASS_1_RANKS_ONLY_GOAL_GROUNDED_CANDIDATES__PASS_2_RUNS_ONLY_IF_PASS_1_FOUND_NOTHING__AND_TREAT_REPOSITORY_SELF_REFERENTIAL_TOKENS_AS_NON_DISTINCTIVE_SO_INCIDENTAL_PATH_WORDS_CANNOT_CREATE_A_MATCH",
+  "why_selected_route_is_fastest_sufficient": "THE_BINDER_IS_ALREADY_WRITTEN_AND_VERIFIED__WIRING_IT_REUSES_EVERY_ROUTE_AND_NEEDS_NO_NEW_CAPABILITY_NO_MODEL_AND_NO_SPEND",
+  "expected_parent_level_state_change": "ORDINARY_COMPOUND_GOALS_COMPILE_INTO_EXECUTABLE_CAPABILITY_PLANS__MEASURED_1_OF_9_TO_5_OF_9__ZERO_CAPABILITY_AND_TERMINAL_CREDIT",
+  "stop_condition": "GOAL_COMPILER_SUITE_26_OF_26_OK_WAS_26_WITH_1_PRE_EXISTING_ERROR__11_NEW_WORLD_BINDING_TESTS_PASS__BENCHMARK_COMPILED_5_OF_9_AND_EXPECTED_FIRST_SELECTED_3_OF_9__GROUNDED_CANDIDATES_NEVER_OUTBID_BY_INFERRED__UNJUSTIFIABLE_PLACEHOLDERS_STILL_FAIL_CLOSED__ZERO_MODEL_CLIENT_IMPORTS_AND_ZERO_SPEND",
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-10-20T15:57:33Z",
+   "max_age_hours": 24,
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/world_binding_v1.py",
+     "canonical/runtime/goal_compiler.py",
+     "canonical/runtime/goal_front_compiler_v1.py",
+     "canonical/runtime/capability_selection_retrieval_v1.py"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.python.org/3/library/unittest.html__STDLIB_TEST_RUNNER_USED_FOR_EVERY_MEASUREMENT"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://pypi.org/pypi/jsonschema/json__HTTP_200",
+     "https://pypi.org/pypi/pydantic/json__HTTP_200"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://api.github.com/search/repositories?q=deterministic+capability+selection+input+binding__TOTAL_1_TOP_6_STARS_VAIXLNS",
+     "https://api.github.com/search/repositories?q=agent+tool+argument+binding+without+llm__TOTAL_0",
+     "https://api.github.com/search/repositories?q=goal+compiler+effect+graph+planner+python__TOTAL_0"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "deterministic capability selection input binding"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "agent tool argument binding without llm"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "goal compiler effect graph planner python"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 deterministic agent planner no model"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "negative_search_summary": "GITHUB_SEARCH_RETURNED_TOTALS_OF_1_0_0_AND_0_ACROSS_FOUR_QUERY_FAMILIES_WITH_A_BEST_HIT_OF_SIX_STARS__NO_PROJECT_BINDS_GOAL_ARGUMENTS_TO_A_VERIFIED_CAPABILITY_REGISTRY_WITHOUT_A_MODEL__REACHABLE_PACKAGE_REGISTRIES_ARE_EVIDENCE_ONLY_NOT_ROUTES",
+   "incumbent_route": "GOAL_COMPILER_BIND_INPUTS_ALONE__FAILS_CLOSED_ON_IMPLIED_VALUES__1_OF_9_GOALS_COMPILE",
+   "selected_route": "WIRE_THE_ALREADY_VERIFIED_WORLD_BINDING_V1_IN_AS_A_STRICT_SECOND_PASS_BEHIND_BIND_INPUTS__PASS_1_RANKS_ONLY_GOAL_GROUNDED_CANDIDATES__PASS_2_RUNS_ONLY_IF_PASS_1_FOUND_NOTHING__AND_TREAT_REPOSITORY_SELF_REFERENTIAL_TOKENS_AS_NON_DISTINCTIVE_SO_INCIDENTAL_PATH_WORDS_CANNOT_CREATE_A_MATCH",
+   "challenger_routes": [
+    {
+     "route": "TWO_PHASE_BINDING_REUSING_THE_EXISTING_VERIFIED_WORLD_BINDING",
+     "evidence": [
+      "canonical/runtime/goal_compiler.py",
+      "canonical/runtime/world_binding_v1.py",
+      "canonical/runtime/goal_compilation_benchmark_v1.py"
+     ],
+     "qualification_evidence": [
+      "BENCHMARK_COMPILED_5_OF_9_UP_FROM_1_OF_9",
+      "EXPECTED_FIRST_CAPABILITY_SELECTED_3_OF_9",
+      "GOAL_COMPILER_SUITE_26_OF_26_OK_WAS_26_WITH_1_ERROR",
+      "11_NEW_WORLD_BINDING_TESTS_PASS"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "comparison": {
+      "CORRECTNESS": "BIND_INPUTS_REMAINS_AUTHORITATIVE__NOTHING_INFERRED_WHEN_THE_GOAL_STATES_IT",
+      "CAPABILITY_STRENGTH": "5_OF_9_ORDINARY_GOALS_COMPILE_UP_FROM_1_OF_9__NO_NEW_CAPABILITY_ADDED",
+      "WALL_CLOCK": "PASS_2_RUNS_ONLY_WHEN_PASS_1_IS_EMPTY__MEASURED_BENCHMARK_UNDER_ONE_SECOND",
+      "INCREMENTAL_COST": "ZERO_MONETARY_SPEND__LOCAL_STDLIB_ONLY",
+      "RELIABILITY": "UNJUSTIFIABLE_PLACEHOLDERS_STILL_FAIL_CLOSED__11_REGRESSION_TESTS",
+      "VERIFIABILITY": "FIXED_BENCHMARK_DIGEST_PLUS_BINDING_PROVENANCE_REPORTED_PER_PLAN"
+     }
+    },
+    {
+     "route": "ADMIT_INFERRED_CANDIDATES_INTO_THE_SAME_RANKING",
+     "evidence": [
+      "canonical/tests/test_goal_compiler.py"
+     ],
+     "qualification_evidence": [
+      "MEASURED_REGRESSION__BARCODE_DECODER_OUTRANKED_THE_BARCODE_GENERATOR",
+      "THREE_EXISTING_TESTS_FAILED"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "SELECTED_THE_WRONG_CAPABILITY_FOR_BARCODE_QR_AND_OCR_GOALS",
+      "CAPABILITY_STRENGTH": "HIGHER_COMPILE_RATE_BUT_WRONG_SELECTIONS",
+      "WALL_CLOCK": "ONE_PASS",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "REGRESSED_THREE_EXISTING_TESTS",
+      "VERIFIABILITY": "DISPROVED_BY_THE_EXISTING_SUITE"
+     }
+    },
+    {
+     "route": "A_NEW_PARALLEL_BINDER",
+     "evidence": [
+      "canonical/runtime/world_binding_v1.py"
+     ],
+     "qualification_evidence": [
+      "WOULD_DUPLICATE_571_LINES_OF_ALREADY_VERIFIED_BINDING_LOGIC"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "TWO_BINDERS_COULD_DIVERGE",
+      "CAPABILITY_STRENGTH": "NO_GAIN_OVER_REUSING_THE_EXISTING_ONE",
+      "WALL_CLOCK": "DAYS_TO_REWRITE_AND_REVERIFY",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "UNVERIFIED_UNTIL_REPROVEN",
+      "VERIFIABILITY": "DUPLICATED_LOGIC_IS_HARDER_TO_AUDIT"
+     }
+    },
+    {
+     "route": "GUESS_MISSING_INPUTS_TO_RAISE_THE_COMPILE_RATE",
+     "evidence": [
+      "canonical/runtime/world_binding_v1.py"
+     ],
+     "qualification_evidence": [
+      "AN_INVENTED_INPUT_IS_AN_UNVERIFIABLE_ACT__THE_BINDER_REFUSES_PATTERN_AND_GLOB_BY_DESIGN"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "WOULD_EXECUTE_CAPABILITIES_AGAINST_FABRICATED_ARGUMENTS",
+      "CAPABILITY_STRENGTH": "APPARENT_ONLY",
+      "WALL_CLOCK": "IMMEDIATE_BUT_WRONG",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "SILENTLY_WRONG_OUTPUTS",
+      "VERIFIABILITY": "DESTROYS_FAIL_CLOSED"
+     }
+    }
+   ],
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-10-20T15:57:33Z",
+    "max_age_hours": 2,
+    "selected_route": "WIRE_THE_ALREADY_VERIFIED_WORLD_BINDING_V1_IN_AS_A_STRICT_SECOND_PASS_BEHIND_BIND_INPUTS__PASS_1_RANKS_ONLY_GOAL_GROUNDED_CANDIDATES__PASS_2_RUNS_ONLY_IF_PASS_1_FOUND_NOTHING__AND_TREAT_REPOSITORY_SELF_REFERENTIAL_TOKENS_AS_NON_DISTINCTIVE_SO_INCIDENTAL_PATH_WORDS_CANNOT_CREATE_A_MATCH",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "python3_interpreter",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "python3_--version__Python_3.11.2__DIRECT_PROBE_2026-10-20"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "live_verified_capability_registry",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "load_verified_registry_returned_363_capabilities__DIRECT_PROBE_2026-10-20"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "BRAIN_INHERITED"
+      ]
+     },
+     {
+      "dependency": "world_binding_v1_module",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "complete_inputs_imported_and_called_against_the_live_registry__DIRECT_PROBE_2026-10-20"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "BRAIN_INHERITED"
+      ]
+     },
+     {
+      "dependency": "unittest_runner",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "python3_-m_unittest_ran_26_plus_11_tests__DIRECT_PROBE_2026-10-20"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+  "progress_evidence_paths": [
+   "canonical/runtime/goal_compiler.py",
+   "canonical/runtime/goal_compilation_benchmark_v1.py",
+   "canonical/tests/test_goal_compiler_world_binding_v1.py"
+  ],
+  "route_class": "INTEGRATE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ]
+ }
+}
