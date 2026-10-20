@@ -493,6 +493,9 @@ Measured on this machine, same machine, same day:
 | the first three characters of each line | 2 | 0.03 s |
 | the last two characters of each line (a slice, not a range) | 2 | 0.03 s |
 | the third character of each line | 4 | 0.05 s |
+| the number of words in each line | 2 | 0.02 s |
+| count the words | 2 | 0.03 s |
+| reverse the lines of a named file (discovered `tac`) | 3 | 0.09 s |
 | translate commas to semicolons (both named) | 3 | 0.05 s |
 | lines that contain a given word | 2 | 0.07 s |
 | count the distinct values in column 2 | 50 | 0.21 s |
@@ -750,15 +753,25 @@ rather than die mid-loop.
   filter, a per-line length, a character slice) and the ones already earned.
   A task needing an unmodelled stage is an honest `NO_VERIFIED_PIPELINE`, not a
   silent wrong answer.
-- Reverse-of-input is one of those honest refusals.  `tac` writes the last line
-  first; `sort -r` does not -- it reverses a *lexical* order, which agrees with
-  the arrival order only when the file happened to be sorted.  `tac` is not in
-  the agent's admitted binary vocabulary, so "print the lines in reverse order"
-  is refused on an unsorted file rather than answered with `sort -r` (the two
-  are indistinguishable on a sorted one, which is exactly how the wrong answer
-  used to be admitted).  Adding a read-only filter to that vocabulary is a
-  one-line change with an authority decision attached, so it is left as a
-  recorded gap rather than made silently.
+- Reverse-of-input is answered two ways, and only one of them generalises.
+  `discover("reverse the lines of n.txt", path)` reads the machine's own
+  documentation, finds `tac`, and proves it; `sort -r` is never allowed to
+  stand in, because it reverses a *lexical* order and agrees with the arrival
+  order only on a file that happened to be sorted.  With examples but no named
+  file, the composition path needs a *grounded argument* to propose a tool, and
+  a bare invocation such as `tac` supplies none -- so "print the lines in
+  reverse order" from two examples alone is an honest
+  `NO_PIPELINE_WITHIN_BUDGET`.  Widening composition to bare tools is the next
+  step there; hard-coding the reversal as a `sed` idiom was tried and removed,
+  because it shadowed the discovery path that proves the tool for real.
+- A stage that is *nearly* the right function must not enter the fixed
+  vocabulary.  `wc -w` was added and removed for exactly this reason: after
+  `sort -u` every line is one word, so `wc -w` looks like `wc -l` -- except for
+  an empty line, which `wc -l` counts and `wc -w` does not.  It made a correct
+  pipeline answer 1181 where the target was 1182, and drowned the right
+  candidate in the search.  Word counting is now read from the sentence (a
+  per-line `awk NF`, or `wc -w` for the whole text) instead of sitting in the
+  grammar as a near-miss.
 - Two demonstrations that are identical are *one* demonstration, and are
   refused as `TOO_FEW_EXAMPLES`.  Without that check a single example plus its
   duplicate admits whatever fits it, which is how a probe of my own learned

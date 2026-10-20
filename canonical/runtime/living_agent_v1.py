@@ -662,8 +662,14 @@ def _requested_operations(goal: str) -> list[tuple[str, str, str]]:
     if re.search(r"\b(distinct|unique)\b", text):
         requested.append(("distinct values", r"\bsort\s+-u\b|\buniq\b", "any"))
     counted = _COUNT_UNIT.search(text)
+    distinct_requested = re.search(r"\b(distinct|unique)\b", text) is not None
     if re.search(r"\b(count|counts|how many|number of)\b", text):
-        unit = counted.group(1) if counted else ""
+        # "How many distinct words" counts a *set*: once the stream has one
+        # word per line and the duplicates are gone, counting lines *is*
+        # counting words.  The unit noun belongs to the thing being made
+        # distinct, not to the arithmetic, so the generic count is the right
+        # reading -- requiring `wc -w` would refuse the correct pipeline.
+        unit = (counted.group(1) if counted else "") if not distinct_requested else ""
         if unit in {"characters", "character", "chars", "letters", "bytes", "byte"}:
             if per_line:
                 requested.append(("a count of the characters in each line",
@@ -2060,6 +2066,40 @@ class LivingAgent:
         lowered = goal.lower()
         stages: list[Any] = []
 
+        counting = _COUNT_UNIT.search(lowered)
+        if counting and counting.group(1) in {"words", "word"} and not (
+            "each line" in lowered or "per line" in lowered
+        ) and re.search(r"\b(count|counts|how many|number of)\b", lowered) and not re.search(
+            r"\b(distinct|unique)\b", lowered
+        ):
+            # "How many words" is `wc -w` on the whole text.  It stays out of
+            # the fixed vocabulary because it is *not* interchangeable with
+            # `wc -l` on a one-word-per-line stream: an empty line is a word
+            # to `wc -l` and nothing to `wc -w`, and a grammar that offered
+            # both would drown the right candidate with the near-miss.
+            stages.append(
+                synthesis.Stage(
+                    "wc -w",
+                    synthesis.LINES,
+                    synthesis.COUNT,
+                    lambda text: str(
+                        sum(len(line.split()) for line in synthesis.as_lines(text))
+                    ) + "\n",
+                )
+            )
+        if counting and counting.group(1) in {"words", "word"} and (
+            "each line" in lowered or "per line" in lowered
+        ):
+            stages.append(
+                synthesis.Stage(
+                    "awk '{print NF}'",
+                    synthesis.LINES,
+                    synthesis.LINES,
+                    lambda text: synthesis.as_text(
+                        [str(len(line.split())) for line in synthesis.as_lines(text)]
+                    ),
+                )
+            )
         length = cls._LINE_LENGTH.search(lowered)
         if length and ("each line" in lowered or "per line" in lowered):
             stages.append(
