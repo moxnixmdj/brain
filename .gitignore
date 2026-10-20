@@ -24,3 +24,15 @@ canonical/runtime/state/module_bridge_index_v1.json
 # Practice environments the machine downloads to work against.
 # Not part of the project, and their own conftest.py is not ours to police.
 canonical/astra_runtime/state/real_env/
+
+# Heartbeat run artifacts: the receipt and the job summary are published by the
+# live-brain-heartbeat workflow (upload-artifact), not versioned as source.  The
+# controller checkpoints one heartbeat run leaves behind are run litter, same as
+# the test-suite litter above.
+heartbeat_out/
+canonical/astra_runtime/state/E2E_*
+
+# The long-horizon continuity capability writes its report into the repository
+# root when it runs.  It is run litter, not source: `git add -A` must never
+# commit it as if it were evidence.
+LONG_HORIZON_CONTINUITY_REPORT.json

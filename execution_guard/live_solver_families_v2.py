@@ -68,7 +68,12 @@ def gen_jq(rng: random.Random, work: Path, i: int) -> Case:
         filt, expected = f".items[{idx}].name", items[idx]["name"]
     else:
         filt, expected = ".tag", doc["tag"]
-    goal = f'Run the jq query with jq filter "{filt}" on {_rel(src)} and save the output to {_rel(out)}.'
+    goal = rng.choice([
+        f'Run the jq query with jq filter "{filt}" on {_rel(src)} and save the output to {_rel(out)}.',
+        f'Apply the jq filter "{filt}" to {_rel(src)} with jq and write the output to {_rel(out)}.',
+        f'Use jq to run the filter "{filt}" on {_rel(src)}, saving the output to {_rel(out)}.',
+        f'Query {_rel(src)} with jq filter "{filt}" and store the output in {_rel(out)}.',
+    ])
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
         if not _passed(result):
@@ -103,7 +108,12 @@ def gen_archive_verify(rng: random.Random, work: Path, i: int) -> Case:
                 tf.add(bad, arcname=_rel(p))  # same member name, different bytes
             else:
                 tf.add(p, arcname=_rel(p))
-    goal = f"Verify the tar.gz archive {_rel(archive)} against the manifest {_rel(manifest)} with gnu tar."
+    goal = rng.choice([
+        f"Verify the tar.gz archive {_rel(archive)} against the manifest {_rel(manifest)} with gnu tar.",
+        f"Check the tar.gz archive {_rel(archive)} against the manifest {_rel(manifest)} using gnu tar.",
+        f"Verify, with gnu tar, the tar.gz archive {_rel(archive)} against the manifest {_rel(manifest)}.",
+        f"Audit the tar.gz archive {_rel(archive)} against the manifest {_rel(manifest)} with gnu tar.",
+    ])
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
         if tamper:
@@ -130,7 +140,12 @@ def gen_source_audit(rng: random.Random, work: Path, i: int) -> Case:
         body += [f"class C_{f}_{k}:\n    value = {k}\n" for k in range(nc)]
         (pkg / f"mod_{f}.py").write_text("\n".join(body) + "\n", encoding="utf-8")
     out = work / f"audit_{i}_{_word(rng, 4)}.json"
-    goal = f"Audit the python source tree {_rel(pkg)} with the ast audit and save the report to {_rel(out)}."
+    goal = rng.choice([
+        f"Audit the python source tree {_rel(pkg)} with the ast audit and save the report to {_rel(out)}.",
+        f"Run the ast audit on the python source tree {_rel(pkg)} and save the report to {_rel(out)}.",
+        f"Audit the python sources under {_rel(pkg)} with the ast audit and write the report to {_rel(out)}.",
+        f"Check the python source tree {_rel(pkg)} with the ast audit and save the report to {_rel(out)}.",
+    ])
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
         if not _passed(result):
@@ -162,7 +177,12 @@ def gen_tests_audit(rng: random.Random, work: Path, i: int) -> Case:
     lines += ["", "if __name__ == '__main__':", "    unittest.main()"]
     (root / "test_gen.py").write_text("\n".join(lines) + "\n", encoding="utf-8")
     out = work / f"tests_{i}_{_word(rng, 4)}.json"
-    goal = f'Audit the unittest tests under {_rel(root)} matching pattern "test_*.py" and save the report to {_rel(out)}.'
+    goal = rng.choice([
+        f'Audit the unittest tests under {_rel(root)} matching pattern "test_*.py" and save the report to {_rel(out)}.',
+        f'Audit the unittest tests under {_rel(root)} with test pattern "test_*.py" and save the report to {_rel(out)}.',
+        f'Run the audit of the unittest tests under {_rel(root)} with test pattern "test_*.py" and write the report to {_rel(out)}.',
+        f'Audit the unit tests under {_rel(root)} matching pattern "test_*.py" and save the report to {_rel(out)}.',
+    ])
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
         if failing:
@@ -364,7 +384,12 @@ def _gen_codec(family: str, words: str, suffix: str, decoder: Callable[[bytes], 
         src = work / f"{family.lower()}_{i}_{_word(rng, 4)}.json"
         src.write_text(json.dumps(records), encoding="utf-8")
         out = work / f"{family.lower()}_{i}_{_word(rng, 4)}{suffix}"
-        goal = f"Encode the JSON records in {_rel(src)} with {words} and save the binary output to {_rel(out)}."
+        goal = rng.choice([
+            f"Encode the JSON records in {_rel(src)} with {words} and save the binary output to {_rel(out)}.",
+            f"Encode the JSON records in {_rel(src)} using {words} and write the binary output to {_rel(out)}.",
+            f"With {words}, encode the JSON records in {_rel(src)} and save the binary output to {_rel(out)}.",
+            f"Encode the records in the json file {_rel(src)} with {words} and save the binary output to {_rel(out)}.",
+        ])
 
         def oracle(result: dict[str, Any]) -> tuple[bool, str]:
             if not expect_pass:
@@ -406,8 +431,14 @@ def gen_sqlite(rng: random.Random, work: Path, i: int) -> Case:
     src.write_text(json.dumps({"items": records}), encoding="utf-8")
     out = work / f"db_{i}_{_word(rng, 4)}.sqlite"
     table = "t_" + _word(rng, 4)
-    goal = (f"Create a sqlite database table named {table} from the {wanted} records in {_rel(src)} "
-            f"and save it to {_rel(out)}, with columns owner, weight.")
+    goal = rng.choice([
+        f"Create a sqlite database table named {table} from the {wanted} records in {_rel(src)} "
+        f"and save it to {_rel(out)}, with columns owner, weight.",
+        f"Create a sqlite database table named {table} from the {wanted} records in {_rel(src)} "
+        f"and save the database to {_rel(out)}, with columns owner, weight.",
+        f"Build a sqlite database table named {table} from the {wanted} records in {_rel(src)} "
+        f"and save it to {_rel(out)}, with columns owner, weight.",
+    ])
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
         if not _passed(result):

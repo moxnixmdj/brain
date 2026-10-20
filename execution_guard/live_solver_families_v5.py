@@ -26,7 +26,11 @@ def gen_math_numeric_sympy(rng: random.Random, work: Path, i: int) -> Case:
     out = work / f"math_{i}_{_word(rng, 4)}.json"
     formula = f"a * {mult} + b"
     expected = a_val * mult + b_val
-    goal = f'Evaluate the numeric formula "{formula}" with sympy where a = {a_val}, b = {b_val} and save to {_rel(out)}.'
+    goal = rng.choice([
+        f'Evaluate the numeric formula "{formula}" with sympy where a = {a_val}, b = {b_val} and save to {_rel(out)}.',
+        f'Evaluate the numeric expression "{formula}" with sympy where a = {a_val}, b = {b_val} and save the result to {_rel(out)}.',
+        f'With sympy, evaluate the numeric formula "{formula}" where a = {a_val}, b = {b_val} and save to {_rel(out)}.',
+    ])
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
         if not _passed(result):
@@ -53,7 +57,11 @@ def gen_json_query_jq(rng: random.Random, work: Path, i: int) -> Case:
     src = work / f"data_{i}_{_word(rng, 4)}.json"
     src.write_text(json.dumps({"record": {"tag": tag_val, "count": count_val}}), encoding="utf-8")
     out = work / f"jq_out_{i}_{_word(rng, 4)}.json"
-    goal = f'Transform the json file {_rel(src)} with jq filter ".record.tag" and save output to {_rel(out)}.'
+    goal = rng.choice([
+        f'Transform the json file {_rel(src)} with jq filter ".record.tag" and save output to {_rel(out)}.',
+        f'Transform the json file {_rel(src)} with the jq filter ".record.tag" and save the output to {_rel(out)}.',
+        f'Apply the jq filter ".record.tag" to the json file {_rel(src)} and save the output to {_rel(out)}.',
+    ])
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
         if not _passed(result):
@@ -97,7 +105,10 @@ def gen_python_fault_localize(rng: random.Random, work: Path, i: int) -> Case:
         encoding="utf-8",
     )
 
-    goal = f"Localize fault in python source root {_rel(src_dir)} from dynamic trace of test {_rel(test_file)} with ochiai spectrum and save output_path {_rel(out)}."
+    goal = rng.choice([
+        f"Localize fault in python source root {_rel(src_dir)} from dynamic trace of test {_rel(test_file)} with ochiai spectrum and save output_path {_rel(out)}.",
+        f"Localize the fault in python source root {_rel(src_dir)} from the dynamic trace of test {_rel(test_file)} with ochiai spectrum and save output_path {_rel(out)}.",
+    ])
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
         if not _passed(result):
@@ -141,10 +152,12 @@ def gen_python_ast_patch_search(rng: random.Random, work: Path, i: int) -> Case:
         encoding="utf-8",
     )
 
-    goal = (
+    goal = rng.choice([
         f'Repair python bug in source {_rel(mod_file)} with ast patch search guided by test {_rel(test_file)} '
-        f'using test command "python3 {_rel(test_file)}" and save output_path {_rel(out)}.'
-    )
+        f'using test command "python3 {_rel(test_file)}" and save output_path {_rel(out)}.',
+        f'Repair the python bug in the source {_rel(mod_file)} with ast patch search guided by the test {_rel(test_file)} '
+        f'using test command "python3 {_rel(test_file)}" and save output_path {_rel(out)}.',
+    ])
 
     def oracle(result: dict[str, Any]) -> tuple[bool, str]:
         if not _passed(result):

@@ -139,6 +139,16 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     if entry is None:
         return {"schema": SCHEMA, "admitted": False, "rule": "SELECTED_CAPABILITY_NOT_ADMISSIBLE", "selected_capability": selected}
     score, specificity, evidence = goal_compiler._score(goal, selected, entry)
+    if score == 0 and evidence.get("execution_surface_rejection"):
+        # F18, re-verified here exactly like F15 and the typed rule are: when the only
+        # ecosystem claim the full-goal surface rule saw lives inside a URL (a value this
+        # capability fetches, not a statement about the executor), the lexical evidence is
+        # recomputed on prose - the same basis the front layer ranks on.  Measured: without
+        # this, ``Fetch ... https://pypi.org/pypi/six/...`` scored 0 with zero matched tokens
+        # here while the front scored 29, and every stated contract was rejected R3_WEAK_EVIDENCE.
+        prose_score, prose_specificity, prose_evidence = goal_compiler._score(front.prose_only(goal), selected, entry)
+        if prose_score > 0:
+            score, specificity, evidence = prose_score, prose_specificity, prose_evidence
     matched = set(evidence.get("matched_provides") or []) | set(evidence.get("matched_identity") or []) | set(evidence.get("matched_keywords") or [])
     prose = _prose_tokens(goal)
     semantic = matched & prose
@@ -312,7 +322,7 @@ def dag_admission(goal: str, compiled: Mapping[str, Any], dag: Mapping[str, Any]
         if not isinstance(entry, Mapping):
             return {**base, "admitted": False, "rule": "DAG_CAPABILITY_NOT_ADMISSIBLE", "dag_steps": rows,
                     "failed_capability_id": cid}
-        score, _specificity, evidence = goal_compiler._score(front.prose_only(clause), cid, entry)
+        score, _specificity, evidence = front.score_capability(clause, cid, entry)
         matched = set(evidence.get("matched_provides") or []) | set(evidence.get("matched_identity") or []) | set(evidence.get("matched_keywords") or [])
         semantic = matched & _prose_tokens(clause)
         rows.append({
