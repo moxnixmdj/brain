@@ -29,6 +29,7 @@ verified it on untouched instances.
 """
 from __future__ import annotations
 
+import contextlib
 import hashlib
 import json
 import os
@@ -116,6 +117,14 @@ class Computer:
         self._admitted: set[str] = set(_ALLOWED_BINARIES)
         self.admissions: dict[str, dict[str, Any]] = {}
         self._digests: dict[tuple[str, str], str] = {}
+        # Every real process this computer starts, counted once, at the point
+        # it starts.  `commands_run` reads this instead of being incremented by
+        # each caller, so a replayed answer is not counted twice and a caller
+        # cannot over- or under-report what the machine actually did.
+        self.runs = 0
+        # Set for the duration of one request (see ``replaying``); between
+        # requests it is None and every run is a real run.
+        self._replay: dict[tuple[str, str, str | None], CommandResult] | None = None
 
     def search_dirs(self) -> list[str]:
         """The directories this computer will look in, nearest first."""
@@ -240,8 +249,38 @@ class Computer:
             if word.startswith("/") or ".." in word or word.startswith("~"):
                 self.path(word)
 
+    @contextlib.contextmanager
+    def replaying(self) -> Any:
+        """Answer an identical (command, input) once per request.
+
+        Verification runs the same pipeline over the same bytes several times
+        on purpose -- remembered mechanisms, each candidate, the final proof --
+        and every one of those runs costs a process.  Within a single request
+        nothing on the machine changes, so the second run of the same command
+        over the same input has exactly one possible answer: the first one.
+        The cache is scoped to the request and dropped afterwards, so nothing
+        observed earlier can stand in for something observed later.
+        """
+        previous = self._replay
+        self._replay = {}
+        try:
+            yield
+        finally:
+            self._replay = previous
+
     def run(self, command: str, *, cwd: str | None = None, stdin: str | None = None) -> CommandResult:
+        if self._replay is not None:
+            remembered = self._replay.get((command, cwd or ".", stdin))
+            if remembered is not None:
+                return remembered
+        result = self._execute(command, cwd=cwd, stdin=stdin)
+        if self._replay is not None:
+            self._replay[(command, cwd or ".", stdin)] = result
+        return result
+
+    def _execute(self, command: str, *, cwd: str | None = None, stdin: str | None = None) -> CommandResult:
         self._admit(command)
+        self.runs += 1
         workdir = self.path(cwd or ".")
         workdir.mkdir(parents=True, exist_ok=True)
         search = "/usr/local/bin:/usr/bin:/bin"
@@ -733,6 +772,115 @@ def _translate_sets(text: str, source: str, target: str) -> str:
     return "".join(mapping.get(char, char) for char in text)
 
 
+def _sentence_separator(goal: str) -> str:
+    """The character a sentence names as the separator, or "".
+
+    "comma separated", "colon separated", "separated by a pipe" -- the sentence
+    says which character divides the fields, and the command has to be spelled
+    with exactly that character.  Only the *first* named character is the
+    separator: in "replace every comma with a semicolon" the second one is what
+    the comma becomes.
+    """
+    for word in re.findall(r"[a-z]+", goal.lower()):
+        character = _SEPARATOR_WORDS.get(word)
+        if character is not None:
+            return character
+    return ""
+
+
+def _awk_literal(character: str) -> str:
+    """The shell spelling of a one-character field separator for awk.
+
+    A separator with no regex meaning needs no quoting; anything else is
+    escaped so awk reads it as the literal character rather than as syntax.
+    """
+    if character == "\t":
+        return r"-F'\t'"
+    if character and character.isalnum():
+        return f"-F{character}"
+    if character in {",", ":", ";", "/"}:
+        return f"-F{character}"
+    escaped = re.sub(r"([\\.\[\](){}*+?^$|])", r"\\\1", character)
+    return f"-F'{escaped}'"
+
+
+def _join_spelling(character: str) -> str:
+    """The shell spelling of a one-character row separator for paste."""
+    # `-s` is the operation the sentence asks for: serialise the rows into one
+    # row instead of pairing up lines from several files.
+    if character in {",", ":", ";", ".", "_", "-"}:
+        return f"-sd{character}"
+    return "-sd" + shlex.quote(character)
+
+
+_NEGATION = re.compile(
+    r"\b(?:do(?:es)?\s+not|don't|doesn't|did\s+not|not|never|without|excluding|except(?:ing)?)\b"
+)
+_CONTAINS = re.compile(
+    r"\b(?:contain|contains|containing|include|includes|including|having|"
+    r"match|matches|matching|mention|mentions|mentioning)\b"
+)
+_AFFIX_VERB = re.compile(
+    r"\b(?:start|starts|starting|begin|begins|beginning|end|ends|ending)\b"
+)
+
+
+def _negated(goal: str) -> bool:
+    """Does the sentence say the test is *not* to hold?
+
+    "The lines that do not contain error" and "the lines without error" are
+    statements about the same data as their positive form, with the answer
+    complemented.  A reading that drops the negation does not merely lose
+    nuance -- it describes a different function, so a pipeline that fits the
+    examples by coincidence looks correct.
+    """
+    return bool(_NEGATION.search(goal.lower()))
+
+
+_LENGTH_QUALIFIER = re.compile(
+    r"\b(longer|shorter|more|fewer|greater|less|bigger|smaller)\s+than\s+(\d{1,4})\s*"
+    r"(?:character|characters|char|chars|byte|bytes)\b"
+    r"|\b(at\s+least|at\s+most)\s+(\d{1,4})\s*(?:character|characters|char|chars|byte|bytes)\b"
+)
+
+
+def _content_token(goal: str) -> tuple[str, bool] | None:
+    """The word a sentence filters on, and whether the filter is negated.
+
+    "Show the lines that contain error" names `error`; "the lines that do not
+    contain error" names the same word and flips the test.  Only the token the
+    sentence itself supplies is returned -- it is never read out of the data,
+    because then the data would be choosing its own test.
+    """
+    text = goal.lower()
+    if _LENGTH_QUALIFIER.search(text):
+        # "The lines with fewer than 4 characters" is a length test; the word
+        # after "with" is a comparison, not a word to look for.
+        return None
+    negated = _negated(goal)
+    match = _CONTAINS.search(text) or re.search(r"\bwithout\b\s+(\S+)", text)
+    if match is None:
+        return None
+    if match.re is _CONTAINS:
+        rest = text[match.end():]
+        negated = negated or bool(
+            _NEGATION.search(text[max(0, match.start() - 24): match.start()])
+        )
+    else:
+        rest = match.group(1)
+        negated = True
+    words = re.findall(r"[A-Za-z0-9_'-]+", rest)
+    for word in words:
+        cleaned = word.strip("'\"")
+        if cleaned and cleaned not in _STOP and cleaned not in {
+            "the", "a", "an", "any", "some", "word", "words", "text", "string",
+            "line", "lines", "that", "which", "it", "this", "these", "those",
+            "only", "just", "all",
+        }:
+            return cleaned, negated
+    return None
+
+
 def _requested_operations(goal: str) -> list[tuple[str, str, str]]:
     """Operations the sentence names: (label, stage spellings, where it belongs).
 
@@ -778,6 +926,25 @@ def _requested_operations(goal: str) -> list[tuple[str, str, str]]:
             requested.append((f"first {count}", rf"\bhead\s+-n\s*\+?{count}\b", role))
         else:
             requested.append((f"last {count}", rf"\btail\s+-n\s*{count}\b", role))
+    content = _content_token(goal)
+    if content is not None and _AFFIX_VERB.search(text) is None:
+        token, negated = content
+        word = re.escape(token)
+        # A filter is a stage that names the word.  `sort | tail -n +2` fits
+        # two files where the described line happens to sort first, and never
+        # looks at the word at all; the sentence said which word decides, so a
+        # pipeline that does not mention it has answered something else.
+        if negated:
+            # The complement needs an inversion, not merely the word: `grep
+            # error` on a request that said "not" is the opposite function.
+            spelled = (
+                rf"(?=[^|]*\b{word}\b)"
+                rf"(?=[^|]*(?:\s-v\b|--invert-match|\bfgrep\b[^|]*-[A-Za-z]*v))"
+                rf"[^|]*"
+            )
+            requested.append((f"the lines that do not contain {token}", spelled, "any"))
+        else:
+            requested.append((f"the lines that contain {token}", rf"\b{word}\b", "any"))
     if re.search(r"\b(sort|sorted|sorting|arrange|arranged|arranging|rank|ranked)\b", text):
         # A sentence that names an ordering is not satisfied by a *fixed*
         # permutation of the rows, however well that permutation happens to
@@ -939,7 +1106,6 @@ class LivingAgent:
         self._stage_dir: str | None = None
         # Real process executions, counted so a claim about cost is measured
         # rather than estimated.
-        self._runs = 0
 
     # -- learning ---------------------------------------------------------
     def learn_shell_skill(
@@ -1323,6 +1489,24 @@ class LivingAgent:
         }
 
     # -- synthesis: learn a new skill from examples, not from a command ----
+    @staticmethod
+    def _skill_could_name(skill: ShellSkill, goal: str) -> bool:
+        """Can this command even contain the word the sentence filters on?
+
+        "Show the lines that contain warning" cannot be answered by a
+        remembered `egrep error`: the pattern is a literal operand of the
+        command, so a mechanism that never mentions the word cannot select on
+        it.  This is a necessary condition read from the command text, not a
+        guess about behaviour -- the bytes still decide everything else.
+        """
+        content = _content_token(goal)
+        if content is None:
+            return True
+        token, negated = content
+        if token not in skill.template:
+            return False
+        return ("-v " in skill.template) == negated
+
     def _skill_matches_examples(
         self, skill: ShellSkill, examples: Sequence[tuple[str, str]]
     ) -> bool:
@@ -1355,6 +1539,25 @@ class LivingAgent:
         max_length: int = 3,
         time_budget_s: float = 2.0,
     ) -> dict[str, Any]:
+        """Learn that ``examples`` are true, answering repeated work once.
+
+        Everything a request does is a pure function of the files it was given
+        and the commands it runs; the same command over the same bytes during
+        one request can only have the one answer it already produced.
+        """
+        with self.computer.replaying():
+            return self._acquire(
+                goal, examples, max_length=max_length, time_budget_s=time_budget_s
+            )
+
+    def _acquire(
+        self,
+        goal: str,
+        examples: Sequence[tuple[str, str]],
+        *,
+        max_length: int = 3,
+        time_budget_s: float = 2.0,
+    ) -> dict[str, Any]:
         """Learn whatever is needed to make ``examples`` come true.
 
         ``examples`` are (input file, expected stdout) pairs.  Nothing here is
@@ -1375,7 +1578,7 @@ class LivingAgent:
             # which needs no example because the result is verified directly.
             raise AgentError("TOO_FEW_EXAMPLES")
         started = time.perf_counter()
-        runs_before = self._runs
+        runs_before = self.computer.runs
         # Two demonstrations of the same thing are one demonstration.  A
         # request taught twice on identical data constrains the answer exactly
         # as much as a single example does, and admitting a pipeline from it
@@ -1394,7 +1597,14 @@ class LivingAgent:
 
         # 1. behavioural retrieval: a known skill that already produces these
         # results is reused, even if the goal shares no word with its text.
+        # A filter is the one case where the answer is decidable from the
+        # command text alone: a request that names a word cannot be answered by
+        # a command that never mentions it (and a request that negates cannot
+        # be answered by one that does not).  Rejecting that costs nothing,
+        # where checking it costs a real command.
         for skill in sorted(self.skills.values(), key=lambda s: (s.tries, s.skill_id)):
+            if not self._skill_could_name(skill, goal):
+                continue
             if not self._skill_matches_examples(skill, examples):
                 continue
             for token in _tokens(goal):
@@ -1418,8 +1628,34 @@ class LivingAgent:
             # instant recall with first-time search on equal terms.
             outcome["learned"] = False
             outcome["source"] = "reused"
-            outcome["commands_run"] = max(1, self._runs - runs_before)
+            outcome["commands_run"] = max(1, self.computer.runs - runs_before)
             outcome["seconds"] = round(time.perf_counter() - started, 4)
+            return outcome
+
+        # 1b. Memory is the cheapest answer there is -- one run -- so it is
+        # consulted first.  Next cheapest is a construction the sentence spells
+        # itself: a handful of runs and no search at all.  Only then is the
+        # space of documented mechanisms worth scanning.
+        requested = self._requested_pipeline(goal, examples)
+        if requested is not None:
+            pipeline, detail = requested
+            skill = self._admit_composed(goal, pipeline, examples)
+            outcome = self.solve(goal, bindings={"path": examples[0][0]})
+            outcome.update(
+                {
+                    "learned": True,
+                    "stages": pipeline,
+                    "documented": detail["documented"],
+                    "grammar": detail["grammar"],
+                    "prefix": detail.get("prefix", ""),
+                    "remembered": False,
+                    "source": "requested",
+                    "tool": detail["tool"],
+                    "argv": list(detail["argv"]),
+                    "commands_run": max(1, self.computer.runs - runs_before),
+                    "seconds": round(time.perf_counter() - started, 4),
+                }
+            )
             return outcome
 
         # 2b. A request that names every value a command consumes has nothing
@@ -1439,7 +1675,7 @@ class LivingAgent:
                     "tool": found["tool"],
                     "argv": list(found["argv"]),
                     "source": "documentation-options",
-                    "commands_run": max(int(found.get("runs") or 0), self._runs - runs_before),
+                    "commands_run": max(int(found.get("runs") or 0), self.computer.runs - runs_before),
                     "seconds": round(time.perf_counter() - started, 4),
                 }
             )
@@ -1565,7 +1801,7 @@ class LivingAgent:
                     "source": "composed",
                     "tool": detail["tool"],
                     "argv": list(detail["argv"]),
-                    "commands_run": max(int(detail.get("tested") or 0), self._runs - runs_before),
+                    "commands_run": max(int(detail.get("tested") or 0), self.computer.runs - runs_before),
                     "seconds": round(time.perf_counter() - started, 4),
                 }
             )
@@ -1592,7 +1828,7 @@ class LivingAgent:
                     "tool": found["tool"],
                     "argv": list(found["argv"]),
                     "source": "documentation-options",
-                    "commands_run": max(int(found.get("runs") or 0), self._runs - runs_before),
+                    "commands_run": max(int(found.get("runs") or 0), self.computer.runs - runs_before),
                     "seconds": round(time.perf_counter() - started, 4),
                 }
             )
@@ -1915,6 +2151,15 @@ class LivingAgent:
         qualifier_words: list[str] = []
         stated = [word for word in sorted(set(re.findall(r"[a-z]+", goal.lower())))
                   if len(word) >= 6 and word.endswith("ly")]
+        # A negated sentence states a qualifier too: the test holds the other
+        # way round.  "Invert" is not a word of the request, but it is the word
+        # *the tool's own documentation* uses for exactly that -- grep's
+        # `-v, --invert-match select non-matching lines` -- so the reading is
+        # grounded in documentation, not in a synonym list.  It costs one
+        # qualifier lookup per tool and is only consulted when the sentence
+        # actually negates.
+        if _negated(goal):
+            stated = [*stated, "invert"]
         for word in [*stated, *manners]:
             flags = self._qualifier_flags(word, doc)
             if not flags or word in qualifier_words:
@@ -2712,11 +2957,9 @@ class LivingAgent:
         if not request_order:
             return None
         payload = "\n".join(separator.join(row) for row in probe) + "\n"
-        self._runs += 1
         wanted = self.computer.run(" | ".join(request_order), stdin=payload)
         if not wanted.ok:
             return None
-        self._runs += 1
         given = self.computer.run(" | ".join(stages), stdin=payload)
         if not given.ok:
             return None
@@ -2782,12 +3025,62 @@ class LivingAgent:
                     "stages": list(stages),
                     "exact_hypotheses": len(candidates),
                     "probe_seconds": stats.get("seconds"),
-                    "commands_run": max(evaluated, self._runs - runs_before),
+                    "commands_run": max(evaluated, self.computer.runs - runs_before),
                     "seconds": round(time.perf_counter() - started, 4),
                 }
             )
             return outcome, evaluated
         return None, evaluated
+
+    def _requested_pipeline(
+        self, goal: str, examples: Sequence[tuple[str, str]] | None = None
+    ) -> tuple[list[str], dict[str, Any]] | None:
+        """The pipeline the sentence spells, if the machine may run and verify it.
+
+        A tool named by the request still has to be *documented*: the shortcut
+        skips the search, never admission.  Failure is ``None`` -- the search
+        that follows is the general case, and this is only its cheapest
+        member.
+        """
+        if examples is None:
+            return None
+        pipeline = self._requested_stages(goal)
+        if not pipeline:
+            return None
+        names = [shlex.split(stage)[0] for stage in pipeline]
+        admitted = self.computer.admitted()
+        # A stage whose tool is already admitted needs nothing more.  A stage
+        # whose tool is not needs its own documentation, exactly as discovery
+        # would: `awk` has no manual page the vocabulary can read, but it is
+        # admitted, so a request that names it is not blocked by that.
+        missing = [name for name in names if name not in admitted]
+        docs = [self.vocabulary.doc(name) for name in missing]
+        if not all(docs):
+            return None
+        before = set(self.computer.admitted())
+        for doc in docs:
+            self.computer.admit(
+                doc.name,
+                evidence={
+                    "summary": doc.summary,
+                    "usage": doc.usage,
+                    "argv": [],
+                    "request": goal,
+                },
+            )
+        if not self._confirm(goal, pipeline, examples):
+            self._settle_admissions(before, winner="")
+            return None
+        pipeline = list(self._minimise(goal, pipeline, examples))
+        self._settle_admissions(before, winner=names)
+        return pipeline, {
+            "documented": [],
+            "grammar": list(pipeline),
+            "prefix": "",
+            "tool": "",
+            "argv": [],
+            "requested": True,
+        }
 
     def _compose(
         self,
@@ -2815,13 +3108,22 @@ class LivingAgent:
         sources = [text for text, _ in inputs]
         expected = [text for _, text in inputs]
         before = set(self.computer.admitted())
+        runs_before = self.computer.runs
+        # Cheapest of all: the sentence may already spell the pipeline.  That
+        # costs one run per example plus a probe, and needs no vocabulary scan
+        # at all -- "show the largest number" shares no word with sort's own
+        # description, so a keyword search would have nothing to go on.
+        shortcut = self._requested_pipeline(goal, examples)
+        if shortcut is not None:
+            pipeline, detail = shortcut
+            detail["tested"] = max(1, self.computer.runs - runs_before)
+            return pipeline, detail
         grammar = self._base_grammar(inputs, goal)
         candidates = self._candidate_stages(goal, sources, self._demonstrated_manners(goal, examples))
         if not candidates:
             return None
         scratch = tempfile.mkdtemp(prefix="brain-compose-")
         try:
-            runs_before = self._runs
             # What answered this kind of request before, cheapest first.  A
             # remembered mechanism is re-verified on these examples like
             # anything else; the memory only saves the search, never the proof.
@@ -2836,29 +3138,8 @@ class LivingAgent:
             if recalled is not None:
                 pipeline, detail = recalled
                 self._settle_admissions(before, winner=detail["tool"])
-                detail["tested"] = max(1, self._runs - runs_before)
+                detail["tested"] = max(1, self.computer.runs - runs_before)
                 return pipeline, detail
-            # Cheapest of all: the sentence may already spell the pipeline.
-            # "Count the distinct values in the second column" names the
-            # column, the set, and the count, in that order -- so that pipeline
-            # is one hypothesis, not a haystack to search.  It is *verified*
-            # like everything else (exact bytes on every example, then the
-            # order probe), because naming an operation is not performing it;
-            # but when it holds, it is the answer the request itself gave, and
-            # finding it costs two processes instead of a documented-tool hunt.
-            requested_pipeline = self._requested_stages(goal)
-            if requested_pipeline and self._confirm(goal, requested_pipeline, examples):
-                pipeline = list(self._minimise(goal, requested_pipeline, examples))
-                self._settle_admissions(before, winner="")
-                return pipeline, {
-                    "documented": [],
-                    "grammar": list(pipeline),
-                    "prefix": "",
-                    "tested": max(1, self._runs - runs_before),
-                    "tool": "",
-                    "argv": [],
-                    "requested": True,
-                }
             # Second cheapest: the vocabulary this creature has already earned.
             # Every entry was verified on real bytes somewhere else; testing it
             # here costs a handful of processes instead of a fresh hunt.
@@ -2886,7 +3167,7 @@ class LivingAgent:
                         "documented": [stage.shell],
                         "grammar": pipeline[2:] if prefix_shell else pipeline[1:],
                         "prefix": prefix_shell,
-                        "tested": max(1, self._runs - runs_before),
+                        "tested": max(1, self.computer.runs - runs_before),
                         "tool": tool,
                         "argv": list(record.get("argv") or []),
                         "reused_stage": True,
@@ -2980,7 +3261,7 @@ class LivingAgent:
                             "documented": [stage.shell],
                             "grammar": pipeline[2:] if prefix_shell else pipeline[1:],
                             "prefix": prefix_shell,
-                            "tested": self._runs - runs_before,
+                            "tested": self.computer.runs - runs_before,
                             "tool": doc.name,
                             "argv": list(form),
                         }
@@ -2989,15 +3270,19 @@ class LivingAgent:
         finally:
             shutil.rmtree(scratch, ignore_errors=True)
 
-    def _settle_admissions(self, before: set[str], *, winner: str) -> None:
+    def _settle_admissions(
+        self, before: set[str], *, winner: str | Sequence[str]
+    ) -> None:
         """Leave no authority behind from a probe.
 
         Trying a stranger means admitting it for one run.  Keeping it admitted
         afterwards would let every failed guess widen what the computer may
-        execute, so only the winner of a successful search survives.
+        execute, so only the winner of a successful search survives.  A
+        pipeline has as many winners as it has stages.
         """
+        keep = {winner} if isinstance(winner, str) else set(winner)
         for name in set(self.computer.admitted()) - before:
-            if name != winner:
+            if name not in keep:
                 self.computer.revoke(name)
 
     def _log_composition(
@@ -3260,13 +3545,48 @@ class LivingAgent:
         selections the sentence puts first are not part of the tail.
         """
         stages: list[str] = []
+        # A filter is stated outright: the sentence names the word, and says
+        # which way round the test goes.  Spelling it here makes it the first
+        # hypothesis tried instead of something the option space has to stumble
+        # on; the documented reading of `--invert-match` remains as the
+        # fallback for any tool the sentence describes in other words.
+        content = _content_token(goal)
+        if content is not None and _AFFIX_VERB.search(goal.lower()) is None:
+            flag = "-v " if content[1] else ""
+            stages.append(f"grep {flag}{shlex.quote(content[0])}")
+        text_goal = goal.lower()
+        separator = _sentence_separator(goal)
+        # "Join every line into a single line separated by commas" is one
+        # operation on the whole text, not on each line: the rows stop being
+        # rows.  `paste -sd ,` is that operation, and the sentence states both
+        # halves of it.
+        if re.search(r"\b(join|merge|combine|concatenate)\b", text_goal) and re.search(
+            r"\b(lines?|rows?)\b", text_goal
+        ) and re.search(r"\b(into|as)\b\s+(?:a\s+)?(?:single|one)\b", text_goal):
+            stages.append("paste " + _join_spelling(separator or " "))
+            return stages
+        # "Show the last field of each line" is not `cut -f N` for any fixed N:
+        # the number of fields varies per line, and the last one is `$NF`.
+        if re.search(r"\b(last|final|rightmost)\s+(field|column|part)\b", text_goal):
+            stages.append(f"awk {_awk_literal(separator or ',')} '{{print $NF}}'")
+            return stages
+        # "Show the largest number" is an ordering plus a choice of end.  The
+        # ordering must be numeric: over 3, 10, 7 a lexical sort puts 7 last,
+        # and the sentence is not about text.  The pair is the request's own
+        # construction, so it is one hypothesis, not a search.
+        largest = re.search(r"\b(largest|biggest|greatest|maximum|max|highest)\b", text_goal)
+        smallest = re.search(r"\b(smallest|least|minimum|min|lowest)\b", text_goal)
+        if (largest or smallest) and not re.search(r"\bsort\b", text_goal):
+            stages.append("sort -n")
+            stages.append("tail -n 1" if largest else "head -n 1")
+            return stages
         operations = _requested_operations(goal)
         positions = _ordinal_positions(goal)
         if any(label == "distinct values" for label, _p, _r in operations):
             if positions:
                 # "distinct values in the second column": the set is taken of
                 # the column, so the column is read *before* the set is formed.
-                stages.append(f"cut -f {positions[0]} -d ,")
+                stages.append(f"cut -f {positions[0]} -d {separator or ','}")
             stages.append("sort -u")
         for label, _pattern, role in operations:
             if role == "prefix":
@@ -3322,11 +3642,7 @@ class LivingAgent:
     _CONTAINMENT = re.compile(
         r"\b(contain|contains|containing|include|includes|including|with|having|match|matches|matching)\b"
     )
-    _LENGTH_FILTER = re.compile(
-        r"\b(longer|shorter|more|fewer|greater|less|bigger|smaller)\s+than\s+(\d{1,4})\s*"
-        r"(?:character|characters|char|chars|byte|bytes)\b"
-        r"|\b(at\s+least|at\s+most)\s+(\d{1,4})\s*(?:character|characters|char|chars|byte|bytes)\b"
-    )
+    _LENGTH_FILTER = _LENGTH_QUALIFIER
     _PREFIX_FILTER = re.compile(
         r"\b(?:start|starts|starting|begin|begins|beginning)\s+(?:with|by)\s+(\S+)"
     )
@@ -3362,6 +3678,18 @@ class LivingAgent:
         being taken on faith.
         """
         lowered = goal.lower()
+
+        def polarised(position: int, test: Any) -> Any:
+            """The test as the sentence states it, negation included.
+
+            The negator has to be read in the clause that governs the verb --
+            "the lines that do not contain error" -- and not anywhere in the
+            sentence, because "show the lines without error and keep them
+            sorted" negates only the filter.
+            """
+            window = lowered[max(0, position - 24): position]
+            return (lambda line, inner=test: not inner(line)) if _NEGATION.search(window) else test
+
         found = self._LENGTH_FILTER.search(lowered)
         if found:
             if found.group(1):
@@ -3376,20 +3704,22 @@ class LivingAgent:
                 test = (lambda line, n=amount: len(line) >= n)
             else:
                 test = (lambda line, n=amount: len(line) <= n)
-            return test, "length"
+            return polarised(found.start(), test), "length"
         found = self._PREFIX_FILTER.search(lowered)
         if found:
             token = found.group(1).strip("'\"")
             if token:
-                return (lambda line, t=token: line.startswith(t)), "prefix"
+                return polarised(found.start(), lambda line, t=token: line.startswith(t)), "prefix"
         found = self._SUFFIX_FILTER.search(lowered)
         if found:
             token = found.group(1).strip("'\"")
             if token:
-                return (lambda line, t=token: line.endswith(t)), "suffix"
+                return polarised(found.start(), lambda line, t=token: line.endswith(t)), "suffix"
         if self._CONTAINMENT.search(lowered):
-            path, expected = "", ""
-            return None, "containment"
+            # The word itself is supplied by the caller (it is the word of the
+            # sentence that the data actually contains); what is decided here
+            # is *which way round* the test goes.
+            return None, "exclusion" if _negated(goal) else "containment"
         return None
 
     def _selection_matches_the_sentence(
@@ -3408,33 +3738,49 @@ class LivingAgent:
         """
         reading = self._line_predicate(goal)
         predicate, kind = reading if reading else (None, "")
-        if predicate is None and kind != "containment":
+        if predicate is None and kind not in {"containment", "exclusion"}:
             return None
         path, expected = examples[0]
         text = self.computer.read(path)
+        word = ""
         if predicate is None:
             words = [
                 word
                 for word in sorted(_tokens(goal))
-                if word.isalpha() and len(word) > 2 and word in text
+                if word.isalpha() and len(word) > 3 and word in text
                 and word not in {"line", "lines"}
             ]
+            # The word the sentence names is the one the data actually
+            # contains.  "Do not contain" is not a second word to find: it is
+            # the polarity of the same test, and reading it as a token made the
+            # sentence unreadable -- which silently disabled the check.
             if len(words) != 1:
                 return None
             word = words[0]
-            predicate = lambda line, w=word: w in line  # noqa: E731
+            if kind == "exclusion":
+                predicate = lambda line, w=word: w not in line  # noqa: E731
+            else:
+                predicate = lambda line, w=word: w in line  # noqa: E731
         selected = "".join(line + "\n" for line in text.splitlines() if predicate(line))
         if expected != selected:
             return None
         # Two probes, both written by the sentence rather than by the examples:
         # one matching line at the front, one non-matching line at the end.
+        # The probe text has to contain one line the sentence accepts and one it
+        # rejects -- for a negated filter that is the opposite of the positive
+        # case, so the candidates are built from the sentence's own word rather
+        # than from a fixed pool that only makes sense one way round.
+        candidates = ([f"{word} appears here", f"a line with no such word"]
+                      if word else [])
         matching = next(
-            (candidate for candidate in ("a line for the test" * 3, "zzzz probe", "x")
+            (candidate for candidate in
+             (*candidates, "a line for the test" * 3, "zzzz probe", "x")
              if predicate(candidate)),
             None,
         )
         missing = next(
-            (candidate for candidate in ("", "q", "~", "###")
+            (candidate for candidate in
+             (*reversed(candidates), "", "q", "~", "###")
              if not predicate(candidate)),
             None,
         )
@@ -3442,7 +3788,6 @@ class LivingAgent:
             return None
         probe = matching + "\n" + text + missing + "\n"
         oracle = "".join(line + "\n" for line in probe.splitlines() if predicate(line))
-        self._runs += 1
         result = self.computer.run(" | ".join(stages), stdin=probe)
         if not result.ok:
             return None
@@ -3553,7 +3898,6 @@ class LivingAgent:
         pipeline = " | ".join(stages)
 
         def answer(payload: str) -> str | None:
-            self._runs += 1
             result = self.computer.run(pipeline, stdin=payload)
             return result.stdout if result.ok else None
 
@@ -3641,7 +3985,6 @@ class LivingAgent:
         for field, value in zip(rotated, values[1:] + values[:1]):
             field[position - 1] = value
         probe = "\n".join(separator.join(field) for field in rotated) + "\n"
-        self._runs += 1
         result = self.computer.run(" | ".join(stages), stdin=probe)
         if not result.ok:
             return None
@@ -3700,7 +4043,6 @@ class LivingAgent:
         pipeline = " | ".join(stages)
 
         def answer(payload: str) -> str | None:
-            self._runs += 1
             result = self.computer.run(pipeline, stdin=payload)
             return result.stdout if result.ok else None
 
@@ -3728,7 +4070,6 @@ class LivingAgent:
         """
         template = "cat {path} | " + " | ".join(stages)
         for path, expected in examples:
-            self._runs += 1
             result = self.computer.run(template.replace("{path}", shlex.quote(path)))
             if not result.ok or result.stdout != expected:
                 return False
@@ -3765,7 +4106,7 @@ class LivingAgent:
                 return cached
             if doc.name not in self.computer.admitted():
                 self.computer.admit(doc.name, evidence={"summary": doc.summary, "usage": doc.usage, "argv": list(form)})
-            self._runs += 1
+            self.computer.runs += 1
             code, raw = discovery._run_capped(
                 argv, cwd=workdir, env=env, timeout=2.0, limit=1_048_576, stdin_text=text
             )

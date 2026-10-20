@@ -2589,9 +2589,12 @@ class MemoryScaleTests(unittest.TestCase):
     def test_a_restored_solution_is_recalled_in_one_command(self) -> None:
         # Memory is only worth having if it survives the process.  A solution
         # learned by search costs many real commands; the same creature after a
-        # restart must recognise the situation and spend exactly one, and its
-        # outcome must report the same schema either way -- an instant answer is
-        # not allowed to look like an answer that measured nothing.
+        # restart must recognise the situation without searching at all, and
+        # its outcome must report the same schema either way -- an instant
+        # answer is not allowed to look like an answer that measured nothing.
+        # "Without searching" is measured in real processes now, which is a
+        # stricter count than before: the remembered skill is proved on each
+        # example (the proof is a run) and then answers (one more run).
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             goal = "sort the rows by the second column numerically, comma separated"
@@ -2614,7 +2617,9 @@ class MemoryScaleTests(unittest.TestCase):
             )
             self.assertTrue(second["reused"])
             self.assertFalse(second["learned"])
-            self.assertEqual(second["commands_run"], 1)
+            # One real run proves the remembered path on each example and one
+            # answers; anything above that would mean it searched.
+            self.assertEqual(second["commands_run"], 3)
             self.assertEqual(second["status"], "PASS")
             self.assertEqual(second["stdout"], "z,3\ny,20\nx,100\n")
             self.assertLess(second["commands_run"], first["commands_run"])
@@ -3180,6 +3185,198 @@ class EvidenceInductionTests(unittest.TestCase):
         pairs = [("b\na\nc\n", "c\na\nb\n"), ("d\nf\ne\n", "e\nf\nd\n")]
         stages = LivingAgent._induced_stages(pairs)
         self.assertEqual([stage.shell for stage in stages], ["tac"])
+
+
+class ReadingWhatTheSentenceDoesNotHaveTests(unittest.TestCase):
+    """The sentence decides the function; the examples only decide the spelling.
+
+    Every case here was answered *wrongly* by this machine before the reading
+    existed -- not refused, but confirmed on both examples and then wrong on a
+    third file.  That is the failure mode worth a test: two examples are a
+    sample, and a pipeline that fits a sample while contradicting the sentence
+    is not an answer.
+    """
+
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name)
+
+    def _agent(self) -> LivingAgent:
+        return LivingAgent(self.root, computer=Computer(self.root))
+
+    def _write(self, agent: LivingAgent, name: str, text: str) -> str:
+        path = self.root / name
+        path.write_text(text, encoding="utf-8")
+        return name
+
+    @staticmethod
+    def _kept(text: str, word: str) -> str:
+        return "".join(line + "\n" for line in text.splitlines() if word in line)
+
+    @staticmethod
+    def _without(text: str, word: str) -> str:
+        return "".join(line + "\n" for line in text.splitlines() if word not in line)
+
+    def test_a_negated_filter_is_not_the_positive_one(self) -> None:
+        # The word sits on the second line of both examples, so `sort | tail
+        # -n +2` reproduces the answer by accident -- and it was admitted.  A
+        # third file where the word comes first separates the two readings,
+        # and a fourth where no line has the word must return the whole text.
+        agent = self._agent()
+        self._write(agent, "n1.txt", "ok\nan error\n")
+        self._write(agent, "n2.txt", "error here\nfine\n")
+        goal = "show only the lines that do not contain error"
+        outcome = agent.acquire(
+            goal, [("n1.txt", "ok\n"), ("n2.txt", "fine\n")]
+        )
+        self.assertEqual(outcome["status"], "PASS", outcome)
+        self.assertIn("error", " ".join(outcome["stages"]))
+        self.assertLessEqual(outcome["commands_run"], 6)
+        for name, text in (
+            ("h1.txt", "error at the start\nok\nlate error\n"),
+            ("h2.txt", "error\n"),
+            ("h3.txt", "nothing to see\n"),
+        ):
+            self._write(agent, name, text)
+            self.assertEqual(
+                agent.solve(goal, bindings={"path": name})["stdout"],
+                self._without(text, "error"),
+                name,
+            )
+
+    def test_the_positive_filter_still_selects_by_the_word(self) -> None:
+        agent = self._agent()
+        self._write(agent, "p1.txt", "ok\nboom error here\nfine\n")
+        self._write(agent, "p2.txt", "error\nx\n")
+        goal = "show only the lines that contain error"
+        outcome = agent.acquire(
+            goal, [("p1.txt", "boom error here\n"), ("p2.txt", "error\n")]
+        )
+        self.assertIn("error", " ".join(outcome["stages"]))
+        for name, text in (
+            ("h1.txt", "fine\nan error at noon\nok\n"),
+            ("h2.txt", "all good\n"),
+        ):
+            self._write(agent, name, text)
+            self.assertEqual(
+                agent.solve(goal, bindings={"path": name})["stdout"],
+                self._kept(text, "error"),
+                name,
+            )
+
+    def test_the_last_field_is_not_any_fixed_column(self) -> None:
+        # A fixed `cut -f 2` fits the first line of each example and is wrong
+        # on every line that has a different number of fields, so the taught
+        # files vary the count.  The held-out file has a single field, where
+        # the last field is the whole line.
+        agent = self._agent()
+        self._write(agent, "l1.dat", "a:b:c\nx:y\n")
+        self._write(agent, "l2.dat", "p:q:r:s\nt\n")
+        goal = "show the last field of each line, colon separated"
+        outcome = agent.acquire(
+            goal,
+            [("l1.dat", "c\ny\n"), ("l2.dat", "s\nt\n")],
+        )
+        self.assertIn("NF", " ".join(outcome["stages"]))
+        for name, text in (
+            ("h1.dat", "m:n:o\n"),
+            ("h2.dat", "single\n"),
+            ("h3.dat", "w:x:y:z\n"),
+        ):
+            self._write(agent, name, text)
+            expected = "".join(line.split(":")[-1] + "\n" for line in text.splitlines())
+            self.assertEqual(
+                agent.solve(goal, bindings={"path": name})["stdout"], expected, name
+            )
+
+    def test_joining_rows_is_not_a_per_line_operation(self) -> None:
+        agent = self._agent()
+        self._write(agent, "j1.dat", "a\nb\n")
+        self._write(agent, "j2.dat", "x\ny\nz\n")
+        goal = "join every line into a single line separated by commas"
+        outcome = agent.acquire(
+            goal, [("j1.dat", "a,b\n"), ("j2.dat", "x,y,z\n")]
+        )
+        self.assertLessEqual(outcome["commands_run"], 4)
+        for name, text in (
+            ("h1.dat", "p\nq\n"),
+            ("h2.dat", "only\n"),
+            ("h3.dat", "1\n2\n3\n4\n"),
+        ):
+            self._write(agent, name, text)
+            self.assertEqual(
+                agent.solve(goal, bindings={"path": name})["stdout"],
+                ",".join(text.splitlines()) + "\n",
+                name,
+            )
+
+    def test_the_largest_number_is_not_the_last_line(self) -> None:
+        # Nothing in the sentence shares a word with sort's own description,
+        # so a keyword search has nothing to go on; the construction is the
+        # request's own.  The taught files are arranged so that the file order,
+        # the lexical order and the numeric order all disagree.
+        agent = self._agent()
+        self._write(agent, "g1.dat", "3\n10\n7\n")
+        self._write(agent, "g2.dat", "42\n5\n")
+        largest = "show the largest number"
+        outcome = agent.acquire(largest, [("g1.dat", "10\n"), ("g2.dat", "42\n")])
+        self.assertLessEqual(outcome["commands_run"], 6)
+        for name, text in (
+            ("h1.dat", "2\n9\n11\n"),
+            ("h2.dat", "100\n99\n"),
+            ("h3.dat", "5\n5\n5\n"),
+        ):
+            self._write(agent, name, text)
+            expected = str(max(int(v) for v in text.split())) + "\n"
+            self.assertEqual(
+                agent.solve(largest, bindings={"path": name})["stdout"], expected, name
+            )
+
+    def test_the_smallest_number_is_not_the_largest_one_reversed(self) -> None:
+        agent = self._agent()
+        self._write(agent, "s1.dat", "3\n10\n7\n")
+        self._write(agent, "s2.dat", "42\n5\n")
+        smallest = "show the smallest number"
+        outcome = agent.acquire(smallest, [("s1.dat", "3\n"), ("s2.dat", "5\n")])
+        self.assertLessEqual(outcome["commands_run"], 8)
+        for name, text in (
+            ("h1.dat", "9\n11\n2\n"),
+            ("h2.dat", "100\n99\n"),
+        ):
+            self._write(agent, name, text)
+            expected = str(min(int(v) for v in text.split())) + "\n"
+            self.assertEqual(
+                agent.solve(smallest, bindings={"path": name})["stdout"], expected, name
+            )
+
+    def test_memory_is_not_asked_a_question_it_cannot_answer(self) -> None:
+        # After learning "contain error", a request about "warning" cannot be
+        # answered by the remembered command: the pattern is a literal operand,
+        # so a command that never contains the word cannot select on it.  That
+        # is a necessary condition read from the text, and rejecting the
+        # candidate on it costs nothing -- whereas checking it costs a command.
+        agent = self._agent()
+        self._write(agent, "m1.txt", "ok\nerror\n")
+        self._write(agent, "m2.txt", "fine\nerror\n")
+        first = agent.acquire(
+            "show only the lines that contain error",
+            [("m1.txt", "error\n"), ("m2.txt", "error\n")],
+        )
+        self._write(agent, "m3.txt", "ok\nwarning here\n")
+        self._write(agent, "m4.txt", "warning\n")
+        second = agent.acquire(
+            "show only the lines that contain warning",
+            [("m3.txt", "warning here\n"), ("m4.txt", "warning\n")],
+        )
+        self.assertIn("warning", " ".join(second["stages"]))
+        self.assertNotIn("error", " ".join(second["stages"]))
+        self.assertLessEqual(second["commands_run"], first["commands_run"])
+        self._write(agent, "h.txt", "a warning line\nok\n")
+        self.assertEqual(
+            agent.solve("show only the lines that contain warning", bindings={"path": "h.txt"})["stdout"],
+            "a warning line\n",
+        )
 
 
 class EndToEndTests(unittest.TestCase):

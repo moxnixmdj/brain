@@ -756,6 +756,58 @@ The battery's cost did not move (88 runs, median 3), and the count-distinct case
 went from 45 runs to 9 with the answer right on a held-out file where the old
 pipeline was wrong.
 
+### Saying the opposite, saying the end, saying the whole
+
+Three families of request were refused outright, and one was answered *wrongly*
+on a third file.  All four are readings, not new scripts:
+
+* **Negation.**  "Show the lines that do not contain error" was answered by
+  `sort | tail -n +2`: the word sat on the second line of both examples, so
+  dropping the first line of the sorted text reproduced both answers exactly.
+  Nothing in the machine read the negation -- not the predicate check (it
+  inferred the positive test and then declined to judge), not the option space
+  (grep's `-v` is documented as "invert-match"; no word of the request reached
+  it), not the request's requirements (a filter was not a requirement at all).
+  Now all three read it: the predicate is complemented, "invert" joins the
+  qualifier vocabulary so the option space can find `-v`, and the sentence
+  requires a stage that names the word and inverts.  The request's own
+  spelling (`grep -v error`) is tried first and costs three runs; the
+  documented `egrep error -v` remains as the fallback for other words.
+* **The last field.**  `cut -f N` cannot express it, because the number of
+  fields varies per line.  The sentence says "last field", so the construction
+  is `awk -F: '{print $NF}'`, with the separator read from the sentence
+  ("colon separated") rather than guessed from the data.
+* **Joining rows.**  "Join every line into a single line separated by commas"
+  changes the number of lines, which nothing in the line grammar could do.
+  `paste -sd ,` is stated by the sentence, and `paste` is admitted through its
+  own usage line before it runs.
+* **The largest number.**  Nothing in the sentence shares a word with sort's
+  description ("write sorted concatenation"), so a keyword search has nothing
+  to go on.  An extremum is an ordering plus one end: `sort -n | tail -n 1`
+  (or `head -n 1` for the smallest), and the ordering is numeric because over
+  3, 10, 7 the lexical order puts 7 last.
+
+### The request's construction, and what a run costs
+
+Trying the sentence's own pipeline first is only sound if it is cheap and
+verified, and if the count of commands is honest:
+
+* The shortcut runs **after memory** (one command is cheaper than three) and
+  **before any keyword search**.  A tool it names still has to be admitted --
+  through its own documentation if it is not already admitted -- so the
+  shortcut skips the search, never admission.
+* `commands_run` is now counted where the process starts, in `Computer`, not by
+  each caller.  Before this, the two runs that prove a remembered skill on its
+  examples were invisible: "recalled in one command" was reporting a number
+  nobody had measured.  It is now three -- one proof per example and one
+  answer -- and the memory test asserts that exact number.
+* Within one request, an identical (command, input) is answered once and
+  replayed: the same command over the same bytes can only have the one answer
+  it already produced, and nothing on the machine changes during a request.
+  The cache is dropped when the request ends.  A second request of the same
+  family now costs 3-4 processes total instead of 6, and nothing is claimed
+  that was not run.
+
 ### Two characters with no spelling
 
 A shell command cannot carry a TAB: a literal one is a control character and
@@ -899,6 +951,11 @@ rather than die mid-loop.
   admitted.
 - Pipeline search is bounded at four stages and a few hundred hypotheses. Deeper
   compositions and stages outside the vocabulary are honest failures.
+- A construction the sentence spells is one hypothesis, so it costs two to four
+  processes; a request whose words share nothing with any tool's documentation
+  is still refused unless the sentence itself spells the construction.  Synonym
+  coverage remains lexical: "flip", "tidy up" and "biggest one" outside the
+  read vocabulary are honest refusals.
 - A shallow exact fit is not the only fit, so the search keeps descending past
   the first one: `wc -l` answers "count the distinct values" on a file that
   happens to have three rows, and stopping there hides the three-stage pipeline
