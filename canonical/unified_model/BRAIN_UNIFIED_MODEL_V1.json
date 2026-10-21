@@ -24397,7 +24397,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6273,
+  "research_index_records": 6274,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24406,7 +24406,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d3362bbc83996d4b67faf6cae1e5272ecd939b14001a6c3ce6529d27cf3c0e38"
+  "value": "da2264242e16260bace81e8687da58ec58e983679c426a396ec981960fb4813e"
  },
  "engines": [
   {
@@ -187533,6 +187533,34 @@
    }
   },
   {
+   "action_id": "CHAINED_PRODUCER_PLAN_CLAUSE_COVERAGE_ATTRIBUTES_STEPS_TO_THE_SENTENCE_V1_20261021_V1",
+   "capability": false,
+   "date": "2026-10-21",
+   "id": "research:canonical/action_intents/CHAINED_PRODUCER_PLAN_CLAUSE_COVERAGE_ATTRIBUTES_STEPS_TO_THE_SENTENCE_V1_20261021_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/CHAINED_PRODUCER_PLAN_CLAUSE_COVERAGE_ATTRIBUTES_STEPS_TO_THE_SENTENCE_V1_20261021_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "200f7293dd03b0f091ae6ae42aa8bd9e115176374647b2c16fe2ee102c2e0412",
+   "status": "",
+   "terms": {
+    "20261021": 1,
+    "attribute_a_chained_producer_plans_steps_back_to_the_sentences_clauses_so_a_compound_goal_whose_real_dependency_order_needs_more_steps_than_it_has_clauses_can_compile_rather_than_refuse": 1,
+    "attributes": 1,
+    "chained": 1,
+    "chained_producer_plan_clause_coverage_attributes_steps_to_the_sentence_v1_20261021_v1": 1,
+    "clause": 1,
+    "compile_compound_goal_starts_effect_providers_empty_and_fills_it_only_from_already_compiled_clauses_so_a_clause_whose_correct_capability_needs_an_upstream_producer_can_only_fall_back_to_a_weaker_one__on_extract_evidence_then_rank_then_bind_the_split_put_enumerate_and_rank_in_the_prefix_and_then_refused_the_third_clause__while_the_chained_pass_scores_30_against_the_grounded_single_pass_19_and_returns_the_complete_enumerate_then_rank_then_extract_then_bind_chain__what_blocked_using_it_was_that_validate_compiled_clause_coverage_demands_exactly_one_part_per_clause_index_and_a_chained_plan_carried_no_clause_metadata_at_all": 1,
+    "coverage": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "plan": 1,
+    "producer": 1,
+    "sentence": 1,
+    "steps": 1,
+    "the_evidence_rank_bind_goal_now_compiles_and_executes_end_to_end_through_a_four_step_chain_enumerate_then_rank_then_extract_then_bind__measured_goals_that_run_to_completion_10_to_11_of_23__compiled_21_to_22_of_23__correct_selection_19_to_20_of_23__all_ten_prior_passers_still_pass": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "CLAUSE_TIE_BROKEN_BY_THE_SENTENCE_AND_SUBGOAL_ABSORBED_BY_PREFIX_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -214935,13 +214963,14 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "37dfb972a76c95e7e8a91ca965cbb37e87aa651b0db82c2b044b9439dd95b494",
+   "sha256": "62cf33d63c2906853bd5852ef0f715b26e807667d8f35ec3424195d5d9e836fc",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
-   "symbol_count": 110,
+   "symbol_count": 111,
    "symbols": [
     "GoalCompilationFailure",
     "_append_producer_parts",
     "_attach_effect_producer_steps",
+    "_attribute_chained_parts_to_clauses",
     "_bind_inputs",
     "_bind_numeric_expression_producers",
     "_bind_producer_inputs",
@@ -214961,8 +214990,7 @@
     "_compile_exact_markdown_pdf_goal",
     "_compile_existing_causal_artifact_assertion",
     "_compile_external_json_knowledge_fetch",
-    "_compile_generic_dataflow_verification_ir",
-    "_compile_generic_group_derive_ir"
+    "_compile_generic_dataflow_verification_ir"
    ],
    "terms": {
     "bind_inputs": 1,

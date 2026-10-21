@@ -137,12 +137,123 @@ class SubgoalAbsorbedByTheCompiledPrefix(unittest.TestCase):
         ))
 
     def test_a_goal_with_no_capability_at_all_still_refuses(self):
-        # Negative control end to end.
-        with self.assertRaises(gc.GoalCompilationFailure):
+        # Negative control end to end, on BOTH shapes the compiler can take.
+        #
+        # This used to pin "Extract evidence from a source, then rank it, then
+        # bind it to a claim." as uncompilable. That premise is now false and
+        # was measured false: the sentence resolves to a four-step producer
+        # chain -- enumerate 400 candidates, rank them, extract objective-
+        # grounded evidence, then attempt the claim binding -- and runs to
+        # completion. Pinning it as impossible would have pinned a capability
+        # the machine demonstrably has.
+        #
+        # The invariant this control actually protects is unchanged: a goal no
+        # capability can serve must still refuse, on the single-clause path and
+        # on the multi-clause path alike. The multi-clause case is the one that
+        # matters now, because the chained fallback only fires where the clause
+        # split has already failed -- so a compound nonsense goal is what proves
+        # that fallback refuses instead of fabricating a selection.
+        with self.assertRaises(gc.GoalCompilationFailure) as single:
+            gc.compile_goal("Teleport the moon into next Tuesday.",
+                            self.reg, self.root)
+        self.assertEqual(
+            single.exception.code,
+            "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+        )
+        with self.assertRaises(gc.GoalCompilationFailure) as compound:
             gc.compile_goal(
-                "Extract evidence from a source, then rank it, then bind it to a claim.",
-                self.reg,self.root,
+                "Fold the alphabet into a paper crane, then whisper to it.",
+                self.reg, self.root,
             )
+        self.assertEqual(
+            compound.exception.code,
+            "GOAL_COMPILATION_SUBGOAL_UNRESOLVED",
+            "a compound goal no capability can serve must still refuse",
+        )
+
+
+class ChainedPlanClauseCoverageTests(unittest.TestCase):
+    """A chained plan may cover a sentence only by accounting for every clause.
+
+    The clause split compiles one capability per clause, so its parts line up
+    1:1 with the clauses. A chained plan resolves the sentence's own dependency
+    order instead, which can need MORE steps than the sentence has clauses --
+    extracting objective-grounded evidence requires ranked candidates first, so
+    "extract, then rank, then bind" needs enumerate -> rank -> extract -> bind,
+    four steps for three clauses.
+
+    The clause ledger is about the sentence being accounted for, not about how
+    many steps execution takes. So each clause must win a DISTINCT step, and a
+    step that answers no clause stays in the execution chain without being
+    claimed as coverage.
+    """
+
+    def setUp(self):
+        self.reg = _registry()
+        self.root = str(REPO_ROOT)
+        self.goal = ("Extract evidence from a source, then rank it, "
+                     "then bind it to a claim.")
+
+    def test_every_clause_wins_a_distinct_capability(self):
+        compiled = gc.compile_goal(self.goal, self.reg, self.root)
+        self.assertTrue(compiled.get("clause_coverage_verified"))
+        parts = compiled.get("compiled_parts") or []
+        self.assertEqual([p["index"] for p in parts], [0, 1, 2])
+        selected = [p["selected_capability"] for p in parts]
+        self.assertEqual(len(set(selected)), 3, "two clauses collapsed onto one step")
+        self.assertEqual(selected, [
+            "source.evidence.extract.objective_grounded.stdlib",
+            "source.objective_relevance.rank.bm25",
+            "evidence.claim_spec.bind.explicit_comparison.stdlib",
+        ])
+
+    def test_a_prerequisite_step_is_not_claimed_as_clause_coverage(self):
+        """NEGATIVE CONTROL on the ledger itself.
+
+        ``source.candidates.enumerate.stdlib`` is a prerequisite the dependency
+        order forced -- no clause asked to enumerate candidates. It must remain
+        in the execution chain, and must NOT appear as a clause's capability.
+        If it did, the ledger would be claiming the sentence asked for something
+        it did not.
+        """
+        compiled = gc.compile_goal(self.goal, self.reg, self.root)
+        claimed = {p["selected_capability"] for p in compiled["compiled_parts"]}
+        self.assertNotIn("source.candidates.enumerate.stdlib", claimed)
+        self.assertIn(
+            "source.candidates.enumerate.stdlib",
+            compiled.get("effect_producer_chain_steps") or [],
+            "the prerequisite must still be in the execution chain",
+        )
+        self.assertEqual(len(compiled["effect_producer_chain_steps"]), 4)
+
+    def test_attribution_refuses_when_a_clause_wins_no_step(self):
+        """NEGATIVE CONTROL: the attribution must be able to say no.
+
+        A clause no step answers means the sentence is not accounted for. The
+        helper must return None so the caller re-raises the split's original
+        reason rather than reporting coverage it does not have.
+        """
+        parts = [
+            {"selected_capability": "pdf.extract.text.pypdf", "inputs": {}},
+        ]
+        self.assertIsNone(gc._attribute_chained_parts_to_clauses(
+            ["read the pdf", "then summarise it"], parts, self.reg,
+        ))
+
+    def test_attribution_refuses_when_two_clauses_want_the_same_step(self):
+        """NEGATIVE CONTROL: one step cannot cover two clauses."""
+        parts = [
+            {"selected_capability": "pdf.extract.text.pypdf", "inputs": {}},
+        ]
+        self.assertIsNone(gc._attribute_chained_parts_to_clauses(
+            ["read the pdf", "extract the pdf text"], parts, self.reg,
+        ))
+
+    def test_attribution_refuses_an_unknown_capability(self):
+        parts = [{"selected_capability": "no.such.capability", "inputs": {}}]
+        self.assertIsNone(gc._attribute_chained_parts_to_clauses(
+            ["do something"], parts, self.reg,
+        ))
 
 
 if __name__=="__main__":
