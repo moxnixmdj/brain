@@ -47,7 +47,9 @@ RULES.
 """
 from __future__ import annotations
 
+import ast
 import hashlib
+import json
 import re
 from pathlib import Path
 
@@ -499,6 +501,120 @@ def render_args(entry, bound):
     return out
 
 
+def _demonstrated_invocation_inputs(entry, root, keys=()):
+    """The values this capability was actually called with, from its own receipt.
+
+    A VERIFIED_BOUND_CAPABILITY is verified by running it, and the run is
+    recorded: `verification.state_path` holds the adapter invocation, and
+    `verification.receipt_path` pins that state by `state_sha256`. So for
+    these capabilities the binder does not have to guess what a slot accepts
+    -- the capability carries a witness, exactly the evidence
+    `filled_from_demonstrated_case` already exists to report. It was simply
+    never read for registry entries, only for forged ones via
+    `_forged_defaults`.
+
+    `python.tests.audit.unittest` is the measured case. Its recorded run is
+    `run({'source_root':'canonical/tests','pattern':'test_*.py',...}, root)`.
+    Without it the goal "Run the unittest corpus and produce a pass rate
+    report." bound `source_root` to `.` by a generic heuristic -- a root under
+    which `test*.py` matches nothing -- left `pattern` missing entirely, and
+    the compile died as GOAL_COMPILATION_AMBIGUOUS on a score-4 tie between
+    two capabilities with no claim on the goal.
+
+    Extraction is `ast.literal_eval` over brace-delimited dict literals only,
+    so nothing is executed and no value is synthesised: an argument mapping
+    that cannot be read literally yields nothing, and the slot stays missing.
+    """
+    state_path = ((entry or {}).get("verification") or {}).get("state_path")
+    if not state_path:
+        return {}
+    path = Path(root) / str(state_path)
+    if not path.is_file():
+        return {}
+    try:
+        record = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    wanted = {str(k) for k in (keys or ())}
+    best: dict = {}
+    best_hits = 0
+    for item in (record.get("history") or []):
+        command = (((item or {}).get("result")) or {}).get("command") or ""
+        if not isinstance(command, str):
+            continue
+        for match in re.finditer(r"\{[^{}]*\}", command):
+            try:
+                value = ast.literal_eval(match.group(0))
+            except Exception:
+                continue
+            if not isinstance(value, dict):
+                continue
+            if not all(isinstance(k, str) for k in value):
+                continue
+            scalars = {
+                k: v for k, v in value.items()
+                if isinstance(v, (str, int, float, bool))
+            }
+            # SELECTED BY PLACEHOLDER COVERAGE, NOT BY SIZE.
+            #
+            # The recorded command holds both the invocation arguments and the
+            # result the adapter returned, and the result is the bigger dict:
+            # `{'files':0,'tests':0,'passed':0,...}` beat the real arguments
+            # `{'source_root':'canonical/tests','pattern':'test_*.py',...}` on
+            # length and silently supplied nothing. A result mapping covers no
+            # placeholder at all, so coverage is the criterion that separates
+            # what was asked from what came back.
+            hits = len(wanted & set(scalars))
+            if hits > best_hits:
+                best, best_hits = scalars, hits
+    return best
+
+
+def _declared_discovery_pattern(cid, entry):
+    """The discovery glob the platform itself declares, or None.
+
+    `pattern`/`glob` is refused by default and stays refused: a glob is a
+    search policy, and inventing one silently decides what the capability
+    looks at, which is worse than leaving the capability unbindable. It is
+    completed only when the capability's declared semantics name a discovery
+    mechanism that PUBLISHES ITS OWN DEFAULT -- and then the value is read
+    from that mechanism at call time rather than written here, so this module
+    never authors a search policy and follows the platform if it ever moves.
+
+    `unittest.TestLoader.discover` declares `pattern='test*.py'`. A capability
+    whose identity, keywords, or adapter declare unittest therefore has an
+    authoritative glob whose source is the interpreter that will run the
+    tests. `python.tests.audit.unittest` was left unbindable on exactly this
+    slot -- this module's own headline example in its docstring -- so it was
+    dropped from both ranking passes, and "Run the unittest corpus and produce
+    a pass rate report." then died as GOAL_COMPILATION_AMBIGUOUS on a score-4
+    tie between `source.candidates.enumerate.stdlib` and
+    `document.convert.markdown_pdf.pandoc_weasyprint`: two capabilities with
+    no claim on the goal outranking the one that owns it at score 6.
+
+    Anything that names no such mechanism returns None and is still refused.
+    That is what keeps the synthetic `python_stub` case refusing: it declares
+    no discovery mechanism, so there is nothing to ask.
+    """
+    blob = " ".join(
+        [str(cid or "").lower()]
+        + [str(k).lower() for k in ((entry or {}).get("keywords") or [])]
+        + [str((entry or {}).get("adapter_module") or "").lower()]
+    )
+    if "unittest" not in blob:
+        return None
+    try:
+        import inspect
+        import unittest
+
+        default = inspect.signature(
+            unittest.TestLoader.discover
+        ).parameters["pattern"].default
+    except Exception:
+        return None
+    return str(default) if isinstance(default, str) and default.strip() else None
+
+
 def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
     """Return a full input mapping for `entry`, or report exactly what is missing.
 
@@ -527,6 +643,7 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
             goal_paths = []
 
     cid = str((entry or {}).get("capability_id") or "")
+    demonstrated = _demonstrated_invocation_inputs(entry, root, keys)
     filled = {}
     missing = []
     from_world = {}
@@ -552,6 +669,19 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
             filled[key] = value
             continue
         if key in bound and str(bound[key]).strip():
+            continue
+        # GOAL > DEMONSTRATED RECEIPT > WORLD HEURISTIC.
+        #
+        # A value this capability was verified with outranks a generic guess
+        # about the world, because it is evidence about THIS capability rather
+        # than about roots in general. It never outranks the goal: `bound` was
+        # settled above, and a slot the goal named is never revisited here.
+        # Measured case: `source_root` was heuristically filled with `.`, under
+        # which `test*.py` matches nothing, while the capability's own recorded
+        # run used `canonical/tests`.
+        if key in demonstrated:
+            filled[key] = demonstrated[key]
+            from_demonstrated[key] = demonstrated[key]
             continue
         value = None
         if low in ("goal", "task", "objective", "query", "question", "text"):
@@ -607,7 +737,12 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
             else:
                 value = None
         elif low in ("pattern", "glob"):
-            value = None
+            # A SEARCH POLICY IS NEVER INVENTED. It is completed only when the
+            # capability names a discovery mechanism that publishes its own
+            # default, and the value is read from that mechanism.
+            value = _declared_discovery_pattern(cid, entry)
+            if value is not None:
+                from_world[key] = value
         if value is None:
             # A CAPABILITY ADMITTED BY EVIDENCE CARRIES ITS EVIDENCE.
             #

@@ -1103,3 +1103,140 @@ class ChainedPlanScoreComparisonTests(unittest.TestCase):
             compiler._plan_score({"compiled_parts": [{"score": 4}, {"score": 9}]}), 9.0
         )
         self.assertEqual(compiler._plan_score({"score": "not-a-number"}), -1)
+
+
+class DemonstratedInvocationBindingTests(unittest.TestCase):
+    """A verified capability carries a witness to what its slots accept.
+
+    `verification.state_path` records the invocation that earned the
+    `VERIFIED_BOUND_CAPABILITY` status, and the receipt pins that state by
+    `state_sha256`. Reading it is not guessing: it is the only evidence about
+    THIS capability that exists. These tests pin the read, the precedence, and
+    the two ways it could silently go wrong.
+    """
+
+    def setUp(self):
+        holder = tempfile.TemporaryDirectory()
+        self.addCleanup(holder.cleanup)
+        self.tmp = pathlib.Path(holder.name)
+
+    def _state(self, commands):
+        path = self.tmp / "STATE.json"
+        path.write_text(
+            json.dumps({"history": [{"result": {"command": c}} for c in commands]}),
+            encoding="utf-8",
+        )
+        return str(path)
+
+    def _entry(self, commands, args, cid="test.receipt.backed",
+               keywords=("widget",), adapter="python_stub"):
+        return {
+            "capability_id": cid,
+            "status": "VERIFIED_BOUND_CAPABILITY",
+            "action_template": {
+                "type": "invoke_capability",
+                "args": args,
+                "expect": {"type": "field_equals", "field": "output_verified",
+                           "value": True},
+            },
+            "provides": ["test.receipt"],
+            "requires": [],
+            "keywords": list(keywords),
+            "platforms": ["linux", "windows", "darwin"],
+            "source": {"type": "stdlib"},
+            "adapter_module": adapter,
+            "verification": {"state_path": self._state(commands)},
+        }
+
+    def test_a_recorded_receipt_supplies_the_slots_the_goal_cannot_state(self):
+        entry = self._entry(
+            ["m.run({'pattern': 'widget_*.py', 'source_root': 'widgets'}, root)"],
+            {"capability_id": "test.receipt.backed",
+             "pattern": "${input.pattern}",
+             "source_root": "${input.source_root}",
+             "output_path": "${input.output_path}"},
+        )
+        out = world_binding.complete_inputs("Audit the widgets.", ROOT, entry)
+        self.assertEqual(out["missing"], [])
+        self.assertEqual(out["inputs"]["pattern"], "widget_*.py")
+        self.assertEqual(out["inputs"]["source_root"], "widgets")
+        # Reported as demonstrated, never as grounded -- the sentence said
+        # neither of these.
+        self.assertEqual(
+            out["filled_from_demonstrated_case"],
+            {"pattern": "widget_*.py", "source_root": "widgets"},
+        )
+
+    def test_a_result_mapping_is_never_read_as_invocation_arguments(self):
+        """The bug this pins: the recorded command holds the RESULT too, and
+        the result is the BIGGER dict, so selecting by size silently supplies
+        `{'files':0,'tests':0,...}` -- six plausible-looking values that fill
+        nothing. Coverage of the capability's own placeholders is what
+        separates what was asked from what came back.
+        """
+        entry = self._entry(
+            ["m.run({'pattern': 'widget_*.py'}, root)",
+             "print({'files': 0, 'tests': 0, 'passed': 0, 'failed': 0, "
+             "'errors': 0, 'skipped': 0})"],
+            {"capability_id": "test.receipt.backed",
+             "pattern": "${input.pattern}"},
+        )
+        demo = world_binding._demonstrated_invocation_inputs(entry, ROOT, ["pattern"])
+        self.assertEqual(demo.get("pattern"), "widget_*.py")
+        self.assertNotIn("files", demo)
+
+    def test_the_goal_outranks_the_demonstrated_receipt(self):
+        """A receipt is evidence about a capability, not authority over the
+        sentence. A slot the goal stated is never revisited."""
+        entry = self._entry(
+            ["m.run({'pattern': 'recorded_*.py'}, root)"],
+            {"capability_id": "test.receipt.backed",
+             "pattern": "${input.pattern}"},
+        )
+
+        class _GoalWins:
+            @staticmethod
+            def _bind_inputs(goal, root, entry, **kwargs):
+                return {"pattern": "stated_*.py"}
+
+        out = world_binding.complete_inputs(
+            "Audit the stated widgets.", ROOT, entry, compiler=_GoalWins
+        )
+        self.assertEqual(out["inputs"]["pattern"], "stated_*.py")
+        self.assertEqual(out["filled_from_demonstrated_case"], {})
+
+    def test_without_a_receipt_or_a_declared_default_a_glob_is_still_refused(self):
+        """The invariant the module docstring states, re-pinned at this level.
+
+        The synthetic capability carries no verification record and names no
+        discovery mechanism, so there is nothing to ask and nothing was ever
+        demonstrated. Inventing a search policy would decide, silently, what
+        the capability looks at.
+        """
+        entry = dict(_synthetic_registry()["test.pattern_only.capability"])
+        entry["capability_id"] = "test.pattern_only.capability"
+        out = world_binding.complete_inputs("Do the zebrafish thing.", ROOT, entry)
+        self.assertIn("pattern", out["missing"])
+
+    def test_the_live_unittest_audit_reads_its_own_recorded_run(self):
+        """End to end on the real entry that motivated this, so the mechanism
+        is pinned against the registry and not only against fixtures."""
+        from canonical.runtime import live_integrated_brain_v1 as lb
+
+        cid = "python.tests.audit.unittest"
+        registry = lb.load_verified_registry()
+        if cid not in registry:
+            self.skipTest(f"{cid} not in registry")
+        entry = dict(registry[cid])
+        entry["capability_id"] = cid
+        out = world_binding.complete_inputs(
+            "Run the unittest corpus and produce a pass rate report.", ROOT,
+            entry, compiler=compiler,
+        )
+        self.assertEqual(out["missing"], [])
+        self.assertEqual(out["inputs"]["source_root"], "canonical/tests")
+        self.assertEqual(out["inputs"]["pattern"], "test_*.py")
+        self.assertEqual(
+            out["filled_from_demonstrated_case"],
+            {"pattern": "test_*.py", "source_root": "canonical/tests"},
+        )
