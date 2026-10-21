@@ -35,7 +35,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::BROWSER_V1_BIND_DID_A_BARE_IMPORT_OF_OSWORLD_V21_BROWSER_CDP_V1_WHICH_RESOLVES_ONLY_WHEN_CANONICAL_RUNTIME_IS_ALREADY_ON_SYS_PATH__TRUE_TODAY_ONLY_AS_A_SIDE_EFFECT_OF_AUTONOMOUS_V1_AND_REGRESSION_SWEEP_V1_PUTTING_IT_THERE__THE_RUNTIMES_OWN_LOADER_GOAL_COMPILER_LOAD_SIBLING_RUNTIME_MODULE_LOADS_BY_FILE_PATH_AND_DOES_NOT_ADD_THE_DIRECTORY__SO_UNDER_THAT_LOADER_BIND_RAISED_MODULENOTFOUNDERROR_AND_EVERY_BROWSER_ENTRY_POINT_BIND_STATE_AND_ACT_FAILED_EVEN_WITH_A_LIVE_CHROMIUM_ON_THE_PORT",
-  "canonical_base_commit": "8e7dda92d30cd1f455257013c7347c7926afd16d",
+  "canonical_base_commit": "efeb5d6407ae404f393c76e3e8fb5d49596ebc02",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -81,7 +81,7 @@
     "canonical/runtime/browser_v1.py available() -- its playwright gate is CORRECT and was left alone: osworld_v21_browser_cdp_v1 imports playwright.sync_api at lines 70 and 126, so the driver genuinely needs it."
   ],
   "recursive_obs": {
-    "canonical_base_commit": "8e7dda92d30cd1f455257013c7347c7926afd16d",
+    "canonical_base_commit": "efeb5d6407ae404f393c76e3e8fb5d49596ebc02",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "WIDENING_WORLD_BINDING_TO_ACCEPT_A_TYPE_INCOMPATIBLE_FILE",
