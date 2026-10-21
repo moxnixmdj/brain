@@ -1,0 +1,99 @@
+name: verify-brain-unified-model-v1
+
+# The compiled model artifact is content-addressed: its digest is a function of
+# the tree it was compiled from. Nothing else in CI checked that, so a stale
+# artifact merged silently -- measured, PR #5931 landed with the verifier at
+# 32/33 because the artifact had been compiled before its own action intent was
+# written, and canonical/action_intents is one of the trees the artifact indexes.
+#
+# This workflow deliberately has NO paths filter. The artifact indexes
+# canonical/runtime, canonical/governance, canonical/verification and
+# canonical/action_intents, and every pull request writes an action intent, so a
+# paths filter would miss exactly the change that invalidates the digest.
+#
+# Every step tees to /tmp and the final step publishes the tail to the pull
+# request on failure. This is not decoration: run-log blobs are not retrievable
+# out of band and check-run annotations carry only "exit code 1", so a red run
+# was previously undiagnosable. A guard whose failure cannot be read cannot be
+# fixed, which is how a stale artifact sat on main unnoticed.
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # test_goal_compiler.py shells out to jq to prove a compiled plan really
+      # does what it claims (4 call sites: L198, L338, L359, L383). Those calls
+      # are load-bearing evidence, not convenience, so they must not skip. The
+      # ubuntu-latest image no longer ships jq, which surfaced as exactly 4
+      # errors -- reproduced locally by hiding jq from PATH:
+      #   FAILED (errors=4) FileNotFoundError: [Errno 2] ... 'jq'
+      # Same convention as live-brain-heartbeat.yml, which already declares jq.
+      - name: Install jq (substrate the goal-compiler tests execute through)
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq jq
+
+      # recompilation_is_byte_identical is the case that catches a stale
+      # artifact, so the verifier alone is the load-bearing step.
+      # `shell: bash` is explicit so pipefail is on and tee cannot mask a
+      # non-zero exit from the command it is teeing.
+      - name: Verify the compiled model artifact
+        shell: bash
+        run: python canonical/runtime/verify_brain_unified_model_v1.py 2>&1 | tee /tmp/verify.log
+
+      - name: Run the unified model test suite
+        shell: bash
+        run: >-
+          python -m unittest -v
+          canonical.tests.test_brain_unified_model_v1
+          canonical.tests.test_goal_compiler
+          canonical.tests.test_goal_compiler_world_binding_v1
+          2>&1 | tee /tmp/tests.log
+
+      - name: Report the goal-compilation benchmark
+        shell: bash
+        run: >-
+          python canonical/runtime/goal_compilation_benchmark_v1.py
+          --json /tmp/bench.json 2>&1 | tee /tmp/bench.log
+
+      - name: Publish failure detail to the pull request
+        if: failure() && github.event_name == 'pull_request'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          {
+            echo '### verify-brain-unified-model-v1 FAILED'
+            echo
+            echo "run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo
+            echo '```'
+            echo '--- environment ---'
+            python -VV 2>&1
+            jq --version 2>&1 || echo 'jq: MISSING'
+            tar --version 2>&1 | head -1 || echo 'tar: MISSING'
+            grep -E '^(PRETTY_NAME|VERSION)=' /etc/os-release 2>/dev/null
+            echo '--- pip freeze ---'
+            python -m pip freeze 2>&1 | head -40
+            echo '--- verify.log (tail) ---'
+            tail -c 10000 /tmp/verify.log 2>/dev/null || echo '(no verify.log)'
+            echo '--- tests.log (tail) ---'
+            tail -c 40000 /tmp/tests.log 2>/dev/null || echo '(no tests.log)'
+            echo '```'
+          } > /tmp/report.md
+          gh pr comment "$PR_NUMBER" --body-file /tmp/report.md

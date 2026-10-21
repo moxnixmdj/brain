@@ -1,7 +1,7 @@
 {
- "artifact_bytes": 8883251,
+ "artifact_bytes": 8887886,
  "artifact_path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
- "artifact_sha256": "d2d25383cd95769635831ed935d0fc42d341c6f15ca22167c12d82af645f4fff",
+ "artifact_sha256": "fc5c4cf78256f7e927097f16f347d84683b755eb7af84a80fa51e8c4fd526f58",
  "authority": "NONE",
  "capability_credit_delta": 0,
  "categories": [
@@ -15,7 +15,7 @@
    "rows": [
     {
      "detail": {
-      "declared": "fb389ce2ca08580b72464a69a563d9f1a0cad68da31c6d0089913d184d06ac75"
+      "declared": "1d2ac92f8611b34ec75c42e7d4bce3a9a7e08e023d32149b6ebbf64a3f9a1a86"
      },
      "name": "digest_recomputes",
      "oracle": "SHA256_RECOMPUTATION",
@@ -23,7 +23,7 @@
     },
     {
      "detail": {
-      "recompiled_digest": "fb389ce2ca08580b72464a69a563d9f1a0cad68da31c6d0089913d184d06ac75"
+      "recompiled_digest": "1d2ac92f8611b34ec75c42e7d4bce3a9a7e08e023d32149b6ebbf64a3f9a1a86"
      },
      "name": "recompilation_is_byte_identical",
      "oracle": "DETERMINISTIC_RECOMPILE",
@@ -68,7 +68,7 @@
     },
     {
      "detail": {
-      "bytes": 8883251
+      "bytes": 8887886
      },
      "name": "artifact_bytes_are_the_model",
      "oracle": "FILE_STAT",
@@ -128,88 +128,88 @@
       "examples": [
        {
         "confident": true,
-        "goal": "convert selected document now temperature report",
-        "target": "document.convert.markdown_pdf.pandoc_weasyprint",
+        "goal": "k6_decision_refinement_compiler_v1 compiler the bytes_characteristic_active_query_task_generator_v10 auto auto",
+        "target": "canonical/runtime/k6_decision_refinement_compiler_v1.py.auto.v1",
         "top": [
-         "document.convert.markdown_pdf.pandoc_weasyprint",
-         "docx.document.create_from_json_record",
-         "chart.raster.axis_title_unit_binding.v1"
+         "canonical/runtime/k6_decision_refinement_compiler_v1.py.auto.v1",
+         "canonical/runtime/bytes_characteristic_active_query_task_generator_v10.py.auto.v1",
+         "canonical/runtime/external_benchmark_dominance_compiler_v1.py.auto.v1"
         ]
        },
        {
         "confident": true,
-        "goal": "seven then auto auto solver substrate",
-        "target": "canonical/runtime/root3_seven_class_one_substrate_policy_v1.py.auto.v1",
+        "goal": "brain now guard extract global authority",
+        "target": "canonical/runtime/global_retrieval_authority_guard_v1.py.auto.v1",
         "top": [
-         "canonical/runtime/root3_seven_class_one_substrate_policy_v1.py.auto.v1",
-         "canonical/runtime/dual_judgment_general_substrate_role_v1.py.auto.v1",
-         "canonical/runtime/livebench_if_single_checker_solver_v1.py.auto.v1"
+         "canonical/runtime/global_retrieval_authority_guard_v1.py.auto.v1",
+         "brain.module.function.invoke",
+         "canonical/runtime/brain_witness_contamination_admissibility_v1.py.auto.v1"
         ]
        },
        {
         "confident": true,
-        "goal": "cell cursorbench v14_synthesis_unsupported_claim_cell_verifier_v1 meta the unsupported",
-        "target": "canonical/runtime/v14_synthesis_unsupported_claim_cell_verifier_v1.py.auto.v1",
+        "goal": "channel binding shared with auto p3_bound_relevance_cegar_loop_v1",
+        "target": "canonical/runtime/shared_channel_dominator_v1.py.auto.v1",
         "top": [
-         "canonical/runtime/v14_synthesis_unsupported_claim_cell_verifier_v1.py.auto.v1",
-         "canonical/runtime/professional_r12_safe_meta_composition_v1.py.auto.v1",
-         "canonical/runtime/cursorbench_constructive_scope_information_nogo_v1.py.auto.v1"
-        ]
-       },
-       {
-        "confident": true,
-        "goal": "auto using terminal relevance auto candidate",
-        "target": "canonical/runtime/verify_terminal_scheduling_v11_candidate_v1.py.auto.v1",
-        "top": [
-         "source.objective_relevance.rank.bm25",
          "canonical/runtime/p3_bound_relevance_cegar_loop_v1.py.auto.v1",
-         "canonical/runtime/p3_bounded_objective_role_relevance_v1.py.auto.v1"
+         "canonical/runtime/shared_channel_dominator_v1.py.auto.v1",
+         "canonical/runtime/livebench_union25_channel_factorization_v1.py.auto.v1"
         ]
        },
        {
         "confident": true,
-        "goal": "prewave_direct_proof_preflight direct leaf with verify auto",
-        "target": "canonical/runtime/prewave_direct_proof_preflight.py.auto.v1",
+        "goal": "admissibility characteristic produce current auto terminal",
+        "target": "canonical/runtime/p1_v5_terminal_scope_admissibility_v1.py.auto.v1",
         "top": [
-         "canonical/runtime/prewave_direct_proof_preflight.py.auto.v1",
-         "canonical/runtime/exact_symbolic_selected_leaf_verifier_v1.py.auto.v1",
-         "canonical/runtime/professional_quality_leaf_binder_v1.py.auto.v1"
+         "canonical/runtime/p1_v5_terminal_scope_admissibility_v1.py.auto.v1",
+         "canonical/runtime/brain_witness_contamination_admissibility_v1.py.auto.v1",
+         "canonical/runtime/bytes_characteristic_active_query_task_generator_v10.py.auto.v1"
         ]
        },
        {
         "confident": true,
-        "goal": "binding livebench_root1_reused_core_selector_v1 generic_units stdlib compare using",
-        "target": "evidence.claim_relation.generic_units.stdlib",
+        "goal": "credit and runtime_cognition_credit_guard_v1 livebench guard role",
+        "target": "canonical/runtime/runtime_cognition_credit_guard_v1.py.auto.v1",
         "top": [
-         "evidence.claim_relation.generic_units.stdlib",
-         "evidence.claim_spec.bind.explicit_comparison.stdlib",
-         "canonical/runtime/livebench_root1_reused_core_selector_v1.py.auto.v1"
+         "canonical/runtime/runtime_cognition_credit_guard_v1.py.auto.v1",
+         "finance.saccr.credit.addon.v1",
+         "canonical/runtime/dual_judgment_general_substrate_role_v1.py.auto.v1"
         ]
        },
        {
         "confident": true,
-        "goal": "checker terminal docx selection produce guard",
-        "target": "canonical/runtime/terminal_selection_kernel_guard.py.auto.v1",
+        "goal": "records verify json observability five now",
+        "target": "xlsx.table.verify_against_json_records",
         "top": [
-         "canonical/runtime/livebench_if_single_checker_solver_v1.py.auto.v1",
-         "canonical/runtime/terminal_selection_kernel_guard.py.auto.v1",
-         "canonical/runtime/p3_source_positive_selection_cell_v1.py.auto.v1"
+         "canonical/runtime/tool_discovery_observability_partition_v2.py.auto.v1",
+         "sqlite.table.verify_against_json_records",
+         "xlsx.table.verify_against_json_records"
         ]
        },
        {
         "confident": true,
-        "goal": "current_projection_consistency_guard_v1 consistency verifier handle post current",
-        "target": "canonical/runtime/current_projection_consistency_guard_v1.py.auto.v1",
+        "goal": "carefully step composition_cross_step_no_bypass_audit_v1 python auto livebench_legacy15_pointwise_optimal_v1",
+        "target": "canonical/runtime/composition_cross_step_no_bypass_audit_v1.py.auto.v1",
         "top": [
-         "canonical/runtime/current_projection_consistency_guard_v1.py.auto.v1",
-         "canonical/runtime/root3_post_synthesis_reconciliation_verifier_v2.py.auto.v1",
-         "canonical/runtime/livebench_post_sacrifice_parametric_reduction_v1.py.auto.v1"
+         "canonical/runtime/composition_cross_step_no_bypass_audit_v1.py.auto.v1",
+         "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py.auto.v1",
+         "canonical/runtime/composition_cross_step_no_bypass_audit_v2.py.auto.v1"
+        ]
+       },
+       {
+        "confident": true,
+        "goal": "policy discovery required composition with synthesis_zero_required_uncertainty_policy_v1",
+        "target": "canonical/runtime/synthesis_zero_required_uncertainty_policy_v1.py.auto.v1",
+        "top": [
+         "canonical/runtime/synthesis_zero_required_uncertainty_policy_v1.py.auto.v1",
+         "canonical/runtime/p3_required_claim_grounded_realization_cell_v1.py.auto.v1",
+         "canonical/runtime/p3_required_claim_grounded_realization_cell_v2.py.auto.v1"
         ]
        }
       ],
       "top1": 218,
-      "top3": 268,
-      "top3_rate": 0.8933
+      "top3": 262,
+      "top3_rate": 0.8733
      },
      "name": "fresh_goals_rank_target_in_top3",
      "oracle": "SYNTHETIC_GENERATOR_ORACLE",
@@ -244,20 +244,10 @@
     {
      "detail": {
       "attempts": 40,
-      "hit_at_1": 37,
-      "hit_at_3": 39,
-      "measured": 77,
-      "misses": [
-       {
-        "expected": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V4.md",
-        "got": [
-         "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
-         "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V8.md",
-         "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V9.md"
-        ],
-        "query": "jit capability_acquisition_engine_law_v5.md invention"
-       }
-      ]
+      "hit_at_1": 38,
+      "hit_at_3": 40,
+      "measured": 78,
+      "misses": []
      },
      "name": "held_out_term_queries_hit_the_source_document",
      "oracle": "TERM_GENERATOR_ORACLE",
@@ -285,16 +275,16 @@
     {
      "detail": {
       "expected": {
-       "class_count": 2,
+       "class_count": 1,
        "distinct_imported_module_count": 3,
        "file_count": 1,
-       "function_count": 2
+       "function_count": 4
       },
       "observed": {
-       "class_count": 2,
+       "class_count": 1,
        "distinct_imported_module_count": 3,
        "file_count": 1,
-       "function_count": 2
+       "function_count": 4
       }
      },
      "name": "python_source_audit_matches_independent_ast_oracle",
@@ -305,9 +295,9 @@
      "detail": {
       "extracted": true,
       "listing": [
-       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_wsy62c6n/manifest.json",
-       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_wsy62c6n/payload/alpha.txt",
-       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_wsy62c6n/payload/beta.txt"
+       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_ve342f6k/manifest.json",
+       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_ve342f6k/payload/alpha.txt",
+       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_ve342f6k/payload/beta.txt"
       ]
      },
      "name": "tar_creation_matches_gnu_tar_oracle",
@@ -329,8 +319,8 @@
        "name",
        "v"
       ],
-      "oracle_rows": 4,
-      "reported_rows": 4
+      "oracle_rows": 6,
+      "reported_rows": 6
      },
      "name": "sqlite_creation_matches_sqlite3_oracle",
      "oracle": "INDEPENDENT",
@@ -338,10 +328,10 @@
     },
     {
      "detail": {
-      "expected_tests": 4,
+      "expected_tests": 3,
       "reported": {
-       "passed_count": 4,
-       "test_count": 4
+       "passed_count": 3,
+       "test_count": 3
       }
      },
      "name": "test_audit_matches_generated_case_count",
@@ -512,11 +502,11 @@
    ]
   }
  ],
- "generated_utc": "2026-10-21T07:12:24Z",
+ "generated_utc": "2026-10-21T08:08:08Z",
  "incremental_spend_usd": 0,
  "independent_verifier": null,
  "independent_verifier_run_reference": null,
- "model_digest": "fb389ce2ca08580b72464a69a563d9f1a0cad68da31c6d0089913d184d06ac75",
+ "model_digest": "1d2ac92f8611b34ec75c42e7d4bce3a9a7e08e023d32149b6ebbf64a3f9a1a86",
  "model_id": "BRAIN-UNIFIED-MODEL-V1",
  "next_independent_step": "A different identity must re-run `python3 canonical/runtime/verify_brain_unified_model_v1.py --seed <the seed above>` on a clean checkout and sign the result. Until then this document is a sandbox measurement with no authority.",
  "non_claims": [
@@ -529,7 +519,7 @@
  "ownership_credit_delta": 0,
  "producer_cognition_model_dependency_count": 0,
  "schema": "PROJECT_BRAIN_UNIFIED_MODEL_V1_VERIFICATION",
- "seed": "540248dc575b2482",
+ "seed": "8bbb74a812d8955f",
  "summary": {
   "capabilities_modelled": 363,
   "cases": 33,
