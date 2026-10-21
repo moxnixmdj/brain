@@ -891,9 +891,191 @@ def _rank_bindable_candidates(
     return _bm25_rerank(goal,ranked)
 
 
+def _collect_effect_result_refs(value, out=None):
+    """Every ``{"$effect_result": {...}}`` reference reachable in a value."""
+    if out is None:
+        out=[]
+    if isinstance(value,dict):
+        ref=value.get("$effect_result")
+        if isinstance(ref,dict):
+            out.append(ref)
+        for item in value.values():
+            _collect_effect_result_refs(item,out)
+    elif isinstance(value,list):
+        for item in value:
+            _collect_effect_result_refs(item,out)
+    return out
+
+
+def _rewrite_effect_result_refs(value, cycle_by_ref):
+    """Point a dangling effect reference at the step that now produces it."""
+    if isinstance(value,dict):
+        ref=value.get("$effect_result")
+        if isinstance(ref,dict):
+            key=(str(ref.get("effect") or ""),str(ref.get("field") or ""))
+            cycle=cycle_by_ref.get(key)
+            if cycle is None:
+                return value
+            return {"$result":{"cycle":cycle,"field":key[1]}}
+        return {k:_rewrite_effect_result_refs(v,cycle_by_ref) for k,v in value.items()}
+    if isinstance(value,list):
+        return [_rewrite_effect_result_refs(v,cycle_by_ref) for v in value]
+    return value
+
+
+def _bind_producer_inputs(goal, root, provider_id, provider_entry,
+                          context_paths=None, future_clauses=None):
+    """Bind a producer, auto-generating output slots a sentence never names.
+
+    ``_bind_inputs`` refuses any ``output_path`` the sentence does not state,
+    which is every sentence: goals describe work, not output filenames. The
+    proposal binder already solves this with its ``auto_path`` binding type, so
+    output-shaped placeholders are masked out here and generated with the same
+    content-addressed convention rather than being demanded of the sentence.
+    Returns None when any NON-output slot cannot be bound, which is the
+    fail-closed case.
+    """
+    template=provider_entry.get("action_template") or {}
+    args=template.get("args") or {}
+    output_keys=[]
+    for key,value in args.items():
+        name=str(value)
+        if not (name.startswith("${input.") and name.endswith("}")):
+            continue
+        slot=name[len("${input."):-1]
+        if slot=="output_path" or slot.startswith("output_"):
+            output_keys.append(slot)
+    masked=dict(provider_entry)
+    masked_args={k:v for k,v in args.items()
+                 if not (isinstance(v,str) and v.startswith("${input.")
+                         and v.endswith("}") and v[len("${input."):-1] in output_keys)}
+    masked["action_template"]={**template,"args":masked_args}
+    try:
+        inputs=_bind_inputs(goal,root,masked,
+                            context_paths=context_paths,
+                            future_clauses=future_clauses)
+    except Exception:
+        return None
+    if inputs is None:
+        return None
+    inputs=dict(inputs)
+    for slot in output_keys:
+        if slot in inputs:
+            continue
+        digest=hashlib.sha256(str(goal).encode("utf-8")).hexdigest()[:16]
+        slug=re.sub(r"[^a-z0-9]+","-",str(provider_id).lower()).strip("-")[:72]
+        suffix=".json" if slot=="output_path" else ""
+        inputs[slot]=(
+            "canonical/astra_runtime/tmp/auto_proposal/"
+            +digest+"_effect-producer_"+slug+"_"+re.sub(r"[^a-z0-9]+","-",slot.lower()).strip("-")[:32]
+            +suffix
+        )
+    return inputs
+
+
+def _attach_effect_producer_steps(
+    result, goal, registry, root, effect_providers,
+    context_paths=None, future_clauses=None
+):
+    """Replace a dangling ``$effect_result`` with a real producer step.
+
+    ``_bind_planned_inputs`` resolves a consumer's ``effect_result`` slot to
+    ``{"$effect_result": {"effect": E, "field": F}}`` and records which
+    capability produces ``E``, but the plan was emitted with the reference
+    still dangling and no step able to satisfy it. The adapter then received a
+    dict where its contract expects a path. Measured on the benchmark:
+    ``EXT_DECISION_VERIFY`` reached ``decision.synthesis.verify.stdlib``
+    carrying that dict verbatim and died with
+    ``DECISION_VERIFIER_INPUT_MISSING``, and both knowledge goals reached
+    ``assess_knowledge_consistency`` the same way.
+
+    A producer is attached only when its own non-output inputs bind from this
+    sentence. A producer that needs a url or a path the goal never states is
+    left exactly as it was, so this cannot turn an honest refusal into a chain
+    whose first step is guaranteed to fail.
+    """
+    refs=_collect_effect_result_refs(result.get("inputs"))
+    if not refs:
+        return result
+    providers=effect_providers or {}
+    cycle_by_ref={}
+    parts=[]
+    actions=[]
+    for ref in refs:
+        effect=str(ref.get("effect") or "").strip()
+        field=str(ref.get("field") or "").strip()
+        if (effect,field) in cycle_by_ref:
+            continue
+        provider=providers.get(effect.lower())
+        if not provider:
+            return result
+        provider_id,provider_entry=provider
+        if not isinstance(provider_entry,dict):
+            return result
+        declared={str(x).strip() for x in provider_entry.get("result_fields") or []
+                  if isinstance(x,str) and x.strip()}
+        if field not in declared:
+            return result
+        producer_inputs=_bind_producer_inputs(
+            goal,root,provider_id,provider_entry,
+            context_paths=context_paths,future_clauses=future_clauses
+        )
+        if producer_inputs is None:
+            return result
+        cycle=len(parts)
+        cycle_by_ref[(effect,field)]=cycle
+        parts.append({
+            "index":cycle,
+            "mode":"EFFECT_PRODUCER",
+            "selected_capability":provider_id,
+            "subgoal":goal,
+            "inputs":producer_inputs,
+            "target_effects":list(provider_entry.get("provides") or []),
+            "score":0,
+        })
+        actions.append({"type":"invoke_capability",
+                        "args":_render_action_args(provider_entry,producer_inputs,provider_id)})
+    consumer_inputs=_rewrite_effect_result_refs(result.get("inputs"),cycle_by_ref)
+    if _collect_effect_result_refs(consumer_inputs):
+        return result
+    consumer_id=result.get("selected_capability")
+    consumer_entry=(registry or {}).get(consumer_id) or {}
+    parts.append({
+        "index":len(parts),
+        "mode":"EFFECT_CONSUMER",
+        "selected_capability":consumer_id,
+        "subgoal":goal,
+        "inputs":consumer_inputs,
+        "target_effects":list(consumer_entry.get("provides") or []),
+        "score":result.get("score"),
+    })
+    actions.append({"type":"invoke_capability",
+                    "args":_render_action_args(consumer_entry,consumer_inputs,consumer_id)})
+    actions.append({"type":"finish","args":{"summary":"EFFECT_PRODUCER_CHAIN_COMPLETE"}})
+    chained=dict(result)
+    chained["inputs"]=consumer_inputs
+    chained["compiled_parts"]=parts
+    chained["controller_actions"]=actions
+    chained["binding_source"]=str(result.get("binding_source") or "")+"+EFFECT_PRODUCER_CHAIN"
+    chained["effect_producer_chain"]=[p["selected_capability"] for p in parts]
+    return chained
+
+
+def _render_action_args(entry, inputs, capability_id):
+    """Render an action_template against bound inputs, as the runtime does."""
+    args={}
+    for key,value in ((entry.get("action_template") or {}).get("args") or {}).items():
+        if isinstance(value,str) and value.startswith("${input.") and value.endswith("}"):
+            args[key]=inputs.get(value[len("${input."):-1])
+        else:
+            args[key]=value
+    args.setdefault("capability_id",capability_id)
+    return args
+
+
 def _compile_single_goal(
     goal, registry, root, context_paths=None, future_clauses=None,
-    proposal_binder=None, effect_providers=None
+    proposal_binder=None, effect_providers=None, attach_producer_steps=False
 ):
     ranked=_rank_bindable_candidates(
         goal,registry,root,
@@ -945,7 +1127,15 @@ def _compile_single_goal(
             "filled_from_companion_not_goal":binding_provenance.get("filled_from_companion_not_goal") or {},
             "filled_from_demonstrated_case":binding_provenance.get("filled_from_demonstrated_case") or {},
         }
-    return result
+    if not attach_producer_steps:
+        # Clause-level compiles are numbered by the compound path, which owns
+        # the $result cycle indices. Attaching a producer step here would
+        # renumber them out from under it.
+        return result
+    return _attach_effect_producer_steps(
+        result,goal,registry,root,effect_providers,
+        context_paths=context_paths,future_clauses=future_clauses,
+    )
 
 
 def _find_status_collection(data, wanted, prefix=()):
@@ -5425,6 +5615,7 @@ def compile_goal(goal, registry, root):
             goal,registry,root,
             proposal_binder=binder,
             effect_providers=providers,
+            attach_producer_steps=True,
         )
     except GoalCompilationFailure:
         chained=None

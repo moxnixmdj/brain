@@ -1940,6 +1940,81 @@
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-PYTHON-TEST-AUDIT-005.json"
       }
     },
+    "source.candidates.enumerate.stdlib": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [],
+      "provides": [
+        "source.candidates.available"
+      ],
+      "result_fields": [
+        "status",
+        "candidate_count",
+        "search_root",
+        "glob",
+        "model_dependency_count",
+        "output_path",
+        "output_verified"
+      ],
+      "keywords": [
+        "source",
+        "candidates",
+        "enumerate",
+        "corpus",
+        "evidence",
+        "files",
+        "discovery",
+        "repository",
+        "rank",
+        "bm25"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "source.candidates.enumerate.stdlib",
+          "search_root": "canonical/runtime",
+          "glob": "**/*.py",
+          "objective": "${input.goal}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "source_candidates_enumerate",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "hashlib",
+          "json",
+          "pathlib"
+        ],
+        "algorithm": "Deterministic sorted directory walk with bounded snippet extraction",
+        "adapter_path": "canonical/runtime/bound_capabilities/source_candidates_enumerate.py"
+      },
+      "limitations": [
+        "Enumerates paths and bounded text snippets only; it does not score, select, or rank. Ranking stays with source.objective_relevance.rank.bm25.",
+        "Lexical corpus only. Emits no semantic, authority, or correctness claim.",
+        "Fails closed with SOURCE_CANDIDATES_NONE_FOUND when the glob matches no file, so an empty corpus can never be mistaken for a ranked result.",
+        "search_root and glob are literal parts of this capability's identity, per capability_selection_retrieval_v1._arg_names; the objective is bound from ${input.goal}, which goal_compiler._bind_inputs fills with the full sentence."
+      ],
+      "verification": {
+        "status": "LOCAL_EXECUTION_AND_TEST_VERIFIED",
+        "independent_public_cross_domain_qualification": false,
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0,
+        "note": "Verified by in-repo execution and the project test suite only. Carries no workflow_run_id because no public runner has re-run it; admitted through the curated bound registry whose gate is status plus zero spend, and is not receipt-backed."
+      }
+    },
     "sqlite.table.create_from_json_records": {
       "action_template": {
         "args": {
@@ -3076,6 +3151,18 @@
         "no_overlap_fail_closed": true,
         "model_dependency_count": 0,
         "incremental_spend_usd": 0
+      },
+      "proposal_bindings": {
+        "input_path": {
+          "type": "effect_result",
+          "effect": "source.candidates.available",
+          "field": "output_path",
+          "container": "scalar"
+        },
+        "output_path": {
+          "type": "auto_path",
+          "suffix": ".json"
+        }
       }
     },
     "source.evidence.extract.objective_grounded.stdlib": {
