@@ -24397,7 +24397,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6267,
+  "research_index_records": 6268,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24406,7 +24406,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8b7b4ef20990237f42753e9e34b45002e6e7252358d8dce6343982f854b0dffd"
+  "value": "bb05e20ca5ee990d5e84a036e9f62c924165a347755f6766cdc23e313b548542"
  },
  "engines": [
   {
@@ -187445,6 +187445,33 @@
     "reuse_the_repositorys_own_bm25_scorer_to_reorder_the_candidates_the_pinned_scorer_already_admitted_rather_than_extending_the_hand_kept_generic_token_denylist_or_writing_a_new_ranker__ordering_only_the_admissible_set_is_proven_identical_with_and_without_the_step": 1,
     "selection": 1,
     "the_front_door_now_separates_capabilities_by_how_distinctive_their_vocabulary_is_rather_than_by_how_much_of_it_they_share_so_a_goal_stops_binding_to_a_decoder_when_it_asked_for_a_generator__compiled_18_of_23_unchanged_correct_selection_13_to_14_wrong_capability_5_to_4_and_the_capability_count_stays_363": 1,
+    "v1": 2
+   }
+  },
+  {
+   "action_id": "BROWSER_CDP_DRIVER_RESOLUTION_INDEPENDENT_OF_SYS_PATH_V1_20261021_V1",
+   "capability": false,
+   "date": "2026-10-21",
+   "id": "research:canonical/action_intents/BROWSER_CDP_DRIVER_RESOLUTION_INDEPENDENT_OF_SYS_PATH_V1_20261021_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/BROWSER_CDP_DRIVER_RESOLUTION_INDEPENDENT_OF_SYS_PATH_V1_20261021_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "f3ad712e370aea5eab1716f58934a6377eb04b36f50aca709c950a9458c28e4a",
+   "status": "",
+   "terms": {
+    "20261021": 1,
+    "browser": 1,
+    "browser_cdp_driver_resolution_independent_of_sys_path_v1_20261021_v1": 1,
+    "browser_v1_bind_did_a_bare_import_of_osworld_v21_browser_cdp_v1_which_resolves_only_when_canonical_runtime_is_already_on_sys_path__true_today_only_as_a_side_effect_of_autonomous_v1_and_regression_sweep_v1_putting_it_there__the_runtimes_own_loader_goal_compiler_load_sibling_runtime_module_loads_by_file_path_and_does_not_add_the_directory__so_under_that_loader_bind_raised_modulenotfounderror_and_every_browser_entry_point_bind_state_and_act_failed_even_with_a_live_chromium_on_the_port": 1,
+    "cdp": 1,
+    "driver": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "independent": 1,
+    "path": 1,
+    "resolution": 1,
+    "resolve_the_cdp_driver_next_to___file___with_the_bare_import_kept_as_the_fallback_for_callers_that_do_have_the_directory_on_their_path__rather_than_adding_canonical_runtime_to_sys_path_as_an_import_side_effect_which_is_how_the_fragility_arose_in_the_first_place": 1,
+    "sys": 1,
+    "the_browser_surface_resolves_its_driver_however_browser_v1_is_loaded__measured_against_a_live_chromium_launched_by_canonical_runtime_browser_launch_v1_sh__available_returned_true_browser_present__navigation_to_pypi_dot_org_and_github_dot_com_over_cdp_returned_titles_and_55_to_240_interactive_elements__benchmark_compiled_19_of_23_unchanged_correct_selection_17_of_23_unchanged_wrong_capability_2_of_23_unchanged__tests_162_to_165": 1,
     "v1": 2
    }
   },
