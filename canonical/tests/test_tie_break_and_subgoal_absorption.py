@@ -34,6 +34,36 @@ def _registry():
     return json.loads(path.read_text(encoding="utf-8"))["capabilities"]
 
 
+def _ambiguous_pair_registry():
+    """Two capabilities no evidence can tell apart -- the honest refusal case.
+
+    Deliberately symmetric: same keywords, same single placeholder, no
+    ``verification`` record and no declared discovery mechanism, so neither
+    the goal, the world, a receipt, nor a platform default can separate them.
+    Built synthetically rather than borrowed from a live goal so the negative
+    control cannot be quietly invalidated by a future registry change.
+    """
+    def entry(cid):
+        return {
+            "status":"VERIFIED_BOUND_CAPABILITY",
+            "action_template":{
+                "type":"invoke_capability",
+                "args":{"capability_id":cid,"output_path":"${input.output_path}"},
+                "expect":{"type":"field_equals","field":"output_verified","value":True},
+            },
+            "provides":["zebrafish.metric"],
+            "requires":[],
+            "keywords":["zebrafish","metric"],
+            "platforms":["linux","windows","darwin"],
+            "source":{"type":"stdlib"},
+            "adapter_module":"python_stub",
+        }
+    return {
+        "zebrafish.metric.alpha":entry("zebrafish.metric.alpha"),
+        "zebrafish.metric.beta":entry("zebrafish.metric.beta"),
+    }
+
+
 class TieBrokenByTheSentenceTheClauseCameFrom(unittest.TestCase):
     def setUp(self):
         type(self).reg=staticmethod(_registry())
@@ -57,15 +87,63 @@ class TieBrokenByTheSentenceTheClauseCameFrom(unittest.TestCase):
         self.assertNotEqual(separated[0],separated[1])
 
     def test_a_genuine_ambiguity_still_refuses(self):
-        # Negative control. This goal ties on two capabilities that are both
-        # wrong and neither wider text nor executability can separate them;
-        # absorbing or guessing here would be a fabricated selection.
+        """Negative control, on a pair that genuinely is indistinguishable.
+
+        This used to use ``Run the unittest corpus and produce a pass rate
+        report.`` That goal was never genuinely ambiguous -- the next test
+        measures why -- so it is replaced here by a synthetic pair built to
+        tie: identical keywords, identical placeholders, no receipt and no
+        declared discovery mechanism to separate them. A tie with no basis to
+        break it must still refuse rather than guess.
+        """
+        reg=_ambiguous_pair_registry()
         with self.assertRaises(gc.GoalCompilationFailure) as ctx:
             gc.compile_goal(
-                "Run the unittest corpus and produce a pass rate report.",
-                self.reg,self.root,
+                "Compute the zebrafish metric and store it.",
+                reg,self.root,
             )
         self.assertEqual(ctx.exception.code,"GOAL_COMPILATION_AMBIGUOUS")
+
+    def test_the_unittest_corpus_goal_was_never_ambiguous(self):
+        """The premise the old negative control rested on, measured and false.
+
+        ``Run the unittest corpus and produce a pass rate report.`` scored
+        ``python.tests.audit.unittest`` at 6 while both competitors scored 4.
+        There was never a tie involving the owner: the owner was DROPPED,
+        because ``pattern`` had no binder at all and world binding filled
+        ``source_root`` with ``.`` -- a root under which ``test*.py`` matches
+        nothing. The refusal was therefore not the compiler declining to
+        guess between two rivals; it was the compiler failing to see the one
+        capability that owned the goal, then tying two that did not.
+
+        Once the capability's own verification record supplies both slots, the
+        owner wins outright on score and the ambiguity disappears. Pinning the
+        scores, not just the outcome, is what keeps this honest: if the owner
+        ever stops outranking its rivals the compile is guessing again.
+        """
+        owner="python.tests.audit.unittest"
+        goal="Run the unittest corpus and produce a pass rate report."
+        rivals=("source.candidates.enumerate.stdlib",
+                "document.convert.markdown_pdf.pandoc_weasyprint")
+        owner_score=gc._score(goal,owner,self.reg[owner])[0]
+        rival_scores=[gc._score(goal,c,self.reg[c])[0] for c in rivals]
+        self.assertGreater(owner_score,max(rival_scores))
+        plan=gc.compile_goal(goal,self.reg,self.root)
+        parts=plan.get("compiled_parts") or [plan]
+        self.assertEqual(parts[0]["selected_capability"],owner)
+        inputs=plan.get("inputs") or {}
+        # Both come from the capability's recorded, receipt-pinned run -- not
+        # from a heuristic, and not authored here.
+        self.assertEqual(inputs.get("pattern"),"test_*.py")
+        self.assertEqual(inputs.get("source_root"),"canonical/tests")
+        # And the plan says so. A value supplied by a receipt must never be
+        # reported as though the sentence had stated it.
+        prov=plan.get("binding_provenance") or {}
+        self.assertEqual(
+            prov.get("filled_from_demonstrated_case"),
+            {"pattern":"test_*.py","source_root":"canonical/tests"},
+        )
+        self.assertEqual(plan.get("binding_source"),"GOAL_STATEMENT+WORLD_BINDING")
 
     def test_the_tiebreaker_never_admits_a_candidate_the_sentence_rejected(self):
         # Negative control on the invariant the ranking documents: an inferred

@@ -24397,7 +24397,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6276,
+  "research_index_records": 6277,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24406,7 +24406,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a89894aa161548d35f6a4c6cc6750012650e0f273d7dab9235b7b57481aab2ff"
+  "value": "ed527bf56267ee5a9f0799738a999cac0aa9b3414962aa7944ab6a654a6bd72d"
  },
  "engines": [
   {
@@ -187663,6 +187663,33 @@
    }
   },
   {
+   "action_id": "DEMONSTRATED_INVOCATION_BINDING_UNLOCKS_THE_LAST_UNCOMPILABLE_GOAL_V1_20261021_V1",
+   "capability": false,
+   "date": "2026-10-21",
+   "id": "research:canonical/action_intents/DEMONSTRATED_INVOCATION_BINDING_UNLOCKS_THE_LAST_UNCOMPILABLE_GOAL_V1_20261021_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/DEMONSTRATED_INVOCATION_BINDING_UNLOCKS_THE_LAST_UNCOMPILABLE_GOAL_V1_20261021_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "36ca2d14dced8d1ed50cd0a446a7f6fb16b5fca59bdd4bd89188a0bf28be901a",
+   "status": "",
+   "terms": {
+    "20261021": 1,
+    "bind_a_slot_from_the_capabilitys_own_receipt_pinned_verification_run_and_from_the_platforms_declared_discovery_default__rather_than_leaving_a_verified_capability_unbindable_so_that_two_capabilities_with_no_claim_on_the_goal_tie_and_kill_the_compile": 1,
+    "binding": 1,
+    "compiled_goes_from_22_of_23_to_23_of_23_and_correct_selection_from_20_of_23_to_21_of_23_on_the_same_23_goals_with_goals_that_run_to_completion_11_of_23_unchanged_semantic_acceptance_9_of_23_unchanged_wrong_capability_2_of_23_unchanged_and_failure_causes_now_empty_was_goal_compilation_ambiguous_1": 1,
+    "demonstrated": 1,
+    "demonstrated_invocation_binding_unlocks_the_last_uncompilable_goal_v1_20261021_v1": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 1,
+    "invocation": 1,
+    "last": 1,
+    "the_last_goal_that_could_not_compile_was_never_ambiguous__python_tests_audit_unittest_scored_6_while_both_tied_candidates_scored_4_and_it_was_simply_dropped_from_both_ranking_passes_because_pattern_had_no_binder_at_all_and_world_binding_filled_source_root_with_a_dot_under_which_the_glob_matches_nothing__the_compiler_then_tied_two_capabilities_with_no_claim_on_the_goal_and_refused": 1,
+    "uncompilable": 1,
+    "unlocks": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "EFFECT_RESULT_PRODUCER_MAP_AS_SECOND_PASS_ON_THE_SINGLE_CLAUSE_PATH_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -259252,11 +259279,13 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/world_binding_v1.py",
-   "sha256": "eb8534be5f88a2cb58a5df3e89e3bae5d58460bcae592c112df87b054ec77cdf",
+   "sha256": "be1071065d00b945242000976c253efe438e4ee172a6215a8a3325be330610a0",
    "summary": "Complete a capability's inputs when the goal does not state all of them.",
-   "symbol_count": 20,
+   "symbol_count": 22,
    "symbols": [
     "_companion_paths",
+    "_declared_discovery_pattern",
+    "_demonstrated_invocation_inputs",
     "_ext_for",
     "_ext_for_placeholder",
     "_first_with_records",
@@ -259284,6 +259313,8 @@
     "companion_paths": 1,
     "complete": 1,
     "complete_inputs": 1,
+    "declared_discovery_pattern": 1,
+    "demonstrated_invocation_inputs": 1,
     "ext_for": 1,
     "ext_for_placeholder": 1,
     "first_with_records": 1,
