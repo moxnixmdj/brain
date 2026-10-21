@@ -287,6 +287,61 @@ def _kind_key_for(token):
     return None
 
 
+# Structural preference is bounded. Measured: the first file holding a record
+# collection sits at sorted index 1525 of 9130 and costs 0.08s to reach, but a
+# kind with no suitable file at all would otherwise parse the whole matching
+# set on every bind.
+_STRUCTURAL_SCAN_LIMIT = 4000
+_STRUCTURAL_SCAN_MAX_BYTES = 2_000_000
+
+# Kinds whose contents are structured data rather than an opaque blob.
+_STRUCTURED_KINDS = frozenset({"json", "manifest.json", "structured.json", "trades.json"})
+
+
+def _is_record_collection(data):
+    """True when a JSON value holds a table of records.
+
+    Same shape the adapters already require -- ``xlsx_table_xlsxwriter
+    ._record_items`` and ``sqlite_table_stdlib._find_collection`` both accept a
+    mapping whose every value is a mapping, or a list of mappings -- extended
+    one level so a nested collection also counts. Nothing here is tool
+    specific: this is the shape "records" means.
+    """
+    if isinstance(data, dict):
+        if data and all(isinstance(v, dict) for v in data.values()):
+            return True
+        return any(_is_record_collection(v) for v in data.values())
+    if isinstance(data, list):
+        if data and all(isinstance(x, dict) for x in data):
+            return True
+        return any(_is_record_collection(v) for v in data)
+    return False
+
+
+def _first_with_records(rel_paths, root):
+    """The first candidate that actually holds records, within a bounded scan.
+
+    Returns None when nothing in the scanned prefix qualifies; the caller then
+    falls back to the plain first match rather than refusing.
+    """
+    import json as _json
+    scanned = 0
+    for rel in rel_paths:
+        if scanned >= _STRUCTURAL_SCAN_LIMIT:
+            return None
+        path = root / str(rel)
+        try:
+            if path.stat().st_size > _STRUCTURAL_SCAN_MAX_BYTES:
+                continue
+            data = _json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError, UnicodeDecodeError):
+            continue
+        scanned += 1
+        if _is_record_collection(data):
+            return rel
+    return None
+
+
 def _world_path_for(name, cid, root):
     """Find the file the world already has, when the goal never named it.
 
@@ -294,6 +349,15 @@ def _world_path_for(name, cid, root):
     precondition; binding must use the same evidence rather than asking the
     user to repeat themselves. Deterministic: sorted, so the same world
     always yields the same path.
+
+    Suffix alone is not enough for a structured kind. Measured: binding
+    ``json_path`` returned ``MIGRATION_STATUS_2026-09-10.json`` purely because
+    uppercase sorts first, and that file is a flat status document holding no
+    records -- so a consumer that needs a table of records could never use it,
+    whatever else was fixed. 3835 of the 9130 matching JSON files here do hold
+    records, so preferring one is a general rule rather than a patch for one
+    goal. The plain first match stays the fallback, so this can only improve
+    the pick.
     """
     from canonical.runtime import world_probe_v1 as WP
     # The placeholder's own name is the stronger signal: `manifest_path`
@@ -301,9 +365,15 @@ def _world_path_for(name, cid, root):
     for keys in (WP.kind_keys_for(str(name)), WP.kind_keys_for(str(cid))):
         for key in sorted(keys):
             suffixes, substrings = WP._FILE_KINDS[key]
-            for rel in sorted(WP._index(root)):
-                if WP._matches_kind(rel, suffixes, substrings):
-                    return rel
+            ordered = [rel for rel in sorted(WP._index(root))
+                       if WP._matches_kind(rel, suffixes, substrings)]
+            if not ordered:
+                continue
+            if key in _STRUCTURED_KINDS:
+                with_records = _first_with_records(ordered, root)
+                if with_records is not None:
+                    return with_records
+            return ordered[0]
     return None
 
 

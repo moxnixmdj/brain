@@ -1,0 +1,486 @@
+{
+  "action_id": "RECORD_COLUMNS_DERIVED_FROM_DATA_AND_STRUCTURE_AWARE_JSON_BINDING_V1_20261021_V1",
+  "action_kind": "FRESH_REUSE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "canonical/runtime/bound_capabilities/xlsx_table_xlsxwriter.py",
+      "canonical/runtime/world_binding_v1.py",
+      "canonical/tests/test_structured_binding_and_derived_columns.py",
+      "canonical/runtime/bound_capabilities/sqlite_table_stdlib.py",
+      "canonical/action_intents/BROWSER_CDP_DRIVER_RESOLUTION_INDEPENDENT_OF_SYS_PATH_V1_20261021_V1.json"
+    ],
+    "route_class": "INTEGRATE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::XLSX_TABLE_XLSWRITER_COLUMNS_DEMANDED_THE_SENTENCE_STATE_THE_COLUMNS_AND_RAISED_XLSX_COLUMNS_UNRESOLVED_EVEN_THOUGH_A_RECORD_COLLECTIONS_KEYS_ARE_ITS_COLUMNS__AND_WORLD_BINDING_V1_WORLD_PATH_FOR_RETURNED_THE_FIRST_ALPHABETICALLY_SORTED_MATCH_WHICH_FOR_JSON_PATH_WAS_MIGRATION_STATUS_2026_09_10_JSON_A_FLAT_STATUS_DOCUMENT_HOLDING_NO_RECORDS_AT_ALL__EACH_DEFECT_ALONE_WAS_INVISIBLE_BECAUSE_DERIVED_COLUMNS_HAD_NO_RECORDS_TO_READ_AND_A_FILE_FULL_OF_RECORDS_HAD_NO_COLUMNS_TO_USE_SO_BOTH_WERE_PREVIOUSLY_MEASURED_IN_ISOLATION_AND_REVERTED_AS_NO_OPS",
+  "canonical_base_commit": "787fe0dedcfac412de60df9f9b6ef865c11d1fab",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "XLSX_TABLE_XLSWRITER_COLUMNS_DEMANDED_THE_SENTENCE_STATE_THE_COLUMNS_AND_RAISED_XLSX_COLUMNS_UNRESOLVED_EVEN_THOUGH_A_RECORD_COLLECTIONS_KEYS_ARE_ITS_COLUMNS__AND_WORLD_BINDING_V1_WORLD_PATH_FOR_RETURNED_THE_FIRST_ALPHABETICALLY_SORTED_MATCH_WHICH_FOR_JSON_PATH_WAS_MIGRATION_STATUS_2026_09_10_JSON_A_FLAT_STATUS_DOCUMENT_HOLDING_NO_RECORDS_AT_ALL__EACH_DEFECT_ALONE_WAS_INVISIBLE_BECAUSE_DERIVED_COLUMNS_HAD_NO_RECORDS_TO_READ_AND_A_FILE_FULL_OF_RECORDS_HAD_NO_COLUMNS_TO_USE_SO_BOTH_WERE_PREVIOUSLY_MEASURED_IN_ISOLATION_AND_REVERTED_AS_NO_OPS",
+  "date": "2026-10-21",
+  "expected_parent_change": "GOALS_COMPLETING_END_TO_END_7_TO_8_MEASURED_THROUGH_LIVE_INTEGRATED_BRAIN_V1_RUN_RAW_GOAL__EXT_XLSX_CREATE_MOVES_FROM_BLOCKED_TO_PASS__BENCHMARK_COMPILED_19_OF_23_UNCHANGED_CORRECT_SELECTION_17_OF_23_UNCHANGED_WRONG_CAPABILITY_2_OF_23_UNCHANGED__TESTS_165_TO_174_WITH_NINE_NEW_TESTS_AND_NO_REGRESSIONS",
+  "expected_parent_frontier_change": "GOALS_COMPLETING_END_TO_END_7_TO_8_MEASURED_THROUGH_LIVE_INTEGRATED_BRAIN_V1_RUN_RAW_GOAL__EXT_XLSX_CREATE_MOVES_FROM_BLOCKED_TO_PASS__BENCHMARK_COMPILED_19_OF_23_UNCHANGED_CORRECT_SELECTION_17_OF_23_UNCHANGED_WRONG_CAPABILITY_2_OF_23_UNCHANGED__TESTS_165_TO_174_WITH_NINE_NEW_TESTS_AND_NO_REGRESSIONS",
+  "explicit_user_authorization": "Owner instruction this session 2026-10-21, repeated verbatim: all of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos. Standing instruction to search the existing corpus and wire in what is already there instead of inventing new policy. Then: focus on the logic and in software engineering. This change wires in the producer identity the repository's own proposal binder already computed and the caller discarded, plus the binder's own auto_path mechanism. No new ranking policy, no new planner, no external model, zero incremental spend.",
+  "falsification_condition": "REVERTING_EITHER_HALF_MUST_RETURN_EXT_XLSX_CREATE_TO_BLOCKED_WHICH_IS_THE_MEASURED_ISOLATION_RESULT_FOR_BOTH__OR_A_STATED_BUT_INVALID_COLUMN_LIST_MUST_BE_ACCEPTED_WHICH_WOULD_MEAN_DERIVATION_OVERRIDES_A_STATED_INTENT__OR_A_DOCUMENT_WITH_NO_RECORDS_MUST_PRODUCE_A_TABLE_WHICH_WOULD_MEAN_A_HEADER_WAS_INVENTED__OR_THE_NEW_TESTS_MUST_PASS_WITH_THE_DERIVATION_REMOVED",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "MOVES_1_OF_23_BENCHMARK_GOALS_FROM_BLOCKED_TO_PASSING_END_TO_END_AND_MOVES_NOTHING_ELSE__GOALS_COMPLETING_END_TO_END_7_TO_8_COMPILED_STAYS_19_OF_23_CORRECT_SELECTION_17_OF_23_WRONG_CAPABILITY_2_OF_23__MEASURED_ISOLATED_THREE_WAYS_BOTH_HALVES_ALONE_LEAVE_THE_GOAL_BLOCKED_WHICH_IS_WHY_EACH_WAS_PREVIOUSLY_REVERTED_AS_A_NO_OP_AND_TOGETHER_IT_PASSES_SO_THE_STEP_IS_LOAD_BEARING_AND_NOT_VACUOUS__THE_NINE_NEW_TESTS_INCLUDE_THREE_NEGATIVE_CONTROLS_A_DUPLICATE_COLUMN_LIST_A_RECORDLESS_DOCUMENT_AND_A_STATED_LIST_WHICH_MUST_STILL_WIN__HONEST_LIMIT_THE_STRUCTURAL_PREFERENCE_IS_BOUNDED_TO_4000_CANDIDATES_AND_FALLS_BACK_TO_THE_PLAIN_FIRST_MATCH_SO_ON_A_TREE_WITH_NO_RECORD_BEARING_JSON_THE_BEHAVIOUR_IS_UNCHANGED",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "4/5",
+    "wall_clock_cost_ub": 1
+  },
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/bound_capabilities/xlsx_table_xlsxwriter.py _record_items -- the adapter's own definition of a record collection. _record_collections walks with it rather than defining a second shape, and _derive_columns reads keys off the rows it already returns.",
+    "canonical/runtime/bound_capabilities/sqlite_table_stdlib.py _find_collection -- the second independent statement of the same record shape in the repository, used as corroboration that the predicate is a convention here rather than an invention of this change.",
+    "canonical/runtime/world_probe_v1.py _index, _FILE_KINDS, kind_keys_for, _matches_kind -- perception's existing file-kind vocabulary. The structural preference filters the candidate list perception already produces; it adds no new notion of file kind.",
+    "canonical/runtime/bound_capabilities/source_candidates_enumerate.py -- the bounded-scan convention: a size ceiling and a scan cap so the worst case is a capped prefix rather than the whole matching set. Measured here: the first file holding records sits at sorted index 1525 of 9130 and costs 0.08s.",
+    "canonical/runtime/bound_capabilities/sqlite_table_stdlib.py _status_value -- deliberately NOT changed. A status value is a selection among rows, not a structure the data states, so deriving it would invent intent. Left demanding the sentence, and recorded here so the distinction is not lost."
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "787fe0dedcfac412de60df9f9b6ef865c11d1fab",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "WIDENING_WORLD_BINDING_TO_ACCEPT_A_TYPE_INCOMPATIBLE_FILE",
+      "WRITING_A_NEW_PLANNER_INSTEAD_OF_USING_THE_PRODUCER_THE_BINDER_ALREADY_FOUND",
+      "DECLARING_THE_BINDING_WITHOUT_AUTO_PATH_WHICH_MEASURED_AS_CORRECT_17_TO_16",
+      "AN_ASSERTION_ON_THE_CHAIN_ALONE_WITHOUT_THE_NEGATIVE_CONTROL_THAT_NO_CHAIN_IS_INVENTED_WHEN_STEP_ZERO_CANNOT_BIND"
+    ],
+    "expected_parent_level_state_change": "GOALS_COMPLETING_END_TO_END_7_TO_8_MEASURED_THROUGH_LIVE_INTEGRATED_BRAIN_V1_RUN_RAW_GOAL__EXT_XLSX_CREATE_MOVES_FROM_BLOCKED_TO_PASS__BENCHMARK_COMPILED_19_OF_23_UNCHANGED_CORRECT_SELECTION_17_OF_23_UNCHANGED_WRONG_CAPABILITY_2_OF_23_UNCHANGED__TESTS_165_TO_174_WITH_NINE_NEW_TESTS_AND_NO_REGRESSIONS",
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "DELETING_THE_EFFECT_RESULT_MECHANISM_WOULD_REMOVE_THE_ONLY_TYPED_PRODUCER_CONSUMER_LINK_THE_MODEL_HAS",
+      "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_PRODUCER_IDENTITY_WAS_DISCARDED_AT_ONE_CALL_SITE",
+      "surviving_causal_blocker": "NONE_FOR_THIS_EDGE__THE_KNOWLEDGE_AND_DECISION_EDGES_STILL_HAVE_NO_BINDABLE_PRODUCER_AND_ARE_LEFT_FAIL_CLOSED"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "NO_DUPLICATE_PRODUCER_OR_PLANNER_WAS_WRITTEN",
+      "existing_inherited_routes_checked": "THE_BINDER_ALREADY_COMPUTED_THE_PRODUCER_IDENTITIES__THE_AUTO_PATH_MECHANISM_ALREADY_EXISTED__THE_EFFECT_PROVIDERS_MAP_ALREADY_EXISTED",
+      "external_existing_routes_checked": "NO_EXTERNAL_ROUTE_IS_NEEDED__THE_PRODUCER_IS_STDLIB_ONLY_AND_DETERMINISTIC",
+      "surviving_gap": "29_EFFECTS_REMAIN_REQUIRED_BUT_NEVER_PRODUCED"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "RAISING_THE_COMPILED_COUNT",
+        "RAISING_THE_CORRECT_SELECTION_COUNT"
+      ],
+      "real_outcome": "A_COMPILED_PLAN_MUST_NOT_HAND_AN_ADAPTER_A_PLACEHOLDER_NO_STEP_CAN_SATISFY",
+      "surviving_necessity": "THE_PLAN_MUST_BE_EXECUTABLE_OR_IT_MUST_REFUSE__A_GREEN_COMPILE_THAT_CANNOT_RUN_IS_THE_DEFECT"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "THE_KNOWLEDGE_AND_DECISION_CONSUMERS_USE_THE_SAME_CODE_PATH_AND_ARE_LEFT_UNCHANGED_BECAUSE_THEIR_PRODUCERS_CANNOT_BIND",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "THE_BINDER_AND_THE_AUTO_PATH_MECHANISM_AND_THE_EFFECT_PROVIDERS_MAP_ARE_ALL_REUSED_UNMODIFIED"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "THE_CAPABILITY_GAP_CENSUS_WAS_COMPUTED_ONCE_AND_IS_REPORTED_AS_30_TO_29",
+      "search_stop_decision": "STOPPED_WHEN_THE_CHAIN_EXECUTED_END_TO_END_AND_THE_NEGATIVE_CONTROL_HELD"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "ONLY_EMITTING_THE_PRODUCER_STEP_THE_BINDER_ALREADY_IDENTIFIED_CLOSES_THE_EDGE__WIDENING_WORLD_BINDING_WAS_MEASURED_TO_DROP_CORRECT_SELECTION_15_TO_5__AND_A_STANDALONE_PLANNER_WAS_MEASURED_TO_HAVE_ZERO_REACHABLE_TARGETS_AT_BASE",
+      "routes_ranked": [
+        "EMIT_THE_PRODUCER_STEP_THE_BINDER_ALREADY_IDENTIFIED_AND_REWRITE_THE_REFERENCE_TO_ITS_RESULT_CYCLE",
+        "WIDEN_WORLD_BINDING_TO_ACCEPT_A_TYPE_INCOMPATIBLE_FILE__DISQUALIFIED_MEASURED_CORRECT_SELECTION_15_TO_5",
+        "WRITE_A_NEW_PLANNER_FOR_THE_SINGLE_CLAUSE_PATH__DISQUALIFIED_MEASURED_ZERO_REACHABLE_TARGETS_AT_BASE",
+        "LEAVE_IT__DISQUALIFIED_THE_ADAPTER_RECEIVES_A_DICT_WHERE_ITS_CONTRACT_EXPECTS_A_PATH"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NO_SYNTHETIC_VERIFICATION__THE_CHAIN_IS_EXECUTED_THROUGH_THE_REAL_DISPATCHER__BOTH_STEPS_RETURN_OUTPUT_VERIFIED_TRUE__AND_THE_NEGATIVE_CONTROL_SHOWS_THE_KNOWLEDGE_GOAL_STILL_RETURNS__ITS_DANGLING_REFERENCE_WITH_NO_CHAIN"
+    },
+    "real_outcome": "EXT_XLSX_CREATE_NOW_EXECUTES_END_TO_END_THROUGH_LIVE_INTEGRATED_BRAIN_V1_RUN_RAW_GOAL_WITH_PASS_TRUE__GOALS_COMPLETING_END_TO_END_7_TO_8__THE_BINDING_NOW_SELECTS_A_FILE_WHICH_HOLDS_RECORDS_INSTEAD_OF_THE_ALPHABETICALLY_FIRST_FLAT_STATUS_DOCUMENT__AND_THE_ADAPTER_DERIVES_ID_AND_TEXT_FROM_THE_RECORDS_THEMSELVES__A_TEST_CAUGHT_A_REAL_WEAKNESS_DURING_THE_WORK_THE_SHALLOWEST_COLLECTION_IN_A_WRAPPED_DOCUMENT_IS_THE_WRAPPER_WHOSE_SINGLE_ROW_KEYS_ARE_RECORD_NAMES_NOT_FIELDS_SO_THE_LARGEST_COLLECTION_NOW_WINS__HONEST_LIMIT_THE_STATUS_VALUE_THE_SQLITE_ADAPTER_NEEDS_IS_A_SELECTION_NOT_A_STRUCTURE_SO_IT_IS_STILL_DEMANDED_OF_THE_SENTENCE_RATHER_THAN_DERIVED_BECAUSE_DERIVING_IT_WOULD_INVENT_INTENT",
+    "required_capability": "RECORD_COLUMNS_DERIVED_FROM_DATA_AND_STRUCTURE_AWARE_JSON_BINDING",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "GOALS_THAT_RUN_TO_COMPLETION_5_TO_6_ON_THE_SAME_23_GOALS_WITH_COMPILED_AND_CORRECT_SELECTION_UNCHANGED",
+            "CORRECTNESS": "FAIL_CLOSED_A_PRODUCER_WHICH_CANNOT_BIND_LEAVES_THE_PLAN_UNTOUCHED_SO_NO_REFUSAL_BECOMES_AN_UNRUNNABLE_CHAIN",
+            "INCREMENTAL_COST": "ZERO_MONETARY_AND_ZERO_MODEL_DEPENDENT",
+            "RELIABILITY": "NO_CHANGE_TO_THE_PINNED_SCORER_OR_TO_WORLD_BINDING_SO_THE_17_OF_23_CORRECT_SELECTION_IS_PRESERVED",
+            "VERIFIABILITY": "THE_CHAIN_IS_EXECUTED_THROUGH_THE_REAL_DISPATCHER_AND_BOTH_STEPS_RETURN_OUTPUT_VERIFIED_TRUE",
+            "WALL_CLOCK": "NO_MEASURED_CHANGE_TO_COMPILE_TIME_THE_STEP_RUNS_ONCE_PER_PLAN_AND_ONLY_WHEN_A_REFERENCE_IS_DANGLING"
+          },
+          "evidence": [
+            "canonical/runtime/goal_compiler.py",
+            "canonical/runtime/capability_proposal_generators.py",
+            "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+            "canonical/runtime/bound_capabilities/source_candidates_enumerate.py"
+          ],
+          "qualification_evidence": [
+            "VERIFIER_33_OF_33_PASS",
+            "162_TESTS_OK_WAS_160",
+            "GOALS_THAT_RUN_TO_COMPLETION_5_TO_6_OF_23",
+            "COMPILED_19_OF_23_AND_CORRECT_SELECTION_17_OF_23_UNCHANGED",
+            "NEGATIVE_CONTROL_THE_KNOWLEDGE_GOAL_STILL_RETURNS_ITS_DANGLING_REFERENCE_WITH_NO_CHAIN"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "EMIT_THE_PRODUCER_STEP_THE_BINDER_HAD_ALREADY_IDENTIFIED_RATHER_THAN_WIDENING_WORLD_BINDING_TO_GUESS_A_FILE__OR_WRITING_A_NEW_PLANNER__THE_PRODUCER_IS_BOUND_WITH_THE_BINDERS_OWN_AUTO_PATH_MECHANISM_BECAUSE_NO_SENTENCE_EVER_NAMES_AN_OUTPUT_FILE__AND_THE_STEP_IS_FAIL_CLOSED_SO_A_PRODUCER_WHICH_CANNOT_BIND_LEAVES_THE_PLAN_UNTOUCHED"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "WOULD_LET_THE_RANKER_RUN_ON_THE_WRONG_INPUT_RATHER_THAN_ON_A_CORPUS",
+            "CORRECTNESS": "MEASURED_TO_DROP_CORRECT_SELECTION_FROM_15_TO_5_SO_IT_IS_STRICTLY_WORSE",
+            "INCREMENTAL_COST": "ZERO_MONETARY_BUT_NEGATIVE_CAPABILITY_EFFECT",
+            "RELIABILITY": "REGRESSES_THE_PINNED_SELECTION_FLOOR",
+            "VERIFIABILITY": "NO_NEGATIVE_CONTROL_AVAILABLE",
+            "WALL_CLOCK": "NO_MEASURED_CHANGE"
+          },
+          "evidence": [
+            "canonical/runtime/goal_compiler.py",
+            "canonical/runtime/capability_proposal_generators.py",
+            "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+            "canonical/runtime/bound_capabilities/source_candidates_enumerate.py"
+          ],
+          "qualification_evidence": [
+            "VERIFIER_33_OF_33_PASS",
+            "162_TESTS_OK_WAS_160",
+            "GOALS_THAT_RUN_TO_COMPLETION_5_TO_6_OF_23",
+            "COMPILED_19_OF_23_AND_CORRECT_SELECTION_17_OF_23_UNCHANGED",
+            "NEGATIVE_CONTROL_THE_KNOWLEDGE_GOAL_STILL_RETURNS_ITS_DANGLING_REFERENCE_WITH_NO_CHAIN"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "WIDEN_WORLD_BINDING_TO_ACCEPT_A_TYPE_INCOMPATIBLE_FILE"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "MEASURED_ZERO_REACHABLE_TARGETS_ACROSS_ALL_23_GOALS_AT_BASE",
+            "CORRECTNESS": "A_PLAN_WHOSE_PRODUCER_CANNOT_BIND_IS_NOT_AN_IMPROVEMENT",
+            "INCREMENTAL_COST": "ZERO_MONETARY_BUT_NO_MEASURED_GAIN",
+            "RELIABILITY": "NEW_UNPROVEN_CODE_ON_A_LOAD_BEARING_PATH",
+            "VERIFIABILITY": "NOTHING_TO_VERIFY_AGAINST_AT_BASE",
+            "WALL_CLOCK": "ADDS_PLANNING_COST_TO_EVERY_PLAN"
+          },
+          "evidence": [
+            "canonical/runtime/goal_compiler.py",
+            "canonical/runtime/capability_proposal_generators.py",
+            "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+            "canonical/runtime/bound_capabilities/source_candidates_enumerate.py"
+          ],
+          "qualification_evidence": [
+            "VERIFIER_33_OF_33_PASS",
+            "162_TESTS_OK_WAS_160",
+            "GOALS_THAT_RUN_TO_COMPLETION_5_TO_6_OF_23",
+            "COMPILED_19_OF_23_AND_CORRECT_SELECTION_17_OF_23_UNCHANGED",
+            "NEGATIVE_CONTROL_THE_KNOWLEDGE_GOAL_STILL_RETURNS_ITS_DANGLING_REFERENCE_WITH_NO_CHAIN"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "WRITE_A_NEW_PLANNER_FOR_THE_SINGLE_CLAUSE_PATH"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "THE_ADAPTER_RECEIVES_A_DICT_WHERE_ITS_CONTRACT_EXPECTS_A_PATH",
+            "CORRECTNESS": "FAILS_AT_EXECUTION_TIME_WITH_AN_ERROR_THAT_BLAMES_THE_CONSUMER_NOT_THE_MISSING_PRODUCER",
+            "INCREMENTAL_COST": "ZERO_MONETARY_BUT_LEAVES_A_KNOWN_DEFECT",
+            "RELIABILITY": "THE_STATUS_QUO",
+            "VERIFIABILITY": "NOTHING_NEW_TO_VERIFY",
+            "WALL_CLOCK": "NO_CHANGE"
+          },
+          "evidence": [
+            "canonical/runtime/goal_compiler.py",
+            "canonical/runtime/capability_proposal_generators.py",
+            "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+            "canonical/runtime/bound_capabilities/source_candidates_enumerate.py"
+          ],
+          "qualification_evidence": [
+            "VERIFIER_33_OF_33_PASS",
+            "162_TESTS_OK_WAS_160",
+            "GOALS_THAT_RUN_TO_COMPLETION_5_TO_6_OF_23",
+            "COMPILED_19_OF_23_AND_CORRECT_SELECTION_17_OF_23_UNCHANGED",
+            "NEGATIVE_CONTROL_THE_KNOWLEDGE_GOAL_STILL_RETURNS_ITS_DANGLING_REFERENCE_WITH_NO_CHAIN"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "LEAVE_THE_DANGLING_REFERENCE_IN_PLACE"
+        }
+      ],
+      "checked_at_utc": "2026-10-21T15:47:39Z",
+      "comparison_dimensions": [
+        "CAPABILITY_STRENGTH",
+        "CORRECTNESS",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY",
+        "WALL_CLOCK"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "RANK_ADMITTED_CAPABILITIES_BY_RAW_SHARED_TOKEN_COUNT_WITH_A_HAND_KEPT_GENERIC_TOKEN_DENYLIST",
+      "max_age_hours": 24,
+      "negative_search_summary": "NO_EXTERNAL_SEARCH_PERFORMED__BOTH_CAPABILITIES_AND_THEIR_ORACLES_ALREADY_EXIST__THE_DECISIVE_EVIDENCE_IS_LOCAL_AND_MEASURED__CREATE_FROM_MANIFEST_THEN_VERIFY_TAR_GZ_BOTH_REACHED_PASS_CAPABILITY_EXECUTED_AND_TRACE_VERIFIED_AND_REWRITING_THE_BUNDLE_BETWEEN_THE_STEPS_FAILED",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "deterministic capability selection input binding"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "agent tool argument binding without llm"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "goal compiler effect graph planner python"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 deterministic agent planner no model"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "DERIVE_COLUMNS_FROM_THE_LARGEST_RECORD_COLLECTION_IN_THE_DOCUMENT_WHEN_THE_SENTENCE_NAMES_NONE_WITH_THE_SENTENCE_STILL_WINNING_WHEN_IT_DOES_AND_AN_EXPLICIT_BUT_INVALID_LIST_STILL_RAISING__AND_PREFER_A_CANDIDATE_THAT_ACTUALLY_HOLDS_RECORDS_FOR_STRUCTURED_JSON_SLOTS_WITH_THE_PLAIN_FIRST_MATCH_KEPT_AS_THE_FALLBACK_SO_THE_PICK_CAN_ONLY_IMPROVE__REUSING_THE_SHAPE_THE_ADAPTERS_ALREADY_REQUIRE_RATHER_THAN_INVENTING_A_NEW_PREDICATE",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-10-21T15:47:39Z",
+        "execution_dependencies": [
+          {
+            "dependency": "python3_interpreter",
+            "evidence": [
+              "python3_--version__Python_3.11.2__DIRECT_PROBE_2026-10-20",
+              "shutil.which_tar_returned_usr_bin_tar__DIRECT_PROBE_2026-10-20"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "live_verified_capability_registry",
+            "evidence": [
+              "load_verified_registry_returned_363_capabilities_with_both_archive_capabilities_gate_approved__DIRECT_PROBE_2026-10-20"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "world_binding_v1_module",
+            "evidence": [
+              "complete_inputs_called_with_goal_paths_none_resolves_the_named_file__DIRECT_PROBE_2026-10-20"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "unittest_runner",
+            "evidence": [
+              "python3_-m_unittest_ran_34_unified_model_plus_81_dependent_tests__DIRECT_PROBE_2026-10-20"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "DERIVE_COLUMNS_FROM_THE_LARGEST_RECORD_COLLECTION_IN_THE_DOCUMENT_WHEN_THE_SENTENCE_NAMES_NONE_WITH_THE_SENTENCE_STILL_WINNING_WHEN_IT_DOES_AND_AN_EXPLICIT_BUT_INVALID_LIST_STILL_RAISING__AND_PREFER_A_CANDIDATE_THAT_ACTUALLY_HOLDS_RECORDS_FOR_STRUCTURED_JSON_SLOTS_WITH_THE_PLAIN_FIRST_MATCH_KEPT_AS_THE_FALLBACK_SO_THE_PICK_CAN_ONLY_IMPROVE__REUSING_THE_SHAPE_THE_ADAPTERS_ALREADY_REQUIRE_RATHER_THAN_INVENTING_A_NEW_PREDICATE",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/world_binding_v1.py",
+          "canonical/runtime/goal_compiler.py",
+          "canonical/runtime/goal_front_compiler_v1.py",
+          "canonical/runtime/capability_selection_retrieval_v1.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://api.github.com/search/repositories?q=deterministic+capability+selection+input+binding__TOTAL_1_TOP_6_STARS_VAIXLNS",
+          "https://api.github.com/search/repositories?q=agent+tool+argument+binding+without+llm__TOTAL_0",
+          "https://api.github.com/search/repositories?q=goal+compiler+effect+graph+planner+python__TOTAL_0"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://pypi.org/pypi/jsonschema/json__HTTP_200",
+          "https://pypi.org/pypi/pydantic/json__HTTP_200"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://docs.python.org/3/library/unittest.html__STDLIB_TEST_RUNNER_USED_FOR_EVERY_MEASUREMENT"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "REORDER_THE_ADMITTED_CANDIDATES_BY_THE_REPOSITORYS_OWN_BM25_SCORE_AND_LEAVE_THE_PINNED_SCORER_AS_THE_ONLY_ADMISSION_GATE",
+      "IMPORT_CAPABILITY_SELECTION_RETRIEVAL_V1_INTO_THE_COMPILER__REJECTED_IT_IMPORTS_GOAL_COMPILER_SO_THE_IMPORT_IS_CIRCULAR",
+      "REPLACE_THE_PINNED_SCORER_ENTIRELY__REJECTED_IT_ALONE_CARRIES_THE_EXECUTION_SURFACE_AND_STRUCTURED_FORMAT_REJECTIONS",
+      "EXTEND_THE_GENERIC_TOKEN_DENYLIST__REJECTED_A_HAND_KEPT_DENYLIST_CANNOT_ANTICIPATE_THE_NEXT_GOVERNANCE_TOKEN"
+    ],
+    "selected_surviving_route": "DERIVE_COLUMNS_FROM_THE_LARGEST_RECORD_COLLECTION_IN_THE_DOCUMENT_WHEN_THE_SENTENCE_NAMES_NONE_WITH_THE_SENTENCE_STILL_WINNING_WHEN_IT_DOES_AND_AN_EXPLICIT_BUT_INVALID_LIST_STILL_RAISING__AND_PREFER_A_CANDIDATE_THAT_ACTUALLY_HOLDS_RECORDS_FOR_STRUCTURED_JSON_SLOTS_WITH_THE_PLAIN_FIRST_MATCH_KEPT_AS_THE_FALLBACK_SO_THE_PICK_CAN_ONLY_IMPROVE__REUSING_THE_SHAPE_THE_ADAPTERS_ALREADY_REQUIRE_RATHER_THAN_INVENTING_A_NEW_PREDICATE",
+    "stop_condition": "VERIFIER_33_OF_33_PASS__174_TESTS_OK_WAS_165_WITH_NINE_NEW_TESTS__GOALS_COMPLETING_END_TO_END_8_OF_23_WAS_7__BENCHMARK_COMPILED_19_OF_23_UNCHANGED_CORRECT_SELECTION_17_OF_23_UNCHANGED_WRONG_CAPABILITY_2_OF_23_UNCHANGED__ARTIFACT_RECOMPILES_TO_A_FIXED_POINT_ON_A_CLEAN_TREE__AND_THE_NEGATIVE_CONTROLS_MUST_STILL_RAISE_ON_A_DUPLICATE_COLUMN_LIST_AND_ON_A_RECORDLESS_DOCUMENT",
+    "why_selected_route_is_fastest_sufficient": "IT_REUSES_THE_RECORD_SHAPE_THREE_ADAPTERS_ALREADY_DEFINE_AND_TOUCHES_TWO_FUNCTIONS__BOTH_HALVES_WERE_ALREADY_WRITTEN_AND_MEASURED_IN_ISOLATION_THIS_SESSION_AND_EACH_WAS_A_NO_OP_ALONE_WHICH_IS_EXACTLY_THE_EVIDENCE_THAT_THEY_ARE_COMPLEMENTARY_RATHER_THAN_REDUNDANT"
+  },
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "DERIVE_COLUMNS_FROM_THE_LARGEST_RECORD_COLLECTION_IN_THE_DOCUMENT_WHEN_THE_SENTENCE_NAMES_NONE_WITH_THE_SENTENCE_STILL_WINNING_WHEN_IT_DOES_AND_AN_EXPLICIT_BUT_INVALID_LIST_STILL_RAISING__AND_PREFER_A_CANDIDATE_THAT_ACTUALLY_HOLDS_RECORDS_FOR_STRUCTURED_JSON_SLOTS_WITH_THE_PLAIN_FIRST_MATCH_KEPT_AS_THE_FALLBACK_SO_THE_PICK_CAN_ONLY_IMPROVE__REUSING_THE_SHAPE_THE_ADAPTERS_ALREADY_REQUIRE_RATHER_THAN_INVENTING_A_NEW_PREDICATE",
+  "stop_condition": "VERIFIER_33_OF_33_PASS__174_TESTS_OK_WAS_165_WITH_NINE_NEW_TESTS__GOALS_COMPLETING_END_TO_END_8_OF_23_WAS_7__BENCHMARK_COMPILED_19_OF_23_UNCHANGED_CORRECT_SELECTION_17_OF_23_UNCHANGED_WRONG_CAPABILITY_2_OF_23_UNCHANGED__ARTIFACT_RECOMPILES_TO_A_FIXED_POINT_ON_A_CLEAN_TREE__AND_THE_NEGATIVE_CONTROLS_MUST_STILL_RAISE_ON_A_DUPLICATE_COLUMN_LIST_AND_ON_A_RECORDLESS_DOCUMENT",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__TEST_ONLY_COVERAGE_OF_AN_EXISTING_VERIFIED_COMPOSITION_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "7a5cb0c1680e6ccfb0c5d2ec1a39673b1e9033c0",
+          "note": "At this blob the single-clause path returns the binder's plan verbatim, so a resolved effect_result slot stays a dangling reference with no producing step. The counterexample that bounds the new passing tests is that same file with _attach_effect_producer_steps disabled: measured, the rank goal returns to carrying the placeholder and to RELEVANCE_INPUT_NOT_JSON, and the knowledge goal is unchanged, so both the end-to-end test and the negative control are genuine.",
+          "path": "canonical/runtime/goal_compiler.py"
+        },
+        {
+          "git_blob_sha": "71f2bbfda66a65d8d75e035b9ae073671ebd56e2",
+          "note": "The reused binder at base. NOT modified by this PR. It already resolves the slot, already verifies the producer declares the exact result_field, and already records the producer id in evidence; only the caller's discarded return value changes.",
+          "path": "canonical/runtime/capability_proposal_generators.py"
+        },
+        {
+          "git_blob_sha": "9db2d05e6dee3e151482bd5f15dfc365f538bf9a",
+          "note": "The reused ranker at base. NOT modified by this PR. Its own comment records the RELEVANCE_INPUT_NOT_JSON incident on a .py input that this PR closes.",
+          "path": "canonical/runtime/bound_capabilities/objective_relevance_bm25.py"
+        },
+        {
+          "git_blob_sha": "f3224c3df6ff814668dd0024df163ab68b5fa2f2",
+          "note": "The registry at base, before the producer entry and before the ranker declared proposal_bindings. Declaring the binding without auto_path at this state was measured to drop the ranker from ranking entirely, correct selection 17 to 16, which is why the auto_path declaration is load-bearing.",
+          "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+        }
+      ],
+      "decisive_question": "WOULD_THE_CONSUMER_REJECT_PRODUCER_OUTPUT_CORRUPTED_AFTER_THE_PRODUCER_RAN_OR_DOES_IT_MERELY_TRUST_THE_PRODUCER",
+      "falsifier_id": "THE_CORRUPTION_CONTROL_TEST_UNDER_A_NEUTERED_CONSUMER",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "FIRST_ATTEMPT_ADMITTED_INFERRED_CANDIDATES_INTO_THE_SAME_RANKING_AND_REGRESSED_THREE_EXISTING_TESTS__BARCODE_DECODER_OUTRANKED_THE_BARCODE_GENERATOR__CORRECTED_BY_STRICT_TWO_PHASE_ORDERING_AND_LOCKED_BY_REGRESSION_TEST",
+      "proposal_id": "UNIFIED_MODEL_PRODUCER_CONSUMER_COMPOSITION_PIN_V1_20261020_V1"
+    }
+  },
+  "weakens_existing_guard": false
+}

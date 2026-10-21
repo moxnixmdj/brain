@@ -114,12 +114,74 @@ def _select_collection(data,columns):
         raise RuntimeError("XLSX_RECORD_COLLECTION_AMBIGUOUS:"+json.dumps([list(p) for p,_ in best]))
     return best[0]
 
+def _record_collections(node,path=()):
+    """Every record collection in the document, shallowest first."""
+    out=[]
+    items=_record_items(node)
+    if items:
+        out.append((path,items))
+    if isinstance(node,dict):
+        for k,v in sorted(node.items(),key=lambda kv:str(kv[0])):
+            out.extend(_record_collections(v,path+(str(k),)))
+    elif isinstance(node,list):
+        for i,v in enumerate(node):
+            out.extend(_record_collections(v,path+(str(i),)))
+    return out
+
+
+def _derive_columns(node):
+    """Columns read off the records themselves, when the sentence names none.
+
+    A record collection's keys ARE its columns. Demanding them from the sentence
+    as well meant "Create an xlsx table from JSON records." could never run: the
+    data states its own columns, and nothing about the task needed a human to
+    restate them.
+
+    The largest table in the document wins, because the shallowest match is
+    often a wrapper: ``{"rows": {"a": {...}, "b": {...}}}`` is itself a
+    one-record collection whose single "row" has the keys ``a`` and ``b``,
+    which are record names, not fields. Row count separates a wrapper from the
+    table it wraps. Ties break on the sorted path, so this stays deterministic.
+
+    Returns [] when the document holds no records, so the caller still fails
+    closed rather than emitting an empty or invented header row.
+    """
+    best=None
+    for path,items in _record_collections(node):
+        if best is None or len(items)>len(best[1]) or (
+                len(items)==len(best[1]) and path<best[0]):
+            best=(path,items)
+    if best is None:
+        return []
+    return sorted({str(k) for _i,row in best[1] for k in row.keys()})
+
+
+def _columns_stated_or_derived(goal,data):
+    """The sentence wins when it states columns; the data fills the gap.
+
+    Only ``XLSX_COLUMNS_UNRESOLVED`` is recoverable -- an explicit but invalid
+    column list (duplicates, too many) is the caller's error and must still
+    raise, so this cannot quietly override a stated intent.
+    """
+    try:
+        return _columns(goal)
+    except RuntimeError as exc:
+        if str(exc)!="XLSX_COLUMNS_UNRESOLVED":
+            raise
+    derived=_derive_columns(data)
+    if not derived:
+        raise RuntimeError("XLSX_COLUMNS_UNRESOLVED")
+    if len(derived)>64:
+        raise RuntimeError("XLSX_COLUMNS_INVALID")
+    return derived
+
+
 def run(args,root):
     source=_safe(root,args.get("json_path"),require_file=True)
     output=_safe(root,args.get("output_path"))
     data=json.loads(source.read_text(encoding="utf-8"))
     goal=str(args.get("goal") or "")
-    cols=_columns(goal)
+    cols=_columns_stated_or_derived(goal,data)
     collection_path,records=_select_collection(data,cols)
     rows=[]
     for key,record in _record_items(records) or []:
