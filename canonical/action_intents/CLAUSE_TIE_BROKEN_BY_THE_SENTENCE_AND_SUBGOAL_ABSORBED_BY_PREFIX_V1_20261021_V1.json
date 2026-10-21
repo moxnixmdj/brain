@@ -81,7 +81,7 @@
     "canonical/runtime/bound_capabilities/sqlite_table_stdlib.py _status_value -- deliberately NOT changed. A status value is a selection among rows, not a structure the data states, so deriving it would invent intent. Left demanding the sentence, and recorded here so the distinction is not lost."
   ],
   "recursive_obs": {
-    "canonical_base_commit": "787fe0dedcfac412de60df9f9b6ef865c11d1fab",
+    "canonical_base_commit": "685ba58dc6ee82d6ea1912d3604e2aece742e2e4",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "WIDENING_WORLD_BINDING_TO_ACCEPT_A_TYPE_INCOMPATIBLE_FILE",
@@ -150,31 +150,31 @@
       "challenger_routes": [
         {
           "comparison": {
-            "CAPABILITY_STRENGTH": "GOALS_THAT_RUN_TO_COMPLETION_5_TO_6_ON_THE_SAME_23_GOALS_WITH_COMPILED_AND_CORRECT_SELECTION_UNCHANGED",
-            "CORRECTNESS": "FAIL_CLOSED_A_PRODUCER_WHICH_CANNOT_BIND_LEAVES_THE_PLAN_UNTOUCHED_SO_NO_REFUSAL_BECOMES_AN_UNRUNNABLE_CHAIN",
-            "INCREMENTAL_COST": "ZERO_MONETARY_AND_ZERO_MODEL_DEPENDENT",
-            "RELIABILITY": "NO_CHANGE_TO_THE_PINNED_SCORER_OR_TO_WORLD_BINDING_SO_THE_17_OF_23_CORRECT_SELECTION_IS_PRESERVED",
-            "VERIFIABILITY": "THE_CHAIN_IS_EXECUTED_THROUGH_THE_REAL_DISPATCHER_AND_BOTH_STEPS_RETURN_OUTPUT_VERIFIED_TRUE",
-            "WALL_CLOCK": "NO_MEASURED_CHANGE_TO_COMPILE_TIME_THE_STEP_RUNS_ONCE_PER_PLAN_AND_ONLY_WHEN_A_REFERENCE_IS_DANGLING"
+            "CAPABILITY_STRENGTH": "GOALS_THAT_RUN_TO_COMPLETION_7_TO_8_OF_23_AND_COMPILED_19_TO_20_OF_23_ON_THE_SAME_23_GOALS",
+            "CORRECTNESS": "FAIL_CLOSED_THE_TIEBREAKER_ONLY_REORDERS_CANDIDATES_THE_GROUNDED_PASS_ALREADY_TIED_ON_AND_ABSORPTION_FIRES_ONLY_WHEN_NOTHING_MATCHED_AND_EVERY_CONTENT_WORD_IS_ALREADY_IN_THE_PREFIX_IDENTITY",
+            "INCREMENTAL_COST": "ZERO_NEW_DEPENDENCIES_ZERO_NEW_FILES_IN_THE_RUNTIME_ONE_HELPER_AND_ONE_PREDICATE_IN_GOAL_COMPILER",
+            "RELIABILITY": "DETERMINISTIC_LEXICAL_CONTAINMENT_AND_THE_EXISTING_SCORE_FUNCTION_NO_SAMPLING_NO_RANDOMNESS",
+            "VERIFIABILITY": "10_NEW_TESTS_WITH_5_NEGATIVE_CONTROLS_PLUS_THE_PROJECTS_OWN_BENCHMARK_RUNNER_AND_THE_33_CHECK_VERIFIER",
+            "WALL_CLOCK": "SUB_SECOND_THE_WIDER_TEXT_IS_ALREADY_HELD_BY_THE_CALLER_AND_RESCORING_TOUCHES_ONLY_THE_TIED_SET"
           },
           "evidence": [
             "canonical/runtime/goal_compiler.py",
-            "canonical/runtime/capability_proposal_generators.py",
-            "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
-            "canonical/runtime/bound_capabilities/source_candidates_enumerate.py"
+            "canonical/runtime/goal_compilation_benchmark_v1.py",
+            "canonical/tests/test_tie_break_and_subgoal_absorption.py"
           ],
           "qualification_evidence": [
             "VERIFIER_33_OF_33_PASS",
-            "162_TESTS_OK_WAS_160",
-            "GOALS_THAT_RUN_TO_COMPLETION_5_TO_6_OF_23",
-            "COMPILED_19_OF_23_AND_CORRECT_SELECTION_17_OF_23_UNCHANGED",
-            "NEGATIVE_CONTROL_THE_KNOWLEDGE_GOAL_STILL_RETURNS_ITS_DANGLING_REFERENCE_WITH_NO_CHAIN"
+            "210_TESTS_RAN_WITH_3_PRE_EXISTING_FAILURES_AND_3_SKIPS",
+            "GOALS_THAT_RUN_TO_COMPLETION_7_TO_8_OF_23_MEASURED_WITH_NO_OPTIONAL_SUBSTRATE_INSTALLED",
+            "COMPILED_19_TO_20_OF_23",
+            "CORRECT_SELECTION_17_TO_18_OF_23",
+            "WRONG_CAPABILITY_UNCHANGED_AT_2"
           ],
           "qualification_evidence_classes": [
             "DIRECT_PROBE"
           ],
           "resolution": "SELECTED",
-          "route": "EMIT_THE_PRODUCER_STEP_THE_BINDER_HAD_ALREADY_IDENTIFIED_RATHER_THAN_WIDENING_WORLD_BINDING_TO_GUESS_A_FILE__OR_WRITING_A_NEW_PLANNER__THE_PRODUCER_IS_BOUND_WITH_THE_BINDERS_OWN_AUTO_PATH_MECHANISM_BECAUSE_NO_SENTENCE_EVER_NAMES_AN_OUTPUT_FILE__AND_THE_STEP_IS_FAIL_CLOSED_SO_A_PRODUCER_WHICH_CANNOT_BIND_LEAVES_THE_PLAN_UNTOUCHED"
+          "route": "CLAUSE_TIE_BROKEN_BY_WIDER_SENTENCE_THEN_SUBGOAL_ABSORBED_BY_COMPILED_PREFIX"
         },
         {
           "comparison": {
@@ -187,16 +187,16 @@
           },
           "evidence": [
             "canonical/runtime/goal_compiler.py",
-            "canonical/runtime/capability_proposal_generators.py",
-            "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
-            "canonical/runtime/bound_capabilities/source_candidates_enumerate.py"
+            "canonical/runtime/goal_compilation_benchmark_v1.py",
+            "canonical/tests/test_tie_break_and_subgoal_absorption.py"
           ],
           "qualification_evidence": [
             "VERIFIER_33_OF_33_PASS",
-            "162_TESTS_OK_WAS_160",
-            "GOALS_THAT_RUN_TO_COMPLETION_5_TO_6_OF_23",
-            "COMPILED_19_OF_23_AND_CORRECT_SELECTION_17_OF_23_UNCHANGED",
-            "NEGATIVE_CONTROL_THE_KNOWLEDGE_GOAL_STILL_RETURNS_ITS_DANGLING_REFERENCE_WITH_NO_CHAIN"
+            "210_TESTS_RAN_WITH_3_PRE_EXISTING_FAILURES_AND_3_SKIPS",
+            "GOALS_THAT_RUN_TO_COMPLETION_7_TO_8_OF_23_MEASURED_WITH_NO_OPTIONAL_SUBSTRATE_INSTALLED",
+            "COMPILED_19_TO_20_OF_23",
+            "CORRECT_SELECTION_17_TO_18_OF_23",
+            "WRONG_CAPABILITY_UNCHANGED_AT_2"
           ],
           "qualification_evidence_classes": [
             "DIRECT_PROBE"
@@ -215,16 +215,16 @@
           },
           "evidence": [
             "canonical/runtime/goal_compiler.py",
-            "canonical/runtime/capability_proposal_generators.py",
-            "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
-            "canonical/runtime/bound_capabilities/source_candidates_enumerate.py"
+            "canonical/runtime/goal_compilation_benchmark_v1.py",
+            "canonical/tests/test_tie_break_and_subgoal_absorption.py"
           ],
           "qualification_evidence": [
             "VERIFIER_33_OF_33_PASS",
-            "162_TESTS_OK_WAS_160",
-            "GOALS_THAT_RUN_TO_COMPLETION_5_TO_6_OF_23",
-            "COMPILED_19_OF_23_AND_CORRECT_SELECTION_17_OF_23_UNCHANGED",
-            "NEGATIVE_CONTROL_THE_KNOWLEDGE_GOAL_STILL_RETURNS_ITS_DANGLING_REFERENCE_WITH_NO_CHAIN"
+            "210_TESTS_RAN_WITH_3_PRE_EXISTING_FAILURES_AND_3_SKIPS",
+            "GOALS_THAT_RUN_TO_COMPLETION_7_TO_8_OF_23_MEASURED_WITH_NO_OPTIONAL_SUBSTRATE_INSTALLED",
+            "COMPILED_19_TO_20_OF_23",
+            "CORRECT_SELECTION_17_TO_18_OF_23",
+            "WRONG_CAPABILITY_UNCHANGED_AT_2"
           ],
           "qualification_evidence_classes": [
             "DIRECT_PROBE"
@@ -243,16 +243,16 @@
           },
           "evidence": [
             "canonical/runtime/goal_compiler.py",
-            "canonical/runtime/capability_proposal_generators.py",
-            "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
-            "canonical/runtime/bound_capabilities/source_candidates_enumerate.py"
+            "canonical/runtime/goal_compilation_benchmark_v1.py",
+            "canonical/tests/test_tie_break_and_subgoal_absorption.py"
           ],
           "qualification_evidence": [
             "VERIFIER_33_OF_33_PASS",
-            "162_TESTS_OK_WAS_160",
-            "GOALS_THAT_RUN_TO_COMPLETION_5_TO_6_OF_23",
-            "COMPILED_19_OF_23_AND_CORRECT_SELECTION_17_OF_23_UNCHANGED",
-            "NEGATIVE_CONTROL_THE_KNOWLEDGE_GOAL_STILL_RETURNS_ITS_DANGLING_REFERENCE_WITH_NO_CHAIN"
+            "210_TESTS_RAN_WITH_3_PRE_EXISTING_FAILURES_AND_3_SKIPS",
+            "GOALS_THAT_RUN_TO_COMPLETION_7_TO_8_OF_23_MEASURED_WITH_NO_OPTIONAL_SUBSTRATE_INSTALLED",
+            "COMPILED_19_TO_20_OF_23",
+            "CORRECT_SELECTION_17_TO_18_OF_23",
+            "WRONG_CAPABILITY_UNCHANGED_AT_2"
           ],
           "qualification_evidence_classes": [
             "DIRECT_PROBE"
@@ -261,7 +261,7 @@
           "route": "LEAVE_THE_DANGLING_REFERENCE_IN_PLACE"
         }
       ],
-      "checked_at_utc": "2026-10-21T16:16:58Z",
+      "checked_at_utc": "2026-10-21T16:19:27Z",
       "comparison_dimensions": [
         "CAPABILITY_STRENGTH",
         "CORRECTNESS",
@@ -271,9 +271,9 @@
         "WALL_CLOCK"
       ],
       "discovery_required": true,
-      "incumbent_route": "RANK_ADMITTED_CAPABILITIES_BY_RAW_SHARED_TOKEN_COUNT_WITH_A_HAND_KEPT_GENERIC_TOKEN_DENYLIST",
+      "incumbent_route": "REFUSE_THE_GOAL_WHEN_A_CLAUSE_TIES_ON_SCORE_AND_SPECIFICITY_AND_REFUSE_AGAIN_WHEN_A_LATER_CLAUSE_MATCHES_NO_CAPABILITY",
       "max_age_hours": 24,
-      "negative_search_summary": "NO_EXTERNAL_SEARCH_PERFORMED__BOTH_CAPABILITIES_AND_THEIR_ORACLES_ALREADY_EXIST__THE_DECISIVE_EVIDENCE_IS_LOCAL_AND_MEASURED__CREATE_FROM_MANIFEST_THEN_VERIFY_TAR_GZ_BOTH_REACHED_PASS_CAPABILITY_EXECUTED_AND_TRACE_VERIFIED_AND_REWRITING_THE_BUNDLE_BETWEEN_THE_STEPS_FAILED",
+      "negative_search_summary": "SEARCHED_THE_RUNTIME_FOR_AN_EXISTING_ABSORPTION_OR_SUBSUMPTION_MECHANISM_OVER_COMPILED_PREFIXES_AND_FOUND_NONE_IN_GOAL_COMPILER_THE_ONLY_SUBSUMPTION_HITS_ARE_IN_UNRELATED_MODULES_AGENCY_INTERACTION_SUBSUMPTION_V1_AND_BOUNDED_PARTICIPIAL_DISPOSITION_V1",
       "query_families": [
         {
           "intent": "CAPABILITY_VECTOR",
@@ -301,7 +301,7 @@
       "selected_route": "CLAUSE_TIE_BROKEN_BY_WIDER_SENTENCE_THEN_SUBGOAL_ABSORBED_BY_COMPILED_PREFIX",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-10-21T16:16:58Z",
+        "checked_at_utc": "2026-10-21T16:19:27Z",
         "execution_dependencies": [
           {
             "dependency": "python3_interpreter",
