@@ -24254,7 +24254,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6263,
+  "research_index_records": 6264,
   "routing_tokens": 1775,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24263,7 +24263,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a0d9ac9713f8c67d1c6e17612172969e7cc172a2900868f86209819431107136"
+  "value": "d73e21f010c11205fe2f7975df82f3c30ac8b7893e826e45c7194ea134b18f72"
  },
  "engines": [
   {
@@ -187280,6 +187280,35 @@
    }
   },
   {
+   "action_id": "EFFECT_RESULT_PRODUCER_MAP_AS_SECOND_PASS_ON_THE_SINGLE_CLAUSE_PATH_V1_20261021_V1",
+   "capability": false,
+   "date": "2026-10-21",
+   "id": "research:canonical/action_intents/EFFECT_RESULT_PRODUCER_MAP_AS_SECOND_PASS_ON_THE_SINGLE_CLAUSE_PATH_V1_20261021_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/EFFECT_RESULT_PRODUCER_MAP_AS_SECOND_PASS_ON_THE_SINGLE_CLAUSE_PATH_V1_20261021_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e1dd0daee05d7bd02be721741c4375c900ba2133b13be43b27885c8b8077f026",
+   "status": "",
+   "terms": {
+    "20261021": 1,
+    "a_capability_whose_input_is_another_capabilitys_output_is_now_reachable_on_the_single_clause_path_so_a_goal_can_be_met_by_a_producer_and_a_consumer_the_registry_already_declared_as_a_chain__compiled_18_to_19_of_23_correct_selection_14_to_15_wrong_capability_unchanged_at_4_and_the_capability_count_stays_363": 1,
+    "clause": 1,
+    "effect": 1,
+    "effect_result_producer_map_as_second_pass_on_the_single_clause_path_v1_20261021_v1": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "map": 1,
+    "nine_capabilities_declare_a_proposal_binding_of_type_effect_result_meaning_fill_this_slot_from_whoever_produces_effect_x_and_the_binder_resolves_that_against_an_effect_providers_map_the_caller_must_supply__the_single_clause_path_at_the_end_of_the_compile_entry_point_called_compile_single_goal_with_neither_a_proposal_binder_nor_effect_providers_so_all_nine_were_dropped_before_ranking_with_proposal_effect_provider_missing_however_well_they_matched__measured_at_base_knowledge_consistency_assess_scores_22_on_its_own_goal_while_the_catch_all_that_replaced_it_scores_2_and_decision_synthesis_verify_stdlib_refused_outright_even_though_the_registry_already_declares_that_decision_synthesis_typed_stdlib_produces_the_resource_it_requires": 1,
+    "pass": 1,
+    "path": 1,
+    "producer": 1,
+    "result": 1,
+    "second": 1,
+    "single": 1,
+    "supply_the_binder_and_an_effect_providers_map_derived_from_the_registrys_own_provides_declarations_as_a_second_pass_that_runs_only_when_the_grounded_pass_raised__not_unconditionally_because_measured_unconditionally_it_is_a_net_loss": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "ESCAPE_GAP_A_POLICY_COVER_ADAPTER_V1",
    "capability": false,
    "date": "2026-10-10",
@@ -214455,9 +214484,9 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "50b14d9969043b34d7a20746928374a6bb397eec34c929fa7feb9bc111909d40",
+   "sha256": "bc08ca14581bc0b22f6a32a4ddb499c0ea75fa9a2a81d2deaf93738974fa2c9a",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
-   "symbol_count": 100,
+   "symbol_count": 101,
    "symbols": [
     "GoalCompilationFailure",
     "_bind_inputs",

@@ -1,0 +1,465 @@
+{
+ "action_id": "EFFECT_RESULT_PRODUCER_MAP_AS_SECOND_PASS_ON_THE_SINGLE_CLAUSE_PATH_V1_20261021_V1",
+ "action_kind": "FRESH_REUSE",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+  "progress_evidence_paths": [
+   "canonical/runtime/goal_compiler.py",
+   "canonical/tests/test_goal_compiler_world_binding_v1.py",
+   "canonical/action_intents/EFFECT_RESULT_PRODUCER_MAP_AS_SECOND_PASS_ON_THE_SINGLE_CLAUSE_PATH_V1_20261021_V1.json"
+  ],
+  "route_class": "INTEGRATE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::NINE_CAPABILITIES_DECLARE_A_PROPOSAL_BINDING_OF_TYPE_EFFECT_RESULT_MEANING_FILL_THIS_SLOT_FROM_WHOEVER_PRODUCES_EFFECT_X_AND_THE_BINDER_RESOLVES_THAT_AGAINST_AN_EFFECT_PROVIDERS_MAP_THE_CALLER_MUST_SUPPLY__THE_SINGLE_CLAUSE_PATH_AT_THE_END_OF_THE_COMPILE_ENTRY_POINT_CALLED_COMPILE_SINGLE_GOAL_WITH_NEITHER_A_PROPOSAL_BINDER_NOR_EFFECT_PROVIDERS_SO_ALL_NINE_WERE_DROPPED_BEFORE_RANKING_WITH_PROPOSAL_EFFECT_PROVIDER_MISSING_HOWEVER_WELL_THEY_MATCHED__MEASURED_AT_BASE_KNOWLEDGE_CONSISTENCY_ASSESS_SCORES_22_ON_ITS_OWN_GOAL_WHILE_THE_CATCH_ALL_THAT_REPLACED_IT_SCORES_2_AND_DECISION_SYNTHESIS_VERIFY_STDLIB_REFUSED_OUTRIGHT_EVEN_THOUGH_THE_REGISTRY_ALREADY_DECLARES_THAT_DECISION_SYNTHESIS_TYPED_STDLIB_PRODUCES_THE_RESOURCE_IT_REQUIRES",
+ "canonical_base_commit": "fcdf0e904caf45f132cc776a595b511763fac708",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "NINE_CAPABILITIES_DECLARE_A_PROPOSAL_BINDING_OF_TYPE_EFFECT_RESULT_MEANING_FILL_THIS_SLOT_FROM_WHOEVER_PRODUCES_EFFECT_X_AND_THE_BINDER_RESOLVES_THAT_AGAINST_AN_EFFECT_PROVIDERS_MAP_THE_CALLER_MUST_SUPPLY__THE_SINGLE_CLAUSE_PATH_AT_THE_END_OF_THE_COMPILE_ENTRY_POINT_CALLED_COMPILE_SINGLE_GOAL_WITH_NEITHER_A_PROPOSAL_BINDER_NOR_EFFECT_PROVIDERS_SO_ALL_NINE_WERE_DROPPED_BEFORE_RANKING_WITH_PROPOSAL_EFFECT_PROVIDER_MISSING_HOWEVER_WELL_THEY_MATCHED__MEASURED_AT_BASE_KNOWLEDGE_CONSISTENCY_ASSESS_SCORES_22_ON_ITS_OWN_GOAL_WHILE_THE_CATCH_ALL_THAT_REPLACED_IT_SCORES_2_AND_DECISION_SYNTHESIS_VERIFY_STDLIB_REFUSED_OUTRIGHT_EVEN_THOUGH_THE_REGISTRY_ALREADY_DECLARES_THAT_DECISION_SYNTHESIS_TYPED_STDLIB_PRODUCES_THE_RESOURCE_IT_REQUIRES",
+ "date": "2026-10-21",
+ "expected_parent_change": "A_CAPABILITY_WHOSE_INPUT_IS_ANOTHER_CAPABILITYS_OUTPUT_IS_NOW_REACHABLE_ON_THE_SINGLE_CLAUSE_PATH_SO_A_GOAL_CAN_BE_MET_BY_A_PRODUCER_AND_A_CONSUMER_THE_REGISTRY_ALREADY_DECLARED_AS_A_CHAIN__COMPILED_18_TO_19_OF_23_CORRECT_SELECTION_14_TO_15_WRONG_CAPABILITY_UNCHANGED_AT_4_AND_THE_CAPABILITY_COUNT_STAYS_363",
+ "expected_parent_frontier_change": "A_CAPABILITY_WHOSE_INPUT_IS_ANOTHER_CAPABILITYS_OUTPUT_IS_NOW_REACHABLE_ON_THE_SINGLE_CLAUSE_PATH_SO_A_GOAL_CAN_BE_MET_BY_A_PRODUCER_AND_A_CONSUMER_THE_REGISTRY_ALREADY_DECLARED_AS_A_CHAIN__COMPILED_18_TO_19_OF_23_CORRECT_SELECTION_14_TO_15_WRONG_CAPABILITY_UNCHANGED_AT_4_AND_THE_CAPABILITY_COUNT_STAYS_363",
+ "explicit_user_authorization": "Owner instruction this session 2026-10-21, repeated verbatim six times: all of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers. Standing instruction therefore to search the existing corpus and wire in what is already there instead of inventing new policy. This change wires in machinery the repository already owned end to end: the effect_result binding type, the proposal binder at canonical/runtime/capability_proposal_generators.py, and the provides declarations already present on all 363 registry entries. Nothing new is invented; a caller-side omission is closed.",
+ "falsification_condition": "NEUTRALISING_THE_PROVIDER_MAP_MUST_REPRODUCE_GOAL_COMPILATION_AMBIGUOUS_FOR_THE_TYPED_DECISION_GOAL_AND_THE_PRIOR_18_OF_23_COMPILED_WITH_14_OF_23_CORRECT__OR_ANY_GOAL_THAT_COMPILED_ON_THE_GROUNDED_PASS_MUST_CHANGE_ITS_SELECTION_WHICH_WOULD_MEAN_THE_SECOND_PASS_IS_STEALING_RATHER_THAN_RECOVERING__OR_RECOMPILING_MOVES_THE_DIGEST",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "MOVES_2_OF_23_BENCHMARK_GOALS__COMPILED_18_TO_19_AND_CORRECT_SELECTION_14_TO_15_WITH_WRONG_CAPABILITY_UNCHANGED_AT_4_AND_THE_CAPABILITY_COUNT_UNCHANGED_AT_363__EXT_DECISION_VERIFY_NOW_SELECTS_decision_synthesis_verify_stdlib_INSTEAD_OF_REFUSING__MEASURED_ISOLATED_BY_NEGATIVE_CONTROL_NEUTRALISING_THE_PROVIDER_MAP_REPRODUCES_GOAL_COMPILATION_AMBIGUOUS_AND_THE_PRIOR_18_AND_14__THE_UNCONDITIONAL_FORM_WAS_BUILT_FIRST_AND_MEASURED_AS_A_NET_LOSS_COMPILED_18_TO_16_CORRECT_14_TO_11_THREE_GOALS_STOLEN_AND_THREE_BEGUN_REFUSING_SO_IT_WAS_SCOPED_TO_A_SECOND_PASS_AND_A_TEST_PINS_THAT_THE_FIRST_PASS_IS_NOT_STOLEN_FROM__HONEST_LIMIT_THE_TWO_KNOWLEDGE_GOALS_STILL_TAKE_THE_CATCH_ALL_BECAUSE_THEY_COMPILE_SUCCESSFULLY_ON_THE_GROUNDED_PASS_MERELY_WRONGLY_SO_A_FAILURE_TRIGGERED_SECOND_PASS_NEVER_FIRES_FOR_THEM",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "4/5",
+  "wall_clock_cost_ub": 1
+ },
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/runtime/capability_proposal_generators.py -- the proposal binder, unmodified. Its _bind_planned_inputs already resolves effect_result bindings and already refuses a provider that does not declare the exact result_field the consumer names (PROPOSAL_EFFECT_RESULT_FIELD_UNDECLARED). Only the caller was missing.",
+  "The provides declaration on all 363 registry entries -- the producer side of every chain is already declared data. _effect_providers reads it; it invents nothing.",
+  "The proposal_bindings effect_result declarations on the nine consumer capabilities -- already on the entries, including knowledge.consistency.assess, decision.synthesis.verify.stdlib and evidence.claim_spec.bind.explicit_comparison.stdlib.",
+  "The second-pass pattern already in _rank_bindable_candidates for world binding -- 'The inferred pass therefore runs only when nothing grounded survived.' The same rule is applied here because the unconditional form measured worse."
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "fcdf0e904caf45f132cc776a595b511763fac708",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "A_HARDCODED_PRODUCER_TABLE",
+   "AN_UNCONDITIONAL_EFFECT_RESULT_PASS",
+   "AN_ASSERTION_ON_THE_SELECTED_CAPABILITY_ALONE_WITHOUT_THE_NEGATIVE_CONTROL"
+  ],
+  "expected_parent_level_state_change": "A_CAPABILITY_WHOSE_INPUT_IS_ANOTHER_CAPABILITYS_OUTPUT_IS_NOW_REACHABLE_ON_THE_SINGLE_CLAUSE_PATH_SO_A_GOAL_CAN_BE_MET_BY_A_PRODUCER_AND_A_CONSUMER_THE_REGISTRY_ALREADY_DECLARED_AS_A_CHAIN__COMPILED_18_TO_19_OF_23_CORRECT_SELECTION_14_TO_15_WRONG_CAPABILITY_UNCHANGED_AT_4_AND_THE_CAPABILITY_COUNT_STAYS_363",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "DELETE_THE_NINE_EFFECT_RESULT_DECLARATIONS__REJECTED_THEY_ARE_THE_ONLY_RECORD_OF_WHICH_CAPABILITY_FEEDS_WHICH",
+    "BYPASS_BY_LETTING_THE_CONSUMER_BIND_ANY_FILE_OF_THE_RIGHT_TYPE__REJECTED_THAT_IS_THE_ARBITRARY_WORLD_FILE_FAILURE_THIS_REPOSITORY_ALREADY_MEASURED_AS_WORSE_THAN_REFUSING",
+    "SUBSTITUTE_A_HARDCODED_PRODUCER_TABLE__REJECTED_DUPLICATES_THE_PROVIDES_DECLARATION_THE_REGISTRY_ALREADY_CARRIES_AND_WOULD_DRIFT_FROM_IT",
+    "ENABLE_EFFECT_RESULT_BINDING_UNCONDITIONALLY__REJECTED_ON_MEASUREMENT_COMPILED_18_TO_16_AND_CORRECT_14_TO_11"
+   ],
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__ONE_DICTIONARY_BUILDER_AND_ONE_TRY_EXCEPT_AT_THE_END_OF_THE_SINGLE_CLAUSE_COMPILE_PATH__NO_NEW_BINDING_POLICY_NO_NEW_DATA_AND_NO_CHANGE_TO_THE_BINDER",
+   "surviving_causal_blocker": "THE_SECOND_PASS_IS_TRIGGERED_BY_FAILURE_ONLY_SO_A_GOAL_THAT_COMPILES_SUCCESSFULLY_AGAINST_THE_WRONG_CAPABILITY_NEVER_REACHES_IT__CLOSING_THAT_NEEDS_A_SELECTION_COMPARISON_NOT_A_FAILURE_SIGNAL"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [],
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/capability_proposal_generators.py__THE_BINDER_ALREADY_RESOLVES_EFFECT_RESULT_AND_ALREADY_REFUSES_A_PROVIDER_LACKING_THE_NAMED_RESULT_FIELD__UNMODIFIED",
+    "canonical/runtime/goal_compiler.py__COMPILE_COMPOUND_GOAL_ALREADY_LOADS_THE_SAME_BINDER_AND_A_CAPABILITY_PLANNER_SO_THE_MECHANISM_WAS_LIVE_ON_THE_MULTI_CLAUSE_PATH_ONLY",
+    "THE_PROVIDES_DECLARATION_ON_ALL_363_ENTRIES__ALREADY_PRESENT_SO_THE_PRODUCER_SIDE_NEEDED_NO_NEW_DATA"
+   ],
+   "external_existing_routes_checked": [
+    "NO_EXTERNAL_PACKAGE_OR_NETWORK_RESOURCE_IS_USED__THE_WHOLE_CHANGE_IS_A_DICTIONARY_BUILT_FROM_THE_REGISTRY_PLUS_A_TRY_EXCEPT_AROUND_AN_EXISTING_CALL"
+   ],
+   "surviving_gap": "THE_TWO_KNOWLEDGE_CONSISTENCY_GOALS_STILL_TAKE_THE_CATCH_ALL_BECAUSE_THEY_COMPILE_ON_THE_GROUNDED_PASS_MERELY_WRONGLY_SO_A_FAILURE_TRIGGERED_SECOND_PASS_NEVER_FIRES__AND_evidence_claim_spec_bind_STILL_REFUSES_BECAUSE_IT_NEEDS_TWO_PRODUCERS_WHICH_THE_SCALAR_CONTAINER_RULE_WILL_NOT_COMPOSE"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "MAKE_ALL_NINE_EFFECT_RESULT_CAPABILITIES_SELECTABLE__REJECTED_AS_A_PROXY_MEASURED_IT_COST_THREE_GOALS_THAT_WERE_ALREADY_CORRECT_AND_STARTED_THREE_REFUSALS",
+    "RAISE_THE_COMPILE_RATE_ALONE__REJECTED_AS_A_PROXY_COMPILED_AND_CORRECT_ARE_REPORTED_SEPARATELY_AND_WRONG_CAPABILITY_IS_REPORTED_ALONGSIDE_BOTH"
+   ],
+   "real_outcome": "EXT_DECISION_VERIFY_COMPILES_AND_SELECTS_decision_synthesis_verify_stdlib_AND_THE_23_GOAL_BENCHMARK_MOVES_COMPILED_18_TO_19_WITH_CORRECT_SELECTION_14_TO_15_AND_WRONG_CAPABILITY_UNCHANGED_AT_4",
+   "surviving_necessity": "A_CAPABILITY_THE_REGISTRY_ALREADY_DECLARED_AS_A_CONSUMER_OF_ANOTHER_CAPABILITYS_OUTPUT_MUST_BE_REACHABLE__NOTHING_ELSE_DISCHARGES_IT_AND_THE_ALTERNATIVE_IS_LEAVING_A_CAPABILITY_THAT_SCORES_22_UNSELECTABLE_WHILE_ONE_THAT_SCORES_2_WINS"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": [],
+   "downstream_work_to_delete_or_supersede": [],
+   "fresh_reuse_plan": "REUSE_CAPABILITY_PROPOSAL_GENERATORS_PY_UNMODIFIED_AND_THE_PROVIDES_DECLARATION_ALREADY_ON_ALL_363_ENTRIES__NO_NEW_BINDER_NO_NEW_DATA"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": [
+    "RE_DERIVING_THE_PRODUCER_RELATIONS__THE_PROVIDES_DECLARATION_IS_READ_NOT_RECOMPUTED",
+    "RE_IMPLEMENTING_EFFECT_RESULT_RESOLUTION__THE_EXISTING_BINDER_IS_CALLED_UNMODIFIED"
+   ],
+   "search_stop_decision": "STOP__THE_QUESTION_IS_ANSWERED_BY_LOCAL_MEASUREMENT"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "ONLY_SUPPLYING_THE_PROVIDERS_THE_REGISTRY_ALREADY_DECLARES_MAKES_THE_CONSUMERS_REACHABLE_AND_ONLY_DOING_IT_AS_A_SECOND_PASS_AVOIDS_THE_MEASURED_THEFT_OF_THREE_GOALS_THE_GROUNDED_PASS_ALREADY_WON",
+   "routes_ranked": [
+    "SUPPLY_BINDER_AND_REGISTRY_DERIVED_PROVIDERS_AS_A_FAILURE_TRIGGERED_SECOND_PASS",
+    "SUPPLY_THEM_UNCONDITIONALLY__DISQUALIFIED_ON_MEASUREMENT_COMPILED_18_TO_16_CORRECT_14_TO_11",
+    "HARDCODE_A_PRODUCER_TABLE__DISQUALIFIED_DUPLICATES_PROVIDES_AND_DRIFTS",
+    "LEAVE_IT__DISQUALIFIED_A_CAPABILITY_SCORING_22_IS_UNSELECTABLE_WHILE_ONE_SCORING_2_WINS"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "NO_SYNTHETIC_VERIFICATION__MEASURED_ON_THE_23_GOAL_BENCHMARK_AND_ON_THE_LIVE_REGISTRY_WITH_A_NEGATIVE_CONTROL_THAT_NEUTRALISES_THE_PROVIDER_MAP"
+  },
+  "real_outcome": "COMPILED_18_TO_19_OF_23_CORRECT_SELECTION_14_TO_15_WRONG_CAPABILITY_UNCHANGED_AT_4_CAPABILITY_COUNT_363_UNCHANGED_AND_THE_ARTIFACT_RECOMPILES_TO_A_FIXED_POINT",
+  "required_capability": "REORDER_ADMITTED_CAPABILITY_CANDIDATES_BY_HOW_DISTINCTIVE_THEIR_VOCABULARY_IS_RATHER_THAN_BY_HOW_MUCH_VOCABULARY_THEY_SHARE_WITH_THE_GOAL",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "COMPILED_18_TO_19_OF_23_AND_CORRECT_SELECTION_14_TO_15_ON_THE_SAME_23_GOALS",
+      "CORRECTNESS": "THE_PROVIDER_MAP_IS_BUILT_ONLY_FROM_PROVIDES_DECLARATIONS_AND_A_TEST_ASSERTS_EVERY_MAPPING_IS_JUSTIFIED_BY_THE_PROVIDERS_OWN_ENTRY",
+      "INCREMENTAL_COST": "ZERO_MONETARY_SPEND__NO_NEW_MODULE__NO_NETWORK__ONE_DICTIONARY_AND_ONE_TRY_EXCEPT",
+      "RELIABILITY": "SECOND_PASS_ONLY__A_TEST_PINS_THAT_A_GOAL_THE_GROUNDED_PASS_ALREADY_WON_IS_NOT_STOLEN",
+      "VERIFIABILITY": "FOUR_NEW_TESTS_ALL_RUNNING_PLUS_A_NEGATIVE_CONTROL_THAT_NEUTRALISES_THE_MAP_AND_REPRODUCES_THE_PRIOR_18_AND_14",
+      "WALL_CLOCK": "THE_MAP_IS_BUILT_ONCE_PER_SINGLE_CLAUSE_COMPILE_AND_THE_SECOND_PASS_RUNS_ONLY_AFTER_A_FAILURE"
+     },
+     "evidence": [
+      "canonical/runtime/goal_compiler.py",
+      "canonical/runtime/capability_proposal_generators.py"
+     ],
+     "qualification_evidence": [
+      "VERIFIER_33_OF_33_PASS",
+      "136_TESTS_OK_WAS_132",
+      "COMPILED_18_TO_19_OF_23",
+      "CORRECT_SELECTION_14_TO_15",
+      "NEGATIVE_CONTROL_REPRODUCES_THE_REFUSAL_AND_18_AND_14"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "SUPPLY_THE_BINDER_AND_REGISTRY_DERIVED_PROVIDERS_AS_A_FAILURE_TRIGGERED_SECOND_PASS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "COMPILED_18_TO_19_OF_23_AND_CORRECT_SELECTION_14_TO_15_ON_THE_SAME_23_GOALS",
+      "CORRECTNESS": "THE_PROVIDER_MAP_IS_BUILT_ONLY_FROM_PROVIDES_DECLARATIONS_AND_A_TEST_ASSERTS_EVERY_MAPPING_IS_JUSTIFIED_BY_THE_PROVIDERS_OWN_ENTRY",
+      "INCREMENTAL_COST": "ZERO_MONETARY_SPEND__NO_NEW_MODULE__NO_NETWORK__ONE_DICTIONARY_AND_ONE_TRY_EXCEPT",
+      "RELIABILITY": "SECOND_PASS_ONLY__A_TEST_PINS_THAT_A_GOAL_THE_GROUNDED_PASS_ALREADY_WON_IS_NOT_STOLEN",
+      "VERIFIABILITY": "FOUR_NEW_TESTS_ALL_RUNNING_PLUS_A_NEGATIVE_CONTROL_THAT_NEUTRALISES_THE_MAP_AND_REPRODUCES_THE_PRIOR_18_AND_14",
+      "WALL_CLOCK": "THE_MAP_IS_BUILT_ONCE_PER_SINGLE_CLAUSE_COMPILE_AND_THE_SECOND_PASS_RUNS_ONLY_AFTER_A_FAILURE"
+     },
+     "evidence": [
+      "canonical/runtime/goal_compiler.py"
+     ],
+     "qualification_evidence": [
+      "MEASURED_COMPILED_18_TO_16_AND_CORRECT_14_TO_11",
+      "THREE_PREVIOUSLY_CORRECT_GOALS_TAKEN_BY_source_evidence_extract_objective_grounded_stdlib",
+      "THREE_GOALS_BEGAN_REFUSING"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "SUPPLY_THE_BINDER_AND_PROVIDERS_UNCONDITIONALLY"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "COMPILED_18_TO_19_OF_23_AND_CORRECT_SELECTION_14_TO_15_ON_THE_SAME_23_GOALS",
+      "CORRECTNESS": "THE_PROVIDER_MAP_IS_BUILT_ONLY_FROM_PROVIDES_DECLARATIONS_AND_A_TEST_ASSERTS_EVERY_MAPPING_IS_JUSTIFIED_BY_THE_PROVIDERS_OWN_ENTRY",
+      "INCREMENTAL_COST": "ZERO_MONETARY_SPEND__NO_NEW_MODULE__NO_NETWORK__ONE_DICTIONARY_AND_ONE_TRY_EXCEPT",
+      "RELIABILITY": "SECOND_PASS_ONLY__A_TEST_PINS_THAT_A_GOAL_THE_GROUNDED_PASS_ALREADY_WON_IS_NOT_STOLEN",
+      "VERIFIABILITY": "FOUR_NEW_TESTS_ALL_RUNNING_PLUS_A_NEGATIVE_CONTROL_THAT_NEUTRALISES_THE_MAP_AND_REPRODUCES_THE_PRIOR_18_AND_14",
+      "WALL_CLOCK": "THE_MAP_IS_BUILT_ONCE_PER_SINGLE_CLAUSE_COMPILE_AND_THE_SECOND_PASS_RUNS_ONLY_AFTER_A_FAILURE"
+     },
+     "evidence": [
+      "canonical/runtime/goal_compiler.py"
+     ],
+     "qualification_evidence": [
+      "DUPLICATES_THE_PROVIDES_DECLARATION_ALREADY_ON_ALL_363_ENTRIES_AND_WOULD_DRIFT_FROM_IT"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "HARDCODE_A_PRODUCER_TABLE_FOR_THE_NINE_CONSUMERS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "COMPILED_18_TO_19_OF_23_AND_CORRECT_SELECTION_14_TO_15_ON_THE_SAME_23_GOALS",
+      "CORRECTNESS": "THE_PROVIDER_MAP_IS_BUILT_ONLY_FROM_PROVIDES_DECLARATIONS_AND_A_TEST_ASSERTS_EVERY_MAPPING_IS_JUSTIFIED_BY_THE_PROVIDERS_OWN_ENTRY",
+      "INCREMENTAL_COST": "ZERO_MONETARY_SPEND__NO_NEW_MODULE__NO_NETWORK__ONE_DICTIONARY_AND_ONE_TRY_EXCEPT",
+      "RELIABILITY": "SECOND_PASS_ONLY__A_TEST_PINS_THAT_A_GOAL_THE_GROUNDED_PASS_ALREADY_WON_IS_NOT_STOLEN",
+      "VERIFIABILITY": "FOUR_NEW_TESTS_ALL_RUNNING_PLUS_A_NEGATIVE_CONTROL_THAT_NEUTRALISES_THE_MAP_AND_REPRODUCES_THE_PRIOR_18_AND_14",
+      "WALL_CLOCK": "THE_MAP_IS_BUILT_ONCE_PER_SINGLE_CLAUSE_COMPILE_AND_THE_SECOND_PASS_RUNS_ONLY_AFTER_A_FAILURE"
+     },
+     "evidence": [
+      "canonical/runtime/capability_proposal_generators.py"
+     ],
+     "qualification_evidence": [
+      "REINTRODUCES_THE_ARBITRARY_WORLD_FILE_FAILURE_ALREADY_MEASURED_AS_WORSE_THAN_REFUSING"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "WIDEN_THE_BINDER_TO_ACCEPT_ANY_TYPE_COMPATIBLE_FILE"
+    }
+   ],
+   "checked_at_utc": "2026-10-21T10:52:59Z",
+   "comparison_dimensions": [
+    "CAPABILITY_STRENGTH",
+    "CORRECTNESS",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY",
+    "WALL_CLOCK"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "SINGLE_CLAUSE_PATH_CALLS_THE_COMPILER_WITH_NO_PROPOSAL_BINDER_AND_NO_EFFECT_PROVIDERS_SO_ALL_NINE_EFFECT_RESULT_CONSUMERS_ARE_DROPPED_BEFORE_RANKING",
+   "max_age_hours": 24,
+   "negative_search_summary": "NO_EXTERNAL_SEARCH_PERFORMED__BOTH_CAPABILITIES_AND_THEIR_ORACLES_ALREADY_EXIST__THE_DECISIVE_EVIDENCE_IS_LOCAL_AND_MEASURED__CREATE_FROM_MANIFEST_THEN_VERIFY_TAR_GZ_BOTH_REACHED_PASS_CAPABILITY_EXECUTED_AND_TRACE_VERIFIED_AND_REWRITING_THE_BUNDLE_BETWEEN_THE_STEPS_FAILED",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "deterministic capability selection input binding"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "agent tool argument binding without llm"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "goal compiler effect graph planner python"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 deterministic agent planner no model"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "CLOSE_A_CALLER_SIDE_OMISSION__THE_BINDER_THE_BINDING_TYPE_AND_THE_PRODUCER_DECLARATIONS_ALL_ALREADY_EXISTED_AND_THE_MULTI_CLAUSE_PATH_ALREADY_USED_THEM_SO_THE_SINGLE_CLAUSE_PATH_NOW_BUILDS_THE_PROVIDERS_MAP_FROM_THE_REGISTRYS_OWN_PROVIDES_AND_PASSES_IT_ALONGSIDE_THE_BINDER_BUT_ONLY_WHEN_THE_GROUNDED_PASS_FOUND_NOTHING_BECAUSE_THE_UNCONDITIONAL_FORM_MEASURED_WORSE_AND_A_TEST_PINS_THE_FIRST_PASS_AGAINST_BEING_STOLEN_FROM",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-10-21T09:49:17Z",
+    "execution_dependencies": [
+     {
+      "dependency": "python3_interpreter",
+      "evidence": [
+       "python3_--version__Python_3.11.2__DIRECT_PROBE_2026-10-20",
+       "shutil.which_tar_returned_usr_bin_tar__DIRECT_PROBE_2026-10-20"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "live_verified_capability_registry",
+      "evidence": [
+       "load_verified_registry_returned_363_capabilities_with_both_archive_capabilities_gate_approved__DIRECT_PROBE_2026-10-20"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "BRAIN_INHERITED"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "world_binding_v1_module",
+      "evidence": [
+       "complete_inputs_called_with_goal_paths_none_resolves_the_named_file__DIRECT_PROBE_2026-10-20"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "BRAIN_INHERITED"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "unittest_runner",
+      "evidence": [
+       "python3_-m_unittest_ran_34_unified_model_plus_81_dependent_tests__DIRECT_PROBE_2026-10-20"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "CLOSE_A_CALLER_SIDE_OMISSION__THE_BINDER_THE_BINDING_TYPE_AND_THE_PRODUCER_DECLARATIONS_ALL_ALREADY_EXISTED_AND_THE_MULTI_CLAUSE_PATH_ALREADY_USED_THEM_SO_THE_SINGLE_CLAUSE_PATH_NOW_BUILDS_THE_PROVIDERS_MAP_FROM_THE_REGISTRYS_OWN_PROVIDES_AND_PASSES_IT_ALONGSIDE_THE_BINDER_BUT_ONLY_WHEN_THE_GROUNDED_PASS_FOUND_NOTHING_BECAUSE_THE_UNCONDITIONAL_FORM_MEASURED_WORSE_AND_A_TEST_PINS_THE_FIRST_PASS_AGAINST_BEING_STOLEN_FROM",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/world_binding_v1.py",
+     "canonical/runtime/goal_compiler.py",
+     "canonical/runtime/goal_front_compiler_v1.py",
+     "canonical/runtime/capability_selection_retrieval_v1.py"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://api.github.com/search/repositories?q=deterministic+capability+selection+input+binding__TOTAL_1_TOP_6_STARS_VAIXLNS",
+     "https://api.github.com/search/repositories?q=agent+tool+argument+binding+without+llm__TOTAL_0",
+     "https://api.github.com/search/repositories?q=goal+compiler+effect+graph+planner+python__TOTAL_0"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://pypi.org/pypi/jsonschema/json__HTTP_200",
+     "https://pypi.org/pypi/pydantic/json__HTTP_200"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.python.org/3/library/unittest.html__STDLIB_TEST_RUNNER_USED_FOR_EVERY_MEASUREMENT"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "SUPPLY_THE_BINDER_AND_A_REGISTRY_DERIVED_EFFECT_PROVIDERS_MAP_ONLY_WHEN_THE_GROUNDED_PASS_RAISED",
+   "SUPPLY_THEM_UNCONDITIONALLY__REJECTED_MEASURED_NET_LOSS_THREE_GOALS_STOLEN_THREE_REFUSALS_ADDED",
+   "HARDCODE_THE_PRODUCER_FOR_EACH_CONSUMER__REJECTED_DUPLICATES_DATA_THE_REGISTRY_ALREADY_CARRIES",
+   "WIDEN_THE_BINDER_TO_ACCEPT_ANY_TYPE_COMPATIBLE_FILE__REJECTED_REINTRODUCES_THE_ARBITRARY_WORLD_FILE_FAILURE"
+  ],
+  "selected_surviving_route": "CLOSE_A_CALLER_SIDE_OMISSION__THE_BINDER_THE_BINDING_TYPE_AND_THE_PRODUCER_DECLARATIONS_ALL_ALREADY_EXISTED_AND_THE_MULTI_CLAUSE_PATH_ALREADY_USED_THEM_SO_THE_SINGLE_CLAUSE_PATH_NOW_BUILDS_THE_PROVIDERS_MAP_FROM_THE_REGISTRYS_OWN_PROVIDES_AND_PASSES_IT_ALONGSIDE_THE_BINDER_BUT_ONLY_WHEN_THE_GROUNDED_PASS_FOUND_NOTHING_BECAUSE_THE_UNCONDITIONAL_FORM_MEASURED_WORSE_AND_A_TEST_PINS_THE_FIRST_PASS_AGAINST_BEING_STOLEN_FROM",
+  "stop_condition": "VERIFIER_33_OF_33_PASS__136_TESTS_OK_WAS_132_WITH_FOUR_NEW_PRODUCER_CONSUMER_TESTS__BENCHMARK_COMPILED_19_OF_23_WAS_18_CORRECT_SELECTION_15_OF_23_WAS_14_WRONG_CAPABILITY_4_OF_23_UNCHANGED__ARTIFACT_RECOMPILES_TO_A_FIXED_POINT__AND_NEUTRALISING_THE_PROVIDER_MAP_MUST_REPRODUCE_THE_REFUSAL_AND_THE_PRIOR_18_AND_14",
+  "why_selected_route_is_fastest_sufficient": "THE_ENTIRE_CHANGE_IS_ONE_DICTIONARY_BUILT_FROM_DATA_ALREADY_ON_THE_REGISTRY_PLUS_A_TRY_EXCEPT_AROUND_A_CALL_THAT_ALREADY_EXISTED__NOTHING_IS_IMPORTED_THAT_WAS_NOT_ALREADY_IMPORTED_ON_THE_MULTI_CLAUSE_PATH_AND_THE_BINDER_IS_UNMODIFIED_SO_THERE_IS_NO_NEW_SURFACE_TO_VERIFY_BEYOND_THE_ONE_NEW_BEHAVIOUR_WHICH_IS_PINNED_BY_FOUR_TESTS_AND_A_NEGATIVE_CONTROL"
+ },
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "SUPPLY_THE_BINDER_AND_AN_EFFECT_PROVIDERS_MAP_DERIVED_FROM_THE_REGISTRYS_OWN_PROVIDES_DECLARATIONS_AS_A_SECOND_PASS_THAT_RUNS_ONLY_WHEN_THE_GROUNDED_PASS_RAISED__NOT_UNCONDITIONALLY_BECAUSE_MEASURED_UNCONDITIONALLY_IT_IS_A_NET_LOSS",
+ "stop_condition": "VERIFIER_33_OF_33_PASS__136_TESTS_OK_WAS_132_WITH_FOUR_NEW_PRODUCER_CONSUMER_TESTS__BENCHMARK_COMPILED_19_OF_23_WAS_18_CORRECT_SELECTION_15_OF_23_WAS_14_WRONG_CAPABILITY_4_OF_23_UNCHANGED__ARTIFACT_RECOMPILES_TO_A_FIXED_POINT__AND_NEUTRALISING_THE_PROVIDER_MAP_MUST_REPRODUCE_THE_REFUSAL_AND_THE_PRIOR_18_AND_14",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NOT_APPLICABLE__TEST_ONLY_COVERAGE_OF_AN_EXISTING_VERIFIED_COMPOSITION_WITH_SANDBOX_MEASUREMENT_ONLY",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "a759cbcd11bb7bcebc63e63d336a70a519ecb45d",
+     "note": "At this blob the single-clause path ends in a bare call with neither binder nor providers, so all nine effect_result consumers are dropped before ranking. The counterexample that bounds the new passing tests is the same file with the provider map neutralised to empty: measured, the typed-decision goal returns to GOAL_COMPILATION_AMBIGUOUS and the benchmark returns to 18 compiled and 14 correct. The map is populated in this PR.",
+     "path": "canonical/runtime/goal_compiler.py"
+    },
+    {
+     "git_blob_sha": "71f2bbfda66a65d8d75e035b9ae073671ebd56e2",
+     "note": "The proposal binder at base. It is NOT modified by this PR; it is called. Recorded so a future reader can see which blob of the reused binder the measurement was taken against, and that its PROPOSAL_EFFECT_RESULT_FIELD_UNDECLARED refusal is what still stops a provider lacking the named field.",
+     "path": "canonical/runtime/capability_proposal_generators.py"
+    }
+   ],
+   "decisive_question": "WOULD_THE_CONSUMER_REJECT_PRODUCER_OUTPUT_CORRUPTED_AFTER_THE_PRODUCER_RAN_OR_DOES_IT_MERELY_TRUST_THE_PRODUCER",
+   "falsifier_id": "THE_CORRUPTION_CONTROL_TEST_UNDER_A_NEUTERED_CONSUMER",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "FIRST_ATTEMPT_ADMITTED_INFERRED_CANDIDATES_INTO_THE_SAME_RANKING_AND_REGRESSED_THREE_EXISTING_TESTS__BARCODE_DECODER_OUTRANKED_THE_BARCODE_GENERATOR__CORRECTED_BY_STRICT_TWO_PHASE_ORDERING_AND_LOCKED_BY_REGRESSION_TEST",
+   "proposal_id": "UNIFIED_MODEL_PRODUCER_CONSUMER_COMPOSITION_PIN_V1_20261020_V1"
+  }
+ },
+ "weakens_existing_guard": false
+}
