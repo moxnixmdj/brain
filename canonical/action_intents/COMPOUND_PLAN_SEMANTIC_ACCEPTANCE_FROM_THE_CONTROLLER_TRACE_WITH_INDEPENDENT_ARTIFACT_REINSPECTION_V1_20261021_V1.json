@@ -1,0 +1,485 @@
+{
+  "action_id": "COMPOUND_PLAN_SEMANTIC_ACCEPTANCE_FROM_THE_CONTROLLER_TRACE_WITH_INDEPENDENT_ARTIFACT_REINSPECTION_V1_20261021_V1",
+  "action_kind": "FRESH_REUSE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "canonical/runtime/raw_goal_archive_compound_acceptance_v1.py",
+      "canonical/runtime/live_integrated_brain_v1.py",
+      "canonical/tests/test_raw_goal_archive_compound_acceptance_v1.py",
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+      "canonical/unified_model/README.md"
+    ],
+    "route_class": "INTEGRATE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::_THE_COMPOUND_RETURN_PATH_HARDCODED_SEMANTIC_ACCEPTANCE_COMPLETE_TO_FALSE_AND_ACCEPTED_RAW_OBLIGATION_IDS_TO_AN_EMPTY_LIST_SO_ACCEPTANCE_WAS_STRUCTURALLY_UNREACHABLE_FOR_EVERY_MULTI_CLAUSE_GOAL__AND_THE_ONE_WIRED_VERIFIER_SITS_BEHIND_A_GATE_REQUIRING_EXECUTION_TO_BE_A_ONE_ELEMENT_LIST_WHICH_A_COMPOUND_PLAN_NEVER_POPULATES_BECAUSE_IT_REPORTS_WORK_IN_CONTROLLER_EXECUTION_INSTEAD__THE_VERIFIER_ITSELF_IS_ALSO_KEYED_TO_A_SENTENCE_THAT_NAMES_BOTH_PATHS_SO_IT_CANNOT_MATCH_ANY_BENCHMARK_GOAL",
+  "canonical_base_commit": "d1f8a70a2babc1a0f5066dfcf10c69a431830c65",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "_THE_COMPOUND_RETURN_PATH_HARDCODED_SEMANTIC_ACCEPTANCE_COMPLETE_TO_FALSE_AND_ACCEPTED_RAW_OBLIGATION_IDS_TO_AN_EMPTY_LIST_SO_ACCEPTANCE_WAS_STRUCTURALLY_UNREACHABLE_FOR_EVERY_MULTI_CLAUSE_GOAL__AND_THE_ONE_WIRED_VERIFIER_SITS_BEHIND_A_GATE_REQUIRING_EXECUTION_TO_BE_A_ONE_ELEMENT_LIST_WHICH_A_COMPOUND_PLAN_NEVER_POPULATES_BECAUSE_IT_REPORTS_WORK_IN_CONTROLLER_EXECUTION_INSTEAD__THE_VERIFIER_ITSELF_IS_ALSO_KEYED_TO_A_SENTENCE_THAT_NAMES_BOTH_PATHS_SO_IT_CANNOT_MATCH_ANY_BENCHMARK_GOAL",
+  "date": "2026-10-21",
+  "expected_parent_change": "SEMANTIC_ACCEPTANCE_MOVES_FROM_0_OF_23_TO_1_OF_23__BENCH_TAR_GZ_CREATE_AND_VERIFY_IS_NOW_ACCEPTED_WITH_BOTH_RAW_OBLIGATIONS_DISCHARGED_AND_THE_ARCHIVE_RE_OPENED_FROM_DISK__EXECUTION_STAYS_11_OF_23__COMPILED_STAYS_22_OF_23__CORRECT_SELECTION_STAYS_20_OF_23__ALL_ELEVEN_PRIOR_PASSERS_STILL_PASS",
+  "expected_parent_frontier_change": "SEMANTIC_ACCEPTANCE_MOVES_FROM_0_OF_23_TO_1_OF_23__BENCH_TAR_GZ_CREATE_AND_VERIFY_IS_NOW_ACCEPTED_WITH_BOTH_RAW_OBLIGATIONS_DISCHARGED_AND_THE_ARCHIVE_RE_OPENED_FROM_DISK__EXECUTION_STAYS_11_OF_23__COMPILED_STAYS_22_OF_23__CORRECT_SELECTION_STAYS_20_OF_23__ALL_ELEVEN_PRIOR_PASSERS_STILL_PASS",
+  "explicit_user_authorization": "Owner instruction this session 2026-10-21, repeated verbatim: all of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos. Standing instruction to search the existing corpus and wire in what is already there instead of inventing new policy. Then: focus on the logic and in software engineering. This change wires in the producer identity the repository's own proposal binder already computed and the caller discarded, plus the binder's own auto_path mechanism. No new ranking policy, no new planner, no external model, zero incremental spend.",
+  "falsification_condition": "REVERTING_THE_COMPOUND_ACCEPTANCE_BRANCH_MUST_RETURN_SEMANTIC_ACCEPTANCE_TO_0_OF_23__AND_A_TRACE_MISSING_THE_VERIFY_STEP_A_VERIFY_POINTED_AT_A_DIFFERENT_MANIFEST_OR_A_DIFFERENT_ARCHIVE_A_CREATE_STEP_NOT_OUTPUT_VERIFIED_AN_ARCHIVE_ABSENT_FROM_DISK_AN_ARCHIVE_MEMBER_NOT_IN_THE_REPOSITORY_OR_A_GOAL_HASH_MISMATCH_MUST_EACH_BE_REFUSED_WITH_ITS_OWN_REASON__ALL_OF_WHICH_ARE_TEST_ASSERTED_SO_A_GREEN_CHECK_CANNOT_BE_PRODUCED_BY_A_PLAN_THAT_MERELY_CLAIMS_SUCCESS",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "MOVES_SEMANTIC_ACCEPTANCE_FROM_0_OF_23_TO_1_OF_23_WHICH_IS_THE_FIRST_TIME_ANY_GOAL_HAS BEEN_ACCEPTED_RATHER_THAN_MERELY_EXECUTED__EXECUTION_STAYS_11_OF_23_COMPILED_STAYS_22_OF_23_CORRECT_SELECTION_STAYS_20_OF_23_AND_ALL_ELEVEN_PRIOR_PASSERS_STILL_PASS_SO_NOTHING_REGRESSED__THE_GAIN_IS_BENCH_TAR_GZ_CREATE_AND_VERIFY_BEING_ACCEPTED_WITH_BOTH_RAW_OBLIGATIONS_DISCHARGED_THE_ARCHIVE_RE_OPENED_FROM_DISK_AND_ITS_SHA256_RECORDED__MEASURED_ISOLATED_BY_THE_FACT_THAT_THE_COMPOUND_RETURN_PATH_PREVIOUSLY_HARDCODED_SEMANTIC_ACCEPTANCE_COMPLETE_TO_FALSE_SO_NO_CHANGE_OF_PLAN_COULD_HAVE_REACHED_IT__HONEST_LIMIT_ACCEPTANCE_IS_KEYED_TO_ONE_EXACT_SENTENCE_SO_IT_COVERS_1_OF_23_AND_THE_REMAINING_TEN_PASSING_GOALS_STILL_NEED_THEIR_OWN_INDEPENDENT_VERIFIERS__THE_BRANCH_IS_GATED_ON_THAT_GRAMMAR_SO_NO_OTHER_GOAL_BEHAVIOUR_CHANGES_AT_ALL",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "4/5",
+    "wall_clock_cost_ub": 1
+  },
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/raw_goal_archive_acceptance_v1.py -- the existing single-clause verifier supplied the obligation-envelope checks verbatim: task_sha256 binding, unique and complete obligation ids, required_obligation_ids equality, and per-obligation hash equality",
+    "canonical/runtime/live_integrated_brain_v1.py -- the front door already compiled the raw contract and already carried the controller trace; neither was changed, only read",
+    "canonical/runtime/archive_tarfile.py and the archive.verify.tar_gz.gnu capability -- the machine already creates and independently verifies the archive; acceptance re-inspects the bytes rather than repeating their work",
+    "canonical/runtime/lossless_raw_task_contract_v1.py -- unchanged; it already emits the two obligations this acceptance discharges"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "d1f8a70a2babc1a0f5066dfcf10c69a431830c65",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "IMPORTING_THE_TWO_UNUSED_ACCEPTANCE_VERIFIERS_WHICH_MEASURED_AS_MATCHING_ZERO_OF_THE_23_GOALS_BECAUSE_ONE_WANTS_A_REPLY_WITH_EXACTLY_GRAMMAR_AND_THE_OTHER_WANTS_A_LITERAL_JSON_SENTENCE",
+      "FEEDING_THE_COMPOUND_ROW_TO_THE_EXISTING_ARCHIVE_VERIFIER_WHICH_REFUSES_AT_ITS_OWN_GRAMMAR_BECAUSE_IT_REQUIRES_BOTH_PATHS_TO_BE_NAMED_IN_THE_SENTENCE",
+      "TRUSTING_THE_PLAN_RESULTS_INSTEAD_OF_RE_OPENING_THE_ARCHIVE_WHICH_WOULD_HAVE_MADE_ACCEPTANCE_A_RESTATED_CLAIM_RATHER_THAN_AN_INDEPENDENT_CHECK",
+      "WIDENING_THE_GRAMMAR_TO_A_FAMILY_OF_SENTENCES_WHICH_WOULD_HAVE_ACCEPTED_GOALS_NOBODY_SPECIFIED"
+    ],
+    "expected_parent_level_state_change": "SEMANTIC_ACCEPTANCE_MOVES_FROM_0_OF_23_TO_1_OF_23__BENCH_TAR_GZ_CREATE_AND_VERIFY_IS_NOW_ACCEPTED_WITH_BOTH_RAW_OBLIGATIONS_DISCHARGED_AND_THE_ARCHIVE_RE_OPENED_FROM_DISK__EXECUTION_STAYS_11_OF_23__COMPILED_STAYS_22_OF_23__CORRECT_SELECTION_STAYS_20_OF_23__ALL_ELEVEN_PRIOR_PASSERS_STILL_PASS",
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "DELETING_THE_BRANCH_RETURNS_SEMANTIC_ACCEPTANCE_TO_0_OF_23_SO_IT_IS_NOT_A_BYPASS",
+      "intrinsic_or_path_specific": "PATH_SPECIFIC__ONE_HARDCODED_FALSE_ON_THE_COMPOUND_RETURN_PATH_AND_ONE_VERIFIER_KEYED_TO_A_SENTENCE_NO_BENCHMARK_GOAL_USES",
+      "surviving_causal_blocker": "TEN_PASSING_GOALS_STILL_HAVE_NO_INDEPENDENT_VERIFIER_SO_SEMANTIC_ACCEPTANCE_REMAINS_1_OF_23"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "NO_NEW_CAPABILITY_OR_ADAPTER_WAS_WRITTEN__ONLY_AN_ACCEPTANCE_VERIFIER_OVER_TWO_CAPABILITIES_THE_MACHINE_ALREADY_RUNS",
+      "existing_inherited_routes_checked": "THE_OBLIGATION_ENVELOPE_CHECKS_WERE_TAKEN_FROM_THE_EXISTING_ARCHIVE_VERIFIER__THE_CONTRACT_AND_THE_TRACE_WERE_ALREADY_PRODUCED_BY_THE_FRONT_DOOR",
+      "external_existing_routes_checked": "NO_EXTERNAL_ROUTE_IS_NEEDED__TARFILE_IS_STDLIB_AND_THE_CHECK_IS_DETERMINISTIC",
+      "surviving_gap": "TEN_OF_THE_ELEVEN_PASSING_GOALS_HAVE_NO_INDEPENDENT_ACCEPTANCE_VERIFIER"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "RAISING_THE_COMPILED_COUNT",
+        "RAISING_THE_CORRECT_SELECTION_COUNT"
+      ],
+      "real_outcome": "A_COMPILED_PLAN_MUST_NOT_HAND_AN_ADAPTER_A_PLACEHOLDER_NO_STEP_CAN_SATISFY",
+      "surviving_necessity": "THE_PLAN_MUST_BE_EXECUTABLE_OR_IT_MUST_REFUSE__A_GREEN_COMPILE_THAT_CANNOT_RUN_IS_THE_DEFECT"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "THE_KNOWLEDGE_AND_DECISION_CONSUMERS_USE_THE_SAME_CODE_PATH_AND_ARE_LEFT_UNCHANGED_BECAUSE_THEIR_PRODUCERS_CANNOT_BIND",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "THE_BINDER_AND_THE_AUTO_PATH_MECHANISM_AND_THE_EFFECT_PROVIDERS_MAP_ARE_ALL_REUSED_UNMODIFIED"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "THE_CAPABILITY_GAP_CENSUS_WAS_COMPUTED_ONCE_AND_IS_REPORTED_AS_30_TO_29",
+      "search_stop_decision": "STOPPED_WHEN_THE_CHAIN_EXECUTED_END_TO_END_AND_THE_NEGATIVE_CONTROL_HELD"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "ONLY_EMITTING_THE_PRODUCER_STEP_THE_BINDER_ALREADY_IDENTIFIED_CLOSES_THE_EDGE__WIDENING_WORLD_BINDING_WAS_MEASURED_TO_DROP_CORRECT_SELECTION_15_TO_5__AND_A_STANDALONE_PLANNER_WAS_MEASURED_TO_HAVE_ZERO_REACHABLE_TARGETS_AT_BASE",
+      "routes_ranked": [
+        "EMIT_THE_PRODUCER_STEP_THE_BINDER_ALREADY_IDENTIFIED_AND_REWRITE_THE_REFERENCE_TO_ITS_RESULT_CYCLE",
+        "WIDEN_WORLD_BINDING_TO_ACCEPT_A_TYPE_INCOMPATIBLE_FILE__DISQUALIFIED_MEASURED_CORRECT_SELECTION_15_TO_5",
+        "WRITE_A_NEW_PLANNER_FOR_THE_SINGLE_CLAUSE_PATH__DISQUALIFIED_MEASURED_ZERO_REACHABLE_TARGETS_AT_BASE",
+        "LEAVE_IT__DISQUALIFIED_THE_ADAPTER_RECEIVES_A_DICT_WHERE_ITS_CONTRACT_EXPECTS_A_PATH"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NO_SYNTHETIC_VERIFICATION__THE_CHAIN_IS_EXECUTED_THROUGH_THE_REAL_DISPATCHER__BOTH_STEPS_RETURN_OUTPUT_VERIFIED_TRUE__AND_THE_NEGATIVE_CONTROL_SHOWS_THE_KNOWLEDGE_GOAL_STILL_RETURNS__ITS_DANGLING_REFERENCE_WITH_NO_CHAIN"
+    },
+    "real_outcome": "THE_DECISION_VERIFIER_GOAL_NOW_RUNS_END_TO_END__CHAIN_STRUCTURED_DECISION_EVIDENCE_LOCATE_STDLIB_THEN_DECISION_SYNTHESIS_TYPED_STDLIB_THEN_DECISION_SYNTHESIS_VERIFY_STDLIB__LOCATOR_SOURCE_CANONICAL_CAPABILITIES_OBSOLESCENCE_MODEL_INDEPENDENT_EVIDENCE_DECISION_REAL_TASK_A_CARRIER_INPUT_JSON_WITH_3_ALTERNATIVES_6_CONSTRAINTS_4_EVIDENCE__SYNTHESIZER_DECIDED__AND_A_SELECTION_REGRESSION_WAS_CAUGHT_AND_FIXED_DURING_THE_WORK__A_VERIFY_KEYWORD_ON_THE_NEW_CAPABILITY_RAISED_THAT_TOKENS_DOCUMENT_FREQUENCY__LOWERING_ITS_BM25_INVERSE_DOCUMENT_FREQUENCY__WHICH_FLIPPED_EXT_TAR_VERIFY_FROM_THE_VERIFIER_TO_THE_CREATOR__REMOVING_THE_INACCURATE_KEYWORD_RESTORED_17_OF_23",
+    "required_capability": "STRUCTURED_DECISION_EVIDENCE_LOCATING_PRODUCER_AND_RECURSIVE_PRODUCER_CHAIN_EMISSION",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "GOALS_THAT_RUN_TO_COMPLETION_5_TO_6_ON_THE_SAME_23_GOALS_WITH_COMPILED_AND_CORRECT_SELECTION_UNCHANGED",
+            "CORRECTNESS": "FAIL_CLOSED_A_PRODUCER_WHICH_CANNOT_BIND_LEAVES_THE_PLAN_UNTOUCHED_SO_NO_REFUSAL_BECOMES_AN_UNRUNNABLE_CHAIN",
+            "INCREMENTAL_COST": "ZERO_MONETARY_AND_ZERO_MODEL_DEPENDENT",
+            "RELIABILITY": "NO_CHANGE_TO_THE_PINNED_SCORER_OR_TO_WORLD_BINDING_SO_THE_17_OF_23_CORRECT_SELECTION_IS_PRESERVED",
+            "VERIFIABILITY": "THE_CHAIN_IS_EXECUTED_THROUGH_THE_REAL_DISPATCHER_AND_BOTH_STEPS_RETURN_OUTPUT_VERIFIED_TRUE",
+            "WALL_CLOCK": "NO_MEASURED_CHANGE_TO_COMPILE_TIME_THE_STEP_RUNS_ONCE_PER_PLAN_AND_ONLY_WHEN_A_REFERENCE_IS_DANGLING"
+          },
+          "evidence": [
+            "canonical/runtime/goal_compiler.py",
+            "canonical/runtime/capability_proposal_generators.py",
+            "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+            "canonical/runtime/bound_capabilities/source_candidates_enumerate.py"
+          ],
+          "qualification_evidence": [
+            "VERIFIER_33_OF_33_PASS",
+            "162_TESTS_OK_WAS_160",
+            "GOALS_THAT_RUN_TO_COMPLETION_5_TO_6_OF_23",
+            "COMPILED_19_OF_23_AND_CORRECT_SELECTION_17_OF_23_UNCHANGED",
+            "NEGATIVE_CONTROL_THE_KNOWLEDGE_GOAL_STILL_RETURNS_ITS_DANGLING_REFERENCE_WITH_NO_CHAIN"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "EMIT_THE_PRODUCER_STEP_THE_BINDER_HAD_ALREADY_IDENTIFIED_RATHER_THAN_WIDENING_WORLD_BINDING_TO_GUESS_A_FILE__OR_WRITING_A_NEW_PLANNER__THE_PRODUCER_IS_BOUND_WITH_THE_BINDERS_OWN_AUTO_PATH_MECHANISM_BECAUSE_NO_SENTENCE_EVER_NAMES_AN_OUTPUT_FILE__AND_THE_STEP_IS_FAIL_CLOSED_SO_A_PRODUCER_WHICH_CANNOT_BIND_LEAVES_THE_PLAN_UNTOUCHED"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "WOULD_LET_THE_RANKER_RUN_ON_THE_WRONG_INPUT_RATHER_THAN_ON_A_CORPUS",
+            "CORRECTNESS": "MEASURED_TO_DROP_CORRECT_SELECTION_FROM_15_TO_5_SO_IT_IS_STRICTLY_WORSE",
+            "INCREMENTAL_COST": "ZERO_MONETARY_BUT_NEGATIVE_CAPABILITY_EFFECT",
+            "RELIABILITY": "REGRESSES_THE_PINNED_SELECTION_FLOOR",
+            "VERIFIABILITY": "NO_NEGATIVE_CONTROL_AVAILABLE",
+            "WALL_CLOCK": "NO_MEASURED_CHANGE"
+          },
+          "evidence": [
+            "canonical/runtime/goal_compiler.py",
+            "canonical/runtime/capability_proposal_generators.py",
+            "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+            "canonical/runtime/bound_capabilities/source_candidates_enumerate.py"
+          ],
+          "qualification_evidence": [
+            "VERIFIER_33_OF_33_PASS",
+            "162_TESTS_OK_WAS_160",
+            "GOALS_THAT_RUN_TO_COMPLETION_5_TO_6_OF_23",
+            "COMPILED_19_OF_23_AND_CORRECT_SELECTION_17_OF_23_UNCHANGED",
+            "NEGATIVE_CONTROL_THE_KNOWLEDGE_GOAL_STILL_RETURNS_ITS_DANGLING_REFERENCE_WITH_NO_CHAIN"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "WIDEN_WORLD_BINDING_TO_ACCEPT_A_TYPE_INCOMPATIBLE_FILE"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "MEASURED_ZERO_REACHABLE_TARGETS_ACROSS_ALL_23_GOALS_AT_BASE",
+            "CORRECTNESS": "A_PLAN_WHOSE_PRODUCER_CANNOT_BIND_IS_NOT_AN_IMPROVEMENT",
+            "INCREMENTAL_COST": "ZERO_MONETARY_BUT_NO_MEASURED_GAIN",
+            "RELIABILITY": "NEW_UNPROVEN_CODE_ON_A_LOAD_BEARING_PATH",
+            "VERIFIABILITY": "NOTHING_TO_VERIFY_AGAINST_AT_BASE",
+            "WALL_CLOCK": "ADDS_PLANNING_COST_TO_EVERY_PLAN"
+          },
+          "evidence": [
+            "canonical/runtime/goal_compiler.py",
+            "canonical/runtime/capability_proposal_generators.py",
+            "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+            "canonical/runtime/bound_capabilities/source_candidates_enumerate.py"
+          ],
+          "qualification_evidence": [
+            "VERIFIER_33_OF_33_PASS",
+            "162_TESTS_OK_WAS_160",
+            "GOALS_THAT_RUN_TO_COMPLETION_5_TO_6_OF_23",
+            "COMPILED_19_OF_23_AND_CORRECT_SELECTION_17_OF_23_UNCHANGED",
+            "NEGATIVE_CONTROL_THE_KNOWLEDGE_GOAL_STILL_RETURNS_ITS_DANGLING_REFERENCE_WITH_NO_CHAIN"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "WRITE_A_NEW_PLANNER_FOR_THE_SINGLE_CLAUSE_PATH"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "THE_ADAPTER_RECEIVES_A_DICT_WHERE_ITS_CONTRACT_EXPECTS_A_PATH",
+            "CORRECTNESS": "FAILS_AT_EXECUTION_TIME_WITH_AN_ERROR_THAT_BLAMES_THE_CONSUMER_NOT_THE_MISSING_PRODUCER",
+            "INCREMENTAL_COST": "ZERO_MONETARY_BUT_LEAVES_A_KNOWN_DEFECT",
+            "RELIABILITY": "THE_STATUS_QUO",
+            "VERIFIABILITY": "NOTHING_NEW_TO_VERIFY",
+            "WALL_CLOCK": "NO_CHANGE"
+          },
+          "evidence": [
+            "canonical/runtime/goal_compiler.py",
+            "canonical/runtime/capability_proposal_generators.py",
+            "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+            "canonical/runtime/bound_capabilities/source_candidates_enumerate.py"
+          ],
+          "qualification_evidence": [
+            "VERIFIER_33_OF_33_PASS",
+            "162_TESTS_OK_WAS_160",
+            "GOALS_THAT_RUN_TO_COMPLETION_5_TO_6_OF_23",
+            "COMPILED_19_OF_23_AND_CORRECT_SELECTION_17_OF_23_UNCHANGED",
+            "NEGATIVE_CONTROL_THE_KNOWLEDGE_GOAL_STILL_RETURNS_ITS_DANGLING_REFERENCE_WITH_NO_CHAIN"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "LEAVE_THE_DANGLING_REFERENCE_IN_PLACE"
+        }
+      ],
+      "checked_at_utc": "2026-10-21T13:56:10Z",
+      "comparison_dimensions": [
+        "CAPABILITY_STRENGTH",
+        "CORRECTNESS",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY",
+        "WALL_CLOCK"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "RANK_ADMITTED_CAPABILITIES_BY_RAW_SHARED_TOKEN_COUNT_WITH_A_HAND_KEPT_GENERIC_TOKEN_DENYLIST",
+      "max_age_hours": 24,
+      "negative_search_summary": "NO_EXTERNAL_SEARCH_PERFORMED__BOTH_CAPABILITIES_AND_THEIR_ORACLES_ALREADY_EXIST__THE_DECISIVE_EVIDENCE_IS_LOCAL_AND_MEASURED__CREATE_FROM_MANIFEST_THEN_VERIFY_TAR_GZ_BOTH_REACHED_PASS_CAPABILITY_EXECUTED_AND_TRACE_VERIFIED_AND_REWRITING_THE_BUNDLE_BETWEEN_THE_STEPS_FAILED",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "deterministic capability selection input binding"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "agent tool argument binding without llm"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "goal compiler effect graph planner python"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 deterministic agent planner no model"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "ACCEPT_A_COMPOUND_PLAN_AGAINST_ITS_CONTROLLER_TRACE_AND_RE_OPEN_THE_ARTIFACT_FROM_DISK_RATHER_THAN_LEAVING_SEMANTIC_ACCEPTANCE_HARDCODED_FALSE_FOR_EVERY_MULTI_CLAUSE_GOAL",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-10-21T20:34:31Z",
+        "execution_dependencies": [
+          {
+            "dependency": "python3_interpreter",
+            "evidence": [
+              "python3_--version__Python_3.11.2__DIRECT_PROBE_2026-10-20",
+              "shutil.which_tar_returned_usr_bin_tar__DIRECT_PROBE_2026-10-20"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "live_verified_capability_registry",
+            "evidence": [
+              "load_verified_registry_returned_363_capabilities_with_both_archive_capabilities_gate_approved__DIRECT_PROBE_2026-10-20"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "world_binding_v1_module",
+            "evidence": [
+              "complete_inputs_called_with_goal_paths_none_resolves_the_named_file__DIRECT_PROBE_2026-10-20"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "unittest_runner",
+            "evidence": [
+              "python3_-m_unittest_ran_34_unified_model_plus_81_dependent_tests__DIRECT_PROBE_2026-10-20"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "ACCEPT_A_COMPOUND_PLAN_AGAINST_ITS_CONTROLLER_TRACE_AND_RE_OPEN_THE_ARTIFACT_FROM_DISK_RATHER_THAN_LEAVING_SEMANTIC_ACCEPTANCE_HARDCODED_FALSE_FOR_EVERY_MULTI_CLAUSE_GOAL",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/world_binding_v1.py",
+          "canonical/runtime/goal_compiler.py",
+          "canonical/runtime/goal_front_compiler_v1.py",
+          "canonical/runtime/capability_selection_retrieval_v1.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://api.github.com/search/repositories?q=deterministic+capability+selection+input+binding__TOTAL_1_TOP_6_STARS_VAIXLNS",
+          "https://api.github.com/search/repositories?q=agent+tool+argument+binding+without+llm__TOTAL_0",
+          "https://api.github.com/search/repositories?q=goal+compiler+effect+graph+planner+python__TOTAL_0"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://pypi.org/pypi/jsonschema/json__HTTP_200",
+          "https://pypi.org/pypi/pydantic/json__HTTP_200"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://docs.python.org/3/library/unittest.html__STDLIB_TEST_RUNNER_USED_FOR_EVERY_MEASUREMENT"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "REORDER_THE_ADMITTED_CANDIDATES_BY_THE_REPOSITORYS_OWN_BM25_SCORE_AND_LEAVE_THE_PINNED_SCORER_AS_THE_ONLY_ADMISSION_GATE",
+      "IMPORT_CAPABILITY_SELECTION_RETRIEVAL_V1_INTO_THE_COMPILER__REJECTED_IT_IMPORTS_GOAL_COMPILER_SO_THE_IMPORT_IS_CIRCULAR",
+      "REPLACE_THE_PINNED_SCORER_ENTIRELY__REJECTED_IT_ALONE_CARRIES_THE_EXECUTION_SURFACE_AND_STRUCTURED_FORMAT_REJECTIONS",
+      "EXTEND_THE_GENERIC_TOKEN_DENYLIST__REJECTED_A_HAND_KEPT_DENYLIST_CANNOT_ANTICIPATE_THE_NEXT_GOVERNANCE_TOKEN"
+    ],
+    "selected_surviving_route": "ACCEPT_A_COMPOUND_PLAN_AGAINST_ITS_CONTROLLER_TRACE_AND_RE_OPEN_THE_ARTIFACT_FROM_DISK_RATHER_THAN_LEAVING_SEMANTIC_ACCEPTANCE_HARDCODED_FALSE_FOR_EVERY_MULTI_CLAUSE_GOAL",
+    "stop_condition": "VERIFIER_33_OF_33_PASS__261_TESTS_WITH_ONLY_THE_3_PRE_EXISTING_FAILURES__SEMANTIC_ACCEPTANCE_1_OF_23__EXECUTION_11_OF_23__COMPILED_22_OF_23__CORRECT_SELECTION_20_OF_23__MODEL_2BB1BAE8990A9654F904EBBF6EF43DDD156BE51E600993E2BAB2D30E014246F2",
+    "why_selected_route_is_fastest_sufficient": "IT_REUSES_THE_CONSUMERS_OWN_VALIDATOR_AND_TWO_EXISTING_BINDER_MECHANISMS__SYNTHESISING_DECISION_EVIDENCE_WAS_MEASURED_TO_REQUIRE_CONSTRAINT_STATES_AND_NUMERIC_CONFIDENCE_NO_DOCUMENT_CONTAINS__AND_A_STRUCTURAL_BINDING_FIX_WAS_BUILT_MEASURED_AND_REVERTED_BECAUSE_IT_MOVED_NOTHING"
+  },
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "ACCEPT_A_COMPOUND_PLAN_AGAINST_ITS_CONTROLLER_TRACE_AND_RE_OPEN_THE_ARTIFACT_FROM_DISK_RATHER_THAN_LEAVING_SEMANTIC_ACCEPTANCE_HARDCODED_FALSE_FOR_EVERY_MULTI_CLAUSE_GOAL",
+  "stop_condition": "VERIFIER_33_OF_33_PASS__261_TESTS_WITH_ONLY_THE_3_PRE_EXISTING_FAILURES__SEMANTIC_ACCEPTANCE_1_OF_23__EXECUTION_11_OF_23__COMPILED_22_OF_23__CORRECT_SELECTION_20_OF_23__MODEL_2BB1BAE8990A9654F904EBBF6EF43DDD156BE51E600993E2BAB2D30E014246F2",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__TEST_ONLY_COVERAGE_OF_AN_EXISTING_VERIFIED_COMPOSITION_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "eaa1154907ac5d984331f436e2ea968201b1fc30",
+          "note": "At this blob the compound return path hardcodes semantic_acceptance_complete to False and accepted_raw_obligation_ids to an empty list, so no plan can be accepted.",
+          "path": "canonical/runtime/live_integrated_brain_v1.py"
+        },
+        {
+          "git_blob_sha": "fe6210c737975509be6488d97cefe64e455877ef",
+          "note": "At this blob the only wired verifier is gated on execution being a one-element list and on a grammar that names both paths, which no benchmark goal satisfies.",
+          "path": "canonical/runtime/raw_goal_archive_acceptance_v1.py"
+        },
+        {
+          "git_blob_sha": "5873ea1798eef3e6bb0708a4e627db527a9c2743",
+          "note": "At this blob the contract already emits two obligations for the create-and-verify archive sentence, so the obligations existed with nothing able to discharge them.",
+          "path": "canonical/runtime/lossless_raw_task_contract_v1.py"
+        },
+        {
+          "git_blob_sha": "d4cbef869859b910e2e664993f2370ac58177213",
+          "note": "At this blob the compound create-and-verify goal already compiles and executes, which is what makes its acceptance reachable at all.",
+          "path": "canonical/tests/test_tie_break_and_subgoal_absorption.py"
+        }
+      ],
+      "decisive_question": "WOULD_THE_CONSUMER_REJECT_PRODUCER_OUTPUT_CORRUPTED_AFTER_THE_PRODUCER_RAN_OR_DOES_IT_MERELY_TRUST_THE_PRODUCER",
+      "falsifier_id": "THE_CORRUPTION_CONTROL_TEST_UNDER_A_NEUTERED_CONSUMER",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "FIRST_ATTEMPT_ADMITTED_INFERRED_CANDIDATES_INTO_THE_SAME_RANKING_AND_REGRESSED_THREE_EXISTING_TESTS__BARCODE_DECODER_OUTRANKED_THE_BARCODE_GENERATOR__CORRECTED_BY_STRICT_TWO_PHASE_ORDERING_AND_LOCKED_BY_REGRESSION_TEST",
+      "proposal_id": "UNIFIED_MODEL_PRODUCER_CONSUMER_COMPOSITION_PIN_V1_20261020_V1"
+    }
+  },
+  "weakens_existing_guard": false
+}
