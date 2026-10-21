@@ -1,0 +1,504 @@
+{
+  "action_id": "GENERIC_TRACE_REINSPECTION_ACCEPTANCE_FOR_EVERY_INSPECTABLE_CAPABILITY_V1_20261021_V1",
+  "action_kind": "FRESH_REUSE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "canonical/runtime/raw_goal_trace_acceptance_v1.py",
+      "canonical/runtime/live_integrated_brain_v1.py",
+      "canonical/tests/test_raw_goal_trace_acceptance_v1.py",
+      "canonical/tests/test_goal_compiler_world_binding_v1.py",
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+    ],
+    "route_class": "INTEGRATE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::ACCEPTANCE_WAS_KEYED_TO_ONE_EXACT_SENTENCE_SO_10_OF_THE_11_GOALS_THE_MACHINE_ALREADY_EXECUTES_FINISHED_WITH_NO_INDEPENDENT_CHECK_AT_ALL__SEMANTIC_ACCEPTANCE_COMPLETE_WAS_STRUCTURALLY_UNREACHABLE_FOR_THEM_BECAUSE_NO_VERIFIER_COULD_FIRE__AND_THE_ONLY_VERIFIERS_THAT_EXISTED_DEMANDED_EXPLICIT_PATHS_IN_THE_SENTENCE_WHICH_NO_BENCHMARK_GOAL_STATES",
+  "canonical_base_commit": "bff2cc0c0a19a71485a2a79bc84500c88d08c67e",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "ACCEPTANCE_WAS_KEYED_TO_ONE_EXACT_SENTENCE_SO_10_OF_THE_11_GOALS_THE_MACHINE_ALREADY_EXECUTES_FINISHED_WITH_NO_INDEPENDENT_CHECK_AT_ALL__SEMANTIC_ACCEPTANCE_COMPLETE_WAS_STRUCTURALLY_UNREACHABLE_FOR_THEM_BECAUSE_NO_VERIFIER_COULD_FIRE__AND_THE_ONLY_VERIFIERS_THAT_EXISTED_DEMANDED_EXPLICIT_PATHS_IN_THE_SENTENCE_WHICH_NO_BENCHMARK_GOAL_STATES",
+  "date": "2026-10-21",
+  "expected_parent_change": "SEMANTIC_ACCEPTANCE_GOES_FROM_1_OF_23_TO_9_OF_23_ON_THE_SAME_23_GOALS_WITH_COMPILED_22_OF_23_UNCHANGED_CORRECT_SELECTION_20_OF_23_UNCHANGED_WRONG_CAPABILITY_2_OF_23_UNCHANGED_AND_GOALS_THAT_RUN_TO_COMPLETION_11_OF_23_UNCHANGED__TEN_CAPABILITIES_NOW_HAVE_AN_INSPECTOR_WHICH_RE_OPENS_THEIR_ARTIFACT_AND_THE_TWO_GOALS_WHICH_STILL_REFUSE_DO_SO_BECAUSE_THEIR_OWN_PRODUCER_REPORTED_OUTPUT_VERIFIED_FALSE_WITH_LIVE_RETRIEVAL_PROVENANCE_REQUIRED",
+  "expected_parent_frontier_change": "SEMANTIC_ACCEPTANCE_GOES_FROM_1_OF_23_TO_9_OF_23_ON_THE_SAME_23_GOALS_WITH_COMPILED_22_OF_23_UNCHANGED_CORRECT_SELECTION_20_OF_23_UNCHANGED_WRONG_CAPABILITY_2_OF_23_UNCHANGED_AND_GOALS_THAT_RUN_TO_COMPLETION_11_OF_23_UNCHANGED__TEN_CAPABILITIES_NOW_HAVE_AN_INSPECTOR_WHICH_RE_OPENS_THEIR_ARTIFACT_AND_THE_TWO_GOALS_WHICH_STILL_REFUSE_DO_SO_BECAUSE_THEIR_OWN_PRODUCER_REPORTED_OUTPUT_VERIFIED_FALSE_WITH_LIVE_RETRIEVAL_PROVENANCE_REQUIRED",
+  "explicit_user_authorization": "Owner instruction this session 2026-10-21, verbatim: use all the capability, I think we already have perfect solutions in the brain for all of this, plus thinking from the deepest layer from first principles, and the plan must make the goal real now, not fake. Standing instruction repeated five times: all of your problems I already solved in the brain or somewhere on the internet hidden as tools. Standing correction: focus on hardcore software engineering. Standing bar: all the tests must be extremely hard and only real. This change wires the acceptance decision to the controller trace the machine already produces and re-opens the artifacts that trace names, instead of inventing new policy. No external model, zero spend, fail closed.",
+  "falsification_condition": "REVERTING_THE_INSPECTOR_TABLE_MUST_RETURN_SEMANTIC_ACCEPTANCE_TO_1_OF_23__OR_NEUTERING_THE_VERIFIER_SO_IT_ACCEPTS_ON_THE_OBLIGATION_ENVELOPE_ALONE_MUST_LEAVE_THE_22_TESTS_GREEN_WHICH_WOULD_MEAN_THE_TESTS_ARE_DECORATIVE__OR_A_TAMPERED_MEMBER_LIST_MUST_STILL_BE_ACCEPTED__OR_A_GOAL_WHOSE_OWN_PRODUCER_REPORTED_OUTPUT_VERIFIED_FALSE_MUST_BE_ACCEPTED__OR_A_CAPABILITY_WITH_NO_INSPECTOR_MUST_BE_ACCEPTED",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "MOVES_SEMANTIC_ACCEPTANCE_FROM_1_OF_23_TO_9_OF_23_AND_MOVES_NOTHING_ELSE__COMPILED_STAYS_22_OF_23_CORRECT_SELECTION_STAYS_20_OF_23_WRONG_CAPABILITY_STAYS_2_OF_23_AND_GOALS_THAT_RUN_TO_COMPLETION_STAYS_11_OF_23_ALL_MEASURED_WITH_THE_REPOSITORYS_OWN_BENCHMARK_RUNNER__THE_GAIN_IS_THAT_NINE_GOALS_ARE_NOW_PROVEN_RATHER_THAN_MERELY_EXECUTED__MEASURED_ISOLATED_BY_NEUTERING_THE_VERIFIER_WHICH_TURNS_15_OF_THE_22_NEW_TESTS_RED_AND_BY_STASHING_THE_DIFF_WHICH_RETURNS_ACCEPTANCE_TO_1_OF_23_SO_THE_STEP_IS_LOAD_BEARING_AND_NOT_VACUOUS__HONEST_LIMIT_TWO_EXECUTING_GOALS_STILL_REFUSE_BECAUSE_THEIR_EVIDENCE_EXTRACTION_STEP_REPORTS_OUTPUT_VERIFIED_FALSE_WITH_LIVE_RETRIEVAL_PROVENANCE_REQUIRED_AND_THAT_REFUSAL_IS_CORRECT_NOT_A_GAP_IN_THIS_CHANGE__AND_THE_INSPECTOR_TABLE_COVERS_TEN_CAPABILITIES_SO_ACCEPTANCE_CANNOT_YET_REACH_THE_GOALS_BLOCKED_ON_MISSING_C_BINARIES",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "4/5",
+    "wall_clock_cost_ub": 1
+  },
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/raw_goal_archive_compound_acceptance_v1.py -- the obligation envelope discipline established for the one accepted sentence: contract verified, goal hash bound, obligation ids unique and matching required_obligation_ids, every obligation carrying the same task_sha256. Lifted verbatim into the generic verifier so the envelope cannot be weaker than the sentence-specific one.",
+    "canonical/runtime/lossless_raw_task_contract_v1.py compile_contract -- the obligation source. Unmodified; the verifier consumes its acceptance_contract exactly as the front door built it.",
+    "The controller trace the runtime already emits -- controller_execution.trace, an ordered list of plan.args plus result rows. Unmodified; it is the evidence the verifier reads, which is why no new instrumentation was needed.",
+    "canonical/tests/test_raw_goal_archive_compound_acceptance_v1.py -- the negative-control discipline: one real run for the whole class, contract rebuilt the way the front door rebuilds it, contract pass asserted in setUp so a control cannot trip the wrong check and look green.",
+    "The capabilities' own substrates -- tarfile, zipfile, xml.etree, pypdf and json -- are re-used to re-open artifacts. No new parsing library, no new dependency, no model."
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "bff2cc0c0a19a71485a2a79bc84500c88d08c67e",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "TRUSTING_THE_PRODUCERS_OUTPUT_VERIFIED_OR_VERIFIED_FLAG_AS_EVIDENCE",
+      "WRITING_ONE_MORE_SENTENCE_SPECIFIC_VERIFIER_PER_GOAL_WHICH_SCALES_LINEARLY_WITH_SENTENCES",
+      "COUNTING_A_PREREQUISITE_PRODUCER_STEP_AS_CLAUSE_COVERAGE",
+      "ACCEPTING_A_CAPABILITY_WITH_NO_INSPECTOR_RATHER_THAN_REFUSING_IT",
+      "A_COUNT_EQUALITY_CHECK_ON_ENUMERATED_CANDIDATES_WHICH_MEASURED_400_CLAIMED_AGAINST_2192_REAL_FILES"
+    ],
+    "expected_parent_level_state_change": "SEMANTIC_ACCEPTANCE_GOES_FROM_1_OF_23_TO_9_OF_23_ON_THE_SAME_23_GOALS_WITH_COMPILED_22_OF_23_UNCHANGED_CORRECT_SELECTION_20_OF_23_UNCHANGED_WRONG_CAPABILITY_2_OF_23_UNCHANGED_AND_GOALS_THAT_RUN_TO_COMPLETION_11_OF_23_UNCHANGED__TEN_CAPABILITIES_NOW_HAVE_AN_INSPECTOR_WHICH_RE_OPENS_THEIR_ARTIFACT_AND_THE_TWO_GOALS_WHICH_STILL_REFUSE_DO_SO_BECAUSE_THEIR_OWN_PRODUCER_REPORTED_OUTPUT_VERIFIED_FALSE_WITH_LIVE_RETRIEVAL_PROVENANCE_REQUIRED",
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "DELETING_THE_INSPECTOR_TABLE_WOULD_RETURN_ACCEPTANCE_TO_ONE_SENTENCE_AND_LEAVE_TEN_EXECUTED_GOALS_UNPROVEN",
+      "intrinsic_or_path_specific": "PATH_SPECIFIC__ACCEPTANCE_WAS_GATED_ON_ONE_EXACT_REGULAR_EXPRESSION_AT_TWO_RETURN_SITES",
+      "surviving_causal_blocker": "NONE_FOR_THE_TEN_INSPECTED_CAPABILITIES__THE_TWO_GOALS_WHICH_STILL_REFUSE_ARE_BLOCKED_UPSTREAM_BY_LIVE_RETRIEVAL_PROVENANCE_REQUIRED_IN_THE_EVIDENCE_EXTRACTION_CAPABILITY_AND_ARE_LEFT_FAIL_CLOSED"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "NO_NEW_CAPABILITY_NO_NEW_PLANNER_AND_NO_NEW_ADAPTER_WAS_WRITTEN",
+      "existing_inherited_routes_checked": "THE_CONTROLLER_TRACE_ALREADY_CARRIED_EVERY_ARGUMENT_AND_EVERY_PRODUCED_PATH__THE_OBLIGATION_ENVELOPE_ALREADY_EXISTED__THE_ARTIFACTS_WERE_ALREADY_ON_DISK",
+      "external_existing_routes_checked": "NO_EXTERNAL_ROUTE_IS_NEEDED__EVERY_INSPECTOR_IS_STDLIB_PLUS_THE_PYPDF_SUBSTRATE_THE_PDF_CAPABILITY_ALREADY_DECLARES",
+      "surviving_gap": "28_EFFECTS_REMAIN_REQUIRED_BUT_NEVER_PRODUCED_AND_295_REGISTRY_ENTRIES_REMAIN_RECEIPT_BACKED_PENDING_PROMOTION"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "RAISING_THE_COMPILED_COUNT",
+        "RAISING_THE_CORRECT_SELECTION_COUNT",
+        "RAISING_THE_COUNT_OF_GOALS_THAT_MERELY_EXECUTE"
+      ],
+      "real_outcome": "AN_EXECUTED_GOAL_MUST_BE_PROVEN_TO_HAVE_DONE_WHAT_THE_SENTENCE_ASKED_OR_IT_MUST_REFUSE",
+      "surviving_necessity": "A_RESULT_NOBODY_RE_INSPECTED_IS_A_CLAIM_NOT_A_MEASUREMENT__ELEVEN_GOALS_EXECUTE_AND_ONLY_ONE_WAS_PROVEN"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "THE_SENTENCE_SPECIFIC_ARCHIVE_VERIFIERS_STAY_AUTHORITATIVE_WHEN_THEY_ACCEPT_SO_THE_ALREADY_MERGED_ACCEPTED_GOAL_IS_UNTOUCHED",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "THE_TRACE_THE_ENVELOPE_THE_ARTIFACTS_AND_THE_CAPABILITY_SUBSTRATES_ARE_ALL_REUSED_UNMODIFIED"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "THE_TRACE_SHAPE_AND_ARTIFACT_SHAPE_CENSUS_OF_ALL_TEN_EXECUTING_GOALS_WAS_COMPUTED_ONCE_AND_DRIVES_THE_INSPECTOR_TABLE",
+      "search_stop_decision": "STOPPED_WHEN_NINE_OF_TWENTY_THREE_WERE_ACCEPTED_THE_TWO_REMAINING_EXECUTING_GOALS_REFUSED_FOR_A_MEASURED_UPSTREAM_REASON_AND_NEUTERING_THE_VERIFIER_TURNED_FIFTEEN_OF_TWENTY_TWO_TESTS_RED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "ONLY_RE_OPENING_THE_ARTIFACTS_THE_TRACE_ALREADY_NAMES_CLOSES_THE_GAP__A_SENTENCE_SPECIFIC_VERIFIER_PER_GOAL_WAS_MEASURED_AT_ONE_OF_TWENTY_THREE_AFTER_A_FULL_SESSION_OF_WORK__AND_TRUSTING_THE_VERIFIED_FLAG_WAS_MEASURED_TO_ACCEPT_A_GOAL_WHOSE_OWN_PRODUCER_SAYD_OUTPUT_VERIFIED_FALSE",
+      "routes_ranked": [
+        "RE_INSPECT_THE_ARTIFACTS_THE_CONTROLLER_TRACE_ALREADY_NAMES_AND_REFUSE_ANY_CAPABILITY_WITH_NO_INSPECTOR",
+        "WRITE_ONE_SENTENCE_SPECIFIC_VERIFIER_PER_GOAL__DISQUALIFIED_MEASURED_ONE_OF_TWENTY_THREE_AFTER_A_FULL_SESSION_AND_IT_SCALES_WITH_SENTENCES_NOT_WITH_CAPABILITIES",
+        "TRUST_THE_PRODUCERS_VERIFIED_FLAG__DISQUALIFIED_MEASURED_TO_ACCEPT_TWO_GOALS_WHOSE_PRODUCER_REPORTED_OUTPUT_VERIFIED_FALSE",
+        "LEAVE_ACCEPTANCE_UNREACHABLE__DISQUALIFIED_TEN_EXECUTED_GOALS_REMAIN_UNPROVEN_CLAIMS"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NO_SYNTHETIC_VERIFICATION__EVERY_ACCEPTANCE_COMES_FROM_A_REAL_RUN_WHOSE_ARTIFACT_IS_RE_OPENED_FROM_DISK__AND_THE_NEGATIVE_CONTROLS_TAKE_A_REAL_TRACE_AND_BREAK_EXACTLY_ONE_THING_ABOUT_IT"
+    },
+    "real_outcome": "SEMANTIC_ACCEPTANCE_1_OF_23_TO_9_OF_23__THE_NINE_ARE_BENCH_TAR_GZ_CREATE_AND_VERIFY_BENCH_PDF_EXTRACT_TEXT_BENCH_SOURCE_AUDIT_WRITE_JSON_EXT_TAR_VERIFY_EXT_XLSX_CREATE_EXT_DOCX_VERIFY_EXT_EVIDENCE_RANK_EXT_AST_AUDIT_AND_EXT_DECISION_VERIFY__EACH_WITH_A_PER_STEP_REINSPECTION_LEDGER__THE_PDF_WAS_RE_EXTRACTED_AND_ITS_TEXT_SHA256_RECOMPUTED__THE_TAR_WAS_RE_OPENED_AND_ITS_MEMBERS_RELISTED__THE_XLSX_AND_DOCX_WERE_RE_OPENED_AS_OOXML_PACKAGES_AND_THEIR_ROW_COLUMN_PARAGRAPH_AND_TABLE_COUNTS_REPARSED__THE_4566_FILE_AST_LEDGER_WAS_REHASHED_FILE_BY_FILE__THE_400_RANKED_CANDIDATES_WERE_EACH_MATCHED_TO_THE_SHA256_OF_A_REAL_REPOSITORY_FILE__AND_THE_DECISION_CHAIN_HAD_ITS_INPUT_DIGEST_AND_SELECTED_ALTERNATIVE_RECONCILED_ACROSS_THREE_STEPS__TWO_GOALS_STILL_REFUSE_HONESTLY",
+    "required_capability": "GENERIC_TRACE_GROUNDED_ACCEPTANCE_WITH_INDEPENDENT_ARTIFACT_REINSPECTION",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SEMANTIC_ACCEPTANCE_1_OF_23_TO_9_OF_23_ON_THE_SAME_23_GOALS",
+            "CORRECTNESS": "FAIL_CLOSED_A_CAPABILITY_WITH_NO_INSPECTOR_IS_REFUSED_AND_A_PRODUCER_WHICH_SAID_OUTPUT_VERIFIED_FALSE_IS_REFUSED",
+            "INCREMENTAL_COST": "ZERO_MONETARY_AND_ZERO_MODEL_DEPENDENT",
+            "RELIABILITY": "COMPILED_22_OF_23_CORRECT_SELECTION_20_OF_23_AND_WRONG_CAPABILITY_2_OF_23_ALL_UNCHANGED_BY_THE_REPOSITORYS_OWN_BENCHMARK_RUNNER",
+            "VERIFIABILITY": "EVERY_ACCEPTANCE_RE_OPENS_BYTES_AND_15_OF_22_TESTS_GO_RED_WHEN_THE_VERIFIER_IS_NEUTERED",
+            "WALL_CLOCK": "THE_FULL_23_GOAL_COMPILE_AND_EXECUTE_CENSUS_RUNS_IN_ABOUT_16_SECONDS"
+          },
+          "evidence": [
+            "canonical/runtime/raw_goal_trace_acceptance_v1.py",
+            "canonical/runtime/live_integrated_brain_v1.py",
+            "canonical/runtime/raw_goal_archive_compound_acceptance_v1.py",
+            "canonical/runtime/lossless_raw_task_contract_v1.py"
+          ],
+          "qualification_evidence": [
+            "VERIFIER_33_OF_33_PASS",
+            "SEMANTIC_ACCEPTANCE_9_OF_23_WAS_1_OF_23",
+            "112_TESTS_OK_FRONT_DOOR_AND_UNIFIED_MODEL",
+            "150_TESTS_WITH_ONLY_THE_3_PRE_EXISTING_FAILURES",
+            "NEUTERING_THE_VERIFIER_TURNS_15_OF_22_NEW_TESTS_RED",
+            "COMPILED_22_OF_23_AND_CORRECT_SELECTION_20_OF_23_UNCHANGED"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "RE_INSPECT_EVERY_CLAIMED_EFFECT_FROM_DISK_IN_THE_CONTROLLER_TRACE_AND_REFUSE_ANY_CAPABILITY_WITH_NO_INSPECTOR__RATHER_THAN_KEYING_ACCEPTANCE_TO_ONE_EXACT_SENTENCE__OR_TRUSTING_THE_PRODUCERS_OWN_VERIFIED_FLAG"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "MEASURED_ONE_OF_TWENTY_THREE_AFTER_A_FULL_SESSION_OF_WORK",
+            "CORRECTNESS": "EACH_VERIFIER_IS_CORRECT_BUT_COVERS_EXACTLY_ONE_SENTENCE",
+            "INCREMENTAL_COST": "ZERO_MONETARY_BUT_LINEAR_IN_THE_NUMBER_OF_SENTENCES",
+            "RELIABILITY": "PROVEN_FOR_THE_ONE_SENTENCE_IT_NAMES",
+            "VERIFIABILITY": "STRONG_FOR_ONE_SENTENCE_AND_SILENT_FOR_THE_OTHER_TWENTY_TWO",
+            "WALL_CLOCK": "NO_CHANGE"
+          },
+          "evidence": [
+            "canonical/runtime/raw_goal_trace_acceptance_v1.py",
+            "canonical/runtime/live_integrated_brain_v1.py",
+            "canonical/runtime/raw_goal_archive_compound_acceptance_v1.py",
+            "canonical/runtime/lossless_raw_task_contract_v1.py"
+          ],
+          "qualification_evidence": [
+            "VERIFIER_33_OF_33_PASS",
+            "SEMANTIC_ACCEPTANCE_9_OF_23_WAS_1_OF_23",
+            "112_TESTS_OK_FRONT_DOOR_AND_UNIFIED_MODEL",
+            "150_TESTS_WITH_ONLY_THE_3_PRE_EXISTING_FAILURES",
+            "NEUTERING_THE_VERIFIER_TURNS_15_OF_22_NEW_TESTS_RED",
+            "COMPILED_22_OF_23_AND_CORRECT_SELECTION_20_OF_23_UNCHANGED"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "WRITE_ONE_SENTENCE_SPECIFIC_VERIFIER_PER_GOAL"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "WOULD_REPORT_ELEVEN_OF_TWENTY_THREE",
+            "CORRECTNESS": "MEASURED_TO_ACCEPT_TWO_GOALS_WHOSE_OWN_PRODUCER_REPORTED_OUTPUT_VERIFIED_FALSE_WITH_LIVE_RETRIEVAL_PROVENANCE_REQUIRED",
+            "INCREMENTAL_COST": "ZERO_MONETARY_BUT_NEGATIVE_TRUTH_EFFECT",
+            "RELIABILITY": "A_CLAIM_IS_NOT_A_MEASUREMENT",
+            "VERIFIABILITY": "NOTHING_IS_RE_OPENED_SO_NOTHING_IS_VERIFIED",
+            "WALL_CLOCK": "FASTEST_AND_WORST"
+          },
+          "evidence": [
+            "canonical/runtime/raw_goal_trace_acceptance_v1.py",
+            "canonical/runtime/live_integrated_brain_v1.py",
+            "canonical/runtime/raw_goal_archive_compound_acceptance_v1.py",
+            "canonical/runtime/lossless_raw_task_contract_v1.py"
+          ],
+          "qualification_evidence": [
+            "VERIFIER_33_OF_33_PASS",
+            "SEMANTIC_ACCEPTANCE_9_OF_23_WAS_1_OF_23",
+            "112_TESTS_OK_FRONT_DOOR_AND_UNIFIED_MODEL",
+            "150_TESTS_WITH_ONLY_THE_3_PRE_EXISTING_FAILURES",
+            "NEUTERING_THE_VERIFIER_TURNS_15_OF_22_NEW_TESTS_RED",
+            "COMPILED_22_OF_23_AND_CORRECT_SELECTION_20_OF_23_UNCHANGED"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "TRUST_THE_PRODUCERS_VERIFIED_FLAG_AS_EVIDENCE"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "TEN_EXECUTED_GOALS_REMAIN_UNPROVEN_CLAIMS",
+            "CORRECTNESS": "THE_STATUS_QUO",
+            "INCREMENTAL_COST": "ZERO_MONETARY_BUT_LEAVES_A_KNOWN_DEFECT",
+            "RELIABILITY": "NO_CHANGE",
+            "VERIFIABILITY": "NOTHING_NEW_TO_VERIFY",
+            "WALL_CLOCK": "NO_CHANGE"
+          },
+          "evidence": [
+            "canonical/runtime/raw_goal_trace_acceptance_v1.py",
+            "canonical/runtime/live_integrated_brain_v1.py",
+            "canonical/runtime/raw_goal_archive_compound_acceptance_v1.py",
+            "canonical/runtime/lossless_raw_task_contract_v1.py"
+          ],
+          "qualification_evidence": [
+            "VERIFIER_33_OF_33_PASS",
+            "SEMANTIC_ACCEPTANCE_9_OF_23_WAS_1_OF_23",
+            "112_TESTS_OK_FRONT_DOOR_AND_UNIFIED_MODEL",
+            "150_TESTS_WITH_ONLY_THE_3_PRE_EXISTING_FAILURES",
+            "NEUTERING_THE_VERIFIER_TURNS_15_OF_22_NEW_TESTS_RED",
+            "COMPILED_22_OF_23_AND_CORRECT_SELECTION_20_OF_23_UNCHANGED"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "LEAVE_ACCEPTANCE_UNREACHABLE_FOR_THE_TEN_OTHER_EXECUTING_GOALS"
+        }
+      ],
+      "checked_at_utc": "2026-10-21T21:20:00Z",
+      "comparison_dimensions": [
+        "CAPABILITY_STRENGTH",
+        "CORRECTNESS",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY",
+        "WALL_CLOCK"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "KEY_ACCEPTANCE_TO_ONE_EXACT_SENTENCE_AND_HARDCODE_FALSE_EVERYWHERE_ELSE",
+      "max_age_hours": 24,
+      "negative_search_summary": "NO_EXTERNAL_SEARCH_PERFORMED__THE_TRACE_THE_OBLIGATION_ENVELOPE_THE_ARTIFACTS_AND_THE_PARSING_SUBSTRATES_ALL_ALREADY_EXIST_IN_THE_REPOSITORY__THE_DECISIVE_EVIDENCE_IS_LOCAL_AND_MEASURED__DUMPING_THE_TRACE_AND_ARTIFACT_SHAPE_OF_ALL_TEN_EXECUTING_GOALS_SHOWED_ONE_UNIFORM_ROW_SHAPE_SO_ONE_GENERIC_VERIFIER_COVERS_ALL_OF_THEM",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "independent artifact verification of agent tool output"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "verify agent action results without trusting the agent"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "reopen produced artifact and compare claimed digest python"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 deterministic execution trace acceptance verifier"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "RE_INSPECT_EVERY_CLAIMED_EFFECT_FROM_DISK_IN_THE_CONTROLLER_TRACE_AND_REFUSE_ANY_CAPABILITY_WITH_NO_INSPECTOR__RATHER_THAN_KEYING_ACCEPTANCE_TO_ONE_EXACT_SENTENCE__OR_TRUSTING_THE_PRODUCERS_OWN_VERIFIED_FLAG",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-10-21T21:25:00Z",
+        "execution_dependencies": [
+          {
+            "dependency": "python3_interpreter",
+            "evidence": [
+              "python3_--version__Python_3.11.2__DIRECT_PROBE_2026-10-21"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "tarfile_zipfile_and_elementtree_stdlib",
+            "evidence": [
+              "all_three_imported_and_used_to_reopen_real_artifacts__DIRECT_PROBE_2026-10-21"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "pypdf_for_the_pdf_inspector_only",
+            "evidence": [
+              "pypdf_PdfReader_reopened_the_real_pdf_and_reproduced_text_sha256_97fa8642__DIRECT_PROBE_2026-10-21"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "controller_trace_in_the_live_result",
+            "evidence": [
+              "all_ten_executing_goals_return_controller_execution_trace_including_the_single_plan_ones__DIRECT_PROBE_2026-10-21"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "unittest_and_pytest_runners",
+            "evidence": [
+              "python3_-m_unittest_ran_112_front_door_and_model_tests_ok__python3_-m_pytest_9.1.1_ran_44_front_compiler_tests__DIRECT_PROBE_2026-10-21"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "RE_INSPECT_EVERY_CLAIMED_EFFECT_FROM_DISK_IN_THE_CONTROLLER_TRACE_AND_REFUSE_ANY_CAPABILITY_WITH_NO_INSPECTOR__RATHER_THAN_KEYING_ACCEPTANCE_TO_ONE_EXACT_SENTENCE__OR_TRUSTING_THE_PRODUCERS_OWN_VERIFIED_FLAG",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/raw_goal_archive_compound_acceptance_v1.py",
+          "canonical/runtime/raw_goal_archive_acceptance_v1.py",
+          "canonical/runtime/lossless_raw_task_contract_v1.py",
+          "canonical/runtime/live_integrated_brain_v1.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://api.github.com/search/repositories?q=verify+agent+tool+output+artifact__BEST_MATCH_7_STARS__NO_PROJECT_RE_OPENS_PRODUCED_ARTIFACTS_AGAINST_A_TRACE"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://pypi.org/pypi/pypdf/json__HTTP_200"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://docs.python.org/3/library/tarfile.html__STDLIB_USED_TO_REOPEN_THE_ARCHIVE",
+          "https://docs.python.org/3/library/zipfile.html__STDLIB_USED_TO_REOPEN_THE_OOXML_PACKAGES"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "RE_OPEN_THE_ARTIFACTS_THE_TRACE_ALREADY_NAMES_AND_REFUSE_ANY_CAPABILITY_WITH_NO_INSPECTOR",
+      "WRITE_ONE_SENTENCE_SPECIFIC_VERIFIER_PER_GOAL__REJECTED_MEASURED_ONE_OF_TWENTY_THREE_AND_LINEAR_IN_SENTENCES",
+      "TRUST_THE_PRODUCERS_VERIFIED_FLAG__REJECTED_MEASURED_TO_ACCEPT_TWO_GOALS_THE_PRODUCER_SAID_WERE_UNVERIFIED",
+      "COMPARE_ENUMERATED_CANDIDATE_COUNT_TO_A_FRESH_GLOB__REJECTED_MEASURED_400_CLAIMED_AGAINST_2192_REAL_FILES_SO_THE_CAP_WOULD_LOOK_LIKE_A_LIE",
+      "REQUIRE_THE_TRACE_CAPABILITY_SEQUENCE_TO_EQUAL_THE_PLAN_CHAIN__REJECTED_MEASURED_THE_PLAN_AND_TRACE_ORDERS_LEGITIMATELY_DIFFER_WHEN_A_PREREQUISITE_PRODUCER_IS_INSERTED"
+    ],
+    "selected_surviving_route": "RE_INSPECT_EVERY_CLAIMED_EFFECT_FROM_DISK_IN_THE_CONTROLLER_TRACE_AND_REFUSE_ANY_CAPABILITY_WITH_NO_INSPECTOR__RATHER_THAN_KEYING_ACCEPTANCE_TO_ONE_EXACT_SENTENCE__OR_TRUSTING_THE_PRODUCERS_OWN_VERIFIED_FLAG",
+    "stop_condition": "VERIFIER_33_OF_33_PASS__112_FRONT_DOOR_AND_MODEL_TESTS_OK__150_GOAL_AND_GROUNDING_TESTS_WITH_ONLY_THE_3_PRE_EXISTING_FAILURES__SEMANTIC_ACCEPTANCE_9_OF_23_WAS_1__COMPILED_22_OF_23_AND_CORRECT_SELECTION_20_OF_23_AND_WRONG_CAPABILITY_2_OF_23_ALL_UNCHANGED__ARTIFACT_RECOMPILES_BYTE_IDENTICAL_TO_A_FIXED_POINT__AND_NEUTERING_THE_VERIFIER_MUST_TURN_15_OF_THE_22_NEW_TESTS_RED_WHICH_IT_MEASURED_DOES",
+    "why_selected_route_is_fastest_sufficient": "IT_REUSES_THE_TRACE_THE_RUNTIME_ALREADY_EMITS_SO_ONE_VERIFIER_COVERS_EVERY_GOAL_THE_TEN_INSPECTORS_REACH_RATHER_THAN_ONE_SENTENCE_AT_A_TIME__AND_IT_WAS_MEASURED_TO_MOVE_THE_NUMBER_NINE_STEPS_IN_ONE_PASS_WITH_NO_REGRESSION_ON_COMPILE_SELECTION_OR_EXECUTION"
+  },
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "RE_INSPECT_EVERY_CLAIMED_EFFECT_FROM_DISK_IN_THE_CONTROLLER_TRACE_AND_REFUSE_ANY_CAPABILITY_WITH_NO_INSPECTOR__RATHER_THAN_KEYING_ACCEPTANCE_TO_ONE_EXACT_SENTENCE__OR_TRUSTING_THE_PRODUCERS_OWN_VERIFIED_FLAG",
+  "stop_condition": "VERIFIER_33_OF_33_PASS__112_FRONT_DOOR_AND_MODEL_TESTS_OK__150_GOAL_AND_GROUNDING_TESTS_WITH_ONLY_THE_3_PRE_EXISTING_FAILURES__SEMANTIC_ACCEPTANCE_9_OF_23_WAS_1__COMPILED_22_OF_23_AND_CORRECT_SELECTION_20_OF_23_AND_WRONG_CAPABILITY_2_OF_23_ALL_UNCHANGED__ARTIFACT_RECOMPILES_BYTE_IDENTICAL_TO_A_FIXED_POINT__AND_NEUTERING_THE_VERIFIER_MUST_TURN_15_OF_THE_22_NEW_TESTS_RED_WHICH_IT_MEASURED_DOES",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__TEST_ONLY_COVERAGE_OF_AN_EXISTING_VERIFIED_EXECUTION_PATH_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "cba465790d8558e431cbb5642717db2ed4ed5bb5",
+          "note": "The front door at base. Its compound return path computes acceptance only when the goal matches one exact regular expression, and its single-plan path only for one archive capability with exactly one execution row, so the other ten executing goals reach the return with semantic_acceptance_complete hardcoded False. Reverting this file returns acceptance to 1 of 23, which is the counterexample that bounds the gain.",
+          "path": "canonical/runtime/live_integrated_brain_v1.py"
+        },
+        {
+          "git_blob_sha": "bbd74922dbd322413f90011c858db8131502416d",
+          "note": "The sentence-specific verifier at base, reused not modified. Its obligation envelope checks are lifted into the generic verifier, and it stays authoritative when it accepts, so the already-merged accepted goal is unchanged by this PR.",
+          "path": "canonical/runtime/raw_goal_archive_compound_acceptance_v1.py"
+        },
+        {
+          "git_blob_sha": "5873ea1798eef3e6bb0708a4e627db527a9c2743",
+          "note": "The obligation envelope source at base, unmodified. compile_contract is still called positionally by the front door and the generic verifier consumes its acceptance_contract verbatim, so acceptance cannot outlive the envelope.",
+          "path": "canonical/runtime/lossless_raw_task_contract_v1.py"
+        },
+        {
+          "git_blob_sha": "15e57779121f0ca73798044c4990d492b4f22534",
+          "note": "The world-binding end-to-end test at base, which asserted the goal ends in the receipts-still-required status because acceptance was unreachable for it. That assertion was the visible symptom of the gap; it is strengthened here to require full obligation discharge by re-inspection rather than loosened.",
+          "path": "canonical/tests/test_goal_compiler_world_binding_v1.py"
+        }
+      ],
+      "decisive_question": "IS_A_GOAL_ACCEPTED_BECAUSE_THE_MACHINE_REALLY_PRODUCED_THE_ARTIFACT_THE_SENTENCE_ASKED_FOR_OR_MERELY_BECAUSE_A_PRODUCER_SET_A_FLAG_ABOUT_ITSELF",
+      "falsifier_id": "THE_NEUTERED_VERIFIER_CONTROL_AND_THE_TAMPERED_ARTIFACT_CONTROLS",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "FIRST_ATTEMPT_COMPARED_THE_ENUMERATED_CANDIDATE_COUNT_TO_A_FRESH_GLOB_AND_MEASURED_400_CLAIMED_AGAINST_2192_REAL_FILES_SO_A_CORRECT_TRUNCATED_ENUMERATION_LOOKED_LIKE_A_LIE__CORRECTED_BY_MATCHING_EVERY_CANDIDATE_SHA256_TO_A_REAL_FILE_AND_REPORTING_THE_TRUNCATION_HONESTLY__SECOND_ATTEMPT_DIGESTED_THE_DECISION_INPUT_AS_RAW_BYTES_AND_REFUSED_AN_HONEST_PRODUCER_WHICH_DIGESTS_THE_PARSED_CONTENT__CORRECTED_TO_THE_CANONICAL_JSON_DIGEST_AND_LOCKED_BY_TEST",
+      "proposal_id": "GENERIC_TRACE_REINSPECTION_ACCEPTANCE_FOR_EVERY_INSPECTABLE_CAPABILITY_V1_20261021_V1"
+    }
+  },
+  "weakens_existing_guard": false
+}

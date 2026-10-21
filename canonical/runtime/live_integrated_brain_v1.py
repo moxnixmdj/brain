@@ -31,6 +31,9 @@ from canonical.runtime.raw_goal_archive_compound_acceptance_v1 import (
 from canonical.runtime.raw_goal_archive_compound_acceptance_v1 import (
     verify as verify_raw_archive_compound_acceptance,
 )
+from canonical.runtime.raw_goal_trace_acceptance_v1 import (
+    verify as verify_raw_goal_trace_acceptance,
+)
 from canonical.runtime.runtime_cognition_credit_guard_v1 import assert_credit_path_cognition_governance
 
 SCHEMA = "PROJECT_BRAIN_LIVE_INTEGRATED_BRAIN_V1"
@@ -717,15 +720,38 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
             # grammar has to match, the trace has to be the capabilities the
             # sentence asked for in the order it asked for them, and the
             # artifact is re-opened from disk rather than believed.
-            if passed and RAW_ARCHIVE_COMPOUND_GRAMMAR.fullmatch(goal) is not None:
+            if passed:
                 trace = (controller or {}).get("trace")
                 if isinstance(trace, list) and trace:
-                    acceptance = verify_raw_archive_compound_acceptance(
-                        goal=goal,
-                        execution=trace,
-                        raw_contract=raw_contract,
-                        root=ROOT,
-                    )
+                    acceptance = None
+                    if RAW_ARCHIVE_COMPOUND_GRAMMAR.fullmatch(goal) is not None:
+                        acceptance = verify_raw_archive_compound_acceptance(
+                            goal=goal,
+                            execution=trace,
+                            raw_contract=raw_contract,
+                            root=ROOT,
+                        )
+                    # A sentence-specific verifier stays authoritative when it
+                    # accepts. Otherwise the generic trace verifier measures the
+                    # work itself: it re-opens every artifact from disk and
+                    # refuses any capability it has no re-inspector for, so
+                    # acceptance can only grow when a real inspector is written.
+                    if not (
+                        isinstance(acceptance, Mapping)
+                        and acceptance.get("semantic_acceptance_complete") is True
+                    ):
+                        generic = verify_raw_goal_trace_acceptance(
+                            goal=goal,
+                            compiled_plan=compiled,
+                            execution=trace,
+                            raw_contract=raw_contract,
+                            root=ROOT,
+                        )
+                        if acceptance is None or (
+                            isinstance(generic, Mapping)
+                            and generic.get("semantic_acceptance_complete") is True
+                        ):
+                            acceptance = generic
                     compound_result["raw_goal_acceptance"] = acceptance
                     accepted = list(
                         acceptance.get("accepted_obligation_ids") or []
@@ -925,6 +951,30 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
                     raw_contract=raw_contract,
                     root=ROOT,
                 )
+        # Same asymmetry on the single-plan path: a sentence-specific verifier
+        # wins when it accepts, otherwise the generic trace verifier re-opens
+        # the artifacts from disk and refuses whatever it cannot re-inspect.
+        if (
+            result.get("pass") is True
+            and not (
+                isinstance(acceptance, Mapping)
+                and acceptance.get("semantic_acceptance_complete") is True
+            )
+        ):
+            trace = (result.get("controller_execution") or {}).get("trace")
+            if isinstance(trace, list) and trace:
+                generic = verify_raw_goal_trace_acceptance(
+                    goal=goal,
+                    compiled_plan=compiled,
+                    execution=trace,
+                    raw_contract=raw_contract,
+                    root=ROOT,
+                )
+                if acceptance is None or (
+                    isinstance(generic, Mapping)
+                    and generic.get("semantic_acceptance_complete") is True
+                ):
+                    acceptance = generic
         result["raw_goal_acceptance"] = acceptance
         result["accepted_raw_obligation_ids"] = (
             list(acceptance.get("accepted_obligation_ids") or [])
