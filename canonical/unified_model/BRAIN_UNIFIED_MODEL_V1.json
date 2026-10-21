@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "00b9bf330f82ba6d6523909ed336eb56fb0b65cd4d2d353b38d6bf34858a0b87"
+  "value": "7b246b232ecd1f811f53668ee6f91a46848b3b3b3655372b06cc73229dcf851f"
  },
  "engines": [
   {
@@ -221710,12 +221710,14 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_integrated_brain_v1.py",
-   "sha256": "1b6be0c4188034640edd48bd6f047a5f975576b7bdaa2470f9fee092dad9b852",
+   "sha256": "b34f285de5aa5f0260ec02b0fc1022f1b86ad97b04bf444cecc29d57ec89a8b5",
    "summary": "Live integrated Brain V1.",
-   "symbol_count": 13,
+   "symbol_count": 15,
    "symbols": [
     "LiveBrainError",
     "_receipt_admits",
+    "_record_raw_goal_experience",
+    "_run_raw_goal_impl",
     "_sha256_of",
     "_tokens",
     "_with_declared_contract",
@@ -221740,8 +221742,10 @@
     "livebrainerror": 1,
     "load_verified_registry": 1,
     "receipt_admits": 1,
+    "record_raw_goal_experience": 1,
     "run": 1,
     "run_raw_goal": 1,
+    "run_raw_goal_impl": 1,
     "sha256_of": 1,
     "tokens": 1,
     "v1": 2,
