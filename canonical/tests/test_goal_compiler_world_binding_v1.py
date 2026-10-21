@@ -919,13 +919,81 @@ class ProducerConsumerSecondPassTests(unittest.TestCase):
     def test_a_consumer_with_no_producer_still_refuses(self):
         """The map names producers; it does not manufacture them.
 
-        ``source.objective_relevance.rank.bm25`` needs
-        ``source.candidates.available``, which no capability produces. Nothing
-        in the registry can fill it, so the binder must still refuse rather
-        than invent a file.
+        ``decision.synthesis.typed.stdlib`` needs
+        ``structured.decision_evidence.available``, which no capability
+        produces. Nothing in the registry can fill it, so the binder must still
+        refuse rather than invent a file.
+
+        This assertion used to be made on ``source.candidates.available``.
+        That effect now HAS a producer (``source.candidates.enumerate.stdlib``),
+        so the assertion was repointed to an effect that still has none. The
+        property under test is unchanged: the map is read off the registry and
+        cannot conjure a producer that is not there.
         """
         providers = compiler._effect_providers(self.registry)
-        self.assertNotIn("source.candidates.available", providers)
+        self.assertNotIn("structured.decision_evidence.available", providers)
+        self.assertNotIn("json.file.available", providers)
+        # And the effect that did gain a producer is genuinely in the map,
+        # read off the registry rather than asserted.
+        self.assertIn("source.candidates.available", providers)
+        self.assertEqual(
+            providers["source.candidates.available"][0],
+            "source.candidates.enumerate.stdlib",
+        )
+
+    def test_a_dangling_effect_reference_becomes_a_real_producer_step(self):
+        """An emitted plan must not hand an adapter a placeholder.
+
+        ``_bind_planned_inputs`` resolves an ``effect_result`` slot to
+        ``{"$effect_result": ...}`` and the plan used to be emitted with that
+        reference still dangling and no step able to satisfy it, so the ranker
+        received a dict where its contract expects a path and died with
+        ``RELEVANCE_INPUT_NOT_JSON`` on whatever file world binding offered.
+
+        The producer is now emitted as step 0 and the reference rewritten to
+        the ``$result`` cycle that produces it.
+        """
+        plan = compiler.compile_goal(
+            "Rank source evidence by relevance to the objective.",
+            self.registry, self.root,
+        )
+        self.assertEqual(
+            plan.get("effect_producer_chain"),
+            ["source.candidates.enumerate.stdlib",
+             "source.objective_relevance.rank.bm25"],
+        )
+        # No dangling reference survives anywhere in the plan.
+        self.assertEqual(compiler._collect_effect_result_refs(plan.get("inputs")), [])
+        for part in plan.get("compiled_parts") or []:
+            self.assertEqual(
+                compiler._collect_effect_result_refs(part.get("inputs")), [],
+                f"dangling reference left in part {part.get('index')}",
+            )
+        # The consumer's slot points at the producer's cycle, not at a guess.
+        consumer = plan["compiled_parts"][-1]
+        self.assertEqual(
+            consumer["inputs"]["input_path"],
+            {"$result": {"cycle": 0, "field": "output_path"}},
+        )
+
+    def test_a_producer_that_cannot_bind_leaves_the_plan_untouched(self):
+        """Negative control: no chain is invented when step 0 could not run.
+
+        ``knowledge.consistency.assess`` resolves its evidence slot to a
+        producer that needs a url the sentence never states. Attaching that
+        producer would emit a chain whose first step is guaranteed to fail, so
+        the plan must be returned exactly as the binder produced it.
+        """
+        plan = compiler.compile_goal(
+            "Assess the consistency of knowledge observations.",
+            self.registry, self.root,
+        )
+        self.assertIsNone(plan.get("effect_producer_chain"))
+        self.assertNotIn("controller_actions", plan)
+        self.assertNotEqual(
+            compiler._collect_effect_result_refs(plan.get("inputs")), [],
+            "expected the dangling reference to be preserved, not silently dropped",
+        )
 
 
 class ChainedPlanScoreComparisonTests(unittest.TestCase):

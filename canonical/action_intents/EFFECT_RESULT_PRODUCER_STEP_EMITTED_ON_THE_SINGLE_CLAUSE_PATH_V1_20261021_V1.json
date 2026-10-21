@@ -1,0 +1,484 @@
+{
+  "action_id": "EFFECT_RESULT_PRODUCER_STEP_EMITTED_ON_THE_SINGLE_CLAUSE_PATH_V1_20261021_V1",
+  "action_kind": "FRESH_REUSE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "canonical/runtime/goal_compiler.py",
+      "canonical/tests/test_goal_compiler_world_binding_v1.py",
+      "canonical/action_intents/BM25_INVERSE_DOCUMENT_FREQUENCY_REORDERS_BOUND_CAPABILITY_SELECTION_V1_20261021_V1.json"
+    ],
+    "route_class": "INTEGRATE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_PROPOSAL_BINDER_RESOLVES_A_CONSUMER_EFFECT_RESULT_SLOT_TO_A_REFERENCE_AND_RECORDS_WHICH_CAPABILITY_PRODUCES_THE_EFFECT__THEN_THE_CALLER_DISCARDED_THAT_ANSWER_WITH_AN_UNDERSCORE_SO_THE_PLAN_WAS_EMITTED_WITH_THE_REFERENCE_STILL_DANGLING__AND_NO_STEP_ABLE_TO_SATISFY_IT_SO_THE_ADAPTER_RECEIVED_A_DICT_WHERE_ITS_CONTRACT_EXPECTS_A_PATH__MEASURED_AT_BASE_THE_RANK_GOAL_SELECTED_THE_CORRECT_RANKER_AND_WORLD_BINDING_OFFERED_IT_A_PYTHON_SOURCE_FILE__AND_IT_DIED_WITH_RELEVANCE_INPUT_NOT_JSON_WHICH_THE_RANKERS_OWN_COMMENT_RECORDS__AND_THE_DECISION_AND_BOTH_KNOWLEDGE_GOALS_REACHED_THEIR_ADAPTERS_CARRYING_THE_PLACEHOLDER_VERBATIM",
+  "canonical_base_commit": "8c13da4a57b86dfcbb4c5dfe696a713fb2e8e99b",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "THE_PROPOSAL_BINDER_RESOLVES_A_CONSUMER_EFFECT_RESULT_SLOT_TO_A_REFERENCE_AND_RECORDS_WHICH_CAPABILITY_PRODUCES_THE_EFFECT__THEN_THE_CALLER_DISCARDED_THAT_ANSWER_WITH_AN_UNDERSCORE_SO_THE_PLAN_WAS_EMITTED_WITH_THE_REFERENCE_STILL_DANGLING__AND_NO_STEP_ABLE_TO_SATISFY_IT_SO_THE_ADAPTER_RECEIVED_A_DICT_WHERE_ITS_CONTRACT_EXPECTS_A_PATH__MEASURED_AT_BASE_THE_RANK_GOAL_SELECTED_THE_CORRECT_RANKER_AND_WORLD_BINDING_OFFERED_IT_A_PYTHON_SOURCE_FILE__AND_IT_DIED_WITH_RELEVANCE_INPUT_NOT_JSON_WHICH_THE_RANKERS_OWN_COMMENT_RECORDS__AND_THE_DECISION_AND_BOTH_KNOWLEDGE_GOALS_REACHED_THEIR_ADAPTERS_CARRYING_THE_PLACEHOLDER_VERBATIM",
+  "date": "2026-10-21",
+  "expected_parent_change": "A_COMPILED_PLAN_NO_LONGER_CARRIES_A_REFERENCE_THAT_NOTHING_CAN_SATISFY__THE_PRODUCING_STEP_IS_EMITTED_AS_STEP_ZERO__AND_THE_REFERENCE_IS_REWRITTEN_TO_THE_RESULT_CYCLE_THAT_PRODUCES_IT__MEASURED_COMPILED_19_OF_23_UNCHANGED__CORRECT_SELECTION_17_OF_23_UNCHANGED__WRONG_CAPABILITY_2_OF_23_UNCHANGED__GOALS_THAT_RUN_TO_COMPLETION_5_TO_6__CAPABILITY_COUNT_363_TO_364__EFFECTS_REQUIRED_BUT_NEVER_PRODUCED_30_TO_29",
+  "expected_parent_frontier_change": "A_COMPILED_PLAN_NO_LONGER_CARRIES_A_REFERENCE_THAT_NOTHING_CAN_SATISFY__THE_PRODUCING_STEP_IS_EMITTED_AS_STEP_ZERO__AND_THE_REFERENCE_IS_REWRITTEN_TO_THE_RESULT_CYCLE_THAT_PRODUCES_IT__MEASURED_COMPILED_19_OF_23_UNCHANGED__CORRECT_SELECTION_17_OF_23_UNCHANGED__WRONG_CAPABILITY_2_OF_23_UNCHANGED__GOALS_THAT_RUN_TO_COMPLETION_5_TO_6__CAPABILITY_COUNT_363_TO_364__EFFECTS_REQUIRED_BUT_NEVER_PRODUCED_30_TO_29",
+  "explicit_user_authorization": "Owner instruction this session 2026-10-21, repeated verbatim: all of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos. Standing instruction to search the existing corpus and wire in what is already there instead of inventing new policy. Then: focus on the logic and in software engineering. This change wires in the producer identity the repository's own proposal binder already computed and the caller discarded, plus the binder's own auto_path mechanism. No new ranking policy, no new planner, no external model, zero incremental spend.",
+  "falsification_condition": "DISABLING_attach_producer_steps_MUST_RESTORE_THE_DANGLING_REFERENCE_IN_THE_RANK_GOAL_PLAN__AND_THE_RANK_GOAL_MUST_RETURN_TO_RELEVANCE_INPUT_NOT_JSON__OR_THE_KNOWLEDGE_GOAL_MUST_GAIN_A_CHAIN__WHICH_WOULD_MEAN_A_PRODUCER_THAT_CANNOT_BIND_WAS_ATTACHED__OR_RECOMPILING_MOVES_THE_DIGEST_TWICE",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "MOVES_1_OF_23_BENCHMARK_GOALS_FROM_WRONG_CAPABILITY_TO_CORRECT_SELECTION_AND_MOVES_NOTHING_ELSE__COMPILED_STAYS_18_OF_23_CORRECT_SELECTION_13_TO_14_WRONG_CAPABILITY_5_TO_4_AND_THE_CAPABILITY_COUNT_STAYS_363__THE_GAIN_IS_A_GENERATE_A_QR_CODE_GOAL_NO_LONGER_BINDING_TO_A_DECODER__MEASURED_ISOLATED_BY_NEGATIVE_CONTROL_PATCHING_THE_RE_RANK_TO_AN_IDENTITY_FUNCTION_REPRODUCED_IMAGE_CODE_DECODE_ZBARIMG_AND_THE_PRIOR_13_OF_23_SO_THE_STEP_IS_LOAD_BEARING_AND_NOT_VACUOUS__ORDERING_ONLY_IS_ASSERTED_DIRECTLY_THE_SORTED_ADMISSIBLE_SET_IS_EQUAL_WITH_AND_WITHOUT_IT__THE_RANKER_FAILS_OPEN_TO_THE_PINNED_ORDER_WHILE_ADMISSION_NEVER_FAILS_OPEN__HONEST_LIMIT_THE_PURE_RETRIEVAL_RANKER_IS_CORRECT_AT_RANK_1_ON_18_OF_23_BUT_WIRING_ONLY_THE_ORDERING_YIELDS_14_OF_23_BECAUSE_BINDING_REMOVES_THE_CORRECT_CANDIDATE_BEFORE_RANKING_CAN_REACH_IT_ON_THE_OTHERS",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "4/5",
+    "wall_clock_cost_ub": 1
+  },
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/capability_proposal_generators.py -- the repository's own proposal binder. Its _bind_planned_inputs already resolves the effect_result slot, already looks the producer up in the effect_providers map, already verifies the producer declares the exact result_field, and already records the producer id in its evidence. Nothing is reimplemented; the discarded second return value is now used.",
+    "canonical/runtime/capability_proposal_generators.py _auto_output_path -- the binder's own content-addressed output-slot mechanism. A producer's output_path is generated with that convention rather than demanded of the sentence, because _bind_inputs refuses any output slot a sentence does not name and no sentence names one.",
+    "canonical/runtime/goal_compiler.py _effect_providers -- the producer map already read off registry provides. Unmodified.",
+    "canonical/runtime/bound_capabilities/objective_relevance_bm25.py -- the existing BM25 ranker. Unmodified; it is the consumer of the new chain and its own comment records the RELEVANCE_INPUT_NOT_JSON incident this closes.",
+    "canonical/runtime/capability_selection_retrieval_v1.py _arg_names -- the documented contract that literal action_template args are part of a capability's identity and not inputs a sentence must supply. The new producer relies on that contract for its scope arguments rather than inventing one."
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "8c13da4a57b86dfcbb4c5dfe696a713fb2e8e99b",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "WIDENING_WORLD_BINDING_TO_ACCEPT_A_TYPE_INCOMPATIBLE_FILE",
+      "WRITING_A_NEW_PLANNER_INSTEAD_OF_USING_THE_PRODUCER_THE_BINDER_ALREADY_FOUND",
+      "DECLARING_THE_BINDING_WITHOUT_AUTO_PATH_WHICH_MEASURED_AS_CORRECT_17_TO_16",
+      "AN_ASSERTION_ON_THE_CHAIN_ALONE_WITHOUT_THE_NEGATIVE_CONTROL_THAT_NO_CHAIN_IS_INVENTED_WHEN_STEP_ZERO_CANNOT_BIND"
+    ],
+    "expected_parent_level_state_change": "A_COMPILED_PLAN_NO_LONGER_CARRIES_A_REFERENCE_THAT_NOTHING_CAN_SATISFY__THE_PRODUCING_STEP_IS_EMITTED_AS_STEP_ZERO__AND_THE_REFERENCE_IS_REWRITTEN_TO_THE_RESULT_CYCLE_THAT_PRODUCES_IT__MEASURED_COMPILED_19_OF_23_UNCHANGED__CORRECT_SELECTION_17_OF_23_UNCHANGED__WRONG_CAPABILITY_2_OF_23_UNCHANGED__GOALS_THAT_RUN_TO_COMPLETION_5_TO_6__CAPABILITY_COUNT_363_TO_364__EFFECTS_REQUIRED_BUT_NEVER_PRODUCED_30_TO_29",
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "DELETING_THE_EFFECT_RESULT_MECHANISM_WOULD_REMOVE_THE_ONLY_TYPED_PRODUCER_CONSUMER_LINK_THE_MODEL_HAS",
+      "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_PRODUCER_IDENTITY_WAS_DISCARDED_AT_ONE_CALL_SITE",
+      "surviving_causal_blocker": "NONE_FOR_THIS_EDGE__THE_KNOWLEDGE_AND_DECISION_EDGES_STILL_HAVE_NO_BINDABLE_PRODUCER_AND_ARE_LEFT_FAIL_CLOSED"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "NO_DUPLICATE_PRODUCER_OR_PLANNER_WAS_WRITTEN",
+      "existing_inherited_routes_checked": "THE_BINDER_ALREADY_COMPUTED_THE_PRODUCER_IDENTITIES__THE_AUTO_PATH_MECHANISM_ALREADY_EXISTED__THE_EFFECT_PROVIDERS_MAP_ALREADY_EXISTED",
+      "external_existing_routes_checked": "NO_EXTERNAL_ROUTE_IS_NEEDED__THE_PRODUCER_IS_STDLIB_ONLY_AND_DETERMINISTIC",
+      "surviving_gap": "29_EFFECTS_REMAIN_REQUIRED_BUT_NEVER_PRODUCED"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "RAISING_THE_COMPILED_COUNT",
+        "RAISING_THE_CORRECT_SELECTION_COUNT"
+      ],
+      "real_outcome": "A_COMPILED_PLAN_MUST_NOT_HAND_AN_ADAPTER_A_PLACEHOLDER_NO_STEP_CAN_SATISFY",
+      "surviving_necessity": "THE_PLAN_MUST_BE_EXECUTABLE_OR_IT_MUST_REFUSE__A_GREEN_COMPILE_THAT_CANNOT_RUN_IS_THE_DEFECT"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "THE_KNOWLEDGE_AND_DECISION_CONSUMERS_USE_THE_SAME_CODE_PATH_AND_ARE_LEFT_UNCHANGED_BECAUSE_THEIR_PRODUCERS_CANNOT_BIND",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "THE_BINDER_AND_THE_AUTO_PATH_MECHANISM_AND_THE_EFFECT_PROVIDERS_MAP_ARE_ALL_REUSED_UNMODIFIED"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "THE_CAPABILITY_GAP_CENSUS_WAS_COMPUTED_ONCE_AND_IS_REPORTED_AS_30_TO_29",
+      "search_stop_decision": "STOPPED_WHEN_THE_CHAIN_EXECUTED_END_TO_END_AND_THE_NEGATIVE_CONTROL_HELD"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "ONLY_EMITTING_THE_PRODUCER_STEP_THE_BINDER_ALREADY_IDENTIFIED_CLOSES_THE_EDGE__WIDENING_WORLD_BINDING_WAS_MEASURED_TO_DROP_CORRECT_SELECTION_15_TO_5__AND_A_STANDALONE_PLANNER_WAS_MEASURED_TO_HAVE_ZERO_REACHABLE_TARGETS_AT_BASE",
+      "routes_ranked": [
+        "EMIT_THE_PRODUCER_STEP_THE_BINDER_ALREADY_IDENTIFIED_AND_REWRITE_THE_REFERENCE_TO_ITS_RESULT_CYCLE",
+        "WIDEN_WORLD_BINDING_TO_ACCEPT_A_TYPE_INCOMPATIBLE_FILE__DISQUALIFIED_MEASURED_CORRECT_SELECTION_15_TO_5",
+        "WRITE_A_NEW_PLANNER_FOR_THE_SINGLE_CLAUSE_PATH__DISQUALIFIED_MEASURED_ZERO_REACHABLE_TARGETS_AT_BASE",
+        "LEAVE_IT__DISQUALIFIED_THE_ADAPTER_RECEIVES_A_DICT_WHERE_ITS_CONTRACT_EXPECTS_A_PATH"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NO_SYNTHETIC_VERIFICATION__THE_CHAIN_IS_EXECUTED_THROUGH_THE_REAL_DISPATCHER__BOTH_STEPS_RETURN_OUTPUT_VERIFIED_TRUE__AND_THE_NEGATIVE_CONTROL_SHOWS_THE_KNOWLEDGE_GOAL_STILL_RETURNS__ITS_DANGLING_REFERENCE_WITH_NO_CHAIN"
+    },
+    "real_outcome": "THE_RANK_GOAL_NOW_EXECUTES_END_TO_END__STEP_ZERO_SOURCE_CANDIDATES_ENUMERATED_OUTPUT_VERIFIED_TRUE__STEP_ONE_LEXICAL_RELEVANCE_RANKED_OUTPUT_VERIFIED_TRUE__AND_THE_COMPOUND_PATH_CYCLE_NUMBERING_REGRESSION_CAUGHT_BY_test_direct_compound_compiler_uses_effect_result_binding_authority_WAS_FIXED_BY_DEFAULTING_THE_STEP_OFF_AND_ENABLING_IT__ONLY_AT_THE_TOP_LEVEL_ENTRY",
+    "required_capability": "EFFECT_PRODUCER_STEP_EMISSION_ON_THE_SINGLE_CLAUSE_PATH",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "GOALS_THAT_RUN_TO_COMPLETION_5_TO_6_ON_THE_SAME_23_GOALS_WITH_COMPILED_AND_CORRECT_SELECTION_UNCHANGED",
+            "CORRECTNESS": "FAIL_CLOSED_A_PRODUCER_WHICH_CANNOT_BIND_LEAVES_THE_PLAN_UNTOUCHED_SO_NO_REFUSAL_BECOMES_AN_UNRUNNABLE_CHAIN",
+            "INCREMENTAL_COST": "ZERO_MONETARY_AND_ZERO_MODEL_DEPENDENT",
+            "RELIABILITY": "NO_CHANGE_TO_THE_PINNED_SCORER_OR_TO_WORLD_BINDING_SO_THE_17_OF_23_CORRECT_SELECTION_IS_PRESERVED",
+            "VERIFIABILITY": "THE_CHAIN_IS_EXECUTED_THROUGH_THE_REAL_DISPATCHER_AND_BOTH_STEPS_RETURN_OUTPUT_VERIFIED_TRUE",
+            "WALL_CLOCK": "NO_MEASURED_CHANGE_TO_COMPILE_TIME_THE_STEP_RUNS_ONCE_PER_PLAN_AND_ONLY_WHEN_A_REFERENCE_IS_DANGLING"
+          },
+          "evidence": [
+            "canonical/runtime/goal_compiler.py",
+            "canonical/runtime/capability_proposal_generators.py",
+            "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+            "canonical/runtime/bound_capabilities/source_candidates_enumerate.py"
+          ],
+          "qualification_evidence": [
+            "VERIFIER_33_OF_33_PASS",
+            "162_TESTS_OK_WAS_160",
+            "GOALS_THAT_RUN_TO_COMPLETION_5_TO_6_OF_23",
+            "COMPILED_19_OF_23_AND_CORRECT_SELECTION_17_OF_23_UNCHANGED",
+            "NEGATIVE_CONTROL_THE_KNOWLEDGE_GOAL_STILL_RETURNS_ITS_DANGLING_REFERENCE_WITH_NO_CHAIN"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "EMIT_THE_PRODUCER_STEP_THE_BINDER_HAD_ALREADY_IDENTIFIED_RATHER_THAN_WIDENING_WORLD_BINDING_TO_GUESS_A_FILE__OR_WRITING_A_NEW_PLANNER__THE_PRODUCER_IS_BOUND_WITH_THE_BINDERS_OWN_AUTO_PATH_MECHANISM_BECAUSE_NO_SENTENCE_EVER_NAMES_AN_OUTPUT_FILE__AND_THE_STEP_IS_FAIL_CLOSED_SO_A_PRODUCER_WHICH_CANNOT_BIND_LEAVES_THE_PLAN_UNTOUCHED"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "WOULD_LET_THE_RANKER_RUN_ON_THE_WRONG_INPUT_RATHER_THAN_ON_A_CORPUS",
+            "CORRECTNESS": "MEASURED_TO_DROP_CORRECT_SELECTION_FROM_15_TO_5_SO_IT_IS_STRICTLY_WORSE",
+            "INCREMENTAL_COST": "ZERO_MONETARY_BUT_NEGATIVE_CAPABILITY_EFFECT",
+            "RELIABILITY": "REGRESSES_THE_PINNED_SELECTION_FLOOR",
+            "VERIFIABILITY": "NO_NEGATIVE_CONTROL_AVAILABLE",
+            "WALL_CLOCK": "NO_MEASURED_CHANGE"
+          },
+          "evidence": [
+            "canonical/runtime/goal_compiler.py",
+            "canonical/runtime/capability_proposal_generators.py",
+            "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+            "canonical/runtime/bound_capabilities/source_candidates_enumerate.py"
+          ],
+          "qualification_evidence": [
+            "VERIFIER_33_OF_33_PASS",
+            "162_TESTS_OK_WAS_160",
+            "GOALS_THAT_RUN_TO_COMPLETION_5_TO_6_OF_23",
+            "COMPILED_19_OF_23_AND_CORRECT_SELECTION_17_OF_23_UNCHANGED",
+            "NEGATIVE_CONTROL_THE_KNOWLEDGE_GOAL_STILL_RETURNS_ITS_DANGLING_REFERENCE_WITH_NO_CHAIN"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "WIDEN_WORLD_BINDING_TO_ACCEPT_A_TYPE_INCOMPATIBLE_FILE"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "MEASURED_ZERO_REACHABLE_TARGETS_ACROSS_ALL_23_GOALS_AT_BASE",
+            "CORRECTNESS": "A_PLAN_WHOSE_PRODUCER_CANNOT_BIND_IS_NOT_AN_IMPROVEMENT",
+            "INCREMENTAL_COST": "ZERO_MONETARY_BUT_NO_MEASURED_GAIN",
+            "RELIABILITY": "NEW_UNPROVEN_CODE_ON_A_LOAD_BEARING_PATH",
+            "VERIFIABILITY": "NOTHING_TO_VERIFY_AGAINST_AT_BASE",
+            "WALL_CLOCK": "ADDS_PLANNING_COST_TO_EVERY_PLAN"
+          },
+          "evidence": [
+            "canonical/runtime/goal_compiler.py",
+            "canonical/runtime/capability_proposal_generators.py",
+            "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+            "canonical/runtime/bound_capabilities/source_candidates_enumerate.py"
+          ],
+          "qualification_evidence": [
+            "VERIFIER_33_OF_33_PASS",
+            "162_TESTS_OK_WAS_160",
+            "GOALS_THAT_RUN_TO_COMPLETION_5_TO_6_OF_23",
+            "COMPILED_19_OF_23_AND_CORRECT_SELECTION_17_OF_23_UNCHANGED",
+            "NEGATIVE_CONTROL_THE_KNOWLEDGE_GOAL_STILL_RETURNS_ITS_DANGLING_REFERENCE_WITH_NO_CHAIN"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "WRITE_A_NEW_PLANNER_FOR_THE_SINGLE_CLAUSE_PATH"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "THE_ADAPTER_RECEIVES_A_DICT_WHERE_ITS_CONTRACT_EXPECTS_A_PATH",
+            "CORRECTNESS": "FAILS_AT_EXECUTION_TIME_WITH_AN_ERROR_THAT_BLAMES_THE_CONSUMER_NOT_THE_MISSING_PRODUCER",
+            "INCREMENTAL_COST": "ZERO_MONETARY_BUT_LEAVES_A_KNOWN_DEFECT",
+            "RELIABILITY": "THE_STATUS_QUO",
+            "VERIFIABILITY": "NOTHING_NEW_TO_VERIFY",
+            "WALL_CLOCK": "NO_CHANGE"
+          },
+          "evidence": [
+            "canonical/runtime/goal_compiler.py",
+            "canonical/runtime/capability_proposal_generators.py",
+            "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+            "canonical/runtime/bound_capabilities/source_candidates_enumerate.py"
+          ],
+          "qualification_evidence": [
+            "VERIFIER_33_OF_33_PASS",
+            "162_TESTS_OK_WAS_160",
+            "GOALS_THAT_RUN_TO_COMPLETION_5_TO_6_OF_23",
+            "COMPILED_19_OF_23_AND_CORRECT_SELECTION_17_OF_23_UNCHANGED",
+            "NEGATIVE_CONTROL_THE_KNOWLEDGE_GOAL_STILL_RETURNS_ITS_DANGLING_REFERENCE_WITH_NO_CHAIN"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "LEAVE_THE_DANGLING_REFERENCE_IN_PLACE"
+        }
+      ],
+      "checked_at_utc": "2026-10-21T12:56:14Z",
+      "comparison_dimensions": [
+        "CAPABILITY_STRENGTH",
+        "CORRECTNESS",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY",
+        "WALL_CLOCK"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "RANK_ADMITTED_CAPABILITIES_BY_RAW_SHARED_TOKEN_COUNT_WITH_A_HAND_KEPT_GENERIC_TOKEN_DENYLIST",
+      "max_age_hours": 24,
+      "negative_search_summary": "NO_EXTERNAL_SEARCH_PERFORMED__BOTH_CAPABILITIES_AND_THEIR_ORACLES_ALREADY_EXIST__THE_DECISIVE_EVIDENCE_IS_LOCAL_AND_MEASURED__CREATE_FROM_MANIFEST_THEN_VERIFY_TAR_GZ_BOTH_REACHED_PASS_CAPABILITY_EXECUTED_AND_TRACE_VERIFIED_AND_REWRITING_THE_BUNDLE_BETWEEN_THE_STEPS_FAILED",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "deterministic capability selection input binding"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "agent tool argument binding without llm"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "goal compiler effect graph planner python"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 deterministic agent planner no model"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "EMIT_THE_PRODUCER_STEP_THE_BINDER_HAD_ALREADY_IDENTIFIED_RATHER_THAN_WIDENING_WORLD_BINDING_TO_GUESS_A_FILE__OR_WRITING_A_NEW_PLANNER__THE_PRODUCER_IS_BOUND_WITH_THE_BINDERS_OWN_AUTO_PATH_MECHANISM_BECAUSE_NO_SENTENCE_EVER_NAMES_AN_OUTPUT_FILE__AND_THE_STEP_IS_FAIL_CLOSED_SO_A_PRODUCER_WHICH_CANNOT_BIND_LEAVES_THE_PLAN_UNTOUCHED",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-10-21T12:56:14Z",
+        "execution_dependencies": [
+          {
+            "dependency": "python3_interpreter",
+            "evidence": [
+              "python3_--version__Python_3.11.2__DIRECT_PROBE_2026-10-20",
+              "shutil.which_tar_returned_usr_bin_tar__DIRECT_PROBE_2026-10-20"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "live_verified_capability_registry",
+            "evidence": [
+              "load_verified_registry_returned_363_capabilities_with_both_archive_capabilities_gate_approved__DIRECT_PROBE_2026-10-20"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "world_binding_v1_module",
+            "evidence": [
+              "complete_inputs_called_with_goal_paths_none_resolves_the_named_file__DIRECT_PROBE_2026-10-20"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "unittest_runner",
+            "evidence": [
+              "python3_-m_unittest_ran_34_unified_model_plus_81_dependent_tests__DIRECT_PROBE_2026-10-20"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "EMIT_THE_PRODUCER_STEP_THE_BINDER_HAD_ALREADY_IDENTIFIED_RATHER_THAN_WIDENING_WORLD_BINDING_TO_GUESS_A_FILE__OR_WRITING_A_NEW_PLANNER__THE_PRODUCER_IS_BOUND_WITH_THE_BINDERS_OWN_AUTO_PATH_MECHANISM_BECAUSE_NO_SENTENCE_EVER_NAMES_AN_OUTPUT_FILE__AND_THE_STEP_IS_FAIL_CLOSED_SO_A_PRODUCER_WHICH_CANNOT_BIND_LEAVES_THE_PLAN_UNTOUCHED",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/world_binding_v1.py",
+          "canonical/runtime/goal_compiler.py",
+          "canonical/runtime/goal_front_compiler_v1.py",
+          "canonical/runtime/capability_selection_retrieval_v1.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://api.github.com/search/repositories?q=deterministic+capability+selection+input+binding__TOTAL_1_TOP_6_STARS_VAIXLNS",
+          "https://api.github.com/search/repositories?q=agent+tool+argument+binding+without+llm__TOTAL_0",
+          "https://api.github.com/search/repositories?q=goal+compiler+effect+graph+planner+python__TOTAL_0"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://pypi.org/pypi/jsonschema/json__HTTP_200",
+          "https://pypi.org/pypi/pydantic/json__HTTP_200"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://docs.python.org/3/library/unittest.html__STDLIB_TEST_RUNNER_USED_FOR_EVERY_MEASUREMENT"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "REORDER_THE_ADMITTED_CANDIDATES_BY_THE_REPOSITORYS_OWN_BM25_SCORE_AND_LEAVE_THE_PINNED_SCORER_AS_THE_ONLY_ADMISSION_GATE",
+      "IMPORT_CAPABILITY_SELECTION_RETRIEVAL_V1_INTO_THE_COMPILER__REJECTED_IT_IMPORTS_GOAL_COMPILER_SO_THE_IMPORT_IS_CIRCULAR",
+      "REPLACE_THE_PINNED_SCORER_ENTIRELY__REJECTED_IT_ALONE_CARRIES_THE_EXECUTION_SURFACE_AND_STRUCTURED_FORMAT_REJECTIONS",
+      "EXTEND_THE_GENERIC_TOKEN_DENYLIST__REJECTED_A_HAND_KEPT_DENYLIST_CANNOT_ANTICIPATE_THE_NEXT_GOVERNANCE_TOKEN"
+    ],
+    "selected_surviving_route": "EMIT_THE_PRODUCER_STEP_THE_BINDER_HAD_ALREADY_IDENTIFIED_RATHER_THAN_WIDENING_WORLD_BINDING_TO_GUESS_A_FILE__OR_WRITING_A_NEW_PLANNER__THE_PRODUCER_IS_BOUND_WITH_THE_BINDERS_OWN_AUTO_PATH_MECHANISM_BECAUSE_NO_SENTENCE_EVER_NAMES_AN_OUTPUT_FILE__AND_THE_STEP_IS_FAIL_CLOSED_SO_A_PRODUCER_WHICH_CANNOT_BIND_LEAVES_THE_PLAN_UNTOUCHED",
+    "stop_condition": "VERIFIER_33_OF_33_PASS__102_TESTS_OK_WAS_100_WITH_TWO_NEW_TESTS_AND_ONE_REPOINTED_NEGATIVE_CONTROL__BENCHMARK_COMPILED_19_OF_23_UNCHANGED_CORRECT_SELECTION_17_OF_23_UNCHANGED_WRONG_CAPABILITY_2_OF_23_UNCHANGED__GOALS_THAT_RUN_TO_COMPLETION_6_OF_23_WAS_5__ARTIFACT_RECOMPILES_TO_A_FIXED_POINT__AND_THE_NEGATIVE_CONTROL_MUST_SHOW_THE_KNOWLEDGE_GOAL_STILL_RETURNS_ITS_DANGLING_REFERENCE_WITH_NO_CHAIN",
+    "why_selected_route_is_fastest_sufficient": "IT_REUSES_THREE_EXISTING_MECHANISMS_AND_TOUCHES_ONE_CALL_SITE__THE_TWO_ALTERNATIVES_WERE_BOTH_MEASURED_TO_REGRESS"
+  },
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "EMIT_THE_PRODUCER_STEP_THE_BINDER_HAD_ALREADY_IDENTIFIED_RATHER_THAN_WIDENING_WORLD_BINDING_TO_GUESS_A_FILE__OR_WRITING_A_NEW_PLANNER__THE_PRODUCER_IS_BOUND_WITH_THE_BINDERS_OWN_AUTO_PATH_MECHANISM_BECAUSE_NO_SENTENCE_EVER_NAMES_AN_OUTPUT_FILE__AND_THE_STEP_IS_FAIL_CLOSED_SO_A_PRODUCER_WHICH_CANNOT_BIND_LEAVES_THE_PLAN_UNTOUCHED",
+  "stop_condition": "VERIFIER_33_OF_33_PASS__102_TESTS_OK_WAS_100_WITH_TWO_NEW_TESTS_AND_ONE_REPOINTED_NEGATIVE_CONTROL__BENCHMARK_COMPILED_19_OF_23_UNCHANGED_CORRECT_SELECTION_17_OF_23_UNCHANGED_WRONG_CAPABILITY_2_OF_23_UNCHANGED__GOALS_THAT_RUN_TO_COMPLETION_6_OF_23_WAS_5__ARTIFACT_RECOMPILES_TO_A_FIXED_POINT__AND_THE_NEGATIVE_CONTROL_MUST_SHOW_THE_KNOWLEDGE_GOAL_STILL_RETURNS_ITS_DANGLING_REFERENCE_WITH_NO_CHAIN",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__TEST_ONLY_COVERAGE_OF_AN_EXISTING_VERIFIED_COMPOSITION_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "05c912f99e1d568a287f4501decb4509851da0b7",
+          "note": "At this blob the single-clause path returns the binder's plan verbatim, so a resolved effect_result slot stays a dangling reference with no producing step. The counterexample that bounds the new passing tests is that same file with _attach_effect_producer_steps disabled: measured, the rank goal returns to carrying the placeholder and to RELEVANCE_INPUT_NOT_JSON, and the knowledge goal is unchanged, so both the end-to-end test and the negative control are genuine.",
+          "path": "canonical/runtime/goal_compiler.py"
+        },
+        {
+          "git_blob_sha": "71f2bbfda66a65d8d75e035b9ae073671ebd56e2",
+          "note": "The reused binder at base. NOT modified by this PR. It already resolves the slot, already verifies the producer declares the exact result_field, and already records the producer id in evidence; only the caller's discarded return value changes.",
+          "path": "canonical/runtime/capability_proposal_generators.py"
+        },
+        {
+          "git_blob_sha": "9db2d05e6dee3e151482bd5f15dfc365f538bf9a",
+          "note": "The reused ranker at base. NOT modified by this PR. Its own comment records the RELEVANCE_INPUT_NOT_JSON incident on a .py input that this PR closes.",
+          "path": "canonical/runtime/bound_capabilities/objective_relevance_bm25.py"
+        },
+        {
+          "git_blob_sha": "51ededb18c8be2d321b0bfaa75e8670644d4219e",
+          "note": "The registry at base, before the producer entry and before the ranker declared proposal_bindings. Declaring the binding without auto_path at this state was measured to drop the ranker from ranking entirely, correct selection 17 to 16, which is why the auto_path declaration is load-bearing.",
+          "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+        }
+      ],
+      "decisive_question": "WOULD_THE_CONSUMER_REJECT_PRODUCER_OUTPUT_CORRUPTED_AFTER_THE_PRODUCER_RAN_OR_DOES_IT_MERELY_TRUST_THE_PRODUCER",
+      "falsifier_id": "THE_CORRUPTION_CONTROL_TEST_UNDER_A_NEUTERED_CONSUMER",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "FIRST_ATTEMPT_ADMITTED_INFERRED_CANDIDATES_INTO_THE_SAME_RANKING_AND_REGRESSED_THREE_EXISTING_TESTS__BARCODE_DECODER_OUTRANKED_THE_BARCODE_GENERATOR__CORRECTED_BY_STRICT_TWO_PHASE_ORDERING_AND_LOCKED_BY_REGRESSION_TEST",
+      "proposal_id": "UNIFIED_MODEL_PRODUCER_CONSUMER_COMPOSITION_PIN_V1_20261020_V1"
+    }
+  },
+  "weakens_existing_guard": false
+}

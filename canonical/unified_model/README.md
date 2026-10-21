@@ -5,7 +5,7 @@ compiled into a single model.
 
 ```
 canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json
-model digest: 3e0e7354faa9a42e32286bc752bd0bd3b6e4ee647a358dbb2a6f3822ddeb4521
+model digest: 22f5de496c2a1a29dd23cbb387d2b37345e2aa5d72028cdf4a03b1c50bc299f0
 ```
 
 This is a **compiled projection**, not a new authority. It is a deterministic
@@ -15,7 +15,7 @@ function of the repository tree: compile it twice and you get the same bytes.
 
 | Layer | Count | What it is |
 |---|---|---|
-| Capabilities | **363** | 68 promoted bound capabilities + 295 receipt-backed capabilities from the live verified registry |
+| Capabilities | **364** | 69 promoted bound capabilities + 295 receipt-backed capabilities from the live verified registry |
 | Engines | **26** | 25 unified-cognitive-fabric modes + 1 meta orchestrator |
 | Skills | **18** | Internalized `SKILL.md` procedures with their operational lines |
 | Knowledge | **168** | 59 laws, 95 documents, 14 structured records — indexed by hash, headings and terms |
@@ -119,7 +119,7 @@ written oracles:
 | `EXECUTION_FRESH` | Python source audit, tar create/verify, SQLite creation and test execution run on new inputs and agree with independent oracles; a substrate-blocked capability must fail closed and name the gap |
 | `NEGATIVE_CONTROLS` | unknown goal, missing inputs, tampered artifact, nonzero-spend capability and provider-less engine are all refused |
 | `MODEL_DEPENDENCE_AUDIT` | no model client is imported in the runtime or named in any capability route; zero external calls, zero spend |
-| `ONE_FRONT_DOOR` | all 363 capabilities and 26 engines are addressable through this one artifact |
+| `ONE_FRONT_DOOR` | all 364 capabilities and 26 engines are addressable through this one artifact |
 
 Current result: **33/33 sandbox checks pass** on seeds
 `arena-first-run`, `alpha-7`, `beta-19`, `gamma-2026`, `delta-3`,
@@ -133,7 +133,7 @@ counts as independent verification.
   visual capabilities need `PIL`, and browser capture needs `chromedriver`.
   `json.query.jq` has `jq` installed but still fails closed with
   `BOUND_APT_METADATA_NOT_FOUND`; the model reports that instead of hiding it.
-- 356 of 363 capabilities have their declared dependencies present. Present is
+- 357 of 364 capabilities have their declared dependencies present. Present is
   not the same as executable: adapters can fail closed on other preconditions.
   Only execution evidence answers that question, which is why the verifier runs
   real instances rather than counting files.
