@@ -23559,7 +23559,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/objective_relevance_bm25.py",
-    "source_sha256": "43c7e8c05161d91ae057023928b8d212eb514261b69b74a6bbc674df94a2a6f2",
+    "source_sha256": "70f4729046b4e526fdbd6e04424c446dfdcc980d2e25609e2fd075f5cd15b8e9",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24254,7 +24254,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6260,
+  "research_index_records": 6261,
   "routing_tokens": 1775,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24263,7 +24263,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e7bbe1d07ba91fc9413c1eda66040b8a7414d1d9621e476335d25bd9bfb6d468"
+  "value": "53e5b44f9540805e55069be153619a47c96bc8a40cfb2dd67e2a47abb5639f71"
  },
  "engines": [
   {
@@ -46119,7 +46119,7 @@
   "included_source_count": 859,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "3029597e5cb7f2a77b0c2e89df641781f92bf30f235808941bf8081ba53b610d"
+  "source_tree_digest": "57197bc10252c77877200bb660bbeb82e2503acde8e5c643caeacfae8d40a420"
  },
  "research_index": [
   {
@@ -187760,6 +187760,31 @@
     "reuse_python_transitive_runtime_closure_v1_plus_exact_dependency_relevance_boundary__seed_from_declared_system_not_external_verifier_tooling": 1,
     "subject": 1,
     "v2": 1
+   }
+  },
+  {
+   "action_id": "RELEVANCE_ADAPTER_INPUT_TYPE_GUARD_V1_20261021_V1",
+   "capability": false,
+   "date": "2026-10-21",
+   "id": "research:canonical/action_intents/RELEVANCE_ADAPTER_INPUT_TYPE_GUARD_V1_20261021_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/RELEVANCE_ADAPTER_INPUT_TYPE_GUARD_V1_20261021_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "698f752e64c86ae69cba868f58373ce1aa582d859f4a5fef610a03a03068aff8",
+   "status": "",
+   "terms": {
+    "20261021": 1,
+    "adapter": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "guard": 1,
+    "input": 1,
+    "make_the_adapter_say_what_is_wrong_rather_than_leak_a_decoder_exception__a_slot_named_input_path_states_no_type_so_anything_can_arrive_and_measured_a_py_file_did_because_the_word_source_in_the_capability_id_made_kind_keys_for_announce_python_source__guard_the_read_and_the_object_shape_in_the_adapter_which_is_the_layer_that_owns_the_contract__the_vocabulary_fix_was_implemented_and_measured_and_rejected_because_it_moved_extended_wrong_capability_from_3_to_4": 1,
+    "objective_relevance_bm25_run_read_its_input_with_an_unguarded_json_loads_so_a_non_json_input_escaped_as_a_bare_jsondecoder_error_and_surfaced_only_as_fail_live_controller_execution_with_no_legible_cause__measured_the_input_was_canonical_astra_runtime_state_env_hard_src_deep_nested_tool_py_a_python_file_bound_to_a_slot_the_adapter_parses_as_json_because_kind_keys_for_source_objective_relevance_rank_bm25_returns_python_source_on_the_strength_of_the_word_source_alone": 1,
+    "relevance": 1,
+    "relevance_adapter_input_type_guard_v1_20261021_v1": 1,
+    "the_research_record_is_now_reachable_through_the_model_without_inflating_the_capability_claim__6256_governance_verification_and_intent_records_are_indexed_as_research_index_with_capability_false_on_every_row_solve_never_routes_there_and_find_research_answers_where_was_this_decided_rather_than_run_this__generated_outputs_are_excluded_so_the_compile_is_a_verified_fixed_point__capability_count_stays_363__new_digest_fb389ce2__107_tests_ok_verifier_33_of_33_benchmark_unchanged_at_17_of_23_and_12_of_23": 1,
+    "type": 1,
+    "v1": 2
    }
   },
   {

@@ -75,4 +75,52 @@ class ObjectiveRelevanceTests(unittest.TestCase):
         self.assertEqual(out["primary_source_status"],"UNVERIFIED")
         self.assertTrue(outp.is_file())
 
+class InputTypeGuardTests(unittest.TestCase):
+    """A slot named input_path states no type, so anything can arrive.
+
+    Measured: the word "source" in source.objective_relevance.rank.bm25 made
+    kind_keys_for announce python.source, world binding handed this adapter a
+    .py file for input_path, and json.loads died with a bare JSONDecodeError
+    that surfaced as an unexplained FAIL__LIVE_CONTROLLER_EXECUTION. The
+    binding defect is recorded separately; what is pinned here is that the
+    adapter says what is wrong instead of leaking a decoder exception.
+    """
+
+    @classmethod
+    def setUpClass(cls): cls.m = load()
+
+    def _run_on(self, name, body):
+        import tempfile
+        with tempfile.TemporaryDirectory() as td:
+            root = pathlib.Path(td)
+            (root / name).write_text(body, encoding="utf-8")
+            return self.m.run(
+                {"input_path": name, "output_path": "out.json",
+                 "objective": "sqlite backup consistency"},
+                root,
+            )
+
+    def test_python_source_is_reported_not_parsed(self):
+        with self.assertRaises(ValueError) as ctx:
+            self._run_on("tool.py", "def f():\n    return 1\n")
+        self.assertIn("RELEVANCE_INPUT_NOT_JSON", str(ctx.exception.args[0]))
+
+    def test_empty_file_is_reported_not_parsed(self):
+        with self.assertRaises(ValueError) as ctx:
+            self._run_on("empty.json", "")
+        self.assertIn("RELEVANCE_INPUT_NOT_JSON", str(ctx.exception.args[0]))
+
+    def test_json_that_is_not_an_object_is_reported(self):
+        with self.assertRaises(ValueError) as ctx:
+            self._run_on("list.json", "[1, 2, 3]")
+        self.assertIn("RELEVANCE_INPUT_NOT_AN_OBJECT", str(ctx.exception.args[0]))
+
+    def test_a_real_object_still_ranks(self):
+        out = self._run_on("ok.json", json.dumps({
+            "objective": "sqlite backup consistency",
+            "candidates": [{"title": "SQLite backup", "snippet": "sqlite backup consistency", "rank": 0}],
+        }))
+        self.assertEqual(out["status"], "LEXICAL_RELEVANCE_RANKED", out)
+
+
 if __name__=="__main__": unittest.main(verbosity=2)
