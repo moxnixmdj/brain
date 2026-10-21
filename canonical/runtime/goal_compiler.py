@@ -801,6 +801,32 @@ def _effect_providers(registry):
     return providers
 
 
+def _plan_score(plan):
+    """The score of a compiled plan, comparable across passes.
+
+    Both passes score with the same ``_score``, so this is a like-for-like
+    comparison and not a heuristic. A compound plan is scored by its strongest
+    part, which is the part that decided the selection.
+    """
+    if not isinstance(plan,dict):
+        return -1
+    parts=plan.get("compiled_parts") or []
+    if parts:
+        best=-1
+        for part in parts:
+            if isinstance(part,dict):
+                try:
+                    best=max(best,float(part.get("score") or 0))
+                except (TypeError,ValueError):
+                    continue
+        if best>=0:
+            return best
+    try:
+        return float(plan.get("score") or 0)
+    except (TypeError,ValueError):
+        return -1
+
+
 def _rank_bindable_candidates(
     goal, registry, root, context_paths=None, future_clauses=None,
     proposal_binder=None, effect_providers=None, allow_world_binding=False
@@ -5364,27 +5390,50 @@ def compile_goal(goal, registry, root):
         return _validate_compiled_clause_coverage(
             _compile_compound_goal(goal,clauses,registry,root)
         )
-    # Producer->consumer (``effect_result``) binding is a SECOND pass, for the
-    # same reason world binding is: enabling it unconditionally lets the nine
-    # capabilities that declare an effect_result input out-compete the plain
-    # capability the goal actually meant. Measured with it always on, the three
-    # goals it was added for were fixed but three previously-correct goals were
-    # stolen and three began refusing -- compiled 18 to 16, correct 14 to 11.
-    # So it runs only when the grounded pass found nothing at all.
+    # Producer->consumer (``effect_result``) binding reaches nine capabilities
+    # that the grounded pass cannot, because their slots are filled from another
+    # capability's output. Two ways to use it have both been measured:
+    #
+    #   always on            compiled 18 to 16, correct 14 to 11  (net loss: three
+    #                        goals stolen, three begun refusing)
+    #   only after a failure compiled 18 to 19, correct 14 to 15  (net gain, but
+    #                        blind: a goal that compiles wrongly never retries)
+    #
+    # The failure trigger was blind in a specific, measured way: on "Assess
+    # knowledge consistency" the grounded pass SUCCEEDS with
+    # terminal.kstar.root.assess.stdlib at score 2, while
+    # knowledge.consistency.assess scores 22 and is reachable once producers are
+    # supplied -- so the retry never fired and the catch-all won.
+    #
+    # Both passes score with the same _score, so their results are directly
+    # comparable. Run both and keep the better-scoring one: that recovers the
+    # goals the failure trigger missed while still refusing to let a greedier
+    # capability take one the grounded pass already answered better.
+    binder=_load_sibling_runtime_module(
+        "capability_proposal_generators.py",
+        "project_brain_direct_compiler_proposal_binder",
+    )
+    providers=_effect_providers(registry)
+    grounded=None
+    grounded_failure=None
     try:
-        return _compile_single_goal(goal,registry,root)
-    except GoalCompilationFailure as first_pass_failure:
-        binder=_load_sibling_runtime_module(
-            "capability_proposal_generators.py",
-            "project_brain_direct_compiler_proposal_binder",
+        grounded=_compile_single_goal(goal,registry,root)
+    except GoalCompilationFailure as exc:
+        grounded_failure=exc
+    try:
+        chained=_compile_single_goal(
+            goal,registry,root,
+            proposal_binder=binder,
+            effect_providers=providers,
         )
-        try:
-            return _compile_single_goal(
-                goal,registry,root,
-                proposal_binder=binder,
-                effect_providers=_effect_providers(registry),
-            )
-        except GoalCompilationFailure:
-            # The first pass's reason is the honest one: it describes what the
-            # goal itself lacked, not what the wider second pass also lacked.
-            raise first_pass_failure
+    except GoalCompilationFailure:
+        chained=None
+    if grounded is None and chained is None:
+        # The grounded pass's reason is the honest one: it describes what the
+        # goal itself lacked, not what the wider second pass also lacked.
+        raise grounded_failure
+    if grounded is None:
+        return chained
+    if chained is None:
+        return grounded
+    return chained if _plan_score(chained)>_plan_score(grounded) else grounded

@@ -208,12 +208,16 @@ BENCHMARK_GOALS: List[Dict[str, Any]] = [
 #   3. The remaining two need the goal to ground a resource it never names.
 #      "Query a JSON table" does not say which table, so refusing is arguably
 #      the correct outcome; an invented input is an unverifiable act.
+# BENCH_JSON_FETCH_CONSISTENCY used to belong here, recorded as
+# BEST_MATCHES_UNBINDABLE because knowledge.json.fetch.external and
+# knowledge.consistency.assess could not be called and the catch-all won on one
+# identity token at score 2. That diagnosis was accurate and is now closed:
+# both capabilities declare an effect_result input, and once the producer map
+# derived from the registry's own `provides` is supplied they bind, so the
+# better-scoring chained plan (knowledge.consistency.assess, score 22) is kept
+# over the grounded catch-all (score 2). It is removed rather than re-labelled
+# because the goal now selects correctly.
 KNOWN_SELECTION_GAPS = {
-    "BENCH_JSON_FETCH_CONSISTENCY": (
-        "BEST_MATCHES_UNBINDABLE__knowledge.json.fetch.external_SCORE_12_AND_"
-        "knowledge.consistency.assess_SCORE_8__SELECTED_terminal.kstar.root.assess.stdlib_"
-        "SCORE_2_ON_ONE_IDENTITY_TOKEN__PRE_EXISTING_AT_BASE_9554215"
-    ),
     "BENCH_MARKDOWN_TO_DECISION": (
         "BEST_MATCH_UNBINDABLE__decision.synthesis.typed.stdlib_SCORE_14_REQUIRES_"
         "structured.decision_evidence.available__SELECTED_A_MARKDOWN_TO_PDF_CONVERTER"

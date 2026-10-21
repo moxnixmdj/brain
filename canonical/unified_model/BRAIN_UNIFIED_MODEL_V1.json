@@ -24254,7 +24254,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6264,
+  "research_index_records": 6265,
   "routing_tokens": 1775,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24263,7 +24263,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d73e21f010c11205fe2f7975df82f3c30ac8b7893e826e45c7194ea134b18f72"
+  "value": "3e0e7354faa9a42e32286bc752bd0bd3b6e4ee647a358dbb2a6f3822ddeb4521"
  },
  "engines": [
   {
@@ -187260,6 +187260,33 @@
    }
   },
   {
+   "action_id": "CHAINED_PLAN_SCORE_COMPARISON_ON_THE_SINGLE_CLAUSE_PATH_V1_20261021_V1",
+   "capability": false,
+   "date": "2026-10-21",
+   "id": "research:canonical/action_intents/CHAINED_PLAN_SCORE_COMPARISON_ON_THE_SINGLE_CLAUSE_PATH_V1_20261021_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/CHAINED_PLAN_SCORE_COMPARISON_ON_THE_SINGLE_CLAUSE_PATH_V1_20261021_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "f2d4612c7d2f5c07a4f3fc6d6e9951eddf64738463b340133f1ed9dfd0fcbd9c",
+   "status": "",
+   "terms": {
+    "20261021": 1,
+    "chained": 1,
+    "chained_plan_score_comparison_on_the_single_clause_path_v1_20261021_v1": 1,
+    "clause": 1,
+    "comparison": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "path": 1,
+    "plan": 1,
+    "run_both_passes_and_keep_the_better_scoring_plan_using_the_scorer_both_already_share_rather_than_triggering_the_wider_pass_on_failure_which_is_blind_to_a_goal_that_succeeds_wrongly": 1,
+    "score": 1,
+    "single": 1,
+    "the_effect_result_producer_map_was_supplied_only_as_a_failure_triggered_retry_so_a_goal_whose_grounded_pass_merely_succeeded_wrongly_never_reached_it__measured_at_base_470d046_on_assess_knowledge_consistency_the_grounded_pass_succeeds_with_terminal_kstar_root_assess_stdlib_at_score_2_while_knowledge_consistency_assess_scores_22_and_is_reachable_once_the_producer_map_is_supplied_so_the_retry_never_fired_and_the_catch_all_won_two_goals__both_passes_score_with_the_same_scorer_so_their_plans_are_directly_comparable_but_nothing_compared_them": 1,
+    "two_binding_passes_are_now_compared_rather_than_one_being_blinded_to_the_other_so_a_capability_that_is_reachable_only_through_a_producer_can_win_a_goal_it_out_scores_even_when_the_grounded_pass_already_succeeded__compiled_unchanged_at_19_of_23_correct_selection_15_to_17_wrong_capability_4_to_2_and_the_capability_count_stays_363": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "",
    "capability": false,
    "date": "2026-10-11",
@@ -214442,7 +214469,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compilation_benchmark_v1.py",
-   "sha256": "ce2f6052b3eddf27ba6972b9577e06e3856be4c818856c7ba2d5445d5db86ee9",
+   "sha256": "aae33be5db74cf1b7e243a57075328dc0b309165da4e63ef195ae8038b29f915",
    "summary": "Fixed, measured benchmark for plain-goal -> executable-plan compilation.",
    "symbol_count": 9,
    "symbols": [
@@ -214484,9 +214511,9 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "bc08ca14581bc0b22f6a32a4ddb499c0ea75fa9a2a81d2deaf93738974fa2c9a",
+   "sha256": "26adbf367ccf5b577a09807f97712376e8ee4f1a3dc3b81dc7aa443bdcd04d60",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
-   "symbol_count": 101,
+   "symbol_count": 102,
    "symbols": [
     "GoalCompilationFailure",
     "_bind_inputs",
