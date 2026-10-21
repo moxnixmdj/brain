@@ -945,10 +945,29 @@ def _bind_producer_inputs(goal, root, provider_id, provider_entry,
         slot=name[len("${input."):-1]
         if slot=="output_path" or slot.startswith("output_"):
             output_keys.append(slot)
+    # A producer is itself a consumer. Slots its own ``proposal_bindings`` fill
+    # from an upstream effect cannot be bound from the sentence, and
+    # ``_bind_inputs`` does not speak ``effect_result`` -- it would refuse the
+    # whole producer. Mask them exactly as output slots are masked, then put
+    # the reference back so ``_append_producer_parts`` can recurse on it and
+    # emit the upstream step. Without this the middle link of a two-level chain
+    # (verifier <- synthesizer <- locator) always failed to bind and the chain
+    # was never emitted.
+    bindings=provider_entry.get("proposal_bindings") or {}
+    effect_slots={
+        str(slot):(binding.get("effect"),binding.get("field"))
+        for slot,binding in bindings.items()
+        if isinstance(binding,dict) and binding.get("type")=="effect_result"
+    }
     masked=dict(provider_entry)
+    masked["proposal_bindings"]={
+        k:v for k,v in bindings.items() if k not in effect_slots
+    }
     masked_args={k:v for k,v in args.items()
                  if not (isinstance(v,str) and v.startswith("${input.")
-                         and v.endswith("}") and v[len("${input."):-1] in output_keys)}
+                         and v.endswith("}") and v[len("${input."):-1] in output_keys
+                         or isinstance(v,str) and v.startswith("${input.")
+                         and v.endswith("}") and v[len("${input."):-1] in effect_slots)}
     masked["action_template"]={**template,"args":masked_args}
     try:
         inputs=_bind_inputs(goal,root,masked,
@@ -959,6 +978,8 @@ def _bind_producer_inputs(goal, root, provider_id, provider_entry,
     if inputs is None:
         return None
     inputs=dict(inputs)
+    for slot,(effect,field) in effect_slots.items():
+        inputs[slot]={"$effect_result":{"effect":str(effect or ""),"field":str(field or "")}}
     for slot in output_keys:
         if slot in inputs:
             continue
@@ -971,6 +992,98 @@ def _bind_producer_inputs(goal, root, provider_id, provider_entry,
             +suffix
         )
     return inputs
+
+
+_MAX_PRODUCER_CHAIN_DEPTH=3
+
+
+def _append_producer_parts(
+    refs, goal, registry, root, effect_providers, parts, actions, cycle_by_ref,
+    context_paths=None, future_clauses=None, depth=0
+):
+    """Emit one producer step per dangling effect reference, deepest first.
+
+    Returns False -- leaving ``parts`` for the caller to discard -- whenever any
+    reference cannot be satisfied by a real producer that itself binds. The
+    caller then returns the plan untouched, so a gap stays a gap instead of
+    becoming a chain whose first step is guaranteed to fail.
+
+    Recursion is the load-bearing part. A producer is itself a consumer: it may
+    declare an ``effect_result`` slot that this same sentence never states.
+    Measured on ``EXT_DECISION_VERIFY`` -- "Verify a typed decision synthesis"
+    -- the verifier needs ``decision.synthesis.typed``, whose producer
+    ``decision.synthesis.typed.stdlib`` in turn needs
+    ``structured.decision_evidence.available``. Resolving only the outer level
+    bound the synthesizer's ``input_path`` to a dangling ``$effect_result`` and
+    the verifier still died with ``DECISION_VERIFIER_INPUT_MISSING``. A
+    producer's own references are therefore resolved BEFORE it is numbered, so
+    cycle indices stay in execution order and every ``$result`` reference
+    points at a step that runs earlier.
+
+    ``depth`` bounds the walk. Providers are looked up in a map keyed by the
+    effect they declare, so a malformed registry claiming to provide its own
+    requirement would otherwise recurse forever; the bound turns that into a
+    refusal.
+    """
+    providers=effect_providers or {}
+    for ref in refs:
+        effect=str(ref.get("effect") or "").strip()
+        field=str(ref.get("field") or "").strip()
+        if (effect,field) in cycle_by_ref:
+            continue
+        prior=[c for (e,_f),c in cycle_by_ref.items() if e==effect]
+        if prior:
+            # A consumer may read two fields of one producer's result --
+            # EXT_DECISION_VERIFY takes both ``input_path`` and ``result_path``
+            # from ``decision.synthesis.typed``. That is one upstream step, not
+            # two, so map the second field at the cycle already emitted instead
+            # of running the producer again. Derived from cycle_by_ref so it
+            # stays correct across recursion levels.
+            cycle_by_ref[(effect,field)]=min(prior)
+            continue
+        if depth<=0:
+            return False
+        provider=providers.get(effect.lower())
+        if not provider:
+            return False
+        provider_id,provider_entry=provider
+        if not isinstance(provider_entry,dict):
+            return False
+        declared={str(x).strip() for x in provider_entry.get("result_fields") or []
+                  if isinstance(x,str) and x.strip()}
+        if field not in declared:
+            return False
+        producer_inputs=_bind_producer_inputs(
+            goal,root,provider_id,provider_entry,
+            context_paths=context_paths,future_clauses=future_clauses
+        )
+        if producer_inputs is None:
+            return False
+        nested=_collect_effect_result_refs(producer_inputs)
+        if nested:
+            if not _append_producer_parts(
+                nested,goal,registry,root,effect_providers,parts,actions,cycle_by_ref,
+                context_paths=context_paths,future_clauses=future_clauses,
+                depth=depth-1,
+            ):
+                return False
+            producer_inputs=_rewrite_effect_result_refs(producer_inputs,cycle_by_ref)
+            if _collect_effect_result_refs(producer_inputs):
+                return False
+        cycle=len(parts)
+        cycle_by_ref[(effect,field)]=cycle
+        parts.append({
+            "index":cycle,
+            "mode":"EFFECT_PRODUCER",
+            "selected_capability":provider_id,
+            "subgoal":goal,
+            "inputs":producer_inputs,
+            "target_effects":list(provider_entry.get("provides") or []),
+            "score":0,
+        })
+        actions.append({"type":"invoke_capability",
+                        "args":_render_action_args(provider_entry,producer_inputs,provider_id)})
+    return True
 
 
 def _attach_effect_producer_steps(
@@ -997,44 +1110,15 @@ def _attach_effect_producer_steps(
     refs=_collect_effect_result_refs(result.get("inputs"))
     if not refs:
         return result
-    providers=effect_providers or {}
     cycle_by_ref={}
     parts=[]
     actions=[]
-    for ref in refs:
-        effect=str(ref.get("effect") or "").strip()
-        field=str(ref.get("field") or "").strip()
-        if (effect,field) in cycle_by_ref:
-            continue
-        provider=providers.get(effect.lower())
-        if not provider:
-            return result
-        provider_id,provider_entry=provider
-        if not isinstance(provider_entry,dict):
-            return result
-        declared={str(x).strip() for x in provider_entry.get("result_fields") or []
-                  if isinstance(x,str) and x.strip()}
-        if field not in declared:
-            return result
-        producer_inputs=_bind_producer_inputs(
-            goal,root,provider_id,provider_entry,
-            context_paths=context_paths,future_clauses=future_clauses
-        )
-        if producer_inputs is None:
-            return result
-        cycle=len(parts)
-        cycle_by_ref[(effect,field)]=cycle
-        parts.append({
-            "index":cycle,
-            "mode":"EFFECT_PRODUCER",
-            "selected_capability":provider_id,
-            "subgoal":goal,
-            "inputs":producer_inputs,
-            "target_effects":list(provider_entry.get("provides") or []),
-            "score":0,
-        })
-        actions.append({"type":"invoke_capability",
-                        "args":_render_action_args(provider_entry,producer_inputs,provider_id)})
+    if not _append_producer_parts(
+        refs,goal,registry,root,effect_providers,parts,actions,cycle_by_ref,
+        context_paths=context_paths,future_clauses=future_clauses,
+        depth=_MAX_PRODUCER_CHAIN_DEPTH,
+    ):
+        return result
     consumer_inputs=_rewrite_effect_result_refs(result.get("inputs"),cycle_by_ref)
     if _collect_effect_result_refs(consumer_inputs):
         return result

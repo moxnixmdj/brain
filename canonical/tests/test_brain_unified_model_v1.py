@@ -75,7 +75,7 @@ class BrainUnifiedModelV1Tests(unittest.TestCase):
         live = set(live_brain.load_verified_registry())
         modelled = set(self.model.capabilities)
         self.assertEqual(live, modelled)
-        self.assertEqual(len(modelled), 364)
+        self.assertEqual(len(modelled), 365)
 
     def test_every_capability_has_a_trigger_and_a_route(self):
         for cid, row in self.model.capabilities.items():
@@ -828,7 +828,7 @@ class DeclaredContextBindingTests(unittest.TestCase):
     def test_a_receipt_backed_execution_never_claims_trace_verification(self):
         """`solve()` must report what the adapter established, not more.
 
-        295 of the 364 modelled capabilities are `RECEIPT_BACKED_CAPABILITY`:
+        295 of the 365 modelled capabilities are `RECEIPT_BACKED_CAPABILITY`:
         their only evidence is an execution receipt, and the registry marks them
         `RECEIPT_BACKED_PENDING_PROMOTION`. When one runs, the adapter returns
         `PASS__RECEIPT_BACKED_BOUND_CAPABILITY_EXECUTED`, which states that the
@@ -1133,10 +1133,10 @@ class DeclaredDependencyEnvironmentIndependenceTests(unittest.TestCase):
     def test_status_reports_the_machine_it_actually_runs_on(self):
         """Presence is measured live, so it tracks the real interpreter."""
         status = self.model.status()
-        self.assertEqual(status["counts"]["capabilities"], 364)
+        self.assertEqual(status["counts"]["capabilities"], 365)
         self.assertEqual(
             status["declared_dependencies_present"] + status["declared_dependencies_missing"],
-            364,
+            365,
             "present + missing must account for every capability",
         )
 
@@ -1304,7 +1304,7 @@ class SourceIndexTests(unittest.TestCase):
         )
         self.assertEqual(int(counts.get("source_index_entry_points", -1)), entry_points)
         # The capability count must not have been inflated by indexing.
-        self.assertEqual(int(counts.get("capabilities", -1)), 364)
+        self.assertEqual(int(counts.get("capabilities", -1)), 365)
 
     def test_status_reports_the_source_index_it_holds(self):
         """The model's self-description must not omit what it indexes.
@@ -1339,12 +1339,12 @@ class SourceIndexTests(unittest.TestCase):
         # The distinction must be stated wherever the larger number appears, so
         # it cannot be read as a capability gain.
         self.assertIs(status.get("source_index_is_addressable_not_executable"), True)
-        self.assertEqual(int(counts["capabilities"]), 364)
+        self.assertEqual(int(counts["capabilities"]), 365)
 
     def test_status_does_not_overcount_reachable_modules(self):
         """A tempting derived figure that is wrong must not be reported.
 
-        `len(capabilities) + len(source_index)` is 2223, but only 330 of the 364
+        `len(capabilities) + len(source_index)` is 2223, but only 330 of the 365
         capabilities are runtime files -- 69 are named or bound entries -- so the
         true figure is 2189. Deriving it correctly needs a filesystem walk, which
         would put host coupling back inside `status()`. Reporting nothing is
@@ -1449,4 +1449,4 @@ class ResearchIndexTests(unittest.TestCase):
             int(counts.get("research_index_records", -1)),
             len(self.model.research_index),
         )
-        self.assertEqual(int(counts["capabilities"]), 364)
+        self.assertEqual(int(counts["capabilities"]), 365)

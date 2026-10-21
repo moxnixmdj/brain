@@ -919,26 +919,33 @@ class ProducerConsumerSecondPassTests(unittest.TestCase):
     def test_a_consumer_with_no_producer_still_refuses(self):
         """The map names producers; it does not manufacture them.
 
-        ``decision.synthesis.typed.stdlib`` needs
-        ``structured.decision_evidence.available``, which no capability
-        produces. Nothing in the registry can fill it, so the binder must still
-        refuse rather than invent a file.
+        ``sqlite.table.verify_against_json_records`` needs
+        ``structured.json.available``, which no capability produces. Nothing in
+        the registry can fill it, so the binder must still refuse rather than
+        invent a file.
 
-        This assertion used to be made on ``source.candidates.available``.
-        That effect now HAS a producer (``source.candidates.enumerate.stdlib``),
-        so the assertion was repointed to an effect that still has none. The
-        property under test is unchanged: the map is read off the registry and
-        cannot conjure a producer that is not there.
+        This assertion has been repointed twice, each time because the effect it
+        named gained a real producer -- first ``source.candidates.available``
+        (now ``source.candidates.enumerate.stdlib``), then
+        ``structured.decision_evidence.available`` (now
+        ``structured.decision_evidence.locate.stdlib``). Repointing is the
+        correct response: deleting the test would lose the only thing proving
+        the map cannot conjure a producer. The property under test is unchanged.
         """
         providers = compiler._effect_providers(self.registry)
-        self.assertNotIn("structured.decision_evidence.available", providers)
+        self.assertNotIn("structured.json.available", providers)
         self.assertNotIn("json.file.available", providers)
-        # And the effect that did gain a producer is genuinely in the map,
+        # And the effects that did gain producers are genuinely in the map,
         # read off the registry rather than asserted.
         self.assertIn("source.candidates.available", providers)
         self.assertEqual(
             providers["source.candidates.available"][0],
             "source.candidates.enumerate.stdlib",
+        )
+        self.assertIn("structured.decision_evidence.available", providers)
+        self.assertEqual(
+            providers["structured.decision_evidence.available"][0],
+            "structured.decision_evidence.locate.stdlib",
         )
 
     def test_a_dangling_effect_reference_becomes_a_real_producer_step(self):
