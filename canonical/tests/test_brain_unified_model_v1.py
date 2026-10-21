@@ -514,7 +514,13 @@ class DeclaredContextBindingTests(unittest.TestCase):
 
             self.assertIs(out.get("pass"), True, out.get("reason"))
             self.assertEqual(
-                out.get("status"), "PASS__CAPABILITY_EXECUTED_AND_TRACE_VERIFIED"
+                out.get("status"),
+                "PASS__PROMOTED_BOUND_CAPABILITY_EXECUTED_AND_TRACE_VERIFIED",
+            )
+            # The envelope must report what the adapter established, not a
+            # stronger word for it.
+            self.assertEqual(
+                out.get("status"), (out.get("execution") or {}).get("status")
             )
         finally:
             # Leave nothing behind: canonical/astra_runtime/state is tracked, so
@@ -629,7 +635,12 @@ class DeclaredContextBindingTests(unittest.TestCase):
             )
             self.assertIs(verified.get("pass"), True, verified.get("reason"))
             self.assertEqual(
-                verified.get("status"), "PASS__CAPABILITY_EXECUTED_AND_TRACE_VERIFIED"
+                verified.get("status"),
+                "PASS__PROMOTED_BOUND_CAPABILITY_EXECUTED_AND_TRACE_VERIFIED",
+            )
+            self.assertEqual(
+                verified.get("status"),
+                (verified.get("execution") or {}).get("status"),
             )
         finally:
             for path in (arc, man, src):
@@ -813,3 +824,71 @@ class DeclaredContextBindingTests(unittest.TestCase):
             f"{adapter} no longer matches verifier_git_blob {pinned}; "
             "the ACQUIRED_VERIFIED receipt describes different code now",
         )
+
+    def test_a_receipt_backed_execution_never_claims_trace_verification(self):
+        """`solve()` must report what the adapter established, not more.
+
+        295 of the 363 modelled capabilities are `RECEIPT_BACKED_CAPABILITY`:
+        their only evidence is an execution receipt, and the registry marks them
+        `RECEIPT_BACKED_PENDING_PROMOTION`. They are indexed under the words of
+        their own filename, so `run_long_horizon_continuity_v1.py` is indexed
+        under `run`, `long`, `horizon`, `continuity`. The ordinary verb "run" in
+        a goal about unittest pass rates therefore selects that script.
+
+        Selecting it is a routing question this test does not settle. What is
+        not acceptable is the envelope's description of it: the adapter returns
+        `PASS__RECEIPT_BACKED_BOUND_CAPABILITY_EXECUTED`, which states that the
+        thing ran, while `solve()` used to relabel every pass as
+        `PASS__CAPABILITY_EXECUTED_AND_TRACE_VERIFIED` -- asserting a trace
+        check that never ran, on a capability that is explicitly not promoted.
+
+        The distinction is the adapter's own, so the invariant asserted here is
+        that the envelope carries it through unchanged.
+        """
+        target = "canonical/verification/run_long_horizon_continuity_v1.py.auto.v1"
+        if target not in self.model.capabilities:
+            self.skipTest("receipt-backed probe capability not in model")
+        row = self.model.capabilities[target]
+        self.assertEqual(row.get("kind"), "RECEIPT_BACKED_CAPABILITY")
+
+        out = self.model.solve("Run the unittest suite and report the pass rate.")
+        execution = out.get("execution") or {}
+        if execution.get("status") != "PASS__RECEIPT_BACKED_BOUND_CAPABILITY_EXECUTED":
+            self.skipTest(f"probe did not take the receipt-backed path: {execution.get('status')}")
+
+        # The load-bearing claim: the envelope never upgrades the adapter.
+        self.assertEqual(out.get("status"), execution.get("status"))
+        self.assertNotIn("TRACE_VERIFIED", str(out.get("status")))
+
+    def test_no_pass_status_is_invented_by_the_envelope(self):
+        """Every PASS status `solve()` emits must be one the adapter produced.
+
+        The overclaim was a single hard-coded string, so it is pinned
+        structurally rather than case by case: on any pass, the envelope status
+        and the adapter status are the same string.
+        """
+        goals = [
+            "Run the unittest suite and report the pass rate.",
+            "Assess the consistency of knowledge observations.",
+            "Audit python source structure and imports.",
+        ]
+        checked = 0
+        for goal in goals:
+            out = self.model.solve(goal)
+            execution = out.get("execution") or {}
+            if not execution:
+                continue
+            checked += 1
+            with self.subTest(goal=goal):
+                if out.get("pass") is True:
+                    self.assertEqual(
+                        out.get("status"),
+                        execution.get("status"),
+                        "envelope upgraded the adapter's own status",
+                    )
+                    self.assertTrue(str(out.get("status")).startswith("PASS__"))
+                else:
+                    self.assertEqual(
+                        out.get("status"), "FAIL_CLOSED__CAPABILITY_DID_NOT_PASS"
+                    )
+        self.assertGreaterEqual(checked, 1, "no goal reached the execution adapter")
