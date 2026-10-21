@@ -233,8 +233,28 @@ class UnifiedModel:
                 "engines": len(self.engines),
                 "skills": len(self.skills),
                 "knowledge_documents": len(self.knowledge),
+                # Counted live rather than read from the declared block, so this
+                # cannot drift from what the model actually holds. Omitting the
+                # source index here would make the model's own self-description
+                # leave out 1859 of the modules it indexes.
+                "source_index_modules": len(self.source_index),
+                "source_index_entry_points": sum(
+                    1
+                    for row in self.source_index.values()
+                    if row.get("classification") == "ENTRY_POINT"
+                ),
                 "routing_tokens": len(self.index),
             },
+            # Stated next to the counts so a larger number cannot be misread as
+            # more capability. These modules are addressable, not executable.
+            #
+            # A combined "runtime modules reachable" figure is deliberately not
+            # reported here. It would be len(capabilities) + len(source_index),
+            # which overcounts by 33: 69 of the 363 capabilities are named or
+            # bound entries that are not runtime files at all. Deriving the true
+            # figure needs a filesystem walk, and putting that inside status()
+            # would reintroduce exactly the host coupling this model removed.
+            "source_index_is_addressable_not_executable": True,
             "declared_dependencies_present": present,
             "declared_dependencies_missing": len(self.capabilities) - present,
             "objective": (self.model.get("objective") or {}).get("verbatim"),

@@ -1269,3 +1269,51 @@ class SourceIndexTests(unittest.TestCase):
         self.assertEqual(int(counts.get("source_index_entry_points", -1)), entry_points)
         # The capability count must not have been inflated by indexing.
         self.assertEqual(int(counts.get("capabilities", -1)), 363)
+
+    def test_status_reports_the_source_index_it_holds(self):
+        """The model's self-description must not omit what it indexes.
+
+        `status()` builds its counts from a hardcoded list, so adding a section
+        to the artifact does not make it appear here. Measured after the source
+        index shipped: the artifact declared `source_index_modules: 1859` while
+        `status()` reported no source figure at all -- asking the model what it
+        is returned an answer that never mentioned 1859 of the modules it holds.
+
+        The counts are derived live from what the model actually loaded rather
+        than read back from the declared block, so they cannot drift.
+        """
+        status = self.model.status()
+        counts = status["counts"]
+
+        self.assertEqual(
+            int(counts.get("source_index_modules", -1)),
+            len(self.model.source_index),
+        )
+        self.assertGreater(int(counts["source_index_modules"]), 1000)
+
+        self.assertEqual(
+            int(counts.get("source_index_entry_points", -1)),
+            sum(
+                1
+                for row in self.model.source_index.values()
+                if row.get("classification") == "ENTRY_POINT"
+            ),
+        )
+
+        # The distinction must be stated wherever the larger number appears, so
+        # it cannot be read as a capability gain.
+        self.assertIs(status.get("source_index_is_addressable_not_executable"), True)
+        self.assertEqual(int(counts["capabilities"]), 363)
+
+    def test_status_does_not_overcount_reachable_modules(self):
+        """A tempting derived figure that is wrong must not be reported.
+
+        `len(capabilities) + len(source_index)` is 2222, but only 330 of the 363
+        capabilities are runtime files -- 69 are named or bound entries -- so the
+        true figure is 2189. Deriving it correctly needs a filesystem walk, which
+        would put host coupling back inside `status()`. Reporting nothing is
+        better than reporting 2222.
+        """
+        status = self.model.status()
+        self.assertNotIn("runtime_modules_reachable", status)
+        self.assertNotIn("runtime_modules_reachable", status["counts"])
