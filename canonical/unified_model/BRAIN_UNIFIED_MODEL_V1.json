@@ -24254,7 +24254,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6261,
+  "research_index_records": 6262,
   "routing_tokens": 1775,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24263,7 +24263,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "53e5b44f9540805e55069be153619a47c96bc8a40cfb2dd67e2a47abb5639f71"
+  "value": "a0268615c17c6f76fb3e980e93349a55269b42f766119ab60a128f79b8819561"
  },
  "engines": [
   {
@@ -187470,6 +187470,34 @@
    }
   },
   {
+   "action_id": "GROUNDED_BINDING_TERMINAL_EQUIVALENCE_VIA_EXISTING_AMBIGUITY_CONTROL_V1_20261021_V1",
+   "capability": false,
+   "date": "2026-10-21",
+   "id": "research:canonical/action_intents/GROUNDED_BINDING_TERMINAL_EQUIVALENCE_VIA_EXISTING_AMBIGUITY_CONTROL_V1_20261021_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/GROUNDED_BINDING_TERMINAL_EQUIVALENCE_VIA_EXISTING_AMBIGUITY_CONTROL_V1_20261021_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "a1d01195c86092d47a30feeb0c120d675d11faa7efd8f0f83621009fe8697910",
+   "status": "",
+   "terms": {
+    "20261021": 1,
+    "ambiguity": 1,
+    "binding": 1,
+    "control": 1,
+    "equivalence": 1,
+    "existing": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "grounded": 1,
+    "grounded_binding_refused_every_multi_candidate_directory_blanket_so_a_directory_holding_two_byte_identical_copies_of_one_input_was_treated_as_ambiguous_even_though_the_choice_cannot_change_the_outcome__the_rule_that_separates_the_two_cases_already_existed_in_canonical_runtime_semantic_ambiguity_control_v1_decide_and_was_imported_by_nothing_so_the_binder_had_no_way_to_tell_an_irrelevant_choice_from_a_real_one__separately_the_test_that_pinned_this_behaviour_wrote_the_same_bytes_to_both_candidates_so_it_tested_that_a_duplicate_is_refused_which_is_the_opposite_of_correct_and_it_passed": 1,
+    "grounded_binding_terminal_equivalence_via_existing_ambiguity_control_v1_20261021_v1": 1,
+    "terminal": 1,
+    "the_research_record_is_now_reachable_through_the_model_without_inflating_the_capability_claim__6256_governance_verification_and_intent_records_are_indexed_as_research_index_with_capability_false_on_every_row_solve_never_routes_there_and_find_research_answers_where_was_this_decided_rather_than_run_this__generated_outputs_are_excluded_so_the_compile_is_a_verified_fixed_point__capability_count_stays_363__new_digest_fb389ce2__107_tests_ok_verifier_33_of_33_benchmark_unchanged_at_17_of_23_and_12_of_23": 1,
+    "use_the_ambiguity_control_the_repository_already_contains_instead_of_inventing_a_policy__semantic_ambiguity_control_v1_decide_was_present_and_imported_by_nothing_and_it_already_implements_the_exact_rule_needed_candidates_sharing_a_terminal_signature_are_terminally_equivalent_and_need_no_disambiguation__so_when_the_working_directory_holds_several_type_compatible_files_hash_them_and_bind_if_they_are_byte_identical_because_two_copies_of_one_file_are_one_input_not_a_choice__refusing_there_was_not_rigour_it_was_a_refusal_with_no_reason_behind_it__and_fix_the_test_that_claimed_to_pin_ambiguity_while_writing_the_same_bytes_to_both_files": 1,
+    "v1": 2,
+    "via": 1
+   }
+  },
+  {
    "action_id": "GROUNDED_INPUT_BINDING_LOOK_BEFORE_BIND_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -214505,9 +214533,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "0874411bc15cd220c2abc49c9b79ae60cf1a57c4d6fd4a23254e02ca34db1b3b",
+   "sha256": "c8831695b8a1977130d8cebe0ac2d7af70e110cb49e6ac7aabeb8204bda85ea8",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
-   "symbol_count": 54,
+   "symbol_count": 55,
    "symbols": [
     "_actions_of",
     "_after_key",
@@ -214524,6 +214552,7 @@
     "_excluded",
     "_failure_is_unstated",
     "_future_artifacts",
+    "_interchangeable",
     "_is_catch_all",
     "_is_output_key",
     "_joint_role_binding",
@@ -214531,8 +214560,7 @@
     "_named_existing_paths",
     "_number",
     "_number_list",
-    "_output_keys",
-    "_pair_list"
+    "_output_keys"
    ],
    "terms": {
     "after_key": 1,
@@ -214553,6 +214581,7 @@
     "front": 2,
     "goal": 2,
     "input_keys": 1,
+    "interchangeable": 1,
     "is_output_key": 1,
     "is_plain_goal_routable": 1,
     "kv_pairs": 1,
@@ -214568,7 +214597,6 @@
     "quoted": 1,
     "routable_registry": 1,
     "scan_root_by_type": 1,
-    "spool_suffix": 1,
     "v1": 1
    }
   },

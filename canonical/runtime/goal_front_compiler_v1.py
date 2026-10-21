@@ -478,6 +478,11 @@ _STEM_SUFFIXES: dict[str, set[str]] = {
 }
 _OUTPUT_STEMS = {"output", "result", "report", "screenshot", "image", "artifact", "destination", "dest"}
 
+# Past this many candidates the set is ambiguous whatever it contains, so the
+# walk stops. Chosen so hashing them all stays cheap while still covering the
+# realistic case of a directory holding a few copies of one input.
+_SCAN_CANDIDATE_CAP = 8
+
 
 def _is_output_key(key: str, entry: Mapping[str, Any] | None = None) -> bool:
     if entry is not None and isinstance(entry, Mapping):
@@ -494,13 +499,50 @@ def _excluded(produced_paths, taken) -> set[str]:
     return skip
 
 
+def _interchangeable(cands, root: pathlib.Path) -> bool:
+    """True when every candidate is byte-identical, so the choice cannot matter.
+
+    Delegates the judgement to semantic_ambiguity_control_v1, which already
+    implements the exact rule -- surviving interpretations that share a
+    terminal signature are terminally equivalent and need no disambiguation.
+    Two copies of the same file are the same input; refusing to pick between
+    them is not rigour, it is a refusal with no reason behind it.
+    """
+    import hashlib
+
+    try:
+        from canonical.runtime import semantic_ambiguity_control_v1 as SA
+    except Exception:
+        return False
+    digests = []
+    for rel in cands:
+        p = root / rel
+        try:
+            digests.append(hashlib.sha256(p.read_bytes()).hexdigest())
+        except OSError:
+            return False
+    worlds = [
+        {"world_id": rel, "terminal_signature_complete": True,
+         "terminal_signature": {"sha256": d}}
+        for rel, d in zip(cands, digests)
+    ]
+    verdict = SA.decide({
+        "ambiguity_owner": "EXTERNAL_WORLD",
+        "hypothesis_set_complete": True,
+        "worlds": worlds,
+        "observations": [],
+    })
+    return verdict.get("status") == "PASS__AMBIGUITY_TERMINALLY_IRRELEVANT"
+
+
 def _scan_root_by_type(wanted, root: pathlib.Path, skip) -> list[str]:
     """Files in the working directory whose type fits the slot.
 
-    Bails out as soon as a second candidate appears: ambiguity is the answer,
-    and walking 14k more paths to confirm it buys nothing. `.git` and
-    `node_modules` are pruned because neither is a place a user's input file
-    lives and both are large enough to dominate the walk.
+    Collects up to _SCAN_CANDIDATE_CAP candidates and stops: past that the set
+    is ambiguous whatever it contains, and walking 14k more paths to confirm it
+    buys nothing. `.git`, `node_modules`, `__pycache__` and `.venv` are pruned
+    because none is where a user's input file lives and all are large enough to
+    dominate the walk.
     """
     pruned = {".git", "node_modules", "__pycache__", ".venv"}
     out: list[str] = []
@@ -527,7 +569,7 @@ def _scan_root_by_type(wanted, root: pathlib.Path, skip) -> list[str]:
                 continue
             if "".join(p.suffixes[-2:]).lower() in wanted or p.suffix.lower() in wanted:
                 out.append(rel)
-                if len(out) > 1:
+                if len(out) > _SCAN_CANDIDATE_CAP:
                     return out
     return out
 
@@ -554,6 +596,10 @@ def _bind_path_by_type(goal: str, key: str, root: pathlib.Path, exclude=None):
         scanned = _scan_root_by_type(wanted, root, skip)
         if len(scanned) == 1:
             return scanned[0]
+        if 1 < len(scanned) <= _SCAN_CANDIDATE_CAP and _interchangeable(scanned, root):
+            # Byte-identical, so the choice is terminal-irrelevant. Sorted for
+            # determinism: the same world always yields the same path.
+            return sorted(scanned)[0]
     raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":" + str(len(matching)) + "_type_compatible_existing_files_named")
 
 

@@ -675,22 +675,42 @@ class GroundedInputBindingTests(unittest.TestCase):
 
     GOAL = "Read a PDF and extract its text."
 
-    def _bind(self, files, key="pdf_path", exclude=None):
+    def _bind(self, files, key="pdf_path", exclude=None, distinct=False):
         from canonical.runtime import goal_front_compiler_v1 as gf
 
         with tempfile.TemporaryDirectory() as td:
             root = pathlib.Path(td)
-            for name in files:
-                (root / name).write_bytes(b"%PDF-1.4\nreal bytes, not a stub\n")
+            for i, name in enumerate(files):
+                body = f"%PDF-1.4 distinct body {i}\n".encode() if distinct else b"%PDF-1.4 identical body\n"
+                (root / name).write_bytes(body)
             return gf._bind_path_by_type(self.GOAL, key, root, exclude=exclude)
 
     def test_exactly_one_candidate_is_bound(self):
         self.assertEqual(self._bind(["report.pdf"]), "report.pdf")
 
     def test_two_candidates_refuse_rather_than_guess(self):
-        """The whole point: alphabetical first is not a choice."""
+        """The whole point: alphabetical first is not a choice.
+
+        The bodies must differ. An earlier version of this test wrote the same
+        bytes to both files and so did not test ambiguity at all -- it tested
+        that a duplicate is refused, which is the opposite of correct.
+        """
         with self.assertRaises(GoalCompilationFailure):
-            self._bind(["aaa_first.pdf", "zzz_last.pdf"])
+            self._bind(["aaa_first.pdf", "zzz_last.pdf"], distinct=True)
+
+    def test_byte_identical_candidates_are_interchangeable_and_bind(self):
+        """Two copies of one file are one input, not a choice.
+
+        The judgement is delegated to semantic_ambiguity_control_v1, which was
+        already in the repository and imported by nothing: candidates sharing a
+        terminal signature are terminally equivalent and need no
+        disambiguation. Refusing here would be rigour with no reason behind it.
+        """
+        self.assertEqual(self._bind(["aaa_first.pdf", "zzz_last.pdf"]), "aaa_first.pdf")
+        self.assertEqual(
+            self._bind(["c.pdf", "a.pdf", "b.pdf"]), "a.pdf",
+            "deterministic: sorted, so the same world yields the same path",
+        )
 
     def test_no_candidates_refuse(self):
         with self.assertRaises(GoalCompilationFailure):
