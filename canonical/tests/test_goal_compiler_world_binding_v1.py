@@ -733,3 +733,104 @@ class GroundedInputBindingTests(unittest.TestCase):
         """A directory full of the wrong kind must not satisfy a pdf slot."""
         with self.assertRaises(GoalCompilationFailure):
             self._bind(["notes.md", "data.json", "photo.png"])
+
+
+class SelectionRankingTests(unittest.TestCase):
+    """BM25 reorders the survivors of the pinned scorer; it never re-admits one.
+
+    The pinned ``_score`` counts shared tokens, so every token is worth the same
+    and a capability carrying 27 governance keywords can out-score the one that
+    owns the task. The only defence was ``GENERIC_MATCH_TOKENS``, a hand-kept
+    denylist whose own comment records that it still lost two goals. BM25's
+    inverse document frequency derives that weighting from the corpus instead.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        from canonical.runtime import live_integrated_brain_v1 as lb
+
+        cls.registry = dict(lb.load_verified_registry())
+        cls.root = str(pathlib.Path(__file__).resolve().parents[2])
+        # staticmethod: a bare function stored on a class becomes an unbound
+        # method, so `self._rerank` would prepend the instance as an argument.
+        cls._rerank = staticmethod(compiler._bm25_rerank)
+
+    def tearDown(self):
+        compiler._bm25_rerank = self._rerank
+
+    def test_a_generate_goal_selects_the_generator_not_the_decoder(self):
+        """The inversion this change exists to remove.
+
+        Measured before it: this goal compiled against
+        ``image.code.decode.zbarimg`` -- a DECODER -- because both capabilities
+        share the tokens 'image' and 'code', and the overlap count could not
+        tell 'generate' from 'decode'. ``qrencode`` is the rarer term, so IDF
+        settles it.
+        """
+        plan = compiler.compile_goal(
+            "Generate a QR code image from a text string.", self.registry, self.root
+        )
+        self.assertEqual(plan.get("selected_capability"), "image.qr.generate.qrencode")
+
+    def test_bm25_reorders_without_introducing_or_dropping_a_candidate(self):
+        """Ordering only. The admissible SET must be byte-for-byte the same."""
+        goal = "Generate a QR code image from a text string."
+        # allow_world_binding=True: this goal binds nothing from its own words
+        # on the grounded first pass, which returns zero candidates by design.
+        # The inferred pass is the one that actually produced the selection.
+        with_rerank = compiler._rank_bindable_candidates(
+            goal, self.registry, self.root, allow_world_binding=True)
+        compiler._bm25_rerank = lambda g, ranked: ranked
+        pinned = compiler._rank_bindable_candidates(
+            goal, self.registry, self.root, allow_world_binding=True)
+        self.assertEqual(
+            sorted(x[2] for x in with_rerank), sorted(x[2] for x in pinned),
+            "BM25 changed WHICH capabilities are admissible, not only their order",
+        )
+        self.assertGreater(len(pinned), 1, "a single candidate proves nothing about ordering")
+
+    def test_the_overlap_count_alone_still_picks_the_decoder(self):
+        """Negative control: with the re-rank disabled the old wrong answer returns.
+
+        Without this the test above could pass for an unrelated reason -- the
+        registry changing, the goal text changing, or the scorer's denylist
+        growing -- and the BM25 step would not be load-bearing at all.
+        """
+        compiler._bm25_rerank = lambda g, ranked: ranked
+        plan = compiler.compile_goal(
+            "Generate a QR code image from a text string.", self.registry, self.root
+        )
+        self.assertEqual(plan.get("selected_capability"), "image.code.decode.zbarimg")
+
+    def test_the_document_repeats_identity_and_provides_only(self):
+        """Field weighting by repetition; nothing is invented for the index."""
+        # Tokens are kept disjoint across fields on purpose: a keyword that
+        # coincides with an identity token legitimately accumulates both
+        # weights, which would make the counts below meaningless.
+        entry = {
+            "provides": ["payload"], "keywords": ["code", "matrix"],
+            "requires": ["text"],
+        }
+        doc = compiler._capability_document("image.qr.generate.qrencode", entry)
+        for term in ("image", "qr", "generate", "qrencode", "payload"):
+            self.assertEqual(doc.count(term), 2, f"{term} should be identity-weighted")
+        for term in ("code", "matrix", "text"):
+            self.assertEqual(doc.count(term), 1, f"{term} is supporting vocabulary")
+
+    def test_a_missing_bm25_module_falls_back_to_the_pinned_order(self):
+        """Fail-open on the RANKER, never on admission: ranking is a preference."""
+        goal = "Generate a QR code image from a text string."
+        saved = compiler._BM25_MODULE
+        compiler._BM25_MODULE = None
+        compiler._BM25_LOAD_FAILED = True
+        try:
+            ranked = compiler._rank_bindable_candidates(
+                goal, self.registry, self.root, allow_world_binding=True)
+            self.assertTrue(ranked, "the fallback must still rank, not refuse")
+            self.assertEqual(
+                ranked[0][2], "image.code.decode.zbarimg",
+                "with the ranker gone the pinned overlap order must decide, "
+                "which is the decoder -- the pre-change behaviour, not a refusal")
+        finally:
+            compiler._BM25_MODULE = saved
+            compiler._BM25_LOAD_FAILED = False
