@@ -495,12 +495,21 @@ class UnifiedModel:
                 capability_id=cid,
             )
         passed = raw.get("pass") is True
+        # Report what the adapter actually established, not a stronger word for
+        # it. The adapter distinguishes a promoted capability whose execution
+        # trace was independently checked
+        # (PASS__PROMOTED_BOUND_CAPABILITY_EXECUTED_AND_TRACE_VERIFIED) from a
+        # receipt-backed one that merely ran and reported success
+        # (PASS__RECEIPT_BACKED_BOUND_CAPABILITY_EXECUTED). Relabelling both as
+        # "TRACE_VERIFIED" asserted a check that never ran, which let a plain
+        # goal that matched a script's filename claim verified execution of it.
+        status = str(raw.get("status") or "")
         return self._envelope(
             operation="SOLVE",
             goal=goal,
             status=(
-                "PASS__CAPABILITY_EXECUTED_AND_TRACE_VERIFIED"
-                if passed
+                status
+                if passed and status.startswith("PASS__")
                 else "FAIL_CLOSED__CAPABILITY_DID_NOT_PASS"
             ),
             **{"pass": bool(passed)},
