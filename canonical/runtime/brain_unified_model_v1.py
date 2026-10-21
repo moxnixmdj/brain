@@ -168,6 +168,19 @@ class UnifiedModel:
             terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
             for term in terms:
                 self._source_df[str(term)] = self._source_df.get(str(term), 0) + 1
+        # The research record: governance decisions, verification receipts,
+        # action intents. Evidence *about* capabilities, never a capability, so
+        # `solve()` never routes here either. See the compiler's _research_rows.
+        self.research_index: dict[str, dict[str, Any]] = {
+            str(row["path"]): dict(row)
+            for row in model.get("research_index") or []
+            if isinstance(row, Mapping) and row.get("path")
+        }
+        self._research_df: dict[str, int] = {}
+        for row in self.research_index.values():
+            terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
+            for term in terms:
+                self._research_df[str(term)] = self._research_df.get(str(term), 0) + 1
         raw_index: dict[str, dict[str, float]] = {
             str(token): {str(cid): float(weight) for cid, weight in postings.items()}
             for token, postings in ((model.get("grammar") or {}).get("index") or {}).items()
@@ -243,6 +256,9 @@ class UnifiedModel:
                     for row in self.source_index.values()
                     if row.get("classification") == "ENTRY_POINT"
                 ),
+                # Derived live, for the same reason as the source counts above:
+                # a hardcoded list silently omits whatever is added later.
+                "research_index_records": len(self.research_index),
                 "routing_tokens": len(self.index),
             },
             # Stated next to the counts so a larger number cannot be misread as
@@ -434,6 +450,75 @@ class UnifiedModel:
                 "SOURCE_LOCATED__NOT_EXECUTABLE__NO_RECEIPT_OR_BOUND_ADAPTER"
                 if rows
                 else "NO_INDEXED_SOURCE_MATCHED"
+            ),
+        }
+
+    # ---------------------------------------------------------- research index
+
+    def find_research(self, query: str, *, top_k: int = 5) -> dict[str, Any]:
+        """Locate the research record behind a decision or a capability.
+
+        Governance decisions, verification receipts and action intents: what was
+        claimed, when, and under which authority. A record is *evidence about* a
+        capability, never a capability, so this is not ``route`` and ``solve``
+        never calls it. Every row repeats ``capability: False``.
+        """
+        terms = tokenize(query)
+        if not terms:
+            raise UnifiedModelError("FIND_RESEARCH_QUERY_EMPTY")
+        wanted = set(terms)
+        total_docs = max(1, len(self.research_index))
+        scored: list[tuple[float, str, dict[str, Any]]] = []
+        for path, row in self.research_index.items():
+            counts = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
+            if not counts:
+                continue
+            score = 0.0
+            for term in wanted:
+                tf = int(counts.get(term, 0) or 0)
+                if tf <= 0:
+                    continue
+                df = max(1, self._research_df.get(term, 1))
+                # "v1" occurs in 79% of these records, so raw overlap is noise;
+                # the same IDF form `recall` and `find_source` use.
+                score += math.log(1.0 + (total_docs - df + 0.5) / (df + 0.5)) * (1.0 + math.log(tf))
+            if score <= 0.0:
+                continue
+            # Naming a record by its action id is an address, not a keyword.
+            action_id = str(row.get("action_id") or "")
+            if action_id and action_id.casefold() in query.casefold():
+                score += 8.0
+            scored.append((score, path, row))
+        scored.sort(key=lambda item: (-item[0], item[1]))
+
+        rows: list[dict[str, Any]] = []
+        for score, path, row in scored[: max(1, int(top_k))]:
+            rows.append(
+                {
+                    "path": path,
+                    "id": row.get("id"),
+                    "schema": row.get("schema") or "",
+                    "status": row.get("status") or "",
+                    "date": row.get("date") or "",
+                    "action_id": row.get("action_id") or "",
+                    "sha256": row.get("sha256"),
+                    "score": round(float(score), 6),
+                    "capability": False,
+                }
+            )
+        return {
+            "schema": SOLUTION_SCHEMA,
+            "operation": "FIND_RESEARCH",
+            "model_digest": self.digest,
+            "query": query,
+            "query_terms": terms,
+            "candidates": rows,
+            "best": rows[0] if rows else None,
+            "indexed_records": len(self.research_index),
+            "reason": (
+                "RESEARCH_RECORD_LOCATED__EVIDENCE_NOT_CAPABILITY"
+                if rows
+                else "NO_INDEXED_RESEARCH_MATCHED"
             ),
         }
 

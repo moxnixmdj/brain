@@ -832,6 +832,113 @@ def _source_index_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
     return rows
 
 
+# Free-text fields that actually discriminate one research record from another.
+# Structural keys (schema/status/date/accounting/hard_nonclaims) are deliberately
+# excluded: measured, they recur across nearly every record and would dominate a
+# term-overlap ranking the way "v1" dominated the source index.
+_RESEARCH_TEXT_FIELDS = (
+    "action_id",
+    "causal_blocker",
+    "expected_parent_frontier_change",
+    "selected_route",
+    "capability_target",
+    "subject",
+    "summary",
+    "title",
+    "status",
+)
+
+_RESEARCH_ROOTS = (
+    "canonical/governance",
+    "canonical/verification",
+    "canonical/action_intents",
+)
+
+# Outputs this toolchain writes, and which embed the artifact digest. Indexing
+# one of them inside the artifact is a cycle: the artifact hashes the receipt,
+# the receipt records the artifact's digest, so every recompile changes the
+# other and the build never converges. Measured, this produced a different
+# digest on each pass. Excluding generated outputs is what makes the compile a
+# fixed point -- note this is a real cycle, unlike `source_index` hashing the
+# runtime module, which converges because that module does not embed the digest.
+_GENERATED_OUTPUTS = frozenset(
+    {
+        "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+        "canonical/verification/BRAIN_UNIFIED_MODEL_V1_VERIFICATION_20261020.json",
+    }
+)
+
+
+def _research_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
+    """Index the research record: governance, verification, and action intents.
+
+    These are the decisions and receipts behind the capabilities -- 6266 files,
+    31.8 MB -- and none of them were reachable through the model. They are
+    indexed as *records*: what was claimed, when, and under which authority. A
+    record is evidence about a capability, never a capability itself, so nothing
+    here is reachable through ``solve()``.
+
+    Rows are deliberately compact (~330 bytes) and carry only discriminating
+    free text. The full documents stay on disk and are addressed by path and
+    sha256; embedding them would have grown the artifact by tens of megabytes to
+    restate what the tree already holds.
+    """
+    rows: list[dict[str, Any]] = []
+    for rel_root in _RESEARCH_ROOTS:
+        base = root / rel_root
+        if not base.is_dir():
+            continue
+        for path in sorted(base.rglob("*")):
+            if not path.is_file() or ".git" in path.parts:
+                continue
+            rel = path.relative_to(root).as_posix()
+            if rel in covered or rel in _GENERATED_OUTPUTS:
+                continue
+            try:
+                raw = path.read_bytes()
+            except OSError:
+                continue
+            text = raw.decode("utf-8", errors="replace")
+
+            schema = ""
+            status = ""
+            date = ""
+            action_id = ""
+            parts: list[str] = []
+            if path.suffix == ".json":
+                try:
+                    doc = json.loads(text)
+                except ValueError:
+                    doc = None
+                if isinstance(doc, Mapping):
+                    schema = str(doc.get("schema") or "")
+                    status = str(doc.get("status") or "")
+                    date = str(doc.get("date") or "")
+                    action_id = str(doc.get("action_id") or "")
+                    for field in _RESEARCH_TEXT_FIELDS:
+                        value = doc.get(field)
+                        if isinstance(value, str) and value:
+                            parts.append(value)
+
+            haystack = " ".join(parts) + " " + path.stem.replace("_", " ").replace("-", " ")
+            rows.append(
+                {
+                    "id": "research:" + rel,
+                    "kind": "RESEARCH_RECORD",
+                    "path": rel,
+                    "sha256": digest_bytes(raw),
+                    "schema": schema[:160],
+                    "status": status[:80],
+                    "date": date[:32],
+                    "action_id": action_id[:160],
+                    # A record is evidence about a capability, not a capability.
+                    "capability": False,
+                    "terms": _term_counts(haystack, limit=32),
+                }
+            )
+    return rows
+
+
 def _objective_block(root: Path) -> dict[str, Any]:
     rel = "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json"
     path = root / rel
@@ -889,6 +996,12 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
     )
     source_index = _source_index_rows(base, covered_paths)
 
+    # The research record behind the capabilities: governance decisions,
+    # verification receipts, action intents. Records, not capabilities -- see
+    # _research_rows.
+    covered_docs = {str(row.get("path")) for row in knowledge + skills if row.get("path")}
+    research_index = _research_rows(base, covered_docs)
+
     for row in capabilities:
         if not row["triggers"]:
             raise UnifiedModelCompileError("CAPABILITY_WITHOUT_TRIGGERS:" + row["id"])
@@ -923,6 +1036,7 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
         "skills": skills,
         "knowledge": knowledge,
         "source_index": source_index,
+        "research_index": research_index,
         "grammar": grammar,
         "counts": {
             "capabilities": len(capabilities),
@@ -939,6 +1053,7 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
             "source_index_entry_points": sum(
                 1 for row in source_index if row["classification"] == "ENTRY_POINT"
             ),
+            "research_index_records": len(research_index),
             "routing_tokens": len(grammar["index"]),
         },
         "provenance": {
@@ -964,6 +1079,7 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
             "KNOWLEDGE_IS_INDEXED_NOT_EMBEDDED__RETRIEVED_JUST_IN_TIME",
             "COVERAGE_IS_NOT_CAPABILITY__EXECUTION_STILL_REQUIRES_DECLARED_SUBSTRATE",
             "SOURCE_INDEX_IS_ADDRESSABLE_NOT_EXECUTABLE__NOT_REACHABLE_THROUGH_SOLVE",
+            "RESEARCH_INDEX_IS_EVIDENCE_ABOUT_CAPABILITIES__NOT_A_CAPABILITY_ITSELF",
         ],
     }
     model["digest"] = {
