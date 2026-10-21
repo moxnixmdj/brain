@@ -61,7 +61,8 @@ def _effect_refs(value):
             out.extend(_effect_refs(v))
     return out
 
-def _validate_declared_bindings(clause_text,instance_id,entry,inputs):
+def _validate_declared_bindings(clause_text,instance_id,entry,inputs,
+                                verified_initial_set=frozenset()):
     declared=entry.get("proposal_bindings") or {}
     if not declared:
         return True,"VERIFIED"
@@ -89,6 +90,16 @@ def _validate_declared_bindings(clause_text,instance_id,entry,inputs):
         elif typ=="effect_result":
             refs=_effect_refs(value)
             if not refs:
+                # An effect supplied as a verified initial fact is provenance
+                # too -- it was established upstream of this composition, so the
+                # slot legitimately holds a concrete path rather than a
+                # reference to a step inside it. The composer binds exactly this
+                # case from the clause's own sentence. Without this the two
+                # disagree, and a clause the composer admitted is rejected here.
+                effect=str(spec.get("effect") or "").strip()
+                if (effect and effect in verified_initial_set
+                        and isinstance(value,str) and value.strip()):
+                    continue
                 return False,"PROPOSAL_EFFECT_RESULT_MISSING:"+instance_id+":"+str(key)
             field=str(spec.get("field") or "")
             if any(ref_field!=field for _effect,ref_field in refs):
@@ -205,14 +216,23 @@ def verify(goal,composition,grounding,registry,verified_initial_facts=None):
         clause_index=int(cap.get("clause_index"))
         if clause_index<0 or clause_index>=len(grounding_clauses):
             return False,"CLAUSE_INDEX_INVALID:"+instance_id
-        ok,reason=_validate_declared_bindings(
-            str((grounding_clauses[clause_index] or {}).get("text") or ""),
-            instance_id,
-            entry,
-            inputs,
-        )
-        if not ok:
-            return False,reason
+        # The composer records which route bound this capability. When a
+        # declared ``effect_result`` slot has no provider inside the composition,
+        # it falls back to ``_bind_inputs`` and the clause's own sentence supplies
+        # the paths, leaving ``proposal_binding_evidence`` empty. Validating the
+        # declared bindings in that case compares the sentence's paths against
+        # generated ones and can only mismatch, so validate only what the
+        # composer actually used.
+        if cap.get("proposal_binding_evidence"):
+            ok,reason=_validate_declared_bindings(
+                str((grounding_clauses[clause_index] or {}).get("text") or ""),
+                instance_id,
+                entry,
+                inputs,
+                verified_initial_set,
+            )
+            if not ok:
+                return False,reason
         if float(cap.get("cost",0))!=float(entry.get("cost",1)):
             return False,"COST_MISMATCH:"+instance_id
         if list(cap.get("result_fields") or [])!=[str(x) for x in (entry.get("result_fields") or [])]:

@@ -173,11 +173,42 @@ def start(port: str = PORT, timeout: int = 120, pins: list[str] | None = None) -
     return False, (r.stdout + r.stderr).strip()[:300]
 
 
+def _load_cdp_driver():
+    """Resolve the CDP driver whether or not its directory is on sys.path.
+
+    A bare ``import osworld_v21_browser_cdp_v1`` only resolves when
+    ``canonical/runtime`` happens to be importable as a top-level path. The
+    runtime loads its modules by file path instead -- that is what
+    ``goal_compiler._load_sibling_runtime_module`` does -- and under that
+    loader the bare import raised ``ModuleNotFoundError``, so every entry point
+    that drives a browser (``bind``, and therefore ``state`` and ``act``) failed
+    even with a live Chromium on the port. Resolved next to this file first,
+    with the bare import kept as the fallback for callers that do have the
+    directory on their path.
+    """
+    import importlib.util
+    import sys
+
+    try:
+        import osworld_v21_browser_cdp_v1 as OC
+        return OC
+    except ImportError:
+        pass
+    path = Path(__file__).resolve().with_name("osworld_v21_browser_cdp_v1.py")
+    spec = importlib.util.spec_from_file_location("osworld_v21_browser_cdp_v1", path)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"cannot load CDP driver from {path}")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
 def bind(port: str = PORT):
     """The repo's own browser capability, pointed at our running Chromium."""
     import types
 
-    import osworld_v21_browser_cdp_v1 as OC
+    OC = _load_cdp_driver()
     b = OC.BrowserCDP()
     b.bind_environment(types.SimpleNamespace(vm_ip="127.0.0.1", chromium_port=int(port)))
     return b
