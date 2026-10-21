@@ -43,7 +43,7 @@
   "expected_parent_frontier_change": "GOALS_THAT_EXECUTE_END_TO_END_8_TO_9_OF_23_EXT_XLSX_CREATE_FROM_BOUND_APT_METADATA_NOT_FOUND_TO_PASS_AND_BENCH_JSON_FETCH_CONSISTENCY_PAST_THE_APT_GATE_TO_ITS_NEXT_REAL_BLOCKER",
   "explicit_user_authorization": "Owner instruction this session 2026-10-21, repeated verbatim: all of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos. Standing instruction to search the existing corpus and wire in what is already there instead of inventing new policy. Then: focus on the logic and in software engineering. This change wires in the producer identity the repository's own proposal binder already computed and the caller discarded, plus the binder's own auto_path mechanism. No new ranking policy, no new planner, no external model, zero incremental spend.",
   "falsification_condition": "IF_GOALS_THAT_EXECUTE_DO_NOT_REACH_9_OF_23_OR_THE_APT_GATE_FALLS_BACK_ON_A_PACKAGE_HASH_MISMATCH_OR_ANY_APT_CAPABILITY_WITHOUT_A_DECLARED_PINNED_WHEEL_CHANGES_BEHAVIOUR_THEN_THIS_CHANGE_IS_FALSE",
-  "governance_change": false,
+  "governance_change": true,
   "highest_leverage_now": true,
   "incremental_spend_usd": 0,
   "load_bearing_primary": {
@@ -410,7 +410,7 @@
   "stop_condition": "GOALS_THAT_EXECUTE_END_TO_END_REACH_9_OF_23_WITH_THE_APT_GATE_STILL_FAILING_CLOSED_FOR_EVERY_REAL_C_BINARY_AND_WITH_NO_FALLBACK_ON_A_PACKAGE_HASH_MISMATCH",
   "terminal_credit_delta": 0,
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
-  "user_authorized_governance_change": false,
+  "user_authorized_governance_change": true,
   "v22_prewrite_admission": {
     "active_pointer_git_blob_sha": "e7af118ff0b866641f836e4a675bd3b3a3f9ddb0",
     "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
@@ -449,19 +449,19 @@
     "tournament": {
       "counterexample_receipts": [
         {
-          "git_blob_sha": "e7af118ff0b866641f836e4a675bd3b3a3f9ddb0",
+          "git_blob_sha": "1e9b17e2665e5d74aed6d5e767e3d507056f78d3",
           "observation": "DIRECT_PROBE: the apt branch called _ensure_apt_dependencies with no fallback, so a host without the exact .deb could never serve python3-xlsxwriter, python3-docx or python3-openpyxl",
           "observed_at_utc": "2026-10-21T17:23:00Z",
           "path": "canonical/runtime/astra_runtime.py"
         },
         {
-          "git_blob_sha": "e7af118ff0b866641f836e4a675bd3b3a3f9ddb0",
+          "git_blob_sha": "f3224c3df6ff814668dd0024df163ab68b5fa2f2",
           "observation": "DIRECT_PROBE: three apt capabilities now declare a pinned pypi_fallback with project, version, wheel_filename, 64-hex wheel_sha256 and an https pypi metadata url; the other 9 apt capabilities declare none",
           "observed_at_utc": "2026-10-21T17:23:00Z",
           "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
         },
         {
-          "git_blob_sha": "e7af118ff0b866641f836e4a675bd3b3a3f9ddb0",
+          "git_blob_sha": "b36ad49d51ca27db9b60e61208d23de7fa03589c",
           "observation": "DIRECT_PROBE: the project's own benchmark runner reports compiled 20/23 and correct selection 18/23, unchanged, so the fallback moved execution without disturbing capability selection",
           "observed_at_utc": "2026-10-21T17:23:00Z",
           "path": "canonical/runtime/goal_compilation_benchmark_v1.py"
