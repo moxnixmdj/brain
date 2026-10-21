@@ -24406,7 +24406,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "bb05e20ca5ee990d5e84a036e9f62c924165a347755f6766cdc23e313b548542"
+  "value": "6ee672c2952ce0dce4067c765db07606c9e3fe59eed8a03dac73d6d506468101"
  },
  "engines": [
   {
@@ -187456,7 +187456,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/BROWSER_CDP_DRIVER_RESOLUTION_INDEPENDENT_OF_SYS_PATH_V1_20261021_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "f3ad712e370aea5eab1716f58934a6377eb04b36f50aca709c950a9458c28e4a",
+   "sha256": "c518629f44262227a8f0cfe05799215d7fb914c151192441c1726255a39c4050",
    "status": "",
    "terms": {
     "20261021": 1,
