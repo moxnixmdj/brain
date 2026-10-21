@@ -24397,7 +24397,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6266,
+  "research_index_records": 6267,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24406,7 +24406,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c3dd66d720de5a3d8ca6f51ea6273028bacdbf556805f717fd4812f7a439c978"
+  "value": "c7708c68ae818d78542f400ddc840114c6ec4068627f0858dc5b3a3da8bc9c92"
  },
  "engines": [
   {
@@ -187493,6 +187493,32 @@
     "execution": 1,
     "first": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "DECISION_EVIDENCE_LOCATING_PRODUCER_AND_RECURSIVE_PRODUCER_CHAIN_V1_20261021_V1",
+   "capability": false,
+   "date": "2026-10-21",
+   "id": "research:canonical/action_intents/DECISION_EVIDENCE_LOCATING_PRODUCER_AND_RECURSIVE_PRODUCER_CHAIN_V1_20261021_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/DECISION_EVIDENCE_LOCATING_PRODUCER_AND_RECURSIVE_PRODUCER_CHAIN_V1_20261021_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "c5a5c11253ab0a02777ffafbf337fc44a825a2ca4351a495c1f6a14eb581c2ff",
+   "status": "",
+   "terms": {
+    "20261021": 1,
+    "chain": 1,
+    "decision": 1,
+    "decision_evidence_locating_producer_and_recursive_producer_chain_v1_20261021_v1": 1,
+    "decision_synthesis_typed_stdlib_requires_structured_decision_evidence_available_and_nothing_in_the_registry_produced_it__so_its_input_path_had_no_upstream_step__and_the_verifier_chain_decision_synthesis_verify_stdlib_died_with_decision_verifier_input_missing__two_compiler_facts_kept_it_closed_even_with_a_producer__attach_effect_producer_steps_resolved_only_one_level_so_a_producer_which_is_itself_a_consumer_left_the_synthesizer_input_path_dangling__and_bind_producer_inputs_refused_the_middle_link_because_bind_inputs_does_not_speak_effect_result": 1,
+    "evidence": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "locate_and_validate_a_typed_decision_problem_the_repository_already_contains_rather_than_synthesising_alternatives_constraint_states_or_confidence_values__admission_requires_the_consumers_own_synthesize_to_return_decided_so_validation_is_by_the_consumers_authority_not_a_reimplemented_schema_grep__and_make_the_producer_step_attachment_recurse_so_a_three_link_chain_emits_in_execution_order": 1,
+    "locating": 1,
+    "producer": 2,
+    "recursive": 1,
+    "the_decision_verifier_goal_now_executes_end_to_end_through_a_three_link_chain_locator_then_synthesizer_then_verifier__measured_compiled_19_of_23_unchanged__correct_selection_17_of_23_unchanged__wrong_capability_2_of_23_unchanged__goals_that_run_to_completion_6_to_7__capability_count_364_to_365__effects_required_but_never_produced_29_to_28": 1,
+    "v1": 2
    }
   },
   {
