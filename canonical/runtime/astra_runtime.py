@@ -1122,6 +1122,44 @@ def _already_present_dependency(entry):
     }
 
 
+def _apt_then_pinned_pypi_fallback(entry, source):
+    """Acquire an apt-declared dependency, falling back to a pinned wheel.
+
+    Some capabilities are declared against a Debian package that is nothing
+    more than a pure-Python library in a .deb -- ``python3-xlsxwriter``,
+    ``python3-docx``, ``python3-openpyxl``. On a host whose apt metadata does
+    not carry that exact name/version/sha256 the gate correctly refuses, and the
+    capability becomes unusable even though the identical code is a published,
+    hash-pinned wheel.
+
+    So: try apt first, because on a Debian host that is the stronger claim. Only
+    if the package is *absent from this host's metadata* -- never if it is
+    present but hashes differently, which is an integrity event -- fall back to
+    a wheel the entry pins explicitly. The fallback runs through
+    ``_ensure_pypi_dependency``, which verifies the registry digest, the
+    downloaded wheel's sha256, and the version that actually becomes
+    importable. Nothing about it is opportunistic: an entry with no
+    ``pypi_fallback`` behaves exactly as before.
+    """
+    try:
+        return _ensure_apt_dependencies(source)
+    except Blocker as exc:
+        if not str(exc).startswith("BOUND_APT_METADATA_NOT_FOUND"):
+            raise
+        fallback=source.get("pypi_fallback")
+        if not isinstance(fallback,dict) or not fallback:
+            raise
+        dependency=_ensure_pypi_dependency(fallback)
+        if not isinstance(dependency,dict):
+            raise Blocker("BOUND_PYPI_FALLBACK_RESULT_INVALID")
+        out=dict(dependency)
+        out["acquired_via"]="PINNED_PYPI_FALLBACK_FOR_APT_DECLARED_PURE_PYTHON_PACKAGE"
+        out["apt_package_declared"]=str(
+            ((source.get("packages") or [{}])[0] or {}).get("name") or ""
+        )
+        return out
+
+
 def _ensure_apt_dependencies(source):
     if not sys.platform.startswith("linux"):
         raise Blocker("BOUND_APT_PLATFORM_UNSUPPORTED:"+sys.platform)
@@ -1194,7 +1232,7 @@ def _invoke_bound_capability(args):
         # Ask the machine before asking the package database. A dependency
         # the machine already holds is a fact, not something to acquire,
         # and a fact about the machine is what may satisfy it.
-        dependency=_already_present_dependency(entry) or _ensure_apt_dependencies(source)
+        dependency=_already_present_dependency(entry) or _apt_then_pinned_pypi_fallback(entry,source)
     elif source.get("type")=="git_source_tree":
         dependency=_ensure_git_source_tree_dependency(source)
         call_args["_source_root"]=dependency.get("source_root")

@@ -1,0 +1,70 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "plan": {
+        "args": {
+          "capability_id": "xlsx.table.create_from_json_records",
+          "goal": "Create an xlsx table from JSON records",
+          "json_path": "canonical/CANONICAL_POINTER.json",
+          "output_path": "canonical/astra_runtime/tmp/brain_out__xlsx_table_create_from_json_records__f849648a47.xlsx"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "adapter": "xlsx_table_xlsxwriter",
+        "capability_id": "xlsx.table.create_from_json_records",
+        "collection_path": [
+          "active_persistent_controllers"
+        ],
+        "column_count": 2,
+        "columns": [
+          "agent_id",
+          "classification"
+        ],
+        "dependency": {
+          "acquired_via": "PINNED_PYPI_FALLBACK_FOR_APT_DECLARED_PURE_PYTHON_PACKAGE",
+          "apt_package_declared": "python3-xlsxwriter",
+          "project": "xlsxwriter",
+          "status": "INSTALLED_VERIFIED",
+          "version": "3.2.9",
+          "wheel_sha256": "9a5db42bc5dff014806c58a20b9eae7322a134abb6fce3c92c181bfb275ec5b3"
+        },
+        "output_bytes": 5385,
+        "output_path": "canonical/astra_runtime/tmp/brain_out__xlsx_table_create_from_json_records__f849648a47.xlsx",
+        "output_sha256": "333b50dedc8fd56119e37787cbff311bf173147d7cdc3b31856c6f4e28730cf2",
+        "output_verified": true,
+        "row_count": 2,
+        "status_value": null
+      }
+    },
+    {
+      "cycle": 1,
+      "plan": {
+        "args": {
+          "summary": "RAW_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "RAW_GOAL_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-10-21T17:20:27.093067+00:00",
+  "mission_id": "D13",
+  "next_action_index": 2,
+  "plan_sha256": "8c446735c19e56de68446af446cae8f4bf226384179190d4e2c441001d77e8f3",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "live-raw-goal-controller",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-10-21T17:20:27.681548+00:00"
+}
