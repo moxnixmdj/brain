@@ -1050,3 +1050,98 @@ class VerifierRoutingStabilityTests(unittest.TestCase):
             if stripped.startswith("attempts ="):
                 return int(stripped.split("=", 1)[1].strip())
         raise AssertionError("could not find the attempts assignment in check_routing")
+
+
+class DeclaredDependencyEnvironmentIndependenceTests(unittest.TestCase):
+    """The artifact must be a function of the tree, not of the compiling machine.
+
+    The compiler used to answer "are this capability's dependencies present?" by
+    calling ``shutil.which`` and ``importlib.util.find_spec`` at compile time and
+    baking the answers into the artifact. That contradicted the compiler's own
+    contract -- "no environment-derived values ... compiling twice from the same
+    tree produces byte-identical output".
+
+    It was not theoretical. Installing Pillow and nothing else changed the model
+    digest from ``4d7e627e...`` to ``8c158876...`` across six capabilities, and
+    the verifier's ``recompilation_is_byte_identical`` case failed on that
+    machine -- so ``33/33`` depended on which packages the compiling host had.
+
+    Presence is a property of the machine answering, so it now belongs at run
+    time. These tests pin that separation.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.model = model_runtime.open_model()
+
+    def test_the_compiler_cannot_probe_the_environment(self):
+        """No import that could observe the machine remains in the compiler."""
+        for name in ("shutil", "importlib"):
+            with self.subTest(module=name):
+                self.assertIsNone(
+                    getattr(compiler, name, None),
+                    f"the compiler imports {name}, so the artifact can depend on the host",
+                )
+
+    def test_the_declaration_records_no_presence_verdict(self):
+        """`declared_dependencies` states what is needed, never what is installed."""
+        forbidden = {"declared_dependencies_present", "declared_dependencies_missing"}
+        offenders = {}
+        for cid, row in self.model.capabilities.items():
+            keys = set((row.get("declared_dependencies") or {}).keys())
+            leaked = keys & forbidden
+            if leaked:
+                offenders[cid] = sorted(leaked)
+        self.assertEqual(
+            offenders,
+            {},
+            f"{len(offenders)} capabilities bake a host-specific presence verdict "
+            f"into the artifact, e.g. {list(offenders.items())[:3]}",
+        )
+
+    def test_the_declaration_is_unchanged_by_a_different_machine(self):
+        """Simulating two opposite machines must not move the declaration.
+
+        This is the control that fails if environment probing is reintroduced:
+        under a host where every dependency resolves, and one where none does,
+        the recorded declaration must be byte-identical.
+        """
+        import importlib
+        import shutil
+        from unittest import mock
+
+        entry = {
+            "source": {"type": "pypi", "module": "pypdf", "executable": "pdftotext"}
+        }
+        python_entry = {"source": {"type": "python", "path": "canonical/runtime/goal_compiler.py"}}
+
+        def _declare(everything_present: bool):
+            with mock.patch.object(shutil, "which", lambda _n: "/usr/bin/x" if everything_present else None), \
+                 mock.patch.object(importlib.util, "find_spec", lambda _n: object() if everything_present else None):
+                return [
+                    compiler._dependency_declaration(entry, model_runtime.ROOT),
+                    compiler._dependency_declaration(python_entry, model_runtime.ROOT),
+                ]
+
+        self.assertEqual(
+            _declare(True),
+            _declare(False),
+            "the declaration changed with the simulated host, so the artifact is "
+            "still environment-derived",
+        )
+
+    def test_status_reports_the_machine_it_actually_runs_on(self):
+        """Presence is measured live, so it tracks the real interpreter."""
+        status = self.model.status()
+        self.assertEqual(status["counts"]["capabilities"], 363)
+        self.assertEqual(
+            status["declared_dependencies_present"] + status["declared_dependencies_missing"],
+            363,
+            "present + missing must account for every capability",
+        )
+
+        # chromedriver is not installed in this sandbox and is the one dependency
+        # no amount of pip-installing fixes, so it must always be reported.
+        row = self.model.capabilities.get("web.browser.rendered.capture.chromedriver")
+        self.assertIsNotNone(row, "the chromedriver capability should exist")
+        self.assertIn("chromedriver", model_runtime._missing_declared_dependencies(row))
