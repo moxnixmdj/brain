@@ -1145,3 +1145,127 @@ class DeclaredDependencyEnvironmentIndependenceTests(unittest.TestCase):
         row = self.model.capabilities.get("web.browser.rendered.capture.chromedriver")
         self.assertIsNotNone(row, "the chromedriver capability should exist")
         self.assertIn("chromedriver", model_runtime._missing_declared_dependencies(row))
+
+
+class SourceIndexTests(unittest.TestCase):
+    """The model addresses the whole runtime tree without claiming to run it.
+
+    Measured, the capability registry reached 291 of 2189 ``canonical/runtime``
+    modules -- 13%. The honest fix is not to promote the rest to capabilities:
+    only 404 are entry points, 39 are internal helpers and the remainder are
+    imported by nobody, so calling them capabilities would claim execution that
+    has never been observed. It is equally wrong to leave 1859 real modules
+    invisible to a model that claims to be the whole brain.
+
+    So they are indexed as *source*. These tests pin the line between the two:
+    the partition must be exact, and nothing indexed may claim to be executable.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.model = model_runtime.open_model()
+
+    def test_the_partition_of_the_runtime_tree_is_exact(self):
+        """Every runtime module is either a capability or indexed source, never both."""
+        import pathlib
+
+        root = model_runtime.ROOT
+        on_disk = {
+            p.relative_to(root).as_posix()
+            for p in (root / "canonical" / "runtime").rglob("*.py")
+            if ".git" not in p.parts
+        }
+
+        capability_paths = {
+            cid[: -len(".auto.v1")]
+            for cid in self.model.capabilities
+            if cid.endswith(".auto.v1")
+        }
+        capability_paths.update(
+            str((row.get("provenance") or {}).get("source_path"))
+            for row in self.model.capabilities.values()
+            if isinstance((row.get("provenance") or {}).get("source_path"), str)
+        )
+        capability_paths &= on_disk
+        indexed = set(self.model.source_index)
+
+        self.assertEqual(
+            capability_paths & indexed,
+            set(),
+            "a module that is already a capability must not also be indexed as "
+            "non-executable source -- that is a contradiction on its face",
+        )
+        self.assertEqual(
+            on_disk - capability_paths - indexed,
+            set(),
+            "every runtime module must be reachable one way or the other",
+        )
+        self.assertEqual(
+            len(capability_paths) + len(indexed),
+            len(on_disk),
+            "the two sets must partition the tree exactly",
+        )
+
+    def test_nothing_indexed_claims_to_be_a_capability(self):
+        offenders = {
+            path: row.get("capability")
+            for path, row in self.model.source_index.items()
+            if row.get("capability") is not False
+        }
+        self.assertEqual(
+            offenders,
+            {},
+            f"{len(offenders)} indexed modules claim capability status",
+        )
+
+    def test_find_source_never_reports_something_executable(self):
+        """`find_source` answers 'where is this?', never 'run this'."""
+        for query in ("pdf text extraction", "docx document verify", "sqlite query"):
+            with self.subTest(query=query):
+                result = self.model.find_source(query, top_k=10)
+                self.assertTrue(result["candidates"], f"no candidates for {query!r}")
+                for row in result["candidates"]:
+                    self.assertFalse(row["executable"], row["path"])
+                    self.assertFalse(row["capability"], row["path"])
+                self.assertIn("NOT_EXECUTABLE", result["reason"])
+
+    def test_find_source_is_not_reachable_from_solve(self):
+        """Indexing a module must not make `solve()` able to select it."""
+        before = set(self.model.capabilities)
+        for path in list(self.model.source_index)[:50]:
+            self.assertNotIn(path, before, f"{path} leaked into capabilities")
+        # And solve() still refuses a goal that only indexed source could serve.
+        out = self.model.solve("Inspect the type directed sampler internals.")
+        self.assertIs(out.get("pass"), False, out.get("status"))
+
+    def test_idf_outranks_ubiquitous_tokens(self):
+        """A rare term must beat one that appears in most of the index.
+
+        This is the control for the original defect: with raw term overlap the
+        token "v1" -- present in 1132 of 1859 rows -- decided the ranking, and a
+        query for "docx document verify" returned an unrelated module first.
+        """
+        self.assertGreater(len(self.model.source_index), 1000)
+        # "v1" is ubiquitous, so it must carry almost no weight on its own.
+        df_v1 = self.model._source_df.get("v1", 0)
+        df_docx = self.model._source_df.get("docx", 0)
+        self.assertGreater(df_v1, df_docx * 10, "expected v1 to be far more common")
+
+        result = self.model.find_source("docx document verify", top_k=1)
+        self.assertIsNotNone(result["best"])
+        self.assertIn("docx", result["best"]["path"].casefold())
+
+    def test_counts_declare_the_index_and_stay_true(self):
+        counts = self.model.model.get("counts") or {}
+        self.assertEqual(
+            int(counts.get("source_index_modules", -1)),
+            len(self.model.source_index),
+        )
+        entry_points = sum(
+            1
+            for row in self.model.source_index.values()
+            if row.get("classification") == "ENTRY_POINT"
+        )
+        self.assertEqual(int(counts.get("source_index_entry_points", -1)), entry_points)
+        # The capability count must not have been inflated by indexing.
+        self.assertEqual(int(counts.get("capabilities", -1)), 363)

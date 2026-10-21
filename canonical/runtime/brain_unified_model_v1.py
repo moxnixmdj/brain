@@ -152,6 +152,22 @@ class UnifiedModel:
         self.knowledge = [
             dict(row) for row in (model.get("knowledge") or []) if isinstance(row, Mapping)
         ]
+        # Runtime modules the model can address but not execute. Deliberately
+        # kept apart from `capabilities`: `solve()` never routes here, and every
+        # row carries capability=False. See the compiler's _source_index_rows.
+        self.source_index: dict[str, dict[str, Any]] = {
+            str(row["path"]): dict(row)
+            for row in model.get("source_index") or []
+            if isinstance(row, Mapping) and row.get("path")
+        }
+        # Document frequency over the source index, so `find_source` can weight
+        # a rare term above a ubiquitous one. Measured, "v1" occurs in 1132 of
+        # 1859 rows; without IDF that token alone decided the ranking.
+        self._source_df: dict[str, int] = {}
+        for row in self.source_index.values():
+            terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
+            for term in terms:
+                self._source_df[str(term)] = self._source_df.get(str(term), 0) + 1
         raw_index: dict[str, dict[str, float]] = {
             str(token): {str(cid): float(weight) for cid, weight in postings.items()}
             for token, postings in ((model.get("grammar") or {}).get("index") or {}).items()
@@ -325,6 +341,79 @@ class UnifiedModel:
                 "ROUTED_WITHIN_MODEL"
                 if confident
                 else "GOAL_NOT_REPRESENTED_IN_MODEL__FAIL_CLOSED"
+            ),
+        }
+
+    # -------------------------------------------------------------- source index
+
+    def find_source(self, query: str, *, top_k: int = 5) -> dict[str, Any]:
+        """Locate runtime source the model can *address* but cannot *execute*.
+
+        This is deliberately not ``route`` and ``solve`` never calls it. The
+        modules returned here have no receipt and no bound adapter, so naming one
+        is an answer to "where is this?", never to "run this". Every row repeats
+        ``executable: False`` so a caller cannot mistake a hit for a capability.
+        """
+        terms = tokenize(query)
+        if not terms:
+            raise UnifiedModelError("FIND_SOURCE_QUERY_EMPTY")
+        wanted = set(terms)
+        total_docs = max(1, len(self.source_index))
+        scored: list[tuple[float, str, dict[str, Any]]] = []
+        for path, row in self.source_index.items():
+            counts = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
+            if not counts:
+                continue
+            score = 0.0
+            hit: set[str] = set()
+            for term in wanted:
+                tf = int(counts.get(term, 0) or 0)
+                if tf <= 0:
+                    continue
+                hit.add(term)
+                df = max(1, self._source_df.get(term, 1))
+                # Same IDF form `recall` uses for knowledge, so a term that
+                # appears in one module outranks one that appears in a thousand.
+                score += math.log(1.0 + (total_docs - df + 0.5) / (df + 0.5)) * (1.0 + math.log(tf))
+            if score <= 0.0:
+                continue
+            # Naming the file is an address, not a keyword, so it outranks term
+            # overlap -- but only for the row actually named.
+            if path.casefold() in query.casefold():
+                score += 8.0
+            scored.append((score, path, row))
+        scored.sort(key=lambda item: (-item[0], item[1]))
+
+        rows: list[dict[str, Any]] = []
+        for score, path, row in scored[: max(1, int(top_k))]:
+            rows.append(
+                {
+                    "path": path,
+                    "id": row.get("id"),
+                    "classification": row.get("classification"),
+                    "sha256": row.get("sha256"),
+                    "summary": row.get("summary") or "",
+                    "symbol_count": int(row.get("symbol_count") or 0),
+                    "matched_terms": sorted(wanted & set(row.get("terms") or ())),
+                    "score": round(float(score), 6),
+                    # The load-bearing part of this whole method.
+                    "capability": False,
+                    "executable": False,
+                }
+            )
+        return {
+            "schema": SOLUTION_SCHEMA,
+            "operation": "FIND_SOURCE",
+            "model_digest": self.digest,
+            "query": query,
+            "query_terms": terms,
+            "candidates": rows,
+            "best": rows[0] if rows else None,
+            "indexed_modules": len(self.source_index),
+            "reason": (
+                "SOURCE_LOCATED__NOT_EXECUTABLE__NO_RECEIPT_OR_BOUND_ADAPTER"
+                if rows
+                else "NO_INDEXED_SOURCE_MATCHED"
             ),
         }
 

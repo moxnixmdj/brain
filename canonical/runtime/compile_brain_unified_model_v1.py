@@ -737,6 +737,101 @@ def _engine_rows(root: Path) -> list[dict[str, Any]]:
     return rows
 
 
+_IMPORT_RE = re.compile(r"^\s*(?:from|import)\s+([A-Za-z_][\w.]*)", re.M)
+
+
+def _source_index_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
+    """Index the runtime modules the model can *address* but cannot *execute*.
+
+    Measured, the capability registry reaches 291 of 2189 ``canonical/runtime``
+    modules. The honest response is not to promote the other 1898 to
+    capabilities -- only 407 of them are entry points, 39 are internal helpers
+    and 1452 are imported by nobody, so calling them capabilities would claim
+    execution that has never been observed. It is equally wrong to leave them
+    invisible, because they are real source an operator may need to find.
+
+    So this records them as *source*, with the distinction made explicit on
+    every row: ``capability: false`` and a ``classification`` that says what the
+    module actually is. Nothing here is reachable through ``solve()``.
+    """
+    # One reverse-import graph over the tree, so "imported by nobody" is a
+    # measured fact rather than a guess.
+    importers: dict[str, set[str]] = {}
+    py_files: list[Path] = []
+    for name in ("canonical", "tests"):
+        base = root / name
+        if base.is_dir():
+            py_files.extend(
+                p for p in sorted(base.rglob("*.py")) if ".git" not in p.parts
+            )
+    for path in py_files:
+        try:
+            text = path.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        for mod in _IMPORT_RE.findall(text):
+            importers.setdefault(mod.split(".")[0], set()).add(path.as_posix())
+
+    rows: list[dict[str, Any]] = []
+    runtime_root = root / "canonical" / "runtime"
+    for path in sorted(runtime_root.rglob("*.py")):
+        if ".git" in path.parts:
+            continue
+        rel = path.relative_to(root).as_posix()
+        if rel in covered:
+            continue
+        try:
+            raw = path.read_bytes()
+        except OSError:
+            continue
+        text = raw.decode("utf-8", errors="replace")
+        stem = path.stem
+        is_entry = "__main__" in text
+        n_importers = len(importers.get(stem, set()) - {rel})
+        classification = (
+            "ENTRY_POINT" if is_entry else ("INTERNAL_HELPER" if n_importers else "ORPHAN")
+        )
+
+        symbols: list[str] = []
+        summary = ""
+        try:
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore", DeprecationWarning)
+                tree = ast.parse(text)
+            for node in tree.body:
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                    symbols.append(node.name)
+            summary = (ast.get_docstring(tree) or "").strip().splitlines()
+            summary = summary[0][:240] if summary else ""
+        except (SyntaxError, ValueError, UnicodeDecodeError):
+            classification = "UNPARSEABLE"
+
+        haystack = " ".join([stem.replace("_", " "), summary, " ".join(symbols[:24])])
+        rows.append(
+            {
+                "id": "source:" + rel,
+                "kind": "SOURCE_ADDRESSABLE_MODULE",
+                "path": rel,
+                "sha256": digest_bytes(raw),
+                "classification": classification,
+                # The load-bearing part: addressable is not executable.
+                "capability": False,
+                "executable_entry_point": is_entry,
+                "imported_by_count": n_importers,
+                "symbol_count": len(symbols),
+                "symbols": sorted(symbols)[:24],
+                "summary": summary,
+                # Term *counts*, matching the convention `knowledge` and
+                # `skills` already use, so the runtime can score this index with
+                # the same IDF weighting as `recall`. A flat set of terms made
+                # every row look equally about "v1" -- measured, "v1" occurs in
+                # 1132 of 1859 rows -- which is why raw overlap ranked noise.
+                "terms": _term_counts(haystack),
+            }
+        )
+    return rows
+
+
 def _objective_block(root: Path) -> dict[str, Any]:
     rel = "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json"
     path = root / rel
@@ -775,6 +870,25 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
     skills = _skill_rows(base)
     knowledge = _knowledge_rows(base)
 
+    # Modules the model can address but not execute. Kept out of `capabilities`
+    # on purpose: see _source_index_rows.
+    #
+    # The exclusion set must be derived from the capability *ids*, not from
+    # provenance.source_path. A file-backed capability's id is its source path
+    # plus ".auto.v1", and only 158 of the 291 such rows carry a source_path at
+    # all -- excluding by provenance left 133 modules that are already
+    # capabilities also indexed as "addressable but not executable", which is a
+    # contradiction on its face.
+    covered_paths = {
+        cid[: -len(".auto.v1")] for cid in registry if cid.endswith(".auto.v1")
+    }
+    covered_paths.update(
+        str(row["provenance"].get("source_path"))
+        for row in capabilities
+        if row["provenance"].get("source_path")
+    )
+    source_index = _source_index_rows(base, covered_paths)
+
     for row in capabilities:
         if not row["triggers"]:
             raise UnifiedModelCompileError("CAPABILITY_WITHOUT_TRIGGERS:" + row["id"])
@@ -808,6 +922,7 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
         "engines": engines,
         "skills": skills,
         "knowledge": knowledge,
+        "source_index": source_index,
         "grammar": grammar,
         "counts": {
             "capabilities": len(capabilities),
@@ -820,6 +935,10 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
             "engines": len(engines),
             "skills": len(skills),
             "knowledge_documents": len(knowledge),
+            "source_index_modules": len(source_index),
+            "source_index_entry_points": sum(
+                1 for row in source_index if row["classification"] == "ENTRY_POINT"
+            ),
             "routing_tokens": len(grammar["index"]),
         },
         "provenance": {
@@ -844,6 +963,7 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
             "NOT_A_REPLACEMENT_FOR_THE_LIVE_REGISTRY_OR_LAWS",
             "KNOWLEDGE_IS_INDEXED_NOT_EMBEDDED__RETRIEVED_JUST_IN_TIME",
             "COVERAGE_IS_NOT_CAPABILITY__EXECUTION_STILL_REQUIRES_DECLARED_SUBSTRATE",
+            "SOURCE_INDEX_IS_ADDRESSABLE_NOT_EXECUTABLE__NOT_REACHABLE_THROUGH_SOLVE",
         ],
     }
     model["digest"] = {

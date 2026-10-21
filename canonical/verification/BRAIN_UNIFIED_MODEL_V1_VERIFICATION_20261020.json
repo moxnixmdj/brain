@@ -1,7 +1,7 @@
 {
- "artifact_bytes": 1670327,
+ "artifact_bytes": 3447717,
  "artifact_path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
- "artifact_sha256": "1c906b006c8f6d468ab9d2ad8bf2ac87b97fd7d2ac53eb9f9d0ba06d468dd828",
+ "artifact_sha256": "f96eae570a3cd26cb96d72d6926bb4c23da683d6a7f893480a48ed8aad0513de",
  "authority": "NONE",
  "capability_credit_delta": 0,
  "categories": [
@@ -15,7 +15,7 @@
    "rows": [
     {
      "detail": {
-      "declared": "9306f87c2fdbfc1adfc2c3d70513d444aa1262bb71bcad7a7d2aa07c9923fc5a"
+      "declared": "75dab67b3a7c09739daa193d6fdf51104fe31835a028a823c055b16fec038a59"
      },
      "name": "digest_recomputes",
      "oracle": "SHA256_RECOMPUTATION",
@@ -23,7 +23,7 @@
     },
     {
      "detail": {
-      "recompiled_digest": "9306f87c2fdbfc1adfc2c3d70513d444aa1262bb71bcad7a7d2aa07c9923fc5a"
+      "recompiled_digest": "75dab67b3a7c09739daa193d6fdf51104fe31835a028a823c055b16fec038a59"
      },
      "name": "recompilation_is_byte_identical",
      "oracle": "DETERMINISTIC_RECOMPILE",
@@ -68,7 +68,7 @@
     },
     {
      "detail": {
-      "bytes": 1670327
+      "bytes": 3447717
      },
      "name": "artifact_bytes_are_the_model",
      "oracle": "FILE_STAT",
@@ -128,88 +128,88 @@
       "examples": [
        {
         "confident": true,
-        "goal": "json auto optimal measurement handle livebench_legacy15_pointwise_optimal_v1",
-        "target": "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py.auto.v1",
+        "goal": "auto image transform check reduction legacy",
+        "target": "canonical/runtime/livebench_legacy_composition_shape_reduction_v1.py.auto.v1",
         "top": [
-         "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py.auto.v1",
-         "python.repository.acceptance.measure.v1",
-         "python.task.acceptance.measured.objective.v1"
+         "json.query.jq",
+         "python.contract.check.crosshair.v1",
+         "terminal.kstar.root.assess.stdlib"
         ]
        },
        {
         "confident": true,
-        "goal": "authority please source current_escape_o11_proof_instantiation_search_v1 finance auto",
-        "target": "canonical/runtime/r2_finance_normalized_source_universe_direct_adequacy_v1.py.auto.v1",
+        "goal": "http active active15 for noarg plus",
+        "target": "canonical/runtime/livebench_active15_plus_one_noarg_pointwise_v1.py.auto.v1",
         "top": [
-         "canonical/runtime/current_escape_o11_proof_instantiation_search_v1.py.auto.v1",
-         "canonical/runtime/finance_direct_source_coverage_audit_v1.py.auto.v1",
-         "canonical/runtime/r2_finance_normalized_source_universe_direct_adequacy_v1.py.auto.v1"
+         "canonical/runtime/livebench_active15_plus_one_noarg_pointwise_v1.py.auto.v1",
+         "http.json.fetch_from_state",
+         "web.release.verify.independent_http"
         ]
        },
        {
         "confident": true,
-        "goal": "finance_semantic_zero_reality_fixed_point_v1 image generate scalar qrencode please",
-        "target": "image.qr.generate.qrencode",
+        "goal": "binding observability professional auto mechanically for",
+        "target": "canonical/runtime/professional_quality_r8_root_subject_binding_verify_v1.py.auto.v1",
         "top": [
-         "image.qr.generate.qrencode",
-         "canonical/runtime/finance_semantic_zero_reality_fixed_point_v1.py.auto.v1",
-         "canonical/runtime/bytes_scalar_exact_task_generator_v1.py.auto.v1"
+         "canonical/runtime/p3_mechanically_closed_common_policy_cell_v1.py.auto.v1",
+         "canonical/runtime/tool_discovery_observability_partition_v2.py.auto.v1",
+         "canonical/runtime/professional_quality_r10_root_subject_binding_verify_v1.py.auto.v1"
         ]
        },
        {
         "confident": true,
-        "goal": "content-addressed the addressed component test zero",
-        "target": "python.repository.acceptance.measure.v1",
+        "goal": "target router briefcase summary please aa_briefcase_component_summary_noninversion_v1",
+        "target": "canonical/runtime/aa_briefcase_component_summary_noninversion_v1.py.auto.v1",
         "top": [
-         "python.repository.acceptance.measure.v1",
          "canonical/runtime/aa_briefcase_component_summary_noninversion_v1.py.auto.v1",
-         "chart.raster.scene_graph.v1"
+         "canonical/runtime/professional_quality_p1_router_v5.py.auto.v1",
+         "canonical/runtime/professional_quality_p1_router_v6.py.auto.v1"
         ]
        },
        {
         "confident": true,
-        "goal": "subject auto root auto and verify",
-        "target": "canonical/runtime/professional_quality_r7_root_subject_binding_verify_v1.py.auto.v1",
+        "goal": "target bm25 residual lock verifier produce",
+        "target": "canonical/runtime/v12_target_law_uncertainty_residual_verifier_v1.py.auto.v1",
         "top": [
-         "canonical/runtime/professional_quality_r10_root_subject_binding_verify_v1.py.auto.v1",
-         "canonical/runtime/professional_quality_r11_root_subject_binding_verify_v1.py.auto.v1",
-         "canonical/runtime/professional_quality_r12_root_subject_binding_verify_v1.py.auto.v1"
+         "canonical/runtime/opus55_target_identity_truth_lock_v1.py.auto.v1",
+         "source.evidence.extract.objective_grounded.stdlib",
+         "source.objective_relevance.rank.bm25"
         ]
        },
        {
         "confident": true,
-        "goal": "msgpack-msgpack repair then projection javascript encode",
-        "target": "auto.npm.msgpack-msgpack",
+        "goal": "root3 please auto continuity_root3_fixed_entry_verifier_v1 generator verifier",
+        "target": "canonical/runtime/continuity_root3_fixed_entry_verifier_v1.py.auto.v1",
         "top": [
-         "auto.npm.msgpack-msgpack",
-         "auto.npm.dfinity-cbor",
-         "auto.pypi.bson-modern"
+         "canonical/runtime/continuity_root3_fixed_entry_verifier_v1.py.auto.v1",
+         "canonical/runtime/root3_current_credited_zero_effect_reconciliation_verifier_v1.py.auto.v1",
+         "canonical/runtime/root3_matched_superportfolio_minimum_reality_verifier_v1.py.auto.v1"
         ]
        },
        {
         "confident": true,
-        "goal": "encode objective using auto scope p3_bounded_objective_role_presentation_compiler_v1",
-        "target": "canonical/runtime/p3_bounded_objective_role_presentation_compiler_v1.py.auto.v1",
+        "goal": "authoritative current_projection_consistency_guard_v1 then consistency guard auto",
+        "target": "canonical/runtime/current_projection_consistency_guard_v1.py.auto.v1",
         "top": [
-         "canonical/runtime/p3_bounded_objective_role_presentation_compiler_v1.py.auto.v1",
-         "auto.npm.dfinity-cbor",
-         "auto.npm.msgpack-msgpack"
+         "canonical/runtime/current_projection_consistency_guard_v1.py.auto.v1",
+         "http.json.fetch_from_state",
+         "canonical/runtime/terminal_projection_consistency_v1.py.auto.v1"
         ]
        },
        {
         "confident": true,
-        "goal": "auto task handle real admission auto",
-        "target": "canonical/runtime/p3_real_context_v3_admission_v10.py.auto.v1",
+        "goal": "unittest failed columns for passed nonidentifiability",
+        "target": "python.tests.audit.unittest",
         "top": [
-         "canonical/runtime/p3_real_context_v3_admission_v1.py.auto.v1",
-         "canonical/runtime/p3_real_context_v3_admission_v10.py.auto.v1",
-         "canonical/runtime/p3_real_context_v3_admission_v11.py.auto.v1"
+         "python.tests.audit.unittest",
+         "canonical/runtime/cursorbench_public_score_nonidentifiability_v1.py.auto.v1",
+         "canonical/runtime/cursorbench_three_region_complement_nonidentifiability_v1.py.auto.v1"
         ]
        }
       ],
-      "top1": 225,
-      "top3": 265,
-      "top3_rate": 0.8833
+      "top1": 219,
+      "top3": 267,
+      "top3_rate": 0.89
      },
      "name": "fresh_goals_rank_target_in_top3",
      "oracle": "SYNTHETIC_GENERATOR_ORACLE",
@@ -217,7 +217,7 @@
     },
     {
      "detail": {
-      "top1_rate": 0.75
+      "top1_rate": 0.73
      },
      "name": "fresh_goals_are_not_answered_at_random",
      "oracle": "SYNTHETIC_GENERATOR_ORACLE",
@@ -244,9 +244,9 @@
     {
      "detail": {
       "attempts": 40,
-      "hit_at_1": 37,
+      "hit_at_1": 36,
       "hit_at_3": 40,
-      "measured": 77,
+      "measured": 76,
       "misses": []
      },
      "name": "held_out_term_queries_hit_the_source_document",
@@ -275,16 +275,16 @@
     {
      "detail": {
       "expected": {
-       "class_count": 2,
+       "class_count": 3,
        "distinct_imported_module_count": 3,
        "file_count": 1,
-       "function_count": 2
+       "function_count": 4
       },
       "observed": {
-       "class_count": 2,
+       "class_count": 3,
        "distinct_imported_module_count": 3,
        "file_count": 1,
-       "function_count": 2
+       "function_count": 4
       }
      },
      "name": "python_source_audit_matches_independent_ast_oracle",
@@ -295,9 +295,9 @@
      "detail": {
       "extracted": true,
       "listing": [
-       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_nmx3qpg7/manifest.json",
-       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_nmx3qpg7/payload/alpha.txt",
-       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_nmx3qpg7/payload/beta.txt"
+       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY___ilhtkf/manifest.json",
+       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY___ilhtkf/payload/alpha.txt",
+       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY___ilhtkf/payload/beta.txt"
       ]
      },
      "name": "tar_creation_matches_gnu_tar_oracle",
@@ -319,8 +319,8 @@
        "name",
        "v"
       ],
-      "oracle_rows": 3,
-      "reported_rows": 3
+      "oracle_rows": 4,
+      "reported_rows": 4
      },
      "name": "sqlite_creation_matches_sqlite3_oracle",
      "oracle": "INDEPENDENT",
@@ -443,9 +443,11 @@
       "occurrences": {
        "anthropic": 5,
        "claude": 12,
-       "deepseek": 1,
+       "deepseek": 6,
        "gpt": 6,
-       "openai": 44
+       "llama": 2,
+       "openai": 44,
+       "qwen": 12
       }
      },
      "name": "model_vendor_name_occurrences_are_reported_not_hidden",
@@ -499,11 +501,11 @@
    ]
   }
  ],
- "generated_utc": "2026-10-21T05:56:06Z",
+ "generated_utc": "2026-10-21T06:46:35Z",
  "incremental_spend_usd": 0,
  "independent_verifier": null,
  "independent_verifier_run_reference": null,
- "model_digest": "9306f87c2fdbfc1adfc2c3d70513d444aa1262bb71bcad7a7d2aa07c9923fc5a",
+ "model_digest": "75dab67b3a7c09739daa193d6fdf51104fe31835a028a823c055b16fec038a59",
  "model_id": "BRAIN-UNIFIED-MODEL-V1",
  "next_independent_step": "A different identity must re-run `python3 canonical/runtime/verify_brain_unified_model_v1.py --seed <the seed above>` on a clean checkout and sign the result. Until then this document is a sandbox measurement with no authority.",
  "non_claims": [
@@ -516,7 +518,7 @@
  "ownership_credit_delta": 0,
  "producer_cognition_model_dependency_count": 0,
  "schema": "PROJECT_BRAIN_UNIFIED_MODEL_V1_VERIFICATION",
- "seed": "15ccfc172e9f42cf",
+ "seed": "0e178cfccbdb3095",
  "summary": {
   "capabilities_modelled": 363,
   "cases": 33,
