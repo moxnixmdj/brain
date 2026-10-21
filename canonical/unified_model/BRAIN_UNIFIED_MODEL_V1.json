@@ -24254,7 +24254,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6258,
+  "research_index_records": 6259,
   "routing_tokens": 1775,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24263,7 +24263,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "1d2ac92f8611b34ec75c42e7d4bce3a9a7e08e023d32149b6ebbf64a3f9a1a86"
+  "value": "37acf92742a9d1bb7a3c420c85e3d07d56befb70d0fcf292f33cc50251d2ebb7"
  },
  "engines": [
   {
@@ -187635,6 +187635,31 @@
    }
   },
   {
+   "action_id": "PERCEPTION_FILE_KIND_VOCABULARY_COMPLETION_V1_20261021_V1",
+   "capability": false,
+   "date": "2026-10-21",
+   "id": "research:canonical/action_intents/PERCEPTION_FILE_KIND_VOCABULARY_COMPLETION_V1_20261021_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/PERCEPTION_FILE_KIND_VOCABULARY_COMPLETION_V1_20261021_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "71f1ecc9862b7227abf3258676e2367418cc902cff4134f72caee3ea00e7defe",
+   "status": "",
+   "terms": {
+    "20261021": 1,
+    "complete_the_perception_vocabulary_rather_than_reweight_the_ranking__the_correct_capability_already_won_on_score_35_to_22_and_the_file_was_already_on_disk_but_kind_keys_for_docx_path_returned_the_empty_set_so_the_winner_was_discarded_as_unbindable__add_the_five_missing_file_kinds_and_leave_every_score_alone__a_blanket_refuse_on_ambiguous_world_matches_was_measured_and_rejected_because_it_cost_eight_correct_selections": 1,
+    "completion": 1,
+    "file": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "kind": 1,
+    "perception": 1,
+    "perception_file_kind_vocabulary_completion_v1_20261021_v1": 1,
+    "the_perception_vocabulary_in_world_probe_v1_file_kinds_had_no_entry_for_docx_or_xlsx_or_sqlite_or_csv_or_html_so_kind_keys_for_returned_the_empty_set_for_34_of_the_70_path_shaped_input_slots_across_30_capabilities__measured_on_a_goal_that_names_no_file_with_one_real_docx_in_the_working_directory_the_file_was_indexed_by_world_probe_and_docx_document_verify_intent_ooxml_outscored_docx_document_create_python_docx_35_to_22_yet_was_discarded_as_unbindable_so_the_goal_compiled_against_a_capability_that_merely_had_to_invent_an_output_path": 1,
+    "the_research_record_is_now_reachable_through_the_model_without_inflating_the_capability_claim__6256_governance_verification_and_intent_records_are_indexed_as_research_index_with_capability_false_on_every_row_solve_never_routes_there_and_find_research_answers_where_was_this_decided_rather_than_run_this__generated_outputs_are_excluded_so_the_compile_is_a_verified_fixed_point__capability_count_stays_363__new_digest_fb389ce2__107_tests_ok_verifier_33_of_33_benchmark_unchanged_at_17_of_23_and_12_of_23": 1,
+    "v1": 2,
+    "vocabulary": 1
+   }
+  },
+  {
    "action_id": "PHASE1_CAPABILITY_DAG_LIVE_WIRING_20261015_V1",
    "capability": false,
    "date": "2026-10-15",
@@ -258511,7 +258536,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/world_probe_v1.py",
-   "sha256": "eeed8a8869433fedb0a3d14f8a4332bbc999c5b93668b5f5a9fb994532c5d3ea",
+   "sha256": "888cf69209b13672c294ba5397224e3bc7aecd38ba6ca34903d5cc16cf66b315",
    "summary": "Perception: turn the machine's actual state into established facts.",
    "symbol_count": 18,
    "symbols": [

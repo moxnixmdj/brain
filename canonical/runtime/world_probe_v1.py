@@ -80,6 +80,18 @@ _FILE_KINDS = {
     "archive.tar_gz":         ((".tar.gz", ".tgz"), ()),
     "artifact.file":          ((), ()),
     "candidate.response_or_fields": ((".json",), ()),
+    # Kinds the office/database surface actually uses. Their absence was not a
+    # small gap: kind_keys_for("docx_path") returned the empty set, so a
+    # capability whose only unbound slot was a .docx could never be grounded
+    # even with the file sitting in the working directory. Measured, that
+    # discarded docx.document.verify.intent_ooxml at score 35 in favour of
+    # docx.document.create.python_docx at 22 -- the goal's own word "verify"
+    # lost to a capability that only had to invent an output path.
+    "docx":                   ((".docx",), ()),
+    "xlsx":                   ((".xlsx", ".xlsm"), ()),
+    "sqlite":                 ((".sqlite", ".sqlite3", ".db"), ()),
+    "csv":                    ((".csv",), ()),
+    "html":                   ((".html", ".htm"), ()),
 }
 
 # subject -> executable that must exist on PATH

@@ -27,6 +27,7 @@ from __future__ import annotations
 
 import json
 import pathlib
+import tempfile
 import unittest
 
 from canonical.runtime import goal_compiler as compiler
@@ -576,3 +577,81 @@ class BenchmarkFloorTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PerceptionVocabularyTests(unittest.TestCase):
+    """The world is consulted, and only when it can actually say which file.
+
+    Measured, `_FILE_KINDS` had no entry for docx, xlsx, sqlite, csv or html,
+    so `kind_keys_for("docx_path")` returned the empty set. On a goal that
+    names no file, with one real .docx sitting in the working directory,
+    world_probe indexed the file and `docx.document.verify.intent_ooxml`
+    outscored `docx.document.create.python_docx` 35 to 22 -- and the winner
+    was still discarded as unbindable. The goal then compiled against a
+    capability that only had to invent an output path.
+
+    These tests use real OOXML packages on disk, never a stub, because the
+    claim is about perception: that the machine looked and found the file.
+    """
+
+    GOAL = "Verify a docx document against its intent."
+    EXPECTED = "docx.document.verify.intent_ooxml"
+    WRONG = "docx.document.create.python_docx"
+
+    @staticmethod
+    def _real_docx(path: pathlib.Path) -> None:
+        """A genuine OOXML package, not a text file wearing a .docx name."""
+        import zipfile
+
+        with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
+            z.writestr(
+                "[Content_Types].xml",
+                '<?xml version="1.0" encoding="UTF-8"?>'
+                '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+                '<Default Extension="rels" ContentType='
+                '"application/vnd.openxmlformats-package.relationships+xml"/>'
+                '<Override PartName="/word/document.xml" ContentType='
+                '"application/vnd.openxmlformats-officedocument.wordprocessingml'
+                '.document.main+xml"/></Types>',
+            )
+            z.writestr(
+                "word/document.xml",
+                '<?xml version="1.0" encoding="UTF-8"?>'
+                '<w:document xmlns:w="http://schemas.openxmlformats.org/'
+                'wordprocessingml/2006/main"><w:body><w:p><w:r>'
+                "<w:t>real</w:t></w:r></w:p></w:body></w:document>",
+            )
+
+    def _compile_in(self, files):
+        from canonical.runtime import live_integrated_brain_v1 as lb
+
+        with tempfile.TemporaryDirectory() as td:
+            root = pathlib.Path(td)
+            for name in files:
+                self._real_docx(root / name)
+            return compiler.compile_goal(self.GOAL, lb.load_verified_registry(), root)
+
+    def test_the_goal_word_verify_selects_the_verifier_found_on_disk(self):
+        """One real .docx on disk is enough; the goal need not name it."""
+        plan = self._compile_in(["report.docx"])
+        self.assertEqual(plan["selected_capability"], self.EXPECTED)
+        self.assertNotEqual(plan["selected_capability"], self.WRONG)
+        bound = str(plan["inputs"].get("docx_path") or "")
+        self.assertTrue(bound.endswith("report.docx"), bound)
+
+    def test_the_same_goal_without_the_file_does_not_claim_the_verifier(self):
+        """Perception must not manufacture the file it went looking for."""
+        plan = self._compile_in([])
+        self.assertNotEqual(
+            plan.get("selected_capability"),
+            self.EXPECTED,
+            "the verifier was selected with no docx anywhere on disk",
+        )
+
+    def test_the_slot_name_alone_resolves_the_kind(self):
+        """The gap was lexical: kind_keys_for must now answer for docx_path."""
+        from canonical.runtime import world_probe_v1 as WP
+
+        self.assertIn("docx", WP.kind_keys_for("docx_path"))
+        for slot in ("xlsx_path", "sqlite_path", "csv_path", "html_path"):
+            self.assertTrue(WP.kind_keys_for(slot), slot)
