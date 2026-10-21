@@ -1,7 +1,7 @@
 {
  "artifact_bytes": 3447717,
  "artifact_path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
- "artifact_sha256": "f96eae570a3cd26cb96d72d6926bb4c23da683d6a7f893480a48ed8aad0513de",
+ "artifact_sha256": "124e149db766ee2c9d754747976decded824314bab0bb0623f64e3f2e000fbd9",
  "authority": "NONE",
  "capability_credit_delta": 0,
  "categories": [
@@ -15,7 +15,7 @@
    "rows": [
     {
      "detail": {
-      "declared": "75dab67b3a7c09739daa193d6fdf51104fe31835a028a823c055b16fec038a59"
+      "declared": "9428b2a2f51db7936a46c2f2f23a73d280958d1e8bd5cc8025f4e7a74f600fcc"
      },
      "name": "digest_recomputes",
      "oracle": "SHA256_RECOMPUTATION",
@@ -23,7 +23,7 @@
     },
     {
      "detail": {
-      "recompiled_digest": "75dab67b3a7c09739daa193d6fdf51104fe31835a028a823c055b16fec038a59"
+      "recompiled_digest": "9428b2a2f51db7936a46c2f2f23a73d280958d1e8bd5cc8025f4e7a74f600fcc"
      },
      "name": "recompilation_is_byte_identical",
      "oracle": "DETERMINISTIC_RECOMPILE",
@@ -128,88 +128,88 @@
       "examples": [
        {
         "confident": true,
-        "goal": "auto image transform check reduction legacy",
-        "target": "canonical/runtime/livebench_legacy_composition_shape_reduction_v1.py.auto.v1",
+        "goal": "role then objective livebench_prompt_contract_synthesizer_v1 p3_bounded_objective_role_relevance_v1 support",
+        "target": "canonical/runtime/p3_bounded_objective_role_relevance_v1.py.auto.v1",
         "top": [
-         "json.query.jq",
-         "python.contract.check.crosshair.v1",
-         "terminal.kstar.root.assess.stdlib"
+         "canonical/runtime/p3_bounded_objective_role_relevance_v1.py.auto.v1",
+         "canonical/runtime/livebench_prompt_contract_synthesizer_v1.py.auto.v1",
+         "canonical/runtime/p3_bounded_objective_role_presentation_compiler_v1.py.auto.v1"
         ]
        },
        {
         "confident": true,
-        "goal": "http active active15 for noarg plus",
-        "target": "canonical/runtime/livebench_active15_plus_one_noarg_pointwise_v1.py.auto.v1",
+        "goal": "the professional_quality_p1_router_v8 auto capacity common terminal_projection_consistency_v1",
+        "target": "canonical/runtime/p3_nonbinding_capacity_common_policy_cell_v1.py.auto.v1",
         "top": [
-         "canonical/runtime/livebench_active15_plus_one_noarg_pointwise_v1.py.auto.v1",
-         "http.json.fetch_from_state",
-         "web.release.verify.independent_http"
-        ]
-       },
-       {
-        "confident": true,
-        "goal": "binding observability professional auto mechanically for",
-        "target": "canonical/runtime/professional_quality_r8_root_subject_binding_verify_v1.py.auto.v1",
-        "top": [
-         "canonical/runtime/p3_mechanically_closed_common_policy_cell_v1.py.auto.v1",
-         "canonical/runtime/tool_discovery_observability_partition_v2.py.auto.v1",
-         "canonical/runtime/professional_quality_r10_root_subject_binding_verify_v1.py.auto.v1"
-        ]
-       },
-       {
-        "confident": true,
-        "goal": "target router briefcase summary please aa_briefcase_component_summary_noninversion_v1",
-        "target": "canonical/runtime/aa_briefcase_component_summary_noninversion_v1.py.auto.v1",
-        "top": [
-         "canonical/runtime/aa_briefcase_component_summary_noninversion_v1.py.auto.v1",
-         "canonical/runtime/professional_quality_p1_router_v5.py.auto.v1",
-         "canonical/runtime/professional_quality_p1_router_v6.py.auto.v1"
-        ]
-       },
-       {
-        "confident": true,
-        "goal": "target bm25 residual lock verifier produce",
-        "target": "canonical/runtime/v12_target_law_uncertainty_residual_verifier_v1.py.auto.v1",
-        "top": [
-         "canonical/runtime/opus55_target_identity_truth_lock_v1.py.auto.v1",
-         "source.evidence.extract.objective_grounded.stdlib",
-         "source.objective_relevance.rank.bm25"
-        ]
-       },
-       {
-        "confident": true,
-        "goal": "root3 please auto continuity_root3_fixed_entry_verifier_v1 generator verifier",
-        "target": "canonical/runtime/continuity_root3_fixed_entry_verifier_v1.py.auto.v1",
-        "top": [
-         "canonical/runtime/continuity_root3_fixed_entry_verifier_v1.py.auto.v1",
-         "canonical/runtime/root3_current_credited_zero_effect_reconciliation_verifier_v1.py.auto.v1",
-         "canonical/runtime/root3_matched_superportfolio_minimum_reality_verifier_v1.py.auto.v1"
-        ]
-       },
-       {
-        "confident": true,
-        "goal": "authoritative current_projection_consistency_guard_v1 then consistency guard auto",
-        "target": "canonical/runtime/current_projection_consistency_guard_v1.py.auto.v1",
-        "top": [
-         "canonical/runtime/current_projection_consistency_guard_v1.py.auto.v1",
-         "http.json.fetch_from_state",
+         "canonical/runtime/p3_nonbinding_capacity_common_policy_cell_v1.py.auto.v1",
+         "canonical/runtime/professional_quality_p1_router_v8.py.auto.v1",
          "canonical/runtime/terminal_projection_consistency_v1.py.auto.v1"
         ]
        },
        {
         "confident": true,
-        "goal": "unittest failed columns for passed nonidentifiability",
+        "goal": "constraint trace please policy auto support",
+        "target": "decision.synthesis.typed.stdlib",
+        "top": [
+         "decision.synthesis.typed.stdlib",
+         "canonical/runtime/unified_trace_policy_generator_v1.py.auto.v1",
+         "canonical/runtime/synthesis_certified_visible_support_policy_v1.py.auto.v1"
+        ]
+       },
+       {
+        "confident": true,
+        "goal": "context real v14_db_existing_evidence_saturation_verifier_v2 postprocessor auto now",
+        "target": "canonical/runtime/p3_real_context_v3_admission_v2.py.auto.v1",
+        "top": [
+         "canonical/runtime/v14_db_existing_evidence_saturation_verifier_v2.py.auto.v1",
+         "canonical/runtime/seed_preserving_instruction_postprocessor_v1.py.auto.v1",
+         "canonical/runtime/seed_preserving_instruction_postprocessor_v2.py.auto.v1"
+        ]
+       },
+       {
+        "confident": true,
+        "goal": "auto lossless selected using diagram support",
+        "target": "canonical/runtime/selected_support_truth_certificate_v2.py.auto.v1",
+        "top": [
+         "chart.read.binary_phase_solvus.v1",
+         "canonical/runtime/professional_r12_c3_lossless_composition_projection_verify_v1.py.auto.v1",
+         "canonical/runtime/synthesis_lossless_scope_decomposition_verifier_v1.py.auto.v1"
+        ]
+       },
+       {
+        "confident": true,
+        "goal": "with mandatory guard livebench loss p3_bounded_objective_role_presentation_compiler_v1",
+        "target": "canonical/runtime/livebench_union25_mandatory_loss_v1.py.auto.v1",
+        "top": [
+         "canonical/runtime/livebench_union25_mandatory_loss_v1.py.auto.v1",
+         "canonical/runtime/p3_bounded_objective_role_presentation_compiler_v1.py.auto.v1",
+         "canonical/runtime/livebench_union25_mandatory_footprint_v1.py.auto.v1"
+        ]
+       },
+       {
+        "confident": true,
+        "goal": "with unittest skipped failed partition candidate",
         "target": "python.tests.audit.unittest",
         "top": [
          "python.tests.audit.unittest",
-         "canonical/runtime/cursorbench_public_score_nonidentifiability_v1.py.auto.v1",
-         "canonical/runtime/cursorbench_three_region_complement_nonidentifiability_v1.py.auto.v1"
+         "canonical/runtime/livebench_legacy15_composition_partition_v1.py.auto.v1",
+         "canonical/runtime/tool_discovery_observability_partition_v2.py.auto.v1"
+        ]
+       },
+       {
+        "confident": true,
+        "goal": "noninversion sequence briefcase component bson-modern with",
+        "target": "canonical/runtime/aa_briefcase_component_summary_noninversion_v1.py.auto.v1",
+        "top": [
+         "canonical/runtime/aa_briefcase_component_summary_noninversion_v1.py.auto.v1",
+         "auto.pypi.bson-modern",
+         "canonical/runtime/bytes_discrete_sequence_task_generator_v1.py.auto.v1"
         ]
        }
       ],
-      "top1": 219,
-      "top3": 267,
-      "top3_rate": 0.89
+      "top1": 225,
+      "top3": 259,
+      "top3_rate": 0.8633
      },
      "name": "fresh_goals_rank_target_in_top3",
      "oracle": "SYNTHETIC_GENERATOR_ORACLE",
@@ -217,7 +217,7 @@
     },
     {
      "detail": {
-      "top1_rate": 0.73
+      "top1_rate": 0.75
      },
      "name": "fresh_goals_are_not_answered_at_random",
      "oracle": "SYNTHETIC_GENERATOR_ORACLE",
@@ -244,9 +244,9 @@
     {
      "detail": {
       "attempts": 40,
-      "hit_at_1": 36,
+      "hit_at_1": 35,
       "hit_at_3": 40,
-      "measured": 76,
+      "measured": 75,
       "misses": []
      },
      "name": "held_out_term_queries_hit_the_source_document",
@@ -275,16 +275,16 @@
     {
      "detail": {
       "expected": {
-       "class_count": 3,
+       "class_count": 2,
        "distinct_imported_module_count": 3,
        "file_count": 1,
-       "function_count": 4
+       "function_count": 3
       },
       "observed": {
-       "class_count": 3,
+       "class_count": 2,
        "distinct_imported_module_count": 3,
        "file_count": 1,
-       "function_count": 4
+       "function_count": 3
       }
      },
      "name": "python_source_audit_matches_independent_ast_oracle",
@@ -295,9 +295,9 @@
      "detail": {
       "extracted": true,
       "listing": [
-       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY___ilhtkf/manifest.json",
-       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY___ilhtkf/payload/alpha.txt",
-       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY___ilhtkf/payload/beta.txt"
+       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_7bd1zubg/manifest.json",
+       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_7bd1zubg/payload/alpha.txt",
+       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_7bd1zubg/payload/beta.txt"
       ]
      },
      "name": "tar_creation_matches_gnu_tar_oracle",
@@ -319,8 +319,8 @@
        "name",
        "v"
       ],
-      "oracle_rows": 4,
-      "reported_rows": 4
+      "oracle_rows": 6,
+      "reported_rows": 6
      },
      "name": "sqlite_creation_matches_sqlite3_oracle",
      "oracle": "INDEPENDENT",
@@ -501,11 +501,11 @@
    ]
   }
  ],
- "generated_utc": "2026-10-21T06:46:35Z",
+ "generated_utc": "2026-10-21T06:55:44Z",
  "incremental_spend_usd": 0,
  "independent_verifier": null,
  "independent_verifier_run_reference": null,
- "model_digest": "75dab67b3a7c09739daa193d6fdf51104fe31835a028a823c055b16fec038a59",
+ "model_digest": "9428b2a2f51db7936a46c2f2f23a73d280958d1e8bd5cc8025f4e7a74f600fcc",
  "model_id": "BRAIN-UNIFIED-MODEL-V1",
  "next_independent_step": "A different identity must re-run `python3 canonical/runtime/verify_brain_unified_model_v1.py --seed <the seed above>` on a clean checkout and sign the result. Until then this document is a sandbox measurement with no authority.",
  "non_claims": [
@@ -518,7 +518,7 @@
  "ownership_credit_delta": 0,
  "producer_cognition_model_dependency_count": 0,
  "schema": "PROJECT_BRAIN_UNIFIED_MODEL_V1_VERIFICATION",
- "seed": "0e178cfccbdb3095",
+ "seed": "16815aebda56a344",
  "summary": {
   "capabilities_modelled": 363,
   "cases": 33,
