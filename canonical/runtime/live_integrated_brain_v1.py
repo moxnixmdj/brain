@@ -576,7 +576,7 @@ def drive_controller(task_id: str, goal: str, controller_actions: Any,
     return controller, None
 
 
-def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
+def _run_raw_goal_impl(request: Mapping[str, Any]) -> dict[str, Any]:
     """Compile one raw plain-language goal into the live verified runtime.
 
     Raw text is preserved losslessly as acceptance obligations. The deterministic
@@ -1006,3 +1006,51 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
             "elapsed_ns": perf_counter_ns() - started,
             "incremental_spend_usd": 0,
         }
+
+
+def _record_raw_goal_experience(out: Any) -> None:
+    """Retain what the front door actually achieved, without judging it.
+
+    106 modules in this tree implement learning, episode retention, skill
+    induction and Pareto admission, and the front door called none of them:
+    `grep -c` for the self-improvement, learning and feedback symbols in this
+    file returned 0. So every goal the machine carried out was forgotten the
+    instant it returned, and the learning loop had no experience to learn from.
+
+    This records and nothing else. `record_success_observation` refuses an
+    output that did not pass, and it deliberately does not promote anything --
+    promotion still requires that module's own independent verification, which
+    is an authority boundary this function has no part in. Nothing here can
+    make a run succeed, and nothing here is consulted to decide one.
+
+    The call is contained because forgetting must never become failing: a
+    learning layer that can break execution is worse than no learning layer.
+    Any error is swallowed deliberately, and the caller's result is returned
+    byte for byte whatever happens here.
+    """
+    try:
+        if not isinstance(out, Mapping) or out.get("pass") is not True:
+            return
+        from canonical.runtime import (
+            autonomous_verified_self_improvement_v1 as _self_improvement,
+        )
+
+        _self_improvement.record_success_observation(
+            out, surface="RAW_GOAL_FRONT_DOOR_V1"
+        )
+    except Exception:
+        # Deliberate: see the docstring. Experience is best-effort by design.
+        pass
+
+
+def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
+    """Compile and run one raw plain-language goal, then remember the outcome.
+
+    A thin wrapper: the compile/plan/execute/verify path is
+    `_run_raw_goal_impl`, unchanged. Wrapping rather than editing its many
+    return sites means experience is recorded on exactly one code path, so no
+    return can be missed and none can be recorded twice.
+    """
+    out = _run_raw_goal_impl(request)
+    _record_raw_goal_experience(out)
+    return out
