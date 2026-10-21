@@ -150,10 +150,32 @@ class UnifiedModel:
         self.knowledge = [
             dict(row) for row in (model.get("knowledge") or []) if isinstance(row, Mapping)
         ]
-        self.index: dict[str, dict[str, float]] = {
+        raw_index: dict[str, dict[str, float]] = {
             str(token): {str(cid): float(weight) for cid, weight in postings.items()}
             for token, postings in ((model.get("grammar") or {}).get("index") or {}).items()
         }
+        # A receipt-backed capability is indexed under every word of its own
+        # path, so `run_long_horizon_continuity_v1.py` is reachable by the
+        # ordinary verb "run". Keep only the tokens the verifier itself treats
+        # as that capability's triggers -- the declared triggers that are not
+        # path segments and are longer than three characters -- so a common
+        # short word cannot select a script and execute it. Bound capabilities
+        # declare their own keywords and are left exactly as compiled.
+        self.receipt_backed_ids: frozenset[str] = frozenset(
+            cid
+            for cid, row in self.capabilities.items()
+            if row.get("kind") == "RECEIPT_BACKED_CAPABILITY"
+        )
+        self.index: dict[str, dict[str, float]] = {}
+        for token, postings in raw_index.items():
+            kept = {}
+            for cid, weight in postings.items():
+                if cid in self.receipt_backed_ids:
+                    if token not in self._declared_triggers(cid):
+                        continue
+                kept[cid] = weight
+            if kept:
+                self.index[token] = kept
         confidence = (model.get("grammar") or {}).get("confidence") or {}
         self.min_score = float(confidence.get("minimum_best_score", 1.0))
         self.min_coverage = float(confidence.get("minimum_coverage", 0.34))
@@ -207,6 +229,24 @@ class UnifiedModel:
 
     # ------------------------------------------------------------------- route
 
+    def _declared_triggers(self, cid: str) -> set[str]:
+        """The tokens the verifier treats as this capability's own triggers.
+
+        Mirrors `verify_brain_unified_model_v1._capability_tokens`: a declared
+        trigger counts only if it is not a segment of the capability's own id
+        and is longer than three characters. That excludes the path segments
+        (`canonical`, `verification`) and short filename fragments (`run`,
+        `py`, `v1`) that would otherwise make an ordinary word in a goal select
+        this capability.
+        """
+        row = self.capabilities.get(cid) or {}
+        id_tokens = set(tokenize(cid))
+        return {
+            str(t)
+            for t in (row.get("triggers") or [])
+            if str(t) not in id_tokens and len(str(t)) > 3
+        }
+
     def _ids_mentioned(self, goal: str) -> set[str]:
         folded = str(goal or "").casefold()
         hits: set[str] = set()
@@ -230,11 +270,26 @@ class UnifiedModel:
             matched.add(token)
             for cid, weight in postings.items():
                 scores[cid] = scores.get(cid, 0.0) + weight
-        for cid in self._ids_mentioned(goal):
+        mentioned = self._ids_mentioned(goal)
+        for cid in mentioned:
             scores[cid] = scores.get(cid, 0.0) + 24.0
             matched.add(cid.casefold())
         coverage = (len(matched) / len(tokens)) if tokens else 0.0
-        ranked = sorted(scores.items(), key=lambda kv: (-kv[1], kv[0]))
+        # Naming a capability by its own id is an address, not a keyword. Its
+        # path segments also index capabilities that legitimately claim those
+        # words, so a flat +24 can be outscored by the noise the address itself
+        # introduced. Sort addressed capabilities ahead of the rest instead of
+        # inflating the bonus until it wins by force.
+        #
+        # Engines are excluded from that priority: they match by mode phrase
+        # (`engine:BOUND_CAPABILITY` matches the phrase "bound capability"),
+        # which is ordinary keyword overlap, not an address. Promoting them let
+        # a 195.977 engine outrank the 911.668 capability the goal named.
+        addressed = {cid for cid in mentioned if cid in self.capabilities}
+        ranked = sorted(
+            scores.items(),
+            key=lambda kv: (kv[0] not in addressed, -kv[1], kv[0]),
+        )
         rows: list[dict[str, Any]] = []
         for cid, score in ranked[: max(1, int(top_k))]:
             row = self.capabilities.get(cid) or self.engines.get(cid) or {}

@@ -830,20 +830,17 @@ class DeclaredContextBindingTests(unittest.TestCase):
 
         295 of the 363 modelled capabilities are `RECEIPT_BACKED_CAPABILITY`:
         their only evidence is an execution receipt, and the registry marks them
-        `RECEIPT_BACKED_PENDING_PROMOTION`. They are indexed under the words of
-        their own filename, so `run_long_horizon_continuity_v1.py` is indexed
-        under `run`, `long`, `horizon`, `continuity`. The ordinary verb "run" in
-        a goal about unittest pass rates therefore selects that script.
-
-        Selecting it is a routing question this test does not settle. What is
-        not acceptable is the envelope's description of it: the adapter returns
+        `RECEIPT_BACKED_PENDING_PROMOTION`. When one runs, the adapter returns
         `PASS__RECEIPT_BACKED_BOUND_CAPABILITY_EXECUTED`, which states that the
         thing ran, while `solve()` used to relabel every pass as
         `PASS__CAPABILITY_EXECUTED_AND_TRACE_VERIFIED` -- asserting a trace
         check that never ran, on a capability that is explicitly not promoted.
 
         The distinction is the adapter's own, so the invariant asserted here is
-        that the envelope carries it through unchanged.
+        that the envelope carries it through unchanged. The capability is
+        addressed by id: routing no longer offers it for a plain goal, which is
+        asserted separately below, and this test is about the envelope's honesty
+        once the adapter has actually run.
         """
         target = "canonical/verification/run_long_horizon_continuity_v1.py.auto.v1"
         if target not in self.model.capabilities:
@@ -851,10 +848,13 @@ class DeclaredContextBindingTests(unittest.TestCase):
         row = self.model.capabilities[target]
         self.assertEqual(row.get("kind"), "RECEIPT_BACKED_CAPABILITY")
 
-        out = self.model.solve("Run the unittest suite and report the pass rate.")
+        out = self.model.solve("run the long horizon continuity replay", capability_id=target)
         execution = out.get("execution") or {}
-        if execution.get("status") != "PASS__RECEIPT_BACKED_BOUND_CAPABILITY_EXECUTED":
-            self.skipTest(f"probe did not take the receipt-backed path: {execution.get('status')}")
+        self.assertEqual(
+            execution.get("status"),
+            "PASS__RECEIPT_BACKED_BOUND_CAPABILITY_EXECUTED",
+            f"probe did not take the receipt-backed path: {execution.get('status')}",
+        )
 
         # The load-bearing claim: the envelope never upgrades the adapter.
         self.assertEqual(out.get("status"), execution.get("status"))
@@ -865,21 +865,52 @@ class DeclaredContextBindingTests(unittest.TestCase):
 
         The overclaim was a single hard-coded string, so it is pinned
         structurally rather than case by case: on any pass, the envelope status
-        and the adapter status are the same string.
+        and the adapter status are the same string. Both adapter verdicts are
+        exercised -- the receipt-backed one and the promoted, trace-verified
+        one -- so the assertion covers the distinction rather than one side.
         """
-        goals = [
-            "Run the unittest suite and report the pass rate.",
-            "Assess the consistency of knowledge observations.",
-            "Audit python source structure and imports.",
-        ]
+        tmp = ROOT / "canonical" / "astra_runtime" / "tmp"
+        src = tmp / "_envelope_src.txt"
+        man = tmp / "_envelope_manifest.json"
+        arc = tmp / "_envelope_bundle.tar.gz"
+        rel = [p.relative_to(ROOT).as_posix() for p in (src, man, arc)]
+
+        receipt_backed = "canonical/verification/run_long_horizon_continuity_v1.py.auto.v1"
+        results = []
+        if receipt_backed in self.model.capabilities:
+            results.append(
+                self.model.solve("run the long horizon continuity replay",
+                                 capability_id=receipt_backed)
+            )
+        try:
+            if "archive.tar_gz.create_from_manifest" in self.model.capabilities:
+                src.write_text("authoritative bytes\n", encoding="utf-8")
+                man.write_text(
+                    json.dumps({"records": [{"verification_paths": [rel[0]]}]},
+                               indent=2, sort_keys=True) + "\n",
+                    encoding="utf-8",
+                )
+                results.append(
+                    self.model.solve(
+                        "Create a tar.gz archive from a manifest.",
+                        capability_id="archive.tar_gz.create_from_manifest",
+                        inputs={"manifest_path": rel[1], "output_path": rel[2]},
+                        context_paths=[rel[1]],
+                    )
+                )
+        finally:
+            for path in (arc, man, src):
+                path.unlink(missing_ok=True)
+
         checked = 0
-        for goal in goals:
-            out = self.model.solve(goal)
+        seen_statuses = set()
+        for out in results:
             execution = out.get("execution") or {}
             if not execution:
                 continue
             checked += 1
-            with self.subTest(goal=goal):
+            seen_statuses.add(str(execution.get("status")))
+            with self.subTest(capability=out.get("capability_id")):
                 if out.get("pass") is True:
                     self.assertEqual(
                         out.get("status"),
@@ -892,3 +923,41 @@ class DeclaredContextBindingTests(unittest.TestCase):
                         out.get("status"), "FAIL_CLOSED__CAPABILITY_DID_NOT_PASS"
                     )
         self.assertGreaterEqual(checked, 1, "no goal reached the execution adapter")
+        # If both adapter verdicts were reachable, the envelope must have kept
+        # them distinct rather than collapsing them onto one string.
+        if checked >= 2:
+            self.assertEqual(len(seen_statuses), checked, seen_statuses)
+
+    def test_a_short_filename_word_does_not_select_and_run_a_script(self):
+        """A common verb must not reach a script via its own filename.
+
+        Receipt-backed capabilities are compiled into the routing index under
+        every word of their path, so `run_long_horizon_continuity_v1.py` was
+        reachable by the ordinary verb "run". `solve()` then executed that
+        script -- `python3 canonical/verification/run_long_horizon_continuity_v1.py`
+        -- and reported success for a goal that had nothing to do with it.
+
+        The index now keeps only the tokens the verifier itself treats as a
+        capability's triggers: declared triggers that are not path segments and
+        are longer than three characters. "run" is three characters, so it is
+        not one. The capability stays reachable when addressed by name, which
+        the test above relies on.
+        """
+        target = "canonical/verification/run_long_horizon_continuity_v1.py.auto.v1"
+        if target not in self.model.capabilities:
+            self.skipTest("probe capability not in model")
+
+        self.assertNotIn("run", self.model._declared_triggers(target))
+        self.assertNotIn(
+            target,
+            self.model.index.get("run") or {},
+            "'run' still indexes the script",
+        )
+
+        out = self.model.solve("Run the unittest suite and report the pass rate.")
+        self.assertIsNot(
+            out.get("capability_id"),
+            target,
+            "a plain goal selected a script on the strength of one short word",
+        )
+        self.assertIsNot(out.get("pass"), True, out.get("status"))
