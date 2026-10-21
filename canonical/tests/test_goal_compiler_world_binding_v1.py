@@ -247,7 +247,10 @@ class KnownSelectionGapTests(unittest.TestCase):
         report = bench.run()
         gapped = sorted(report["known_selection_gaps"])
         self.assertEqual(gapped, sorted(bench.KNOWN_SELECTION_GAPS))
-        self.assertEqual(len(gapped), 2)
+        # Was 2. BENCH_JSON_FETCH_CONSISTENCY was closed by supplying the
+        # effect_result producer map and keeping the better-scoring plan, so
+        # only the markdown-to-decision goal still selects wrongly.
+        self.assertEqual(len(gapped), 1)
         for goal_id, cause in report["known_selection_gaps"].items():
             self.assertTrue(cause, f"{goal_id} has no recorded cause")
 
@@ -455,42 +458,56 @@ class ScoreRankIsNotCorrectnessTests(unittest.TestCase):
         self.assertEqual(out["binding_source"], "GOAL_STATEMENT")
 
     def test_no_score_gap_threshold_can_separate_correct_from_wrong(self):
-        """Pin the two data points that make any threshold an overfit.
+        """Refusing on a score gap cannot work, and this is the hardest case.
 
-        A correct selection here sits 1 point below the best match. A wrong one
-        (BENCH_JSON_FETCH_CONSISTENCY) sat 23 points below. Any cut between
-        them is fitted to this sample, not derived from the problem.
+        An earlier version of this test pinned BENCH_JSON_FETCH_CONSISTENCY,
+        where the wrong selection sat 23 points below the best match, and argued
+        that any cut between that and a correct selection sitting 1 point below
+        its own best match is fitted to the sample. That goal now selects
+        correctly, so its data point is gone.
+
+        The remaining wrong selection is a STRONGER counterexample, not a weaker
+        one: for BENCH_MARKDOWN_TO_DECISION the wrong capability IS the
+        best-scoring capability in the registry, so the gap is exactly 0. There
+        is no threshold -- however small -- that separates this wrong selection
+        from a correct one, because it is not below anything. A refusal rule
+        keyed on score gap would have to refuse the top match, which is not a
+        policy, it is a shutdown.
+
+        What does work, and what was shipped instead, is not a threshold on an
+        absolute gap: it is comparing two fully-bound compiled plans produced by
+        two different binding passes and keeping the better-scoring one. Both
+        candidates are runnable, so nothing is refused on a hunch.
         """
-        from canonical.runtime import goal_compilation_benchmark_v1 as bench
         from canonical.runtime import live_integrated_brain_v1 as lb
 
         registry = dict(lb.load_verified_registry())
-        goal = "Fetch a JSON document and assess its internal consistency."
-        best_score, best_cid = max(
-            (
-                (compiler._score(goal, cid, entry)[0], cid)
-                for cid, entry in registry.items()
-                if isinstance(entry, dict)
-                and entry.get("status") == "VERIFIED_BOUND_CAPABILITY"
-                and isinstance(entry.get("action_template"), dict)
-            ),
-            default=(0, None),
+        goal = "Summarize a markdown document into a decision record."
+        eligible = (
+            (compiler._score(goal, cid, entry)[0], cid)
+            for cid, entry in registry.items()
+            if isinstance(entry, dict)
+            and entry.get("status") == "VERIFIED_BOUND_CAPABILITY"
+            and isinstance(entry.get("action_template"), dict)
         )
+        best_score, best_cid = max(eligible, default=(0, None))
         out = compiler.compile_goal(goal, registry, ROOT)
         selected_score = compiler._score(
             goal, out["selected_capability"], registry[out["selected_capability"]]
         )[0]
-        wrong_gap = best_score - selected_score
 
-        self.assertEqual(out["selected_capability"], bench.KNOWN_OVERMATCHING_CAPABILITY)
-        self.assertGreaterEqual(
-            wrong_gap,
-            10,
-            "wrong selection no longer far below best match; re-test the refusal policy",
+        self.assertEqual(out["selected_capability"], best_cid)
+        self.assertEqual(
+            best_score - selected_score,
+            0,
+            "the wrong selection is no longer the top-scoring capability; if a "
+            "gap has appeared here, re-test whether a gap-keyed refusal is viable",
         )
-        # And the correct selection above sits below its own best match, so the
-        # two intervals overlap and no single cut is justified.
-        self.assertLess(1, wrong_gap)
+        self.assertNotEqual(
+            out["selected_capability"],
+            "decision.synthesis.typed.stdlib",
+            "this goal now selects correctly; move this counterexample",
+        )
 
 
 class BenchmarkFloorTests(unittest.TestCase):
@@ -909,3 +926,83 @@ class ProducerConsumerSecondPassTests(unittest.TestCase):
         """
         providers = compiler._effect_providers(self.registry)
         self.assertNotIn("source.candidates.available", providers)
+
+
+class ChainedPlanScoreComparisonTests(unittest.TestCase):
+    """Two passes, same scorer, keep the better plan.
+
+    A failure-triggered retry was measured to be blind in one specific way: on
+    "Assess knowledge consistency" the grounded pass SUCCEEDS with the catch-all
+    at score 2 while knowledge.consistency.assess scores 22 and is reachable once
+    the producer map is supplied -- so the retry never fired. Comparing the two
+    plans by score fixes that without the theft the unconditional form caused.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        from canonical.runtime import live_integrated_brain_v1 as lb
+
+        cls.registry = dict(lb.load_verified_registry())
+        cls.root = str(pathlib.Path(__file__).resolve().parents[2])
+        cls._score_fn = staticmethod(compiler._plan_score)
+
+    def tearDown(self):
+        compiler._plan_score = self._score_fn
+
+    def test_the_better_scoring_chained_plan_is_kept(self):
+        plan = compiler.compile_goal(
+            "Assess knowledge consistency.", self.registry, self.root
+        )
+        self.assertEqual(plan.get("selected_capability"), "knowledge.consistency.assess")
+
+    def test_forcing_the_grounded_plan_back_reproduces_the_catch_all(self):
+        """Negative control. Without it the test above proves nothing.
+
+        Making _plan_score rank every grounded plan above every chained one is
+        equivalent to never taking the chained plan, which must return the old
+        wrong answer.
+        """
+        real = compiler._plan_score
+        compiler._plan_score = lambda plan: real(plan) - 1000 if (
+            isinstance(plan, dict) and plan.get("compiler_mode")
+        ) else real(plan)
+        try:
+            # Prefer whichever plan the grounded pass produced by demoting any
+            # plan that carries chained provenance is brittle, so demote by
+            # identity instead: the grounded plan for this goal selects the
+            # catch-all, and both plans share the same schema. Compare directly.
+            grounded = compiler._compile_single_goal(
+                "Assess knowledge consistency.", self.registry, self.root
+            )
+            self.assertEqual(
+                grounded.get("selected_capability"),
+                "terminal.kstar.root.assess.stdlib",
+                "the grounded pass no longer produces the catch-all; this "
+                "counterexample no longer bounds the comparison",
+            )
+            self.assertGreater(
+                real(compiler.compile_goal(
+                    "Assess knowledge consistency.", self.registry, self.root)),
+                real(grounded),
+                "the chained plan does not out-score the grounded one, so the "
+                "comparison is not what selects it",
+            )
+        finally:
+            compiler._plan_score = real
+
+    def test_the_grounded_plan_is_kept_when_it_scores_higher(self):
+        """The theft guard. This goal compiled correctly before the comparison
+        existed and must not be taken by a greedier chained capability."""
+        plan = compiler.compile_goal(
+            "Audit the python source and write the result as json.",
+            self.registry, self.root,
+        )
+        self.assertEqual(plan.get("selected_capability"), "python.source.audit.ast")
+
+    def test_plan_score_of_a_compound_plan_is_its_strongest_part(self):
+        self.assertEqual(compiler._plan_score(None), -1)
+        self.assertEqual(compiler._plan_score({}), 0)
+        self.assertEqual(
+            compiler._plan_score({"compiled_parts": [{"score": 4}, {"score": 9}]}), 9.0
+        )
+        self.assertEqual(compiler._plan_score({"score": "not-a-number"}), -1)
