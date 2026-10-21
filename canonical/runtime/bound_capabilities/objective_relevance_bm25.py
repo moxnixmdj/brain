@@ -284,7 +284,17 @@ def run(args,root):
     out=_safe_path(root,args.get("output_path"))
     if not inp.is_file():
         raise ValueError("RELEVANCE_INPUT_MISSING")
-    data=json.loads(inp.read_text(encoding="utf-8"))
+    try:
+        data=json.loads(inp.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, UnicodeDecodeError) as exc:
+        # The slot is named input_path, which states no type, so a .py file can
+        # reach here -- measured, that is exactly what happened: the word
+        # "source" in source.objective_relevance.rank.bm25 announced
+        # python.source, this was handed tool.py, and it died with a bare
+        # JSONDecodeError that surfaced as an unexplained execution failure.
+        raise ValueError("RELEVANCE_INPUT_NOT_JSON:"+type(exc).__name__) from exc
+    if not isinstance(data,dict):
+        raise ValueError("RELEVANCE_INPUT_NOT_AN_OBJECT")
     objective=_canon(data.get("objective") or args.get("objective"))
     candidates=data.get("candidates")
     if candidates is None and isinstance(data.get("discovery"),dict):
