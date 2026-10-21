@@ -1,88 +1,111 @@
 {
-  "control_plane_projection_pass": true,
-  "parallel_frontier_status": "PARALLEL_FRONTIER_PLAN_READY",
+  "schema": "PROJECT_BRAIN_ONE_SHOT_SKY_IMPACT_PLANNER_V1",
+  "status": "PASS__ONE_SHOT_8_STEP_MATHEMATICAL_AND_UNCERTAINTY_RESOLUTION_PLAN_VERIFIED",
   "pass": true,
-  "plan_sha256": "583bc606771e2b5322819eb3ed68b6d13644e1501245e26f95058b34a0280619",
+  "control_plane_projection_pass": true,
   "reached_escape_no_bypass_pass": true,
+  "parallel_frontier_status": "PARALLEL_FRONTIER_PLAN_READY",
   "ready_parallel_frontiers": [
     "BYTES_EXACT_SYMBOLIC_V81_NEXT_PHYSICAL_CUT",
     "CHARTOGRAPHY_BRAIN_NATIVE_PROFESSIONAL_SEMANTICS_V2",
     "CODING_GENERAL_SOFTWARE_REPAIR_LOOP_V10",
     "PROFESSIONAL_QUALITY_V7_PROPERTY_TRUTH_DEPLETION"
   ],
-  "schema": "PROJECT_BRAIN_ONE_SHOT_SKY_IMPACT_PLANNER_V1",
-  "status": "PASS__ONE_SHOT_8_STEP_MATHEMATICAL_AND_UNCERTAINTY_RESOLUTION_PLAN_VERIFIED",
+  "summary": {
+    "step_count": 8,
+    "certificate_count": 6,
+    "covered_propositions": 24,
+    "required_propositions": 24,
+    "covered_unresolved_atomic_predicates": 20,
+    "open_milestone_families_targeted": 12,
+    "controller_zero_reality_work_units": 31,
+    "controller_ownership_prework_units": 10,
+    "controller_ownership_reconciliation_units": 2,
+    "cleanroom_open_truth_snapshot": {
+      "terminal": false,
+      "current_U_empty_proved": false,
+      "complete_selected_context_ABC_closed": false,
+      "D_finality_closed": false,
+      "frozen_terminal_family_pass_count": 7,
+      "frozen_terminal_family_open_count": 12,
+      "frozen_atomic_predicates_proved": 18,
+      "frozen_atomic_predicates_unresolved": 20,
+      "r2_primary_internal_unsolved_count": 0,
+      "r2_primary_internal_unsolved_cell": null
+    },
+    "total_covered_weight": 80,
+    "total_reusable_coverage_bonus": 84,
+    "transplant_frontier_count": 11,
+    "transplant_plan_sha256": "ead64397a934fed6df6a2844f417ae73338e408fbf7b583d976c471b281442e3",
+    "serial_wall_clock_seconds": 11.7,
+    "parallel_critical_path_seconds": 4.0,
+    "joint_single_shot_probability_lower": 0.883976,
+    "joint_k2_probability_lower": 0.997397,
+    "joint_k3_probability_lower": 0.999935,
+    "total_shannon_entropy_bits_resolved": 163.0,
+    "incremental_spend_usd": 0.0,
+    "external_runtime_cognition_count": 0,
+    "external_dependency_risk_count": 0
+  },
   "steps": [
     {
+      "step_id": "STEP_1",
       "certificate_id": "CERT_C1",
-      "conservative_log_impact_rate_truths_per_sec": 11.6,
-      "covered_proposition_count": 3,
-      "covered_weight": 14,
-      "entropy_bits_resolved": 42.0,
-      "external_dependency_risk": 0,
-      "external_runtime_cognition": 0,
-      "k2_resolved_probability_lower": 0.999775,
-      "k3_resolved_probability_lower": 0.999997,
+      "title": "Software Semantic Acceptance & Compositional Repair Engine (V10)",
+      "stage": 1,
       "newly_covered_propositions": [
         "P01",
         "P02",
         "P03"
       ],
-      "probability_interval": [
-        0.985,
-        0.999
-      ],
+      "covered_proposition_count": 3,
+      "covered_weight": 14,
       "reusable_coverage_bonus": 15,
-      "stage": 1,
-      "step_id": "STEP_1",
       "target_families": [
         "ADVANCED_AGENTIC_CODING"
-      ],
-      "target_reality_lanes": [
-        "L1_BUILDKITE_TB4_CHARTOGRAPHY",
-        "L5_COGNITION_FRONTIERCODE",
-        "L7_CURSORBENCH_OWNER_BOUNDARY"
       ],
       "target_unresolved_predicates": [
         "CODING_TB4_GE_66_4",
         "CODING_FRONTIERCODE_GE_54_4",
         "CODING_CURSORBENCH_GE_57_8"
       ],
-      "title": "Software Semantic Acceptance & Compositional Repair Engine (V10)",
-      "uncertainty_resolution_mechanism": "raw_task_objective_acceptance_executor_v1 + verified_improvement_loop_v2 branch-and-verify k=3 beam with exact test-oracle replay and git rollback",
+      "target_reality_lanes": [
+        "L1_BUILDKITE_TB4_CHARTOGRAPHY",
+        "L5_COGNITION_FRONTIERCODE",
+        "L7_CURSORBENCH_OWNER_BOUNDARY"
+      ],
+      "probability_interval": [
+        0.985,
+        0.999
+      ],
+      "k2_resolved_probability_lower": 0.999775,
+      "k3_resolved_probability_lower": 0.999997,
+      "wall_clock_seconds": 1.8,
+      "conservative_log_impact_rate_truths_per_sec": 11.6,
+      "entropy_bits_resolved": 42.0,
       "uncertainty_type": "ALEATORIC_AND_EPISTEMIC_HYBRID",
-      "wall_clock_seconds": 1.8
+      "uncertainty_resolution_mechanism": "raw_task_objective_acceptance_executor_v1 + verified_improvement_loop_v2 branch-and-verify k=3 beam with exact test-oracle replay and git rollback",
+      "external_dependency_risk": 0,
+      "external_runtime_cognition": 0
     },
     {
+      "step_id": "STEP_2",
       "certificate_id": "CERT_C2",
-      "conservative_log_impact_rate_truths_per_sec": 15.09,
-      "covered_proposition_count": 4,
-      "covered_weight": 15,
-      "entropy_bits_resolved": 24.0,
-      "external_dependency_risk": 0,
-      "external_runtime_cognition": 0,
-      "k2_resolved_probability_lower": 0.999936,
-      "k3_resolved_probability_lower": 0.999999,
+      "title": "Artifact Production, Professional Quality V10 Totality & Synthesis Engine (UVCK V2)",
+      "stage": 1,
       "newly_covered_propositions": [
         "P04",
         "P05",
         "P06",
         "P07"
       ],
-      "probability_interval": [
-        0.992,
-        1.0
-      ],
+      "covered_proposition_count": 4,
+      "covered_weight": 15,
       "reusable_coverage_bonus": 16,
-      "stage": 1,
-      "step_id": "STEP_2",
       "target_families": [
         "PROFESSIONAL_KNOWLEDGE_WORK",
         "ARTIFACT_CREATION",
         "COMMUNICATION_AND_SYNTHESIS"
-      ],
-      "target_reality_lanes": [
-        "L4_ARTIFICIAL_ANALYSIS_PROFESSIONAL"
       ],
       "target_unresolved_predicates": [
         "PROWORK_GDPVAL_GE_1846",
@@ -90,272 +113,249 @@
         "ARTIFACT_AA_BRIEFCASE_GE_1822",
         "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR"
       ],
-      "title": "Artifact Production, Professional Quality V10 Totality & Synthesis Engine (UVCK V2)",
-      "uncertainty_resolution_mechanism": "professional_semantic_totality_claim_pack_v3 4-root claim-scoped totality (CC_R1, CC_R2, CC_R3, R4) + synthesis_quality_wake_subsumption_v1 6-dimension ceiling",
+      "target_reality_lanes": [
+        "L4_ARTIFICIAL_ANALYSIS_PROFESSIONAL"
+      ],
+      "probability_interval": [
+        0.992,
+        1.0
+      ],
+      "k2_resolved_probability_lower": 0.999936,
+      "k3_resolved_probability_lower": 0.999999,
+      "wall_clock_seconds": 1.5,
+      "conservative_log_impact_rate_truths_per_sec": 15.09,
+      "entropy_bits_resolved": 24.0,
       "uncertainty_type": "EPISTEMIC_FORMAL_TOTALITY",
-      "wall_clock_seconds": 1.5
+      "uncertainty_resolution_mechanism": "professional_semantic_totality_claim_pack_v3 4-root claim-scoped totality (CC_R1, CC_R2, CC_R3, R4) + synthesis_quality_wake_subsumption_v1 6-dimension ceiling",
+      "external_dependency_risk": 0,
+      "external_runtime_cognition": 0
     },
     {
+      "step_id": "STEP_3",
       "certificate_id": "CERT_C2",
-      "conservative_log_impact_rate_truths_per_sec": 9.0,
-      "covered_proposition_count": 3,
-      "covered_weight": 10,
-      "entropy_bits_resolved": 18.0,
-      "external_dependency_risk": 0,
-      "external_runtime_cognition": 0,
-      "k2_resolved_probability_lower": 0.999516,
-      "k3_resolved_probability_lower": 0.999989,
+      "title": "Visual-Geometric Chartography V2 & Dense CAD Orthographic Topology Engine",
+      "stage": 1,
       "newly_covered_propositions": [
         "P08",
         "P16",
         "P17"
       ],
-      "probability_interval": [
-        0.978,
-        0.996
-      ],
+      "covered_proposition_count": 3,
+      "covered_weight": 10,
       "reusable_coverage_bonus": 10,
-      "stage": 1,
-      "step_id": "STEP_3",
       "target_families": [
         "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING"
-      ],
-      "target_reality_lanes": [
-        "L1_BUILDKITE_TB4_CHARTOGRAPHY"
       ],
       "target_unresolved_predicates": [
         "CHARTOGRAPHY_TOOLS_GE_89",
         "VISION_DENSE_NONCHART_SCOPE"
       ],
-      "title": "Visual-Geometric Chartography V2 & Dense CAD Orthographic Topology Engine",
-      "uncertainty_resolution_mechanism": "chart_axis_title_unit_binding_v1 full-height vertical strip OCR + cad_orthographic_information_safe_proof 3-view polycube visual-hull & Euler oracle",
+      "target_reality_lanes": [
+        "L1_BUILDKITE_TB4_CHARTOGRAPHY"
+      ],
+      "probability_interval": [
+        0.978,
+        0.996
+      ],
+      "k2_resolved_probability_lower": 0.999516,
+      "k3_resolved_probability_lower": 0.999989,
+      "wall_clock_seconds": 1.6,
+      "conservative_log_impact_rate_truths_per_sec": 9.0,
+      "entropy_bits_resolved": 18.0,
       "uncertainty_type": "OBSERVATIONAL_OCR_AND_VOXEL_AMBIGUITY",
-      "wall_clock_seconds": 1.6
+      "uncertainty_resolution_mechanism": "chart_axis_title_unit_binding_v1 full-height vertical strip OCR + cad_orthographic_information_safe_proof 3-view polycube visual-hull & Euler oracle",
+      "external_dependency_risk": 0,
+      "external_runtime_cognition": 0
     },
     {
+      "step_id": "STEP_4",
       "certificate_id": "CERT_C5",
-      "conservative_log_impact_rate_truths_per_sec": 6.98,
-      "covered_proposition_count": 2,
-      "covered_weight": 6,
-      "entropy_bits_resolved": 22.0,
-      "external_dependency_risk": 0,
-      "external_runtime_cognition": 0,
-      "k2_resolved_probability_lower": 0.999856,
-      "k3_resolved_probability_lower": 0.999998,
+      "title": "R2 V91 Financial Decision-Intelligence & 3-Class Wake Quotient Engine",
+      "stage": 1,
       "newly_covered_propositions": [
         "P18",
         "P19"
       ],
-      "probability_interval": [
-        0.988,
-        0.999
-      ],
+      "covered_proposition_count": 2,
+      "covered_weight": 6,
       "reusable_coverage_bonus": 8,
-      "stage": 1,
-      "step_id": "STEP_4",
       "target_families": [
         "FINANCIAL_ANALYSIS"
-      ],
-      "target_reality_lanes": [
-        "L3_VALS_FINANCE_MYSTERY"
       ],
       "target_unresolved_predicates": [
         "FINANCE_ACCOUNTING_INDEX_GE_61",
         "FINANCE_AGENT_V2_GE_58_59",
         "FINANCE_UNCOVERED_SCOPE_AUDIT"
       ],
-      "title": "R2 V91 Financial Decision-Intelligence & 3-Class Wake Quotient Engine",
-      "uncertainty_resolution_mechanism": "source_assertion_ownership_guard_v1 + regcap_context_signature_v1 + r2_four_way_regcap_governing_requirement_request_v1 typed 1-observation request",
+      "target_reality_lanes": [
+        "L3_VALS_FINANCE_MYSTERY"
+      ],
+      "probability_interval": [
+        0.988,
+        0.999
+      ],
+      "k2_resolved_probability_lower": 0.999856,
+      "k3_resolved_probability_lower": 0.999998,
+      "wall_clock_seconds": 1.4,
+      "conservative_log_impact_rate_truths_per_sec": 6.98,
+      "entropy_bits_resolved": 22.0,
       "uncertainty_type": "ONTOLOGICAL_AND_BUDGET_CONSTRAINED_RETRIEVAL",
-      "wall_clock_seconds": 1.4
+      "uncertainty_resolution_mechanism": "source_assertion_ownership_guard_v1 + regcap_context_signature_v1 + r2_four_way_regcap_governing_requirement_request_v1 typed 1-observation request",
+      "external_dependency_risk": 0,
+      "external_runtime_cognition": 0
     },
     {
+      "step_id": "STEP_5",
       "certificate_id": "CERT_C3",
-      "conservative_log_impact_rate_truths_per_sec": 9.24,
-      "covered_proposition_count": 3,
-      "covered_weight": 10,
-      "entropy_bits_resolved": 19.0,
-      "external_dependency_risk": 0,
-      "external_runtime_cognition": 0,
-      "k2_resolved_probability_lower": 0.999375,
-      "k3_resolved_probability_lower": 0.999984,
+      "title": "Long-Horizon Stateful Agency & Direct Tree-Hash Workspace Equivalence Engine",
+      "stage": 1,
       "newly_covered_propositions": [
         "P09",
         "P10",
         "P11"
       ],
-      "probability_interval": [
-        0.975,
-        0.995
-      ],
+      "covered_proposition_count": 3,
+      "covered_weight": 10,
       "reusable_coverage_bonus": 9,
-      "stage": 1,
-      "step_id": "STEP_5",
       "target_families": [
         "BUSINESS_WORKFLOW_AUTOMATION",
         "COMPUTER_AND_BROWSER_USE"
-      ],
-      "target_reality_lanes": [
-        "L6_ZAPIER_AUTOMATIONBENCH",
-        "L2_HUGGINGFACE_HLE_OSWORLD"
       ],
       "target_unresolved_predicates": [
         "AUTOMATIONBENCH_GE_40",
         "OSWORLD_2_1_PARTIAL_GE_81_8"
       ],
-      "title": "Long-Horizon Stateful Agency & Direct Tree-Hash Workspace Equivalence Engine",
-      "uncertainty_resolution_mechanism": "automationbench_600_private_task_contract_transducer_v3 + osworld_direct_workspace_equivalence_v1 content-addressed tree hash c54d4283...",
+      "target_reality_lanes": [
+        "L6_ZAPIER_AUTOMATIONBENCH",
+        "L2_HUGGINGFACE_HLE_OSWORLD"
+      ],
+      "probability_interval": [
+        0.975,
+        0.995
+      ],
+      "k2_resolved_probability_lower": 0.999375,
+      "k3_resolved_probability_lower": 0.999984,
+      "wall_clock_seconds": 1.5,
+      "conservative_log_impact_rate_truths_per_sec": 9.24,
+      "entropy_bits_resolved": 19.0,
       "uncertainty_type": "POMDP_ENVIRONMENT_LATENCY_AND_STATE_DRIFT",
-      "wall_clock_seconds": 1.5
+      "uncertainty_resolution_mechanism": "automationbench_600_private_task_contract_transducer_v3 + osworld_direct_workspace_equivalence_v1 content-addressed tree hash c54d4283...",
+      "external_dependency_risk": 0,
+      "external_runtime_cognition": 0
     },
     {
+      "step_id": "STEP_6",
       "certificate_id": "CERT_C4",
-      "conservative_log_impact_rate_truths_per_sec": 10.54,
-      "covered_proposition_count": 4,
-      "covered_weight": 13,
-      "entropy_bits_resolved": 26.0,
-      "external_dependency_risk": 0,
-      "external_runtime_cognition": 0,
-      "k2_resolved_probability_lower": 0.998976,
-      "k3_resolved_probability_lower": 0.999967,
+      "title": "Scientific, Symbolic & Exact Rational Polytope Active-Discovery Engine",
+      "stage": 1,
       "newly_covered_propositions": [
         "P12",
         "P13",
         "P14",
         "P15"
       ],
-      "probability_interval": [
-        0.968,
-        0.994
-      ],
+      "covered_proposition_count": 4,
+      "covered_weight": 13,
       "reusable_coverage_bonus": 12,
-      "stage": 1,
-      "step_id": "STEP_6",
       "target_families": [
         "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
         "AGENTIC_SCIENTIFIC_RESEARCH",
         "UNKNOWN_DOMAIN_ADAPTATION"
-      ],
-      "target_reality_lanes": [
-        "L2_HUGGINGFACE_HLE_OSWORLD",
-        "L8_TB_SCIENCE_HARBOR",
-        "L3_VALS_FINANCE_MYSTERY"
       ],
       "target_unresolved_predicates": [
         "HLE_TOOLS_GE_67_7",
         "TB_SCIENCE_GE_58_7",
         "MYSTERYMECHANISM_GE_49_55"
       ],
-      "title": "Scientific, Symbolic & Exact Rational Polytope Active-Discovery Engine",
-      "uncertainty_resolution_mechanism": "exact_linear_parameter_polytope_v1 (fractions.Fraction Simplex) + interval_information_frontier_v1 bisection probe at x* = argmax(u(x) - l(x))",
+      "target_reality_lanes": [
+        "L2_HUGGINGFACE_HLE_OSWORLD",
+        "L8_TB_SCIENCE_HARBOR",
+        "L3_VALS_FINANCE_MYSTERY"
+      ],
+      "probability_interval": [
+        0.968,
+        0.994
+      ],
+      "k2_resolved_probability_lower": 0.998976,
+      "k3_resolved_probability_lower": 0.999967,
+      "wall_clock_seconds": 1.7,
+      "conservative_log_impact_rate_truths_per_sec": 10.54,
+      "entropy_bits_resolved": 26.0,
       "uncertainty_type": "CONTINUOUS_PARAMETER_POLYTOPE_IDENTIFIABILITY",
-      "wall_clock_seconds": 1.7
+      "uncertainty_resolution_mechanism": "exact_linear_parameter_polytope_v1 (fractions.Fraction Simplex) + interval_information_frontier_v1 bisection probe at x* = argmax(u(x) - l(x))",
+      "external_dependency_risk": 0,
+      "external_runtime_cognition": 0
     },
     {
+      "step_id": "STEP_7",
       "certificate_id": "CERT_C6",
-      "conservative_log_impact_rate_truths_per_sec": 4.94,
-      "covered_proposition_count": 1,
-      "covered_weight": 3,
-      "entropy_bits_resolved": 8.0,
-      "external_dependency_risk": 0,
-      "external_runtime_cognition": 0,
-      "k2_resolved_probability_lower": 0.999964,
-      "k3_resolved_probability_lower": 1.0,
+      "title": "R1+R2+R3 Self-Improvement Loop V2 & Bytes V81->V82 NEXT87 Successor Cut",
+      "stage": 2,
       "newly_covered_propositions": [
         "P20"
       ],
+      "covered_proposition_count": 1,
+      "covered_weight": 3,
+      "reusable_coverage_bonus": 6,
+      "target_families": [
+        "MULTI_CAPABILITY_COMPOSITION"
+      ],
+      "target_unresolved_predicates": [
+        "COMPOSITION_COMPONENT_SCOPED_PROOFS"
+      ],
+      "target_reality_lanes": [],
       "probability_interval": [
         0.994,
         1.0
       ],
-      "reusable_coverage_bonus": 6,
-      "stage": 2,
-      "step_id": "STEP_7",
-      "target_families": [
-        "MULTI_CAPABILITY_COMPOSITION"
-      ],
-      "target_reality_lanes": [],
-      "target_unresolved_predicates": [
-        "COMPOSITION_COMPONENT_SCOPED_PROOFS"
-      ],
-      "title": "R1+R2+R3 Self-Improvement Loop V2 & Bytes V81->V82 NEXT87 Successor Cut",
-      "uncertainty_resolution_mechanism": "verified_improvement_loop_v2 9-phase closed loop + two_clock_semantic_validity_and_scheduler_authority_v4 zero-drift 21,620-test gate",
+      "k2_resolved_probability_lower": 0.999964,
+      "k3_resolved_probability_lower": 1.0,
+      "wall_clock_seconds": 1.2,
+      "conservative_log_impact_rate_truths_per_sec": 4.94,
+      "entropy_bits_resolved": 8.0,
       "uncertainty_type": "CROSS_MODULE_REGRESSION_INTERFERENCE",
-      "wall_clock_seconds": 1.2
+      "uncertainty_resolution_mechanism": "verified_improvement_loop_v2 9-phase closed loop + two_clock_semantic_validity_and_scheduler_authority_v4 zero-drift 21,620-test gate",
+      "external_dependency_risk": 0,
+      "external_runtime_cognition": 0
     },
     {
+      "step_id": "STEP_8",
       "certificate_id": "CERT_C6",
-      "conservative_log_impact_rate_truths_per_sec": 12.95,
-      "covered_proposition_count": 4,
-      "covered_weight": 9,
-      "entropy_bits_resolved": 4.0,
-      "external_dependency_risk": 0,
-      "external_runtime_cognition": 0,
-      "k2_resolved_probability_lower": 0.999996,
-      "k3_resolved_probability_lower": 1.0,
+      "title": "Cleanroom Donor-Deletion V2 Requalification & Universal Cover K* Finality",
+      "stage": 3,
       "newly_covered_propositions": [
         "P21",
         "P22",
         "P23",
         "P24"
       ],
-      "probability_interval": [
-        0.998,
-        1.0
-      ],
+      "covered_proposition_count": 4,
+      "covered_weight": 9,
       "reusable_coverage_bonus": 8,
-      "stage": 3,
-      "step_id": "STEP_8",
       "target_families": [
         "MULTI_CAPABILITY_COMPOSITION"
       ],
-      "target_reality_lanes": [],
       "target_unresolved_predicates": [
         "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
         "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
       ],
-      "title": "Cleanroom Donor-Deletion V2 Requalification & Universal Cover K* Finality",
-      "uncertainty_resolution_mechanism": "final_terminal_cleanroom_gate_v1 + terminal_closure_reducer (5c198f5f0a1cbc80cf183b12940870917afaf9b9) donor-removed network-denied replay",
+      "target_reality_lanes": [],
+      "probability_interval": [
+        0.998,
+        1.0
+      ],
+      "k2_resolved_probability_lower": 0.999996,
+      "k3_resolved_probability_lower": 1.0,
+      "wall_clock_seconds": 1.0,
+      "conservative_log_impact_rate_truths_per_sec": 12.95,
+      "entropy_bits_resolved": 4.0,
       "uncertainty_type": "RESIDUAL_AMBIENT_DONOR_LEAKAGE",
-      "wall_clock_seconds": 1.0
+      "uncertainty_resolution_mechanism": "final_terminal_cleanroom_gate_v1 + terminal_closure_reducer (5c198f5f0a1cbc80cf183b12940870917afaf9b9) donor-removed network-denied replay",
+      "external_dependency_risk": 0,
+      "external_runtime_cognition": 0
     }
   ],
-  "summary": {
-    "certificate_count": 6,
-    "cleanroom_open_truth_snapshot": {
-      "D_finality_closed": false,
-      "complete_selected_context_ABC_closed": false,
-      "current_U_empty_proved": false,
-      "frozen_atomic_predicates_proved": 18,
-      "frozen_atomic_predicates_unresolved": 20,
-      "frozen_terminal_family_open_count": 12,
-      "frozen_terminal_family_pass_count": 7,
-      "r2_primary_internal_unsolved_cell": null,
-      "r2_primary_internal_unsolved_count": 0,
-      "terminal": false
-    },
-    "controller_ownership_prework_units": 10,
-    "controller_ownership_reconciliation_units": 2,
-    "controller_zero_reality_work_units": 31,
-    "covered_propositions": 24,
-    "covered_unresolved_atomic_predicates": 20,
-    "external_dependency_risk_count": 0,
-    "external_runtime_cognition_count": 0,
-    "incremental_spend_usd": 0.0,
-    "joint_k2_probability_lower": 0.997397,
-    "joint_k3_probability_lower": 0.999935,
-    "joint_single_shot_probability_lower": 0.883976,
-    "open_milestone_families_targeted": 12,
-    "parallel_critical_path_seconds": 4.0,
-    "required_propositions": 24,
-    "serial_wall_clock_seconds": 11.7,
-    "step_count": 8,
-    "total_covered_weight": 80,
-    "total_reusable_coverage_bonus": 84,
-    "total_shannon_entropy_bits_resolved": 163.0,
-    "transplant_frontier_count": 11,
-    "transplant_plan_sha256": "2d4db73639fff6b6396fce46133a931da9ed4d0cd2428e7070166f9456c751df"
-  },
   "terminal_authority": false,
-  "terminal_credit_delta": 0
+  "terminal_credit_delta": 0,
+  "plan_sha256": "ec80274c9537ff425e1f3d56cedabd400854afdb8f72295a6ac101ad4cec21b6"
 }

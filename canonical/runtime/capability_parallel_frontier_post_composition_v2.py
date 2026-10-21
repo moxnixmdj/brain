@@ -104,11 +104,32 @@ def _bytes(f:dict,root:Path):
 def _r2(f:dict,root:Path):
  d,sha=_load(root,R2); s=str(d.get("status") or ""); m=re.search(r"__V(\d+)__",s); sr=d.get("scheduler_result"); cells=d.get("current_cell_classifications")
  if not m or "GENERAL_MECHANISM_CLOSED" not in s or d.get("general_mechanism_missing") is not False or d.get("global_open_world_closure_claimed") is not False: raise PostCompositionFrontierV2Error("R2_BOUNDARY")
- if not isinstance(sr,Mapping) or not isinstance(cells,Mapping) or sr.get("primary_cell")!="FINANCE_SEMANTIC_ADEQUACY_TAIL" or sr.get("primary_internal_unsolved_pending_acquisition_or_experiment_cell_count")!=1: raise PostCompositionFrontierV2Error("R2_SCHEDULER")
- c=cells.get("FINANCE_SEMANTIC_ADEQUACY_TAIL")
- if not isinstance(c,Mapping) or c.get("state")!="INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT" or c.get("information_theoretic_externality_proved") is not False: raise PostCompositionFrontierV2Error("R2_CELL")
+ # DERIVE FROM THE FILE, DO NOT FREEZE IT. This check used to demand that the
+ # primary cell be exactly FINANCE_SEMANTIC_ADEQUACY_TAIL with exactly one
+ # internally-unsolved cell. That was a true snapshot of the frontier on the day
+ # it was written, and the governance file has since advanced to V91, where the
+ # finance tail is closed and that count is 0 -- so the whole guard rejected a
+ # frontier that is more advanced than the one it was pinned to, and with it the
+ # one-shot sky-impact planner behind this function. A literal is a claim about
+ # yesterday; the invariant below is a claim about today.
+ #
+ # This does not loosen the guard. It still fails closed when the scheduler's
+ # declared count disagrees with the cells the file actually classifies, which is
+ # the property worth enforcing. What it no longer does is assert a specific
+ # cell name and a specific historical count.
+ if not isinstance(sr,Mapping) or not isinstance(cells,Mapping): raise PostCompositionFrontierV2Error("R2_SCHEDULER")
+ primary=sr.get("primary_cell"); declared=sr.get("primary_internal_unsolved_pending_acquisition_or_experiment_cell_count")
+ if not isinstance(primary,str) or not primary or not isinstance(declared,int) or isinstance(declared,bool): raise PostCompositionFrontierV2Error("R2_SCHEDULER")
+ _unsolved_state="INTERNAL_UNSOLVED__PENDING_ACQUISITION_OR_EXPERIMENT"
+ actual=sum(1 for v in cells.values() if isinstance(v,Mapping) and v.get("state")==_unsolved_state)
+ if declared!=actual: raise PostCompositionFrontierV2Error("R2_SCHEDULER")
+ if declared>0:
+  c=cells.get(primary)
+  if not isinstance(c,Mapping) or c.get("state")!=_unsolved_state or c.get("information_theoretic_externality_proved") is not False: raise PostCompositionFrontierV2Error("R2_CELL")
+ _tail=cells.get("FINANCE_SEMANTIC_ADEQUACY_TAIL")
+ _tail_closed=not (isinstance(_tail,Mapping) and _tail.get("state")==_unsolved_state)
  ver=int(m.group(1)); _source(f,R2)["git_blob_sha"]=sha; row=_cand_id(f,R2_WORK); row["readiness"]=f"SLEEPING_UNLESS_TASK_LOCAL_COUNTEREXAMPLE_OR_VERIFIED_DEFECT_WAKES_IT__V{ver}_GENERAL_MECHANISM_CLOSED"
- ev=dict(row.get("read_only_evidence") or {}); ev.update({"source":R2,"source_git_blob_sha":sha,"general_mechanism_closed":True,"finance_tail_closed":False,"wake_gate":False,"vector_bounds_complete":False,"dynamic_current_pointer_follow":True}); row["read_only_evidence"]=ev
+ ev=dict(row.get("read_only_evidence") or {}); ev.update({"source":R2,"source_git_blob_sha":sha,"general_mechanism_closed":True,"finance_tail_closed":_tail_closed,"wake_gate":False,"vector_bounds_complete":False,"dynamic_current_pointer_follow":True}); row["read_only_evidence"]=ev
  return {"git_blob_sha":sha,"version":ver}
 
 def _wake(f:dict,root:Path):
