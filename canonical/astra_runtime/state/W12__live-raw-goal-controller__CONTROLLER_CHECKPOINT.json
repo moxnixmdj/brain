@@ -1,0 +1,61 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "plan": {
+        "args": {
+          "archive_path": "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_BUNDLE.tar.gz",
+          "capability_id": "archive.verify.tar_gz.gnu",
+          "manifest_path": "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_MANIFEST.json"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "adapter": "archive_verify_gnu_tar",
+        "archive_path": "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_BUNDLE.tar.gz",
+        "capability_id": "archive.verify.tar_gz.gnu",
+        "dependency": {
+          "executable": "tar",
+          "resolved_path": "/usr/bin/tar",
+          "status": "LOCAL_VERIFIED",
+          "type": "system_tool"
+        },
+        "manifest_path": "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_MANIFEST.json",
+        "member_count": 2,
+        "members": [
+          "canonical/astra_runtime/evidence/ASTRA-RUNTIME-CORE-REGRESSION-006__RECEIPT.json",
+          "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_MANIFEST.json"
+        ],
+        "verified": true
+      }
+    },
+    {
+      "cycle": 1,
+      "plan": {
+        "args": {
+          "summary": "RAW_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "RAW_GOAL_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-10-21T16:13:05.347070+00:00",
+  "mission_id": "W12",
+  "next_action_index": 2,
+  "plan_sha256": "943c10ca0fc66951caa6d00669a9f2683059b18fa7eb5005ed33d883c8bfa8a3",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "live-raw-goal-controller",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-10-21T16:13:05.359309+00:00"
+}

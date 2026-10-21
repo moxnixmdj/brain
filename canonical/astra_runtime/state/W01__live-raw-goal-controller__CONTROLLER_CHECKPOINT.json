@@ -1,0 +1,59 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "plan": {
+        "args": {
+          "capability_id": "pdf.extract.text.pypdf",
+          "max_pages": 200,
+          "path": "canonical/astra_runtime/tmp/BOUND_PDF_TEXT_TEST.pdf"
+        },
+        "expect": {
+          "field": "text",
+          "type": "field_nonempty"
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "adapter": "bound_capability",
+        "capability_id": "pdf.extract.text.pypdf",
+        "dependency": {
+          "project": "pypdf",
+          "status": "INSTALLED_VERIFIED",
+          "version": "6.19.0",
+          "wheel_sha256": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14"
+        },
+        "pages_processed": 1,
+        "pages_total": 1,
+        "source_path": "canonical/astra_runtime/tmp/BOUND_PDF_TEXT_TEST.pdf",
+        "text": "PROJECT BRAIN BOUND PDF CAPABILITY VERIFIED",
+        "text_bytes": 43,
+        "text_sha256": "97fa8642db783ccc4c477a1ab0dc72a144da2932106ae51b9818eb7fc4b8030c",
+        "text_truncated": false
+      }
+    },
+    {
+      "cycle": 1,
+      "plan": {
+        "args": {
+          "summary": "COMPOUND_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "COMPOUND_GOAL_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-10-21T16:12:56.131592+00:00",
+  "mission_id": "W01",
+  "next_action_index": 2,
+  "plan_sha256": "290c58e927a8a56eef9bfd40a84abb27ae023bf3bed65b9eff87e2eb85237ec6",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "live-raw-goal-controller",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-10-21T16:12:57.450049+00:00"
+}
