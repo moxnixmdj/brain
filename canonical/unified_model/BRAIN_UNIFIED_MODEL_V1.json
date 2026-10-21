@@ -24406,7 +24406,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "50a26b0040113f3207a7d88bae4e23a79c55dbef9700d02d2774a9759a7d8440"
+  "value": "fbb8b8f57c66b245423a6f41bd7465733ce469880747b9ea9b35926af2655ceb"
  },
  "engines": [
   {
@@ -187834,7 +187834,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FRONTIER_GUARD_DERIVES_FROM_THE_LIVE_R2_FILE_UNBLOCKING_THE_ONE_SHOT_SKY_IMPACT_PLANNER_V1_20261021_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "9c104f6adf3afed80673228059e2d5881d9d2334af97acc9f371006a109c4c4b",
+   "sha256": "b9c8bb75cf9f7fe89166e27043993c724c8004be87f2a327793b4de4a023c18a",
    "status": "",
    "terms": {
     "20261021": 1,
