@@ -678,6 +678,101 @@ def _compile_verified_browser_interaction(goal, registry, root):
     }
 
 
+_BM25_MODULE=None
+_BM25_LOAD_FAILED=False
+
+
+def _bm25_module():
+    """Load the repo's own BM25 scorer once. Returns None if it cannot be loaded."""
+    global _BM25_MODULE,_BM25_LOAD_FAILED
+    if _BM25_MODULE is not None or _BM25_LOAD_FAILED:
+        return _BM25_MODULE
+    path=(pathlib.Path(__file__).resolve().parent
+          /"bound_capabilities"/"objective_relevance_bm25.py")
+    if not path.is_file():
+        _BM25_LOAD_FAILED=True
+        return None
+    try:
+        spec=importlib.util.spec_from_file_location(
+            "project_brain_objective_relevance_bm25_v1",path)
+        if spec is None or spec.loader is None:
+            _BM25_LOAD_FAILED=True
+            return None
+        module=importlib.util.module_from_spec(spec)
+        sys.modules[spec.name]=module
+        spec.loader.exec_module(module)
+        _BM25_MODULE=module
+    except Exception:
+        _BM25_LOAD_FAILED=True
+        _BM25_MODULE=None
+    return _BM25_MODULE
+
+
+def _bm25_terms(value):
+    """Token LIST (not set) so BM25 sees real term frequencies."""
+    return [
+        t.lower() for t in re.findall(r"[A-Za-z0-9]+",str(value or ""))
+        if len(t)>=2 and t.lower() not in STOPWORDS
+    ]
+
+
+def _capability_document(cid,entry):
+    """The indexed text for one capability.
+
+    Field weighting by repetition, the same approximation
+    ``objective_relevance_bm25._candidate_text`` uses: the identity and the
+    declared effect are repeated because they state what the capability IS and
+    DOES, while ``keywords`` are supporting vocabulary. Nothing is invented
+    here -- every field already exists on the registry entry.
+    """
+    identity=_bm25_terms(cid)
+    provides=_bm25_terms(entry.get("provides",[]))
+    requires=_bm25_terms(entry.get("requires",[]))
+    keywords=_bm25_terms(entry.get("keywords",[]))
+    return identity+identity+provides+provides+requires+keywords
+
+
+def _bm25_rerank(goal,ranked):
+    """Reorder already-admissible candidates by BM25 relevance.
+
+    This changes ORDER ONLY. Every element of ``ranked`` has already passed
+    ``_score`` (execution-surface and structured-format rejections, plus the
+    distinctive-token requirement) and has already bound its inputs, so BM25
+    cannot introduce a capability the pinned scorer refused and cannot make an
+    unbindable one bindable. It decides which of the survivors the goal is
+    most likely to mean.
+
+    Why BM25 rather than the raw overlap count: the count treats every shared
+    token as equally informative, so a capability carrying 27 governance
+    keywords (``terminal.kstar.root.assess.stdlib``) out-scores the capability
+    that actually owns the task, and the only defence is a hand-maintained
+    denylist of generic tokens. BM25's inverse document frequency derives that
+    weighting from the corpus instead: a token most capabilities carry is worth
+    little, a token only this one carries is worth a lot. No denylist to
+    maintain, and no capability can win on vocabulary it shares with everyone.
+    """
+    if len(ranked)<2:
+        return ranked
+    module=_bm25_module()
+    if module is None:
+        return ranked
+    try:
+        docs=[_capability_document(item[2],item[3]) for item in ranked]
+        scores=module._bm25_scores(_bm25_terms(goal),docs)
+    except Exception:
+        return ranked
+    if len(scores)!=len(ranked):
+        return ranked
+    out=[]
+    for item,(relevance,_contributions) in zip(ranked,scores):
+        score,specificity,cid=item[0],item[1],item[2]
+        out.append((relevance,score,specificity,cid,item))
+    # BM25 first; the pinned overlap score breaks BM25 ties, then specificity,
+    # then identity for determinism.
+    out.sort(key=lambda x:(-x[0],-x[1],-x[2],x[3]))
+    return [x[4] for x in out]
+
+
 def _rank_bindable_candidates(
     goal, registry, root, context_paths=None, future_clauses=None,
     proposal_binder=None, effect_providers=None, allow_world_binding=False
@@ -737,7 +832,9 @@ def _rank_bindable_candidates(
             inputs,binding_provenance=completed
         ranked.append((score,specificity,cid,entry,inputs,evidence,binding_provenance))
     ranked.sort(key=lambda x:(-x[0],-x[1],x[2]))
-    return ranked
+    # Pinned ordering first, then BM25 reorders the survivors. Reordering only:
+    # see ``_bm25_rerank``.
+    return _bm25_rerank(goal,ranked)
 
 
 def _compile_single_goal(
