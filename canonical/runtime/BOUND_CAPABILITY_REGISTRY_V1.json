@@ -1610,7 +1610,14 @@
             "version": "1.1.0+dfsg-2"
           }
         ],
-        "type": "apt"
+        "type": "apt",
+        "pypi_fallback": {
+          "project": "python-docx",
+          "version": "1.2.0",
+          "wheel_filename": "python_docx-1.2.0-py3-none-any.whl",
+          "wheel_sha256": "3fd478f3250fbbbfd3b94fe1e985955737c145627498896a8a6bf81f4baf66c7",
+          "metadata_url": "https://pypi.org/pypi/python-docx/1.2.0/json"
+        }
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
@@ -5708,7 +5715,14 @@
             "version": "3.1.9-1"
           }
         ],
-        "type": "apt"
+        "type": "apt",
+        "pypi_fallback": {
+          "project": "xlsxwriter",
+          "version": "3.2.9",
+          "wheel_filename": "xlsxwriter-3.2.9-py3-none-any.whl",
+          "wheel_sha256": "9a5db42bc5dff014806c58a20b9eae7322a134abb6fce3c92c181bfb275ec5b3",
+          "metadata_url": "https://pypi.org/pypi/xlsxwriter/3.2.9/json"
+        }
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
@@ -5783,7 +5797,14 @@
             "version": "3.1.2+dfsg-6"
           }
         ],
-        "type": "apt"
+        "type": "apt",
+        "pypi_fallback": {
+          "project": "openpyxl",
+          "version": "3.1.5",
+          "wheel_filename": "openpyxl-3.1.5-py2.py3-none-any.whl",
+          "wheel_sha256": "5282c12b107bffeef825f4617dc029afaf41d0ea60823bbb665ef3079dc79de2",
+          "metadata_url": "https://pypi.org/pypi/openpyxl/3.1.5/json"
+        }
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {

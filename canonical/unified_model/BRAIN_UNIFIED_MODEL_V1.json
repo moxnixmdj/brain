@@ -24397,7 +24397,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6271,
+  "research_index_records": 6272,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24406,7 +24406,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "fbb8b8f57c66b245423a6f41bd7465733ce469880747b9ea9b35926af2655ceb"
+  "value": "dea20100d32d54f8651235b3a931ceeb01892569c9248880401bdc173d770f52"
  },
  "engines": [
   {
@@ -46308,7 +46308,7 @@
   "included_source_count": 861,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "3860a524f80d39c7943d90f12599d7032651b7e56dbfc930e4a34e789e64e07d"
+  "source_tree_digest": "69969b3fb534b9ae15112295a3bb121d51c7c89162574ef69a1aff54358b9ea8"
  },
  "research_index": [
   {
@@ -187421,6 +187421,36 @@
    }
   },
   {
+   "action_id": "APT_PURE_PYTHON_DEPENDENCIES_ACQUIRE_FROM_A_PINNED_PYPI_WHEEL_WHEN_THE_DEB_IS_UNAVAILABLE_V1_20261021_V1",
+   "capability": false,
+   "date": "2026-10-21",
+   "id": "research:canonical/action_intents/APT_PURE_PYTHON_DEPENDENCIES_ACQUIRE_FROM_A_PINNED_PYPI_WHEEL_WHEN_THE_DEB_IS_UNAVAILABLE_V1_20261021_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/APT_PURE_PYTHON_DEPENDENCIES_ACQUIRE_FROM_A_PINNED_PYPI_WHEEL_WHEN_THE_DEB_IS_UNAVAILABLE_V1_20261021_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "36296c01cc4fb69e8490014eeb6f3b928861e1e009ed5252c38ea8582eaea2a9",
+   "status": "",
+   "terms": {
+    "20261021": 1,
+    "acquire": 1,
+    "apt": 1,
+    "apt_declared_pure_python_packages_could_not_be_acquired_on_a_host_without_that_exact_debian_metadata_even_though_the_identical_code_is_a_hash_pinned_wheel_the_runtime_already_knows_how_to_verify": 1,
+    "apt_pure_python_dependencies_acquire_from_a_pinned_pypi_wheel_when_the_deb_is_unavailable_v1_20261021_v1": 1,
+    "deb": 1,
+    "dependencies": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goals_that_execute_end_to_end_8_to_9_of_23_ext_xlsx_create_from_bound_apt_metadata_not_found_to_pass_and_bench_json_fetch_consistency_past_the_apt_gate_to_its_next_real_blocker": 1,
+    "pinned": 1,
+    "pure": 1,
+    "pypi": 1,
+    "python": 1,
+    "try_apt_first_then_fall_back_to_an_explicitly_pinned_pypi_wheel_only_when_the_package_is_absent_from_this_hosts_apt_metadata_and_never_on_a_hash_mismatch": 1,
+    "unavailable": 1,
+    "v1": 2,
+    "wheel": 1
+   }
+  },
+  {
    "action_id": "BM25_INVERSE_DOCUMENT_FREQUENCY_REORDERS_BOUND_CAPABILITY_SELECTION_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -192801,9 +192831,9 @@
    "imported_by_count": 4,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/astra_runtime.py",
-   "sha256": "dce1b5e9bf45df414c38f3232ed6847037848d2e7950c1e1e85c0aec24991259",
+   "sha256": "3b28202ddfb16daf85b95d8bf8e857c45326d356ca3daff82016e9284ba68e6f",
    "summary": "",
-   "symbol_count": 110,
+   "symbol_count": 111,
    "symbols": [
     "Blocker",
     "_ExternalBridgeHTTPResponse",
@@ -192814,6 +192844,7 @@
     "_alias_effects",
     "_already_present_dependency",
     "_append_admin_jsonl",
+    "_apt_then_pinned_pypi_fallback",
     "_authorize_external_information",
     "_bind_supervisor_identity",
     "_bounded_failure_result",
@@ -192827,8 +192858,7 @@
     "_compact_model_data",
     "_compile_plain_goal",
     "_compose_grounding_to_capability_problem",
-    "_content_addressed_repo_file",
-    "_context_result_map"
+    "_content_addressed_repo_file"
    ],
    "terms": {
     "admin_destination_class": 1,
