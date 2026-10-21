@@ -24406,7 +24406,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c7708c68ae818d78542f400ddc840114c6ec4068627f0858dc5b3a3da8bc9c92"
+  "value": "8b7b4ef20990237f42753e9e34b45002e6e7252358d8dce6343982f854b0dffd"
  },
  "engines": [
   {
@@ -197391,10 +197391,11 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/browser_v1.py",
-   "sha256": "6aa6178f4ecbc4b42579792756fe738760a7d47363c50cdbffdd09899c9290c0",
+   "sha256": "e7f64f035e9a535bf0e845b87cd165f06d371b8dcaa00f7fae10000e89235c4e",
    "summary": "The browser: one more sense the loop can consult.",
-   "symbol_count": 11,
+   "symbol_count": 12,
    "symbols": [
+    "_load_cdp_driver",
     "act",
     "available",
     "bind",
@@ -197415,6 +197416,7 @@
     "consult": 1,
     "ensure": 1,
     "host_of": 1,
+    "load_cdp_driver": 1,
     "loop": 1,
     "more": 1,
     "one": 1,
@@ -228243,7 +228245,7 @@
    "classification": "INTERNAL_HELPER",
    "executable_entry_point": false,
    "id": "source:canonical/runtime/osworld_v21_browser_cdp_v1.py",
-   "imported_by_count": 1,
+   "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/osworld_v21_browser_cdp_v1.py",
    "sha256": "8d24ab8a311bde6bdbf2601165746c7f3f81d9784f447f1d7ad1dcbef0c283c9",
