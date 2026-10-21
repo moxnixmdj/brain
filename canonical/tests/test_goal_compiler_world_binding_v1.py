@@ -655,3 +655,61 @@ class PerceptionVocabularyTests(unittest.TestCase):
         self.assertIn("docx", WP.kind_keys_for("docx_path"))
         for slot in ("xlsx_path", "sqlite_path", "csv_path", "html_path"):
             self.assertTrue(WP.kind_keys_for(slot), slot)
+
+
+class GroundedInputBindingTests(unittest.TestCase):
+    """A slot is bound by looking, and only when looking can settle it.
+
+    Measured, 8 of the 10 correctly-selected benchmark goals took their input
+    file from the world rather than the goal, and what they took was arbitrary:
+    AGENTS.md bound as the markdown to convert to PDF, a stray
+    canonical/astra_runtime/state/.../tool.py bound as the evidence to rank,
+    and the alphabetically first of five .docx files bound as the document to
+    verify. The skill was right and the file was a guess.
+
+    `_bind_path_by_type` is the binder that already had the correct rule --
+    bind on exactly one candidate, refuse on two -- but it only ever looked at
+    paths the goal sentence named. These tests give it a working directory and
+    hold it to the same rule there.
+    """
+
+    GOAL = "Read a PDF and extract its text."
+
+    def _bind(self, files, key="pdf_path", exclude=None):
+        from canonical.runtime import goal_front_compiler_v1 as gf
+
+        with tempfile.TemporaryDirectory() as td:
+            root = pathlib.Path(td)
+            for name in files:
+                (root / name).write_bytes(b"%PDF-1.4\nreal bytes, not a stub\n")
+            return gf._bind_path_by_type(self.GOAL, key, root, exclude=exclude)
+
+    def test_exactly_one_candidate_is_bound(self):
+        self.assertEqual(self._bind(["report.pdf"]), "report.pdf")
+
+    def test_two_candidates_refuse_rather_than_guess(self):
+        """The whole point: alphabetical first is not a choice."""
+        with self.assertRaises(GoalCompilationFailure):
+            self._bind(["aaa_first.pdf", "zzz_last.pdf"])
+
+    def test_no_candidates_refuse(self):
+        with self.assertRaises(GoalCompilationFailure):
+            self._bind([])
+
+    def test_a_claimed_file_is_not_reused_so_the_other_binds(self):
+        """The exclusion set is what makes two candidates resolvable.
+
+        This is the property world_binding_v1._world_path_for does not have,
+        and the reason bolting a refusal onto that function cost eight
+        selections: it could not tell 'taken by an earlier step' from
+        'genuinely ambiguous'.
+        """
+        self.assertEqual(
+            self._bind(["aaa_first.pdf", "zzz_last.pdf"], exclude={"aaa_first.pdf"}),
+            "zzz_last.pdf",
+        )
+
+    def test_the_wrong_type_is_not_substituted(self):
+        """A directory full of the wrong kind must not satisfy a pdf slot."""
+        with self.assertRaises(GoalCompilationFailure):
+            self._bind(["notes.md", "data.json", "photo.png"])

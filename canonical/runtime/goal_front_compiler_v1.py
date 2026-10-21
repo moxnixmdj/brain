@@ -494,6 +494,44 @@ def _excluded(produced_paths, taken) -> set[str]:
     return skip
 
 
+def _scan_root_by_type(wanted, root: pathlib.Path, skip) -> list[str]:
+    """Files in the working directory whose type fits the slot.
+
+    Bails out as soon as a second candidate appears: ambiguity is the answer,
+    and walking 14k more paths to confirm it buys nothing. `.git` and
+    `node_modules` are pruned because neither is a place a user's input file
+    lives and both are large enough to dominate the walk.
+    """
+    pruned = {".git", "node_modules", "__pycache__", ".venv"}
+    out: list[str] = []
+    stack = [pathlib.Path(root)]
+    while stack:
+        d = stack.pop()
+        try:
+            entries = list(d.iterdir())
+        except OSError:
+            continue
+        for p in entries:
+            name = p.name
+            try:
+                if p.is_dir():
+                    if name not in pruned:
+                        stack.append(p)
+                    continue
+                if not p.is_file():
+                    continue
+            except OSError:
+                continue
+            rel = p.relative_to(root).as_posix()
+            if rel in skip:
+                continue
+            if "".join(p.suffixes[-2:]).lower() in wanted or p.suffix.lower() in wanted:
+                out.append(rel)
+                if len(out) > 1:
+                    return out
+    return out
+
+
 def _bind_path_by_type(goal: str, key: str, root: pathlib.Path, exclude=None):
     """F6: bind an input path by file TYPE when the pinned name-stem binder cannot."""
     stem = key[:-5].lower()
@@ -506,6 +544,16 @@ def _bind_path_by_type(goal: str, key: str, root: pathlib.Path, exclude=None):
         matching = [raw for raw, p in existing]
     if len(matching) == 1:
         return matching[0]
+    if not matching and wanted:
+        # The goal named no usable file, so ask the working directory. This
+        # binder keeps the two properties world_binding_v1._world_path_for
+        # lacks: it honours the exclusion set, and it binds on exactly one
+        # candidate while refusing on two. Measured, that other path returns
+        # the alphabetically first match, which bound AGENTS.md as the
+        # markdown to convert and a stray tool.py as the evidence to rank.
+        scanned = _scan_root_by_type(wanted, root, skip)
+        if len(scanned) == 1:
+            return scanned[0]
     raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":" + str(len(matching)) + "_type_compatible_existing_files_named")
 
 

@@ -24254,7 +24254,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6259,
+  "research_index_records": 6260,
   "routing_tokens": 1775,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24263,7 +24263,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "37acf92742a9d1bb7a3c420c85e3d07d56befb70d0fcf292f33cc50251d2ebb7"
+  "value": "e7bbe1d07ba91fc9413c1eda66040b8a7414d1d9621e476335d25bd9bfb6d468"
  },
  "engines": [
   {
@@ -187470,6 +187470,32 @@
    }
   },
   {
+   "action_id": "GROUNDED_INPUT_BINDING_LOOK_BEFORE_BIND_V1_20261021_V1",
+   "capability": false,
+   "date": "2026-10-21",
+   "id": "research:canonical/action_intents/GROUNDED_INPUT_BINDING_LOOK_BEFORE_BIND_V1_20261021_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/GROUNDED_INPUT_BINDING_LOOK_BEFORE_BIND_V1_20261021_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "de98f10a5a498d6a0bcd06ea017c3d9bef5536543f08aa650d8aacc2312de111",
+   "status": "",
+   "terms": {
+    "20261021": 1,
+    "before": 1,
+    "bind": 1,
+    "binding": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "give_the_binder_that_already_refuses_on_ambiguity_the_ability_to_look__measured_there_are_two_path_binders_with_opposite_policies__goal_front_compiler_v1_bind_path_by_type_considers_only_files_the_goal_sentence_names_and_binds_on_exactly_one_else_refuses_while_world_binding_v1_world_path_for_scans_the_directory_and_returns_the_alphabetically_first_match__so_the_one_with_the_correct_rule_could_not_see_the_disk_and_the_one_that_could_see_the_disk_guessed__add_a_pruned_early_exiting_directory_scan_to_the_first_and_leave_the_second_alone_because_it_has_no_exclusion_set_and_bolting_a_refusal_onto_it_cost_eight_selections": 1,
+    "grounded": 1,
+    "grounded_input_binding_look_before_bind_v1_20261021_v1": 1,
+    "input": 1,
+    "look": 1,
+    "the_research_record_is_now_reachable_through_the_model_without_inflating_the_capability_claim__6256_governance_verification_and_intent_records_are_indexed_as_research_index_with_capability_false_on_every_row_solve_never_routes_there_and_find_research_answers_where_was_this_decided_rather_than_run_this__generated_outputs_are_excluded_so_the_compile_is_a_verified_fixed_point__capability_count_stays_363__new_digest_fb389ce2__107_tests_ok_verifier_33_of_33_benchmark_unchanged_at_17_of_23_and_12_of_23": 1,
+    "the_two_path_binders_disagree__goal_front_compiler_v1_bind_path_by_type_only_considers_paths_the_goal_sentence_names_via_goal_compiler_repo_paths_so_it_raised_goal_input_binding_required_for_all_six_never_compiled_goals_even_though_five_pdfs_sat_on_disk_while_world_binding_v1_world_path_for_scans_the_directory_but_returns_the_first_sorted_match_so_measured_eight_of_the_ten_correctly_selected_benchmark_goals_took_their_input_file_from_the_world_and_what_they_took_was_arbitrary_agents_md_bound_as_the_markdown_to_convert_a_stray_tool_py_bound_as_the_evidence_to_rank_and_the_alphabetically_first_of_five_docx_bound_as_the_document_to_verify": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "LIVE_BRAIN_HEARTBEAT_20261015_V1",
    "capability": false,
    "date": "2026-10-15",
@@ -214454,9 +214480,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "68bfddbc965648dfee9bbf7b5a1818c5caa00e07ab30eec2be90b369fea05246",
+   "sha256": "0874411bc15cd220c2abc49c9b79ae60cf1a57c4d6fd4a23254e02ca34db1b3b",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
-   "symbol_count": 53,
+   "symbol_count": 54,
    "symbols": [
     "_actions_of",
     "_after_key",
@@ -214516,7 +214542,7 @@
     "parse_typed_value": 1,
     "quoted": 1,
     "routable_registry": 1,
-    "spool_path": 1,
+    "scan_root_by_type": 1,
     "spool_suffix": 1,
     "v1": 1
    }
