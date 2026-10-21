@@ -31,9 +31,11 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
 import math
 import re
+import shutil
 import sys
 from pathlib import Path
 from typing import Any, Iterable, Mapping
@@ -196,11 +198,12 @@ class UnifiedModel:
 
     def status(self) -> dict[str, Any]:
         declared = self.model.get("counts") or {}
-        present = sum(
-            1
-            for row in self.capabilities.values()
-            if (row.get("declared_dependencies") or {}).get("declared_dependencies_present")
+        missing_ids = sorted(
+            cid
+            for cid, row in self.capabilities.items()
+            if _missing_declared_dependencies(row)
         )
+        present = len(self.capabilities) - len(missing_ids)
         return {
             "schema": SOLUTION_SCHEMA,
             "operation": "STATUS",
@@ -759,6 +762,37 @@ class UnifiedModel:
 
 
 # --------------------------------------------------------------------------- helpers
+
+
+def _missing_declared_dependencies(row: Mapping[str, Any]) -> list[str]:
+    """Resolve a capability's declared dependencies against *this* machine.
+
+    The artifact records only the tree-derived declaration, so this answer is
+    true of the machine that is answering rather than of whichever machine last
+    compiled the model. Names in ``declared_dependency_executables`` are resolved
+    on PATH; every other declared name is resolved through the Python import
+    machinery.
+    """
+    declaration = row.get("declared_dependencies") or {}
+    checked = declaration.get("declared_dependencies_checked") or []
+    on_path = {str(name) for name in declaration.get("declared_dependency_executables") or []}
+    missing: list[str] = []
+    for entry in checked:
+        name = str(entry)
+        if not name:
+            continue
+        if name in on_path:
+            found = shutil.which(name) is not None
+        else:
+            try:
+                found = importlib.util.find_spec(name) is not None
+            except (ImportError, ValueError):
+                # A name the import machinery refuses to resolve is not
+                # evidence of presence. Fail closed.
+                found = False
+        if not found:
+            missing.append(name)
+    return sorted(set(missing))
 
 
 def _normalise_capability_id(value: str) -> str:

@@ -10,8 +10,7 @@
      "pathlib",
      "tarfile"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -78,8 +77,9 @@
     "declared_dependencies_checked": [
      "tar"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [
+     "tar"
+    ],
     "kind": "EXECUTABLE"
    },
    "entrypoint": "run",
@@ -145,8 +145,7 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -207,8 +206,9 @@
     "declared_dependencies_checked": [
      "node"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [
+     "node"
+    ],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -277,8 +277,9 @@
     "declared_dependencies_checked": [
      "node"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [
+     "node"
+    ],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -345,8 +346,7 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -409,8 +409,7 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -485,8 +484,7 @@
      "time",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -549,8 +547,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -615,8 +612,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -682,8 +678,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -748,8 +743,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -812,8 +806,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -877,8 +870,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -942,8 +934,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -1008,8 +999,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -1076,8 +1066,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -1142,8 +1131,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -1210,8 +1198,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -1277,8 +1264,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -1343,8 +1329,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -1409,8 +1394,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -1474,8 +1458,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -1541,8 +1524,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -1607,8 +1589,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -1674,8 +1655,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -1741,8 +1721,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -1808,8 +1787,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -1876,8 +1854,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -1943,8 +1920,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -2008,8 +1984,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -2075,8 +2050,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -2143,8 +2117,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -2209,8 +2182,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -2275,8 +2247,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -2345,8 +2316,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -2413,8 +2383,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -2479,8 +2448,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -2546,8 +2514,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -2613,8 +2580,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -2680,8 +2646,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -2746,8 +2711,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -2813,8 +2777,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -2882,8 +2845,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -2950,8 +2912,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -3019,8 +2980,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -3087,8 +3047,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -3153,8 +3112,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -3220,8 +3178,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -3286,8 +3243,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -3351,8 +3307,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -3416,8 +3371,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -3481,8 +3435,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -3547,8 +3500,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -3613,8 +3565,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -3681,8 +3632,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -3747,8 +3697,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -3813,8 +3762,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -3879,8 +3827,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -3945,8 +3892,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -4011,8 +3957,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -4077,8 +4022,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -4142,8 +4086,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -4208,8 +4151,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -4274,8 +4216,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -4340,8 +4281,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -4405,8 +4345,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -4471,8 +4410,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -4537,8 +4475,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -4605,8 +4542,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -4671,8 +4607,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -4737,8 +4672,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -4803,8 +4737,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -4870,8 +4803,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -4937,8 +4869,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -5006,8 +4937,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -5072,8 +5002,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -5137,8 +5066,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -5203,8 +5131,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -5270,8 +5197,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -5337,8 +5263,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -5402,8 +5327,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -5469,8 +5393,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -5538,8 +5461,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -5603,8 +5525,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -5668,8 +5589,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -5733,8 +5653,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -5798,8 +5717,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -5864,8 +5782,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -5930,8 +5847,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -5996,8 +5912,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -6062,8 +5977,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -6128,8 +6042,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -6193,8 +6106,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -6260,8 +6172,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -6328,8 +6239,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -6395,8 +6305,7 @@
      "sys",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -6462,8 +6371,7 @@
      "json",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -6527,8 +6435,7 @@
      "json",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -6594,8 +6501,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -6658,8 +6564,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -6724,8 +6629,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -6790,8 +6694,7 @@
      "string",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -6855,8 +6758,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -6921,8 +6823,7 @@
      "itertools",
      "json"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -6986,8 +6887,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -7052,8 +6952,7 @@
      "sys",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -7119,8 +7018,7 @@
      "sys",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -7186,8 +7084,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -7252,8 +7149,7 @@
      "sys",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -7318,8 +7214,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -7384,8 +7279,7 @@
      "json",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -7449,8 +7343,7 @@
      "json",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -7514,8 +7407,7 @@
      "sys",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -7580,8 +7472,7 @@
      "sys",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -7646,8 +7537,7 @@
      "json",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -7712,8 +7602,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -7778,8 +7667,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -7842,8 +7730,7 @@
      "json",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -7911,8 +7798,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -7980,8 +7866,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -8046,8 +7931,7 @@
      "itertools",
      "json"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -8113,8 +7997,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -8178,8 +8061,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -8247,8 +8129,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -8315,8 +8196,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -8383,8 +8263,7 @@
      "json",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -8451,8 +8330,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -8519,8 +8397,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -8585,8 +8462,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -8652,8 +8528,7 @@
      "math",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -8716,8 +8591,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -8784,8 +8658,7 @@
      "string",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -8850,8 +8723,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -8914,8 +8786,7 @@
      "json",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -8980,8 +8851,7 @@
      "json",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -9044,8 +8914,7 @@
     "declared_dependencies_checked": [
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -9109,8 +8978,7 @@
      "json",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -9175,8 +9043,7 @@
      "json",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -9240,8 +9107,7 @@
      "json",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -9305,8 +9171,7 @@
      "json",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -9370,8 +9235,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -9434,8 +9298,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -9498,8 +9361,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -9559,8 +9421,7 @@
     "declared_dependencies_checked": [
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -9621,8 +9482,7 @@
     "declared_dependencies_checked": [
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -9687,8 +9547,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -9753,8 +9612,7 @@
      "sys",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -9819,8 +9677,7 @@
      "json",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -9888,8 +9745,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -9953,8 +9809,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -10019,8 +9874,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -10084,8 +9938,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -10150,8 +10003,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -10216,8 +10068,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -10282,8 +10133,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -10349,8 +10199,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -10413,8 +10262,7 @@
     "declared_dependencies_checked": [
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -10479,8 +10327,7 @@
      "json",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -10545,8 +10392,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -10612,8 +10458,7 @@
      "hashlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -10678,8 +10523,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -10745,8 +10589,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -10810,8 +10653,7 @@
      "copy",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -10875,8 +10717,7 @@
     "declared_dependencies_checked": [
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -10943,8 +10784,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -11008,8 +10848,7 @@
      "copy",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -11072,8 +10911,7 @@
     "declared_dependencies_checked": [
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -11138,8 +10976,7 @@
      "copy",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -11207,8 +11044,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -11271,8 +11107,7 @@
     "declared_dependencies_checked": [
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -11336,8 +11171,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -11402,8 +11236,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -11468,8 +11301,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -11533,8 +11365,7 @@
     "declared_dependencies_checked": [
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -11598,8 +11429,7 @@
     "declared_dependencies_checked": [
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -11662,8 +11492,7 @@
     "declared_dependencies_checked": [
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -11727,8 +11556,7 @@
     "declared_dependencies_checked": [
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -11792,8 +11620,7 @@
     "declared_dependencies_checked": [
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -11858,8 +11685,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -11924,8 +11750,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -11990,8 +11815,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -12055,8 +11879,7 @@
     "declared_dependencies_checked": [
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -12120,8 +11943,7 @@
     "declared_dependencies_checked": [
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -12186,8 +12008,7 @@
     "declared_dependencies_checked": [
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -12255,8 +12076,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -12323,8 +12143,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -12389,8 +12208,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -12454,8 +12272,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -12521,8 +12338,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -12586,8 +12402,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -12652,8 +12467,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -12719,8 +12533,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -12786,8 +12599,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -12853,8 +12665,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -12919,8 +12730,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -12987,8 +12797,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -13055,8 +12864,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -13123,8 +12931,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -13191,8 +12998,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -13260,8 +13066,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -13329,8 +13134,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -13399,8 +13203,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -13467,8 +13270,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -13536,8 +13338,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -13604,8 +13405,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -13672,8 +13472,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -13740,8 +13539,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -13808,8 +13606,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -13876,8 +13673,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -13944,8 +13740,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -14012,8 +13807,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -14078,8 +13872,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -14146,8 +13939,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -14211,8 +14003,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -14280,8 +14071,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -14349,8 +14139,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -14416,8 +14205,7 @@
      "copy",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -14482,8 +14270,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -14550,8 +14337,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -14620,8 +14406,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -14686,8 +14471,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -14755,8 +14539,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -14823,8 +14606,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -14890,8 +14672,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -14957,8 +14738,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -15023,8 +14803,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -15088,8 +14867,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -15153,8 +14931,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -15221,8 +14998,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -15288,8 +15064,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -15355,8 +15130,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -15420,8 +15194,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -15487,8 +15260,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -15554,8 +15326,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -15620,8 +15391,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -15688,8 +15458,7 @@
      "typing",
      "xml"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -15759,8 +15528,7 @@
      "typing",
      "xml"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -15830,8 +15598,7 @@
      "urllib",
      "xml"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -15901,8 +15668,7 @@
      "typing",
      "urllib"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -15970,8 +15736,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -16041,8 +15806,7 @@
      "typing",
      "urllib"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -16110,8 +15874,7 @@
      "typing",
      "urllib"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -16179,8 +15942,7 @@
      "json",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -16243,8 +16005,7 @@
      "string",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -16309,8 +16070,7 @@
      "json",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -16375,8 +16135,7 @@
      "json",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -16442,8 +16201,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -16509,8 +16267,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -16576,8 +16333,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -16642,8 +16398,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -16706,8 +16461,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -16770,8 +16524,7 @@
     "declared_dependencies_checked": [
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -16834,8 +16587,7 @@
     "declared_dependencies_checked": [
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -16900,8 +16652,7 @@
      "copy",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -16967,8 +16718,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -17033,8 +16783,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -17100,8 +16849,7 @@
     "declared_dependencies_checked": [
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -17166,8 +16914,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -17231,8 +16978,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -17296,8 +17042,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -17366,8 +17111,7 @@
      "sys",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -17431,8 +17175,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -17497,8 +17240,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -17562,8 +17304,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -17627,8 +17368,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -17691,8 +17431,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -17756,8 +17495,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -17822,8 +17560,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -17887,8 +17624,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -17952,8 +17688,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -18018,8 +17753,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -18084,8 +17818,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -18148,8 +17881,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -18213,8 +17945,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -18278,8 +18009,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -18344,8 +18074,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -18409,8 +18138,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -18474,8 +18202,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -18541,8 +18268,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -18607,8 +18333,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -18673,8 +18398,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -18739,8 +18463,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -18806,8 +18529,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -18871,8 +18593,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -18939,8 +18660,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -19006,8 +18726,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -19073,8 +18792,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -19140,8 +18858,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -19208,8 +18925,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -19276,8 +18992,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -19344,8 +19059,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -19413,8 +19127,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -19480,8 +19193,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -19549,8 +19261,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -19616,8 +19327,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -19682,8 +19392,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -19749,8 +19458,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -19815,8 +19523,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -19881,8 +19588,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -19947,8 +19653,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -20012,8 +19717,7 @@
      "pathlib",
      "subprocess"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -20082,10 +19786,7 @@
      "tempfile",
      "typing"
     ],
-    "declared_dependencies_missing": [
-     "PIL"
-    ],
-    "declared_dependencies_present": false,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -20162,10 +19863,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [
-     "PIL"
-    ],
-    "declared_dependencies_present": false,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -20238,10 +19936,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [
-     "PIL"
-    ],
-    "declared_dependencies_present": false,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -20314,8 +20009,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -20393,10 +20087,7 @@
      "re",
      "typing"
     ],
-    "declared_dependencies_missing": [
-     "PIL"
-    ],
-    "declared_dependencies_present": false,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -20466,10 +20157,7 @@
      "statistics",
      "typing"
     ],
-    "declared_dependencies_missing": [
-     "PIL"
-    ],
-    "declared_dependencies_present": false,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -20550,8 +20238,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -20621,8 +20308,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -20694,8 +20380,7 @@
      "math",
      "pathlib"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -20771,8 +20456,7 @@
      "math",
      "pathlib"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -20838,8 +20522,7 @@
    "cost": 2,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -20901,8 +20584,7 @@
    "cost": 2,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -20963,8 +20645,7 @@
    "cost": 2,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -21031,8 +20712,7 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -21095,8 +20775,7 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -21165,8 +20844,7 @@
      "pathlib",
      "re"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -21245,8 +20923,7 @@
      "pathlib",
      "re"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -21340,8 +21017,7 @@
      "math",
      "pathlib"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -21417,8 +21093,7 @@
      "urllib",
      "urllib.request"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -21486,8 +21161,7 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -21547,8 +21221,7 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -21609,8 +21282,7 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -21667,8 +21339,7 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -21730,8 +21401,7 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": null,
@@ -21797,8 +21467,7 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": null,
@@ -21864,8 +21533,7 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run_assert",
@@ -21928,8 +21596,7 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run_materialize",
@@ -21994,8 +21661,7 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -22066,8 +21732,7 @@
    "cost": 2,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -22125,8 +21790,7 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -22190,8 +21854,7 @@
      "re",
      "sys"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -22264,8 +21927,7 @@
      "pathlib",
      "re"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -22343,10 +22005,7 @@
      "tempfile",
      "typing"
     ],
-    "declared_dependencies_missing": [
-     "PIL"
-    ],
-    "declared_dependencies_present": false,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -22422,8 +22081,7 @@
      "urllib",
      "urllib.request"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -22494,8 +22152,7 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -22574,8 +22231,7 @@
      "textwrap",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -22663,8 +22319,7 @@
      "sys",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -22750,8 +22405,7 @@
      "time",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -22837,8 +22491,7 @@
      "time",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -22920,8 +22573,7 @@
      "sys",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -23007,8 +22659,7 @@
      "sys",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -23099,8 +22750,7 @@
      "sys",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -23190,8 +22840,7 @@
      "sys",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -23279,8 +22928,7 @@
      "tempfile",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -23364,8 +23012,7 @@
      "tempfile",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -23450,8 +23097,7 @@
      "sys",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -23525,8 +23171,7 @@
     "declared_dependencies_checked": [
      "ast"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -23594,8 +23239,7 @@
      "pathlib",
      "typing"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -23666,8 +23310,7 @@
     "declared_dependencies_checked": [
      "unittest"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -23735,8 +23378,7 @@
      "re",
      "urllib"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -23811,8 +23453,7 @@
      "re",
      "urllib"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -23894,8 +23535,7 @@
      "re",
      "unicodedata"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -23969,8 +23609,7 @@
      "re",
      "sqlite3"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -24033,8 +23672,7 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -24102,8 +23740,7 @@
     "declared_dependencies_checked": [
      "pathlib"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -24183,8 +23820,7 @@
      "json",
      "pathlib"
     ],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -24274,10 +23910,9 @@
     "declared_dependencies_checked": [
      "chromedriver"
     ],
-    "declared_dependencies_missing": [
+    "declared_dependency_executables": [
      "chromedriver"
     ],
-    "declared_dependencies_present": false,
     "kind": "EXECUTABLE"
    },
    "entrypoint": "run",
@@ -24352,8 +23987,7 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
@@ -24423,8 +24057,7 @@
    "cost": 2,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -24488,8 +24121,7 @@
    "cost": 2,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -24556,8 +24188,7 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [],
-    "declared_dependencies_missing": [],
-    "declared_dependencies_present": true,
+    "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -24629,7 +24260,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "4d7e627ea91d88b042cc984865cc777c99f6e40bc27a4d5c7a161c2f70c3b6a9"
+  "value": "9306f87c2fdbfc1adfc2c3d70513d444aa1262bb71bcad7a7d2aa07c9923fc5a"
  },
  "engines": [
   {
@@ -46476,7 +46107,7 @@
  },
  "provenance": {
   "compiler": "canonical/runtime/compile_brain_unified_model_v1.py",
-  "compiler_sha256": "e7f4d218ddbd649d0317a9bdd57158c3d367723261dd1cd54cc0353467939d27",
+  "compiler_sha256": "2ba11ebdf7b6374b58ca21010d07d3fdbf252b5f19458c1d671856bd7980fa56",
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",

@@ -46,10 +46,8 @@ from __future__ import annotations
 
 import ast
 import hashlib
-import importlib.util
 import json
 import re
-import shutil
 import sys
 import warnings
 from pathlib import Path
@@ -347,15 +345,31 @@ def _adapter_imports(root: Path, rel: str | None) -> list[str]:
     return sorted(modules)
 
 
-def _dependency_probe(
+def _dependency_declaration(
     entry: Mapping[str, Any], root: Path
 ) -> dict[str, Any]:
-    """Report whether the capability's *declared* dependencies are present.
+    """Record the capability's *declared* dependencies without probing for them.
+
+    This used to be called ``_dependency_probe`` and it answered "are they
+    present here?" by calling ``shutil.which`` and ``importlib.util.find_spec``
+    at compile time.  That made the artifact depend on the machine that compiled
+    it, which contradicts this module's own contract -- "no environment-derived
+    values ... compiling twice from the same tree produces byte-identical
+    output".  Measured, it was not a theoretical worry: installing Pillow and
+    nothing else changed the model digest from ``4d7e627e...`` to ``8c158876...``
+    across 6 capabilities, and the verifier's own
+    ``recompilation_is_byte_identical`` case failed on that machine.
+
+    Presence is a property of the machine, not of the tree, so it is no longer
+    recorded here.  What is recorded is the tree-derived *declaration*: which
+    names would have to resolve, and by which mechanism.  ``UnifiedModel``
+    probes them at run time, where the answer is actually true of the machine
+    answering.  Nothing here touches the file system or the import state.
 
     This is deliberately not called "available": BOUND_APT_METADATA_NOT_FOUND
     and a dozen other fail-closed adapter preconditions cannot be decided by
     looking at a file system.  The verifier measures actual execution; this
-    field only says what an operator could install or import.
+    field only says what an operator would have to install or import.
     """
     source = entry.get("source") if isinstance(entry.get("source"), Mapping) else {}
     source_type = str(source.get("type") or "unknown")
@@ -363,45 +377,44 @@ def _dependency_probe(
     executable = source.get("executable")
     module = source.get("module")
 
-    missing: list[str] = []
     checked: list[str] = []
+    executables: list[str] = []
     kind = "DECLARED_SOURCE_UNKNOWN"
 
     if executable:
         kind = "EXECUTABLE"
         checked.append(str(executable))
-        if not shutil.which(str(executable)):
-            missing.append(str(executable))
+        executables.append(str(executable))
     elif source_type in {"pypi", "npm", "apt", "system_tool", "brain_bound_system_tool"}:
         kind = "PACKAGE_OR_SYSTEM_TOOL"
         if source_type == "npm":
             checked.append("node")
-            if not shutil.which("node"):
-                missing.append("node")
+            executables.append("node")
         if module:
             checked.append(str(module))
-            if source_type != "npm" and importlib.util.find_spec(str(module)) is None:
-                missing.append(str(module))
+            # An npm module is resolved by node, not by the Python import
+            # machinery, so it is declared but not probed here -- matching the
+            # original behaviour, which only probed the npm case via "node".
     else:
         kind = "PYTHON_SOURCE"
         modules = _adapter_imports(root, str(adapter_path) if adapter_path else None)
         if module and str(module) not in modules:
             modules = sorted(set(modules) | {str(module)})
-        stdlib = set(getattr(sys, "stdlib_module_names", frozenset()))
         for name in modules:
             if name in {"__future__"} or name.startswith("canonical"):
                 continue
             checked.append(name)
-            if name in stdlib:
-                continue
-            if importlib.util.find_spec(name) is None:
-                missing.append(name)
+            # Standard-library membership is a property of the interpreter, not
+            # of this tree, so it is not filtered here. Resolving a stdlib name
+            # succeeds at run time and costs nothing.
 
     return {
         "kind": kind,
         "declared_dependencies_checked": sorted(checked),
-        "declared_dependencies_missing": sorted(missing),
-        "declared_dependencies_present": not missing,
+        # Names resolved on PATH. Every other declared name is resolved through
+        # the Python import machinery. Stating the exception rather than one
+        # method per name keeps the artifact free of restated data.
+        "declared_dependency_executables": sorted(executables),
     }
 
 
@@ -497,7 +510,7 @@ def _capability_row(
             "source_module": source.get("module"),
             "source_executable": source.get("executable"),
         },
-        "declared_dependencies": _dependency_probe(entry, root),
+        "declared_dependencies": _dependency_declaration(entry, root),
         "platforms": sorted(str(x) for x in (entry.get("platforms") or [])),
     }
 

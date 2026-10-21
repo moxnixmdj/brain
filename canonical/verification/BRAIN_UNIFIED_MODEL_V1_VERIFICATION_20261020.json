@@ -1,7 +1,7 @@
 {
- "artifact_bytes": 1685263,
+ "artifact_bytes": 1670327,
  "artifact_path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
- "artifact_sha256": "77211a4fb0e94a540f36249b8964250c291dade6e916a8d70d97c84323eba76b",
+ "artifact_sha256": "1c906b006c8f6d468ab9d2ad8bf2ac87b97fd7d2ac53eb9f9d0ba06d468dd828",
  "authority": "NONE",
  "capability_credit_delta": 0,
  "categories": [
@@ -15,7 +15,7 @@
    "rows": [
     {
      "detail": {
-      "declared": "4d7e627ea91d88b042cc984865cc777c99f6e40bc27a4d5c7a161c2f70c3b6a9"
+      "declared": "9306f87c2fdbfc1adfc2c3d70513d444aa1262bb71bcad7a7d2aa07c9923fc5a"
      },
      "name": "digest_recomputes",
      "oracle": "SHA256_RECOMPUTATION",
@@ -23,7 +23,7 @@
     },
     {
      "detail": {
-      "recompiled_digest": "4d7e627ea91d88b042cc984865cc777c99f6e40bc27a4d5c7a161c2f70c3b6a9"
+      "recompiled_digest": "9306f87c2fdbfc1adfc2c3d70513d444aa1262bb71bcad7a7d2aa07c9923fc5a"
      },
      "name": "recompilation_is_byte_identical",
      "oracle": "DETERMINISTIC_RECOMPILE",
@@ -68,7 +68,7 @@
     },
     {
      "detail": {
-      "bytes": 1685263
+      "bytes": 1670327
      },
      "name": "artifact_bytes_are_the_model",
      "oracle": "FILE_STAT",
@@ -123,93 +123,93 @@
    "rows": [
     {
      "detail": {
-      "attempts": 60,
-      "confident": 60,
+      "attempts": 300,
+      "confident": 300,
       "examples": [
        {
         "confident": true,
-        "goal": "call extract text pypdf axis using",
-        "target": "pdf.extract.text.pypdf",
+        "goal": "json auto optimal measurement handle livebench_legacy15_pointwise_optimal_v1",
+        "target": "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py.auto.v1",
         "top": [
-         "pdf.extract.text.pypdf",
-         "image.extract.ocr.tesseract",
-         "python.fault.provenance.interprocedural.value.v1"
+         "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py.auto.v1",
+         "python.repository.acceptance.measure.v1",
+         "python.task.acceptance.measured.objective.v1"
         ]
        },
        {
         "confident": true,
-        "goal": "auto compare legacy15 auto composition now",
-        "target": "canonical/runtime/livebench_legacy15_composition_partition_v1.py.auto.v1",
+        "goal": "authority please source current_escape_o11_proof_instantiation_search_v1 finance auto",
+        "target": "canonical/runtime/r2_finance_normalized_source_universe_direct_adequacy_v1.py.auto.v1",
         "top": [
-         "evidence.claim_relation.generic_units.stdlib",
-         "evidence.claim_spec.bind.explicit_comparison.stdlib",
-         "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py.auto.v1"
+         "canonical/runtime/current_escape_o11_proof_instantiation_search_v1.py.auto.v1",
+         "canonical/runtime/finance_direct_source_coverage_audit_v1.py.auto.v1",
+         "canonical/runtime/r2_finance_normalized_source_universe_direct_adequacy_v1.py.auto.v1"
         ]
        },
        {
         "confident": true,
-        "goal": "auto sec_extracted_xbrl_instance_source_native_verify_v1 carefully extracted scheduling verifier",
-        "target": "canonical/runtime/sec_extracted_xbrl_instance_source_native_verify_v1.py.auto.v1",
+        "goal": "finance_semantic_zero_reality_fixed_point_v1 image generate scalar qrencode please",
+        "target": "image.qr.generate.qrencode",
         "top": [
-         "canonical/runtime/sec_extracted_xbrl_instance_source_native_verify_v1.py.auto.v1",
-         "canonical/runtime/verify_terminal_scheduling_v11_candidate_v1.py.auto.v1",
-         "canonical/runtime/verify_terminal_scheduling_v12_candidate_v1.py.auto.v1"
+         "image.qr.generate.qrencode",
+         "canonical/runtime/finance_semantic_zero_reality_fixed_point_v1.py.auto.v1",
+         "canonical/runtime/bytes_scalar_exact_task_generator_v1.py.auto.v1"
         ]
        },
        {
         "confident": true,
-        "goal": "legacy15 storage exact joint carefully witness",
-        "target": "canonical/runtime/livebench_legacy15_joint_witness_v1.py.auto.v1",
-        "top": [
-         "canonical/runtime/livebench_legacy15_joint_witness_v1.py.auto.v1",
-         "canonical/runtime/h100_unichart_storage_feasibility_v1.py.auto.v1",
-         "canonical/runtime/livebench_legacy15_joint_candidate_generator_v1.py.auto.v1"
-        ]
-       },
-       {
-        "confident": true,
-        "goal": "source please python measurement acceptance repository",
+        "goal": "content-addressed the addressed component test zero",
         "target": "python.repository.acceptance.measure.v1",
         "top": [
          "python.repository.acceptance.measure.v1",
-         "python.task.acceptance.measured.objective.v1",
-         "python.patch.search.test_guided.ast.v1"
+         "canonical/runtime/aa_briefcase_component_summary_noninversion_v1.py.auto.v1",
+         "chart.raster.scene_graph.v1"
         ]
        },
        {
         "confident": true,
-        "goal": "verify verify imports professional_r12_cc_r3_truth_reconciliation_v3_verify_v1 reconciliation check",
-        "target": "canonical/runtime/professional_r12_cc_r3_truth_reconciliation_v3_verify_v1.py.auto.v1",
+        "goal": "subject auto root auto and verify",
+        "target": "canonical/runtime/professional_quality_r7_root_subject_binding_verify_v1.py.auto.v1",
         "top": [
-         "canonical/runtime/professional_r12_cc_r3_truth_reconciliation_v3_verify_v1.py.auto.v1",
-         "python.source.audit.ast",
-         "python.contract.check.crosshair.v1"
+         "canonical/runtime/professional_quality_r10_root_subject_binding_verify_v1.py.auto.v1",
+         "canonical/runtime/professional_quality_r11_root_subject_binding_verify_v1.py.auto.v1",
+         "canonical/runtime/professional_quality_r12_root_subject_binding_verify_v1.py.auto.v1"
         ]
        },
        {
         "confident": true,
-        "goal": "root3 basis frontier please verifier continuity_root3_fixed_entry_verifier_v1",
-        "target": "canonical/runtime/continuity_root3_fixed_entry_verifier_v1.py.auto.v1",
+        "goal": "msgpack-msgpack repair then projection javascript encode",
+        "target": "auto.npm.msgpack-msgpack",
         "top": [
-         "canonical/runtime/continuity_root3_fixed_entry_verifier_v1.py.auto.v1",
-         "canonical/runtime/professional_quality_r2_candidate_branch_basis_v2.py.auto.v1",
-         "terminal.kstar.root.assess.stdlib"
+         "auto.npm.msgpack-msgpack",
+         "auto.npm.dfinity-cbor",
+         "auto.pypi.bson-modern"
         ]
        },
        {
         "confident": true,
-        "goal": "inline metadata influence handle tool xbrl",
-        "target": "canonical/runtime/sec_inline_xbrl_fasb_release_metadata_verify_v1.py.auto.v1",
+        "goal": "encode objective using auto scope p3_bounded_objective_role_presentation_compiler_v1",
+        "target": "canonical/runtime/p3_bounded_objective_role_presentation_compiler_v1.py.auto.v1",
         "top": [
-         "canonical/runtime/sec_inline_xbrl_fasb_release_metadata_verify_v1.py.auto.v1",
-         "canonical/runtime/p3_policy_influence_relevance_cell_v1.py.auto.v1",
-         "canonical/runtime/sec_extracted_xbrl_instance_source_native_verify_v1.py.auto.v1"
+         "canonical/runtime/p3_bounded_objective_role_presentation_compiler_v1.py.auto.v1",
+         "auto.npm.dfinity-cbor",
+         "auto.npm.msgpack-msgpack"
+        ]
+       },
+       {
+        "confident": true,
+        "goal": "auto task handle real admission auto",
+        "target": "canonical/runtime/p3_real_context_v3_admission_v10.py.auto.v1",
+        "top": [
+         "canonical/runtime/p3_real_context_v3_admission_v1.py.auto.v1",
+         "canonical/runtime/p3_real_context_v3_admission_v10.py.auto.v1",
+         "canonical/runtime/p3_real_context_v3_admission_v11.py.auto.v1"
         ]
        }
       ],
-      "top1": 48,
-      "top3": 55,
-      "top3_rate": 0.9167
+      "top1": 225,
+      "top3": 265,
+      "top3_rate": 0.8833
      },
      "name": "fresh_goals_rank_target_in_top3",
      "oracle": "SYNTHETIC_GENERATOR_ORACLE",
@@ -217,7 +217,7 @@
     },
     {
      "detail": {
-      "top1_rate": 0.8
+      "top1_rate": 0.75
      },
      "name": "fresh_goals_are_not_answered_at_random",
      "oracle": "SYNTHETIC_GENERATOR_ORACLE",
@@ -245,19 +245,9 @@
      "detail": {
       "attempts": 40,
       "hit_at_1": 37,
-      "hit_at_3": 39,
+      "hit_at_3": 40,
       "measured": 77,
-      "misses": [
-       {
-        "expected": "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V2.md",
-        "got": [
-         "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
-         "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
-         "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V7.md"
-        ],
-        "query": "accounting operative capsule"
-       }
-      ]
+      "misses": []
      },
      "name": "held_out_term_queries_hit_the_source_document",
      "oracle": "TERM_GENERATOR_ORACLE",
@@ -285,16 +275,16 @@
     {
      "detail": {
       "expected": {
-       "class_count": 3,
+       "class_count": 2,
        "distinct_imported_module_count": 3,
        "file_count": 1,
-       "function_count": 4
+       "function_count": 2
       },
       "observed": {
-       "class_count": 3,
+       "class_count": 2,
        "distinct_imported_module_count": 3,
        "file_count": 1,
-       "function_count": 4
+       "function_count": 2
       }
      },
      "name": "python_source_audit_matches_independent_ast_oracle",
@@ -305,9 +295,9 @@
      "detail": {
       "extracted": true,
       "listing": [
-       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_2l71g47b/manifest.json",
-       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_2l71g47b/payload/alpha.txt",
-       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_2l71g47b/payload/beta.txt"
+       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_nmx3qpg7/manifest.json",
+       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_nmx3qpg7/payload/alpha.txt",
+       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_nmx3qpg7/payload/beta.txt"
       ]
      },
      "name": "tar_creation_matches_gnu_tar_oracle",
@@ -316,7 +306,7 @@
     },
     {
      "detail": {
-      "status": "PASS__CAPABILITY_EXECUTED_AND_TRACE_VERIFIED",
+      "status": "PASS__PROMOTED_BOUND_CAPABILITY_EXECUTED_AND_TRACE_VERIFIED",
       "verified": true
      },
      "name": "tar_verification_reports_manifest_members",
@@ -338,10 +328,10 @@
     },
     {
      "detail": {
-      "expected_tests": 3,
+      "expected_tests": 4,
       "reported": {
-       "passed_count": 3,
-       "test_count": 3
+       "passed_count": 4,
+       "test_count": 4
       }
      },
      "name": "test_audit_matches_generated_case_count",
@@ -509,11 +499,11 @@
    ]
   }
  ],
- "generated_utc": "2026-10-20T15:14:55Z",
+ "generated_utc": "2026-10-21T05:56:06Z",
  "incremental_spend_usd": 0,
  "independent_verifier": null,
  "independent_verifier_run_reference": null,
- "model_digest": "4d7e627ea91d88b042cc984865cc777c99f6e40bc27a4d5c7a161c2f70c3b6a9",
+ "model_digest": "9306f87c2fdbfc1adfc2c3d70513d444aa1262bb71bcad7a7d2aa07c9923fc5a",
  "model_id": "BRAIN-UNIFIED-MODEL-V1",
  "next_independent_step": "A different identity must re-run `python3 canonical/runtime/verify_brain_unified_model_v1.py --seed <the seed above>` on a clean checkout and sign the result. Until then this document is a sandbox measurement with no authority.",
  "non_claims": [
@@ -526,7 +516,7 @@
  "ownership_credit_delta": 0,
  "producer_cognition_model_dependency_count": 0,
  "schema": "PROJECT_BRAIN_UNIFIED_MODEL_V1_VERIFICATION",
- "seed": "arena-final-20261020",
+ "seed": "15ccfc172e9f42cf",
  "summary": {
   "capabilities_modelled": 363,
   "cases": 33,
