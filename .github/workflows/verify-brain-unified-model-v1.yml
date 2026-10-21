@@ -1,0 +1,46 @@
+name: verify-brain-unified-model-v1
+
+# The compiled model artifact is content-addressed: its digest is a function of
+# the tree it was compiled from. Nothing else in CI checked that, so a stale
+# artifact merged silently -- measured, PR #5931 landed with the verifier at
+# 32/33 because the artifact had been compiled before its own action intent was
+# written, and canonical/action_intents is one of the trees the artifact indexes.
+#
+# This workflow deliberately has NO paths filter. The artifact indexes
+# canonical/runtime, canonical/governance, canonical/verification and
+# canonical/action_intents, and every pull request writes an action intent, so a
+# paths filter would miss exactly the change that invalidates the digest.
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # recompilation_is_byte_identical is the case that catches a stale
+      # artifact, so the verifier alone is the load-bearing step.
+      - name: Verify the compiled model artifact
+        run: python canonical/runtime/verify_brain_unified_model_v1.py
+
+      - name: Run the unified model test suite
+        run: >-
+          python -m unittest
+          canonical.tests.test_brain_unified_model_v1
+          canonical.tests.test_goal_compiler
+          canonical.tests.test_goal_compiler_world_binding_v1
+
+      - name: Report the goal-compilation benchmark
+        run: python canonical/runtime/goal_compilation_benchmark_v1.py --json /tmp/bench.json
