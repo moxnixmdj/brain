@@ -25,11 +25,11 @@
     "producer_cognition_model_dependency_count": 0,
     "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
     "progress_evidence_paths": [
-      "canonical/runtime/bound_capabilities/xlsx_table_xlsxwriter.py",
-      "canonical/runtime/world_binding_v1.py",
-      "canonical/tests/test_structured_binding_and_derived_columns.py",
-      "canonical/runtime/bound_capabilities/sqlite_table_stdlib.py",
-      "canonical/action_intents/BROWSER_CDP_DRIVER_RESOLUTION_INDEPENDENT_OF_SYS_PATH_V1_20261021_V1.json"
+      "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
+      "canonical/runtime/one_shot_sky_impact_planner_v1.py",
+      "canonical/governance/CURRENT_R2_DECISION_INTELLIGENCE.json",
+      "canonical/governance/ONE_SHOT_SKY_IMPACT_PLAN_20261012_V1.json",
+      "canonical/tests/test_frontier_guard_derives_from_the_live_file.py"
     ],
     "route_class": "INTEGRATE"
   },
@@ -81,7 +81,7 @@
     "canonical/runtime/bound_capabilities/sqlite_table_stdlib.py _status_value -- deliberately NOT changed. A status value is a selection among rows, not a structure the data states, so deriving it would invent intent. Left demanding the sentence, and recorded here so the distinction is not lost."
   ],
   "recursive_obs": {
-    "canonical_base_commit": "685ba58dc6ee82d6ea1912d3604e2aece742e2e4",
+    "canonical_base_commit": "4a65d925ecec21301e4c6376139601df1c234237",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "WIDENING_WORLD_BINDING_TO_ACCEPT_A_TYPE_INCOMPATIBLE_FILE",
@@ -89,7 +89,7 @@
       "DECLARING_THE_BINDING_WITHOUT_AUTO_PATH_WHICH_MEASURED_AS_CORRECT_17_TO_16",
       "AN_ASSERTION_ON_THE_CHAIN_ALONE_WITHOUT_THE_NEGATIVE_CONTROL_THAT_NO_CHAIN_IS_INVENTED_WHEN_STEP_ZERO_CANNOT_BIND"
     ],
-    "expected_parent_level_state_change": "GOALS_COMPLETING_END_TO_END_7_TO_8_MEASURED_THROUGH_LIVE_INTEGRATED_BRAIN_V1_RUN_RAW_GOAL__EXT_XLSX_CREATE_MOVES_FROM_BLOCKED_TO_PASS__BENCHMARK_COMPILED_19_OF_23_UNCHANGED_CORRECT_SELECTION_17_OF_23_UNCHANGED_WRONG_CAPABILITY_2_OF_23_UNCHANGED__TESTS_165_TO_174_WITH_NINE_NEW_TESTS_AND_NO_REGRESSIONS",
+    "expected_parent_level_state_change": "COMPILE_SKY_IMPACT_PLAN_FROM_RAISING_POST_COMPOSITION_FRONTIER_V2_ERROR_R2_SCHEDULER_TO_PASS_WITH_AN_8_STEP_VERIFIED_PLAN_6_CERTIFICATES_AND_24_OF_24_PROPOSITIONS_COVERED",
     "obs_blocker": {
       "delete_bypass_substitute_options": "DELETING_THE_EFFECT_RESULT_MECHANISM_WOULD_REMOVE_THE_ONLY_TYPED_PRODUCER_CONSUMER_LINK_THE_MODEL_HAS",
       "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_PRODUCER_IDENTITY_WAS_DISCARDED_AT_ONE_CALL_SITE",
