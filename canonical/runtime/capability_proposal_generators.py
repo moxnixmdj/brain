@@ -293,6 +293,30 @@ def _bind_planned_inputs(
             inputs[key]=urls[index]
             evidence[key]={"type":"goal_url","index":index,"value":urls[index]}
             continue
+        if typ=="goal_text":
+            # Bind the slot to the goal sentence itself.
+            #
+            # Some adapters take natural language as an operand rather than a
+            # value extracted from it: ``objective_claim_operand_binding.bind``
+            # takes ``objective`` and parses the explicit comparison out of it,
+            # and ``generic_evidence_claim_relation`` takes ``spec`` the same
+            # way. Neither slot is a URL, a path, or an upstream effect, so
+            # none of the existing types could express it -- and the binder
+            # falls back to ``_bind_inputs``, which demands the value appear in
+            # the sentence, which it already is.
+            #
+            # This does NOT weaken anything. The adapter still adjudicates: if
+            # the sentence states no explicit comparison, ``_parse_objective``
+            # returns its own refusal reason and the run fails closed for a
+            # reason about the goal's content instead of about plumbing.
+            if not isinstance(goal,str) or not goal.strip():
+                raise CapabilityProposalFailure(
+                    "PROPOSAL_GOAL_TEXT_BINDING_REQUIRED:"
+                    +str(cid)+":"+key
+                )
+            inputs[key]=goal
+            evidence[key]={"type":"goal_text","value":goal}
+            continue
         if typ=="auto_path":
             value=_auto_output_path(
                 goal,instance_id,key,spec.get("suffix")

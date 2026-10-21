@@ -24397,7 +24397,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6272,
+  "research_index_records": 6273,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24406,7 +24406,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8fd9967c9d4d56ea574699b9b88fb394777e0d81903d69b328f184c7e26fadac"
+  "value": "d3362bbc83996d4b67faf6cae1e5272ecd939b14001a6c3ce6529d27cf3c0e38"
  },
  "engines": [
   {
@@ -46308,7 +46308,7 @@
   "included_source_count": 861,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "69969b3fb534b9ae15112295a3bb121d51c7c89162574ef69a1aff54358b9ea8"
+  "source_tree_digest": "b9b2b38dafcf133ffeb221a0df38521157959b8489d12c8ad81caa8cd70eea31"
  },
  "research_index": [
   {
@@ -187913,6 +187913,35 @@
    }
   },
   {
+   "action_id": "GOAL_TEXT_PROPOSAL_BINDING_MAKES_LANGUAGE_OPERAND_CAPABILITIES_REACHABLE_V1_20261021_V1",
+   "capability": false,
+   "date": "2026-10-21",
+   "id": "research:canonical/action_intents/GOAL_TEXT_PROPOSAL_BINDING_MAKES_LANGUAGE_OPERAND_CAPABILITIES_REACHABLE_V1_20261021_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/GOAL_TEXT_PROPOSAL_BINDING_MAKES_LANGUAGE_OPERAND_CAPABILITIES_REACHABLE_V1_20261021_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "9478939c254480253aa8a91843b0002ab7633c491faf8f27780557773db72744",
+   "status": "",
+   "terms": {
+    "20261021": 1,
+    "binding": 1,
+    "capabilities": 1,
+    "declare_a_goal_text_proposal_binding_so_a_capability_whose_adapter_parses_the_sentence_itself_becomes_reachable_rather_than_writing_a_new_adapter_or_widening_the_sentence_binding": 1,
+    "evidence_claim_spec_bind_explicit_comparison_scored_28_on_a_goal_that_asked_for_exactly_that_and_was_then_dropped_with_no_verified_capability_match__the_producer_chain_was_already_fully_declared_the_extractor_provides_source_evidence_objective_grounded_units_and_the_consumer_binds_extraction_path_from_that_effects_output_path_and_effect_providers_resolved_the_producer_correctly__what_failed_was_one_undeclared_slot_objective_which_is_the_goal_sentence_itself_which_the_adapter_parses_the_explicit_comparison_out_of__no_binding_type_could_express_that_so_the_binder_fell_back_to_bind_inputs_which_demands_the_value_appear_in_the_sentence_it_already_is": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 1,
+    "goal_text_proposal_binding_makes_language_operand_capabilities_reachable_v1_20261021_v1": 1,
+    "language": 1,
+    "makes": 1,
+    "operand": 1,
+    "proposal": 1,
+    "reachable": 1,
+    "text": 1,
+    "the_claim_binding_goal_now_executes_end_to_end_through_a_four_link_chain_enumerate_then_rank_then_extract_then_bind__measured_compiled_20_of_23_to_21_of_23__correct_selection_18_of_23_to_19_of_23__wrong_capability_2_of_23_to_1_of_23__goals_that_run_to_completion_9_to_10__all_nine_prior_passers_still_pass": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "GROUNDED_BINDING_TERMINAL_EQUIVALENCE_VIA_EXISTING_AMBIGUITY_CONTROL_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -201009,7 +201038,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/capability_proposal_generators.py",
-   "sha256": "fb908106a773528fbac3fd3e1c7956bd6d56b994ab7c4f267754989ccf6b83b8",
+   "sha256": "82e427d678133748d98eb8a085609e34d51df7c1f1c57fc509d41097a8d60739",
    "summary": "Fail-closed proposal generators for verified Project Brain capabilities.",
    "symbol_count": 15,
    "symbols": [
