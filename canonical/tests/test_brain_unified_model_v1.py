@@ -1140,11 +1140,47 @@ class DeclaredDependencyEnvironmentIndependenceTests(unittest.TestCase):
             "present + missing must account for every capability",
         )
 
-        # chromedriver is not installed in this sandbox and is the one dependency
-        # no amount of pip-installing fixes, so it must always be reported.
+        import shutil
+        from unittest import mock
+
         row = self.model.capabilities.get("web.browser.rendered.capture.chromedriver")
         self.assertIsNotNone(row, "the chromedriver capability should exist")
-        self.assertIn("chromedriver", model_runtime._missing_declared_dependencies(row))
+
+        # This used to assert that chromedriver is *absent*. That is a fact
+        # about one host, not a property of the model: GitHub's ubuntu runners
+        # ship Chrome and chromedriver, so the assertion held in the sandbox
+        # and failed in CI -- measured, 'chromedriver' not found in []. Two
+        # claims replace it, and both hold on any machine.
+
+        # 1. The reported answer must agree with an independent live probe of
+        #    PATH. That is the actual "tracks the real interpreter" claim, and
+        #    it is true whether or not chromedriver is installed here.
+        self.assertEqual(
+            "chromedriver" in model_runtime._missing_declared_dependencies(row),
+            shutil.which("chromedriver") is None,
+            "reported presence disagrees with a live probe of PATH, so the "
+            "answer is not being measured on this machine",
+        )
+
+        # 2. The answer must move when the probe moves. If the value were baked
+        #    into the artifact at compile time neither patch would change it and
+        #    both assertions would fail -- the regression this exists to catch,
+        #    and a strictly stronger test than the absence it replaces.
+        with mock.patch.object(shutil, "which", lambda _name: None):
+            on_a_bare_host = model_runtime._missing_declared_dependencies(row)
+        with mock.patch.object(shutil, "which", lambda _name: "/usr/bin/true"):
+            on_a_complete_host = model_runtime._missing_declared_dependencies(row)
+
+        self.assertIn(
+            "chromedriver",
+            on_a_bare_host,
+            "a host without chromedriver on PATH must report it missing",
+        )
+        self.assertNotIn(
+            "chromedriver",
+            on_a_complete_host,
+            "a host with chromedriver on PATH must not report it missing",
+        )
 
 
 class SourceIndexTests(unittest.TestCase):
