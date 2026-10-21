@@ -33,7 +33,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::APT_DECLARED_PURE_PYTHON_PACKAGES_COULD_NOT_BE_ACQUIRED_ON_A_HOST_WITHOUT_THAT_EXACT_DEBIAN_METADATA_EVEN_THOUGH_THE_IDENTICAL_CODE_IS_A_HASH_PINNED_WHEEL_THE_RUNTIME_ALREADY_KNOWS_HOW_TO_VERIFY",
-  "canonical_base_commit": "4a65d925ecec21301e4c6376139601df1c234237",
+  "canonical_base_commit": "e7af118ff0b866641f836e4a675bd3b3a3f9ddb0",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -79,7 +79,7 @@
     "canonical/runtime/bound_capabilities/sqlite_table_stdlib.py _status_value -- deliberately NOT changed. A status value is a selection among rows, not a structure the data states, so deriving it would invent intent. Left demanding the sentence, and recorded here so the distinction is not lost."
   ],
   "recursive_obs": {
-    "canonical_base_commit": "4a65d925ecec21301e4c6376139601df1c234237",
+    "canonical_base_commit": "e7af118ff0b866641f836e4a675bd3b3a3f9ddb0",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "WIDENING_WORLD_BINDING_TO_ACCEPT_A_TYPE_INCOMPATIBLE_FILE",
