@@ -1843,6 +1843,15 @@
         "output_path": {
           "type": "auto_path",
           "suffix": ".json"
+        },
+        "spec": {
+          "type": "goal_text"
+        }
+      },
+      "proposal_binding_evidence": {
+        "spec": {
+          "type": "goal_text",
+          "source": "adapter parses this slot from the goal sentence itself"
         }
       }
     },
@@ -1941,6 +1950,15 @@
         "output_path": {
           "type": "auto_path",
           "suffix": ".json"
+        },
+        "objective": {
+          "type": "goal_text"
+        }
+      },
+      "proposal_binding_evidence": {
+        "objective": {
+          "type": "goal_text",
+          "source": "adapter parses this slot from the goal sentence itself"
         }
       }
     },
