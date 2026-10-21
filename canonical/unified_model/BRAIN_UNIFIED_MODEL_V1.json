@@ -23742,9 +23742,16 @@
    "adapter_module": "sqlite_verify_cli",
    "cost": 1,
    "declared_dependencies": {
-    "declared_dependencies_checked": [],
+    "declared_dependencies_checked": [
+     "hashlib",
+     "json",
+     "pathlib",
+     "re",
+     "sqlite3",
+     "subprocess"
+    ],
     "declared_dependency_executables": [],
-    "kind": "PACKAGE_OR_SYSTEM_TOOL"
+    "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
    "id": "sqlite.table.verify_against_json_records",
@@ -23764,10 +23771,10 @@
    ],
    "provenance": {
     "source_executable": null,
-    "source_module": null,
-    "source_path": null,
-    "source_sha256": null,
-    "source_type": "apt"
+    "source_module": "sqlite3",
+    "source_path": "canonical/runtime/bound_capabilities/sqlite_verify_cli.py",
+    "source_sha256": "fb46443e34bf58ad5b15c163ff66ab081c2c8df1de917d4bb71e3661ff290ccb",
+    "source_type": "python_stdlib"
    },
    "provides": [
     "sqlite.table.verify_against_json_records"
@@ -24397,16 +24404,16 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6277,
+  "research_index_records": 6278,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
-  "source_index_modules": 1861
+  "source_index_modules": 1860
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ed527bf56267ee5a9f0799738a999cac0aa9b3414962aa7944ab6a654a6bd72d"
+  "value": "00b9bf330f82ba6d6523909ed336eb56fb0b65cd4d2d353b38d6bf34858a0b87"
  },
  "engines": [
   {
@@ -46305,10 +46312,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 861,
+  "included_source_count": 862,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "b9b2b38dafcf133ffeb221a0df38521157959b8489d12c8ad81caa8cd70eea31"
+  "source_tree_digest": "8e0f3464e7b38f98618a31a5da77041354c133bc580b32ba897ef6a89e408303"
  },
  "research_index": [
   {
@@ -188496,6 +188503,34 @@
    }
   },
   {
+   "action_id": "SQLITE_VERIFIER_SUBSTRATE_DECLARED_AS_THE_STDLIB_MODULE_IT_ACTUALLY_USES_V1_20261021_V1",
+   "capability": false,
+   "date": "2026-10-21",
+   "id": "research:canonical/action_intents/SQLITE_VERIFIER_SUBSTRATE_DECLARED_AS_THE_STDLIB_MODULE_IT_ACTUALLY_USES_V1_20261021_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SQLITE_VERIFIER_SUBSTRATE_DECLARED_AS_THE_STDLIB_MODULE_IT_ACTUALLY_USES_V1_20261021_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "ef62a2b2415f8d3699891f46b5e529b5b7c8e988feda1555dcd8706e727e15ce",
+   "status": "",
+   "terms": {
+    "20261021": 1,
+    "actually": 1,
+    "declare_the_substrate_a_capability_actually_needs__rather_than_letting_a_preferred_but_unrequired_apt_package_block_it__so_the_sqlite_verifier_is_declared_python_stdlib_sqlite3_the_way_its_sibling_create_capability_always_has_because_its_adapter_catches_filenotfounderror_and_imports_the_stdlib_module": 1,
+    "declared": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "module": 1,
+    "sqlite": 1,
+    "sqlite_table_verify_against_json_records_goes_from_bound_apt_metadata_not_found_sqlite3_to_running_on_this_host_through_pythons_own_sqlite3_module__measured_by_the_failure_moving_off_the_substrate_gate_entirely_and_into_row_comparison_as_sqlite_column_unresolved_source_type__on_the_23_goal_benchmark_compiled_stays_23_of_23_correct_selection_21_of_23_wrong_capability_2_of_23_and_by_census_executed_11_of_23_and_semantic_acceptance_9_of_23_all_unchanged_so_there_is_no_regression_and_the_gain_is_a_restored_capability_not_a_moved_rate": 1,
+    "sqlite_verifier_substrate_declared_as_the_stdlib_module_it_actually_uses_v1_20261021_v1": 1,
+    "stdlib": 1,
+    "substrate": 1,
+    "the_sqlite_verifier_was_declared_as_an_ubuntu_apt_package_so_on_a_host_without_the_sqlite3_cli_the_substrate_gate_raised_bound_apt_metadata_not_found_and_the_capability_never_ran_at_all__even_though_its_adapter_catches_filenotfounderror_and_imports_the_stdlib_module_and_its_own_entry_already_carried_optional_true_with_a_python_stdlib_fallback_and_an_optional_reason_naming_that_adapter__the_gate_read_none_of_those_fields": 1,
+    "uses": 1,
+    "v1": 2,
+    "verifier": 1
+   }
+  },
+  {
    "action_id": "TRUE_CAPABILITY_AUDIT_AND_DOCX_MEASUREMENT_20261014_V1",
    "capability": false,
    "date": "2026-10-14",
@@ -195893,47 +195928,6 @@
     "source": 2,
     "title": 1,
     "verification": 1,
-    "verify": 2
-   }
-  },
-  {
-   "capability": false,
-   "classification": "ORPHAN",
-   "executable_entry_point": false,
-   "id": "source:canonical/runtime/bound_capabilities/sqlite_verify_cli.py",
-   "imported_by_count": 0,
-   "kind": "SOURCE_ADDRESSABLE_MODULE",
-   "path": "canonical/runtime/bound_capabilities/sqlite_verify_cli.py",
-   "sha256": "fb46443e34bf58ad5b15c163ff66ab081c2c8df1de917d4bb71e3661ff290ccb",
-   "summary": "Independently verify a SQLite table against canonical JSON using sqlite3 CLI.",
-   "symbol_count": 8,
-   "symbols": [
-    "_cell",
-    "_find_collection",
-    "_flatten_paths",
-    "_run_json",
-    "_safe",
-    "_status_value",
-    "_table_name",
-    "run"
-   ],
-   "terms": {
-    "against": 1,
-    "canonical": 1,
-    "cell": 1,
-    "cli": 2,
-    "find_collection": 1,
-    "flatten_paths": 1,
-    "independently": 1,
-    "json": 1,
-    "run": 1,
-    "run_json": 1,
-    "safe": 1,
-    "sqlite": 2,
-    "sqlite3": 1,
-    "status_value": 1,
-    "table": 1,
-    "table_name": 1,
     "verify": 2
    }
   },
