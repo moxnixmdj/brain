@@ -25,6 +25,13 @@ import unittest
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 BOUND = ROOT / "runtime" / "bound_capabilities"
 
+# The adapter writes the workbook through xlsxwriter, which is an optional
+# substrate. Tests that reach the write must skip when it is absent rather than
+# error: the derivation logic under test is the adapter's own, and a machine
+# without the writer tells us nothing about whether it is correct.
+_HAS_XLSXWRITER = importlib.util.find_spec("xlsxwriter") is not None
+_SKIP_REASON = "xlsxwriter is not installed; the adapter cannot write a workbook"
+
 
 def _load(name):
     """Load an adapter by path without touching sys.modules.
@@ -66,12 +73,14 @@ class TestColumnsDerivedFromRecords(unittest.TestCase):
             str(self.root),
         )
 
+    @unittest.skipUnless(_HAS_XLSXWRITER, _SKIP_REASON)
     def test_a_silent_sentence_still_yields_the_columns_the_data_states(self):
         result = self._run("records.json", "Create an xlsx table from JSON records.")
         self.assertEqual(result["columns"], ["id", "text"])
         self.assertEqual(result["row_count"], 2)
         self.assertTrue(result["output_verified"])
 
+    @unittest.skipUnless(_HAS_XLSXWRITER, _SKIP_REASON)
     def test_derivation_is_deterministic_and_sorted(self):
         first = self._run("records.json", "Create an xlsx table from JSON records.")
         second = self._run("records.json", "Create an xlsx table from JSON records.")
@@ -84,6 +93,7 @@ class TestColumnsDerivedFromRecords(unittest.TestCase):
             self._run("records.json", "Create an xlsx table with columns id, id.")
         self.assertEqual(str(ctx.exception), "XLSX_COLUMNS_DUPLICATE")
 
+    @unittest.skipUnless(_HAS_XLSXWRITER, _SKIP_REASON)
     def test_a_stated_column_list_still_wins_over_derivation(self):
         result = self._run("records.json", "Create an xlsx table with columns text.")
         self.assertEqual(result["columns"], ["text"])

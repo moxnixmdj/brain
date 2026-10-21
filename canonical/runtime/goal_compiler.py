@@ -891,6 +891,122 @@ def _rank_bindable_candidates(
     return _bm25_rerank(goal,ranked)
 
 
+def _resolve_tie_by_executability(
+    goal, registry, root, ranked,
+    context_paths=None, future_clauses=None,
+    proposal_binder=None, effect_providers=None
+):
+    """Break an exact score/specificity tie using what the world can bind.
+
+    This is the same principle the ranking already states -- "BIND FIRST, THEN
+    RANK. Ambiguity is frequently an artefact of ranking unbound candidates" --
+    applied to the one case it was never reached for: a tie.
+
+    It does NOT admit inferred candidates into the ranking. The tied set is
+    fixed by the grounded pass, so an inferred candidate can never outrank a
+    grounded one on raw lexical score, which is the failure this file warns
+    about (a barcode DECODER outranking the barcode GENERATOR the goal asked
+    for). Inference is used only to order capabilities that are already
+    indistinguishable on the goal's own words -- where returning nothing is
+    provably worse than returning the one that can actually be called.
+
+    Returns the winning ranked tuple, or ``None`` when even executability
+    cannot separate them, in which case the caller refuses exactly as before.
+    """
+    best=ranked[0]
+    tied=[c for c in ranked if c[0]==best[0] and c[1]==best[1]]
+    if len(tied)<2:
+        return None
+    tied_ids={c[2] for c in tied}
+    try:
+        reranked=_rank_bindable_candidates(
+            goal,registry,root,
+            context_paths=context_paths,
+            future_clauses=future_clauses,
+            proposal_binder=proposal_binder,
+            effect_providers=effect_providers,
+            allow_world_binding=True,
+        )
+    except Exception:
+        return None
+    survivors=[c for c in reranked if c[2] in tied_ids]
+    if not survivors:
+        return None
+    if len(survivors)==1:
+        return survivors[0]
+    top=survivors[0]
+    if survivors[1][0]==top[0] and survivors[1][1]==top[1]:
+        # Executability could not separate them either. The clause was carved
+        # out of a longer sentence, and the words that decide between these
+        # candidates are usually in the part that was carved away -- measured:
+        # "Read a PDF" scores pdf.extract.text.pypdf and pdf.extract.ocr.tesseract
+        # at 10 and 10, while the sentence it came from, "Read a PDF and extract
+        # its text.", scores them 24 and 17. Re-scoring against the wider text
+        # the compiler already holds uses no new policy, only information that
+        # was discarded by the split.
+        wider=str(goal)
+        for clause in (future_clauses or []):
+            if clause and str(clause) not in wider:
+                wider=f"{wider} {clause}"
+        if wider!=str(goal):
+            rescored=[]
+            for item in survivors:
+                try:
+                    sc,sp,ev=_score(wider,item[2],item[3])
+                except Exception:
+                    continue
+                rescored.append((sc,sp,item))
+            rescored.sort(key=lambda x:(-x[0],-x[1],x[2][2]))
+            if rescored and (
+                len(rescored)==1
+                or rescored[1][0]!=rescored[0][0]
+                or rescored[1][1]!=rescored[0][1]
+            ):
+                return rescored[0][2]
+        return None
+    return top
+
+
+def _subgoal_absorbed_by_prefix(clause, compiled_parts, registry):
+    """True when a clause asks only for what the compiled prefix already does.
+
+    Clause splitting on conjunctions can divide ONE action into two sentences:
+    "Read a PDF and extract its text" describes a single capability,
+    ``pdf.extract.text.pypdf``, twice. The second clause then matches nothing
+    -- not because the machine lacks the ability, but because the ability is
+    already compiled.
+
+    The test is lexical containment against the prefix capability's own
+    identity, which invents no new policy: every content word of the clause
+    must already appear in the capability the prefix selected.
+    """
+    stopwords={
+        "a","an","the","its","it","to","and","of","from","then","that","this",
+        "with","into","out","on","in","for","be","is","are","as","at","by",
+        "their","them","they","those","these","was","were","do","does",
+    }
+    words={
+        w for w in re.findall(r"[a-z0-9_]+",str(clause).lower())
+        if w not in stopwords and len(w)>2
+    }
+    if not words:
+        return False
+    if not compiled_parts:
+        return False
+    cid=str((compiled_parts[-1] or {}).get("selected_capability") or "")
+    entry=(registry or {}).get(cid)
+    if not isinstance(entry,dict):
+        return False
+    identity=" ".join(str(x) for x in (
+        cid,
+        entry.get("name") or "",
+        entry.get("description") or "",
+        " ".join(entry.get("keywords") or []) if isinstance(entry.get("keywords"),list) else "",
+    )).lower()
+    tokens=set(re.findall(r"[a-z0-9_]+",identity))
+    return bool(tokens) and words<=tokens
+
+
 def _collect_effect_result_refs(value, out=None):
     """Every ``{"$effect_result": {...}}`` reference reachable in a value."""
     if out is None:
@@ -1184,10 +1300,23 @@ def _compile_single_goal(
         raise GoalCompilationFailure("GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH")
     best=ranked[0]
     if len(ranked)>1 and ranked[1][0]==best[0] and ranked[1][1]==best[1]:
-        raise GoalCompilationFailure(
-            "GOAL_COMPILATION_AMBIGUOUS",
-            json.dumps({"candidates":[best[2],ranked[1][2]],"score":best[0]},sort_keys=True)
+        resolved=_resolve_tie_by_executability(
+            goal,registry,root,ranked,
+            context_paths=context_paths,
+            future_clauses=future_clauses,
+            proposal_binder=proposal_binder,
+            effect_providers=effect_providers,
         )
+        if resolved is None:
+            raise GoalCompilationFailure(
+                "GOAL_COMPILATION_AMBIGUOUS",
+                json.dumps({"candidates":[best[2],ranked[1][2]],"score":best[0]},sort_keys=True)
+            )
+        best=resolved
+        # The winning slots were completed from the world, not the sentence, so
+        # the provenance label must say so -- the same label the inferred pass
+        # already uses.
+        binding_source="GOAL_STATEMENT+WORLD_BINDING"
     score,specificity,cid,entry,inputs,evidence,binding_provenance=best
     result={
         "schema":"PROJECT_BRAIN_COMPILED_CAPABILITY_PROBLEM_V1",
@@ -5188,6 +5317,29 @@ def _compile_compound_goal(goal, clauses, registry, root):
                 effect_providers=effect_providers,
             )
         except GoalCompilationFailure as exc:
+            if (
+                exc.code=="GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+                and compiled_parts
+                and _subgoal_absorbed_by_prefix(clause,compiled_parts,registry)
+            ):
+                # The sentence was split into clauses, but one action was
+                # described twice: "Read a PDF and extract its text" names a
+                # single capability whose own identity is extracting text from
+                # a PDF. The second clause matches nothing because there is
+                # nothing left to match -- the work it asks for is already in
+                # the compiled prefix. Absorb it rather than refuse a goal the
+                # machine can in fact carry out.
+                #
+                # Deliberately narrow: only when NO capability matched at all,
+                # and only when every content word of the clause is already
+                # present in the prefix capability's own identity. A clause with
+                # a real candidate is never absorbed.
+                compiled_parts.append({
+                    "index":index,"subgoal":clause,
+                    "mode":"SUBGOAL_ABSORBED_BY_COMPILED_PREFIX",
+                    "selected_capability":compiled_parts[-1].get("selected_capability"),
+                })
+                continue
             raise GoalCompilationFailure(
                 "GOAL_COMPILATION_SUBGOAL_UNRESOLVED",
                 json.dumps({
