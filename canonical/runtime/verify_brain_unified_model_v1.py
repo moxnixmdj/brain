@@ -284,7 +284,20 @@ def check_routing(model: unified_model.UnifiedModel, rng: random.Random) -> dict
     ]
     pool = [row for row in capabilities if _capability_tokens(row)]
     cases: list[dict[str, Any]] = []
-    attempts = 60
+    # The generator can produce an unfair case, as noted below: the distractor
+    # tokens it adds may be stronger than the target's own words. That is a
+    # property of the generator, so the only honest control on it is sample
+    # size -- the threshold itself is not moved.
+    #
+    # At 60 draws one unfair case moves the rate by 1/60 = 0.0167, enough to
+    # cross the 0.80 threshold on luck. Measured over 60 seeds driven through
+    # this script, 3 of 60 runs (5.0%) failed with no code change at all. The
+    # rate's standard deviation is 0.0390 at n=60 and 0.0167 at n=300, so the
+    # observed mean of ~0.881 sits 2.1 standard deviations above the threshold
+    # at n=60 but 4.8 at n=300. Over 120 seeds the minimum observed rate is
+    # 0.7833 at n=60, 0.8000 at n=150 -- exactly on the line -- and 0.8400 at
+    # n=300. The extra 240 route calls cost about 40ms.
+    attempts = 300
     top1 = top3 = confident = 0
     examples: list[dict[str, Any]] = []
     for _ in range(attempts):

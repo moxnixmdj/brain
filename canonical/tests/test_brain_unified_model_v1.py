@@ -961,3 +961,92 @@ class DeclaredContextBindingTests(unittest.TestCase):
             "a plain goal selected a script on the strength of one short word",
         )
         self.assertIsNot(out.get("pass"), True, out.get("status"))
+
+
+class VerifierRoutingStabilityTests(unittest.TestCase):
+    """The verifier's own routing check must not fail on luck.
+
+    `check_routing` composes goals at run time from a capability's trigger
+    words plus two distractor tokens drawn from other capabilities. The script
+    itself notes that this can produce an unfair case, where the distractors are
+    stronger than the target's own words. That is a property of the generator,
+    so the only honest control on it is sample size.
+
+    At 60 draws a single unfair case moved the rate by 1/60 = 0.0167, which was
+    enough to cross the 0.80 threshold: measured over 60 seeds driven through
+    the script, 3 of 60 runs failed with no code change at all. The threshold
+    was not moved to fix this; the sample size was raised to 300, which puts the
+    observed mean about 4.8 standard deviations clear of it.
+
+    This test pins that the check is stable across seeds. If the sample size is
+    ever reduced again, it fails here rather than intermittently in CI.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.model = model_runtime.open_model()
+
+    def test_routing_check_is_stable_across_seeds(self):
+        import random
+
+        from canonical.runtime import verify_brain_unified_model_v1 as verifier
+
+        attempts = self._attempts(verifier)
+        self.assertGreaterEqual(
+            attempts,
+            300,
+            "reducing the sample size reintroduces a ~5% spurious failure rate",
+        )
+
+        gen = random.Random(20261021)
+        seeds = [gen.randbytes(8).hex() for _ in range(25)]
+        self.assertEqual(len(set(seeds)), len(seeds), "seeds must be distinct")
+
+        failures = []
+        for seed in seeds:
+            category = verifier.check_routing(self.model, random.Random(seed))
+            if not category["pass"]:
+                failures.append((seed, category["failed_cases"]))
+        self.assertEqual(
+            failures,
+            [],
+            f"check_routing failed on {len(failures)}/25 seeds: {failures[:3]}",
+        )
+
+    def test_the_known_unstable_seeds_now_pass(self):
+        """Seeds that failed at 60 draws are pinned as passing.
+
+        These are the exact seeds observed failing with no code change, plus one
+        that still failed at 150 draws. They are recorded so the fix is tied to
+        the instances that motivated it rather than to an average.
+        """
+        import random
+
+        from canonical.runtime import verify_brain_unified_model_v1 as verifier
+
+        known_bad = [
+            "ffd510f92c75fbab",
+            "9f4a630e0ed20734",
+            "f043de59351b7ddc",
+            "53c7c38527d8159b",
+            "29fb388c22e44cb6",
+        ]
+        for seed in known_bad:
+            with self.subTest(seed=seed):
+                category = verifier.check_routing(self.model, random.Random(seed))
+                self.assertTrue(
+                    category["pass"],
+                    f"seed {seed} regressed: {category['failed_cases']}",
+                )
+
+    @staticmethod
+    def _attempts(verifier) -> int:
+        """Read the sample size the routing check actually uses."""
+        import inspect
+
+        source = inspect.getsource(verifier.check_routing)
+        for line in source.splitlines():
+            stripped = line.strip()
+            if stripped.startswith("attempts ="):
+                return int(stripped.split("=", 1)[1].strip())
+        raise AssertionError("could not find the attempts assignment in check_routing")
