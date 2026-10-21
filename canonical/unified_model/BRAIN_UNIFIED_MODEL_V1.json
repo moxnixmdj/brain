@@ -24406,7 +24406,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "64167002b0d0f8c16351a4bc5cfd00d2c09c3ff3e26aef1a7b722b10377716a8"
+  "value": "3828165e5a15b3e94eedefba59a59fb697365a9cc383817f90c07fc277ce3900"
  },
  "engines": [
   {
@@ -187510,7 +187510,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/CLAUSE_TIE_BROKEN_BY_THE_SENTENCE_AND_SUBGOAL_ABSORBED_BY_PREFIX_V1_20261021_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "078b3025f6154aadefcf0cd417690c8924e121aee76da854ac16adbfd8a4c65e",
+   "sha256": "33b202cbc8feb01697bfc7792bbe43e32d6e8916510fe1f9ab5025253fe4dec8",
    "status": "",
    "terms": {
     "20261021": 1,
@@ -187520,8 +187520,8 @@
     "clause_split_discards_the_words_that_disambiguate_and_duplicates_one_action_into_two": 1,
     "clause_tie_broken_by_the_sentence_and_subgoal_absorbed_by_prefix_v1_20261021_v1": 1,
     "clause_tie_broken_by_wider_sentence_then_subgoal_absorbed_by_compiled_prefix": 1,
-    "goal_sentence_clause_resolution_and_tie_breaking": 1,
-    "goals_completing_end_to_end_7_to_8_of_23_compiled_19_to_20_of_23_correct_selection_17_to_18_of_23_wrong_unchanged_at_2": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goals_completing_end_to_end_7_to_8_measured_through_live_integrated_brain_v1_run_raw_goal__ext_xlsx_create_moves_from_blocked_to_pass__benchmark_compiled_19_of_23_unchanged_correct_selection_17_of_23_unchanged_wrong_capability_2_of_23_unchanged__tests_165_to_174_with_nine_new_tests_and_no_regressions": 1,
     "prefix": 1,
     "sentence": 1,
     "subgoal": 1,
