@@ -189,8 +189,40 @@ def compose(goal,grounding,registry,compiler,root,verified_initial_facts=None):
                     +cid+":"+",".join(path_placeholders)
                 )
 
+            # A capability declaring ``proposal_bindings`` normally binds through
+            # the proposal binder. But an ``effect_result`` slot can only be
+            # filled from an upstream step *in this composition*; when the
+            # effect arrives instead as a verified initial fact, the provider
+            # map has no entry for it and the proposal binder fails closed with
+            # PROPOSAL_EFFECT_PROVIDER_MISSING -- even though the clause's own
+            # sentence names the path. Measured: adding ``effect_result`` on
+            # ``decision.synthesis.typed.stdlib:input_path`` broke
+            # test_decision_verifier_paths_use_explicit_upstream_provenance,
+            # which passes that effect as an initial fact and states the path.
+            # So take the proposal route only when every declared effect
+            # actually has a provider here; otherwise bind from the sentence,
+            # which is what the clause said. Still fail-closed: if the sentence
+            # does not name it either, ``_bind_inputs`` refuses.
+            _alias_by_effect_pre={}
+            for _item in requires_as:
+                _alias_by_effect_pre.setdefault(
+                    str(_item["effect"]), []
+                ).append(str(_item["as"]))
+            _declared_effects=[
+                str((_spec or {}).get("effect") or "").strip()
+                for _spec in (entry.get("proposal_bindings") or {}).values()
+                if isinstance(_spec, dict) and _spec.get("type") == "effect_result"
+            ]
+            _proposal_route=bool(entry.get("proposal_bindings"))
+            if _proposal_route and _declared_effects:
+                for _eff in _declared_effects:
+                    _names=[_eff]+(_alias_by_effect_pre.get(_eff) or [])
+                    if not any(provider_map.get(_n) for _n in _names):
+                        _proposal_route=False
+                        break
+
             try:
-                if entry.get("proposal_bindings"):
+                if _proposal_route:
                     inputs,binding_evidence=proposal_binder._bind_planned_inputs(
                         str(clause.get("text") or ""),
                         root,

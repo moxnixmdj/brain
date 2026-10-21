@@ -24406,7 +24406,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6ee672c2952ce0dce4067c765db07606c9e3fe59eed8a03dac73d6d506468101"
+  "value": "6fec59ed8a46e7c4c2492119be487270b568fb15120b50dcaf7ea64a7bd9a410"
  },
  "engines": [
   {
@@ -194701,7 +194701,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/grounded_executable_composition.py",
-   "sha256": "549f96c62fbede3b7ccab5eec5a520b3b9339f758bdf2eff99a1195c3db4b152",
+   "sha256": "29b66fdca247018dfbe5925d4e463f9fb9dd212afb473222e01eb9964270709a",
    "summary": "Compile verified grounding records into Brain's native capability-planner problem.",
    "symbol_count": 10,
    "symbols": [
@@ -194748,7 +194748,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/grounded_executable_composition_verify.py",
-   "sha256": "744c11efe9c4f261317ea479d64f8bf8c3f6f660a172b95ac399274f6ec3f8bd",
+   "sha256": "f6fcafcfccce822b4c7afccdebdeee094975442378c244bb53d4b3ea055404a3",
    "summary": "Independent structural verifier for grounded executable composition.",
    "symbol_count": 7,
    "symbols": [
