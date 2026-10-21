@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "7b246b232ecd1f811f53668ee6f91a46848b3b3b3655372b06cc73229dcf851f"
+  "value": "4a8d69f551f17e2d3d4cb903637563270c06e5a979e2993d7d94ad04a6eabb55"
  },
  "engines": [
   {
@@ -187980,6 +187980,38 @@
    }
   },
   {
+   "action_id": "SQLITE_VERIFIER_SUBSTRATE_DECLARED_AS_THE_STDLIB_MODULE_IT_ACTUALLY_USES_V1_20261021_V1",
+   "capability": false,
+   "date": "2026-10-21",
+   "id": "research:canonical/action_intents/FRONT_DOOR_RETAINS_EXPERIENCE_THROUGH_THE_SELF_IMPROVEMENT_MODULE_IT_SHIPPED_BUT_NEVER_CALLED_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/FRONT_DOOR_RETAINS_EXPERIENCE_THROUGH_THE_SELF_IMPROVEMENT_MODULE_IT_SHIPPED_BUT_NEVER_CALLED_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "a576a06e7b1f843d7c31f4c0660f81fbeaf2b5bfcdb21ac7d71e48e3b9a371ab",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "but": 1,
+    "called": 1,
+    "door": 1,
+    "experience": 1,
+    "front": 1,
+    "front_door_retains_experience_through_the_self_improvement_module_it_shipped_but_never_called_v1_20261022_v1": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "improvement": 1,
+    "module": 1,
+    "never": 1,
+    "retains": 1,
+    "self": 1,
+    "shipped": 1,
+    "sqlite_table_verify_against_json_records_goes_from_bound_apt_metadata_not_found_sqlite3_to_running_on_this_host_through_pythons_own_sqlite3_module__measured_by_the_failure_moving_off_the_substrate_gate_entirely_and_into_row_comparison_as_sqlite_column_unresolved_source_type__on_the_23_goal_benchmark_compiled_stays_23_of_23_correct_selection_21_of_23_wrong_capability_2_of_23_and_by_census_executed_11_of_23_and_semantic_acceptance_9_of_23_all_unchanged_so_there_is_no_regression_and_the_gain_is_a_restored_capability_not_a_moved_rate": 1,
+    "sqlite_verifier_substrate_declared_as_the_stdlib_module_it_actually_uses_v1_20261021_v1": 1,
+    "the_sqlite_verifier_was_declared_as_an_ubuntu_apt_package_so_on_a_host_without_the_sqlite3_cli_the_substrate_gate_raised_bound_apt_metadata_not_found_and_the_capability_never_ran_at_all__even_though_its_adapter_catches_filenotfounderror_and_imports_the_stdlib_module_and_its_own_entry_already_carried_optional_true_with_a_python_stdlib_fallback_and_an_optional_reason_naming_that_adapter__the_gate_read_none_of_those_fields": 1,
+    "through": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "GENERIC_TRACE_REINSPECTION_ACCEPTANCE_FOR_EVERY_INSPECTABLE_CAPABILITY_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -188500,34 +188532,6 @@
     "root2-closure-controller-v2-20261004": 1,
     "truth_repair_then_proof_compression_then_parallel_zero_reality_then_single_minimum_reality_transaction": 1,
     "v2": 1
-   }
-  },
-  {
-   "action_id": "SQLITE_VERIFIER_SUBSTRATE_DECLARED_AS_THE_STDLIB_MODULE_IT_ACTUALLY_USES_V1_20261021_V1",
-   "capability": false,
-   "date": "2026-10-21",
-   "id": "research:canonical/action_intents/SQLITE_VERIFIER_SUBSTRATE_DECLARED_AS_THE_STDLIB_MODULE_IT_ACTUALLY_USES_V1_20261021_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/SQLITE_VERIFIER_SUBSTRATE_DECLARED_AS_THE_STDLIB_MODULE_IT_ACTUALLY_USES_V1_20261021_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "ef62a2b2415f8d3699891f46b5e529b5b7c8e988feda1555dcd8706e727e15ce",
-   "status": "",
-   "terms": {
-    "20261021": 1,
-    "actually": 1,
-    "declare_the_substrate_a_capability_actually_needs__rather_than_letting_a_preferred_but_unrequired_apt_package_block_it__so_the_sqlite_verifier_is_declared_python_stdlib_sqlite3_the_way_its_sibling_create_capability_always_has_because_its_adapter_catches_filenotfounderror_and_imports_the_stdlib_module": 1,
-    "declared": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "module": 1,
-    "sqlite": 1,
-    "sqlite_table_verify_against_json_records_goes_from_bound_apt_metadata_not_found_sqlite3_to_running_on_this_host_through_pythons_own_sqlite3_module__measured_by_the_failure_moving_off_the_substrate_gate_entirely_and_into_row_comparison_as_sqlite_column_unresolved_source_type__on_the_23_goal_benchmark_compiled_stays_23_of_23_correct_selection_21_of_23_wrong_capability_2_of_23_and_by_census_executed_11_of_23_and_semantic_acceptance_9_of_23_all_unchanged_so_there_is_no_regression_and_the_gain_is_a_restored_capability_not_a_moved_rate": 1,
-    "sqlite_verifier_substrate_declared_as_the_stdlib_module_it_actually_uses_v1_20261021_v1": 1,
-    "stdlib": 1,
-    "substrate": 1,
-    "the_sqlite_verifier_was_declared_as_an_ubuntu_apt_package_so_on_a_host_without_the_sqlite3_cli_the_substrate_gate_raised_bound_apt_metadata_not_found_and_the_capability_never_ran_at_all__even_though_its_adapter_catches_filenotfounderror_and_imports_the_stdlib_module_and_its_own_entry_already_carried_optional_true_with_a_python_stdlib_fallback_and_an_optional_reason_naming_that_adapter__the_gate_read_none_of_those_fields": 1,
-    "uses": 1,
-    "v1": 2,
-    "verifier": 1
    }
   },
   {
