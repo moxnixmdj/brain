@@ -5210,21 +5210,9 @@
       ],
       "requires": [],
       "source": {
-        "origin": "Ubuntu",
-        "packages": [
-          {
-            "name": "sqlite3",
-            "sha256": "78493e56909614ec1d588c9fae1739a704d9e1a6ff65509b1f06c3e4d53ed0c3",
-            "version": "3.45.1-1ubuntu2.8",
-            "optional": true,
-            "fallback": {
-              "type": "python_stdlib",
-              "module": "sqlite3"
-            },
-            "optional_reason": "adapter canonical/runtime/bound_capabilities/sqlite_verify_cli.py catches FileNotFoundError for the sqlite3 binary and falls back to the sqlite3 module; the family using this capability passes end to end on this machine with the binary absent."
-          }
-        ],
-        "type": "apt"
+        "adapter_path": "canonical/runtime/bound_capabilities/sqlite_verify_cli.py",
+        "module": "sqlite3",
+        "type": "python_stdlib"
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
