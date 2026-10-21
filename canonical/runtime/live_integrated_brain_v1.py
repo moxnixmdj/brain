@@ -25,6 +25,12 @@ from canonical.runtime.capability_planner import PlanningFailure, plan_capabilit
 from canonical.runtime import astra_runtime, goal_compiler, goal_front_compiler_v1
 from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
 from canonical.runtime.raw_goal_archive_acceptance_v1 import verify as verify_raw_archive_acceptance
+from canonical.runtime.raw_goal_archive_compound_acceptance_v1 import (
+    GRAMMAR as RAW_ARCHIVE_COMPOUND_GRAMMAR,
+)
+from canonical.runtime.raw_goal_archive_compound_acceptance_v1 import (
+    verify as verify_raw_archive_compound_acceptance,
+)
 from canonical.runtime.runtime_cognition_credit_guard_v1 import assert_credit_path_cognition_governance
 
 SCHEMA = "PROJECT_BRAIN_LIVE_INTEGRATED_BRAIN_V1"
@@ -662,7 +668,7 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
                 and isinstance(controller.get("final_summary"), str)
                 and bool(controller.get("final_summary").strip())
             )
-            return {
+            compound_result = {
                 "schema": SCHEMA,
                 "status": (
                     "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__"
@@ -704,6 +710,40 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
                 "benchmark_specific": False,
                 "terminal_credit_delta": 0,
             }
+            # A compound plan used to hardcode acceptance to False here, which
+            # is why ``semantic_acceptance_complete`` was unreachable for every
+            # multi-clause goal no matter what the machine actually produced.
+            # Execution success is still not acceptance: the sentence's exact
+            # grammar has to match, the trace has to be the capabilities the
+            # sentence asked for in the order it asked for them, and the
+            # artifact is re-opened from disk rather than believed.
+            if passed and RAW_ARCHIVE_COMPOUND_GRAMMAR.fullmatch(goal) is not None:
+                trace = (controller or {}).get("trace")
+                if isinstance(trace, list) and trace:
+                    acceptance = verify_raw_archive_compound_acceptance(
+                        goal=goal,
+                        execution=trace,
+                        raw_contract=raw_contract,
+                        root=ROOT,
+                    )
+                    compound_result["raw_goal_acceptance"] = acceptance
+                    accepted = list(
+                        acceptance.get("accepted_obligation_ids") or []
+                    ) if isinstance(acceptance, Mapping) else []
+                    compound_result["accepted_raw_obligation_ids"] = accepted
+                    compound_result["semantic_acceptance_complete"] = (
+                        isinstance(acceptance, Mapping)
+                        and acceptance.get("semantic_acceptance_complete") is True
+                        and len(accepted) == compound_result[
+                            "raw_acceptance_obligation_count"
+                        ]
+                    )
+                    if compound_result["semantic_acceptance_complete"]:
+                        compound_result["status"] = (
+                            "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_"
+                            "ACCEPTANCE_VERIFIED"
+                        )
+            return compound_result
 
         selected = str(compiled.get("selected_capability") or "").strip()
         inputs = compiled.get("inputs")
@@ -861,6 +901,30 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
                 raw_contract=raw_contract,
                 root=ROOT,
             )
+        # A compound plan reports its work in the controller trace, not in
+        # ``execution``, so the single-row gate above can never see it -- which
+        # is why acceptance has stayed unreachable for every compound goal. The
+        # create-and-verify archive sentence asks for two capabilities and the
+        # compiler really does plan two, so its acceptance is checked against
+        # the trace instead, and the archive is re-opened from disk rather than
+        # believed.
+        #
+        # Gated on the exact grammar so no other goal's behaviour changes: a
+        # goal that does not match still gets ``acceptance is None``, exactly as
+        # before.
+        if (
+            acceptance is None
+            and result.get("pass") is True
+            and RAW_ARCHIVE_COMPOUND_GRAMMAR.fullmatch(goal) is not None
+        ):
+            trace = (result.get("controller_execution") or {}).get("trace")
+            if isinstance(trace, list) and trace:
+                acceptance = verify_raw_archive_compound_acceptance(
+                    goal=goal,
+                    execution=trace,
+                    raw_contract=raw_contract,
+                    root=ROOT,
+                )
         result["raw_goal_acceptance"] = acceptance
         result["accepted_raw_obligation_ids"] = (
             list(acceptance.get("accepted_obligation_ids") or [])
