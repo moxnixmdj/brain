@@ -773,6 +773,34 @@ def _bm25_rerank(goal,ranked):
     return [x[4] for x in out]
 
 
+def _effect_providers(registry):
+    """Which capability produces each effect, read off the registry itself.
+
+    A consumer capability declares its inputs as ``proposal_bindings`` of type
+    ``effect_result``: "this slot is filled from the output of whoever produces
+    effect X". The binder then looks the producer up in ``effect_providers`` --
+    a map the CALLER has to supply. On the single-clause path nothing supplied
+    it, so every one of those consumers was dropped before ranking with
+    ``PROPOSAL_EFFECT_PROVIDER_MISSING``, however well it matched the goal.
+
+    Nothing is inferred here. ``provides`` is already on every entry, and the
+    binder separately insists that the producer declare the exact
+    ``result_field`` the consumer names, so a producer that cannot actually
+    yield that field is still refused. The map only tells the binder which
+    capabilities exist to be asked.
+    """
+    providers={}
+    for cid,entry in sorted((registry or {}).items()):
+        if not isinstance(entry,dict):
+            continue
+        for effect in entry.get("provides") or []:
+            key=str(effect).strip()
+            if key:
+                # sorted() above makes first-writer-wins deterministic.
+                providers.setdefault(key.lower(),(cid,entry))
+    return providers
+
+
 def _rank_bindable_candidates(
     goal, registry, root, context_paths=None, future_clauses=None,
     proposal_binder=None, effect_providers=None, allow_world_binding=False
@@ -5336,4 +5364,27 @@ def compile_goal(goal, registry, root):
         return _validate_compiled_clause_coverage(
             _compile_compound_goal(goal,clauses,registry,root)
         )
-    return _compile_single_goal(goal,registry,root)
+    # Producer->consumer (``effect_result``) binding is a SECOND pass, for the
+    # same reason world binding is: enabling it unconditionally lets the nine
+    # capabilities that declare an effect_result input out-compete the plain
+    # capability the goal actually meant. Measured with it always on, the three
+    # goals it was added for were fixed but three previously-correct goals were
+    # stolen and three began refusing -- compiled 18 to 16, correct 14 to 11.
+    # So it runs only when the grounded pass found nothing at all.
+    try:
+        return _compile_single_goal(goal,registry,root)
+    except GoalCompilationFailure as first_pass_failure:
+        binder=_load_sibling_runtime_module(
+            "capability_proposal_generators.py",
+            "project_brain_direct_compiler_proposal_binder",
+        )
+        try:
+            return _compile_single_goal(
+                goal,registry,root,
+                proposal_binder=binder,
+                effect_providers=_effect_providers(registry),
+            )
+        except GoalCompilationFailure:
+            # The first pass's reason is the honest one: it describes what the
+            # goal itself lacked, not what the wider second pass also lacked.
+            raise first_pass_failure

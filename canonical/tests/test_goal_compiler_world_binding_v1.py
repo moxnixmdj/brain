@@ -834,3 +834,78 @@ class SelectionRankingTests(unittest.TestCase):
         finally:
             compiler._BM25_MODULE = saved
             compiler._BM25_LOAD_FAILED = False
+
+
+class ProducerConsumerSecondPassTests(unittest.TestCase):
+    """A capability may declare that its input is another capability's output.
+
+    Nine capabilities carry a ``proposal_bindings`` entry of type
+    ``effect_result``: "fill this slot from whoever produces effect X". The
+    binder resolves that against an ``effect_providers`` map the caller must
+    supply. The single-clause path supplied nothing, so those nine were dropped
+    before ranking with PROPOSAL_EFFECT_PROVIDER_MISSING no matter how well they
+    matched -- ``knowledge.consistency.assess`` scores 22 on its own goal while
+    the catch-all that replaced it scores 2.
+
+    Enabling it unconditionally is a measured NET LOSS (compiled 18 to 16,
+    correct 14 to 11: three goals stolen, three begun refusing), so it is a
+    second pass that runs only when the grounded pass found nothing -- the same
+    rule the file already applies to world binding.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        from canonical.runtime import live_integrated_brain_v1 as lb
+
+        cls.registry = dict(lb.load_verified_registry())
+        cls.root = str(pathlib.Path(__file__).resolve().parents[2])
+
+    def test_the_provider_map_is_read_off_the_registry_not_invented(self):
+        providers = compiler._effect_providers(self.registry)
+        self.assertIn("knowledge.observation.available", providers)
+        cid, entry = providers["knowledge.observation.available"]
+        self.assertEqual(cid, "knowledge.json.fetch.external")
+        self.assertIs(entry, self.registry[cid])
+        # Every mapping must be justified by the provider's own declaration.
+        for effect, (pcid, pentry) in providers.items():
+            self.assertIn(
+                effect, [str(x).lower() for x in (pentry.get("provides") or [])],
+                f"{pcid} mapped to {effect} which it does not declare",
+            )
+
+    def test_a_consumer_whose_producer_exists_now_compiles(self):
+        """The goal this second pass exists for.
+
+        ``decision.synthesis.verify.stdlib`` requires ``decision.synthesis.typed``,
+        which ``decision.synthesis.typed.stdlib`` produces. Before the second
+        pass this goal refused; the chain was declared in the registry all along.
+        """
+        plan = compiler.compile_goal(
+            "Verify a typed decision synthesis result.", self.registry, self.root
+        )
+        self.assertIn("decision.synthesis.verify.stdlib", str(plan.get("selected_capability")) +
+                      str([p.get("selected_capability") for p in plan.get("compiled_parts") or []]))
+
+    def test_the_second_pass_does_not_steal_a_goal_the_first_pass_already_won(self):
+        """This is the regression that made the unconditional version a net loss.
+
+        With effect_result binding always on, this goal was taken by
+        ``source.evidence.extract.objective_grounded.stdlib``. It must stay with
+        the plain capability the sentence asks for.
+        """
+        plan = compiler.compile_goal(
+            "Audit the python source and write the result as json.",
+            self.registry, self.root,
+        )
+        self.assertEqual(plan.get("selected_capability"), "python.source.audit.ast")
+
+    def test_a_consumer_with_no_producer_still_refuses(self):
+        """The map names producers; it does not manufacture them.
+
+        ``source.objective_relevance.rank.bm25`` needs
+        ``source.candidates.available``, which no capability produces. Nothing
+        in the registry can fill it, so the binder must still refuse rather
+        than invent a file.
+        """
+        providers = compiler._effect_providers(self.registry)
+        self.assertNotIn("source.candidates.available", providers)
