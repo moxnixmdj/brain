@@ -1317,3 +1317,100 @@ class SourceIndexTests(unittest.TestCase):
         status = self.model.status()
         self.assertNotIn("runtime_modules_reachable", status)
         self.assertNotIn("runtime_modules_reachable", status["counts"])
+
+
+class ResearchIndexTests(unittest.TestCase):
+    """The research record is indexed as evidence, never as capability.
+
+    Governance decisions, verification receipts and action intents are the
+    reasoning behind the capabilities -- 6256 files that were previously
+    unreachable through the model. They are indexed so `find_research` can
+    answer "where was this decided?", with the same line held as the source
+    index: a record is evidence *about* a capability, never a capability.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.model = model_runtime.open_model()
+
+    def test_the_research_corpora_are_indexed(self):
+        roots = ("canonical/governance/", "canonical/verification/", "canonical/action_intents/")
+        counts = {r: 0 for r in roots}
+        for path in self.model.research_index:
+            for r in roots:
+                if path.startswith(r):
+                    counts[r] += 1
+        for root, n in counts.items():
+            with self.subTest(root=root):
+                self.assertGreater(n, 100, f"{root} should be substantially indexed, got {n}")
+        self.assertGreater(len(self.model.research_index), 6000)
+
+    def test_no_research_record_claims_to_be_a_capability(self):
+        offenders = {
+            path: row.get("capability")
+            for path, row in self.model.research_index.items()
+            if row.get("capability") is not False
+        }
+        self.assertEqual(offenders, {}, f"{len(offenders)} records claim capability status")
+
+    def test_generated_outputs_are_excluded_so_the_compile_converges(self):
+        """The receipt is written *from* the artifact, so it must not be in it.
+
+        This is the control for a real cycle, not a hypothetical one. Indexing
+        the verification receipt inside the artifact makes the build diverge:
+        the artifact hashes the receipt, the receipt records the artifact's
+        digest, so each recompile changes the other. Measured, the digest
+        differed on every pass until these paths were excluded.
+
+        Note this is a genuine cycle and not the same as `source_index` hashing
+        the runtime module -- that converges, because the module does not embed
+        the digest.
+        """
+        for path in sorted(compiler._GENERATED_OUTPUTS):
+            with self.subTest(path=path):
+                self.assertNotIn(path, self.model.research_index)
+                self.assertNotIn(path, self.model.source_index)
+
+    def test_the_compile_is_a_fixed_point(self):
+        """Recompiling must not move the digest.
+
+        The artifact hashes files it lives beside, so a self-referential index
+        shows up here rather than in CI. This is the end-to-end form of the
+        exclusion test above.
+        """
+        model = compiler.compile_model()
+        again = compiler.compile_model()
+        self.assertEqual(
+            model["digest"]["value"],
+            again["digest"]["value"],
+            "compiling twice produced different digests -- the build is not a fixed point",
+        )
+        self.assertEqual(model["digest"]["value"], self.model.digest)
+
+    def test_find_research_ranks_by_rare_terms_not_ubiquitous_ones(self):
+        """'v1' occurs in 79% of these records, so raw overlap would be noise."""
+        df_v1 = self.model._research_df.get("v1", 0)
+        total = len(self.model.research_index)
+        self.assertGreater(df_v1, total * 0.5, "expected v1 to be ubiquitous")
+
+        result = self.model.find_research("verifier routing sample size", top_k=5)
+        self.assertTrue(result["candidates"])
+        self.assertIn("EVIDENCE_NOT_CAPABILITY", result["reason"])
+        for row in result["candidates"]:
+            self.assertFalse(row["capability"])
+        best = result["best"]["path"].casefold()
+        self.assertIn("sample_size", best)
+
+    def test_find_research_is_not_reachable_from_solve(self):
+        indexed = set(self.model.research_index)
+        self.assertTrue(indexed)
+        for path in list(indexed)[:50]:
+            self.assertNotIn(path, self.model.capabilities)
+
+    def test_status_reports_the_research_index(self):
+        counts = self.model.status()["counts"]
+        self.assertEqual(
+            int(counts.get("research_index_records", -1)),
+            len(self.model.research_index),
+        )
+        self.assertEqual(int(counts["capabilities"]), 363)
