@@ -4619,6 +4619,74 @@ def _compile_knowledge_revalidation(clause,compiled_parts,future_clauses=None):
     }
 
 
+def _attribute_chained_parts_to_clauses(clauses, parts, registry):
+    """Attribute a producer-chain plan's steps back to the sentence's clauses.
+
+    A clause split compiles one capability per clause, so its ``compiled_parts``
+    line up 1:1 with ``clauses`` and coverage is trivially complete. A chained
+    plan is the other shape: it resolves the sentence's own dependency order, so
+    "Extract evidence from a source, then rank it, then bind it to a claim"
+    needs enumerate -> rank -> extract -> bind -- four steps for three clauses,
+    because extracting objective-grounded evidence requires ranked candidates
+    first.
+
+    The clause ledger is about *the sentence being accounted for*, not about how
+    many steps execution takes. So each clause is attributed to the step that
+    actually answers it, scored with the same ``_score`` the rest of the
+    compiler uses, and each clause must win a DISTINCT step. Steps that answer
+    no clause -- the prerequisites the dependency order forced -- stay in the
+    execution chain and in ``effect_producer_chain``, but are not claimed as
+    clause coverage, because they are not what any clause asked for.
+
+    Returns one part per clause index, or ``None`` when the attribution is not
+    clean. Returning ``None`` is the honest outcome: an unattributable clause
+    means the sentence is not accounted for and the caller refuses exactly as
+    it did before.
+    """
+    if not isinstance(clauses, list) or not clauses:
+        return None
+    if not isinstance(parts, list) or not parts:
+        return None
+    scored = []
+    for clause_index, clause in enumerate(clauses):
+        text = clause.get("text") if isinstance(clause, dict) else clause
+        if not isinstance(text, str) or not text.strip():
+            return None
+        best = None
+        for part_index, part in enumerate(parts):
+            if not isinstance(part, dict):
+                return None
+            cid = str(part.get("selected_capability") or "")
+            entry = (registry or {}).get(cid)
+            if not isinstance(entry, dict):
+                return None
+            score = _score(text, cid, entry)[0]
+            if best is None or score > best[0]:
+                best = (score, part_index)
+        if best is None or best[0] <= 0:
+            return None
+        scored.append((clause_index, best[1], best[0]))
+    # Each clause must win a distinct step. Two clauses collapsing onto one
+    # step means the chain does not actually cover the sentence.
+    if len({s[1] for s in scored}) != len(scored):
+        return None
+    attributed = []
+    for clause_index, part_index, score in sorted(scored):
+        part = parts[part_index]
+        clause = clauses[clause_index]
+        text = clause.get("text") if isinstance(clause, dict) else clause
+        attributed.append({
+            "index": clause_index,
+            "subgoal": text,
+            "mode": "EFFECT_PRODUCER_CHAIN_STEP",
+            "selected_capability": part.get("selected_capability"),
+            "inputs": part.get("inputs"),
+            "score": score,
+            "target_effects": part.get("target_effects") or [],
+        })
+    return attributed
+
+
 def _compile_compound_goal(goal, clauses, registry, root):
     actions=[]
     compiled_parts=[]
@@ -5813,9 +5881,53 @@ def compile_goal(goal, registry, root):
     if runtime_fallback is not None:
         return _validate_compiled_clause_coverage(runtime_fallback)
     if len(clauses)>1:
-        return _validate_compiled_clause_coverage(
-            _compile_compound_goal(goal,clauses,registry,root)
-        )
+        try:
+            return _validate_compiled_clause_coverage(
+                _compile_compound_goal(goal,clauses,registry,root)
+            )
+        except GoalCompilationFailure as compound_failure:
+            # The clause split compiles each clause against producers already
+            # in the plan (_compile_compound_goal starts effect_providers={}),
+            # so a clause whose correct capability needs an upstream producer
+            # can only fall back to a weaker one -- and then the sentence's
+            # real dependency order can never be completed. The chained pass
+            # resolves that order instead, scoring 30 against the grounded
+            # single pass's 19 on "Extract evidence from a source, then rank
+            # it, then bind it to a claim", with the full
+            # enumerate -> rank -> extract -> bind chain.
+            #
+            # This runs ONLY where the split has already failed, so it cannot
+            # take a goal the split was answering. And it is refused unless
+            # every clause wins a distinct step: an incomplete attribution
+            # re-raises the split's original, honest reason.
+            if compound_failure.code!="GOAL_COMPILATION_SUBGOAL_UNRESOLVED":
+                raise
+            try:
+                chained=_compile_single_goal(
+                    goal,registry,root,
+                    proposal_binder=_load_sibling_runtime_module(
+                        "capability_proposal_generators.py",
+                        "project_brain_direct_compiler_proposal_binder",
+                    ),
+                    effect_providers=_effect_providers(registry),
+                    attach_producer_steps=True,
+                )
+            except GoalCompilationFailure:
+                raise compound_failure
+            attributed=_attribute_chained_parts_to_clauses(
+                clauses,chained.get("compiled_parts"),registry
+            )
+            if attributed is None:
+                raise compound_failure
+            covered=dict(chained)
+            covered["clauses"]=[
+                c if isinstance(c,dict) else {"text":c} for c in clauses
+            ]
+            covered["compiled_parts"]=attributed
+            covered["effect_producer_chain_steps"]=(
+                chained.get("effect_producer_chain") or []
+            )
+            return _validate_compiled_clause_coverage(covered)
     # Producer->consumer (``effect_result``) binding reaches nine capabilities
     # that the grounded pass cannot, because their slots are filled from another
     # capability's output. Two ways to use it have both been measured:
