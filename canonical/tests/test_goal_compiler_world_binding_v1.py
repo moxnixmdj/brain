@@ -385,8 +385,30 @@ class EndToEndExecutionTests(unittest.TestCase):
             self.assertTrue(
                 str(result.get("status", "")).startswith(
                     "PASS__RAW_GOAL_COMPILED_PLANNED_EXECUTED"
+                )
+                or str(result.get("status", "")) == (
+                    "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
                 ),
                 result.get("status"),
+            )
+            # Acceptance used to be structurally unreachable here, so this test
+            # could only assert the "receipts still required" status. It is
+            # reachable now, and the stronger claim is required rather than
+            # permitted: every obligation discharged by an artifact that was
+            # re-opened from disk, never by a flag the producer set itself.
+            self.assertIs(
+                result.get("semantic_acceptance_complete"), True,
+                result.get("status"),
+            )
+            self.assertEqual(
+                len(result.get("accepted_raw_obligation_ids") or []),
+                result.get("raw_acceptance_obligation_count"),
+            )
+            acceptance = result.get("raw_goal_acceptance") or {}
+            self.assertIs(acceptance.get("independent_reinspection"), True)
+            self.assertEqual(
+                acceptance.get("verified_capability_chain"),
+                ["python.source.audit.ast"],
             )
             self.assertEqual(result.get("selected_plan"), ["python.source.audit.ast"])
 

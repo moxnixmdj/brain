@@ -1,0 +1,673 @@
+"""Generic raw-goal acceptance: every claimed effect is re-opened from disk.
+
+Why this module exists
+----------------------
+Before this, raw-goal acceptance was keyed to ONE exact sentence, so 10 of the
+11 goals the machine actually executes finished with no independent check at
+all: ``semantic_acceptance_complete`` was ``False`` even though the controller
+had really run and really written artifacts.
+
+Execution success is a claim. Acceptance is a measurement. This module measures.
+
+The rule is deliberately asymmetric:
+
+* A capability with **no** registered re-inspector can never be accepted
+  (``NO_INDEPENDENT_REINSPECTION_FOR:<cid>``). Acceptance therefore grows only
+  when someone writes a real inspector, never when someone trusts a flag.
+* ``output_verified`` / ``verified`` in a result are **not** evidence. They are
+  only used to refuse early when the producer itself said ``False``.
+* Every inspector opens bytes: the tar is re-opened with :mod:`tarfile`, the
+  xlsx and docx are re-opened as OOXML packages, the PDF is re-extracted, the
+  JSON artifacts are re-parsed, and every candidate the ranker scored is
+  required to match the sha256 of a real file in the repository.
+* Every path is required to resolve inside the repository, and every declared
+  output sha256 is recomputed from the file on disk.
+
+Nothing here calls a model. Nothing here spends. Everything fails closed.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import re
+import tarfile
+import zipfile
+from collections.abc import Mapping
+from pathlib import Path
+from typing import Any, Callable
+
+SCHEMA = "PROJECT_BRAIN_RAW_GOAL_TRACE_ACCEPTANCE_V1"
+ABSORBED_MODE = "SUBGOAL_ABSORBED_BY_COMPILED_PREFIX"
+DOCX_NS = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
+
+# Argument names that carry a path, split by role. A step's outputs must exist
+# on disk; its inputs must exist too, because a step cannot have consumed a
+# file that was not there.
+_PATH_ARGS = (
+    "output_path", "path", "json_path", "archive_path", "manifest_path",
+    "input_path", "extraction_path", "result_path", "source_json_path",
+)
+_ROOT_ARGS = ("source_root", "search_root")
+
+Inspector = Callable[[Mapping[str, Any], Mapping[str, Any], Path], tuple[bool, str, dict]]
+
+
+def _digest(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
+def _unresolved(reason: str, **extra: Any) -> dict[str, Any]:
+    out = {
+        "schema": SCHEMA,
+        "status": "RAW_GOAL_ACCEPTANCE_UNRESOLVED",
+        "pass": False,
+        "reason": reason,
+        "semantic_acceptance_complete": False,
+        "terminal_authority": False,
+        "accepted_obligation_ids": [],
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0,
+    }
+    out.update(extra)
+    return out
+
+
+def _inside(root: Path, relative: Any) -> Path | None:
+    """Resolve a repository-relative path, refusing anything outside the repo."""
+    if not isinstance(relative, str) or not relative.strip():
+        return None
+    candidate = (root / relative).resolve()
+    try:
+        candidate.relative_to(root.resolve())
+    except ValueError:
+        return None
+    return candidate
+
+
+def _rel(path: Path, root: Path) -> str:
+    try:
+        return str(path.resolve().relative_to(root.resolve()))
+    except ValueError:
+        return str(path)
+
+
+def _json(path: Path) -> Any:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError, UnicodeDecodeError):
+        return None
+
+
+def _canonical_json_sha256(path: Path) -> str | None:
+    """Digest of a JSON file's canonical form.
+
+    The decision capabilities digest the *parsed content*, not the raw bytes,
+    so an inspector that hashed the file would disagree with an honest
+    producer. Content equality is the stronger claim anyway: it survives
+    re-serialisation and still fails the moment the evidence changes.
+    """
+    data = _json(path)
+    if data is None:
+        return None
+    try:
+        canonical = json.dumps(data, sort_keys=True, separators=(",", ":"))
+    except (TypeError, ValueError):
+        return None
+    return _digest(canonical.encode("utf-8"))
+
+
+def _alternative_ids(alternatives: Any) -> set[str]:
+    """Alternative identifiers, whether the evidence file spells them as
+    bare strings or as ``{"id": ..., "label": ...}`` records."""
+    ids: set[str] = set()
+    if not isinstance(alternatives, list):
+        return ids
+    for row in alternatives:
+        if isinstance(row, str):
+            ids.add(row)
+        elif isinstance(row, Mapping) and isinstance(row.get("id"), str):
+            ids.add(row["id"])
+    return ids
+
+
+def _action_rows(trace: Any) -> list[dict[str, Any]]:
+    """The capability actions of a controller trace, in execution order."""
+    if not isinstance(trace, list):
+        return []
+    rows = []
+    for row in trace:
+        if not isinstance(row, Mapping):
+            continue
+        plan = row.get("plan")
+        args = (plan or {}).get("args") if isinstance(plan, Mapping) else None
+        if isinstance(args, Mapping) and args.get("capability_id"):
+            result = row.get("result")
+            rows.append({
+                "args": dict(args),
+                "result": dict(result) if isinstance(result, Mapping) else {},
+            })
+    return rows
+
+
+def _trace_is_finished(trace: Any) -> bool:
+    """The controller must have reached its finish row, not stopped mid-plan."""
+    if not isinstance(trace, list) or not trace:
+        return False
+    last = trace[-1]
+    if not isinstance(last, Mapping):
+        return False
+    result = last.get("result")
+    return isinstance(result, Mapping) and result.get("type") == "finish"
+
+
+def _plan_chain(compiled: Any) -> list[str]:
+    """What the sentence asked for, in plan order, without absorbed clauses.
+
+    A chained plan legitimately runs MORE steps than the sentence has clauses,
+    because prerequisite producers are inserted. Those must not be counted as
+    clause coverage, and absorbed subgoals must not be counted as extra steps.
+    """
+    if not isinstance(compiled, Mapping):
+        return []
+    parts = compiled.get("compiled_parts")
+    chain: list[str] = []
+    if isinstance(parts, list) and parts:
+        for part in parts:
+            if not isinstance(part, Mapping):
+                continue
+            if part.get("mode") == ABSORBED_MODE:
+                continue
+            cid = part.get("selected_capability")
+            if isinstance(cid, dict):
+                cid = cid.get("capability_id")
+            if cid:
+                chain.append(str(cid))
+        return chain
+    single = compiled.get("selected_capability")
+    if isinstance(single, dict):
+        single = single.get("capability_id")
+    return [str(single)] if single else []
+
+
+# --------------------------------------------------------------------------
+# Independent re-inspectors. Each one opens the bytes and compares them with
+# what the producer claimed. Returning ``(False, reason, {})`` refuses.
+# --------------------------------------------------------------------------
+
+def _inspect_pdf_extract_text(args, result, root):
+    source = _inside(root, args.get("path"))
+    if source is None or not source.is_file():
+        return False, "PDF_SOURCE_ABSENT_FROM_DISK", {}
+    try:
+        import pypdf  # the capability's own declared substrate, re-used
+    except Exception:
+        return False, "PDF_REINSPECTION_SUBSTRATE_UNAVAILABLE", {}
+    try:
+        reader = pypdf.PdfReader(str(source))
+        pages = len(reader.pages)
+        text = "".join((page.extract_text() or "") for page in reader.pages)
+    except Exception:
+        return False, "PDF_NOT_A_READABLE_PDF", {}
+    if pages != result.get("pages_total"):
+        return False, "PDF_PAGE_COUNT_MISMATCH", {
+            "reopened_pages": pages, "claimed_pages": result.get("pages_total")}
+    if _digest(text.encode("utf-8")) != result.get("text_sha256"):
+        return False, "PDF_TEXT_SHA256_MISMATCH", {}
+    return True, "", {
+        "pages_reopened": pages,
+        "text_bytes_reextracted": len(text.encode("utf-8")),
+        "text_sha256_recomputed": True,
+    }
+
+
+def _inspect_python_source_audit(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "AUDIT_OUTPUT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "AUDIT_OUTPUT_NOT_A_JSON_OBJECT", {}
+    files = data.get("files")
+    if not isinstance(files, list):
+        return False, "AUDIT_OUTPUT_HAS_NO_FILE_LEDGER", {}
+    totals = data.get("totals")
+    if not isinstance(totals, dict):
+        return False, "AUDIT_OUTPUT_HAS_NO_TOTALS", {}
+    if len(files) != result.get("file_count") or totals.get("files") != result.get("file_count"):
+        return False, "AUDIT_FILE_COUNT_MISMATCH", {
+            "ledger_files": len(files), "totals_files": totals.get("files"),
+            "claimed": result.get("file_count")}
+    if totals.get("classes") != result.get("class_count"):
+        return False, "AUDIT_CLASS_COUNT_MISMATCH", {}
+    if totals.get("functions") != result.get("function_count"):
+        return False, "AUDIT_FUNCTION_COUNT_MISMATCH", {}
+    if totals.get("distinct_imported_modules") != result.get("distinct_imported_module_count"):
+        return False, "AUDIT_IMPORT_COUNT_MISMATCH", {}
+    unparseable = data.get("unparseable")
+    if not isinstance(unparseable, list) or len(unparseable) != result.get("unparseable_count"):
+        return False, "AUDIT_UNPARSEABLE_COUNT_MISMATCH", {}
+    # Every file in the ledger must really exist, with exactly those bytes.
+    audited = 0
+    for row in files:
+        if not isinstance(row, Mapping):
+            return False, "AUDIT_LEDGER_ROW_INVALID", {}
+        path = _inside(root, row.get("path"))
+        if path is None or not path.is_file():
+            return False, "AUDIT_LEDGER_FILE_ABSENT_FROM_REPOSITORY", {}
+        if row.get("sha256") and _digest(path.read_bytes()) != row["sha256"]:
+            return False, "AUDIT_LEDGER_FILE_SHA256_MISMATCH", {}
+        audited += 1
+    return True, "", {"ledger_files_rehashed": audited,
+                     "totals_reconciled": True}
+
+
+def _inspect_archive_verify(args, result, root):
+    archive = _inside(root, args.get("archive_path"))
+    manifest = _inside(root, args.get("manifest_path"))
+    if archive is None or not archive.is_file():
+        return False, "ARCHIVE_ABSENT_FROM_DISK", {}
+    if manifest is None or not manifest.is_file():
+        return False, "MANIFEST_ABSENT_FROM_DISK", {}
+    try:
+        with tarfile.open(archive, "r:gz") as handle:
+            members = sorted(handle.getnames())
+    except (tarfile.TarError, OSError, EOFError):
+        return False, "ARCHIVE_NOT_A_READABLE_GZIP_TAR", {}
+    if members != sorted(result.get("members") or []):
+        return False, "ARCHIVE_MEMBERS_MISMATCH", {
+            "reopened": members, "claimed": sorted(result.get("members") or [])}
+    if len(members) != result.get("member_count"):
+        return False, "ARCHIVE_MEMBER_COUNT_MISMATCH", {}
+    if not members:
+        return False, "ARCHIVE_HAS_NO_MEMBERS", {}
+    for name in members:
+        member = _inside(root, name)
+        if member is None or not member.is_file():
+            return False, "ARCHIVE_MEMBER_ABSENT_FROM_REPOSITORY", {}
+    declared = result.get("archive_path")
+    if declared is not None and declared != args.get("archive_path"):
+        return False, "ARCHIVE_RESULT_PATH_MISMATCH", {}
+    return True, "", {"archive_reopened": True, "members_relisted": len(members),
+                      "archive_sha256": _digest(archive.read_bytes())}
+
+
+def _inspect_xlsx_create(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "XLSX_OUTPUT_ABSENT_FROM_DISK", {}
+    blob = out.read_bytes()
+    if len(blob) != result.get("output_bytes"):
+        return False, "XLSX_OUTPUT_BYTE_COUNT_MISMATCH", {}
+    try:
+        package = zipfile.ZipFile(out)
+        names = package.namelist()
+        sheet = package.read("xl/worksheets/sheet1.xml").decode("utf-8")
+    except (zipfile.BadZipFile, KeyError, OSError, UnicodeDecodeError):
+        return False, "XLSX_NOT_A_READABLE_OOXML_PACKAGE", {}
+    if "xl/workbook.xml" not in names:
+        return False, "XLSX_PACKAGE_HAS_NO_WORKBOOK", {}
+    rows = len(re.findall(r"<row[\s>]", sheet))
+    # The producer reports data rows; the sheet also carries the header row.
+    if rows != int(result.get("row_count") or 0) + 1:
+        return False, "XLSX_ROW_COUNT_MISMATCH", {
+            "sheet_rows": rows, "claimed_data_rows": result.get("row_count")}
+    first_row = sheet.split("</row>")[0]
+    cells = len(re.findall(r"<c[\s>]", first_row))
+    if cells != result.get("column_count"):
+        return False, "XLSX_COLUMN_COUNT_MISMATCH", {
+            "sheet_columns": cells, "claimed": result.get("column_count")}
+    return True, "", {"ooxml_package_reopened": True, "sheet_rows": rows,
+                      "sheet_columns": cells}
+
+
+def _inspect_docx_verify(args, result, root):
+    import xml.etree.ElementTree as ET
+
+    doc = _inside(root, args.get("path"))
+    if doc is None or not doc.is_file():
+        return False, "DOCX_ABSENT_FROM_DISK", {}
+    try:
+        package = zipfile.ZipFile(doc)
+        xml_bytes = package.read("word/document.xml")
+        body = ET.fromstring(xml_bytes).find(DOCX_NS + "body")
+    except (zipfile.BadZipFile, KeyError, OSError, ET.ParseError):
+        return False, "DOCX_NOT_A_READABLE_OOXML_PACKAGE", {}
+    if body is None:
+        return False, "DOCX_PACKAGE_HAS_NO_BODY", {}
+    paragraphs = [
+        "".join(node.text or "" for node in para.iter(DOCX_NS + "t"))
+        for para in body.iter(DOCX_NS + "p")
+    ]
+    observed = result.get("observed_paragraphs")
+    if not isinstance(observed, list):
+        return False, "DOCX_OBSERVED_PARAGRAPHS_MISSING", {}
+    for expected in observed:
+        if expected not in paragraphs:
+            return False, "DOCX_OBSERVED_PARAGRAPH_ABSENT_FROM_FILE", {}
+    tables = [
+        [["".join(node.text or "" for node in cell.iter(DOCX_NS + "t"))
+          for cell in tr.iter(DOCX_NS + "tc")]
+         for tr in table.iter(DOCX_NS + "tr")]
+        for table in body.iter(DOCX_NS + "tbl")
+    ]
+    claimed_tables = result.get("observed_tables")
+    if not isinstance(claimed_tables, list) or claimed_tables != tables:
+        return False, "DOCX_OBSERVED_TABLE_MISMATCH", {}
+    if result.get("verified") is not True:
+        return False, "DOCX_VERIFY_STEP_NOT_VERIFIED", {}
+    return True, "", {"ooxml_package_reopened": True,
+                      "paragraphs_in_file": len(paragraphs),
+                      "tables_reparsed": len(tables)}
+
+
+def _inspect_candidates_enumerate(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "CANDIDATE_OUTPUT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict) or not isinstance(data.get("candidates"), list):
+        return False, "CANDIDATE_OUTPUT_NOT_A_JSON_CANDIDATE_LIST", {}
+    candidates = data["candidates"]
+    if len(candidates) != result.get("candidate_count"):
+        return False, "CANDIDATE_COUNT_MISMATCH", {}
+    if not candidates:
+        return False, "CANDIDATE_LIST_IS_EMPTY", {}
+    search_root = _inside(root, args.get("search_root"))
+    pattern = args.get("glob")
+    if search_root is None or not search_root.is_dir() or not isinstance(pattern, str):
+        return False, "CANDIDATE_SEARCH_ROOT_INVALID", {}
+    try:
+        files = [p for p in search_root.glob(pattern) if p.is_file()]
+    except (OSError, ValueError):
+        return False, "CANDIDATE_SEARCH_GLOB_FAILED", {}
+    if len(candidates) > len(files):
+        return False, "CANDIDATE_COUNT_EXCEEDS_REPOSITORY_FILES", {
+            "claimed": len(candidates), "files_matching_glob": len(files)}
+    # Content, not names: every candidate must be a real file with those bytes.
+    digests = {_digest(p.read_bytes()) for p in files}
+    for cand in candidates:
+        if not isinstance(cand, Mapping) or cand.get("sha256") not in digests:
+            return False, "CANDIDATE_CONTENT_ABSENT_FROM_REPOSITORY", {}
+    return True, "", {"candidates_content_reverified": len(candidates),
+                      "files_matching_glob": len(files),
+                      "enumeration_truncated": len(candidates) != len(files)}
+
+
+def _inspect_relevance_rank(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "RANK_OUTPUT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict) or not isinstance(data.get("ranked_candidates"), list):
+        return False, "RANK_OUTPUT_NOT_A_JSON_RANKING", {}
+    ranked = data["ranked_candidates"]
+    if len(ranked) != result.get("candidate_count"):
+        return False, "RANK_CANDIDATE_COUNT_MISMATCH", {}
+    if not ranked:
+        return False, "RANK_OUTPUT_IS_EMPTY", {}
+    scores: list[float] = []
+    indexes: list[int] = []
+    for row in ranked:
+        if not isinstance(row, Mapping):
+            return False, "RANK_ROW_INVALID", {}
+        score = row.get("lexical_relevance_score")
+        index = row.get("original_index")
+        if not isinstance(score, (int, float)) or not isinstance(index, int):
+            return False, "RANK_ROW_MISSING_SCORE_OR_INDEX", {}
+        scores.append(float(score))
+        indexes.append(index)
+    if any(scores[i] < scores[i + 1] for i in range(len(scores) - 1)):
+        return False, "RANK_ORDER_NOT_MONOTONE_NON_INCREASING", {}
+    if len(set(indexes)) != len(indexes) or min(indexes) < 0 \
+            or max(indexes) >= len(ranked):
+        return False, "RANK_ORIGINAL_INDEXES_INVALID", {}
+    # The ranker must have scored the candidates the enumerator produced.
+    upstream = _inside(root, args.get("input_path"))
+    if upstream is None or not upstream.is_file():
+        return False, "RANK_INPUT_ABSENT_FROM_DISK", {}
+    source = _json(upstream)
+    if not isinstance(source, dict) \
+            or source.get("candidate_count") != result.get("candidate_count"):
+        return False, "RANK_INPUT_CANDIDATE_COUNT_MISMATCH", {}
+    return True, "", {"ranked_candidates_reparsed": len(ranked),
+                      "ranking_monotone": True,
+                      "upstream_candidate_count_reconciled": True}
+
+
+def _inspect_decision_locate(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "DECISION_EVIDENCE_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "DECISION_EVIDENCE_NOT_A_JSON_OBJECT", {}
+    alternatives = data.get("alternatives")
+    evidence = data.get("evidence")
+    if not isinstance(alternatives, list) or len(alternatives) != result.get("alternative_count"):
+        return False, "DECISION_ALTERNATIVE_COUNT_MISMATCH", {}
+    if not isinstance(evidence, list) or len(evidence) != result.get("evidence_count"):
+        return False, "DECISION_EVIDENCE_COUNT_MISMATCH", {}
+    if not alternatives:
+        return False, "DECISION_HAS_NO_ALTERNATIVES", {}
+    # Every evidence row must be about an alternative the file actually lists.
+    ids = _alternative_ids(alternatives)
+    if len(ids) != len(alternatives):
+        return False, "DECISION_ALTERNATIVE_IDS_NOT_DISTINCT", {}
+    for row in evidence:
+        if not isinstance(row, Mapping) or row.get("alternative") not in ids:
+            return False, "DECISION_EVIDENCE_REFERENCES_UNKNOWN_ALTERNATIVE", {}
+    return True, "", {"alternatives_reparsed": len(alternatives),
+                      "evidence_reparsed": len(evidence),
+                      "evidence_alternatives_reconciled": True,
+                      "decision_id": data.get("decision_id")}
+
+
+def _inspect_decision_synthesis(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "DECISION_SYNTHESIS_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "DECISION_SYNTHESIS_NOT_A_JSON_OBJECT", {}
+    upstream = _inside(root, args.get("input_path"))
+    if upstream is None or not upstream.is_file():
+        return False, "DECISION_SYNTHESIS_INPUT_ABSENT_FROM_DISK", {}
+    # The synthesis must declare the digest of the evidence it really read.
+    expected = _canonical_json_sha256(upstream)
+    if expected is None or data.get("input_sha256") != expected:
+        return False, "DECISION_SYNTHESIS_INPUT_SHA256_MISMATCH", {}
+    source = _json(upstream)
+    ids = _alternative_ids((source or {}).get("alternatives") if isinstance(source, dict) else None)
+    chosen = result.get("selected_alternative")
+    if not ids or chosen not in ids:
+        return False, "DECISION_SELECTED_ALTERNATIVE_NOT_IN_EVIDENCE", {}
+    if data.get("selected_alternative") != chosen:
+        return False, "DECISION_SYNTHESIS_SELECTED_ALTERNATIVE_MISMATCH", {}
+    return True, "", {"synthesis_reopened": True,
+                      "input_sha256_recomputed": True,
+                      "selected_alternative": chosen}
+
+
+def _inspect_decision_verify(args, result, root):
+    produced = _inside(root, args.get("result_path"))
+    if produced is None or not produced.is_file():
+        return False, "DECISION_VERIFY_RESULT_ABSENT_FROM_DISK", {}
+    data = _json(produced)
+    if not isinstance(data, dict):
+        return False, "DECISION_VERIFY_RESULT_NOT_A_JSON_OBJECT", {}
+    if data.get("decision_id") != result.get("decision_id"):
+        return False, "DECISION_VERIFY_DECISION_ID_MISMATCH", {}
+    if data.get("selected_alternative") != result.get("selected_alternative"):
+        return False, "DECISION_VERIFY_SELECTED_ALTERNATIVE_MISMATCH", {}
+    if result.get("producer_independent") is not True:
+        return False, "DECISION_VERIFIER_NOT_PRODUCER_INDEPENDENT", {}
+    return True, "", {"verified_artifact_reopened": True,
+                      "decision_id_reconciled": result.get("decision_id")}
+
+
+INSPECTORS: dict[str, Inspector] = {
+    "pdf.extract.text.pypdf": _inspect_pdf_extract_text,
+    "python.source.audit.ast": _inspect_python_source_audit,
+    "archive.verify.tar_gz.gnu": _inspect_archive_verify,
+    "xlsx.table.create_from_json_records": _inspect_xlsx_create,
+    "docx.document.verify.intent_ooxml": _inspect_docx_verify,
+    "source.candidates.enumerate.stdlib": _inspect_candidates_enumerate,
+    "source.objective_relevance.rank.bm25": _inspect_relevance_rank,
+    "structured.decision_evidence.locate.stdlib": _inspect_decision_locate,
+    "decision.synthesis.typed.stdlib": _inspect_decision_synthesis,
+    "decision.synthesis.verify.stdlib": _inspect_decision_verify,
+}
+
+
+def _consumed_downstream(rows: list[dict], index: int, root: Path) -> bool:
+    """True when a later step reads what this step wrote.
+
+    A prerequisite producer the sentence never mentioned is only legitimate if
+    something downstream actually consumed its output. Otherwise the plan did
+    work the sentence did not ask for and nothing used it.
+    """
+    produced: set[str] = set()
+    for name in _PATH_ARGS:
+        value = rows[index]["args"].get(name)
+        if isinstance(value, str) and value.strip():
+            produced.add(value)
+    if not produced:
+        return False
+    for later in rows[index + 1:]:
+        for name in _PATH_ARGS:
+            value = later["args"].get(name)
+            if isinstance(value, str) and value in produced:
+                return True
+    return False
+
+
+def verify(
+    *,
+    goal: str,
+    compiled_plan: Any = None,
+    execution: Any = None,
+    raw_contract: Mapping[str, Any],
+    root: Path,
+) -> dict[str, Any]:
+    """Accept only after the contract, the plan, the trace and the bytes agree."""
+    try:
+        if not isinstance(goal, str) or not goal.strip():
+            return _unresolved("RAW_GOAL_INVALID")
+        if not isinstance(raw_contract, Mapping) or raw_contract.get("pass") is not True:
+            return _unresolved("RAW_TASK_CONTRACT_NOT_VERIFIED")
+        if raw_contract.get("task_sha256") != _digest(goal.encode("utf-8")):
+            return _unresolved("RAW_GOAL_HASH_MISMATCH")
+        acceptance_contract = raw_contract.get("acceptance_contract")
+        if not isinstance(acceptance_contract, Mapping):
+            return _unresolved("ACCEPTANCE_CONTRACT_MISSING")
+        obligations = acceptance_contract.get("obligations")
+        if not isinstance(obligations, list) or not obligations:
+            return _unresolved("RAW_OBLIGATIONS_MISSING")
+        ids = [o.get("obligation_id") for o in obligations if isinstance(o, Mapping)]
+        if (
+            len(ids) != len(obligations)
+            or not all(isinstance(x, str) and x for x in ids)
+            or len(set(ids)) != len(ids)
+            or acceptance_contract.get("required_obligation_ids") != ids
+            or any(
+                o.get("task_sha256") != raw_contract["task_sha256"] for o in obligations
+            )
+        ):
+            return _unresolved("RAW_OBLIGATION_BINDING_INVALID")
+
+        if not _trace_is_finished(execution):
+            return _unresolved("TRACE_DID_NOT_REACH_FINISH")
+        rows = _action_rows(execution)
+        if not rows:
+            return _unresolved("TRACE_HAS_NO_CAPABILITY_ACTIONS")
+
+        # --- the trace must be the plan the sentence compiled to -----------
+        chain = _plan_chain(compiled_plan)
+        if not chain:
+            return _unresolved("COMPILED_PLAN_HAS_NO_SELECTED_CAPABILITY")
+        executed = [r["args"].get("capability_id") for r in rows]
+        missing = [cid for cid in chain if cid not in executed]
+        if missing:
+            return _unresolved("PLAN_CAPABILITY_ABSENT_FROM_TRACE",
+                               missing_capabilities=missing)
+        if executed[-1] != chain[-1]:
+            return _unresolved("TRACE_DOES_NOT_END_WITH_THE_PLANS_LAST_CAPABILITY",
+                               last_executed=executed[-1], planned_last=chain[-1])
+        for index, cid in enumerate(executed):
+            if cid in chain:
+                continue
+            if not _consumed_downstream(rows, index, root):
+                return _unresolved("UNCONSUMED_STEP_THE_SENTENCE_DID_NOT_ASK_FOR",
+                                   capability_id=cid)
+
+        # --- every path must be real, every declared digest must match -----
+        for row in rows:
+            cid = row["args"].get("capability_id")
+            for name in _PATH_ARGS:
+                value = row["args"].get(name)
+                if not isinstance(value, str) or not value.strip():
+                    continue
+                path = _inside(root, value)
+                if path is None:
+                    return _unresolved("STEP_PATH_OUTSIDE_REPOSITORY",
+                                       capability_id=cid, argument=name)
+                if not path.is_file():
+                    return _unresolved("STEP_PATH_ABSENT_FROM_DISK",
+                                       capability_id=cid, argument=name)
+            for name in _ROOT_ARGS:
+                value = row["args"].get(name)
+                if not isinstance(value, str) or not value.strip():
+                    continue
+                path = _inside(root, value) if value not in (".", "./") else root.resolve()
+                if path is None or not path.is_dir():
+                    return _unresolved("STEP_ROOT_INVALID",
+                                       capability_id=cid, argument=name)
+            result = row["result"]
+            if result.get("output_verified") is False:
+                return _unresolved("STEP_OUTPUT_NOT_VERIFIED_BY_ITS_PRODUCER",
+                                   capability_id=cid,
+                                   producer_reason=result.get("reason"))
+            if result.get("verified") is False:
+                return _unresolved("STEP_NOT_VERIFIED_BY_ITS_PRODUCER",
+                                   capability_id=cid,
+                                   producer_reason=result.get("reason"))
+            claimed = result.get("output_sha256") or result.get("sha256")
+            output = result.get("output_path") or row["args"].get("output_path")
+            if claimed and isinstance(output, str):
+                path = _inside(root, output)
+                if path is None or not path.is_file():
+                    return _unresolved("DECLARED_OUTPUT_ABSENT_FROM_DISK",
+                                       capability_id=cid)
+                if _digest(path.read_bytes()) != claimed:
+                    return _unresolved("DECLARED_OUTPUT_SHA256_MISMATCH",
+                                       capability_id=cid)
+
+        # --- independent re-inspection, or refusal -------------------------
+        ledger = []
+        for row in rows:
+            cid = str(row["args"].get("capability_id"))
+            inspector = INSPECTORS.get(cid)
+            if inspector is None:
+                return _unresolved("NO_INDEPENDENT_REINSPECTION_FOR:" + cid)
+            ok, reason, evidence = inspector(row["args"], row["result"], root)
+            if not ok:
+                return _unresolved(reason, capability_id=cid)
+            ledger.append({"capability_id": cid, "reinspection": evidence})
+
+        return {
+            "schema": SCHEMA,
+            "status": "RAW_GOAL_ACCEPTANCE_VERIFIED",
+            "pass": True,
+            "semantic_acceptance_complete": True,
+            "terminal_authority": False,
+            "accepted_obligation_ids": list(ids),
+            "verified_capability_chain": executed,
+            "planned_capability_chain": chain,
+            "reinspection_ledger": ledger,
+            "reinspected_step_count": len(ledger),
+            "independent_reinspection": True,
+            "model_dependency_count": 0,
+            "incremental_spend_usd": 0,
+        }
+    except Exception as exc:  # fail closed on anything unexpected
+        return _unresolved("ACCEPTANCE_VERIFIER_EXCEPTION:" + type(exc).__name__)
