@@ -24397,7 +24397,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6270,
+  "research_index_records": 6271,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24406,7 +24406,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3828165e5a15b3e94eedefba59a59fb697365a9cc383817f90c07fc277ce3900"
+  "value": "50a26b0040113f3207a7d88bae4e23a79c55dbef9700d02d2774a9759a7d8440"
  },
  "engines": [
   {
@@ -76869,7 +76869,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/governance/ONE_SHOT_SKY_IMPACT_PLAN_20261012_V1.json",
    "schema": "PROJECT_BRAIN_ONE_SHOT_SKY_IMPACT_PLANNER_V1",
-   "sha256": "b6143fee2bcd00cb7eabe5f2e13114bb1617d2c8984e246696df3d26e1196284",
+   "sha256": "ee0a0144e7d48fb8f46cffa065a3ce09f6d874f1aa912883afe53ba19f58b7a2",
    "status": "PASS__ONE_SHOT_8_STEP_MATHEMATICAL_AND_UNCERTAINTY_RESOLUTION_PLAN_VERIFIED",
    "terms": {
     "20261012": 1,
@@ -187827,6 +187827,38 @@
    }
   },
   {
+   "action_id": "FRONTIER_GUARD_DERIVES_FROM_THE_LIVE_R2_FILE_UNBLOCKING_THE_ONE_SHOT_SKY_IMPACT_PLANNER_V1_20261021_V1",
+   "capability": false,
+   "date": "2026-10-21",
+   "id": "research:canonical/action_intents/FRONTIER_GUARD_DERIVES_FROM_THE_LIVE_R2_FILE_UNBLOCKING_THE_ONE_SHOT_SKY_IMPACT_PLANNER_V1_20261021_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/FRONTIER_GUARD_DERIVES_FROM_THE_LIVE_R2_FILE_UNBLOCKING_THE_ONE_SHOT_SKY_IMPACT_PLANNER_V1_20261021_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "9c104f6adf3afed80673228059e2d5881d9d2334af97acc9f371006a109c4c4b",
+   "status": "",
+   "terms": {
+    "20261021": 1,
+    "compile_sky_impact_plan_from_raising_post_composition_frontier_v2_error_r2_scheduler_to_pass_with_an_8_step_verified_plan_6_certificates_and_24_of_24_propositions_covered": 1,
+    "derive_the_r2_scheduler_invariant_from_the_live_governance_file_instead_of_a_frozen_cell_name_and_count": 1,
+    "derives": 1,
+    "file": 1,
+    "frontier": 1,
+    "frontier_guard_derives_from_the_live_r2_file_unblocking_the_one_shot_sky_impact_planner_v1_20261021_v1": 1,
+    "frontier_guard_froze_a_historical_snapshot_of_the_r2_scheduler_state_so_the_one_shot_sky_impact_planner_could_not_be_compiled_at_all": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "guard": 1,
+    "impact": 1,
+    "live": 1,
+    "one": 1,
+    "planner": 1,
+    "r2": 1,
+    "shot": 1,
+    "sky": 1,
+    "unblocking": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "GOAL_PLAN_WORLD_BINDING_V1_20261020_V1",
    "capability": false,
    "date": "2026-10-20",
@@ -200650,7 +200682,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
-   "sha256": "f2b9efe4cc1f37b2ead145be5da5222111ae47e2e18377441cf6e218a636e55c",
+   "sha256": "40b59450e37d0a3c71d5d960a06e2158fc606b111ea24c59eedeea51fe4bbe20",
    "summary": "",
    "symbol_count": 14,
    "symbols": [

@@ -5,7 +5,7 @@ compiled into a single model.
 
 ```
 canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json
-model digest: 3828165e5a15b3e94eedefba59a59fb697365a9cc383817f90c07fc277ce3900
+model digest: 50a26b0040113f3207a7d88bae4e23a79c55dbef9700d02d2774a9759a7d8440
 ```
 
 This is a **compiled projection**, not a new authority. It is a deterministic
