@@ -11,6 +11,7 @@ once, and an API that never recovers must still fail the guard.
 from __future__ import annotations
 
 import io
+import os
 import pathlib
 import sys
 import unittest
@@ -127,3 +128,59 @@ class RetryTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class FailureAnnotationTests(unittest.TestCase):
+    """A guard failure must be readable without the workflow logs."""
+
+    def test_reasons_are_emitted_as_annotations_under_actions(self):
+        import io
+        import contextlib
+
+        buf = io.StringIO()
+        real = os.environ.get("GITHUB_ACTIONS")
+        os.environ["GITHUB_ACTIONS"] = "true"
+        try:
+            with contextlib.redirect_stdout(buf):
+                guard._annotate_failures(["BLOCKER_LEASE_DEDUPE_CHECK_FAILED:HTTP Error 504"])
+        finally:
+            if real is None:
+                os.environ.pop("GITHUB_ACTIONS", None)
+            else:
+                os.environ["GITHUB_ACTIONS"] = real
+        self.assertIn("::error::BLOCKER_LEASE_DEDUPE_CHECK_FAILED:HTTP Error 504", buf.getvalue())
+
+    def test_local_runs_keep_their_existing_output(self):
+        """Emitting annotations outside Actions would pollute every local invocation."""
+        import io
+        import contextlib
+
+        buf = io.StringIO()
+        real = os.environ.pop("GITHUB_ACTIONS", None)
+        try:
+            with contextlib.redirect_stdout(buf):
+                guard._annotate_failures(["SOME_REASON"])
+        finally:
+            if real is not None:
+                os.environ["GITHUB_ACTIONS"] = real
+        self.assertEqual(buf.getvalue(), "")
+
+    def test_annotation_special_characters_are_escaped(self):
+        """An unescaped newline would truncate the annotation and hide the rest."""
+        import io
+        import contextlib
+
+        buf = io.StringIO()
+        real = os.environ.get("GITHUB_ACTIONS")
+        os.environ["GITHUB_ACTIONS"] = "true"
+        try:
+            with contextlib.redirect_stdout(buf):
+                guard._annotate_failures(["A:B\nsecond line"])
+        finally:
+            if real is None:
+                os.environ.pop("GITHUB_ACTIONS", None)
+            else:
+                os.environ["GITHUB_ACTIONS"] = real
+        out = buf.getvalue()
+        self.assertEqual(out.count("\n"), 1, "the payload must stay on one line")
+        self.assertIn("%0A", out)

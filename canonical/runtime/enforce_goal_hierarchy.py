@@ -1200,6 +1200,25 @@ def enforce_v22_prewrite_admission(intent,base):
     for item in errors:
         fail(item)
 
+def _annotate_failures(items):
+    """Surface the reasons as GitHub annotations, not just stdout.
+
+    The guard already knew why it failed and printed it, but a workflow step's stdout
+    is not retrievable once the run's logs are off the retention window or unreachable
+    from where the failure is being triaged -- the check run reports only "Process
+    completed with exit code 1", which is why a transient GitHub API gateway error in
+    the blocker-lease dedupe was indistinguishable from a real policy rejection for
+    three consecutive attempts at diagnosing it. `::error::` becomes a check-run
+    annotation, which is readable through the API independently of the logs.
+
+    Only emitted under Actions; a local run keeps its existing output exactly.
+    """
+    if os.environ.get("GITHUB_ACTIONS")!="true":
+        return
+    for item in items:
+        text=str(item).replace("%","%25").replace("\r","%0D").replace("\n","%0A")
+        print("::error::"+text)
+
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--base",required=True)
@@ -1475,6 +1494,7 @@ def main():
         print("DRIFT_GUARD_FAIL")
         for item in FAIL:
             print(" -",item)
+        _annotate_failures(FAIL)
         return 1
 
     digest=hashlib.sha256(terminal.encode()).hexdigest()
