@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6285,
+  "research_index_records": 6286,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b923842080970b0e1dba1e402daaea869ab26cb73b5d46cc55ad7f90e1441e16"
+  "value": "7c962e70eaf402f7ac11679ffe8a15f46e7a2160785a4ca13a0fcd99004db8f9"
  },
  "engines": [
   {
@@ -187776,6 +187776,31 @@
     "v1": 2,
     "verified": 2,
     "whose": 2
+   }
+  },
+  {
+   "action_id": "CONTROLLER_TRACE_DECLARED_PLAN_PARITY_V1_20261022_V1",
+   "capability": false,
+   "date": "2026-10-22",
+   "id": "research:canonical/action_intents/CONTROLLER_TRACE_DECLARED_PLAN_PARITY_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/CONTROLLER_TRACE_DECLARED_PLAN_PARITY_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "2adde5f84b32643ed94338925b5f32f2fe51ae8038ec84629eef2cdc42ce3b3b",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "controller": 1,
+    "controller_trace_declared_plan_parity_v1_20261022_v1": 1,
+    "declared": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "no_compound_goal_with_cross_step_dataflow_could_ever_become_a_verified_episode_because_checkpoint_plan_recomputation_mismatch_rejected_it__removing_that_hard_blocker_lets_the_episode_advance_to_the_next_verification_gate_instead_of_failing_at_the_first_one": 1,
+    "parity": 1,
+    "plan": 1,
+    "record_the_declared_plan_in_each_trace_row_alongside_the_resolved_one_and_have_the_bound_success_checkpoint_verifier_recompute_over_the_declared_form_with_an_exact_fallback_for_checkpoints_written_before_the_field_existed": 1,
+    "the_controller_checkpoint_pins_plan_sha256_over_the_plan_as_declared_but_the_trace_stores_only_the_executed_copy_in_which_every_result_reference_is_already_substituted_so_the_recomputed_hash_can_never_match_for_any_plan_with_cross_step_dataflow": 1,
+    "trace": 1,
+    "v1": 2
    }
   },
   {
