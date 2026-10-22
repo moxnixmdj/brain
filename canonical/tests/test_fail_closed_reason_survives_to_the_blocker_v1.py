@@ -25,13 +25,16 @@ The fix reuses the convention this repository already uses one module over:
 FAIL_CLOSED, `pass` stays False, `errors` is untouched, and the caller's expectation
 still fails.
 
-Measured after the fix, the same twelve goals report nine distinct causes:
-SQLITE_STATUS_VALUE_UNRESOLVED, JSON_DOCX_SPEC_UNRESOLVED, TEST_FILE_FAILED:<path>,
+Measured after the fix, the same twelve goals report eight distinct causes:
+SQLITE_STATUS_VALUE_UNRESOLVED, TEST_FILE_FAILED:<path>,
 BOUND_APT_METADATA_NOT_FOUND:pandoc, BOUND_APT_METADATA_NOT_FOUND:zbar-tools,
 BOUND_CAPABILITY_SOURCE_UNSUPPORTED:brain_bound_system_tool,
 BOUND_CAPABILITY_INDEPENDENT_VERIFICATION_NOT_EVIDENT:<capability>, STATUS_INVALID,
-and the sqlite compound-plan variant. Acceptance stays 11 of 23, verified episodes
-stay 9, and correct selection stays 21 of 23.
+and the sqlite compound-plan variant. It was nine until the front-door selection
+fix removed JSON_DOCX_SPEC_UNRESOLVED: that cause only existed because the goal
+compiled against a producer whose spec the sentence never stated. Acceptance stays
+11 of 23, verified episodes stay 9, and benchmark correct selection stays 21 of 23
+-- while FRONT-DOOR selection, which is what actually runs, went from 20 to 21.
 """
 from __future__ import annotations
 
@@ -58,7 +61,14 @@ _OPAQUE = 'ACTION_EXPECTATION_FAILED:pass:OBSERVED=False:RESULT={"status":"FAIL_
 FAILING_GOALS = {
     "BENCH_SQLITE_CREATE_INSERT_QUERY": "SQLITE_STATUS_VALUE_UNRESOLVED",
     "BENCH_GROUNDING_AND_VERIFY": "STATUS_INVALID",
-    "BENCH_JSON_FETCH_CONSISTENCY": "JSON_DOCX_SPEC_UNRESOLVED",
+    # Moved by the front-door selection fix, and the move is the point: this goal
+    # used to compile against `docx.document.create_from_json_record`, which then
+    # failed with JSON_DOCX_SPEC_UNRESOLVED because the spec that producer needs
+    # was never stated.  It now selects `knowledge.consistency.assess` -- the
+    # capability the sentence asked for -- and fails on the same honest blocker
+    # `EXT_KNOWLEDGE_CONSISTENCY` already reported: no independent-verification
+    # receipt for that capability.  Measured on a live front-door run, not inferred.
+    "BENCH_JSON_FETCH_CONSISTENCY": "BOUND_CAPABILITY_INDEPENDENT_VERIFICATION_NOT_EVIDENT",
     "BENCH_UNITTEST_PASS_RATE": "TEST_FILE_FAILED",
     "BENCH_MARKDOWN_TO_DECISION": "BOUND_APT_METADATA_NOT_FOUND:pandoc",
     "EXT_QR_GENERATE": "BOUND_CAPABILITY_INDEPENDENT_VERIFICATION_NOT_EVIDENT",

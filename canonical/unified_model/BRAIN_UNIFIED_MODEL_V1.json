@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6291,
+  "research_index_records": 6292,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "95bfc446226b889e1d29987c57f7983cdf2e35e127f63a2068869c6dd90ce968"
+  "value": "786b68302bc4eeaf69b3b3ce49da01df715c4a43af6a81ab695fcb1456f01cf0"
  },
  "engines": [
   {
@@ -188316,6 +188316,37 @@
    }
   },
   {
+   "action_id": "FRONT_DOOR_RANKS_EVERY_ADMISSIBLE_TOOL_BUT_DECIDES_ONLY_FROM_THE_ROUTABLE_ONES_V1_20261022_V1",
+   "capability": false,
+   "date": "2026-10-22",
+   "id": "research:canonical/action_intents/FRONT_DOOR_RANKS_EVERY_ADMISSIBLE_TOOL_BUT_DECIDES_ONLY_FROM_THE_ROUTABLE_ONES_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/FRONT_DOOR_RANKS_EVERY_ADMISSIBLE_TOOL_BUT_DECIDES_ONLY_FROM_THE_ROUTABLE_ONES_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "5f9d46f1465c7682780c6ebdf42b6f3df38b3cd4c0f6a6687abd7d8415c43f0c",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "admissible": 1,
+    "but": 1,
+    "decides": 1,
+    "door": 1,
+    "every": 1,
+    "front": 1,
+    "front_door_correct_selection_20_to_21_of_23__divergence_with_the_benchmark_path_1_to_0__bench_json_fetch_consistency_now_selects_knowledge_consistency_assess_with_binding_source_goal_statement_instead_of_the_docx_writer_with_binding_source_goal_statement_plus_world_binding__its_failure_cause_moves_from_json_docx_spec_unresolved_to_the_same_honest_blocker_ext_knowledge_consistency_already_reported_so_the_distinct_cause_count_over_the_twelve_failing_goals_goes_9_to_8__acceptance_holds_at_11_of_23_verified_episodes_at_9_and_benchmark_selection_at_21_of_23": 1,
+    "front_door_ranks_every_admissible_tool_but_decides_only_from_the_routable_ones_v1_20261022_v1": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal_front_compiler_v1_ranked_and_ran_the_pinned_compiler_over_routable_registry_which_deletes_every_zero_input_capability_so_a_sentence_whose_grounded_pass_was_held_nonempty_by_one_weak_competitor_fell_through_to_world_binding__measured_for_fetch_a_json_document_and_assess_its_internal_consistency_the_front_door_returned_docx_document_create_from_json_record_at_score_25_with_json_path_inferred_to_canonical_pointer_json_a_file_the_sentence_never_mentioned_and_that_plan_then_failed_at_execution_with_json_docx_spec_unresolved__front_door_selection_measured_at_20_of_23_against_the_benchmark_paths_21_of_23_with_one_divergence": 1,
+    "ones": 1,
+    "only": 1,
+    "rank_and_bind_against_the_full_platform_admissible_view_while_restricting_the_decision_pool_to_the_routable_projection__selected__measured_to_move_front_door_correct_selection_from_20_to_21_of_23_and_to_remove_the_only_divergence_with_the_benchmark_path_with_no_new_failure_in_the_41_suite_sweep": 1,
+    "ranks": 1,
+    "routable": 1,
+    "tool": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "GENERIC_TRACE_REINSPECTION_ACCEPTANCE_FOR_EVERY_INSPECTABLE_CAPABILITY_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -215707,7 +215738,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "c8831695b8a1977130d8cebe0ac2d7af70e110cb49e6ac7aabeb8204bda85ea8",
+   "sha256": "a4ae7767db085435c4a37efc37ccf03379eeccc29f6dab579d87e65d362b9d46",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
    "symbol_count": 55,
    "symbols": [
