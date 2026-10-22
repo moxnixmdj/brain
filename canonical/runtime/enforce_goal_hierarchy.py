@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fail-closed anti-drift validator for frontier-sensitive changes."""
 from __future__ import annotations
-import argparse, base64, hashlib, json, os, pathlib, subprocess, sys, urllib.parse, urllib.request
+import argparse, base64, hashlib, json, os, pathlib, socket, subprocess, sys, time, urllib.error, urllib.parse, urllib.request
 from datetime import datetime, timezone, timedelta
 
 _REPO_ROOT = str(pathlib.Path(__file__).resolve().parents[2])
@@ -654,21 +654,55 @@ def blocker_lease_key(intent):
     ]
     return "::".join(parts)
 
+_DEDUPE_RETRY_STATUSES=frozenset({429,500,502,503,504})
+_DEDUPE_ATTEMPTS=4
+
+def _urlopen_with_retry(build_request,timeout):
+    """urlopen that survives transient gateway errors from api.github.com.
+
+    Measured on PR #5983: the blocker-lease dedupe call failed one attempt in three
+    with HTTP 502 then HTTP 504, and ``enforce_blocker_lease`` turned that straight
+    into BLOCKER_LEASE_DEDUPE_CHECK_FAILED -- a policy rejection of a change caused
+    by a third-party gateway rather than by anything in the change. Two identical
+    local runs of the same guard command passed either side of the failure.
+
+    Only 5xx/429 and transport timeouts are retried, so the check stays fail-closed:
+    a 4xx (auth, not found) still raises immediately, and an API that stays
+    unreachable still fails the guard once the attempts are exhausted. The request is
+    rebuilt per attempt because a Request that has already been sent is not
+    guaranteed to be reusable.
+    """
+    last=None
+    for attempt in range(_DEDUPE_ATTEMPTS):
+        try:
+            return urllib.request.urlopen(build_request(),timeout=timeout)
+        except urllib.error.HTTPError as exc:
+            if exc.code not in _DEDUPE_RETRY_STATUSES:
+                raise
+            exc.close()
+            last=exc
+        except (urllib.error.URLError,socket.timeout,TimeoutError) as exc:
+            last=exc
+        if attempt+1<_DEDUPE_ATTEMPTS:
+            time.sleep(min(2**attempt,8))
+    raise last
+
 def _github_json(path):
     token=os.environ.get("GITHUB_TOKEN")
     repo=os.environ.get("GITHUB_REPOSITORY")
     if not token or not repo:
         raise RuntimeError("GITHUB_DEDUPE_CONTEXT_MISSING")
-    req=urllib.request.Request(
-        "https://api.github.com"+path,
-        headers={
-            "Authorization":"Bearer "+token,
-            "Accept":"application/vnd.github+json",
-            "X-GitHub-Api-Version":"2022-11-28",
-            "User-Agent":"ProjectBrain-DriftGuard/1",
-        },
-    )
-    with urllib.request.urlopen(req,timeout=20) as resp:
+    def _request():
+        return urllib.request.Request(
+            "https://api.github.com"+path,
+            headers={
+                "Authorization":"Bearer "+token,
+                "Accept":"application/vnd.github+json",
+                "X-GitHub-Api-Version":"2022-11-28",
+                "User-Agent":"ProjectBrain-DriftGuard/1",
+            },
+        )
+    with _urlopen_with_retry(_request,20) as resp:
         return json.loads(resp.read().decode("utf-8"))
 
 def _github_graphql(query,variables):
@@ -676,19 +710,20 @@ def _github_graphql(query,variables):
     if not token:
         raise RuntimeError("GITHUB_DEDUPE_CONTEXT_MISSING")
     body=json.dumps({"query":query,"variables":variables}).encode("utf-8")
-    req=urllib.request.Request(
-        "https://api.github.com/graphql",
-        data=body,
-        method="POST",
-        headers={
-            "Authorization":"Bearer "+token,
-            "Accept":"application/vnd.github+json",
-            "Content-Type":"application/json",
-            "X-GitHub-Api-Version":"2022-11-28",
-            "User-Agent":"ProjectBrain-DriftGuard/2",
-        },
-    )
-    with urllib.request.urlopen(req,timeout=30) as resp:
+    def _request():
+        return urllib.request.Request(
+            "https://api.github.com/graphql",
+            data=body,
+            method="POST",
+            headers={
+                "Authorization":"Bearer "+token,
+                "Accept":"application/vnd.github+json",
+                "Content-Type":"application/json",
+                "X-GitHub-Api-Version":"2022-11-28",
+                "User-Agent":"ProjectBrain-DriftGuard/2",
+            },
+        )
+    with _urlopen_with_retry(_request,30) as resp:
         payload=json.loads(resp.read().decode("utf-8"))
     if not isinstance(payload,dict) or payload.get("errors"):
         raise RuntimeError("GITHUB_GRAPHQL_FAILED:"+json.dumps(payload.get("errors") if isinstance(payload,dict) else payload,sort_keys=True))
