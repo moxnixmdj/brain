@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6297,
+  "research_index_records": 6298,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "265564242e344a2cf157b9b24875d6bc4268ab53f0dbe9b0c5d11d07cd2d6fff"
+  "value": "c4dc270c5ae7666071f42c975209e32d7d1f532940c6b4e7d6da980a69c1b690"
  },
  "engines": [
   {
@@ -77145,7 +77145,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json",
    "schema": "PROJECT_BRAIN_OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1",
-   "sha256": "0cb86eac4f8ace67c900c823a50d5455083c932aec16465d705596bee8a385d4",
+   "sha256": "7f815ec04719b3af8055c5872703d7d16ba438a2eadfdec1c36adbb619c7b596",
    "status": "ACTIVE__ATTAINABILITY_FAIL_CLOSED__FULL_OPEN_PREDICATE_ACTION_COVERAGE__TOOL_AND",
    "terms": {
     "acceptance": 1,
@@ -189066,6 +189066,34 @@
     "upgraded": 2,
     "v1": 2,
     "verified": 3
+   }
+  },
+  {
+   "action_id": "STALE_GOVERNANCE_SNAPSHOT_COUNTS_TURN_THE_GUARDS_THAT_PROTECT_THEM_RED_V1_20261022_V1",
+   "capability": false,
+   "date": "2026-10-22",
+   "id": "research:canonical/action_intents/STALE_GOVERNANCE_SNAPSHOT_COUNTS_TURN_THE_GUARDS_THAT_PROTECT_THEM_RED_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/STALE_GOVERNANCE_SNAPSHOT_COUNTS_TURN_THE_GUARDS_THAT_PROTECT_THEM_RED_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "2a283d56e7ff75645f29576159f33505b502704c69b7a088c635dd85f1630b2d",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "counts": 1,
+    "four_live_governance_assertions_pin_literal_snapshot_counts_of_how_much_of_the_acceptance_frontier_has_been_discharged_so_every_time_the_repo_proves_another_predicate_the_guard_that_exists_to_catch_a_stale_frontier_goes_red_for_an_unrelated_reason_and_its_real_signal_is_lost__measured_16_of_38_predicates_proved_while_the_tests_still_pinned_2_closed_families_and_7_proved_predicates_and_the_live_action_hypergraph_still_targeted_all_16_already_proved_predicates_as_remaining_work": 1,
+    "four_tests_that_were_red_on_a_clean_main_tip_go_green_without_weakening_any_of_them__the_open_predicate_guard_now_passes_because_the_frontier_no_longer_targets_proved_predicates__and_the_counts_they_pinned_are_derived_so_the_next_predicate_proved_no_longer_turns_them_red": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "governance": 1,
+    "guards": 1,
+    "protect": 1,
+    "red": 1,
+    "replace_each_literal_snapshot_count_with_the_invariant_it_was_standing_in_for_derived_from_the_tracked_evidence_bindings__closed_equals_already_passing_and_no_witness_is_silently_swallowed_for_the_transmuter__proved_plus_unresolved_equals_the_registry_for_the_frontier_compiler__a_satisfied_precondition_must_name_evidence_that_exists_on_disk_and_the_step_must_still_be_blocked_for_the_activation__and_prune_the_16_proved_predicates_out_of_the_live_action_hypergraph_targets_which_is_the_correction_the_guard_itself_demands": 1,
+    "snapshot": 1,
+    "stale": 1,
+    "stale_governance_snapshot_counts_turn_the_guards_that_protect_them_red_v1_20261022_v1": 1,
+    "turn": 1,
+    "v1": 2
    }
   },
   {

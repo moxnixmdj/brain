@@ -14,11 +14,6 @@
         "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
         "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
         "VISION_DENSE_NONCHART_SCOPE",
-        "IF_SCOPE_BOUNDARY_NONINFERIOR",
-        "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
-        "RECOVERY_TERMINAL_NONINFERIOR",
-        "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
-        "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES",
         "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
         "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
         "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
@@ -73,9 +68,6 @@
       "new_reality_units": 0,
       "target_predicates": [
         "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
-        "IF_SCOPE_BOUNDARY_NONINFERIOR",
-        "RECOVERY_TERMINAL_NONINFERIOR",
-        "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
         "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
         "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR"
       ],
@@ -104,8 +96,7 @@
       "critical_path": true,
       "new_reality_units": 0,
       "target_predicates": [
-        "FINANCE_UNCOVERED_SCOPE_AUDIT",
-        "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
+        "FINANCE_UNCOVERED_SCOPE_AUDIT"
       ],
       "preconditions": [
         {
@@ -161,11 +152,6 @@
         "AGENCY_MATCHED_SUCCESS_NONINFERIOR",
         "AGENCY_SCOPE_SAFETY_NO_MATERIAL_REGRESSION",
         "VISION_DENSE_NONCHART_SCOPE",
-        "IF_SCOPE_BOUNDARY_NONINFERIOR",
-        "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
-        "RECOVERY_TERMINAL_NONINFERIOR",
-        "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
-        "RECOVERY_ZERO_CRITICAL_FAIL_CLOSED_MISSES",
         "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
         "COMPOSITION_TERMINAL_SUCCESS_NONINFERIOR",
         "COMPOSITION_ZERO_CRITICAL_INVARIANT_FAILURES"
@@ -195,8 +181,7 @@
       "new_reality_units": 0,
       "target_predicates": [
         "AUTOMATIONBENCH_GE_40",
-        "TB_SCIENCE_GE_58_7",
-        "LIVEBENCH_IF_GE_65_7"
+        "TB_SCIENCE_GE_58_7"
       ],
       "preconditions": [],
       "notes": "Shared adapter work only. Does not imply underlying cognition exists and grants zero benchmark credit."
@@ -232,9 +217,7 @@
       "effect": "UNLOCKS",
       "critical_path": false,
       "new_reality_units": 0,
-      "target_predicates": [
-        "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT"
-      ],
+      "target_predicates": [],
       "preconditions": [],
       "notes": "Bind operative cross-domain transfer and calibrated-abstention configuration before direct oracle leaves."
     },
