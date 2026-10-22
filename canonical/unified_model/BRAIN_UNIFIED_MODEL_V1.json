@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6298,
+  "research_index_records": 6299,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c4dc270c5ae7666071f42c975209e32d7d1f532940c6b4e7d6da980a69c1b690"
+  "value": "dfd5c6a0785636e257d113d2600214647e970a024cbe04bb6beb1b9134120c16"
  },
  "engines": [
   {
@@ -188930,6 +188930,36 @@
    }
   },
   {
+   "action_id": "REGISTRY_V3_WAS_THE_ONLY_LINK_WITHOUT_THE_RESOLVER_SO_EVERY_RESOLUTION_ABOVE_IT_RAISED_V1_20261022_V1",
+   "capability": false,
+   "date": "2026-10-22",
+   "id": "research:canonical/action_intents/REGISTRY_V3_WAS_THE_ONLY_LINK_WITHOUT_THE_RESOLVER_SO_EVERY_RESOLUTION_ABOVE_IT_RAISED_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/REGISTRY_V3_WAS_THE_ONLY_LINK_WITHOUT_THE_RESOLVER_SO_EVERY_RESOLUTION_ABOVE_IT_RAISED_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "5af962cd2c737bd109020d482f47f33942e53bdc0cfa39ca14170da49dccf078",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "above": 1,
+    "every": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "h100_verified_capability_registry_v3_never_defined_resolve_verified_capability_while_v4_through_v8_each_delegated_down_to_v3_resolve_verified_capability_so_the_chain_terminated_in_a_hole_and_every_resolution_above_v3_raised_attributeerror_on_the_last_hop_instead_of_returning_a_verdict__measured_13_test_modules_failed_on_that_one_missing_function_and_a_root_cause_census_over_all_2042_corpus_files_put_it_as_the_largest_single_logic_bucket": 1,
+    "link": 1,
+    "only": 1,
+    "raised": 1,
+    "registry": 1,
+    "registry_v3_was_the_only_link_without_the_resolver_so_every_resolution_above_it_raised_v1_20261022_v1": 1,
+    "resolution": 1,
+    "resolver": 1,
+    "restore_the_missing_hop_by_delegating_to_v2_and_re_stamping_the_envelope_exactly_as_v2_already_does_for_v1_then_make_v3_the_authorization_point_it_was_always_meant_to_be_by_routing_the_four_verified_patch_transfer_families_read_from_the_frozen_precommit_rather_than_restated_in_code_reusing_the_existing_zero_learned_least_squares_search_in_h100_generic_patch_search_transfer_v1_and_enforcing_the_precommit_own_routing_contract__v2_first_unchanged__nrmse_at_most_1e-8__two_exact_families_fail_closed_rather_than_pick__unverified_grammars_still_route_to_raw_search": 1,
+    "so": 1,
+    "the_delegation_chain_v1_through_v8_resolves_end_to_end_with_no_hole_and_the_four_independently_verified_patch_transfer_families_power5_hinge_gaussian_tanh_become_library_hits_at_zero_learned_bytes_as_the_frozen_precommit_authorizes_instead_of_every_caller_above_v3_crashing": 1,
+    "v1": 2,
+    "v3": 1
+   }
+  },
+  {
    "action_id": "RELEVANCE_ADAPTER_INPUT_TYPE_GUARD_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -217639,26 +217669,32 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/h100_verified_capability_registry_v3.py",
-   "sha256": "bd81c33ca95b61b417265fde68256d0a06c1cd4b06711983e5d4ef58fafa92cd",
+   "sha256": "ce9c3c7d9456464449cc108daba93320760041c65091d64ff5cc5768d27b1805",
    "summary": "Registry V3: V2 plus computer use, composed not edited.",
-   "symbol_count": 3,
+   "symbol_count": 6,
    "symbols": [
     "CapabilityRegistryV3Error",
+    "_authorized_transfer_families",
+    "_exact_family_matches",
     "invoke",
-    "registry_snapshot"
+    "registry_snapshot",
+    "resolve_verified_capability"
    ],
    "terms": {
+    "authorized_transfer_families": 1,
     "capability": 1,
     "capabilityregistryv3error": 1,
     "composed": 1,
     "computer": 1,
     "edited": 1,
+    "exact_family_matches": 1,
     "h100": 1,
     "invoke": 1,
     "not": 1,
     "plus": 1,
     "registry": 2,
     "registry_snapshot": 1,
+    "resolve_verified_capability": 1,
     "use": 1,
     "v2": 1,
     "v3": 2,
