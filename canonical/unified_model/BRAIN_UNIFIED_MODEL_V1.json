@@ -23874,11 +23874,11 @@
     "available"
    ],
    "verification": {
-    "evidence_path": null,
+    "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DECISION-EVIDENCE-LOCATE-001__RESULT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": null,
-    "independent_verification_evident": false,
-    "mission_id": null,
+    "evidence_sha256": "7fafa83e11d676612c221b24e2f9ae52fa83cff627bf349b39abb40249d52fb6",
+    "independent_verification_evident": true,
+    "mission_id": "ASTRA-VERIFY-DECISION-EVIDENCE-LOCATE-001",
     "module_sha256": null,
     "producer_independent": null
    }
@@ -24404,16 +24404,16 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6288,
+  "research_index_records": 6289,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
-  "source_index_modules": 1861
+  "source_index_modules": 1862
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8ef951a3d66c4b7eec04a623828b610b40a22c5802956725599ae7fe8681c7be"
+  "value": "854b7b0de13f4dbeba12294e02c513da61cec0276877cc5a784b46d0b33fd579"
  },
  "engines": [
   {
@@ -46312,10 +46312,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 862,
+  "included_source_count": 863,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "a10c81fc3378a88525890549ddd6c95445ffbbd3a4fa9b7c81ecc910accbd75f"
+  "source_tree_digest": "f637254d570050d10b10a2c2487b66fd5fb0fb4e3247c84a8ea71062361416ea"
  },
  "research_index": [
   {
@@ -187904,6 +187904,35 @@
    }
   },
   {
+   "action_id": "DECISION_EVIDENCE_LOCATOR_INDEPENDENTLY_VERIFIED_BY_GIT_GREP_SHA256SUM_AND_JQ_V1_20261022_V1",
+   "capability": false,
+   "date": "2026-10-22",
+   "id": "research:canonical/action_intents/DECISION_EVIDENCE_LOCATOR_INDEPENDENTLY_VERIFIED_BY_GIT_GREP_SHA256SUM_AND_JQ_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/DECISION_EVIDENCE_LOCATOR_INDEPENDENTLY_VERIFIED_BY_GIT_GREP_SHA256SUM_AND_JQ_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "6b9608e58338d5b4668d5dcfd9cc244040bef256dac2bde710db9ed061759b39",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "decision": 1,
+    "decision_evidence_locator_independently_verified_by_git_grep_sha256sum_and_jq_v1_20261022_v1": 1,
+    "evidence": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "git": 1,
+    "grep": 1,
+    "independently": 1,
+    "jq": 1,
+    "locator": 1,
+    "sha256sum": 1,
+    "structured_decision_evidence_locate_stdlib_had_no_independence_evidence_so_the_verified_bound_adapter_refused_to_run_it_and_no_plan_whose_chain_began_with_it_could_upgrade_to_the_proof_bearing_path__measured_on_ext_decision_verify_where_it_was_the_only_one_of_three_capabilities_not_independently_verified": 1,
+    "v1": 2,
+    "verified": 1,
+    "verified_episodes_6_to_7_and_parked_success_learning_1_to_0_measured_on_a_tree_wiped_of_every_untracked_artifact__the_new_episode_is_the_three_step_chain_structured_decision_evidence_locate_stdlib_then_decision_synthesis_typed_stdlib_then_decision_synthesis_verify_stdlib__acceptance_holds_at_11_and_selection_at_21_of_23": 1,
+    "write_a_real_second_implementation_that_re_establishes_every_load_bearing_claim_through_a_mechanism_the_producer_does_not_use__candidate_set_from_git_grep_l_digests_from_sha256sum_canonical_form_and_counts_from_jq_and_decidability_by_re_running_the_consumers_own_validator_on_bytes_reopened_from_disk__then_record_the_measured_result_as_evidence_rather_than_asserting_a_flag": 1
+   }
+  },
+  {
    "action_id": "DEMONSTRATED_INVOCATION_BINDING_UNLOCKS_THE_LAST_UNCOMPILABLE_GOAL_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -195183,6 +195212,50 @@
     "oracle": 2,
     "run": 1,
     "safe_path": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/bound_capabilities/decision_evidence_locate_verify.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/bound_capabilities/decision_evidence_locate_verify.py",
+   "sha256": "0f1097055a04bee35e8c43c46a6da2892bcf2fc570e9f9945f4ec81182549a49",
+   "summary": "Independently verify a located typed decision problem against external tools.",
+   "symbol_count": 9,
+   "symbols": [
+    "_decides",
+    "_git_schema_candidates",
+    "_jq_canonical",
+    "_jq_length",
+    "_run",
+    "_safe",
+    "_sha256sum",
+    "_synthesis_module",
+    "run"
+   ],
+   "terms": {
+    "against": 1,
+    "decides": 1,
+    "decision": 2,
+    "evidence": 1,
+    "external": 1,
+    "git_schema_candidates": 1,
+    "independently": 1,
+    "jq_canonical": 1,
+    "jq_length": 1,
+    "locate": 1,
+    "located": 1,
+    "problem": 1,
+    "run": 2,
+    "safe": 1,
+    "sha256sum": 1,
+    "synthesis_module": 1,
+    "tools": 1,
+    "typed": 1,
+    "verify": 2
    }
   },
   {
