@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import hashlib
 import pathlib
+from collections.abc import Mapping
 import unittest
 import uuid
 
@@ -108,8 +109,17 @@ def _reset_learning_state():
 
 
 def _create_row(res):
-    """The executed trace row for the create capability."""
-    trace = (res.get("controller_execution") or {}).get("trace") or []
+    """The executed trace row for the create capability.
+
+    Read through `unwrap_bound_adapter_row`, because that is the shape the acceptance
+    verifiers actually receive: the verified bound adapter wraps the
+    capability's own result and arguments one level down, and the normalization
+    is what lets an inspector written against the flat shape still read them.
+    """
+    trace = [
+        trace_acc.unwrap_bound_adapter_row(row)
+        for row in ((res.get("controller_execution") or {}).get("trace") or [])
+    ]
     for row in trace:
         result = row.get("result") if isinstance(row, dict) else None
         if isinstance(result, dict) and result.get("capability_id") == ARCHIVE_CAPABILITY:
@@ -230,10 +240,54 @@ class CompoundRunsRetainProofMaterialTests(unittest.TestCase):
 class LearningLoopCanReachItsAdapterTests(unittest.TestCase):
     """The headline: the R3 raw success adapter is reachable from a real run."""
 
-    def test_the_replay_context_has_the_shape_the_adapter_requires(self):
+    def test_a_compiled_run_replays_in_the_general_adapters_mode(self):
+        """With lineage available the context uses `compiled_bound`, the mode
+        that works for any bound capability rather than one sentence shape."""
+        ctx = live._raw_goal_replay_context(
+            {"task_id": "T", "goal": "G"},
+            {"controller_execution": {"trace": [
+                {"result": {"capability_id": "c", "requires": ["a.available"],
+                            "provides": ["b.produced"]}},
+            ]}},
+        )
+        self.assertEqual(ctx.get("mode"), "compiled_bound")
+        self.assertEqual(ctx["request"]["initial_facts"], ["a.available"])
+        self.assertEqual(ctx["request"]["target_effects"], ["b.produced"])
+
+    def test_without_lineage_it_falls_back_to_the_raw_mode(self):
         ctx = live._raw_goal_replay_context({"task_id": "T", "goal": "G"})
         self.assertEqual(ctx.get("mode"), "raw_bound")
         self.assertEqual(ctx.get("request"), {"goal": "G", "task_id": "T"})
+
+    def test_lineage_comes_from_the_capabilities_that_ran(self):
+        facts, effects = live._plan_lineage({"controller_execution": {"trace": [
+            {"result": {"capability_id": "first", "requires": ["x.available"],
+                        "provides": ["y.available"]}},
+            {"result": {"capability_id": "last", "requires": ["y.available"],
+                        "provides": ["z.produced"]}},
+            {"result": {"summary": "RAW_GOAL_COMPLETE", "type": "finish"}},
+        ]}})
+        self.assertEqual(facts, ["x.available"])
+        self.assertEqual(effects, ["z.produced"])
+
+    def test_the_trace_normalization_is_a_union_not_a_rewrite(self):
+        """The adapter's own keys must survive, or the proof digests and the
+        capability identity would be lost."""
+        rows = [trace_acc.unwrap_bound_adapter_row(r) for r in [{
+            "plan": {"type": "invoke_verified_bound_capability_adapter",
+                     "args": {"capability_id": "cid", "inputs": {"path": "p"}}},
+            "result": {"capability_id": "cid", "pass": True,
+                       "composition_capsule_head_hash": "h" * 64,
+                       "result": {"output_path": "o", "capability_id": "other"}},
+        }]]
+        args = rows[0]["plan"]["args"]
+        result = rows[0]["result"]
+        self.assertEqual(args["path"], "p")
+        self.assertEqual(args["capability_id"], "cid")
+        self.assertEqual(result["output_path"], "o")
+        # adapter wins the collision, so identity is never overwritten
+        self.assertEqual(result["capability_id"], "cid")
+        self.assertEqual(result["composition_capsule_head_hash"], "h" * 64)
 
     def test_an_incomplete_request_produces_no_replay_context(self):
         self.assertIsNone(live._raw_goal_replay_context(None))
@@ -259,19 +313,22 @@ class LearningLoopCanReachItsAdapterTests(unittest.TestCase):
                 "selected_plan") == [ARCHIVE_CAPABILITY]
         )
         replay = self_improvement.get_success_replay_context(oid)
-        adapted = raw_adapter.adapt(
-            {
-                "kind": "SUCCESS_TO_CANONICAL_EPISODE_CANDIDATE",
-                "observation": dict(observations[oid]),
-                "replay_context": replay["context"],
-                "improvement_work_id": "test",
-                "authority_requested": "CANDIDATE_ONLY",
-            },
-            repo_root=REPO_ROOT,
-        )
-        self.assertIsInstance(adapted, dict)
-        self.assertEqual(
-            adapted.get("status"), "RAW_ACCEPTED_SUCCESS_EPISODE_CANDIDATE_READY")
+        from canonical.runtime import r3_bound_success_adapter_v1 as bound_adapter
+
+        request = {
+            "kind": "SUCCESS_TO_CANONICAL_EPISODE_CANDIDATE",
+            "observation": dict(observations[oid]),
+            "replay_context": replay["context"],
+            "improvement_work_id": "test",
+            "authority_requested": "CANDIDATE_ONLY",
+        }
+        # Whichever adapter the replay mode selects, an accepted run must be
+        # adaptable by one of them.
+        adapted = bound_adapter.adapt(request, repo_root=REPO_ROOT)
+        if adapted is None:
+            adapted = raw_adapter.adapt(request, repo_root=REPO_ROOT)
+        self.assertIsInstance(adapted, dict, "no success adapter accepted this run")
+        self.assertIn("EPISODE_CANDIDATE_READY", str(adapted.get("status")))
         # It grants nothing: a candidate is not a promotion.
         self.assertIs(adapted.get("promotion_authority"), False)
         self.assertIs(adapted.get("execution_authority"), False)
@@ -383,6 +440,75 @@ class LearningHappensInsideTheRunTests(unittest.TestCase):
                 .get("verified_episode_count") or 0), 0)
         self.assertIs(res.get("semantic_acceptance_complete"), True)
         self.assertEqual(res.get("selected_plan"), [ARCHIVE_CAPABILITY])
+
+
+class CorpusGoalsBecomeVerifiedExperienceTests(unittest.TestCase):
+    """The point of the whole change: the machine learns from its own goals.
+
+    Before this, learning worked only for a hand-written sentence that matched
+    the archive grammar. Measured across the 23 benchmark goals, 9 were
+    executed and accepted and **none** of them became verified experience --
+    the traces carried no proof digests, so every success adapter refused them.
+    """
+
+    def setUp(self):
+        _reset_learning_state()
+        self.checkpoint = None
+
+    def tearDown(self):
+        if self.checkpoint is not None:
+            self.checkpoint.unlink(missing_ok=True)
+
+    def _learn(self, tag, goal):
+        before = int(
+            (self_improvement.load_state().get("stats") or {})
+            .get("verified_episode_count") or 0
+        )
+        res, self.checkpoint = _run_keeping_checkpoint(tag, goal)
+        after = int(
+            (self_improvement.load_state().get("stats") or {})
+            .get("verified_episode_count") or 0
+        )
+        return res, after - before
+
+    def test_an_accepted_benchmark_goal_becomes_a_verified_episode(self):
+        from canonical.runtime import goal_compilation_benchmark_v1 as bench
+
+        goal = next(
+            g["goal"] for g in list(bench.BENCHMARK_GOALS) + list(bench.EXTENDED_BENCHMARK_GOALS)
+            if g["id"] == "EXT_XLSX_CREATE"
+        )
+        res, delta = self._learn("CORPUS_XLSX", goal)
+        self.assertIs(res.get("semantic_acceptance_complete"), True)
+        self.assertEqual(delta, 1, "an accepted corpus goal produced no verified episode")
+
+    def test_the_trace_carries_the_proof_digests_learning_binds_to(self):
+        from canonical.runtime import goal_compilation_benchmark_v1 as bench
+
+        goal = next(
+            g["goal"] for g in list(bench.BENCHMARK_GOALS) + list(bench.EXTENDED_BENCHMARK_GOALS)
+            if g["id"] == "EXT_AST_AUDIT"
+        )
+        res, _ = self._learn("CORPUS_AST", goal)
+        rows = [
+            trace_acc.unwrap_bound_adapter_row(row)
+            for row in ((res.get("controller_execution") or {}).get("trace") or [])
+        ]
+        capability_rows = [
+            r["result"] for r in rows
+            if isinstance(r.get("result"), Mapping) and r["result"].get("capability_id")
+        ]
+        self.assertTrue(capability_rows)
+        for result in capability_rows:
+            self.assertEqual(
+                len(str(result.get("composition_capsule_head_hash") or "")), 64,
+                "no proof digest: this trace could never bind an episode")
+
+    def test_normalization_never_invents_a_field(self):
+        """A row with nothing wrapped must come back untouched."""
+        row = {"plan": {"type": "finish", "args": {"summary": "X"}},
+               "result": {"summary": "RAW_GOAL_COMPLETE"}}
+        self.assertEqual(trace_acc.unwrap_bound_adapter_row(row), row)
 
 
 if __name__ == "__main__":

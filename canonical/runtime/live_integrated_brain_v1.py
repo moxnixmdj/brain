@@ -335,6 +335,45 @@ def compile_capability_graph(
     }
 
 
+_BOUND_IDS_CACHE: frozenset[str] | None = None
+
+
+def _bound_capability_ids() -> frozenset[str]:
+    """Capability ids the BOUND registry knows how to execute. Cached."""
+    global _BOUND_IDS_CACHE
+    if _BOUND_IDS_CACHE is None:
+        try:
+            from canonical.runtime import availability_v1
+
+            _BOUND_IDS_CACHE = frozenset(availability_v1.load_registry())
+        except Exception:
+            _BOUND_IDS_CACHE = frozenset()
+    return _BOUND_IDS_CACHE
+
+
+def _plan_lineage(out: Any) -> tuple[list[str], list[str]]:
+    """What the executed plan needed before it started and produced by the end.
+
+    Taken from the capabilities that actually ran -- the first one's
+    requirements and the last one's provisions -- rather than from the compiled
+    plan, so the lineage describes the execution rather than the intention. The
+    controller's finish row carries no capability and is not part of it.
+    """
+    trace = ((out or {}).get("controller_execution") or {}).get("trace")
+    if not isinstance(trace, list):
+        return [], []
+    results = []
+    for row in trace:
+        result = row.get("result") if isinstance(row, Mapping) else None
+        if isinstance(result, Mapping) and result.get("capability_id"):
+            results.append(result)
+    if not results:
+        return [], []
+    facts = [str(x) for x in (results[0].get("requires") or [])]
+    effects = [str(x) for x in (results[-1].get("provides") or [])]
+    return facts, effects
+
+
 def bound_capability_controller_action(cid: str, entry: Mapping[str, Any], inputs: Mapping[str, Any]) -> dict[str, Any]:
     """The one controller action shape that executes a verified capability.
 
@@ -816,10 +855,47 @@ def _run_raw_goal_impl(request: Mapping[str, Any]) -> dict[str, Any]:
             }
 
         entry = admissible[selected]
-        if entry.get("capability_source") == "receipt_projection":
-            # the registry's own template resolves through the BOUND registry (promoted entries
-            # only) and refuses every receipt-backed capability before any work is done
+        # Receipt-backed capabilities have always needed the verified bound
+        # adapter action, because the registry's own template resolves through
+        # the BOUND registry and refuses them before any work is done. Every
+        # other capability that registry also knows how to execute is sent the
+        # same way, because that action shape is the only one whose trace
+        # carries proof digests -- and without them the learning adapters have
+        # nothing to bind an episode to, so the run is executed, accepted and
+        # then forgotten. Capabilities it does not know keep their template,
+        # which is what makes this bounded rather than blanket: an unknown id
+        # would answer BOUND_CAPABILITY_UNKNOWN.
+        # Archive capabilities are deliberately left out of the widening below.
+        # They are served by dedicated sentence-specific acceptance verifiers
+        # that were written against the flat trace shape and report fields the
+        # generic verifier does not, such as ``verified_output_sha256``. Sending
+        # them through the bound adapter moved them onto the generic verifier
+        # instead, which still accepted and still re-inspected the bytes but
+        # answered a different question. None of the goals this change makes
+        # learnable is an archive goal, so excluding them costs nothing here and
+        # keeps a verifier boundary I have not re-proven exactly as it was.
+        if entry.get("capability_source") == "receipt_projection" or (
+            selected in _bound_capability_ids()
+            and not selected.startswith("archive.")
+        ):
             action = bound_capability_controller_action(selected, entry, dict(inputs))
+            # Carry the registry's own argument names alongside the raw inputs.
+            # A template declares how inputs map onto arguments -- the document
+            # verifier's reads "path": "${input.docx_path}" -- and everything
+            # downstream reads arguments by those declared names. The bound
+            # adapter takes the inputs unmapped, so without this the trace
+            # would carry ``docx_path`` where a re-inspector asks for ``path``.
+            # The adapter ignores keys it does not use, and ``setdefault``
+            # leaves its own identity and proof keys untouched.
+            rendered = goal_compiler._render_template(
+                entry["action_template"], dict(inputs)
+            )
+            rendered_args = (
+                rendered.get("args") if isinstance(rendered, Mapping) else None
+            )
+            if isinstance(rendered_args, Mapping):
+                for name, value in rendered_args.items():
+                    action["args"].setdefault(name, value)
         else:
             action = goal_compiler._render_template(entry["action_template"], dict(inputs))
         controller_actions = [
@@ -1029,7 +1105,7 @@ def _run_raw_goal_impl(request: Mapping[str, Any]) -> dict[str, Any]:
         }
 
 
-def _raw_goal_replay_context(request: Any) -> dict[str, Any] | None:
+def _raw_goal_replay_context(request: Any, out: Any = None) -> dict[str, Any] | None:
     """The exact shape the Brain's own raw success adapter accepts.
 
     `r3_raw_success_adapter_v1.adapt` is one of four success adapters the
@@ -1054,10 +1130,17 @@ def _raw_goal_replay_context(request: Any) -> dict[str, Any] | None:
     task_id = str(request.get("task_id") or "").strip()
     if not goal or not task_id:
         return None
-    return {
-        "mode": "raw_bound",
-        "request": {"goal": goal, "task_id": task_id},
-    }
+    base = {"goal": goal, "task_id": task_id}
+    facts, effects = _plan_lineage(out)
+    if effects:
+        # The general adapter's mode: the one that works for any bound
+        # capability rather than a single sentence shape, and which needs the
+        # lineage to bind an episode's preconditions and postconditions.
+        return {
+            "mode": "compiled_bound",
+            "request": {**base, "initial_facts": facts, "target_effects": effects},
+        }
+    return {"mode": "raw_bound", "request": base}
 
 
 def _record_raw_goal_experience(out: Any, request: Any = None) -> None:
@@ -1093,7 +1176,7 @@ def _record_raw_goal_experience(out: Any, request: Any = None) -> None:
         _self_improvement.record_success_observation(
             out,
             surface="RAW_GOAL_FRONT_DOOR_V1",
-            replay_context=_raw_goal_replay_context(request),
+            replay_context=_raw_goal_replay_context(request, out),
         )
     except Exception:
         # Deliberate: see the docstring. Experience is best-effort by design.

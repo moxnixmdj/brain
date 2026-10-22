@@ -130,12 +130,52 @@ def _alternative_ids(alternatives: Any) -> set[str]:
     return ids
 
 
+def unwrap_bound_adapter_row(row: Any) -> Any:
+    """Read a trace row whether or not a verified bound adapter wrapped it.
+
+    The verified bound adapter nests the capability's own result under
+    ``result`` and its arguments under ``args.inputs``; the registry template
+    action does neither. The re-inspectors were written against the flat shape
+    and read arguments by the names the registry template declares, so a
+    wrapped row handed to them looks empty and every artifact reads as missing.
+
+    This is a union, not a rewrite: the wrapper's own keys win every collision,
+    so the capability identity and the proof digests stay exactly as the
+    adapter recorded them, and only keys the wrapper does not define are added.
+    Nothing is invented, and each inspector still re-opens the artifact from
+    disk and recomputes its digest, so a lifted path that does not match
+    reality is refused all the same.
+    """
+    if not isinstance(row, Mapping):
+        return row
+
+    def _lift(outer: Any) -> Any:
+        if not isinstance(outer, Mapping):
+            return outer
+        inner = outer.get("result") if "result" in outer else outer.get("inputs")
+        if not isinstance(inner, Mapping):
+            return outer
+        merged = dict(outer)
+        for key, value in inner.items():
+            merged.setdefault(key, value)
+        return merged
+
+    out = dict(row)
+    plan = row.get("plan")
+    if isinstance(plan, Mapping) and isinstance(plan.get("args"), Mapping):
+        out["plan"] = {**plan, "args": _lift(plan["args"])}
+    if isinstance(row.get("result"), Mapping):
+        out["result"] = _lift(row["result"])
+    return out
+
+
 def _action_rows(trace: Any) -> list[dict[str, Any]]:
     """The capability actions of a controller trace, in execution order."""
     if not isinstance(trace, list):
         return []
     rows = []
-    for row in trace:
+    for raw_row in trace:
+        row = unwrap_bound_adapter_row(raw_row)
         if not isinstance(row, Mapping):
             continue
         plan = row.get("plan")
