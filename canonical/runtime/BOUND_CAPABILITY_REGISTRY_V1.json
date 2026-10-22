@@ -4631,7 +4631,7 @@
           "timeout_s": 180
         },
         "expect": {
-          "field": "output_verified",
+          "field": "report_verified",
           "type": "field_equals",
           "value": true
         },

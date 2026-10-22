@@ -25,16 +25,18 @@ The fix reuses the convention this repository already uses one module over:
 FAIL_CLOSED, `pass` stays False, `errors` is untouched, and the caller's expectation
 still fails.
 
-Measured after the fix, the failing goals report eight distinct causes:
-SQLITE_STATUS_VALUE_UNRESOLVED, TEST_FILE_FAILED:<path>,
+Measured after the fix, the failing goals report seven distinct causes:
+SQLITE_STATUS_VALUE_UNRESOLVED,
 BOUND_APT_METADATA_NOT_FOUND:pandoc, BOUND_APT_METADATA_NOT_FOUND:zbar-tools,
 BOUND_CAPABILITY_SOURCE_UNSUPPORTED:brain_bound_system_tool,
 BOUND_CAPABILITY_INDEPENDENT_VERIFICATION_NOT_EVIDENT:<capability>, STATUS_INVALID,
 and the sqlite compound-plan variant. It was nine until the front-door selection
-fix removed JSON_DOCX_SPEC_UNRESOLVED, and the goal count fell from twelve to
-eleven when BENCH_MARKDOWN_TO_DECISION stopped failing altogether. Measured on a
-clean tree: acceptance is 12 of 23, and correct selection is 22 of 23 on both the
-benchmark path and the front door that actually runs.
+fix removed JSON_DOCX_SPEC_UNRESOLVED; the goal count fell from twelve to eleven
+when BENCH_MARKDOWN_TO_DECISION stopped failing altogether, and to ten when
+BENCH_UNITTEST_PASS_RATE stopped failing because the test-corpus audit began
+reporting a red corpus instead of raising TEST_FILE_FAILED on the first one.
+Measured on a clean tree: correct selection is 22 of 23 on both the benchmark
+path and the front door that actually runs.
 """
 from __future__ import annotations
 
@@ -75,7 +77,16 @@ FAILING_GOALS = {
     # `EXT_KNOWLEDGE_CONSISTENCY` already reported: no independent-verification
     # receipt for that capability.  Measured on a live front-door run, not inferred.
     "BENCH_JSON_FETCH_CONSISTENCY": "BOUND_CAPABILITY_INDEPENDENT_VERIFICATION_NOT_EVIDENT",
-    "BENCH_UNITTEST_PASS_RATE": "TEST_FILE_FAILED",
+    # BENCH_UNITTEST_PASS_RATE left this list for the same reason
+    # BENCH_MARKDOWN_TO_DECISION did: it stopped failing. The audit capability
+    # used to raise TEST_FILE_FAILED on the first red file, so it could only
+    # ever report on a corpus that was already green -- a pass-rate report that
+    # could only ever say 100 percent. It now reports a red corpus instead of
+    # aborting, so this goal produces its artifact. Removing it here also
+    # removes a nasty recursion: this file is inside the corpus the audit
+    # walks, and running this goal from inside this file made the audit run
+    # itself, which is why this suite took longer than the audit's own 180s
+    # per-file timeout.
     "EXT_QR_GENERATE": "BOUND_CAPABILITY_INDEPENDENT_VERIFICATION_NOT_EVIDENT",
     "EXT_BARCODE_DECODE": "BOUND_APT_METADATA_NOT_FOUND:zbar-tools",
     "EXT_OCR_SCANNED_IMAGE": "BOUND_CAPABILITY_SOURCE_UNSUPPORTED",
