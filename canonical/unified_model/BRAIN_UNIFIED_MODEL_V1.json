@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6286,
+  "research_index_records": 6287,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "fecf4f43d7593ac080d7ba5530330c42f566e2317f4863d87158bf2c5ab049aa"
+  "value": "729a1b33f11562c840fd586fef132c82c6efc1f33678e26b110a0dc06228c416"
  },
  "engines": [
   {
@@ -158560,7 +158560,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/ROOT3_DIRECT_URLOPEN_NETWORK_MEDIATOR_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json",
    "schema": "PROJECT_BRAIN_ROOT3_DIRECT_URLOPEN_NETWORK_MEDIATOR_PUBLIC_RUNNER_VERIFICATION_V1",
-   "sha256": "d38bf8846163f4f8142e220b2189b92ec4363a7aebd6c40fab1b49435fd74150",
+   "sha256": "eb34d7a2d7f9ff35a8470e8a806cb2d14e79b00606fdd5ea6968b3e8c74b3373",
    "status": "PUBLIC_RUNNER_PASS__DIRECT_URLOPEN_FALLBACK_MEDIATED_AND_RECEIPTED__ZERO_TERMINA",
    "terms": {
     "20261006": 1,
@@ -189370,6 +189370,35 @@
     "verifier": 1,
     "verifier_routing_check_sample_size_fix_v1_20261021_v1": 1
    }
+  },
+  {
+   "action_id": "VERIFIER_STEP_INHERITS_PRODUCER_GOAL_SO_THE_HASH_CHECK_CAN_PASS_V1_20261022_V1",
+   "capability": false,
+   "date": "2026-10-22",
+   "id": "research:canonical/action_intents/VERIFIER_STEP_INHERITS_PRODUCER_GOAL_SO_THE_HASH_CHECK_CAN_PASS_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/VERIFIER_STEP_INHERITS_PRODUCER_GOAL_SO_THE_HASH_CHECK_CAN_PASS_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e473358930e9c90b24e74d42c644b679a6317631fa3ab3fedc40187ecbb5f125",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "a_verifier_step_could_never_pass_its_goal_hash_check_whenever_its_clause_differed_from_the_producers__measured_on_bench_grounding_and_verify_where_the_producer_got_compile_a_plain_goal_into_a_bound_capability_sha256_8999f288_and_the_verifier_got_verify_the_grounding_sha256_4c9ae405_and_failed_with_goal_hash_mismatch__that_mismatch_is_now_gone": 1,
+    "after_the_compound_plan_is_assembled_copy_the_producer_goal_string_into_any_step_that_the_registry_proves_consumes_an_effect_that_earlier_step_provides__the_relation_is_read_from_requires_and_provides_not_guessed_and_the_string_still_comes_from_the_request_never_from_the_producer_output_so_independence_is_preserved": 1,
+    "check": 1,
+    "every_clause_of_a_compound_goal_is_compiled_with_its_own_clause_text_bound_to_the_goal_input_so_a_step_whose_contract_is_to_recheck_an_earlier_step_is_handed_a_different_string_than_the_producer_was_and_the_independent_verifier_goal_hash_comparison_can_never_succeed": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 1,
+    "hash": 1,
+    "inherits": 1,
+    "pass": 1,
+    "producer": 1,
+    "so": 1,
+    "step": 1,
+    "v1": 2,
+    "verifier": 1,
+    "verifier_step_inherits_producer_goal_so_the_hash_check_can_pass_v1_20261022_v1": 1
+   }
   }
  ],
  "schema": "PROJECT_BRAIN_UNIFIED_MODEL_V1",
@@ -215412,9 +215441,9 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "62cf33d63c2906853bd5852ef0f715b26e807667d8f35ec3424195d5d9e836fc",
+   "sha256": "27e8fda73b49bc45e2247c1dffb0c6244963aab6d4f79821e50c79cddc733f8c",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
-   "symbol_count": 111,
+   "symbol_count": 112,
    "symbols": [
     "GoalCompilationFailure",
     "_append_producer_parts",
