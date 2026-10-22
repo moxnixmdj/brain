@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py.auto.v1",
- "elapsed_ms": 14.87,
+ "elapsed_ms": 15.357,
  "independent_run_reference": {
-  "github_run_id": 39780554160,
+  "github_run_id": 39781637740,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "66fe897b-20c8-4a5f-8ee4-ab908fd5cc5f",
+   "jti": "03670dbf-dab1-492f-9f54-1c9a6545aebe",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39780554160",
+   "run_id": "39781637740",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
