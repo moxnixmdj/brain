@@ -50,7 +50,15 @@ class CertificateGatedAstraBindingTests(unittest.TestCase):
             "actual_context_digest": "ctx",
             "content_address_bindings": _bindings(),
             "admission_receipts": [
-                _receipt(admitted=False),
+                # The negative receipt must differ in identity, not just in
+                # `admitted`. The router's identity tuple deliberately excludes
+                # `admitted`, because the same certified route in the same
+                # context cannot be both admitted and not admitted -- so a pair
+                # that differs only in that flag is a contradiction and the
+                # router fails closed on it. This fixture used to supply exactly
+                # that, and the test errored with DUPLICATE_RECEIPT instead of
+                # testing selection.
+                _receipt(admitted=False, route="route-c", cell="cell-c"),
                 _receipt(route="route-b", cell="cell-b"),
                 _receipt(route="route-a", cell="cell-a"),
             ],
@@ -69,6 +77,43 @@ class CertificateGatedAstraBindingTests(unittest.TestCase):
         self.assertFalse(out["promotion_authority"])
         self.assertEqual(out["terminal_results_observed"], 0)
         self.assertEqual(out["terminal_credit_delta"], 0)
+
+    def test_astra_step_rejects_contradictory_admission_for_one_certified_route(self):
+        """Two receipts for one route that disagree about admission must not be
+        resolved by picking one.
+
+        The router's identity tuple excludes ``admitted`` on purpose: the same
+        certified route, in the same context, bound to the same three blobs,
+        cannot be both admitted and not admitted. That is a contradiction in the
+        evidence, not a choice to be made, so it fails closed. This was only
+        exercised by accident before -- a stale fixture tripped it while trying
+        to test selection -- so nothing pinned the behaviour.
+        """
+        step = {
+            "id": "route-select",
+            "adapter": "certificate_gated_route_select",
+            "actual_context_digest": "ctx",
+            "content_address_bindings": _bindings(),
+            "admission_receipts": [
+                _receipt(admitted=False),
+                _receipt(admitted=True),
+            ],
+        }
+        with self.assertRaisesRegex(astra.Blocker, "DUPLICATE_RECEIPT"):
+            astra.execute_step(step, mission={})
+
+    def test_identical_receipts_repeated_are_still_a_duplicate(self):
+        """Even two receipts that agree are a duplicate identity, so the guard
+        is about identity and not about disagreement."""
+        step = {
+            "id": "route-select",
+            "adapter": "certificate_gated_route_select",
+            "actual_context_digest": "ctx",
+            "content_address_bindings": _bindings(),
+            "admission_receipts": [_receipt(), _receipt()],
+        }
+        with self.assertRaisesRegex(astra.Blocker, "DUPLICATE_RECEIPT"):
+            astra.execute_step(step, mission={})
 
     def test_astra_step_fails_closed_for_uncovered_context(self):
         step = {
