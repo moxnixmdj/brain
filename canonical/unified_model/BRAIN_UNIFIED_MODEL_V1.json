@@ -101,7 +101,7 @@
     "source_executable": "tar",
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py",
-    "source_sha256": "fd8bff157300a064f5af949d6c0bdf881de7cdd7691b2b4ced3f1d523c8aa6c8",
+    "source_sha256": "573758c26854563d3857c98e4e5f51377dc9f1b35edddf2520fced599a5834bb",
     "source_type": "system_tool"
    },
    "provides": [
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "452bf4cdda2a9d0b17e6173ad509b612c8dc40d85fc18eab368201d3f6b59df0"
+  "value": "91197479405b7a2705c21269f8fe36681f0368c05ec55838849785224ae08f98"
  },
  "engines": [
   {
@@ -46315,7 +46315,7 @@
   "included_source_count": 862,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "8e0f3464e7b38f98618a31a5da77041354c133bc580b32ba897ef6a89e408303"
+  "source_tree_digest": "8faec70a54d1ba06935b71461e337e303a2bd38e4eec260efe1d82682d3f96a5"
  },
  "research_index": [
   {
@@ -194946,7 +194946,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/docx_verify_ooxml_intent.py",
-   "sha256": "f0e7982d866f46cc0d0fd0c1a1df3298676ba1cdb2d95d3fa99022ee1f11b6a9",
+   "sha256": "a62189b0628b4d7b5cc404836df548328ff7890c65e3ca62e11e2f5a341af035",
    "summary": "Verify DOCX content against independently parsed raw creation intent.",
    "symbol_count": 5,
    "symbols": [
@@ -241131,7 +241131,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py",
-   "sha256": "18e75f1e53652827254faa611a1ab52088c83906693670ab53b3c73066e24b37",
+   "sha256": "5268edf534136de5f5b1164eade5817d732b0298e800f560392fa0ab5333a440",
    "summary": "Independent read-only verifier for compiled-bound success episodes.",
    "symbol_count": 8,
    "symbols": [

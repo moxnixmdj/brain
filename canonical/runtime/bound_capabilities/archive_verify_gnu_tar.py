@@ -66,5 +66,11 @@ def run(args, root):
       "member_count":len(expected),
       "members":expected,
       "archive_path":str(archive_path.relative_to(root)),
+      # The digest of the archive this capability just verified, from its real
+      # bytes. Without it the success had no durable artifact anyone could
+      # re-hash, so it could never become verified experience even though the
+      # members had all been checked one by one above.
+      "archive_sha256":hashlib.sha256(archive_path.read_bytes()).hexdigest(),
       "manifest_path":str(manifest_path.relative_to(root)),
+      "manifest_sha256":hashlib.sha256(manifest_path.read_bytes()).hexdigest(),
     }

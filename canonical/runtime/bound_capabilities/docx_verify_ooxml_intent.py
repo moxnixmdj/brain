@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Verify DOCX content against independently parsed raw creation intent."""
 from __future__ import annotations
-import importlib.util,json,pathlib,re,sys
+import hashlib,importlib.util,json,pathlib,re,sys
 
 def _safe(root,raw):
     root=pathlib.Path(root).resolve()
@@ -95,4 +95,11 @@ def run(args,root):
     result["intent_derived_expected"]=expected
     result["source_json_path"]=source_json_path
     result["source_record_verified"]=schema=="PROJECT_BRAIN_DOCUMENT_JSON_INTENT_V1"
+    # The document this capability verified, named and digested from its real
+    # bytes. The base verifier reported neither, so the success carried no
+    # durable artifact anyone could re-hash and could never become verified
+    # experience. Naming it ``docx_path`` matches the field this capability
+    # already uses for its input, so nothing downstream has to learn a new one.
+    result["docx_path"]=str(docx.relative_to(pathlib.Path(root).resolve())).replace("\\","/")
+    result["docx_sha256"]=hashlib.sha256(docx.read_bytes()).hexdigest()
     return result
