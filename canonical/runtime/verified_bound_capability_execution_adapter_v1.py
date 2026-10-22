@@ -421,11 +421,31 @@ def execute(
             ),
         }
     except Exception as exc:
+        # The cause is reported under `reason` as well as `errors`, mirroring the
+        # convention this repository's sibling verifier already uses
+        # (bound_capability_execution_verifier_v1 sets "reason" to exactly
+        # type(exc).__name__ + ":" + str(exc)).
+        #
+        # This is not a loosening. `status` stays FAIL_CLOSED, `pass` stays False,
+        # `errors` is untouched, and the caller's expectation still fails. What
+        # changes is only that the cause survives.
+        #
+        # Measured consequence of the omission: the controller's blocker builder
+        # (astra_runtime._verify_action_expectation) reads `result["reason"]` or
+        # `result["error"]` -- singular keys -- and appends ":REASON=" only when one
+        # is present. With the cause trapped in the `errors` list, every one of the
+        # twelve failing benchmark goals reported the identical opaque string
+        # `ACTION_EXPECTATION_FAILED:pass:OBSERVED=False:RESULT={"status":"FAIL_CLOSED"}`.
+        # A machine that cannot say why it refused cannot route the refusal -- cannot
+        # tell a missing binary that needs acquisition from a goal that is genuinely
+        # under-specified and correctly fail-closed.
+        detail = type(exc).__name__ + ":" + str(exc)
         return {
             "schema": SCHEMA,
             "status": "FAIL_CLOSED",
             "pass": False,
-            "errors": [type(exc).__name__ + ":" + str(exc)],
+            "reason": detail,
+            "errors": [detail],
             "terminal_authority": False,
             "capability_credit_delta": 0,
             "ownership_credit_delta": 0,
