@@ -657,8 +657,12 @@ def blocker_lease_key(intent):
 _DEDUPE_RETRY_STATUSES=frozenset({429,500,502,503,504})
 _DEDUPE_ATTEMPTS=4
 
-def _urlopen_with_retry(build_request,timeout):
+def _urlopen_with_retry(build_request,timeout,opener=None,sleep=None):
     """urlopen that survives transient gateway errors from api.github.com.
+
+    ``opener`` and ``sleep`` are injectable so the retry can be tested without
+    reassigning a network entry point, which repo_integrity_guard_v1 rightly
+    forbids in test code.
 
     Measured on PR #5983: the blocker-lease dedupe call failed one attempt in three
     with HTTP 502 then HTTP 504, and ``enforce_blocker_lease`` turned that straight
@@ -672,10 +676,12 @@ def _urlopen_with_retry(build_request,timeout):
     rebuilt per attempt because a Request that has already been sent is not
     guaranteed to be reusable.
     """
+    opener=opener or urllib.request.urlopen
+    sleep=sleep or time.sleep
     last=None
     for attempt in range(_DEDUPE_ATTEMPTS):
         try:
-            return urllib.request.urlopen(build_request(),timeout=timeout)
+            return opener(build_request(),timeout=timeout)
         except urllib.error.HTTPError as exc:
             if exc.code not in _DEDUPE_RETRY_STATUSES:
                 raise
@@ -684,7 +690,7 @@ def _urlopen_with_retry(build_request,timeout):
         except (urllib.error.URLError,socket.timeout,TimeoutError) as exc:
             last=exc
         if attempt+1<_DEDUPE_ATTEMPTS:
-            time.sleep(min(2**attempt,8))
+            sleep(min(2**attempt,8))
     raise last
 
 def _github_json(path):

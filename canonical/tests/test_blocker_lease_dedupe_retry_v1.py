@@ -15,7 +15,6 @@ import pathlib
 import sys
 import unittest
 import urllib.error
-import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
@@ -39,12 +38,10 @@ def _http_error(code):
 
 
 class RetryTests(unittest.TestCase):
-    def setUp(self):
-        self._real = urllib.request.urlopen
-        guard.time.sleep = lambda *_: None  # keep the test fast; backoff is not the claim
-
-    def tearDown(self):
-        urllib.request.urlopen = self._real
+    # The retry takes its opener and sleep by injection, so no network entry point
+    # is ever reassigned -- repo_integrity_guard_v1 forbids that in test code.
+    def _run(self, build, opener):
+        return guard._urlopen_with_retry(build, 5, opener=opener, sleep=lambda *_: None)
 
     def test_a_transient_gateway_error_is_retried_and_recovers(self):
         calls = {"n": 0}
@@ -55,8 +52,7 @@ class RetryTests(unittest.TestCase):
                 raise _http_error(502)
             return _Resp(b'{"ok": true}')
 
-        urllib.request.urlopen = fake
-        with guard._urlopen_with_retry(lambda: object(), 5) as resp:
+        with self._run(lambda: object(), fake) as resp:
             self.assertEqual(resp.read(), b'{"ok": true}')
         self.assertEqual(calls["n"], 3)
 
@@ -68,9 +64,8 @@ class RetryTests(unittest.TestCase):
             calls["n"] += 1
             raise _http_error(404)
 
-        urllib.request.urlopen = fake
         with self.assertRaises(urllib.error.HTTPError) as ctx:
-            guard._urlopen_with_retry(lambda: object(), 5)
+            self._run(lambda: object(), fake)
         self.assertEqual(ctx.exception.code, 404)
         self.assertEqual(calls["n"], 1, "a 4xx must fail on the first attempt")
 
@@ -82,9 +77,8 @@ class RetryTests(unittest.TestCase):
             calls["n"] += 1
             raise _http_error(504)
 
-        urllib.request.urlopen = fake
         with self.assertRaises(urllib.error.HTTPError):
-            guard._urlopen_with_retry(lambda: object(), 5)
+            self._run(lambda: object(), fake)
         self.assertEqual(calls["n"], guard._DEDUPE_ATTEMPTS)
 
     def test_a_transport_timeout_is_retried(self):
@@ -96,8 +90,7 @@ class RetryTests(unittest.TestCase):
                 raise urllib.error.URLError("timed out")
             return _Resp(b"{}")
 
-        urllib.request.urlopen = fake
-        with guard._urlopen_with_retry(lambda: object(), 5) as resp:
+        with self._run(lambda: object(), fake) as resp:
             self.assertEqual(resp.read(), b"{}")
         self.assertEqual(calls["n"], 2)
 
@@ -117,8 +110,7 @@ class RetryTests(unittest.TestCase):
             built.append(token)
             return token
 
-        urllib.request.urlopen = fake
-        with guard._urlopen_with_retry(build, 5):
+        with self._run(build, fake):
             pass
         self.assertEqual(len(built), 2)
         self.assertIsNot(built[0], built[1])
