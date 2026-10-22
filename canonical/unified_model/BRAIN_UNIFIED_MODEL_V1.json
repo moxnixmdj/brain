@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6290,
+  "research_index_records": 6291,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e21ae247216d31720c9b164967a10a975ffe26c681a0c85b2520b628e6be9338"
+  "value": "95bfc446226b889e1d29987c57f7983cdf2e35e127f63a2068869c6dd90ce968"
  },
  "engines": [
   {
@@ -188189,6 +188189,34 @@
    }
   },
   {
+   "action_id": "FAIL_CLOSED_REFUSAL_CARRIES_ITS_CAUSE_SO_THE_MACHINE_CAN_ROUTE_IT_V1_20261022_V1",
+   "capability": false,
+   "date": "2026-10-22",
+   "id": "research:canonical/action_intents/FAIL_CLOSED_REFUSAL_CARRIES_ITS_CAUSE_SO_THE_MACHINE_CAN_ROUTE_IT_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/FAIL_CLOSED_REFUSAL_CARRIES_ITS_CAUSE_SO_THE_MACHINE_CAN_ROUTE_IT_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e2e0a2a9e9200c41e7ca10cfce2b0c196ca130ac1924d492ca0f00804872667d",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "all_twelve_failing_benchmark_goals_now_report_their_real_cause__nine_distinct_causes_where_there_was_one_opaque_string__sqlite_status_value_unresolved_json_docx_spec_unresolved_test_file_failed_with_the_offending_path_bound_apt_metadata_not_found_pandoc_bound_apt_metadata_not_found_zbar_tools_bound_capability_source_unsupported_bound_capability_independent_verification_not_evident_with_the_capability_named_and_status_invalid__acceptance_holds_at_11_of_23_verified_episodes_hold_at_9_and_correct_selection_holds_at_21_of_23": 1,
+    "carries": 1,
+    "cause": 1,
+    "closed": 1,
+    "fail": 1,
+    "fail_closed_refusal_carries_its_cause_so_the_machine_can_route_it_v1_20261022_v1": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "machine": 1,
+    "refusal": 1,
+    "route": 1,
+    "so": 1,
+    "v1": 2,
+    "verified_bound_capability_execution_adapter_v1_caught_every_exception_and_returned_the_cause_only_in_the_errors_list_while_the_controller_blocker_builder_astra_runtime_verify_action_expectation_reads_the_singular_keys_reason_and_error_so_the_cause_was_in_the_payload_and_invisible_in_the_only_message_anyone_ever_reads__measured_all_twelve_failing_benchmark_goals_reported_the_byte_identical_string_action_expectation_failed_pass_observed_false_result_status_fail_closed": 1,
+    "write_a_real_second_implementation_that_re_establishes_every_load_bearing_claim_through_a_mechanism_the_producer_does_not_use__candidate_set_from_git_grep_l_digests_from_sha256sum_canonical_form_and_counts_from_jq_and_decidability_by_re_running_the_consumers_own_validator_on_bytes_reopened_from_disk__then_record_the_measured_result_as_evidence_rather_than_asserting_a_flag": 1
+   }
+  },
+  {
    "action_id": "FINANCE_SACCR_CREDIT_ADDON_LIVE_BINDING_20261016_V1",
    "capability": false,
    "date": "2026-10-16",
@@ -259020,7 +259048,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/verified_bound_capability_execution_adapter_v1.py",
-   "sha256": "78b4703ec1db48f68dfce7b6f84796c1b643c354b3e0582a23db73261838ed4c",
+   "sha256": "a17be73efd1d2e91e2a8016013a7e19d2b20641ba611644620676be9fcbf832b",
    "summary": "Execute one promoted verified Brain capability and reverify its trace.",
    "symbol_count": 9,
    "symbols": [
