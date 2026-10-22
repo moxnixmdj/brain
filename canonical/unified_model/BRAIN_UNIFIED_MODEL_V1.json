@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6287,
+  "research_index_records": 6288,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "729a1b33f11562c840fd586fef132c82c6efc1f33678e26b110a0dc06228c416"
+  "value": "8ef951a3d66c4b7eec04a623828b610b40a22c5802956725599ae7fe8681c7be"
  },
  "engines": [
   {
@@ -187503,6 +187503,35 @@
    }
   },
   {
+   "action_id": "ARTIFACT_FREE_STEP_ADMITTED_WHEN_IT_CONSUMES_BYTES_THE_PROOF_ALREADY_REHASHED_V1_20261022_V1",
+   "capability": false,
+   "date": "2026-10-22",
+   "id": "research:canonical/action_intents/ARTIFACT_FREE_STEP_ADMITTED_WHEN_IT_CONSUMES_BYTES_THE_PROOF_ALREADY_REHASHED_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ARTIFACT_FREE_STEP_ADMITTED_WHEN_IT_CONSUMES_BYTES_THE_PROOF_ALREADY_REHASHED_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e47707805049916a86def677b47c3dbf3f5c6a875ce7854c3e422f333d28062d",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "admitted": 1,
+    "already": 1,
+    "artifact": 1,
+    "artifact_free_step_admitted_when_it_consumes_bytes_the_proof_already_rehashed_v1_20261022_v1": 1,
+    "bytes": 1,
+    "consumes": 1,
+    "free": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "no_plan_ending_in_a_verification_step_could_become_verified_experience__measured_on_ext_decision_verify_whose_decision_synthesis_verify_stdlib_reports_no_path_at_all__that_structural_refusal_is_now_removed__acceptance_and_learning_rates_are_unchanged_at_11_and_6_because_the_goals_that_would_use_it_are_blocked_earlier_by_the_capability_independence_gate": 1,
+    "proof": 1,
+    "rehashed": 1,
+    "require_an_artifact_free_step_to_consume_at_least_one_path_that_this_same_proof_already_reopened_and_rehashed_in_an_earlier_step_rather_than_to_produce_one_itself__a_blanket_exemption_would_have_destroyed_the_invariant_that_no_step_enters_an_episode_without_bytes_behind_it_having_been_checked_against_disk": 1,
+    "step": 1,
+    "the_bound_success_checkpoint_verifier_demanded_a_rehashable_durable_artifact_from_every_step_so_a_terminal_verification_step_which_produces_only_a_verdict_could_never_enter_a_verified_episode_however_real_its_work_was": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "BM25_INVERSE_DOCUMENT_FREQUENCY_REORDERS_BOUND_CAPABILITY_SELECTION_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -241459,7 +241488,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py",
-   "sha256": "fd98e47ec55b0f6fd1d280ec079924d0980fa79d66377235d1f402e27229b04a",
+   "sha256": "374be2e603f5541343089690e96db097115ca587a19ed03d23092e7989c8e49d",
    "summary": "Independent read-only verifier for compiled-bound success episodes.",
    "symbol_count": 9,
    "symbols": [
