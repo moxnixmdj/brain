@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/root3_matched_superportfolio_minimum_reality_verifier_v1.py.auto.v1",
- "elapsed_ms": 38.64,
+ "elapsed_ms": 36.843,
  "independent_run_reference": {
-  "github_run_id": 39772076409,
+  "github_run_id": 39772597757,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "1a2936a4-f67e-467f-87b8-460a0248d460",
+   "jti": "0a94b42e-3ee9-4b0c-9add-f9f50aee3fca",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39772076409",
+   "run_id": "39772597757",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
