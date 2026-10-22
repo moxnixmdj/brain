@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "61046362e0235d9d31aad2f3c2201479b55070514305396b72200c61d4e8aa64"
+  "value": "b923842080970b0e1dba1e402daaea869ab26cb73b5d46cc55ad7f90e1441e16"
  },
  "engines": [
   {
@@ -158560,7 +158560,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/ROOT3_DIRECT_URLOPEN_NETWORK_MEDIATOR_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json",
    "schema": "PROJECT_BRAIN_ROOT3_DIRECT_URLOPEN_NETWORK_MEDIATOR_PUBLIC_RUNNER_VERIFICATION_V1",
-   "sha256": "b0e9f1ef01740c85164f9569248bf57005ac1be98ba3f2813a5f5f5aad9221f5",
+   "sha256": "d38bf8846163f4f8142e220b2189b92ec4363a7aebd6c40fab1b49435fd74150",
    "status": "PUBLIC_RUNNER_PASS__DIRECT_URLOPEN_FALLBACK_MEDIATED_AND_RECEIPTED__ZERO_TERMINA",
    "terms": {
     "20261006": 1,
@@ -193310,7 +193310,7 @@
    "imported_by_count": 4,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/astra_runtime.py",
-   "sha256": "88264c6361f5eaa037f81641de1609904bbdf491f067d0dd4bb538123031d689",
+   "sha256": "85a2c2ff6a12edd65acccee5d3e489be8eb66242ade51416a50fa6bb495f5149",
    "summary": "",
    "symbol_count": 112,
    "symbols": [
@@ -241405,12 +241405,13 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py",
-   "sha256": "5268edf534136de5f5b1164eade5817d732b0298e800f560392fa0ab5333a440",
+   "sha256": "fd98e47ec55b0f6fd1d280ec079924d0980fa79d66377235d1f402e27229b04a",
    "summary": "Independent read-only verifier for compiled-bound success episodes.",
-   "symbol_count": 8,
+   "symbol_count": 9,
    "symbols": [
     "BoundSuccessVerificationError",
     "_canon",
+    "_declared_plan_of",
     "_items",
     "_lineage_heads",
     "_reverify_hashed_artifact",
@@ -241424,6 +241425,7 @@
     "canon": 1,
     "checkpoint": 1,
     "compiled-bound": 1,
+    "declared_plan_of": 1,
     "episodes": 1,
     "independent": 1,
     "items": 1,
