@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6280,
+  "research_index_records": 6281,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "91197479405b7a2705c21269f8fe36681f0368c05ec55838849785224ae08f98"
+  "value": "f99d4028ad3dfe2c79cde0dc95edd8041aa5d0b38dc15459f57b86e2378c692f"
  },
  "engines": [
   {
@@ -187739,6 +187739,51 @@
     "uncompilable": 1,
     "unlocks": 1,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "DURABLE_ARTIFACT_DIGEST_REPORTED_UNDER_THE_NAME_THE_CAPABILITY_USES_V1_20261022_V1",
+   "capability": false,
+   "date": "2026-10-22",
+   "id": "research:canonical/action_intents/DURABLE_ARTIFACT_DIGEST_REPORTED_UNDER_THE_NAME_THE_CAPABILITY_USES_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/DURABLE_ARTIFACT_DIGEST_REPORTED_UNDER_THE_NAME_THE_CAPABILITY_USES_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "963a1bd97950d17c104b9c6dbccf3da229c6a4fe9a5c6aee72e58a0477894e24",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "accepted": 1,
+    "all": 1,
+    "archive": 1,
+    "archive_path": 1,
+    "artifact": 2,
+    "benchmark-corpus": 1,
+    "both": 1,
+    "bytes": 1,
+    "calls": 2,
+    "capability": 1,
+    "counts": 1,
+    "digest": 2,
+    "document": 1,
+    "docx_path": 1,
+    "durable": 2,
+    "durable_artifact_digest_reported_under_the_name_the_capability_uses_v1_20261022_v1": 1,
+    "exactly": 1,
+    "file": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goals": 1,
+    "had": 1,
+    "holding": 1,
+    "independent": 1,
+    "just": 1,
+    "knew": 1,
+    "learning": 1,
+    "learning_loop_closed_inside_the_run_by_draining_the_improvement_queue_the_front_door_never_called_v1_20261022_v1": 1,
+    "name": 1,
+    "reported": 2,
+    "v1": 2,
+    "verifier": 3
    }
   },
   {
