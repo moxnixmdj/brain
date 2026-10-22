@@ -876,7 +876,6 @@ def _run_raw_goal_impl(request: Mapping[str, Any]) -> dict[str, Any]:
         # keeps a verifier boundary I have not re-proven exactly as it was.
         if entry.get("capability_source") == "receipt_projection" or (
             selected in _bound_capability_ids()
-            and not selected.startswith("archive.")
         ):
             action = bound_capability_controller_action(selected, entry, dict(inputs))
             # Carry the registry's own argument names alongside the raw inputs.

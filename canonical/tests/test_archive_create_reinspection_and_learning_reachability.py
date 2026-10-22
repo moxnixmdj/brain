@@ -685,3 +685,183 @@ class DocumentVerifyGoalBecomesExperienceTests(unittest.TestCase):
             1,
             "an accepted document-verify goal produced no verified episode",
         )
+
+
+class ArchiveAcceptanceAcceptsTheProofBearingActionTests(unittest.TestCase):
+    """The archive verifier judges the work, not the spelling of the action.
+
+    It compared the recorded plan against one hardcoded action shape, the
+    registry template. The verified bound adapter action names the same
+    capability and carries the same two arguments -- and is the only shape
+    whose trace carries the proof digests learning binds to -- so refusing it
+    meant an archive goal could be executed, accepted, re-inspected byte for
+    byte, and still never become experience. Measured: that cost
+    `EXT_TAR_VERIFY`.
+
+    Accepting the second shape must not open a hole, so the controls below are
+    the point of this class: the plan digest is still recomputed over the
+    actions that actually ran and compared to the controller's own hash, and
+    the capability and both arguments are still pinned to the sentence.
+    """
+
+    def setUp(self):
+        self._out = REPO_ROOT / "canonical/astra_runtime/tmp/accepts-proof-action.tar.gz"
+        self._out.unlink(missing_ok=True)
+        self.checkpoint = None
+
+    def tearDown(self):
+        self._out.unlink(missing_ok=True)
+        if self.checkpoint is not None:
+            self.checkpoint.unlink(missing_ok=True)
+
+    def _run(self):
+        from canonical.runtime import lossless_raw_task_contract_v1 as lrc
+
+        goal = _grammar_goal(
+            str(self._out.relative_to(REPO_ROOT)).replace("\\", "/")
+        )
+        res, self.checkpoint = _run_keeping_checkpoint("ACCEPTS_PROOF", goal)
+        _, _, compiled = live.compile_against_live_registry(goal)
+        contract = lrc.compile_contract(
+            goal,
+            source_id="user",
+            routing_target_effects=list(compiled.get("target_effects") or []),
+        )
+        return goal, res, contract
+
+    def _verify(self, goal, res, contract, row=None):
+        from canonical.runtime import raw_goal_archive_acceptance_v1 as archive_acc
+
+        rows = res.get("execution")
+        row = rows[0] if row is None else row
+        # The inputs the verifier binds the sentence to, taken from the action
+        # that ran: the bound form nests them under ``inputs``.
+        args = row["controller_trace"][0]["plan"].get("args") or {}
+        nested = args.get("inputs") if isinstance(args.get("inputs"), dict) else None
+        inputs = dict(nested) if isinstance(nested, dict) else dict(args)
+        return archive_acc.verify(
+            goal=goal,
+            capability_id=ARCHIVE_CAPABILITY,
+            inputs=inputs,
+            execution=row,
+            raw_contract=contract,
+            root=REPO_ROOT,
+        )
+
+    def test_a_real_run_is_accepted_and_reports_the_output_digest(self):
+        goal, res, contract = self._run()
+        self.assertIs(res.get("pass"), True)
+        acceptance = self._verify(goal, res, contract)
+        self.assertIs(
+            acceptance.get("pass"), True, f"refused: {acceptance.get('reason')}"
+        )
+        self.assertTrue(acceptance.get("verified_output_sha256"))
+
+    def test_the_recorded_action_still_carries_the_proof_digests(self):
+        goal, res, contract = self._run()
+        row = res["execution"][0]
+        plan = row["controller_trace"][0]["plan"]
+        self.assertEqual(
+            plan["type"],
+            "invoke_verified_bound_capability_adapter",
+            "this goal is no longer routed through the proof-bearing action, "
+            "so this test no longer proves what it claims",
+        )
+        inner = row["result"].get("result") or {}
+        self.assertEqual(len(row["result"].get("result_sha256") or ""), 64)
+        self.assertEqual(len(row["result"].get("composition_capsule_head_hash") or ""), 64)
+        self.assertTrue(inner.get("output_sha256"))
+
+    def test_changing_the_output_the_action_names_is_still_refused(self):
+        """NEGATIVE CONTROL: the action must still name the sentence's output."""
+        import copy
+
+        goal, res, contract = self._run()
+        row = copy.deepcopy(res["execution"][0])
+        args = row["controller_trace"][0]["plan"]["args"]
+        args["output_path"] = "canonical/astra_runtime/tmp/somewhere-else.tar.gz"
+        verdict = self._verify(goal, res, contract, row=row)
+        self.assertIs(verdict.get("pass"), False)
+        self.assertEqual(
+            verdict.get("reason"), "CONTROLLER_TRACE_ACTION_BINDING_MISMATCH"
+        )
+
+    def test_editing_the_plan_without_touching_its_binding_is_still_refused(self):
+        """NEGATIVE CONTROL: the plan digest must still bind the exact bytes.
+
+        The digest is now recomputed over the observed plan rather than over a
+        shape this file expects. If that weakened anything, an edit that leaves
+        the capability and both arguments intact -- so the binding check has
+        nothing to say -- would slip through. It must still fail the digest.
+        """
+        import copy
+
+        goal, res, contract = self._run()
+        row = copy.deepcopy(res["execution"][0])
+        row["controller_trace"][0]["plan"]["args"]["injected_note"] = "harmless"
+        verdict = self._verify(goal, res, contract, row=row)
+        self.assertIs(verdict.get("pass"), False)
+        self.assertEqual(
+            verdict.get("reason"), "CONTROLLER_TRACE_PLAN_HASH_MISMATCH"
+        )
+
+    def test_a_different_capability_in_the_action_is_refused(self):
+        """NEGATIVE CONTROL: the action must still name this capability."""
+        import copy
+
+        goal, res, contract = self._run()
+        row = copy.deepcopy(res["execution"][0])
+        row["controller_trace"][0]["plan"]["args"]["capability_id"] = (
+            "archive.verify.tar_gz.gnu"
+        )
+        verdict = self._verify(goal, res, contract, row=row)
+        self.assertIs(verdict.get("pass"), False)
+        self.assertIn("ACTION_BINDING_MISMATCH", str(verdict.get("reason")))
+
+    def test_an_unsupported_action_type_is_refused(self):
+        """NEGATIVE CONTROL: only the two known action shapes are admitted."""
+        import copy
+
+        goal, res, contract = self._run()
+        row = copy.deepcopy(res["execution"][0])
+        row["controller_trace"][0]["plan"]["type"] = "bash_exec"
+        verdict = self._verify(goal, res, contract, row=row)
+        self.assertIs(verdict.get("pass"), False)
+        self.assertIn("ACTION_BINDING_MISMATCH", str(verdict.get("reason")))
+
+
+class ArchiveVerifyGoalBecomesExperienceTests(unittest.TestCase):
+    """The corpus goal this change was measured on: 4 learned becomes 5."""
+
+    def setUp(self):
+        _reset_learning_state()
+        self.checkpoint = None
+
+    def tearDown(self):
+        if self.checkpoint is not None:
+            self.checkpoint.unlink(missing_ok=True)
+        _reset_learning_state()
+
+    def test_an_accepted_archive_verify_goal_becomes_a_verified_episode(self):
+        from canonical.runtime import goal_compilation_benchmark_v1 as bench
+
+        goal = next(
+            g["goal"]
+            for g in list(bench.BENCHMARK_GOALS) + list(bench.EXTENDED_BENCHMARK_GOALS)
+            if g["id"] == "EXT_TAR_VERIFY"
+        )
+        before = int(
+            (self_improvement.load_state().get("stats") or {}).get("verified_episode_count")
+            or 0
+        )
+        res, self.checkpoint = _run_keeping_checkpoint("ARCHIVE_LEARNS", goal)
+        after = int(
+            (self_improvement.load_state().get("stats") or {}).get("verified_episode_count")
+            or 0
+        )
+        self.assertIs(res.get("semantic_acceptance_complete"), True)
+        self.assertEqual(
+            after - before,
+            1,
+            "an accepted archive-verify goal produced no verified episode",
+        )
