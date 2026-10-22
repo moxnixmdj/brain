@@ -23505,10 +23505,10 @@
     "evidence_path": null,
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
     "evidence_sha256": null,
-    "independent_verification_evident": false,
-    "mission_id": null,
+    "independent_verification_evident": true,
+    "mission_id": "ASTRA-VERIFY-SOURCE-CANDIDATES-GIT-INDEX-001",
     "module_sha256": null,
-    "producer_independent": null
+    "producer_independent": true
    }
   },
   {
@@ -24404,16 +24404,16 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6284,
+  "research_index_records": 6285,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
-  "source_index_modules": 1860
+  "source_index_modules": 1861
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e5d3b750f8e12052dbb63e2e30a409f0f13127d385905034b8a810383fd61dcd"
+  "value": "c1c71a88dd597b959143e644fec346a47f16dc724a37ad2ded930848265e0910"
  },
  "engines": [
   {
@@ -46315,7 +46315,7 @@
   "included_source_count": 862,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "8faec70a54d1ba06935b71461e337e303a2bd38e4eec260efe1d82682d3f96a5"
+  "source_tree_digest": "a10c81fc3378a88525890549ddd6c95445ffbbd3a4fa9b7c81ecc910accbd75f"
  },
  "research_index": [
   {
@@ -188790,6 +188790,51 @@
    }
   },
   {
+   "action_id": "SOURCE_CANDIDATE_INDEPENDENT_VERIFICATION_AND_RESULT_REF_LIFT_V1_20261022_V1",
+   "capability": false,
+   "date": "2026-10-22",
+   "id": "research:canonical/action_intents/SOURCE_CANDIDATE_INDEPENDENT_VERIFICATION_AND_RESULT_REF_LIFT_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SOURCE_CANDIDATE_INDEPENDENT_VERIFICATION_AND_RESULT_REF_LIFT_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "dfd1a898b37cf43c88423f1451bcb3303f24ad0815110d5029ba2f9fd07922d1",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "accepted": 3,
+    "access": 1,
+    "adapter": 3,
+    "admit": 1,
+    "all": 2,
+    "astra_runtime.py": 1,
+    "because": 1,
+    "been": 1,
+    "began": 1,
+    "being": 1,
+    "blocked": 1,
+    "bound": 3,
+    "broadening": 2,
+    "chain": 2,
+    "every": 2,
+    "evidence": 2,
+    "goals": 3,
+    "independence": 3,
+    "made": 2,
+    "not": 3,
+    "plan": 2,
+    "read": 2,
+    "result": 4,
+    "so": 4,
+    "source.candidates.enumerate.stdlib": 2,
+    "step": 2,
+    "three": 3,
+    "two": 2,
+    "upgraded": 2,
+    "v1": 2,
+    "verified": 3
+   }
+  },
+  {
    "action_id": "TRUE_CAPABILITY_AUDIT_AND_DOCX_MEASUREMENT_20261014_V1",
    "capability": false,
    "date": "2026-10-14",
@@ -193265,9 +193310,9 @@
    "imported_by_count": 4,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/astra_runtime.py",
-   "sha256": "3b28202ddfb16daf85b95d8bf8e857c45326d356ca3daff82016e9284ba68e6f",
+   "sha256": "88264c6361f5eaa037f81641de1609904bbdf491f067d0dd4bb538123031d689",
    "summary": "",
-   "symbol_count": 111,
+   "symbol_count": 112,
    "symbols": [
     "Blocker",
     "_ExternalBridgeHTTPResponse",
@@ -196187,6 +196232,41 @@
     "source": 2,
     "title": 1,
     "verification": 1,
+    "verify": 2
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/bound_capabilities/source_candidates_verify_git_index.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/bound_capabilities/source_candidates_verify_git_index.py",
+   "sha256": "28a3faeb5909be17bbb44343e74cdb67d308683868bfc4b8f57ae6eef319d3e8",
+   "summary": "Independently verify a source-candidate enumeration against the git index.",
+   "symbol_count": 5,
+   "symbols": [
+    "_independent_digests",
+    "_matches",
+    "_safe",
+    "_suffix_pattern",
+    "run"
+   ],
+   "terms": {
+    "against": 1,
+    "candidates": 1,
+    "enumeration": 1,
+    "git": 2,
+    "independent_digests": 1,
+    "independently": 1,
+    "index": 2,
+    "matches": 1,
+    "run": 1,
+    "safe": 1,
+    "source": 1,
+    "source-candidate": 1,
+    "suffix_pattern": 1,
     "verify": 2
    }
   },
