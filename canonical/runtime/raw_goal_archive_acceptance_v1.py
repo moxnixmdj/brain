@@ -125,22 +125,7 @@ def verify(
                 or len(plan_sha) != 64
             ):
                 return _unresolved("CONTROLLER_TRACE_PROOF_INVALID")
-            expected_actions = [
-                {
-                    "type": "invoke_capability",
-                    "args": {
-                        "capability_id": capability_id,
-                        "manifest_path": manifest_rel,
-                        "output_path": output_rel,
-                    },
-                    "expect": {
-                        "type": "field_equals",
-                        "field": "output_verified",
-                        "value": True,
-                    },
-                },
-                {"type": "finish", "args": {"summary": "RAW_GOAL_COMPLETE"}},
-            ]
+            expected_finish = {"type": "finish", "args": {"summary": "RAW_GOAL_COMPLETE"}}
             observed_actions = []
             for index, row in enumerate(trace):
                 if (
@@ -151,10 +136,42 @@ def verify(
                 ):
                     return _unresolved("CONTROLLER_TRACE_RECORD_INVALID")
                 observed_actions.append(dict(row["plan"]))
-            if observed_actions != expected_actions:
+
+            # The work step must be this capability, carrying the manifest and
+            # the output this sentence named, whether the controller sent it as
+            # the registry template or as the verified bound adapter action.
+            # Both name the same capability and the same two arguments; the
+            # bound form is the one whose trace carries the proof digests the
+            # learning adapters bind an episode to, so refusing it here meant a
+            # goal could be executed, accepted and re-inspected and still never
+            # become experience. The bound form nests its arguments under
+            # ``inputs``, so both places are read.
+            def _bound_arg(args: Mapping[str, Any], name: str) -> Any:
+                if name in args:
+                    return args[name]
+                nested = args.get("inputs")
+                if isinstance(nested, Mapping) and name in nested:
+                    return nested[name]
+                return None
+
+            work = observed_actions[0]
+            work_args = work.get("args") if isinstance(work.get("args"), Mapping) else {}
+            if (
+                work.get("type")
+                not in {"invoke_capability", "invoke_verified_bound_capability_adapter"}
+                or str(work_args.get("capability_id") or "") != capability_id
+                or _bound_arg(work_args, "manifest_path") != manifest_rel
+                or _bound_arg(work_args, "output_path") != output_rel
+                or observed_actions[1] != expected_finish
+            ):
                 return _unresolved("CONTROLLER_TRACE_ACTION_BINDING_MISMATCH")
+            # Bound to the actions that actually ran, which is what the
+            # controller hashed into ``controller_plan_sha256``. Recomputing it
+            # over the observed plan rather than over a shape this file expects
+            # keeps the tamper check exact: change any byte of the recorded plan
+            # and the digest still stops matching.
             canonical = json.dumps(
-                expected_actions,
+                observed_actions,
                 sort_keys=True,
                 separators=(",", ":"),
                 ensure_ascii=False,

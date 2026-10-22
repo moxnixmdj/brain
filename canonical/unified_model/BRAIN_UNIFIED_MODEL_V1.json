@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6281,
+  "research_index_records": 6282,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f99d4028ad3dfe2c79cde0dc95edd8041aa5d0b38dc15459f57b86e2378c692f"
+  "value": "dfc0a9ceaab41a1c362999c0bdce0c6d471edcbac3177a2582d7981f82a499b3"
  },
  "engines": [
   {
@@ -187458,6 +187458,51 @@
    }
   },
   {
+   "action_id": "ARCHIVE_ACCEPTANCE_ADMITS_THE_PROOF_BEARING_ACTION_SHAPE_V1_20261022_V1",
+   "capability": false,
+   "date": "2026-10-22",
+   "id": "research:canonical/action_intents/ARCHIVE_ACCEPTANCE_ADMITS_THE_PROOF_BEARING_ACTION_SHAPE_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ARCHIVE_ACCEPTANCE_ADMITS_THE_PROOF_BEARING_ACTION_SHAPE_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "b5aa809b4f87393101e1db5e130e4742061341696cc607e3e17a6f282a44c567",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "acceptance": 1,
+    "accepted": 1,
+    "action": 3,
+    "adapter": 1,
+    "admits": 1,
+    "against": 1,
+    "answered": 1,
+    "archive": 3,
+    "archive_acceptance_admits_the_proof_bearing_action_shape_v1_20261022_v1": 1,
+    "bearing": 1,
+    "become": 1,
+    "benchmark-corpus": 1,
+    "bound": 1,
+    "capabilities": 1,
+    "carries": 1,
+    "compared": 1,
+    "controller_trace_action_binding_mismatch": 1,
+    "counts": 1,
+    "digests": 1,
+    "excluded": 1,
+    "experience": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 1,
+    "goals": 1,
+    "hardcoded": 1,
+    "learning_loop_closed_inside_the_run_by_draining_the_improvement_queue_the_front_door_never_called_v1_20261022_v1": 1,
+    "no": 1,
+    "proof": 2,
+    "shape": 4,
+    "v1": 2,
+    "verified": 2
+   }
+  },
+  {
    "action_id": "BM25_INVERSE_DOCUMENT_FREQUENCY_REORDERS_BOUND_CAPABILITY_SELECTION_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -221834,7 +221879,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_integrated_brain_v1.py",
-   "sha256": "8c08a678a8a41712023f0e3c2c73f502aebd8320d8b8673a18b68720d1a94c4f",
+   "sha256": "df58b61e8085823e6ada09b9aa1eefed1d3d2a50b4add71cb9127b74f7037744",
    "summary": "Live integrated Brain V1.",
    "symbol_count": 19,
    "symbols": [
@@ -242145,7 +242190,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_archive_acceptance_v1.py",
-   "sha256": "2f147ff73c8934c059da4031ed8a4893b709f13b21475731c7ad6594eaf00d1f",
+   "sha256": "af6142fd467506450db54c711863d5e4e2239b8239219cc8f5fad4a64a8fa8be",
    "summary": "Conservative post-execution, raw-intent acceptance for one exact archive goal.",
    "symbol_count": 5,
    "symbols": [
