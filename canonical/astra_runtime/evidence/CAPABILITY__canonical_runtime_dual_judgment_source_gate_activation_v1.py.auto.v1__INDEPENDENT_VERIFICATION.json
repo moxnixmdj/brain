@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/dual_judgment_source_gate_activation_v1.py.auto.v1",
- "elapsed_ms": 32.022,
+ "elapsed_ms": 30.7,
  "independent_run_reference": {
-  "github_run_id": 39772597757,
+  "github_run_id": 39773116383,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "0a94b42e-3ee9-4b0c-9add-f9f50aee3fca",
+   "jti": "9593e4e3-4b45-4e12-8e80-b123a2cf141a",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39772597757",
+   "run_id": "39773116383",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
