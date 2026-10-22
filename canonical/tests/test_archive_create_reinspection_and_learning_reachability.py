@@ -513,3 +513,175 @@ class CorpusGoalsBecomeVerifiedExperienceTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class DurableArtifactDigestIsReverifiedTests(unittest.TestCase):
+    """Whatever a capability calls its artifact, the bytes get re-hashed.
+
+    The independent verifier only knew three artifact names. A capability whose
+    file was called anything else could never become verified experience, no
+    matter how real its work was, and it was refused with
+    `NO_HASHED_DURABLE_ARTIFACT_TO_REVERIFY` while holding the bytes. Measured
+    across the corpus that cost `EXT_DOCX_VERIFY`: accepted, re-inspected, and
+    then forgotten.
+
+    The rule is now "any `<name>_path` that carries a matching `<name>_sha256`".
+    That can only add artifacts that get re-checked -- a path with no digest
+    sibling is skipped exactly as before, so nothing that was accepted becomes
+    refused -- and every pair it does find is still re-opened from disk and
+    re-hashed, so a mismatch still refuses.
+    """
+
+    def setUp(self):
+        self._dir = REPO_ROOT / "canonical/astra_runtime/tmp/durable-artifact-digest"
+        self._dir.mkdir(parents=True, exist_ok=True)
+        self._made = []
+
+    def tearDown(self):
+        for p in self._made:
+            p.unlink(missing_ok=True)
+
+    def _write(self, name, payload):
+        p = self._dir / name
+        p.write_bytes(payload)
+        self._made.append(p)
+        return str(p.relative_to(REPO_ROOT)).replace("\\", "/")
+
+    def test_a_durable_artifact_under_an_unusual_name_is_reverified(self):
+        from canonical.runtime.r3_bound_success_checkpoint_verifier_v1 import (
+            _reverify_hashed_artifact,
+        )
+
+        rel = self._write("bundle.tar.gz", b"real archive bytes")
+        inner = {
+            "verified": True,
+            "docx_path": rel,
+            "docx_sha256": hashlib.sha256(b"real archive bytes").hexdigest(),
+        }
+        self.assertIs(_reverify_hashed_artifact(inner, REPO_ROOT), True)
+
+    def test_tampering_with_an_unusually_named_artifact_is_refused(self):
+        """NEGATIVE CONTROL: the digest must be checked, not trusted."""
+        from canonical.runtime.r3_bound_success_checkpoint_verifier_v1 import (
+            BoundSuccessVerificationError,
+            _reverify_hashed_artifact,
+        )
+
+        rel = self._write("tampered.tar.gz", b"real archive bytes")
+        inner = {
+            "docx_path": rel,
+            # the digest of bytes that are not there
+            "docx_sha256": hashlib.sha256(b"something else entirely").hexdigest(),
+        }
+        with self.assertRaises(BoundSuccessVerificationError) as ctx:
+            _reverify_hashed_artifact(inner, REPO_ROOT)
+        self.assertIn("DURABLE_ARTIFACT_HASH_MISMATCH:docx_path", str(ctx.exception))
+
+    def test_a_path_with_no_digest_sibling_is_still_skipped(self):
+        """Guard: widening must not newly refuse what it used to accept.
+
+        `collection_path` is reported without a digest by the spreadsheet
+        capability, and was ignored before. It must still be ignored, or this
+        change would turn working goals into refusals.
+        """
+        from canonical.runtime.r3_bound_success_checkpoint_verifier_v1 import (
+            _reverify_hashed_artifact,
+        )
+
+        hashed = self._write("sheet.xlsx", b"spreadsheet bytes")
+        plain = self._write("collection.json", b"input only")
+        inner = {
+            "output_path": hashed,
+            "output_sha256": hashlib.sha256(b"spreadsheet bytes").hexdigest(),
+            "collection_path": plain,  # no collection_sha256 on purpose
+        }
+        self.assertIs(_reverify_hashed_artifact(inner, REPO_ROOT), True)
+
+    def test_a_success_with_no_digested_artifact_is_still_refused(self):
+        """Guard: the fail-closed floor is unchanged."""
+        from canonical.runtime.r3_bound_success_checkpoint_verifier_v1 import (
+            BoundSuccessVerificationError,
+            _reverify_hashed_artifact,
+        )
+
+        plain = self._write("nodigest.tar.gz", b"real archive bytes")
+        with self.assertRaises(BoundSuccessVerificationError) as ctx:
+            _reverify_hashed_artifact({"archive_path": plain}, REPO_ROOT)
+        self.assertIn("NO_HASHED_DURABLE_ARTIFACT_TO_REVERIFY", str(ctx.exception))
+
+    def test_the_archive_verifier_reports_the_digest_of_what_it_verified(self):
+        """The capability now names and digests the file it checked."""
+        from canonical.runtime import goal_compilation_benchmark_v1 as bench
+
+        goal = next(
+            g["goal"]
+            for g in list(bench.BENCHMARK_GOALS) + list(bench.EXTENDED_BENCHMARK_GOALS)
+            if g["id"] == "EXT_TAR_VERIFY"
+        )
+        res, checkpoint = _run_keeping_checkpoint("DURABLE_TAR", goal)
+        try:
+            self.assertIs(res.get("pass"), True)
+            rows = [
+                trace_acc.unwrap_bound_adapter_row(row)
+                for row in (res.get("controller_execution") or {}).get("trace") or []
+            ]
+            row = next(
+                r for r in rows
+                if isinstance(r.get("result"), Mapping)
+                and r["result"].get("capability_id") == "archive.verify.tar_gz.gnu"
+            )
+            result = row["result"]
+            digest = result.get("archive_sha256")
+            self.assertIsInstance(digest, str)
+            self.assertEqual(len(digest), 64)
+            on_disk = (REPO_ROOT / str(result["archive_path"])).read_bytes()
+            self.assertEqual(
+                digest,
+                hashlib.sha256(on_disk).hexdigest(),
+                "the reported digest is not the digest of the bytes on disk",
+            )
+        finally:
+            checkpoint.unlink(missing_ok=True)
+
+
+class DocumentVerifyGoalBecomesExperienceTests(unittest.TestCase):
+    """The corpus goal this change was measured on.
+
+    `EXT_DOCX_VERIFY` was executed and fully accepted and still produced no
+    verified episode, because its capability reported neither the document's
+    name nor its digest. It is the goal that moved the corpus from 3 learned to
+    4, so it is pinned here rather than left to a census.
+    """
+
+    def setUp(self):
+        _reset_learning_state()
+        self.checkpoint = None
+
+    def tearDown(self):
+        if self.checkpoint is not None:
+            self.checkpoint.unlink(missing_ok=True)
+        _reset_learning_state()
+
+    def test_an_accepted_document_verify_goal_becomes_a_verified_episode(self):
+        from canonical.runtime import goal_compilation_benchmark_v1 as bench
+
+        goal = next(
+            g["goal"]
+            for g in list(bench.BENCHMARK_GOALS) + list(bench.EXTENDED_BENCHMARK_GOALS)
+            if g["id"] == "EXT_DOCX_VERIFY"
+        )
+        before = int(
+            (self_improvement.load_state().get("stats") or {}).get("verified_episode_count")
+            or 0
+        )
+        res, self.checkpoint = _run_keeping_checkpoint("DURABLE_DOCX", goal)
+        after = int(
+            (self_improvement.load_state().get("stats") or {}).get("verified_episode_count")
+            or 0
+        )
+        self.assertIs(res.get("semantic_acceptance_complete"), True)
+        self.assertEqual(
+            after - before,
+            1,
+            "an accepted document-verify goal produced no verified episode",
+        )

@@ -59,13 +59,15 @@ def _safe_file(root: Path, relative: str) -> Path:
 
 
 def _reverify_hashed_artifact(inner: Mapping[str, Any], root: Path) -> bool:
-    pairs = (
+    # These three keep their strict contract: a capability that reports one of
+    # these paths must also report its digest, or the success is refused.
+    strict = (
         ("output_path", "output_sha256"),
         ("screenshot_path", "screenshot_sha256"),
         ("xlsx_path", "xlsx_sha256"),
     )
     observed = 0
-    for path_key, hash_key in pairs:
+    for path_key, hash_key in strict:
         raw_path = inner.get(path_key)
         if not isinstance(raw_path, str) or not raw_path.strip():
             continue
@@ -77,6 +79,36 @@ def _reverify_hashed_artifact(inner: Mapping[str, Any], root: Path) -> bool:
         if actual != expected:
             raise BoundSuccessVerificationError("DURABLE_ARTIFACT_HASH_MISMATCH:" + path_key)
         observed += 1
+
+    # Every other durable artifact a capability digested for itself is
+    # re-verified the same way: re-opened from disk and re-hashed, a mismatch
+    # still refuses. A path with no digest sibling is skipped exactly as it was
+    # before, so this can only ever add artifacts that get re-checked -- it
+    # cannot make a success that was accepted before newly refused for lacking a
+    # hash it never reported. Without this, a capability whose artifact is
+    # called something other than one of the three names above could never
+    # become verified experience, no matter how real its work was: the archive
+    # verifier calls its file ``archive_path`` and the document verifier calls
+    # its ``docx_path``, and both were refused with
+    # NO_HASHED_DURABLE_ARTIFACT_TO_REVERIFY while holding the bytes.
+    for path_key in sorted(inner):
+        if not isinstance(path_key, str) or not path_key.endswith("_path"):
+            continue
+        hash_key = path_key[: -len("_path")] + "_sha256"
+        if any(path_key == known for known, _ in strict):
+            continue
+        raw_path = inner.get(path_key)
+        expected = inner.get(hash_key)
+        if not isinstance(raw_path, str) or not raw_path.strip():
+            continue
+        if not isinstance(expected, str) or len(expected) != 64:
+            continue
+        artifact = _safe_file(root, raw_path)
+        actual = sha256(artifact.read_bytes()).hexdigest()
+        if actual != expected:
+            raise BoundSuccessVerificationError("DURABLE_ARTIFACT_HASH_MISMATCH:" + path_key)
+        observed += 1
+
     if observed < 1:
         raise BoundSuccessVerificationError("NO_HASHED_DURABLE_ARTIFACT_TO_REVERIFY")
     return True
