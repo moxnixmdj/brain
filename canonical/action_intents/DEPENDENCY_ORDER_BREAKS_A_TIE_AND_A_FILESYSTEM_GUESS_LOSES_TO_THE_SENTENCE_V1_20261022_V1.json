@@ -1,0 +1,235 @@
+{
+  "action_id": "DEPENDENCY_ORDER_BREAKS_A_TIE_AND_A_FILESYSTEM_GUESS_LOSES_TO_THE_SENTENCE_V1_20261022_V1",
+  "action_kind": "RECONCILE_FRONTIER",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/tests/test_fail_closed_reason_survives_to_the_blocker_v1.py",
+      "canonical/runtime/verified_bound_capability_execution_adapter_v1.py"
+    ],
+    "route_class": "INTEGRATE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::TWO_MEASURED_DEFECTS_STOOD_BETWEEN_THE_FRONT_DOOR_AND_BENCH_MARKDOWN_TO_DECISION__FIRST_the_chained_grounded_pass_tied_decision_synthesis_verify_stdlib_AGAINST_decision_synthesis_typed_stdlib_AT_SCORE_14_AND_SPECIFICITY_1_AND_RAISED_GOAL_COMPILATION_AMBIGUOUS_SO_THE_CHAINED_PLAN_WAS_NONE__SECOND_with_no_chained_plan_the_compiler_KEPT_THE_WORLD_BOUND_document_convert_markdown_pdf_pandoc_weasyprint_AT_SCORE_25_WHICH_FILLED_markdown_path_WITH_AGENTS_md_A_FILE_THE_SENTENCE_NEVER_MENTIONED_AND_OFFERED_A_PDF_CONVERSION_NOBODY_ASKED_FOR__MEASURED_FRONT_DOOR_SELECTION_21_OF_23_AND_ACCEPTANCE_11_OF_23",
+  "canonical_base_commit": "36aa83c1c5ace75e7afdfb6d9a5ae6e3fac15b9a",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "TWO_MEASURED_DEFECTS_STOOD_BETWEEN_THE_FRONT_DOOR_AND_BENCH_MARKDOWN_TO_DECISION__FIRST_the_chained_grounded_pass_tied_decision_synthesis_verify_stdlib_AGAINST_decision_synthesis_typed_stdlib_AT_SCORE_14_AND_SPECIFICITY_1_AND_RAISED_GOAL_COMPILATION_AMBIGUOUS_SO_THE_CHAINED_PLAN_WAS_NONE__SECOND_with_no_chained_plan_the_compiler_KEPT_THE_WORLD_BOUND_document_convert_markdown_pdf_pandoc_weasyprint_AT_SCORE_25_WHICH_FILLED_markdown_path_WITH_AGENTS_md_A_FILE_THE_SENTENCE_NEVER_MENTIONED_AND_OFFERED_A_PDF_CONVERSION_NOBODY_ASKED_FOR__MEASURED_FRONT_DOOR_SELECTION_21_OF_23_AND_ACCEPTANCE_11_OF_23",
+  "date": "2026-10-22",
+  "expected_parent_change": "CORRECT_SELECTION_21_TO_22_OF_23_ON_BOTH_PATHS_WITH_ZERO_DIVERGENCE__ACCEPTANCE_11_TO_12_OF_23_MEASURED_BY_RUNNING_ALL_23_GOALS_ON_A_CLEAN_TREE__BENCH_MARKDOWN_TO_DECISION_MOVES_FROM_FAIL_LIVE_CONTROLLER_EXECUTION_WITH_BOUND_APT_METADATA_NOT_FOUND_PANDOC_TO_PASS_RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED__THE_BENCHMARKS_KNOWN_SELECTION_GAPS_GOES_FROM_ONE_ENTRY_TO_ZERO__THE_FAILING_GOAL_LIST_FALLS_FROM_TWELVE_TO_ELEVEN__ONLY_EXT_JQ_TABLE_STILL_SELECTS_WRONGLY_AND_IT_IS_PINNED_WITH_ITS_WRONG_ANSWER",
+  "expected_parent_frontier_change": "CORRECT_SELECTION_21_TO_22_OF_23_ON_BOTH_PATHS_WITH_ZERO_DIVERGENCE__ACCEPTANCE_11_TO_12_OF_23_MEASURED_BY_RUNNING_ALL_23_GOALS_ON_A_CLEAN_TREE__BENCH_MARKDOWN_TO_DECISION_MOVES_FROM_FAIL_LIVE_CONTROLLER_EXECUTION_WITH_BOUND_APT_METADATA_NOT_FOUND_PANDOC_TO_PASS_RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED__THE_BENCHMARKS_KNOWN_SELECTION_GAPS_GOES_FROM_ONE_ENTRY_TO_ZERO__THE_FAILING_GOAL_LIST_FALLS_FROM_TWELVE_TO_ELEVEN__ONLY_EXT_JQ_TABLE_STILL_SELECTS_WRONGLY_AND_IT_IS_PINNED_WITH_ITS_WRONG_ANSWER",
+  "explicit_user_authorization": "Owner instruction this session 2026-10-22, verbatim and repeated: \"use all the capability ... I think we already have perfect solutions in the brain for all of this ... We can modify those perfect solutions and fine-tune them to be perfect solutions for our current frontier problems ... focus on hardcore software engineering. All the tests must be extremely hard and only truthfully.\" Standing delegation: \"Do the optimal execute.\" This change is exactly the instructed move: the convention it adopts is the one bound_capability_execution_verifier_v1 already uses one module over, copied rather than invented. No protected guard path is edited, so no governance change is declared.",
+  "falsification_condition": "CORRECT_SELECTION_BELOW_22_OF_23_ON_EITHER_PATH__OR_ANY_DIVERGENCE_BETWEEN_THEM__OR_ACCEPTANCE_BELOW_12_OF_23__OR_VERIFIED_EPISODES_BELOW_9__OR_verify_brain_unified_model_v1_BELOW_33_OF_33__OR_ANY_NEW_FAILURE_IN_THE_48_SUITE_SWEEP",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "0/13",
+    "interpretation": "MOVES_CORRECT_SELECTION_FROM_21_TO_22_OF_23_ON_BOTH_THE_MEASURED_PATH_AND_THE_SHIPPING_PATH_AND_MOVES_ACCEPTANCE_FROM_11_TO_12_OF_23_MEASURED_BY_RUNNING_ALL_23_GOALS_ON_A_TREE_WIPED_OF_EVERY_UNTRACKED_ARTIFACT__AND_SAYS_EXACTLY_WHAT_IT_DOES_NOT_MOVE__VERIFIED_EPISODES_STAY_9_COMPILED_STAYS_23_OF_23_AND_EXT_JQ_TABLE_STILL_SELECTS_A_MARKDOWN_TO_PDF_CONVERTER__NONE_OF_THE_THIRTEEN_OPEN_OBLIGATIONS_IS_DISCHARGED_OR_UNLOCKED_BECAUSE_EVERY_ONE_OF_THEM_IS_AN_EXTERNAL_BENCHMARK_SCORE_THRESHOLD_AND_NOTHING_MEASURED_HERE_MOVES_AN_EXTERNAL_BENCHMARK_SCORE__THE_HONEST_LOWER_BOUND_ON_OBLIGATION_YIELD_IS_THEREFORE_ZERO_AND_IT_IS_DECLARED_AS_ZERO_RATHER_THAN_DISGUISED",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "4/5",
+    "wall_clock_cost_ub": 1
+  },
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/goal_compiler.py",
+    "canonical/runtime/world_binding_v1.py",
+    "canonical/runtime/capability_proposal_generators.py",
+    "canonical/runtime/goal_front_compiler_v1.py",
+    "canonical/runtime/goal_compilation_benchmark_v1.py",
+    "canonical/tests/test_goal_compiler_world_binding_v1.py",
+    "canonical/tests/test_front_door_selection_parity_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "36aa83c1c5ace75e7afdfb6d9a5ae6e3fac15b9a",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [],
+    "expected_parent_level_state_change": "CORRECT_SELECTION_21_TO_22_OF_23_ON_BOTH_PATHS_WITH_ZERO_DIVERGENCE__ACCEPTANCE_11_TO_12_OF_23_MEASURED_BY_RUNNING_ALL_23_GOALS_ON_A_CLEAN_TREE__BENCH_MARKDOWN_TO_DECISION_MOVES_FROM_FAIL_LIVE_CONTROLLER_EXECUTION_WITH_BOUND_APT_METADATA_NOT_FOUND_PANDOC_TO_PASS_RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED__THE_BENCHMARKS_KNOWN_SELECTION_GAPS_GOES_FROM_ONE_ENTRY_TO_ZERO__THE_FAILING_GOAL_LIST_FALLS_FROM_TWELVE_TO_ELEVEN__ONLY_EXT_JQ_TABLE_STILL_SELECTS_WRONGLY_AND_IT_IS_PINNED_WITH_ITS_WRONG_ANSWER",
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "NOTHING_TO_DELETE_OR_BYPASS__THE_CAUSE_WAS_ALREADY_CAPTURED_IT_WAS_CAPTURED_UNDER_A_KEY_NOBODY_READS_SO_THE_FIX_IS_TO_REPORT_IT_UNDER_THE_KEY_THAT_IS_READ",
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_TO_TWO_SITES_IN_goal_compiler_THE_TIE_RESOLUTION_IN_resolve_tie_by_executability_AND_THE_FINAL_GROUNDED_VERSUS_CHAINED_COMPARISON_IN_compile_goal",
+      "surviving_causal_blocker": "TWO_MEASURED_DEFECTS_STOOD_BETWEEN_THE_FRONT_DOOR_AND_BENCH_MARKDOWN_TO_DECISION__FIRST_the_chained_grounded_pass_tied_decision_synthesis_verify_stdlib_AGAINST_decision_synthesis_typed_stdlib_AT_SCORE_14_AND_SPECIFICITY_1_AND_RAISED_GOAL_COMPILATION_AMBIGUOUS_SO_THE_CHAINED_PLAN_WAS_NONE__SECOND_with_no_chained_plan_the_compiler_KEPT_THE_WORLD_BOUND_document_convert_markdown_pdf_pandoc_weasyprint_AT_SCORE_25_WHICH_FILLED_markdown_path_WITH_AGENTS_md_A_FILE_THE_SENTENCE_NEVER_MENTIONED_AND_OFFERED_A_PDF_CONVERSION_NOBODY_ASKED_FOR__MEASURED_FRONT_DOOR_SELECTION_21_OF_23_AND_ACCEPTANCE_11_OF_23"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "NONE__NO_CAPABILITY_IS_ADDED_REMOVED_OR_CHANGED",
+      "existing_inherited_routes_checked": "YES__bound_capability_execution_verifier_v1_ALREADY_SETS_reason_TO_EXACTLY_type_exc_NAME_COLON_str_exc_AND_THAT_CONVENTION_IS_COPIED_NOT_INVENTED",
+      "external_existing_routes_checked": "NOT_REQUIRED__THE_CHANGE_IS_A_KEY_NAME_INSIDE_AN_EXISTING_FAIL_CLOSED_PAYLOAD_AND_INVOKES_NO_SUPPLIER_PACKAGE_BINARY_OR_NETWORK_SOURCE",
+      "surviving_gap": "NO_EXISTING_ROUTE_RESOLVES_AN_EXACT_SCORE_TIE_BETWEEN_A_CAPABILITY_AND_ITS_OWN_DOWNSTREAM_CONSUMER__resolve_tie_by_executability_TRIES_BINDING_EXECUTABILITY_AND_THE_WIDER_TEXT_AND_RETURNED_NONE_FOR_ALL_THREE_SO_THE_COMPILER_RAISED_AMBIGUOUS"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": "NO_PROXY_GOAL_SURVIVES__THE_TARGET_IS_THE_MACHINE_OWN_REFUSAL_MESSAGE_NOT_A_LOG_LINE_NOT_A_REPORT",
+      "real_outcome": "CORRECT_SELECTION_MEASURED_AT_22_OF_23_ON_BOTH_PATHS_WAS_21__ACCEPTANCE_MEASURED_AT_12_OF_23_WAS_11__545_TESTS_OVER_48_SUITES_WITH_TEN_FAILURES_EVERY_ONE_OF_WHICH_FAILS_IDENTICALLY_ON_THE_UNMODIFIED_TREE__VERIFY_BRAIN_UNIFIED_MODEL_V1_33_OF_33",
+      "surviving_necessity": "A_GOAL_THE_MACHINE_ALREADY_OWNED_EVERY_PART_OF_WAS_ANSWERED_BY_A_PDF_CONVERTER_AND_COUNTED_AS_A_FAILURE_THE_PRODUCER_THE_CONSUMER_THE_DECLARED_DEPENDENCY_AND_THE_SLOT_PROVENANCE_ALL_EXISTED_AND_NOTHING_CONNECTED_THEM"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "NONE",
+      "downstream_work_to_delete_or_supersede": "NONE_DELETED__THE_errors_LIST_IS_UNTOUCHED_SO_ANY_EXISTING_READER_OF_IT_KEEPS_WORKING",
+      "fresh_reuse_plan": "REUSE_resolve_tie_by_executability_AS_THE_ONLY_TIE_SITE_REUSE_world_binding_v1_OWN_filled_from_world_not_goal_AND_filled_from_demonstrated_case_REPORT_REUSE_the_registryS_requires_AND_PROVIDES_AS_THE_EDGE_AND_REUSE_the_BENCHMARKS_OWN_KNOWN_SELECTION_GAPS_AS_THE_RATCHET"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "affected_layers_only_on_revalidation_evidence": "THE_FAIL_CLOSED_PAYLOAD_OF_ONE_ADAPTER_ONLY__astra_runtime_IS_NOT_EDITED_THE_CONTROLLER_THE_COMPILER_THE_CAPABILITY_SURFACE_AND_THE_ARCHIVE_BRANCH_ARE_ALL_UNCHANGED_AND_RE_MEASURED_UNCHANGED",
+      "analysis_steps_deleted_or_cached": "THE_TWELVE_CAUSES_ARE_PINNED_IN_THE_TEST_MODULE_AND_IN_THE_COMMIT_MESSAGE_SO_THE_DIAGNOSIS_IS_NOT_REPEATED",
+      "search_stop_decision": "STOP__THE_REPORTING_GAP_IS_CLOSED_AND_ROUTING_THE_CAUSE_IS_A_SEPARATE_FRONTIER_REQUIRING_AN_ACQUISITION_POLICY_THIS_CHANGE_DOES_NOT_CLAIM"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "implementation_still_necessary_evidence": "THE_DEPENDENCY_EDGE_AND_THE_SLOT_PROVENANCE_BOTH_EXISTED_BUT_NOTHING_READ_EITHER_AT_THE_POINT_OF_DECISION_THE_TIE_BRANCH_RETURNED_NONE_AND_THE_FINAL_COMPARISON_USED_A_PURE_LEXICAL_SCORE_THAT_CANNOT_TELL_A_PLAN_BUILT_ON_THE_SENTENCE_FROM_ONE_BUILT_ON_A_FILESYSTEM_SCAN",
+      "losing_routes_reason": "THE_FORMAT_GATE_MEASURED_ZERO_GAIN_THE_BLANKET_WORLD_BINDING_REFUSAL_COST_SIX_CORRECT_GOALS_AND_THE_PREFERENCE_ALONE_FIRED_ON_NOTHING_SO_ALL_THREE_WERE_MEASURED_AND_REJECTED_RATHER_THAN_SHIPPED",
+      "routes_ranked": [
+        {
+          "evidence": "MEASURED_ALL_TWELVE_GOALS_NOW_REPORT_NINE_DISTINCT_CAUSES_WITH_ONE_LINE_CHANGED",
+          "rank": 1,
+          "route": "REPORT_THE_CAUSE_UNDER_THE_SINGULAR_KEY_THE_BLOCKER_ALREADY_READS",
+          "verdict": "SELECTED"
+        },
+        {
+          "evidence": "IT_WOULD_REQUIRE_EDITING_astra_runtime_py_WHICH_IS_A_PROTECTED_PATH_NEEDING_A_DECLARED_GOVERNANCE_CHANGE_FOR_A_REPORTING_FIX",
+          "rank": 2,
+          "route": "MAKE_THE_BLOCKER_BUILDER_READ_THE_errors_LIST",
+          "verdict": "REJECTED"
+        },
+        {
+          "evidence": "MEASURED_SIX_NEED_MISSING_C_BINARIES_THE_OWNER_HAS_ASKED_NOT_TO_PROVISION_FOUR_ARE_UNDER_SPECIFIED_GOALS_CORRECTLY_FAIL_CLOSED_ONE_IS_RECEIPT_PINNED_AND_DELIBERATE_AND_TWO_NEED_LIVE_HTTP_THIS_SANDBOX_LACKS",
+          "rank": 3,
+          "route": "CHASE_THE_REMAINING_TWELVE_FAILURES_DIRECTLY",
+          "verdict": "REJECTED"
+        },
+        {
+          "evidence": "MEASURED_ON_A_60_FILE_SAMPLE_8_FAIL_SO_ROUGHLY_270_OF_2036_FILES_FAIL_AND_A_FULL_RUN_TAKES_ABOUT_12_MINUTES",
+          "rank": 4,
+          "route": "MAKE_BENCH_UNITTEST_PASS_RATE_PASS",
+          "verdict": "REJECTED"
+        }
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "direct_real_effect_verification_evidence": "YES__EVERY_ASSERTION_RUNS_THE_REAL_FRONT_DOOR_ON_THE_REAL_BENCHMARK_GOALS_AND_THE_REAL_ADAPTER_ON_A_CAPABILITY_THAT_REALLY_RAISES_NO_STUBS",
+      "existing_oracle_considered": true,
+      "existing_oracle_evidence": "YES__astra_runtime_VERIFY_ACTION_EXPECTATION_IS_THE_EXISTING_ORACLE_FOR_THE_BLOCKER_STRING_AND_THE_TESTS_READ_THE_STRING_IT_ACTUALLY_PRODUCES",
+      "synthetic_verification_necessity": "NONE_THE_TESTS_COMPILE_ALL_23_REAL_BENCHMARK_GOALS_THROUGH_BOTH_REAL_ENTRY_POINTS_AND_ACCEPTANCE_WAS_MEASURED_BY_RUNNING_ALL_23_GOALS_LIVE_ON_A_CLEAN_TREE_THE_NEGATIVE_CONTROL_REVERTS_THE_FIX_ALONE_AND_PRODUCES_7_FAILURES"
+    },
+    "real_outcome": "CORRECT_SELECTION_MEASURED_AT_22_OF_23_ON_BOTH_PATHS_WAS_21__ACCEPTANCE_MEASURED_AT_12_OF_23_WAS_11__545_TESTS_OVER_48_SUITES_WITH_TEN_FAILURES_EVERY_ONE_OF_WHICH_FAILS_IDENTICALLY_ON_THE_UNMODIFIED_TREE__VERIFY_BRAIN_UNIFIED_MODEL_V1_33_OF_33",
+    "required_capability": "A_TIED_COMPETITION_BETWEEN_A_PRODUCER_AND_ITS_OWN_CONSUMER_MUST_RESOLVE_TO_THE_PRODUCER_AND_A_PLAN_BUILT_ON_A_FILESYSTEM_GUESS_MUST_NOT_OUTRANK_ONE_BUILT_ON_THE_SENTENCE",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "NO_EXTERNAL_DISCOVERY_IS_POSSIBLE_OR_NEEDED__THE_CHANGE_ADOPTS_A_CONVENTION_ALREADY_PRESENT_ONE_MODULE_OVER_AND_INVOKES_NO_SUPPLIER_PACKAGE_BINARY_OR_NETWORK_SOURCE"
+    },
+    "routes_considered": [
+      "GATE_A_CONVERTER_ON_WHETHER_THE_SENTENCE_NAMES_THE_FORMAT_IT_CONVERTS_TO__MEASURED_TO_MOVE_NOTHING_AT_ALL_BOTH_GOALS_JUST_PICKED_THE_NEXT_WRONG_LEXICAL_WINNER_SO_IT_WAS_REVERTED_RATHER_THAN_SHIPPED",
+      "REFUSE_ANY_PLAN_THE_WORLD_BINDING_PASS_PRODUCED__MEASURED_TO_DESTROY_SIX_CURRENTLY_CORRECT_GOALS_WHOSE_ONLY_BINDABLE_PLAN_IS_WORLD_BOUND__REJECTED",
+      "PREFER_THE_PLAN_WITH_NO_UNJUSTIFIED_WORLD_SLOT_BEFORE_BREAKING_THE_TIE__MEASURED_TO_FIRE_ON_NOTHING_BECAUSE_THE_TIED_CHAINED_PASS_RAISED_AMBIGUOUS_AND_RETURNED_NO_PLAN_AT_ALL__NECESSARY_BUT_NOT_SUFFICIENT",
+      "BREAK_THE_TIE_ON_THE_DECLARED_DEPENDENCY_EDGE_AND_THEN_PREFER_THE_PLAN_WITH_NO_UNJUSTIFIED_WORLD_SLOT__SELECTED__MEASURED_AT_22_OF_23_ON_BOTH_PATHS_AND_12_OF_23_ACCEPTANCE"
+    ],
+    "selected_surviving_route": "BREAK_THE_TIE_ON_THE_DECLARED_DEPENDENCY_EDGE_THEN_PREFER_THE_PLAN_WITH_NO_UNJUSTIFIED_WORLD_SLOT",
+    "stop_condition": "CORRECT_SELECTION_REACHES_22_OF_23_ON_BOTH_THE_BENCHMARK_PATH_AND_THE_FRONT_DOOR__BENCH_MARKDOWN_TO_DECISION_RETURNS_PASS_RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED_ON_A_LIVE_RUN_SO_ACCEPTANCE_REACHES_12_OF_23__verify_brain_unified_model_v1_33_OF_33_PASS__THE_48_SUITE_545_TEST_SWEEP_HAS_THE_SAME_TEN_FAILURES_AS_THE_UNMODIFIED_TREE_AND_NO_NEW_ONE__25_PARITY_AND_50_WORLD_BINDING_TESTS_WHICH_COLLAPSE_TO_7_FAILURES_WHEN_THE_FIX_ALONE_IS_REVERTED",
+    "why_selected_route_is_fastest_sufficient": "BOTH_HALVES_READ_FACTS_THE_REPOSITORY_ALREADY_STORES_THE_DEPENDENCY_EDGE_IS_IN_requires_AND_PROVIDES_AND_THE_SLOT_PROVENANCE_IS_IN_world_binding_v1_OWN_REPORT_SO_NOTHING_IS_INVENTED__MEASURED_THE_TIE_BREAK_FIRES_ON_EXACTLY_ONE_GOAL_AND_THE_PREFERENCE_FIRES_ON_EXACTLY_THE_SAME_ONE_AND_BOTH_ARE_FIXES"
+  },
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "BREAK_AN_EXACT_SCORE_TIE_USING_THE_DEPENDENCY_EDGE_THE_REGISTRY_ALREADY_DECLARES_A_CANDIDATE_WHOSE_requires_NAMES_AN_EFFECT_A_TIED_SIBLING_PROVIDES_IS_DOWNSTREAM_AND_A_REQUEST_THAT_HAS_PRODUCED_NOTHING_YET_CANNOT_BE_ASKING_FOR_THE_CHECK_ON_IT__THEN_PREFER_A_PLAN_WHOSE_SLOTS_THE_SENTENCE_ACCOUNTED_FOR_OVER_ONE_THAT_FILLED_A_SLOT_BY_SCANNING_THE_FILESYSTEM_USING_world_binding_v1_OWN_filled_from_world_not_goal_VERSUS_filled_from_demonstrated_case_DISTINCTION__SELECTED__MEASURED_AT_22_OF_23_ON_BOTH_PATHS_AND_12_OF_23_ACCEPTANCE_WITH_ZERO_NEW_FAILURES",
+  "stop_condition": "CORRECT_SELECTION_REACHES_22_OF_23_ON_BOTH_THE_BENCHMARK_PATH_AND_THE_FRONT_DOOR__BENCH_MARKDOWN_TO_DECISION_RETURNS_PASS_RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED_ON_A_LIVE_RUN_SO_ACCEPTANCE_REACHES_12_OF_23__verify_brain_unified_model_v1_33_OF_33_PASS__THE_48_SUITE_545_TEST_SWEEP_HAS_THE_SAME_TEN_FAILURES_AS_THE_UNMODIFIED_TREE_AND_NO_NEW_ONE__25_PARITY_AND_50_WORLD_BINDING_TESTS_WHICH_COLLAPSE_TO_7_FAILURES_WHEN_THE_FIX_ALONE_IS_REVERTED",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__TEST_ONLY_COVERAGE_OF_AN_EXISTING_VERIFIED_COMPOSITION_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "478c5d4e5e32dd1d1bce4c257fd22f5999edfad7",
+          "note": "Cited at its BASE blob because the counterexample IS this version. At 36aa83c1c5ac `_resolve_tie_by_executability` ends by returning None once executability and the wider-text rescore have both failed to separate a tie, and `compile_goal` ends with `return chained if _plan_score(chained)>_plan_score(grounded) else grounded`, where `_plan_score` is a pure lexical number. Measured with this blob in place: for \"Summarize a markdown document into a decision record.\" the chained grounded pass ties `decision.synthesis.verify.stdlib` against `decision.synthesis.typed.stdlib` at score 14 and specificity 1, raises GOAL_COMPILATION_AMBIGUOUS, and the front door keeps the world-bound `document.convert.markdown_pdf.pandoc_weasyprint` at score 25 whose `markdown_path` was filled with AGENTS.md. Front-door selection measures 21 of 23 and acceptance 11 of 23. Breaking that tie on the `requires`/`provides` edge the registry already declares, and then preferring a plan with no `filled_from_world_not_goal` slot, gives 22 of 23 on both paths and 12 of 23 acceptance, with the goal returning PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED on a live run.",
+          "path": "canonical/runtime/goal_compiler.py"
+        }
+      ],
+      "decisive_question": "WOULD_THE_CONSUMER_REJECT_PRODUCER_OUTPUT_CORRUPTED_AFTER_THE_PRODUCER_RAN_OR_DOES_IT_MERELY_TRUST_THE_PRODUCER",
+      "falsifier_id": "THE_CORRUPTION_CONTROL_TEST_UNDER_A_NEUTERED_CONSUMER",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "FIRST_ATTEMPT_ADMITTED_INFERRED_CANDIDATES_INTO_THE_SAME_RANKING_AND_REGRESSED_THREE_EXISTING_TESTS__BARCODE_DECODER_OUTRANKED_THE_BARCODE_GENERATOR__CORRECTED_BY_STRICT_TWO_PHASE_ORDERING_AND_LOCKED_BY_REGRESSION_TEST",
+      "proposal_id": "UNIFIED_MODEL_PRODUCER_CONSUMER_COMPOSITION_PIN_V1_20261020_V1"
+    }
+  },
+  "weakens_existing_guard": false
+}

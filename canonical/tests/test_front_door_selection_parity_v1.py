@@ -42,8 +42,16 @@ changes what the pinned compiler can bind at all.  For
   * with ``terminal.kstar.root.assess.stdlib`` present the grounded pass is non-empty,
     the world fallback never runs, and the chained pass's ``knowledge.consistency.assess``
     (score 8, every slot bound from the sentence) wins.  Removing that one entry from
-    the registry flips the answer; adding it back flips it again.  Both directions are
-    pinned below, which is what makes the mechanism load-bearing rather than a story.
+    the registry flipped the answer, and adding it back flipped it again -- which is
+    what made the mechanism load-bearing rather than a story.
+
+That last fragility has since been removed rather than merely pinned.  A second fix,
+in ``goal_compiler.compile_goal``, makes a plan that filled a slot by scanning the
+filesystem lose to a plan whose slots the sentence accounted for.  Measured over all
+three registry views the answer is now the same and is grounded, so the selection no
+longer depends on a weak competitor staying in the ranking.  Both fixes are kept: the
+widened ranking separates "may compete" from "may decide", and the preference makes
+the right answer independent of what competes.
 
 The fix therefore keeps the full admissible view as the thing that is RANKED and bound
 against, while the routable projection remains the only pool a DECISION may come from.
@@ -53,12 +61,12 @@ F4 was protecting became selectable.
 
 MEASURED RESULT
 
-  canonical (benchmark path)  21 of 23   unchanged
-  front door (shipping path)  21 of 23   was 20
+  canonical (benchmark path)  22 of 23   was 21
+  front door (shipping path)  22 of 23   was 20
   divergences between them    0          was 1
 
-The two remaining misses are shared by both paths and are pinned with their wrong
-answer, so a fix that moves them has to say so.
+The one remaining miss is shared by both paths and is pinned with its wrong answer,
+so a fix that moves it has to say so.
 
 Every number here is a measurement, not an assertion: each test compiles the real goals
 through the real entry points.  Perturbing any pin turns it red -- that was verified by
@@ -93,11 +101,10 @@ THE_WRONG_PICK = "docx.document.create_from_json_record"
 LOAD_BEARING_COMPETITOR = "terminal.kstar.root.assess.stdlib"
 
 # Measured, with the benchmark's own selection rule (parts first, else the top pick).
-KNOWN_FRONT_DOOR_CORRECT = 21
-KNOWN_CANONICAL_CORRECT = 21
+KNOWN_FRONT_DOOR_CORRECT = 22
+KNOWN_CANONICAL_CORRECT = 22
 KNOWN_DIVERGENCES: set = set()
 KNOWN_SHARED_MISSES = {
-    "BENCH_MARKDOWN_TO_DECISION": "document.convert.markdown_pdf.pandoc_weasyprint",
     "EXT_JQ_TABLE": "document.convert.markdown_pdf.pandoc_weasyprint",
 }
 
@@ -213,7 +220,22 @@ class FrontDoorAndCanonicalNowAgreeTests(RegistryViews):
 
 
 class TheMechanismIsLoadBearingTests(RegistryViews):
-    """Pin WHY the answer changes, so the fix cannot be undone by accident."""
+    """Pin WHY the answer holds, so the fix cannot be undone by accident.
+
+    This class used to pin a FRAGILITY: the correct answer depended on one weak
+    zero-input capability staying in the ranking, and deleting
+    `terminal.kstar.root.assess.stdlib` flipped the selection to the docx writer.
+    That was a real measurement and it drove the fix that widened the ranking.
+
+    It no longer holds, and the reason is a better fix rather than a lost one.
+    The unjustified-world-slot preference in `goal_compiler.compile_goal` now
+    catches the same case one level down: the docx writer's `json_path` is filled
+    by picking a file off the filesystem, so it loses to a plan every one of
+    whose slots the sentence accounted for -- whatever the ranking contains.
+    Measured over all three registry views, the answer is now the same and is
+    grounded, so the selection no longer depends on a weak competitor being
+    present. That is pinned here in place of the old fragility.
+    """
 
     GOAL = next(g["goal"] for g in GOALS if g["id"] == FIXED_GOAL)
 
@@ -223,27 +245,42 @@ class TheMechanismIsLoadBearingTests(RegistryViews):
         except Exception:
             return []
 
-    def test_ranking_without_the_competitor_selects_the_wrong_capability(self):
-        """The regression this file exists to prevent, pinned in both directions."""
-        self.assertIn(THE_WRONG_PICK, self._pinned_over(self.routable))
-
-    def test_ranking_with_the_competitor_selects_the_right_capability(self):
-        self.assertIn(EXPECTED_FOR_FIXED, self._pinned_over(self.admissible))
-
-    def test_deleting_that_one_entry_from_the_full_view_flips_the_answer(self):
-        """Names the exact entry, so nobody 'cleans up' a weak candidate and loses this."""
+    def test_the_answer_holds_over_every_registry_view(self):
+        """Stronger than the pin this replaces: no view, no competitor, same answer."""
         without = {k: v for k, v in self.admissible.items() if k != LOAD_BEARING_COMPETITOR}
-        self.assertIn(THE_WRONG_PICK, self._pinned_over(without))
-        self.assertIn(EXPECTED_FOR_FIXED, self._pinned_over(self.admissible))
+        for label, view in (("routable", self.routable),
+                            ("admissible", self.admissible),
+                            ("admissible-minus-competitor", without)):
+            self.assertIn(EXPECTED_FOR_FIXED, self._pinned_over(view), label)
+            self.assertNotIn(THE_WRONG_PICK, self._pinned_over(view), label)
 
-    def test_the_wrong_pick_needs_a_file_the_sentence_never_stated(self):
-        """The reason the wrong answer is wrong: its slot came off the filesystem."""
-        plan = goal_compiler.compile_goal(self.GOAL, self.routable, REPO_ROOT)
-        self.assertEqual(plan["selected_capability"], THE_WRONG_PICK)
-        self.assertTrue(str(plan.get("binding_source")).endswith("WORLD_BINDING"),
-                        "the wrong pick was supposed to be world-bound; if it is now "
-                        "grounded the diagnosis in this file's docstring is stale")
-        self.assertIn("json_path", plan["inputs"])
+    def test_the_answer_is_grounded_over_every_registry_view(self):
+        """Not merely correct -- bound from the sentence, never from the filesystem."""
+        without = {k: v for k, v in self.admissible.items() if k != LOAD_BEARING_COMPETITOR}
+        for label, view in (("routable", self.routable),
+                            ("admissible", self.admissible),
+                            ("admissible-minus-competitor", without)):
+            plan = goal_compiler.compile_goal(self.GOAL, view, REPO_ROOT)
+            self.assertEqual(plan["binding_source"], "GOAL_STATEMENT", label)
+            self.assertFalse(
+                goal_compiler._plan_has_unjustified_world_slots(plan),
+                f"{label}: a slot was filled off the filesystem again",
+            )
+
+    def test_the_wrong_pick_would_need_a_file_the_sentence_never_stated(self):
+        """Why the old wrong answer was wrong, kept as a measurement of the slot.
+
+        The docx writer is still in the registry and still scores 25 on this
+        sentence -- higher than the correct capability's 8.  What changed is that
+        its `json_path` can now only be filled by picking a file the sentence
+        never named, and a plan built on that guess no longer wins.
+        """
+        score, _spec, evidence = goal_compiler._score(self.GOAL, THE_WRONG_PICK,
+                                                      self.admissible[THE_WRONG_PICK])
+        self.assertGreater(score, 0, "the wrong pick is no longer even a candidate")
+        self.assertTrue(evidence["matched_identity"], "it still matches the sentence's nouns")
+        self.assertIn("json_path", goal_compiler._placeholders(
+            (self.admissible[THE_WRONG_PICK].get("action_template") or {})))
 
     def test_the_right_pick_is_bound_from_the_sentence_not_the_world(self):
         plan = goal_compiler.compile_goal(self.GOAL, self.admissible, REPO_ROOT)
