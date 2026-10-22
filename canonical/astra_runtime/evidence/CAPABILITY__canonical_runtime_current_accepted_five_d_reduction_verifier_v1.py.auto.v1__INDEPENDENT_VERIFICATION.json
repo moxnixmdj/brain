@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/current_accepted_five_d_reduction_verifier_v1.py.auto.v1",
- "elapsed_ms": 32.002,
+ "elapsed_ms": 33.144,
  "independent_run_reference": {
-  "github_run_id": 39773116383,
+  "github_run_id": 39773558749,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "9593e4e3-4b45-4e12-8e80-b123a2cf141a",
+   "jti": "9fbdc838-f78e-4513-9673-fef6713ca2eb",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39773116383",
+   "run_id": "39773558749",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
