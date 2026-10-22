@@ -50,6 +50,23 @@ class DecisionEvidenceIndependenceTests(unittest.TestCase):
         cls.output_path = REPO_ROOT / cls.output_rel
         cls.pristine = cls.output_path.read_bytes()
 
+    @classmethod
+    def tearDownClass(cls):
+        # The producer walks **/*.json from the repository root, so a file this
+        # suite leaves behind is itself a schema-declaring, decidable candidate
+        # that sorts AHEAD of the real source. Measured: leaving these in place
+        # made the next run's producer pick its own earlier output while git's
+        # tracked-file search still picked the real one, and the verifier then
+        # correctly reported SOURCE_NOT_IN_GIT_SCHEMA_CANDIDATES. Two tests
+        # failed on the second run of the same suite and passed on a clean tree,
+        # i.e. the suite was order-dependent. It must not be.
+        for rel in (cls.output_rel, cls.result_rel,
+                    "canonical/astra_runtime/tmp/TEST_INDEP_DECISION_EVIDENCE_PROBE.json"):
+            try:
+                (REPO_ROOT / rel).unlink()
+            except FileNotFoundError:
+                pass
+
     def tearDown(self):
         self.output_path.write_bytes(self.pristine)
 

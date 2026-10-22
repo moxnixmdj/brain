@@ -81,7 +81,12 @@ def adapt(request: Mapping[str, Any], *, repo_root: str | Path) -> Mapping[str, 
         if not isinstance(selected, Sequence) or isinstance(selected, (str, bytes)):
             return None
         selected = [str(x) for x in selected]
-        if selected != [ARCHIVE_CAPABILITY]:
+        # The plan is the goal's own compiled chain. It used to be pinned to the
+        # single archive sentence; every other accepted goal was discarded here
+        # even though its semantic acceptance had already been independently
+        # verified. The capability allowlist lives in the independent verifier,
+        # which re-derives acceptance from the checkpoint bytes -- not here.
+        if not selected or any(not cid for cid in selected):
             return None
 
         checkpoint = material.get("controller_checkpoint")
@@ -104,11 +109,11 @@ def adapt(request: Mapping[str, Any], *, repo_root: str | Path) -> Mapping[str, 
 
         accepted_effect = "raw_goal.accepted.sha256:" + goal_sha
         steps = [{
-            "index": 0,
-            "op": ARCHIVE_CAPABILITY,
+            "index": index,
+            "op": cid,
             "inputs": [],
-            "outputs": [accepted_effect],
-        }]
+            "outputs": [accepted_effect] if index == len(selected) - 1 else [],
+        } for index, cid in enumerate(selected)]
         episode = {
             "episode_id": "raw-accepted:" + goal_sha[:24],
             "scope_id": "raw-goal-sha256:" + goal_sha,
@@ -125,7 +130,7 @@ def adapt(request: Mapping[str, Any], *, repo_root: str | Path) -> Mapping[str, 
         }
         trace = [{
             "cycle": 0,
-            "capability_id": ARCHIVE_CAPABILITY,
+            "capability_id": selected[-1],
             "goal_sha256": goal_sha,
             "task_contract_sha256": material.get("raw_task_contract_sha256"),
             "acceptance_sha256": _sha(dict(acceptance)),
@@ -151,7 +156,8 @@ def adapt(request: Mapping[str, Any], *, repo_root: str | Path) -> Mapping[str, 
             "raw_task_contract_sha256": material.get("raw_task_contract_sha256"),
             "accepted_obligation_ids": deepcopy(obligation_ids),
             "retained_acceptance": deepcopy(dict(acceptance)),
-            "selected_capability_id": ARCHIVE_CAPABILITY,
+            "selected_plan": deepcopy(selected),
+            "selected_capability_id": selected[-1],
             "checkpoint_path": checkpoint_path,
             "checkpoint_sha256": trace[0]["checkpoint_sha256"],
             "controller_plan_sha256": plan_sha,

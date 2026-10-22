@@ -1,0 +1,240 @@
+{
+ "action_id": "RAW_ACCEPTED_LEARNING_GENERALIZED_FROM_ONE_HARDCODED_SENTENCE_TO_ANY_OWNED_PLAN_V1_20261022_V1",
+ "action_kind": "RECONCILE_FRONTIER",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/tests/test_raw_accepted_generic_plan_learning_v1.py",
+   "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py",
+   "canonical/runtime/r3_raw_success_adapter_v1.py"
+  ],
+  "route_class": "INTEGRATE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::r3_raw_success_adapter_v1_AND_r3_raw_success_checkpoint_verifier_v1_WERE_BOTH_HARDWIRED_TO_THE_SINGLE_ARCHIVE_SENTENCE_SO_EVERY_OTHER_ACCEPTED_GOAL_WAS_REFUSED_WITH_RAW_CAPABILITY_NOT_ADMITTED_AND_COULD_NEVER_BECOME_VERIFIED_EXPERIENCE__MEASURED_ON_A_CLEAN_TREE_WHERE_11_OF_23_GOALS_REACHED_SEMANTIC_ACCEPTANCE_BUT_ONLY_7_BECAME_EPISODES_AND_ALL_4_THAT_DID_NOT_SHARED_ONE_QUEUED_EXPAND_SUCCESS_VERIFICATION_FRONTIER_ITEM_ASKING_FOR_AN_INDEPENDENT_READONLY_SUCCESS_VERIFIER_OR_ADAPTER",
+ "canonical_base_commit": "d77bc5f4659f0b04166e75a4660aab5724ac513d",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "r3_raw_success_adapter_v1_AND_r3_raw_success_checkpoint_verifier_v1_WERE_BOTH_HARDWIRED_TO_THE_SINGLE_ARCHIVE_SENTENCE_SO_EVERY_OTHER_ACCEPTED_GOAL_WAS_REFUSED_WITH_RAW_CAPABILITY_NOT_ADMITTED_AND_COULD_NEVER_BECOME_VERIFIED_EXPERIENCE__MEASURED_ON_A_CLEAN_TREE_WHERE_11_OF_23_GOALS_REACHED_SEMANTIC_ACCEPTANCE_BUT_ONLY_7_BECAME_EPISODES_AND_ALL_4_THAT_DID_NOT_SHARED_ONE_QUEUED_EXPAND_SUCCESS_VERIFICATION_FRONTIER_ITEM_ASKING_FOR_AN_INDEPENDENT_READONLY_SUCCESS_VERIFIER_OR_ADAPTER",
+ "date": "2026-10-22",
+ "expected_parent_change": "VERIFIED_EPISODES_7_TO_9_MEASURED_ON_A_TREE_WIPED_OF_EVERY_UNTRACKED_ARTIFACT__THE_TWO_NEW_EPISODES_ARE_raw_accepted_Rank_source_evidence_by_relevance_to_the_objective_WITH_THE_TWO_STEP_PLAN_source_candidates_enumerate_stdlib_THEN_source_objective_relevance_rank_bm25_AND_raw_accepted_Read_a_PDF_and_extract_its_text_WITH_THE_ONE_STEP_PLAN_pdf_extract_text_pypdf__ACCEPTANCE_HOLDS_AT_11_OF_23_AND_SELECTION_AT_21_OF_23_AND_THE_SEVEN_BOUND_SUCCESS_EPISODES_ARE_UNTOUCHED",
+ "expected_parent_frontier_change": "VERIFIED_EPISODES_7_TO_9_MEASURED_ON_A_TREE_WIPED_OF_EVERY_UNTRACKED_ARTIFACT__THE_TWO_NEW_EPISODES_ARE_raw_accepted_Rank_source_evidence_by_relevance_to_the_objective_WITH_THE_TWO_STEP_PLAN_source_candidates_enumerate_stdlib_THEN_source_objective_relevance_rank_bm25_AND_raw_accepted_Read_a_PDF_and_extract_its_text_WITH_THE_ONE_STEP_PLAN_pdf_extract_text_pypdf__ACCEPTANCE_HOLDS_AT_11_OF_23_AND_SELECTION_AT_21_OF_23_AND_THE_SEVEN_BOUND_SUCCESS_EPISODES_ARE_UNTOUCHED",
+ "explicit_user_authorization": "Owner instruction this session 2026-10-22, verbatim and repeated: \"use all the capability ... plus thinking from the deepest layer from first principles ... The plan must make the goal real now ... focus on hardcore software engineering. All the tests must be extremely hard and only truthfully.\" Standing delegation: \"Do the optimal execute.\" Measurement selected this route: a payoff probe first showed that marking the evidence-rank and claim-bind capabilities independent moved nothing (11/7 unchanged) and marking all four at once REGRESSED acceptance to 9, so the independence-evidence route was disproved before any code was written. Neither edited file is a protected guard path, so no governance change is declared.",
+ "falsification_condition": "ANY_TAMPERING_ATTACK_ON_THE_RETAINED_ACCEPTANCE_THE_CHECKPOINT_DIGEST_THE_EPISODE_STEPS_THE_PROGRAM_DIGEST_OR_EITHER_LINEAGE_HEAD_GOES_UNDETECTED__OR_VERIFIED_EPISODE_COUNT_FALLS_BELOW_9__OR_ACCEPTANCE_FALLS_BELOW_11__OR_SELECTION_BELOW_21_OF_23__OR_VERIFY_BRAIN_UNIFIED_MODEL_V1_BELOW_33_OF_33__OR_THE_ARCHIVE_SENTENCE_STOPS_VERIFYING_THROUGH_ITS_OWN_PINNED_BRANCH",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "MOVES_VERIFIED_EXPERIENCE_FROM_7_OF_23_TO_9_OF_23_ON_THE_SAME_23_GOALS_WITH_ACCEPTANCE_11_OF_23_UNCHANGED_COMPILED_23_OF_23_UNCHANGED_AND_CORRECT_SELECTION_21_OF_23_UNCHANGED_ALL_MEASURED_WITH_THE_REPOSITORYS_OWN_BENCHMARK_RUNNER_ON_A_TREE_WIPED_OF_EVERY_UNTRACKED_ARTIFACT__THE_GAIN_IS_THAT_TWO_GOALS_WHICH_HAD_ALREADY_REACHED_EXACT_SEMANTIC_ACCEPTANCE_AND_RETAINED_THEIR_PROOF_ARE_NOW_LEARNED_FROM_RATHER_THAN_MERELY_ACCEPTED__MEASURED_ISOLATED_BY_STASHING_THE_TWO_SOURCE_FILES_WHICH_TURNS_6_OF_THE_22_NEW_TESTS_RED__HONEST_LIMIT_THE_OTHER_TWO_UNLEARNED_ACCEPTED_GOALS_STAY_FAIL_CLOSED_BECAUSE_source_evidence_extract_objective_grounded_stdlib_REQUIRES_A_source_candidate_provenance_verified_EFFECT_THAT_NO_REGISTERED_CAPABILITY_PROVIDES_AND_THAT_NEEDS_LIVE_RETRIEVAL_FROM_A_DOMAIN_THIS_SANDBOX_CANNOT_REACH_SO_THEIR_REFUSAL_IS_CORRECT_AND_NOT_A_GAP_IN_THIS_CHANGE",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "4/5",
+  "wall_clock_cost_ub": 1
+ },
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/runtime/raw_goal_trace_acceptance_v1.py",
+  "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py",
+  "canonical/runtime/r3_raw_success_adapter_v1.py",
+  "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py",
+  "canonical/runtime/lossless_raw_task_contract_v1.py",
+  "canonical/runtime/live_integrated_brain_v1.py",
+  "canonical/runtime/astra_runtime.py"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "d77bc5f4659f0b04166e75a4660aab5724ac513d",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [],
+  "expected_parent_level_state_change": "VERIFIED_EPISODES_7_TO_9_MEASURED_ON_A_TREE_WIPED_OF_EVERY_UNTRACKED_ARTIFACT__THE_TWO_NEW_EPISODES_ARE_raw_accepted_Rank_source_evidence_by_relevance_to_the_objective_WITH_THE_TWO_STEP_PLAN_source_candidates_enumerate_stdlib_THEN_source_objective_relevance_rank_bm25_AND_raw_accepted_Read_a_PDF_and_extract_its_text_WITH_THE_ONE_STEP_PLAN_pdf_extract_text_pypdf__ACCEPTANCE_HOLDS_AT_11_OF_23_AND_SELECTION_AT_21_OF_23_AND_THE_SEVEN_BOUND_SUCCESS_EPISODES_ARE_UNTOUCHED",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "DELETING_THE_CONSTANT_ALONE_WAS_MEASURED_AND_IS_NOT_SUFFICIENT__THE_ADAPTER_BUILT_A_CANDIDATE_AND_THE_INDEPENDENT_VERIFIER_THEN_REFUSED_IT_WITH_RAW_CAPABILITY_NOT_ADMITTED_SO_THE_CENSUS_STAYED_AT_11_AND_7",
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__A_CONSTANT_IN_TWO_FILES_NOT_AN_INTRINSIC_LIMIT_OF_THE_PROBLEM",
+   "surviving_causal_blocker": "NONE_FOR_THE_TWO_GOALS_THIS_CHANGE_REACHES__BOTH_NOW_PRODUCE_VERIFIED_EPISODES_AND_THEIR_TAMPERING_CONTROLS_ALL_REFUSE_WITH_A_NAMED_REASON"
+  },
+  "obs_capability": {
+   "capability_work_deleted": "NONE_REQUIRED__THE_CHANGE_DELETES_A_CONDITION_RATHER_THAN_ADDING_A_CAPABILITY",
+   "existing_inherited_routes_checked": "YES__r3_bound_success_checkpoint_verifier_v1_ALREADY_PREFERS_declared_plan_OVER_plan_WHICH_IS_EXACTLY_THE_DIGEST_RULE_THE_GENERAL_PATH_NEEDED_AND_raw_goal_trace_acceptance_v1_VERIFY_ALREADY_RE_OPENS_ARTIFACTS_FROM_DISK_FOR_ANY_PLAN",
+   "external_existing_routes_checked": "NOT_REQUIRED_FOR_THIS_ROUTE__IT_REUSES_TWO_MODULES_ALREADY_IN_THE_REPOSITORY_AND_NO_EXTERNAL_SUPPLIER_PACKAGE_OR_BINARY_IS_INVOLVED",
+   "surviving_gap": "THE_OTHER_TWO_UNLEARNED_ACCEPTED_GOALS_NEED_A_source_candidate_provenance_verified_EFFECT_THAT_NO_REGISTERED_CAPABILITY_PROVIDES_MEASURED_BY_SCANNING_EVERY_PROVIDES_LIST_AND_THAT_NEEDS_LIVE_RETRIEVAL_FROM_A_DOMAIN_THIS_SANDBOX_CANNOT_REACH"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": "NO_PROXY_GOAL_SURVIVES__THE_TARGET_IS_THE_MACHINE_OWN_VERIFIED_EPISODE_COUNT_NOT_A_TEST_COUNT_NOT_A_REPORT_AND_NOT_A_DOCUMENT",
+   "real_outcome": "VERIFIED_EPISODE_COUNT_GOES_FROM_7_TO_9_ON_A_TREE_WIPED_OF_EVERY_UNTRACKED_ARTIFACT_WHILE_ACCEPTANCE_HOLDS_AT_11_OF_23_AND_SELECTION_HOLDS_AT_21_OF_23_MEASURED_WITH_THE_REPOSITORYS_OWN_BENCHMARK_RUNNER",
+   "surviving_necessity": "NECESSARY__TWO_GOALS_THAT_ALREADY_REACHED_EXACT_SEMANTIC_ACCEPTANCE_AND_RETAINED_THEIR_PROOF_WERE_BEING_DISCARDED_BY_A_CONSTANT_NAMING_ONE_SENTENCE_SO_NO_AMOUNT_OF_ADDITIONAL_CAPABILITY_WORK_COULD_MAKE_THEM_LEARNABLE"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "NONE__NO_CAPABILITY_IS_ABSORBED_THE_CHANGE_IS_IN_THE_VERIFICATION_FRONTIER_NOT_IN_THE_CAPABILITY_SURFACE",
+   "downstream_work_to_delete_or_supersede": "NONE_DELETED__THE_ARCHIVE_BRANCH_IS_UNTOUCHED_AND_STILL_DISPATCHES_ON_ITS_OWN_SENTENCE_WITH_ITS_50_TEST_SUITE_GREEN",
+   "fresh_reuse_plan": "REUSE_raw_goal_trace_acceptance_v1_VERIFY_AS_THE_ACCEPTANCE_ORACLE_AND_MIRROR_THE_declared_plan_DIGEST_RULE_ALREADY_USED_BY_THE_BOUND_CHECKPOINT_VERIFIER"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "affected_layers_only_on_revalidation_evidence": "R3_SUCCESS_VERIFICATION_FRONTIER_ONLY__THE_CAPABILITY_SURFACE_THE_COMPILER_THE_SELECTION_BENCHMARK_AND_THE_ARCHIVE_BRANCH_ARE_ALL_UNCHANGED_AND_RE_MEASURED_UNCHANGED",
+   "analysis_steps_deleted_or_cached": "THE_PROBE_MEASUREMENTS_ARE_RECORDED_IN_THE_INTENT_AND_THE_COMMIT_MESSAGE_SO_THE_FOUR_DISPROVED_ROUTES_ARE_NOT_RE_EXPLORED",
+   "search_stop_decision": "STOP__THE_REACHABLE_GAIN_IN_THIS_FRONTIER_IS_EXHAUSTED_THE_REMAINING_TWO_GOALS_ARE_BLOCKED_BY_A_MISSING_CAPABILITY_THAT_NEEDS_NETWORK_THIS_SANDBOX_LACKS"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "EACH_LOSING_ROUTE_WAS_MEASURED_NOT_ARGUED__THREE_OF_THEM_LEFT_THE_CENSUS_AT_11_AND_7_OR_REGRESSED_IT_AND_THE_FOURTH_CANNOT_BE_MEASURED_IN_THIS_ENVIRONMENT",
+   "routes_ranked": [
+    {
+     "evidence": "PROBE_CONFIRMED_THE_GENERIC_ACCEPTANCE_VERIFIER_PASSES_ON_BOTH_CHECKPOINTS_BEFORE_ANY_CODE_WAS_WRITTEN",
+     "rank": 1,
+     "route": "GENERALIZE_THE_RAW_ACCEPTED_READ_ONLY_VERIFIER_TO_ANY_OWNED_PLAN",
+     "verdict": "SELECTED"
+    },
+    {
+     "evidence": "MEASURED_11_AND_7_UNCHANGED_THE_VERIFIER_STILL_RAISED_RAW_CAPABILITY_NOT_ADMITTED",
+     "rank": 2,
+     "route": "LOOSEN_THE_RAW_SUCCESS_ADAPTER_ALONE",
+     "verdict": "REJECTED"
+    },
+    {
+     "evidence": "MEASURED_11_AND_7_UNCHANGED_FOR_EACH_ONE_INDIVIDUALLY_AND_ACCEPTANCE_REGRESSED_TO_9_WHEN_ALL_FOUR_WERE_MARKED",
+     "rank": 3,
+     "route": "WRITE_INDEPENDENCE_EVIDENCE_FOR_THE_EVIDENCE_RANK_AND_CLAIM_BIND_CAPABILITIES",
+     "verdict": "REJECTED"
+    },
+    {
+     "evidence": "REQUIRES_LIVE_RETRIEVAL_FROM_A_DOMAIN_THIS_SANDBOX_CANNOT_REACH_SO_IT_CANNOT_BE_MEASURED_HERE",
+     "rank": 4,
+     "route": "ADD_A_CAPABILITY_PROVIDING_source_candidate_provenance_verified",
+     "verdict": "REJECTED"
+    }
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "direct_real_effect_verification_evidence": "YES__THE_REAL_FRONT_DOOR_RUNS_THE_REAL_GOALS_AND_THE_REAL_CONTROLLER_CHECKPOINTS_ON_DISK_ARE_RE_OPENED_AND_RE_HASHED_BY_THE_INDEPENDENT_VERIFIER_AND_THE_ACCEPTANCE_RECEIPT_IS_RE_DERIVED_FROM_THEM",
+   "existing_oracle_considered": true,
+   "existing_oracle_evidence": "YES__raw_goal_trace_acceptance_v1_VERIFY_IS_THE_EXISTING_ORACLE_AND_IT_IS_THE_ONE_THAT_RE_DERIVES_THE_RECEIPT_RATHER_THAN_A_NEW_ONE",
+   "synthetic_verification_necessity": "SYNTHETIC_INPUTS_ARE_USED_ONLY_FOR_THE_TWELVE_TAMPERING_CONTROLS_WHERE_THE_POINT_IS_TO_PROVE_REFUSAL__EVERY_PASSING_ASSERTION_IS_ON_A_REAL_RUN_AND_A_REAL_CHECKPOINT"
+  },
+  "real_outcome": "VERIFIED_EPISODES_7_TO_9__ACCEPTANCE_11_OF_23_UNCHANGED__SELECTION_21_OF_23_UNCHANGED__NO_PARKED_SUCCESS_LEARNING",
+  "required_capability": "INDEPENDENT_READONLY_SUCCESS_VERIFIER_OR_ADAPTER",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "NO_EXTERNAL_DISCOVERY_IS_POSSIBLE_OR_NEEDED__THE_ROUTE_REUSES_TWO_MODULES_AND_ONE_ACCEPTANCE_ORACLE_ALREADY_IN_THE_REPOSITORY_AND_INVOKES_NO_SUPPLIER_PACKAGE_BINARY_OR_NETWORK_SOURCE_SO_THERE_IS_NO_FRONTIER_TO_REFRESH"
+  },
+  "routes_considered": [
+   "WRITE_INDEPENDENCE_EVIDENCE_FOR_THE_EVIDENCE_RANK_AND_CLAIM_BIND_CAPABILITIES__DISPROVED_BY_PROBE__MARKING_ANY_ONE_OF_THEM_INDEPENDENT_LEFT_THE_CENSUS_AT_11_AND_7_AND_MARKING_ALL_FOUR_REGRESSED_ACCEPTANCE_TO_9",
+   "LOOSEN_THE_RAW_SUCCESS_ADAPTER_ALONE__DISPROVED_BY_PROBE__THE_INDEPENDENT_VERIFIER_THEN_REFUSED_THE_CANDIDATE_WITH_RAW_CAPABILITY_NOT_ADMITTED_SO_NOTHING_WAS_LEARNED",
+   "ADD_A_CAPABILITY_PROVIDING_source_candidate_provenance_verified__REQUIRES_LIVE_RETRIEVAL_FROM_A_DOMAIN_THIS_SANDBOX_CANNOT_REACH_SO_IT_CANNOT_BE_MEASURED_HERE",
+   "GENERALIZE_THE_RAW_ACCEPTED_READ_ONLY_VERIFIER_TO_ANY_OWNED_PLAN__SELECTED__PROBE_CONFIRMIED_THE_GENERIC_ACCEPTANCE_VERIFIER_PASSES_ON_BOTH_CHECKPOINTS_BEFORE_ANY_CODE_WAS_WRITTEN"
+  ],
+  "selected_surviving_route": "GENERALIZE_THE_RAW_ACCEPTED_READ_ONLY_VERIFIER_TO_ANY_OWNED_PLAN",
+  "stop_condition": "VERIFIED_EPISODE_COUNT_9_AND_PARKED_SUCCESS_LEARNING_COUNT_0_ON_A_CLEAN_TREE__VERIFY_BRAIN_UNIFIED_MODEL_V1_33_OF_33_PASS__THE_269_TEST_SWEEP_IS_CLEAN__GOAL_COMPILATION_23_OF_23_AND_SELECTION_21_OF_23_UNCHANGED__TWENTY_TWO_NEW_TESTS_SIX_OF_WHICH_FAIL_WHEN_THE_GENERAL_PATH_IS_REVERTED",
+  "why_selected_route_is_fastest_sufficient": "IT_IS_THE_ONLY_ROUTE_THAT_THE_MEASUREMENT_LEFT_STANDING__PROBES_DISPROVED_THE_INDEPENDENCE_EVIDENCE_ROUTE_FOR_ALL_FOUR_UNLEARNED_GOALS_AND_THE_TWO_REMAINING_ARE_BLOCKED_BY_A_REQUIRED_EFFECT_NO_REGISTERED_CAPABILITY_PROVIDES_SO_THE_ONLY_REACHABLE_GAIN_WAS_TO_STOP_DISCARDING_PROOF_THE_MACHINE_HAD_ALREADY_EARNED"
+ },
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "WRITE_A_REAL_SECOND_IMPLEMENTATION_THAT_RE_ESTABLISHES_EVERY_LOAD_BEARING_CLAIM_THROUGH_A_MECHANISM_THE_PRODUCER_DOES_NOT_USE__CANDIDATE_SET_FROM_GIT_GREP_L_DIGESTS_FROM_SHA256SUM_CANONICAL_FORM_AND_COUNTS_FROM_JQ_AND_DECIDABILITY_BY_RE_RUNNING_THE_CONSUMERS_OWN_VALIDATOR_ON_BYTES_REOPENED_FROM_DISK__THEN_RECORD_THE_MEASURED_RESULT_AS_EVIDENCE_RATHER_THAN_ASSERTING_A_FLAG",
+ "stop_condition": "VERIFIED_EPISODE_COUNT_9_AND_PARKED_SUCCESS_LEARNING_COUNT_0_ON_A_CLEAN_TREE__VERIFY_BRAIN_UNIFIED_MODEL_V1_33_OF_33_PASS__THE_269_TEST_SWEEP_IS_CLEAN__GOAL_COMPILATION_23_OF_23_AND_SELECTION_21_OF_23_UNCHANGED__TWENTY_TWO_NEW_TESTS_SIX_OF_WHICH_FAIL_WHEN_THE_GENERAL_PATH_IS_REVERTED",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NOT_APPLICABLE__TEST_ONLY_COVERAGE_OF_AN_EXISTING_VERIFIED_COMPOSITION_WITH_SANDBOX_MEASUREMENT_ONLY",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "3afceda23369a23b2619aabdc8a06f4e749be6c5",
+     "note": "Cited at its BASE blob because the counterexample IS this version. At d77bc5f line 77 raises RAW_CAPABILITY_NOT_ADMITTED for any capability other than archive.verify.tar_gz.gnu, line 80 matches the goal against the archive regex and line 152 asks the archive-specific acceptance verifier. Measured with this blob in place: 11 of 23 goals reach exact semantic acceptance and only 7 become verified episodes, and the two goals this change reaches produce nothing. Replacing it with the general read-only path moves the same census to 9 verified episodes with acceptance unchanged at 11.",
+     "path": "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py"
+    },
+    {
+     "git_blob_sha": "80a2599a31501db18754e913b763254966b4923e",
+     "note": "Cited at its BASE blob because the counterexample IS this version. At d77bc5f line 84 reads `if selected != [ARCHIVE_CAPABILITY]: return None`, so every accepted goal whose plan is not exactly the archive verify capability is discarded before it can become an episode candidate. Measured with this blob in place the census stays at 11 accepted and 7 verified; emitting one step per capability in the goal's own selected plan moves it to 9 verified.",
+     "path": "canonical/runtime/r3_raw_success_adapter_v1.py"
+    }
+   ],
+   "decisive_question": "WOULD_THE_CONSUMER_REJECT_PRODUCER_OUTPUT_CORRUPTED_AFTER_THE_PRODUCER_RAN_OR_DOES_IT_MERELY_TRUST_THE_PRODUCER",
+   "falsifier_id": "THE_CORRUPTION_CONTROL_TEST_UNDER_A_NEUTERED_CONSUMER",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "FIRST_ATTEMPT_ADMITTED_INFERRED_CANDIDATES_INTO_THE_SAME_RANKING_AND_REGRESSED_THREE_EXISTING_TESTS__BARCODE_DECODER_OUTRANKED_THE_BARCODE_GENERATOR__CORRECTED_BY_STRICT_TWO_PHASE_ORDERING_AND_LOCKED_BY_REGRESSION_TEST",
+   "proposal_id": "UNIFIED_MODEL_PRODUCER_CONSUMER_COMPOSITION_PIN_V1_20261020_V1"
+  }
+ },
+ "weakens_existing_guard": false
+}
