@@ -71,7 +71,13 @@ def _safe_file(root: Path, relative: str) -> Path:
     return target
 
 
-def _reverify_hashed_artifact(inner: Mapping[str, Any], root: Path) -> bool:
+def _reverify_hashed_artifact(
+    inner: Mapping[str, Any],
+    root: Path,
+    *,
+    inputs: Mapping[str, Any] | None = None,
+    prior_artifacts: set[str] | None = None,
+) -> bool:
     # These three keep their strict contract: a capability that reports one of
     # these paths must also report its digest, or the success is refused.
     strict = (
@@ -80,6 +86,7 @@ def _reverify_hashed_artifact(inner: Mapping[str, Any], root: Path) -> bool:
         ("xlsx_path", "xlsx_sha256"),
     )
     observed = 0
+    reverified: list[str] = []
     for path_key, hash_key in strict:
         raw_path = inner.get(path_key)
         if not isinstance(raw_path, str) or not raw_path.strip():
@@ -92,6 +99,7 @@ def _reverify_hashed_artifact(inner: Mapping[str, Any], root: Path) -> bool:
         if actual != expected:
             raise BoundSuccessVerificationError("DURABLE_ARTIFACT_HASH_MISMATCH:" + path_key)
         observed += 1
+        reverified.append(raw_path)
 
     # Every other durable artifact a capability digested for itself is
     # re-verified the same way: re-opened from disk and re-hashed, a mismatch
@@ -121,9 +129,31 @@ def _reverify_hashed_artifact(inner: Mapping[str, Any], root: Path) -> bool:
         if actual != expected:
             raise BoundSuccessVerificationError("DURABLE_ARTIFACT_HASH_MISMATCH:" + path_key)
         observed += 1
+        reverified.append(raw_path)
 
     if observed < 1:
-        raise BoundSuccessVerificationError("NO_HASHED_DURABLE_ARTIFACT_TO_REVERIFY")
+        # A step that produces no durable artifact of its own -- a terminal
+        # verification step, whose entire output is a verdict -- is not thereby
+        # unproven: the caller has already recomputed its inputs digest, its
+        # registry entry digest, its rendered action and its exact result bytes.
+        # What it must additionally do is consume bytes that this same proof has
+        # already re-opened and re-hashed, so no step can enter a verified
+        # episode unless some artifact behind it was checked against disk.
+        # Without this, any plan ending in a verification step could never become
+        # verified experience however real its work was: measured on
+        # BENCH_GROUNDING_AND_VERIFY, whose decision and grounding verifiers
+        # return only a verdict, and on EXT_DECISION_VERIFY, whose
+        # decision.synthesis.verify.stdlib reports no path at all.
+        prior = set(prior_artifacts or ())
+        consumed = {
+            value
+            for value in (inputs.values() if isinstance(inputs, Mapping) else ())
+            if isinstance(value, str) and value in prior
+        }
+        if not consumed:
+            raise BoundSuccessVerificationError("NO_HASHED_DURABLE_ARTIFACT_TO_REVERIFY")
+    if prior_artifacts is not None:
+        prior_artifacts.update(reverified)
     return True
 
 
@@ -212,6 +242,9 @@ def verify_material(
 
         expected_steps: list[dict[str, Any]] = []
         expected_trace: list[dict[str, Any]] = []
+        # Artifact paths this proof has already re-opened and re-hashed, in step
+        # order, so a later artifact-free step can be tied back to real bytes.
+        reverified_artifacts: set[str] = set()
         for index, cid in enumerate(selected):
             record = completed[index]
             if astra_runtime._controller_checkpoint_record_valid(record) is not True:
@@ -249,7 +282,12 @@ def verify_material(
                 raise BoundSuccessVerificationError("BOUND_INNER_RESULT_INVALID:" + cid)
             if _sha(inner) != result.get("result_sha256"):
                 raise BoundSuccessVerificationError("BOUND_RESULT_DIGEST_MISMATCH:" + cid)
-            _reverify_hashed_artifact(inner, root)
+            _reverify_hashed_artifact(
+                inner,
+                root,
+                inputs=args.get("inputs") if isinstance(args.get("inputs"), Mapping) else None,
+                prior_artifacts=reverified_artifacts,
+            )
 
             inspected = bound_adapter.inspect(cid)
             entry = inspected.get("entry")
