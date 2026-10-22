@@ -34,7 +34,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::source.candidates.enumerate.stdlib carried no independence evidence at all, so the verified bound adapter refused it and blocked every goal whose chain began with it. Nothing in the registry checked its filesystem walk. Separately, _resolve_result_refs in astra_runtime.py only knew the flat registry-template result shape, so once a chain's first step was upgraded to the verified bound adapter -- which nests the capability's own result under 'result' -- the next step could not read output_path and the whole plan died with RESULT_REFERENCE_FIELD_MISSING. That made three goals that had been accepted stop being accepted the moment their plans were upgraded, so the upgrade path could not be used at all.",
- "canonical_base_commit": "8c39f3c3e50c4b84523b25d9977f11587f574a75",
+ "canonical_base_commit": "d804c455663dea5454ebf1a81a8b7298f79ddac9",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -79,7 +79,7 @@
   "canonical/runtime/astra_runtime.py -- unmodified. _ensure_local_dependency already probes a declared python_stdlib module with importlib.util.find_spec and blocks when it is missing, so the corrected declaration is verified by the existing gate rather than by anything new."
  ],
  "recursive_obs": {
-  "canonical_base_commit": "8c39f3c3e50c4b84523b25d9977f11587f574a75",
+  "canonical_base_commit": "d804c455663dea5454ebf1a81a8b7298f79ddac9",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "EDITING_THE_SUBSTRATE_GATE_TO_HONOUR_OPTIONAL_AND_FALLBACK_WHICH_IS_A_PROTECTED_GUARD_PATH_AND_WOULD_HAVE_REQUIRED_ASSERTING_A_USER_GOVERNANCE_AUTHORIZATION_THAT_WAS_DELEGATED_RATHER_THAN_GRANTED",
@@ -305,7 +305,7 @@
    "selected_route": "DECLARE_THE_SUBSTRATE_A_CAPABILITY_ACTUALLY_NEEDS__RATHER_THAN_LETTING_A_PREFERRED_BUT_UNREQUIRED_APT_PACKAGE_BLOCK_IT__SO_THE_SQLITE_VERIFIER_IS_DECLARED_PYTHON_STDLIB_SQLITE3_THE_WAY_ITS_SIBLING_CREATE_CAPABILITY_ALWAYS_HAS_BECAUSE_ITS_ADAPTER_CATCHES_FILENOTFOUNDERROR_AND_IMPORTS_THE_STDLIB_MODULE",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-22T12:56:24Z",
+    "checked_at_utc": "2026-10-22T12:58:36Z",
     "execution_dependencies": [
      {
       "dependency": "python3_interpreter",
