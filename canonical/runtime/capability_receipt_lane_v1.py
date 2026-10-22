@@ -47,6 +47,7 @@ import importlib.util
 import json
 import os
 import platform
+import re
 import shutil
 import signal
 import subprocess
@@ -156,6 +157,73 @@ def run_cli_adapter(module_path: str, root: str, timeout_s: int = 20) -> dict[st
         return None
     result["structured_stdout"] = structured
     return result
+
+
+_DECLARED_ARG_CACHE: dict[str, dict[str, Any]] = {}
+
+
+def _declared_entries(root: str) -> dict[str, Any]:
+    """Registry entries by capability id, from both registries (bound wins)."""
+    if root not in _DECLARED_ARG_CACHE:
+        merged: dict[str, Any] = {}
+        for rel in (EXTENDED, BOUND):
+            try:
+                merged.update(json.load(open(os.path.join(root, rel), encoding="utf-8"))["capabilities"])
+            except (OSError, ValueError, KeyError):
+                continue
+        _DECLARED_ARG_CACHE[root] = merged
+    return _DECLARED_ARG_CACHE[root]
+
+
+def _probe_output_path(capability_id: str, module_sha: str) -> str:
+    """A deterministic, repository-local sink so a probe is reproducible by `--verify`."""
+    safe = re.sub(r"[^A-Za-z0-9._-]", "_", capability_id)
+    return os.path.join(
+        "canonical", "astra_runtime", "tmp", "receipt_probe", f"{safe}__{module_sha[:12]}.json"
+    )
+
+
+def declared_probe_args(root: str, capability_id: str, module_sha: str) -> dict[str, Any]:
+    """The capability's own declared invocation, with `${input.*}` given probe values.
+
+    `action_template.args` already states precisely how the brain invokes this
+    capability. The probe discarded it and called `run({}, root)`, so any adapter
+    that reads an argument -- `source.candidates.enumerate.stdlib` raises
+    `JSON_OUTPUT_REQUIRED` on an absent `output_path` -- could never be receipted,
+    and `except BaseException: return None` made that look like "no evidence
+    available" rather than "the probe never ran it". Placeholders are filled with
+    deterministic values only: a capability id for free text and a content-addressed
+    path for sinks, so a later `--verify` re-execution reaches the same result hash.
+    """
+    entry = _declared_entries(root).get(capability_id)
+    template = (entry or {}).get("action_template")
+    args = dict(((template or {}).get("args")) or {})
+    args.pop("capability_id", None)
+    sink = _probe_output_path(capability_id, module_sha)
+    for key, value in list(args.items()):
+        if isinstance(value, str) and value.startswith("${input.") and value.endswith("}"):
+            name = value[len("${input."):-1]
+            args[key] = sink if name.endswith("_path") else capability_id
+    return args
+
+
+def _probe_invoke(
+    fn: Any, root: str, capability_id: str, module_sha: str
+) -> tuple[Any, dict[str, Any]]:
+    """Run the adapter, preferring the empty-arg probe and falling back to declared args.
+
+    Monotonic by construction: the `{}` call is attempted first and unchanged, so
+    every receipt the lane already issued still issues identically, and only
+    adapters that the empty call cannot exercise gain one.
+    """
+    try:
+        return fn({}, root), {}
+    except BaseException:  # noqa: BLE001 - the empty probe is a first attempt, not a verdict
+        pass
+    declared = declared_probe_args(root, capability_id, module_sha)
+    if not declared:
+        raise
+    return fn(declared, root), declared
 
 
 def contract_shape(path: str | os.PathLike) -> tuple[str, str] | None:
@@ -281,6 +349,7 @@ def execute_and_receipt(capability_id: str, module_path: str, entrypoint: str,
     outcome = "UNKNOWN"
     result: Any = None
     observed: dict[str, Any] = {}
+    invoked: dict[str, Any] = {}
     try:
         spec = importlib.util.spec_from_file_location(module_name, os.path.join(root, module_path))
         if spec is None or spec.loader is None:
@@ -294,7 +363,7 @@ def execute_and_receipt(capability_id: str, module_path: str, entrypoint: str,
             fn = getattr(module, entrypoint, None)
             if not callable(fn):
                 return None
-            result = fn({}, root)
+            result, invoked = _probe_invoke(fn, root, capability_id, module_sha)
         finally:
             signal.alarm(0)
     except BaseException:  # noqa: BLE001 - a failed probe is data, not an error
@@ -319,7 +388,7 @@ def execute_and_receipt(capability_id: str, module_path: str, entrypoint: str,
         "module_path": module_path,
         "module_sha256": module_sha,
         "entrypoint": entrypoint,
-        "invoked_args": {},
+        "invoked_args": invoked,
         "outcome": outcome,
         "observed": observed,
         "result_sha256": sha256_canonical(result),
@@ -416,8 +485,41 @@ def verify_producer_receipts(root: str, ran_by: str,
                      "GitHub OIDC claims is not independence")}
 
 
+def _has_independence_claim(entry: dict[str, Any]) -> bool:
+    """Whether the entry already carries an independence claim, read as the gate reads it.
+
+    Mirrors `verified_bound_capability_execution_adapter_v1`, so "needs attestation"
+    here means exactly "the bound adapter will refuse to run this capability".
+    """
+    verification = entry.get("verification")
+    if not isinstance(verification, dict):
+        return False
+    return (
+        verification.get("independent_verified") is True
+        or verification.get("independently_verified") is True
+        or isinstance(verification.get("independently_verified_by"), str)
+        or verification.get("producer_independent") is True
+    )
+
+
+def _bound_module_path(root: str, entry: dict[str, Any]) -> str | None:
+    """The adapter module a bound capability runs through, if it is in the tree."""
+    source = entry.get("source")
+    declared = str((source or {}).get("adapter_path") or "") if isinstance(source, dict) else ""
+    for candidate in (
+        declared,
+        os.path.join(
+            "canonical", "runtime", "bound_capabilities",
+            str(entry.get("adapter_module") or "") + ".py",
+        ),
+    ):
+        if candidate and os.path.isfile(os.path.join(root, candidate)):
+            return candidate
+    return None
+
+
 def discover(root: str, kinds: tuple[str, ...] = ("contract", "cli")) -> list[tuple[str, str, str, str]]:
-    """Inventory entries not already live in the bound registry, by invocation kind.
+    """Inventory entries needing a producer receipt, by invocation kind.
 
     Returns (capability_id, module_path, kind, entrypoint).  `kind` was previously carried in
     the entrypoint slot and silently dropped by the caller, so every CLI candidate was
@@ -426,24 +528,43 @@ def discover(root: str, kinds: tuple[str, ...] = ("contract", "cli")) -> list[tu
     `contract` - speaks `run(args, root) -> dict` and is called in-process.
     `cli`      - executable as a program and is run through the repository's own
                  `bound_capabilities/cli_command.py` adapter.
+
+    Two populations need receipts, and only the first was covered. Extended-registry
+    entries are not executable at all yet. Bound entries *are* executable -- but
+    "executable" was being read as "already verified", which it is not: 36 of the 72
+    bound capabilities carry no independence claim the gate accepts, so the bound
+    adapter refuses them and no success of theirs can become verified experience.
+    Skipping them left that gap permanently unclosable, because the independent
+    verifier can only re-run what a producer receipt already describes.
     """
     extended = json.load(open(os.path.join(root, EXTENDED), encoding="utf-8"))["capabilities"]
     bound = json.load(open(os.path.join(root, BOUND), encoding="utf-8"))["capabilities"]
     out: list[tuple[str, str, str, str]] = []
+
+    def _add(cid: str, path: str) -> None:
+        shape = contract_shape(os.path.join(root, path))
+        if shape is not None:
+            if "contract" in kinds:
+                out.append((cid, path, "contract", shape[0]))
+            return
+        if "cli" in kinds and cli_shape(os.path.join(root, path)):
+            # entrypoint is the adapter's function; cli_command always exposes `run`
+            out.append((cid, path, "cli", "run"))
+
     for cid, entry in extended.items():
         if cid in bound:
             continue
         path = str((entry.get("source") or {}).get("path") or "")
         if not path or not os.path.isfile(os.path.join(root, path)):
             continue
-        shape = contract_shape(os.path.join(root, path))
-        if shape is not None:
-            if "contract" in kinds:
-                out.append((cid, path, "contract", shape[0]))
+        _add(cid, path)
+
+    for cid, entry in sorted(bound.items()):
+        if not isinstance(entry, dict) or _has_independence_claim(entry):
             continue
-        if "cli" in kinds and cli_shape(os.path.join(root, path)):
-            # entrypoint is the adapter's function; cli_command always exposes `run`
-            out.append((cid, path, "cli", "run"))
+        path = _bound_module_path(root, entry)
+        if path is not None:
+            _add(cid, path)
     return out
 
 

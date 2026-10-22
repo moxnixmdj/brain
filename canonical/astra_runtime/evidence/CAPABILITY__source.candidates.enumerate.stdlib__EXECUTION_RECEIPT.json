@@ -1,0 +1,33 @@
+{
+ "capability_id": "source.candidates.enumerate.stdlib",
+ "elapsed_ms": 49.636,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "glob": "**/*.py",
+  "objective": "source.candidates.enumerate.stdlib",
+  "output_path": "canonical/astra_runtime/tmp/receipt_probe/source.candidates.enumerate.stdlib__1bb83d60e8d0.json",
+  "search_root": "canonical/runtime"
+ },
+ "kind": "contract",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bound_capabilities/source_candidates_enumerate.py",
+ "module_sha256": "1bb83d60e8d0fdee7436cb7105d10f4518cf60eba87e28c5ece2b3ba592e8887",
+ "observed": {
+  "output_verified": true,
+  "status": "SOURCE_CANDIDATES_ENUMERATED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "arena-session-f48a3a02-brain",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__source.candidates.enumerate.stdlib__EXECUTION_RECEIPT.json",
+ "result_key_count": 10,
+ "result_sha256": "f39ede7b209e2720bf194e3d17e45acccb944da644b8fdff5f34dd8eeecb6429",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
