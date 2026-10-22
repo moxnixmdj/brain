@@ -47,8 +47,20 @@ CLOSABLE = "compress notes.txt into notes.txt.gz with gzip"
 # can do it. It is the exact shape of the lie: sources answer in three kinds,
 # the machine reads about a capability it does not have, and reports a gap
 # closed by doing nothing.
-READABLE_BUT_IMPOSSIBLE = "extract text from a pdf file"
+#
+# This used to be "extract text from a pdf file", and it was true then. It is
+# not true now: the machine really can extract pdf text -- it is one of the
+# goals the compilation benchmark accepts end to end -- so the fixture stopped
+# being impossible and the sabotage check stopped checking anything. real_gap()
+# below re-verifies the failure on every run, so a fixture that becomes
+# possible fails loudly instead of quietly passing.
+READABLE_BUT_IMPOSSIBLE = "decode the barcode in scan.png"
 AWKWARD = "write the text hello to out.txt"
+# Solvable, and solvable without asking the world for anything. It has to name
+# an output: with no declared output there is no effect to verify, so the
+# channels that would otherwise close it fail closed on NO_OUTPUT_FORMAT_IN_GOAL
+# -- which is correct behaviour, not a gap.
+ALREADY_SOLVABLE = "run shell command echo hello and write the output to out.txt"
 UNSOLVABLE = [CLOSABLE, "combine many files into one archive"]
 
 
@@ -131,7 +143,8 @@ class ClosingTests(_Isolated, unittest.TestCase):
         """Sabotage check: the knowledge channel used to return closed=True
         the moment sources answered. Sources answering is evidence the world
         knows something, not that this machine can now do it. Nothing here can
-        open a pdf, so this gap must stay open no matter how much is read."""
+        read a barcode out of an image, so this gap must stay open no matter how
+        much is read."""
         gap = self.real_gap(READABLE_BUT_IMPOSSIBLE)
         r = cur.study(gap, channels=["knowledge"])
         answered = any(a.get("sources") for a in r["attempts"])
@@ -248,7 +261,7 @@ class HonestyTests(_Isolated, unittest.TestCase):
 class EfficiencyTests(_Isolated, unittest.TestCase):
     def test_it_stops_at_the_first_channel_that_works(self):
         """Running every channel after one succeeded is waste, not thoroughness."""
-        r = cur.study("run shell command echo hello")
+        r = cur.study(ALREADY_SOLVABLE)
         self.assertTrue(r["pass"], r)
         closed_at = r["channels_tried"].index(r["closed_by"])
         self.assertEqual(closed_at, len(r["channels_tried"]) - 1)
@@ -281,10 +294,25 @@ class EfficiencyTests(_Isolated, unittest.TestCase):
 
 
     def test_a_gap_already_solvable_is_closed_by_the_cheap_channel(self):
-        """No retrieval needed when the machine can already do it."""
-        r = cur.study("run shell command echo hello")
+        """No retrieval needed when the machine can already do it.
+
+        This used to pin ``closed_by == "solve"``. That was wrong about how the
+        curriculum works: channel order is earned from evidence rather than
+        written down, and for a goal like this the channel that actually closes
+        it is ``synthesize``, which composes capabilities the machine already
+        owns. Pinning one channel name made the test depend on which channel
+        happened to be credited first, and it failed even though nothing was
+        retrieved from the world -- which is the only thing this test is about.
+        """
+        r = cur.study(ALREADY_SOLVABLE)
         self.assertTrue(r["pass"], r)
-        self.assertEqual(r["closed_by"], "solve")
+        retrieval = {"knowledge", "acquire", "explore"}
+        self.assertNotIn(r["closed_by"], retrieval, r)
+        self.assertEqual(
+            retrieval & set(r["channels_tried"]), set(),
+            "the machine went out to the world for something it could already do: %s"
+            % (r["channels_tried"],),
+        )
 
     def test_channel_order_is_earned_not_written(self):
         first = list(cur.ordered_channels())
