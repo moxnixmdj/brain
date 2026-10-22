@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6278,
+  "research_index_records": 6279,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "1174655befbe3db8cbff707fc0077d01e2d22b1df0f2c158236b9d42a29b7b5a"
+  "value": "2bcb884f36dbc83e573e53b05af8590ba3d151f22ccf95823ab254b29381e763"
  },
  "engines": [
   {
@@ -188114,6 +188114,38 @@
    }
   },
   {
+   "action_id": "SQLITE_VERIFIER_SUBSTRATE_DECLARED_AS_THE_STDLIB_MODULE_IT_ACTUALLY_USES_V1_20261021_V1",
+   "capability": false,
+   "date": "2026-10-21",
+   "id": "research:canonical/action_intents/LEARNING_LOOP_CLOSED_INSIDE_THE_RUN_BY_DRAINING_THE_IMPROVEMENT_QUEUE_THE_FRONT_DOOR_NEVER_CALLED_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/LEARNING_LOOP_CLOSED_INSIDE_THE_RUN_BY_DRAINING_THE_IMPROVEMENT_QUEUE_THE_FRONT_DOOR_NEVER_CALLED_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "32f21626304334962912d6ed35baa6d2e73401265d4390a519b71ece79058e54",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "called": 1,
+    "closed": 1,
+    "door": 1,
+    "draining": 1,
+    "front": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "improvement": 1,
+    "inside": 1,
+    "learning": 1,
+    "learning_loop_closed_inside_the_run_by_draining_the_improvement_queue_the_front_door_never_called_v1_20261022_v1": 1,
+    "loop": 1,
+    "never": 1,
+    "queue": 1,
+    "run": 1,
+    "sqlite_table_verify_against_json_records_goes_from_bound_apt_metadata_not_found_sqlite3_to_running_on_this_host_through_pythons_own_sqlite3_module__measured_by_the_failure_moving_off_the_substrate_gate_entirely_and_into_row_comparison_as_sqlite_column_unresolved_source_type__on_the_23_goal_benchmark_compiled_stays_23_of_23_correct_selection_21_of_23_wrong_capability_2_of_23_and_by_census_executed_11_of_23_and_semantic_acceptance_9_of_23_all_unchanged_so_there_is_no_regression_and_the_gain_is_a_restored_capability_not_a_moved_rate": 1,
+    "sqlite_verifier_substrate_declared_as_the_stdlib_module_it_actually_uses_v1_20261021_v1": 1,
+    "the_sqlite_verifier_was_declared_as_an_ubuntu_apt_package_so_on_a_host_without_the_sqlite3_cli_the_substrate_gate_raised_bound_apt_metadata_not_found_and_the_capability_never_ran_at_all__even_though_its_adapter_catches_filenotfounderror_and_imports_the_stdlib_module_and_its_own_entry_already_carried_optional_true_with_a_python_stdlib_fallback_and_an_optional_reason_naming_that_adapter__the_gate_read_none_of_those_fields": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "LIVE_BRAIN_HEARTBEAT_20261015_V1",
    "capability": false,
    "date": "2026-10-15",
@@ -221712,11 +221744,12 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_integrated_brain_v1.py",
-   "sha256": "d23632396695af1254dad63e5dc1321ed499852f290d7e42c4116fa65853c751",
+   "sha256": "49c53107f81a4bb8e4ec2cb34337357c9374e9092d21f2de83fb72c11ceff293",
    "summary": "Live integrated Brain V1.",
-   "symbol_count": 16,
+   "symbol_count": 17,
    "symbols": [
     "LiveBrainError",
+    "_advance_learning_queue",
     "_raw_goal_replay_context",
     "_receipt_admits",
     "_record_raw_goal_experience",
@@ -221734,6 +221767,7 @@
     "run_raw_goal"
    ],
    "terms": {
+    "advance_learning_queue": 1,
     "bound_capability_controller_action": 1,
     "brain": 2,
     "compile_against_live_registry": 1,

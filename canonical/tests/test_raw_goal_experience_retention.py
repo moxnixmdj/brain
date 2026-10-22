@@ -73,6 +73,16 @@ def _run_impl(tag, goal):
         checkpoint.unlink(missing_ok=True)
 
 
+def _reset_learning_state():
+    """Own the whole state.
+
+    The state file is shared across every test in the process, and the front
+    door now drains the improvement queue, so a counter read here can be moved
+    by another test's run. Anything asserting on a count has to start from zero.
+    """
+    pathlib.Path(self_improvement.DEFAULT_STATE_PATH).unlink(missing_ok=True)
+
+
 def _observations():
     return dict(self_improvement.load_state().get("observations") or {})
 
@@ -105,12 +115,20 @@ class ExperienceIsRetainedTests(unittest.TestCase):
 
     def test_retention_becomes_explicit_pending_work_not_a_shortcut(self):
         """The module's own contract: a plain runtime success is recorded as
-        work to build a verifiable episode, never promoted to a reusable skill
-        by the act of being remembered."""
+        work, never promoted to a reusable skill by the act of being remembered.
+
+        The invariant is `skills == 0`, not `verified_episode_count == 0`. An
+        episode is verified experience and the queue driver is now allowed to
+        build one during the run; a *skill* is the promoted, reusable artefact,
+        and nothing may mint one from a single remembered success.
+        """
+        _reset_learning_state()
         _run("RETAIN_PROBE_WORK", PASSING_GOAL)
-        stats = self_improvement.load_state().get("stats") or {}
+        state = self_improvement.load_state()
+        stats = state.get("stats") or {}
         self.assertGreaterEqual(int(stats.get("success_observation_count") or 0), 1)
-        self.assertEqual(int(stats.get("verified_episode_count") or 0), 0)
+        self.assertEqual(len(state.get("skills") or {}), 0)
+        self.assertEqual(int(stats.get("active_skill_count") or 0), 0)
 
 
 class RetentionCannotChangeAnOutcomeTests(unittest.TestCase):

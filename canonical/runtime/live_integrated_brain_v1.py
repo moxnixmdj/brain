@@ -1100,6 +1100,35 @@ def _record_raw_goal_experience(out: Any, request: Any = None) -> None:
         pass
 
 
+def _advance_learning_queue() -> None:
+    """Turn what the machine just did into verified experience, in the same run.
+
+    Recording alone left the loop open. The front door retained each success,
+    and the improvement queue driver -- with its own independent verifier -- was
+    sitting right there able to turn one into a verified episode, but nothing on
+    the live path ever called it. Measured: after a run the state held a pending
+    improvement and `verified_episode_count` stayed 0 until `advance_once` was
+    invoked by hand. Learning that only happens when someone remembers to ask
+    for it is not instant learning.
+
+    `drain` executes the highest-priority actionable improvements and stops when
+    none are actionable. It grants nothing by itself: promotion still requires
+    the independent verifier, and a queue with no actionable work is a no-op
+    rather than an error. It is contained for the same reason recording is --
+    learning must never be able to fail a run -- and nothing it writes is read
+    back to decide this run's outcome.
+    """
+    try:
+        from canonical.runtime import (
+            r3_improvement_queue_driver_v1 as _improvement_driver,
+        )
+
+        _improvement_driver.drain(max_actions=4)
+    except Exception:
+        # Deliberate: see the docstring. Learning is best-effort by design.
+        pass
+
+
 def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
     """Compile and run one raw plain-language goal, then remember the outcome.
 
@@ -1110,4 +1139,5 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
     """
     out = _run_raw_goal_impl(request)
     _record_raw_goal_experience(out, request)
+    _advance_learning_queue()
     return out

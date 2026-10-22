@@ -45,6 +45,19 @@ from canonical.runtime.raw_goal_archive_acceptance_v1 import (  # noqa: E402
 )
 
 CREATE_GOAL = "Create a tar.gz archive from a manifest."
+
+# The one shape the archive acceptance grammar admits. Its manifest and the
+# evidence file it references are both tracked, so this does not depend on
+# anything a previous run happened to leave behind.
+_ARCHIVE_MANIFEST = "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_MANIFEST.json"
+
+
+def _grammar_goal(output_rel):
+    return (
+        f"Create a tar.gz archive from the manifest {_ARCHIVE_MANIFEST}, "
+        f"including all its verification_paths files, and save it to "
+        f"{output_rel}."
+    )
 COMPOUND_GOAL = (
     "Create a tar.gz archive from a manifest and verify the archive "
     "against that manifest."
@@ -294,6 +307,82 @@ class LearningLoopCanReachItsAdapterTests(unittest.TestCase):
             repo_root=REPO_ROOT,
         )
         self.assertIsNone(adapted)
+
+
+class LearningHappensInsideTheRunTests(unittest.TestCase):
+    """The loop must close during the run, not when someone asks it to.
+
+    Recording alone left it open: the front door retained each success and the
+    improvement queue driver could turn one into a verified episode, but nothing
+    on the live path called it, so `verified_episode_count` stayed 0 until
+    `advance_once` was invoked by hand.
+    """
+
+    def setUp(self):
+        _reset_learning_state()
+        self.output = REPO_ROOT / (
+            f"canonical/astra_runtime/tmp/learning_probe_{_NONCE}.tar.gz"
+        )
+        self.checkpoint = None
+
+    def tearDown(self):
+        self.output.unlink(missing_ok=True)
+        if self.checkpoint is not None:
+            self.checkpoint.unlink(missing_ok=True)
+
+    def _run(self, tag):
+        res, self.checkpoint = _run_keeping_checkpoint(
+            tag, _grammar_goal(str(self.output.relative_to(REPO_ROOT))))
+        return res
+
+    def test_it_starts_from_no_verified_experience(self):
+        stats = self_improvement.load_state().get("stats") or {}
+        self.assertEqual(int(stats.get("verified_episode_count") or 0), 0)
+
+    def test_one_run_yields_an_independently_verified_episode(self):
+        """No manual driver call anywhere in this test."""
+        res = self._run("LEARN")
+        self.assertIs(res.get("semantic_acceptance_complete"), True)
+        state = self_improvement.load_state()
+        self.assertEqual(len(state.get("episodes") or {}), 1)
+        self.assertEqual(
+            int((state.get("stats") or {}).get("verified_episode_count") or 0), 1)
+
+    def test_a_verified_episode_is_not_a_promoted_skill(self):
+        """One example must not generalise. The queue asks for more matching
+        episodes instead of minting a skill from a single success."""
+        self._run("LEARN_SKILL")
+        state = self_improvement.load_state()
+        self.assertEqual(len(state.get("skills") or {}), 0)
+        self.assertEqual(
+            (self_improvement.next_improvement_action() or {}).get("kind"),
+            "COLLECT_MATCHING_VERIFIED_EPISODE")
+
+    def test_a_broken_learning_layer_cannot_fail_a_run(self):
+        from canonical.runtime import r3_improvement_queue_driver_v1 as driver
+
+        real = driver.drain
+
+        def _boom(*args, **kwargs):
+            raise RuntimeError("LEARNING_QUEUE_IS_BROKEN")
+
+        driver.drain = _boom
+        try:
+            res = self._run("LEARN_BOOM")
+        finally:
+            driver.drain = real
+        self.assertIs(res.get("pass"), True)
+
+    def test_nothing_learned_decides_the_outcome(self):
+        """Wiping retained experience must not change the result: the outcome
+        comes from execution and re-inspection, never from memory."""
+        res = self._run("LEARN_COLD")
+        _reset_learning_state()
+        self.assertEqual(
+            int((self_improvement.load_state().get("stats") or {})
+                .get("verified_episode_count") or 0), 0)
+        self.assertIs(res.get("semantic_acceptance_complete"), True)
+        self.assertEqual(res.get("selected_plan"), [ARCHIVE_CAPABILITY])
 
 
 if __name__ == "__main__":
