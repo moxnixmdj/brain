@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6279,
+  "research_index_records": 6280,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2bcb884f36dbc83e573e53b05af8590ba3d151f22ccf95823ab254b29381e763"
+  "value": "452bf4cdda2a9d0b17e6173ad509b612c8dc40d85fc18eab368201d3f6b59df0"
  },
  "engines": [
   {
@@ -187644,6 +187644,51 @@
    }
   },
   {
+   "action_id": "CORPUS_GOALS_BECOME_VERIFIED_EXPERIENCE_BY_CARRYING_PROOF_DIGESTS_THROUGH_THE_TRACE_V1_20261022_V1",
+   "capability": false,
+   "date": "2026-10-22",
+   "id": "research:canonical/action_intents/CORPUS_GOALS_BECOME_VERIFIED_EXPERIENCE_BY_CARRYING_PROOF_DIGESTS_THROUGH_THE_TRACE_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/CORPUS_GOALS_BECOME_VERIFIED_EXPERIENCE_BY_CARRYING_PROOF_DIGESTS_THROUGH_THE_TRACE_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "71493536f9d631c27594eef0f643b550082727ab9f3884a2671bdbd1bfccbd43",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "accepted": 2,
+    "action": 2,
+    "adaptations": 1,
+    "adapter": 1,
+    "adapters": 2,
+    "all": 1,
+    "become": 1,
+    "benchmark-corpus": 1,
+    "bound": 1,
+    "capabilities": 1,
+    "carrying": 1,
+    "corpus": 2,
+    "corpus_goals_become_verified_experience_by_carrying_proof_digests_through_the_trace_v1_20261022_v1": 1,
+    "counts": 1,
+    "digests": 2,
+    "door": 1,
+    "episode": 1,
+    "every": 1,
+    "executed": 1,
+    "experience": 1,
+    "four": 1,
+    "front": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 1,
+    "goals": 3,
+    "learning_loop_closed_inside_the_run_by_draining_the_improvement_queue_the_front_door_never_called_v1_20261022_v1": 1,
+    "proof": 2,
+    "success": 2,
+    "trace": 2,
+    "v1": 2,
+    "verified": 3
+   }
+  },
+  {
    "action_id": "DECISION_EVIDENCE_LOCATING_PRODUCER_AND_RECURSIVE_PRODUCER_CHAIN_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -221744,12 +221789,14 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_integrated_brain_v1.py",
-   "sha256": "49c53107f81a4bb8e4ec2cb34337357c9374e9092d21f2de83fb72c11ceff293",
+   "sha256": "8c08a678a8a41712023f0e3c2c73f502aebd8320d8b8673a18b68720d1a94c4f",
    "summary": "Live integrated Brain V1.",
-   "symbol_count": 17,
+   "symbol_count": 19,
    "symbols": [
     "LiveBrainError",
     "_advance_learning_queue",
+    "_bound_capability_ids",
+    "_plan_lineage",
     "_raw_goal_replay_context",
     "_receipt_admits",
     "_record_raw_goal_experience",
@@ -221769,6 +221816,7 @@
    "terms": {
     "advance_learning_queue": 1,
     "bound_capability_controller_action": 1,
+    "bound_capability_ids": 1,
     "brain": 2,
     "compile_against_live_registry": 1,
     "compile_capability_graph": 1,
@@ -221778,6 +221826,7 @@
     "live": 2,
     "livebrainerror": 1,
     "load_verified_registry": 1,
+    "plan_lineage": 1,
     "raw_goal_replay_context": 1,
     "receipt_admits": 1,
     "record_raw_goal_experience": 1,
@@ -242051,13 +242100,14 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_archive_acceptance_v1.py",
-   "sha256": "dfea0ac20295aa7e8b2f53846c6b85d9cd39b3ff7e3e7b4c14c6e9010bb0d738",
+   "sha256": "2f147ff73c8934c059da4031ed8a4893b709f13b21475731c7ad6594eaf00d1f",
    "summary": "Conservative post-execution, raw-intent acceptance for one exact archive goal.",
-   "symbol_count": 4,
+   "symbol_count": 5,
    "symbols": [
     "_digest",
     "_inside",
     "_unresolved",
+    "_unwrap_result",
     "verify"
    ],
    "terms": {
@@ -242073,6 +242123,7 @@
     "raw": 1,
     "raw-intent": 1,
     "unresolved": 1,
+    "unwrap_result": 1,
     "v1": 1,
     "verify": 1
    }
@@ -242085,7 +242136,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_archive_compound_acceptance_v1.py",
-   "sha256": "a677ecbc4ef95dad73c9ba6ceee016a905d4b9afcb9140a49715a0168573d5fb",
+   "sha256": "124a3a2c334ddc4f60af85d87d845dbed1a5ceefdd02e3779e34b5a976d88fb6",
    "summary": "Independent raw-goal acceptance for the compound archive create-and-verify goal.",
    "symbol_count": 5,
    "symbols": [
@@ -242183,9 +242234,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "0c91cde39adec07d39bb2e27dbc695ee017837d5c275284077278c00f08e6b7f",
+   "sha256": "252b2b5b7758b3be0bc273f737096e078c8b812a93dad0a8d44e7fb137717637",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
-   "symbol_count": 23,
+   "symbol_count": 24,
    "symbols": [
     "_action_rows",
     "_alternative_ids",
@@ -242209,6 +242260,7 @@
     "_rel",
     "_trace_is_finished",
     "_unresolved",
+    "unwrap_bound_adapter_row",
     "verify"
    ],
    "terms": {
@@ -242245,6 +242297,7 @@
     "trace": 1,
     "trace_is_finished": 1,
     "unresolved": 1,
+    "unwrap_bound_adapter_row": 1,
     "v1": 1,
     "verify": 1
    }

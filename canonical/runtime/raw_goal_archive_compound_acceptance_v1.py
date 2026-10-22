@@ -29,6 +29,10 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
+from canonical.runtime.raw_goal_trace_acceptance_v1 import (
+    unwrap_bound_adapter_row as _unwrap,
+)
+
 SCHEMA = "PROJECT_BRAIN_RAW_GOAL_ARCHIVE_COMPOUND_ACCEPTANCE_V1"
 CREATE_CAPABILITY = "archive.tar_gz.create_from_manifest"
 VERIFY_CAPABILITY = "archive.verify.tar_gz.gnu"
@@ -76,6 +80,7 @@ def _action_rows(execution: Any) -> list[dict[str, Any]]:
     for row in execution:
         if not isinstance(row, Mapping):
             continue
+        row = _unwrap(row)
         plan = row.get("plan")
         args = (plan or {}).get("args") if isinstance(plan, Mapping) else None
         if isinstance(args, Mapping) and args.get("capability_id"):

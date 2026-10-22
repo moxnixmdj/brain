@@ -13,6 +13,24 @@ import re
 import tarfile
 from typing import Any, Mapping
 
+
+def _unwrap_result(result: Any) -> Any:
+    """The capability's own fields, whether or not an adapter wrapped them.
+
+    Imported lazily so this module keeps no import-time dependency on the trace
+    verifier; a union where the wrapper's own keys win, so nothing it recorded
+    is displaced.
+    """
+    if not isinstance(result, Mapping):
+        return result
+    inner = result.get("result")
+    if not isinstance(inner, Mapping):
+        return result
+    merged = dict(result)
+    for key, value in inner.items():
+        merged.setdefault(key, value)
+    return merged
+
 SCHEMA = "PROJECT_BRAIN_RAW_GOAL_ARCHIVE_ACCEPTANCE_V1"
 CAPABILITY = "archive.tar_gz.create_from_manifest"
 GRAMMAR = re.compile(
@@ -146,7 +164,9 @@ def verify(
             if trace[-1]["result"].get("summary") != "RAW_GOAL_COMPLETE":
                 return _unresolved("CONTROLLER_TRACE_FINISH_INVALID")
 
-        result = execution.get("result")
+        # The verified bound adapter nests the capability's own result one
+        # level down; unwrap so this verifier reads the same fields either way.
+        result = _unwrap_result(execution.get("result"))
         if not isinstance(result, Mapping) or result.get("output_verified") is not True:
             return _unresolved("CAPABILITY_OUTPUT_PROOF_MISSING")
         root = Path(root).resolve()
