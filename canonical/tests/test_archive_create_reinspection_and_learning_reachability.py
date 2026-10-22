@@ -865,3 +865,184 @@ class ArchiveVerifyGoalBecomesExperienceTests(unittest.TestCase):
             1,
             "an accepted archive-verify goal produced no verified episode",
         )
+
+
+class CompoundPlanUpgradeIsAllOrNothingTests(unittest.TestCase):
+    """A compiled plan is upgraded whole, or not at all.
+
+    The learning adapter binds an episode only when *every* recorded step came
+    through the verified bound adapter, so a partly upgraded plan earns
+    nothing -- and that adapter refuses any capability whose independence was
+    never established, which turns a working run into a failed one. Upgrading
+    such a plan was measured to cost five accepted goals, so the guard is the
+    whole point of the change and is tested directly here rather than inferred
+    from a census.
+    """
+
+    def _entry(self, cid, provides, independent=True, template_args=None):
+        entry = {
+            "action_template": {
+                "type": "invoke_capability",
+                "args": {
+                    "capability_id": cid,
+                    **(template_args or {"path": "${input.in_path}"}),
+                },
+            },
+            "provides": list(provides),
+            "requires": [],
+        }
+        if independent:
+            entry["verification"] = {"independently_verified": True}
+        return entry
+
+    def _action(self, cid, **args):
+        return {"type": "invoke_capability", "args": {"capability_id": cid, **args}}
+
+    def test_a_fully_verified_plan_is_upgraded(self):
+        import unittest.mock as mock
+
+        cid = "test.capability.alpha"
+        entry = self._entry(cid, ["effect.alpha"])
+        with mock.patch.object(live, "_bound_capability_ids", return_value=frozenset({cid})):
+            out = live._upgrade_compound_actions(
+                [self._action(cid, path="a/b.txt"),
+                 {"type": "finish", "args": {"summary": "X"}}],
+                {cid: entry},
+            )
+        self.assertEqual(out[0]["type"], "invoke_verified_bound_capability_adapter")
+        self.assertEqual(out[0]["args"]["capability_id"], cid)
+        self.assertEqual(out[0]["args"]["inputs"], {"in_path": "a/b.txt"})
+        self.assertEqual(out[0]["args"]["provides"], ["effect.alpha"])
+        # the finish row is carried through untouched
+        self.assertEqual(out[1], {"type": "finish", "args": {"summary": "X"}})
+
+    def test_one_unverified_capability_leaves_the_whole_plan_alone(self):
+        """NEGATIVE CONTROL: this is the guard that prevents the regression."""
+        import unittest.mock as mock
+
+        good, bad = "test.capability.alpha", "test.capability.beta"
+        admissible = {
+            good: self._entry(good, ["effect.alpha"]),
+            bad: self._entry(bad, ["effect.beta"], independent=False),
+        }
+        actions = [self._action(good, path="a.txt"), self._action(bad, path="b.txt")]
+        with mock.patch.object(
+            live, "_bound_capability_ids", return_value=frozenset({good, bad})
+        ):
+            out = live._upgrade_compound_actions(actions, admissible)
+        self.assertEqual(
+            [a["type"] for a in out],
+            ["invoke_capability", "invoke_capability"],
+            "a plan with one unverified capability was partly upgraded, which "
+            "would fail closed at execution and lose the accepted run",
+        )
+        self.assertEqual(out, actions)
+
+    def test_an_unknown_capability_leaves_the_whole_plan_alone(self):
+        import unittest.mock as mock
+
+        known, unknown = "test.capability.alpha", "test.capability.unknown"
+        admissible = {known: self._entry(known, ["effect.alpha"])}
+        actions = [self._action(known, path="a.txt"), self._action(unknown, path="b.txt")]
+        with mock.patch.object(
+            live, "_bound_capability_ids", return_value=frozenset({known})
+        ):
+            out = live._upgrade_compound_actions(actions, admissible)
+        self.assertEqual(out, actions)
+
+    def test_unrecoverable_inputs_leave_the_plan_alone(self):
+        """An argument that is not a single input reference is not guessed at."""
+        import unittest.mock as mock
+
+        cid = "test.capability.alpha"
+        entry = self._entry(
+            cid,
+            ["effect.alpha"],
+            template_args={"path": "${input.in_path}", "mode": "literal-not-an-input"},
+        )
+        actions = [self._action(cid, path="a.txt", mode="literal-not-an-input")]
+        with mock.patch.object(live, "_bound_capability_ids", return_value=frozenset({cid})):
+            out = live._upgrade_compound_actions(actions, admissible={cid: entry})
+        # the literal is not an input reference, so only in_path is recoverable;
+        # the plan is still upgraded because nothing was guessed -- mode is a
+        # template literal the adapter re-renders itself
+        self.assertEqual(out[0]["type"], "invoke_verified_bound_capability_adapter")
+        self.assertEqual(out[0]["args"]["inputs"], {"in_path": "a.txt"})
+
+    def test_a_plan_with_no_capability_steps_is_untouched(self):
+        actions = [{"type": "finish", "args": {"summary": "X"}}]
+        self.assertEqual(live._upgrade_compound_actions(actions, {}), actions)
+        self.assertEqual(live._upgrade_compound_actions(None, {}), None)
+
+
+class CompoundArchiveGoalBecomesExperienceTests(unittest.TestCase):
+    """The corpus goal this change was measured on: 5 learned becomes 6.
+
+    A two-clause goal -- create an archive, then verify it -- whose capabilities
+    have both had their independence established, so its whole plan can go
+    through the proof-bearing action.
+    """
+
+    def setUp(self):
+        _reset_learning_state()
+        self.checkpoint = None
+
+    def tearDown(self):
+        if self.checkpoint is not None:
+            self.checkpoint.unlink(missing_ok=True)
+        _reset_learning_state()
+
+    def test_the_compound_archive_goal_becomes_a_verified_episode(self):
+        from canonical.runtime import goal_compilation_benchmark_v1 as bench
+
+        goal = next(
+            g["goal"]
+            for g in list(bench.BENCHMARK_GOALS) + list(bench.EXTENDED_BENCHMARK_GOALS)
+            if g["id"] == "BENCH_TAR_GZ_CREATE_AND_VERIFY"
+        )
+        before = int(
+            (self_improvement.load_state().get("stats") or {}).get("verified_episode_count")
+            or 0
+        )
+        res, self.checkpoint = _run_keeping_checkpoint("COMPOUND_LEARNS", goal)
+        after = int(
+            (self_improvement.load_state().get("stats") or {}).get("verified_episode_count")
+            or 0
+        )
+        self.assertIs(res.get("semantic_acceptance_complete"), True)
+        self.assertEqual(
+            after - before,
+            1,
+            "an accepted compound archive goal produced no verified episode",
+        )
+
+    def test_every_step_of_its_plan_carries_proof_digests(self):
+        from canonical.runtime import goal_compilation_benchmark_v1 as bench
+
+        goal = next(
+            g["goal"]
+            for g in list(bench.BENCHMARK_GOALS) + list(bench.EXTENDED_BENCHMARK_GOALS)
+            if g["id"] == "BENCH_TAR_GZ_CREATE_AND_VERIFY"
+        )
+        res, self.checkpoint = _run_keeping_checkpoint("COMPOUND_PROOF", goal)
+        try:
+            rows = [
+                r for r in (res.get("controller_execution") or {}).get("trace") or []
+                if isinstance(r.get("result"), Mapping)
+                and r["result"].get("capability_id")
+            ]
+            self.assertEqual(len(rows), 2, "expected the create step and the verify step")
+            for row in rows:
+                self.assertEqual(
+                    row["plan"]["type"],
+                    "invoke_verified_bound_capability_adapter",
+                    "a step was not routed through the proof-bearing action, so "
+                    "the episode could not have been bound",
+                )
+                self.assertEqual(len(row["result"].get("result_sha256") or ""), 64)
+                self.assertEqual(
+                    len(row["result"].get("composition_capsule_head_hash") or ""), 64
+                )
+        finally:
+            self.checkpoint.unlink(missing_ok=True)
+            self.checkpoint = None
