@@ -1398,6 +1398,65 @@ def _record_raw_goal_pathology(out: Any, request: Any = None, path: Any = None) 
         pass
 
 
+def _record_raw_goal_failure_diagnosis(
+    out: Any, request: Any = None, state_path: Any = None
+) -> None:
+    """Diagnose and count what the front door could not do.
+
+    WHAT WAS MISSING. Both existing hooks on this path bail out on a failure:
+    `_record_raw_goal_experience` returns unless ``out["pass"] is True``, and
+    `_record_raw_goal_pathology` writes a cell about how this box behaves but
+    keeps no account of the failure itself. So the episode store's ``failures``
+    table stayed permanently empty -- measured at ``failure_class_count: 0``
+    after running all 23 benchmark goals, of which 11 fail -- even though
+    `integrate_solver_output` already contains the whole failure half of the
+    learning loop: it diagnoses, fingerprints, counts repeats, and records a
+    repair class. Nothing on the shipping path ever called it.
+
+    The consequence is not a missing statistic. ``count`` is the difference
+    between "this failed once" and "this fails every single time", and that
+    distinction is the only thing that separates a transient problem from a
+    permanent one. Measured: three runs of one failing goal now give one
+    failure class with ``count == 3``, where before they gave nothing at all.
+    Two modules already read this table -- `live_brain_runtime_v1` for retry
+    context and `r3_historical_failure_irreducibility_v1` for the irreducibility
+    proof -- and neither could ever run against an empty one.
+
+    Only failures are passed here. `record_success_observation` handles
+    successes and itself refuses an output that did not pass, so sending both
+    would record a success twice; the split is deliberate, not incidental.
+
+    WHAT THIS DOES NOT DO. It grants no repair and authorizes no replay. With
+    no retry context there is no capsule, so the disposition is honestly
+    ``FAILURE_DIAGNOSED__ORPHANED_TELEMETRY__NO_REPAIR_OBLIGATION_CREATED``,
+    and the improvement queue gains no actionable work -- measured, and said
+    plainly rather than left to be inferred. Retrying a failed goal would
+    re-execute an action whose effects may already have occurred, which is
+    exactly what `_effect_may_have_occurred` exists to gate; that belongs to a
+    door that owns the retry, not to a recorder.
+
+    `state_path` is a passthrough to that module's own argument, unused by the
+    live path, so a test can aim this at a scratch state instead of the real
+    one. Contained for the same reason the other two hooks are: a learning
+    layer that can fail a run is worse than no learning layer, and the caller's
+    result is returned byte for byte whatever happens here.
+    """
+    try:
+        if not isinstance(out, Mapping) or out.get("pass") is True:
+            return
+        from canonical.runtime import (
+            autonomous_verified_self_improvement_v1 as _self_improvement,
+        )
+
+        kwargs: dict[str, Any] = {}
+        if state_path is not None:
+            kwargs["state_path"] = state_path
+        _self_improvement.integrate_solver_output(out, **kwargs)
+    except Exception:
+        # Deliberate: see the docstring. Diagnosis is best-effort by design.
+        pass
+
+
 def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
     """Compile and run one raw plain-language goal, then remember the outcome.
 
@@ -1405,9 +1464,14 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
     `_run_raw_goal_impl`, unchanged. Wrapping rather than editing its many
     return sites means experience is recorded on exactly one code path, so no
     return can be missed and none can be recorded twice.
+
+    The three hooks are disjoint by outcome, not redundant: a success becomes
+    an episode, either outcome becomes a pathology cell about this machine, and
+    a failure becomes a diagnosed, counted failure class.
     """
     out = _run_raw_goal_impl(request)
     _record_raw_goal_experience(out, request)
     _record_raw_goal_pathology(out, request)
+    _record_raw_goal_failure_diagnosis(out, request)
     _advance_learning_queue()
     return out
