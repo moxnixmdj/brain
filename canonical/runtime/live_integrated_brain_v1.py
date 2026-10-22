@@ -1314,6 +1314,90 @@ def _advance_learning_queue() -> None:
         pass
 
 
+def _pathology_reason_code(reason: Any) -> str:
+    """The reason code, unwrapped from the front door's blocker envelope.
+
+    The front door reports a blocker as ``Blocker:CODE:detail:RESULT={...}``,
+    and an action expectation wraps a second one inside it
+    (``...REASON=Blocker:CODE2:...``). ``experience_v1`` keys a memory cell on
+    the leading code of whatever string it is handed, so passing the raw
+    envelope files every failure on this path under the single useless cell
+    ``<capability>|blocker``. Taking the innermost ``REASON=`` payload keeps the
+    unit of memory the pathology, which is what that module is built around --
+    ``BOUND_APT_METADATA_NOT_FOUND`` and
+    ``BOUND_CAPABILITY_SOURCE_UNSUPPORTED`` are different facts about this
+    machine and must not share an address.
+
+    Nothing is interpreted here. The code is copied out of the string the run
+    already produced; when there is no envelope the string is used as-is.
+    """
+    text = str(reason or "")
+    while True:
+        idx = text.rfind("REASON=")
+        if idx < 0:
+            break
+        text = text[idx + len("REASON="):]
+    if text.startswith("Blocker:"):
+        text = text[len("Blocker:"):]
+    return text.split(":", 1)[0][:60] or "FAILED"
+
+
+def _record_raw_goal_pathology(out: Any, request: Any = None, path: Any = None) -> None:
+    """Fold what the front door just did into the machine's pathology memory.
+
+    WHAT WAS MISSING. ``_record_raw_goal_experience`` returns unless
+    ``out["pass"] is True``, so the shipping path remembered successes into the
+    episode store and dropped every failure on the floor. Meanwhile
+    ``experience_v1`` -- whose entire purpose is that ``image.extract.ocr.
+    tesseract`` x ``BOUND_CAPABILITY_SOURCE_UNSUPPORTED`` "will be true on this
+    machine forever" and is therefore worth remembering -- was written by
+    ``grounded_action_v1`` alone. Measured before this change: the store held 37
+    cells, not one of them from a front-door run, while the front door
+    rediscovered the same four dead routes on every single run. That is exactly
+    the failure the module's own docstring says it exists to prevent.
+
+    So the two stores now hold different things, as designed: the episode store
+    keeps what the machine ACHIEVED, and this one keeps how this box BEHAVES.
+    Failures belong in the second and nowhere else, which is why
+    `_record_raw_goal_experience` was left alone rather than widened.
+
+    This writes memory and consults nothing. ``experience_v1.is_suppressed`` is
+    deliberately NOT called on this path: suppression would drop
+    ``image.extract.ocr.tesseract`` from the candidate pool, and that capability
+    is the benchmark's own expected selection for ``EXT_OCR_SCANNED_IMAGE``, so
+    consulting here would trade a correct selection for a faster refusal. The
+    memory is still worth having -- ``grounded_action_v1`` consults the same
+    file and now benefits from what the front door learns.
+
+    Contained for the same reason recording is: a memory that can fail a run is
+    worse than no memory, and the caller's result is returned byte for byte.
+
+    ``path`` is a passthrough to ``experience_v1``'s own state-location
+    argument, unused by the live path. It exists so a test can aim this at a
+    scratch store instead of the tracked one; production behaviour is unchanged
+    because the default is that module's own default.
+    """
+    try:
+        if not isinstance(out, Mapping):
+            return
+        from canonical.runtime import experience_v1 as _experience
+
+        goal = ""
+        if isinstance(request, Mapping):
+            goal = str(request.get("goal") or "")
+        receipt = {
+            "capability_id": str(out.get("compiled_capability_id") or ""),
+            "error": _pathology_reason_code(out.get("reason")),
+            "verified": out.get("pass") is True,
+        }
+        if not receipt["capability_id"]:
+            return
+        _experience.observe(goal, receipt, path=path)
+    except Exception:
+        # Deliberate: see the docstring. Memory is best-effort by design.
+        pass
+
+
 def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
     """Compile and run one raw plain-language goal, then remember the outcome.
 
@@ -1324,5 +1408,6 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
     """
     out = _run_raw_goal_impl(request)
     _record_raw_goal_experience(out, request)
+    _record_raw_goal_pathology(out, request)
     _advance_learning_queue()
     return out
