@@ -464,7 +464,12 @@ class LaneRunTests(unittest.TestCase):
             if isinstance(entry, dict) and not lane_module._has_independence_claim(entry)
         }
         self.assertTrue(discovered_bound <= unattested)
-        self.assertIn("source.candidates.enumerate.stdlib", discovered_bound)
+        # `source.candidates.enumerate.stdlib` was the capability this discovery rule
+        # was added for. It has since been independently verified by a different
+        # implementation (git index + sha256sum), so it must now be *excluded*: the
+        # rule is about capabilities still needing attestation, not about this one.
+        self.assertNotIn("source.candidates.enumerate.stdlib", discovered_bound)
+        self.assertNotIn("source.candidates.enumerate.stdlib", unattested)
 
     def test_lane_never_claims_independence(self):
         with tempfile.TemporaryDirectory() as tmp:
