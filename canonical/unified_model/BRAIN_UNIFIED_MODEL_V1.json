@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "278c0bc852c17850f66e2230a5e7b5e3713f82ecb71dc080199f2bcf2a1f631f"
+  "value": "15cee7497b13abcd021b39e7a4f030da2cdc663231f64ca1e0dc9ead8d276da2"
  },
  "engines": [
   {
@@ -209620,7 +209620,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/enforce_goal_hierarchy.py",
-   "sha256": "ef24000ba71835a1a9c960856d07b3682005ad3541069b8a35d6da3404bd1481",
+   "sha256": "6498128e8459a1cb9c49e8a7a814eec35dff66ec88a74dc07b47a809d0791ccb",
    "summary": "Fail-closed anti-drift validator for frontier-sensitive changes.",
    "symbol_count": 32,
    "symbols": [
