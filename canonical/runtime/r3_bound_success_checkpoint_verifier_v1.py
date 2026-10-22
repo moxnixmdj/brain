@@ -34,6 +34,19 @@ def _sha(value: Any) -> str:
     return sha256(_canon(value).encode("utf-8")).hexdigest()
 
 
+def _declared_plan_of(record: Mapping) -> Mapping:
+    """The plan form the checkpoint's plan_sha256 was computed over.
+
+    The controller executes a *resolved* copy of each action, so `plan` holds
+    substituted `$result` values and can never hash back to the declared form.
+    `declared_plan` carries that form. Checkpoints written before it existed only
+    have `plan`; for plans without cross-step refs the two are identical, so the
+    fallback stays exact rather than permissive.
+    """
+    declared = record.get("declared_plan")
+    return declared if isinstance(declared, Mapping) else record["plan"]
+
+
 def _items(value: Any) -> list[str]:
     if not isinstance(value, Sequence) or isinstance(value, (str, bytes)):
         raise BoundSuccessVerificationError("STRING_SEQUENCE_REQUIRED")
@@ -176,7 +189,12 @@ def verify_material(
         for raw in completed:
             if not isinstance(raw, Mapping) or not isinstance(raw.get("plan"), Mapping):
                 raise BoundSuccessVerificationError("CHECKPOINT_RECORD_INVALID")
-            plans.append(deepcopy(dict(raw["plan"])))
+            # plan_sha256 pins the plan as *declared*. The controller executes a resolved
+            # copy, so `plan` holds substituted $result values and can never hash back to
+            # the declared form. `declared_plan` is that form; prefer it when the
+            # checkpoint carries it, and fall back for checkpoints written before it
+            # existed (plans without cross-step refs hash identically either way).
+            plans.append(deepcopy(dict(_declared_plan_of(raw))))
         if astra_runtime._controller_plan_sha256(plans) != problem.get("controller_plan_sha256"):
             raise BoundSuccessVerificationError("CHECKPOINT_PLAN_RECOMPUTATION_MISMATCH")
         if plans[-1].get("type") != "finish":

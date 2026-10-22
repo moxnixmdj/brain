@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6285,
+  "research_index_records": 6286,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "61046362e0235d9d31aad2f3c2201479b55070514305396b72200c61d4e8aa64"
+  "value": "fecf4f43d7593ac080d7ba5530330c42f566e2317f4863d87158bf2c5ab049aa"
  },
  "engines": [
   {
@@ -158560,7 +158560,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/ROOT3_DIRECT_URLOPEN_NETWORK_MEDIATOR_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json",
    "schema": "PROJECT_BRAIN_ROOT3_DIRECT_URLOPEN_NETWORK_MEDIATOR_PUBLIC_RUNNER_VERIFICATION_V1",
-   "sha256": "b0e9f1ef01740c85164f9569248bf57005ac1be98ba3f2813a5f5f5aad9221f5",
+   "sha256": "d38bf8846163f4f8142e220b2189b92ec4363a7aebd6c40fab1b49435fd74150",
    "status": "PUBLIC_RUNNER_PASS__DIRECT_URLOPEN_FALLBACK_MEDIATED_AND_RECEIPTED__ZERO_TERMINA",
    "terms": {
     "20261006": 1,
@@ -187779,6 +187779,31 @@
    }
   },
   {
+   "action_id": "CONTROLLER_TRACE_DECLARED_PLAN_PARITY_V1_20261022_V1",
+   "capability": false,
+   "date": "2026-10-22",
+   "id": "research:canonical/action_intents/CONTROLLER_TRACE_DECLARED_PLAN_PARITY_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/CONTROLLER_TRACE_DECLARED_PLAN_PARITY_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "03b2a55405f38148b78a384c9f25ccfe54ec5b5c6337db1faf5e48a37c179a89",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "controller": 1,
+    "controller_trace_declared_plan_parity_v1_20261022_v1": 1,
+    "declared": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "no_compound_goal_with_cross_step_dataflow_could_ever_become_a_verified_episode_because_checkpoint_plan_recomputation_mismatch_rejected_it__removing_that_hard_blocker_lets_the_episode_advance_to_the_next_verification_gate_instead_of_failing_at_the_first_one": 1,
+    "parity": 1,
+    "plan": 1,
+    "record_the_declared_plan_in_each_trace_row_alongside_the_resolved_one_and_have_the_bound_success_checkpoint_verifier_recompute_over_the_declared_form_with_an_exact_fallback_for_checkpoints_written_before_the_field_existed": 1,
+    "the_controller_checkpoint_pins_plan_sha256_over_the_plan_as_declared_but_the_trace_stores_only_the_executed_copy_in_which_every_result_reference_is_already_substituted_so_the_recomputed_hash_can_never_match_for_any_plan_with_cross_step_dataflow": 1,
+    "trace": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "CORPUS_GOALS_BECOME_VERIFIED_EXPERIENCE_BY_CARRYING_PROOF_DIGESTS_THROUGH_THE_TRACE_V1_20261022_V1",
    "capability": false,
    "date": "2026-10-22",
@@ -193310,7 +193335,7 @@
    "imported_by_count": 4,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/astra_runtime.py",
-   "sha256": "88264c6361f5eaa037f81641de1609904bbdf491f067d0dd4bb538123031d689",
+   "sha256": "85a2c2ff6a12edd65acccee5d3e489be8eb66242ade51416a50fa6bb495f5149",
    "summary": "",
    "symbol_count": 112,
    "symbols": [
@@ -241405,12 +241430,13 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py",
-   "sha256": "5268edf534136de5f5b1164eade5817d732b0298e800f560392fa0ab5333a440",
+   "sha256": "fd98e47ec55b0f6fd1d280ec079924d0980fa79d66377235d1f402e27229b04a",
    "summary": "Independent read-only verifier for compiled-bound success episodes.",
-   "symbol_count": 8,
+   "symbol_count": 9,
    "symbols": [
     "BoundSuccessVerificationError",
     "_canon",
+    "_declared_plan_of",
     "_items",
     "_lineage_heads",
     "_reverify_hashed_artifact",
@@ -241424,6 +241450,7 @@
     "canon": 1,
     "checkpoint": 1,
     "compiled-bound": 1,
+    "declared_plan_of": 1,
     "episodes": 1,
     "independent": 1,
     "items": 1,

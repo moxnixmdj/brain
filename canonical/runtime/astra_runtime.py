@@ -4918,7 +4918,15 @@ def _run_model_independent_goal(step, mission, goal):
                     +type(exc).__name__+":"+str(exc)
                 ) from exc
 
-        record={"cycle":cycle,"plan":action,"result":result}
+        # `plan` stays the *resolved* action: the acceptance verifiers re-open the
+        # artifacts named in it, so replacing it with the declared form would hand them
+        # `{"$result": ...}` placeholders instead of paths. `declared_plan` carries the
+        # form the plan hash was actually computed over. Without it the checkpoint's
+        # plan_sha256 (over the declared actions) could never equal a hash recomputed
+        # from the trace (over the resolved ones), so every plan with a cross-step
+        # $result reference failed CHECKPOINT_PLAN_RECOMPUTATION_MISMATCH and could
+        # never become a verified episode.
+        record={"cycle":cycle,"plan":action,"declared_plan":json.loads(json.dumps(raw_action)),"result":result}
         if composition_head is not None:
             record["composition_capsule_head_hash"]=composition_head
         trace.append(record)
