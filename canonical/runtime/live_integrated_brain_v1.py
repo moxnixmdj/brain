@@ -722,6 +722,27 @@ def _run_raw_goal_impl(request: Mapping[str, Any]) -> dict[str, Any]:
             # artifact is re-opened from disk rather than believed.
             if passed:
                 trace = (controller or {}).get("trace")
+                # The single-plan return path reports ``selected_plan`` and the
+                # compound one did not, so a passing multi-clause goal was
+                # retained with no proof capsule at all:
+                # ``_make_success_proof_capsule`` requires that key, and without
+                # it the observation carries no material for any adapter to
+                # re-inspect. Derived from the executed trace rather than from
+                # the compiled plan, so it records what actually ran, including
+                # the order it ran in. Summary rows carry no capability and are
+                # not part of the work.
+                if isinstance(trace, list):
+                    executed = []
+                    for row in trace:
+                        result = row.get("result") if isinstance(row, Mapping) else None
+                        cid = (
+                            str(result.get("capability_id") or "").strip()
+                            if isinstance(result, Mapping) else ""
+                        )
+                        if cid:
+                            executed.append(cid)
+                    if executed:
+                        compound_result["selected_plan"] = executed
                 if isinstance(trace, list) and trace:
                     acceptance = None
                     if RAW_ARCHIVE_COMPOUND_GRAMMAR.fullmatch(goal) is not None:
@@ -1008,7 +1029,38 @@ def _run_raw_goal_impl(request: Mapping[str, Any]) -> dict[str, Any]:
         }
 
 
-def _record_raw_goal_experience(out: Any) -> None:
+def _raw_goal_replay_context(request: Any) -> dict[str, Any] | None:
+    """The exact shape the Brain's own raw success adapter accepts.
+
+    `r3_raw_success_adapter_v1.adapt` is one of four success adapters the
+    improvement driver owns, and it is the one that turns a retained raw-goal
+    success into a verifiable episode. It requires `mode == "raw_bound"` and a
+    `request` mapping carrying both the goal and the task_id, and returns None
+    for anything else. When every adapter returns None the driver parks the work
+    as IMPROVEMENT_PARKED__CURRENT_OWNED_VERIFICATION_FRONTIER_INCOMPLETE, so a
+    wrongly shaped context does not fail loudly -- it silently strands the
+    experience, which is what a `{"surface", "goal"}` context did.
+
+    The adapter does not re-execute the goal. It reconstructs the episode from
+    the retained proof capsule and the controller checkpoint the run already
+    wrote, so the task_id names evidence that already exists rather than
+    requesting a second run. Every field it checks -- raw_goal_sha256, the
+    acceptance contract, selected_plan, accepted_raw_obligation_ids -- is
+    already present in the proof capsule this recording stores.
+    """
+    if not isinstance(request, Mapping):
+        return None
+    goal = str(request.get("goal") or "").strip()
+    task_id = str(request.get("task_id") or "").strip()
+    if not goal or not task_id:
+        return None
+    return {
+        "mode": "raw_bound",
+        "request": {"goal": goal, "task_id": task_id},
+    }
+
+
+def _record_raw_goal_experience(out: Any, request: Any = None) -> None:
     """Retain what the front door actually achieved, without judging it.
 
     106 modules in this tree implement learning, episode retention, skill
@@ -1016,6 +1068,9 @@ def _record_raw_goal_experience(out: Any) -> None:
     `grep -c` for the self-improvement, learning and feedback symbols in this
     file returned 0. So every goal the machine carried out was forgotten the
     instant it returned, and the learning loop had no experience to learn from.
+
+    The retained record carries a replay context, so the improvement driver can
+    act on it rather than stranding it; see `_raw_goal_replay_context`.
 
     This records and nothing else. `record_success_observation` refuses an
     output that did not pass, and it deliberately does not promote anything --
@@ -1036,7 +1091,9 @@ def _record_raw_goal_experience(out: Any) -> None:
         )
 
         _self_improvement.record_success_observation(
-            out, surface="RAW_GOAL_FRONT_DOOR_V1"
+            out,
+            surface="RAW_GOAL_FRONT_DOOR_V1",
+            replay_context=_raw_goal_replay_context(request),
         )
     except Exception:
         # Deliberate: see the docstring. Experience is best-effort by design.
@@ -1052,5 +1109,5 @@ def run_raw_goal(request: Mapping[str, Any]) -> dict[str, Any]:
     return can be missed and none can be recorded twice.
     """
     out = _run_raw_goal_impl(request)
-    _record_raw_goal_experience(out)
+    _record_raw_goal_experience(out, request)
     return out

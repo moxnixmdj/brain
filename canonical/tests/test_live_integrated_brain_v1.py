@@ -272,8 +272,20 @@ class LiveIntegratedBrainV1Tests(unittest.TestCase):
         self.assertTrue(result["raw_source_coverage_complete"])
         self.assertGreaterEqual(result["raw_acceptance_obligation_count"], 1)
         self.assertFalse(result["routing_success_authority"])
-        self.assertFalse(result["semantic_acceptance_complete"])
         self.assertTrue(output.is_file())
+        # This used to assert that acceptance was impossible here, which encoded
+        # a gap rather than a requirement: the trace verifier refuses any
+        # capability it has no re-inspector for, and this capability had none.
+        # A real re-inspector now re-opens the archive, recomputes its digest and
+        # byte-compares every member against the source file still on disk, so
+        # acceptance is earned from bytes rather than assumed from the producer.
+        self.assertTrue(result["semantic_acceptance_complete"], result.get("status"))
+        acceptance = result["raw_goal_acceptance"]
+        self.assertIs(acceptance["independent_reinspection"], True)
+        self.assertIn(
+            "archive.tar_gz.create_from_manifest",
+            [row["capability_id"] for row in acceptance["reinspection_ledger"]],
+        )
 
         output.unlink()
         manifest.unlink()

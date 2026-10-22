@@ -505,10 +505,97 @@ def _inspect_decision_verify(args, result, root):
                       "decision_id_reconciled": result.get("decision_id")}
 
 
+def _inspect_tar_gz_create_from_manifest(args, result, root):
+    """Re-open an archive the machine claims it built from a manifest.
+
+    The producer's own ``output_verified`` flag is not evidence, so this reads
+    the manifest and every source file back off disk, re-opens the archive that
+    was supposedly written, and compares the archived bytes with the bytes still
+    on disk. A claim that does not survive being re-opened is refused.
+
+    Acceptance for this capability was impossible before: the trace verifier
+    refuses any capability it has no re-inspector for, and this one had none.
+    That also made the R3 raw success adapter unreachable, because any accepted
+    archive goal had to carry ``archive.verify.tar_gz.gnu`` alongside the
+    create, so ``selected_plan`` was never the single create capability the
+    adapter requires.
+    """
+    archive = _inside(root, result.get("output_path") or args.get("output_path"))
+    if archive is None or not archive.is_file():
+        return False, "ARCHIVE_ABSENT_FROM_DISK", {}
+    data = archive.read_bytes()
+    claimed_sha = result.get("output_sha256")
+    if _digest(data) != claimed_sha:
+        return False, "ARCHIVE_SHA256_MISMATCH", {
+            "recomputed_sha256": _digest(data), "claimed_sha256": claimed_sha}
+    claimed_bytes = result.get("output_bytes")
+    if claimed_bytes is not None and len(data) != int(claimed_bytes):
+        return False, "ARCHIVE_BYTE_LENGTH_MISMATCH", {
+            "reopened_bytes": len(data), "claimed_bytes": claimed_bytes}
+
+    manifest = _inside(root, args.get("manifest_path"))
+    if manifest is None or not manifest.is_file():
+        return False, "MANIFEST_ABSENT_FROM_DISK", {}
+
+    members = result.get("members")
+    if not isinstance(members, list) or not members:
+        return False, "ARCHIVE_MEMBER_LIST_MISSING", {}
+    members = [str(m) for m in members]
+    claimed_sources = result.get("source_sha256")
+    if not isinstance(claimed_sources, dict):
+        return False, "ARCHIVE_SOURCE_DIGESTS_MISSING", {}
+
+    try:
+        import tarfile  # the capability's own declared substrate, re-used
+    except Exception:
+        return False, "ARCHIVE_REINSPECTION_SUBSTRATE_UNAVAILABLE", {}
+    try:
+        with tarfile.open(archive, "r:gz") as handle:
+            found = [m.name for m in handle.getmembers() if m.isfile()]
+            archived: dict[str, bytes] = {}
+            for name in found:
+                member = handle.getmember(name)
+                streamed = handle.extractfile(member)
+                if streamed is None:
+                    return False, "ARCHIVE_MEMBER_UNREADABLE", {"member": name}
+                archived[name] = streamed.read()
+    except Exception:
+        return False, "ARCHIVE_NOT_A_READABLE_GZIP_TAR", {}
+
+    if sorted(found) != sorted(members):
+        return False, "ARCHIVE_MEMBER_SET_MISMATCH", {
+            "reopened_members": sorted(found), "claimed_members": sorted(members)}
+    claimed_count = result.get("member_count")
+    if claimed_count is not None and len(found) != int(claimed_count):
+        return False, "ARCHIVE_MEMBER_COUNT_MISMATCH", {
+            "reopened_count": len(found), "claimed_count": claimed_count}
+
+    for name in found:
+        on_disk = _inside(root, name)
+        if on_disk is None or not on_disk.is_file():
+            return False, "ARCHIVE_SOURCE_ABSENT_FROM_DISK", {"member": name}
+        live_bytes = on_disk.read_bytes()
+        if _digest(live_bytes) != str(claimed_sources.get(name) or ""):
+            return False, "ARCHIVE_SOURCE_SHA256_MISMATCH", {"member": name}
+        # The strongest check: the bytes inside the archive are the bytes on
+        # disk now, not merely a digest the producer asserted.
+        if archived[name] != live_bytes:
+            return False, "ARCHIVE_CONTENT_DIFFERS_FROM_SOURCE", {"member": name}
+
+    return True, "", {
+        "archive_bytes_reopened": len(data),
+        "archive_sha256_recomputed": True,
+        "members_reopened": len(found),
+        "manifest_reread_from_disk": True,
+        "members_byte_compared_to_source": len(found),
+    }
+
+
 INSPECTORS: dict[str, Inspector] = {
     "pdf.extract.text.pypdf": _inspect_pdf_extract_text,
     "python.source.audit.ast": _inspect_python_source_audit,
     "archive.verify.tar_gz.gnu": _inspect_archive_verify,
+    "archive.tar_gz.create_from_manifest": _inspect_tar_gz_create_from_manifest,
     "xlsx.table.create_from_json_records": _inspect_xlsx_create,
     "docx.document.verify.intent_ooxml": _inspect_docx_verify,
     "source.candidates.enumerate.stdlib": _inspect_candidates_enumerate,
@@ -660,6 +747,14 @@ def verify(
             "pass": True,
             "semantic_acceptance_complete": True,
             "terminal_authority": False,
+            # An acceptance that does not say which goal and which contract it
+            # judged cannot be bound to the run that produced it. Both values
+            # are already in hand and the goal hash is already checked against
+            # the contract above, so recording them adds no new trust -- it
+            # makes the record self-identifying, which is what lets downstream
+            # learning tie a retained success to this exact acceptance.
+            "goal_sha256": _digest(goal.encode("utf-8")),
+            "task_contract_sha256": raw_contract.get("task_contract_sha256"),
             "accepted_obligation_ids": list(ids),
             "verified_capability_chain": executed,
             "planned_capability_chain": chain,
