@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6279,
+  "research_index_records": 6280,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e5f813ffb15918748a68f09c9b0e05e3d30340ba73e4b1f2362c1a4f1e6e0293"
+  "value": "452bf4cdda2a9d0b17e6173ad509b612c8dc40d85fc18eab368201d3f6b59df0"
  },
  "engines": [
   {
@@ -187641,6 +187641,51 @@
     "the_compound_return_path_hardcoded_semantic_acceptance_complete_to_false_and_accepted_raw_obligation_ids_to_an_empty_list_so_acceptance_was_structurally_unreachable_for_every_multi_clause_goal__and_the_one_wired_verifier_sits_behind_a_gate_requiring_execution_to_be_a_one_element_list_which_a_compound_plan_never_populates_because_it_reports_work_in_controller_execution_instead__the_verifier_itself_is_also_keyed_to_a_sentence_that_names_both_paths_so_it_cannot_match_any_benchmark_goal": 1,
     "trace": 1,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "CORPUS_GOALS_BECOME_VERIFIED_EXPERIENCE_BY_CARRYING_PROOF_DIGESTS_THROUGH_THE_TRACE_V1_20261022_V1",
+   "capability": false,
+   "date": "2026-10-22",
+   "id": "research:canonical/action_intents/CORPUS_GOALS_BECOME_VERIFIED_EXPERIENCE_BY_CARRYING_PROOF_DIGESTS_THROUGH_THE_TRACE_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/CORPUS_GOALS_BECOME_VERIFIED_EXPERIENCE_BY_CARRYING_PROOF_DIGESTS_THROUGH_THE_TRACE_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "71493536f9d631c27594eef0f643b550082727ab9f3884a2671bdbd1bfccbd43",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "accepted": 2,
+    "action": 2,
+    "adaptations": 1,
+    "adapter": 1,
+    "adapters": 2,
+    "all": 1,
+    "become": 1,
+    "benchmark-corpus": 1,
+    "bound": 1,
+    "capabilities": 1,
+    "carrying": 1,
+    "corpus": 2,
+    "corpus_goals_become_verified_experience_by_carrying_proof_digests_through_the_trace_v1_20261022_v1": 1,
+    "counts": 1,
+    "digests": 2,
+    "door": 1,
+    "episode": 1,
+    "every": 1,
+    "executed": 1,
+    "experience": 1,
+    "four": 1,
+    "front": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 1,
+    "goals": 3,
+    "learning_loop_closed_inside_the_run_by_draining_the_improvement_queue_the_front_door_never_called_v1_20261022_v1": 1,
+    "proof": 2,
+    "success": 2,
+    "trace": 2,
+    "v1": 2,
+    "verified": 3
    }
   },
   {
