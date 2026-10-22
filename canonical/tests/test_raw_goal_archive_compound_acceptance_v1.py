@@ -65,8 +65,17 @@ class CompoundArchiveAcceptanceTests(unittest.TestCase):
         ce = r.get("controller_execution") or {}
         self.trace = ce.get("trace")
         rows = [x for x in self.trace if ((x.get("plan") or {}).get("args") or {}).get("capability_id")]
-        self.manifest = rows[0]["plan"]["args"]["manifest_path"]
-        self.archive = rows[0]["plan"]["args"]["output_path"]
+        # Read through the shared unwrap, which is how the verifier itself sees
+        # these rows: the verified bound adapter nests its arguments under
+        # ``args.inputs``, so reading the raw trace directly here would test a
+        # shape the verifier is never handed.
+        from canonical.runtime.raw_goal_trace_acceptance_v1 import (
+            unwrap_bound_adapter_row as _unwrap,
+        )
+
+        create_args = _unwrap(rows[0])["plan"]["args"]
+        self.manifest = create_args["manifest_path"]
+        self.archive = create_args["output_path"]
         # Rebuild the contract exactly the way the front door does: routing
         # targets come from the COMPILED plan's parts, not from the trace. Get
         # this wrong and every negative control trips

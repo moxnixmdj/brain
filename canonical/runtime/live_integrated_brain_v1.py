@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from pathlib import Path
 from time import perf_counter_ns
 from typing import Any
@@ -374,6 +375,106 @@ def _plan_lineage(out: Any) -> tuple[list[str], list[str]]:
     return facts, effects
 
 
+_INPUT_REF = re.compile(r"^\$\{input\.([A-Za-z0-9_]+)\}$")
+
+
+def _independently_verified(entry: Mapping[str, Any]) -> bool:
+    """The verified bound adapter's own gate, read the same way it reads it.
+
+    Duplicated rather than imported because it lives inline in that module's
+    ``execute``. The consequence of drifting is bounded in both directions: too
+    strict and a plan simply is not upgraded, too permissive and the adapter
+    refuses at execution and fails closed, which the corpus census reports
+    immediately as a goal that stopped being accepted.
+    """
+    verification = entry.get("verification")
+    if not isinstance(verification, Mapping):
+        return False
+    return (
+        verification.get("independent_verified") is True
+        or verification.get("independently_verified") is True
+        or isinstance(verification.get("independently_verified_by"), str)
+        or verification.get("producer_independent") is True
+    )
+
+
+def _inputs_from_rendered_args(
+    entry: Mapping[str, Any], rendered_args: Mapping[str, Any]
+) -> dict[str, Any] | None:
+    """Recover the raw input names a rendered action was built from.
+
+    A registry template renames inputs onto argument names -- ``"path":
+    "${input.docx_path}"`` -- and the verified bound adapter renders that
+    template itself from the inputs it is handed. Handing it the already-renamed
+    arguments would ask it to resolve ``${input.docx_path}`` from a mapping that
+    only has ``path``. The template is the exact record of that renaming, so it
+    is read backwards. Returns None when nothing is recoverable, so the caller
+    leaves the action alone instead of guessing.
+    """
+    template = entry.get("action_template")
+    template_args = template.get("args") if isinstance(template, Mapping) else None
+    if not isinstance(template_args, Mapping):
+        return None
+    inputs: dict[str, Any] = {}
+    for name, spec in template_args.items():
+        match = _INPUT_REF.match(spec) if isinstance(spec, str) else None
+        if match is None:
+            continue
+        if name in rendered_args:
+            inputs[match.group(1)] = rendered_args[name]
+    return inputs or None
+
+
+def _upgrade_compound_actions(actions: Any, admissible: Mapping[str, Any]) -> Any:
+    """Send a compiled plan through the proof-bearing action, all of it or none.
+
+    A multi-clause goal's actions are built by the compiler, and that shape's
+    trace carries no proof digests -- so no compound goal could become verified
+    experience however real its work was. Upgrading here, at the one place the
+    front door takes the compiled plan in hand, covers every compiler path
+    instead of chasing each of them.
+
+    All or none is the point. The learning adapter binds an episode only when
+    every recorded step came through the verified bound adapter, so a partially
+    upgraded plan is worth nothing -- and the verified bound adapter refuses any
+    capability that has not been independently verified, which would turn a
+    working run into a failed one. So a plan is upgraded only when every
+    capability step in it is one the BOUND registry can execute, has had its
+    independence established, and has inputs recoverable exactly from its
+    template. Any plan that is not, is passed through untouched and executes
+    exactly as it did before.
+    """
+    if not isinstance(actions, list):
+        return actions
+    bound = _bound_capability_ids()
+    planned = []
+    for action in actions:
+        if not isinstance(action, Mapping) or action.get("type") != "invoke_capability":
+            planned.append((None, action))
+            continue
+        args = action.get("args")
+        cid = (
+            str((args or {}).get("capability_id") or "")
+            if isinstance(args, Mapping) else ""
+        )
+        entry = admissible.get(cid) if isinstance(admissible, Mapping) else None
+        if (
+            not cid
+            or not isinstance(args, Mapping)
+            or not isinstance(entry, Mapping)
+            or cid not in bound
+            or not _independently_verified(entry)
+        ):
+            return actions
+        inputs = _inputs_from_rendered_args(entry, args)
+        if inputs is None:
+            return actions
+        planned.append((bound_capability_controller_action(cid, entry, inputs), action))
+    if not any(built is not None for built, _ in planned):
+        return actions
+    return [built if built is not None else original for built, original in planned]
+
+
 def bound_capability_controller_action(cid: str, entry: Mapping[str, Any], inputs: Mapping[str, Any]) -> dict[str, Any]:
     """The one controller action shape that executes a verified capability.
 
@@ -650,7 +751,9 @@ def _run_raw_goal_impl(request: Mapping[str, Any]) -> dict[str, Any]:
                 "incremental_spend_usd": 0,
             }
 
-        controller_actions = compiled.get("controller_actions")
+        controller_actions = _upgrade_compound_actions(
+            compiled.get("controller_actions"), admissible
+        )
         routing_targets = list(compiled.get("target_effects") or [])
         if not routing_targets:
             for part in compiled.get("compiled_parts") or []:
