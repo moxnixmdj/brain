@@ -22,5 +22,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v6
         with:
-          python-version: "3.12.10"
+          # Pinned to the minor series, not a patch release. The exact pin "3.12.10"
+          # made setup-python fail outright on the Ubuntu 26.04 runner image
+          # ("The version '3.12.10' with architecture 'x64' was not found"), so this
+          # gate reported a failure without running a single test.
+          python-version: "3.12"
+      # setup-python provides a bare interpreter; pytest is not bundled with it. Without
+      # this step the run below died with "No module named pytest" and exit code 1 -- a
+      # failure that had been hidden behind the exact-version pin failing first, so this
+      # gate had never actually executed its test.
+      - run: python -m pip install --disable-pip-version-check -q pytest
       - run: python -m pytest -q canonical/tests/test_honesty_load_bearing_result_gate_v1.py

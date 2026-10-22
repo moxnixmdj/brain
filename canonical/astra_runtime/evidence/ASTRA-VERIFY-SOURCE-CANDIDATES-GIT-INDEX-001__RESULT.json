@@ -1,0 +1,46 @@
+{
+ "candidate_count": 400,
+ "digest_mismatches": 0,
+ "enumeration_sha256": "1677c459c1b04b68ad59aff69e17deb69deb05f11c39e566b35625ff215e6eb2",
+ "incremental_spend_usd": 0,
+ "independence_basis": {
+  "digests": "sha256sum (coreutils) -- a different implementation than hashlib.sha256",
+  "enumeration": "git ls-files (git index) -- a different mechanism than pathlib.Path.glob",
+  "pattern_matching": "fnmatch -- a different matcher than pathlib's glob translator"
+ },
+ "independent_result": {
+  "adapter": "source_candidates_verify_git_index",
+  "candidate_count": 400,
+  "enumeration_path": "canonical/astra_runtime/tmp/INDEP_VERIFY_SOURCE_CANDIDATES.json",
+  "glob": "**/*.py",
+  "incremental_spend_usd": 0,
+  "independent_digest_source": "sha256sum (coreutils)",
+  "independent_enumeration_source": "git ls-files (git index)",
+  "independent_pattern_matcher": "fnmatch",
+  "model_dependency_count": 0,
+  "search_root": "canonical/runtime",
+  "status": "SOURCE_CANDIDATES_INDEPENDENTLY_VERIFIED",
+  "tracked_files_considered": 2213,
+  "verified": true
+ },
+ "independent_verifier_capability": "source.candidates.verify_against_git_index",
+ "mission_id": "ASTRA-VERIFY-SOURCE-CANDIDATES-GIT-INDEX-001",
+ "model_dependency_count": 0,
+ "negative_control": "the verifier raised CANDIDATE_SET_MISMATCH when the new adapter file was on disk but absent from the git index, naming the exact differing path; it was re-run only after the file was staged",
+ "producer_result": {
+  "adapter": "source_candidates_enumerate",
+  "candidate_count": 400,
+  "glob": "**/*.py",
+  "incremental_spend_usd": 0,
+  "model_dependency_count": 0,
+  "output_path": "canonical/astra_runtime/tmp/INDEP_VERIFY_SOURCE_CANDIDATES.json",
+  "output_verified": true,
+  "schema": "PROJECT_BRAIN_SOURCE_CANDIDATE_ENUMERATION_V1",
+  "search_root": "canonical/runtime",
+  "status": "SOURCE_CANDIDATES_ENUMERATED"
+ },
+ "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_VERIFICATION_RESULT_V1",
+ "set_mismatches": 0,
+ "subject_capability": "source.candidates.enumerate.stdlib",
+ "verified_at_utc": "2026-10-22T11:05:47Z"
+}

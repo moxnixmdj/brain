@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fail-closed anti-drift validator for frontier-sensitive changes."""
 from __future__ import annotations
-import argparse, base64, hashlib, json, os, pathlib, subprocess, sys, urllib.parse, urllib.request
+import argparse, base64, hashlib, json, os, pathlib, socket, subprocess, sys, time, urllib.error, urllib.parse, urllib.request
 from datetime import datetime, timezone, timedelta
 
 _REPO_ROOT = str(pathlib.Path(__file__).resolve().parents[2])
@@ -654,21 +654,61 @@ def blocker_lease_key(intent):
     ]
     return "::".join(parts)
 
+_DEDUPE_RETRY_STATUSES=frozenset({429,500,502,503,504})
+_DEDUPE_ATTEMPTS=4
+
+def _urlopen_with_retry(build_request,timeout,opener=None,sleep=None):
+    """urlopen that survives transient gateway errors from api.github.com.
+
+    ``opener`` and ``sleep`` are injectable so the retry can be tested without
+    reassigning a network entry point, which repo_integrity_guard_v1 rightly
+    forbids in test code.
+
+    Measured on PR #5983: the blocker-lease dedupe call failed one attempt in three
+    with HTTP 502 then HTTP 504, and ``enforce_blocker_lease`` turned that straight
+    into BLOCKER_LEASE_DEDUPE_CHECK_FAILED -- a policy rejection of a change caused
+    by a third-party gateway rather than by anything in the change. Two identical
+    local runs of the same guard command passed either side of the failure.
+
+    Only 5xx/429 and transport timeouts are retried, so the check stays fail-closed:
+    a 4xx (auth, not found) still raises immediately, and an API that stays
+    unreachable still fails the guard once the attempts are exhausted. The request is
+    rebuilt per attempt because a Request that has already been sent is not
+    guaranteed to be reusable.
+    """
+    opener=opener or urllib.request.urlopen
+    sleep=sleep or time.sleep
+    last=None
+    for attempt in range(_DEDUPE_ATTEMPTS):
+        try:
+            return opener(build_request(),timeout=timeout)
+        except urllib.error.HTTPError as exc:
+            if exc.code not in _DEDUPE_RETRY_STATUSES:
+                raise
+            exc.close()
+            last=exc
+        except (urllib.error.URLError,socket.timeout,TimeoutError) as exc:
+            last=exc
+        if attempt+1<_DEDUPE_ATTEMPTS:
+            sleep(min(2**attempt,8))
+    raise last
+
 def _github_json(path):
     token=os.environ.get("GITHUB_TOKEN")
     repo=os.environ.get("GITHUB_REPOSITORY")
     if not token or not repo:
         raise RuntimeError("GITHUB_DEDUPE_CONTEXT_MISSING")
-    req=urllib.request.Request(
-        "https://api.github.com"+path,
-        headers={
-            "Authorization":"Bearer "+token,
-            "Accept":"application/vnd.github+json",
-            "X-GitHub-Api-Version":"2022-11-28",
-            "User-Agent":"ProjectBrain-DriftGuard/1",
-        },
-    )
-    with urllib.request.urlopen(req,timeout=20) as resp:
+    def _request():
+        return urllib.request.Request(
+            "https://api.github.com"+path,
+            headers={
+                "Authorization":"Bearer "+token,
+                "Accept":"application/vnd.github+json",
+                "X-GitHub-Api-Version":"2022-11-28",
+                "User-Agent":"ProjectBrain-DriftGuard/1",
+            },
+        )
+    with _urlopen_with_retry(_request,20) as resp:
         return json.loads(resp.read().decode("utf-8"))
 
 def _github_graphql(query,variables):
@@ -676,19 +716,20 @@ def _github_graphql(query,variables):
     if not token:
         raise RuntimeError("GITHUB_DEDUPE_CONTEXT_MISSING")
     body=json.dumps({"query":query,"variables":variables}).encode("utf-8")
-    req=urllib.request.Request(
-        "https://api.github.com/graphql",
-        data=body,
-        method="POST",
-        headers={
-            "Authorization":"Bearer "+token,
-            "Accept":"application/vnd.github+json",
-            "Content-Type":"application/json",
-            "X-GitHub-Api-Version":"2022-11-28",
-            "User-Agent":"ProjectBrain-DriftGuard/2",
-        },
-    )
-    with urllib.request.urlopen(req,timeout=30) as resp:
+    def _request():
+        return urllib.request.Request(
+            "https://api.github.com/graphql",
+            data=body,
+            method="POST",
+            headers={
+                "Authorization":"Bearer "+token,
+                "Accept":"application/vnd.github+json",
+                "Content-Type":"application/json",
+                "X-GitHub-Api-Version":"2022-11-28",
+                "User-Agent":"ProjectBrain-DriftGuard/2",
+            },
+        )
+    with _urlopen_with_retry(_request,30) as resp:
         payload=json.loads(resp.read().decode("utf-8"))
     if not isinstance(payload,dict) or payload.get("errors"):
         raise RuntimeError("GITHUB_GRAPHQL_FAILED:"+json.dumps(payload.get("errors") if isinstance(payload,dict) else payload,sort_keys=True))
@@ -1159,6 +1200,25 @@ def enforce_v22_prewrite_admission(intent,base):
     for item in errors:
         fail(item)
 
+def _annotate_failures(items):
+    """Surface the reasons as GitHub annotations, not just stdout.
+
+    The guard already knew why it failed and printed it, but a workflow step's stdout
+    is not retrievable once the run's logs are off the retention window or unreachable
+    from where the failure is being triaged -- the check run reports only "Process
+    completed with exit code 1", which is why a transient GitHub API gateway error in
+    the blocker-lease dedupe was indistinguishable from a real policy rejection for
+    three consecutive attempts at diagnosing it. `::error::` becomes a check-run
+    annotation, which is readable through the API independently of the logs.
+
+    Only emitted under Actions; a local run keeps its existing output exactly.
+    """
+    if os.environ.get("GITHUB_ACTIONS")!="true":
+        return
+    for item in items:
+        text=str(item).replace("%","%25").replace("\r","%0D").replace("\n","%0A")
+        print("::error::"+text)
+
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--base",required=True)
@@ -1434,6 +1494,7 @@ def main():
         print("DRIFT_GUARD_FAIL")
         for item in FAIL:
             print(" -",item)
+        _annotate_failures(FAIL)
         return 1
 
     digest=hashlib.sha256(terminal.encode()).hexdigest()
@@ -1445,4 +1506,15 @@ def main():
     return 0
 
 if __name__=="__main__":
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except SystemExit:
+        raise
+    except BaseException as _exc:  # noqa: BLE001 - reported, then re-raised unchanged
+        # An unhandled exception exits non-zero with a traceback on stderr and emits no
+        # annotation, so from the check run it is indistinguishable from a policy
+        # rejection. That is exactly the ambiguity that kept the real cause of this
+        # job's failure hidden. Name the crash, then re-raise so the exit code and the
+        # traceback are preserved exactly.
+        _annotate_failures(["DRIFT_GUARD_CRASH:"+type(_exc).__name__+": "+str(_exc)[:400]])
+        raise

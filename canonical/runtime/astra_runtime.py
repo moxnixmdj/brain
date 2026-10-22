@@ -1311,6 +1311,26 @@ def _verify_action_expectation(action,result):
         message+=":RESULT="+detail
         raise Blocker(message)
 
+def _lift_bound_adapter_result(result):
+    """The capability's own fields, when a verified bound adapter wrapped them.
+
+    The verified bound adapter nests the capability's result under ``result``, while
+    the registry template action does not nest at all. This resolver was written
+    against the flat shape only, so a chain whose first step had been upgraded to
+    that adapter could not see ``output_path`` and died with
+    RESULT_REFERENCE_FIELD_MISSING -- which made three goals that had been accepted
+    stop being accepted the moment their plans were upgraded.
+
+    It reuses ``raw_goal_trace_acceptance_v1.unwrap_bound_adapter_row``, which is a
+    union rather than a rewrite: the wrapper's own keys win every collision, so
+    nothing is invented and no reference that already resolved changes meaning. The
+    import is deferred to keep this module's import graph unchanged.
+    """
+    if not isinstance(result,dict) or "result" not in result:
+        return result
+    from canonical.runtime.raw_goal_trace_acceptance_v1 import unwrap_bound_adapter_row
+    return unwrap_bound_adapter_row({"result":result}).get("result")
+
 def _resolve_result_refs(value, trace):
     if isinstance(value,dict):
         if set(value.keys())=={"$result"}:
@@ -1324,9 +1344,14 @@ def _resolve_result_refs(value, trace):
             field=str(spec.get("field") or "").strip()
             if field:
                 for part in field.split("."):
-                    if not isinstance(current,dict) or part not in current:
-                        raise Blocker("RESULT_REFERENCE_FIELD_MISSING:"+field)
-                    current=current[part]
+                    if isinstance(current,dict) and part in current:
+                        current=current[part]
+                        continue
+                    lifted=_lift_bound_adapter_result(current)
+                    if isinstance(lifted,dict) and part in lifted:
+                        current=lifted[part]
+                        continue
+                    raise Blocker("RESULT_REFERENCE_FIELD_MISSING:"+field)
             return current
         return {k:_resolve_result_refs(v,trace) for k,v in value.items()}
     if isinstance(value,list):
