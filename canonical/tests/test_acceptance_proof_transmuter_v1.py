@@ -82,13 +82,54 @@ class Tests(unittest.TestCase):
     def test_bad_evidence_shape_fails_closed(self):
         self.assertEqual(evaluate(protocols(),{"evidence":"bad"})["status"],"FAIL_CLOSED")
 
-    def test_live_repo_stays_2_17_without_typed_witnesses(self):
+    def test_live_repo_grants_no_closure_of_its_own(self):
+        """The transmuter must never close a family on its own authority.
+
+        This used to pin the literal tuple ``(19, 2, 17)``. That constant was
+        wrong on two counts. It measured the wrong thing -- it counted families
+        that arrived in the tracked protocol file *already* marked ``PASS`` as
+        though the transmuter had closed them -- and it went stale the moment
+        that file legitimately recorded more passing families, which is exactly
+        what happened: the file records four ``PASS`` protocols, so the honest
+        count is ``(19, 4, 15)``.
+
+        The property that actually has to hold is independent of how many
+        families have passed so far: closed == already-passing, every closure is
+        labelled as such, and no witness is silently swallowed -- one either
+        closes its family or is rejected with a named reason. Asserting that
+        keeps the guard live without going red every time the repo improves.
+        """
         root=Path(__file__).resolve().parents[2]
-        pp=root/"canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json"
-        ep=root/"canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json"
-        if not pp.exists() or not ep.exists(): self.skipTest("integration fixtures absent")
-        out=evaluate(json.loads(pp.read_text()),json.loads(ep.read_text()))
-        self.assertEqual((out["family_count"],out["closed_family_count"],out["open_family_count"]),(19,2,17))
+        pp_path=root/"canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json"
+        ep_path=root/"canonical/governance/OPUS55_ACCEPTANCE_PROOF_TRANSMUTATION_INPUT_V1.json"
+        if not pp_path.exists() or not ep_path.exists(): self.skipTest("integration fixtures absent")
+        pp=json.loads(pp_path.read_text()); ep=json.loads(ep_path.read_text())
+        out=evaluate(pp,ep)
+
+        already_pass={p["family"] for p in pp["protocols"] if p.get("status")=="PASS"}
+        closed_rows=[r for r in out["families"] if r["result_status"]=="PASS"]
+        closed={r["family"] for r in closed_rows}
+
+        # the transmuter grants no closure of its own authority
+        self.assertEqual(closed,already_pass)
+        self.assertEqual(out["closed_family_count"],len(already_pass))
+        self.assertEqual(out["open_family_count"],out["family_count"]-len(already_pass))
+        self.assertEqual(out["family_count"],len(out["families"]))
+        # and it never disguises where a closure came from
+        self.assertTrue(all(r["closure_mode"]=="ALREADY_PASS" for r in closed_rows))
+
+        # the guard has teeth: a witness either closes its family or is rejected
+        # with a reason. One that is neither honoured nor rejected means the
+        # transmuter is swallowing evidence it was told to evaluate.
+        for e in ep.get("evidence") or []:
+            fam=e.get("family")
+            row=next((r for r in out["families"] if r["family"]==fam),None)
+            self.assertIsNotNone(row,f"evidence {e.get('id')} names unknown family {fam}")
+            if row["result_status"]!="PASS":
+                self.assertTrue(
+                    row["rejections"],
+                    f"witness for {fam} neither closed the family nor was rejected with a reason",
+                )
 
 if __name__=="__main__":
     unittest.main(verbosity=2)
