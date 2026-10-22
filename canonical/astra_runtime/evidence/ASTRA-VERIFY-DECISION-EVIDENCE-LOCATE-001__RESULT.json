@@ -1,0 +1,41 @@
+{
+  "capability_id": "structured.decision_evidence.locate.stdlib",
+  "digest_agreement": true,
+  "incremental_spend_usd": 0,
+  "independent_observation": {
+    "decidability_authority": "evidence_decision_synthesis.synthesize re-run on re-opened bytes",
+    "first_decidable_candidate": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REAL_TASK_A_CARRIER_20260930_INPUT.json",
+    "git_schema_candidate_count": 29,
+    "independent_canonicalisation_source": "jq -S (jq binary)",
+    "independent_count_source": "jq (jq binary)",
+    "independent_digest_source": "sha256sum (coreutils)",
+    "independent_enumeration_source": "git grep -l (git content search)",
+    "mismatches": [],
+    "verified": true
+  },
+  "independent_verifier": "canonical/runtime/bound_capabilities/decision_evidence_locate_verify.py",
+  "independent_verifier_binaries": [
+    "git grep -l",
+    "sha256sum",
+    "jq -S"
+  ],
+  "mission_id": "ASTRA-VERIFY-DECISION-EVIDENCE-LOCATE-001",
+  "model_dependency_count": 0,
+  "producer_report": {
+    "alternative_count": 3,
+    "constraint_count": 6,
+    "evidence_count": 4,
+    "json_files_scanned": 2383,
+    "output_path": "canonical/astra_runtime/tmp/INDEP_VERIFY_DECISION_EVIDENCE_INPUT.json",
+    "output_sha256": "817b66999c744d0dfcb206139a472957c6a968c0dfb124edec1f0926358735c9",
+    "schema_matches_validated": 1,
+    "source_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REAL_TASK_A_CARRIER_20260930_INPUT.json",
+    "source_sha256": "1775f1694ba0e6e3b464a9e73e21387fab2d530ecfd5c866bea677cbda759c5d",
+    "status": "DECISION_EVIDENCE_LOCATED"
+  },
+  "producer_result_sha256": "817b66999c744d0dfcb206139a472957c6a968c0dfb124edec1f0926358735c9",
+  "reproduced": true,
+  "schema": "PROJECT_BRAIN_CAPABILITY_INDEPENDENT_VERIFICATION_EVIDENCE_V1",
+  "selection_rule_reproduced_independently": true,
+  "verifier_result_sha256": "817b66999c744d0dfcb206139a472957c6a968c0dfb124edec1f0926358735c9"
+}
