@@ -305,7 +305,7 @@
    "selected_route": "DECLARE_THE_SUBSTRATE_A_CAPABILITY_ACTUALLY_NEEDS__RATHER_THAN_LETTING_A_PREFERRED_BUT_UNREQUIRED_APT_PACKAGE_BLOCK_IT__SO_THE_SQLITE_VERIFIER_IS_DECLARED_PYTHON_STDLIB_SQLITE3_THE_WAY_ITS_SIBLING_CREATE_CAPABILITY_ALWAYS_HAS_BECAUSE_ITS_ADAPTER_CATCHES_FILENOTFOUNDERROR_AND_IMPORTS_THE_STDLIB_MODULE",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-22T08:15:40Z",
+    "checked_at_utc": "2026-10-22T10:52:51Z",
     "execution_dependencies": [
      {
       "dependency": "python3_interpreter",
