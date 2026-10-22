@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c1c71a88dd597b959143e644fec346a47f16dc724a37ad2ded930848265e0910"
+  "value": "278c0bc852c17850f66e2230a5e7b5e3713f82ecb71dc080199f2bcf2a1f631f"
  },
  "engines": [
   {
@@ -209620,9 +209620,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/enforce_goal_hierarchy.py",
-   "sha256": "a0ee320067a74360a06e7908689bbc0ab85c27c28b60f1b164eec230c33a95dc",
+   "sha256": "ef24000ba71835a1a9c960856d07b3682005ad3541069b8a35d6da3404bd1481",
    "summary": "Fail-closed anti-drift validator for frontier-sensitive changes.",
-   "symbol_count": 31,
+   "symbol_count": 32,
    "symbols": [
     "_collect_key_values",
     "_contains_placeholder",
@@ -209635,6 +209635,7 @@
     "_open_pr_intents_from_apis",
     "_parse_utc_timestamp",
     "_require_existing_paths",
+    "_urlopen_with_retry",
     "active_target_mirror_errors",
     "added_diff",
     "blocker_lease_key",
@@ -209646,8 +209647,7 @@
     "enforce_promotion_truth",
     "enforce_recursive_obs",
     "enforce_selected_route_preflight",
-    "enforce_target_continuity",
-    "enforce_v22_prewrite_admission"
+    "enforce_target_continuity"
    ],
    "terms": {
     "added_diff": 1,
@@ -209662,7 +209662,6 @@
     "enforce_model_independent_cognition": 1,
     "enforce_recursive_obs": 1,
     "enforce_selected_route_preflight": 1,
-    "enforce_target_continuity": 1,
     "fail": 1,
     "fail-closed": 1,
     "frontier-sensitive": 1,
@@ -209681,6 +209680,7 @@
     "open_pr_intents_from_apis": 1,
     "parse_utc_timestamp": 1,
     "path_exists_at_ref": 1,
+    "urlopen_with_retry": 1,
     "validator": 1
    }
   },
