@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "cba625b234587393b868d5ae15b07cf6248c0717ef5b93b61a09f8562d021c8e"
+  "value": "5898b2936302c547f6b1336d5263a33fee18f4b303f3a77b88cea0d492d17383"
  },
  "engines": [
   {
@@ -187565,7 +187565,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/CAPABILITY_RECEIPT_LANE_DECLARED_INVOCATION_PROBE_V1_20261022_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "635931eb0ad907c79c3d4059b6a74202c44d579f75e6ed6703a2889a194e25eb",
+   "sha256": "fd67928d5ef87c4ab6f33080bfae6a4ade4fc15304d886f0a1d0737f4162c325",
    "status": "",
    "terms": {
     "20261022": 1,
