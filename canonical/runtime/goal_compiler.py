@@ -4687,6 +4687,57 @@ def _attribute_chained_parts_to_clauses(clauses, parts, registry):
     return attributed
 
 
+def _inherit_producer_goal_for_verifier_steps(actions, registry):
+    """Hand a verifier step the exact goal string its producer was given.
+
+    Every clause of a compound goal is compiled with its own clause text bound to
+    the ``goal`` input. That is correct for a step doing independent work and
+    wrong for a step whose whole contract is to re-check an earlier one: an
+    independent verifier recomputes a digest of the goal it is handed and compares
+    it against the digest the producer recorded, so both must be handed the same
+    string or the comparison can never succeed.
+
+    Measured on BENCH_GROUNDING_AND_VERIFY -- "Compile a plain goal into a bound
+    capability and verify the grounding." The clause split gave the producer
+    'Compile a plain goal into a bound capability' (sha256 8999f288...) and the
+    verifier 'verify the grounding' (sha256 4c9ae405...), so
+    plain_goal.bound_capability.grounding.verify.stdlib failed with
+    GOAL_HASH_MISMATCH even though the producer had succeeded.
+
+    The relation is proved from the registry, not guessed: this fires only where a
+    step requires an effect that an earlier step in this same plan provides. It
+    therefore cannot fire on a single-step goal, and it does not fire on the
+    archive verifier, whose requirements are ambient facts rather than plan
+    outputs, so the tar goals are untouched. The inherited string still comes from
+    the original request text and never from the producer's own output document,
+    so the verifier remains independent of the thing it checks.
+    """
+    if not isinstance(actions, list) or len(actions) < 2:
+        return actions
+    producer_by_effect = {}
+    for action in actions:
+        if not isinstance(action, dict):
+            continue
+        args = action.get("args")
+        if not isinstance(args, dict):
+            continue
+        entry = (registry or {}).get(str(args.get("capability_id") or "")) or {}
+        if not isinstance(entry, dict):
+            continue
+        requires = {str(x) for x in entry.get("requires") or [] if isinstance(x, str) and x}
+        consumed = requires & set(producer_by_effect)
+        if consumed and "goal" in args:
+            earliest = min(producer_by_effect[effect] for effect in consumed)
+            producer_goal = earliest[1]
+            if isinstance(producer_goal, str) and args["goal"] != producer_goal:
+                args["goal"] = producer_goal
+        producer_goal = args.get("goal")
+        for effect in entry.get("provides") or []:
+            if isinstance(effect, str) and effect:
+                producer_by_effect.setdefault(effect, (len(producer_by_effect), producer_goal))
+    return actions
+
+
 def _compile_compound_goal(goal, clauses, registry, root):
     actions=[]
     compiled_parts=[]
@@ -5478,6 +5529,7 @@ def _compile_compound_goal(goal, clauses, registry, root):
             "target_effects":part["target_effects"],
             "score":part["score"],
         })
+    _inherit_producer_goal_for_verifier_steps(actions, registry)
     actions.append({
         "type":"finish",
         "args":{"summary":"COMPOUND_GOAL_COMPLETE"},
