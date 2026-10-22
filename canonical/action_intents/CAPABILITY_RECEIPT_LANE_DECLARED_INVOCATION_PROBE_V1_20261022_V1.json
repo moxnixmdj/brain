@@ -34,7 +34,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The capability receipt lane probed every contract adapter as fn({}, root) inside 'except BaseException: return None', so any adapter that reads an argument was never executed at all and the lane reported that as no evidence available rather than the probe never ran it. source.candidates.enumerate.stdlib raises JSON_OUTPUT_REQUIRED on an absent output_path, so it could never be receipted, and it is the capability the bound adapter refuses in three of the five accepted-but-unlearned goals. discover() also read already live as already verified, skipping 36 of 72 bound capabilities that carry no independence claim the gate accepts, which left that gap permanently unclosable because the independent verifier can only re-run what a producer receipt already describes.",
- "canonical_base_commit": "ec8bfa706842493926cea0380285514e2dda65bd",
+ "canonical_base_commit": "1cfbbbf22238a7a4b7f2bbd8dea9911af6ffed16",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -79,7 +79,7 @@
   "canonical/runtime/astra_runtime.py -- unmodified. _ensure_local_dependency already probes a declared python_stdlib module with importlib.util.find_spec and blocks when it is missing, so the corrected declaration is verified by the existing gate rather than by anything new."
  ],
  "recursive_obs": {
-  "canonical_base_commit": "ec8bfa706842493926cea0380285514e2dda65bd",
+  "canonical_base_commit": "1cfbbbf22238a7a4b7f2bbd8dea9911af6ffed16",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "EDITING_THE_SUBSTRATE_GATE_TO_HONOUR_OPTIONAL_AND_FALLBACK_WHICH_IS_A_PROTECTED_GUARD_PATH_AND_WOULD_HAVE_REQUIRED_ASSERTING_A_USER_GOVERNANCE_AUTHORIZATION_THAT_WAS_DELEGATED_RATHER_THAN_GRANTED",
