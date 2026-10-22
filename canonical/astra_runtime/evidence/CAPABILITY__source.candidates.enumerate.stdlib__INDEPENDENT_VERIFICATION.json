@@ -1,0 +1,31 @@
+{
+ "capability_id": "source.candidates.enumerate.stdlib",
+ "elapsed_ms": 111.301,
+ "independent_run_reference": {
+  "github_run_id": 39780554160,
+  "oidc_claims": {
+   "actor": "brain-automation[bot]",
+   "aud": "https://github.com/moxnixmdj/brain",
+   "event_name": "push",
+   "head_ref": "",
+   "iss": "https://token.actions.githubusercontent.com",
+   "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
+   "jti": "66fe897b-20c8-4a5f-8ee4-ab908fd5cc5f",
+   "repository": "moxnixmdj/brain",
+   "repository_id": "1364778274",
+   "run_attempt": "1",
+   "run_id": "39780554160",
+   "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
+  }
+ },
+ "independent_verifier": "github-actions:moxnixmdj/brain",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bound_capabilities/source_candidates_enumerate.py",
+ "module_sha256": "1bb83d60e8d0fdee7436cb7105d10f4518cf60eba87e28c5ece2b3ba592e8887",
+ "producer_ran_by": "arena-session-f48a3a02-brain",
+ "producer_receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__source.candidates.enumerate.stdlib__EXECUTION_RECEIPT.json",
+ "producer_result_sha256": "f39ede7b209e2720bf194e3d17e45acccb944da644b8fdff5f34dd8eeecb6429",
+ "reproduced": true,
+ "schema": "PROJECT_BRAIN_CAPABILITY_INDEPENDENT_VERIFICATION_V1",
+ "verifier_result_sha256": "f39ede7b209e2720bf194e3d17e45acccb944da644b8fdff5f34dd8eeecb6429"
+}
