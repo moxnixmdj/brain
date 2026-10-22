@@ -15,10 +15,10 @@
   "status": "PUBLIC_RUNNER_PASS__DIRECT_URLOPEN_FALLBACK_MEDIATED_AND_RECEIPTED__ZERO_TERMINAL_CREDIT",
   "subject": {
     "astra_runtime": {
-      "git_blob_sha": "b00d9ed9b6f614215ed65384dd652557e32e233f",
+      "git_blob_sha": "14ce1af08781882456eed690abfb3adfd487e1f5",
       "path": "canonical/runtime/astra_runtime.py"
     },
-    "commit": "291bfa717e77f9575f2a3ebd141bebf4964b732d",
+    "commit": "588a34c884200ee1fbe253a1a155a54f84bf81af",
     "tests": {
       "git_blob_sha": "4556190b6e8f7e9774f165e2e5146914eb293911",
       "path": "canonical/tests/test_external_tool_bridge.py"
