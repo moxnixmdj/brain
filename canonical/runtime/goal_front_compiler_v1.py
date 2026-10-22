@@ -1496,8 +1496,34 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
             raise GoalCompilationFailure("GOAL_NAMES_UNKNOWN_CAPABILITY", ",".join(unknown[:3]))
         raise GoalCompilationFailure("GOAL_NAMES_CAPABILITY_IN_COMPOUND_REQUEST", ",".join(identities[:3]))
 
-    registry = routable_registry(admissible)
-    if len(registry) != len(admissible):
+    # A ZERO-INPUT TOOL MAY COMPETE; IT MAY NEVER DECIDE.
+    #
+    # `routable_registry` deletes the capabilities that take no input, because a
+    # capability that binds every sentence can never be the answer to one.  That
+    # is exactly what `_is_catch_all`'s own docstring says: "it can never be the
+    # DECISION".  Deleting them from the RANKING, though, does more than refuse
+    # them -- it changes what the pinned compiler can bind at all, and that was
+    # measured to flip a selection.
+    #
+    # "Fetch a JSON document and assess its internal consistency." binds nothing
+    # grounded once `terminal.kstar.root.assess.stdlib` is gone, so the pinned
+    # compiler falls through to WORLD binding and returns
+    # `docx.document.create_from_json_record` at score 25 with `json_path`
+    # inferred to canonical/CANONICAL_POINTER.json; with it present the grounded
+    # pass is non-empty, the world fallback never runs, and the chained pass's
+    # `knowledge.consistency.assess` (score 8, every slot grounded) wins.  The
+    # docx pick then fails at execution with JSON_DOCX_SPEC_UNRESOLVED, because
+    # the spec that producer needs was never stated.
+    #
+    # So the full admissible view is what gets RANKED and what the pinned
+    # compiler binds against, while the routable projection is what may be
+    # DECIDED.  `_is_catch_all` still refuses a catch-all inside the walk and F17
+    # still displaces one the pinned scorer returned, so nothing that F4 was
+    # protecting becomes selectable -- the weak candidate is back as a
+    # competitor, which is the only role it ever needed.
+    registry = dict(admissible)
+    decidable = set(routable_registry(admissible))
+    if len(decidable) != len(admissible):
         rules.append("F4_ZERO_INPUT_TOOLS_NOT_ROUTABLE")
     ranked = ranked_candidates(text, registry)
     best_cid = ranked[0][2] if ranked else None
@@ -1529,11 +1555,16 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
 
     if single_shape or compiled is None:
         future = _future_artifacts(text, root)
+        # The pool a DECISION may come from.  A catch-all stays in `ranked` as a
+        # competitor and in `registry` as a bindable entry, but it is never a
+        # candidate this walk may return - that is the whole of F4, applied where
+        # the decision is made instead of where the ranking is built.
+        selectable = [c for c in ranked if c[2] in decidable]
         # F3: a goal that names a file to be produced is served by a tool that can write a file
-        preferred = [c for c in ranked if _output_keys(registry[c[2]])] if future else []
+        preferred = [c for c in selectable if _output_keys(registry[c[2]])] if future else []
         if future and preferred:
             rules.append("F3_ARTIFACT_WRITERS_PREFERRED")
-        pool = preferred or ranked
+        pool = preferred or selectable
         best = pool[0] if pool else None
         if best is not None and selected != best[2]:
             # F1 binds the best candidate; F22 disposes a same-score TIE by typed admission:

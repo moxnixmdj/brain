@@ -1,48 +1,68 @@
-"""The benchmark must measure the compiler the product actually runs.
+"""The front door's selection is measured, and the two compilers now agree.
 
-`goal_compilation_benchmark_v1` scores selection with `goal_compiler.compile_goal`.
-The live front door does not use that function: `live_integrated_brain_v1.run_raw_goal`
-calls `compile_against_live_registry`, which selects through
-`goal_front_compiler_v1.compile_goal`. Two compilers, one reported number.
+WHY THIS FILE EXISTS
 
-Measured on all 23 benchmark goals, the two disagree on exactly one:
+``goal_compilation_benchmark_v1`` reports a correct-selection rate.  It measures
+``goal_compiler.compile_goal`` over ``live_integrated_brain_v1.load_verified_registry()``.
+The live front door does not make that call: ``run_raw_goal`` goes through
+``compile_against_live_registry``, which selects with
+``goal_front_compiler_v1.compile_goal`` over the platform-admissible projection.
+Two call sites, one reported number -- so the rate in the benchmark describes a
+configuration the shipping path does not use, and nothing measured the one that runs.
 
-    goal      "Fetch a JSON document and assess its internal consistency."
-    expected  knowledge.consistency.assess
-    canonical knowledge.consistency.assess                 (score 8)
-    front     docx.document.create_from_json_record        (score 25)
+WHAT WAS MEASURED, AND WHAT WAS WRONG THE FIRST TIME
 
-The front-door pick wins on raw lexical score because it matches two INPUT nouns --
-"json" and "document" -- while the capability the sentence actually asks for matches
-the sentence's ACTION words, "assess" and "consistency". It then fails at execution
-with `JSON_DOCX_SPEC_UNRESOLVED`, because the spec the docx producer needs was never
-stated.
+The first version of this file reported front-door selection as 15 of 19 and blamed a
+disagreement between the two compiler MODULES.  Both claims were wrong and both are
+corrected here rather than left standing:
 
-So the reported correct-selection rate describes a compiler the shipping path does not
-use, and one goal's error is invisible in it.
+  * 15 of 19 came from reading only ``plan["selected_capability"]``.  The benchmark's
+    own rule reads ``compiled_parts`` first and falls back to the top-level pick, so a
+    compound plan scored as "no selection".  Measured with the benchmark's own rule the
+    number was 20 of 23, not 15 of 19.
+  * The two compiler modules do not disagree.  Given the same registry and the same
+    root, ``goal_compiler.compile_goal`` and ``goal_front_compiler_v1.compile_goal``
+    return the same capability for all 23 goals.  The difference was the REGISTRY VIEW:
+    the front compiler ranks over ``routable_registry(admissible)``, which deletes the
+    capabilities that take no input, and the benchmark ranks over the full verified
+    registry.
 
-Diagnosed and deliberately NOT papered over here:
+THE ACTUAL DEFECT, MEASURED
 
-  * The registry is not the cause. Both capabilities are present in the plain 72-entry
-    registry and in the 365-entry extended/admissible one, and each compiler gives the
-    same answer under either registry. The divergence is entirely in the compiler
-    module.
-  * The front compiler already owns a bind-first-then-rank reconciliation (rules F1,
-    F22, F24) that is exactly the right shape of fix, but on this goal
-    `rules_applied` is only `F2_SENTENCE_FINAL_PERIOD_REMOVED` and
-    `F4_ZERO_INPUT_TOOLS_NOT_ROUTABLE` -- the reconciliation never fires.
-  * Preferring the canonical pick would NOT fix it either. Measured: `bind_all_inputs`
-    raises `GOAL_INPUT_BINDING_REQUIRED` for BOTH candidates
-    (`json_path:0_type_compatible_existing_files_named` and
-    `evidence_paths:no_matching_existing_files_named`), so neither survives a
-    bindability filter and the walk falls through to the lexical winner regardless.
-    The real repair has to make "the producer needs a spec the sentence never stated"
-    count as unstated, which is a change to binding, not to ordering.
+Deleting a zero-input capability from the RANKING does more than refuse it -- it
+changes what the pinned compiler can bind at all.  For
+"Fetch a JSON document and assess its internal consistency.":
 
-What this suite does instead is make the gap impossible to lose sight of. It measures
-the FRONT-DOOR selection rate directly, pins it, and names the divergent goal. Anyone
-who repairs the selection has to update the pinned set -- the ratchet only turns one
-way, and it turns visibly.
+  * over the routable projection the grounded pass returns NOTHING, so
+    ``_compile_single_goal`` falls through to WORLD binding and returns
+    ``docx.document.create_from_json_record`` at score 25 with ``json_path`` inferred
+    to canonical/CANONICAL_POINTER.json -- a file the sentence never mentioned.  That
+    plan then fails at execution with JSON_DOCX_SPEC_UNRESOLVED, because the spec that
+    producer needs was never stated.
+  * with ``terminal.kstar.root.assess.stdlib`` present the grounded pass is non-empty,
+    the world fallback never runs, and the chained pass's ``knowledge.consistency.assess``
+    (score 8, every slot bound from the sentence) wins.  Removing that one entry from
+    the registry flips the answer; adding it back flips it again.  Both directions are
+    pinned below, which is what makes the mechanism load-bearing rather than a story.
+
+The fix therefore keeps the full admissible view as the thing that is RANKED and bound
+against, while the routable projection remains the only pool a DECISION may come from.
+``_is_catch_all``'s own docstring already states the principle -- "it can never be the
+DECISION" -- and F17 still displaces a catch-all the pinned scorer returned, so nothing
+F4 was protecting became selectable.
+
+MEASURED RESULT
+
+  canonical (benchmark path)  21 of 23   unchanged
+  front door (shipping path)  21 of 23   was 20
+  divergences between them    0          was 1
+
+The two remaining misses are shared by both paths and are pinned with their wrong
+answer, so a fix that moves them has to say so.
+
+Every number here is a measurement, not an assertion: each test compiles the real goals
+through the real entry points.  Perturbing any pin turns it red -- that was verified by
+changing the pinned rate and the pinned mechanism and watching both fail.
 """
 from __future__ import annotations
 
@@ -51,236 +71,235 @@ import sys
 import unittest
 
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
-
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from canonical.runtime import goal_compiler  # noqa: E402
-from canonical.runtime import availability_v1  # noqa: E402
-from canonical.runtime import goal_compilation_benchmark_v1 as benchmark  # noqa: E402
-from canonical.runtime import goal_front_compiler_v1 as front  # noqa: E402
-from canonical.runtime import live_integrated_brain_v1 as live  # noqa: E402
+from canonical.runtime import (  # noqa: E402
+    goal_compiler,
+    goal_compilation_benchmark_v1 as benchmark,
+    goal_front_compiler_v1 as front,
+    live_integrated_brain_v1 as live,
+)
 
 GOALS = benchmark.BENCHMARK_GOALS + benchmark.EXTENDED_BENCHMARK_GOALS
 
-# Goals whose expected chain is a single capability, so a selection can be compared.
-# Compound goals report selected_capability None on both compilers by design.
-SINGLE_CAPABILITY_GOALS = {
-    "BENCH_PDF_EXTRACT_TEXT",
-    "BENCH_SOURCE_AUDIT_WRITE_JSON",
-    "BENCH_JSON_FETCH_CONSISTENCY",
-    "BENCH_UNITTEST_PASS_RATE",
-    "BENCH_MARKDOWN_TO_DECISION",
-    "EXT_QR_GENERATE",
-    "EXT_BARCODE_DECODE",
-    "EXT_OCR_SCANNED_IMAGE",
-    "EXT_TAR_VERIFY",
-    "EXT_XLSX_CREATE",
-    "EXT_DOCX_VERIFY",
-    "EXT_EVIDENCE_RANK",
-    "EXT_CLAIM_BIND",
-    "EXT_KNOWLEDGE_CONSISTENCY",
-    "EXT_JQ_TABLE",
-    "EXT_AST_AUDIT",
-    "EXT_SQLITE_VERIFY",
-    "EXT_DECISION_VERIFY",
-    "EXT_MD_TO_PDF",
-}
+# The goal whose selection this file exists to keep correct.
+FIXED_GOAL = "BENCH_JSON_FETCH_CONSISTENCY"
+EXPECTED_FOR_FIXED = "knowledge.consistency.assess"
+THE_WRONG_PICK = "docx.document.create_from_json_record"
 
-# The measured divergence set. Repairing the selection must shrink this, and the test
-# fails if it silently grows or if an entry changes without the docstring being updated.
-KNOWN_FRONT_DOOR_DIVERGENCE = {"BENCH_JSON_FETCH_CONSISTENCY"}
+# The zero-input capability whose presence in the RANKING keeps the grounded pass
+# non-empty.  It is never the decision; it is only ever a competitor.
+LOAD_BEARING_COMPETITOR = "terminal.kstar.root.assess.stdlib"
 
-# The measured front-door selection rate over the single-capability goals.
-# Measured: 15 of the 19 single-capability goals select correctly through the front
-# door. The four that do not, and why each is different:
-#   BENCH_JSON_FETCH_CONSISTENCY  the divergence -- canonical is right, front is wrong
-#   BENCH_MARKDOWN_TO_DECISION    BOTH compilers pick the pandoc converter
-#   EXT_JQ_TABLE                  BOTH compilers pick the pandoc converter
-#   BENCH_PDF_EXTRACT_TEXT        front returns None: it plans a DAG, not one capability
-KNOWN_FRONT_DOOR_CORRECT = 15
-
-# Every goal the front door gets wrong, pinned with its wrong answer, so a repair has
-# to be explicit about which one it fixed.
-KNOWN_FRONT_DOOR_WRONG = {
-    "BENCH_JSON_FETCH_CONSISTENCY": "docx.document.create_from_json_record",
+# Measured, with the benchmark's own selection rule (parts first, else the top pick).
+KNOWN_FRONT_DOOR_CORRECT = 21
+KNOWN_CANONICAL_CORRECT = 21
+KNOWN_DIVERGENCES: set = set()
+KNOWN_SHARED_MISSES = {
     "BENCH_MARKDOWN_TO_DECISION": "document.convert.markdown_pdf.pandoc_weasyprint",
     "EXT_JQ_TABLE": "document.convert.markdown_pdf.pandoc_weasyprint",
-    "BENCH_PDF_EXTRACT_TEXT": None,
 }
 
 
-class FrontDoorSelectionIsMeasuredTests(unittest.TestCase):
+def selected(plan) -> list:
+    """The benchmark's own selection rule, copied rather than re-invented.
+
+    A compound plan has no top-level ``selected_capability``; its parts are the
+    selection.  Reading only the top level scored every compound plan as "no
+    selection", which is how this file's first version produced 15 of 19.
+    """
+    if not isinstance(plan, dict):
+        return []
+    parts = [str((p or {}).get("selected_capability"))
+             for p in (plan.get("compiled_parts") or [])
+             if isinstance(p, dict) and (p or {}).get("selected_capability")]
+    if parts:
+        return parts
+    if plan.get("selected_capability"):
+        return [str(plan["selected_capability"])]
+    return []
+
+
+class RegistryViews(unittest.TestCase):
+    """Both registry views the two call sites actually use, built once."""
+
     @classmethod
     def setUpClass(cls):
-        cls.registry = availability_v1.load_registry()
-        cls.rows = {}
-        for goal in GOALS:
-            gid = goal["id"]
-            expected = (goal.get("expected") or [None])[0]
-            try:
-                canonical = goal_compiler.compile_goal(
-                    goal["goal"], cls.registry, str(REPO_ROOT)
-                ).get("selected_capability")
-            except Exception as exc:  # a compile failure is data, not a crash
-                canonical = "EXCEPTION:" + type(exc).__name__
-            try:
-                _reg, _adm, compiled = live.compile_against_live_registry(goal["goal"])
-                frontdoor = compiled.get("selected_capability")
-            except Exception as exc:
-                frontdoor = "EXCEPTION:" + type(exc).__name__
-            cls.rows[gid] = {
-                "goal": goal["goal"],
-                "expected": expected,
-                "canonical": canonical,
-                "front_door": frontdoor,
-            }
+        cls.verified = dict(live.load_verified_registry(include_extended=True))
+        cls.admissible = goal_compiler._platform_admissible_registry(dict(cls.verified))
+        cls.routable = front.routable_registry(cls.admissible)
 
     def test_the_benchmark_covers_every_goal_it_claims_to(self):
-        self.assertEqual(len(GOALS), 23)
+        self.assertEqual(len(GOALS), 23, "the benchmark's goal list moved; re-measure")
 
-    def test_the_two_compilers_agree_on_every_goal_except_the_pinned_one(self):
-        divergent = {
-            gid for gid, row in self.rows.items()
-            if row["canonical"] != row["front_door"]
-        }
-        self.assertEqual(
-            divergent, KNOWN_FRONT_DOOR_DIVERGENCE,
-            "the divergence set changed -- update the docstring and the pinned rate, "
-            "and say which way it moved",
-        )
+    def test_the_routable_projection_really_does_delete_zero_input_tools(self):
+        self.assertLess(len(self.routable), len(self.admissible),
+                        "if the projection no longer deletes anything, the F4 rule and "
+                        "this file's premise have both changed")
+        self.assertNotIn(LOAD_BEARING_COMPETITOR, self.routable)
+        self.assertIn(LOAD_BEARING_COMPETITOR, self.admissible)
 
-    def test_the_divergent_goal_is_the_one_the_docstring_names(self):
-        row = self.rows["BENCH_JSON_FETCH_CONSISTENCY"]
-        self.assertEqual(row["expected"], "knowledge.consistency.assess")
-        self.assertEqual(row["canonical"], "knowledge.consistency.assess")
-        self.assertEqual(row["front_door"], "docx.document.create_from_json_record")
+    def test_both_candidates_exist_in_both_views(self):
+        """The defect was never a missing capability."""
+        for view in (self.routable, self.admissible, self.verified):
+            for cid in (EXPECTED_FOR_FIXED, THE_WRONG_PICK):
+                self.assertIn(cid, view)
+
+
+class FrontDoorAndCanonicalNowAgreeTests(RegistryViews):
+    """The two shipping paths are measured against each other, goal by goal."""
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.rows = {}
+        for g in GOALS:
+            want = g["expected"][0]
+            try:
+                canon = selected(goal_compiler.compile_goal(g["goal"], cls.verified, str(REPO_ROOT)))
+            except Exception:
+                canon = []
+            try:
+                door = selected(front.compile_goal(g["goal"], cls.admissible, REPO_ROOT))
+            except Exception:
+                door = []
+            cls.rows[g["id"]] = (want, canon, door)
 
     def test_the_front_door_selection_rate_is_pinned(self):
-        """The number that describes the shipping path, measured not asserted."""
-        correct = sum(
-            1 for gid in SINGLE_CAPABILITY_GOALS
-            if self.rows[gid]["front_door"] == self.rows[gid]["expected"]
-        )
+        got = sum(1 for want, _, door in self.rows.values() if want in door)
         self.assertEqual(
-            correct, KNOWN_FRONT_DOOR_CORRECT,
-            f"front-door selection moved to {correct}/"
-            f"{len(SINGLE_CAPABILITY_GOALS)} -- update the pin and say which way",
+            got, KNOWN_FRONT_DOOR_CORRECT,
+            "front-door selection moved -- update KNOWN_FRONT_DOOR_CORRECT and say "
+            "which way it moved and why",
         )
 
-    def test_every_front_door_miss_is_pinned_with_its_wrong_answer(self):
-        wrong = {
-            gid: self.rows[gid]["front_door"]
-            for gid in SINGLE_CAPABILITY_GOALS
-            if self.rows[gid]["front_door"] != self.rows[gid]["expected"]
-        }
+    def test_the_canonical_selection_rate_is_pinned(self):
+        got = sum(1 for want, canon, _ in self.rows.values() if want in canon)
+        self.assertEqual(got, KNOWN_CANONICAL_CORRECT)
+
+    def test_the_two_paths_agree_on_every_goal(self):
+        """Zero divergence. This is the claim the first version of this file got wrong."""
+        divergent = {gid for gid, (_, c, d) in self.rows.items() if c != d}
         self.assertEqual(
-            wrong, KNOWN_FRONT_DOOR_WRONG,
-            "the front-door miss set changed -- update the pin and say which way it moved",
+            divergent, KNOWN_DIVERGENCES,
+            "the two shipping paths disagree again -- a compiled artifact and the path "
+            "that runs it must not select differently",
         )
 
-    def test_only_one_miss_is_a_divergence_the_others_are_shared(self):
-        """Three of the four misses are not this suite's subject: both compilers agree
-        on them. Only the divergent one is a front-door-specific defect."""
-        shared = {
-            gid for gid in KNOWN_FRONT_DOOR_WRONG
-            if self.rows[gid]["canonical"] == self.rows[gid]["front_door"]
-        }
+    def test_the_goal_this_file_exists_for_is_selected_correctly(self):
+        want, canon, door = self.rows[FIXED_GOAL]
+        self.assertEqual(want, EXPECTED_FOR_FIXED)
+        self.assertIn(EXPECTED_FOR_FIXED, canon)
+        self.assertIn(EXPECTED_FOR_FIXED, door,
+                      "the front door is back on the docx writer")
+        self.assertNotIn(THE_WRONG_PICK, door)
+
+    def test_every_remaining_miss_is_pinned_with_its_wrong_answer(self):
+        misses = {gid: (door[0] if door else None)
+                  for gid, (want, _, door) in self.rows.items() if want not in door}
         self.assertEqual(
-            shared,
-            set(KNOWN_FRONT_DOOR_WRONG) - KNOWN_FRONT_DOOR_DIVERGENCE,
+            misses, KNOWN_SHARED_MISSES,
+            "the miss set changed -- update KNOWN_SHARED_MISSES with the new wrong "
+            "answers, or the new correct ones",
         )
 
-    def test_the_canonical_compiler_is_not_the_one_that_is_wrong(self):
-        """Guard the direction of the repair: the canonical pick is the correct one."""
-        row = self.rows["BENCH_JSON_FETCH_CONSISTENCY"]
-        self.assertEqual(row["canonical"], row["expected"])
-        self.assertNotEqual(row["front_door"], row["expected"])
+    def test_the_remaining_misses_are_missed_by_both_paths(self):
+        """So they are a real gap in the compiler, not a front-door artefact."""
+        for gid in KNOWN_SHARED_MISSES:
+            want, canon, door = self.rows[gid]
+            self.assertNotIn(want, canon, gid)
+            self.assertNotIn(want, door, gid)
 
 
-class DivergenceIsNotTheRegistryTests(unittest.TestCase):
-    """The cause is the compiler module, and that must stay measured."""
+class TheMechanismIsLoadBearingTests(RegistryViews):
+    """Pin WHY the answer changes, so the fix cannot be undone by accident."""
 
-    GOAL = "Fetch a JSON document and assess its internal consistency."
+    GOAL = next(g["goal"] for g in GOALS if g["id"] == FIXED_GOAL)
 
-    def test_both_candidates_exist_in_both_registries(self):
-        plain = availability_v1.load_registry()
-        extended = live.load_verified_registry(include_extended=True)
-        for cid in ("knowledge.consistency.assess",
-                    "docx.document.create_from_json_record"):
-            self.assertIn(cid, plain)
-            self.assertIn(cid, extended)
+    def _pinned_over(self, registry):
+        try:
+            return selected(goal_compiler.compile_goal(self.GOAL, registry, REPO_ROOT))
+        except Exception:
+            return []
 
-    def test_the_canonical_compiler_gives_the_same_answer_under_either_registry(self):
-        plain = availability_v1.load_registry()
-        extended = live.load_verified_registry(include_extended=True)
-        admissible = goal_compiler._platform_admissible_registry(dict(extended))
-        for label, reg in (("plain", plain), ("admissible-extended", admissible)):
-            with self.subTest(registry=label):
-                self.assertEqual(
-                    goal_compiler.compile_goal(
-                        self.GOAL, reg, str(REPO_ROOT)
-                    ).get("selected_capability"),
-                    "knowledge.consistency.assess",
-                )
+    def test_ranking_without_the_competitor_selects_the_wrong_capability(self):
+        """The regression this file exists to prevent, pinned in both directions."""
+        self.assertIn(THE_WRONG_PICK, self._pinned_over(self.routable))
 
-    def test_the_front_compiler_gives_the_same_wrong_answer_under_either_registry(self):
-        plain = availability_v1.load_registry()
-        extended = live.load_verified_registry(include_extended=True)
-        admissible = goal_compiler._platform_admissible_registry(dict(extended))
-        for label, reg in (("plain", plain), ("admissible-extended", admissible)):
-            with self.subTest(registry=label):
-                self.assertEqual(
-                    front.compile_goal(self.GOAL, reg, REPO_ROOT).get(
-                        "selected_capability"),
-                    "docx.document.create_from_json_record",
-                )
+    def test_ranking_with_the_competitor_selects_the_right_capability(self):
+        self.assertIn(EXPECTED_FOR_FIXED, self._pinned_over(self.admissible))
+
+    def test_deleting_that_one_entry_from_the_full_view_flips_the_answer(self):
+        """Names the exact entry, so nobody 'cleans up' a weak candidate and loses this."""
+        without = {k: v for k, v in self.admissible.items() if k != LOAD_BEARING_COMPETITOR}
+        self.assertIn(THE_WRONG_PICK, self._pinned_over(without))
+        self.assertIn(EXPECTED_FOR_FIXED, self._pinned_over(self.admissible))
+
+    def test_the_wrong_pick_needs_a_file_the_sentence_never_stated(self):
+        """The reason the wrong answer is wrong: its slot came off the filesystem."""
+        plan = goal_compiler.compile_goal(self.GOAL, self.routable, REPO_ROOT)
+        self.assertEqual(plan["selected_capability"], THE_WRONG_PICK)
+        self.assertTrue(str(plan.get("binding_source")).endswith("WORLD_BINDING"),
+                        "the wrong pick was supposed to be world-bound; if it is now "
+                        "grounded the diagnosis in this file's docstring is stale")
+        self.assertIn("json_path", plan["inputs"])
+
+    def test_the_right_pick_is_bound_from_the_sentence_not_the_world(self):
+        plan = goal_compiler.compile_goal(self.GOAL, self.admissible, REPO_ROOT)
+        self.assertEqual(plan["selected_capability"], EXPECTED_FOR_FIXED)
+        self.assertEqual(plan["binding_source"], "GOAL_STATEMENT")
 
 
-class NeitherCandidateBindsSoOrderingAloneCannotFixItTests(unittest.TestCase):
-    """Pins why the obvious one-line repair does not work.
+class AZeroInputToolCanNeverBeTheDecisionTests(RegistryViews):
+    """The safety property F4 exists for, re-asserted against the widened ranking.
 
-    If this ever starts passing, bind-first-then-rank becomes a live fix and the
-    docstring's diagnosis is stale -- which is exactly when someone should look again.
+    The predicate is ``blocked_zero_input_capabilities`` -- the exact set
+    ``routable_registry`` deletes -- and deliberately NOT ``_is_catch_all``.  Those
+    two are not the same thing, and measuring the difference matters: ``_is_catch_all``
+    also rejects capabilities whose only inputs are the whole request or an output
+    path, and three of the benchmark's OWN correct answers
+    (``plain_goal.bound_capability.grounding.stdlib``,
+    ``source.candidates.enumerate.stdlib``,
+    ``structured.decision_evidence.locate.stdlib``) are catch-alls in that broader
+    sense.  Asserting the broad predicate here failed on a clean tree, which is what
+    pinned the narrow one instead of an assumption about it.
     """
 
-    GOAL = "Fetch a JSON document and assess its internal consistency."
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.blocked = set(front.blocked_zero_input_capabilities(cls.admissible))
+        cls.selections = {}
+        for g in GOALS:
+            try:
+                cls.selections[g["id"]] = selected(front.compile_goal(g["goal"], cls.admissible, REPO_ROOT))
+            except Exception:
+                cls.selections[g["id"]] = []
 
-    def _binds(self, cid):
-        registry = front.routable_registry(
-            goal_compiler._platform_admissible_registry(
-                dict(live.load_verified_registry(include_extended=True))
-            )
-        )
-        try:
-            front.bind_all_inputs(
-                self.GOAL, registry[cid], REPO_ROOT, cycle=0, spool=set()
-            )
-            return True
-        except Exception:
-            return False
+    def test_the_blocked_set_is_the_one_the_projection_deletes(self):
+        self.assertTrue(self.blocked)
+        self.assertEqual(set(self.admissible) - self.blocked, set(self.routable))
 
-    def test_neither_candidate_survives_a_bindability_filter(self):
-        self.assertFalse(self._binds("knowledge.consistency.assess"))
-        self.assertFalse(self._binds("docx.document.create_from_json_record"))
-
-
-class TheLoserFailsAtExecutionNotAtCompileTests(unittest.TestCase):
-    """The wrong pick is not harmless: it fails later, with a cause nobody could see
-    before the reason survived to the blocker."""
-
-    def test_the_front_door_pick_is_the_one_that_fails_at_runtime(self):
-        import uuid
-        result = live.run_raw_goal({
-            "task_id": f"DIVERGE_{uuid.uuid4().hex[:8]}",
-            "goal": "Fetch a JSON document and assess its internal consistency.",
-        })
-        self.assertFalse(result.get("pass"))
+    def test_no_front_door_selection_is_a_capability_the_projection_deleted(self):
+        caught = sorted((gid, cid) for gid, cids in self.selections.items()
+                        for cid in cids if cid in self.blocked)
         self.assertEqual(
-            result.get("compiled_capability_id"),
-            "docx.document.create_from_json_record",
+            caught, [],
+            "a zero-input tool became a decision -- the widened ranking leaked into "
+            "the decision pool, which is the one thing F4 exists to prevent",
         )
-        self.assertIn("JSON_DOCX_SPEC_UNRESOLVED", str(result.get("reason") or ""))
+
+    def test_the_competitor_still_cannot_be_selected_by_the_front_door(self):
+        """It may compete; it may never decide. Both halves are pinned."""
+        self.assertIn(LOAD_BEARING_COMPETITOR, self.admissible)
+        for g in GOALS:
+            try:
+                plan = front.compile_goal(g["goal"], self.admissible, REPO_ROOT)
+            except Exception:
+                continue
+            self.assertNotIn(LOAD_BEARING_COMPETITOR, selected(plan),
+                             f"{g['id']} selected a zero-input tool")
 
 
 if __name__ == "__main__":
