@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6283,
+  "research_index_records": 6284,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "cebcc5206662daccbbde88697453fb4464dd559210d604587abcf8b60ebb0463"
+  "value": "cba625b234587393b868d5ae15b07cf6248c0717ef5b93b61a09f8562d021c8e"
  },
  "engines": [
   {
@@ -187554,6 +187554,51 @@
     "resolve_the_cdp_driver_next_to___file___with_the_bare_import_kept_as_the_fallback_for_callers_that_do_have_the_directory_on_their_path__rather_than_adding_canonical_runtime_to_sys_path_as_an_import_side_effect_which_is_how_the_fragility_arose_in_the_first_place": 1,
     "sys": 1,
     "the_browser_surface_resolves_its_driver_however_browser_v1_is_loaded__measured_against_a_live_chromium_launched_by_canonical_runtime_browser_launch_v1_sh__available_returned_true_browser_present__navigation_to_pypi_dot_org_and_github_dot_com_over_cdp_returned_titles_and_55_to_240_interactive_elements__benchmark_compiled_19_of_23_unchanged_correct_selection_17_of_23_unchanged_wrong_capability_2_of_23_unchanged__tests_162_to_165": 1,
+    "v1": 2
+   }
+  },
+  {
+   "action_id": "CAPABILITY_RECEIPT_LANE_DECLARED_INVOCATION_PROBE_V1_20261022_V1",
+   "capability": false,
+   "date": "2026-10-22",
+   "id": "research:canonical/action_intents/CAPABILITY_RECEIPT_LANE_DECLARED_INVOCATION_PROBE_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/CAPABILITY_RECEIPT_LANE_DECLARED_INVOCATION_PROBE_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "635931eb0ad907c79c3d4059b6a74202c44d579f75e6ed6703a2889a194e25eb",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "305": 1,
+    "309": 1,
+    "36": 1,
+    "72": 1,
+    "absent": 1,
+    "accepted-but-unlearned": 1,
+    "accepts": 1,
+    "adapter": 3,
+    "all": 1,
+    "already": 3,
+    "also": 1,
+    "any": 1,
+    "argument": 1,
+    "attestable": 1,
+    "attestation": 1,
+    "available": 1,
+    "baseexception": 1,
+    "because": 1,
+    "bound": 2,
+    "capability": 3,
+    "executed": 2,
+    "independent": 2,
+    "lane": 4,
+    "never": 3,
+    "no": 2,
+    "probe": 2,
+    "producer": 2,
+    "receipt": 4,
+    "so": 2,
+    "source.candidates.enumerate.stdlib": 2,
     "v1": 2
    }
   },
