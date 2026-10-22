@@ -217,12 +217,26 @@ BENCHMARK_GOALS: List[Dict[str, Any]] = [
 # better-scoring chained plan (knowledge.consistency.assess, score 22) is kept
 # over the grounded catch-all (score 2). It is removed rather than re-labelled
 # because the goal now selects correctly.
-KNOWN_SELECTION_GAPS = {
-    "BENCH_MARKDOWN_TO_DECISION": (
-        "BEST_MATCH_UNBINDABLE__decision.synthesis.typed.stdlib_SCORE_14_REQUIRES_"
-        "structured.decision_evidence.available__SELECTED_A_MARKDOWN_TO_PDF_CONVERTER"
-    ),
-}
+# Was 2, then 1, now 0. Each closure is recorded because the reason matters more
+# than the count.
+#
+#   BENCH_JSON_FETCH_CONSISTENCY  closed by supplying the effect_result producer
+#       map and keeping the better-scoring plan.
+#   BENCH_MARKDOWN_TO_DECISION    closed by two measurements, not by a threshold.
+#       The chained grounded pass tied `decision.synthesis.verify.stdlib` against
+#       `decision.synthesis.typed.stdlib` at score 14 and specificity 1, raised
+#       GOAL_COMPILATION_AMBIGUOUS, and the compiler fell back to the world-bound
+#       markdown-to-PDF converter. The tie is now broken by an edge the registry
+#       already declares -- the verifier's `requires` names the effect the
+#       synthesizer `provides`, so the verifier is downstream and a request that
+#       has produced no decision cannot be asking for the check on one. With the
+#       tie resolved, a plan whose slots were all accounted for beats a plan that
+#       filled `markdown_path` by picking AGENTS.md off the filesystem.
+#
+# The remaining wrong selection is EXT_JQ_TABLE, in the EXTENDED tier, tracked in
+# test_front_door_selection_parity_v1. It is not listed here because this dict is
+# compared against the PRIMARY tier's own report.
+KNOWN_SELECTION_GAPS = {}
 
 # A separate, real COVERAGE gap. Not a wrong selection -- this goal's expected
 # first capability IS selected correctly -- so it is recorded apart from

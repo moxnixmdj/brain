@@ -247,10 +247,11 @@ class KnownSelectionGapTests(unittest.TestCase):
         report = bench.run()
         gapped = sorted(report["known_selection_gaps"])
         self.assertEqual(gapped, sorted(bench.KNOWN_SELECTION_GAPS))
-        # Was 2. BENCH_JSON_FETCH_CONSISTENCY was closed by supplying the
-        # effect_result producer map and keeping the better-scoring plan, so
-        # only the markdown-to-decision goal still selects wrongly.
-        self.assertEqual(len(gapped), 1)
+        # Was 2, then 1, now 0. BENCH_JSON_FETCH_CONSISTENCY was closed by
+        # supplying the effect_result producer map and keeping the better-scoring
+        # plan. BENCH_MARKDOWN_TO_DECISION was closed by breaking a tie the
+        # registry already had the facts to break -- see KNOWN_SELECTION_GAPS.
+        self.assertEqual(len(gapped), 0)
         for goal_id, cause in report["known_selection_gaps"].items():
             self.assertTrue(cause, f"{goal_id} has no recorded cause")
 
@@ -479,27 +480,38 @@ class ScoreRankIsNotCorrectnessTests(unittest.TestCase):
         self.assertEqual(out["selected_capability"], generator)
         self.assertEqual(out["binding_source"], "GOAL_STATEMENT")
 
-    def test_no_score_gap_threshold_can_separate_correct_from_wrong(self):
-        """Refusing on a score gap cannot work, and this is the hardest case.
+    def test_the_score_gap_counterexample_is_gone_and_says_so(self):
+        """The strongest argument against a score-gap refusal no longer holds here.
 
-        An earlier version of this test pinned BENCH_JSON_FETCH_CONSISTENCY,
-        where the wrong selection sat 23 points below the best match, and argued
-        that any cut between that and a correct selection sitting 1 point below
-        its own best match is fitted to the sample. That goal now selects
-        correctly, so its data point is gone.
+        This test used to pin BENCH_MARKDOWN_TO_DECISION as the case that killed a
+        gap-keyed refusal: the wrong capability WAS the best-scoring capability in
+        the registry, so the gap was exactly 0 and no threshold -- however small --
+        could refuse it without refusing the top match.
 
-        The remaining wrong selection is a STRONGER counterexample, not a weaker
-        one: for BENCH_MARKDOWN_TO_DECISION the wrong capability IS the
-        best-scoring capability in the registry, so the gap is exactly 0. There
-        is no threshold -- however small -- that separates this wrong selection
-        from a correct one, because it is not below anything. A refusal rule
-        keyed on score gap would have to refuse the top match, which is not a
-        policy, it is a shutdown.
+        That goal now selects correctly, so the data point is gone, and the honest
+        consequence has to be recorded rather than papered over.  Measured on the
+        live registry:
 
-        What does work, and what was shipped instead, is not a threshold on an
-        absolute gap: it is comparing two fully-bound compiled plans produced by
-        two different binding passes and keeping the better-scoring one. Both
-        candidates are runnable, so nothing is refused on a hunch.
+            "Summarize a markdown document into a decision record."
+                best match  document.convert.markdown_pdf.pandoc_weasyprint  25
+                SELECTED    decision.synthesis.typed.stdlib                  14   gap 11
+            "Query a JSON table and produce a markdown table."
+                best match  json.query.jq                                    29
+                SELECTED    document.convert.markdown_pdf.pandoc_weasyprint  14   gap 15
+
+        A correct selection at gap 11 and a wrong one at gap 15 means a threshold
+        anywhere in 11..14 separates them on THIS sample.  The claim "no threshold
+        can separate correct from wrong" is therefore no longer supported by these
+        two goals, and this test does not restate it.
+
+        What is unchanged is the reason not to ship one.  The sibling test above
+        still holds its counterexample -- the QR goal, where the correct GENERATOR
+        is selected one point below a DECODER that outscores it -- and a cut tuned
+        to clear a 23-goal sample is fitted to that sample, not derived from
+        anything.  The fix that actually shipped is not a threshold: it reads a
+        dependency edge the registry already declares, and then prefers a plan
+        whose slots the sentence accounted for over one that filled a slot by
+        picking a file off the filesystem.
         """
         from canonical.runtime import live_integrated_brain_v1 as lb
 
@@ -518,18 +530,16 @@ class ScoreRankIsNotCorrectnessTests(unittest.TestCase):
             goal, out["selected_capability"], registry[out["selected_capability"]]
         )[0]
 
-        self.assertEqual(out["selected_capability"], best_cid)
         self.assertEqual(
-            best_score - selected_score,
-            0,
-            "the wrong selection is no longer the top-scoring capability; if a "
-            "gap has appeared here, re-test whether a gap-keyed refusal is viable",
-        )
-        self.assertNotEqual(
             out["selected_capability"],
             "decision.synthesis.typed.stdlib",
-            "this goal now selects correctly; move this counterexample",
+            "this goal stopped selecting correctly -- the dependency tie-break or "
+            "the unjustified-world-slot preference has regressed",
         )
+        self.assertEqual(best_cid, "document.convert.markdown_pdf.pandoc_weasyprint")
+        # Pinned from a measurement, not asserted: the correct answer is NOT the
+        # top scorer, so any policy that demands the top match would refuse it.
+        self.assertEqual(best_score - selected_score, 11)
 
 
 class BenchmarkFloorTests(unittest.TestCase):

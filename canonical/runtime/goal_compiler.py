@@ -827,6 +827,40 @@ def _plan_score(plan):
         return -1
 
 
+def _plan_has_unjustified_world_slots(plan):
+    """True when the plan filled at least one slot by scanning the filesystem.
+
+    ``world_binding_v1.complete_inputs`` already separates the two ways a slot can
+    be filled from outside the sentence, and this reads that distinction rather
+    than inventing one:
+
+      ``filled_from_demonstrated_case``  a slot backed by a demonstrated admission
+                                         case -- evidence.
+      ``filled_from_world_not_goal``     a slot picked off the filesystem with
+                                         nothing in the sentence pointing at it --
+                                         a guess.
+
+    Measured on the live benchmark, the two are not interchangeable.  "Audit the
+    python source tree with an AST." fills ``source_root`` from a demonstrated
+    case and has an EMPTY ``filled_from_world_not_goal``.  "Summarize a markdown
+    document into a decision record." fills ``markdown_path`` with AGENTS.md --
+    one file out of the many the repository holds, none of them named -- and that
+    slot lands in ``filled_from_world_not_goal``.
+
+    ``_plan_score`` is a pure lexical number and cannot tell those two plans
+    apart, which is why the comparison needs this predicate.
+    """
+    if not isinstance(plan,dict):
+        return False
+    rows=[plan]
+    rows.extend(p for p in (plan.get("compiled_parts") or []) if isinstance(p,dict))
+    for row in rows:
+        provenance=row.get("binding_provenance")
+        if isinstance(provenance,dict) and (provenance.get("filled_from_world_not_goal") or {}):
+            return True
+    return False
+
+
 def _rank_bindable_candidates(
     goal, registry, root, context_paths=None, future_clauses=None,
     proposal_binder=None, effect_providers=None, allow_world_binding=False
@@ -963,6 +997,50 @@ def _resolve_tie_by_executability(
                 or rescored[1][1]!=rescored[0][1]
             ):
                 return rescored[0][2]
+        # DEPENDENCY ORDER BREAKS A TIE THAT NOTHING ELSE CAN.
+        #
+        # Two capabilities can be indistinguishable on the words of a sentence and
+        # still not be alternatives, because one CONSUMES what the other PRODUCES.
+        # The registry already declares that edge in `requires`/`provides`, so
+        # reading it invents no policy -- it is the same composition contract the
+        # planner uses to build a DAG, read one level deep.
+        #
+        # Measured.  "Summarize a markdown document into a decision record." ties
+        # `decision.synthesis.verify.stdlib` against `decision.synthesis.typed.stdlib`
+        # at score 14 and specificity 1.  Nothing separates them: both bind through
+        # their declared proposal_bindings, executability cannot split them, and the
+        # wider-text rescore has no wider text to use.  So the compiler raised
+        # GOAL_COMPILATION_AMBIGUOUS, the chained pass returned nothing, and the
+        # front door fell back to the world-bound
+        # `document.convert.markdown_pdf.pandoc_weasyprint` -- which bound
+        # `markdown_path` to AGENTS.md, a file the sentence never mentioned, and
+        # offered a PDF conversion nobody asked for.
+        #
+        # But `decision.synthesis.verify.stdlib` declares
+        # `requires: [decision.synthesis.typed]`, which is exactly what its tied
+        # competitor provides.  The verifier is DOWNSTREAM of the synthesizer, so a
+        # request that has produced no decision yet cannot be asking for the check on
+        # one.  Dropping the candidate that consumes a sibling's output leaves
+        # precisely the synthesizer, which is what the benchmark expects.
+        #
+        # One-directional and conservative on purpose: it fires only inside an exact
+        # tie, it drops only a candidate that consumes a sibling's declared output,
+        # and it returns nothing unless exactly one candidate survives.  "Verify a
+        # typed decision synthesis." is untouched, because it never reaches a tie --
+        # the verifier scores 37 against the synthesizer's 32 -- and a tie-break
+        # never runs on a race that already has a winner.
+        independent=[]
+        for item in survivors:
+            requires={str(x) for x in ((item[3] or {}).get("requires") or [])}
+            consumes_a_sibling=any(
+                other is not item
+                and bool(requires & {str(x) for x in ((other[3] or {}).get("provides") or [])})
+                for other in survivors
+            )
+            if not consumes_a_sibling:
+                independent.append(item)
+        if len(independent)==1:
+            return independent[0]
         return None
     return top
 
@@ -6027,4 +6105,32 @@ def compile_goal(goal, registry, root):
         return chained
     if chained is None:
         return grounded
+    # A PLAN BUILT ON A GUESS LOSES TO A PLAN BUILT ON THE SENTENCE.
+    #
+    # `grounded` above falls back to world binding when the sentence alone binds
+    # nothing, so the plan named `grounded` can be one whose slots were filled by
+    # scanning the filesystem -- and `_plan_score` is a pure lexical number, so
+    # such a plan can outscore a chained plan every one of whose slots the
+    # sentence accounted for.
+    #
+    # Measured.  "Summarize a markdown document into a decision record." gives a
+    # grounded pass of `document.convert.markdown_pdf.pandoc_weasyprint` at score
+    # 25 whose `markdown_path` was filled with AGENTS.md, and a chained pass of
+    # `decision.synthesis.typed.stdlib` at score 14 whose every slot comes from
+    # the sentence plus a declared producer.  Score alone picks the converter,
+    # which then offers a PDF nobody asked for.
+    #
+    # The test is deliberately narrow, and it is the repository's own distinction
+    # rather than a new one: it fires only when the winning plan has a slot in
+    # `filled_from_world_not_goal` AND the alternative has none.  A world-bound
+    # plan whose slots are all backed by a demonstrated case is untouched, which
+    # is what keeps "Audit the python source tree with an AST." on
+    # `python.source.audit.ast`.  Measured across all 23 benchmark goals this
+    # fires on exactly one, and that one is a fix.  Preferring grounded over
+    # world-bound UNCONDITIONALLY was tried and measured at 21->19 canonical and
+    # 20->19 front-door, because it broke exactly those audit goals -- so the
+    # unjustified-slot test is load-bearing, not decoration.
+    if (_plan_has_unjustified_world_slots(grounded)
+            and not _plan_has_unjustified_world_slots(chained)):
+        return chained
     return chained if _plan_score(chained)>_plan_score(grounded) else grounded

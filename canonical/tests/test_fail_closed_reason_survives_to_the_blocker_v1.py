@@ -25,16 +25,16 @@ The fix reuses the convention this repository already uses one module over:
 FAIL_CLOSED, `pass` stays False, `errors` is untouched, and the caller's expectation
 still fails.
 
-Measured after the fix, the same twelve goals report eight distinct causes:
+Measured after the fix, the failing goals report eight distinct causes:
 SQLITE_STATUS_VALUE_UNRESOLVED, TEST_FILE_FAILED:<path>,
 BOUND_APT_METADATA_NOT_FOUND:pandoc, BOUND_APT_METADATA_NOT_FOUND:zbar-tools,
 BOUND_CAPABILITY_SOURCE_UNSUPPORTED:brain_bound_system_tool,
 BOUND_CAPABILITY_INDEPENDENT_VERIFICATION_NOT_EVIDENT:<capability>, STATUS_INVALID,
 and the sqlite compound-plan variant. It was nine until the front-door selection
-fix removed JSON_DOCX_SPEC_UNRESOLVED: that cause only existed because the goal
-compiled against a producer whose spec the sentence never stated. Acceptance stays
-11 of 23, verified episodes stay 9, and benchmark correct selection stays 21 of 23
--- while FRONT-DOOR selection, which is what actually runs, went from 20 to 21.
+fix removed JSON_DOCX_SPEC_UNRESOLVED, and the goal count fell from twelve to
+eleven when BENCH_MARKDOWN_TO_DECISION stopped failing altogether. Measured on a
+clean tree: acceptance is 12 of 23, and correct selection is 22 of 23 on both the
+benchmark path and the front door that actually runs.
 """
 from __future__ import annotations
 
@@ -56,8 +56,14 @@ from canonical.runtime import (  # noqa: E402
 # The opaque string every refusal used to collapse into.
 _OPAQUE = 'ACTION_EXPECTATION_FAILED:pass:OBSERVED=False:RESULT={"status":"FAIL_CLOSED"}'
 
-# Twelve goals that fail on a clean tree. Each is listed with the substring its real
-# cause must contain -- pinned from a measurement, not from a guess.
+# Eleven goals that fail on a clean tree. Each is listed with the substring its
+# real cause must contain -- pinned from a measurement, not from a guess.
+#
+# This was twelve. BENCH_MARKDOWN_TO_DECISION left the list because it stopped
+# failing: the dependency tie-break and the unjustified-world-slot preference made
+# it select `decision.synthesis.typed.stdlib` instead of the markdown-to-PDF
+# converter, and it now returns
+# PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED on a live run.
 FAILING_GOALS = {
     "BENCH_SQLITE_CREATE_INSERT_QUERY": "SQLITE_STATUS_VALUE_UNRESOLVED",
     "BENCH_GROUNDING_AND_VERIFY": "STATUS_INVALID",
@@ -70,7 +76,6 @@ FAILING_GOALS = {
     # receipt for that capability.  Measured on a live front-door run, not inferred.
     "BENCH_JSON_FETCH_CONSISTENCY": "BOUND_CAPABILITY_INDEPENDENT_VERIFICATION_NOT_EVIDENT",
     "BENCH_UNITTEST_PASS_RATE": "TEST_FILE_FAILED",
-    "BENCH_MARKDOWN_TO_DECISION": "BOUND_APT_METADATA_NOT_FOUND:pandoc",
     "EXT_QR_GENERATE": "BOUND_CAPABILITY_INDEPENDENT_VERIFICATION_NOT_EVIDENT",
     "EXT_BARCODE_DECODE": "BOUND_APT_METADATA_NOT_FOUND:zbar-tools",
     "EXT_OCR_SCANNED_IMAGE": "BOUND_CAPABILITY_SOURCE_UNSUPPORTED",

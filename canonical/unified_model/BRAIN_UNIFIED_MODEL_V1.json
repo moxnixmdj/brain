@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6292,
+  "research_index_records": 6293,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "786b68302bc4eeaf69b3b3ce49da01df715c4a43af6a81ab695fcb1456f01cf0"
+  "value": "827bf21a9c10c27193e9dc35a686d6bf520d985188e9ec2c67adcbcbbdbdaffe"
  },
  "engines": [
   {
@@ -187960,6 +187960,34 @@
    }
   },
   {
+   "action_id": "DEPENDENCY_ORDER_BREAKS_A_TIE_AND_A_FILESYSTEM_GUESS_LOSES_TO_THE_SENTENCE_V1_20261022_V1",
+   "capability": false,
+   "date": "2026-10-22",
+   "id": "research:canonical/action_intents/DEPENDENCY_ORDER_BREAKS_A_TIE_AND_A_FILESYSTEM_GUESS_LOSES_TO_THE_SENTENCE_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/DEPENDENCY_ORDER_BREAKS_A_TIE_AND_A_FILESYSTEM_GUESS_LOSES_TO_THE_SENTENCE_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "cd83de7f88a808c1f3393ce5875aff8a6af2ec02aa911f9ce3c9a89e93a93460",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "break_an_exact_score_tie_using_the_dependency_edge_the_registry_already_declares_a_candidate_whose_requires_names_an_effect_a_tied_sibling_provides_is_downstream_and_a_request_that_has_produced_nothing_yet_cannot_be_asking_for_the_check_on_it__then_prefer_a_plan_whose_slots_the_sentence_accounted_for_over_one_that_filled_a_slot_by_scanning_the_filesystem_using_world_binding_v1_own_filled_from_world_not_goal_versus_filled_from_demonstrated_case_distinction__selected__measured_at_22_of_23_on_both_paths_and_12_of_23_acceptance_with_zero_new_failures": 1,
+    "breaks": 1,
+    "correct_selection_21_to_22_of_23_on_both_paths_with_zero_divergence__acceptance_11_to_12_of_23_measured_by_running_all_23_goals_on_a_clean_tree__bench_markdown_to_decision_moves_from_fail_live_controller_execution_with_bound_apt_metadata_not_found_pandoc_to_pass_raw_goal_executed_and_exact_semantic_acceptance_verified__the_benchmarks_known_selection_gaps_goes_from_one_entry_to_zero__the_failing_goal_list_falls_from_twelve_to_eleven__only_ext_jq_table_still_selects_wrongly_and_it_is_pinned_with_its_wrong_answer": 1,
+    "dependency": 1,
+    "dependency_order_breaks_a_tie_and_a_filesystem_guess_loses_to_the_sentence_v1_20261022_v1": 1,
+    "filesystem": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "guess": 1,
+    "loses": 1,
+    "order": 1,
+    "sentence": 1,
+    "tie": 1,
+    "two_measured_defects_stood_between_the_front_door_and_bench_markdown_to_decision__first_the_chained_grounded_pass_tied_decision_synthesis_verify_stdlib_against_decision_synthesis_typed_stdlib_at_score_14_and_specificity_1_and_raised_goal_compilation_ambiguous_so_the_chained_plan_was_none__second_with_no_chained_plan_the_compiler_kept_the_world_bound_document_convert_markdown_pdf_pandoc_weasyprint_at_score_25_which_filled_markdown_path_with_agents_md_a_file_the_sentence_never_mentioned_and_offered_a_pdf_conversion_nobody_asked_for__measured_front_door_selection_21_of_23_and_acceptance_11_of_23": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "DURABLE_ARTIFACT_DIGEST_REPORTED_UNDER_THE_NAME_THE_CAPABILITY_USES_V1_20261022_V1",
    "capability": false,
    "date": "2026-10-22",
@@ -215590,7 +215618,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compilation_benchmark_v1.py",
-   "sha256": "aae33be5db74cf1b7e243a57075328dc0b309165da4e63ef195ae8038b29f915",
+   "sha256": "4d809e2f6c6ca58d85cb0e1f40b2d1acf2f84e1b69baa3ba90376a1463b62bd6",
    "summary": "Fixed, measured benchmark for plain-goal -> executable-plan compilation.",
    "symbol_count": 9,
    "symbols": [
@@ -215632,9 +215660,9 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "27e8fda73b49bc45e2247c1dffb0c6244963aab6d4f79821e50c79cddc733f8c",
+   "sha256": "bff01503c8c9b249fe8925d8b08e6bcf75f3ba073dad853a771f9d535b28f933",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
-   "symbol_count": 112,
+   "symbol_count": 113,
    "symbols": [
     "GoalCompilationFailure",
     "_append_producer_parts",
