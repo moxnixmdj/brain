@@ -25,9 +25,8 @@
     "producer_cognition_model_dependency_count": 0,
     "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
     "progress_evidence_paths": [
-      "canonical/runtime/verify_brain_unified_model_v1.py",
-      "canonical/tests/test_brain_unified_model_v1.py",
-      "canonical/action_intents/VERIFIER_ROUTING_CHECK_SAMPLE_SIZE_FIX_V1_20261021_V1.json"
+      "canonical/tests/test_controller_trace_declared_plan_parity_v1.py",
+      "canonical/runtime/r3_bound_success_checkpoint_verifier_v1.py"
     ],
     "route_class": "INTEGRATE"
   },

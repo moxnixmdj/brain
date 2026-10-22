@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "7c962e70eaf402f7ac11679ffe8a15f46e7a2160785a4ca13a0fcd99004db8f9"
+  "value": "fecf4f43d7593ac080d7ba5530330c42f566e2317f4863d87158bf2c5ab049aa"
  },
  "engines": [
   {
@@ -187786,7 +187786,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/CONTROLLER_TRACE_DECLARED_PLAN_PARITY_V1_20261022_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "2adde5f84b32643ed94338925b5f32f2fe51ae8038ec84629eef2cdc42ce3b3b",
+   "sha256": "03b2a55405f38148b78a384c9f25ccfe54ec5b5c6337db1faf5e48a37c179a89",
    "status": "",
    "terms": {
     "20261022": 1,
