@@ -184,3 +184,36 @@ class FailureAnnotationTests(unittest.TestCase):
         out = buf.getvalue()
         self.assertEqual(out.count("\n"), 1, "the payload must stay on one line")
         self.assertIn("%0A", out)
+
+
+class CrashReportingTests(unittest.TestCase):
+    """A crash must be as readable as a policy rejection, and must still exit non-zero."""
+
+    def test_the_entry_point_reports_and_reraises_a_crash(self):
+        import contextlib
+        import io
+        import runpy
+
+        src = (ROOT / "canonical/runtime/enforce_goal_hierarchy.py").read_text(encoding="utf-8")
+        # The handler must exist and must not swallow the exception.
+        self.assertIn("DRIFT_GUARD_CRASH:", src)
+        tail = src[src.index('if __name__=="__main__":'):]
+        self.assertIn("raise", tail.split("DRIFT_GUARD_CRASH:")[1],
+                      "a crash handler that swallows the exception would hide a real failure")
+
+    def test_annotate_handles_an_empty_reason_list(self):
+        import contextlib
+        import io
+
+        buf = io.StringIO()
+        real = os.environ.get("GITHUB_ACTIONS")
+        os.environ["GITHUB_ACTIONS"] = "true"
+        try:
+            with contextlib.redirect_stdout(buf):
+                guard._annotate_failures([])
+        finally:
+            if real is None:
+                os.environ.pop("GITHUB_ACTIONS", None)
+            else:
+                os.environ["GITHUB_ACTIONS"] = real
+        self.assertEqual(buf.getvalue(), "")

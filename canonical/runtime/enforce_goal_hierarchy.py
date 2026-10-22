@@ -1506,4 +1506,15 @@ def main():
     return 0
 
 if __name__=="__main__":
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except SystemExit:
+        raise
+    except BaseException as _exc:  # noqa: BLE001 - reported, then re-raised unchanged
+        # An unhandled exception exits non-zero with a traceback on stderr and emits no
+        # annotation, so from the check run it is indistinguishable from a policy
+        # rejection. That is exactly the ambiguity that kept the real cause of this
+        # job's failure hidden. Name the crash, then re-raise so the exit code and the
+        # traceback are preserved exactly.
+        _annotate_failures(["DRIFT_GUARD_CRASH:"+type(_exc).__name__+": "+str(_exc)[:400]])
+        raise
