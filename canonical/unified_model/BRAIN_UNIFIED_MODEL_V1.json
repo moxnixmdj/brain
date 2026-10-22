@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "4a8d69f551f17e2d3d4cb903637563270c06e5a979e2993d7d94ad04a6eabb55"
+  "value": "1174655befbe3db8cbff707fc0077d01e2d22b1df0f2c158236b9d42a29b7b5a"
  },
  "engines": [
   {
@@ -187980,38 +187980,6 @@
    }
   },
   {
-   "action_id": "SQLITE_VERIFIER_SUBSTRATE_DECLARED_AS_THE_STDLIB_MODULE_IT_ACTUALLY_USES_V1_20261021_V1",
-   "capability": false,
-   "date": "2026-10-21",
-   "id": "research:canonical/action_intents/FRONT_DOOR_RETAINS_EXPERIENCE_THROUGH_THE_SELF_IMPROVEMENT_MODULE_IT_SHIPPED_BUT_NEVER_CALLED_V1_20261022_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/FRONT_DOOR_RETAINS_EXPERIENCE_THROUGH_THE_SELF_IMPROVEMENT_MODULE_IT_SHIPPED_BUT_NEVER_CALLED_V1_20261022_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "a576a06e7b1f843d7c31f4c0660f81fbeaf2b5bfcdb21ac7d71e48e3b9a371ab",
-   "status": "",
-   "terms": {
-    "20261022": 1,
-    "but": 1,
-    "called": 1,
-    "door": 1,
-    "experience": 1,
-    "front": 1,
-    "front_door_retains_experience_through_the_self_improvement_module_it_shipped_but_never_called_v1_20261022_v1": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "improvement": 1,
-    "module": 1,
-    "never": 1,
-    "retains": 1,
-    "self": 1,
-    "shipped": 1,
-    "sqlite_table_verify_against_json_records_goes_from_bound_apt_metadata_not_found_sqlite3_to_running_on_this_host_through_pythons_own_sqlite3_module__measured_by_the_failure_moving_off_the_substrate_gate_entirely_and_into_row_comparison_as_sqlite_column_unresolved_source_type__on_the_23_goal_benchmark_compiled_stays_23_of_23_correct_selection_21_of_23_wrong_capability_2_of_23_and_by_census_executed_11_of_23_and_semantic_acceptance_9_of_23_all_unchanged_so_there_is_no_regression_and_the_gain_is_a_restored_capability_not_a_moved_rate": 1,
-    "sqlite_verifier_substrate_declared_as_the_stdlib_module_it_actually_uses_v1_20261021_v1": 1,
-    "the_sqlite_verifier_was_declared_as_an_ubuntu_apt_package_so_on_a_host_without_the_sqlite3_cli_the_substrate_gate_raised_bound_apt_metadata_not_found_and_the_capability_never_ran_at_all__even_though_its_adapter_catches_filenotfounderror_and_imports_the_stdlib_module_and_its_own_entry_already_carried_optional_true_with_a_python_stdlib_fallback_and_an_optional_reason_naming_that_adapter__the_gate_read_none_of_those_fields": 1,
-    "through": 1,
-    "v1": 2
-   }
-  },
-  {
    "action_id": "GENERIC_TRACE_REINSPECTION_ACCEPTANCE_FOR_EVERY_INSPECTABLE_CAPABILITY_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -188410,6 +188378,36 @@
     "reuse_python_transitive_runtime_closure_v1_plus_exact_dependency_relevance_boundary__seed_from_declared_system_not_external_verifier_tooling": 1,
     "subject": 1,
     "v2": 1
+   }
+  },
+  {
+   "action_id": "SQLITE_VERIFIER_SUBSTRATE_DECLARED_AS_THE_STDLIB_MODULE_IT_ACTUALLY_USES_V1_20261021_V1",
+   "capability": false,
+   "date": "2026-10-21",
+   "id": "research:canonical/action_intents/RAW_SUCCESS_ADAPTER_MADE_REACHABLE_BY_GIVING_THE_CREATE_CAPABILITY_A_REAL_REINSPECTOR_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/RAW_SUCCESS_ADAPTER_MADE_REACHABLE_BY_GIVING_THE_CREATE_CAPABILITY_A_REAL_REINSPECTOR_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "c78086538811ca2bd60934bebf4a62b73d287fa36926d0adc4cd40cd6cc9828d",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "adapter": 1,
+    "capability": 1,
+    "create": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "giving": 1,
+    "made": 1,
+    "raw": 1,
+    "raw_success_adapter_made_reachable_by_giving_the_create_capability_a_real_reinspector_v1_20261022_v1": 1,
+    "reachable": 1,
+    "real": 1,
+    "reinspector": 1,
+    "sqlite_table_verify_against_json_records_goes_from_bound_apt_metadata_not_found_sqlite3_to_running_on_this_host_through_pythons_own_sqlite3_module__measured_by_the_failure_moving_off_the_substrate_gate_entirely_and_into_row_comparison_as_sqlite_column_unresolved_source_type__on_the_23_goal_benchmark_compiled_stays_23_of_23_correct_selection_21_of_23_wrong_capability_2_of_23_and_by_census_executed_11_of_23_and_semantic_acceptance_9_of_23_all_unchanged_so_there_is_no_regression_and_the_gain_is_a_restored_capability_not_a_moved_rate": 1,
+    "sqlite_verifier_substrate_declared_as_the_stdlib_module_it_actually_uses_v1_20261021_v1": 1,
+    "success": 1,
+    "the_sqlite_verifier_was_declared_as_an_ubuntu_apt_package_so_on_a_host_without_the_sqlite3_cli_the_substrate_gate_raised_bound_apt_metadata_not_found_and_the_capability_never_ran_at_all__even_though_its_adapter_catches_filenotfounderror_and_imports_the_stdlib_module_and_its_own_entry_already_carried_optional_true_with_a_python_stdlib_fallback_and_an_optional_reason_naming_that_adapter__the_gate_read_none_of_those_fields": 1,
+    "v1": 2
    }
   },
   {
@@ -221714,11 +221712,12 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_integrated_brain_v1.py",
-   "sha256": "b34f285de5aa5f0260ec02b0fc1022f1b86ad97b04bf444cecc29d57ec89a8b5",
+   "sha256": "d23632396695af1254dad63e5dc1321ed499852f290d7e42c4116fa65853c751",
    "summary": "Live integrated Brain V1.",
-   "symbol_count": 15,
+   "symbol_count": 16,
    "symbols": [
     "LiveBrainError",
+    "_raw_goal_replay_context",
     "_receipt_admits",
     "_record_raw_goal_experience",
     "_run_raw_goal_impl",
@@ -221745,6 +221744,7 @@
     "live": 2,
     "livebrainerror": 1,
     "load_verified_registry": 1,
+    "raw_goal_replay_context": 1,
     "receipt_admits": 1,
     "record_raw_goal_experience": 1,
     "run": 1,
@@ -242149,9 +242149,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "6851ae38b5bd6c96c62e2ef801e40473baf32f38395da4a9dce09f79ea4d2123",
+   "sha256": "0c91cde39adec07d39bb2e27dbc695ee017837d5c275284077278c00f08e6b7f",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
-   "symbol_count": 22,
+   "symbol_count": 23,
    "symbols": [
     "_action_rows",
     "_alternative_ids",
@@ -242168,6 +242168,7 @@
     "_inspect_pdf_extract_text",
     "_inspect_python_source_audit",
     "_inspect_relevance_rank",
+    "_inspect_tar_gz_create_from_manifest",
     "_inspect_xlsx_create",
     "_json",
     "_plan_chain",
@@ -242199,6 +242200,7 @@
     "inspect_pdf_extract_text": 1,
     "inspect_python_source_audit": 1,
     "inspect_relevance_rank": 1,
+    "inspect_tar_gz_create_from_manifest": 1,
     "inspect_xlsx_create": 1,
     "json": 1,
     "plan_chain": 1,
