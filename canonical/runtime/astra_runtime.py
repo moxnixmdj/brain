@@ -1479,6 +1479,12 @@ def _goal_action(action):
             and int(totals.get("files",0))>0
             and int(totals.get("failed",-1))==0
             and int(totals.get("errors",-1))==0
+            # A file that died before unittest ran, or that hung, contributes
+            # zero tests and zero failures, so the tests==passed+skipped check
+            # below cannot see it. Without these two the corpus would be
+            # declared clean while a file in it never ran at all.
+            and int(totals.get("crashed",0))==0
+            and int(totals.get("timed_out",0))==0
             and int(totals.get("tests",0))==(
                 int(totals.get("passed",0))+int(totals.get("skipped",0))
             )

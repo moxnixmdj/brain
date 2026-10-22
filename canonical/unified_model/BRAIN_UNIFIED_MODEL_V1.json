@@ -23324,7 +23324,7 @@
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
-    "output_verified"
+    "report_verified"
    ],
    "platforms": [
     "darwin",
@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6299,
+  "research_index_records": 6300,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "dfd5c6a0785636e257d113d2600214647e970a024cbe04bb6beb1b9134120c16"
+  "value": "f692a7414b8cc8a4fac49cf90776118da27ccf6c9491795cdabb07e451e9ccd1"
  },
  "engines": [
   {
@@ -46315,7 +46315,7 @@
   "included_source_count": 863,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "f637254d570050d10b10a2c2487b66fd5fb0fb4e3247c84a8ea71062361416ea"
+  "source_tree_digest": "30de58966be897cf607a82d3438a8d4ef9d518346a201aa0320960b18a00b662"
  },
  "research_index": [
   {
@@ -189227,6 +189227,40 @@
    }
   },
   {
+   "action_id": "THE_TEST_CORPUS_AUDIT_COULD_ONLY_REPORT_A_CORPUS_THAT_WAS_ALREADY_GREEN_SO_ITS_PASS_RATE_WAS_ALWAYS_ONE_HUNDRED_PERCENT_V1_20261022_V1",
+   "capability": false,
+   "date": "2026-10-22",
+   "id": "research:canonical/action_intents/THE_TEST_CORPUS_AUDIT_COULD_ONLY_REPORT_A_CORPUS_THAT_WAS_ALREADY_GREEN_SO_ITS_PASS_RATE_WAS_ALWAYS_ONE_HUNDRED_PERCENT_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_TEST_CORPUS_AUDIT_COULD_ONLY_REPORT_A_CORPUS_THAT_WAS_ALREADY_GREEN_SO_ITS_PASS_RATE_WAS_ALWAYS_ONE_HUNDRED_PERCENT_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "6cfdca2c1ab0dfe6308c965a2f0d0b5ea48fc55f5503d07001e2e9504334e745",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "already": 1,
+    "always": 1,
+    "audit": 1,
+    "bench_unittest_pass_rate_goes_from_fail_to_pass_and_live_acceptance_goes_from_12_of_23_to_13_of_23_measured_on_a_live_front_door_run_not_inferred__the_machine_now_runs_its_own_2044_file_corpus_and_writes_a_truthful_pass_rate_report_to_disk_measured_at_8716_tests_8442_passed_216_failed_70_errors_12_skipped_8_crashed_1_timed_out_pass_rate_0_967675_with_all_138_red_files_carrying_the_tail_of_why_they_are_red__the_strictness_is_not_traded_away_it_moves_to_the_field_that_always_meant_it_output_verified_stays_strict_and_assert_python_test_audit_zero_still_refuses_a_dirty_corpus_and_now_also_refuses_a_crashed_or_hung_one_which_it_previously_called_clean__what_the_generic_template_now_asserts_is_harder_not_softer_it_re_reads_the_artifact_from_disk_re_derives_every_total_from_the_per_file_records_and_rejects_any_report_where_a_nonzero_exit_is_not_accounted_for__compile_stays_23_of_23_and_correct_selection_stays_22_of_23_measured_with_the_repositorys_own_benchmark_runner": 1,
+    "corpus": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "green": 1,
+    "hundred": 1,
+    "make_the_audit_report_a_red_corpus_instead_of_raising_on_it_and_move_the_clean_corpus_claim_onto_the_field_that_always_meant_it__selected__the_capability_already_computed_output_verified_so_the_strict_verdict_was_never_lost_only_misplaced_onto_the_templates_expectation__measured_at_bench_unittest_pass_rate_going_from_fail_to_pass_and_acceptance_from_12_to_13_of_23_with_compile_and_selection_unchanged": 1,
+    "one": 1,
+    "only": 1,
+    "pass": 1,
+    "percent": 1,
+    "rate": 1,
+    "report": 1,
+    "so": 1,
+    "test": 1,
+    "the_test_corpus_audit_could_only_ever_report_on_a_corpus_that_was_already_green_so_the_pass_rate_it_reported_was_always_one_hundred_percent_and_carried_no_information__python_test_audit_raised_test_file_failed_on_the_first_file_that_exited_nonzero_and_never_wrote_the_report_so_the_artifact_the_capability_exists_to_produce_could_not_exist_unless_nothing_had_failed_which_is_the_one_condition_under_which_a_pass_rate_is_worthless__three_further_ways_the_same_report_could_lie_were_behind_it__a_file_that_dies_at_import_prints_no_summary_line_so_it_recorded_as_zero_tests_zero_failures_a_clean_file__a_file_that_hung_raised_an_unhandled_timeoutexpired_out_of_the_loop_and_killed_the_audit_partway_through_the_corpus_so_everything_after_the_slow_file_went_unreported__and_assert_python_test_audit_zero_declared_a_corpus_clean_on_failed_zero_errors_zero_which_a_crashed_or_hung_file_satisfies_because_it_contributes_nothing_to_either": 1,
+    "the_test_corpus_audit_could_only_report_a_corpus_that_was_already_green_so_its_pass_rate_was_always_one_hundred_percent_v1_20261022_v1": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "TRUE_CAPABILITY_AUDIT_AND_DOCX_MEASUREMENT_20261014_V1",
    "capability": false,
    "date": "2026-10-14",
@@ -193731,7 +193765,7 @@
    "imported_by_count": 4,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/astra_runtime.py",
-   "sha256": "85a2c2ff6a12edd65acccee5d3e489be8eb66242ade51416a50fa6bb495f5149",
+   "sha256": "d6dd589ab747bb98e12c11d0c4f45072b15b514181b87c056eedf9313230d7e4",
    "summary": "",
    "symbol_count": 112,
    "symbols": [
@@ -196305,12 +196339,14 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_test_audit.py",
-   "sha256": "42ea45db7e123d181fd7280e1e625efaf3d1223fd2a0f480d0deea9a79bd286a",
+   "sha256": "2613627df9d3e2f2aa826451c75f354a0d0abd1de58ff58c4b62d8741749703b",
    "summary": "Deterministic repository-local Python test-corpus execution audit.",
-   "symbol_count": 3,
+   "symbol_count": 5,
    "symbols": [
     "_counts",
+    "_report_is_consistent",
     "_safe_dir",
+    "_text",
     "run"
    ],
    "terms": {
@@ -196319,11 +196355,13 @@
     "deterministic": 1,
     "execution": 1,
     "python": 2,
+    "report_is_consistent": 1,
     "repository-local": 1,
     "run": 1,
     "safe_dir": 1,
     "test": 1,
-    "test-corpus": 1
+    "test-corpus": 1,
+    "text": 1
    }
   },
   {
