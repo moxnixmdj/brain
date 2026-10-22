@@ -1,8 +1,8 @@
 {
  "capability_id": "canonical/runtime/bytes_sequence_characteristic_set_v1.py.auto.v1",
- "elapsed_ms": 232.868,
+ "elapsed_ms": 162.008,
  "independent_run_reference": {
-  "github_run_id": 39771238252,
+  "github_run_id": 39771681365,
   "oidc_claims": {
    "actor": "brain-automation[bot]",
    "aud": "https://github.com/moxnixmdj/brain",
@@ -10,11 +10,11 @@
    "head_ref": "",
    "iss": "https://token.actions.githubusercontent.com",
    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
-   "jti": "20b7ad5a-4e6b-4858-bcd2-ea0aba34c40a",
+   "jti": "1d94f48b-5584-436e-b673-9f8052fd4b45",
    "repository": "moxnixmdj/brain",
    "repository_id": "1364778274",
    "run_attempt": "1",
-   "run_id": "39771238252",
+   "run_id": "39771681365",
    "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
   }
  },
