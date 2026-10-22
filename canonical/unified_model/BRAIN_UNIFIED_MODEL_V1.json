@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6295,
+  "research_index_records": 6296,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "222c9ceaffabe24f08bf1d5d38bd5db67f886b01be40c9a3821abb1ee5aba8f6"
+  "value": "a51ce469e95da08f01caf699919e19236a87157829f2a6fc8d68ea9f2097e4ef"
  },
  "engines": [
   {
@@ -189035,6 +189035,40 @@
    }
   },
   {
+   "action_id": "THE_REPLAY_SAFETY_GATE_FAILED_OPEN_ON_THE_SHIPPING_PATH_BECAUSE_IT_READ_A_KEY_THE_FRONT_DOOR_NEVER_EMITS_V1_20261022_V1",
+   "capability": false,
+   "date": "2026-10-22",
+   "id": "research:canonical/action_intents/THE_REPLAY_SAFETY_GATE_FAILED_OPEN_ON_THE_SHIPPING_PATH_BECAUSE_IT_READ_A_KEY_THE_FRONT_DOOR_NEVER_EMITS_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_REPLAY_SAFETY_GATE_FAILED_OPEN_ON_THE_SHIPPING_PATH_BECAUSE_IT_READ_A_KEY_THE_FRONT_DOOR_NEVER_EMITS_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "1f82fe2163fd251c94fd9d397b81096ae2d1d321076f87b8840b3dad10e82b7b",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "ask_the_safety_gate_the_question_it_is_actually_being_asked_is_there_evidence_of_a_produced_artifact_anywhere_in_this_result_instead_of_is_the_key_at_one_particular_path_so_a_door_that_reports_evidence_under_a_name_or_a_nesting_the_function_was_never_told_about_is_caught_rather_than_waved_through__selected__measured_at_23_of_23_agreement_with_ground_truth_where_the_old_body_agreed_on_17_of_23_by_returning_false_for_everything": 1,
+    "because": 1,
+    "door": 1,
+    "effect_may_have_occurred_is_the_safety_gate_that_decides_whether_a_failed_run_may_be_re_run_autonomously_autonomous_replay_authorized_is_literally_not_it_and_a_second_caller_uses_it_to_block_a_reuse_fallback_it_looked_for_effect_outcome_sha256_inside_out_trace_and_nowhere_else_measured_over_all_23_benchmark_goals_driven_through_run_raw_goal_out_trace_is_not_a_list_in_a_single_one_of_them_because_the_front_door_nests_its_trace_under_controller_execution_and_effect_outcome_sha256_never_appears_at_all_so_the_gate_returned_false_for_all_23_including_the_six_that_verifiably_wrote_files_a_safety_gate_that_answers_no_evidence_when_it_simply_cannot_see_the_evidence_fails_open_and_failing_open_here_means_re_running_an_action_that_already_wrote_something_to_disk": 1,
+    "emits": 1,
+    "failed": 1,
+    "front": 1,
+    "gate": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "key": 1,
+    "never": 1,
+    "open": 1,
+    "path": 1,
+    "read": 1,
+    "replay": 1,
+    "safety": 1,
+    "shipping": 1,
+    "the_gate_now_agrees_with_did_this_run_write_a_file_on_23_of_23_measured_through_the_real_front_door_where_it_previously_returned_false_for_all_23__the_six_runs_that_produced_an_artifact_are_now_caught_and_the_seventeen_read_only_ones_are_still_clear_so_the_gate_discriminates_rather_than_refusing__a_failure_carrying_effect_evidence_now_comes_out_of_integrate_solver_output_with_autonomous_replay_authorized_not_true_and_a_failure_without_evidence_is_still_authorized__correct_selection_stays_22_of_23_on_both_paths_acceptance_stays_12_of_23_and_compile_stays_23_of_23_so_this_changes_no_benchmark_number_which_is_declared_rather_than_disguised__what_it_changes_is_which_answer_a_safety_gate_gives_and_the_worst_case_cost_of_the_deeper_scan_is_6_milliseconds_on_a_run_that_takes_about_six_hundred": 1,
+    "the_replay_safety_gate_failed_open_on_the_shipping_path_because_it_read_a_key_the_front_door_never_emits_v1_20261022_v1": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "THE_SHIPPING_PATH_COULD_NOT_TELL_FAILED_ONCE_FROM_FAILS_EVERY_TIME_BECAUSE_NOTHING_WROTE_THE_FAILURE_TABLE_V1_20261022_V1",
    "capability": false,
    "date": "2026-10-22",
@@ -194645,7 +194679,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/autonomous_verified_self_improvement_v1.py",
-   "sha256": "762bfaa2443a96457fe9ffe9a588d2719416c86c0ce1945ca524ca4345c0b8b2",
+   "sha256": "b33eedb222fac9583aa179d907d4001c1538837bd022b09197b0607c0fb05a67",
    "summary": "Autonomous verified self-improvement loop V1.",
    "symbol_count": 45,
    "symbols": [

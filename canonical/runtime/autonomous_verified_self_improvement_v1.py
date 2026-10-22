@@ -1938,14 +1938,56 @@ def _all_prior_verified_episodes(
     return out
 
 
-def _effect_may_have_occurred(out: Mapping[str, Any]) -> bool:
-    trace = out.get("trace")
-    if not isinstance(trace, Sequence) or isinstance(trace, (str, bytes)):
-        return False
-    return any(
-        isinstance(row, Mapping) and bool(row.get("effect_outcome_sha256"))
-        for row in trace
-    )
+EFFECT_EVIDENCE_KEYS = ("effect_outcome_sha256", "output_sha256")
+_EFFECT_SCAN_MAX_DEPTH = 24
+
+
+def _effect_may_have_occurred(out: Any, _depth: int = 0) -> bool:
+    """Could this run have changed something on disk?
+
+    This is a SAFETY gate, and the only acceptable answer when uncertain is the
+    conservative one: a caller uses it to decide whether an autonomous replay is
+    authorized (`autonomous_replay_authorized = not _effect_may_have_occurred`)
+    and whether a reuse fallback must be blocked. Failing open here means
+    re-running an action that already wrote something.
+
+    IT USED TO FAIL OPEN ON THE SHIPPING PATH. The old body looked for
+    ``effect_outcome_sha256`` in ``out["trace"]`` and nowhere else. Measured
+    over all 23 benchmark goals driven through `run_raw_goal`: ``out["trace"]``
+    is not a list in a single one of them -- the front door nests its trace
+    under ``controller_execution`` -- and ``effect_outcome_sha256`` never
+    appears at all. So the gate returned False for all 23, including the six
+    that verifiably wrote files. ``output_sha256`` is exactly the evidence those
+    six carry: it is present for the archive, source-audit-JSON,
+    markdown-to-decision, xlsx-create, ast-audit and decision-verify goals, and
+    absent for every read-only one (pdf extract, tar verify, docx verify,
+    evidence rank, claim bind). The signal was there; the gate was looking
+    somewhere else.
+
+    So the question is asked the way it is actually posed -- "is there evidence
+    of a produced artifact ANYWHERE in this result" -- rather than "is the key
+    at one particular path". That is strictly more conservative: any door that
+    reported evidence before still reports it, and a door that reports it under
+    a name or a nesting this function was never told about is now caught instead
+    of waved through. Both evidence keys are unambiguous: each is the hash of
+    something an action produced.
+
+    The depth bound is a guard against a pathological or self-referential
+    structure, not a limit on real results; at the bound the scan stops and
+    reports what it found, which for a genuine artifact is always well above it.
+    """
+    if isinstance(out, Mapping):
+        for key in EFFECT_EVIDENCE_KEYS:
+            if out.get(key):
+                return True
+        if _depth >= _EFFECT_SCAN_MAX_DEPTH:
+            return False
+        return any(_effect_may_have_occurred(v, _depth + 1) for v in out.values())
+    if isinstance(out, Sequence) and not isinstance(out, (str, bytes)):
+        if _depth >= _EFFECT_SCAN_MAX_DEPTH:
+            return False
+        return any(_effect_may_have_occurred(v, _depth + 1) for v in out)
+    return False
 
 
 def _select_active_skill(
