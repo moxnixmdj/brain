@@ -7,6 +7,7 @@ nothing more.
 """
 from __future__ import annotations
 
+import importlib.util
 import json
 import pathlib
 import sys
@@ -444,8 +445,26 @@ class LaneRunTests(unittest.TestCase):
         self.assertGreater(len(candidates), 100)
         bound = json.loads((ROOT / lane_module.BOUND).read_text(encoding="utf-8"))["capabilities"]
         for cid, _path, kind, _entrypoint in candidates:
-            self.assertNotIn(cid, bound)
+            # A bound capability may appear, but only if the bound adapter would still
+            # refuse it: "already live" is not "already independently verified".
+            self.assertTrue(
+                cid not in bound or not lane_module._has_independence_claim(bound[cid]),
+                f"{cid} is bound and already carries an independence claim; re-receipting it proves nothing",
+            )
             self.assertIn(kind, ("contract", "cli"))
+
+    def test_every_discovered_bound_candidate_is_one_the_gate_refuses(self):
+        """The bound population added to discovery is exactly the unattested remainder."""
+        candidates = lane_module.discover(str(ROOT))
+        bound = json.loads((ROOT / lane_module.BOUND).read_text(encoding="utf-8"))["capabilities"]
+        discovered_bound = {cid for cid, *_ in candidates if cid in bound}
+        self.assertGreater(len(discovered_bound), 0, "no bound capability was left unattested?")
+        unattested = {
+            cid for cid, entry in bound.items()
+            if isinstance(entry, dict) and not lane_module._has_independence_claim(entry)
+        }
+        self.assertTrue(discovered_bound <= unattested)
+        self.assertIn("source.candidates.enumerate.stdlib", discovered_bound)
 
     def test_lane_never_claims_independence(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -458,6 +477,159 @@ class LaneRunTests(unittest.TestCase):
             )
             self.assertIsNone(receipt["independent_verifier"])
             self.assertIsNone(receipt["independent_run_reference"])
+
+
+class DeclaredProbeArgsTests(unittest.TestCase):
+    """The probe called every contract adapter with `{}` and swallowed the failure.
+
+    `result = fn({}, root)` inside `except BaseException: return None` meant an
+    adapter that reads an argument was never executed at all, and the lane reported
+    that as "no evidence available" rather than "the probe never ran it".
+    """
+
+    def _fake_root(self, tmp, capabilities):
+        root = pathlib.Path(tmp)
+        for rel in (lane_module.EXTENDED, lane_module.BOUND):
+            path = root / rel
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(json.dumps({"capabilities": capabilities}), encoding="utf-8")
+        return str(root)
+
+    def test_empty_probe_is_still_tried_first(self):
+        """Monotonicity: an adapter the empty call already exercises is unchanged."""
+        with tempfile.TemporaryDirectory() as tmp:
+            mod = pathlib.Path(tmp) / "m.py"
+            mod.write_text("def run(args, root):\n    return {'status': 'OK', 'n': len(args)}\n", encoding="utf-8")
+            spec = importlib.util.spec_from_file_location("mono_probe", mod)
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            result, used = lane_module._probe_invoke(module.run, tmp, "some.capability", "a" * 64)
+            self.assertEqual(used, {})
+            self.assertEqual(result["n"], 0)
+
+    def test_declared_args_are_used_only_when_the_empty_probe_fails(self):
+        entry = {
+            "needs.args.v1": {
+                "adapter_module": "needs_args",
+                "action_template": {
+                    "type": "invoke_capability",
+                    "args": {
+                        "capability_id": "needs.args.v1",
+                        "objective": "${input.goal}",
+                        "output_path": "${input.output_path}",
+                    }
+                },
+            }
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._fake_root(tmp, entry)
+            lane_module._DECLARED_ARG_CACHE.pop(root, None)
+            mod = pathlib.Path(tmp) / "canonical/runtime/bound_capabilities/needs_args.py"
+            mod.parent.mkdir(parents=True, exist_ok=True)
+            mod.write_text(
+                "def run(args, root):\n"
+                "    args = dict(args or {})\n"
+                "    if not args.get('output_path'):\n"
+                "        raise RuntimeError('JSON_OUTPUT_REQUIRED')\n"
+                "    return {'status': 'S', 'objective': args['objective'],\n"
+                "            'sink': args['output_path']}\n",
+                encoding="utf-8",
+            )
+            receipt = lane_module.execute_and_receipt(
+                "needs.args.v1",
+                "canonical/runtime/bound_capabilities/needs_args.py",
+                "run",
+                root,
+                "me",
+            )
+            self.assertIsNotNone(receipt, "the declared-args fallback must produce a receipt")
+            self.assertEqual(receipt["outcome"], "EXECUTED")
+            self.assertEqual(receipt["observed"]["status"], "S")
+            # the receipt must record what was actually passed, or --verify cannot replay it
+            self.assertEqual(receipt["invoked_args"]["objective"], "needs.args.v1")
+            self.assertTrue(receipt["invoked_args"]["output_path"].endswith(".json"))
+            self.assertNotIn("capability_id", receipt["invoked_args"])
+
+    def test_declared_args_are_deterministic_so_verify_can_replay_them(self):
+        entry = {
+            "det.v1": {
+                "action_template": {"args": {"goal": "${input.goal}", "out": "${input.output_path}"}}
+            }
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._fake_root(tmp, entry)
+            lane_module._DECLARED_ARG_CACHE.pop(root, None)
+            first = lane_module.declared_probe_args(root, "det.v1", "b" * 64)
+            second = lane_module.declared_probe_args(root, "det.v1", "b" * 64)
+            self.assertEqual(first, second)
+            self.assertIn("receipt_probe", first["out"])
+
+
+class BoundDiscoveryTests(unittest.TestCase):
+    """Bound capabilities were skipped because "already live" was read as "already verified"."""
+
+    def _root(self, tmp, bound_entry):
+        root = pathlib.Path(tmp)
+        for rel, caps in ((lane_module.EXTENDED, {}), (lane_module.BOUND, bound_entry)):
+            path = root / rel
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(json.dumps({"capabilities": caps}), encoding="utf-8")
+        mod = root / "canonical/runtime/bound_capabilities/unattested.py"
+        mod.parent.mkdir(parents=True, exist_ok=True)
+        mod.write_text("def run(args, root):\n    return {'status': 'S'}\n", encoding="utf-8")
+        return str(root)
+
+    def test_unattested_bound_capability_is_discovered(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._root(tmp, {
+                "unattested.v1": {
+                    "adapter_module": "unattested",
+                    "verification": {"status": "LOCAL_EXECUTION_AND_TEST_VERIFIED",
+                                     "independent_public_cross_domain_qualification": False},
+                }
+            })
+            found = {cid for cid, *_ in lane_module.discover(root)}
+            self.assertIn("unattested.v1", found)
+
+    def test_independently_verified_bound_capability_is_not_re_receipted(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._root(tmp, {
+                "unattested.v1": {
+                    "adapter_module": "unattested",
+                    "verification": {"independently_verified_by": "github-actions:moxnixmdj/brain"},
+                }
+            })
+            found = {cid for cid, *_ in lane_module.discover(root)}
+            self.assertNotIn("unattested.v1", found)
+
+
+class CommittedReceiptReproducesTests(unittest.TestCase):
+    """The receipt this change adds must survive the verifier's re-execution."""
+
+    CAPABILITY = "source.candidates.enumerate.stdlib"
+
+    def test_committed_receipt_reproduces_exactly(self):
+        path = (
+            ROOT / "canonical/astra_runtime/evidence"
+            / f"CAPABILITY__{self.CAPABILITY}__EXECUTION_RECEIPT.json"
+        )
+        self.assertTrue(path.exists(), "the producer receipt must be committed")
+        receipt = json.loads(path.read_text(encoding="utf-8"))
+        self.assertEqual(receipt["outcome"], "EXECUTED")
+        self.assertEqual(receipt["capability_id"], self.CAPABILITY)
+        module_path = ROOT / receipt["module_path"]
+        spec = importlib.util.spec_from_file_location("replay_enumerate", module_path)
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = module
+        spec.loader.exec_module(module)
+        again = getattr(module, receipt["entrypoint"])(
+            dict(receipt.get("invoked_args") or {}), str(ROOT)
+        )
+        self.assertEqual(
+            lane_module.sha256_canonical(again),
+            receipt["result_sha256"],
+            "a receipt the independent verifier cannot reproduce is not evidence",
+        )
 
 
 if __name__ == "__main__":

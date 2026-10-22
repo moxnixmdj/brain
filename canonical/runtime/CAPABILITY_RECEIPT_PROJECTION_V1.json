@@ -1,5 +1,5 @@
 {
- "count": 304,
+ "count": 305,
  "entries": {
   "brain.module.function.invoke": {
    "action_template": {
@@ -14992,6 +14992,50 @@
     },
     "producer_independent": false,
     "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_verification_verify_image_ocr_tesseract_reuse.py.auto.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "source.candidates.enumerate.stdlib": {
+   "action_template": {
+    "args": {
+     "capability_id": "source.candidates.enumerate.stdlib"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "source_candidates_enumerate",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "source",
+    "candidates",
+    "enumerate"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "source.candidates.enumerate.stdlib"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/source_candidates_enumerate.py",
+    "path": "canonical/runtime/bound_capabilities/source_candidates_enumerate.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "1bb83d60e8d0fdee7436cb7105d10f4518cf60eba87e28c5ece2b3ba592e8887",
+    "observed_effect": {
+     "output_verified": true,
+     "status": "SOURCE_CANDIDATES_ENUMERATED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__source.candidates.enumerate.stdlib__EXECUTION_RECEIPT.json"
    }
   }
  },
