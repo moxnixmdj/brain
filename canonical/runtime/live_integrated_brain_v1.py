@@ -1398,6 +1398,50 @@ def _record_raw_goal_pathology(out: Any, request: Any = None, path: Any = None) 
         pass
 
 
+def _failure_counterexample(out: Mapping[str, Any]) -> list[dict[str, Any]]:
+    """Name the capability the front door actually attempted, truthfully.
+
+    WHAT WAS MISSING. The failure record carried a status, a reason and a
+    fingerprint -- but not WHICH capability failed. Measured over the 11 failing
+    benchmark goals: the stored record for `EXT_OCR_SCANNED_IMAGE` does not
+    contain the string `image.extract.ocr.tesseract` anywhere. Eight failure
+    classes, none of them with a subject. Everything that reasons about a
+    failure per capability -- `r3_historical_failure_irreducibility_v1`, the
+    pathology cells in `experience_v1`, which ARE keyed by capability -- had
+    nothing to join it to.
+
+    WHY `counterexamples` AND NOT `falsified_capability_ids`. That field is not
+    "this failed"; it is PROOF OF EXHAUSTION. `_complete_route_failure` in the
+    solver family returns True only when the proposal search was complete over
+    the declared finite domain, and the solver files a capability under
+    `falsified` on that proof and under `deferred` otherwise. The front door
+    runs one attempt and searches nothing, so it cannot claim exhaustion, and
+    filling that field from a front-door failure would be a lie that a later
+    retry would act on. A counterexample row is the truthful shape: it says this
+    capability was tried and did not work, and it says explicitly that the route
+    was NOT proven dead.
+
+    `route_falsified_for_current_contract` is therefore hard False, and the row
+    shape is the solver's own so the two doors write records that mean the same
+    thing. The reason is unwrapped by the same helper the pathology hook uses,
+    so one failure carries one reason string everywhere it is recorded.
+
+    When the result names no capability the list is empty. Two of the eleven
+    failures -- `BENCH_SQLITE_CREATE_INSERT_QUERY` and `BENCH_GROUNDING_AND_VERIFY`
+    -- fail before a capability is bound, and inventing one for them would be
+    worse than leaving the subject unnamed.
+    """
+    cid = str(out.get("compiled_capability_id") or "").strip()
+    if not cid:
+        return []
+    return [{
+        "capability_id": cid,
+        "solver_status": str(out.get("status") or ""),
+        "route_falsified_for_current_contract": False,
+        "reason": _pathology_reason_code(out.get("reason")),
+    }]
+
+
 def _record_raw_goal_failure_diagnosis(
     out: Any, request: Any = None, state_path: Any = None
 ) -> None:
@@ -1451,7 +1495,16 @@ def _record_raw_goal_failure_diagnosis(
         kwargs: dict[str, Any] = {}
         if state_path is not None:
             kwargs["state_path"] = state_path
-        _self_improvement.integrate_solver_output(out, **kwargs)
+        # A COPY, never the caller's mapping: `run_raw_goal` returns `out` to
+        # its caller and the docstring promises it byte for byte, so the
+        # counterexample is attached to what the learning layer sees and not to
+        # what the user gets back.
+        enriched = dict(out)
+        if not enriched.get("counterexamples"):
+            rows = _failure_counterexample(out)
+            if rows:
+                enriched["counterexamples"] = rows
+        _self_improvement.integrate_solver_output(enriched, **kwargs)
     except Exception:
         # Deliberate: see the docstring. Diagnosis is best-effort by design.
         pass

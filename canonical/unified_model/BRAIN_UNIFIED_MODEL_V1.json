@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6296,
+  "research_index_records": 6297,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a51ce469e95da08f01caf699919e19236a87157829f2a6fc8d68ea9f2097e4ef"
+  "value": "265564242e344a2cf157b9b24875d6bc4268ab53f0dbe9b0c5d11d07cd2d6fff"
  },
  "engines": [
   {
@@ -187532,6 +187532,40 @@
    }
   },
   {
+   "action_id": "A_FAILURE_RECORD_WITH_NO_SUBJECT_COUNTED_TWO_DIFFERENT_BREAKAGES_AS_ONE_AND_falsified_MEANS_PROOF_NOT_MERELY_FAILURE_V1_20261022_V1",
+   "capability": false,
+   "date": "2026-10-22",
+   "id": "research:canonical/action_intents/A_FAILURE_RECORD_WITH_NO_SUBJECT_COUNTED_TWO_DIFFERENT_BREAKAGES_AS_ONE_AND_falsified_MEANS_PROOF_NOT_MERELY_FAILURE_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_FAILURE_RECORD_WITH_NO_SUBJECT_COUNTED_TWO_DIFFERENT_BREAKAGES_AS_ONE_AND_falsified_MEANS_PROOF_NOT_MERELY_FAILURE_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "9e2384f5eb71849824252e32c2f34b796d359406f23dbbc4246174715816235b",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "a_failure_record_with_no_subject_counted_two_different_breakages_as_one_and_falsified_means_proof_not_merely_failure_v1_20261022_v1": 1,
+    "breakages": 1,
+    "counted": 1,
+    "different": 1,
+    "failure": 2,
+    "falsified": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "means": 1,
+    "merely": 1,
+    "name_the_capability_in_a_counterexample_row_using_the_solver_family_own_row_shape_and_hard_coding_route_falsified_for_current_contract_to_false_so_the_record_gains_a_subject_without_claiming_a_proof__selected__measured_at_nine_of_eleven_failures_named_and_classes_eight_to_nine_with_selection_and_acceptance_unchanged": 1,
+    "nine_of_the_eleven_failing_goals_now_name_the_capability_that_failed_in_their_own_failure_record_the_two_that_fail_before_a_capability_is_bound_correctly_name_none__distinct_failure_classes_go_from_eight_to_nine_on_the_same_23_goals_because_a_failure_with_a_known_subject_no_longer_shares_a_class_with_one_that_has_none__every_row_asserts_route_falsified_for_current_contract_false_and_falsified_capability_ids_stays_empty_for_all_nine_classes_so_nothing_clays_a_proof_the_front_door_did_not_make__correct_selection_stays_22_of_23_on_both_paths_acceptance_stays_12_of_23_and_compile_stays_23_of_23_so_this_moves_no_benchmark_number_which_is_declared_rather_than_disguised__it_adds_no_retry_loop_because_a_retry_still_has_nothing_it_could_truthfully_exclude": 1,
+    "no": 1,
+    "not": 1,
+    "one": 1,
+    "proof": 1,
+    "record": 1,
+    "subject": 1,
+    "the_shipping_paths_failure_records_had_no_subject__they_carried_a_status_a_reason_and_a_fingerprint_but_not_which_capability_failed__measured_the_stored_record_for_ext_ocr_scanned_image_does_not_contain_the_string_image_extract_ocr_tesseract_anywhere_and_because_the_fingerprint_is_computed_over_the_records_core_two_failures_with_the_same_status_and_the_same_reason_share_one_class_however_different_their_causes__measured_on_the_23_goal_benchmark_ext_sqlite_verify_which_fails_inside_sqlite_table_verify_against_json_records_and_bench_sqlite_create_insert_query_which_fails_before_any_capability_is_bound_both_report_the_bare_reason_runtimeerror_and_collapsed_into_a_single_recurring_failure__separately_falsified_capability_ids_was_empty_for_all_recorded_classes_and_must_stay_that_way_because_in_this_tree_it_does_not_mean_this_failed_it_means_proof_of_exhaustion": 1,
+    "two": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "BM25_INVERSE_DOCUMENT_FREQUENCY_REORDERS_BOUND_CAPABILITY_SELECTION_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -222430,13 +222464,14 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_integrated_brain_v1.py",
-   "sha256": "b260342ed63f1ae6dda5cef58985823ae9d3b3b0eae5c7f3696363de3d79be3c",
+   "sha256": "72a896d66521afb80128322fa9cbdade83aeb33f0c9af8d50d2986b6b1dbbfac",
    "summary": "Live integrated Brain V1.",
-   "symbol_count": 25,
+   "symbol_count": 26,
    "symbols": [
     "LiveBrainError",
     "_advance_learning_queue",
     "_bound_capability_ids",
+    "_failure_counterexample",
     "_independently_verified",
     "_inputs_from_rendered_args",
     "_pathology_reason_code",
@@ -222456,8 +222491,7 @@
     "compile_capability_graph",
     "controller_actions_permitted",
     "drive_controller",
-    "load_verified_registry",
-    "run"
+    "load_verified_registry"
    ],
    "terms": {
     "advance_learning_queue": 1,
@@ -222468,6 +222502,7 @@
     "compile_capability_graph": 1,
     "controller_actions_permitted": 1,
     "drive_controller": 1,
+    "failure_counterexample": 1,
     "independently_verified": 1,
     "inputs_from_rendered_args": 1,
     "integrated": 2,
@@ -222479,7 +222514,6 @@
     "raw_goal_replay_context": 1,
     "receipt_admits": 1,
     "record_raw_goal_experience": 1,
-    "record_raw_goal_failure_diagnosis": 1,
     "record_raw_goal_pathology": 1,
     "run": 1,
     "run_raw_goal_impl": 1,
