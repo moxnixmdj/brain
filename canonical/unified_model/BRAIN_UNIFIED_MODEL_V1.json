@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6289,
+  "research_index_records": 6290,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "854b7b0de13f4dbeba12294e02c513da61cec0276877cc5a784b46d0b33fd579"
+  "value": "e21ae247216d31720c9b164967a10a975ffe26c681a0c85b2520b628e6be9338"
  },
  "engines": [
   {
@@ -188721,6 +188721,36 @@
    }
   },
   {
+   "action_id": "RAW_ACCEPTED_LEARNING_GENERALIZED_FROM_ONE_HARDCODED_SENTENCE_TO_ANY_OWNED_PLAN_V1_20261022_V1",
+   "capability": false,
+   "date": "2026-10-22",
+   "id": "research:canonical/action_intents/RAW_ACCEPTED_LEARNING_GENERALIZED_FROM_ONE_HARDCODED_SENTENCE_TO_ANY_OWNED_PLAN_V1_20261022_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/RAW_ACCEPTED_LEARNING_GENERALIZED_FROM_ONE_HARDCODED_SENTENCE_TO_ANY_OWNED_PLAN_V1_20261022_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "1ea1563bfa437653823e6fc53611f7406a3c39e4299669880cae0ba97893595a",
+   "status": "",
+   "terms": {
+    "20261022": 1,
+    "accepted": 1,
+    "any": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "generalized": 1,
+    "hardcoded": 1,
+    "learning": 1,
+    "one": 1,
+    "owned": 1,
+    "plan": 1,
+    "r3_raw_success_adapter_v1_and_r3_raw_success_checkpoint_verifier_v1_were_both_hardwired_to_the_single_archive_sentence_so_every_other_accepted_goal_was_refused_with_raw_capability_not_admitted_and_could_never_become_verified_experience__measured_on_a_clean_tree_where_11_of_23_goals_reached_semantic_acceptance_but_only_7_became_episodes_and_all_4_that_did_not_shared_one_queued_expand_success_verification_frontier_item_asking_for_an_independent_readonly_success_verifier_or_adapter": 1,
+    "raw": 1,
+    "raw_accepted_learning_generalized_from_one_hardcoded_sentence_to_any_owned_plan_v1_20261022_v1": 1,
+    "sentence": 1,
+    "v1": 2,
+    "verified_episodes_7_to_9_measured_on_a_tree_wiped_of_every_untracked_artifact__the_two_new_episodes_are_raw_accepted_rank_source_evidence_by_relevance_to_the_objective_with_the_two_step_plan_source_candidates_enumerate_stdlib_then_source_objective_relevance_rank_bm25_and_raw_accepted_read_a_pdf_and_extract_its_text_with_the_one_step_plan_pdf_extract_text_pypdf__acceptance_holds_at_11_of_23_and_selection_at_21_of_23_and_the_seven_bound_success_episodes_are_untouched": 1,
+    "write_a_real_second_implementation_that_re_establishes_every_load_bearing_claim_through_a_mechanism_the_producer_does_not_use__candidate_set_from_git_grep_l_digests_from_sha256sum_canonical_form_and_counts_from_jq_and_decidability_by_re_running_the_consumers_own_validator_on_bytes_reopened_from_disk__then_record_the_measured_result_as_evidence_rather_than_asserting_a_flag": 1
+   }
+  },
+  {
    "action_id": "SQLITE_VERIFIER_SUBSTRATE_DECLARED_AS_THE_STDLIB_MODULE_IT_ACTUALLY_USES_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -242032,7 +242062,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/r3_raw_success_adapter_v1.py",
-   "sha256": "943a2498fb9b275ad34eb21307d9dd4212e1f93f229e0e73c698aeb28903a125",
+   "sha256": "c71a9f00b0337849e26aa998a30cca6dc8272247c53376aa386e86e3bf44fbfa",
    "summary": "Candidate adapter for independently accepted RAW_BOUND successes.",
    "symbol_count": 4,
    "symbols": [
@@ -242066,14 +242096,15 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/r3_raw_success_checkpoint_verifier_v1.py",
-   "sha256": "cc337f73b2634fb288f967c5340d78882151f3cfa8ba51308953d363d4833d43",
+   "sha256": "642d24119ca381100e8fde83f08dd5433bc89a5e1140f20cfa4a338ec950ae5e",
    "summary": "Independent read-only verifier for semantically accepted RAW_BOUND successes.",
-   "symbol_count": 5,
+   "symbol_count": 6,
    "symbols": [
     "_canon",
     "_fail",
     "_safe_file",
     "_sha",
+    "_verify_generic",
     "verify_material"
    ],
    "terms": {
@@ -242093,6 +242124,7 @@
     "successes": 1,
     "v1": 1,
     "verifier": 2,
+    "verify_generic": 1,
     "verify_material": 1
    }
   },
