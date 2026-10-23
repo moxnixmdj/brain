@@ -24536,7 +24536,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6329,
+  "research_index_records": 6330,
   "routing_tokens": 1798,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "df4dc02039648ca4b92b7ed640094107ad61c7cbef89c1feaa0b9dc471c01a44"
+  "value": "d300ff6935ec621a0697cafc35ad9a5e419b9709df249326a0ef033990f37829"
  },
  "engines": [
   {
@@ -188037,6 +188037,51 @@
    }
   },
   {
+   "action_id": "COMPOSED_FALLBACK_HELD_TO_PROMISED_ARTIFACT_EVIDENCE_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/COMPOSED_FALLBACK_HELD_TO_PROMISED_ARTIFACT_EVIDENCE_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/COMPOSED_FALLBACK_HELD_TO_PROMISED_ARTIFACT_EVIDENCE_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "0e094943565a2f82b2ab28bd877200226c3fbc3c68b600b754e6caac04dfbe5d",
+   "status": "",
+   "terms": {
+    "20261023": 1,
+    "abandon": 1,
+    "about": 1,
+    "adapters": 1,
+    "already": 1,
+    "anywhere": 1,
+    "appear": 1,
+    "artifact": 1,
+    "before": 1,
+    "both": 1,
+    "cannot": 1,
+    "columns": 1,
+    "composed": 1,
+    "composed_fallback_held_to_promised_artifact_evidence_v1_20261023_v1": 2,
+    "data": 1,
+    "demanding": 1,
+    "derived": 1,
+    "document": 1,
+    "either": 1,
+    "evidence": 1,
+    "fact": 1,
+    "fallback": 1,
+    "family": 2,
+    "file": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 1,
+    "had": 1,
+    "held": 1,
+    "interpreter": 1,
+    "json": 1,
+    "source": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "COMPOUND_PLAN_SEMANTIC_ACCEPTANCE_FROM_THE_CONTROLLER_TRACE_WITH_INDEPENDENT_ARTIFACT_REINSPECTION_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -217348,7 +217393,7 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "e98c1bfbe17cabe7cd4eda8da5429c40b1d799d437774b70b0a5f15241a560cf",
+   "sha256": "387238258b6a811f1dc87d47168525fe388fd2b2500b90cceaae3dad45074f4d",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
    "symbol_count": 120,
    "symbols": [
@@ -223762,12 +223807,13 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "d187091fd1dc9e46df575373af0a2ea0097fb7d5ae422cc53574a95e3460a9de",
+   "sha256": "a1b9c05541635af51338a5952b933a110d683377262b906f6023e15337ce7110",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 35,
+   "symbol_count": 36,
    "symbols": [
     "LocalExecutionFailure",
     "_check_expectation",
+    "_composed_holds_up",
     "_controller_passed",
     "_credit_recall",
     "_dag_evidence",
@@ -223788,8 +223834,7 @@
     "_resolve_plan_refs",
     "_result_refs",
     "_source_digest",
-    "_try_composed",
-    "dag_admission"
+    "_try_composed"
    ],
    "terms": {
     "admission": 2,
