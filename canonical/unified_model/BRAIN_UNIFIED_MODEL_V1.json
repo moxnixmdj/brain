@@ -24406,7 +24406,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6303,
+  "research_index_records": 6304,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24415,7 +24415,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a536e40c105fbc8723faf8faa729cfb0abe7ad14ed155aa65c03ed754a5cbf3f"
+  "value": "70d863f3e431c65b53102fb245825152bd13c35a21d602e7b74e5434b28f467b"
  },
  "engines": [
   {
@@ -188323,6 +188323,51 @@
     "v1": 2,
     "verified_bound_capability_execution_adapter_v1_caught_every_exception_and_returned_the_cause_only_in_the_errors_list_while_the_controller_blocker_builder_astra_runtime_verify_action_expectation_reads_the_singular_keys_reason_and_error_so_the_cause_was_in_the_payload_and_invisible_in_the_only_message_anyone_ever_reads__measured_all_twelve_failing_benchmark_goals_reported_the_byte_identical_string_action_expectation_failed_pass_observed_false_result_status_fail_closed": 1,
     "write_a_real_second_implementation_that_re_establishes_every_load_bearing_claim_through_a_mechanism_the_producer_does_not_use__candidate_set_from_git_grep_l_digests_from_sha256sum_canonical_form_and_counts_from_jq_and_decidability_by_re_running_the_consumers_own_validator_on_bytes_reopened_from_disk__then_record_the_measured_result_as_evidence_rather_than_asserting_a_flag": 1
+   }
+  },
+  {
+   "action_id": "FAULT_LOCALIZATION_TRACED_CHILD_ON_PYTHONPATH_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/FAULT_LOCALIZATION_TRACED_CHILD_ON_PYTHONPATH_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/FAULT_LOCALIZATION_TRACED_CHILD_ON_PYTHONPATH_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "1fd8f5c3e2eb93113d41c72687183fe492c7b1f9220978657d026c4171f4c0f4",
+   "status": "",
+   "terms": {
+    "20261023": 1,
+    "adapter": 2,
+    "auditing": 1,
+    "because": 1,
+    "benchmark": 1,
+    "bound": 2,
+    "capability": 1,
+    "change": 1,
+    "child": 3,
+    "class": 1,
+    "consumes": 1,
+    "defect": 1,
+    "directory": 2,
+    "empty": 2,
+    "fault": 2,
+    "fault_localization_traced_child_on_pythonpath_v1_20261023_v1": 2,
+    "import": 2,
+    "line": 2,
+    "localization": 2,
+    "module": 2,
+    "nothing": 4,
+    "ranking": 2,
+    "reported": 2,
+    "repository": 2,
+    "spawns": 2,
+    "still": 2,
+    "success": 2,
+    "suite": 2,
+    "tests": 2,
+    "traced": 2,
+    "v1": 2,
+    "while": 2
    }
   },
   {
