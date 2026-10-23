@@ -24536,7 +24536,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6331,
+  "research_index_records": 6332,
   "routing_tokens": 1798,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b6a7a0546cafb22345c796379da5d15e37d26fae9ba606f22f43431f6af7886b"
+  "value": "6cacfc6d8cc9a0b6a4e236476c8076e308b67e603637acc4ab15e0d24df9668a"
  },
  "engines": [
   {
@@ -191373,6 +191373,51 @@
     "v1": 2,
     "verifier": 1,
     "verifier_step_inherits_producer_goal_so_the_hash_check_can_pass_v1_20261022_v1": 1
+   }
+  },
+  {
+   "action_id": "WAVE_SEVEN_RECEIPT_PROSE_FAMILY_GETS_A_SUITE_V1_20261024_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/WAVE_SEVEN_RECEIPT_PROSE_FAMILY_GETS_A_SUITE_V1_20261024_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WAVE_SEVEN_RECEIPT_PROSE_FAMILY_GETS_A_SUITE_V1_20261024_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "c3885a5ee09193f8636a5da3be22eea3d65d3576b26e04f7c5f46d871056bc03",
+   "status": "",
+   "terms": {
+    "20261024": 1,
+    "abandon": 1,
+    "about": 1,
+    "adapters": 1,
+    "already": 1,
+    "anywhere": 1,
+    "appear": 1,
+    "before": 1,
+    "both": 1,
+    "cannot": 1,
+    "columns": 1,
+    "data": 1,
+    "demanding": 1,
+    "derived": 1,
+    "document": 1,
+    "either": 1,
+    "fact": 1,
+    "family": 3,
+    "file": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "gets": 1,
+    "goal": 1,
+    "had": 1,
+    "interpreter": 1,
+    "json": 1,
+    "looked": 1,
+    "mixed-vendor": 1,
+    "needs": 1,
+    "one": 1,
+    "source": 2,
+    "v1": 2,
+    "wave_seven_receipt_prose_family_gets_a_suite_v1_20261024_v1": 2
    }
   }
  ],
