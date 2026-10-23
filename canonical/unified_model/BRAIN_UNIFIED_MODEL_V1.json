@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6300,
+  "research_index_records": 6301,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "dbe0a345d217c67af2453afe1f2ef473d812aafdd4c6fe945214cd440cf35681"
+  "value": "70c03d43adc0d6ee83dafc476116e91bafeba539b67254f0474cd80d0fbbae53"
  },
  "engines": [
   {
@@ -187590,6 +187590,51 @@
     "reuse_the_repositorys_own_bm25_scorer_to_reorder_the_candidates_the_pinned_scorer_already_admitted_rather_than_extending_the_hand_kept_generic_token_denylist_or_writing_a_new_ranker__ordering_only_the_admissible_set_is_proven_identical_with_and_without_the_step": 1,
     "selection": 1,
     "the_front_door_now_separates_capabilities_by_how_distinctive_their_vocabulary_is_rather_than_by_how_much_of_it_they_share_so_a_goal_stops_binding_to_a_decoder_when_it_asked_for_a_generator__compiled_18_of_23_unchanged_correct_selection_13_to_14_wrong_capability_5_to_4_and_the_capability_count_stays_363": 1,
+    "v1": 2
+   }
+  },
+  {
+   "action_id": "BOUND_CAPABILITY_SOURCE_TYPE_AND_DECLARED_ADAPTER_PATH_REACHABILITY_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/BOUND_CAPABILITY_SOURCE_TYPE_AND_DECLARED_ADAPTER_PATH_REACHABILITY_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/BOUND_CAPABILITY_SOURCE_TYPE_AND_DECLARED_ADAPTER_PATH_REACHABILITY_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d2f7ff654b10ebdd3b0c3b066d0abe1951e81240202b6d80679a92be96de8be1",
+   "status": "",
+   "terms": {
+    "11": 1,
+    "16": 1,
+    "20261023": 1,
+    "22": 1,
+    "23": 1,
+    "56": 1,
+    "72": 4,
+    "accepted": 1,
+    "actually": 1,
+    "adapter": 4,
+    "admitted": 1,
+    "any": 1,
+    "anything": 1,
+    "apt": 1,
+    "bound": 3,
+    "bound_capabilities": 1,
+    "bound_capability_adapter_missing": 1,
+    "bound_capability_source_type_and_declared_adapter_path_reachability_v1_20261023_v1": 2,
+    "bound_capability_source_unsupported": 1,
+    "brain_bound_system_tool": 1,
+    "brain_native_deterministic": 1,
+    "brain_native_deterministic_composition": 1,
+    "canonical": 2,
+    "capabilities": 2,
+    "capability": 3,
+    "declares": 2,
+    "file": 2,
+    "path": 3,
+    "runtime": 2,
+    "so": 2,
+    "source": 2,
     "v1": 2
    }
   },
