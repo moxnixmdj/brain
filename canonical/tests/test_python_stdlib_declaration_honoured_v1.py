@@ -97,9 +97,6 @@ class TestSqliteVerifyNeedsNoBinary(unittest.TestCase):
     """End-to-end through the real adapter, with no sqlite3 binary on the box."""
 
     def setUp(self):
-        self.assertTrue(
-            shutil.which("sqlite3") is None or True,  # informational; the test holds either way
-        )
         self.tmp = pathlib.Path(tempfile.mkdtemp(prefix="sqlite_stdlib_verify_"))
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         # The adapter reads a collection as either a list (keyed by index) or a mapping
