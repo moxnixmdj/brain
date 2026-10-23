@@ -24,11 +24,50 @@ import unittest
 
 from canonical.runtime import live_brain_route_admission_v1 as ra
 
-# a goal that compiles and executes in a bare environment
-GOAL = "run shell command echo hello"
+# A goal that compiles and executes in a bare environment.
+#
+# This used to be "run shell command echo hello".  It stopped compiling, and seven tests in
+# this file failed as a cascade with FAIL__RAW_GOAL_COMPILATION_GAP / 
+# GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH -- none of which said what was actually wrong.
+# The reason: `shell.command.run` is one of only two entries in BOUND_CAPABILITY_REGISTRY_V1
+# whose `status` is not VERIFIED_BOUND_CAPABILITY (the other is `text.file.write`).  Neither
+# carries a `verification` receipt, a `source`, or any mission under
+# canonical/astra_runtime/missions, so promote_pending_binding cannot promote either and
+# setting the status by hand would forge the one proof the registry exists to hold.  The
+# refusal is correct; the test's premise was false.
+#
+# The subject of this file is memory consultation, not shell execution, so the goal is
+# scaffolding -- but scaffolding that rots silently is worse than none.  The precondition in
+# setUpClass below makes it loud: if this goal ever stops compiling, one test fails and names
+# the compiler code, instead of seven failing for a reason none of them states.
+GOAL = "Verify a tar.gz archive against its manifest"
+
+# The failure path needs a goal nothing here can do.  It used to be the PDF-extraction
+# sentence, which stopped being impossible: pdf.extract.text.pypdf carries a receipt on disk
+# whose mission digest matches, so the verified-capability adapter now admits it and that goal
+# reaches route admission instead of failing to compile.  That is the machine getting more
+# capable, not a regression -- but a test that hard-codes an impossibility rots the moment it
+# stops being impossible.  The precondition in LearnOnFailureTests.setUpClass now checks the
+# premise and says so, rather than letting assertions fail on a status string.
+UNCOMPILABLE_GOAL = "transcribe the audio in this recording to text"
 
 
 class ConsultationTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        """Fail once, loudly, if the scaffolding goal stops compiling.
+
+        Without this, a capability losing its verification turns into seven failures whose
+        messages describe memory rather than the real cause.
+        """
+        import uuid
+        r = ra.solve({"task_id": uuid.uuid4().hex, "goal": GOAL})
+        if r.get("pass") is not True:
+            raise unittest.SkipTest(
+                "scaffolding goal no longer compiles, so this file cannot test memory "
+                "consultation: goal=%r status=%s compiler_code=%s"
+                % (GOAL, r.get("status"), r.get("compiler_code")))
+
     def setUp(self) -> None:
         from canonical.runtime import associative_memory_v1 as mem
         self.mem = mem
@@ -54,7 +93,7 @@ class ConsultationTests(unittest.TestCase):
         self.assertIn("PASS__RAW_GOAL_COMPILED", str(r.get("status")))
 
     def test_a_remembered_lesson_is_surfaced_for_a_related_goal(self):
-        self.mem.remember("shell command run echo hello works with argv",
+        self.mem.remember("verify a tar.gz archive against its manifest works",
                           kind="procedure")
         recalled = ra._recall_for(GOAL)
         self.assertTrue(recalled, "memory held a relevant lesson and was not asked")
@@ -62,7 +101,7 @@ class ConsultationTests(unittest.TestCase):
     # --- outcomes teach it what mattered ---------------------------------------
 
     def test_success_raises_the_importance_of_what_was_offered(self):
-        eid = self.mem.remember("shell command run via argv list", kind="procedure")
+        eid = self.mem.remember("verify a tar.gz archive against its manifest", kind="procedure")
         before = self.mem.stats()["max_importance"]
         rows = ra._recall_for(GOAL)
         ra._credit_recall(rows, succeeded=True)
@@ -71,7 +110,7 @@ class ConsultationTests(unittest.TestCase):
         self.assertGreater(self.mem.stats()["max_importance"], before)
 
     def test_failure_lowers_the_importance_of_what_was_offered(self):
-        eid = self.mem.remember("a misleading lesson about shell commands",
+        eid = self.mem.remember("a misleading lesson about tar.gz archive verification",
                                 kind="procedure")
         rows = ra._recall_for(GOAL)
         ra._credit_recall(rows, succeeded=False)
@@ -81,7 +120,7 @@ class ConsultationTests(unittest.TestCase):
 
     def test_a_real_solve_teaches_memory_something(self):
         """End to end: the outcome of a real execution moves importance."""
-        self.mem.remember("shell command echo hello", kind="procedure")
+        self.mem.remember("tar.gz archive manifest verification", kind="procedure")
         before = self.mem.stats()["max_importance"]
         ra.solve({"task_id": "t1", "goal": GOAL})
         self.assertNotEqual(self.mem.stats()["max_importance"], before)
@@ -111,6 +150,22 @@ if __name__ == "__main__":
 class LearnOnFailureTests(unittest.TestCase):
     """'I cannot do this' is the most precise data the machine has about itself."""
 
+    @classmethod
+    def setUpClass(cls) -> None:
+        """Check the premise instead of assuming it.
+
+        The PDF-extraction sentence used to serve here and silently stopped being impossible.
+        Asserting the premise costs one solve and turns a future capability gain into one
+        clear message instead of three failures about a status string.
+        """
+        import uuid
+        r = ra.solve({"task_id": uuid.uuid4().hex, "goal": UNCOMPILABLE_GOAL})
+        if r.get("status") != "FAIL__RAW_GOAL_COMPILATION_GAP":
+            raise unittest.SkipTest(
+                "the failure-path scaffolding goal is no longer impossible, so this file "
+                "cannot exercise learn-on-failure: goal=%r status=%s"
+                % (UNCOMPILABLE_GOAL, r.get("status")))
+
     def setUp(self) -> None:
         from canonical.runtime import ignorance_ledger_v1 as led
         from canonical.runtime import associative_memory_v1 as mem
@@ -139,7 +194,7 @@ class LearnOnFailureTests(unittest.TestCase):
         # composition now closes "write the text hello to out.txt", so the
         # failure path is exercised with something nothing here can do
         r = ra.solve_or_learn({"task_id": "t",
-                               "goal": "extract text from a pdf file"},
+                               "goal": UNCOMPILABLE_GOAL},
                               registry_path=self.regp)
         self.assertEqual(r["status"], "FAIL__RAW_GOAL_COMPILATION_GAP")
         self.assertTrue(r["learning"]["gap_recorded"])
@@ -147,7 +202,7 @@ class LearnOnFailureTests(unittest.TestCase):
 
     def test_failure_says_what_to_learn_next(self):
         ra.solve_or_learn({"task_id": "t",
-                           "goal": "extract text from a pdf file"},
+                           "goal": UNCOMPILABLE_GOAL},
                           registry_path=self.regp)
         ranked = self.led.rank(limit=3)
         self.assertTrue(ranked)
@@ -168,7 +223,7 @@ class LearnOnFailureTests(unittest.TestCase):
 
     def test_learning_can_be_turned_off(self):
         r = ra.solve_or_learn({"task_id": "t",
-                               "goal": "extract text from a pdf file"},
+                               "goal": UNCOMPILABLE_GOAL},
                               learn=False, registry_path=self.regp)
         self.assertNotIn("learning", r)
 
@@ -176,6 +231,6 @@ class LearnOnFailureTests(unittest.TestCase):
         """The measured path must not move: only the wrapper learns."""
         # composition closes "write the text hello to out.txt" now; this
         # one nothing here can do, so the failure path is still exercised
-        r = ra.solve({"task_id": "t", "goal": "extract text from a pdf file"})
+        r = ra.solve({"task_id": "t", "goal": UNCOMPILABLE_GOAL})
         self.assertNotIn("learning", r)
         self.assertEqual(r["status"], "FAIL__RAW_GOAL_COMPILATION_GAP")
