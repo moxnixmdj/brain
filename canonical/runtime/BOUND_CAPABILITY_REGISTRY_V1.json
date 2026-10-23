@@ -5555,6 +5555,23 @@
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/file_write_text.py",
         "modules": []
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "autonomous_acquisition": true,
+        "independent_output_bytes": 74,
+        "independent_output_sha256": "8ce68071a92cb992f8dfae9d70db838c0996f6960f8c4f489e3e72e0c21faad6",
+        "independent_verified": true,
+        "mission_id": "ASTRA-AUTO-VERIFY-TEXT-FILE-WRITE-001",
+        "observed_effect": {
+          "adapter": "file_write_text",
+          "content_sha256": "8ce68071a92cb992f8dfae9d70db838c0996f6960f8c4f489e3e72e0c21faad6",
+          "output_bytes": 74,
+          "output_path": "canonical/astra_runtime/tmp/tfw_verify/TEXT_FILE_WRITE_PROOF.txt",
+          "output_sha256": "8ce68071a92cb992f8dfae9d70db838c0996f6960f8c4f489e3e72e0c21faad6",
+          "output_verified": true
+        },
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-AUTO-VERIFY-TEXT-FILE-WRITE-001__text.file.write__AUTO_VERIFY.json"
       }
     },
     "web.browser.rendered.capture.chromedriver": {

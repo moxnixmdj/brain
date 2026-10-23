@@ -1,0 +1,11 @@
+{
+  "acceptance": "The independently computed sha256 of the file on disk equals the sha256 of the content that was asked for, and equals the digest the adapter itself reported.",
+  "capability_id": "text.file.write",
+  "cost_usd": 0,
+  "created_at_utc": "2026-10-23T17:06:12Z",
+  "independence": "The verifier does not import or call the adapter; it reads the filesystem directly.",
+  "method": "Invoke the bound adapter once on a fresh path, then confirm the bytes on disk through a separate code path (pathlib.read_bytes + hashlib.sha256) that shares no code with the adapter.",
+  "mission_id": "ASTRA-VERIFY-TEXT-FILE-WRITE-001",
+  "objective": "Establish whether text.file.write really writes the exact bytes it is given to a repository-local file, so that the registry can carry proof instead of an unverified claim.",
+  "schema": "PROJECT_BRAIN_VERIFICATION_MISSION_V1"
+}
