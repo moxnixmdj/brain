@@ -22433,7 +22433,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "76ddc81f8f731494cdff62fd3596d5df539af626a3067948f3adf7d4de6c3b8f",
+    "source_sha256": "4648a8e7fbe9a208a8b2e16f391c44c1d3d8dde51271e2eb1446c89bde9c3241",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24416,7 +24416,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6637e423952e533dbbc160025c054357cb0a248cfeb9ea9285a6bfdbd23ebf6d"
+  "value": "4f284fd285d3e6563c0a018b854962652397c0fd413222559cf66999128ae9f6"
  },
  "engines": [
   {
@@ -46318,7 +46318,7 @@
   "included_source_count": 863,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "a2ee0624a89eeeb81724276d0431bf039c55d4231729785209eca0fa3b41ae7c"
+  "source_tree_digest": "a3877ff12c7ee50cf96050983c0dbe3b147621c0d5225f2bb028f64ae5c9d6a5"
  },
  "research_index": [
   {

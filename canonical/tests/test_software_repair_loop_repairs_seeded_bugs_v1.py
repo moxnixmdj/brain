@@ -643,5 +643,125 @@ class AuditAndMeasurementEvidenceTests(unittest.TestCase):
         self.assertNotEqual(ev.get("stderr_sha256"), self.EMPTY_SHA)
 
 
+PYTEST_STYLE = "import calc\n\n\ndef test_add():\n    assert calc.add(2, 3) == 5\n"
+PYTEST_STYLE_MULTI = (
+    "import calc\n\n\ndef test_add():\n    assert calc.add(2, 3) == 5\n\n\n"
+    "def test_add_zero():\n    assert calc.add(0, 0) == 0\n"
+)
+
+
+class PytestStyleSuiteTests(unittest.TestCase):
+    """A suite that is not a unittest suite at all must still be collected, run and counted.
+
+    710 files in this repository hold 3880 bare ``def test_*`` functions in the pytest style, with no
+    unittest.TestCase anywhere. From those the unittest loader collects nothing, and the runpy
+    fallback executes the module body but never enters a function - so the tests were invisible in
+    exactly the way the guard-less unittest files were, one shape over. Measured before this change,
+    on a broken function with a pytest-style suite:
+
+      python.tests.audit.unittest                    test_count 0, failed_count 0
+      python.fault.localize.dynamic.dataflow.v1      NO_FAILING_TEST
+      python.software.repair.loop.strict_progress    BASELINE_ALREADY_PASSES
+
+    The functions are now wrapped in unittest.FunctionTestCase, the standard library type built for
+    exactly that, so they run through the same runner and print the same summary the auditor and the
+    repair scorers parse. A function needing an argument is skipped rather than guessed at.
+    """
+
+    @classmethod
+    def tearDownClass(cls):
+        shutil.rmtree(WORK_ROOT, ignore_errors=True)
+
+    def _seed_pytest(self, name, source, test_source=PYTEST_STYLE):
+        d = WORK_ROOT / name
+        if d.exists():
+            shutil.rmtree(d)
+        d.mkdir(parents=True)
+        (d / "calc.py").write_text(source, encoding="utf-8")
+        (d / "test_calc.py").write_text(test_source, encoding="utf-8")
+        return d
+
+    def test_the_auditor_counts_a_pytest_style_failure(self):
+        work = self._seed_pytest("pyt_audit", CASES[0][1])
+        r = runtime._invoke_bound_capability({
+            "capability_id": "python.tests.audit.unittest", "source_root": str(work),
+            "test_paths": [str(work / "test_calc.py")], "output_path": str(work / "a.json")})
+        self.assertEqual(r.get("test_count"), 1, "a pytest-style file must not audit as zero tests")
+        self.assertEqual(r.get("failed_count"), 1)
+
+    def test_every_bare_function_is_collected_not_just_the_first(self):
+        work = self._seed_pytest("pyt_multi", "def add(a, b):\n    return a - b\n", PYTEST_STYLE_MULTI)
+        r = runtime._invoke_bound_capability({
+            "capability_id": "python.tests.audit.unittest", "source_root": str(work),
+            "test_paths": [str(work / "test_calc.py")], "output_path": str(work / "a.json")})
+        self.assertEqual(r.get("test_count"), 2, "both bare functions must be collected")
+        self.assertEqual(r.get("failed_count"), 1, "only the one that actually fails")
+        self.assertEqual(r.get("passed_count"), 1)
+
+    def test_a_passing_pytest_style_suite_counts_as_passing(self):
+        work = self._seed_pytest("pyt_pass", "def add(a, b):\n    return a + b\n")
+        r = runtime._invoke_bound_capability({
+            "capability_id": "python.tests.audit.unittest", "source_root": str(work),
+            "test_paths": [str(work / "test_calc.py")], "output_path": str(work / "a.json")})
+        self.assertEqual((r.get("test_count"), r.get("failed_count"), r.get("passed_count")), (1, 0, 1))
+
+    def test_the_localizer_ranks_the_faulty_symbol_from_a_pytest_style_suite(self):
+        work = self._seed_pytest("pyt_loc", CASES[0][1])
+        r = runtime._invoke_bound_capability({
+            "capability_id": "python.fault.localize.dynamic.dataflow.v1", "source_root": str(work),
+            "test_paths": [str(work / "test_calc.py")], "output_path": str(work / "l.json")})
+        self.assertTrue(r.get("ranked_symbols"), "pytest-style suite must still localize: " + repr(r))
+        self.assertEqual(r["ranked_symbols"][0]["symbol"], "add")
+
+    def test_the_whole_family_repairs_a_pytest_style_failure(self):
+        work = self._seed_pytest("pyt_family", CASES[0][1])
+        broken = {}
+        for cid in WholeFamilyTests.FAMILY:
+            args = {"capability_id": cid, "test_paths": [str(work / "test_calc.py")],
+                    "output_path": str(work / ("o" + cid.replace(".", "_") + ".json"))}
+            if cid == "python.patch.search.test_guided.ast.v1":
+                args["source_path"] = str(work / "calc.py")
+            elif cid == "python.software.repair.loop.test_guided.ast.v1":
+                args["source_paths"] = [str(work / "calc.py")]
+            else:
+                args["source_root"] = str(work)
+            try:
+                r = runtime._invoke_bound_capability(args)
+                if not r.get("pass"):
+                    broken[cid] = str(r.get("status"))
+            except Exception as exc:  # noqa: BLE001
+                broken[cid] = type(exc).__name__
+        self.assertEqual(broken, {}, "did not repair: " + repr(broken))
+
+    def test_correct_code_with_a_pytest_style_suite_is_still_refused(self):
+        work = self._seed_pytest("pyt_correct", "def add(a, b):\n    return a + b\n")
+        for cid in WholeFamilyTests.FAMILY:
+            args = {"capability_id": cid, "test_paths": [str(work / "test_calc.py")],
+                    "output_path": str(work / ("c" + cid.replace(".", "_") + ".json"))}
+            if cid == "python.patch.search.test_guided.ast.v1":
+                args["source_path"] = str(work / "calc.py")
+            elif cid == "python.software.repair.loop.test_guided.ast.v1":
+                args["source_paths"] = [str(work / "calc.py")]
+            else:
+                args["source_root"] = str(work)
+            try:
+                r = runtime._invoke_bound_capability(args)
+                self.assertFalse(r.get("pass"), cid + " fabricated a repair for correct code")
+            except Exception:
+                pass  # refusing by exception is also a refusal
+
+    def test_a_function_needing_an_argument_is_skipped_not_guessed(self):
+        """A fixture-parameterised test must not be called with a fabricated argument."""
+        work = self._seed_pytest(
+            "pyt_fixture", "def add(a, b):\n    return a + b\n",
+            "import calc\n\n\ndef test_with_fixture(tmp_path):\n    assert calc.add(1, 1) == 2\n\n\n"
+            "def test_plain():\n    assert calc.add(1, 1) == 2\n")
+        r = runtime._invoke_bound_capability({
+            "capability_id": "python.tests.audit.unittest", "source_root": str(work),
+            "test_paths": [str(work / "test_calc.py")], "output_path": str(work / "a.json")})
+        self.assertEqual(r.get("test_count"), 1, "the fixture-parameterised function must be skipped")
+        self.assertEqual(r.get("error_count"), 0, "skipping must not be recorded as an error")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -212,6 +212,14 @@ runpy.run_path(..., run_name="__main__") only executes the tests when the file c
 to be collected by a runner. For those the traced child produced no failures at all, so the caller
 raised NO_FAILING_TEST and the whole localization-and-repair chain was dead on a third of the corpus.
 
+A second shape is not a unittest suite at all: 710 files in this repository hold 3880 bare
+``def test_*`` functions in the pytest style, from which the unittest loader collects nothing. The
+runpy fallback executes the module but never enters a function body, so those tests were invisible
+too. They are wrapped in unittest.FunctionTestCase, the standard library type built for exactly
+that, so they run through the same runner and produce the same parseable summary. A function that
+requires an argument is skipped rather than guessed at, and a module with neither shape still falls
+back to runpy.
+
 Loading the module and running the collected suite works for both shapes, and the first failure is
 re-raised with its original traceback so the caller can still rank the lines that actually executed.
 The suite is run through unittest.TextTestRunner so the child still prints the standard summary and
@@ -219,7 +227,19 @@ FAIL:/ERROR: lines, which is what the repair loops parse to score a baseline; th
 then re-raised so a tracing caller can still rank the lines that executed. Files that are not
 unittest suites fall back to runpy, so nothing that worked before changes.
 """
-SUITE_RUNNER = """import importlib.util,unittest
+SUITE_RUNNER = """import importlib.util,inspect,unittest
+def _brain_bare_functions(mod):
+ out=[]
+ for name in sorted(vars(mod)):
+  if not name.startswith("test_"):continue
+  fn=vars(mod)[name]
+  if not callable(fn):continue
+  try:params=list(inspect.signature(fn).parameters.values())
+  except (TypeError,ValueError):continue
+  needs=[p for p in params if p.default is p.empty and p.kind in (p.POSITIONAL_ONLY,p.POSITIONAL_OR_KEYWORD)]
+  if needs:continue
+  out.append((name,fn))
+ return out
 def _brain_run_suite(target):
  import runpy,sys
  spec=importlib.util.spec_from_file_location("__brain_suite__",str(target))
@@ -227,7 +247,10 @@ def _brain_run_suite(target):
  spec.loader.exec_module(mod)
  suite=unittest.TestLoader().loadTestsFromModule(mod)
  if suite.countTestCases()==0:
-  runpy.run_path(str(target),run_name="__main__");return
+  bare=_brain_bare_functions(mod)
+  if not bare:
+   runpy.run_path(str(target),run_name="__main__");return
+  suite=unittest.TestSuite(unittest.FunctionTestCase(fn) for _,fn in bare)
  class _R(unittest.TestResult):
   def __init__(self,*a,**k):unittest.TestResult.__init__(self);self.err=None
   def addFailure(self,test,err):unittest.TestResult.addFailure(self,test,err);self.err=err
