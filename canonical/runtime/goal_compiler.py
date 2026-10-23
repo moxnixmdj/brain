@@ -353,6 +353,44 @@ def _claimed_paths(result):
     return claimed
 
 
+def _find_suite_argv(mod, _seen=None, _depth=0):
+    """Follow an adapter's own delegation chain to the suite runner it uses.
+
+    ``test_argv`` is optional in every adapter that takes it, because each falls
+    back to a shared ``suite_argv`` that embeds the collecting suite runner.  The
+    adapters reach that helper at different depths:
+
+        python_software_repair_loop_v1.py                  ptg.suite_argv            depth 1
+        python_repair_measured_acceptance_controller_v1.py _REPAIR._PATCH.suite_argv depth 2
+        python_repair_semantic_acceptance_controller_v1.py v8._REPAIR._PATCH....     depth 3
+
+    Searching only one module level found the first and missed the other two, so
+    those capabilities could never bind ``test_argv`` and were unreachable from
+    any sentence however well it described the work.  The delegation is real in
+    all three; only the discovery stopped early.
+
+    Bounded on purpose: a visited set stops import cycles and a depth cap stops
+    an unbounded walk.  ``suite_argv`` is a project-specific name, so reaching it
+    anywhere in the adapter's own import graph means it is the project's runner
+    rather than something unrelated.
+    """
+    import types
+    seen=_seen if _seen is not None else set()
+    if id(mod) in seen or _depth>4:
+        return None
+    seen.add(id(mod))
+    fn=getattr(mod,"suite_argv",None)
+    if callable(fn):
+        return fn
+    for name in dir(mod):
+        obj=getattr(mod,name,None)
+        if isinstance(obj,types.ModuleType):
+            found=_find_suite_argv(obj,seen,_depth+1)
+            if found is not None:
+                return found
+    return None
+
+
 def _adapter_default_argv(entry, root, targets):
     """The command line the capability's OWN adapter would derive, or None.
 
@@ -377,19 +415,7 @@ def _adapter_default_argv(entry, root, targets):
         spec.loader.exec_module(mod)
     except Exception:
         return None
-    fn=getattr(mod,"suite_argv",None)
-    if not callable(fn):
-        # Most adapters do not define it; they delegate --
-        # `args.get("test_argv") or _PATCH.suite_argv(...)`.  Follow that
-        # delegation instead of copying the runner it embeds.
-        import types
-        for name in dir(mod):
-            obj=getattr(mod,name,None)
-            if isinstance(obj,types.ModuleType):
-                cand=getattr(obj,"suite_argv",None)
-                if callable(cand):
-                    fn=cand
-                    break
+    fn=_find_suite_argv(mod)
     if not callable(fn):
         return None
     try:
