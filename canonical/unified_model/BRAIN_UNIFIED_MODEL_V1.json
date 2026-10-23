@@ -24407,7 +24407,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6318,
+  "research_index_records": 6319,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24416,7 +24416,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b36ed66dfce6f3ef069148b8f574ba397f88b3c5c00f608c9c5516a4b14c2a6c"
+  "value": "6ecf8d75c71feec40b2ecb2bc9b7d5de04a82d053976b94418643723fc19392a"
  },
  "engines": [
   {
@@ -188934,6 +188934,51 @@
     "sqlite_table_verify_against_json_records_goes_from_bound_apt_metadata_not_found_sqlite3_to_running_on_this_host_through_pythons_own_sqlite3_module__measured_by_the_failure_moving_off_the_substrate_gate_entirely_and_into_row_comparison_as_sqlite_column_unresolved_source_type__on_the_23_goal_benchmark_compiled_stays_23_of_23_correct_selection_21_of_23_wrong_capability_2_of_23_and_by_census_executed_11_of_23_and_semantic_acceptance_9_of_23_all_unchanged_so_there_is_no_regression_and_the_gain_is_a_restored_capability_not_a_moved_rate": 1,
     "sqlite_verifier_substrate_declared_as_the_stdlib_module_it_actually_uses_v1_20261021_v1": 1,
     "the_sqlite_verifier_was_declared_as_an_ubuntu_apt_package_so_on_a_host_without_the_sqlite3_cli_the_substrate_gate_raised_bound_apt_metadata_not_found_and_the_capability_never_ran_at_all__even_though_its_adapter_catches_filenotfounderror_and_imports_the_stdlib_module_and_its_own_entry_already_carried_optional_true_with_a_python_stdlib_fallback_and_an_optional_reason_naming_that_adapter__the_gate_read_none_of_those_fields": 1,
+    "v1": 2
+   }
+  },
+  {
+   "action_id": "LIST_INPUTS_AND_ADAPTER_DERIVED_ARGV_BOUND_FROM_THE_SENTENCE_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/LIST_INPUTS_AND_ADAPTER_DERIVED_ARGV_BOUND_FROM_THE_SENTENCE_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/LIST_INPUTS_AND_ADAPTER_DERIVED_ARGV_BOUND_FROM_THE_SENTENCE_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "4c635e1e063778de4a5af5f30b3837660483f94511d162fc554af95bd89a50ab",
+   "status": "",
+   "terms": {
+    "20261023": 1,
+    "abandon": 1,
+    "about": 1,
+    "adapter": 1,
+    "adapters": 1,
+    "already": 1,
+    "anywhere": 1,
+    "appear": 1,
+    "argv": 1,
+    "before": 1,
+    "both": 1,
+    "bound": 1,
+    "cannot": 1,
+    "columns": 1,
+    "data": 1,
+    "demanding": 1,
+    "derived": 2,
+    "document": 1,
+    "either": 1,
+    "fact": 1,
+    "family": 2,
+    "file": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 1,
+    "had": 1,
+    "inputs": 1,
+    "interpreter": 1,
+    "json": 1,
+    "list_inputs_and_adapter_derived_argv_bound_from_the_sentence_v1_20261023_v1": 2,
+    "sentence": 2,
+    "source": 2,
     "v1": 2
    }
   },
