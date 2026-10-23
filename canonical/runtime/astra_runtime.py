@@ -989,8 +989,33 @@ def _ensure_git_source_tree_dependency(source):
       "total_bytes":int(manifest.get("total_bytes") or 0),
     }
 
+# Registry source types whose dependency is satisfiable on THIS machine without acquiring
+# anything: a composition of stdlib modules is still a stdlib dependency, a brain-owned Python
+# adapter has no external dependency at all, and a brain-bound system tool is a system tool whose
+# executable is named by ``engine``.  Measured before this existed: all 16 entries carrying these
+# five types were refused with BOUND_CAPABILITY_SOURCE_UNSUPPORTED even though every one declares
+# a real adapter and an ``invoke_capability`` template -- 16 of 72, 22% of the bound surface.
+LOCAL_SOURCE_BASE_TYPE={
+  "python_stdlib_composition":"python_stdlib",
+  "brain_bound_system_tool":"system_tool",
+  "brain_native_deterministic":None,
+  "brain_native_deterministic_composition":None,
+  "brain_owned_python_composition":None,
+}
+
+
 def _ensure_local_dependency(source):
     typ=str(source.get("type") or "").strip()
+    if typ in LOCAL_SOURCE_BASE_TYPE:
+        base=LOCAL_SOURCE_BASE_TYPE[typ]
+        if base is None:
+            # Pure in-repo Python: the adapter file itself is the dependency, and it is
+            # loaded and entrypoint-checked immediately below. Nothing to acquire.
+            return {"status":"LOCAL_VERIFIED","type":typ,"external_dependency":None}
+        source=dict(source); source["type"]=base
+        if base=="system_tool" and not str(source.get("executable") or "").strip():
+            source["executable"]=source.get("engine")
+        typ=base
     if typ=="python_stdlib":
         raw_modules=source.get("modules")
         if raw_modules is None:
@@ -1210,6 +1235,35 @@ def _ensure_apt_dependencies(source):
             raise Blocker("BOUND_APT_INSTALLED_VERSION_MISMATCH:"+name+":"+str(observed or ""))
     return {"status":"INSTALLED_VERIFIED","origin":source.get("origin"),"packages":evidence}
 
+def _resolve_bound_adapter_path(entry,module_name):
+    """Where this entry's adapter module actually lives.
+
+    The convention is ``canonical/runtime/bound_capabilities/<adapter_module>.py``, and 71 of the
+    72 bound entries follow it.  One -- ``python.task.acceptance.measured.objective.v1`` -- declares
+    its own ``source.adapter_path`` under ``canonical/runtime/`` instead, and that file exists.  The
+    loader ignored the declaration and looked only in the conventional directory, so a capability
+    whose adapter was present on disk was refused with BOUND_CAPABILITY_ADAPTER_MISSING and could
+    never run on any path.  The declaration is now honoured, and narrowly: the path must be
+    relative, stay inside ``canonical/runtime/``, resolve without escaping it, name exactly the
+    declared module, and be a real file.  Anything else still fails closed.
+    """
+    default=ROOT/"canonical"/"runtime"/"bound_capabilities"/(module_name+".py")
+    declared=str((entry.get("source") or {}).get("adapter_path") or "").strip()
+    if not declared:
+        return default
+    if declared.startswith("/") or ".." in pathlib.PurePosixPath(declared).parts:
+        raise Blocker("BOUND_CAPABILITY_ADAPTER_PATH_UNSAFE:"+declared)
+    candidate=(ROOT/declared).resolve()
+    allowed=(ROOT/"canonical"/"runtime").resolve()
+    if allowed not in candidate.parents:
+        raise Blocker("BOUND_CAPABILITY_ADAPTER_PATH_OUTSIDE_RUNTIME:"+declared)
+    if candidate.stem!=module_name or candidate.suffix!=".py":
+        raise Blocker("BOUND_CAPABILITY_ADAPTER_PATH_MODULE_MISMATCH:"+declared)
+    if not candidate.is_file():
+        raise Blocker("BOUND_CAPABILITY_ADAPTER_MISSING")
+    return candidate
+
+
 def _invoke_bound_capability(args):
     cid=str(args.get("capability_id") or "").strip()
     if not cid:
@@ -1236,16 +1290,14 @@ def _invoke_bound_capability(args):
     elif source.get("type")=="git_source_tree":
         dependency=_ensure_git_source_tree_dependency(source)
         call_args["_source_root"]=dependency.get("source_root")
-    elif source.get("type") in {"python_stdlib","system_tool"}:
+    elif source.get("type") in {"python_stdlib","system_tool"} or source.get("type") in LOCAL_SOURCE_BASE_TYPE:
         dependency=_ensure_local_dependency(source)
     elif source.get("type"):
         raise Blocker("BOUND_CAPABILITY_SOURCE_UNSUPPORTED:"+str(source.get("type")))
     module_name=str(entry.get("adapter_module") or "")
     if not module_name or any(ch not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_" for ch in module_name):
         raise Blocker("BOUND_CAPABILITY_ADAPTER_INVALID")
-    path=ROOT/"canonical"/"runtime"/"bound_capabilities"/(module_name+".py")
-    if not path.is_file():
-        raise Blocker("BOUND_CAPABILITY_ADAPTER_MISSING")
+    path=_resolve_bound_adapter_path(entry,module_name)
     spec=importlib.util.spec_from_file_location("project_brain_bound_"+module_name,path)
     if spec is None or spec.loader is None:
         raise Blocker("BOUND_CAPABILITY_ADAPTER_LOAD_FAILED")
