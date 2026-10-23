@@ -74,7 +74,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if not isinstance(args,Mapping):raise RepairLoopError('ARGS_NOT_OBJECT')
  repo=pathlib.Path(root).resolve();src=_safe_dir(repo,args.get('source_root','.'));tests=[_safe_file(repo,x) for x in (args.get('test_paths') or [])]
  if not tests:raise RepairLoopError('TEST_PATHS_REQUIRED')
- argv=[str(x) for x in (args.get('test_argv') or [sys.executable]+[_rel(repo,p) for p in tests])]
+ argv=[str(x) for x in (args.get('test_argv') or _PATCH.suite_argv(sys.executable,*tests))]
  timeout=max(1,min(int(args.get('timeout_s',30)),300));rounds_max=max(1,min(int(args.get('max_rounds',6)),20));files_max=max(1,min(int(args.get('max_files',12)),100));per=max(1,min(int(args.get('max_candidates_per_file',250)),5000));total_max=max(1,min(int(args.get('max_total_candidates',2000)),50000))
  out=(repo/str(args.get('output_path') or '')).resolve()
  if out==repo or repo not in out.parents:raise RepairLoopError('OUTPUT_PATH_OUTSIDE_REPOSITORY')

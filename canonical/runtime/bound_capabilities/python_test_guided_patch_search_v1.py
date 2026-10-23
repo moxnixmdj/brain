@@ -214,7 +214,10 @@ raised NO_FAILING_TEST and the whole localization-and-repair chain was dead on a
 
 Loading the module and running the collected suite works for both shapes, and the first failure is
 re-raised with its original traceback so the caller can still rank the lines that actually executed.
-Files that are not unittest suites fall back to runpy, so nothing that worked before changes.
+The suite is run through unittest.TextTestRunner so the child still prints the standard summary and
+FAIL:/ERROR: lines, which is what the repair loops parse to score a baseline; the first failure is
+then re-raised so a tracing caller can still rank the lines that executed. Files that are not
+unittest suites fall back to runpy, so nothing that worked before changes.
 """
 SUITE_RUNNER = """import importlib.util,unittest
 def _brain_run_suite(target):
@@ -226,15 +229,42 @@ def _brain_run_suite(target):
  if suite.countTestCases()==0:
   runpy.run_path(str(target),run_name="__main__");return
  class _R(unittest.TestResult):
+  def __init__(self,*a,**k):unittest.TestResult.__init__(self);self.err=None
   def addFailure(self,test,err):unittest.TestResult.addFailure(self,test,err);self.err=err
   def addError(self,test,err):unittest.TestResult.addError(self,test,err);self.err=err
- res=_R();suite.run(res)
+ res=unittest.TextTestRunner(stream=sys.stderr,resultclass=_R).run(suite)
  if not res.wasSuccessful():
-  err=getattr(res,"err",None)
-  if err:raise err[1].with_traceback(err[2])
+  if res.err:raise res.err[1].with_traceback(res.err[2])
   raise AssertionError("SUITE_FAILED_WITHOUT_EXCEPTION_INFO")
 """
 
+
+
+SUITE_ENTRY = (
+    "import pathlib,sys\n"
+    "_errs=[]\n"
+    "for _t in sys.argv[1:]:\n"
+    " try:_brain_run_suite(pathlib.Path(_t).resolve())\n"
+    " except BaseException as _e:_errs.append(_e)\n"
+    "if _errs:raise _errs[0]\n"
+)
+
+
+def suite_argv(executable: Any, *targets: Any) -> list[str]:
+    """A command line that runs suites through the loader instead of executing the files.
+
+    Running a test file as a script only starts the tests when the file carries a __main__ guard, and
+    34% of the unittest files in this repository (695 of 2019, measured) do not, because they are
+    written to be collected by a runner. Such a run executes nothing and exits 0, which a repair loop
+    reads as BASELINE_ALREADY_PASSES - a false "already passes" for a program that fails its own test.
+    Delegating to SUITE_RUNNER collects the tests the way a real runner does and falls back to runpy
+    for files that are not unittest suites, so the shape of the file stops deciding whether a
+    capability can see its failures.
+
+    Every suite named is run and the first failure is re-raised, so a baseline over several files
+    fails if any one of them fails, which is what a repair loop needs.
+    """
+    return [str(executable), "-c", SUITE_RUNNER + SUITE_ENTRY] + [str(x) for x in targets]
 
 
 def _source_env(*paths: Any) -> dict[str, str]:
@@ -314,7 +344,7 @@ def run(args: Mapping[str, Any], root: str|os.PathLike[str]) -> dict[str, Any]:
     tests=[_safe_file(repo,x,suffix=".py") for x in tests_raw]
     argv=args.get("test_argv")
     if argv is None:
-        argv=[sys.executable]+[str(p.relative_to(repo)) for p in tests]
+        argv=suite_argv(sys.executable,*tests)
     if not isinstance(argv,list):
         raise PatchSearchError("TEST_ARGV_INVALID")
     argv=[str(x) for x in argv]
@@ -328,7 +358,7 @@ def run(args: Mapping[str, Any], root: str|os.PathLike[str]) -> dict[str, Any]:
         source_text=original_bytes.decode("utf-8")
     except UnicodeDecodeError as exc:
         raise PatchSearchError("SOURCE_NOT_UTF8") from exc
-    env=_source_env(source)
+    env=_source_env(source,*tests)
     baseline=_run_tests(repo,argv,timeout_s,env)
     if baseline["returncode"]==0:
         raise PatchSearchError("BASELINE_ALREADY_PASSES")

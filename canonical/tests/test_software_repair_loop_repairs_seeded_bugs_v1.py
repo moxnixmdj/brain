@@ -492,5 +492,94 @@ class GuardlessSuiteTests(unittest.TestCase):
         self.assertTrue(r.get("ranked_symbols"), "plain-assert suite must still be traced: " + repr(r))
 
 
+class DerivedCommandTests(unittest.TestCase):
+    """When no test_argv is supplied, every capability must derive a command line that really runs.
+
+    Seven adapters built their default as [python, <test file>], which executes the file as a script.
+    That only starts the tests if the file carries a __main__ guard, and 695 of the 2019 unittest
+    files in this repository (34%, measured) do not. Such a run executes nothing and exits 0, so a
+    repair loop read it as BASELINE_ALREADY_PASSES: for a third of the corpus the tool reported the
+    code already passes, for a program that fails its own test. That is the most dangerous shape of
+    false positive in a repair tool, because it looks like a clean bill of health.
+
+    The derived command line now goes through the same loader the localizer uses, which prints the
+    standard unittest summary the repair loops parse to score a baseline and re-raises the first
+    failure so a tracing caller can still rank the lines that executed.
+    """
+
+    FAMILY = [
+        "python.patch.search.test_guided.ast.v1",
+        "python.software.repair.loop.strict_progress.ast.v1",
+        "python.software.repair.loop.test_guided.ast.v1",
+        "python.software.repair.loop.coupled.ast.v1",
+        "python.software.repair.guided.provenance.coupled.v1",
+    ]
+
+    @classmethod
+    def tearDownClass(cls):
+        shutil.rmtree(WORK_ROOT, ignore_errors=True)
+
+    def _run_family(self, name, source, guard):
+        work = _seed(name, source, CASES[0][2], guard=guard)
+        out = {}
+        for cid in self.FAMILY:
+            args = {"capability_id": cid, "test_paths": [str(work / "test_calc.py")],
+                    "output_path": str(work / ("o" + cid.replace(".", "_") + ".json"))}
+            if cid == "python.patch.search.test_guided.ast.v1":
+                args["source_path"] = str(work / "calc.py")
+            elif cid == "python.software.repair.loop.test_guided.ast.v1":
+                args["source_paths"] = [str(work / "calc.py")]
+            else:
+                args["source_root"] = str(work)
+            try:
+                r = runtime._invoke_bound_capability(args)
+                out[cid] = (bool(r.get("pass")), str(r.get("status")))
+            except Exception as exc:  # noqa: BLE001 - the exception name is the finding
+                out[cid] = (False, type(exc).__name__)
+        return out
+
+    def test_a_guardless_failing_suite_is_repaired_not_reported_as_passing(self):
+        results = self._run_family("derived_guardless", CASES[0][1], guard=False)
+        lying = {k: v for k, v in results.items()
+                 if v[1] == "BASELINE_ALREADY_PASSES"}
+        self.assertEqual(lying, {}, "reported 'already passes' for code that fails: " + repr(lying))
+        broken = {k: v for k, v in results.items() if not v[0]}
+        self.assertEqual(broken, {}, "did not repair: " + repr(broken))
+
+    def test_the_guarded_shape_still_repairs_after_the_same_change(self):
+        """The change must not trade one shape for the other."""
+        self.assertEqual(
+            sorted(k for k, v in self._run_family("derived_guarded", CASES[0][1], guard=True).items() if v[0]),
+            sorted(self.FAMILY))
+
+    def test_a_genuinely_passing_suite_is_still_refused_not_repaired(self):
+        """The safety property: correct code must not be 'fixed'."""
+        results = self._run_family("derived_passing", "def add(a, b):\n    return a + b\n", guard=False)
+        for cid, (passed, status) in results.items():
+            self.assertFalse(passed, cid + " fabricated a repair for correct code")
+            self.assertNotEqual(status, "PASS__VERIFIED_CANDIDATE_PATCH_FOUND", cid)
+
+    def test_the_derived_command_line_prints_the_summary_the_scorer_parses(self):
+        """A baseline the scorer cannot parse is the regression this pins shut."""
+        import python_test_guided_patch_search_v1 as PS
+
+        work = _seed("derived_summary", CASES[0][1], CASES[0][2], guard=False)
+        argv = PS.suite_argv("python3", work / "test_calc.py")
+        result = PS._run_tests(work, argv, 60, PS._source_env(work))
+        self.assertNotEqual(result["returncode"], 0, "the seeded suite genuinely fails")
+        import python_iterative_software_repair_loop_v1 as LOOP
+
+        self.assertIsNotNone(LOOP._score(result),
+                             "scorer could not parse the child output: " + repr(result)[:400])
+
+    def test_suite_argv_names_every_target_and_runs_them_all(self):
+        import python_test_guided_patch_search_v1 as PS
+
+        argv = PS.suite_argv("python3", "/a.py", "/b.py")
+        self.assertEqual(argv[0], "python3")
+        self.assertEqual(argv[1], "-c")
+        self.assertEqual(argv[3:], ["/a.py", "/b.py"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

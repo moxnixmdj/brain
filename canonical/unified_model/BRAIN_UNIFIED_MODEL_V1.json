@@ -22433,7 +22433,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "dd9d569efd41ddd07c534d21631e0de197f88655609bb99800789eb087c0d135",
+    "source_sha256": "76ddc81f8f731494cdff62fd3596d5df539af626a3067948f3adf7d4de6c3b8f",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22601,7 +22601,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py",
-    "source_sha256": "057c0964be27cd96149412465ef36f4b4363017586781f30e06d787d74046ad5",
+    "source_sha256": "96ac2dcd00e7f16e4a93190402cdec06ff94646ca87add16923f21c45878c6ba",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -22687,7 +22687,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
-    "source_sha256": "6900aef5331202edbd570af3c33c3f66d32ca4f4c71799639d2878e41b2f28ca",
+    "source_sha256": "33e3d79d6fb5f92bac84706da92331624eff3147939382e9034dab39bf4310ef",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22778,7 +22778,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py",
-    "source_sha256": "cbe8e8a4dbe778461b0f7fa4b79e24ae9fe1feef08bdf81c77b01d5ab3a0268f",
+    "source_sha256": "d9a9a8006e8198bbd84bc702fd72a86b657b9993754e47d4655224c9a5e56f9d",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -22867,7 +22867,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py",
-    "source_sha256": "eb47db82d2da3503e6a44264f709fa0ff27340a62adb35129cf8aa3def9a7d25",
+    "source_sha256": "05742806d7f16a156ddb44dabfb237f6342b6db39b337b8ca5e8d98fd5adbce7",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -22957,7 +22957,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_measured_acceptance_controller_v1.py",
-    "source_sha256": "a0bbf17a2cf7a3257b05aa3458cbc0880aceb5b99612f51bdef26018511a6396",
+    "source_sha256": "40331ef4b982ea8ac9e54cb725b27f58fba55f8ad0f1832754416193e131028e",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -23041,7 +23041,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_semantic_acceptance_controller_v1.py",
-    "source_sha256": "bec7567731a0e33e01e864b046f954909e73e9a011138df83d089a38d3e70720",
+    "source_sha256": "84829a3ee8479a62dd208bb2616c5332a74ef03227eb91f6b1bbe31ee5c62952",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -24415,7 +24415,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "02e03a23b2d162845e979e9f2b35e7c6b4a3824ddfb3a568365239ae969f40a4"
+  "value": "4a3eb06a0acbe24dfea1c5a0f5fee276d9027aafe4db5d77601bf5d8a3415e89"
  },
  "engines": [
   {
@@ -46317,7 +46317,7 @@
   "included_source_count": 863,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "4fe288e84c8db4a3966e3f1c940ef5e6e1f9829b2b5540f92c3c77744fea5297"
+  "source_tree_digest": "f905641419fd7bee0693a6c8a06b3546f1634ecc918e25a0aa0e57dc3d0a3b71"
  },
  "research_index": [
   {

@@ -200,7 +200,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     test_paths=[_safe_file(repo,x) for x in (args.get("test_paths") or [])]
     if not test_paths:
         raise RepairAcceptanceError("TEST_PATHS_REQUIRED")
-    argv=[str(x) for x in (args.get("test_argv") or [sys.executable]+[_rel(repo,p) for p in test_paths])]
+    argv=[str(x) for x in (args.get("test_argv") or _REPAIR._PATCH.suite_argv(sys.executable,*test_paths))]
     task_text=str(args.get("task_text") or "").strip()
     if not task_text:
         raise RepairAcceptanceError("TASK_TEXT_REQUIRED")
