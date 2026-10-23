@@ -308,6 +308,49 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                 result[key]=urls[0]
                 continue
             raise GoalCompilationFailure("GOAL_URL_BINDING_REQUIRED",str(len(urls)))
+        if key.endswith("_root") or key.endswith("_dir"):
+            # A *_root key names a DIRECTORY, and the binder only ever handled
+            # *_path.  Every capability whose input is source_root therefore
+            # raised GOAL_INPUT_BINDING_REQUIRED, so it could never be bound
+            # from a goal and silently lost the ranking to whatever
+            # lower-scoring candidate happened to bind -- which is how an
+            # AST-audit goal ended up selecting a semantic-behaviour compiler
+            # that scored 15 against the audit capability's 35.
+            stem=key[:-5].lower()
+            rr=pathlib.Path(root).resolve()
+            # The sentence has to give a path this role before it is used.
+            # Inferring "the parent of the only file mentioned" binds source_root
+            # out of an unrelated file -- measured: in a compound plan whose only
+            # existing file was a registry JSON, that inference bound source_root
+            # to canonical/runtime and let the AST audit steal a clause that
+            # belonged to the markdown-to-PDF capability.
+            named=bool(re.search(
+                r"\b"+re.escape(str(stem).replace("_"," "))+r"\b",str(goal),re.IGNORECASE))
+            dirs=[(raw,p) for raw,p in paths if p.is_dir()]
+            matching=[raw for raw,p in dirs if not stem or stem in raw.lower()]
+            if len(matching)==1:
+                result[key]=matching[0]
+                continue
+            if named and len(dirs)==1:
+                result[key]=dirs[0][0]
+                continue
+            if named:
+                # The sentence gave a path this role, so the parent of the one
+                # file it names is the root that file lives under.
+                files=[(raw,fp) for raw,fp in paths if fp.is_file()]
+                if len(files)==1 and files[0][1].parent!=rr and rr in files[0][1].parent.parents:
+                    result[key]=str(files[0][1].parent.relative_to(rr))
+                    continue
+            role_bound=_path_named_by_role(goal,stem,root)
+            if role_bound is not None:
+                rp=(rr/role_bound).resolve()
+                if rp.is_dir():
+                    result[key]=role_bound
+                    continue
+                # A goal that names one file names the root that file lives under.
+                if rp.is_file() and rp.parent!=rr and rr in rp.parent.parents:
+                    result[key]=str(rp.parent.relative_to(rr))
+                    continue
         if key.endswith("_path"):
             stem=key[:-5].lower()
             output_stems={"output","result","report","screenshot","image","artifact","destination","dest"}
