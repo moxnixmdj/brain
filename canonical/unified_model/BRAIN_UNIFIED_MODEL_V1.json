@@ -24536,7 +24536,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6323,
+  "research_index_records": 6324,
   "routing_tokens": 1798,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f0e42f31bc69de95c083678d20e9cf2400beaba68e1bdae69959e1f092cf8e9d"
+  "value": "2d9a8e37b9077103fb0abede788dcd81474ce6f4ef995ec1435eae6e89896001"
  },
  "engines": [
   {
@@ -190174,6 +190174,51 @@
     "sentence": 2,
     "source": 3,
     "sqlite": 2,
+    "v1": 2
+   }
+  },
+  {
+   "action_id": "SQLITE_STATUS_FILTER_TAKEN_FROM_THE_SENTENCE_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/SQLITE_STATUS_FILTER_TAKEN_FROM_THE_SENTENCE_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SQLITE_STATUS_FILTER_TAKEN_FROM_THE_SENTENCE_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "4285540d6a0f6d4b49fe7ae0c7ae712609a35e111a0479eb3f5be324ec571a32",
+   "status": "",
+   "terms": {
+    "20261023": 1,
+    "abandon": 1,
+    "about": 1,
+    "adapters": 1,
+    "already": 1,
+    "anywhere": 1,
+    "appear": 1,
+    "before": 1,
+    "both": 1,
+    "cannot": 1,
+    "columns": 1,
+    "data": 1,
+    "demanding": 1,
+    "derived": 1,
+    "document": 1,
+    "either": 1,
+    "fact": 1,
+    "family": 2,
+    "file": 2,
+    "filter": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 1,
+    "had": 1,
+    "interpreter": 1,
+    "json": 1,
+    "looked": 1,
+    "sentence": 2,
+    "source": 2,
+    "sqlite": 2,
+    "sqlite_status_filter_taken_from_the_sentence_v1_20261023_v1": 2,
+    "status": 2,
     "v1": 2
    }
   },
