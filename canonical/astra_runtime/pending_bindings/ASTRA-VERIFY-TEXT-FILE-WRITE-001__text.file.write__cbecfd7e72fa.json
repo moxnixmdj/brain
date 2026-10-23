@@ -1,0 +1,56 @@
+{
+  "capability_id": "text.file.write",
+  "effect": "text.file.available",
+  "goal": "Write UTF-8 text to one repository-local file and prove the bytes on disk are exactly the bytes requested.",
+  "origin_mission_id": "ASTRA-VERIFY-TEXT-FILE-WRITE-001",
+  "origin_mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_TEXT_FILE_WRITE_001.json",
+  "origin_mission_sha256_at_acquisition": "cbecfd7e72faae7310774e2fa52cad15c121ccf76d6c5060f396c65effb62166",
+  "origin_mission_sha256_verified_at_promotion": "cbecfd7e72faae7310774e2fa52cad15c121ccf76d6c5060f396c65effb62166",
+  "registry_entry": {
+    "action_template": {
+      "args": {
+        "capability_id": "text.file.write",
+        "content": "${input.content}",
+        "output_path": "${input.output_path}"
+      },
+      "expect": {
+        "field": "output_verified",
+        "type": "field_equals",
+        "value": true
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "file_write_text",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "write",
+      "text",
+      "file",
+      "create",
+      "save",
+      "content",
+      "output"
+    ],
+    "limitations": [
+      "Writes UTF-8 text to one repository-local file.",
+      "The written bytes are read back and compared before the step is reported as done."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "provides": [
+      "text.file.available"
+    ],
+    "requires": [],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/file_write_text.py",
+      "modules": []
+    }
+  },
+  "schema": "PROJECT_BRAIN_PENDING_AUTO_BINDING_V1",
+  "status": "PROMOTED_VERIFIED",
+  "verification_mission_id": "ASTRA-AUTO-VERIFY-TEXT-FILE-WRITE-001",
+  "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-AUTO-VERIFY-TEXT-FILE-WRITE-001__text.file.write__AUTO_VERIFY.json"
+}
