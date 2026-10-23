@@ -4718,7 +4718,35 @@
       "provides": [
         "shell.command.result"
       ],
-      "requires": []
+      "requires": [],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/cli_command.py",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "autonomous_acquisition": true,
+        "independent_output_bytes": 51,
+        "independent_output_sha256": "cf8aa6bb828d7b0fb3819f9b4254ab772e49afe19dbbe1ff969532705a9ef5d8",
+        "independent_verified": true,
+        "mission_id": "ASTRA-AUTO-VERIFY-SHELL-COMMAND-RUN-001",
+        "observed_effect": {
+          "adapter": "bound_capability_cli",
+          "argv": [
+            "/usr/bin/python3",
+            "-c",
+            "import pathlib; pathlib.Path('canonical/astra_runtime/tmp/shell_verify/SHELL_COMMAND_RUN_PROOF.txt').write_text('PROJECT BRAIN shell.command.run verification probe\\n')"
+          ],
+          "output_bytes": 51,
+          "output_path": "canonical/astra_runtime/tmp/shell_verify/SHELL_COMMAND_RUN_PROOF.txt",
+          "output_sha256": "cf8aa6bb828d7b0fb3819f9b4254ab772e49afe19dbbe1ff969532705a9ef5d8",
+          "output_verified": true,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        },
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-AUTO-VERIFY-SHELL-COMMAND-RUN-001__shell.command.run__AUTO_VERIFY.json"
+      }
     },
     "source.authority.identity.ror": {
       "action_template": {

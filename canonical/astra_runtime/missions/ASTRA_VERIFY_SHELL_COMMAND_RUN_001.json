@@ -1,0 +1,11 @@
+{
+  "acceptance": "returncode is 0, the adapter reports output_verified, and the independently computed sha256 equals both the adapter's reported digest and the digest of the requested payload.",
+  "capability_id": "shell.command.run",
+  "cost_usd": 0,
+  "created_at_utc": "2026-10-23T17:22:03Z",
+  "independence": "The verifier does not import or call the adapter; it reads the filesystem directly.",
+  "method": "Invoke the bound adapter once with an argv that writes a known payload to a fresh path, then re-derive the bytes on disk through pathlib.read_bytes + hashlib.sha256, a code path sharing nothing with the adapter, and compare against the sha256 of the payload that was requested.",
+  "mission_id": "ASTRA-VERIFY-SHELL-COMMAND-RUN-001",
+  "objective": "Establish whether shell.command.run really executes the argv it is given and whether the artifact that command produces is the artifact that was asked for, so the registry can carry proof instead of an entry with no status, no verification and no source.",
+  "schema": "PROJECT_BRAIN_VERIFICATION_MISSION_V1"
+}
