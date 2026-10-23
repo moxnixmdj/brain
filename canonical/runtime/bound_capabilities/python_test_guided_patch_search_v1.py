@@ -32,7 +32,21 @@ def _safe_file(root: pathlib.Path, raw: Any, *, suffix: str|None=None) -> pathli
 def _sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
-def _run_tests(root: pathlib.Path, argv: list[str], timeout_s: int) -> dict[str, Any]:
+def _run_tests(root: pathlib.Path, argv: list[str], timeout_s: int,
+               extra_env: Mapping[str, str] | None = None) -> dict[str, Any]:
+    """Run the test argv and report the outcome.
+
+    ``extra_env`` is merged over the inherited environment. It exists because the bound executor
+    calls every adapter with the REPOSITORY ROOT as ``root``, and the subprocess inherits that as
+    its working directory. A test that imports the module under repair - which is how ordinary
+    Python test suites are written - then dies with ModuleNotFoundError instead of reaching its
+    assertion. Measured: for ``def add(a, b): return a - b`` with ``assertEqual(add(2, 3), 5)``,
+    cwd at the repository root gives ``errors=1`` (No module named 'calc') and cwd at the source
+    directory gives ``failures=1`` (-1 != 5). Both score 1, so no edit to the source can ever
+    strictly improve the metric and the repair loop reports OPEN__NO_STRICTLY_IMPROVING_CANDIDATE
+    for every bug. The fix is to put the source directory on PYTHONPATH, which makes the module
+    importable without changing the working directory the caller chose.
+    """
     if not argv or any(not isinstance(x,str) or not x for x in argv):
         raise PatchSearchError("TEST_ARGV_INVALID")
     exe=pathlib.Path(argv[0]).name.lower()
@@ -41,7 +55,8 @@ def _run_tests(root: pathlib.Path, argv: list[str], timeout_s: int) -> dict[str,
         raise PatchSearchError("TEST_EXECUTABLE_NOT_PYTHON")
     started=time.monotonic()
     try:
-        proc=subprocess.run(argv,cwd=root,text=True,capture_output=True,timeout=timeout_s)
+        env=None if not extra_env else {**os.environ,**{k:str(v) for k,v in extra_env.items()}}
+        proc=subprocess.run(argv,cwd=root,text=True,capture_output=True,timeout=timeout_s,env=env)
         return {
             "returncode":proc.returncode,
             "stdout":proc.stdout or "",
