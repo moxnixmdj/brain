@@ -170,6 +170,68 @@ def test_a_manifest_not_named_manifest_now_binds_by_the_role_the_sentence_gives_
     assert verdict["admitted"] is True, verdict
 
 
+def test_an_absolute_path_is_not_doubled_into_a_path_that_cannot_exist():
+    """The path scanner cannot match a leading "/", so an absolute path used to be
+    joined onto the repository root and silently doubled: /home/user/brain/canonical/x
+    became /home/user/brain/home/user/brain/canonical/x.  A path that can never exist
+    makes every path-dependent binding fail closed, so absolute goals could not work
+    at all.  It must now normalise to the repository-relative form."""
+    rel = "canonical/astra_runtime/tmp/test_live_brain_route_admission/abs_probe.txt"
+    found = dict(goal_compiler._repo_paths("read %s" % (ROOT / rel), ROOT))
+    assert rel in found, sorted(found)
+    assert found[rel] == (ROOT / rel).resolve(), found[rel]
+    # the doubled spelling must not be what we hand back
+    assert all(not str(v).startswith(str(ROOT.resolve()) + str(ROOT)) for v in found.values())
+
+
+def test_an_absolute_goal_binds_the_manifest_and_the_archive_as_two_files():
+    """Same goal, absolute paths.  Binding must come from the sentence, and the
+    manifest must not be bound to the archive it is meant to produce."""
+    manifest = WORK / "mabs.json"
+    src = WORK / "sabs.txt"
+    src.write_bytes(b"absolute\n")
+    manifest.write_text(json.dumps({"records": [{
+        "verification_paths": [str(src)]}]}), encoding="utf-8")
+    goal = ("Create a tar.gz archive from the manifest %s, "
+            "including all its verification_paths files, and save it to %s."
+            % (WORK / "mabs.json", WORK / "bundleabs.tar.gz"))
+    compiled = _compile(goal)
+    assert compiled.get("selected_capability") == "archive.tar_gz.create_from_manifest", compiled
+    assert compiled.get("binding_source") == "GOAL_STATEMENT", compiled
+    inputs = compiled.get("inputs") or {}
+    assert inputs.get("manifest_path", "").endswith("/mabs.json"), inputs
+    assert inputs.get("output_path", "").endswith("/bundleabs.tar.gz"), inputs
+    assert inputs.get("manifest_path") != inputs.get("output_path"), inputs
+
+
+def test_the_same_goal_runs_three_times_in_a_row():
+    """The output binder used non-existence as its proxy for "this is the output".
+    Once the first run wrote the archive, that proxy failed, _bind_inputs gave up,
+    and every later run of an identical goal failed.  A capability that works once
+    and then stops working is not a capability."""
+    manifest = WORK / "mrep.json"
+    src = WORK / "srep.txt"
+    out = WORK / "bundlerep.tar.gz"
+    if out.exists():
+        out.unlink()
+    src.write_bytes(b"idempotent\n")
+    manifest.write_text(json.dumps({"records": [{
+        "verification_paths": ["canonical/astra_runtime/tmp/test_live_brain_route_admission/srep.txt"]}]}),
+        encoding="utf-8")
+    goal = ("Create a tar.gz archive from the manifest "
+            "canonical/astra_runtime/tmp/test_live_brain_route_admission/mrep.json, "
+            "including all its verification_paths files, and save it to "
+            "canonical/astra_runtime/tmp/test_live_brain_route_admission/bundlerep.tar.gz.")
+    statuses = []
+    for i in range(3):
+        task_id = "TEST_ROUTE_ADMISSION_REPLAY_%d_%d" % (os.getpid(), i)
+        try:
+            statuses.append(adm.solve({"task_id": task_id, "goal": goal})["pass"])
+        finally:
+            _cleanup(task_id)
+    assert statuses == [True, True, True], statuses
+
+
 def test_solve_still_executes_a_real_goal():
     manifest = WORK / "manifest2.json"
     src = WORK / "s2.txt"
