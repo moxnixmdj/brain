@@ -66,35 +66,48 @@ _OPAQUE = 'ACTION_EXPECTATION_FAILED:pass:OBSERVED=False:RESULT={"status":"FAIL_
 # it select `decision.synthesis.typed.stdlib` instead of the markdown-to-PDF
 # converter, and it now returns
 # PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED on a live run.
-FAILING_GOALS = {
+# Goals that fail on a clean tree, split by WHY, because the two classes have different
+# lifetimes.  Re-measured this turn: the causes below are what a live front-door run
+# reports now, not what an earlier measurement recorded.
+#
+# PORTABLE: the cause is a fact about the repository or about the sentence, so it holds on
+# every host.  A goal that names no status value cannot have one resolved; a goal that names
+# no evidence has nothing to assess.  These must fail everywhere and must keep failing.
+PORTABLE_FAILURES = {
     "BENCH_SQLITE_CREATE_INSERT_QUERY": "SQLITE_STATUS_VALUE_UNRESOLVED",
     "BENCH_GROUNDING_AND_VERIFY": "STATUS_INVALID",
-    # Moved by the front-door selection fix, and the move is the point: this goal
-    # used to compile against `docx.document.create_from_json_record`, which then
-    # failed with JSON_DOCX_SPEC_UNRESOLVED because the spec that producer needs
-    # was never stated.  It now selects `knowledge.consistency.assess` -- the
-    # capability the sentence asked for -- and fails on the same honest blocker
-    # `EXT_KNOWLEDGE_CONSISTENCY` already reported: no independent-verification
-    # receipt for that capability.  Measured on a live front-door run, not inferred.
-    "BENCH_JSON_FETCH_CONSISTENCY": "BOUND_CAPABILITY_INDEPENDENT_VERIFICATION_NOT_EVIDENT",
-    # BENCH_UNITTEST_PASS_RATE left this list for the same reason
-    # BENCH_MARKDOWN_TO_DECISION did: it stopped failing. The audit capability
-    # used to raise TEST_FILE_FAILED on the first red file, so it could only
-    # ever report on a corpus that was already green -- a pass-rate report that
-    # could only ever say 100 percent. It now reports a red corpus instead of
-    # aborting, so this goal produces its artifact. Removing it here also
-    # removes a nasty recursion: this file is inside the corpus the audit
-    # walks, and running this goal from inside this file made the audit run
-    # itself, which is why this suite took longer than the audit's own 180s
-    # per-file timeout.
-    "EXT_QR_GENERATE": "BOUND_CAPABILITY_INDEPENDENT_VERIFICATION_NOT_EVIDENT",
-    "EXT_BARCODE_DECODE": "BOUND_APT_METADATA_NOT_FOUND:zbar-tools",
-    "EXT_OCR_SCANNED_IMAGE": "BOUND_CAPABILITY_SOURCE_UNSUPPORTED",
-    "EXT_KNOWLEDGE_CONSISTENCY": "BOUND_CAPABILITY_INDEPENDENT_VERIFICATION_NOT_EVIDENT",
-    "EXT_JQ_TABLE": "BOUND_APT_METADATA_NOT_FOUND:pandoc",
+    # Moved twice, and both moves are the point.  This goal used to compile against a docx
+    # producer and fail on a spec the sentence never stated; the front-door selection fix
+    # moved it to knowledge.consistency.assess, where it then reported
+    # BOUND_CAPABILITY_INDEPENDENT_VERIFICATION_NOT_EVIDENT -- "you have no proof you may
+    # run".  That was false: the capability carries a receipt on disk whose mission digest
+    # matches, and the adapter simply did not read that encoding.  It now runs and reports
+    # the truth, which is that the sentence names no evidence to assess.  A refusal that
+    # names the wrong cause sends the machine to acquire verification it already has instead
+    # of asking for the input it actually lacks.
+    "BENCH_JSON_FETCH_CONSISTENCY": "KNOWLEDGE_ASSESSMENT_INPUT_INVALID",
+    "EXT_KNOWLEDGE_CONSISTENCY": "KNOWLEDGE_ASSESSMENT_INPUT_INVALID",
     "EXT_SQLITE_VERIFY": "SQLITE_STATUS_VALUE_UNRESOLVED",
-    "EXT_MD_TO_PDF": "BOUND_APT_METADATA_NOT_FOUND:pandoc",
 }
+
+# TOOL-DEPENDENT: the cause is a fact about THIS machine -- astra_runtime cross-checks the
+# registry against the host apt snapshot (BOUND_APT_METADATA_NOT_FOUND, line 1213) and
+# against shutil.which (BOUND_SYSTEM_TOOL_MISSING, line 1058).  A host that has the package
+# legitimately gets a different, later answer, so these must NOT be pinned to a literal
+# cause: that would encode one host into a portable test.  What is pinned instead is the
+# invariant that actually matters -- when one of these is refused, the refusal names the
+# missing dependency rather than collapsing into the opaque string.
+TOOL_DEPENDENT_GOALS = (
+    "EXT_QR_GENERATE",
+    "EXT_BARCODE_DECODE",
+    "EXT_OCR_SCANNED_IMAGE",
+    "EXT_JQ_TABLE",
+    "EXT_MD_TO_PDF",
+)
+
+_TOOL_CAUSE_MARKERS = ("BOUND_APT_METADATA_NOT_FOUND", "BOUND_SYSTEM_TOOL_MISSING")
+
+FAILING_GOALS = PORTABLE_FAILURES
 
 _GOALS = {g["id"]: g["goal"] for g in
           benchmark.BENCHMARK_GOALS + benchmark.EXTENDED_BENCHMARK_GOALS}
@@ -187,17 +200,26 @@ class EveryRefusalIsDistinguishableTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.causes = {}
-        for goal_id in FAILING_GOALS:
+        cls.passed = set()
+        for goal_id in list(PORTABLE_FAILURES) + list(TOOL_DEPENDENT_GOALS):
             result = _run(goal_id)
             reason = str(result.get("reason") or "")
             cls.causes[goal_id] = (
                 reason.split(":REASON=", 1)[1].split(":RESULT=")[0]
                 if ":REASON=" in reason else reason
             )
+            if result.get("pass"):
+                cls.passed.add(goal_id)
 
-    def test_every_failing_goal_still_fails(self):
-        """Guard against the reporting fix silently turning refusals into passes."""
-        for goal_id in FAILING_GOALS:
+    def test_every_portably_failing_goal_still_fails(self):
+        """Guard against the reporting fix silently turning refusals into passes.
+
+        Scoped to PORTABLE_FAILURES on purpose.  The tool-dependent goals fail here because
+        this machine lacks qrencode, zbar-tools, tesseract and pandoc; a host that has them
+        may legitimately run the goal, and asserting failure there would pin one host's
+        package set into a portable test.
+        """
+        for goal_id in PORTABLE_FAILURES:
             with self.subTest(goal=goal_id):
                 self.assertFalse(_run(goal_id).get("pass"))
 
@@ -207,24 +229,46 @@ class EveryRefusalIsDistinguishableTests(unittest.TestCase):
                 self.assertNotEqual(cause.strip(), "")
                 self.assertNotIn('RESULT={"status":"FAIL_CLOSED"}', cause)
 
-    def test_each_cause_names_its_real_blocker(self):
-        for goal_id, needle in FAILING_GOALS.items():
+    def test_each_portable_cause_names_its_real_blocker(self):
+        for goal_id, needle in PORTABLE_FAILURES.items():
             with self.subTest(goal=goal_id):
                 self.assertIn(needle, self.causes[goal_id], self.causes[goal_id])
+
+    def test_a_tool_dependent_refusal_names_the_missing_dependency(self):
+        """Refused for a missing package must say which package, on any host.
+
+        This is the invariant that survives a host change.  If the tool is present the goal
+        is allowed to proceed -- that is the correct answer, not a broken test -- but if it
+        is refused, the refusal must name the dependency it is missing rather than collapse
+        into the opaque wrapper this file exists to prevent.
+        """
+        refused = [g for g in TOOL_DEPENDENT_GOALS if g not in self.passed]
+        if not refused:
+            self.skipTest("every tool-dependent goal ran on this host")
+        for goal_id in refused:
+            with self.subTest(goal=goal_id):
+                self.assertTrue(
+                    any(m in self.causes[goal_id] for m in _TOOL_CAUSE_MARKERS),
+                    self.causes[goal_id],
+                )
 
     def test_a_missing_binary_and_an_unresolved_input_are_distinguishable(self):
         """These demand opposite responses: acquisition versus a better-specified goal.
         If they read the same, the machine cannot choose between them."""
-        self.assertNotEqual(
-            self.causes["EXT_MD_TO_PDF"], self.causes["EXT_SQLITE_VERIFY"]
-        )
-        self.assertIn("BOUND_APT_METADATA_NOT_FOUND", self.causes["EXT_MD_TO_PDF"])
+        tool_side = next((g for g in TOOL_DEPENDENT_GOALS if g not in self.passed), None)
+        if tool_side is None:
+            self.skipTest("no tool-dependent goal was refused on this host")
+        self.assertNotEqual(self.causes[tool_side], self.causes["EXT_SQLITE_VERIFY"])
+        self.assertTrue(any(m in self.causes[tool_side] for m in _TOOL_CAUSE_MARKERS),
+                        self.causes[tool_side])
         self.assertNotIn("BOUND_APT_METADATA_NOT_FOUND",
+                         self.causes["EXT_SQLITE_VERIFY"])
+        self.assertNotIn("BOUND_SYSTEM_TOOL_MISSING",
                          self.causes["EXT_SQLITE_VERIFY"])
 
     def test_the_causes_are_not_all_the_same(self):
-        self.assertGreaterEqual(len(set(self.causes.values())), 5,
-                                f"causes collapsed: {self.causes}")
+        portable = {self.causes[g] for g in PORTABLE_FAILURES}
+        self.assertGreaterEqual(len(portable), 3, f"portable causes collapsed: {portable}")
 
 
 if __name__ == "__main__":
