@@ -22433,7 +22433,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "dd9d569efd41ddd07c534d21631e0de197f88655609bb99800789eb087c0d135",
+    "source_sha256": "76ddc81f8f731494cdff62fd3596d5df539af626a3067948f3adf7d4de6c3b8f",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22601,7 +22601,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py",
-    "source_sha256": "057c0964be27cd96149412465ef36f4b4363017586781f30e06d787d74046ad5",
+    "source_sha256": "96ac2dcd00e7f16e4a93190402cdec06ff94646ca87add16923f21c45878c6ba",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -22687,7 +22687,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
-    "source_sha256": "6900aef5331202edbd570af3c33c3f66d32ca4f4c71799639d2878e41b2f28ca",
+    "source_sha256": "33e3d79d6fb5f92bac84706da92331624eff3147939382e9034dab39bf4310ef",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22778,7 +22778,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py",
-    "source_sha256": "cbe8e8a4dbe778461b0f7fa4b79e24ae9fe1feef08bdf81c77b01d5ab3a0268f",
+    "source_sha256": "d9a9a8006e8198bbd84bc702fd72a86b657b9993754e47d4655224c9a5e56f9d",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -22867,7 +22867,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py",
-    "source_sha256": "eb47db82d2da3503e6a44264f709fa0ff27340a62adb35129cf8aa3def9a7d25",
+    "source_sha256": "05742806d7f16a156ddb44dabfb237f6342b6db39b337b8ca5e8d98fd5adbce7",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -22957,7 +22957,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_measured_acceptance_controller_v1.py",
-    "source_sha256": "a0bbf17a2cf7a3257b05aa3458cbc0880aceb5b99612f51bdef26018511a6396",
+    "source_sha256": "40331ef4b982ea8ac9e54cb725b27f58fba55f8ad0f1832754416193e131028e",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -23041,7 +23041,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_semantic_acceptance_controller_v1.py",
-    "source_sha256": "bec7567731a0e33e01e864b046f954909e73e9a011138df83d089a38d3e70720",
+    "source_sha256": "84829a3ee8479a62dd208bb2616c5332a74ef03227eb91f6b1bbe31ee5c62952",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -24406,7 +24406,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6305,
+  "research_index_records": 6306,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24415,7 +24415,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "02e03a23b2d162845e979e9f2b35e7c6b4a3824ddfb3a568365239ae969f40a4"
+  "value": "b6b818cd84c6f4c67fc0f441612a4894cae6b6ddfe14352835a7300c950e14d1"
  },
  "engines": [
   {
@@ -46317,7 +46317,7 @@
   "included_source_count": 863,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "4fe288e84c8db4a3966e3f1c940ef5e6e1f9829b2b5540f92c3c77744fea5297"
+  "source_tree_digest": "f905641419fd7bee0693a6c8a06b3546f1634ecc918e25a0aa0e57dc3d0a3b71"
  },
  "research_index": [
   {
@@ -188065,6 +188065,51 @@
     "sentence": 1,
     "tie": 1,
     "two_measured_defects_stood_between_the_front_door_and_bench_markdown_to_decision__first_the_chained_grounded_pass_tied_decision_synthesis_verify_stdlib_against_decision_synthesis_typed_stdlib_at_score_14_and_specificity_1_and_raised_goal_compilation_ambiguous_so_the_chained_plan_was_none__second_with_no_chained_plan_the_compiler_kept_the_world_bound_document_convert_markdown_pdf_pandoc_weasyprint_at_score_25_which_filled_markdown_path_with_agents_md_a_file_the_sentence_never_mentioned_and_offered_a_pdf_conversion_nobody_asked_for__measured_front_door_selection_21_of_23_and_acceptance_11_of_23": 1,
+    "v1": 2
+   }
+  },
+  {
+   "action_id": "DERIVED_TEST_COMMAND_LINE_RUNS_VIA_LOADER_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/DERIVED_TEST_COMMAND_LINE_RUNS_VIA_LOADER_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/DERIVED_TEST_COMMAND_LINE_RUNS_VIA_LOADER_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "3fffd6546499b62f2c22ebeef2ab8f33c8999e458a37fceab5efef7c08f5e1ea",
+   "status": "",
+   "terms": {
+    "2019": 1,
+    "20261023": 1,
+    "34": 1,
+    "695": 1,
+    "actually": 1,
+    "adapters": 1,
+    "any": 1,
+    "baseline_already_passes": 3,
+    "because": 1,
+    "before": 1,
+    "bill": 1,
+    "bug": 1,
+    "built": 1,
+    "capability": 1,
+    "command": 3,
+    "derived": 2,
+    "derived_test_command_line_runs_via_loader_v1_20261023_v1": 2,
+    "executes": 2,
+    "file": 3,
+    "line": 3,
+    "measured": 2,
+    "not": 2,
+    "nothing": 2,
+    "one": 3,
+    "python": 2,
+    "repair": 3,
+    "run": 2,
+    "seven": 2,
+    "suite": 3,
+    "test": 4,
+    "than": 2,
     "v1": 2
    }
   },

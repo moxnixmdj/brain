@@ -33,7 +33,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     test_paths=[v8._safe_file(repo,x) for x in (args.get("test_paths") or [])]
     if not test_paths:
         raise SemanticRepairError("TEST_PATHS_REQUIRED")
-    argv=[str(x) for x in (args.get("test_argv") or [sys.executable]+[v8._rel(repo,p) for p in test_paths])]
+    argv=[str(x) for x in (args.get("test_argv") or v8._REPAIR._PATCH.suite_argv(sys.executable,*test_paths))]
     task_text=str(args.get("task_text") or "").strip()
     if not task_text:
         raise SemanticRepairError("TASK_TEXT_REQUIRED")

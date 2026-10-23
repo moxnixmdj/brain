@@ -31,7 +31,7 @@ def _imports(repo:pathlib.Path, test:pathlib.Path)->list[pathlib.Path]:
     return out
 
 def _test(repo:pathlib.Path, test:pathlib.Path, timeout:int)->dict[str,Any]:
-    return ptg._run_tests(repo,[sys.executable,str(test.relative_to(repo))],timeout)
+    return ptg._run_tests(repo,ptg.suite_argv(sys.executable,test),timeout,ptg._source_env(test))
 
 def _materialize(source:pathlib.Path, tests:list[pathlib.Path], wanted:Mapping[str,Any])->str|None:
     text=source.read_text(encoding="utf-8")
@@ -86,7 +86,7 @@ def run(args:Mapping[str,Any], root:str|os.PathLike[str])->dict[str,Any]:
                     res=ptg.run({
                         "source_path":str(source.relative_to(repo)),
                         "test_paths":[str(target.relative_to(repo))],
-                        "test_argv":[sys.executable,str(target.relative_to(repo))],
+                        "test_argv":ptg.suite_argv(sys.executable,target),
                         "output_path":str(probe.relative_to(repo)),
                         "timeout_s":timeout,
                         "max_candidates":max_candidates,
