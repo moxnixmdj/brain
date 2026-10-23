@@ -24407,7 +24407,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6315,
+  "research_index_records": 6316,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 405,
@@ -24416,7 +24416,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "64f51249830cde0854ad9eb68c18f2634725628a0c68909a75950ad21dbd56e6"
+  "value": "c50b80907c8c28204492fc99053f246799593c5bd2532468a061e38926ffc194"
  },
  "engines": [
   {
@@ -188812,6 +188812,51 @@
     "look": 1,
     "the_research_record_is_now_reachable_through_the_model_without_inflating_the_capability_claim__6256_governance_verification_and_intent_records_are_indexed_as_research_index_with_capability_false_on_every_row_solve_never_routes_there_and_find_research_answers_where_was_this_decided_rather_than_run_this__generated_outputs_are_excluded_so_the_compile_is_a_verified_fixed_point__capability_count_stays_363__new_digest_fb389ce2__107_tests_ok_verifier_33_of_33_benchmark_unchanged_at_17_of_23_and_12_of_23": 1,
     "the_two_path_binders_disagree__goal_front_compiler_v1_bind_path_by_type_only_considers_paths_the_goal_sentence_names_via_goal_compiler_repo_paths_so_it_raised_goal_input_binding_required_for_all_six_never_compiled_goals_even_though_five_pdfs_sat_on_disk_while_world_binding_v1_world_path_for_scans_the_directory_but_returns_the_first_sorted_match_so_measured_eight_of_the_ten_correctly_selected_benchmark_goals_took_their_input_file_from_the_world_and_what_they_took_was_arbitrary_agents_md_bound_as_the_markdown_to_convert_a_stray_tool_py_bound_as_the_evidence_to_rank_and_the_alphabetically_first_of_five_docx_bound_as_the_document_to_verify": 1,
+    "v1": 2
+   }
+  },
+  {
+   "action_id": "INPUT_BOUND_BY_SENTENCE_ROLE_NOT_BY_FILENAME_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/INPUT_BOUND_BY_SENTENCE_ROLE_NOT_BY_FILENAME_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/INPUT_BOUND_BY_SENTENCE_ROLE_NOT_BY_FILENAME_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "6b82bc14f076b1004a177db0803a0fd17318ac82fbaf0f2becdc156a72b6c75d",
+   "status": "",
+   "terms": {
+    "20261023": 1,
+    "abandon": 1,
+    "about": 1,
+    "adapters": 1,
+    "already": 1,
+    "anywhere": 1,
+    "appear": 1,
+    "before": 1,
+    "both": 1,
+    "bound": 1,
+    "cannot": 1,
+    "columns": 1,
+    "data": 1,
+    "demanding": 1,
+    "derived": 1,
+    "document": 1,
+    "either": 1,
+    "fact": 1,
+    "family": 2,
+    "file": 2,
+    "filename": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 1,
+    "had": 1,
+    "input": 1,
+    "input_bound_by_sentence_role_not_by_filename_v1_20261023_v1": 2,
+    "interpreter": 1,
+    "json": 1,
+    "looked": 1,
+    "sentence": 2,
+    "source": 2,
     "v1": 2
    }
   },
