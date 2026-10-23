@@ -24407,7 +24407,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6319,
+  "research_index_records": 6320,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24416,7 +24416,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "da460c8a340536422e750936bbfe52404625526883f43a362adb8cc9138b244b"
+  "value": "d0df6adecc687970fa0a3d6d5002a993257a6ceca216140195823e7cf494a225"
  },
  "engines": [
   {
@@ -189337,6 +189337,51 @@
     "reuse_python_transitive_runtime_closure_v1_plus_exact_dependency_relevance_boundary__seed_from_declared_system_not_external_verifier_tooling": 1,
     "subject": 1,
     "v2": 1
+   }
+  },
+  {
+   "action_id": "PROMISED_SOURCE_CHANGE_CHECKED_BEFORE_PASS_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/PROMISED_SOURCE_CHANGE_CHECKED_BEFORE_PASS_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/PROMISED_SOURCE_CHANGE_CHECKED_BEFORE_PASS_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "67f887de2c8a047fb45bef1cd895d59170821645bf58173422fb3ffa2847e63c",
+   "status": "",
+   "terms": {
+    "20261023": 1,
+    "abandon": 1,
+    "about": 1,
+    "adapters": 1,
+    "already": 1,
+    "anywhere": 1,
+    "appear": 1,
+    "before": 2,
+    "both": 1,
+    "cannot": 1,
+    "change": 1,
+    "checked": 1,
+    "columns": 1,
+    "data": 1,
+    "demanding": 1,
+    "derived": 1,
+    "document": 1,
+    "either": 1,
+    "fact": 1,
+    "family": 2,
+    "file": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 1,
+    "had": 1,
+    "interpreter": 1,
+    "json": 1,
+    "looked": 1,
+    "mixed-vendor": 1,
+    "needs": 1,
+    "promised_source_change_checked_before_pass_v1_20261023_v1": 2,
+    "source": 3,
+    "v1": 2
    }
   },
   {
