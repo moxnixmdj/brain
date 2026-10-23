@@ -1,7 +1,22 @@
 #!/usr/bin/env python3
 """Deterministic repository-local Python test-corpus execution audit."""
 from __future__ import annotations
-import hashlib, json, pathlib, re, subprocess, sys, time
+import hashlib, importlib.util, json, pathlib, re, subprocess, sys, time
+
+
+def _load_patch_search():
+    """The shared module that owns how a suite is executed.
+
+    Imported by path, matching every other adapter in this directory that reaches it.
+    """
+    here = pathlib.Path(__file__).with_name('python_test_guided_patch_search_v1.py')
+    spec = importlib.util.spec_from_file_location('_brain_patch_search', here)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+_PATCH = _load_patch_search()
 
 def _text(value):
     """Partial subprocess buffers arrive as bytes even in text mode."""
@@ -113,7 +128,14 @@ def run(args, root):
         started=time.monotonic()
         timed_out=False
         try:
-            proc=subprocess.run([sys.executable,str(path)],cwd=repo,text=True,capture_output=True,timeout=timeout_s)
+            # Executing a test file as a script only starts the tests when the file carries a
+            # __main__ guard, and 695 of the 2019 unittest files in this repository (34%,
+            # measured) do not. Such a run exits 0 having executed nothing, so the audit counted
+            # zero tests and zero failures for the file - a failing test became invisible rather
+            # than red, which understates the whole corpus health report.
+            proc=subprocess.run(_PATCH.suite_argv(sys.executable,path),cwd=repo,text=True,
+                                capture_output=True,timeout=timeout_s,
+                                env=_PATCH._source_env(path))
             returncode=proc.returncode
             combined=(proc.stdout or "")+"\n"+(proc.stderr or "")
         except subprocess.TimeoutExpired as exc:

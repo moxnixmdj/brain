@@ -22482,6 +22482,7 @@
     "declared_dependencies_checked": [
      "ast",
      "hashlib",
+     "importlib",
      "json",
      "os",
      "pathlib",
@@ -22519,7 +22520,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repository_acceptance_measurement_v1.py",
-    "source_sha256": "616bcb99646f4ca3f5218667aada4f2786dd070a3ec2b8c9de1e1972c468e510",
+    "source_sha256": "00d03acc2bc40ecef0eaf3411e7c929a64844b4a51053fa75ae80935b73b5254",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24406,16 +24407,16 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6306,
+  "research_index_records": 6307,
   "routing_tokens": 1785,
   "skills": 18,
-  "source_index_entry_points": 404,
+  "source_index_entry_points": 405,
   "source_index_modules": 1862
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b6b818cd84c6f4c67fc0f441612a4894cae6b6ddfe14352835a7300c950e14d1"
+  "value": "6637e423952e533dbbc160025c054357cb0a248cfeb9ea9285a6bfdbd23ebf6d"
  },
  "engines": [
   {
@@ -46317,7 +46318,7 @@
   "included_source_count": 863,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "f905641419fd7bee0693a6c8a06b3546f1634ecc918e25a0aa0e57dc3d0a3b71"
+  "source_tree_digest": "a2ee0624a89eeeb81724276d0431bf039c55d4231729785209eca0fa3b41ae7c"
  },
  "research_index": [
   {
@@ -187914,6 +187915,51 @@
    }
   },
   {
+   "action_id": "CORPUS_AUDIT_AND_ACCEPTANCE_EVIDENCE_RUN_VIA_LOADER_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/CORPUS_AUDIT_AND_ACCEPTANCE_EVIDENCE_RUN_VIA_LOADER_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/CORPUS_AUDIT_AND_ACCEPTANCE_EVIDENCE_RUN_VIA_LOADER_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "fa42e07a617114c9a2bd260879499dbc2a53902c545d29f20bfbca2e57706b52",
+   "status": "",
+   "terms": {
+    "1324": 1,
+    "2019": 2,
+    "20261023": 1,
+    "34": 1,
+    "3771": 1,
+    "695": 1,
+    "acceptance": 2,
+    "actually": 1,
+    "audit": 1,
+    "auditor": 2,
+    "became": 1,
+    "both": 2,
+    "carries": 1,
+    "clean": 2,
+    "corpus": 3,
+    "corpus_audit_and_acceptance_evidence_run_via_loader_v1_20261023_v1": 2,
+    "every": 2,
+    "evidence": 2,
+    "failing": 2,
+    "file": 4,
+    "files": 3,
+    "measurement": 2,
+    "nothing": 2,
+    "omission": 2,
+    "only": 2,
+    "recorded": 2,
+    "report": 2,
+    "run": 4,
+    "so": 3,
+    "test": 5,
+    "test_count": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "CORPUS_GOALS_BECOME_VERIFIED_EXPERIENCE_BY_CARRYING_PROOF_DIGESTS_THROUGH_THE_TRACE_V1_20261022_V1",
    "capability": false,
    "date": "2026-10-22",
@@ -196605,17 +196651,18 @@
   },
   {
    "capability": false,
-   "classification": "ORPHAN",
-   "executable_entry_point": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
    "id": "source:canonical/runtime/bound_capabilities/python_test_audit.py",
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_test_audit.py",
-   "sha256": "2613627df9d3e2f2aa826451c75f354a0d0abd1de58ff58c4b62d8741749703b",
+   "sha256": "d644cd5a57b06a8b468795f0aaeaa7a44fa5069d5f0a2746c38697ab0f6542d6",
    "summary": "Deterministic repository-local Python test-corpus execution audit.",
-   "symbol_count": 5,
+   "symbol_count": 6,
    "symbols": [
     "_counts",
+    "_load_patch_search",
     "_report_is_consistent",
     "_safe_dir",
     "_text",
@@ -196626,6 +196673,7 @@
     "counts": 1,
     "deterministic": 1,
     "execution": 1,
+    "load_patch_search": 1,
     "python": 2,
     "report_is_consistent": 1,
     "repository-local": 1,
