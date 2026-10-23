@@ -132,10 +132,10 @@ def _candidate(originals,items):
   if v is None or v.encode()==originals[p]:return None
   out[p]=v
  return out
-def _run_candidate(repo,originals,cand,argv,timeout):
+def _run_candidate(repo,originals,cand,argv,timeout,env):
  try:
   for p,t in cand.items():p.write_text(t);_PATCH._purge_source_bytecode(p)
-  return _PATCH._run_tests(repo,argv,timeout)
+  return _PATCH._run_tests(repo,argv,timeout,env)
  finally:
   for p in cand:p.write_bytes(originals[p]);_PATCH._purge_source_bytecode(p)
 def _diff(repo,p,a,b):
@@ -143,6 +143,7 @@ def _diff(repo,p,a,b):
 def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if not isinstance(args,Mapping):raise RepairLoopError("ARGS_NOT_OBJECT")
  repo=pathlib.Path(root).resolve();src=_safe_dir(repo,args.get("source_root","."))
+ env=_PATCH._source_env(src)
  tests=[_safe_file(repo,x) for x in (args.get("test_paths") or [])]
  if not tests:raise RepairLoopError("TEST_PATHS_REQUIRED")
  argv=[str(x) for x in (args.get("test_argv") or [sys.executable]+[_rel(repo,p) for p in tests])]
@@ -160,7 +161,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if strict.get("pass"):
   result={"schema":SCHEMA,"status":"PASS__STRICT_PROGRESS_ROUTE","pass":True,"route":"STRICT_PROGRESS","strict_result":strict,"localization_candidates":[],"crossed_nonmonotonic_valley":False,"model_dependency_count":0,"external_capability_provider_count":0,"incremental_spend_usd":0,"source_restored":strict.get("source_restored") is True,"hard_nonclaims":["NO_UNIVERSAL_SOFTWARE_REPAIR_COMPLETENESS","NO_NON_PYTHON_SUPPORT","NO_HIDDEN_REQUIREMENTS_OR_GENERAL_MERGEABILITY_PROOF","NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT"]}
  else:
-  base=_PATCH._run_tests(repo,argv,timeout);score=_STRICT._score(base)
+  base=_PATCH._run_tests(repo,argv,timeout,env);score=_STRICT._score(base)
   if score is None and not base.get("timed_out"): score=1
   if base.get("timed_out"):raise RepairLoopError("BASELINE_TIMEOUT")
   if base.get("returncode")==0:raise RepairLoopError("BASELINE_ALREADY_PASSES")
@@ -173,7 +174,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
   for p,e in items:
    cand=_candidate(originals,[(p,e)])
    if cand is None:continue
-   rr=_run_candidate(repo,originals,cand,argv,timeout);ss=_STRICT._score(rr);single_scores[(p,e["start"],e["end"],e["replacement"])]=(1 if ss is None and rr.get("returncode")!=0 and not rr.get("timed_out") else ss);tested_single+=1
+   rr=_run_candidate(repo,originals,cand,argv,timeout,env);ss=_STRICT._score(rr);single_scores[(p,e["start"],e["end"],e["replacement"])]=(1 if ss is None and rr.get("returncode")!=0 and not rr.get("timed_out") else ss);tested_single+=1
   winner=None;winner_items=None;pair_count=0;crossed=False
   for i in range(len(items)):
    if pair_count>=pair_max:break
@@ -181,7 +182,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
     if pair_count>=pair_max:break
     pair_count+=1;a,b=items[i],items[j];cand=_candidate(originals,[a,b])
     if cand is None:continue
-    rr=_run_candidate(repo,originals,cand,argv,timeout);ps=_STRICT._score(rr)
+    rr=_run_candidate(repo,originals,cand,argv,timeout,env);ps=_STRICT._score(rr)
     if ps is None and rr.get("returncode")!=0 and not rr.get("timed_out"): ps=1
     if rr.get("returncode")==0 and ps==0:
      ka=(a[0],a[1]["start"],a[1]["end"],a[1]["replacement"]);kb=(b[0],b[1]["start"],b[1]["end"],b[1]["replacement"])
@@ -192,7 +193,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
   if winner:
    ok=True
    for _ in range(2):
-    rr=_run_candidate(repo,originals,winner,argv,timeout);rs=_STRICT._score(rr);rs=(0 if rr.get("returncode")==0 else (1 if rs is None and not rr.get("timed_out") else rs));replay.append({"returncode":rr.get("returncode"),"failure_score":rs,"timed_out":rr.get("timed_out")});ok=ok and rr.get("returncode")==0 and rs==0
+    rr=_run_candidate(repo,originals,winner,argv,timeout,env);rs=_STRICT._score(rr);rs=(0 if rr.get("returncode")==0 else (1 if rs is None and not rr.get("timed_out") else rs));replay.append({"returncode":rr.get("returncode"),"failure_score":rs,"timed_out":rr.get("timed_out")});ok=ok and rr.get("returncode")==0 and rs==0
    if not ok:winner=None;winner_items=None
   patches=[]
   if winner:
