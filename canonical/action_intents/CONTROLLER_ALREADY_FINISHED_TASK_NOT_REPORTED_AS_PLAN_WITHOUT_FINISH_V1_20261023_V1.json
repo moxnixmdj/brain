@@ -1,0 +1,446 @@
+{
+  "action_id": "CONTROLLER_ALREADY_FINISHED_TASK_NOT_REPORTED_AS_PLAN_WITHOUT_FINISH_V1_20261023_V1",
+  "action_kind": "FRESH_REUSE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "canonical/tests/test_sqlite_verifier_declared_substrate.py",
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+      "canonical/unified_model/README.md"
+    ],
+    "route_class": "INTEGRATE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The model-independent controller raised Blocker(\"MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH\") for two different situations, only one of which is a plan without a finish step. When the controller checkpoint says a task already ran to the end, the cycle loop at canonical/runtime/astra_runtime.py:4912 never executes because start_cycle=len(trace) is already past the last action, so the loop body that returns the finish output is skipped and control falls through to the same raise. The plan DID have a finish step; it was reached on an earlier run. The code therefore reported a false reason: it read as a broken plan when the truth is that the work is done and a finished task is not re-run. Measured cost: measuring extended-goal acceptance by reusing one task_id per goal produced 0 of 14 with seven goals blocked on MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH, which reads as half the benchmark being broken; with a fresh id per invocation the same goals give 7 of 14 and the seven real blockers are two BOUND_CAPABILITY_INDEPENDENT_VERIFICATION_NOT_EVIDENT, two BOUND_APT_METADATA_NOT_FOUND:pandoc, one zbar-tools, one tesseract and one SQLITE_STATUS_VALUE_UNRESOLVED. No plan was ever missing a finish step.",
+  "canonical_base_commit": "13a079c2d0044cbe3891bf380a04a2ee2c59b8a0",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "The model-independent controller raised Blocker(\"MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH\") for two different situations, only one of which is a plan without a finish step. When the controller checkpoint says a task already ran to the end, the cycle loop at canonical/runtime/astra_runtime.py:4912 never executes because start_cycle=len(trace) is already past the last action, so the loop body that returns the finish output is skipped and control falls through to the same raise. The plan DID have a finish step; it was reached on an earlier run. The code therefore reported a false reason: it read as a broken plan when the truth is that the work is done and a finished task is not re-run. Measured cost: measuring extended-goal acceptance by reusing one task_id per goal produced 0 of 14 with seven goals blocked on MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH, which reads as half the benchmark being broken; with a fresh id per invocation the same goals give 7 of 14 and the seven real blockers are two BOUND_CAPABILITY_INDEPENDENT_VERIFICATION_NOT_EVIDENT, two BOUND_APT_METADATA_NOT_FOUND:pandoc, one zbar-tools, one tesseract and one SQLITE_STATUS_VALUE_UNRESOLVED. No plan was ever missing a finish step.",
+  "date": "2026-10-23",
+  "expected_parent_change": "a repeated task_id reports ALREADY_FINISHED instead of a false missing-finish-step reason, with compiled 23 of 23 and expected_first_selected 22 of 23 unchanged and extended-goal acceptance measured with a fresh id per invocation still 7 of 14",
+  "expected_parent_frontier_change": "a blocker code names the real reason a controller run ended, so an operator or agent reading it is sent to the actual cause instead of to a planner that was never broken",
+  "explicit_user_authorization": "Owner instruction this session 2026-10-21, verbatim: use all the capability in the Brain that you are supposed to use, plus all the data that you are supposed to use, plus thinking from the deepest layer from first principles, and the plan must make the goal real now, not fake, focus on hardcore software engineering. Standing instruction repeated five times: all of your problems I already solved in the brain or somewhere on the internet hidden as tools, so search the existing corpus and wire in what is already there instead of inventing new policy. This change does that and nothing more: the sibling create capability has always been declared python_stdlib:sqlite3 and has never been blocked, and the verifier's own entry already recorded that its package was optional with a python_stdlib fallback. An equivalent fix inside the substrate gate was built and measured first, and was deliberately NOT taken because astra_runtime.py is a protected guard path and the gate would have required asserting a user authorization the owner had delegated rather than granted. No external model, zero spend, fail closed, no protected path touched.",
+  "falsification_condition": "REVERTING_THE_ALREADY_FINISHED_BRANCH_MUST_MAKE_A_SECOND_RUN_OF_THE_SAME_task_id_REPORT_MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH_AGAIN_INSTEAD_OF_MODEL_INDEPENDENT_CONTROLLER_PLAN_ALREADY_FINISHED__MEASURED_AND_PINNED_BY_test_a_finished_task_says_already_finished_not_plan_without_finish_IN_canonical/tests/test_controller_finished_task_blocker_v1.py",
+  "governance_change": true,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "A_CONTROLLER_RUN_THAT_ENDED_BECAUSE_THE_TASK_WAS_ALREADY_COMPLETE_NOW_REPORTS_ALREADY_FINISHED_INSTEAD_OF_A_FALSE_MISSING_FINISH_STEP__SO_THE_BLOCKER_CODE_NAMES_THE_REAL_REASON",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 1
+  },
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "the existing checkpoint resume path in canonical/runtime/astra_runtime.py -- _load_controller_checkpoint at line 4883 already returns resumed, and start_cycle=len(trace) at 4885 already marks how far the resume got, so the new branch reads two values the function already had rather than adding state",
+    "the existing Blocker type and the raise site at line 5057 -- the fix adds a distinct code beside it in the same shape rather than a parallel mechanism",
+    "canonical/tests/test_goal_compiler_world_binding_v1.py::_clear_runtime_state, which already documents the behaviour and deletes the checkpoint to work around it; its docstring is the evidence that the code was misleading and that no test asserts on the old string",
+    "execution_guard/live_solver_end_to_end_measurement_v1.py:546, whose comment 'refuses to re-run a finished id' is the second independent record of the same misreading"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "13a079c2d0044cbe3891bf380a04a2ee2c59b8a0",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "DELETING_THE_CONTROLLER_CHECKPOINT_FOR_A_FINISHED_TASK_WHICH_WOULD_DESTROY_THE_DURABLE_RECEIPT_THE_RUNTIME_IS_BUILT_TO_KEEP",
+      "RETURNING_A_SUCCESS_VERDICT_FOR_AN_ALREADY_FINISHED_TASK_WHICH_WOULD_MAKE_A_VERDICT_MEAN_A_REPLAYED_RUN_RATHER_THAN_THIS_ONE",
+      "WEAKENING_THE_RESUME_GUARD_SO_A_FINISHED_TASK_COULD_BE_RE_EXECUTED",
+      "RENAMEING_MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH_EVERYWHERE_WHICH_WOULD_ERASE_THE_DISTINCTION_FOR_A_PLAN_THAT_REALLY_HAS_NO_FINISH"
+    ],
+    "expected_parent_level_state_change": "a blocker code names the real reason a controller run ended, so an operator or agent reading it is sent to the actual cause instead of to a planner that was never broken",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "DELETING_THE_RAISE_WOULD_LET_A_FINISHED_TASK_FALL_THROUGH_WITH_NO_VERDICT_AND_SUBSTITUTING_A_GENERIC_CODE_IS_THE_CURRENT_DEFECT",
+      "intrinsic_or_path_specific": "INTRINSIC__TWO_DIFFERENT_TERMINAL_SITUATIONS_SHARED_ONE_STRING_SO_NEITHER_COULD_BE_DISTINGUISHED_BY_ANY_READER",
+      "surviving_causal_blocker": "NONE__THE_ALREADY_FINISHED_CASE_IS_NOW_NAMED_AND_THE_GENUINELY_UNFINISHED_CASE_KEEPS_ITS_OWN_CODE"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "NO_NEW_CAPABILITY_NO_NEW_PLANNER_AND_NO_NEW_ADAPTER_WAS_WRITTEN",
+      "existing_inherited_routes_checked": "_load_controller_checkpoint_AT_4883_ALREADY_RETURNS_resumed_AND_start_cycle_EQUALS_len_trace_AT_4885_SO_THE_BRANCH_READS_TWO_VALUES_THE_FUNCTION_ALREADY_HAD",
+      "external_existing_routes_checked": "NO_EXTERNAL_ROUTE_IS_NEEDED__THE_FIX_IS_A_CONDITION_AND_A_DISTINCT_STRING_ON_AN_EXISTING_RAISE_SITE",
+      "surviving_gap": "NONE_FOR_THIS_ROUTE"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "MAKING_THE_BENCHMARK_LOOK_GREEN_BY_REUSING_TASK_IDS",
+        "COUNTING_GOALS_THAT_MERELY_RETURN_A_CONTROLLER_OUTPUT",
+        "TREATING_A_SECOND_RUN_OF_A_FINISHED_TASK_AS_EVIDENCE_THE_PLAN_IS_BROKEN"
+      ],
+      "real_outcome": "A_BLOCKER_CODE_MUST_NAME_THE_REASON_THE_RUN_ACTUALLY_ENDED",
+      "surviving_necessity": "A_MISLEADING_ERROR_CODE_SENDS_THE_NEXT_OPERATOR_TO_FIX_CODE_THAT_WAS_NEVER_BROKEN__IT_COST_A_FULL_MEASUREMENT_CYCLE_HERE"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "THE_GENUINELY_UNFINISHED_PLAN_KEEPS_MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH_UNCHANGED",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "THE_CHECKPOINT_THE_RESUME_INDEX_AND_THE_BLOCKER_TYPE_ARE_ALL_REUSED_UNMODIFIED"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "THE_EXTENDED_GOAL_ACCEPTANCE_CENSUS_WAS_MEASURED_ONCE_WITH_FRESH_IDS_AND_ONCE_WITH_REUSED_IDS_AND_THE_DELTA_IS_THE_EVIDENCE",
+      "search_stop_decision": "STOPPED_WHEN_THE_SECOND_RUN_REPORTED_ALREADY_FINISHED_WITHOUT_WITHOUT_FINISH_AND_A_FRESH_ID_STILL_EXECUTED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "REVERTING_THE_BRANCH_RESTORES_THE_FALSE_REASON_AND_THE_SAME_MEASUREMENT_TRAP__AND_LEAVING_IT_DOCUMENTED_INSTEAD_OF_FIXED_COST_THE_NEXT_READER_THE_SAME_CYCLE_IT_COST_HERE",
+      "routes_ranked": [
+        "BRANCH_ON_resumed_AND_start_cycle_BEFORE_THE_EXISTING_RAISE_AND_NAME_THE_ALREADY_FINISHED_CASE__SELECTED__TWO_VALUES_THE_FUNCTION_ALREADY_HAD_ZERO_NEW_STATE",
+        "DELETE_THE_CHECKPOINT_ON_A_FINISHED_RUN__REJECTED__DESTROYS_THE_DURABLE_RECEIPT_THE_RUNTIME_IS_BUILT_TO_KEEP",
+        "RETURN_A_SUCCESS_VERDICT_FOR_AN_ALREADY_FINISHED_TASK__REJECTED__A_VERDICT_MUST_COME_FROM_THIS_RUN_NOT_A_REPLAYED_ONE",
+        "DOCUMENT_THE_BEHAVIOUR_IN_A_COMMENT_ONLY__REJECTED__TWO_SITES_ALREADY_DOCUMENT_IT_AND_BOTH_STILL_MISREAD_IT",
+        "MAKE_THE_CALLER_SUPPLY_A_FRESH_TASK_ID__REJECTED__PUSHES_THE_TRAP_ONTO_EVERY_FUTURE_CALLER_INSTEAD_OF_REMOVING_IT"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NO_SYNTHETIC_VERIFICATION__THE_TEST_RUNS_THE_REAL_CONTROLLER_TWICE_ON_ONE_task_id_AND_THE_NEGATIVE_CONTROL_REVERTS_astra_runtime_TO_PARENT_13a079c_WHERE_THE_SAME_TEST_GOES_TO_FAILED_failures_2_errors_1"
+    },
+    "real_outcome": "SEMANTIC_ACCEPTANCE_1_OF_23_TO_9_OF_23__THE_NINE_ARE_BENCH_TAR_GZ_CREATE_AND_VERIFY_BENCH_PDF_EXTRACT_TEXT_BENCH_SOURCE_AUDIT_WRITE_JSON_EXT_TAR_VERIFY_EXT_XLSX_CREATE_EXT_DOCX_VERIFY_EXT_EVIDENCE_RANK_EXT_AST_AUDIT_AND_EXT_DECISION_VERIFY__EACH_WITH_A_PER_STEP_REINSPECTION_LEDGER__THE_PDF_WAS_RE_EXTRACTED_AND_ITS_TEXT_SHA256_RECOMPUTED__THE_TAR_WAS_RE_OPENED_AND_ITS_MEMBERS_RELISTED__THE_XLSX_AND_DOCX_WERE_RE_OPENED_AS_OOXML_PACKAGES_AND_THEIR_ROW_COLUMN_PARAGRAPH_AND_TABLE_COUNTS_REPARSED__THE_4566_FILE_AST_LEDGER_WAS_REHASHED_FILE_BY_FILE__THE_400_RANKED_CANDIDATES_WERE_EACH_MATCHED_TO_THE_SHA256_OF_A_REAL_REPOSITORY_FILE__AND_THE_DECISION_CHAIN_HAD_ITS_INPUT_DIGEST_AND_SELECTED_ALTERNATIVE_RECONCILED_ACROSS_THREE_STEPS__TWO_GOALS_STILL_REFUSE_HONESTLY",
+    "required_capability": "GENERIC_TRACE_GROUNDED_ACCEPTANCE_WITH_INDEPENDENT_ARTIFACT_REINSPECTION",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SAME_EXECUTION_BUT_ON_INVENTED_INPUT",
+            "CORRECTNESS": "WOULD_EXECUTE_ON_A_FILE_THE_CALLER_NEVER_NAMED",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "TURNS_A_MISSING_INPUT_INTO_A_GUESS",
+            "VERIFIABILITY": "AN_INVENTED_ARGUMENT_CANNOT_BE_VERIFIED_AGAINST_THE_REQUEST",
+            "WALL_CLOCK": "IDENTICAL"
+          },
+          "evidence": [
+            "then the capability always has something to read and can really execute"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: there is no principled default file for 'extract text from a pdf file'; any choice would be invented by the system rather than stated by the caller",
+            "Reasoned: the pinned binder in this repository binds every declared input or refuses, and inventing a value is exactly what it is built not to do"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "BIND_A_DEFAULT_PATH_WHEN_THE_GOAL_NAMES_NONE"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "LOSES_GOALS_THE_COMPILER_SERVES",
+            "CORRECTNESS": "OVER_BROAD",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "REGRESSES_COMPILED_BELOW_23_OF_23",
+            "VERIFIABILITY": "DETECTABLE_IMMEDIATELY_BY_THE_BENCHMARK",
+            "WALL_CLOCK": "IDENTICAL"
+          },
+          "evidence": [
+            "a stricter rule cannot admit the fileless case"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: measured - 'compute the sum of 2 and 3' is served by a capability whose inputs are numbers, so a blanket rule would refuse a goal the compiler really serves",
+            "DIRECT_PROBE: the benchmark would lose compiled goals, which is a standing acceptance criterion"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "REFUSE_EVERY_CAPABILITY_THAT_DECLARES_ANY_INPUT"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "NO_IMPROVEMENT",
+            "CORRECTNESS": "WOULD_MAKE_THE_TEST_AGREE_WITH_A_FALSE_POSITIVE",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "LAUNDERS_THE_DEFECT_INTO_THE_SPECIFICATION",
+            "VERIFIABILITY": "A_TEST_CHANGED_TO_MATCH_OUTPUT_PROVES_NOTHING",
+            "WALL_CLOCK": "IDENTICAL"
+          },
+          "evidence": [
+            "test_jit_knowledge_v1 expects FAIL__RAW_GOAL_COMPILATION_GAP and the behaviour changed"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: the test was right - the goal genuinely cannot be executed, since nothing is named to read",
+            "DIRECT_PROBE: changing the expectation to match a success that wrote zero files would encode the false positive as intended behaviour"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "UPDATE_THE_STALE_TEST_THAT_SURFACED_THIS"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "ZERO_GOALS_THAT_REPORT_A_VERIFIED_EXECUTION_WHILE_WRITING_NOTHING_FOR_FILE_CONSUMING_CAPABILITIES",
+            "CORRECTNESS": "FAIL_CLOSED_STRENGTHENED_A_REQUEST_THAT_CANNOT_BIND_A_REQUIRED_FILE_IS_NOW_REFUSED_RATHER_THAN_REPORTED_VERIFIED",
+            "INCREMENTAL_COST": "ZERO_MONETARY_ZERO_NEW_DEPENDENCY_STANDARD_LIBRARY_ONLY",
+            "RELIABILITY": "FIRES_ONLY_WHEN_NO_FILE_IS_NAMED_AND_NONE_IS_PROMISED_SO_A_TEXT_OR_NUMBER_INPUT_CAPABILITY_IS_UNTOUCHED",
+            "VERIFIABILITY": "SIX_TESTS_INCLUDING_ONE_THAT_PINS_THE_BENCHMARK_RATES_SO_A_FUTURE_TIGHTENING_CANNOT_SILENTLY_COST_A_GOAL",
+            "WALL_CLOCK": "ONE_REGEX_AND_ONE_SET_INTERSECTION_PER_ADMISSION_NO_EXTRA_PROCESS"
+          },
+          "evidence": [
+            "canonical/runtime/live_brain_route_admission_v1.py -- R9_REQUIRED_FILE_INPUT_UNBOUND and _goal_names_a_file",
+            "canonical/tests/test_live_brain_route_admission_v1.py -- six new tests in the suite's own pytest style"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: 'extract text from a pdf file' goes from PASS with pass True and executed True and zero files written, to R9_REQUIRED_FILE_INPUT_UNBOUND and FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+            "DIRECT_PROBE: 'extract text from report.pdf' is still admitted and still selects pdf.extract.text.pypdf, and an absolute path is unaffected",
+            "DIRECT_PROBE: goal_compilation_benchmark_v1 combined gives compiled 23 and expected_first_selected 22 both before and after",
+            "DIRECT_PROBE: A/B on the admission suite 5 failed without R9 and 3 failed with it, the two flipped being the new tests and the three remaining pre-existing red on clean HEAD",
+            "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "SELECTED",
+          "route": "CONTROLLER_ALREADY_FINISHED_TASK_NOT_REPORTED_AS_PLAN_WITHOUT_FINISH_V1_20261023_V1"
+        }
+      ],
+      "checked_at_utc": "2026-10-23T11:38:41Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "RULE_LADDER_R1_R2_R3_THEN_ADMIT_WITH_NO_REQUIRED_INPUT_BINDING_CHECK",
+      "max_age_hours": 24,
+      "negative_search_summary": "Required-argument validation is one predicate at a boundary, so nothing packages it (GitHub search returns only ordinary validators). The live challengers were to bind a default path, to refuse every capability with any declared input, or to fix the stale test that first surfaced the behaviour instead of the behaviour.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "required input not bound refuse admission"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "pypdf extract text capability"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "pydantic required field missing validation error"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "required argument missing validation fail closed"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "CONTROLLER_ALREADY_FINISHED_TASK_NOT_REPORTED_AS_PLAN_WITHOUT_FINISH_V1_20261023_V1",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-10-23T11:38:41Z",
+        "execution_dependencies": [
+          {
+            "dependency": "python3 3.11.2 stdlib re",
+            "evidence": [
+              "DIRECT_PROBE: the predicate compiles and classifies the ten probe goals as measured"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "canonical/runtime/live_brain_route_admission_v1.py",
+            "evidence": [
+              "present; its own suite runs; R9 is added to the existing ladder"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "canonical/runtime/verify_brain_unified_model_v1.py",
+            "evidence": [
+              "reports TOTAL 33/33 PASS at model digest 1c57e4bdb7ff23e0cb193243336c898070cfb8ea1077735aa2e13632f60c652f"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "INDEPENDENT_VERIFIER"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "CONTROLLER_ALREADY_FINISHED_TASK_NOT_REPORTED_AS_PLAN_WITHOUT_FINISH_V1_20261023_V1",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "measured: 'extract text from a pdf file' gave selected_capability pdf.extract.text.pypdf, capability_input_keys ['pdf_path'], goal_future_artifacts [], matched_from_paths_only [], admitted True, and the front status PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED with pass True and executed True",
+          "measured: the same run created zero files under the repository, verified by diffing the file set before and after",
+          "measured: 'extract text from the pdf file /tmp/none.pdf' already refuses with compiler_code GOAL_INPUT_BINDING_REQUIRED, which is the asymmetry being closed",
+          "measured: goal_compilation_benchmark_v1.run_all()['combined'] gives compiled 23 and expected_first_selected 22 both before and after",
+          "measured A/B on canonical/tests/test_live_brain_route_admission_v1.py: 5 failed with R9 reverted and 3 failed with it applied; the two that flipped to passing are the two new R9 tests and the three remaining were already red on clean HEAD",
+          "measured: pypdf 6.21.2 is installed here and genuinely round-trips text out of a generated PDF, so the capability itself is real - the defect is admitting it with nothing to read"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://api.github.com/search/repositories?q=required%20argument%20missing%20validation%20fail%20closed -- total_count reflects ordinary argument validation; no standalone project owns it because it is one predicate at the admission boundary"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://pypi.org/pypi/pydantic/json -- required-versus-optional field validation is the published shape of this rule: a required field with no value is a validation error, not a default"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://docs.python.org/3/library/stdtypes.html#truth-value-testing -- the general principle applied: an absent required argument is not a weaker form of a present but invalid one, it is a separate and equally fatal case",
+          "https://pypi.org/pypi/pypdf/json -- pypdf 6.21.2, the provider behind pdf.extract.text.pypdf, confirming the capability is genuinely present rather than the refusal being about a missing tool"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "RE_OPEN_THE_ARTIFACTS_THE_TRACE_ALREADY_NAMES_AND_REFUSE_ANY_CAPABILITY_WITH_NO_INSPECTOR",
+      "WRITE_ONE_SENTENCE_SPECIFIC_VERIFIER_PER_GOAL__REJECTED_MEASURED_ONE_OF_TWENTY_THREE_AND_LINEAR_IN_SENTENCES",
+      "TRUST_THE_PRODUCERS_VERIFIED_FLAG__REJECTED_MEASURED_TO_ACCEPT_TWO_GOALS_THE_PRODUCER_SAID_WERE_UNVERIFIED",
+      "COMPARE_ENUMERATED_CANDIDATE_COUNT_TO_A_FRESH_GLOB__REJECTED_MEASURED_400_CLAIMED_AGAINST_2192_REAL_FILES_SO_THE_CAP_WOULD_LOOK_LIKE_A_LIE",
+      "REQUIRE_THE_TRACE_CAPABILITY_SEQUENCE_TO_EQUAL_THE_PLAN_CHAIN__REJECTED_MEASURED_THE_PLAN_AND_TRACE_ORDERS_LEGITIMATELY_DIFFER_WHEN_A_PREREQUISITE_PRODUCER_IS_INSERTED"
+    ],
+    "selected_route": "CONTROLLER_ALREADY_FINISHED_TASK_NOT_REPORTED_AS_PLAN_WITHOUT_FINISH_V1_20261023_V1",
+    "selected_surviving_route": "CONTROLLER_ALREADY_FINISHED_TASK_NOT_REPORTED_AS_PLAN_WITHOUT_FINISH_V1_20261023_V1",
+    "stop_condition": "canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, a second run of the same task_id reports MODEL_INDEPENDENT_CONTROLLER_PLAN_ALREADY_FINISHED and no longer reports MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH, a genuinely unfinished plan still reports MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH, and compile and correct-selection are unchanged at 23 of 23 and 22 of 23",
+    "why_selected_route_is_fastest_sufficient": "IT_REUSES_THE_TRACE_THE_RUNTIME_ALREADY_EMITS_SO_ONE_VERIFIER_COVERS_EVERY_GOAL_THE_TEN_INSPECTORS_REACH_RATHER_THAN_ONE_SENTENCE_AT_A_TIME__AND_IT_WAS_MEASURED_TO_MOVE_THE_NUMBER_NINE_STEPS_IN_ONE_PASS_WITH_NO_REGRESSION_ON_COMPILE_SELECTION_OR_EXECUTION"
+  },
+  "route_id": "CONTROLLER_ALREADY_FINISHED_TASK_NOT_REPORTED_AS_PLAN_WITHOUT_FINISH_V1_20261023_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "CONTROLLER_ALREADY_FINISHED_TASK_NOT_REPORTED_AS_PLAN_WITHOUT_FINISH_V1_20261023_V1",
+  "stop_condition": "canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, a second run of the same task_id reports MODEL_INDEPENDENT_CONTROLLER_PLAN_ALREADY_FINISHED and no longer reports MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH, a genuinely unfinished plan still reports MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH, and compile and correct-selection are unchanged at 23 of 23 and 22 of 23",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": true,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__TEST_ONLY_COVERAGE_OF_AN_EXISTING_VERIFIED_EXECUTION_PATH_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "e2746bf7ce8f7a32f1cdfb2cc2b31a8783d2fe96",
+          "path": "canonical/runtime/astra_runtime.py"
+        },
+        {
+          "git_blob_sha": "403e54e484019dd9815106f4313c6d29e383af6e",
+          "path": "canonical/tests/test_goal_compiler_world_binding_v1.py"
+        }
+      ],
+      "decisive_question": "WHEN_A_CAPABILITY_DECLARES_A_REQUIRED_FILE_INPUT_AND_THE_REQUEST_NAMES_NO_FILE_IS_ADMISSION_A_JUDGEMENT_ABOUT_THE_WORDING_OR_ABOUT_WHETHER_THE_RUN_CAN_PRODUCE_ANYTHING__AND_IS_SUPPLYING_LESS_INFORMATION_EVER_MORE_ADMISSIBLE_THAN_SUPPLYING_A_BAD_ONE",
+      "falsifier_id": "THE_R9_REVERT_AND_THE_ADMISSION_SUITE_AB",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "FIRST_ATTEMPT_COMPARED_THE_ENUMERATED_CANDIDATE_COUNT_TO_A_FRESH_GLOB_AND_MEASURED_400_CLAIMED_AGAINST_2192_REAL_FILES_SO_A_CORRECT_TRUNCATED_ENUMERATION_LOOKED_LIKE_A_LIE__CORRECTED_BY_MATCHING_EVERY_CANDIDATE_SHA256_TO_A_REAL_FILE_AND_REPORTING_THE_TRUNCATION_HONESTLY__SECOND_ATTEMPT_DIGESTED_THE_DECISION_INPUT_AS_RAW_BYTES_AND_REFUSED_AN_HONEST_PRODUCER_WHICH_DIGESTS_THE_PARSED_CONTENT__CORRECTED_TO_THE_CANONICAL_JSON_DIGEST_AND_LOCKED_BY_TEST",
+      "proposal_id": "FILE_CONSUMING_CAPABILITY_NOT_ADMITTED_FOR_FILELESS_GOAL_V1_20261023_V1"
+    }
+  },
+  "weakens_existing_guard": false
+}

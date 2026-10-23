@@ -5054,6 +5054,17 @@ def _run_model_independent_goal(step, mission, goal):
             if composition_summary is not None:
                 output["composition_state_capsule"]=composition_summary
             return output
+    # Two different situations reached this line and both were reported as "the plan has no finish
+    # step", which is only true of one of them.  When the checkpoint says this task already ran to
+    # the end, the loop above never executes because start_cycle is already past the last action, so
+    # the plan DID have a finish - it was reached on an earlier run.  Reporting that as a missing
+    # finish is a false reason: it reads as a broken plan when the truth is that the work is done
+    # and a finished task is not re-run.  canonical/tests/test_goal_compiler_world_binding_v1.py
+    # already documents the behaviour and works around it by deleting the checkpoint, and
+    # execution_guard/live_solver_end_to_end_measurement_v1.py notes that it "refuses to re-run a
+    # finished id"; neither could say so from the code it was given.
+    if resumed and start_cycle>=len(actions):
+        raise Blocker("MODEL_INDEPENDENT_CONTROLLER_PLAN_ALREADY_FINISHED")
     raise Blocker("MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH")
 
 def _capability_problem(step, mission):

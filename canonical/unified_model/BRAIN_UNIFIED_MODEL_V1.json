@@ -24407,7 +24407,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6310,
+  "research_index_records": 6311,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 405,
@@ -24416,7 +24416,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "54bbc9f1028a46471bacd4da843fe7223465fbd5ab6cab72f199bad801324cea"
+  "value": "f832cdcc4488935d1c644e920cff74cccb104740e8bff3f72e2c210c2a0f5f32"
  },
  "engines": [
   {
@@ -187890,6 +187890,51 @@
    }
   },
   {
+   "action_id": "CONTROLLER_ALREADY_FINISHED_TASK_NOT_REPORTED_AS_PLAN_WITHOUT_FINISH_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/CONTROLLER_ALREADY_FINISHED_TASK_NOT_REPORTED_AS_PLAN_WITHOUT_FINISH_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/CONTROLLER_ALREADY_FINISHED_TASK_NOT_REPORTED_AS_PLAN_WITHOUT_FINISH_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "1af682cb51b39f3aa96350465c7710bbc68dd20bbe72ad5fe252418b7e8f80a8",
+   "status": "",
+   "terms": {
+    "14": 2,
+    "20261023": 1,
+    "4912": 1,
+    "acceptance": 1,
+    "action": 1,
+    "already": 3,
+    "blocker": 2,
+    "broken": 3,
+    "code": 2,
+    "controller": 4,
+    "controller_already_finished_task_not_reported_as_plan_without_finish_v1_20261023_v1": 2,
+    "finish": 5,
+    "finished": 2,
+    "goals": 2,
+    "loop": 2,
+    "model_independent_controller_plan_without_finish": 2,
+    "never": 2,
+    "not": 2,
+    "one": 5,
+    "per": 2,
+    "plan": 5,
+    "real": 2,
+    "reason": 2,
+    "reported": 2,
+    "run": 2,
+    "same": 2,
+    "seven": 2,
+    "so": 2,
+    "step": 3,
+    "task": 3,
+    "two": 3,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "CONTROLLER_TRACE_DECLARED_PLAN_PARITY_V1_20261022_V1",
    "capability": false,
    "date": "2026-10-22",
@@ -194218,7 +194263,7 @@
    "imported_by_count": 4,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/astra_runtime.py",
-   "sha256": "3e06fa1d53b0856a6207e4a2ff047938dcdcb07af2f4f31d0319957eb1d3b88e",
+   "sha256": "c0a920dabf136beb01d317c6834e5358b7d658325a3bedb5cac560fe7911bad2",
    "summary": "",
    "symbol_count": 113,
    "symbols": [
