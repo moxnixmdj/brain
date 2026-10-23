@@ -22433,7 +22433,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "76ddc81f8f731494cdff62fd3596d5df539af626a3067948f3adf7d4de6c3b8f",
+    "source_sha256": "4648a8e7fbe9a208a8b2e16f391c44c1d3d8dde51271e2eb1446c89bde9c3241",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24407,7 +24407,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6307,
+  "research_index_records": 6308,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 405,
@@ -24416,7 +24416,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6637e423952e533dbbc160025c054357cb0a248cfeb9ea9285a6bfdbd23ebf6d"
+  "value": "5ef7ba54d497e4bb17b4d04d45bb8206cd0c1e2875c5bb0060a090c61fbb26ae"
  },
  "engines": [
   {
@@ -46318,7 +46318,7 @@
   "included_source_count": 863,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "a2ee0624a89eeeb81724276d0431bf039c55d4231729785209eca0fa3b41ae7c"
+  "source_tree_digest": "a3877ff12c7ee50cf96050983c0dbe3b147621c0d5225f2bb028f64ae5c9d6a5"
  },
  "research_index": [
   {
@@ -189022,6 +189022,51 @@
     "reuse_python_transitive_runtime_closure_v1_plus_exact_dependency_relevance_boundary__seed_from_declared_system_not_external_verifier_tooling": 1,
     "subject": 1,
     "v2": 1
+   }
+  },
+  {
+   "action_id": "PYTEST_STYLE_BARE_FUNCTIONS_COLLECTED_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/PYTEST_STYLE_BARE_FUNCTIONS_COLLECTED_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/PYTEST_STYLE_BARE_FUNCTIONS_COLLECTED_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "b38019410eca1d43e22e4795a6cc0d9603901405999ebc24acb3cf453e8a5c81",
+   "status": "",
+   "terms": {
+    "20261023": 1,
+    "3880": 1,
+    "710": 1,
+    "all": 1,
+    "bare": 2,
+    "baseline_already_passes": 1,
+    "body": 1,
+    "broken": 1,
+    "call": 1,
+    "cannot": 1,
+    "code": 1,
+    "collected": 3,
+    "counted": 1,
+    "def": 1,
+    "empty": 1,
+    "entering": 1,
+    "ever": 1,
+    "files": 2,
+    "function": 3,
+    "functions": 2,
+    "pytest": 2,
+    "pytest_style_bare_functions_collected_v1_20261023_v1": 2,
+    "rather": 2,
+    "reported": 2,
+    "style": 2,
+    "suite": 4,
+    "test": 2,
+    "tests": 2,
+    "than": 2,
+    "unittest": 2,
+    "v1": 2,
+    "were": 2
    }
   },
   {
