@@ -1,5 +1,5 @@
 {
- "action_id": "SQLITE_SOURCE_SELECTED_BY_COLUMNS_NOT_BY_SENTENCE_V1_20261023_V1",
+ "action_id": "INPUT_BOUND_BY_SENTENCE_ROLE_NOT_BY_FILENAME_V1_20261023_V1",
  "action_kind": "FRESH_REUSE",
  "action_summary": "Bind typed capability inputs by the role the goal sentence assigns them, not by their filename.  _bind_inputs matched a typed key such as manifest_path by requiring the stem inside the path's own name, so a real manifest named m9.json could not bind and the whole goal failed closed.",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
