@@ -24536,7 +24536,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6333,
+  "research_index_records": 6334,
   "routing_tokens": 1798,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c911fbe1d88f92a3fb2ff58975724df4e87940489f3cc213fde212ac26ee95b0"
+  "value": "3c0fd9b0f17aacbe6236319d97413870b2d9428ca1ca0ce9bbfd6fdcf49d26d6"
  },
  "engines": [
   {
@@ -188313,6 +188313,51 @@
     "trace": 2,
     "v1": 2,
     "verified": 3
+   }
+  },
+  {
+   "action_id": "DAG_EXECUTOR_CONTRACT_ASSERTED_AS_IMPLEMENTED_V1_20261024_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/DAG_EXECUTOR_CONTRACT_ASSERTED_AS_IMPLEMENTED_V1_20261024_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/DAG_EXECUTOR_CONTRACT_ASSERTED_AS_IMPLEMENTED_V1_20261024_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "b5d50e3ec85c2825544566ea2a0845d81f3d19d27bdaeaffe9d121cbb073ca34",
+   "status": "",
+   "terms": {
+    "20261024": 1,
+    "abandon": 1,
+    "about": 1,
+    "adapters": 1,
+    "already": 1,
+    "anywhere": 1,
+    "appear": 1,
+    "asserted": 1,
+    "before": 1,
+    "both": 1,
+    "cannot": 1,
+    "columns": 1,
+    "contract": 1,
+    "dag": 1,
+    "dag_executor_contract_asserted_as_implemented_v1_20261024_v1": 2,
+    "data": 1,
+    "demanding": 1,
+    "derived": 1,
+    "document": 1,
+    "either": 1,
+    "executor": 1,
+    "fact": 1,
+    "family": 2,
+    "file": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 1,
+    "had": 1,
+    "implemented": 1,
+    "interpreter": 1,
+    "json": 1,
+    "source": 2,
+    "v1": 2
    }
   },
   {
