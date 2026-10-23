@@ -205,6 +205,29 @@ def _candidate_specs(tree: ast.AST, numeric_literals: list[Any], string_literals
                     lambda n: ast.UnaryOp(op=ast.Not(),operand=n)
                 )
 
+def _source_env(*paths: Any) -> dict[str, str]:
+    """PYTHONPATH extended with the directories holding the code under repair.
+
+    A test suite normally imports the module it tests. The bound executor calls every adapter
+    with the REPOSITORY ROOT as ``root`` and the subprocess inherits that as its working
+    directory, so a sibling ``import calc`` dies with ModuleNotFoundError before any assertion
+    runs - and then the baseline and every candidate score identically, so a search that only
+    accepts a STRICT improvement reports no candidate for any bug. Adding the source directory to
+    PYTHONPATH makes the module importable without changing the working directory the caller
+    chose, so no other caller's relative paths change meaning.
+    """
+    dirs: list[str] = []
+    for raw in paths:
+        q = pathlib.Path(str(raw))
+        d = q if q.is_dir() else q.parent
+        if str(d) not in dirs:
+            dirs.append(str(d))
+    existing = os.environ.get("PYTHONPATH", "")
+    if existing:
+        dirs.append(existing)
+    return {"PYTHONPATH": os.pathsep.join(dirs)}
+
+
 def _byte_offset(lines: list[bytes], lineno: int, col: int) -> int:
     return sum(len(x) for x in lines[:lineno-1]) + col
 
@@ -273,7 +296,8 @@ def run(args: Mapping[str, Any], root: str|os.PathLike[str]) -> dict[str, Any]:
         source_text=original_bytes.decode("utf-8")
     except UnicodeDecodeError as exc:
         raise PatchSearchError("SOURCE_NOT_UTF8") from exc
-    baseline=_run_tests(repo,argv,timeout_s)
+    env=_source_env(source)
+    baseline=_run_tests(repo,argv,timeout_s,env)
     if baseline["returncode"]==0:
         raise PatchSearchError("BASELINE_ALREADY_PASSES")
     if baseline["timed_out"]:
@@ -293,7 +317,7 @@ def run(args: Mapping[str, Any], root: str|os.PathLike[str]) -> dict[str, Any]:
             tested+=1
             source.write_text(candidate,encoding="utf-8")
             _purge_source_bytecode(source)
-            result=_run_tests(repo,argv,timeout_s)
+            result=_run_tests(repo,argv,timeout_s,env)
             source.write_bytes(original_bytes)
             _purge_source_bytecode(source)
             attempts.append({
@@ -310,7 +334,7 @@ def run(args: Mapping[str, Any], root: str|os.PathLike[str]) -> dict[str, Any]:
                 for _ in range(2):
                     source.write_text(candidate,encoding="utf-8")
                     _purge_source_bytecode(source)
-                    rr=_run_tests(repo,argv,timeout_s)
+                    rr=_run_tests(repo,argv,timeout_s,env)
                     source.write_bytes(original_bytes)
                     _purge_source_bytecode(source)
                     replay.append({

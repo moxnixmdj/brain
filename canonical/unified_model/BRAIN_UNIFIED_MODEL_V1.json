@@ -22431,7 +22431,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "6385313b1ff06d1d01c96132d66410982ff92fa3a8a3a5ac523577a5beab204d",
+    "source_sha256": "5948576fd977c8a95c5eb6594f0b39bb9420651e021f9afd0d5253ed3bcafc31",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22776,7 +22776,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py",
-    "source_sha256": "8cb2c30a041d6dfb8df53e43aca95a1c003c46957b0a8b30bed8e376ef8642b9",
+    "source_sha256": "cbe8e8a4dbe778461b0f7fa4b79e24ae9fe1feef08bdf81c77b01d5ab3a0268f",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6302,
+  "research_index_records": 6303,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "1840bda1083caaa5346808eca52aab16c3b03097bfb26eb1d1e14d14048eddb6"
+  "value": "8803ce2a85bcd361a5eac79df1fb1e87097bbd42208aaab91b7f377f973a6c20"
  },
  "engines": [
   {
@@ -46315,7 +46315,7 @@
   "included_source_count": 863,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "0df9b0d24602256a2409794a52c28c5e65fd1a4535189f24ddbece10872cb35e"
+  "source_tree_digest": "cffc174bc9eaf34b84ab4323847e3a411e54c18b1d24303972e03bd7e61d413f"
  },
  "research_index": [
   {
@@ -189096,6 +189096,51 @@
     "root2-closure-controller-v2-20261004": 1,
     "truth_repair_then_proof_compression_then_parallel_zero_reality_then_single_minimum_reality_transaction": 1,
     "v2": 1
+   }
+  },
+  {
+   "action_id": "SOFTWARE_REPAIR_FAMILY_SHARED_SOURCE_ENV_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/SOFTWARE_REPAIR_FAMILY_SHARED_SOURCE_ENV_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SOFTWARE_REPAIR_FAMILY_SHARED_SOURCE_ENV_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "44a9e6e1eb3ab0f264a1552b1cfe9a608e2ad3a5616637e2888b231b516e77d1",
+   "status": "",
+   "terms": {
+    "20261023": 1,
+    "after": 1,
+    "already": 1,
+    "also": 1,
+    "applied": 1,
+    "because": 3,
+    "both": 1,
+    "bound": 1,
+    "broken": 1,
+    "bug": 1,
+    "but": 1,
+    "called": 1,
+    "cannot": 1,
+    "drift": 2,
+    "environment": 2,
+    "family": 4,
+    "half": 2,
+    "loop": 3,
+    "module": 2,
+    "one": 2,
+    "python": 2,
+    "repair": 6,
+    "repaired": 2,
+    "run": 2,
+    "so": 3,
+    "software": 3,
+    "software_repair_family_shared_source_env_v1_20261023_v1": 2,
+    "source": 2,
+    "still": 2,
+    "tests": 2,
+    "v1": 2,
+    "working": 2
    }
   },
   {

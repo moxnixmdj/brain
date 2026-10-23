@@ -66,15 +66,8 @@ def _best(repo,source,tests,argv,timeout,score,limit,touched,env):
   return rec,tested
  return best,tested
 def _source_env(src):
-    """PYTHONPATH extended with the directory holding the code under repair.
-
-    The subprocess keeps the working directory the caller chose; this only makes the repaired
-    module importable by its own tests. Without it a sibling ``import calc`` dies with
-    ModuleNotFoundError, the baseline and every candidate then score identically, and no edit
-    can ever strictly improve - so the loop reports no improving candidate for every bug.
-    """
-    existing=os.environ.get('PYTHONPATH','')
-    return {'PYTHONPATH':os.pathsep.join([str(src)]+([existing] if existing else []))}
+    """Delegate to the shared helper in the patch-search module; one implementation."""
+    return _PATCH._source_env(src)
 
 
 def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
