@@ -32,7 +32,7 @@ def _safe_dir(repo,raw):
  if not p.is_dir() or p.is_symlink(): raise FaultLocalizerError("DIRECTORY_INVALID")
  return p
 def _trace_one(repo,test,timeout,max_events,env=None):
- code=r'''import json,pathlib,runpy,sys,traceback
+ code=_PATCH.SUITE_RUNNER+r'''import json,pathlib,runpy,sys,traceback
 repo=pathlib.Path(sys.argv[1]).resolve(); target=pathlib.Path(sys.argv[2]).resolve(); cap=int(sys.argv[3]); seen={}; events=0
 def tr(frame,event,arg):
  global events
@@ -46,7 +46,7 @@ def tr(frame,event,arg):
 ok=True;tb=[]
 sys.settrace(tr)
 try:
- runpy.run_path(str(target),run_name="__main__")
+ _brain_run_suite(target)
 except SystemExit as e:
  ok=(e.code in (None,0,False))
  if not ok:tb=traceback.extract_tb(e.__traceback__)

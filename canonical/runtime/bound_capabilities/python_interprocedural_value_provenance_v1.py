@@ -38,7 +38,7 @@ def _safe_dir(repo,raw):
  return p
 
 def _trace_one(repo,test,timeout,max_events,max_value_chars,env=None):
- code=r'''import hashlib,json,math,pathlib,runpy,sys,traceback
+ code=_PATCH.SUITE_RUNNER+r'''import hashlib,json,math,pathlib,runpy,sys,traceback
 repo=pathlib.Path(sys.argv[1]).resolve(); target=pathlib.Path(sys.argv[2]).resolve(); cap=int(sys.argv[3]); maxchars=int(sys.argv[4])
 events=[]; seq=0
 def path_of(frame):
@@ -76,7 +76,7 @@ def tr(frame,event,arg):
  return tr
 ok=True;tb=[]
 sys.settrace(tr)
-try:runpy.run_path(str(target),run_name="__main__")
+try:_brain_run_suite(target)
 except SystemExit as e:
  ok=(e.code in (None,0,False))
  if not ok:tb=traceback.extract_tb(e.__traceback__)

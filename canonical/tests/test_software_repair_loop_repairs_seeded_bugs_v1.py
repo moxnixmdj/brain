@@ -105,7 +105,7 @@ CASES = [
 GUARD = "\nif __name__ == '__main__':\n    unittest.main()\n"
 
 
-def _seed(name, source, test_source):
+def _seed(name, source, test_source, guard=True):
     """Write one seeded case. The __main__ guard is added because the fault localizer executes the
     suite with runpy.run_path(..., run_name="__main__"), which only runs the tests if the file has
     that guard - without it the child reports NO_FAILING_TEST. Real unittest files have it; the
@@ -115,7 +115,7 @@ def _seed(name, source, test_source):
         shutil.rmtree(d)
     d.mkdir(parents=True)
     (d / "calc.py").write_text(source, encoding="utf-8")
-    if "__main__" not in test_source:
+    if guard and "__main__" not in test_source:
         test_source = test_source + GUARD
     (d / "test_calc.py").write_text(test_source, encoding="utf-8")
     return d
@@ -391,7 +391,12 @@ class LocalizationTests(unittest.TestCase):
         # the traceback must reach the assertion, not stop on the import
         tb = (r["test_traces"][0].get("traceback") or [])
         self.assertTrue(tb, "traceback must not be empty")
-        self.assertEqual(tb[0][1], 7, "traceback must point at the assertion line, not the import")
+        lines = [f[1] for f in tb]
+        self.assertNotIn(1, lines, "line 1 is the import; stopping there was the original defect")
+        assert_line = (work / "test_calc.py").read_text().splitlines().index(
+            "        self.assertEqual(calc.add(2, 3), 5)") + 1
+        self.assertIn(assert_line, lines,
+                      "the traceback must reach the failing assertion: " + repr(lines))
 
     def test_a_pass_that_ranks_nothing_is_a_false_positive_and_must_not_happen(self):
         """The exact shape that was shipping: pass=True with an empty ranking."""
@@ -413,6 +418,78 @@ class LocalizationTests(unittest.TestCase):
         tt = (r.get("test_traces") or [{}])[0]
         self.assertGreater(tt.get("event_count", 0), 1,
                            "one event means the child died on the import line: " + repr(tt))
+
+
+class GuardlessSuiteTests(unittest.TestCase):
+    """The localizer must handle a suite that a runner collects, not only one that runs itself.
+
+    runpy.run_path(..., run_name="__main__") only executes the tests if the file carries that guard.
+    Measured over this repository: 2019 unittest-style test files, 1324 (65%) with the guard and
+    695 (34%) without, because they are written to be collected. For those 695 the traced child
+    produced no failures at all, the localizer raised NO_FAILING_TEST, and the provenance-guided
+    repair that consumes it died with the same error. A third of the corpus was unreachable.
+
+    The fix loads the module and runs the collected suite through a unittest loader, the way a real
+    runner does, and re-raises the first failure with its original traceback so the ranking still
+    sees the lines that executed. Files that are not unittest suites fall back to runpy.
+    """
+
+    @classmethod
+    def tearDownClass(cls):
+        shutil.rmtree(WORK_ROOT, ignore_errors=True)
+
+    def _localize(self, guard):
+        work = _seed("guardless" if not guard else "guarded", *CASES[0][1:3], guard=guard)
+        return work, runtime._invoke_bound_capability({
+            "capability_id": "python.fault.localize.dynamic.dataflow.v1",
+            "source_root": str(work), "test_paths": [str(work / "test_calc.py")],
+            "output_path": str(work / "loc.json")})
+
+    def test_a_guardless_suite_is_localized_not_refused(self):
+        work, r = self._localize(guard=False)
+        self.assertNotIn("__main__", (work / "test_calc.py").read_text(),
+                         "the fixture must really be guard-less or this test proves nothing")
+        self.assertTrue(r.get("ranked_symbols"), "guard-less suite must still rank: " + repr(r))
+        self.assertEqual(r["ranked_symbols"][0]["symbol"], "add")
+
+    def test_the_guarded_shape_is_unchanged_by_the_same_fix(self):
+        """Backward compatibility is part of the claim, not an assumption."""
+        _, guarded = self._localize(guard=True)
+        _, guardless = self._localize(guard=False)
+        self.assertEqual([s["symbol"] for s in guarded["ranked_symbols"]],
+                         [s["symbol"] for s in guardless["ranked_symbols"]])
+        self.assertEqual(guarded["failing_test_count"], guardless["failing_test_count"], 1)
+
+    def test_the_traced_child_ran_the_test_not_just_imported_it(self):
+        """One event means the child died before running anything - the previous false positive."""
+        _, r = self._localize(guard=False)
+        tt = (r["test_traces"] or [{}])[0]
+        self.assertGreater(tt.get("event_count", 0), 1, repr(tt))
+        self.assertFalse(tt.get("pass"), "the seeded suite genuinely fails")
+
+    def test_the_guided_repair_reaches_a_guardless_repository(self):
+        work = _seed("guardless_repair", *CASES[0][1:3], guard=False)
+        r = runtime._invoke_bound_capability({
+            "capability_id": "python.software.repair.guided.provenance.coupled.v1",
+            "source_root": str(work), "test_paths": [str(work / "test_calc.py")],
+            "test_argv": ["python3", "-m", "unittest", str(work / "test_calc.py")],
+            "output_path": str(work / "repair.json")})
+        self.assertTrue(r.get("pass"), repr(r.get("status")))
+
+    def test_a_suite_that_is_not_unittest_still_runs_via_the_runpy_fallback(self):
+        """The fallback is load-bearing: not every test file is a unittest suite."""
+        work = WORK_ROOT / "plain_script"
+        if work.exists():
+            shutil.rmtree(work)
+        work.mkdir(parents=True)
+        (work / "calc.py").write_text("def add(a, b):\n    return a - b\n", encoding="utf-8")
+        (work / "test_calc.py").write_text(
+            "import calc\nassert calc.add(2, 3) == 5, 'boom'\n", encoding="utf-8")
+        r = runtime._invoke_bound_capability({
+            "capability_id": "python.fault.localize.dynamic.dataflow.v1",
+            "source_root": str(work), "test_paths": [str(work / "test_calc.py")],
+            "output_path": str(work / "loc.json")})
+        self.assertTrue(r.get("ranked_symbols"), "plain-assert suite must still be traced: " + repr(r))
 
 
 if __name__ == "__main__":

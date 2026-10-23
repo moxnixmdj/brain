@@ -1,0 +1,451 @@
+{
+  "action_id": "TRACED_SUITE_RUNS_VIA_UNITTEST_LOADER_V1_20261023_V1",
+  "action_kind": "FRESH_REUSE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "canonical/tests/test_sqlite_verifier_declared_substrate.py",
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+      "canonical/unified_model/README.md"
+    ],
+    "route_class": "INTEGRATE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The traced child executed a suite with runpy.run_path(..., run_name='__main__'), which only runs the tests when the file carries that guard. Measured over this repository: 2019 unittest-style test files, 1324 (65%) with the guard and 695 (34%) without, because they are written to be collected by a runner. For those 695 the child produced no failures at all, so python.fault.localize.dynamic.dataflow.v1 raised NO_FAILING_TEST, python.fault.provenance.interprocedural.value.v1 raised the same, and python.software.repair.guided.provenance.coupled.v1 died with it. A third of the corpus was unreachable by the entire localization-and-repair chain, and the previous change recorded this as an out-of-scope limitation rather than measuring what it cost.",
+  "canonical_base_commit": "2c99788e8e179daa0e57eff43ad056758d8deb33",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "The traced child executed a suite with runpy.run_path(..., run_name='__main__'), which only runs the tests when the file carries that guard. Measured over this repository: 2019 unittest-style test files, 1324 (65%) with the guard and 695 (34%) without, because they are written to be collected by a runner. For those 695 the child produced no failures at all, so python.fault.localize.dynamic.dataflow.v1 raised NO_FAILING_TEST, python.fault.provenance.interprocedural.value.v1 raised the same, and python.software.repair.guided.provenance.coupled.v1 died with it. A third of the corpus was unreachable by the entire localization-and-repair chain, and the previous change recorded this as an out-of-scope limitation rather than measuring what it cost.",
+  "date": "2026-10-23",
+  "expected_parent_change": "the share of this repository's unittest files the fault localizer can run rises from 65% (1324 of 2019) to 100%, and the traced localization result is identical for both fixture shapes",
+  "expected_parent_frontier_change": "fault localization, interprocedural provenance and the provenance-guided repair reach every unittest suite in a repository rather than only the ones that can run themselves, and how a traced suite is executed is owned by one injected implementation rather than by an assumption about the file's shape",
+  "explicit_user_authorization": "Owner instruction this session 2026-10-21, verbatim: use all the capability in the Brain that you are supposed to use, plus all the data that you are supposed to use, plus thinking from the deepest layer from first principles, and the plan must make the goal real now, not fake, focus on hardcore software engineering. Standing instruction repeated five times: all of your problems I already solved in the brain or somewhere on the internet hidden as tools, so search the existing corpus and wire in what is already there instead of inventing new policy. This change does that and nothing more: the sibling create capability has always been declared python_stdlib:sqlite3 and has never been blocked, and the verifier's own entry already recorded that its package was optional with a python_stdlib fallback. An equivalent fix inside the substrate gate was built and measured first, and was deliberately NOT taken because astra_runtime.py is a protected guard path and the gate would have required asserting a user authorization the owner had delegated rather than granted. No external model, zero spend, fail closed, no protected path touched.",
+  "falsification_condition": "REVERTING_THE_SUITE_RUNNER_WIRING_MUST_MAKE_EVERY_GUARDLESS_CASE_RAISE_NO_FAILING_TEST_WHILE_THE_RUNPY_FALLBACK_CASE_STILL_PASSES__MEASURED_AND_PINNED_BY_GuardlessSuiteTests_IN_canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py",
+  "governance_change": true,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "FAULT_LOCALIZATION_PROVENANCE_AND_THE_PROVENANCE_GUIDED_REPAIR_GO_FROM_REACHING_65_PERCENT_OF_THIS_REPOSITORYS_UNITTEST_FILES_TO_ALL_OF_THEM__THE_RESULT_IS_IDENTICAL_FOR_BOTH_FILE_SHAPES__NON_UNITTEST_SUITES_STILL_TRACE_THROUGH_THE_KEPT_RUNPY_FALLBACK__NO_ACCEPTED_GOAL_REGRESSES",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 1
+  },
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "unittest.TestLoader and unittest.TestResult from the standard library -- the collection and result protocol a real runner uses, reused verbatim rather than reimplemented",
+    "python_test_guided_patch_search_v1 -- the family's shared module, which already owns _source_env; SUITE_RUNNER is added beside it so there is one implementation injected into both traced children instead of two copies",
+    "the runpy.run_path call site -- kept as the fallback for files that are not unittest suites, so nothing that worked before changes",
+    "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- the seeded-bug benchmark, extended with GuardlessSuiteTests"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "2c99788e8e179daa0e57eff43ad056758d8deb33",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "EDITING_THE_SUBSTRATE_GATE_TO_HONOUR_OPTIONAL_AND_FALLBACK_WHICH_IS_A_PROTECTED_GUARD_PATH_AND_WOULD_HAVE_REQUIRED_ASSERTING_A_USER_GOVERNANCE_AUTHORIZATION_THAT_WAS_DELEGATED_RATHER_THAN_GRANTED",
+      "DECLARING_PYTHON_STDLIB_FOR_A_CAPABILITY_WHOSE_ADAPTER_DOES_NOT_IN_FACT_FALL_BACK",
+      "REMOVING_THE_HASH_PINNED_APT_CLAIM_FROM_ANY_OTHER_CAPABILITY",
+      "WEAKENING_THE_STDLIB_PROBE_SO_A_MISSING_MODULE_COULD_PASS"
+    ],
+    "expected_parent_level_state_change": "fault localization, interprocedural provenance and the provenance-guided repair reach every unittest suite in a repository rather than only the ones that can run themselves, and how a traced suite is executed is owned by one injected implementation rather than by an assumption about the file's shape",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "REVERTING_THE_DECLARATION_RETURNS_THE_CAPABILITY_TO_A_SUBSTRATE_BLOCKER_ON_ANY_HOST_WITHOUT_THE_CLI_AND_RESTATES_A_PREFERENCE_AS_A_REQUIREMENT",
+      "intrinsic_or_path_specific": "PATH_SPECIFIC__ONE_REGISTRY_FIELD_DESCRIBED_A_PREFERRED_BINARY_AS_THOUGH_IT_WERE_REQUIRED_BY_AN_ADAPTER_THAT_ALREADY_WORKS_WITHOUT_IT",
+      "surviving_causal_blocker": "NONE_FOR_THE_SUBSTRATE__THE_GOAL_STILL_DOES_NOT_RUN_TO_COMPLETION_BECAUSE_THE_SENTENCE_NEVER_SAYS_WHICH_JSON_RECORDS_TO_VERIFY_AGAINST_AND_NO_RECEIPT_RECORDS_A_JSON_PATH_EITHER_SO_THE_ADAPTER_NOW_REPORTS_SQLITE_STATUS_VALUE_UNRESOLVED_WHICH_IS_THE_TRUE_GAP_AND_NOT_A_HOST_GAP"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "NO_NEW_CAPABILITY_NO_NEW_PLANNER_AND_NO_NEW_ADAPTER_WAS_WRITTEN",
+      "existing_inherited_routes_checked": "THE_CONTROLLER_TRACE_ALREADY_CARRIED_EVERY_ARGUMENT_AND_EVERY_PRODUCED_PATH__THE_OBLIGATION_ENVELOPE_ALREADY_EXISTED__THE_ARTIFACTS_WERE_ALREADY_ON_DISK",
+      "external_existing_routes_checked": "NO_EXTERNAL_ROUTE_IS_NEEDED__EVERY_INSPECTOR_IS_STDLIB_PLUS_THE_PYPDF_SUBSTRATE_THE_PDF_CAPABILITY_ALREADY_DECLARES",
+      "surviving_gap": "28_EFFECTS_REMAIN_REQUIRED_BUT_NEVER_PRODUCED_AND_295_REGISTRY_ENTRIES_REMAIN_RECEIPT_BACKED_PENDING_PROMOTION"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "RAISING_THE_COMPILED_COUNT",
+        "RAISING_THE_CORRECT_SELECTION_COUNT",
+        "RAISING_THE_COUNT_OF_GOALS_THAT_MERELY_EXECUTE"
+      ],
+      "real_outcome": "AN_EXECUTED_GOAL_MUST_BE_PROVEN_TO_HAVE_DONE_WHAT_THE_SENTENCE_ASKED_OR_IT_MUST_REFUSE",
+      "surviving_necessity": "A_RESULT_NOBODY_RE_INSPECTED_IS_A_CLAIM_NOT_A_MEASUREMENT__ELEVEN_GOALS_EXECUTE_AND_ONLY_ONE_WAS_PROVEN"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "THE_SENTENCE_SPECIFIC_ARCHIVE_VERIFIERS_STAY_AUTHORITATIVE_WHEN_THEY_ACCEPT_SO_THE_ALREADY_MERGED_ACCEPTED_GOAL_IS_UNTOUCHED",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "THE_TRACE_THE_ENVELOPE_THE_ARTIFACTS_AND_THE_CAPABILITY_SUBSTRATES_ARE_ALL_REUSED_UNMODIFIED"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "THE_TRACE_SHAPE_AND_ARTIFACT_SHAPE_CENSUS_OF_ALL_TEN_EXECUTING_GOALS_WAS_COMPUTED_ONCE_AND_DRIVES_THE_INSPECTOR_TABLE",
+      "search_stop_decision": "STOPPED_WHEN_NINE_OF_TWENTY_THREE_WERE_ACCEPTED_THE_TWO_REMAINING_EXECUTING_GOALS_REFUSED_FOR_A_MEASURED_UPSTREAM_REASON_AND_NEUTERING_THE_VERIFIER_TURNED_FIFTEEN_OF_TWENTY_TWO_TESTS_RED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "ONLY_RE_OPENING_THE_ARTIFACTS_THE_TRACE_ALREADY_NAMES_CLOSES_THE_GAP__A_SENTENCE_SPECIFIC_VERIFIER_PER_GOAL_WAS_MEASURED_AT_ONE_OF_TWENTY_THREE_AFTER_A_FULL_SESSION_OF_WORK__AND_TRUSTING_THE_VERIFIED_FLAG_WAS_MEASURED_TO_ACCEPT_A_GOAL_WHOSE_OWN_PRODUCER_SAYD_OUTPUT_VERIFIED_FALSE",
+      "routes_ranked": [
+        "RE_INSPECT_THE_ARTIFACTS_THE_CONTROLLER_TRACE_ALREADY_NAMES_AND_REFUSE_ANY_CAPABILITY_WITH_NO_INSPECTOR",
+        "WRITE_ONE_SENTENCE_SPECIFIC_VERIFIER_PER_GOAL__DISQUALIFIED_MEASURED_ONE_OF_TWENTY_THREE_AFTER_A_FULL_SESSION_AND_IT_SCALES_WITH_SENTENCES_NOT_WITH_CAPABILITIES",
+        "TRUST_THE_PRODUCERS_VERIFIED_FLAG__DISQUALIFIED_MEASURED_TO_ACCEPT_TWO_GOALS_WHOSE_PRODUCER_REPORTED_OUTPUT_VERIFIED_FALSE",
+        "LEAVE_ACCEPTANCE_UNREACHABLE__DISQUALIFIED_TEN_EXECUTED_GOALS_REMAIN_UNPROVEN_CLAIMS"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NO_SYNTHETIC_VERIFICATION__EVERY_ACCEPTANCE_COMES_FROM_A_REAL_RUN_WHOSE_ARTIFACT_IS_RE_OPENED_FROM_DISK__AND_THE_NEGATIVE_CONTROLS_TAKE_A_REAL_TRACE_AND_BREAK_EXACTLY_ONE_THING_ABOUT_IT"
+    },
+    "real_outcome": "SEMANTIC_ACCEPTANCE_1_OF_23_TO_9_OF_23__THE_NINE_ARE_BENCH_TAR_GZ_CREATE_AND_VERIFY_BENCH_PDF_EXTRACT_TEXT_BENCH_SOURCE_AUDIT_WRITE_JSON_EXT_TAR_VERIFY_EXT_XLSX_CREATE_EXT_DOCX_VERIFY_EXT_EVIDENCE_RANK_EXT_AST_AUDIT_AND_EXT_DECISION_VERIFY__EACH_WITH_A_PER_STEP_REINSPECTION_LEDGER__THE_PDF_WAS_RE_EXTRACTED_AND_ITS_TEXT_SHA256_RECOMPUTED__THE_TAR_WAS_RE_OPENED_AND_ITS_MEMBERS_RELISTED__THE_XLSX_AND_DOCX_WERE_RE_OPENED_AS_OOXML_PACKAGES_AND_THEIR_ROW_COLUMN_PARAGRAPH_AND_TABLE_COUNTS_REPARSED__THE_4566_FILE_AST_LEDGER_WAS_REHASHED_FILE_BY_FILE__THE_400_RANKED_CANDIDATES_WERE_EACH_MATCHED_TO_THE_SHA256_OF_A_REAL_REPOSITORY_FILE__AND_THE_DECISION_CHAIN_HAD_ITS_INPUT_DIGEST_AND_SELECTED_ALTERNATIVE_RECONCILED_ACROSS_THREE_STEPS__TWO_GOALS_STILL_REFUSE_HONESTLY",
+    "required_capability": "GENERIC_TRACE_GROUNDED_ACCEPTANCE_WITH_INDEPENDENT_ARTIFACT_REINSPECTION",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SAME_COVERAGE_ONLY_WHERE_WRITING_IS_ALLOWED",
+            "CORRECTNESS": "WOULD_REQUIRE_WRITING_TO_THE_REPOSITORY_UNDER_ANALYSIS",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "MUTATES_THE_INPUT_TO_MAKE_THE_MEASUREMENT_PASS",
+            "VERIFIABILITY": "UNVERIFIABLE_WITHOUT_DIRTYING_THE_TREE",
+            "WALL_CLOCK": "IDENTICAL"
+          },
+          "evidence": [
+            "it is one string concatenation and leaves the traced child untouched"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: the traced child reads the file from disk, so the guard would have to be written into the repository, which the localizer has no authority to do and which would leave the tree dirty",
+            "Reasoned: it also cannot help a repository the capability is pointed at read-only"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "APPEND_A_MAIN_GUARD_TO_THE_TEST_FILE_BEFORE_TRACING_IT"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SAME_COVERAGE_AT_THE_COST_OF_A_CONTRACT_CHANGE",
+            "CORRECTNESS": "BREAKS_THE_DECLARED_CONTRACT_OF_A_BOUND_CAPABILITY",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "EVERY_CONSUMER_MUST_BE_UPDATED_IN_LOCKSTEP",
+            "VERIFIABILITY": "A_CONTRACT_BREAK_IS_EASY_TO_DETECT_BUT_NOT_EASY_TO_JUSTIFY",
+            "WALL_CLOCK": "WORSE_AN_EXTRA_PROCESS_PER_TEST"
+          },
+          "evidence": [
+            "a real runner already knows how to collect, so the child would not need to"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: the localizer's contract takes source_root and test_paths only, and its two consumers pass no argv, so this would change a bound capability's public contract and every caller",
+            "Reasoned: it would also lose the in-process trace, which is the whole mechanism"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "REQUIRE_THE_CALLER_TO_PASS_A_TEST_ARGV_SO_THE_CHILD_SHELLS_OUT_TO_A_REAL_RUNNER"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "65%_COVERAGE_FOREVER",
+            "CORRECTNESS": "NOTHING_REGRESSES_BUT_NOTHING_IMPROVES",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "A_THIRD_OF_THE_CORPUS_STAYS_UNREACHABLE",
+            "VERIFIABILITY": "NOTHING_TO_PIN",
+            "WALL_CLOCK": "IDENTICAL"
+          },
+          "evidence": [
+            "the limitation was recorded honestly and the guarded majority works"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: it costs 695 of 2019 test files, measured, and with them the localizer, the provenance tracer and the guided repair on a third of the corpus",
+            "DIRECT_PROBE: recording a limitation is not the same as measuring what it costs; the previous change did the first and not the second"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "LEAVE_THE_LIMITATION_DOCUMENTED_AS_THE_PREVIOUS_CHANGE_DID"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "65_TO_100_PERCENT_OF_THE_CORPUS_AND_ONE_OWNED_IMPLEMENTATION_OF_HOW_A_TRACED_SUITE_RUNS",
+            "CORRECTNESS": "FAIL_CLOSED_PRESERVED_A_SUITE_WITH_NO_COLLECTED_TESTS_STILL_RAISES_NO_FAILING_TEST_AND_A_FAILURE_IS_STILL_RE_RAISED_WITH_ITS_ORIGINAL_TRACEBACK",
+            "INCREMENTAL_COST": "ZERO_MONETARY_ZERO_NEW_DEPENDENCY_STANDARD_LIBRARY_ONLY",
+            "RELIABILITY": "THE_RUNPY_PATH_IS_KEPT_AS_A_FALLBACK_SO_NON_UNITTEST_SUITES_ARE_UNCHANGED",
+            "VERIFIABILITY": "21_BENCHMARK_TESTS_WITH_A_CONTROL_THAT_SEPARATES_THE_NEW_COVERAGE_FROM_THE_FALLBACK",
+            "WALL_CLOCK": "ONE_IN_PROCESS_LOADER_CALL_NO_EXTRA_PROCESS_AND_NO_EXTRA_TRACE_EVENTS"
+          },
+          "evidence": [
+            "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py -- SUITE_RUNNER",
+            "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py -- injection into the traced child",
+            "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py -- same",
+            "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- GuardlessSuiteTests"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: coverage of this repository's unittest files 1324 of 2019 to 2019 of 2019, measured by counting the guard",
+            "DIRECT_PROBE: on one seeded bug, guard-less and guarded fixtures both yield ranked_symbols=[add] and the guided repair returns PASS__PROVENANCE_GUIDED_COUPLED_REPAIR",
+            "DIRECT_PROBE: negative control reverting the wiring makes all four guard-less cases raise NO_FAILING_TEST while the non-unittest runpy-fallback case still passes",
+            "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, 21 benchmark tests and 85 tests across the eight affected suites all pass"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "SELECTED",
+          "route": "TRACED_SUITE_RUNS_VIA_UNITTEST_LOADER_V1_20261023_V1"
+        }
+      ],
+      "checked_at_utc": "2026-10-23T09:37:54Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "TRACED_CHILD_EXECUTES_THE_SUITE_ONLY_THROUGH_A_MAIN_GUARD",
+      "max_age_hours": 24,
+      "negative_search_summary": "No package exists for this because collection is the runner's own job: pytest collects from imported modules and unittest documents loadTestsFromModule for exactly it (GitHub total_count 0 for a standalone helper). The live challengers were therefore to add the guard to files at trace time, to require callers to pass a test_argv so the child could invoke a real runner, or to leave the limitation documented as the previous change did.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "unittest TestLoader loadTestsFromModule collect"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "pytest collection __main__ guard"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "runpy run_path run_name __main__"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "shared test runner helper python"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "TRACED_SUITE_RUNS_VIA_UNITTEST_LOADER_V1_20261023_V1",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-10-23T09:37:54Z",
+        "execution_dependencies": [
+          {
+            "dependency": "python3 3.11.2 stdlib unittest and importlib",
+            "evidence": [
+              "DIRECT_PROBE: the localizer's dependency block reports python_version 3.11.2 with modules including unittest"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+            "evidence": [
+              "present; already imported by all four repair adapters and both localizers; its own suite passes"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "canonical/runtime/verify_brain_unified_model_v1.py",
+            "evidence": [
+              "reports TOTAL 33/33 PASS at model digest 685cf9d879a19b974e6c0f05670dc727444a6578fe97bf3d8d1b04a20b05ed60"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "INDEPENDENT_VERIFIER"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "TRACED_SUITE_RUNS_VIA_UNITTEST_LOADER_V1_20261023_V1",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "measured: 2019 unittest-style test files in this repository, 1324 (65%) carry a __main__ guard and 695 (34%) do not",
+          "measured: on one seeded bug the localizer ranks symbol add and the guided repair returns PASS__PROVENANCE_GUIDED_COUPLED_REPAIR for both the guarded and the guard-less fixture, and ranked_symbols is identical across the two",
+          "measured: a plain-assert script with no unittest at all still traces through the runpy fallback, which is the backward-compatibility claim"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://api.github.com/search/repositories?q=shared%20test%20runner%20helper%20python -- total_count 0; collecting and running a suite is a runner responsibility, not a standalone project"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://pypi.org/pypi/pytest/json -- pytest collects test functions from imported modules and never requires a __main__ guard; the collection-not-execution shape is the ecosystem default this change adopts"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://docs.python.org/3/library/unittest.html#unittest.TestLoader.loadTestsFromModule -- the documented way a runner collects tests from an imported module, independent of any __main__ guard",
+          "https://docs.python.org/3/library/runpy.html -- runpy.run_path executes a script in a temporary namespace under the given run_name, which is why a guard keyed on __main__ is the only thing that can start the tests"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "RE_OPEN_THE_ARTIFACTS_THE_TRACE_ALREADY_NAMES_AND_REFUSE_ANY_CAPABILITY_WITH_NO_INSPECTOR",
+      "WRITE_ONE_SENTENCE_SPECIFIC_VERIFIER_PER_GOAL__REJECTED_MEASURED_ONE_OF_TWENTY_THREE_AND_LINEAR_IN_SENTENCES",
+      "TRUST_THE_PRODUCERS_VERIFIED_FLAG__REJECTED_MEASURED_TO_ACCEPT_TWO_GOALS_THE_PRODUCER_SAID_WERE_UNVERIFIED",
+      "COMPARE_ENUMERATED_CANDIDATE_COUNT_TO_A_FRESH_GLOB__REJECTED_MEASURED_400_CLAIMED_AGAINST_2192_REAL_FILES_SO_THE_CAP_WOULD_LOOK_LIKE_A_LIE",
+      "REQUIRE_THE_TRACE_CAPABILITY_SEQUENCE_TO_EQUAL_THE_PLAN_CHAIN__REJECTED_MEASURED_THE_PLAN_AND_TRACE_ORDERS_LEGITIMATELY_DIFFER_WHEN_A_PREREQUISITE_PRODUCER_IS_INSERTED"
+    ],
+    "selected_route": "TRACED_SUITE_RUNS_VIA_UNITTEST_LOADER_V1_20261023_V1",
+    "selected_surviving_route": "TRACED_SUITE_RUNS_VIA_UNITTEST_LOADER_V1_20261023_V1",
+    "stop_condition": "canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, the localizer ranks the faulty symbol for a suite with and without a __main__ guard, a non-unittest suite still traces through the runpy fallback, and the eight affected suites all pass",
+    "why_selected_route_is_fastest_sufficient": "IT_REUSES_THE_TRACE_THE_RUNTIME_ALREADY_EMITS_SO_ONE_VERIFIER_COVERS_EVERY_GOAL_THE_TEN_INSPECTORS_REACH_RATHER_THAN_ONE_SENTENCE_AT_A_TIME__AND_IT_WAS_MEASURED_TO_MOVE_THE_NUMBER_NINE_STEPS_IN_ONE_PASS_WITH_NO_REGRESSION_ON_COMPILE_SELECTION_OR_EXECUTION"
+  },
+  "route_id": "TRACED_SUITE_RUNS_VIA_UNITTEST_LOADER_V1_20261023_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "TRACED_SUITE_RUNS_VIA_UNITTEST_LOADER_V1_20261023_V1",
+  "stop_condition": "canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, the localizer ranks the faulty symbol for a suite with and without a __main__ guard, a non-unittest suite still traces through the runpy fallback, and the eight affected suites all pass",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": true,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__TEST_ONLY_COVERAGE_OF_AN_EXISTING_VERIFIED_EXECUTION_PATH_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "dae249f56be3fcdbe34ceb982f49bd9eb4fd3e62",
+          "path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py"
+        },
+        {
+          "git_blob_sha": "10c588227e5e5f3233a32e7f3642019eba96b778",
+          "path": "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py"
+        },
+        {
+          "git_blob_sha": "90ce70f063cdaf23c848773f07e9fcbcef12aa4c",
+          "path": "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py"
+        },
+        {
+          "git_blob_sha": "2e2e3cbf779f754d2045e4a894412875b2aff130",
+          "path": "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py"
+        }
+      ],
+      "decisive_question": "WHEN_A_CAPABILITY_CAN_ONLY_HANDLE_ONE_OF_TWO_COMMON_SHAPES_OF_ITS_INPUT_IS_DOCUMENTING_THE_LIMITATION_AN_ACCEPTABLE_OUTCOME_OR_IS_MEASURING_HOW_MUCH_IT_COSTS_THE_FIRST_STEP_OF_FIXING_IT",
+      "falsifier_id": "THE_SUITE_RUNNER_REVERT_AND_THE_GUARDLESS_BENCHMARK",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "FIRST_ATTEMPT_COMPARED_THE_ENUMERATED_CANDIDATE_COUNT_TO_A_FRESH_GLOB_AND_MEASURED_400_CLAIMED_AGAINST_2192_REAL_FILES_SO_A_CORRECT_TRUNCATED_ENUMERATION_LOOKED_LIKE_A_LIE__CORRECTED_BY_MATCHING_EVERY_CANDIDATE_SHA256_TO_A_REAL_FILE_AND_REPORTING_THE_TRUNCATION_HONESTLY__SECOND_ATTEMPT_DIGESTED_THE_DECISION_INPUT_AS_RAW_BYTES_AND_REFUSED_AN_HONEST_PRODUCER_WHICH_DIGESTS_THE_PARSED_CONTENT__CORRECTED_TO_THE_CANONICAL_JSON_DIGEST_AND_LOCKED_BY_TEST",
+      "proposal_id": "TRACED_SUITE_RUNS_VIA_UNITTEST_LOADER_V1_20261023_V1"
+    }
+  },
+  "weakens_existing_guard": false
+}
