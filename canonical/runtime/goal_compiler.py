@@ -312,7 +312,14 @@ def _paths_named_by_role(goal, stem, root):
     text=str(goal)
     word=str(stem).replace("_"," ")
     hits=[]
-    for m in re.finditer(r"\b"+re.escape(word)+r"\b",text,re.IGNORECASE):
+    # A *_paths input is a LIST, and a sentence names a list in the plural as
+    # naturally as in the singular: "the tests A and B" is how a suite is
+    # normally written.  \btest\b cannot match "tests", so every plural phrasing
+    # missed the role entirely -- and the fallback below used the same regex, so
+    # the whole input went unbound and the capability lost however well it
+    # matched the goal.  Measured: singular bound, plural raised
+    # GOAL_INPUT_BINDING_REQUIRED:test_paths.
+    for m in re.finditer(r"\b"+re.escape(word)+r"s?\b",text,re.IGNORECASE):
         for raw,_p in candidates:
             for spelling in (raw, str(raw).lstrip("/"), str(_p)):
                 if not spelling:
@@ -443,7 +450,7 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                     result[key]=role
                     continue
             # The sentence gave the role but named the files separately.
-            if re.search(r"\b"+re.escape(str(stem).replace("_"," "))+r"\b",
+            if re.search(r"\b"+re.escape(str(stem).replace("_"," "))+r"s?\b",
                          str(goal),re.IGNORECASE):
                 files=[raw for raw,p in paths if p.is_file()]
                 if files:
