@@ -56,6 +56,7 @@ Zero credit, zero spend, zero models.
 """
 from __future__ import annotations
 
+import hashlib
 import pathlib
 import re
 import importlib.util
@@ -852,6 +853,67 @@ def promised_artifact_errors(goal: str, future_artifacts: list[str]) -> list[str
 
 
 
+_REPAIR_VERB_RE = re.compile(r"\b(?:repair|fix|patch|correct)\b", re.IGNORECASE)
+
+
+def _promised_source_files(goal: str) -> list[str]:
+    """Source files the goal asked to have CHANGED, not merely read.
+
+    "Repair the python source file X" promises X is different afterwards.  Reading
+    X promises nothing about its bytes, so only a goal carrying a repair verb
+    counts, and only files that already exist -- a file the goal asks to create is
+    a promised artifact, which R6 already covers.
+    """
+    text = str(goal or "")
+    candidates = [(raw, path) for raw, path in goal_compiler._repo_paths(goal, ROOT)
+                  if path.is_file() and path.suffix.lower() == ".py"]
+    if not candidates:
+        return []
+    # Only the file the repair verb governs.  "Repair the source file X so that
+    # the test Y passes" names Y as the WITNESS; demanding Y change too would
+    # fail a goal that did exactly what it said.  So take the nearest source file
+    # after each repair verb, not every source file in the sentence.
+    out = []
+    for m in _REPAIR_VERB_RE.finditer(text):
+        best = None
+        best_at = None
+        for raw, path in candidates:
+            for spelling in (raw, str(path)):
+                at = text.find(spelling, m.end())
+                if at >= 0 and (best_at is None or at < best_at):
+                    best_at = at
+                    best = raw
+        if best is not None and best not in out:
+            out.append(best)
+    return out
+
+
+def _source_digest(raw: str) -> str:
+    try:
+        return hashlib.sha256((ROOT / raw).read_bytes()).hexdigest()
+    except Exception:  # noqa: BLE001 - unreadable is its own error, reported below
+        return ""
+
+
+def promised_source_change_errors(goal: str, before: Mapping[str, str]) -> list[str]:
+    """Every source file the goal asked to repair must actually be different now.
+
+    The repair loops find a patch, verify it, replay the verification, then restore
+    the source, declaring NO_SOURCE_WRITE_OR_PROMOTION_AUTHORITY.  That is the right
+    boundary for a capability to hold -- but the front door was reporting PASS for a
+    file that is still broken.  That is the over-claim R6 exists to stop, one layer
+    down: the goal promised a change and no change happened.
+    """
+    errors = []
+    for raw, digest in (before or {}).items():
+        now = _source_digest(raw)
+        if not now:
+            errors.append("PROMISED_SOURCE_UNREADABLE:" + raw)
+        elif now == digest:
+            errors.append("PROMISED_SOURCE_UNCHANGED:" + raw)
+    return errors
+
+
 def _recall_for(goal: str) -> list:
     """What the machine remembers that bears on this goal, before it acts.
 
@@ -953,6 +1015,8 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     if admission.get("admitted") is not True:
         return _fail(task_id, "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED", "ROUTE_ADMISSION_REJECTED:" + str(admission.get("rule")), started,
                      compiled_capability_id=admission.get("selected_capability"), compiler_mode=compiled.get("compiler_mode"), route_admission=admission)
+    promised_sources = _promised_source_files(normalized)
+    source_digests_before = {raw: _source_digest(raw) for raw in promised_sources}
     result = _execute(task_id, goal, compiled, admissible, started)
     result["route_admission"] = admission
     result["memory_recalled"] = [
@@ -993,6 +1057,14 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         result["pass"] = False
         result["failure_class"] = "PROMISED_ARTIFACT_MISSING"
         result["promised_artifact_errors"] = missing
+    unchanged = promised_source_change_errors(normalized, source_digests_before) \
+        if result.get("pass") is True else []
+    if unchanged:
+        result["runtime_status_before_source_change_check"] = result.get("status")
+        result["status"] = "FAIL_CLOSED__PROMISED_SOURCE_CHANGE_NOT_APPLIED"
+        result["pass"] = False
+        result["failure_class"] = "PROMISED_SOURCE_CHANGE_NOT_APPLIED"
+        result["promised_source_change_errors"] = unchanged
     result["elapsed_ns"] = perf_counter_ns() - started
     return result
 
