@@ -88,6 +88,19 @@ def _prose_tokens(goal: str) -> set[str]:
     return goal_compiler._tokens(_PATH_RE.sub(" ", goal))
 
 
+_FILE_TOKEN = re.compile(r"[\w.~-]+\.[A-Za-z0-9]{1,8}|/[\w./~-]+|~[\w./~-]+")
+
+
+def _goal_names_a_file(goal: str) -> bool:
+    """True when the sentence contains anything that could name a file or a path.
+
+    Deliberately generous: a dotted token, an absolute path, or a home-relative path all count, so
+    this only returns False for a request that mentions no file at all. Being generous is the safe
+    direction - a false negative here refuses a goal that could have run.
+    """
+    return bool(_FILE_TOKEN.search(str(goal or "")))
+
+
 def _future_artifacts(goal: str) -> list[str]:
     """Repository-relative paths named by the goal that do not exist yet.
 
@@ -219,6 +232,21 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
         return {**base, "admitted": False, "rule": "R2_OUTPUT_ARTIFACT_UNSERVED"}
     if len(semantic) <= 1:
         return {**base, "admitted": False, "rule": "R3_WEAK_EVIDENCE"}
+    # R9: a capability that consumes a FILE cannot run on a request that names no file.  Measured:
+    # `extract text from a pdf file` selected pdf.extract.text.pypdf, whose only declared input is
+    # pdf_path, with goal_future_artifacts empty and no path token anywhere in the sentence - and
+    # this layer admitted it, so the front reported
+    # PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED while writing zero files.
+    # The same capability, given a path that does not exist, already refuses with
+    # GOAL_INPUT_BINDING_REQUIRED.  Supplying LESS information was being treated as MORE
+    # admissible, which is backwards: an unbindable path fails, so no path at all must fail too.
+    # Only a FILE input is checked, and only when nothing in the request could ever name one, so a
+    # capability whose inputs are text or numbers is untouched.
+    file_inputs = sorted(k for k in input_keys
+                         if k.endswith("_path") or k.endswith("_file") or k in ("path", "file"))
+    if file_inputs and not futures and not _goal_names_a_file(goal):
+        return {**base, "admitted": False, "rule": "R9_REQUIRED_FILE_INPUT_UNBOUND",
+                "unbound_file_inputs": file_inputs}
     return {**base, "admitted": True, "rule": None}
 
 

@@ -24407,7 +24407,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6309,
+  "research_index_records": 6310,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 405,
@@ -24416,7 +24416,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6ff047a9418d8336f71c7178595518d945f36fdff362b2c81c674254db4cccb6"
+  "value": "54bbc9f1028a46471bacd4da843fe7223465fbd5ab6cab72f199bad801324cea"
  },
  "engines": [
   {
@@ -188462,6 +188462,51 @@
    }
   },
   {
+   "action_id": "FILE_CONSUMING_CAPABILITY_NOT_ADMITTED_FOR_FILELESS_GOAL_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/FILE_CONSUMING_CAPABILITY_NOT_ADMITTED_FOR_FILELESS_GOAL_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/FILE_CONSUMING_CAPABILITY_NOT_ADMITTED_FOR_FILELESS_GOAL_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "5fcb4d0357edebcf7c34b335ef50b2b1de83ec1144654554e8a3f32b4037c137",
+   "status": "",
+   "terms": {
+    "20261023": 1,
+    "actually": 1,
+    "admissible": 1,
+    "admission": 2,
+    "admitted": 2,
+    "admitting": 1,
+    "already": 1,
+    "anywhere": 1,
+    "asymmetry": 1,
+    "because": 1,
+    "being": 1,
+    "bind": 1,
+    "cannot": 1,
+    "capability": 2,
+    "consumed": 1,
+    "consuming": 1,
+    "creating": 1,
+    "declared": 1,
+    "extract": 2,
+    "file": 3,
+    "file_consuming_capability_not_admitted_for_fileless_goal_v1_20261023_v1": 2,
+    "goal": 2,
+    "input": 2,
+    "not": 2,
+    "nothing": 3,
+    "path": 2,
+    "produced": 2,
+    "refuses": 2,
+    "route": 2,
+    "so": 2,
+    "true": 3,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "FINANCE_SACCR_CREDIT_ADDON_LIVE_BINDING_20261016_V1",
    "capability": false,
    "date": "2026-10-16",
@@ -222714,9 +222759,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "492fe38b6a3cf7f963f3281127acf71927ea90b661aacbb4739782d7de937f8f",
+   "sha256": "fe947f7c81d58158d846a47249657da668c3dda46bac8f999f806f67abbbbc10",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 31,
+   "symbol_count": 32,
    "symbols": [
     "LocalExecutionFailure",
     "_check_expectation",
@@ -222730,6 +222775,7 @@
     "_execute_locally",
     "_fail",
     "_future_artifacts",
+    "_goal_names_a_file",
     "_is_executable",
     "_named_executable",
     "_output_keys",
@@ -222740,8 +222786,7 @@
     "_try_composed",
     "dag_admission",
     "dag_contract_errors",
-    "dag_executor",
-    "execute_capability_plan_locally"
+    "dag_executor"
    ],
    "terms": {
     "admission": 2,
@@ -222762,11 +222807,11 @@
     "fail-closed": 1,
     "front": 1,
     "future_artifacts": 1,
+    "goal_names_a_file": 1,
     "kernel_refuses": 1,
     "live": 2,
     "localexecutionfailure": 1,
     "output_keys": 1,
-    "promised_artifact_errors": 1,
     "prose_tokens": 1,
     "resolve_plan_refs": 1,
     "result_refs": 1,
