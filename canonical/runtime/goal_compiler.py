@@ -297,12 +297,39 @@ def _path_named_after_output_verb(goal, root):
     return None
 
 
-def _paths_named_by_role(goal, stem, root):
+_PATH_ROLE_SUFFIXES=("_paths","_path","_root","_dir")
+
+
+def _path_role_words(keys):
+    """The role word each path-bearing input key implies.
+
+    Needed so a path can be given to the role that most recently precedes it
+    rather than to every role mentioned anywhere earlier in the sentence.
+    """
+    out=set()
+    for key in keys or ():
+        text=str(key)
+        for suffix in _PATH_ROLE_SUFFIXES:
+            if text.endswith(suffix) and len(text)>len(suffix):
+                out.add(text[:-len(suffix)].lower().replace("_"," "))
+                break
+    return out
+
+
+def _paths_named_by_role(goal, stem, root, other_roles=()):
     """Every repository path the sentence gives this role, in order of mention.
 
     The singular helper answers "which file is the manifest"; this answers "which
     files are the tests", because a *_paths input is a list and a suite is
     normally more than one file.
+
+    A path belongs to the role word that most recently PRECEDES it.  Collecting
+    every path that merely appears after the role word lets the first role in a
+    sentence swallow the rest of it: for "Repair the python source S with the test
+    guided repair loop so that the unit tests in A, B pass, and save the repair
+    report to R" both source_paths and test_paths came back as the same
+    everything-list, the repair loop was handed its own tests as the files to
+    repair, and it died with NO_LOCALIZED_SOURCE_FILES.
     """
     if not stem:
         return []
@@ -311,22 +338,33 @@ def _paths_named_by_role(goal, stem, root):
         return []
     text=str(goal)
     word=str(stem).replace("_"," ")
+    words={word} | {
+        str(r).replace("_"," ") for r in (other_roles or ()) if str(r or "").strip()
+    }
+    marks=[]
+    for role_word in words:
+        for m in re.finditer(r"\b"+re.escape(role_word)+r"s?\b",text,re.IGNORECASE):
+            marks.append((m.start(),m.end(),role_word))
+    marks.sort()
     hits=[]
-    # A *_paths input is a LIST, and a sentence names a list in the plural as
-    # naturally as in the singular: "the tests A and B" is how a suite is
-    # normally written.  \btest\b cannot match "tests", so every plural phrasing
-    # missed the role entirely -- and the fallback below used the same regex, so
-    # the whole input went unbound and the capability lost however well it
-    # matched the goal.  Measured: singular bound, plural raised
-    # GOAL_INPUT_BINDING_REQUIRED:test_paths.
-    for m in re.finditer(r"\b"+re.escape(word)+r"s?\b",text,re.IGNORECASE):
-        for raw,_p in candidates:
-            for spelling in (raw, str(raw).lstrip("/"), str(_p)):
-                if not spelling:
-                    continue
-                at=text.find(spelling,m.end())
-                if at>=0:
-                    hits.append((at,raw))
+    for raw,_p in candidates:
+        at=-1
+        for spelling in (raw, str(raw).lstrip("/"), str(_p)):
+            if not spelling:
+                continue
+            at=text.find(spelling)
+            if at>=0:
+                break
+        if at<0:
+            continue
+        owner=None
+        for _start,end,role_word in marks:
+            if end<=at:
+                owner=role_word
+            else:
+                break
+        if owner==word:
+            hits.append((at,raw))
     found=[]
     for _at,raw in sorted(hits):
         if raw not in found:
@@ -456,7 +494,7 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             # evidence_paths raised GOAL_INPUT_BINDING_REQUIRED and lost the
             # ranking however well it matched the goal.
             stem=key[:-6].lower()
-            role=_paths_named_by_role(goal,stem,root)
+            role=_paths_named_by_role(goal,stem,root,_path_role_words(keys))
             if role:
                 # Everything after the role word is not necessarily in that role:
                 # "the test X passes, and write the report to Y" put the report
@@ -487,7 +525,8 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             # would itself have used for the tests the sentence named, and fail
             # closed when it offers no default.
             stem=key[:-5].lower()
-            targets=result.get(stem+"_paths") or _paths_named_by_role(goal,stem,root)
+            targets=result.get(stem+"_paths") or _paths_named_by_role(
+                goal,stem,root,_path_role_words(keys))
             if not targets:
                 targets=[raw for raw,p in paths if p.is_file()]
             # Key order is the template's, so this often runs before the matching
