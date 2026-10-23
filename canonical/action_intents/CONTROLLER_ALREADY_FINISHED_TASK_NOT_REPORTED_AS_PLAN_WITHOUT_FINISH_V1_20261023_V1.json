@@ -386,12 +386,12 @@
     "tournament": {
       "counterexample_receipts": [
         {
-          "git_blob_sha": "c917285d337aa8dc0faac23e8a22f17970b84821",
-          "path": "canonical/runtime/live_brain_route_admission_v1.py"
+          "git_blob_sha": "e2746bf7ce8f7a32f1cdfb2cc2b31a8783d2fe96",
+          "path": "canonical/runtime/astra_runtime.py"
         },
         {
-          "git_blob_sha": "fff20e534588406c94c255c847dee21018b39a0f",
-          "path": "canonical/tests/test_live_brain_route_admission_v1.py"
+          "git_blob_sha": "403e54e484019dd9815106f4313c6d29e383af6e",
+          "path": "canonical/tests/test_goal_compiler_world_binding_v1.py"
         }
       ],
       "decisive_question": "WHEN_A_CAPABILITY_DECLARES_A_REQUIRED_FILE_INPUT_AND_THE_REQUEST_NAMES_NO_FILE_IS_ADMISSION_A_JUDGEMENT_ABOUT_THE_WORDING_OR_ABOUT_WHETHER_THE_RUN_CAN_PRODUCE_ANYTHING__AND_IS_SUPPLYING_LESS_INFORMATION_EVER_MORE_ADMISSIBLE_THAN_SUPPLYING_A_BAD_ONE",
