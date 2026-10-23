@@ -24416,7 +24416,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6ecf8d75c71feec40b2ecb2bc9b7d5de04a82d053976b94418643723fc19392a"
+  "value": "da460c8a340536422e750936bbfe52404625526883f43a362adb8cc9138b244b"
  },
  "engines": [
   {
@@ -223164,9 +223164,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "fe947f7c81d58158d846a47249657da668c3dda46bac8f999f806f67abbbbc10",
+   "sha256": "d187091fd1dc9e46df575373af0a2ea0097fb7d5ae422cc53574a95e3460a9de",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 32,
+   "symbol_count": 35,
    "symbols": [
     "LocalExecutionFailure",
     "_check_expectation",
@@ -223184,14 +223184,14 @@
     "_is_executable",
     "_named_executable",
     "_output_keys",
+    "_promised_source_files",
     "_prose_tokens",
     "_recall_for",
     "_resolve_plan_refs",
     "_result_refs",
+    "_source_digest",
     "_try_composed",
-    "dag_admission",
-    "dag_contract_errors",
-    "dag_executor"
+    "dag_admission"
    ],
    "terms": {
     "admission": 2,
