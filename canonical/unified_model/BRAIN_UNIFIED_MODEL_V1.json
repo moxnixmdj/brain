@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "df4dc02039648ca4b92b7ed640094107ad61c7cbef89c1feaa0b9dc471c01a44"
+  "value": "a24cb8b781ecf9a184b7aa6d93ea916a4508df975573318ee0d32895147fc4f4"
  },
  "engines": [
   {
@@ -217348,7 +217348,7 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "e98c1bfbe17cabe7cd4eda8da5429c40b1d799d437774b70b0a5f15241a560cf",
+   "sha256": "387238258b6a811f1dc87d47168525fe388fd2b2500b90cceaae3dad45074f4d",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
    "symbol_count": 120,
    "symbols": [
@@ -223762,12 +223762,13 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "d187091fd1dc9e46df575373af0a2ea0097fb7d5ae422cc53574a95e3460a9de",
+   "sha256": "a1b9c05541635af51338a5952b933a110d683377262b906f6023e15337ce7110",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 35,
+   "symbol_count": 36,
    "symbols": [
     "LocalExecutionFailure",
     "_check_expectation",
+    "_composed_holds_up",
     "_controller_passed",
     "_credit_recall",
     "_dag_evidence",
@@ -223788,8 +223789,7 @@
     "_resolve_plan_refs",
     "_result_refs",
     "_source_digest",
-    "_try_composed",
-    "dag_admission"
+    "_try_composed"
    ],
    "terms": {
     "admission": 2,

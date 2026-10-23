@@ -950,6 +950,34 @@ def _credit_recall(rows: list, succeeded: bool) -> None:
 COMPOSED_EXECUTOR = "TYPE_LEVEL_COMPOSITION_LOCAL_ADAPTER"
 
 
+def _composed_holds_up(composed: dict[str, Any], goal: str, future_artifacts: list[str]) -> dict[str, Any]:
+    """A fallback must be held to the same evidence as the path it replaces.
+
+    Composition is attempted at exactly two moments, and both of them are
+    moments where the primary path has already failed: the sentence named no
+    single capability, or it named a capability whose promised file never
+    appeared.  Both call sites returned the chain's own verdict untouched, so a
+    chain that declared success was believed without looking at the disk.
+
+    Measured: "Write the text 'hello patch' to the file X and save the report to
+    Y" returned status PASS__COMPOSED_CAPABILITY_CHAIN, pass=True, having written
+    those 11 bytes into Y.  X -- the file the goal actually named -- was never
+    created, and the front door reported the goal done.  The gate that catches
+    this already existed and already ran; its result was simply discarded on the
+    way out.
+    """
+    still = promised_artifact_errors(goal, future_artifacts)
+    if not still:
+        return composed
+    composed["composer_status_before_artifact_check"] = composed.get("status")
+    composed["status"] = "FAIL_CLOSED__PROMISED_ARTIFACT_MISSING"
+    composed["pass"] = False
+    composed["failure_class"] = "PROMISED_ARTIFACT_MISSING"
+    composed["promised_artifact_errors"] = still
+    composed["composer_ran_but_left_the_artifact_missing"] = True
+    return composed
+
+
 def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | None:
     """Close a goal by chaining capabilities, when no single one matches.
 
@@ -1001,7 +1029,12 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         # together. Composition was built and tested and then never called.
         composed = _try_composed(task_id, goal, started)
         if composed is not None:
-            return composed
+            # The chain may still have missed the file the sentence named.  The
+            # artifact list is derived here for the same reason it is derived
+            # below: it comes from the sentence, not from the capability.
+            gap_normalized = front.normalize_goal(goal)
+            return _composed_holds_up(composed, gap_normalized,
+                                      _future_artifacts(gap_normalized))
         return _fail(task_id, "FAIL__RAW_GOAL_COMPILATION_GAP", "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP", started,
                      compiler_code=exc.code, compiler_detail=exc.detail, route_admission=None)
     except Exception as exc:  # pragma: no cover - defensive, mirrors run_raw_goal
@@ -1051,7 +1084,9 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
                 "status": result.get("status"),
                 "compiled_capability_id": result.get("compiled_capability_id"),
                 "promised_artifact_errors": list(missing)}
-            return composed
+            # Composition was tried BECAUSE the artifact was missing, so it is
+            # the one path that must be re-measured before it may report success.
+            return _composed_holds_up(composed, normalized, future_artifacts)
         result["runtime_status_before_artifact_check"] = result.get("status")
         result["status"] = "FAIL_CLOSED__PROMISED_ARTIFACT_MISSING"
         result["pass"] = False

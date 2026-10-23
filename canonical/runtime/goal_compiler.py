@@ -278,22 +278,51 @@ def _path_named_by_role(goal, stem, root):
 _OUTPUT_ROLE_RE=r"\b(?:save|write|store|output|emit)\b(?:\s+[A-Za-z0-9_.\-']+){0,4}\s+to\b"
 
 
+# Clauses are separated by a comma, a semicolon, or a coordinating word.  A
+# period is deliberately NOT a boundary: repository paths contain dots, and a
+# window cut at the first dot would truncate at "out.txt".
+_CLAUSE_BOUNDARY_RE=re.compile(r"[,;]|\band\b|\bthen\b",re.IGNORECASE)
+
+
 def _path_named_after_output_verb(goal, root):
     """Return the repository path the goal names as the destination, or None.
 
     "save it to X" names X as the output whatever X happens to be called, and
     whether or not an earlier run already created it.
+
+    The destination is the first repository path in the SAME CLAUSE as the verb;
+    it does not have to sit immediately after "to".  Requiring adjacency meant
+    "write the text T to the file X" named no destination at all -- the noun
+    "file" sat in between -- so a later "save the report to Y" in the same
+    sentence won the binding instead.  text.file.write then reported
+    PASS__COMPOSED_CAPABILITY_CHAIN having written T into the report, while X,
+    the file the goal actually named, never existed on disk.
     """
     candidates=_repo_paths(goal,root)
     if not candidates:
         return None
     text=str(goal)
     for m in re.finditer(_OUTPUT_ROLE_RE,text,re.IGNORECASE):
-        tail=text[m.end():].lstrip(" \t:,;")
+        tail=text[m.end():]
+        best=None
         for raw,_p in candidates:
             for spelling in (raw, str(raw).lstrip("/"), str(_p)):
-                if spelling and tail.startswith(spelling):
-                    return raw
+                if not spelling:
+                    continue
+                at=tail.find(spelling)
+                if at>=0:
+                    if best is None or at<best[0]:
+                        best=(at,raw)
+                    break
+        if best is None:
+            continue
+        boundary=_CLAUSE_BOUNDARY_RE.search(tail)
+        if boundary is not None and boundary.start()<best[0]:
+            # The nearest path belongs to a later clause, so this verb does not
+            # name it.  Trying the next verb is what lets "write ... to X and
+            # save the report to Y" bind X rather than Y.
+            continue
+        return best[1]
     return None
 
 
@@ -334,6 +363,16 @@ def _paths_named_by_role(goal, stem, root, other_roles=()):
     if not stem:
         return []
     candidates=_repo_paths(goal,root)
+    if not candidates:
+        return []
+    # A role list names files in the repository, so a candidate has to be one.
+    # _repo_paths only checks that a path RESOLVES under the root, which admits
+    # anything with a slash in it: the test command "/usr/bin/python3 X" handed
+    # the binder "usr/bin/python3" as though it were a test file, and the adapter
+    # rejected it with FILE_INVALID.  Filtering on existence is the general rule;
+    # it happened to be masked while a derived argv counted as a competing claim.
+    rr=pathlib.Path(root).resolve()
+    candidates=[(raw,p) for raw,p in candidates if p.is_file() and rr in p.parents]
     if not candidates:
         return []
     text=str(goal)
@@ -381,9 +420,21 @@ def _claimed_paths(result):
     output file as though they were tests -- which then fails with FILE_INVALID
     rather than doing the work.  Role exclusivity is the general rule; filtering
     by recognising the output verb is only ever a special case of it.
+
+    A *_argv value is NOT a claim.  It is a derived command line, and the paths
+    inside it are the very paths of the role it was derived from -- the test
+    runner takes the tests as arguments.  Counting them as somebody else's claim
+    cancels the role against itself.  Measured: with test_argv bound before
+    test_paths in the template order (output_path, source_root, test_argv,
+    test_paths), the exclusivity filter emptied a correct
+    test_paths=[test_goal_compiler.py], the "sentence named the files
+    separately" fallback then fired, and test_paths became every file in the
+    sentence -- source included.
     """
     claimed=set()
-    for value in (result or {}).values():
+    for key,value in (result or {}).items():
+        if str(key).endswith("_argv"):
+            continue
         if isinstance(value,str):
             claimed.add(value)
         elif isinstance(value,(list,tuple)):
