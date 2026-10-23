@@ -24407,7 +24407,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6307,
+  "research_index_records": 6308,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 405,
@@ -24416,7 +24416,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "4f284fd285d3e6563c0a018b854962652397c0fd413222559cf66999128ae9f6"
+  "value": "5ef7ba54d497e4bb17b4d04d45bb8206cd0c1e2875c5bb0060a090c61fbb26ae"
  },
  "engines": [
   {
@@ -189022,6 +189022,51 @@
     "reuse_python_transitive_runtime_closure_v1_plus_exact_dependency_relevance_boundary__seed_from_declared_system_not_external_verifier_tooling": 1,
     "subject": 1,
     "v2": 1
+   }
+  },
+  {
+   "action_id": "PYTEST_STYLE_BARE_FUNCTIONS_COLLECTED_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/PYTEST_STYLE_BARE_FUNCTIONS_COLLECTED_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/PYTEST_STYLE_BARE_FUNCTIONS_COLLECTED_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "b38019410eca1d43e22e4795a6cc0d9603901405999ebc24acb3cf453e8a5c81",
+   "status": "",
+   "terms": {
+    "20261023": 1,
+    "3880": 1,
+    "710": 1,
+    "all": 1,
+    "bare": 2,
+    "baseline_already_passes": 1,
+    "body": 1,
+    "broken": 1,
+    "call": 1,
+    "cannot": 1,
+    "code": 1,
+    "collected": 3,
+    "counted": 1,
+    "def": 1,
+    "empty": 1,
+    "entering": 1,
+    "ever": 1,
+    "files": 2,
+    "function": 3,
+    "functions": 2,
+    "pytest": 2,
+    "pytest_style_bare_functions_collected_v1_20261023_v1": 2,
+    "rather": 2,
+    "reported": 2,
+    "style": 2,
+    "suite": 4,
+    "test": 2,
+    "tests": 2,
+    "than": 2,
+    "unittest": 2,
+    "v1": 2,
+    "were": 2
    }
   },
   {
