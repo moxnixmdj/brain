@@ -149,35 +149,28 @@ def test_a_capability_asked_for_by_name_is_the_one_that_runs(work):
     )
 
 
-OVERSELECTED = "python.task.acceptance.measured.objective.v1"
-
-# Measured, not asserted from hope: over the first 13 path-style receipt-backed
-# targets, 6 route to the capability their own sentence names and 7 do not. Every
-# one of the 7 loses to the SAME capability. Pinning the number means the suite
-# fails if routing gets worse, and the list below says exactly what is still open.
-KNOWN_MISROUTES = {
-    "authority_epoch_guard_v1.py.auto.v1",
-    "bytes_characteristic_active_query_task_generator_v10.py.auto.v1",
-    "bytes_discrete_sequence_task_generator_v1.py.auto.v1",
-    "bytes_domain_free_active_query_task_generator_v1.py.auto.v1",
-    "bytes_hblind_active_query_task_generator_v1.py.auto.v1",
-    "bytes_microkernel_v3_task_generator_v1.py.auto.v1",
-    "bytes_scalar_exact_task_generator_v1.py.auto.v1",
-}
+# The residual that was pinned here is now CLEARED, and the history is kept because
+# the number moved in three measured steps over the same 13 path-style targets:
+#
+#     6 of 13   before this change -- all 7 misroutes lost to
+#               python.task.acceptance.measured.objective.v1
+#    10 of 13   once taking over a route required the caller's whole name in order;
+#               the 3 that remained lost to a SIBLING instead
+#    13 of 13   once the most specific name stated wins
+#
+# The last step matters on its own: "Run the bytes characteristic active query task
+# generator v10." also states the whole of bytes_active_query_task_generator_v1,
+# because "characteristic" is only an extra word in the middle, so iteration order
+# picked the less specific sibling. A caller who says the longer name means it.
+KNOWN_MISROUTES: set[str] = set()
 
 
 def test_the_compiler_alone_routes_a_named_capability_without_the_path_in_the_sentence():
-    """Routing, isolated from execution, at the rate actually measured.
+    """Routing, isolated from execution: every named capability routes to itself.
 
-    Six of thirteen path-style targets route to the capability their own sentence
-    names. The other seven all lose to python.task.acceptance.measured.objective.v1,
-    and they are lexical siblings -- bytes_characteristic_, bytes_discrete_sequence_,
-    bytes_domain_free_, bytes_hblind_, bytes_microkernel_v3_ and bytes_scalar_exact_
-    variants of bytes_active_query_task_generator_v1 -- which is why a k=3 retrieval
-    shortlist cannot separate them. Admitting the named entry directly was tried and
-    measured as a regression (7 failures in test_live_brain_route_admission_v1.py),
-    so the residual is pinned here instead of being hidden behind an assertion that
-    only the easy cases satisfy.
+    Measured over the first 13 path-style receipt-backed targets. The floor is 13
+    because 13 is what it does; if a future change costs one of them its route this
+    fails and says which.
     """
     reg = _registry()
     good, bad = [], []
@@ -191,14 +184,46 @@ def test_the_compiler_alone_routes_a_named_capability_without_the_path_in_the_se
         except gc.GoalCompilationFailure as exc:
             selected = "<raised:" + str(getattr(exc, "code", "?")) + ">"
         (good if selected == cid else bad).append((cid.rsplit("/", 1)[-1], selected))
-    assert len(good) >= 6, (
+    assert len(good) >= 13, (
         f"only {len(good)} of {len(good) + len(bad)} named capabilities routed to themselves: {bad}"
     )
-    unexpected = [name for name, _ in bad if name not in KNOWN_MISROUTES]
-    assert not unexpected, f"new misroutes beyond the pinned residual: {unexpected}"
-    assert all(selected == OVERSELECTED for _, selected in bad), (
-        f"the residual changed shape: {bad}"
-    )
+    assert not bad, f"misroutes: {bad}"
+
+
+def test_a_capability_whose_name_is_only_part_of_the_sentence_is_not_taken_to_be_named():
+    """The evidence needed to TAKE a route is stronger than the evidence to refuse one.
+
+    Measured before this was tightened: judging a name against the raw sentence let a
+    repository PATH do the naming -- one ordinary "Call the function classify_support
+    in canonical/runtime/bounded_claim_support.py ..." sentence read as naming 16
+    receipt projections, and admitting the first of them broke 4 tests in
+    test_live_brain_route_admission_v1.py.  A path is not prose, an identifier is not
+    prose, and one shared word is not a name.
+    """
+    ordinary = ("Call the function classify_support in canonical/runtime/bounded_claim_support.py "
+                "with the payload canonical/astra_runtime/tmp/door_agreement.json and save the "
+                "result to canonical/astra_runtime/tmp/door_agreement_out.json.")
+    audit = ("Audit the python source file canonical/runtime/goal_compiler.py with an AST parser "
+             "and save the report to canonical/astra_runtime/tmp/audit.json.")
+    reg = _registry()
+    for goal in (ordinary, audit):
+        claimed = [cid for cid in reg
+                   if (reg[cid] or {}).get("capability_source") == "receipt_projection"
+                   and front.request_states_the_capability_name(goal, cid)]
+        assert not claimed, (goal, claimed)
+
+
+def test_a_shorter_name_does_not_win_over_the_longer_one_the_caller_said():
+    """The sibling ambiguity, stated as behaviour."""
+    long_cid = "canonical/runtime/bytes_characteristic_active_query_task_generator_v10.py.auto.v1"
+    short_cid = "canonical/runtime/bytes_active_query_task_generator_v1.py.auto.v1"
+    sentence = v7._name_sentence(long_cid)
+    assert front.request_states_the_capability_name(sentence, long_cid)
+    # the shorter name IS also stated, which is exactly why specificity has to decide
+    assert front.request_states_the_capability_name(sentence, short_cid)
+    reg = _registry()
+    assert front._named_receipt_projection(sentence, reg, None,
+                                           front.request_states_the_capability_name) == long_cid
 
 
 def test_a_target_that_routes_by_name_carries_the_rule_that_made_it_possible():

@@ -24536,7 +24536,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6332,
+  "research_index_records": 6333,
   "routing_tokens": 1798,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6cacfc6d8cc9a0b6a4e236476c8076e308b67e603637acc4ab15e0d24df9668a"
+  "value": "c911fbe1d88f92a3fb2ff58975724df4e87940489f3cc213fde212ac26ee95b0"
  },
  "engines": [
   {
@@ -191419,6 +191419,51 @@
     "v1": 2,
     "wave_seven_receipt_prose_family_gets_a_suite_v1_20261024_v1": 2
    }
+  },
+  {
+   "action_id": "WHOLE_NAME_IN_PROSE_TAKES_THE_ROUTE_V1_20261024_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/WHOLE_NAME_IN_PROSE_TAKES_THE_ROUTE_V1_20261024_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WHOLE_NAME_IN_PROSE_TAKES_THE_ROUTE_V1_20261024_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e969b43293957592f92891a9473e3c92da2ef81cd7ad622bab1726319236f45b",
+   "status": "",
+   "terms": {
+    "20261024": 1,
+    "abandon": 1,
+    "about": 1,
+    "adapters": 1,
+    "already": 1,
+    "anywhere": 1,
+    "appear": 1,
+    "before": 1,
+    "both": 1,
+    "cannot": 1,
+    "columns": 1,
+    "data": 1,
+    "demanding": 1,
+    "derived": 1,
+    "document": 1,
+    "either": 1,
+    "fact": 1,
+    "family": 2,
+    "file": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 1,
+    "had": 1,
+    "interpreter": 1,
+    "json": 1,
+    "looked": 1,
+    "mixed-vendor": 1,
+    "name": 1,
+    "needs": 1,
+    "source": 2,
+    "v1": 2,
+    "whole": 2,
+    "whole_name_in_prose_takes_the_route_v1_20261024_v1": 2
+   }
   }
  ],
  "schema": "PROJECT_BRAIN_UNIFIED_MODEL_V1",
@@ -217589,9 +217634,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "a733979d40914805a2b4ab2ed7773e6dc03a708a06ed5875acfa61acd0e89137",
+   "sha256": "f39747c72034ca578afb4312682539911faa35f1a4a825daa73674696d725b06",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
-   "symbol_count": 58,
+   "symbol_count": 60,
    "symbols": [
     "_actions_of",
     "_after_key",
@@ -217635,7 +217680,6 @@
     "front": 2,
     "goal": 2,
     "input_keys": 1,
-    "interchangeable": 1,
     "is_output_key": 1,
     "is_plain_goal_routable": 1,
     "kv_pairs": 1,
@@ -217649,10 +217693,11 @@
     "one": 1,
     "pair_list": 1,
     "parse_typed_value": 1,
+    "prose_of": 1,
     "quoted": 1,
     "request_names_capability_id": 1,
+    "request_states_the_capability_name": 1,
     "routable_registry": 1,
-    "scan_root_by_type": 1,
     "v1": 1
    }
   },
