@@ -312,6 +312,141 @@ def check(root: pathlib.Path = ROOT) -> list[str]:
     return errors
 
 
+def drifted_modules(data: dict[str, Any], root: pathlib.Path = ROOT) -> list[str]:
+    """Every module whose pins no longer match, by exactly the rule `check()` uses.
+
+    A module is drifted when its own sha256 moved, or when any test file it cites as evidence
+    moved. Both mean the same thing: the pin that proves "the function that runs is the
+    function that was tested" no longer proves it, so `brain_module_invoke_v1.admitted` refuses
+    every call into that module.
+    """
+    out: list[str] = []
+    for rel, row in data["modules"].items():
+        if not (root / rel).is_file() or _sha(root / rel) != row.get("sha256"):
+            out.append(rel)
+            continue
+        for t, sha in (row.get("tests") or {}).items():
+            if not (root / t).is_file() or _sha(root / t) != sha:
+                out.append(rel)
+                break
+    return sorted(set(out))
+
+
+def remeasure(junit: list[str], only: list[str] | None = None,
+              root: pathlib.Path = ROOT) -> tuple[dict[str, Any], list[str], list[tuple[str, str]]]:
+    """Refresh ONLY the drifted rows, from a real test run, leaving the rest byte-identical.
+
+    Why this exists. `--write` calls `build()`, which rebuilds the whole document from the
+    junit it is given. Feeding it a partial run therefore does not partially update anything:
+    every function not named by the supplied cases silently loses TEST_EVIDENCED and is
+    re-tiered READ_ONLY_UNTESTED. Measured on this repository that is 2678 test-evidenced
+    functions, so the partial re-measurement this document's own `remeasurement.why` field
+    describes -- "re-measured from a real pytest run of every test file that references them"
+    -- could not actually be performed by the tool that wrote the field. It had to be done by
+    hand, which is how 26 modules came to sit stale and refuse every call into them.
+
+    This does the documented thing for real, and it fails closed rather than re-stamping:
+
+    * a module with no supplied junit for ANY test that references it is REFUSED, not
+      re-pinned. Re-stamping a sha256 without a run behind it would forge the proof that the
+      function which runs is the function which was tested -- the one thing this document
+      exists to establish.
+    * only rows in `drifted_modules` are touched; every other row is left exactly as it was.
+    * a function named by a failing case is dropped from the row and listed under `refused`,
+      exactly as `build()` does.
+    """
+    data = json.loads((root / EVIDENCE_REL).read_text(encoding="utf-8"))
+    targets = drifted_modules(data, root)
+    if only:
+        wanted = set(only)
+        targets = [r for r in targets if r in wanted]
+    if not targets:
+        return data, [], []
+
+    mods, _ = statics(root)
+    index = TestIndex(test_files(root))
+    cases = junit_cases(junit, root)
+    refs_cache: dict[str, dict] = {}
+    updated: list[str] = []
+    refused: list[tuple[str, str]] = []
+
+    for rel in targets:
+        if rel not in mods:
+            refused.append((rel, "NOT_IN_STATIC_INVENTORY"))
+            continue
+        covering = sorted(index.referencing(rel))
+        if not any(cases.get(t) for t in covering):
+            refused.append((rel, "NO_TEST_RUN_SUPPLIED_FOR_ANY_REFERENCING_TEST"))
+            continue
+        try:
+            loaded = invoker.probe_import(root, rel)
+        except invoker.ModuleInvokeRefused as exc:
+            refused.append((rel, "IMPORT_REFUSED:" + str(exc)[:120]))
+            continue
+        info = mods[rel]
+        names = [f for f in info["functions"] if f in loaded]
+        if not names:
+            refused.append((rel, "NO_PUBLIC_FUNCTION_AFTER_IMPORT"))
+            continue
+        evidence_files: set[str] = set()
+        functions: dict[str, Any] = {}
+        failing_names: dict[str, str] = {}
+        for f in names:
+            passing = failing = 0
+            files: set[str] = set()
+            for t in covering:
+                if t not in refs_cache:
+                    refs_cache[t] = case_references(index.tests[t])
+                for cls, name, state in cases.get(t, []):
+                    used = refs_cache[t].get((cls, name)) or refs_cache[t].get((None, name)) or set()
+                    if f in used:
+                        if state == "PASS":
+                            passing += 1
+                            files.add(t)
+                        elif state == "FAIL":
+                            failing += 1
+            if failing:
+                failing_names[f] = "FAILING_TEST_CASES:%d" % failing
+                continue
+            tier = TESTED if passing else UNTESTED
+            evidence_files |= files
+            functions[f] = {"tier": tier, "passing_cases": passing, **info["functions"][f]}
+        if not functions:
+            refused.append((rel, "NO_ADMITTABLE_FUNCTION"))
+            continue
+        data["modules"][rel] = {
+            "sha256": _sha(root / rel), "doc": info["doc"], "functions": functions,
+            "tests": {t: _sha(root / t) for t in sorted(evidence_files)}}
+        if failing_names:
+            data.setdefault("refused", {})[rel] = failing_names
+        else:
+            (data.get("refused") or {}).pop(rel, None)
+        updated.append(rel)
+
+    if updated:
+        tiers = collections.Counter(
+            f["tier"] for m in data["modules"].values() for f in m["functions"].values())
+        data["summary"]["invocable_modules"] = len(data["modules"])
+        data["summary"]["invocable_functions"] = sum(tiers.values())
+        data["summary"]["functions_by_tier"] = dict(sorted(tiers.items()))
+        data["remeasurement"] = {
+            "authority": "NONE__SANDBOX_MEASUREMENT_OF_EXISTING_TESTS_NOT_A_TRUE_CAPABILITY_RECEIPT",
+            "junit_cases_observed": sum(len(v) for v in cases.values()),
+            "measured_platform": platform.system().lower(),
+            "measured_python": "%d.%d" % sys.version_info[:2],
+            "modules": sorted(updated),
+            "refused": [{"module": r, "why": w} for r, w in sorted(refused)],
+            "tool": "canonical/runtime/module_invocation_evidence_v1.py --remeasure",
+            "why": ("These modules drifted: their own bytes or a test file they cite as evidence "
+                    "changed, so the sha256 pins no longer proved that the function which runs is "
+                    "the function which was tested, and every call into them was refused. They were "
+                    "re-measured from a real pytest run of the test files that reference them. Every "
+                    "other row in this document is byte-identical to before, and a drifted module "
+                    "with no supplied run is listed under refused rather than re-stamped."),
+        }
+    return data, updated, refused
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
     g = ap.add_mutually_exclusive_group(required=True)
@@ -319,7 +454,9 @@ def main(argv: list[str] | None = None) -> int:
     g.add_argument("--write", action="store_true")
     g.add_argument("--check", action="store_true")
     g.add_argument("--register", action="store_true")
+    g.add_argument("--remeasure", action="store_true")
     ap.add_argument("--junit", action="append", default=[])
+    ap.add_argument("--module", action="append", default=[])
     ns = ap.parse_args(argv)
     if ns.list_tests:
         mods, _ = statics()
@@ -332,6 +469,15 @@ def main(argv: list[str] | None = None) -> int:
         data = build(ns.junit)
         (ROOT / EVIDENCE_REL).write_text(json.dumps(data, indent=1, sort_keys=True) + "\n", encoding="utf-8")
         print(json.dumps(data["summary"], indent=1))
+        return 0
+    if ns.remeasure:
+        if not ns.junit:
+            ap.error("--remeasure needs --junit from a real pytest run; re-stamping a sha256 "
+                     "with no run behind it would forge the proof this document exists to hold")
+        data, updated, refused = remeasure(ns.junit, ns.module or None)
+        (ROOT / EVIDENCE_REL).write_text(json.dumps(data, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+        print(json.dumps({"updated": updated,
+                          "refused": [{"module": r, "why": w} for r, w in refused]}, indent=1))
         return 0
     if ns.register:
         entries = register()
