@@ -402,16 +402,17 @@
    "WRITE_ONE_SENTENCE_SPECIFIC_VERIFIER_PER_GOAL__REJECTED_MEASURED_ONE_OF_TWENTY_THREE_AND_LINEAR_IN_SENTENCES",
    "TRUST_THE_PRODUCERS_VERIFIED_FLAG__REJECTED_MEASURED_TO_ACCEPT_TWO_GOALS_THE_PRODUCER_SAID_WERE_UNVERIFIED",
    "COMPARE_ENUMERATED_CANDIDATE_COUNT_TO_A_FRESH_GLOB__REJECTED_MEASURED_400_CLAIMED_AGAINST_2192_REAL_FILES_SO_THE_CAP_WOULD_LOOK_LIKE_A_LIE",
-   "REQUIRE_THE_TRACE_CAPABILITY_SEQUENCE_TO_EQUAL_THE_PLAN_CHAIN__REJECTED_MEASURED_THE_PLAN_AND_TRACE_ORDERS_LEGITIMATELY_DIFFER_WHEN_A_PREREQUISITE_PRODUCER_IS_INSERTED"
+   "REQUIRE_THE_TRACE_CAPABILITY_SEQUENCE_TO_EQUAL_THE_PLAN_CHAIN__REJECTED_MEASURED_THE_PLAN_AND_TRACE_ORDERS_LEGITIMATELY_DIFFER_WHEN_A_PREREQUISITE_PRODUCER_IS_INSERTED",
+   "INPUT_BOUND_BY_SENTENCE_ROLE_NOT_BY_FILENAME_V1_20261023_V1"
   ],
-  "selected_route": "SQLITE_SOURCE_SELECTED_BY_COLUMNS_NOT_BY_SENTENCE_V1_20261023_V1",
-  "selected_surviving_route": "SQLITE_SOURCE_SELECTED_BY_COLUMNS_NOT_BY_SENTENCE_V1_20261023_V1",
+  "selected_route": "INPUT_BOUND_BY_SENTENCE_ROLE_NOT_BY_FILENAME_V1_20261023_V1",
+  "selected_surviving_route": "INPUT_BOUND_BY_SENTENCE_ROLE_NOT_BY_FILENAME_V1_20261023_V1",
   "stop_condition": "Stop when the new suite passes, its negative control fails on revert, the two families resolve their source identically, 201 tests pass across the nine suites touched, and the benchmark holds at 23/23 and 22/23.",
   "why_selected_route_is_fastest_sufficient": "IT_REUSES_THE_TRACE_THE_RUNTIME_ALREADY_EMITS_SO_ONE_VERIFIER_COVERS_EVERY_GOAL_THE_TEN_INSPECTORS_REACH_RATHER_THAN_ONE_SENTENCE_AT_A_TIME__AND_IT_WAS_MEASURED_TO_MOVE_THE_NUMBER_NINE_STEPS_IN_ONE_PASS_WITH_NO_REGRESSION_ON_COMPILE_SELECTION_OR_EXECUTION"
  },
- "route_id": "SQLITE_SOURCE_SELECTED_BY_COLUMNS_NOT_BY_SENTENCE_V1_20261023_V1",
+ "route_id": "INPUT_BOUND_BY_SENTENCE_ROLE_NOT_BY_FILENAME_V1_20261023_V1",
  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
- "selected_route": "Read the evidence the repository already holds, and dispatch through the kernel's own action loop.",
+ "selected_route": "INPUT_BOUND_BY_SENTENCE_ROLE_NOT_BY_FILENAME_V1_20261023_V1",
  "stop_condition": "Stop when the new suite passes, its negative control fails on revert, the two families resolve their source identically, 201 tests pass across the nine suites touched, and the benchmark holds at 23/23 and 22/23.",
  "terminal_credit_delta": 0,
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
@@ -454,11 +455,11 @@
   "tournament": {
    "counterexample_receipts": [
     {
-     "git_blob_sha": "9c69ecdb13d5a569d0a516ab5f4667636e73e490",
+     "git_blob_sha": "0f5df6ffc34a0b8645d70934c9273852961deb40",
      "path": "canonical/runtime/goal_compiler.py"
     },
     {
-     "git_blob_sha": "f57eb88fdba9dd126372f2f673db1bac344893b6",
+     "git_blob_sha": "3277f02f42920e6a8198b4ddb2a3e8775f8df7ea",
      "path": "canonical/tests/test_live_brain_route_admission_v1.py"
     }
    ],
