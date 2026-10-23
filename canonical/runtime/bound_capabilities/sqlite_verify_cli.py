@@ -14,22 +14,73 @@ def _safe(root,raw,require_file=True):
         raise RuntimeError("INPUT_FILE_MISSING")
     return p
 
-def _find_collection(data,wanted,path=()):
-    if isinstance(data,dict):
-        if data and all(isinstance(v,dict) for v in data.values()):
-            if any(wanted in rec.values() for rec in data.values()):
-                return path,data
-        for k,v in data.items():
-            found=_find_collection(v,wanted,path+(str(k),))
-            if found is not None:
-                return found
+def _record_items(node):
+    """A collection of records, whether the document spells it as a list or a mapping."""
+    if isinstance(node,list) and node and all(isinstance(v,dict) for v in node):
+        return [(str(i),v) for i,v in enumerate(node)]
+    if isinstance(node,dict) and node and all(isinstance(v,dict) for v in node.values()):
+        return [(str(k),v) for k,v in sorted(node.items(),key=lambda kv:str(kv[0]))]
     return None
 
-def _status_value(goal,data):
-    for token in re.findall(r"\b[A-Z][A-Z0-9_]{3,}\b",str(goal or "")):
-        if _find_collection(data,token) is not None:
-            return token
-    raise RuntimeError("SQLITE_STATUS_VALUE_UNRESOLVED")
+def _candidate_collections(node,path=()):
+    out=[]
+    if _record_items(node) is not None:
+        out.append((path,node))
+    if isinstance(node,dict):
+        for k,v in node.items():
+            out.extend(_candidate_collections(v,path+(str(k),)))
+    elif isinstance(node,list):
+        for i,v in enumerate(node):
+            if isinstance(v,(dict,list)):
+                out.extend(_candidate_collections(v,path+(str(i),)))
+    return out
+
+def _select_collection(data,columns):
+    """Pick the JSON collection that can actually supply these columns.
+
+    Ported from canonical/runtime/bound_capabilities/xlsx_verify_openpyxl.py, which has
+    always selected its source this way.  The sqlite adapters instead demanded an UPPERCASE
+    token in the goal sentence and refused with SQLITE_STATUS_VALUE_UNRESOLVED when the
+    sentence had none -- so "Verify a sqlite table against JSON records." could never run,
+    while the xlsx sibling handling the same shape of task could.  Choosing by the columns
+    the work really needs is both faithful to the sentence and impossible to get wrong
+    silently: a collection that cannot supply a column is not a candidate, and if the
+    shallowest surviving candidates are not exactly one this fails closed instead of picking.
+    """
+    valid=[]
+    for path,node in _candidate_collections(data):
+        items=_record_items(node) or []
+        if not items:
+            continue
+        try:
+            for key,record in items:
+                for column in columns:
+                    _cell(record,key,column)
+        except RuntimeError:
+            continue
+        valid.append((path,node))
+    if not valid:
+        raise RuntimeError("SQLITE_RECORD_COLLECTION_NOT_FOUND")
+    min_depth=min(len(pth) for pth,_ in valid)
+    best=[x for x in valid if len(x[0])==min_depth]
+    if len(best)!=1:
+        raise RuntimeError("SQLITE_RECORD_COLLECTION_AMBIGUOUS:"+json.dumps([list(pth) for pth,_ in best],sort_keys=True))
+    return best[0]
+
+def _status_value_from_records(records):
+    """The one status the records agree on, or None when they do not agree on one.
+
+    Also ported from the xlsx sibling.  Exactly one distinct value is a fact about the
+    document rather than a guess; anything else declines to filter at all.
+    """
+    values=set()
+    for _,record in _record_items(records) or []:
+        value=record.get("status")
+        if value is not None and not isinstance(value,(dict,list)):
+            text=str(value).strip()
+            if text:
+                values.add(text)
+    return next(iter(values)) if len(values)==1 else None
 
 def _table_name(goal):
     m=re.search(r"\btable\s+named\s+([A-Za-z_][A-Za-z0-9_]*)\b",str(goal or ""),flags=re.I)
@@ -84,11 +135,6 @@ def run(args,root):
     db=_safe(root,args.get("sqlite_path"))
     goal=str(args.get("goal") or "")
     data=json.loads(source.read_text(encoding="utf-8"))
-    wanted=_status_value(goal,data)
-    found=_find_collection(data,wanted)
-    if found is None:
-        raise RuntimeError("SQLITE_STATUS_COLLECTION_NOT_FOUND")
-    _,records=found
     table=_table_name(goal)
     if table is None:
         tables=_run_json(
@@ -110,9 +156,14 @@ def run(args,root):
     if "capability_id" not in cols:
         raise RuntimeError("SQLITE_ID_COLUMN_REQUIRED")
 
+    # The source collection is chosen by the columns this table actually has, and the status
+    # filter -- only when the records agree on exactly one status -- is derived from them.
+    # Neither comes from the sentence, so a sentence stating neither still verifies.
+    _,records=_select_collection(data,cols)
+    wanted=_status_value_from_records(records)
     expected={}
-    for key,record in sorted(records.items()):
-        if wanted not in record.values():
+    for key,record in _record_items(records) or []:
+        if wanted is not None and wanted not in record.values():
             continue
         expected[str(key)]={c:_cell(record,str(key),c) for c in cols}
 
