@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6cacfc6d8cc9a0b6a4e236476c8076e308b67e603637acc4ab15e0d24df9668a"
+  "value": "bc3499a1c7efeb3184fcc6eab6c8217c7816217ca4600163f5a62629eb770713"
  },
  "engines": [
   {
@@ -217589,9 +217589,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "a733979d40914805a2b4ab2ed7773e6dc03a708a06ed5875acfa61acd0e89137",
+   "sha256": "f39747c72034ca578afb4312682539911faa35f1a4a825daa73674696d725b06",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
-   "symbol_count": 58,
+   "symbol_count": 60,
    "symbols": [
     "_actions_of",
     "_after_key",
@@ -217635,7 +217635,6 @@
     "front": 2,
     "goal": 2,
     "input_keys": 1,
-    "interchangeable": 1,
     "is_output_key": 1,
     "is_plain_goal_routable": 1,
     "kv_pairs": 1,
@@ -217649,10 +217648,11 @@
     "one": 1,
     "pair_list": 1,
     "parse_typed_value": 1,
+    "prose_of": 1,
     "quoted": 1,
     "request_names_capability_id": 1,
+    "request_states_the_capability_name": 1,
     "routable_registry": 1,
-    "scan_root_by_type": 1,
     "v1": 1
    }
   },

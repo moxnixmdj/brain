@@ -226,7 +226,7 @@ def is_plain_goal_routable(entry: Mapping[str, Any]) -> bool:
 
 
 def _named_receipt_projection(text: str, admissible: Mapping[str, Mapping[str, Any]],
-                              selected: str | None) -> str | None:
+                              selected: str | None, names=None) -> str | None:
     """A receipt-projected capability the sentence NAMES but the scorer cannot see.
 
     The pinned scorer skips anything whose status is not VERIFIED_BOUND_CAPABILITY,
@@ -241,14 +241,98 @@ def _named_receipt_projection(text: str, admissible: Mapping[str, Mapping[str, A
     Scoped exactly as F17 is: receipt projections only.  The trigger is new, the
     authority is not.
     """
+    matches = []
     for cid, entry in (admissible or {}).items():
         if cid == selected or not isinstance(entry, Mapping):
             continue
         if entry.get("capability_source") != "receipt_projection":
             continue
-        if request_names_capability_id(text, cid):
-            return cid
-    return None
+        if (names or request_names_capability_id)(text, cid):
+            matches.append(cid)
+    if not matches:
+        return None
+    # The MOST SPECIFIC name stated, not the first one found.  A shorter name can
+    # be a subsequence of a longer one: "Run the bytes characteristic active query
+    # task generator v10." states the whole of bytes_active_query_task_generator_v1
+    # as well, because "characteristic" is only an extra word in the middle, so
+    # iteration order picked the less specific sibling and 3 of 13 still misrouted.
+    # A caller who says the longer name means the longer name.
+    def _specificity(cid: str) -> tuple:
+        stem = str(cid).rsplit("/", 1)[-1].split(".py")[0]
+        words = [w for w in re.split(r"[_\s]+", stem) if len(w) > 1]
+        return (len(words), len(stem))
+    return max(matches, key=_specificity)
+
+
+ROOT_FOR_NAMING = pathlib.Path(__file__).resolve().parents[2]
+
+# A token carrying an underscore, a dot or a slash is an identifier, not a word the
+# caller wrote out.  "v1" survives; "classify_support" and "bytes_active_..." do not.
+_IDENTIFIER_TOKEN_RE = re.compile(r"\S*[_.\/]\S*")
+
+
+def _prose_of(text: str) -> str:
+    """The caller's own words: no repository paths, no identifiers.
+
+    Measured: judging a name against the raw sentence let a PATH do the naming.
+    "Call the function classify_support in canonical/runtime/bounded_claim_support.py
+    with the payload ... and save the result to ..." was read as naming SIXTEEN
+    receipt projections, because bounded_, support, claim and selected_ all occur
+    inside repository paths -- and the shared predicate tokenises, so the identifier
+    "classify_support" alone contributed "support" and named nine more.
+    """
+    prose = str(text or "")
+    for raw, _resolved in gc._repo_paths(prose, ROOT_FOR_NAMING):
+        for spelling in {raw, str(raw).lstrip("/"), str(_resolved)}:
+            if spelling:
+                prose = prose.replace(spelling, " ")
+    return _IDENTIFIER_TOKEN_RE.sub(" ", prose)
+
+
+_NAME_VERSION_RE = re.compile(r"^v\d+$", re.IGNORECASE)
+_NAME_STOPWORDS = frozenset({"run", "call", "the", "a", "an", "and", "with", "of",
+                             "for", "to", "in", "on", "that", "it", "by"})
+
+
+def request_states_the_capability_name(text: str, cid: str) -> bool:
+    """True only when the caller wrote the capability's WHOLE name, in order.
+
+    Refusing a request is a fail-closed act, so one word of a name is enough
+    evidence for it -- that is what request_names_capability is documented to do.
+    TAKING OVER a route that already bound is the opposite kind of act and needs
+    far stronger evidence.  Measured with the one-word rule: "Audit the python
+    source file ... with an AST parser ..." read as naming 15 receipt projections
+    and "Repair the python source ... so that the test ... passes" read as naming
+    8, on the strength of a single shared word each.  Admitting the first of those
+    displaced real bound capabilities and broke 4 tests in
+    test_live_brain_route_admission_v1.py.
+
+    The whole name, in order, is the evidence a caller actually gives when they mean
+    a specific capability, and it is exactly what the wave 7 generator produces:
+    "Run the bytes active query task generator." A trailing version token is
+    optional, because prose drops it and the retrieval path separates version
+    siblings only when the request states the version.
+    """
+    try:
+        stem = str(cid or "").rsplit("/", 1)[-1].split(".py")[0]
+        if not stem or stem == cid:
+            return False
+        words = [w.lower() for w in re.split(r"[_\s]+", stem) if len(w) > 1]
+        while words and _NAME_VERSION_RE.match(words[-1]):
+            words.pop()
+        words = [w for w in words if w not in _NAME_STOPWORDS]
+        if not words:
+            return False
+        prose = _prose_of(text)
+        last = -1
+        for w in words:
+            m = re.search(r"\b" + re.escape(w) + r"s?\b", prose, re.IGNORECASE)
+            if m is None or m.start() < last:
+                return False
+            last = m.end()
+        return True
+    except Exception:  # noqa: BLE001 - naming is evidence, never a reason to raise
+        return False
 
 
 def request_names_capability_id(text: str, cid: str) -> bool:
@@ -266,7 +350,29 @@ def request_names_capability_id(text: str, cid: str) -> bool:
             # A dotted capability id is not a module name; judging it as one would
             # match on ordinary English words inside the id.
             return False
-        return bool(_sel.request_names_capability(text, stem))
+        # A NAME has to appear in the PROSE.  Judged against the raw sentence, a
+        # path does the naming instead: "Call the function classify_support in
+        # canonical/runtime/bounded_claim_support.py with the payload ... and save
+        # the result to ..." was measured to "name" SIXTEEN different receipt
+        # projections, because bounded_, support, claim and selected_ all occur
+        # inside repository paths and ordinary words.  That is what made admitting
+        # the named entry directly break 7 tests in
+        # test_live_brain_route_admission_v1.py -- the hook fired on a candidate the
+        # sentence never mentioned.  Removing the path spans first leaves only the
+        # words the caller actually wrote.
+        prose = text
+        for raw, _resolved in gc._repo_paths(text, ROOT_FOR_NAMING):
+            for spelling in {raw, str(raw).lstrip("/"), str(_resolved)}:
+                if spelling:
+                    prose = prose.replace(spelling, " ")
+        # And an IDENTIFIER is not prose either.  The shared predicate tokenises,
+        # so "classify_support" contributes the word "support" -- which on its own
+        # measured as naming nine different capabilities ending in _support, after
+        # the paths were already stripped.  A caller writes a capability's name in
+        # words; a token with an underscore, a dot or a slash in it is a path, a
+        # function or a field, and none of those is the caller naming a capability.
+        prose = _IDENTIFIER_TOKEN_RE.sub(" ", prose)
+        return bool(_sel.request_names_capability(prose, stem))
     except Exception:  # noqa: BLE001 - naming is evidence, never a reason to raise
         return False
 
@@ -1667,12 +1773,40 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
 
     # An explicit name outranks a scorer that could not see the thing named.
     if single_shape:
-        _named = _named_receipt_projection(text, admissible, selected)
+        _named = _named_receipt_projection(text, admissible, selected,
+                                            request_states_the_capability_name)
         if _named is not None:
             rules.append("F29_NAMED_RECEIPT_PROJECTION_CONSULTED")
             retrieved = _retrieval_first_selection(text, admissible, root, rules)
             if retrieved is not None and retrieved.get("selected_capability") == _named:
                 return retrieved
+            # F17 retrieves k=3 and disposes by typed admission, so among lexical
+            # SIBLINGS it cannot tell which one was asked for: the registry holds
+            # bytes_active_query_task_generator_v1 alongside bytes_characteristic_,
+            # bytes_discrete_sequence_, bytes_domain_free_, bytes_hblind_,
+            # bytes_microkernel_v3_ and bytes_scalar_exact_ variants, and 7 of the
+            # first 13 receipt-backed prose goals lost to
+            # python.task.acceptance.measured.objective.v1 because the shortlist was
+            # ambiguous and F17 selects nothing when it is.  An explicit name IS the
+            # disambiguation the ranker lacks.  This was attempted before and broke 7
+            # tests in test_live_brain_route_admission_v1.py -- because the naming
+            # test counted a repository PATH and an identifier as naming a
+            # capability, so it fired on 16 candidates for one ordinary sentence.
+            # The predicate now needs the name in the caller's own words, and that
+            # sentence names none.  Admission still goes through the typed binder,
+            # which is what bounds selection quality.
+            named_entry = admissible.get(_named) or {}
+            try:
+                named_inputs = bind_all_inputs(text, named_entry, root, cycle=0, spool=None)
+            except GoalCompilationFailure:
+                named_inputs = None
+            if named_inputs is not None:
+                rules.append("F29_NAMED_RECEIPT_PROJECTION_ADMITTED_BY_CONTRACT")
+                return _single(_named, named_entry, named_inputs, 0, {
+                    "rule": "F29_NAMED_RECEIPT_PROJECTION_ADMITTED_BY_CONTRACT",
+                    "named": _named,
+                    "retrieval_was_ambiguous": retrieved is None,
+                }, rules)
 
     if single_shape or compiled is None:
         future = _future_artifacts(text, root)
