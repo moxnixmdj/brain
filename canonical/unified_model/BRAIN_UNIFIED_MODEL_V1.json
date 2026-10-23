@@ -24416,7 +24416,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "eb28bd84fb3de2323835b3948f165a65c30e55b3416b7b045b659e2fd657f573"
+  "value": "64f51249830cde0854ad9eb68c18f2634725628a0c68909a75950ad21dbd56e6"
  },
  "engines": [
   {
@@ -216570,9 +216570,9 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "bff01503c8c9b249fe8925d8b08e6bcf75f3ba073dad853a771f9d535b28f933",
+   "sha256": "d8e22ead08e85651b189a63653158b53f16e4129142159fbbfe7e70b06f401ad",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
-   "symbol_count": 113,
+   "symbol_count": 114,
    "symbols": [
     "GoalCompilationFailure",
     "_append_producer_parts",
@@ -216602,7 +216602,6 @@
    "terms": {
     "bind_inputs": 1,
     "bm25_module": 1,
-    "bm25_rerank": 1,
     "bm25_terms": 1,
     "brain": 1,
     "capability_document": 1,
@@ -216619,6 +216618,7 @@
     "goal": 1,
     "goalcompilationfailure": 1,
     "load_sibling_runtime_module": 1,
+    "path_named_by_role": 1,
     "placeholders": 1,
     "plain-goal": 1,
     "planner_capability": 1,

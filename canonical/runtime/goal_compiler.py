@@ -213,6 +213,36 @@ def _context_path_for_key(key, context_paths):
     return seen[0] if len(seen)>=1 else None
 
 
+def _path_named_by_role(goal, stem, root):
+    """Bind a typed input by the role the sentence assigns it, not its filename.
+
+    "create an archive from the manifest X" names X as the manifest whatever X
+    happens to be called.  Matching ``stem`` against X's own name rejects a real
+    manifest named ``m9.json``, and the whole goal then fails closed even though
+    the goal states plainly which file plays which part.
+
+    Returns the repository path that immediately follows the stem word in the
+    goal, or None when the sentence does not name one.  Only ever consulted for
+    inputs that no other rule could bind, so it cannot move a binding that
+    already succeeds.
+    """
+    if not stem:
+        return None
+    candidates=_repo_paths(goal,root)
+    if not candidates:
+        return None
+    text=str(goal)
+    word=str(stem).replace("_"," ")
+    for m in re.finditer(r"\b"+re.escape(word)+r"\b",text,re.IGNORECASE):
+        tail=text[m.end():].lstrip(" \t:,;")
+        for raw,_p in candidates:
+            if not raw:
+                continue
+            if tail.startswith(raw) or tail.startswith(str(raw).lstrip("/")):
+                return raw
+    return None
+
+
 def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
     template=entry.get("action_template") or {}
     keys=_placeholders(template)
@@ -334,6 +364,14 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                 context_value=_context_path_for_key(key,context_paths)
                 if context_value is not None:
                     result[key]=context_value
+                    continue
+                # Last resort for a typed input: the sentence itself said which
+                # file plays this role.  Consulted only after the stem match and
+                # the context path both came up empty, so it can only rescue a
+                # binding that would otherwise fail closed.
+                role_bound=_path_named_by_role(goal,stem,root)
+                if role_bound is not None:
+                    result[key]=role_bound
                     continue
                 if stem in {"input","source"} and len(existing)==1:
                     result[key]=existing[0][0]
