@@ -17,7 +17,14 @@ def _safe(repo:pathlib.Path, raw:Any)->pathlib.Path:
     return p
 
 def _imports(repo:pathlib.Path, test:pathlib.Path)->list[pathlib.Path]:
-    tree=ast.parse(test.read_text(encoding="utf-8"),filename=str(test))
+    # A file under source_root may be third-party and use syntax this interpreter cannot parse
+    # (PEP 695 type aliases need 3.12). Such a file cannot be a repair candidate or a
+    # localization target, so it contributes nothing - it must not abort the whole search,
+    # which is the defect python_test_audit documents for timeouts one layer down.
+    try:
+        tree=ast.parse(test.read_text(encoding="utf-8"),filename=str(test))
+    except (SyntaxError,ValueError,UnicodeDecodeError):
+        return []
     names=[]
     for n in ast.walk(tree):
         if isinstance(n,ast.Import): names += [a.name for a in n.names]
@@ -36,7 +43,10 @@ def _test(repo:pathlib.Path, test:pathlib.Path, timeout:int)->dict[str,Any]:
 def _materialize(source:pathlib.Path, tests:list[pathlib.Path], wanted:Mapping[str,Any])->str|None:
     text=source.read_text(encoding="utf-8")
     nums,strings=ptg._test_literals(tests)
-    tree=ast.parse(text,filename=str(source))
+    try:
+        tree=ast.parse(text,filename=str(source))
+    except (SyntaxError,ValueError):
+        return None
     for key,desc,replacer in ptg._candidate_specs(tree,nums,strings):
         if desc==wanted:
             return ptg._render_candidate(text,key,replacer)

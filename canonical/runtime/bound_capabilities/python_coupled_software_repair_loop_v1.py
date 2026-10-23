@@ -91,7 +91,13 @@ def _localize(repo,root,tests,failure,max_files,max_symbols):
  ranked.sort(key=lambda x:(-x["score"],x["rel"]))
  return ranked[:max_files]
 def _edit(text,key,desc,replacer):
- tree=ast.parse(text); target=None
+  # A file under source_root may be third-party and use syntax this interpreter cannot parse
+  # (PEP 695 type aliases need 3.12). Such a file cannot be a repair candidate or a
+  # localization target, so it contributes nothing - it must not abort the whole search,
+  # which is the defect python_test_audit documents for timeouts one layer down.
+ try:tree=ast.parse(text)
+ except (SyntaxError,ValueError):return None
+ target=None
  for n in ast.walk(tree):
   if _PATCH._node_key(n)==key:target=n;break
  if target is None:return None
@@ -103,7 +109,11 @@ def _edit(text,key,desc,replacer):
  if raw[start:end]==rb:return None
  return {"start":start,"end":end,"replacement":rb,"mutation":desc}
 def _pool(row,tests,per_file):
- p=row["path"]; text=p.read_bytes().decode("utf-8");tree=ast.parse(text,filename=str(p));nums,strings=_PATCH._test_literals(tests)
+ p=row["path"]
+ try:
+  text=p.read_bytes().decode("utf-8");tree=ast.parse(text,filename=str(p))
+ except (SyntaxError,ValueError,UnicodeDecodeError):return []
+ nums,strings=_PATCH._test_literals(tests)
  ranges=[(s["lineno"],s["end_lineno"],s["score"]) for s in row["symbols"] if s["score"]>0]
  out=[]
  for key,desc,replacer in _PATCH._candidate_specs(tree,nums,strings):

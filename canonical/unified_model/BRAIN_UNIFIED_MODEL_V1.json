@@ -22257,7 +22257,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
-    "source_sha256": "37a23056de223710abaa1d534543c1cd8dc12bb87551bd9697e5c6751bdf2aab",
+    "source_sha256": "ca327e0782fca640161eeb39a265d0e01d6a6f53b105fc8eed2d05dcf7d676d8",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22346,7 +22346,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py",
-    "source_sha256": "2d8d75fb1761d08c2e785f4994721c2af179603c52e6a88fc0521142b2ba8b57",
+    "source_sha256": "d191b5149837d4dd615dbdfc9cd332249218def83436fe9dc9c4ed0cca7820b5",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22688,7 +22688,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
-    "source_sha256": "33e3d79d6fb5f92bac84706da92331624eff3147939382e9034dab39bf4310ef",
+    "source_sha256": "3a6cfe12f9dc3606d36d4bc8cd0660da89db2e549b26e62aec4cbb51c4ceb58b",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22868,7 +22868,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py",
-    "source_sha256": "05742806d7f16a156ddb44dabfb237f6342b6db39b337b8ca5e8d98fd5adbce7",
+    "source_sha256": "e3a41d1021f167e34f9a3fe2128bebb793a28e4ebb28e34f1a298036dfee3220",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -24407,7 +24407,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6308,
+  "research_index_records": 6309,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 405,
@@ -24416,7 +24416,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "5ef7ba54d497e4bb17b4d04d45bb8206cd0c1e2875c5bb0060a090c61fbb26ae"
+  "value": "6ff047a9418d8336f71c7178595518d945f36fdff362b2c81c674254db4cccb6"
  },
  "engines": [
   {
@@ -46318,7 +46318,7 @@
   "included_source_count": 863,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "a3877ff12c7ee50cf96050983c0dbe3b147621c0d5225f2bb028f64ae5c9d6a5"
+  "source_tree_digest": "25e34f92d7493bad10981d3d2be502b02225c0f2c4727509094d66cf2f273d20"
  },
  "research_index": [
   {
@@ -190107,6 +190107,51 @@
     "unified": 1,
     "unified_model_status_source_index_reporting_fix_v1_20261021_v1": 1,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "UNPARSEABLE_NEIGHBOUR_DOES_NOT_ABORT_REPAIR_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/UNPARSEABLE_NEIGHBOUR_DOES_NOT_ABORT_REPAIR_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/UNPARSEABLE_NEIGHBOUR_DOES_NOT_ABORT_REPAIR_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e3630171b2b6356f70b4016879075961831ecfdd1f4d184a30b907109efe759b",
+   "status": "",
+   "terms": {
+    "20261023": 1,
+    "3.11.2": 1,
+    "3.12": 1,
+    "47": 2,
+    "695": 1,
+    "abandon": 1,
+    "abort": 2,
+    "about": 1,
+    "across": 1,
+    "adapters": 1,
+    "alias": 1,
+    "anywhere": 2,
+    "ast.parse": 1,
+    "benchmark": 1,
+    "candidate": 1,
+    "canonical": 2,
+    "capabilities": 2,
+    "file": 4,
+    "interpreter": 2,
+    "line": 2,
+    "one": 2,
+    "real": 2,
+    "repair": 6,
+    "repository": 2,
+    "search": 2,
+    "so": 2,
+    "source_root": 3,
+    "synthetic": 2,
+    "under": 3,
+    "unparseable_neighbour_does_not_abort_repair_v1_20261023_v1": 2,
+    "v1": 2,
+    "while": 2
    }
   },
   {

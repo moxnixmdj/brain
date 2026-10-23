@@ -99,7 +99,13 @@ print("__BRAIN_PROVENANCE__"+json.dumps({"pass":ok,"events":events,"traceback":f
  out=json.loads(lines[-1][len(marker):]);out["returncode"]=r.returncode;return out
 
 def _static_calls(path):
- tree=ast.parse(path.read_text(encoding="utf-8"),filename=str(path));out=[]
+  # A file under source_root may be third-party and use syntax this interpreter cannot parse
+  # (PEP 695 type aliases need 3.12). Such a file cannot be a repair candidate or a
+  # localization target, so it contributes nothing - it must not abort the whole search,
+  # which is the defect python_test_audit documents for timeouts one layer down.
+ try:tree=ast.parse(path.read_text(encoding="utf-8"),filename=str(path))
+ except (SyntaxError,ValueError,UnicodeDecodeError):return []
+ out=[]
  def names(expr):
   return sorted({n.id for n in ast.walk(expr) if isinstance(n,ast.Name) and isinstance(n.ctx,ast.Load)})
  def callee_name(call):
