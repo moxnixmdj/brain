@@ -74,7 +74,14 @@ _OPAQUE = 'ACTION_EXPECTATION_FAILED:pass:OBSERVED=False:RESULT={"status":"FAIL_
 # every host.  A goal that names no status value cannot have one resolved; a goal that names
 # no evidence has nothing to assess.  These must fail everywhere and must keep failing.
 PORTABLE_FAILURES = {
-    "BENCH_SQLITE_CREATE_INSERT_QUERY": "SQLITE_STATUS_VALUE_UNRESOLVED",
+    # Both sqlite causes moved, and both moves are toward the truth. They used to report
+    # SQLITE_STATUS_VALUE_UNRESOLVED -- "the sentence did not name a status" -- before either
+    # adapter had looked at the data. Neither goal's real gap was a status: the create goal
+    # never states its COLUMNS, and the verify goal's bound json_path is
+    # canonical/CANONICAL_POINTER.json, a governance pointer document that holds no table of
+    # records at all. The adapters now resolve their source the way the xlsx sibling always
+    # has (by the columns the work needs) and refuse on what is actually missing.
+    "BENCH_SQLITE_CREATE_INSERT_QUERY": "SQLITE_COLUMNS_UNRESOLVED",
     "BENCH_GROUNDING_AND_VERIFY": "STATUS_INVALID",
     # Moved twice, and both moves are the point.  This goal used to compile against a docx
     # producer and fail on a spec the sentence never stated; the front-door selection fix
@@ -87,7 +94,7 @@ PORTABLE_FAILURES = {
     # of asking for the input it actually lacks.
     "BENCH_JSON_FETCH_CONSISTENCY": "KNOWLEDGE_ASSESSMENT_INPUT_INVALID",
     "EXT_KNOWLEDGE_CONSISTENCY": "KNOWLEDGE_ASSESSMENT_INPUT_INVALID",
-    "EXT_SQLITE_VERIFY": "SQLITE_STATUS_VALUE_UNRESOLVED",
+    "EXT_SQLITE_VERIFY": "SQLITE_RECORD_COLLECTION_NOT_FOUND",
 }
 
 # TOOL-DEPENDENT: the cause is a fact about THIS machine -- astra_runtime cross-checks the
@@ -191,7 +198,7 @@ class ControllerBlockerCarriesTheCauseTests(unittest.TestCase):
         result = _run("EXT_SQLITE_VERIFY")
         reason = str(result.get("reason") or "")
         cause = reason.split(":REASON=", 1)[1].split(":RESULT=")[0]
-        self.assertIn("SQLITE_STATUS_VALUE_UNRESOLVED", cause)
+        self.assertIn("SQLITE_RECORD_COLLECTION_NOT_FOUND", cause)
 
 
 class EveryRefusalIsDistinguishableTests(unittest.TestCase):

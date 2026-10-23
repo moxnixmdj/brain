@@ -23706,7 +23706,7 @@
     "source_executable": null,
     "source_module": "sqlite3",
     "source_path": "canonical/runtime/bound_capabilities/sqlite_table_stdlib.py",
-    "source_sha256": "802f65b18d165cdb2693ff7b8309195d5686890be3db998013920dc709ddd823",
+    "source_sha256": "d3d6d6d32563ed31deaa48d5a42f70dc058901e21522e488a96c43e58b350d4f",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -23776,7 +23776,7 @@
     "source_executable": null,
     "source_module": "sqlite3",
     "source_path": "canonical/runtime/bound_capabilities/sqlite_verify_cli.py",
-    "source_sha256": "fb46443e34bf58ad5b15c163ff66ab081c2c8df1de917d4bb71e3661ff290ccb",
+    "source_sha256": "8b7e13b0343238b32eba11d0a1a4df5345a021724a941180bb00fdb259c75ec1",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24407,7 +24407,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6313,
+  "research_index_records": 6314,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 405,
@@ -24416,7 +24416,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8b8dc1c38db74795dfcd201c569081cf1d5ad113165b60cdb44b9b2299fff0df"
+  "value": "2b7b3ac05080d29974e6434b327e3c84a889de0b4599513899036e282b9275f1"
  },
  "engines": [
   {
@@ -46318,7 +46318,7 @@
   "included_source_count": 863,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "25e34f92d7493bad10981d3d2be502b02225c0f2c4727509094d66cf2f273d20"
+  "source_tree_digest": "632336fcc55a6cee6c57ccca633a15979624c2630d9688b88a5ea376d5a3bca4"
  },
  "research_index": [
   {
@@ -189594,6 +189594,51 @@
     "upgraded": 2,
     "v1": 2,
     "verified": 3
+   }
+  },
+  {
+   "action_id": "SQLITE_SOURCE_SELECTED_BY_COLUMNS_NOT_BY_SENTENCE_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/SQLITE_SOURCE_SELECTED_BY_COLUMNS_NOT_BY_SENTENCE_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SQLITE_SOURCE_SELECTED_BY_COLUMNS_NOT_BY_SENTENCE_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "dfbe2b926379353faf4ca27bb7345adf41b3fa3ce725d139da9624b73214e103",
+   "status": "",
+   "terms": {
+    "20261023": 1,
+    "abandon": 1,
+    "about": 1,
+    "action": 1,
+    "adapters": 1,
+    "already": 2,
+    "anywhere": 1,
+    "appear": 1,
+    "before": 1,
+    "both": 1,
+    "cannot": 1,
+    "columns": 2,
+    "data": 1,
+    "demanding": 1,
+    "derived": 1,
+    "dispatch": 1,
+    "document": 1,
+    "either": 1,
+    "evidence": 1,
+    "fact": 1,
+    "family": 2,
+    "file": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 1,
+    "had": 1,
+    "holds": 1,
+    "repository": 2,
+    "selected": 2,
+    "sentence": 2,
+    "source": 3,
+    "sqlite": 2,
+    "v1": 2
    }
   },
   {
