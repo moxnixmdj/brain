@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6302,
+  "research_index_records": 6303,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "deac02d554397816db3efd34c5af994311cdcafe2f29f0d77394a80bfd1b8d4f"
+  "value": "8803ce2a85bcd361a5eac79df1fb1e87097bbd42208aaab91b7f377f973a6c20"
  },
  "engines": [
   {
@@ -189096,6 +189096,51 @@
     "root2-closure-controller-v2-20261004": 1,
     "truth_repair_then_proof_compression_then_parallel_zero_reality_then_single_minimum_reality_transaction": 1,
     "v2": 1
+   }
+  },
+  {
+   "action_id": "SOFTWARE_REPAIR_FAMILY_SHARED_SOURCE_ENV_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/SOFTWARE_REPAIR_FAMILY_SHARED_SOURCE_ENV_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SOFTWARE_REPAIR_FAMILY_SHARED_SOURCE_ENV_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "44a9e6e1eb3ab0f264a1552b1cfe9a608e2ad3a5616637e2888b231b516e77d1",
+   "status": "",
+   "terms": {
+    "20261023": 1,
+    "after": 1,
+    "already": 1,
+    "also": 1,
+    "applied": 1,
+    "because": 3,
+    "both": 1,
+    "bound": 1,
+    "broken": 1,
+    "bug": 1,
+    "but": 1,
+    "called": 1,
+    "cannot": 1,
+    "drift": 2,
+    "environment": 2,
+    "family": 4,
+    "half": 2,
+    "loop": 3,
+    "module": 2,
+    "one": 2,
+    "python": 2,
+    "repair": 6,
+    "repaired": 2,
+    "run": 2,
+    "so": 3,
+    "software": 3,
+    "software_repair_family_shared_source_env_v1_20261023_v1": 2,
+    "source": 2,
+    "still": 2,
+    "tests": 2,
+    "v1": 2,
+    "working": 2
    }
   },
   {
