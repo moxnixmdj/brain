@@ -40,6 +40,85 @@ class BoundExecutionError(ValueError):
     pass
 
 
+# Four of the 72 promoted capabilities carry a frozen action template whose type is a
+# KERNEL-NATIVE action rather than `invoke_capability`:
+#
+#   knowledge.consistency.assess      assess_knowledge_consistency
+#   knowledge.json.fetch.external     fetch_json_knowledge
+#   knowledge.status.assert           assert_knowledge_status
+#   knowledge.support.materialize     materialize_supported_knowledge
+#
+# Measured, `astra_runtime` dispatches all four (lines 4155, 4208, 4318, 4397) and lists
+# them in the kernel's own allowed action types. They have no adapter module at all --
+# `route_admission.run_adapter_locally` answers BOUND_CAPABILITY_ADAPTER_MISSING for them --
+# because the kernel action loop IS their executor. This adapter demanded
+# `invoke_capability` exactly, so it refused four capabilities the kernel can run, and
+# `EXT_KNOWLEDGE_CONSISTENCY` reported BOUND_CAPABILITY_ACTION_TEMPLATE_INVALID for a
+# capability whose own dispatcher was three calls away.
+_KERNEL_NATIVE_ACTION_TYPES = frozenset({
+    "assess_knowledge_consistency",
+    "fetch_json_knowledge",
+    "assert_knowledge_status",
+    "materialize_supported_knowledge",
+})
+
+
+def _is_kernel_native(template_type: Any) -> bool:
+    """Exactly one of the kernel's own native action types, never truthiness."""
+    return isinstance(template_type, str) and template_type in _KERNEL_NATIVE_ACTION_TYPES
+
+
+def _receipt_anchor_verified(verification: Mapping[str, Any]) -> bool:
+    """True when a receipt on disk cryptographically anchors to its own mission.
+
+    The gate above reads four boolean spellings. Measured, 34 of the 72 promoted
+    capabilities carry none of them -- but 10 of those 34 point at a receipt file
+    whose `status` is COMPLETE and whose `mission_sha256` equals the SHA-256 of the
+    mission document at `mission_path`, with both files present in the tree. That is
+    stronger evidence than a boolean somebody set: a fabricated receipt cannot pass
+    without also fabricating a mission file AND its digest, which is a repository
+    change, not a runtime claim.
+
+    Every condition is exact, never truthiness, for the same reason the boolean path
+    is: the adversarial scheduler generator writes "true" as a STRING to model a
+    capability claiming verification it does not have, and a receipt path that
+    accepted weaker claims would reopen exactly that hole. So: the file must exist,
+    must parse, must be a mapping, must say COMPLETE and nothing else, must name a
+    mission path that exists, and must name a digest that equals that file's digest.
+    A receipt that merely exists is not evidence. A receipt that cannot be tied to a
+    mission is not evidence. One anchored receipt is enough; none is not.
+    """
+    candidates: list[str] = []
+    if isinstance(verification.get("receipt_path"), str):
+        candidates.append(verification["receipt_path"])
+    extra = verification.get("additional_receipts")
+    if isinstance(extra, (list, tuple)):
+        candidates.extend(str(r) for r in extra if isinstance(r, str))
+    for rel in candidates:
+        receipt_file = ROOT / rel
+        if not receipt_file.is_file():
+            continue
+        try:
+            receipt = json.loads(receipt_file.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if not isinstance(receipt, Mapping):
+            continue
+        if receipt.get("status") != "COMPLETE":
+            continue
+        mission_rel = receipt.get("mission_path")
+        expected = receipt.get("mission_sha256")
+        if not isinstance(mission_rel, str) or not isinstance(expected, str):
+            continue
+        mission_file = ROOT / mission_rel
+        if not mission_file.is_file():
+            continue
+        if sha256(mission_file.read_bytes()).hexdigest() != expected:
+            continue
+        return True
+    return False
+
+
 def _canon(value: Any) -> str:
     return json.dumps(
         value,
@@ -96,10 +175,16 @@ def inspect(capability_id: str) -> dict[str, Any]:
         or isinstance(verification.get("independently_verified_by"), str)
         or verification.get("producer_independent") is True
     )
-    if not independently_verified:
+    # The four spellings above are one encoding of the evidence; an anchored receipt
+    # on disk is another, and a strictly stronger one. Refusing it told the machine it
+    # had no proof for work whose receipt it could hash.
+    if not independently_verified and not _receipt_anchor_verified(verification):
         raise BoundExecutionError("BOUND_CAPABILITY_INDEPENDENT_VERIFICATION_NOT_EVIDENT:" + cid)
     action_template = entry.get("action_template")
-    if not isinstance(action_template, Mapping) or action_template.get("type") != "invoke_capability":
+    template_type = action_template.get("type") if isinstance(action_template, Mapping) else None
+    if not isinstance(action_template, Mapping) or (
+        template_type != "invoke_capability" and not _is_kernel_native(template_type)
+    ):
         raise BoundExecutionError("BOUND_CAPABILITY_ACTION_TEMPLATE_INVALID:" + cid)
     return {
         "capability_id": cid,
@@ -130,10 +215,22 @@ def prepare(
         raise BoundExecutionError(
             "BOUND_TEMPLATE_RENDER_FAILED:" + type(exc).__name__ + ":" + str(exc)
         ) from exc
-    if not isinstance(rendered, Mapping) or rendered.get("type") != "invoke_capability":
+    rendered_type = rendered.get("type") if isinstance(rendered, Mapping) else None
+    if not isinstance(rendered, Mapping) or (
+        rendered_type != "invoke_capability" and not _is_kernel_native(rendered_type)
+    ):
         raise BoundExecutionError("RENDERED_BOUND_ACTION_INVALID")
     args = rendered.get("args")
-    if not isinstance(args, Mapping) or args.get("capability_id") != cid:
+    if not isinstance(args, Mapping):
+        raise BoundExecutionError("RENDERED_BOUND_ACTION_INVALID")
+    # An `invoke_capability` template carries the capability id among its own args, so the
+    # rendered action is checked against the entry it was rendered from. The kernel-native
+    # templates carry no capability_id argument at all -- assess_knowledge_consistency takes
+    # evidence_paths, max_age_s and output_path -- so there is nothing to compare. Identity is
+    # still frozen: the caller may only instantiate `${input.*}` placeholders, so the action
+    # type and its argument names come from the registry entry for THIS id and nothing else,
+    # and `rendered_action_sha256` pins the exact rendered bytes for the caller to re-check.
+    if rendered_type == "invoke_capability" and args.get("capability_id") != cid:
         raise BoundExecutionError("RENDERED_BOUND_ACTION_CAPABILITY_ID_MISMATCH")
 
     iid = str(instance_id or cid).strip()
@@ -342,7 +439,14 @@ def execute(
         ):
             raise BoundExecutionError("RENDERED_ACTION_CHANGED_AFTER_PREPARATION")
 
-        result = astra_runtime._invoke_bound_capability(dict(args))
+        # The kernel action loop is the executor for a kernel-native template; the bound
+        # adapter invoker is by definition confined to invoke_capability. Everything after
+        # this line is generic: `_verify_action_expectation` reads `rendered["expect"]`, and
+        # the planner and the execution verifier both take the rendered action as-is.
+        if _is_kernel_native(rendered.get("type")):
+            result = astra_runtime._goal_action(deepcopy(dict(rendered)))
+        else:
+            result = astra_runtime._invoke_bound_capability(dict(args))
         if not isinstance(result, Mapping):
             raise BoundExecutionError("BOUND_CAPABILITY_RESULT_INVALID")
         astra_runtime._verify_action_expectation(rendered, result)
