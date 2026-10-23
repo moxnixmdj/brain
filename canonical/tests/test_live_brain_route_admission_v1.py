@@ -283,3 +283,66 @@ def test_a_ghost_capability_id_is_refused_before_anything_executes():
     result = adm.solve({"task_id": "TEST_GHOST_ID", "goal": f"run {ghost}"})
     assert result["status"] == "FAIL__RAW_GOAL_COMPILATION_GAP"
     assert result["compiler_code"] == "GOAL_NAMES_UNKNOWN_CAPABILITY"
+
+
+# --------------------------------------------------------------------------- #
+# R9: a capability that consumes a file must not be admitted for a fileless goal
+# --------------------------------------------------------------------------- #
+# Measured before R9: "extract text from a pdf file" selected pdf.extract.text.pypdf, whose only
+# declared input is pdf_path, with goal_future_artifacts empty and no path token anywhere in the
+# sentence.  This layer admitted it, so the front reported
+# PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED with pass=True and
+# executed=True while creating ZERO files.  Nothing was extracted because nothing was named to
+# extract from.
+#
+# The asymmetry is the defect: the same capability, given a path that does not exist, already
+# refuses with GOAL_INPUT_BINDING_REQUIRED.  Supplying LESS information was treated as MORE
+# admissible.  An unbindable path fails, so no path at all must fail too.
+
+
+def _admit(goal):
+    r = adm.solve_or_learn({"task_id": "t", "goal": goal})
+    return r, (r.get("route_admission") or {})
+
+
+def test_file_capability_is_refused_when_the_goal_names_no_file():
+    r, a = _admit("extract text from a pdf file")
+    assert a.get("admitted") is False, a
+    assert a.get("rule") == "R9_REQUIRED_FILE_INPUT_UNBOUND", a
+    assert "pdf_path" in (a.get("unbound_file_inputs") or []), a
+    assert not r.get("pass"), r.get("status")
+    assert "EXECUTED_AND_VERIFIED" not in str(r.get("status")), r.get("status")
+
+
+def test_naming_a_file_still_admits_the_same_capability():
+    """R9 must refuse the empty case only, not the capability."""
+    _, a = _admit("extract text from report.pdf")
+    assert a.get("admitted") is True, a
+    assert a.get("selected_capability") == "pdf.extract.text.pypdf", a
+
+
+def test_an_absolute_path_still_admits():
+    _, a = _admit("extract text from the pdf file /tmp/none.pdf")
+    assert a.get("rule") != "R9_REQUIRED_FILE_INPUT_UNBOUND", a
+
+
+def test_the_file_predicate_is_generous_so_r9_only_fires_on_truly_fileless_goals():
+    for goal in ("read a.txt", "convert /abs/path/b.md", "use ~/c.json", "open file.tar.gz"):
+        assert adm._goal_names_a_file(goal), goal
+    for goal in ("extract text from a pdf file", "summarize this document", "translate the readme"):
+        assert not adm._goal_names_a_file(goal), goal
+
+
+def test_a_capability_with_no_file_input_is_untouched_by_r9():
+    """R9 must not become a general refusal of goals that lack a filename."""
+    _, a = _admit("compute the sum of 2 and 3")
+    assert a.get("rule") != "R9_REQUIRED_FILE_INPUT_UNBOUND", a
+
+
+def test_r9_does_not_move_the_compile_or_selection_rates():
+    """Compile and correct-selection are the standing acceptance criteria."""
+    from canonical.runtime import goal_compilation_benchmark_v1 as bench
+
+    c = bench.run_all()["combined"]
+    assert c["compiled"] == 23, c
+    assert c["expected_first_selected"] == 22, c
