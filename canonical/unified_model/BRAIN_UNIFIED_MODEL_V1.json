@@ -21878,7 +21878,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py",
-    "source_sha256": "6057e56e051a9b9e245bfaaa5250d6564707fef27fd1d1460135c037d503feaa",
+    "source_sha256": "92a52c512411bec9144423e6398ce18618c5b3898421e24eee79264d98b3c039",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -21951,7 +21951,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding_verify.py",
-    "source_sha256": "47b013b0a5df77acd4b1a63bdfec2a83f01f7cbf16bbddcd56206022c6300205",
+    "source_sha256": "98f6acc71975ed819dc2cad244dbf9184144daaa25b0cc64d9f95e958648dd67",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24407,7 +24407,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6313,
+  "research_index_records": 6312,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 405,
@@ -24416,7 +24416,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "1d23c28ab053bdb3cbbe15b636689074e49289717cdc685304d1d893197d35a0"
+  "value": "cb37930072a79d79405cb64f15f85c93be676ca1694aece8c5765f55561494f7"
  },
  "engines": [
   {
@@ -46318,7 +46318,7 @@
   "included_source_count": 863,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "6ccca0ed05dff6bf92b63bd2921de9f44bcca5730627f0186652d0c37496614b"
+  "source_tree_digest": "25e34f92d7493bad10981d3d2be502b02225c0f2c4727509094d66cf2f273d20"
  },
  "research_index": [
   {
@@ -187669,51 +187669,6 @@
    }
   },
   {
-   "action_id": "CALLER_DECLARED_OUTPUT_AREA_REACHES_BINDABILITY_GATE_V1_20261023_V1",
-   "capability": false,
-   "date": "2026-10-23",
-   "id": "research:canonical/action_intents/CALLER_DECLARED_OUTPUT_AREA_REACHES_BINDABILITY_GATE_V1_20261023_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/CALLER_DECLARED_OUTPUT_AREA_REACHES_BINDABILITY_GATE_V1_20261023_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "8e526c3af3f1f35773247f919d5450227d2c434dfa506f54ebe07e957854e631",
-   "status": "",
-   "terms": {
-    "15": 1,
-    "20": 2,
-    "20261023": 1,
-    "all": 2,
-    "already": 1,
-    "any": 1,
-    "area": 2,
-    "bindability": 2,
-    "caller": 4,
-    "caller_declared_output_area_reaches_bindability_gate_v1_20261023_v1": 2,
-    "candidate": 2,
-    "clause": 4,
-    "counted": 2,
-    "counts": 2,
-    "declared": 3,
-    "destination": 2,
-    "failed": 2,
-    "gate": 2,
-    "grounded": 5,
-    "had": 3,
-    "not": 2,
-    "output": 2,
-    "producer": 3,
-    "reaches": 2,
-    "record": 2,
-    "report": 5,
-    "same": 2,
-    "so": 5,
-    "status": 3,
-    "v1": 2,
-    "verifier": 3,
-    "whenever": 2
-   }
-  },
-  {
    "action_id": "CAPABILITY_RECEIPT_LANE_DECLARED_INVOCATION_PROBE_V1_20261022_V1",
    "capability": false,
    "date": "2026-10-22",
@@ -216480,7 +216435,7 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "7edef349ff771776de20b5b6acec11058df481ee2a507e0944f1184195a85bdb",
+   "sha256": "bff01503c8c9b249fe8925d8b08e6bcf75f3ba073dad853a771f9d535b28f933",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
    "symbol_count": 113,
    "symbols": [

@@ -30,14 +30,7 @@ def verify(goal,result,registry):
         if not isinstance(candidates,list):
             return False,"CANDIDATES_INVALID"
         status=clause.get("status")
-        # UNBOUND_INPUTS_NOT_GROUNDED is a status the producer emits deliberately: a candidate
-        # was found whose proposed bindings do not cover its declared inputs, so the call
-        # cannot be made and the clause is not grounded.  The verifier never listed it, so the
-        # moment a clause reached that state the producer's own report failed independent
-        # verification with STATUS_INVALID - producer and consumer disagreed on the vocabulary
-        # they share, and the disagreement surfaced as a rejected report instead of the honest
-        # "this clause is not grounded" that it meant.
-        if status not in {"UNRESOLVED","GROUNDED","AMBIGUOUS_BOUNDED","UNBOUND_INPUTS_NOT_GROUNDED"}:
+        if status not in {"UNRESOLVED","GROUNDED","AMBIGUOUS_BOUNDED"}:
             return False,"STATUS_INVALID"
         if status=="UNRESOLVED" and candidates:
             return False,"UNRESOLVED_HAS_CANDIDATES"
@@ -45,13 +38,7 @@ def verify(goal,result,registry):
             return False,"GROUNDED_CARDINALITY_INVALID"
         if status=="AMBIGUOUS_BOUNDED" and len(candidates)<2:
             return False,"AMBIGUOUS_CARDINALITY_INVALID"
-        # Grounded means the clause reached a grounded STATUS, not that a candidate was found.
-        # This counted any clause with a candidate as grounded, which is the same conflation
-        # the producer had: a clause labelled UNBOUND_INPUTS_NOT_GROUNDED has a candidate and
-        # still cannot be called, so counting it made the verifier disagree with an honest
-        # producer on the very number it exists to check independently.  Independence is about
-        # the implementation, not about inventing a different definition of the contract.
-        if status in {"GROUNDED","AMBIGUOUS_BOUNDED"}:
+        if candidates:
             grounded+=1
         clause_tokens=set(re.findall(r"[a-z0-9]+",str(clause.get("text") or "").lower()))
         for item in candidates:
