@@ -22431,7 +22431,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "6385313b1ff06d1d01c96132d66410982ff92fa3a8a3a5ac523577a5beab204d",
+    "source_sha256": "5948576fd977c8a95c5eb6594f0b39bb9420651e021f9afd0d5253ed3bcafc31",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22776,7 +22776,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py",
-    "source_sha256": "8cb2c30a041d6dfb8df53e43aca95a1c003c46957b0a8b30bed8e376ef8642b9",
+    "source_sha256": "cbe8e8a4dbe778461b0f7fa4b79e24ae9fe1feef08bdf81c77b01d5ab3a0268f",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "1840bda1083caaa5346808eca52aab16c3b03097bfb26eb1d1e14d14048eddb6"
+  "value": "deac02d554397816db3efd34c5af994311cdcafe2f29f0d77394a80bfd1b8d4f"
  },
  "engines": [
   {
@@ -46315,7 +46315,7 @@
   "included_source_count": 863,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "0df9b0d24602256a2409794a52c28c5e65fd1a4535189f24ddbece10872cb35e"
+  "source_tree_digest": "cffc174bc9eaf34b84ab4323847e3a411e54c18b1d24303972e03bd7e61d413f"
  },
  "research_index": [
   {
