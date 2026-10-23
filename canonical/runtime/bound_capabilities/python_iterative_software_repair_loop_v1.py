@@ -51,7 +51,7 @@ def _files(repo,root,tests,failure):
 def _purge(paths):
  for p in paths:_PATCH._purge_source_bytecode(p)
 def _diff(repo,p,a,b):return ''.join(difflib.unified_diff(a.decode().splitlines(True),b.decode().splitlines(True),fromfile='a/'+_rel(repo,p),tofile='b/'+_rel(repo,p)))
-def _best(repo,source,tests,argv,timeout,score,limit,touched):
+def _best(repo,source,tests,argv,timeout,score,limit,touched,env):
  cur=source.read_bytes()
  try:text=cur.decode();tree=ast.parse(text)
  except Exception:return None,0
@@ -60,11 +60,23 @@ def _best(repo,source,tests,argv,timeout,score,limit,touched):
   if tested>=limit:break
   cand=_PATCH._render_candidate(text,key,replacer)
   if not cand or cand==text:continue
-  tested+=1;source.write_text(cand);_purge(set(touched)|{source});r=_PATCH._run_tests(repo,argv,timeout);source.write_bytes(cur);_purge(set(touched)|{source});s=_score(r)
+  tested+=1;source.write_text(cand);_purge(set(touched)|{source});r=_PATCH._run_tests(repo,argv,timeout,env);source.write_bytes(cur);_purge(set(touched)|{source});s=_score(r)
   if s is None or s>=score:continue
   rec={'source':source,'bytes':cand.encode(),'score':s,'mutation':desc,'sha256':_sha(cand.encode())}
   return rec,tested
  return best,tested
+def _source_env(src):
+    """PYTHONPATH extended with the directory holding the code under repair.
+
+    The subprocess keeps the working directory the caller chose; this only makes the repaired
+    module importable by its own tests. Without it a sibling ``import calc`` dies with
+    ModuleNotFoundError, the baseline and every candidate then score identically, and no edit
+    can ever strictly improve - so the loop reports no improving candidate for every bug.
+    """
+    existing=os.environ.get('PYTHONPATH','')
+    return {'PYTHONPATH':os.pathsep.join([str(src)]+([existing] if existing else []))}
+
+
 def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if not isinstance(args,Mapping):raise RepairLoopError('ARGS_NOT_OBJECT')
  repo=pathlib.Path(root).resolve();src=_safe_dir(repo,args.get('source_root','.'));tests=[_safe_file(repo,x) for x in (args.get('test_paths') or [])]
@@ -73,7 +85,8 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  timeout=max(1,min(int(args.get('timeout_s',30)),300));rounds_max=max(1,min(int(args.get('max_rounds',6)),20));files_max=max(1,min(int(args.get('max_files',12)),100));per=max(1,min(int(args.get('max_candidates_per_file',250)),5000));total_max=max(1,min(int(args.get('max_total_candidates',2000)),50000))
  out=(repo/str(args.get('output_path') or '')).resolve()
  if out==repo or repo not in out.parents:raise RepairLoopError('OUTPUT_PATH_OUTSIDE_REPOSITORY')
- base=_PATCH._run_tests(repo,argv,timeout);score=_score(base)
+ env=_source_env(src)
+ base=_PATCH._run_tests(repo,argv,timeout,env);score=_score(base)
  if base.get('timed_out'):raise RepairLoopError('BASELINE_TIMEOUT')
  if base.get('returncode')==0:raise RepairLoopError('BASELINE_ALREADY_PASSES')
  if score is None:raise RepairLoopError('BASELINE_FAILURE_METRIC_UNPARSEABLE')
@@ -84,18 +97,18 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
    for source in fs:
     rem=total_max-tested_total
     if rem<=0:break
-    cand,n=_best(repo,source,tests,argv,timeout,score,min(per,rem),touched);tested_total+=n;round_tested+=n
+    cand,n=_best(repo,source,tests,argv,timeout,score,min(per,rem),touched,env);tested_total+=n;round_tested+=n
     if cand is not None:
      best=cand
      break
    if best is None:status='OPEN__NO_STRICTLY_IMPROVING_CANDIDATE';break
-   p=best['source'];originals.setdefault(p,p.read_bytes());p.write_bytes(best['bytes']);touched.add(p);_purge(touched);current=_PATCH._run_tests(repo,argv,timeout);ns=_score(current)
+   p=best['source'];originals.setdefault(p,p.read_bytes());p.write_bytes(best['bytes']);touched.add(p);_purge(touched);current=_PATCH._run_tests(repo,argv,timeout,env);ns=_score(current)
    if ns is None or ns>=score:raise RepairLoopError('ACCEPTED_CANDIDATE_DID_NOT_REPLAY_IMPROVEMENT')
    accepted.append({'round':ri,'source_path':_rel(repo,p),'mutation':best['mutation'],'candidate_sha256':best['sha256'],'score_before':score,'score_after':ns});rrecs.append({'round':ri,'localized_file_count':len(fs),'tested_candidate_count':round_tested,'score_before':score,'score_after':ns});score=ns
    if score==0:status='PASS__BOUNDED_MULTI_ROUND_REPAIR_FOUND';break
   if score==0:
    for _ in range(2):
-    _purge(touched);rr=_PATCH._run_tests(repo,argv,timeout);rs=_score(rr);vreplays.append({'returncode':rr.get('returncode'),'timed_out':rr.get('timed_out'),'failure_score':rs})
+    _purge(touched);rr=_PATCH._run_tests(repo,argv,timeout,env);rs=_score(rr);vreplays.append({'returncode':rr.get('returncode'),'timed_out':rr.get('timed_out'),'failure_score':rs})
     if rr.get('returncode')!=0 or rs!=0:raise RepairLoopError('FINAL_REPLAY_FAILED')
    final_bytes={p:p.read_bytes() for p in touched}
  finally:

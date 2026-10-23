@@ -22431,7 +22431,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "a85691068c4eeff53c2d787ddb5a799462ea867cd6b92c4573bf58e0846f7dc0",
+    "source_sha256": "6385313b1ff06d1d01c96132d66410982ff92fa3a8a3a5ac523577a5beab204d",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22776,7 +22776,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py",
-    "source_sha256": "ecc2da70f6defaff183acda1201c610963322d41e76d889796dda959a287171e",
+    "source_sha256": "8cb2c30a041d6dfb8df53e43aca95a1c003c46957b0a8b30bed8e376ef8642b9",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "cc389865199fbe43826bfa9fd2a81124eba57739922984ffa5dff4c0813df558"
+  "value": "3b2048e9bb9f554e33af4fdf3388e7e95a0f4bbc5f82cfa93edb17031e59ea9c"
  },
  "engines": [
   {
@@ -46315,7 +46315,7 @@
   "included_source_count": 863,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "30de58966be897cf607a82d3438a8d4ef9d518346a201aa0320960b18a00b662"
+  "source_tree_digest": "0df9b0d24602256a2409794a52c28c5e65fd1a4535189f24ddbece10872cb35e"
  },
  "research_index": [
   {
@@ -158560,7 +158560,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/ROOT3_DIRECT_URLOPEN_NETWORK_MEDIATOR_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json",
    "schema": "PROJECT_BRAIN_ROOT3_DIRECT_URLOPEN_NETWORK_MEDIATOR_PUBLIC_RUNNER_VERIFICATION_V1",
-   "sha256": "b435bcdf65da47881504b5fc061745edd24df8f4609ed78b2b63e74973a087ea",
+   "sha256": "146d8578200d5b460553f6f8f1357df89fa9fbb8f5388ba65b27a8ca5ed94ee3",
    "status": "PUBLIC_RUNNER_PASS__DIRECT_URLOPEN_FALLBACK_MEDIATED_AND_RECEIPTED__ZERO_TERMINA",
    "terms": {
     "20261006": 1,
