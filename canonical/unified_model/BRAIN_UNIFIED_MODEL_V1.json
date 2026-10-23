@@ -24407,7 +24407,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6309,
+  "research_index_records": 6310,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 405,
@@ -24416,7 +24416,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "1c57e4bdb7ff23e0cb193243336c898070cfb8ea1077735aa2e13632f60c652f"
+  "value": "54bbc9f1028a46471bacd4da843fe7223465fbd5ab6cab72f199bad801324cea"
  },
  "engines": [
   {
@@ -188459,6 +188459,51 @@
     "traced": 2,
     "v1": 2,
     "while": 2
+   }
+  },
+  {
+   "action_id": "FILE_CONSUMING_CAPABILITY_NOT_ADMITTED_FOR_FILELESS_GOAL_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/FILE_CONSUMING_CAPABILITY_NOT_ADMITTED_FOR_FILELESS_GOAL_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/FILE_CONSUMING_CAPABILITY_NOT_ADMITTED_FOR_FILELESS_GOAL_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "5fcb4d0357edebcf7c34b335ef50b2b1de83ec1144654554e8a3f32b4037c137",
+   "status": "",
+   "terms": {
+    "20261023": 1,
+    "actually": 1,
+    "admissible": 1,
+    "admission": 2,
+    "admitted": 2,
+    "admitting": 1,
+    "already": 1,
+    "anywhere": 1,
+    "asymmetry": 1,
+    "because": 1,
+    "being": 1,
+    "bind": 1,
+    "cannot": 1,
+    "capability": 2,
+    "consumed": 1,
+    "consuming": 1,
+    "creating": 1,
+    "declared": 1,
+    "extract": 2,
+    "file": 3,
+    "file_consuming_capability_not_admitted_for_fileless_goal_v1_20261023_v1": 2,
+    "goal": 2,
+    "input": 2,
+    "not": 2,
+    "nothing": 3,
+    "path": 2,
+    "produced": 2,
+    "refuses": 2,
+    "route": 2,
+    "so": 2,
+    "true": 3,
+    "v1": 2
    }
   },
   {
