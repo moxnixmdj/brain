@@ -34,7 +34,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::canonical/tests/test_capability_selection_retrieval_v1.py passed when each of its four classes ran alone and failed when the module ran as a whole, with BINDING_REFUSED:json_path:2_type_compatible_existing_files_named and matching=['.../x.json','.../x_out.json']. GoalDrivenSelectionTests executes the goal, so x_out.json comes into existence; the later sentence 'read x.json and save the result to x_out.json' then offers the binder two named type-compatible existing .json files. _bind_output_by_future binds an output only when the named file does not exist yet, so it declined the destination, the step spooled elsewhere, and the sentence's own destination was left unclaimed for the input binder to find. The sentence never offered x_out.json as a source; it named it as the destination. A destination the request states for a capability is therefore never a candidate source for it.",
-  "canonical_base_commit": "f13231228128754a2b879c76ed009e6efed42c7b",
+  "canonical_base_commit": "b8d8f2ea75ef28eb731a665626416f1b39630cef",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -79,7 +79,7 @@
     "canonical/tests/test_capability_selection_retrieval_v1.py, whose own module-level promise that 'a test run leaves no probe file behind' is what made the order dependence visible"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "f13231228128754a2b879c76ed009e6efed42c7b",
+    "canonical_base_commit": "b8d8f2ea75ef28eb731a665626416f1b39630cef",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "FILTERING_DESTINATIONS_BY_SUFFIX_WHICH_MEASURED_TO_EXCLUDE_THE_REAL_INPUT_AND_BREAK_THE_BINDING",
