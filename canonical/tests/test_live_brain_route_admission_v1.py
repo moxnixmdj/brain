@@ -334,8 +334,69 @@ def test_a_repair_sentence_reaches_a_repair_capability_end_to_end():
     finally:
         _cleanup(task_id)
     assert str(result.get("compiled_capability_id", "")).startswith("python.software.repair."), result
+    # The capability really did the work: it found the patch and verified it.
+    report = json.loads((work / "report.json").read_text(encoding="utf-8"))
+    assert report["status"] == "PASS__VERIFIED_MULTI_EDIT_PATCH_FOUND", report["status"]
+    assert "+    return a + b" in json.dumps(report["patches"]), report["patches"]
+    # But the loops restore the source and declare NO_SOURCE_WRITE authority, so
+    # the goal's promise -- that the file is repaired -- was not kept, and the
+    # front door must say so instead of reporting PASS over an unchanged bug.
+    assert result["pass"] is False, result
+    assert result["status"] == "FAIL_CLOSED__PROMISED_SOURCE_CHANGE_NOT_APPLIED", result
+    assert result["promised_source_change_errors"] == [
+        "PROMISED_SOURCE_UNCHANGED:%s/mod.py" % base], result
+    assert "NO_SOURCE_WRITE_OR_PROMOTION_AUTHORITY" in report["hard_nonclaims"], report
+    assert (work / "mod.py").read_text(encoding="utf-8") == "def add(a, b):\n    return a - b\n"
+
+
+def test_a_goal_that_only_reads_source_still_passes():
+    """The new gate must not punish a goal that promised no change.  "Audit the
+    source file X" leaves X alone by design; failing that would be the gate
+    inventing an obligation the sentence never made."""
+    out = WORK / "auditro.json"
+    if out.exists():
+        out.unlink()
+    goal = ("Audit the python source file canonical/runtime/goal_compiler.py with an AST "
+            "and write the audit to "
+            "canonical/astra_runtime/tmp/test_live_brain_route_admission/auditro.json.")
+    task_id = "TEST_ROUTE_ADMISSION_AUDITRO_%d" % os.getpid()
+    try:
+        result = adm.solve({"task_id": task_id, "goal": goal})
+    finally:
+        _cleanup(task_id)
     assert result["pass"] is True, result
-    assert (work / "report.json").is_file()
+    assert "promised_source_change_errors" not in result, result
+
+
+def test_promised_source_change_errors_is_pure_and_exact():
+    """The gate compares bytes, so it cannot be fooled by a report claiming
+    success.  Written directly against the helper: unchanged is an error, changed
+    is not, and a file that vanished is its own distinct error."""
+    work = WORK / "psce"
+    if work.exists():
+        shutil.rmtree(work)
+    work.mkdir(parents=True)
+    rel = "canonical/astra_runtime/tmp/test_live_brain_route_admission/psce/m.py"
+    (work / "m.py").write_text("x = 1\n", encoding="utf-8")
+    before = {rel: adm._source_digest(rel)}
+    assert adm.promised_source_change_errors("repair %s" % rel, before) == [
+        "PROMISED_SOURCE_UNCHANGED:" + rel]
+    (work / "m.py").write_text("x = 2\n", encoding="utf-8")
+    assert adm.promised_source_change_errors("repair %s" % rel, before) == []
+    (work / "m.py").unlink()
+    assert adm.promised_source_change_errors("repair %s" % rel, before) == [
+        "PROMISED_SOURCE_UNREADABLE:" + rel]
+    # no repair verb means nothing was promised, even with the same paths named
+    assert adm._promised_source_files("read %s and summarise it" % rel) == []
+    # a file that does not exist is a promised ARTIFACT, which R6 covers, not a
+    # promised change -- so it is not claimed here either
+    assert adm._promised_source_files("repair the source file %s" % rel) == []
+    (work / "m.py").write_text("x = 1\n", encoding="utf-8")
+    assert adm._promised_source_files("repair the source file %s" % rel) == [rel]
+    # the witness in "so that the test Y passes" is not a repair target
+    witness = "canonical/tests/test_live_brain_route_admission_v1.py"
+    assert adm._promised_source_files(
+        "repair the source file %s so that the test %s passes" % (rel, witness)) == [rel]
 
 
 def test_solve_still_executes_a_real_goal():
