@@ -536,7 +536,16 @@ def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], k
             elapsed = 0
             caps: dict[str, int] = {}
             for i in range(n):
-                case = gen(rng, work / entry_name, i)
+                case, gen_blocker = generated_case(gen, rng, work / entry_name, i)
+                if case is None:
+                    env_blocked += 1
+                    if len(failures) < 60:
+                        failures.append({
+                            "family": family, "goal": "(fixture could not be generated)",
+                            "why": "ENVIRONMENT_BLOCKED_HERE:" + gen_blocker,
+                            "status": "GENERATOR_DEPENDENCY_MISSING", "capability": "-",
+                            "admission_rule": None})
+                    continue
                 for a in case.artifacts:
                     if a.exists():
                         a.unlink()
@@ -551,7 +560,7 @@ def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], k
                 cap = str(result.get("compiled_capability_id") or result.get("compiler_mode") or "-")
                 caps[cap] = caps.get(cap, 0) + 1
                 blocker = environment_blocker(result)
-                good, why = (False, "") if blocker else case.oracle(result)
+                good, why, blocker = oracle_outcome(case, result, blocker)
                 if good:
                     ok += 1
                 elif blocker:
@@ -678,6 +687,43 @@ def environment_blocker(result: Mapping[str, Any]) -> str | None:
         if marker in reason:
             return marker
     return None
+
+
+def missing_dependency_blocker(exc: BaseException) -> str:
+    """A blocker naming the library this host does not have."""
+    return "ORACLE_DEPENDENCY_MISSING:" + str(getattr(exc, "name", "") or exc)
+
+
+def oracle_outcome(case: Any, result: Mapping[str, Any], blocker: str | None) -> tuple[bool, str, str | None]:
+    """Grade one instance, classifying a missing ORACLE dependency instead of raising it.
+
+    The oracle is the measurement's own checker, so when it needs a library this host
+    lacks that is the same class of fact as an adapter blocker -- a property of this
+    machine, not of the capability.  Before this the ModuleNotFoundError escaped and
+    aborted the whole census, so on any host without openpyxl or python-docx not one
+    family could be measured.  Only ModuleNotFoundError is caught: any other oracle
+    defect still raises loudly, which is what it should do.  On the public runner,
+    where every declared dependency is installed, environment_blockers_are_failures=True
+    still turns a blocker into a NOT ALIVE verdict, so this classifies failures rather
+    than hiding them.
+    """
+    try:
+        good, why = (False, "") if blocker else case.oracle(result)
+    except ModuleNotFoundError as exc:
+        return False, "", (blocker or missing_dependency_blocker(exc))
+    return good, why, blocker
+
+
+def generated_case(gen: Any, rng: Any, work: Any, i: int) -> tuple[Any, str | None]:
+    """Build one fixture, or report the library this host lacks to build it.
+
+    Same reasoning as oracle_outcome one layer earlier: a generator that cannot even
+    create the input file must cost its own family, not every family after it.
+    """
+    try:
+        return gen(rng, work, i), None
+    except ModuleNotFoundError as exc:
+        return None, missing_dependency_blocker(exc)
 
 
 def alive_errors(receipt: Mapping[str, Any], environment_blockers_are_failures: bool = False) -> list[str]:
