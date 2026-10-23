@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "52cd99e9cbf1523f2ad6d4f413e5ba3c4c5e753d66add8c6f15816e38b5164d3"
+  "value": "e63ed1825de992aaf17819fa2a60d12662c9cb33c31e8a11bfd17b39f0be8674"
  },
  "engines": [
   {
@@ -217168,9 +217168,9 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "d120d578c7df3aa5b86c83ef699d1cc3416ce85c3a1dcfc95626c0bbce869705",
+   "sha256": "e9dcf03e766fd695e74e79812e7044db083df3ca12828c8deda73013edbd6b60",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
-   "symbol_count": 117,
+   "symbol_count": 118,
    "symbols": [
     "GoalCompilationFailure",
     "_adapter_default_argv",
@@ -217184,6 +217184,7 @@
     "_bm25_rerank",
     "_bm25_terms",
     "_capability_document",
+    "_claimed_paths",
     "_collect_effect_result_refs",
     "_compile_authoritative_json_knowledge_fetch",
     "_compile_bounded_loop_goal",
@@ -217194,14 +217195,13 @@
     "_compile_dynamic_fanout_goal",
     "_compile_exact_literal_response_goal",
     "_compile_exact_markdown_pdf_goal",
-    "_compile_existing_causal_artifact_assertion",
-    "_compile_external_json_knowledge_fetch"
+    "_compile_existing_causal_artifact_assertion"
    ],
    "terms": {
     "adapter_default_argv": 1,
     "bind_inputs": 1,
     "brain": 1,
-    "compile_verified_browser_interaction": 1,
+    "claimed_paths": 1,
     "compiler": 2,
     "complete_inputs_via_world_binding": 1,
     "context_path_for_key": 1,

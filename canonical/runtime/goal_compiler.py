@@ -327,6 +327,25 @@ def _paths_named_by_role(goal, stem, root):
     return found
 
 
+def _claimed_paths(result):
+    """Every path the sentence has already given to some other input key.
+
+    A repository path in a sentence has ONE role.  "the source root D ... the test
+    D/t.py ... save output_path R.json" names three paths in three roles, and a
+    *_paths list that scoops up all three hands the adapter a directory and an
+    output file as though they were tests -- which then fails with FILE_INVALID
+    rather than doing the work.  Role exclusivity is the general rule; filtering
+    by recognising the output verb is only ever a special case of it.
+    """
+    claimed=set()
+    for value in (result or {}).values():
+        if isinstance(value,str):
+            claimed.add(value)
+        elif isinstance(value,(list,tuple)):
+            claimed.update(str(x) for x in value if isinstance(x,str))
+    return claimed
+
+
 def _adapter_default_argv(entry, root, targets):
     """The command line the capability's OWN adapter would derive, or None.
 
@@ -413,6 +432,13 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                 out=_path_named_after_output_verb(goal,root)
                 if out is not None:
                     role=[x for x in role if x!=out]
+                # The output-verb filter only fires when the sentence uses a verb
+                # this helper recognises.  "save output_path R.json" does not, so
+                # the report still landed among the tests -- and so did the source
+                # root directory.  Drop every path already bound to another key,
+                # which covers both and every future phrasing.
+                claimed=_claimed_paths(result)
+                role=[x for x in role if x not in claimed]
                 if role:
                     result[key]=role
                     continue
@@ -437,6 +463,7 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             out=_path_named_after_output_verb(goal,root)
             if out is not None:
                 targets=[t for t in targets if t!=out]
+            targets=[t for t in targets if t not in _claimed_paths(result)]
             argv=_adapter_default_argv(entry,root,targets)
             if argv is not None:
                 result[key]=argv
