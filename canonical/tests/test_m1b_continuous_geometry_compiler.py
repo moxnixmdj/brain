@@ -1,5 +1,15 @@
 import math
+import sys
 import unittest
+from pathlib import Path
+
+# Both of these modules live in canonical/runtime and import their own siblings
+# by bare name, so they are only importable with that directory on sys.path.
+# Nineteen workflows set PYTHONPATH that way; the plain `python -m unittest` and
+# test-corpus-audit invocations do not, so this import raised ModuleNotFoundError
+# and every test in this file was silently never run. This is the same bootstrap
+# test_capability_composer_v1.py already uses.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "runtime"))
 
 from m1b_continuous_geometry_compiler import compile_contract
 from cad_partspec_generator import normalize_to_mm, spec_to_code
