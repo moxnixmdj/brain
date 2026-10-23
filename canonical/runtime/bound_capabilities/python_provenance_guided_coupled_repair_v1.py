@@ -64,6 +64,7 @@ def _pair_space(n):return n*(n-1)//2
 def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if not isinstance(args,Mapping):raise GuidedRepairError("ARGS_NOT_OBJECT")
  repo=pathlib.Path(root).resolve();src=_safe_dir(repo,args.get("source_root","."))
+ env=_PATCH._source_env(src)
  tests=[_safe_file(repo,x) for x in (args.get("test_paths") or [])]
  if not tests:raise GuidedRepairError("TEST_PATHS_REQUIRED")
  argv=[str(x) for x in (args.get("test_argv") or [sys.executable]+[_rel(repo,p) for p in tests])]
@@ -76,7 +77,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  control_symbols=max(max_symbols,min(int(args.get("max_control_symbols_per_file",12)),64))
  out=(repo/str(args.get("output_path") or "")).resolve()
  if out==repo or repo not in out.parents:raise GuidedRepairError("OUTPUT_PATH_OUTSIDE_REPOSITORY")
- base=_PATCH._run_tests(repo,argv,timeout)
+ base=_PATCH._run_tests(repo,argv,timeout,env)
  if base.get("timed_out"):raise GuidedRepairError("BASELINE_TIMEOUT")
  if base.get("returncode")==0:raise GuidedRepairError("BASELINE_ALREADY_PASSES")
  base_score=_STRICT._score(base)
@@ -112,14 +113,14 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  for p,e in guided_items:
   cand=_COUPLED._candidate(originals,[(p,e)])
   if cand is None:continue
-  rr=_COUPLED._run_candidate(repo,originals,cand,argv,timeout);ss=_STRICT._score(rr)
+  rr=_COUPLED._run_candidate(repo,originals,cand,argv,timeout,env);ss=_STRICT._score(rr)
   if ss is None and rr.get("returncode")!=0 and not rr.get("timed_out"):ss=1
   single_scores[(p,e["start"],e["end"],e["replacement"])]=ss;tested_single+=1
  winner=None;winner_mode=None;pair_count=0;crossed=False
  for p,e in guided_items:
   cand=_COUPLED._candidate(originals,[(p,e)])
   if cand is None:continue
-  rr=_COUPLED._run_candidate(repo,originals,cand,argv,timeout);ss=_STRICT._score(rr)
+  rr=_COUPLED._run_candidate(repo,originals,cand,argv,timeout,env);ss=_STRICT._score(rr)
   if rr.get("returncode")==0 and (ss==0 or ss is None):
    winner=cand;winner_mode="SINGLE_GUIDED";break
  if winner is None:
@@ -130,7 +131,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
     pair_count+=1;a,b=guided_items[i],guided_items[j]
     cand=_COUPLED._candidate(originals,[a,b])
     if cand is None:continue
-    rr=_COUPLED._run_candidate(repo,originals,cand,argv,timeout);ps=_STRICT._score(rr)
+    rr=_COUPLED._run_candidate(repo,originals,cand,argv,timeout,env);ps=_STRICT._score(rr)
     if ps is None and rr.get("returncode")!=0 and not rr.get("timed_out"):ps=1
     if rr.get("returncode")==0 and (ps==0 or ps is None):
      ka=(a[0],a[1]["start"],a[1]["end"],a[1]["replacement"]);kb=(b[0],b[1]["start"],b[1]["end"],b[1]["replacement"])
@@ -141,7 +142,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if winner:
   ok=True
   for _ in range(2):
-   rr=_COUPLED._run_candidate(repo,originals,winner,argv,timeout);rs=_STRICT._score(rr)
+   rr=_COUPLED._run_candidate(repo,originals,winner,argv,timeout,env);rs=_STRICT._score(rr)
    if rr.get("returncode")==0:rs=0
    elif rs is None and not rr.get("timed_out"):rs=1
    replay.append({"returncode":rr.get("returncode"),"failure_score":rs,"timed_out":rr.get("timed_out")})

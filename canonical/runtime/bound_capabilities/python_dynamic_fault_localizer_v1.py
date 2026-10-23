@@ -1,6 +1,24 @@
 from __future__ import annotations
 import ast,hashlib,json,math,os,pathlib,subprocess,sys,textwrap
 from typing import Any,Mapping
+import importlib.util
+def _load_patch():
+ p=pathlib.Path(__file__).with_name('python_test_guided_patch_search_v1.py');s=importlib.util.spec_from_file_location('_p',p)
+ m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
+_PATCH=_load_patch()
+def _source_env(*paths):
+ """Delegate to the one implementation in the shared patch-search module.
+
+ A traced child inherits the repository root as its working directory and runpy.run_path does NOT
+ put the target's own directory on sys.path the way running a script does, so a test suite that
+ imports the module it tests dies on line 1 with ModuleNotFoundError. The localizer then reports
+ PASS with an empty ranking - a false positive - and every consumer of its guidance downstream
+ gets nothing. Adding the source directory to PYTHONPATH fixes the import without moving the
+ working directory the caller chose.
+ """
+ return _PATCH._source_env(*paths)
+
+
 SCHEMA="PROJECT_BRAIN_PYTHON_DYNAMIC_FAULT_LOCALIZER_V1"
 class FaultLocalizerError(RuntimeError): pass
 def _rel(repo,p): return str(p.relative_to(repo)).replace("\\","/")
@@ -13,7 +31,7 @@ def _safe_dir(repo,raw):
  if p!=repo and repo not in p.parents: raise FaultLocalizerError("PATH_OUTSIDE_REPOSITORY")
  if not p.is_dir() or p.is_symlink(): raise FaultLocalizerError("DIRECTORY_INVALID")
  return p
-def _trace_one(repo,test,timeout,max_events):
+def _trace_one(repo,test,timeout,max_events,env=None):
  code=r'''import json,pathlib,runpy,sys,traceback
 repo=pathlib.Path(sys.argv[1]).resolve(); target=pathlib.Path(sys.argv[2]).resolve(); cap=int(sys.argv[3]); seen={}; events=0
 def tr(frame,event,arg):
@@ -37,7 +55,7 @@ except BaseException as e:
 finally:sys.settrace(None)
 print("__BRAIN_TRACE__"+json.dumps({"pass":ok,"events":[[a,b,c,n] for (a,b,c),n in sorted(seen.items())],"traceback":[[str(pathlib.Path(x.filename).resolve().relative_to(repo)).replace("\\","/"),x.lineno,x.name] for x in tb if pathlib.Path(x.filename).resolve().is_file() and repo in pathlib.Path(x.filename).resolve().parents],"event_count":events},sort_keys=True))
 '''
- try:r=subprocess.run([sys.executable,"-c",code,str(repo),str(test),str(max_events)],cwd=repo,text=True,capture_output=True,timeout=timeout)
+ try:r=subprocess.run([sys.executable,"-c",code,str(repo),str(test),str(max_events)],cwd=repo,text=True,capture_output=True,timeout=timeout,env=env)
  except subprocess.TimeoutExpired:raise FaultLocalizerError("TEST_TIMEOUT")
  marker="__BRAIN_TRACE__"; lines=[x for x in r.stdout.splitlines() if x.startswith(marker)]
  if not lines: raise FaultLocalizerError("TRACE_OUTPUT_MISSING")
@@ -69,10 +87,11 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if not isinstance(args,Mapping):raise FaultLocalizerError("ARGS_NOT_OBJECT")
  repo=pathlib.Path(root).resolve();src=_safe_dir(repo,args.get("source_root","."))
  tests=[_safe_file(repo,x) for x in (args.get("test_paths") or [])]
+ env=_source_env(src,*tests)
  if not tests:raise FaultLocalizerError("TEST_PATHS_REQUIRED")
  timeout=max(1,min(int(args.get("timeout_s",20)),120));max_events=max(100,min(int(args.get("max_trace_events",200000)),1000000));max_lines=max(1,min(int(args.get("max_ranked_lines",100)),1000));max_symbols=max(1,min(int(args.get("max_ranked_symbols",50)),500))
  traces=[]
- for t in tests:traces.append({"test_path":_rel(repo,t),**_trace_one(repo,t,timeout,max_events)})
+ for t in tests:traces.append({"test_path":_rel(repo,t),**_trace_one(repo,t,timeout,max_events,env)})
  F=sum(not x["pass"] for x in traces);P=sum(x["pass"] for x in traces)
  if F==0:raise FaultLocalizerError("NO_FAILING_TEST")
  line_counts={}

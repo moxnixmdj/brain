@@ -102,12 +102,21 @@ CASES = [
 ]
 
 
+GUARD = "\nif __name__ == '__main__':\n    unittest.main()\n"
+
+
 def _seed(name, source, test_source):
+    """Write one seeded case. The __main__ guard is added because the fault localizer executes the
+    suite with runpy.run_path(..., run_name="__main__"), which only runs the tests if the file has
+    that guard - without it the child reports NO_FAILING_TEST. Real unittest files have it; the
+    repair capabilities are unaffected either way, since they load the suite through unittest."""
     d = WORK_ROOT / name
     if d.exists():
         shutil.rmtree(d)
     d.mkdir(parents=True)
     (d / "calc.py").write_text(source, encoding="utf-8")
+    if "__main__" not in test_source:
+        test_source = test_source + GUARD
     (d / "test_calc.py").write_text(test_source, encoding="utf-8")
     return d
 
@@ -268,11 +277,13 @@ class WholeFamilyTests(unittest.TestCase):
     _run_tests without the environment. Fixing one adapter and not the module it lives in leaves
     the family half-working, which is worse than uniformly broken because it looks fixed.
 
-    python.software.repair.guided.provenance.coupled.v1 is not here: it requires the
-    python.source.file.available and python.test.corpus.available effects from upstream producers
-    and correctly reports GUIDANCE_EMPTY when invoked standalone. python.repository.acceptance
-    .measure.v1 copies the source into its own workspace and runs the tests there, so it never had
-    the defect.
+    python.software.repair.guided.provenance.coupled.v1 was excluded from this benchmark while it
+    reported GUIDANCE_EMPTY. That was not a missing-input precondition, it was the same defect one
+    layer down: its guidance comes from the dynamic fault localizer, whose traced child also
+    inherited the repository root as its working directory, so the localizer ranked nothing and the
+    guidance really was empty. Both are fixed, so it is now measured here.
+    python.repository.acceptance.measure.v1 is still absent: it copies the source into its own
+    workspace and runs the tests there with cwd=workspace, so it never had the defect.
     """
 
     FAMILY = {
@@ -280,6 +291,7 @@ class WholeFamilyTests(unittest.TestCase):
         "python.software.repair.loop.strict_progress.ast.v1": "source_root",
         "python.software.repair.loop.test_guided.ast.v1": "source_paths",
         "python.software.repair.loop.coupled.ast.v1": "source_root",
+        "python.software.repair.guided.provenance.coupled.v1": "source_root",
     }
 
     @classmethod
@@ -304,9 +316,6 @@ class WholeFamilyTests(unittest.TestCase):
         for cid, slot in self.FAMILY.items():
             work = _seed("family_" + cid.replace(".", "_"), *CASES[0][1:3])
             # the test_guided loop runs the test file as a script, so it needs the __main__ guard
-            (work / "test_calc.py").write_text(
-                CASES[0][2] + "\nif __name__ == '__main__':\n    unittest.main()\n", encoding="utf-8"
-            )
             try:
                 r = runtime._invoke_bound_capability(self._args(cid, slot, work))
                 results[cid] = (bool(r.get("pass")), str(r.get("status")))
@@ -314,7 +323,7 @@ class WholeFamilyTests(unittest.TestCase):
                 results[cid] = (False, type(exc).__name__ + ": " + str(exc)[:80])
         failing = {k: v for k, v in results.items() if not v[0]}
         self.assertEqual(failing, {}, "capabilities that did not repair: " + repr(failing))
-        self.assertEqual(len(results), 4)
+        self.assertEqual(len(results), 5)
 
     def test_the_family_shares_one_source_env_implementation(self):
         """The loop must delegate, not keep a second copy that can drift."""
@@ -350,6 +359,60 @@ class WholeFamilyTests(unittest.TestCase):
                 os.environ["PYTHONPATH"] = saved
         self.assertIn("/some/existing/path", value)
         self.assertTrue(value.startswith(str(work)), value)
+
+
+class LocalizationTests(unittest.TestCase):
+    """The fault localizer must rank the real fault, and must not report PASS while ranking nothing.
+
+    Before this fix the traced child inherited the repository root as its working directory and
+    runpy.run_path does NOT put the target's own directory on sys.path the way running a script does,
+    so the suite died on line 1 with ModuleNotFoundError. The capability still returned
+    status=PASS__BOUNDED_DYNAMIC_FAULT_LOCALIZATION and pass=True, with ranked_lines=[] and
+    ranked_symbols=[] and a single trace event on the import line. That is a false positive: it
+    claims a successful localization while delivering nothing, and every consumer downstream gets
+    empty guidance.
+    """
+
+    @classmethod
+    def tearDownClass(cls):
+        shutil.rmtree(WORK_ROOT, ignore_errors=True)
+
+    def test_the_localizer_names_the_faulty_function_not_the_import_line(self):
+        work = _seed("localize", *CASES[0][1:3])
+        r = runtime._invoke_bound_capability({
+            "capability_id": "python.fault.localize.dynamic.dataflow.v1",
+            "source_root": str(work), "test_paths": [str(work / "test_calc.py")],
+            "output_path": str(work / "loc.json")})
+        self.assertTrue(r.get("ranked_lines"), "ranked_lines must not be empty: " + repr(r))
+        self.assertTrue(r.get("ranked_symbols"), "ranked_symbols must not be empty")
+        top = r["ranked_symbols"][0]
+        self.assertEqual(top["symbol"], "add")
+        self.assertTrue(top["path"].endswith("calc.py"), top["path"])
+        # the traceback must reach the assertion, not stop on the import
+        tb = (r["test_traces"][0].get("traceback") or [])
+        self.assertTrue(tb, "traceback must not be empty")
+        self.assertEqual(tb[0][1], 7, "traceback must point at the assertion line, not the import")
+
+    def test_a_pass_that_ranks_nothing_is_a_false_positive_and_must_not_happen(self):
+        """The exact shape that was shipping: pass=True with an empty ranking."""
+        work = _seed("localize_false_positive", *CASES[0][1:3])
+        r = runtime._invoke_bound_capability({
+            "capability_id": "python.fault.localize.dynamic.dataflow.v1",
+            "source_root": str(work), "test_paths": [str(work / "test_calc.py")],
+            "output_path": str(work / "loc.json")})
+        if r.get("pass"):
+            self.assertTrue(r.get("ranked_lines") or r.get("ranked_symbols"),
+                            "PASS with no ranking is the false positive being fixed")
+
+    def test_provenance_child_sees_the_module_under_test(self):
+        work = _seed("provenance_child", *CASES[0][1:3])
+        r = runtime._invoke_bound_capability({
+            "capability_id": "python.fault.provenance.interprocedural.value.v1",
+            "source_root": str(work), "test_paths": [str(work / "test_calc.py")],
+            "output_path": str(work / "prov.json")})
+        tt = (r.get("test_traces") or [{}])[0]
+        self.assertGreater(tt.get("event_count", 0), 1,
+                           "one event means the child died on the import line: " + repr(tt))
 
 
 if __name__ == "__main__":

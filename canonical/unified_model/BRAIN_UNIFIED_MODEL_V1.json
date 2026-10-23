@@ -22222,6 +22222,7 @@
     "declared_dependencies_checked": [
      "ast",
      "hashlib",
+     "importlib",
      "json",
      "math",
      "os",
@@ -22256,7 +22257,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
-    "source_sha256": "bd13487db85a3e1f50257e489d168964a0bb0ef386c3bc7bf740dc3f661345b3",
+    "source_sha256": "6dd9f5fe998ee80264a17a132445ecb0c6424b7a17e3e35f16c86da68f2372be",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22311,6 +22312,7 @@
     "declared_dependencies_checked": [
      "ast",
      "hashlib",
+     "importlib",
      "json",
      "math",
      "os",
@@ -22344,7 +22346,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py",
-    "source_sha256": "cfa9b3f5446a5c88d5d08b699c2af27e1470cb65620e0fae9b62d1d50182d477",
+    "source_sha256": "e540731de956df9daa8431069dec9f9deac634254d826eeca5a1b3fadc17a777",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22599,7 +22601,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py",
-    "source_sha256": "111e1a5c30a529a0e0ab2b727c74313b9b2b1875348cc11fae12690f91b15324",
+    "source_sha256": "057c0964be27cd96149412465ef36f4b4363017586781f30e06d787d74046ad5",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -22685,7 +22687,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
-    "source_sha256": "7b4025c68bc247fb3d5dbc774b751353ffb76891f52441d643913de970757a49",
+    "source_sha256": "6900aef5331202edbd570af3c33c3f66d32ca4f4c71799639d2878e41b2f28ca",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24404,7 +24406,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6303,
+  "research_index_records": 6304,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24415,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8803ce2a85bcd361a5eac79df1fb1e87097bbd42208aaab91b7f377f973a6c20"
+  "value": "70d863f3e431c65b53102fb245825152bd13c35a21d602e7b74e5434b28f467b"
  },
  "engines": [
   {
@@ -46315,7 +46317,7 @@
   "included_source_count": 863,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "cffc174bc9eaf34b84ab4323847e3a411e54c18b1d24303972e03bd7e61d413f"
+  "source_tree_digest": "2c0e8a1b15f7c1e24063037b6fd3a4e8c1609923dd6a7b010a0035ce0539d6c7"
  },
  "research_index": [
   {
@@ -188321,6 +188323,51 @@
     "v1": 2,
     "verified_bound_capability_execution_adapter_v1_caught_every_exception_and_returned_the_cause_only_in_the_errors_list_while_the_controller_blocker_builder_astra_runtime_verify_action_expectation_reads_the_singular_keys_reason_and_error_so_the_cause_was_in_the_payload_and_invisible_in_the_only_message_anyone_ever_reads__measured_all_twelve_failing_benchmark_goals_reported_the_byte_identical_string_action_expectation_failed_pass_observed_false_result_status_fail_closed": 1,
     "write_a_real_second_implementation_that_re_establishes_every_load_bearing_claim_through_a_mechanism_the_producer_does_not_use__candidate_set_from_git_grep_l_digests_from_sha256sum_canonical_form_and_counts_from_jq_and_decidability_by_re_running_the_consumers_own_validator_on_bytes_reopened_from_disk__then_record_the_measured_result_as_evidence_rather_than_asserting_a_flag": 1
+   }
+  },
+  {
+   "action_id": "FAULT_LOCALIZATION_TRACED_CHILD_ON_PYTHONPATH_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/FAULT_LOCALIZATION_TRACED_CHILD_ON_PYTHONPATH_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/FAULT_LOCALIZATION_TRACED_CHILD_ON_PYTHONPATH_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "1fd8f5c3e2eb93113d41c72687183fe492c7b1f9220978657d026c4171f4c0f4",
+   "status": "",
+   "terms": {
+    "20261023": 1,
+    "adapter": 2,
+    "auditing": 1,
+    "because": 1,
+    "benchmark": 1,
+    "bound": 2,
+    "capability": 1,
+    "change": 1,
+    "child": 3,
+    "class": 1,
+    "consumes": 1,
+    "defect": 1,
+    "directory": 2,
+    "empty": 2,
+    "fault": 2,
+    "fault_localization_traced_child_on_pythonpath_v1_20261023_v1": 2,
+    "import": 2,
+    "line": 2,
+    "localization": 2,
+    "module": 2,
+    "nothing": 4,
+    "ranking": 2,
+    "reported": 2,
+    "repository": 2,
+    "spawns": 2,
+    "still": 2,
+    "success": 2,
+    "suite": 2,
+    "tests": 2,
+    "traced": 2,
+    "v1": 2,
+    "while": 2
    }
   },
   {
