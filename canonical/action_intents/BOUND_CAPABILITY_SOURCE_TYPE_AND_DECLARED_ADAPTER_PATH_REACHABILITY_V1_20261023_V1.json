@@ -33,7 +33,7 @@
     "route_class": "INTEGRATE"
   },
   "benchmark_or_family_rank_authority": false,
-  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The pinned kernel resolved six source types and refused five more that the registry uses, and looked for adapters in one directory only",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::_invoke_bound_capability resolved a capability's dependency for pypi, npm, apt, git_source_tree, python_stdlib and system_tool and raised BOUND_CAPABILITY_SOURCE_UNSUPPORTED for anything else. Five source types the registry actually uses fell outside that list -- python_stdlib_composition (6 entries), brain_native_deterministic (4), brain_native_deterministic_composition (4), brain_bound_system_tool (1), brain_owned_python_composition (1) -- so 16 of the 72 bound capabilities, 22% of the surface, could never execute on any path even though every one declares a real adapter file and an invoke_capability template. Separately the loader looked for the adapter only in canonical/runtime/bound_capabilities/, while python.task.acceptance.measured.objective.v1 declares its own source.adapter_path under canonical/runtime/ where the file exists, so that capability was refused BOUND_CAPABILITY_ADAPTER_MISSING with its adapter on disk.",
   "canonical_base_commit": "5a3a8d3d7318a9e5cde8f164ac78dd776be0300f",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
@@ -150,150 +150,133 @@
       "challenger_routes": [
         {
           "comparison": {
-            "CAPABILITY_STRENGTH": "SEMANTIC_ACCEPTANCE_1_OF_23_TO_9_OF_23_ON_THE_SAME_23_GOALS",
-            "CORRECTNESS": "FAIL_CLOSED_A_CAPABILITY_WITH_NO_INSPECTOR_IS_REFUSED_AND_A_PRODUCER_WHICH_SAID_OUTPUT_VERIFIED_FALSE_IS_REFUSED",
-            "INCREMENTAL_COST": "ZERO_MONETARY_AND_ZERO_MODEL_DEPENDENT",
-            "RELIABILITY": "COMPILED_22_OF_23_CORRECT_SELECTION_20_OF_23_AND_WRONG_CAPABILITY_2_OF_23_ALL_UNCHANGED_BY_THE_REPOSITORYS_OWN_BENCHMARK_RUNNER",
-            "VERIFIABILITY": "EVERY_ACCEPTANCE_RE_OPENS_BYTES_AND_15_OF_22_TESTS_GO_RED_WHEN_THE_VERIFIER_IS_NEUTERED",
-            "WALL_CLOCK": "THE_FULL_23_GOAL_COMPILE_AND_EXECUTE_CENSUS_RUNS_IN_ABOUT_16_SECONDS"
+            "CAPABILITY_STRENGTH": "WOULD_ADD_GENERIC_HOOK_DISPATCH_BUT_NOT_DEPENDENCY_VERIFICATION_WHICH_IS_THE_ACTUAL_GAP",
+            "CORRECTNESS": "CANNOT_ADDRESS_THE_TARGET__BOTH_DISCOVER_PLUGINS_FROM_INSTALLED_DISTRIBUTION_METADATA_WHICH_0_OF_72_ENTRIES_HAVE",
+            "INCREMENTAL_COST": "ADDS_A_NEW_RUNTIME_DEPENDENCY_AGAINST_A_ZERO_NEW_DEPENDENCY_AND_ZERO_SPEND_CONSTRAINT",
+            "RELIABILITY": "DISCOVERY_IS_IMPLICIT_SO_A_MISSING_ADAPTER_BECOMES_SILENT_ABSENCE_RATHER_THAN_A_NAMED_BLOCKER",
+            "VERIFIABILITY": "CANNOT_BE_PINNED_BY_THE_EXISTING_TESTS_BECAUSE_NOTHING_IN_THE_REGISTRY_WOULD_NAME_THE_ADAPTER",
+            "WALL_CLOCK": "ADDS_A_PACKAGE_INSTALL_AND_A_DISCOVERY_PASS_ON_EVERY_INVOCATION_VERSUS_A_DICT_LOOKUP"
           },
           "evidence": [
-            "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-            "canonical/runtime/live_integrated_brain_v1.py",
-            "canonical/runtime/raw_goal_archive_compound_acceptance_v1.py",
-            "canonical/runtime/lossless_raw_task_contract_v1.py"
+            "https://pypi.org/pypi/stevedore/json (5.9.1, sha256 5c8ff3a9f336cc1a06ac0f59...)",
+            "https://pypi.org/pypi/pluggy/json (1.7.0, sha256 7dd7b0d8832ba3cb632c3069...)"
           ],
           "qualification_evidence": [
-            "VERIFIER_33_OF_33_PASS",
-            "SEMANTIC_ACCEPTANCE_9_OF_23_WAS_1_OF_23",
-            "112_TESTS_OK_FRONT_DOOR_AND_UNIFIED_MODEL",
-            "150_TESTS_WITH_ONLY_THE_3_PRE_EXISTING_FAILURES",
-            "NEUTERING_THE_VERIFIER_TURNS_15_OF_22_NEW_TESTS_RED",
-            "COMPILED_22_OF_23_AND_CORRECT_SELECTION_20_OF_23_UNCHANGED"
+            "Read both packages' declared purpose and discovery model: both enumerate entry points of INSTALLED distributions via importlib.metadata",
+            "Measured against this registry: 0 of 72 entries are installed distributions, all 72 are in-repo .py files named by adapter_module"
           ],
           "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY",
             "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "STEVEDORE_OR_PLUGGY_ENTRY_POINT_PLUGIN_FRAMEWORK"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "NO_CAPABILITY_GAIN_OVER_THE_SELECTED_ROUTE_WHICH_ALREADY_REACHES_ALL_72",
+            "CORRECTNESS": "SAME_PACKAGING_METADATA_PRECONDITION_AS_STEVEDORE_SO_IT_ALSO_CANNOT_RESOLVE_ANY_OF_THE_72",
+            "INCREMENTAL_COST": "ZERO_MONETARY_BUT_REPLACES_AN_EXPLICIT_ALLOWLIST_WITH_IMPLICIT_DISCOVERY",
+            "RELIABILITY": "WEAKENS_THE_GUARD_ANYTHING_IMPORTABLE_WOULD_BE_ADMITTED_SO_A_TYPO_STOPS_FAILING_CLOSED",
+            "VERIFIABILITY": "THE_NEGATIVE_CONTROL_COULD_NO_LONGER_NAME_BOUND_CAPABILITY_SOURCE_UNSUPPORTED_AS_THE_REVERTED_BEHAVIOUR",
+            "WALL_CLOCK": "SCANS_ALL_INSTALLED_METADATA_ON_EACH_CALL_VERSUS_ONE_PATH_JOIN"
+          },
+          "evidence": [
+            "https://api.github.com/repos/python/cpython/contents/Lib/importlib/metadata/__init__.py (blob 32f4b7d2d6e08be1, 38204 bytes)",
+            "https://api.github.com/repos/python/cpython (pushed 2026-10-23T06:53:38Z)"
+          ],
+          "qualification_evidence": [
+            "Read the stdlib module: entry_points() selects over installed distributions' metadata, not over filesystem paths",
+            "Probed the registry: adapter_module names a bare module with no distribution, so entry_points() returns nothing for it"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "STDLIB_IMPORTLIB_METADATA_ENTRY_POINTS_DISCOVERY"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SAME_72_OF_72_REACH_NO_ADVANTAGE",
+            "CORRECTNESS": "RESOLVES_ADAPTERS_BUT_STOPS_CHECKING_THAT_A_DECLARED_DEPENDENCY_EXISTS_SO_FAILURE_MOVES_FROM_ADMISSION_TO_RUN_TIME",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "LOSES_THE_DISTINCTION_BETWEEN_A_MISSING_TOOL_AND_A_BROKEN_ONE_BOTH_LOOK_LIKE_AN_ADAPTER_FAILURE",
+            "VERIFIABILITY": "FEWER_ASSERTABLE_INVARIANTS_THE_GUARD_CAN_PIN_BECAUSE_THERE_IS_NO_TYPE_TO_CHECK",
+            "WALL_CLOCK": "A_FILESYSTEM_SCAN_OF_THE_WHOLE_RUNTIME_TREE_ON_EVERY_INVOCATION_VERSUS_A_CONSTANT_TIME_MAP_LOOKUP"
+          },
+          "evidence": [
+            "canonical/runtime/astra_runtime.py -- the rejected variant was implemented and probed directly rather than argued about"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: with the allowlist removed entirely, image.extract.ocr.tesseract resolves an adapter and then fails at run time instead of at admission",
+            "Measured: the selected route keeps the admission-time Blocker for a genuinely absent tool (BOUND_SYSTEM_TOOL_MISSING:tesseract) and still reaches all 70 present adapters"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "NON_DOMINATING",
+          "route": "REPO_WIDE_FIND_SPEC_SCAN_WITH_NO_SOURCE_TYPE_ALLOWLIST"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "EXECUTABLE_BOUND_CAPABILITIES_56_OF_72_TO_72_OF_72_INCLUDING_THE_ENTIRE_AST_SOFTWARE_REPAIR_FAMILY",
+            "CORRECTNESS": "FAIL_CLOSED_PRESERVED_A_DECLARED_PATH_MUST_BE_RELATIVE_INSIDE_canonical/runtime_NON_ESCAPING_MODULE_NAME_MATCHING_AND_A_REAL_FILE",
+            "INCREMENTAL_COST": "ZERO_MONETARY_ZERO_NEW_DEPENDENCY_ZERO_MODEL_DEPENDENT",
+            "RELIABILITY": "LEARNING_PATH_UNCHANGED_AT_11_OF_23_AND_THE_ONE_SOURCE_OF_TRUTH_MAP_CANNOT_DRIFT_FROM_THE_DISPATCH",
+            "VERIFIABILITY": "11_TESTS_NEGATIVE_CONTROLLED_AND_THE_REVERTED_BEHAVIOUR_IS_NAMED_EXPLICITLY",
+            "WALL_CLOCK": "ONE_DICT_LOOKUP_PER_INVOCATION_NO_SCAN_NO_INSTALL"
+          },
+          "evidence": [
+            "canonical/runtime/astra_runtime.py -- LOCAL_SOURCE_BASE_TYPE and _resolve_bound_adapter_path",
+            "canonical/tests/test_bound_capability_source_types_and_adapter_paths_v1.py -- 11 tests"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: python.software.repair.loop.strict_progress.ast.v1 executes end to end with output_verified True and an honest OPEN__NO_STRICTLY_IMPROVING_CANDIDATE verdict",
+            "DIRECT_PROBE: python.task.acceptance.measured.objective.v1 reaches its adapter and fails closed on a junk receipt instead of being refused outright",
+            "DIRECT_PROBE: 70 of 72 entries resolve to a real adapter file; the 2 that do not are BOUND_SYSTEM_TOOL_MISSING for tesseract and chromedriver, which are genuinely absent here",
+            "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS and the 60 unified-model tests report OK",
+            "DIRECT_PROBE: negative control measured -- reverting the runtime fix makes the 11 tests fail with BOUND_CAPABILITY_SOURCE_UNSUPPORTED:python_stdlib_composition, 1 failure and 9 errors"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER",
+            "BRAIN_INHERITED"
           ],
           "resolution": "SELECTED",
-          "route": "DECLARE_THE_SUBSTRATE_A_CAPABILITY_ACTUALLY_NEEDS__RATHER_THAN_LETTING_A_PREFERRED_BUT_UNREQUIRED_APT_PACKAGE_BLOCK_IT__SO_THE_SQLITE_VERIFIER_IS_DECLARED_PYTHON_STDLIB_SQLITE3_THE_WAY_ITS_SIBLING_CREATE_CAPABILITY_ALWAYS_HAS_BECAUSE_ITS_ADAPTER_CATCHES_FILENOTFOUNDERROR_AND_IMPORTS_THE_STDLIB_MODULE"
-        },
-        {
-          "comparison": {
-            "CAPABILITY_STRENGTH": "MEASURED_ONE_OF_TWENTY_THREE_AFTER_A_FULL_SESSION_OF_WORK",
-            "CORRECTNESS": "EACH_VERIFIER_IS_CORRECT_BUT_COVERS_EXACTLY_ONE_SENTENCE",
-            "INCREMENTAL_COST": "ZERO_MONETARY_BUT_LINEAR_IN_THE_NUMBER_OF_SENTENCES",
-            "RELIABILITY": "PROVEN_FOR_THE_ONE_SENTENCE_IT_NAMES",
-            "VERIFIABILITY": "STRONG_FOR_ONE_SENTENCE_AND_SILENT_FOR_THE_OTHER_TWENTY_TWO",
-            "WALL_CLOCK": "NO_CHANGE"
-          },
-          "evidence": [
-            "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-            "canonical/runtime/live_integrated_brain_v1.py",
-            "canonical/runtime/raw_goal_archive_compound_acceptance_v1.py",
-            "canonical/runtime/lossless_raw_task_contract_v1.py"
-          ],
-          "qualification_evidence": [
-            "VERIFIER_33_OF_33_PASS",
-            "SEMANTIC_ACCEPTANCE_9_OF_23_WAS_1_OF_23",
-            "112_TESTS_OK_FRONT_DOOR_AND_UNIFIED_MODEL",
-            "150_TESTS_WITH_ONLY_THE_3_PRE_EXISTING_FAILURES",
-            "NEUTERING_THE_VERIFIER_TURNS_15_OF_22_NEW_TESTS_RED",
-            "COMPILED_22_OF_23_AND_CORRECT_SELECTION_20_OF_23_UNCHANGED"
-          ],
-          "qualification_evidence_classes": [
-            "DIRECT_PROBE"
-          ],
-          "resolution": "DISQUALIFIED",
-          "route": "WRITE_ONE_SENTENCE_SPECIFIC_VERIFIER_PER_GOAL"
-        },
-        {
-          "comparison": {
-            "CAPABILITY_STRENGTH": "WOULD_REPORT_ELEVEN_OF_TWENTY_THREE",
-            "CORRECTNESS": "MEASURED_TO_ACCEPT_TWO_GOALS_WHOSE_OWN_PRODUCER_REPORTED_OUTPUT_VERIFIED_FALSE_WITH_LIVE_RETRIEVAL_PROVENANCE_REQUIRED",
-            "INCREMENTAL_COST": "ZERO_MONETARY_BUT_NEGATIVE_TRUTH_EFFECT",
-            "RELIABILITY": "A_CLAIM_IS_NOT_A_MEASUREMENT",
-            "VERIFIABILITY": "NOTHING_IS_RE_OPENED_SO_NOTHING_IS_VERIFIED",
-            "WALL_CLOCK": "FASTEST_AND_WORST"
-          },
-          "evidence": [
-            "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-            "canonical/runtime/live_integrated_brain_v1.py",
-            "canonical/runtime/raw_goal_archive_compound_acceptance_v1.py",
-            "canonical/runtime/lossless_raw_task_contract_v1.py"
-          ],
-          "qualification_evidence": [
-            "VERIFIER_33_OF_33_PASS",
-            "SEMANTIC_ACCEPTANCE_9_OF_23_WAS_1_OF_23",
-            "112_TESTS_OK_FRONT_DOOR_AND_UNIFIED_MODEL",
-            "150_TESTS_WITH_ONLY_THE_3_PRE_EXISTING_FAILURES",
-            "NEUTERING_THE_VERIFIER_TURNS_15_OF_22_NEW_TESTS_RED",
-            "COMPILED_22_OF_23_AND_CORRECT_SELECTION_20_OF_23_UNCHANGED"
-          ],
-          "qualification_evidence_classes": [
-            "DIRECT_PROBE"
-          ],
-          "resolution": "DISQUALIFIED",
-          "route": "TRUST_THE_PRODUCERS_VERIFIED_FLAG_AS_EVIDENCE"
-        },
-        {
-          "comparison": {
-            "CAPABILITY_STRENGTH": "TEN_EXECUTED_GOALS_REMAIN_UNPROVEN_CLAIMS",
-            "CORRECTNESS": "THE_STATUS_QUO",
-            "INCREMENTAL_COST": "ZERO_MONETARY_BUT_LEAVES_A_KNOWN_DEFECT",
-            "RELIABILITY": "NO_CHANGE",
-            "VERIFIABILITY": "NOTHING_NEW_TO_VERIFY",
-            "WALL_CLOCK": "NO_CHANGE"
-          },
-          "evidence": [
-            "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-            "canonical/runtime/live_integrated_brain_v1.py",
-            "canonical/runtime/raw_goal_archive_compound_acceptance_v1.py",
-            "canonical/runtime/lossless_raw_task_contract_v1.py"
-          ],
-          "qualification_evidence": [
-            "VERIFIER_33_OF_33_PASS",
-            "SEMANTIC_ACCEPTANCE_9_OF_23_WAS_1_OF_23",
-            "112_TESTS_OK_FRONT_DOOR_AND_UNIFIED_MODEL",
-            "150_TESTS_WITH_ONLY_THE_3_PRE_EXISTING_FAILURES",
-            "NEUTERING_THE_VERIFIER_TURNS_15_OF_22_NEW_TESTS_RED",
-            "COMPILED_22_OF_23_AND_CORRECT_SELECTION_20_OF_23_UNCHANGED"
-          ],
-          "qualification_evidence_classes": [
-            "DIRECT_PROBE"
-          ],
-          "resolution": "DISQUALIFIED",
-          "route": "LEAVE_ACCEPTANCE_UNREACHABLE_FOR_THE_TEN_OTHER_EXECUTING_GOALS"
+          "route": "BOUND_CAPABILITY_SOURCE_TYPE_AND_DECLARED_ADAPTER_PATH_REACHABILITY_V1_20261023_V1"
         }
       ],
-      "checked_at_utc": "2026-10-21T21:20:00Z",
+      "checked_at_utc": "2026-10-23T08:19:28Z",
       "comparison_dimensions": [
-        "CAPABILITY_STRENGTH",
         "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
         "INCREMENTAL_COST",
         "RELIABILITY",
-        "VERIFIABILITY",
-        "WALL_CLOCK"
+        "VERIFIABILITY"
       ],
       "discovery_required": true,
-      "incumbent_route": "KEY_ACCEPTANCE_TO_ONE_EXACT_SENTENCE_AND_HARDCODE_FALSE_EVERYWHERE_ELSE",
+      "incumbent_route": "FRONT_LAYER_LOCAL_ADAPTER_EXECUTION_V1__E1_EXECUTOR_GAP_BRIDGE_IN_live_brain_route_admission_v1",
       "max_age_hours": 24,
-      "negative_search_summary": "NO_EXTERNAL_SEARCH_PERFORMED__THE_TRACE_THE_OBLIGATION_ENVELOPE_THE_ARTIFACTS_AND_THE_PARSING_SUBSTRATES_ALL_ALREADY_EXIST_IN_THE_REPOSITORY__THE_DECISIVE_EVIDENCE_IS_LOCAL_AND_MEASURED__DUMPING_THE_TRACE_AND_ARTIFACT_SHAPE_OF_ALL_TEN_EXECUTING_GOALS_SHOWED_ONE_UNIFORM_ROW_SHAPE_SO_ONE_GENERIC_VERIFIER_COVERS_ALL_OF_THEM",
+      "negative_search_summary": "The published solution space for 'resolve and dispatch a plugin by declaration' is entry-point based: stevedore, pluggy and the stdlib importlib.metadata. All three require each capability to be an INSTALLED distribution declaring entry points in packaging metadata. This registry is a JSON document whose adapters are ordinary in-repo .py files with no packaging metadata, so none of the three can address it without first packaging 72 capabilities as distributions. GitHub shows no standalone project solving the in-repo form (total_count 0, 5, 0, 0 across four queries). The remaining live challenger is to drop the type check entirely and scan the repo with importlib.util.find_spec, which is non-dominating because it stops verifying that a declared dependency is actually present on the machine.",
       "query_families": [
         {
           "intent": "CAPABILITY_VECTOR",
-          "query": "independent artifact verification of agent tool output"
+          "query": "plugin registry python dispatch"
         },
         {
           "intent": "SUPPLIER_OR_PRODUCT",
-          "query": "verify agent action results without trusting the agent"
+          "query": "entry points plugin discovery"
         },
         {
           "intent": "IMPLEMENTATION_FORM",
-          "query": "reopen produced artifact and compare claimed digest python"
+          "query": "importlib metadata entry_points loader"
         },
         {
           "intent": "RECENCY_OR_NEW_RELEASE",
-          "query": "2026 deterministic execution trace acceptance verifier"
+          "query": "stevedore plugin manager"
         }
       ],
       "refresh_triggers": [
@@ -302,47 +285,33 @@
         "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
         "BEFORE_SCARCE_GATE_SPEND"
       ],
-      "selected_route": "DECLARE_THE_SUBSTRATE_A_CAPABILITY_ACTUALLY_NEEDS__RATHER_THAN_LETTING_A_PREFERRED_BUT_UNREQUIRED_APT_PACKAGE_BLOCK_IT__SO_THE_SQLITE_VERIFIER_IS_DECLARED_PYTHON_STDLIB_SQLITE3_THE_WAY_ITS_SIBLING_CREATE_CAPABILITY_ALWAYS_HAS_BECAUSE_ITS_ADAPTER_CATCHES_FILENOTFOUNDERROR_AND_IMPORTS_THE_STDLIB_MODULE",
+      "selected_route": "BOUND_CAPABILITY_SOURCE_TYPE_AND_DECLARED_ADAPTER_PATH_REACHABILITY_V1_20261023_V1",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-10-22T08:15:40Z",
+        "checked_at_utc": "2026-10-23T08:19:28Z",
         "execution_dependencies": [
           {
-            "dependency": "python3_interpreter",
+            "dependency": "python3 3.11.2 at /usr/bin/python3",
             "evidence": [
-              "python3_--version__Python_3.11.2__DIRECT_PROBE_2026-10-21"
+              "DIRECT_PROBE: sys.version 3.11.2 and shutil.which('python3') == /usr/bin/python3 on this machine"
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
             ],
-            "evidence_scope": "GLOBAL",
+            "evidence_scope": "LOCAL",
             "kind": "LOCAL_RUNTIME",
             "required": true,
-            "scope": "GLOBAL",
+            "scope": "LOCAL",
             "status": "READY",
             "volatility": "STATIC"
           },
           {
-            "dependency": "tarfile_zipfile_and_elementtree_stdlib",
+            "dependency": "canonical/runtime/astra_runtime.py",
             "evidence": [
-              "all_three_imported_and_used_to_reopen_real_artifacts__DIRECT_PROBE_2026-10-21"
+              "sha256 3e06fa1d53b0856a..., 345256 bytes, present in the working tree at 2cdf9e4"
             ],
             "evidence_classes": [
-              "DIRECT_PROBE"
-            ],
-            "evidence_scope": "GLOBAL",
-            "kind": "LOCAL_RUNTIME",
-            "required": true,
-            "scope": "GLOBAL",
-            "status": "READY",
-            "volatility": "STATIC"
-          },
-          {
-            "dependency": "pypdf_for_the_pdf_inspector_only",
-            "evidence": [
-              "pypdf_PdfReader_reopened_the_real_pdf_and_reproduced_text_sha256_97fa8642__DIRECT_PROBE_2026-10-21"
-            ],
-            "evidence_classes": [
+              "BRAIN_INHERITED",
               "DIRECT_PROBE"
             ],
             "evidence_scope": "LOCAL",
@@ -353,33 +322,34 @@
             "volatility": "STATIC"
           },
           {
-            "dependency": "controller_trace_in_the_live_result",
+            "dependency": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
             "evidence": [
-              "all_ten_executing_goals_return_controller_execution_trace_including_the_single_plan_ones__DIRECT_PROBE_2026-10-21"
+              "sha256 1b14c4e82012fb55..., 207282 bytes, 72 entries"
             ],
             "evidence_classes": [
-              "DIRECT_PROBE",
-              "BRAIN_INHERITED"
+              "BRAIN_INHERITED",
+              "DIRECT_PROBE"
             ],
             "evidence_scope": "LOCAL",
-            "kind": "CODE_ARTIFACT",
+            "kind": "DATA_SOURCE",
             "required": true,
             "scope": "LOCAL",
             "status": "READY",
             "volatility": "STATIC"
           },
           {
-            "dependency": "unittest_and_pytest_runners",
+            "dependency": "canonical/runtime/verify_brain_unified_model_v1.py",
             "evidence": [
-              "python3_-m_unittest_ran_112_front_door_and_model_tests_ok__python3_-m_pytest_9.1.1_ran_44_front_compiler_tests__DIRECT_PROBE_2026-10-21"
+              "sha256 e2a432ccaf52e3ab..., 41017 bytes; reports TOTAL 33/33 PASS at model digest 70c03d43adc0d6ee"
             ],
             "evidence_classes": [
-              "DIRECT_PROBE"
+              "BRAIN_INHERITED",
+              "INDEPENDENT_VERIFIER"
             ],
-            "evidence_scope": "GLOBAL",
-            "kind": "LOCAL_RUNTIME",
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
             "required": true,
-            "scope": "GLOBAL",
+            "scope": "LOCAL",
             "status": "READY",
             "volatility": "STATIC"
           }
@@ -387,7 +357,7 @@
         "execution_dependencies_complete": true,
         "failed_dependencies": [],
         "max_age_hours": 2,
-        "selected_route": "DECLARE_THE_SUBSTRATE_A_CAPABILITY_ACTUALLY_NEEDS__RATHER_THAN_LETTING_A_PREFERRED_BUT_UNREQUIRED_APT_PACKAGE_BLOCK_IT__SO_THE_SQLITE_VERIFIER_IS_DECLARED_PYTHON_STDLIB_SQLITE3_THE_WAY_ITS_SIBLING_CREATE_CAPABILITY_ALWAYS_HAS_BECAUSE_ITS_ADAPTER_CATCHES_FILENOTFOUNDERROR_AND_IMPORTS_THE_STDLIB_MODULE",
+        "selected_route": "BOUND_CAPABILITY_SOURCE_TYPE_AND_DECLARED_ADAPTER_PATH_REACHABILITY_V1_20261023_V1",
         "status": "READY"
       },
       "source_classes_checked": [
@@ -398,20 +368,25 @@
       ],
       "source_evidence": {
         "BRAIN_INHERITED": [
-          "canonical/runtime/raw_goal_archive_compound_acceptance_v1.py",
-          "canonical/runtime/raw_goal_archive_acceptance_v1.py",
-          "canonical/runtime/lossless_raw_task_contract_v1.py",
-          "canonical/runtime/live_integrated_brain_v1.py"
+          "canonical/runtime/astra_runtime.py -- _ensure_local_dependency already verifies declared stdlib modules with importlib.util.find_spec and already resolves a system tool with shutil.which; the repair reuses both rather than adding a resolver",
+          "canonical/runtime/live_brain_route_admission_v1.py -- E1 EXECUTOR_GAP_BRIDGE and KERNEL_UNSUPPORTED_SOURCE_TYPES already enumerate exactly these five source types; that enumeration is the measurement this route is built from",
+          "canonical/capabilities/true/LIVE_SOLVER_END_TO_END_MEASUREMENT_20261017_V1.json -- tool_liveness.executor_kernel_refuses_source_type names all 16 capabilities before any code was changed",
+          "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json -- source.adapter_path was already declared by python.task.acceptance.measured.objective.v1; nothing was added to the registry"
         ],
         "BROAD_WEB_OR_COMMUNITY": [
-          "https://api.github.com/search/repositories?q=verify+agent+tool+output+artifact__BEST_MATCH_7_STARS__NO_PROJECT_RE_OPENS_PRODUCED_ARTIFACTS_AGAINST_A_TRACE"
+          "https://api.github.com/search/repositories?q=entry%20points%20plugin%20discovery -- total_count 5, best match dperezcabrera/pico-boot at 2 stars; no established standalone project",
+          "https://api.github.com/search/repositories?q=plugin%20registry%20python -- total_count 38, best match IBM/mcp-context-forge; none dispatch a JSON-declared capability registry by source type",
+          "https://api.github.com/search/repositories?q=importlib%20metadata%20entry_points%20loader -- total_count 0",
+          "https://api.github.com/search/repositories?q=stevedore%20plugin%20manager -- total_count 0"
         ],
         "CODE_OR_PACKAGE_REGISTRY": [
-          "https://pypi.org/pypi/pypdf/json__HTTP_200"
+          "https://pypi.org/pypi/stevedore/json -- stevedore 5.9.1, wheel sha256 5c8ff3a9f336cc1a06ac0f59..., 'Manage dynamic plugins for Python applications'",
+          "https://pypi.org/pypi/pluggy/json -- pluggy 1.7.0, wheel sha256 7dd7b0d8832ba3cb632c3069..., 'plugin and hook calling mechanisms for python'",
+          "https://pypi.org/pypi/importlib-metadata/json -- importlib-metadata 9.1.0, wheel sha256 626c65eddcd23c0ee0ffb175..., 'Read metadata from Python packages'"
         ],
         "OFFICIAL_PRIMARY": [
-          "https://docs.python.org/3/library/tarfile.html__STDLIB_USED_TO_REOPEN_THE_ARCHIVE",
-          "https://docs.python.org/3/library/zipfile.html__STDLIB_USED_TO_REOPEN_THE_OOXML_PACKAGES"
+          "https://api.github.com/repos/python/cpython -- 77751 stars, pushed_at 2026-10-23T06:53:38Z",
+          "https://api.github.com/repos/python/cpython/contents/Lib/importlib/metadata/__init__.py -- git blob 32f4b7d2d6e08be1..., size 38204 bytes; this is the stdlib entry-point mechanism the challenger routes below would depend on"
         ]
       },
       "unresolved_plausible_dominators": []
@@ -473,31 +448,27 @@
     "tournament": {
       "counterexample_receipts": [
         {
-          "git_blob_sha": "9857412382ac9533d23132edc3930bec5a035bc8",
-          "note": "The declaration at base. The verifier pinned the Ubuntu sqlite3 package with optional true, a python_stdlib fallback and an optional_reason naming its adapter, while the sibling create capability was declared python_stdlib:sqlite3 and was never blocked.",
-          "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
-        },
-        {
-          "git_blob_sha": "9780dd329ab291455daed4b8f26702d799145b1d",
-          "note": "The adapter at base, unmodified by this change. It already catches FileNotFoundError and imports the stdlib sqlite3 module, which is the fact that makes the corrected declaration true rather than aspirational.",
-          "path": "canonical/runtime/bound_capabilities/sqlite_verify_cli.py"
-        },
-        {
-          "git_blob_sha": "b00d9ed9b6f614215ed65384dd652557e32e233f",
-          "note": "The substrate gate at base, unmodified by this change. It dispatches on source type, so declaring python_stdlib routes the capability through the existing find_spec probe instead of the apt metadata check.",
+          "git_blob_sha": "eb135bc0a172ad2e97e25d14418eaa5d453d50ec",
           "path": "canonical/runtime/astra_runtime.py"
         },
         {
-          "git_blob_sha": "c2aca6c308d38b4c88dc3395402b8d0ed05ae4ad",
-          "note": "The pinned-pypi fallback tests at base, unmodified and still passing. They pin the apt path this capability no longer declares, so removing one capability from that path cannot have weakened it for the others.",
-          "path": "canonical/tests/test_apt_pure_python_pinned_pypi_fallback.py"
+          "git_blob_sha": "6f0b70439bfc61522283ebaa075cb4f59987c7e0",
+          "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+        },
+        {
+          "git_blob_sha": "6f6b10b191710bf9b5601c1518dc3c2bed493438",
+          "path": "canonical/capabilities/true/LIVE_SOLVER_END_TO_END_MEASUREMENT_20261017_V1.json"
+        },
+        {
+          "git_blob_sha": "cbe584f0f7d06fe98d5fd9184cefe21ff652d6f4",
+          "path": "canonical/runtime/live_brain_route_admission_v1.py"
         }
       ],
-      "decisive_question": "IS_A_GOAL_ACCEPTED_BECAUSE_THE_MACHINE_REALLY_PRODUCED_THE_ARTIFACT_THE_SENTENCE_ASKED_FOR_OR_MERELY_BECAUSE_A_PRODUCER_SET_A_FLAG_ABOUT_ITSELF",
-      "falsifier_id": "THE_NEUTERED_VERIFIER_CONTROL_AND_THE_TAMPERED_ARTIFACT_CONTROLS",
+      "decisive_question": "IS_A_BOUND_CAPABILITY_UNREACHABLE_BECAUSE_SOMETHING_ABOUT_IT_IS_GENUINELY_UNSATISFIABLE_ON_THIS_MACHINE_OR_MERELY_BECAUSE_ITS_SOURCE_TYPE_STRING_IS_ABSENT_FROM_AN_ALLOWLIST_AND_ITS_ADAPTER_IS_NOT_IN_THE_ONE_DIRECTORY_THE_LOADER_LOOKS_IN",
+      "falsifier_id": "THE_REVERT_CONTROL_AND_THE_JUNK_RECEIPT_CONTROL",
       "known_counterexamples_checked": true,
       "no_known_counterexample_reason": "FIRST_ATTEMPT_COMPARED_THE_ENUMERATED_CANDIDATE_COUNT_TO_A_FRESH_GLOB_AND_MEASURED_400_CLAIMED_AGAINST_2192_REAL_FILES_SO_A_CORRECT_TRUNCATED_ENUMERATION_LOOKED_LIKE_A_LIE__CORRECTED_BY_MATCHING_EVERY_CANDIDATE_SHA256_TO_A_REAL_FILE_AND_REPORTING_THE_TRUNCATION_HONESTLY__SECOND_ATTEMPT_DIGESTED_THE_DECISION_INPUT_AS_RAW_BYTES_AND_REFUSED_AN_HONEST_PRODUCER_WHICH_DIGESTS_THE_PARSED_CONTENT__CORRECTED_TO_THE_CANONICAL_JSON_DIGEST_AND_LOCKED_BY_TEST",
-      "proposal_id": "GENERIC_TRACE_REINSPECTION_ACCEPTANCE_FOR_EVERY_INSPECTABLE_CAPABILITY_V1_20261021_V1"
+      "proposal_id": "BOUND_CAPABILITY_SOURCE_TYPE_AND_DECLARED_ADAPTER_PATH_REACHABILITY_V1_20261023_V1"
     }
   },
   "weakens_existing_guard": false
