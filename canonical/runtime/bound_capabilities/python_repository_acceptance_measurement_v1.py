@@ -20,6 +20,25 @@ import sys
 import tempfile
 import time
 from typing import Any, Mapping
+import importlib.util
+
+
+def _load_patch_search():
+    """The shared module that owns how a suite is executed.
+
+    Imported by path rather than by package name, matching how every other adapter in this
+    directory reaches it.
+    """
+    here = pathlib.Path(__file__).with_name('python_test_guided_patch_search_v1.py')
+    spec = importlib.util.spec_from_file_location('_brain_patch_search', here)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+_PATCH = _load_patch_search()
+
+
 
 SCHEMA = "PROJECT_BRAIN_PYTHON_REPOSITORY_ACCEPTANCE_MEASUREMENT_V1"
 CAPABILITY_ID = "python.repository.acceptance.measure.v1"
@@ -123,7 +142,11 @@ def _validate_test_paths(source_root: pathlib.Path, values: Any) -> list[str]:
 def _validate_argv(values: Any, test_paths: list[str]) -> list[str]:
     argv = values
     if argv is None:
-        argv = [sys.executable] + test_paths
+        # Executing a test file as a script only starts the tests when the file carries a __main__
+        # guard, and 695 of the 2019 unittest files in this repository (34%, measured) do not.
+        # Such a run exits 0 having executed nothing, which this measurement then records as
+        # returncode 0 with test_count 0 - clean evidence for a repository whose suite fails.
+        argv = _PATCH.suite_argv(sys.executable, *test_paths)
     if not isinstance(argv, list) or not argv or any(not isinstance(x, str) or not x for x in argv):
         raise MeasurementError("TEST_ARGV_INVALID")
     exe = pathlib.Path(argv[0]).name.lower()

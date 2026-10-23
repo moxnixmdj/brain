@@ -581,5 +581,67 @@ class DerivedCommandTests(unittest.TestCase):
         self.assertEqual(argv[3:], ["/a.py", "/b.py"])
 
 
+class AuditAndMeasurementEvidenceTests(unittest.TestCase):
+    """The corpus auditor and the acceptance measurer must not record evidence for a suite that never ran.
+
+    Both derived their command line as [python, <test file>], which executes the file as a script and
+    therefore only starts the tests when the file carries a __main__ guard. For the 695 unittest
+    files in this repository without one (34%, measured) the run exited 0 having executed nothing, so:
+
+      python.tests.audit.unittest             reported test_count 0, failed_count 0
+      python.repository.acceptance.measure.v1 recorded returncode 0, test_count 0, empty stderr
+
+    A failing test in such a file became invisible rather than red. That is worse than a wrong
+    verdict, because the corpus health report reads as complete while silently omitting a third of
+    the tests, and nothing downstream can tell the omission from a clean run.
+    """
+
+    @classmethod
+    def tearDownClass(cls):
+        shutil.rmtree(WORK_ROOT, ignore_errors=True)
+
+    EMPTY_SHA = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+
+    def _seed_case(self, name, source, guard):
+        return _seed(name, source, CASES[0][2], guard=guard)
+
+    def test_the_auditor_counts_a_guardless_failing_test_as_one_failure(self):
+        work = self._seed_case("audit_guardless", CASES[0][1], guard=False)
+        r = runtime._invoke_bound_capability({
+            "capability_id": "python.tests.audit.unittest", "source_root": str(work),
+            "test_paths": [str(work / "test_calc.py")], "output_path": str(work / "a.json")})
+        self.assertEqual(r.get("test_count"), 1, "a guard-less file must not audit as zero tests")
+        self.assertEqual(r.get("failed_count"), 1, "the seeded failure must be counted as a failure")
+
+    def test_the_auditor_is_unchanged_for_the_guarded_shape(self):
+        work = self._seed_case("audit_guarded", CASES[0][1], guard=True)
+        r = runtime._invoke_bound_capability({
+            "capability_id": "python.tests.audit.unittest", "source_root": str(work),
+            "test_paths": [str(work / "test_calc.py")], "output_path": str(work / "a.json")})
+        self.assertEqual((r.get("test_count"), r.get("failed_count")), (1, 1))
+
+    def test_the_acceptance_measurement_records_truthful_test_evidence(self):
+        """The load-bearing field is test_evidence, not the top-level pass flag."""
+        work = self._seed_case("measure_guardless", CASES[0][1], guard=False)
+        r = runtime._invoke_bound_capability({
+            "capability_id": "python.repository.acceptance.measure.v1", "source_root": str(work),
+            "test_paths": [str(work / "test_calc.py")], "output_path": str(work / "m.json")})
+        ev = r.get("test_evidence") or {}
+        self.assertEqual(ev.get("test_count"), 1, "zero tests recorded means nothing ran: " + repr(ev))
+        self.assertNotEqual(ev.get("returncode"), 0, "a failing suite must not record a clean exit")
+        self.assertNotEqual(ev.get("stderr_sha256"), self.EMPTY_SHA,
+                            "empty stderr is the signature of a suite that never ran")
+
+    def test_the_measurement_records_a_passing_guardless_suite_as_actually_passing(self):
+        work = self._seed_case("measure_passing", "def add(a, b):\n    return a + b\n", guard=False)
+        r = runtime._invoke_bound_capability({
+            "capability_id": "python.repository.acceptance.measure.v1", "source_root": str(work),
+            "test_paths": [str(work / "test_calc.py")], "output_path": str(work / "m.json")})
+        ev = r.get("test_evidence") or {}
+        self.assertEqual(ev.get("test_count"), 1)
+        self.assertEqual(ev.get("returncode"), 0)
+        self.assertNotEqual(ev.get("stderr_sha256"), self.EMPTY_SHA)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

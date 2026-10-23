@@ -22482,6 +22482,7 @@
     "declared_dependencies_checked": [
      "ast",
      "hashlib",
+     "importlib",
      "json",
      "os",
      "pathlib",
@@ -22519,7 +22520,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repository_acceptance_measurement_v1.py",
-    "source_sha256": "616bcb99646f4ca3f5218667aada4f2786dd070a3ec2b8c9de1e1972c468e510",
+    "source_sha256": "00d03acc2bc40ecef0eaf3411e7c929a64844b4a51053fa75ae80935b73b5254",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24409,13 +24410,13 @@
   "research_index_records": 6306,
   "routing_tokens": 1785,
   "skills": 18,
-  "source_index_entry_points": 404,
+  "source_index_entry_points": 405,
   "source_index_modules": 1862
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b6b818cd84c6f4c67fc0f441612a4894cae6b6ddfe14352835a7300c950e14d1"
+  "value": "23e09f91cde9a34559476d4f46ca926c357eb4f1119bdbbada8f281f3bc799ea"
  },
  "engines": [
   {
@@ -46317,7 +46318,7 @@
   "included_source_count": 863,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "f905641419fd7bee0693a6c8a06b3546f1634ecc918e25a0aa0e57dc3d0a3b71"
+  "source_tree_digest": "a2ee0624a89eeeb81724276d0431bf039c55d4231729785209eca0fa3b41ae7c"
  },
  "research_index": [
   {
@@ -196605,17 +196606,18 @@
   },
   {
    "capability": false,
-   "classification": "ORPHAN",
-   "executable_entry_point": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
    "id": "source:canonical/runtime/bound_capabilities/python_test_audit.py",
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_test_audit.py",
-   "sha256": "2613627df9d3e2f2aa826451c75f354a0d0abd1de58ff58c4b62d8741749703b",
+   "sha256": "d644cd5a57b06a8b468795f0aaeaa7a44fa5069d5f0a2746c38697ab0f6542d6",
    "summary": "Deterministic repository-local Python test-corpus execution audit.",
-   "symbol_count": 5,
+   "symbol_count": 6,
    "symbols": [
     "_counts",
+    "_load_patch_search",
     "_report_is_consistent",
     "_safe_dir",
     "_text",
@@ -196626,6 +196628,7 @@
     "counts": 1,
     "deterministic": 1,
     "execution": 1,
+    "load_patch_search": 1,
     "python": 2,
     "report_is_consistent": 1,
     "repository-local": 1,
