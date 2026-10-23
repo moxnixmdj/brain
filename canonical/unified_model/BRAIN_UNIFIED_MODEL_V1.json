@@ -24404,7 +24404,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6301,
+  "research_index_records": 6302,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3b2048e9bb9f554e33af4fdf3388e7e95a0f4bbc5f82cfa93edb17031e59ea9c"
+  "value": "1840bda1083caaa5346808eca52aab16c3b03097bfb26eb1d1e14d14048eddb6"
  },
  "engines": [
   {
@@ -189096,6 +189096,51 @@
     "root2-closure-controller-v2-20261004": 1,
     "truth_repair_then_proof_compression_then_parallel_zero_reality_then_single_minimum_reality_transaction": 1,
     "v2": 1
+   }
+  },
+  {
+   "action_id": "SOFTWARE_REPAIR_LOOP_SOURCE_DIRECTORY_ON_PYTHONPATH_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/SOFTWARE_REPAIR_LOOP_SOURCE_DIRECTORY_ON_PYTHONPATH_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SOFTWARE_REPAIR_LOOP_SOURCE_DIRECTORY_ON_PYTHONPATH_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "a04e34e384e7568ab75e57a4df026e4aa425a15a03ea80f6c74c8632882b9452",
+   "status": "",
+   "terms": {
+    "20261023": 1,
+    "able": 1,
+    "accepted": 1,
+    "accepts": 1,
+    "adapter": 1,
+    "add": 3,
+    "any": 2,
+    "assertequal": 1,
+    "becomes": 2,
+    "candidate": 2,
+    "cwd": 3,
+    "directory": 3,
+    "every": 2,
+    "family": 2,
+    "gives": 2,
+    "import": 2,
+    "loop": 4,
+    "module": 3,
+    "no": 3,
+    "ordinary": 2,
+    "own": 2,
+    "python": 3,
+    "repair": 5,
+    "repository": 3,
+    "root": 6,
+    "score": 2,
+    "so": 2,
+    "software": 3,
+    "software_repair_loop_source_directory_on_pythonpath_v1_20261023_v1": 2,
+    "source": 4,
+    "tests": 2,
+    "v1": 2
    }
   },
   {
