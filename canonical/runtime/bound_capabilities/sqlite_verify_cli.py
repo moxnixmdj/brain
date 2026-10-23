@@ -82,6 +82,38 @@ def _status_value_from_records(records):
                 values.add(text)
     return next(iter(values)) if len(values)==1 else None
 
+def _status_value_from_goal(goal,records):
+    """The status the SENTENCE names, chosen from the records' own vocabulary.
+
+    The old code derived the filter only from the data, and only when every record
+    agreed on one status.  A goal that says "from the ACTIVE records" over a mixed
+    collection therefore produced wanted=None, the filter was skipped, and the table
+    was built from every record -- a confident superset of what was asked for.  Measured
+    on the live harness: 4 of 10 instances correct, the other 6 silently over-inclusive.
+
+    This does not enumerate phrasings.  It takes the distinct status values the records
+    actually carry and asks which of them the sentence mentions as a whole word, so any
+    vocabulary works and no list of words is maintained.  Exactly one named value is a
+    fact about the sentence; two is a contradiction and fails closed; none falls back to
+    the data-derived value, which is still right when the records are unanimous.
+    """
+    values=set()
+    for _,record in _record_items(records) or []:
+        value=record.get("status")
+        if value is not None and not isinstance(value,(dict,list)):
+            text=str(value).strip()
+            if text:
+                values.add(text)
+    sentence=str(goal or "")
+    named=sorted(
+        v for v in values
+        if re.search(r"(?<![A-Za-z0-9_])"+re.escape(v)+r"(?![A-Za-z0-9_])",sentence,flags=re.I)
+    )
+    if len(named)>1:
+        raise RuntimeError("SQLITE_STATUS_AMBIGUOUS:"+json.dumps(named,sort_keys=True))
+    return named[0] if named else None
+
+
 def _table_name(goal):
     m=re.search(r"\btable\s+named\s+([A-Za-z_][A-Za-z0-9_]*)\b",str(goal or ""),flags=re.I)
     return m.group(1) if m else None
@@ -168,7 +200,7 @@ def run(args,root):
     # filter -- only when the records agree on exactly one status -- is derived from them.
     # Neither comes from the sentence, so a sentence stating neither still verifies.
     _,records=_select_collection(data,cols)
-    wanted=_status_value_from_records(records)
+    wanted=_status_value_from_goal(goal,records) or _status_value_from_records(records)
     expected={}
     for key,record in _record_items(records) or []:
         if wanted is not None and wanted not in record.values():
