@@ -24471,7 +24471,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6320,
+  "research_index_records": 6321,
   "routing_tokens": 1789,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24480,7 +24480,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "779e72bb7f1585405c079c0ed36fee53bb1b7887a9993283f943aaf5918a6ceb"
+  "value": "aabfecce5a2d9ad86b38d50d681d9e0edfe8160b6bf33507a3f0a7e1bc454c6f"
  },
  "engines": [
   {
@@ -190017,6 +190017,51 @@
     "stale": 1,
     "stale_governance_snapshot_counts_turn_the_guards_that_protect_them_red_v1_20261022_v1": 1,
     "turn": 1,
+    "v1": 2
+   }
+  },
+  {
+   "action_id": "TEXT_FILE_WRITE_VERIFIED_FROM_REAL_EXECUTION_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/TEXT_FILE_WRITE_VERIFIED_FROM_REAL_EXECUTION_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/TEXT_FILE_WRITE_VERIFIED_FROM_REAL_EXECUTION_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "b12c7cc5cb37d04d8837655d07ae4d434dd801d6d3fb345f796924373b794022",
+   "status": "",
+   "terms": {
+    "20261023": 1,
+    "abandon": 1,
+    "about": 1,
+    "adapters": 1,
+    "already": 1,
+    "anywhere": 1,
+    "appear": 1,
+    "before": 1,
+    "both": 1,
+    "cannot": 1,
+    "columns": 1,
+    "data": 1,
+    "demanding": 1,
+    "derived": 1,
+    "document": 1,
+    "either": 1,
+    "execution": 1,
+    "fact": 1,
+    "family": 2,
+    "file": 3,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 1,
+    "had": 1,
+    "interpreter": 1,
+    "json": 1,
+    "looked": 1,
+    "mixed-vendor": 1,
+    "needs": 1,
+    "real": 2,
+    "source": 2,
+    "text_file_write_verified_from_real_execution_v1_20261023_v1": 2,
     "v1": 2
    }
   },
