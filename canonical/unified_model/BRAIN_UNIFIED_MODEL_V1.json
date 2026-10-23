@@ -23816,8 +23816,7 @@
      "json",
      "pathlib",
      "re",
-     "sqlite3",
-     "subprocess"
+     "sqlite3"
     ],
     "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
@@ -23842,7 +23841,7 @@
     "source_executable": null,
     "source_module": "sqlite3",
     "source_path": "canonical/runtime/bound_capabilities/sqlite_verify_cli.py",
-    "source_sha256": "8b7e13b0343238b32eba11d0a1a4df5345a021724a941180bb00fdb259c75ec1",
+    "source_sha256": "974f0361f7b42843913308bd1b6e814137a5b40bbec80400d5d23dc519bd2bb3",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24546,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "150ea935fb7d885f113ba2e5064f7bb150713e39bef9904705337ba3b4271554"
+  "value": "706d3ba98d98c1713aa69b0d9ffe24d876bcc7f71c8e4dfd7edfe503af6073d2"
  },
  "engines": [
   {
@@ -46495,7 +46494,7 @@
   "included_source_count": 865,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "7010ef123ab68bb60d6b424e8de5a42fcaabc2689dd28006fa1821df19125a00"
+  "source_tree_digest": "8657c2e5c9cc5b0289acd5f221029a45a7bfc913ebc2f63f2e58c08c17940b84"
  },
  "research_index": [
   {

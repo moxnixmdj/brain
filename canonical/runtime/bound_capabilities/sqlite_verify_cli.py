@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Independently verify a SQLite table against canonical JSON using sqlite3 CLI."""
 from __future__ import annotations
-import hashlib,json,pathlib,re,subprocess
+import hashlib,json,pathlib,re
 
 IDENT=re.compile(r"^[A-Za-z_][A-Za-z0-9_]{0,127}$")
 
@@ -114,12 +114,20 @@ def _cell(record,key,column):
     return str(value)
 
 def _run_json(db,sql):
-    try:
-        p=subprocess.run(["sqlite3","-json",str(db),sql],text=True,capture_output=True,timeout=60)
-        if p.returncode==0:
-            return json.loads(p.stdout.strip() or "[]")
-    except FileNotFoundError:
-        pass
+    """Read rows back through the standard library, which is what this capability declares.
+
+    The registry records this adapter as ``source.type: python_stdlib`` -- a promise that
+    it needs nothing but the interpreter.  It used to shell out to the ``sqlite3`` CLI
+    first and only fall back to ``sqlite3`` the module when the binary was missing, so the
+    promise held by accident: delete the fallback and a capability that declares no
+    dependency silently becomes host-dependent.  That is not hypothetical -- the recorded
+    end-to-end receipt logged this whole family as ``environment_blocked_here: 50`` because
+    of the CLI preference, on hosts where the module was present all along.
+
+    Both paths return ``list[dict]`` over the same libsqlite3, measured equivalent on
+    populated and empty results, so preferring the module removes a host dependency
+    without changing a single returned byte.
+    """
     import sqlite3 as py_sqlite3
     conn=py_sqlite3.connect(str(db))
     conn.row_factory=py_sqlite3.Row
