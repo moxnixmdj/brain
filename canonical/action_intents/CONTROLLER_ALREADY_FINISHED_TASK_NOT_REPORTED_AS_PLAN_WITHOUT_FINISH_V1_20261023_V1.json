@@ -82,29 +82,70 @@
     "canonical_base_commit": "13a079c2d0044cbe3891bf380a04a2ee2c59b8a0",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
-      "EDITING_THE_SUBSTRATE_GATE_TO_HONOUR_OPTIONAL_AND_FALLBACK_WHICH_IS_A_PROTECTED_GUARD_PATH_AND_WOULD_HAVE_REQUIRED_ASSERTING_A_USER_GOVERNANCE_AUTHORIZATION_THAT_WAS_DELEGATED_RATHER_THAN_GRANTED",
-      "DECLARING_PYTHON_STDLIB_FOR_A_CAPABILITY_WHOSE_ADAPTER_DOES_NOT_IN_FACT_FALL_BACK",
-      "REMOVING_THE_HASH_PINNED_APT_CLAIM_FROM_ANY_OTHER_CAPABILITY",
-      "WEAKENING_THE_STDLIB_PROBE_SO_A_MISSING_MODULE_COULD_PASS"
+      "DELETING_THE_CONTROLLER_CHECKPOINT_FOR_A_FINISHED_TASK_WHICH_WOULD_DESTROY_THE_DURABLE_RECEIPT_THE_RUNTIME_IS_BUILT_TO_KEEP",
+      "RETURNING_A_SUCCESS_VERDICT_FOR_AN_ALREADY_FINISHED_TASK_WHICH_WOULD_MAKE_A_VERDICT_MEAN_A_REPLAYED_RUN_RATHER_THAN_THIS_ONE",
+      "WEAKENING_THE_RESUME_GUARD_SO_A_FINISHED_TASK_COULD_BE_RE_EXECUTED",
+      "RENAMEING_MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH_EVERYWHERE_WHICH_WOULD_ERASE_THE_DISTINCTION_FOR_A_PLAN_THAT_REALLY_HAS_NO_FINISH"
     ],
     "expected_parent_level_state_change": "a blocker code names the real reason a controller run ended, so an operator or agent reading it is sent to the actual cause instead of to a planner that was never broken",
     "iteration_limit": 4,
-    "obs_blocker": "The model-independent controller raised Blocker(\"MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH\") for two different situations, only one of which is a plan without a finish step. When the controller checkpoint says a task already ran to the end, the cycle loop at canonical/runtime/astra_runtime.py:4912 never executes because start_cycle=len(trace) is already past the last action, so the loop body that returns the finish output is skipped and control falls through to the same raise. The plan DID have a finish step; it was reached on an earlier run. The code therefore reported a false reason: it read as a broken plan when the truth is that the work is done and a finished task is not re-run. Measured cost: measuring extended-goal acceptance by reusing one task_id per goal produced 0 of 14 with seven goals blocked on MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH, which reads as half the benchmark being broken; with a fresh id per invocation the same goals give 7 of 14 and the seven real blockers are two BOUND_CAPABILITY_INDEPENDENT_VERIFICATION_NOT_EVIDENT, two BOUND_APT_METADATA_NOT_FOUND:pandoc, one zbar-tools, one tesseract and one SQLITE_STATUS_VALUE_UNRESOLVED. No plan was ever missing a finish step.",
-    "obs_capability": "truthful blocker codes from the model-independent controller",
-    "obs_goal": "a controller run that ended because the task was already complete must report that, not that the plan had no finish step",
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "DELETING_THE_RAISE_WOULD_LET_A_FINISHED_TASK_FALL_THROUGH_WITH_NO_VERDICT_AND_SUBSTITUTING_A_GENERIC_CODE_IS_THE_CURRENT_DEFECT",
+      "intrinsic_or_path_specific": "INTRINSIC__TWO_DIFFERENT_TERMINAL_SITUATIONS_SHARED_ONE_STRING_SO_NEITHER_COULD_BE_DISTINGUISHED_BY_ANY_READER",
+      "surviving_causal_blocker": "NONE__THE_ALREADY_FINISHED_CASE_IS_NOW_NAMED_AND_THE_GENUINELY_UNFINISHED_CASE_KEEPS_ITS_OWN_CODE"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "NO_NEW_CAPABILITY_NO_NEW_PLANNER_AND_NO_NEW_ADAPTER_WAS_WRITTEN",
+      "existing_inherited_routes_checked": "_load_controller_checkpoint_AT_4883_ALREADY_RETURNS_resumed_AND_start_cycle_EQUALS_len_trace_AT_4885_SO_THE_BRANCH_READS_TWO_VALUES_THE_FUNCTION_ALREADY_HAD",
+      "external_existing_routes_checked": "NO_EXTERNAL_ROUTE_IS_NEEDED__THE_FIX_IS_A_CONDITION_AND_A_DISTINCT_STRING_ON_AN_EXISTING_RAISE_SITE",
+      "surviving_gap": "NONE_FOR_THIS_ROUTE"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "MAKING_THE_BENCHMARK_LOOK_GREEN_BY_REUSING_TASK_IDS",
+        "COUNTING_GOALS_THAT_MERELY_RETURN_A_CONTROLLER_OUTPUT",
+        "TREATING_A_SECOND_RUN_OF_A_FINISHED_TASK_AS_EVIDENCE_THE_PLAN_IS_BROKEN"
+      ],
+      "real_outcome": "A_BLOCKER_CODE_MUST_NAME_THE_REASON_THE_RUN_ACTUALLY_ENDED",
+      "surviving_necessity": "A_MISLEADING_ERROR_CODE_SENDS_THE_NEXT_OPERATOR_TO_FIX_CODE_THAT_WAS_NEVER_BROKEN__IT_COST_A_FULL_MEASUREMENT_CYCLE_HERE"
+    },
     "obs_inherited_system": {
-      "adjacent_capabilities_absorbed": "THE_SENTENCE_SPECIFIC_ARCHIVE_VERIFIERS_STAY_AUTHORITATIVE_WHEN_THEY_ACCEPT_SO_THE_ALREADY_MERGED_ACCEPTED_GOAL_IS_UNTOUCHED",
+      "adjacent_capabilities_absorbed": "THE_GENUINELY_UNFINISHED_PLAN_KEEPS_MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH_UNCHANGED",
       "downstream_work_to_delete_or_supersede": "NONE",
-      "fresh_reuse_plan": "THE_TRACE_THE_ENVELOPE_THE_ARTIFACTS_AND_THE_CAPABILITY_SUBSTRATES_ARE_ALL_REUSED_UNMODIFIED"
+      "fresh_reuse_plan": "THE_CHECKPOINT_THE_RESUME_INDEX_AND_THE_BLOCKER_TYPE_ARE_ALL_REUSED_UNMODIFIED"
     },
     "obs_obs": {
       "affected_layers_only_on_revalidation": true,
-      "analysis_steps_deleted_or_cached": "THE_TRACE_SHAPE_AND_ARTIFACT_SHAPE_CENSUS_OF_ALL_TEN_EXECUTING_GOALS_WAS_COMPUTED_ONCE_AND_DRIVES_THE_INSPECTOR_TABLE",
-      "search_stop_decision": "STOPPED_WHEN_NINE_OF_TWENTY_THREE_WERE_ACCEPTED_THE_TWO_REMAINING_EXECUTING_GOALS_REFUSED_FOR_A_MEASURED_UPSTREAM_REASON_AND_NEUTERING_THE_VERIFIER_TURNED_FIFTEEN_OF_TWENTY_TWO_TESTS_RED"
+      "analysis_steps_deleted_or_cached": "THE_EXTENDED_GOAL_ACCEPTANCE_CENSUS_WAS_MEASURED_ONCE_WITH_FRESH_IDS_AND_ONCE_WITH_REUSED_IDS_AND_THE_DELTA_IS_THE_EVIDENCE",
+      "search_stop_decision": "STOPPED_WHEN_THE_SECOND_RUN_REPORTED_ALREADY_FINISHED_WITHOUT_WITHOUT_FINISH_AND_A_FRESH_ID_STILL_EXECUTED"
     },
-    "obs_solution": "branch before the existing raise: if resumed and start_cycle>=len(actions) the loop could not have run, so the plan was already finished, and raise MODEL_INDEPENDENT_CONTROLLER_PLAN_ALREADY_FINISHED; otherwise keep the existing MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH",
-    "obs_verification": "measured the same task_id twice on 'Create an xlsx table from JSON records.': first run PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED with pass=True, second run FAIL__LIVE_CONTROLLER_EXECUTION whose reason contains ALREADY_FINISHED and does not contain WITHOUT_FINISH; A/B on canonical/tests/test_fail_closed_reason_survives_to_the_blocker_v1.py gives 13 tests with 1 failure (EXT_OCR_SCANNED_IMAGE) both with and without the change, so that failure is pre-existing",
-    "real_outcome": "MODEL_INDEPENDENT_CONTROLLER_PLAN_ALREADY_FINISHED is now distinguishable from MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH",
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "REVERTING_THE_BRANCH_RESTORES_THE_FALSE_REASON_AND_THE_SAME_MEASUREMENT_TRAP__AND_LEAVING_IT_DOCUMENTED_INSTEAD_OF_FIXED_COST_THE_NEXT_READER_THE_SAME_CYCLE_IT_COST_HERE",
+      "routes_ranked": [
+        "BRANCH_ON_resumed_AND_start_cycle_BEFORE_THE_EXISTING_RAISE_AND_NAME_THE_ALREADY_FINISHED_CASE__SELECTED__TWO_VALUES_THE_FUNCTION_ALREADY_HAD_ZERO_NEW_STATE",
+        "DELETE_THE_CHECKPOINT_ON_A_FINISHED_RUN__REJECTED__DESTROYS_THE_DURABLE_RECEIPT_THE_RUNTIME_IS_BUILT_TO_KEEP",
+        "RETURN_A_SUCCESS_VERDICT_FOR_AN_ALREADY_FINISHED_TASK__REJECTED__A_VERDICT_MUST_COME_FROM_THIS_RUN_NOT_A_REPLAYED_ONE",
+        "DOCUMENT_THE_BEHAVIOUR_IN_A_COMMENT_ONLY__REJECTED__TWO_SITES_ALREADY_DOCUMENT_IT_AND_BOTH_STILL_MISREAD_IT",
+        "MAKE_THE_CALLER_SUPPLY_A_FRESH_TASK_ID__REJECTED__PUSHES_THE_TRAP_ONTO_EVERY_FUTURE_CALLER_INSTEAD_OF_REMOVING_IT"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NO_SYNTHETIC_VERIFICATION__THE_TEST_RUNS_THE_REAL_CONTROLLER_TWICE_ON_ONE_task_id_AND_THE_NEGATIVE_CONTROL_REVERTS_astra_runtime_TO_PARENT_13a079c_WHERE_THE_SAME_TEST_GOES_TO_FAILED_failures_2_errors_1"
+    },
+    "real_outcome": "SEMANTIC_ACCEPTANCE_1_OF_23_TO_9_OF_23__THE_NINE_ARE_BENCH_TAR_GZ_CREATE_AND_VERIFY_BENCH_PDF_EXTRACT_TEXT_BENCH_SOURCE_AUDIT_WRITE_JSON_EXT_TAR_VERIFY_EXT_XLSX_CREATE_EXT_DOCX_VERIFY_EXT_EVIDENCE_RANK_EXT_AST_AUDIT_AND_EXT_DECISION_VERIFY__EACH_WITH_A_PER_STEP_REINSPECTION_LEDGER__THE_PDF_WAS_RE_EXTRACTED_AND_ITS_TEXT_SHA256_RECOMPUTED__THE_TAR_WAS_RE_OPENED_AND_ITS_MEMBERS_RELISTED__THE_XLSX_AND_DOCX_WERE_RE_OPENED_AS_OOXML_PACKAGES_AND_THEIR_ROW_COLUMN_PARAGRAPH_AND_TABLE_COUNTS_REPARSED__THE_4566_FILE_AST_LEDGER_WAS_REHASHED_FILE_BY_FILE__THE_400_RANKED_CANDIDATES_WERE_EACH_MATCHED_TO_THE_SHA256_OF_A_REAL_REPOSITORY_FILE__AND_THE_DECISION_CHAIN_HAD_ITS_INPUT_DIGEST_AND_SELECTED_ALTERNATIVE_RECONCILED_ACROSS_THREE_STEPS__TWO_GOALS_STILL_REFUSE_HONESTLY",
     "required_capability": "GENERIC_TRACE_GROUNDED_ACCEPTANCE_WITH_INDEPENDENT_ARTIFACT_REINSPECTION",
     "route_frontier": {
       "challenger_routes": [
@@ -202,7 +243,7 @@
             "BRAIN_INHERITED"
           ],
           "resolution": "SELECTED",
-          "route": "FILE_CONSUMING_CAPABILITY_NOT_ADMITTED_FOR_FILELESS_GOAL_V1_20261023_V1"
+          "route": "CONTROLLER_ALREADY_FINISHED_TASK_NOT_REPORTED_AS_PLAN_WITHOUT_FINISH_V1_20261023_V1"
         }
       ],
       "checked_at_utc": "2026-10-23T11:38:41Z",
@@ -242,7 +283,7 @@
         "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
         "BEFORE_SCARCE_GATE_SPEND"
       ],
-      "selected_route": "FILE_CONSUMING_CAPABILITY_NOT_ADMITTED_FOR_FILELESS_GOAL_V1_20261023_V1",
+      "selected_route": "CONTROLLER_ALREADY_FINISHED_TASK_NOT_REPORTED_AS_PLAN_WITHOUT_FINISH_V1_20261023_V1",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
         "checked_at_utc": "2026-10-23T11:38:41Z",
@@ -298,7 +339,7 @@
         "execution_dependencies_complete": true,
         "failed_dependencies": [],
         "max_age_hours": 2,
-        "selected_route": "FILE_CONSUMING_CAPABILITY_NOT_ADMITTED_FOR_FILELESS_GOAL_V1_20261023_V1",
+        "selected_route": "CONTROLLER_ALREADY_FINISHED_TASK_NOT_REPORTED_AS_PLAN_WITHOUT_FINISH_V1_20261023_V1",
         "status": "READY"
       },
       "source_classes_checked": [
