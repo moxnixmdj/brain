@@ -24536,7 +24536,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6324,
+  "research_index_records": 6325,
   "routing_tokens": 1798,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2d9a8e37b9077103fb0abede788dcd81474ce6f4ef995ec1435eae6e89896001"
+  "value": "52cd99e9cbf1523f2ad6d4f413e5ba3c4c5e753d66add8c6f15816e38b5164d3"
  },
  "engines": [
   {
@@ -189228,6 +189228,51 @@
     "reachability_from_one_entry_63_to_66__zero_input_capabilities_3_to_0": 1,
     "reachable": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "MEASUREMENT_DEPENDENCY_BLOCKED_NOT_ABORTED_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/MEASUREMENT_DEPENDENCY_BLOCKED_NOT_ABORTED_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/MEASUREMENT_DEPENDENCY_BLOCKED_NOT_ABORTED_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "3c651cd3a3963d8446d19364dc770d3dffb066bc10adb1fb5b3047d55ad4c637",
+   "status": "",
+   "terms": {
+    "20261023": 1,
+    "abandon": 1,
+    "aborted": 1,
+    "about": 1,
+    "adapters": 1,
+    "already": 1,
+    "anywhere": 1,
+    "appear": 1,
+    "before": 1,
+    "blocked": 1,
+    "both": 1,
+    "cannot": 1,
+    "columns": 1,
+    "data": 1,
+    "demanding": 1,
+    "dependency": 1,
+    "derived": 1,
+    "document": 1,
+    "either": 1,
+    "fact": 1,
+    "family": 2,
+    "file": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 1,
+    "had": 1,
+    "interpreter": 1,
+    "json": 1,
+    "looked": 1,
+    "measurement": 1,
+    "measurement_dependency_blocked_not_aborted_v1_20261023_v1": 2,
+    "source": 2,
+    "v1": 2
    }
   },
   {
