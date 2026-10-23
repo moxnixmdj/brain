@@ -22257,7 +22257,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
-    "source_sha256": "6dd9f5fe998ee80264a17a132445ecb0c6424b7a17e3e35f16c86da68f2372be",
+    "source_sha256": "37a23056de223710abaa1d534543c1cd8dc12bb87551bd9697e5c6751bdf2aab",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22346,7 +22346,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py",
-    "source_sha256": "e540731de956df9daa8431069dec9f9deac634254d826eeca5a1b3fadc17a777",
+    "source_sha256": "2d8d75fb1761d08c2e785f4994721c2af179603c52e6a88fc0521142b2ba8b57",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22433,7 +22433,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "5948576fd977c8a95c5eb6594f0b39bb9420651e021f9afd0d5253ed3bcafc31",
+    "source_sha256": "dd9d569efd41ddd07c534d21631e0de197f88655609bb99800789eb087c0d135",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24415,7 +24415,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "70d863f3e431c65b53102fb245825152bd13c35a21d602e7b74e5434b28f467b"
+  "value": "685cf9d879a19b974e6c0f05670dc727444a6578fe97bf3d8d1b04a20b05ed60"
  },
  "engines": [
   {
@@ -46317,7 +46317,7 @@
   "included_source_count": 863,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "2c0e8a1b15f7c1e24063037b6fd3a4e8c1609923dd6a7b010a0035ce0539d6c7"
+  "source_tree_digest": "4fe288e84c8db4a3966e3f1c940ef5e6e1f9829b2b5540f92c3c77744fea5297"
  },
  "research_index": [
   {

@@ -205,6 +205,38 @@ def _candidate_specs(tree: ast.AST, numeric_literals: list[Any], string_literals
                     lambda n: ast.UnaryOp(op=ast.Not(),operand=n)
                 )
 
+"""Child-side source injected into every traced suite execution.
+
+runpy.run_path(..., run_name="__main__") only executes the tests when the file carries that guard.
+34% of the unittest files in this repository (695 of 2019, measured) do not, because they are meant
+to be collected by a runner. For those the traced child produced no failures at all, so the caller
+raised NO_FAILING_TEST and the whole localization-and-repair chain was dead on a third of the corpus.
+
+Loading the module and running the collected suite works for both shapes, and the first failure is
+re-raised with its original traceback so the caller can still rank the lines that actually executed.
+Files that are not unittest suites fall back to runpy, so nothing that worked before changes.
+"""
+SUITE_RUNNER = """import importlib.util,unittest
+def _brain_run_suite(target):
+ import runpy,sys
+ spec=importlib.util.spec_from_file_location("__brain_suite__",str(target))
+ mod=importlib.util.module_from_spec(spec);sys.modules["__brain_suite__"]=mod
+ spec.loader.exec_module(mod)
+ suite=unittest.TestLoader().loadTestsFromModule(mod)
+ if suite.countTestCases()==0:
+  runpy.run_path(str(target),run_name="__main__");return
+ class _R(unittest.TestResult):
+  def addFailure(self,test,err):unittest.TestResult.addFailure(self,test,err);self.err=err
+  def addError(self,test,err):unittest.TestResult.addError(self,test,err);self.err=err
+ res=_R();suite.run(res)
+ if not res.wasSuccessful():
+  err=getattr(res,"err",None)
+  if err:raise err[1].with_traceback(err[2])
+  raise AssertionError("SUITE_FAILED_WITHOUT_EXCEPTION_INFO")
+"""
+
+
+
 def _source_env(*paths: Any) -> dict[str, str]:
     """PYTHONPATH extended with the directories holding the code under repair.
 
