@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d300ff6935ec621a0697cafc35ad9a5e419b9709df249326a0ef033990f37829"
+  "value": "f4c150cd7b93826aaa57eff8dd51276ea875e982c41cd79ea69ca1d7c6a97c0b"
  },
  "engines": [
   {
@@ -217499,9 +217499,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "bd68bbca87bfae771339a184911dcbf00718ee153f9646fe771f37b5f3ded88f",
+   "sha256": "a733979d40914805a2b4ab2ed7773e6dc03a708a06ed5875acfa61acd0e89137",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
-   "symbol_count": 56,
+   "symbol_count": 58,
    "symbols": [
     "_actions_of",
     "_after_key",
@@ -217525,13 +217525,12 @@
     "_kv_pairs",
     "_named_existing_paths",
     "_named_output_destinations",
-    "_number",
-    "_number_list"
+    "_named_receipt_projection",
+    "_number"
    ],
    "terms": {
     "after_key": 1,
     "alias_regex": 1,
-    "bind_path_by_type": 1,
     "bind_typed_key": 1,
     "blocked_zero_input_capabilities": 1,
     "bound": 1,
@@ -217552,7 +217551,7 @@
     "kv_pairs": 1,
     "layer": 1,
     "mouth": 1,
-    "named_output_destinations": 1,
+    "named_receipt_projection": 1,
     "naming_is_the_whole_request": 1,
     "normalize_goal": 1,
     "number": 1,
@@ -217561,6 +217560,7 @@
     "pair_list": 1,
     "parse_typed_value": 1,
     "quoted": 1,
+    "request_names_capability_id": 1,
     "routable_registry": 1,
     "scan_root_by_type": 1,
     "v1": 1

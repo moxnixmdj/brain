@@ -225,6 +225,52 @@ def is_plain_goal_routable(entry: Mapping[str, Any]) -> bool:
     return isinstance(template, dict) and bool(gc._placeholders(template))
 
 
+def _named_receipt_projection(text: str, admissible: Mapping[str, Mapping[str, Any]],
+                              selected: str | None) -> str | None:
+    """A receipt-projected capability the sentence NAMES but the scorer cannot see.
+
+    The pinned scorer skips anything whose status is not VERIFIED_BOUND_CAPABILITY,
+    so a receipt projection is structurally invisible to it -- that is the whole
+    reason F17 exists.  But F17 was only ever consulted when the pinned path had
+    FAILED, so a sentence that named a receipt projection outright still lost to
+    whatever bound capability the scorer happened to rank first.  Measured:
+    "Run the bytes active query task generator." selected
+    python.task.acceptance.measured.objective.v1 while naming
+    bytes_active_query_task_generator_v1 and binding nothing of its contract.
+
+    Scoped exactly as F17 is: receipt projections only.  The trigger is new, the
+    authority is not.
+    """
+    for cid, entry in (admissible or {}).items():
+        if cid == selected or not isinstance(entry, Mapping):
+            continue
+        if entry.get("capability_source") != "receipt_projection":
+            continue
+        if request_names_capability_id(text, cid):
+            return cid
+    return None
+
+
+def request_names_capability_id(text: str, cid: str) -> bool:
+    """Does the sentence name this capability, judging by its module name?
+
+    F29 already answers this for a module name; a capability id such as
+    ``canonical/runtime/bytes_active_query_task_generator_v1.py.auto.v1`` carries
+    that name as the stem before ``.py``.  Reusing the existing predicate rather
+    than writing a second notion of "named" is the point: one rule, one meaning.
+    """
+    try:
+        from canonical.runtime import capability_selection_retrieval_v1 as _sel
+        stem = str(cid or "").rsplit("/", 1)[-1].split(".py")[0]
+        if not stem or stem == cid:
+            # A dotted capability id is not a module name; judging it as one would
+            # match on ordinary English words inside the id.
+            return False
+        return bool(_sel.request_names_capability(text, stem))
+    except Exception:  # noqa: BLE001 - naming is evidence, never a reason to raise
+        return False
+
+
 def routable_registry(admissible: Mapping[str, Mapping[str, Any]]) -> dict[str, Mapping[str, Any]]:
     return {cid: entry for cid, entry in admissible.items() if isinstance(entry, Mapping) and is_plain_goal_routable(entry)}
 
@@ -1619,13 +1665,34 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
     selected = (compiled or {}).get("selected_capability") if compiled else None
     single_shape = bool(compiled) and compiled.get("compiler_mode") == "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH" and selected
 
+    # An explicit name outranks a scorer that could not see the thing named.
+    if single_shape:
+        _named = _named_receipt_projection(text, admissible, selected)
+        if _named is not None:
+            rules.append("F29_NAMED_RECEIPT_PROJECTION_CONSULTED")
+            retrieved = _retrieval_first_selection(text, admissible, root, rules)
+            if retrieved is not None and retrieved.get("selected_capability") == _named:
+                return retrieved
+
     if single_shape or compiled is None:
         future = _future_artifacts(text, root)
         # The pool a DECISION may come from.  A catch-all stays in `ranked` as a
         # competitor and in `registry` as a bindable entry, but it is never a
         # candidate this walk may return - that is the whole of F4, applied where
         # the decision is made instead of where the ranking is built.
-        selectable = [c for c in ranked if c[2] in decidable]
+        # F29 earns back what F4 withholds.  A zero-input tool declares no task,
+        # so no part of the sentence can evidence it -- unless the sentence NAMES
+        # it, which is precisely the one link F29 accepts for that shape of
+        # contract.  Measured: "Run the bytes active query task generator." names
+        # bytes_active_query_task_generator_v1 and still lost its route to
+        # python.task.acceptance.measured.objective.v1, because F4 had already
+        # taken the named capability out of the decidable set.  The converse is
+        # the same rule and it is what keeps "Run the thing." refused: a VERB is
+        # not a name, so a zero-input tool that is not named stays undecidable.
+        selectable = [
+            c for c in ranked
+            if c[2] in decidable or request_names_capability_id(text, c[2])
+        ]
         # F3: a goal that names a file to be produced is served by a tool that can write a file
         preferred = [c for c in selectable if _output_keys(registry[c[2]])] if future else []
         if future and preferred:
@@ -1693,6 +1760,19 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
                 if retrieved is not None:
                     return retrieved
                 detail = str(getattr(best_error, "detail", "")) if best_error is not None else "no_candidate_binds"
+                # F29: when the sentence stated NO contract anywhere and named no
+                # capability, the honest diagnosis is that nothing was named -- not
+                # the name of whatever candidate happened to rank first.  Measured:
+                # "Run the thing." was refused as
+                # GOAL_INPUT_BINDING_REQUIRED:shell.command.run:argv:not_stated,
+                # which blames a capability the request never mentioned.  A bound
+                # contract stays stronger evidence than a name, so this fires only
+                # when every candidate failed for want of a stated input.
+                if best_error is not None and _failure_is_unstated(best_error) \
+                        and not any(request_names_capability_id(text, cid) for cid in admissible):
+                    rules.append("F29_REQUEST_NAMED_NOTHING")
+                    raise GoalCompilationFailure("GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+                                                 best[2] + ":" + detail)
                 raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", best[2] + ":" + detail)
         if compiled is None:
             retrieved = _retrieval_first_selection(text, admissible, root, rules)
