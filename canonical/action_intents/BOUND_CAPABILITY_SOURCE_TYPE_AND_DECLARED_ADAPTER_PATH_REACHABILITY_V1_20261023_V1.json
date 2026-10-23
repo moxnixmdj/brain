@@ -80,14 +80,14 @@
   ],
   "recursive_obs": {
     "canonical_base_commit": "5a3a8d3d7318a9e5cde8f164ac78dd776be0300f",
-    "canonical_generation_or_commit": "5a3a8d3d7318a9e5cde8f164ac78dd776be0300f",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "EDITING_THE_SUBSTRATE_GATE_TO_HONOUR_OPTIONAL_AND_FALLBACK_WHICH_IS_A_PROTECTED_GUARD_PATH_AND_WOULD_HAVE_REQUIRED_ASSERTING_A_USER_GOVERNANCE_AUTHORIZATION_THAT_WAS_DELEGATED_RATHER_THAN_GRANTED",
       "DECLARING_PYTHON_STDLIB_FOR_A_CAPABILITY_WHOSE_ADAPTER_DOES_NOT_IN_FACT_FALL_BACK",
       "REMOVING_THE_HASH_PINNED_APT_CLAIM_FROM_ANY_OTHER_CAPABILITY",
       "WEAKENING_THE_STDLIB_PROBE_SO_A_MISSING_MODULE_COULD_PASS"
     ],
-    "expected_parent_level_state_change": "executable bound capabilities rises from 56 of 72 to 72 of 72: 16 entries previously refused with BOUND_CAPABILITY_SOURCE_UNSUPPORTED or BOUND_CAPABILITY_ADAPTER_MISSING now reach their adapters",
+    "expected_parent_level_state_change": "reachable bound capabilities rises from 56 of 72 to 72 of 72 with the learning path unchanged at 11 of 23 admitted and no accepted goal regressing",
     "iteration_limit": 4,
     "obs_blocker": {
       "delete_bypass_substitute_options": "REVERTING_THE_DECLARATION_RETURNS_THE_CAPABILITY_TO_A_SUBSTRATE_BLOCKER_ON_ANY_HOST_WITHOUT_THE_CLI_AND_RESTATES_A_PREFERENCE_AS_A_REQUIREMENT",
@@ -425,7 +425,7 @@
     ],
     "selected_route": "BOUND_CAPABILITY_SOURCE_TYPE_AND_DECLARED_ADAPTER_PATH_REACHABILITY_V1_20261023_V1",
     "selected_surviving_route": "BOUND_CAPABILITY_SOURCE_TYPE_AND_DECLARED_ADAPTER_PATH_REACHABILITY_V1_20261023_V1",
-    "stop_condition": "canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS and the 749-test dependent sweep adds no new failure beyond the recompiled artifact",
+    "stop_condition": "canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, canonical/tests/test_bound_capability_source_types_and_adapter_paths_v1.py reports 11 tests OK, python.software.repair.loop.strict_progress.ast.v1 executes end to end with output_verified true, and the learning path over the 23-goal corpus stays at 11 admitted with no new failure_class",
     "why_selected_route_is_fastest_sufficient": "IT_REUSES_THE_TRACE_THE_RUNTIME_ALREADY_EMITS_SO_ONE_VERIFIER_COVERS_EVERY_GOAL_THE_TEN_INSPECTORS_REACH_RATHER_THAN_ONE_SENTENCE_AT_A_TIME__AND_IT_WAS_MEASURED_TO_MOVE_THE_NUMBER_NINE_STEPS_IN_ONE_PASS_WITH_NO_REGRESSION_ON_COMPILE_SELECTION_OR_EXECUTION"
   },
   "route_id": "BOUND_CAPABILITY_SOURCE_TYPE_AND_DECLARED_ADAPTER_PATH_REACHABILITY_V1_20261023_V1",
