@@ -744,11 +744,16 @@ class PytestStyleSuiteTests(unittest.TestCase):
                 args["source_paths"] = [str(work / "calc.py")]
             else:
                 args["source_root"] = str(work)
+            # The call and the assertion are deliberately separated. Wrapping the assertion in
+            # try/except Exception swallows its own AssertionError, which makes the test unable to
+            # fail - repo_integrity_guard flags exactly this as ASSERTION_SWALLOWED.
+            result = None
             try:
-                r = runtime._invoke_bound_capability(args)
-                self.assertFalse(r.get("pass"), cid + " fabricated a repair for correct code")
+                result = runtime._invoke_bound_capability(args)
             except Exception:
-                pass  # refusing by exception is also a refusal
+                result = None  # refusing by raising is also a refusal
+            if result is not None:
+                self.assertFalse(result.get("pass"), cid + " fabricated a repair for correct code")
 
     def test_a_function_needing_an_argument_is_skipped_not_guessed(self):
         """A fixture-parameterised test must not be called with a fabricated argument."""
