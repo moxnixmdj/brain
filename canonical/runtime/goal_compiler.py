@@ -150,10 +150,26 @@ def _repo_paths(goal, root):
     # URL path components are not repository paths. Strip complete URLs before
     # scanning for repository-local artifacts.
     path_text=re.sub(r"https?://[^\s)\]}>]+"," ",str(goal or ""))
-    for raw in re.findall(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+",path_text):
-        raw=raw.rstrip(".,;:!?)]}")
-        p=(pathlib.Path(root)/raw).resolve()
-        rr=pathlib.Path(root).resolve()
+    rr=pathlib.Path(root).resolve()
+    for m in re.finditer(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+",path_text):
+        raw=m.group(0).rstrip(".,;:!?)]}")
+        # The pattern cannot match a leading "/", so an absolute path such as
+        # /home/user/brain/canonical/x.json is matched starting at "home/", and
+        # joining that onto the repository root silently doubles the prefix into
+        # /home/user/brain/home/user/brain/canonical/x.json -- a path that can
+        # never exist, so every path-dependent binding then fails closed.
+        # Reattach the separator and resolve it as absolute first, normalising to
+        # the repository-relative form the rest of the compiler expects.
+        start=m.start()
+        if start>0 and path_text[start-1]=="/":
+            ap=pathlib.Path("/"+raw).resolve()
+            if ap!=rr and rr in ap.parents:
+                try:
+                    candidates.append((str(ap.relative_to(rr)),ap))
+                except ValueError:
+                    pass
+                continue
+        p=(rr/raw).resolve()
         if p==rr or rr in p.parents:
             candidates.append((raw,p))
     return candidates
@@ -238,8 +254,34 @@ def _path_named_by_role(goal, stem, root):
         for raw,_p in candidates:
             if not raw:
                 continue
-            if tail.startswith(raw) or tail.startswith(str(raw).lstrip("/")):
-                return raw
+            # The goal may name the path in absolute form while the candidate is
+            # held repository-relative, so both spellings have to be tried.
+            for spelling in (raw, str(raw).lstrip("/"), str(_p)):
+                if spelling and tail.startswith(spelling):
+                    return raw
+    return None
+
+
+_OUTPUT_ROLE_VERBS=("save it to","save to","write it to","write to","store to","output to")
+
+
+def _path_named_after_output_verb(goal, root):
+    """Return the repository path the goal names as the destination, or None.
+
+    "save it to X" names X as the output whatever X happens to be called, and
+    whether or not an earlier run already created it.
+    """
+    candidates=_repo_paths(goal,root)
+    if not candidates:
+        return None
+    text=str(goal)
+    for verb in _OUTPUT_ROLE_VERBS:
+        for m in re.finditer(r"\b"+re.escape(verb)+r"\b",text,re.IGNORECASE):
+            tail=text[m.end():].lstrip(" \t:,;")
+            for raw,_p in candidates:
+                for spelling in (raw, str(raw).lstrip("/"), str(_p)):
+                    if spelling and tail.startswith(spelling):
+                        return raw
     return None
 
 
@@ -344,6 +386,16 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                     ]
                     if len(future_artifacts)==1:
                         result[key]=future_artifacts[0]
+                        continue
+                    # Non-existence is only a proxy for "this is the output".
+                    # On a replay the artifact the previous run wrote is already
+                    # on disk, so the proxy fails, _bind_inputs gives up, and a
+                    # goal that succeeded once can never be run again.  Fall back
+                    # to the role the sentence assigns: the path named after an
+                    # output verb is the destination whether or not it exists.
+                    verb_bound=_path_named_after_output_verb(goal,root)
+                    if verb_bound is not None:
+                        result[key]=verb_bound
                         continue
                 # Single-path fallback is safe only for an actual typed file,
                 # never for URL fragments or extensionless directory-like text.
