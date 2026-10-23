@@ -76,7 +76,7 @@
  "prior_work_reused": "canonical/runtime/bound_capabilities/xlsx_verify_openpyxl.py already contained _record_items, _candidate_collections, _select_collection and _status_value_from_records; all four are reused rather than reinvented, which is why the two families now resolve identically.",
  "recursive_obs": {
   "canonical_base_commit": "9ff97c8498239986e5def7924301cf6de79baea7",
-  "canonical_generation_or_commit": "9c113dc",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "EDITING_THE_SUBSTRATE_GATE_TO_HONOUR_OPTIONAL_AND_FALLBACK_WHICH_IS_A_PROTECTED_GUARD_PATH_AND_WOULD_HAVE_REQUIRED_ASSERTING_A_USER_GOVERNANCE_AUTHORIZATION_THAT_WAS_DELEGATED_RATHER_THAN_GRANTED",
    "DECLARING_PYTHON_STDLIB_FOR_A_CAPABILITY_WHOSE_ADAPTER_DOES_NOT_IN_FACT_FALL_BACK",
@@ -241,6 +241,38 @@
      ],
      "resolution": "SELECTED",
      "route": "SQLITE_SOURCE_SELECTED_BY_COLUMNS_NOT_BY_SENTENCE_V1_20261023_V1"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME_COVERAGE",
+      "CORRECTNESS": "SAME_COVERAGE",
+      "INCREMENTAL_COST": "SAME_COVERAGE",
+      "RELIABILITY": "SAME_COVERAGE",
+      "VERIFIABILITY": "SAME_COVERAGE",
+      "WALL_CLOCK": "SAME_COVERAGE"
+     },
+     "evidence": [
+      "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py -- _edit and _pool",
+      "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py -- _imports and _materialize",
+      "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py -- _defs_and_lines and _line_names",
+      "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py -- _static_calls",
+      "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- UnparseableNeighbourTests"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: on source_root=canonical the guided repair goes from SyntaxError to OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS, the coupled repair to OPEN__NO_VERIFIED_REPAIR_IN_STRICT_OR_COUPLED, and value provenance to PASS__BOUNDED_INTERPROCEDURAL_VALUE_PROVENANCE",
+      "DIRECT_PROBE: unguarded ast.parse sites over walked files in the family fall from seven to zero, verified by an awk scan of the previous-line context",
+      "DIRECT_PROBE: negative control reverting the four adapters makes the guided repair raise SyntaxError again on a PEP 695 neighbour",
+      "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, 41 benchmark tests and 161 tests across the thirteen affected suites all pass"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "SELECTED",
+     "route": "INPUT_BOUND_BY_SENTENCE_ROLE_NOT_BY_FILENAME_V1_20261023_V1",
+     "why_considered": "The typed-input binder matched a role key such as manifest_path by requiring the stem inside the path's own filename, so a real manifest named m9.json could not bind.",
+     "why_not_selected_or_selected": "SELECTED: consulted only after the stem match and the context path both came up empty, so it cannot move a binding that already succeeds, and it binds the role the sentence states."
     }
    ],
    "checked_at_utc": "2026-10-23T15:40:05Z",
@@ -280,7 +312,7 @@
     "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
     "BEFORE_SCARCE_GATE_SPEND"
    ],
-   "selected_route": "ROLE_FROM_SENTENCE_INPUT_BINDING_FALLBACK_V1",
+   "selected_route": "INPUT_BOUND_BY_SENTENCE_ROLE_NOT_BY_FILENAME_V1_20261023_V1",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
     "checked_at_utc": "2026-10-23T15:40:05Z",
@@ -336,7 +368,7 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "ROLE_FROM_SENTENCE_INPUT_BINDING_FALLBACK_V1",
+    "selected_route": "INPUT_BOUND_BY_SENTENCE_ROLE_NOT_BY_FILENAME_V1_20261023_V1",
     "status": "READY"
    },
    "source_classes_checked": [
@@ -422,16 +454,12 @@
   "tournament": {
    "counterexample_receipts": [
     {
-     "git_blob_sha": "9780dd329ab291455daed4b8f26702d799145b1d",
-     "path": "canonical/runtime/bound_capabilities/sqlite_verify_cli.py"
+     "git_blob_sha": "9c69ecdb13d5a569d0a516ab5f4667636e73e490",
+     "path": "canonical/runtime/goal_compiler.py"
     },
     {
-     "git_blob_sha": "d729d19ba5c0808273268426e7450f1db74a5c07",
-     "path": "canonical/runtime/bound_capabilities/sqlite_table_stdlib.py"
-    },
-    {
-     "git_blob_sha": "7f74241cbc689b42d7010a303088fa4a285720b9",
-     "path": "canonical/tests/test_fail_closed_reason_survives_to_the_blocker_v1.py"
+     "git_blob_sha": "f57eb88fdba9dd126372f2f673db1bac344893b6",
+     "path": "canonical/tests/test_live_brain_route_admission_v1.py"
     }
    ],
    "decisive_question": "WHEN_A_SEARCH_WALKS_A_TREE_IS_A_FILE_THE_INTERPRETER_CANNOT_PARSE_A_REASON_TO_ABANDON_THE_SEARCH_OR_A_FACT_ABOUT_THAT_ONE_FILE__AND_CAN_A_SYNTHETIC_BENCHMARK_EVER_REACH_THE_CASE",
