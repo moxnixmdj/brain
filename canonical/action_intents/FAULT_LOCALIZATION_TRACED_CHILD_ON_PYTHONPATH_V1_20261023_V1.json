@@ -1,0 +1,433 @@
+{
+  "action_id": "FAULT_LOCALIZATION_TRACED_CHILD_ON_PYTHONPATH_V1_20261023_V1",
+  "action_kind": "FRESH_REUSE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "canonical/tests/test_sqlite_verifier_declared_substrate.py",
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+      "canonical/unified_model/README.md"
+    ],
+    "route_class": "INTEGRATE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Auditing every bound adapter that spawns a subprocess found two more with the same defect class, one of which reported SUCCESS while producing nothing. python.fault.localize.dynamic.dataflow.v1 traces a suite in a child run with the repository root as working directory, and runpy.run_path does not put the target's own directory on sys.path the way running a script does, so a suite that imports the module it tests died on line 1 with ModuleNotFoundError. The capability still returned status=PASS__BOUNDED_DYNAMIC_FAULT_LOCALIZATION and pass=True with ranked_lines=[] ranked_symbols=[] and a single trace event on the import line - a false positive. python.fault.provenance.interprocedural.value.v1 had the identical shape. That empty ranking is why python.software.repair.guided.provenance.coupled.v1 reported GUIDANCE_EMPTY; the previous change recorded that as a missing-input precondition and left it out of the benchmark, which was wrong - the guidance was empty because its producer ranked nothing.",
+  "canonical_base_commit": "d1f097b6fc95089575a48da2effd036b58fd73e1",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "Auditing every bound adapter that spawns a subprocess found two more with the same defect class, one of which reported SUCCESS while producing nothing. python.fault.localize.dynamic.dataflow.v1 traces a suite in a child run with the repository root as working directory, and runpy.run_path does not put the target's own directory on sys.path the way running a script does, so a suite that imports the module it tests died on line 1 with ModuleNotFoundError. The capability still returned status=PASS__BOUNDED_DYNAMIC_FAULT_LOCALIZATION and pass=True with ranked_lines=[] ranked_symbols=[] and a single trace event on the import line - a false positive. python.fault.provenance.interprocedural.value.v1 had the identical shape. That empty ranking is why python.software.repair.guided.provenance.coupled.v1 reported GUIDANCE_EMPTY; the previous change recorded that as a missing-input precondition and left it out of the benchmark, which was wrong - the guidance was empty because its producer ranked nothing.",
+  "date": "2026-10-23",
+  "expected_parent_change": "capabilities in the Python software repair family that repair a seeded bug rises from 4 of 5 to 5 of 5, and the dynamic fault localizer goes from an empty ranking with a false PASS to naming the faulty function",
+  "expected_parent_frontier_change": "fault localization on a repository whose tests import the module under test now identifies the faulty symbol instead of silently returning nothing, which unblocks the provenance-guided repair that consumes it, and no bound adapter that spawns a traced child still reports success while ranking nothing",
+  "explicit_user_authorization": "Owner instruction this session 2026-10-21, verbatim: use all the capability in the Brain that you are supposed to use, plus all the data that you are supposed to use, plus thinking from the deepest layer from first principles, and the plan must make the goal real now, not fake, focus on hardcore software engineering. Standing instruction repeated five times: all of your problems I already solved in the brain or somewhere on the internet hidden as tools, so search the existing corpus and wire in what is already there instead of inventing new policy. This change does that and nothing more: the sibling create capability has always been declared python_stdlib:sqlite3 and has never been blocked, and the verifier's own entry already recorded that its package was optional with a python_stdlib fallback. An equivalent fix inside the substrate gate was built and measured first, and was deliberately NOT taken because astra_runtime.py is a protected guard path and the gate would have required asserting a user authorization the owner had delegated rather than granted. No external model, zero spend, fail closed, no protected path touched.",
+  "falsification_condition": "REVERTING_THE_FOUR_PATCHED_ADAPTERS_MUST_REPRODUCE_BOTH_OBSERVABLES__ranked_lines_EMPTY_WITH_status_PASS__BOUNDED_DYNAMIC_FAULT_LOCALIZATION_AND_pass_TRUE__AND_python.software.repair.guided.provenance.coupled.v1_RAISING_GUIDANCE_EMPTY__MEASURED_AND_PINNED_BY_LocalizationTests_AND_WholeFamilyTests_IN_canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py",
+  "governance_change": true,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "FAULT_LOCALIZATION_ON_A_REPOSITORY_WHOSE_TESTS_IMPORT_THE_MODULE_UNDER_TEST_GOES_FROM_AN_EMPTY_RANKING_REPORTED_AS_PASS_TO_NAMING_THE_FAULTY_SYMBOL__THE_PYTHON_SOFTWARE_REPAIR_FAMILY_GOES_FROM_4_OF_5_TO_5_OF_5__AND_NO_BOUND_ADAPTER_THAT_SPAWNS_A_TRACED_CHILD_STILL_REPORTS_SUCCESS_WHILE_RANKING_NOTHING__NO_ACCEPTED_GOAL_REGRESSES",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 1
+  },
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "python_test_guided_patch_search_v1._source_env -- the one implementation landed in the previous change; both localizers now delegate to it rather than adding a third copy",
+    "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py and python_interprocedural_value_provenance_v1.py -- the traced-child design is unchanged; only the environment it runs in changed",
+    "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- the seeded-bug benchmark, extended with LocalizationTests and with the guided capability added to WholeFamilyTests",
+    "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py and python_repository_acceptance_measurement_v1.py -- measured as already correct and left untouched"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "d1f097b6fc95089575a48da2effd036b58fd73e1",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "EDITING_THE_SUBSTRATE_GATE_TO_HONOUR_OPTIONAL_AND_FALLBACK_WHICH_IS_A_PROTECTED_GUARD_PATH_AND_WOULD_HAVE_REQUIRED_ASSERTING_A_USER_GOVERNANCE_AUTHORIZATION_THAT_WAS_DELEGATED_RATHER_THAN_GRANTED",
+      "DECLARING_PYTHON_STDLIB_FOR_A_CAPABILITY_WHOSE_ADAPTER_DOES_NOT_IN_FACT_FALL_BACK",
+      "REMOVING_THE_HASH_PINNED_APT_CLAIM_FROM_ANY_OTHER_CAPABILITY",
+      "WEAKENING_THE_STDLIB_PROBE_SO_A_MISSING_MODULE_COULD_PASS"
+    ],
+    "expected_parent_level_state_change": "fault localization on a repository whose tests import the module under test now identifies the faulty symbol instead of silently returning nothing, which unblocks the provenance-guided repair that consumes it, and no bound adapter that spawns a traced child still reports success while ranking nothing",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "REVERTING_THE_DECLARATION_RETURNS_THE_CAPABILITY_TO_A_SUBSTRATE_BLOCKER_ON_ANY_HOST_WITHOUT_THE_CLI_AND_RESTATES_A_PREFERENCE_AS_A_REQUIREMENT",
+      "intrinsic_or_path_specific": "PATH_SPECIFIC__ONE_REGISTRY_FIELD_DESCRIBED_A_PREFERRED_BINARY_AS_THOUGH_IT_WERE_REQUIRED_BY_AN_ADAPTER_THAT_ALREADY_WORKS_WITHOUT_IT",
+      "surviving_causal_blocker": "NONE_FOR_THE_SUBSTRATE__THE_GOAL_STILL_DOES_NOT_RUN_TO_COMPLETION_BECAUSE_THE_SENTENCE_NEVER_SAYS_WHICH_JSON_RECORDS_TO_VERIFY_AGAINST_AND_NO_RECEIPT_RECORDS_A_JSON_PATH_EITHER_SO_THE_ADAPTER_NOW_REPORTS_SQLITE_STATUS_VALUE_UNRESOLVED_WHICH_IS_THE_TRUE_GAP_AND_NOT_A_HOST_GAP"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "NO_NEW_CAPABILITY_NO_NEW_PLANNER_AND_NO_NEW_ADAPTER_WAS_WRITTEN",
+      "existing_inherited_routes_checked": "THE_CONTROLLER_TRACE_ALREADY_CARRIED_EVERY_ARGUMENT_AND_EVERY_PRODUCED_PATH__THE_OBLIGATION_ENVELOPE_ALREADY_EXISTED__THE_ARTIFACTS_WERE_ALREADY_ON_DISK",
+      "external_existing_routes_checked": "NO_EXTERNAL_ROUTE_IS_NEEDED__EVERY_INSPECTOR_IS_STDLIB_PLUS_THE_PYPDF_SUBSTRATE_THE_PDF_CAPABILITY_ALREADY_DECLARES",
+      "surviving_gap": "28_EFFECTS_REMAIN_REQUIRED_BUT_NEVER_PRODUCED_AND_295_REGISTRY_ENTRIES_REMAIN_RECEIPT_BACKED_PENDING_PROMOTION"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "RAISING_THE_COMPILED_COUNT",
+        "RAISING_THE_CORRECT_SELECTION_COUNT",
+        "RAISING_THE_COUNT_OF_GOALS_THAT_MERELY_EXECUTE"
+      ],
+      "real_outcome": "AN_EXECUTED_GOAL_MUST_BE_PROVEN_TO_HAVE_DONE_WHAT_THE_SENTENCE_ASKED_OR_IT_MUST_REFUSE",
+      "surviving_necessity": "A_RESULT_NOBODY_RE_INSPECTED_IS_A_CLAIM_NOT_A_MEASUREMENT__ELEVEN_GOALS_EXECUTE_AND_ONLY_ONE_WAS_PROVEN"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "THE_SENTENCE_SPECIFIC_ARCHIVE_VERIFIERS_STAY_AUTHORITATIVE_WHEN_THEY_ACCEPT_SO_THE_ALREADY_MERGED_ACCEPTED_GOAL_IS_UNTOUCHED",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "THE_TRACE_THE_ENVELOPE_THE_ARTIFACTS_AND_THE_CAPABILITY_SUBSTRATES_ARE_ALL_REUSED_UNMODIFIED"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "THE_TRACE_SHAPE_AND_ARTIFACT_SHAPE_CENSUS_OF_ALL_TEN_EXECUTING_GOALS_WAS_COMPUTED_ONCE_AND_DRIVES_THE_INSPECTOR_TABLE",
+      "search_stop_decision": "STOPPED_WHEN_NINE_OF_TWENTY_THREE_WERE_ACCEPTED_THE_TWO_REMAINING_EXECUTING_GOALS_REFUSED_FOR_A_MEASURED_UPSTREAM_REASON_AND_NEUTERING_THE_VERIFIER_TURNED_FIFTEEN_OF_TWENTY_TWO_TESTS_RED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "ONLY_RE_OPENING_THE_ARTIFACTS_THE_TRACE_ALREADY_NAMES_CLOSES_THE_GAP__A_SENTENCE_SPECIFIC_VERIFIER_PER_GOAL_WAS_MEASURED_AT_ONE_OF_TWENTY_THREE_AFTER_A_FULL_SESSION_OF_WORK__AND_TRUSTING_THE_VERIFIED_FLAG_WAS_MEASURED_TO_ACCEPT_A_GOAL_WHOSE_OWN_PRODUCER_SAYD_OUTPUT_VERIFIED_FALSE",
+      "routes_ranked": [
+        "RE_INSPECT_THE_ARTIFACTS_THE_CONTROLLER_TRACE_ALREADY_NAMES_AND_REFUSE_ANY_CAPABILITY_WITH_NO_INSPECTOR",
+        "WRITE_ONE_SENTENCE_SPECIFIC_VERIFIER_PER_GOAL__DISQUALIFIED_MEASURED_ONE_OF_TWENTY_THREE_AFTER_A_FULL_SESSION_AND_IT_SCALES_WITH_SENTENCES_NOT_WITH_CAPABILITIES",
+        "TRUST_THE_PRODUCERS_VERIFIED_FLAG__DISQUALIFIED_MEASURED_TO_ACCEPT_TWO_GOALS_WHOSE_PRODUCER_REPORTED_OUTPUT_VERIFIED_FALSE",
+        "LEAVE_ACCEPTANCE_UNREACHABLE__DISQUALIFIED_TEN_EXECUTED_GOALS_REMAIN_UNPROVEN_CLAIMS"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NO_SYNTHETIC_VERIFICATION__EVERY_ACCEPTANCE_COMES_FROM_A_REAL_RUN_WHOSE_ARTIFACT_IS_RE_OPENED_FROM_DISK__AND_THE_NEGATIVE_CONTROLS_TAKE_A_REAL_TRACE_AND_BREAK_EXACTLY_ONE_THING_ABOUT_IT"
+    },
+    "real_outcome": "SEMANTIC_ACCEPTANCE_1_OF_23_TO_9_OF_23__THE_NINE_ARE_BENCH_TAR_GZ_CREATE_AND_VERIFY_BENCH_PDF_EXTRACT_TEXT_BENCH_SOURCE_AUDIT_WRITE_JSON_EXT_TAR_VERIFY_EXT_XLSX_CREATE_EXT_DOCX_VERIFY_EXT_EVIDENCE_RANK_EXT_AST_AUDIT_AND_EXT_DECISION_VERIFY__EACH_WITH_A_PER_STEP_REINSPECTION_LEDGER__THE_PDF_WAS_RE_EXTRACTED_AND_ITS_TEXT_SHA256_RECOMPUTED__THE_TAR_WAS_RE_OPENED_AND_ITS_MEMBERS_RELISTED__THE_XLSX_AND_DOCX_WERE_RE_OPENED_AS_OOXML_PACKAGES_AND_THEIR_ROW_COLUMN_PARAGRAPH_AND_TABLE_COUNTS_REPARSED__THE_4566_FILE_AST_LEDGER_WAS_REHASHED_FILE_BY_FILE__THE_400_RANKED_CANDIDATES_WERE_EACH_MATCHED_TO_THE_SHA256_OF_A_REAL_REPOSITORY_FILE__AND_THE_DECISION_CHAIN_HAD_ITS_INPUT_DIGEST_AND_SELECTED_ALTERNATIVE_RECONCILED_ACROSS_THREE_STEPS__TWO_GOALS_STILL_REFUSE_HONESTLY",
+    "required_capability": "GENERIC_TRACE_GROUNDED_ACCEPTANCE_WITH_INDEPENDENT_ARTIFACT_REINSPECTION",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SAME_EMPTY_TO_RANKED_OUTCOME",
+            "CORRECTNESS": "ALSO_FIXES_THE_IMPORT",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "WORSE_IT_SILENTLY_CHANGES_RELATIVE_PATH_RESOLUTION_FOR_EVERY_PROGRAM_BEING_TRACED",
+            "VERIFIABILITY": "HARDER_TO_PIN_THEN_THE_IMPORT_AND_THEN_THE_CWD_ARE_CONFOUNDED",
+            "WALL_CLOCK": "IDENTICAL"
+          },
+          "evidence": [
+            "the child would then resolve a sibling import without any environment change"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: the child also receives repo, test and max_events as argv and filters every traceback frame with repo in parents, so changing cwd does not change those absolute paths but does change how every relative path in the traced program resolves",
+            "The previous change already rejected this route for the same reason and pinned it with a test"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "NON_DOMINATING",
+          "route": "CHANGE_THE_TRACED_CHILD_WORKING_DIRECTORY_TO_THE_SOURCE_ROOT"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "4_OF_5_NOT_5_OF_5",
+            "CORRECTNESS": "MORE_HONEST_BUT_NOT_MORE_CAPABLE",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "TRADES_A_FALSE_POSITIVE_FOR_A_FALSE_NEGATIVE",
+            "VERIFIABILITY": "A_REFUSAL_IS_EASY_TO_PIN_BUT_PROVES_NOTHING_ABOUT_THE_CAUSE",
+            "WALL_CLOCK": "IDENTICAL"
+          },
+          "evidence": [
+            "a false positive is the worst outcome, so refusing would at least be honest"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: an empty ranking is legitimate for a genuinely unlocalizable fault, so this would convert a real result into a refusal in that case",
+            "DIRECT_PROBE: it does not repair the localization, so the guided repair would go from GUIDANCE_EMPTY to a hard failure - downstream capability would still be 4 of 5"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "MAKE_THE_LOCALIZER_FAIL_INSTEAD_OF_REPORTING_PASS_WITH_AN_EMPTY_RANKING"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "4_OF_5_TO_5_OF_5_AND_FAULT_LOCALIZATION_ON_SUCH_REPOSITORIES_GOES_FROM_NOTHING_TO_THE_FAULTY_SYMBOL",
+            "CORRECTNESS": "FAIL_CLOSED_PRESERVED_THE_LOCALIZER_STILL_REPORTS_ONLY_WHAT_IT_TRACED_AND_THE_REPAIR_STILL_REQUIRES_A_VERIFIED_REPLAY",
+            "INCREMENTAL_COST": "ZERO_MONETARY_ZERO_NEW_DEPENDENCY_ZERO_MODEL_DEPENDENT",
+            "RELIABILITY": "REUSES_THE_ONE_EXISTING_IMPLEMENTATION_RATHER_THAN_ADDING_A_THIRD_COPY_SO_NOTHING_CAN_DRIFT",
+            "VERIFIABILITY": "16_BENCHMARK_TESTS_INCLUDING_A_CONTROL_THAT_REPRODUCES_THE_EXACT_FALSE_POSITIVE_BYTES",
+            "WALL_CLOCK": "ONE_DICT_MERGE_PER_CHILD_NO_EXTRA_PROCESS_NO_EXTRA_TRACE_EVENTS"
+          },
+          "evidence": [
+            "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py -- _source_env delegation and env threaded through _trace_one",
+            "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py -- same",
+            "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py -- _run_candidate and its three call sites",
+            "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py -- four cross-module call sites",
+            "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- LocalizationTests"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: family repair rate 4 of 5 before, 5 of 5 after, measured through the bound path on one seeded bug",
+            "DIRECT_PROBE: localizer ranked_lines goes from [] to calc.py:1 ochiai 1.0 reason FAIL_ONLY_EXECUTION, ranked_symbols names add, trace events 1 to 7, traceback line 1 to line 7",
+            "DIRECT_PROBE: precise negative control reverting all four adapters reproduces ranked_lines=[] with pass=True and GUIDANCE_EMPTY",
+            "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS and 118 tests across the seven affected suites all pass"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "SELECTED",
+          "route": "FAULT_LOCALIZATION_TRACED_CHILD_ON_PYTHONPATH_V1_20261023_V1"
+        }
+      ],
+      "checked_at_utc": "2026-10-23T09:21:27Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "TRACED_CHILD_INHERITS_THE_REPOSITORY_ROOT_AND_RUNPY_PATH_RUNS_THE_SUITE_THERE",
+      "max_age_hours": 24,
+      "negative_search_summary": "The asymmetry between running a script and runpy.run_path is documented in CPython rather than fixed by any package, and no standalone project owns it (GitHub total_count 0). The live challengers were therefore to change the traced child's working directory instead, to make the localizer fail loudly when its ranking is empty rather than fix the import, or to leave it and treat GUIDANCE_EMPTY downstream as a precondition.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "runpy run_path sys.path script directory"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "pytest-pythonpath"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "subprocess env PYTHONPATH"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "shared test runner helper python"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "FAULT_LOCALIZATION_TRACED_CHILD_ON_PYTHONPATH_V1_20261023_V1",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-10-23T09:21:27Z",
+        "execution_dependencies": [
+          {
+            "dependency": "python3 3.11.2 at /usr/bin/python3",
+            "evidence": [
+              "DIRECT_PROBE: the localizer's own dependency block reports python_version 3.11.2"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
+            "evidence": [
+              "present; its pre-existing suite passes; loaded by the guided repair as _LOC"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "canonical/runtime/verify_brain_unified_model_v1.py",
+            "evidence": [
+              "reports TOTAL 33/33 PASS at model digest a536e40c105fbc8723faf8faa729cfb0abe7ad14ed155aa65c03ed754a5cbf3f"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "INDEPENDENT_VERIFIER"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "FAULT_LOCALIZATION_TRACED_CHILD_ON_PYTHONPATH_V1_20261023_V1",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "measured by audit: grep over canonical/runtime/bound_capabilities/*.py found 25 subprocess call sites; only the traced children of the two localizers still ran a Python suite with an inherited working directory",
+          "measured: python_repository_acceptance_measurement_v1 copies the source into a workspace and runs with cwd=workspace, and python_software_repair_loop_v1 runs the test file as a script so sys.path[0] is already the source directory; both were left untouched rather than changed on suspicion",
+          "measured: after the fix the localizer ranks calc.py/add at ochiai 1.0 reason FAIL_ONLY_EXECUTION and the traceback reaches line 7, versus ranked_lines=[] and one event on line 1 before"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://api.github.com/search/repositories?q=shared%20test%20runner%20helper%20python -- total_count 0; this is a runner responsibility, not a standalone project"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://pypi.org/pypi/pytest-pythonpath/json -- pytest-pythonpath 0.7.4, sha256 e73e11dab2f0b83e7322...; the published fix owns the import path in one place, the runner, not per call site"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://api.github.com/repos/python/cpython/contents/Lib/subprocess.py -- git blob 466f2c10a2c3d4dd, 101818 bytes; env= gives a child a different environment while leaving cwd alone",
+          "https://docs.python.org/3/library/runpy.html -- runpy.run_path executes a script in a temporary module namespace; unlike running a file, it does not prepend the script's directory to sys.path, which is the asymmetry that caused the defect"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "RE_OPEN_THE_ARTIFACTS_THE_TRACE_ALREADY_NAMES_AND_REFUSE_ANY_CAPABILITY_WITH_NO_INSPECTOR",
+      "WRITE_ONE_SENTENCE_SPECIFIC_VERIFIER_PER_GOAL__REJECTED_MEASURED_ONE_OF_TWENTY_THREE_AND_LINEAR_IN_SENTENCES",
+      "TRUST_THE_PRODUCERS_VERIFIED_FLAG__REJECTED_MEASURED_TO_ACCEPT_TWO_GOALS_THE_PRODUCER_SAID_WERE_UNVERIFIED",
+      "COMPARE_ENUMERATED_CANDIDATE_COUNT_TO_A_FRESH_GLOB__REJECTED_MEASURED_400_CLAIMED_AGAINST_2192_REAL_FILES_SO_THE_CAP_WOULD_LOOK_LIKE_A_LIE",
+      "REQUIRE_THE_TRACE_CAPABILITY_SEQUENCE_TO_EQUAL_THE_PLAN_CHAIN__REJECTED_MEASURED_THE_PLAN_AND_TRACE_ORDERS_LEGITIMATELY_DIFFER_WHEN_A_PREREQUISITE_PRODUCER_IS_INSERTED"
+    ],
+    "selected_route": "FAULT_LOCALIZATION_TRACED_CHILD_ON_PYTHONPATH_V1_20261023_V1",
+    "selected_surviving_route": "FAULT_LOCALIZATION_TRACED_CHILD_ON_PYTHONPATH_V1_20261023_V1",
+    "stop_condition": "canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, all five invocable capabilities in the Python software repair family repair the seeded bug, the localizer ranks the faulty symbol rather than reporting PASS with an empty ranking, and the seven affected suites all pass",
+    "why_selected_route_is_fastest_sufficient": "IT_REUSES_THE_TRACE_THE_RUNTIME_ALREADY_EMITS_SO_ONE_VERIFIER_COVERS_EVERY_GOAL_THE_TEN_INSPECTORS_REACH_RATHER_THAN_ONE_SENTENCE_AT_A_TIME__AND_IT_WAS_MEASURED_TO_MOVE_THE_NUMBER_NINE_STEPS_IN_ONE_PASS_WITH_NO_REGRESSION_ON_COMPILE_SELECTION_OR_EXECUTION"
+  },
+  "route_id": "FAULT_LOCALIZATION_TRACED_CHILD_ON_PYTHONPATH_V1_20261023_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "FAULT_LOCALIZATION_TRACED_CHILD_ON_PYTHONPATH_V1_20261023_V1",
+  "stop_condition": "canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, all five invocable capabilities in the Python software repair family repair the seeded bug, the localizer ranks the faulty symbol rather than reporting PASS with an empty ranking, and the seven affected suites all pass",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": true,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__TEST_ONLY_COVERAGE_OF_AN_EXISTING_VERIFIED_EXECUTION_PATH_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "9a3cd924bd7cdaf6918c6072aebc7c344a69324e",
+          "path": "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py"
+        },
+        {
+          "git_blob_sha": "7e9a0201b89b5d2edf4647c868858288fd1a9820",
+          "path": "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py"
+        },
+        {
+          "git_blob_sha": "ab626e85d9075a4c0d3490e2774ac9fb6d2ccdfd",
+          "path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py"
+        },
+        {
+          "git_blob_sha": "0b779992f229dbe27f665a8f68c89cbb5a39fc28",
+          "path": "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py"
+        },
+        {
+          "git_blob_sha": "2477035283a2a384034bfb32e615754e1549c1ed",
+          "path": "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py"
+        }
+      ],
+      "decisive_question": "IS_A_CAPABILITY_THAT_REPORTS_PASS_WITH_AN_EMPTY_RESULT_EVER_AN_ACCEPTABLE_OUTCOME__AND_WHEN_A_DOWNSTREAM_CONSUMER_REPORTS_ITS_INPUT_IS_EMPTY_IS_THAT_A_PRECONDITION_OR_IS_THE_PRODUCER_BROKEN",
+      "falsifier_id": "THE_FOUR_ADAPTER_REVERT_AND_THE_LOCALIZATION_BENCHMARK",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "FIRST_ATTEMPT_COMPARED_THE_ENUMERATED_CANDIDATE_COUNT_TO_A_FRESH_GLOB_AND_MEASURED_400_CLAIMED_AGAINST_2192_REAL_FILES_SO_A_CORRECT_TRUNCATED_ENUMERATION_LOOKED_LIKE_A_LIE__CORRECTED_BY_MATCHING_EVERY_CANDIDATE_SHA256_TO_A_REAL_FILE_AND_REPORTING_THE_TRUNCATION_HONESTLY__SECOND_ATTEMPT_DIGESTED_THE_DECISION_INPUT_AS_RAW_BYTES_AND_REFUSED_AN_HONEST_PRODUCER_WHICH_DIGESTS_THE_PARSED_CONTENT__CORRECTED_TO_THE_CANONICAL_JSON_DIGEST_AND_LOCKED_BY_TEST",
+      "proposal_id": "FAULT_LOCALIZATION_TRACED_CHILD_ON_PYTHONPATH_V1_20261023_V1"
+    }
+  },
+  "weakens_existing_guard": false
+}
