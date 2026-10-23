@@ -23772,7 +23772,7 @@
     "source_executable": null,
     "source_module": "sqlite3",
     "source_path": "canonical/runtime/bound_capabilities/sqlite_table_stdlib.py",
-    "source_sha256": "d3d6d6d32563ed31deaa48d5a42f70dc058901e21522e488a96c43e58b350d4f",
+    "source_sha256": "290f786fb4e36ec680cc9f1eca157732009a69c4a40dab56819e1d2346b8fcd0",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -23841,7 +23841,7 @@
     "source_executable": null,
     "source_module": "sqlite3",
     "source_path": "canonical/runtime/bound_capabilities/sqlite_verify_cli.py",
-    "source_sha256": "974f0361f7b42843913308bd1b6e814137a5b40bbec80400d5d23dc519bd2bb3",
+    "source_sha256": "c67c70439629a3568abbc2db8759719b430169b3ebdad4e8c141b8fad7c7b3fc",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "193b83ed191855db1ea0d27905097ba2555a2bb8a9e95dfd166f4ee7321d7b2a"
+  "value": "f0e42f31bc69de95c083678d20e9cf2400beaba68e1bdae69959e1f092cf8e9d"
  },
  "engines": [
   {
@@ -46494,7 +46494,7 @@
   "included_source_count": 865,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "8657c2e5c9cc5b0289acd5f221029a45a7bfc913ebc2f63f2e58c08c17940b84"
+  "source_tree_digest": "16360ebfc0ec92cbbd9ed47412833d9c4e5eb323efae73a36047f562c664916d"
  },
  "research_index": [
   {
