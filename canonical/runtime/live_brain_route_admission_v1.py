@@ -419,7 +419,17 @@ LOCAL_EXECUTION_PROOF = "FRONT_LAYER_LOCAL_ADAPTER_EXECUTION_V1"
 
 
 def kernel_refuses(entry: Mapping[str, Any]) -> bool:
-    """True when the pinned kernel would raise BOUND_CAPABILITY_SOURCE_UNSUPPORTED for this entry."""
+    """True when this entry carries a source type THIS ENTRY executes locally rather than delegating.
+
+    Historically these were exactly the types the pinned kernel refused with
+    BOUND_CAPABILITY_SOURCE_UNSUPPORTED, and E1 below was written as the bridge over that gap.  The
+    kernel now resolves all five of them itself (see ``astra_runtime.LOCAL_SOURCE_BASE_TYPE``), so
+    this predicate no longer describes a kernel limitation -- it names the set this entry keeps on
+    its own pinned, measured local path.  Kept deliberately: E1's local execution is the path the
+    29/29 family measurement was taken on, and moving these to the kernel is a separate, separately
+    measured decision.  ``astra_runtime.LOCAL_SOURCE_BASE_TYPE`` is the authority on what the
+    kernel supports; this set is the authority on what this entry runs itself.
+    """
     source = entry.get("source") if isinstance(entry.get("source"), Mapping) else {}
     return str(source.get("type") or "") in KERNEL_UNSUPPORTED_SOURCE_TYPES
 
