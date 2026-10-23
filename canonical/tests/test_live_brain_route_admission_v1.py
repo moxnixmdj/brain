@@ -461,6 +461,54 @@ def test_the_written_bytes_are_what_was_asked_for_not_what_was_convenient():
     assert "alpha" in out.read_text(encoding="utf-8"), repr(out.read_text(encoding="utf-8"))
 
 
+def test_no_registry_entry_is_left_without_proof():
+    """For the first time this holds: every entry in the bound registry carries
+    VERIFIED_BOUND_CAPABILITY status.  Two entries used to sit there with no
+    status, no verification and no source at all -- an unverified claim in the one
+    place the machine trusts.  This is the invariant that keeps it from drifting
+    back, and it fails loudly on the entry that regresses."""
+    caps = json.loads((ROOT / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json")
+                      .read_text(encoding="utf-8"))["capabilities"]
+    assert caps, "registry must not be empty"
+    unproven = sorted(k for k, v in caps.items()
+                      if v.get("status") != "VERIFIED_BOUND_CAPABILITY")
+    assert unproven == [], unproven
+    # Proof means an evidence block, not just a status string.  Four evidence
+    # schemes coexist here and all count: mission/receipt (41 entries), CI
+    # workflow with a verifier merge sha, exact replay counts, and recorded blob
+    # shas.  Naming any one marker would have been false for the others --
+    # measured: mission_id is absent from 31 entries and receipt_path from 8.
+    # What holds for all 72, and did not before this change, is that no entry
+    # carries an empty or missing verification block.
+    for cid, v in sorted(caps.items()):
+        ver = v.get("verification")
+        assert isinstance(ver, dict) and ver, (cid, "no verification block")
+
+
+def test_shell_command_run_is_verified_by_evidence_not_by_assertion():
+    """The last entry to carry no proof.  Checkable here rather than trusted: a
+    frozen mission, a receipt on disk, and an independently computed digest that
+    equals both the adapter's report and the digest of the payload the argv was
+    asked to write."""
+    caps = json.loads((ROOT / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json")
+                      .read_text(encoding="utf-8"))["capabilities"]
+    entry = caps["shell.command.run"]
+    assert entry["status"] == "VERIFIED_BOUND_CAPABILITY", entry.get("status")
+    v = entry["verification"]
+    assert v["independent_verified"] is True, v
+    assert re.fullmatch(r"[0-9a-f]{64}", v["independent_output_sha256"]), v
+    mission = ROOT / "canonical/astra_runtime/missions/ASTRA_VERIFY_SHELL_COMMAND_RUN_001.json"
+    receipt = ROOT / v["verification_result_path"]
+    assert mission.is_file() and receipt.is_file(), (mission, receipt)
+    doc = json.loads(receipt.read_text(encoding="utf-8"))
+    assert doc["independent_output_sha256"] == v["independent_output_sha256"], doc
+    assert doc["independent_output_bytes"] == v["independent_output_bytes"], doc
+    assert doc["adapter_result"]["returncode"] == 0, doc["adapter_result"]
+    # the adapter ran a real process: it recorded the argv it was given
+    assert doc["adapter_result"]["argv"], doc["adapter_result"]
+    assert doc["semantic_roundtrip"]["implementation_independent"] is True, doc
+
+
 def test_solve_still_executes_a_real_goal():
     manifest = WORK / "manifest2.json"
     src = WORK / "s2.txt"

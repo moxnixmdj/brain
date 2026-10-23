@@ -1,0 +1,57 @@
+{
+  "capability_id": "shell.command.run",
+  "effect": "shell.command.result",
+  "goal": "Execute a given argv and prove the artifact it produced is the artifact that was asked for.",
+  "origin_mission_id": "ASTRA-VERIFY-SHELL-COMMAND-RUN-001",
+  "origin_mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_SHELL_COMMAND_RUN_001.json",
+  "origin_mission_sha256_at_acquisition": "203756ead2db9271c40c76a696fef9974176db3e0446ffc347a5e0515307707e",
+  "origin_mission_sha256_verified_at_promotion": "203756ead2db9271c40c76a696fef9974176db3e0446ffc347a5e0515307707e",
+  "registry_entry": {
+    "action_template": {
+      "args": {
+        "argv": "${input.argv}",
+        "output_path": "${input.output_path}"
+      },
+      "expect": {
+        "field": "returncode",
+        "type": "field_equals",
+        "value": 0
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "cli_command",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "shell",
+      "command",
+      "exec",
+      "run",
+      "terminal",
+      "bash",
+      "process",
+      "environment",
+      "probe",
+      "cli"
+    ],
+    "limitations": [
+      "Runs with cwd pinned to the repository root.",
+      "Timeout clamped to 1-300 seconds.",
+      "Argv limited to 64 non-empty string elements.",
+      "Non-zero exit raises rather than returning."
+    ],
+    "provides": [
+      "shell.command.result"
+    ],
+    "requires": [],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/cli_command.py",
+      "type": "python_stdlib"
+    }
+  },
+  "schema": "PROJECT_BRAIN_PENDING_AUTO_BINDING_V1",
+  "status": "PROMOTED_VERIFIED",
+  "verification_mission_id": "ASTRA-AUTO-VERIFY-SHELL-COMMAND-RUN-001",
+  "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-AUTO-VERIFY-SHELL-COMMAND-RUN-001__shell.command.run__AUTO_VERIFY.json"
+}
