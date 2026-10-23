@@ -24406,7 +24406,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6305,
+  "research_index_records": 6306,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 404,
@@ -24415,7 +24415,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "4a3eb06a0acbe24dfea1c5a0f5fee276d9027aafe4db5d77601bf5d8a3415e89"
+  "value": "b6b818cd84c6f4c67fc0f441612a4894cae6b6ddfe14352835a7300c950e14d1"
  },
  "engines": [
   {
@@ -188065,6 +188065,51 @@
     "sentence": 1,
     "tie": 1,
     "two_measured_defects_stood_between_the_front_door_and_bench_markdown_to_decision__first_the_chained_grounded_pass_tied_decision_synthesis_verify_stdlib_against_decision_synthesis_typed_stdlib_at_score_14_and_specificity_1_and_raised_goal_compilation_ambiguous_so_the_chained_plan_was_none__second_with_no_chained_plan_the_compiler_kept_the_world_bound_document_convert_markdown_pdf_pandoc_weasyprint_at_score_25_which_filled_markdown_path_with_agents_md_a_file_the_sentence_never_mentioned_and_offered_a_pdf_conversion_nobody_asked_for__measured_front_door_selection_21_of_23_and_acceptance_11_of_23": 1,
+    "v1": 2
+   }
+  },
+  {
+   "action_id": "DERIVED_TEST_COMMAND_LINE_RUNS_VIA_LOADER_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/DERIVED_TEST_COMMAND_LINE_RUNS_VIA_LOADER_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/DERIVED_TEST_COMMAND_LINE_RUNS_VIA_LOADER_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "3fffd6546499b62f2c22ebeef2ab8f33c8999e458a37fceab5efef7c08f5e1ea",
+   "status": "",
+   "terms": {
+    "2019": 1,
+    "20261023": 1,
+    "34": 1,
+    "695": 1,
+    "actually": 1,
+    "adapters": 1,
+    "any": 1,
+    "baseline_already_passes": 3,
+    "because": 1,
+    "before": 1,
+    "bill": 1,
+    "bug": 1,
+    "built": 1,
+    "capability": 1,
+    "command": 3,
+    "derived": 2,
+    "derived_test_command_line_runs_via_loader_v1_20261023_v1": 2,
+    "executes": 2,
+    "file": 3,
+    "line": 3,
+    "measured": 2,
+    "not": 2,
+    "nothing": 2,
+    "one": 3,
+    "python": 2,
+    "repair": 3,
+    "run": 2,
+    "seven": 2,
+    "suite": 3,
+    "test": 4,
+    "than": 2,
     "v1": 2
    }
   },
