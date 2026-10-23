@@ -22257,7 +22257,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
-    "source_sha256": "37a23056de223710abaa1d534543c1cd8dc12bb87551bd9697e5c6751bdf2aab",
+    "source_sha256": "ca327e0782fca640161eeb39a265d0e01d6a6f53b105fc8eed2d05dcf7d676d8",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22346,7 +22346,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py",
-    "source_sha256": "2d8d75fb1761d08c2e785f4994721c2af179603c52e6a88fc0521142b2ba8b57",
+    "source_sha256": "d191b5149837d4dd615dbdfc9cd332249218def83436fe9dc9c4ed0cca7820b5",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22688,7 +22688,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
-    "source_sha256": "33e3d79d6fb5f92bac84706da92331624eff3147939382e9034dab39bf4310ef",
+    "source_sha256": "3a6cfe12f9dc3606d36d4bc8cd0660da89db2e549b26e62aec4cbb51c4ceb58b",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22868,7 +22868,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py",
-    "source_sha256": "05742806d7f16a156ddb44dabfb237f6342b6db39b337b8ca5e8d98fd5adbce7",
+    "source_sha256": "e3a41d1021f167e34f9a3fe2128bebb793a28e4ebb28e34f1a298036dfee3220",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -24416,7 +24416,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "5ef7ba54d497e4bb17b4d04d45bb8206cd0c1e2875c5bb0060a090c61fbb26ae"
+  "value": "98ee335aef3e1c892a6a6fcf1f6dc3a79e3035f88ce33fba0b7a800878a62f6e"
  },
  "engines": [
   {
@@ -46318,7 +46318,7 @@
   "included_source_count": 863,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "a3877ff12c7ee50cf96050983c0dbe3b147621c0d5225f2bb028f64ae5c9d6a5"
+  "source_tree_digest": "25e34f92d7493bad10981d3d2be502b02225c0f2c4727509094d66cf2f273d20"
  },
  "research_index": [
   {

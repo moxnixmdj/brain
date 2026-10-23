@@ -61,7 +61,13 @@ print("__BRAIN_TRACE__"+json.dumps({"pass":ok,"events":[[a,b,c,n] for (a,b,c),n 
  if not lines: raise FaultLocalizerError("TRACE_OUTPUT_MISSING")
  out=json.loads(lines[-1][len(marker):]);out["returncode"]=r.returncode;return out
 def _defs_and_lines(path):
- tree=ast.parse(path.read_text(encoding="utf-8"),filename=str(path));out=[]
+  # A file under source_root may be third-party and use syntax this interpreter cannot parse
+  # (PEP 695 type aliases need 3.12). Such a file cannot be a repair candidate or a
+  # localization target, so it contributes nothing - it must not abort the whole search,
+  # which is the defect python_test_audit documents for timeouts one layer down.
+ try:tree=ast.parse(path.read_text(encoding="utf-8"),filename=str(path))
+ except (SyntaxError,ValueError,UnicodeDecodeError):return []
+ out=[]
  for n in ast.walk(tree):
   if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef,ast.ClassDef)):
    a=getattr(n,"lineno",0);b=getattr(n,"end_lineno",a)
@@ -74,7 +80,9 @@ def _defs_and_lines(path):
    out.append({"name":n.name,"kind":type(n).__name__,"lineno":a,"end_lineno":b,"names":sorted(names),"defs":defs})
  return out
 def _line_names(path):
- tree=ast.parse(path.read_text(encoding="utf-8"),filename=str(path));m={}
+ try:tree=ast.parse(path.read_text(encoding="utf-8"),filename=str(path))
+ except (SyntaxError,ValueError,UnicodeDecodeError):return {}
+ m={}
  for n in ast.walk(tree):
   line=getattr(n,"lineno",None)
   if line is None:continue

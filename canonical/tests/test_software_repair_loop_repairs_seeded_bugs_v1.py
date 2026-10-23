@@ -768,5 +768,82 @@ class PytestStyleSuiteTests(unittest.TestCase):
         self.assertEqual(r.get("error_count"), 0, "skipping must not be recorded as an error")
 
 
+PEP695 = "from typing import Literal\n\ntype ReasoningEffort = Literal[\"none\", \"low\", \"high\"]\n"
+
+
+class UnparseableNeighbourTests(unittest.TestCase):
+    """One file under source_root that this interpreter cannot parse must not abort the search.
+
+    Found by pointing the repair capabilities at a real red test in this repository with
+    source_root=canonical. The tree contains a vendored third-party file,
+    canonical/capabilities/internalized/professional_work/stirrup_247f24d/src/stirrup/clients/
+    litellm_client.py, whose line 47 is a PEP 695 type alias. That syntax needs Python 3.12 and this
+    interpreter is 3.11.2, so ast.parse raises SyntaxError - on a file that has nothing to do with
+    the repair target. Seven ast.parse sites in four adapters were unguarded, and one of them
+    aborted the whole capability:
+
+      python.software.repair.guided.provenance.coupled.v1 -> SyntaxError: invalid syntax
+                                                             (litellm_client.py, line 47)
+
+    A file that cannot be parsed cannot be a repair candidate or a localization target, so it now
+    contributes nothing. That is the rule python_test_audit already documents for timeouts: one bad
+    file is a fact about that file, not a reason to abandon the run.
+    """
+
+    @classmethod
+    def tearDownClass(cls):
+        shutil.rmtree(WORK_ROOT, ignore_errors=True)
+
+    def _seed_with_unparseable_neighbour(self, name):
+        d = WORK_ROOT / name
+        if d.exists():
+            shutil.rmtree(d)
+        (d / "vendor").mkdir(parents=True)
+        (d / "calc.py").write_text(CASES[0][1], encoding="utf-8")
+        (d / "test_calc.py").write_text(CASES[0][2] + GUARD, encoding="utf-8")
+        (d / "vendor" / "third_party.py").write_text(PEP695, encoding="utf-8")
+        return d
+
+    def test_the_pep695_fixture_really_is_unparseable_here(self):
+        """Otherwise this whole class would pass vacuously on a newer interpreter."""
+        import ast as _ast
+        import sys as _sys
+
+        if _sys.version_info >= (3, 12):
+            self.skipTest("PEP 695 parses on this interpreter; the guard is not exercised")
+        with self.assertRaises(SyntaxError):
+            _ast.parse(PEP695)
+
+    def test_the_guided_repair_completes_instead_of_crashing(self):
+        work = self._seed_with_unparseable_neighbour("unparseable_guided")
+        r = runtime._invoke_bound_capability({
+            "capability_id": "python.software.repair.guided.provenance.coupled.v1",
+            "source_root": str(work), "test_paths": [str(work / "test_calc.py")],
+            "test_argv": ["python3", "-m", "unittest", str(work / "test_calc.py")],
+            "output_path": str(work / "o.json"), "timeout_s": 45})
+        self.assertTrue(r.get("pass"), "the repair must still work: " + str(r.get("status")))
+
+    def test_the_localizer_and_provenance_still_rank_past_an_unparseable_neighbour(self):
+        work = self._seed_with_unparseable_neighbour("unparseable_loc")
+        r = runtime._invoke_bound_capability({
+            "capability_id": "python.fault.localize.dynamic.dataflow.v1",
+            "source_root": str(work), "test_paths": [str(work / "test_calc.py")],
+            "output_path": str(work / "l.json"), "timeout_s": 45})
+        self.assertTrue(r.get("ranked_symbols"), "localization must survive: " + repr(r))
+        self.assertEqual(r["ranked_symbols"][0]["symbol"], "add")
+        paths = [s["path"] for s in r["ranked_symbols"]]
+        self.assertFalse(any("third_party" in p for p in paths), paths)
+
+    def test_the_unparseable_file_is_never_offered_as_a_repair_target(self):
+        work = self._seed_with_unparseable_neighbour("unparseable_target")
+        r = runtime._invoke_bound_capability({
+            "capability_id": "python.software.repair.loop.coupled.ast.v1",
+            "source_root": str(work), "test_paths": [str(work / "test_calc.py")],
+            "test_argv": ["python3", "-m", "unittest", str(work / "test_calc.py")],
+            "output_path": str(work / "o.json"), "timeout_s": 45})
+        for patch in (r.get("patches") or []):
+            self.assertNotIn("third_party", str(patch.get("source_path")), patch)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
