@@ -139,6 +139,11 @@ _QUOTED_LITERAL = re.compile(r"\"[^\"\n]*\"|'[^'\n]*'|“[^”\n]*”|‘[^’\n
 
 # natural aliases for registry input keys (key -> phrases that may name it in a sentence)
 _KEY_ALIASES: dict[str, tuple[str, ...]] = {
+    # An output has no type of its own, so its role can only come from the sentence.
+    "output_path": ("result to", "results to", "save to", "save it to", "write to",
+                    "output to", "store to", "report to"),
+    "output_file": ("result to", "results to", "save to", "save it to", "write to",
+                    "output to", "store to", "report to"),
     "jq_filter": ("jq filter", "jq_filter", "jq expression", "filter"),
     "expression": ("expression", "formula"),
     "variables": ("variables", "with variables", "where"),
@@ -603,6 +608,59 @@ def _bind_path_by_type(goal: str, key: str, root: pathlib.Path, exclude=None):
     raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":" + str(len(matching)) + "_type_compatible_existing_files_named")
 
 
+def _named_output_destinations(
+    goal: str, entry: Mapping[str, Any], keys: Any, root: pathlib.Path
+) -> set[str]:
+    """The paths this sentence explicitly introduces as a DESTINATION of this capability.
+
+    F7 binds an output only when the named file does not exist yet, on the sound rule that a
+    file already on disk may belong to somebody else.  But when the named destination DOES
+    exist - a re-run of the same request, or an artifact an earlier test left in a shared
+    scratch directory - F7 declines it, the step spools elsewhere, and the sentence's own
+    destination is left unclaimed.  The input binder then finds it: a named, type-compatible,
+    existing file that nothing has taken.  Measured, that is a phantom second candidate, and
+    it turns an explicitly stated input into a refusal:
+
+        BINDING_REFUSED:json_path:2_type_compatible_existing_files_named
+        matching = ['.../x.json', '.../x_out.json']
+
+    for the sentence "read x.json and save the result to x_out.json", where x_out.json exists.
+    The sentence never offered x_out.json as a source; it named it as the destination.
+
+    Identification is by ROLE, not by type.  A generic output_path carries no type of its own,
+    so filtering by suffix swept in every named path including the real input - measured, that
+    broke the binding outright.  The sentence states the role in the words immediately before
+    the path ("save the result to <file>"), and _role_anchored already reads exactly that for
+    input roles; outputs simply had no phrases in the alias table, so _role_phrases returned
+    [] and no destination could ever be recognised.  When no path is role-anchored this
+    returns nothing and every binder behaves exactly as before.
+
+    This only ever REMOVES candidates from input binding.  The one case it can newly refuse is
+    a sentence that names the same path as both the source and the destination, which is a
+    self-overwrite and should be refused.
+    """
+    named: set[str] = set()
+    for key in (keys or []):
+        key = str(key)
+        if not key.endswith("_path") or not _is_output_key(key, entry):
+            continue
+        phrases = _role_phrases(key)
+        if not phrases:
+            continue
+        for raw, _path in gc._repo_paths(goal, root):
+            # Every mention, not just the first.  _role_anchored judges the text before the
+            # occurrence it finds, so a path the sentence mentions twice - once as the source
+            # and once as the destination - would be judged only at its first mention and the
+            # destination role would be missed entirely.
+            index = str(goal or "").find(raw)
+            while index >= 0:
+                if _role_anchored(goal, raw, phrases, index=index):
+                    named.add(raw)
+                    break
+                index = str(goal or "").find(raw, index + 1)
+    return named
+
+
 def _bind_output_by_future(goal: str, key: str, root: pathlib.Path, exclude=None):
     """F7: an output named in the sentence is a file that does not exist yet.
 
@@ -704,10 +762,18 @@ def _role_phrases(key: str) -> list[str]:
     return phrases
 
 
-def _role_anchored(goal: str, raw: str, phrases) -> bool:
-    """True when the sentence introduces this path with one of ``phrases`` right before it."""
+def _role_anchored(goal: str, raw: str, phrases, index: int | None = None) -> bool:
+    """True when the sentence introduces this path with one of ``phrases`` right before it.
+
+    ``index`` pins WHICH mention to judge.  Without it the first occurrence decides, which is
+    right for a path named once and wrong for a path named twice: in "read x.json and save
+    the result to x.json" the first mention carries the source role and the second carries
+    the destination role, so a caller asking about the destination must be able to point at
+    the second.  Default None keeps every existing caller's behaviour exactly.
+    """
     text = str(goal or "")
-    index = text.find(raw)
+    if index is None:
+        index = text.find(raw)
     if index < 0:
         return False
     before = text[:index]
@@ -913,10 +979,10 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
             try:
                 inputs[key] = _bind_produced_artifact(goal, key, root, produced_paths)
             except GoalCompilationFailure:
-                inputs[key] = _bind_path_by_type(goal, key, root, exclude=_excluded(produced_paths, taken))
+                inputs[key] = _bind_path_by_type(goal, key, root, exclude=_excluded(produced_paths, taken) | _named_output_destinations(goal, entry, keys, root))
         else:
             try:
-                inputs[key] = _bind_path_by_type(goal, key, root, exclude=_excluded(produced_paths, taken))
+                inputs[key] = _bind_path_by_type(goal, key, root, exclude=_excluded(produced_paths, taken) | _named_output_destinations(goal, entry, keys, root))
             except GoalCompilationFailure as type_failure:
                 if not produced_paths:
                     raise
