@@ -404,11 +404,29 @@ class StagedRetrievalTests(_Store, unittest.TestCase):
 # Composition now closes "write the text hello to out.txt" outright, so
 # it is no longer a gap. This one is still genuinely impossible here:
 # nothing on this machine can open a pdf.
-GAP_GOAL = "extract text from a pdf file"
+# A goal nothing here can do, so the gap path is really exercised.
+#
+# This was the PDF-extraction sentence.  It stopped being impossible: pdf.extract.text.pypdf
+# carries a receipt on disk whose mission digest matches, so the verified-capability adapter
+# now admits it and the goal reaches route admission instead of failing to compile.  The
+# machine got more capable; the test's premise went stale.  setUpClass below now checks the
+# premise rather than letting three assertions fail on a status string.
+GAP_GOAL = "transcribe the audio in this recording to text"
 
 
 @requires_network
 class LivePathRealTests(_Store, unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        """Check that the gap goal really is a gap before asserting anything about it."""
+        from canonical.runtime import live_brain_route_admission_v1 as ra
+        import uuid
+        r = ra.solve({"task_id": uuid.uuid4().hex, "goal": GAP_GOAL})
+        if r.get("status") != "FAIL__RAW_GOAL_COMPILATION_GAP":
+            raise unittest.SkipTest(
+                "GAP_GOAL is no longer a compilation gap, so this class cannot exercise the "
+                "retrieval path: goal=%r status=%s" % (GAP_GOAL, r.get("status")))
+
     def test_a_real_gap_triggers_real_retrieval(self):
         from canonical.runtime import live_brain_route_admission_v1 as ra
 
@@ -460,7 +478,13 @@ class LivePathRealTests(_Store, unittest.TestCase):
     def test_a_goal_that_compiles_does_not_go_looking(self):
         from canonical.runtime import live_brain_route_admission_v1 as ra
 
-        r = ra.solve_or_learn({"task_id": "t", "goal": "run shell command echo hello"})
+        # Was the shell-echo sentence.  shell.command.run is one of only two registry entries
+        # with no VERIFIED_BOUND_CAPABILITY status and no verification receipt, so it cannot be
+        # promoted without forging the registry's one proof; the goal never compiles.  The
+        # subject of this test is that a compiling goal does not go looking, so any goal that
+        # really compiles serves -- this one does, against archive.verify.tar_gz.gnu.
+        r = ra.solve_or_learn({"task_id": "t",
+                               "goal": "Verify a tar.gz archive against its manifest"})
         self.assertTrue(r.get("pass") is True, r.get("status"))
         self.assertNotIn("learning", r)
 
