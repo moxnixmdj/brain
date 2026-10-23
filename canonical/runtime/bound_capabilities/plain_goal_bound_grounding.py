@@ -348,7 +348,8 @@ def _constraints(clause):
 
 def ground(
     goal,registry,max_candidates_per_clause=8,*,
-    compiler=None,proposal_binder=None,root=None,enforce_bindability=False
+    compiler=None,proposal_binder=None,root=None,enforce_bindability=False,
+    output_destination=None
 ):
     if not isinstance(registry,dict):
         raise GroundingError("REGISTRY_INVALID")
@@ -392,7 +393,8 @@ def ground(
         if enforce_bindability and ranked:
             ranked,rejected_unbindable,bound_inputs=_admit_bindable_candidates(
                 text,index,ranked,registry,compiler,proposal_binder,root,
-                provider_slots,prior_paths,
+                provider_slots,
+                list(prior_paths)+([str(output_destination)] if output_destination else []),
                 [str(x.get("text") or "") for x in clauses[index+1:]],
             )
 
@@ -472,8 +474,15 @@ def ground(
             if str(x) not in prior_paths
         )
 
-    grounded=[x for x in records if x["status"]!="UNRESOLVED"]
-    unresolved=[x["index"] for x in records if x["status"]=="UNRESOLVED"]
+    # A clause the producer itself labelled UNBOUND_INPUTS_NOT_GROUNDED is NOT grounded: the
+    # label exists precisely because a candidate was found whose proposed bindings do not
+    # cover its declared inputs, so the call cannot be made.  Counting it as grounded merely
+    # because its status is "not UNRESOLVED" reported grounded_clause_count 1 for a clause the
+    # same record called not grounded - a success verdict for work that cannot be done, which
+    # is exactly what this capability's independent verifier exists to catch.
+    _GROUNDED_STATUSES={"GROUNDED","AMBIGUOUS_BOUNDED"}
+    grounded=[x for x in records if x["status"] in _GROUNDED_STATUSES]
+    unresolved=[x["index"] for x in records if x["status"] not in _GROUNDED_STATUSES]
     canonical_goal=" ".join(str(goal or "").strip().split())
     broad=None
     if records and not grounded and unresolved==list(range(len(records))):
@@ -523,6 +532,31 @@ def run(args,root):
         enforce_bindability=True,
     )
     output_path=args.get("output_path")
+    # A capability that writes a report needs somewhere to write it, and the sentence is not
+    # where that comes from - the caller already named an output area when it asked for this
+    # grounding report.  Measured, that omission alone rejected all 20 candidates ranked for
+    # "Audit the Python tests with unittest and report passed failed and skipped counts.", 15
+    # of them on output_path, while the report still read output_verified: true and
+    # grounded_clause_count: 0.  The sibling is derived in the SAME directory the caller
+    # chose, so nothing is invented outside the area the caller declared, and it is recorded
+    # in the artifact rather than applied silently.
+    declared_output_destination=None
+    if output_path:
+        _op=pathlib.PurePosixPath(str(output_path))
+        declared_output_destination=str(
+            _op.with_name(_op.stem+"_candidate_output"+(_op.suffix or ".json"))
+        )
+        result=ground(
+            goal,registry,
+            compiler=compiler,
+            proposal_binder=proposal_binder,
+            root=root,
+            enforce_bindability=True,
+            output_destination=declared_output_destination,
+        )
+        # Recorded, not silent: the artifact states which destination was offered to the
+        # bindability gate, so a reader can tell a grounded clause from an invented one.
+        result["declared_output_destination"]=declared_output_destination
     if output_path:
         path=(root/str(output_path)).resolve()
         if path==root or root not in path.parents:

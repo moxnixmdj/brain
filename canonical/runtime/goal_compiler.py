@@ -320,6 +320,31 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                 if wanted is None and len(paths)==1 and pathlib.Path(paths[0][0]).suffix:
                     result[key]=paths[0][0]
                     continue
+                # An output destination the CALLER declared, offered through context_paths.
+                # The input branch below has always consulted context_paths; the output branch
+                # never did, so a caller that supplied an output area could bind a source from
+                # it but never a destination.  Measured, that left every one of the 20 candidates
+                # a grounding pass ranked for "Audit the Python tests with unittest and report
+                # passed failed and skipped counts." rejected, 15 of them on output_path alone,
+                # while the grounding report still read output_verified: true.
+                #
+                # Deliberately narrower than deriving a destination out of nothing, which was
+                # measured to drop expected_first_selected from 22 of 23 to 12 of 23: inventing a
+                # path makes every report writer bindable, so more candidates enter ranking and
+                # the wrong one wins.  Nothing is invented here - the caller has to have handed a
+                # path over - and exactly one type-compatible path has to be on offer, or this
+                # refuses exactly as it always did.  capability_selection_retrieval_v1.select
+                # calls the front binder with context_paths=None, so selection cannot see this.
+                offered=[str(x) for x in (context_paths or []) if pathlib.Path(str(x)).suffix]
+                if wanted is not None:
+                    offered=[
+                        x for x in offered
+                        if pathlib.Path(x).suffix.lower() in wanted
+                        or "".join(pathlib.Path(x).suffixes[-2:]).lower() in wanted
+                    ]
+                if len(offered)==1:
+                    result[key]=offered[0]
+                    continue
             else:
                 existing=[(raw,p) for raw,p in paths if p.is_file()]
                 matching=[raw for raw,p in existing if (not stem or stem in p.suffix.lower() or stem in raw.lower())]
