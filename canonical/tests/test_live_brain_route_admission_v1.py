@@ -54,12 +54,18 @@ def teardown_module(_module=None):
 def test_path_token_only_match_is_rejected_before_execution():
     goal = "Translate the sentence 'good morning' into French and save it to canonical/astra_runtime/tmp/test_live_brain_route_admission/fr.txt."
     compiled = _compile(goal)
-    assert compiled.get("selected_capability") == "terminal.kstar.root.assess.stdlib"  # the measured fail-open route
+    # Nothing here can translate, so the compiler fails open and picks *something*; R1 must
+    # catch it.  Which wrong capability wins is not the subject of this test, and it moves as
+    # the corpus grows -- asserting the property keeps the test about the thing it is about.
+    assert compiled.get("selected_capability"), "expected the compiler to fail open here"
     verdict = adm.route_admission(goal, compiled, _registry())
     assert verdict["admitted"] is False
     assert verdict["rule"] == "R1_PATH_TOKENS_ONLY"
     assert verdict["semantic_matched_tokens"] == []
-    assert "runtime" in verdict["matched_from_paths_only"]
+    # The match came only out of a repository path, never from the goal's meaning.  Which token
+    # it was ("runtime", "live") is a property of whichever capability the compiler happened to
+    # pick, so pinning it re-introduces exactly the fragility removed two lines up.
+    assert verdict["matched_from_paths_only"], verdict
 
 
 def test_future_artifact_with_tool_that_cannot_write_is_rejected():
@@ -126,17 +132,27 @@ def test_solve_fails_closed_on_out_of_scope_goal_and_writes_nothing():
     assert result["pass"] is False
     # with zero-input tools blocked from plain goals (F4) nothing can match; before F4 the same
     # goal reached admission and was rejected there - both are fail-closed with nothing written
-    assert result["status"] == "FAIL__RAW_GOAL_COMPILATION_GAP"
-    assert result["compiler_code"] == "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+    #
+    # The comment above always described two acceptable outcomes but the assertion pinned one,
+    # so the test went red the moment the goal moved to the other side of the same boundary.
+    # What must hold is that it fails closed, executes nothing, spends nothing and writes
+    # nothing -- the four assertions below that, not which gate caught it.
+    assert result["status"] in {"FAIL__RAW_GOAL_COMPILATION_GAP",
+                                "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED"}, result["status"]
     assert result["executed"] is False
     assert result["incremental_spend_usd"] == 0
     assert not out.exists()
 
 
-def test_compiler_fallback_to_a_zero_input_tool_is_refused():
-    """When the right tool cannot bind its inputs (manifest file not named *manifest*), the
-    compiler silently falls through to the next scored candidate - here the zero-input
-    catch-all - instead of failing closed.  The guard must refuse that route."""
+def test_a_manifest_not_named_manifest_now_binds_by_the_role_the_sentence_gives_it():
+    """This used to assert a defect: a manifest not named *manifest* could not bind, so the
+    compiler silently fell through to a zero-input catch-all and the guard had to refuse it.
+
+    The defect is closed.  ``_bind_inputs`` now falls back to the role the sentence assigns --
+    "the manifest X" names X as the manifest whatever X is called -- so this exact goal binds
+    ``archive.tar_gz.create_from_manifest`` with the manifest and the output as two different
+    paths.  Asserting the fixed behaviour turns a characterization of a known gap into a
+    regression guard for the fix."""
     manifest = WORK / "m9.json"
     src = WORK / "s9.txt"
     src.write_bytes(b"fallback")
@@ -144,10 +160,14 @@ def test_compiler_fallback_to_a_zero_input_tool_is_refused():
     goal = ("Create a tar.gz archive from the manifest canonical/astra_runtime/tmp/test_live_brain_route_admission/m9.json, "
             "including all its verification_paths files, and save it to canonical/astra_runtime/tmp/test_live_brain_route_admission/bundle9.tar.gz.")
     compiled = _compile(goal)
-    assert compiled.get("selected_capability") == "terminal.kstar.root.assess.stdlib"
+    assert compiled.get("selected_capability") == "archive.tar_gz.create_from_manifest"
+    inputs = compiled.get("inputs") or {}
+    # the manifest and the archive are different files; binding both to the output was the bug
+    assert inputs.get("manifest_path", "").endswith("/m9.json"), inputs
+    assert inputs.get("output_path", "").endswith("/bundle9.tar.gz"), inputs
+    assert inputs.get("manifest_path") != inputs.get("output_path"), inputs
     verdict = adm.route_admission(goal, compiled, _registry())
-    assert verdict["admitted"] is False
-    assert verdict["rule"] in {"R1_PATH_TOKENS_ONLY", "R2_OUTPUT_ARTIFACT_UNSERVED"}
+    assert verdict["admitted"] is True, verdict
 
 
 def test_solve_still_executes_a_real_goal():
