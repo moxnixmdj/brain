@@ -24407,7 +24407,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6317,
+  "research_index_records": 6318,
   "routing_tokens": 1785,
   "skills": 18,
   "source_index_entry_points": 405,
@@ -24416,7 +24416,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e3da1a3cafc6296138aa868a643e369402ff7af3075954197e715b76cce54204"
+  "value": "0d343e139d18762d78ce7705c67aef9c0168730a223a491a144094f569102a19"
  },
  "engines": [
   {
@@ -189732,6 +189732,51 @@
    }
   },
   {
+   "action_id": "SOURCE_ROOT_BOUND_FROM_THE_SENTENCE_ROLE_V1_20261023_V1",
+   "capability": false,
+   "date": "2026-10-23",
+   "id": "research:canonical/action_intents/SOURCE_ROOT_BOUND_FROM_THE_SENTENCE_ROLE_V1_20261023_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SOURCE_ROOT_BOUND_FROM_THE_SENTENCE_ROLE_V1_20261023_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "50b7b2a582d00b0be9fe65b67e37d37c44e58e08a5399adc716bace6a8fda07f",
+   "status": "",
+   "terms": {
+    "20261023": 1,
+    "abandon": 1,
+    "about": 1,
+    "adapters": 1,
+    "already": 1,
+    "anywhere": 1,
+    "appear": 1,
+    "before": 1,
+    "both": 1,
+    "bound": 1,
+    "cannot": 1,
+    "columns": 1,
+    "data": 1,
+    "demanding": 1,
+    "derived": 1,
+    "document": 1,
+    "either": 1,
+    "fact": 1,
+    "family": 2,
+    "file": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 1,
+    "had": 1,
+    "interpreter": 1,
+    "json": 1,
+    "looked": 1,
+    "mixed-vendor": 1,
+    "needs": 1,
+    "sentence": 2,
+    "source": 3,
+    "source_root_bound_from_the_sentence_role_v1_20261023_v1": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "SQLITE_SOURCE_SELECTED_BY_COLUMNS_NOT_BY_SENTENCE_V1_20261023_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -216660,7 +216705,7 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "34ed18bb016cafb9e6133688fc319b9bd5589ad776fe70042a8d9fbd416ed4dc",
+   "sha256": "238321766270dae967afbcd2026469220873bbdd5825843f0fa3da70ca40d544",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
    "symbol_count": 115,
    "symbols": [

@@ -232,6 +232,45 @@ def test_the_same_goal_runs_three_times_in_a_row():
     assert statuses == [True, True, True], statuses
 
 
+def test_a_source_root_key_binds_from_the_goal():
+    """The binder only ever handled *_path, so a capability whose input is
+    source_root could never be bound and always lost the ranking.  Measured:
+    "Audit the python source file X with an AST" selected a semantic-behaviour
+    compiler scoring 15, while python.source.audit.ast scored 35 and was skipped
+    because it raised GOAL_INPUT_BINDING_REQUIRED:source_root.
+
+    A goal that names one file names the root that file lives under."""
+    out = WORK / "auditroot.json"
+    if out.exists():
+        out.unlink()
+    goal = ("Audit the python source file canonical/runtime/goal_compiler.py with an AST "
+            "and write the audit to "
+            "canonical/astra_runtime/tmp/test_live_brain_route_admission/auditroot.json.")
+    compiled = _compile(goal)
+    assert compiled.get("selected_capability") == "python.source.audit.ast", compiled
+    inputs = compiled.get("inputs") or {}
+    assert inputs.get("source_root") == "canonical/runtime", inputs
+    assert inputs.get("output_path", "").endswith("/auditroot.json"), inputs
+
+
+def test_the_highest_scoring_capability_is_not_skipped_for_an_unbindable_key():
+    """The real defect behind the one above, asserted directly: the capability the
+    goal describes must outscore the one that merely binds.  If source_root ever
+    becomes unbindable again this fails on the score, naming the cause."""
+    goal = ("Audit the python source file canonical/runtime/goal_compiler.py with an AST "
+            "and write the audit to "
+            "canonical/astra_runtime/tmp/test_live_brain_route_admission/auditroot2.json.")
+    registry = _registry()
+    audit = registry["python.source.audit.ast"]
+    rival = registry["python.software.request.semantic_behavior.compile.v1"]
+    s_audit = goal_compiler._score(goal, "python.source.audit.ast", audit)[0]
+    s_rival = goal_compiler._score(goal, "python.software.request.semantic_behavior.compile.v1", rival)[0]
+    assert s_audit > s_rival, (s_audit, s_rival)
+    # and it must actually bind, which is the only reason it ever lost
+    bound = goal_compiler._bind_inputs(goal, ROOT, audit)
+    assert bound.get("source_root"), bound
+
+
 def test_solve_still_executes_a_real_goal():
     manifest = WORK / "manifest2.json"
     src = WORK / "s2.txt"
