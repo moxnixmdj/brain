@@ -215,7 +215,18 @@ def test_solve_executes_a_multi_step_dag_and_forwards_the_artifact():
     assert result["status"] == "PASS__CAPABILITY_DAG_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED"
     assert result["route_admission"]["admitted"] is True
     assert result["selected_plan"] == ["archive.tar_gz.create_from_manifest", "archive.verify.tar_gz.gnu"]
-    assert result["capability_dag"]["executor"] == adm.DAG_KERNEL_EXECUTOR
+    # The local runner is tried FIRST and returned whenever it passes; the pinned
+    # kernel is the fallback, reached only when local fails.  That ordering is the
+    # module's repeated shape -- the single-capability path in _execute() does the
+    # same -- and kernel_refuses() says so outright: "E1's local execution is the
+    # path the 29/29 family measurement was taken on, and moving these to the kernel
+    # is a separate, separately measured decision."  dag_executor() states a
+    # NECESSARY condition for the kernel ("used only when it accepts every step's
+    # source type"), not a sufficient one.  This assertion used to demand the kernel
+    # and read that docstring as kernel-primary; both are kept, so the decision
+    # function and the executor that actually ran are each pinned.
+    assert adm.dag_executor(_compile(goal), _registry()) == adm.DAG_KERNEL_EXECUTOR
+    assert result["capability_dag"]["executor"] == adm.DAG_LOCAL_EXECUTOR
     assert [row["cycle"] for row in result["execution"]] == [0, 1]
     assert all(row["pass"] is True for row in result["execution"])
     assert result["execution"][1]["plan_action"]["args"]["archive_path"] == {"$result": {"cycle": 0, "field": "output_path"}}
@@ -257,7 +268,18 @@ def test_solve_runs_a_kernel_refused_step_in_the_local_dag_runner():
         result = adm.solve({"task_id": task_id, "goal": goal})
     finally:
         _cleanup(task_id)
-    assert result["pass"] is True, result.get("reason") or result.get("status")
+    # The work is real and the verdict is a refusal, and BOTH are asserted.  The
+    # goal says "repair the python source ... so that the unit tests pass", which
+    # promises a source change; the repair loop finds a patch, verifies it, replays
+    # the verification and then RESTORES the source, because source_write_authority
+    # is False and is enforced against in five separate guard modules.  The front
+    # door therefore fails closed -- correctly.  This assertion used to demand
+    # pass=True and predates the promised_source_change_errors gate.  Asserting the
+    # honest verdict is what keeps the independent oracle below meaningful: a patch
+    # that is real but unapplied must not be reported as a repaired file.
+    assert result["pass"] is False, result
+    assert result["status"] == "FAIL_CLOSED__PROMISED_SOURCE_CHANGE_NOT_APPLIED", result.get("status")
+    assert result["promised_source_change_errors"], result
     assert result["capability_dag"]["executor"] == adm.DAG_LOCAL_EXECUTOR
     assert all(row["pass"] is True for row in result["execution"])
     assert result["controller_execution"]["reason_kernel_not_used"] == "BOUND_CAPABILITY_SOURCE_UNSUPPORTED_IN_AT_LEAST_ONE_DAG_STEP"
