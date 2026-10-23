@@ -72,13 +72,18 @@ class RegistryKnowledgeGraphTests(unittest.TestCase):
                     "instance_id":"materialize-fact",
                     "capability_id":"knowledge.support.materialize",
                     "inputs":{
-                        "assessment_path":{
+                        # The materializer's declared contract is {candidate_path,
+                        # verification_path, output_path}: it reads the candidate document and its
+                        # independent verification record and writes the supported fact.  The
+                        # assessment this graph just produced IS that candidate, so it binds from
+                        # the assessment effect rather than being restated.
+                        "candidate_path":{
                             "$effect_result":{
                                 "effect":"knowledge.assessment.available",
                                 "field":"output_path",
                             }
                         },
-                        "field_name":"claim",
+                        "verification_path":"verification.json",
                         "output_path":"fact.json",
                     },
                 },
@@ -117,9 +122,14 @@ class RegistryKnowledgeGraphTests(unittest.TestCase):
             ],
         )
         self.assertEqual(
-            actions[3]["args"]["assessment_path"],
+            actions[3]["args"]["candidate_path"],
             {"$result":{"cycle":2,"field":"output_path"}},
         )
+        # The verification record is a declared input of the same contract; if it were dropped the
+        # template would render an unbound ${input.verification_path} and the adapter would read
+        # None.  Pinning it keeps the whole declared contract wired, not just the first argument.
+        self.assertEqual(actions[3]["args"]["verification_path"], "verification.json")
+        self.assertEqual(actions[3]["args"]["output_path"], "fact.json")
 
 
 if __name__=="__main__":
