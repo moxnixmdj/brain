@@ -24410,13 +24410,13 @@
   "research_index_records": 6318,
   "routing_tokens": 1785,
   "skills": 18,
-  "source_index_entry_points": 405,
+  "source_index_entry_points": 406,
   "source_index_modules": 1862
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0d343e139d18762d78ce7705c67aef9c0168730a223a491a144094f569102a19"
+  "value": "b36ed66dfce6f3ef069148b8f574ba397f88b3c5c00f608c9c5516a4b14c2a6c"
  },
  "engines": [
   {
@@ -216699,17 +216699,18 @@
   },
   {
    "capability": false,
-   "classification": "INTERNAL_HELPER",
-   "executable_entry_point": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
    "id": "source:canonical/runtime/goal_compiler.py",
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "238321766270dae967afbcd2026469220873bbdd5825843f0fa3da70ca40d544",
+   "sha256": "d120d578c7df3aa5b86c83ef699d1cc3416ce85c3a1dcfc95626c0bbce869705",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
-   "symbol_count": 115,
+   "symbol_count": 117,
    "symbols": [
     "GoalCompilationFailure",
+    "_adapter_default_argv",
     "_append_producer_parts",
     "_attach_effect_producer_steps",
     "_attribute_chained_parts_to_clauses",
@@ -216731,13 +216732,11 @@
     "_compile_exact_literal_response_goal",
     "_compile_exact_markdown_pdf_goal",
     "_compile_existing_causal_artifact_assertion",
-    "_compile_external_json_knowledge_fetch",
-    "_compile_generic_dataflow_verification_ir"
+    "_compile_external_json_knowledge_fetch"
    ],
    "terms": {
+    "adapter_default_argv": 1,
     "bind_inputs": 1,
-    "bm25_module": 1,
-    "bm25_terms": 1,
     "brain": 1,
     "compile_verified_browser_interaction": 1,
     "compiler": 2,
@@ -216754,6 +216753,7 @@
     "load_sibling_runtime_module": 1,
     "path_named_after_output_verb": 1,
     "path_named_by_role": 1,
+    "paths_named_by_role": 1,
     "placeholders": 1,
     "plain-goal": 1,
     "planner_capability": 1,
