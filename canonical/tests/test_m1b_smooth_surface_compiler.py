@@ -1,4 +1,15 @@
+import sys
 import unittest
+from pathlib import Path
+
+# m1b_smooth_surface_compiler lives in canonical/runtime and imports its own
+# siblings by bare name, so it is only importable with that directory on
+# sys.path. Nineteen workflows set PYTHONPATH that way; the plain
+# `python -m unittest` and test-corpus-audit invocations do not, so this import
+# raised ModuleNotFoundError and every test in this file was silently never run
+# -- a test that cannot be imported asserts nothing at all. This is the same
+# bootstrap test_capability_composer_v1.py already uses.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "runtime"))
 
 from m1b_smooth_surface_compiler import compile_source
 

@@ -24413,7 +24413,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f692a7414b8cc8a4fac49cf90776118da27ccf6c9491795cdabb07e451e9ccd1"
+  "value": "d8ea066aae3f2f56472c82eafddf9e044448fcf14e057dba94820170eff8be6a"
  },
  "engines": [
   {
@@ -158560,7 +158560,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/ROOT3_DIRECT_URLOPEN_NETWORK_MEDIATOR_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json",
    "schema": "PROJECT_BRAIN_ROOT3_DIRECT_URLOPEN_NETWORK_MEDIATOR_PUBLIC_RUNNER_VERIFICATION_V1",
-   "sha256": "eb34d7a2d7f9ff35a8470e8a806cb2d14e79b00606fdd5ea6968b3e8c74b3373",
+   "sha256": "b435bcdf65da47881504b5fc061745edd24df8f4609ed78b2b63e74973a087ea",
    "status": "PUBLIC_RUNNER_PASS__DIRECT_URLOPEN_FALLBACK_MEDIATED_AND_RECEIPTED__ZERO_TERMINA",
    "terms": {
     "20261006": 1,
@@ -224776,7 +224776,7 @@
    "classification": "INTERNAL_HELPER",
    "executable_entry_point": false,
    "id": "source:canonical/runtime/m1b_smooth_surface_compiler.py",
-   "imported_by_count": 1,
+   "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/m1b_smooth_surface_compiler.py",
    "sha256": "c125439d6c07ddda03b0828a576d6cd20f59c4a35d6ca39d1e07548e3fcc2ade",
