@@ -249,20 +249,33 @@ def _path_named_by_role(goal, stem, root):
         return None
     text=str(goal)
     word=str(stem).replace("_"," ")
+    # Nearest path after the role word, not the path immediately after it: goals
+    # say "the manifest X" and "the source file X" and "the source files under X"
+    # alike, and requiring adjacency only ever matched the first wording.
+    best=None
+    best_at=None
     for m in re.finditer(r"\b"+re.escape(word)+r"\b",text,re.IGNORECASE):
-        tail=text[m.end():].lstrip(" \t:,;")
         for raw,_p in candidates:
             if not raw:
                 continue
             # The goal may name the path in absolute form while the candidate is
             # held repository-relative, so both spellings have to be tried.
             for spelling in (raw, str(raw).lstrip("/"), str(_p)):
-                if spelling and tail.startswith(spelling):
-                    return raw
-    return None
+                if not spelling:
+                    continue
+                at=text.find(spelling,m.end())
+                if at<0:
+                    continue
+                if best_at is None or at<best_at:
+                    best_at=at
+                    best=raw
+    return best
 
 
-_OUTPUT_ROLE_VERBS=("save it to","save to","write it to","write to","store to","output to")
+# A verb, up to four words of object ("write the report", "save the final audit"),
+# then "to".  A fixed phrase list only ever matched the exact wording it was
+# written against: "write to" matched, "write the report to" did not.
+_OUTPUT_ROLE_RE=r"\b(?:save|write|store|output|emit)\b(?:\s+[A-Za-z0-9_.\-']+){0,4}\s+to\b"
 
 
 def _path_named_after_output_verb(goal, root):
@@ -275,14 +288,91 @@ def _path_named_after_output_verb(goal, root):
     if not candidates:
         return None
     text=str(goal)
-    for verb in _OUTPUT_ROLE_VERBS:
-        for m in re.finditer(r"\b"+re.escape(verb)+r"\b",text,re.IGNORECASE):
-            tail=text[m.end():].lstrip(" \t:,;")
-            for raw,_p in candidates:
-                for spelling in (raw, str(raw).lstrip("/"), str(_p)):
-                    if spelling and tail.startswith(spelling):
-                        return raw
+    for m in re.finditer(_OUTPUT_ROLE_RE,text,re.IGNORECASE):
+        tail=text[m.end():].lstrip(" \t:,;")
+        for raw,_p in candidates:
+            for spelling in (raw, str(raw).lstrip("/"), str(_p)):
+                if spelling and tail.startswith(spelling):
+                    return raw
     return None
+
+
+def _paths_named_by_role(goal, stem, root):
+    """Every repository path the sentence gives this role, in order of mention.
+
+    The singular helper answers "which file is the manifest"; this answers "which
+    files are the tests", because a *_paths input is a list and a suite is
+    normally more than one file.
+    """
+    if not stem:
+        return []
+    candidates=_repo_paths(goal,root)
+    if not candidates:
+        return []
+    text=str(goal)
+    word=str(stem).replace("_"," ")
+    hits=[]
+    for m in re.finditer(r"\b"+re.escape(word)+r"\b",text,re.IGNORECASE):
+        for raw,_p in candidates:
+            for spelling in (raw, str(raw).lstrip("/"), str(_p)):
+                if not spelling:
+                    continue
+                at=text.find(spelling,m.end())
+                if at>=0:
+                    hits.append((at,raw))
+    found=[]
+    for _at,raw in sorted(hits):
+        if raw not in found:
+            found.append(raw)
+    return found
+
+
+def _adapter_default_argv(entry, root, targets):
+    """The command line the capability's OWN adapter would derive, or None.
+
+    ``test_argv`` is optional in every adapter that takes it: each falls back to
+    ``suite_argv(sys.executable, *tests)``.  That helper embeds the suite runner
+    which collects tests through the loader, because 695 of 2019 unittest files
+    here carry no __main__ guard and running them as scripts silently executes
+    nothing.  Copying that into the compiler would duplicate it and drift, so the
+    adapter is asked for its own default and the binding fails closed if the
+    adapter offers none.
+    """
+    rel=((entry or {}).get("source") or {}).get("adapter_path")
+    if not rel:
+        return None
+    p=(pathlib.Path(root)/str(rel)).resolve()
+    if not p.is_file():
+        return None
+    try:
+        import importlib.util
+        spec=importlib.util.spec_from_file_location("_argv_adapter_"+p.stem,p)
+        mod=importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+    except Exception:
+        return None
+    fn=getattr(mod,"suite_argv",None)
+    if not callable(fn):
+        # Most adapters do not define it; they delegate --
+        # `args.get("test_argv") or _PATCH.suite_argv(...)`.  Follow that
+        # delegation instead of copying the runner it embeds.
+        import types
+        for name in dir(mod):
+            obj=getattr(mod,name,None)
+            if isinstance(obj,types.ModuleType):
+                cand=getattr(obj,"suite_argv",None)
+                if callable(cand):
+                    fn=cand
+                    break
+    if not callable(fn):
+        return None
+    try:
+        argv=fn(sys.executable,*[str(t) for t in targets])
+    except Exception:
+        return None
+    if not isinstance(argv,(list,tuple)) or not argv:
+        return None
+    return [str(x) for x in argv]
 
 
 def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
@@ -308,6 +398,49 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                 result[key]=urls[0]
                 continue
             raise GoalCompilationFailure("GOAL_URL_BINDING_REQUIRED",str(len(urls)))
+        if key.endswith("_paths"):
+            # A *_paths input is a LIST of repository paths, and the binder only
+            # ever produced scalars, so every capability taking test_paths or
+            # evidence_paths raised GOAL_INPUT_BINDING_REQUIRED and lost the
+            # ranking however well it matched the goal.
+            stem=key[:-6].lower()
+            role=_paths_named_by_role(goal,stem,root)
+            if role:
+                # Everything after the role word is not necessarily in that role:
+                # "the test X passes, and write the report to Y" put the report
+                # among the tests.  Drop whatever the sentence gives the output
+                # role -- a suite that contains its own report is not a suite.
+                out=_path_named_after_output_verb(goal,root)
+                if out is not None:
+                    role=[x for x in role if x!=out]
+                if role:
+                    result[key]=role
+                    continue
+            # The sentence gave the role but named the files separately.
+            if re.search(r"\b"+re.escape(str(stem).replace("_"," "))+r"\b",
+                         str(goal),re.IGNORECASE):
+                files=[raw for raw,p in paths if p.is_file()]
+                if files:
+                    result[key]=files
+                    continue
+        if key.endswith("_argv"):
+            # Derived, never invented: ask the adapter for the command line it
+            # would itself have used for the tests the sentence named, and fail
+            # closed when it offers no default.
+            stem=key[:-5].lower()
+            targets=result.get(stem+"_paths") or _paths_named_by_role(goal,stem,root)
+            if not targets:
+                targets=[raw for raw,p in paths if p.is_file()]
+            # Key order is the template's, so this often runs before the matching
+            # *_paths key is bound and falls back to the raw role list -- which
+            # still contains the report.  Exclude it here for the same reason.
+            out=_path_named_after_output_verb(goal,root)
+            if out is not None:
+                targets=[t for t in targets if t!=out]
+            argv=_adapter_default_argv(entry,root,targets)
+            if argv is not None:
+                result[key]=argv
+                continue
         if key.endswith("_root") or key.endswith("_dir"):
             # A *_root key names a DIRECTORY, and the binder only ever handled
             # *_path.  Every capability whose input is source_root therefore

@@ -271,6 +271,73 @@ def test_the_highest_scoring_capability_is_not_skipped_for_an_unbindable_key():
     assert bound.get("source_root"), bound
 
 
+def test_a_paths_key_binds_the_tests_the_sentence_names_not_the_report():
+    """A *_paths input is a list, and the binder only ever produced scalars, so
+    every capability taking test_paths raised and lost the ranking.  Binding it
+    naively is also wrong: "the test X passes, and write the report to Y" puts
+    the report among the tests, and a suite containing its own report is not a
+    suite."""
+    goal = ("Repair the python source file canonical/runtime/goal_compiler.py so that the test "
+            "canonical/tests/test_goal_compiler.py passes, and write the report to "
+            "canonical/astra_runtime/tmp/test_live_brain_route_admission/rep.json.")
+    registry = _registry()
+    entry = registry["python.software.repair.loop.coupled.ast.v1"]
+    bound = goal_compiler._bind_inputs(goal, ROOT, entry)
+    assert bound["test_paths"] == ["canonical/tests/test_goal_compiler.py"], bound["test_paths"]
+    assert bound["output_path"].endswith("/rep.json"), bound
+    assert bound["source_root"] == "canonical/runtime", bound
+
+
+def test_test_argv_is_the_adapters_own_default_not_an_invented_command():
+    """test_argv is optional in every adapter that takes it: each falls back to
+    suite_argv(sys.executable, *tests), which embeds a runner that collects tests
+    through the loader because 695 of 2019 unittest files here carry no __main__
+    guard.  The binding must ask the adapter for that default, not invent one."""
+    goal = ("Repair the python source file canonical/runtime/goal_compiler.py so that the test "
+            "canonical/tests/test_goal_compiler.py passes, and write the report to "
+            "canonical/astra_runtime/tmp/test_live_brain_route_admission/rep2.json.")
+    registry = _registry()
+    entry = registry["python.software.repair.loop.coupled.ast.v1"]
+    argv = goal_compiler._bind_inputs(goal, ROOT, entry)["test_argv"]
+    assert isinstance(argv, list) and argv, argv
+    assert argv[0] == sys.executable, argv[:2]
+    assert "canonical/tests/test_goal_compiler.py" in argv, argv
+    # it is the adapter's own helper that produced it, so it carries that runner
+    import importlib.util
+    from canonical.runtime.bound_capabilities import python_test_guided_patch_search_v1 as patch
+    expected = patch.suite_argv(sys.executable, "canonical/tests/test_goal_compiler.py")
+    assert argv == [str(x) for x in expected], (argv[:3], expected[:3])
+
+
+def test_a_repair_sentence_reaches_a_repair_capability_end_to_end():
+    """The whole point: a sentence, not a hand-built action, must reach a repair
+    loop.  Before the binder handled *_paths and *_argv this compiled to nothing
+    in that family at all."""
+    work = WORK / "repairmod"
+    if work.exists():
+        shutil.rmtree(work)
+    work.mkdir(parents=True)
+    (work / "mod.py").write_text("def add(a, b):\n    return a - b\n", encoding="utf-8")
+    (work / "test_mod.py").write_text(
+        "import unittest, sys, pathlib\n"
+        "sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))\n"
+        "import mod\n"
+        "class T(unittest.TestCase):\n"
+        "    def test_add(self):\n"
+        "        self.assertEqual(mod.add(2, 3), 5)\n", encoding="utf-8")
+    base = "canonical/astra_runtime/tmp/test_live_brain_route_admission/repairmod"
+    goal = ("Repair the python source file %s/mod.py so that the test %s/test_mod.py passes, "
+            "and write the report to %s/report.json." % (base, base, base))
+    task_id = "TEST_ROUTE_ADMISSION_REPAIR_%d" % os.getpid()
+    try:
+        result = adm.solve({"task_id": task_id, "goal": goal})
+    finally:
+        _cleanup(task_id)
+    assert str(result.get("compiled_capability_id", "")).startswith("python.software.repair."), result
+    assert result["pass"] is True, result
+    assert (work / "report.json").is_file()
+
+
 def test_solve_still_executes_a_real_goal():
     manifest = WORK / "manifest2.json"
     src = WORK / "s2.txt"
