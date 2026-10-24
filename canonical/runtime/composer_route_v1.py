@@ -203,7 +203,31 @@ def extract_paths(text: str) -> list[str]:
     return [m.group(0) for m in _EXT.finditer(str(text or ""))]
 
 
+# A destination is a PATH, and the terminator only counts when what follows it is
+# one.  The previous patterns ended the payload at the first "to|into|in|at",
+# which are ordinary English words that belong to the payload far more often than
+# they introduce a destination.  Measured on 4d859af over 18 stated texts, 13 were
+# silently altered before they were written:
+#
+#     "a plain sentence about nothing in particular" -> "plain sentence about nothing"
+#     "the results are in the attachment"            -> "results are"
+#     "items in stock at the warehouse"              -> "items"
+#     "text in the middle of it"                     -> "text"
+#
+# The file was then written with the truncated bytes, and because the acceptance
+# re-inspector compares the file against the ARGUMENT rather than the sentence, it
+# reported the result as independently verified.  So this was not a cosmetic
+# truncation: it produced a confident pass on work the request never asked for.
+_DEST_AHEAD = r"(?=[^\s]*/|\S+\.[A-Za-z0-9]{1,6}\b)"
+_DEST_WORDS = r"\s+(?:to|into|in|at)\s+(?:(?:the|a|an)\s+)?(?:file|path|folder|directory)?\s*"
 _CONTENT = [
+    re.compile(r"\b(?:text|content|string|message|word|line)\s+(.+?)" + _DEST_WORDS + _DEST_AHEAD, re.I),
+    re.compile(r"\bwrite\s+(.+?)" + _DEST_WORDS + _DEST_AHEAD, re.I),
+]
+# Kept, and tried only when nothing above matched, so a destination with no
+# extension and no separator still binds exactly as it did before.  A fallback
+# that is never reached first cannot change any sentence that already worked.
+_CONTENT_FALLBACK = [
     re.compile(r"\b(?:text|content|string|message|word|line)\s+(.+?)\s+(?:to|into|in|at)\s+", re.I),
     re.compile(r"\bwrite\s+(.+?)\s+(?:to|into)\s+", re.I),
 ]
@@ -216,12 +240,21 @@ def extract_content(text: str) -> str | None:
     destination, not the payload. Guessing the filename as the content is how
     a machine writes a file full of its own name and calls it done.
     """
-    for pat in _CONTENT:
-        m = pat.search(str(text or ""))
-        if m:
+    sentence = str(text or "")
+    for table in (_CONTENT, _CONTENT_FALLBACK):
+        for pat in table:
+            m = pat.search(sentence)
+            if not m:
+                continue
             body = m.group(1).strip().strip("'\"")
-            body = re.sub(r"^(?:the|a|an)\s+", "", body, flags=re.I).strip()
             if body:
+                # The payload is delivered VERBATIM.  This used to strip a leading
+                # "the"/"a"/"an", on the reasoning that an article is grammar rather
+                # than content.  For a value that is about to be written to a file
+                # that is not a distinction the writer gets to make: "the archive
+                # manifest listing" was written as "archive manifest listing" and
+                # "an important note" as "important note".  Measured, that one line
+                # accounted for 7 of the 13 altered texts.
                 return body
     return None
 

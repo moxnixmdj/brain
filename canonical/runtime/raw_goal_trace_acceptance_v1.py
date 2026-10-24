@@ -43,6 +43,54 @@ DOCX_NS = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 # Argument names that carry a path, split by role. A step's outputs must exist
 # on disk; its inputs must exist too, because a step cannot have consumed a
 # file that was not there.
+# Roles whose value is the payload a request asked to be written.  Unlike a path,
+# a payload has no on-disk form to re-open, so the only independent check available
+# is that the sentence actually contains it.
+_TEXT_PAYLOAD_ARGS = ("content", "text", "body", "message")
+
+# What may sit between a payload and the path it is being written to.
+_BETWEEN_PAYLOAD_AND_DEST = re.compile(
+    r"\s*(?:to|into|in|at)\s+(?:(?:the|a|an)\s+)?(?:file|path|folder|directory)?\s*"
+    r"(?=\S*/|\S+\.[A-Za-z0-9]{1,6}\b)", re.I)
+# The word that introduces a payload.  Both boundaries are needed, and measuring
+# showed why one is not enough: dropping a leading article leaves a payload that
+# still runs to the destination, so "archive manifest listing" satisfies the
+# right-hand check inside "Write the text the archive manifest listing to X".
+# What gives it away is the left edge -- it does not begin where the role word
+# says the payload begins.
+_PAYLOAD_ROLE_WORD = re.compile(
+    r"(?:text|content|string|message|word|line|containing)\s+$", re.I)
+
+
+def _payload_runs_to_the_destination(goal: str, payload: str) -> bool:
+    """True when the sentence states this payload and then names where it goes.
+
+    Substring containment is NOT sufficient, and measuring it proved why: the
+    altered payloads are truncations, so every one of them is still a substring
+    of the sentence that produced it.  "the results are in the attachment" was
+    truncated to "results are", "results are" is plainly inside the goal, and a
+    containment check accepted it.  What distinguishes the payload the sentence
+    actually stated is that the sentence is DONE with it -- a destination follows
+    immediately.  A truncated payload is followed by the rest of the payload
+    instead, and "in the attachment" is not a destination because nothing
+    path-like comes after it.
+
+    This is re-derived here rather than read from the binder on purpose.  The
+    binder is the thing under test; an inspector that asks the binder what it
+    meant is not an inspector.
+    """
+    text = str(goal or "")
+    start = text.find(payload)
+    while start >= 0:
+        if _PAYLOAD_ROLE_WORD.search(text[:start]):
+            rest = text[start + len(payload):]
+            # Either the sentence goes on to name where the payload goes, or the
+            # payload is the last thing in it ("... containing the text X").
+            if not rest.strip() or _BETWEEN_PAYLOAD_AND_DEST.match(text, start + len(payload)):
+                return True
+        start = text.find(payload, start + 1)
+    return False
+
 _PATH_ARGS = (
     "output_path", "path", "json_path", "archive_path", "manifest_path",
     "input_path", "extraction_path", "result_path", "source_json_path",
@@ -785,6 +833,26 @@ def verify(
                 if path is None or not path.is_dir():
                     return _unresolved("STEP_ROOT_INVALID",
                                        capability_id=cid, argument=name)
+            # --- a text payload must be the text the sentence stated -------
+            # The re-inspection below compares the file to this argument, so an
+            # argument that the binder altered is verified against its own
+            # alteration and passes.  Measured on 4d859af: "Write the text the
+            # results are in the attachment to the file X" wrote "results are" to
+            # X, the re-inspector compared the file to "results are", found them
+            # equal, and returned RAW_GOAL_ACCEPTANCE_VERIFIED.  Eight such
+            # requests were accepted that way and only one of the eight files
+            # matched its sentence.  Comparing bytes to the argument proves the
+            # writer did what the plan said; only the sentence can prove the plan
+            # said what was asked.  Both are needed, and until now only the first
+            # existed.
+            for name in _TEXT_PAYLOAD_ARGS:
+                value = row["args"].get(name)
+                if not isinstance(value, str) or len(value.strip()) < 2:
+                    continue
+                if not _payload_runs_to_the_destination(goal, value.strip()):
+                    return _unresolved("STEP_TEXT_PAYLOAD_NOT_IN_THE_REQUEST",
+                                       capability_id=cid, argument=name,
+                                       payload_bytes=len(value.encode("utf-8")))
             result = row["result"]
             if result.get("output_verified") is False:
                 return _unresolved("STEP_OUTPUT_NOT_VERIFIED_BY_ITS_PRODUCER",
