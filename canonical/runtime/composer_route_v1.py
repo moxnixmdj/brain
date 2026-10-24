@@ -21,6 +21,7 @@ and reports the observed result of every step.
 from __future__ import annotations
 
 import re
+import shlex
 from typing import Any, Mapping, Sequence
 
 SCHEMA = "PROJECT_BRAIN_COMPOSER_ROUTE_V1"
@@ -259,6 +260,54 @@ def extract_content(text: str) -> str | None:
     return None
 
 
+# --- argv -----------------------------------------------------------------
+# A command line is quoted, like a payload: every token is content, so nothing
+# here may be normalised, reordered or defaulted.  The role word is required,
+# which is what keeps the whole "Run the <capability>." corpus from binding a
+# command nobody asked to run -- measured, none of those sentences mention
+# "command" or "argv".
+_ARGV = [
+    re.compile(r"\b(?:shell\s+|cli\s+|terminal\s+)?command\s+(?:to\s+run\s+|line\s+)?(.+?)\s*$", re.I),
+    re.compile(r"\bargv\s+(.+?)\s*$", re.I),
+]
+
+
+def extract_argv(text: str) -> list[str] | None:
+    """The command line the sentence states, token by token, or None.
+
+    ``shell.command.run`` has been a VERIFIED_BOUND_CAPABILITY with an
+    independently verified output all along -- cwd pinned to the repository
+    root, timeout clamped to 300s, argv capped at 64 non-empty strings, and a
+    non-zero exit raised rather than returned.  It was simply unreachable:
+    ``bind`` had no rule for an ARGV slot, so every sentence that named it was
+    refused with ``shell.command.run:argv:not_stated``.  One slot type was the
+    whole distance between a verified general command runner and the requests
+    that would use it.
+
+    Returns None rather than a guess when the sentence states no command.  That
+    is the rule PR #6119 established for a text slot and it applies here for the
+    same reason: a slot filled from something the sentence does not contain is
+    an invention, and an invention executes.
+    """
+    sentence = str(text or "")
+    for pat in _ARGV:
+        m = pat.search(sentence)
+        if not m:
+            continue
+        body = m.group(1).strip().rstrip(".").strip()
+        if not body:
+            continue
+        try:
+            parts = shlex.split(body)
+        except ValueError:
+            # An unbalanced quote is a malformed command line, not something to
+            # repair by guessing at the missing half.
+            return None
+        if parts and all(isinstance(part, str) and part for part in parts):
+            return parts
+    return None
+
+
 def extract_number(text: str) -> float | None:
     m = _NUM.search(str(text or ""))
     return float(m.group(0)) if m else None
@@ -288,6 +337,10 @@ def bind(signature: Mapping[str, str], goal: str,
             # for "compress notes.txt into notes.txt.gz" that is the .gz
             if paths:
                 args[slot] = paths[-1]
+        elif t == "ARGV":
+            argv = extract_argv(goal)
+            if argv:
+                args[slot] = argv
         elif t == "NUMBER":
             n = extract_number(goal)
             if n is not None:

@@ -845,6 +845,20 @@ def verify(
             # writer did what the plan said; only the sentence can prove the plan
             # said what was asked.  Both are needed, and until now only the first
             # existed.
+            # --- a command line must be the one the sentence stated ---------
+            # An argv is a payload with teeth: it is executed, not written.  The
+            # adapter pins cwd to the repository root, clamps the timeout and
+            # raises on a non-zero exit, but none of that answers whether the
+            # sentence asked for THIS command.  Re-derived here from the goal
+            # rather than read from the binder, for the reason PR #6118
+            # established: the binder is the thing under test.
+            value = row["args"].get("argv")
+            if isinstance(value, (list, tuple)) and value:
+                tokens = [str(tok) for tok in value]
+                if any(not tok or tok not in goal for tok in tokens):
+                    return _unresolved("STEP_COMMAND_NOT_IN_THE_REQUEST",
+                                       capability_id=cid, argument="argv",
+                                       argv_token_count=len(tokens))
             for name in _TEXT_PAYLOAD_ARGS:
                 value = row["args"].get(name)
                 if not isinstance(value, str) or len(value.strip()) < 2:
