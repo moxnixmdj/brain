@@ -32,7 +32,7 @@
     "source_executable": null,
     "source_module": "tarfile",
     "source_path": "canonical/runtime/bound_capabilities/archive_tarfile.py",
-    "source_sha256": "6f05de15eed1d792525938fa90c940fcc3b3566b9504cddd47dbf8994dec11ab",
+    "source_sha256": "d86fc673b2d250b965b33b1db98b551d2c1400311ea28f9911b2d891cce5577f",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -101,7 +101,7 @@
     "source_executable": "tar",
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py",
-    "source_sha256": "573758c26854563d3857c98e4e5f51377dc9f1b35edddf2520fced599a5834bb",
+    "source_sha256": "644aa3bedfe0734eddbdb9a94fa19013d56865e614a6eb0ee69ddd93e7b77dfe",
     "source_type": "system_tool"
    },
    "provides": [
@@ -24536,7 +24536,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6342,
+  "research_index_records": 6343,
   "routing_tokens": 1798,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "59a0d3518a20dd33e91f935f6df52713e04a232c5445d61f00b7556fbdc4a893"
+  "value": "08b8cd6e9aaa1f5a728b44b5a20fd654a8085b88d8c3c36190b56480cf756486"
  },
  "engines": [
   {
@@ -46494,7 +46494,7 @@
   "included_source_count": 865,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "16360ebfc0ec92cbbd9ed47412833d9c4e5eb323efae73a36047f562c664916d"
+  "source_tree_digest": "d694a46570e5fc94b088d77800cc069b7609862fcdcc1a5090b4dc7676f3ebf8"
  },
  "research_index": [
   {
@@ -188012,6 +188012,51 @@
     "stated": 3,
     "step": 2,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1",
+   "capability": false,
+   "date": "2026-10-24",
+   "id": "research:canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "52d51ec2699176791c15e3fc9d2fc2818fd636905dbb650450f2bc39939f8fde",
+   "status": "",
+   "terms": {
+    "20261024": 1,
+    "a_wrong_shaped_manifest_is_a_named_contract_error_not_a_crash_v1_20261024_v1": 2,
+    "act": 1,
+    "adapter": 1,
+    "adapters": 1,
+    "attributeerror": 1,
+    "bound-capability": 1,
+    "but": 1,
+    "caller": 2,
+    "contract": 1,
+    "controller": 1,
+    "crash": 2,
+    "diagnosable": 1,
+    "document": 1,
+    "error": 1,
+    "exception": 1,
+    "failure": 1,
+    "falls": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "input": 1,
+    "live": 1,
+    "manifest": 2,
+    "name": 2,
+    "named": 1,
+    "not": 2,
+    "number": 1,
+    "opaque": 1,
+    "path": 3,
+    "shape": 2,
+    "uncaught": 2,
+    "v1": 2,
+    "wrong-shaped": 2
    }
   },
   {

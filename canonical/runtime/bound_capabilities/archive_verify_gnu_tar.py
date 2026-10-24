@@ -11,8 +11,29 @@ def _safe(root, raw):
     return p
 
 def _manifest_paths(manifest):
+    """The repository paths a manifest lists, in manifest order.
+
+    A manifest whose top level is not a mapping -- a bare JSON array, which is a
+    perfectly ordinary thing to write and what a caller reaches for first -- used
+    to die here with ``AttributeError: 'list' object has no attribute 'get'``.  The
+    adapter validated its input PATHS carefully (MANIFEST_INPUT_REQUIRED,
+    TAR_GZ_OUTPUT_REQUIRED) but never their STRUCTURE, so a wrong-shaped manifest
+    escaped as an uncaught Python traceback and surfaced one layer up as an opaque
+    LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE.  It now fails closed with a
+    named contract error like every other rejection in this file.  ``records``
+    absent or null stays legal and yields no paths, exactly as before.
+    """
+    if not isinstance(manifest,dict):
+        raise RuntimeError("MANIFEST_RECORDS_REQUIRED")
+    records=manifest.get("records")
+    if records is None:
+        return []
+    if not isinstance(records,list):
+        raise RuntimeError("MANIFEST_RECORDS_REQUIRED")
     out=[]
-    for rec in manifest.get("records") or []:
+    for rec in records:
+        if not isinstance(rec,dict):
+            raise RuntimeError("MANIFEST_RECORDS_REQUIRED")
         for p in rec.get("verification_paths") or []:
             if isinstance(p,str) and p.startswith("canonical/") and p not in out:
                 out.append(p)
