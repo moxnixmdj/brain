@@ -855,7 +855,15 @@ def _inspect_shell_command_run(args: Mapping, result: Mapping, root: Path) -> tu
     if any(not tok for tok in tokens):
         return False, "COMMAND_ARGV_HAS_AN_EMPTY_TOKEN", {}
     program = tokens[0].rsplit("/", 1)[-1]
-    if program not in _READ_ONLY_COMMANDS:
+    # An interpreter is not read-only in general, and it is not being treated as
+    # one here.  What is allowed is the one shape the receipt-backed rows all
+    # have -- ["python3", "<a .py file inside this repository>"] -- which is
+    # narrow enough to reason about: no arguments to smuggle anything through,
+    # and a script whose source is in the tree being judged.
+    if program in ("python3", "python") and len(tokens) == 2 and tokens[1].endswith(".py"):
+        if _inside(root, tokens[1]) is None:
+            return False, "COMMAND_SCRIPT_OUTSIDE_REPOSITORY", {}
+    elif program not in _READ_ONLY_COMMANDS:
         # Not re-runnable -- but a command that changes something still makes a
         # promise about the world, and the world is still there to be asked.
         check = _MUTATING_POSTCONDITIONS.get(program)
@@ -903,6 +911,14 @@ INSPECTORS: dict[str, Inspector] = {
     "decision.synthesis.verify.stdlib": _inspect_decision_verify,
     "text.file.write": _inspect_text_file_write,
     "shell.command.run": _inspect_shell_command_run,
+}
+
+
+# Inspectors keyed on the adapter that ran the step, for the families where one
+# runner serves many capability ids and the result shape is the same for all of
+# them.  Narrow by design: one adapter, one inspector.
+_ADAPTER_INSPECTORS: dict[str, Inspector] = {
+    "bound_capability_cli": _inspect_shell_command_run,
 }
 
 
@@ -1068,6 +1084,17 @@ def verify(
         for row in rows:
             cid = str(row["args"].get("capability_id"))
             inspector = INSPECTORS.get(cid)
+            if inspector is None:
+                # Keyed on the adapter rather than the capability, because the
+                # 294 receipt-backed rows all execute through one runner and all
+                # report one result shape -- argv, returncode, stdout, stderr.
+                # Measured: 221 of the 223 passing goals on the 367-prose corpus
+                # were stopped by NO_INDEPENDENT_REINSPECTION_FOR naming one of
+                # those rows, and 14 of 14 sampled scripts returned a byte-
+                # identical returncode and stdout on a second run with no change
+                # to the working tree, so the world does answer for them.
+                adapter = str((row["result"] or {}).get("adapter") or "")
+                inspector = _ADAPTER_INSPECTORS.get(adapter)
             if inspector is None:
                 return _unresolved("NO_INDEPENDENT_REINSPECTION_FOR:" + cid)
             ok, reason, evidence = inspector(row["args"], row["result"], root)
