@@ -266,9 +266,15 @@ def _named_receipt_projection(text: str, admissible: Mapping[str, Mapping[str, A
 
 ROOT_FOR_NAMING = pathlib.Path(__file__).resolve().parents[2]
 
-# A token carrying an underscore, a dot or a slash is an identifier, not a word the
-# caller wrote out.  "v1" survives; "classify_support" and "bytes_active_..." do not.
-_IDENTIFIER_TOKEN_RE = re.compile(r"\S*[_.\/]\S*")
+# A token carrying an underscore, a slash, or an INTERNAL dot is an identifier, not
+# a word the caller wrote out: "classify_support" and "canonical/runtime/x.py" go,
+# while "v1", "generator" and "candidate" stay.  The dot has to be internal -- the
+# first version of this matched any token containing a dot, so the sentence-final
+# period turned the LAST WORD OF EVERY GOAL into an "identifier" and deleted it:
+# "Run the bytes active query task generator." lost "generator", "... v6
+# candidate." lost "candidate", and "... audit v1." lost the version itself, which
+# is why a v1 sentence matched a v2 capability.
+_IDENTIFIER_TOKEN_RE = re.compile(r"\S*(?:_|/|\.\S)\S*")
 
 
 def _prose_of(text: str) -> str:
@@ -317,13 +323,32 @@ def request_states_the_capability_name(text: str, cid: str) -> bool:
         stem = str(cid or "").rsplit("/", 1)[-1].split(".py")[0]
         if not stem or stem == cid:
             return False
-        words = [w.lower() for w in re.split(r"[_\s]+", stem) if len(w) > 1]
-        while words and _NAME_VERSION_RE.match(words[-1]):
-            words.pop()
+        all_words = [w.lower() for w in re.split(r"[_\s]+", stem) if len(w) > 1]
+        # A version token can sit ANYWHERE in the name, not only at the end:
+        # terminal_frontier_factorizer_v6_candidate and
+        # current_terminal_authority_v3_k6_v4_verifier both carry one mid-name.
+        # Reading only the trailing word rejected the right capability outright and
+        # handed the route to a sibling.
+        stem_versions = [w for w in all_words if _NAME_VERSION_RE.match(w)]
+        words = [w for w in all_words if not _NAME_VERSION_RE.match(w)]
         words = [w for w in words if w not in _NAME_STOPWORDS]
         if not words:
             return False
         prose = _prose_of(text)
+        # A version the caller STATES must match; one they omit is left open.  The
+        # trailing token is dropped from the word list so that prose without a
+        # version still names the capability, but dropping it silently made
+        # siblings indistinguishable: "Run the composition cross step no bypass
+        # audit v2." matched _v1 and _v2 identically, both tie-break on the same
+        # word count and the same stem length, and iteration order picked _v1.
+        # Measured across all 294 path-style receipt-backed capabilities, 24 of the
+        # 294 misrouted and every one of them was a version sibling.  The harness
+        # generator documents this rule for the retrieval path: "the version is
+        # part of the name, because the retrieval path separates a capability's
+        # version siblings only when the request states the version."
+        stated = re.findall(r"\bv(\d+)\b", prose, re.IGNORECASE)
+        if stated and sorted("v" + x for x in stated) != sorted(stem_versions):
+            return False
         last = -1
         for w in words:
             m = re.search(r"\b" + re.escape(w) + r"s?\b", prose, re.IGNORECASE)

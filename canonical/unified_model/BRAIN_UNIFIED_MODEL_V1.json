@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3c0fd9b0f17aacbe6236319d97413870b2d9428ca1ca0ce9bbfd6fdcf49d26d6"
+  "value": "e8ce2e7ab3987e901ceeb1ca1c1f81063469601ea35ffef55f9eda815035f40e"
  },
  "engines": [
   {
@@ -217679,7 +217679,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "f39747c72034ca578afb4312682539911faa35f1a4a825daa73674696d725b06",
+   "sha256": "39128b2d859b54a72147a847e7019200d3686cac6b82d699f3f790318733dcf6",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
    "symbol_count": 60,
    "symbols": [
