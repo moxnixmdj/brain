@@ -993,7 +993,7 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
                                "result": dict(first_result) if isinstance(first_result, Mapping) else None,
                                "execution_proof_type": "MODEL_INDEPENDENT_CONTROLLER_TRACE_V1",
                                "controller_plan_sha256": checkpoint.get("plan_sha256"), "controller_trace": list(trace)})
-    return {
+    out = {
         "schema": LIVE_SCHEMA,
         "status": "PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED_AND_CHECKPOINTED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED" if passed else "FAIL__LIVE_CONTROLLER_RESULT_INVALID",
         "pass": passed, "task_id": task_id, "executed": True, "raw_goal": goal,
@@ -1006,9 +1006,21 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
         "controller_checkpoint": dict(checkpoint),
         "cognition_dependency_class": controller.get("cognition_dependency_class") if isinstance(controller, Mapping) else None,
         "model_dependency_count": controller.get("model_dependency_count") if isinstance(controller, Mapping) else None,
-        "routing_success_authority": False, "semantic_acceptance_complete": False, "accepted_raw_obligation_ids": [],
+        "routing_success_authority": False,
         "elapsed_ns": perf_counter_ns() - started, "incremental_spend_usd": 0, "benchmark_specific": False, "terminal_credit_delta": 0,
     }
+    if passed:
+        # Same defect as the front-layer path fixed in PR #6111, on its sibling: the
+        # verdict was hard-coded and the verifier was never asked.  The difference is
+        # that this trace already carries the controller's canonical shape, so nothing
+        # about it needs repairing -- only asking.  Measured on bf2799b: two
+        # capabilities (auto.npm.dfinity-cbor, auto.npm.msgpack-msgpack) pass here,
+        # write the artifact they promised, declare 3 obligations, accept 0, and carry
+        # no acceptance verdict at all.
+        out.update(_exact_acceptance(goal, compiled, trace, raw_contract))
+        if out["semantic_acceptance_complete"]:
+            out["status"] = "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
+    return out
 
 
 def promised_artifact_errors(goal: str, future_artifacts: list[str]) -> list[str]:
