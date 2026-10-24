@@ -24536,7 +24536,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6335,
+  "research_index_records": 6336,
   "routing_tokens": 1798,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ae2f32d7f1017895848420341ea1affc3574dfee7b94703a7a6ffe14e6e07d21"
+  "value": "380d4fd8bfac8626eadf0cd19d1c0ea90f0709c3fe6a21c6f33f7ecd124d3c55"
  },
  "engines": [
   {
@@ -189493,6 +189493,51 @@
    }
   },
   {
+   "action_id": "NAMED_CAPABILITY_IS_NEVER_ANSWERED_BY_ANOTHER_V1_20261024_V1",
+   "capability": false,
+   "date": "2026-10-24",
+   "id": "research:canonical/action_intents/NAMED_CAPABILITY_IS_NEVER_ANSWERED_BY_ANOTHER_V1_20261024_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/NAMED_CAPABILITY_IS_NEVER_ANSWERED_BY_ANOTHER_V1_20261024_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "059d16108e656aeb706641e3a0402b07b54d76307deafc81b7627e2e1ae709b9",
+   "status": "",
+   "terms": {
+    "20261024": 1,
+    "32": 2,
+    "72": 1,
+    "all": 1,
+    "another": 1,
+    "answered": 3,
+    "auto": 1,
+    "auto.pypi.msgpack": 1,
+    "being": 1,
+    "bound": 2,
+    "capabilities": 1,
+    "capability": 5,
+    "collapsed": 1,
+    "create": 1,
+    "derived": 1,
+    "different": 1,
+    "document": 1,
+    "docx": 1,
+    "docx.document.create.python_docx": 1,
+    "dotted": 1,
+    "every": 1,
+    "fall": 1,
+    "false": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "id": 1,
+    "include_bound": 1,
+    "measured": 1,
+    "name": 1,
+    "named": 3,
+    "named_capability_is_never_answered_by_another_v1_20261024_v1": 2,
+    "named_receipt_projection": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "NAMED_OUTPUT_DESTINATION_NOT_COUNTED_AS_INPUT_CANDIDATE_V1_20261023_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -217615,7 +217660,7 @@
    "classification": "ENTRY_POINT",
    "executable_entry_point": true,
    "id": "source:canonical/runtime/goal_compiler.py",
-   "imported_by_count": 2,
+   "imported_by_count": 3,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
    "sha256": "387238258b6a811f1dc87d47168525fe388fd2b2500b90cceaae3dad45074f4d",
@@ -217718,15 +217763,15 @@
   },
   {
    "capability": false,
-   "classification": "ORPHAN",
+   "classification": "INTERNAL_HELPER",
    "executable_entry_point": false,
    "id": "source:canonical/runtime/goal_front_compiler_v1.py",
-   "imported_by_count": 0,
+   "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "39128b2d859b54a72147a847e7019200d3686cac6b82d699f3f790318733dcf6",
+   "sha256": "3d0acdf09eee777d7d5507d1efe7af4bc986a5c5c27a360647eaa3516db58e60",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
-   "symbol_count": 60,
+   "symbol_count": 61,
    "symbols": [
     "_actions_of",
     "_after_key",
@@ -217736,6 +217781,7 @@
     "_bind_produced_artifact",
     "_claiming_earlier_artifact",
     "_compile_clauses",
+    "_compile_goal_body",
     "_dag_artifact_edges",
     "_dag_problem",
     "_dag_steps",
@@ -217750,8 +217796,7 @@
     "_kv_pairs",
     "_named_existing_paths",
     "_named_output_destinations",
-    "_named_receipt_projection",
-    "_number"
+    "_named_receipt_projection"
    ],
    "terms": {
     "after_key": 1,
