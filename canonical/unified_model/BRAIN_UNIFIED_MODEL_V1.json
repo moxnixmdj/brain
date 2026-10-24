@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f017c1b59c43453e1438c557031cb94b15098dc13cfa6e6800fc9acee8ec0230"
+  "value": "7631e918a79a6aa2f3c93e07b64bd048b46cffb48b1f9b13118da5047b14522f"
  },
  "engines": [
   {
@@ -188690,18 +188690,19 @@
    }
   },
   {
-   "action_id": "A_COMMAND_THAT_CANNOT_BE_RE_RUN_IS_CHECKED_BY_WHAT_IT_LEFT_V1_20261024_V1",
+   "action_id": "A_THE_STATED_TEXT_GOES_WHERE_THE_SENTENCE_SAID_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
    "id": "research:canonical/action_intents/A_THE_STATED_TEXT_GOES_WHERE_THE_SENTENCE_SAID_V1_20261024_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_THE_STATED_TEXT_GOES_WHERE_THE_SENTENCE_SAID_V1_20261024_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "46e621a26e2912c90658a2d4ae2f1dc6ff392e6326803e4d70a6e7815a56e966",
+   "sha256": "112542c6b8efe4a057fd182bb486d908e48ff4f21b3b6a36ec6942e22f2699e4",
    "status": "",
    "terms": {
     "20261024": 1,
-    "a_command_that_cannot_be_re_run_is_checked_by_what_it_left_v1_20261024_v1": 2,
+    "a_command_that_cannot_be_re_run_is_checked_by_what_it_left_v1_20261024_v1": 1,
+    "a_the_stated_text_goes_where_the_sentence_said_v1_20261024_v1": 1,
     "actually": 1,
     "artifact": 1,
     "before": 1,
@@ -188718,7 +188719,6 @@
     "destination": 1,
     "down": 1,
     "e00d2d5": 1,
-    "each": 1,
     "gate": 2,
     "goes": 2,
     "one": 2,

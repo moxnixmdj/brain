@@ -1,5 +1,5 @@
 {
-  "action_id": "A_COMMAND_THAT_CANNOT_BE_RE_RUN_IS_CHECKED_BY_WHAT_IT_LEFT_V1_20261024_V1",
+  "action_id": "A_THE_STATED_TEXT_GOES_WHERE_THE_SENTENCE_SAID_V1_20261024_V1",
   "action_intent_id": "A_THE_STATED_TEXT_GOES_WHERE_THE_SENTENCE_SAID_V1_20261024_V1",
   "action_kind": "FRESH_REUSE",
   "action_summary": "Give tee the postcondition tee actually guarantees -- its operand exists when it returns, because tee opens it O_CREAT|O_TRUNC whatever is on stdin -- so a command that cannot be re-run is checked by what it left instead of being refused for being unrepeatable.",
@@ -35,8 +35,8 @@
     "route_class": "INTEGRATE"
   },
   "benchmark_or_family_rank_authority": false,
-  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A request that names two destinations binds the stated text to the last path, so the text lands in the report and the file the sentence asked for is never created.",
-  "canonical_base_commit": "44d995cb56b96f2ef884dbaecdb3e8cd5ee4079b",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::composer_route_v1.bind bound every PATH_OUTPUT slot to paths[-1]. That is right for 'compress notes.txt into notes.txt.gz' and wrong for a sentence that states a text and says where it goes before naming a second destination. Measured on e00d2d5: the chain ran one step, wrote the stated text into report.json, left out.txt uncreated, and the artifact gate correctly refused with PROMISED_ARTIFACT_MISSING:out.txt. The gate was right; the binding was wrong, and the user's text was sitting in a file they named for something else.",
+  "canonical_base_commit": "e00d2d5a63753c4abcb02867097312b00c4ca6ea",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -77,7 +77,7 @@
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "prior_work_reused": "_post_tee is written on the shape of _post_touch and _post_rm, which already established the (tokens, root) contract, the _inside confinement and the reason vocabulary. _MUTATING_POSTCONDITIONS already decided which commands are judged by their effect rather than re-run, and tee is added to that table rather than given a separate path. The adapter already fingerprinted the file honestly and needed no change at all. The promise is taken from tee's own documented behaviour -- it opens its operand O_CREAT|O_TRUNC -- and is claimed at exactly that strength: existence, not emptiness, because emptiness follows from stdin and stdin is not part of the argv shape this is scoped to.",
   "recursive_obs": {
-    "canonical_base_commit": "44d995cb56b96f2ef884dbaecdb3e8cd5ee4079b",
+    "canonical_base_commit": "e00d2d5a63753c4abcb02867097312b00c4ca6ea",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "EDITING_THE_SUBSTRATE_GATE_TO_HONOUR_OPTIONAL_AND_FALLBACK_WHICH_IS_A_PROTECTED_GUARD_PATH_AND_WOULD_HAVE_REQUIRED_ASSERTING_A_USER_GOVERNANCE_AUTHORIZATION_THAT_WAS_DELEGATED_RATHER_THAN_GRANTED",
@@ -1021,7 +1021,7 @@
     "why_selected_route_is_fastest_sufficient": "IT_ADDS_ONE_POSTCONDITION_TO_A_TABLE_THAT_ALREADY_JUDGED_FIVE_COMMANDS_BY_THEIR_EFFECT_AND_NEEDS_NO_ADAPTER_CHANGE_AT_ALL__MEASURED_TO_TAKE_THE_EVERYDAY_SET_TO_14_OF_14_WITH_ALL_TWELVE_ACCEPTANCE_SUITES_GREEN_AND_FALSE_PASSES_AT_ZERO"
   },
   "resolution": "extract_content_destination returns the path the sentence puts immediately after the payload it states, built from the same _DEST_WORDS the payload patterns already use. bind consults it only when content was actually stated and the token is a path the extractor already recognized, so every payload-free sentence keeps binding to paths[-1].",
-  "route_id": "A_COMMAND_THAT_CANNOT_BE_RE_RUN_IS_CHECKED_BY_WHAT_IT_LEFT_V1_20261024_V1",
+  "route_id": "A_THE_STATED_TEXT_GOES_WHERE_THE_SENTENCE_SAID_V1_20261024_V1",
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
   "selected_route": "A_COMMAND_THAT_CANNOT_BE_RE_RUN_IS_CHECKED_BY_WHAT_IT_LEFT_V1_20261024_V1",
   "stop_condition": "Stop when the new suite passes and seven of its nine tests fail on baseline, every unstateable shape of tee is refused, a tee whose operand is absent or is a directory is refused, the bytes on disk match the producer's digest, tee excuses no path as a consumer, all twelve acceptance suites pass with no new failure, the CI suite is 136, the benchmark holds at 23/23 and 22/23, verify reports 33/33, measured false passes stay at zero, and repo-integrity-guard reports 0 violations.",
@@ -1066,7 +1066,7 @@
     "tournament": {
       "counterexample_receipts": [
         {
-          "git_blob_sha": "221b631d481431b2a2359e6eb342cfd3213f922b",
+          "git_blob_sha": "df156b6bfe3b891e4d9646d6d867800790395f74",
           "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py"
         },
         {
@@ -1074,7 +1074,7 @@
           "path": "canonical/runtime/bound_capabilities/cli_command.py"
         },
         {
-          "git_blob_sha": "1b312340c1be47b5b3e8dd0a93773192fbf9072c",
+          "git_blob_sha": "38d9be07b5f26f667c1f3b1f3410cc56a5474423",
           "path": "canonical/tests/test_a_command_is_verified_by_running_it_again_v1.py"
         },
         {
