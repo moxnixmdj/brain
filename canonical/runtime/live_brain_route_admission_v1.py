@@ -1310,14 +1310,27 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         # ask the composer whether a CHAIN of capabilities reaches it: the
         # sentence may describe work no one capability does but several do
         # together. Composition was built and tested and then never called.
+        # The chain may still have missed the file the sentence named.  The
+        # artifact list is derived here for the same reason it is derived
+        # below: it comes from the sentence, not from the capability.
+        #
+        # It is read BEFORE the chain runs, which is the only order in which it
+        # means anything.  _future_artifacts answers "which paths does this
+        # sentence name that do not exist YET", and "yet" means before the work.
+        # It was being evaluated as an argument to _composed_holds_up, so it ran
+        # after _try_composed had already executed the chain -- and a file the
+        # work legitimately removed came back as a promise the chain had failed
+        # to keep.  Measured on 6411cf6: "Run the shell command mv A B" moved A
+        # to B correctly, and was then refused with
+        # PROMISED_ARTIFACT_MISSING:A, naming the source the sentence asked to
+        # have gone.  The main path below has always read this list before
+        # _execute; this branch did not.
+        gap_normalized = front.normalize_goal(goal)
+        gap_future_artifacts = _future_artifacts(gap_normalized)
         composed = _try_composed(task_id, goal, started)
         if composed is not None:
-            # The chain may still have missed the file the sentence named.  The
-            # artifact list is derived here for the same reason it is derived
-            # below: it comes from the sentence, not from the capability.
-            gap_normalized = front.normalize_goal(goal)
             return _composed_holds_up(composed, gap_normalized,
-                                      _future_artifacts(gap_normalized))
+                                      gap_future_artifacts)
         return _fail(task_id, "FAIL__RAW_GOAL_COMPILATION_GAP", "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP", started,
                      compiler_code=exc.code, compiler_detail=exc.detail, route_admission=None)
     except Exception as exc:  # pragma: no cover - defensive, mirrors run_raw_goal
