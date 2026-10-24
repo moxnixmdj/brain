@@ -37,8 +37,30 @@ def run(args, root):
     if proc.returncode!=0:
         raise RuntimeError("CLI_COMMAND_FAILED:"+result["stderr"][-1200:])
     if out is not None:
-        if not out.is_file():
+        if not out.exists():
             raise RuntimeError("CLI_EXPECTED_OUTPUT_MISSING")
+        if out.is_dir():
+            # `not out.is_file()` conflated two different facts: "the declared
+            # output does not exist" and "the declared output is not a regular
+            # file".  A directory the command just created is a real artifact
+            # and the second fact is not a failure, so `mkdir D` -- which
+            # produces exactly a directory -- raised CLI_EXPECTED_OUTPUT_MISSING
+            # after having done its work.  Measured on cfd742d: the directory
+            # was never even created, because the composer refused to dispatch a
+            # command whose declared output could not be satisfied.
+            #
+            # A directory carries no bytes, so a byte-level expectation cannot
+            # be met by one.  That case still refuses, and says which fact it is
+            # reporting rather than claiming the output is missing.
+            if str(args.get("output_prefix_hex") or "").strip() or args.get("output_text_utf8") is True:
+                raise RuntimeError("CLI_EXPECTED_OUTPUT_NOT_A_FILE")
+            result.update({
+              "output_path":str(out.relative_to(pathlib.Path(root).resolve())),
+              "output_kind":"directory",
+              "output_bytes":0,
+              "output_verified":True
+            })
+            return result
         raw=out.read_bytes()
         prefix=str(args.get("output_prefix_hex") or "").strip().lower()
         if prefix:
