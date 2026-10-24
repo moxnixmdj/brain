@@ -1,0 +1,23 @@
+{
+  "adapter_result": {
+    "adapter": "file_write_json",
+    "content_sha256": "c6d314954c1cd3e9dfa0aa5a8e20abcd94157e922c50682c6ad9403f778b99ca",
+    "json_parsed": true,
+    "json_top_level_type": "dict",
+    "output_bytes": 103,
+    "output_path": "canonical/astra_runtime/tmp/jfw_verify/JSON_FILE_WRITE_PROOF.json",
+    "output_sha256": "c6d314954c1cd3e9dfa0aa5a8e20abcd94157e922c50682c6ad9403f778b99ca",
+    "output_verified": true
+  },
+  "capability_id": "json.file.write",
+  "independent_method": "pathlib.Path.read_bytes + hashlib.sha256 + json.loads, no adapter code involved",
+  "independent_output_bytes": 103,
+  "independent_output_sha256": "c6d314954c1cd3e9dfa0aa5a8e20abcd94157e922c50682c6ad9403f778b99ca",
+  "independent_verified": true,
+  "origin_mission_id": "ASTRA-VERIFY-JSON-FILE-WRITE-001",
+  "schema": "PROJECT_BRAIN_AUTO_BINDING_VERIFICATION_V1",
+  "semantic_roundtrip": {
+    "expected_content_sha256": "c6d314954c1cd3e9dfa0aa5a8e20abcd94157e922c50682c6ad9403f778b99ca",
+    "parsed_equals_stated": true
+  }
+}

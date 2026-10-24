@@ -956,20 +956,24 @@ class ProducerConsumerSecondPassTests(unittest.TestCase):
         the registry can fill it, so the binder must still refuse rather than
         invent a file.
 
-        This assertion has been repointed twice, each time because the effect it
-        named gained a real producer -- first ``source.candidates.available``
-        (now ``source.candidates.enumerate.stdlib``), then
+        This assertion has been repointed three times, each time because the
+        effect it named gained a real producer -- first
+        ``source.candidates.available`` (now
+        ``source.candidates.enumerate.stdlib``), then
         ``structured.decision_evidence.available`` (now
-        ``structured.decision_evidence.locate.stdlib``). Repointing is the
+        ``structured.decision_evidence.locate.stdlib``), then
+        ``json.file.available`` (now ``json.file.write``). Repointing is the
         correct response: deleting the test would lose the only thing proving
-        the map cannot conjure a producer. The property under test is unchanged.
+        the map cannot conjure a producer. The property under test is unchanged,
+        so it is ``structured.json.available`` that carries it now -- still no
+        producer, read off the registry rather than asserted.
         """
         providers = compiler._effect_providers(self.registry)
         self.assertNotIn("structured.json.available", providers)
-        self.assertNotIn("json.file.available", providers)
         # And the effects that did gain producers are genuinely in the map,
         # read off the registry rather than asserted.
         self.assertIn("source.candidates.available", providers)
+        self.assertIn("json.file.available", providers)
         self.assertEqual(
             providers["source.candidates.available"][0],
             "source.candidates.enumerate.stdlib",
