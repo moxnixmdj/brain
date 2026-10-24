@@ -401,10 +401,31 @@ def execute_chain(chain: Sequence[str], goal: str,
         try:
             result = ra.run_adapter_locally(entry, {"args": dict(args)})
         except Exception as exc:  # noqa: BLE001 - a step failure is data
+            # The adapter dispatches the command and only THEN checks its own
+            # expectations, so it can raise after the work has already landed.
+            # For `rm A` the file is deleted and only then does the output check
+            # fail.  Returning without appending this step destroys the only
+            # record that a command was dispatched, so every downstream consumer
+            # sees an empty step list and reports that nothing happened.
+            #
+            # Measured on b364795: "Run the shell command rm A" deleted A,
+            # execute_chain returned steps=[] with status
+            # FAIL__COMPOSER_STEP_RAISED, and solve() reported
+            # FAIL__RAW_GOAL_COMPILATION_GAP -- a report that denied a side
+            # effect which had already happened.  That is the one direction a
+            # false report must never go.
+            #
+            # Whether the side effect landed is genuinely unknown from here, so
+            # the record says exactly that and claims nothing more.
+            reason = type(exc).__name__ + ":" + str(exc)[:200]
+            steps.append({"index": index, "capability_id": cid,
+                          "args": dict(args), "type_errors": list(errors),
+                          "adapter_raised": reason, "result": None,
+                          "side_effect_landed": "UNKNOWN"})
             return {"schema": SCHEMA, "pass": False, "goal": goal,
                     "status": "FAIL__COMPOSER_STEP_RAISED",
                     "failed_step": {"index": index, "capability_id": cid,
-                                    "reason": type(exc).__name__ + ":" + str(exc)[:200]},
+                                    "reason": reason},
                     "steps": steps}
         # `run_adapter_locally` returns the adapter's own dict AS the result --
         # {"output_path": ..., "output_sha256": ..., "output_verified": True, ...}.

@@ -24536,7 +24536,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6359,
+  "research_index_records": 6360,
   "routing_tokens": 1798,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "9046aef90eb96a88cb3fac36d504bce3b09afb72557d04493b9eca41d389f765"
+  "value": "ed3e1eff01475d1c36c8ab4287fe9be6e82b873d600d3b70d8a72f6c2a4b45e6"
  },
  "engines": [
   {
@@ -187891,6 +187891,51 @@
    }
   },
   {
+   "action_id": "A_COMMAND_THAT_RAN_IS_NEVER_REPORTED_AS_ONE_THAT_COULD_NOT_V1_20261024_V1",
+   "capability": false,
+   "date": "2026-10-24",
+   "id": "research:canonical/action_intents/A_COMMAND_THAT_RAN_IS_NEVER_REPORTED_AS_ONE_THAT_COULD_NOT_V1_20261024_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_COMMAND_THAT_RAN_IS_NEVER_REPORTED_AS_ONE_THAT_COULD_NOT_V1_20261024_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "08ad6a4ae9e1308109c7c548ba5b63d7930626e92d09c437e08e899e8252c51f",
+   "status": "",
+   "terms": {
+    "20261024": 1,
+    "a_command_that_ran_is_never_reported_as_one_that_could_not_v1_20261024_v1": 2,
+    "adapter": 2,
+    "after": 1,
+    "already": 1,
+    "appending": 1,
+    "b364795": 1,
+    "been": 1,
+    "caller": 1,
+    "checks": 1,
+    "command": 4,
+    "compilation": 1,
+    "composer_route": 1,
+    "consumer": 1,
+    "dangerous": 1,
+    "deleted": 1,
+    "denying": 1,
+    "destroying": 1,
+    "direction": 1,
+    "dispatched": 2,
+    "empty": 2,
+    "had": 2,
+    "list": 2,
+    "only": 2,
+    "record": 2,
+    "report": 2,
+    "reported": 3,
+    "returned": 2,
+    "run": 2,
+    "so": 2,
+    "step": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_COMPOSED_STEP_RECORDS_WHAT_IT_PRODUCED_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -207111,7 +207156,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "2de93bc0a7824357a998f816650aca4f69c911665816b2c31cbad511dd2d7c2e",
+   "sha256": "0538ce9bcacd416835aa042425afa3187e4c2186b9110bac3b402b078e4db4f0",
    "summary": "Routing a sentence to a typed capability chain.",
    "symbol_count": 11,
    "symbols": [
@@ -225114,7 +225159,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "019b7e98cbbe2bd803b6e6caeda75ec454ae4c6644a2a4ce739bbd94ba8c3e0f",
+   "sha256": "71282228096d6d7e5a20d5e2436057b610b1f829ae4778032cefc3897c5c0b82",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 42,
    "symbols": [

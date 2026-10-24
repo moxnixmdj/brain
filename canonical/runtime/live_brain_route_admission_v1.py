@@ -1234,7 +1234,46 @@ def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | Non
     except Exception:  # noqa: BLE001 - composition must never break routing
         return None
     if not executed.get("pass"):
-        return None
+        # The chain ALREADY RAN.  execute_chain does not roll back, so returning
+        # None here throws away the only record that work happened and lets the
+        # caller report FAIL__RAW_GOAL_COMPILATION_GAP -- "I could not turn this
+        # into an executable contract" -- about a command that executed and
+        # changed the repository.
+        #
+        # Measured on b364795: "Run the shell command rm A" deleted A and was
+        # then reported as a compilation gap.  The report denied a side effect
+        # that had already happened, which is the one direction a false report
+        # must never go.
+        #
+        # Scoped to the claim this record can actually make: a step is only
+        # reported as having run when it carries a result.  A chain that failed
+        # before reaching any command still returns None, so the caller keeps
+        # reporting the honest gap rather than claiming work that never started.
+        #
+        # pass stays False.  This is not acceptance -- it is a truthful account
+        # of work that ran and could not be certified.
+        steps = executed.get("steps") or []
+        dispatched = [st for st in steps
+                      if isinstance(st, Mapping)
+                      and (st.get("adapter_raised") is not None
+                           or st.get("result") is not None)]
+        if not dispatched:
+            return None
+        return {
+            "schema": LIVE_SCHEMA,
+            "status": "FAIL_CLOSED__COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN",
+            "pass": False, "task_id": task_id, "goal": goal,
+            "executed": True, "execution_proof_type": COMPOSED_EXECUTOR,
+            "failure_class": "STEP_RAISED_OUTCOME_UNKNOWN",
+            "steps_dispatched": len(dispatched),
+            "adapter_raised": [st.get("adapter_raised") for st in dispatched
+                               if st.get("adapter_raised")],
+            "composer_route": {k: routed.get(k) for k in ("token", "chain", "tried")},
+            "composer_execution": {k: executed.get(k) for k in
+                                   ("steps", "produced", "status")},
+            "capability_id": (routed["chain"] or [None])[-1],
+            "elapsed_ns": perf_counter_ns() - started,
+        }
     out = {
         "schema": LIVE_SCHEMA, "status": "PASS__COMPOSED_CAPABILITY_CHAIN",
         "pass": True, "task_id": task_id, "goal": goal,
