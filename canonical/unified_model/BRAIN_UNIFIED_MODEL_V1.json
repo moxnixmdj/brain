@@ -24536,7 +24536,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6364,
+  "research_index_records": 6365,
   "routing_tokens": 1798,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8d19304b56aee9a6f3c689ebc6d01fb231bac4ca8681884e97f98318e4cd273e"
+  "value": "5f5673291767468fbab022865816a5f60fed62cf4ac7933fffe46b74647deb96"
  },
  "engines": [
   {
@@ -187891,6 +187891,51 @@
    }
   },
   {
+   "action_id": "A_COMMAND_THAT_CANNOT_BE_RE_RUN_IS_CHECKED_BY_WHAT_IT_LEFT_V1_20261024_V1",
+   "capability": false,
+   "date": "2026-10-24",
+   "id": "research:canonical/action_intents/A_COMMAND_THAT_CANNOT_BE_RE_RUN_IS_CHECKED_BY_WHAT_IT_LEFT_V1_20261024_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_COMMAND_THAT_CANNOT_BE_RE_RUN_IS_CHECKED_BY_WHAT_IT_LEFT_V1_20261024_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "ff8943a71ca07c8e2daed400838d7b36382dac0e63ee96a6ee1f7dd3195824c1",
+   "status": "",
+   "terms": {
+    "20261024": 1,
+    "44d995c": 1,
+    "a_command_that_cannot_be_re_run_is_checked_by_what_it_left_v1_20261024_v1": 2,
+    "actually": 1,
+    "adapter": 1,
+    "because": 1,
+    "bytes": 1,
+    "cannot": 1,
+    "certified": 1,
+    "check": 2,
+    "checked": 1,
+    "command": 3,
+    "command_not_re_runnable_without_side_effects": 1,
+    "commands": 2,
+    "complete": 1,
+    "correctly": 1,
+    "cp": 1,
+    "down": 2,
+    "effect": 2,
+    "everyday": 3,
+    "judged": 2,
+    "left": 2,
+    "one": 2,
+    "promise": 2,
+    "rather": 3,
+    "refused": 2,
+    "set": 2,
+    "strength": 2,
+    "tee": 2,
+    "than": 3,
+    "v1": 2,
+    "written": 2
+   }
+  },
+  {
    "action_id": "A_COMMAND_THAT_CHANGES_SOMETHING_IS_VERIFIED_BY_THE_WORLD_AFTERWARDS_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -246062,9 +246107,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "6548cc066d1e3794800f61ab4aecc23836a862fd7454f98b7c4c8c464f4d1b7c",
+   "sha256": "006eb4dff6a1e5c29ab1e180e2f33f9bdafd0718b718dd483124014cdfe80790",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
-   "symbol_count": 34,
+   "symbol_count": 35,
    "symbols": [
     "_STATES_A_COMMAND",
     "_action_rows",

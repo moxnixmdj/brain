@@ -153,11 +153,15 @@ class TestNothingIsReRunThatCouldChangeSomething(unittest.TestCase):
     # promise it made about the world instead -- but only when that promise can
     # be stated precisely enough to be checked.  These cannot, so they are
     # refused rather than passed.
-    # `rm` is not here any more, and that is the point: a single removal has a
-    # precise promise -- the path is gone -- and is certified (and every
-    # unstateable shape of it refused) by
-    # test_a_removal_is_certified_only_when_the_removal_is_proven_v1.
-    NO_STATEABLE_PROMISE = ("tee", "dd", "chmod", "ln", "sed", "truncate")
+    # `rm` and `tee` are not here any more, and that is the point of both.
+    # A single removal has a precise promise -- the path is gone -- and a single
+    # tee has one too -- its operand exists when it returns, because tee opens it
+    # O_CREAT|O_TRUNC whatever is on stdin.  Each is certified, and every shape of
+    # it that cannot be stated is refused, by
+    # test_a_removal_is_certified_only_when_the_removal_is_proven_v1 and
+    # test_a_command_that_cannot_be_re_run_is_checked_by_what_it_left_v1.
+    # What is left is the set for which no promise can be stated at all.
+    NO_STATEABLE_PROMISE = ("dd", "chmod", "ln", "sed", "truncate")
 
     def test_a_mutating_command_with_no_stateable_promise_is_refused(self):
         for program in self.NO_STATEABLE_PROMISE:
@@ -332,7 +336,7 @@ class TestEveryPostconditionCanBeFalsified(unittest.TestCase):
         the set for which no promise can be stated at all.
         """
         self._world()
-        for program in ("tee", "dd", "chmod", "ln", "sed", "truncate"):
+        for program in ("dd", "chmod", "ln", "sed", "truncate"):
             self._ask([program, self.A], False,
                       "COMMAND_NOT_RE_RUNNABLE_WITHOUT_SIDE_EFFECTS")
 
