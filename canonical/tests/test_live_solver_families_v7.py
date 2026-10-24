@@ -213,17 +213,122 @@ def test_a_capability_whose_name_is_only_part_of_the_sentence_is_not_taken_to_be
         assert not claimed, (goal, claimed)
 
 
-def test_a_shorter_name_does_not_win_over_the_longer_one_the_caller_said():
-    """The sibling ambiguity, stated as behaviour."""
+def test_a_stated_version_excludes_the_sibling_it_does_not_name():
+    """A stronger guarantee than the one this test used to assert.
+
+    It previously recorded that "Run the bytes characteristic active query task
+    generator v10." ALSO states the whole of bytes_active_query_task_generator_v1,
+    with "characteristic" as an extra word in the middle, so specificity had to
+    decide.  Honouring a stated version removes the ambiguity outright: the sentence
+    says v10, the sibling says v1, so the sibling is not named at all.
+    """
     long_cid = "canonical/runtime/bytes_characteristic_active_query_task_generator_v10.py.auto.v1"
     short_cid = "canonical/runtime/bytes_active_query_task_generator_v1.py.auto.v1"
-    sentence = v7._name_sentence(long_cid)
-    assert front.request_states_the_capability_name(sentence, long_cid)
-    # the shorter name IS also stated, which is exactly why specificity has to decide
-    assert front.request_states_the_capability_name(sentence, short_cid)
     reg = _registry()
+    assert long_cid in reg and short_cid in reg
+    sentence = v7._name_sentence(long_cid)
+    assert front.request_states_the_capability_name(sentence, long_cid), sentence
+    assert not front.request_states_the_capability_name(sentence, short_cid), sentence
     assert front._named_receipt_projection(sentence, reg, None,
                                            front.request_states_the_capability_name) == long_cid
+
+
+def test_when_two_names_are_equally_stated_the_more_specific_one_wins():
+    """The specificity tie-break on its own, on a synthetic pair with no versions.
+
+    Kept as a unit check because the live corpus no longer contains a pair that
+    reaches it -- versions now separate every sibling that used to.  Without it the
+    tie-break would be untested code that only looks redundant.
+    """
+    reg = {
+        "canonical/runtime/alpha_beta.py.auto.v1": {
+            "capability_source": "receipt_projection"},
+        "canonical/runtime/alpha_beta_gamma.py.auto.v1": {
+            "capability_source": "receipt_projection"},
+    }
+    sentence = "Run the alpha beta gamma."
+    names = front.request_states_the_capability_name
+    assert names(sentence, "canonical/runtime/alpha_beta.py.auto.v1")
+    assert names(sentence, "canonical/runtime/alpha_beta_gamma.py.auto.v1")
+    assert front._named_receipt_projection(sentence, reg, None, names) == \
+        "canonical/runtime/alpha_beta_gamma.py.auto.v1"
+
+
+def test_every_path_style_receipt_backed_capability_routes_to_itself_when_named():
+    """ALL of them, not a sample: 294 capabilities, each named by its own sentence.
+
+    Measured in three steps over the same 294:
+
+        270 of 294  before a stated version was honoured
+        287 of 294  once a stated version had to match, reading the version only
+                    from the END of the name -- which wrongly rejected
+                    terminal_frontier_factorizer_v6_candidate, whose version sits
+                    mid-name, and handed the route to ..._v6
+        294 of 294  once the version is read from anywhere in the name and matched
+                    as a set, so current_terminal_authority_v3_k6_v4_verifier works
+                    too
+
+    Every one of the 24 original failures was a VERSION SIBLING: "Run the
+    composition cross step no bypass audit v2." matched _v1 and _v2 identically
+    because the trailing version token was dropped, both tie-break on the same word
+    count and the same stem length, and iteration order picked _v1.  The harness
+    generator documents the rule this implements: "the version is part of the name,
+    because the retrieval path separates a capability's version siblings only when
+    the request states the version."
+    """
+    reg = _registry()
+    targets = [t for t in v7._receipt_backed() if "/" in t["capability_id"]]
+    assert len(targets) >= 200, f"only {len(targets)} targets: the corpus shrank"
+    bad = []
+    for t in targets:
+        cid = t["capability_id"]
+        sentence = v7._name_sentence(cid)
+        try:
+            selected = front.compile_goal(sentence, reg, ROOT).get("selected_capability")
+        except gc.GoalCompilationFailure as exc:
+            selected = "<raised:" + str(getattr(exc, "code", "?")) + ">"
+        if selected != cid:
+            bad.append((cid, selected))
+    assert not bad, f"{len(bad)} of {len(targets)} misrouted; first few: {bad[:6]}"
+
+
+def test_a_stated_version_selects_that_version_and_not_its_sibling():
+    """The sibling rule as behaviour, on names that really exist in the registry."""
+    v1 = "canonical/runtime/escape_progress_shared_gap_audit_v1.py.auto.v1"
+    v2 = "canonical/runtime/escape_progress_shared_gap_audit_v2.py.auto.v1"
+    v3 = "canonical/runtime/escape_progress_shared_gap_audit_v3.py.auto.v1"
+    reg = _registry()
+    for cid in (v1, v2, v3):
+        assert cid in reg, cid
+    # each sentence states exactly one version, and only that capability may claim it
+    for want, others in ((v1, (v2, v3)), (v2, (v1, v3)), (v3, (v1, v2))):
+        sentence = v7._name_sentence(want)
+        assert front.request_states_the_capability_name(sentence, want), sentence
+        for other in others:
+            assert not front.request_states_the_capability_name(sentence, other), (sentence, other)
+        assert front._named_receipt_projection(sentence, reg, None,
+                                               front.request_states_the_capability_name) == want
+
+
+def test_a_version_mid_name_is_still_part_of_the_name():
+    """Reading only the trailing token rejected the right capability outright."""
+    cid = "canonical/runtime/terminal_frontier_factorizer_v6_candidate.py.auto.v1"
+    sibling = "canonical/runtime/terminal_frontier_factorizer_v6.py.auto.v1"
+    reg = _registry()
+    if cid not in reg or sibling not in reg:
+        pytest.skip("the mid-name version pair is not in this registry")
+    sentence = v7._name_sentence(cid)
+    assert front.request_states_the_capability_name(sentence, cid), sentence
+    assert front._named_receipt_projection(sentence, reg, None,
+                                           front.request_states_the_capability_name) == cid
+
+
+def test_a_name_with_no_version_still_matches_a_versioned_capability():
+    """The reason the trailing token is dropped at all -- prose omits the version."""
+    cid = "canonical/runtime/bytes_active_query_task_generator_v1.py.auto.v1"
+    sentence = "Run the bytes active query task generator."
+    assert "v1" not in sentence
+    assert front.request_states_the_capability_name(sentence, cid), sentence
 
 
 def test_a_target_that_routes_by_name_carries_the_rule_that_made_it_possible():
