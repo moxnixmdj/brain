@@ -73,11 +73,27 @@ def score(goal_words: set[str], token: str,
 
 
 def candidate_tokens(goal: str, g: Mapping[str, Any] | None = None) -> list[str]:
-    """Tokens the goal might be asking for, best guess first."""
+    """Tokens the goal might be asking for, best guess first.
+
+    Scored on the request's PROSE, never on the values it carries -- the same rule the
+    front compiler already applies as F8/F25, and for the same measured reason.  A URL,
+    a path and a quoted payload are values: the address it reads, the file it touches,
+    the text it encodes.  None of them says what the task IS.
+
+    Measured without this, on "Write the text 'hello patch' to the file <t>/out.txt and
+    save the report to <t>/report.json": words() returns the path's own components as
+    task words -- json, txt, out, canonical, astra, runtime, tmp -- and `json`, taken
+    from the FILENAME report.json, ranked json.file.available above text.file.available.
+    The request was then routed to a JSON writer, which correctly refused the plain text
+    with CONTENT_NOT_VALID_JSON, and neither file was written.  A destination's suffix
+    decided the task.  On prose the same sentence yields file, report, save, text,
+    write -- the words the request is actually made of.
+    """
     from canonical.runtime import capability_composer_v1 as composer
+    from canonical.runtime import goal_front_compiler_v1 as front
 
     g = g if g is not None else composer.graph()
-    gw = words(goal)
+    gw = words(front.prose_only(goal))
     if not gw:
         return []
     provided: set[str] = set()

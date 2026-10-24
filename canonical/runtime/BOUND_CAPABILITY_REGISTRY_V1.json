@@ -2303,6 +2303,67 @@
         "state_path": "canonical/astra_runtime/state/ASTRA-RUNTIME-BOUND-QR-GENERIC-001.json"
       }
     },
+    "json.file.write": {
+      "action_template": {
+        "args": {
+          "capability_id": "json.file.write",
+          "output_path": "${input.output_path}",
+          "spec": "${input.spec}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "file_write_json",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "json",
+        "report",
+        "document",
+        "record",
+        "structured"
+      ],
+      "limitations": [
+        "Writes one UTF-8 JSON document to one repository-local file.",
+        "The bytes are read back, byte-compared, then parsed; a document that does not parse is refused, not reported.",
+        "The document slot is JSON_TEXT, so a stated payload that is not JSON is refused at type-check time rather than written."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "json.file.available"
+      ],
+      "requires": [],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/file_write_json.py",
+        "modules": []
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "autonomous_acquisition": true,
+        "independent_output_bytes": 103,
+        "independent_output_sha256": "c6d314954c1cd3e9dfa0aa5a8e20abcd94157e922c50682c6ad9403f778b99ca",
+        "independent_verified": true,
+        "mission_id": "ASTRA-VERIFY-JSON-FILE-WRITE-001",
+        "observed_effect": {
+          "adapter": "file_write_json",
+          "content_sha256": "c6d314954c1cd3e9dfa0aa5a8e20abcd94157e922c50682c6ad9403f778b99ca",
+          "json_parsed": true,
+          "json_top_level_type": "dict",
+          "output_bytes": 103,
+          "output_path": "canonical/astra_runtime/tmp/jfw_verify/JSON_FILE_WRITE_PROOF.json",
+          "output_sha256": "c6d314954c1cd3e9dfa0aa5a8e20abcd94157e922c50682c6ad9403f778b99ca",
+          "output_verified": true
+        },
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-JSON-FILE-WRITE-001__json.file.write__AUTO_VERIFY.json"
+      }
+    },
     "json.query.jq": {
       "action_template": {
         "args": {
