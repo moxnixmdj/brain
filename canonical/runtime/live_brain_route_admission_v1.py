@@ -243,8 +243,19 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     # admissible, which is backwards: an unbindable path fails, so no path at all must fail too.
     # Only a FILE input is checked, and only when nothing in the request could ever name one, so a
     # capability whose inputs are text or numbers is untouched.
+    # An OUTPUT is not a file the capability consumes.  Where a result lands is
+    # ours to choose, so counting output_path/result_path here made R9 refuse a
+    # capability for missing a file it never needed to be given -- measured on
+    # 3b9e6a0d, all five of the remaining opaque refusals over the 72 verified
+    # capabilities named in prose reported `output_path` as the unbound input,
+    # which is a diagnosis pointing the caller at the one thing they were never
+    # supposed to supply.
+    _owned_outputs = ("output_path", "result_path")
     file_inputs = sorted(k for k in input_keys
-                         if k.endswith("_path") or k.endswith("_file") or k in ("path", "file"))
+                         if (k.endswith("_path") or k.endswith("_file") or k in ("path", "file"))
+                         and k not in _owned_outputs
+                         and not k.endswith("_output_path")
+                         and not k.endswith("_result_path"))
     if file_inputs and not futures and not _goal_names_a_file(goal):
         return {**base, "admitted": False, "rule": "R9_REQUIRED_FILE_INPUT_UNBOUND",
                 "unbound_file_inputs": file_inputs}
@@ -1046,8 +1057,30 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     admission = route_admission(normalized, compiled, admissible)
     admission["front_compiler_rules"] = list((compiled.get("front_compiler") or {}).get("rules_applied") or [])
     if admission.get("admitted") is not True:
-        return _fail(task_id, "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED", "ROUTE_ADMISSION_REJECTED:" + str(admission.get("rule")), started,
-                     compiled_capability_id=admission.get("selected_capability"), compiler_mode=compiled.get("compiler_mode"), route_admission=admission)
+        # Name the capability and what it is missing, in the same language the
+        # compiler boundary uses.  The rule already computed both -- R9 returns
+        # `unbound_file_inputs` and the base carries `selected_capability` -- but
+        # the message carried neither, so measured on 3b9e6a0d five of the six
+        # remaining opaque refusals over the 72 verified capabilities named in
+        # prose were `ROUTE_ADMISSION_REJECTED:R9_REQUIRED_FILE_INPUT_UNBOUND`
+        # with no capability and no input in it.  A refusal the caller cannot
+        # read is a refusal they cannot close.
+        _rejected = admission.get("selected_capability")
+        _unbound = admission.get("unbound_file_inputs") or []
+        _detail = None
+        if _rejected:
+            _detail = "%s:contract_not_stated:%s" % (_rejected, ",".join(_unbound)) \
+                if _unbound else "%s:not_admitted:%s" % (_rejected, admission.get("rule"))
+        _extra: dict[str, Any] = {
+            "compiled_capability_id": _rejected,
+            "compiler_mode": compiled.get("compiler_mode"),
+            "route_admission": admission,
+        }
+        if _detail is not None:
+            _extra["compiler_detail"] = _detail
+            _extra["compiler_code"] = "GOAL_INPUT_BINDING_REQUIRED"
+        return _fail(task_id, "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+                     "ROUTE_ADMISSION_REJECTED:" + str(admission.get("rule")), started, **_extra)
     promised_sources = _promised_source_files(normalized)
     source_digests_before = {raw: _source_digest(raw) for raw in promised_sources}
     result = _execute(task_id, goal, compiled, admissible, started)
