@@ -2176,9 +2176,37 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
         # the contract is checked here, where the winning binding is known.
         unstated = _inputs_not_stated_by(goal, compiled.get("inputs") or {})
         if unstated:
+            # The body's wider context is usually the better binding, but not when
+            # it fills a slot with a reference to a step that does not exist.
+            # Measured on 6ecc6e52, "Run the decision synthesis typed stdlib with
+            # input path <file>" bound input_path to
+            # {"$result": {"cycle": 0, "field": "output_path"}} -- a dangling
+            # reference in a single-capability goal -- while the named entry's own
+            # binding had the file the caller actually wrote.  So before refusing,
+            # take any unstated role the caller literally stated from the named
+            # binding.  Only a role whose value appears in the request is taken;
+            # anything else still refuses.
+            named_entry = (admissible or {}).get(expected) or {}
+            try:
+                named_bound = bind_all_inputs(goal, named_entry, root, cycle=0,
+                                              spool=set())
+            except GoalCompilationFailure:
+                named_bound = None
+            named_bound = dict(named_bound or {})
+            repaired = dict(compiled.get("inputs") or {})
+            still = []
+            for role in sorted(unstated):
+                value = named_bound.get(role)
+                if isinstance(value, str) and value.strip() and (
+                        value.strip() in goal or goal.strip().startswith(value.strip())):
+                    repaired[role] = value
+                else:
+                    still.append(role)
+            if not still:
+                return {**compiled, "inputs": repaired}
             raise GoalCompilationFailure(
                 "GOAL_INPUT_BINDING_REQUIRED",
-                "%s:named_but_inputs_not_stated:%s" % (expected, ",".join(sorted(unstated))))
+                "%s:named_but_inputs_not_stated:%s" % (expected, ",".join(still)))
         return compiled
     if route is not None:
         # The body picked something else.  An explicit name IS the disambiguation
