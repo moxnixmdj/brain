@@ -648,9 +648,34 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
         return _fail(task_id, "FAIL__LIVE_CONTROLLER_EXECUTION", "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE", started, executed=tool_executed,
                      compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"), reason=type(exc).__name__ + ":" + str(exc),
                      executor=LOCAL_EXECUTION_PROOF, tool_executed=tool_executed)
+    # The controller writes its trace rows as {"cycle", "plan", "result"} and closes the
+    # trace with a row whose result.type is "finish" (astra_runtime.py:6795 and :6844).
+    # This path wrote the same information under the key "action" and never closed the
+    # trace, so the one consumer of a trace -- raw_goal_trace_acceptance_v1, which reads
+    # row["plan"] at :164 and :181 and requires a finish row -- saw an empty trace:
+    #
+    #     _action_rows(trace)       -> 0      (reads "plan"; the row had "action")
+    #     _trace_is_finished(trace) -> False  (no row carried result.type == "finish")
+    #
+    # Measured on 82c30fd over all 367 admissible capabilities named in prose: 223 pass,
+    # and 222 of those 223 produced a trace the acceptance verifier could not read.  So
+    # the only verdict it could ever return was TRACE_HAS_NO_CAPABILITY_ACTIONS, which
+    # was untrue -- there was exactly one capability action.
+    #
+    # Nothing here is invented.  The capability really was the planned action, it really
+    # ran, and run_adapter_locally verified its declared expectation before this line.
+    # "action" is kept alongside "plan" so a reader of the old key is unaffected.
+    _summary = "%s executed by the front layer local adapter and its declared expectation verified" % selected
+    _trace = [
+        {"cycle": 0, "plan": dict(action), "action": dict(action), "result": dict(tool_result)},
+        {"cycle": 1, "phase": "front_layer_local_finalization",
+         "plan": {"type": "finish", "args": {"summary": _summary},
+                  "why": "front layer local adapter executed and its declared expectation verified"},
+         "result": {"type": "finish", "summary": _summary}},
+    ]
     row = {"capability_id": selected, "pass": True, "status": "PASS__FRONT_LAYER_LOCAL_ADAPTER_ACTION", "result": dict(tool_result),
-           "execution_proof_type": LOCAL_EXECUTION_PROOF, "controller_plan_sha256": None, "controller_trace": [{"action": dict(action), "result": dict(tool_result)}]}
-    return {
+           "execution_proof_type": LOCAL_EXECUTION_PROOF, "controller_plan_sha256": None, "controller_trace": _trace}
+    out = {
         "schema": LIVE_SCHEMA,
         "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
         "pass": True, "task_id": task_id, "executed": True, "raw_goal": goal,
@@ -664,9 +689,51 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
                                   "model_dependency_count": 0, "trace": row["controller_trace"]},
         "controller_checkpoint": {},
         "cognition_dependency_class": "MODEL_INDEPENDENT", "model_dependency_count": 0,
-        "routing_success_authority": False, "semantic_acceptance_complete": False, "accepted_raw_obligation_ids": [],
+        "routing_success_authority": False,
         "elapsed_ns": perf_counter_ns() - started, "incremental_spend_usd": 0, "benchmark_specific": False, "terminal_credit_delta": 0,
     }
+    out.update(_exact_acceptance(goal, compiled, _trace, raw_contract))
+    if out["semantic_acceptance_complete"]:
+        out["status"] = "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
+    return out
+
+
+def _exact_acceptance(goal: str, compiled: Mapping[str, Any], trace: Any,
+                      raw_contract: Mapping[str, Any]) -> dict[str, Any]:
+    """Ask the real acceptance verifier, and report what it says.
+
+    This path hard-coded ``semantic_acceptance_complete: False`` and
+    ``accepted_raw_obligation_ids: []`` and never called the verifier, so a
+    front-layer execution reported itself provisional with no reason at all -- all
+    223 passes measured on 82c30fd carried no acceptance verdict.
+
+    The verdict is not decided here.  ``raw_goal_trace_acceptance_v1.verify``
+    re-opens every artifact from disk, recomputes its digest and requires every
+    obligation the goal stated to be met.  This only hands it the execution and
+    reports the answer, so a provisional pass now says WHY it is provisional.
+    Measured, that answer is NO_INDEPENDENT_REINSPECTION_FOR:<path> for every one of
+    them: these executions print to stdout and leave no artifact to re-inspect, so
+    the refusal is correct and this change does not upgrade a single pass class.
+    """
+    base: dict[str, Any] = {"semantic_acceptance_complete": False, "accepted_raw_obligation_ids": []}
+    try:
+        from canonical.runtime.raw_goal_trace_acceptance_v1 import verify as _verify_trace
+    except Exception:  # noqa: BLE001 - without the verifier the answer stays provisional
+        return base
+    try:
+        acceptance = _verify_trace(goal=goal, compiled_plan=compiled, execution=trace,
+                                   raw_contract=raw_contract,
+                                   root=pathlib.Path(__file__).resolve().parents[2])
+    except Exception:  # noqa: BLE001 - a verifier fault must not turn a pass into a crash
+        return base
+    if not isinstance(acceptance, Mapping):
+        return base
+    accepted = [str(x) for x in (acceptance.get("accepted_obligation_ids") or [])]
+    obligations = ((raw_contract.get("acceptance_contract") or {}).get("obligations") or [])
+    complete = (acceptance.get("semantic_acceptance_complete") is True
+                and len(accepted) == len(obligations) and len(obligations) > 0)
+    return {"semantic_acceptance_complete": complete, "accepted_raw_obligation_ids": accepted,
+            "raw_goal_acceptance": dict(acceptance)}
 
 
 DAG_KERNEL_EXECUTOR = "PINNED_KERNEL_CAPABILITY_DAG_V1"
