@@ -193,6 +193,22 @@ _EXT = re.compile(r"[A-Za-z0-9_./-]+\.[A-Za-z0-9_]{1,8}")
 _NUM = re.compile(r"-?\d+(?:\.\d+)?")
 
 
+# A path is not required to have an extension, and a directory almost never has
+# one.  `_EXT` alone therefore made every directory invisible to the composer:
+# "mkdir canonical/.../sub" bound no path at all, so PATH_OUTPUT could not be
+# filled and execute_chain refused with OPEN__COMPOSER_SLOT_UNBOUND before
+# dispatching anything -- while goal_compiler._repo_paths found that very path.
+# Two extractors in one brain disagreed about what a path is, and the narrower
+# one was the one that decided whether a command could run.
+#
+# Tried only AFTER `_EXT`, and only for a token carrying a separator whose last
+# segment has no dot and is not the stem of a longer dotted name, so no sentence
+# that already found its paths can change.  The same idiom this file already uses
+# for _CONTENT_FALLBACK: a fallback that is never reached first cannot alter a
+# sentence that already worked.
+_DIRPATH = re.compile(r"\b(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_-]+(?![.\w-])")
+
+
 def extract_paths(text: str) -> list[str]:
     """Filenames anywhere in the sentence.
 
@@ -201,7 +217,22 @@ def extract_paths(text: str) -> list[str]:
     first word is a verb, and the file is the third. Looking only where the
     library looks is how a machine decides a goal named no input.
     """
-    return [m.group(0) for m in _EXT.finditer(str(text or ""))]
+    body = str(text or "")
+    found = [m.group(0) for m in _EXT.finditer(body)]
+    seen = set(found)
+    for m in _DIRPATH.finditer(body):
+        token = m.group(0)
+        if token in seen:
+            continue
+        # The parent of a path already found is not a second path.  Appending it
+        # would move paths[-1] -- which is what PATH_OUTPUT binds -- off the file
+        # the sentence named and onto the directory holding it, so a command
+        # would be told its output is a folder it was never asked to produce.
+        if any(f == token or f.startswith(token + "/") for f in found):
+            continue
+        found.append(token)
+        seen.add(token)
+    return found
 
 
 # A destination is a PATH, and the terminator only counts when what follows it is
