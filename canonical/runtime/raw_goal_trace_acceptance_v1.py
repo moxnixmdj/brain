@@ -30,6 +30,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import subprocess
 import tarfile
 import zipfile
 from collections.abc import Mapping
@@ -47,6 +48,29 @@ DOCX_NS = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 # a payload has no on-disk form to re-open, so the only independent check available
 # is that the sentence actually contains it.
 _TEXT_PAYLOAD_ARGS = ("content", "text", "body", "message")
+
+# The role word that introduces a command line in a sentence.  Deliberately a
+# two-word test rather than a call into the binder: the binder is the thing under
+# test, and PR #6118 established that an inspector which asks the binder what it
+# meant is not an inspector.
+#
+# This test is also what keeps the argv check honest about its own scope, and
+# measuring showed why the unscoped version was wrong.  A capability declares its
+# own argv in its action_template -- the 295 receipt-backed rows all run
+# ["python3", "canonical/runtime/<name>.py"] -- and that argv is part of a
+# definition that was independently verified at acquisition, not something a
+# binder took out of a sentence.  Unscoped, the check refused 174 of the 223
+# passing goals with STEP_COMMAND_NOT_IN_THE_REQUEST, because the token "python3"
+# is not in "Run the <capability>."  When a sentence states no command there is
+# no claim about a command to check, and inventing one is the same error the
+# check exists to catch.
+_COMMAND_ROLE_WORD = re.compile(r"\b(?:shell|cli|terminal)?\s*(?:command|argv)\b", re.I)
+
+
+def _STATES_A_COMMAND(goal: Any) -> bool:
+    """True when the sentence itself introduces a command line."""
+    return bool(_COMMAND_ROLE_WORD.search(str(goal or "")))
+
 
 # What may sit between a payload and the path it is being written to.
 _BETWEEN_PAYLOAD_AND_DEST = re.compile(
@@ -714,6 +738,74 @@ def _inspect_text_file_write(args: Mapping, result: Mapping, root: Path) -> tupl
                       "matches_the_requested_text": True}
 
 
+# Commands that cannot change anything when they are run again.  A re-inspection
+# has to go back to the world rather than to the producer's own report, and for a
+# command the only way back to the world is to run it -- which is safe for these
+# and not safe for anything else, so everything else is refused rather than
+# guessed at.  "cp", "mv", "rm", "mkdir", "touch", "tee" and "dd" are deliberately
+# absent: re-running one of those is a second side effect, not a check.
+_READ_ONLY_COMMANDS = frozenset({
+    "cat", "head", "tail", "wc", "nl", "sort", "grep", "egrep", "fgrep", "ls",
+    "uniq", "tr", "cut", "sha256sum", "md5sum", "stat", "file", "diff", "cmp",
+    "od", "tac", "basename", "dirname", "realpath",
+})
+# A reader with an output flag is not a reader.  "sort -o FILE" writes FILE.
+_SIDE_EFFECTING_FLAGS = ("-o", "--output")
+
+
+def _inspect_shell_command_run(args: Mapping, result: Mapping, root: Path) -> tuple[bool, str, dict]:
+    """Run the stated command again and compare what comes back.
+
+    A command has no artifact of its own to re-open, so the temptation is to
+    accept ``returncode == 0`` and the ``stdout`` the adapter reported.  That is
+    exactly the shape of check PR #6118 showed to be worthless: it compares the
+    record to the record.  What is available instead is the world -- the command
+    can be run again, and if the world still says the same thing then the report
+    was not invented.
+
+    Re-running is only safe for a command that cannot change anything, so the
+    set above is closed and everything outside it is refused with a named reason
+    rather than passed.  That costs coverage -- "cp", "mv" and "rm" are not
+    re-inspected here -- and the honest reading of that cost is in the ledger:
+    this inspector reports what it checked, and a mutating command is reported as
+    unchecked rather than as accepted.
+    """
+    argv = args.get("argv")
+    if not isinstance(argv, (list, tuple)) or not argv:
+        return False, "COMMAND_ARGV_ABSENT", {}
+    tokens = [str(tok) for tok in argv]
+    if any(not tok for tok in tokens):
+        return False, "COMMAND_ARGV_HAS_AN_EMPTY_TOKEN", {}
+    program = tokens[0].rsplit("/", 1)[-1]
+    if program not in _READ_ONLY_COMMANDS:
+        return False, "COMMAND_NOT_RE_RUNNABLE_WITHOUT_SIDE_EFFECTS", {
+            "program": program, "checked": False}
+    if any(tok in _SIDE_EFFECTING_FLAGS or tok.startswith("--output=") for tok in tokens[1:]):
+        return False, "COMMAND_TAKES_AN_OUTPUT_FLAG", {"program": program}
+    claimed_out = result.get("stdout")
+    claimed_code = result.get("returncode")
+    if not isinstance(claimed_out, str) or not isinstance(claimed_code, int):
+        return False, "COMMAND_RESULT_CARRIES_NO_OUTPUT_TO_CHECK", {}
+    try:
+        proc = subprocess.run(tokens, cwd=root, capture_output=True, timeout=60)
+    except Exception as exc:  # noqa: BLE001 - a failed re-run is a refusal, not a crash
+        return False, "COMMAND_RE_RUN_RAISED:" + type(exc).__name__, {}
+    if proc.returncode != claimed_code:
+        return False, "COMMAND_RETURN_CODE_NOT_REPRODUCED", {
+            "claimed": claimed_code, "re_run": proc.returncode}
+    again = proc.stdout.decode("utf-8", "replace")
+    if again != claimed_out:
+        return False, "COMMAND_OUTPUT_NOT_REPRODUCED", {
+            "claimed_bytes": len(claimed_out.encode("utf-8")),
+            "re_run_bytes": len(again.encode("utf-8"))}
+    again_err = proc.stderr.decode("utf-8", "replace")
+    if again_err != str(result.get("stderr") or ""):
+        return False, "COMMAND_STDERR_NOT_REPRODUCED", {}
+    return True, "", {"command_re_run": True, "program": program,
+                      "returncode_reproduced": proc.returncode,
+                      "stdout_bytes_reproduced": len(again.encode("utf-8"))}
+
+
 INSPECTORS: dict[str, Inspector] = {
     "pdf.extract.text.pypdf": _inspect_pdf_extract_text,
     "python.source.audit.ast": _inspect_python_source_audit,
@@ -727,6 +819,7 @@ INSPECTORS: dict[str, Inspector] = {
     "decision.synthesis.typed.stdlib": _inspect_decision_synthesis,
     "decision.synthesis.verify.stdlib": _inspect_decision_verify,
     "text.file.write": _inspect_text_file_write,
+    "shell.command.run": _inspect_shell_command_run,
 }
 
 
@@ -853,7 +946,7 @@ def verify(
             # rather than read from the binder, for the reason PR #6118
             # established: the binder is the thing under test.
             value = row["args"].get("argv")
-            if isinstance(value, (list, tuple)) and value:
+            if isinstance(value, (list, tuple)) and value and _STATES_A_COMMAND(goal):
                 tokens = [str(tok) for tok in value]
                 if any(not tok or tok not in goal for tok in tokens):
                     return _unresolved("STEP_COMMAND_NOT_IN_THE_REQUEST",
