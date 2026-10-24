@@ -24536,7 +24536,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6366,
+  "research_index_records": 6367,
   "routing_tokens": 1798,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "7631e918a79a6aa2f3c93e07b64bd048b46cffb48b1f9b13118da5047b14522f"
+  "value": "e270f0e8412c5cba5fcffaa6ef366661d895c5edcde4b954a9ec6f0475ab8bd0"
  },
  "engines": [
   {
@@ -188510,6 +188510,51 @@
    }
   },
   {
+   "action_id": "A_REQUEST_IS_READ_BY_THE_WORDS_IT_USES_V1_20261024_V1",
+   "capability": false,
+   "date": "2026-10-24",
+   "id": "research:canonical/action_intents/A_REQUEST_IS_READ_BY_THE_WORDS_IT_USES_V1_20261024_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_REQUEST_IS_READ_BY_THE_WORDS_IT_USES_V1_20261024_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "bc81552f48795f773dbfb27eb8e0e8281737d3dd28684dc9dfc499f8e975777d",
+   "status": "",
+   "terms": {
+    "20261024": 1,
+    "22b95bb": 1,
+    "367": 1,
+    "a_command_that_cannot_be_re_run_is_checked_by_what_it_left_v1_20261024_v1": 1,
+    "a_request_is_read_by_the_words_it_uses_v1_20261024_v1": 1,
+    "actually": 1,
+    "admit": 1,
+    "all": 1,
+    "binder": 1,
+    "binding_refused": 1,
+    "bound": 1,
+    "but": 1,
+    "capabilities": 1,
+    "check": 1,
+    "command": 1,
+    "commands": 1,
+    "content": 3,
+    "end": 2,
+    "file": 3,
+    "generic": 2,
+    "not_stated": 2,
+    "one": 2,
+    "rather": 2,
+    "read": 2,
+    "returned": 2,
+    "same": 2,
+    "sentence": 3,
+    "strength": 2,
+    "text": 3,
+    "than": 2,
+    "v1": 2,
+    "write": 2
+   }
+  },
+  {
    "action_id": "A_REQUEST_THAT_NAMES_NO_TEXT_WRITES_NOTHING_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -219125,9 +219170,9 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "cd451eb59d36fa1685952686163a4d61697bc30c159bf09775c37dde4d1f8f35",
+   "sha256": "1b735ab4be0f07cca0802be789f537ecc2a5726a40d6e4c5e022d0cb40c9b3de",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
-   "symbol_count": 64,
+   "symbol_count": 65,
    "symbols": [
     "_actions_of",
     "_after_key",
