@@ -52,21 +52,54 @@ def _solve(goal):
 
 class TestAStatedWriteIsHeldToTheFileItNamed(unittest.TestCase):
 
-    def test_the_file_the_sentence_named_is_the_one_named_in_the_refusal(self):
+    def test_every_file_the_sentence_named_is_present_or_named_in_the_refusal(self):
+        """Nothing the sentence asked for goes silently unmade.
+
+        Stronger than the version this replaced, which asserted one specific file
+        was the missing one.  The request names two destinations; the invariant is
+        that each of them is either on disk or named in the refusal, so a file the
+        sentence asked for can never be quietly dropped whichever step is missing.
+        """
         base = _fresh("w1")
         target = "%s/out.txt" % base
+        report = "%s/report.json" % base
         goal = ("Write the text 'hello patch' to the file %s "
-                "and save the report to %s/report.json." % (target, base))
+                "and save the report to %s." % (target, report))
         result = _solve(goal)
         if result.get("pass") is True:
-            self.assertTrue((ROOT / target).is_file(), "passed without the file")
+            for path in (target, report):
+                self.assertTrue((ROOT / path).is_file(), "passed without %s" % path)
             return
         errors = " ".join(result.get("promised_artifact_errors") or [])
-        self.assertIn(
-            target, errors,
-            "refused without naming the file the sentence asked for: %s / %s"
-            % (result.get("status"), result.get("failure_class")),
+        for path in (target, report):
+            self.assertTrue(
+                (ROOT / path).is_file() or path in errors,
+                "%s is neither on disk nor named in the refusal: %s / %s"
+                % (path, result.get("status"), errors),
+            )
+
+    def test_the_stated_text_goes_to_the_file_it_was_stated_for(self):
+        """The binding defect this pins: the text used to land in the report.
+
+        The binder took the LAST path in the sentence as the output, so for a
+        request naming two destinations the stated text was written into the
+        report and the file the sentence actually asked for was never created.
+        """
+        base = _fresh("w1b")
+        target = "%s/out.txt" % base
+        report = "%s/report.json" % base
+        _solve("Write the text 'hello patch' to the file %s "
+               "and save the report to %s." % (target, report))
+        self.assertTrue((ROOT / target).is_file(), "the stated file was never created")
+        self.assertEqual(
+            (ROOT / target).read_text(encoding="utf-8"), "hello patch",
+            "the stated text did not go to the file it was stated for",
         )
+        if (ROOT / report).is_file():
+            self.assertNotEqual(
+                (ROOT / report).read_text(encoding="utf-8"), "hello patch",
+                "the stated text was written into the report instead",
+            )
 
     def test_the_refusal_is_not_a_weak_evidence_rule(self):
         """The reason must be the real one, not a lexical-rule placeholder."""

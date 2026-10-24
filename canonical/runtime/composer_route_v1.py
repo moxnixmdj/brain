@@ -265,6 +265,35 @@ _CONTENT_FALLBACK = [
 ]
 
 
+# The destination a stated payload runs to: the path the sentence puts immediately
+# after the content.  Built from the same _DEST_WORDS and path lookahead the
+# payload patterns already use, so a sentence is parsed by one grammar rather than
+# two that can disagree.
+_CONTENT_DEST = [
+    re.compile(r"\b(?:text|content|string|message|word|line)\s+.+?" + _DEST_WORDS + r"(\S+)", re.I),
+    re.compile(r"\bwrite\s+.+?" + _DEST_WORDS + r"(\S+)", re.I),
+]
+
+
+def extract_content_destination(text: str) -> str | None:
+    """The path the sentence puts immediately after the text it states.
+
+    Returns None when the sentence states no content, or states it with no
+    destination following -- "create the file X containing the text Y" names its
+    destination BEFORE the payload, and "compress notes.txt into notes.txt.gz"
+    states no payload at all.  Both must keep binding the way they always did, so
+    this answers only the one question it can answer precisely.
+    """
+    body = str(text or "")
+    for pattern in _CONTENT_DEST:
+        match = pattern.search(body)
+        if match:
+            token = str(match.group(1) or "").strip().strip(".,;:!?\"'")
+            if token:
+                return token
+    return None
+
+
 def extract_content(text: str) -> str | None:
     """What the goal asks to be written, when it says.
 
@@ -366,7 +395,29 @@ def bind(signature: Mapping[str, str], goal: str,
         elif t == "PATH_OUTPUT":
             # the target is the LAST name in the sentence, not the first --
             # for "compress notes.txt into notes.txt.gz" that is the .gz
-            if paths:
+            #
+            # Unless the sentence states content and says where THAT goes.  A
+            # request can name two destinations with two different roles:
+            #
+            #   "Write the text 'hello patch' to the file out.txt
+            #    and save the report to report.json."
+            #
+            # paths[-1] is report.json, so the stated text was written into the
+            # report and out.txt -- the file the sentence actually asked for --
+            # was never created.  Measured on e00d2d5: the chain ran one step,
+            # wrote report.json, and the artifact gate correctly refused with
+            # PROMISED_ARTIFACT_MISSING:out.txt.  The gate was right; the binding
+            # was wrong.
+            #
+            # The destination the content runs to is the path the sentence puts
+            # immediately after the payload, which is the same notion
+            # _payload_runs_to_the_destination already verifies on the acceptance
+            # side -- and it is only consulted when content was actually stated,
+            # so a sentence with no payload keeps binding exactly as before.
+            destination = extract_content_destination(goal)
+            if destination and destination in paths:
+                args[slot] = destination
+            elif paths:
                 args[slot] = paths[-1]
         elif t == "ARGV":
             argv = extract_argv(goal)
