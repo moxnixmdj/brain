@@ -906,12 +906,43 @@ def _post_rm(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
 _CONSUMES_AN_OPERAND = frozenset({"rm", "mv"})
 
 
+def _post_tee(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
+    """`tee A` promises exactly one thing that does not depend on its input.
+
+    tee opens its operand with O_CREAT|O_TRUNC, so A exists when tee returns --
+    whatever was on stdin, including nothing at all.  That is the whole of the
+    unconditional promise, and it is the same promise `touch` makes, so it is
+    checked the same way.
+
+    What is deliberately NOT claimed is that A is empty.  Emptiness follows from
+    stdin being empty, and stdin is not part of the argv shape this is scoped to
+    -- the adapter passes no stdin, but a postcondition that asserted a fact
+    about a channel it never saw would be guessing.  The bytes themselves are
+    already pinned elsewhere: the adapter fingerprints the file it wrote and the
+    trace check compares every declared digest.
+
+    Scoped to one program and one operand, no flags.  `tee -a A` appends and
+    `tee A B` writes two files, and neither promise is stated by this shape, so
+    both are refused rather than approximated -- the same discipline that keeps
+    dd, chmod, ln and sed out of this table.
+    """
+    if len(tokens) != 2:
+        return False, "COMMAND_TEE_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", {"argv_tokens": len(tokens)}
+    target = _inside(root, tokens[1])
+    if target is None:
+        return False, "COMMAND_TEE_PATH_OUTSIDE_REPOSITORY", {}
+    if not target.is_file():
+        return False, "COMMAND_TEE_TARGET_ABSENT_FROM_DISK", {}
+    return True, "", {"postcondition_checked": "tee", "target_present": True}
+
+
 _MUTATING_POSTCONDITIONS = {
     "cp": _post_cp,
     "mv": _post_mv,
     "mkdir": _post_mkdir,
     "touch": _post_touch,
     "rm": _post_rm,
+    "tee": _post_tee,
 }
 
 
