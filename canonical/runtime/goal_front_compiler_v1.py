@@ -181,10 +181,32 @@ def without_stated_text_value(text: str) -> str:
     return _STATED_TEXT_TAIL.sub(r"\1", out)
 
 # natural aliases for registry input keys (key -> phrases that may name it in a sentence)
+# The words a request uses for an input are not the words a contract declares it with.
+# "Write the text 'hello patch' to the file out.txt" states a content and a destination
+# but names neither by its declared key: it says "text" for `content` and "to the file"
+# for `output_path`.  The binder looked for the declared key, found nothing, and
+# reported content:not_stated -- while composer_route_v1.extract_content, which already
+# carries this synonym set, read the value from the same sentence without difficulty.
+# Two doors disagreed about one sentence and the disagreement was a missing row in a
+# table that already existed.  These are the synonyms that extractor uses, so the two
+# doors now share one vocabulary instead of each keeping its own.
+#
+# They apply ONLY to a sentence that quotes its value, and that restriction is earned,
+# not decorative.  Measured with the alias unconditional: "Write the text hello world
+# to the file X" -- no quotes -- found a tail, _quoted() returned None, and the binder
+# claimed the slot with None.  That sentence worked before by falling through to the
+# composer, which reads a bare value; claiming the slot with nothing preempted the one
+# path that could serve it and three acceptance suites went red.  A synonym may widen
+# the words a QUOTED value is recognized under.  It may not manufacture a value that
+# the sentence never delimited.
+_QUOTED_VALUE_ALIASES: dict[str, tuple[str, ...]] = {
+    "content": ("text", "string", "message", "line"),
+}
 _KEY_ALIASES: dict[str, tuple[str, ...]] = {
+    "content": _QUOTED_VALUE_ALIASES["content"],
     # An output has no type of its own, so its role can only come from the sentence.
     "output_path": ("result to", "results to", "save to", "save it to", "write to",
-                    "output to", "store to", "report to"),
+                    "output to", "store to", "report to", "to the file", "into the file"),
     "output_file": ("result to", "results to", "save to", "save it to", "write to",
                     "output to", "store to", "report to"),
     "jq_filter": ("jq filter", "jq_filter", "jq expression", "filter"),
@@ -543,8 +565,18 @@ def _alias_regex(key: str) -> str:
 
 
 def _after_key(goal: str, key: str) -> list[str]:
-    """Every text tail following '<key words>' plus optional '=', ':', 'of', 'is' (all aliases, overlapping)."""
-    phrases = sorted(set(list(_KEY_ALIASES.get(key, ())) + [key, key.replace("_", " ")]), key=len, reverse=True)
+    """Every text tail following '<key words>' plus optional '=', ':', 'of', 'is' (all aliases, overlapping).
+
+    A synonym that only ever introduces a QUOTED value is dropped when the sentence
+    quotes nothing.  Without that, "Write the text hello world to the file X" matches
+    the synonym, finds a tail, and binds the slot to None -- which is worse than not
+    matching, because the sentence then never reaches the path that reads a bare value.
+    """
+    aliases = list(_KEY_ALIASES.get(key, ()))
+    gated = _QUOTED_VALUE_ALIASES.get(key, ())
+    if gated and not _QUOTED_LITERAL.search(goal):
+        aliases = [a for a in aliases if a not in gated]
+    phrases = sorted(set(aliases + [key, key.replace("_", " ")]), key=len, reverse=True)
     tails: list[str] = []
     for phrase in phrases:
         pattern = re.compile(r"(?i)\b" + re.escape(phrase) + r"\s*(?:=|:|\bof\b|\bis\b)?\s*")
@@ -1368,6 +1400,12 @@ def score_capability(goal: str, cid: str, entry: Mapping[str, Any]) -> tuple[int
     return gc._score(scored_text, cid, entry)
 
 
+# ranked_candidates ranks on tokens and is given no repository root, but binding a path
+# input needs one.  The naming root this module already uses is the right default: every
+# other binder here resolves a stated path against it.
+_FALLBACK_ROOT = pathlib.Path(__file__).resolve().parents[2]
+
+
 def ranked_candidates(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> list[tuple[int, int, str, dict[str, Any]]]:
     """Candidates ranked by the pinned scorer on prose tokens only; constraints see the full goal."""
     out = []
@@ -1389,7 +1427,65 @@ def ranked_candidates(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> l
         if score > 0:
             out.append((score, specificity, cid, evidence))
     out.sort(key=lambda x: (-x[0], -x[1], x[2]))
-    return out
+    if out:
+        return out
+    # A request whose every distinctive word is a VALUE carries no prose to rank on.
+    # "Write the text 'hello patch' to the file out.txt" reduces to "Write the text to
+    # the file": three tokens, all generic, and a generic token may refine a match but
+    # never create one.  Measured, this returns ZERO candidates for that sentence while
+    # the composer reads both values from it -- so the evidence was in the sentence and
+    # the ranker was looking at the vocabulary instead of the contract.
+    #
+    # So rank on the contract: a capability whose every declared input the pinned binder
+    # can actually fill is described by that sentence whether or not it shares a
+    # distinctive word with it.  This runs only when prose found nothing at all, so no
+    # currently-working selection can change, and bind_all_inputs still raises rather
+    # than inventing a value.  The count cannot decide on its own -- text.file.write,
+    # auto.apt.zint and image.qr.generate.qrencode all declare exactly {STRING,
+    # PATH_OUTPUT} and all three bind both values -- so the tie is broken on what each
+    # capability declares it PRODUCES, which is its own identity and the same evidence
+    # the composer's token route already ranks on.
+    #
+    # And it runs only for a sentence that QUOTES its value, for the same earned reason
+    # the synonym above is gated.  Measured without this: "Write the text hello world to
+    # the file X" -- no quotes -- reached the fallback, where auto.apt.zint bound every
+    # declared input because its own input is literally named `text`, and a barcode
+    # generator was ranked for an ordinary write.  That sentence used to fall through to
+    # the composer, which reads a bare value; three acceptance suites went red.  The
+    # contract evidence is a quoted value plus a destination, so a sentence that delimits
+    # no value offers none, and keeps the route it always had.
+    if not _QUOTED_LITERAL.search(goal):
+        return out
+    shaped: list[tuple[int, int, str, dict[str, Any]]] = []
+    for cid, entry in sorted(registry.items()):
+        if not isinstance(entry, Mapping) or entry.get("status") != "VERIFIED_BOUND_CAPABILITY":
+            continue
+        if not isinstance(entry.get("action_template"), dict):
+            continue
+        try:
+            inputs = bind_all_inputs(goal, entry, _FALLBACK_ROOT, produced_paths=None,
+                                     cycle=0, spool=set())
+        except Exception:
+            continue
+        if not inputs:
+            continue
+        keys = sorted(input_keys(entry))
+        if sorted(inputs) != keys:
+            continue
+        shaped.append((len(inputs), _provides_evidence(goal, entry), cid,
+                       {"contract_inputs_bound": keys,
+                        "ranked_by": "DECLARED_CONTRACT_FULLY_BOUND"}))
+    shaped.sort(key=lambda x: (-x[0], -x[1], x[2]))
+    return shaped
+
+
+def _provides_evidence(goal: str, entry: Mapping[str, Any]) -> int:
+    """How many words of the capability's own `provides` token the sentence states."""
+    stated = gc._tokens(prose_only(goal))
+    total = 0
+    for token in gc._tokens(entry.get("provides", [])):
+        total += len(stated & gc._tokens(token))
+    return total
 
 
 def _future_artifacts(goal: str, root: pathlib.Path) -> list[str]:
