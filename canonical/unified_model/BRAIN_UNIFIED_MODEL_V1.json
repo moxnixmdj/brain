@@ -24536,7 +24536,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6349,
+  "research_index_records": 6350,
   "routing_tokens": 1798,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "1dcafd0d086075581c3cba6b598b799a0b4bbad667b7eff45e0f60492a9acae5"
+  "value": "7cf5493a2a1b478f1180f95e63f991ad7c3ecd9e5b45df68d99c0d68a4a187d6"
  },
  "engines": [
   {
@@ -191241,6 +191241,51 @@
    }
   },
   {
+   "action_id": "THE_COMPOSED_PATH_ASKS_THE_ACCEPTANCE_VERIFIER_TOO_V1_20261024_V1",
+   "capability": false,
+   "date": "2026-10-24",
+   "id": "research:canonical/action_intents/THE_COMPOSED_PATH_ASKS_THE_ACCEPTANCE_VERIFIER_TOO_V1_20261024_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_COMPOSED_PATH_ASKS_THE_ACCEPTANCE_VERIFIER_TOO_V1_20261024_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "cad18f1acdda9e31fbe58cc62d9b72bead2eb78418c08f405c682153e42e8b8b",
+   "status": "",
+   "terms": {
+    "11": 1,
+    "144": 1,
+    "20261024": 1,
+    "223": 1,
+    "367": 2,
+    "51": 1,
+    "acceptance": 3,
+    "accepted": 1,
+    "admissible": 1,
+    "all": 1,
+    "artifact-declaring": 1,
+    "asks": 1,
+    "because": 1,
+    "being": 1,
+    "capabilities": 3,
+    "carried": 1,
+    "carrying": 2,
+    "composed": 1,
+    "contract": 1,
+    "corpus": 1,
+    "every": 1,
+    "fall": 2,
+    "no": 4,
+    "not": 3,
+    "one": 2,
+    "over": 2,
+    "pass": 2,
+    "passes": 2,
+    "path": 2,
+    "the_composed_path_asks_the_acceptance_verifier_too_v1_20261024_v1": 2,
+    "v1": 2,
+    "verdict": 3
+   }
+  },
+  {
    "action_id": "THE_CONTROLLER_PATH_ASKS_THE_ACCEPTANCE_VERIFIER_TOO_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -224662,12 +224707,13 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "601ac6783e898af965bf09db498ac434e677c2722a532c49b42765b1521bcb0a",
+   "sha256": "0962386b1d736079b0cca2157b24afbdc042b5a1dc95e3932fcab41e31c8d3b6",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 40,
+   "symbol_count": 41,
    "symbols": [
     "LocalExecutionFailure",
     "_check_expectation",
+    "_composed_acceptance",
     "_composed_holds_up",
     "_controller_passed",
     "_credit_recall",
@@ -224688,8 +224734,7 @@
     "_prose_tokens",
     "_recall_for",
     "_resolve_plan_refs",
-    "_result_refs",
-    "_source_digest"
+    "_result_refs"
    ],
    "terms": {
     "admission": 2,
@@ -245383,9 +245428,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "252b2b5b7758b3be0bc273f737096e078c8b812a93dad0a8d44e7fb137717637",
+   "sha256": "b568d8e85822f995bd05ba9c1a28d2d6fae31a4ccda6a1c5b5ca390aafe76f39",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
-   "symbol_count": 24,
+   "symbol_count": 25,
    "symbols": [
     "_action_rows",
     "_alternative_ids",
@@ -245403,14 +245448,14 @@
     "_inspect_python_source_audit",
     "_inspect_relevance_rank",
     "_inspect_tar_gz_create_from_manifest",
+    "_inspect_text_file_write",
     "_inspect_xlsx_create",
     "_json",
     "_plan_chain",
     "_rel",
     "_trace_is_finished",
     "_unresolved",
-    "unwrap_bound_adapter_row",
-    "verify"
+    "unwrap_bound_adapter_row"
    ],
    "terms": {
     "acceptance": 2,
@@ -245436,6 +245481,7 @@
     "inspect_python_source_audit": 1,
     "inspect_relevance_rank": 1,
     "inspect_tar_gz_create_from_manifest": 1,
+    "inspect_text_file_write": 1,
     "inspect_xlsx_create": 1,
     "json": 1,
     "plan_chain": 1,
@@ -245447,8 +245493,7 @@
     "trace_is_finished": 1,
     "unresolved": 1,
     "unwrap_bound_adapter_row": 1,
-    "v1": 1,
-    "verify": 1
+    "v1": 1
    }
   },
   {

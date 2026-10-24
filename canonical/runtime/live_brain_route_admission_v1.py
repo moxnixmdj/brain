@@ -1207,7 +1207,7 @@ def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | Non
         return None
     if not executed.get("pass"):
         return None
-    return {
+    out = {
         "schema": LIVE_SCHEMA, "status": "PASS__COMPOSED_CAPABILITY_CHAIN",
         "pass": True, "task_id": task_id, "goal": goal,
         "executed": True, "execution_proof_type": COMPOSED_EXECUTOR,
@@ -1223,6 +1223,77 @@ def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | Non
         "incremental_spend_usd": 0,
         "elapsed_ns": perf_counter_ns() - started,
     }
+    # The third and last path that never asked.  The front-layer local adapter
+    # path was fixed in PR #6111 and the model-independent controller path in
+    # #6112; this one is where a NATURAL sentence lands -- "Write the text X to
+    # the file Y", which names no capability, so no single one matches and the
+    # composer answers instead.  It reported pass=True on the strength of the
+    # chain having run, with no acceptance verdict of any kind, so the route
+    # ordinary requests take was the one route that was never checked.
+    #
+    # It could not be checked before, for two concrete reasons, both now gone:
+    # the step records were {"raw": null} so there was no evidence to inspect
+    # (fixed in PR #6115), and no acceptance contract was ever built here.  The
+    # contract is derived from the sentence alone by compile_contract, and the
+    # only thing it needs that the sentence does not supply is the set of files
+    # the request touches -- which the chain now reports, because each step's
+    # own args are recorded.
+    out.update(_composed_acceptance(goal, routed.get("chain") or [], executed))
+    if out.get("semantic_acceptance_complete"):
+        out["status"] = "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
+    return out
+
+
+def _composed_acceptance(goal: str, chain: Any, executed: Mapping[str, Any]) -> dict[str, Any]:
+    """Ask the acceptance verifier about a composed chain, and report the answer.
+
+    Three things have to be handed over in the shape the verifier reads, none of
+    which the composer produces on its own:
+
+      * an acceptance contract.  ``compile_contract`` derives one from the
+        sentence, but refuses with ROUTING_TARGET_EFFECTS_EMPTY unless it is
+        told which files the request touches.  Measured: the same sentence gives
+        0 obligations with an empty effect set and 2 with the step's own
+        output_path, so the effects are taken from the steps the chain actually
+        ran -- not guessed, and not widened to anything the chain did not write.
+      * a trace in the canonical row shape.  The verifier reads each row's
+        ``plan.args`` and requires a trailing ``finish`` row; the composer emits
+        ``index``/``capability_id``/``args``/``result`` and no finish row.
+      * a plan whose chain matches what ran, or the verifier refuses with
+        COMPILED_PLAN_HAS_NO_SELECTED_CAPABILITY before it inspects anything.
+
+    A verifier fault must never turn a pass into a crash, and must never turn a
+    pass into a failure either: the honest fallback is the provisional verdict
+    this path already gave, now carrying the reason.
+    """
+    base: dict[str, Any] = {"semantic_acceptance_complete": False,
+                            "accepted_raw_obligation_ids": []}
+    steps = [row for row in (executed.get("steps") or []) if isinstance(row, Mapping)]
+    if not steps:
+        return base
+    trace: list[dict[str, Any]] = []
+    effects: list[str] = []
+    for row in steps:
+        args = dict(row.get("args") or {})
+        args.setdefault("capability_id", str(row.get("capability_id") or ""))
+        trace.append({"plan": {"args": args},
+                      "result": dict(row.get("result") or {})})
+        for key in ("output_path", "result_path"):
+            value = args.get(key)
+            if isinstance(value, str) and value.strip() and value not in effects:
+                effects.append(value)
+    if not effects:
+        # Nothing the chain wrote, so there is no effect to accept against and
+        # compile_contract would refuse on an empty set anyway.
+        return base
+    trace.append({"plan": {"args": {}}, "result": {"type": "finish"}})
+    try:
+        raw_contract = compile_contract(goal, source_id="user",
+                                        routing_target_effects=effects)
+    except Exception:  # noqa: BLE001 - a contract fault leaves the verdict provisional
+        return base
+    plan = {"compiled_parts": [{"selected_capability": str(cid)} for cid in chain]}
+    return _exact_acceptance(goal, plan, trace, raw_contract)
 
 
 def solve(request: Mapping[str, Any]) -> dict[str, Any]:
