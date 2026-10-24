@@ -24536,7 +24536,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6355,
+  "research_index_records": 6356,
   "routing_tokens": 1798,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "9b23ebf7b990c025f724e9cd0ff3458e65f5cf06d44f37fc456604e50e6b7cea"
+  "value": "3640ffcefbe8ad8d454782e0169a59006785d0822ca843d381cc417a64ef30c9"
  },
  "engines": [
   {
@@ -187846,6 +187846,51 @@
    }
   },
   {
+   "action_id": "A_COMMAND_THAT_CHANGES_SOMETHING_IS_VERIFIED_BY_THE_WORLD_AFTERWARDS_V1_20261024_V1",
+   "capability": false,
+   "date": "2026-10-24",
+   "id": "research:canonical/action_intents/A_COMMAND_THAT_CHANGES_SOMETHING_IS_VERIFIED_BY_THE_WORLD_AFTERWARDS_V1_20261024_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_COMMAND_THAT_CHANGES_SOMETHING_IS_VERIFIED_BY_THE_WORLD_AFTERWARDS_V1_20261024_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "1e3b7ad19cd47342f96210b72acaa056062d5c555eeb81bd9e86d4a2e1aef187",
+   "status": "",
+   "terms": {
+    "20261024": 1,
+    "a_command_that_changes_something_is_verified_by_the_world_afterwards_v1_20261024_v1": 2,
+    "act": 1,
+    "afterwards": 1,
+    "all": 1,
+    "attached": 1,
+    "back": 1,
+    "certifiable": 1,
+    "certified": 1,
+    "change": 1,
+    "changes": 3,
+    "changing": 1,
+    "check": 1,
+    "command": 5,
+    "command_not_re_runnable_without_side_effects": 1,
+    "commands": 1,
+    "deliberate": 1,
+    "depends": 1,
+    "effect": 1,
+    "every": 1,
+    "fell": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "happening": 1,
+    "idempotent": 1,
+    "longer": 1,
+    "measured": 1,
+    "mutating": 2,
+    "so": 2,
+    "something": 2,
+    "v1": 2,
+    "verified": 2,
+    "world": 2
+   }
+  },
+  {
    "action_id": "A_COMPOSED_STEP_RECORDS_WHAT_IT_PRODUCED_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -245655,9 +245700,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "e4bcc4349da2d8b03f32e68d31a773d0dd17b2a90dc29f9734892c1048bb1221",
+   "sha256": "15bc6cc6ca44a74fe11db784d7dc69cadf666966bbb6c47f8c69cb48f35f7517",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
-   "symbol_count": 28,
+   "symbol_count": 32,
    "symbols": [
     "_STATES_A_COMMAND",
     "_action_rows",
@@ -245682,7 +245727,7 @@
     "_json",
     "_payload_runs_to_the_destination",
     "_plan_chain",
-    "_rel"
+    "_post_cp"
    ],
    "terms": {
     "acceptance": 2,

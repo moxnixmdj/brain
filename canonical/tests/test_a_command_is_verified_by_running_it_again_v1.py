@@ -149,11 +149,31 @@ class TestNothingIsReRunThatCouldChangeSomething(unittest.TestCase):
     def tearDown(self):
         shutil.rmtree(ROOT / SCRATCH, ignore_errors=True)
 
-    def test_a_mutating_command_is_refused_not_certified(self):
-        for program in ("rm", "cp", "mv", "mkdir", "touch", "tee", "dd"):
+    # A command that changes something cannot be re-run, so it is held to the
+    # promise it made about the world instead -- but only when that promise can
+    # be stated precisely enough to be checked.  These cannot, so they are
+    # refused rather than passed.
+    NO_STATEABLE_PROMISE = ("rm", "tee", "dd", "chmod", "ln", "sed", "truncate")
+
+    def test_a_mutating_command_with_no_stateable_promise_is_refused(self):
+        for program in self.NO_STATEABLE_PROMISE:
             ok, reason, _ = _inspect([program, self.f], "")
             self.assertFalse(ok, "re-ran or certified a mutating command: %s" % program)
             self.assertEqual(reason, "COMMAND_NOT_RE_RUNNABLE_WITHOUT_SIDE_EFFECTS")
+
+    def test_a_mutating_command_is_checked_against_the_world_not_re_run(self):
+        """cp/mv/mkdir/touch are verified by their effect, and can still fail."""
+        dest = "%s/b2.txt" % SCRATCH
+        ok, reason, _ = _inspect(["cp", self.f, dest], "")
+        self.assertFalse(ok, "certified a copy that was never made")
+        self.assertEqual(reason, "COMMAND_CP_DESTINATION_ABSENT_FROM_DISK")
+        (ROOT / dest).write_text("NOT THE SOURCE\n", encoding="utf-8")
+        ok, reason, _ = _inspect(["cp", self.f, dest], "")
+        self.assertFalse(ok, "certified a copy whose bytes differ from the source")
+        self.assertEqual(reason, "COMMAND_CP_DESTINATION_DIFFERS_FROM_SOURCE")
+        (ROOT / dest).write_text(BODY, encoding="utf-8")
+        ok, reason, _ = _inspect(["cp", self.f, dest], "")
+        self.assertTrue(ok, "refused a copy that is really there and really equal: %s" % reason)
 
     def test_a_reader_with_an_output_flag_is_refused(self):
         ok, reason, _ = _inspect(["sort", "-o", "%s/b2.txt" % SCRATCH, self.f], "")
@@ -186,17 +206,104 @@ class TestEndToEndAnOrdinaryReadIsCertified(unittest.TestCase):
             "an ordinary read command was not certified",
         )
 
-    def test_a_mutating_command_still_executes_but_is_not_certified(self):
-        """The honest cost of fail-closed, pinned so it cannot silently widen."""
+    def test_a_mutating_command_is_certified_from_its_effect_on_the_world(self):
         f = _fresh()
         dest = "%s/b2.txt" % SCRATCH
         result = self._solve("Run the shell command cp %s %s" % (f, dest))
         self.assertIs(result.get("pass"), True, "a stated command stopped running")
         self.assertTrue((ROOT / dest).is_file(), "cp did not produce the copy")
+        self.assertEqual((ROOT / dest).read_text(encoding="utf-8"), BODY)
+        self.assertTrue(
+            str(result.get("status")).endswith("EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"),
+            "a copy that really exists and really matches was not certified: %s"
+            % (result.get("raw_goal_acceptance") or {}).get("reason"),
+        )
+
+    def test_a_command_with_no_stateable_promise_still_executes_uncertified(self):
+        """The remaining honest cost, pinned so it cannot silently widen."""
+        f = _fresh()
+        dest = "%s/b2.txt" % SCRATCH
+        result = self._solve("Run the shell command tee %s" % dest)
+        self.assertIs(result.get("pass"), True, "a stated command stopped running")
         self.assertFalse(
             str(result.get("status")).endswith("EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"),
-            "certified a command that cannot be re-run to check it",
+            "certified a command whose promise cannot be checked",
         )
+
+
+class TestEveryPostconditionCanBeFalsified(unittest.TestCase):
+    """The full matrix. Each row builds its own world, then asks.
+
+    A postcondition that only ever passes is not a check, so every accepting row
+    here is paired with the nearest world in which it must fail: the copy that
+    was never made, the copy whose bytes differ, the move that left the source
+    behind, the directory that does not exist.
+    """
+
+    A = "%s/a1.txt" % SCRATCH
+    B = "%s/b2.txt" % SCRATCH
+    D = "%s/sub" % SCRATCH
+
+    def tearDown(self):
+        shutil.rmtree(ROOT / SCRATCH, ignore_errors=True)
+
+    def _world(self):
+        root = ROOT / SCRATCH
+        shutil.rmtree(root, ignore_errors=True)
+        root.mkdir(parents=True, exist_ok=True)
+        (ROOT / self.A).write_text(BODY, encoding="utf-8")
+
+    def _ask(self, argv, expect_ok, expect_reason=""):
+        ok, reason, _ = _inspect(argv, "")
+        self.assertEqual(
+            ok, expect_ok,
+            "argv=%r expected ok=%s reason=%s, got ok=%s reason=%s"
+            % (argv, expect_ok, expect_reason, ok, reason))
+        if expect_reason:
+            self.assertEqual(reason, expect_reason)
+
+    def test_cp(self):
+        self._world()
+        self._ask(["cp", self.A, self.B], False, "COMMAND_CP_DESTINATION_ABSENT_FROM_DISK")
+        self._world(); shutil.copy(ROOT / self.A, ROOT / self.B)
+        self._ask(["cp", self.A, self.B], True)
+        self._world(); (ROOT / self.B).write_text("DIFFERENT\n", encoding="utf-8")
+        self._ask(["cp", self.A, self.B], False, "COMMAND_CP_DESTINATION_DIFFERS_FROM_SOURCE")
+        self._world(); (ROOT / self.B).write_text("x\n", encoding="utf-8")
+        self._ask(["cp", "%s/missing.txt" % SCRATCH, self.B], False,
+                  "COMMAND_CP_SOURCE_ABSENT_FROM_DISK")
+        self._world(); shutil.copy(ROOT / self.A, ROOT / self.B)
+        self._ask(["cp", self.A, self.B, "extra"], False,
+                  "COMMAND_CP_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE")
+        self._world(); shutil.copy(ROOT / self.A, ROOT / self.B)
+        self._ask(["cp", "/etc/passwd", self.B], False, "COMMAND_CP_PATH_OUTSIDE_REPOSITORY")
+
+    def test_mv(self):
+        self._world(); (ROOT / self.B).write_text(BODY, encoding="utf-8")
+        (ROOT / self.A).unlink()
+        self._ask(["mv", self.A, self.B], True)
+        self._world(); (ROOT / self.B).write_text("x\n", encoding="utf-8")
+        self._ask(["mv", self.A, self.B], False, "COMMAND_MV_SOURCE_STILL_PRESENT")
+        self._world()
+        self._ask(["mv", self.A, self.B], False, "COMMAND_MV_DESTINATION_ABSENT_FROM_DISK")
+
+    def test_mkdir(self):
+        self._world()
+        self._ask(["mkdir", self.D], False, "COMMAND_MKDIR_DIRECTORY_ABSENT_FROM_DISK")
+        self._world(); (ROOT / self.D).mkdir()
+        self._ask(["mkdir", self.D], True)
+
+    def test_touch(self):
+        self._world()
+        self._ask(["touch", self.B], False, "COMMAND_TOUCH_TARGET_ABSENT_FROM_DISK")
+        self._world(); (ROOT / self.B).write_text("", encoding="utf-8")
+        self._ask(["touch", self.B], True)
+
+    def test_commands_with_no_stateable_promise_stay_refused(self):
+        self._world()
+        for program in ("rm", "tee", "dd", "chmod", "ln", "sed", "truncate"):
+            self._ask([program, self.A], False,
+                      "COMMAND_NOT_RE_RUNNABLE_WITHOUT_SIDE_EFFECTS")
 
 
 class TestTheArgvCheckOnlyAppliesToAStatedCommand(unittest.TestCase):

@@ -753,6 +753,84 @@ _READ_ONLY_COMMANDS = frozenset({
 _SIDE_EFFECTING_FLAGS = ("-o", "--output")
 
 
+# --- postconditions for commands that change something ---------------------
+# A mutating command cannot be checked by running it again, and the temptation is
+# to fall back on its returncode -- which is the producer grading its own work.
+# What is actually available is the world afterwards.  "cp A B" makes a promise
+# about B that the file system can be asked about directly, and so can "mkdir",
+# "touch" and "mv".  Each check below derives the promised end state from the
+# argv -- which is already grounded in the sentence -- and then asks the disk,
+# with no reference to anything the producer reported.
+#
+# Every one of these can fail, which is the whole point: a cp whose destination
+# is missing, or whose bytes differ from the source, is refused.  Commands whose
+# promise cannot be stated this precisely are absent and stay refused.
+def _post_cp(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
+    if len(tokens) != 3:
+        return False, "COMMAND_CP_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", {"argv_tokens": len(tokens)}
+    src = _inside(root, tokens[1])
+    dst = _inside(root, tokens[2])
+    if src is None or dst is None:
+        return False, "COMMAND_CP_PATH_OUTSIDE_REPOSITORY", {}
+    if not src.is_file():
+        return False, "COMMAND_CP_SOURCE_ABSENT_FROM_DISK", {}
+    if not dst.is_file():
+        return False, "COMMAND_CP_DESTINATION_ABSENT_FROM_DISK", {}
+    a, b = src.read_bytes(), dst.read_bytes()
+    if _digest(a) != _digest(b):
+        return False, "COMMAND_CP_DESTINATION_DIFFERS_FROM_SOURCE", {
+            "source_bytes": len(a), "destination_bytes": len(b)}
+    return True, "", {"postcondition_checked": "cp", "bytes_compared": len(b),
+                      "destination_matches_source": True}
+
+
+def _post_mv(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
+    if len(tokens) != 3:
+        return False, "COMMAND_MV_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", {"argv_tokens": len(tokens)}
+    src = _inside(root, tokens[1])
+    dst = _inside(root, tokens[2])
+    if src is None or dst is None:
+        return False, "COMMAND_MV_PATH_OUTSIDE_REPOSITORY", {}
+    if not dst.is_file():
+        return False, "COMMAND_MV_DESTINATION_ABSENT_FROM_DISK", {}
+    if src.exists():
+        return False, "COMMAND_MV_SOURCE_STILL_PRESENT", {}
+    return True, "", {"postcondition_checked": "mv", "destination_present": True,
+                      "source_removed": True}
+
+
+def _post_mkdir(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
+    if len(tokens) != 2:
+        return False, "COMMAND_MKDIR_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", {"argv_tokens": len(tokens)}
+    target = _inside(root, tokens[1])
+    if target is None:
+        return False, "COMMAND_MKDIR_PATH_OUTSIDE_REPOSITORY", {}
+    if not target.is_dir():
+        return False, "COMMAND_MKDIR_DIRECTORY_ABSENT_FROM_DISK", {}
+    return True, "", {"postcondition_checked": "mkdir", "directory_present": True}
+
+
+def _post_touch(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
+    if len(tokens) != 2:
+        return False, "COMMAND_TOUCH_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", {"argv_tokens": len(tokens)}
+    target = _inside(root, tokens[1])
+    if target is None:
+        return False, "COMMAND_TOUCH_PATH_OUTSIDE_REPOSITORY", {}
+    if not target.exists():
+        return False, "COMMAND_TOUCH_TARGET_ABSENT_FROM_DISK", {}
+    return True, "", {"postcondition_checked": "touch", "target_present": True}
+
+
+# Keyed by program name.  Anything absent is refused by the caller rather than
+# passed, so widening this table is a deliberate act with a test attached.
+_MUTATING_POSTCONDITIONS = {
+    "cp": _post_cp,
+    "mv": _post_mv,
+    "mkdir": _post_mkdir,
+    "touch": _post_touch,
+}
+
+
 def _inspect_shell_command_run(args: Mapping, result: Mapping, root: Path) -> tuple[bool, str, dict]:
     """Run the stated command again and compare what comes back.
 
@@ -778,6 +856,11 @@ def _inspect_shell_command_run(args: Mapping, result: Mapping, root: Path) -> tu
         return False, "COMMAND_ARGV_HAS_AN_EMPTY_TOKEN", {}
     program = tokens[0].rsplit("/", 1)[-1]
     if program not in _READ_ONLY_COMMANDS:
+        # Not re-runnable -- but a command that changes something still makes a
+        # promise about the world, and the world is still there to be asked.
+        check = _MUTATING_POSTCONDITIONS.get(program)
+        if check is not None:
+            return check(tokens, root)
         return False, "COMMAND_NOT_RE_RUNNABLE_WITHOUT_SIDE_EFFECTS", {
             "program": program, "checked": False}
     if any(tok in _SIDE_EFFECTING_FLAGS or tok.startswith("--output=") for tok in tokens[1:]):
