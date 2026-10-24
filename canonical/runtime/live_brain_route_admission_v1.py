@@ -66,6 +66,7 @@ from time import perf_counter_ns
 from typing import Any, Mapping
 
 from canonical.runtime import astra_runtime, goal_compiler
+from canonical.runtime import composer_route_v1 as composer_route
 from canonical.runtime import goal_front_compiler_v1 as front
 from canonical.runtime import live_integrated_brain_v1
 from canonical.runtime.live_integrated_brain_v1 import (
@@ -1053,15 +1054,41 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
 
 
 def promised_artifact_errors(goal: str, future_artifacts: list[str]) -> list[str]:
-    """R6: every output file the goal named must now exist and be non-empty."""
+    """R6: every output file the goal named must now exist.
+
+    It must also be non-empty -- but only when the sentence promised content.  The
+    non-empty clause exists to catch a producer that writes nothing and reports
+    success, so it is only evidence of failure when there was something to write.
+    Measured: "Run the shell command touch X" creates X correctly as 0 bytes --
+    an empty file IS the stated result -- and was refused with
+    PROMISED_ARTIFACT_EMPTY:X.  The rule was measuring a promise the sentence
+    never made.  composer_route_v1.extract_content already answers "what text did
+    this sentence state" and is reused here rather than a second rule being
+    invented; when it returns nothing, existence is the whole of the claim.
+
+    A guard must be scoped to the claim the sentence actually makes.
+    """
+    states_content = composer_route.extract_content(goal) is not None
     errors = []
     for raw in future_artifacts:
         p = ROOT / raw
         if not p.is_file():
             errors.append("PROMISED_ARTIFACT_MISSING:" + raw)
-        elif p.stat().st_size == 0:
+        elif states_content and p.stat().st_size == 0:
             errors.append("PROMISED_ARTIFACT_EMPTY:" + raw)
     return errors
+
+
+def promised_artifact_class(errors: list[str]) -> str:
+    """Name the error that actually fired, not a constant.
+
+    Measured: a 0-byte artifact the sentence never asked to be non-empty was
+    reported to the caller as PROMISED_ARTIFACT_MISSING while the file sat on
+    disk -- the refusal named a reason its own evidence list contradicted.
+    """
+    if not errors:
+        return "PROMISED_ARTIFACT_MISSING"
+    return str(errors[0]).split(":", 1)[0]
 
 
 
@@ -1182,9 +1209,10 @@ def _composed_holds_up(composed: dict[str, Any], goal: str, future_artifacts: li
     if not still:
         return composed
     composed["composer_status_before_artifact_check"] = composed.get("status")
-    composed["status"] = "FAIL_CLOSED__PROMISED_ARTIFACT_MISSING"
+    cls = promised_artifact_class(still)
+    composed["status"] = "FAIL_CLOSED__" + cls
     composed["pass"] = False
-    composed["failure_class"] = "PROMISED_ARTIFACT_MISSING"
+    composed["failure_class"] = cls
     composed["promised_artifact_errors"] = still
     composed["composer_ran_but_left_the_artifact_missing"] = True
     return composed
@@ -1406,9 +1434,10 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
             # the one path that must be re-measured before it may report success.
             return _composed_holds_up(composed, normalized, future_artifacts)
         result["runtime_status_before_artifact_check"] = result.get("status")
-        result["status"] = "FAIL_CLOSED__PROMISED_ARTIFACT_MISSING"
+        cls = promised_artifact_class(missing)
+        result["status"] = "FAIL_CLOSED__" + cls
         result["pass"] = False
-        result["failure_class"] = "PROMISED_ARTIFACT_MISSING"
+        result["failure_class"] = cls
         result["promised_artifact_errors"] = missing
     unchanged = promised_source_change_errors(normalized, source_digests_before) \
         if result.get("pass") is True else []

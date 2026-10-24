@@ -157,18 +157,66 @@ class TestAMissingPromiseIsStillAMissingPromise(unittest.TestCase):
         )
         self.assertEqual(errors, ["PROMISED_ARTIFACT_MISSING:%s/b2.txt" % SCRATCH])
 
-    def test_an_empty_promised_file_is_still_refused(self):
+    def test_an_empty_file_the_sentence_asked_to_be_written_is_still_refused(self):
+        """The fake-output guard must still bite when there was something to write.
+
+        This is the case the non-empty clause exists for: the sentence states
+        text, and the file arrived holding none of it.  Reverting the scoping to
+        "always non-empty" keeps this passing, so it is the pin that stops the
+        scoped rule from being read as "the empty check was deleted".
+        """
         from canonical.runtime.live_brain_route_admission_v1 import (
             promised_artifact_errors,
         )
 
         _fresh()
-        (ROOT / ("%s/b2.txt" % SCRATCH)).write_text("", encoding="utf-8")
+        dest = "%s/b2.txt" % SCRATCH
+        (ROOT / dest).write_text("", encoding="utf-8")
         errors = promised_artifact_errors(
-            "Run the shell command touch %s/b2.txt" % SCRATCH,
-            ["%s/b2.txt" % SCRATCH],
+            "Write the text 'real content' to the file %s" % dest,
+            [dest],
         )
-        self.assertEqual(errors, ["PROMISED_ARTIFACT_EMPTY:%s/b2.txt" % SCRATCH])
+        self.assertEqual(errors, ["PROMISED_ARTIFACT_EMPTY:" + dest])
+
+    def test_an_empty_file_is_the_stated_result_when_no_text_was_promised(self):
+        """`touch` makes an empty file. That is the whole of what was asked.
+
+        A guard must be scoped to the claim the sentence actually makes.  This
+        asserts the other half, so the pair above cannot pass by simply
+        deleting the empty check.
+        """
+        from canonical.runtime.live_brain_route_admission_v1 import (
+            promised_artifact_errors,
+        )
+
+        _fresh()
+        dest = "%s/b3.txt" % SCRATCH
+        (ROOT / dest).write_text("", encoding="utf-8")
+        self.assertEqual(
+            promised_artifact_errors("Run the shell command touch %s" % dest, [dest]),
+            [],
+        )
+
+    def test_the_refusal_names_the_error_that_actually_fired(self):
+        """A 0-byte file on disk was reported as MISSING.
+
+        Measured: `touch` created the file, the evidence list said
+        PROMISED_ARTIFACT_EMPTY, and the failure_class the caller received said
+        PROMISED_ARTIFACT_MISSING -- the refusal named a reason its own evidence
+        contradicted.  Both directions are pinned.
+        """
+        from canonical.runtime.live_brain_route_admission_v1 import (
+            promised_artifact_class,
+        )
+
+        self.assertEqual(
+            promised_artifact_class(["PROMISED_ARTIFACT_EMPTY:a/b.txt"]),
+            "PROMISED_ARTIFACT_EMPTY",
+        )
+        self.assertEqual(
+            promised_artifact_class(["PROMISED_ARTIFACT_MISSING:a/b.txt"]),
+            "PROMISED_ARTIFACT_MISSING",
+        )
 
 
 if __name__ == "__main__":
