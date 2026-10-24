@@ -1822,10 +1822,28 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
     single_shape = bool(compiled) and compiled.get("compiler_mode") == "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH" and selected
 
     # An explicit name outranks a scorer that could not see the thing named.
+    # The name is read OUTSIDE the single_shape gate on purpose.  Inside it, the
+    # 28 of 32 capabilities that routed to themselves while being handed inputs
+    # the sentence never contained were never even recorded as named, because
+    # their compile ran in another mode -- so the contract check at the boundary
+    # could not see them either.  Recording the name is free and changes no route;
+    # it only lets the boundary hold the winner to the caller's own words.
+    # Two reads, because the hook deliberately skips whatever is already
+    # selected -- it was built to surface a capability the scorer could not see.
+    # That is right for deciding whether to OVERRIDE a pick, and wrong for
+    # deciding whether the request NAMED something: with `selected` passed in,
+    # every capability that routed to itself came back None, so the 28 of 32 that
+    # were handed inputs the sentence never contained were never recorded as
+    # named at all and no contract check could reach them.
+    _named_stated = _named_receipt_projection(text, admissible, None,
+                                              request_states_the_capability_name,
+                                              include_bound=True)
+    if _named_stated is not None:
+        _NAMED_EXPECTATION.set(_named_stated)
+    _named = _named_receipt_projection(text, admissible, selected,
+                                       request_states_the_capability_name,
+                                       include_bound=True)
     if single_shape:
-        _named = _named_receipt_projection(text, admissible, selected,
-                                            request_states_the_capability_name,
-                                            include_bound=True)
         if _named is not None and (admissible.get(_named) or {}).get(
                 "capability_source") != "receipt_projection":
             # A BOUND capability is already visible to the pinned scorer, so the
@@ -1837,7 +1855,6 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
             # the name is recorded and the body is left completely alone; the
             # objection is raised on the way out, and only against a substitution.
             rules.append("F29_NAMED_BOUND_CAPABILITY_CONSULTED")
-            _NAMED_EXPECTATION.set(_named)
         elif _named is not None:
             rules.append("F29_NAMED_RECEIPT_PROJECTION_CONSULTED")
             retrieved = _retrieval_first_selection(text, admissible, root, rules)
@@ -2035,6 +2052,43 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
     return compiled
 
 
+_OWNED_OUTPUT_ROLES = ("output_path", "result_path")
+
+
+def _inputs_not_stated_by(text: str, inputs: Mapping[str, Any]) -> list[str]:
+    """Every bound input that is neither an output we own nor the caller's own words.
+
+    Binding SUCCEEDING is not the same as the caller having stated the contract.
+    Measured on 8273253 across the 72 verified capabilities named in prose: 32
+    routed to the capability asked for, and 28 of those 32 were handed at least
+    one input the sentence never contained --
+
+        pdf.extract.text.pypdf        pdf_path = ".../tmp/BOUND_PDF_TEXT_TEST.pdf"
+        image.code.decode.zbarimg     path     = ".../canary_frames/000-c-ferry-scan0.png"
+        math.numeric_expression.sympy expression = "sympy"   <- scraped from its own name
+        python.source.audit.ast       source_root = "canonical/runtime"
+
+    The binder picks a plausible-looking path out of the repository and presents
+    it as though the caller had supplied it, so the compile reports a success on
+    work nobody asked for.  The rule is narrow and structural: where an OUTPUT
+    lands is ours to choose, and everything else has to be evidenced by the
+    request itself.
+    """
+    unstated = []
+    for key, value in dict(inputs or {}).items():
+        role = str(key)
+        if (role in _OWNED_OUTPUT_ROLES
+                or role.endswith("_output_path")
+                or role.endswith("_result_path")):
+            continue
+        if isinstance(value, str):
+            stated = value.strip()
+            if stated and (stated in text or text.strip().startswith(stated)):
+                continue
+        unstated.append(role)
+    return unstated
+
+
 def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path) -> dict[str, Any]:
     """Compile a goal, and never answer a named capability with a different one.
 
@@ -2065,7 +2119,14 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
         # The body reached the named capability on its own.  Its binding saw the
         # whole compilation context; the named branch's did not, and returning the
         # narrower one broke two live wave-4 families whose goals state their
-        # inputs (bm25 source ranking, typed decision synthesis).
+        # inputs (bm25 source ranking, typed decision synthesis).  But reaching the
+        # right capability with invented inputs is still a fabricated success, so
+        # the contract is checked here, where the winning binding is known.
+        unstated = _inputs_not_stated_by(goal, compiled.get("inputs") or {})
+        if unstated:
+            raise GoalCompilationFailure(
+                "GOAL_INPUT_BINDING_REQUIRED",
+                "%s:named_but_inputs_not_stated:%s" % (expected, ",".join(sorted(unstated))))
         return compiled
     if route is not None:
         # The body picked something else.  An explicit name IS the disambiguation
