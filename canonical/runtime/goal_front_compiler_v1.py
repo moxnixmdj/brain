@@ -2089,6 +2089,43 @@ def _inputs_not_stated_by(text: str, inputs: Mapping[str, Any]) -> list[str]:
     return unstated
 
 
+_TEMPLATE_INPUT_RE = re.compile(r"\$\{input\.([A-Za-z0-9_]+)\}")
+
+
+def _contract_gaps_for(text: str, entry: Mapping[str, Any], root: pathlib.Path) -> list[str]:
+    """The inputs THIS capability needs that the request did not state.
+
+    A refusal is only useful if it says what to fix.  Measured through the front
+    door on 8a721233, 42 of the 72 verified capabilities named in prose refused
+    without saying what was missing, and some described a DIFFERENT capability's
+    problem instead: asking for text.file.write returned
+    "shell.command.run:argv:not_stated", and six returned
+    FAIL_CLOSED__ROUTE_ADMISSION_REJECTED with an empty detail.  Naming whatever
+    the fallback path happened to trip over is not a diagnosis the caller can act
+    on, so the gaps are computed from the capability that was actually asked for.
+    """
+    template = json.dumps((entry or {}).get("action_template") or {})
+    required = sorted(set(_TEMPLATE_INPUT_RE.findall(template)))
+    try:
+        bound = bind_all_inputs(text, entry, root, cycle=0, spool=set())
+    except GoalCompilationFailure:
+        bound = None
+    bound = dict(bound or {})
+    gaps = []
+    for role in required:
+        if (role in _OWNED_OUTPUT_ROLES
+                or role.endswith("_output_path")
+                or role.endswith("_result_path")):
+            continue
+        value = bound.get(role)
+        if isinstance(value, str) and value.strip():
+            stated = value.strip()
+            if stated in text or text.strip().startswith(stated):
+                continue
+        gaps.append(role)
+    return gaps
+
+
 def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path) -> dict[str, Any]:
     """Compile a goal, and never answer a named capability with a different one.
 
@@ -2104,15 +2141,30 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
     """
     token = _NAMED_EXPECTATION.set(None)
     rtoken = _NAMED_ROUTE.set(None)
+    failure = None
     try:
         compiled = _compile_goal_body(goal, admissible, root)
-    except GoalCompilationFailure:
-        raise
+    except GoalCompilationFailure as exc:
+        # Held, not re-raised: when the request named a capability, the body's own
+        # complaint is usually about whatever it landed on instead.  Measured on
+        # 8a721233, asking for text.file.write returned
+        # "shell.command.run:argv:not_stated" -- a different capability's problem,
+        # which the caller cannot act on.
+        failure = exc
+        compiled = None
     finally:
         expected = _NAMED_EXPECTATION.get()
         route = _NAMED_ROUTE.get()
         _NAMED_EXPECTATION.reset(token)
         _NAMED_ROUTE.reset(rtoken)
+    if failure is not None:
+        if expected is not None and expected not in str(failure.detail or ""):
+            named_entry = (admissible or {}).get(expected) or {}
+            gaps = _contract_gaps_for(goal, named_entry, root)
+            raise GoalCompilationFailure(
+                "GOAL_INPUT_BINDING_REQUIRED",
+                "%s:contract_not_stated:%s" % (expected, ",".join(gaps) or "inputs"))
+        raise failure
     if expected is None:
         return compiled
     if compiled.get("selected_capability") == expected:
@@ -2134,6 +2186,11 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
         # Built only now: constructing it eagerly perturbed the body's own
         # binding for the same capability and broke two live wave-4 families.
         return route()
+    # Name the capability that was asked for and what IT needs.  Reporting the
+    # capability the walk landed on instead -- which is what this used to do --
+    # tells the caller nothing they can act on.
+    named_entry = (admissible or {}).get(expected) or {}
+    gaps = _contract_gaps_for(goal, named_entry, root)
     raise GoalCompilationFailure(
         "GOAL_INPUT_BINDING_REQUIRED",
-        "%s:named_but_other_selected:%s" % (expected, compiled.get("selected_capability")))
+        "%s:contract_not_stated:%s" % (expected, ",".join(gaps) or "inputs"))
