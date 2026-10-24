@@ -141,6 +141,31 @@ def _payload_runs_to_the_destination(goal: str, payload: str) -> bool:
 _PAYLOAD_OPEN_DELIM = re.compile(r"""[\'"\u2018\u201c(\[]\s*$""")
 _PAYLOAD_CLOSE_DELIM = re.compile(r"""\s*[\'"\u2019\u201d)\]]""")
 
+def _verified_consumed_paths(args: Mapping[str, Any], root: Path) -> tuple[str, ...]:
+    """Paths this step's command removed, where the removal itself was verified.
+
+    Asks the same postcondition table the inspector uses and returns nothing
+    unless it passes, so a path is excused from the existence check only by a
+    check that looked at the disk -- never by the shape of the command alone.
+    """
+    argv = args.get("argv")
+    if not isinstance(argv, (list, tuple)) or not argv:
+        return ()
+    tokens = [str(tok) for tok in argv]
+    if any(not tok for tok in tokens):
+        return ()
+    check = _MUTATING_POSTCONDITIONS.get(tokens[0].rsplit("/", 1)[-1])
+    if check is None:
+        return ()
+    try:
+        passed, _reason, evidence = check(tokens, root)
+    except Exception:  # noqa: BLE001 - a postcondition that cannot run grants nothing
+        return ()
+    if not passed:
+        return ()
+    return tuple(str(item) for item in (evidence or {}).get("consumed_paths") or ())
+
+
 _PATH_ARGS = (
     "output_path", "path", "json_path", "archive_path", "manifest_path",
     "input_path", "extraction_path", "result_path", "source_json_path",
@@ -822,7 +847,7 @@ def _post_mv(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
     if src.exists():
         return False, "COMMAND_MV_SOURCE_STILL_PRESENT", {}
     return True, "", {"postcondition_checked": "mv", "destination_present": True,
-                      "source_removed": True}
+                      "source_removed": True, "consumed_paths": [tokens[1]]}
 
 
 def _post_mkdir(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
@@ -849,11 +874,44 @@ def _post_touch(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
 
 # Keyed by program name.  Anything absent is refused by the caller rather than
 # passed, so widening this table is a deliberate act with a test attached.
+def _post_rm(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
+    """`rm A` promises exactly one thing about the world: A is gone.
+
+    Scoped to the one shape whose promise can be stated precisely -- a program
+    and a single operand, no flags.  `rm -r`, `rm -f a b` and a glob are refused
+    as unstateable rather than guessed at, which is the same discipline that keeps
+    dd, chmod, ln and sed out of this table.
+
+    That the file EXISTED is not assumed and does not need to be witnessed: the
+    adapter raises CLI_COMMAND_FAILED on a non-zero exit, and rm exits non-zero on
+    a path that was not there.  A zero exit plus an absent path is the whole of
+    the promise, and both halves are checkable now.
+    """
+    if len(tokens) != 2:
+        return False, "COMMAND_RM_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", {"argv_tokens": len(tokens)}
+    target = _inside(root, tokens[1])
+    if target is None:
+        return False, "COMMAND_RM_PATH_OUTSIDE_REPOSITORY", {}
+    if target.exists():
+        return False, "COMMAND_RM_TARGET_STILL_PRESENT", {}
+    return True, "", {"postcondition_checked": "rm", "target_removed": True,
+                      "consumed_paths": [tokens[1]]}
+
+
+# Commands whose verified postcondition accounts for a path it CONSUMED.  Kept
+# beside the table and pinned to it by test: a command listed here must return
+# consumed_paths from its postcondition, so the two cannot drift apart.  This is
+# what lets a caller bind output_path to the operand a command removes and say so
+# honestly, instead of the adapter guessing at the command's intent.
+_CONSUMES_AN_OPERAND = frozenset({"rm", "mv"})
+
+
 _MUTATING_POSTCONDITIONS = {
     "cp": _post_cp,
     "mv": _post_mv,
     "mkdir": _post_mkdir,
     "touch": _post_touch,
+    "rm": _post_rm,
 }
 
 
@@ -1032,9 +1090,19 @@ def verify(
         # --- every path must be real, every declared digest must match -----
         for row in rows:
             cid = row["args"].get("capability_id")
+            consumed = _verified_consumed_paths(row["args"], root)
             for name in _PATH_ARGS:
                 value = row["args"].get(name)
                 if not isinstance(value, str) or not value.strip():
+                    continue
+                # A command that REMOVES a path names a path that is supposed to
+                # be gone, and reporting it absent contradicts the sentence that
+                # asked for the removal.  The skip is not assumed from the shape
+                # of the argv: it is granted only when the command's own
+                # postcondition -- the same table the inspector judges by --
+                # verifies the removal and names this path as the one consumed.
+                # An unverified absence still fails exactly as it did before.
+                if value in consumed:
                     continue
                 path = _inside(root, value)
                 if path is None:
@@ -1096,7 +1164,17 @@ def verify(
                                        capability_id=cid, argument=name,
                                        payload_bytes=len(value.encode("utf-8")))
             result = row["result"]
-            if result.get("output_verified") is False:
+            # A producer that could not fingerprint its declared output is
+            # refusing to vouch for it, and that normally ends the matter.  But a
+            # command that REMOVED the output has nothing to fingerprint -- the
+            # absence is the result -- and its producer says so honestly with
+            # output_verified False and output_absent_after_run.  Treating that
+            # honesty as failure would punish the one adapter that reported the
+            # truth instead of inventing a digest.  The excuse is the same earned
+            # one as the existence check: a verified postcondition accounted for
+            # this exact path being gone.
+            declared_output = str(row["args"].get("output_path") or "")
+            if result.get("output_verified") is False and declared_output not in consumed:
                 return _unresolved("STEP_OUTPUT_NOT_VERIFIED_BY_ITS_PRODUCER",
                                    capability_id=cid,
                                    producer_reason=result.get("reason"))

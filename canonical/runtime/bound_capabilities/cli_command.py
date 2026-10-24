@@ -38,6 +38,26 @@ def run(args, root):
         raise RuntimeError("CLI_COMMAND_FAILED:"+result["stderr"][-1200:])
     if out is not None:
         if not out.exists():
+            # Whether a missing declared output is a FAILURE is a judgement about
+            # what the sentence asked for, and this adapter is the producer -- it
+            # is the one thing that must not be allowed to make it.  A command
+            # that removes its operand (`rm A`, where the only path the sentence
+            # names is the one being removed) leaves nothing to fingerprint, and
+            # that is a fact worth reporting rather than an error worth raising.
+            #
+            # Only on the caller's explicit word, and reported as a fact with
+            # output_verified False so no fingerprint is fabricated and nothing
+            # downstream can read this as proof of a produced artifact.  Whether
+            # the absence is what was asked for is decided by the acceptance
+            # layer, which has the postcondition for exactly that.
+            if str(args.get("output_may_be_consumed") or "").strip().lower() in ("1", "true", "yes"):
+                result.update({
+                  "output_path":str(out.relative_to(pathlib.Path(root).resolve())),
+                  "output_absent_after_run":True,
+                  "output_bytes":0,
+                  "output_verified":False
+                })
+                return result
             raise RuntimeError("CLI_EXPECTED_OUTPUT_MISSING")
         if out.is_dir():
             # `not out.is_file()` conflated two different facts: "the declared

@@ -372,6 +372,7 @@ def bind(signature: Mapping[str, str], goal: str,
             argv = extract_argv(goal)
             if argv:
                 args[slot] = argv
+                _declare_a_consumed_output(args, argv)
         elif t == "NUMBER":
             n = extract_number(goal)
             if n is not None:
@@ -390,6 +391,33 @@ def bind(signature: Mapping[str, str], goal: str,
             if body:
                 args[slot] = body
     return args
+
+
+def _declare_a_consumed_output(args: dict[str, Any], argv: Sequence[str]) -> None:
+    """Tell the adapter when the bound output is the operand a command removes.
+
+    The composer binds PATH_OUTPUT to the last path the sentence names.  For
+    `rm A` that is A itself -- the file being deleted -- so the adapter is handed
+    a declared output that the command is about to make absent.  Without this the
+    adapter raises CLI_EXPECTED_OUTPUT_MISSING after having already run the
+    command, which is a report that denies work that happened.
+
+    The knowledge is not invented here: it is read from the acceptance layer's
+    own postcondition table, so a command is only declared a consumer when a
+    verified postcondition exists to judge the result.  A deferred import keeps
+    the layering -- the composer asks the verifier what it knows, and never the
+    other way round.
+    """
+    if not argv:
+        return
+    program = str(argv[0]).rsplit("/", 1)[-1]
+    try:
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
+        consumes = program in _accept._CONSUMES_AN_OPERAND
+    except Exception:  # noqa: BLE001 - no table, no declaration
+        consumes = False
+    if consumes:
+        args["output_may_be_consumed"] = "true"
 
 
 # --------------------------------------------------------------------------- #
