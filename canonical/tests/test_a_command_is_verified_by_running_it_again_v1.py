@@ -153,7 +153,11 @@ class TestNothingIsReRunThatCouldChangeSomething(unittest.TestCase):
     # promise it made about the world instead -- but only when that promise can
     # be stated precisely enough to be checked.  These cannot, so they are
     # refused rather than passed.
-    NO_STATEABLE_PROMISE = ("rm", "tee", "dd", "chmod", "ln", "sed", "truncate")
+    # `rm` is not here any more, and that is the point: a single removal has a
+    # precise promise -- the path is gone -- and is certified (and every
+    # unstateable shape of it refused) by
+    # test_a_removal_is_certified_only_when_the_removal_is_proven_v1.
+    NO_STATEABLE_PROMISE = ("tee", "dd", "chmod", "ln", "sed", "truncate")
 
     def test_a_mutating_command_with_no_stateable_promise_is_refused(self):
         for program in self.NO_STATEABLE_PROMISE:
@@ -319,8 +323,16 @@ class TestEveryPostconditionCanBeFalsified(unittest.TestCase):
         self._ask(["touch", self.B], True)
 
     def test_commands_with_no_stateable_promise_stay_refused(self):
+        """`rm` is not in this list any more, and that is the point.
+
+        It used to be, because nothing could be said about a removal.  A single
+        removal now has a precise promise -- the path is gone -- and is certified
+        by test_a_removal_is_certified_only_when_the_removal_is_proven_v1, which
+        also pins every shape that still cannot be stated.  What remains here is
+        the set for which no promise can be stated at all.
+        """
         self._world()
-        for program in ("rm", "tee", "dd", "chmod", "ln", "sed", "truncate"):
+        for program in ("tee", "dd", "chmod", "ln", "sed", "truncate"):
             self._ask([program, self.A], False,
                       "COMMAND_NOT_RE_RUNNABLE_WITHOUT_SIDE_EFFECTS")
 

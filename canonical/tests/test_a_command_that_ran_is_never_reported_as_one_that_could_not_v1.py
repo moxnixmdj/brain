@@ -41,25 +41,28 @@ def _solve(goal):
 
 
 class TestACommandThatRanIsReportedAsOneThatRan(unittest.TestCase):
+    """A dispatched command is recorded, whatever happened next.
 
-    def test_a_deletion_that_landed_is_not_reported_as_a_compilation_gap(self):
-        """The report must not deny a side effect that already happened."""
+    Originally written against `rm A`, which deleted A and was then reported as a
+    compilation gap.  A single removal is now certified outright (see
+    test_a_removal_is_certified_only_when_the_removal_is_proven_v1), so the
+    invariant is asserted on a dispatch that still ends in a raise: a removal
+    whose target was never there.  The command was still dispatched, and the
+    record still has to say so.
+    """
+
+    def test_a_dispatch_that_raised_is_not_reported_as_a_compilation_gap(self):
         base = _fresh("rmcase")
-        target = "%s/a1.txt" % base
-        result = _solve("Run the shell command rm %s" % target)
-
-        self.assertFalse((ROOT / target).exists(), "fixture did not delete")
+        result = _solve("Run the shell command rm %s/never_existed.txt" % base)
         self.assertNotEqual(
             result.get("failure_class"),
             "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP",
-            "reported 'could not make this executable' about a command that ran",
+            "reported 'could not make this executable' about a command that was dispatched",
         )
-        self.assertEqual(result.get("failure_class"), "STEP_RAISED_OUTCOME_UNKNOWN")
 
     def test_the_record_names_the_command_that_was_dispatched(self):
-        """The argv must survive, or nothing downstream can ever know."""
         base = _fresh("rmcase2")
-        target = "%s/a1.txt" % base
+        target = "%s/never_existed.txt" % base
         result = _solve("Run the shell command rm %s" % target)
         steps = (result.get("composer_execution") or {}).get("steps") or []
         self.assertTrue(steps, "no step record survived the adapter raising")
@@ -71,10 +74,10 @@ class TestACommandThatRanIsReportedAsOneThatRan(unittest.TestCase):
             "the reason the adapter raised was discarded",
         )
 
-    def test_it_is_still_refused(self):
-        """This is a truthful report, not acceptance.  Fail closed stays closed."""
+    def test_a_removal_that_could_not_happen_is_still_refused(self):
+        """Certifying a real removal must not certify one that never happened."""
         base = _fresh("rmcase3")
-        result = _solve("Run the shell command rm %s/a1.txt" % base)
+        result = _solve("Run the shell command rm %s/never_existed.txt" % base)
         self.assertIs(result.get("pass"), False)
         self.assertNotIn("PASS", str(result.get("status")))
 

@@ -566,7 +566,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -631,7 +631,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -697,7 +697,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -762,7 +762,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -889,7 +889,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -953,7 +953,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -1018,7 +1018,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -1085,7 +1085,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -1150,7 +1150,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -1217,7 +1217,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -1283,7 +1283,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -1348,7 +1348,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -1413,7 +1413,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -1477,7 +1477,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -1543,7 +1543,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -1608,7 +1608,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -1674,7 +1674,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -1740,7 +1740,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -1806,7 +1806,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -1873,7 +1873,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -1939,7 +1939,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -2003,7 +2003,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -2069,7 +2069,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -2136,7 +2136,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -2201,7 +2201,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -2266,7 +2266,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -2335,7 +2335,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -2402,7 +2402,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -2467,7 +2467,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -2533,7 +2533,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -2599,7 +2599,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -2665,7 +2665,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -2730,7 +2730,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -3197,7 +3197,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -3262,7 +3262,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -3326,7 +3326,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -3390,7 +3390,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -3454,7 +3454,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -3519,7 +3519,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -3584,7 +3584,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -3651,7 +3651,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -3716,7 +3716,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -3781,7 +3781,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -3846,7 +3846,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -3911,7 +3911,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -3976,7 +3976,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -4041,7 +4041,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -4105,7 +4105,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -4170,7 +4170,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -4235,7 +4235,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -4300,7 +4300,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -4364,7 +4364,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -4429,7 +4429,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -4494,7 +4494,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -4626,7 +4626,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -4691,7 +4691,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -4756,7 +4756,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -4822,7 +4822,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -4888,7 +4888,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -4956,7 +4956,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -5021,7 +5021,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -5085,7 +5085,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -5150,7 +5150,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -5216,7 +5216,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -5282,7 +5282,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -5346,7 +5346,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -5412,7 +5412,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -5480,7 +5480,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -5544,7 +5544,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -5608,7 +5608,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -5672,7 +5672,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -5736,7 +5736,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -5801,7 +5801,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -5866,7 +5866,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -5931,7 +5931,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -5996,7 +5996,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -6061,7 +6061,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -6125,7 +6125,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -6191,7 +6191,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -6258,7 +6258,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -6648,7 +6648,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -6906,7 +6906,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -9828,7 +9828,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -9893,7 +9893,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -9957,7 +9957,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -10022,7 +10022,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -10087,7 +10087,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -10152,7 +10152,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -10218,7 +10218,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -10411,7 +10411,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -12227,7 +12227,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -12291,7 +12291,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -12357,7 +12357,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -12749,7 +12749,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -12816,7 +12816,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -12883,7 +12883,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -12950,7 +12950,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -13017,7 +13017,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -13085,7 +13085,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -13153,7 +13153,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -13289,7 +13289,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -13357,7 +13357,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -13424,7 +13424,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -13491,7 +13491,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -13558,7 +13558,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -13625,7 +13625,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -13692,7 +13692,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -13759,7 +13759,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -13826,7 +13826,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -13891,7 +13891,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -13958,7 +13958,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -14022,7 +14022,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -14090,7 +14090,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -14158,7 +14158,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -14289,7 +14289,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -14356,7 +14356,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -14625,7 +14625,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -14691,7 +14691,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -14757,7 +14757,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -14886,7 +14886,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -14950,7 +14950,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -15017,7 +15017,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -15083,7 +15083,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -15149,7 +15149,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -15213,7 +15213,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -15279,7 +15279,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -15345,7 +15345,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -15410,7 +15410,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -16417,7 +16417,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -16480,7 +16480,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -16737,7 +16737,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -16802,7 +16802,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -16933,7 +16933,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -16997,7 +16997,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -17061,7 +17061,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -17194,7 +17194,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -17259,7 +17259,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -17323,7 +17323,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -17387,7 +17387,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -17450,7 +17450,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -17514,7 +17514,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -17579,7 +17579,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -17643,7 +17643,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -17707,7 +17707,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -17772,7 +17772,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -17837,7 +17837,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -17900,7 +17900,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -17964,7 +17964,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -18028,7 +18028,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -18093,7 +18093,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -18157,7 +18157,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -18221,7 +18221,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -18287,7 +18287,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -18352,7 +18352,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -18417,7 +18417,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -18482,7 +18482,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -18548,7 +18548,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -18612,7 +18612,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -18679,7 +18679,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -18745,7 +18745,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -18811,7 +18811,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -18877,7 +18877,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -18944,7 +18944,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -19011,7 +19011,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -19078,7 +19078,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -19146,7 +19146,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -19212,7 +19212,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -19280,7 +19280,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -19346,7 +19346,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -19411,7 +19411,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -19477,7 +19477,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -19542,7 +19542,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -19607,7 +19607,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -19672,7 +19672,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -19736,7 +19736,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "repository_python_source"
    },
    "provides": [
@@ -23400,7 +23400,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
-    "source_sha256": "a8cdd12e6587ebdff0b023368779576235d03ea8c6fec056c29e5d436bab52d2",
+    "source_sha256": "63509eb46e9a2b9c274555067c08c82aef47bf3089761015da9f60e6f355690b",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24536,7 +24536,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6363,
+  "research_index_records": 6364,
   "routing_tokens": 1798,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e4bc231d70d8e3f51127d1e332dd181debf62830f5b1c751bb8baaa9fc529285"
+  "value": "8d19304b56aee9a6f3c689ebc6d01fb231bac4ca8681884e97f98318e4cd273e"
  },
  "engines": [
   {
@@ -46494,7 +46494,7 @@
   "included_source_count": 865,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "ec0dc5d8aa65abd9ce7d5b07dca71a5c0e1a46a6b17b1e9ae98c071ed0a7059e"
+  "source_tree_digest": "4a4eb2fba4d37ece43e67b21554f389da7b1a15097fdb562f87318a95514227c"
  },
  "research_index": [
   {
@@ -188420,6 +188420,51 @@
    }
   },
   {
+   "action_id": "A_REMOVAL_IS_CERTIFIED_BY_PROVING_THE_FILE_IS_GONE_V1_20261024_V1",
+   "capability": false,
+   "date": "2026-10-24",
+   "id": "research:canonical/action_intents/A_REMOVAL_IS_CERTIFIED_BY_PROVING_THE_FILE_IS_GONE_V1_20261024_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_REMOVAL_IS_CERTIFIED_BY_PROVING_THE_FILE_IS_GONE_V1_20261024_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "1f48278d0e70e94586260b772aa6aadaf1b626b3f545cae6bca54ca86f07f775",
+   "status": "",
+   "terms": {
+    "20261024": 1,
+    "4116129": 1,
+    "a_removal_is_certified_by_proving_the_file_is_gone_v1_20261024_v1": 2,
+    "about": 1,
+    "absent": 1,
+    "acceptance": 1,
+    "adapter": 2,
+    "asked": 1,
+    "behind": 1,
+    "being": 1,
+    "binds": 1,
+    "certified": 2,
+    "check": 2,
+    "cli_expected_output_missing": 1,
+    "command": 2,
+    "composer": 1,
+    "decides": 1,
+    "declared": 2,
+    "deleted": 2,
+    "file": 2,
+    "gone": 2,
+    "judgement": 2,
+    "last": 2,
+    "not": 2,
+    "output": 3,
+    "path": 2,
+    "producer": 4,
+    "removal": 2,
+    "reported": 2,
+    "rm": 2,
+    "sentence": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_REQUEST_THAT_NAMES_NO_TEXT_WRITES_NOTHING_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -207291,10 +207336,11 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "7586d490a41d9b70d6028d19850284ce1719349dac04f513375ea9ab411605e7",
+   "sha256": "ef95b97d64388573f924b89ac4525bc157974e2bc15220c97f9fe8465b99f883",
    "summary": "Routing a sentence to a typed capability chain.",
-   "symbol_count": 11,
+   "symbol_count": 12,
    "symbols": [
+    "_declare_a_consumed_output",
     "bind",
     "candidate_tokens",
     "execute_chain",
@@ -207313,6 +207359,7 @@
     "capability": 1,
     "chain": 1,
     "composer": 1,
+    "declare_a_consumed_output": 1,
     "execute_chain": 1,
     "extract_argv": 1,
     "extract_content": 1,
@@ -246015,9 +246062,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "c00789f927c820de3394a38322608cdd7a62d8bb42c464e6b461a238d0ad6156",
+   "sha256": "6548cc066d1e3794800f61ab4aecc23836a862fd7454f98b7c4c8c464f4d1b7c",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
-   "symbol_count": 32,
+   "symbol_count": 34,
    "symbols": [
     "_STATES_A_COMMAND",
     "_action_rows",
@@ -246066,7 +246113,6 @@
     "inspect_pdf_extract_text": 1,
     "inspect_python_source_audit": 1,
     "inspect_relevance_rank": 1,
-    "inspect_tar_gz_create_from_manifest": 1,
     "inspect_xlsx_create": 1,
     "json": 1,
     "payload_runs_to_the_destination": 1,
@@ -246080,7 +246126,8 @@
     "trace_is_finished": 1,
     "unresolved": 1,
     "unwrap_bound_adapter_row": 1,
-    "v1": 1
+    "v1": 1,
+    "verified_consumed_paths": 1
    }
   },
   {
