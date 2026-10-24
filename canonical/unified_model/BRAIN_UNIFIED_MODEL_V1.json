@@ -24536,7 +24536,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6345,
+  "research_index_records": 6346,
   "routing_tokens": 1798,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f967234c1f32ce26e8593cc799e9b2f8a380c010f42e78c057ac78cccd864d20"
+  "value": "cebfc214261d65041443e1cdc6e0f3e6fa26ee437238f48274956e4afacd3f3e"
  },
  "engines": [
   {
@@ -191151,6 +191151,51 @@
    }
   },
   {
+   "action_id": "THE_CONTROLLER_PATH_ASKS_THE_ACCEPTANCE_VERIFIER_TOO_V1_20261024_V1",
+   "capability": false,
+   "date": "2026-10-24",
+   "id": "research:canonical/action_intents/THE_CONTROLLER_PATH_ASKS_THE_ACCEPTANCE_VERIFIER_TOO_V1_20261024_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_CONTROLLER_PATH_ASKS_THE_ACCEPTANCE_VERIFIER_TOO_V1_20261024_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "9bb363ead5d3de95604258c182a9b87efb7c370e5937ab7e04eccc9ac88934b5",
+   "status": "",
+   "terms": {
+    "11": 1,
+    "144": 1,
+    "20261024": 1,
+    "223": 1,
+    "367": 2,
+    "51": 1,
+    "acceptance": 3,
+    "accepted": 1,
+    "admissible": 1,
+    "all": 1,
+    "artifact-declaring": 1,
+    "asks": 1,
+    "because": 1,
+    "being": 1,
+    "capabilities": 3,
+    "carried": 1,
+    "carrying": 2,
+    "contract": 1,
+    "controller": 1,
+    "corpus": 1,
+    "every": 1,
+    "fall": 2,
+    "no": 4,
+    "not": 3,
+    "one": 2,
+    "over": 2,
+    "pass": 2,
+    "passes": 2,
+    "path": 2,
+    "the_controller_path_asks_the_acceptance_verifier_too_v1_20261024_v1": 2,
+    "v1": 2,
+    "verdict": 3
+   }
+  },
+  {
    "action_id": "THE_REPLAY_SAFETY_GATE_FAILED_OPEN_ON_THE_SHIPPING_PATH_BECAUSE_IT_READ_A_KEY_THE_FRONT_DOOR_NEVER_EMITS_V1_20261022_V1",
    "capability": false,
    "date": "2026-10-22",
@@ -224482,7 +224527,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "5ac67d159a8f173c89ac4aaf1bc352e291c537372220c3b4227d6fd36f3e5201",
+   "sha256": "2c992c491c3d6196d6ec81aceb961593a3595912181c9443c5a62d3c8636da19",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 39,
    "symbols": [
