@@ -24536,7 +24536,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6351,
+  "research_index_records": 6352,
   "routing_tokens": 1798,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "1ed37ca5b4e7153db35aa997c0690f31854bc857b13f9cd29820c5578e011aa3"
+  "value": "5d39a870b2111d545cbba34145dd73020442a3b48f9a164a0a2252e064cc2b09"
  },
  "engines": [
   {
@@ -191465,6 +191465,51 @@
    }
   },
   {
+   "action_id": "THE_TEXT_A_REQUEST_STATES_IS_THE_TEXT_WRITTEN_V1_20261024_V1",
+   "capability": false,
+   "date": "2026-10-24",
+   "id": "research:canonical/action_intents/THE_TEXT_A_REQUEST_STATES_IS_THE_TEXT_WRITTEN_V1_20261024_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_TEXT_A_REQUEST_STATES_IS_THE_TEXT_WRITTEN_V1_20261024_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e83721560bce1bda65cd576381153a94f6ce12900e61e4756a3d4cd0c276fdde",
+   "status": "",
+   "terms": {
+    "20261024": 1,
+    "agreed": 1,
+    "agreeing": 1,
+    "already-edited": 1,
+    "args": 1,
+    "article": 1,
+    "asked": 1,
+    "attachment": 1,
+    "before": 1,
+    "being": 1,
+    "bytes": 1,
+    "capable": 1,
+    "certified": 1,
+    "compared": 1,
+    "composer_route_v1": 1,
+    "construction": 1,
+    "contain": 1,
+    "content": 1,
+    "disk": 1,
+    "edited": 1,
+    "ended": 1,
+    "file": 2,
+    "request": 3,
+    "results": 2,
+    "so": 2,
+    "states": 2,
+    "text": 4,
+    "the_text_a_request_states_is_the_text_written_v1_20261024_v1": 2,
+    "v1": 2,
+    "write": 3,
+    "written": 2,
+    "wrong": 2
+   }
+  },
+  {
    "action_id": "THE_TEXT_TO_WRITE_DOES_NOT_CHOOSE_THE_CAPABILITY_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -206751,7 +206796,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "68615ebd7636b42c66755e14a5a0423a17a952e6fb1279869496bb0377c1ca48",
+   "sha256": "f5e7d04ce4130b5a1b7758ea6d27e25fe2218753b60c5642e0e9d96d17d5170b",
    "summary": "Routing a sentence to a typed capability chain.",
    "symbol_count": 10,
    "symbols": [
@@ -245473,9 +245518,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "b568d8e85822f995bd05ba9c1a28d2d6fae31a4ccda6a1c5b5ca390aafe76f39",
+   "sha256": "ba552ce66c774d0be2130ed41fc4e5aa1d800f5fb6440447c5d62cc587713886",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
-   "symbol_count": 25,
+   "symbol_count": 26,
    "symbols": [
     "_action_rows",
     "_alternative_ids",
@@ -245496,11 +245541,11 @@
     "_inspect_text_file_write",
     "_inspect_xlsx_create",
     "_json",
+    "_payload_runs_to_the_destination",
     "_plan_chain",
     "_rel",
     "_trace_is_finished",
-    "_unresolved",
-    "unwrap_bound_adapter_row"
+    "_unresolved"
    ],
    "terms": {
     "acceptance": 2,
@@ -245508,7 +245553,6 @@
     "alternative_ids": 1,
     "canonical_json_sha256": 1,
     "claimed": 1,
-    "consumed_downstream": 1,
     "digest": 1,
     "disk": 1,
     "effect": 1,
@@ -245529,6 +245573,7 @@
     "inspect_text_file_write": 1,
     "inspect_xlsx_create": 1,
     "json": 1,
+    "payload_runs_to_the_destination": 1,
     "plan_chain": 1,
     "raw": 1,
     "raw-goal": 1,
