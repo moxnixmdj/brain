@@ -462,8 +462,37 @@ def failure_reason(result: Mapping[str, Any]) -> str:
             value = "; ".join(str(item) for item in value if str(item).strip())
         text = str(value).strip()
         if text:
-            return text
+            return _with_tool_own_reason(text, result)
     return str(result.get("failure_class") or result.get("status") or "")
+
+
+def _with_tool_own_reason(text: str, result: Mapping[str, Any]) -> str:
+    """Attach the tool's own explanation to a truth-check refusal.
+
+    `TOOL_REPORTED_PASS_FALSE:<cid>` says a capability ran and said "no" but not
+    why.  The why is in that capability's own result (`reason`), which the truth
+    check reads only to decide pass/fail and then discards.  Measured on cc3bd40
+    across all 367 admissible capabilities, 74 failures were reported this way,
+    and the tools had already named their cause in every case where they had one:
+    CONTEXT_ID_REQUIRED (13), V3_INPUT_REQUIRED (10), PREDICATE_ALIAS_REQUIRED (5),
+    OBJECTIVE_REQUIRED (4), INPUT_SCHEMA_INVALID (4), OBLIGATION_ID_REQUIRED (3),
+    TEXT_REQUIRED (1), PROMPT_REQUIRED (1).  The same 74 all declare zero input
+    roles in their action_template, so the capability is structurally unservable --
+    no goal wording can supply an input the registry never declared.  That is a
+    different fact from "the tool judged the answer wrong", and this accessor is
+    the only place a caller can see either.  Appending rather than replacing keeps
+    every existing consumer of the prefix working.
+    """
+    if not text.startswith(("TOOL_REPORTED_PASS_FALSE:", "TOOL_REPORTED_NON_SUCCESS_STATUS:")):
+        return text
+    for row in list(result.get("execution") or []) + list((result.get("controller_execution") or {}).get("trace") or []):
+        if not isinstance(row, Mapping):
+            continue
+        inner = row.get("result") if isinstance(row.get("result"), Mapping) else {}
+        cause = inner.get("reason")
+        if isinstance(cause, str) and cause.strip():
+            return text + ":" + cause.strip()[:64]
+    return text
 
 
 # An uncaught programming error inside a bound-capability adapter, as opposed to a
