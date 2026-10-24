@@ -466,6 +466,65 @@ def failure_reason(result: Mapping[str, Any]) -> str:
     return str(result.get("failure_class") or result.get("status") or "")
 
 
+# An uncaught programming error inside a bound-capability adapter, as opposed to a
+# refusal the adapter raised on purpose.  Measured on d1ad8da across the 72 verified
+# capabilities with nine hostile-but-valid fixtures (392 clean outcomes), exactly
+# one site crashes: evidence_decision_verify.py:101, reachable as
+# decision.synthesis.verify.stdlib, given a document whose top level is a list,
+# null or a number.  That file cannot be repaired in place -- its exact bytes are
+# pinned as the capability's verifier_git_blob -- and neither can the single
+# invocation site in astra_runtime.py, pinned as subject.astra_runtime.git_blob_sha.
+# So the defect cannot be removed here; the least that is true is that it must be
+# LABELLED as a defect.  Today it is reported as
+# LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE, the same class as a correct
+# refusal, which means a caller and the learning loop cannot tell "the adapter
+# refused, correctly" from "the adapter is broken" -- and those need opposite
+# responses.  The marker requires the type name followed by a colon, because a
+# bare substring could appear inside an ordinary path or message.
+_ADAPTER_FAULT_RE = re.compile(
+    r"\b(AttributeError|TypeError|KeyError|IndexError|UnboundLocalError|NameError)\b\s*:")
+
+_ENVIRONMENT_MARKERS = (
+    "NOT_FOUND", "NOT_INSTALLED", "APT_METADATA", "INSTALL_FAILED",
+    "ModuleNotFoundError", "No module named",
+)
+# A named error in this codebase has a recognisable SHAPE, not a recognisable word:
+# "RuntimeError:JSON_DOCX_SPEC_UNRESOLVED", "TOOL_REPORTED_PASS_FALSE:...",
+# "web.browser.rendered.capture.chromedriver:0", "FileNotFoundError:[Errno 2] ...".
+# Enumerating the names cannot work -- the adapters raise RuntimeError at 355 sites
+# and ValueError at 72 -- and a marker list measured 17 of 60 failures as UNKNOWN
+# that were in fact perfectly well named.  So the test is the shape: an identifier
+# followed by a colon, or an UPPER_SNAKE token.
+_NAMED_ERROR_RE = re.compile(
+    r"(?:^[A-Za-z_][A-Za-z0-9_.]*\d*\s*:)|(?:\b[A-Z][A-Z0-9_]{3,}\b)")
+
+FAILURE_KIND_ADAPTER_FAULT = "ADAPTER_FAULT"
+FAILURE_KIND_ENVIRONMENT = "ENVIRONMENT_BLOCKER"
+FAILURE_KIND_CONTRACT = "CONTRACT_REFUSAL"
+FAILURE_KIND_UNKNOWN = "UNKNOWN"
+
+
+def failure_kind(result: Mapping[str, Any]) -> str:
+    """What KIND of failure this is, so a defect is never mistaken for a refusal.
+
+    ``failure_reason`` answers *why*; this answers *whose fault it is*, and the two
+    are not the same thing.  A refusal means the system behaved correctly and the
+    request was under-specified or the machine lacks a dependency; an adapter fault
+    means the system has a bug.  Treating them alike is how a real defect hides
+    inside a wall of legitimate refusals.
+    """
+    reason = failure_reason(result)
+    if not reason:
+        return FAILURE_KIND_UNKNOWN
+    if _ADAPTER_FAULT_RE.search(reason):
+        return FAILURE_KIND_ADAPTER_FAULT
+    if any(marker in reason for marker in _ENVIRONMENT_MARKERS):
+        return FAILURE_KIND_ENVIRONMENT
+    if _NAMED_ERROR_RE.search(reason):
+        return FAILURE_KIND_CONTRACT
+    return FAILURE_KIND_UNKNOWN
+
+
 def _fail(task_id: str, status: str, failure_class: str, started: int, **extra: Any) -> dict[str, Any]:
     out = {"schema": LIVE_SCHEMA, "status": status, "pass": False, "task_id": task_id, "failure_class": failure_class,
            "executed": extra.pop("executed", False), "elapsed_ns": perf_counter_ns() - started, "incremental_spend_usd": 0}
