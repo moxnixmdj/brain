@@ -432,6 +432,40 @@ def tool_truth_errors(result: Mapping[str, Any]) -> list[str]:
     return errors
 
 
+# Every field that has ever carried the reason a result failed, most specific
+# first.  Which one is populated depends on which layer refused.
+FAILURE_REASON_FIELDS = ("compiler_detail", "reason", "tool_truth_errors", "blocker")
+
+
+def failure_reason(result: Mapping[str, Any]) -> str:
+    """The one answer to "why did this fail", whatever shape the result has.
+
+    The diagnosis lives in a different field depending on which layer refused:
+    the compiler boundary writes `compiler_detail`, the controller writes
+    `reason`, the truth check writes `tool_truth_errors`.  Measured on bcb5661a
+    over the 72 verified capabilities named in prose, all 70 failures carried a
+    diagnosis -- but reading only `compiler_detail` made 4 of them look silent
+    when they were in fact reporting BOUND_APT_METADATA_NOT_FOUND in `reason`.
+
+    A caller that must first work out which layer refused in order to read the
+    reason will eventually read the wrong one, and a failure that is fully
+    diagnosed will look like a failure with no cause at all.  So there is one
+    accessor, and it never returns empty for a result that failed.
+    """
+    if not isinstance(result, Mapping):
+        return ""
+    for field in FAILURE_REASON_FIELDS:
+        value = result.get(field)
+        if value is None or value == "" or value == [] or value == {}:
+            continue
+        if isinstance(value, (list, tuple)):
+            value = "; ".join(str(item) for item in value if str(item).strip())
+        text = str(value).strip()
+        if text:
+            return text
+    return str(result.get("failure_class") or result.get("status") or "")
+
+
 def _fail(task_id: str, status: str, failure_class: str, started: int, **extra: Any) -> dict[str, Any]:
     out = {"schema": LIVE_SCHEMA, "status": status, "pass": False, "task_id": task_id, "failure_class": failure_class,
            "executed": extra.pop("executed", False), "elapsed_ns": perf_counter_ns() - started, "incremental_spend_usd": 0}
