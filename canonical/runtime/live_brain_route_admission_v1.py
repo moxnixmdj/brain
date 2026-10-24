@@ -209,6 +209,16 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
         return {**base, "admitted": True, "rule": None,
                 "admission_basis": "DECLARED_INPUT_CONTRACT_FULLY_STATED_IN_GOAL",
                 "typed_admission": {"required_inputs": typed.get("required_inputs"), "specific": True}}
+    # The same verdict read the other way.  `admit` had only ever been allowed to
+    # GRANT admission; when it refused, its reason was thrown away and the route
+    # fell through to a lexical rule that could not see it.  So a capability whose
+    # declared input the sentence could never supply was still the selected route,
+    # and the refusal that reached the caller named a weak-evidence rule instead of
+    # the real one.  Recorded here so the caller can tell "this capability could
+    # not be bound to this sentence" from "this sentence is thin evidence".
+    if isinstance(typed, Mapping) and str(typed.get("reason") or "").startswith("BINDING_REFUSED:"):
+        base["typed_binding_refused"] = True
+        base["typed_binding_reason"] = typed.get("reason")
     # Decisive lexical margin (F18), the third way a caller can be explicit without this layer
     # inventing anything: the sentence names one capability so much better than any other that the
     # ranker separates them.  Measured before it was trusted - 295 name-derived goals, threshold
@@ -1431,6 +1441,35 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         if _detail is not None:
             _extra["compiler_detail"] = _detail
             _extra["compiler_code"] = "GOAL_INPUT_BINDING_REQUIRED"
+        # A route refused because the SELECTED capability could not be bound to
+        # this sentence is not a dead end -- the sentence may still be servable by
+        # a chain, and the chain is held to the same evidence by _composed_holds_up.
+        #
+        # Measured on b018600: "Write the text 'hello patch' to the file out.txt
+        # and save the report to out.txt.done.json" selected
+        # document.convert.markdown_pdf.pandoc_weasyprint on the single word
+        # "report", whose own binder said
+        # BINDING_REFUSED:markdown_path:0_type_compatible_existing_files_named.
+        # The route was refused R3_WEAK_EVIDENCE and nothing was written, although
+        # the sentence is an ordinary write that composition serves.  With the
+        # chain tried, the report is written, the file the sentence named is not,
+        # and the gate names exactly that file -- which is the truthful answer.
+        #
+        # Scoped to the one case the binder actually refuted.  A thin-evidence
+        # refusal with no binding verdict still fails closed exactly as before.
+        # And only when the sentence states WHAT to write.  Measured while
+        # building this: opening the fallthrough on every binding refusal let
+        # "Check the file X" -- a request that names a file and states no text --
+        # reach composition, where PATH_OUTPUT binds the only path in the sentence
+        # and the chain overwrote the file with a JSON report, reporting pass=True.
+        # That is the data-destruction class closed in PR #6119, reopened.  A
+        # sentence that states no content has nothing to compose into a write, so
+        # it keeps failing closed exactly as it did before.
+        if (admission.get("typed_binding_refused") is True
+                and composer_route.extract_content(normalized) is not None):
+            composed = _try_composed(task_id, goal, started)
+            if composed is not None:
+                return _composed_holds_up(composed, normalized, future_artifacts)
         return _fail(task_id, "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
                      "ROUTE_ADMISSION_REJECTED:" + str(admission.get("rule")), started, **_extra)
     promised_sources = _promised_source_files(normalized)
