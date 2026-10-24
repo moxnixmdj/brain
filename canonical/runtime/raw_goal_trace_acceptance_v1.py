@@ -631,6 +631,41 @@ def _inspect_tar_gz_create_from_manifest(args, result, root):
     }
 
 
+def _inspect_text_file_write(args: Mapping, result: Mapping, root: Path) -> tuple[bool, str, dict]:
+    """Re-open the file and compare it to the text the REQUEST asked for.
+
+    The producer already read the bytes back and set ``output_verified``, and its
+    ``output_sha256`` is checked against the disk above.  Neither is acceptance:
+    both only prove the file is what the writer wrote, not that it is what was
+    asked for.  The expectation this step is held to is stated in the request
+    itself -- ``args["content"]`` -- so that is what is re-derived here, from the
+    bytes on disk, with no reference to anything the producer reported.
+
+    This is the capability natural sentences actually reach ("Write the text X to
+    the file Y"), and before it existed every composed execution that wrote a file
+    was refused with NO_INDEPENDENT_REINSPECTION_FOR:text.file.write.
+    """
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "TEXT_OUTPUT_ABSENT_FROM_DISK", {}
+    wanted = args.get("content")
+    if not isinstance(wanted, str) or not wanted:
+        # Nothing was asked for, so there is nothing to hold the bytes to.
+        return False, "TEXT_REQUEST_STATES_NO_CONTENT_TO_CHECK", {}
+    blob = out.read_bytes()
+    try:
+        written = blob.decode("utf-8")
+    except UnicodeDecodeError:
+        return False, "TEXT_OUTPUT_IS_NOT_VALID_UTF8", {"bytes": len(blob)}
+    if written != wanted:
+        return False, "TEXT_OUTPUT_DOES_NOT_MATCH_THE_REQUESTED_TEXT", {
+            "bytes_on_disk": len(blob), "bytes_requested": len(wanted.encode("utf-8"))}
+    if _digest(blob) != _digest(wanted.encode("utf-8")):
+        return False, "TEXT_OUTPUT_DIGEST_MISMATCH", {}
+    return True, "", {"file_reopened": True, "bytes": len(blob),
+                      "matches_the_requested_text": True}
+
+
 INSPECTORS: dict[str, Inspector] = {
     "pdf.extract.text.pypdf": _inspect_pdf_extract_text,
     "python.source.audit.ast": _inspect_python_source_audit,
@@ -643,6 +678,7 @@ INSPECTORS: dict[str, Inspector] = {
     "structured.decision_evidence.locate.stdlib": _inspect_decision_locate,
     "decision.synthesis.typed.stdlib": _inspect_decision_synthesis,
     "decision.synthesis.verify.stdlib": _inspect_decision_verify,
+    "text.file.write": _inspect_text_file_write,
 }
 
 
