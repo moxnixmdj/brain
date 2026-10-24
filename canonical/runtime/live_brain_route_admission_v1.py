@@ -1318,6 +1318,24 @@ def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | Non
     out.update(_composed_acceptance(goal, routed.get("chain") or [], executed))
     if out.get("semantic_acceptance_complete"):
         out["status"] = "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
+        return out
+    # The verifier spoke and said no.  A composed chain claimed pass=True on the
+    # strength of having run, and the verdict sitting beside it was never read --
+    # so the one route ordinary sentences take was the one route that could report
+    # success over its own verifier's refusal.  Measured on a8d35d7: `tee` wrote
+    # its file, solve() said pass=True, and raw_goal_acceptance said pass=False
+    # with COMMAND_NOT_RE_RUNNABLE_WITHOUT_SIDE_EFFECTS.  A report that outranks
+    # the check meant to catch it is not a report.
+    #
+    # Scoped to an explicit False.  When there is no verdict at all -- a goal no
+    # acceptance path covers -- nothing changes, because turning an absence of
+    # evidence into a refusal is a different decision and is not this one.
+    verdict = out.get("raw_goal_acceptance")
+    if out.get("pass") is True and isinstance(verdict, Mapping) and verdict.get("pass") is False:
+        out["status"] = "FAIL_CLOSED__COMPOSED_CHAIN_NOT_VERIFIED"
+        out["pass"] = False
+        out["failure_class"] = "COMPOSED_CHAIN_NOT_VERIFIED"
+        out["unverified_reason"] = verdict.get("reason")
     return out
 
 

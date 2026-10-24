@@ -24536,7 +24536,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6362,
+  "research_index_records": 6363,
   "routing_tokens": 1798,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f55fefdea5dd07f057d3321f403a6e5e131ff787eb1e247782e517fe5d14e826"
+  "value": "e4bc231d70d8e3f51127d1e332dd181debf62830f5b1c751bb8baaa9fc529285"
  },
  "engines": [
   {
@@ -188600,6 +188600,51 @@
    }
   },
   {
+   "action_id": "A_VERIFIER_THAT_SAID_NO_IS_NOT_OVERRULED_BY_THE_REPORT_V1_20261024_V1",
+   "capability": false,
+   "date": "2026-10-24",
+   "id": "research:canonical/action_intents/A_VERIFIER_THAT_SAID_NO_IS_NOT_OVERRULED_BY_THE_REPORT_V1_20261024_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_VERIFIER_THAT_SAID_NO_IS_NOT_OVERRULED_BY_THE_REPORT_V1_20261024_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e89bc3b791ec36884820709e55ddbcc03dc695e3b1c445773b71a691e13ff364",
+   "status": "",
+   "terms": {
+    "11": 1,
+    "20261024": 1,
+    "a8d35d7": 1,
+    "a_verifier_that_said_no_is_not_overruled_by_the_report_v1_20261024_v1": 2,
+    "about": 1,
+    "absent": 2,
+    "acceptance": 2,
+    "against": 2,
+    "all": 1,
+    "anchored": 1,
+    "beside": 1,
+    "chain": 2,
+    "check": 3,
+    "directory": 3,
+    "disk": 2,
+    "false": 3,
+    "longer": 2,
+    "no": 3,
+    "pass": 4,
+    "path": 2,
+    "payload": 2,
+    "report": 2,
+    "reported": 2,
+    "said": 3,
+    "so": 3,
+    "text": 2,
+    "true": 2,
+    "v1": 2,
+    "verdict": 2,
+    "verifier": 2,
+    "whether": 2,
+    "write": 2
+   }
+  },
+  {
    "action_id": "A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -225249,7 +225294,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "7969750d2a014b9f278129af165e78383bd56548dfb43fafa437144fc9e66e7c",
+   "sha256": "c10bba2665c4e3663a33a8385358a777724209a4bd392736e9286cd4942c30ad",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 42,
    "symbols": [
@@ -245970,7 +246015,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "407120309001bc5be14c6277506393a617703c5afbb615fcab4c2ae10fdd3fc8",
+   "sha256": "c00789f927c820de3394a38322608cdd7a62d8bb42c464e6b461a238d0ad6156",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
    "symbol_count": 32,
    "symbols": [
