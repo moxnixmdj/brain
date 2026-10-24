@@ -271,6 +271,12 @@ def bind(signature: Mapping[str, str], goal: str,
 # --------------------------------------------------------------------------- #
 # execution: a plan that is never run is not a capability
 # --------------------------------------------------------------------------- #
+# Keys run_adapter_locally stamps onto the adapter's own result.  They describe
+# the invocation, not what the capability produced, so they are kept out of the
+# values a later step may bind to.
+_INVOKER_STAMPED_KEYS = ("capability_id", "dependency")
+
+
 def execute_chain(chain: Sequence[str], goal: str,
                   inputs: Mapping[str, Any] | None = None,
                   registry: Mapping[str, Any] | None = None) -> dict[str, Any]:
@@ -307,7 +313,24 @@ def execute_chain(chain: Sequence[str], goal: str,
                     "failed_step": {"index": index, "capability_id": cid,
                                     "reason": type(exc).__name__ + ":" + str(exc)[:200]},
                     "steps": steps}
-        observed = result.get("result") if isinstance(result, Mapping) else None
+        # `run_adapter_locally` returns the adapter's own dict AS the result --
+        # {"output_path": ..., "output_sha256": ..., "output_verified": True, ...}.
+        # It does not wrap it under a "result" key, and it never has.  Reading
+        # result.get("result") therefore returned None for every step of every
+        # chain, which had two measured consequences on 5402138: the step record
+        # was written as {"raw": null}, destroying the only evidence the step
+        # produced, and `produced` stayed empty, so `bind` could never offer a
+        # later step anything an earlier step had made.  The chain still reported
+        # pass=True, so a composed goal answered "done" with a record that said
+        # nothing had been produced.  Measured over the composed path: every step
+        # of every chain recorded {"raw": null} and `produced` was always {}.
+        observed = dict(result) if isinstance(result, Mapping) else None
+        if observed is not None:
+            # run_adapter_locally stamps these two itself; they are provenance
+            # about the invocation, not outputs of the capability, and must not
+            # become bindable slots for a later step.
+            for injected in _INVOKER_STAMPED_KEYS:
+                observed.pop(injected, None)
         if isinstance(observed, Mapping):
             for key, value in observed.items():
                 produced.setdefault(key, value)
