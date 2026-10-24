@@ -138,6 +138,48 @@ _NUM = r"-?\d+(?:\.\d+)?"
 # A quoted literal: the VALUE the request carries (F25).  Its words are not the task's words.
 _QUOTED_LITERAL = re.compile(r"\"[^\"\n]*\"|'[^'\n]*'|“[^”\n]*”|‘[^’\n]*’")
 
+# The words of a stated text VALUE are not the task.  F25 already removes a
+# QUOTED literal from the prose a capability is scored on, for exactly this
+# reason.  The same sentence written without quote marks states the value just as
+# plainly, and was not covered.
+#
+# Measured on d2887c5 over thirteen ordinary "write this text to that file"
+# requests: 4 reached the file.  The other 9 were routed by the words of the text
+# to be written -- "rank the source candidates by objective relevance" selected
+# source.objective_relevance.rank.bm25, "the archive manifest listing" selected
+# archive.tar_gz.create_from_manifest, "compile the semantic behavior of this
+# module" selected python.software.request.semantic_behavior.compile.v1, and even
+# "a plain sentence about nothing in particular" selected a capability whose id
+# begins plain_goal.  text.file.write itself scores 0 on every one of these
+# sentences BY DESIGN -- write, text and file are all in GENERIC_MATCH_TOKENS, and
+# a generic token may refine a match but never create one -- so it is only ever
+# reached when nothing else claims the sentence.  A value's distinctive words
+# therefore do not merely outrank the right capability, they prevent the request
+# from being a write at all.
+#
+# The lookahead is deliberately narrow: the value is removed only when the
+# sentence goes on to name a destination.  Without that anchor "Extract the text
+# from the pdf" would lose the words "from the pdf", and those ARE the task.
+_STATED_TEXT_VALUE = re.compile(
+    r"(?i)(\b(?:the\s+)?text\s+)(.+?)"
+    r"(?=\s+(?:to|into)\s+(?:the\s+)?(?:file|path)\b"
+    r"|\s+and\s+(?:save|write|store)\b"
+    r"|\s+(?:save|write|store)\s+(?:it|the|that|this)\b)")
+_STATED_TEXT_TAIL = re.compile(r"(?i)(\bcontaining\s+(?:the\s+)?text\s+).+$")
+
+
+def without_stated_text_value(text: str) -> str:
+    """The sentence with a stated text VALUE blanked, for SELECTION only.
+
+    The role words are kept -- "the text" and "to the file" are what say the task
+    is a write -- and only the value between them is dropped.  Binding still runs
+    on the untouched sentence, so the value is delivered to the capability
+    exactly as the request stated it; this only decides which capability is
+    allowed to claim the sentence in the first place.
+    """
+    out = _STATED_TEXT_VALUE.sub(r"\1", str(text or ""))
+    return _STATED_TEXT_TAIL.sub(r"\1", out)
+
 # natural aliases for registry input keys (key -> phrases that may name it in a sentence)
 _KEY_ALIASES: dict[str, tuple[str, ...]] = {
     # An output has no type of its own, so its role can only come from the sentence.
@@ -1828,11 +1870,18 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
     decidable = set(routable_registry(admissible))
     if len(decidable) != len(admissible):
         rules.append("F4_ZERO_INPUT_TOOLS_NOT_ROUTABLE")
-    ranked = ranked_candidates(text, registry)
+    # Selection reads the sentence with any stated text value blanked; everything
+    # below that BINDS keeps reading `text`, so the value still reaches the
+    # capability verbatim.  Doing this only for selection is the whole point: a
+    # value may be delivered, it may not choose the deliverer.
+    selection_text = without_stated_text_value(text)
+    if selection_text != text:
+        rules.append("F31_STATED_TEXT_VALUE_NOT_TASK_PROSE")
+    ranked = ranked_candidates(selection_text, registry)
     best_cid = ranked[0][2] if ranked else None
     spool: set[str] = set()
     try:
-        compiled = dict(gc.compile_goal(text, registry, root))
+        compiled = dict(gc.compile_goal(selection_text, registry, root))
         pinned_failure = None
     except GoalCompilationFailure as exc:
         compiled, pinned_failure = None, exc
