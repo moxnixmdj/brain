@@ -114,6 +114,7 @@ guessed: a goal that does not state an input fails closed with GOAL_INPUT_BINDIN
 """
 from __future__ import annotations
 
+import contextvars
 import json
 import pathlib
 import re
@@ -225,8 +226,23 @@ def is_plain_goal_routable(entry: Mapping[str, Any]) -> bool:
     return isinstance(template, dict) and bool(gc._placeholders(template))
 
 
+# Set while a request names exactly one capability, and read by compile_goal on
+# the way out.  Naming a capability is evidence about WHAT was asked for; it is
+# not evidence that a different capability may answer instead.
+_NAMED_EXPECTATION: "contextvars.ContextVar[str | None]" = contextvars.ContextVar(
+    "goal_named_expectation", default=None)
+
+# The route the name earned, held back until the body has had its say.  The body
+# binds through cycle/spool/DAG context that the named entry alone cannot see, so
+# when the body reaches the SAME capability its binding is the better one; the
+# name only overrides a pick that is actually different.
+_NAMED_ROUTE: "contextvars.ContextVar[Any]" = contextvars.ContextVar(
+    "goal_named_route", default=None)
+
+
 def _named_receipt_projection(text: str, admissible: Mapping[str, Mapping[str, Any]],
-                              selected: str | None, names=None) -> str | None:
+                              selected: str | None, names=None,
+                              include_bound: bool = False) -> str | None:
     """A receipt-projected capability the sentence NAMES but the scorer cannot see.
 
     The pinned scorer skips anything whose status is not VERIFIED_BOUND_CAPABILITY,
@@ -245,7 +261,7 @@ def _named_receipt_projection(text: str, admissible: Mapping[str, Mapping[str, A
     for cid, entry in (admissible or {}).items():
         if cid == selected or not isinstance(entry, Mapping):
             continue
-        if entry.get("capability_source") != "receipt_projection":
+        if not include_bound and entry.get("capability_source") != "receipt_projection":
             continue
         if (names or request_names_capability_id)(text, cid):
             matches.append(cid)
@@ -320,10 +336,19 @@ def request_states_the_capability_name(text: str, cid: str) -> bool:
     siblings only when the request states the version.
     """
     try:
-        stem = str(cid or "").rsplit("/", 1)[-1].split(".py")[0]
-        if not stem or stem == cid:
+        # Only the DERIVED suffix is trimmed.  The old code cut at the first ".py",
+        # which mangled any id containing that sequence -- docx.document.create.
+        # python_docx lost its last word -- and it refused every dotted id outright
+        # on the reasoning that "judging it as one would match on ordinary English
+        # words inside the id".  That reasoning belongs to the ONE-WORD rule, where a
+        # single shared word is the whole evidence.  Here the caller has to state the
+        # entire name in order, so a dotted id is judgeable on the same terms as a
+        # module name, and refusing it left the verified capabilities unreachable by
+        # the one sentence that asks for them by name.
+        stem = re.sub(r"\.py\.auto\.v\d+$", "", str(cid or "").rsplit("/", 1)[-1])
+        if not stem:
             return False
-        all_words = [w.lower() for w in re.split(r"[_\s]+", stem) if len(w) > 1]
+        all_words = [w.lower() for w in re.split(r"[_.\s]+", stem) if len(w) > 1]
         # A version token can sit ANYWHERE in the name, not only at the end:
         # terminal_frontier_factorizer_v6_candidate and
         # current_terminal_authority_v3_k6_v4_verifier both carry one mid-name.
@@ -1687,7 +1712,7 @@ def _compile_clauses(clauses: list[str], admissible: Mapping[str, Mapping[str, A
     }
 
 
-def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path) -> dict[str, Any]:
+def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path) -> dict[str, Any]:
     """Front compile. Returns the pinned compiler's shape plus ``front_compiler`` metadata."""
     rules: list[str] = []
     original = str(goal or "").strip()
@@ -1799,12 +1824,26 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
     # An explicit name outranks a scorer that could not see the thing named.
     if single_shape:
         _named = _named_receipt_projection(text, admissible, selected,
-                                            request_states_the_capability_name)
-        if _named is not None:
+                                            request_states_the_capability_name,
+                                            include_bound=True)
+        if _named is not None and (admissible.get(_named) or {}).get(
+                "capability_source") != "receipt_projection":
+            # A BOUND capability is already visible to the pinned scorer, so the
+            # name adds nothing to the walk -- it only states what the answer must
+            # be.  Running retrieval and a second binding here perturbed the
+            # body's own binding for the very same capability and broke two live
+            # wave-4 families (bm25 source ranking, typed decision synthesis) that
+            # state their inputs and compiled correctly on e2be63e1.  So for these
+            # the name is recorded and the body is left completely alone; the
+            # objection is raised on the way out, and only against a substitution.
+            rules.append("F29_NAMED_BOUND_CAPABILITY_CONSULTED")
+            _NAMED_EXPECTATION.set(_named)
+        elif _named is not None:
             rules.append("F29_NAMED_RECEIPT_PROJECTION_CONSULTED")
             retrieved = _retrieval_first_selection(text, admissible, root, rules)
             if retrieved is not None and retrieved.get("selected_capability") == _named:
-                return retrieved
+                _NAMED_EXPECTATION.set(_named)
+                _NAMED_ROUTE.set(lambda: retrieved)
             # F17 retrieves k=3 and disposes by typed admission, so among lexical
             # SIBLINGS it cannot tell which one was asked for: the registry holds
             # bytes_active_query_task_generator_v1 alongside bytes_characteristic_,
@@ -1825,13 +1864,27 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
                 named_inputs = bind_all_inputs(text, named_entry, root, cycle=0, spool=None)
             except GoalCompilationFailure:
                 named_inputs = None
+            if named_inputs is None:
+                # The sentence named ONE capability and stated none of its inputs.
+                # Falling through lets an unrelated capability that happens to bind
+                # answer instead and report success, so a request for a chart reader
+                # was answered by python.task.acceptance.measured.objective.v1 --
+                # measured on 20 of the 38 verified capabilities that did not route
+                # to themselves.  F29 already holds that a request naming nothing
+                # must fail closed; a request naming something specific and stating
+                # none of what it needs is the same failure with a better diagnosis,
+                # and the diagnosis names the capability the caller actually asked
+                # for rather than the one that happened to fit.
+                rules.append("F29_NAMED_CAPABILITY_CONTRACT_NOT_STATED")
+                _NAMED_EXPECTATION.set(_named)
             if named_inputs is not None:
                 rules.append("F29_NAMED_RECEIPT_PROJECTION_ADMITTED_BY_CONTRACT")
-                return _single(_named, named_entry, named_inputs, 0, {
+                _NAMED_EXPECTATION.set(_named)
+                _NAMED_ROUTE.set(lambda: _single(_named, named_entry, named_inputs, 0, {
                     "rule": "F29_NAMED_RECEIPT_PROJECTION_ADMITTED_BY_CONTRACT",
                     "named": _named,
                     "retrieval_was_ambiguous": retrieved is None,
-                }, rules)
+                }, rules))
 
     if single_shape or compiled is None:
         future = _future_artifacts(text, root)
@@ -1980,3 +2033,46 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
                             args[k] = v
     compiled["front_compiler"] = {"schema": SCHEMA, "rules_applied": rules}
     return compiled
+
+
+def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path) -> dict[str, Any]:
+    """Compile a goal, and never answer a named capability with a different one.
+
+    The body may legitimately reach a capability through its own structural walk
+    even when the caller named one: refusing inside the named branch broke two
+    live wave-4 families whose goals state their inputs but bind through a wider
+    context than the named entry alone offers.  So the objection is raised once,
+    at the boundary, and only against a substitution -- a request that named
+    capability X must not be answered by capability Y and reported as a success.
+    Measured on e2be63e1, that substitution happened for 32 of the 72 verified
+    capabilities named in prose, 20 of them answered by
+    python.task.acceptance.measured.objective.v1.
+    """
+    token = _NAMED_EXPECTATION.set(None)
+    rtoken = _NAMED_ROUTE.set(None)
+    try:
+        compiled = _compile_goal_body(goal, admissible, root)
+    except GoalCompilationFailure:
+        raise
+    finally:
+        expected = _NAMED_EXPECTATION.get()
+        route = _NAMED_ROUTE.get()
+        _NAMED_EXPECTATION.reset(token)
+        _NAMED_ROUTE.reset(rtoken)
+    if expected is None:
+        return compiled
+    if compiled.get("selected_capability") == expected:
+        # The body reached the named capability on its own.  Its binding saw the
+        # whole compilation context; the named branch's did not, and returning the
+        # narrower one broke two live wave-4 families whose goals state their
+        # inputs (bm25 source ranking, typed decision synthesis).
+        return compiled
+    if route is not None:
+        # The body picked something else.  An explicit name IS the disambiguation
+        # the ranker lacks, and the named route was admitted by the typed binder.
+        # Built only now: constructing it eagerly perturbed the body's own
+        # binding for the same capability and broke two live wave-4 families.
+        return route()
+    raise GoalCompilationFailure(
+        "GOAL_INPUT_BINDING_REQUIRED",
+        "%s:named_but_other_selected:%s" % (expected, compiled.get("selected_capability")))
