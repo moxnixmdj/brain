@@ -190,6 +190,42 @@ def _extract_text_argument(goal):
     raise GoalCompilationFailure("GOAL_TEXT_INPUT_BINDING_REQUIRED")
 
 
+_GOAL_ARGUMENT_PATTERNS=[
+    r"\bwith\s+(?:the\s+)?goal\s+(.+?)(?=\s+and\s+(?:save|write|store|using)\b|\s+(?:save|write|store)\s+(?:it|the|output)\b|$)",
+    r"\bfor\s+the\s+goal\s+(.+?)(?=\s+and\s+(?:save|write|store)\b|$)",
+]
+
+
+def _extract_goal_argument(goal):
+    """The goal the sentence STATES, or the whole sentence when it states none.
+
+    ``_bind_inputs`` gave a ``goal`` input the entire raw request verbatim.  That is
+    right when the request *is* the goal ("Write a report on quarterly sales"), and
+    wrong when the request is an INVOCATION that names a capability and then hands
+    the goal over as an argument.  Measured on 0351c257:
+
+        "Run the docx document create python docx with goal Write a report on
+         quarterly sales."
+        goal -> "Run the docx document create python docx with goal Write a report
+                 on quarterly sales."
+
+    4 of the 13 capabilities that take a ``goal`` were handed their own invocation
+    wrapper as the thing to do.  ``_extract_text_argument`` below already did this
+    for ``text``; ``goal`` never got the same treatment.  A quoted string wins, then
+    an explicit "with/for the goal" clause; anything else keeps the whole request,
+    which is what every plain request has always received.
+    """
+    text=str(goal or "")
+    quoted=re.findall(r'["\']([^"\']+)["\']',text)
+    if len(quoted)==1 and quoted[0].strip():
+        return quoted[0].strip()
+    for pattern in _GOAL_ARGUMENT_PATTERNS:
+        m=re.search(pattern,text,flags=re.IGNORECASE)
+        if m and m.group(1).strip():
+            return m.group(1).strip(" .,:;")
+    return text
+
+
 def _context_path_for_key(key, context_paths):
     stem=key[:-5].lower() if key.endswith("_path") else key.lower()
     suffixes={
@@ -530,7 +566,7 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             result[key]=_extract_text_argument(goal)
             continue
         if key=="goal":
-            result[key]=str(goal)
+            result[key]=_extract_goal_argument(goal)
             continue
         if key=="url":
             urls=re.findall(r"https?://[^\s)\]}>]+",goal)
