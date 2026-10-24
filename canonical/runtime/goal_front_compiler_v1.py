@@ -953,10 +953,45 @@ def _role_phrases(key: str) -> list[str]:
     adds the natural words a person actually uses for that role ("with selection <file>").
     """
     stem = key[:-5].lower() if key.endswith("_path") else key.lower()
-    words = [w for w in re.split(r"[^a-z0-9]+", stem) if w and w not in _GENERIC_ROLE_WORDS]
+    split = [w for w in re.split(r"[^a-z0-9]+", stem) if w]
+    words = [w for w in split if w not in _GENERIC_ROLE_WORDS]
+    if not words and split:
+        # The filter above exists to strip noise out of a MULTI-word stem -- the
+        # comment on _GENERIC_ROLE_WORDS gives the case, "source_path" -> "source"
+        # alone says nothing.  It is wrong when the stem IS the filtered word:
+        # `input_path` -> "input" is that role's only name, and dropping it leaves
+        # the role with no phrase at all, so _role_anchored can never fire and no
+        # sentence can state the input however it is worded.  Measured over all
+        # 367 admissible capabilities and their 57 distinct declared roles, exactly
+        # two roles were in that state: `path` (11 capabilities) and `input_path`
+        # (4).  Every goal naming one was refused with
+        # named_but_inputs_not_stated:<role> before any binder ran -- two of the
+        # eleven capabilities that carry a real re-inspector
+        # (decision.synthesis.typed.stdlib, source.objective_relevance.rank.bm25)
+        # were among them, so they could never reach exact acceptance at all.
+        # Falling back to the stem's own words restores the role's name without
+        # touching any role that already had one.
+        words = split
     phrases: list[str] = []
     if words:
         phrases.append(" ".join(words))
+    # The role's own DECLARED NAME is always a way of stating the role.  An
+    # invocation that says "with output_path <file>" states the destination as
+    # plainly as "save the result to <file>" does, but the alias table only ever
+    # carried the natural-language forms, so the literal name matched nothing.
+    # Measured consequence, on the two capabilities that carry a real
+    # re-inspector and take an input_path: the destination they were told to
+    # write already existed from the previous run, _named_output_destinations
+    # could not recognise it as a destination, the input binder counted it as a
+    # second type-compatible existing file and failed closed on ambiguity --
+    # input_path:2_type_compatible_existing_files_named.  That is precisely the
+    # phantom-second-candidate case _named_output_destinations was written to
+    # remove, unreachable only because the sentence used the machine name.
+    # _KEY_ALIASES already does this by hand for test_argv ("test_argv"), so
+    # this generalises an existing pattern rather than inventing one.
+    literal = str(key).lower().strip()
+    if literal and literal not in phrases:
+        phrases.append(literal)
     for alias in _KEY_ALIASES.get(key, ()):
         alias = str(alias).lower().strip()
         if alias and alias not in phrases:

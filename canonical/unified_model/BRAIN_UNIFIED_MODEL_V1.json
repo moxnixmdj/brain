@@ -24536,7 +24536,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6347,
+  "research_index_records": 6348,
   "routing_tokens": 1798,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24545,7 +24545,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "5833792ddd223ead3a295634f26b792616d10c8f664912618d8e1864eeddd82a"
+  "value": "cd0ea96de984ad17726e2b4a4650dadb8dae4827a0c0c3ec8e9e487bdb7dc3bd"
  },
  "engines": [
   {
@@ -188060,6 +188060,51 @@
    }
   },
   {
+   "action_id": "A_ROLE_NAMED_BY_ITS_DECLARED_NAME_IS_STATED_V1_20261024_V1",
+   "capability": false,
+   "date": "2026-10-24",
+   "id": "research:canonical/action_intents/A_ROLE_NAMED_BY_ITS_DECLARED_NAME_IS_STATED_V1_20261024_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_ROLE_NAMED_BY_ITS_DECLARED_NAME_IS_STATED_V1_20261024_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "4740792202201fd04c4e4a04e7688d9f2792feb435428be3fc0cff0969ff08d1",
+   "status": "",
+   "terms": {
+    "11": 1,
+    "144": 1,
+    "20261024": 1,
+    "223": 1,
+    "367": 2,
+    "51": 1,
+    "a_role_named_by_its_declared_name_is_stated_v1_20261024_v1": 2,
+    "acceptance": 2,
+    "accepted": 1,
+    "admissible": 1,
+    "all": 1,
+    "artifact-declaring": 1,
+    "because": 1,
+    "being": 1,
+    "capabilities": 3,
+    "carried": 1,
+    "carrying": 2,
+    "contract": 1,
+    "corpus": 1,
+    "declared": 1,
+    "every": 1,
+    "fall": 2,
+    "named": 2,
+    "no": 4,
+    "not": 3,
+    "one": 2,
+    "over": 2,
+    "pass": 2,
+    "passes": 2,
+    "stated": 2,
+    "v1": 2,
+    "verdict": 3
+   }
+  },
+  {
    "action_id": "A_STATED_FILE_BEATS_A_REFERENCE_TO_A_STEP_THAT_DOES_NOT_EXIST_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -218264,7 +218309,7 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "55fc31b545b9fa4e9782c2d44ad218e48bbf3c1deede023e99202ee7332c54ae",
+   "sha256": "a0ae3f2a07fd810997a620e8e4f443f139c3eb84c245fa1bf64a1e6a085b843a",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
    "symbol_count": 63,
    "symbols": [
