@@ -106,14 +106,40 @@ def _payload_runs_to_the_destination(goal: str, payload: str) -> bool:
     text = str(goal or "")
     start = text.find(payload)
     while start >= 0:
-        if _PAYLOAD_ROLE_WORD.search(text[:start]):
-            rest = text[start + len(payload):]
+        prefix = text[:start]
+        # A sentence normally QUOTES the text it states -- "write the text
+        # 'hello there' to the file X" -- and the quotation marks are the
+        # sentence's punctuation, not part of the payload.  Both anchors below
+        # were written against unquoted sentences, so they read a quote as
+        # payload: the role word had to run straight into the payload, and the
+        # destination had to start the instant the payload ended.  Measured on
+        # a8d35d7: every quoting style failed, and "Write the text 'hello
+        # there' to the file w.txt" wrote the correct 11 bytes and was then
+        # refused STEP_TEXT_PAYLOAD_NOT_IN_THE_REQUEST -- while solve() reported
+        # pass=True anyway, because nothing downstream read that verdict.
+        #
+        # This tolerates one delimiter on each side and nothing else, so the
+        # truncation defence is untouched: a truncated payload is still followed
+        # by the rest of itself, which no delimiter turns into a destination.
+        open_delim = _PAYLOAD_OPEN_DELIM.search(prefix)
+        role_prefix = prefix[:open_delim.start()] if open_delim else prefix
+        if _PAYLOAD_ROLE_WORD.search(role_prefix):
+            end = start + len(payload)
+            close_delim = _PAYLOAD_CLOSE_DELIM.match(text, end)
+            if close_delim:
+                end = close_delim.end()
+            rest = text[end:]
             # Either the sentence goes on to name where the payload goes, or the
             # payload is the last thing in it ("... containing the text X").
-            if not rest.strip() or _BETWEEN_PAYLOAD_AND_DEST.match(text, start + len(payload)):
+            if not rest.strip() or _BETWEEN_PAYLOAD_AND_DEST.match(text, end):
                 return True
         start = text.find(payload, start + 1)
     return False
+
+# One quotation mark, bracket or paren on each side of a stated payload.  Kept to
+# a single character deliberately: a run of them is not punctuation, it is content.
+_PAYLOAD_OPEN_DELIM = re.compile(r"""[\'"\u2018\u201c(\[]\s*$""")
+_PAYLOAD_CLOSE_DELIM = re.compile(r"""\s*[\'"\u2019\u201d)\]]""")
 
 _PATH_ARGS = (
     "output_path", "path", "json_path", "archive_path", "manifest_path",
@@ -1014,7 +1040,17 @@ def verify(
                 if path is None:
                     return _unresolved("STEP_PATH_OUTSIDE_REPOSITORY",
                                        capability_id=cid, argument=name)
-                if not path.is_file():
+                # "Absent from disk" is a claim about EXISTENCE, and is_file()
+                # answers a different question as well: it is False for a
+                # directory that is plainly there.  Measured on a8d35d7: mkdir
+                # created its directory, solve() reported pass=True, and this
+                # layer returned STEP_PATH_ABSENT_FROM_DISK -- a verifier
+                # contradicting the disk in the same sentence the caller was
+                # ignoring.  Whether a path must be a FILE is the capability's
+                # own contract, and the adapter already enforces it
+                # (CLI_EXPECTED_OUTPUT_MISSING, CLI_EXPECTED_OUTPUT_NOT_A_FILE);
+                # this layer's job is whether the path is real.
+                if not path.exists():
                     return _unresolved("STEP_PATH_ABSENT_FROM_DISK",
                                        capability_id=cid, argument=name)
             for name in _ROOT_ARGS:

@@ -231,13 +231,23 @@ class TestEndToEndAnOrdinaryReadIsCertified(unittest.TestCase):
         result = self._solve("Run the shell command tee %s" % dest)
         self.assertTrue(
             (ROOT / dest).is_file(),
-            "certified a file that was never produced: %s" % (result.get("status"),),
+            "reported anything at all for a file that was never produced: %s"
+            % (result.get("status"),),
         )
-        self.assertIsNone(
-            result.get("failure_class"),
-            "refused work whose only promise was met: %s / %s"
-            % (result.get("status"), result.get("promised_artifact_errors")),
-        )
+        # `tee` writes its file and then cannot be re-run to check it, because
+        # re-running is a second write. The honest answer is "I did this and
+        # could not verify it", never "done". This asserted failure_class None
+        # while solve() said pass=True over a verifier that said pass=False --
+        # it pinned the false pass, so it is rewritten to pin the refusal.
+        if result.get("pass") is True:
+            acc = result.get("raw_goal_acceptance") or {}
+            self.assertIsNot(
+                acc.get("pass"), False,
+                "claimed success over its own verifier's refusal: %s"
+                % (acc.get("reason"),),
+            )
+        else:
+            self.assertEqual(result.get("failure_class"), "COMPOSED_CHAIN_NOT_VERIFIED")
 
 
 class TestEveryPostconditionCanBeFalsified(unittest.TestCase):
