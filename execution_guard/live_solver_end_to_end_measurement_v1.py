@@ -72,6 +72,12 @@ def _kernel_refuses(entry) -> bool:
     return kernel_refuses(entry)
 
 
+def _failure_reason(result) -> str:
+    """Why this result failed, read through the runtime's single accessor."""
+    from canonical.runtime.live_brain_route_admission_v1 import failure_reason
+    return failure_reason(result)
+
+
 def tool_liveness() -> dict[str, Any]:
     doc = json.loads(REGISTRY.read_text(encoding="utf-8"))
     rows = []
@@ -569,7 +575,7 @@ def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], k
                         failures.append({"family": family, "goal": case.goal[:220], "why": "ENVIRONMENT_BLOCKED_HERE:" + blocker,
                                          "status": str(result.get("status"))[:120], "capability": cap, "admission_rule": None})
                 elif len(failures) < 60:
-                    failures.append({"family": family, "goal": case.goal[:220], "why": (why + " | " + str(result.get("reason") or ""))[:400],
+                    failures.append({"family": family, "goal": case.goal[:220], "why": (why + " | " + _failure_reason(result))[:400],
                                      "status": str(result.get("status"))[:120], "capability": cap,
                                      "admission_rule": ((result.get("route_admission") or {}).get("rule") if isinstance(result.get("route_admission"), dict) else None)})
             families[family] = {"instances": n, "oracle_pass": ok, "environment_blocked_here": env_blocked, "pass_rate": round(ok / n, 4) if n else None,
@@ -682,7 +688,11 @@ _ENVIRONMENT_BLOCKERS = ("BOUND_APT_METADATA_NOT_FOUND", "BOUND_PYPI_INSTALL_FAI
 
 def environment_blocker(result: Mapping[str, Any]) -> str | None:
     """A failure caused by this machine (no apt metadata, pip refused) rather than by the Brain."""
-    reason = str(result.get("reason") or "")
+    # Read through the single accessor, not `reason` alone.  A blocker surfaced by
+    # a different layer lands in a different field, and reading one field counted
+    # a machine problem as a Brain failure -- which corrupts the pass rate rather
+    # than merely understating the diagnosis.
+    reason = _failure_reason(result)
     for marker in _ENVIRONMENT_BLOCKERS:
         if marker in reason:
             return marker
