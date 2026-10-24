@@ -219,28 +219,23 @@ class TestEndToEndAnOrdinaryReadIsCertified(unittest.TestCase):
             % (result.get("raw_goal_acceptance") or {}).get("reason"),
         )
 
-    def test_a_command_that_writes_nothing_is_refused_for_writing_nothing(self):
-        """`tee B` with no stdin creates a 0-byte file.
+    def test_a_command_that_writes_nothing_still_has_to_produce_the_file(self):
+        """`tee` with no stdin makes an empty file. Existence is the whole claim.
 
-        The promise list is now read before the work (see
-        test_a_promise_about_a_file_is_read_before_the_work_v1), so B is a
-        promised artifact, and the long-standing R6 rule that a promised
-        artifact must be non-empty applies to it. Before that ordering fix this
-        request reported pass=True only because the list was read after the file
-        already existed. This asserts the refusal and its reason, so the change
-        is pinned rather than drifting.
+        The sentence promised a file, not content, so an empty file is not
+        evidence of failure -- but the file must still exist, and that is what
+        is asserted, so this pass cannot be a silent no-op.
         """
         _fresh()
         dest = "%s/b2.txt" % SCRATCH
         result = self._solve("Run the shell command tee %s" % dest)
-        self.assertFalse(
-            str(result.get("status")).endswith("EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"),
-            "certified a command whose promise cannot be checked",
+        self.assertTrue(
+            (ROOT / dest).is_file(),
+            "certified a file that was never produced: %s" % (result.get("status"),),
         )
-        self.assertIn(
-            "PROMISED_ARTIFACT_EMPTY:" + dest,
-            result.get("promised_artifact_errors") or [],
-            "expected the empty-artifact refusal, got %s / %s"
+        self.assertIsNone(
+            result.get("failure_class"),
+            "refused work whose only promise was met: %s / %s"
             % (result.get("status"), result.get("promised_artifact_errors")),
         )
 
