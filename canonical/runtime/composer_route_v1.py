@@ -293,11 +293,18 @@ def bind(signature: Mapping[str, str], goal: str,
             if n is not None:
                 args[slot] = n
         elif t == "STRING":
+            # Only a text the sentence actually stated.  The old fallback used
+            # paths[0] when no text was stated, which invented a payload out of a
+            # filename -- and because a read or a count names exactly one path,
+            # that same path also bound PATH_OUTPUT, so the file was opened for
+            # writing and filled with its own name.  Measured on 25e3d67: 10 of 15
+            # ordinary non-write requests -- read, count, delete, sort, reverse,
+            # show, print, sum, search, truncate -- destroyed the file they were
+            # told about and every one reported pass=True.  Leaving the slot
+            # unbound makes the composer say so instead.
             body = extract_content(goal)
             if body:
                 args[slot] = body
-            elif paths:
-                args[slot] = paths[0]
     return args
 
 
