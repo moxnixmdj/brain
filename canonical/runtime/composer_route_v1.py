@@ -526,6 +526,19 @@ def _prose_count(sentence: str) -> int:
     return 2
 
 
+# The one shape where the destination is NOT the last operand.  "Sort the file A
+# into B" states two paths in source-then-destination order, but `sort` writes
+# its destination through -o, so the argv is `sort -o B A`.  The knowledge is not
+# invented here either: raw_goal_trace_acceptance_v1 already records that "sort -o
+# FILE" writes FILE, in _SIDE_EFFECTING_FLAGS, and refuses to treat it as a
+# reader.  This routes it; _post_sort judges it.
+_PROSE_COMMAND_DEST_FLAG: tuple[tuple[str, str, str], ...] = (
+    # [^\n] and not [^.\n]: the text between the verb and "into" is a PATH, and
+    # a path is full of dots.  Measured with [^.\n] this pattern never matched.
+    (r"\bsort\b[^\n]{0,80}?\binto\b", "sort", "-o"),
+)
+
+
 def _prose_argv(sentence: str) -> list[str] | None:
     """The command a sentence asks for in ordinary English, or None.
 
@@ -540,6 +553,14 @@ def _prose_argv(sentence: str) -> list[str] | None:
     paths = extract_paths(sentence)
     if not paths:
         return None
+    for pattern, program, dest_flag in _PROSE_COMMAND_DEST_FLAG:
+        if program not in known:
+            continue
+        if not re.search(pattern, text):
+            continue
+        if len(paths) != 2:
+            return None
+        return [program, dest_flag, str(paths[1]), str(paths[0])]
     for pattern, program, flags, arity in _PROSE_COMMAND:
         if program not in known:
             continue

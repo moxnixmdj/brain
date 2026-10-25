@@ -24619,7 +24619,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6370,
+  "research_index_records": 6371,
   "routing_tokens": 1816,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24628,7 +24628,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "1a5f38965a51dfd9c1b1636725a467839373f656805e9a895669b87804ac6dc9"
+  "value": "9f24ad8907bdf3d0fa07d63bc5f13dbb8e8baf21a8f4aa6800a96116c635d109"
  },
  "engines": [
   {
@@ -188836,6 +188836,51 @@
    }
   },
   {
+   "action_id": "A_SENTENCE_THAT_STATES_A_COMMAND_IS_SERVED_AND_A_SORTED_DESTINATION_IS_JUDGED_BY_THE_DISK_V1_20261025_V1",
+   "capability": false,
+   "date": "2026-10-25",
+   "id": "research:canonical/action_intents/A_SENTENCE_THAT_STATES_A_COMMAND_IS_SERVED_AND_A_SORTED_DESTINATION_IS_JUDGED_BY_THE_DISK_V1_20261025_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_SENTENCE_THAT_STATES_A_COMMAND_IS_SERVED_AND_A_SORTED_DESTINATION_IS_JUDGED_BY_THE_DISK_V1_20261025_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "f74e7b537e92750a1074ed24afff862f532baedb3ee12129df0670c18e61ba38",
+   "status": "",
+   "terms": {
+    "20261025": 1,
+    "a1": 1,
+    "a1.txt": 2,
+    "a_command_that_cannot_be_re_run_is_checked_by_what_it_left_v1_20261024_v1": 1,
+    "a_sentence_that_states_a_command_is_served_and_a_sorted_destination_is_judged_by_the_disk_v1_20261025_v1": 1,
+    "about": 1,
+    "admission": 1,
+    "against": 1,
+    "any": 1,
+    "argv": 1,
+    "b2": 1,
+    "b2.txt": 1,
+    "because": 2,
+    "being": 1,
+    "bind": 1,
+    "both": 1,
+    "branch": 2,
+    "but": 2,
+    "command": 4,
+    "compute": 2,
+    "correct": 2,
+    "disk": 2,
+    "file": 2,
+    "first": 2,
+    "judged": 2,
+    "refused": 2,
+    "sentence": 2,
+    "served": 2,
+    "shell.command.run": 2,
+    "sort": 3,
+    "states": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_STATED_COMMAND_LINE_RUNS_AND_IS_CHECKED_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -207752,7 +207797,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "a4deb8908bae09db107a31ab497a553ad8a8ebefd7e921593c4558b03fb7d15a",
+   "sha256": "4bbe0ff4e181f614df77accf00ad8971bcbee8a18979b19abfc6ff0bc24988a9",
    "summary": "Routing a sentence to a typed capability chain.",
    "symbol_count": 19,
    "symbols": [
@@ -225771,7 +225816,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "c10bba2665c4e3663a33a8385358a777724209a4bd392736e9286cd4942c30ad",
+   "sha256": "62fdfa4a4590215df094a7c727b203f664343fe9ff6003c2c76ecfe8b9e3cb11",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 42,
    "symbols": [
@@ -246492,9 +246537,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "006eb4dff6a1e5c29ab1e180e2f33f9bdafd0718b718dd483124014cdfe80790",
+   "sha256": "c9197790d2f933d5a89fe8d70ffe90d32e320e660e11ce680ad2ee88db571c5e",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
-   "symbol_count": 35,
+   "symbol_count": 36,
    "symbols": [
     "_STATES_A_COMMAND",
     "_action_rows",
