@@ -591,6 +591,111 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
                                  "%r wrote the wrong bytes: %r"
                                  % (sentence, written.read_text(encoding="utf-8")))
 
+    def test_a_capability_with_nowhere_to_put_the_text_cannot_answer_a_write(self):
+        """The admission pin.  Measured, and it is not a corner.
+
+        "Write the content 'PROJECT BRAIN' to the output path <f>" was compiled
+        to docx.document.verify.intent_ooxml, which raised
+        DOCX_INTENT_SIDECAR_MISSING.  Its keywords include "content", "exact",
+        "word" and "document", so the sentence matched -- and its only declared
+        input is a path, so it could be bound ONLY once that path existed.  The
+        identical sentence over a path that did not exist was served correctly.
+        A file's mere existence changed which capability answered an ordinary
+        write.
+
+        The rule is the capability's own contract, not a keyword list: a
+        sentence that states a payload and where it goes cannot be answered by
+        a capability with no slot to put the payload in.
+        """
+        from canonical.runtime import capability_selection_retrieval_v1 as _sel
+        from canonical.runtime import live_integrated_brain_v1 as _L
+        cid = "docx.document.verify.intent_ooxml"
+        entry = _L.load_verified_registry()[cid]
+        verdict = _sel.admit("Write the content 'PROJECT BRAIN' to the output "
+                             "path %s/a1.txt" % SCRATCH, cid, entry, ROOT)
+        self.assertIs(verdict.get("admitted"), False,
+                      "a DOCX verifier was admitted for a text write: %r" % verdict)
+        self.assertTrue(str(verdict.get("reason") or "").startswith(
+                            "BINDING_REFUSED:NO_SLOT_FOR_THE_STATED_PAYLOAD:"),
+                        "the refusal must carry the prefix the route layer "
+                        "listens for, or the fallthrough cannot serve the "
+                        "write: %r" % verdict.get("reason"))
+        # The text writer must still be admitted for the same sentence.
+        tw = _L.load_verified_registry()["text.file.write"]
+        granted = _sel.admit("Write the content 'PROJECT BRAIN' to the output "
+                             "path %s/a1.txt" % SCRATCH, "text.file.write", tw, ROOT)
+        self.assertIs(granted.get("admitted"), True,
+                      "the rule refused the writer that CAN hold the text: %r"
+                      % granted)
+
+    def test_a_write_is_answered_the_same_way_whether_or_not_the_file_exists(self):
+        """The end-to-end pin on the bug: existence must not choose the route.
+
+        This is the whole defect in one assertion pair.  The same sentence, the
+        same bytes, differing only in whether the destination already held
+        something -- and one of the two used to be answered by a DOCX verifier.
+        """
+        want = "PROJECT BRAIN"
+        for label, pre in (("absent", None), ("already exists", "stale bytes\n")):
+            path = SCRATCH + "/exists_%s.txt" % ("a" if pre is None else "b")
+            target = ROOT / path
+            if target.exists():
+                target.unlink()
+            if pre is not None:
+                target.write_text(pre, encoding="utf-8")
+            sentence = ("Write the content '%s' to the output path %s."
+                        % (want, path))
+            result = _solve(sentence)
+            self.assertTrue(_verified(result),
+                            "the target was %s and the write was not verified: "
+                            "%r / %r / %r"
+                            % (label, result.get("status"),
+                               result.get("compiled_capability_id"),
+                               result.get("reason")))
+            self.assertEqual(target.read_text(encoding="utf-8"), want,
+                             "the target was %s and holds the wrong bytes: %r"
+                             % (label, target.read_text(encoding="utf-8")))
+
+    def test_the_payload_slot_rule_reaches_only_write_requests(self):
+        """The blast-radius pin, measured rather than asserted.
+
+        The rule fires only when the sentence states a payload AND a
+        destination.  Over seventeen ordinary sentences -- count, read, show,
+        copy, sort, remove, hash, list, search, diff, head, verify, check,
+        mkdir, uniq and two writes -- it applies to exactly the two writes.
+        Widen the trigger and this goes red.
+        """
+        from canonical.runtime import capability_selection_retrieval_v1 as _sel
+        f = SCRATCH + "/a1.txt"
+        b = SCRATCH + "/b2.txt"
+        d = SCRATCH + "/listing"
+        sentences = [
+            "Count the lines in the file %s" % f,
+            "Read the file %s" % f,
+            "Show the file %s" % f,
+            "Copy the file %s to %s" % (f, b),
+            "Sort the file %s" % f,
+            "Remove the file %s" % f,
+            "Compute the sha256 of the file %s" % f,
+            "List the directory %s" % d,
+            "Search the file %s for the exact text 'apple'" % f,
+            "Diff the file %s against %s" % (f, b),
+            "Show the first 2 lines of the file %s" % f,
+            "Verify the file %s" % f,
+            "Check the file %s" % f,
+            "Create the directory %s" % d,
+            "Show the unique lines of the file %s" % f,
+            "Write the content 'X' to the output path %s" % f,
+            "Write the text 'X' to the file %s" % f,
+        ]
+        firing = [s for s in sentences if _sel._states_a_payload_and_its_destination(s)]
+        self.assertEqual(len(firing), 2,
+                         "the rule now reaches %d of %d ordinary sentences; it "
+                         "was measured to reach exactly the two writes: %r"
+                         % (len(firing), len(sentences), firing))
+        for s in firing:
+            self.assertIn("Write", s, "a non-write sentence triggered the rule: %r" % s)
+
     def test_the_two_commands_that_answer_with_a_status_are_both_reachable(self):
         """Both members of _ANSWER_IS_THE_EXIT_STATUS must be reachable from prose.
 
