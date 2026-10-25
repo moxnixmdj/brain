@@ -161,13 +161,43 @@ class TestNothingIsReRunThatCouldChangeSomething(unittest.TestCase):
     # test_a_removal_is_certified_only_when_the_removal_is_proven_v1 and
     # test_a_command_that_cannot_be_re_run_is_checked_by_what_it_left_v1.
     # What is left is the set for which no promise can be stated at all.
-    NO_STATEABLE_PROMISE = ("dd", "chmod", "ln", "sed", "truncate")
+    # `sed` came OFF this list, and the distinction is the shape, not the
+    # program: `sed -e s|a|b| FILE` reads a file and writes nothing, so it is as
+    # re-runnable as cat.  What must never be re-run is `sed -i`, which rewrites
+    # the file in place -- so it is pinned on its own below instead of by
+    # refusing the whole program, which would refuse a read.
+    NO_STATEABLE_PROMISE = ("dd", "chmod", "ln", "truncate")
 
     def test_a_mutating_command_with_no_stateable_promise_is_refused(self):
         for program in self.NO_STATEABLE_PROMISE:
             ok, reason, _ = _inspect([program, self.f], "")
             self.assertFalse(ok, "re-ran or certified a mutating command: %s" % program)
             self.assertEqual(reason, "COMMAND_NOT_RE_RUNNABLE_WITHOUT_SIDE_EFFECTS")
+
+    def test_sed_is_re_runnable_as_a_reader_and_refused_as_a_writer(self):
+        # Both halves, because either one alone would be a false comfort.  `-i`
+        # cannot live in the shared side-effecting flag tuple: for grep those two
+        # characters mean ignore-case, so it is per-program.
+        # The claim is that the shape is RE-RUNNABLE, not that this particular
+        # comparison passes: the recorded output handed in here is empty, so the
+        # re-run correctly reports that it did not reproduce.  What must not
+        # happen is the refusal reserved for commands that would change
+        # something by being run again.
+        ok, reason, _ = _inspect(["sed", "-e", "s|a|b|", self.f], "")
+        self.assertNotEqual(reason, "COMMAND_NOT_RE_RUNNABLE_WITHOUT_SIDE_EFFECTS",
+                            "a read-only sed was refused as a writer")
+        for argv in (["sed", "-i", "s|a|b|", self.f],
+                     ["sed", "--in-place", "s|a|b|", self.f]):
+            ok, reason, _ = _inspect(argv, "")
+            self.assertFalse(ok, "re-ran %r, which rewrites the file" % argv)
+            # caught by the output-flag branch, which is the right one: `-i` is
+            # sed's in-place flag and the flag check is where a writer belongs
+            self.assertEqual(reason, "COMMAND_TAKES_AN_OUTPUT_FLAG")
+        # and the shared tuple must not have grown a flag that refuses a read
+        ok, reason, _ = _inspect(["grep", "-i", "APPLE", self.f], "")
+        self.assertNotIn(reason, ("COMMAND_TAKES_AN_OUTPUT_FLAG",
+                                  "COMMAND_NOT_RE_RUNNABLE_WITHOUT_SIDE_EFFECTS"),
+                         "grep -i was refused as a writer: %s" % reason)
 
     def test_a_mutating_command_is_checked_against_the_world_not_re_run(self):
         """cp/mv/mkdir/touch are verified by their effect, and can still fail."""
@@ -371,9 +401,12 @@ class TestEveryPostconditionCanBeFalsified(unittest.TestCase):
         the set for which no promise can be stated at all.
         """
         self._world()
-        for program in ("dd", "chmod", "ln", "sed", "truncate"):
+        for program in ("dd", "chmod", "ln", "truncate"):
             self._ask([program, self.A], False,
                       "COMMAND_NOT_RE_RUNNABLE_WITHOUT_SIDE_EFFECTS")
+        # sed left the list above as a program, and stays on it as a shape
+        self._ask(["sed", "-i", "s|a|b|", self.A], False,
+                  "COMMAND_TAKES_AN_OUTPUT_FLAG")
 
 
 class TestTheArgvCheckOnlyAppliesToAStatedCommand(unittest.TestCase):
