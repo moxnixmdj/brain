@@ -1159,6 +1159,8 @@ _FIND_PREFIX = re.compile(r"\b(?:start|begin)(?:s|ing)?\s+with\s+([^\s,]+)")
 _EVERY_FILE = re.compile(r"\b(?:all|every|each)\b[^\n]{0,60}?\bfiles?\b")
 _ONE_LEVEL_ONLY = re.compile(r"\brecursive(?:ly)?\b|\bsub[- ]?director(?:y|ies)\b|\btree\b")
 _FILE_SUFFIX = re.compile(r"\.([A-Za-z0-9]+)\b")
+# The words that say a sentence wants the directory LISTED rather than read.
+_LISTING_REQUEST = re.compile(r"\b(?:list|names?|what|which)\b")
 
 
 def _prose_argv(sentence: str) -> list[str] | None:
@@ -1247,8 +1249,24 @@ def _prose_argv(sentence: str) -> list[str] | None:
     # the intent is decided BEFORE any expansion and a non-match is not a
     # refusal of the whole sentence.
     _deleting = bool(re.search(r"\b(?:delet|remov)\w*\b", text)) and "rm" in known
-    _counting = bool(re.search(_WC_LINES, text)) and "wc" in known
-    if ((_deleting or _counting) and _EVERY_FILE.search(text)
+    # A request to COUNT lines, not a mention of the word "line".  `_WC_LINES` is
+    # the pattern for the unit -- it is what tells `wc` to count lines instead of
+    # words -- and on its own it fires on any sentence that says "line" at all.
+    # Measured: "Show the third line of every file in the directory D" set
+    # `_counting`, engaged this expansion and returned `wc -l` over the set, so a
+    # request for the third line of two files was answered with their line counts
+    # -- 4, 2, 6 total -- and certified as an exact semantic answer.  The word
+    # that says something is being COUNTED already exists in this module:
+    # `_WC_QTY` is what every `wc` row in the table below already requires.
+    _counting = (bool(re.search(_WC_LINES, text)) and "wc" in known
+                 and bool(re.search(r"\b(?:%s)\b" % _WC_QTY, text)))
+    # Reading the CONTENTS of a set of files is the third thing a set can be
+    # asked to do.  Without it the sentence falls through to the table, where
+    # `(?:list|show) ... directory` binds `ls` and answers with the file NAMES.
+    # Measured: "Show the contents of every file in the directory D" returned
+    # "one.txt\ntwo.txt" and was certified as exact.
+    _reading = bool(re.search(r"\bcontents?\b", text)) and "cat" in known
+    if ((_deleting or _counting or _reading) and _EVERY_FILE.search(text)
             and _DIRECTORY_REQUEST.search(text)):
         if _ONE_LEVEL_ONLY.search(text):
             # A deeper sweep than one level, which this expansion cannot do.
@@ -1290,6 +1308,8 @@ def _prose_argv(sentence: str) -> list[str] | None:
             return ["rm", *names]
         if _counting:
             return ["wc", "-l", *names]
+        if _reading:
+            return ["cat", *names]
         return None
 
     for pattern, program in _PROSE_COMMAND_WITH_TWO_VALUES:
@@ -1494,6 +1514,17 @@ def _prose_argv(sentence: str) -> list[str] | None:
             return [program, "-f", str(column), str(paths[0])]
         if program == "cp" and _DIRECTORY_REQUEST.search(text):
             return [program, "-r", str(paths[0]), str(paths[1])]
+        if program == "ls" and _EVERY_FILE.search(text) and not _LISTING_REQUEST.search(text):
+            # `ls` answers "what files are here", never "what is IN them".  Its
+            # pattern is `(?:list|show) ... directory`, which matches a sentence
+            # about the files in a directory just as readily as one about the
+            # directory.  Measured: once `_counting` stopped claiming "Show lines
+            # 2 to 4 of every file in the directory D", this row took it and
+            # answered "one.txt\ntwo.txt" -- the NAMES -- and was certified as an
+            # exact semantic answer.  Tightening one keyword match simply handed
+            # the sentence to the next loose one, so the loose one is scoped too.
+            # A sentence that really asks for a listing says so.
+            return None
         argv = [program, *flags(_prose_count(text)), *paths]
         return [str(part) for part in argv if str(part)]
     return None

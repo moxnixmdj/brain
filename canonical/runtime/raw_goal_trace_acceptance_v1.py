@@ -821,6 +821,36 @@ def _inspect_text_file_write(args: Mapping, result: Mapping, root: Path) -> tupl
 # and not safe for anything else, so everything else is refused rather than
 # guessed at.  "cp", "mv", "rm", "mkdir", "touch", "tee" and "dd" are deliberately
 # absent: re-running one of those is a second side effect, not a check.
+_SED_PRINT_OF_NAMED_LINES = re.compile(r"\d+(?:,\d+)?p\Z")
+_TAIL_FROM_A_NAMED_LINE = re.compile(r"\+\d+\Z")
+
+
+def _asked_to_print_named_lines(tokens: Any) -> bool:
+    """True when the argv's whole job was to print lines the sentence named.
+
+    `sed -n 10p` over a four-line file exits 0 having printed nothing.  The
+    program reports success and produces no answer, because the line the sentence
+    named is not in the file.  `sed -n 8,9p` and `tail -n +100` are the same
+    shape.  Certifying such a run reports an exact semantic answer where the
+    answer is silence -- measured: "Show the tenth line of X" over a four-line
+    file was accepted with stdout "" and the file itself fingerprinted as the
+    output, so the check that passed was a check of the file, not of the answer.
+
+    Deliberately narrow.  A `cat` of an empty file also prints nothing and exits
+    0, and there silence IS the answer, so `cat` is not named here.  A `grep -v`
+    that matches nothing also prints nothing, but it exits 1 -- the program
+    itself says "nothing matched", which is an answer -- and the exit code is
+    what separates the two.
+    """
+    parts = [str(part) for part in (tokens or [])]
+    if not parts:
+        return False
+    if parts[0] == "sed":
+        return any(_SED_PRINT_OF_NAMED_LINES.match(part) for part in parts[1:])
+    if parts[0] == "tail":
+        return any(_TAIL_FROM_A_NAMED_LINE.match(part) for part in parts[1:])
+    return False
+
 _READ_ONLY_COMMANDS = frozenset({
     "cat", "head", "tail", "wc", "nl", "sort", "grep", "egrep", "fgrep", "ls",
     "uniq", "tr", "cut", "sha256sum", "md5sum", "stat", "file", "diff", "cmp",
@@ -1259,6 +1289,14 @@ def _inspect_shell_command_run(args: Mapping, result: Mapping, root: Path) -> tu
     again_err = proc.stderr.decode("utf-8", "replace")
     if again_err != str(result.get("stderr") or ""):
         return False, "COMMAND_STDERR_NOT_REPRODUCED", {}
+    if not again and proc.returncode == 0 and _asked_to_print_named_lines(tokens):
+        # Reproducible silence is still silence.  The re-run agrees that the
+        # command printed nothing, which proves the nothing was real and proves
+        # nothing about whether it answers the sentence -- and for a command
+        # whose whole job was to print the lines the sentence named, it does not.
+        return False, "COMMAND_PRINTED_NONE_OF_THE_LINES_THE_SENTENCE_NAMED", {
+            "program": program, "returncode_reproduced": proc.returncode,
+            "stdout_bytes_reproduced": 0}
     return True, "", {"command_re_run": True, "program": program,
                       "returncode_reproduced": proc.returncode,
                       "stdout_bytes_reproduced": len(again.encode("utf-8"))}
