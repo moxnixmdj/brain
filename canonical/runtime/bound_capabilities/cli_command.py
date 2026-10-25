@@ -35,7 +35,33 @@ def run(args, root):
       "stderr":proc.stderr[-12000:].decode("utf-8","replace")
     }
     if proc.returncode!=0:
-        raise RuntimeError("CLI_COMMAND_FAILED:"+result["stderr"][-1200:])
+        # Whether a non-zero exit is a FAILURE is a judgement about what the
+        # sentence asked for, and this adapter is the producer -- the same reason
+        # it does not decide whether a missing output is a failure below.  Some
+        # programs report their answer as an exit status: `diff` exits 1 to say
+        # "these differ", which is the only thing anyone asks it.  Raising there
+        # reported failure over work that succeeded.
+        #
+        # So it is the caller that says so, and only for codes it enumerates.
+        # Anything not declared raises exactly as before, and the declared path
+        # returns output_verified False: no fingerprint is fabricated and nothing
+        # downstream can read this as proof.  Whether the code the command
+        # returned is the code it really returned is decided by the acceptance
+        # layer, which re-runs the command and compares.
+        declared = {
+            int(part) for part in str(args.get("exit_status_is_the_answer") or "").split(",")
+            if part.strip().lstrip("-").isdigit()
+        } if str(args.get("exit_status_is_the_answer") or "").strip() else set()
+        if proc.returncode not in declared:
+            raise RuntimeError("CLI_COMMAND_FAILED:"+result["stderr"][-1200:])
+        # The only thing that changes is the raise.  Execution falls through to
+        # the ordinary output handling below, so any artifact the command really
+        # left is still read back and fingerprinted and output_verified means
+        # what it always meant.  An early return here measured as
+        # STEP_OUTPUT_NOT_VERIFIED_BY_ITS_PRODUCER: it skipped the check and left
+        # a flag claiming nothing had been verified, when the bytes were sitting
+        # there to be checked.
+        result["exit_status_is_the_answer"]=True
     if out is not None:
         if not out.exists():
             # Whether a missing declared output is a FAILURE is a judgement about

@@ -954,6 +954,26 @@ def _post_rm(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
 _CONSUMES_AN_OPERAND = frozenset({"rm", "mv"})
 
 
+# Programs that report their ANSWER as an exit status rather than as a failure.
+#
+# `diff` exits 1 when the files differ -- that is the whole of what anyone asks
+# it, and it is not an error.  Exit 2 is "trouble", and it is deliberately absent
+# here, so a genuine failure still fails.  The set is closed and each code is
+# listed individually: a program whose codes are not enumerated keeps the
+# adapter's unconditional refusal.
+#
+# Nothing downstream has to trust the code.  diff and cmp are both in
+# _READ_ONLY_COMMANDS, so _inspect_shell_command_run re-runs them and compares
+# stdout, stderr AND the returncode against the world -- a code the command did
+# not really return is caught by COMMAND_RETURN_CODE_NOT_REPRODUCED.  What this
+# table changes is only whether the producer is allowed to report the fact at
+# all instead of raising over it.
+_ANSWER_IS_THE_EXIT_STATUS = {
+    "diff": frozenset({0, 1}),
+    "cmp": frozenset({0, 1}),
+}
+
+
 def _post_tee(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
     """`tee A` promises exactly one thing that does not depend on its input.
 
