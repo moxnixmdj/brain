@@ -138,6 +138,48 @@ def _fully_bound_contract_tokens(goal: str, g: Mapping[str, Any],
     return frozenset(filled)
 
 
+def _contradicts_the_stated_payload(goal: str, token: str) -> bool:
+    """True when the sentence states a TEXT payload and the token offers JSON.
+
+    Measured, and it is not a corner.  "Write the message 'PROJECT BRAIN' into
+    the file X" and "Write the string ... to the file X" were both routed to
+    json.file.write, which correctly refused the plain text and wrote nothing.
+    Neither "json" nor "text" appears in those sentences, so json.file.available
+    and text.file.available scored identically on the word "file" -- and the tie
+    was then broken ALPHABETICALLY, which always favours the JSON writer.  The
+    requests that happened to work did so by luck: "text", "content" and
+    "output" are keywords of the text writer, so any sentence using them scored
+    it higher, and "into the output file" worked only because of the word
+    "output".
+
+    This is the same failure candidate_tokens' own docstring already records --
+    a request routed to a JSON writer that refused the plain text with
+    CONTENT_NOT_VALID_JSON and wrote neither file -- arriving by a different
+    door: there a destination's suffix supplied the word "json", here nothing
+    supplied either word and the alphabet decided.
+
+    Scoped as narrowly as the claim allows.  It never promotes anything, only
+    demotes, and only a JSON token, and only when the sentence states a payload
+    the brain already reads as TEXT -- extract_content is that test, and its own
+    patterns require a text role word, so no new vocabulary is introduced here.
+    A sentence that says "json" is left alone.  It sits AFTER the score in the
+    sort key, so it can only break an exact tie and can never outrank a
+    capability the sentence scored higher.
+    """
+    if not str(token or "").lower().startswith("json."):
+        return False
+    if extract_content(goal) is None:
+        # The sentence states no text payload, so it makes no claim a JSON
+        # writer would contradict.  "Copy the file a to b" is untouched.
+        return False
+    try:
+        from canonical.runtime import goal_front_compiler_v1 as _front
+        prose = _front.prose_only(goal)
+    except Exception:  # noqa: BLE001 - no front compiler, fall back to the goal
+        prose = str(goal or "")
+    return not re.search(r"\bjson\b", str(prose), re.I)
+
+
 def candidate_tokens(goal: str, g: Mapping[str, Any] | None = None) -> list[str]:
     """Tokens the goal might be asking for, best guess first.
 
@@ -202,8 +244,14 @@ def candidate_tokens(goal: str, g: Mapping[str, Any] | None = None) -> list[str]
     scored = [(score(gw, tok, extra), tok) for tok in provided]
     scored = [(s0, t) for s0, t in scored if s0 > 0]
     bound = _fully_bound_contract_tokens(goal, g, reg)
+    # The last two terms are the tiebreak, and their ORDER is the fix.  A
+    # capability that contradicts the payload the sentence states is demoted
+    # below one that does not, but only once the score is equal -- so this can
+    # break a tie and can never overturn the words.
     scored.sort(key=lambda pair: (pair[1] not in bound,
-                                  -pair[0], pair[1]))
+                                  -pair[0],
+                                  _contradicts_the_stated_payload(goal, pair[1]),
+                                  pair[1]))
     return [t for _, t in scored]
 
 
