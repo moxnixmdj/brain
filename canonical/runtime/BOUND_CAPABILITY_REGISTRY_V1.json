@@ -2323,7 +2323,6 @@
       "incremental_spend_usd": 0,
       "keywords": [
         "json",
-        "report",
         "document",
         "record",
         "structured"
@@ -4768,7 +4767,26 @@
         "process",
         "environment",
         "probe",
-        "cli"
+        "cli",
+        "cp",
+        "mv",
+        "rm",
+        "mkdir",
+        "touch",
+        "cat",
+        "sort",
+        "sha256sum",
+        "copy",
+        "move",
+        "rename",
+        "remove",
+        "delete",
+        "checksum",
+        "sha256",
+        "directory",
+        "dir",
+        "empty",
+        "file"
       ],
       "limitations": [
         "Runs with cwd pinned to the repository root.",
