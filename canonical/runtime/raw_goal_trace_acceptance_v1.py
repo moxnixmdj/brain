@@ -1232,26 +1232,86 @@ def _post_tee(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
     return True, "", {"postcondition_checked": "tee", "target_present": True}
 
 
+def _sed_promise(script: str, raw: bytes):
+    """Return (ok, reason, evidence) for one in-place sed script, or None.
+
+    None means this shape's promise is not stateable, which is a refusal -- not a
+    pass.  Every promise below is recomputed from the argv alone and asked of the
+    bytes on disk, with no reference to anything the command reported.
+
+    The discipline that separates these from a guess is what each shape can state
+    AFTER the fact.  Appending and prepending state where the line went, so the
+    line is checkable.  A deletion by POSITION -- `1d`, `$d` -- states nothing
+    checkable, because the line it removed is gone and was never in the argv, so
+    those shapes are absent here and stay refused.  A deletion by PATTERN is
+    different: the pattern IS in the argv, so "nothing matches it any more" is a
+    promise the disk can answer.
+    """
+    lines = raw.splitlines()
+
+    def _line(i):
+        return lines[i].decode("utf-8", "replace") if 0 <= i < len(lines) else None
+
+    # append after the last line / insert before the first line.  Symmetric
+    # promises, and the position is what makes each one stateable.
+    if script.startswith("$a "):
+        want, got = script[3:], _line(len(lines) - 1)
+        return (got == want, "COMMAND_SED_LAST_LINE_IS_NOT_THE_APPENDED_TEXT",
+                {"appended_line": want, "last_line": got})
+    if script.startswith("1i "):
+        want, got = script[3:], _line(0)
+        return (got == want, "COMMAND_SED_FIRST_LINE_IS_NOT_THE_INSERTED_TEXT",
+                {"inserted_line": want, "first_line": got})
+
+    # delete every line matching a literal pattern, and substitute a literal word
+    # away.  Both leave a negative promise the disk can answer directly.
+    if script.startswith("/^") and script.endswith("/d"):
+        needle = script[2:-2].encode("utf-8")
+        hit = [x.decode("utf-8", "replace") for x in lines if x.startswith(needle)]
+        return (not hit, "COMMAND_SED_LINE_THE_SCRIPT_DELETED_IS_STILL_PRESENT",
+                {"deleted_prefix": script[2:-2], "survivors": hit[:3]})
+    # replace the first line wholesale.  The promise is the same as an insert's --
+    # the first line is now the stated text -- and it is stateable for the same
+    # reason: the text is in the argv, so the disk can be asked about it.
+    m = re.fullmatch(r"1s\|\.\*\|(.*)\|", script)
+    if m:
+        want, got = m.group(1), _line(0)
+        return (got == want, "COMMAND_SED_FIRST_LINE_IS_NOT_THE_STATED_TEXT",
+                {"stated_line": want, "first_line": got})
+
+    m = re.fullmatch(r"s\|(.+?)\|\|g", script)
+    if m:
+        needle = m.group(1).encode("utf-8")
+        return (needle not in raw, "COMMAND_SED_TEXT_THE_SCRIPT_REMOVED_IS_STILL_PRESENT",
+                {"removed_text": m.group(1)})
+
+    # Exact strings, not patterns: the promise is stated for this script and no
+    # other, because a regex cannot be inverted into an assertion in general.
+    if script == "s| *$||":
+        bad = [x.decode("utf-8", "replace") for x in lines if x.endswith(b" ")]
+        return (not bad, "COMMAND_SED_TRAILING_SPACE_STILL_PRESENT",
+                {"survivors": [x[:40] for x in bad[:3]]})
+    if script == "1,$d":
+        return (raw == b"", "COMMAND_SED_FILE_IS_NOT_EMPTY", {"bytes": len(raw)})
+    return None
+
+
 def _post_sed(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
-    """`sed -i '$a TEXT' A` promises that A's last line is TEXT.
+    """`sed -i SCRIPT A` promises whatever SCRIPT states about A afterwards.
 
     sed only reaches this table when it carries `-i`, because that flag is what
     makes it not re-runnable -- every reading form of sed (`sed -n 3p A`,
     `sed -e s|a|b| A`) still goes to the re-run check and is unaffected by this
-    function existing.  So the shape scoped here is the only one that can arrive.
+    function existing.  So the shapes scoped here are the only ones that arrive.
 
-    The promise is deliberately the small one.  An append consumes the file's
-    previous bytes into its own prefix, so unlike `_post_sort` there is no oracle
-    left on disk to recompute the whole end state from.  What the argv states
-    unconditionally is the line that was added and where it went, and that is
-    what is asked of the disk -- the same discipline that keeps `_post_tee` from
-    claiming a file is empty because stdin happened to be.
-
-    Refused rather than approximated for every other sed shape, including a
-    substitution: `s|a|b|` has no promise about the last line at all.
+    The promise is deliberately the small one.  An in-place edit consumes the
+    file's previous bytes, so unlike `_post_sort` there is no oracle left on disk
+    to recompute the whole end state from.  What the argv states is what is asked,
+    and anything else is refused as unstateable rather than approximated -- the
+    same discipline that keeps `_post_tee` from claiming a file is empty because
+    stdin happened to be.
     """
-    if (len(tokens) != 4 or tokens[1] not in ("--in-place",) + _SIDE_EFFECTING_FLAGS_BY_PROGRAM["sed"]
-            or not tokens[2].startswith("$a ")):
+    if (len(tokens) != 4 or tokens[1] not in ("--in-place",) + _SIDE_EFFECTING_FLAGS_BY_PROGRAM["sed"]):
         return False, "COMMAND_SED_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", {
             "argv_tokens": len(tokens)}
     target = _inside(root, tokens[3])
@@ -1259,13 +1319,46 @@ def _post_sed(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
         return False, "COMMAND_SED_PATH_OUTSIDE_REPOSITORY", {}
     if not target.is_file():
         return False, "COMMAND_SED_TARGET_ABSENT_FROM_DISK", {}
-    lines = target.read_bytes().splitlines()
-    if not lines:
-        return False, "COMMAND_SED_APPENDED_LINE_ABSENT_FROM_DISK", {}
-    if lines[-1].decode("utf-8", "replace") != tokens[2][3:]:
-        return False, "COMMAND_SED_LAST_LINE_IS_NOT_THE_APPENDED_TEXT", {
-            "last_line": lines[-1].decode("utf-8", "replace")[:80]}
-    return True, "", {"postcondition_checked": "sed", "appended_line": tokens[2][3:]}
+    promise = _sed_promise(tokens[2], target.read_bytes())
+    if promise is None:
+        return False, "COMMAND_SED_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", {
+            "argv_tokens": len(tokens), "script": tokens[2][:40]}
+    ok, reason, ev = promise
+    if not ok:
+        return False, reason, ev
+    return True, "", dict({"postcondition_checked": "sed"}, **ev)
+
+
+def _post_chmod(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
+    """`chmod +x A` promises A is executable; `chmod -x` promises it is not.
+
+    Scoped to exactly one flag and one operand.  A numeric mode such as `0644` is
+    refused rather than interpreted, because which bits a sentence meant is not in
+    the argv; and so is `a+x`, `u+x` and `g+x`, because "make the file executable"
+    states the owner bit and nothing about the other two, so claiming more would be
+    a promise the sentence never made.
+
+    The mode is read from the file itself.  Nothing here consults what the command
+    reported, which is the whole reason a mutating command gets a postcondition
+    instead of a return code.
+    """
+    if (len(tokens) != 3 or tokens[1] not in ("+x", "-x")
+            or str(tokens[2]).startswith("-")):
+        return False, "COMMAND_CHMOD_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", {
+            "argv_tokens": len(tokens)}
+    target = _inside(root, tokens[2])
+    if target is None:
+        return False, "COMMAND_CHMOD_PATH_OUTSIDE_REPOSITORY", {}
+    if not target.exists():
+        return False, "COMMAND_CHMOD_TARGET_ABSENT_FROM_DISK", {}
+    wants_executable = tokens[1] == "+x"
+    is_executable = bool(target.stat().st_mode & 0o100)
+    if is_executable != wants_executable:
+        return False, ("COMMAND_CHMOD_NOT_EXECUTABLE" if wants_executable
+                       else "COMMAND_CHMOD_STILL_EXECUTABLE"), {
+            "mode": oct(target.stat().st_mode & 0o777)}
+    return True, "", {"postcondition_checked": "chmod", "executable": wants_executable,
+                      "mode": oct(target.stat().st_mode & 0o777)}
 
 
 # `rm -r` only.  `-f` is deliberately absent: it suppresses the error that is
@@ -1276,6 +1369,7 @@ _RM_RECURSIVE_FLAGS = ("-r", "-R", "--recursive")
 
 _MUTATING_POSTCONDITIONS = {
     "sed": _post_sed,
+    "chmod": _post_chmod,
     "cp": _post_cp,
     "mv": _post_mv,
     "mkdir": _post_mkdir,
