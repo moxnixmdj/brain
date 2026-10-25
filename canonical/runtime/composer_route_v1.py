@@ -1356,6 +1356,13 @@ def _prose_argv(sentence: str) -> list[str] | None:
                 return ["grep", "-c", _asked[0], str(_operands[0])]
             if re.search(r"\b(?:which|what|where)\b|\bnumber\b", text):
                 return ["grep", "-n", _asked[0], str(_operands[0])]
+            # A yes-or-no question.  Its answer is the exit status, and the
+            # acceptance layer already enumerates which codes are answers for
+            # grep -- 0 and 1, and never 2, which means trouble.  Nothing new is
+            # trusted here: the table, the declaration and the adapter's
+            # handling of it all already existed; only the sentence was missing.
+            if re.search(r"\b(?:does|did|is|are|whether)\b", text) or text.rstrip().endswith("?"):
+                return ["grep", "-q", _asked[0], str(_operands[0])]
     # Singular "line", so "the first 3 lines" stays with `head`, which is the
     # command that means it, and only "the third line" comes here.
     _which = _prose_ordinal(sentence)
@@ -1365,6 +1372,15 @@ def _prose_argv(sentence: str) -> list[str] | None:
         _operands = extract_paths(sentence)
         if len(_operands) == 1:
             return ["sed", "-n", "%dp" % _which, str(_operands[0])]
+    # "Are the files A and B identical" asks a yes-or-no question about two
+    # files.  `cmp -s` answers it with an exit status and prints nothing, and the
+    # acceptance layer already treats 0 and 1 as answers for cmp -- 1 meaning
+    # "they differ", which is an answer and not a failure.
+    if "cmp" in known and re.search(
+            r"\bidentical\b|\bthe same\b|\bno differences?\b|\bexactly alike\b", text):
+        _operands = extract_paths(sentence)
+        if len(_operands) == 2:
+            return ["cmp", "-s", str(_operands[0]), str(_operands[1])]
     for pattern, program, flags, arity in _PROSE_COMMAND:
         if program not in known:
             continue
