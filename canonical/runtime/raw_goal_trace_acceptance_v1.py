@@ -994,9 +994,32 @@ _CONSUMES_AN_OPERAND = frozenset({"rm", "mv"})
 # not really return is caught by COMMAND_RETURN_CODE_NOT_REPRODUCED.  What this
 # table changes is only whether the producer is allowed to report the fact at
 # all instead of raising over it.
+#
+# `grep`, `egrep` and `fgrep` are here for the identical reason, and it was
+# measured rather than inferred from the man page.  Their documented codes are
+# 0 = a line was selected, 1 = no line was selected, 2 = an error, and the three
+# were confirmed on this host:
+#
+#   grep 'apple'  -> 0     grep 'zzz'        -> 1     grep 'a' <missing file> -> 2
+#   egrep 'a|b'   -> 0     egrep 'zzz'       -> 1
+#   fgrep 'apple' -> 0     fgrep 'zzz'       -> 1
+#
+# Measured without them in the table, "Search the file a.txt for the exact text
+# 'zzzz'" raised RuntimeError:CLI_COMMAND_FAILED and arrived as
+# COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN -- a failure reported over a search that
+# ran correctly and answered "nothing matches".  That is the most ordinary
+# outcome a search has, and it was the one outcome reported as a crash.  Exit 2
+# is deliberately absent, so a missing file or an unreadable pattern still fails.
+#
+# All three are in _READ_ONLY_COMMANDS, so the inspector re-runs them and
+# compares stdout, stderr AND the returncode: a code the command did not really
+# return is caught by COMMAND_RETURN_CODE_NOT_REPRODUCED, exactly as for diff.
 _ANSWER_IS_THE_EXIT_STATUS = {
     "diff": frozenset({0, 1}),
     "cmp": frozenset({0, 1}),
+    "grep": frozenset({0, 1}),
+    "egrep": frozenset({0, 1}),
+    "fgrep": frozenset({0, 1}),
 }
 
 
