@@ -20,6 +20,9 @@ and reports the observed result of every step.
 
 from __future__ import annotations
 
+import fnmatch
+import os
+import pathlib
 import re
 import shlex
 from typing import Any, Mapping, Sequence
@@ -985,6 +988,13 @@ _RECURSIVE_REQUEST = re.compile(
     r"|\ball the files\b|\bevery file\b|\beach file\b")
 _FIND_SUFFIX = re.compile(r"\bend(?:s|ing)?\s+with\s+([^\s,]+)")
 _FIND_PREFIX = re.compile(r"\b(?:start|begin)(?:s|ing)?\s+with\s+([^\s,]+)")
+# "all the .log files in the directory D" names a SET of files by pattern, which
+# no fixed-arity rule can hold: the sentence states one path and a shape.  The
+# pattern is expanded here, from the sentence's own words, and the command runs
+# on exactly the names it produced.
+_EVERY_FILE = re.compile(r"\b(?:all|every|each)\b[^\n]{0,60}?\bfiles?\b")
+_ONE_LEVEL_ONLY = re.compile(r"\brecursive(?:ly)?\b|\bsub[- ]?director(?:y|ies)\b|\btree\b")
+_FILE_SUFFIX = re.compile(r"\.([A-Za-z0-9]+)\b")
 
 
 def _prose_argv(sentence: str) -> list[str] | None:
@@ -1062,6 +1072,62 @@ def _prose_argv(sentence: str) -> list[str] | None:
             if len(operand_paths) == 1:
                 return ["grep", "-v", str(needle), str(operand_paths[0])]
             return None
+    # A sentence that names a SET of files by pattern -- "all the .log files in
+    # the directory D" -- states one path and a shape.  The shape is expanded
+    # here from the sentence's own words and the command runs on exactly those
+    # names: one level of the directory the sentence named, ordinary files only,
+    # nothing looser than the ending it spelled out.
+    # Engage only on the two things a set of files can be asked to do here.  A
+    # sentence that merely says "all the files" -- "list all the files in the
+    # directory D" -- is not a set operation and must fall through untouched, so
+    # the intent is decided BEFORE any expansion and a non-match is not a
+    # refusal of the whole sentence.
+    _deleting = bool(re.search(r"\b(?:delet|remov)\w*\b", text)) and "rm" in known
+    _counting = bool(re.search(_WC_LINES, text)) and "wc" in known
+    if ((_deleting or _counting) and _EVERY_FILE.search(text)
+            and _DIRECTORY_REQUEST.search(text)):
+        if _ONE_LEVEL_ONLY.search(text):
+            # A deeper sweep than one level, which this expansion cannot do.
+            # Falling through would be worse than refusing: the generic
+            # single-operand rule sees one path -- the directory -- and binds
+            # `rm <the directory>`, deleting the container of the set the
+            # sentence described.  So the sentence owns this branch and gets no
+            # route rather than a different command.
+            return None
+        masked = str(sentence)
+        for value in _quoted_values(sentence):
+            masked = re.sub(re.escape(value), " ", masked, flags=re.IGNORECASE)
+        masked_paths = extract_paths(masked)
+        for p in masked_paths:
+            masked = re.sub(re.escape(str(p)), " ", masked, flags=re.IGNORECASE)
+        suffix = _FILE_SUFFIX.search(masked.lower())
+        # Quotes and dots only: the ending must be the one the sentence spelled
+        # out, so ".log" selects `*.log` and not the looser `*log`.
+        needle = ("*." + suffix.group(1)) if suffix else "*"
+        if len(masked_paths) != 1:
+            return None
+        # The repository root comes from this module's own location, never from
+        # the process cwd: a sentence names a path the way the rest of the system
+        # does, relative to the root, and binding must not depend on where the
+        # caller happened to be standing.
+        root = pathlib.Path(__file__).resolve().parents[2]
+        base = pathlib.Path(str(masked_paths[0]))
+        directory = base if base.is_absolute() else root / base
+        if not directory.is_dir():
+            return None
+        names = sorted(str(base / f) for f in os.listdir(directory)
+                       if fnmatch.fnmatch(f, needle) and (directory / f).is_file())
+        if not names:
+            # Nothing matches.  No program can be asked to delete or count an
+            # empty set, so the sentence gets no route rather than a no-op run
+            # reported as the work it described.
+            return None
+        if _deleting:
+            return ["rm", *names]
+        if _counting:
+            return ["wc", "-l", *names]
+        return None
+
     for pattern, program in _PROSE_COMMAND_WITH_TWO_VALUES:
         if program not in known:
             continue

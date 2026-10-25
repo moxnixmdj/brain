@@ -1021,24 +1021,31 @@ def _post_rm(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
     """`rm A` promises exactly one thing about the world: A is gone.
 
     Scoped to the one shape whose promise can be stated precisely -- a program
-    and a single operand, no flags.  `rm -r`, `rm -f a b` and a glob are refused
-    as unstateable rather than guessed at, which is the same discipline that keeps
-    dd, chmod, ln and sed out of this table.
+    and one or more plain operands, no flags.  `rm -r` and `rm -f a b` are still
+    refused as unstateable rather than guessed at, which is the same discipline
+    that keeps dd, chmod, ln and sed out of this table.  Multiple operands are
+    stateable and are all checked: the sentence that named them named a set.
 
     That the file EXISTED is not assumed and does not need to be witnessed: the
     adapter raises CLI_COMMAND_FAILED on a non-zero exit, and rm exits non-zero on
     a path that was not there.  A zero exit plus an absent path is the whole of
     the promise, and both halves are checkable now.
     """
-    if len(tokens) != 2:
+    if len(tokens) < 2 or any(str(x).startswith("-") for x in tokens[1:]):
         return False, "COMMAND_RM_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", {"argv_tokens": len(tokens)}
-    target = _inside(root, tokens[1])
-    if target is None:
-        return False, "COMMAND_RM_PATH_OUTSIDE_REPOSITORY", {}
-    if target.exists():
-        return False, "COMMAND_RM_TARGET_STILL_PRESENT", {}
+    # Every operand, not just the first.  A sentence may name a set of files by
+    # pattern, and the promise is about the whole set: one survivor out of five
+    # is a deletion that did not happen, and reporting it as done would be a lie.
+    consumed: list[str] = []
+    for operand in tokens[1:]:
+        target = _inside(root, str(operand))
+        if target is None:
+            return False, "COMMAND_RM_PATH_OUTSIDE_REPOSITORY", {}
+        if target.exists():
+            return False, "COMMAND_RM_TARGET_STILL_PRESENT", {"survivor": str(operand)}
+        consumed.append(str(operand))
     return True, "", {"postcondition_checked": "rm", "target_removed": True,
-                      "consumed_paths": [tokens[1]]}
+                      "targets_removed": len(consumed), "consumed_paths": consumed}
 
 
 # Commands whose verified postcondition accounts for a path it CONSUMED.  Kept
