@@ -529,6 +529,16 @@ def extract_paths(text: str) -> list[str]:
         if best:
             found[base + offset] = best
             seen.add(best)
+    # Every path already found is removed before a directory is looked for.  The
+    # prefix check below cannot do this job alone, because it compares spellings:
+    # for "/home/u/brain/x/a1.txt" the directory token is "home/u/brain/x", which
+    # is not a prefix of the found path -- it is missing the leading slash -- so
+    # the sentence was read as naming a file AND a folder, `wc` was refused for
+    # want of arity, and the request fell through to a chain that reported
+    # pass True with no answer and no acceptance at all.  The same happened to
+    # "./x/a1.txt".  A path that has been read is not also its own parent.
+    for stated in found:
+        body = body.replace(str(stated), " ", 1)
     for m in _DIRPATH.finditer(body):
         token = m.group(0)
         if token in seen:
