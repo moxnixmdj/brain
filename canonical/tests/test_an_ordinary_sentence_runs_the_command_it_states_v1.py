@@ -1308,6 +1308,105 @@ class TestTheFallthroughIsScopedToWhatTheSentenceStates(unittest.TestCase):
                 self.assertNotIn("apt", str(tried.get("chain")), tried)
 
 
+    def test_a_commands_result_can_be_written_where_the_sentence_says(self):
+        # `output_path` was a promise to CHECK, never a place to write, so a
+        # sentence asking for a result to be put somewhere had no mechanism at
+        # all: "Join the files A and B into the file C" compiled, ran `cat A B`,
+        # and was correctly refused with PROMISED_ARTIFACT_MISSING because
+        # nothing ever wrote C.  The refusal was honest and the request ordinary.
+        a = _fresh("apple\nbanana\napple\n")
+        b = "%s/b1.txt" % SCRATCH
+        (ROOT / b).write_text("grape\n", encoding="utf-8")
+        c = "%s/c1.txt" % SCRATCH
+        out = _solve("Join the files %s and %s into the file %s" % (a, b, c))
+        self.assertTrue(_verified(out), out.get("status"))
+        # the promise is read back from the bytes, not from a flag
+        self.assertEqual("apple\nbanana\napple\ngrape\n",
+                         (ROOT / c).read_text(encoding="utf-8"))
+
+    def test_a_read_only_command_with_a_destination_is_not_refused_on_arity(self):
+        # `uniq` takes one file.  The sentence names two, and the second is where
+        # the result goes -- so it was refused for want of arity, which read as
+        # "you gave me too many files" for a request that stated exactly enough.
+        from canonical.runtime import composer_route_v1 as _cr
+        # Adjacent duplicates, because that is all `uniq` removes -- writing the
+        # fixture as apple/banana/apple and expecting two lines back was this
+        # test being wrong about the program, not the program being wrong.
+        a = _fresh("apple\napple\nbanana\n")
+        c = "%s/c1.txt" % SCRATCH
+        goal = "Write the unique lines of the file %s to the file %s" % (a, c)
+        self.assertEqual(["uniq", a], _cr._prose_argv(goal))
+        self.assertTrue(_verified(_solve(goal)))
+        self.assertEqual("apple\nbanana\n", (ROOT / c).read_text(encoding="utf-8"))
+
+    def test_a_destination_has_to_be_said_not_assumed(self):
+        # The other side of the rule, and the reason it is scoped to the words
+        # that introduce a destination: `cmp` and `diff` take two files and
+        # write nothing, so the second path must stay an operand.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh("apple\n")
+        b = "%s/b1.txt" % SCRATCH
+        (ROOT / b).write_text("grape\n", encoding="utf-8")
+        # Measured, not assumed: "compare" reaches `diff`, and `cmp` answers only
+        # to an explicit claim about bytes.  Both take two operands and write
+        # nothing, which is the point under test.
+        self.assertEqual(["diff", a, b], _cr._prose_argv("Compare the files %s and %s" % (a, b)))
+        self.assertEqual(["cmp", a, b],
+                         _cr._prose_argv("Check whether the files %s and %s have the same bytes" % (a, b)))
+        self.assertEqual(["diff", a, b],
+                         _cr._prose_argv("Show the difference between the file %s and the file %s" % (a, b)))
+        self.assertTrue(_verified(_solve("Show the difference between the file %s and the file %s" % (a, b))))
+
+    def test_a_command_that_consumes_its_operand_is_never_written_over(self):
+        # For `rm A` the bound output is the file being deleted.  Writing stdout
+        # there would resurrect it, so the declaration must not fire.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh("apple\n")
+        args = _cr.bind({"argv": "ARGV", "output_path": "PATH_OUTPUT"},
+                        "Delete the file %s" % a)
+        self.assertNotIn("write_stdout_to_output", args, args)
+        self.assertTrue(_verified(_solve("Delete the file %s" % a)))
+        self.assertFalse((ROOT / a).exists(), "the file was deleted and then written back")
+
+    def test_a_stated_command_is_not_taken_by_a_keyword_match(self):
+        # Measured while writing the rule: "Join the files A and B into the file
+        # C" was routed to json.file.write on the single matched word "file", and
+        # the chain then died OPEN__COMPOSER_SLOT_UNBOUND.  Trying the stated
+        # command first is what fixed it, so the order is the thing under test.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh("apple\n")
+        b = "%s/b1.txt" % SCRATCH
+        (ROOT / b).write_text("grape\n", encoding="utf-8")
+        r = _cr.route("Join the files %s and %s into the file %s/c1.txt" % (a, b, SCRATCH))
+        self.assertIs(r.get("pass"), True, r.get("status"))
+        self.assertEqual(["shell.command.run"], r.get("chain"))
+
+    def test_the_adapter_writes_stdout_only_when_the_sentence_asked_for_it(self):
+        # The default must stay the default.  `output_path` has always meant
+        # "check that this exists", and every route that worked before this
+        # change runs through this adapter, so an unconditional write would be a
+        # side effect no sentence asked for.
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(
+            "_cli_probe", ROOT / "canonical/runtime/bound_capabilities/cli_command.py")
+        mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+        a = _fresh("apple\n")
+        for flag, expect in ((None, False), ("true", True)):
+            out = "%s/o%s.txt" % (SCRATCH, "1" if flag else "0")
+            args = {"argv": ["cat", a], "output_path": out}
+            if flag: args["write_stdout_to_output"] = flag
+            try:
+                mod.run(args, str(ROOT))
+            except RuntimeError as exc:
+                # Without the flag nothing is written, and a declared output
+                # that is absent is exactly what the adapter reports -- that is
+                # the documented behaviour, and the file must still not exist.
+                self.assertIsNone(flag, "the flagged write raised: %s" % exc)
+                self.assertEqual("CLI_EXPECTED_OUTPUT_MISSING", str(exc))
+            self.assertIs((ROOT / out).exists(), expect,
+                          "write_stdout_to_output=%r created a file: %r" % (flag, out))
+
+
 
 if __name__ == "__main__":
     unittest.main()
