@@ -1997,6 +1997,75 @@ class TestTheFallthroughIsScopedToWhatTheSentenceStates(unittest.TestCase):
         self.assertTrue(_verified(_solve(goal)))
 
 
+    def test_a_bare_name_with_spaces_is_read_from_the_world_not_guessed(self):
+        # No word introduces the name here -- "sort my notes.txt" -- so the only
+        # honest way to know where the name begins is that a name like that
+        # really exists in a directory that really exists.  Measured before: 2 of
+        # 8 such requests were served, and one that reported a pass had counted
+        # the lines of the lookalike file instead.
+        from canonical.runtime import composer_route_v1 as _cr
+        named, trap = self._spaced()
+        self.assertEqual([named], _cr.extract_paths("Sort %s" % named))
+        self.assertNotIn(trap, _cr.extract_paths("Sort %s" % named))
+
+    def test_a_bare_deletion_removes_the_named_file_and_not_its_tail(self):
+        # The hardest shape for a rule that consults the disk: the acceptance
+        # layer re-derives the command from the sentence AFTER the file is gone,
+        # so a rule keyed on the file existing would read a different command the
+        # second time.  The directory outlives the file, which is why the
+        # discriminator is the parent and not the name.
+        named, trap = self._spaced()
+        self.assertTrue(_verified(_solve("Delete %s" % named)))
+        self.assertFalse((ROOT / named).exists())
+        self.assertTrue((ROOT / trap).exists(),
+                         "a file the sentence never named was deleted")
+
+    def test_a_bare_copy_reads_both_ends_of_the_sentence(self):
+        named, _trap = self._spaced()
+        dest = "%s/backup.txt" % SCRATCH
+        self.assertTrue(_verified(_solve("Copy %s to %s" % (named, dest))))
+        self.assertEqual("apple\nbanana\n", (ROOT / dest).read_text(encoding="utf-8"))
+
+    def test_a_destination_with_spaces_that_does_not_exist_yet_is_read_whole(self):
+        # A destination has not been written, so "does this name exist" cannot be
+        # the question.  "Does this directory exist" can be, and it is the same
+        # question for a source and for a destination.
+        a = _fresh("apple\n")
+        dest = "%s/my backup.txt" % SCRATCH
+        self.assertTrue(_verified(_solve("Copy the file %s to %s" % (a, dest))))
+        self.assertEqual("apple\n", (ROOT / dest).read_text(encoding="utf-8"))
+
+    def test_a_name_in_a_directory_that_does_not_exist_is_not_invented(self):
+        # The pin on the discriminator.  Reading any run of words as a name would
+        # accept this, and the machine would then run a command on a path no
+        # sentence ever stated and no disk ever held.
+        from canonical.runtime import composer_route_v1 as _cr
+        paths = _cr.extract_paths("Sort nosuchdir/my notes.txt")
+        self.assertNotIn("nosuchdir/my notes.txt", paths)
+
+    def test_a_phrase_that_is_not_a_name_is_still_not_a_path(self):
+        from canonical.runtime import composer_route_v1 as _cr
+        _fresh()
+        d = "%s/dq" % SCRATCH
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "one.txt").write_text("apple\n", encoding="utf-8")
+        goal = "Show which files in the directory %s contain 'apple'" % d
+        self.assertEqual([d], _cr.extract_paths(goal))
+        self.assertTrue(_verified(_solve(goal)))
+
+    def test_reading_names_does_not_run_off_the_end_of_a_sentence(self):
+        # Two spaced names in one sentence, the first starting at offset zero.
+        # Shortening the sentence while walking it put the next offset past its
+        # end, which is how this test earned its place.
+        from canonical.runtime import composer_route_v1 as _cr
+        named, _trap = self._spaced()
+        other = "%s/other notes.txt" % SCRATCH
+        (ROOT / other).write_text("fig\n", encoding="utf-8")
+        self.assertEqual([named, other], _cr.extract_paths(
+            "Compare the file %s and %s byte by byte" % (named, other)))
+        self.assertEqual([named, other], _cr.extract_paths("%s %s" % (named, other)))
+
+
 
 if __name__ == "__main__":
     unittest.main()
