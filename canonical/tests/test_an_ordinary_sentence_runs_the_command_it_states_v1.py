@@ -2137,6 +2137,80 @@ class TestTheFallthroughIsScopedToWhatTheSentenceStates(unittest.TestCase):
             outside.parent.rmdir()
 
 
+    def _answer(self, result):
+        import json as _json, re as _re
+        text = _json.dumps(result, default=str)
+        m = _re.search(r'"stdout"\s*:\s*"((?:[^"\\]|\\.)*)"', text)
+        return m.group(1).encode().decode("unicode_escape") if m else None
+
+    def test_a_request_to_be_shown_a_line_does_not_change_the_file(self):
+        # The reason this test exists.  "Show the third line of the file X" set
+        # the file as its own output, and because sed counts as an in-place
+        # transform the adapter wrote the command's output over the source.
+        # Measured: X went from four lines to one -- a request to be SHOWN
+        # something destroyed the file it named.  The run was refused
+        # afterwards, which is not the same as not doing it.
+        a = _fresh("apple\nbanana\napple pie\ncherry\n")
+        before = (ROOT / a).read_text(encoding="utf-8")
+        result = _solve("Show the third line of the file %s" % a)
+        self.assertTrue(_verified(result))
+        self.assertEqual(before, (ROOT / a).read_text(encoding="utf-8"),
+                         "a request to be shown a line changed the file")
+        self.assertEqual("apple pie\n", self._answer(result))
+
+    def test_a_reader_is_not_permitted_to_write_over_its_own_operand(self):
+        # The distinction is in the script, not in the program: a sed script that
+        # rewrites may write its result back, because that is the work the
+        # sentence asked for; a sed script that only prints may not.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh("apple\n")
+        reader = {"argv": ["sed", "-n", "1p", a], "output_path": a}
+        _cr._declare_a_written_output(reader, reader["argv"],
+                                     "Show the first line of the file %s" % a)
+        self.assertNotIn("write_stdout_to_output", reader,
+                         "a reader was allowed to write over the file it read")
+        writer = {"argv": ["sed", "-e", "s|apple|fig|", a], "output_path": a}
+        _cr._declare_a_written_output(writer, writer["argv"],
+                                     "Replace 'apple' with 'fig' in the file %s" % a)
+        self.assertEqual("true", writer.get("write_stdout_to_output"))
+
+    def test_a_count_of_the_lines_holding_a_text_is_not_the_line_count(self):
+        # Measured: "How many lines in the file X contain 'apple'" bound `wc -l`
+        # and answered 4, the number of lines in the file, when two of them hold
+        # the text.  The answer was wrong and it was certified, because a whole
+        # file is a perfectly reproducible answer to a question nobody asked.
+        a = _fresh("apple\nbanana\napple pie\ncherry\n")
+        result = _solve("How many lines in the file %s contain 'apple'?" % a)
+        self.assertTrue(_verified(result))
+        self.assertEqual("2\n", self._answer(result))
+
+    def test_the_line_number_asked_for_is_reported(self):
+        a = _fresh("apple\nbanana\napple pie\ncherry\n")
+        result = _solve("Which line of the file %s contains 'cherry'?" % a)
+        self.assertTrue(_verified(result))
+        self.assertTrue(str(self._answer(result)).startswith("4:"),
+                        self._answer(result))
+
+    def test_a_transformation_still_writes_back_over_the_file_it_read(self):
+        # The pin on the other half of the distinction.  Narrowing the write to a
+        # rewriting script must not take away the in-place conversion, which is
+        # the work that sentence asked for.
+        a = _fresh("apple\nbanana\n")
+        self.assertTrue(_verified(_solve("Convert the file %s to upper case" % a)))
+        self.assertEqual("APPLE\nBANANA\n", (ROOT / a).read_text(encoding="utf-8"))
+
+    def test_asking_for_several_lines_still_binds_the_command_that_means_it(self):
+        # Singular "line" goes to the command that prints one; a stated COUNT of
+        # lines must not, or "the first 3 lines" would return only the third.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh("apple\nbanana\napple pie\ncherry\n")
+        self.assertEqual(["head", "-n", "3", a],
+                         _cr._prose_argv("Show the first 3 lines of the file %s" % a))
+        result = _solve("Show the first 3 lines of the file %s" % a)
+        self.assertTrue(_verified(result))
+        self.assertEqual("apple\nbanana\napple pie\n", self._answer(result))
+
+
 
 if __name__ == "__main__":
     unittest.main()
