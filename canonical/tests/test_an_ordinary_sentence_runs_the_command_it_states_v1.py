@@ -2430,6 +2430,139 @@ class TestTheFallthroughIsScopedToWhatTheSentenceStates(unittest.TestCase):
         self.assertNotIn("+2", argv, "a directory request was read as a line range")
 
 
+class TestAStatedOperationIsHonouredOrRefused(unittest.TestCase):
+    """A qualifier the route cannot honour must not be silently dropped.
+
+    Every defect here was measured CERTIFIED as an exact semantic answer while
+    answering a different question.  Reproducibility cannot see any of it: the
+    wrong output is just as reproducible as the right one.
+    """
+
+    def _answer(self, result):
+        import json as _json, re as _re
+        text = _json.dumps(result, default=str)
+        m = _re.search(r'"stdout"\s*:\s*"((?:[^"\\]|\\.)*)"', text)
+        return m.group(1).encode().decode("unicode_escape") if m else None
+
+    def _set_of_two_files(self):
+        a = _fresh("apple\nbanana\napple pie\ncherry\n")
+        d = "%s/dset" % SCRATCH
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "one.txt").write_text("apple\nbanana\n", encoding="utf-8")
+        (ROOT / d / "two.txt").write_text("fig\n", encoding="utf-8")
+        return d
+
+    def test_the_contents_of_a_set_of_files_are_not_their_names(self):
+        # Measured: "Show the contents of every file in the directory D" bound
+        # `ls D` -- its pattern is `(?:list|show) ... directory` -- and answered
+        # "one.txt\ntwo.txt", which was certified as exact.
+        d = self._set_of_two_files()
+        result = _solve("Show the contents of every file in the directory %s" % d)
+        self.assertTrue(_verified(result))
+        self.assertEqual("apple\nbanana\nfig\n", self._answer(result))
+        self.assertNotIn("one.txt", self._answer(result),
+                         "a request for contents was answered with the names")
+
+    def test_a_line_of_every_file_is_not_answered_with_a_line_count(self):
+        # `_WC_LINES` is the pattern for the UNIT, and on its own it fires on any
+        # sentence that says "line".  Measured: this sentence set `_counting`,
+        # engaged the set expansion and returned `wc -l` over the set, answering
+        # a request for the third line with "2, 1, 3 total".
+        d = self._set_of_two_files()
+        result = _solve("Show the third line of every file in the directory %s" % d)
+        self.assertNotIn("total", self._answer(result) or "",
+                         "a request for a line was answered with a line count")
+        self.assertNotIn("total", str(result.get("status") or ""))
+
+    def test_counting_the_lines_of_a_set_of_files_still_counts_them(self):
+        # The scope pin on the other side: the word that says something is being
+        # COUNTED is `_WC_QTY`, and a sentence that really counts keeps its route.
+        from canonical.runtime import composer_route_v1 as _cr
+        d = self._set_of_two_files()
+        argv = _cr._prose_argv("Count the lines in every file in the directory %s" % d)
+        self.assertIsNotNone(argv)
+        self.assertEqual("wc", argv[0])
+        self.assertEqual("-l", argv[1])
+        self.assertEqual(2, len(argv) - 2, "the set was not expanded")
+
+    def test_a_sentence_about_the_files_in_a_directory_is_not_a_listing_of_it(self):
+        # The hazard this exposed.  Tightening `_counting` handed "Show lines 2 to
+        # 4 of every file in the directory D" straight to the `ls` row, which
+        # answered with the file NAMES and was certified.  A looser match further
+        # down the table is not a fix for a loose match above it.
+        from canonical.runtime import composer_route_v1 as _cr
+        d = self._set_of_two_files()
+        for goal in ("Show lines 2 to 4 of every file in the directory %s" % d,
+                     "Show the first 10 bytes of every file in the directory %s" % d):
+            argv = _cr._prose_argv(goal) or []
+            self.assertNotEqual("ls", argv[:1], goal)
+
+    def test_listing_a_directory_is_still_a_listing(self):
+        # And a sentence that really asks for a listing keeps it.
+        from canonical.runtime import composer_route_v1 as _cr
+        d = self._set_of_two_files()
+        for goal in ("List all the files in the directory %s" % d,
+                     "Show the contents of the directory %s" % d):
+            self.assertEqual(["ls", d], _cr._prose_argv(goal), goal)
+
+    # ------------------------------------------------------------------
+    # Silence is not an answer -- unless silence IS the answer.
+    #
+    # `sed -n 10p` over a four-line file exits 0 having printed nothing, and the
+    # run was accepted: `output_path` was the file itself, so the fingerprint
+    # that passed was a fingerprint of the FILE, and the answer was empty.
+    # The re-inspection faithfully reproduced the emptiness, which proves the
+    # nothing was real and proves nothing about whether it answers the sentence.
+    # ------------------------------------------------------------------
+    def test_a_line_the_file_does_not_have_is_not_an_answer(self):
+        a = _fresh("apple\nbanana\napple pie\ncherry\n")
+        result = _solve("Show the tenth line of the file %s" % a)
+        self.assertFalse(_verified(result),
+                         "a line that is not in the file was certified as an answer")
+        import json as _json
+        self.assertIn("COMMAND_PRINTED_NONE_OF_THE_LINES_THE_SENTENCE_NAMED",
+                      _json.dumps(result, default=str))
+
+    def test_a_range_the_file_does_not_reach_is_not_an_answer(self):
+        a = _fresh("apple\nbanana\napple pie\ncherry\n")
+        self.assertFalse(_verified(_solve("Show lines 8 to 9 of the file %s" % a)))
+
+    def test_a_range_starting_past_the_end_is_not_an_answer(self):
+        # `tail -n +99` is the same shape: success, and nothing printed.
+        a = _fresh("apple\nbanana\napple pie\ncherry\n")
+        result = _solve("Show the lines from line 99 to the end of the file %s" % a)
+        self.assertFalse(_verified(result))
+
+    def test_the_line_that_is_there_is_still_shown(self):
+        a = _fresh("apple\nbanana\napple pie\ncherry\n")
+        result = _solve("Show the third line of the file %s" % a)
+        self.assertTrue(_verified(result))
+        self.assertEqual("apple pie\n", self._answer(result))
+
+    def test_silence_that_really_is_the_answer_is_still_an_answer(self):
+        # THE COUNTER-TEST.  Without it, the rule above could be a blanket
+        # "empty output is a failure" and still pass every other test here.
+        # "Show the lines that do not contain X" over a file where EVERY line
+        # contains X has the empty set as its answer, and `grep -v` says so by
+        # exiting 1 -- the program itself reports "nothing matched".  The exit
+        # code is the whole difference between that and a line that is not there.
+        a = _fresh("apple\napple pie\napple sauce\n")
+        result = _solve("Show the lines in the file %s that do not contain 'apple'" % a)
+        self.assertTrue(_verified(result), "the empty set was refused as if it were a failure")
+        self.assertEqual("", self._answer(result))
+        self.assertEqual(1, int(((result.get("composer_execution") or {})
+                                 .get("produced") or {}).get("returncode")))
+
+    def test_an_empty_file_still_reads_as_empty(self):
+        # The second counter-test, and the reason the rule names `sed` and `tail`
+        # and not every reader: the contents of an empty file really are nothing,
+        # and `cat` exits 0 saying so.
+        a = _fresh("")
+        result = _solve("Show the contents of the file %s" % a)
+        self.assertTrue(_verified(result))
+        self.assertEqual("", self._answer(result))
+
+
 
 if __name__ == "__main__":
     unittest.main()
