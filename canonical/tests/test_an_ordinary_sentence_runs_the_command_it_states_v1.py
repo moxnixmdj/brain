@@ -506,6 +506,91 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
             self.assertEqual((ROOT / f).read_text(encoding="utf-8"), before,
                              "%r changed a file it only mentioned" % sentence)
 
+    def test_the_writer_is_chosen_by_the_payload_not_by_the_alphabet(self):
+        """The tiebreak pin.  This was a silent, systematic routing failure.
+
+        Measured before this: "Write the message 'PROJECT BRAIN' into the file X"
+        and "Write the string ... to the file X" were routed to json.file.write,
+        which correctly refused the plain text and wrote NOTHING.  Neither
+        "json" nor "text" appears in those sentences, so the JSON and text
+        tokens scored identically on the word "file" and the tie was broken
+        ALPHABETICALLY -- which always favours the JSON writer.  The phrasings
+        that worked did so by luck: "text", "content" and "output" happen to be
+        keywords of the text writer.
+
+        Every role word the brain already recognises as introducing a text
+        payload must reach the text writer.
+        """
+        from canonical.runtime import composer_route_v1 as _cr
+        for role in ("text", "content", "message", "string", "word", "line"):
+            sentence = ("Write the %s 'PROJECT BRAIN' into the file %s/a1.txt."
+                        % (role, SCRATCH))
+            chain = (_cr.route(sentence).get("chain") or [None])[0]
+            self.assertEqual(chain, "text.file.write",
+                             "the role word %r was routed to %r -- a text "
+                             "payload reached a JSON writer" % (role, chain))
+
+    def test_a_json_request_is_still_answered_by_the_json_writer(self):
+        """The pairing control: the tiebreak demotes, it does not delete.
+
+        A fix that sent every write to the text writer would pass the test above
+        and break JSON.  The sentence decides, and a sentence that says json is
+        left exactly alone.
+        """
+        from canonical.runtime import composer_route_v1 as _cr
+        sentence = ("Write the json '{\"a\": 1}' to the file %s/a1.json." % SCRATCH)
+        chain = (_cr.route(sentence).get("chain") or [None])[0]
+        self.assertEqual(chain, "json.file.write",
+                         "a JSON request was demoted away from the JSON writer: %r"
+                         % chain)
+
+    def test_a_sentence_that_states_no_payload_leaves_the_ranking_alone(self):
+        """The scope pin: the tiebreak fires only on a stated text payload.
+
+        It must never promote or demote anything for a sentence that makes no
+        claim about payload kind, or it would be deciding questions the sentence
+        did not ask.
+        """
+        from canonical.runtime import composer_route_v1 as _cr
+        a, b = SCRATCH + "/a1.txt", SCRATCH + "/b2.txt"
+        for sentence, expected in (("Copy the file %s to %s" % (a, b), "shell.command.run"),
+                                   ("Count the lines in the file %s" % a, "shell.command.run"),
+                                   ("Sort the file %s" % a, "shell.command.run")):
+            chain = (_cr.route(sentence).get("chain") or [None])[0]
+            self.assertEqual(chain, expected,
+                             "%r was rerouted by the payload tiebreak: %r"
+                             % (sentence, chain))
+
+    def test_the_write_family_writes_the_stated_bytes_whatever_words_carry_it(self):
+        """End to end, with the bytes on disk as the assertion.
+
+        Measured across the whole family -- six role words crossed with ten ways
+        of describing a destination -- this went to 60 of 60.  A representative
+        slice is pinned here rather than all sixty, so the suite stays fast
+        while every role word and every destination shape is still covered.
+        """
+        want = "PROJECT BRAIN"
+        for role in ("text", "content", "message", "string", "word", "line"):
+            DESTS = ("to the file", "into the same file", "to the output path")
+            for dest in DESTS:
+                # A unique name per case.  Measured the hard way: two of these
+                # destination phrases are the same length, so a name built from
+                # the length collided and the second write hit a file that
+                # already existed.
+                name = "wf%s%d.txt" % (role[:3], DESTS.index(dest))
+                path = SCRATCH + "/" + name
+                sentence = "Write the %s '%s' %s %s." % (role, want, dest, path)
+                result = _solve(sentence)
+                self.assertTrue(_verified(result),
+                                "%r was not verified: %r / %r"
+                                % (sentence, result.get("status"),
+                                   (result.get("raw_goal_acceptance") or {}).get("reason")))
+                written = ROOT / path
+                self.assertTrue(written.exists(), "%r wrote nothing" % sentence)
+                self.assertEqual(written.read_text(encoding="utf-8"), want,
+                                 "%r wrote the wrong bytes: %r"
+                                 % (sentence, written.read_text(encoding="utf-8")))
+
     def test_the_two_commands_that_answer_with_a_status_are_both_reachable(self):
         """Both members of _ANSWER_IS_THE_EXIT_STATUS must be reachable from prose.
 
