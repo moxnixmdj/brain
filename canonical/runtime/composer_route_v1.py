@@ -487,9 +487,48 @@ def extract_paths(text: str) -> list[str]:
     # Not de-duplicated, exactly as before: "Compare the file A and A byte by
     # byte" states two operands that happen to be the same path, and a set here
     # measured that sentence as one operand and refused it for want of arity.
-    for match in _EXT.finditer(body):
+    matches = list(_EXT.finditer(body))
+    base = len(found)
+    for match in matches:
         found.append(match.group(0))
     seen.update(found)
+    # A name with spaces that no word introduces -- "sort <dir>/my notes.txt".
+    # Taking any run of words would invent paths out of prose, so the candidate
+    # has to be a name in a directory that EXISTS: a fact about the world, not a
+    # guess about the sentence.  It replaces its own tail WHERE THAT TAIL SITS,
+    # because order is meaning -- `cp` takes the first path as its source and the
+    # last as its destination, and appending the longer name at the end measured
+    # "copy A to <dir>/my backup.txt" as a copy running backwards.
+    root = pathlib.Path(__file__).resolve().parents[2]
+    for offset, match in enumerate(matches):
+        best = None
+        left = match.start()
+        for _ in range(4):
+            i = left - 1
+            while i >= 0 and body[i] == " ":
+                i -= 1
+            j = i
+            while j >= 0 and body[j] not in " \t,;:'\"()":
+                j -= 1
+            if j >= i:
+                break
+            extended = body[j + 1:match.end()]
+            head = extended.split(" ", 1)[0].lower()
+            left = j + 1
+            if head in _LEAD_STOPWORDS or " " not in extended:
+                continue
+            # The sentence has to say which directory to look in.  Without a
+            # separator the parent of the candidate is the repository root,
+            # which always exists, and the rule measured "Search the file
+            # a1.txt" as a file called "Search the file a1.txt" -- the very
+            # invention the disk check was here to prevent.
+            if "/" not in extended:
+                continue
+            if ((root / extended).parent).is_dir():
+                best = extended
+        if best:
+            found[base + offset] = best
+            seen.add(best)
     for m in _DIRPATH.finditer(body):
         token = m.group(0)
         if token in seen:
@@ -498,7 +537,10 @@ def extract_paths(text: str) -> list[str]:
         # would move paths[-1] -- which is what PATH_OUTPUT binds -- off the file
         # the sentence named and onto the directory holding it, so a command
         # would be told its output is a folder it was never asked to produce.
-        if any(f == token or f.startswith(token + "/") for f in found):
+        if any(f == token or f.startswith(token + "/") or f.startswith(token + " ")
+               for f in found):
+            # The last arm is a name with spaces: "canonical/x/my" is the head of
+            # "canonical/x/my backup.txt", not a directory holding it.
             continue
         _add(token)
     return found
