@@ -116,13 +116,24 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
         ("Find the lines in the file {f} matching 'apple'", ["grep", "apple", "{f}"]),
     )
 
-    # Deliberately NOT bound, each measured rather than assumed.  Binding one of
-    # these would run a command and then report failure over work that
-    # succeeded, which is the shape PR #6126 closed.
+    # Deliberately NOT bound, each measured rather than assumed.
+    #
+    # `diff` USED to be on this list, and the version of this test that kept it
+    # there was right at the time: diff reports "they differ" as exit status 1
+    # and the adapter raised on any non-zero exit, so binding it ran a command
+    # and then reported failure over work that succeeded.  What changed is that
+    # the adapter no longer makes that judgement -- the caller declares the codes
+    # that are answers, and the verifier re-runs the command and compares the
+    # code.  So diff moved from this list to a positive test below, which is a
+    # harder claim than the refusal was.
+    #
+    # `stat` stays: it prints access and modify times, so running it twice cannot
+    # give the same bytes and the re-inspection that makes a reader trustworthy
+    # is unavailable.  `cmp` stays out of prose for a different reason -- reaching
+    # it would need bare task verbs on the command runner's keywords, which is
+    # the move that measurably broke the model's own verifier.
     NO_TRUTHFUL_CHECK = (
         "Show the status of the file {f}",      # stat: timestamps never repeat
-        "Diff the file {f} against {g}",        # diff: answers via exit status 1
-        "Compare the bytes of {f} and {g}",     # cmp: the same mechanism
     )
 
     SUBS = (("{f}", "%s/a1.txt" % SCRATCH), ("{g}", "%s/b2.txt" % SCRATCH),
@@ -173,6 +184,40 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
         self.assertIsNone(_argv("Find the lines in %s/a1.txt matching 'a' or 'b'"
                                 % SCRATCH),
                           "guessed between two stated patterns")
+
+    def test_a_comparison_answers_with_the_code_the_world_agrees_with(self):
+        """The hardest row in the file: the exit status is cross-checked, not trusted.
+
+        `diff` reports its answer as an exit status, so the tempting check is
+        ``returncode == 0`` -- which is the producer grading its own work, the
+        exact shape PR #6118 showed to be worthless.  What actually happens is
+        that the verifier re-runs the command and compares stdout, stderr AND the
+        code, so a code the command did not really return is caught.
+
+        Both directions are pinned, because a check that only ever saw identical
+        files would pass on a machine that always reported 0, and a check that
+        only ever saw differing ones would pass on a machine that always
+        reported 1.
+        """
+        f = _fresh()
+        same = "%s/same.txt" % SCRATCH
+        other = "%s/other.txt" % SCRATCH
+        (ROOT / same).write_text(UNSORTED, encoding="utf-8")
+        (ROOT / other).write_text("cherry\nplum\n", encoding="utf-8")
+
+        for target, expected_code in ((same, 0), (other, 1)):
+            result = _solve("Diff the file %s against %s" % (f, target))
+            self.assertTrue(_verified(result),
+                            "a comparison against %s was not verified: %r"
+                            % (target, result.get("status")))
+            steps = (result.get("composer_execution") or {}).get("steps") or []
+            self.assertTrue(steps, "no step ran")
+            self.assertEqual(
+                (steps[0].get("result") or {}).get("returncode"), expected_code,
+                "diff against %s reported the wrong answer -- identical files "
+                "must be 0 and differing files 1" % target)
+            # Neither file is an operand the comparison may alter.
+            self.assertEqual((ROOT / f).read_text(encoding="utf-8"), UNSORTED)
 
     def test_a_command_missing_an_operand_is_refused_not_completed(self):
         """The arity rule. cp with one path must not invent a destination."""

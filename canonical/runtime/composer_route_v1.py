@@ -72,6 +72,13 @@ def score(goal_words: set[str], token: str,
     return hit / (len(tw) ** 0.5)
 
 
+# Keys the composer adds to a capability's arguments to tell the ADAPTER how to
+# report a fact.  They are not declared inputs -- the capability never asks for
+# them -- so they must not be counted when deciding whether a contract is full.
+_ADAPTER_DIRECTIVES = frozenset({"output_may_be_consumed",
+                                 "exit_status_is_the_answer"})
+
+
 def _fully_bound_contract_tokens(goal: str, g: Mapping[str, Any],
                                  reg: Mapping[str, Any]) -> frozenset[str]:
     """Tokens provided by a capability every declared input of which the goal fills.
@@ -114,9 +121,17 @@ def _fully_bound_contract_tokens(goal: str, g: Mapping[str, Any],
             args = bind(sig, goal)
         except Exception:  # noqa: BLE001 - binding is best effort here
             continue
-        if not args or set(args) != set(sig):
+        if not args or (set(args) - _ADAPTER_DIRECTIVES) != set(sig):
             # Every declared input, or none.  A half-filled contract is not
             # evidence that this is the capability the sentence meant.
+            #
+            # The adapter directives are excluded from the comparison because
+            # they are not declared inputs at all: they are instructions the
+            # composer gives the adapter about how to REPORT a fact, added after
+            # the contract is filled.  Counting them as unbound inputs made every
+            # consuming or answer-reporting command look half-filled -- measured,
+            # "Diff the file a against b" lost the tie to json.file.available on
+            # the word "file" and the request reached a JSON writer.
             continue
         for tok in (node.get("provides") or []):
             filled.add(str(tok))
@@ -531,17 +546,27 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     (r"\b(?:list|show)\b[^\n]{0,40}?\bdirectory\b", "ls", _no_flags, 1),
     (r"\b(?:real|absolute|full) path\b", "realpath", _no_flags, 1),
     (r"\b(?:octal|byte) dump\b", "od", _no_flags, 1),
-    # `stat`, `diff` and `cmp` are deliberately ABSENT, and each was measured
+    # Two operands, both stated.  `cmp` is kept distinct from `diff` because it
+    # answers a different question -- equal or not, rather than how they differ.
+    # Both report their answer as an exit status, which the adapter is now told
+    # about by _declare_an_exit_status_answer and the verifier re-derives by
+    # re-running the command and comparing the code.
+    # One comparison command, not two.  `cmp` stays in
+    # _ANSWER_IS_THE_EXIT_STATUS so a sentence that STATES it as a command line
+    # is served and judged, but it is not reachable from prose on purpose:
+    # reaching it would need "compare" and "bytes" on the command runner's own
+    # keywords, and adding a bare task verb there is the move that measurably
+    # took the unified model's verifier from 33/33 to 32/33 on the word "count".
+    # `diff` answers the same question with strictly more information, and it is
+    # reachable, so "compare the bytes of a and b" is served by diff.
+    (r"\bdiff\b|\bcompare\b", "diff", _no_flags, 2),
+    # `stat` is deliberately ABSENT, and it was measured
     # rather than assumed:
     #
     #   stat  -> COMMAND_OUTPUT_NOT_REPRODUCED.  It prints access and modify
     #            times, so running it twice cannot give the same bytes and the
     #            re-inspection that makes a read-only command trustworthy is
     #            unavailable.  The verifier's refusal is the truthful answer.
-    #   diff  -> a step that RAISED.  diff reports "they differ" as exit status
-    #            1, and the adapter raises on a non-zero exit, so the one answer
-    #            anyone usually wants from diff arrives as a failure.
-    #   cmp   -> the same mechanism as diff.
     #
     # Binding them would produce a command that runs and then reports failure
     # over work that succeeded -- the exact shape PR #6126 closed.  A request
@@ -717,6 +742,7 @@ def bind(signature: Mapping[str, str], goal: str,
             if argv:
                 args[slot] = argv
                 _declare_a_consumed_output(args, argv)
+                _declare_an_exit_status_answer(args, argv)
         elif t == "NUMBER":
             n = extract_number(goal)
             if n is not None:
@@ -762,6 +788,29 @@ def _declare_a_consumed_output(args: dict[str, Any], argv: Sequence[str]) -> Non
         consumes = False
     if consumes:
         args["output_may_be_consumed"] = "true"
+
+
+def _declare_an_exit_status_answer(args: dict[str, Any], argv: Sequence[str]) -> None:
+    """Tell the adapter when the command's exit status IS its answer.
+
+    Written on the shape of ``_declare_a_consumed_output`` directly above, and
+    for the same reason: the adapter is the producer and must not decide whether
+    a fact is a failure.  The knowledge is read from the acceptance layer's own
+    table rather than written here, so a program is only ever declared an
+    answer-reporter when a verifier exists to judge the answer -- and the codes
+    are enumerated there, so `diff` exiting 2 for "trouble" still fails.
+    """
+    if not argv:
+        return
+    program = str(argv[0]).rsplit("/", 1)[-1]
+    try:
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
+        codes = _accept._ANSWER_IS_THE_EXIT_STATUS.get(program)
+    except Exception:  # noqa: BLE001 - no table, no declaration
+        codes = None
+    if codes:
+        args["exit_status_is_the_answer"] = ",".join(
+            str(code) for code in sorted(codes))
 
 
 # --------------------------------------------------------------------------- #
