@@ -630,22 +630,22 @@ _PROSE_COMMAND_WITH_VALUE: tuple[tuple[str, str], ...] = (
     # with `fgrep`, which program answers is decided by what the sentence says
     # about the text, never by inspecting the caller's own value.
     #
-    # The word "expression" is deliberately NOT a trigger, and that was measured
-    # rather than assumed.  A sentence containing it ranks a NUMERIC EXPRESSION
-    # capability first, which then tries to evaluate the caller's own search
-    # text as an arithmetic expression and dies:
+    # "regular expression" WAS excluded from this trigger, on a measurement: a
+    # sentence containing the word "expression" ranked math.numeric_expression.sympy
+    # first on that single generic token scoring 11, the calculator then treated
+    # the caller's own search text as arithmetic and died at execution with
+    # NUMERIC_EXPRESSION_VARIABLE_UNBOUND:plum -- so the phrasing could never
+    # reach the command it states.
     #
-    #   "…for the regular expression 'plum|grape'"  -> NUMERIC_EXPRESSION_AST_NODE_REJECTED:BinOp
-    #   "…for the regular expression 'plum'"        -> NUMERIC_EXPRESSION_VARIABLE_UNBOUND:plum
-    #
-    # Both arrived as FAIL__LIVE_CONTROLLER_EXECUTION, never reaching the
-    # command.  "regex", "extended pattern" and "extended search" bind and
-    # verify exactly.  A phrasing that measurably cannot reach the command it
-    # states is not a route; it is left to `grep`, which fails truthfully rather
-    # than pretending.  The hijack itself is a separate, named gap: the binder
-    # ranks a capability whose expression slot is unbound above a command line
-    # that is fully bound.
-    (r"\bregex\b|\bextended (?:pattern|regex|search)\b"
+    # The cause was not the trigger and never was: admission granted a capability
+    # whose own declared precondition (`typed.scalar.inputs.available`, supplied
+    # by nothing in the registry) the sentence could not meet, because its
+    # `variables` slot was silently defaulted to `{}` instead of refused.  That
+    # is now refused at admission, on the capability's own contract, and the
+    # existing composition fallthrough serves the command.  So the phrasing is a
+    # route again -- but it is pinned by a test that fails if the guard is ever
+    # removed, because without the guard this row measurably cannot work.
+    (r"\bregex\b|\bregular expression\b|\bextended (?:pattern|regex|search)\b"
      r"|\bpattern\b[^\n]{0,30}?\b(?:match|search)\b", "egrep"),
     (r"\b(?:grep|search|find)\b", "grep"),
 )

@@ -33,6 +33,7 @@ dispatched entry is independently admitted - this module proposes and types, it 
 """
 from __future__ import annotations
 
+import ast
 import json
 import pathlib
 import re
@@ -456,6 +457,56 @@ def _is_executable(entry: Mapping[str, Any]) -> bool:
     return str(entry.get("adapter_module") or "").lower() == "runtime_native_action"
 
 
+# A capability may declare that it needs an effect no other capability provides.
+# That is not by itself a defect: 39 entries in the live registry require an
+# effect nothing provides (`image.file.available`, `manifest.json.available`,
+# ...) and every one of them is supplied by the GOAL, which states a path.  So
+# refusing a capability merely for having an unsatisfied `requires` was measured
+# first and rejected -- it would have broken all 39.
+#
+# `typed.scalar.inputs.available` is different, and only one entry declares it.
+# Nothing can supply it but the goal declaring variables, and the binder
+# silently defaults `variables` to `{}` rather than refusing.  Measured:
+# "Search the file a.txt for the regular expression 'plum'" bound
+# output_path=a.txt, expression='plum', variables={} and was ADMITTED, so a
+# calculator ran on a caller's search text and died at execution with
+# NUMERIC_EXPRESSION_VARIABLE_UNBOUND:plum -- outranking the command runner that
+# the same sentence fully and correctly bound, on the strength of the single
+# generic word "expression" scoring 11.
+#
+# The rule applied here is not new policy: it is the capability's own contract,
+# already enforced by its adapter, which raises NUMERIC_EXPRESSION_VARIABLE_UNBOUND
+# for exactly this.  The only change is WHEN it is applied.  At execution it is a
+# crash that has already displaced a correct route; at admission it is a refusal,
+# and the existing composition fallthrough serves the command the sentence stated.
+_TYPED_SCALAR_PRECONDITION = "typed.scalar.inputs.available"
+
+
+def _undeclared_expression_names(expression: Any, variables: Any) -> list[str] | None:
+    """Names in a bound expression that no declared variable supplies.
+
+    Returns None when the text is not an expression at all -- whether a string is
+    arithmetic is the adapter's finding to make, not this layer's, and guessing
+    here would put a second parser in front of the one that owns the contract.
+    """
+    try:
+        tree = ast.parse(str(expression or ""), mode="eval")
+    except (SyntaxError, ValueError):
+        return None
+    declared: set[str] = set()
+    if isinstance(variables, Mapping):
+        declared = {str(key) for key in variables}
+    elif isinstance(variables, str) and variables.strip():
+        try:
+            loaded = json.loads(variables)
+        except Exception:  # noqa: BLE001 - unparsable is the adapter's finding
+            loaded = None
+        if isinstance(loaded, Mapping):
+            declared = {str(key) for key in loaded}
+    return sorted({node.id for node in ast.walk(tree)
+                   if isinstance(node, ast.Name)} - declared)
+
+
 def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
           declaration: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Typed admission for one proposal: bind the sentence against the declared contract, or refuse.
@@ -509,6 +560,19 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
         return {"capability_id": cid, "admitted": False,
                 "reason": "DECLARED_INPUTS_UNBOUND:" + ",".join(sorted(missing)),
                 "required_inputs": required}
+    # Refuse BEFORE execution, on the capability's own declared precondition.
+    # The reason carries the BINDING_REFUSED: prefix deliberately: that is the
+    # signal the route layer already listens for, and it is what lets the
+    # composition fallthrough serve the command the sentence actually stated
+    # instead of reporting a calculator's crash.
+    if _TYPED_SCALAR_PRECONDITION in [str(x) for x in (entry.get("requires") or [])]:
+        undeclared = _undeclared_expression_names(
+            inputs.get("expression"), inputs.get("variables"))
+        if undeclared:
+            return {"capability_id": cid, "admitted": False,
+                    "reason": "BINDING_REFUSED:TYPED_SCALAR_INPUTS_UNDECLARED:"
+                              + ",".join(undeclared)[:120],
+                    "required_inputs": required}
     return {"capability_id": cid, "admitted": True, "inputs": inputs,
             "required_inputs": required, "specific": is_specific(required)}
 

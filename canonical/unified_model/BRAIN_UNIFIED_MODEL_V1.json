@@ -24619,7 +24619,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6375,
+  "research_index_records": 6376,
   "routing_tokens": 1816,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24628,7 +24628,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "9e9886e0ec20d3a530ddf2b3b08ba5378a2d7e1bad55e3fb310ae718bed6e9e9"
+  "value": "6302d95bca64ae4e1aefe7ba876bd68fa660573a42f5c2ec7b7030f13519598b"
  },
  "engines": [
   {
@@ -188037,6 +188037,51 @@
    }
   },
   {
+   "action_id": "A_CAPABILITY_WHOSE_OWN_PRECONDITION_THE_SENTENCE_CANNOT_MEET_IS_REFUSED_AT_ADMISSION_NOT_CRASHED_AT_EXECUTION_V1_20261025_V1",
+   "capability": false,
+   "date": "2026-10-25",
+   "id": "research:canonical/action_intents/A_CAPABILITY_WHOSE_OWN_PRECONDITION_THE_SENTENCE_CANNOT_MEET_IS_REFUSED_AT_ADMISSION_NOT_CRASHED_AT_EXECUTION_V1_20261025_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_CAPABILITY_WHOSE_OWN_PRECONDITION_THE_SENTENCE_CANNOT_MEET_IS_REFUSED_AT_ADMISSION_NOT_CRASHED_AT_EXECUTION_V1_20261025_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "72b8aa22e5cf159c4c820ea2e01e1256a8583dafc226448a0b263d65caa8efc6",
+   "status": "",
+   "terms": {
+    "20261025": 1,
+    "a_capability_whose_own_precondition_the_sentence_cannot_meet_is_refused_at_admission_not_crashed_at_execution_v1_20261025_v1": 1,
+    "a_command_that_cannot_be_re_run_is_checked_by_what_it_left_v1_20261024_v1": 1,
+    "adapter": 1,
+    "admission": 3,
+    "after": 1,
+    "against": 1,
+    "all": 1,
+    "already": 2,
+    "announced": 1,
+    "anywhere": 1,
+    "arrives": 1,
+    "capability": 4,
+    "contract": 3,
+    "declared": 2,
+    "entry": 2,
+    "execution": 2,
+    "measured": 2,
+    "never": 2,
+    "new": 2,
+    "no": 3,
+    "not": 2,
+    "one": 2,
+    "own": 4,
+    "precondition": 4,
+    "rather": 2,
+    "route": 3,
+    "sentence": 2,
+    "so": 3,
+    "than": 2,
+    "v1": 2,
+    "variables": 2
+   }
+  },
+  {
    "action_id": "A_COMMAND_IS_VERIFIED_BY_RUNNING_IT_AGAIN_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -205817,9 +205862,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/capability_selection_retrieval_v1.py",
-   "sha256": "fcdf4447915f18f44cb39660b366af4e25875d0d2279bc0c884b4a6594d213eb",
+   "sha256": "d60df71864fdf345690d90f53c779af87ae105e1a5cc2151f1dc330965dc3d50",
    "summary": "One sentence selects one capability: retrieval PROPOSES, typed admission DISPOSES.",
-   "symbol_count": 21,
+   "symbol_count": 22,
    "symbols": [
     "_arg_names",
     "_expectation_compatible",
@@ -205827,6 +205872,7 @@
     "_name_words",
     "_request_words",
     "_stem_of",
+    "_undeclared_expression_names",
     "_version_sequence",
     "admit",
     "contract_of",
@@ -205874,6 +205920,7 @@
     "shortlist": 1,
     "stem_of": 1,
     "typed": 1,
+    "undeclared_expression_names": 1,
     "v1": 1,
     "version_sequence": 1
    }
@@ -207977,7 +208024,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "0239865a52757f1c2a895b390f3af3e8566dfee73ffc33c03f419310b9e87f7f",
+   "sha256": "a6d518ac24584291b2d97e87723118fc73df7a498a67cc76e3ad989f9794b2b0",
    "summary": "Routing a sentence to a typed capability chain.",
    "symbol_count": 23,
    "symbols": [

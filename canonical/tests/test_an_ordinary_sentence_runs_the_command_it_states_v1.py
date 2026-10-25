@@ -208,26 +208,121 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
             self.assertEqual(argv, ["diff", a, b],
                              "%r lost its route to cmp: %r" % (sentence, argv))
 
-    def test_a_pattern_search_is_reached_by_the_words_that_work_and_not_the_one_that_does_not(self):
-        """A phrasing that measurably cannot reach its command is not a route.
+    def test_a_capability_whose_own_precondition_the_sentence_cannot_meet_is_refused_not_run(self):
+        """The guard that makes "regular expression" a route again.
 
-        The word "expression" ranks a NUMERIC EXPRESSION capability first, which
-        then evaluates the caller's own search text as arithmetic and dies with
-        NUMERIC_EXPRESSION_VARIABLE_UNBOUND before any command runs.  Measured,
-        not assumed.  The three phrasings that do reach egrep are asserted
-        positively; the fourth is pinned as NOT binding egrep, so this test must
-        be rewritten -- never merely deleted -- by whoever fixes the hijack.
+        Measured before this existed: the single generic word "expression"
+        scored 11 and ranked math.numeric_expression.sympy first, its `variables`
+        slot was silently defaulted to `{}`, admission GRANTED it, and the
+        calculator then evaluated the caller's own search text as arithmetic --
+        NUMERIC_EXPRESSION_VARIABLE_UNBOUND:plum -- displacing the command runner
+        that the same sentence had fully and correctly bound.
+
+        The rule applied is not new policy.  It is the capability's own contract,
+        which its adapter already enforces by raising that very error; the only
+        change is WHEN.  At execution it is a crash that has already displaced a
+        correct route.  At admission it is a refusal, and the existing
+        composition fallthrough serves the command the sentence stated.
         """
-        for phrase in ("the regex", "the extended pattern", "an extended search for"):
-            argv = _argv("Search the file %s %s 'a|b'" % (SCRATCH + "/a1.txt", phrase))
-            self.assertEqual((argv or [None])[0], "egrep",
-                             "%r no longer reaches egrep: %r" % (phrase, argv))
-        hijacked = _argv("Search the file %s for the regular expression 'a|b'"
-                         % (SCRATCH + "/a1.txt"))
-        self.assertNotEqual((hijacked or [None])[0], "egrep",
-                            "the word 'expression' was made a trigger again, and it "
-                            "provably routes to a numeric expression evaluator: %r"
-                            % hijacked)
+        from canonical.runtime import capability_selection_retrieval_v1 as _sel
+        from canonical.runtime import live_integrated_brain_v1 as _L
+        entry = _L.load_verified_registry()["math.numeric_expression.sympy"]
+        verdict = _sel.admit("Search the file %s for the regular expression 'plum'"
+                             % (SCRATCH + "/a1.txt"),
+                             "math.numeric_expression.sympy", entry, ROOT)
+        self.assertIs(verdict.get("admitted"), False,
+                      "a calculator was admitted for a sentence that states no "
+                      "variables: %r" % verdict)
+        self.assertTrue(str(verdict.get("reason") or "").startswith(
+                            "BINDING_REFUSED:TYPED_SCALAR_INPUTS_UNDECLARED:"),
+                        "the refusal must carry the prefix the route layer "
+                        "listens for, or the fallthrough cannot serve the "
+                        "command: %r" % verdict.get("reason"))
+        self.assertIn("plum", str(verdict.get("reason")),
+                      "the refusal must name the undeclared input it found: %r"
+                      % verdict.get("reason"))
+
+    def test_a_real_arithmetic_request_is_still_admitted(self):
+        """The guard must not disable the capability it constrains.
+
+        A refusal that fires on everything is not a guard, it is a deletion.  An
+        expression of literals declares no names, so it needs no variables and
+        must still be admitted -- and so must one whose names ARE declared.
+        """
+        from canonical.runtime import capability_selection_retrieval_v1 as _sel
+        from canonical.runtime import live_integrated_brain_v1 as _L
+        entry = _L.load_verified_registry()["math.numeric_expression.sympy"]
+        cid = "math.numeric_expression.sympy"
+        out = SCRATCH + "/out.json"
+        granted = _sel.admit("Evaluate the numeric expression '2 + 3' and write "
+                             "the result to %s" % out, cid, entry, ROOT)
+        self.assertIs(granted.get("admitted"), True,
+                      "the guard disabled literal arithmetic: %r" % granted)
+        self.assertEqual(_sel._undeclared_expression_names("2 + 3", "{}"), [],
+                         "a literal expression was read as needing variables")
+        self.assertIsNone(_sel._undeclared_expression_names("not an expression ;", "{}"),
+                          "unparsable text must be left to the adapter, not judged here")
+        self.assertEqual(_sel._undeclared_expression_names("plum", "{}"), ["plum"],
+                         "an undeclared name was not detected")
+        self.assertEqual(_sel._undeclared_expression_names("a + b", '{"a": 1, "b": 2}'),
+                         [], "declared variables were reported as missing")
+
+    def test_the_guard_is_scoped_to_the_one_precondition_it_was_written_for(self):
+        """39 entries require an effect nothing provides, and this must not touch them.
+
+        Measured, not assumed: refusing a capability merely for having an
+        unsatisfied `requires` would have broken all 39, because effects like
+        `image.file.available` and `manifest.json.available` are supplied by the
+        GOAL stating a path, not by another capability.  This test is the pin on
+        that blast radius -- widen the guard and it goes red.
+        """
+        from canonical.runtime import capability_selection_retrieval_v1 as _sel
+        import json as _json
+        caps = _json.loads((ROOT / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json")
+                           .read_text(encoding="utf-8"))["capabilities"]
+        items = caps if isinstance(caps, list) else list(caps.items())
+        provided = set()
+        for item in items:
+            e = item[1] if isinstance(item, tuple) else item
+            provided |= {str(x) for x in (e.get("provides") or [])}
+        unsatisfied = []
+        for item in items:
+            e = item[1] if isinstance(item, tuple) else item
+            cid = e.get("capability_id") or (item[0] if isinstance(item, tuple) else "")
+            if [str(x) for x in (e.get("requires") or []) if str(x) not in provided]:
+                unsatisfied.append((cid, [str(x) for x in (e.get("requires") or [])]))
+        self.assertGreater(len(unsatisfied), 30,
+                           "the measured blast radius shrank, so this pin no "
+                           "longer proves anything: %d" % len(unsatisfied))
+        scoped = [cid for cid, reqs in unsatisfied
+                  if _sel._TYPED_SCALAR_PRECONDITION in reqs]
+        self.assertEqual(scoped, ["math.numeric_expression.sympy"],
+                         "the guard's precondition is declared by more than the "
+                         "one entry it was measured against: %r" % scoped)
+
+    def test_the_phrasing_that_once_hijacked_the_binder_now_reaches_its_command(self):
+        """Rewritten, not deleted: this test pinned the limitation as permanent.
+
+        It used to assert that "regular expression" must NOT bind egrep, because
+        the phrasing measurably could not reach the command.  The cause was
+        admission, not the trigger, so the assertion is now the opposite and is
+        checked end to end -- which is the only form that would have caught the
+        hijack, since argv was correct the whole time.
+        """
+        argv = _argv("Search the file %s for the regular expression 'plum|grape'"
+                     % (SCRATCH + "/a1.txt"))
+        self.assertEqual(argv, ["egrep", "plum|grape", "%s/a1.txt" % SCRATCH],
+                         "the phrasing no longer binds egrep: %r" % argv)
+        f = _fresh("banana apple\ncherry plum\nfig grape\n")
+        result = _solve("Search the file %s for the regular expression 'plum|grape'" % f)
+        self.assertTrue(_verified(result),
+                        "the phrasing binds egrep but was not verified -- the "
+                        "hijack is back: %r / %r"
+                        % (result.get("status"), result.get("failure_reason")))
+        steps = (result.get("composer_execution") or {}).get("steps") or []
+        out = str((steps[0].get("result") or {}).get("stdout") or "")
+        self.assertEqual(sorted(out.splitlines()), ["cherry plum", "fig grape"],
+                         "the alternation did not match both lines: %r" % out)
 
     def test_the_two_commands_that_answer_with_a_status_are_both_reachable(self):
         """Both members of _ANSWER_IS_THE_EXIT_STATUS must be reachable from prose.
