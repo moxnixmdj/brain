@@ -1899,6 +1899,104 @@ class TestTheFallthroughIsScopedToWhatTheSentenceStates(unittest.TestCase):
             self.assertEqual("COMMAND_GZIP_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", reason, argv)
 
 
+    def _spaced(self):
+        # The named file, plus a lookalike holding the name a reader that stops
+        # at whitespace would see.  Without the trap, reading "my notes.txt" as
+        # "notes.txt" would silently succeed on the wrong file.
+        _fresh()
+        base = ROOT / SCRATCH
+        (base / "my notes.txt").write_text("apple\nbanana\n", encoding="utf-8")
+        (base / "notes.txt").write_text("WRONG FILE\n", encoding="utf-8")
+        return "%s/my notes.txt" % SCRATCH, "%s/notes.txt" % SCRATCH
+
+    def test_a_filename_with_spaces_is_one_path_not_two(self):
+        # Measured before this change: extract_paths read "my notes.txt" as the
+        # tail `notes.txt` AND the head as a directory, so the sentence named one
+        # file and the machine saw two things it was never told about.
+        from canonical.runtime import composer_route_v1 as _cr
+        named, trap = self._spaced()
+        paths = _cr.extract_paths(
+            "Copy the file %s to the file %s/backup.txt" % (named, SCRATCH))
+        self.assertEqual([named, "%s/backup.txt" % SCRATCH], paths)
+        self.assertNotIn(trap, paths, "the tail of the name was read as a file")
+        self.assertFalse(any(p.endswith("/my") for p in paths),
+                         "the head of the name was read as a directory")
+
+    def test_a_greedy_read_does_not_span_two_destinations(self):
+        # The pin on the lazy quantifier.  A greedy count measured this sentence
+        # as ONE path stretching from the first name across "to the file" to the
+        # second, which is a name no sentence ever stated.
+        from canonical.runtime import composer_route_v1 as _cr
+        named, _trap = self._spaced()
+        paths = _cr.extract_paths(
+            "Copy the file %s to the file %s/backup.txt" % (named, SCRATCH))
+        self.assertEqual(2, len(paths), paths)
+
+    def test_a_write_to_a_filename_with_spaces_does_not_invent_a_destination(self):
+        # The whole reason this test exists.  Measured before this change: the
+        # sentence named "my notes.txt", the machine took the last path it had
+        # invented -- a file called `my` -- wrote there, left both real files
+        # untouched, and reported
+        # PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED.
+        named, trap = self._spaced()
+        self.assertTrue(_verified(_solve("Write the text 'hello' to the file %s" % named)))
+        self.assertEqual("hello", (ROOT / named).read_text(encoding="utf-8"))
+        self.assertEqual("WRONG FILE\n", (ROOT / trap).read_text(encoding="utf-8"))
+        self.assertFalse((ROOT / SCRATCH / "my").exists(),
+                         "a destination was invented out of the first word of a filename")
+
+    def test_a_copy_names_the_file_the_sentence_named_not_its_tail(self):
+        named, trap = self._spaced()
+        dest = "%s/backup.txt" % SCRATCH
+        self.assertTrue(_verified(_solve(
+            "Copy the file %s to the file %s" % (named, dest))))
+        self.assertEqual("apple\nbanana\n", (ROOT / dest).read_text(encoding="utf-8"),
+                         "the copy came from the lookalike file, not the named one")
+        self.assertTrue((ROOT / trap).exists())
+
+    def test_a_deletion_of_a_filename_with_spaces_leaves_the_lookalike_alone(self):
+        named, trap = self._spaced()
+        self.assertTrue(_verified(_solve("Delete the file %s" % named)))
+        self.assertFalse((ROOT / named).exists())
+        self.assertTrue((ROOT / trap).exists(),
+                         "a file the sentence never named was deleted")
+
+    def test_a_command_over_a_filename_with_spaces_reads_that_file(self):
+        named, _trap = self._spaced()
+        self.assertTrue(_verified(_solve("Convert the file %s to upper case" % named)))
+        self.assertEqual("APPLE\nBANANA\n", (ROOT / named).read_text(encoding="utf-8"))
+
+    def test_a_quoted_filename_is_an_operand_and_not_a_payload(self):
+        # Quoting a name is the ordinary way to say it holds a space.  The value
+        # is the only operand the sentence named, so masking it -- correct for a
+        # quoted PATTERN -- leaves the command with nothing to run on.
+        named, _trap = self._spaced()
+        result = _solve("Count the lines in the file '%s'" % named)
+        self.assertTrue(_verified(result))
+
+    def test_a_quoted_pattern_is_still_not_a_path(self):
+        # The pin on the other half of the distinction: a quoted value the
+        # sentence introduced as a pattern must not become the destination.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh("apple\n")
+        goal = "Search the file %s for the exact text 'notes.md'" % a
+        argv = _cr._prose_argv(goal)
+        self.assertIsNotNone(argv, goal)
+        self.assertEqual(a, argv[-1], "the search pattern became the operand")
+
+    def test_a_preposition_after_the_introducer_is_not_part_of_a_name(self):
+        # "which files in the directory D" must keep yielding D.  Without the
+        # stopword guard the phrase "in the directory D" was read as one name.
+        from canonical.runtime import composer_route_v1 as _cr
+        _fresh()
+        d = "%s/dq" % SCRATCH
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "one.txt").write_text("apple\n", encoding="utf-8")
+        goal = "Show which files in the directory %s contain 'apple'" % d
+        self.assertEqual([d], _cr.extract_paths(goal))
+        self.assertTrue(_verified(_solve(goal)))
+
+
 
 if __name__ == "__main__":
     unittest.main()

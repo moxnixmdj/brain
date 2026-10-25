@@ -24619,7 +24619,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6388,
+  "research_index_records": 6389,
   "routing_tokens": 1816,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24628,7 +24628,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "46e17e23165a7807a0ffae8256398a3c90d4d9a56ba76a8b35d65997c7825a12"
+  "value": "70f7fb1c4c878492ddfef5d836669bda2d9029ea7a11b82b2d364df05cfa8310"
  },
  "engines": [
   {
@@ -188746,6 +188746,51 @@
    }
   },
   {
+   "action_id": "A_FILENAME_WITH_SPACES_IS_ONE_NAME_AND_NOT_A_FRAGMENT_THE_SENTENCE_NEVER_SAID_V1_20261025_V1",
+   "capability": false,
+   "date": "2026-10-25",
+   "id": "research:canonical/action_intents/A_FILENAME_WITH_SPACES_IS_ONE_NAME_AND_NOT_A_FRAGMENT_THE_SENTENCE_NEVER_SAID_V1_20261025_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_FILENAME_WITH_SPACES_IS_ONE_NAME_AND_NOT_A_FRAGMENT_THE_SENTENCE_NEVER_SAID_V1_20261025_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "938768472b394164da3efac83599c44de649fe7d14813b427ef74a22ecf4ca22",
+   "status": "",
+   "terms": {
+    "20261025": 1,
+    "a_filename_with_spaces_is_one_name_and_not_a_fragment_the_sentence_never_said_v1_20261025_v1": 1,
+    "a_name_with_spaces_is_read_from_the_words_that_introduce_it_and_a_quoted_value_is_masked_whole": 1,
+    "all": 1,
+    "both": 1,
+    "called": 1,
+    "canonical": 1,
+    "conversions": 1,
+    "copies": 1,
+    "corpus": 1,
+    "counts": 1,
+    "created": 1,
+    "deletions": 1,
+    "directory": 1,
+    "every": 1,
+    "file": 4,
+    "filename": 1,
+    "filenames-with-spaces": 1,
+    "files": 1,
+    "finds": 1,
+    "fragment": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "my": 4,
+    "name": 4,
+    "named": 2,
+    "never": 2,
+    "notes.txt": 3,
+    "one": 2,
+    "ordinary": 2,
+    "sentence": 4,
+    "spaces": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_GOAL_INPUT_GETS_THE_GOAL_NOT_THE_INVOCATION_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -208568,9 +208613,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "f5d986dedb3338c189e13d7fbfbf7d466ec9c94c9fcec714ad974738e6a8ca10",
+   "sha256": "a8d470fa4d5abddee9e3dd80d0ea4f7b9c056aeacbcd6625a4f7635fb4292917",
    "summary": "Routing a sentence to a typed capability chain.",
-   "symbol_count": 28,
+   "symbol_count": 29,
    "symbols": [
     "_contradicts_the_stated_payload",
     "_cut_flags",
@@ -208579,6 +208624,7 @@
     "_declare_an_exit_status_answer",
     "_fully_bound_contract_tokens",
     "_head_flags",
+    "_mask_a_quoted_value",
     "_no_flags",
     "_prose_argv",
     "_prose_count",
@@ -208594,11 +208640,9 @@
     "extract_content",
     "extract_content_destination",
     "extract_number",
-    "extract_paths",
-    "keeps_existing_content"
+    "extract_paths"
    ],
    "terms": {
-    "bind": 1,
     "candidate_tokens": 1,
     "capability": 1,
     "chain": 1,
@@ -208613,6 +208657,7 @@
     "fully_bound_contract_tokens": 1,
     "head_flags": 1,
     "keeps_existing_content": 1,
+    "mask_a_quoted_value": 1,
     "no_flags": 1,
     "prose_argv": 1,
     "prose_count": 1,
