@@ -825,9 +825,29 @@ _READ_ONLY_COMMANDS = frozenset({
     "cat", "head", "tail", "wc", "nl", "sort", "grep", "egrep", "fgrep", "ls",
     "uniq", "tr", "cut", "sha256sum", "md5sum", "stat", "file", "diff", "cmp",
     "od", "tac", "basename", "dirname", "realpath",
+    # `sed` WITHOUT -i reads a file and writes nothing: the transformed text
+    # comes back on stdout.  That makes it a reader as far as this table is
+    # concerned, and the inspector re-runs it and compares stdout, stderr and
+    # the return code exactly as it does for cat.  Whether the result is then
+    # put somewhere is the caller's declaration, not the program's behaviour.
+    "sed",
 })
+# Programs whose whole purpose is to hand back a rewritten copy of the file they
+# read.  Only these may write over their own operand, and only because the
+# adapter captures stdout in full BEFORE it writes, so there is no read-after-
+# truncate race.  For any other program the bound output being an operand means
+# the command is about to remove or replace it -- `rm A` -- and writing stdout
+# there would resurrect the file.
+_IN_PLACE_TRANSFORMS = frozenset({"sed"})
 # A reader with an output flag is not a reader.  "sort -o FILE" writes FILE.
 _SIDE_EFFECTING_FLAGS = ("-o", "--output")
+# Flags that make ONE program write, and only that program.  `-i` is sed's
+# in-place flag; for grep the same two characters mean ignore-case, so `-i`
+# cannot join the shared tuple above without refusing a perfectly read-only
+# search.  `sed` is in _READ_ONLY_COMMANDS because `sed -e s|a|b| FILE` reads a
+# file and writes nothing -- but `sed -i` rewrites it in place, and re-running
+# that is a second side effect, not a check.
+_SIDE_EFFECTING_FLAGS_BY_PROGRAM = {"sed": ("-i", "--in-place")}
 
 
 # --- postconditions for commands that change something ---------------------
@@ -1090,6 +1110,8 @@ def _inspect_shell_command_run(args: Mapping, result: Mapping, root: Path) -> tu
     program = tokens[0].rsplit("/", 1)[-1]
     takes_output_flag = any(
         tok in _SIDE_EFFECTING_FLAGS or tok.startswith("--output=")
+        for tok in tokens[1:]) or any(
+        tok in _SIDE_EFFECTING_FLAGS_BY_PROGRAM.get(program, ())
         for tok in tokens[1:])
     # An interpreter is not read-only in general, and it is not being treated as
     # one here.  What is allowed is the one shape the receipt-backed rows all

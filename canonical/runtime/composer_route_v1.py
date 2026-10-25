@@ -920,6 +920,47 @@ def _states_a_destination_for_the_result(sentence: str, dest: Any) -> bool:
     return bool(_RESULT_DESTINATION.search(text[:where]))
 
 
+# A substitution states TWO quoted values, and `_quoted_value` refuses on two by
+# design -- it cannot know which one the sentence meant.  Here the order is the
+# meaning, and only for phrasings whose word order fixes it.  "Substitute 'pear'
+# for 'apple'" is deliberately absent: it puts the NEW value first, and guessing
+# at a word order would silently rewrite the file the wrong way round.
+_PROSE_COMMAND_WITH_TWO_VALUES: tuple[tuple[str, str], ...] = (
+    (r"\breplace\b[^\n]{0,60}?\bwith\b", "sed"),
+    (r"\bchange\b[^\n]{0,60}?\bto\b", "sed"),
+    (r"\bsubstitut(?:e|ing)\b[^\n]{0,60}?\bwith\b", "sed"),
+)
+# sed treats the left side as a regular expression and `|` is this rule's
+# delimiter, so a value carrying either would make the command mean something
+# the sentence did not say.  Refuse rather than edit the file wrongly.
+# sed treats the left side as a regular expression, and `|` is this rule's
+# delimiter, so a value carrying either -- or a newline, which would end the
+# expression -- would make the command mean something the sentence did not
+# say.  Written with chr() so the set is exactly these five characters and
+# cannot be mangled by an escape sequence on the way into the file.
+_SED_UNSAFE = "|" + chr(92) + "&" + chr(10) + chr(13)
+
+
+def _quoted_values(sentence: str) -> list[str]:
+    """Every value the sentence delimits, in the order it states them."""
+    return [m.group(2) for m in _QUOTED.finditer(str(sentence or ""))]
+
+
+# Filtering lines OUT of a file is `grep -v`.  Two shapes, and neither is a
+# guess about the pattern:
+#   * the sentence quotes the text and says the lines must NOT have it;
+#   * the sentence says the lines are EMPTY, which is one exact pattern.
+# "empty" is not a loose synonym here -- it names `^$` and nothing else, the same
+# way an ordinal names a column number.
+_NEGATED_LINE = re.compile(
+    r"\b(?:do(?:es)?n't|do(?:es)? not|don't|without|excluding|except)\b"
+    r"[^\n]{0,40}?\b(?:contain|containing|match|matching|include|including|have)\b"
+    r"|\bnot\b[^\n]{0,20}?\b(?:contain|match|include)\b")
+_BLANK_LINE = re.compile(r"\b(?:empty|blank)\b[^\n]{0,20}?\blines?\b")
+_FILTER_LINE = re.compile(
+    r"\b(?:remove|delete|drop|strip|write|show|list|print)\b[^\n]{0,40}?\blines?\b")
+
+
 def _prose_argv(sentence: str) -> list[str] | None:
     """The command a sentence asks for in ordinary English, or None.
 
@@ -942,6 +983,41 @@ def _prose_argv(sentence: str) -> list[str] | None:
         if len(paths) != 2:
             return None
         return [program, dest_flag, str(paths[1]), str(paths[0])]
+    if _FILTER_LINE.search(text) and "grep" in known:
+        values = _quoted_values(sentence)
+        blank = bool(_BLANK_LINE.search(text))
+        if blank or (len(values) == 1 and _NEGATED_LINE.search(text)):
+            # `^$` when the sentence said the lines are empty, otherwise the one
+            # value it quoted.  A sentence that quoted nothing and did not say
+            # "empty" states no pattern, and an invented pattern is executed.
+            needle = "^$" if blank else values[0]
+            operand_paths = extract_paths(
+                str(sentence).replace(needle, " ") if not blank else str(sentence))
+            if len(operand_paths) == 2 and _states_a_destination_for_the_result(
+                    sentence, operand_paths[-1]):
+                operand_paths = operand_paths[:1]
+            if len(operand_paths) == 1:
+                return ["grep", "-v", str(needle), str(operand_paths[0])]
+            return None
+    for pattern, program in _PROSE_COMMAND_WITH_TWO_VALUES:
+        if program not in known:
+            continue
+        if not re.search(pattern, text):
+            continue
+        values = _quoted_values(sentence)
+        if len(values) != 2:
+            # A substitution the sentence did not fully state.  Refuse; do not
+            # invent the half it left out.
+            return None
+        before, after = values[0], values[1]
+        if not before or any(ch in before or ch in after for ch in _SED_UNSAFE):
+            return None
+        operand_paths = extract_paths(
+            str(sentence).replace(before, " ").replace(after, " "))
+        if len(operand_paths) != 1:
+            return None
+        return [program, "-e", "s|%s|%s|g" % (before, after),
+                str(operand_paths[0])]
     for pattern, program in _PROSE_COMMAND_WITH_VALUE:
         if program not in known:
             continue
@@ -1144,6 +1220,18 @@ def _declare_a_written_output(args: dict[str, Any], argv: Sequence[str],
         return
     dest = str(named[-1])
     if dest in {str(x) for x in argv[1:]}:
+        # The bound output IS an operand.  For almost every program that means
+        # the command is about to remove or replace the file -- which is what
+        # _declare_a_consumed_output handles -- and writing stdout there would
+        # resurrect it.  A transform is the one exception, and it is safe for a
+        # concrete reason: the adapter captures stdout in full and only then
+        # writes, so the read is already finished.
+        try:
+            transforms = _accept._IN_PLACE_TRANSFORMS
+        except Exception:  # noqa: BLE001 - no table, no permission
+            return
+        if program in transforms:
+            args["write_stdout_to_output"] = "true"
         return
     if _states_a_destination_for_the_result(sentence, dest):
         args["write_stdout_to_output"] = "true"

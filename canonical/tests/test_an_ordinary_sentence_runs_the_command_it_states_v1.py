@@ -1407,6 +1407,86 @@ class TestTheFallthroughIsScopedToWhatTheSentenceStates(unittest.TestCase):
                           "write_stdout_to_output=%r created a file: %r" % (flag, out))
 
 
+    def test_a_sentence_can_ask_for_text_to_be_replaced_in_a_file(self):
+        # The whole edit family measured 0 of 8 before this.  `sed` without -i
+        # reads a file and writes nothing, so it is a reader whose transformed
+        # text comes back on stdout -- and the adapter captures stdout in full
+        # BEFORE it writes, which is the only reason writing back over the same
+        # file is not a read-after-truncate race.
+        a = _fresh("apple\nbanana\napple\n")
+        out = _solve("Replace every 'apple' with 'pear' in the file %s" % a)
+        self.assertTrue(_verified(out), out.get("status"))
+        # read the promise back off the disk, and check the rest survived
+        self.assertEqual("pear\nbanana\npear\n",
+                         (ROOT / a).read_text(encoding="utf-8"))
+
+    def test_a_substitution_whose_word_order_is_reversed_is_refused_not_guessed(self):
+        # "Substitute 'pear' for 'apple'" puts the NEW value first.  Reading the
+        # two quoted values in sentence order would rewrite the file exactly the
+        # wrong way round, and an edit in the wrong direction destroys the text
+        # it was asked to keep.  The phrasing is deliberately absent from the
+        # table, so the request is refused and the file is left alone.
+        a = _fresh("apple\nbanana\n")
+        before = (ROOT / a).read_text(encoding="utf-8")
+        out = _solve("Substitute 'pear' for 'apple' in the file %s" % a)
+        self.assertIsNot(out.get("pass"), True, out.get("status"))
+        self.assertEqual(before, (ROOT / a).read_text(encoding="utf-8"),
+                         "a refused substitution edited the file anyway")
+
+    def test_a_value_that_would_change_the_command_is_refused(self):
+        # `|` is the substitution's delimiter and sed reads the left side as a
+        # regular expression, so a value carrying either would make the command
+        # mean something the sentence never said -- and it would mean it over
+        # the caller's file.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh("apple\n")
+        self.assertIsNone(_cr._prose_argv("Replace 'a|b' with 'x' in the file %s" % a))
+        self.assertIsNone(_cr._prose_argv("Replace 'a.b' with 'x' in the file %s" % a))
+
+    def test_lines_can_be_filtered_out_by_what_they_do_not_contain(self):
+        # `grep -v`, and the destination is a different file, so the source must
+        # be left exactly as it was.
+        a = _fresh("apple\nbanana\napple\ncherry\n")
+        c = "%s/c1.txt" % SCRATCH
+        out = _solve("Write the lines of the file %s that do not contain 'apple' "
+                     "to the file %s" % (a, c))
+        self.assertTrue(_verified(out), out.get("status"))
+        self.assertEqual("banana\ncherry\n", (ROOT / c).read_text(encoding="utf-8"))
+        self.assertEqual("apple\nbanana\napple\ncherry\n",
+                         (ROOT / a).read_text(encoding="utf-8"))
+
+    def test_empty_names_one_exact_pattern_and_not_a_loose_one(self):
+        # "empty lines" is `^$` and nothing else.  It is a pattern the sentence
+        # states by name, the way an ordinal states a column number -- not a
+        # synonym the machine picked.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh("apple\n\nbanana\n\n")
+        self.assertEqual(["grep", "-v", "^$", a],
+                         _cr._prose_argv("Remove the empty lines from the file %s" % a))
+        c = "%s/c1.txt" % SCRATCH
+        out = _solve("Remove the empty lines from the file %s and write the result "
+                     "to the file %s" % (a, c))
+        self.assertTrue(_verified(out), out.get("status"))
+        self.assertEqual("apple\nbanana\n", (ROOT / c).read_text(encoding="utf-8"))
+
+    def test_only_a_transform_may_write_back_over_the_file_it_read(self):
+        # For `cat A` the bound output is A itself, and writing stdout there
+        # would look harmless until a command that removes or truncates its
+        # operand does the same thing.  The permission is a named table in the
+        # acceptance layer, so this pins both sides of it.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh("apple\n")
+        yes = _cr.bind({"argv": "ARGV", "output_path": "PATH_OUTPUT"},
+                       "Replace every 'apple' with 'pear' in the file %s" % a)
+        self.assertEqual("true", yes.get("write_stdout_to_output"), yes)
+        for sentence in ("Show the contents of the file %s" % a,
+                         "Delete the file %s" % a,
+                         "Search the file %s for the exact text 'apple'" % a):
+            args = _cr.bind({"argv": "ARGV", "output_path": "PATH_OUTPUT"}, sentence)
+            self.assertNotIn("write_stdout_to_output", args,
+                             "%r was allowed to write over its own operand" % sentence)
+
+
 
 if __name__ == "__main__":
     unittest.main()
