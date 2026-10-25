@@ -1115,6 +1115,10 @@ _PROSE_COMMAND_WITH_TWO_VALUES: tuple[tuple[str, str], ...] = (
 # Refusing is the only truthful answer, and until now the refusal this sentence
 # got was an accident of a corrupted path reading as two operands.
 _SED_UNSAFE = "|" + chr(92) + "&" + chr(10) + chr(13) + "."
+# What breaks an `a` (append) command rather than an `s` one.  Deliberately
+# shorter: `|`, `&` and `.` are hazards of the substitution's own syntax and are
+# harmless text in a line being appended.
+_SED_APPEND_UNSAFE = chr(92) + chr(10) + chr(13)
 
 
 def _mask_a_quoted_value(sentence: str, value: str) -> str:
@@ -1254,7 +1258,8 @@ _CHANGE_VERBS = re.compile(
     r"\bconvert(?:s|ed|ing)?\b|\breplace\w*|\bsubstitut\w*"
     r"|\bchang(?:e|es|ed|ing)\b|\brewrit(?:e|es|en|ing)\b|\btransform\w*"
     r"|\bupdate[ds]?\b|\boverwrit\w*|\buppercase\b|\blowercase\b"
-    r"|\bin[- ]place\b|\bturn\w*\b[^\n]{0,20}?\binto\b"
+    r"|\bin[- ]place\b|\bappend(?:s|ed|ing)?\b|\bprepend(?:s|ed|ing)?\b"
+    r"|\bturn\w*\b[^\n]{0,20}?\binto\b"
     r"|\bmake\b[^\n]{0,20}?\b(?:upper|lower)\b")
 
 _KEEPS_EXISTING_CONTENT = re.compile(
@@ -1530,6 +1535,58 @@ def _prose_argv(sentence: str) -> list[str] | None:
             return ["cat", *names]
         return None
 
+    # An APPEND states one quoted value and one file, and asks for the file's
+    # existing content to survive.  Nothing could serve it: `file_write_text`
+    # opens with write_bytes, so it truncates, and the refusal this produced was
+    # honest but the request is ordinary.  Measured on 263ad2f, three phrasings
+    # of it were all refused -- including "Write the text 'hello' to the file X
+    # without losing what is there", which the code already REFUSED ON PURPOSE
+    # because `_KEEPS_EXISTING_CONTENT` recognised the promise and
+    # `_PLAIN_PAYLOAD_WRITES` knew the writer would break it.  The system could
+    # tell the sentence wanted the content kept and had no program that kept it.
+    #
+    # sed's `a` command appends after the addressed line, and `$` addresses the
+    # last one, so `sed -e '$a date' X` prints the whole file plus one new line.
+    # That rides the rails in-place substitution already rides -- read-only sed,
+    # stdout captured in full, then written back -- so it needs no `-i`, no new
+    # capability and no postcondition that does not already exist.
+    # `insert` and `prepend` are deliberately NOT triggers.  Both name a position
+    # this rule cannot honour -- prepend means the beginning and insert does not
+    # say where at all -- and appending anyway would put the line somewhere the
+    # sentence did not ask for, in a file the caller will not re-read.  They stay
+    # refused, and the refusal is pinned by a test.
+    if (re.search(r"\bappend(?:s|ed|ing)?\b|\b(?:to|at) the end\b|>>"
+                  r"|\bwithout\s+(?:losing|deleting|removing|replacing)\b", text)
+            and not re.search(r"\b(?:insert|prepend)\w*\b", text)
+            and "sed" in known):
+        _values = _quoted_values(sentence)
+        if len(_values) != 1:
+            # Not this rule's sentence to refuse.  "to the end" also appears in a
+            # READING -- "Show the lines from line 3 to the end of the file X" --
+            # and returning None here measured as refusing it outright, because a
+            # `return None` inside a branch is a refusal while falling out of the
+            # `if` is a fall-through.  A sentence that states no line to add is
+            # not an append request, so it goes on to the rule that owns it.
+            _values = []
+        if len(_values) == 1:
+            _line = _values[0]
+            # Narrower than `_SED_UNSAFE`, which also rejects a dot because a
+            # dot is a delimiter hazard inside `s|a|b|`.  In an `a` command the
+            # text is literal, so a dot is ordinary -- "version 1.2" is a real
+            # line.  What breaks the command is a backslash escape and a newline.
+            # These two DO refuse: the sentence stated a line to add and named
+            # one file, so it is an append this rule owns and cannot serve.
+            if not _line or any(ch in _line for ch in _SED_APPEND_UNSAFE):
+                return None
+            _operands = extract_paths(str(sentence).replace(_line, " "))
+            if len(_operands) != 1:
+                return None
+            # `-i`, not `-e` with a write-back.  The append is not idempotent, so
+            # re-running it can never reproduce the first output and the re-run
+            # check measured COMMAND_OUTPUT_NOT_REPRODUCED on the correct file.
+            # `-i` puts the command on the postcondition path instead, where
+            # `_post_sed` asks the disk the one question this shape can answer.
+            return ["sed", "-i", "$a %s" % _line, str(_operands[0])]
     for pattern, program in _PROSE_COMMAND_WITH_TWO_VALUES:
         if program not in known:
             continue
@@ -1745,6 +1802,13 @@ def _prose_argv(sentence: str) -> list[str] | None:
             return [program, "-f", str(column), str(paths[0])]
         if program == "cp" and _DIRECTORY_REQUEST.search(text):
             return [program, "-r", str(paths[0]), str(paths[1])]
+        if program == "rm" and _DIRECTORY_REQUEST.search(text):
+            # The same reading `cp` already makes: a sentence that says
+            # "directory" is asking about a tree, and plain `rm` on a directory
+            # fails.  Measured, "Delete the directory D" bound `rm D` and came
+            # back COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN -- the vaguest report
+            # there is -- over a directory that was still standing.
+            return [program, "-r", str(paths[0])]
         if program == "ls" and _EVERY_FILE.search(text) and not _LISTING_REQUEST.search(text):
             # `ls` answers "what files are here", never "what is IN them".  Its
             # pattern is `(?:list|show) ... directory`, which matches a sentence
@@ -1913,6 +1977,18 @@ def _declare_a_written_output(args: dict[str, Any], argv: Sequence[str],
         return
     if not read_only or consumes:
         return
+    try:
+        _by_program = _accept._SIDE_EFFECTING_FLAGS_BY_PROGRAM.get(program, ())
+    except Exception:  # noqa: BLE001 - no table, no restriction to apply
+        _by_program = ()
+    if any(str(tok) in _accept._SIDE_EFFECTING_FLAGS or str(tok) in _by_program
+           for tok in argv[1:]):
+        # The command already writes the file itself, so its stdout is not the
+        # result -- for `sed -i` it is empty, and writing that over the operand
+        # would truncate a file the command had just finished rewriting.
+        # Measured before this guard: `sed -i '$a date' X` was handed
+        # write_stdout_to_output="true" on exactly those terms.
+        return
     named = extract_paths(sentence)
     if not named:
         return
@@ -1949,7 +2025,8 @@ def _declare_a_written_output(args: dict[str, Any], argv: Sequence[str],
             # where a reading puts its answer.
             _said = str(sentence or "").lower()
             if (_READ_VERBS.search(_said) or not _CHANGE_VERBS.search(_said)
-                    or not any(re.match(r"^s[|/#]", str(part).lstrip()) for part in argv[1:])):
+                    or not any(re.match(r"^(?:s[|/#]|\$a\s)", str(part).lstrip())
+                               for part in argv[1:])):
                 return
             args["write_stdout_to_output"] = "true"
         return

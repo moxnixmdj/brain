@@ -55,7 +55,16 @@ class TestASingleRemovalIsCertifiedFromTheDisk(unittest.TestCase):
 class TestThePromiseThatCannotBeStatedIsStillRefused(unittest.TestCase):
 
     def test_flags_make_the_shape_unstateable(self):
-        for argv in (["rm", "-f", "x.txt"], ["rm", "-r", "d"], ["rm", "--", "x.txt"]):
+        # Rewritten, not deleted.  `-r` used to be in this list and is not any
+        # more: it changes only WHETHER a directory may be removed, not WHAT is
+        # promised, and "Delete the directory D" measured as binding plain `rm D`,
+        # failing on a directory that was not empty, and reporting
+        # COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN -- the vaguest report there is.
+        # `-f` stays, and stays for a concrete reason: it suppresses the error
+        # that is the only evidence a named path was ever there.
+        for argv in (["rm", "-f", "x.txt"], ["rm", "--", "x.txt"],
+                     ["rm", "-rf", "x.txt"], ["rm", "-i", "x.txt"],
+                     ["rm", "-r", "-f", "x.txt"]):
             ok, reason, _ev = accept._post_rm(argv, ROOT)
             self.assertFalse(ok, "certified %r" % (argv,))
             self.assertEqual(reason, "COMMAND_RM_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE")
@@ -67,11 +76,27 @@ class TestThePromiseThatCannotBeStatedIsStillRefused(unittest.TestCase):
         # may name a set -- so the pin is on the flag, not on the count.
         base = _fresh("still")
         gone = "%s/gone.txt" % base
-        for argv in (["rm", "-f", gone], ["rm", "-r", base],
-                     ["rm", "--", gone], ["rm", "-f", gone, "%s/other.txt" % base]):
+        for argv in (["rm", "-f", gone], ["rm", "--", gone],
+                     ["rm", "-f", gone, "%s/other.txt" % base]):
             ok, reason, _ev = accept._post_rm(argv, ROOT)
             self.assertFalse(ok, argv)
             self.assertEqual(reason, "COMMAND_RM_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", argv)
+
+    def test_the_recursive_flag_is_stateable_and_still_has_to_prove_itself(self):
+        # The other side of the change above, pinned from both directions so it
+        # cannot pass by simply trusting the flag.  A directory that is really
+        # gone is certified; a directory that SURVIVED is refused, which is the
+        # whole reason the check exists.
+        base = _fresh("still")
+        survivor = "%s/stillhere" % base
+        (ROOT / survivor).mkdir(parents=True, exist_ok=True)
+        ok, reason, _ev = accept._post_rm(["rm", "-r", survivor], ROOT)
+        self.assertFalse(ok, "a surviving directory was certified as removed")
+        self.assertEqual(reason, "COMMAND_RM_TARGET_STILL_PRESENT")
+        (ROOT / survivor).rmdir()
+        ok, _reason, ev = accept._post_rm(["rm", "-r", survivor], ROOT)
+        self.assertTrue(ok)
+        self.assertIn(survivor, ev.get("consumed_paths") or ())
 
     def test_every_operand_is_judged_not_just_the_first(self):
         # The multi-operand shape is only honest if each operand is checked on

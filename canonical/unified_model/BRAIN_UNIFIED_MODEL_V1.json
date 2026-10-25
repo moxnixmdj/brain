@@ -24619,7 +24619,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6400,
+  "research_index_records": 6401,
   "routing_tokens": 1816,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24628,7 +24628,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a3d5e708d4c74179b398f690051c4c62fbdc967ca31e76c19677950e07c339a5"
+  "value": "dbce64b63d0bce0287639d51d9404a2f61ebeba749233d6d4127d29339477c7c"
  },
  "engines": [
   {
@@ -187798,6 +187798,51 @@
    }
   },
   {
+   "action_id": "AN_APPEND_IS_SERVED_AND_A_DIRECTORY_IS_NAMED_BY_THE_SENTENCE_V1_20261025_V1",
+   "capability": false,
+   "date": "2026-10-25",
+   "id": "research:canonical/action_intents/AN_APPEND_IS_SERVED_AND_A_DIRECTORY_IS_NAMED_BY_THE_SENTENCE_V1_20261025_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/AN_APPEND_IS_SERVED_AND_A_DIRECTORY_IS_NAMED_BY_THE_SENTENCE_V1_20261025_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "59a7a7568a76165bd29ccd1bf51cb66c3cda94fac849653824e4981d9362a818",
+   "status": "",
+   "terms": {
+    "20261025": 1,
+    "already": 1,
+    "an_append_is_served_and_a_directory_is_named_by_the_sentence_v1_20261025_v1": 1,
+    "any": 1,
+    "append": 3,
+    "back": 1,
+    "because": 1,
+    "being": 1,
+    "bound": 2,
+    "command": 2,
+    "directory": 5,
+    "every": 3,
+    "failure": 2,
+    "file": 6,
+    "four": 2,
+    "fourteen": 3,
+    "had": 4,
+    "kept": 2,
+    "left": 2,
+    "move": 2,
+    "mutating": 2,
+    "no": 4,
+    "nothing": 2,
+    "ordinary": 2,
+    "refused": 2,
+    "report": 2,
+    "requests": 2,
+    "sentence": 2,
+    "so": 6,
+    "v1": 2,
+    "world": 2,
+    "would": 2
+   }
+  },
+  {
    "action_id": "AN_EVERYDAY_SENTENCE_STATES_THE_COUNTING_AND_COLUMN_COMMANDS_IT_MEANS_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -209108,7 +209153,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "e1a7b9dacd6d9a9bb7d293709d2891df55bec3043908c9abaaeb96b563801563",
+   "sha256": "b470344b8c2961289e515fe87d80520b37048c3300c9cf27b7b08fd3c41390de",
    "summary": "Routing a sentence to a typed capability chain.",
    "symbol_count": 30,
    "symbols": [
@@ -247858,9 +247903,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "f3fc49ccab9e3e67c8040c68ffd28564b5ecefdd9c3fc7d0887e7e369bac2dbe",
+   "sha256": "af937be3635b0a028c4062464a4991c58e89f83f58d93b9a08ceaaa776c581f0",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
-   "symbol_count": 38,
+   "symbol_count": 39,
    "symbols": [
     "_STATES_A_COMMAND",
     "_action_rows",
