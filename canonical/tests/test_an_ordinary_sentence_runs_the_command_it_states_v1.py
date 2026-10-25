@@ -3100,5 +3100,154 @@ class TestAQuestionNeedsNoVerbAndAUniqueSetIsReallyUnique(unittest.TestCase):
             "a pattern search with no verb was handed to the literal matcher")
 
 
+class TestANounPhraseIsAnsweredAndAChainThatRanNothingIsNotAPass(unittest.TestCase):
+    """Asking with no verb at all, and the false pass that hid behind it.
+
+    Measured on main 5126acf, a census of eighteen ordinary requests asked as
+    bare noun phrases -- the plainest form there is -- scored ten of eighteen.
+    The eight failures were three different defects, and the worst was not a
+    refusal:
+
+      "the first 3 lines of X"   -> pass=True, status PASS__COMPOSED_CAPABILITY_CHAIN,
+                                    NO raw_goal_acceptance, chain=[], produced={}
+      "the lines of X numbered"  -> the same
+      "the contents of the file X" -> routed to a JSON file WRITER for a read
+      "the first/last/third line of X" -> FAIL__RAW_GOAL_COMPILATION_GAP
+      "the files in the directory D"   -> refused
+
+    The first two are the reason this class exists.  `route` returned
+    PASS__SYNTHESISED_PROGRAM with an empty chain, `execute_chain([])` ran its
+    loop zero times and returned pass=True with the status
+    PASS__COMPOSER_CHAIN_EXECUTED, and the front door reported the goal DONE.  A
+    request that ran no step and left no bytes was reported as finished.
+
+    Two more were found while measuring the fix, both pre-existing and both
+    certified: "X in upper case" -- a phrase that states no verb either way --
+    wrote the upper-cased text back over X, and "the third line of X in upper
+    case" was answered with the WHOLE FILE upper-cased.
+
+    Every expectation below is computed by RUNNING the command that means the
+    question.
+    """
+
+    TEXT = "apple\nbanana\napple pie\ncherry\n"
+
+    def _truth(self, argv):
+        import subprocess
+        return subprocess.run(argv, capture_output=True, text=True,
+                              cwd=str(ROOT)).stdout
+
+    def _fixtures(self):
+        f = _fresh(self.TEXT)
+        (ROOT / SCRATCH / "b1.txt").write_text("apple\nbanana\nfig\n", encoding="utf-8")
+        (ROOT / SCRATCH / "dup.txt").write_text("apple\nbanana\nappe\ncherry\n",
+                                               encoding="utf-8")
+        d = "%s/dset" % SCRATCH
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "one.txt").write_text("apple\nbanana\n", encoding="utf-8")
+        (ROOT / d / "two.log").write_text("fig\n", encoding="utf-8")
+        return f, "%s/b1.txt" % SCRATCH, "%s/dup.txt" % SCRATCH, d
+
+    def test_a_noun_phrase_gets_the_answer_the_verbed_form_gets(self):
+        f, other, dup, d = self._fixtures()
+        touched = [f, other, dup, "%s/one.txt" % d, "%s/two.log" % d]
+        before = {p: (ROOT / p).read_bytes() for p in touched}
+        cases = (
+            ("the contents of the file %s" % f, ["cat", f]),
+            ("the first line of %s" % f, ["sed", "-n", "1p", f]),
+            ("the last line of %s" % f, ["tail", "-n", "1", f]),
+            ("the third line of %s" % f, ["sed", "-n", "3p", f]),
+            ("the first 3 lines of %s" % f, ["head", "-n", "3", f]),
+            ("the last 2 lines of %s" % f, ["tail", "-n", "2", f]),
+            ("the lines 2 to 4 of %s" % f, ["sed", "-n", "2,4p", f]),
+            ("the number of lines in %s" % f, ["wc", "-l", f]),
+            ("the sorted lines of %s" % f, ["sort", f]),
+            ("the unique lines of the file %s" % dup, ["sort", "-u", dup]),
+            ("the lines of %s in reverse order" % f, ["tac", f]),
+            ("the lines of %s numbered" % f, ["nl", f]),
+            ("the lines in the file %s with 'apple'" % f, ["fgrep", "apple", f]),
+            ("the lines in the file %s without 'apple'" % f, ["fgrep", "-v", "apple", f]),
+            ("the files in the directory %s" % d, ["ls", d]),
+            ("the difference between %s and %s" % (f, other), ["diff", f, other]),
+        )
+        for goal, argv in cases:
+            result = _solve(goal)
+            self.assertTrue(_verified(result), goal)
+            self.assertEqual(self._truth(argv), _stdout(result), goal)
+        self.assertEqual(before, {p: (ROOT / p).read_bytes() for p in touched},
+                         "a noun phrase that asked to be shown something changed a file")
+
+    def test_a_chain_that_ran_no_step_is_not_reported_as_executed(self):
+        from canonical.runtime import composer_route_v1 as _cr
+        out = _cr.execute_chain([], "the first 3 lines of a1.txt")
+        self.assertIs(False, out.get("pass"))
+        self.assertEqual([], out.get("steps"))
+        self.assertEqual("FAIL__COMPOSER_CHAIN_RAN_NO_STEP", out.get("status"))
+
+    def test_no_goal_is_reported_done_without_an_acceptance_verdict(self):
+        # The invariant the two false passes broke, stated generally rather than
+        # per sentence: nothing may report pass=True while carrying no acceptance
+        # verdict at all.  Measured on 5126acf, two noun phrases did exactly that.
+        f, _other, _dup, d = self._fixtures()
+        hollow = []
+        for goal in ("the first 3 lines of %s" % f,
+                     "the last 2 lines of %s" % f,
+                     "the lines of %s numbered" % f,
+                     "the contents of the file %s" % f,
+                     "the files in the directory %s" % d,
+                     "the third line of %s" % f,
+                     "the lines 2 to 4 of %s" % f):
+            result = _solve(goal)
+            if result.get("pass") is True and result.get("raw_goal_acceptance") is None:
+                hollow.append((goal, result.get("status")))
+        self.assertEqual([], hollow, "a goal was reported done with no verdict")
+
+    def test_a_noun_phrase_names_a_reader_and_not_a_writer(self):
+        # "the contents of the file X" measured as routing to `json.file.write`
+        # -- a capability that truncates what it is given, chosen for a request
+        # to be shown something.
+        from canonical.runtime import composer_route_v1 as _cr
+        f, _o, _d, _e = self._fixtures()
+        self.assertEqual(["cat", f], _cr._prose_argv("the contents of the file %s" % f))
+
+    def test_an_ambiguous_transform_answers_without_destroying_the_file(self):
+        # The phrase states no verb, so it does not say whether the file should
+        # change.  The answer is on stdout either way, so the file stays.
+        a = _fresh(self.TEXT)
+        result = _solve("%s in upper case" % a)
+        self.assertTrue(_verified(result))
+        self.assertEqual("APPLE\nBANANA\nAPPLE PIE\nCHERRY\n", _stdout(result))
+        self.assertEqual(self.TEXT.encode(), (ROOT / a).read_bytes(),
+                         "an ambiguous phrase rewrote the file it named")
+
+    def test_a_stated_conversion_still_writes_the_file(self):
+        # The other side of the rule above, pinned so narrowing the write path
+        # cannot pass by simply never writing.  Both of these wrote before and
+        # must write now.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh(self.TEXT)
+        result = _solve("Convert the file %s to upper case" % a)
+        self.assertTrue(_verified(result))
+        self.assertEqual("APPLE\nBANANA\nAPPLE PIE\nCHERRY\n",
+                         (ROOT / a).read_text(encoding="utf-8"))
+        for sentence in ("Replace every 'apple' with 'pear' in the file %s" % a,
+                         "Replace 'apple' with 'fig' in the file %s" % a):
+            args = _cr.bind({"argv": "ARGV", "output_path": "PATH_OUTPUT"}, sentence)
+            self.assertEqual("true", args.get("write_stdout_to_output"), sentence)
+
+    def test_a_noun_phrase_that_states_a_transform_is_composed_not_dropped(self):
+        # Both of these were answered with the WHOLE FILE, upper-cased, and
+        # certified.  The address and the case are one sed script, so the line
+        # the sentence named is the line that comes back.
+        for goal, want in (("the third line of %s in upper case", "APPLE PIE\n"),
+                           ("the lines 2 to 4 of %s in upper case",
+                            "BANANA\nAPPLE PIE\nCHERRY\n")):
+            a = _fresh(self.TEXT)
+            result = _solve(goal % a)
+            self.assertTrue(_verified(result), goal)
+            self.assertEqual(want, _stdout(result), goal)
+            self.assertEqual(self.TEXT.encode(), (ROOT / a).read_bytes(), goal)
+
+
 if __name__ == "__main__":
     unittest.main()
