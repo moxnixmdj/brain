@@ -1595,6 +1595,81 @@ class TestTheFallthroughIsScopedToWhatTheSentenceStates(unittest.TestCase):
         self.assertEqual("apple\n", (ROOT / b).read_text(encoding="utf-8"))
 
 
+    def test_a_file_can_be_converted_to_upper_case_in_place(self):
+        # `tr` reads standard input, which the adapter never passes, so case
+        # conversion looked blocked behind that wall.  It is not: `sed 's/.*/\U&/'`
+        # reads the FILE and prints the converted text, so it is a reader like
+        # cat, the inspector re-runs it, and the write mechanism already existed.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh("apple\nBanana\n")
+        goal = "Convert the file %s to upper case" % a
+        self.assertEqual(["sed", "-e", "s/.*/\\U&/", a], _cr._prose_argv(goal))
+        self.assertTrue(_verified(_solve(goal)))
+        self.assertEqual("APPLE\nBANANA\n", (ROOT / a).read_text(encoding="utf-8"))
+
+    def test_case_conversion_can_go_to_a_destination_and_leave_the_source_alone(self):
+        a = _fresh("apple\nbanana\n")
+        c = "%s/c1.txt" % SCRATCH
+        goal = ("Convert the file %s to upper case and write it to the file %s"
+                % (a, c))
+        self.assertTrue(_verified(_solve(goal)))
+        self.assertEqual("APPLE\nBANANA\n", (ROOT / c).read_text(encoding="utf-8"))
+        self.assertEqual("apple\nbanana\n", (ROOT / a).read_text(encoding="utf-8"),
+                         "the source was changed by a request that named a destination")
+
+    def test_the_case_script_is_fixed_by_the_rule_and_not_taken_from_the_sentence(self):
+        # The sed script comes from the rule, not from the sentence, so nothing
+        # the caller writes can change what the command means -- and a quoted
+        # value in the sentence must not end up inside the expression.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh("apple\n")
+        for goal in ("Convert the file %s to upper case" % a,
+                     "Convert the file %s to upper case, replacing 'x' with 'y'" % a):
+            argv = _cr._prose_argv(goal)
+            self.assertIsNotNone(argv, goal)
+            self.assertEqual("s/.*/\\U&/", argv[2], goal)
+
+    def test_a_sentence_can_create_every_directory_it_names(self):
+        # `mkdir` arity was one, so "create A and B" was refused for want of
+        # arity -- a sentence that stated exactly enough operands, refused for
+        # stating them.  The promise generalises honestly: every directory named
+        # exists.
+        from canonical.runtime import composer_route_v1 as _cr
+        _fresh()
+        p = "%s/p1" % SCRATCH
+        q = "%s/q1" % SCRATCH
+        goal = "Create the directory %s and the directory %s" % (p, q)
+        self.assertEqual(["mkdir", p, q], _cr._prose_argv(goal))
+        self.assertTrue(_verified(_solve(goal)))
+        self.assertTrue((ROOT / p).is_dir() and (ROOT / q).is_dir())
+
+    def test_a_directory_promise_covers_every_directory_not_just_the_first(self):
+        # The whole reason a variadic shape is safe here: the postcondition asks
+        # about all of them, so a mkdir that made one of two is refused.
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _acc
+        _fresh()
+        p = "%s/p1" % SCRATCH
+        (ROOT / p).mkdir(parents=True, exist_ok=True)
+        ok, reason, _ = _acc._post_mkdir(["mkdir", p, "%s/absent1" % SCRATCH], ROOT)
+        self.assertFalse(ok)
+        self.assertEqual("COMMAND_MKDIR_DIRECTORY_ABSENT_FROM_DISK", reason)
+        ok, reason, _ = _acc._post_mkdir(["mkdir", p], ROOT)
+        self.assertTrue(ok, reason)
+
+    def test_rm_was_not_given_the_same_freedom_as_mkdir(self):
+        # The pin on the decision not to generalise.  Creating a directory the
+        # sentence named is harmless; deleting a path the sentence happened to
+        # mention is not.  So a deletion still names exactly one file, and a
+        # sentence naming two is refused rather than executed.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh("apple\n")
+        b = "%s/b1.txt" % SCRATCH
+        (ROOT / b).write_text("grape\n", encoding="utf-8")
+        self.assertIsNone(_cr._prose_argv("Delete the file %s and the file %s" % (a, b)))
+        self.assertTrue((ROOT / a).exists() and (ROOT / b).exists())
+        self.assertEqual(["rm", a], _cr._prose_argv("Delete the file %s" % a))
+
+
 
 if __name__ == "__main__":
     unittest.main()
