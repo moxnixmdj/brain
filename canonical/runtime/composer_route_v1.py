@@ -860,8 +860,15 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # already existed: nothing here adds a way to be trusted, only a way to be
     # asked.  Measured before this block, 11 of those 30 commands were reachable
     # from English and 19 were not.
+    # `uniq` alone removes ADJACENT duplicates only, so on a file that was never
+    # sorted it answers "the unique lines" with duplicates still in it.  Measured
+    # on apple/banana/apple/cherry: the answer held `apple` twice and was
+    # certified as an exact semantic acceptance, because acceptance checks
+    # reproducibility and `uniq` is perfectly reproducible.  `sort -u` is the
+    # distinct set the sentence asked for; `sort` is already in
+    # _READ_ONLY_COMMANDS and `-u` is not a side-effecting flag.
     (r"\bunique\b|\b(?:duplicate|duplicates|repeated)\b[^\n]{0,20}?\blines?\b",
-     "uniq", _no_flags, 1),
+     "sort", lambda _n: ["-u"], 1),
     (r"\breverse\b[^\n]{0,40}?\blines?\b|\blines?\b[^\n]{0,40}?\breverse\b",
      "tac", _no_flags, 1),
     # "Add line numbers to the file X" measured to bind nothing: the noun and
@@ -1156,6 +1163,30 @@ _BLANK_LINE = re.compile(
 # the ones that are not empty, while "show the empty lines" asks for the empty
 # ones.  Hard-coding `-v` measured as answering the second with the first.
 _REMOVES_THE_LINES = re.compile(r"\b(?:remove|delete|drop|strip)\b")
+_MENTIONS_LINES = re.compile(r"\blines?\b")
+# The questions a count rule and a line-number rule own.  A sentence that asks
+# HOW MANY lines hold a text, or WHICH ones, is not asking for the lines
+# themselves, and answering it with the lines would be a certified wrong answer.
+_ASKS_A_COUNT_OR_A_NUMBER = re.compile(
+    # `which`, `what` and `where` only when the sentence ASKS with them, at its
+    # head.  Taken from anywhere in the sentence they exclude a relative pronoun
+    # too: "the lines in X WHICH include 'apple'" was measured refused, because
+    # the `which` in it introduces the value and asks nothing.
+    r"^\s*(?:which|what|where)\b|\b(?:%s)\b|\bnumber\b" % _WC_QTY)
+# The introducers that make a quoted value LITERAL text.  `match` is deliberately
+# absent: "the lines matching 'ap.le'" is pattern language, and a rule further
+# down already answers it with `grep`, while this block sends a quoted value to
+# the literal matcher.  Measured, letting this arm claim it: the sentence went
+# from `grep` to a refusal, and the two spellings of the same question --
+# "Find the lines ... matching" and "Show the lines ... matching" -- were already
+# answered by different programs on main, which is a question about matcher
+# selection and not one this change should settle by accident.
+_STATES_A_LITERAL_VALUE = re.compile(
+    r"\bcontain(?:s|ed|ing)?\b|\binclud\w*|\bhold(?:s|ing)?\b|\bhave\b|\bhas\b"
+    r"|\bwith\b[^\n]{0,20}?['\"]"
+    r"|\b(?:without|excluding|except)\b[^\n]{0,20}?['\"]"
+    r"|\b(?:do(?:es)?n't|do(?:es)? not|don't|not)\b[^\n]{0,20}?"
+    r"\b(?:contain|includ\w*|have)\b")
 # The words that make a quoted value a PATTERN rather than a PAYLOAD.  Shape
 # cannot tell them apart -- both are one quoted string -- and neither can the
 # word "line", because "Write the line 'PROJECT BRAIN' to the file X" satisfies
@@ -1300,7 +1331,21 @@ def _prose_argv(sentence: str) -> list[str] | None:
         if needle:
             argv += ["-name", str(needle)]
         return argv
-    if _FILTER_LINE.search(text) and "grep" in known:
+    # The verb is not what makes a sentence ask for lines.  `_FILTER_LINE`
+    # requires one of remove/delete/drop/strip/write/show/list/print before
+    # "lines", so the plainest way to ask -- the noun phrase on its own, "the
+    # lines in X with 'apple'" -- matched nothing and was refused, while "Show
+    # me the lines in X with 'apple'" was answered.  Both ask the same question.
+    # The extra arm is scoped to a sentence that mentions lines AND states
+    # containment or its negation, and it stays away from the two questions a
+    # count and a line-number rule own: "How many lines in X contain 'apple'"
+    # must stay a count and "Which lines in X contain 'apple'" must stay a
+    # numbered listing.
+    _asks_a_filter = _FILTER_LINE.search(text) or (
+        _MENTIONS_LINES.search(text)
+        and _STATES_A_LITERAL_VALUE.search(text)
+        and not _ASKS_A_COUNT_OR_A_NUMBER.search(text))
+    if _asks_a_filter and "grep" in known:
         values = _quoted_values(sentence)
         # The blank test runs over the sentence with every path masked out, the
         # way `_prose_ordinal` reads its number from the prose alone.  Measured
