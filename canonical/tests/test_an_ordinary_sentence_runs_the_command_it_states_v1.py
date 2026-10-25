@@ -86,6 +86,19 @@ def _verified(result) -> bool:
                 "EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"))
 
 
+def _stdout(result) -> str | None:
+    """The text the run actually produced, or None if it produced none.
+
+    Asserting the argv proves only that a sentence was translated; the answer is
+    what the caller asked for.  Read out of the acceptance record the same way
+    the class-level helpers in this file read it.
+    """
+    import json as _json, re as _re
+    text = _json.dumps(result, default=str)
+    m = _re.search(r'"stdout"\s*:\s*"((?:[^"\\]|\\.)*)"', text)
+    return m.group(1).encode().decode("unicode_escape") if m else None
+
+
 def _ra_compatible_registry():
     """The registry the live gate judges against, loaded the way it loads it."""
     from canonical.runtime import capability_composer_v1 as _comp
@@ -114,7 +127,7 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
         # and 19 were not; the acceptance machinery for every one of them already
         # existed, and only the translation was missing.
         ("Compute the md5 of the file {f}", ["md5sum", "{f}"]),
-        ("Show the unique lines of the file {f}", ["uniq", "{f}"]),
+        ("Show the unique lines of the file {f}", ["sort", "-u", "{f}"]),
         ("Reverse the lines of the file {f}", ["tac", "{f}"]),
         ("Number the lines of the file {f}", ["nl", "{f}"]),
         ("List the directory {d}", ["ls", "{d}"]),
@@ -1260,10 +1273,18 @@ class TestTheFallthroughIsScopedToWhatTheSentenceStates(unittest.TestCase):
         # the first pattern to match wins -- and `cp` matched "duplicate" before
         # that, found one operand instead of two, and abandoned the whole table.
         from canonical.runtime import composer_route_v1 as _cr
+        # The duplicate is NOT adjacent, on purpose.  `uniq` removes adjacent
+        # duplicates only, so on this file it answers all three lines -- the
+        # duplicate still in it -- and that answer was certified as an exact
+        # semantic acceptance, because acceptance checks reproducibility and
+        # `uniq` is perfectly reproducible.  The distinct set is two lines.
         f = _fresh("apple\nbanana\napple\n")
-        self.assertEqual(["uniq", f],
+        self.assertEqual(["sort", "-u", f],
                          _cr._prose_argv("Remove the duplicate lines from the file %s" % f))
-        self.assertTrue(_verified(_solve("Remove the duplicate lines from the file %s" % f)))
+        _r = _solve("Remove the duplicate lines from the file %s" % f)
+        self.assertTrue(_verified(_r))
+        self.assertEqual("apple\nbanana\n", _stdout(_r),
+                         "the duplicate survived: the answer is not the distinct set")
         self.assertTrue(os.path.exists(os.path.join(ROOT, f)),
                         "the filter deleted the file it was asked to filter")
         self.assertEqual(["cp", "a.txt", "b.txt"],
@@ -1337,17 +1358,19 @@ class TestTheFallthroughIsScopedToWhatTheSentenceStates(unittest.TestCase):
                          (ROOT / c).read_text(encoding="utf-8"))
 
     def test_a_read_only_command_with_a_destination_is_not_refused_on_arity(self):
-        # `uniq` takes one file.  The sentence names two, and the second is where
-        # the result goes -- so it was refused for want of arity, which read as
-        # "you gave me too many files" for a request that stated exactly enough.
+        # The program takes one file.  The sentence names two, and the second is
+        # where the result goes -- so it was refused for want of arity, which read
+        # as "you gave me too many files" for a request that stated exactly enough.
         from canonical.runtime import composer_route_v1 as _cr
-        # Adjacent duplicates, because that is all `uniq` removes -- writing the
-        # fixture as apple/banana/apple and expecting two lines back was this
-        # test being wrong about the program, not the program being wrong.
-        a = _fresh("apple\napple\nbanana\n")
+        # The duplicate is NOT adjacent, on purpose.  This test used to say the
+        # opposite -- that apple/banana/apple expecting two lines back was the
+        # test being wrong about the program.  It was the program that was wrong:
+        # "the unique lines" is the distinct set, and `uniq` on an unsorted file
+        # leaves the duplicate in and was certified all the same.
+        a = _fresh("apple\nbanana\napple\n")
         c = "%s/c1.txt" % SCRATCH
         goal = "Write the unique lines of the file %s to the file %s" % (a, c)
-        self.assertEqual(["uniq", a], _cr._prose_argv(goal))
+        self.assertEqual(["sort", "-u", a], _cr._prose_argv(goal))
         self.assertTrue(_verified(_solve(goal)))
         self.assertEqual("apple\nbanana\n", (ROOT / c).read_text(encoding="utf-8"))
 
@@ -2979,6 +3002,102 @@ class TestThePlainestWayToAskEachQuestionIsAnswered(unittest.TestCase):
         self.assertTrue(_verified(result))
         self.assertEqual("cherry\n", self._answer(result))
 
+
+
+class TestAQuestionNeedsNoVerbAndAUniqueSetIsReallyUnique(unittest.TestCase):
+    """Two defects found by asking merged main, not by reasoning about the code.
+
+    Both were measured on main AFTER the plainest-phrasing class was reported
+    closed, which is the point: the census that closed it carried a verb in every
+    filter row -- "Show me the lines in X with 'apple'" -- so the plainest form of
+    all, the noun phrase on its own, was never asked.
+
+      "the lines in X with 'apple'"        -> REFUSED, while the same question
+                                              with "Show me" in front was answered
+      "the lines in X that contain 'apple'"-> REFUSED
+      "the lines in X matching 'apple'"    -> REFUSED
+      "the lines in X without 'apple'"     -> REFUSED
+      "the lines in X that do not contain" -> REFUSED
+      "Show the unique lines of the file X"-> on apple/banana/apple/cherry the
+                                              answer held `apple` TWICE, and was
+                                              certified as an exact semantic
+                                              acceptance, because acceptance
+                                              checks reproducibility and `uniq`
+                                              is perfectly reproducible.
+
+    The first is a refusal, so nothing wrong was believed.  The second is a
+    certified wrong answer, and it had been in main since the row was added:
+    the test pinned the ARGV (`uniq`) and never looked at what it returned.
+    """
+
+    def _truth(self, argv):
+        """What the command that MEANS the question really returns."""
+        import subprocess
+        return subprocess.run(argv, capture_output=True, text=True,
+                              cwd=str(ROOT)).stdout
+
+    def test_the_plainest_form_of_a_filter_question_needs_no_verb(self):
+        f = _fresh("apple\nbanana\nappe pie\ncherry\n")
+        before = (ROOT / f).read_bytes()
+        cases = (
+            ("the lines in the file %s with 'apple'" % f, ["fgrep", "apple", f]),
+            ("the lines in the file %s that contain 'apple'" % f,
+             ["fgrep", "apple", f]),
+            ("the lines in the file %s which include 'apple'" % f,
+             ["fgrep", "apple", f]),
+            ("the lines in the file %s without 'apple'" % f,
+             ["fgrep", "-v", "apple", f]),
+            ("the lines in the file %s that do not contain 'apple'" % f,
+             ["fgrep", "-v", "apple", f]),
+        )
+        for goal, argv in cases:
+            result = _solve(goal)
+            self.assertTrue(_verified(result), goal)
+            self.assertEqual(self._truth(argv), _stdout(result), goal)
+        self.assertEqual(before, (ROOT / f).read_bytes(),
+                         "a question about lines rewrote the file it named")
+
+    def test_a_count_and_a_line_number_question_are_not_answered_with_lines(self):
+        # The nearest legitimate cases to the rule this class widens, and the
+        # reason the new arm is scoped away from them.  Both mention lines, a
+        # quoted value and a word of containing -- exactly what the new arm
+        # matches -- and neither is asking for the lines themselves.
+        f = _fresh("apple\nbanana\nappe pie\ncherry\n")
+        for goal, argv in (
+                ("How many lines in the file %s contain 'apple'?" % f,
+                 ["grep", "-c", "apple", f]),
+                ("Which lines in the file %s contain 'apple'?" % f,
+                 ["grep", "-n", "apple", f])):
+            result = _solve(goal)
+            self.assertTrue(_verified(result), goal)
+            self.assertEqual(self._truth(argv), _stdout(result), goal)
+
+    def test_the_unique_lines_are_the_distinct_set_when_the_file_is_unsorted(self):
+        # The duplicate is not adjacent, which is the whole test.  `uniq` removes
+        # adjacent duplicates only, so on this file it returns all four lines --
+        # the duplicate still in it -- and that answer was certified.
+        f = _fresh("apple\nbanana\napple\ncherry\n")
+        result = _solve("Show the unique lines of the file %s" % f)
+        self.assertTrue(_verified(result))
+        self.assertEqual("apple\nbanana\ncherry\n", _stdout(result))
+        self.assertEqual(self._truth(["sort", "-u", f]), _stdout(result))
+        self.assertNotEqual(self._truth(["uniq", f]), _stdout(result),
+                            "the answer is what the adjacent-only program gives")
+
+    def test_a_pattern_search_is_still_handed_to_the_pattern_matcher(self):
+        # The price of the widening, stated rather than left implicit.  `match`
+        # is pattern language and this file already pins that it goes to `grep`;
+        # the filter block sends a quoted value to the literal matcher, so the new
+        # arm deliberately does not claim a sentence introduced by `matching`.
+        # Measured, letting it: the sentence went from `grep` to a refusal.
+        from canonical.runtime import composer_route_v1 as _cr
+        f = _fresh("apple\nbanana\n")
+        self.assertEqual("grep",
+                         _cr._prose_argv(
+                             "Find the lines in the file %s matching 'ap.le'" % f)[0])
+        self.assertIsNone(
+            _cr._prose_argv("the lines in the file %s matching 'ap.le'" % f),
+            "a pattern search with no verb was handed to the literal matcher")
 
 
 if __name__ == "__main__":
