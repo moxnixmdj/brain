@@ -479,6 +479,32 @@ def _is_executable(entry: Mapping[str, Any]) -> bool:
 # for exactly this.  The only change is WHEN it is applied.  At execution it is a
 # crash that has already displaced a correct route; at admission it is a refusal,
 # and the existing composition fallthrough serves the command the sentence stated.
+# Slot kinds that can hold a payload a sentence states.  A capability whose
+# declared contract has none of them has NOWHERE to put the text, so it cannot
+# be the capability a write request meant -- whatever its keywords matched.
+_PAYLOAD_SLOT_KINDS = frozenset({"STRING", "JSON_TEXT", "UNKNOWN"})
+
+
+def _states_a_payload_and_its_destination(goal: Any) -> bool:
+    """True when the sentence states text to write AND the path it goes to.
+
+    Both halves are required, and both are re-derived from the sentence by the
+    helpers that already exist for reading them.  A payload with no stated
+    destination is deliberately not enough: that is the shape where the only
+    path in the sentence becomes the destination by default and a file is
+    overwritten by a report about it.
+    """
+    try:
+        from canonical.runtime import composer_route_v1 as _cr
+    except Exception:  # noqa: BLE001 - no composer, no claim to make
+        return False
+    try:
+        return (_cr.extract_content(goal) is not None
+                and _cr.extract_content_destination(goal) is not None)
+    except Exception:  # noqa: BLE001 - an unreadable sentence states nothing
+        return False
+
+
 _TYPED_SCALAR_PRECONDITION = "typed.scalar.inputs.available"
 
 
@@ -530,6 +556,36 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
     if not request_may_select(goal, cid, required):
         return {"capability_id": cid, "admitted": False, "reason": "REQUEST_DOES_NOT_NAME_CAPABILITY",
                 "required_inputs": required}
+    # A write request must be answered by something that can hold the text.
+    #
+    # Measured: "Write the content 'PROJECT BRAIN' to the output path <f>" was
+    # compiled to docx.document.verify.intent_ooxml, which then raised
+    # DOCX_INTENT_SIDECAR_MISSING.  Its keywords include "content", "exact",
+    # "word" and "document", so the sentence matched -- and its only declared
+    # input is a path, so it could be bound ONLY once that path existed.  The
+    # identical sentence over a path that did not yet exist was served correctly
+    # by the text writer.  A file's mere existence changed which capability
+    # answered an ordinary write, and the answer was a DOCX verifier that failed.
+    #
+    # The rule is the capability's own contract, not a keyword list: a sentence
+    # that states a payload and where it goes cannot be answered by a capability
+    # with no slot to put the payload in.  Measured blast radius over 17
+    # ordinary sentences -- count, read, show, copy, sort, remove, hash, list,
+    # search, diff, head, verify, check, mkdir, uniq and two writes -- the check
+    # applies to exactly the 2 writes and to nothing else.  The refusal carries
+    # the BINDING_REFUSED: prefix, which is what lets the existing composition
+    # fallthrough serve the write instead.
+    if _states_a_payload_and_its_destination(goal):
+        try:
+            from canonical.runtime import capability_type_surface_v1 as _TS
+            kinds = {str(t or "").upper() for t in _TS.signature(entry).values()}
+        except Exception:  # noqa: BLE001 - an unreadable entry declares nothing
+            kinds = set()
+        if kinds and not (kinds & _PAYLOAD_SLOT_KINDS):
+            return {"capability_id": cid, "admitted": False,
+                    "reason": "BINDING_REFUSED:NO_SLOT_FOR_THE_STATED_PAYLOAD:"
+                              + ",".join(sorted(kinds))[:120],
+                    "required_inputs": required}
     if not front.is_plain_goal_routable({"action_template": contract}):
         return {"capability_id": cid, "admitted": False, "reason": "NO_DECLARED_INPUT_CONTRACT",
                 "required_inputs": required}
