@@ -872,6 +872,54 @@ def _post_touch(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
     return True, "", {"postcondition_checked": "touch", "target_present": True}
 
 
+def _post_sort(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
+    """`sort -o B A` promises that B is A's lines, in order.
+
+    This is the strongest postcondition in the table, and it needs no trust in
+    anything the producer reported: the promised end state is recomputed from A,
+    which is still on disk, and compared byte for byte with B.  A is not consumed
+    by sort, so the oracle outlives the command.
+
+    Scoped to exactly one shape -- `sort -o B A`, four tokens -- because that is
+    the only shape whose promise can be stated without guessing.  `sort A` alone
+    writes nothing and stays a reader; `sort -o B A C` merges several inputs and
+    is refused as unstateable rather than approximated.
+
+    Ordering is checked against BOTH the bytewise order and the locale's
+    collation order, because which one `sort` applied depends on the environment
+    it ran in and this check must not encode a fact about one host.  A file that
+    matches neither is a real failure, not a locale artifact.
+    """
+    if len(tokens) != 4 or tokens[1] not in _SIDE_EFFECTING_FLAGS:
+        return False, "COMMAND_SORT_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", {
+            "argv_tokens": len(tokens)}
+    dst = _inside(root, tokens[2])
+    src = _inside(root, tokens[3])
+    if src is None or dst is None:
+        return False, "COMMAND_SORT_PATH_OUTSIDE_REPOSITORY", {}
+    if not src.is_file():
+        return False, "COMMAND_SORT_SOURCE_ABSENT_FROM_DISK", {}
+    if not dst.is_file():
+        return False, "COMMAND_SORT_DESTINATION_ABSENT_FROM_DISK", {}
+    raw = src.read_bytes()
+    lines = raw.splitlines(keepends=True)
+    candidates = [b"".join(sorted(lines))]
+    try:
+        import locale as _locale
+
+        collated = b"".join(sorted(lines, key=_locale.strxfrm))
+        if collated not in candidates:
+            candidates.append(collated)
+    except Exception:  # noqa: BLE001 - no collation available, bytes still are
+        pass
+    got = dst.read_bytes()
+    if got not in candidates:
+        return False, "COMMAND_SORT_DESTINATION_IS_NOT_THE_SOURCE_IN_ORDER", {
+            "source_bytes": len(raw), "destination_bytes": len(got)}
+    return True, "", {"postcondition_checked": "sort", "lines_compared": len(lines),
+                      "destination_matches_sorted_source": True}
+
+
 # Keyed by program name.  Anything absent is refused by the caller rather than
 # passed, so widening this table is a deliberate act with a test attached.
 def _post_rm(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
@@ -943,6 +991,7 @@ _MUTATING_POSTCONDITIONS = {
     "touch": _post_touch,
     "rm": _post_rm,
     "tee": _post_tee,
+    "sort": _post_sort,
 }
 
 
@@ -970,6 +1019,9 @@ def _inspect_shell_command_run(args: Mapping, result: Mapping, root: Path) -> tu
     if any(not tok for tok in tokens):
         return False, "COMMAND_ARGV_HAS_AN_EMPTY_TOKEN", {}
     program = tokens[0].rsplit("/", 1)[-1]
+    takes_output_flag = any(
+        tok in _SIDE_EFFECTING_FLAGS or tok.startswith("--output=")
+        for tok in tokens[1:])
     # An interpreter is not read-only in general, and it is not being treated as
     # one here.  What is allowed is the one shape the receipt-backed rows all
     # have -- ["python3", "<a .py file inside this repository>"] -- which is
@@ -978,15 +1030,30 @@ def _inspect_shell_command_run(args: Mapping, result: Mapping, root: Path) -> tu
     if program in ("python3", "python") and len(tokens) == 2 and tokens[1].endswith(".py"):
         if _inside(root, tokens[1]) is None:
             return False, "COMMAND_SCRIPT_OUTSIDE_REPOSITORY", {}
-    elif program not in _READ_ONLY_COMMANDS:
+    elif program not in _READ_ONLY_COMMANDS or takes_output_flag:
         # Not re-runnable -- but a command that changes something still makes a
         # promise about the world, and the world is still there to be asked.
+        #
+        # A reader carrying an output flag belongs here too, and always did: the
+        # note on _SIDE_EFFECTING_FLAGS says plainly that "sort -o FILE" writes
+        # FILE, so re-running it is a second side effect and not a check.  It
+        # used to be refused outright below, which was correct while nothing
+        # could state what such a command promises.  Now that _post_sort can --
+        # recomputing the sorted bytes from the source, which sort leaves on
+        # disk -- refusing it denies work that is fully checkable.
+        #
+        # Nothing else changes.  A command with an output flag and NO
+        # postcondition falls to the same refusal it always got, so `grep -o`,
+        # whose -o means only-matching and not output, is refused exactly as
+        # before rather than being re-run.
         check = _MUTATING_POSTCONDITIONS.get(program)
         if check is not None:
             return check(tokens, root)
-        return False, "COMMAND_NOT_RE_RUNNABLE_WITHOUT_SIDE_EFFECTS", {
+        return False, (
+            "COMMAND_TAKES_AN_OUTPUT_FLAG" if takes_output_flag
+            else "COMMAND_NOT_RE_RUNNABLE_WITHOUT_SIDE_EFFECTS"), {
             "program": program, "checked": False}
-    if any(tok in _SIDE_EFFECTING_FLAGS or tok.startswith("--output=") for tok in tokens[1:]):
+    if takes_output_flag:
         return False, "COMMAND_TAKES_AN_OUTPUT_FLAG", {"program": program}
     claimed_out = result.get("stdout")
     claimed_code = result.get("returncode")

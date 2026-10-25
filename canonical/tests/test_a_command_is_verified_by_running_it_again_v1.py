@@ -183,9 +183,44 @@ class TestNothingIsReRunThatCouldChangeSomething(unittest.TestCase):
         ok, reason, _ = _inspect(["cp", self.f, dest], "")
         self.assertTrue(ok, "refused a copy that is really there and really equal: %s" % reason)
 
-    def test_a_reader_with_an_output_flag_is_refused(self):
-        ok, reason, _ = _inspect(["sort", "-o", "%s/b2.txt" % SCRATCH, self.f], "")
-        self.assertFalse(ok, "sort -o writes a file; re-running it is a side effect")
+    def test_a_reader_with_an_output_flag_is_never_re_run(self):
+        """An output flag takes a command out of the re-run path, permanently.
+
+        Rewritten harder, not deleted.  The version this replaced asserted one
+        refusal string -- COMMAND_TAKES_AN_OUTPUT_FLAG for `sort -o B A` -- and
+        so pinned "refused" where the invariant was only ever "not re-run".  A
+        machine that did nothing at all satisfied the old assertion.
+
+        The invariant that actually matters is stated by the note on
+        _SIDE_EFFECTING_FLAGS: "sort -o FILE" writes FILE, so repeating it is a
+        second side effect and not a check.  That still holds.  What changed is
+        that a command whose promise CAN be stated is now judged against the
+        world instead of being refused for want of a check -- so this pins both
+        halves: a wrong destination is refused, a right one is accepted, and
+        neither was reached by running the command again.
+        """
+        dest = "%s/b2.txt" % SCRATCH
+        # Unsorted on disk, and not the source in order: must be refused.
+        (ROOT / dest).write_text("banana\napple\ncherry\n", encoding="utf-8")
+        ok, reason, _ = _inspect(["sort", "-o", dest, self.f], "")
+        self.assertFalse(ok, "certified a destination that is not the source in order")
+        self.assertEqual(reason, "COMMAND_SORT_DESTINATION_IS_NOT_THE_SOURCE_IN_ORDER",
+                         "refused for the wrong reason -- this must be judged by the "
+                         "world, not by an output-flag rule: %s" % reason)
+        # Exactly the source in order: accepted, and still without a re-run.
+        (ROOT / dest).write_text("apple\nbanana\ncherry\n", encoding="utf-8")
+        ok, reason, _ = _inspect(["sort", "-o", dest, self.f], "")
+        self.assertTrue(ok, "refused a destination that is exactly sorted: %s" % reason)
+
+    def test_an_output_flag_with_no_stateable_promise_is_still_refused(self):
+        """The guard on that widening: only commands with a promise gained one.
+
+        `grep -o` means only-matching, not output-to-file, and nothing states a
+        promise for it.  It must be refused exactly as it was before, and above
+        all it must not be re-run.
+        """
+        ok, reason, _ = _inspect(["grep", "-o", "apple", self.f], "")
+        self.assertFalse(ok, "re-ran a command whose -o is not an output flag")
         self.assertEqual(reason, "COMMAND_TAKES_AN_OUTPUT_FLAG")
 
     def test_an_absent_or_empty_argv_is_refused(self):

@@ -1483,8 +1483,29 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         # That is the data-destruction class closed in PR #6119, reopened.  A
         # sentence that states no content has nothing to compose into a write, so
         # it keeps failing closed exactly as it did before.
-        if (admission.get("typed_binding_refused") is True
-                and composer_route.extract_content(normalized) is not None):
+        # The same gate widened to the other thing a sentence can state.  A
+        # command line is grounded content in exactly the sense a payload is: it
+        # is something the request actually says, token for token, and the
+        # acceptance layer re-derives it and stops a step whose argv the sentence
+        # does not contain with STEP_COMMAND_NOT_IN_THE_REQUEST.  So a stated
+        # command is as safe to compose as a stated payload, and refusing it
+        # fails a request the machine can do.
+        #
+        # Measured without this, on "Compute the sha256 of the file <t>/a1.txt":
+        # the front compiler ranked shell.command.run FIRST at score 8, could not
+        # bind its argv slot from prose (argv:not_stated), moved on to
+        # finance.saccr.credit.addon.v1 on the single matched word "compute",
+        # and route admission fail-closed that as R3_WEAK_EVIDENCE -- while the
+        # composer route reached the request with the one-step chain
+        # ['shell.command.run'].  The capability was ranked correctly and then
+        # thrown away for want of a binder.
+        #
+        # The #6119 hazard this gate was scoped against stays closed: "Check the
+        # file X" states neither a payload nor a command line, so extract_content
+        # and extract_argv are both None and it keeps failing closed.
+        if admission.get("typed_binding_refused") is True and (
+                composer_route.extract_content(normalized) is not None
+                or composer_route.extract_argv(normalized) is not None):
             composed = _try_composed(task_id, goal, started)
             if composed is not None:
                 return _composed_holds_up(composed, normalized, future_artifacts)
