@@ -835,10 +835,10 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # "Show me the beginning of the file X" measured to bind `cat`, which returns
     # the whole file.  Not a false answer, but the sentence asked for the
     # beginning and `head` is the command that means it.
-    (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\b(?:first|beginning)\b",
-     "head", _head_flags, 1),
-    (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\b(?:last|final|end)\b",
-     "tail", _tail_flags, 1),
+    (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\b(?:first|beginning)\b"
+     r"|\bfirst\b[^\n]{0,20}?\blines?\b", "head", _head_flags, 1),
+    (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\b(?:last|final|end)\b"
+     r"|\b(?:last|final)\b[^\n]{0,20}?\blines?\b", "tail", _tail_flags, 1),
     # "Put the lines of the file X in order" and "Arrange the lines of the file
     # X in order" both measured to bind nothing: the sentence states the RESULT
     # rather than naming the program.
@@ -873,15 +873,16 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
      "tac", _no_flags, 1),
     # "Add line numbers to the file X" measured to bind nothing: the noun and
     # the counting word are the other way round from "number the lines".
-    (r"\bnumbers?\b[^\n]{0,40}?\blines?\b|\blines?\b[^\n]{0,20}?\bnumbers?\b",
-     "nl", _no_flags, 1),
+    (r"\bnumbers?\b[^\n]{0,40}?\blines?\b"
+     r"|\blines?\b[^\n]{0,20}?\b(?:numbers?|numbered)\b", "nl", _no_flags, 1),
     # Order matters: the first pattern to match wins, so the narrower claims
     # about a path come before the general one about a directory.  Measured out
     # of order, "Show the directory name of X" matched (show ... directory) and
     # bound `ls` on a file.
     (r"\bbase ?name\b", "basename", _no_flags, 1),
     (r"\b(?:directory name|parent directory)\b", "dirname", _no_flags, 1),
-    (r"\b(?:list|show)\b[^\n]{0,40}?\bdirectory\b", "ls", _no_flags, 1),
+    (r"\b(?:list|show)\b[^\n]{0,40}?\bdirectory\b"
+     r"|\bfiles?\b[^\n]{0,30}?\bdirectory\b", "ls", _no_flags, 1),
     (r"\b(?:real|absolute|full) path\b", "realpath", _no_flags, 1),
     (r"\b(?:octal|byte) dump\b", "od", _no_flags, 1),
     # The pattern is deliberately narrow.  The PROGRAM is called `file`, and the
@@ -934,8 +935,12 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # here because the first pattern to match wins, and the generic read rule
     # would otherwise take the sentence and refuse it on arity.
     (r"\b(?:join|concatenate|combine|merge)\b", "cat", _no_flags, 2),
+    # The noun phrase on its own.  "the contents of the file X" states the thing
+    # wanted and the thing it is in, with no verb at all, and measured as routing
+    # to a JSON file WRITER -- a write capability picked for a read request.
     (r"\b(?:read|show|display|print|cat)\b[^.\n]{0,40}?\bfile\b"
-     r"|\boutput\b(?!\s+file\b)[^.\n]{0,40}?\bfile\b", "cat", _no_flags, 1),
+     r"|\boutput\b(?!\s+file\b)[^.\n]{0,40}?\bfile\b"
+     r"|\bcontents?\b[^\n]{0,20}?\bof\b", "cat", _no_flags, 1),
 )
 
 # A command whose first operand is NOT a path but a value the sentence states.
@@ -1233,6 +1238,24 @@ _FILTER_LINE = re.compile(
 # request to be shown something destroyed the file it named, which is the same
 # defect `sed -n 3p` had, one layer up, where the script really does rewrite.
 _READ_VERBS = re.compile(r"\b(?:show|print|read|display)\b")
+# The other half of the same distinction, which was never written.  `_READ_VERBS`
+# says when NOT to write back; nothing ever said when TO.  So a sentence with no
+# verb at all fell into the write branch by default.  Measured on 5126acf, and
+# pre-existing rather than new: "X in upper case" -- a noun phrase that states no
+# verb either way -- bound the rewriting script, wrote the upper-cased text back
+# over X, and was certified, while "Show X in upper case" left X alone.  An
+# ambiguous phrase destroying the file it named is the wrong default: the answer
+# is on stdout either way, so nothing is lost by not writing.
+#
+# Deliberately absent: the two words "upper case" and "lower case" on their own.
+# "Show X in upper case" contains them and must not write, and the one-word verb
+# forms `uppercase`/`lowercase` are listed instead.
+_CHANGE_VERBS = re.compile(
+    r"\bconvert(?:s|ed|ing)?\b|\breplace\w*|\bsubstitut\w*"
+    r"|\bchang(?:e|es|ed|ing)\b|\brewrit(?:e|es|en|ing)\b|\btransform\w*"
+    r"|\bupdate[ds]?\b|\boverwrit\w*|\buppercase\b|\blowercase\b"
+    r"|\bin[- ]place\b|\bturn\w*\b[^\n]{0,20}?\binto\b"
+    r"|\bmake\b[^\n]{0,20}?\b(?:upper|lower)\b")
 
 _KEEPS_EXISTING_CONTENT = re.compile(
     r"\bappend(?:s|ed|ing)?\b|\bprepend(?:s|ed|ing)?\b|\binsert(?:s|ed|ing)?\b"
@@ -1262,6 +1285,13 @@ _ONE_LEVEL_ONLY = re.compile(r"\brecursive(?:ly)?\b|\bsub[- ]?director(?:y|ies)\
 _FILE_SUFFIX = re.compile(r"\.([A-Za-z0-9]+)\b")
 # The words that say a sentence wants the directory LISTED rather than read.
 _LISTING_REQUEST = re.compile(r"\b(?:list|names?|what|which)\b")
+# A sentence that opens with an article and never states a verb is a noun phrase:
+# "the third line of X" asks for the same thing as "Show the third line of X".
+# Scoped to the head of the sentence, so a verb anywhere later still decides, and
+# paired with `_ANOTHER_OPERATION` at the call site so a noun phrase that also
+# states a transform -- "the third line of X in upper case" -- keeps composing
+# instead of losing the transform.
+_BARE_NOUN_PHRASE = re.compile(r"^\s*(?:the|a|an)\b")
 
 
 def _prose_argv(sentence: str) -> list[str] | None:
@@ -1577,7 +1607,16 @@ def _prose_argv(sentence: str) -> list[str] | None:
     _which = _prose_ordinal(sentence)
     if (_which is not None and "sed" in known
             and re.search(r"\bline\b", text) and not re.search(r"\blines\b", text)
-            and re.search(r"\b(?:show|print|read|display)\b", text)):
+            # No `not _ANOTHER_OPERATION` guard here, and putting one in measured
+            # as the defect.  Gating the noun phrase on "states no other
+            # operation" handed "the third line of X in upper case" to the
+            # upper-case table row, which binds the whole file -- so the sentence
+            # was answered with all four lines upper-cased and certified, when it
+            # asked for one.  The verb form never had that guard, and this is the
+            # same sentence; `_sed_print_script` already composes the address with
+            # the transform in one script, which is the answer both forms mean.
+            and (re.search(r"\b(?:show|print|read|display)\b", text)
+                 or _BARE_NOUN_PHRASE.search(text))):
         _operands = extract_paths(sentence)
         if len(_operands) == 1:
             return ["sed", "-n", _sed_print_script(str(_which), sentence),
@@ -1620,7 +1659,8 @@ def _prose_argv(sentence: str) -> list[str] | None:
     _unit_paths = extract_paths(sentence)
     if (_prose and len(_unit_paths) == 1 and "head" in known
             and not _DIRECTORY_REQUEST.search(_prose)
-            and re.search(r"\b(?:show|print|read|display)\b", _prose)):
+            and (re.search(r"\b(?:show|print|read|display)\b", _prose)
+                 or _BARE_NOUN_PHRASE.search(_prose))):
         _operand = str(_unit_paths[0])
         _digits = re.findall(r"\b(\d+)\b", _prose)
         # Both ends stated: "lines 2 to 4".  Neither `head` nor `tail` can answer
@@ -1907,7 +1947,8 @@ def _declare_a_written_output(args: dict[str, Any], argv: Sequence[str],
             # says the opposite.  Nothing is written for a reading, and the run
             # is still accepted -- the upper-cased text is on stdout, which is
             # where a reading puts its answer.
-            if (_READ_VERBS.search(str(sentence or "").lower())
+            _said = str(sentence or "").lower()
+            if (_READ_VERBS.search(_said) or not _CHANGE_VERBS.search(_said)
                     or not any(re.match(r"^s[|/#]", str(part).lstrip()) for part in argv[1:])):
                 return
             args["write_stdout_to_output"] = "true"
@@ -2066,6 +2107,26 @@ def execute_chain(chain: Sequence[str], goal: str,
                       "type_errors": list(errors),
                       "result": observed if isinstance(observed, Mapping)
                                 else {"raw": observed}})
+    if not steps:
+        # Nothing ran.  The loop above is the whole execution, so an empty chain
+        # reaches this return having done nothing at all -- and it used to report
+        # `pass` here, with the status PASS__COMPOSER_CHAIN_EXECUTED, which the
+        # caller then turned into PASS__COMPOSED_CAPABILITY_CHAIN, pass=True.
+        #
+        # Measured on 5126acf: "the first 3 lines of X" routed to
+        # PASS__SYNTHESISED_PROGRAM with chain=[], execute_chain([]) reported it
+        # executed, produced was {}, no acceptance verdict was ever built, and the
+        # front door said the goal was DONE.  A request that ran no step and left
+        # no bytes is the one thing an execution record must never claim.
+        #
+        # Scoped to what this record can prove: it ran zero steps.  It does not
+        # decide whether the goal was achievable -- the caller still reports its
+        # own honest gap, which is what it reported before the chain was believed.
+        return {"schema": SCHEMA, "pass": False, "goal": goal, "steps": steps,
+                "produced": dict(produced),
+                "status": "FAIL__COMPOSER_CHAIN_RAN_NO_STEP",
+                "failed_step": {"index": 0, "capability_id": None},
+                "authority": "TYPE_LEVEL_COMPOSITION_EXECUTED_LOCALLY"}
     return {"schema": SCHEMA, "pass": True, "goal": goal, "steps": steps,
             "produced": dict(produced),
             "status": "PASS__COMPOSER_CHAIN_EXECUTED",
