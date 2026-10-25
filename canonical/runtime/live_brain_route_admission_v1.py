@@ -167,6 +167,17 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     # extract_argv returns one settled argv or refuses on ambiguity, and the
     # acceptance layer re-derives it, so this is a fact about the sentence rather
     # than a preference about capabilities.
+    # A sentence that says "append" promises the file's current content survives.
+    # A plain payload write replaces the whole file, so admitting one here turns
+    # that promise into a deletion reported as exact semantic acceptance --
+    # measured: 'apple\nbanana\n' became 'hello' and passed.  The refusal belongs
+    # in this gate as well as in execute_chain, because this gate re-judges the
+    # compiler's own pick and has admitted what another layer refused.
+    if (str(selected) in composer_route._PLAIN_PAYLOAD_WRITES
+            and composer_route.keeps_existing_content(goal)):
+        return {"schema": SCHEMA, "admitted": False,
+                "rule": "WRITE_WOULD_DISCARD_CONTENT_THE_SENTENCE_PROMISED_TO_KEEP",
+                "compiler_mode": mode, "selected_capability": selected}
     if composer_route.extract_argv(goal) is not None:
         _slots = {str(k or "").lower() for k in
                   ((entry.get("action_template") or {}).get("args") or {})}

@@ -151,6 +151,16 @@ class TestTheExcuseIsEarnedAndNotAssumed(unittest.TestCase):
             base = _fresh("pin_%s" % program)
             if program == "rm":
                 argv = ["rm", "%s/g.txt" % base]
+            elif program == "gzip":
+                # gzip leaves the source gone and a COMPLETE archive in its
+                # place, so that is the world the promise is asked about -- and
+                # writing it through gzip.compress means the stream really does
+                # carry the source's bytes and a valid CRC.
+                import gzip as _gzip
+                with _gzip.open("%s/g.txt.gz" % base if False else
+                                str(ROOT / ("%s/g.txt.gz" % base)), "wb") as handle:
+                    handle.write(b"pin_gzip\n")
+                argv = ["gzip", "%s/g.txt" % base]
             else:
                 # A postcondition judges the WORLD, it does not run anything, so
                 # the world has to be put in the state the command would have

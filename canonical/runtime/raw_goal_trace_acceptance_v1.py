@@ -1017,6 +1017,40 @@ def _post_sort(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
 
 # Keyed by program name.  Anything absent is refused by the caller rather than
 # passed, so widening this table is a deliberate act with a test attached.
+def _post_gzip(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
+    """`gzip A` promises three things, and all three are checkable now.
+
+    A is gone; A.gz is there in its place; and A.gz is a COMPLETE gzip stream, so
+    the content is recoverable rather than merely renamed.  The third is the one
+    that makes the promise honest -- a truncated or corrupt archive satisfies the
+    first two and still destroyed the file.  Decompressing it here reads the
+    whole stream, which checks the stored CRC and length, using the standard
+    library rather than shelling out to a second program.
+
+    Scoped to a program and one plain operand: a flag such as `-k` changes what
+    survives, so it is refused as unstateable rather than guessed at.
+    """
+    if len(tokens) != 2 or str(tokens[1]).startswith("-"):
+        return False, "COMMAND_GZIP_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", {"argv_tokens": len(tokens)}
+    source = _inside(root, tokens[1])
+    if source is None:
+        return False, "COMMAND_GZIP_PATH_OUTSIDE_REPOSITORY", {}
+    if source.exists():
+        return False, "COMMAND_GZIP_SOURCE_STILL_PRESENT", {}
+    archive = source.with_name(source.name + ".gz")
+    if not archive.is_file():
+        return False, "COMMAND_GZIP_ARCHIVE_ABSENT_FROM_DISK", {"expected": str(archive)}
+    try:
+        import gzip as _gzip
+        with _gzip.open(archive, "rb") as handle:
+            recovered = handle.read()
+    except Exception as exc:  # noqa: BLE001 - a corrupt stream is data, not a crash
+        return False, "COMMAND_GZIP_ARCHIVE_NOT_A_COMPLETE_STREAM", {"error": str(exc)[:160]}
+    return True, "", {"postcondition_checked": "gzip", "source_replaced_by_archive": True,
+                      "archive": str(archive), "recoverable_bytes": len(recovered),
+                      "consumed_paths": [tokens[1]]}
+
+
 def _post_rm(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
     """`rm A` promises exactly one thing about the world: A is gone.
 
@@ -1053,7 +1087,10 @@ def _post_rm(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
 # consumed_paths from its postcondition, so the two cannot drift apart.  This is
 # what lets a caller bind output_path to the operand a command removes and say so
 # honestly, instead of the adapter guessing at the command's intent.
-_CONSUMES_AN_OPERAND = frozenset({"rm", "mv"})
+# `gzip A` consumes A the way `rm A` does: the operand is gone afterwards and
+# what replaces it is judged by _post_gzip, which reads the archive back and
+# checks the stored CRC rather than trusting that a file appeared.
+_CONSUMES_AN_OPERAND = frozenset({"rm", "mv", "gzip"})
 
 
 # Programs that report their ANSWER as an exit status rather than as a failure.
@@ -1135,6 +1172,7 @@ _MUTATING_POSTCONDITIONS = {
     "mkdir": _post_mkdir,
     "touch": _post_touch,
     "rm": _post_rm,
+    "gzip": _post_gzip,
     "tee": _post_tee,
     "sort": _post_sort,
 }
