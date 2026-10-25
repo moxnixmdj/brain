@@ -100,6 +100,29 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
         ("Compute the sha256 of the file {f}", ["sha256sum", "{f}"]),
         # The destination is not the last operand here: sort writes through -o.
         ("Sort the file {f} into {g}", ["sort", "-o", "{g}", "{f}"]),
+        # --- the rest of the surface the verifier already knows how to judge.
+        # Before this block 11 of those 30 commands were reachable from English
+        # and 19 were not; the acceptance machinery for every one of them already
+        # existed, and only the translation was missing.
+        ("Compute the md5 of the file {f}", ["md5sum", "{f}"]),
+        ("Show the unique lines of the file {f}", ["uniq", "{f}"]),
+        ("Reverse the lines of the file {f}", ["tac", "{f}"]),
+        ("Number the lines of the file {f}", ["nl", "{f}"]),
+        ("List the directory {d}", ["ls", "{d}"]),
+        ("Show the base name of {f}", ["basename", "{f}"]),
+        ("Show the directory name of {f}", ["dirname", "{f}"]),
+        ("Show the real path of {f}", ["realpath", "{f}"]),
+        ("Show the octal dump of the file {f}", ["od", "{f}"]),
+        ("Find the lines in the file {f} matching 'apple'", ["grep", "apple", "{f}"]),
+    )
+
+    # Deliberately NOT bound, each measured rather than assumed.  Binding one of
+    # these would run a command and then report failure over work that
+    # succeeded, which is the shape PR #6126 closed.
+    NO_TRUTHFUL_CHECK = (
+        "Show the status of the file {f}",      # stat: timestamps never repeat
+        "Diff the file {f} against {g}",        # diff: answers via exit status 1
+        "Compare the bytes of {f} and {g}",     # cmp: the same mechanism
     )
 
     SUBS = (("{f}", "%s/a1.txt" % SCRATCH), ("{g}", "%s/b2.txt" % SCRATCH),
@@ -121,6 +144,35 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
             if got != self._fmt(want):
                 wrong.append((template, got, self._fmt(want)))
         self.assertEqual(wrong, [], "prose command not bound exactly: %r" % wrong)
+
+    def test_a_command_with_no_truthful_check_is_never_bound(self):
+        """Never the unverifiable program, whatever else the sentence falls to.
+
+        The claim is about the PROGRAM, not about refusal.  "Show the status of
+        the file X" legitimately falls through to the general read rule and
+        binds `cat`, which is verifiable and harmless; what it must never do is
+        bind `stat`, whose answer cannot be checked.  Asserting None here would
+        have been the weaker test -- it would have failed the moment any other
+        rule served the sentence, for a reason that has nothing to do with stat.
+        """
+        banned = {"stat", "diff", "cmp"}
+        for template in self.NO_TRUTHFUL_CHECK:
+            goal = self._fmt([template])[0]
+            argv = _argv(goal)
+            program = argv[0] if argv else None
+            self.assertNotIn(
+                program, banned,
+                "bound %r for %r, whose answer this layer cannot verify -- "
+                "running it reports failure over work that succeeded"
+                % (program, template))
+
+    def test_a_search_that_states_no_pattern_is_refused(self):
+        """grep needs a pattern; a sentence that states none binds nothing."""
+        self.assertIsNone(_argv("Search the file %s/a1.txt" % SCRATCH),
+                          "invented a search pattern")
+        self.assertIsNone(_argv("Find the lines in %s/a1.txt matching 'a' or 'b'"
+                                % SCRATCH),
+                          "guessed between two stated patterns")
 
     def test_a_command_missing_an_operand_is_refused_not_completed(self):
         """The arity rule. cp with one path must not invent a destination."""
@@ -235,6 +287,34 @@ class TestEveryProseRequestRunsAndIsChecked(unittest.TestCase):
         self.assertEqual(len(out.split()[0]) if out.split() else 0, 64,
                          "sha256sum did not report a digest: %r" % out)
         self.assertEqual((ROOT / f).read_text(encoding="utf-8"), UNSORTED)
+
+    def test_the_rest_of_the_verifiable_surface_runs_and_is_checked(self):
+        """Every newly reachable command that CAN be checked, checked."""
+        cases = (
+            ("Compute the md5 of the file %s", 32),
+            ("Show the unique lines of the file %s", None),
+            ("Reverse the lines of the file %s", None),
+            ("Number the lines of the file %s", None),
+            ("Show the octal dump of the file %s", None),
+            ("Find the lines in the file %s matching 'apple'", None),
+        )
+        unverified = []
+        for template, digest_len in cases:
+            f = _fresh()
+            result = _solve(template % f)
+            if not _verified(result):
+                unverified.append((template, result.get("status")))
+                continue
+            if digest_len is not None:
+                steps = (result.get("composer_execution") or {}).get("steps") or []
+                out = str((steps[0].get("result") or {}).get("stdout") or "")
+                self.assertEqual(len(out.split()[0]) if out.split() else 0, digest_len,
+                                 "md5sum did not report a digest: %r" % out)
+            # A reader must leave what it read alone.
+            self.assertEqual((ROOT / f).read_text(encoding="utf-8"), UNSORTED,
+                             "%s changed the file it only read" % template)
+        self.assertEqual(unverified, [],
+                         "a reachable command was not exactly verified: %r" % unverified)
 
     def test_a_stated_sort_into_a_file_writes_the_sorted_bytes_there(self):
         """The strongest row: the promise is recomputed, not trusted."""

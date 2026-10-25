@@ -512,10 +512,74 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
      "tail", _tail_flags, 1),
     (r"\bsort\b", "sort", _no_flags, 1),
     (r"\b(?:checksum|sha256)\b", "sha256sum", _no_flags, 1),
+    # --- the rest of the surface the acceptance layer already knows how to
+    # judge.  Every program below is in _READ_ONLY_COMMANDS or
+    # _MUTATING_POSTCONDITIONS, so each one is verified by machinery that
+    # already existed: nothing here adds a way to be trusted, only a way to be
+    # asked.  Measured before this block, 11 of those 30 commands were reachable
+    # from English and 19 were not.
+    (r"\bmd5\b", "md5sum", _no_flags, 1),
+    (r"\bunique\b", "uniq", _no_flags, 1),
+    (r"\breverse\b[^\n]{0,40}?\blines?\b", "tac", _no_flags, 1),
+    (r"\bnumber\b[^\n]{0,40}?\blines?\b", "nl", _no_flags, 1),
+    # Order matters: the first pattern to match wins, so the narrower claims
+    # about a path come before the general one about a directory.  Measured out
+    # of order, "Show the directory name of X" matched (show ... directory) and
+    # bound `ls` on a file.
+    (r"\bbase ?name\b", "basename", _no_flags, 1),
+    (r"\b(?:directory name|parent directory)\b", "dirname", _no_flags, 1),
+    (r"\b(?:list|show)\b[^\n]{0,40}?\bdirectory\b", "ls", _no_flags, 1),
+    (r"\b(?:real|absolute|full) path\b", "realpath", _no_flags, 1),
+    (r"\b(?:octal|byte) dump\b", "od", _no_flags, 1),
+    # `stat`, `diff` and `cmp` are deliberately ABSENT, and each was measured
+    # rather than assumed:
+    #
+    #   stat  -> COMMAND_OUTPUT_NOT_REPRODUCED.  It prints access and modify
+    #            times, so running it twice cannot give the same bytes and the
+    #            re-inspection that makes a read-only command trustworthy is
+    #            unavailable.  The verifier's refusal is the truthful answer.
+    #   diff  -> a step that RAISED.  diff reports "they differ" as exit status
+    #            1, and the adapter raises on a non-zero exit, so the one answer
+    #            anyone usually wants from diff arrives as a failure.
+    #   cmp   -> the same mechanism as diff.
+    #
+    # Binding them would produce a command that runs and then reports failure
+    # over work that succeeded -- the exact shape PR #6126 closed.  A request
+    # for one of them is refused instead, which is honest: nothing here can
+    # verify the answer, and an unverifiable act should not be performed.
     (r"\b(?:read|show|display|print|cat)\b[^.\n]{0,40}?\bfile\b", "cat", _no_flags, 1),
 )
 
+# A command whose first operand is NOT a path but a value the sentence states.
+# `grep` needs a pattern, and a pattern is exactly what a quoted value is: the
+# binder already has extract_content for it, and the acceptance layer already
+# re-derives the whole argv from the sentence.  Requiring BOTH a quoted pattern
+# and exactly one path is what keeps this from guessing -- a search that states
+# no pattern binds nothing, because an invented pattern is an invented answer.
+_PROSE_COMMAND_WITH_VALUE: tuple[tuple[str, str], ...] = (
+    (r"\b(?:grep|search|find)\b", "grep"),
+)
+
 _COUNT_RE = re.compile(r"\bfirst\s+(\d+)\b|\b(\d+)\s+lines?\b")
+
+
+_QUOTED = re.compile(r"""(['"])(.+?)\1""", re.S)
+
+
+def _quoted_value(sentence: str) -> str | None:
+    """The value a sentence delimits, when it delimits one and nothing else.
+
+    ``extract_content`` reads a stated payload from its ROLE in the sentence --
+    "the text ... to the file ...".  A search pattern has no role phrase: it is
+    simply quoted.  Reading the quotes is not a guess, it is the caller having
+    marked the boundary, which is the same evidence the ARGV rule already trusts
+    when it splits a quoted command line.  Ambiguity refuses: two different
+    quoted values in one sentence state two candidates and neither is the one.
+    """
+    found = [m.group(2) for m in _QUOTED.finditer(str(sentence or ""))]
+    if len(found) != 1 or not found[0].strip():
+        return None
+    return found[0]
 
 
 def _prose_count(sentence: str) -> int:
@@ -561,6 +625,17 @@ def _prose_argv(sentence: str) -> list[str] | None:
         if len(paths) != 2:
             return None
         return [program, dest_flag, str(paths[1]), str(paths[0])]
+    for pattern, program in _PROSE_COMMAND_WITH_VALUE:
+        if program not in known:
+            continue
+        if not re.search(pattern, text):
+            continue
+        value = extract_content(sentence) or _quoted_value(sentence)
+        if not value or len(paths) != 1:
+            # A pattern the sentence did not state, or more than one file to
+            # search in: refuse rather than complete the command by guessing.
+            return None
+        return [program, str(value), str(paths[0])]
     for pattern, program, flags, arity in _PROSE_COMMAND:
         if program not in known:
             continue
