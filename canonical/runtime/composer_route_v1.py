@@ -279,6 +279,49 @@ def route(goal: str, seed: Sequence[str] | None = None,
                     "token": token, "chain": list(chain), "tried": tried,
                     "status": "PASS__COMPOSER_ROUTE_FOUND",
                     "authority": "TYPE_LEVEL_COMPOSITION_REACHABLE"}
+    # A sentence that STATES a command line is not a token-scoring question.
+    # `candidate_tokens` scores the registry's keywords against the sentence's
+    # prose, so a sentence whose words match no keyword scores nothing at all --
+    # measured on caaf2e7: "Make a folder named X" returned
+    # OPEN__COMPOSER_NO_REACHABLE_TOKEN with tried=[] (the word "folder" is in
+    # no capability's keywords), while extract_argv had ALREADY returned
+    # ['mkdir', X].  The same sentence with "directory" in place of "folder"
+    # routed fine, because one word happened to be a keyword.  Whether a request
+    # the machine can do is served should not depend on that coincidence.
+    #
+    # Scoped to what the sentence states: extract_argv returns one settled argv
+    # or refuses on ambiguity, and the acceptance layer re-derives it and stops
+    # any step whose argv the sentence does not contain
+    # (STEP_COMMAND_NOT_IN_THE_REQUEST).  Tried AFTER the token loop, so this
+    # only adds reach where there was none -- it cannot preempt a route that
+    # already worked.
+    stated_command = extract_argv(goal)
+    if stated_command is not None:
+        reg = composer.load_registry()
+        for cid, node in g.items():
+            entry = reg.get(cid)
+            if not isinstance(entry, Mapping):
+                continue
+            slots = {str(k or "").lower() for k in
+                     ((entry.get("action_template") or {}).get("args") or {})}
+            # "Declares an argv slot" is NOT "is a command runner", and measuring
+            # it that way mis-routed this very sentence: the first match in the
+            # graph was auto.apt.zint, a barcode-package installer that happens
+            # to take an argv, and route() returned it as a PASS.  A general
+            # command runner takes the command line and a place to put the
+            # result, and nothing else -- a capability that also wants a package
+            # name or a payload is answering a different question.
+            if "argv" not in slots or not slots <= {"argv", "output_path"}:
+                continue
+            for token in [str(t) for t in (node.get("provides") or [])]:
+                chain = composer.plan(have, token, g)
+                tried.append({"token": token, "reachable": chain is not None,
+                              "chain": chain, "stated_command_line": stated_command})
+                if chain:
+                    return {"schema": SCHEMA, "pass": True, "goal": goal,
+                            "token": token, "chain": list(chain), "tried": tried,
+                            "status": "PASS__COMPOSER_ROUTE_FOUND",
+                            "authority": "TYPE_LEVEL_COMPOSITION_REACHABLE"}
     # No chain of registered capabilities reaches it. Before reporting that,
     # try to WRITE a program that does it -- python3 is here and the stdlib is
     # free, so "nothing is registered" is not the same as "it cannot be done".
@@ -598,24 +641,56 @@ def _tail_flags(n: int) -> list[str]:
     return ["-n", str(n)]
 
 
+# The units `wc` counts, and the words that say something is being counted.
+# Defined once so the three `wc` rules cannot drift apart from each other.
+_WC_QTY = r"count|counts|counting|how many|number of|total|tally"
+_WC_WORDS = r"words?|word count"
+_WC_CHARS = r"bytes?|characters?|char count|byte count"
+_WC_LINES = r"lines?|line count"
+
 _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # Synonyms measured rather than guessed: "duplicate the file a as b" bound
     # nothing at all, so a request the machine can do was refused for want of one
     # word in a table.  Each addition here is a phrasing that was measured to
     # fail, not a synonym thought up in advance.
-    (r"\b(?:copy|duplicate)\b", "cp", _no_flags, 2),
+    # The same filter claim that `rm` must not steal, `cp` must not steal
+    # either -- and it is worse here, because `cp` sits first in the table and
+    # needs two operands, so "Remove the duplicate lines from the file X"
+    # matched `copy|duplicate`, found one path instead of two, and returned
+    # None, which ends the search.  The whole table was abandoned on a word that
+    # meant "repeated", not "make a second copy".
+    (r"\b(?:copy|duplicate)\b(?![^\n]{0,20}?\blines?\b)", "cp", _no_flags, 2),
     (r"\b(?:move|rename)\b", "mv", _no_flags, 2),
-    (r"\b(?:remove|delete)\b", "rm", _no_flags, 1),
-    (r"\b(?:create|make)\b[^.\n]{0,40}?\bdirectory\b", "mkdir", _no_flags, 1),
+    # "Erase the file X" measured to bind nothing.  The negative lookahead is
+    # scoped to exactly one claim: removing LINES that are duplicated is a
+    # filter over a file that stays, not a deletion of it.  Measured without it,
+    # "Remove the duplicate lines from the file X" matched `rm` first -- it is
+    # third in this table and the first pattern to match wins -- so teaching
+    # `uniq` the word "duplicate" alone would have changed nothing at all.
+    (r"\b(?:remove|delete|erase)\b"
+     r"(?![^\n]{0,40}?\b(?:duplicate|repeated|unique)\b[^\n]{0,20}?\blines?\b)",
+     "rm", _no_flags, 1),
+    (r"\b(?:create|make)\b[^.\n]{0,40}?\b(?:directory|folder)\b", "mkdir",
+     _no_flags, 1),
     (r"\b(?:create|make|touch)\b[^.\n]{0,40}?\bempty file\b", "touch", _no_flags, 1),
     # The three things `wc` counts, each stated by its own noun.  Order matters
     # only in that all three are narrower than the general read rule below.
-    (r"\b(?:count|how many)\b[^.\n]{0,40}?\b(?:words?|word count)\b", "wc", lambda n: ["-w"], 1),
-    (r"\b(?:count|how many)\b[^.\n]{0,40}?\b(?:bytes?|characters?|char count)\b",
-     "wc", lambda n: ["-c"], 1),
+    # The unit `wc` counts is named by the sentence, and English puts the noun
+    # on either side of the counting word: "count the words", "how many words",
+    # "the number of words" and "the word count" all name the same unit.  The
+    # three rules below used to require the counting word FIRST, so "Show the
+    # word count of the file X" bound no command at all and fell through to
+    # capability selection -- which measured as `docx.document.verify.intent_ooxml`,
+    # a Word-document verifier, answering a request to count words.  Each rule
+    # now matches the unit and the counting word in EITHER order.
+    (r"\b(?:%s)\b[^\n]{0,40}?\b(?:%s)\b|\b(?:%s)\b[^\n]{0,20}?\b(?:%s)\b"
+     % (_WC_QTY, _WC_WORDS, _WC_WORDS, _WC_QTY), "wc", lambda n: ["-w"], 1),
+    (r"\b(?:%s)\b[^\n]{0,40}?\b(?:%s)\b|\b(?:%s)\b[^\n]{0,20}?\b(?:%s)\b"
+     % (_WC_QTY, _WC_CHARS, _WC_CHARS, _WC_QTY), "wc", lambda n: ["-c"], 1),
     # "How many lines are in the file X" is at least as ordinary as "count the
     # lines", and measured to bind nothing.
-    (r"\b(?:count|how many)\b[^.\n]{0,40}?\blines?\b", "wc", lambda n: ["-l"], 1),
+    (r"\b(?:%s)\b[^\n]{0,40}?\b(?:%s)\b|\b(?:%s)\b[^\n]{0,20}?\b(?:%s)\b"
+     % (_WC_QTY, _WC_LINES, _WC_LINES, _WC_QTY), "wc", lambda n: ["-l"], 1),
     # `cut` must be tried BEFORE `head`: "Show the first field of the file X"
     # contains both "show" and "first", and the first pattern to match wins.
     # Measured out of order, it bound `head -n 2` and returned two whole lines
@@ -628,18 +703,33 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
      "head", _head_flags, 1),
     (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\b(?:last|end)\b",
      "tail", _tail_flags, 1),
-    (r"\bsort\b", "sort", _no_flags, 1),
-    (r"\b(?:checksum|sha256)\b", "sha256sum", _no_flags, 1),
+    # "Put the lines of the file X in order" and "Arrange the lines of the file
+    # X in order" both measured to bind nothing: the sentence states the RESULT
+    # rather than naming the program.
+    (r"\bsort\b|\bin order\b|\balphabetical(?:ly)?\b", "sort", _no_flags, 1),
+    # `md5sum` must be tried BEFORE `sha256sum` now that the latter answers to
+    # the generic word "hash": "Compute the md5 hash of X" would otherwise bind
+    # sha256sum and return the wrong digest for an algorithm the sentence named.
+    (r"\bmd5\b", "md5sum", _no_flags, 1),
+    # "Compute the hash of the file X" and "Hash the file X" both measured to
+    # bind nothing, and both fell through to capability selection -- the first
+    # to `source.evidence.extract.objective_grounded.stdlib`, which cannot hash
+    # a file at all.  sha256 is the default when the sentence names no algorithm.
+    (r"\b(?:checksum|sha256|sha-256|hash|hashes|hashed|digest|fingerprint)\b",
+     "sha256sum", _no_flags, 1),
     # --- the rest of the surface the acceptance layer already knows how to
     # judge.  Every program below is in _READ_ONLY_COMMANDS or
     # _MUTATING_POSTCONDITIONS, so each one is verified by machinery that
     # already existed: nothing here adds a way to be trusted, only a way to be
     # asked.  Measured before this block, 11 of those 30 commands were reachable
     # from English and 19 were not.
-    (r"\bmd5\b", "md5sum", _no_flags, 1),
-    (r"\bunique\b", "uniq", _no_flags, 1),
+    (r"\bunique\b|\b(?:duplicate|duplicates|repeated)\b[^\n]{0,20}?\blines?\b",
+     "uniq", _no_flags, 1),
     (r"\breverse\b[^\n]{0,40}?\blines?\b", "tac", _no_flags, 1),
-    (r"\bnumber\b[^\n]{0,40}?\blines?\b", "nl", _no_flags, 1),
+    # "Add line numbers to the file X" measured to bind nothing: the noun and
+    # the counting word are the other way round from "number the lines".
+    (r"\bnumbers?\b[^\n]{0,40}?\blines?\b|\blines?\b[^\n]{0,20}?\bnumbers?\b",
+     "nl", _no_flags, 1),
     # Order matters: the first pattern to match wins, so the narrower claims
     # about a path come before the general one about a directory.  Measured out
     # of order, "Show the directory name of X" matched (show ... directory) and
@@ -689,7 +779,13 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # over work that succeeded -- the exact shape PR #6126 closed.  A request
     # for one of them is refused instead, which is honest: nothing here can
     # verify the answer, and an unverifiable act should not be performed.
-    (r"\b(?:read|show|display|print|cat)\b[^.\n]{0,40}?\bfile\b", "cat", _no_flags, 1),
+    # "Output the contents of the file X" measured to bind nothing.  The
+    # lookahead is load-bearing: "Write the text 'hello' to the OUTPUT FILE X"
+    # also contains "output" followed by "file", and measured without it this
+    # rule stole the write -- the sentence was served by `cat` and refused with
+    # PROMISED_ARTIFACT_MISSING.  "output" counts only as a verb.
+    (r"\b(?:read|show|display|print|cat)\b[^.\n]{0,40}?\bfile\b"
+     r"|\boutput\b(?!\s+file\b)[^.\n]{0,40}?\bfile\b", "cat", _no_flags, 1),
 )
 
 # A command whose first operand is NOT a path but a value the sentence states.
