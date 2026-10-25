@@ -77,7 +77,12 @@ NON_MUTATING_REQUESTS = (
     "Check the file {f}",
     "Verify the file {f}",
     "Search the file {f}",
-    "Truncate the file {f}",
+    # "Truncate the file {f}" is NOT in this list, and was.  Truncating is a
+    # mutation -- it is the plainest way to say "empty this file" -- so a corpus
+    # of requests that state no mutation was the wrong home for it, and keeping it
+    # here pinned a refusal of work the sentence plainly asked for.  It is served
+    # by `sed -i 1,$d` and pinned as served in the ordinary-sentence suite.
+
     "Diff the file {f} against {g}",
 )
 

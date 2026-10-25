@@ -166,7 +166,10 @@ class TestNothingIsReRunThatCouldChangeSomething(unittest.TestCase):
     # re-runnable as cat.  What must never be re-run is `sed -i`, which rewrites
     # the file in place -- so it is pinned on its own below instead of by
     # refusing the whole program, which would refuse a read.
-    NO_STATEABLE_PROMISE = ("dd", "chmod", "ln", "truncate")
+    # `chmod` left this list, and that is the point: `chmod +x A` has a precise
+    # promise -- the owner-execute bit is set -- and the disk can be asked about
+    # it directly.  What remains is the set for which no promise can be stated.
+    NO_STATEABLE_PROMISE = ("dd", "ln", "truncate")
 
     def test_a_mutating_command_with_no_stateable_promise_is_refused(self):
         for program in self.NO_STATEABLE_PROMISE:
@@ -190,9 +193,12 @@ class TestNothingIsReRunThatCouldChangeSomething(unittest.TestCase):
                      ["sed", "--in-place", "s|a|b|", self.f]):
             ok, reason, _ = _inspect(argv, "")
             self.assertFalse(ok, "re-ran %r, which rewrites the file" % argv)
-            # caught by the output-flag branch, which is the right one: `-i` is
-            # sed's in-place flag and the flag check is where a writer belongs
-            self.assertEqual(reason, "COMMAND_TAKES_AN_OUTPUT_FLAG")
+            # Still refused, but no longer by the output-flag branch.  `-i` routes
+            # sed to the postcondition table -- which is where a writer belongs --
+            # and `s|a|b|` is refused THERE, because a substitution between two
+            # texts leaves no promise the disk can answer.  The reason is the more
+            # specific one now, and pinning the old one would have hidden that.
+            self.assertEqual(reason, "COMMAND_SED_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE")
         # and the shared tuple must not have grown a flag that refuses a read
         ok, reason, _ = _inspect(["grep", "-i", "APPLE", self.f], "")
         self.assertNotIn(reason, ("COMMAND_TAKES_AN_OUTPUT_FLAG",
@@ -401,12 +407,21 @@ class TestEveryPostconditionCanBeFalsified(unittest.TestCase):
         the set for which no promise can be stated at all.
         """
         self._world()
-        for program in ("dd", "chmod", "ln", "truncate"):
+        for program in ("dd", "ln", "truncate"):
             self._ask([program, self.A], False,
                       "COMMAND_NOT_RE_RUNNABLE_WITHOUT_SIDE_EFFECTS")
         # sed left the list above as a program, and stays on it as a shape
         self._ask(["sed", "-i", "s|a|b|", self.A], False,
-                  "COMMAND_TAKES_AN_OUTPUT_FLAG")
+                  "COMMAND_SED_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE")
+        # A deletion by POSITION joins it, for the reason that decides the whole
+        # split: the line `1d` removes is gone and was never in the argv, so
+        # nothing about it survives the run to be asked about.
+        self._ask(["sed", "-i", "1d", self.A], False,
+                  "COMMAND_SED_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE")
+        # chmod left the program list, but a NUMERIC mode stays on it: which bits
+        # a sentence meant is not in the argv.
+        self._ask(["chmod", "0644", self.A], False,
+                  "COMMAND_CHMOD_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE")
 
 
 class TestTheArgvCheckOnlyAppliesToAStatedCommand(unittest.TestCase):
