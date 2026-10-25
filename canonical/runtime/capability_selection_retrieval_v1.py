@@ -485,6 +485,20 @@ def _is_executable(entry: Mapping[str, Any]) -> bool:
 _PAYLOAD_SLOT_KINDS = frozenset({"STRING", "JSON_TEXT", "UNKNOWN"})
 
 
+def _states_a_command_the_sentence_maps_to(goal: Any) -> bool:
+    """True when the sentence names an operation that maps to one real program.
+
+    The composer already answers this question -- `_prose_argv` returns one
+    settled argv or None, and it refuses on ambiguity by construction -- so this
+    reads the same fact the route does rather than re-deriving it.
+    """
+    try:
+        from canonical.runtime import composer_route_v1 as _cr
+        return _cr._prose_argv(str(goal or "")) is not None
+    except Exception:  # noqa: BLE001 - an unreadable sentence states no command
+        return False
+
+
 def _states_a_payload_and_its_destination(goal: Any) -> bool:
     """True when the sentence states text to write AND the path it goes to.
 
@@ -628,6 +642,38 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
             return {"capability_id": cid, "admitted": False,
                     "reason": "BINDING_REFUSED:TYPED_SCALAR_INPUTS_UNDECLARED:"
                               + ",".join(undeclared)[:120],
+                    "required_inputs": required}
+    # A sentence that names an operation mapping to one concrete program states a
+    # COMMAND, and a capability that cannot run a command cannot answer it --
+    # however many of the sentence's words its keywords happen to contain.  This
+    # is the same shape as the payload rule above: the question is not whether
+    # the capability's declared inputs can be FILLED, but whether the capability
+    # can hold the thing the sentence asked for.
+    #
+    # Measured on caaf2e7: "Show the word count of the file X" selected
+    # docx.document.verify.intent_ooxml -- a Word-document verifier, whose
+    # registry keywords include "word" -- and "Compute the hash of the file X"
+    # selected source.evidence.extract.objective_grounded.stdlib, which then died
+    # with JSONDecodeError:Expecting value.  For BOTH, composer_route.route()
+    # had already returned PASS__COMPOSER_ROUTE_FOUND with the exact argv
+    # (wc -w X / sha256sum X), but that path is the fallback for a REFUSED
+    # admission, so it never ran.  Refusing here is what lets it run.
+    #
+    # Blast radius measured over a 77-sentence ordinary-phrasing corpus: this
+    # rule changes exactly three routes, and all three were already failing.
+    # No working route moves.
+    if _states_a_command_the_sentence_maps_to(goal):
+        # Imported privately and locally: `admit` imports the type surface under
+        # the name _TS further down, which makes _TS a local for the WHOLE
+        # function.  Naming it here raised UnboundLocalError on every capability
+        # the sentence reached, and the caller turned that into FAIL_CLOSED --
+        # measured as wc losing all ten of its phrasings at once.
+        from canonical.runtime import capability_type_surface_v1 as _ts
+        slots = {str(k or "").lower() for k in _ts.signature(entry)}
+        if slots and "argv" not in slots:
+            return {"capability_id": cid, "admitted": False,
+                    "reason": "BINDING_REFUSED:NO_COMMAND_SLOT_FOR_THE_STATED_COMMAND:"
+                              + ",".join(sorted(slots))[:120],
                     "required_inputs": required}
     return {"capability_id": cid, "admitted": True, "inputs": inputs,
             "required_inputs": required, "specific": is_specific(required)}

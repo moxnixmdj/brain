@@ -30,6 +30,7 @@ finding are green verdicts over work that did not happen.
 """
 
 from __future__ import annotations
+import os
 
 import shutil
 import sys
@@ -1210,6 +1211,101 @@ class TestTheFallthroughIsScopedToWhatTheSentenceStates(unittest.TestCase):
             _verified(out),
             "status=%r reason=%r unverified=%r"
             % (acc.get("status"), acc.get("reason"), acc.get("unverified_reason")))
+
+
+    def test_the_unit_wc_counts_may_come_either_side_of_the_counting_word(self):
+        # "count the words", "how many words", "the number of words" and "the
+        # word count" name the same unit.  The three wc rules used to require the
+        # counting word FIRST, so "Show the word count of the file X" bound no
+        # command and fell through to capability selection -- which measured as
+        # docx.document.verify.intent_ooxml answering a request to count words.
+        from canonical.runtime import composer_route_v1 as _cr
+        f = _fresh("apple banana\ncherry\n")
+        for goal, flag in (("Show the word count of the file %s" % f, "-w"),
+                           ("Count the words in the file %s" % f, "-w"),
+                           ("How many words are in the file %s" % f, "-w"),
+                           ("Show the line count of the file %s" % f, "-l"),
+                           ("Count the number of lines in the file %s" % f, "-l"),
+                           ("Show the character count of the file %s" % f, "-c")):
+            self.assertEqual(["wc", flag, f], _cr._prose_argv(goal), goal)
+            self.assertTrue(_verified(_solve(goal)), goal)
+
+    def test_the_algorithm_the_sentence_names_is_the_one_that_runs(self):
+        # "Compute the md5 hash of X" must not return a sha256 digest: the
+        # sentence named an algorithm.  md5sum is tried first for that reason,
+        # and only now that sha256sum answers to the generic word "hash".
+        from canonical.runtime import composer_route_v1 as _cr
+        f = _fresh("apple\n")
+        self.assertEqual(["md5sum", f],
+                         _cr._prose_argv("Compute the md5 hash of the file %s" % f))
+        self.assertEqual(["sha256sum", f],
+                         _cr._prose_argv("Compute the hash of the file %s" % f))
+        self.assertTrue(_verified(_solve("Compute the hash of the file %s" % f)))
+
+    def test_removing_duplicate_lines_filters_a_file_it_does_not_delete(self):
+        # "Remove the duplicate lines from the file X" is a filter over a file
+        # that stays.  Measured, it matched `rm` first -- third in the table, and
+        # the first pattern to match wins -- and `cp` matched "duplicate" before
+        # that, found one operand instead of two, and abandoned the whole table.
+        from canonical.runtime import composer_route_v1 as _cr
+        f = _fresh("apple\nbanana\napple\n")
+        self.assertEqual(["uniq", f],
+                         _cr._prose_argv("Remove the duplicate lines from the file %s" % f))
+        self.assertTrue(_verified(_solve("Remove the duplicate lines from the file %s" % f)))
+        self.assertTrue(os.path.exists(os.path.join(ROOT, f)),
+                        "the filter deleted the file it was asked to filter")
+        self.assertEqual(["cp", "a.txt", "b.txt"],
+                         _cr._prose_argv("Copy the file a.txt to b.txt"))
+
+    def test_a_capability_that_cannot_run_a_command_does_not_answer_one(self):
+        # The Word-document verifier's registry keywords include "word", so
+        # "Show the word count of the file X" selected it and died inside a
+        # sidecar check.  Its declared inputs can be FILLED from the sentence;
+        # what it cannot do is run a command.
+        from canonical.runtime import capability_composer_v1 as _comp
+        from canonical.runtime import capability_selection_retrieval_v1 as _sel
+        f = _fresh("apple\n")
+        goal = "Show the word count of the file %s" % f
+        reg = _comp.load_registry()
+        verdict = _sel.admit(goal, "docx.document.verify.intent_ooxml",
+                             reg.get("docx.document.verify.intent_ooxml"), ROOT)
+        self.assertIs(verdict.get("admitted"), False, verdict)
+        self.assertIn("NO_COMMAND_SLOT_FOR_THE_STATED_COMMAND",
+                      str(verdict.get("reason")))
+        # The capability that CAN run it is served by the composer, not by the
+        # compiler's own binder -- shell.command.run is refused there with
+        # argv:not_stated, which is exactly why the fallthrough exists.  So the
+        # claim under test is the end-to-end one.
+        self.assertTrue(_verified(_solve(goal)))
+
+    def test_a_stated_command_is_routed_even_when_no_keyword_matches_it(self):
+        # "folder" appears in no capability's keywords, so candidate_tokens
+        # scored nothing and route() returned OPEN__COMPOSER_NO_REACHABLE_TOKEN
+        # with tried=[] -- while extract_argv had already returned ['mkdir', X].
+        # The identical sentence saying "directory" worked, because that one word
+        # happened to be a keyword.  A request the machine can do must not depend
+        # on that coincidence.
+        from canonical.runtime import composer_route_v1 as _cr
+        d = "%s/dqz" % SCRATCH
+        goal = "Make a folder named %s" % d
+        self.assertEqual(["mkdir", d], _cr.extract_argv(goal))
+        self.assertTrue(_verified(_solve(goal)))
+        self.assertTrue(os.path.isdir(os.path.join(ROOT, d)),
+                        "the folder the sentence named was not created")
+
+    def test_a_capability_that_merely_takes_an_argv_is_not_the_command_runner(self):
+        # The regression pin for a mis-route measured while writing the rule
+        # above: "declares an argv slot" matched auto.apt.zint, a barcode-package
+        # installer, and route() returned it as a PASS.  A general command runner
+        # takes the command line and a place for the result and nothing else.
+        from canonical.runtime import composer_route_v1 as _cr
+        d = "%s/dqz" % SCRATCH
+        r = _cr.route("Make a folder named %s" % d)
+        self.assertIs(r.get("pass"), True, r.get("status"))
+        self.assertEqual(["shell.command.run"], r.get("chain"))
+        for tried in (r.get("tried") or []):
+            if tried.get("reachable"):
+                self.assertNotIn("apt", str(tried.get("chain")), tried)
 
 
 
