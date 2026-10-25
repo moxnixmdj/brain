@@ -3378,5 +3378,116 @@ class TestAnAppendIsServedAndADirectoryIsNamedByTheSentence(unittest.TestCase):
         self.assertEqual(["rm", f], _cr._prose_argv("Delete the file %s" % f))
 
 
+class TestRemovingSomethingInsideAFileIsNotDeletingTheFile(unittest.TestCase):
+    """Eight ordinary sentences deleted the file they named and were certified.
+
+    Measured on main d3e9a3a, before this change:
+
+        Remove the executable permission from the file X   -> `rm X`  DELETED, verified
+        Remove the read permission from the file X         -> `rm X`  DELETED, verified
+        Remove the first line from the file X              -> `rm X`  DELETED, verified
+        Remove the last line from the file X               -> `rm X`  DELETED, verified
+        Remove the word 'apple' from the file X            -> `rm X`  DELETED, verified
+        Remove the header from the file X                  -> `rm X`  DELETED, verified
+        Remove the trailing spaces from the file X         -> `rm X`  DELETED, verified
+        Remove the comments from the file X                -> `rm X`  DELETED, verified
+
+    Every one reported PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED.
+    "Remove X from the file Y" is an edit of Y; the sentence names Y as the
+    SOURCE, and the `rm` row matched on the verb alone.
+
+    Scoping `rm` alone was not enough and is measured below: the same sentences
+    then fell through to a READER and were still certified -- `head -n 1` printed
+    the line it had been asked to delete.  A certified wrong answer is not a
+    smaller failure than a deletion, so the fall-through is refused too.
+    """
+
+    EDITS = ("Remove the executable permission from the file %s",
+             "Remove the read permission from the file %s",
+             "Remove the first line from the file %s",
+             "Remove the last line from the file %s",
+             "Remove the word 'apple' from the file %s",
+             "Remove the header from the file %s",
+             "Remove the trailing spaces from the file %s",
+             "Remove the comments from the file %s")
+
+    def test_no_removal_of_something_inside_a_file_deletes_the_file(self):
+        for goal in self.EDITS:
+            a = _fresh("apple\nbanana\ncherry\n")
+            result = _solve(goal % a)
+            self.assertTrue((ROOT / a).exists(),
+                            "the file was deleted by %r" % (goal,))
+            self.assertEqual("apple\nbanana\ncherry\n",
+                             (ROOT / a).read_text(encoding="utf-8"), goal)
+
+    def test_no_removal_of_something_inside_a_file_is_certified_as_answered(self):
+        # The sharper half.  Deleting is one failure; certifying `head -n 1` as
+        # the answer to "remove the first line" is the other, and it is silent --
+        # the caller gets the very line they asked to have gone.
+        for goal in self.EDITS:
+            a = _fresh("apple\nbanana\ncherry\n")
+            self.assertFalse(_verified(_solve(goal % a)), goal)
+
+    def test_a_real_deletion_still_deletes(self):
+        # The pin on the scope of both rules above: they are scoped to the OBJECT
+        # of the verb, not to the verb, so naming the file itself still deletes it.
+        for goal in ("Remove the file %s", "Delete the file %s"):
+            a = _fresh("apple\nbanana\ncherry\n")
+            self.assertTrue(_verified(_solve(goal % a)), goal)
+            self.assertFalse((ROOT / a).exists(), goal)
+
+    def test_a_directory_the_sentence_named_is_still_deleted_whole(self):
+        root = ROOT / SCRATCH
+        root.mkdir(parents=True, exist_ok=True)
+        d = "%s/treerm" % SCRATCH
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "one.log").write_text("fig\n", encoding="utf-8")
+        result = _solve("Delete the directory %s" % d)
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertFalse((ROOT / d).exists())
+
+    def test_deleting_files_inside_a_directory_does_not_delete_the_directory(self):
+        # Regression pin on a defect introduced and merged by the change that
+        # taught `rm -r` to read the word "directory": that rule matched on the
+        # word alone and paths[0] was the DIRECTORY, so a sentence naming files
+        # inside it bound `rm -r` on the tree and deleted every file in it,
+        # certifying the deletion of files the sentence never named.  Refusing is
+        # the honest outcome until the pattern is expanded to real names.
+        root = ROOT / SCRATCH
+        root.mkdir(parents=True, exist_ok=True)
+        d = "%s/treerm2" % SCRATCH
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        for name in ("one.log", "two.txt"):
+            (ROOT / d / name).write_text("fig\n", encoding="utf-8")
+        result = _solve("Delete the files named '*.log' in the directory %s" % d)
+        self.assertFalse(_verified(result), result.get("status"))
+        self.assertTrue((ROOT / d).exists(), "the directory itself was deleted")
+        self.assertTrue((ROOT / d / "two.txt").exists(),
+                        "a file the sentence never named was deleted")
+
+    def test_the_removals_that_are_owned_still_do_their_work(self):
+        # The nearest legitimate cases to the refusal above.  A rule that refuses
+        # too much is a defect too, and these four really perform the removal.
+        a = _fresh("apple\nbanana\napple\ncherry\n\n")
+        self.assertEqual("apple\nbanana\ncherry\n",
+                         _stdout(_solve("Remove the duplicate lines from the file %s" % a)).lstrip("\n"))
+        self.assertEqual("apple\nbanana\ncherry\n",
+                         _stdout(_solve("Remove the repeated lines from the file %s" % a)).lstrip("\n"))
+        b = _fresh("apple\nbanana\napple\ncherry\n\n")
+        self.assertEqual("apple\nbanana\napple\ncherry\n",
+                         _stdout(_solve("Remove the empty lines from the file %s" % b)))
+        c = _fresh("apple\nbanana\napple\ncherry\n\n")
+        self.assertEqual("apple\nbanana\napple\ncherry\n",
+                         _stdout(_solve("Remove the blank lines from the file %s" % c)))
+
+    def test_reading_a_line_is_untouched_by_the_refusal(self):
+        # The refusal keys on a removal verb, so asking for a line still answers.
+        a = _fresh("apple\nbanana\ncherry\n")
+        self.assertEqual("apple\n", _stdout(_solve("Show the first line of the file %s" % a)))
+        self.assertEqual("cherry\n", _stdout(_solve("Show the last line of the file %s" % a)))
+        self.assertEqual("apple\nbanana\ncherry\n",
+                         (ROOT / a).read_text(encoding="utf-8"))
+
+
 if __name__ == "__main__":
     unittest.main()
