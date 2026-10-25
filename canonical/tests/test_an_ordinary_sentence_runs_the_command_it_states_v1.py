@@ -1789,6 +1789,116 @@ class TestTheFallthroughIsScopedToWhatTheSentenceStates(unittest.TestCase):
         self.assertTrue(_verified(_solve(goal)))
 
 
+    def test_a_request_to_append_does_not_replace_the_file(self):
+        # The whole reason this test exists.  "Append the text 'hello' to the
+        # file A" was served by a capability that writes a payload to a
+        # destination, which TRUNCATES the file first.  Measured on the tree
+        # before this change: A held 'apple\nbanana\n', afterwards it held
+        # 'hello', and the run reported
+        # PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED.  The
+        # content the sentence promised to keep was deleted and the deletion was
+        # certified as the work asked for.  No capability in the registry writes
+        # in append mode, so the honest outcome is a refusal with the file
+        # untouched -- not a smaller lie.
+        a = _fresh("apple\nbanana\n")
+        before = (ROOT / a).read_text(encoding="utf-8")
+        result = _solve("Append the text 'hello' to the file %s" % a)
+        self.assertEqual(before, (ROOT / a).read_text(encoding="utf-8"),
+                         "a request to append changed what was already there")
+        self.assertFalse(_verified(result),
+                         "a destructive write was certified as an append")
+
+    def test_every_way_of_saying_append_is_refused_rather_than_destructive(self):
+        # Scoped to the promise, not to one verb: the sentence may say append,
+        # add to the end, put at the end, or insert, and in every case the
+        # existing content must survive.
+        for goal in ("Append the text 'hello' to the file %s",
+                     "Add the text 'hello' to the end of the file %s",
+                     "Add 'hello' to the end of the file %s",
+                     "Write the text 'hello' at the end of the file %s",
+                     "Put the text 'hello' at the end of the file %s",
+                     "Append 'hello' to %s",
+                     "Insert the text 'hello' into the file %s"):
+            a = _fresh("apple\nbanana\n")
+            result = _solve(goal % a)
+            self.assertEqual("apple\nbanana\n", (ROOT / a).read_text(encoding="utf-8"),
+                             goal)
+            self.assertFalse(_verified(result), goal)
+
+    def test_a_plain_write_still_writes_when_the_sentence_asks_for_a_replacement(self):
+        # The pin on the scope of the refusal.  A sentence that asks for the
+        # file to HOLD some text is not a promise that anything survives, and
+        # refusing it would trade one defect for a larger one.
+        a = _fresh("apple\nbanana\n")
+        self.assertTrue(_verified(_solve("Write the text 'hello' to the file %s" % a)))
+        self.assertEqual("hello", (ROOT / a).read_text(encoding="utf-8"))
+
+    def test_the_refusal_names_the_promise_the_sentence_made(self):
+        # Pinned at the choke point that runs chains, and pinned on the reason:
+        # the report must say which promise was broken, not merely that a
+        # capability was declined -- and the file must be untouched, because the
+        # refusal happens before the adapter is called, not after it truncated.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh("apple\nbanana\n")
+        verdict = _cr.execute_chain(
+            ["text.file.write"], "Append the text 'hello' to the file %s" % a)
+        self.assertFalse(verdict["pass"])
+        self.assertEqual(
+            "FAIL_CLOSED__WRITE_WOULD_DISCARD_CONTENT_THE_SENTENCE_PROMISED_TO_KEEP",
+            verdict["status"])
+        self.assertEqual([], verdict["steps"], "a step ran before the refusal")
+        self.assertEqual("apple\nbanana\n", (ROOT / a).read_text(encoding="utf-8"))
+
+    def test_compressing_a_file_replaces_it_with_an_archive_that_reads_back(self):
+        # `gzip A` removes A and leaves A.gz.  The third fact is the one that
+        # makes it a compression and not a renaming: the archive must read back
+        # to the very bytes that were there, which also checks the stored CRC.
+        import gzip as _gzip
+        a = _fresh("apple\nbanana\n")
+        goal = "Compress the file %s" % a
+        from canonical.runtime import composer_route_v1 as _cr
+        self.assertEqual(["gzip", a], _cr._prose_argv(goal))
+        self.assertTrue(_verified(_solve(goal)))
+        self.assertFalse((ROOT / a).exists(), "the source survived a compression")
+        with _gzip.open(ROOT / (a + ".gz"), "rb") as handle:
+            self.assertEqual(b"apple\nbanana\n", handle.read())
+
+    def test_an_archive_that_does_not_read_back_is_not_a_compression(self):
+        # A truncated or invented .gz satisfies "the source is gone and an
+        # archive appeared" and still destroyed the file, so the postcondition
+        # reads the whole stream rather than trusting the filename.
+        import gzip as _gzip
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _acc
+        a = _fresh("apple\nbanana\n")
+        good = (ROOT / a).read_bytes()
+        (ROOT / a).unlink()
+        (ROOT / (a + ".gz")).write_bytes(_gzip.compress(good))
+        ok, reason, ev = _acc._post_gzip(["gzip", a], ROOT)
+        self.assertTrue(ok, reason)
+        self.assertEqual(len(good), ev["recoverable_bytes"])
+        (ROOT / (a + ".gz")).write_bytes(_gzip.compress(good)[:9])
+        ok, reason, _ev = _acc._post_gzip(["gzip", a], ROOT)
+        self.assertFalse(ok)
+        self.assertEqual("COMMAND_GZIP_ARCHIVE_NOT_A_COMPLETE_STREAM", reason)
+
+    def test_a_compression_promise_covers_the_source_disappearing(self):
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _acc
+        a = _fresh("apple\nbanana\n")
+        ok, reason, _ev = _acc._post_gzip(["gzip", a], ROOT)
+        self.assertFalse(ok, "a compression was certified with the source still there")
+        self.assertEqual("COMMAND_GZIP_SOURCE_STILL_PRESENT", reason)
+
+    def test_a_compression_flag_is_unstateable(self):
+        # `-k` keeps the source, so the promise above would be wrong; a flag
+        # changes what survives and is refused rather than guessed at.
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _acc
+        a = _fresh("apple\nbanana\n")
+        for argv in (["gzip", "-k", a], ["gzip", "-9", a]):
+            ok, reason, _ev = _acc._post_gzip(argv, ROOT)
+            self.assertFalse(ok, argv)
+            self.assertEqual("COMMAND_GZIP_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", reason, argv)
+
+
 
 if __name__ == "__main__":
     unittest.main()

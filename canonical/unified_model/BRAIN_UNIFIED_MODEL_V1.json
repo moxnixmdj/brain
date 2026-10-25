@@ -24619,7 +24619,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6387,
+  "research_index_records": 6388,
   "routing_tokens": 1816,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24628,7 +24628,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "9a22c26cbd6fea0ee72dfaf93676f6f3c8f16cdbaf271f695df89efe58e5435d"
+  "value": "46e17e23165a7807a0ffae8256398a3c90d4d9a56ba76a8b35d65997c7825a12"
  },
  "engines": [
   {
@@ -189196,6 +189196,51 @@
    }
   },
   {
+   "action_id": "A_REQUEST_TO_APPEND_IS_REFUSED_RATHER_THAN_DESTRUCTIVE_AND_A_COMPRESSION_IS_READ_BACK_V1_20261025_V1",
+   "capability": false,
+   "date": "2026-10-25",
+   "id": "research:canonical/action_intents/A_REQUEST_TO_APPEND_IS_REFUSED_RATHER_THAN_DESTRUCTIVE_AND_A_COMPRESSION_IS_READ_BACK_V1_20261025_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_REQUEST_TO_APPEND_IS_REFUSED_RATHER_THAN_DESTRUCTIVE_AND_A_COMPRESSION_IS_READ_BACK_V1_20261025_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "538ec5b7dd1b68216e7cf3a4306d7a07701d8c70e8510a8ae4bd1e8b84ae413b",
+   "status": "",
+   "terms": {
+    "17": 1,
+    "20261025": 1,
+    "a_request_to_append_is_refused_rather_than_destructive_and_a_compression_is_read_back_v1_20261025_v1": 1,
+    "afterwards": 1,
+    "append": 2,
+    "apple": 1,
+    "archive": 1,
+    "asked": 1,
+    "back": 2,
+    "before": 1,
+    "capability": 1,
+    "certified": 2,
+    "change": 1,
+    "compressing": 2,
+    "compression": 1,
+    "content": 2,
+    "corpus": 1,
+    "correctly": 1,
+    "deleted": 1,
+    "destination": 1,
+    "destructive": 2,
+    "even": 1,
+    "existing": 1,
+    "false": 1,
+    "file": 5,
+    "file-and-directory": 1,
+    "held": 2,
+    "no": 3,
+    "refused": 3,
+    "sentence": 2,
+    "served": 3,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_ROLE_NAMED_BY_ITS_DECLARED_NAME_IS_STATED_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -208523,9 +208568,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "821f8439f18cd8052f5d2919710cc0d06e3e3edf3fb5aca04b6ae9380ce4f634",
+   "sha256": "f5d986dedb3338c189e13d7fbfbf7d466ec9c94c9fcec714ad974738e6a8ca10",
    "summary": "Routing a sentence to a typed capability chain.",
-   "symbol_count": 27,
+   "symbol_count": 28,
    "symbols": [
     "_contradicts_the_stated_payload",
     "_cut_flags",
@@ -208550,7 +208595,7 @@
     "extract_content_destination",
     "extract_number",
     "extract_paths",
-    "route"
+    "keeps_existing_content"
    ],
    "terms": {
     "bind": 1,
@@ -208560,7 +208605,6 @@
     "composer": 1,
     "contradicts_the_stated_payload": 1,
     "cut_flags": 1,
-    "declare_a_written_output": 1,
     "extract_argv": 1,
     "extract_content": 1,
     "extract_content_destination": 1,
@@ -208568,6 +208612,7 @@
     "extract_paths": 1,
     "fully_bound_contract_tokens": 1,
     "head_flags": 1,
+    "keeps_existing_content": 1,
     "no_flags": 1,
     "prose_argv": 1,
     "prose_count": 1,
@@ -226552,7 +226597,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "58b24b1caa521e432f7004a1ef1c24a02d30be4837842a2f448a2062f30adbdd",
+   "sha256": "d39474706fa953ebc9e949f9e8aa373fd977bd5db32c12daecb918f8c44dbf8b",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 42,
    "symbols": [
@@ -247273,9 +247318,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "61bef274682bba6319d9b36fad69a637ae5dde44b213afce7a96232274309d23",
+   "sha256": "02c310266aa2180197e85b08c0751a5514cab6cea4f5e95610639da2bf6ed69e",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
-   "symbol_count": 36,
+   "symbol_count": 37,
    "symbols": [
     "_STATES_A_COMMAND",
     "_action_rows",

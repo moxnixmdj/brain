@@ -687,7 +687,8 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # The script is fixed by this rule rather than taken from the sentence, so
     # there is no value to escape and no way for the sentence to change what the
     # command means.
-    (r"\bupper[\s-]*case\b|\buppercase\b", "sed", lambda n: ["-e", "s/.*/\\U&/"], 1),
+    (r"\bcompress(?:es|ed|ing)?\b|\bgzip(?:s|ped|ping)?\b", "gzip", lambda n: [], 1),
+(r"\bupper[\s-]*case\b|\buppercase\b", "sed", lambda n: ["-e", "s/.*/\\U&/"], 1),
     (r"\blower[\s-]*case\b|\blowercase\b", "sed", lambda n: ["-e", "s/.*/\\L&/"], 1),
     # The three things `wc` counts, each stated by its own noun.  Order matters
     # only in that all three are narrower than the general read rule below.
@@ -982,6 +983,26 @@ _FILTER_LINE = re.compile(
 # directory B" says "directory" twice; `cp` without -r refuses it and the report
 # came back COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN -- the worst shape of answer,
 # because it claims not to know whether anything happened.
+# A sentence that says "append" is making a promise about what SURVIVES: the
+# file's current content stays and the new text comes after it.  A plain payload
+# write replaces the whole file, so binding one for such a sentence deletes the
+# content the sentence promised to keep -- and then reports exact semantic
+# acceptance over a file holding five bytes.  Measured: "Append the text 'hello'
+# to the file A" turned 'apple\nbanana\n' into 'hello' and passed.  No capability
+# in the registry writes in append mode, so the honest outcome is a refusal.
+_KEEPS_EXISTING_CONTENT = re.compile(
+    r"\bappend(?:s|ed|ing)?\b|\bprepend(?:s|ed|ing)?\b|\binsert(?:s|ed|ing)?\b"
+    r"|\b(?:to|at)\s+the\s+(?:end|beginning|start|top|bottom)\s+of\b"
+    r"|\bwithout\s+(?:losing|deleting|removing|replacing)\b")
+# The capabilities that replace a file wholesale with a payload they were given.
+_PLAIN_PAYLOAD_WRITES = frozenset({"text.file.write", "json.file.write"})
+
+
+def keeps_existing_content(sentence: Any) -> bool:
+    """True when the sentence promises a file's current content survives."""
+    return bool(_KEEPS_EXISTING_CONTENT.search(str(sentence or "").lower()))
+
+
 _DIRECTORY_REQUEST = re.compile(r"\bdirector(?:y|ies)\b|\bfolders?\b")
 _RECURSIVE_REQUEST = re.compile(
     r"\bfiles?\b[^\n]{0,20}?\bin the\b[^\n]{0,20}?\bdirector(?:y|ies)\b"
@@ -1456,6 +1477,15 @@ def execute_chain(chain: Sequence[str], goal: str,
             return {"schema": SCHEMA, "pass": False, "goal": goal,
                     "status": "FAIL__COMPOSER_STEP_NOT_IN_REGISTRY",
                     "failed_step": {"index": index, "capability_id": cid},
+                    "steps": steps}
+        if str(cid) in _PLAIN_PAYLOAD_WRITES and keeps_existing_content(goal):
+            # Refuse BEFORE the adapter runs: this capability truncates the file
+            # it is given, so checking afterwards would only report a deletion
+            # that has already happened.
+            return {"schema": SCHEMA, "pass": False, "goal": goal,
+                    "status": "FAIL_CLOSED__WRITE_WOULD_DISCARD_CONTENT_THE_SENTENCE_PROMISED_TO_KEEP",
+                    "failed_step": {"index": index, "capability_id": str(cid),
+                                    "promise": "existing_content_kept"},
                     "steps": steps}
         sig = TS.signature(entry)
         args = bind(sig, goal, inputs, produced)
