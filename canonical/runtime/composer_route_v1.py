@@ -506,6 +506,18 @@ def _no_flags(_n: int) -> list[str]:
     return []
 
 
+# Which column the sentence asked for.  An ordinal word is a number the sentence
+# states just as much as a digit is, so it is read rather than defaulted; a
+# sentence that states neither is refused by the arity rule below rather than
+# given column 1, because an invented column is an invented answer.
+_ORDINALS = {"first": 1, "second": 2, "third": 3, "fourth": 4, "fifth": 5,
+             "sixth": 6, "seventh": 7, "eighth": 8, "ninth": 9, "tenth": 10}
+
+
+def _cut_flags(n: int) -> list[str]:
+    return ["-f", str(n)]
+
+
 def _head_flags(n: int) -> list[str]:
     return ["-n", str(n)]
 
@@ -520,7 +532,17 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     (r"\b(?:remove|delete)\b", "rm", _no_flags, 1),
     (r"\b(?:create|make)\b[^.\n]{0,40}?\bdirectory\b", "mkdir", _no_flags, 1),
     (r"\b(?:create|make|touch)\b[^.\n]{0,40}?\bempty file\b", "touch", _no_flags, 1),
+    # The three things `wc` counts, each stated by its own noun.  Order matters
+    # only in that all three are narrower than the general read rule below.
+    (r"\bcount\b[^.\n]{0,40}?\b(?:words?|word count)\b", "wc", lambda n: ["-w"], 1),
+    (r"\bcount\b[^.\n]{0,40}?\b(?:bytes?|characters?|char count)\b",
+     "wc", lambda n: ["-c"], 1),
     (r"\bcount\b[^.\n]{0,40}?\blines?\b", "wc", lambda n: ["-l"], 1),
+    # `cut` must be tried BEFORE `head`: "Show the first field of the file X"
+    # contains both "show" and "first", and the first pattern to match wins.
+    # Measured out of order, it bound `head -n 2` and returned two whole lines
+    # when the sentence asked for one column.
+    (r"\bcut\b|\bfields?\b|\bcolumns?\b", "cut", _cut_flags, 1),
     (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\bfirst\b",
      "head", _head_flags, 1),
     (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\blast\b",
@@ -546,6 +568,12 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     (r"\b(?:list|show)\b[^\n]{0,40}?\bdirectory\b", "ls", _no_flags, 1),
     (r"\b(?:real|absolute|full) path\b", "realpath", _no_flags, 1),
     (r"\b(?:octal|byte) dump\b", "od", _no_flags, 1),
+    # The pattern is deliberately narrow.  The PROGRAM is called `file`, and the
+    # word "file" is in almost every sentence this module ever sees, so a loose
+    # pattern here would steal routes the way a bare task verb on the command
+    # runner's keywords once stole the model's own audit.  Only an explicit ask
+    # about a file's TYPE reaches it.
+    (r"\bfile type\b|\btype of the file\b|\bwhat type\b", "file", _no_flags, 1),
     # Two operands, both stated.  `cmp` is kept distinct from `diff` because it
     # answers a different question -- equal or not, rather than how they differ.
     # Both report their answer as an exit status, which the adapter is now told
@@ -582,6 +610,12 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
 # and exactly one path is what keeps this from guessing -- a search that states
 # no pattern binds nothing, because an invented pattern is an invented answer.
 _PROSE_COMMAND_WITH_VALUE: tuple[tuple[str, str], ...] = (
+    # fgrep is tried first: a sentence that asks for literal or exact text is
+    # asking for a FIXED STRING, and handing that to `grep` would let a dot or a
+    # bracket in the caller's own text be read as a pattern it never wrote.
+    # Which program answers is decided by what the sentence says about the text,
+    # not by guessing at the text itself.
+    (r"\b(?:exact|literal|fixed)\b[^\n]{0,40}?\b(?:text|string)\b", "fgrep"),
     (r"\b(?:grep|search|find)\b", "grep"),
 )
 
@@ -613,6 +647,32 @@ def _prose_count(sentence: str) -> int:
     if m:
         return int(m.group(1) or m.group(2))
     return 2
+
+
+def _prose_ordinal(sentence: str) -> int | None:
+    """Which one of a series the sentence named, as a digit or as a word.
+
+    Returns None rather than 1 when the sentence states neither.  ``head`` may
+    default, because "show the first lines" is a real request with a real
+    conventional answer; ``cut`` may not, because there is no conventional
+    column and choosing one would be choosing the answer.
+    """
+    text = str(sentence or "").lower()
+    # From the PROSE, never from the whole sentence.  Measured without this,
+    # "Show the second column of the file canonical/astra_runtime/tmp/z1/a.txt"
+    # bound `cut -f 1`: extract_number found the 1 in the directory name z1, a
+    # number the sentence never stated, and it outranked the word "second".
+    try:
+        from canonical.runtime import goal_front_compiler_v1 as _front
+        number = extract_number(_front.prose_only(sentence))
+    except Exception:  # noqa: BLE001 - no front compiler, fall back to the word
+        number = None
+    if number is not None and float(number).is_integer() and int(number) >= 1:
+        return int(number)
+    for word, value in _ORDINALS.items():
+        if re.search(r"\b%s\b" % word, text):
+            return value
+    return None
 
 
 # The one shape where the destination is NOT the last operand.  "Sort the file A
@@ -656,11 +716,20 @@ def _prose_argv(sentence: str) -> list[str] | None:
         if not re.search(pattern, text):
             continue
         value = extract_content(sentence) or _quoted_value(sentence)
-        if not value or len(paths) != 1:
+        # A search pattern is frequently shaped like a filename -- 'a.c',
+        # 'notes.md' -- and extract_paths cannot tell the difference, so it
+        # counted the caller's own quoted text as a second operand and the
+        # request was refused for want of arity.  The value is masked out
+        # before the paths are read: it is a value because the caller quoted
+        # it, which is the same evidence that made it the pattern.
+        operand_paths = paths
+        if value:
+            operand_paths = extract_paths(str(sentence).replace(str(value), " "))
+        if not value or len(operand_paths) != 1:
             # A pattern the sentence did not state, or more than one file to
             # search in: refuse rather than complete the command by guessing.
             return None
-        return [program, str(value), str(paths[0])]
+        return [program, str(value), str(operand_paths[0])]
     for pattern, program, flags, arity in _PROSE_COMMAND:
         if program not in known:
             continue
@@ -670,6 +739,13 @@ def _prose_argv(sentence: str) -> list[str] | None:
             # The sentence did not state enough operands for the program it
             # asked for.  Refuse; do not repeat a path to make the numbers fit.
             return None
+        if program == "cut":
+            column = _prose_ordinal(sentence)
+            if column is None:
+                # No column stated.  Defaulting to 1 would be inventing the
+                # answer to the question the sentence actually asked.
+                return None
+            return [program, "-f", str(column), str(paths[0])]
         argv = [program, *flags(_prose_count(text)), *paths]
         return [str(part) for part in argv if str(part)]
     return None

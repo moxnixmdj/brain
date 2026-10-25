@@ -114,6 +114,15 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
         ("Show the real path of {f}", ["realpath", "{f}"]),
         ("Show the octal dump of the file {f}", ["od", "{f}"]),
         ("Find the lines in the file {f} matching 'apple'", ["grep", "apple", "{f}"]),
+        # --- the counting verbs, the column selector and the literal search.
+        ("Count the words in the file {f}", ["wc", "-w", "{f}"]),
+        ("Count the bytes in the file {f}", ["wc", "-c", "{f}"]),
+        ("Count the characters in the file {f}", ["wc", "-c", "{f}"]),
+        ("Show the first field of the file {f}", ["cut", "-f", "1", "{f}"]),
+        ("Show the second column of the file {f}", ["cut", "-f", "2", "{f}"]),
+        ("Cut field 3 from the file {f}", ["cut", "-f", "3", "{f}"]),
+        ("Search the file {f} for the exact text 'a.c'", ["fgrep", "a.c", "{f}"]),
+        ("Find the literal string 'b[n' in the file {f}", ["fgrep", "b[n", "{f}"]),
     )
 
     # Deliberately NOT bound, each measured rather than assumed.
@@ -177,6 +186,80 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
                 "running it reports failure over work that succeeded"
                 % (program, template))
 
+    def test_the_column_number_comes_from_the_sentence_not_from_a_path(self):
+        """The regression pin: a digit inside a path is not a stated column.
+
+        Measured before this was fixed, "Show the second column of the file
+        canonical/astra_runtime/tmp/z1/a1.txt" bound `cut -f 1` -- the 1 in the
+        directory name z1, a number the sentence never stated, outranked the word
+        "second".  The scratch directory is named with a digit on purpose so this
+        test cannot pass by accident.
+        """
+        path = "%s/a1.txt" % SCRATCH
+        digits = [ch for ch in path if ch.isdigit()]
+        # Without a digit in the path this test would pass against the buggy
+        # reading too, so it would be proving nothing.  Assert the fixture
+        # still has one, and that it is NOT the column the sentence asked for,
+        # so a regression returns a different number and is caught.
+        self.assertTrue(digits, "the fixture path contains no digit, so this "
+                                "test would pass without proving anything")
+        self.assertNotIn("2", digits,
+                         "the path's own digit equals the stated column, so a "
+                         "regression would be invisible: %r" % path)
+        argv = _argv("Show the second column of the file %s" % path)
+        self.assertEqual(argv, ["cut", "-f", "2", path],
+                         "read a column number out of the path %r (which "
+                         "contains %r): %r" % (path, digits, argv))
+
+    def test_a_column_the_sentence_does_not_state_is_not_invented(self):
+        """`cut` may not default the way `head` may.
+
+        "Show the first lines" has a conventional answer; "show the fields" has
+        no conventional column, so choosing one would be choosing the answer to
+        the question that was actually asked.
+        """
+        self.assertIsNone(_argv("Show the fields of the file %s/a1.txt" % SCRATCH),
+                          "invented a column number")
+
+    def test_a_quoted_pattern_shaped_like_a_filename_is_not_a_second_operand(self):
+        """The caller's own quoted text must not be counted as a file.
+
+        Measured before this was fixed, "Search the file a1.txt for the exact
+        text 'a.c'" was refused for want of arity, because extract_paths read
+        'a.c' as a second path.  The value is a value because the caller quoted
+        it -- the same evidence that made it the pattern.
+        """
+        argv = _argv("Search the file %s/a1.txt for the exact text 'a.c'" % SCRATCH)
+        self.assertEqual(argv, ["fgrep", "a.c", "%s/a1.txt" % SCRATCH],
+                         "the quoted pattern was read as an operand: %r" % argv)
+
+    def test_a_search_for_literal_text_does_not_become_a_pattern(self):
+        """`fgrep` for text the sentence calls exact, `grep` otherwise.
+
+        Which program answers is decided by what the sentence SAYS about the
+        text, never by inspecting the text for metacharacters -- guessing at the
+        caller's own value is how a literal '[' becomes a character class they
+        never wrote.
+        """
+        literal = _argv("Find the literal string 'b[n' in the file %s/a1.txt" % SCRATCH)
+        self.assertEqual(literal[0], "fgrep",
+                         "a literal search was handed to a pattern matcher: %r" % literal)
+        pattern = _argv("Find the lines in the file %s/a1.txt matching 'ap.le'" % SCRATCH)
+        self.assertEqual(pattern[0], "grep",
+                         "a pattern search was handed to a literal matcher: %r" % pattern)
+
+    def test_a_request_for_a_column_is_not_answered_with_whole_lines(self):
+        """The pattern-order pin: `cut` is tried before `head`.
+
+        "Show the first field of the file X" contains both "show" and "first",
+        and the first pattern to match wins.  Measured out of order it bound
+        `head -n 2` and returned two whole lines when the sentence asked for one
+        column -- a wrong answer delivered confidently.
+        """
+        argv = _argv("Show the first field of the file %s/a1.txt" % SCRATCH)
+        self.assertEqual(argv[0], "cut",
+                         "a request for one column was answered with whole lines: %r" % argv)
+
     def test_a_search_that_states_no_pattern_is_refused(self):
         """grep needs a pattern; a sentence that states none binds nothing."""
         self.assertIsNone(_argv("Search the file %s/a1.txt" % SCRATCH),
@@ -184,6 +267,43 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
         self.assertIsNone(_argv("Find the lines in %s/a1.txt matching 'a' or 'b'"
                                 % SCRATCH),
                           "guessed between two stated patterns")
+
+    def test_the_counting_and_column_commands_run_and_report_the_real_numbers(self):
+        """Read back from the command's own output, not from a flag."""
+        f = _fresh("banana apple\ncherry plum\nfig grape\n")
+        expected = {
+            "Count the lines in the file %s": "3",
+            "Count the words in the file %s": "6",
+            "Count the bytes in the file %s": "35",
+        }
+        wrong = []
+        for template, want in expected.items():
+            result = _solve(template % f)
+            if not _verified(result):
+                wrong.append((template, result.get("status")))
+                continue
+            steps = (result.get("composer_execution") or {}).get("steps") or []
+            out = str((steps[0].get("result") or {}).get("stdout") or "")
+            if not out.split() or out.split()[0] != want:
+                wrong.append((template, "reported %r, the file holds %s"
+                              % (out.split()[:1], want)))
+            self.assertEqual((ROOT / f).read_text(encoding="utf-8"),
+                             "banana apple\ncherry plum\nfig grape\n",
+                             "%s changed the file it only counted" % template)
+        self.assertEqual(wrong, [], "a counting command did not report the real "
+                                    "number: %r" % wrong)
+
+    def test_a_literal_search_finds_the_line_and_changes_nothing(self):
+        f = _fresh("banana apple\ncherry plum\nfig grape\n")
+        result = _solve("Search the file %s for the exact text 'cherry plum'" % f)
+        self.assertTrue(_verified(result),
+                        "a literal search was not verified: %r" % result.get("status"))
+        steps = (result.get("composer_execution") or {}).get("steps") or []
+        out = str((steps[0].get("result") or {}).get("stdout") or "")
+        self.assertEqual(out.strip(), "cherry plum",
+                         "the literal search returned the wrong line: %r" % out)
+        self.assertEqual((ROOT / f).read_text(encoding="utf-8"),
+                         "banana apple\ncherry plum\nfig grape\n")
 
     def test_a_comparison_answers_with_the_code_the_world_agrees_with(self):
         """The hardest row in the file: the exit status is cross-checked, not trusted.
