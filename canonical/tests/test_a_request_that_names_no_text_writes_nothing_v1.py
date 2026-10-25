@@ -58,12 +58,17 @@ from canonical.runtime.composer_route_v1 import bind  # noqa: E402
 SCRATCH = "canonical/astra_runtime/tmp/x9k2p"
 ORIGINAL = "PRECIOUS ORIGINAL CONTENT\n"
 
-# Every one of these names a file and states no text to be written. Measured on
-# 25e3d67, the first ten destroyed the file and reported pass=True.
-NON_WRITE_REQUESTS = (
+# Split by what the sentence ASKS FOR, which is the distinction the single list
+# this replaced could not make.  Measured after ordinary prose requests began to
+# run real commands: "Delete the file a1.txt" deleted a1.txt, and the old list
+# called that damage.  It was not damage -- it was the request.  A guard that
+# cannot tell the two apart stops being a guard and becomes a ban.
+#
+# These twelve state no mutation.  The file must survive byte for byte, which is
+# the claim PR #6119 established and the one that matters.
+NON_MUTATING_REQUESTS = (
     "Read the file {f}",
     "Count the lines in the file {f}",
-    "Delete the file {f}",
     "Sort the lines of the file {f}",
     "Reverse the file {f}",
     "Show the file {f}",
@@ -74,9 +79,34 @@ NON_WRITE_REQUESTS = (
     "Search the file {f}",
     "Truncate the file {f}",
     "Diff the file {f} against {g}",
-    "Copy the file {f} to {g}",
-    "Move the file {f} to {g}",
 )
+
+# These three state a mutation, so the file MUST change -- and must change to
+# exactly the state the sentence described, and no further.  This is a harder
+# claim than the one it replaces: "nothing happened" was satisfied by a machine
+# that did nothing at all, while this is only satisfied by one that did the
+# requested work and stopped there.  The second file is the control: it is never
+# an operand of any of these three, so if it moves, the request overshot.
+STATED_MUTATIONS = (
+    # (template, source must survive?, destination contents after)
+    ("Delete the file {f}", False, "other\n"),
+    ("Copy the file {f} to {g}", True, ORIGINAL),
+    ("Move the file {f} to {g}", False, ORIGINAL),
+)
+
+# Kept under the old name so the count of guarded requests stays visible: the
+# guard still covers fifteen sentences, it now just knows which ones mutate.
+NON_WRITE_REQUESTS = NON_MUTATING_REQUESTS + tuple(t for t, _, _ in STATED_MUTATIONS)
+
+
+def _stated_end_state(template: str):
+    """What the sentence promised, as (source_present, destination_contents)."""
+    for tmpl, source_present, dest_contents in STATED_MUTATIONS:
+        if tmpl == template:
+            return source_present, dest_contents
+    # No mutation stated: both files exactly as they were.
+    return True, "other\n"
+
 
 
 def _fresh_two() -> tuple[str, str]:
@@ -102,11 +132,14 @@ class TestNoTextNoWrite(unittest.TestCase):
     def tearDown(self):
         shutil.rmtree(ROOT / SCRATCH, ignore_errors=True)
 
-    def test_a_request_that_states_no_text_leaves_the_file_intact(self):
+    def test_a_request_that_states_no_mutation_leaves_the_file_intact(self):
         damaged = []
-        for template in NON_WRITE_REQUESTS:
+        for template in NON_MUTATING_REQUESTS:
             f, g = _fresh_two()
             _solve(template.format(f=f, g=g))
+            if not (ROOT / f).is_file():
+                damaged.append((template, "the file it only read was removed"))
+                continue
             if (ROOT / f).read_text(encoding="utf-8") != ORIGINAL:
                 damaged.append((template, (ROOT / f).read_text(encoding="utf-8")[:60]))
             if not (ROOT / g).is_file() or (ROOT / g).read_text(encoding="utf-8") != "other\n":
@@ -114,23 +147,56 @@ class TestNoTextNoWrite(unittest.TestCase):
         self.assertEqual(
             damaged,
             [],
-            "%d of %d requests that name a file but state no text changed it" % (
-                len(damaged), len(NON_WRITE_REQUESTS)),
+            "%d of %d requests that name a file but state no mutation changed it" % (
+                len(damaged), len(NON_MUTATING_REQUESTS)),
         )
 
-    def test_no_request_reports_success_over_a_file_it_damaged(self):
-        """The sharper half: the verdict must not be green over a destroyed file."""
+    def test_a_stated_mutation_does_what_was_stated_and_nothing_more(self):
+        """The half the old list got wrong: doing the work is not damage.
+
+        Harder than the assertion it replaces.  "Nothing changed" passes for a
+        machine that did nothing; this passes only for one that performed
+        exactly the stated mutation and left the untouched file alone.
+        """
+        wrong = []
+        for template, source_present, dest_contents in STATED_MUTATIONS:
+            f, g = _fresh_two()
+            _solve(template.format(f=f, g=g))
+            if (ROOT / f).is_file() != source_present:
+                wrong.append((template, "source present=%s, stated=%s"
+                              % ((ROOT / f).is_file(), source_present)))
+            if not (ROOT / g).is_file() or (ROOT / g).read_text(encoding="utf-8") != dest_contents:
+                wrong.append((template, "destination is %r, stated %r"
+                              % ((ROOT / g).read_text(encoding="utf-8")
+                                 if (ROOT / g).is_file() else None, dest_contents)))
+        self.assertEqual(wrong, [], "a stated mutation did not do exactly what "
+                                    "was stated: %r" % wrong)
+
+    def test_no_request_reports_success_over_an_end_state_it_did_not_state(self):
+        """The sharp half, restated so it still bites now that commands run.
+
+        The defect PR #6119 found was a green verdict over a destroyed file.
+        That is still the thing to catch, but "destroyed" is no longer the test
+        -- a request may now legitimately destroy a file.  The test is whether
+        the verdict is green over an end state the SENTENCE did not state.
+        """
         false_passes = []
         for template in NON_WRITE_REQUESTS:
             f, g = _fresh_two()
             result = _solve(template.format(f=f, g=g))
-            intact = (ROOT / f).read_text(encoding="utf-8") == ORIGINAL
-            if result.get("pass") is True and not intact:
+            source_present, dest_contents = _stated_end_state(template)
+            if (ROOT / f).is_file() != source_present:
+                matches = False
+            else:
+                matches = ((ROOT / g).is_file()
+                           and (ROOT / g).read_text(encoding="utf-8") == dest_contents)
+            if result.get("pass") is True and not matches:
                 false_passes.append(template)
         self.assertEqual(
             false_passes,
             [],
-            "reported pass=True while the file was destroyed: %r" % false_passes,
+            "reported pass=True over an end state the sentence never stated: %r"
+            % false_passes,
         )
 
     def test_reading_a_file_does_not_fill_it_with_its_own_name(self):

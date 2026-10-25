@@ -21381,7 +21381,6 @@
    },
    "triggers": [
     "json",
-    "report",
     "document",
     "record",
     "structured",
@@ -23490,6 +23489,25 @@
     "environment",
     "probe",
     "cli",
+    "cp",
+    "mv",
+    "rm",
+    "mkdir",
+    "touch",
+    "cat",
+    "sort",
+    "sha256sum",
+    "copy",
+    "move",
+    "rename",
+    "remove",
+    "delete",
+    "checksum",
+    "sha256",
+    "directory",
+    "dir",
+    "empty",
+    "file",
     "result"
    ],
    "verification": {
@@ -24602,7 +24620,7 @@
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
   "research_index_records": 6369,
-  "routing_tokens": 1799,
+  "routing_tokens": 1816,
   "skills": 18,
   "source_index_entry_points": 406,
   "source_index_modules": 1861
@@ -24610,7 +24628,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6b1b2cbce1c9753e1de7adbc8e8d4e621f5fd1e2acee6aab8a0d55bb69695c67"
+  "value": "198beea042843b12b394c76868ce6b6b849cadecd7cdefb0230058be9f8f665d"
  },
  "engines": [
   {
@@ -27198,6 +27216,9 @@
     "canonical/runtime/livebench_union25_language_exception_carrier_v1.py.auto.v1": 264.666667,
     "canonical/runtime/livebench_union25_language_exception_carrier_v2.py.auto.v1": 264.666667
    },
+   "cat": {
+    "shell.command.run": 396.0
+   },
    "catalog": {
     "engine:OWNERSHIP_CATALOG": 396.0
    },
@@ -27318,6 +27339,9 @@
    },
    "checker": {
     "canonical/runtime/livebench_if_single_checker_solver_v1.py.auto.v1": 396.0
+   },
+   "checksum": {
+    "shell.command.run": 396.0
    },
    "choose": {
     "web.browser.rendered.capture.chromedriver": 396.0
@@ -27589,6 +27613,9 @@
     "document.convert.markdown_pdf.pandoc_weasyprint": 264.666667,
     "yaml.to_json.yq": 264.666667
    },
+   "copy": {
+    "shell.command.run": 396.0
+   },
    "core": {
     "canonical/runtime/livebench_root1_reused_core_selector_v1.py.auto.v1": 396.0
    },
@@ -27641,6 +27668,9 @@
    },
    "coverage_cc_r3_mission_scope_bridge_guard_v1.py.auto.v1": {
     "canonical/runtime/coverage_cc_r3_mission_scope_bridge_guard_v1.py.auto.v1": 594.0
+   },
+   "cp": {
+    "shell.command.run": 396.0
    },
    "cre52": {
     "finance.saccr.credit.addon.v1": 396.0
@@ -27965,6 +27995,9 @@
    "defeater": {
     "canonical/runtime/professional_r12_material_defeater_totality_route_audit_v1.py.auto.v1": 396.0
    },
+   "delete": {
+    "shell.command.run": 396.0
+   },
    "dependency": {
     "canonical/runtime/p3_exact_dependency_relevance_cell_v1.py.auto.v1": 396.0
    },
@@ -27999,6 +28032,9 @@
    "dimension": {
     "chart.raster.axis_title_unit_binding.v1": 396.0
    },
+   "dir": {
+    "shell.command.run": 396.0
+   },
    "direct": {
     "canonical/runtime/direct_e2e_selected_cell_certificate_v1.py.auto.v1": 114.571429,
     "canonical/runtime/finance_direct_source_coverage_audit_v1.py.auto.v1": 114.571429,
@@ -28015,6 +28051,9 @@
    },
    "direct_e2e_selected_cell_certificate_v1.py.auto.v1": {
     "canonical/runtime/direct_e2e_selected_cell_certificate_v1.py.auto.v1": 594.0
+   },
+   "directory": {
+    "shell.command.run": 396.0
    },
    "discharge": {
     "canonical/runtime/tool_discovery_frozen_scope_completeness_discharge_v1.py.auto.v1": 396.0
@@ -28128,6 +28167,9 @@
     "auto.apt.zint": 199.0,
     "canonical/runtime/root3_current_credited_zero_effect_reconciliation_verifier_v1.py.auto.v1": 199.0,
     "canonical/runtime/root3_effect_membrane_e1_current_byte_v1.py.auto.v1": 199.0
+   },
+   "empty": {
+    "shell.command.run": 396.0
    },
    "encode": {
     "auto.npm.dfinity-cbor": 159.6,
@@ -28406,9 +28448,10 @@
     "docx.document.create_from_json_record": 396.0
    },
    "file": {
-    "json.file.write": 199.0,
-    "python.software.repair.semantic_acceptance.v1": 199.0,
-    "text.file.write": 199.0
+    "json.file.write": 159.6,
+    "python.software.repair.semantic_acceptance.v1": 159.6,
+    "shell.command.run": 159.6,
+    "text.file.write": 159.6
    },
    "files": {
     "source.candidates.enumerate.stdlib": 396.0
@@ -29574,6 +29617,9 @@
    "mission": {
     "canonical/runtime/coverage_cc_r3_mission_scope_bridge_guard_v1.py.auto.v1": 396.0
    },
+   "mkdir": {
+    "shell.command.run": 396.0
+   },
    "model": {
     "task.acceptance.objective.lossless.v1": 396.0
    },
@@ -29582,6 +29628,9 @@
    },
    "most": {
     "evidence.claim_spec.bind.explicit_comparison.stdlib": 594.0
+   },
+   "move": {
+    "shell.command.run": 396.0
    },
    "msgpack": {
     "auto.npm.msgpack-msgpack": 264.666667,
@@ -29613,6 +29662,9 @@
    },
    "mutation": {
     "python.patch.search.test_guided.ast.v1": 396.0
+   },
+   "mv": {
+    "shell.command.run": 396.0
    },
    "mystery": {
     "engine:MYSTERY_INFERENCE": 396.0
@@ -31250,6 +31302,12 @@
     "source.evidence.extract.objective_grounded.stdlib": 114.571429,
     "source.objective_relevance.rank.bm25": 114.571429
    },
+   "remove": {
+    "shell.command.run": 396.0
+   },
+   "rename": {
+    "shell.command.run": 396.0
+   },
    "render": {
     "professional.artifact.visual_observer.v1": 396.0
    },
@@ -31282,9 +31340,8 @@
     "canonical/verification/p3_nonbinding_v9_compositional_replay_v1.py.auto.v1": 396.0
    },
    "report": {
-    "document.convert.markdown_pdf.pandoc_weasyprint": 199.0,
-    "docx.document.create_from_json_record": 199.0,
-    "json.file.write": 199.0
+    "document.convert.markdown_pdf.pandoc_weasyprint": 264.666667,
+    "docx.document.create_from_json_record": 264.666667
    },
    "repository": {
     "python.patch.search.test_guided.ast.v1": 199.0,
@@ -31345,6 +31402,9 @@
    },
    "reused": {
     "canonical/runtime/livebench_root1_reused_core_selector_v1.py.auto.v1": 396.0
+   },
+   "rm": {
+    "shell.command.run": 396.0
    },
    "robust": {
     "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py.auto.v1": 396.0
@@ -32065,8 +32125,12 @@
     "canonical/runtime/root3_seven_class_one_substrate_policy_v1.py.auto.v1": 396.0
    },
    "sha256": {
-    "pypi.provenance.audit_live_artifact": 264.666667,
-    "python.source.audit.ast": 264.666667
+    "pypi.provenance.audit_live_artifact": 199.0,
+    "python.source.audit.ast": 199.0,
+    "shell.command.run": 199.0
+   },
+   "sha256sum": {
+    "shell.command.run": 396.0
    },
    "shape": {
     "canonical/runtime/livebench_legacy_composition_shape_reduction_v1.py.auto.v1": 396.0
@@ -32129,6 +32193,9 @@
    },
    "solvus": {
     "chart.read.binary_phase_solvus.v1": 396.0
+   },
+   "sort": {
+    "shell.command.run": 396.0
    },
    "sound": {
     "canonical/runtime/livebench_union25_sound_lower_bound_hitting_set_v1.py.auto.v1": 396.0
@@ -32713,6 +32780,9 @@
    "totality": {
     "canonical/runtime/bytes_v14_zero_overhead_totality_task_generator_v1.py.auto.v1": 264.666667,
     "canonical/runtime/professional_r12_material_defeater_totality_route_audit_v1.py.auto.v1": 264.666667
+   },
+   "touch": {
+    "shell.command.run": 396.0
    },
    "tournament": {
     "terminal.kstar.root.assess.stdlib": 396.0
@@ -46570,7 +46640,7 @@
   "included_source_count": 866,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "548260049fa136ed671b71909463139f901d97bf674360f5be7cfa979d3ca4cb"
+  "source_tree_digest": "b5972321cfc0fc22da32f2739c360d672c02a754fd45902d60d1fe17da3bd18b"
  },
  "research_index": [
   {
@@ -207637,11 +207707,17 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "22ae7135d6afdb766659d0e12973aab8f622fba0c6e3c728c9fea7970c2ca0d7",
+   "sha256": "a4deb8908bae09db107a31ab497a553ad8a8ebefd7e921593c4558b03fb7d15a",
    "summary": "Routing a sentence to a typed capability chain.",
-   "symbol_count": 13,
+   "symbol_count": 19,
    "symbols": [
     "_declare_a_consumed_output",
+    "_fully_bound_contract_tokens",
+    "_head_flags",
+    "_no_flags",
+    "_prose_argv",
+    "_prose_count",
+    "_tail_flags",
     "bind",
     "candidate_tokens",
     "execute_chain",
@@ -207668,10 +207744,16 @@
     "extract_content_destination": 1,
     "extract_number": 1,
     "extract_paths": 1,
+    "fully_bound_contract_tokens": 1,
+    "head_flags": 1,
+    "no_flags": 1,
+    "prose_argv": 1,
+    "prose_count": 1,
     "route": 2,
     "routing": 1,
     "score": 1,
     "sentence": 1,
+    "tail_flags": 1,
     "token_words": 1,
     "typed": 1,
     "v1": 1,

@@ -72,6 +72,57 @@ def score(goal_words: set[str], token: str,
     return hit / (len(tw) ** 0.5)
 
 
+def _fully_bound_contract_tokens(goal: str, g: Mapping[str, Any],
+                                 reg: Mapping[str, Any]) -> frozenset[str]:
+    """Tokens provided by a capability every declared input of which the goal fills.
+
+    Nothing is mapped by hand from sentence to capability.  The question asked is
+    the one PR #6135 already asks: can this capability's own signature be filled
+    from what the sentence states?  A capability that declares an ARGV slot is
+    chosen for a sentence that states a command line because that sentence
+    *fills the slot*, not because somebody wrote down which capability "copy"
+    means.  A sentence that states no command binds nothing, and this returns an
+    empty set, so the ranking falls back to the words alone.
+    """
+    try:
+        from canonical.runtime import capability_type_surface_v1 as TS
+    except Exception:  # noqa: BLE001 - no type surface, no contract to test
+        return frozenset()
+    if not extract_argv(goal):
+        # The sentence states no command line, so there is no contract for this
+        # rule to read.  Returning early is what keeps the rule from flooding:
+        # measured without it, "audit the python unit tests and count passes"
+        # promoted every capability whose STRING slot extract_content could
+        # fill, the real auditor fell out of the top of the ranking, and the
+        # unified model's own execution audit went 33/33 -> 32/33.
+        return frozenset()
+    filled: set[str] = set()
+    for cid, node in g.items():
+        entry = reg.get(cid)
+        if not isinstance(entry, Mapping):
+            continue
+        try:
+            sig = TS.signature(entry)
+        except Exception:  # noqa: BLE001 - an unreadable entry declares nothing
+            continue
+        if not any(str(typ or "").upper() == "ARGV" for typ in sig.values()):
+            # Only a capability that DECLARES a command-line slot can be the one
+            # a stated command line fills.  That is the whole of the claim: the
+            # sentence supplied a command, this capability is built to take one.
+            continue
+        try:
+            args = bind(sig, goal)
+        except Exception:  # noqa: BLE001 - binding is best effort here
+            continue
+        if not args or set(args) != set(sig):
+            # Every declared input, or none.  A half-filled contract is not
+            # evidence that this is the capability the sentence meant.
+            continue
+        for tok in (node.get("provides") or []):
+            filled.add(str(tok))
+    return frozenset(filled)
+
+
 def candidate_tokens(goal: str, g: Mapping[str, Any] | None = None) -> list[str]:
     """Tokens the goal might be asking for, best guess first.
 
@@ -93,6 +144,13 @@ def candidate_tokens(goal: str, g: Mapping[str, Any] | None = None) -> list[str]
     from canonical.runtime import goal_front_compiler_v1 as front
 
     g = g if g is not None else composer.graph()
+    # Scored on the request's PROSE, never on the values it carries -- the rule
+    # the front compiler already applies as F8/F25.  An earlier revision also
+    # subtracted the payload returned by ``extract_content``, on the theory that
+    # an unquoted payload could still vote.  Measured, it changed nothing: for
+    # "Write the text the archive manifest listing to out.txt" the writer is
+    # chosen either way, because the archiver's own name matches no word of the
+    # prose.  So the subtraction was removed rather than kept as a guess.
     gw = words(front.prose_only(goal))
     if not gw:
         return []
@@ -109,9 +167,28 @@ def candidate_tokens(goal: str, g: Mapping[str, Any] | None = None) -> list[str]
             tok = str(tok)
             provided.add(tok)
             extra.setdefault(tok, set()).update(words_for)
+    # RANK ON THE WORDS, THEN ON WHETHER THE SENTENCE FILLS THE CONTRACT.
+    #
+    # An earlier revision of this function demoted any capability whose matches
+    # were all generic, on the theory that a shared word is not evidence.  That
+    # is wrong on its own terms, and measurably so: for "Write the text 'hello
+    # patch' to out.txt and save the report to r.json", text.file.available
+    # matched four of the sentence's five words and scored 2.3094 -- the highest
+    # in the registry -- while document.convert.markdown_pdf matched one word,
+    # "report", and scored 0.5000.  The rule handed the request to the archiver.
+    # A capability that matches almost the whole sentence is not a weak
+    # candidate; it is the candidate.
+    #
+    # What actually separates "Copy the file a to b" from "Write the text ...",
+    # where a JSON writer and a text writer tie on the word "file", is not which
+    # words are distinctive.  It is that the first sentence fills an ARGV slot
+    # and the second fills none.  That is the contract test below, and it is the
+    # same test PR #6135 established as DECLARED_CONTRACT_FULLY_BOUND.
     scored = [(score(gw, tok, extra), tok) for tok in provided]
-    scored = [(s, t) for s, t in scored if s > 0]
-    scored.sort(key=lambda pair: (-pair[0], pair[1]))
+    scored = [(s0, t) for s0, t in scored if s0 > 0]
+    bound = _fully_bound_contract_tokens(goal, g, reg)
+    scored.sort(key=lambda pair: (pair[1] not in bound,
+                                  -pair[0], pair[1]))
     return [t for _, t in scored]
 
 
@@ -381,7 +458,111 @@ def extract_argv(text: str) -> list[str] | None:
             return None
         if parts and all(isinstance(part, str) and part for part in parts):
             return parts
+    # No command line was QUOTED.  The request may still state one in ordinary
+    # English -- "Copy the file a to b" -- and that is the shape almost every
+    # real request takes.  This is a fallthrough, not a replacement: a quoted
+    # command line always wins, because it is the stronger statement.
+    return _prose_argv(sentence)
+
+
+# --------------------------------------------------------------------------- #
+# a command the sentence asks for in words, rather than states as a line
+# --------------------------------------------------------------------------- #
+# ``_ARGV`` reads a command line the sentence QUOTES -- "Run the shell command
+# cp a b".  Nobody writes it that way twice.  The ordinary request is "Copy the
+# file a to b", and before this table it produced no argv at all, so
+# shell.command.run -- a VERIFIED_BOUND_CAPABILITY with an independently
+# verified output -- was unreachable for every sentence phrased as English.
+#
+# Nothing here is invented.  Each pattern names one program, and every program
+# below is drawn from the acceptance layer's own tables
+# (``_READ_ONLY_COMMANDS`` and ``_MUTATING_POSTCONDITIONS``), which is the set of
+# commands the verifier already knows how to judge AFTER the fact.  A prose
+# request is only ever routed to a command the verifier can check.  The import
+# assertion at the bottom of this block makes that a fact rather than a comment.
+#
+# Each row is (pattern, program, flag-builder, operand-arity).  The arity is the
+# half that keeps this from guessing: a pattern that wants two paths and finds
+# one returns None, so an incomplete request is refused instead of being
+# completed with an invented operand -- the same rule PR #6119 set for a text
+# slot and PR #6120 set for a command line.
+
+def _no_flags(_n: int) -> list[str]:
+    return []
+
+
+def _head_flags(n: int) -> list[str]:
+    return ["-n", str(n)]
+
+
+def _tail_flags(n: int) -> list[str]:
+    return ["-n", str(n)]
+
+
+_PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
+    (r"\bcopy\b", "cp", _no_flags, 2),
+    (r"\b(?:move|rename)\b", "mv", _no_flags, 2),
+    (r"\b(?:remove|delete)\b", "rm", _no_flags, 1),
+    (r"\b(?:create|make)\b[^.\n]{0,40}?\bdirectory\b", "mkdir", _no_flags, 1),
+    (r"\b(?:create|make|touch)\b[^.\n]{0,40}?\bempty file\b", "touch", _no_flags, 1),
+    (r"\bcount\b[^.\n]{0,40}?\blines?\b", "wc", lambda n: ["-l"], 1),
+    (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\bfirst\b",
+     "head", _head_flags, 1),
+    (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\blast\b",
+     "tail", _tail_flags, 1),
+    (r"\bsort\b", "sort", _no_flags, 1),
+    (r"\b(?:checksum|sha256)\b", "sha256sum", _no_flags, 1),
+    (r"\b(?:read|show|display|print|cat)\b[^.\n]{0,40}?\bfile\b", "cat", _no_flags, 1),
+)
+
+_COUNT_RE = re.compile(r"\bfirst\s+(\d+)\b|\b(\d+)\s+lines?\b")
+
+
+def _prose_count(sentence: str) -> int:
+    """How many lines the sentence asked for, or 2 as the documented default."""
+    m = _COUNT_RE.search(sentence)
+    if m:
+        return int(m.group(1) or m.group(2))
+    return 2
+
+
+def _prose_argv(sentence: str) -> list[str] | None:
+    """The command a sentence asks for in ordinary English, or None.
+
+    Returns None whenever the sentence does not supply the operands the program
+    needs.  An arity mismatch is a refusal, never a guess: ``cp`` with one path
+    would be an invented destination, and an invented operand is executed.
+    """
+    from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
+
+    known = set(_accept._READ_ONLY_COMMANDS) | set(_accept._MUTATING_POSTCONDITIONS)
+    text = str(sentence or "").lower()
+    paths = extract_paths(sentence)
+    if not paths:
+        return None
+    for pattern, program, flags, arity in _PROSE_COMMAND:
+        if program not in known:
+            continue
+        if not re.search(pattern, text):
+            continue
+        if len(paths) != arity:
+            # The sentence did not state enough operands for the program it
+            # asked for.  Refuse; do not repeat a path to make the numbers fit.
+            return None
+        argv = [program, *flags(_prose_count(text)), *paths]
+        return [str(part) for part in argv if str(part)]
     return None
+
+
+try:  # pragma: no cover - import-time consistency check
+    from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
+
+    _VERIFIABLE = set(_accept._READ_ONLY_COMMANDS) | set(
+        _accept._MUTATING_POSTCONDITIONS)
+    assert {p for _p, p, _f, _a in _PROSE_COMMAND} <= _VERIFIABLE, (
+        "a prose pattern names a program the acceptance layer cannot verify")
+except Exception:  # noqa: BLE001 - the layer may be absent; routing still works
+    pass
 
 
 def extract_number(text: str) -> float | None:

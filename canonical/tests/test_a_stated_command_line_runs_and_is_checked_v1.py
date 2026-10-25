@@ -110,7 +110,17 @@ class TestTheStatedCommandLineIsTakenVerbatim(unittest.TestCase):
 
 
 class TestNoCommandStatedNoCommandBound(unittest.TestCase):
-    """The negative control that keeps a general runner from being reached by accident."""
+    """The negative control that keeps a general runner from being reached by accident.
+
+    Narrowed to the sentences that genuinely state no command, and made harder
+    rather than softer.  The list this replaces also contained "Copy the file a
+    to b", "Read the file a" and "Count the lines in the file a" -- which, once
+    ordinary prose began to run, DO state a command.  Keeping them here would
+    have turned the control into a ban on English.  What the control actually
+    protects is the shape of the 367-sentence regression corpus: "Run the
+    <capability>.", a sentence that names a capability and no action at all.
+    Those three are still here, and nothing about them was relaxed.
+    """
 
     # The regression corpus is 367 sentences of exactly this shape. If any of
     # them bound a command, a capability-naming sentence would execute one.
@@ -118,23 +128,59 @@ class TestNoCommandStatedNoCommandBound(unittest.TestCase):
         "Run the archive manifest listing.",
         "Run the python source audit ast.",
         "Run the source candidates enumerate stdlib.",
-        "Read the file %s/a1.txt" % SCRATCH,
-        "Count the lines in the file %s/a1.txt" % SCRATCH,
         "Write the text hello world to the file %s/b2.txt" % SCRATCH,
         "Create the file %s/b2.txt containing the text second line" % SCRATCH,
-        "Copy the file %s/a1.txt to %s/b2.txt" % (SCRATCH, SCRATCH),
+    )
+
+    # The other half, and the reason narrowing this list is not a weakening:
+    # a sentence that DOES state a command must bind exactly the command it
+    # stated.  The old file only ever checked that these bound nothing; now they
+    # are pinned token by token, so a prose request that binds the wrong program
+    # fails here instead of being quietly ignored.
+    PROSE_COMMANDS = (
+        ("Copy the file %s/a1.txt to %s/b2.txt" % (SCRATCH, SCRATCH),
+         ["cp", "%s/a1.txt" % SCRATCH, "%s/b2.txt" % SCRATCH]),
+        ("Move the file %s/a1.txt to %s/b2.txt" % (SCRATCH, SCRATCH),
+         ["mv", "%s/a1.txt" % SCRATCH, "%s/b2.txt" % SCRATCH]),
+        ("Remove the file %s/a1.txt" % SCRATCH,
+         ["rm", "%s/a1.txt" % SCRATCH]),
+        ("Create the directory %s/d9" % SCRATCH, ["mkdir", "%s/d9" % SCRATCH]),
+        ("Create an empty file %s/e9" % SCRATCH, ["touch", "%s/e9" % SCRATCH]),
+        ("Read the file %s/a1.txt" % SCRATCH, ["cat", "%s/a1.txt" % SCRATCH]),
+        ("Count the lines in the file %s/a1.txt" % SCRATCH,
+         ["wc", "-l", "%s/a1.txt" % SCRATCH]),
+        ("Show the first 2 lines of the file %s/a1.txt" % SCRATCH,
+         ["head", "-n", "2", "%s/a1.txt" % SCRATCH]),
+        ("Sort the file %s/a1.txt" % SCRATCH, ["sort", "%s/a1.txt" % SCRATCH]),
+        ("Compute the sha256 of the file %s/a1.txt" % SCRATCH,
+         ["sha256sum", "%s/a1.txt" % SCRATCH]),
     )
 
     def test_a_sentence_that_states_no_command_binds_no_command(self):
         bound = [(g, extract_argv(g)) for g in self.NO_COMMAND if extract_argv(g)]
         self.assertEqual(bound, [], "invented a command line: %r" % bound)
 
+    def test_every_prose_command_binds_the_command_it_stated(self):
+        """Prose is not a licence to guess: each of these must bind exactly."""
+        wrong = [(g, extract_argv(g), want) for g, want in self.PROSE_COMMANDS
+                 if extract_argv(g) != want]
+        self.assertEqual(wrong, [], "prose command not bound exactly: %r" % wrong)
+
+    def test_a_prose_command_missing_an_operand_is_refused_not_completed(self):
+        """The arity rule.  `cp` with one path must not invent a destination."""
+        self.assertIsNone(extract_argv("Copy the file %s/a1.txt" % SCRATCH),
+                          "invented the second operand of cp")
+
     def test_an_unstated_argv_slot_is_left_unbound(self):
-        args = bind({"argv": "ARGV"}, "Read the file %s/a1.txt" % SCRATCH)
+        args = bind({"argv": "ARGV"}, "Run the archive manifest listing.")
         self.assertNotIn("argv", args, "bound an argv nobody stated: %r" % args)
 
     def test_a_stated_argv_does_bind(self):
         args = bind({"argv": "ARGV"}, "Run the shell command cat %s/a1.txt" % SCRATCH)
+        self.assertEqual(args.get("argv"), ["cat", "%s/a1.txt" % SCRATCH])
+
+    def test_a_prose_argv_binds_too(self):
+        args = bind({"argv": "ARGV"}, "Read the file %s/a1.txt" % SCRATCH)
         self.assertEqual(args.get("argv"), ["cat", "%s/a1.txt" % SCRATCH])
 
 
