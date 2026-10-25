@@ -35,6 +35,7 @@ import os
 import shutil
 import sys
 import time
+import pathlib
 import unittest
 from pathlib import Path
 
@@ -2064,6 +2065,76 @@ class TestTheFallthroughIsScopedToWhatTheSentenceStates(unittest.TestCase):
         self.assertEqual([named, other], _cr.extract_paths(
             "Compare the file %s and %s byte by byte" % (named, other)))
         self.assertEqual([named, other], _cr.extract_paths("%s %s" % (named, other)))
+
+
+    def test_a_directory_is_not_read_out_of_a_path_that_was_already_read(self):
+        # The core of the defect.  The prefix check that keeps a directory out of
+        # the path list compares SPELLINGS, and for "/home/u/brain/x/a1.txt" the
+        # directory token is "home/u/brain/x" -- not a prefix of the found path,
+        # because the leading slash is missing.  The sentence was then read as
+        # naming a file AND a folder, and a command needing one operand was
+        # refused for want of arity.  The same happened to "./x/a1.txt".
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh("apple\nbanana\n")
+        for stated in (str(ROOT / a), "./%s" % a):
+            self.assertEqual([stated], _cr.extract_paths("Count the lines in %s" % stated),
+                             stated)
+            self.assertEqual(["wc", "-l", stated],
+                             _cr._prose_argv("Count the lines in %s" % stated))
+
+    def test_an_absolute_path_names_the_file_it_states(self):
+        a = _fresh("apple\nbanana\n")
+        result = _solve("Count the lines in %s" % (ROOT / a))
+        self.assertTrue(_verified(result))
+
+    def test_a_path_that_starts_with_dot_slash_names_the_same_file(self):
+        a = _fresh("apple\nbanana\n")
+        self.assertTrue(_verified(_solve("Count the lines in ./%s" % a)))
+
+    def test_a_request_that_reports_success_is_a_request_that_was_checked(self):
+        # The pin on the shape of the defect, and the one that generalises: the
+        # absolute-path request reported pass True while raw_goal_acceptance was
+        # absent entirely -- no answer, no acceptance, nothing checked.  A pass
+        # that no verifier produced is not a pass, whatever else it is.
+        a = _fresh("apple\nbanana\n")
+        result = _solve("Count the lines in %s" % (ROOT / a))
+        self.assertTrue(_verified(result))
+        acceptance = result.get("raw_goal_acceptance") or {}
+        self.assertIs(True, acceptance.get("pass"),
+                      "a request reported success with no acceptance behind it")
+
+    def test_an_absolute_deletion_removes_the_named_file(self):
+        named, trap = self._spaced()
+        self.assertTrue(_verified(_solve("Delete %s" % (ROOT / named))))
+        self.assertFalse((ROOT / named).exists())
+        self.assertTrue((ROOT / trap).exists())
+
+    def test_an_extension_written_in_capitals_is_still_a_filename(self):
+        _fresh()
+        upper = "%s/A1.TXT" % SCRATCH
+        (ROOT / upper).write_text("upper\next\n", encoding="utf-8")
+        self.assertTrue(_verified(_solve("Count the lines in %s" % upper)))
+
+    def test_a_path_outside_the_repository_is_refused_and_not_read(self):
+        # Naming a file by an absolute path is now read correctly, so the
+        # boundary has to be checked on the same shape: a path outside the
+        # repository must be refused, its contents must not reach the report, and
+        # a deletion must leave it alone.
+        import tempfile, json as _json
+        outside = pathlib.Path(tempfile.mkdtemp()) / "outside_probe.txt"
+        outside.write_text("secret one\nsecret two\n", encoding="utf-8")
+        try:
+            read = _solve("Count the lines in %s" % outside)
+            self.assertFalse(_verified(read))
+            self.assertNotIn("secret", _json.dumps(read, default=str),
+                             "the contents of a file outside the repository were reported")
+            delete = _solve("Delete %s" % outside)
+            self.assertFalse(_verified(delete))
+            self.assertTrue(outside.exists(),
+                            "a file outside the repository was deleted")
+        finally:
+            outside.unlink(missing_ok=True)
+            outside.parent.rmdir()
 
 
 
