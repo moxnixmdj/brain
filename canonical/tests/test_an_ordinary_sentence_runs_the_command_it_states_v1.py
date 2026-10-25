@@ -135,7 +135,11 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
         #     sentence that SAYS which question it is asking.
         ("Compare the file {f} and {f} byte by byte", ["cmp", "{f}", "{f}"]),
         ("Compare the file {f} and {f} byte-for-byte", ["cmp", "{f}", "{f}"]),
-        ("Check whether the file {f} and {f} are identical bytes", ["cmp", "{f}", "{f}"]),
+        # `-s`, and measured: plain `cmp` on two identical files exits 0 having printed
+        # nothing, and the adapter raises CLI_EXPECTED_OUTPUT_MISSING -- the command
+        # could not answer the very question the sentence asked.  Silent `cmp`
+        # answers with its exit status, which is what the sentence wants.
+        ("Check whether the file {f} and {f} are identical bytes", ["cmp", "-s", "{f}", "{f}"]),
         ("Search the file {f} for the regex 'a|b'", ["egrep", "a|b", "{f}"]),
         ("Search the file {f} for the extended pattern 'a|b'", ["egrep", "a|b", "{f}"]),
         ("Find the literal string 'b[n' in the file {f}", ["fgrep", "b[n", "{f}"]),
@@ -1359,7 +1363,7 @@ class TestTheFallthroughIsScopedToWhatTheSentenceStates(unittest.TestCase):
         # to an explicit claim about bytes.  Both take two operands and write
         # nothing, which is the point under test.
         self.assertEqual(["diff", a, b], _cr._prose_argv("Compare the files %s and %s" % (a, b)))
-        self.assertEqual(["cmp", a, b],
+        self.assertEqual(["cmp", "-s", a, b],
                          _cr._prose_argv("Check whether the files %s and %s have the same bytes" % (a, b)))
         self.assertEqual(["diff", a, b],
                          _cr._prose_argv("Show the difference between the file %s and the file %s" % (a, b)))
@@ -2209,6 +2213,85 @@ class TestTheFallthroughIsScopedToWhatTheSentenceStates(unittest.TestCase):
         result = _solve("Show the first 3 lines of the file %s" % a)
         self.assertTrue(_verified(result))
         self.assertEqual("apple\nbanana\napple pie\n", self._answer(result))
+
+
+    def _status_answer(self, result):
+        produced = ((result.get("composer_execution") or {}).get("produced") or {})
+        return produced.get("returncode")
+
+    def test_a_yes_answer_and_a_no_answer_are_not_the_same_answer(self):
+        # The only test that matters here.  A yes-or-no question is answered by
+        # the exit status, so an implementation that always reported the same
+        # thing would still "pass" every row unless the two cases are asserted
+        # against each other.  grep exits 0 when it finds the text and 1 when it
+        # does not, and both are answers the acceptance layer enumerates.
+        a = _fresh("apple\nbanana\n")
+        yes = _solve("Does the file %s contain the text 'apple'?" % a)
+        no = _solve("Does the file %s contain the text 'zebra'?" % a)
+        self.assertTrue(_verified(yes))
+        self.assertTrue(_verified(no))
+        self.assertEqual(0, self._status_answer(yes))
+        self.assertEqual(1, self._status_answer(no))
+        self.assertNotEqual(self._status_answer(yes), self._status_answer(no),
+                            "the same answer was given for both questions")
+
+    def test_the_answer_to_a_yes_or_no_question_is_reproduced_by_running_it_again(self):
+        # The answer is not asserted by the producer: the inspector re-runs the
+        # command and the code it gets has to be the code that was recorded.
+        a = _fresh("apple\nbanana\n")
+        result = _solve("Does the file %s contain the text 'zebra'?" % a)
+        self.assertTrue(_verified(result))
+        ledger = ((result.get("raw_goal_acceptance") or {}).get("reinspection_ledger") or [])
+        self.assertTrue(ledger, "nothing was re-inspected")
+        reinspection = ledger[0].get("reinspection") or {}
+        self.assertIs(True, reinspection.get("command_re_run"), "the answer was never re-run")
+        self.assertEqual(int(self._status_answer(result)),
+                         int(reinspection["returncode_reproduced"]))
+
+    def test_a_yes_or_no_question_leaves_the_file_unchanged(self):
+        # `grep -q` prints nothing, and an empty output written to the bound
+        # destination would empty the file -- the same defect as a read that
+        # truncates, one layer down.
+        a = _fresh("apple\nbanana\n")
+        before = (ROOT / a).read_text(encoding="utf-8")
+        self.assertTrue(_verified(_solve("Does the file %s contain the text 'apple'?" % a)))
+        self.assertEqual(before, (ROOT / a).read_text(encoding="utf-8"))
+
+    def test_two_identical_files_and_two_different_files_are_distinguished(self):
+        a = _fresh("apple\nbanana\n")
+        same = "%s/same.txt" % SCRATCH
+        other = "%s/other.txt" % SCRATCH
+        (ROOT / same).write_text("apple\nbanana\n", encoding="utf-8")
+        (ROOT / other).write_text("fig\n", encoding="utf-8")
+        yes = _solve("Are the files %s and %s identical?" % (a, same))
+        no = _solve("Are the files %s and %s identical?" % (a, other))
+        self.assertTrue(_verified(yes))
+        self.assertTrue(_verified(no))
+        self.assertEqual(0, self._status_answer(yes))
+        self.assertEqual(1, self._status_answer(no))
+
+    def test_a_trouble_exit_status_is_never_reported_as_an_answer(self):
+        # 2 means the command had trouble, not "no".  Folding it into the answer
+        # would turn a broken search into a confident negative.
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _acc
+        for program in ("grep", "egrep", "fgrep", "cmp", "diff"):
+            self.assertEqual({0, 1}, set(_acc._ANSWER_IS_THE_EXIT_STATUS[program]),
+                             program)
+
+    def test_a_question_about_a_tree_still_searches_the_tree(self):
+        # The pin on the scope.  A yes-or-no rule keyed on the word "contain"
+        # must not take a sentence that asks for a search of a whole directory:
+        # answering it from one file would report a search that never happened.
+        from canonical.runtime import composer_route_v1 as _cr
+        _fresh()
+        d = "%s/dq" % SCRATCH
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "one.txt").write_text("apple\n", encoding="utf-8")
+        goal = "Search the files in the directory %s for the exact text 'apple'" % d
+        argv = _cr._prose_argv(goal)
+        self.assertIsNotNone(argv, goal)
+        self.assertIn("-r", argv, "a search of a tree was answered from one file")
+        self.assertEqual(d, argv[-1])
 
 
 
