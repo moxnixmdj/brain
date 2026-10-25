@@ -24601,7 +24601,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6368,
+  "research_index_records": 6369,
   "routing_tokens": 1799,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24610,7 +24610,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3c6b80f5dfdc08afe8246e180ce02ddc9a276385b63bdb2e4f6865e5b3786e27"
+  "value": "6828801f98b68eca480f647751d203e846697ce189065ff65026a5e1c3b51ad2"
  },
  "engines": [
   {
@@ -192124,6 +192124,51 @@
     "the_controller_path_asks_the_acceptance_verifier_too_v1_20261024_v1": 2,
     "v1": 2,
     "verdict": 3
+   }
+  },
+  {
+   "action_id": "THE_EVERYDAY_COMMANDS_ARE_PINNED_BY_A_SUITE_NOT_A_PROBE_V1_20261024_V1",
+   "capability": false,
+   "date": "2026-10-24",
+   "id": "research:canonical/action_intents/THE_EVERYDAY_COMMANDS_ARE_PINNED_BY_A_SUITE_NOT_A_PROBE_V1_20261024_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_EVERYDAY_COMMANDS_ARE_PINNED_BY_A_SUITE_NOT_A_PROBE_V1_20261024_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "0de75444a8206f9dbd7d16a93e949137069d1f0b041ac125d6c5f4b858ff2f73",
+   "status": "",
+   "terms": {
+    "14": 1,
+    "20261024": 1,
+    "6136": 1,
+    "797": 1,
+    "a_command_that_cannot_be_re_run_is_checked_by_what_it_left_v1_20261024_v1": 1,
+    "acted": 1,
+    "actually": 1,
+    "ad-hoc": 1,
+    "against": 1,
+    "anything": 1,
+    "been": 1,
+    "before": 1,
+    "belief": 1,
+    "blamed": 1,
+    "caught": 1,
+    "cause": 1,
+    "command": 2,
+    "commands": 4,
+    "did": 2,
+    "everyday": 3,
+    "fourteen": 2,
+    "had": 2,
+    "not": 2,
+    "one": 2,
+    "probe": 3,
+    "rather": 2,
+    "run": 2,
+    "strength": 2,
+    "suite": 2,
+    "than": 2,
+    "v1": 2,
+    "were": 2
    }
   },
   {
