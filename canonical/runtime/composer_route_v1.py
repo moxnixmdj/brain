@@ -391,6 +391,36 @@ def route(goal: str, seed: Sequence[str] | None = None,
 # --------------------------------------------------------------------------- #
 # binding: turning a sentence into the arguments a capability wants
 # --------------------------------------------------------------------------- #
+# A filename may contain spaces -- "my notes.txt" is an ordinary name -- and
+# every rule below is built on tokens that stop at whitespace, so such a name was
+# read as two things: the tail `notes.txt`, a file the sentence never named, and
+# the head as a directory, `canonical/.../tz/my`.  Measured: "Write the text
+# 'hello' to the file <scratch>/my notes.txt" created a file called `my`, left
+# both real files untouched, and reported
+# PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED.  An invented
+# destination certified as the work asked for is the same defect as a destructive
+# write, so a name with spaces is read whole, from the words that introduce it.
+_QUOTED_SPAN = re.compile(r"\"([^\"]+)\"|'([^']+)'")
+# A quoted value is a PATH when it holds a separator or ends in a lettered
+# extension.  Letters, not digits: '3.5' is a number the sentence asked to be
+# written, not a file.
+_PATHISH = re.compile(r"/|\.[A-Za-z][A-Za-z0-9]{0,7}$")
+_LEAD_STOPWORDS = frozenset({
+    "in", "at", "on", "to", "from", "into", "of", "for", "which", "that", "this",
+    "these", "those", "containing", "named", "called", "under", "inside", "and",
+    "or", "with", "by", "the", "a", "an", "is", "are", "was", "were", "it", "its"})
+# "the file my notes.txt" -- the introducer, then as FEW plain words as it takes
+# to reach a token that ends in an extension.  Lazy, not greedy: a greedy count
+# measured "the file my notes.txt to the file backup.txt" as ONE path stretching
+# across both, which is a name no sentence ever stated.
+# The same distinction at the layer that fills the slots: a quoted value the
+# sentence introduced as a file is an operand, while a quoted value it introduced
+# as a pattern is not.
+_QUOTED_AS_A_PATH = re.compile(
+    r"\b(?:files?|paths?|documents?)\s+(?:\"[^\"]+\"|'[^']+')")
+_INTRO_PATH = re.compile(
+    r"\b(?:files?|paths?|documents?)\s+"
+    r"((?:[^\s,;:'\"()]+[ ]){0,5}?[^\s,;:'\"()]*\.[A-Za-z][A-Za-z0-9_]{0,7})")
 _EXT = re.compile(r"[A-Za-z0-9_./-]+\.[A-Za-z0-9_]{1,8}")
 _NUM = re.compile(r"-?\d+(?:\.\d+)?")
 
@@ -420,8 +450,46 @@ def extract_paths(text: str) -> list[str]:
     library looks is how a machine decides a goal named no input.
     """
     body = str(text or "")
-    found = [m.group(0) for m in _EXT.finditer(body)]
-    seen = set(found)
+    found: list[str] = []
+    seen: set[str] = set()
+
+    def _add(candidate: str) -> None:
+        if candidate and candidate not in seen:
+            found.append(candidate)
+            seen.add(candidate)
+
+    # A quoted name is read whole first, and then removed from the sentence, so
+    # its fragments cannot be picked up as separate paths below.  Only a quoted
+    # value the sentence INTRODUCED as a file qualifies: shape alone cannot tell
+    # them apart, and measuring that way broke a refusal -- in "Replace 'a.b'
+    # with 'x' in the file A" the value 'a.b' ends in a lettered extension, so
+    # reading it as a path hid it from the unsafe-value check and bound a sed
+    # script the sentence was never allowed to produce.  The introducer is the
+    # fact that decides it, not the spelling of the value.
+    for match in _QUOTED_AS_A_PATH.finditer(str(text or "")):
+        quoted = match.group(0).split(None, 1)[1].strip()
+        inner = quoted[1:-1] if len(quoted) >= 2 and quoted[0] in "'" + '"' else quoted
+        if inner and _PATHISH.search(inner):
+            _add(inner)
+            body = body.replace(match.group(0), " ")
+    # Then a name with spaces, taken from the word that introduces it.  Only a
+    # candidate that really holds a space needs this route, and one whose first
+    # word is a preposition is not a name at all -- "which files in the
+    # directory X" must keep yielding X and not a phrase.
+    for match in _INTRO_PATH.finditer(body):
+        candidate = match.group(1)
+        if " " not in candidate:
+            continue
+        if candidate.split(" ", 1)[0].lower() in _LEAD_STOPWORDS:
+            continue
+        _add(candidate)
+        body = body.replace(candidate, " ")
+    # Not de-duplicated, exactly as before: "Compare the file A and A byte by
+    # byte" states two operands that happen to be the same path, and a set here
+    # measured that sentence as one operand and refused it for want of arity.
+    for match in _EXT.finditer(body):
+        found.append(match.group(0))
+    seen.update(found)
     for m in _DIRPATH.finditer(body):
         token = m.group(0)
         if token in seen:
@@ -432,8 +500,7 @@ def extract_paths(text: str) -> list[str]:
         # would be told its output is a folder it was never asked to produce.
         if any(f == token or f.startswith(token + "/") for f in found):
             continue
-        found.append(token)
-        seen.add(token)
+        _add(token)
     return found
 
 
@@ -955,7 +1022,31 @@ _PROSE_COMMAND_WITH_TWO_VALUES: tuple[tuple[str, str], ...] = (
 # expression -- would make the command mean something the sentence did not
 # say.  Written with chr() so the set is exactly these five characters and
 # cannot be mangled by an escape sequence on the way into the file.
-_SED_UNSAFE = "|" + chr(92) + "&" + chr(10) + chr(13)
+# A character that would make the command mean something the sentence did not
+# say.  The dot belongs here on the same grounds as the pipe: in a sed pattern it
+# matches ANY character, so "replace 'a.b' with 'x'" would also replace "axb".
+# Refusing is the only truthful answer, and until now the refusal this sentence
+# got was an accident of a corrupted path reading as two operands.
+_SED_UNSAFE = "|" + chr(92) + "&" + chr(10) + chr(13) + "."
+
+
+def _mask_a_quoted_value(sentence: str, value: str) -> str:
+    """Blank out a quoted value without touching anything else in the sentence.
+
+    A blind ``re.sub(value, " ")`` eats the same characters wherever they occur,
+    including inside a path: masking the value 'x' turned
+    "canonical/.../m3v7x/a1.txt" into "canonical/.../m3v7 /a1.t t" -- a path that
+    exists nowhere, and one that then read as TWO operands, which is the only
+    reason a sentence replacing 'a.b' was ever refused.  The sentence quoted the
+    value, so the quoted span is what gets removed, quotes and all, and nothing
+    outside it can be hit.
+    """
+    body = str(sentence)
+    for match in _QUOTED_SPAN.finditer(body):
+        inner = str(match.group(1) or match.group(2) or "").strip()
+        if inner == str(value):
+            return body.replace(match.group(0), " ", 1)
+    return body
 
 
 def _quoted_values(sentence: str) -> list[str]:
@@ -1056,7 +1147,7 @@ def _prose_argv(sentence: str) -> list[str] | None:
         needle = None
         if len(values) == 1:
             needle = values[0]
-            masked = re.sub(re.escape(needle), " ", masked, flags=re.IGNORECASE)
+            masked = _mask_a_quoted_value(masked, needle)
         else:
             m = _FIND_SUFFIX.search(text) or _FIND_PREFIX.search(text)
             if m:
@@ -1117,7 +1208,7 @@ def _prose_argv(sentence: str) -> list[str] | None:
             return None
         masked = str(sentence)
         for value in _quoted_values(sentence):
-            masked = re.sub(re.escape(value), " ", masked, flags=re.IGNORECASE)
+            masked = _mask_a_quoted_value(masked, value)
         masked_paths = extract_paths(masked)
         for p in masked_paths:
             masked = re.sub(re.escape(str(p)), " ", masked, flags=re.IGNORECASE)
@@ -1278,7 +1369,12 @@ def bind(signature: Mapping[str, str], goal: str,
     # operands, at the layer that fills the slots.  A fix that closes one path
     # and leaves its sibling open is not closed.
     _quoted = _quoted_value(goal)
-    if _quoted:
+    if _quoted and not _QUOTED_AS_A_PATH.search(str(goal or "")):
+        # Still masked when the sentence quoted a PATTERN, which is the case that
+        # made the defect above invisible.  Not masked when the sentence
+        # introduced the quoted value as a file -- "the file 'my notes.txt'" --
+        # because then the quoted value is the only operand the sentence named,
+        # and removing it leaves the command with nothing to run on.
         paths = [p for p in paths if p != str(_quoted)]
     args: dict[str, Any] = {}
     for slot, typ in signature.items():
