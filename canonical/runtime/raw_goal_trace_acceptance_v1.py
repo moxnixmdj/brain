@@ -821,7 +821,13 @@ def _inspect_text_file_write(args: Mapping, result: Mapping, root: Path) -> tupl
 # and not safe for anything else, so everything else is refused rather than
 # guessed at.  "cp", "mv", "rm", "mkdir", "touch", "tee" and "dd" are deliberately
 # absent: re-running one of those is a second side effect, not a check.
-_SED_PRINT_OF_NAMED_LINES = re.compile(r"\d+(?:,\d+)?p\Z")
+# An address, optionally a substitution composed onto it, ending in `p`: the
+# shapes are `3p`, `2,4p` and `3s/.*/\U&/p`.  sed composes an address with a
+# command in one script, so "the third line in upper case" is a single command
+# that still names a line -- and it prints nothing at all, exiting 0, when the
+# line is not there.  Matching only `<addr>p` would have left that composed form
+# free to certify silence, which is the defect this predicate exists to stop.
+_SED_PRINT_OF_NAMED_LINES = re.compile(r"\d+(?:,\d+)?(?:s[|/#].*)?p\Z")
 _TAIL_FROM_A_NAMED_LINE = re.compile(r"\+\d+\Z")
 
 
