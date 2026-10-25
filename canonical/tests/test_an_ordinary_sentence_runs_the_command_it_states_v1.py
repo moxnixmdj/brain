@@ -85,6 +85,13 @@ def _verified(result) -> bool:
                 "EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"))
 
 
+def _ra_compatible_registry():
+    """The registry the live gate judges against, loaded the way it loads it."""
+    from canonical.runtime import capability_composer_v1 as _comp
+    reg = _comp.load_registry()
+    return {cid: (e if isinstance(e, dict) else dict(e)) for cid, e in reg.items()}
+
+
 class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
     """Half one: the words become the argv, token for token, or nothing."""
 
@@ -1485,6 +1492,107 @@ class TestTheFallthroughIsScopedToWhatTheSentenceStates(unittest.TestCase):
             args = _cr.bind({"argv": "ARGV", "output_path": "PATH_OUTPUT"}, sentence)
             self.assertNotIn("write_stdout_to_output", args,
                              "%r was allowed to write over its own operand" % sentence)
+
+
+    def _make_tree(self):
+        a = _fresh("apple\nbanana\n")
+        sub = os.path.join(SCRATCH, "sub")
+        (ROOT / sub).mkdir(parents=True, exist_ok=True)
+        (ROOT / sub / "deep.txt").write_text("fig\n", encoding="utf-8")
+        return a
+
+    def test_a_directory_can_be_copied_and_the_whole_tree_is_compared(self):
+        # "Copy the directory A to the directory B" said "directory" twice, and
+        # `cp` without -r refuses a directory -- so the report came back
+        # COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN, which claims not to know whether
+        # anything happened.  The flag is not a guess: the sentence stated it.
+        from canonical.runtime import composer_route_v1 as _cr
+        # The source is a subdirectory and the destination a sibling: copying a
+        # directory INTO itself is a different request and an error, and putting
+        # the destination inside the source was this test's own first bug.
+        self._make_tree()
+        d = "%s/tree" % SCRATCH
+        e = "%s/eq" % SCRATCH
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "aq.txt").write_text("apple\nbanana\n", encoding="utf-8")
+        (ROOT / d / "sub").mkdir(exist_ok=True)
+        (ROOT / d / "sub" / "deep.txt").write_text("fig\n", encoding="utf-8")
+        goal = "Copy the directory %s to the directory %s" % (d, e)
+        self.assertEqual(["cp", "-r", d, e], _cr._prose_argv(goal))
+        self.assertTrue(_verified(_solve(goal)))
+        self.assertEqual("apple\nbanana\n",
+                         (ROOT / e / "aq.txt").read_text(encoding="utf-8"))
+        self.assertEqual("fig\n", (ROOT / e / "sub" / "deep.txt").read_text(encoding="utf-8"))
+
+    def test_a_tree_promise_without_the_recursive_flag_is_not_certified(self):
+        # The other half.  `cp A B` on a directory is an error, so certifying a
+        # copied tree there would be a green verdict over work that did not
+        # happen -- the one direction a false report must never go.
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _acc
+        a = self._make_tree()
+        (ROOT / SCRATCH / "tree").mkdir(parents=True, exist_ok=True)
+        (ROOT / SCRATCH / "tree" / "aq.txt").write_text("apple\n", encoding="utf-8")
+        ok, reason, _ = _acc._post_cp(["cp", "%s/tree" % SCRATCH,
+                                       "%s/eq2" % SCRATCH], ROOT)
+        self.assertFalse(ok)
+        self.assertEqual("COMMAND_CP_TREE_PROMISE_NEEDS_A_RECURSIVE_FLAG", reason)
+        # and the file shape that always worked still does
+        b = "%s/b1.txt" % SCRATCH
+        (ROOT / b).write_text((ROOT / a).read_text(encoding="utf-8"), encoding="utf-8")
+        ok, reason, _ = _acc._post_cp(["cp", a, b], ROOT)
+        self.assertTrue(ok, reason)
+
+    def test_files_can_be_found_by_the_ending_the_sentence_spells_out(self):
+        # `find` only reads the tree and prints what is there, so the inspector
+        # re-runs it and compares stdout -- no new way to be trusted.  The dot is
+        # load-bearing: stripping it turned ".txt" into the pattern `*txt`, which
+        # is looser than the sentence said and would also select `notes_txt`.
+        from canonical.runtime import composer_route_v1 as _cr
+        self._make_tree()
+        goal = "Find the files in the directory %s that end with .txt" % SCRATCH
+        self.assertEqual(["find", SCRATCH, "-name", "*.txt"], _cr._prose_argv(goal))
+        out = _solve(goal)
+        self.assertTrue(_verified(out), out.get("status"))
+
+    def test_a_search_of_a_directory_is_recursive_because_the_sentence_said_files(self):
+        # `grep` on a directory without -r is an error, not an answer -- and the
+        # sentence said "the files in the directory", which is a tree.  A search
+        # of ONE file must stay non-recursive, or the flag is an invention.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = self._make_tree()
+        across = "Search the files in the directory %s for the exact text 'apple'" % SCRATCH
+        self.assertEqual(["fgrep", "-r", "apple", SCRATCH], _cr._prose_argv(across))
+        self.assertTrue(_verified(_solve(across)))
+        single = "Search the file %s for the exact text 'apple'" % a
+        self.assertEqual(["fgrep", "apple", a], _cr._prose_argv(single))
+        self.assertTrue(_verified(_solve(single)))
+
+    def test_a_capability_that_cannot_run_a_command_is_refused_at_the_live_gate(self):
+        # The retrieval layer already refused evidence.claim_relation.generic_units
+        # for this sentence, and the live gate -- which re-judges the compiler's
+        # own pick -- admitted it anyway, so it ran and died while the composer
+        # had the exact argv.  Both layers have to ask the same question.
+        from canonical.runtime import live_brain_route_admission_v1 as _ra
+        self._make_tree()
+        goal = ("Search the files in the directory %s for the exact text 'apple'"
+                % SCRATCH)
+        verdict = _ra.route_admission(
+            goal, {"selected_capability": "evidence.claim_relation.generic_units.stdlib",
+                   "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH"},
+            _ra_compatible_registry())
+        self.assertIs(verdict.get("admitted"), False, verdict)
+        self.assertEqual("NO_COMMAND_SLOT_FOR_THE_STATED_COMMAND", verdict.get("rule"))
+
+    def test_a_file_copy_still_binds_without_the_recursive_flag(self):
+        # Regression pin: the flag comes from the word "directory", so a sentence
+        # about files must be byte for byte what it was.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh("apple\n")
+        b = "%s/b1.txt" % SCRATCH
+        goal = "Copy the file %s to the file %s" % (a, b)
+        self.assertEqual(["cp", a, b], _cr._prose_argv(goal))
+        self.assertTrue(_verified(_solve(goal)))
+        self.assertEqual("apple\n", (ROOT / b).read_text(encoding="utf-8"))
 
 
 

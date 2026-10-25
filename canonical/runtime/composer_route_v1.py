@@ -961,6 +961,19 @@ _FILTER_LINE = re.compile(
     r"\b(?:remove|delete|drop|strip|write|show|list|print)\b[^\n]{0,40}?\blines?\b")
 
 
+# A request about a DIRECTORY is not the same request about a file, and the
+# difference is a flag the sentence itself states.  "Copy the directory A to the
+# directory B" says "directory" twice; `cp` without -r refuses it and the report
+# came back COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN -- the worst shape of answer,
+# because it claims not to know whether anything happened.
+_DIRECTORY_REQUEST = re.compile(r"\bdirector(?:y|ies)\b|\bfolders?\b")
+_RECURSIVE_REQUEST = re.compile(
+    r"\bfiles?\b[^\n]{0,20}?\bin the\b[^\n]{0,20}?\bdirector(?:y|ies)\b"
+    r"|\ball the files\b|\bevery file\b|\beach file\b")
+_FIND_SUFFIX = re.compile(r"\bend(?:s|ing)?\s+with\s+([^\s,]+)")
+_FIND_PREFIX = re.compile(r"\b(?:start|begin)(?:s|ing)?\s+with\s+([^\s,]+)")
+
+
 def _prose_argv(sentence: str) -> list[str] | None:
     """The command a sentence asks for in ordinary English, or None.
 
@@ -983,6 +996,43 @@ def _prose_argv(sentence: str) -> list[str] | None:
         if len(paths) != 2:
             return None
         return [program, dest_flag, str(paths[1]), str(paths[0])]
+    # "find" alone is NOT enough, and measuring it that way was a regression:
+    # "Find the lines in the file X matching 'apple'" is an ordinary search, and
+    # the word "find" in it stole the sentence and bound `find X -name 'apple'`.
+    # `find` walks a tree, so the sentence has to name one.
+    if (re.search(r"\bfind\b", text) and "find" in known
+            and _DIRECTORY_REQUEST.search(text)):
+        # `find` only reads the tree and prints what is there, so the inspector
+        # re-runs it and compares stdout -- no new way to be trusted, only a new
+        # way to be asked.  The name pattern is either the value the sentence
+        # quoted or the ending it spelled out; "that end with .txt" names `*.txt`
+        # and nothing looser.
+        values = _quoted_values(sentence)
+        masked = str(sentence)
+        needle = None
+        if len(values) == 1:
+            needle = values[0]
+            masked = re.sub(re.escape(needle), " ", masked, flags=re.IGNORECASE)
+        else:
+            m = _FIND_SUFFIX.search(text) or _FIND_PREFIX.search(text)
+            if m:
+                # Quotes only.  Stripping the dot too turned ".txt" into the
+                # pattern `*txt`, which is looser than the sentence said: it
+                # would also select a file called `a-txt` or `notes_txt`.
+                token = m.group(1).strip("'\"")
+                if not token:
+                    return None
+                needle = ("*" + token) if _FIND_SUFFIX.search(text) else (token + "*")
+                masked = re.sub(re.escape(m.group(1)), " ", masked, flags=re.IGNORECASE)
+        operand_paths = extract_paths(masked)
+        if len(operand_paths) != 1:
+            # No single directory to search, or more than one: refuse rather than
+            # pick one and report a search the sentence did not describe.
+            return None
+        argv = ["find", str(operand_paths[0])]
+        if needle:
+            argv += ["-name", str(needle)]
+        return argv
     if _FILTER_LINE.search(text) and "grep" in known:
         values = _quoted_values(sentence)
         blank = bool(_BLANK_LINE.search(text))
@@ -1037,7 +1087,10 @@ def _prose_argv(sentence: str) -> list[str] | None:
             # A pattern the sentence did not state, or more than one file to
             # search in: refuse rather than complete the command by guessing.
             return None
-        return [program, str(value), str(operand_paths[0])]
+        # "Search the files in the directory X for ..." is a search of a tree,
+        # and `grep` on a directory without -r is an error, not an answer.
+        extra = ["-r"] if _RECURSIVE_REQUEST.search(text) else []
+        return [program, *extra, str(value), str(operand_paths[0])]
     for pattern, program, flags, arity in _PROSE_COMMAND:
         if program not in known:
             continue
@@ -1071,6 +1124,8 @@ def _prose_argv(sentence: str) -> list[str] | None:
                 # answer to the question the sentence actually asked.
                 return None
             return [program, "-f", str(column), str(paths[0])]
+        if program == "cp" and _DIRECTORY_REQUEST.search(text):
+            return [program, "-r", str(paths[0]), str(paths[1])]
         argv = [program, *flags(_prose_count(text)), *paths]
         return [str(part) for part in argv if str(part)]
     return None
