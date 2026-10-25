@@ -270,15 +270,6 @@ def route(goal: str, seed: Sequence[str] | None = None,
     ext = sorted(composer.external_tokens(g))
     have = list(seed) if seed is not None else list(ext)
     tried: list[dict[str, Any]] = []
-    for token in candidate_tokens(goal, g)[:max_candidates]:
-        chain = composer.plan(have, token, g)
-        tried.append({"token": token, "reachable": chain is not None,
-                      "chain": chain})
-        if chain:
-            return {"schema": SCHEMA, "pass": True, "goal": goal,
-                    "token": token, "chain": list(chain), "tried": tried,
-                    "status": "PASS__COMPOSER_ROUTE_FOUND",
-                    "authority": "TYPE_LEVEL_COMPOSITION_REACHABLE"}
     # A sentence that STATES a command line is not a token-scoring question.
     # `candidate_tokens` scores the registry's keywords against the sentence's
     # prose, so a sentence whose words match no keyword scores nothing at all --
@@ -322,6 +313,15 @@ def route(goal: str, seed: Sequence[str] | None = None,
                             "token": token, "chain": list(chain), "tried": tried,
                             "status": "PASS__COMPOSER_ROUTE_FOUND",
                             "authority": "TYPE_LEVEL_COMPOSITION_REACHABLE"}
+    for token in candidate_tokens(goal, g)[:max_candidates]:
+        chain = composer.plan(have, token, g)
+        tried.append({"token": token, "reachable": chain is not None,
+                      "chain": chain})
+        if chain:
+            return {"schema": SCHEMA, "pass": True, "goal": goal,
+                    "token": token, "chain": list(chain), "tried": tried,
+                    "status": "PASS__COMPOSER_ROUTE_FOUND",
+                    "authority": "TYPE_LEVEL_COMPOSITION_REACHABLE"}
     # No chain of registered capabilities reaches it. Before reporting that,
     # try to WRITE a program that does it -- python3 is here and the stdlib is
     # free, so "nothing is registered" is not the same as "it cannot be done".
@@ -706,7 +706,8 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # "Put the lines of the file X in order" and "Arrange the lines of the file
     # X in order" both measured to bind nothing: the sentence states the RESULT
     # rather than naming the program.
-    (r"\bsort\b|\bin order\b|\balphabetical(?:ly)?\b", "sort", _no_flags, 1),
+    (r"\bsort(?:ed|ing)?\b|\bin order\b|\balphabetical(?:ly)?\b", "sort",
+     _no_flags, 1),
     # `md5sum` must be tried BEFORE `sha256sum` now that the latter answers to
     # the generic word "hash": "Compute the md5 hash of X" would otherwise bind
     # sha256sum and return the wrong digest for an algorithm the sentence named.
@@ -766,7 +767,7 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # registry keywords were not touched, and verify still reports 33/33.
     (r"\bcmp\b|\bbyte[ -]for[ -]byte\b|\bbyte[ -]by[ -]byte\b|\bidentical bytes\b|\bthe same bytes\b",
      "cmp", _no_flags, 2),
-    (r"\bdiff\b|\bcompare\b", "diff", _no_flags, 2),
+    (r"\bdiff\b|\bcompare\b|\bdifference\b|\bdiffers?\b", "diff", _no_flags, 2),
     # `stat` is deliberately ABSENT, and it was measured
     # rather than assumed:
     #
@@ -784,6 +785,11 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # also contains "output" followed by "file", and measured without it this
     # rule stole the write -- the sentence was served by `cat` and refused with
     # PROMISED_ARTIFACT_MISSING.  "output" counts only as a verb.
+    # "Join the files A and B into the file C" names TWO sources, so it cannot
+    # use the single-operand `cat` rule at the end of this table.  It is placed
+    # here because the first pattern to match wins, and the generic read rule
+    # would otherwise take the sentence and refuse it on arity.
+    (r"\b(?:join|concatenate|combine|merge)\b", "cat", _no_flags, 2),
     (r"\b(?:read|show|display|print|cat)\b[^.\n]{0,40}?\bfile\b"
      r"|\boutput\b(?!\s+file\b)[^.\n]{0,40}?\bfile\b", "cat", _no_flags, 1),
 )
@@ -896,6 +902,24 @@ _PROSE_COMMAND_DEST_FLAG: tuple[tuple[str, str, str], ...] = (
 )
 
 
+# The words that put a command's result somewhere.  Scoped to the claim the
+# sentence makes: a path is only a destination if the sentence introduces it as
+# one, so a command that simply takes two files keeps taking two files.
+_RESULT_DESTINATION = re.compile(
+    r"\b(?:into|to|onto|as|inside)\b[^\n]{0,40}?$"
+    r"|\b(?:write|save|put|store|output|send|direct)\b[^\n]{0,40}?$",
+    re.IGNORECASE)
+
+
+def _states_a_destination_for_the_result(sentence: str, dest: Any) -> bool:
+    """True when the sentence introduces `dest` as where the result goes."""
+    text = str(sentence or "")
+    where = text.rfind(str(dest))
+    if where <= 0:
+        return False
+    return bool(_RESULT_DESTINATION.search(text[:where]))
+
+
 def _prose_argv(sentence: str) -> list[str] | None:
     """The command a sentence asks for in ordinary English, or None.
 
@@ -943,10 +967,27 @@ def _prose_argv(sentence: str) -> list[str] | None:
             continue
         if not re.search(pattern, text):
             continue
-        if len(paths) != arity:
+        operands = paths
+        # A read-only command can be asked to put its result somewhere: "write
+        # the unique lines of A to the file B", "join A and B into C".  The
+        # sentence then names one more path than the program takes as operands,
+        # and the extra one is the DESTINATION -- not an operand, and not an
+        # invention either, because the adapter writes the command's stdout to
+        # `output_path`, which `bind` already fills with the last path in the
+        # sentence.  Measured before this, every such sentence was refused on
+        # arity: uniq wants one file and the sentence named two.
+        #
+        # The destination has to be SAID, not assumed.  Requiring the words that
+        # introduce it is what keeps "Compare the files A and B" -- two operands,
+        # no destination -- binding exactly as it did.
+        if (len(paths) == arity + 1
+                and _states_a_destination_for_the_result(sentence, paths[-1])):
+            operands = paths[:arity]
+        if len(operands) != arity:
             # The sentence did not state enough operands for the program it
             # asked for.  Refuse; do not repeat a path to make the numbers fit.
             return None
+        paths = operands
         if program == "cut":
             column = _prose_ordinal(sentence)
             if column is None:
@@ -1043,6 +1084,7 @@ def bind(signature: Mapping[str, str], goal: str,
             if argv:
                 args[slot] = argv
                 _declare_a_consumed_output(args, argv)
+                _declare_a_written_output(args, argv, goal)
                 _declare_an_exit_status_answer(args, argv)
         elif t == "NUMBER":
             n = extract_number(goal)
@@ -1062,6 +1104,49 @@ def bind(signature: Mapping[str, str], goal: str,
             if body:
                 args[slot] = body
     return args
+
+
+def _declare_a_written_output(args: dict[str, Any], argv: Sequence[str],
+                              sentence: str) -> None:
+    """Tell the adapter to write the command's stdout to the declared output.
+
+    `output_path` has always been a promise to CHECK, never a place to write --
+    the adapter creates its parent directory and then asks whether it exists.  So
+    a sentence that asks for a command's result to be put somewhere had no
+    mechanism at all: "Write the unique lines of the file A to the file B"
+    compiled, ran `uniq A`, and was then correctly refused with
+    PROMISED_ARTIFACT_MISSING because nothing ever wrote B.  The refusal was
+    honest and the request was perfectly ordinary.
+
+    Three conditions, each of which is read rather than assumed:
+      * the sentence INTRODUCES the last path as where the result goes, which is
+        the same test that let the command bind one operand fewer;
+      * the command is read-only, so its stdout IS the result and writing it
+        changes nothing the sentence did not ask for;
+      * the command does not consume its operand -- for `rm A` the bound output
+        is the file being deleted, and writing stdout there would resurrect it.
+    Anything else leaves the argument unset, so every route that worked before
+    this runs byte for byte as it did.
+    """
+    if not argv:
+        return
+    program = str(argv[0]).rsplit("/", 1)[-1]
+    try:
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
+        read_only = program in _accept._READ_ONLY_COMMANDS
+        consumes = program in _accept._CONSUMES_AN_OPERAND
+    except Exception:  # noqa: BLE001 - no table, no declaration
+        return
+    if not read_only or consumes:
+        return
+    named = extract_paths(sentence)
+    if not named:
+        return
+    dest = str(named[-1])
+    if dest in {str(x) for x in argv[1:]}:
+        return
+    if _states_a_destination_for_the_result(sentence, dest):
+        args["write_stdout_to_output"] = "true"
 
 
 def _declare_a_consumed_output(args: dict[str, Any], argv: Sequence[str]) -> None:

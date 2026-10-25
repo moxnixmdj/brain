@@ -27,6 +27,13 @@ def run(args, root):
     proc=subprocess.run(
         argv,cwd=root,text=False,capture_output=True,timeout=max(1,min(int(args.get("timeout_s",60)),300))
     )
+    if args.get("write_stdout_to_output")=="true" and out is not None and proc.returncode==0:
+        # The sentence asked for this command's result to be put somewhere, and
+        # the composer only sets that argument when the sentence says so, the
+        # program is read-only, and it does not consume the operand.  A non-zero
+        # exit is left alone: that is a failure or an answer for the caller to
+        # judge, and writing a partial result over a promise is not either.
+        out.write_bytes(proc.stdout)
     result={
       "adapter":"bound_capability_cli",
       "argv":argv,
