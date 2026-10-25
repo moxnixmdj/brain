@@ -24619,7 +24619,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6391,
+  "research_index_records": 6392,
   "routing_tokens": 1816,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24628,7 +24628,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "bb75918a95b977f19e1cc76a6b9daa3294ca5fb603327ca6d0694cd4b3a8896f"
+  "value": "6e93bc5991efa999e2585afaa2d26f4b6d1793187468218f4966f7155583bb5f"
  },
  "engines": [
   {
@@ -189106,6 +189106,51 @@
    }
   },
   {
+   "action_id": "A_QUESTION_ABOUT_PART_OF_A_FILE_GETS_THAT_PART_AND_A_READER_NEVER_WRITES_OVER_WHAT_IT_READ_V1_20261025_V1",
+   "capability": false,
+   "date": "2026-10-25",
+   "id": "research:canonical/action_intents/A_QUESTION_ABOUT_PART_OF_A_FILE_GETS_THAT_PART_AND_A_READER_NEVER_WRITES_OVER_WHAT_IT_READ_V1_20261025_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_QUESTION_ABOUT_PART_OF_A_FILE_GETS_THAT_PART_AND_A_READER_NEVER_WRITES_OVER_WHAT_IT_READ_V1_20261025_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "2d272ef9726f36075ec81891ad8f1b459dc74346b9ddf04dca313f4a85d724ac",
+   "status": "",
+   "terms": {
+    "13": 2,
+    "20261025": 1,
+    "a_question_about_a_part_binds_the_command_that_returns_that_part_and_the_write_back_is_decided_by_the_script": 1,
+    "a_question_about_part_of_a_file_gets_that_part_and_a_reader_never_writes_over_what_it_read_v1_20261025_v1": 1,
+    "about": 2,
+    "adapter": 1,
+    "all": 2,
+    "answer": 2,
+    "answered": 1,
+    "answers": 1,
+    "apple": 1,
+    "asked": 2,
+    "because": 2,
+    "both": 1,
+    "certified": 1,
+    "command": 2,
+    "file": 10,
+    "line": 3,
+    "lines": 4,
+    "never": 2,
+    "not": 2,
+    "number": 2,
+    "one": 2,
+    "output": 2,
+    "over": 2,
+    "part": 4,
+    "question": 3,
+    "returned": 2,
+    "same": 2,
+    "text": 2,
+    "v1": 2,
+    "whole": 2
+   }
+  },
+  {
    "action_id": "A_REFUSAL_NAMES_THE_CAPABILITY_THAT_WAS_ASKED_FOR_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -208703,7 +208748,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "1d22dc2eeec335b8d328295f59d6d0b05fcc494b1ed61d97c63edcfb273059b1",
+   "sha256": "5d41814c71099c0bdeeb7c2ca9a651b9e541122bf567e0a4f1626ed9d412acec",
    "summary": "Routing a sentence to a typed capability chain.",
    "symbol_count": 29,
    "symbols": [

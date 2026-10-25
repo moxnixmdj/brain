@@ -1334,6 +1334,37 @@ def _prose_argv(sentence: str) -> list[str] | None:
         # and `grep` on a directory without -r is an error, not an answer.
         extra = ["-r"] if _RECURSIVE_REQUEST.search(text) else []
         return [program, *extra, str(value), str(operand_paths[0])]
+    # A sentence that asks for ONE line, for a COUNT of the lines holding some
+    # text, or for the NUMBER of a line, names a part of the file rather than
+    # the file.  Falling through to `cat` or `wc -l` then answers a different
+    # question, and the answer is certified all the same, because a whole file
+    # is a perfectly reproducible answer to a question nobody asked.  Measured:
+    # "Show the third line of X" returned the whole file, and "How many lines in
+    # X contain 'apple'" returned 4 -- the number of lines in the file -- when
+    # two of them hold the text.
+    _asked = _quoted_values(sentence)
+    # Not when the sentence is about a TREE.  "Show which files in the directory
+    # D contain 'apple'" names a directory and asks which files in it match, and
+    # the recursive search rule owns that sentence; taking it here bound
+    # `grep -n` over a directory, which is not a search of the tree at all.
+    if (len(_asked) == 1 and "grep" in known and not _DIRECTORY_REQUEST.search(text)
+            and re.search(r"\bcontain(?:s|ed|ing)?\b|\bmatch(?:es|ed|ing)?\b", text)):
+        _masked = re.sub(re.escape(_asked[0]), " ", sentence, flags=re.IGNORECASE)
+        _operands = extract_paths(_masked)
+        if len(_operands) == 1:
+            if re.search(r"\b(?:%s)\b" % _WC_QTY, text):
+                return ["grep", "-c", _asked[0], str(_operands[0])]
+            if re.search(r"\b(?:which|what|where)\b|\bnumber\b", text):
+                return ["grep", "-n", _asked[0], str(_operands[0])]
+    # Singular "line", so "the first 3 lines" stays with `head`, which is the
+    # command that means it, and only "the third line" comes here.
+    _which = _prose_ordinal(sentence)
+    if (_which is not None and "sed" in known
+            and re.search(r"\bline\b", text) and not re.search(r"\blines\b", text)
+            and re.search(r"\b(?:show|print|read|display)\b", text)):
+        _operands = extract_paths(sentence)
+        if len(_operands) == 1:
+            return ["sed", "-n", "%dp" % _which, str(_operands[0])]
     for pattern, program, flags, arity in _PROSE_COMMAND:
         if program not in known:
             continue
@@ -1543,7 +1574,14 @@ def _declare_a_written_output(args: dict[str, Any], argv: Sequence[str],
         except Exception:  # noqa: BLE001 - no table, no permission
             return
         if program in transforms:
-            args["write_stdout_to_output"] = "true"
+            # Only a script that REWRITES may write over the file it read.
+            # `sed -e s|a|b| A` transforms A and putting the result back is the
+            # work the sentence asked for.  `sed -n 3p A` is a reader: measured,
+            # treating it as a transform left A holding nothing but its third
+            # line -- a request to be SHOWN something destroyed the file it
+            # named.  The distinction is in the script, not in the program.
+            if any(re.match(r"^s[|/#]", str(part).lstrip()) for part in argv[1:]):
+                args["write_stdout_to_output"] = "true"
         return
     if _states_a_destination_for_the_result(sentence, dest):
         args["write_stdout_to_output"] = "true"
