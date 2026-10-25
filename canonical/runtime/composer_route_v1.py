@@ -1372,6 +1372,75 @@ def _prose_argv(sentence: str) -> list[str] | None:
         _operands = extract_paths(sentence)
         if len(_operands) == 1:
             return ["sed", "-n", "%dp" % _which, str(_operands[0])]
+    # A part of a file measured in a UNIT the sentence states.  The table below
+    # builds every argv as `flags(_prose_count(text))`, and `_head_flags` and
+    # `_tail_flags` both answer in LINES, because a line is the only unit the
+    # flag callables were ever handed: the NUMBER is read out of the sentence and
+    # the unit is thrown away.  Measured, all three certified as exact:
+    #   "Show the first 10 bytes of X"       -> `head -n 10`, ten LINES
+    #   "Show the first 5 characters of X"   -> `head -n 5`,  five LINES
+    #   "Show lines 2 to 4 of X"             -> `cat`, the WHOLE file
+    # Ten lines are a perfectly reproducible answer to a question nobody asked,
+    # so reproducibility cannot catch this -- only the answer text can.
+    #
+    # Nothing new is trusted here.  The unit words already live in this module:
+    # `_WC_CHARS` is exactly what tells `wc` to count bytes instead of lines, and
+    # `head -c` / `tail -c` / `sed -n M,Np` / `tail -n +M` are the four ordinary
+    # commands that mean these four questions.  Only the sentence rules were
+    # missing -- the same shape as the yes-or-no fix.
+    #
+    # Digits are read from the PROSE, never from the whole sentence.  That is
+    # `_prose_ordinal`'s own measured lesson: a digit inside a directory name
+    # (".../tmp/clz1/...") outranked the digit the sentence stated and bound
+    # `cut -f 1`.  And a quantity the sentence does not state unambiguously is
+    # not guessed -- the rule declines and the sentence falls through unchanged.
+    try:
+        from canonical.runtime import goal_front_compiler_v1 as _front_unit
+        _prose = _front_unit.prose_only(sentence)
+    except Exception:  # noqa: BLE001 - no front compiler; decline rather than guess
+        _prose = ""
+    # The words are matched case-insensitively, the way every other rule in this
+    # function matches them against `text`.  Measured without this: `prose_only`
+    # keeps the sentence's own case, so "Show the first 10 bytes of X" -- capital
+    # S -- failed a lowercase `\bshow\b` test and the whole block was skipped,
+    # leaving all three wrong answers exactly as they were.  A block that never
+    # runs is indistinguishable from a block that declines, and only the argv
+    # shows which one happened.
+    _prose = _prose.lower()
+    _unit_paths = extract_paths(sentence)
+    if (_prose and len(_unit_paths) == 1 and "head" in known
+            and not _DIRECTORY_REQUEST.search(_prose)
+            and re.search(r"\b(?:show|print|read|display)\b", _prose)):
+        _operand = str(_unit_paths[0])
+        _digits = re.findall(r"\b(\d+)\b", _prose)
+        # Both ends stated: "lines 2 to 4".  Neither `head` nor `tail` can answer
+        # this, because each of them fixes one end and leaves the other free.
+        _span = re.search(
+            r"\blines?\b[^\n]{0,12}?\b(\d+)\s*(?:to|through|thru|until|-)\s*(\d+)\b",
+            _prose)
+        if _span and len(_digits) == 2 and "sed" in known:
+            return ["sed", "-n", "%s,%sp" % (_span.group(1), _span.group(2)),
+                    _operand]
+        # Only the START is stated: "from line 3 to the end".  `tail -n +3` is
+        # that question exactly.  Measured before this, the sentence bound
+        # `tail -n 2` -- the last two lines -- which answered correctly on a
+        # four-line fixture and returned `L9\nL10` for "from line 3 to the end"
+        # of a ten-line file.  A rule that is right only on the fixture it was
+        # measured against is a wrong rule.
+        _from_line = re.search(r"\bfrom\s+line\s+(\d+)\b", _prose)
+        if (_from_line and len(_digits) == 1 and "tail" in known
+                and re.search(r"\b(?:end|bottom|rest)\b", _prose)):
+            return ["tail", "-n", "+%s" % _from_line.group(1), _operand]
+        # A quantity in BYTES or CHARACTERS, not in lines.  `_WC_QTY` is excluded
+        # so "Count the characters in X" stays with `wc -c`, which is the command
+        # that answers it.
+        if (re.search(r"\b(?:%s)\b" % _WC_CHARS, _prose)
+                and not re.search(r"\b(?:%s)\b" % _WC_QTY, _prose)
+                and len(_digits) == 1):
+            if re.search(r"\b(?:last|end)\b", _prose) and "tail" in known:
+                return ["tail", "-c", _digits[0], _operand]
+            if re.search(r"\b(?:first|beginning)\b", _prose):
+                return ["head", "-c", _digits[0], _operand]
     # "Are the files A and B identical" asks a yes-or-no question about two
     # files.  `cmp -s` answers it with an exit status and prints nothing, and the
     # acceptance layer already treats 0 and 1 as answers for cmp -- 1 meaning

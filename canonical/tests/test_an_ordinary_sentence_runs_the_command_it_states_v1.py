@@ -2293,6 +2293,142 @@ class TestTheFallthroughIsScopedToWhatTheSentenceStates(unittest.TestCase):
         self.assertIn("-r", argv, "a search of a tree was answered from one file")
         self.assertEqual(d, argv[-1])
 
+    # ------------------------------------------------------------------
+    # A part of a file measured in a UNIT the sentence states.
+    #
+    # The table builds every argv as `flags(_prose_count(text))`, and both
+    # `_head_flags` and `_tail_flags` answer in LINES -- the number is read out
+    # of the sentence and the unit is thrown away.  Measured before this, all
+    # four of these were CERTIFIED as exact semantic acceptance while answering
+    # a different question:
+    #   "Show lines 2 to 4 of X"              -> `cat`,      the whole file
+    #   "Show the first 10 bytes of X"        -> `head -n 10`, ten LINES
+    #   "Show the first 5 characters of X"    -> `head -n 5`,  five LINES
+    #   "from line 3 to the end" of a 10-line file -> `tail -n 2`, the LAST two
+    # Reproducibility cannot see any of this: ten lines are a perfectly
+    # reproducible answer to a question nobody asked.  So every test here
+    # asserts the ANSWER TEXT, and asserts it against the wrong answer.
+    # ------------------------------------------------------------------
+    PART = "apple\nbanana\napple pie\ncherry\n"
+
+    def test_a_line_range_is_the_lines_asked_for_and_not_the_whole_file(self):
+        a = _fresh(self.PART)
+        whole = (ROOT / a).read_text(encoding="utf-8")
+        result = _solve("Show lines 2 to 4 of the file %s" % a)
+        self.assertTrue(_verified(result))
+        self.assertEqual("banana\napple pie\ncherry\n", self._answer(result))
+        # The assertion that actually carries the fix.  Before it, this sentence
+        # bound `cat` and returned the whole file -- and passed.
+        self.assertNotEqual(whole, self._answer(result),
+                            "a range of lines was answered with the whole file")
+
+    def test_a_range_of_both_ends_is_pinned_to_the_command_that_means_it(self):
+        # argv, not just the answer: a regression to `cat` or to `head`/`tail`
+        # has to fail even if the answer scraping above ever changes shape.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh(self.PART)
+        for word in ("to", "through"):
+            self.assertEqual(["sed", "-n", "2,4p", a],
+                             _cr._prose_argv("Show lines 2 %s 4 of the file %s" % (word, a)),
+                             word)
+
+    def test_a_range_that_names_one_line_twice_is_that_one_line(self):
+        a = _fresh(self.PART)
+        result = _solve("Show lines 3 to 3 of the file %s" % a)
+        self.assertTrue(_verified(result))
+        self.assertEqual("apple pie\n", self._answer(result))
+
+    def test_bytes_are_counted_in_bytes_and_not_in_lines(self):
+        a = _fresh(self.PART)
+        result = _solve("Show the first 10 bytes of the file %s" % a)
+        self.assertTrue(_verified(result))
+        answer = self._answer(result)
+        # Ten bytes of this file straddle a newline: `head -n 10` -- what this
+        # sentence bound before -- returns all 30 bytes of the file instead.
+        self.assertEqual(10, len(answer))
+        self.assertEqual("apple\nbana", answer)
+
+    def test_characters_are_counted_in_characters_and_not_in_lines(self):
+        a = _fresh(self.PART)
+        result = _solve("Show the first 5 characters of the file %s" % a)
+        self.assertTrue(_verified(result))
+        self.assertEqual("apple", self._answer(result))
+        self.assertNotEqual(self.PART, self._answer(result),
+                            "five characters was answered with the whole file")
+
+    def test_the_last_of_a_quantity_in_bytes_is_read_from_the_end(self):
+        # The unit rule is not a `first`-only rule.  Measured: `tail -c 10`.
+        a = _fresh(self.PART)
+        result = _solve("Show the last 10 bytes of the file %s" % a)
+        self.assertTrue(_verified(result))
+        self.assertEqual(10, len(self._answer(result)))
+        self.assertEqual("ie\ncherry\n", self._answer(result))
+
+    def test_a_range_starting_at_a_line_runs_to_the_end_of_the_file(self):
+        # This is the test that kills `tail -n 3`.  The fixture is deliberately
+        # LONG: on a four-line file `tail -n 2` answered "from line 3 to the
+        # end" correctly by coincidence, and the rule looked right.  A rule that
+        # is only right on the fixture it was measured against is a wrong rule,
+        # so the fixture is ten lines and the answer has to be eight of them.
+        lines = "".join("L%d\n" % i for i in range(1, 11))
+        long_file = _fresh(lines)
+        result = _solve("Show the lines from line 3 to the end of the file %s" % long_file)
+        self.assertTrue(_verified(result))
+        answer = self._answer(result)
+        self.assertEqual(["L%d" % i for i in range(3, 11)], answer.splitlines())
+        self.assertEqual(8, len(answer.splitlines()),
+                         "a range with an open end was answered from the wrong end")
+
+    def test_reading_a_part_of_a_file_leaves_every_byte_of_it_alone(self):
+        # Earned the hard way: `sed -n 3p` with the file as its own output
+        # truncated the file to one line, because sed counts as an in-place
+        # transform.  Every new sed script here is a print, not a substitution,
+        # and `head -c` / `tail -c` are reads -- but a read that destroys the
+        # thing it read is worse than a refusal, so it is pinned for all four.
+        for goal in ("Show lines 2 to 4 of the file %s",
+                     "Show lines 3 to 3 of the file %s",
+                     "Show the first 10 bytes of the file %s",
+                     "Show the last 10 bytes of the file %s"):
+            a = _fresh(self.PART)
+            before = (ROOT / a).read_bytes()
+            self.assertTrue(_verified(_solve(goal % a)), goal)
+            self.assertEqual(before, (ROOT / a).read_bytes(), goal)
+
+    def test_a_quantity_in_bytes_does_not_steal_a_count_of_characters(self):
+        # The `_WC_QTY` scope.  "Count the characters in X" is `wc -c`'s
+        # question; answering it with the first N bytes would report a count
+        # that was never made.  Measured unchanged.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh(self.PART)
+        argv = _cr._prose_argv("Count the characters in the file %s" % a)
+        self.assertEqual(["wc", "-c", a], argv)
+
+    def test_a_quantity_measured_in_lines_is_still_measured_in_lines(self):
+        # The other side of the same scope: no unit word means the documented
+        # line default stands, so nothing that already worked moves.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh(self.PART)
+        self.assertEqual(["head", "-n", "3", a],
+                         _cr._prose_argv("Show the first 3 lines of the file %s" % a))
+        self.assertEqual(["tail", "-n", "2", a],
+                         _cr._prose_argv("Show the last 2 lines of the file %s" % a))
+        self.assertEqual(["sed", "-n", "3p", a],
+                         _cr._prose_argv("Show the third line of the file %s" % a))
+
+    def test_the_unit_rule_does_not_reach_into_a_directory(self):
+        # The scope pin, the same way the tree question is pinned.  "Show the
+        # first 2 files in the directory D" is not a quantity of one file's
+        # bytes, and `head -c` over a directory would report a read of bytes
+        # that are not there.  Measured: the block declines and no `-c` appears.
+        from canonical.runtime import composer_route_v1 as _cr
+        _fresh(self.PART)
+        d = "%s/du" % SCRATCH
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "one.txt").write_text("apple\n", encoding="utf-8")
+        argv = _cr._prose_argv("Show the first 2 files in the directory %s" % d) or []
+        self.assertNotIn("-c", argv, "a directory request was read as a byte count")
+        self.assertNotIn("+2", argv, "a directory request was read as a line range")
+
 
 
 if __name__ == "__main__":
