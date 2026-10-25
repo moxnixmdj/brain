@@ -1828,25 +1828,47 @@ class TestTheFallthroughIsScopedToWhatTheSentenceStates(unittest.TestCase):
         # certified as the work asked for.  No capability in the registry writes
         # in append mode, so the honest outcome is a refusal with the file
         # untouched -- not a smaller lie.
+        # Rewritten, not deleted, and stronger than it was.  It used to assert a
+        # REFUSAL, because no capability in the registry wrote in append mode and
+        # a refusal was the honest outcome.  sed's `a` command appends, so the
+        # honest outcome is now the work itself -- and the promise this test was
+        # written to protect is asserted directly: what was already there is
+        # still there, in front of the line that was added.
         a = _fresh("apple\nbanana\n")
-        before = (ROOT / a).read_text(encoding="utf-8")
         result = _solve("Append the text 'hello' to the file %s" % a)
-        self.assertEqual(before, (ROOT / a).read_text(encoding="utf-8"),
+        self.assertTrue(_verified(result), result.get("status"))
+        after = (ROOT / a).read_text(encoding="utf-8")
+        self.assertEqual("apple\nbanana\nhello\n", after,
                          "a request to append changed what was already there")
-        self.assertFalse(_verified(result),
-                         "a destructive write was certified as an append")
+        self.assertTrue(after.startswith("apple\nbanana\n"))
 
-    def test_every_way_of_saying_append_is_refused_rather_than_destructive(self):
-        # Scoped to the promise, not to one verb: the sentence may say append,
-        # add to the end, put at the end, or insert, and in every case the
-        # existing content must survive.
+    def test_every_way_of_saying_append_keeps_what_was_there(self):
+        # Scoped to the promise, not to one verb -- which is why it survived the
+        # change that made append work.  Every phrasing below states the end of
+        # the file or promises the content survives, so every one of them must
+        # leave what was there in place and add the stated line after it.  Two
+        # phrasings are asserted the OTHER way round below, because they name a
+        # position this route cannot honour.
         for goal in ("Append the text 'hello' to the file %s",
                      "Add the text 'hello' to the end of the file %s",
                      "Add 'hello' to the end of the file %s",
                      "Write the text 'hello' at the end of the file %s",
                      "Put the text 'hello' at the end of the file %s",
                      "Append 'hello' to %s",
-                     "Insert the text 'hello' into the file %s"):
+                     "Write the text 'hello' to the file %s without losing what is there"):
+            a = _fresh("apple\nbanana\n")
+            result = _solve(goal % a)
+            self.assertTrue(_verified(result), (goal, result.get("status")))
+            self.assertEqual("apple\nbanana\nhello\n",
+                             (ROOT / a).read_text(encoding="utf-8"), goal)
+
+    def test_a_position_the_route_cannot_honour_is_refused_not_guessed(self):
+        # The other side of the rule above, and the reason `insert` and `prepend`
+        # are not triggers.  Prepend means the beginning and insert does not say
+        # where at all, so appending would put the line somewhere the sentence
+        # never asked for -- in the one file the caller will not re-read.
+        for goal in ("Insert the text 'hello' into the file %s",
+                     "Prepend the text 'hello' to the file %s"):
             a = _fresh("apple\nbanana\n")
             result = _solve(goal % a)
             self.assertEqual("apple\nbanana\n", (ROOT / a).read_text(encoding="utf-8"),
@@ -3247,6 +3269,113 @@ class TestANounPhraseIsAnsweredAndAChainThatRanNothingIsNotAPass(unittest.TestCa
             self.assertTrue(_verified(result), goal)
             self.assertEqual(want, _stdout(result), goal)
             self.assertEqual(self.TEXT.encode(), (ROOT / a).read_bytes(), goal)
+
+
+class TestAnAppendIsServedAndADirectoryIsNamedByTheSentence(unittest.TestCase):
+    """The mutating requests that were measured as refused, now served.
+
+    A census of fourteen ordinary mutating requests, judged by comparing the
+    world the binder left with the world the real command left in a parallel
+    directory, scored five of fourteen on main 263ad2f.  None of the nine was a
+    wrong answer or a deletion -- every one was fail-closed -- but they were
+    ordinary requests going unserved, and two of them were served wrongly in a
+    way that only the world could show:
+
+      "Append the line 'date' to the file X"        -> refused, three phrasings
+      "Move the file X into the directory D"        -> COMMAND_MV_DESTINATION_ABSENT
+                                                       over a move that HAD happened
+      "Delete the directory D"                      -> `rm D`, failed on a non-empty
+                                                       directory, reported
+                                                       COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN
+      "Write ... without losing what is there"      -> refused, though the code
+                                                       already knew the promise
+
+    The last one is the sharpest: `_KEEPS_EXISTING_CONTENT` recognised the
+    promise and `_PLAIN_PAYLOAD_WRITES` knew the writer would break it, so the
+    system could tell the sentence wanted the content kept and had no program
+    that kept it.
+    """
+
+    def _world(self):
+        f = _fresh("apple\nbanana\ncherry\n")
+        d = "%s/dset" % SCRATCH
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "one.log").write_text("fig\n", encoding="utf-8")
+        return f, d
+
+    def test_an_append_adds_the_line_and_keeps_what_was_there(self):
+        # `_fresh` wipes the whole scratch directory, so the fixture is written
+        # by hand here: the test needs a second file to survive beside the one
+        # being appended to, and a helper that deletes the tree cannot provide it.
+        for index, goal in enumerate((
+                "Append the line 'date' to the file %s",
+                "Add the line 'date' to the end of the file %s",
+                "Write the line 'date' at the end of the file %s",
+                "Append 'date' to %s")):
+            root = ROOT / SCRATCH
+            root.mkdir(parents=True, exist_ok=True)
+            a = "%s/ap%d.txt" % (SCRATCH, index)
+            neighbour = "%s/nb%d.txt" % (SCRATCH, index)
+            (ROOT / a).write_text("apple\nbanana\ncherry\n", encoding="utf-8")
+            (ROOT / neighbour).write_text("fig\n", encoding="utf-8")
+            result = _solve(goal % a)
+            self.assertTrue(_verified(result), (goal, result.get("status")))
+            self.assertEqual("apple\nbanana\ncherry\ndate\n",
+                             (ROOT / a).read_text(encoding="utf-8"), goal)
+            # A file the sentence never named is untouched: the append is scoped
+            # to the one operand, not to the directory it happens to sit in.
+            self.assertEqual("fig\n", (ROOT / neighbour).read_text(encoding="utf-8"),
+                             goal)
+
+    def test_a_command_that_writes_the_file_itself_is_not_also_handed_its_stdout(self):
+        # The hazard this closes, measured before the guard: `sed -i` writes the
+        # file itself and puts nothing on stdout, so writing that stdout over the
+        # declared output would truncate a file the command had just rewritten.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh("apple\n")
+        for argv in (["sed", "-i", "$a date", a], ["sort", "-o", a, a]):
+            args = {}
+            _cr._declare_a_written_output(
+                args, argv, "Append the line 'date' to the file %s" % a)
+            self.assertNotIn("write_stdout_to_output", args, argv)
+
+    def test_the_append_postcondition_can_fail(self):
+        # Pinned from both sides so it cannot pass by trusting the flag.  The
+        # promise is asked of the disk: the last line is the line that was added.
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
+        a = _fresh("apple\nbanana\n")
+        ok, reason, _ev = _accept._post_sed(["sed", "-i", "$a date", a], ROOT)
+        self.assertFalse(ok, "a file with no appended line was certified")
+        self.assertEqual("COMMAND_SED_LAST_LINE_IS_NOT_THE_APPENDED_TEXT", reason)
+        (ROOT / a).write_text("apple\nbanana\ndate\n", encoding="utf-8")
+        ok, _reason, _ev = _accept._post_sed(["sed", "-i", "$a date", a], ROOT)
+        self.assertTrue(ok)
+        # A substitution has no promise about the last line and stays refused.
+        ok, reason, _ev = _accept._post_sed(["sed", "-i", "s|a|b|g", a], ROOT)
+        self.assertFalse(ok)
+        self.assertEqual("COMMAND_SED_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", reason)
+
+    def test_moving_a_file_into_a_directory_is_proven_by_the_world(self):
+        f, d = self._world()
+        result = _solve("Move the file %s into the directory %s" % (f, d))
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertTrue((ROOT / d / "a1.txt").is_file(),
+                        "the file is not inside the directory it was moved into")
+        self.assertFalse((ROOT / f).exists(), "the source is still there")
+
+    def test_deleting_a_directory_the_sentence_named_deletes_it(self):
+        _f, d = self._world()
+        result = _solve("Delete the directory %s" % d)
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertFalse((ROOT / d).exists(), "the directory survived its own deletion")
+
+    def test_a_file_deletion_still_binds_no_flag_at_all(self):
+        # The pin on the scope of the rule above: `rm -r` is bound only when the
+        # sentence says "directory".  A sentence about a file gets plain `rm`,
+        # which fails loudly on a directory instead of removing a tree.
+        from canonical.runtime import composer_route_v1 as _cr
+        f, _d = self._world()
+        self.assertEqual(["rm", f], _cr._prose_argv("Delete the file %s" % f))
 
 
 if __name__ == "__main__":

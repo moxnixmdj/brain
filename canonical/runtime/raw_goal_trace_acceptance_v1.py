@@ -965,7 +965,18 @@ def _post_mv(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
     dst = _inside(root, tokens[2])
     if src is None or dst is None:
         return False, "COMMAND_MV_PATH_OUTSIDE_REPOSITORY", {}
-    if not dst.is_file():
+    if dst.is_dir():
+        # `mv A D` where D is a directory does not make D the file -- it puts A
+        # at D/<A's own name>.  Measured, refusing this shape reported
+        # COMMAND_MV_DESTINATION_ABSENT_FROM_DISK over a move that had happened,
+        # which is a report denying work that did occur.  The promise is still
+        # exact and still asked of the disk: the named file is now inside the
+        # named directory under the name it already had.
+        moved = dst / Path(str(tokens[1])).name
+        if not moved.is_file():
+            return False, "COMMAND_MV_DESTINATION_ABSENT_FROM_DISK", {
+                "expected_inside_directory": str(moved)}
+    elif not dst.is_file():
         return False, "COMMAND_MV_DESTINATION_ABSENT_FROM_DISK", {}
     if src.exists():
         return False, "COMMAND_MV_SOURCE_STILL_PRESENT", {}
@@ -1101,13 +1112,32 @@ def _post_rm(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
     a path that was not there.  A zero exit plus an absent path is the whole of
     the promise, and both halves are checkable now.
     """
-    if len(tokens) < 2 or any(str(x).startswith("-") for x in tokens[1:]):
+    # The recursive flag is allowed and nothing else is.  It changes only
+    # WHETHER a directory may be removed, not WHAT is promised: the operand is
+    # gone.  Measured without it, "Delete the directory D" bound `rm D`, the
+    # command failed on a directory that was not empty, and the report said
+    # COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN -- the shape that says least about
+    # what happened.  Every other flag stays unstateable, because `-f` in
+    # particular would let a path that never existed count as a deletion.
+    _operands: list[str] = []
+    for _tok in tokens[1:]:
+        _tok = str(_tok)
+        if _tok in _RM_RECURSIVE_FLAGS:
+            continue
+        if _tok.startswith("-"):
+            # Any other flag and the promise is no longer stateable from the
+            # argv alone.  `-f` above all: it suppresses the very error that
+            # would show a named path was never there.
+            return False, "COMMAND_RM_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", {
+                "argv_tokens": len(tokens), "flag": _tok}
+        _operands.append(_tok)
+    if not _operands:
         return False, "COMMAND_RM_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", {"argv_tokens": len(tokens)}
     # Every operand, not just the first.  A sentence may name a set of files by
     # pattern, and the promise is about the whole set: one survivor out of five
     # is a deletion that did not happen, and reporting it as done would be a lie.
     consumed: list[str] = []
-    for operand in tokens[1:]:
+    for operand in _operands:
         target = _inside(root, str(operand))
         if target is None:
             return False, "COMMAND_RM_PATH_OUTSIDE_REPOSITORY", {}
@@ -1202,7 +1232,50 @@ def _post_tee(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
     return True, "", {"postcondition_checked": "tee", "target_present": True}
 
 
+def _post_sed(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
+    """`sed -i '$a TEXT' A` promises that A's last line is TEXT.
+
+    sed only reaches this table when it carries `-i`, because that flag is what
+    makes it not re-runnable -- every reading form of sed (`sed -n 3p A`,
+    `sed -e s|a|b| A`) still goes to the re-run check and is unaffected by this
+    function existing.  So the shape scoped here is the only one that can arrive.
+
+    The promise is deliberately the small one.  An append consumes the file's
+    previous bytes into its own prefix, so unlike `_post_sort` there is no oracle
+    left on disk to recompute the whole end state from.  What the argv states
+    unconditionally is the line that was added and where it went, and that is
+    what is asked of the disk -- the same discipline that keeps `_post_tee` from
+    claiming a file is empty because stdin happened to be.
+
+    Refused rather than approximated for every other sed shape, including a
+    substitution: `s|a|b|` has no promise about the last line at all.
+    """
+    if (len(tokens) != 4 or tokens[1] not in ("--in-place",) + _SIDE_EFFECTING_FLAGS_BY_PROGRAM["sed"]
+            or not tokens[2].startswith("$a ")):
+        return False, "COMMAND_SED_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", {
+            "argv_tokens": len(tokens)}
+    target = _inside(root, tokens[3])
+    if target is None:
+        return False, "COMMAND_SED_PATH_OUTSIDE_REPOSITORY", {}
+    if not target.is_file():
+        return False, "COMMAND_SED_TARGET_ABSENT_FROM_DISK", {}
+    lines = target.read_bytes().splitlines()
+    if not lines:
+        return False, "COMMAND_SED_APPENDED_LINE_ABSENT_FROM_DISK", {}
+    if lines[-1].decode("utf-8", "replace") != tokens[2][3:]:
+        return False, "COMMAND_SED_LAST_LINE_IS_NOT_THE_APPENDED_TEXT", {
+            "last_line": lines[-1].decode("utf-8", "replace")[:80]}
+    return True, "", {"postcondition_checked": "sed", "appended_line": tokens[2][3:]}
+
+
+# `rm -r` only.  `-f` is deliberately absent: it suppresses the error that is
+# the only evidence a named path was ever there, so a deletion of nothing would
+# look exactly like a deletion of something.
+_RM_RECURSIVE_FLAGS = ("-r", "-R", "--recursive")
+
+
 _MUTATING_POSTCONDITIONS = {
+    "sed": _post_sed,
     "cp": _post_cp,
     "mv": _post_mv,
     "mkdir": _post_mkdir,
