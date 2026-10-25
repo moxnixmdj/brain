@@ -1400,6 +1400,86 @@ def _prose_argv(sentence: str) -> list[str] | None:
     # count and a line-number rule own: "How many lines in X contain 'apple'"
     # must stay a count and "Which lines in X contain 'apple'" must stay a
     # numbered listing.
+    # --- edits of a file's contents -------------------------------------------
+    # These run BEFORE the refusal gate below, because that gate refuses an edit
+    # nothing owns and these are edits something now owns.  Each binds an in-place
+    # sed script (or chmod) whose promise `_sed_promise` / `_post_chmod` can ask
+    # of the disk afterwards, which is the only reason an in-place edit can be
+    # certified at all: it consumes its own oracle, so it cannot be re-run.
+    #
+    # Deletion by POSITION is absent on purpose.  `1d` and `$d` leave nothing
+    # checkable behind -- the line removed is gone and was never in the argv -- so
+    # "Remove the first line from the file X" stays refused rather than being
+    # served and certified on a promise no one can check.
+    # Every branch below requires an explicit change verb, and the reason is
+    # measured: without this, "the empty lines in the file X" -- a READING -- was
+    # bound to `sed -i 1,$d`, emptied the file, and was certified.  A sentence
+    # that only names a property of a file is not asking for the file to change.
+    if (("sed" in known or "chmod" in known)
+            and re.search(r"\b(?:append|prepend|insert|remove|delete|strip|drop"
+                          r"|replace|empty|clear|truncate|chmod|make|set)\w*\b", text)):
+        _edits = extract_paths(sentence)
+        if (len(_edits) == 1 and "chmod" in known
+                and re.search(r"\bexecutable\b|\bexecute permission\b|\+x\b|-x\b", text)
+                and re.search(r"\b(?:chmod|make|set|remove|delete|clear|unset)\w*\b", text)):
+            _off = bool(re.search(r"\b(?:remove|removes|removing|removed|delete"
+                                  r"|clear|unset|without|not)\w*\b|-x\b", text))
+            return ["chmod", "-x" if _off else "+x", str(_edits[0])]
+        if "sed" in known:
+            # Scoped away from lines.  "Remove the empty lines from the file X"
+            # and "the empty lines in the file X" both say "empty" and both say
+            # "file", and measured with only that to go on they were each bound to
+            # `sed -i 1,$d` -- the first destroyed the file it was asked to filter
+            # and the second destroyed the file it was asked to read.
+            # And scoped away from CREATING one.  "Create an empty file X" says
+            # "empty" and says "file", and measured with only that to go on it was
+            # bound to `sed -i 1,$d` on a file that did not exist yet, where the
+            # sentence asked for `touch`.
+            if (re.search(r"\b(?:empty|clear|truncate)\w*\b[^\n]{0,30}?\bfile\b", text)
+                    and not re.search(r"\blines?\b", text)
+                    and not re.search(r"\b(?:create|creates|created|creating|new"
+                                      r"|touch|make|makes|making)\w*\b", text)):
+                return ["sed", "-i", "1,$d", str(_edits[0])]
+            if re.search(r"\b(?:comments?|comment lines?)\b", text) and re.search(
+                    r"\b(?:remove|delete|strip|drop)\w*\b", text):
+                return ["sed", "-i", "/^#/d", str(_edits[0])]
+            if (re.search(r"\btrailing\b[^\n]{0,30}?\b(?:space|spaces|whitespace)\b", text)
+                    and re.search(r"\b(?:remove|removes|removing|removed|delete|strip"
+                                  r"|drop)\w*\b", text)):
+                return ["sed", "-i", "s| *$||", str(_edits[0])]
+            _ev = _quoted_values(sentence)
+            if len(_ev) == 1:
+                _v = _ev[0]
+                _vpaths = extract_paths(str(sentence).replace(_v, " "))
+                if len(_vpaths) == 1:
+                    # `prepend` names the beginning by itself.  `insert` does NOT:
+                    # measured with `insert` in this list, "Insert the text 'hello'
+                    # into the file X" was served as a prepend, putting the line
+                    # somewhere the sentence never said.  So `insert` only counts
+                    # when the sentence also states where.
+                    _at_start = bool(re.search(
+                        r"\b(?:prepend|prepending|prepends|prepended)\w*\b"
+                        r"|\b(?:put|add|write|place|insert|inserts|inserted"
+                        r"|inserting)\w*\b[^\n]{0,40}?\bat the"
+                        r" (?:beginning|start|top)\b", text))
+                    _first_line = bool(re.search(
+                        r"\b(?:replace|replaces|replaced|replacing)\w*\b"
+                        r"[^\n]{0,40}?\bfirst line\b[^\n]{0,40}?\bwith\b", text))
+                    if _first_line:
+                        return ["sed", "-i", "1s|.*|%s|" % _v, str(_vpaths[0])]
+                    if _at_start:
+                        if not _v or any(ch in _v for ch in _SED_APPEND_UNSAFE):
+                            return None
+                        return ["sed", "-i", "1i %s" % _v, str(_vpaths[0])]
+                    if re.search(r"\b(?:remove|delete|strip|drop)\w*\b[^\n]{0,40}?\bword\b"
+                                 r"|\b(?:remove|delete|strip|drop)\w*\b[^\n]{0,20}?\bfrom\b", text):
+                        # The word becomes a REGEX here, so the full delimiter
+                        # hazard list applies -- unlike an `a`/`i` command, where
+                        # the text is literal and a dot is ordinary.
+                        if not _v or any(ch in _v for ch in _SED_UNSAFE):
+                            return None
+                        return ["sed", "-i", "s|%s||g" % _v, str(_vpaths[0])]
+
     _asks_a_filter = _FILTER_LINE.search(text) or (
         _MENTIONS_LINES.search(text)
         and _STATES_A_LITERAL_VALUE.search(text)

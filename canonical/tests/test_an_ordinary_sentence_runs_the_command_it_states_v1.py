@@ -1867,13 +1867,26 @@ class TestTheFallthroughIsScopedToWhatTheSentenceStates(unittest.TestCase):
         # are not triggers.  Prepend means the beginning and insert does not say
         # where at all, so appending would put the line somewhere the sentence
         # never asked for -- in the one file the caller will not re-read.
-        for goal in ("Insert the text 'hello' into the file %s",
-                     "Prepend the text 'hello' to the file %s"):
+        # Narrowed, not deleted, and for a measured reason: "prepend" and "at the
+        # beginning" DO state a position, so they are served now and pinned in the
+        # test above.  What stays refused is an insert that states none.
+        # Only the unstated-position insert belongs here.  "Add the text 'hello'
+        # to the file X" was A/B-checked against main and behaves identically
+        # there -- the plain payload write the sentence describes, which truncates
+        # and is certified -- so it is not this rule's case and is not asserted.
+        for goal in ("Insert the text 'hello' into the file %s",):
             a = _fresh("apple\nbanana\n")
             result = _solve(goal % a)
             self.assertEqual("apple\nbanana\n", (ROOT / a).read_text(encoding="utf-8"),
                              goal)
             self.assertFalse(_verified(result), goal)
+        a = _fresh("apple\nbanana\n")
+        self.assertTrue(_verified(_solve("Prepend the text 'hello' to the file %s" % a)))
+        self.assertEqual("hello\napple\nbanana\n", (ROOT / a).read_text(encoding="utf-8"))
+        b = _fresh("apple\nbanana\n")
+        self.assertTrue(_verified(_solve(
+            "Insert the text 'hello' at the beginning of the file %s" % b)))
+        self.assertEqual("hello\napple\nbanana\n", (ROOT / b).read_text(encoding="utf-8"))
 
     def test_a_plain_write_still_writes_when_the_sentence_asks_for_a_replacement(self):
         # The pin on the scope of the refusal.  A sentence that asks for the
@@ -3412,21 +3425,56 @@ class TestRemovingSomethingInsideAFileIsNotDeletingTheFile(unittest.TestCase):
              "Remove the comments from the file %s")
 
     def test_no_removal_of_something_inside_a_file_deletes_the_file(self):
+        # This invariant is unchanged and now covers eight sentences that are
+        # served as well as the ones still refused: an edit of a file's contents
+        # must never remove the file.
         for goal in self.EDITS:
             a = _fresh("apple\nbanana\ncherry\n")
-            result = _solve(goal % a)
+            _solve(goal % a)
             self.assertTrue((ROOT / a).exists(),
                             "the file was deleted by %r" % (goal,))
+
+    def test_an_edit_nothing_can_prove_is_refused_and_leaves_the_file_alone(self):
+        # Four of the eight are served now and four are not, and the split is not
+        # arbitrary: a deletion by POSITION leaves nothing checkable behind,
+        # because the line removed is gone and was never in the argv, while a
+        # deletion by PATTERN keeps the pattern in the argv and so keeps a promise
+        # the disk can answer.  The unprovable ones are refused with the file
+        # byte-identical -- not served and certified on a promise no one can check.
+        for goal in ("Remove the first line from the file %s",
+                     "Remove the last line from the file %s",
+                     "Remove the header from the file %s"):
+            a = _fresh("apple\nbanana\ncherry\n")
+            self.assertFalse(_verified(_solve(goal % a)), goal)
             self.assertEqual("apple\nbanana\ncherry\n",
                              (ROOT / a).read_text(encoding="utf-8"), goal)
 
-    def test_no_removal_of_something_inside_a_file_is_certified_as_answered(self):
-        # The sharper half.  Deleting is one failure; certifying `head -n 1` as
-        # the answer to "remove the first line" is the other, and it is silent --
-        # the caller gets the very line they asked to have gone.
-        for goal in self.EDITS:
-            a = _fresh("apple\nbanana\ncherry\n")
-            self.assertFalse(_verified(_solve(goal % a)), goal)
+    def test_the_edits_that_can_be_proven_are_proven_by_the_world_afterwards(self):
+        # The other side of the split.  Each of these is certified only because a
+        # postcondition asked the disk the question the argv can answer, so each is
+        # asserted on the bytes it left and on the mode bit it left.
+        a = _fresh("apple\nbanana\napple\ncherry\n")
+        self.assertTrue(_verified(_solve("Remove the word 'apple' from the file %s" % a)))
+        self.assertEqual("\nbanana\n\ncherry\n", (ROOT / a).read_text(encoding="utf-8"))
+
+        b = _fresh("apple  \nbanana\ncherry   \n")
+        self.assertTrue(_verified(_solve("Remove the trailing spaces from the file %s" % b)))
+        self.assertEqual("apple\nbanana\ncherry\n", (ROOT / b).read_text(encoding="utf-8"))
+
+        c = _fresh("apple\n# a comment\nbanana\n")
+        self.assertTrue(_verified(_solve("Remove the comments from the file %s" % c)))
+        self.assertEqual("apple\nbanana\n", (ROOT / c).read_text(encoding="utf-8"))
+
+        d = _fresh("apple\n")
+        self.assertTrue(_verified(_solve("Make the file %s executable" % d)))
+        self.assertTrue((ROOT / d).stat().st_mode & 0o100)
+        self.assertTrue(_verified(_solve("Remove the executable permission from the file %s" % d)))
+        self.assertFalse((ROOT / d).stat().st_mode & 0o100)
+        self.assertEqual("apple\n", (ROOT / d).read_text(encoding="utf-8"))
+
+        e = _fresh("apple\nbanana\n")
+        self.assertTrue(_verified(_solve("Empty the file %s" % e)))
+        self.assertEqual("", (ROOT / e).read_text(encoding="utf-8"))
 
     def test_a_real_deletion_still_deletes(self):
         # The pin on the scope of both rules above: they are scoped to the OBJECT
