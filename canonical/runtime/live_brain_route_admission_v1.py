@@ -1503,9 +1503,30 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         # The #6119 hazard this gate was scoped against stays closed: "Check the
         # file X" states neither a payload nor a command line, so extract_content
         # and extract_argv are both None and it keeps failing closed.
-        if admission.get("typed_binding_refused") is True and (
-                composer_route.extract_content(normalized) is not None
-                or composer_route.extract_argv(normalized) is not None):
+        #
+        # One further case, measured.  A sentence can state a complete command
+        # line and STILL be refused -- not for want of a binder, but because two
+        # CAPABILITIES tied and ambiguity refuses.  "Show the files in the
+        # directory <d>" ranked shell.command.run and
+        # source.candidates.enumerate.stdlib at 4 each, on the word "files", so
+        # admission fail-closed R3_WEAK_EVIDENCE with typed_binding_refused
+        # unset and this gate never fired.  "List the directory <d>" and "Show
+        # the contents of the directory <d>" -- the same command, the same
+        # operand, phrased without the word that draws a tie -- both ran and
+        # were exact-verified.  One ordinary word was the whole difference.
+        #
+        # A tie between capabilities says nothing about the COMMAND, and the
+        # command is what would be executed.  extract_argv refuses on ambiguity
+        # by construction, so a non-None result is one settled argv, and the
+        # acceptance layer re-derives it and stops any step whose argv the
+        # sentence does not contain with STEP_COMMAND_NOT_IN_THE_REQUEST.  The
+        # #6119 hazard stays closed for the reason it always has: "Check the
+        # file X" states no command line, so extract_argv is None and it keeps
+        # failing closed.
+        stated_a_command_line = composer_route.extract_argv(normalized) is not None
+        if stated_a_command_line or (
+                admission.get("typed_binding_refused") is True
+                and composer_route.extract_content(normalized) is not None):
             composed = _try_composed(task_id, goal, started)
             if composed is not None:
                 return _composed_holds_up(composed, normalized, future_artifacts)

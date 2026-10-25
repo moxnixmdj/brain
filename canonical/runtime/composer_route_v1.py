@@ -527,25 +527,34 @@ def _tail_flags(n: int) -> list[str]:
 
 
 _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
-    (r"\bcopy\b", "cp", _no_flags, 2),
+    # Synonyms measured rather than guessed: "duplicate the file a as b" bound
+    # nothing at all, so a request the machine can do was refused for want of one
+    # word in a table.  Each addition here is a phrasing that was measured to
+    # fail, not a synonym thought up in advance.
+    (r"\b(?:copy|duplicate)\b", "cp", _no_flags, 2),
     (r"\b(?:move|rename)\b", "mv", _no_flags, 2),
     (r"\b(?:remove|delete)\b", "rm", _no_flags, 1),
     (r"\b(?:create|make)\b[^.\n]{0,40}?\bdirectory\b", "mkdir", _no_flags, 1),
     (r"\b(?:create|make|touch)\b[^.\n]{0,40}?\bempty file\b", "touch", _no_flags, 1),
     # The three things `wc` counts, each stated by its own noun.  Order matters
     # only in that all three are narrower than the general read rule below.
-    (r"\bcount\b[^.\n]{0,40}?\b(?:words?|word count)\b", "wc", lambda n: ["-w"], 1),
-    (r"\bcount\b[^.\n]{0,40}?\b(?:bytes?|characters?|char count)\b",
+    (r"\b(?:count|how many)\b[^.\n]{0,40}?\b(?:words?|word count)\b", "wc", lambda n: ["-w"], 1),
+    (r"\b(?:count|how many)\b[^.\n]{0,40}?\b(?:bytes?|characters?|char count)\b",
      "wc", lambda n: ["-c"], 1),
-    (r"\bcount\b[^.\n]{0,40}?\blines?\b", "wc", lambda n: ["-l"], 1),
+    # "How many lines are in the file X" is at least as ordinary as "count the
+    # lines", and measured to bind nothing.
+    (r"\b(?:count|how many)\b[^.\n]{0,40}?\blines?\b", "wc", lambda n: ["-l"], 1),
     # `cut` must be tried BEFORE `head`: "Show the first field of the file X"
     # contains both "show" and "first", and the first pattern to match wins.
     # Measured out of order, it bound `head -n 2` and returned two whole lines
     # when the sentence asked for one column.
     (r"\bcut\b|\bfields?\b|\bcolumns?\b", "cut", _cut_flags, 1),
-    (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\bfirst\b",
+    # "Show me the beginning of the file X" measured to bind `cat`, which returns
+    # the whole file.  Not a false answer, but the sentence asked for the
+    # beginning and `head` is the command that means it.
+    (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\b(?:first|beginning)\b",
      "head", _head_flags, 1),
-    (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\blast\b",
+    (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\b(?:last|end)\b",
      "tail", _tail_flags, 1),
     (r"\bsort\b", "sort", _no_flags, 1),
     (r"\b(?:checksum|sha256)\b", "sha256sum", _no_flags, 1),

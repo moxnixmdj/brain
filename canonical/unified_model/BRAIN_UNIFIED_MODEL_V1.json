@@ -24619,7 +24619,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6376,
+  "research_index_records": 6377,
   "routing_tokens": 1816,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24628,7 +24628,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6302d95bca64ae4e1aefe7ba876bd68fa660573a42f5c2ec7b7030f13519598b"
+  "value": "0d5843a09aecc34005289fa4a39262c4d5448bf7bf62f30212754ded75cdf891"
  },
  "engines": [
   {
@@ -189151,6 +189151,51 @@
    }
   },
   {
+   "action_id": "A_TIE_BETWEEN_CAPABILITIES_IS_NOT_AMBIGUITY_ABOUT_THE_COMMAND_THE_SENTENCE_STATED_V1_20261025_V1",
+   "capability": false,
+   "date": "2026-10-25",
+   "id": "research:canonical/action_intents/A_TIE_BETWEEN_CAPABILITIES_IS_NOT_AMBIGUITY_ABOUT_THE_COMMAND_THE_SENTENCE_STATED_V1_20261025_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_TIE_BETWEEN_CAPABILITIES_IS_NOT_AMBIGUITY_ABOUT_THE_COMMAND_THE_SENTENCE_STATED_V1_20261025_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "0fb9ffb3e93a74449b2dd61629f21aa8df6cb2c1731067ea2effbaf7edf84ac6",
+   "status": "",
+   "terms": {
+    "20261025": 1,
+    "a_command_that_cannot_be_re_run_is_checked_by_what_it_left_v1_20261024_v1": 1,
+    "a_tie_between_capabilities_is_not_ambiguity_about_the_command_the_sentence_stated_v1_20261025_v1": 1,
+    "about": 4,
+    "always": 1,
+    "ambiguity": 4,
+    "because": 1,
+    "between": 3,
+    "binder": 1,
+    "both": 1,
+    "capabilities": 4,
+    "command": 6,
+    "composer": 2,
+    "failed": 2,
+    "line": 3,
+    "no": 2,
+    "not": 3,
+    "only": 2,
+    "reason": 3,
+    "refused": 2,
+    "request": 3,
+    "route": 3,
+    "same": 2,
+    "scored": 2,
+    "sentence": 4,
+    "shell.command.run": 2,
+    "so": 3,
+    "stated": 4,
+    "states": 2,
+    "tie": 2,
+    "v1": 2,
+    "word": 2
+   }
+  },
+  {
    "action_id": "A_VERIFIER_THAT_SAID_NO_IS_NOT_OVERRULED_BY_THE_REPORT_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -208024,7 +208069,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "a6d518ac24584291b2d97e87723118fc73df7a498a67cc76e3ad989f9794b2b0",
+   "sha256": "29a76841c96c97b747014584973ee46479a293b0ecec004b00cf31a8bd9a2330",
    "summary": "Routing a sentence to a typed capability chain.",
    "symbol_count": 23,
    "symbols": [
@@ -226051,7 +226096,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "62fdfa4a4590215df094a7c727b203f664343fe9ff6003c2c76ecfe8b9e3cb11",
+   "sha256": "8a44749acfc236c69970e2f9a606719e11e522615ae4cef416d906e7ec62ab41",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 42,
    "symbols": [
