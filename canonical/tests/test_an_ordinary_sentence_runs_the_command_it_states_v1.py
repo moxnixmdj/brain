@@ -706,11 +706,34 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
         """
         from canonical.runtime import composer_route_v1 as _cr
         from canonical.runtime import raw_goal_trace_acceptance_v1 as _acc
-        progs = {p for _x, p, _f, _a in _cr._PROSE_COMMAND}
+        # Reachable means reachable from EITHER prose table: a command that takes
+        # an operand is in _PROSE_COMMAND, one that takes a quoted value is in
+        # _PROSE_COMMAND_WITH_VALUE.  Reading only the first said grep was dead
+        # weight the moment it was added, which was this test's own defect, not
+        # the table's.
+        progs = ({p for _x, p, _f, _a in _cr._PROSE_COMMAND}
+                 | {p for _x, p in _cr._PROSE_COMMAND_WITH_VALUE})
         for program in sorted(_acc._ANSWER_IS_THE_EXIT_STATUS):
             self.assertIn(program, progs,
                           "%s answers with a status and is verifiable, but no "
                           "sentence reaches it" % program)
+        # Measured on this host, all five:
+        #   grep/egrep/fgrep  0 = a line was selected, 1 = none was, 2 = an error
+        #   diff/cmp          0 = they agree, 1 = they differ, 2 = trouble
+        self.assertEqual(
+            {k: frozenset(v) for k, v in _acc._ANSWER_IS_THE_EXIT_STATUS.items()},
+            {p: frozenset({0, 1}) for p in
+             ("diff", "cmp", "grep", "egrep", "fgrep")},
+        )
+        # The hard half of the pin: 2 is NOT an answer for any of them, and each
+        # one must be re-run by the inspector -- otherwise a command that could
+        # not read its file, or a step that reported a code it did not get, would
+        # be accepted.
+        for program in sorted(_acc._ANSWER_IS_THE_EXIT_STATUS):
+            self.assertNotIn(2, _acc._ANSWER_IS_THE_EXIT_STATUS[program], program)
+            self.assertIn(program, _acc._READ_ONLY_COMMANDS,
+                          "%s is not re-run, so a lied exit status would go "
+                          "unchallenged" % program)
 
     def test_the_column_number_comes_from_the_sentence_not_from_a_path(self):
         """The regression pin: a digit inside a path is not a stated column.
@@ -1139,6 +1162,55 @@ class TestTheFallthroughIsScopedToWhatTheSentenceStates(unittest.TestCase):
                          "a request that stated nothing changed the file")
         self.assertIsNot(result.get("pass"), True,
                          "reported pass=True over a request that stated nothing")
+
+    def test_a_search_that_finds_nothing_is_an_answer_not_a_crash(self):
+        # grep exits 1 when no line matched.  That is the answer to a search that
+        # finds nothing, not a failure of the command.  Measured on cb8534b: the
+        # adapter raised RuntimeError:CLI_COMMAND_FAILED and the trace said
+        # COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN -- a crash report for a command
+        # that ran correctly and answered truthfully.
+        f = _fresh("apple\nbanana\napple\n")
+        for pattern in ("apple", "zzzz"):
+            out = _solve("Search the file %s for the exact text '%s'"
+                         % (f, pattern))
+            acc = out.get("raw_goal_acceptance") or {}
+            self.assertTrue(
+                _verified(out),
+                "pattern %r was not verified: status=%r reason=%r "
+                "unverified=%r" % (pattern, acc.get("status"), acc.get("reason"),
+                                   acc.get("unverified_reason")))
+
+    def test_a_search_on_a_file_it_cannot_read_still_fails(self):
+        # The other side of the same coin, and the reason 2 is left out of the
+        # answer table: grep exits 2 when the file is missing.  That IS trouble,
+        # and accepting it would turn a broken command into a verified one.
+        _fresh()
+        out = _solve("Search the file %s/never.txt for the exact text 'apple'"
+                     % SCRATCH)
+        self.assertIsNot((out.get("raw_goal_acceptance") or {}).get("pass"), True,
+                         "a search over a missing file was accepted: %r"
+                         % (out.get("raw_goal_acceptance"),))
+
+    def test_a_search_pattern_shaped_like_a_filename_is_not_the_output(self):
+        # 'ap.le' and 'notes.md' are ordinary patterns and ordinary filenames.
+        # extract_paths cannot tell them apart and PATH_OUTPUT takes the LAST
+        # path in the sentence, so the pattern became the output and the adapter
+        # failed CLI_EXPECTED_OUTPUT_MISSING over a promise nobody made.  'zzzz'
+        # bound correctly, which is why this was invisible.
+        from canonical.runtime import composer_route_v1 as _cr
+        args = _cr.bind({"argv": "ARGV", "output_path": "PATH_OUTPUT"},
+                        "Search the file a1.txt for the literal string 'ap.le'")
+        self.assertEqual("a1.txt", args.get("output_path"))
+        self.assertEqual(["fgrep", "ap.le", "a1.txt"], args.get("argv"))
+
+        f = _fresh("apple\nbanana\n")
+        out = _solve("Search the file %s for the literal string 'ap.le'" % f)
+        acc = out.get("raw_goal_acceptance") or {}
+        self.assertTrue(
+            _verified(out),
+            "status=%r reason=%r unverified=%r"
+            % (acc.get("status"), acc.get("reason"), acc.get("unverified_reason")))
+
 
 
 if __name__ == "__main__":

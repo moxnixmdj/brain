@@ -886,6 +886,23 @@ def bind(signature: Mapping[str, str], goal: str,
     inputs = inputs or {}
     produced = produced or {}
     paths = extract_paths(goal)
+    # A value the caller quoted is a VALUE, not a path -- but a search pattern
+    # is very often shaped like a filename, and extract_paths cannot tell the
+    # difference.  Measured: "Search the file a1.txt for the literal string
+    # 'ap.le'" bound output_path to "ap.le", because the pattern was the LAST
+    # path in the sentence and PATH_OUTPUT takes the last.  The adapter then
+    # failed CLI_EXPECTED_OUTPUT_MISSING over a command whose argv was correct
+    # and which ran fine -- the promise was about a file nobody named.  The
+    # pattern 'zzzz' bound correctly, because with no dot it is not path-shaped,
+    # which is what made this invisible: it only ever fired on a pattern that
+    # looks like a file, and 'notes.md' is exactly such a pattern.
+    #
+    # This is the same masking _prose_argv already applies when it reads
+    # operands, at the layer that fills the slots.  A fix that closes one path
+    # and leaves its sibling open is not closed.
+    _quoted = _quoted_value(goal)
+    if _quoted:
+        paths = [p for p in paths if p != str(_quoted)]
     args: dict[str, Any] = {}
     for slot, typ in signature.items():
         if slot in inputs:
