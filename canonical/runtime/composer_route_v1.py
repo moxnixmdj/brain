@@ -579,14 +579,22 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # Both report their answer as an exit status, which the adapter is now told
     # about by _declare_an_exit_status_answer and the verifier re-derives by
     # re-running the command and comparing the code.
-    # One comparison command, not two.  `cmp` stays in
-    # _ANSWER_IS_THE_EXIT_STATUS so a sentence that STATES it as a command line
-    # is served and judged, but it is not reachable from prose on purpose:
-    # reaching it would need "compare" and "bytes" on the command runner's own
-    # keywords, and adding a bare task verb there is the move that measurably
-    # took the unified model's verifier from 33/33 to 32/33 on the word "count".
-    # `diff` answers the same question with strictly more information, and it is
-    # reachable, so "compare the bytes of a and b" is served by diff.
+    # `cmp` asks a question `diff` does not answer: equal or not, with no
+    # account of how they differ.  It is reachable only from a sentence that
+    # SAYS byte-for-byte, never from the word "compare" alone -- "compare a and
+    # b" is asking how they differ, which is diff's answer, and the first
+    # pattern to match wins.
+    #
+    # This row was previously withheld on the stated ground that reaching `cmp`
+    # would need "compare" and "bytes" added to the command runner's registry
+    # keywords, the move that measurably took the unified model's verifier from
+    # 33/33 to 32/33 on the word "count".  That ground was a claim, not a
+    # measurement, and it is false: a prose pattern adds no registry keyword at
+    # all.  `diff` reaches the same capability through the composer path with
+    # none of its own words on the keywords list, and so does `cmp`.  The
+    # registry keywords were not touched, and verify still reports 33/33.
+    (r"\bcmp\b|\bbyte[ -]for[ -]byte\b|\bbyte[ -]by[ -]byte\b|\bidentical bytes\b|\bthe same bytes\b",
+     "cmp", _no_flags, 2),
     (r"\bdiff\b|\bcompare\b", "diff", _no_flags, 2),
     # `stat` is deliberately ABSENT, and it was measured
     # rather than assumed:
@@ -616,6 +624,29 @@ _PROSE_COMMAND_WITH_VALUE: tuple[tuple[str, str], ...] = (
     # Which program answers is decided by what the sentence says about the text,
     # not by guessing at the text itself.
     (r"\b(?:exact|literal|fixed)\b[^\n]{0,40}?\b(?:text|string)\b", "fgrep"),
+    # `egrep` is the same rule from the other side: a sentence that calls the
+    # text a regular expression or a pattern is asking for a PATTERN, and
+    # handing it to `fgrep` would make an alternation or a class literal.  As
+    # with `fgrep`, which program answers is decided by what the sentence says
+    # about the text, never by inspecting the caller's own value.
+    #
+    # The word "expression" is deliberately NOT a trigger, and that was measured
+    # rather than assumed.  A sentence containing it ranks a NUMERIC EXPRESSION
+    # capability first, which then tries to evaluate the caller's own search
+    # text as an arithmetic expression and dies:
+    #
+    #   "…for the regular expression 'plum|grape'"  -> NUMERIC_EXPRESSION_AST_NODE_REJECTED:BinOp
+    #   "…for the regular expression 'plum'"        -> NUMERIC_EXPRESSION_VARIABLE_UNBOUND:plum
+    #
+    # Both arrived as FAIL__LIVE_CONTROLLER_EXECUTION, never reaching the
+    # command.  "regex", "extended pattern" and "extended search" bind and
+    # verify exactly.  A phrasing that measurably cannot reach the command it
+    # states is not a route; it is left to `grep`, which fails truthfully rather
+    # than pretending.  The hijack itself is a separate, named gap: the binder
+    # ranks a capability whose expression slot is unbound above a command line
+    # that is fully bound.
+    (r"\bregex\b|\bextended (?:pattern|regex|search)\b"
+     r"|\bpattern\b[^\n]{0,30}?\b(?:match|search)\b", "egrep"),
     (r"\b(?:grep|search|find)\b", "grep"),
 )
 

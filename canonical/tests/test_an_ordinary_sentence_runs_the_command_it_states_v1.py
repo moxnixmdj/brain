@@ -122,7 +122,15 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
         ("Show the second column of the file {f}", ["cut", "-f", "2", "{f}"]),
         ("Cut field 3 from the file {f}", ["cut", "-f", "3", "{f}"]),
         ("Search the file {f} for the exact text 'a.c'", ["fgrep", "a.c", "{f}"]),
+        # --- a byte comparison and a pattern search, each reached only by a
+        #     sentence that SAYS which question it is asking.
+        ("Compare the file {f} and {f} byte by byte", ["cmp", "{f}", "{f}"]),
+        ("Compare the file {f} and {f} byte-for-byte", ["cmp", "{f}", "{f}"]),
+        ("Check whether the file {f} and {f} are identical bytes", ["cmp", "{f}", "{f}"]),
+        ("Search the file {f} for the regex 'a|b'", ["egrep", "a|b", "{f}"]),
+        ("Search the file {f} for the extended pattern 'a|b'", ["egrep", "a|b", "{f}"]),
         ("Find the literal string 'b[n' in the file {f}", ["fgrep", "b[n", "{f}"]),
+        ("Search the file {f} with an extended search for 'a|b'", ["egrep", "a|b", "{f}"]),
     )
 
     # Deliberately NOT bound, each measured rather than assumed.
@@ -185,6 +193,57 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
                 "bound %r for %r, whose answer this layer cannot verify -- "
                 "running it reports failure over work that succeeded"
                 % (program, template))
+
+    def test_a_plain_comparison_still_answers_how_they_differ(self):
+        """The stealing guard: `cmp` must not take `diff`'s question.
+
+        The first pattern to match wins, and the cmp row sits above the diff row
+        so that "byte by byte" reaches cmp at all.  "Compare a against b" asks
+        HOW they differ, which only diff answers, so it must not be captured.
+        A row placed to win one phrasing is a row that can steal another.
+        """
+        for sentence in ("Diff the file %s against %s", "Compare the file %s against %s"):
+            a, b = "%s/a1.txt" % SCRATCH, "%s/b2.txt" % SCRATCH
+            argv = _argv(sentence % (a, b))
+            self.assertEqual(argv, ["diff", a, b],
+                             "%r lost its route to cmp: %r" % (sentence, argv))
+
+    def test_a_pattern_search_is_reached_by_the_words_that_work_and_not_the_one_that_does_not(self):
+        """A phrasing that measurably cannot reach its command is not a route.
+
+        The word "expression" ranks a NUMERIC EXPRESSION capability first, which
+        then evaluates the caller's own search text as arithmetic and dies with
+        NUMERIC_EXPRESSION_VARIABLE_UNBOUND before any command runs.  Measured,
+        not assumed.  The three phrasings that do reach egrep are asserted
+        positively; the fourth is pinned as NOT binding egrep, so this test must
+        be rewritten -- never merely deleted -- by whoever fixes the hijack.
+        """
+        for phrase in ("the regex", "the extended pattern", "an extended search for"):
+            argv = _argv("Search the file %s %s 'a|b'" % (SCRATCH + "/a1.txt", phrase))
+            self.assertEqual((argv or [None])[0], "egrep",
+                             "%r no longer reaches egrep: %r" % (phrase, argv))
+        hijacked = _argv("Search the file %s for the regular expression 'a|b'"
+                         % (SCRATCH + "/a1.txt"))
+        self.assertNotEqual((hijacked or [None])[0], "egrep",
+                            "the word 'expression' was made a trigger again, and it "
+                            "provably routes to a numeric expression evaluator: %r"
+                            % hijacked)
+
+    def test_the_two_commands_that_answer_with_a_status_are_both_reachable(self):
+        """Both members of _ANSWER_IS_THE_EXIT_STATUS must be reachable from prose.
+
+        The adapter was taught to report rather than raise for exactly the
+        programs enumerated in that table.  A capability the acceptance layer is
+        willing to judge, and whose binary is present, that no sentence can
+        reach is dead weight in the table.
+        """
+        from canonical.runtime import composer_route_v1 as _cr
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _acc
+        progs = {p for _x, p, _f, _a in _cr._PROSE_COMMAND}
+        for program in sorted(_acc._ANSWER_IS_THE_EXIT_STATUS):
+            self.assertIn(program, progs,
+                          "%s answers with a status and is verifiable, but no "
+                          "sentence reaches it" % program)
 
     def test_the_column_number_comes_from_the_sentence_not_from_a_path(self):
         """The regression pin: a digit inside a path is not a stated column.
@@ -304,6 +363,49 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
                          "the literal search returned the wrong line: %r" % out)
         self.assertEqual((ROOT / f).read_text(encoding="utf-8"),
                          "banana apple\ncherry plum\nfig grape\n")
+
+    def test_a_pattern_search_answers_with_the_lines_the_pattern_matches(self):
+        """`egrep` end to end, and `grep` must not be silently substituted.
+
+        Basic grep reads a pipe literally, so if egrep were not really bound the
+        alternation would match nothing and exit 1 -- which is exactly why the
+        assertion is on the returned lines and not on the status alone.
+        """
+        f = _fresh("banana apple\ncherry plum\nfig grape\n")
+        result = _solve("Search the file %s for the regex 'plum|grape'" % f)
+        self.assertTrue(_verified(result),
+                        "a pattern search was not verified: %r" % result.get("status"))
+        steps = (result.get("composer_execution") or {}).get("steps") or []
+        out = str((steps[0].get("result") or {}).get("stdout") or "")
+        self.assertEqual(sorted(out.splitlines()), ["cherry plum", "fig grape"],
+                         "the alternation did not match both lines -- egrep was "
+                         "not really the program that ran: %r" % out)
+        self.assertEqual((ROOT / f).read_text(encoding="utf-8"),
+                         "banana apple\ncherry plum\nfig grape\n")
+
+    def test_a_byte_comparison_answers_with_the_code_the_world_agrees_with(self):
+        """`cmp` end to end in both directions, and neither operand altered."""
+        for same, want in ((True, 0), (False, 1)):
+            a = _fresh("banana apple\ncherry plum\nfig grape\n")
+            b = a.replace("a1.txt", "b2.txt")
+            (ROOT / b).write_text(
+                "banana apple\ncherry plum\nfig grape\n" if same
+                else "banana apple\ncherry PLUM\nfig grape\n", encoding="utf-8")
+            result = _solve("Compare the file %s and %s byte by byte" % (a, b))
+            self.assertTrue(_verified(result),
+                            "a byte comparison of %s files was not verified: %r"
+                            % ("identical" if same else "differing",
+                               result.get("status")))
+            steps = (result.get("composer_execution") or {}).get("steps") or []
+            got = (steps[0].get("result") or {}).get("returncode")
+            self.assertEqual(got, want,
+                             "identical=%s differing=%s: cmp reported %r, the world "
+                             "says %r" % (same, not same, got, want))
+            self.assertEqual((ROOT / a).read_text(encoding="utf-8"),
+                             "banana apple\ncherry plum\nfig grape\n")
+            self.assertEqual((ROOT / b).read_text(encoding="utf-8"),
+                             ("banana apple\ncherry plum\nfig grape\n" if same
+                              else "banana apple\ncherry PLUM\nfig grape\n"))
 
     def test_a_comparison_answers_with_the_code_the_world_agrees_with(self):
         """The hardest row in the file: the exit status is cross-checked, not trusted.
