@@ -2821,6 +2821,165 @@ class TestAFilterQuestionGetsTheLinesItAskedFor(unittest.TestCase):
         self.assertFalse(_verified(_solve(goal)))
 
 
+class TestThePlainestWayToAskEachQuestionIsAnswered(unittest.TestCase):
+    """Every operation, asked in its plainest English.
+
+    The corpora this file grew out of were written from the phrasings the binder
+    already understood, which is how a family gets measured as closed while its
+    most ordinary sentence is wrong.  Measured from the OPERATIONS instead, over
+    eighteen plainest-phrasing questions: six were answered wrongly and all six
+    were certified as exact semantic answers.
+
+      "Show me the last line of X"            -> the last TWO lines
+      "Where does 'apple' appear in X?"       -> refused
+      "the lines in X with 'apple'"           -> the whole file
+      "the lines in X without 'apple'"        -> the whole file
+      "the lines of X in reverse order"       -> the whole file, unreversed
+      "What is different between A and B?"    -> refused
+
+    The cause is one thing: each pattern was written for a single word order and
+    a single word form.  "difference" matched and "different" did not; "reverse
+    the lines" matched and "the lines ... in reverse order" did not.  And the
+    table was matched against the sentence WITH ITS PATH IN IT, so a path stood
+    between words the pattern expected to be neighbours -- and a file called
+    `blank.txt` satisfied the blank-line pattern by its own name.
+
+    The expectations below are computed by RUNNING the command that means each
+    question, never by writing down what the answer should be.
+    """
+
+    def _answer(self, result):
+        import json as _json, re as _re
+        text = _json.dumps(result, default=str)
+        m = _re.search(r'"stdout"\s*:\s*"((?:[^"\\]|\\.)*)"', text)
+        return m.group(1).encode().decode("unicode_escape") if m else None
+
+    def _status(self, result):
+        return ((result.get("composer_execution") or {}).get("produced") or {}).get("returncode")
+
+    TEXT = "apple\nbanana\napple pie\ncherry\n"
+    OTHER = "apple\nbanana\nfig\n"
+
+    def _truth(self, argv):
+        """The answer to the question, from the command that means it."""
+        import subprocess as _sp
+        proc = _sp.run(argv, cwd=str(ROOT), capture_output=True)
+        return proc.returncode, proc.stdout.decode("utf-8")
+
+    def test_each_question_matches_the_command_that_means_it(self):
+        a = _fresh(self.TEXT)
+        b = "%s/other1.txt" % SCRATCH
+        (ROOT / b).write_text(self.OTHER, encoding="utf-8")
+        cases = [
+            ("Show me the contents of the file %s" % a, ["cat", a], False),
+            ("Show me the first line of the file %s" % a, ["head", "-n", "1", a], False),
+            ("Show me the last line of the file %s" % a, ["tail", "-n", "1", a], False),
+            ("Show the final line of the file %s" % a, ["tail", "-n", "1", a], False),
+            ("Print the last line of the file %s" % a, ["tail", "-n", "1", a], False),
+            ("Show me the last 3 lines of the file %s" % a, ["tail", "-n", "3", a], False),
+            ("How many lines are in the file %s?" % a, ["wc", "-l", a], False),
+            ("How many words are in the file %s?" % a, ["wc", "-w", a], False),
+            ("Where does 'apple' appear in the file %s?" % a, ["grep", "-n", "apple", a], False),
+            ("Which lines in the file %s contain 'apple'?" % a, ["grep", "-n", "apple", a], False),
+            ("How many lines in the file %s contain 'apple'?" % a, ["grep", "-c", "apple", a], False),
+            ("Show me the lines in the file %s with 'apple'" % a, ["fgrep", "apple", a], False),
+            ("Show the lines in the file %s that contain 'apple'" % a,
+             ["fgrep", "apple", a], False),
+            ("Show me the lines in the file %s without 'apple'" % a,
+             ["fgrep", "-v", "apple", a], False),
+            ("Sort the lines of the file %s" % a, ["sort", a], False),
+            ("Show me the lines of the file %s in reverse order" % a, ["tac", a], False),
+            ("Reverse the lines of the file %s" % a, ["tac", a], False),
+            ("Show the file %s in upper case" % a, ["sed", "-e", "s/.*/" + chr(92) + "U&/", a], False),
+            ("What is different between the files %s and %s?" % (a, b), ["diff", a, b], True),
+            ("Show the differences between the files %s and %s" % (a, b), ["diff", a, b], True),
+            ("Are the files %s and %s the same?" % (a, a), ["cmp", "-s", a, a], True),
+        ]
+        for goal, argv, exit_is_the_answer in cases:
+            _fresh(self.TEXT)
+            (ROOT / b).write_text(self.OTHER, encoding="utf-8")
+            code, out = self._truth(argv)
+            result = _solve(goal)
+            self.assertTrue(_verified(result), goal)
+            if exit_is_the_answer:
+                self.assertEqual(code, self._status(result), goal)
+            else:
+                self.assertEqual(out, self._answer(result), goal)
+            self.assertEqual(self.TEXT, (ROOT / a).read_text(encoding="utf-8"),
+                             "a reading rewrote the file: " + goal)
+
+    def test_the_last_line_of_a_file_is_one_line_and_not_the_default_two(self):
+        # `_prose_count` documents a default of 2, which is right for "the last
+        # lines" and wrong for "the last line".  Measured: the last line of a
+        # four-line file was answered with its last two.
+        a = _fresh(self.TEXT)
+        for goal in ("Show me the last line of the file %s" % a,
+                     "Show the final line of the file %s" % a):
+            result = _solve(goal)
+            self.assertTrue(_verified(result), goal)
+            self.assertEqual("cherry\n", self._answer(result), goal)
+
+    def test_a_count_the_sentence_states_still_stands(self):
+        # The other side of the singular rule: a stated number is not overridden.
+        a = _fresh(self.TEXT)
+        result = _solve("Show me the last 3 lines of the file %s" % a)
+        self.assertTrue(_verified(result))
+        self.assertEqual("banana\napple pie\ncherry\n", self._answer(result))
+
+    def test_the_lines_in_reverse_order_are_reversed_from_either_word_order(self):
+        a = _fresh(self.TEXT)
+        for goal in ("Show me the lines of the file %s in reverse order" % a,
+                     "Reverse the lines of the file %s" % a):
+            result = _solve(goal)
+            self.assertTrue(_verified(result), goal)
+            self.assertEqual("cherry\napple pie\nbanana\napple\n", self._answer(result), goal)
+
+    def test_the_lines_with_a_text_and_the_lines_without_it_are_not_the_same(self):
+        # "With" and "without" introduce a quoted value directly, with no verb of
+        # containing at all.  Measured, both fell through to `cat` and were
+        # certified with the whole file -- so both gave the SAME answer, and only
+        # asking both can show that.
+        a = _fresh(self.TEXT)
+        yes = _solve("Show me the lines in the file %s with 'apple'" % a)
+        no = _solve("Show me the lines in the file %s without 'apple'" % a)
+        self.assertTrue(_verified(yes))
+        self.assertTrue(_verified(no))
+        self.assertEqual("apple\napple pie\n", self._answer(yes))
+        self.assertEqual("banana\ncherry\n", self._answer(no))
+        self.assertNotEqual(self._answer(yes), self._answer(no))
+
+    def test_a_verb_of_appearing_is_a_verb_of_containing(self):
+        a = _fresh(self.TEXT)
+        result = _solve("Where does 'apple' appear in the file %s?" % a)
+        self.assertTrue(_verified(result))
+        self.assertEqual("1:apple\n3:apple pie\n", self._answer(result))
+
+    def test_a_difference_question_is_answered_whatever_word_carries_it(self):
+        a = _fresh(self.TEXT)
+        b = "%s/other2.txt" % SCRATCH
+        (ROOT / b).write_text(self.OTHER, encoding="utf-8")
+        for goal in ("What is different between the files %s and %s?" % (a, b),
+                     "Show the differences between the files %s and %s" % (a, b),
+                     "Compare the files %s and %s" % (a, b)):
+            result = _solve(goal)
+            self.assertTrue(_verified(result), goal)
+            self.assertEqual(1, self._status(result), goal)
+
+    def test_a_path_is_not_read_as_prose(self):
+        # The fixture is deliberately named for a word a pattern looks for.  The
+        # table is matched with every path masked out, so the name cannot satisfy
+        # a pattern and the words on either side of the path stay neighbours.
+        named = "%s/reverse.txt" % SCRATCH
+        _fresh(self.TEXT)
+        (ROOT / named).write_text(self.TEXT, encoding="utf-8")
+        result = _solve("Show me the lines of the file %s in reverse order" % named)
+        self.assertTrue(_verified(result))
+        self.assertEqual("cherry\napple pie\nbanana\napple\n", self._answer(result))
+        result = _solve("Show me the last line of the file %s" % named)
+        self.assertTrue(_verified(result))
+        self.assertEqual("cherry\n", self._answer(result))
+
+
 
 if __name__ == "__main__":
     unittest.main()
