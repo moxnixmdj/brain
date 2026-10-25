@@ -790,7 +790,12 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # third in this table and the first pattern to match wins -- so teaching
     # `uniq` the word "duplicate" alone would have changed nothing at all.
     (r"\b(?:remove|delete|erase)\b"
-     r"(?![^\n]{0,40}?\b(?:duplicate|repeated|unique)\b[^\n]{0,20}?\blines?\b)",
+     r"(?![^\n]{0,40}?\b(?:duplicate|repeated|unique)\b[^\n]{0,20}?\blines?\b)"
+     r"(?![^\n]{0,60}?\b(?:permission|permissions|bit|bits|line|lines|word|words|"
+     r"character|characters|letter|letters|header|headers|footer|footers|space|"
+     r"spaces|comment|comments|blank|blanks|row|rows|column|columns|field|fields|"
+     r"entry|entries|tag|tags|number|numbers|indentation|prefix|suffix)\b)"
+     r"(?![^\n]{0,40}?\bfrom the (?:file|files)\b)",
      "rm", _no_flags, 1),
     (r"\b(?:create|make)\b[^.\n]{0,40}?\b(?:directory|folder)\b", "mkdir",
      _no_flags, -1),
@@ -1254,6 +1259,25 @@ _READ_VERBS = re.compile(r"\b(?:show|print|read|display)\b")
 # Deliberately absent: the two words "upper case" and "lower case" on their own.
 # "Show X in upper case" contains them and must not write, and the one-word verb
 # forms `uppercase`/`lowercase` are listed instead.
+# "Remove X from the file Y" is an EDIT of Y, not a deletion of it.  Measured on
+# main d3e9a3a, eight ordinary sentences of that shape bound `rm` on the file they
+# named as the SOURCE, deleted it, and were certified
+# PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED:
+#   remove the executable permission from / remove the read permission from
+#   remove the first line from / remove the last line from / remove the word
+#   'apple' from / remove the header from / remove the trailing spaces from
+#   remove the comments from  -- each one deleted the file.
+# "Remove the file X" and "Remove the files named '*.log' from the directory D"
+# stay deletions, and are pinned by tests, so this is scoped to the object of the
+# verb rather than to the verb.
+_REMOVES_SOMETHING_INSIDE_THE_FILE = re.compile(
+    r"\bfrom the (?:file|files)\b"
+    r"|\b(?:permission|permissions|bit|bits|line|lines|word|words|character|"
+    r"characters|letter|letters|header|headers|footer|footers|space|spaces|"
+    r"comment|comments|blank|blanks|row|rows|column|columns|field|fields|"
+    r"entry|entries|tag|tags|number|numbers|indentation|prefix|suffix)\b",
+    re.IGNORECASE)
+
 _CHANGE_VERBS = re.compile(
     r"\bconvert(?:s|ed|ing)?\b|\breplace\w*|\bsubstitut\w*"
     r"|\bchang(?:e|es|ed|ing)\b|\brewrit(?:e|es|en|ing)\b|\btransform\w*"
@@ -1472,6 +1496,12 @@ def _prose_argv(sentence: str) -> list[str] | None:
     # the intent is decided BEFORE any expansion and a non-match is not a
     # refusal of the whole sentence.
     _deleting = bool(re.search(r"\b(?:delet|remov)\w*\b", text)) and "rm" in known
+    # The same guard as the single-file row, and it matters more here: a set
+    # expansion turns one wrong deletion into a whole directory of them.
+    # "Remove the trailing spaces from every file in the directory D" measured as
+    # binding `rm` over every file it matched.
+    if _deleting and _REMOVES_SOMETHING_INSIDE_THE_FILE.search(text):
+        _deleting = False
     # A request to COUNT lines, not a mention of the word "line".  `_WC_LINES` is
     # the pattern for the unit -- it is what tells `wc` to count lines instead of
     # words -- and on its own it fires on any sentence that says "line" at all.
@@ -1758,6 +1788,24 @@ def _prose_argv(sentence: str) -> list[str] | None:
         _operands = extract_paths(sentence)
         if len(_operands) == 2:
             return ["cmp", "-s", str(_operands[0]), str(_operands[1])]
+    # A sentence that removes something INSIDE a file, which no rule owns, must
+    # be refused -- not handed to a reader.  Measured immediately after scoping
+    # `rm`, three such sentences fell through to a reader and were CERTIFIED with
+    # the opposite of what was asked:
+    #   "Remove the first line from the file X" -> `head -n 1`, printing the very
+    #       line it was asked to delete
+    #   "Remove the last line from the file X"  -> `tail -n 1`, the same
+    #   "Remove the read permission from the file X" -> `cat`, printing the file
+    # A certified wrong answer is not a smaller failure than a deletion: it is
+    # reported as the work that was asked for.  The removals that ARE owned keep
+    # working and are pinned -- duplicate, repeated, unique, empty and blank lines
+    # each reach a rule that really performs them.
+    if (re.search(r"\b(?:remove|delete|erase)s?\b", text)
+            and _REMOVES_SOMETHING_INSIDE_THE_FILE.search(text)
+            and not re.search(
+                r"\b(?:duplicate|repeated|unique|empty|blank)\b[^\n]{0,20}?\blines?\b",
+                text)):
+        return None
     for pattern, program, flags, arity in _PROSE_COMMAND:
         if program not in known:
             continue
@@ -1802,12 +1850,21 @@ def _prose_argv(sentence: str) -> list[str] | None:
             return [program, "-f", str(column), str(paths[0])]
         if program == "cp" and _DIRECTORY_REQUEST.search(text):
             return [program, "-r", str(paths[0]), str(paths[1])]
-        if program == "rm" and _DIRECTORY_REQUEST.search(text):
+        if (program == "rm" and _DIRECTORY_REQUEST.search(text)
+                and not re.search(r"\bfiles?\b|\*|\bnamed\b|\bpattern\b", text)):
             # The same reading `cp` already makes: a sentence that says
             # "directory" is asking about a tree, and plain `rm` on a directory
             # fails.  Measured, "Delete the directory D" bound `rm D` and came
             # back COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN -- the vaguest report
             # there is -- over a directory that was still standing.
+            #
+            # Scoped here to a sentence that mentions no file at all.  Without
+            # the guard, "Delete the files named '*.log' in the directory D"
+            # matched -- it says "directory", and paths[0] is the DIRECTORY -- so
+            # it bound `rm -r D` and deleted every file in the tree, certifying
+            # the deletion of files the sentence never named.  A sentence about
+            # files inside a directory belongs to the set expansion, which
+            # deletes exactly the names the pattern matched.
             return [program, "-r", str(paths[0])]
         if program == "ls" and _EVERY_FILE.search(text) and not _LISTING_REQUEST.search(text):
             # `ls` answers "what files are here", never "what is IN them".  Its
