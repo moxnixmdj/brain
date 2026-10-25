@@ -2675,6 +2675,152 @@ class TestAReadingDoesNotWriteAndAStatedTransformIsNotDropped(unittest.TestCase)
                          _cr._prose_argv("Show lines 2 to 4 of the file %s" % a))
 
 
+class TestAFilterQuestionGetsTheLinesItAskedFor(unittest.TestCase):
+    """The lines that hold a text, and the lines that are empty.
+
+    `_FILTER_LINE` matched "Show the lines in X that contain 'apple'", one value
+    was quoted, `_NEGATED_LINE` did not fire -- and then the branch ended, so the
+    sentence fell all the way through to `cat` and was certified with the WHOLE
+    FILE as the answer to a question about two of its four lines.  Measured over
+    nine such sentences, including one quoting 'apple' itself: every one answered
+    with the whole file.  The negative form of the very same sentence worked, so
+    only half of it had ever been written.
+
+    The same half-written shape hid in the blank-line rule, where `-v` was
+    hard-coded: "show the empty lines" was answered with the lines that are NOT
+    empty, because inverting is what "REMOVE the empty lines" means.
+    """
+
+    def _answer(self, result):
+        import json as _json, re as _re
+        text = _json.dumps(result, default=str)
+        m = _re.search(r'"stdout"\s*:\s*"((?:[^"\\]|\\.)*)"', text)
+        return m.group(1).encode().decode("unicode_escape") if m else None
+
+    TEXT = "apple\nbanana\napple pie\ncherry\n"
+
+    def test_the_lines_that_contain_a_text_are_those_lines_not_the_file(self):
+        a = _fresh(self.TEXT)
+        whole = (ROOT / a).read_text(encoding="utf-8")
+        result = _solve("Show the lines in the file %s that contain 'apple'" % a)
+        self.assertTrue(_verified(result))
+        self.assertEqual("apple\napple pie\n", self._answer(result))
+        self.assertNotEqual(whole, self._answer(result),
+                            "a question about two lines was answered with the whole file")
+        self.assertEqual(self.TEXT, (ROOT / a).read_text(encoding="utf-8"))
+
+    def test_the_positive_and_negative_forms_are_not_the_same_answer(self):
+        # The assertion that carries the fix.  Before it, the positive form
+        # returned the whole file and the negative form returned two lines, and
+        # both were certified -- so an implementation that ignored the negation
+        # entirely would still have passed a one-sided test.
+        a = _fresh(self.TEXT)
+        yes = _solve("Show the lines in the file %s that contain 'apple'" % a)
+        no = _solve("Show the lines in the file %s that do not contain 'apple'" % a)
+        self.assertTrue(_verified(yes))
+        self.assertTrue(_verified(no))
+        self.assertEqual("apple\napple pie\n", self._answer(yes))
+        self.assertEqual("banana\ncherry\n", self._answer(no))
+        self.assertNotEqual(self._answer(yes), self._answer(no))
+
+    def test_a_value_nothing_matches_is_an_answer_and_not_the_whole_file(self):
+        # The counter-test.  `grep` exits 1 when nothing matches, and that is the
+        # answer "nothing matched" -- not a failure and not a licence to fall
+        # through to `cat`, which is what used to happen.
+        a = _fresh(self.TEXT)
+        result = _solve("Show the lines in the file %s that contain 'zebra'" % a)
+        self.assertTrue(_verified(result))
+        self.assertEqual("", self._answer(result))
+
+    def test_a_metacharacter_in_the_stated_value_is_a_literal_not_a_shell_word(self):
+        # The value reaches the command as one argv element, so nothing in it is
+        # interpreted.  Were a shell involved, `$(echo apple)` would become
+        # 'apple' and match two lines; measured, it matches none.
+        a = _fresh(self.TEXT)
+        for value in ("a;b", "a|b", "$(echo apple)", "`echo apple`", 'a"b', "a*b", "a\\b"):
+            result = _solve("Show the lines in the file %s that contain '%s'" % (a, value))
+            self.assertTrue(_verified(result), value)
+            self.assertEqual("", self._answer(result), value)
+
+    def test_a_value_that_is_literal_text_is_not_read_as_a_regular_expression(self):
+        # "Contain" is literal language, so `a*b` means those three characters --
+        # and no line holds them.  Measured with `grep`, which treats the value as
+        # a regex, this answered 'banana', because `a*b` matches it.
+        a = _fresh(self.TEXT)
+        result = _solve("Show the lines in the file %s that contain 'a*b'" % a)
+        self.assertTrue(_verified(result))
+        self.assertEqual("", self._answer(result))
+        self.assertEqual("apple\napple pie\n",
+                         self._answer(_solve(
+                             "Show the lines in the file %s that contain 'apple'" % a)),
+                         "the literal matcher must still find ordinary text")
+
+    def test_a_value_the_sentence_never_delimited_is_not_guessed(self):
+        # "contain 'a'b'" has three quote marks, so what was quoted is not
+        # recoverable.  The recoverable fragment is `a`, and searching for that
+        # matches three of the four lines -- a confident answer to a question the
+        # sentence did not manage to ask.
+        a = _fresh(self.TEXT)
+        result = _solve("Show the lines in the file %s that contain 'a'b'" % a)
+        self.assertFalse(_verified(result),
+                         "an unbalanced quotation was answered by guessing the value")
+
+    def test_a_quoted_payload_is_not_read_as_a_quoted_pattern(self):
+        # Shape cannot tell a payload from a pattern, and neither can the word
+        # "line": this sentence satisfies `_FILTER_LINE` and quotes exactly one
+        # value.  Taking it as a filter bound `grep` over the file the sentence
+        # was asking to be WRITTEN, and the promised artifact was then correctly
+        # reported missing.  Caught by an existing test, and pinned here too.
+        out = "%s/payload1.txt" % SCRATCH
+        _fresh(self.TEXT)
+        result = _solve("Write the line 'PROJECT BRAIN' to the file %s." % out)
+        self.assertTrue(_verified(result))
+        self.assertEqual("PROJECT BRAIN", (ROOT / out).read_text(encoding="utf-8"))
+
+    def test_the_empty_lines_asked_for_are_the_empty_ones(self):
+        # Both word orders, and the answer is the empty line -- not the two lines
+        # that are not empty, which is what hard-coding `-v` returned.
+        blank = _fresh("apple\n\ncherry\n")
+        for goal in ("Show the empty lines in the file %s" % blank,
+                     "Show the lines in the file %s that are empty" % blank):
+            result = _solve(goal)
+            self.assertTrue(_verified(result), goal)
+            self.assertEqual("\n", self._answer(result), goal)
+
+    def test_removing_the_empty_lines_still_keeps_the_ones_that_are_not(self):
+        # The other half of the inversion, pinned so the fix cannot be a blanket
+        # removal of `-v`.
+        blank = _fresh("apple\n\ncherry\n")
+        result = _solve("Remove the empty lines from the file %s" % blank)
+        self.assertTrue(_verified(result))
+        self.assertEqual("apple\ncherry\n", self._answer(result))
+
+    def test_a_file_named_for_the_word_does_not_make_the_sentence_about_it(self):
+        # The fixture is literally called blank.txt.  Measured without masking
+        # the paths out first, the file's own NAME satisfied the blank-line
+        # pattern, so a question about which of its lines contain 'apple' became
+        # a question about its empty lines.
+        blank = _fresh("apple\n\ncherry\n")
+        self.assertTrue(blank.endswith("a1.txt"))
+        named = "%s/blank.txt" % SCRATCH
+        (ROOT / named).write_text("apple\n\ncherry\n", encoding="utf-8")
+        result = _solve("Show the lines in the file %s that contain 'apple'" % named)
+        self.assertTrue(_verified(result))
+        self.assertEqual("apple\n", self._answer(result),
+                         "the file's name was read as the sentence's subject")
+
+    def test_a_second_operation_beside_the_filter_is_refused_not_half_served(self):
+        # "The SORTED lines that contain 'apple'" needs two commands.  Serving the
+        # filter alone would drop the sort and certify it, which is the defect;
+        # so this refuses.  Pinned so the refusal is not later traded for a
+        # half-answer that looks like progress.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh(self.TEXT)
+        goal = "Show the sorted lines in the file %s that contain 'apple'" % a
+        self.assertIsNone(_cr._prose_argv(goal))
+        self.assertFalse(_verified(_solve(goal)))
+
+
 
 if __name__ == "__main__":
     unittest.main()
