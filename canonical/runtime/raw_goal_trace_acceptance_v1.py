@@ -73,8 +73,34 @@ def _STATES_A_COMMAND(goal: Any) -> bool:
 
 
 # What may sit between a payload and the path it is being written to.
+# A destination may be described, not just named.  Measured: the pattern
+# allowed "to the file X" and nothing else, so every ordinary adjective between
+# the article and the noun broke the match --
+#
+#   to the output file X       -> False
+#   to the target file X       -> False
+#   to the destination file X  -> False
+#   into the same file X       -> False
+#   to the given file X        -> False
+#
+# six of seven natural phrasings.  The consequence is not a refusal to write:
+# the write HAPPENS and the bytes are correct, and the verifier then reports
+# STEP_TEXT_PAYLOAD_NOT_IN_THE_REQUEST -- a failure reported over work that
+# succeeded, the shape PR #6126 closed elsewhere.  "Write the file content
+# PROJECT BRAIN to the output file X" wrote exactly those 13 bytes and was
+# refused, while "Write the text 'PROJECT BRAIN' to the file X" passed, the
+# only difference being one adjective.
+#
+# The words admitted are the ones that describe WHERE the payload goes.  The
+# truncation defence is untouched, because it does not rest on this prefix: the
+# lookahead still requires a path-like token to begin the instant the
+# description ends, and a truncated payload is followed by the rest of the
+# payload, which is prose and not a path.
+_DEST_MODIFIER = r"(?:(?:output|target|destination|same|given|stated|named|following|new|existing)\s+){0,2}"
+
 _BETWEEN_PAYLOAD_AND_DEST = re.compile(
-    r"\s*(?:to|into|in|at)\s+(?:(?:the|a|an)\s+)?(?:file|path|folder|directory)?\s*"
+    r"\s*(?:to|into|in|at)\s+(?:(?:the|a|an)\s+)?" + _DEST_MODIFIER +
+    r"(?:file|path|folder|directory)?\s*"
     r"(?=\S*/|\S+\.[A-Za-z0-9]{1,6}\b)", re.I)
 # The word that introduces a payload.  Both boundaries are needed, and measuring
 # showed why one is not enough: dropping a leading article leaves a payload that

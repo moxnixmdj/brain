@@ -402,6 +402,110 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
             self.assertEqual(_argv(sentence), expected,
                              "%r bound %r" % (sentence, _argv(sentence)))
 
+    def test_a_destination_may_be_described_not_only_named(self):
+        """The bytes on disk are the assertion, not the status.
+
+        Measured before this: only the bare "to the file X" worked.  Any
+        ordinary adjective between the article and the noun -- output, target,
+        destination, given, new -- lost the request, in two independent places
+        that had drifted apart.  The write itself was never the problem: the
+        bytes were correct and the verifier then reported
+        STEP_TEXT_PAYLOAD_NOT_IN_THE_REQUEST, a failure reported over work that
+        succeeded.
+        """
+        want = "PROJECT BRAIN"
+        for phrase in ("to the file", "to the output file", "to the target file",
+                       "to the destination file", "to the output path",
+                       "to the given file", "to the new output file"):
+            name = "w%d.txt" % (abs(hash(phrase)) % 99999)
+            path = SCRATCH + "/" + name
+            result = _solve("Write the text '%s' %s %s." % (want, phrase, path))
+            self.assertTrue(_verified(result),
+                            "%r was refused: %r / %r"
+                            % (phrase, result.get("status"),
+                               (result.get("raw_goal_acceptance") or {}).get("reason")))
+            written = ROOT / path
+            self.assertTrue(written.exists(), "%r wrote nothing" % phrase)
+            self.assertEqual(written.read_text(encoding="utf-8"), want,
+                             "%r wrote the wrong bytes: %r"
+                             % (phrase, written.read_text(encoding="utf-8")))
+
+    def test_the_two_destination_readings_must_agree_on_the_same_sentence(self):
+        """The drift pin.  This is the bug, and this is what stops it returning.
+
+        The composer decides where a payload goes with _DEST_WORDS, and the
+        acceptance layer independently decides whether a payload runs to a
+        destination with _BETWEEN_PAYLOAD_AND_DEST.  They are not shared on
+        purpose -- an inspector that asks the binder what it meant is not an
+        inspector -- but they answer the same question about the same sentence.
+        Measured: they had drifted, so one bound a destination the other then
+        refused, and a correct write was reported as a payload the request never
+        stated.  Widening either one alone moves nothing end to end.
+        """
+        from canonical.runtime import composer_route_v1 as _cr
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _acc
+        payload = "PROJECT BRAIN"
+        for phrase in ("to the file", "to the output file", "to the target file",
+                       "to the destination file", "into the output path",
+                       "to the given file", "to the new output file"):
+            path = SCRATCH + "/agree.txt"
+            sentence = "Write the text '%s' %s %s." % (payload, phrase, path)
+            bound = _cr.extract_content_destination(sentence)
+            self.assertEqual(bound, path,
+                             "%r: the composer bound %r as the destination"
+                             % (phrase, bound))
+            self.assertTrue(_acc._payload_runs_to_the_destination(sentence, payload),
+                            "%r: the composer bound the destination but the "
+                            "inspector refuses the payload -- the two readings "
+                            "have drifted apart again" % phrase)
+
+    def test_a_truncated_payload_is_still_refused_by_both_readings(self):
+        """The defence the widening must not weaken.
+
+        A truncated payload is still a substring of the sentence that produced
+        it, so containment proves nothing.  What distinguishes the payload the
+        sentence stated is that the sentence is DONE with it: a destination
+        follows immediately.  Allowing a destination to be described widens the
+        prefix, never the lookahead, so this must be unchanged.
+        """
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _acc
+        sentence = ("Write the text 'the results are in the attachment' "
+                    "to the output file %s/a1.txt." % SCRATCH)
+        for truncated in ("results are", "the results are", "results are in"):
+            self.assertFalse(_acc._payload_runs_to_the_destination(sentence, truncated),
+                             "a truncated payload %r was accepted -- allowing a "
+                             "described destination weakened the defence" % truncated)
+        self.assertTrue(_acc._payload_runs_to_the_destination(
+            sentence, "the results are in the attachment"),
+            "the payload the sentence actually stated was refused")
+
+    def test_a_payload_with_no_stated_destination_does_not_get_one_invented(self):
+        """The #6119 pin, at the gate that was widened.
+
+        A stated payload is now enough to reach composition, but only WITH a
+        stated destination.  Without one, the only path in the sentence becomes
+        the destination by default and a file is overwritten by a report about
+        it -- the data-destruction class PR #6119 closed.  Measured unchanged:
+        these refuse, and the file survives byte-identical.
+        """
+        f = _fresh("banana\napple\ncherry\n")
+        before = (ROOT / f).read_text(encoding="utf-8")
+        # "Read" and "Show" legitimately succeed -- they run `cat` -- so the
+        # hazard is not that they are accepted, it is that a file gets CHANGED.
+        # Every one of these must leave the bytes alone; the two that state no
+        # command at all must also refuse.
+        for sentence in ("Check the file %s", "Verify the file %s",
+                         "Read the file %s", "Show the file %s"):
+            result = _solve(sentence % f)
+            self.assertEqual((ROOT / f).read_text(encoding="utf-8"), before,
+                             "%r changed a file it only mentioned" % sentence)
+        for sentence in ("Check the file %s", "Verify the file %s"):
+            result = _solve(sentence % f)
+            self.assertIsNot(result.get("pass"), True,
+                             "%r was accepted: %r" % (sentence, result.get("status")))
+            self.assertEqual((ROOT / f).read_text(encoding="utf-8"), before,
+                             "%r changed a file it only mentioned" % sentence)
+
     def test_the_two_commands_that_answer_with_a_status_are_both_reachable(self):
         """Both members of _ANSWER_IS_THE_EXIT_STATUS must be reachable from prose.
 
