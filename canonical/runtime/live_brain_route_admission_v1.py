@@ -1524,9 +1524,34 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         # file X" states no command line, so extract_argv is None and it keeps
         # failing closed.
         stated_a_command_line = composer_route.extract_argv(normalized) is not None
-        if stated_a_command_line or (
-                admission.get("typed_binding_refused") is True
-                and composer_route.extract_content(normalized) is not None):
+        # The symmetric case, measured.  A sentence can state BOTH a payload and
+        # the path it goes to, and still be refused for a reason that has
+        # nothing to do with the binder -- so this gate, which required
+        # typed_binding_refused, never fired and composition never ran:
+        #
+        #   "Write the text 'PROJECT BRAIN' to the target file X"
+        #       -> FAIL_CLOSED__ROUTE_ADMISSION_REJECTED, zero steps, no verdict
+        #
+        # while the same sentence phrased "to the file X" ran and was verified.
+        # The payload and the destination are both re-derived from the sentence
+        # here, exactly as the command line is, and both are then independently
+        # checked: _payload_runs_to_the_destination refuses a payload the
+        # sentence does not actually run to the destination, and the written
+        # bytes are compared against the sentence rather than the argument.  So
+        # a payload with a stated destination is as grounded as a stated command
+        # line, and refusing it fails a request the machine can do.
+        #
+        # A payload with NO stated destination is deliberately not enough --
+        # that is the #6119 shape, where the only path in the sentence becomes
+        # the destination by default and a file is overwritten by a report about
+        # it.  "Check the file X" states no payload at all, so it keeps failing
+        # closed for the reason it always has.
+        states_a_payload_and_its_destination = (
+            composer_route.extract_content(normalized) is not None
+            and composer_route.extract_content_destination(normalized) is not None)
+        if (stated_a_command_line or states_a_payload_and_its_destination
+                or (admission.get("typed_binding_refused") is True
+                    and composer_route.extract_content(normalized) is not None)):
             composed = _try_composed(task_id, goal, started)
             if composed is not None:
                 return _composed_holds_up(composed, normalized, future_artifacts)

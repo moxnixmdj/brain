@@ -359,7 +359,31 @@ def extract_paths(text: str) -> list[str]:
 # reported the result as independently verified.  So this was not a cosmetic
 # truncation: it produced a confident pass on work the request never asked for.
 _DEST_AHEAD = r"(?=[^\s]*/|\S+\.[A-Za-z0-9]{1,6}\b)"
-_DEST_WORDS = r"\s+(?:to|into|in|at)\s+(?:(?:the|a|an)\s+)?(?:file|path|folder|directory)?\s*"
+# A destination may be DESCRIBED, not only named.  Without this, "to the output
+# file X" captured the adjective as the destination and the path was never
+# bound:
+#
+#     "to the output file X"      -> destination "output"
+#     "to the target file X"      -> destination "target"
+#     "into the same file X"      -> destination "same"
+#
+# Measured: six of seven ordinary phrasings of a write request lost their
+# destination this way, and only the bare "to the file X" worked.
+#
+# This list is deliberately the same shape and the same words as
+# _BETWEEN_PAYLOAD_AND_DEST in raw_goal_trace_acceptance_v1.  The two are not
+# shared on purpose -- an inspector that asks the binder what it meant is not an
+# inspector -- but they answer the same question about the same sentence, so if
+# they drift a request is bound by one and refused by the other.  A test asserts
+# they agree across a table of phrasings; that test is the thing that keeps them
+# from drifting again.
+#
+# The truncation defence is untouched: _DEST_AHEAD still requires a path-like
+# token to begin the instant the description ends, and a truncated payload is
+# followed by the rest of the payload, which is prose and not a path.
+_DEST_MODIFIER = r"(?:(?:output|target|destination|same|given|stated|named|following|new|existing)\s+){0,2}"
+_DEST_WORDS = (r"\s+(?:to|into|in|at)\s+(?:(?:the|a|an)\s+)?" + _DEST_MODIFIER +
+               r"(?:file|path|folder|directory)?\s*")
 _CONTENT = [
     re.compile(r"\b(?:text|content|string|message|word|line)\s+(.+?)" + _DEST_WORDS + _DEST_AHEAD, re.I),
     re.compile(r"\bwrite\s+(.+?)" + _DEST_WORDS + _DEST_AHEAD, re.I),
