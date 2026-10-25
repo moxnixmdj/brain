@@ -60,10 +60,41 @@ class TestThePromiseThatCannotBeStatedIsStillRefused(unittest.TestCase):
             self.assertFalse(ok, "certified %r" % (argv,))
             self.assertEqual(reason, "COMMAND_RM_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE")
 
-    def test_two_operands_make_the_shape_unstateable(self):
-        ok, reason, _ev = accept._post_rm(["rm", "a.txt", "b.txt"], ROOT)
+    def test_a_flag_makes_the_shape_unstateable_however_many_operands_follow(self):
+        # What the old two-operand refusal was really about, kept and widened:
+        # a flag changes what `rm` does, and the promise this table can state
+        # does not cover it.  Two plain operands are stateable now -- a sentence
+        # may name a set -- so the pin is on the flag, not on the count.
+        base = _fresh("still")
+        gone = "%s/gone.txt" % base
+        for argv in (["rm", "-f", gone], ["rm", "-r", base],
+                     ["rm", "--", gone], ["rm", "-f", gone, "%s/other.txt" % base]):
+            ok, reason, _ev = accept._post_rm(argv, ROOT)
+            self.assertFalse(ok, argv)
+            self.assertEqual(reason, "COMMAND_RM_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", argv)
+
+    def test_every_operand_is_judged_not_just_the_first(self):
+        # The multi-operand shape is only honest if each operand is checked on
+        # its own: one survivor out of two is a removal that did not happen, and
+        # an outside path slipped into the third position must be caught even
+        # though the first two are inside the repository and gone.
+        base = _fresh("still")
+        first = "%s/first.txt" % base
+        second = "%s/second.txt" % base
+        (ROOT / first).write_text("x\n", encoding="utf-8")
+        (ROOT / second).write_text("y\n", encoding="utf-8")
+        (ROOT / first).unlink()
+        ok, reason, ev = accept._post_rm(["rm", first, second], ROOT)
         self.assertFalse(ok)
-        self.assertEqual(reason, "COMMAND_RM_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE")
+        self.assertEqual(reason, "COMMAND_RM_TARGET_STILL_PRESENT")
+        self.assertEqual(second, ev.get("survivor"))
+        (ROOT / second).unlink()
+        ok, reason, ev = accept._post_rm(["rm", first, second], ROOT)
+        self.assertTrue(ok, reason)
+        self.assertEqual(sorted([first, second]), sorted(ev["consumed_paths"]))
+        ok, reason, _ev = accept._post_rm(["rm", first, second, "/etc/passwd"], ROOT)
+        self.assertFalse(ok)
+        self.assertEqual(reason, "COMMAND_RM_PATH_OUTSIDE_REPOSITORY")
 
     def test_a_path_outside_the_repository_is_refused(self):
         ok, reason, _ev = accept._post_rm(["rm", "/etc/passwd"], ROOT)

@@ -1670,6 +1670,125 @@ class TestTheFallthroughIsScopedToWhatTheSentenceStates(unittest.TestCase):
         self.assertEqual(["rm", a], _cr._prose_argv("Delete the file %s" % a))
 
 
+    def _set_dir(self, names):
+        # A directory holding exactly `names`, as SCRATCH-relative paths.
+        d = "%s/ks" % SCRATCH
+        full = ROOT / d
+        for child in full.iterdir() if full.is_dir() else []:
+            child.unlink() if child.is_file() else None
+        full.mkdir(parents=True, exist_ok=True)
+        for n in names:
+            (full / n).write_text("apple\n", encoding="utf-8")
+        return d
+
+    def test_a_sentence_naming_a_set_of_files_deletes_exactly_that_set(self):
+        # "all the .log files in the directory D" states one path and a shape.
+        # The shape is expanded from the sentence's own words and the command
+        # runs on exactly those names -- and the directory itself survives, so
+        # the set was deleted and not its container.
+        from canonical.runtime import composer_route_v1 as _cr
+        _fresh()
+        d = self._set_dir(["one.txt", "two.log", "three.txt", "four.log"])
+        goal = "Delete all the .log files in the directory %s" % d
+        argv = _cr._prose_argv(goal)
+        self.assertEqual(sorted([d + "/four.log", d + "/two.log"]), sorted(argv[1:]))
+        self.assertTrue(_verified(_solve(goal)))
+        self.assertFalse((ROOT / d / "two.log").exists())
+        self.assertFalse((ROOT / d / "four.log").exists())
+        self.assertTrue((ROOT / d / "one.txt").exists())
+        self.assertTrue((ROOT / d / "three.txt").exists())
+        self.assertTrue((ROOT / d).is_dir(), "the container was deleted, not the set")
+
+    def test_the_ending_the_sentence_spelled_out_is_not_widened(self):
+        # ".log" names `*.log`.  A file called `notes_log` has no dot and is a
+        # different name, so widening the pattern would delete a file the
+        # sentence never described.
+        _fresh()
+        d = self._set_dir(["a.log", "notes_log", "b.txt"])
+        self.assertTrue(_verified(_solve("Delete all the .log files in the directory %s" % d)))
+        self.assertFalse((ROOT / d / "a.log").exists())
+        self.assertTrue((ROOT / d / "notes_log").exists(),
+                         "a file with no dot was deleted by a request for .log files")
+        self.assertTrue((ROOT / d / "b.txt").exists())
+
+    def test_a_set_operation_does_not_reach_into_subdirectories(self):
+        # The sentence named one directory.  Deleting from a directory it did
+        # not name would be work the sentence never asked for.
+        _fresh()
+        d = self._set_dir(["a.log"])
+        (ROOT / d / "sub").mkdir(exist_ok=True)
+        (ROOT / d / "sub" / "deep.log").write_text("x\n", encoding="utf-8")
+        self.assertTrue(_verified(_solve("Delete all the .log files in the directory %s" % d)))
+        self.assertFalse((ROOT / d / "a.log").exists())
+        self.assertTrue((ROOT / d / "sub" / "deep.log").exists(),
+                         "a subdirectory was searched by a request that named one level")
+
+    def test_a_sentence_asking_for_a_recursive_deletion_is_refused_not_half_done(self):
+        # The expansion is one level.  Running it on a sentence that said
+        # "recursively" would report a deeper deletion than the one performed,
+        # so the sentence gets no route instead.
+        from canonical.runtime import composer_route_v1 as _cr
+        _fresh()
+        d = self._set_dir(["a.log"])
+        self.assertIsNone(_cr._prose_argv(
+            "Delete all the .log files in the directory %s recursively" % d))
+        self.assertTrue((ROOT / d / "a.log").exists())
+
+    def test_a_deletion_of_a_set_is_refused_if_any_one_file_survives(self):
+        # The whole reason a multi-operand deletion is stateable: the promise
+        # covers every operand.  Four gone and one left is a deletion that did
+        # not happen, and flags are still refused as unstateable.
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _acc
+        _fresh()
+        d = self._set_dir(["gone1.log", "still_here.log"])
+        (ROOT / d / "gone1.log").unlink()
+        ok, reason, _ = _acc._post_rm(["rm", "%s/gone1.log" % d, "%s/still_here.log" % d], ROOT)
+        self.assertFalse(ok)
+        self.assertEqual("COMMAND_RM_TARGET_STILL_PRESENT", reason)
+        ok, reason, _ = _acc._post_rm(["rm", "%s/gone1.log" % d], ROOT)
+        self.assertTrue(ok, reason)
+        (ROOT / d / "still_here.log").unlink()
+        ok, reason, _ = _acc._post_rm(
+            ["rm", "%s/gone1.log" % d, "%s/still_here.log" % d], ROOT)
+        self.assertTrue(ok, reason)
+        _fresh()
+        d2 = self._set_dir(["f.log"])
+        ok, reason, _ = _acc._post_rm(["rm", "-f", "%s/f.log" % d2], ROOT)
+        self.assertFalse(ok)
+        self.assertEqual("COMMAND_RM_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", reason)
+
+    def test_a_set_with_nothing_in_it_gets_no_route_rather_than_a_no_op(self):
+        # An empty set cannot be handed to rm or wc.  Reporting a run that
+        # touched nothing as the work the sentence described would be a lie, so
+        # the sentence gets no route.
+        from canonical.runtime import composer_route_v1 as _cr
+        _fresh()
+        d = self._set_dir(["only.txt"])
+        self.assertIsNone(_cr._prose_argv("Delete all the .log files in the directory %s" % d))
+
+    def test_a_sentence_that_just_says_all_the_files_is_not_a_set_operation(self):
+        # The pin on the ordering.  "List all the files in the directory D"
+        # says "all the files" and names a directory, so a block keyed on those
+        # words alone steals it; it must fall through to `ls` untouched.
+        from canonical.runtime import composer_route_v1 as _cr
+        _fresh()
+        d = self._set_dir(["one.txt", "two.log"])
+        goal = "List all the files in the directory %s" % d
+        self.assertEqual(["ls", d], _cr._prose_argv(goal))
+        self.assertTrue(_verified(_solve(goal)))
+
+    def test_counting_lines_over_a_set_runs_on_the_named_files(self):
+        from canonical.runtime import composer_route_v1 as _cr
+        _fresh()
+        d = self._set_dir(["one.txt", "two.log", "three.txt"])
+        goal = "Count the lines in all the files in the directory %s" % d
+        argv = _cr._prose_argv(goal)
+        self.assertEqual("wc", argv[0])
+        self.assertEqual("-l", argv[1])
+        self.assertEqual(3, len(argv) - 2)
+        self.assertTrue(_verified(_solve(goal)))
+
+
 
 if __name__ == "__main__":
     unittest.main()
