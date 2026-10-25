@@ -24619,7 +24619,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6397,
+  "research_index_records": 6398,
   "routing_tokens": 1816,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24628,7 +24628,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0e3ebdab81b3c7fd63a712c543891d04459d20c29507ea8ae93180cbe4cea1ca"
+  "value": "b839143b5b30f17603af307e1f7d6f69804bf0a9d434f7733aee5fd3162d5e0e"
  },
  "engines": [
   {
@@ -189241,6 +189241,51 @@
    }
   },
   {
+   "action_id": "A_QUESTION_ASKED_THE_PLAINEST_WAY_GETS_THE_ANSWER_IT_MEANS_V1_20261025_V1",
+   "capability": false,
+   "date": "2026-10-25",
+   "id": "research:canonical/action_intents/A_QUESTION_ASKED_THE_PLAINEST_WAY_GETS_THE_ANSWER_IT_MEANS_V1_20261025_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_QUESTION_ASKED_THE_PLAINEST_WAY_GETS_THE_ANSWER_IT_MEANS_V1_20261025_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "31bea8b03c8b3baec58bb68f78532cf1d89ba2b669e885237256541d7547449e",
+   "status": "",
+   "terms": {
+    "accepted": 2,
+    "answer": 4,
+    "answered": 5,
+    "appear": 2,
+    "apple": 3,
+    "because": 5,
+    "census": 4,
+    "certified-wrong": 2,
+    "every": 3,
+    "file": 4,
+    "gets": 2,
+    "last": 2,
+    "line": 2,
+    "lines": 5,
+    "means": 2,
+    "measured": 4,
+    "ordinary": 2,
+    "pattern": 3,
+    "phrasing": 4,
+    "phrasings": 3,
+    "plainest": 3,
+    "question": 3,
+    "rather": 2,
+    "read": 2,
+    "refused": 2,
+    "reverse": 2,
+    "running": 2,
+    "second": 2,
+    "show": 2,
+    "six": 2,
+    "twenty-one": 4,
+    "whole": 3
+   }
+  },
+  {
    "action_id": "A_READING_DOES_NOT_WRITE_WHATEVER_THE_SCRIPT_AND_A_STATED_CASE_IS_NOT_DROPPED_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -208973,7 +209018,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "189a974ed2e86024c98cfaa4d13bf0338252179583b8b471d3cbc804a1bd52c0",
+   "sha256": "f3ff89628b3bee59d05f63996f1011677ef7ff1ba817c4067299b1f823cbd323",
    "summary": "Routing a sentence to a typed capability chain.",
    "symbol_count": 30,
    "symbols": [

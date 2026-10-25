@@ -837,7 +837,7 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # beginning and `head` is the command that means it.
     (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\b(?:first|beginning)\b",
      "head", _head_flags, 1),
-    (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\b(?:last|end)\b",
+    (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\b(?:last|final|end)\b",
      "tail", _tail_flags, 1),
     # "Put the lines of the file X in order" and "Arrange the lines of the file
     # X in order" both measured to bind nothing: the sentence states the RESULT
@@ -862,7 +862,8 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # from English and 19 were not.
     (r"\bunique\b|\b(?:duplicate|duplicates|repeated)\b[^\n]{0,20}?\blines?\b",
      "uniq", _no_flags, 1),
-    (r"\breverse\b[^\n]{0,40}?\blines?\b", "tac", _no_flags, 1),
+    (r"\breverse\b[^\n]{0,40}?\blines?\b|\blines?\b[^\n]{0,40}?\breverse\b",
+     "tac", _no_flags, 1),
     # "Add line numbers to the file X" measured to bind nothing: the noun and
     # the counting word are the other way round from "number the lines".
     (r"\bnumbers?\b[^\n]{0,40}?\blines?\b|\blines?\b[^\n]{0,20}?\bnumbers?\b",
@@ -903,7 +904,7 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # registry keywords were not touched, and verify still reports 33/33.
     (r"\bcmp\b|\bbyte[ -]for[ -]byte\b|\bbyte[ -]by[ -]byte\b|\bidentical bytes\b|\bthe same bytes\b",
      "cmp", _no_flags, 2),
-    (r"\bdiff\b|\bcompare\b|\bdifference\b|\bdiffers?\b", "diff", _no_flags, 2),
+    (r"\bdiff\b|\bcompare\b|\bdiffer\w*\b", "diff", _no_flags, 2),
     # `stat` is deliberately ABSENT, and it was measured
     # rather than assumed:
     #
@@ -1137,7 +1138,12 @@ def _quoted_values(sentence: str) -> list[str]:
 _NEGATED_LINE = re.compile(
     r"\b(?:do(?:es)?n't|do(?:es)? not|don't|without|excluding|except)\b"
     r"[^\n]{0,40}?\b(?:contain|containing|match|matching|include|including|have)\b"
-    r"|\bnot\b[^\n]{0,20}?\b(?:contain|match|include)\b")
+    r"|\bnot\b[^\n]{0,20}?\b(?:contain|match|include)\b"
+    # "the lines WITHOUT 'apple'" -- the same direct introduction, negated.
+    # Measured: it satisfied neither arm, because neither `without` nor the
+    # value was followed by a verb of containing, so the sentence fell through
+    # to `cat` and was certified with the whole file.
+    r"|\b(?:without|excluding|except)\b[^\n]{0,20}?['\"]")
 # Both word orders.  Measured: "Show the empty lines in the file X" matched and
 # "Show the lines in the file X that are empty" did not, so the second fell all
 # the way through to `cat` and was certified with the whole file as the answer to
@@ -1160,7 +1166,11 @@ _REMOVES_THE_LINES = re.compile(r"\b(?:remove|delete|drop|strip)\b")
 # role in the sentence rather than from its quotes.
 _STATES_CONTAINMENT = re.compile(
     r"\bcontain(?:s|ed|ing)?\b|\bmatch(?:es|ed|ing)?\b|\binclud\w*"
-    r"|\bhold(?:s|ing)?\b|\bhave\b|\bhas\b")
+    r"|\bhold(?:s|ing)?\b|\bhave\b|\bhas\b"
+    # "the lines WITH 'apple'" introduces the value directly, with no verb of
+    # containing at all.  Scoped to a word that runs straight into the quotation,
+    # so a "with" anywhere else in the sentence cannot claim the value.
+    r"|\bwith\b[^\n]{0,20}?['\"]")
 # A SECOND operation stated alongside the filter.  No single command performs
 # both halves, so a sentence that states one is refused rather than served with
 # the other half silently dropped -- which is the defect, not the fix.
@@ -1237,6 +1247,14 @@ def _prose_argv(sentence: str) -> list[str] | None:
     paths = extract_paths(sentence)
     if not paths:
         return None
+    # The table is matched against the sentence with every path masked out.  A
+    # path is a name, not prose, and leaving it in measured two ways: a fixture
+    # called `blank.txt` satisfied the blank-line pattern by its own name, and
+    # "the lines of the file <path> in reverse order" put forty-plus characters
+    # between two words the pattern expected to be neighbours.  Masking first is
+    # the same discipline `_prose_ordinal` already applies to numbers.
+    for _p in paths:
+        text = text.replace(str(_p).lower(), " ")
     for pattern, program, dest_flag in _PROSE_COMMAND_DEST_FLAG:
         if program not in known:
             continue
@@ -1493,7 +1511,8 @@ def _prose_argv(sentence: str) -> list[str] | None:
     # the recursive search rule owns that sentence; taking it here bound
     # `grep -n` over a directory, which is not a search of the tree at all.
     if (len(_asked) == 1 and "grep" in known and not _DIRECTORY_REQUEST.search(text)
-            and re.search(r"\bcontain(?:s|ed|ing)?\b|\bmatch(?:es|ed|ing)?\b", text)):
+            and re.search(r"\bcontain(?:s|ed|ing)?\b|\bmatch(?:es|ed|ing)?\b"
+                          r"|\bappear(?:s|ed|ing)?\b", text)):
         _masked = re.sub(re.escape(_asked[0]), " ", sentence, flags=re.IGNORECASE)
         _operands = extract_paths(_masked)
         if len(_operands) == 1:
@@ -1652,7 +1671,15 @@ def _prose_argv(sentence: str) -> list[str] | None:
             # the sentence to the next loose one, so the loose one is scoped too.
             # A sentence that really asks for a listing says so.
             return None
-        argv = [program, *flags(_prose_count(text)), *paths]
+        _count = _prose_count(text)
+        if (program in ("head", "tail") and _COUNT_RE.search(text) is None
+                and re.search(r"\bline\b", text) and not re.search(r"\blines\b", text)):
+            # "Show me the last LINE" names one line.  The default of two is
+            # right for "show me the last lines" and wrong for the singular, and
+            # measured as answering the last line of a four-line file with its
+            # last two.  Only when no number was stated: a stated count stands.
+            _count = 1
+        argv = [program, *flags(_count), *paths]
         return [str(part) for part in argv if str(part)]
     return None
 
