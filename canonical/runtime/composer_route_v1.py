@@ -1138,7 +1138,35 @@ _NEGATED_LINE = re.compile(
     r"\b(?:do(?:es)?n't|do(?:es)? not|don't|without|excluding|except)\b"
     r"[^\n]{0,40}?\b(?:contain|containing|match|matching|include|including|have)\b"
     r"|\bnot\b[^\n]{0,20}?\b(?:contain|match|include)\b")
-_BLANK_LINE = re.compile(r"\b(?:empty|blank)\b[^\n]{0,20}?\blines?\b")
+# Both word orders.  Measured: "Show the empty lines in the file X" matched and
+# "Show the lines in the file X that are empty" did not, so the second fell all
+# the way through to `cat` and was certified with the whole file as the answer to
+# a question about one line of it.
+_BLANK_LINE = re.compile(
+    r"\b(?:empty|blank)\b[^\n]{0,40}?\blines?\b"
+    r"|\blines?\b[^\n]{0,40}?\b(?:empty|blank)\b")
+# The verbs that ask for lines to be TAKEN OUT, as against shown.  `-v` inverts,
+# so it belongs to these and not to the others: "remove the empty lines" keeps
+# the ones that are not empty, while "show the empty lines" asks for the empty
+# ones.  Hard-coding `-v` measured as answering the second with the first.
+_REMOVES_THE_LINES = re.compile(r"\b(?:remove|delete|drop|strip)\b")
+# The words that make a quoted value a PATTERN rather than a PAYLOAD.  Shape
+# cannot tell them apart -- both are one quoted string -- and neither can the
+# word "line", because "Write the line 'PROJECT BRAIN' to the file X" satisfies
+# `_FILTER_LINE` and quotes exactly one value.  Measured: taking that sentence
+# here bound `grep` over a file the sentence was asking to be WRITTEN, and the
+# promised artifact was then correctly reported missing.  The introducer is the
+# evidence, and this is the same reason `_quoted_value` reads a payload from its
+# role in the sentence rather than from its quotes.
+_STATES_CONTAINMENT = re.compile(
+    r"\bcontain(?:s|ed|ing)?\b|\bmatch(?:es|ed|ing)?\b|\binclud\w*"
+    r"|\bhold(?:s|ing)?\b|\bhave\b|\bhas\b")
+# A SECOND operation stated alongside the filter.  No single command performs
+# both halves, so a sentence that states one is refused rather than served with
+# the other half silently dropped -- which is the defect, not the fix.
+_ANOTHER_OPERATION = re.compile(
+    r"\bsort(?:s|ed|ing)?\b|\bunique\b|\bduplicat\w*|\bupper[\s-]*case\b|\buppercase\b"
+    r"|\blower[\s-]*case\b|\blowercase\b|\brevers\w*|\bnumbered\b")
 _FILTER_LINE = re.compile(
     r"\b(?:remove|delete|drop|strip|write|show|list|print)\b[^\n]{0,40}?\blines?\b")
 
@@ -1256,19 +1284,84 @@ def _prose_argv(sentence: str) -> list[str] | None:
         return argv
     if _FILTER_LINE.search(text) and "grep" in known:
         values = _quoted_values(sentence)
-        blank = bool(_BLANK_LINE.search(text))
-        if blank or (len(values) == 1 and _NEGATED_LINE.search(text)):
-            # `^$` when the sentence said the lines are empty, otherwise the one
-            # value it quoted.  A sentence that quoted nothing and did not say
-            # "empty" states no pattern, and an invented pattern is executed.
-            needle = "^$" if blank else values[0]
+        # The blank test runs over the sentence with every path masked out, the
+        # way `_prose_ordinal` reads its number from the prose alone.  Measured
+        # without this: a file literally named `blank.txt` satisfied the pattern
+        # by its own NAME, and the gap "lines in the file <path> that are empty"
+        # is longer than the pattern allowed once the path sat in the middle.
+        _masked_for_blank = text
+        for _p in extract_paths(sentence):
+            _masked_for_blank = _masked_for_blank.replace(str(_p).lower(), " ")
+        blank = bool(_BLANK_LINE.search(_masked_for_blank))
+        _unspanned = _masked_for_blank
+        for _span in _QUOTED_SPAN.finditer(str(sentence)):
+            _unspanned = _unspanned.replace(str(_span.group(0)).lower(), " ")
+        if "'" in _unspanned or '"' in _unspanned:
+            # A quote mark the sentence opened and never closed, so what it quoted
+            # is not recoverable: "contain 'a'b'" reads as the value `a` followed
+            # by a stray fragment.  Measured, taking the recoverable part searched
+            # for 'a' -- a guess at a value the sentence never delimited, and one
+            # that matches three of four lines.  Refuse instead.
+            #
+            # Counting quote marks would be wrong here: `'a"b'` is one
+            # well-formed value that happens to hold a double quote, and it has
+            # three quote marks in it.  What matters is whether any quote is left
+            # over once the spans the sentence really delimited are removed.
+            return None
+        if blank:
+            # `^$` is the pattern the sentence itself described -- a regular
+            # expression, so it goes to `grep` and not to the literal matcher.
+            needle = "^$"
+            matcher = "grep"
+            invert = bool(_REMOVES_THE_LINES.search(text))
+        elif len(values) == 1 and _NEGATED_LINE.search(text):
+            needle = values[0]
+            matcher = "fgrep"
+            invert = True
+        elif len(values) == 1 and _STATES_CONTAINMENT.search(text):
+            # The POSITIVE half of the same sentence, which was never written:
+            # "the lines in X that CONTAIN 'apple'".  `_FILTER_LINE` matched it,
+            # one value was quoted, `_NEGATED_LINE` did not fire -- and then the
+            # branch ended.  The sentence fell all the way through to `cat` and
+            # was certified with the WHOLE FILE as the answer to a question about
+            # two of its lines.  Measured: nine such sentences, including one
+            # quoting 'apple' itself, every one answered with the whole file.
+            # Plain `grep` means it, and grep's exit status is already declared an
+            # answer, so a value nothing matches is reported as "nothing matched"
+            # rather than refused -- the same distinction the negated form relies
+            # on, and pinned from both sides by a test.
+            if _ANOTHER_OPERATION.search(text):
+                # The sentence also states a second operation -- "the SORTED lines
+                # that contain 'apple'" -- and no single command does both.
+                # Serving the filter alone would drop the sort and certify it,
+                # which is the defect; so this refuses instead of half-serving.
+                return None
+            # A quoted value is the LITERAL text the sentence delimited, not a
+            # regular expression: "contain" is literal language, and this module
+            # already sends literal and exact text to `fgrep` for exactly that
+            # reason.  Measured with `grep`: "lines that contain 'a*b'" answered
+            # 'banana', because `a*b` is a regex that matches it, when no line
+            # holds those three characters.
+            needle = values[0]
+            matcher = "fgrep"
+            invert = False
+        else:
+            # A sentence that quoted nothing and did not say "empty" states no
+            # pattern, and an invented pattern is executed.
+            needle = None
+            matcher = "grep"
+            invert = False
+        if needle is not None:
+            # The QUOTED SPAN is masked, not the bare value: a blind replace eats
+            # the same characters wherever they occur, including inside a path.
             operand_paths = extract_paths(
-                str(sentence).replace(needle, " ") if not blank else str(sentence))
+                _mask_a_quoted_value(sentence, needle) if not blank else str(sentence))
             if len(operand_paths) == 2 and _states_a_destination_for_the_result(
                     sentence, operand_paths[-1]):
                 operand_paths = operand_paths[:1]
             if len(operand_paths) == 1:
-                return ["grep", "-v", str(needle), str(operand_paths[0])]
+                return [matcher, *(["-v"] if invert else []), str(needle),
+                        str(operand_paths[0])]
             return None
     # A sentence that names a SET of files by pattern -- "all the .log files in
     # the directory D" -- states one path and a shape.  The shape is expanded
