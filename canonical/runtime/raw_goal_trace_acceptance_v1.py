@@ -825,6 +825,11 @@ _READ_ONLY_COMMANDS = frozenset({
     "cat", "head", "tail", "wc", "nl", "sort", "grep", "egrep", "fgrep", "ls",
     "uniq", "tr", "cut", "sha256sum", "md5sum", "stat", "file", "diff", "cmp",
     "od", "tac", "basename", "dirname", "realpath",
+    # `find` only ever reads the tree and prints what is there, so the inspector
+    # can re-run it and compare stdout exactly as it does for ls.  `du` reads a
+    # tree too, but no sentence reaches it, and a command the acceptance layer is
+    # willing to judge that nothing can ask for is dead weight in this table.
+    "find",
     # `sed` WITHOUT -i reads a file and writes nothing: the transformed text
     # comes back on stdout.  That makes it a reader as far as this table is
     # concerned, and the inspector re-runs it and compares stdout, stderr and
@@ -863,12 +868,48 @@ _SIDE_EFFECTING_FLAGS_BY_PROGRAM = {"sed": ("-i", "--in-place")}
 # is missing, or whose bytes differ from the source, is refused.  Commands whose
 # promise cannot be stated this precisely are absent and stay refused.
 def _post_cp(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
-    if len(tokens) != 3:
+    # `cp -r A B` carries a flag, so the shape is no longer three tokens.  The
+    # operands are the tokens that are not the recursive flag, and a tree promise
+    # is only stateable when the flag is actually there: without it `cp` on a
+    # directory is an error, and claiming a copied tree would be a lie.
+    _recursive = ("-r", "-R", "-a", "--recursive")
+    _flags = [t for t in tokens[1:] if t in _recursive]
+    operands = [t for t in tokens[1:] if t not in _recursive]
+    if len(operands) != 2 or len(_flags) + len(operands) != len(tokens) - 1:
         return False, "COMMAND_CP_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", {"argv_tokens": len(tokens)}
-    src = _inside(root, tokens[1])
-    dst = _inside(root, tokens[2])
+    src = _inside(root, operands[0])
+    dst = _inside(root, operands[1])
     if src is None or dst is None:
         return False, "COMMAND_CP_PATH_OUTSIDE_REPOSITORY", {}
+    if src.is_dir() or dst.is_dir():
+        # `cp -r A B` copies a tree, and a promise about a tree is just as
+        # stateable as a promise about a file: every path under the source must
+        # exist under the destination with the same bytes, and the destination
+        # must hold nothing the source did not have.  Both directions matter --
+        # a copy that silently dropped a file is the failure this exists to
+        # catch, and one that added a file is a copy of something else.
+        if not _flags:
+            return False, "COMMAND_CP_TREE_PROMISE_NEEDS_A_RECURSIVE_FLAG", {}
+        if not src.is_dir():
+            return False, "COMMAND_CP_SOURCE_ABSENT_FROM_DISK", {}
+        if not dst.is_dir():
+            return False, "COMMAND_CP_DESTINATION_ABSENT_FROM_DISK", {}
+        rel_src = sorted(str(p.relative_to(src)) for p in src.rglob("*") if p.is_file())
+        rel_dst = sorted(str(p.relative_to(dst)) for p in dst.rglob("*") if p.is_file())
+        if rel_src != rel_dst:
+            return False, "COMMAND_CP_TREE_DIFFERS_FROM_SOURCE", {
+                "source_files": len(rel_src), "destination_files": len(rel_dst),
+                "missing": rel_src[:4], "unexpected": rel_dst[:4]}
+        total = 0
+        for rel in rel_src:
+            a = (src / rel).read_bytes(); b = (dst / rel).read_bytes()
+            if _digest(a) != _digest(b):
+                return False, "COMMAND_CP_DESTINATION_DIFFERS_FROM_SOURCE", {
+                    "path": rel, "source_bytes": len(a), "destination_bytes": len(b)}
+            total += len(b)
+        return True, "", {"postcondition_checked": "cp", "bytes_compared": total,
+                          "files_compared": len(rel_src),
+                          "destination_matches_source": True}
     if not src.is_file():
         return False, "COMMAND_CP_SOURCE_ABSENT_FROM_DISK", {}
     if not dst.is_file():

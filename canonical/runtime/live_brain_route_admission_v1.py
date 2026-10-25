@@ -153,6 +153,27 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     entry = registry.get(selected)
     if entry is None:
         return {"schema": SCHEMA, "admitted": False, "rule": "SELECTED_CAPABILITY_NOT_ADMISSIBLE", "selected_capability": selected}
+    # A sentence that states a settled command line states a COMMAND, and a
+    # capability that cannot run a command line cannot answer it -- however many
+    # of the sentence's words its keywords happen to contain.  The retrieval
+    # layer already applies this rule to the candidates IT ranks, and measured,
+    # that was not enough: for "Search the files in the directory X for the exact
+    # text 'apple'" the compiler selected
+    # evidence.claim_relation.generic_units.stdlib, the retrieval layer refused
+    # it, and this function -- which re-judges the compiler's own pick -- admitted
+    # it anyway.  It then ran and died, while composer_route.route() had already
+    # returned shell.command.run with the exact argv (fgrep -r apple X).
+    #
+    # extract_argv returns one settled argv or refuses on ambiguity, and the
+    # acceptance layer re-derives it, so this is a fact about the sentence rather
+    # than a preference about capabilities.
+    if composer_route.extract_argv(goal) is not None:
+        _slots = {str(k or "").lower() for k in
+                  ((entry.get("action_template") or {}).get("args") or {})}
+        if _slots and "argv" not in _slots:
+            return {"schema": SCHEMA, "admitted": False,
+                    "rule": "NO_COMMAND_SLOT_FOR_THE_STATED_COMMAND",
+                    "compiler_mode": mode, "selected_capability": selected}
     score, specificity, evidence = goal_compiler._score(goal, selected, entry)
     if score == 0 and evidence.get("execution_surface_rejection"):
         # F18, re-verified here exactly like F15 and the typed rule are: when the only
