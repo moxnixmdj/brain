@@ -938,14 +938,22 @@ def _post_mv(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
 
 
 def _post_mkdir(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
-    if len(tokens) != 2:
+    # `mkdir A B` is not a guess about anything: the sentence named both
+    # directories, and the promise generalises exactly -- every one of them
+    # exists.  This is deliberately NOT extended to `rm`, where a path the
+    # sentence mentioned in passing would be deleted, and not to flags or globs,
+    # where the operand set is not stated at all.
+    targets = tokens[1:]
+    if not targets:
         return False, "COMMAND_MKDIR_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", {"argv_tokens": len(tokens)}
-    target = _inside(root, tokens[1])
-    if target is None:
-        return False, "COMMAND_MKDIR_PATH_OUTSIDE_REPOSITORY", {}
-    if not target.is_dir():
-        return False, "COMMAND_MKDIR_DIRECTORY_ABSENT_FROM_DISK", {}
-    return True, "", {"postcondition_checked": "mkdir", "directory_present": True}
+    for raw in targets:
+        target = _inside(root, raw)
+        if target is None:
+            return False, "COMMAND_MKDIR_PATH_OUTSIDE_REPOSITORY", {"path": raw}
+        if not target.is_dir():
+            return False, "COMMAND_MKDIR_DIRECTORY_ABSENT_FROM_DISK", {"path": raw}
+    return True, "", {"postcondition_checked": "mkdir", "directory_present": True,
+                      "directories_checked": len(targets)}
 
 
 def _post_touch(tokens: list[str], root: Path) -> tuple[bool, str, dict]:

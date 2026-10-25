@@ -671,8 +671,21 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
      r"(?![^\n]{0,40}?\b(?:duplicate|repeated|unique)\b[^\n]{0,20}?\blines?\b)",
      "rm", _no_flags, 1),
     (r"\b(?:create|make)\b[^.\n]{0,40}?\b(?:directory|folder)\b", "mkdir",
-     _no_flags, 1),
+     _no_flags, -1),
     (r"\b(?:create|make|touch)\b[^.\n]{0,40}?\bempty file\b", "touch", _no_flags, 1),
+    # Case conversion needs no stdin, and that is the whole reason it is here:
+    # `tr` reads standard input, which the adapter never passes, so "convert this
+    # file to upper case" looked blocked behind that wall.  It is not blocked --
+    # `sed 's/.*/\U&/'` reads the FILE and prints the converted text, so it is a
+    # reader like cat, the inspector re-runs it and compares stdout, and the
+    # destination is written by the mechanism that already existed.  In place it
+    # is also already permitted, because sed is a named transform.
+    #
+    # The script is fixed by this rule rather than taken from the sentence, so
+    # there is no value to escape and no way for the sentence to change what the
+    # command means.
+    (r"\bupper[\s-]*case\b|\buppercase\b", "sed", lambda n: ["-e", "s/.*/\\U&/"], 1),
+    (r"\blower[\s-]*case\b|\blowercase\b", "sed", lambda n: ["-e", "s/.*/\\L&/"], 1),
     # The three things `wc` counts, each stated by its own noun.  Order matters
     # only in that all three are narrower than the general read rule below.
     # The unit `wc` counts is named by the sentence, and English puts the noun
@@ -1097,6 +1110,14 @@ def _prose_argv(sentence: str) -> list[str] | None:
         if not re.search(pattern, text):
             continue
         operands = paths
+        if arity < 0:
+            # A negative arity means the program takes as many operands as the
+            # sentence names, and every one of them has to be stated.  Only
+            # `mkdir` uses it: creating a directory the sentence named is
+            # harmless, while the same freedom on `rm` would delete a path the
+            # sentence happened to mention.
+            if not operands:
+                return None
         # A read-only command can be asked to put its result somewhere: "write
         # the unique lines of A to the file B", "join A and B into C".  The
         # sentence then names one more path than the program takes as operands,
@@ -1112,10 +1133,11 @@ def _prose_argv(sentence: str) -> list[str] | None:
         if (len(paths) == arity + 1
                 and _states_a_destination_for_the_result(sentence, paths[-1])):
             operands = paths[:arity]
-        if len(operands) != arity:
-            # The sentence did not state enough operands for the program it
-            # asked for.  Refuse; do not repeat a path to make the numbers fit.
-            return None
+        if arity >= 0:
+            if len(operands) != arity:
+                # The sentence did not state enough operands for the program it
+                # asked for.  Refuse; do not repeat a path to make the numbers fit.
+                return None
         paths = operands
         if program == "cut":
             column = _prose_ordinal(sentence)
