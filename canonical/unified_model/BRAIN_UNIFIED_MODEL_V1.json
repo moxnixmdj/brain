@@ -24610,7 +24610,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6828801f98b68eca480f647751d203e846697ce189065ff65026a5e1c3b51ad2"
+  "value": "6b1b2cbce1c9753e1de7adbc8e8d4e621f5fd1e2acee6aab8a0d55bb69695c67"
  },
  "engines": [
   {
@@ -192129,12 +192129,12 @@
   {
    "action_id": "THE_EVERYDAY_COMMANDS_ARE_PINNED_BY_A_SUITE_NOT_A_PROBE_V1_20261024_V1",
    "capability": false,
-   "date": "2026-10-24",
+   "date": "2026-10-25",
    "id": "research:canonical/action_intents/THE_EVERYDAY_COMMANDS_ARE_PINNED_BY_A_SUITE_NOT_A_PROBE_V1_20261024_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_EVERYDAY_COMMANDS_ARE_PINNED_BY_A_SUITE_NOT_A_PROBE_V1_20261024_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "0de75444a8206f9dbd7d16a93e949137069d1f0b041ac125d6c5f4b858ff2f73",
+   "sha256": "48a452f1c5ec9904776847f3c3d672ae0c75ffc7e783c4048d480fec14c0a5b7",
    "status": "",
    "terms": {
     "14": 1,

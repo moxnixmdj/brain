@@ -41,7 +41,7 @@
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "causal_blocker": "The fourteen everyday commands were measured by an ad-hoc probe that lived in no test suite, so the measurement could change without anything failing. It did: the probe's sentences were silently changed from 'Run the shell command cp <a> <b>' to 'Copy the file <a> to <b>' -- a different and much harder input class that has never been supported -- and the result read as a collapse from fourteen working commands to one. That belief was acted on: PR #6136 was blamed for a regression it did not cause, and `git revert -m 1` was run against a merge commit, rewriting 14,797 files before it was caught and reset. Nothing had regressed; the instrument had.",
-  "date": "2026-10-24",
+  "date": "2026-10-25",
   "expected_parent_change": "A stated tee reaches exact semantic acceptance, taking the everyday set from 13 of 14 to 14 of 14 with measured false passes still at zero -- every ordinary command the system accepts is now independently verified",
   "expected_parent_frontier_change": "The set of commands judged by their effect rather than by repetition is complete for the everyday surface, and the promise each one makes is written down at the strength the command actually guarantees rather than at the strength that happens to be easy to check",
   "explicit_user_authorization": "Owner instruction this session 2026-10-21, verbatim: use all the capability in the Brain that you are supposed to use, plus all the data that you are supposed to use, plus thinking from the deepest layer from first principles, and the plan must make the goal real now, not fake, focus on hardcore software engineering. Owner instruction, real now not fake: the promise is claimed at the strength tee actually guarantees and not one step further, and the bytes are tied to the command by the producer's own digest rather than assumed. Owner standing instruction repeated six times: the perfect solution already exists in the brain, so _post_tee joins a table that already judged five commands by their effect and needs no new mechanism. Owner instruction that all tests must be extremely hard and only truthful: seven of the nine new tests fail on baseline and every accepting row is paired with the nearest world in which it must fail. No external model, zero spend, fail closed, no protected path touched.",
@@ -827,7 +827,7 @@
           "why_not_selected_or_selected": "SELECTED: separate the two acts. Refusing keeps the one-word rule. Taking over a route now requires the caller's WHOLE name, in order, in PROSE -- repository paths and identifier tokens are stripped first, a trailing version token is optional because prose drops it, and among several names stated the MOST SPECIFIC one wins. Measured in three steps over the same 13 path-style receipt-backed targets: 6 of 13 before, 10 of 13 once the whole name was required (the 3 remaining lost to a SIBLING, because 'bytes characteristic active query task generator v10' also states the whole of bytes_active_query_task_generator_v1 with one extra word in the middle), and 13 of 13 once specificity decides. The ordinary sentences that caused the regression now name ZERO receipt projections, and the 4 core failures are gone: test_live_brain_route_admission_v1 and test_capability_naming_rule_v1 are 42 passed. The end-to-end family moved with it: RECEIPT_PROSE_EXECUTION 12 instances went 7 of 12 (0.5833) to 12 of 12 (1.0), measured with the harness itself. Benchmark unchanged at 23/23 compiled and 22/23 selected; 213 unittest OK; pytest suites over the live path 117 passed with the same 6 pre-existing failures (2 capability DAG, 3 missing openpyxl/docx, 1 the deliberate no-write-authority boundary, which source_write_authority=False is hard-coded and enforced against in five separate guard modules). The wave 7 suite now asserts 13 of 13 and an empty residual, with the three-step history kept in the file; 3 of its 10 tests go red when the change is reverted."
         }
       ],
-      "checked_at_utc": "2026-10-23T22:43:50Z",
+      "checked_at_utc": "2026-10-25T04:24:40Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -904,10 +904,10 @@
         "A_COMMAND_THAT_CANNOT_BE_RE_RUN_IS_CHECKED_BY_WHAT_IT_LEFT_V1_20261024_V1"
       ],
       "selected_route": "A_COMMAND_THAT_CANNOT_BE_RE_RUN_IS_CHECKED_BY_WHAT_IT_LEFT_V1_20261024_V1",
-      "selected_route_checked_at_utc": "2026-10-24T17:20:00Z",
+      "selected_route_checked_at_utc": "2026-10-25T04:24:40Z",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-10-24T19:44:46Z",
+        "checked_at_utc": "2026-10-25T04:24:40Z",
         "execution_dependencies": [
           {
             "dependency": "python3 3.11.2",
