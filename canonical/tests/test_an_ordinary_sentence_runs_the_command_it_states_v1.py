@@ -324,6 +324,84 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
         self.assertEqual(sorted(out.splitlines()), ["cherry plum", "fig grape"],
                          "the alternation did not match both lines: %r" % out)
 
+    def test_an_ordinary_word_that_draws_a_tie_does_not_cost_the_command(self):
+        """Three phrasings of one request must not differ by a routing accident.
+
+        Measured: "Show the files in the directory <d>" ranked shell.command.run
+        and source.candidates.enumerate.stdlib at 4 each on the word "files", so
+        admission fail-closed R3_WEAK_EVIDENCE with typed_binding_refused unset
+        and the composition gate never fired -- while "List the directory <d>"
+        and "Show the contents of the directory <d>", the same command over the
+        same operand, both ran and were exact-verified.  One ordinary word was
+        the whole difference.
+
+        A tie between CAPABILITIES says nothing about the COMMAND, and the
+        command is what would be executed: extract_argv refuses on ambiguity by
+        construction, so a non-None result is one settled argv.
+        """
+        same = [_argv("List the directory %s" % (SCRATCH + "/listing")),
+                _argv("Show the files in the directory %s" % (SCRATCH + "/listing")),
+                _argv("Show the contents of the directory %s" % (SCRATCH + "/listing"))]
+        self.assertEqual(same[0], same[1],
+                         "the three phrasings do not even state the same command: %r" % same)
+        d = SCRATCH + "/listing"
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "one.txt").write_text("x\n", encoding="utf-8")
+        (ROOT / d / "two.txt").write_text("y\n", encoding="utf-8")
+        for sentence in ("List the directory %s", "Show the files in the directory %s",
+                         "Show the contents of the directory %s"):
+            result = _solve(sentence % d)
+            self.assertTrue(_verified(result),
+                            "%r was refused while its synonyms ran -- a tie "
+                            "between capabilities cost the command: %r"
+                            % (sentence, result.get("status")))
+            steps = (result.get("composer_execution") or {}).get("steps") or []
+            out = str((steps[0].get("result") or {}).get("stdout") or "")
+            self.assertEqual(sorted(out.splitlines()), ["one.txt", "two.txt"],
+                             "%r listed the wrong entries: %r" % (sentence, out))
+
+    def test_a_sentence_that_states_no_command_line_still_fails_closed(self):
+        """The pin on the widened gate: this is the #6119 data-destruction class.
+
+        The composition gate was widened so that a stated command line is served
+        even when the single-capability route was refused for ambiguity.  The
+        widening is safe for exactly one reason -- extract_argv is None unless
+        the sentence states a command -- so a sentence that states nothing keeps
+        failing closed.  Measured before this change and required to be
+        unchanged after it: the file must survive untouched.
+        """
+        f = _fresh("banana\napple\ncherry\n")
+        before = (ROOT / f).read_text(encoding="utf-8")
+        for sentence in ("Check the file %s", "Verify the file %s"):
+            result = _solve(sentence % f)
+            self.assertIsNot(result.get("pass"), True,
+                             "%r was accepted, which is how a file gets "
+                             "overwritten by a report about it: %r"
+                             % (sentence, result.get("status")))
+            self.assertEqual((ROOT / f).read_text(encoding="utf-8"), before,
+                             "%r changed a file it only mentioned" % sentence)
+
+    def test_the_synonyms_that_were_measured_to_bind_nothing_now_bind_their_command(self):
+        """Each row here is a phrasing measured to fail, not one invented in advance.
+
+        A hand-written table of patterns refuses every phrasing nobody thought
+        to write down.  These four were found by running ordinary sentences
+        against the table and keeping only the ones that actually broke.
+        """
+        f = SCRATCH + "/a1.txt"
+        for sentence, expected in (
+            ("Duplicate the file %s as %s" % (f, SCRATCH + "/b2.txt"),
+             ["cp", f, SCRATCH + "/b2.txt"]),
+            ("How many lines are in the file %s" % f, ["wc", "-l", f]),
+            ("How many words are in the file %s" % f, ["wc", "-w", f]),
+            # head and tail default to 2 lines when the sentence states no
+            # count -- the existing contract, asserted here rather than assumed.
+            ("Show me the beginning of the file %s" % f, ["head", "-n", "2", f]),
+            ("Show me the end of the file %s" % f, ["tail", "-n", "2", f]),
+        ):
+            self.assertEqual(_argv(sentence), expected,
+                             "%r bound %r" % (sentence, _argv(sentence)))
+
     def test_the_two_commands_that_answer_with_a_status_are_both_reachable(self):
         """Both members of _ANSWER_IS_THE_EXIT_STATUS must be reachable from prose.
 
