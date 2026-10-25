@@ -2563,6 +2563,118 @@ class TestAStatedOperationIsHonouredOrRefused(unittest.TestCase):
         self.assertEqual("", self._answer(result))
 
 
+class TestAReadingDoesNotWriteAndAStatedTransformIsNotDropped(unittest.TestCase):
+    """Two halves of one distinction: what the sentence ASKED FOR.
+
+    A rewriting sed script was treated as sufficient licence to write its output
+    back over the file it read.  It is not: "Show the file X in upper case" and
+    "Convert the file X to upper case" bind the SAME script, and only the second
+    asked for X to change.  Measured, the first turned 'apple\nbanana\n' into
+    'APPLE\nBANANA\n' on disk and was certified as an exact semantic answer.
+
+    And the case a sentence asked for was silently dropped when it also named a
+    line, because no rule composed the two.  sed composes an address with a
+    command inside one script, so no pipeline was ever needed -- the reason
+    recorded for this being impossible was wrong.
+    """
+
+    def _answer(self, result):
+        import json as _json, re as _re
+        text = _json.dumps(result, default=str)
+        m = _re.search(r'"stdout"\s*:\s*"((?:[^"\\]|\\.)*)"', text)
+        return m.group(1).encode().decode("unicode_escape") if m else None
+
+    TEXT = "apple\nbanana\napple pie\ncherry\n"
+
+    def test_a_request_to_be_shown_a_file_in_upper_case_does_not_change_it(self):
+        # The reason this class exists.  Measured before the fix: the file on
+        # disk went from 'apple\nbanana\n...' to 'APPLE\nBANANA\n...' on a
+        # request to be SHOWN something, and the run was certified.  A read that
+        # destroys what it read is worse than a refusal.
+        a = _fresh(self.TEXT)
+        result = _solve("Show the file %s in upper case" % a)
+        self.assertTrue(_verified(result))
+        self.assertEqual("APPLE\nBANANA\nAPPLE PIE\nCHERRY\n", self._answer(result),
+                         "the upper-cased text is the answer, and belongs on stdout")
+        self.assertEqual(self.TEXT, (ROOT / a).read_text(encoding="utf-8"),
+                         "a request to be shown something rewrote the file")
+
+    def test_a_conversion_still_changes_the_file_it_was_asked_to_change(self):
+        # The other half, pinned in the same place so the distinction cannot be
+        # collapsed in either direction: an implementation that never wrote back
+        # would pass the test above and fail this one.
+        a = _fresh(self.TEXT)
+        result = _solve("Convert the file %s to upper case" % a)
+        self.assertTrue(_verified(result))
+        self.assertEqual("APPLE\nBANANA\nAPPLE PIE\nCHERRY\n",
+                         (ROOT / a).read_text(encoding="utf-8"))
+
+    def test_the_same_script_is_a_read_or_a_write_by_the_verb_alone(self):
+        # Both sentences bind the same rewriting script, so the script cannot be
+        # what tells them apart.  Only the verb can, and this asserts that the
+        # two outcomes really do differ.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh(self.TEXT)
+        show = _cr._prose_argv("Show the file %s in upper case" % a)
+        convert = _cr._prose_argv("Convert the file %s to upper case" % a)
+        self.assertEqual(show, convert, "expected both to bind the same script")
+        one = _solve("Show the file %s in upper case" % a)
+        self.assertEqual(self.TEXT, (ROOT / a).read_text(encoding="utf-8"))
+        _solve("Convert the file %s to upper case" % a)
+        self.assertNotEqual(self.TEXT, (ROOT / a).read_text(encoding="utf-8"))
+        self.assertTrue(_verified(one))
+
+    def test_a_line_asked_for_in_upper_case_is_that_line_in_upper_case(self):
+        # sed composes the address with the transform in one script, so this is a
+        # single command.  Measured before: it bound `sed -n 3p` and answered
+        # 'apple pie' in lower case, certified, with the case dropped.
+        a = _fresh(self.TEXT)
+        result = _solve("Show the third line of the file %s in upper case" % a)
+        self.assertTrue(_verified(result))
+        self.assertEqual("APPLE PIE\n", self._answer(result))
+        self.assertEqual(self.TEXT, (ROOT / a).read_text(encoding="utf-8"))
+
+    def test_a_range_asked_for_in_upper_case_is_those_lines_in_upper_case(self):
+        a = _fresh(self.TEXT)
+        result = _solve("Show lines 2 to 4 of the file %s in upper case" % a)
+        self.assertTrue(_verified(result))
+        self.assertEqual("BANANA\nAPPLE PIE\nCHERRY\n", self._answer(result))
+        self.assertEqual(self.TEXT, (ROOT / a).read_text(encoding="utf-8"))
+
+    def test_a_line_asked_for_in_lower_case_is_that_line_in_lower_case(self):
+        a = _fresh("APPLE\nBANANA\n")
+        result = _solve("Show the second line of the file %s in lower case" % a)
+        self.assertTrue(_verified(result))
+        self.assertEqual("banana\n", self._answer(result))
+
+    def test_the_composition_is_one_command_and_not_a_pipeline(self):
+        # The argv, so a regression to two steps -- or to dropping the case --
+        # fails even if the answer scraping above ever changes shape.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh(self.TEXT)
+        argv = _cr._prose_argv("Show the third line of the file %s in upper case" % a)
+        self.assertEqual(["sed", "-n", "3s/.*/" + chr(92) + "U&/p", a], argv)
+        self.assertEqual(4, len(argv), "a single command was asked for")
+
+    def test_a_line_that_is_not_there_is_not_an_answer_even_in_upper_case(self):
+        # The sibling pin.  `sed -n '10s/.*/\U&/p'` prints nothing and exits 0
+        # when line 10 is absent, exactly like `sed -n 10p` -- and the silence
+        # rule matches the script by shape, so composing a transform onto the
+        # address must not slip past it.
+        a = _fresh(self.TEXT)
+        self.assertFalse(_verified(_solve("Show the tenth line of the file %s in upper case" % a)))
+        self.assertFalse(_verified(_solve("Show lines 8 to 9 of the file %s in upper case" % a)))
+
+    def test_a_plain_line_and_a_plain_range_are_untouched_by_the_composition(self):
+        # No case word means no substitution in the script.
+        from canonical.runtime import composer_route_v1 as _cr
+        a = _fresh(self.TEXT)
+        self.assertEqual(["sed", "-n", "3p", a],
+                         _cr._prose_argv("Show the third line of the file %s" % a))
+        self.assertEqual(["sed", "-n", "2,4p", a],
+                         _cr._prose_argv("Show lines 2 to 4 of the file %s" % a))
+
+
 
 if __name__ == "__main__":
     unittest.main()

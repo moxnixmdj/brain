@@ -24619,7 +24619,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6395,
+  "research_index_records": 6396,
   "routing_tokens": 1816,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24628,7 +24628,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "933e6bc0c42f7730a01bf381110004d38409414436bb9e32b09f14ac612c8362"
+  "value": "04217fe2909bf620102c977c320e9bc22e09907ac5475b1bf788009e8d12285f"
  },
  "engines": [
   {
@@ -189196,6 +189196,51 @@
    }
   },
   {
+   "action_id": "A_READING_DOES_NOT_WRITE_WHATEVER_THE_SCRIPT_AND_A_STATED_CASE_IS_NOT_DROPPED_V1_20261025_V1",
+   "capability": false,
+   "date": "2026-10-25",
+   "id": "research:canonical/action_intents/A_READING_DOES_NOT_WRITE_WHATEVER_THE_SCRIPT_AND_A_STATED_CASE_IS_NOT_DROPPED_V1_20261025_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_READING_DOES_NOT_WRITE_WHATEVER_THE_SCRIPT_AND_A_STATED_CASE_IS_NOT_DROPPED_V1_20261025_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "600d6fe55d729e84230cd8b50723158303cc321da04a20aaede0cb7bbe8c3a9d",
+   "status": "",
+   "terms": {
+    "20261025": 1,
+    "3p": 2,
+    "a_reading_does_not_write_whatever_the_script_and_a_stated_case_is_not_dropped_v1_20261025_v1": 1,
+    "action": 2,
+    "answer": 1,
+    "answered": 1,
+    "answers": 1,
+    "apple": 3,
+    "asked": 2,
+    "asserted": 1,
+    "case": 7,
+    "certified": 2,
+    "dropped": 3,
+    "file": 5,
+    "line": 2,
+    "measured": 2,
+    "named": 2,
+    "nbanana": 2,
+    "not": 5,
+    "one": 2,
+    "request": 2,
+    "same": 2,
+    "script": 5,
+    "sed": 4,
+    "sentence": 2,
+    "show": 2,
+    "shown": 2,
+    "something": 2,
+    "states": 2,
+    "upper": 3,
+    "v1": 2,
+    "write": 2
+   }
+  },
+  {
    "action_id": "A_REFUSAL_NAMES_THE_CAPABILITY_THAT_WAS_ASKED_FOR_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -208883,9 +208928,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "9ed0dc603d177f6206fadc87bf48d9f20e610c7f15aa9a9ee0c0a1c4f0743eb7",
+   "sha256": "b03dca89ef35c81c90ea996c88eed32a7aa18a7d29397be7b4914dead7bb8800",
    "summary": "Routing a sentence to a typed capability chain.",
-   "symbol_count": 29,
+   "symbol_count": 30,
    "symbols": [
     "_contradicts_the_stated_payload",
     "_cut_flags",
@@ -208901,6 +208946,7 @@
     "_prose_ordinal",
     "_quoted_value",
     "_quoted_values",
+    "_sed_print_script",
     "_states_a_destination_for_the_result",
     "_tail_flags",
     "bind",
@@ -208909,8 +208955,7 @@
     "extract_argv",
     "extract_content",
     "extract_content_destination",
-    "extract_number",
-    "extract_paths"
+    "extract_number"
    ],
    "terms": {
     "candidate_tokens": 1,
@@ -208922,7 +208967,6 @@
     "extract_argv": 1,
     "extract_content": 1,
     "extract_content_destination": 1,
-    "extract_number": 1,
     "extract_paths": 1,
     "fully_bound_contract_tokens": 1,
     "head_flags": 1,
@@ -208937,6 +208981,7 @@
     "route": 2,
     "routing": 1,
     "score": 1,
+    "sed_print_script": 1,
     "sentence": 1,
     "states_a_destination_for_the_result": 1,
     "tail_flags": 1,
@@ -247633,7 +247678,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "ab910d2725126e2e0f4e90c3eee0052293059c1340b0729f4a6b13fe9f7a33c8",
+   "sha256": "f3fc49ccab9e3e67c8040c68ffd28564b5ecefdd9c3fc7d0887e7e369bac2dbe",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
    "symbol_count": 38,
    "symbols": [

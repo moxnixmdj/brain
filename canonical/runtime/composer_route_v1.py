@@ -999,6 +999,28 @@ def _prose_count(sentence: str) -> int:
     return 2
 
 
+def _sed_print_script(address: str, sentence: str) -> str:
+    """The sed script that prints `address`, in the case the sentence states.
+
+    sed composes an ADDRESS with a COMMAND inside one script, so "the third line
+    in upper case" is `sed -n '3s/.*/\\U&/p'` -- a single command with no
+    pipeline, no shell and no second step.  The composition is ordinary sed and
+    was probed directly before this was written.
+
+    Measured without it: the sentence bound `sed -n 3p` and answered 'apple pie'
+    in lower case, certified as an exact semantic answer, because the case the
+    sentence asked for was dropped and nothing reported the drop.  A pipeline was
+    recorded as the reason this could not be answered; it was not -- one program
+    already does both halves.
+    """
+    text = str(sentence or "").lower()
+    if re.search(r"\bupper[\s-]*case\b|\buppercase\b", text):
+        return "%ss/.*/\\U&/p" % address
+    if re.search(r"\blower[\s-]*case\b|\blowercase\b", text):
+        return "%ss/.*/\\L&/p" % address
+    return "%sp" % address
+
+
 def _prose_ordinal(sentence: str) -> int | None:
     """Which one of a series the sentence named, as a digit or as a word.
 
@@ -1133,6 +1155,16 @@ _FILTER_LINE = re.compile(
 # acceptance over a file holding five bytes.  Measured: "Append the text 'hello'
 # to the file A" turned 'apple\nbanana\n' into 'hello' and passed.  No capability
 # in the registry writes in append mode, so the honest outcome is a refusal.
+# The verbs that say a sentence wants to be SHOWN something.  A read is not a
+# write whatever command serves it: "Show the file X in upper case" asks for the
+# upper-cased text, and "Convert the file X to upper case" asks for X to change.
+# Both bind the same rewriting sed script, so the script cannot tell them apart
+# and only the sentence can.  Measured: the first turned 'apple\nbanana\n' into
+# 'APPLE\nBANANA\n' on disk and was certified as an exact semantic answer -- a
+# request to be shown something destroyed the file it named, which is the same
+# defect `sed -n 3p` had, one layer up, where the script really does rewrite.
+_READ_VERBS = re.compile(r"\b(?:show|print|read|display)\b")
+
 _KEEPS_EXISTING_CONTENT = re.compile(
     r"\bappend(?:s|ed|ing)?\b|\bprepend(?:s|ed|ing)?\b|\binsert(?:s|ed|ing)?\b"
     r"|\b(?:to|at)\s+the\s+(?:end|beginning|start|top|bottom)\s+of\b"
@@ -1391,7 +1423,8 @@ def _prose_argv(sentence: str) -> list[str] | None:
             and re.search(r"\b(?:show|print|read|display)\b", text)):
         _operands = extract_paths(sentence)
         if len(_operands) == 1:
-            return ["sed", "-n", "%dp" % _which, str(_operands[0])]
+            return ["sed", "-n", _sed_print_script(str(_which), sentence),
+                    str(_operands[0])]
     # A part of a file measured in a UNIT the sentence states.  The table below
     # builds every argv as `flags(_prose_count(text))`, and `_head_flags` and
     # `_tail_flags` both answer in LINES, because a line is the only unit the
@@ -1439,7 +1472,8 @@ def _prose_argv(sentence: str) -> list[str] | None:
             r"\blines?\b[^\n]{0,12}?\b(\d+)\s*(?:to|through|thru|until|-)\s*(\d+)\b",
             _prose)
         if _span and len(_digits) == 2 and "sed" in known:
-            return ["sed", "-n", "%s,%sp" % (_span.group(1), _span.group(2)),
+            return ["sed", "-n",
+                    _sed_print_script("%s,%s" % (_span.group(1), _span.group(2)), sentence),
                     _operand]
         # Only the START is stated: "from line 3 to the end".  `tail -n +3` is
         # that question exactly.  Measured before this, the sentence bound
@@ -1696,8 +1730,22 @@ def _declare_a_written_output(args: dict[str, Any], argv: Sequence[str],
             # treating it as a transform left A holding nothing but its third
             # line -- a request to be SHOWN something destroyed the file it
             # named.  The distinction is in the script, not in the program.
-            if any(re.match(r"^s[|/#]", str(part).lstrip()) for part in argv[1:]):
-                args["write_stdout_to_output"] = "true"
+            #
+            # But the script is not the WHOLE distinction, and saying so was
+            # wrong.  `sed -e 's/.*/\U&/'` rewrites, so it passed this test --
+            # and "Show the file X in upper case" bound it, wrote the upper-cased
+            # text back over X, and was certified.  Measured: X went from
+            # 'apple\nbanana\n' to 'APPLE\nBANANA\n' on a request to be SHOWN
+            # something.  A rewriting script is necessary for a write-back and
+            # not sufficient: the sentence has to have asked for the file to
+            # change.  "Convert X to upper case" says so; "Show X in upper case"
+            # says the opposite.  Nothing is written for a reading, and the run
+            # is still accepted -- the upper-cased text is on stdout, which is
+            # where a reading puts its answer.
+            if (_READ_VERBS.search(str(sentence or "").lower())
+                    or not any(re.match(r"^s[|/#]", str(part).lstrip()) for part in argv[1:])):
+                return
+            args["write_stdout_to_output"] = "true"
         return
     if _states_a_destination_for_the_result(sentence, dest):
         args["write_stdout_to_output"] = "true"
