@@ -973,6 +973,43 @@ def discover(gap: str, budget: int = 120, seed: int = 11,
         return {"closed": False, "status": "OPEN__NO_OUTPUT_FORMAT_IN_GAP",
                 "detail": "nothing to verify an effect against"}
 
+    # A QUESTION is not closed by a file appearing.
+    #
+    # Everything below measures one thing: did a program make the target file
+    # of the requested suffix show up.  That is a fact about a FORMAT, and it
+    # is the right test for "compress notes.txt into notes.txt.gz".  It is not
+    # an answer to a question, and this route has no way to tell the two apart
+    # -- so it reported questions as closed.  Measured on main 249a702:
+    #
+    #   discover("the different lines of the file a.txt")
+    #     -> closed=True, plan ['run_md5sum.textutils'],
+    #        status PASS__RECALLED_AND_REVERIFIED
+    #   discover("the duplicate lines of the file a.txt")
+    #     -> closed=True, plan ['run_md5sum.textutils'],
+    #        status PASS__SINGLE_ACTION_FOUND_AND_VERIFIED
+    #
+    # md5sum prints a HASH.  Neither goal asked for one.  The word
+    # "VERIFIED" in those statuses is a claim about the goal, and the goal
+    # was never asked -- the suffix was matched.  composer_route_v1 turns a
+    # closed discovery into pass=True with authority
+    # DISCOVERED_BY_ACTING_AND_EFFECT_VERIFIED, so the false claim travels.
+    #
+    # The machine already knows how to tell: query_kind names the one thing a
+    # goal asks to be counted, and returns None when the goal is not a
+    # question about a measurable quantity.  A goal it CAN classify is a
+    # question, and this route cannot answer questions -- answer_query does,
+    # by building a file that holds a known number of the thing and throwing
+    # away every program that does not print it.  Refusing here hands the
+    # goal to something that can answer it instead of closing it with a hash.
+    asked = query_kind(gap)
+    if asked is not None:
+        return {"closed": False, "kind": asked,
+                "status": "OPEN__A_QUESTION_IS_NOT_CLOSED_BY_A_FILE_APPEARING",
+                "detail": "the goal asks to be told %s; this route only "
+                          "checks that a file of the requested suffix "
+                          "appeared, which is a fact about a format and not "
+                          "an answer" % asked}
+
     named = output_name(gap) or ""
     target = named if named.endswith(suffix) else ("input.txt" + suffix)
     # candidates by NAME (gzip for .gz) and by MEANING (convert for resize)
