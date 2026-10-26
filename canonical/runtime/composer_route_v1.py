@@ -872,7 +872,26 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # reproducibility and `uniq` is perfectly reproducible.  `sort -u` is the
     # distinct set the sentence asked for; `sort` is already in
     # _READ_ONLY_COMMANDS and `-u` is not a side-effecting flag.
-    (r"\bunique\b|\b(?:duplicate|duplicates|repeated)\b[^\n]{0,20}?\blines?\b",
+    # `sort -u` answers "the unique lines" and "the distinct lines", which in this
+    # repository both mean the DISTINCT SET -- that reading is pinned in four
+    # places and was chosen deliberately over `uniq`, which leaves duplicates in
+    # an unsorted file.  It does NOT answer "the duplicate lines", which asks for
+    # the opposite set: the lines that repeat.  That arm used to live in this
+    # pattern, so the two opposite questions shared one answer, and the one that
+    # asked for the repeats was certified with a set containing a line that
+    # appears exactly once.  Measured on apple/banana/apple/cherry/banana/apple:
+    # "Show the duplicate lines" returned 'apple\nbanana\ncherry\n' where the
+    # duplicates are 'apple\nbanana\n'.  `cherry` appears once and is not a
+    # duplicate, so the answer was wrong in the direction that is hardest to
+    # notice -- it is a plausible list of lines from the right file.
+    # The removal arm stays, and is now the ONLY way the word "duplicate" reaches
+    # this row: "Remove the duplicate lines from the file X" asks for what is left
+    # once the repeats are gone, which IS the distinct set, and it is pinned.  The
+    # refusal above is scoped away from exactly these verbs, so the two forms of
+    # the question now go to two different answers instead of one shared wrong one.
+    (r"\bunique\b|\bdistinct\b"
+     r"|\b(?:remove|delete|erase|drop|strip)s?\b[^\n]{0,40}?"
+     r"\b(?:duplicate|duplicates|repeated)\b[^\n]{0,20}?\blines?\b",
      "sort", lambda _n: ["-u"], 1),
     (r"\breverse\b[^\n]{0,40}?\blines?\b|\blines?\b[^\n]{0,40}?\breverse\b",
      "tac", _no_flags, 1),
@@ -2017,6 +2036,37 @@ def _prose_argv(sentence: str) -> list[str] | None:
     if (_ASKS_A_COUNT_OR_A_NUMBER.search(text) and _DIRECTORY_REQUEST.search(text)
             and re.search(r"\bfiles?\b", text)
             and not re.search(r"\blines?\b", text)):
+        return None
+    # Asking for the lines that REPEAT is the opposite of asking for the distinct
+    # set, and no single program answers it: the lines that appear more than once
+    # are `sort X | uniq -d`, which is two programs.  `uniq -d` on its own only
+    # sees ADJACENT repeats, so on an unsorted file it returns nothing at all --
+    # measured empty on apple/banana/apple/cherry/banana/apple.  So this is a
+    # refusal and not a quieter wrong answer.  Scoped away from the removal
+    # requests, which ask for the distinct set and stay served and pinned.
+    if (re.search(r"\b(?:duplicate|duplicates|repeated)\b[^\n]{0,20}?\blines?\b"
+                  r"|\blines?\b[^\n]{0,30}?\bmore than once\b"
+                  r"|\bappears?\b[^\n]{0,20}?\btwice\b", text)
+            and not re.search(r"\b(?:remove|delete|erase|drop|strip)s?\b", text)):
+        return None
+    # Counting the distinct set, or the repeats, is a count OF A FILTERED SET.
+    # `wc -l` counts every line the file holds, so "How many unique lines are in
+    # the file X" was certified with 6 on a file whose distinct set is 3, and
+    # "How many duplicate lines" with 6 where the answer is 2.  Both are the total
+    # line count wearing the shape of an answer.  The plain count a file has stays
+    # served -- that is what `wc -l` really measures.
+    if (_ASKS_A_COUNT_OR_A_NUMBER.search(text)
+            and re.search(r"\b(?:unique|distinct|duplicate|duplicates|repeated)\b", text)
+            and re.search(r"\blines?\b", text)):
+        return None
+    # A yes/no question answered with a listing is the same defect as a count
+    # answered with names: the shape of the answer does not match the shape of the
+    # question, and it certifies.  "Are all the lines of the file X unique?"
+    # measured as binding `sort -u` and returning the distinct set, which the
+    # caller then has to compare against the file by hand -- the question was
+    # never answered.
+    if (re.search(r"\bare\b[^\n]{0,80}?\b(?:unique|distinct|duplicated?)\b", text)
+            or re.search(r"\b(?:any|are there)\b[^\n]{0,40}?\b(?:duplicate|repeated)\b", text)):
         return None
     # The lines two files share, and the lines only one of them has.  Both are
     # one `grep` reading the other file as its pattern list, and the ORDER IS THE
