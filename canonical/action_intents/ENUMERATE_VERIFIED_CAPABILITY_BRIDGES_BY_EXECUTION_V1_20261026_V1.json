@@ -35,7 +35,7 @@
       "route_class": "COMPOSE"
    },
    "benchmark_or_family_rank_authority": false,
-   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The composer can only see the 11 edges where a provides token literally equals a requires token, out of 96 provides and 38 requires over 73 entries on main ce288da; provi",
+   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The composer can only see the 11 edges where a provides token literally equals a requires token, out of 96 provides and 38 requires over 73 entries on main ce288da; provides_as and requires_as are empty on every entry, so 51 produced capabilities are composition-invisible even where the bytes one writes are exactly the bytes another reads.  Nobody derives the semantic edges by running the candidates, because no procedure in the tree measures them.",
    "canonical_base_commit": "ce288da",
    "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
    "capability_credit_delta": 0,
@@ -151,6 +151,23 @@
          "existing_oracle_considered": true,
          "synthetic_verification_necessity": "Not synthetic in the dangerous sense: fixtures are declared and tiny, but every claim is bytes on disk re-verified by code that shares no lineage with the adapter under test, and the tamper test mutates the world itself rather than any expectation."
       },
+      "routes_considered": [
+         "HAND_FILL_ALIAS_SLOTS",
+         "STRING_SIMILARITY_BRIDGING",
+         "DOC_SIMILARITY_BRIDGING",
+         "PLAN_OVER_LITERAL_EDGES",
+         "CVC5_SYGUS_FILLER_SYNTHESIS",
+         "TRUST_SELF_REPORT",
+         "SCRATCH_IN_TMP",
+         "GENERIC_FIXTURE_PROBE",
+         "REGISTRY_EDIT_SAME_PR",
+         "EXECUTE_CANDIDATES_AND_VERIFY_BYTES__SELECTED",
+         "REUSE_RUN_ADAPTER_LOCALLY__SELECTED_PART",
+         "REPO_SCOPED_SCRATCH__SELECTED_PART",
+         "INDEPENDENT_STDLIB_ORACLES__SELECTED_PART",
+         "REFUSAL_CLASSIFICATION__SELECTED_PART",
+         "TAMPERED_WORLD_MUST_FAIL__SELECTED_PART"
+      ],
       "prior_routes_considered": [
          "FILL_PROVIDES_AS_AND_REQUIRES_AS_BY_HAND__REJECTED_96_BY_38_PAIRS_OUTLIVE_REVIEW_AND_NO_PROOF_THE_FILLED_EDGE_RUNS",
          "STRING_SIMILARITY_OVER_REQUIRES_AND_PROVIDES_VOCABULARIES__REJECTED_MEASURED_GENERIC_VOCABULARY_MATCHES_BURN_TRUST",
@@ -471,12 +488,12 @@
       "tournament": {
          "counterexample_receipts": [
             {
-               "git_blob_sha": "dc235659cab303090cb23a736d28ab8cb13fd185",
-               "path": "canonical/runtime/bridge_enumeration_v1.py"
+               "git_blob_sha": "786c1fa59359b1ae60d05f8f649ebc3babee3b91",
+               "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
             },
             {
-               "git_blob_sha": "eeb0c858aaec836f363199b6ccef5a17f2405d70",
-               "path": "canonical/tests/test_bridge_enumeration_v1.py"
+               "git_blob_sha": "4bcabd06bbc8fef6bcf95c450d54889f55ca8296",
+               "path": "canonical/runtime/live_brain_route_admission_v1.py"
             }
          ],
          "decisive_question": "MAY_THE_SYSTEM_CLAIM_TWO_CAPABILITIES_COMPOSE_BECAUSE_THEIR_TYPE_TOKENS_MATCH_WITHOUT_RUNNING_EITHER",
