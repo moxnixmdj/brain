@@ -1350,7 +1350,7 @@ def _rank_bindable_candidates(
                 )
                 inputs,_=proposal_binder._bind_planned_inputs(
                     goal,root,sys.modules[__name__],instance_id,cid,entry,
-                    effect_providers or {}
+                    effect_providers or {},_already_produced_paths=context_paths
                 )
             else:
                 inputs=_bind_inputs(

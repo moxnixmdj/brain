@@ -346,6 +346,18 @@
           "source_path": "canonical/astra_runtime/tmp/ASTRA-AUTO-VERIFY-NPM-DFINITY-CBOR-B52D51692BC6_SOURCE.json"
         },
         "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-NPM-ACQUIRE-CBOR-001__dfinity-cbor__b52d51692bc6__AUTO_VERIFY.json"
+      },
+      "proposal_bindings": {
+        "json_path": {
+          "type": "effect_result",
+          "container": "scalar",
+          "effect": "json.file.available",
+          "field": "output_path"
+        },
+        "output_path": {
+          "type": "auto_path",
+          "suffix": ".cbor"
+        }
       }
     },
     "auto.npm.msgpack-msgpack": {
@@ -467,6 +479,18 @@
           "source_path": "canonical/astra_runtime/tmp/ASTRA-AUTO-VERIFY-NPM-MSGPACK-MSGPACK-69DD66DA69F7_SOURCE.json"
         },
         "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-NPM-ACQUIRE-MSGPACKR-003__msgpack-msgpack__69dd66da69f7__AUTO_VERIFY.json"
+      },
+      "proposal_bindings": {
+        "json_path": {
+          "type": "effect_result",
+          "container": "scalar",
+          "effect": "json.file.available",
+          "field": "output_path"
+        },
+        "output_path": {
+          "type": "auto_path",
+          "suffix": ".msgpack"
+        }
       }
     },
     "auto.pypi.bson-modern": {
@@ -623,6 +647,18 @@
           "source_path": "canonical/astra_runtime/tmp/ASTRA-AUTO-VERIFY-PYPI-BSON-MODERN-C0BB873E73B6_SOURCE.json"
         },
         "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-PYPI-ACQUIRE-BSON-009__bson-modern__c0bb873e73b6__AUTO_VERIFY.json"
+      },
+      "proposal_bindings": {
+        "json_path": {
+          "type": "effect_result",
+          "container": "scalar",
+          "effect": "json.file.available",
+          "field": "output_path"
+        },
+        "output_path": {
+          "type": "auto_path",
+          "suffix": ".bson"
+        }
       }
     },
     "auto.pypi.msgpack": {
@@ -737,6 +773,18 @@
           "source_path": "canonical/astra_runtime/tmp/ASTRA-AUTO-VERIFY-PYPI-MSGPACK-9F0974D98983_SOURCE.json"
         },
         "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-PYPI-ACQUIRE-MSGPACK-002__msgpack__9f0974d98983__AUTO_VERIFY.json"
+      },
+      "proposal_bindings": {
+        "json_path": {
+          "type": "effect_result",
+          "container": "scalar",
+          "effect": "json.file.available",
+          "field": "output_path"
+        },
+        "output_path": {
+          "type": "auto_path",
+          "suffix": ".msgpack"
+        }
       }
     },
     "chart.raster.axis_title_unit_binding.v1": {
@@ -2508,6 +2556,18 @@
         "independent_verifier": "python-stdlib-json",
         "mission_id": "ASTRA-VERIFY-JQ-STRUCTURED-DATA-001",
         "verification_evidence": "canonical/astra_runtime/evidence/ASTRA-VERIFY-JQ-STRUCTURED-DATA-001__INDEPENDENT.json"
+      },
+      "proposal_bindings": {
+        "json_path": {
+          "type": "effect_result",
+          "container": "scalar",
+          "effect": "json.file.available",
+          "field": "output_path"
+        },
+        "output_path": {
+          "type": "auto_path",
+          "suffix": ".json"
+        }
       }
     },
     "knowledge.consistency.assess": {

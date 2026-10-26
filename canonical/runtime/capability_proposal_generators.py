@@ -217,9 +217,15 @@ def _auto_output_path(goal,instance_id,key,suffix):
     )
 
 
+# Spec types whose declared binding may be overruled by a value the goal
+# sentence states explicitly. "literal"/"goal_text" stay spec-authoritative:
+# their bindings exist precisely to override sentence parsing.
+STATED_PRECEDENCE_TYPES=frozenset({"effect_result","auto_path","goal_url"})
+
+
 def _bind_planned_inputs(
     goal,root,compiler,instance_id,cid,entry,providers,
-    goal_value_index=None,require_aliases=None
+    goal_value_index=None,require_aliases=None,_already_produced_paths=None
 ):
     template=entry.get("action_template") or {}
     placeholders=set(compiler._placeholders(template))
@@ -244,6 +250,41 @@ def _bind_planned_inputs(
             +str(cid)+":"+type(exc).__name__+":"+str(exc)
         ) from exc
     evidence={}
+
+    # Stated-precedence law: for slots a goal states explicitly, the stated
+    # literal wins over any declared proposal binding of a sentence-fillable
+    # type (effect_result/auto_path/goal_url). A binding only fills what the
+    # sentence left open; it may never silently reroute a value the requester
+    # actually wrote. Measured defect class this closes: a consumer carrying
+    # an effect_result binding for json_path rejected goals that stated the
+    # path, producing COMPILED_PATH_BINDING_MISMATCH fail-closures on
+    # direct-tag routes that were valid before the binding existed.
+    # Probe per slot: mask every placeholder but that one; if the compiler can
+    # bind it from the sentence alone, that slot is stated. A stated value that
+    # the compiled prefix already produces is NOT precedence-eligible: naming
+    # it is how the sentence refers to the produced artifact, so the reference
+    # binding keeps authority (reference survives planner relocation; the plain
+    # literal would freeze one rendering).
+    produced=set(str(x) for x in (_already_produced_paths or []))
+    stated={}
+    for _slot in [str(k) for k in declared]:
+        _spec=declared[_slot]
+        if not isinstance(_spec,dict):
+            continue
+        if str(_spec.get("type") or "") not in STATED_PRECEDENCE_TYPES:
+            continue
+        if _slot not in placeholders:
+            continue
+        probe=dict(entry)
+        probe["action_template"]=_mask_declared_placeholders(
+            template,(set(placeholders)-{_slot})
+        )
+        try:
+            prope=compiler._bind_inputs(goal,root,probe)
+        except Exception:
+            continue
+        if isinstance(prope,dict) and _slot in prope and str(prope[_slot]) not in produced:
+            stated[_slot]=json.loads(json.dumps(prope[_slot]))
     requires={
         str(x).strip() for x in entry.get("requires") or []
         if isinstance(x,str) and x.strip()
@@ -268,6 +309,10 @@ def _bind_planned_inputs(
                 "PROPOSAL_BINDING_SPEC_INVALID:"+str(cid)+":"+key
             )
         typ=str(spec.get("type") or "").strip()
+        if key in stated:
+            inputs[key]=stated[key]
+            evidence[key]={"type":"stated_literal","value":inputs[key]}
+            continue
         if typ=="literal":
             if "value" not in spec:
                 raise CapabilityProposalFailure(

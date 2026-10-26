@@ -21946,7 +21946,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py",
-    "source_sha256": "92a52c512411bec9144423e6398ce18618c5b3898421e24eee79264d98b3c039",
+    "source_sha256": "129c18bef6a3a3ea56fac2617079e8da747c232da58f1e56e765bc505d591fc0",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24635,7 +24635,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "101b58601f6c2ecc9ca6bceb688f84c28acdb33c23e0e31acbe8d34472de6ae4"
+  "value": "13370409d3745edaed14b98e771c55da18915c89901ecb3b858b837f08c57e7c"
  },
  "engines": [
   {
@@ -46652,7 +46652,7 @@
   "included_source_count": 866,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "c8526a587d7ac3bddfcfe3f15322e2d3cc670d4e2809a93cbff9850840cb944a"
+  "source_tree_digest": "3e81574da42f18e4da0aef438357ac7774ce97cf764ed2d022155fbbd2d55248"
  },
  "research_index": [
   {
@@ -191483,7 +191483,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "d0085b1d7ea9e267d38acac9d0306bfca6ee5f305336d7800bb6efe33c394607",
+   "sha256": "6c3ac78f6acd3b1e44f27c905753f1cc6504189652d75ff04b00798123ca840b",
    "status": "",
    "terms": {
     "11": 2,
@@ -207425,7 +207425,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/capability_proposal_generators.py",
-   "sha256": "82e427d678133748d98eb8a085609e34d51df7c1f1c57fc509d41097a8d60739",
+   "sha256": "ea1890e6c15af507b51c37a06ad5a25ca44834dcd8a197db5dcbd165bed86fb8",
    "summary": "Fail-closed proposal generators for verified Project Brain capabilities.",
    "symbol_count": 15,
    "symbols": [
@@ -221364,7 +221364,7 @@
    "imported_by_count": 7,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "b2e2324fcd17be209a1277732e23be972d8a75b61a0a85dff90002db221a7953",
+   "sha256": "fa7dc0916ca3cfa2b31faa4628fa3b34008de8bcb41e998b40056e27444670fd",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
    "symbol_count": 121,
    "symbols": [
