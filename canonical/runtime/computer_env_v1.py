@@ -1131,6 +1131,25 @@ _PROBE_KINDS: dict[str, tuple[str, ...]] = {
     "characters": ("characters", "character", "chars", "char"),
     "uniquelines": ("unique lines", "uniquelines", "distinct lines",
                     "different lines", "unique", "distinct"),
+    # The opposite half of the same question, which was never written.  The
+    # words are deliberately TIGHT -- the noun phrase, not the adjective on
+    # its own -- because "the duplicate entries in this ledger" is not a
+    # countable question about lines and must not be turned into one.
+    "duplicatelines": ("duplicate lines", "duplicate line", "duplicated lines",
+                       "duplicated line", "repeated lines", "repeated line",
+                       "lines that repeat", "lines that are repeated",
+                       "lines that are duplicated",
+                       # The noun has to be in the phrase, and the phrase has
+                       # to survive the ordinary ways a sentence drops a word:
+                       # "lines THAT appear more than once" and "lines appear
+                       # more than once" are one question, and a list that
+                       # holds only the first is a list of phrasings.
+                       "lines that appear more than once",
+                       "lines appear more than once",
+                       "lines appearing more than once",
+                       "lines that occur more than once",
+                       "lines occur more than once",
+                       "lines occurring more than once"),
     "lineswith": ("containing", "contain", "contains", "mentioning",
                   "mention", "mentions", "matching", "match", "matches"),
 }
@@ -1257,6 +1276,24 @@ def probe_bytes(kind: str, n: int = 7, literal: str | None = None) -> bytes | No
         # a test of anything.
         first = b"".join(b"row %d\n" % i for i in range(n))
         return first + first
+    if kind == "duplicatelines":
+        # Exactly n lines that repeat, and n that do not -- so this probe
+        # separates three answers that a weaker file would let pass as one:
+        #   every line            -> 3n   (a plain line count)
+        #   every DIFFERENT line  -> 2n   (`sort --unique | wc --lines`)
+        #   the lines that repeat -> n    (the answer)
+        # On n = 7 that is 21, 14 and 7: no two of them coincide, so a
+        # program that measures the wrong thing cannot print 7 by accident.
+        #
+        # The repeats are put at OPPOSITE ENDS for the reason `uniquelines`
+        # already learned the hard way: `uniq` collapses NEIGHBOURS, so on
+        # 'row 0, row 0, row 1, row 1' it prints n and looks exactly like a
+        # tool that finds the repeats.  It is not.  Given a file whose twins
+        # are not neighbours it prints nothing at all -- so only something
+        # that really compares each line against every other survives.
+        twice = b"".join(b"twice %d\n" % i for i in range(n))
+        once = b"".join(b"once %d\n" % i for i in range(n))
+        return twice + once + twice
     return None
 
 
@@ -1300,7 +1337,8 @@ _PROBE_SIZES = (7, 13)
 # this word" is a refinement of "how many lines", not a second unrelated
 # question, and the machine is allowed to know that -- otherwise every
 # question containing the word 'lines' would have to be refused.
-_REFINES = {"uniquelines": "lines", "lineswith": "lines"}
+_REFINES = {"uniquelines": "lines", "lineswith": "lines",
+          "duplicatelines": "lines"}
 
 _LITERAL_TRIGGERS = ("containing", "contain", "contains", "mentioning",
                      "mention", "mentions", "matching", "match", "matches",
