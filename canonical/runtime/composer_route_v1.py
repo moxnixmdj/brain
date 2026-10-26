@@ -1398,6 +1398,11 @@ _FIND_PREFIX = re.compile(r"\b(?:start|begin)(?:s|ing)?\s+with\s+([^\s,]+)")
 _EVERY_FILE = re.compile(r"\b(?:all|every|each)\b[^\n]{0,60}?\bfiles?\b")
 _ONE_LEVEL_ONLY = re.compile(r"\brecursive(?:ly)?\b|\bsub[- ]?director(?:y|ies)\b|\btree\b")
 _FILE_SUFFIX = re.compile(r"\.([A-Za-z0-9]+)\b")
+# An extension written IN FRONT OF the word "files" -- "the .log files in D".
+# Deliberately anchored to that position: `_FILE_SUFFIX` on its own also matches
+# the dot in a path like a.txt, so using it as an entry condition would pull
+# ordinary sentences about a named file into a set search.
+_FILE_BEFORE_FILES = re.compile(r"\.[A-Za-z0-9]+\s+files?\b")
 # The words that say a sentence wants the directory LISTED rather than read.
 _LISTING_REQUEST = re.compile(r"\b(?:list|names?|what|which)\b")
 # A sentence that opens with an article and never states a verb is a noun phrase:
@@ -1477,7 +1482,21 @@ def _prose_argv(sentence: str) -> list[str] | None:
                               r"|removing|removed|erase|move|copy|rename|make|makes"
                               r"|making|made|create|creates|creating|created|touch"
                               r"|mkdir|build|builds)\w*\b", text)
-            and (re.search(r"\bfind\b", text) or _NAMES_A_TREE.search(text))):
+            # Stating a SHAPE is a third way to ask for a set, and it was
+            # missing.  Measured on main 17993e0, five of the ten rows in a
+            # set-of-files census were answered by `ls` with EVERY entry in the
+            # directory -- including a subdirectory -- and certified, for
+            # sentences that asked for the .log files:
+            #     "the files in the directory D ending with '.log'"  -> `ls D`
+            #     "the files in the directory D starting with 'one'"  -> `ls D`
+            #     "the .log files in the directory D"                -> `ls D`
+            # Each states which files it wants, so a listing of all of them is
+            # not a partial answer, it is the wrong one.  The verb and the word
+            # "named" were the only two ways in; a shape is a third, and the
+            # plainest form of the question uses it.
+            and (re.search(r"\bfind\b", text) or _NAMES_A_TREE.search(text)
+                 or _FIND_SUFFIX.search(text) or _FIND_PREFIX.search(text)
+                 or _FILE_BEFORE_FILES.search(text))):
         # `find` only reads the tree and prints what is there, so the inspector
         # re-runs it and compares stdout -- no new way to be trusted, only a new
         # way to be asked.  The name pattern is either the value the sentence
@@ -1489,6 +1508,19 @@ def _prose_argv(sentence: str) -> list[str] | None:
         if len(values) == 1:
             needle = values[0]
             masked = _mask_a_quoted_value(masked, needle)
+            # Quoting the value does not cancel the shape the sentence stated
+            # around it.  The unquoted branch below builds `*` + token from
+            # "ending with .log", but the quoted branch used the value raw, so
+            # "Find the files in the directory D that end with '.log'" bound
+            # `find D -name '.log'` -- a pattern matching a file literally named
+            # ".log" -- and returned NOTHING, certified, for a directory holding
+            # two .log files.  The same sentence without the quotes was correct,
+            # which is what made it invisible: the defect was in the quoting, not
+            # in the question.
+            if not needle.startswith("*") and _FIND_SUFFIX.search(text):
+                needle = "*" + needle
+            elif not needle.endswith("*") and _FIND_PREFIX.search(text):
+                needle = needle + "*"
         else:
             m = _FIND_SUFFIX.search(text) or _FIND_PREFIX.search(text)
             if m:
@@ -1500,6 +1532,21 @@ def _prose_argv(sentence: str) -> list[str] | None:
                     return None
                 needle = ("*" + token) if _FIND_SUFFIX.search(text) else (token + "*")
                 masked = re.sub(re.escape(m.group(1)), " ", masked, flags=re.IGNORECASE)
+            else:
+                # "the .log files in the directory D" states its shape in front of
+                # the word "files" instead of after a verb, and nothing here read
+                # it.  The sentence reached the block and then left `needle` None,
+                # which builds a bare `find D` -- a walk of the WHOLE tree,
+                # certified, for a question about the .log files in it.  Measured:
+                # it returned keep.txt and both subdirectories alongside the two
+                # files that were asked about.  The extension is taken from the
+                # match that sits immediately before "files", not from the first
+                # dot anywhere in the sentence, because a path has dots too.
+                _ext = _FILE_BEFORE_FILES.search(text)
+                if _ext:
+                    _m2 = re.match(r"\.([A-Za-z0-9]+)", _ext.group(0))
+                    if _m2:
+                        needle = "*." + _m2.group(1)
         operand_paths = extract_paths(masked)
         if len(operand_paths) != 1:
             # No single directory to search, or more than one: refuse rather than
