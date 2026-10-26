@@ -140,9 +140,13 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
         ("Count the words in the file {f}", ["wc", "-w", "{f}"]),
         ("Count the bytes in the file {f}", ["wc", "-c", "{f}"]),
         ("Count the characters in the file {f}", ["wc", "-c", "{f}"]),
-        ("Show the first field of the file {f}", ["cut", "-f", "1", "{f}"]),
-        ("Show the second column of the file {f}", ["cut", "-f", "2", "{f}"]),
-        ("Cut field 3 from the file {f}", ["cut", "-f", "3", "{f}"]),
+        # `-s` is asserted here on purpose.  Without it `cut -f 2` prints a line
+        # that has no delimiter UNCHANGED, so on a file with no tab in it "the
+        # second column" was certified returning the whole file.  `-s` suppresses
+        # such a line, which is the truthful answer: there is no second column.
+        ("Show the first field of the file {f}", ["cut", "-s", "-f", "1", "{f}"]),
+        ("Show the second column of the file {f}", ["cut", "-s", "-f", "2", "{f}"]),
+        ("Cut field 3 from the file {f}", ["cut", "-s", "-f", "3", "{f}"]),
         ("Search the file {f} for the exact text 'a.c'", ["fgrep", "a.c", "{f}"]),
         # --- a byte comparison and a pattern search, each reached only by a
         #     sentence that SAYS which question it is asking.
@@ -782,7 +786,7 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
                          "the path's own digit equals the stated column, so a "
                          "regression would be invisible: %r" % path)
         argv = _argv("Show the second column of the file %s" % path)
-        self.assertEqual(argv, ["cut", "-f", "2", path],
+        self.assertEqual(argv, ["cut", "-s", "-f", "2", path],
                          "read a column number out of the path %r (which "
                          "contains %r): %r" % (path, digits, argv))
 
@@ -3969,3 +3973,112 @@ class TestTheLinesThatRepeatAreNotAnsweredWithTheLinesThatDoNot(unittest.TestCas
             self.assertEqual("apple\n\nbanana\n# note\n\n",
                              (ROOT / f).read_text(encoding="utf-8"),
                              "%s is a filter; the file must be untouched" % goal)
+
+
+class TestAQuotedValueDoesNotEatThePathItIsQuotedBeside(unittest.TestCase):
+    """Masking a quoted value must remove the QUOTED SPAN, not those characters.
+
+    The `grep -c` / `grep -n` branch masked its value with a blind
+    `re.sub(re.escape(value), " ", sentence)`, which eats those characters
+    wherever they occur -- including inside the file's own path.  Measured on a
+    file at canonical/astra_runtime/tmp/m3v7x/zz/u.txt, the pattern 'an' turned
+    the operand into "c onical/astra_runtime/tmp/m3v7x/zz/u.txt" and grep failed
+    with "No such file or directory".  13 of 15 two- and three-character patterns
+    corrupted the path the same way, including 'tm', 'mp' and 'ru', because the
+    path is built out of ordinary letters.
+
+    `_mask_a_quoted_value` already existed for exactly this defect and its
+    docstring already described it.  It was called from one branch and not from
+    this one.  A fix applied to one call site is not applied to its siblings.
+    """
+
+    def _f(self, name):
+        d = "%s/%s" % (SCRATCH, name)
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "u.txt").write_text("apple\nbanana\ncherry\n", encoding="utf-8")
+        return d + "/u.txt"
+
+    def test_a_pattern_found_inside_the_path_does_not_break_the_path(self):
+        f = self._f("mv1")
+        # Every one of these occurs inside the path this repository runs in.  If
+        # the value is masked blindly the operand arrives with a space in it and
+        # the command fails on a file that does not exist.
+        for pat in ("an", "ca", "ni", "ic", "al", "ru", "nt", "tm", "mp"):
+            result = _solve("How many lines in the file %s contain '%s'?" % (f, pat))
+            self.assertTrue(
+                _verified(result),
+                "the pattern %r was masked out of the path itself: %s"
+                % (pat, result.get("status")))
+        # And the count is the real one, not merely a successful run.  On
+        # apple/banana/cherry: 'an' is in "banana" alone, so 1; 'a' is in "apple"
+        # and "banana" but NOT in "cherry", so 2 -- a number that is merely
+        # plausible would be 3, the count of lines in the file.
+        self.assertEqual("1\n", _stdout(_solve(
+            "How many lines in the file %s contain 'an'?" % f)))
+        self.assertEqual("2\n", _stdout(_solve(
+            "How many lines in the file %s contain 'a'?" % f)))
+
+    def test_the_value_is_still_masked_where_it_was_quoted(self):
+        # The other half: masking exists so a quoted value is not read as a
+        # second file.  Removing it entirely would pass the test above and fail
+        # this one.
+        f = self._f("mv2")
+        result = _solve("the lines in the file %s that contain 'u.txt'" % f)
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual("", _stdout(result))
+
+
+class TestAColumnThatIsNotThereAndANumberThatWasAskedFor(unittest.TestCase):
+    """Two certified wrong answers, each the whole answer to a different question.
+
+    "The second column of the file X" on a file with no tab in it was certified
+    returning the ENTIRE FILE, because `cut -f 2` prints a line that has no
+    delimiter unchanged.  Every line looked like its own second column.
+
+    "The line numbers in the file X containing 'an'" was certified returning
+    'banana' -- the matching line, with no number on it.  The number was the
+    whole question.
+    """
+
+    def _file(self, name, content):
+        d = "%s/%s" % (SCRATCH, name)
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "a.txt").write_text(content, encoding="utf-8")
+        return d + "/a.txt"
+
+    def test_a_file_with_no_such_column_does_not_return_its_whole_lines(self):
+        f = self._file("cw1", "apple banana cherry\ndate fig grape\n")
+        result = _solve("Show the second column of the file %s" % f)
+        self.assertTrue(_verified(result), result.get("status"))
+        # `-s` suppresses a line with no delimiter, so a file that has no columns
+        # yields nothing rather than pretending every line is one.
+        self.assertEqual("", _stdout(result),
+                         "a file with no tab has no second column; returning its "
+                         "lines invents one")
+        self.assertEqual("apple banana cherry\ndate fig grape\n",
+                         (ROOT / f).read_text(encoding="utf-8"))
+
+    def test_a_real_column_still_comes_back_unchanged(self):
+        # The nearest legitimate case: `-s` must not cost the ordinary answer.
+        f = self._file("cw2", "name\tage\tcity\nann\t30\toslo\nbob\t25\trome\n")
+        self.assertEqual("age\n30\n25\n",
+                         _stdout(_solve("Show the second column of the file %s" % f)))
+        self.assertEqual("name\nann\nbob\n",
+                         _stdout(_solve("Show the first column of the file %s" % f)))
+        self.assertEqual("city\noslo\nrome\n",
+                         _stdout(_solve("Cut field 3 from the file %s" % f)))
+
+    def test_a_line_number_question_carries_the_number(self):
+        f = self._file("cw3", "apple\nbanana\ncherry\n")
+        result = _solve("the line numbers in the file %s containing 'an'" % f)
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual("2:banana\n", _stdout(result))
+
+    def test_the_plain_filter_is_untouched_by_the_number_flag(self):
+        # The pin on the other side: a sentence that asks for the LINES must not
+        # grow line numbers it did not ask for.
+        f = self._file("cw4", "apple\nbanana\ncherry\n")
+        self.assertEqual("banana\n", _stdout(_solve(
+            "the lines in the file %s that contain 'an'" % f)))
+        self.assertEqual("apple\ncherry\n", _stdout(_solve(
+            "the lines in the file %s that do not contain 'an'" % f)))

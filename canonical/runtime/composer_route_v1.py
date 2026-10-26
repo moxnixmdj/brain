@@ -752,7 +752,15 @@ _ORDINALS = {"first": 1, "second": 2, "third": 3, "fourth": 4, "fifth": 5,
 
 
 def _cut_flags(n: int) -> list[str]:
-    return ["-f", str(n)]
+    # `-s` suppresses a line that has no delimiter at all.  Without it `cut -f 2`
+    # prints such a line UNCHANGED, which is POSIX-defined but is not the answer:
+    # measured on a file holding "apple banana cherry" with no tab anywhere, "the
+    # second column of the file X" was certified returning the entire file, as
+    # though every line were its own second column.  There is no second column in
+    # that file, and `-s` is what makes the command say so instead of inventing
+    # one.  On a real tab-separated file `-s` changes nothing and the column comes
+    # back exactly as before, which is pinned.
+    return ["-s", "-f", str(n)]
 
 
 def _head_flags(n: int) -> list[str]:
@@ -1202,6 +1210,12 @@ _BLANK_LINE = re.compile(
 # ones.  Hard-coding `-v` measured as answering the second with the first.
 _REMOVES_THE_LINES = re.compile(r"\b(?:remove|delete|drop|strip)\b")
 _MENTIONS_LINES = re.compile(r"\blines?\b")
+# A request for the NUMBERS of the lines, not a mention of a number.  Scoped to
+# the noun phrase so that "the third line" -- which names a line by its number --
+# is not mistaken for a request to print numbers.
+_ASKS_FOR_LINE_NUMBERS = re.compile(
+    r"\bline numbers?\b|\bnumbers? (?:of|for) the lines?\b"
+    r"|\bwith (?:their |the )?line numbers?\b|\bnumbered lines?\b")
 # Programs for which a second operand means "and this one too".  This is an
 # allowlist and not a blanket permission, because for three programs a second
 # operand means something else entirely -- measured, not assumed:
@@ -1704,7 +1718,16 @@ def _prose_argv(sentence: str) -> list[str] | None:
                     sentence, operand_paths[-1]):
                 operand_paths = operand_paths[:1]
             if len(operand_paths) == 1:
-                return [matcher, *(["-v"] if invert else []), str(needle),
+                # A sentence that asks for the LINE NUMBERS was being answered
+                # with the lines and no numbers: "the line numbers in the file X
+                # containing 'an'" was claimed here by the containment arm and
+                # certified returning 'banana' where the answer is '2:banana'.
+                # The number is the whole question, so dropping it is not a
+                # smaller answer, it is the wrong one.  `-n` is the flag that
+                # carries it and nothing else about the command changes.
+                _numbered = bool(_ASKS_FOR_LINE_NUMBERS.search(text)) and not invert
+                return [matcher, *(["-v"] if invert else []),
+                        *(["-n"] if _numbered else []), str(needle),
                         str(operand_paths[0])]
             return None
     # A sentence that names a SET of files by pattern -- "all the .log files in
@@ -1897,7 +1920,17 @@ def _prose_argv(sentence: str) -> list[str] | None:
     if (len(_asked) == 1 and "grep" in known and not _DIRECTORY_REQUEST.search(text)
             and re.search(r"\bcontain(?:s|ed|ing)?\b|\bmatch(?:es|ed|ing)?\b"
                           r"|\bappear(?:s|ed|ing)?\b", text)):
-        _masked = re.sub(re.escape(_asked[0]), " ", sentence, flags=re.IGNORECASE)
+        # The QUOTED SPAN is masked, not the bare value.  This line was a blind
+        # `re.sub(re.escape(_asked[0]), " ", sentence)` and it ate the value
+        # wherever those characters occurred -- including inside the path.  The
+        # sibling at _mask_a_quoted_value already documents this exact defect and
+        # was fixed there, but not here.  Measured with the file at
+        # canonical/astra_runtime/tmp/m3v7x/zz/u.txt: the pattern 'an' turned the
+        # operand into "c onical/astra_runtime/tmp/m3v7x/zz/u.txt", grep failed
+        # with "No such file or directory", and 13 of 15 two- and three-character
+        # patterns corrupted the path the same way.  A fix applied to one call
+        # site is not applied to its siblings.
+        _masked = _mask_a_quoted_value(sentence, _asked[0])
         _operands = extract_paths(_masked)
         if len(_operands) == 1:
             if re.search(r"\b(?:%s)\b" % _WC_QTY, text):
@@ -2134,7 +2167,13 @@ def _prose_argv(sentence: str) -> list[str] | None:
                 # No column stated.  Defaulting to 1 would be inventing the
                 # answer to the question the sentence actually asked.
                 return None
-            return [program, "-f", str(column), str(paths[0])]
+            # Through `_cut_flags`, not spelled out here: that helper is the one
+            # place cut's flags are defined, and this line had its own copy of
+            # them, which is why adding `-s` there changed nothing.  Measured: the
+            # helper returned ["-s", "-f", "2"] while the sentence still bound
+            # ["cut", "-f", "2"] and kept returning a whole file for a column
+            # that does not exist.
+            return [program, *_cut_flags(column), str(paths[0])]
         if program == "cp" and _DIRECTORY_REQUEST.search(text):
             return [program, "-r", str(paths[0]), str(paths[1])]
         if (program == "rm" and _DIRECTORY_REQUEST.search(text)
