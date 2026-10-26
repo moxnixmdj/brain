@@ -4423,3 +4423,105 @@ class TestThePlainestWordForAConceptIsInTheSameListAsItsSynonyms(unittest.TestCa
                             % (a, b))
         self.assertNotEqual("apple\nbanana\ncherry\n", _stdout(cmp_result),
                             "the two-file question was answered with a deduplicated set")
+
+
+class TestANegationAndALongFilenameAreNotSilentlyDropped(unittest.TestCase):
+    """Two certified wrong answers, found by a 28-row census of everyday requests.
+
+    Both were certified with the strongest verdict the system has, and neither
+    destroyed anything -- which is why they survived.
+
+    (1) "the lines in the file X that are NOT BLANK" bound `grep '^$'` with no
+        `-v` and returned the two blank lines: the exact opposite of the
+        question.  So did "the NON-BLANK lines".  Four phrasings of two opposite
+        questions bound one command, because the blank arm inverted for a REMOVAL
+        verb and for nothing else.
+
+    (2) "Make the file X all upper case" printed the upper-cased text, left the
+        file lower case, and was certified.  The rule that decides whether to
+        write the file back is `make ... upper` with TWENTY CHARACTERS allowed
+        between the words -- and a path sits between them.  Measured: with the
+        name `a.txt` it wrote the file; with `notes.txt` it did not.  The same
+        question, answered by how long the filename is.
+    """
+
+    NOTED = "# Title\n\nbody line\n\nlast\n"      # 5 lines: 3 non-blank, 2 blank
+    LOWER = "apple\nbanana\n"
+
+    def _f(self, name, content):
+        d = "%s/%s" % (SCRATCH, name)
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "notes.md").write_text(content, encoding="utf-8")
+        return d + "/notes.md"
+
+    def test_the_lines_that_are_not_blank_are_not_the_blank_lines(self):
+        for word in ("that are not blank", "that are not empty"):
+            f = self._f("nb1", self.NOTED)
+            result = _solve("the lines in the file %s %s" % (f, word))
+            self.assertTrue(_verified(result), "%s -> %s" % (word, result.get("status")))
+            self.assertEqual("# Title\nbody line\nlast\n", _stdout(result), word)
+        # And the hyphenated form, which is one word and not a window at all.
+        f = self._f("nb2", self.NOTED)
+        self.assertEqual("# Title\nbody line\nlast\n",
+                         _stdout(_solve("the non-blank lines in the file %s" % f)))
+
+    def test_the_blank_lines_are_still_the_blank_lines(self):
+        # The pin on the other side of the inversion: asking FOR the blank lines
+        # must not grow a -v it did not ask for.
+        for word in ("blank", "empty"):
+            f = self._f("nb3", self.NOTED)
+            result = _solve("the %s lines in the file %s" % (word, f))
+            self.assertTrue(_verified(result), result.get("status"))
+            self.assertEqual("\n\n", _stdout(result), word)
+
+    def test_removing_the_blank_lines_is_still_a_filter(self):
+        f = self._f("nb4", self.NOTED)
+        result = _solve("Remove the blank lines from the file %s" % f)
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual("# Title\nbody line\nlast\n", _stdout(result))
+        self.assertEqual(self.NOTED, (ROOT / f).read_text(encoding="utf-8"),
+                         "a filter must not rewrite the file")
+
+    def test_making_a_file_upper_case_changes_the_file(self):
+        f = self._f("up1", self.LOWER)
+        result = _solve("Make the file %s all upper case" % f)
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual("APPLE\nBANANA\n", (ROOT / f).read_text(encoding="utf-8"),
+                         "the sentence said MAKE THE FILE, and the file did not change")
+
+    def test_a_short_name_and_a_long_name_get_the_same_answer(self):
+        # The defect in one assertion.  The old rule allowed twenty characters
+        # between "make" and "upper", so the answer depended on the filename.
+        short = "a.txt"
+        long_ = "a-filename-long-enough-to-break-the-window.txt"
+        for name in (short, long_):
+            d = "%s/up2" % SCRATCH
+            (ROOT / d).mkdir(parents=True, exist_ok=True)
+            (ROOT / d / name).write_text(self.LOWER, encoding="utf-8")
+            result = _solve("Make the file %s/%s all upper case" % (d, name))
+            self.assertTrue(_verified(result), "%s -> %s" % (name, result.get("status")))
+            self.assertEqual("APPLE\nBANANA\n",
+                             (ROOT / d / name).read_text(encoding="utf-8"),
+                             "the filename decided the answer: %s" % name)
+
+    def test_showing_a_file_in_upper_case_still_does_not_write(self):
+        # The pin that must not move.  A request to be SHOWN something puts its
+        # answer on stdout and leaves the file alone, even though the script it
+        # binds would rewrite it.
+        f = self._f("up3", self.LOWER)
+        result = _solve("Show the contents of the file %s in upper case" % f)
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual("APPLE\nBANANA\n", _stdout(result))
+        self.assertEqual(self.LOWER, (ROOT / f).read_text(encoding="utf-8"))
+
+    def test_a_file_named_after_a_verb_is_not_a_request_to_change_it(self):
+        # Masking the path before reading the verbs cuts both ways: a file called
+        # `convert.md` is an operand, and its name must not turn a reading into a
+        # rewrite.
+        d = "%s/up4" % SCRATCH
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "convert.md").write_text(self.LOWER, encoding="utf-8")
+        result = _solve("Show the contents of the file %s/convert.md" % d)
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual(self.LOWER, (ROOT / d / "convert.md").read_text(encoding="utf-8"),
+                         "the filename made a reading into a rewrite")

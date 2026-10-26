@@ -1208,6 +1208,23 @@ _NEGATED_LINE = re.compile(
 # "Show the lines in the file X that are empty" did not, so the second fell all
 # the way through to `cat` and was certified with the whole file as the answer to
 # a question about one line of it.
+# The other way a sentence asks for the lines that are NOT blank.  The blank
+# arm below already inverted for a REMOVAL verb -- "Remove the blank lines" is a
+# filter that keeps the rest -- but the plain negation was never written, so
+# "the lines that are not blank" and "the non-blank lines" both bound
+# `grep '^$'` and were certified while handing back the blank lines themselves:
+# the exact opposite of the question.  Four phrasings of two opposite questions
+# bound one command, which is the shape that hides this.
+#
+# Tested against the masked sentence, not the raw one: these are windows between
+# two words, and a path sits between words.  That is the same defect measured in
+# the write-back gate below.
+_NEGATES_A_BLANK_LINE = re.compile(
+    r"\bnot\b[^\n]{0,20}?\b(?:blank|empty)\b"
+    r"|\bare\s*n'?t\b[^\n]{0,20}?\b(?:blank|empty)\b"
+    r"|\bnon[- ]?(?:blank|empty)\b"
+    r"|\bwithout\b[^\n]{0,20}?\b(?:blank|empty)\b")
+
 _BLANK_LINE = re.compile(
     r"\b(?:empty|blank)\b[^\n]{0,40}?\blines?\b"
     r"|\blines?\b[^\n]{0,40}?\b(?:empty|blank)\b")
@@ -1733,7 +1750,12 @@ def _prose_argv(sentence: str) -> list[str] | None:
             # expression, so it goes to `grep` and not to the literal matcher.
             needle = "^$"
             matcher = "grep"
-            invert = bool(_REMOVES_THE_LINES.search(text))
+            # Two ways to ask for the lines that are not the blank ones: say to
+            # REMOVE the blank ones, or say the lines are NOT blank.  Only the
+            # first was written, so the second returned the blank lines and was
+            # certified.  Read over the masked sentence for the reason above.
+            invert = bool(_REMOVES_THE_LINES.search(text)
+                          or _NEGATES_A_BLANK_LINE.search(_masked_for_blank.lower()))
         elif len(values) == 1 and _ASKS_FOR_A_PATTERN.search(text):
             # "matching 'ap.le'" states a REGULAR EXPRESSION, so this is `grep`
             # and not the literal matcher -- the opposite of the branch below it, and
@@ -2525,7 +2547,24 @@ def _declare_a_written_output(args: dict[str, Any], argv: Sequence[str],
             # is still accepted -- the upper-cased text is on stdout, which is
             # where a reading puts its answer.
             _said = str(sentence or "").lower()
-            if (_READ_VERBS.search(_said) or not _CHANGE_VERBS.search(_said)
+            # One of these rules is a DISTANCE between two words --
+            # `make ... upper` allows twenty characters between them -- and a path
+            # sits between the words.  Measured: "Make the file a.txt all upper
+            # case" was read as a request to change the file and wrote it back,
+            # while "Make the file notes.txt all upper case" was not, and the
+            # same question on a real path printed the upper-cased text, left the
+            # file lower case, and was certified.  The verb list decided the
+            # answer by how long the filename was.
+            #
+            # So the verbs are read over the sentence with its paths masked out,
+            # the way the blank-line arm above already masks before reading its
+            # own pattern.  A path is an operand, not a verb, and a file named
+            # `convert.txt` should not make a sentence a conversion.
+            _said_masked = _said
+            for _p in extract_paths(_said):
+                _said_masked = _said_masked.replace(str(_p).lower(), " ")
+            if (_READ_VERBS.search(_said_masked)
+                    or not _CHANGE_VERBS.search(_said_masked)
                     or not any(re.match(r"^(?:s[|/#]|\$a\s)", str(part).lstrip())
                                for part in argv[1:])):
                 return
