@@ -798,7 +798,7 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # third in this table and the first pattern to match wins -- so teaching
     # `uniq` the word "duplicate" alone would have changed nothing at all.
     (r"\b(?:remove|delete|erase)\b"
-     r"(?![^\n]{0,40}?\b(?:duplicate|repeated|unique)\b[^\n]{0,20}?\blines?\b)"
+     r"(?![^\n]{0,40}?\b(?:duplicates?|repeated|unique)\b(?!\.\w))"
      r"(?![^\n]{0,60}?\b(?:permission|permissions|bit|bits|line|lines|word|words|"
      r"character|characters|letter|letters|header|headers|footer|footers|space|"
      r"spaces|comment|comments|blank|blanks|row|rows|column|columns|field|fields|"
@@ -855,6 +855,26 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # "Put the lines of the file X in order" and "Arrange the lines of the file
     # X in order" both measured to bind nothing: the sentence states the RESULT
     # rather than naming the program.
+    # WHICH order, not merely that there is one.  All three measured to bind a
+    # bare `sort` and be certified: "in reverse order" returned the forward
+    # order, "numerically" returned the lexicographic one with 100 ahead of 2,
+    # and "remove duplicates" fell past `-u` below to the `rm` row and DELETED
+    # THE FILE.  They stand above the catch-all `sort` row because in this table
+    # the first pattern to match wins and that row matches any sentence
+    # containing the word "sort" at all.  "reverse ... lines" is a different
+    # operation and stays with `tac`.
+    (r"\bsort\w*\b[^\n]{0,40}?\b(?:reverse|reversed|descending)\b"
+     r"|\b(?:reverse|reversed|descending)\b[^\n]{0,40}?\bsort\w*\b",
+     "sort", lambda _n: ["-r"], 1),
+    (r"\bsort\w*\b[^\n]{0,40}?\b(?:numeric|numerically)\b"
+     r"|\b(?:numeric|numerically)\b[^\n]{0,40}?\bsort\w*\b",
+     "sort", lambda _n: ["-n"], 1),
+    # Anchored to the object, never to the file: "remove duplicates" names
+    # something INSIDE the file.  A file actually named duplicates.txt keeps its
+    # own answer -- measured, and the `\.\w` is what tells the two apart.
+    (r"\b(?:remove|delete|erase|drop|strip)s?\b[^\n]{0,40}?"
+     r"\b(?:duplicates?|repeated)\b(?!\.\w)",
+     "sort", lambda _n: ["-u"], 1),
     (r"\bsort(?:ed|ing)?\b|\bin order\b|\balphabetical(?:ly)?\b", "sort",
      _no_flags, 1),
     # `md5sum` must be tried BEFORE `sha256sum` now that the latter answers to
@@ -906,7 +926,7 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # and both put the noun before the adjective.  Measured against both.
     (r"\bunique\b|\bdistinct\b|\bdifferent\b[^\n]{0,20}?\blines?\b"
      r"|\b(?:remove|delete|erase|drop|strip)s?\b[^\n]{0,40}?"
-     r"\b(?:duplicate|duplicates|repeated)\b[^\n]{0,20}?\blines?\b",
+     r"\b(?:duplicate|duplicates|repeated)\b(?!\.\w)",
      "sort", lambda _n: ["-u"], 1),
     (r"\breverse\b[^\n]{0,40}?\blines?\b|\blines?\b[^\n]{0,40}?\breverse\b",
      "tac", _no_flags, 1),
