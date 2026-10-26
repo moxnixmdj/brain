@@ -34,7 +34,7 @@
   "route_class": "INTEGRATE"
  },
  "benchmark_or_family_rank_authority": false,
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Two causes, one shape. (1) A negation the sentence states does not reach the flags: the blank arm set `invert = bool(_REMOVES_THE_LINES.search(text))`, so 'Remove the blank lines' inverted and 'the lines that are not blank' did not, and both bound `grep '^$'`. The module already owns the mechanism -- `_NEGATED_LINE` inverts 'not contain', 'not matching' and 'without X' for the value arms -- but no negation was written for the blank arm. (2) A rule written as a DISTANCE between two words is a rule about how short the operand is. `_CHANGE_VERBS` ends with `make ... upper` allowing twenty characters, and the sentence puts a path between the words, so the verb list stopped matching at a filename nine characters long. The blocker is that both rules were written against a test sentence with a short name and no negation, and nothing re-read them against a real path.",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::One cause, three symptoms: a word that qualifies the operation never reached the flags, and the unqualified default was certified as the answer. The `rm` rule already carried a guard for this exact sentence and demanded one more word -- (?![^\\n]{0,40}?\\b(?:duplicate|repeated|unique)\\b[^\\n]{0,20}?\\blines?\\b) -- so 'remove duplicate LINES' was protected and 'remove duplicates' was not. The `-u` rule below required the same missing word, so the sentence fell past it to `rm`. The object of the verb decides the operation, not the verb.",
  "canonical_base_commit": "e8842f3157838a7ddc1379bc8da061a5b527c1cd",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
@@ -99,7 +99,11 @@
   ],
   "expected_parent_level_state_change": "Census certified wrong answers 7 -> 4. The destructive one is gone: the file survives 'remove duplicates' and a file actually named duplicates.txt is still deleted. Reverse and numeric now carry their flags. Suite 268 -> 275.",
   "iteration_limit": 4,
-  "obs_blocker": "One cause, three symptoms: a word that qualifies the operation never reached the flags, and the unqualified default was certified as the answer. The `rm` rule already carried a guard for this exact sentence and demanded one more word -- (?![^\\n]{0,40}?\\b(?:duplicate|repeated|unique)\\b[^\\n]{0,20}?\\blines?\\b) -- so 'remove duplicate LINES' was protected and 'remove duplicates' was not. The `-u` rule below required the same missing word, so the sentence fell past it to `rm`. The object of the verb decides the operation, not the verb.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "Deleting either lookahead was rejected: it would let `rm` bind on 'remove the trailing spaces'. Bypassing the table was rejected: the flag slot and lambda shape already exist and are what `-u` uses. Substituting a wider window was rejected: the same rule with a bigger number is not a fix.",
+   "intrinsic_or_path_specific": "Path-specific to canonical/runtime/composer_route_v1.py: two lookaheads that demanded the noun 'lines' after the object, and three ordering rows buried below a catch-all that matches the word 'sort' first.",
+   "surviving_causal_blocker": "One cause, three symptoms: a word that qualifies the operation never reached the flags, and the unqualified default was certified as the answer. The `rm` rule already carried a guard for this exact sentence and demanded one more word -- (?![^\\n]{0,40}?\\b(?:duplicate|repeated|unique)\\b[^\\n]{0,20}?\\blines?\\b) -- so 'remove duplicate LINES' was protected and 'remove duplicates' was not. The `-u` rule below required the same missing word, so the sentence fell past it to `rm`. The object of the verb decides the operation, not the verb."
+  },
   "obs_capability": {
    "capability_work_deleted": "NO_NEW_CAPABILITY_NO_NEW_ADAPTER_AND_NO_NEW_VERIFIER_MECHANISM",
    "existing_inherited_routes_checked": "sed's `r` command already appends a file after the addressed line; the `find` rule already built `-name` from a quoted value or a spelled-out ending; `_post_sort` already recomputed a promise from a source that survives; `_DIRECTORY_REQUEST`, `_quoted_values` and `_ASKS_A_COUNT_OR_A_NUMBER` were reused entire.",
@@ -2002,20 +2006,14 @@
      "path": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py"
     },
     {
-     "git_blob_sha": "origin/main:canonical/action_intents/THE_ORDER_A_REQUEST_NAMES_IS_NOT_THE_DEFAULT_ORDER_V1_20261026_V1.json",
-     "path": "canonical/action_intents/THE_ORDER_A_REQUEST_NAMES_IS_NOT_THE_DEFAULT_ORDER_V1_20261026_V1.json"
+     "git_blob_sha": "48b9bbbeca9bc031e38a894ec1766dd304e08fbf",
+     "path": "canonical/action_intents/A_WINDOW_BETWEEN_TWO_WORDS_IS_NOT_A_RULE_ABOUT_A_SENTENCE_V1_20261026_V1.json"
     }
    ],
    "decisive_question": "Does 'Sort the file X and remove duplicates' delete the file, and do 'in reverse order' and 'numerically' bind a bare `sort`, on main e8842f3?",
    "falsifier_id": "THE_ORDER_A_REQUEST_NAMES_IS_NOT_THE_DEFAULT_ORDER_V1_20261026_V1_FALSIFIER",
-   "known_counterexamples_checked": [
-    "a file actually NAMED duplicates.txt must still be removed by 'Remove the file duplicates.txt'",
-    "'remove the duplicate lines' must still bind `sort -u`, not `rm`",
-    "'Reverse the lines of the file X' must still bind `tac`, not `sort -r`",
-    "'Sort the file X' must still carry no ordering flag",
-    "'Sort the file X into Y' must still bind `sort -o`"
-   ],
-   "no_known_counterexample_reason": "Two counterexamples were measured on the base bytes and neither survives the fix: 'the lines that are not blank' and 'the non-blank lines' both returned the blank lines and were certified, and 'Make the file X all upper case' was certified while leaving the file lower case -- measured to depend on filename length, matching at five characters and failing at nine. After the fix the census has no certified wrong answer, the blank and empty forms still return the blank lines, 'Show ... in upper case' still does not write, and a file named convert.md is not rewritten by a request to be shown it. 3 of the 7 new tests fail when only the source file is reverted, and the five related suites hold at 332 passed.",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "All five known counterexamples were checked and are pinned in TestTheOrderARequestNamesIsNotTheDefaultOrder: a file named duplicates.txt is still removed; 'remove the duplicate lines', 'the unique lines' and 'the different lines' still bind `sort -u`; 'Reverse the lines' still binds `tac`; a plain sort still carries no flag.",
    "proposal_id": "THE_ORDER_A_REQUEST_NAMES_IS_NOT_THE_DEFAULT_ORDER_V1_20261026_V1"
   }
  },
