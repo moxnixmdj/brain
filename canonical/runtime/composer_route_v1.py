@@ -763,6 +763,27 @@ def _cut_flags(n: int) -> list[str]:
     return ["-s", "-f", str(n)]
 
 
+def _word_flags(n: int) -> list[str]:
+    # A WORD is a run of characters, and in a file whose columns are separated by
+    # spaces the delimiter is the space itself.  `-s` is right for a tab column
+    # and wrong here: with `-s` a line holding one word and no space at all would
+    # be suppressed rather than returned, and "the first word of each line" would
+    # quietly drop the lines it was asked about.
+    return ["-d", " ", "-f", str(n)]
+
+
+def _character_flags(n: int) -> list[str]:
+    # `cut -c1-N` takes the first N characters of EVERY line.  Measured, "the
+    # first 5 characters of each line" bound `sed -n 5p`, which prints the fifth
+    # LINE -- a different question, asked of a different unit.
+    return ["-c", "1-%d" % n]
+
+
+def _sort_key_flags(n: int) -> list[str]:
+    # `sort -k N` orders the lines by the Nth field, leaving every line whole.
+    return ["-k", str(n)]
+
+
 def _head_flags(n: int) -> list[str]:
     return ["-n", str(n)]
 
@@ -859,6 +880,26 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # contains both "show" and "first", and the first pattern to match wins.
     # Measured out of order, it bound `head -n 2` and returned two whole lines
     # when the sentence asked for one column.
+    # Three sentences, all measured to bind the wrong command, all answerable by
+    # a program already on the allowlist.  Each row sits ABOVE the `cut` row,
+    # which matches any sentence containing the word "column", and above the
+    # `head` row, which matches any "first ... line" -- and the table is
+    # first-match-wins, so a row below them would be dead code.
+    #
+    #   "Sort the file X by the second column"  -> `cut -s -f 2` -> EMPTY, and
+    #       CERTIFIED.  The file's columns are separated by spaces, so `cut`
+    #       found no tab and printed nothing, and an empty answer to "sort these
+    #       lines" passed as an exact semantic acceptance.
+    (r"\bsort\w*\b[^\n]{0,30}?\b(?:columns?|fields?)\b", "sort", _sort_key_flags, 1),
+    #   "the first word of each line"           -> `sed -n 1p` -> the first
+    #       LINE, and CERTIFIED.  A line is not a word; the sentence asked for
+    #       one unit and was answered with a larger one containing it.
+    (r"\b(?:first|second|third|fourth|fifth|top)\b[^\n]{0,20}?\bwords?\b",
+     "cut", _word_flags, 1),
+    #   "the first 5 characters of each line"   -> `sed -n 5p` -> the fifth
+    #       LINE.  Failed loudly rather than certifying, but it still answered a
+    #       question nobody asked.
+    (r"\bfirst\b[^\n]{0,20}?\bcharacters?\b", "cut", _character_flags, 1),
     (r"\bcut\b|\bfields?\b|\bcolumns?\b", "cut", _cut_flags, 1),
     # "Show me the beginning of the file X" measured to bind `cat`, which returns
     # the whole file.  Not a false answer, but the sentence asked for the
@@ -2262,7 +2303,14 @@ def _prose_argv(sentence: str) -> list[str] | None:
     # Singular "line", so "the first 3 lines" stays with `head`, which is the
     # command that means it, and only "the third line" comes here.
     _which = _prose_ordinal(sentence)
+    # A WORD and a CHARACTER are units too, and they are not lines.  Without this
+    # exclusion "the first word of each line in the file X" matched here on the
+    # singular "line" inside "each line", was answered with `sed -n 1p` -- the
+    # first LINE, a larger unit containing the one asked for -- and was
+    # CERTIFIED.  The object of the sentence decides the operation, and the rows
+    # in the table below are the ones that mean a word and a character range.
     if (_which is not None and "sed" in known
+            and not re.search(r"\b(?:words?|characters?)\b", text)
             and re.search(r"\bline\b", text) and not re.search(r"\blines\b", text)
             # No `not _ANOTHER_OPERATION` guard here, and putting one in measured
             # as the defect.  Gating the noun phrase on "states no other
@@ -2342,8 +2390,15 @@ def _prose_argv(sentence: str) -> list[str] | None:
         # A quantity in BYTES or CHARACTERS, not in lines.  `_WC_QTY` is excluded
         # so "Count the characters in X" stays with `wc -c`, which is the command
         # that answers it.
+        # `head -c N` reads the first N characters OF THE FILE.  A sentence that
+        # says "of each line" is asking a per-line question, and `cut -c1-N` is
+        # the command that means it.  Measured without this exclusion, "the first
+        # 5 characters of each line in the file X" bound `head -c 5` and came
+        # back CERTIFIED with "zebra" -- the first five characters of the whole
+        # file, from a three-line file, with the other two lines gone.
         if (re.search(r"\b(?:%s)\b" % _WC_CHARS, _prose)
                 and not re.search(r"\b(?:%s)\b" % _WC_QTY, _prose)
+                and not re.search(r"\b(?:each|every|per)\s+lines?\b", _prose)
                 and len(_digits) == 1):
             if re.search(r"\b(?:last|end)\b", _prose) and "tail" in known:
                 return ["tail", "-c", _digits[0], _operand]
@@ -2490,6 +2545,26 @@ def _prose_argv(sentence: str) -> list[str] | None:
                     return None
         paths = operands
         if program == "cut":
+            if re.search(r"\bcharacters?\b", text):
+                # How MANY characters, not which one.  `_prose_count` reads the
+                # number the sentence states; the ordinal word is the fallback so
+                # "the first character of each line" means one character and not
+                # nothing at all.
+                # A stated number wins; otherwise the ordinal word is the
+                # number.  `_prose_count` DEFAULTS to two when the sentence
+                # states nothing, and measured that way "the first character of
+                # each line" bound `cut -c1-2` and returned two characters per
+                # line -- an invented quantity the sentence never stated.
+                how_many = (_prose_count(text) if _COUNT_RE.search(text)
+                            else _prose_ordinal(sentence))
+                if not how_many:
+                    return None
+                return [program, *_character_flags(how_many), str(paths[0])]
+            if re.search(r"\bwords?\b", text):
+                which = _prose_ordinal(sentence)
+                if which is None:
+                    return None
+                return [program, *_word_flags(which), str(paths[0])]
             column = _prose_ordinal(sentence)
             if column is None:
                 # No column stated.  Defaulting to 1 would be inventing the
@@ -2531,6 +2606,14 @@ def _prose_argv(sentence: str) -> list[str] | None:
             # the sentence to the next loose one, so the loose one is scoped too.
             # A sentence that really asks for a listing says so.
             return None
+        if program == "sort" and re.search(r"\b(?:columns?|fields?)\b", text):
+            # The lines come back whole, ordered by the field the sentence named.
+            key = _prose_ordinal(sentence)
+            if key is None:
+                # No column stated.  Defaulting to 1 would order by a column the
+                # sentence never named -- the same refusal `cut` already makes.
+                return None
+            return [program, *_sort_key_flags(key), str(paths[0])]
         _count = _prose_count(text)
         if (program in ("head", "tail") and _COUNT_RE.search(text) is None
                 and re.search(r"\bline\b", text) and not re.search(r"\blines\b", text)):

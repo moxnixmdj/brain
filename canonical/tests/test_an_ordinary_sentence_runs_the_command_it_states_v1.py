@@ -5058,3 +5058,116 @@ class TestTopAndBottomArePositionsNotDecorations(unittest.TestCase):
         r = _solve("Show the first line of the file %s" % f)
         self.assertTrue(_verified(r))
         self.assertEqual(_stdout(r), "apple pie\n")
+
+
+class TestAUnitTheSentenceStatesReachesTheCommand(unittest.TestCase):
+    """Three units a sentence can name, all measured to bind the wrong command.
+
+    A word, a character range and a sort column are each answerable by a program
+    already on the allowlist -- `cut` and `sort` -- and each was claimed by a rule
+    that answers a different question:
+
+        "the first word of each line"          -> `sed -n 1p`, the first LINE,
+                                                 CERTIFIED.
+        "the first 5 characters of each line"  -> `head -c 5`, the first five
+                                                 characters OF THE FILE,
+                                                 CERTIFIED as "zebra".
+        "Sort the file X by the second column" -> `cut -s -f 2`, EMPTY,
+                                                 CERTIFIED.
+
+    None of them needed a pipeline, a new capability, or a new policy.  `cut -c`,
+    `cut -d` and `sort -k` were already available; only the wiring was missing.
+    """
+
+    LINES = "zebra apple\nalpha cherry\nbeta banana\n"
+
+    def _file(self, name="b1.txt"):
+        root = ROOT / SCRATCH
+        shutil.rmtree(root, ignore_errors=True)
+        root.mkdir(parents=True, exist_ok=True)
+        rel = "%s/%s" % (SCRATCH, name)
+        (ROOT / rel).write_text(self.LINES, encoding="utf-8")
+        return rel
+
+    # --- the three units, each compared against the command that means it.
+    def test_the_first_word_of_each_line_is_a_word_not_a_line(self):
+        f = self._file()
+        r = _solve("the first word of each line in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_argv(r)[:2], ["cut", "-d"])
+        self.assertEqual(_stdout(r), "zebra\nalpha\nbeta\n")
+
+    def test_the_second_word_of_each_line_is_the_second_word(self):
+        f = self._file()
+        r = _solve("the second word of each line in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple\ncherry\nbanana\n")
+
+    def test_the_first_characters_of_each_line_come_from_every_line(self):
+        f = self._file()
+        r = _solve("the first 5 characters of each line in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "zebra\nalpha\nbeta \n")
+
+    def test_a_character_count_the_sentence_does_not_state_is_not_invented(self):
+        # `_prose_count` DEFAULTS to two when nothing is stated.  Measured that
+        # way, "the first character of each line" bound `cut -c1-2` and returned
+        # two characters per line -- a quantity the sentence never said.
+        f = self._file()
+        r = _solve("the first character of each line in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "z\na\nb\n")
+
+    def test_sorting_by_a_stated_column_returns_the_lines_ordered_by_it(self):
+        f = self._file()
+        r = _solve("Sort the file %s by the second column" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_argv(r)[:3], ["sort", "-k", "2"])
+        self.assertEqual(_stdout(r),
+                         "zebra apple\nbeta banana\nalpha cherry\n")
+
+    # --- pins.  Every one of these was measured before the change.
+    def test_the_first_characters_of_the_file_are_still_read_from_the_file(self):
+        f = self._file()
+        r = _solve("Show the first 5 characters of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "zebra")
+
+    def test_the_last_characters_of_the_file_are_still_read_from_the_file(self):
+        f = self._file()
+        r = _solve("Show the last 5 characters of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "nana\n")
+
+    def test_an_numbered_line_is_still_exactly_one_line(self):
+        f = self._file()
+        r = _solve("the first line of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "zebra apple\n")
+
+    def test_a_tab_column_is_still_cut_with_the_suppressing_flag(self):
+        # `cut -s` is deliberate and pinned: a file with no tab HAS no second
+        # column, and `-s` is what makes the command say so.
+        f = self._file()
+        r = _solve("the second column of the file %s" % f)
+        self.assertEqual(_argv(r)[:4], ["cut", "-s", "-f", "2"])
+        self.assertEqual(_stdout(r), "")
+
+    def test_counting_characters_is_still_a_count(self):
+        f = self._file()
+        r = _solve("Count the characters in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertTrue(_stdout(r).split()[0] == "37", _stdout(r))
+
+    def test_sorting_with_no_column_stated_is_still_a_whole_line_sort(self):
+        f = self._file()
+        r = _solve("Sort the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r),
+                         "alpha cherry\nbeta banana\nzebra apple\n")
+
+    def test_a_span_of_lines_is_still_one_sed_script(self):
+        f = self._file()
+        r = _solve("Show lines 2 to 4 of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "alpha cherry\nbeta banana\n")
