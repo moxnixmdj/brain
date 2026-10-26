@@ -1242,6 +1242,33 @@ every each them they there here which what where from with without not no yes
 """.split())
 
 
+def _bare_alternatives(sentence: str) -> list[str] | None:
+    """The two values a sentence joins with "or", stated without quoting them.
+
+    Same masking as `_bare_stated_value`, for the same reason: a path is bare
+    text too, and read off the raw sentence the filename is offered as a value.
+    """
+    s = str(sentence or "")
+    for span in _QUOTED_SPAN.finditer(s):
+        s = s.replace(str(span.group(0)), " " * len(str(span.group(0))))
+    for path in extract_paths(s):
+        s = s.replace(str(path), " " * len(str(path)))
+    m = re.search(
+        r"\b(?:contain(?:s|ed|ing)?|match(?:es|ed|ing)?|includ\w*|hold(?:s|ing)?)"
+        r"\b(?:\s+(?:the|a|an|every|all|any|that|which))?"
+        r"(?:\s+(?:word|text|string|pattern|lines?|ones?))?"
+        r"\s+([A-Za-z0-9][A-Za-z0-9_+-]*)"
+        r"\s+or\s+"
+        r"(?:the\s+)?(?:word\s+|text\s+|string\s+|pattern\s+)?"
+        r"([A-Za-z0-9][A-Za-z0-9_+-]*)", s, re.IGNORECASE)
+    if not m:
+        return None
+    first, second = m.group(1), m.group(2)
+    if first.lower() in _NOT_A_STATED_VALUE or second.lower() in _NOT_A_STATED_VALUE:
+        return None
+    return [first, second]
+
+
 def _bare_stated_value(sentence: str) -> str | None:
     """The one value a sentence states bare, or None when it states none.
 
@@ -1278,6 +1305,16 @@ def _bare_stated_value(sentence: str) -> str | None:
 # containing APPLE in the file X ignoring case" bound `fgrep APPLE`, matched
 # nothing in a file that holds "apple pie", and was CERTIFIED returning an empty
 # answer.  The word was read, decided nothing, and was dropped.
+# Two values joined by "or" are ONE pattern with an alternation in it, and the
+# sentence says so in plain English.  Measured, all four phrasings of the same
+# question were wrong: "the lines containing apple or banana" bound `fgrep
+# apple` and dropped every banana line, certified; the quoted form quoted two
+# values, so `len(values) == 1` failed and it was refused; and "matching
+# 'apple|banana'" bound `grep`, which is BRE, where `|` is a LITERAL character
+# -- it matched nothing in a file that holds both words, certified.  `egrep` is
+# already a rule in this module and its exit status is already declared an
+# answer, so this is wiring, not new policy.
+_STATES_AN_ALTERNATIVE = re.compile(r"\bor\b|\beither\b", re.IGNORECASE)
 _ASKS_TO_IGNORE_CASE = re.compile(
     r"\bignor(?:e|es|ing)\s+(?:the\s+)?case\b|\bcase[\s-]*insensitive\b"
     r"|\bregardless\s+of\s+case\b|\bwithout\s+regard\s+to\s+case\b"
@@ -1806,6 +1843,10 @@ def _prose_argv(sentence: str) -> list[str] | None:
             _bare = _bare_stated_value(sentence)
             if _bare is not None:
                 values = [_bare]
+        if len(values) < 2:
+            _alts = _bare_alternatives(sentence)
+            if _alts is not None:
+                values = _alts
         # The blank test runs over the sentence with every path masked out, the
         # way `_prose_ordinal` reads its number from the prose alone.  Measured
         # without this: a file literally named `blank.txt` satisfied the pattern
@@ -1841,7 +1882,15 @@ def _prose_argv(sentence: str) -> list[str] | None:
             # three quote marks in it.  What matters is whether any quote is left
             # over once the spans the sentence really delimited are removed.
             return None
-        if blank:
+        if len(values) == 2 and _STATES_AN_ALTERNATIVE.search(text):
+            # "apple or banana" is one pattern with an alternation in it, and
+            # `egrep` is the program that reads an alternation.  Placed above the
+            # blank branch because a sentence that names two values has said what
+            # it wants more specifically than a sentence that says "empty".
+            needle = "|".join(str(v) for v in values)
+            matcher = "egrep"
+            invert = bool(_NEGATED_LINE.search(text))
+        elif blank:
             # `^$` is the pattern the sentence itself described -- a regular
             # expression, so it goes to `grep` and not to the literal matcher.
             needle = "^$"

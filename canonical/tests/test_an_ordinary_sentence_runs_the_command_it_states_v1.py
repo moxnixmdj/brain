@@ -842,12 +842,21 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
                          "a request for one column was answered with whole lines: %r" % argv)
 
     def test_a_search_that_states_no_pattern_is_refused(self):
-        """grep needs a pattern; a sentence that states none binds nothing."""
+        """grep needs a pattern; a sentence that states none binds nothing.
+
+        Rewritten harder, not deleted.  The second assertion used to require that
+        "matching 'a' or 'b'" bind NOTHING, on the reasoning that two stated
+        patterns are a guess between them.  They are not a guess: for a filter
+        over lines, "a or b" states ONE pattern with an alternation in it, and
+        `egrep` is the program that reads an alternation.  Refusing was better
+        than guessing; building the alternation the sentence actually stated is
+        better than refusing, and it is measured here from the argv.
+        """
         self.assertIsNone(_argv("Search the file %s/a1.txt" % SCRATCH),
                           "invented a search pattern")
-        self.assertIsNone(_argv("Find the lines in %s/a1.txt matching 'a' or 'b'"
-                                % SCRATCH),
-                          "guessed between two stated patterns")
+        argv = _argv("Find the lines in %s/a1.txt matching 'a' or 'b'" % SCRATCH)
+        self.assertEqual(argv[:2], ["egrep", "a|b"],
+                         "two values joined by 'or' are one alternation: %r" % (argv,))
 
     def test_the_counting_and_column_commands_run_and_report_the_real_numbers(self):
         """Read back from the command's own output, not from a flag."""
@@ -4857,3 +4866,108 @@ class TestAListWrittenTwiceIsAListEditedOnce(unittest.TestCase):
         d, _ = self._set()
         _solve("Delete the directory %s" % d)
         self.assertFalse((ROOT / d).exists())
+
+
+class TestTwoValuesJoinedByOrAreOnePattern(unittest.TestCase):
+    """An alternation stated in English is an alternation.
+
+    All four phrasings of one question were wrong.  "the lines containing apple
+    or banana" bound `fgrep apple` and dropped every banana line, certified.
+    The quoted form quoted two values, so the arm that requires exactly one
+    refused it.  And "matching 'apple|banana'" bound `grep` -- BRE, where `|` is
+    a LITERAL character -- matched nothing in a file holding both words, and was
+    certified with an empty answer.
+
+    `egrep` was already a rule in this module and its exit status was already
+    declared an answer.  This is wiring, not new policy.
+    """
+
+    LINES = "apple pie\nbanana split\napple tart\n\ncherry\n"
+    BOTH = "apple pie\nbanana split\napple tart\n"
+
+    def _file(self, content=None, name="a1.txt"):
+        root = ROOT / SCRATCH
+        shutil.rmtree(root, ignore_errors=True)
+        root.mkdir(parents=True, exist_ok=True)
+        rel = "%s/%s" % (SCRATCH, name)
+        (ROOT / rel).write_text(content or self.LINES, encoding="utf-8")
+        return rel
+
+    def test_two_values_joined_by_or_are_one_pattern(self):
+        f = self._file()
+        r = _solve("Show the lines containing apple or banana in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.BOTH)
+
+    def test_the_quoted_form_of_the_same_alternative(self):
+        f = self._file()
+        r = _solve("Show the lines containing 'apple' or 'banana' in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.BOTH)
+
+    def test_an_alternative_the_sentence_calls_a_regex_reaches_egrep(self):
+        # The module's design is three-way and pinned elsewhere: `fgrep` when the
+        # sentence calls the text literal, `grep` when it says "matching", `egrep`
+        # when it says regex.  So the supported way to state an alternation is to
+        # call it a regex -- and that is asserted here, because it is the phrasing
+        # a caller must use once "or" is the only English form the filter arm
+        # builds an alternation from.  "matching 'apple|banana'" stays BRE by
+        # design and is recorded as open, not silently re-dialected.
+        f = self._file()
+        r = _solve("Search the file %s for the regex 'apple|banana'" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.BOTH)
+
+    def test_a_pattern_the_sentence_only_calls_matching_stays_bre(self):
+        f = self._file()
+        r = _solve("Show the lines in the file %s matching 'ap.le'" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    # --- pins: the dialect change must be inert where a dot is all there is.
+    def test_a_regex_with_only_a_dot_is_unchanged(self):
+        f = self._file()
+        r = _solve("Show the lines in the file %s matching 'ap.le'" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    def test_a_negated_regex_still_inverts(self):
+        f = self._file()
+        r = _solve("Show the lines in the file %s not matching 'ap.le'" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "banana split\n\ncherry\n")
+
+    def test_a_single_value_is_still_a_literal_match(self):
+        f = self._file()
+        r = _solve("Show the lines containing apple in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    def test_a_single_quoted_value_is_still_a_literal_match(self):
+        f = self._file()
+        r = _solve("Show the lines containing 'apple' in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    def test_ignoring_case_still_reaches_the_command(self):
+        f = self._file()
+        r = _solve("Show the lines containing APPLE in the file %s ignoring case" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    def test_a_count_is_still_a_count(self):
+        f = self._file()
+        r = _solve("How many lines contain apple in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r).split()[0], "2")
+
+    def test_the_blank_lines_still_come_back(self):
+        f = self._file()
+        r = _solve("Show the blank lines in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "\n")
+
+    def test_a_value_that_cannot_be_recovered_is_still_refused(self):
+        f = self._file()
+        r = _solve("Show the lines containing text in the file %s" % f)
+        self.assertNotEqual(_stdout(r), self.LINES)
