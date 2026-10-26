@@ -24635,7 +24635,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "449efeec389aa365ce657e05e14fead91045262f3dc9a9f8b745969ab3d2a736"
+  "value": "f30fdb32bccfb2cf6a589a2bbb4d57041f48caa08a32c85ca0bcd20da0580ad2"
  },
  "engines": [
   {
@@ -46652,7 +46652,7 @@
   "included_source_count": 866,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "3e81574da42f18e4da0aef438357ac7774ce97cf764ed2d022155fbbd2d55248"
+  "source_tree_digest": "2342686dd529040811814be173be9bb2f06ca5da9d77b041dea94dac345beaf3"
  },
  "research_index": [
   {
@@ -191483,7 +191483,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "6c3ac78f6acd3b1e44f27c905753f1cc6504189652d75ff04b00798123ca840b",
+   "sha256": "b6573ae1f09a4970cba707a85ab92a98c8e419a6c01e0c7395308da898d8d9d0",
    "status": "",
    "terms": {
     "11": 2,
@@ -207350,14 +207350,16 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/capability_planner.py",
-   "sha256": "392d3422dce0d9fe448203957597e2b2a87f3c80e0f0cce74a6091369dc23892",
+   "sha256": "51689b253b9cb5c81ec6c69d7890de82f8032c387b31abf07489f8288b24d2a5",
    "summary": "Zero-dependency capability-graph planner for Project Brain.",
-   "symbol_count": 12,
+   "symbol_count": 14,
    "symbols": [
     "Capability",
     "PlanningFailure",
     "_append_channel",
     "_channel_candidates",
+    "_channel_format",
+    "_channel_schema",
     "_channel_where",
     "_normalize",
     "_resolve_effect_bindings",
@@ -207373,6 +207375,8 @@
     "capability": 2,
     "capability-graph": 1,
     "channel_candidates": 1,
+    "channel_format": 1,
+    "channel_schema": 1,
     "channel_where": 1,
     "normalize": 1,
     "plan_actions": 1,
@@ -207433,15 +207437,16 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/capability_proposal_generators.py",
-   "sha256": "744fd4895a27beb5f675f5553cdf096388ec6e271ce3e1774074bc421cadc811",
+   "sha256": "dd44ced72823bd90c8f5defa8e9c5e22c96ac844742df2f9031147e84331614a",
    "summary": "Fail-closed proposal generators for verified Project Brain capabilities.",
-   "symbol_count": 19,
+   "symbol_count": 20,
    "symbols": [
     "CapabilityProposalFailure",
     "_auto_output_path",
     "_bind_planned_inputs",
     "_channel_candidates",
     "_channel_endpoint_id",
+    "_channel_entry_format",
     "_channel_where",
     "_current_platform",
     "_fanin_expansion",
@@ -207466,6 +207471,7 @@
     "capabilityproposalfailure": 1,
     "channel_candidates": 1,
     "channel_endpoint_id": 1,
+    "channel_entry_format": 1,
     "channel_where": 1,
     "current_platform": 1,
     "fail-closed": 1,
@@ -221380,9 +221386,9 @@
    "imported_by_count": 7,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "3a5507f6aecec755fdc96d391c6298b45e5124278f9ed9356259771659736031",
+   "sha256": "2750a85b20090b7e58b766196f4a88e0a89c8d0eb922e566b27204ae62a15e11",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
-   "symbol_count": 125,
+   "symbol_count": 126,
    "symbols": [
     "GoalCompilationFailure",
     "_adapter_default_argv",
@@ -221398,6 +221404,7 @@
     "_capability_document",
     "_channel_candidates",
     "_channel_discriminator",
+    "_channel_entry_format",
     "_channel_where",
     "_claimed_paths",
     "_collect_effect_result_refs",
@@ -221406,8 +221413,7 @@
     "_compile_browser_result_record_projection",
     "_compile_compound_goal",
     "_compile_context_url_json_fetch",
-    "_compile_domain_free_authority_source_goal",
-    "_compile_dynamic_fanout_goal"
+    "_compile_domain_free_authority_source_goal"
    ],
    "terms": {
     "adapter_default_argv": 1,

@@ -53,8 +53,8 @@ import canonical.runtime.goal_compiler as gc  # noqa: E402
 EFFECT = "test.channel.effect"
 
 
-def _producer(cid):
-    return {
+def _producer(cid, fmt=None):
+    entry = {
         "id": cid,
         "provides": [EFFECT],
         "requires": ["test.channel.seed"],
@@ -62,6 +62,11 @@ def _producer(cid):
         "cost": 10,
         "action": {"type": "invoke_capability", "args": {"capability_id": cid}},
     }
+    if fmt is not None:
+        entry["channel_schema"] = {
+            "output_path": {"kind": "file", "format": fmt}
+        }
+    return entry
 
 
 def _consumer(cid, where=None):
@@ -106,12 +111,13 @@ class PlannerChannelTests(unittest.TestCase):
         self.assertEqual(set(ref), {"$result"})
         return ref["$result"]["cycle"]
 
-    def _store_with(self, *ids):
+    def _store_with(self, *ids, format_for=None):
         store = {}
         for cycle, cid in enumerate(ids):
+            fmt = (format_for or {}).get(cid) if format_for else None
             cap = planner._normalize(
                 {"initial_facts": [], "target_effects": [EFFECT],
-                 "capabilities": [_producer(cid)], "t": 1}
+                 "capabilities": [_producer(cid, fmt=fmt)], "t": 1}
             )[2][0]
             planner._append_channel(store, EFFECT, (cycle, cap))
         return store
@@ -168,7 +174,7 @@ class PlannerChannelTests(unittest.TestCase):
     def test_an_unknown_predicate_shape_fails_closed(self):
         with self.assertRaises(planner.PlanningFailure) as caught:
             planner.plan_actions(
-                _problem(_consumer("c", {"format": "json-text"}))
+                _problem(_consumer("c", {"weight": 2}))
             )
         self.assertIn("CAPABILITY_CHANNEL_INVALID", str(caught.exception))
 
@@ -182,6 +188,83 @@ class PlannerChannelTests(unittest.TestCase):
             self._consumer_cap(), {EFFECT: (3, alpha)},
         )
         self.assertEqual(out, {"$result": {"cycle": 3, "field": "output_path"}})
+
+    def test_a_format_predicate_selects_the_declared_channel(self):
+        """Phase C: channels carry format; consumers predicate on it."""
+        store = self._store_with(
+            "p.texty", "p.binary",
+            format_for={"p.texty": "json-text", "p.binary": "msgpack-binary"},
+        )
+        out = planner._resolve_effect_bindings(
+            {"$effect_result": {
+                "effect": EFFECT, "field": "output_path",
+                "where": {"format": "json-text"},
+            }},
+            self._consumer_cap(), store,
+        )
+        self.assertEqual(out, {"$result": {"cycle": 0, "field": "output_path"}})
+
+    def test_a_schema_less_producer_cannot_satisfy_a_format(self):
+        """No declaration, no predicate satisfaction: fail closed."""
+        store = self._store_with("p.undeclared")
+        with self.assertRaises(planner.PlanningFailure) as caught:
+            planner._resolve_effect_bindings(
+                {"$effect_result": {
+                    "effect": EFFECT, "field": "output_path",
+                    "where": {"format": "json-text"},
+                }},
+                self._consumer_cap(), store,
+            )
+        self.assertIn("BINDING_PROVIDER_MISSING", str(caught.exception))
+
+    def test_format_and_provider_compose(self):
+        store = self._store_with(
+            "p.a", "p.b",
+            format_for={"p.a": "json-text", "p.b": "json-text"},
+        )
+        out = planner._resolve_effect_bindings(
+            {"$effect_result": {
+                "effect": EFFECT, "field": "output_path",
+                "where": {"provider": "p.b", "format": "json-text"},
+            }},
+            self._consumer_cap(), store,
+        )
+        self.assertEqual(out, {"$result": {"cycle": 1, "field": "output_path"}})
+
+    def test_a_format_matching_two_channels_fails_closed(self):
+        store = self._store_with(
+            "p.a", "p.b",
+            format_for={"p.a": "json-text", "p.b": "json-text"},
+        )
+        with self.assertRaises(planner.PlanningFailure) as caught:
+            planner._resolve_effect_bindings(
+                {"$effect_result": {
+                    "effect": EFFECT, "field": "output_path",
+                    "where": {"format": "json-text"},
+                }},
+                self._consumer_cap(), store,
+            )
+        self.assertIn("CAPABILITY_CHANNEL_AMBIGUOUS", str(caught.exception))
+
+    def test_a_malformed_format_fails_closed(self):
+        with self.assertRaises(planner.PlanningFailure) as caught:
+            planner.plan_actions(
+                _problem(_consumer("c", {"format": ["json-text"]}))
+            )
+        self.assertIn("CAPABILITY_CHANNEL_INVALID", str(caught.exception))
+
+    def test_a_schema_without_format_is_refused_at_normalization(self):
+        with self.assertRaises(planner.PlanningFailure) as caught:
+            planner._normalize({
+                "initial_facts": [], "target_effects": [EFFECT],
+                "capabilities": [{
+                    "id": "p.bad", "provides": [EFFECT], "requires": [],
+                    "result_fields": ["output_path"],
+                    "channel_schema": {"output_path": {"kind": "file"}},
+                    "action": {"type": "x"},
+                }],
+            })
+        self.assertIn("CAPABILITY_CHANNEL_SCHEMA_INVALID", str(caught.exception))
 
 
 class ProposalBinderChannelTests(unittest.TestCase):
@@ -264,6 +347,64 @@ class ProposalBinderChannelTests(unittest.TestCase):
             self._consumer_entry(None), {EFFECT: ("inst-alpha", alpha)}
         )
         self.assertEqual(evidence["json_path"]["provider"], "inst-alpha")
+
+    def test_the_binder_selects_by_declared_format(self):
+        texty = _producer("x", fmt="json-text")
+        binary = _producer("y", fmt="msgpack-binary")
+        providers = {EFFECT: [("inst-texty", texty, "p.texty"),
+                              ("inst-binary", binary, "p.binary")]}
+        inputs, evidence = self._bind(
+            self._consumer_entry({"format": "msgpack-binary"}), providers
+        )
+        self.assertEqual(
+            inputs["json_path"]["$effect_result"]["where"],
+            {"format": "msgpack-binary"},
+        )
+        self.assertEqual(evidence["json_path"]["provider"], "inst-binary")
+
+
+class RegistryChannelDeclarationTests(unittest.TestCase):
+    """The declarations the whole law runs on, pinned to the registry."""
+
+    EXPECTED = {
+        "json.file.write": "json-text",
+        "math.numeric_expression.sympy": "json-text",
+        "yaml.to_json.yq": "json-text",
+        "auto.pypi.msgpack": "msgpack-binary",
+        "auto.npm.msgpack-msgpack": "msgpack-binary",
+        "auto.pypi.bson-modern": "bson-binary",
+        "auto.npm.dfinity-cbor": "cbor-binary",
+    }
+
+    def test_the_multi_provider_effects_declare_their_formats(self):
+        with open(
+            os.path.join(
+                REPO_ROOT, "canonical", "runtime",
+                "BOUND_CAPABILITY_REGISTRY_V1.json",
+            ),
+            "r", encoding="utf-8",
+        ) as handle:
+            caps = json.load(handle)["capabilities"]
+        for cid, fmt in self.EXPECTED.items():
+            schema = (caps.get(cid) or {}).get("channel_schema") or {}
+            self.assertEqual(
+                (schema.get("output_path") or {}).get("format"), fmt,
+                f"{cid} must declare output_path format {fmt} (its channel is "
+                "shared with siblings -- consumers predicate on this)",
+            )
+
+    def test_no_other_capability_declares_a_schema_yet(self):
+        """Phase C scope: exactly the seven multi-provider producers."""
+        with open(
+            os.path.join(
+                REPO_ROOT, "canonical", "runtime",
+                "BOUND_CAPABILITY_REGISTRY_V1.json",
+            ),
+            "r", encoding="utf-8",
+        ) as handle:
+            caps = json.load(handle)["capabilities"]
+        declared = sorted(cid for cid, e in caps.items() if e.get("channel_schema"))
+        self.assertEqual(declared, sorted(self.EXPECTED))
 
 
 class CompilerChannelTests(unittest.TestCase):

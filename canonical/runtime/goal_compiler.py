@@ -1569,58 +1569,91 @@ def _channel_candidates(store,effect):
 
 
 def _channel_where(where,detail):
-    """Validate an optional ``where`` predicate on an effect reference.
+    """Validate an optional ``where`` predicate; return (provider_set, format).
 
-    Phase B knows one predicate: ``provider`` (a capability id or a list).
-    Unknown shapes refuse loudly rather than degrade into a silent pick.
+    Phase C knows two predicates: ``provider`` (a capability id or a list) and
+    ``format`` (a declared channel format string, matched against a producer's
+    channel_schema for the exact field being bound). Unknown shapes refuse
+    loudly rather than degrade into a silent pick.
     """
     if where is None:
         return None
-    if not isinstance(where,dict) or set(where)!={"provider"}:
+    if not isinstance(where,dict) or not where or set(where)-{"provider","format"}:
         raise GoalCompilationFailure(
             "CAPABILITY_CHANNEL_INVALID",
             str(detail),
         )
-    provider=where["provider"]
-    if isinstance(provider,str) and provider.strip():
-        return {provider.strip()}
-    if (
-        isinstance(provider,list)
-        and provider
-        and all(isinstance(x,str) and x.strip() for x in provider)
-    ):
-        return {x.strip() for x in provider}
-    raise GoalCompilationFailure(
-        "CAPABILITY_CHANNEL_INVALID",
-        str(detail),
-    )
+    provider_set=None
+    if "provider" in where:
+        provider=where["provider"]
+        if isinstance(provider,str) and provider.strip():
+            provider_set={provider.strip()}
+        elif (
+            isinstance(provider,list)
+            and provider
+            and all(isinstance(x,str) and x.strip() for x in provider)
+        ):
+            provider_set={x.strip() for x in provider}
+        else:
+            raise GoalCompilationFailure(
+                "CAPABILITY_CHANNEL_INVALID",
+                str(detail),
+            )
+    fmt=None
+    if "format" in where:
+        fmt=where["format"]
+        if not (isinstance(fmt,str) and fmt.strip()):
+            raise GoalCompilationFailure(
+                "CAPABILITY_CHANNEL_INVALID",
+                str(detail),
+            )
+        fmt=fmt.strip()
+    return provider_set,fmt
 
 
-def _select_channel(candidates,where,detail):
+def _channel_entry_format(entry,field):
+    """Declared format of ``field`` on a registry entry, else None."""
+    schema=(entry or {}).get("channel_schema")
+    if not isinstance(schema,dict):
+        return None
+    spec=schema.get(field)
+    if not isinstance(spec,dict):
+        return None
+    fmt=str(spec.get("format") or "").strip()
+    return fmt or None
+
+
+def _select_channel(candidates,where,detail,field=""):
     """Pick one channel endpoint under the typed-channel law.
 
-    A ``provider`` predicate filters first; more than one survivor under it
-    fails closed CAPABILITY_CHANNEL_AMBIGUOUS. Without a predicate the
-    historical last-writer-wins law of overwrite stores is preserved exactly
-    (single-endpoint legacy maps trivially keep their only endpoint).
+    Predicates filter first: provider id set, then declared channel format for
+    the field being bound (schema-less producers cannot satisfy it). More than
+    one survivor under ANY predicate fails closed CAPABILITY_CHANNEL_AMBIGUOUS.
+    Without a predicate the historical last-writer-wins law of overwrite stores
+    is preserved exactly (single-endpoint legacy maps trivially keep theirs).
     """
     if not candidates:
         return None
-    provider_set=_channel_where(where,detail)
+    parsed=_channel_where(where,detail)
+    if parsed is None:
+        return candidates[-1]
+    provider_set,fmt=parsed
     chosen=candidates
     if provider_set is not None:
-        chosen=[x for x in candidates if x[0] in provider_set]
-        if len(chosen)>1:
-            raise GoalCompilationFailure(
-                "CAPABILITY_CHANNEL_AMBIGUOUS",
-                json.dumps({
-                    "detail":str(detail),
-                    "candidates":sorted(str(x[0]) for x in chosen),
-                },sort_keys=True),
-            )
+        chosen=[x for x in chosen if x[0] in provider_set]
+    if fmt is not None:
+        chosen=[x for x in chosen if _channel_entry_format(x[1],field)==fmt]
+    if len(chosen)>1:
+        raise GoalCompilationFailure(
+            "CAPABILITY_CHANNEL_AMBIGUOUS",
+            json.dumps({
+                "detail":str(detail),
+                "candidates":sorted(str(x[0]) for x in chosen),
+            },sort_keys=True),
+        )
     if not chosen:
         return None
-    return chosen[-1] if provider_set is None else chosen[0]
+    return chosen[0]
 
 
 def _channel_discriminator(ref):
@@ -1791,6 +1824,7 @@ def _append_producer_parts(
             _channel_candidates(providers,effect.lower()),
             ref.get("where"),
             str(effect)+"/"+str(field),
+            field=field,
         )
         if not provider:
             return False

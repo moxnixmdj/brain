@@ -358,6 +358,12 @@
           "type": "auto_path",
           "suffix": ".cbor"
         }
+      },
+      "channel_schema": {
+        "output_path": {
+          "kind": "file",
+          "format": "cbor-binary"
+        }
       }
     },
     "auto.npm.msgpack-msgpack": {
@@ -490,6 +496,12 @@
         "output_path": {
           "type": "auto_path",
           "suffix": ".msgpack"
+        }
+      },
+      "channel_schema": {
+        "output_path": {
+          "kind": "file",
+          "format": "msgpack-binary"
         }
       }
     },
@@ -659,6 +671,12 @@
           "type": "auto_path",
           "suffix": ".bson"
         }
+      },
+      "channel_schema": {
+        "output_path": {
+          "kind": "file",
+          "format": "bson-binary"
+        }
       }
     },
     "auto.pypi.msgpack": {
@@ -784,6 +802,12 @@
         "output_path": {
           "type": "auto_path",
           "suffix": ".msgpack"
+        }
+      },
+      "channel_schema": {
+        "output_path": {
+          "kind": "file",
+          "format": "msgpack-binary"
         }
       }
     },
@@ -2482,6 +2506,12 @@
           "output_verified": true
         },
         "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-JSON-FILE-WRITE-001__json.file.write__AUTO_VERIFY.json"
+      },
+      "channel_schema": {
+        "output_path": {
+          "kind": "file",
+          "format": "json-text"
+        }
       }
     },
     "json.query.jq": {
@@ -2996,6 +3026,12 @@
         "public_job_id": 109732664034,
         "public_run_id": 36666659921,
         "unsafe_rejection_pass": true
+      },
+      "channel_schema": {
+        "output_path": {
+          "kind": "file",
+          "format": "json-text"
+        }
       }
     },
     "pdf.extract.ocr.tesseract": {
@@ -6315,6 +6351,12 @@
           ]
         },
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-YAML-JSON-YQ-001__RECEIPT.json"
+      },
+      "channel_schema": {
+        "output_path": {
+          "kind": "file",
+          "format": "json-text"
+        }
       }
     }
   },

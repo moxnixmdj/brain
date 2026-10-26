@@ -29,6 +29,45 @@ class Capability:
     cost: float
     action: dict
     result_fields: frozenset[str]
+    # Typed composition channels: an optional declaration of what each result
+    # field materially IS ("kind"+"format"), published on the channel with the
+    # endpoint. Consumers may require a format; a producer that declares none
+    # cannot satisfy a format predicate. Tuple of sorted (field, kind, format)
+    # triples so the dataclass stays hashable.
+    channel_schema: tuple = ()
+
+
+def _channel_schema(value, cid):
+    """Validate/normalize an optional channel_schema block.
+
+    Shape: {"<result_field>": {"kind": <str>, "format": <str>}}. ``format`` is
+    mandatory per field -- a schema without it says nothing a consumer could
+    predicate on. Unknown shapes refuse loudly rather than degrade to
+    "declares nothing".
+    """
+    if value is None:
+        return ()
+    if not isinstance(value, dict) or not value:
+        raise PlanningFailure("CAPABILITY_CHANNEL_SCHEMA_INVALID", cid)
+    out = []
+    for field, spec in sorted(value.items(), key=lambda x: str(x[0])):
+        field = str(field).strip()
+        if not field or not isinstance(spec, dict):
+            raise PlanningFailure("CAPABILITY_CHANNEL_SCHEMA_INVALID", cid)
+        fmt = str(spec.get("format") or "").strip()
+        kind = str(spec.get("kind") or "").strip()
+        if not fmt:
+            raise PlanningFailure("CAPABILITY_CHANNEL_SCHEMA_INVALID", cid)
+        out.append((field, kind, fmt))
+    return tuple(out)
+
+
+def _channel_format(cap, field):
+    """Declared format of ``field`` on a normalized capability, else None."""
+    for f, _kind, fmt in getattr(cap, "channel_schema", ()):
+        if f == field:
+            return fmt
+    return None
 
 
 def _string_set(value, field):
@@ -70,7 +109,8 @@ def _normalize(problem):
         if not isinstance(action, dict) or not isinstance(action.get("type"), str):
             raise PlanningFailure("EXECUTABLE_ACTION_REQUIRED", cid)
         result_fields = _string_set(raw.get("result_fields", []), f"{cid}.result_fields")
-        caps.append(Capability(cid, requires, provides, cost, action, result_fields))
+        channel_schema = _channel_schema(raw.get("channel_schema"), cid)
+        caps.append(Capability(cid, requires, provides, cost, action, result_fields, channel_schema))
     return initial, targets, caps
 
 
@@ -162,58 +202,73 @@ def _channel_candidates(store, effect):
 
 
 def _channel_where(where, consumer_id):
-    """Validate an optional channel predicate.
+    """Validate an optional channel predicate; return (provider_set, format).
 
-    ``where`` narrows which producer of an effect a binding may land on.
-    Phase B knows one predicate: ``provider`` (a capability id or a list of
-    them). Anything else is refused loudly -- a predicate the binder does not
-    understand must never degrade into silently picking a producer anyway.
+    Phase C knows two predicates: ``provider`` (a capability id or a list of
+    them) and ``format`` (a declared channel format string, matched against the
+    producer's channel_schema for the exact field being bound). An empty or
+    unknown-keyed predicate is refused loudly -- never silently ignored.
     """
     if where is None:
         return None
-    if not isinstance(where, dict) or set(where) != {"provider"}:
+    if not isinstance(where, dict) or not where or set(where) - {"provider", "format"}:
         raise PlanningFailure("CAPABILITY_CHANNEL_INVALID", str(consumer_id))
-    provider = where["provider"]
-    if isinstance(provider, str) and provider.strip():
-        return {provider.strip()}
-    if (
-        isinstance(provider, list)
-        and provider
-        and all(isinstance(x, str) and x.strip() for x in provider)
-    ):
-        return {x.strip() for x in provider}
-    raise PlanningFailure("CAPABILITY_CHANNEL_INVALID", str(consumer_id))
+    provider_set = None
+    if "provider" in where:
+        provider = where["provider"]
+        if isinstance(provider, str) and provider.strip():
+            provider_set = {provider.strip()}
+        elif (
+            isinstance(provider, list)
+            and provider
+            and all(isinstance(x, str) and x.strip() for x in provider)
+        ):
+            provider_set = {x.strip() for x in provider}
+        else:
+            raise PlanningFailure("CAPABILITY_CHANNEL_INVALID", str(consumer_id))
+    fmt = None
+    if "format" in where:
+        fmt = where["format"]
+        if not (isinstance(fmt, str) and fmt.strip()):
+            raise PlanningFailure("CAPABILITY_CHANNEL_INVALID", str(consumer_id))
+        fmt = fmt.strip()
+    return provider_set, fmt
 
 
-def _select_channel(candidates, where, consumer_id):
+def _select_channel(candidates, where, consumer_id, field=""):
     """Pick one (cycle, producer) from an ordered channel list.
 
-    Laws: a ``where`` predicate filters first. Zero survivors or no channel is
-    the existing missing-provider refusal. More than one survivor UNDER a
-    predicate is a new fail-closed ambiguity -- the sentence asked for a
-    producer and got two. Without a predicate the historical last-writer-wins
-    law of the in-plan store is preserved exactly: the most recent producer
-    registered upstream of the consumer is the channel endpoint.
+    Laws: predicates filter first (provider id set, then declared channel
+    format for the field being bound; a producer that declares no schema for
+    the field cannot satisfy a format predicate). Zero survivors or no channel
+    is the existing missing-provider refusal. More than one survivor UNDER any
+    predicate fails closed CAPABILITY_CHANNEL_AMBIGUOUS. Without predicates the
+    historical last-writer-wins law of the in-plan store is preserved exactly.
     """
     if not candidates:
         return None
-    provider_set = _channel_where(where, consumer_id)
+    parsed = _channel_where(where, consumer_id)
+    if parsed is None:
+        return candidates[-1]
+    provider_set, fmt = parsed
     chosen = candidates
     if provider_set is not None:
         chosen = [
             x for x in candidates
             if getattr(x[1], "capability_id", None) in provider_set
         ]
-        if len(chosen) > 1:
-            raise PlanningFailure(
-                "CAPABILITY_CHANNEL_AMBIGUOUS",
-                f"{consumer_id}:" + ",".join(sorted(
-                    str(getattr(x[1], "capability_id", "?")) for x in chosen
-                )),
-            )
+    if fmt is not None:
+        chosen = [x for x in chosen if _channel_format(x[1], field) == fmt]
+    if len(chosen) > 1:
+        raise PlanningFailure(
+            "CAPABILITY_CHANNEL_AMBIGUOUS",
+            f"{consumer_id}:" + ",".join(sorted(
+                str(getattr(x[1], "capability_id", "?")) for x in chosen
+            )),
+        )
     if not chosen:
         return None
-    return chosen[-1] if provider_set is None else chosen[0]
+    return chosen[0]
 
 
 def _resolve_effect_bindings(value, consumer, providers):
@@ -233,7 +288,7 @@ def _resolve_effect_bindings(value, consumer, providers):
                 )
             channel = _channel_candidates(providers, effect)
             provider = _select_channel(
-                channel, spec.get("where"), consumer.capability_id
+                channel, spec.get("where"), consumer.capability_id, field
             )
             if provider is None:
                 raise PlanningFailure(

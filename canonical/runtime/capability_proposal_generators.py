@@ -245,57 +245,92 @@ def _channel_endpoint_id(candidate):
 
 
 def _channel_where(where,cid,key):
-    """Validate an optional channel predicate on a binding spec.
+    """Validate an optional channel predicate; return (provider_set, format).
 
-    Phase B knows one predicate: ``provider`` -- a capability id or a list of
-    them. Unknown shapes are refused loudly; a predicate the binder cannot
-    evaluate must never degrade into silently picking a producer anyway.
+    Phase C knows two predicates: ``provider`` -- a capability id or a list of
+    them -- and ``format`` -- a declared channel format string matched against
+    a producer's channel_schema for the exact field being bound. Unknown shapes
+    are refused loudly; a predicate the binder cannot evaluate must never
+    degrade into silently picking a producer anyway.
     """
     if where is None:
         return None
-    if not isinstance(where,dict) or set(where)!={"provider"}:
+    if not isinstance(where,dict) or not where or set(where)-{"provider","format"}:
         raise CapabilityProposalFailure(
             "CAPABILITY_CHANNEL_INVALID:"+str(cid)+":"+str(key)
         )
-    provider=where["provider"]
-    if isinstance(provider,str) and provider.strip():
-        return {provider.strip()}
-    if (
-        isinstance(provider,list)
-        and provider
-        and all(isinstance(x,str) and x.strip() for x in provider)
-    ):
-        return {x.strip() for x in provider}
-    raise CapabilityProposalFailure(
-        "CAPABILITY_CHANNEL_INVALID:"+str(cid)+":"+str(key)
-    )
+    provider_set=None
+    if "provider" in where:
+        provider=where["provider"]
+        if isinstance(provider,str) and provider.strip():
+            provider_set={provider.strip()}
+        elif (
+            isinstance(provider,list)
+            and provider
+            and all(isinstance(x,str) and x.strip() for x in provider)
+        ):
+            provider_set={x.strip() for x in provider}
+        else:
+            raise CapabilityProposalFailure(
+                "CAPABILITY_CHANNEL_INVALID:"+str(cid)+":"+str(key)
+            )
+    fmt=None
+    if "format" in where:
+        fmt=where["format"]
+        if not (isinstance(fmt,str) and fmt.strip()):
+            raise CapabilityProposalFailure(
+                "CAPABILITY_CHANNEL_INVALID:"+str(cid)+":"+str(key)
+            )
+        fmt=fmt.strip()
+    return provider_set,fmt
 
 
-def _select_channel(candidates,provider_set,cid,key):
+def _channel_entry_format(entry,field):
+    """Declared format of ``field`` on a registry entry, else None."""
+    schema=(entry or {}).get("channel_schema")
+    if not isinstance(schema,dict):
+        return None
+    spec=schema.get(field)
+    if not isinstance(spec,dict):
+        return None
+    fmt=str(spec.get("format") or "").strip()
+    return fmt or None
+
+
+def _select_channel(candidates,parsed_where,cid,key,field=""):
     """Pick one channel endpoint under the typed-channel law.
 
-    A ``provider`` predicate filters first. More than one survivor under a
-    predicate fails closed CAPABILITY_CHANNEL_AMBIGUOUS -- the goal named a
-    producer and the plan still has two. Without a predicate the historical
-    last-writer-wins law of the in-plan store is preserved exactly.
+    Predicates filter first: provider id set, then declared channel format for
+    the field being bound (a producer with no schema for that field cannot
+    satisfy a format predicate). More than one survivor under ANY predicate
+    fails closed CAPABILITY_CHANNEL_AMBIGUOUS. Without predicates the
+    historical last-writer-wins law of the in-plan store is preserved exactly.
     """
     if not candidates:
         return None,0
+    if parsed_where is None:
+        return candidates[-1],len(candidates)
+    provider_set,fmt=parsed_where
     chosen=candidates
     if provider_set is not None:
         chosen=[
-            x for x in candidates
+            x for x in chosen
             if _channel_endpoint_id(x) in provider_set
         ]
-        if len(chosen)>1:
-            raise CapabilityProposalFailure(
-                "CAPABILITY_CHANNEL_AMBIGUOUS:"
-                +str(cid)+":"+str(key)+":"
-                +",".join(sorted(str(_channel_endpoint_id(x)) for x in chosen))
-            )
+    if fmt is not None:
+        chosen=[
+            x for x in chosen
+            if _channel_entry_format(x[1],field)==fmt
+        ]
+    if len(chosen)>1:
+        raise CapabilityProposalFailure(
+            "CAPABILITY_CHANNEL_AMBIGUOUS:"
+            +str(cid)+":"+str(key)+":"
+            +",".join(sorted(str(_channel_endpoint_id(x)) for x in chosen))
+        )
     if not chosen:
         return None,len(candidates)
-    return (chosen[-1] if provider_set is None else chosen[0]),len(candidates)
+    return chosen[0],len(candidates)
 
 
 STATED_PRECEDENCE_TYPES=frozenset({"effect_result","auto_path","goal_url"})
@@ -452,7 +487,7 @@ def _bind_planned_inputs(
             field=str(spec.get("field") or "").strip()
             container=str(spec.get("container") or "scalar").strip()
             where=spec.get("where")
-            provider_set=_channel_where(where,cid,key)
+            parsed_where=_channel_where(where,cid,key)
             if effect not in requires:
                 raise CapabilityProposalFailure(
                     "PROPOSAL_EFFECT_BINDING_NOT_REQUIRED:"
@@ -470,7 +505,7 @@ def _bind_planned_inputs(
                         +str(cid)+":"+key+":"+bound_effect
                     )
                 provider,channel_size=_select_channel(
-                    channel,provider_set,cid,key
+                    channel,parsed_where,cid,key,field
                 )
                 if provider is None:
                     raise CapabilityProposalFailure(

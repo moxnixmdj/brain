@@ -297,7 +297,7 @@
           "route": "SCRATCH_IN_TMP"
         }
       ],
-      "checked_at_utc": "2026-10-26T23:25:06Z",
+      "checked_at_utc": "2026-10-26T23:45:55Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -352,10 +352,10 @@
         "TAMPERED_WORLD_MUST_FAIL__SELECTED_PART"
       ],
       "selected_route": "ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1",
-      "selected_route_checked_at_utc": "2026-10-26T23:25:06Z",
+      "selected_route_checked_at_utc": "2026-10-26T23:45:55Z",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-10-26T23:25:06Z",
+        "checked_at_utc": "2026-10-26T23:45:55Z",
         "execution_dependencies": [
           {
             "dependency": "python3 >= 3.11",
