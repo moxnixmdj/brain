@@ -778,6 +778,24 @@ _WC_WORDS = r"words?|word count"
 _WC_CHARS = r"bytes?|characters?|char count|byte count"
 _WC_LINES = r"lines?|line count"
 
+# The nouns that name something INSIDE a file rather than the file itself.
+# Written ONCE.  This list was written twice -- inline in the `rm` row's
+# lookahead below and again in `_REMOVES_SOMETHING_INSIDE_THE_FILE` -- and the
+# two copies were byte-identical across all 37 nouns, which is precisely how a
+# list comes to be edited in one place only.  Measured: `duplicate` was in
+# NEITHER copy, so the fix to the `rm` row's own duplicates clause left its
+# sibling deleting, and "Remove the duplicates from every file in the directory
+# D" bound `rm` over every file the set expansion matched -- the directory came
+# back EMPTY, certified.  A set expansion turns one wrong deletion into a whole
+# directory of them, which is the reason this list exists at all.
+_INSIDE_THE_FILE_NOUNS = (
+    r"permission|permissions|bit|bits|line|lines|word|words|character|"
+    r"characters|letter|letters|header|headers|footer|footers|space|spaces|"
+    r"comment|comments|blank|blanks|row|rows|column|columns|field|fields|"
+    r"entry|entries|tag|tags|number|numbers|indentation|prefix|suffix|"
+    r"duplicate|duplicates|repeat|repeats|repeated"
+)
+
 _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # Synonyms measured rather than guessed: "duplicate the file a as b" bound
     # nothing at all, so a request the machine can do was refused for want of one
@@ -799,10 +817,7 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # `uniq` the word "duplicate" alone would have changed nothing at all.
     (r"\b(?:remove|delete|erase)\b"
      r"(?![^\n]{0,40}?\b(?:duplicates?|repeated|unique)\b(?!\.\w))"
-     r"(?![^\n]{0,60}?\b(?:permission|permissions|bit|bits|line|lines|word|words|"
-     r"character|characters|letter|letters|header|headers|footer|footers|space|"
-     r"spaces|comment|comments|blank|blanks|row|rows|column|columns|field|fields|"
-     r"entry|entries|tag|tags|number|numbers|indentation|prefix|suffix)\b)"
+     r"(?![^\n]{0,60}?\b(?:" + _INSIDE_THE_FILE_NOUNS + r")\b)"
      r"(?![^\n]{0,40}?\bfrom the (?:file|files)\b)",
      "rm", _no_flags, 1),
     (r"\b(?:create|make)\b[^.\n]{0,40}?\b(?:directory|folder)\b", "mkdir",
@@ -1459,10 +1474,7 @@ _READ_VERBS = re.compile(r"\b(?:show|print|read|display)\b")
 # verb rather than to the verb.
 _REMOVES_SOMETHING_INSIDE_THE_FILE = re.compile(
     r"\bfrom the (?:file|files)\b"
-    r"|\b(?:permission|permissions|bit|bits|line|lines|word|words|character|"
-    r"characters|letter|letters|header|headers|footer|footers|space|spaces|"
-    r"comment|comments|blank|blanks|row|rows|column|columns|field|fields|"
-    r"entry|entries|tag|tags|number|numbers|indentation|prefix|suffix)\b",
+    r"|\b(?:" + _INSIDE_THE_FILE_NOUNS + r")\b",
     re.IGNORECASE)
 
 _CHANGE_VERBS = re.compile(
@@ -2300,10 +2312,21 @@ def _prose_argv(sentence: str) -> list[str] | None:
     # reported as the work that was asked for.  The removals that ARE owned keep
     # working and are pinned -- duplicate, repeated, unique, empty and blank lines
     # each reach a rule that really performs them.
+    # The exclusion below names the removals a rule really OWNS, and it demanded
+    # the noun "lines" after the word -- the same shape as the defect it guards:
+    # "remove duplicate LINES" was owned and "remove duplicates" was not, so a
+    # sentence the `sort -u` row serves was refused here first.  Scoped to a
+    # sentence that says SORT, because that is what makes the removal owned; a
+    # bare "remove the duplicates from every file in the directory D" is owned by
+    # nothing and must stay refused rather than fall through to a reader.
     if (re.search(r"\b(?:remove|delete|erase)s?\b", text)
             and _REMOVES_SOMETHING_INSIDE_THE_FILE.search(text)
             and not re.search(
                 r"\b(?:duplicate|repeated|unique|empty|blank)\b[^\n]{0,20}?\blines?\b",
+                text)
+            and not re.search(
+                r"\bsort\w*\b[^\n]{0,60}?\b(?:duplicates?|repeats?|repeated)\b"
+                r"|\b(?:duplicates?|repeats?|repeated)\b[^\n]{0,60}?\bsort\w*\b",
                 text)):
         return None
     # "How many files are in the directory D" measured as binding `ls D` and was
