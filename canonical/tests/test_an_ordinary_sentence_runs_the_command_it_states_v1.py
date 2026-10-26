@@ -4082,3 +4082,123 @@ class TestAColumnThatIsNotThereAndANumberThatWasAskedFor(unittest.TestCase):
             "the lines in the file %s that contain 'an'" % f)))
         self.assertEqual("apple\ncherry\n", _stdout(_solve(
             "the lines in the file %s that do not contain 'an'" % f)))
+
+
+class TestAShapeIsAWayToAskForASetOfFiles(unittest.TestCase):
+    """Stating which files you want is a question about a set, not a request for a listing.
+
+    A ten-row census of set-of-files requests, judged against the real `find` run
+    in a parallel directory, scored TWO of ten on main 17993e0.  Eight were
+    certified wrong answers and none of them destroyed anything, which is what
+    let them survive: the answer is always a plausible list of real names from
+    the right directory.
+
+        "the files in the directory D ending with '.log'"   -> `ls D`, every entry
+        "the files in the directory D starting with 'one'"  -> `ls D`, every entry
+        "the .log files in the directory D"                 -> `ls D`, every entry
+            Each returned keep.txt and a SUBDIRECTORY alongside the two files
+            that were asked about.
+
+        "Find the files in the directory D that end with '.log'"
+            -> `find D -name '.log'`, a pattern matching a file literally named
+               ".log", returning NOTHING -- certified, in a directory holding two
+               .log files.  The same sentence WITHOUT quotes around .log was
+               correct, which is what kept it hidden: the defect was in the
+               quoting, not in the question.
+
+        "the files in the directory D and its subdirectories ending with '.log'"
+            -> nothing, for the same reason.
+
+    There were two causes.  The set block could only be entered by the verb
+    "find" or by the word "named"; a sentence that states a SHAPE instead never
+    reached it and fell through to the `ls` row, which matches anything holding
+    both "files" and "directory".  And inside the block, the quoted branch used
+    the value raw while the unquoted branch built `*` + value, so quoting the
+    value turned a suffix pattern into a literal name.
+    """
+
+    def _dir(self, name):
+        d = "%s/%s" % (SCRATCH, name)
+        (ROOT / d / "sub").mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "one.log").write_text("x\n", encoding="utf-8")
+        (ROOT / d / "two.log").write_text("y\n", encoding="utf-8")
+        (ROOT / d / "keep.txt").write_text("z\n", encoding="utf-8")
+        (ROOT / d / "sub" / "deep.log").write_text("w\n", encoding="utf-8")
+        return d
+
+    @staticmethod
+    def _names(result):
+        return sorted(x.rsplit("/", 1)[-1] for x in _stdout(result).split())
+
+    def test_an_ending_selects_a_set_and_not_the_whole_directory(self):
+        d = self._dir("sf1")
+        result = _solve("the files in the directory %s ending with '.log'" % d)
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual(["deep.log", "one.log", "two.log"], self._names(result))
+        # The two things a listing adds and a set must not: a file that does not
+        # match, and a directory, which is not a file at all.
+        self.assertNotIn("keep.txt", self._names(result))
+        self.assertNotIn("sub", self._names(result))
+
+    def test_the_quoted_form_is_not_read_as_a_literal_filename(self):
+        # The defect that returned nothing: `-name '.log'` matches a file called
+        # ".log" and there is no such file, so the answer was empty and certified.
+        d = self._dir("sf2")
+        for goal in ("Find the files in the directory %s that end with '.log'" % d,
+                     "the files in the directory %s that end with '.log'" % d,
+                     "the files in the directory %s ending with .log" % d):
+            result = _solve(goal)
+            self.assertTrue(_verified(result), "%s -> %s" % (goal, result.get("status")))
+            self.assertEqual(["deep.log", "one.log", "two.log"], self._names(result),
+                             "the quoted and unquoted forms of the same shape must "
+                             "give the same set: %s" % goal)
+
+    def test_an_extension_in_front_of_the_word_files_names_the_set(self):
+        d = self._dir("sf3")
+        want = ["deep.log", "one.log", "two.log"]
+        for goal in ("the .log files in the directory %s" % d,
+                     "all the .log files in the directory %s" % d):
+            result = _solve(goal)
+            self.assertTrue(_verified(result), "%s -> %s" % (goal, result.get("status")))
+            self.assertEqual(want, self._names(result), goal)
+
+    def test_a_prefix_shape_selects_by_prefix(self):
+        d = self._dir("sf4")
+        result = _solve("the files in the directory %s starting with 'one'" % d)
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual(["one.log"], self._names(result))
+
+    def test_a_shape_asked_for_over_a_tree_walks_the_tree(self):
+        # The explicit tree form and the plain form must agree: both are a walk,
+        # and a question is not a different question for saying "subdirectories".
+        d = self._dir("sf5")
+        want = ["deep.log", "one.log", "two.log"]
+        self.assertEqual(want, self._names(_solve(
+            "the files in the directory %s and its subdirectories ending with '.log'" % d)))
+
+    def test_the_plain_listing_is_still_a_listing(self):
+        # The pin on the other side of the widening.  A sentence that states no
+        # shape at all asks for everything in the directory, and it must keep
+        # getting everything -- including the subdirectory, which `ls` reports.
+        d = self._dir("sf6")
+        result = _solve("the files in the directory %s" % d)
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual(["keep.txt", "one.log", "sub", "two.log"], self._names(result))
+
+    def test_a_shape_does_not_turn_a_deletion_or_a_creation_into_a_listing(self):
+        # Both of these were measured regressions the last time this entry
+        # condition was widened, and both are pinned.  A set search reads; a
+        # deletion and a creation are not readings, and answering either with a
+        # list of names is a certified answer to a different question.
+        d = self._dir("sf7")
+        for goal in ("Delete the .log files in the directory %s" % d,
+                     "Delete the files in the directory %s ending with '.log'" % d):
+            result = _solve(goal)
+            self.assertFalse(_verified(result), "%s was answered with a listing: %s"
+                             % (goal, _stdout(result)))
+        self.assertTrue((ROOT / d / "one.log").exists(), "a refusal must not delete")
+        self.assertTrue((ROOT / d / "keep.txt").exists())
+        made = _solve("Make a folder named %s/brandnew" % d)
+        self.assertTrue((ROOT / d / "brandnew").is_dir(),
+                        "a creation answered with a listing creates nothing: %s"
+                        % made.get("status"))
