@@ -1159,7 +1159,12 @@ def _quoted_values(sentence: str) -> list[str]:
 _NEGATED_LINE = re.compile(
     r"\b(?:do(?:es)?n't|do(?:es)? not|don't|without|excluding|except)\b"
     r"[^\n]{0,40}?\b(?:contain|containing|match|matching|include|including|have)\b"
-    r"|\bnot\b[^\n]{0,20}?\b(?:contain|match|include)\b"
+    # Inflected, because `\bmatch\b` does not match "matching" -- the word
+    # boundary falls between the `h` and the `i` and there is none.  Measured:
+    # "the lines in X not matching 'ap.le'" satisfied no arm, so the negation was
+    # dropped and the sentence was certified with the MATCHING lines, the exact
+    # opposite of what it asked for.
+    r"|\bnot\b[^\n]{0,20}?\b(?:contain\w*|match\w*|include\w*)\b"
     # "the lines WITHOUT 'apple'" -- the same direct introduction, negated.
     # Measured: it satisfied neither arm, because neither `without` nor the
     # value was followed by a verb of containing, so the sentence fell through
@@ -1178,6 +1183,13 @@ _BLANK_LINE = re.compile(
 # ones.  Hard-coding `-v` measured as answering the second with the first.
 _REMOVES_THE_LINES = re.compile(r"\b(?:remove|delete|drop|strip)\b")
 _MENTIONS_LINES = re.compile(r"\blines?\b")
+# A sentence that asks which lines MATCH something states a pattern, and the
+# plainest form of it -- with no verb -- was refused while "Find the lines in X
+# matching 'ap.le'" was answered, because the row that binds `grep` for a pattern
+# is keyed on the words grep, search and find.  Measured on main 6c456d9:
+#     "the lines in the file X matching 'ap.le'"       -> refused
+#     "Find the lines in the file X matching 'ap.le'"  -> 3 lines
+_ASKS_FOR_A_PATTERN = re.compile(r"\bmatch(?:es|ed|ing)?\b|\bregex\b|\bregular expression\b")
 # The questions a count rule and a line-number rule own.  A sentence that asks
 # HOW MANY lines hold a text, or WHICH ones, is not asking for the lines
 # themselves, and answering it with the lines would be a certified wrong answer.
@@ -1224,6 +1236,20 @@ _ANOTHER_OPERATION = re.compile(
     r"|\blower[\s-]*case\b|\blowercase\b|\brevers\w*|\bnumbered\b")
 _FILTER_LINE = re.compile(
     r"\b(?:remove|delete|drop|strip|write|show|list|print)\b[^\n]{0,40}?\blines?\b")
+# Every one of those is a VERB, and that was the whole defect: the plainest way to
+# ask -- with no verb at all -- was refused while the same question with a verb in
+# front of it was answered.  Measured on main 6c456d9:
+#     "the empty lines in the file X"                    -> refused
+#     "Show me the empty lines in the file X"            -> answered, `\n`
+#     "the lines in the file X matching 'ap.le'"         -> refused
+#     "Find the lines in the file X matching 'ap.le'"    -> answered, 3 lines
+# A question does not become a different question by dropping its verb.
+#
+# `match` is deliberately NOT one of these words.  Measured with it added, the
+# filter block claimed "the lines in X matching 'ap.le'" and handed the quoted
+# value to `fgrep`, which searches LITERALLY -- so a pattern question was answered
+# with an empty result and certified.  A sentence that says "matching" states a
+# regex and belongs to the row that binds `grep`, not to this one.
 
 
 # A request about a DIRECTORY is not the same request about a file, and the
@@ -1483,7 +1509,16 @@ def _prose_argv(sentence: str) -> list[str] | None:
     _asks_a_filter = _FILTER_LINE.search(text) or (
         _MENTIONS_LINES.search(text)
         and _STATES_A_LITERAL_VALUE.search(text)
-        and not _ASKS_A_COUNT_OR_A_NUMBER.search(text))
+        and not _ASKS_A_COUNT_OR_A_NUMBER.search(text)) or (
+        # Two verbless arms, each scoped to a sentence that mentions lines.  A
+        # sentence about empty or blank lines is asking for them whether or not it
+        # says "show", and "the lines in X matching 'ap.le'" states a pattern just
+        # as plainly as "the lines in X that contain 'apple'" states a value.  The
+        # count and line-number exclusions still apply, so "how many empty lines"
+        # stays a count and "which lines match" stays a numbered listing.
+        _MENTIONS_LINES.search(text)
+        and not _ASKS_A_COUNT_OR_A_NUMBER.search(text)
+        and (_BLANK_LINE.search(text) or _ASKS_FOR_A_PATTERN.search(text)))
     if _asks_a_filter and "grep" in known:
         values = _quoted_values(sentence)
         # The blank test runs over the sentence with every path masked out, the
@@ -1491,13 +1526,24 @@ def _prose_argv(sentence: str) -> list[str] | None:
         # without this: a file literally named `blank.txt` satisfied the pattern
         # by its own NAME, and the gap "lines in the file <path> that are empty"
         # is longer than the pattern allowed once the path sat in the middle.
-        _masked_for_blank = text
-        for _p in extract_paths(sentence):
+        # Quoted spans are masked BEFORE paths, and the order is the whole fix.
+        # `extract_paths` reads `ap.le` as a FILENAME -- it has a dot -- so when
+        # paths were masked first, "the lines in X matching 'ap.le'" arrived here
+        # as `matching '     '`: the pattern had been eaten, the quoted span no
+        # longer matched, and the stray-quote guard below refused a well-formed
+        # question.  Measured: `match-verb` answered three lines before this arm
+        # existed only because it never entered this block at all.
+        _prespanned = str(sentence)
+        for _span in _QUOTED_SPAN.finditer(_prespanned):
+            _prespanned = _prespanned.replace(str(_span.group(0)),
+                                              " " * len(str(_span.group(0))))
+        _masked_for_blank = _prespanned
+        for _p in extract_paths(_prespanned):
             _masked_for_blank = _masked_for_blank.replace(str(_p).lower(), " ")
         blank = bool(_BLANK_LINE.search(_masked_for_blank))
+        # The stray-quote guard still bites on `'a'b'`: the span `'a'` is removed
+        # and a lone quote is left over, which is exactly what it is for.
         _unspanned = _masked_for_blank
-        for _span in _QUOTED_SPAN.finditer(str(sentence)):
-            _unspanned = _unspanned.replace(str(_span.group(0)).lower(), " ")
         if "'" in _unspanned or '"' in _unspanned:
             # A quote mark the sentence opened and never closed, so what it quoted
             # is not recoverable: "contain 'a'b'" reads as the value `a` followed
@@ -1516,6 +1562,19 @@ def _prose_argv(sentence: str) -> list[str] | None:
             needle = "^$"
             matcher = "grep"
             invert = bool(_REMOVES_THE_LINES.search(text))
+        elif len(values) == 1 and _ASKS_FOR_A_PATTERN.search(text):
+            # "matching 'ap.le'" states a REGULAR EXPRESSION, so this is `grep`
+            # and not the literal matcher -- the opposite of the branch below it, and
+            # the difference is the whole answer: `fgrep 'ap.le'` matches nothing
+            # in a file that holds "apple".  Placed above BOTH branches below it,
+            # because a sentence that says "matching" has said which reading it
+            # means.  Measured below the negated branch: "the lines in X not
+            # matching 'ap.le'" was served by `fgrep -v`, the literal `ap.le`
+            # matched nothing, and inverting that returned the WHOLE FILE --
+            # certified, for a question about two of its lines.
+            needle = values[0]
+            matcher = "grep"
+            invert = bool(_NEGATED_LINE.search(text))
         elif len(values) == 1 and _NEGATED_LINE.search(text):
             needle = values[0]
             matcher = "fgrep"
