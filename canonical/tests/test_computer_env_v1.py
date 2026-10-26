@@ -1043,3 +1043,113 @@ class GeneralisingTests(unittest.TestCase):
             self.assertNotIn(cenv._LITERAL_HOLE, joined,
                              "the command was run with the hole still in it")
             self.assertIn("WARN", joined)
+
+
+class RepeatedLinesAreNotEveryLine(unittest.TestCase):
+    """A count of the lines that repeat was being answered with every line.
+
+    "how many duplicate lines are in the file X" was classified as the kind
+    `lines`, because `_PROBE_KINDS` held `uniquelines` -- with the words
+    "unique lines", "distinct lines" and "different lines" -- and nothing at
+    all for the opposite half of the same question.  So on a file holding
+
+        apple banana apple cherry banana      (5 lines, 3 distinct, 2 repeated)
+
+    `answer_query` returned '5' with status
+    PASS__MEASURED_BY_ONE_TRACKED_INSTRUMENT: grep had honestly proved, on
+    files built to hold 7 and 13 lines, that it counts lines.  The instrument
+    was calibrated.  It was pointed at the wrong thing, and the word that
+    said which thing -- "duplicate" -- had been dropped on the floor.
+    """
+
+    def setUp(self) -> None:
+        self.tmp = pathlib.Path(tempfile.mkdtemp(prefix="brain-repeated-"))
+        self.work = self.tmp
+        # 5 lines, 3 distinct, 2 that repeat -- and the twins are NOT
+        # neighbours, so a tool that only collapses neighbours is caught.
+        self.file = self.work / "a.txt"
+        self.file.write_text("apple\nbanana\napple\ncherry\nbanana\n")
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def test_the_opposite_half_of_the_question_is_its_own_kind(self):
+        # The defect in one assertion: the classifier read "how many
+        # duplicate lines" and heard only "lines".
+        self.assertEqual("duplicatelines",
+                         cenv.query_kind("how many duplicate lines are in the file a.txt"))
+        self.assertEqual("duplicatelines",
+                         cenv.query_kind("how many repeated lines are in the file a.txt"))
+        self.assertEqual("duplicatelines",
+                         cenv.query_kind("how many lines appear more than once in a.txt"))
+
+    def test_the_kinds_that_already_worked_still_classify(self):
+        # Pinned: this is a refinement, not a second unrelated question, so
+        # every question that used to resolve must resolve to the same kind.
+        for gap, want in (("how many lines are in the file a.txt", "lines"),
+                          ("how many unique lines in a.txt", "uniquelines"),
+                          ("how many distinct lines in a.txt", "uniquelines"),
+                          ("how many different lines in a.txt", "uniquelines"),
+                          ("how many words in a.txt", "words"),
+                          ("how many bytes in a.txt", "bytes")):
+            self.assertEqual(want, cenv.query_kind(gap), gap)
+
+    def test_the_probe_separates_three_answers_that_a_weaker_file_would_merge(self):
+        # The ground truth the instrument is calibrated against.  On this file
+        # "every line", "every different line" and "the lines that repeat" are
+        # three different numbers, so a program measuring the wrong one cannot
+        # print n by accident.
+        for n in cenv._PROBE_SIZES:
+            rows = cenv.probe_bytes("duplicatelines", n).decode().splitlines()
+            seen = {}
+            for row in rows:
+                seen[row] = seen.get(row, 0) + 1
+            repeated = sum(1 for count in seen.values() if count > 1)
+            self.assertEqual(3 * n, len(rows), n)
+            self.assertEqual(2 * n, len(seen), n)
+            self.assertEqual(n, repeated, n)
+            self.assertEqual(3, len({len(rows), len(seen), repeated}),
+                             "two of the three answers coincide at n=%d" % n)
+
+    def test_a_tool_that_only_collapses_neighbours_is_rejected_by_the_probe(self):
+        # `uniq -d` prints the repeated lines only when the twins are ADJACENT.
+        # This probe puts them n lines apart, so it prints nothing at all here
+        # -- which is the difference between a probe and a decoration.
+        for n in cenv._PROBE_SIZES:
+            data = cenv.probe_bytes("duplicatelines", n)
+            proc = subprocess.run(["uniq", "-d"], input=data,
+                                  capture_output=True, timeout=30)
+            self.assertEqual(proc.returncode, 0, proc.stderr[:200])
+            self.assertEqual(b"", proc.stdout,
+                             "the repeats are adjacent again at n=%d, so the "
+                             "probe no longer distinguishes `uniq` from a real "
+                             "comparison" % n)
+
+    def test_a_question_about_duplicates_that_is_not_about_lines_stays_refused(self):
+        # The words are the noun phrase, not the adjective on its own.  If the
+        # bare adjective were enough, a sentence about a ledger would be turned
+        # into a countable question about lines and answered with a number.
+        for gap in ("the duplicate entries in this ledger",
+                    "how many bytes in a.txt",
+                    "which lines are in a.txt"):
+            self.assertNotEqual("duplicatelines", cenv.query_kind(gap), gap)
+
+    def test_the_count_is_not_answered_with_the_total_line_count(self):
+        """The whole path, on the real file, not spoon-fed a shortlist.
+
+        Before this change this returned '5' and was certified.  The correct
+        answer is 2, and no single program prints it: it takes `sort | uniq -d
+        | wc -l`, three stages, while the composition search joins two.  An
+        honest "nothing measured it" is the right answer; a total line count
+        wearing the shape of an answer is not.  The machine may be slow here.
+        """
+        r = cenv.answer_query("how many duplicate lines are in the file a.txt",
+                              self.file)
+        self.assertNotEqual("5", r.get("value"),
+                            "answered with every line in the file: %s" % r)
+        self.assertNotEqual(str(len(self.file.read_text().splitlines())),
+                            r.get("value"), "counted lines, not repeats: %s" % r)
+        if r.get("pass"):
+            self.assertEqual("2", r["value"], r)
+        else:
+            self.assertEqual("OPEN__NOTHING_MEASURED_IT", r["status"], r)

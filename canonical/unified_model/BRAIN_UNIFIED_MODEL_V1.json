@@ -24619,7 +24619,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6412,
+  "research_index_records": 6413,
   "routing_tokens": 1816,
   "skills": 18,
   "source_index_entry_points": 407,
@@ -24628,7 +24628,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "62baf36495dcf0b6c9734cf8fa6107ebe7e36c518e7901248896c4ed448547cf"
+  "value": "819c9712758dd1ddd01b6cfca121104d4e6775ab18ea1ad24326899b8836c83a"
  },
  "engines": [
   {
@@ -193952,6 +193952,51 @@
    }
   },
   {
+   "action_id": "THE_INSTRUMENT_WAS_CALIBRATED_AND_POINTED_AT_THE_WRONG_THING_V1_20261026_V1",
+   "capability": false,
+   "date": "2026-10-26T15:42:35Z",
+   "id": "research:canonical/action_intents/THE_INSTRUMENT_WAS_CALIBRATED_AND_POINTED_AT_THE_WRONG_THING_V1_20261026_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_INSTRUMENT_WAS_CALIBRATED_AND_POINTED_AT_THE_WRONG_THING_V1_20261026_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "9f32f5eb634dacc789adcc24dba6dc3677270b278d75a721c0213db5eda6ff98",
+   "status": "",
+   "terms": {
+    "20261026": 1,
+    "against": 3,
+    "already": 2,
+    "also": 1,
+    "answer": 3,
+    "built": 2,
+    "calibrated": 3,
+    "certified": 3,
+    "classifier": 3,
+    "different": 2,
+    "ground": 3,
+    "kind": 2,
+    "lines": 7,
+    "list": 7,
+    "many": 2,
+    "name": 4,
+    "names": 2,
+    "nearest": 2,
+    "no": 2,
+    "not": 6,
+    "one": 2,
+    "probe": 2,
+    "question": 6,
+    "re-read": 2,
+    "recorded": 2,
+    "refused": 2,
+    "same": 2,
+    "so": 4,
+    "truth": 3,
+    "v1": 2,
+    "word": 2,
+    "wrong": 4
+   }
+  },
+  {
    "action_id": "THE_LINES_THAT_REPEAT_ARE_NOT_THE_LINES_THAT_DO_NOT_AND_A_COUNT_OF_A_FILTERED_SET_IS_NOT_THE_FILE_LENGTH_V1_20261026_V1",
    "capability": false,
    "date": "2026-10-26",
@@ -210393,7 +210438,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/computer_env_v1.py",
-   "sha256": "1c06706ee4d34bde35fecc84b36300591058350165fdac2ce49fe2d4bc8f1bb7",
+   "sha256": "d9588a68f931eab319f32b2d3a2e25e7f38023ac0fd835d9f5de7eb9ce9ed4d0",
    "summary": "The computer itself, as an environment the learner can act in.",
    "symbol_count": 49,
    "symbols": [
