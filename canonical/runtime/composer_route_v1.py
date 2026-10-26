@@ -897,7 +897,14 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # once the repeats are gone, which IS the distinct set, and it is pinned.  The
     # refusal above is scoped away from exactly these verbs, so the two forms of
     # the question now go to two different answers instead of one shared wrong one.
-    (r"\bunique\b|\bdistinct\b"
+    # "different" is the plainest English word for this and was in none of the
+    # three lists that name the concept, so "the different lines in the file X"
+    # was refused while "the unique lines" and "the distinct lines" were served
+    # by this very rule.  Anchored to "lines" AFTER the word, because "different"
+    # is an ordinary adjective: "write the unique lines of A to a DIFFERENT file
+    # B" and "are the lines in A DIFFERENT from B" must keep their own answers,
+    # and both put the noun before the adjective.  Measured against both.
+    (r"\bunique\b|\bdistinct\b|\bdifferent\b[^\n]{0,20}?\blines?\b"
      r"|\b(?:remove|delete|erase|drop|strip)s?\b[^\n]{0,40}?"
      r"\b(?:duplicate|duplicates|repeated)\b[^\n]{0,20}?\blines?\b",
      "sort", lambda _n: ["-u"], 1),
@@ -2198,7 +2205,9 @@ def _prose_argv(sentence: str) -> list[str] | None:
     # line count wearing the shape of an answer.  The plain count a file has stays
     # served -- that is what `wc -l` really measures.
     if (_ASKS_A_COUNT_OR_A_NUMBER.search(text)
-            and re.search(r"\b(?:unique|distinct|duplicate|duplicates|repeated)\b", text)
+            and re.search(
+                r"\b(?:unique|distinct|duplicate|duplicates|repeated|different)\b",
+                text)
             and re.search(r"\blines?\b", text)):
         return None
     # A yes/no question answered with a listing is the same defect as a count
