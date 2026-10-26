@@ -24619,16 +24619,16 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6411,
+  "research_index_records": 6412,
   "routing_tokens": 1816,
   "skills": 18,
-  "source_index_entry_points": 406,
-  "source_index_modules": 1861
+  "source_index_entry_points": 407,
+  "source_index_modules": 1862
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0acd1d8010b08ff5b1abf2c3611d24c78e8e9b7bd333009d3e0ce81b69fee08f"
+  "value": "62baf36495dcf0b6c9734cf8fa6107ebe7e36c518e7901248896c4ed448547cf"
  },
  "engines": [
   {
@@ -191464,6 +191464,51 @@
    }
   },
   {
+   "action_id": "ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1",
+   "capability": false,
+   "date": "2026-10-26",
+   "id": "research:canonical/action_intents/ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e2154fe0d6938dd35b269075614fe560f3153c401c105a6124329d3fa1e1c0f6",
+   "status": "",
+   "terms": {
+    "11": 2,
+    "15": 1,
+    "20261026": 1,
+    "38": 1,
+    "51": 1,
+    "73": 1,
+    "96": 1,
+    "after": 1,
+    "another": 1,
+    "because": 1,
+    "bridge": 1,
+    "bridges": 1,
+    "bytes": 2,
+    "candidates": 1,
+    "capabilities": 1,
+    "capability": 1,
+    "ce288da": 2,
+    "census": 1,
+    "classified": 1,
+    "composer": 1,
+    "composition": 1,
+    "composition-invisible": 1,
+    "derives": 2,
+    "edges": 5,
+    "every": 2,
+    "procedure": 2,
+    "provides": 2,
+    "registry": 2,
+    "requires": 2,
+    "token": 2,
+    "v1": 2,
+    "verified": 4
+   }
+  },
+  {
    "action_id": "ESCAPE_GAP_A_POLICY_COVER_ADAPTER_V1",
    "capability": false,
    "date": "2026-10-10",
@@ -203600,6 +203645,50 @@
     "v3": 1,
     "verifier": 1,
     "witness": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/bridge_enumeration_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/bridge_enumeration_v1.py",
+   "sha256": "ced76e6a3b9f7402dd9c56bd4252c9f70fb427a64ab5f0825476be6596ae6ba6",
+   "summary": "BRIDGE_ENUMERATION_V1 -- the machine derives its own verified capability bridges.",
+   "symbol_count": 9,
+   "symbols": [
+    "_bytes",
+    "_load_registry",
+    "_provides_file_ext",
+    "enumerate_bridges",
+    "fixture_value",
+    "main",
+    "manifest_for_scratch",
+    "oracle_bytes_of",
+    "write_default_fixtures"
+   ],
+   "terms": {
+    "bridge": 1,
+    "bridge_enumeration_v1": 1,
+    "bridges": 1,
+    "bytes": 1,
+    "capability": 1,
+    "derives": 1,
+    "enumerate_bridges": 1,
+    "enumeration": 1,
+    "fixture_value": 1,
+    "load_registry": 1,
+    "machine": 1,
+    "main": 1,
+    "manifest_for_scratch": 1,
+    "oracle_bytes_of": 1,
+    "own": 1,
+    "provides_file_ext": 1,
+    "v1": 1,
+    "verified": 1,
+    "write_default_fixtures": 1
    }
   },
   {
