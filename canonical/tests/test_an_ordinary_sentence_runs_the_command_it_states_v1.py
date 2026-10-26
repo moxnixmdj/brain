@@ -30,7 +30,9 @@ finding are green verdicts over work that did not happen.
 """
 
 from __future__ import annotations
+import json
 import os
+import re
 
 import shutil
 import sys
@@ -4768,3 +4770,90 @@ class TestAWordThatQualifiesAFilterMustReachTheFlags(unittest.TestCase):
         r = _solve("Show the line numbers in the file %s containing apple" % f)
         self.assertTrue(_verified(r))
         self.assertEqual(_stdout(r), "1:apple pie\n3:apple tart\n")
+
+
+class TestAListWrittenTwiceIsAListEditedOnce(unittest.TestCase):
+    """The nouns that name something inside a file were written twice.
+
+    Both copies were byte-identical across 37 nouns, which is exactly how a list
+    comes to be edited in one place only.  `duplicate` was in NEITHER copy, so
+    the fix to the `rm` row's own duplicates clause left its sibling deleting:
+
+        "Remove the duplicates from every file in the directory D"
+          -> `rm one.txt two.txt`   THE DIRECTORY CAME BACK EMPTY.  CERTIFIED.
+
+    A set expansion turns one wrong deletion into a whole directory of them,
+    which is the reason the guard exists at all.
+    """
+
+    CONTENT = "apple\nbanana\napple\n"
+
+    def _set(self):
+        root = ROOT / SCRATCH
+        shutil.rmtree(root, ignore_errors=True)
+        (root / "set").mkdir(parents=True, exist_ok=True)
+        for n in ("one.txt", "two.txt"):
+            (root / "set" / n).write_text(self.CONTENT, encoding="utf-8")
+        (root / "a.txt").write_text(self.CONTENT, encoding="utf-8")
+        (root / "duplicates.txt").write_text(self.CONTENT, encoding="utf-8")
+        return "%s/set" % SCRATCH, "%s/a.txt" % SCRATCH
+
+    def _argv(self, result):
+        m = re.findall(r'"argv"\s*:\s*(\[[^\]]*\])', json.dumps(result, default=str))
+        return " ".join(json.loads(m[0])) if m else "NONE"
+
+    def test_removing_duplicates_from_a_set_does_not_delete_the_set(self):
+        d, _ = self._set()
+        r = _solve("Remove the duplicates from every file in the directory %s" % d)
+        self.assertEqual(sorted(p.name for p in (ROOT / d).iterdir()),
+                         ["one.txt", "two.txt"],
+                         "the request was to remove DUPLICATES, not every file")
+        self.assertNotIn("rm ", self._argv(r))
+
+    def test_removing_repeats_from_a_set_does_not_delete_the_set(self):
+        d, _ = self._set()
+        r = _solve("Remove the repeats from every file in the directory %s" % d)
+        self.assertEqual(sorted(p.name for p in (ROOT / d).iterdir()),
+                         ["one.txt", "two.txt"])
+        self.assertNotIn("rm ", self._argv(r))
+
+    def test_the_noun_list_is_written_once(self):
+        src = (ROOT / "canonical/runtime/composer_route_v1.py").read_text(encoding="utf-8")
+        self.assertEqual(src.count("permission|permissions|bit|bits"), 1,
+                         "the list is duplicated again; the two copies will drift")
+        self.assertIn("duplicate", _binder._INSIDE_THE_FILE_NOUNS)
+
+    # --- pins: the deletions and refusals that must not move.
+    def test_sorting_and_removing_duplicates_still_sorts(self):
+        _, f = self._set()
+        r = _solve("Sort the file %s and remove duplicates" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple\nbanana\n")
+        self.assertTrue((ROOT / f).exists())
+
+    def test_a_file_named_duplicates_is_still_removed(self):
+        _, _f = self._set()
+        target = "%s/duplicates.txt" % SCRATCH
+        _solve("Remove the file %s" % target)
+        self.assertFalse((ROOT / target).exists())
+
+    def test_removing_the_duplicate_lines_still_sorts(self):
+        _, f = self._set()
+        r = _solve("Remove the duplicate lines from the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple\nbanana\n")
+
+    def test_removing_the_first_line_is_still_refused(self):
+        _, f = self._set()
+        _solve("Remove the first line from the file %s" % f)
+        self.assertEqual((ROOT / f).read_text(encoding="utf-8"), self.CONTENT)
+
+    def test_removing_the_read_permission_is_still_refused(self):
+        _, f = self._set()
+        _solve("Remove the read permission from the file %s" % f)
+        self.assertEqual((ROOT / f).read_text(encoding="utf-8"), self.CONTENT)
+
+    def test_deleting_a_whole_directory_still_deletes_it(self):
+        d, _ = self._set()
+        _solve("Delete the directory %s" % d)
+        self.assertFalse((ROOT / d).exists())

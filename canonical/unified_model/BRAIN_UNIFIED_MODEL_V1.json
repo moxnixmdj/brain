@@ -24619,7 +24619,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6417,
+  "research_index_records": 6418,
   "routing_tokens": 1816,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24628,7 +24628,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "fa0a0701f9dbeec4c69e2832ecf2b3b832db9c6f42f0990f24566e8a67a6835b"
+  "value": "69a941dd05533bfd1496cd768c335ca9f095b0cc4f824c266816c01ca44e6afd"
  },
  "engines": [
   {
@@ -189016,6 +189016,51 @@
    }
   },
   {
+   "action_id": "A_LIST_WRITTEN_TWICE_IS_A_LIST_EDITED_ONCE_V1_20261026_V1",
+   "capability": false,
+   "date": "2026-10-26T21:00:39Z",
+   "id": "research:canonical/action_intents/A_LIST_WRITTEN_TWICE_IS_A_LIST_EDITED_ONCE_V1_20261026_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_LIST_WRITTEN_TWICE_IS_A_LIST_EDITED_ONCE_V1_20261026_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "42dd00cc3269c5bfba3ecb39650724a99736b5df3f69c11de33ac442c849b82a",
+   "status": "",
+   "terms": {
+    "20261026": 1,
+    "295": 1,
+    "304": 1,
+    "a_list_written_twice_is_a_list_edited_once_v1_20261026_v1": 1,
+    "answer": 1,
+    "applied": 1,
+    "before": 1,
+    "certified": 1,
+    "comment": 1,
+    "copies": 2,
+    "dangerous": 1,
+    "deletion": 1,
+    "destructive": 1,
+    "directory": 1,
+    "drifted": 1,
+    "drifts": 1,
+    "duplicated": 1,
+    "edited": 2,
+    "exactly": 1,
+    "expansion": 1,
+    "fix": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goes": 1,
+    "had": 1,
+    "identical": 1,
+    "let_a_stated_shape_enter_the_set_block_and_keep_the_quoted_and_unquoted_forms_identical": 1,
+    "list": 5,
+    "one": 4,
+    "set-expansion": 2,
+    "two": 3,
+    "v1": 2,
+    "wrong": 2
+   }
+  },
+  {
    "action_id": "A_NAMED_CAPABILITY_IS_NEVER_GIVEN_INPUTS_IT_WAS_NOT_GIVEN_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -209873,7 +209918,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "9f242b1bae0111d99dd833cc9a4df6f8339213bf626827c54fbc96ff5caf7cc7",
+   "sha256": "b3ed6113b8c393274d45ef560a04ed7e25fcb6f4c808038de2cec6a59ed9ef32",
    "summary": "Routing a sentence to a typed capability chain.",
    "symbol_count": 31,
    "symbols": [
