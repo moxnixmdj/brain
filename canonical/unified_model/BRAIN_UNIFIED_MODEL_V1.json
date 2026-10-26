@@ -24619,7 +24619,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6418,
+  "research_index_records": 6419,
   "routing_tokens": 1816,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24628,7 +24628,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "69a941dd05533bfd1496cd768c335ca9f095b0cc4f824c266816c01ca44e6afd"
+  "value": "c088f1992b65c6ba3e62cf1c6cd4ab6e5898930d8f9545c978bbbe4ddecb9300"
  },
  "engines": [
   {
@@ -194862,6 +194862,51 @@
    }
   },
   {
+   "action_id": "TWO_VALUES_JOINED_BY_OR_ARE_ONE_PATTERN_V1_20261026_V1",
+   "capability": false,
+   "date": "2026-10-26T21:17:06Z",
+   "id": "research:canonical/action_intents/TWO_VALUES_JOINED_BY_OR_ARE_ONE_PATTERN_V1_20261026_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/TWO_VALUES_JOINED_BY_OR_ARE_ONE_PATTERN_V1_20261026_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e72cd8accf02c3e572b24e3cf2ebb79fa7cd0e153dfe41cc68a953e2aa8071af",
+   "status": "",
+   "terms": {
+    "20261026": 1,
+    "304": 1,
+    "316": 1,
+    "all": 1,
+    "already": 1,
+    "alternation": 3,
+    "arm": 1,
+    "branch": 2,
+    "command": 1,
+    "english": 1,
+    "every": 1,
+    "filter": 1,
+    "four": 1,
+    "fourth": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "here": 1,
+    "joined": 2,
+    "keys": 1,
+    "len": 1,
+    "let_a_stated_shape_enter_the_set_block_and_keep_the_quoted_and_unquoted_forms_identical": 1,
+    "match": 1,
+    "no": 1,
+    "not": 1,
+    "off": 1,
+    "one": 2,
+    "open": 1,
+    "pattern": 2,
+    "sentence": 2,
+    "so": 2,
+    "two": 4,
+    "v1": 2,
+    "values": 4
+   }
+  },
+  {
    "action_id": "UNIFIED_BRAIN_MODEL_V1_20261020_V1",
    "capability": false,
    "date": "2026-10-20",
@@ -209918,10 +209963,11 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "b3ed6113b8c393274d45ef560a04ed7e25fcb6f4c808038de2cec6a59ed9ef32",
+   "sha256": "6fff9791ebbef8230b208c942154af2aea49b88baae1b9618ef1a7f7a61a268d",
    "summary": "Routing a sentence to a typed capability chain.",
-   "symbol_count": 31,
+   "symbol_count": 32,
    "symbols": [
+    "_bare_alternatives",
     "_bare_stated_value",
     "_contradicts_the_stated_payload",
     "_cut_flags",
@@ -209944,10 +209990,10 @@
     "candidate_tokens",
     "execute_chain",
     "extract_argv",
-    "extract_content",
-    "extract_content_destination"
+    "extract_content"
    ],
    "terms": {
+    "bare_alternatives": 1,
     "bare_stated_value": 1,
     "candidate_tokens": 1,
     "capability": 1,
@@ -209961,7 +210007,6 @@
     "extract_paths": 1,
     "fully_bound_contract_tokens": 1,
     "head_flags": 1,
-    "keeps_existing_content": 1,
     "mask_a_quoted_value": 1,
     "no_flags": 1,
     "prose_count": 1,
