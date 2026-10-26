@@ -145,7 +145,33 @@ def _placeholders(value):
     return sorted(set(re.findall(r"\$\{input\.([A-Za-z0-9_]+)\}",text)))
 
 
+# `_repo_paths` is a pure function of the sentence and the root: it scans the
+# goal for path-shaped tokens and normalises each one.  It does not test whether
+# anything EXISTS, so nothing about its answer changes when a file is written.
+# Measured, it was called 744 times for ONE solve -- once per capability the
+# receipt projection asks about -- and each call re-ran `Path.resolve()`, so
+# 18,180 realpath calls in twelve solves accounted for 1.42s of a 3.21s profile,
+# 44% of the whole.  The work was not hard, it was repeated.
+#
+# Callers get a COPY.  A caller that appended to the returned list would
+# otherwise be editing every later answer to the same sentence.
+_REPO_PATHS_CACHE: dict[tuple[str, str], list] = {}
+_REPO_PATHS_CACHE_MAX = 1024
+
+
 def _repo_paths(goal, root):
+    key=(str(goal or ""), str(root or ""))
+    hit=_REPO_PATHS_CACHE.get(key)
+    if hit is not None:
+        return list(hit)
+    candidates=_repo_paths_uncached(goal, root)
+    if len(_REPO_PATHS_CACHE)>=_REPO_PATHS_CACHE_MAX:
+        _REPO_PATHS_CACHE.clear()
+    _REPO_PATHS_CACHE[key]=list(candidates)
+    return list(candidates)
+
+
+def _repo_paths_uncached(goal, root):
     candidates=[]
     # URL path components are not repository paths. Strip complete URLs before
     # scanning for repository-local artifacts.

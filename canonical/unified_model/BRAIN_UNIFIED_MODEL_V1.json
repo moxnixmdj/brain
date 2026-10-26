@@ -23782,7 +23782,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/objective_relevance_bm25.py",
-    "source_sha256": "70f4729046b4e526fdbd6e04424c446dfdcc980d2e25609e2fd075f5cd15b8e9",
+    "source_sha256": "809b3a8a8645933b6401017a993389346b310567b0afa9ab65ffccc81803135a",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24619,7 +24619,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6423,
+  "research_index_records": 6424,
   "routing_tokens": 1816,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24628,7 +24628,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6244965ab6e04bc7f5e9758c605548ba063ad7d6270b91b63b2c4eaa99ce87cf"
+  "value": "7c865e8aff69260d02574decf1b3871cf94591a74c6a9dbb5a68638935a9a7f5"
  },
  "engines": [
   {
@@ -46640,7 +46640,7 @@
   "included_source_count": 866,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "1892c1ae3c84e8d24ae3cf24ff0c727951a1a0fabd406d007f2031ed4e6d666a"
+  "source_tree_digest": "adc89ae13f5547cb72849a09eeb871430a6be6db5aad0bacba4fd2deddceffe6"
  },
  "research_index": [
   {
@@ -193834,6 +193834,51 @@
    }
   },
   {
+   "action_id": "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1",
+   "capability": false,
+   "date": "2026-10-26T23:49:03Z",
+   "id": "research:canonical/action_intents/SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "f8c7abbd65abb7fa98a5f1860b47b5f1b71a1cef4fd863e3c732d22d169fa775",
+   "status": "",
+   "terms": {
+    "20261026": 1,
+    "744": 1,
+    "all": 1,
+    "asked": 1,
+    "between": 1,
+    "calls": 1,
+    "capability": 1,
+    "change": 1,
+    "corpus": 1,
+    "duplicated": 1,
+    "functions": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 1,
+    "hundreds": 2,
+    "inputs": 1,
+    "inside": 1,
+    "instead": 1,
+    "let_a_stated_shape_enter_the_set_block_and_keep_the_quoted_and_unquoted_forms_identical": 1,
+    "memoisation": 1,
+    "no": 1,
+    "not": 1,
+    "once": 1,
+    "one": 1,
+    "paths": 1,
+    "process": 1,
+    "produced": 1,
+    "pure": 1,
+    "same": 4,
+    "string": 2,
+    "times": 2,
+    "two": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "SQLITE_SOURCE_SELECTED_BY_COLUMNS_NOT_BY_SENTENCE_V1_20261023_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -221758,9 +221803,9 @@
    "imported_by_count": 7,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "b2e2324fcd17be209a1277732e23be972d8a75b61a0a85dff90002db221a7953",
+   "sha256": "eeb2d11de056385744dbe3d260ec3218eaed825fd625ae995fddc4179cec551d",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
-   "symbol_count": 121,
+   "symbol_count": 122,
    "symbols": [
     "GoalCompilationFailure",
     "_adapter_default_argv",
@@ -221815,7 +221860,7 @@
     "platform_admissible_registry": 1,
     "project": 1,
     "repo_paths": 1,
-    "structured_binary_format_match": 1,
+    "repo_paths_uncached": 1,
     "tokens": 1,
     "uses_effect_result_bindings": 1
    }
