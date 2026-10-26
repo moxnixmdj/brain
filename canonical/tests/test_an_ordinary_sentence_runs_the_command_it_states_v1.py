@@ -3567,5 +3567,118 @@ class TestRemovingSomethingInsideAFileIsNotDeletingTheFile(unittest.TestCase):
                          (ROOT / a).read_text(encoding="utf-8"))
 
 
+class TestATwoFileRequestAndATreeQuestionGetTheOperationTheyStated(unittest.TestCase):
+    """A census of two-file and directory requests, judged against the real command.
+
+    Measured on main 4cd4af4, sixteen rows scored eight.  Five of the failures
+    were certified WRONG answers rather than refusals, and one of them destroyed
+    data:
+
+        "Append the contents of the file A to the file B"
+            -> `cat A` with B declared as the output, which TRUNCATED B and wrote
+               A's bytes over it.  B held 'cherry\\ndate\\n'; afterwards it held
+               'apple\\nbanana\\n'.  A copy, certified as an append, with the
+               content B already held destroyed.
+
+        "the files named '*.log' in the directory D"
+            -> `ls D`, every entry in the directory, for a question about one file
+        "the files in the directory D and its subdirectories"
+            -> `ls D`, one level, for a question about a tree
+        "How many files are in the directory D?"
+            -> `ls D`, a list of names as the answer to a question that asked
+               for a number
+
+    The first two of those were the plainest form of a question the binder already
+    answered correctly with a verb in front of it: "Find the files named '*.log'
+    in the directory D" bound `find`.  A question is not a different question for
+    dropping its verb.
+    """
+
+    def _half(self, name):
+        d = "%s/%s" % (SCRATCH, name)
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "a.txt").write_text("apple\nbanana\n", encoding="utf-8")
+        (ROOT / d / "b.txt").write_text("cherry\ndate\n", encoding="utf-8")
+        (ROOT / d / "sub").mkdir(exist_ok=True)
+        (ROOT / d / "sub" / "one.log").write_text("fig\n", encoding="utf-8")
+        return d
+
+    def test_appending_one_file_to_another_keeps_what_the_destination_held(self):
+        # The defect this exists for.  A copy certified as an append is the worst
+        # shape there is: the answer looks right, the file it destroyed is the one
+        # the sentence named as the destination, and nothing is missing from the
+        # report.  sed's `r` command is the operation the sentence stated, and the
+        # source survives it, which is what makes the result provable afterwards.
+        d = self._half("apdst")
+        result = _solve("Append the contents of the file %s/a.txt to the file %s/b.txt" % (d, d))
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual("cherry\ndate\napple\nbanana\n",
+                         (ROOT / d / "b.txt").read_text(encoding="utf-8"),
+                         "what the destination held was not kept")
+        self.assertEqual("apple\nbanana\n",
+                         (ROOT / d / "a.txt").read_text(encoding="utf-8"),
+                         "the source was consumed by an append")
+
+    def test_the_append_postcondition_is_recomputed_from_a_source_that_survives(self):
+        # Pinned able to fail, from both sides.  Unlike every other in-place shape
+        # this one has a real oracle: `r` reads the source and does not consume it,
+        # so the promised tail is recomputed from a file still on disk.
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
+        d = self._half("appost")
+        argv = ["sed", "-i", "$r %s/a.txt" % d, "%s/b.txt" % d]
+        (ROOT / d / "b.txt").write_text("cherry\ndate\napple\nbanana\n", encoding="utf-8")
+        self.assertTrue(_accept._post_sed(argv, ROOT)[0])
+        (ROOT / d / "b.txt").write_text("cherry\ndate\nWRONG\n", encoding="utf-8")
+        ok, reason, _ev = _accept._post_sed(argv, ROOT)
+        self.assertFalse(ok, "a destination that does not end with the source was certified")
+        self.assertEqual("COMMAND_SED_FILE_DOES_NOT_END_WITH_THE_APPENDED_CONTENTS", reason)
+        ok, reason, _ev = _accept._post_sed(
+            ["sed", "-i", "$r /etc/passwd", "%s/b.txt" % d], ROOT)
+        self.assertFalse(ok)
+        self.assertEqual("COMMAND_SED_SOURCE_PATH_OUTSIDE_REPOSITORY", reason)
+
+    def test_a_question_about_a_tree_is_not_answered_with_one_level_of_it(self):
+        d = self._half("treeq")
+        want = "%s/sub/one.log" % d          # find prints the path as it was given
+        got = _stdout(_solve("the files named '*.log' in the directory %s" % d))
+        self.assertEqual(want, got.strip(),
+                         "a question about one file was answered with the directory")
+        got = _stdout(_solve("the files in the directory %s and its subdirectories" % d))
+        self.assertIn("one.log", got, "a tree question was answered with its top level")
+        # and the verb form of the same two questions still answers the same way
+        self.assertEqual(want, _stdout(_solve(
+            "Find the files named '*.log' in the directory %s" % d)).strip())
+
+    def test_a_listing_of_a_directory_is_not_a_count_of_it(self):
+        # Asked how many, answered with names, certified.  Counting needs a
+        # pipeline and no single program here does it, so the honest outcome is a
+        # refusal -- and the count `wc` really performs is untouched.
+        d = self._half("countq")
+        self.assertFalse(_verified(_solve("How many files are in the directory %s?" % d)))
+        a = _fresh("apple\nbanana\ncherry\n")
+        self.assertEqual("3", _stdout(_solve("How many lines are in the file %s?" % a)).split()[0])
+
+    def test_naming_a_tree_does_not_hijack_a_mutation_or_a_creation(self):
+        # The pin on the scope of the widening above, and the two regressions it
+        # was measured causing.  "named" appears in a deletion and in a creation
+        # as well as in a search, and both were answered with a listing.
+        from canonical.runtime import composer_route_v1 as _cr
+        d = self._half("hijack")
+        result = _solve("Delete the files named '*.log' in the directory %s" % d)
+        self.assertFalse(_verified(result), "a deletion was answered with a listing")
+        self.assertTrue((ROOT / d / "sub" / "one.log").exists(),
+                        "a file the sentence named was removed by a route that only reads")
+        new = "%s/made" % SCRATCH
+        self.assertEqual(["mkdir", new], _cr.extract_argv("Make a folder named %s" % new))
+        self.assertTrue(_verified(_solve("Make a folder named %s" % new)))
+        self.assertTrue((ROOT / new).is_dir())
+
+    def test_a_plain_listing_of_a_directory_is_still_a_listing(self):
+        # The nearest legitimate case to every refusal and widening above.
+        d = self._half("plainls")
+        got = sorted((_stdout(_solve("the files in the directory %s" % d)) or "").split())
+        self.assertEqual(["a.txt", "b.txt", "sub"], got)
+
+
 if __name__ == "__main__":
     unittest.main()

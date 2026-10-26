@@ -1183,6 +1183,11 @@ _BLANK_LINE = re.compile(
 # ones.  Hard-coding `-v` measured as answering the second with the first.
 _REMOVES_THE_LINES = re.compile(r"\b(?:remove|delete|drop|strip)\b")
 _MENTIONS_LINES = re.compile(r"\blines?\b")
+# A sentence asks `find` for a tree when it states a name to look for or asks for
+# the subdirectories too.  `ls` on its own lists one level and answers a question
+# about a tree with a listing of its top -- which is a wrong answer, not a refusal.
+_NAMES_A_TREE = re.compile(
+    r"\bnamed\b|\bcalled\b|\bsubdirector\w*\b|\brecursiv\w*\b|\bwhole tree\b")
 # A sentence that asks which lines MATCH something states a pattern, and the
 # plainest form of it -- with no verb -- was refused while "Find the lines in X
 # matching 'ap.le'" was answered, because the row that binds `grep` for a pattern
@@ -1379,12 +1384,45 @@ def _prose_argv(sentence: str) -> list[str] | None:
         if len(paths) != 2:
             return None
         return [program, dest_flag, str(paths[1]), str(paths[0])]
+    # "Append the contents of the file A to the file B" measured as binding
+    # `cat A` with B declared as the output, which TRUNCATED B and wrote A's bytes
+    # over it -- a copy certified as an append, with the content B already held
+    # destroyed.  sed's `r` command reads a file and appends it after the addressed
+    # line, so `$r A` on B is the operation the sentence actually stated, and A
+    # survives it, which is what makes the result provable afterwards.
+    if ("sed" in known and re.search(r"\bappend\w*\b", text)
+            and re.search(r"\bcontents?\b", text)):
+        _two = extract_paths(sentence)
+        if len(_two) == 2:
+            return ["sed", "-i", "$r %s" % _two[0], str(_two[1])]
+
     # "find" alone is NOT enough, and measuring it that way was a regression:
     # "Find the lines in the file X matching 'apple'" is an ordinary search, and
     # the word "find" in it stole the sentence and bound `find X -name 'apple'`.
     # `find` walks a tree, so the sentence has to name one.
-    if (re.search(r"\bfind\b", text) and "find" in known
-            and _DIRECTORY_REQUEST.search(text)):
+    # The verb is not what makes a sentence ask for a tree.  Measured on main
+    # 4cd4af4, the plainest form was answered by `ls` with the WRONG answer and
+    # certified, while the same question with "Find" in front of it was right:
+    #     "the files named '*.log' in the directory D"       -> `ls D`, every entry
+    #     "Find the files named '*.log' in the directory D"  -> `find D -name *.log`
+    # The `ls` row matches any sentence holding both "files" and "directory", so
+    # without this the plainest form never reaches here at all.  Scoped to a
+    # sentence that states a NAME or asks for a tree, because "find" alone once
+    # stole an ordinary line search and that regression is recorded above.
+    # And never for a sentence that states a MUTATION.  Measured without this,
+    # "Delete the files named '*.log' in the directory D" satisfied the name arm
+    # and was answered with a LISTING of the files -- certified, for a sentence
+    # that asked to remove them.  A deletion of a matched set is the set
+    # expansion's business, and refusing is better than reading.
+    if (("find" in known and _DIRECTORY_REQUEST.search(text))
+            # Creation too: "Make a folder NAMED X" states a name and a directory
+            # and is not a search -- it is `mkdir`, and it measured as being
+            # answered with a listing of the folder it was asked to create.
+            and not re.search(r"\b(?:delete|deletes|deleting|deleted|remove|removes"
+                              r"|removing|removed|erase|move|copy|rename|make|makes"
+                              r"|making|made|create|creates|creating|created|touch"
+                              r"|mkdir|build|builds)\w*\b", text)
+            and (re.search(r"\bfind\b", text) or _NAMES_A_TREE.search(text))):
         # `find` only reads the tree and prints what is there, so the inspector
         # re-runs it and compares stdout -- no new way to be trusted, only a new
         # way to be asked.  The name pattern is either the value the sentence
@@ -1415,6 +1453,10 @@ def _prose_argv(sentence: str) -> list[str] | None:
         argv = ["find", str(operand_paths[0])]
         if needle:
             argv += ["-name", str(needle)]
+        elif re.search(r"\bsubdirector\w*\b|\brecursiv\w*\b|\bwhole tree\b", text):
+            # A tree walk with no name pattern is still a question about FILES, so
+            # the directories it walks through are not part of the answer.
+            argv += ["-type", "f"]
         return argv
     # The verb is not what makes a sentence ask for lines.  `_FILTER_LINE`
     # requires one of remove/delete/drop/strip/write/show/list/print before
@@ -1944,6 +1986,15 @@ def _prose_argv(sentence: str) -> list[str] | None:
             and not re.search(
                 r"\b(?:duplicate|repeated|unique|empty|blank)\b[^\n]{0,20}?\blines?\b",
                 text)):
+        return None
+    # "How many files are in the directory D" measured as binding `ls D` and was
+    # certified with a LIST OF NAMES as the answer to a question that asked for a
+    # number.  Counting them needs a pipeline, and no single program here does it,
+    # so the honest outcome is a refusal.  Scoped to a directory: "How many lines
+    # are in the file X" is a count `wc -l` really performs and stays served.
+    if (_ASKS_A_COUNT_OR_A_NUMBER.search(text) and _DIRECTORY_REQUEST.search(text)
+            and re.search(r"\bfiles?\b", text)
+            and not re.search(r"\blines?\b", text)):
         return None
     for pattern, program, flags, arity in _PROSE_COMMAND:
         if program not in known:
