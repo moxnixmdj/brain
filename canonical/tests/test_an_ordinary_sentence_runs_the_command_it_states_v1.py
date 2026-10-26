@@ -3834,3 +3834,138 @@ class TestASecondOperandIsTheSameQuestionAskedTwice(unittest.TestCase):
         self.assertTrue(_verified(count), count.get("status"))
         self.assertIn("3", _stdout(count).split())
         self._both_intact(d)
+
+
+class TestTheLinesThatRepeatAreNotAnsweredWithTheLinesThatDoNot(unittest.TestCase):
+    """`sort -u` answers "the unique lines".  It does not answer "the duplicate lines".
+
+    Both questions used to reach the same row, because that row matched the bare
+    words `duplicate` or `repeated` next to `lines`, and so the two OPPOSITE
+    questions shared one answer.  Measured on main d39c9db, on a file holding
+    apple/banana/apple/cherry/banana/apple:
+
+        "Show the duplicate lines of the file X"
+            -> `sort -u`, certified, returning 'apple\\nbanana\\ncherry\\n'.
+               The duplicate lines are 'apple\\nbanana\\n'.  `cherry` appears
+               exactly once and is not a duplicate, so the answer named a line
+               that is the opposite of what was asked for -- and it is a
+               plausible list of lines from the right file, which is what makes
+               it hard to notice.
+
+        "How many duplicate lines are in the file X?"
+            -> `wc -l`, certified, returning 6.  The answer is 2.
+        "How many unique lines are in the file X?"
+            -> `wc -l`, certified, returning 6.  The answer is 3.
+               Both are the total line count wearing the shape of an answer.
+
+        "Are all the lines of the file X unique?"
+            -> `sort -u`, certified, returning the distinct set -- a listing as
+               the answer to a yes/no question.
+
+    The repeats themselves are `sort X | uniq -d`, which is two programs, and this
+    binder emits one argv.  `uniq -d` alone sees ADJACENT repeats only and
+    measured empty on this file.  So those are refusals now: a refusal states
+    what it cannot do, whereas the old answer reported the wrong lines as the
+    work that was asked for.
+    """
+
+    DUPES = "apple\nbanana\napple\ncherry\nbanana\napple\n"
+
+    def _file(self, name):
+        d = "%s/%s" % (SCRATCH, name)
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "a.txt").write_text(self.DUPES, encoding="utf-8")
+        return d + "/a.txt"
+
+    def test_the_duplicate_lines_are_not_answered_with_the_distinct_set(self):
+        f = self._file("dl1")
+        result = _solve("Show the duplicate lines of the file %s" % f)
+        self.assertFalse(_verified(result),
+                         "the distinct set is not the set of lines that repeat: %r"
+                         % _stdout(result))
+        # The old answer was the distinct set, and the distinct set contains a
+        # line that appears exactly once.  Assert that directly, so the reason
+        # this must fail is written down and not just the verdict.
+        distinct = sorted(set(self.DUPES.split("\n")) - {""})
+        self.assertIn("cherry", distinct)
+        self.assertEqual(1, self.DUPES.split("\n").count("cherry"),
+                         "cherry appears once, so it is not a duplicate line")
+        self.assertEqual(self.DUPES, (ROOT / f).read_text(encoding="utf-8"))
+
+    def test_the_verbless_form_of_the_same_question_is_refused_too(self):
+        # A phrasing variant is a defect class.  The plainest form is the noun
+        # phrase with no verb in front of it at all.
+        f = self._file("dl2")
+        for goal in ("the duplicate lines of the file %s" % f,
+                     "the repeated lines of the file %s" % f,
+                     "the lines that appear more than once in the file %s" % f):
+            result = _solve(goal)
+            self.assertFalse(_verified(result), "%s -> %r" % (goal, _stdout(result)))
+            self.assertEqual(self.DUPES, (ROOT / f).read_text(encoding="utf-8"),
+                             "a refusal must leave the file alone")
+
+    def test_a_count_of_a_filtered_set_is_not_the_total_line_count(self):
+        # 6 is how many lines the file holds.  It is not how many of them repeat,
+        # and it is not how many are distinct.  Both were certified.
+        f = self._file("dl3")
+        self.assertEqual(6, len(self.DUPES.split("\n")) - 1)
+        self.assertEqual(2, len({x for x in self.DUPES.split("\n")
+                                 if self.DUPES.split("\n").count(x) > 1}))
+        self.assertEqual(3, len(set(self.DUPES.split("\n")) - {""}))
+        for goal in ("How many duplicate lines are in the file %s?" % f,
+                     "How many unique lines are in the file %s?" % f):
+            result = _solve(goal)
+            self.assertFalse(_verified(result), "%s -> %r" % (goal, _stdout(result)))
+        # The nearest legitimate case that must still pass: the count a file
+        # really has is what `wc -l` measures, and it stays served.
+        plain = _solve("How many lines are in the file %s?" % f)
+        self.assertTrue(_verified(plain), plain.get("status"))
+        self.assertIn("6", _stdout(plain).split())
+
+    def test_a_yes_no_question_is_not_answered_with_a_listing(self):
+        f = self._file("dl4")
+        result = _solve("Are all the lines of the file %s unique?" % f)
+        self.assertFalse(_verified(result),
+                         "a listing is not an answer to a yes/no question: %r"
+                         % _stdout(result))
+        self.assertEqual(self.DUPES, (ROOT / f).read_text(encoding="utf-8"))
+
+    def test_the_distinct_set_is_served_under_both_of_its_names(self):
+        # "unique" and "distinct" both mean the distinct set here -- that reading
+        # was chosen deliberately over `uniq`, which leaves duplicates in an
+        # unsorted file.  "distinct" measured as binding nothing at all.
+        f = self._file("dl5")
+        want = "apple\nbanana\ncherry\n"
+        for goal in ("Show the unique lines of the file %s" % f,
+                     "the distinct lines of the file %s" % f):
+            result = _solve(goal)
+            self.assertTrue(_verified(result), "%s -> %s" % (goal, result.get("status")))
+            self.assertEqual(want, _stdout(result))
+
+    def test_removing_the_duplicates_still_yields_the_distinct_set(self):
+        # The neighbour that shares the word.  "Remove the duplicate lines" asks
+        # for what is LEFT, which is the distinct set, and it is pinned elsewhere.
+        # Scoping the question about the repeats must not have taken this with it.
+        f = self._file("dl6")
+        result = _solve("Remove the duplicate lines from the file %s" % f)
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual("apple\nbanana\ncherry\n", _stdout(result))
+
+    def test_the_removals_that_are_owned_are_untouched_by_the_new_refusals(self):
+        # Every one of these contains a word a new refusal could have swallowed.
+        # They are FILTERS in this repository, not in-place edits -- that is
+        # pinned elsewhere for the duplicate form -- so the kept lines come back
+        # on stdout and the file is left exactly as it was.
+        d = "%s/dl7" % SCRATCH
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        f = d + "/b.txt"
+        want = "apple\nbanana\n# note\n"
+        for goal in ("Remove the empty lines from the file %s" % f,
+                     "Remove the blank lines from the file %s" % f):
+            (ROOT / f).write_text("apple\n\nbanana\n# note\n\n", encoding="utf-8")
+            result = _solve(goal)
+            self.assertTrue(_verified(result), "%s -> %s" % (goal, result.get("status")))
+            self.assertEqual(want, _stdout(result), goal)
+            self.assertEqual("apple\n\nbanana\n# note\n\n",
+                             (ROOT / f).read_text(encoding="utf-8"),
+                             "%s is a filter; the file must be untouched" % goal)
