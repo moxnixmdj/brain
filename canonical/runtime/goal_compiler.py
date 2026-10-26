@@ -1553,12 +1553,96 @@ def _collect_effect_result_refs(value, out=None):
     return out
 
 
+def _channel_candidates(store,effect):
+    """Ordered channel list for ``effect`` from either store shape.
+
+    Typed composition channels: a channel maps an effect to every endpoint
+    that published it, in plan order. Legacy single-entry stores (tuple)
+    still read; ``None`` means no channel exists.
+    """
+    value=store.get(effect)
+    if value is None:
+        return None
+    if isinstance(value,list):
+        return list(value)
+    return [value]
+
+
+def _channel_where(where,detail):
+    """Validate an optional ``where`` predicate on an effect reference.
+
+    Phase B knows one predicate: ``provider`` (a capability id or a list).
+    Unknown shapes refuse loudly rather than degrade into a silent pick.
+    """
+    if where is None:
+        return None
+    if not isinstance(where,dict) or set(where)!={"provider"}:
+        raise GoalCompilationFailure(
+            "CAPABILITY_CHANNEL_INVALID",
+            str(detail),
+        )
+    provider=where["provider"]
+    if isinstance(provider,str) and provider.strip():
+        return {provider.strip()}
+    if (
+        isinstance(provider,list)
+        and provider
+        and all(isinstance(x,str) and x.strip() for x in provider)
+    ):
+        return {x.strip() for x in provider}
+    raise GoalCompilationFailure(
+        "CAPABILITY_CHANNEL_INVALID",
+        str(detail),
+    )
+
+
+def _select_channel(candidates,where,detail):
+    """Pick one channel endpoint under the typed-channel law.
+
+    A ``provider`` predicate filters first; more than one survivor under it
+    fails closed CAPABILITY_CHANNEL_AMBIGUOUS. Without a predicate the
+    historical last-writer-wins law of overwrite stores is preserved exactly
+    (single-endpoint legacy maps trivially keep their only endpoint).
+    """
+    if not candidates:
+        return None
+    provider_set=_channel_where(where,detail)
+    chosen=candidates
+    if provider_set is not None:
+        chosen=[x for x in candidates if x[0] in provider_set]
+        if len(chosen)>1:
+            raise GoalCompilationFailure(
+                "CAPABILITY_CHANNEL_AMBIGUOUS",
+                json.dumps({
+                    "detail":str(detail),
+                    "candidates":sorted(str(x[0]) for x in chosen),
+                },sort_keys=True),
+            )
+    if not chosen:
+        return None
+    return chosen[-1] if provider_set is None else chosen[0]
+
+
+def _channel_discriminator(ref):
+    """Stable identity of a reference's ``where`` for cycle dedupe.
+
+    Two references route to the same producer step exactly when their
+    predicates are equal; without a predicate both collapse to "" so the
+    existing two-fields-of-one-producer dedupe is unchanged.
+    """
+    where=ref.get("where") if isinstance(ref,dict) else None
+    if where is None:
+        return ""
+    return json.dumps(where,sort_keys=True)
+
+
 def _rewrite_effect_result_refs(value, cycle_by_ref):
     """Point a dangling effect reference at the step that now produces it."""
     if isinstance(value,dict):
         ref=value.get("$effect_result")
         if isinstance(ref,dict):
-            key=(str(ref.get("effect") or ""),str(ref.get("field") or ""))
+            key=(str(ref.get("effect") or ""),str(ref.get("field") or ""),
+                 _channel_discriminator(ref))
             cycle=cycle_by_ref.get(key)
             if cycle is None:
                 return value
@@ -1605,6 +1689,12 @@ def _bind_producer_inputs(goal, root, provider_id, provider_entry,
         for slot,binding in bindings.items()
         if isinstance(binding,dict) and binding.get("type")=="effect_result"
     }
+    effect_where={
+        str(slot):json.loads(json.dumps(binding["where"]))
+        for slot,binding in bindings.items()
+        if isinstance(binding,dict) and binding.get("type")=="effect_result"
+        and binding.get("where") is not None
+    }
     masked=dict(provider_entry)
     masked["proposal_bindings"]={
         k:v for k,v in bindings.items() if k not in effect_slots
@@ -1625,7 +1715,13 @@ def _bind_producer_inputs(goal, root, provider_id, provider_entry,
         return None
     inputs=dict(inputs)
     for slot,(effect,field) in effect_slots.items():
-        inputs[slot]={"$effect_result":{"effect":str(effect or ""),"field":str(field or "")}}
+        ref={"effect":str(effect or ""),"field":str(field or "")}
+        if slot in effect_where:
+            # Typed-channel predicate travels with the reference so both the
+            # planner lowering and the producer-attach walk select the same
+            # channel endpoint the binding spec asked for.
+            ref["where"]=json.loads(json.dumps(effect_where[slot]))
+        inputs[slot]={"$effect_result":ref}
     for slot in output_keys:
         if slot in inputs:
             continue
@@ -1675,24 +1771,30 @@ def _append_producer_parts(
     for ref in refs:
         effect=str(ref.get("effect") or "").strip()
         field=str(ref.get("field") or "").strip()
-        if (effect,field) in cycle_by_ref:
+        discr=_channel_discriminator(ref)
+        if (effect,field,discr) in cycle_by_ref:
             continue
-        prior=[c for (e,_f),c in cycle_by_ref.items() if e==effect]
+        prior=[c for (e,_f,d),c in cycle_by_ref.items() if e==effect and d==discr]
         if prior:
             # A consumer may read two fields of one producer's result --
             # EXT_DECISION_VERIFY takes both ``input_path`` and ``result_path``
             # from ``decision.synthesis.typed``. That is one upstream step, not
             # two, so map the second field at the cycle already emitted instead
             # of running the producer again. Derived from cycle_by_ref so it
-            # stays correct across recursion levels.
-            cycle_by_ref[(effect,field)]=min(prior)
+            # stays correct across recursion levels. The discriminator keeps
+            # this scoped to references that ask for the SAME channel.
+            cycle_by_ref[(effect,field,discr)]=min(prior)
             continue
         if depth<=0:
             return False
-        provider=providers.get(effect.lower())
+        provider=_select_channel(
+            _channel_candidates(providers,effect.lower()),
+            ref.get("where"),
+            str(effect)+"/"+str(field),
+        )
         if not provider:
             return False
-        provider_id,provider_entry=provider
+        provider_id,provider_entry=provider[0],provider[1]
         if not isinstance(provider_entry,dict):
             return False
         declared={str(x).strip() for x in provider_entry.get("result_fields") or []
@@ -1717,7 +1819,7 @@ def _append_producer_parts(
             if _collect_effect_result_refs(producer_inputs):
                 return False
         cycle=len(parts)
-        cycle_by_ref[(effect,field)]=cycle
+        cycle_by_ref[(effect,field,discr)]=cycle
         parts.append({
             "index":cycle,
             "mode":"EFFECT_PRODUCER",
@@ -6048,8 +6150,12 @@ def _compile_compound_goal(goal, clauses, registry, root):
         producer_cycle=len(actions)-1
         for effect in entry.get("provides") or []:
             effect=str(effect)
-            effect_providers[effect]=(cid,entry)
-            runtime_effect_providers[effect]=(producer_cycle,producer_cap)
+            # Typed channels: every producer of an effect publishes an
+            # endpoint in step order; nothing is silently overwritten.
+            # Untyped consumers resolve via the selection law whose default
+            # keeps the historical last-writer-wins endpoint byte-identical.
+            effect_providers.setdefault(effect,[]).append((cid,entry))
+            runtime_effect_providers.setdefault(effect,[]).append((producer_cycle,producer_cap))
         compiled_parts.append({
             "index":index,
             "subgoal":clause,

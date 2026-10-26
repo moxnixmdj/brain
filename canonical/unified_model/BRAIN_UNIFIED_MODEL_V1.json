@@ -24635,7 +24635,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "13370409d3745edaed14b98e771c55da18915c89901ecb3b858b837f08c57e7c"
+  "value": "449efeec389aa365ce657e05e14fead91045262f3dc9a9f8b745969ab3d2a736"
  },
  "engines": [
   {
@@ -207350,23 +207350,30 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/capability_planner.py",
-   "sha256": "e8127688e0b93fa4a1b8dc8d62485fb140deee42b4ba45ccee8d868703997e64",
+   "sha256": "392d3422dce0d9fe448203957597e2b2a87f3c80e0f0cce74a6091369dc23892",
    "summary": "Zero-dependency capability-graph planner for Project Brain.",
-   "symbol_count": 8,
+   "symbol_count": 12,
    "symbols": [
     "Capability",
     "PlanningFailure",
+    "_append_channel",
+    "_channel_candidates",
+    "_channel_where",
     "_normalize",
     "_resolve_effect_bindings",
+    "_select_channel",
     "_string_set",
     "plan_actions",
     "plan_capabilities",
     "reachable_effects"
    ],
    "terms": {
+    "append_channel": 1,
     "brain": 1,
     "capability": 2,
     "capability-graph": 1,
+    "channel_candidates": 1,
+    "channel_where": 1,
     "normalize": 1,
     "plan_actions": 1,
     "plan_capabilities": 1,
@@ -207375,6 +207382,7 @@
     "project": 1,
     "reachable_effects": 1,
     "resolve_effect_bindings": 1,
+    "select_channel": 1,
     "string_set": 1,
     "zero-dependency": 1
    }
@@ -207425,13 +207433,16 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/capability_proposal_generators.py",
-   "sha256": "ea1890e6c15af507b51c37a06ad5a25ca44834dcd8a197db5dcbd165bed86fb8",
+   "sha256": "744fd4895a27beb5f675f5553cdf096388ec6e271ce3e1774074bc421cadc811",
    "summary": "Fail-closed proposal generators for verified Project Brain capabilities.",
-   "symbol_count": 15,
+   "symbol_count": 19,
    "symbols": [
     "CapabilityProposalFailure",
     "_auto_output_path",
     "_bind_planned_inputs",
+    "_channel_candidates",
+    "_channel_endpoint_id",
+    "_channel_where",
     "_current_platform",
     "_fanin_expansion",
     "_goal_urls",
@@ -207440,6 +207451,7 @@
     "_load_goal_compiler",
     "_mask_declared_placeholders",
     "_platform_supported",
+    "_select_channel",
     "_zero_spend_verified",
     "generate",
     "multi_verified_capability_v1",
@@ -207452,6 +207464,9 @@
     "capabilities": 1,
     "capability": 1,
     "capabilityproposalfailure": 1,
+    "channel_candidates": 1,
+    "channel_endpoint_id": 1,
+    "channel_where": 1,
     "current_platform": 1,
     "fail-closed": 1,
     "fanin_expansion": 1,
@@ -207466,6 +207481,7 @@
     "platform_supported": 1,
     "project": 1,
     "proposal": 2,
+    "select_channel": 1,
     "single_verified_capability_v1": 1,
     "verified": 1,
     "zero_spend_verified": 1
@@ -221364,9 +221380,9 @@
    "imported_by_count": 7,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "fa7dc0916ca3cfa2b31faa4628fa3b34008de8bcb41e998b40056e27444670fd",
+   "sha256": "3a5507f6aecec755fdc96d391c6298b45e5124278f9ed9356259771659736031",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
-   "symbol_count": 121,
+   "symbol_count": 125,
    "symbols": [
     "GoalCompilationFailure",
     "_adapter_default_argv",
@@ -221380,6 +221396,9 @@
     "_bm25_rerank",
     "_bm25_terms",
     "_capability_document",
+    "_channel_candidates",
+    "_channel_discriminator",
+    "_channel_where",
     "_claimed_paths",
     "_collect_effect_result_refs",
     "_compile_authoritative_json_knowledge_fetch",
@@ -221388,10 +221407,7 @@
     "_compile_compound_goal",
     "_compile_context_url_json_fetch",
     "_compile_domain_free_authority_source_goal",
-    "_compile_dynamic_fanout_goal",
-    "_compile_exact_literal_response_goal",
-    "_compile_exact_markdown_pdf_goal",
-    "_compile_existing_causal_artifact_assertion"
+    "_compile_dynamic_fanout_goal"
    ],
    "terms": {
     "adapter_default_argv": 1,

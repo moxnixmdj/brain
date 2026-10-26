@@ -220,6 +220,84 @@ def _auto_output_path(goal,instance_id,key,suffix):
 # Spec types whose declared binding may be overruled by a value the goal
 # sentence states explicitly. "literal"/"goal_text" stay spec-authoritative:
 # their bindings exist precisely to override sentence parsing.
+def _channel_candidates(store,effect):
+    """Ordered channel list for ``effect`` from either store shape.
+
+    Typed composition channels: a store maps an effect to every endpoint that
+    published it, in plan order. Legacy single-entry stores (tuple) and new
+    list stores both read; ``None`` means no channel exists.
+    """
+    value=store.get(effect)
+    if value is None:
+        return None
+    if isinstance(value,list):
+        return list(value)
+    return [value]
+
+
+def _channel_endpoint_id(candidate):
+    """Capability/instance id of one channel endpoint (2- or 3-tuple)."""
+    if isinstance(candidate,(tuple,list)) and len(candidate)==3:
+        return candidate[2]
+    if isinstance(candidate,(tuple,list)) and len(candidate)==2:
+        return candidate[0]
+    return None
+
+
+def _channel_where(where,cid,key):
+    """Validate an optional channel predicate on a binding spec.
+
+    Phase B knows one predicate: ``provider`` -- a capability id or a list of
+    them. Unknown shapes are refused loudly; a predicate the binder cannot
+    evaluate must never degrade into silently picking a producer anyway.
+    """
+    if where is None:
+        return None
+    if not isinstance(where,dict) or set(where)!={"provider"}:
+        raise CapabilityProposalFailure(
+            "CAPABILITY_CHANNEL_INVALID:"+str(cid)+":"+str(key)
+        )
+    provider=where["provider"]
+    if isinstance(provider,str) and provider.strip():
+        return {provider.strip()}
+    if (
+        isinstance(provider,list)
+        and provider
+        and all(isinstance(x,str) and x.strip() for x in provider)
+    ):
+        return {x.strip() for x in provider}
+    raise CapabilityProposalFailure(
+        "CAPABILITY_CHANNEL_INVALID:"+str(cid)+":"+str(key)
+    )
+
+
+def _select_channel(candidates,provider_set,cid,key):
+    """Pick one channel endpoint under the typed-channel law.
+
+    A ``provider`` predicate filters first. More than one survivor under a
+    predicate fails closed CAPABILITY_CHANNEL_AMBIGUOUS -- the goal named a
+    producer and the plan still has two. Without a predicate the historical
+    last-writer-wins law of the in-plan store is preserved exactly.
+    """
+    if not candidates:
+        return None,0
+    chosen=candidates
+    if provider_set is not None:
+        chosen=[
+            x for x in candidates
+            if _channel_endpoint_id(x) in provider_set
+        ]
+        if len(chosen)>1:
+            raise CapabilityProposalFailure(
+                "CAPABILITY_CHANNEL_AMBIGUOUS:"
+                +str(cid)+":"+str(key)+":"
+                +",".join(sorted(str(_channel_endpoint_id(x)) for x in chosen))
+            )
+    if not chosen:
+        return None,len(candidates)
+    return (chosen[-1] if provider_set is None else chosen[0]),len(candidates)
+
+
 STATED_PRECEDENCE_TYPES=frozenset({"effect_result","auto_path","goal_url"})
 
 
@@ -373,6 +451,8 @@ def _bind_planned_inputs(
             effect=str(spec.get("effect") or "").strip()
             field=str(spec.get("field") or "").strip()
             container=str(spec.get("container") or "scalar").strip()
+            where=spec.get("where")
+            provider_set=_channel_where(where,cid,key)
             if effect not in requires:
                 raise CapabilityProposalFailure(
                     "PROPOSAL_EFFECT_BINDING_NOT_REQUIRED:"
@@ -381,14 +461,24 @@ def _bind_planned_inputs(
             bound_effects=alias_map.get(effect) or [effect]
             refs=[]
             provider_ids=[]
+            channel_counts=[]
             for bound_effect in bound_effects:
-                provider=providers.get(bound_effect)
+                channel=_channel_candidates(providers,bound_effect)
+                if channel is None:
+                    raise CapabilityProposalFailure(
+                        "PROPOSAL_EFFECT_PROVIDER_MISSING:"
+                        +str(cid)+":"+key+":"+bound_effect
+                    )
+                provider,channel_size=_select_channel(
+                    channel,provider_set,cid,key
+                )
                 if provider is None:
                     raise CapabilityProposalFailure(
                         "PROPOSAL_EFFECT_PROVIDER_MISSING:"
                         +str(cid)+":"+key+":"+bound_effect
                     )
-                provider_id,provider_entry=provider
+                channel_counts.append(channel_size)
+                provider_id,provider_entry=provider[0],provider[1]
                 result_fields={
                     str(x).strip()
                     for x in provider_entry.get("result_fields") or []
@@ -399,12 +489,17 @@ def _bind_planned_inputs(
                         "PROPOSAL_EFFECT_RESULT_FIELD_UNDECLARED:"
                         +str(provider_id)+":"+field
                     )
-                refs.append({
+                ref={
                     "$effect_result":{
                         "effect":bound_effect,
                         "field":field,
                     }
-                })
+                }
+                if where is not None:
+                    ref["$effect_result"]["where"]=json.loads(
+                        json.dumps(where)
+                    )
+                refs.append(ref)
                 provider_ids.append(provider_id)
             if container=="scalar":
                 if len(refs)!=1:
@@ -428,6 +523,8 @@ def _bind_planned_inputs(
                 "providers":provider_ids,
                 "provider":provider_ids[0] if len(provider_ids)==1 else None,
                 "container":container,
+                "where":json.loads(json.dumps(where)) if where is not None else None,
+                "channel_candidates":channel_counts,
             }
             continue
         raise CapabilityProposalFailure(
@@ -610,7 +707,10 @@ def multi_verified_capability_v1(
                 if not effect:
                     continue
                 bound=alias_lookup.get(effect,effect)
-                providers[bound]=(instance_id,entry)
+                # Typed channel: publish in plan order, never overwrite.
+                # Untyped readers resolve via _select_channel whose default
+                # keeps the historical last-writer-wins winner exactly.
+                providers.setdefault(bound,[]).append((instance_id,entry,cid))
     proposal={
         "goal_sha256":hashlib.sha256(goal.encode("utf-8")).hexdigest(),
         "clauses":[{
