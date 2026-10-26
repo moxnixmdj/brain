@@ -4682,3 +4682,89 @@ class TestAnUnquotedValueIsTheSameValueAsAQuotedOne(unittest.TestCase):
         r = _solve("Show the lines in the file %s matching 'ap.le'" % f)
         self.assertTrue(_verified(r))
         self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+
+class TestAWordThatQualifiesAFilterMustReachTheFlags(unittest.TestCase):
+    """A word that says HOW to match is part of the question.
+
+    "the lines containing APPLE ... ignoring case" bound `fgrep APPLE`, matched
+    nothing in a file that holds "apple pie", and was CERTIFIED returning an
+    empty answer.  The words were read, decided nothing, and were dropped.
+
+    And a filter whose value cannot be recovered must be refused.  "the lines
+    containing text" states "text" as often as an ordinary noun as a value, so
+    refusing to guess it is right -- but the sentence then fell to the leftover
+    `cat` row and was certified with the WHOLE FILE, an answer to a question no
+    line of that file asks.
+    """
+
+    LINES = "apple pie\nbanana split\napple tart\n\ncherry\n"
+
+    def _file(self, content, name="a1.txt"):
+        root = ROOT / SCRATCH
+        shutil.rmtree(root, ignore_errors=True)
+        root.mkdir(parents=True, exist_ok=True)
+        rel = "%s/%s" % (SCRATCH, name)
+        (ROOT / rel).write_text(content, encoding="utf-8")
+        return rel
+
+    def test_ignoring_case_reaches_the_command(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the lines containing APPLE in the file %s ignoring case" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    def test_case_insensitive_is_the_same_request(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the lines containing APPLE in the file %s case-insensitive" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    def test_case_is_still_significant_when_nothing_says_otherwise(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the lines containing APPLE in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "")
+
+    def test_a_value_that_cannot_be_recovered_is_refused_not_the_whole_file(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the lines containing text in the file %s" % f)
+        self.assertNotEqual(_stdout(r), self.LINES,
+                            "the whole file is not an answer to 'which lines hold text'")
+
+    # --- pins: the sentences the narrower `cat` row must keep serving.
+    def test_reading_a_file_still_reads_it(self):
+        f = self._file(self.LINES)
+        r = _solve("Read the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.LINES)
+
+    def test_the_contents_of_a_file_still_reads_it(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the contents of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.LINES)
+
+    def test_a_file_whose_name_says_containing_still_reads_it(self):
+        f = self._file("the report\n", "report.txt")
+        r = _solve("Show the contents of the file %s containing the report" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "the report\n")
+
+    def test_showing_the_lines_of_a_file_still_reads_it(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the lines of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.LINES)
+
+    def test_a_bare_value_still_matches_without_the_case_flag(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the lines containing apple in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    def test_line_numbers_still_carry_their_numbers(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the line numbers in the file %s containing apple" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "1:apple pie\n3:apple tart\n")
