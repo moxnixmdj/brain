@@ -5171,3 +5171,74 @@ class TestAUnitTheSentenceStatesReachesTheCommand(unittest.TestCase):
         r = _solve("Show lines 2 to 4 of the file %s" % f)
         self.assertTrue(_verified(r))
         self.assertEqual(_stdout(r), "alpha cherry\nbeta banana\n")
+
+
+class TestASentenceCanStateMoreThanOneLine(unittest.TestCase):
+    """A payload containing a newline is a payload, not a parsing failure.
+
+    `_CONTENT` captured with `(.+?)`, and `.` stops at a newline.  So a stated
+    text that CONTAINED one never matched, the write slot bound nothing, and the
+    chain reported OPEN__COMPOSER_SLOT_UNBOUND.  Measured, that meant no source
+    file could be authored through this door at all, because every source file
+    has more than one line -- while `_QUOTED_SPAN` read the very same payload
+    correctly, because `[^']+` does cross a newline.  Two grammars for one
+    sentence, disagreeing.
+
+    The fix lets the newline through.  It does NOT start interpreting `\\n`
+    escapes: `extract_content` promises the payload is delivered VERBATIM, and
+    turning two stated characters into one unrequested byte would break that.
+    """
+
+    SOURCE = ("def fib(n):\n"
+              "    a, b = 0, 1\n"
+              "    for _ in range(n):\n"
+              "        a, b = b, a + b\n"
+              "    return a\n")
+
+    def _write(self, text, name="s1.py"):
+        root = ROOT / SCRATCH
+        shutil.rmtree(root, ignore_errors=True)
+        root.mkdir(parents=True, exist_ok=True)
+        rel = "%s/%s" % (SCRATCH, name)
+        r = _solve("Write the text '%s' to the file %s" % (text, rel))
+        return r, rel
+
+    def test_a_source_file_of_several_lines_is_written_verbatim(self):
+        r, rel = self._write(self.SOURCE)
+        self.assertTrue(_verified(r), r.get("status"))
+        self.assertEqual((ROOT / rel).read_text(encoding="utf-8"), self.SOURCE)
+
+    def test_the_file_holds_every_line_the_sentence_stated(self):
+        r, rel = self._write(self.SOURCE)
+        self.assertEqual(len((ROOT / rel).read_text(encoding="utf-8").splitlines()), 5)
+
+    def test_what_is_written_parses_as_the_program_it_states(self):
+        import ast
+        r, rel = self._write(self.SOURCE)
+        self.assertTrue(_verified(r))
+        tree = ast.parse((ROOT / rel).read_text(encoding="utf-8"))
+        self.assertEqual([n.name for n in tree.body if hasattr(n, "name")], ["fib"])
+
+    def test_an_empty_line_in_the_middle_survives(self):
+        r, rel = self._write("one\n\ntwo\n", name="s2.txt")
+        self.assertTrue(_verified(r))
+        self.assertEqual((ROOT / rel).read_text(encoding="utf-8"), "one\n\ntwo\n")
+
+    # --- pins.
+    def test_a_single_line_is_still_written_verbatim(self):
+        r, rel = self._write("hello world", name="s3.txt")
+        self.assertTrue(_verified(r))
+        self.assertEqual((ROOT / rel).read_text(encoding="utf-8"), "hello world")
+
+    def test_a_leading_article_is_still_part_of_the_payload(self):
+        r, rel = self._write("the archive manifest listing", name="s4.txt")
+        self.assertTrue(_verified(r))
+        self.assertEqual((ROOT / rel).read_text(encoding="utf-8"),
+                         "the archive manifest listing")
+
+    def test_an_escape_sequence_is_delivered_verbatim_not_interpreted(self):
+        # The stated text is backslash-n: two characters.  Turning it into a
+        # newline would be writing a byte the sentence never stated.
+        r, rel = self._write("a\\nb", name="s5.txt")
+        self.assertTrue(_verified(r))
+        self.assertEqual((ROOT / rel).read_text(encoding="utf-8"), "a\\nb")
