@@ -35,15 +35,15 @@
       "route_class": "COMPOSE"
    },
    "benchmark_or_family_rank_authority": false,
-   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The composer can only see the 11 edges where a provides token literally equals a requires token, out of 96 provides and 38 requires over 73 entries on main c8fe19b; provi",
-   "canonical_base_commit": "c8fe19b9e3731bfcbea65548994c29a9ef69220b",
+   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The composer can only see the 11 edges where a provides token literally equals a requires token, out of 96 provides and 38 requires over 73 entries on main ce288da; provi",
+   "canonical_base_commit": "ce288da",
    "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
    "capability_credit_delta": 0,
    "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
-   "causal_blocker": "The composer can only see the 11 edges where a provides token literally equals a requires token, out of 96 provides and 38 requires over 73 entries on main c8fe19b; provides_as and requires_as are empty on every entry, so 51 produced capabilities are composition-invisible even where the bytes one writes are exactly the bytes another reads.  Nobody derives the semantic edges by running the candidates, because no procedure in the tree measures them.",
+   "causal_blocker": "The composer can only see the 11 edges where a provides token literally equals a requires token, out of 96 provides and 38 requires over 73 entries on main ce288da; provides_as and requires_as are empty on every entry, so 51 produced capabilities are composition-invisible even where the bytes one writes are exactly the bytes another reads.  Nobody derives the semantic edges by running the candidates, because no procedure in the tree measures them.",
    "date": "2026-10-26",
-   "expected_parent_change": "The verified composition table of the registry goes from 11 literal-token edges and zero machine-derived edges (measured on c8fe19b) to a reproducible enumeration procedure: on this environment it derives 16 verified emission rows and 1 verified cross-capability bridge, with every impossible pairing classified instead of silent, and with the tampered world proven to fail.  Registry fields for the derived edges are a follow-up PR after public-runner census.",
-   "expected_parent_frontier_change": "The verified composition table of the registry goes from 11 literal-token edges and zero machine-derived edges (measured on c8fe19b) to a reproducible enumeration procedure: on this environment it derives 16 verified emission rows and 1 verified cross-capability bridge, with every impossible pairing classified instead of silent, and with the tampered world proven to fail.  Registry fields for the derived edges are a follow-up PR after public-runner census.",
+   "expected_parent_change": "The verified composition table of the registry goes from 11 literal-token edges and zero machine-derived edges (measured on ce288da) to a reproducible enumeration procedure: on this environment it derives 15 verified emission rows and 1 verified cross-capability bridge, with every impossible pairing classified instead of silent, and with the tampered world proven to fail.  Registry fields for the derived edges are a follow-up PR after public-runner census.",
+   "expected_parent_frontier_change": "The verified composition table of the registry goes from 11 literal-token edges and zero machine-derived edges (measured on ce288da) to a reproducible enumeration procedure: on this environment it derives 15 verified emission rows and 1 verified cross-capability bridge, with every impossible pairing classified instead of silent, and with the tampered world proven to fail.  Registry fields for the derived edges are a follow-up PR after public-runner census.",
    "explicit_user_authorization": "Owner instruction this session 2026-10-26, verbatim, repeated five times: All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers.  The repetition is the proceed order for the reuse-first build path this intent records -- hunt existing solutions before any construction, act instead of re-mapping.  Owner instruction 2026-10-21, verbatim: use all the capability in the Brain that you are supposed to use, plus all the data that you are supposed to use, plus thinking.",
    "falsification_condition": "On an environment with GNU tar, the archive bridge row absent while the stdlib producer emits; any emitted row whose bytes fail the independent oracle on re-parse; any row surviving from a producer whose declared source modules cannot import; a yaml row present where neither pyyaml nor yq exists; the tampered-source world accepted (consumer verifies stale bytes); a garbage adapter sinking the enumeration instead of being one classified refusal; a nondeterministic row set across two runs on one environment.",
    "governance_change": true,
@@ -73,11 +73,11 @@
       "success_probability_lcb": 0.9,
       "wall_clock_cost_ub": 1
    },
-   "measured_effect": "On main c8fe19b, `bridge_enumeration_v1.enumerate_bridges` against the live registry: 73 entries, 48 producer candidates, 36 consumer file-needs; 16 capability/type emission rows verified by byte oracles independent of the adapters (magic bytes, strict json, pyyaml when present, zip payload markers, sqlite header, gzip tar members re-read with stdlib tarfile); one verified cross-capability bridge, archive.tar_gz.create_from_manifest --tar.gz--> archive.verify.tar_gz.gnu, an edge the registry's 11 literal-token edges do not contain; 36 impossible rows classified TYPE_MISMATCH (json bytes refused as pdf/png/tar.gz/sqlite/docx/xlsx live) and 88 adapter refusals classified by class; zero registry bytes written, zero network, zero installs, scratch deleted.  The paired world fails on purpose: after the archive is sealed, tampering one source byte makes the same verify adapter refuse ARCHIVE_HASH_MISMATCH:a.txt (recorded in test_tampered_source_breaks_the_bridge).",
+   "measured_effect": "On main ce288da, `bridge_enumeration_v1.enumerate_bridges` against the live registry: 73 entries, 48 producer candidates, 36 consumer file-needs; 15 capability/type emission rows verified by byte oracles independent of the adapters (magic bytes, strict json, pyyaml when present, zip payload markers, sqlite header, gzip tar members re-read with stdlib tarfile); one verified cross-capability bridge, archive.tar_gz.create_from_manifest --tar.gz--> archive.verify.tar_gz.gnu, an edge the registry's 11 literal-token edges do not contain; 37 impossible rows classified TYPE_MISMATCH (json bytes refused as pdf/png/tar.gz/sqlite/docx/xlsx live) and 88 adapter refusals classified by class; zero registry bytes written, zero network, zero installs, scratch deleted.  The paired world fails on purpose: after the archive is sealed, tampering one source byte makes the same verify adapter refuse ARCHIVE_HASH_MISMATCH:a.txt (recorded in test_tampered_source_breaks_the_bridge).",
    "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
    "prior_work_reused": "run_adapter_locally (canonical/runtime/live_brain_route_admission_v1.py:671) already executes any registry entry's adapter in-process with capability_id popped -- reused unchanged as the execution engine.  The 73-entry registry, its provides/requires vocabularies, the 94 bound adapters with their own refusal classes (PATH_OUTSIDE_REPOSITORY, TAR_GZ_OUTPUT_REQUIRED, GNU_TAR_LIST_FAILED, SQLITE_ID_COLUMN_REQUIRED, BYTE oracle magics) -- all read and run as found.  tarfile/sqlite3/zipfile/hashlib/json stdlib reused as the independent oracles.  GNU tar, jq, node reused as environment probes.  External candidates (unified-planning, up-fast-downward, SymK, cvc5 SyGuS enumeration, safe-planner, pddl2smv, provenflow) were fetched, weighed and recorded as donors; none is imported by this change because the missing thing is the EDGES, not a planner to walk them.",
    "recursive_obs": {
-      "canonical_base_commit": "c8fe19b9e3731bfcbea65548994c29a9ef69220b",
+      "canonical_base_commit": "ce288da",
       "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
       "deleted_or_bypassed_paths": [
          "TRUSTING_A_DECLARED_TYPE_TOKEN_AS_PROOF_TWO_CAPABILITIES_COMPOSE_WITHOUT_RUNNING_EITHER",
@@ -86,7 +86,7 @@
          "DEMANDING_A_FULL_PROJECT_BEFORE_MEASUREMENT__THE_FIRST_PROBE_VERSION_REQUIRED_40_OF_52_PRODUCERS_PRE_FILLED",
          "WRITING_TO_REGISTRY_OR_STATE_FILES_TO_MAKE_THE_MEASUREMENT_STICK"
       ],
-      "expected_parent_level_state_change": "The verified composition table of the registry goes from 11 literal-token edges and zero machine-derived edges (measured on c8fe19b) to a reproducible enumeration procedure: on this environment it derives 16 verified emission rows and 1 verified cross-capability bridge, with every impossible pairing classified instead of silent, and with the tampered world proven to fail.  Registry fields for the derived edges are a follow-up PR after public-runner census.",
+      "expected_parent_level_state_change": "The verified composition table of the registry goes from 11 literal-token edges and zero machine-derived edges (measured on ce288da) to a reproducible enumeration procedure: on this environment it derives 15 verified emission rows and 1 verified cross-capability bridge, with every impossible pairing classified instead of silent, and with the tampered world proven to fail.  Registry fields for the derived edges are a follow-up PR after public-runner census.",
       "iteration_limit": 4,
       "obs_blocker": {
          "delete_bypass_substitute_options": "HAND_ALIAS_TABLE__OR_VOCABULARY_SIMILARITY_BRIDGING__OR_SYNTHESIZING_FILLER_ADAPTERS_PER_GAP",
@@ -162,7 +162,7 @@
          "FIRST_PROBE_WITH_GENERIC_PATH_FIXTURES__REJECTED_MEASURED_0_OF_48_PRODUCERS_DRIVABLE",
          "REGISTRY_EDIT_IN_THE_SAME_PR__REJECTED_MEASUREMENT_MUST_LAND_BEFORE_ANY_TRUSTED_WRITE"
       ],
-      "real_outcome": "On main c8fe19b, `bridge_enumeration_v1.enumerate_bridges` against the live registry: 73 entries, 48 producer candidates, 36 consumer file-needs; 16 capability/type emission rows verified by byte oracles independent of the adapters (magic bytes, strict json, pyyaml when present, zip payload markers, sqlite header, gzip tar members re-read with stdlib tarfile); one verified cross-capability bridge, archive.tar_gz.create_from_manifest --tar.gz--> archive.verify.tar_gz.gnu, an edge the registry's 11 literal-token edges do not contain; 36 impossible rows classified TYPE_MISMATCH (json bytes refused as pdf/png/tar.gz/sqlite/docx/xlsx live) and 88 adapter refusals classified by class; zero registry bytes written, zero network, zero installs, scratch deleted.  The paired world fails on purpose: after the archive is sealed, tampering one source byte makes the same verify adapter refuse ARCHIVE_HASH_MISMATCH:a.txt (recorded in test_tampered_source_breaks_the_bridge).",
+      "real_outcome": "On main ce288da, `bridge_enumeration_v1.enumerate_bridges` against the live registry: 73 entries, 48 producer candidates, 36 consumer file-needs; 15 capability/type emission rows verified by byte oracles independent of the adapters (magic bytes, strict json, pyyaml when present, zip payload markers, sqlite header, gzip tar members re-read with stdlib tarfile); one verified cross-capability bridge, archive.tar_gz.create_from_manifest --tar.gz--> archive.verify.tar_gz.gnu, an edge the registry's 11 literal-token edges do not contain; 37 impossible rows classified TYPE_MISMATCH (json bytes refused as pdf/png/tar.gz/sqlite/docx/xlsx live) and 88 adapter refusals classified by class; zero registry bytes written, zero network, zero installs, scratch deleted.  The paired world fails on purpose: after the archive is sealed, tampering one source byte makes the same verify adapter refuse ARCHIVE_HASH_MISMATCH:a.txt (recorded in test_tampered_source_breaks_the_bridge).",
       "required_capability": "shell.command.run",
       "route_frontier": {
          "challenger_routes": [
@@ -180,7 +180,7 @@
                   "CENSUS: 96 provides x 38 requires; hand coverage cannot scale and proves nothing runs"
                ],
                "qualification_evidence": [
-                  "direct census script run on main c8fe19b in this session"
+                  "direct census script run on main ce288da in this session"
                ],
                "qualification_evidence_classes": [
                   "DIRECT_PROBE",
@@ -298,7 +298,7 @@
                "resolution": "DISQUALIFIED"
             }
          ],
-         "checked_at_utc": "2026-10-26T13:40:00Z",
+         "checked_at_utc": "2026-10-26T15:20:00Z",
          "comparison_dimensions": [
             "CORRECTNESS",
             "CAPABILITY_STRENGTH",
@@ -356,7 +356,7 @@
          "selected_route_checked_at_utc": "2026-10-26T13:40:00Z",
          "selected_route_preflight": {
             "all_required_dependencies_ready": true,
-            "checked_at_utc": "2026-10-26T13:40:00Z",
+            "checked_at_utc": "2026-10-26T15:20:00Z",
             "execution_dependencies": [
                {
                   "dependency": "python3 >= 3.11",
@@ -404,7 +404,7 @@
          ],
          "source_evidence": {
             "BRAIN_INHERITED": [
-               "registry census on c8fe19b: 73 entries, 96 provides tokens, 38 requires tokens, 11 literal intersections, 51 unmatched provides, zero provides_as/requires_as filled",
+               "registry census on ce288da: 73 entries, 96 provides tokens, 38 requires tokens, 11 literal intersections, 51 unmatched provides, zero provides_as/requires_as filled",
                "live_brain_route_admission_v1.py:671 run_adapter_locally executes any entry; composer_route_v1.py:2564 borrows capabilities the same way",
                "bound adapter refusal classes observed executing: PATH_OUTSIDE_REPOSITORY, TAR_GZ_OUTPUT_REQUIRED, GNU_TAR_LIST_FAILED, SQLITE_ID_COLUMN_REQUIRED, JSON_OUTPUT_REQUIRED, PDF_OUTPUT_REQUIRED"
             ],
@@ -418,18 +418,18 @@
                "github.com/speckdavid/symk planner; github.com/mokhtarivahid/safe-planner FOND compilation; github.com/ssardina-research/pddl2smv; github.com/belkassaby/provenflow"
             ]
          },
-         "stop_condition": "Holds: on this environment the enumeration finds the archive create-to-verify bridge and 16 emission rows, all 11 tests pass with their paired failing worlds exercised (tampered source byte -> ARCHIVE_HASH_MISMATCH; garbage adapter -> ADAPTER_REFUSED while the rest of the census still completes), and no test asserts what the running environment cannot prove.",
+         "stop_condition": "Holds: on this environment the enumeration finds the archive create-to-verify bridge and 15 emission rows, all 11 tests pass with their paired failing worlds exercised (tampered source byte -> ARCHIVE_HASH_MISMATCH; garbage adapter -> ADAPTER_REFUSED while the rest of the census still completes), and no test asserts what the running environment cannot prove.",
          "unresolved_plausible_dominators": [],
          "why_selected_route_is_fastest_sufficient": "IT_RUNS_WHAT_EXISTS_AND_COUNTS_WHAT_RAN__EVERY_OTHER_ROUTE_EITHER_PROVED_NOTHING_RAN_OR_REQUIRED_THE_EDGES_THIS_ONE_MEASURES__ONE_PYTEST_FILE_PINS_THE_PAIRED_WORLDS"
       },
       "selected_route": "ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1",
       "selected_surviving_route": "ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1",
-      "stop_condition": "Holds: on this environment the enumeration finds the archive create-to-verify bridge and 16 emission rows, all 11 tests pass with their paired failing worlds exercised (tampered source byte -> ARCHIVE_HASH_MISMATCH; garbage adapter -> ADAPTER_REFUSED while the rest of the census still completes), and no test asserts what the running environment cannot prove.",
+      "stop_condition": "Holds: on this environment the enumeration finds the archive create-to-verify bridge and 15 emission rows, all 11 tests pass with their paired failing worlds exercised (tampered source byte -> ARCHIVE_HASH_MISMATCH; garbage adapter -> ADAPTER_REFUSED while the rest of the census still completes), and no test asserts what the running environment cannot prove.",
       "why_selected_route_is_fastest_sufficient": "Every component reused is already in the tree: run_adapter_locally for execution, the adapters' own refusal classes for the failure taxonomy, stdlib for the independent byte oracles.  The dominant alternative was to write edges into the registry untested; execution proved 36 of this session's candidate pairings false, so any static table written a priori would have shipped lies."
    },
    "resolution": "SELECTED",
    "selected_route": "EXECUTE_THE_POSSIBLE_EDGES_VERIFY_THE_BYTES_AND_COUNT_ONLY_WHAT_RAN",
-   "stop_condition": "Holds: on this environment the enumeration finds the archive create-to-verify bridge and 16 emission rows, all 11 tests pass with their paired failing worlds exercised (tampered source byte -> ARCHIVE_HASH_MISMATCH; garbage adapter -> ADAPTER_REFUSED while the rest of the census still completes), and no test asserts what the running environment cannot prove.",
+   "stop_condition": "Holds: on this environment the enumeration finds the archive create-to-verify bridge and 15 emission rows, all 11 tests pass with their paired failing worlds exercised (tampered source byte -> ARCHIVE_HASH_MISMATCH; garbage adapter -> ADAPTER_REFUSED while the rest of the census still completes), and no test asserts what the running environment cannot prove.",
    "terminal_credit_delta": 0,
    "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
    "user_authorized_governance_change": true,
