@@ -24619,7 +24619,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6409,
+  "research_index_records": 6410,
   "routing_tokens": 1816,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24628,7 +24628,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "9a2bc93db8d86568cc32c0858dfd5ea4adc32562f35b3123ea3ff4de711423c8"
+  "value": "9c608aaeb170ff9d67ecab8f0825d157e37042ec3ce0e3005aed42d968f781b0"
  },
  "engines": [
   {
@@ -190051,6 +190051,51 @@
    }
   },
   {
+   "action_id": "A_SENTENCE_THAT_SCOPED_A_CHANGE_IS_NOT_GIVEN_THE_WIDER_ONE_V1_20261026_V1",
+   "capability": false,
+   "date": "2026-10-26T12:28:56Z",
+   "id": "research:canonical/action_intents/A_SENTENCE_THAT_SCOPED_A_CHANGE_IS_NOT_GIVEN_THE_WIDER_ONE_V1_20261026_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_SENTENCE_THAT_SCOPED_A_CHANGE_IS_NOT_GIVEN_THE_WIDER_ONE_V1_20261026_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "5d3436f1369791732b0406966922a53ddcbd3d35dce33021bf1b83fd7ec4185c",
+   "status": "",
+   "terms": {
+    "add": 2,
+    "answer": 2,
+    "answers": 2,
+    "append": 2,
+    "arm": 2,
+    "beginning": 3,
+    "block": 2,
+    "both": 2,
+    "branch": 3,
+    "but": 2,
+    "carried": 2,
+    "certified": 3,
+    "class": 2,
+    "command": 2,
+    "contain": 2,
+    "defect": 2,
+    "delete": 2,
+    "first": 3,
+    "gate": 5,
+    "lines": 3,
+    "not": 6,
+    "one": 4,
+    "own": 3,
+    "prepend": 3,
+    "rule": 6,
+    "sentence": 7,
+    "separate": 3,
+    "seventeen": 3,
+    "so": 4,
+    "two": 3,
+    "word": 4,
+    "wrong": 3
+   }
+  },
+  {
    "action_id": "A_SENTENCE_THAT_STATES_A_COMMAND_IS_NOT_A_TOKEN_SCORING_QUESTION_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -209513,7 +209558,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "1bb65d1a8bb1dd6a850a86c6075aec5eec019f8c11936cf70e16dcf18eb89e05",
+   "sha256": "a34793f019a9b0d37087eabceb5d0767d9ee7b9bf1dea94d89cfbffb7f377fb6",
    "summary": "Routing a sentence to a typed capability chain.",
    "symbol_count": 30,
    "symbols": [
