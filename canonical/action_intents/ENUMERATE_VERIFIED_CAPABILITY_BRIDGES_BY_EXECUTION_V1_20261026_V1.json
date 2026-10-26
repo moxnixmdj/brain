@@ -1,8 +1,6 @@
 {
-  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
   "action_id": "ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1",
   "action_intent_id": "ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1",
-  "route_id": "ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1",
   "action_kind": "FRESH_REUSE",
   "action_summary": "A measurement module enumerates every producer/type edge by executing the candidate and verifying the emitted bytes with oracles independent of the adapters, runs every consumer that accepts an emitted artifact against real bytes, and reports verified bridges with authority NONE -- deriving by execution the semantic composition edges the registry's type-token graph cannot see (11 literal edges measured, 51 capabilities composition-invisible).",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
@@ -151,23 +149,6 @@
       "existing_oracle_considered": true,
       "synthetic_verification_necessity": "Not synthetic in the dangerous sense: fixtures are declared and tiny, but every claim is bytes on disk re-verified by code that shares no lineage with the adapter under test, and the tamper test mutates the world itself rather than any expectation."
     },
-    "routes_considered": [
-      "HAND_FILL_ALIAS_SLOTS",
-      "STRING_SIMILARITY_BRIDGING",
-      "DOC_SIMILARITY_BRIDGING",
-      "PLAN_OVER_LITERAL_EDGES",
-      "CVC5_SYGUS_FILLER_SYNTHESIS",
-      "TRUST_SELF_REPORT",
-      "SCRATCH_IN_TMP",
-      "GENERIC_FIXTURE_PROBE",
-      "REGISTRY_EDIT_SAME_PR",
-      "EXECUTE_CANDIDATES_AND_VERIFY_BYTES__SELECTED",
-      "REUSE_RUN_ADAPTER_LOCALLY__SELECTED_PART",
-      "REPO_SCOPED_SCRATCH__SELECTED_PART",
-      "INDEPENDENT_STDLIB_ORACLES__SELECTED_PART",
-      "REFUSAL_CLASSIFICATION__SELECTED_PART",
-      "TAMPERED_WORLD_MUST_FAIL__SELECTED_PART"
-    ],
     "prior_routes_considered": [
       "FILL_PROVIDES_AS_AND_REQUIRES_AS_BY_HAND__REJECTED_96_BY_38_PAIRS_OUTLIVE_REVIEW_AND_NO_PROOF_THE_FILLED_EDGE_RUNS",
       "STRING_SIMILARITY_OVER_REQUIRES_AND_PROVIDES_VOCABULARIES__REJECTED_MEASURED_GENERIC_VOCABULARY_MATCHES_BURN_TRUST",
@@ -184,7 +165,6 @@
     "route_frontier": {
       "challenger_routes": [
         {
-          "route": "HAND_FILL_THE_ALIAS_SLOTS_FROM_TYPE_VOCABULARY",
           "comparison": {
             "CAPABILITY_STRENGTH": "EDGES_WITHOUT_EVIDENCE",
             "CORRECTNESS": "UNPROVEN",
@@ -203,10 +183,10 @@
             "DIRECT_PROBE",
             "MEASURED_ON_BASELINE"
           ],
-          "resolution": "DISQUALIFIED"
+          "resolution": "DISQUALIFIED",
+          "route": "HAND_FILL_THE_ALIAS_SLOTS_FROM_TYPE_VOCABULARY"
         },
         {
-          "route": "STRING_OR_DOC_SIMILARITY_BETWEEN_REQUIRES_AND_PROVIDES",
           "comparison": {
             "CAPABILITY_STRENGTH": "NONE_DURABLE",
             "CORRECTNESS": "MEASURED_WRONG_ON_GENERIC_VOCABULARY",
@@ -225,10 +205,10 @@
             "DIRECT_PROBE",
             "BRAIN_INHERITED"
           ],
-          "resolution": "DISQUALIFIED"
+          "resolution": "DISQUALIFIED",
+          "route": "STRING_OR_DOC_SIMILARITY_BETWEEN_REQUIRES_AND_PROVIDES"
         },
         {
-          "route": "PLAN_OVER_THE_11_LITERAL_EDGES_WITH_UNIFIED_PLANNING_OR_FAST_DOWNWARD",
           "comparison": {
             "CAPABILITY_STRENGTH": "INHERITS_THE_BLINDNESS",
             "CORRECTNESS": "SOUND_OVER_EMPTY_FIELD",
@@ -247,10 +227,10 @@
             "CODE_OR_PACKAGE_REGISTRY",
             "OFFICIAL_PRIMARY"
           ],
-          "resolution": "NON_DOMINATING"
+          "resolution": "NON_DOMINATING",
+          "route": "PLAN_OVER_THE_11_LITERAL_EDGES_WITH_UNIFIED_PLANNING_OR_FAST_DOWNWARD"
         },
         {
-          "route": "CVC5_SYGUS_STYLE_ENUMERATION_TO_SYNTHESIZE_FILLER_ADAPTERS",
           "comparison": {
             "CAPABILITY_STRENGTH": "POWERFUL_BUT_TARGETLESS",
             "CORRECTNESS": "PER_INVARIANT",
@@ -269,10 +249,10 @@
             "OFFICIAL_PRIMARY",
             "DIRECT_PROBE"
           ],
-          "resolution": "NON_DOMINATING"
+          "resolution": "NON_DOMINATING",
+          "route": "CVC5_SYGUS_STYLE_ENUMERATION_TO_SYNTHESIZE_FILLER_ADAPTERS"
         },
         {
-          "route": "TRUST_ADAPTER_SELF_REPORT_WITHOUT_BYTE_REVERIFICATION",
           "comparison": {
             "CAPABILITY_STRENGTH": "WEAK_PROOF",
             "CORRECTNESS": "FAILED_IN_REHEARSAL",
@@ -291,10 +271,10 @@
             "DIRECT_PROBE",
             "MEASURED_IN_REHEARSAL"
           ],
-          "resolution": "DISQUALIFIED"
+          "resolution": "DISQUALIFIED",
+          "route": "TRUST_ADAPTER_SELF_REPORT_WITHOUT_BYTE_REVERIFICATION"
         },
         {
-          "route": "SCRATCH_IN_TMP",
           "comparison": {
             "CAPABILITY_STRENGTH": "NONE",
             "CORRECTNESS": "STRUCTURALLY_FORBIDDEN",
@@ -313,10 +293,11 @@
             "DIRECT_PROBE",
             "MEASURED_ON_BASELINE"
           ],
-          "resolution": "DISQUALIFIED"
+          "resolution": "DISQUALIFIED",
+          "route": "SCRATCH_IN_TMP"
         }
       ],
-      "checked_at_utc": "2026-10-26T15:20:00Z",
+      "checked_at_utc": "2026-10-26T22:24:22Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -371,10 +352,10 @@
         "TAMPERED_WORLD_MUST_FAIL__SELECTED_PART"
       ],
       "selected_route": "ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1",
-      "selected_route_checked_at_utc": "2026-10-26T13:40:00Z",
+      "selected_route_checked_at_utc": "2026-10-26T22:24:22Z",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-10-26T17:45:43Z",
+        "checked_at_utc": "2026-10-26T22:24:22Z",
         "execution_dependencies": [
           {
             "dependency": "python3 >= 3.11",
@@ -426,26 +407,45 @@
           "live_brain_route_admission_v1.py:671 run_adapter_locally executes any entry; composer_route_v1.py:2564 borrows capabilities the same way",
           "bound adapter refusal classes observed executing: PATH_OUTSIDE_REPOSITORY, TAR_GZ_OUTPUT_REQUIRED, GNU_TAR_LIST_FAILED, SQLITE_ID_COLUMN_REQUIRED, JSON_OUTPUT_REQUIRED, PDF_OUTPUT_REQUIRED"
         ],
-        "OFFICIAL_PRIMARY": [
-          "github.com/cvc5/cvc5 documentation: SyGuS invariant synthesis with --sygus-enum=smart|fast streaming enumeration"
+        "BROAD_WEB_OR_COMMUNITY": [
+          "github.com/speckdavid/symk planner; github.com/mokhtarivahid/safe-planner FOND compilation; github.com/ssardina-research/pddl2smv; github.com/belkassaby/provenflow"
         ],
         "CODE_OR_PACKAGE_REGISTRY": [
           "pypi.org/project/unified-planning 1.3.0: engine-agnostic planning framework; github.com/aiplan4eu/up-fast-downward bundles Fast Downward"
         ],
-        "BROAD_WEB_OR_COMMUNITY": [
-          "github.com/speckdavid/symk planner; github.com/mokhtarivahid/safe-planner FOND compilation; github.com/ssardina-research/pddl2smv; github.com/belkassaby/provenflow"
+        "OFFICIAL_PRIMARY": [
+          "github.com/cvc5/cvc5 documentation: SyGuS invariant synthesis with --sygus-enum=smart|fast streaming enumeration"
         ]
       },
       "stop_condition": "Holds: on this environment the enumeration finds the archive create-to-verify bridge and 15 emission rows, all 11 tests pass with their paired failing worlds exercised (tampered source byte -> ARCHIVE_HASH_MISMATCH; garbage adapter -> ADAPTER_REFUSED while the rest of the census still completes), and no test asserts what the running environment cannot prove.",
       "unresolved_plausible_dominators": [],
       "why_selected_route_is_fastest_sufficient": "IT_RUNS_WHAT_EXISTS_AND_COUNTS_WHAT_RAN__EVERY_OTHER_ROUTE_EITHER_PROVED_NOTHING_RAN_OR_REQUIRED_THE_EDGES_THIS_ONE_MEASURES__ONE_PYTEST_FILE_PINS_THE_PAIRED_WORLDS"
     },
+    "routes_considered": [
+      "HAND_FILL_ALIAS_SLOTS",
+      "STRING_SIMILARITY_BRIDGING",
+      "DOC_SIMILARITY_BRIDGING",
+      "PLAN_OVER_LITERAL_EDGES",
+      "CVC5_SYGUS_FILLER_SYNTHESIS",
+      "TRUST_SELF_REPORT",
+      "SCRATCH_IN_TMP",
+      "GENERIC_FIXTURE_PROBE",
+      "REGISTRY_EDIT_SAME_PR",
+      "EXECUTE_CANDIDATES_AND_VERIFY_BYTES__SELECTED",
+      "REUSE_RUN_ADAPTER_LOCALLY__SELECTED_PART",
+      "REPO_SCOPED_SCRATCH__SELECTED_PART",
+      "INDEPENDENT_STDLIB_ORACLES__SELECTED_PART",
+      "REFUSAL_CLASSIFICATION__SELECTED_PART",
+      "TAMPERED_WORLD_MUST_FAIL__SELECTED_PART"
+    ],
     "selected_route": "ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1",
     "selected_surviving_route": "ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1",
     "stop_condition": "Holds: on this environment the enumeration finds the archive create-to-verify bridge and 15 emission rows, all 11 tests pass with their paired failing worlds exercised (tampered source byte -> ARCHIVE_HASH_MISMATCH; garbage adapter -> ADAPTER_REFUSED while the rest of the census still completes), and no test asserts what the running environment cannot prove.",
     "why_selected_route_is_fastest_sufficient": "Every component reused is already in the tree: run_adapter_locally for execution, the adapters' own refusal classes for the failure taxonomy, stdlib for the independent byte oracles.  The dominant alternative was to write edges into the registry untested; execution proved 36 of this session's candidate pairings false, so any static table written a priori would have shipped lies."
   },
   "resolution": "SELECTED",
+  "route_id": "ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
   "selected_route": "EXECUTE_THE_POSSIBLE_EDGES_VERIFY_THE_BYTES_AND_COUNT_ONLY_WHAT_RAN",
   "stop_condition": "Holds: on this environment the enumeration finds the archive create-to-verify bridge and 15 emission rows, all 11 tests pass with their paired failing worlds exercised (tampered source byte -> ARCHIVE_HASH_MISMATCH; garbage adapter -> ADAPTER_REFUSED while the rest of the census still completes), and no test asserts what the running environment cannot prove.",
   "terminal_credit_delta": 0,
