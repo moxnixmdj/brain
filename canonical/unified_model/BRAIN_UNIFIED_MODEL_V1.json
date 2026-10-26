@@ -24619,7 +24619,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6414,
+  "research_index_records": 6415,
   "routing_tokens": 1816,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24628,7 +24628,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d5016b291579e710e0ac2320a53b95343f365ca0170a7ce03fb685fd52a3338e"
+  "value": "5d3bbfa6fc48c7221d21e1a7622cf3e55ee1a68a0345dddddc5fc6b97d5a05de"
  },
  "engines": [
   {
@@ -194084,6 +194084,51 @@
     "ten-row": 2,
     "unique": 5,
     "wrong": 3
+   }
+  },
+  {
+   "action_id": "THE_ORDER_A_REQUEST_NAMES_IS_NOT_THE_DEFAULT_ORDER_V1_20261026_V1",
+   "capability": false,
+   "date": "2026-10-26T20:23:56Z",
+   "id": "research:canonical/action_intents/THE_ORDER_A_REQUEST_NAMES_IS_NOT_THE_DEFAULT_ORDER_V1_20261026_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_ORDER_A_REQUEST_NAMES_IS_NOT_THE_DEFAULT_ORDER_V1_20261026_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "7943c514220dd559f3c147d3e6a8b6c9e16e25871dbe936eda6b10344013a03e",
+   "status": "",
+   "terms": {
+    "20": 1,
+    "20261026": 1,
+    "268": 1,
+    "275": 1,
+    "40": 1,
+    "actually": 1,
+    "already": 1,
+    "answer": 1,
+    "answers": 1,
+    "below": 1,
+    "blines": 1,
+    "carried": 1,
+    "carry": 1,
+    "cause": 1,
+    "certified": 2,
+    "default": 2,
+    "duplicate": 2,
+    "duplicates": 2,
+    "file": 2,
+    "flags": 2,
+    "not": 3,
+    "one": 3,
+    "operation": 2,
+    "order": 2,
+    "remove": 3,
+    "rm": 2,
+    "rule": 2,
+    "sentence": 2,
+    "so": 2,
+    "v1": 2,
+    "verb": 2,
+    "word": 3
    }
   },
   {
