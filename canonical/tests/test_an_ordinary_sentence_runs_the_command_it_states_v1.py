@@ -4525,3 +4525,75 @@ class TestANegationAndALongFilenameAreNotSilentlyDropped(unittest.TestCase):
         self.assertTrue(_verified(result), result.get("status"))
         self.assertEqual(self.LOWER, (ROOT / d / "convert.md").read_text(encoding="utf-8"),
                          "the filename made a reading into a rewrite")
+
+
+class TestTheOrderARequestNamesIsNotTheDefaultOrder(unittest.TestCase):
+    """Three requests said WHICH order.  All three were certified without it.
+
+    "Sort the file X in reverse order" returned the forward order.
+    "Sort the file X numerically" returned the lexicographic one, 100 ahead of 2.
+    "Sort the file X and remove duplicates" fell past the `-u` rule to the `rm`
+    rule and DELETED THE FILE -- certified as an exact semantic answer.
+
+    The word that names the order, and the thing the verb acts on, are both part
+    of the request.  A default that ignores them is a wrong answer, and a wrong
+    answer that destroys the input is the worst kind: there is nothing left to
+    ask again.
+    """
+
+    LINES = "apple\nbanana\napple\ncherry\nbanana\n"
+    NUMS = "10\n9\n100\n2\n33\n"
+
+    def _file(self, content, name="a1.txt"):
+        root = ROOT / SCRATCH
+        shutil.rmtree(root, ignore_errors=True)
+        root.mkdir(parents=True, exist_ok=True)
+        rel = "%s/%s" % (SCRATCH, name)
+        (ROOT / rel).write_text(content, encoding="utf-8")
+        return rel
+
+    def test_reverse_order_is_the_reverse_order(self):
+        f = self._file(self.LINES)
+        r = _solve("Sort the file %s in reverse order" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "cherry\nbanana\nbanana\napple\napple\n")
+
+    def test_numeric_order_puts_two_before_one_hundred(self):
+        f = self._file(self.NUMS, "n.txt")
+        r = _solve("Sort the file %s numerically" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "2\n9\n10\n33\n100\n")
+
+    def test_removing_duplicates_does_not_remove_the_file(self):
+        f = self._file(self.LINES)
+        r = _solve("Sort the file %s and remove duplicates" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple\nbanana\ncherry\n")
+        self.assertTrue((ROOT / f).exists(),
+                        "the request was to remove DUPLICATES, not the file")
+        self.assertEqual((ROOT / f).read_text(encoding="utf-8"), self.LINES)
+
+    # --- and the neighbours that must not move to make those three true.
+    def test_a_file_actually_named_duplicates_is_still_removed(self):
+        f = self._file("keep me\n", "duplicates.txt")
+        r = _solve("Remove the file %s" % f)
+        self.assertFalse((ROOT / f).exists(),
+                         "a file NAMED duplicates.txt is the object, not a set")
+
+    def test_reversing_the_lines_is_still_tac_not_a_sorted_reverse(self):
+        f = self._file(self.LINES)
+        r = _solve("Reverse the lines of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "banana\ncherry\napple\nbanana\napple\n")
+
+    def test_the_unique_lines_still_bind_sort_dash_u(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the unique lines of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple\nbanana\ncherry\n")
+
+    def test_a_plain_sort_still_carries_no_ordering_flag(self):
+        f = self._file(self.LINES)
+        r = _solve("Sort the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple\napple\nbanana\nbanana\ncherry\n")

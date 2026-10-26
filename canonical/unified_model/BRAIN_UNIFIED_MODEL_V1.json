@@ -24628,7 +24628,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "907036764f6024319c2e2a9abb606871347caa21c450d1aad3731aebb47651c4"
+  "value": "d5016b291579e710e0ac2320a53b95343f365ca0170a7ce03fb685fd52a3338e"
  },
  "engines": [
   {
@@ -209738,7 +209738,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "6b28359d880b4ce3fb47e067eaf6b4bc6be07a0c2ac8994c69911166442266d3",
+   "sha256": "6d33284afebeec3fb4a3dd45df7e78c08b65f7ccb7a6208664531b22243581d1",
    "summary": "Routing a sentence to a typed capability chain.",
    "symbol_count": 30,
    "symbols": [
