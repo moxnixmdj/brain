@@ -597,16 +597,28 @@ _DEST_AHEAD = r"(?=[^\s]*/|\S+\.[A-Za-z0-9]{1,6}\b)"
 _DEST_MODIFIER = r"(?:(?:output|target|destination|same|given|stated|named|following|new|existing)\s+){0,2}"
 _DEST_WORDS = (r"\s+(?:to|into|in|at)\s+(?:(?:the|a|an)\s+)?" + _DEST_MODIFIER +
                r"(?:file|path|folder|directory)?\s*")
+# `re.S` is not a convenience here, it is the whole fix.  Without it `.` stops at
+# a newline, so a payload that CONTAINS one never matched at all: "Write the text
+# '<two lines of source>' to the file X" left the write slot unbound and the
+# chain reported OPEN__COMPOSER_SLOT_UNBOUND -- measured, and it means no source
+# file can be authored through this door, because every source file has more than
+# one line.  `_QUOTED_SPAN` already crossed newlines (`[^']+` does), which is why
+# `_quoted_value` read the same payload correctly while `extract_content` did not:
+# two grammars for one sentence, disagreeing.  Non-greedy capture plus the
+# destination lookahead still stops at the first "to <path>", so a payload with no
+# newline in it matches exactly as it did before.
 _CONTENT = [
-    re.compile(r"\b(?:text|content|string|message|word|line)\s+(.+?)" + _DEST_WORDS + _DEST_AHEAD, re.I),
-    re.compile(r"\bwrite\s+(.+?)" + _DEST_WORDS + _DEST_AHEAD, re.I),
+    re.compile(r"\b(?:text|content|string|message|word|line)\s+(.+?)" + _DEST_WORDS + _DEST_AHEAD,
+               re.I | re.S),
+    re.compile(r"\bwrite\s+(.+?)" + _DEST_WORDS + _DEST_AHEAD, re.I | re.S),
 ]
 # Kept, and tried only when nothing above matched, so a destination with no
 # extension and no separator still binds exactly as it did before.  A fallback
 # that is never reached first cannot change any sentence that already worked.
 _CONTENT_FALLBACK = [
-    re.compile(r"\b(?:text|content|string|message|word|line)\s+(.+?)\s+(?:to|into|in|at)\s+", re.I),
-    re.compile(r"\bwrite\s+(.+?)\s+(?:to|into)\s+", re.I),
+    re.compile(r"\b(?:text|content|string|message|word|line)\s+(.+?)\s+(?:to|into|in|at)\s+",
+               re.I | re.S),
+    re.compile(r"\bwrite\s+(.+?)\s+(?:to|into)\s+", re.I | re.S),
 ]
 
 
@@ -615,7 +627,10 @@ _CONTENT_FALLBACK = [
 # payload patterns already use, so a sentence is parsed by one grammar rather than
 # two that can disagree.
 _CONTENT_DEST = [
-    re.compile(r"\b(?:text|content|string|message|word|line)\s+.+?" + _DEST_WORDS + r"(\S+)", re.I),
+    # `re.S` for the same reason as `_CONTENT`: the destination sits AFTER the
+    # payload, and a payload containing a newline put it out of reach.
+    re.compile(r"\b(?:text|content|string|message|word|line)\s+.+?" + _DEST_WORDS + r"(\S+)",
+               re.I | re.S),
     re.compile(r"\bwrite\s+.+?" + _DEST_WORDS + r"(\S+)", re.I),
 ]
 
