@@ -24619,7 +24619,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6415,
+  "research_index_records": 6416,
   "routing_tokens": 1816,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24628,7 +24628,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "7e265b187d8603354ba09e8105ecff517c1b425fc6e88f4b9dce023630dcf98c"
+  "value": "f7aae1371c6d4af49a34b5b85ef4e038bffed395207df693491eeed82430c25b"
  },
  "engines": [
   {
@@ -192992,6 +192992,51 @@
    }
   },
   {
+   "action_id": "PUNCTUATION_IS_NOT_PART_OF_THE_QUESTION_V1_20261026_V1",
+   "capability": false,
+   "date": "2026-10-26T20:38:05Z",
+   "id": "research:canonical/action_intents/PUNCTUATION_IS_NOT_PART_OF_THE_QUESTION_V1_20261026_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/PUNCTUATION_IS_NOT_PART_OF_THE_QUESTION_V1_20261026_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "28670b09f9b3923bc3ae1c701a44737cbb18407323cc05f16bb41f6e5ef8d011",
+   "status": "",
+   "terms": {
+    "20261026": 1,
+    "275": 1,
+    "285": 1,
+    "all": 1,
+    "already": 2,
+    "answer": 1,
+    "answers": 2,
+    "arm": 3,
+    "arrives": 1,
+    "asked": 1,
+    "bare": 1,
+    "binds": 1,
+    "blank": 3,
+    "blank_line": 1,
+    "both": 3,
+    "census": 1,
+    "certified": 1,
+    "command": 1,
+    "count": 2,
+    "counts": 1,
+    "decided": 1,
+    "entire": 1,
+    "exist": 1,
+    "falls": 1,
+    "file": 1,
+    "filter": 1,
+    "lines": 3,
+    "one": 3,
+    "punctuation": 2,
+    "question": 3,
+    "v1": 2,
+    "value": 3
+   }
+  },
+  {
    "action_id": "PYTEST_STYLE_BARE_FUNCTIONS_COLLECTED_V1_20261023_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -209783,10 +209828,11 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "6d33284afebeec3fb4a3dd45df7e78c08b65f7ccb7a6208664531b22243581d1",
+   "sha256": "f9ac59427ca80f88d4bcd516ee691b233fa8ea4174d1bea90cf5321bc01d5da9",
    "summary": "Routing a sentence to a typed capability chain.",
-   "symbol_count": 30,
+   "symbol_count": 31,
    "symbols": [
+    "_bare_stated_value",
     "_contradicts_the_stated_payload",
     "_cut_flags",
     "_declare_a_consumed_output",
@@ -209809,10 +209855,10 @@
     "execute_chain",
     "extract_argv",
     "extract_content",
-    "extract_content_destination",
-    "extract_number"
+    "extract_content_destination"
    ],
    "terms": {
+    "bare_stated_value": 1,
     "candidate_tokens": 1,
     "capability": 1,
     "chain": 1,
@@ -209828,7 +209874,6 @@
     "keeps_existing_content": 1,
     "mask_a_quoted_value": 1,
     "no_flags": 1,
-    "prose_argv": 1,
     "prose_count": 1,
     "prose_ordinal": 1,
     "quoted_value": 1,

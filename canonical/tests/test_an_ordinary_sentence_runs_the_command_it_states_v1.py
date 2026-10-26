@@ -4597,3 +4597,88 @@ class TestTheOrderARequestNamesIsNotTheDefaultOrder(unittest.TestCase):
         r = _solve("Sort the file %s" % f)
         self.assertTrue(_verified(r))
         self.assertEqual(_stdout(r), "apple\napple\nbanana\nbanana\ncherry\n")
+
+
+class TestAnUnquotedValueIsTheSameValueAsAQuotedOne(unittest.TestCase):
+    """Punctuation is not part of the question.
+
+    "the lines containing apple" bound `cat` and returned the WHOLE FILE for a
+    question about two of its lines, certified.  The quoted form of the same
+    sentence bound `fgrep apple` and returned the two.  "How many lines contain
+    apple" bound `wc -l` and answered 5 where two lines hold the word.
+
+    Both arms already did the whole job once they held one value; both read it
+    from `_quoted_values`, so a sentence that stated its value bare arrived
+    holding none.
+    """
+
+    LINES = "apple pie\nbanana split\napple tart\n\ncherry\n"
+
+    def _file(self, content, name="a1.txt"):
+        root = ROOT / SCRATCH
+        shutil.rmtree(root, ignore_errors=True)
+        root.mkdir(parents=True, exist_ok=True)
+        rel = "%s/%s" % (SCRATCH, name)
+        (ROOT / rel).write_text(content, encoding="utf-8")
+        return rel
+
+    def test_the_lines_containing_an_unquoted_value(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the lines containing apple in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    def test_the_lines_that_contain_an_unquoted_value(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the lines in the file %s that contain apple" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    def test_how_many_lines_contain_an_unquoted_value(self):
+        f = self._file(self.LINES)
+        r = _solve("How many lines contain apple in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r).split()[0], "2")
+
+    def test_how_many_empty_lines_counts_the_empty_ones(self):
+        f = self._file(self.LINES)
+        r = _solve("How many empty lines are in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r).split()[0], "1")
+
+    # --- pins: the quoted forms, and the sentences that must not be hijacked.
+    def test_the_quoted_form_still_answers_the_same(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the lines containing 'apple' in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    def test_a_file_whose_name_is_the_value_keeps_its_path(self):
+        f = self._file(self.LINES, "apple.txt")
+        r = _solve("Show the lines containing apple in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    def test_a_plain_line_count_is_still_a_plain_line_count(self):
+        f = self._file(self.LINES)
+        r = _solve("How many lines are in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r).split()[0], "5")
+
+    def test_a_file_named_blank_is_not_asked_how_many_lines_are_empty(self):
+        f = self._file("apple\n\n\npear\n", "blank.txt")
+        r = _solve("How many lines are in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r).split()[0], "4")
+
+    def test_the_blank_lines_themselves_are_still_returned(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the blank lines in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "\n")
+
+    def test_a_regex_pattern_is_still_not_a_literal(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the lines in the file %s matching 'ap.le'" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")

@@ -1204,6 +1204,44 @@ def _quoted_values(sentence: str) -> list[str]:
     return [m.group(2) for m in _QUOTED.finditer(str(sentence or ""))]
 
 
+# The value a sentence states WITHOUT quoting it.  Both the filter arm and the
+# `grep -c` arm already do the entire job once they hold one value, and both read
+# it from `_quoted_values` -- so a sentence that states the value bare arrived
+# holding none and fell through to a reader.  Measured: "the lines containing
+# apple" bound `cat` and returned the WHOLE FILE for a question about two of its
+# lines, certified, while the quoted form of the same sentence bound `fgrep
+# apple` and returned the two.  One question, two answers, decided by punctuation.
+_NOT_A_STATED_VALUE = frozenset("""
+the a an and or of in on to it its this that those these is are was were be been
+file files line lines text word words string strings pattern patterns one any all
+every each them they there here which what where from with without not no yes
+""".split())
+
+
+def _bare_stated_value(sentence: str) -> str | None:
+    """The one value a sentence states bare, or None when it states none.
+
+    Uses the masking idiom this file already owns -- quoted spans first, then
+    paths -- because a path is bare text too.  Read off the raw sentence the
+    filename itself is offered as the pattern, which is the defect
+    `_mask_a_quoted_value` documents at length.
+    """
+    s = str(sentence or "")
+    for span in _QUOTED_SPAN.finditer(s):
+        s = s.replace(str(span.group(0)), " " * len(str(span.group(0))))
+    for path in extract_paths(s):
+        s = s.replace(str(path), " " * len(str(path)))
+    m = re.search(
+        r"\b(?:contain(?:s|ed|ing)?|match(?:es|ed|ing)?|includ\w*|hold(?:s|ing)?)"
+        r"\b(?:\s+(?:the|a|an|every|all|any|that|which))?"
+        r"(?:\s+(?:word|text|string|pattern|lines?|ones?))?"
+        r"\s+([A-Za-z0-9][A-Za-z0-9_+-]*)", s, re.IGNORECASE)
+    if not m:
+        return None
+    value = m.group(1)
+    return None if value.lower() in _NOT_A_STATED_VALUE else value
+
+
 # Filtering lines OUT of a file is `grep -v`.  Two shapes, and neither is a
 # guess about the pattern:
 #   * the sentence quotes the text and says the lines must NOT have it;
@@ -1730,6 +1768,13 @@ def _prose_argv(sentence: str) -> list[str] | None:
         and (_BLANK_LINE.search(text) or _ASKS_FOR_A_PATTERN.search(text)))
     if _asks_a_filter and "grep" in known:
         values = _quoted_values(sentence)
+        if not values:
+            # The sentence stated its value without quoting it.  Every branch
+            # below keys off `len(values) == 1` and a bare value is a literal,
+            # so it takes the `fgrep` branch the quoted form already takes.
+            _bare = _bare_stated_value(sentence)
+            if _bare is not None:
+                values = [_bare]
         # The blank test runs over the sentence with every path masked out, the
         # way `_prose_ordinal` reads its number from the prose alone.  Measured
         # without this: a file literally named `blank.txt` satisfied the pattern
@@ -2070,7 +2115,29 @@ def _prose_argv(sentence: str) -> list[str] | None:
     # "Show the third line of X" returned the whole file, and "How many lines in
     # X contain 'apple'" returned 4 -- the number of lines in the file -- when
     # two of them hold the text.
+    # "How many empty lines are in the file X" is a COUNT of one exact pattern,
+    # and `_BLANK_LINE` already names it: `^$`.  Measured binding `wc -l`, which
+    # counts every line in the file -- 5 where the file holds one blank -- and
+    # certified all the same, because 5 is a perfectly reproducible answer to a
+    # question nobody asked.  Read over the masked sentence, the way the filter
+    # arm reads its own blank test, so a file NAMED blank.txt cannot claim it.
+    if ("grep" in known and re.search(r"\blines?\b", text)
+            and re.search(r"\b(?:%s)\b" % _WC_QTY, text)):
+        _blank_probe = str(sentence)
+        for _sp in _QUOTED_SPAN.finditer(_blank_probe):
+            _blank_probe = _blank_probe.replace(str(_sp.group(0)),
+                                                " " * len(str(_sp.group(0))))
+        for _pp in extract_paths(_blank_probe):
+            _blank_probe = _blank_probe.replace(str(_pp).lower(), " ")
+        if _BLANK_LINE.search(_blank_probe):
+            _ops = extract_paths(sentence)
+            if len(_ops) == 1:
+                return ["grep", "-c", "^$", str(_ops[0])]
     _asked = _quoted_values(sentence)
+    if not _asked:
+        _bare = _bare_stated_value(sentence)
+        if _bare is not None:
+            _asked = [_bare]
     # Not when the sentence is about a TREE.  "Show which files in the directory
     # D contain 'apple'" names a directory and asks which files in it match, and
     # the recursive search rule owns that sentence; taking it here bound
