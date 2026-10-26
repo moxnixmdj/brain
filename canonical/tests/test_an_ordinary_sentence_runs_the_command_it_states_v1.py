@@ -4202,3 +4202,224 @@ class TestAShapeIsAWayToAskForASetOfFiles(unittest.TestCase):
         self.assertTrue((ROOT / d / "brandnew").is_dir(),
                         "a creation answered with a listing creates nothing: %s"
                         % made.get("status"))
+
+
+class TestAChangeTheSentenceScopedIsNotWidenedAndItsMirrorIsNotLost(unittest.TestCase):
+    """Four defects in the edit class, three of them certified wrong answers.
+
+    A seventeen-row census of mutating requests, judged by running the real
+    command in a parallel directory and comparing the resulting bytes and modes,
+    scored thirteen of seventeen on main c8fe19b:
+
+        "Replace the FIRST 'hello' with 'goodbye' in the file X"
+            -> `sed -e s|hello|goodbye|g`, which replaced BOTH.  Measured,
+               'hello world\\nhello again\\n' became 'goodbye world\\ngoodbye
+               again\\n' and was certified, for a sentence that said first.
+
+        "Remove the lines containing 'again' from the file X"
+            -> plain `fgrep again`, which PRINTS the matching lines and changes
+               nothing.  The answer was 'hello again\\n' -- the very line the
+               sentence asked to have gone -- and the file still held it.
+
+        "Add the text 'top' to the beginning of the file X"  -> refused
+        "Add the text 'top' at the start of the file X"      -> refused
+            while the mirror sentence "Add the text 'end' to the END of the file
+            X" was served.  The prepend branch had always accepted these verbs
+            and these positions; the gate in front of it listed `append` and
+            `prepend` but not `add`, and the append rule has its own separate
+            trigger, so one pair of opposites had two gates and only one was open.
+    """
+
+    TWO_HELLOS = "hello world\nhello again\n"
+
+    def _f(self, name):
+        d = "%s/%s" % (SCRATCH, name)
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "a.txt").write_text(self.TWO_HELLOS, encoding="utf-8")
+        return d + "/a.txt"
+
+    def test_replacing_the_first_occurrence_does_not_replace_all_of_them(self):
+        f = self._f("ed1")
+        result = _solve("Replace the first 'hello' with 'goodbye' in the file %s" % f)
+        # Refused, and the reason is not caution for its own sake.  The bytes the
+        # sentence asks for are producible -- `0,/hello/s|hello|goodbye|` gives
+        # exactly 'goodbye world\\nhello again\\n' -- but nothing can certify
+        # them: written back, the re-run finds the NEXT hello and cannot
+        # reproduce the answer; not written back, the file still holds both while
+        # the report says it was done; with -i, the file that would confirm the
+        # promise is the one the command consumed.  This is the same shape as the
+        # deletion-by-position refusal.  What is asserted here is the direction:
+        # a refusal leaves the file exactly as it was.
+        self.assertFalse(_verified(result),
+                         "certified a replacement nothing can check: %r" % _stdout(result))
+        self.assertEqual(self.TWO_HELLOS, (ROOT / f).read_text(encoding="utf-8"))
+        # And the specific wrong answer this prevents: the global form, which is
+        # what main bound, replaces both.
+        self.assertEqual(2, self.TWO_HELLOS.count("hello"))
+
+    def test_removing_the_lines_that_contain_a_value_keeps_the_other_lines(self):
+        f = self._f("ed2")
+        result = _solve("Remove the lines containing 'again' from the file %s" % f)
+        self.assertTrue(_verified(result), result.get("status"))
+        # A line removal is a filter here -- the kept lines come back and the file
+        # is left alone, the convention pinned for the duplicate form.
+        self.assertEqual("hello world\n", _stdout(result))
+        self.assertEqual(self.TWO_HELLOS, (ROOT / f).read_text(encoding="utf-8"),
+                         "a filter must not rewrite the file")
+
+    def test_the_same_sentence_without_the_removal_verb_still_selects(self):
+        # The pin on the other side of the inversion: a question about the lines
+        # that CONTAIN a value must not grow a -v it did not ask for.
+        f = self._f("ed3")
+        self.assertEqual("hello again\n", _stdout(_solve(
+            "the lines in the file %s that contain 'again'" % f)))
+        self.assertEqual("hello world\n", _stdout(_solve(
+            "the lines in the file %s that do not contain 'again'" % f)))
+
+    def test_adding_to_the_beginning_is_the_mirror_of_adding_to_the_end(self):
+        # One pair of opposites.  Only one half was served, and the difference was
+        # a preposition: the append trigger has always been "(to|at) the end"
+        # while the prepend gate admitted neither the verb "add" nor "to the
+        # beginning".
+        for name, goal, want in (
+                ("ed4a", "Add the text 'top' to the beginning of the file %s",
+                 "top\n" + "hello world\nhello again\n"),
+                ("ed4b", "Add the text 'top' at the start of the file %s",
+                 "top\n" + "hello world\nhello again\n"),
+                ("ed4c", "Add the text 'top' to the top of the file %s",
+                 "top\n" + "hello world\nhello again\n"),
+                ("ed4d", "Add the text 'end' to the end of the file %s",
+                 "hello world\nhello again\n" + "end\n")):
+            f = self._f(name)
+            result = _solve(goal % f)
+            self.assertTrue(_verified(result), "%s -> %s" % (goal, result.get("status")))
+            self.assertEqual(want, (ROOT / f).read_text(encoding="utf-8"), goal)
+
+    def test_replacing_every_occurrence_still_rewrites_the_file(self):
+        # The sibling that already worked, pinned so narrowing "first" did not
+        # take the global form with it.
+        f = self._f("ed5")
+        result = _solve("Replace every 'hello' with 'goodbye' in the file %s" % f)
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual("goodbye world\ngoodbye again\n",
+                         (ROOT / f).read_text(encoding="utf-8"))
+
+    def test_an_insert_that_states_no_position_is_still_refused(self):
+        # Pinned before this change and pinned again: `insert` does not say where,
+        # so serving it as a prepend would put the line somewhere the sentence
+        # never named.  Widening the gate to `add|put|place` must not reopen it.
+        f = self._f("ed6")
+        result = _solve("Insert the text 'hello' into the file %s" % f)
+        self.assertFalse(_verified(result), _stdout(result))
+        self.assertEqual(self.TWO_HELLOS, (ROOT / f).read_text(encoding="utf-8"))
+
+    def test_a_reading_of_the_file_still_does_not_write_to_it(self):
+        # The write-back is gated on the sentence asking for a change.  A request
+        # to be SHOWN something must leave the file alone even when the script it
+        # binds would rewrite it.
+        f = self._f("ed7")
+        result = _solve("Show the contents of the file %s in upper case" % f)
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual("HELLO WORLD\nHELLO AGAIN\n", _stdout(result))
+        self.assertEqual(self.TWO_HELLOS, (ROOT / f).read_text(encoding="utf-8"))
+
+
+class TestThePlainestWordForAConceptIsInTheSameListAsItsSynonyms(unittest.TestCase):
+    """A certified wrong answer that survived a fix written for the same defect.
+
+    This repository already found and fixed this lie once.  The comment sitting
+    above the rule reads:
+
+        `wc -l` counts every line the file holds, so "How many unique lines are
+        in the file X" was certified with 6 on a file whose distinct set is 3,
+        and "How many duplicate lines" with 6 where the answer is 2.
+
+    The rule it introduced guards the words `unique|distinct|duplicate|repeated`.
+    The plainest English word for the same idea -- "different" -- is in none of
+    the three lists that name the concept, so on main e62d1f3:
+
+        "how many DIFFERENT lines are in the file X"
+            -> `wc -l`, certified
+               PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED,
+               printed '5 ...' on a file whose distinct set is 3.
+
+        "the DIFFERENT lines in the file X"
+            -> refused, while "the unique lines" and "the distinct lines" were
+               both served by the very rule that would have served it.
+
+    A list of words is a list of phrasings, not a list of questions.
+    """
+
+    FIVE_LINES_THREE_DISTINCT = "apple\nbanana\napple\ncherry\nbanana\n"
+
+    def _f(self, name, second=None):
+        d = "%s/%s" % (SCRATCH, name)
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "a.txt").write_text(self.FIVE_LINES_THREE_DISTINCT,
+                                        encoding="utf-8")
+        if second is not None:
+            (ROOT / d / "b.txt").write_text(second, encoding="utf-8")
+        return d
+
+    def test_a_count_of_the_distinct_set_is_not_the_total_line_count(self):
+        # The lie.  Five lines, three distinct.  The word "different" used to
+        # fall through to `wc -l` and be certified as the answer.
+        d = self._f("df1")
+        result = _solve("how many different lines are in the file %s/a.txt" % d)
+        self.assertFalse(_verified(result),
+                         "certified a total line count as a count of the distinct "
+                         "set: %r" % _stdout(result))
+        out = _stdout(result) or ""
+        self.assertNotIn("5", out.split()[:1],
+                         "the total line count was handed back as the answer")
+
+    def test_the_three_synonyms_of_one_question_bind_one_operation(self):
+        # One question, three ways of writing it.  Before the fix only two were
+        # served and the third was refused, so the plainest form was the worst
+        # served of the three.
+        seen = []
+        for name, word in (("df2a", "unique"), ("df2b", "distinct"),
+                           ("df2c", "different")):
+            d = self._f(name)
+            result = _solve("the %s lines in the file %s/a.txt" % (word, d))
+            self.assertTrue(_verified(result), "%s -> %s" % (word, result.get("status")))
+            seen.append(_stdout(result))
+        self.assertEqual(["apple\nbanana\ncherry\n"] * 3, seen)
+        # And the opposite is asserted too: this is the DISTINCT set, not the file.
+        self.assertNotEqual(self.FIVE_LINES_THREE_DISTINCT, seen[0])
+
+    def test_the_plain_count_a_file_has_is_still_served(self):
+        # `wc -l` really does measure this.  Narrowing the distinct-set count must
+        # not take the honest count with it.
+        d = self._f("df3")
+        result = _solve("how many lines are in the file %s/a.txt" % d)
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual("5", (_stdout(result) or "").split()[0])
+
+    def test_removal_of_the_repeats_is_still_served(self):
+        # The pinned sibling: asking for what is left once the repeats are gone IS
+        # the distinct set, and it is a filter.
+        d = self._f("df4")
+        result = _solve("Remove the duplicate lines from the file %s/a.txt" % d)
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual("apple\nbanana\ncherry\n", _stdout(result))
+        self.assertEqual(self.FIVE_LINES_THREE_DISTINCT,
+                         (ROOT / d / "a.txt").read_text(encoding="utf-8"))
+
+    def test_different_as_an_adjective_keeps_its_own_answer(self):
+        # "different" is an ordinary adjective.  Widening on the bare word would
+        # hijack four sentences that were already correct; the arm is anchored to
+        # "lines" AFTER the word, and each of these puts the noun before it.
+        d = self._f("df5", second="apple\nfig\n")
+        a, b = "%s/a.txt" % d, "%s/b.txt" % d
+        for goal in ("Write the unique lines of the file %s to a different file %s/c.txt"
+                     % (a, d),
+                     "Are the lines in the file %s different from the file %s" % (a, b),
+                     "Show the lines in the file %s that are different from the file %s" % (a, b),
+                     "Copy the file %s to a different name %s/c.txt" % (a, d)):
+            self.assertTrue(_verified(_solve(goal)), "hijacked: %s" % goal)
+        # And the two-file comparison still compares, rather than deduplicating.
+        cmp_result = _solve("Are the lines in the file %s different from the file %s"
+                            % (a, b))
+        self.assertNotEqual("apple\nbanana\ncherry\n", _stdout(cmp_result),
+                            "the two-file question was answered with a deduplicated set")
