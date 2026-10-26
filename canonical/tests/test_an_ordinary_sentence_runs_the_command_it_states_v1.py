@@ -4971,3 +4971,90 @@ class TestTwoValuesJoinedByOrAreOnePattern(unittest.TestCase):
         f = self._file()
         r = _solve("Show the lines containing text in the file %s" % f)
         self.assertNotEqual(_stdout(r), self.LINES)
+
+
+class TestTopAndBottomArePositionsNotDecorations(unittest.TestCase):
+    """"top" and "bottom" are the plainest English words for first and last.
+
+    Neither was in the rule that engages `head` or the one that engages `tail`,
+    so both sentences fell through to the leftover `cat` row and were CERTIFIED
+    with the WHOLE FILE -- while two other phrasings of the same question bound
+    `head -n 3` and returned three lines.  Measured across twelve operations and
+    several phrasings of each: these were the only two that disagreed.
+
+    A rule that lists words is a list of phrasings, not a list of questions.
+    """
+
+    LINES = "apple pie\nbanana split\napple tart\n\ncherry\n"
+    TOP3 = "apple pie\nbanana split\napple tart\n"
+    BOTTOM3 = "apple tart\n\ncherry\n"
+
+    def _file(self, content=None, name="a1.txt"):
+        root = ROOT / SCRATCH
+        shutil.rmtree(root, ignore_errors=True)
+        root.mkdir(parents=True, exist_ok=True)
+        rel = "%s/%s" % (SCRATCH, name)
+        (ROOT / rel).write_text(content or self.LINES, encoding="utf-8")
+        return rel
+
+    def test_the_top_lines_are_the_first_lines(self):
+        f = self._file()
+        r = _solve("Show the top 3 lines of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.TOP3)
+
+    def test_the_bottom_lines_are_the_last_lines(self):
+        f = self._file()
+        r = _solve("Show the bottom 3 lines of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.BOTTOM3)
+
+    def test_the_verbless_form_of_the_top_lines(self):
+        f = self._file()
+        r = _solve("the top 3 lines of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.TOP3)
+
+    def test_the_top_lines_are_not_the_whole_file(self):
+        f = self._file()
+        r = _solve("Show the top 3 lines of the file %s" % f)
+        self.assertNotEqual(_stdout(r), self.LINES,
+                            "four lines were asked for three of them")
+
+    # --- pins.
+    def test_the_first_lines_are_unchanged(self):
+        f = self._file()
+        r = _solve("Show the first 3 lines of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.TOP3)
+
+    def test_the_last_lines_are_unchanged(self):
+        f = self._file()
+        r = _solve("Show the last 3 lines of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.BOTTOM3)
+
+    def test_the_contents_of_a_file_still_reads_the_whole_file(self):
+        f = self._file()
+        r = _solve("Show the contents of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.LINES)
+
+    def test_reading_a_file_still_reads_the_whole_file(self):
+        f = self._file()
+        r = _solve("Read the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.LINES)
+
+    def test_a_line_whose_text_is_top_is_not_read_as_a_position(self):
+        f = self._file()
+        before = (ROOT / f).read_text(encoding="utf-8")
+        _solve("Append the line 'top' to the file %s" % f)
+        self.assertNotEqual((ROOT / f).read_text(encoding="utf-8"), before[:0])
+        self.assertIn("top", (ROOT / f).read_text(encoding="utf-8"))
+
+    def test_the_first_line_is_still_exactly_one_line(self):
+        f = self._file()
+        r = _solve("Show the first line of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\n")

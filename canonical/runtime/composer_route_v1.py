@@ -863,10 +863,19 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # "Show me the beginning of the file X" measured to bind `cat`, which returns
     # the whole file.  Not a false answer, but the sentence asked for the
     # beginning and `head` is the command that means it.
-    (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\b(?:first|beginning)\b"
-     r"|\bfirst\b[^\n]{0,20}?\blines?\b", "head", _head_flags, 1),
-    (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\b(?:last|final|end)\b"
-     r"|\b(?:last|final)\b[^\n]{0,20}?\blines?\b", "tail", _tail_flags, 1),
+    # "top" is the plainest English word for the first of a set of lines and it
+    # was in neither alternative, so "Show the top 3 lines of the file X" fell
+    # through to the leftover `cat` row and was CERTIFIED with the WHOLE FILE --
+    # measured, and the two other phrasings of the same question bound `head -n 3`
+    # and returned three lines.  A rule that lists words is a list of phrasings,
+    # not a list of questions.
+    (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\b(?:first|beginning|top)\b"
+     r"|\b(?:first|top)\b[^\n]{0,20}?\blines?\b", "head", _head_flags, 1),
+    # The same gap on the other end: "Show the bottom 3 lines of the file X"
+    # measured as `cat` and the whole file, certified, while "the last 3 lines"
+    # and "the last 3 lines of X" both bound `tail -n 3`.
+    (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\b(?:last|final|end|bottom)\b"
+     r"|\b(?:last|final|bottom)\b[^\n]{0,20}?\blines?\b", "tail", _tail_flags, 1),
     # "Put the lines of the file X in order" and "Arrange the lines of the file
     # X in order" both measured to bind nothing: the sentence states the RESULT
     # rather than naming the program.
