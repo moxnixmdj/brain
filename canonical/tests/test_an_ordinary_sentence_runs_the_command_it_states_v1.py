@@ -3120,19 +3120,49 @@ class TestAQuestionNeedsNoVerbAndAUniqueSetIsReallyUnique(unittest.TestCase):
                             "the answer is what the adjacent-only program gives")
 
     def test_a_pattern_search_is_still_handed_to_the_pattern_matcher(self):
-        # The price of the widening, stated rather than left implicit.  `match`
-        # is pattern language and this file already pins that it goes to `grep`;
-        # the filter block sends a quoted value to the literal matcher, so the new
-        # arm deliberately does not claim a sentence introduced by `matching`.
-        # Measured, letting it: the sentence went from `grep` to a refusal.
+        # Rewritten harder, not deleted.  This used to assert that the VERBLESS
+        # form was refused, because the filter block sent a quoted value to the
+        # literal matcher and `fgrep 'ap.le'` matches nothing in a file that holds
+        # "apple" -- a refusal was better than that.  The block now has a branch
+        # for a stated pattern that binds `grep`, so both forms are served and the
+        # real assertion is the one that matters: a pattern is never handed to the
+        # literal matcher, in either form.
         from canonical.runtime import composer_route_v1 as _cr
         f = _fresh("apple\nbanana\n")
-        self.assertEqual("grep",
-                         _cr._prose_argv(
-                             "Find the lines in the file %s matching 'ap.le'" % f)[0])
-        self.assertIsNone(
-            _cr._prose_argv("the lines in the file %s matching 'ap.le'" % f),
-            "a pattern search with no verb was handed to the literal matcher")
+        for goal in ("Find the lines in the file %s matching 'ap.le'" % f,
+                     "the lines in the file %s matching 'ap.le'" % f):
+            argv = _cr._prose_argv(goal)
+            self.assertIsNotNone(argv, "a pattern search was refused: %r" % goal)
+            self.assertEqual("grep", argv[0], goal)
+
+    def test_a_pattern_question_is_answered_as_a_pattern_in_both_forms(self):
+        # The distinction the branch above exists to keep, asserted on the answer
+        # and not on the argv.  `ap.le` matches "apple" as a regular expression and
+        # matches nothing at all as literal text, so the two matchers give
+        # different answers to the same quoted value -- and "contain" is literal
+        # language while "matching" is pattern language.
+        f = _fresh("apple\nbanana\napple\ncherry\n")
+        self.assertEqual("apple\napple\n",
+                         _stdout(_solve("the lines in the file %s matching 'ap.le'" % f)))
+        self.assertEqual("apple\napple\n",
+                         _stdout(_solve("Find the lines in the file %s matching 'ap.le'" % f)))
+        # the same value asked for literally matches nothing, and says so
+        self.assertEqual("", _stdout(_solve(
+            "the lines in the file %s that contain 'ap.le'" % f)))
+        # and negating a pattern inverts the pattern, not the empty literal match.
+        # Measured before the branch was ordered first: `fgrep -v 'ap.le'` matched
+        # nothing, inverting that returned the WHOLE FILE, and it was certified.
+        self.assertEqual("banana\ncherry\n",
+                         _stdout(_solve("the lines in the file %s not matching 'ap.le'" % f)))
+
+    def test_a_question_about_the_empty_lines_needs_no_verb_either(self):
+        f = _fresh("apple\nbanana\n\ncherry\n\n")
+        for goal in ("the empty lines in the file %s" % f,
+                     "Show me the empty lines in the file %s" % f):
+            self.assertEqual("\n\n", _stdout(_solve(goal)), goal)
+        self.assertEqual("apple\nbanana\n\ncherry\n\n",
+                         (ROOT / f).read_text(encoding="utf-8"),
+                         "a question about a file changed it")
 
 
 class TestANounPhraseIsAnsweredAndAChainThatRanNothingIsNotAPass(unittest.TestCase):
