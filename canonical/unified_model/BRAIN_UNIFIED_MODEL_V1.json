@@ -21752,6 +21752,7 @@
     "source_type": "pypi"
    },
    "provides": [
+    "json.file.available",
     "numeric.scalar.expression.evaluate"
    ],
    "registry_status": "VERIFIED_BOUND_CAPABILITY",
@@ -21779,6 +21780,9 @@
     "math",
     "numeric_expression",
     "sympy",
+    "json",
+    "file",
+    "available",
     "evaluate"
    ],
    "verification": {
@@ -24579,6 +24583,7 @@
     "source_type": "apt"
    },
    "provides": [
+    "json.file.available",
     "yaml.to_json"
    ],
    "registry_status": "VERIFIED_BOUND_CAPABILITY",
@@ -24600,7 +24605,9 @@
     "workflow",
     "structured",
     "to_json",
-    "yq"
+    "yq",
+    "file",
+    "available"
    ],
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-YAML-JSON-YQ-001__RECEIPT.json",
@@ -24622,13 +24629,13 @@
   "research_index_records": 6413,
   "routing_tokens": 1816,
   "skills": 18,
-  "source_index_entry_points": 407,
-  "source_index_modules": 1862
+  "source_index_entry_points": 417,
+  "source_index_modules": 1934
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3baa530dbffb9fb43d5966b5d8d3d55f3d6cd52319e3e0fade493e575c83c743"
+  "value": "26bc1a20f65f63babf49375bc3d54c5b0b1cd3b17e335918b106a0ba7e25418d"
  },
  "engines": [
   {
@@ -25673,12 +25680,14 @@
     "engine:TERMINAL_AUTOPILOT": 396.0
    },
    "available": {
-    "json.file.write": 114.571429,
-    "knowledge.consistency.assess": 114.571429,
-    "knowledge.json.fetch.external": 114.571429,
-    "source.candidates.enumerate.stdlib": 114.571429,
-    "structured.decision_evidence.locate.stdlib": 114.571429,
-    "text.file.write": 114.571429
+    "json.file.write": 89.555556,
+    "knowledge.consistency.assess": 89.555556,
+    "knowledge.json.fetch.external": 89.555556,
+    "math.numeric_expression.sympy": 89.555556,
+    "source.candidates.enumerate.stdlib": 89.555556,
+    "structured.decision_evidence.locate.stdlib": 89.555556,
+    "text.file.write": 89.555556,
+    "yaml.to_json.yq": 89.555556
    },
    "axis": {
     "chart.raster.axis_title_unit_binding.v1": 133.333333,
@@ -28448,10 +28457,12 @@
     "docx.document.create_from_json_record": 396.0
    },
    "file": {
-    "json.file.write": 159.6,
-    "python.software.repair.semantic_acceptance.v1": 159.6,
-    "shell.command.run": 159.6,
-    "text.file.write": 159.6
+    "json.file.write": 114.571429,
+    "math.numeric_expression.sympy": 114.571429,
+    "python.software.repair.semantic_acceptance.v1": 114.571429,
+    "shell.command.run": 114.571429,
+    "text.file.write": 114.571429,
+    "yaml.to_json.yq": 114.571429
    },
    "files": {
     "source.candidates.enumerate.stdlib": 396.0
@@ -28906,16 +28917,17 @@
     "json.query.jq": 396.0
    },
    "json": {
-    "docx.document.create_from_json_record": 73.636364,
-    "http.json.fetch_from_state": 73.636364,
-    "json.file.write": 73.636364,
-    "json.query.jq": 73.636364,
-    "knowledge.json.fetch.external": 73.636364,
-    "sqlite.table.create_from_json_records": 73.636364,
-    "sqlite.table.verify_against_json_records": 73.636364,
-    "xlsx.table.create_from_json_records": 73.636364,
-    "xlsx.table.verify_against_json_records": 73.636364,
-    "yaml.to_json.yq": 73.636364
+    "docx.document.create_from_json_record": 67.666667,
+    "http.json.fetch_from_state": 67.666667,
+    "json.file.write": 67.666667,
+    "json.query.jq": 67.666667,
+    "knowledge.json.fetch.external": 67.666667,
+    "math.numeric_expression.sympy": 67.666667,
+    "sqlite.table.create_from_json_records": 67.666667,
+    "sqlite.table.verify_against_json_records": 67.666667,
+    "xlsx.table.create_from_json_records": 67.666667,
+    "xlsx.table.verify_against_json_records": 67.666667,
+    "yaml.to_json.yq": 67.666667
    },
    "json.file.write": {
     "json.file.write": 2376.0
@@ -46640,7 +46652,7 @@
   "included_source_count": 866,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "1892c1ae3c84e8d24ae3cf24ff0c727951a1a0fabd406d007f2031ed4e6d666a"
+  "source_tree_digest": "c8526a587d7ac3bddfcfe3f15322e2d3cc670d4e2809a93cbff9850840cb944a"
  },
  "research_index": [
   {
@@ -256647,6 +256659,1771 @@
     "spread": 2,
     "truth": 2,
     "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/state/pr2_staging/attic/bridge_enumeration_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/pr2_staging/attic/bridge_enumeration_v1.py",
+   "sha256": "ced76e6a3b9f7402dd9c56bd4252c9f70fb427a64ab5f0825476be6596ae6ba6",
+   "summary": "BRIDGE_ENUMERATION_V1 -- the machine derives its own verified capability bridges.",
+   "symbol_count": 9,
+   "symbols": [
+    "_bytes",
+    "_load_registry",
+    "_provides_file_ext",
+    "enumerate_bridges",
+    "fixture_value",
+    "main",
+    "manifest_for_scratch",
+    "oracle_bytes_of",
+    "write_default_fixtures"
+   ],
+   "terms": {
+    "bridge": 1,
+    "bridge_enumeration_v1": 1,
+    "bridges": 1,
+    "bytes": 1,
+    "capability": 1,
+    "derives": 1,
+    "enumerate_bridges": 1,
+    "enumeration": 1,
+    "fixture_value": 1,
+    "load_registry": 1,
+    "machine": 1,
+    "main": 1,
+    "manifest_for_scratch": 1,
+    "oracle_bytes_of": 1,
+    "own": 1,
+    "provides_file_ext": 1,
+    "v1": 1,
+    "verified": 1,
+    "write_default_fixtures": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/state/pr2_staging/attic/test_bridge_enumeration_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/pr2_staging/attic/test_bridge_enumeration_v1.py",
+   "sha256": "3f3e70f6a3e95287af3b041e2b93cc792f606767f153bfa0f32623e6b15d1091",
+   "summary": "Tests for bridge_enumeration_v1 -- the machine-derived verified bridge table.",
+   "symbol_count": 10,
+   "symbols": [
+    "ArchiveBridgeTests",
+    "EnvironmentHonestyTests",
+    "FailClosedRegistryTests",
+    "OracleDisciplineTests",
+    "ReportHonestyTests",
+    "TamperWorldTests",
+    "_EnumerationBase",
+    "_have_tar",
+    "_have_xlsxwriter",
+    "_have_yaml"
+   ],
+   "terms": {
+    "archivebridgetests": 1,
+    "bridge": 2,
+    "bridge_enumeration_v1": 1,
+    "enumeration": 1,
+    "enumerationbase": 1,
+    "environmenthonestytests": 1,
+    "failclosedregistrytests": 1,
+    "have_tar": 1,
+    "have_xlsxwriter": 1,
+    "have_yaml": 1,
+    "machine-derived": 1,
+    "oracledisciplinetests": 1,
+    "reporthonestytests": 1,
+    "table": 1,
+    "tamperworldtests": 1,
+    "test": 1,
+    "tests": 1,
+    "v1": 1,
+    "verified": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/state/pr2_staging/bridge_discrimination_v1_draft.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/pr2_staging/bridge_discrimination_v1_draft.py",
+   "sha256": "489c16230f42d9d213bdd241777adda6fb5ad7968db7514f10132c9db26aaa26",
+   "summary": "Verifier discrimination probe v1 (SANDBOX).",
+   "symbol_count": 11,
+   "symbols": [
+    "_zip_member_span",
+    "adapter_run",
+    "main",
+    "mutate",
+    "probe_family",
+    "produce",
+    "rel",
+    "sha_bytes",
+    "sha_path",
+    "verbose_call",
+    "verdict_field"
+   ],
+   "terms": {
+    "adapter_run": 1,
+    "bridge": 1,
+    "discrimination": 2,
+    "draft": 1,
+    "main": 1,
+    "mutate": 1,
+    "probe": 1,
+    "probe_family": 1,
+    "produce": 1,
+    "rel": 1,
+    "sandbox": 1,
+    "sha_bytes": 1,
+    "sha_path": 1,
+    "v1": 2,
+    "verbose_call": 1,
+    "verdict_field": 1,
+    "verifier": 1,
+    "zip_member_span": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/state/pr2_staging/bridge_effect_wiring_fill_v1_draft.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/pr2_staging/bridge_effect_wiring_fill_v1_draft.py",
+   "sha256": "926a846da9b39848b2d49ab391b06fbdb60929f6b80d469588d954e1f0ab8dcd",
+   "summary": "Bridge effect-wiring fill tool v1 — SANDBOX DRAFT (reconstructed).",
+   "symbol_count": 2,
+   "symbols": [
+    "main",
+    "wire_consumers"
+   ],
+   "terms": {
+    "bridge": 2,
+    "draft": 2,
+    "effect": 1,
+    "effect-wiring": 1,
+    "fill": 2,
+    "main": 1,
+    "reconstructed": 1,
+    "sandbox": 1,
+    "tool": 1,
+    "v1": 2,
+    "wire_consumers": 1,
+    "wiring": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/state/pr2_staging/bridge_enumeration_v2_draft.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/pr2_staging/bridge_enumeration_v2_draft.py",
+   "sha256": "abc230254f72c7ae2261754975b525ee8282442ca130ca7ba3a79edc5f544e66",
+   "summary": "Bridge enumeration v2 draft — SANDBOX (reconstructed after sandbox wipe; staging",
+   "symbol_count": 10,
+   "symbols": [
+    "_is_file_slot",
+    "_utt_ok",
+    "_verified_flag",
+    "demonstrated_replay",
+    "fixture_value",
+    "main",
+    "manifest_for_scratch",
+    "oracle_bytes_of",
+    "run",
+    "write_default_fixtures"
+   ],
+   "terms": {
+    "after": 1,
+    "bridge": 2,
+    "demonstrated_replay": 1,
+    "draft": 2,
+    "enumeration": 2,
+    "fixture_value": 1,
+    "is_file_slot": 1,
+    "main": 1,
+    "manifest_for_scratch": 1,
+    "oracle_bytes_of": 1,
+    "reconstructed": 1,
+    "run": 1,
+    "sandbox": 2,
+    "staging": 1,
+    "utt_ok": 1,
+    "v2": 2,
+    "verified_flag": 1,
+    "wipe": 1,
+    "write_default_fixtures": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/pr2_staging/discrim_scratch/crosshair_python_contract_check_crosshair_v1/contract_broken.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/pr2_staging/discrim_scratch/crosshair_python_contract_check_crosshair_v1/contract_broken.py",
+   "sha256": "6f5e99fb28f8f66df07e31d595bfbedd1273071a31c9edb0901f69654fba548e",
+   "summary": "",
+   "symbol_count": 1,
+   "symbols": [
+    "mergeable"
+   ],
+   "terms": {
+    "broken": 1,
+    "contract": 1,
+    "mergeable": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/pr2_staging/discrim_scratch/crosshair_python_contract_check_crosshair_v1/contract_ok.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/pr2_staging/discrim_scratch/crosshair_python_contract_check_crosshair_v1/contract_ok.py",
+   "sha256": "aab748f1f4f185f6454c18ec4b4d29ce42c67eaa3d2bec51751fd68e7b0e4b86",
+   "summary": "",
+   "symbol_count": 1,
+   "symbols": [
+    "mergeable"
+   ],
+   "terms": {
+    "contract": 1,
+    "mergeable": 1,
+    "ok": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/pr2_staging/discrim_scratch/crosshair_python_contract_check_crosshair_v1/contract_otherbody.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/pr2_staging/discrim_scratch/crosshair_python_contract_check_crosshair_v1/contract_otherbody.py",
+   "sha256": "80c53efd73fd2ba9680fbf024e64e524b5b8bf9f53a5c0963228ded6c55c8034",
+   "summary": "",
+   "symbol_count": 1,
+   "symbols": [
+    "mergeable"
+   ],
+   "terms": {
+    "contract": 1,
+    "mergeable": 1,
+    "otherbody": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/pr2_staging/discrim_scratch/probe_deps/broken_contract.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/pr2_staging/discrim_scratch/probe_deps/broken_contract.py",
+   "sha256": "6f5e99fb28f8f66df07e31d595bfbedd1273071a31c9edb0901f69654fba548e",
+   "summary": "",
+   "symbol_count": 1,
+   "symbols": [
+    "mergeable"
+   ],
+   "terms": {
+    "broken": 1,
+    "contract": 1,
+    "mergeable": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/pr2_staging/discrim_scratch/probe_deps/ok_contract.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/pr2_staging/discrim_scratch/probe_deps/ok_contract.py",
+   "sha256": "aab748f1f4f185f6454c18ec4b4d29ce42c67eaa3d2bec51751fd68e7b0e4b86",
+   "summary": "",
+   "symbol_count": 1,
+   "symbols": [
+    "mergeable"
+   ],
+   "terms": {
+    "contract": 1,
+    "mergeable": 1,
+    "ok": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/pr2_staging/discrim_scratch/tests_audit_python_tests_audit_unittest/corpus/lib.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/pr2_staging/discrim_scratch/tests_audit_python_tests_audit_unittest/corpus/lib.py",
+   "sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+   "summary": "",
+   "symbol_count": 1,
+   "symbols": [
+    "f"
+   ],
+   "terms": {
+    "lib": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/pr2_staging/discrim_scratch/tests_audit_python_tests_audit_unittest/corpus/test_alpha.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/pr2_staging/discrim_scratch/tests_audit_python_tests_audit_unittest/corpus/test_alpha.py",
+   "sha256": "bd256705fd40ad84a25b196d61d2cfe029166ea468ff1f6704189bd3044a9be0",
+   "summary": "",
+   "symbol_count": 1,
+   "symbols": [
+    "Alpha"
+   ],
+   "terms": {
+    "alpha": 2,
+    "test": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/pr2_staging/discrim_scratch/tests_audit_python_tests_audit_unittest/corpus_empty/lib.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/pr2_staging/discrim_scratch/tests_audit_python_tests_audit_unittest/corpus_empty/lib.py",
+   "sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+   "summary": "",
+   "symbol_count": 1,
+   "symbols": [
+    "f"
+   ],
+   "terms": {
+    "lib": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/pr2_staging/discrim_scratch/tests_audit_python_tests_audit_unittest/corpus_failing/lib.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/pr2_staging/discrim_scratch/tests_audit_python_tests_audit_unittest/corpus_failing/lib.py",
+   "sha256": "72d3d5b08c2cf9d267d33ca44474dfaeabe3c74c51fad8b1094d3d07ce3856b7",
+   "summary": "",
+   "symbol_count": 1,
+   "symbols": [
+    "f"
+   ],
+   "terms": {
+    "lib": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/pr2_staging/discrim_scratch/tests_audit_python_tests_audit_unittest/corpus_failing/test_alpha.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/pr2_staging/discrim_scratch/tests_audit_python_tests_audit_unittest/corpus_failing/test_alpha.py",
+   "sha256": "bd256705fd40ad84a25b196d61d2cfe029166ea468ff1f6704189bd3044a9be0",
+   "summary": "",
+   "symbol_count": 1,
+   "symbols": [
+    "Alpha"
+   ],
+   "terms": {
+    "alpha": 2,
+    "test": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/pr2_staging/discrim_scratch/tests_audit_python_tests_audit_unittest/corpus_failing/test_beta.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/pr2_staging/discrim_scratch/tests_audit_python_tests_audit_unittest/corpus_failing/test_beta.py",
+   "sha256": "893d5cb60fa269e7845f410200c0ea1922418d9ae9133748d972ef0b8557735b",
+   "summary": "",
+   "symbol_count": 1,
+   "symbols": [
+    "Beta"
+   ],
+   "terms": {
+    "beta": 2,
+    "test": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/state/pr2_staging/make_bridge_intent_v2.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/pr2_staging/make_bridge_intent_v2.py",
+   "sha256": "7c54caa27e2e5cdbe87322e163a9e793efc565d191298c675396f56aa1dcac9f",
+   "summary": "PR-2 BRIDGE-INTENT assembler v2 (SANDBOX REBUILD).",
+   "symbol_count": 3,
+   "symbols": [
+    "build_intent",
+    "main",
+    "sha"
+   ],
+   "terms": {
+    "assembler": 1,
+    "bridge": 1,
+    "bridge-intent": 1,
+    "build_intent": 1,
+    "intent": 1,
+    "main": 1,
+    "make": 1,
+    "pr-2": 1,
+    "rebuild": 1,
+    "sandbox": 1,
+    "sha": 1,
+    "v2": 2
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/state/pr2_staging/pr2_apply_local_proof.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/pr2_staging/pr2_apply_local_proof.py",
+   "sha256": "247789a38a1865d94bf680b1ca7d67ea43bdafd194abafb4b915bcaeaa5d9aa9",
+   "summary": "PR-2 local apply-proof (SANDBOX): run the brain's own validating suites",
+   "symbol_count": 4,
+   "symbols": [
+    "apply_receipt",
+    "bundle",
+    "main",
+    "run_cmd"
+   ],
+   "terms": {
+    "apply": 1,
+    "apply-proof": 1,
+    "apply_receipt": 1,
+    "brain": 1,
+    "bundle": 1,
+    "local": 2,
+    "main": 1,
+    "own": 1,
+    "pr-2": 1,
+    "pr2": 1,
+    "proof": 1,
+    "run": 1,
+    "run_cmd": 1,
+    "sandbox": 1,
+    "suites": 1,
+    "validating": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/state/pr2_staging/pr2_apply_proof_deepen.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/pr2_staging/pr2_apply_proof_deepen.py",
+   "sha256": "ce8e8621f9c523df3ef38db6c1ab6f5d1dcd8cb1828f616d0ddfa73f284153ee",
+   "summary": "PR-2 apply-proof deepening: exact failing-test NAME sets (baseline vs",
+   "symbol_count": 2,
+   "symbols": [
+    "main",
+    "run_names"
+   ],
+   "terms": {
+    "apply": 1,
+    "apply-proof": 1,
+    "baseline": 1,
+    "deepen": 1,
+    "deepening": 1,
+    "exact": 1,
+    "failing-test": 1,
+    "main": 1,
+    "name": 1,
+    "pr-2": 1,
+    "pr2": 1,
+    "proof": 1,
+    "run_names": 1,
+    "sets": 1,
+    "vs": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/state/pr2_staging/pr2_apply_recipe.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/pr2_staging/pr2_apply_recipe.py",
+   "sha256": "a89cfc5be4bcc9e67dd4177b5b40dd12e7fda74017aec942131e4df70a292d10",
+   "summary": "PR-2 governed apply recipe (SANDBOX DRAFT — submission-day driver).",
+   "symbol_count": 4,
+   "symbols": [
+    "die",
+    "main",
+    "sh",
+    "sha"
+   ],
+   "terms": {
+    "apply": 2,
+    "die": 1,
+    "draft": 1,
+    "driver": 1,
+    "governed": 1,
+    "main": 1,
+    "pr-2": 1,
+    "pr2": 1,
+    "recipe": 2,
+    "sandbox": 1,
+    "sh": 1,
+    "sha": 1,
+    "submission-day": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/pr2_staging/pr2_wiring_patch_proof.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/pr2_staging/pr2_wiring_patch_proof.py",
+   "sha256": "ed9d98934dc189f2cb110a7c5ea9233142965015054784b22f56551aa89d2f3f",
+   "summary": "PR-2 wiring patch chain proof — SANDBOX COPY (reconstructed).",
+   "symbol_count": 2,
+   "symbols": [
+    "add",
+    "sha"
+   ],
+   "terms": {
+    "add": 1,
+    "chain": 1,
+    "copy": 1,
+    "patch": 2,
+    "pr-2": 1,
+    "pr2": 1,
+    "proof": 2,
+    "reconstructed": 1,
+    "sandbox": 1,
+    "sha": 1,
+    "wiring": 2
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/state/pr2_staging/test_bridge_v2_sandbox_run.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/pr2_staging/test_bridge_v2_sandbox_run.py",
+   "sha256": "b043378ab45a61689123c184cb57e6e42e9eb7785bfaeb1894f393f7398cdd35",
+   "summary": "Sandbox test suite for the PR-2 wiring evidence chain — SANDBOX ONLY.",
+   "symbol_count": 5,
+   "symbols": [
+    "BridgeV2ArtifactsExistence",
+    "ChainProofLaws",
+    "EnumerationLaws",
+    "WiringFillLaws",
+    "sha"
+   ],
+   "terms": {
+    "bridge": 1,
+    "bridgev2artifactsexistence": 1,
+    "chain": 1,
+    "chainprooflaws": 1,
+    "enumerationlaws": 1,
+    "evidence": 1,
+    "only": 1,
+    "pr-2": 1,
+    "run": 1,
+    "sandbox": 3,
+    "sha": 1,
+    "suite": 1,
+    "test": 2,
+    "v2": 1,
+    "wiring": 1,
+    "wiringfilllaws": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_evidence_claim_spec_bind_explicit_comparison_stdlib__from__math_numeric_expression_sympy.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_evidence_claim_spec_bind_explicit_comparison_stdlib__from__math_numeric_expression_sympy.py",
+   "sha256": "093429a8176a7189e1df04ac5554390a3a3ac03d4d2e61b3c848455a587cc6ed",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "bind": 1,
+    "claim": 1,
+    "comparison": 1,
+    "cons": 1,
+    "evidence": 1,
+    "explicit": 1,
+    "expression": 1,
+    "math": 1,
+    "numeric": 1,
+    "spec": 1,
+    "stdlib": 1,
+    "sympy": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_evidence_claim_spec_bind_explicit_comparison_stdlib__from__plain_goal_bound_capability_grounding_stdlib.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_evidence_claim_spec_bind_explicit_comparison_stdlib__from__plain_goal_bound_capability_grounding_stdlib.py",
+   "sha256": "093429a8176a7189e1df04ac5554390a3a3ac03d4d2e61b3c848455a587cc6ed",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "bind": 1,
+    "bound": 1,
+    "capability": 1,
+    "claim": 1,
+    "comparison": 1,
+    "cons": 1,
+    "evidence": 1,
+    "explicit": 1,
+    "goal": 1,
+    "grounding": 1,
+    "plain": 1,
+    "spec": 1,
+    "stdlib": 2
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_evidence_claim_spec_bind_explicit_comparison_stdlib__from__python_source_audit_ast.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_evidence_claim_spec_bind_explicit_comparison_stdlib__from__python_source_audit_ast.py",
+   "sha256": "093429a8176a7189e1df04ac5554390a3a3ac03d4d2e61b3c848455a587cc6ed",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "ast": 1,
+    "audit": 1,
+    "bind": 1,
+    "claim": 1,
+    "comparison": 1,
+    "cons": 1,
+    "evidence": 1,
+    "explicit": 1,
+    "python": 1,
+    "source": 1,
+    "spec": 1,
+    "stdlib": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_json_query_jq__from__math_numeric_expression_sympy.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_json_query_jq__from__math_numeric_expression_sympy.py",
+   "sha256": "38e0b9de817f645c4bec37c0d4a3e58baecccb040f5718dc069a72c7385a0bed",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "cons": 1,
+    "expression": 1,
+    "jq": 1,
+    "json": 1,
+    "math": 1,
+    "numeric": 1,
+    "query": 1,
+    "sympy": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_json_query_jq__from__plain_goal_bound_capability_grounding_stdlib.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_json_query_jq__from__plain_goal_bound_capability_grounding_stdlib.py",
+   "sha256": "38e0b9de817f645c4bec37c0d4a3e58baecccb040f5718dc069a72c7385a0bed",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "bound": 1,
+    "capability": 1,
+    "cons": 1,
+    "goal": 1,
+    "grounding": 1,
+    "jq": 1,
+    "json": 1,
+    "plain": 1,
+    "query": 1,
+    "stdlib": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_json_query_jq__from__python_source_audit_ast.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_json_query_jq__from__python_source_audit_ast.py",
+   "sha256": "38e0b9de817f645c4bec37c0d4a3e58baecccb040f5718dc069a72c7385a0bed",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "ast": 1,
+    "audit": 1,
+    "cons": 1,
+    "jq": 1,
+    "json": 1,
+    "python": 1,
+    "query": 1,
+    "source": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_python_contract_check_crosshair_v1__from__auto_pypi_bson-modern.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_python_contract_check_crosshair_v1__from__auto_pypi_bson-modern.py",
+   "sha256": "c84c9619c76af8d5fb0789e674a0c0333e5d2900127a62b69172af0cde83118b",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "auto": 1,
+    "bson-modern": 1,
+    "check": 1,
+    "cons": 1,
+    "contract": 1,
+    "crosshair": 1,
+    "pypi": 1,
+    "python": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_python_contract_check_crosshair_v1__from__math_numeric_expression_sympy.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_python_contract_check_crosshair_v1__from__math_numeric_expression_sympy.py",
+   "sha256": "537c941ce0e527403495b24f065276f12e13153cc780d2dc1531db626e5685ed",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "check": 1,
+    "cons": 1,
+    "contract": 1,
+    "crosshair": 1,
+    "expression": 1,
+    "math": 1,
+    "numeric": 1,
+    "python": 1,
+    "sympy": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_python_contract_check_crosshair_v1__from__plain_goal_bound_capability_grounding_stdlib.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_python_contract_check_crosshair_v1__from__plain_goal_bound_capability_grounding_stdlib.py",
+   "sha256": "57e543ec46b47e3ad3d25574fefad1ab5ae354f8b5944b324238929c3bae38de",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "bound": 1,
+    "capability": 1,
+    "check": 1,
+    "cons": 1,
+    "contract": 1,
+    "crosshair": 1,
+    "goal": 1,
+    "grounding": 1,
+    "plain": 1,
+    "python": 1,
+    "stdlib": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_python_contract_check_crosshair_v1__from__python_source_audit_ast.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_python_contract_check_crosshair_v1__from__python_source_audit_ast.py",
+   "sha256": "501f824e7b23552cfb1f4d0081c03157ffc7135ac566c2df0936ec4645516ac6",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "ast": 1,
+    "audit": 1,
+    "check": 1,
+    "cons": 1,
+    "contract": 1,
+    "crosshair": 1,
+    "python": 2,
+    "source": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_python_contract_check_crosshair_v1__from__text_file_write.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_python_contract_check_crosshair_v1__from__text_file_write.py",
+   "sha256": "5a2a539adc8c47172a4e8c6c1c1a06bbfb39ce73557236648a8a53c6645a5738",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "check": 1,
+    "cons": 1,
+    "contract": 1,
+    "crosshair": 1,
+    "file": 1,
+    "python": 1,
+    "text": 1,
+    "v1": 1,
+    "write": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_source_authority_identity_ror__from__math_numeric_expression_sympy.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_source_authority_identity_ror__from__math_numeric_expression_sympy.py",
+   "sha256": "58ed3e81d4e9698714436d02c82bacc72d57c7b669893e1edece360ea9c327f2",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "authority": 1,
+    "cons": 1,
+    "expression": 1,
+    "identity": 1,
+    "math": 1,
+    "numeric": 1,
+    "ror": 1,
+    "source": 1,
+    "sympy": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_source_authority_identity_ror__from__plain_goal_bound_capability_grounding_stdlib.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_source_authority_identity_ror__from__plain_goal_bound_capability_grounding_stdlib.py",
+   "sha256": "58ed3e81d4e9698714436d02c82bacc72d57c7b669893e1edece360ea9c327f2",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "authority": 1,
+    "bound": 1,
+    "capability": 1,
+    "cons": 1,
+    "goal": 1,
+    "grounding": 1,
+    "identity": 1,
+    "plain": 1,
+    "ror": 1,
+    "source": 1,
+    "stdlib": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_source_authority_identity_ror__from__python_source_audit_ast.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_source_authority_identity_ror__from__python_source_audit_ast.py",
+   "sha256": "58ed3e81d4e9698714436d02c82bacc72d57c7b669893e1edece360ea9c327f2",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "ast": 1,
+    "audit": 1,
+    "authority": 1,
+    "cons": 1,
+    "identity": 1,
+    "python": 1,
+    "ror": 1,
+    "source": 2
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_source_evidence_extract_objective_grounded_stdlib__from__math_numeric_expression_sympy.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_source_evidence_extract_objective_grounded_stdlib__from__math_numeric_expression_sympy.py",
+   "sha256": "1112cf6099bd9187abad60db21d6ea3377afab623eeee783bd86684853003265",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "cons": 1,
+    "evidence": 1,
+    "expression": 1,
+    "extract": 1,
+    "grounded": 1,
+    "math": 1,
+    "numeric": 1,
+    "objective": 1,
+    "source": 1,
+    "stdlib": 1,
+    "sympy": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_source_evidence_extract_objective_grounded_stdlib__from__plain_goal_bound_capability_grounding_stdlib.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_source_evidence_extract_objective_grounded_stdlib__from__plain_goal_bound_capability_grounding_stdlib.py",
+   "sha256": "1112cf6099bd9187abad60db21d6ea3377afab623eeee783bd86684853003265",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "bound": 1,
+    "capability": 1,
+    "cons": 1,
+    "evidence": 1,
+    "extract": 1,
+    "goal": 1,
+    "grounded": 1,
+    "grounding": 1,
+    "objective": 1,
+    "plain": 1,
+    "source": 1,
+    "stdlib": 2
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_source_evidence_extract_objective_grounded_stdlib__from__python_source_audit_ast.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_source_evidence_extract_objective_grounded_stdlib__from__python_source_audit_ast.py",
+   "sha256": "1112cf6099bd9187abad60db21d6ea3377afab623eeee783bd86684853003265",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "ast": 1,
+    "audit": 1,
+    "cons": 1,
+    "evidence": 1,
+    "extract": 1,
+    "grounded": 1,
+    "objective": 1,
+    "python": 1,
+    "source": 2,
+    "stdlib": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_source_objective_relevance_rank_bm25__from__math_numeric_expression_sympy.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_source_objective_relevance_rank_bm25__from__math_numeric_expression_sympy.py",
+   "sha256": "906ff3bdf55a9d01475f1394c70dba2ba1a54542da5b7138ef68bf69744c0ec4",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "bm25": 1,
+    "cons": 1,
+    "expression": 1,
+    "math": 1,
+    "numeric": 1,
+    "objective": 1,
+    "rank": 1,
+    "relevance": 1,
+    "source": 1,
+    "sympy": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_source_objective_relevance_rank_bm25__from__plain_goal_bound_capability_grounding_stdlib.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_source_objective_relevance_rank_bm25__from__plain_goal_bound_capability_grounding_stdlib.py",
+   "sha256": "906ff3bdf55a9d01475f1394c70dba2ba1a54542da5b7138ef68bf69744c0ec4",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "bm25": 1,
+    "bound": 1,
+    "capability": 1,
+    "cons": 1,
+    "goal": 1,
+    "grounding": 1,
+    "objective": 1,
+    "plain": 1,
+    "rank": 1,
+    "relevance": 1,
+    "source": 1,
+    "stdlib": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_source_objective_relevance_rank_bm25__from__python_source_audit_ast.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/cons_source_objective_relevance_rank_bm25__from__python_source_audit_ast.py",
+   "sha256": "906ff3bdf55a9d01475f1394c70dba2ba1a54542da5b7138ef68bf69744c0ec4",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "ast": 1,
+    "audit": 1,
+    "bm25": 1,
+    "cons": 1,
+    "objective": 1,
+    "python": 1,
+    "rank": 1,
+    "relevance": 1,
+    "source": 2
+   }
+  },
+  {
+   "capability": false,
+   "classification": "UNPARSEABLE",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_auto_pypi_bson-modern_base.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_auto_pypi_bson-modern_base.py",
+   "sha256": "012a583a25ea486db6407960683eb05045d2a8f1881d593e12c602fbafce7240",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "auto": 1,
+    "base": 1,
+    "bson-modern": 1,
+    "out": 1,
+    "pypi": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "UNPARSEABLE",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_auto_pypi_bson-modern_capability_id.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_auto_pypi_bson-modern_capability_id.py",
+   "sha256": "012a583a25ea486db6407960683eb05045d2a8f1881d593e12c602fbafce7240",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "auto": 1,
+    "bson-modern": 1,
+    "capability": 1,
+    "id": 1,
+    "out": 1,
+    "pypi": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "UNPARSEABLE",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_auto_pypi_bson-modern_decision.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_auto_pypi_bson-modern_decision.py",
+   "sha256": "012a583a25ea486db6407960683eb05045d2a8f1881d593e12c602fbafce7240",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "auto": 1,
+    "bson-modern": 1,
+    "decision": 1,
+    "out": 1,
+    "pypi": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "UNPARSEABLE",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_auto_pypi_msgpack_base.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_auto_pypi_msgpack_base.py",
+   "sha256": "84efbc8f7e1f74818d6e50b816172f211ebc6328c3a44adafe3c2cdfa67dfbda",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "auto": 1,
+    "base": 1,
+    "msgpack": 1,
+    "out": 1,
+    "pypi": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "UNPARSEABLE",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_auto_pypi_msgpack_capability_id.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_auto_pypi_msgpack_capability_id.py",
+   "sha256": "84efbc8f7e1f74818d6e50b816172f211ebc6328c3a44adafe3c2cdfa67dfbda",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "auto": 1,
+    "capability": 1,
+    "id": 1,
+    "msgpack": 1,
+    "out": 1,
+    "pypi": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "UNPARSEABLE",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_auto_pypi_msgpack_decision.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_auto_pypi_msgpack_decision.py",
+   "sha256": "84efbc8f7e1f74818d6e50b816172f211ebc6328c3a44adafe3c2cdfa67dfbda",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "auto": 1,
+    "decision": 1,
+    "msgpack": 1,
+    "out": 1,
+    "pypi": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "UNPARSEABLE",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_docx_document_create_python_docx_base.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_docx_document_create_python_docx_base.py",
+   "sha256": "0f297e6ca333850ff03bd61f5573e31f18b47e7cb37d3b4c7d927535603a1020",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "base": 1,
+    "create": 1,
+    "document": 1,
+    "docx": 2,
+    "out": 1,
+    "python": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "UNPARSEABLE",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_docx_document_create_python_docx_capability_id.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_docx_document_create_python_docx_capability_id.py",
+   "sha256": "0f297e6ca333850ff03bd61f5573e31f18b47e7cb37d3b4c7d927535603a1020",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "capability": 1,
+    "create": 1,
+    "document": 1,
+    "docx": 2,
+    "id": 1,
+    "out": 1,
+    "python": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "UNPARSEABLE",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_docx_document_create_python_docx_decision.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_docx_document_create_python_docx_decision.py",
+   "sha256": "0f297e6ca333850ff03bd61f5573e31f18b47e7cb37d3b4c7d927535603a1020",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "create": 1,
+    "decision": 1,
+    "document": 1,
+    "docx": 2,
+    "out": 1,
+    "python": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_math_numeric_expression_sympy_base.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_math_numeric_expression_sympy_base.py",
+   "sha256": "fabcbab77b53693c09ddfce074ec13f7a62dd7cf4fc9cb95862ee3eea0a63b94",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "base": 1,
+    "expression": 1,
+    "math": 1,
+    "numeric": 1,
+    "out": 1,
+    "sympy": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_math_numeric_expression_sympy_capability_id.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_math_numeric_expression_sympy_capability_id.py",
+   "sha256": "fabcbab77b53693c09ddfce074ec13f7a62dd7cf4fc9cb95862ee3eea0a63b94",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "capability": 1,
+    "expression": 1,
+    "id": 1,
+    "math": 1,
+    "numeric": 1,
+    "out": 1,
+    "sympy": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_math_numeric_expression_sympy_decision.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_math_numeric_expression_sympy_decision.py",
+   "sha256": "fabcbab77b53693c09ddfce074ec13f7a62dd7cf4fc9cb95862ee3eea0a63b94",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "decision": 1,
+    "expression": 1,
+    "math": 1,
+    "numeric": 1,
+    "out": 1,
+    "sympy": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_plain_goal_bound_capability_grounding_stdlib_base.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_plain_goal_bound_capability_grounding_stdlib_base.py",
+   "sha256": "83801c6484730c5ea90fb4959a37a01c2ee4498f4819a27315826559cb069da3",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "base": 1,
+    "bound": 1,
+    "capability": 1,
+    "goal": 1,
+    "grounding": 1,
+    "out": 1,
+    "plain": 1,
+    "stdlib": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_plain_goal_bound_capability_grounding_stdlib_capability_id.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_plain_goal_bound_capability_grounding_stdlib_capability_id.py",
+   "sha256": "83801c6484730c5ea90fb4959a37a01c2ee4498f4819a27315826559cb069da3",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "bound": 1,
+    "capability": 2,
+    "goal": 1,
+    "grounding": 1,
+    "id": 1,
+    "out": 1,
+    "plain": 1,
+    "stdlib": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_plain_goal_bound_capability_grounding_stdlib_decision.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_plain_goal_bound_capability_grounding_stdlib_decision.py",
+   "sha256": "83801c6484730c5ea90fb4959a37a01c2ee4498f4819a27315826559cb069da3",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "bound": 1,
+    "capability": 1,
+    "decision": 1,
+    "goal": 1,
+    "grounding": 1,
+    "out": 1,
+    "plain": 1,
+    "stdlib": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_python_contract_check_crosshair_v1_base.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_python_contract_check_crosshair_v1_base.py",
+   "sha256": "51ffa4887acee0b7e3eaba1ce75ef1d55b08f83962265ae6e848dc7791b4dc3b",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "base": 1,
+    "check": 1,
+    "contract": 1,
+    "crosshair": 1,
+    "out": 1,
+    "python": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_python_contract_check_crosshair_v1_capability_id.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_python_contract_check_crosshair_v1_capability_id.py",
+   "sha256": "51ffa4887acee0b7e3eaba1ce75ef1d55b08f83962265ae6e848dc7791b4dc3b",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "capability": 1,
+    "check": 1,
+    "contract": 1,
+    "crosshair": 1,
+    "id": 1,
+    "out": 1,
+    "python": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_python_contract_check_crosshair_v1_decision.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_python_contract_check_crosshair_v1_decision.py",
+   "sha256": "51ffa4887acee0b7e3eaba1ce75ef1d55b08f83962265ae6e848dc7791b4dc3b",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "check": 1,
+    "contract": 1,
+    "crosshair": 1,
+    "decision": 1,
+    "out": 1,
+    "python": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_python_source_audit_ast_base.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_python_source_audit_ast_base.py",
+   "sha256": "7df89139ba5d0c84072a1fe7af215d3392a34c07f8946e44e8744f61322043fd",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "ast": 1,
+    "audit": 1,
+    "base": 1,
+    "out": 1,
+    "python": 1,
+    "source": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_python_source_audit_ast_capability_id.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_python_source_audit_ast_capability_id.py",
+   "sha256": "5c2f81680cef0982c6fb680237086b231b2dd3bb47a178aef0ca2f8342be800e",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "ast": 1,
+    "audit": 1,
+    "capability": 1,
+    "id": 1,
+    "out": 1,
+    "python": 1,
+    "source": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_python_source_audit_ast_decision.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_python_source_audit_ast_decision.py",
+   "sha256": "989f5065cf4da0140e198f8a9f4098d610d2c0dae914e0dce97c371b8231a77c",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "ast": 1,
+    "audit": 1,
+    "decision": 1,
+    "out": 1,
+    "python": 1,
+    "source": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_python_tests_audit_unittest_base.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_python_tests_audit_unittest_base.py",
+   "sha256": "3a57f7368fa965c045be6f3854a1c23be697d480d3bb7ec8d36e9278bc8c3840",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "audit": 1,
+    "base": 1,
+    "out": 1,
+    "python": 1,
+    "tests": 1,
+    "unittest": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_python_tests_audit_unittest_capability_id.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_python_tests_audit_unittest_capability_id.py",
+   "sha256": "a8e15d380ea8e3a62acab2d83fcde414e6db377527bae51e28a24d1b40d7940f",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "audit": 1,
+    "capability": 1,
+    "id": 1,
+    "out": 1,
+    "python": 1,
+    "tests": 1,
+    "unittest": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_python_tests_audit_unittest_decision.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_python_tests_audit_unittest_decision.py",
+   "sha256": "f4c7fae1cba84247715164d0eb44cd59659e39e5e4a8f74850d2024f34f70297",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "audit": 1,
+    "decision": 1,
+    "out": 1,
+    "python": 1,
+    "tests": 1,
+    "unittest": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "UNPARSEABLE",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_text_file_write_base.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_text_file_write_base.py",
+   "sha256": "072010ffee2eba5046c40cad589af5daa2636e19e98e9bfdd5964bb4af949eb7",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "base": 1,
+    "file": 1,
+    "out": 1,
+    "text": 1,
+    "write": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "UNPARSEABLE",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_text_file_write_capability_id.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_text_file_write_capability_id.py",
+   "sha256": "072010ffee2eba5046c40cad589af5daa2636e19e98e9bfdd5964bb4af949eb7",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "capability": 1,
+    "file": 1,
+    "id": 1,
+    "out": 1,
+    "text": 1,
+    "write": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "UNPARSEABLE",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_text_file_write_decision.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_text_file_write_decision.py",
+   "sha256": "072010ffee2eba5046c40cad589af5daa2636e19e98e9bfdd5964bb4af949eb7",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "decision": 1,
+    "file": 1,
+    "out": 1,
+    "text": 1,
+    "write": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "UNPARSEABLE",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_xlsx_table_create_from_json_records_base.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_xlsx_table_create_from_json_records_base.py",
+   "sha256": "d53b5379bff5fe7f73ae9c029dd449740b7ebd900e7af44d224dbd570d8488db",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "base": 1,
+    "create": 1,
+    "json": 1,
+    "out": 1,
+    "records": 1,
+    "table": 1,
+    "xlsx": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "UNPARSEABLE",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_xlsx_table_create_from_json_records_capability_id.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_xlsx_table_create_from_json_records_capability_id.py",
+   "sha256": "d53b5379bff5fe7f73ae9c029dd449740b7ebd900e7af44d224dbd570d8488db",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "capability": 1,
+    "create": 1,
+    "id": 1,
+    "json": 1,
+    "out": 1,
+    "records": 1,
+    "table": 1,
+    "xlsx": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "UNPARSEABLE",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_xlsx_table_create_from_json_records_decision.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state/tmp_bridge_v2_sandbox_scratch/out_xlsx_table_create_from_json_records_decision.py",
+   "sha256": "d53b5379bff5fe7f73ae9c029dd449740b7ebd900e7af44d224dbd570d8488db",
+   "summary": "",
+   "symbol_count": 0,
+   "symbols": [],
+   "terms": {
+    "create": 1,
+    "decision": 1,
+    "json": 1,
+    "out": 1,
+    "records": 1,
+    "table": 1,
+    "xlsx": 1
    }
   },
   {

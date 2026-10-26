@@ -39,6 +39,16 @@
       "requires": [
         "manifest.json.available"
       ],
+      "result_fields": [
+        "adapter",
+        "member_count",
+        "members",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "source_sha256"
+      ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/archive_tarfile.py",
         "module": "tarfile",
@@ -296,6 +306,16 @@
         "json.file.available",
         "node.runtime.available"
       ],
+      "result_fields": [
+        "adapter",
+        "decode_export",
+        "encode_export",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "source_path"
+      ],
       "source": {
         "dependency_count": 0,
         "integrity": "sha512-5GX+9tAf29r94Pxv8nCzrv2/t+AkOfem/c/G61+FA2Wadq7THvc5cvr/AVLH0LpukVfNSWRRHvl1fkCdiB9MMQ==",
@@ -407,6 +427,16 @@
         "json.file.available",
         "node.runtime.available"
       ],
+      "result_fields": [
+        "adapter",
+        "decode_export",
+        "encode_export",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "source_path"
+      ],
       "source": {
         "dependency_count": 0,
         "integrity": "sha512-47XIizs9XZXvuJgoaJUIE2lFoID8ugvc0jzSHP+Ptfk8nTbnR8g788wv48N03Kx0UkAv559HWRQ3yzOgzlRNUA==",
@@ -515,6 +545,16 @@
       ],
       "requires": [
         "json.file.available"
+      ],
+      "result_fields": [
+        "adapter",
+        "encode_callable",
+        "module",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "source_path"
       ],
       "source": {
         "dependency_closure": {
@@ -659,6 +699,16 @@
       ],
       "requires": [
         "json.file.available"
+      ],
+      "result_fields": [
+        "adapter",
+        "encode_callable",
+        "module",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "source_path"
       ],
       "source": {
         "license": null,
@@ -1298,12 +1348,15 @@
         "structured.decision_evidence.available"
       ],
       "result_fields": [
-        "status",
-        "selected_alternative",
+        "adapter",
         "decision_confidence",
         "input_path",
+        "model_dependency_count",
         "output_path",
-        "output_sha256"
+        "output_sha256",
+        "output_verified",
+        "selected_alternative",
+        "status"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/evidence_decision_synthesis.py",
@@ -1525,6 +1578,16 @@
         "docx.document.create"
       ],
       "requires": [],
+      "result_fields": [
+        "adapter",
+        "document_spec",
+        "intent_path",
+        "intent_sha256",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
       "source": {
         "origin": "Ubuntu",
         "packages": [
@@ -2339,6 +2402,16 @@
         "json.file.available"
       ],
       "requires": [],
+      "result_fields": [
+        "adapter",
+        "content_sha256",
+        "json_parsed",
+        "json_top_level_type",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/file_write_json.py",
         "modules": []
@@ -2404,6 +2477,19 @@
       ],
       "requires": [
         "json.file.available"
+      ],
+      "result_fields": [
+        "adapter",
+        "argv",
+        "input_path",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_text_excerpt",
+        "output_text_utf8_verified",
+        "output_verified",
+        "returncode",
+        "stderr"
       ],
       "source": {
         "origin": "Ubuntu",
@@ -2783,10 +2869,22 @@
         "linux"
       ],
       "provides": [
+        "json.file.available",
         "numeric.scalar.expression.evaluate"
       ],
       "requires": [
         "typed.scalar.inputs.available"
+      ],
+      "result_fields": [
+        "adapter",
+        "expression",
+        "model_dependency_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "symbolic_result",
+        "value",
+        "variable_names"
       ],
       "source": {
         "dependency_closure": {
@@ -3018,12 +3116,21 @@
       ],
       "requires": [],
       "result_fields": [
+        "broad_objective_decomposition",
+        "broad_objective_decomposition_available",
+        "candidate_capability_ids",
+        "clauses",
+        "external_discovery_allowed_for_unresolved_only",
+        "goal",
+        "goal_sha256",
+        "grounded_clause_count",
+        "input_contract_bindability_enforced",
+        "model_dependency_count",
         "output_path",
         "output_sha256",
-        "grounded_clause_count",
-        "candidate_capability_ids",
+        "output_verified",
         "unresolved_clause_indexes",
-        "model_dependency_count"
+        "whole_goal_external_discovery_forbidden_if_any_bound_grounding"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py",
@@ -4552,6 +4659,18 @@
         "python.source.audit"
       ],
       "requires": [],
+      "result_fields": [
+        "adapter",
+        "class_count",
+        "distinct_imported_module_count",
+        "file_count",
+        "function_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "unparseable_count",
+        "unparseable_paths"
+      ],
       "source": {
         "module": "ast",
         "type": "python_stdlib",
@@ -4798,6 +4917,17 @@
         "shell.command.result"
       ],
       "requires": [],
+      "result_fields": [
+        "adapter",
+        "argv",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "returncode",
+        "stderr",
+        "stdout"
+      ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/cli_command.py",
         "type": "python_stdlib"
@@ -4960,13 +5090,14 @@
       ],
       "requires": [],
       "result_fields": [
-        "status",
+        "adapter",
         "candidate_count",
-        "search_root",
         "glob",
         "model_dependency_count",
         "output_path",
-        "output_verified"
+        "output_verified",
+        "search_root",
+        "status"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/source_candidates_enumerate.py",
@@ -5262,6 +5393,20 @@
         "sqlite.table.create_from_json_records"
       ],
       "requires": [],
+      "result_fields": [
+        "adapter",
+        "collection_path",
+        "column_count",
+        "columns",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "row_count",
+        "sqlite_version",
+        "status_value",
+        "table_name"
+      ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/sqlite_table_stdlib.py",
         "module": "sqlite3",
@@ -5407,15 +5552,19 @@
       ],
       "requires": [],
       "result_fields": [
-        "status",
-        "source_path",
-        "source_sha256",
+        "adapter",
         "alternative_count",
         "constraint_count",
         "evidence_count",
+        "json_files_scanned",
+        "model_dependency_count",
         "output_path",
+        "output_sha256",
         "output_verified",
-        "model_dependency_count"
+        "schema_matches_validated",
+        "source_path",
+        "source_sha256",
+        "status"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/decision_evidence_locate.py",
@@ -5659,6 +5808,14 @@
         "text.file.available"
       ],
       "requires": [],
+      "result_fields": [
+        "adapter",
+        "content_sha256",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/file_write_text.py",
         "modules": []
@@ -5877,6 +6034,18 @@
         "xlsx.table.create_from_json_records"
       ],
       "requires": [],
+      "result_fields": [
+        "adapter",
+        "collection_path",
+        "column_count",
+        "columns",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "row_count",
+        "status_value"
+      ],
       "source": {
         "origin": "Ubuntu",
         "packages": [
@@ -6037,10 +6206,21 @@
         "linux"
       ],
       "provides": [
+        "json.file.available",
         "yaml.to_json"
       ],
       "requires": [
         "yaml.file.available"
+      ],
+      "result_fields": [
+        "adapter",
+        "input_path",
+        "input_sha256",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "top_level_type"
       ],
       "source": {
         "origin": "Ubuntu",
