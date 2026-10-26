@@ -24619,16 +24619,16 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6421,
+  "research_index_records": 6422,
   "routing_tokens": 1816,
   "skills": 18,
   "source_index_entry_points": 406,
-  "source_index_modules": 1861
+  "source_index_modules": 1862
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "7efcd1e29df1d172d79c34d6e7d74103f3ebab757e24d1c208a35959aa3b9f16"
+  "value": "d840fdcc3ecc2549940a0a9274de8ead20de82a1536b7c9d1410b7c785804209"
  },
  "engines": [
   {
@@ -191108,6 +191108,51 @@
    }
   },
   {
+   "action_id": "COMPOSITION_WITHOUT_A_SHELL_STRING_V1_20261026_V1",
+   "capability": false,
+   "date": "2026-10-26T22:19:10Z",
+   "id": "research:canonical/action_intents/COMPOSITION_WITHOUT_A_SHELL_STRING_V1_20261026_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/COMPOSITION_WITHOUT_A_SHELL_STRING_V1_20261026_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "519133793ef933e694641827cb6d5a1989b32b31b36e36f049d388368cc76ecc",
+   "status": "",
+   "terms": {
+    "20261026": 1,
+    "against": 1,
+    "allowlist": 1,
+    "allowlisted": 1,
+    "any": 2,
+    "anywhere": 1,
+    "argv": 1,
+    "around": 1,
+    "being": 1,
+    "believed": 1,
+    "call": 1,
+    "cannot": 3,
+    "case": 1,
+    "chain": 2,
+    "characters": 1,
+    "checked": 1,
+    "code": 1,
+    "composition": 3,
+    "composition_without_a_shell_string_v1_20261026_v1": 1,
+    "computable": 1,
+    "computer_env_v1._run_pipeline": 1,
+    "consumer": 1,
+    "deadline": 1,
+    "differ": 1,
+    "disk": 1,
+    "draining": 1,
+    "one": 2,
+    "shell": 4,
+    "sort": 2,
+    "string": 2,
+    "two": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "COMPOUND_PLAN_SEMANTIC_ACCEPTANCE_FROM_THE_CONTROLLER_TRACE_WITH_INDEPENDENT_ARTIFACT_REINSPECTION_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -210754,9 +210799,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/computer_env_v1.py",
-   "sha256": "2ded90647e4fa51497a4d8abdc03fc30733bf332081456754cd0d95ca82225ae",
+   "sha256": "a1379c56fcc19fbd8c3e5b48feed4bde26264c77f3fa5ce1d67afbbff3be0b7a",
    "summary": "The computer itself, as an environment the learner can act in.",
-   "symbol_count": 49,
+   "symbol_count": 48,
    "symbols": [
     "ComputerEnv",
     "_abstract",
@@ -210777,11 +210822,11 @@
     "_query_cache_put",
     "_query_shapes",
     "_real_binary",
-    "_reap",
     "_recipe_of",
     "_reverify",
     "_run_capped",
-    "_run_pipeline"
+    "_run_pipeline",
+    "_single_step"
    ],
    "terms": {
     "act": 1,
@@ -238826,6 +238871,37 @@
     "v1": 1,
     "validate": 1,
     "validation": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/pipeline_exec_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/pipeline_exec_v1.py",
+   "sha256": "8866ab311025353678d2d27d4f525bf6cc73fad22414b9ef41ab216f9404d56e",
+   "summary": "Run a pipe of argvs as one governed operation.",
+   "symbol_count": 3,
+   "symbols": [
+    "_normalise",
+    "reap",
+    "run_stages"
+   ],
+   "terms": {
+    "argvs": 1,
+    "exec": 1,
+    "governed": 1,
+    "normalise": 1,
+    "one": 1,
+    "operation": 1,
+    "pipe": 1,
+    "pipeline": 1,
+    "reap": 1,
+    "run": 1,
+    "run_stages": 1,
+    "v1": 1
    }
   },
   {

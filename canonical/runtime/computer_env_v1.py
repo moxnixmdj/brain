@@ -1509,39 +1509,12 @@ def _reverify(hit: dict[str, Any], kind: str, literal: str | None,
         shutil.rmtree(str(root), ignore_errors=True)
 
 
-def _reap(proc: subprocess.Popen, worker: Any,
-          also: Sequence[subprocess.Popen] = ()) -> int:
-    """The exit status of a command that has been read on a deadline.
-
-    Poll() answers None both for "still running" and for "finished but not
-    yet reaped", and those are opposite things: one must be killed, the
-    other must be believed. Conflating them threw away perfectly good
-    answers -- the same command scored 0 on one run and None on the next,
-    so a correct measurement was skipped depending on nothing but timing.
-
-    So it is waited for briefly. A command that has already finished is
-    simply reaped and its true status returned; only one that is genuinely
-    still running, or still talking, is killed.
-    """
-    code = proc.poll()
-    if code is None:
-        try:
-            code = proc.wait(timeout=0.25)
-        except Exception:  # noqa: BLE001 - still running
-            code = None
-    if code is None or worker.is_alive():
-        for target in tuple(also) + (proc,):
-            try:
-                target.kill()
-            except Exception:  # noqa: BLE001
-                pass
-        for target in tuple(also) + (proc,):
-            try:
-                target.wait(timeout=2)
-            except Exception:  # noqa: BLE001
-                pass
-        return -9
-    return int(code)
+# One implementation of "read a command on a deadline and reap it", shared
+# with the pipe runner.  It lived here alone, which is why the pipe builder
+# had its own copy of the draining and reaping around it; two copies of the
+# same deadline logic is two places for the same timing bug to hide.
+from canonical.runtime.pipeline_exec_v1 import reap as _reap  # noqa: E402
+from canonical.runtime.pipeline_exec_v1 import run_stages as _run_stages
 
 
 def _run_capped(argv: Sequence[str], cwd: str | pathlib.Path,
@@ -1596,42 +1569,13 @@ def _run_pipeline(argv1: Sequence[str], argv2: Sequence[str],
     no single program answers it, and a machine that can only run one
     thing at a time cannot answer it at all.
 
-    Bounded for the same reason a single command is -- a program in the
-    middle of a pipe that never stops talking takes the learner down just
-    as surely as one on its own.
+    A thin two-stage reading of `_run_stages`, kept because every caller
+    here asks for exactly two and says so more clearly this way. The
+    draining, the deadline and the reaping live in `pipeline_exec_v1`,
+    which is the one place a chain of any length is built.
     """
-    import threading
-    first = subprocess.Popen(list(argv1), cwd=str(cwd),
-                             stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
-                             stdin=subprocess.DEVNULL)
-    second = subprocess.Popen(list(argv2), cwd=str(cwd), stdin=first.stdout,
-                              stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
-    try:
-        first.stdout.close()  # only the second reader may hold it open
-    except Exception:  # noqa: BLE001
-        pass
-    buf = bytearray()
-
-    def drain() -> None:
-        try:
-            while len(buf) < max_bytes:
-                chunk = second.stdout.read(4096)
-                if not chunk:
-                    break
-                buf.extend(chunk)
-        except Exception:  # noqa: BLE001
-            pass
-
-    worker = threading.Thread(target=drain, daemon=True)
-    worker.start()
-    worker.join(timeout)
-    code = _reap(second, worker, also=(first,))
-    for stream in (second.stdout,):
-        try:
-            stream.close()
-        except Exception:  # noqa: BLE001
-            pass
-    return code, bytes(buf[:max_bytes])
+    return _run_stages([list(argv1), list(argv2)], str(cwd),
+                       timeout=timeout, max_bytes=max_bytes)
 
 
 def _instrument(prog: str, depth: int = 4) -> str:
