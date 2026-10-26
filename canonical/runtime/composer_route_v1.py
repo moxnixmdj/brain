@@ -997,7 +997,16 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # The noun phrase on its own.  "the contents of the file X" states the thing
     # wanted and the thing it is in, with no verb at all, and measured as routing
     # to a JSON file WRITER -- a write capability picked for a read request.
-    (r"\b(?:read|show|display|print|cat)\b[^.\n]{0,40}?\bfile\b"
+    # Not when the sentence asks WHICH lines.  "Show the lines containing text
+    # in the file X" states a filter whose value cannot be recovered -- "text" is
+    # an ordinary noun as often as it is a value -- and this row caught the
+    # leftover and answered with the WHOLE FILE, certified, for a question no
+    # line of that file answers.  Refusing to guess the value is right; answering
+    # a different question is not.  Scoped to a sentence that mentions lines AND
+    # a verb of containing, so "the contents of the file containing the report"
+    # keeps `cat` and "show the lines of the file X" is untouched.
+    (r"(?![^\n]{0,120}?\blines?\b[^\n]{0,80}?\b(?:contain|includ|match|hold)\w*\b)"
+     r"\b(?:read|show|display|print|cat)\b[^.\n]{0,40}?\bfile\b"
      r"|\boutput\b(?!\s+file\b)[^.\n]{0,40}?\bfile\b"
      r"|\bcontents?\b[^\n]{0,20}?\bof\b", "cat", _no_flags, 1),
 )
@@ -1248,6 +1257,16 @@ def _bare_stated_value(sentence: str) -> str | None:
 #   * the sentence says the lines are EMPTY, which is one exact pattern.
 # "empty" is not a loose synonym here -- it names `^$` and nothing else, the same
 # way an ordinal names a column number.
+# A sentence that says the CASE does not matter.  `-i` is the flag that carries
+# it and nothing else about the command changes -- the same reasoning the `-n`
+# arm below already records for line numbers.  Measured without it: "the lines
+# containing APPLE in the file X ignoring case" bound `fgrep APPLE`, matched
+# nothing in a file that holds "apple pie", and was CERTIFIED returning an empty
+# answer.  The word was read, decided nothing, and was dropped.
+_ASKS_TO_IGNORE_CASE = re.compile(
+    r"\bignor(?:e|es|ing)\s+(?:the\s+)?case\b|\bcase[\s-]*insensitive\b"
+    r"|\bregardless\s+of\s+case\b|\bwithout\s+regard\s+to\s+case\b"
+    r"|\beither\s+case\b|\bany\s+case\b", re.IGNORECASE)
 _NEGATED_LINE = re.compile(
     r"\b(?:do(?:es)?n't|do(?:es)? not|don't|without|excluding|except)\b"
     r"[^\n]{0,40}?\b(?:contain|containing|match|matching|include|including|have)\b"
@@ -1903,6 +1922,7 @@ def _prose_argv(sentence: str) -> list[str] | None:
                 # carries it and nothing else about the command changes.
                 _numbered = bool(_ASKS_FOR_LINE_NUMBERS.search(text)) and not invert
                 return [matcher, *(["-v"] if invert else []),
+                        *(["-i"] if _ASKS_TO_IGNORE_CASE.search(text) else []),
                         *(["-n"] if _numbered else []), str(needle),
                         str(operand_paths[0])]
             return None
