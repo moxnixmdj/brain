@@ -4202,3 +4202,123 @@ class TestAShapeIsAWayToAskForASetOfFiles(unittest.TestCase):
         self.assertTrue((ROOT / d / "brandnew").is_dir(),
                         "a creation answered with a listing creates nothing: %s"
                         % made.get("status"))
+
+
+class TestAChangeTheSentenceScopedIsNotWidenedAndItsMirrorIsNotLost(unittest.TestCase):
+    """Four defects in the edit class, three of them certified wrong answers.
+
+    A seventeen-row census of mutating requests, judged by running the real
+    command in a parallel directory and comparing the resulting bytes and modes,
+    scored thirteen of seventeen on main c8fe19b:
+
+        "Replace the FIRST 'hello' with 'goodbye' in the file X"
+            -> `sed -e s|hello|goodbye|g`, which replaced BOTH.  Measured,
+               'hello world\\nhello again\\n' became 'goodbye world\\ngoodbye
+               again\\n' and was certified, for a sentence that said first.
+
+        "Remove the lines containing 'again' from the file X"
+            -> plain `fgrep again`, which PRINTS the matching lines and changes
+               nothing.  The answer was 'hello again\\n' -- the very line the
+               sentence asked to have gone -- and the file still held it.
+
+        "Add the text 'top' to the beginning of the file X"  -> refused
+        "Add the text 'top' at the start of the file X"      -> refused
+            while the mirror sentence "Add the text 'end' to the END of the file
+            X" was served.  The prepend branch had always accepted these verbs
+            and these positions; the gate in front of it listed `append` and
+            `prepend` but not `add`, and the append rule has its own separate
+            trigger, so one pair of opposites had two gates and only one was open.
+    """
+
+    TWO_HELLOS = "hello world\nhello again\n"
+
+    def _f(self, name):
+        d = "%s/%s" % (SCRATCH, name)
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "a.txt").write_text(self.TWO_HELLOS, encoding="utf-8")
+        return d + "/a.txt"
+
+    def test_replacing_the_first_occurrence_does_not_replace_all_of_them(self):
+        f = self._f("ed1")
+        result = _solve("Replace the first 'hello' with 'goodbye' in the file %s" % f)
+        # Refused, and the reason is not caution for its own sake.  The bytes the
+        # sentence asks for are producible -- `0,/hello/s|hello|goodbye|` gives
+        # exactly 'goodbye world\\nhello again\\n' -- but nothing can certify
+        # them: written back, the re-run finds the NEXT hello and cannot
+        # reproduce the answer; not written back, the file still holds both while
+        # the report says it was done; with -i, the file that would confirm the
+        # promise is the one the command consumed.  This is the same shape as the
+        # deletion-by-position refusal.  What is asserted here is the direction:
+        # a refusal leaves the file exactly as it was.
+        self.assertFalse(_verified(result),
+                         "certified a replacement nothing can check: %r" % _stdout(result))
+        self.assertEqual(self.TWO_HELLOS, (ROOT / f).read_text(encoding="utf-8"))
+        # And the specific wrong answer this prevents: the global form, which is
+        # what main bound, replaces both.
+        self.assertEqual(2, self.TWO_HELLOS.count("hello"))
+
+    def test_removing_the_lines_that_contain_a_value_keeps_the_other_lines(self):
+        f = self._f("ed2")
+        result = _solve("Remove the lines containing 'again' from the file %s" % f)
+        self.assertTrue(_verified(result), result.get("status"))
+        # A line removal is a filter here -- the kept lines come back and the file
+        # is left alone, the convention pinned for the duplicate form.
+        self.assertEqual("hello world\n", _stdout(result))
+        self.assertEqual(self.TWO_HELLOS, (ROOT / f).read_text(encoding="utf-8"),
+                         "a filter must not rewrite the file")
+
+    def test_the_same_sentence_without_the_removal_verb_still_selects(self):
+        # The pin on the other side of the inversion: a question about the lines
+        # that CONTAIN a value must not grow a -v it did not ask for.
+        f = self._f("ed3")
+        self.assertEqual("hello again\n", _stdout(_solve(
+            "the lines in the file %s that contain 'again'" % f)))
+        self.assertEqual("hello world\n", _stdout(_solve(
+            "the lines in the file %s that do not contain 'again'" % f)))
+
+    def test_adding_to_the_beginning_is_the_mirror_of_adding_to_the_end(self):
+        # One pair of opposites.  Only one half was served, and the difference was
+        # a preposition: the append trigger has always been "(to|at) the end"
+        # while the prepend gate admitted neither the verb "add" nor "to the
+        # beginning".
+        for name, goal, want in (
+                ("ed4a", "Add the text 'top' to the beginning of the file %s",
+                 "top\n" + "hello world\nhello again\n"),
+                ("ed4b", "Add the text 'top' at the start of the file %s",
+                 "top\n" + "hello world\nhello again\n"),
+                ("ed4c", "Add the text 'top' to the top of the file %s",
+                 "top\n" + "hello world\nhello again\n"),
+                ("ed4d", "Add the text 'end' to the end of the file %s",
+                 "hello world\nhello again\n" + "end\n")):
+            f = self._f(name)
+            result = _solve(goal % f)
+            self.assertTrue(_verified(result), "%s -> %s" % (goal, result.get("status")))
+            self.assertEqual(want, (ROOT / f).read_text(encoding="utf-8"), goal)
+
+    def test_replacing_every_occurrence_still_rewrites_the_file(self):
+        # The sibling that already worked, pinned so narrowing "first" did not
+        # take the global form with it.
+        f = self._f("ed5")
+        result = _solve("Replace every 'hello' with 'goodbye' in the file %s" % f)
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual("goodbye world\ngoodbye again\n",
+                         (ROOT / f).read_text(encoding="utf-8"))
+
+    def test_an_insert_that_states_no_position_is_still_refused(self):
+        # Pinned before this change and pinned again: `insert` does not say where,
+        # so serving it as a prepend would put the line somewhere the sentence
+        # never named.  Widening the gate to `add|put|place` must not reopen it.
+        f = self._f("ed6")
+        result = _solve("Insert the text 'hello' into the file %s" % f)
+        self.assertFalse(_verified(result), _stdout(result))
+        self.assertEqual(self.TWO_HELLOS, (ROOT / f).read_text(encoding="utf-8"))
+
+    def test_a_reading_of_the_file_still_does_not_write_to_it(self):
+        # The write-back is gated on the sentence asking for a change.  A request
+        # to be SHOWN something must leave the file alone even when the script it
+        # binds would rewrite it.
+        f = self._f("ed7")
+        result = _solve("Show the contents of the file %s in upper case" % f)
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual("HELLO WORLD\nHELLO AGAIN\n", _stdout(result))
+        self.assertEqual(self.TWO_HELLOS, (ROOT / f).read_text(encoding="utf-8"))

@@ -1586,8 +1586,20 @@ def _prose_argv(sentence: str) -> list[str] | None:
     # bound to `sed -i 1,$d`, emptied the file, and was certified.  A sentence
     # that only names a property of a file is not asking for the file to change.
     if (("sed" in known or "chmod" in known)
+            # `add`, `put` and `place` open the block too.  The prepend branch
+            # below has always listed them as verbs that can name the beginning
+            # -- its own pattern is `(?:put|add|write|place|insert)... (?:at|to)
+            # the (?:beginning|start|top)` -- but the gate in front of it did not,
+            # so "Add the text 'top' to the beginning of the file X" never reached
+            # the branch written to serve it and was refused, while the mirror
+            # sentence "Add the text 'end' to the END of the file X" was served
+            # because the append rule has its own separate trigger.  One pair of
+            # opposites, two gates, only one of them open.  Every branch inside
+            # still requires its own verb and its own stated position, so this
+            # widens which sentences are CONSIDERED, not which are served.
             and re.search(r"\b(?:append|prepend|insert|remove|delete|strip|drop"
-                          r"|replace|empty|clear|truncate|chmod|make|set)\w*\b", text)):
+                          r"|replace|empty|clear|truncate|chmod|make|set"
+                          r"|add|put|place)\w*\b", text)):
         _edits = extract_paths(sentence)
         if (len(_edits) == 1 and "chmod" in known
                 and re.search(r"\bexecutable\b|\bexecute permission\b|\+x\b|-x\b", text)
@@ -1630,8 +1642,17 @@ def _prose_argv(sentence: str) -> list[str] | None:
                     _at_start = bool(re.search(
                         r"\b(?:prepend|prepending|prepends|prepended)\w*\b"
                         r"|\b(?:put|add|write|place|insert|inserts|inserted"
-                        r"|inserting)\w*\b[^\n]{0,40}?\bat the"
+                        r"|inserting)\w*\b[^\n]{0,40}?\b(?:at|to) the"
                         r" (?:beginning|start|top)\b", text))
+                    # `to` as well as `at`.  The append rule this mirrors has
+                    # always accepted both -- its trigger is `(?:to|at) the end`
+                    # -- while this one accepted only `at`, so the two halves of
+                    # one pair disagreed.  Measured on main c8fe19b:
+                    #     "Add the text 'end' to the end of the file X"       -> `sed -i '$a end'`
+                    #     "Add the text 'top' to the beginning of the file X" -> nothing, refused
+                    #     "Add the text 'top' to the start of the file X"     -> nothing, refused
+                    # Same sentence, same verb, same quoted text, opposite
+                    # preposition, and only one of them was served.
                     _first_line = bool(re.search(
                         r"\b(?:replace|replaces|replaced|replacing)\w*\b"
                         r"[^\n]{0,40}?\bfirst line\b[^\n]{0,40}?\bwith\b", text))
@@ -1720,6 +1741,20 @@ def _prose_argv(sentence: str) -> list[str] | None:
             matcher = "grep"
             invert = bool(_NEGATED_LINE.search(text))
         elif len(values) == 1 and _NEGATED_LINE.search(text):
+            needle = values[0]
+            matcher = "fgrep"
+            invert = True
+        elif len(values) == 1 and _STATES_CONTAINMENT.search(text) and \
+                _REMOVES_THE_LINES.search(text):
+            # "Remove the lines containing 'again' from the file X" is a filter
+            # that KEEPS the lines which do not contain it.  Without this arm the
+            # sentence fell to the positive branch below and bound plain `fgrep`,
+            # which prints the very lines the sentence asked to have gone -- and
+            # changed nothing at all, because a filter reads.  Measured on main
+            # c8fe19b: the file still held both lines afterwards and the answer
+            # was 'hello again\n', the line that was supposed to be removed.
+            # The blank-line branch above already inverts on exactly these verbs;
+            # this is the same distinction applied to a quoted value.
             needle = values[0]
             matcher = "fgrep"
             invert = True
@@ -1925,6 +1960,33 @@ def _prose_argv(sentence: str) -> list[str] | None:
         operand_paths = extract_paths(
             str(sentence).replace(before, " ").replace(after, " "))
         if len(operand_paths) != 1:
+            return None
+        # "Replace the FIRST 'hello' with 'goodbye'" is not a global replace.
+        # Measured on main c8fe19b it bound `s|hello|goodbye|g` and rewrote BOTH
+        # occurrences -- 'hello world\nhello again\n' became
+        # 'goodbye world\ngoodbye again\n' -- certified, for a sentence that
+        # said first.  Dropping the `g` does not fix it either: `s|hello|goodbye|`
+        # replaces the first occurrence ON EVERY LINE, which on this file is the
+        # same two replacements.
+        #
+        # GNU sed can state it -- `0,/hello/s|hello|goodbye|` -- and measured, it
+        # produces exactly the right bytes.  It cannot be CERTIFIED, and that is
+        # the whole test here:
+        #   * written back, the run is no longer reproducible.  The re-run reads
+        #     the file the command just rewrote, finds the NEXT `hello`, and
+        #     returns 'goodbye world\ngoodbye again\n' against a claimed
+        #     'goodbye world\nhello again\n' -- COMMAND_OUTPUT_NOT_REPRODUCED on
+        #     a correct answer.  Measured.
+        #   * not written back, the file still holds both `hello`s while the
+        #     report says the replacement was done.  Measured.
+        #   * with `-i`, nothing derivable from the argv can be asked of the disk
+        #     afterwards: the promise would be "the first `hello` became
+        #     `goodbye`", and the file that would confirm it is the one the
+        #     command consumed.
+        # This is the same shape the deletion-by-position refusal already covers,
+        # and it goes the same way.  A refusal says what it cannot check; the
+        # answer on main reported the opposite of what was asked as done.
+        if re.search(r"\bfirst\b", text):
             return None
         return [program, "-e", "s|%s|%s|g" % (before, after),
                 str(operand_paths[0])]
