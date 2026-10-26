@@ -1153,3 +1153,75 @@ class RepeatedLinesAreNotEveryLine(unittest.TestCase):
             self.assertEqual("2", r["value"], r)
         else:
             self.assertEqual("OPEN__NOTHING_MEASURED_IT", r["status"], r)
+
+
+class AQuestionIsNotClosedByAFileAppearing(unittest.TestCase):
+    """`discover` reported questions as closed, verified, with a hash as the plan.
+
+    `discover` measures one thing: did a program make the target file of the
+    requested suffix appear.  That is the right test for "compress notes.txt
+    into notes.txt.gz" and it is a fact about a FORMAT.  It has no way to tell
+    that apart from a question, and on main 249a702 it did not:
+
+        discover("the different lines of the file a.txt")
+          -> closed=True, plan ['run_md5sum.textutils'],
+             status PASS__RECALLED_AND_REVERIFIED
+        discover("the duplicate lines of the file a.txt")
+          -> closed=True, plan ['run_md5sum.textutils'],
+             status PASS__SINGLE_ACTION_FOUND_AND_VERIFIED
+
+    md5sum prints a HASH.  Neither goal asked for one.  The suffix was matched,
+    not the question asked -- and both statuses contain the word VERIFIED,
+    which is a claim about the goal.  composer_route_v1 turns a closed
+    discovery into pass=True with authority
+    DISCOVERED_BY_ACTING_AND_EFFECT_VERIFIED, so the claim travelled.
+    """
+
+    def setUp(self) -> None:
+        self.tmp = pathlib.Path(tempfile.mkdtemp(prefix="brain-asked-"))
+        (self.tmp / "a.txt").write_text("apple\nbanana\napple\ncherry\nbanana\n")
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def test_a_goal_that_asks_for_a_value_is_not_reported_closed(self):
+        for gap in ("the duplicate lines of the file a.txt",
+                    "the different lines of the file a.txt",
+                    "the unique lines of the file a.txt",
+                    "how many lines are in the file a.txt",
+                    "how many duplicate lines are in the file a.txt"):
+            d = cenv.discover(gap)
+            self.assertFalse(d.get("closed"), "%s -> %s" % (gap, d))
+            self.assertEqual("OPEN__A_QUESTION_IS_NOT_CLOSED_BY_A_FILE_APPEARING",
+                             d.get("status"), gap)
+            self.assertNotIn("VERIFIED", str(d.get("status")), gap)
+            # And specifically: not a hash offered as an answer.
+            self.assertNotIn("md5sum", " ".join(d.get("plan") or []), gap)
+
+    def test_a_format_request_is_still_closed_by_the_same_route(self):
+        # The pin on the other side.  `discover` is a format-action route and it
+        # still works; the guard refuses only goals that ask a question, which
+        # is exactly what query_kind can tell and a suffix cannot.
+        d = cenv.discover("compress the file a.txt into a.txt.gz")
+        self.assertTrue(d.get("closed"), d)
+        self.assertIn("VERIFIED", str(d.get("status")), d)
+        self.assertTrue(d.get("plan"), d)
+
+    def test_the_route_that_answers_questions_still_answers_them(self):
+        # Refusing in `discover` must not cost the answer.  answer_query is the
+        # route that CAN answer a question, and it still does.
+        r = cenv.answer_query("how many lines are in the file a.txt",
+                              self.tmp / "a.txt")
+        self.assertTrue(r["pass"], r)
+        self.assertEqual("5", r["value"], r)
+
+    def test_the_tell_is_the_classifier_the_machine_already_had(self):
+        # The guard is not a new rule about wording; it is the classifier this
+        # module already owns, which returns None when a goal is not a question
+        # about something measurable.
+        for gap in ("the different lines of the file a.txt",
+                    "how many duplicate lines are in the file a.txt"):
+            self.assertIsNotNone(cenv.query_kind(gap), gap)
+        for gap in ("compress the file a.txt into a.txt.gz",
+                    "make a pdf from the file a.txt"):
+            self.assertIsNone(cenv.query_kind(gap), gap)
