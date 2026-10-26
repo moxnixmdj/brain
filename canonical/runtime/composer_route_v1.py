@@ -1183,6 +1183,28 @@ _BLANK_LINE = re.compile(
 # ones.  Hard-coding `-v` measured as answering the second with the first.
 _REMOVES_THE_LINES = re.compile(r"\b(?:remove|delete|drop|strip)\b")
 _MENTIONS_LINES = re.compile(r"\blines?\b")
+# Programs for which a second operand means "and this one too".  This is an
+# allowlist and not a blanket permission, because for three programs a second
+# operand means something else entirely -- measured, not assumed:
+#   `uniq A B`  treats B as the OUTPUT FILE.  Measured, it emptied B: A held
+#               'apple\nbanana\n', B held 'cherry\ndate\n', and afterwards B
+#               held 'apple\nbanana\n'.  A deletion of B's content, from a
+#               sentence that asked to remove duplicate lines.
+#   `tac A B`   reverses the CONCATENATION, not each file.
+#   `nl A B`    numbers straight through both, so the second file's first line is
+#               not numbered 1.
+# `sed` is absent too: with `-i` a second operand means "rewrite that file as
+# well", which is a second destructive target the sentence may not have named.
+_MULTI_OPERAND_PROGRAMS = frozenset({
+    "head", "tail", "wc", "cat", "grep", "fgrep", "egrep", "cut", "sort"})
+# A question about the lines TWO files have in common, or that only one of them
+# has, is answered by `grep` reading one file as its pattern list.  Both are one
+# program with two operands -- not a pipeline, which was the assumption that kept
+# this class unserved.  Measured: `grep -xf B A` gives the lines of A that appear
+# in B, and `grep -xvf B A` the lines of A that do not.
+_SET_OF_TWO_FILES = re.compile(
+    r"\bin both\b|\bcommon to\b|\bshared by\b|\bnot in\b|\bmissing from\b"
+    r"|\babsent from\b|\bonly in\b")
 # A sentence asks `find` for a tree when it states a name to look for or asks for
 # the subdirectories too.  `ls` on its own lists one level and answers a question
 # about a tree with a listing of its top -- which is a wrong answer, not a refusal.
@@ -1996,6 +2018,21 @@ def _prose_argv(sentence: str) -> list[str] | None:
             and re.search(r"\bfiles?\b", text)
             and not re.search(r"\blines?\b", text)):
         return None
+    # The lines two files share, and the lines only one of them has.  Both are
+    # one `grep` reading the other file as its pattern list, and the ORDER IS THE
+    # MEANING: -f takes the pattern file, so the file the question is ABOUT has to
+    # be the operand and the file it is compared AGAINST has to be the patterns.
+    # "the lines in A that are not in B" is `grep -xvf B A`, and swapping them
+    # answers the opposite question with equal confidence.
+    if ("grep" in known and _SET_OF_TWO_FILES.search(text)
+            and re.search(r"\blines?\b", text)):
+        _two = extract_paths(sentence)
+        if len(_two) == 2:
+            _neg = bool(re.search(r"\bnot in\b|\bmissing from\b|\babsent from\b"
+                                  r"|\bonly in\b", text))
+            return ["grep", "-x", *(["-v"] if _neg else []), "-f",
+                    str(_two[1]), str(_two[0])]
+
     for pattern, program, flags, arity in _PROSE_COMMAND:
         if program not in known:
             continue
@@ -2027,9 +2064,19 @@ def _prose_argv(sentence: str) -> list[str] | None:
             operands = paths[:arity]
         if arity >= 0:
             if len(operands) != arity:
-                # The sentence did not state enough operands for the program it
-                # asked for.  Refuse; do not repeat a path to make the numbers fit.
-                return None
+                # More operands than the row states is fine for a program whose
+                # second operand means "and this one too" -- "the first line of
+                # the files A and B" is the same question asked twice, and it
+                # measured as refused.  FEWER is never fine, and neither is a
+                # program off the allowlist: see `_MULTI_OPERAND_PROGRAMS` for the
+                # three for which a second operand means something else, one of
+                # which destroys the file it is given.
+                if not (arity == 1 and len(operands) > arity
+                        and program in _MULTI_OPERAND_PROGRAMS):
+                    # The sentence did not state enough operands for the program
+                    # it asked for.  Refuse; do not repeat a path to make the
+                    # numbers fit.
+                    return None
         paths = operands
         if program == "cut":
             column = _prose_ordinal(sentence)
