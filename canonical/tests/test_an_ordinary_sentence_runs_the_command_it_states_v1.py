@@ -3682,3 +3682,155 @@ class TestATwoFileRequestAndATreeQuestionGetTheOperationTheyStated(unittest.Test
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestASecondOperandIsTheSameQuestionAskedTwice(unittest.TestCase):
+    """One program, two operands.  These were all recorded as needing a pipeline.
+
+    They do not.  Every sentence here is a single program given a second operand,
+    and the arity gate refused all of them because the prose rows state exactly
+    one.  "The first line of the files A and B" is the same question the binder
+    already answered, asked twice.
+
+    The permission is an allowlist and not a blanket one, because for three
+    programs a second operand means something else, and one of them is a
+    destruction wearing the face of a read:
+
+        `uniq A B`  does not read B.  B is the OUTPUT FILE.  Measured: A held
+                    'apple\\nbanana\\n', B held 'cherry\\ndate\\n', and after
+                    `uniq A B` the command printed nothing and B held
+                    'apple\\nbanana\\n' -- the content B already had was replaced,
+                    rc 0, no diagnostic.
+        `tac A B`   reverses the concatenation, so A's first line ends up last.
+        `nl A B`    numbers straight through both, so B's first line is not 1.
+
+    Allowing two operands for a program where the second means something else
+    would have answered each of those with the wrong output and one with a
+    destroyed file.  So the allowlist is pinned from both sides.
+    """
+
+    def _pair(self, name):
+        d = "%s/%s" % (SCRATCH, name)
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "a.txt").write_text("apple\nbanana\ncherry\n", encoding="utf-8")
+        (ROOT / d / "b.txt").write_text("banana\ndate\napple\n", encoding="utf-8")
+        return d
+
+    def _both_intact(self, d):
+        self.assertEqual("apple\nbanana\ncherry\n",
+                         (ROOT / d / "a.txt").read_text(encoding="utf-8"))
+        self.assertEqual("banana\ndate\napple\n",
+                         (ROOT / d / "b.txt").read_text(encoding="utf-8"))
+
+    def test_the_first_line_of_two_files_is_asked_of_each_file(self):
+        d = self._pair("mohead")
+        result = _solve("Show the first line of the files %s/a.txt and %s/b.txt" % (d, d))
+        self.assertTrue(_verified(result), result.get("status"))
+        out = _stdout(result)
+        # head names the file it is answering for, so the answer carries both the
+        # lines and which file each came from.
+        for want in ("apple", "banana"):
+            self.assertIn(want, out.split("\n"))
+        self.assertNotIn("cherry", out.split("\n"))
+        self.assertNotIn("date", out.split("\n"))
+        self._both_intact(d)
+
+    def test_the_line_count_of_two_files_reports_each_one_and_the_total(self):
+        d = self._pair("mowc")
+        result = _solve("How many lines are in the files %s/a.txt and %s/b.txt?" % (d, d))
+        self.assertTrue(_verified(result), result.get("status"))
+        fields = _stdout(result).split()
+        # three lines in each file and six across both -- the total is what a
+        # count over two files means, and it is the number a single count cannot
+        # give.  A listing of names here would be a certified wrong answer.
+        self.assertIn("6", fields)
+        self.assertIn("total", fields)
+        self.assertEqual(2, fields.count("3"))
+        self._both_intact(d)
+
+    def test_sorting_two_files_merges_their_lines(self):
+        d = self._pair("mosort")
+        result = _solve("Sort the lines of the files %s/a.txt and %s/b.txt" % (d, d))
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual(["apple", "apple", "banana", "banana", "cherry", "date"],
+                         [x for x in _stdout(result).split("\n") if x])
+        self._both_intact(d)
+
+    def test_the_lines_two_files_share_are_taken_from_the_other_file(self):
+        # Not a pipeline and not an intersection computed in Python: grep reads one
+        # file as its pattern list and prints the lines of the other that match
+        # whole-line.  The oracle is the set the two files actually share.
+        d = self._pair("moboth")
+        a = set((ROOT / d / "a.txt").read_text(encoding="utf-8").split("\n")) - {""}
+        b = set((ROOT / d / "b.txt").read_text(encoding="utf-8").split("\n")) - {""}
+        result = _solve("the lines that are in both the file %s/a.txt and the file %s/b.txt"
+                        % (d, d))
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual(sorted(a & b),
+                         sorted(x for x in _stdout(result).split("\n") if x))
+        self.assertEqual(["apple", "banana"],
+                         sorted(x for x in _stdout(result).split("\n") if x))
+        self._both_intact(d)
+
+    def test_the_lines_only_one_file_has_are_the_complement_of_the_shared_ones(self):
+        # The order of the two files IS the question.  -f takes the pattern file,
+        # so "the lines in A that are not in B" must be `grep -xvf B A`.  Swapped,
+        # it answers the opposite question with exactly as much confidence, and
+        # both answers are plausible-looking lists of lines.
+        d = self._pair("moonly")
+        result = _solve("the lines in the file %s/a.txt that are not in the file %s/b.txt"
+                        % (d, d))
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual(["cherry"], [x for x in _stdout(result).split("\n") if x])
+        # Asserted against its opposite: the same two files with the roles swapped
+        # must give a different answer, or the binder is not reading the order.
+        flipped = _solve("the lines in the file %s/b.txt that are not in the file %s/a.txt"
+                         % (d, d))
+        self.assertTrue(_verified(flipped), flipped.get("status"))
+        self.assertEqual(["date"], [x for x in _stdout(flipped).split("\n") if x])
+        self._both_intact(d)
+
+    def test_a_second_operand_never_reaches_a_program_that_writes_to_it(self):
+        # The reason the permission is an allowlist and not a blanket one.
+        # `uniq A B` does not dedupe two files -- B is where it WRITES.  Measured
+        # on this sandbox: it printed nothing, returned 0, and replaced B's
+        # 'cherry\ndate\n' with A's 'apple\nbanana\n'.  A blank answer and a
+        # destroyed destination, from a sentence that asked to remove duplicates.
+        # `uniq` is not a prose row at all, so the shape is unreachable; the
+        # sentences that ask for it are answered by `sort -u`, which reads both
+        # operands and writes neither.  Pinned on the bytes, not on the argv: if
+        # uniq ever becomes a row, this goes red before B is destroyed silently.
+        d = self._pair("mouniq")
+        before_a = (ROOT / d / "a.txt").read_text(encoding="utf-8")
+        before_b = (ROOT / d / "b.txt").read_text(encoding="utf-8")
+        result = _solve("Remove the duplicate lines from the files %s/a.txt and %s/b.txt"
+                        % (d, d))
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual(["apple", "banana", "cherry", "date"],
+                         [x for x in _stdout(result).split("\n") if x])
+        self.assertEqual(before_a, (ROOT / d / "a.txt").read_text(encoding="utf-8"))
+        self.assertEqual(before_b, (ROOT / d / "b.txt").read_text(encoding="utf-8"),
+                         "the second operand of uniq is its output file; B must survive")
+
+    def test_a_program_whose_second_operand_changes_the_meaning_still_refuses(self):
+        # `tac A B` reverses the concatenation and `nl A B` numbers through both,
+        # so neither answers "do this to each file".  Refusing is right; guessing
+        # which of the two readings was meant is not.
+        d = self._pair("motac")
+        for goal in ("Reverse the files %s/a.txt and %s/b.txt" % (d, d),
+                     "the lines of the files %s/a.txt and %s/b.txt numbered" % (d, d)):
+            result = _solve(goal)
+            self.assertFalse(_verified(result), "%s -> %s" % (goal, _stdout(result)))
+        self._both_intact(d)
+
+    def test_the_single_file_forms_are_not_disturbed_by_the_second_operand(self):
+        # A pin: the widening is for MORE operands than a row states, never fewer
+        # and never a change to the one-operand answer that already worked.
+        d = self._pair("moone")
+        first = _solve("Show the first line of the file %s/a.txt" % d)
+        self.assertTrue(_verified(first), first.get("status"))
+        self.assertEqual("apple\n", _stdout(first))
+        count = _solve("How many lines are in the file %s/a.txt?" % d)
+        self.assertTrue(_verified(count), count.get("status"))
+        self.assertIn("3", _stdout(count).split())
+        self._both_intact(d)
