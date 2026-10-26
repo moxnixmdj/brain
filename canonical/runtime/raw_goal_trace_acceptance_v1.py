@@ -1232,7 +1232,7 @@ def _post_tee(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
     return True, "", {"postcondition_checked": "tee", "target_present": True}
 
 
-def _sed_promise(script: str, raw: bytes):
+def _sed_promise(script: str, raw: bytes, root: Path):
     """Return (ok, reason, evidence) for one in-place sed script, or None.
 
     None means this shape's promise is not stateable, which is a refusal -- not a
@@ -1279,6 +1279,22 @@ def _sed_promise(script: str, raw: bytes):
         return (got == want, "COMMAND_SED_FIRST_LINE_IS_NOT_THE_STATED_TEXT",
                 {"stated_line": want, "first_line": got})
 
+    # append the CONTENTS of another file.  Unlike every other shape here this one
+    # has a real oracle: `r` reads the source and does not consume it, so the
+    # promised tail is recomputed from a file that is still on disk -- the same
+    # discipline `_post_sort` uses.  Measured, `cat A` with B as the output
+    # truncated B and was certified as an append.
+    if script.startswith("$r "):
+        src_path = _inside(root, script[3:])
+        if src_path is None:
+            return (False, "COMMAND_SED_SOURCE_PATH_OUTSIDE_REPOSITORY", {})
+        if not src_path.is_file():
+            return (False, "COMMAND_SED_SOURCE_ABSENT_FROM_DISK", {})
+        tail = src_path.read_bytes().splitlines()
+        return (lines[-len(tail):] == tail if tail else True,
+                "COMMAND_SED_FILE_DOES_NOT_END_WITH_THE_APPENDED_CONTENTS",
+                {"appended_from": script[3:], "appended_lines": len(tail)})
+
     m = re.fullmatch(r"s\|(.+?)\|\|g", script)
     if m:
         needle = m.group(1).encode("utf-8")
@@ -1319,7 +1335,7 @@ def _post_sed(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
         return False, "COMMAND_SED_PATH_OUTSIDE_REPOSITORY", {}
     if not target.is_file():
         return False, "COMMAND_SED_TARGET_ABSENT_FROM_DISK", {}
-    promise = _sed_promise(tokens[2], target.read_bytes())
+    promise = _sed_promise(tokens[2], target.read_bytes(), root)
     if promise is None:
         return False, "COMMAND_SED_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", {
             "argv_tokens": len(tokens), "script": tokens[2][:40]}
