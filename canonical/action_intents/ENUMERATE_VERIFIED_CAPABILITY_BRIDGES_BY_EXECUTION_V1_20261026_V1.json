@@ -27,8 +27,9 @@
     "producer_cognition_model_dependency_count": 0,
     "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
     "progress_evidence_paths": [
-      "canonical/runtime/bridge_enumeration_v1.py",
-      "canonical/tests/test_bridge_enumeration_v1.py"
+      "canonical/runtime/bound_capabilities/python_crossfile_edit_choreograph.py",
+      "canonical/tests/test_python_crossfile_edit_choreograph_v1.py",
+      "canonical/astra_runtime/evidence/ASTRA-VERIFY-CROSSFILE-EDIT-001__RECEIPT.json"
     ],
     "route_class": "COMPOSE"
   },
@@ -297,7 +298,7 @@
           "route": "SCRATCH_IN_TMP"
         }
       ],
-      "checked_at_utc": "2026-10-27T09:21:00Z",
+      "checked_at_utc": "2026-10-27T09:25:55Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -352,10 +353,10 @@
         "TAMPERED_WORLD_MUST_FAIL__SELECTED_PART"
       ],
       "selected_route": "ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1",
-      "selected_route_checked_at_utc": "2026-10-27T09:21:00Z",
+      "selected_route_checked_at_utc": "2026-10-27T09:25:55Z",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-10-27T09:21:00Z",
+        "checked_at_utc": "2026-10-27T09:25:55Z",
         "execution_dependencies": [
           {
             "dependency": "python3 >= 3.11",
