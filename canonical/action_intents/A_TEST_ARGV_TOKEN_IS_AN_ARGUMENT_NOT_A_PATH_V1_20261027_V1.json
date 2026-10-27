@@ -34,7 +34,7 @@
   "route_class": "INTEGRATE"
  },
  "benchmark_or_family_rank_authority": false,
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A test argv token carrying a whole harness program was probed as a filesystem path, so Path.is_file() raised ENAMETOOLONG and aborted the repair before it measured anything::A_TEST_ARGV_TOKEN_IS_AN_ARGUMENT_NOT_A_PATH_V1_20261027_V1",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A test argv token is a command argument, not necessarily a path, but the candidate-layout rewrite asked the filesystem about every token. The existing `else` branch already passed non-file tokens through verbatim, so the intent was right and the probe was unsafe: `Path.is_file()` re-raises OSError for ENAMETOOLONG rather than returning False.",
  "canonical_base_commit": "caa813fff37cd0862984ed61390f1837c68daea1",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
@@ -93,7 +93,7 @@
    "LETTING_THE_WORD_NAMED_PUT_A_DELETION_OR_A_CREATION_ON_THE_TREE_SEARCH_ROUTE",
    "COUNTING_A_CENSUS_BY_THE_ANSWER_STRING_ALONE_WHEN_THE_PROMISE_IS_ABOUT_TWO_FILES_AFTERWARDS"
   ],
-  "expected_parent_level_state_change": "The same verification, the same tokens, the same paths -- produced once instead of hundreds of times.",
+  "expected_parent_level_state_change": "The repair-and-measured-acceptance engine completes from the front door instead of crashing. The same sentence that produced `FAIL__LIVE_CONTROLLER_EXECUTION / OSError:[Errno 36]` now produces a real measurement: `repair_pass: true`, `tests_pass: true`, `test_returncode: 0`, `output_verified: true`.",
   "iteration_limit": 4,
   "obs_blocker": {
    "delete_bypass_substitute_options": "Caching the whole solve() result was rejected: a solve has side effects on disk and a second identical sentence after a write must see the new state. Caching on a timer was rejected: it would make correctness depend on a clock. Skipping the BM25 ranking to save time was rejected: that narrows coverage to buy speed, which is the one trade this is not allowed to make. Returning the cached list itself was rejected: `_bm25_scores` and the receipt projection both build structures from it, and a mutation would silently change every later answer.",
@@ -1944,7 +1944,7 @@
   ],
   "selected_route": "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1",
   "selected_surviving_route": "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1",
-  "stop_condition": "STOP when the duplicated work is gone, every cached value is provably identical to a fresh computation, callers cannot mutate the cache, and the failure SET matches origin/main exactly. All measured. Stated as open: 17 tests in the 47-suite scope still fail on main and are untouched by this change; the routing suite is still single-file so `--dist loadfile` cannot split it across the two cores -- its 345 tests share one scratch directory and would need per-worker isolation to parallelise; the front door still reaches 1 of the 15 registered python.* capabilities; python3 is still not on _READ_ONLY_COMMANDS; nothing routes to run_stages.",
+  "stop_condition": "STOP when an argv token carrying a whole harness program survives the candidate-layout rewrite untouched, the repair engine completes and measures from the front door, the harness is proved to really execute the test by a negative control that must fail, and the regression failure SET matches origin/main exactly.",
   "why_selected_route_is_fastest_sufficient": "Three anchored edits, two of them adding one alternative to a test that already existed and one of them reusing the masking the same block already performs. Nothing new is invented: `_NEGATED_LINE` is the working model for a negation reaching a flag, and masked-then-read is the working model for reading prose without an operand in the way."
  },
  "resolution": "SELECTED",
