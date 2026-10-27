@@ -5708,13 +5708,11 @@
   "python.repository.acceptance.measure.v1": {
    "action_template": {
     "args": {
-     "capability_id": "python.repository.acceptance.measure.v1",
-     "output_path": "${input.output_path}",
-     "source_root": "${input.source_root}",
-     "test_argv": "${input.test_argv}",
-     "test_paths": "${input.test_paths}",
-     "timeout_s": 60
-    },
+          "capability_id": "python.repository.acceptance.measure.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}",
+          "timeout_s": 60
+        },
     "expect": {
      "field": "output_verified",
      "type": "field_equals",
@@ -7969,7 +7967,11 @@
     "skipped",
     "tests",
     "unit",
-    "unittest"
+    "unittest",
+    "corpus",
+    "pass rate",
+    "pass_rate",
+    "rate report"
    ],
    "platforms": [
     "linux",
