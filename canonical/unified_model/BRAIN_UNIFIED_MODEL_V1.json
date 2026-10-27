@@ -24715,7 +24715,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "1e73e00180e8fa6a1db9355b51e067af4fb10e7cf25c03d397a685471380767d"
+  "value": "58d44f2e6d8b8ac984eb9c580a122e2d181b68c820d753473fc88bf10f5ac8b2"
  },
  "engines": [
   {
@@ -190808,7 +190808,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_VERIFIED_REPAIR_MUST_BE_ABLE_TO_LAND_V1_20261027_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "1b6d1d3174919b655733dd72fe62d25e395c59d18ca21bb7c45b08cd7d458ad3",
+   "sha256": "6f2399489edcc89ed35bdc7447f499039ea01cba2d8c0bebc1ba162586a62a4f",
    "status": "",
    "terms": {
     "20261027": 1,

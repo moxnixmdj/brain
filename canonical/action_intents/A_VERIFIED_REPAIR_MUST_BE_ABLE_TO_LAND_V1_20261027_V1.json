@@ -1830,11 +1830,11 @@
     "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1",
     "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1"
    ],
-   "selected_route": "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1",
+   "selected_route": "A_VERIFIED_REPAIR_MUST_BE_ABLE_TO_LAND_V1_20261027_V1",
    "selected_route_checked_at_utc": "2026-10-26T19:40:13Z",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-26T23:49:03Z",
+    "checked_at_utc": "2026-10-27T07:34:01Z",
     "execution_dependencies": [
      {
       "dependency": "python3 3.11.2",
@@ -1871,7 +1871,7 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1",
+    "selected_route": "A_VERIFIED_REPAIR_MUST_BE_ABLE_TO_LAND_V1_20261027_V1",
     "status": "READY"
    },
    "selected_surviving_route": "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1",
@@ -1943,7 +1943,7 @@
    "DIRECTORY_SHAPED_REQUESTS_BIND_DIRECTORY_SHAPED_COMMANDS_AND_THE_LIVE_GATE_ASKS_WHETHER_A_CAPABILITY_CAN_RUN_ONE"
   ],
   "selected_route": "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1",
-  "selected_surviving_route": "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1",
+  "selected_surviving_route": "A_VERIFIED_REPAIR_MUST_BE_ABLE_TO_LAND_V1_20261027_V1",
   "stop_condition": "STOP when a verified repair can be applied to the real source tree from one sentence, when each of the four gates is proved to refuse by its own test, when a failed in-place verification is proved to restore every original byte, and when the regression failure SET matches origin/main exactly.",
   "why_selected_route_is_fastest_sufficient": "Three anchored edits, two of them adding one alternative to a test that already existed and one of them reusing the masking the same block already performs. Nothing new is invented: `_NEGATED_LINE` is the working model for a negation reaching a flag, and masked-then-read is the working model for reading prose without an operand in the way."
  },
