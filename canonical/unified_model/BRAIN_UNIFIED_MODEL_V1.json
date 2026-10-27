@@ -23950,12 +23950,9 @@
     "module",
     "new_name",
     "output_path",
-    "python_executable",
     "qualname",
-    "run_tests",
     "source_root",
-    "start_line",
-    "timeout_s"
+    "start_line"
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
@@ -25796,10 +25793,8 @@
    "input_contract_source": "action_template",
    "input_names": [
     "changed_paths",
-    "diff_path",
     "output_path",
-    "source_root",
-    "test_roots"
+    "source_root"
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
@@ -25871,9 +25866,7 @@
    "incremental_spend_usd": 0,
    "input_contract_source": "action_template",
    "input_names": [
-    "edits",
     "edits_path",
-    "index_path",
     "output_path",
     "source_root"
    ],
@@ -28619,7 +28612,7 @@
   "engines": 26,
   "knowledge_documents": 169,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6484,
+  "research_index_records": 6485,
   "routing_tokens": 2090,
   "skills": 18,
   "source_index_entry_points": 422,
@@ -28628,7 +28621,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "174fc7128be4922cde650e6e2fb0935bed454e42e8f60559107d240fd79c536f"
+  "value": "c324d846186e058552bcc72e0d44e9c8e3f692276d2dee9d0aeb85d44c640b8d"
  },
  "engines": [
   {
@@ -52038,7 +52031,7 @@
   "included_source_count": 938,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "2e366fb6d7e7ea288575c71dc73cd301926f32a4619f2877fd9716c1cc50bacc"
+  "source_tree_digest": "0f34106f334991598e88b969f15186404d4ffe3e8c6015db69454e5cfc84f497"
  },
  "research_index": [
   {
@@ -193839,6 +193832,51 @@
    }
   },
   {
+   "action_id": "AN_EDIT_REQUEST_MUST_RUN_THE_EDIT_CAPABILITY_NOT_A_READ_ONLY_CENSUS_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/AN_EDIT_REQUEST_MUST_RUN_THE_EDIT_CAPABILITY_NOT_A_READ_ONLY_CENSUS_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/AN_EDIT_REQUEST_MUST_RUN_THE_EDIT_CAPABILITY_NOT_A_READ_ONLY_CENSUS_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "58222d0192f0fb981eddc3dba895670935aaf7c9fa53de968a7a8c101e882051",
+   "status": "",
+   "terms": {
+    "22": 5,
+    "adapter": 3,
+    "against": 3,
+    "all": 2,
+    "already": 2,
+    "an_edit_request_must_run_the_edit_capability_not_a_read_only_census_v1_20261027_v1": 2,
+    "big": 2,
+    "caller": 2,
+    "capability": 6,
+    "census": 2,
+    "defaults": 2,
+    "dropped": 2,
+    "edit": 3,
+    "function": 3,
+    "had": 2,
+    "inputs": 2,
+    "lines": 2,
+    "more": 2,
+    "named": 2,
+    "new_name": 2,
+    "no": 3,
+    "not": 2,
+    "python_executable": 2,
+    "qualname": 2,
+    "request": 2,
+    "returned": 2,
+    "run_tests": 2,
+    "sentence": 3,
+    "so": 2,
+    "three": 3,
+    "timeout_s": 2,
+    "total_of": 2
+   }
+  },
+  {
    "action_id": "AN_EDIT_THAT_CAN_BE_PROVEN_IS_SERVED_AND_ONE_THAT_CANNOT_IS_REFUSED_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -229990,7 +230028,7 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "a9d0f553621404b651f55591cf1ca140406d58c355e92b25da3951260cd4645f",
+   "sha256": "521aed8cd23a87f374e76959ded49a0d1b3fccbc1949d5a30bd6ba3e6cfedafd",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
    "symbol_count": 65,
    "symbols": [
@@ -236298,7 +236336,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "ad15c7f2d7ca49a16374a1512cf1fc130bdc41dff2902e68df90c7c16c381106",
+   "sha256": "4896c9480a8a9094d76b366298c9e94e69a155cd5d4add13c49cc8217ebc8d1b",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 52,
    "symbols": [

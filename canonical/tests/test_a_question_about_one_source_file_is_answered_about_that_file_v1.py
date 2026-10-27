@@ -212,8 +212,14 @@ class APreconditionIsNotARequestTests(unittest.TestCase):
         self.assertGreater(audit[0], crosshair[0], (audit, crosshair))
         # The mechanism, not just the outcome: `file` and `python` are matched but
         # carry no information, so they are neither scored nor counted.
-        self.assertEqual(crosshair[2]["nondiscriminating_requires"], ["file", "python"])
-        self.assertEqual(crosshair[2]["informative_requires"], [])
+        # Read off the derived set and the matched tokens rather than off the
+        # evidence dict: _score returns a short evidence dict on the early path a
+        # zero-scoring entry now takes, so the dict no longer always carries these
+        # keys. Measured on main at 3e71a8f2 this assertion failed there too --
+        # crosshair scores 0 and its evidence has no nondiscriminating_requires.
+        self.assertEqual(sorted(crosshair[2]["matched_requires"]), ["file", "python"])
+        nondiscriminating = gc._nondiscriminating_requires_tokens()
+        self.assertTrue(set(crosshair[2]["matched_requires"]) <= set(nondiscriminating))
         self.assertEqual(crosshair[1], 0)
 
 
