@@ -22604,7 +22604,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py",
-    "source_sha256": "129c18bef6a3a3ea56fac2617079e8da747c232da58f1e56e765bc505d591fc0",
+    "source_sha256": "9dbd8855499fa94c03f680a26ceba3939773efaa4b2c79890ee20ede72269ced",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -28620,7 +28620,7 @@
   "engines": 26,
   "knowledge_documents": 169,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6482,
+  "research_index_records": 6483,
   "routing_tokens": 2090,
   "skills": 18,
   "source_index_entry_points": 422,
@@ -28629,7 +28629,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "014ed4aa6e8a85b79eceb405232cc498eb53a239d666e8016ddc25bc0fbef477"
+  "value": "9d566046d8fa7be201fa369db8adaba4950d6f89b9884bbf4c2e1f262dc06203"
  },
  "engines": [
   {
@@ -52041,7 +52041,7 @@
   "included_source_count": 938,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "a27b76666df72b0591c3d2505ee8e072a6869342d36c211dcf4fe6970b6f1847"
+  "source_tree_digest": "2f0e25ff5b888917aa3577f30dfa207a5c1993ccaeaae30503c41e0fccfe5562"
  },
  "research_index": [
   {
@@ -199981,6 +199981,51 @@
    }
   },
   {
+   "action_id": "PLAIN_GOAL_COMPOSITE_ADMISSION_AND_IDENTITY_ROUTING_REPAIR_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27T17:21:08Z",
+   "id": "research:canonical/action_intents/PLAIN_GOAL_COMPOSITE_ADMISSION_AND_IDENTITY_ROUTING_REPAIR_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/PLAIN_GOAL_COMPOSITE_ADMISSION_AND_IDENTITY_ROUTING_REPAIR_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "5b8fd73f1139fc0668474747bd4e0f684c01fb98a75645dac4bb8c35d5127646",
+   "status": "",
+   "terms": {
+    "20261027": 1,
+    "212.786564": 1,
+    "331.186564": 1,
+    "418": 1,
+    "94afa871": 1,
+    "adding": 1,
+    "admission": 3,
+    "after": 1,
+    "against": 1,
+    "ahead": 1,
+    "ambiguity": 2,
+    "assertions": 1,
+    "ast": 1,
+    "audit": 2,
+    "behavior": 1,
+    "bypassed": 1,
+    "candidates": 1,
+    "capabilities": 1,
+    "capability-identity": 1,
+    "census": 1,
+    "composite": 1,
+    "composites": 1,
+    "content-addressed": 1,
+    "correct": 1,
+    "effect-only": 2,
+    "plain-goal": 2,
+    "plain_goal_composite_admission_and_identity_routing_repair_v1_20261027_v1": 2,
+    "route": 2,
+    "routing": 2,
+    "unified-model": 2,
+    "v1": 2,
+    "zero-input": 3
+   }
+  },
+  {
    "action_id": "PLAIN_SENTENCE_REACHABILITY_AND_FAIL_CLOSED_NAMING_RULE_20261019_V1",
    "capability": false,
    "date": "2026-10-19",
@@ -211985,7 +212030,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "a620b2642fe226df94cf2bd3b8ec5e58d74660307603c585464226bcdfacb310",
+   "sha256": "c19835f378a394108248f1fc78c3507ee437c1ebcab280ae590a6729aa3acfa8",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 15,
    "symbols": [
@@ -229797,7 +229842,7 @@
    "imported_by_count": 7,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "2bedeb2e429ca05a2536e462db06ac3796cfdf08a3d7ea51a7fc0372aa48275e",
+   "sha256": "f22ff7d43b54bcbeae8c81a8f043c4e496d06c17c111d6935a2fcee107c08869",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
    "symbol_count": 128,
    "symbols": [

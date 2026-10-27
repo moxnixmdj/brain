@@ -1414,6 +1414,15 @@ def _rank_bindable_candidates(
             continue
         if not isinstance(entry.get("action_template"),dict):
             continue
+        # A zero-input capability with declared prerequisite effects is an
+        # internal composition node: this plain-goal ranker binds none of those
+        # prerequisites, so admitting the node as "grounded" is false. Its
+        # broad keywords can otherwise tie ahead of the input-bearing owner.
+        # Keep legacy standalone zero-input entries visible (the chained-plan
+        # negative control depends on terminal.kstar.root.assess.stdlib), and
+        # keep explicit capability_id invocation outside this ranker.
+        if entry.get("requires") and not _placeholders(entry["action_template"]):
+            continue
         score,specificity,evidence=_score(goal,cid,entry)
         if score<=0:
             continue

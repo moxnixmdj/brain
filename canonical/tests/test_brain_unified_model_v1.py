@@ -75,7 +75,7 @@ class BrainUnifiedModelV1Tests(unittest.TestCase):
         live = set(live_brain.load_verified_registry())
         modelled = set(self.model.capabilities)
         self.assertEqual(live, modelled)
-        self.assertEqual(len(modelled), 385)
+        self.assertEqual(len(modelled), 418)
 
     def test_every_capability_has_a_trigger_and_a_route(self):
         for cid, row in self.model.capabilities.items():
@@ -109,6 +109,7 @@ class BrainUnifiedModelV1Tests(unittest.TestCase):
             "create a sqlite table from json records": "sqlite.table.create_from_json_records",
             "rank sources by relevance to an objective": "source.objective_relevance.rank.bm25",
             "audit python source structure and imports": "python.source.audit.ast",
+            "audit the python source tree with an ast": "python.source.audit.ast",
         }
         for goal, expected in cases.items():
             with self.subTest(goal=goal):
@@ -1133,10 +1134,10 @@ class DeclaredDependencyEnvironmentIndependenceTests(unittest.TestCase):
     def test_status_reports_the_machine_it_actually_runs_on(self):
         """Presence is measured live, so it tracks the real interpreter."""
         status = self.model.status()
-        self.assertEqual(status["counts"]["capabilities"], 385)
+        self.assertEqual(status["counts"]["capabilities"], 418)
         self.assertEqual(
             status["declared_dependencies_present"] + status["declared_dependencies_missing"],
-            385,
+            418,
             "present + missing must account for every capability",
         )
 
@@ -1304,7 +1305,7 @@ class SourceIndexTests(unittest.TestCase):
         )
         self.assertEqual(int(counts.get("source_index_entry_points", -1)), entry_points)
         # The capability count must not have been inflated by indexing.
-        self.assertEqual(int(counts.get("capabilities", -1)), 385)
+        self.assertEqual(int(counts.get("capabilities", -1)), 418)
 
     def test_status_reports_the_source_index_it_holds(self):
         """The model's self-description must not omit what it indexes.
@@ -1339,7 +1340,7 @@ class SourceIndexTests(unittest.TestCase):
         # The distinction must be stated wherever the larger number appears, so
         # it cannot be read as a capability gain.
         self.assertIs(status.get("source_index_is_addressable_not_executable"), True)
-        self.assertEqual(int(counts["capabilities"]), 385)
+        self.assertEqual(int(counts["capabilities"]), 418)
 
     def test_status_does_not_overcount_reachable_modules(self):
         """A tempting derived figure that is wrong must not be reported.
@@ -1450,4 +1451,4 @@ class ResearchIndexTests(unittest.TestCase):
             int(counts.get("research_index_records", -1)),
             len(self.model.research_index),
         )
-        self.assertEqual(int(counts["capabilities"]), 385)
+        self.assertEqual(int(counts["capabilities"]), 418)

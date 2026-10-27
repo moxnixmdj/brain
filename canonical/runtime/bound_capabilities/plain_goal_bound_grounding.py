@@ -368,6 +368,17 @@ def ground(
         for cid,entry in sorted(registry.items()):
             if not _verified_zero_spend(entry):
                 continue
+            # An executable grounding report must not call an internal
+            # composition node grounded when the sentence binds neither an
+            # input nor any of its declared prerequisite effects. Standalone
+            # zero-input entries retain their legacy behavior, and lexical-only
+            # reports (which have no action contracts) remain unchanged.
+            if (
+                enforce_bindability
+                and entry.get("requires")
+                and not _template_inputs(entry)
+            ):
+                continue
             lexical=_lexical_method(text,cid,entry)
             semantic=_similarity_method(text,cid,entry)
             if lexical["score"]<=0 or semantic["score"]<=0:
