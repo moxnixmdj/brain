@@ -798,3 +798,110 @@ def test_a_stated_patch_report_discharges_the_repair_promise():
     assert adm.promised_source_change_errors(goal, before, [report_rel]) == [
         "PROMISED_SOURCE_UNCHANGED:" + rel]
     shutil.rmtree(work, ignore_errors=True)
+
+
+def test_the_filesystem_has_the_last_word_on_a_run():
+    """Three ways a run can lie without writing the wrong thing, all measured.
+
+    On 8f7e411c: "Create a git commit ... containing <p> with the message ..." came
+    back PASS__...EXACT_SEMANTIC_ACCEPTANCE_VERIFIED with no commit, no change and
+    nothing for R6 to look for; and "Rename the parameter text to value throughout
+    the python source <p>" came back PASS after DELETING <p> -- `rename` is not a
+    repair verb, so no digest was ever taken, and the report it wrote satisfied R6.
+
+    The third refusal is the guard against the inverse error: a sentence that only
+    asks for a verdict or for text must not be accused of doing nothing.  Measured
+    on the same commit without that scoping, ARCHIVE_VERIFY_GNU 3/3 -> 1/3,
+    SQLITE_VERIFY_RECORDS 3/3 -> 1/3 and PDF_TEXT_EXTRACT 3/3 -> 0/3 all became
+    FAIL_CLOSED__NO_OBSERVED_EFFECT.
+    """
+    work = WORK / "observe"
+    shutil.rmtree(work, ignore_errors=True)
+    work.mkdir(parents=True)
+    base = "canonical/astra_runtime/tmp/test_live_brain_route_admission/observe"
+    src = base + "/m.py"
+    (work / "m.py").write_text("x = 1\n", encoding="utf-8")
+
+    commit_goal = "Create a git commit in the repository that contains %s with the message 'fix'" % src
+    before = adm.observe_world(commit_goal)
+    assert before["parses"].get(src) is True
+    # nothing changed and no artifact is on disk: that is a broken promise
+    assert adm.observed_effect_errors(commit_goal, before, before, {"pass": True}) == [
+        "NO_OBSERVED_EFFECT"]
+    # the same silence is not a lie when the sentence only asks for a verdict
+    verify_goal = "Verify the archive %s against the manifest %s" % (src, src)
+    assert adm.observed_effect_errors(verify_goal, before, before, {"pass": True}) == []
+    # ... or for text out of a document
+    read_goal = "Extract the text from the pdf document %s with pypdf" % src
+    assert adm.observed_effect_errors(read_goal, before, before, {"pass": True}) == []
+    # a failed run is judged elsewhere; this gate never piles on
+    assert adm.observed_effect_errors(commit_goal, before, before, {"pass": False}) == []
+
+    # DELETION of a file the sentence named, with no destructive verb governing it
+    rename_goal = ("Rename the parameter text to value throughout the python source %s"
+                   " and save the refactor report to %s/r.json" % (src, base))
+    (work / "m.py").unlink()
+    after = adm.observe_world(rename_goal)
+    assert adm.observed_effect_errors(rename_goal, before, after, {"pass": True}) == [
+        "NAMED_INPUT_REMOVED:" + src]
+    # a sentence that really does ask for the deletion is not refused for it
+    (work / "m.py").write_text("x = 1\n", encoding="utf-8")
+    delete_goal = "Delete %s" % src
+    assert adm.observed_effect_errors(delete_goal, before, after, {"pass": True}) == []
+
+    # CORRUPTION: the bytes changed, so the old digest test was satisfied, but the
+    # module is no longer Python -- which is what writing a JSON report over it does
+    # the shape a real report has: a single JSON object, which PARSES as Python --
+    # so a parse-only check would certify exactly this corruption
+    (work / "m.py").write_text('{"cells": [], "totals": {"files": 1}}', encoding="utf-8")
+    after = adm.observe_world(rename_goal)
+    assert adm.observed_effect_errors(rename_goal, before, after, {"pass": True}) == [
+        "NAMED_SOURCE_UNPARSEABLE:" + src]
+    shutil.rmtree(work, ignore_errors=True)
+
+
+def test_a_no_op_goal_is_refused_at_the_door_and_a_real_repair_is_not():
+    """The two sentences that were credited while doing nothing / while destroying.
+
+    Both are composed runs, which is why the check hangs on every exit rather than
+    on the single-capability path: hanging it there left both untouched.
+    """
+    work = WORK / "door_observe"
+    shutil.rmtree(work, ignore_errors=True)
+    (work / "pkg").mkdir(parents=True)
+    base = "canonical/astra_runtime/tmp/test_live_brain_route_admission/door_observe"
+    (work / "pkg" / "util.py").write_text(
+        "def total(values):\n    out = 0\n    for v in values:\n        out = out - v\n    return out\n",
+        encoding="utf-8")
+    (work / "pkg" / "test_util.py").write_text(
+        "import unittest, sys, os\n"
+        "sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))\n"
+        "import util\n"
+        "class T(unittest.TestCase):\n"
+        "    def test_total(self):\n"
+        "        self.assertEqual(util.total([1, 2, 3]), 6)\n"
+        "if __name__ == '__main__':\n"
+        "    unittest.main()\n", encoding="utf-8")
+    task_id = "TEST_DOOR_OBSERVE_%d" % os.getpid()
+    try:
+        no_op = adm.solve({"task_id": task_id + "_A", "goal":
+                           "Create a git commit in the repository that contains %s/pkg/util.py "
+                           "with the message 'fix total'." % base})
+    finally:
+        _cleanup(task_id + "_A")
+    assert no_op["pass"] is False, no_op.get("status")
+    assert no_op["status"] == "FAIL_CLOSED__NO_OBSERVED_EFFECT", no_op.get("status")
+    assert no_op["observed_effect_errors"] == ["NO_OBSERVED_EFFECT"]
+
+    # the repair the same directory needs still passes: the refusal is about
+    # evidence, not about being strict for its own sake
+    try:
+        repaired = adm.solve({"task_id": task_id + "_B", "goal":
+                              "Repair the python source %s/pkg/util.py with the test guided repair "
+                              "loop so that the unit tests in %s/pkg/test_util.py pass, and save "
+                              "the repair report to %s/repair.json." % (base, base, base)})
+    finally:
+        _cleanup(task_id + "_B")
+    assert repaired["pass"] is True, repaired.get("status")
+    assert "observed_effect_errors" not in repaired, repaired
+    shutil.rmtree(work, ignore_errors=True)

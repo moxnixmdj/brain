@@ -1,0 +1,17 @@
+{
+  "capability_id": "software.test.contract.supercomposer.v1",
+  "mission_id": "AUTO-VERIFY-HARDCORE_SOFTWARE_TEST_CONTRACT_SUPERCOMPOSER_V1-V1",
+  "observed_effect": {
+    "adapter": "software_test_contract_supercomposer_v1",
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "output_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_TEST_CONTRACT_SUPERCOMPOSER_V1.json",
+    "output_sha256": "830ff3b861de2d897f8cc9fa25eefc5f1ccb398c36f8b12bfca5b24a622ee19c",
+    "output_verified": true,
+    "verified": true
+  },
+  "output_sha256": "830ff3b861de2d897f8cc9fa25eefc5f1ccb398c36f8b12bfca5b24a622ee19c",
+  "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+  "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_TEST_CONTRACT_SUPERCOMPOSER_V1.json",
+  "verified": true
+}
