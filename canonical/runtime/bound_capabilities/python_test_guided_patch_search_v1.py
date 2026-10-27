@@ -242,6 +242,8 @@ def _brain_bare_functions(mod):
  return out
 def _brain_run_suite(target):
  import runpy,sys
+ _d=str(target.resolve().parent)
+ if _d not in sys.path:sys.path.insert(0,_d)
  spec=importlib.util.spec_from_file_location("__brain_suite__",str(target))
  mod=importlib.util.module_from_spec(spec);sys.modules["__brain_suite__"]=mod
  spec.loader.exec_module(mod)
