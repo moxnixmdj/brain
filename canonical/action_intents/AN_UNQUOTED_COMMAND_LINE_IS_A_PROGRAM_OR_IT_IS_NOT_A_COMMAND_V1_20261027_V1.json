@@ -35,7 +35,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A sentence that merely CONTAINS the word \"command\" is compiled into a shell command whose argv is the rest of the English sentence, and the machine executes it. Measured on main at afa82e5: solve(\"Repair the python source root D so the test command passes writing the report to D_out/r.json\") returns capability_id=shell.command.run with argv=['passes','writing','the','report','to','D_out/r.json'], adapter_raised=FileNotFoundError:[Errno 2] No such file or directory: 'passes', failure_class=PROMISED_ARTIFACT_MISSING. The cause is composer_route_v1._ARGV, whose pattern \\b(?:shell\\s+|cli\\s+|terminal\\s+)?command\\s+(?:to\\s+run\\s+|line\\s+)?(.+?)\\s*$ makes the role word OPTIONAL, so it also matches the ordinary English noun in \"the test command passes\" and captures every word after it as argv. The front binder is not at fault: goal_front_compiler_v1.py:822-824 already demands a QUOTED string for _ARGV_KEYS and returns None for unquoted prose. The proof that an unquoted command line is a command line already exists in this repository and is absent at exactly this site: composer_route_v1._prose_argv:1686-1689 refuses any program outside raw_goal_trace_acceptance_v1._READ_ONLY_COMMANDS union _MUTATING_POSTCONDITIONS, and the shell adapter itself raises TEST_ARGS_WITHOUT_A_PROGRAM.",
- "canonical_base_commit": "afa82e57388fac26051ce996633fbcdbab3c6277",
+ "canonical_base_commit": "ce92836e7e943f0226ba4bec3e96a85590f4df92",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -49,7 +49,7 @@
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
  "load_bearing_primary": {
-  "canonical_base_commit": "afa82e57388fac26051ce996633fbcdbab3c6277",
+  "canonical_base_commit": "ce92836e7e943f0226ba4bec3e96a85590f4df92",
   "constructive_gap_for_open_obligation_ids": [
    "AUTOMATIONBENCH_GE_40",
    "CHARTOGRAPHY_TOOLS_GE_89",
@@ -88,7 +88,7 @@
   }
  ],
  "recursive_obs": {
-  "canonical_base_commit": "afa82e57388fac26051ce996633fbcdbab3c6277",
+  "canonical_base_commit": "ce92836e7e943f0226ba4bec3e96a85590f4df92",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "CHARGING_THE_TOKENS_OF_A_STATED_PATH_TO_THE_COVERAGE_BUDGET",
@@ -1715,7 +1715,7 @@
      "why_not_selected_or_selected": "SELECTED: separate the two acts. Refusing keeps the one-word rule. Taking over a route now requires the caller's WHOLE name, in order, in PROSE -- repository paths and identifier tokens are stripped first, a trailing version token is optional because prose drops it, and among several names stated the MOST SPECIFIC one wins. Measured in three steps over the same 13 path-style receipt-backed targets: 6 of 13 before, 10 of 13 once the whole name was required (the 3 remaining lost to a SIBLING, because 'bytes characteristic active query task generator v10' also states the whole of bytes_active_query_task_generator_v1 with one extra word in the middle), and 13 of 13 once specificity decides. The ordinary sentences that caused the regression now name ZERO receipt projections, and the 4 core failures are gone: test_live_brain_route_admission_v1 and test_capability_naming_rule_v1 are 42 passed. The end-to-end family moved with it: RECEIPT_PROSE_EXECUTION 12 instances went 7 of 12 (0.5833) to 12 of 12 (1.0), measured with the harness itself. Benchmark unchanged at 23/23 compiled and 22/23 selected; 213 unittest OK; pytest suites over the live path 117 passed with the same 6 pre-existing failures (2 capability DAG, 3 missing openpyxl/docx, 1 the deliberate no-write-authority boundary, which source_write_authority=False is hard-coded and enforced against in five separate guard modules). The wave 7 suite now asserts 13 of 13 and an empty residual, with the three-step history kept in the file; 3 of its 10 tests go red when the change is reverted."
     }
    ],
-   "checked_at_utc": "2026-10-27T21:03:12Z",
+   "checked_at_utc": "2026-10-27T21:37:22Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -1831,10 +1831,10 @@
     "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1"
    ],
    "selected_route": "AN_UNQUOTED_COMMAND_LINE_IS_A_PROGRAM_OR_IT_IS_NOT_A_COMMAND_V1_20261027_V1",
-   "selected_route_checked_at_utc": "2026-10-27T21:03:12Z",
+   "selected_route_checked_at_utc": "2026-10-27T21:37:22Z",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-27T21:03:12Z",
+    "checked_at_utc": "2026-10-27T21:37:22Z",
     "execution_dependencies": [
      {
       "dependency": "python3 3.11.2",
@@ -1958,7 +1958,7 @@
  "v22_prewrite_admission": {
   "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-  "checked_at_utc": "2026-10-27T21:03:12Z",
+  "checked_at_utc": "2026-10-27T21:37:22Z",
   "currentness": {
    "accepted_families": 5,
    "meta_envelope_open_count": 8,
@@ -2010,7 +2010,7 @@
      "path": "canonical/tests/test_composer_route_v1.py"
     },
     {
-     "git_blob_sha": "e2a294f223d3fb5eed2a72e6c0677b3575b0df39",
+     "git_blob_sha": "44acbd9d34a685ba9a5f7dcdc27fd4577c8cef26",
      "path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
     }
    ],
