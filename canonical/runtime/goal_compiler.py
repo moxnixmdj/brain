@@ -966,6 +966,46 @@ def _nondiscriminating_requires_tokens():
     except Exception:
         out = frozenset()
     _nondiscriminating_requires_cache = out
+
+
+# A verb does not carry its own meaning; its OBJECT does.  "write the repair
+# report to R" asks for evidence, not for the source bytes to change, and the
+# word "write" alone then credits the one capability that overwrites the input
+# (python.software.repair.apply.verified.v1) over the test-guided loop the same
+# sentence names by name.  Measured: the coupled/repair families routed to the
+# in-place writer and were refused by an oracle that forbids writing the source.
+# "apply" is deliberately NOT in this verb list: "apply the patch to X" is a real
+# source-write request, and only artifact-writing verbs are neutralized here.
+_ARTIFACT_WRITE_VERBS = ("write", "save", "dump", "emit", "store", "record",
+                         "log", "output", "print", "persist")
+_EVIDENCE_OBJECTS = ("report", "receipt", "log", "transcript", "summary",
+                     "manifest", "evidence", "proof", "trace", "plan", "patch",
+                     "json", "csv", "markdown", "txt")
+
+
+# The names a sentence uses when it chooses a patch-producing route rather than an
+# in-place one.  Closed on purpose, and it is the same vocabulary the repair
+# families themselves use ("with the test guided repair loop", "with the coupled
+# multi-edit repair loop", "with ast patch search").
+_PATCH_ROUTE_NOUNS = ("loop", "patch search")
+
+
+def _names_a_patch_route(goal):
+    text = str(goal or "").lower()
+    return any(noun in text for noun in _PATCH_ROUTE_NOUNS)
+
+
+def _artifact_write_tokens(goal):
+    """Words in ``goal`` that only say WHERE evidence goes, not what to change."""
+    text = str(goal or "")
+    verbs = "(?:" + "|".join(_ARTIFACT_WRITE_VERBS) + ")"
+    nouns = "(?:" + "|".join(_EVIDENCE_OBJECTS) + ")"
+    out = set()
+    for m in re.finditer(r"\b" + verbs + r"\b((?:\s+[A-Za-z0-9_.-]+){1,4})", text,
+                         re.IGNORECASE):
+        tail = m.group(1).lower()
+        if re.search(r"\b" + nouns + r"\b", tail):
+            out.add(m.group(0).split()[0].lower())
     return out
 
 
@@ -991,13 +1031,23 @@ def _score(goal, cid, entry):
           "format_rejection":format_evidence,
         }
     gt=_tokens(goal)
+    # Evidence-only verbs are removed from the EFFECT side of the match.  They
+    # still count as requirements below, because "write a report to R" does state
+    # a needed surface; they just may not create or weight a source-change match.
+    # When the sentence names the ROUTE ("... with the test guided repair loop"),
+    # the route decides and the report verb is bookkeeping.  When it names no
+    # route, the repair verb governs the file itself: leaving "write" credited is
+    # what keeps "Repair the python source file X ... and write the report to R"
+    # on python.software.repair.apply.verified.v1, the one capability that both
+    # finds the patch and lands it, so the file really is repaired.
+    gt_effect=gt-(_artifact_write_tokens(goal) if _names_a_patch_route(goal) else set())
     provides=_tokens(entry.get("provides",[]))
     requires=_tokens(entry.get("requires",[]))
     identity=_tokens(cid)
     keywords=_tokens(entry.get("keywords",[]))
     # Requirements are highly informative for environment qualifiers such as
     # image-only/scanned/local/etc. Provides represent the requested effect.
-    effect_matches=(gt & provides) | (gt & identity) | (gt & keywords)
+    effect_matches=(gt_effect & provides) | (gt_effect & identity) | (gt_effect & keywords)
     distinctive={x for x in effect_matches if x not in GENERIC_MATCH_TOKENS}
     # Preconditions and generic verbs/nouns may refine a match but may never
     # create one. A barcode-image goal must not become a QR-image action merely
@@ -1014,17 +1064,17 @@ def _score(goal, cid, entry):
     # sentence. See _nondiscriminating_requires_tokens for the measurement.
     nondiscriminating=_nondiscriminating_requires_tokens()
     informative_requires=(gt & requires) - nondiscriminating
-    score=5*len(gt & provides)+4*len(gt & keywords)+3*len(informative_requires)+2*len(gt & identity)
+    score=5*len(gt_effect & provides)+4*len(gt_effect & keywords)+3*len(informative_requires)+2*len(gt_effect & identity)
     # Prefer more-specific matched preconditions when base scores tie.
     specificity=len(informative_requires)
     return score,specificity,{
         "goal_tokens":sorted(gt),
-        "matched_provides":sorted(gt & provides),
+        "matched_provides":sorted(gt_effect & provides),
         "matched_requires":sorted(gt & requires),
         "informative_requires":sorted(informative_requires),
         "nondiscriminating_requires":sorted((gt & requires) & nondiscriminating),
-        "matched_identity":sorted(gt & identity),
-        "matched_keywords":sorted(gt & keywords),
+        "matched_identity":sorted(gt_effect & identity),
+        "matched_keywords":sorted(gt_effect & keywords),
     }
 
 
