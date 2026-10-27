@@ -1,0 +1,410 @@
+{
+ "action_id": "A_QUANTITY_WORD_IS_NOT_A_NAME_V1_20261027_V1",
+ "action_intent_id": "A_QUANTITY_WORD_IS_NOT_A_NAME_V1_20261027_V1",
+ "action_kind": "FRESH_REUSE",
+ "action_summary": "A QUANTITY IS NOT A NAME. `_tokens` drops one-character digits but keeps numerals spelled out, so a numeral in a sentence was doing the work of a capability's name: on base ce92836, 'Show the last three git commits.' shared exactly one token with cursorbench_three_region_complement_nonidentifiability_v1 -- the word 'three' -- the lexical margin came out DECISIVE, request_names_capability admitted it, the verifier ran, exited 0, and the public door returned PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED with semantic_acceptance_complete true and 1/1 obligations accepted for a request about git history that this capability never touches. That is a false credit, the class of defect the whole repo is built to forbid. FIX, one seam, no new capability, no model: numerals, ordinals and frequency words join goal_compiler.GENERIC_MATCH_TOKENS, the vocabulary BOTH readers already consult -- the compiler's scoring (a generic token may refine a match, never create one) and the selector's name/request words. Measured, before/after, same command: the git question now FAILS CLOSED (pass False, no capability, no artifact); the capability is still SELECTED when a sentence names it; 0 of 419 live capabilities lose their last distinctive token and 0 are named only by a numeral; the 36-family end-to-end suite is identical at 0.8009 in-scope, 28/36 families all-pass, out-of-scope 1.00, with NO family moving in either direction; the goal-compilation benchmark is identical at 21/23 compiled and 19/23 expected-first. Deliberately NOT shipped in this unit: the deeper half of the same defect -- the acceptance layer accepts a capability's own declared effect as the goal's effect -- is recorded open with its next step, because it needs the goal-effect oracle built and measured, not a vocabulary entry.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/runtime/goal_compiler.py",
+   "canonical/tests/test_a_quantity_word_is_not_a_name_v1.py"
+  ],
+  "route_class": "REUSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A numeral in the sentence was read as evidence about WHICH capability was asked for: 'Show the last three git commits.' shared exactly one token with cursorbench_three_region_complement_nonidentifiability_v1 -- the word 'three' -- so the route was DECISIVE, the capability ran, exited 0, and the door issued a fully accepted PASS (semantic_acceptance_complete true, 1/1 obligations) for a request about git history that the capability never touches.",
+ "canonical_base_commit": "ce92836e7e943f0226ba4bec3e96a85590f4df92",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "A numeral in the sentence was read as evidence about WHICH capability was asked for: 'Show the last three git commits.' shared exactly one token with cursorbench_three_region_complement_nonidentifiability_v1 -- the word 'three' -- so the route was DECISIVE, the capability ran, exited 0, and the door issued a fully accepted PASS (semantic_acceptance_complete true, 1/1 obligations) for a request about git history that the capability never touches.",
+ "date": "2026-10-27",
+ "expected_parent_change": "The door stops crediting a capability the sentence cannot have asked for on the strength of a quantity. Measured on the same fixed seed and the same command on both sides: no family moves (0.8009 -> 0.8009 in-scope, 28/36 all-pass, out-of-scope 1.00 -> 1.00), the benchmark is unchanged (21/23 compiled, 19/23 expected-first), and the two measured false-pass sentences become fail-closed refusals with no capability and no artifact. Registry rows, census (419 modelled / 125 bound) and the compiled model's capability surface are untouched; the artifact re-ingests the changed compiler bytes only.",
+ "expected_parent_frontier_change": "The door stops crediting a capability the sentence cannot have asked for on the strength of a quantity. Measured on the same fixed seed and the same command on both sides: no family moves (0.8009 -> 0.8009 in-scope, 28/36 all-pass, out-of-scope 1.00 -> 1.00), the benchmark is unchanged (21/23 compiled, 19/23 expected-first), and the two measured false-pass sentences become fail-closed refusals with no capability and no artifact. Registry rows, census (419 modelled / 125 bound) and the compiled model's capability surface are untouched; the artifact re-ingests the changed compiler bytes only.",
+ "explicit_user_authorization": "Owner instruction this session, verbatim: 'Join my project and learn everything you should learn and tell me what the most critical work is that you think you should work on?' On being given the measured critical path (front door first: 0/10 real software-engineering requests reached a capability that could do the job, and 1 of the 10 was a false PASS), the clarifying question about which item to start was left unanswered, so this unit proceeds on the item named first and highest-leverage: a PASS that nothing caused. Standing programme directives reused unchanged: hardcore software engineering as the focus, zero model in any credited producer path, zero incremental spend, fail closed, never widen a tolerance, and report the real numbers including failures.",
+ "falsification_condition": "Falsified if a quantity word can again be the sole basis of a selection; if any sentence of the form 'Show the last N <noun>' again returns pass True with any capability; if cursorbench_three_region_complement_nonidentifiability_v1 stops being selectable for a sentence that names it; if any of the 419 live capabilities loses its last distinctive token; if any of the 36 measured families drops below its base pass rate at seed 424242; if the out-of-scope fail-closed rate falls below 1.0; or if the goal-compilation benchmark's expected-first count falls below 19/23.",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8",
+   "PROWORK_GDPVAL_GE_1846",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "AUTOMATIONBENCH_GE_40",
+   "HLE_TOOLS_GE_67_7",
+   "TB_SCIENCE_GE_58_7",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "A false PASS is worse than a refusal for every one of the thirteen open obligations at once: each of them is read off passes this machine reports, so a pass that nothing caused corrupts the instrument rather than merely losing a task. Removing the class discharges none of them alone (honest lower bound 0) but protects every future reading of the remaining twelve; honest unlock 1/13.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": 0.9,
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "MEASURED, fixed seed 424242, identical command on both sides (execution_guard/live_solver_end_to_end_measurement_v1.py --seed 424242 --per-family 6 --oos 20 --jobs 4 --entries new), before = this branch's base ce92836, after = this branch. In-scope instance pass rate 0.8009 -> 0.8009; families fully passing 28/36 -> 28/36; out-of-scope fail-closed 1.0 -> 1.0; PER-FAMILY DELTAS: none, in either direction. Goal-compilation benchmark unchanged: compiled 21/23, expected capability selected 19/23, the same 2 wrong rows (auto.pypi.msgpack over xlsx/sqlite) that PR #6292 recorded as declared-contract data debt, not logic. Unified model verify 33/33 PASS; test_brain_unified_model_v1 + test_goal_compiler + test_goal_compiler_world_binding_v1 = 136/136 OK. THE DEFECT AND ITS CLOSURE, through the public door (canonical.runtime.live_brain_route_admission_v1.solve): 'Show the last three git commits.' BEFORE = PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED, pass True, capability canonical/runtime/cursorbench_three_region_complement_nonidentifiability_v1.py.auto.v1, admission_basis DECISIVE_LEXICAL_MARGIN with matched_tokens ['three'], semantic_acceptance_complete true, 1/1 obligations accepted. AFTER = FAIL__RAW_GOAL_COMPILATION_GAP, pass False, capability None, no artifact written; same for 'Show the last three commits.'. CONTROLS: the same capability is still SELECTED for 'Run the cursorbench three region complement nonidentifiability verifier.' and for 'Check the three region complement nonidentifiability with cursorbench.' (F18_DECISIVE_LEXICAL_MARGIN); 419/419 live capabilities keep at least one distinctive token; 0 are named only by a numeral; the 8 numerals actually in use across ids, keywords and provides (zero 11, one 3, two 3, five 3, four 1, seven 1, second 1, three 1) are unaffected as REFINERS, they simply cannot create a match alone. NEW TESTS: 5 cases in canonical/tests/test_a_quantity_word_is_not_a_name_v1.py; 3 of the 5 fail with only the compiler change reverted (the vocabulary declaration, the numeral-name case, and the door case), and the 2 controls pass on both sides by construction.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": "The `python` entry already sitting in GENERIC_MATCH_TOKENS is the exact precedent -- same defect class (a token that names a subject rather than a capability), same seam, same measurement discipline, and its comment states the invariant this unit re-measures over 419 rows. capability_selection_retrieval_v1.request_names_capability's own doctrine ('the rule is deliberately narrow: it needs ONE word of the name ... the registry changes, so rarity is not the test') is the gate this change feeds rather than replaces. PR #6292's refusal vocabulary and the #6111/#6118 'ask the verifier, do not hard-code the verdict' discipline are untouched and still pass. The census pins, the 419/125 registry counts, the unified-model compiler and the 36-family end-to-end instrument are reused unchanged -- no new measurement harness, no new capability row, no new dependency.",
+ "recursive_obs": {
+  "canonical_base_commit": "ce92836e7e943f0226ba4bec3e96a85590f4df92",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "TREATING_A_DECISIVE_LEXICAL_MARGIN_AS_EVIDENCE_THE_SENTENCE_MEANT_IT",
+   "TREATING_NUMERAL_RARITY_AS_INTENT__IDF_IS_A_PROPERTY_OF_THE_CORPUS",
+   "FIXING_ONLY_THE_ONE_MEASURED_SENTENCE"
+  ],
+  "expected_parent_level_state_change": "The door stops crediting a capability the sentence cannot have asked for on the strength of a quantity. Measured on the same fixed seed and the same command on both sides: no family moves (0.8009 -> 0.8009 in-scope, 28/36 all-pass, out-of-scope 1.00 -> 1.00), the benchmark is unchanged (21/23 compiled, 19/23 expected-first), and the two measured false-pass sentences become fail-closed refusals with no capability and no artifact. Registry rows, census (419 modelled / 125 bound) and the compiled model's capability surface are untouched; the artifact re-ingests the changed compiler bytes only.",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "Intrinsic: whether a token names a capability is a fact about language and identity, not about this repository's plumbing. The plumbing (one shared vocabulary that both the scorer and the selector already read) was already correct and was therefore reused, not rebuilt.",
+   "delete_bypass_substitute_options": "DELETE_THE_NUMERAL_CAPABILITY__ADD_A_PER_CAPABILITY_EXCEPTION__RAISE_THE_LEXICAL_THRESHOLD",
+   "surviving_causal_blocker": "No earlier route survives: deleting a verified capability to hide an over-match is a capability regression, a per-capability exception does not generalise to the next numeral already in the registry, and a threshold that refuses a DECISIVE margin refuses real routes. The only route that removes the class without removing capability is the shared vocabulary."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": "GENERIC_MATCH_TOKENS already carried 'python' for exactly this defect shape, with its own measured justification; the selector's request_names_capability already declared that rarity is not the test; PR #6292 already made an unbindable best match a loud refusal. This unit adds the missing members to a list both readers consult rather than a new rule.",
+   "external_existing_routes_checked": "num2words/inflect (numeral-to-word translation) -- non-dominating: the defect is that a quantity is not identity, so translating or weighting it cannot help. Ranking thresholds -- disqualified: the margin was already DECISIVE, and any threshold big enough to refuse this case refuses real routes; no dependency was installed, none is imported.",
+   "capability_work_deleted": "NO_CAPABILITY_DELETED_OR_DEMOTED__NO_ROW_EDITED__THE_VOCABULARY_GAINED_MEMBERS",
+   "surviving_gap": "The deeper half of the same defect stays open and is recorded: the acceptance layer accepts a capability's own declared effect as the goal's effect, so a successfully-run wrong tool can still certify a sentence it does not serve once a route is admitted. Closing that needs the goal-effect oracle built and measured on fresh instances; this unit narrows the admission side only."
+  },
+  "obs_goal": {
+   "real_outcome": "A pass reported by this machine is a claim that the request was answered; after this unit the measured false-credit sentence is refused instead, and every previously passing route is unchanged.",
+   "proxy_goals_deleted": [
+    "COUNTING_A_SELECTION_AS_AN_ANSWER__A_DECISIVE_LEXICAL_MARGIN_IS_NOT_EVIDENCE_THE_SENTENCE_MEANT_IT",
+    "TREATING_NUMERAL_RARITY_AS_INTENT__IDF_IS_A_PROPERTY_OF_THE_CORPUS_NOT_OF_THE_REQUEST",
+    "FIXING_THE_ONE_MEASURED_SENTENCE__THE_VOCABULARY_IS_THE_SHARED_SEAM_AND_THE_NEXT_NUMERAL_IS_ALREADY_IN_THE_REGISTRY"
+   ],
+   "surviving_necessity": "The mission's every number is read off passes this machine reports, so a pass with no cause is not a lost task but a broken instrument; no other defect class can be measured honestly until this one is closed."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": "NOTHING_DELETED__THE_TWO_FALSE_PASS_SENTENCES_BECOME_REFUSALS_AND_THE_RECORDED_OPEN_HALF_IS_THE_NEXT_SLICE",
+   "adjacent_capabilities_absorbed": "ALL_419_LIVE_ROWS_STAY_AUTHORITATIVE_AND_UNTOUCHED__NO_ROW_EDITED__NO_THRESHOLD_MOVED",
+   "fresh_reuse_plan": "The same vocabulary is read by the compiler's scoring and by the selector's name and request words, so any future generic class (units, colours, days) can be measured the same way against the same 419-row invariant."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "THE_VOCABULARY_IS_A_CONSTANT_READ_ONCE_AT_IMPORT__NO_EXTRA_SEARCH_OR_BINDING_PASS_WAS_ADDED",
+   "search_stop_decision": "Stop: the measured class is closed, both controls hold, and the residual (acceptance accepting a capability's own effect) is recorded open with its next step instead of being papered over here."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "ADD_THE_MEASURED_QUANTITY_WORDS_TO_THE_SHARED_VOCABULARY__SELECTED",
+    "RAISE_THE_LEXICAL_MARGIN_THRESHOLD__REJECTED_MARGIN_WAS_ALREADY_DECISIVE",
+    "PER_CAPABILITY_EXCEPTION_IN_THE_SELECTOR__REJECTED_DOES_NOT_GENERALISE",
+    "DELETE_OR_UNREGISTER_THE_NUMERAL_CAPABILITY__REJECTED_CAPABILITY_REGRESSION"
+   ],
+   "losing_routes_reason": "Each losing route either removes a reachable capability, hard-codes the one measured case, or trades a real route away to catch a false one.",
+   "implementation_still_necessary": true,
+   "implementation_still_necessary_reason": "The vocabulary entry is the smallest change that removes the class in both readers at once; no existing list member covered quantifiers and no adjacent mechanism did the job.",
+   "routes_ranked_reason": "1) vocabulary membership (selected: removes the class, keeps every route, measured 0 capabilities unmatchable); 2) threshold (rejected: DECISIVE margin already); 3) per-cap exception (rejected: does not generalise, and a hand-kept rule is exactly what the existing 'python' comment warns about); 4) unregister (rejected: capability regression)."
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "No synthetic world is needed: the oracle is the public door's own verdict plus the sentence itself. The measured case needs no fixture at all (the sentence names no path), and the controls are the live registry's 419 rows -- each capability is asked whether it keeps one distinctive token, which is a fact about the tree and not an expectation."
+  },
+  "prior_routes_considered": [
+   "THRESHOLD_ON_THE_LEXICAL_MARGIN__REJECTED_MEASURED_DECISIVE_ALREADY",
+   "PER_CAPABILITY_EXCEPTION__REJECTED_DOES_NOT_GENERALISE_AND_IS_A_HAND_KEPT_RULE",
+   "UNREGISTER_THE_CAPABILITY__REJECTED_CAPABILITY_REGRESSION",
+   "REWRITE_THE_ACCEPTANCE_LAYER_NOW__DEFERRED_NEEDS_A_GOAL_EFFECT_ORACLE_MEASURED_ON_FRESH_INSTANCES"
+  ],
+  "real_outcome": "The door no longer issues a pass for a request it never answered: 'Show the last three git commits.' returns pass False, no capability and no artifact, where base ce92836 returned a fully accepted PASS from an unrelated three-region complement verifier. Nothing else moves: 0.8009 in-scope and 28/36 families on both sides at seed 424242, out-of-scope 1.00, benchmark 21/23 & 19/23, model 33/33, CI 136/136.",
+  "required_capability": "capability_selection_retrieval_v1.request_names_capability (existing name-evidence gate) fed by goal_compiler.GENERIC_MATCH_TOKENS (existing vocabulary) -- no new capability is claimed by this unit",
+  "route_frontier": {
+   "checked_at_utc": "2026-10-27T21:30:23Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "LET_A_QUANTITY_WORD_BE_THE_ONLY_LINK_BETWEEN_A_SENTENCE_AND_A_CAPABILITY",
+   "max_age_hours": 24,
+   "negative_search_summary": "No new trusted capability, no network call at runtime, no install. The shared vocabulary and the name evidence gate pre-exist in the tree and are reused unchanged; external numeral-normalisation libraries and ranking-threshold routes were weighed and recorded as non-dominating or disqualified.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "semantic router token matching stopwords numerals not discriminative capability selection"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "num2words inflect python numeral to words library pypi"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "bm25 rare term high idf false positive short corpus"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "bm25 idf negative 50 percent document frequency stopword downweighting 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "routes_considered": [
+    "ROPE_EXTERNAL_REFACTOR_ENGINE",
+    "LIBCST_CONCRETE_SYNTAX_REWRITE",
+    "PLAIN_TEXT_REGION_SURGERY_NO_SCOPE_LAW",
+    "EDIT_THEN_VERIFY_WITHOUT_ROLLBACK",
+    "SHIP_UNVERIFIED_NO_TEST_GATE",
+    "HARVEST_RENAME_SPLICE_SPINE_AND_AST_SCOPE_LAW__SELECTED",
+    "NAMED_TEST_SUITE_REFEREE_WITH_FULL_BYTE_ROLLBACK__SELECTED_PART",
+    "STATEMENT_CHAIN_ALIGNMENT_LAW_WITH_BLOCK_DESCENT__SELECTED_PART"
+   ],
+   "selected_route": "A_QUANTITY_WORD_IS_NOT_A_NAME_V1_20261027_V1",
+   "selected_route_checked_at_utc": "2026-10-27T20:48:53Z",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-10-27T21:30:23Z",
+    "execution_dependencies": [
+     {
+      "dependency": "python3.11 standard library (re, json, unittest) -- the only substrate this change needs",
+      "evidence": [
+       "DIRECT_PROBE: python 3.11.2 ran the new test module 5/5 and the 136 CI tests OK on this machine"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "the live bound-capability registry (419 modelled / 125 bound rows) readable at call time",
+      "evidence": [
+       "DIRECT_PROBE: live.load_verified_registry() returned 419 rows in this session; the 419-row invariant is asserted by the new test"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "DATA_SOURCE",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "A_QUANTITY_WORD_IS_NOT_A_NAME_V1_20261027_V1",
+    "status": "READY"
+   },
+   "selected_surviving_route": "REPAIR_GOAL_COMPILER_REFUSE_OVER_SUBSTITUTE_V1_20261027_V1",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "the 'python' member of GENERIC_MATCH_TOKENS already carries this defect shape with its own measured justification (zero capabilities lose their last distinctive token)",
+     "capability_selection_retrieval_v1.request_names_capability documents that rarity is a property of the registry and must not be the test",
+     "PR #6292's GOAL_COMPILATION_BEST_MATCH_UNBINDABLE refusal is the adjacent law and stays untouched"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "docs.python.org/3/library/re.html: re.findall returns matched strings, and goal_compiler._tokens keeps only len>=2 -- which is why a one-character digit was never a token while a spelled numeral was"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "pypi num2words and inflect translate numerals to words and are non-dominating: the defect is that a quantity is not identity, so no translation helps"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "BM25/IR practice treats a rare term as discriminative (arXiv 2608.00229 on idf properties; explainers on idf turning negative beyond 50% document frequency), which is why the ranker had no statistical defence here and why a threshold route was rejected rather than tuned"
+    ]
+   },
+   "stop_condition": "Holds: on this environment the golden extraction runs gate PASS verified=true in ~230 ms, all 15 pins pass three consecutive runs including the paired failing worlds, the registry carries capability 91, the modelled census reads 386 everywhere it is asserted, and both guards (drift, load-bearing admission) pass.",
+   "unresolved_plausible_dominators": [],
+   "why_selected_route_is_fastest_sufficient": "THE_SPINE_IS_ALREADY_VERIFIED_IN_TREE__THE_SCOPE_LAW_IS_TINY_ON_TOP_OF_STDLIB_AST__EVERY_OTHER_ROUTE_EITHER_CANNOT_PROVE_SCOPE_CORRECTNESS_OR_REPRINTS_BYTES_NONDETERMINISTICALLY",
+   "challenger_routes": [
+    {
+     "route": "RAISE_THE_LEXICAL_MARGIN_THRESHOLD",
+     "comparison": {
+      "CORRECTNESS": "WOULD_ALSO_REFUSE_REAL_ROUTES",
+      "CAPABILITY_STRENGTH": "NONE_GAINED",
+      "WALL_CLOCK": "SAME",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "TUNED_TO_ONE_CASE",
+      "VERIFIABILITY": "ONLY_RE_MEASURABLE_BY_RERUNNING_THE_SUITE"
+     },
+     "evidence": [
+      "the margin on the measured sentence was already DECISIVE, so a threshold would have to sit above the runner-up distance of every real family"
+     ],
+     "qualification_evidence": [
+      "direct probe of the live registry: matched_tokens ['three'], admission_basis DECISIVE_LEXICAL_MARGIN"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED"
+    },
+    {
+     "route": "PER_CAPABILITY_EXCEPTION_IN_THE_SELECTOR",
+     "comparison": {
+      "CORRECTNESS": "CORRECT_FOR_ONE_CASE",
+      "CAPABILITY_STRENGTH": "NONE_GAINED",
+      "WALL_CLOCK": "FASTER",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "HAND_KEPT_RULE_ROTS",
+      "VERIFIABILITY": "CANNOT_PROVE_THE_NEXT_NUMERAL_IS_COVERED"
+     },
+     "evidence": [
+      "8 numerals are already in use across 419 rows (zero 11, one 3, two 3, five 3, four 1, seven 1, second 1, three 1), so the exception would have to be re-kept per case"
+     ],
+     "qualification_evidence": [
+      "live registry token census measured in this session"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED"
+    },
+    {
+     "route": "DELETE_OR_UNREGISTER_THE_NUMERAL_CAPABILITY",
+     "comparison": {
+      "CORRECTNESS": "REMOVES_A_VERIFIED_CAPABILITY",
+      "CAPABILITY_STRENGTH": "NEGATIVE",
+      "WALL_CLOCK": "FASTER",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "LOSES_A_ROUTE_THAT_WORKS",
+      "VERIFIABILITY": "ITS_OWN_TESTS_WOULD_FAIL"
+     },
+     "evidence": [
+      "the capability is still correctly selected when a sentence names it (F18_DECISIVE_LEXICAL_MARGIN on two naming phrasings), so it is a real route with a false-positive edge, not dead weight"
+     ],
+     "qualification_evidence": [
+      "selection probe on two naming phrasings in this session"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED"
+    }
+   ]
+  },
+  "routes_considered": [
+   "ADD_THE_MEASURED_QUANTITY_WORDS_TO_THE_SHARED_VOCABULARY__SELECTED",
+   "RAISE_THE_LEXICAL_MARGIN_THRESHOLD",
+   "PER_CAPABILITY_EXCEPTION_IN_THE_SELECTOR",
+   "DELETE_OR_UNREGISTER_THE_NUMERAL_CAPABILITY",
+   "MAKE_ACCEPTANCE_INDEPENDENT_OF_THE_CAPABILITY_SELF_REPORT__RECORDED_OPEN"
+  ],
+  "selected_route": "A_QUANTITY_WORD_IS_NOT_A_NAME_V1_20261027_V1",
+  "selected_surviving_route": "A_QUANTITY_WORD_IS_NOT_A_NAME_V1_20261027_V1",
+  "stop_condition": "Holds: on this environment 'Show the last three git commits.' fails closed with pass False and no capability, the cursorbench verifier is still selected by name, the 36 measured families are byte-identical at seed 424242 (0.8009 in-scope, 28/36, out-of-scope 1.0), the benchmark reads 21/23 and 19/23, the model verifies 33/33, the 136 CI tests pass, and both guards (drift, load-bearing admission) pass against base ce92836.",
+  "why_selected_route_is_fastest_sufficient": "The vocabulary seam already exists and is read by both readers, so the correct fix is one constant gaining measured members: no new module, no new pass over the registry, no new dependency, no threshold to tune, and every existing route measured unchanged."
+ },
+ "resolution": "SELECTED",
+ "route_id": "A_QUANTITY_WORD_IS_NOT_A_NAME_V1_20261027_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "A_QUANTITY_WORD_IS_NOT_A_NAME_V1_20261027_V1",
+ "stop_condition": "Holds: on this environment 'Show the last three git commits.' fails closed with pass False and no capability, the cursorbench verifier is still selected by name, the 36 measured families are byte-identical at seed 424242 (0.8009 in-scope, 28/36, out-of-scope 1.0), the benchmark reads 21/23 and 19/23, the model verifies 33/33, the 136 CI tests pass, and both guards (drift, load-bearing admission) pass against base ce92836.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "EXERCISED__SHARED_MATCH_VOCABULARY_MODIFIED__THE_PUBLIC_DOOR_MEASURED_BEFORE_AND_AFTER__FAMILY_SUITE_AND_BENCHMARK_RE_RUN_ON_BOTH_SIDES__419_ROW_INVARIANT_ASSERTED",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8",
+   "PROWORK_GDPVAL_GE_1846",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "AUTOMATIONBENCH_GE_40",
+   "HLE_TOOLS_GE_67_7",
+   "TB_SCIENCE_GE_58_7",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+     "git_blob_sha": "b52e237aba951446e0c28c0fe7163da37236a2ba"
+    },
+    {
+     "path": "canonical/runtime/goal_compiler.py",
+     "git_blob_sha": "70588c2cb0e982cdb264b573b7db977075be355f"
+    }
+   ],
+   "decisive_question": "MAY_A_QUANTITY_WORD_IN_A_SENTENCE_BE_THE_ONLY_BASIS_OF_A_SELECTION_AND_A_PASS",
+   "falsifier_id": "A_SELECTION_WHOSE_ONLY_SHARED_TOKEN_IS_A_QUANTITY_IS_A_FALSE_CREDIT_NOT_A_MATCH",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "THE_THRESHOLD_VERSION_WAS_REJECTED_BECAUSE_THE_MARGIN_WAS_ALREADY_DECISIVE__THE_PER_CAPABILITY_VERSION_WAS_REJECTED_BECAUSE_EIGHT_NUMERALS_ARE_ALREADY_IN_USE__THE_VOCABULARY_VERSION_IS_PROVEN_BY_THE_419_ROW_INVARIANT_AND_THE_TWO_NAMING_CONTROLS",
+   "proposal_id": "A_QUANTITY_WORD_IS_NOT_A_NAME_V1_20261027_V1"
+  }
+ },
+ "weakens_existing_guard": "No fail-closed rule is weakened and no threshold moves. The change removes a class of matches: a quantity word can no longer be the only link between a sentence and a capability. Every selection that previously rested on a distinctive word survives (measured over all 419 rows: none loses its last distinctive token), and the out-of-scope fail-closed rate stays exactly 1.0, so nothing that should refuse now passes.",
+ "intent": "A_QUANTITY_WORD_IS_NOT_A_NAME_V1_20261027_V1"
+}
