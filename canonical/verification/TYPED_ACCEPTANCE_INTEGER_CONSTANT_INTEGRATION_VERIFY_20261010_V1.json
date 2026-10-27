@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_TYPED_ACCEPTANCE_INTEGER_CONSTANT_INTEGRATION_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__INDEPENDENT_SPRITE__PYCOMPILE__11_OF_11_CORE_CURRENT_MAIN_INTEGRATION_CASES__GENERAL_TYPED_INTEGER_CONSTANT_REPAIR__ZERO_CREDIT",
+  "defect": {
+    "class": "TRANSITIVE_TYPED_ACCEPTANCE_SCHEMA_MISMATCH",
+    "observed_failure": "CompileError:CONST_TYPE_INVALID",
+    "exact_cause": "TYPED_ACCEPTANCE_PROGRAM_DECLARES_INTEGER_FIELDS_AND_EMITS_INTEGER_CONSTANTS__SHARED_STRUCTURED_EXPRESSION_EVALUATOR_ACCEPTED_INTEGER_SCHEMA_VALUES_BUT_OMITTED_INTEGER_CONST_OPERATOR_SUPPORT",
+    "historical_boundary": "ARTIFACT_MEASUREMENT_VERIFY_20261007_V1_USED_A_MINIMAL_TEST_DOUBLE_FOR_STRUCTURED_EXPRESSION_INTERNALS_AND_DID_NOT_ESTABLISH_FULL_CURRENT_INTEGRATION"
+  },
+  "subject": {
+    "runtime_path": "canonical/runtime/structured_method_expression_ast_candidate_v2.py",
+    "runtime_git_blob_sha": "2081fe8e9c6b2af0ee7af7105d114a3fadcf01c8",
+    "regression_test_path": "canonical/tests/test_typed_acceptance_integer_constant_integration_v1.py",
+    "regression_test_git_blob_sha": "a7d0f652d419db4d18ed49062741dc94579c8a15",
+    "typed_acceptance_runtime_git_blob_sha": "7fd2e575bd2d5c36f48c713f15177d5b0d7e68c5",
+    "measurement_runtime_git_blob_sha": "4da88dc71e85874b6445988b792951fb3c36d62f",
+    "measured_acceptance_runtime_git_blob_sha": "7cb47bbefa807e93007e13e84607b41e27245f62",
+    "original_measurement_tests_git_blob_sha": "765e27ee66351b4f1289e4b1fb1c778f4c111da6"
+  },
+  "independent_replay": {
+    "carrier": "brain-capability-first-scheduler-verify-20261008-v1",
+    "carrier_id": "sprite-ab3ec1a7-90d8-4b10-9b35-40c37f707695",
+    "workspace": "/home/sprite/typed-integer-current-v2",
+    "py_compile": "PASS",
+    "integer_regression_cases": "3_OF_3_PASS",
+    "original_measurement_integration_cases": "8_OF_8_PASS",
+    "total": "11_OF_11_PASS",
+    "current_main_rebase": true
+  },
+  "proves": [
+    "INTEGER_CONSTANTS_PRESERVE_INTEGER_TYPE",
+    "BOOLEAN_VALUES_CANNOT_MASQUERADE_AS_INTEGER_CONSTANTS",
+    "INTEGER_CONSTANTS_PARTICIPATE_SOUNDLY_IN_EXISTING_NUMERIC_ORDERING",
+    "ORIGINAL_CONTENT_ADDRESSED_MEASUREMENT_INTEGRATION_PASSES_WITH_REAL_SHARED_EXPRESSION_EVALUATOR",
+    "REPAIR_RESTORES_DOWNSTREAM_R4_EXECUTION_VERIFICATION_WITHOUT_CHANGING_MEASUREMENT_SEMANTICS"
+  ],
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_PROGRAM_SEMANTIC_ADEQUACY_CLAIM",
+    "NO_R4_PROPERTY_TRUTH_CREDIT_FROM_THIS_REPAIR_ALONE",
+    "DOWNSTREAM_R4_CANDIDATE_OBSERVATION_IS_NOT_CANONICAL_AUTHORITY",
+    "NO_QUALITY_ACCEPTANCE_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "downstream_candidate_observation": {
+    "scope": "NONCANONICAL_R4_EXECUTION_PROPERTY_CANDIDATE_ONLY",
+    "result": "10_OF_10_R4_GUARD_AND_PROPERTY_VERIFIER_CASES_PASSED_ON_PRIOR_CANDIDATE_WORKSPACE_AFTER_THIS_REPAIR",
+    "authority": false
+  }
+}
