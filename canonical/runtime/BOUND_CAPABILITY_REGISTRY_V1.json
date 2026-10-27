@@ -7605,6 +7605,95 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SECGATE-001__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-SECGATE-001.json"
       }
+    },
+    "python.repo.pr_realize.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.repo.pr_realize.v1",
+          "repo_path": "${input.repo_path}",
+          "diff_path": "${input.diff_path}",
+          "pr_intent_path": "${input.pr_intent_path}",
+          "apply_directory": "${input.apply_directory}",
+          "branch_name": "${input.branch_name}",
+          "base_branch": "${input.base_branch}",
+          "output_path": "${input.output_path}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "field": "push_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_repo_pr_realize",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "repo",
+        "pull request",
+        "pr",
+        "realize",
+        "forge",
+        "push",
+        "branch",
+        "commit",
+        "ship",
+        "deploy",
+        "git",
+        "verify",
+        "ls-remote"
+      ],
+      "limitations": [
+        "pushes to the repo's configured origin only; forge PR-OPEN (the web/API step after the push) is deliberately out of v1 scope -- the branch on the forge with a verified sha IS the realized intent.",
+        "commit identity and dates are pinned inputs so the sha is a pure content function; a rerun of the same world is idempotent (already_realized, no force-push) and post-rerun receipts are byte-identical.",
+        "staging is restricted to diff-touched paths; crown bookkeeping files (the diff itself, intents, receipts) never enter the commit.",
+        "requires git an origin remote; bogus diffs, empty diffs, non-git trees, and branch-name injection are all named pre-action refusals; a remote sha mismatch after push fails the receipt loudly."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.repo.pr_realize"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "already_realized",
+        "branch_name",
+        "complete",
+        "gate",
+        "head_sha",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "push_verified",
+        "pushed",
+        "remote_ref",
+        "verified"
+      ],
+      "source": {
+        "module": "git",
+        "type": "system_tool",
+        "version_family": ">=2.0"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-REALIZE-001",
+        "observed_effect": {
+          "crown": "natural-language issue -> orchestrate -> six review gates -> THIS CAPABILITY ships the result: branch push verified by ls-remote sha equality",
+          "golden": "remote ref crown/GH-9900-rename == head_sha 7a7e8438f..., all six review gates PASS, full loop ~1.9 s",
+          "idempotent": "rerun: identical head sha, already_realized=true, no force-push, receipts equal on all post-world rows",
+          "hermetic": "local bare repo as origin: full push/verify semantics, zero network"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-REALIZE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-REALIZE-001.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
