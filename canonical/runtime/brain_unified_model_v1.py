@@ -392,17 +392,18 @@ class UnifiedModel:
         machine last built the artifact.
 
         A capability that cannot resolve the substrate it declares can only
-        fail. Ranking it first spends the entire request on a guaranteed
-        ``BOUND_PYPI_SOURCE_INCOMPLETE`` instead of reaching the capability that
-        could have answered. Measured before this gate existed:
-        ``python.contract.check.crosshair.v1`` -- whose adapter runs
-        ``sys.executable -m crosshair`` on a machine without crosshair -- was
-        selected for eight of thirteen ordinary Python software-engineering
-        sentences and failed every one of them.
+        fail. Measured: ``python.contract.check.crosshair.v1`` -- whose adapter
+        runs ``sys.executable -m crosshair`` on a machine without crosshair --
+        was selected for eight of thirteen ordinary Python software-engineering
+        sentences and failed every one of them with
+        ``BOUND_PYPI_SOURCE_INCOMPLETE``, after spending the whole request
+        getting there.
 
-        Addressing a capability by its own id is deliberately unaffected: an
-        address is the caller taking responsibility for the choice, not a
-        keyword match the model made on their behalf.
+        This is reported by ``route()`` and enforced by ``solve()``. It is
+        deliberately NOT used to filter the ranking: what the model contains is
+        not a fact about one host, and this sandbox has pypdf while the CI
+        runner does not, so hiding capabilities here would make routing
+        host-dependent.
         """
         if self._unrunnable is None:
             found: dict[str, list[str]] = {}
@@ -426,10 +427,17 @@ class UnifiedModel:
             matched.add(token)
             for cid, weight in postings.items():
                 if cid in unrunnable:
-                    # The word was understood; the capability that claims it
-                    # cannot run on this machine. Say so instead of answering.
+                    # Recorded, not removed. `route()` answers "what does the
+                    # model contain", and that is not a fact about this host:
+                    # the pinned route for "extract text from a pdf document"
+                    # is pdf.extract.text.pypdf on every machine, and this
+                    # sandbox happens to have pypdf while the CI runner does
+                    # not. Hiding a capability here would make the ranking
+                    # host-dependent, which is exactly what
+                    # test_status_reports_the_machine_it_actually_runs_on
+                    # exists to prevent. `solve()`, which does run things, is
+                    # where the host gets a vote.
                     unrunnable_matched.add(cid)
-                    continue
                 scores[cid] = scores.get(cid, 0.0) + weight
         mentioned = self._ids_mentioned(goal)
         for cid in mentioned:
@@ -496,7 +504,7 @@ class UnifiedModel:
             "query_tokens": tokens,
             "matched_token_count": len(matched),
             "coverage": round(coverage, 6),
-            "unrunnable_excluded": sorted(unrunnable_matched),
+            "unrunnable_on_this_host": sorted(unrunnable_matched),
             "confident": confident,
             "best": rows[0] if rows else None,
             "candidates": rows,
@@ -827,6 +835,21 @@ class UnifiedModel:
         context_paths: Iterable[str] | None = None,
     ) -> dict[str, Any]:
         row = self.capabilities[cid]
+        # The host gets its vote here, not in `route()`. Executing a capability
+        # whose own declared substrate is absent cannot produce an answer; it
+        # produces a late, opaque failure from inside the adapter. Measured:
+        # python.contract.check.crosshair.v1 spent the whole request and came
+        # back BOUND_PYPI_SOURCE_INCOMPLETE. Naming the missing dependency at
+        # the front door is the same refusal, said early and said truthfully.
+        missing_deps = _missing_declared_dependencies(row)
+        if missing_deps:
+            return self._failure(
+                goal,
+                "CAPABILITY_DECLARED_DEPENDENCIES_MISSING:" + ",".join(missing_deps),
+                routing=routing,
+                capability_id=cid,
+                declared_dependencies_missing=missing_deps,
+            )
         required = [str(x) for x in (row.get("input_names") or [])]
         inputs = dict(inputs)
         missing = [name for name in required if name not in inputs]

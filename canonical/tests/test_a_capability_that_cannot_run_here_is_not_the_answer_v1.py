@@ -237,13 +237,39 @@ class UnrunnableCapabilityIsNotTheAnswerTests(unittest.TestCase):
             self.skipTest("crosshair is installed on this host")
         self.assertIn(self.cid, self.model.unrunnable_capabilities())
 
-    def test_an_unrunnable_capability_is_not_selected_for_its_own_keywords(self):
+    def test_route_reports_an_unrunnable_capability_without_hiding_it(self):
+        """`route()` answers what the model contains, which is not a host fact.
+
+        The ranking must not move with what this machine has installed: this
+        sandbox has pypdf and the CI runner does not, and the pinned route for
+        "extract text from a pdf document" has to be the same on both. So the
+        capability is reported, not removed.
+        """
         if self.cid not in self.model.unrunnable_capabilities():
             self.skipTest("crosshair is installed on this host")
         goal = "python symbolic contract verification oracle counterexample crosshair"
         routed = self.model.route(goal)
-        self.assertIn(self.cid, routed["unrunnable_excluded"])
-        self.assertNotEqual((routed["best"] or {}).get("id"), self.cid)
+        self.assertIn(self.cid, routed["unrunnable_on_this_host"])
+        ids = [row["id"] for row in routed["candidates"]]
+        self.assertIn(
+            self.cid,
+            ids,
+            "the capability was hidden from the ranking, which makes routing "
+            "depend on the host that answered",
+        )
+
+    def test_solve_refuses_the_capability_whose_substrate_is_absent(self):
+        """The host votes where the work happens, and says which dependency."""
+        if self.cid not in self.model.unrunnable_capabilities():
+            self.skipTest("crosshair is installed on this host")
+        out = self.model.solve(
+            "check the python contract", capability_id=self.cid, inputs={}
+        )
+        self.assertIs(out.get("pass"), False)
+        self.assertEqual(
+            out["reason"], "CAPABILITY_DECLARED_DEPENDENCIES_MISSING:crosshair"
+        )
+        self.assertEqual(out["declared_dependencies_missing"], ["crosshair"])
 
     def test_an_unrunnable_capability_is_still_addressable_by_its_own_id(self):
         """The negative control for the rule above.
@@ -255,6 +281,41 @@ class UnrunnableCapabilityIsNotTheAnswerTests(unittest.TestCase):
         routed = self.model.route(self.cid)
         self.assertTrue(routed["confident"], routed["reason"])
         self.assertEqual(routed["best"]["id"], self.cid)
+
+    def test_the_ranking_is_the_same_on_a_host_that_has_nothing_installed(self):
+        """The regression this design decision exists to prevent.
+
+        Filtering the ranking by presence made "extract text from a pdf
+        document" stop routing to pdf.extract.text.pypdf on the CI runner,
+        which does not have pypdf, while it kept routing here, which does. A
+        routing assertion that holds in one sandbox and fails in another is not
+        an assertion about the model. With every declared dependency on the
+        machine reported missing -- 367 of 374 capabilities -- all four pinned
+        routes must still be confident and still land where the model says.
+        """
+        cases = {
+            "extract text from a pdf document": "pdf.extract.text.pypdf",
+            "create a sqlite table from json records": (
+                "sqlite.table.create_from_json_records"
+            ),
+            "rank sources by relevance to an objective": (
+                "source.objective_relevance.rank.bm25"
+            ),
+            "audit python source structure and imports": "python.source.audit.ast",
+        }
+        with mock.patch.object(shutil, "which", lambda _name: None), mock.patch.object(
+            importlib.util, "find_spec", lambda _name: None
+        ):
+            self.model._unrunnable = None
+            try:
+                self.assertGreater(len(self.model.unrunnable_capabilities()), 300)
+                for goal, expected in cases.items():
+                    with self.subTest(goal=goal):
+                        routed = self.model.route(goal)
+                        self.assertTrue(routed["confident"], routed["reason"])
+                        self.assertEqual(routed["best"]["id"], expected)
+            finally:
+                self.model._unrunnable = None
 
     def test_every_capability_that_can_run_here_is_still_selectable(self):
         """The gate must not empty the model."""
