@@ -104,6 +104,28 @@ The honest next step is a scoped retry that re-checks ambiguity after derivation
 the full 37-family suite before it can land. Nothing here changes the registry, the unified
 model, any protected path, or any scoreboard.
 
+## Post-merge update (main `c57b21730d`)
+
+The fleet landed two more SWE fixes while this PR was open — `RUN_THE_TESTS_MEANS_RUN_THE_TESTS`
+(discover `test_paths` from the tree, drop `test_argv` from the template, real pass-rate report)
+and `WRITE_THE_TESTS_FOR_THIS_TREE_MUST_WRITE_TESTS` (derive scaffold targets from the symbol
+index, run under `unittest` when pytest is absent). Both are the same pattern as this slice:
+**reuse the adapter's own defaults and derive missing inputs from the tree**, not invent them.
+
+Merging that main into this branch exposed two infrastructure facts, both now fixed here:
+
+1. `verify_brain_unified_model_v1.py` failed `ARTIFACT_INTEGRITY` (5/6) because the compiled
+   9.4 MB model is a hash of the whole tree — including `canonical/action_intents/*.json`.
+   **Every intent edit changes the model digest**, so the model must be recompiled after the
+   final intent bytes, and a re-run of the verifier is 33/33 PASS. This coupling is a real
+   speed/consistency problem: a one-line governance edit forces a 9.4 MB artifact rebuild.
+2. `test_capability_naming_rule_v1.py::test_f29_a_request_that_names_nothing_fails_closed`
+   now fails on **pristine main** (verified by checking out main's two runtime files):
+   `"Run the thing."` selects `python.repository.acceptance.measure.v1` instead of failing
+   closed. That is fleet drift from the `RUN_THE_TESTS` change, not a regression from this PR.
+   It is a fail-open on a request that names nothing and must be fixed before any routing
+   claim is trusted.
+
 ## The fastest remaining wiring, in order
 
 1. Land the scoped F31 retry (keep the ambiguity re-check) so `solve()` uses the same derived

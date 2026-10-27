@@ -35,7 +35,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Human software-engineering requests state their inputs in a different shape than the registry declares: \"fix calc.py\" states a FILE while the repair loop declares source_root (a DIRECTORY), \"rename old_price to price\" states names the binder has no grammar for, and templates demand configuration slots the adapters already default. The typed selector therefore shortlists the right capability and refuses it, so the machine cannot reach its own SWE mechanisms from an ordinary sentence.",
-  "canonical_base_commit": "9179a6cd01b6d5c517cc3c64eb3fe906d4e4bab0",
+  "canonical_base_commit": "c57b21730db5b87356d92ce78aa03ca109cb54a7",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -82,7 +82,7 @@
     "SWE_HIDDEN_WIRING_MEASUREMENT_20261027_V1.md"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "9179a6cd01b6d5c517cc3c64eb3fe906d4e4bab0",
+    "canonical_base_commit": "c57b21730db5b87356d92ce78aa03ca109cb54a7",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "ROPE_LIBCST_EXTERNAL_REFACTOR_ENGINES__HEAVY_CONFIG_NONDETERMINISTIC_FORMATTING_FOR_A_BYTE_EXACT_STD_AST_JOB",
@@ -278,10 +278,10 @@
         "STATEMENT_CHAIN_ALIGNMENT_LAW_WITH_BLOCK_DESCENT__SELECTED_PART"
       ],
       "selected_route": "REUSE_HIDDEN_TYPED_ADMISSION_WITH_DECLARED_INPUT_DERIVATION",
-      "selected_route_checked_at_utc": "2026-10-27T20:06:36Z",
+      "selected_route_checked_at_utc": "2026-10-27T20:18:05Z",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-10-27T20:07:37Z",
+        "checked_at_utc": "2026-10-27T20:18:05Z",
         "execution_dependencies": [
           {
             "dependency": "python3 >= 3.8 stdlib (ast, json, pathlib, re, sys)",
@@ -293,7 +293,7 @@
             ],
             "evidence_scope": "LOCAL",
             "kind": "LOCAL_RUNTIME",
-            "observed_at_utc": "2026-10-27T20:07:37Z",
+            "observed_at_utc": "2026-10-27T20:18:05Z",
             "required": true,
             "scope": "GLOBAL",
             "status": "READY",
@@ -310,7 +310,7 @@
             ],
             "evidence_scope": "LOCAL",
             "kind": "CODE_ARTIFACT",
-            "observed_at_utc": "2026-10-27T20:07:37Z",
+            "observed_at_utc": "2026-10-27T20:18:05Z",
             "required": true,
             "scope": "LOCAL",
             "status": "READY",
@@ -412,7 +412,7 @@
     "tournament": {
       "counterexample_receipts": [
         {
-          "git_blob_sha": "817af4dbcb3cd311bb1f02978a116aa845fea9d0",
+          "git_blob_sha": "9c1ec198d05eb3f1d70b6514c032b8d69f1e50a4",
           "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
         },
         {
