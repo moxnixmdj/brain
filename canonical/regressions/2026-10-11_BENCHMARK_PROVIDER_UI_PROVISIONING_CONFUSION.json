@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_BENCHMARK_PROVIDER_UI_PROVISIONING_CONFUSION_REGRESSION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE_REGRESSION_SPEC__ZERO_CREDIT",
+  "mistake_class": "CLIENT_OR_UI_AUTH_CAPABILITY_INFERRED_AS_SERVER_SIDE_ACCOUNT_PROVISIONING_AND_THEN_PROMOTED_TO_BENCHMARK_ACCESS_ROUTE",
+  "observed_instance": {
+    "provider": "Vals",
+    "benchmark": "MysteryMechanism",
+    "observed_client_surface": "Production Descope flow exposed email Continue SSO and password controls.",
+    "falsifier": "Unprovisioned account attempt returned User does not exist.",
+    "correction": "Client-side sign-up-capable UI is insufficient evidence that provider self-service provisioning is enabled."
+  },
+  "permanent_invariants": [
+    "CLIENT_UI_OR_SDK_SIGNUP_CAPABILITY_DOES_NOT_PROVE_SERVER_SIDE_ACCOUNT_PROVISIONING",
+    "SELF_SERVICE_PROVIDER_ACCESS_CLAIM_REQUIRES_CONTENT_ADDRESSED_SERVER_SIDE_PROVISIONING_EVIDENCE_OR_EXISTING_AUTHORIZED_CREDENTIAL_EVIDENCE",
+    "PROVIDER_ACCESS_IS_AN_ENABLING_ROUTE_NOT_A_CAPABILITY_OBJECTIVE",
+    "BENCHMARK_DERIVED_EXTERNAL_RESULT_ROUTE_REQUIRES_CURRENT_MINIMUM_INFORMATION_CUT_MEMBERSHIP_AND_ROUTE_NONDOMINANCE",
+    "PROVIDER_WAIT_MUST_NOT_BLOCK_THE_CRITICAL_PATH_WHILE_SOUND_INTERNAL_CERTIFICATE_SEARCH_HAS_NONZERO_INFORMATION_GAIN",
+    "EXACT_BENCHMARK_STATISTIC_AND_CAPABILITY_RELATION_MUST_NOT_BE_SILENTLY_SUBSTITUTED",
+    "NO_PRIVATE_TASK_IDENTITY_OR_ANSWER_RECONSTRUCTION"
+  ],
+  "enforcement": {
+    "law": "canonical/laws/BENCHMARK_OUTPUT_INFORMATION_EQUIVALENCE_LAW_V1.md",
+    "witness_synthesis": "canonical/governance/BENCHMARK_WITNESS_ELIMINATION_SYNTHESIS_20261006_V1.json",
+    "prewrite_guard": "execution_guard/v22_prewrite_admission.py",
+    "guarded_child": "execution_guard/github_actions_guarded_run_live.py",
+    "trusted_pr_guard": "canonical/runtime/enforce_goal_hierarchy.py",
+    "activation": "canonical/governance/V22_PREWRITE_ADMISSION_PARTIAL_ACTIVATION_20261006_V1.json"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
