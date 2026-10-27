@@ -25984,7 +25984,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6438,
+  "research_index_records": 6436,
   "routing_tokens": 1944,
   "skills": 18,
   "source_index_entry_points": 419,
@@ -25993,7 +25993,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d9d625c5fb129254f75a14e1e04561027dbbb488ebbf42c545e4ba7e9f4d21f9"
+  "value": "77a16c3e7df8b8a30d6bb7b16432204b51d8e1325aca590fbf7425cd697c7e35"
  },
  "engines": [
   {
@@ -176022,47 +176022,6 @@
     "v1": 1,
     "white": 1,
     "zero": 1
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
-   "date": "",
-   "id": "research:canonical/verification/__pycache__/test_finite_verifier_search.cpython-311-pytest-9.1.1.pyc",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/__pycache__/test_finite_verifier_search.cpython-311-pytest-9.1.1.pyc",
-   "schema": "",
-   "sha256": "f66f5c17a6b8676f193e188bb1c6e87c178ef59095dfad9d43fd8546b48053d2",
-   "status": "",
-   "terms": {
-    "311": 1,
-    "9.1.1": 1,
-    "finite": 1,
-    "pytest": 1,
-    "search.cpython": 1,
-    "test": 1,
-    "verifier": 1
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
-   "date": "",
-   "id": "research:canonical/verification/__pycache__/test_owned_causal_falsification_v1.cpython-311-pytest-9.1.1.pyc",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/__pycache__/test_owned_causal_falsification_v1.cpython-311-pytest-9.1.1.pyc",
-   "schema": "",
-   "sha256": "3850b831c0295e9f900c27fc156652cf202c93f192765b26f64ac3877a39b415",
-   "status": "",
-   "terms": {
-    "311": 1,
-    "9.1.1": 1,
-    "causal": 1,
-    "falsification": 1,
-    "owned": 1,
-    "pytest": 1,
-    "test": 1,
-    "v1.cpython": 1
    }
   },
   {
