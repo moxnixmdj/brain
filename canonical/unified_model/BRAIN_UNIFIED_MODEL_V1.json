@@ -24706,7 +24706,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6428,
+  "research_index_records": 6429,
   "routing_tokens": 1824,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24715,7 +24715,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "794f639e410622879381ade35e08ac1315d2305c1975723a076aed65fb626dc2"
+  "value": "7fd7a8f3efe7ece6b108222a41bd3c90f11a37ac9655b6550c303e58fafd3fa7"
  },
  "engines": [
   {
@@ -193864,6 +193864,31 @@
    }
   },
   {
+   "action_id": "SLOT_TAKES_THE_PATH_THE_SENTENCE_NAMED_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/SLOT_TAKES_THE_PATH_THE_SENTENCE_NAMED_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SLOT_TAKES_THE_PATH_THE_SENTENCE_NAMED_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "b949c7c7142bbb10f6814d9748051f26f94a0248a53934311ac9710559d2ca27",
+   "status": "",
+   "terms": {
+    "20261027": 1,
+    "a_composed_chain_the_planner_had_already_proven_valid_could_not_run_its_first_step_because_bind_gave_every_path_slot_paths_zero__measured_2026_10_27_the_sentence_verify_the_tar_gz_archive_x_against_the_manifest_m_extracts_the_prose_word_tar_gz_as_a_path_and_binds_manifest_path_to_it_so_the_adapter_raises_manifest_input_required_while_both_real_paths_sit_in_the_sentence": 1,
+    "a_slot_takes_the_path_the_sentence_introduced_for_it__the_noun_in_front_of_the_path_matched_against_the_slot_name_and_existence_an_input_is_readable_an_output_is_the_file_that_is_not_there_yet__each_rule_answers_only_when_unambiguous_every_other_sentence_keeps_the_order_rule_byte_for_byte__the_archive_chain_now_executes_create_then_verify_from_one_plain_sentence_where_the_second_step_used_to_raise": 1,
+    "bind_each_path_slot_from_the_word_the_sentence_put_in_front_of_the_path_and_from_existence_instead_of_from_whichever_name_came_first": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "named": 1,
+    "path": 1,
+    "sentence": 1,
+    "slot": 1,
+    "slot_takes_the_path_the_sentence_named_v1_20261027_v1": 1,
+    "takes": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "SOFTWARE_REPAIR_FAMILY_SHARED_SOURCE_ENV_V1_20261023_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -210469,9 +210494,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "62c4fa84b486d200eb346138973fb8093335373cd962f461dbf6b1749a1c13b0",
+   "sha256": "0e250da5858386cee1e4ba13fe550a4942c219ea7994cf33a56a9e2c91d68844",
    "summary": "Routing a sentence to a typed capability chain.",
-   "symbol_count": 35,
+   "symbol_count": 43,
    "symbols": [
     "_bare_alternatives",
     "_bare_stated_value",
@@ -210481,22 +210506,22 @@
     "_declare_a_consumed_output",
     "_declare_a_written_output",
     "_declare_an_exit_status_answer",
+    "_exists_in_repo",
     "_fully_bound_contract_tokens",
     "_head_flags",
+    "_is_repository_path",
     "_mask_a_quoted_value",
     "_no_flags",
+    "_noun_matched_path",
+    "_preceding_words",
     "_prose_argv",
     "_prose_count",
     "_prose_ordinal",
     "_quoted_value",
     "_quoted_values",
+    "_repo_root",
     "_sed_print_script",
-    "_sort_key_flags",
-    "_states_a_destination_for_the_result",
-    "_tail_flags",
-    "_word_flags",
-    "bind",
-    "candidate_tokens"
+    "_slot_words"
    ],
    "terms": {
     "candidate_tokens": 1,
