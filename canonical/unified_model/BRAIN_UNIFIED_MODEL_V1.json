@@ -22604,7 +22604,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py",
-    "source_sha256": "129c18bef6a3a3ea56fac2617079e8da747c232da58f1e56e765bc505d591fc0",
+    "source_sha256": "9dbd8855499fa94c03f680a26ceba3939773efaa4b2c79890ee20ede72269ced",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -28610,7 +28610,7 @@
   "engines": 26,
   "knowledge_documents": 169,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6483,
+  "research_index_records": 6484,
   "routing_tokens": 2090,
   "skills": 18,
   "source_index_entry_points": 422,
@@ -28619,7 +28619,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "70bbaa1fb2b74a8ae1c62d2c1b2c63d6ecb6d38340bc812f54768a729457c00c"
+  "value": "9be98cfb604b1bdf218eeaaf15565f020f7fb28df7c97f0977d51d0ed24a564b"
  },
  "engines": [
   {
@@ -52031,7 +52031,7 @@
   "included_source_count": 938,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "ad34456aa3971ffb1f9634066dfc7eb558d548981b7d4cc7b5d08991cd30d677"
+  "source_tree_digest": "0b87cb8abdcae9ee8e811a7d9db7a5aecab404e17de1d9a5b5c615a57099abb2"
  },
  "research_index": [
   {
@@ -193839,7 +193839,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/AN_EDIT_REQUEST_MUST_RUN_THE_EDIT_CAPABILITY_NOT_A_READ_ONLY_CENSUS_V1_20261027_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "bd8915460df789f0c39a4a84bca8fe3c0bb156c23d24cf30258822dce70cd00c",
+   "sha256": "4cc5d1eb2acefb9f06e646bf4d0300d69005cffd33a9c8d0bec25c570ea636d3",
    "status": "",
    "terms": {
     "22": 5,
@@ -200013,6 +200013,51 @@
     "phase1_capability_dag_live_wiring_20261015_v1": 1,
     "v1": 1,
     "wiring": 1
+   }
+  },
+  {
+   "action_id": "PLAIN_GOAL_COMPOSITE_ADMISSION_AND_IDENTITY_ROUTING_REPAIR_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27T17:21:08Z",
+   "id": "research:canonical/action_intents/PLAIN_GOAL_COMPOSITE_ADMISSION_AND_IDENTITY_ROUTING_REPAIR_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/PLAIN_GOAL_COMPOSITE_ADMISSION_AND_IDENTITY_ROUTING_REPAIR_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "5b8fd73f1139fc0668474747bd4e0f684c01fb98a75645dac4bb8c35d5127646",
+   "status": "",
+   "terms": {
+    "20261027": 1,
+    "212.786564": 1,
+    "331.186564": 1,
+    "418": 1,
+    "94afa871": 1,
+    "adding": 1,
+    "admission": 3,
+    "after": 1,
+    "against": 1,
+    "ahead": 1,
+    "ambiguity": 2,
+    "assertions": 1,
+    "ast": 1,
+    "audit": 2,
+    "behavior": 1,
+    "bypassed": 1,
+    "candidates": 1,
+    "capabilities": 1,
+    "capability-identity": 1,
+    "census": 1,
+    "composite": 1,
+    "composites": 1,
+    "content-addressed": 1,
+    "correct": 1,
+    "effect-only": 2,
+    "plain-goal": 2,
+    "plain_goal_composite_admission_and_identity_routing_repair_v1_20261027_v1": 2,
+    "route": 2,
+    "routing": 2,
+    "unified-model": 2,
+    "v1": 2,
+    "zero-input": 3
    }
   },
   {
@@ -212020,7 +212065,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "a620b2642fe226df94cf2bd3b8ec5e58d74660307603c585464226bcdfacb310",
+   "sha256": "c19835f378a394108248f1fc78c3507ee437c1ebcab280ae590a6729aa3acfa8",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 15,
    "symbols": [
@@ -229832,7 +229877,7 @@
    "imported_by_count": 7,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "2bedeb2e429ca05a2536e462db06ac3796cfdf08a3d7ea51a7fc0372aa48275e",
+   "sha256": "f22ff7d43b54bcbeae8c81a8f043c4e496d06c17c111d6935a2fcee107c08869",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
    "symbol_count": 128,
    "symbols": [

@@ -213,6 +213,13 @@ class UnifiedModel:
             for row in model.get("engines") or []
             if isinstance(row, Mapping) and row.get("id")
         }
+        # Triggers merge identity and effect vocabulary. Keep the identity half
+        # separately so route() can tell an operation named by the capability
+        # from a word that merely occurs in one of its provided effects.
+        self._capability_id_terms = {
+            cid: frozenset(tokenize(cid.replace("/", " ").replace(".", " ")))
+            for cid in self.capabilities
+        }
         self.skills = [dict(row) for row in (model.get("skills") or []) if isinstance(row, Mapping)]
         self.knowledge = [
             dict(row) for row in (model.get("knowledge") or []) if isinstance(row, Mapping)
@@ -466,7 +473,17 @@ class UnifiedModel:
                     # exists to prevent. `solve()`, which does run things, is
                     # where the host gets a vote.
                     unrunnable_matched.add(cid)
-                scores[cid] = scores.get(cid, 0.0) + weight
+                # A query token that is also in the capability id is direct
+                # operation evidence, not merely effect vocabulary. Count that
+                # same declared IDF posting a second time for the identity
+                # channel. Measured on "Audit the python source tree with an
+                # AST": the audit owner has four identity hits, while the
+                # legacy tree-sitter parser's rare `tree` hit comes only from
+                # its provides and otherwise steals the route.
+                identity_weight = (
+                    2.0 if token in self._capability_id_terms.get(cid, ()) else 1.0
+                )
+                scores[cid] = scores.get(cid, 0.0) + weight * identity_weight
         for cid in mentioned:
             scores[cid] = scores.get(cid, 0.0) + 24.0
             matched.add(cid.casefold())
