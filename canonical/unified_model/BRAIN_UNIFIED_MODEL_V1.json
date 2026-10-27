@@ -24439,9 +24439,7 @@
    "input_contract_source": "action_template",
    "input_names": [
     "output_path",
-    "source_root",
-    "test_argv",
-    "test_paths"
+    "source_root"
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
@@ -24456,7 +24454,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repository_acceptance_measurement_v1.py",
-    "source_sha256": "d7ea124d72b564cefd720e28df2c41cb68083e031b6999ec4206b8145b963796",
+    "source_sha256": "85cfe70b2a3f777ca9645be7850ac05b5a8ce1f4626ebff604ed5637450095f0",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -26421,7 +26419,11 @@
     "skipped",
     "tests",
     "unit",
-    "unittest"
+    "unittest",
+    "corpus",
+    "pass rate",
+    "pass_rate",
+    "rate report"
    ],
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYTHON-TEST-AUDIT-005__RECEIPT.json",
@@ -28690,8 +28692,8 @@
   "engines": 26,
   "knowledge_documents": 170,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6489,
-  "routing_tokens": 2094,
+  "research_index_records": 6490,
+  "routing_tokens": 2096,
   "skills": 18,
   "source_index_entry_points": 422,
   "source_index_modules": 1886
@@ -28699,7 +28701,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ceb7a9f8c12370ed01b781cd961c153bdcee81a22cc78dbd9cb52d7e8e300fe0"
+  "value": "227c1759039f68178301bba89148a67632f06a08968183d96fa60957a2065fd4"
  },
  "engines": [
   {
@@ -31895,9 +31897,10 @@
     "canonical/runtime/livebench_root1_reused_core_selector_v1.py.auto.v1": 447.0
    },
    "corpus": {
-    "canonical/runtime/openai_math_frontier_corpus_v1.py.auto.v1": 224.5,
-    "code.multilanguage.parse.tree_sitter.v1": 224.5,
-    "source.candidates.enumerate.stdlib": 224.5
+    "canonical/runtime/openai_math_frontier_corpus_v1.py.auto.v1": 180.0,
+    "code.multilanguage.parse.tree_sitter.v1": 180.0,
+    "python.tests.audit.unittest": 180.0,
+    "source.candidates.enumerate.stdlib": 180.0
    },
    "correctness": {
     "canonical/runtime/structured_method_universal_correctness_certificate_v1.py.auto.v1": 447.0
@@ -34917,7 +34920,11 @@
     "canonical/runtime/tool_discovery_observability_partition_v2.py.auto.v1": 298.666667
    },
    "pass": {
-    "python.software.repair.apply.verified.v1": 670.5
+    "python.software.repair.apply.verified.v1": 448.0,
+    "python.tests.audit.unittest": 448.0
+   },
+   "pass_rate": {
+    "python.tests.audit.unittest": 447.0
    },
    "passed": {
     "python.tests.audit.unittest": 447.0
@@ -36094,6 +36101,9 @@
     "chart.raster.scene_graph.v1": 113.25,
     "image.extract.ocr.tesseract": 113.25
    },
+   "rate": {
+    "python.tests.audit.unittest": 670.5
+   },
    "ratio": {
     "python.review.diff_mutation_gate.v1": 670.5
    },
@@ -36338,8 +36348,9 @@
     "python.repo.pr_realize.v1": 298.666667
    },
    "report": {
-    "document.convert.markdown_pdf.pandoc_weasyprint": 298.666667,
-    "docx.document.create_from_json_record": 298.666667
+    "document.convert.markdown_pdf.pandoc_weasyprint": 224.5,
+    "docx.document.create_from_json_record": 224.5,
+    "python.tests.audit.unittest": 336.75
    },
    "repository": {
     "python.patch.search.test_guided.ast.v1": 224.5,
@@ -52231,7 +52242,7 @@
   "included_source_count": 940,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "53ea2abbef85d2c808af4c3bfb1ddf678897213abc889dc0d52ac41e482c7569"
+  "source_tree_digest": "39450018fde231e71df73f5615a94370bc34148b556f936d770dd631fbe6ab11"
  },
  "research_index": [
   {
@@ -200972,6 +200983,51 @@
     "root2-closure-controller-v2-20261004": 1,
     "truth_repair_then_proof_compression_then_parallel_zero_reality_then_single_minimum_reality_transaction": 1,
     "v2": 1
+   }
+  },
+  {
+   "action_id": "RUN_THE_TESTS_MEANS_RUN_THE_TESTS_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/RUN_THE_TESTS_MEANS_RUN_THE_TESTS_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/RUN_THE_TESTS_MEANS_RUN_THE_TESTS_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "7c885b20cbfd4ecbbbfb01ac5e9469f89f21e6d6cf94548af2ca1fa6d181a12a",
+   "status": "",
+   "terms": {
+    "116": 1,
+    "174": 1,
+    "2019": 1,
+    "20261027": 1,
+    "22": 1,
+    "27": 1,
+    "2754cf0d": 1,
+    "286": 1,
+    "already": 3,
+    "files": 2,
+    "goal_input_binding_required": 2,
+    "main": 2,
+    "matches": 2,
+    "measured": 3,
+    "measurement": 3,
+    "nothing": 3,
+    "one": 2,
+    "only": 2,
+    "pass": 2,
+    "python": 2,
+    "red": 2,
+    "repository": 2,
+    "request": 2,
+    "run": 8,
+    "run_the_tests_means_run_the_tests_v1_20261027_v1": 2,
+    "suite": 5,
+    "test": 4,
+    "test_paths": 2,
+    "tests": 5,
+    "tree": 3,
+    "unittest": 3,
+    "v1": 2
    }
   },
   {
