@@ -7168,6 +7168,92 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DIFFTRIAGE-001__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-DIFFTRIAGE-001.json"
       }
+    },
+    "python.repo.diff_apply_full_testgate.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.repo.diff_apply_full_testgate.v1",
+          "anchor_path": "${input.anchor_path}",
+          "diff_path": "${input.diff_path}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "field": "gate",
+          "type": "field_equals",
+          "value": "PASS"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_repo_diff_apply_full_testgate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "repo",
+        "diff",
+        "apply",
+        "full",
+        "test",
+        "suite",
+        "gate",
+        "integration",
+        "pre-merge",
+        "pytest",
+        "anchor",
+        "regression",
+        "pull request",
+        "pr"
+      ],
+      "limitations": [
+        "needs git on PATH (git apply --check then --apply); absent -> GIT_UNAVAILABLE refusal, loudly, before anything runs.",
+        "test discovery is the pytest filename convention (test_*.py / *_test.py); suites named otherwise are not discovered and an empty suite is a refusal, not a pass.",
+        "scratch apply is single-commit text apply; binary diffs and mode-change hunks are out of v1 scope (git apply refuses them as DIFF_DOES_NOT_APPLY).",
+        "runtime verdicts inherit pytest's own environment sensitivity; the gate reports the pytest verdict honestly rather than interpreting it."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.repo.diff_apply_full_testgate"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "anchor_path",
+        "complete",
+        "diff_sha256",
+        "gate",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "tests_discovered",
+        "tests_failed",
+        "verified"
+      ],
+      "source": {
+        "module": "git",
+        "type": "system_tool",
+        "version_family": ">=2.0"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-APPLYGATE-001",
+        "observed_effect": {
+          "crown": "natural-language issue -> orchestrator -> static diff triage -> this anchored full-suite apply gate",
+          "golden": "gate PASS, 1 test file green, full 4-stage chain 474-538 ms",
+          "blind_spot_closed": "rename-only diff: static triage PASS, this gate FAIL with tests/test_core.py named -- the measured reason this capability exists",
+          "sabotage_both": "unused-import edit: F401 blocks statically AND this gate fails at runtime",
+          "deterministic": "applygate artifact byte-identical on rerun; anchor tree hash-identical before/after"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-APPLYGATE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-APPLYGATE-001.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
