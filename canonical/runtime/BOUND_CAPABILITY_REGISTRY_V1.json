@@ -4338,6 +4338,67 @@
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-NLISSUE-001.json"
       }
     },
+    "python.orchestration.symbol.supercomposer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.orchestration.symbol.supercomposer.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_orchestration_symbol_supercomposer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "orchestration",
+        "symbol",
+        "supercomposer",
+        "navigation"
+      ],
+      "limitations": [
+        "Contract-gated issue \u2192 symbol \u2192 crossfile"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "python.orchestration.symbol.super.verified",
+        "python.navigation.orchestration.verified"
+      ],
+      "requires": [
+        "python.orchestration.fused.verified",
+        "python.symbol.navigation.verified",
+        "python.symbol.resolve.standalone.verified",
+        "python.source.crossfile_edit.choreography",
+        "python.source.symbols.resolve"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_orchestration_symbol_supercomposer_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-PYTHON-ORCHESTRATION-SYMBOL-SUPERCOMPOSER-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_ORCHESTRATION_SYMBOL_SUPERCOMPOSER_V1_V1.json"
+      }
+    },
     "python.patch.search.test_guided.ast.v1": {
       "action_template": {
         "args": {
@@ -7854,6 +7915,67 @@
         "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_REVIEW_GATE_COMPOSER_V1.json"
       }
     },
+    "software.review.synthesis.supercomposer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.review.synthesis.supercomposer.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "software_review_synthesis_supercomposer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "review",
+        "synthesis",
+        "supercomposer",
+        "crossfile"
+      ],
+      "limitations": [
+        "5-kernel review synthesis, deterministic"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "software.review.synthesis.super.verified",
+        "software.review.synthesis.fullstack.verified"
+      ],
+      "requires": [
+        "software.review.all_gates.verified",
+        "software.review.composition.typed",
+        "python.review.composition.allowlist_verified",
+        "python.pr.composition.verified",
+        "software.patch.crossfile.atomic"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/software_review_synthesis_supercomposer_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-SOFTWARE-REVIEW-SYNTHESIS-SUPERCOMPOSER-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REVIEW_SYNTHESIS_SUPERCOMPOSER_V1_V1.json"
+      }
+    },
     "software.synthesis.grid_induction.v1": {
       "action_template": {
         "args": {
@@ -7922,6 +8044,67 @@
         },
         "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_SYNTHESIS_GRID_INDUCTION_V1_V1.json",
         "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_SYNTHESIS_GRID_INDUCTION_V1.json"
+      }
+    },
+    "software.test.contract.supercomposer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.test.contract.supercomposer.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "software_test_contract_supercomposer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "test",
+        "contract",
+        "supercomposer",
+        "verification"
+      ],
+      "limitations": [
+        "Dual-oracle \u2192 test intelligence \u2192 pipeline \u2192 provenance coupling"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "software.test.contract.verified",
+        "software.verification.super.verified"
+      ],
+      "requires": [
+        "evidence.concrete_contract_violation",
+        "evidence.property_test.verified",
+        "python.test.intelligence.verified",
+        "python.test.pipeline.verified",
+        "python.provenance.coupling.super.verified"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/software_test_contract_supercomposer_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-SOFTWARE-TEST-CONTRACT-SUPERCOMPOSER-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_TEST_CONTRACT_SUPERCOMPOSER_V1_V1.json"
       }
     },
     "source.authority.identity.ror": {
