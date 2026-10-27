@@ -1,0 +1,8 @@
+{
+  "mission_id": "ASTRA-VERIFY-SECGATE-001",
+  "arc_class": "semantic_engine",
+  "kind": "VERIFY_CAPABILITY_WORTHSHIP",
+  "target_capability": "python.review.diff_security_gate.v1",
+  "statement": "Lint, types, green tests, full coverage and perf can all PASS an added shell=True subprocess call. This gate runs bandit's JSON rows intersected with changed-line ranges; HIGH severity blocks, MEDIUM-at-HIGH-confidence blocks, the B104-B107 hardcoded-secret family blocks regardless of label, LOW is advisory. Golden leg (all six gates PASS measured). Blind leg (measured below): a covered, typed, lint-clean, fast shell=True wrapper with its own green test -> ONLY the security gate fires, naming B602 line-exact. Security artifact byte-identical on rerun.",
+  "zero_spend": true
+}
