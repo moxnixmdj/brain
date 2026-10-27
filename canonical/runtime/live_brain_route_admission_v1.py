@@ -186,7 +186,19 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     if composer_route.extract_argv(goal) is not None:
         _slots = {str(k or "").lower() for k in
                   ((entry.get("action_template") or {}).get("args") or {})}
-        if _slots and "argv" not in _slots:
+        # A COMMAND slot is a command slot whatever it is called.  Measured on
+        # 7913c4d: "Repair python bug in source <calc.py> with ast patch search
+        # guided by test <t.py> using test command \"python3 <t.py>\" and save
+        # output_path <o.json>" compiled to the right capability and was then
+        # refused NO_COMMAND_SLOT_FOR_THE_STATED_COMMAND, because the entry
+        # declares `test_argv` and this test only looked for the literal name
+        # `argv`.  bind() fills test_argv from that same sentence, exactly:
+        # ["python3", "<t.py>"].  Three repair families never reached a capability
+        # because of the spelling of a slot.
+        _command_slots = {s for s in _slots
+                          if s == "argv" or s.endswith("_argv")
+                          or s in ("command", "command_line", "cmd")}
+        if _slots and not _command_slots:
             return {"schema": SCHEMA, "admitted": False,
                     "rule": "NO_COMMAND_SLOT_FOR_THE_STATED_COMMAND",
                     "compiler_mode": mode, "selected_capability": selected}
@@ -1192,7 +1204,6 @@ def _promised_source_files(goal: str) -> list[str]:
         # the source it repaired was correctly restored.
         if text[m.end():m.end() + 24].lstrip().lower().startswith(_TOOL_NOUNS):
             continue
-            continue
         best = None
         best_at = None
         for raw, path in candidates:
@@ -1201,8 +1212,65 @@ def _promised_source_files(goal: str) -> list[str]:
                 if at >= 0 and (best_at is None or at < best_at):
                     best_at = at
                     best = raw
-        if best is not None and best not in out:
-            out.append(best)
+        if best is None or best in out:
+            continue
+        # A file inside a stated source ROOT is covered by the root rule below.  The
+        # first .py after the verb in "Repair the python source root <dir> ... with
+        # test command \"python -B <dir>/test_x.py\"" is the WITNESS test, and
+        # demanding that it change refuses a correct repair of the module beside it.
+        if any(str(best).startswith(root.rstrip("/") + "/")
+               for root in _promised_source_roots(text)):
+            continue
+        out.append(best)
+    return out
+
+
+def _stated_files(goal: str) -> list[str]:
+    """Every path the sentence names that is a FILE or is meant to become one.
+
+    `_future_artifacts` only returns paths that do not exist yet, so on a second run
+    in the same directory the stated report already exists and stopped counting as
+    evidence -- measured on 7913c4d: the coupled loops wrote their patch report to
+    the stated path, the door looked only at `_future_artifacts`, found nothing, and
+    refused with PROMISED_SOURCE_CHANGE_NOT_APPLIED.  What a sentence states is a
+    fact about the sentence, not about whether an old copy is lying around; that a
+    report must be FRESH is checked separately, against the bytes on disk.
+    """
+    out = []
+    for raw, path in goal_compiler._repo_paths(goal, ROOT):
+        raw = str(raw)
+        if front._CAPABILITY_ID_SHAPE.fullmatch(raw) or path.is_dir():
+            continue
+        if raw not in out:
+            out.append(raw)
+    return out
+
+
+def _promised_source_roots(goal: str) -> list[str]:
+    """Directories the sentence asks to REPAIR, as opposed to files.
+
+    "Repair the python source root <dir> with the coupled multi-edit repair loop"
+    names a tree.  Treating the first .py after the verb as the target made the
+    sentence's WITNESS TEST the thing that had to change -- measured: the coupled
+    families were refused with PROMISED_SOURCE_UNCHANGED:<test file> while the
+    source the loop had patched sat next to it undischarged.
+    """
+    text = str(goal or "")
+    paths = [(raw, path) for raw, path in goal_compiler._repo_paths(goal, ROOT)
+             if not front._CAPABILITY_ID_SHAPE.fullmatch(str(raw))]
+    out = []
+    for m in _REPAIR_VERB_RE.finditer(text):
+        if text[m.end():m.end() + 24].lstrip().lower().startswith(_TOOL_NOUNS):
+            continue
+        best_raw, best_path, best_pos = None, None, None
+        for raw, path in paths:
+            for spelling in (str(raw), str(path)):
+                at = text.find(spelling, m.end())
+                if at >= 0 and (best_pos is None or at < best_pos):
+                    best_raw, best_path, best_pos = raw, path, at
+        if best_raw is not None and best_path is not None and best_path.is_dir() \
+                and str(best_raw) not in out:
+            out.append(str(best_raw))
     return out
 
 
@@ -1213,7 +1281,37 @@ def _source_digest(raw: str) -> str:
         return ""
 
 
-def _statement_patch_authority(raw: str, artifacts: Mapping[str, Any] | None) -> bool:
+def _patch_records(report: Any, _depth: int = 0) -> list[Mapping[str, Any]]:
+    """Every patch-shaped record a report carries, wherever it puts it.
+
+    Measured on 7913c4d, the three repair families write the same evidence in two
+    different shapes: `python.patch.search.test_guided.ast.v1` puts `source_path`
+    and `unified_diff` at the TOP LEVEL of its report, while the coupled loops put
+    them inside a `patches` list.  Reading only `report["patches"]` therefore
+    refused a patch that was sitting in the file, so the family fell back to
+    PROMISED_SOURCE_CHANGE_NOT_APPLIED and the work was done but uncredited.
+
+    Bounded on purpose (depth 3, 64 records): a report is data, not a graph, and
+    this runs at the door.
+    """
+    out: list[Mapping[str, Any]] = []
+    if _depth > 3:
+        return out
+    if isinstance(report, Mapping):
+        if report.get("source_path") and report.get("unified_diff"):
+            out.append(report)
+        for value in report.values():
+            if isinstance(value, (list, Mapping)) and len(out) < 64:
+                out.extend(_patch_records(value, _depth + 1))
+    elif isinstance(report, list):
+        for item in report[:64]:
+            if isinstance(item, (list, Mapping)):
+                out.extend(_patch_records(item, _depth + 1))
+    return out[:64]
+
+
+def _statement_patch_authority(raw: str, artifacts: Mapping[str, Any] | None,
+                               before_files: Mapping[str, Any] | None = None) -> bool:
     """Does a stated report carry a patch for this source that really applies?
 
     Measured on 18ecf7db: "Repair the python source X ... so the unit tests in T
@@ -1234,34 +1332,45 @@ def _statement_patch_authority(raw: str, artifacts: Mapping[str, Any] | None) ->
     if not artifacts:
         return False
     target = (ROOT / raw).resolve()
-    try:
-        current = (ROOT / raw).read_text(encoding="utf-8")
-    except Exception:  # noqa: BLE001 - unreadable source is reported by the caller
-        return False
+    is_root = target.is_dir()
     for stated in artifacts:
         path = ROOT / str(stated)
         if not path.is_file():
             continue
+        if before_files is not None and str(stated) in before_files:
+            # The file was already there.  Evidence must be written by THIS run:
+            # otherwise a stale report from an earlier attempt credits a run that
+            # did nothing, which is the over-claim this gate exists to stop.
+            try:
+                stat = path.stat()
+                if before_files[str(stated)] == (stat.st_size, stat.st_mtime_ns):
+                    continue
+            except OSError:
+                continue
         try:
             report = json.loads(path.read_text(encoding="utf-8"))
         except Exception:  # noqa: BLE001 - a non-JSON artifact promises no patch
             continue
-        patches = report.get("patches") if isinstance(report, Mapping) else None
-        if not isinstance(patches, list):
-            continue
-        for patch in patches:
+        for patch in _patch_records(report):
             if not isinstance(patch, Mapping):
                 continue
             named = str(patch.get("source_path") or "")
             if not named:
                 continue
             try:
-                if (ROOT / named).resolve() != target:
+                resolved = (ROOT / named).resolve()
+                if resolved != target and not (is_root and target in resolved.parents):
                     continue
             except Exception:  # noqa: BLE001
                 continue
             diff = str(patch.get("unified_diff") or "")
             if not diff.strip():
+                continue
+            try:
+                # The bytes a patch applies to are the bytes it NAMES: for a stated
+                # source root that is the module inside it, never the directory.
+                current = resolved.read_text(encoding="utf-8")
+            except Exception:  # noqa: BLE001
                 continue
             try:
                 patched = _acceptance._apply_unified_diff(current, diff)
@@ -1272,8 +1381,23 @@ def _statement_patch_authority(raw: str, artifacts: Mapping[str, Any] | None) ->
     return False
 
 
+def _py_files_under(root: str, limit: int = 50) -> list[str]:
+    base = ROOT / root
+    out: list[str] = []
+    try:
+        for path in sorted(base.rglob("*.py")):
+            out.append(str(path.relative_to(ROOT)))
+            if len(out) >= limit:
+                break
+    except OSError:
+        return out
+    return out
+
+
 def promised_source_change_errors(goal: str, before: Mapping[str, str],
-                                  artifacts: list[str] | None = None) -> list[str]:
+                                  artifacts: list[str] | None = None, *,
+                                  roots_before: Mapping[str, Mapping[str, str]] | None = None,
+                                  before_files: Mapping[str, Any] | None = None) -> list[str]:
     """Every source file the goal asked to repair must actually be different now.
 
     The repair loops find a patch, verify it, replay the verification, then restore
@@ -1294,9 +1418,17 @@ def promised_source_change_errors(goal: str, before: Mapping[str, str],
         if not now:
             errors.append("PROMISED_SOURCE_UNREADABLE:" + raw)
         elif now == digest:
-            if _statement_patch_authority(raw, artifacts):
+            if _statement_patch_authority(raw, artifacts, before_files):
                 continue
             errors.append("PROMISED_SOURCE_UNCHANGED:" + raw)
+    # A stated source ROOT promises that the repair happened somewhere inside it.
+    # Requiring every file in the tree to change would refuse a correct repair of
+    # one module; requiring nothing would accept a run that touched no file at all.
+    for root, files_before in (roots_before or {}).items():
+        changed = any(_source_digest(rel) != digest for rel, digest in files_before.items())
+        if changed or _statement_patch_authority(root, artifacts, before_files):
+            continue
+        errors.append("PROMISED_SOURCE_UNCHANGED:" + root)
     return errors
 
 
@@ -1968,6 +2100,9 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
                      "ROUTE_ADMISSION_REJECTED:" + str(admission.get("rule")), started, **_extra)
     promised_sources = _promised_source_files(normalized)
     source_digests_before = {raw: _source_digest(raw) for raw in promised_sources}
+    promised_roots = _promised_source_roots(normalized)
+    roots_before = {root: {rel: _source_digest(rel) for rel in _py_files_under(root)}
+                    for root in promised_roots}
     try:
         result = _execute(task_id, goal, compiled, admissible, started)
     except SystemExit as exc:
@@ -2024,8 +2159,11 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         result["pass"] = False
         result["failure_class"] = cls
         result["promised_artifact_errors"] = missing
-    unchanged = promised_source_change_errors(normalized, source_digests_before,
-                                                  future_artifacts) \
+    stated_files = _stated_files(normalized)
+    patch_evidence = future_artifacts + [p for p in stated_files if p not in future_artifacts]
+    unchanged = promised_source_change_errors(
+        normalized, source_digests_before, patch_evidence,
+        roots_before=roots_before, before_files=world_before.get("files")) \
         if result.get("pass") is True else []
     if unchanged:
         result["runtime_status_before_source_change_check"] = result.get("status")

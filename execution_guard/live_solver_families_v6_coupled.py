@@ -61,11 +61,16 @@ class _CoupledBug:
         return _rel(self.src.parent)
 
     def coupled_test_phrase(self) -> str:
-        """The goal names ONE test -- the shape the front compiler binds.
+        """The coupled test: its assertion spans both defective functions.
 
-        That test is the coupled one: its assertion spans both defective
-        functions, so it passes only when both are fixed. The oracle still runs
-        every test on disk, so a patch that repairs one defect is rejected.
+        It is the test command's target, so the loop starts from a failure that
+        only a two-defect repair can clear.  It is NOT the whole acceptance
+        condition -- the oracle runs every test on disk, and a goal that named
+        only this one was graded against a stricter condition than it stated
+        (measured at seed 11: a patch that satisfied this single equation but
+        left test_<mod>_<f1>.py failing was rejected, though nothing in the
+        sentence asked for that file).  The sentence therefore names the whole
+        suite; the oracle and the promise are now the same condition.
         """
         for path in self.tests:
             if path.name.endswith("_coupled.py"):
@@ -120,12 +125,35 @@ def fresh_coupled_bug(rng: random.Random, work: Path, i: int, prefix: str = "cou
     tests[d / f"test_{mod}_coupled.py"] = "\n".join(
         head + [f"assert m.{f1}({a}, {b}) + m.{f2}({n}) == {a + b * k + sum(range(n))}"]) + "\n"
 
+    # ONE command that runs the whole suite.  The three test files cannot be put
+    # on one `python -B` command line -- python takes a single script -- and a
+    # goal that named the coupled test alone was graded against a stricter
+    # condition than it stated.  This runner is the sentence's command, so what
+    # the loop verifies and what the oracle checks are the same three tests.
+    runner = d / f"run_all_{mod}.py"
+    runner.write_text("\n".join([
+        "import os, subprocess, sys",
+        "_here = os.path.dirname(os.path.abspath(__file__))",
+        "_files = " + repr([t.name for t in tests]),
+        "_bad = 0",
+        "for _f in _files:",
+        "    _p = subprocess.run([sys.executable, '-B', _f], cwd=_here,",
+        "                         capture_output=True, text=True)",
+        "    if _p.returncode:",
+        "        _bad = 1",
+        "        sys.stderr.write(_p.stderr or _p.stdout)",
+        "sys.exit(_bad)",
+        "",
+    ]), encoding="utf-8")
+
     # They must be on disk before the goal is compiled: the front compiler binds
     # test_paths only to files that already exist.
     for path, text in tests.items():
         path.write_text(text, encoding="utf-8")
 
-    return _CoupledBug(src, tests, source, (f1, f2, f3))
+    bug = _CoupledBug(src, tests, source, (f1, f2, f3))
+    bug.suite_runner = runner
+    return bug
 
 
 def _coupled_oracle(bug: _CoupledBug, out: Path) -> Callable[[dict[str, Any]], tuple[bool, str]]:
@@ -178,8 +206,8 @@ def gen_python_repair_coupled_ast(rng: random.Random, work: Path, i: int) -> Cas
     goal = (
         f"Repair the python source root {bug.source_root} with the coupled "
         f'multi-edit repair loop with test command "python -B '
-        f'{bug.coupled_test_phrase()}" so that the unit tests in '
-        f"{bug.coupled_test_phrase()} pass, and save the repair report "
+        f'{_rel(bug.suite_runner)}" so that the unit tests in '
+        f"{bug.tests_phrase()} pass, and save the repair report "
         f"to {_rel(out)}."
     )
     return Case("PYTHON_REPAIR_COUPLED_AST", goal, _coupled_oracle(bug, out), True, [out])
@@ -191,8 +219,8 @@ def gen_python_repair_coupled_provenance(rng: random.Random, work: Path, i: int)
     goal = (
         f"Repair the python source root {bug.source_root} with the coupled "
         f'provenance-guided repair loop with test command "python -B '
-        f'{bug.coupled_test_phrase()}" so that the unit tests in '
-        f"{bug.coupled_test_phrase()} pass, and save the repair report "
+        f'{_rel(bug.suite_runner)}" so that the unit tests in '
+        f"{bug.tests_phrase()} pass, and save the repair report "
         f"to {_rel(out)}."
     )
     return Case("PYTHON_REPAIR_COUPLED_PROV", goal, _coupled_oracle(bug, out), True, [out])
