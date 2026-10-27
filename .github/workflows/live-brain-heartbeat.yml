@@ -10,11 +10,18 @@ name: live-brain-heartbeat
 # on the public runner.  It never pushes, never merges, never writes to main.
 # Receipts are artifacts; authority NONE; nothing here is a capability credit.
 #
-# MEASURED 2026-10-27, on the tree at 4d2c1a8 (37 families, one entry):
-#   fixed overhead per run ................ 56 s  (tool liveness + reachability)
-#   cheapest family, per instance ......... 0.63 s
-#   python repair families, per instance .. 1.34 s
+# MEASURED 2026-10-27 (37 families, one entry):
+#   tool liveness ......................... 0.1 s
+#   reachability census .................. 110 s   (once, at the end)
+#   a measured instance .................. ~1.5 s   (mean 0.63-1.34 s inside the entry)
 #   families x instances ................. 37 x 50 = 1,850 in-scope + 100 out-of-scope
+#   => the measurement is ~49 minutes of work for ~2 minutes of census.
+# The families are INDEPENDENT -- separate fixtures, separate artifact paths, separate
+# task ids -- so measuring them at the same time is free correctness-wise and is the
+# whole speedup: measured on 2 cores, 37 families at 3 instances went 37.7 s serial ->
+# 15.3 s at jobs=2 (2.47x) with ZERO rows differing, routes and pass counts included.
+# --jobs 4 on this 4-core runner therefore makes the suite ~4x shorter in wall clock
+# without measuring one instance less.
 # The run used to measure BOTH entries, so every one of those ~1,950 instances was
 # executed twice: ~47 minutes of work against a 30-minute job timeout.  The job was
 # therefore cancelled on 17 of the last 20 runs -- five daily schedule runs in a row --
@@ -94,7 +101,7 @@ jobs:
           mkdir -p heartbeat_out
           started=$(date +%s)
           python3 execution_guard/live_solver_end_to_end_measurement_v1.py \
-            --per-family 50 --oos 100 --entries new \
+            --per-family 50 --oos 100 --entries new --jobs 4 \
             --out heartbeat_out/LIVE_BRAIN_HEARTBEAT_RECEIPT.json \
             --summary-md heartbeat_out/SUMMARY.md \
             --require-all-alive \
