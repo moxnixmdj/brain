@@ -34,12 +34,12 @@
   "route_class": "INTEGRATE"
  },
  "benchmark_or_family_rank_authority": false,
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::route() ranked capabilities by scoring every token of the caller's sentence, including the tokens of the file path the caller typed, and counted a word twice when the sentence said it twice. The token breakdown of \"Report who calls the function top in the python source root /home/user/brain/...\" is decisive: brain.module.function.invoke 674.3 = function 269.3 + brain 202.5 twice; terminal.kstar.root.assess.stdlib 449.2 = root 44.2 + brain 202.5 twice; python.source.symbols.index.ast, which owns calls at 403.0, lost at 483.6. 405.0 of every winner's score was the directory the file happens to live in. The same mechanism let document.convert.markdown_pdf.pandoc_weasyprint win \"Report the call graph of the functions in the python file F writing the report to R\" on the single repeated word report, 538.6 against 505.9, with no operation word matched at all",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Two properties of the caller's sentence were choosing the capability instead of the question. route() scored over tokenize(goal), so every token of the file path the caller typed voted. Measured on \"Report who calls the function top in the python source root /home/user/brain/...\": brain.module.function.invoke scored 674.3 of which 405.0 was the single token brain from the caller's own path counted twice, terminal.kstar.root.assess.stdlib scored 449.2 of which 405.0 was the same two hits, and python.source.symbols.index.ast, which owns calls at 403.0, lost at 483.6. 405.0 of every winner's score was the directory the file happens to live in. Separately, saying a word twice counted as two votes: report appears twice in \"Report the call graph of the functions in the python file F writing the report to R\" at 269.3 a hit, 538.6 for document.convert.markdown_pdf.pandoc_weasyprint whose only match was that destination noun, against 505.9 for the capability that owns call and graph. Nine ordinary software-engineering sentences selected a capability that does not own the operation, and the answer to each was decided by how the caller spelled the path and how many times they repeated a word.",
  "canonical_base_commit": "6879d0f1b961277b201dc92a6fb7860730da5125",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
- "causal_blocker": "Two mechanical vetoes stood between the machine and every ordinary software-engineering sentence, and neither had anything to do with understanding the request. First, route() charged the tokens of a stated file path to the coverage budget: an absolute path contributes eleven tokens no capability can ever claim, so \"Count the functions defined in the python file <that path>\" measured coverage 0.240 against the 0.34 floor and was refused as GOAL_NOT_REPRESENTED_IN_MODEL__FAIL_CLOSED before a single capability was considered, while the same sentence written with bare filenames measured 0.556 and routed. The verdict was a lottery on how long the caller's paths were. Second, a capability whose declared substrate is absent was still selected: python.contract.check.crosshair.v1 runs sys.executable -m crosshair, crosshair is not installed and cannot be at zero spend, yet nothing declared that dependency because the registry records the PyPI project name crosshair-tool which is not the name Python imports. Its declared_dependencies_checked was empty, so it looked satisfied and was chosen for eight of thirteen sentences, then failed every one with BOUND_PYPI_SOURCE_INCOMPLETE.",
+ "causal_blocker": "Two properties of the caller's sentence were choosing the capability instead of the question. route() scored over tokenize(goal), so every token of the file path the caller typed voted. Measured on \"Report who calls the function top in the python source root /home/user/brain/...\": brain.module.function.invoke scored 674.3 of which 405.0 was the single token brain from the caller's own path counted twice, terminal.kstar.root.assess.stdlib scored 449.2 of which 405.0 was the same two hits, and python.source.symbols.index.ast, which owns calls at 403.0, lost at 483.6. 405.0 of every winner's score was the directory the file happens to live in. Separately, saying a word twice counted as two votes: report appears twice in \"Report the call graph of the functions in the python file F writing the report to R\" at 269.3 a hit, 538.6 for document.convert.markdown_pdf.pandoc_weasyprint whose only match was that destination noun, against 505.9 for the capability that owns call and graph. Nine ordinary software-engineering sentences selected a capability that does not own the operation, and the answer to each was decided by how the caller spelled the path and how many times they repeated a word.",
  "date": "2026-10-27",
  "expected_parent_change": "canonical/runtime/brain_unified_model_v1.py: ask_tokens() and path_literals() measure the coverage budget over the caller's ask with stated path literals blanked out, and the tokens of a capability id the goal states are treated as ask tokens rather than as a path; unrunnable_capabilities() resolves each capability's declared dependencies against this machine, route() reports them in unrunnable_on_this_host without hiding them from the ranking, and solve() refuses a capability whose declared substrate is absent with CAPABILITY_DECLARED_DEPENDENCIES_MISSING. canonical/runtime/compile_brain_unified_model_v1.py: _adapter_runpy_targets() declares the module an adapter runs with -m, _adapter_executed_programs() declares argv[0] of the subprocesses it starts, and _adapter_path_of() resolves the adapter file from source.adapter_path or the documented bound_capabilities convention. canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json recompiled in the same commit.",
  "expected_parent_frontier_change": "A sentence that names real files is judged on the words that ask the question, not on the length of the paths the caller typed; a capability that cannot resolve the substrate it declares is named at the front door instead of failing from inside its own adapter; and the ranking stays a fact about the model rather than about whichever machine answered.",
@@ -1711,7 +1711,7 @@
      "why_not_selected_or_selected": "SELECTED: separate the two acts. Refusing keeps the one-word rule. Taking over a route now requires the caller's WHOLE name, in order, in PROSE -- repository paths and identifier tokens are stripped first, a trailing version token is optional because prose drops it, and among several names stated the MOST SPECIFIC one wins. Measured in three steps over the same 13 path-style receipt-backed targets: 6 of 13 before, 10 of 13 once the whole name was required (the 3 remaining lost to a SIBLING, because 'bytes characteristic active query task generator v10' also states the whole of bytes_active_query_task_generator_v1 with one extra word in the middle), and 13 of 13 once specificity decides. The ordinary sentences that caused the regression now name ZERO receipt projections, and the 4 core failures are gone: test_live_brain_route_admission_v1 and test_capability_naming_rule_v1 are 42 passed. The end-to-end family moved with it: RECEIPT_PROSE_EXECUTION 12 instances went 7 of 12 (0.5833) to 12 of 12 (1.0), measured with the harness itself. Benchmark unchanged at 23/23 compiled and 22/23 selected; 213 unittest OK; pytest suites over the live path 117 passed with the same 6 pre-existing failures (2 capability DAG, 3 missing openpyxl/docx, 1 the deliberate no-write-authority boundary, which source_write_authority=False is hard-coded and enforced against in five separate guard modules). The wave 7 suite now asserts 13 of 13 and an empty residual, with the three-step history kept in the file; 3 of its 10 tests go red when the change is reverted."
     }
    ],
-   "checked_at_utc": "2026-10-27T09:49:26Z",
+   "checked_at_utc": "2026-10-27T13:26:30Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -1722,7 +1722,7 @@
    ],
    "discovery_required": true,
    "incumbent_route": "MASK_THE_OPERAND_BEFORE_READING_THE_PROSE_AND_LET_A_NEGATION_REACH_THE_FLAGS",
-   "max_age_hours": 24,
+   "max_age_hours": 2,
    "negative_search_summary": "Widening the make...upper window from 20 to 200 characters was rejected as the same rule with a bigger number: it would still be a distance, it would still be wrong for a long enough path, and it would widen every sentence the window was keeping out. Masking the operand is what the blank arm in the same block already does, so this reuses a mechanism rather than inventing one. Adding 'not' to `_NEGATED_LINE` itself was rejected: that pattern is scoped to contain/match/include and is used by the VALUE arms, so widening it would invert value questions nobody measured. Inverting on the bare word 'not' was rejected -- 'the lines that are not blank' and 'the lines that are not sorted' are different questions and only the first is about blankness, so the negation is anchored to blank|empty. Fixing all 13 window-shaped rules at once was rejected as unmeasured: only the one that produced a certified wrong answer was fixed, and the rest are recorded as an open item with their count rather than being changed on suspicion. All alternatives DISQUALIFIED on measured grounds.",
    "query_families": [
     {
@@ -1827,10 +1827,10 @@
     "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1"
    ],
    "selected_route": "A_FILE_PATH_AND_A_REPEATED_WORD_MUST_NOT_CHOOSE_THE_CAPABILITY_V1_20261027_V1",
-   "selected_route_checked_at_utc": "2026-10-27T09:49:26Z",
+   "selected_route_checked_at_utc": "2026-10-27T13:26:30Z",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-27T09:49:26Z",
+    "checked_at_utc": "2026-10-27T13:26:30Z",
     "execution_dependencies": [
      {
       "dependency": "python3 3.11.2",
@@ -1867,10 +1867,10 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "A_CAPABILITY_THAT_CANNOT_RUN_HERE_IS_NOT_THE_ANSWER_V1_20261027_V1",
+    "selected_route": "A_FILE_PATH_AND_A_REPEATED_WORD_MUST_NOT_CHOOSE_THE_CAPABILITY_V1_20261027_V1",
     "status": "READY"
    },
-   "selected_surviving_route": "A_CAPABILITY_THAT_CANNOT_RUN_HERE_IS_NOT_THE_ANSWER_V1_20261027_V1",
+   "selected_surviving_route": "A_FILE_PATH_AND_A_REPEATED_WORD_MUST_NOT_CHOOSE_THE_CAPABILITY_V1_20261027_V1",
    "source_classes_checked": [
     "BRAIN_INHERITED",
     "OFFICIAL_PRIMARY",
