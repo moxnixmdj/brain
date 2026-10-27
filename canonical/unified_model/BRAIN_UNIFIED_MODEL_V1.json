@@ -25191,7 +25191,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0ba0d083ffe4934e6315f6dda4bfdbf448315b4ba90e0fe3a764017bb3ab2016"
+  "value": "1d80dd7ecf1e6f1cb43c4345a785858da2970de6b0b8416216e5b674991f2acb"
  },
  "engines": [
   {
@@ -192698,7 +192698,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "78bbf4d7b1adc1d09034826c9850b15744f359c018a88e99489192b2242c211d",
+   "sha256": "6f2ce8b723a2a57468a7cbf460e52be6ac4c1cc09541d3c0c23f646aaf332c4c",
    "status": "",
    "terms": {
     "11": 2,
