@@ -6784,6 +6784,108 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-CROSSFILE-EDIT-001__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-CROSSFILE-EDIT-001.json"
       }
+    },
+    "python.software.issue_to_pr.orchestrate.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.software.issue_to_pr.orchestrate.v1",
+          "task_path": "${input.task_path}",
+          "source_root": "${input.source_root}",
+          "worktree_path": "${input.worktree_path}",
+          "output_path": "${input.output_path}",
+          "diff_path": "${input.diff_path}",
+          "pr_intent_path": "${input.pr_intent_path}",
+          "index_path": "${input.index_path}",
+          "python_executable": "${input.python_executable}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_issue_to_pr_orchestrate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "issue",
+        "pull request",
+        "pr",
+        "orchestrate",
+        "end-to-end",
+        "implement",
+        "task",
+        "edit",
+        "apply",
+        "diff",
+        "closed loop",
+        "autonomous"
+      ],
+      "limitations": [
+        "v1 applies rename_symbol operations only; move_symbol (and any other op) is refused at apply with UNSUPPORTED_OP_AT_APPLY after the plan stage (slice 4 owns general planning).",
+        "requires a JSON task file whose edits are choreograph ops; free-text issue parsing is a separate concern (refuses TASK_SCHEMA_MISSING fields, never guesses).",
+        "test execution runs pytest on the selected minimal subset when a pytest-bearing interpreter is given; pytest absence is reported as test_pytest 'UNAVAILABLE' and cannot verify green tests.",
+        "writes land only in the named worktree copy; producing the PR itself (git push/gh pr create) is intentionally outside v1."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.software.issue_to_pr.orchestration"
+      ],
+      "requires": [
+        "python.source.crossfile_edit.choreograph.v1",
+        "python.source.change_impact.testselect.v1",
+        "python.source.symbols.index.ast"
+      ],
+      "result_fields": [
+        "adapter",
+        "applied_op_count",
+        "applied_site_count",
+        "diff_sha256",
+        "planned_op_count",
+        "pr_intent_verified",
+        "refused_op_count",
+        "task_id",
+        "test_failed_count",
+        "test_passed_count",
+        "test_pytest",
+        "test_selected_count",
+        "verified"
+      ],
+      "source": {
+        "module": "pytest",
+        "type": "pypi",
+        "version_family": ">=8"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-ISSUE2PR-001",
+        "observed_effect": {
+          "issue_id": "GH-8842",
+          "edit": "rename_symbol helper -> compute on pkg/core.py; 3 files, 6 applied sites",
+          "planned_ops": 1,
+          "applied_ops": 1,
+          "applied_sites": 6,
+          "tests_selected": 1,
+          "tests_passed": 2,
+          "tests_failed": 0,
+          "loop_median_ms": 314.8,
+          "second_run_ms": 304.5,
+          "deterministic": "diff artifacts byte-identical across reruns",
+          "source_tree_untouched": true,
+          "verified": true
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-ISSUE2PR-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-ISSUE2PR-001.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
