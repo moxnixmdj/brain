@@ -7429,6 +7429,96 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-COVGATE-001__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-COVGATE-001.json"
       }
+    },
+    "python.review.diff_perf_gate.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.review.diff_perf_gate.v1",
+          "anchor_path": "${input.anchor_path}",
+          "diff_path": "${input.diff_path}",
+          "bench_path": "${input.bench_path}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "repeats": "${input.repeats}",
+          "tolerance": "${input.tolerance}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "field": "gate",
+          "type": "field_equals",
+          "value": "PASS"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_review_diff_perf_gate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "review",
+        "diff",
+        "performance",
+        "regression",
+        "benchmark",
+        "bench",
+        "gate",
+        "slowdown",
+        "profiling",
+        "pull request",
+        "pr",
+        "hot path",
+        "latency"
+      ],
+      "limitations": [
+        "physical timings: artifacts carry raw nanoseconds and are NOT byte-identical; the pinned invariant is verdict stability (same gate on every rerun of a fixed world) plus deterministic verdict recomputation from recorded runs.",
+        "best-of-N estimator with an in-child fixed calibrator cancels cross-process site bias; residual shared-box noise floor measured ~0.11 -- declared tolerance bands must sit above it (default 0.10 floor, suite pins use 0.30 explicitly and say why).",
+        "needs a benchmark file defining bench(); no benchmark discovery in v1 -- an absent benchmark is a loud refusal, not an inferred one.",
+        "UNCLEAR is an honest third verdict when distributions overlap inside the tolerance band; the gate never coin-flips."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.review.diff_perf_gate"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "anchor_median_ns",
+        "anchor_path",
+        "bench_path",
+        "complete",
+        "diff_sha256",
+        "gate",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "patched_median_ns",
+        "repeats",
+        "slowdown_ratio",
+        "verified"
+      ],
+      "source": {
+        "module": "stdlib",
+        "type": "python_stdlib",
+        "version_family": ">=3.8"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-PERFGATE-001",
+        "observed_effect": {
+          "crown": "natural-language issue -> orchestrator diff -> lint + type + suite + coverage + this perf gate (full review fan-in)",
+          "golden": "all five gates PASS on a cosmetic rename in ~2.0 s; normalized ratio 0.985 shows the calibrator is truthful on a no-op",
+          "isolation_leg": "planted cost executed by the suite (coverage-clean) -> lint/type/suite/coverage ALL PASS, this gate FAILs alone at 13.9x normalized slowdown",
+          "disjointness_law": "FAIL requires min(patched) > max(anchor); overlapping runs inside the band yield UNCLEAR, never a coin flip"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PERFGATE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-PERFGATE-001.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

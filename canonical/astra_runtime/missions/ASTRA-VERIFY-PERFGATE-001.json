@@ -1,0 +1,8 @@
+{
+  "mission_id": "ASTRA-VERIFY-PERFGATE-001",
+  "arc_class": "semantic_engine",
+  "kind": "VERIFY_CAPABILITY_WORTHSHIP",
+  "target_capability": "python.review.diff_perf_gate.v1",
+  "statement": "Lint, type, suite and coverage gates all PASS a diff that detonates the hot path. This gate benches a declared callable on both anchor and anchor+diff trees in isolated child processes with an in-child fixed calibrator cancelling cross-process site bias (pyperf best-of estimator). Golden leg (measured): full 7-stage crown PASS on a cosmetic rename at normalized ratio ~0.985. Blind leg (measured below): a planted deterministic hot-path loop passes lint/type/suite/coverage and FAILs only here. Verdict stability (same gate on reruns) is the honest physical analog of byte-identical artifacts.",
+  "zero_spend": true
+}
