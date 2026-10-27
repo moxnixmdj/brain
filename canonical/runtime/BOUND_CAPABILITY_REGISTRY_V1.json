@@ -6358,6 +6358,85 @@
           "format": "json-text"
         }
       }
+    },
+    "python.source.symbols.index.ast": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.symbols.index.ast",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_source_symbol_index",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "source",
+        "symbols",
+        "definitions",
+        "references",
+        "callers",
+        "call",
+        "graph",
+        "navigation",
+        "index",
+        "ast",
+        "who",
+        "calls"
+      ],
+      "limitations": [
+        "Indexes repository-local Python files using the standard-library AST parser.",
+        "Intra-module reference resolution (local/module/builtin/unknown); cross-module resolution is by import table, not full type inference."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.source.symbol_index"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "call_edge_count",
+        "caller_index_size",
+        "file_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "reference_count",
+        "symbol_count",
+        "unparseable_count",
+        "unparseable_paths"
+      ],
+      "source": {
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-PYTHON-SYMBOL-INDEX-001",
+        "observed_effect": {
+          "files": 2196,
+          "symbols": 86796,
+          "references": 579194,
+          "call_edges": 221482,
+          "verified": true
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYTHON-SYMBOL-INDEX-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-PYTHON-SYMBOL-INDEX-001.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
