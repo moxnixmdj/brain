@@ -1,0 +1,21 @@
+{
+  "receipt_for": "ASTRA-VERIFY-ISSUE2PR-002",
+  "capability_id": "python.software.issue_to_pr.orchestrate.v1",
+  "adapter_module": "python_issue_to_pr_orchestrate",
+  "observed": {
+    "issue_id": "GH-8843",
+    "verified": true,
+    "planned_ops": 1,
+    "applied_ops": 1,
+    "applied_sites": 3,
+    "test_selected_count": 1,
+    "test_passed": 2,
+    "test_failed": 0,
+    "loop_median_ms": 323.3,
+    "second_run_ms": 324.5,
+    "diff_sha256": "cb0aff7034047caa3922d402154d9439f1b5a55860a855e8a6d93126a37ec0ee",
+    "dependency_closure_injected": true,
+    "import_rewrite_split": true,
+    "source_tree_untouched": true
+  }
+}

@@ -22814,17 +22814,21 @@
     "diff",
     "closed loop",
     "autonomous",
+    "rename",
+    "move",
+    "refactor",
+    "dependency closure",
     "software",
     "issue_to_pr",
     "v1",
     "orchestration"
    ],
    "verification": {
-    "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-ISSUE2PR-001__RECEIPT.json",
+    "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-ISSUE2PR-002__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "10ad0da11b56456b23a34ad3551ed811c57d629104998c6b83c8780569848dc7",
+    "evidence_sha256": "0086ee333af537249f4c62faf7f393f899dd30813322de4202d1bb27d84b33e1",
     "independent_verification_evident": true,
-    "mission_id": "ASTRA-VERIFY-ISSUE2PR-001",
+    "mission_id": "ASTRA-VERIFY-ISSUE2PR-002",
     "module_sha256": null,
     "producer_independent": null
    }
@@ -25230,7 +25234,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6432,
+  "research_index_records": 6433,
   "routing_tokens": 1871,
   "skills": 18,
   "source_index_entry_points": 410,
@@ -25239,7 +25243,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "9c85aabd893ed5789f3178ee9041e49ba6c31e8b6c9f4053cb605ff7236357f0"
+  "value": "bc0c83d830760970ba7c2be6320936868214bb3b1cde25c2674a92013bd69e0b"
  },
  "engines": [
   {
@@ -28035,9 +28039,10 @@
     "python.software.issue_to_pr.orchestrate.v1": 403.0
    },
    "closure": {
-    "canonical/runtime/five_public_bar_observable_target_scope_closure_verifier_v1.py.auto.v1": 202.0,
-    "engine:TERMINAL_CLOSURE": 202.0,
-    "meta:ONE_SHOT_REALITY_CLOSURE": 202.0
+    "canonical/runtime/five_public_bar_observable_target_scope_closure_verifier_v1.py.auto.v1": 162.0,
+    "engine:TERMINAL_CLOSURE": 162.0,
+    "meta:ONE_SHOT_REALITY_CLOSURE": 162.0,
+    "python.software.issue_to_pr.orchestrate.v1": 243.0
    },
    "cloud": {
     "canonical/runtime/tb4_omc_cloud_candidate_v1.py.auto.v1": 402.0
@@ -28675,7 +28680,8 @@
     "shell.command.run": 402.0
    },
    "dependency": {
-    "canonical/runtime/p3_exact_dependency_relevance_cell_v1.py.auto.v1": 402.0
+    "canonical/runtime/p3_exact_dependency_relevance_cell_v1.py.auto.v1": 268.666667,
+    "python.software.issue_to_pr.orchestrate.v1": 403.0
    },
    "depth": {
     "canonical/runtime/terminal_causal_depth_controller_v1.py.auto.v1": 268.666667,
@@ -30358,8 +30364,9 @@
     "evidence.claim_spec.bind.explicit_comparison.stdlib": 603.0
    },
    "move": {
-    "python.source.crossfile_edit.choreograph.v1": 268.666667,
-    "shell.command.run": 268.666667
+    "python.software.issue_to_pr.orchestrate.v1": 202.0,
+    "python.source.crossfile_edit.choreograph.v1": 202.0,
+    "shell.command.run": 202.0
    },
    "msgpack": {
     "auto.npm.msgpack-msgpack": 268.666667,
@@ -32048,7 +32055,8 @@
     "canonical/runtime/tool_discovery_acceptance_reduction_v1.py.auto.v1": 74.727273
    },
    "refactor": {
-    "python.source.crossfile_edit.choreograph.v1": 402.0
+    "python.software.issue_to_pr.orchestrate.v1": 268.666667,
+    "python.source.crossfile_edit.choreograph.v1": 268.666667
    },
    "reference": {
     "canonical/runtime/livebench_if_reference_free_compound_witness_v1.py.auto.v1": 202.0,
@@ -32097,8 +32105,9 @@
     "shell.command.run": 402.0
    },
    "rename": {
-    "python.source.crossfile_edit.choreograph.v1": 268.666667,
-    "shell.command.run": 268.666667
+    "python.software.issue_to_pr.orchestrate.v1": 202.0,
+    "python.source.crossfile_edit.choreograph.v1": 202.0,
+    "shell.command.run": 202.0
    },
    "render": {
     "professional.artifact.visual_observer.v1": 402.0
@@ -47472,7 +47481,7 @@
   "included_source_count": 872,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "4c8c9939342efee4c687fea7210889629834f0b8981d939463e4da788286be92"
+  "source_tree_digest": "7d90ab18d7b4023f65f4d104ad3da03aa08dd2ea5735a6fb9af46872f380644a"
  },
  "research_index": [
   {
@@ -188966,7 +188975,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_CAPABILITY_THAT_CANNOT_RUN_HERE_IS_NOT_THE_ANSWER_V1_20261027_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "19643f2f956cdd580b1942a719e9e022852de93f33226ab543257f62aa6150ba",
+   "sha256": "27a440643e2081261ef020218ef543d0a7e6da7562aea28e5b5596ce60b5b9c2",
    "status": "",
    "terms": {
     "0.240": 1,
@@ -192753,7 +192762,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "b8cb065003f72680546b5435b375967333b478734d5636ce1a3cacede28be200",
+   "sha256": "ea2f2199192decab2cc9299f6406a96e3be2045666a200d7c1926cd3a9251058",
    "status": "",
    "terms": {
     "11": 2,
@@ -193386,6 +193395,30 @@
     "looked": 1,
     "sentence": 2,
     "source": 2,
+    "v1": 2
+   }
+  },
+  {
+   "action_id": "HEARTBEAT_REPORTS_WHAT_IT_REACHED_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/INTERRUPTED_MEASUREMENT_REPORTS_WHAT_IT_REACHED_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/INTERRUPTED_MEASUREMENT_REPORTS_WHAT_IT_REACHED_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "41c867e52d719917c4cb1121c75bf374c5d40339409b0de58f9e75ecef55b019",
+   "status": "",
+   "terms": {
+    "20261027": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "heartbeat_reports_what_it_reached_v1_20261027_v1": 1,
+    "interrupted": 1,
+    "measurement": 1,
+    "reached": 1,
+    "reports": 1,
+    "stop_measuring_an_entry_the_verdict_never_reads_and_persist_the_receipt_so_a_timeout_reports_what_it_reached": 1,
+    "the_heartbeat_produced_nothing_on_seventeen_of_twenty_runs_and_still_hit_its_timeout_after_the_duplicated_entry_was_removed__measured_2026_10_27_run_40476270088_one_entry_thirty_seven_families_at_fifty_instances_was_cancelled_at_40m00s_and_returned_no_receipt_because_the_receipt_is_assembled_once_at_the_end": 1,
+    "the_run_writes_its_receipt_after_every_family__an_interrupted_run_therefore_reports_every_family_it_finished_and_names_every_family_it_never_reached__the_receipt_carries_run_complete_and_pending_families__an_incomplete_run_is_never_alive__and_the_workflow_renders_the_summary_from_the_partial_receipt": 1,
     "v1": 2
    }
   },
@@ -203328,10 +203361,11 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_issue_to_pr_orchestrate.py",
-   "sha256": "81e1e87138242c8393ac1825120d88400e5ffe31d607579158e0c5d358016240",
+   "sha256": "fe99c961647b46973c0118803d62f7ad5f58574562fa7ca886966c352d1ed3cc",
    "summary": "python.software.issue_to_pr.orchestrate.v1 — the issue→PR closed loop.",
-   "symbol_count": 10,
+   "symbol_count": 11,
    "symbols": [
+    "_apply_move",
     "_apply_rename",
     "_copy_tree",
     "_fail",
@@ -203344,6 +203378,7 @@
     "run"
    ],
    "terms": {
+    "apply_move": 1,
     "apply_rename": 1,
     "closed": 1,
     "copy_tree": 1,

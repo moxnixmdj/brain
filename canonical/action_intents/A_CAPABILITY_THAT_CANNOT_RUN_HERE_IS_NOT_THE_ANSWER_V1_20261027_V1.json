@@ -36,7 +36,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Two mechanical vetoes stood between the machine and every ordinary software-engineering sentence, and neither had anything to do with understanding the request. First, route() charged the tokens of a stated file path to the coverage budget: an absolute path contributes eleven tokens no capability can ever claim, so \"Count the functions defined in the python file <that path>\" measured coverage 0.240 against the 0.34 floor and was refused as GOAL_NOT_REPRESENTED_IN_MODEL__FAIL_CLOSED before a single capability was considered, while the same sentence written with bare filenames measured 0.556 and routed. The verdict was a lottery on how long the caller's paths were. Second, a capability whose declared substrate is absent was still selected: python.contract.check.crosshair.v1 runs sys.executable -m crosshair, crosshair is not installed and cannot be at zero spend, yet nothing declared that dependency because the registry records the PyPI project name crosshair-tool which is not the name Python imports. Its declared_dependencies_checked was empty, so it looked satisfied and was chosen for eight of thirteen sentences, then failed every one with BOUND_PYPI_SOURCE_INCOMPLETE.",
- "canonical_base_commit": "f2b91ca1fdbc6437408daa19055e90131fe5b763",
+ "canonical_base_commit": "0c368321a5c8408c6b4452d8fc461db2ab43ec65",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -50,7 +50,7 @@
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
  "load_bearing_primary": {
-  "canonical_base_commit": "f2b91ca1fdbc6437408daa19055e90131fe5b763",
+  "canonical_base_commit": "0c368321a5c8408c6b4452d8fc461db2ab43ec65",
   "constructive_gap_for_open_obligation_ids": [
    "AUTOMATIONBENCH_GE_40",
    "CHARTOGRAPHY_TOOLS_GE_89",
@@ -80,12 +80,12 @@
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "prior_work_reused": [
   {
-   "commit": "f2b91ca1fdbc6437408daa19055e90131fe5b763",
+   "commit": "0c368321a5c8408c6b4452d8fc461db2ab43ec65",
    "what": "PR #6209 made a sentence asking to run tests reach the capability that runs them. This PR is the same measurement one gate earlier: the sentence never reached any capability at all, because the coverage budget was spent on the caller's own path tokens. _missing_declared_dependencies, which already resolved declared dependencies against the answering machine and failed closed, is reused entire and wired from status() into route(); _platform_admissible_registry in goal_compiler, the same idea for platforms, is the precedent for filtering the registry by what this runtime can do. The compiler's own rule that presence is a property of the host and never of the tree is preserved: both new derivations read source files only, and the artifact stays byte-identical across recompiles."
   }
  ],
  "recursive_obs": {
-  "canonical_base_commit": "f2b91ca1fdbc6437408daa19055e90131fe5b763",
+  "canonical_base_commit": "0c368321a5c8408c6b4452d8fc461db2ab43ec65",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "CHARGING_THE_TOKENS_OF_A_STATED_PATH_TO_THE_COVERAGE_BUDGET",

@@ -1,0 +1,12 @@
+{
+  "mission_id": "ASTRA-VERIFY-ISSUE2PR-002",
+  "status": "COMPLETE",
+  "run1_ms": 323.3,
+  "run2_ms": 324.5,
+  "determinism": "diff_byte_identical",
+  "tests_selected": 1,
+  "tests_passed": 2,
+  "tests_failed": 0,
+  "pytest": "9.1.1",
+  "dependency_closure": "from pkg.core import normalize injected into pkg/ops.py"
+}

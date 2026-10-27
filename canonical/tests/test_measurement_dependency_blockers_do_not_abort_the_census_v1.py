@@ -133,7 +133,13 @@ class TestBlockersStillFailInTheVerdict(unittest.TestCase):
 
     @staticmethod
     def _receipt(blocked, passed):
+        # A complete run.  `alive_errors` now requires this explicitly: a receipt
+        # that does not say its run finished fails closed (MEASUREMENT_INCOMPLETE),
+        # because an interrupted run measures part of the suite and an unstated
+        # provenance is treated as a gap.  This fixture asserts the blocker
+        # classification, not the completeness contract, so it states the fact.
         return {
+            "run_complete": True,
             "measurements": {
                 "new": {
                     "families": {

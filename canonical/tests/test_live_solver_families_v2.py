@@ -225,7 +225,11 @@ def test_environment_blocker_detection():
 
 
 def _receipt(families):
-    return {"measurements": {"new": {"families": families, "out_of_scope_fail_closed_rate": 1.0}},
+    # `run_complete` is part of the receipt contract now: a run that stopped early
+    # is reported MEASUREMENT_INCOMPLETE and never ALIVE.  These tests are about
+    # blocker classification and annotations, so the fixture states a finished run.
+    return {"run_complete": True,
+            "measurements": {"new": {"families": families, "out_of_scope_fail_closed_rate": 1.0}},
             "reachability_from_one_entry": {"summary": {"NOT_REACHABLE": 0, "ROUTED_ELSEWHERE": 0}}}
 
 

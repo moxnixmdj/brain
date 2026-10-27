@@ -516,7 +516,52 @@ def _entry(name: str) -> Callable[[dict[str, Any]], dict[str, Any]]:
     return solve
 
 
-def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], keep: bool, only_families: set[str] | None = None) -> dict[str, Any]:
+class _RunPlan:
+    """What this run promised to measure, so a partial receipt can name the gap."""
+
+    def __init__(self, entries: list[str], families: list[str]) -> None:
+        self.entries = list(entries)
+        self.families = list(families)
+
+    def pending(self, measured: Mapping[str, Mapping[str, Any]]) -> list[str]:
+        done = set()
+        for payload in measured.values():
+            done |= set((payload.get("families") or {}).keys())
+        return [f for f in self.families if f not in done]
+
+
+def _write_progress(path: str | Path | None, receipt: Mapping[str, Any]) -> None:
+    """Persist the receipt after every family, atomically.
+
+    A forty-minute measurement used to be all-or-nothing: the receipt was written
+    once, at the end, so a job that hit its timeout produced NOTHING -- no receipt,
+    no summary, no per-family numbers, and therefore no basis for making the next
+    run cheaper.  Measured 2026-10-27: the heartbeat was cancelled on 17 of 20 runs
+    and every one of them lost its observations too, so the cost of the run was
+    paid 17 times and bought 17 blanks.
+
+    Writing after each family costs one small JSON file per family and converts any
+    timeout into "here is everything that finished, and here is exactly which
+    families never ran".  The receipt says ``run_complete: false`` and the verdict
+    function refuses to call an incomplete run ALIVE, so this can add information
+    but can never manufacture a pass.
+    """
+    if path is None:
+        return
+    target = Path(path)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    tmp = target.with_suffix(target.suffix + ".partial")
+    tmp.write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    tmp.replace(target)
+
+
+def _family_plan(only_families: set[str] | None) -> list[str]:
+    return [f for f in all_generators() if not only_families or f in only_families]
+
+
+def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], keep: bool,
+        only_families: set[str] | None = None,
+        progress_path: str | Path | None = None) -> dict[str, Any]:
     replay = seed is not None
     if seed is None:
         seed = int.from_bytes(os.urandom(8), "big")
@@ -528,6 +573,7 @@ def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], k
     kstar_existed = kstar_artifact.exists()
     run_tag = "E2E_" + hashlib.sha256(f"{seed}:{os.urandom(8).hex()}".encode()).hexdigest()[:10]
     results: dict[str, Any] = {}
+    plan = _RunPlan(entries, _family_plan(only_families))
     for entry_name in entries:
         fn = _entry(entry_name)
         rng = random.Random(seed)
@@ -581,6 +627,10 @@ def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], k
             families[family] = {"instances": n, "oracle_pass": ok, "environment_blocked_here": env_blocked, "pass_rate": round(ok / n, 4) if n else None,
                                 "mean_ms": round(elapsed / n / 1e6, 2) if n else None, "routes_taken": caps,
                                 "expected": "all PASS with exact artifact" if family != "OUT_OF_SCOPE_MUST_FAIL_CLOSED" else "all FAIL closed, no artifact"}
+            results[entry_name] = _entry_payload(entry_name, families, failures)
+            _write_progress(progress_path, _receipt(
+                results, plan, seed=seed, replay=replay, run_tag=run_tag, removed=0,
+                liveness=None, reach=None, complete=False))
         in_scope = [f for f in families if f != "OUT_OF_SCOPE_MUST_FAIL_CLOSED"]
         results[entry_name] = {
             "entry": "canonical.runtime.live_integrated_brain_v1.run_raw_goal" if entry_name == "old" else "canonical.runtime.live_brain_route_admission_v1.solve",
@@ -607,26 +657,65 @@ def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], k
     reach = reachability(reach_work)
     if reach_work.exists():
         shutil.rmtree(reach_work)
+    receipt = _receipt(results, plan, seed=seed, replay=replay, run_tag=run_tag,
+                       removed=removed, liveness=liveness, reach=reach, complete=True)
+    _write_progress(progress_path, receipt)
+    return receipt
+
+
+def _entry_payload(entry_name: str, families: Mapping[str, Mapping[str, Any]],
+                   failures: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    """One entry's numbers, derived from the families measured so far."""
+    in_scope = [f for f in families if f != "OUT_OF_SCOPE_MUST_FAIL_CLOSED"]
+    total = sum(families[f]["instances"] for f in in_scope)
+    return {
+        "entry": ("canonical.runtime.live_integrated_brain_v1.run_raw_goal" if entry_name == "old"
+                  else "canonical.runtime.live_brain_route_admission_v1.solve"),
+        "families": dict(families),
+        "in_scope_families_measured": len(in_scope),
+        "in_scope_families_all_pass": sum(
+            1 for f in in_scope if families[f]["oracle_pass"] == families[f]["instances"]),
+        "in_scope_instance_pass_rate": round(
+            sum(families[f]["oracle_pass"] for f in in_scope) / max(1, total), 4),
+        "out_of_scope_fail_closed_rate": (families["OUT_OF_SCOPE_MUST_FAIL_CLOSED"]["pass_rate"]
+                                          if "OUT_OF_SCOPE_MUST_FAIL_CLOSED" in families else None),
+        "failures_sample": list(failures),
+    }
+
+
+def _receipt(results: Mapping[str, Any], plan: "_RunPlan", *, seed: int, replay: bool,
+             run_tag: str, removed: int, liveness: Any, reach: Any,
+             complete: bool) -> dict[str, Any]:
+    """The receipt, whether or not the run finished.
+
+    `run_complete` is the field the verdict reads: a partial receipt still carries
+    every family that finished and names every family that did not, but it can
+    never be ALIVE.
+    """
     return {
         "schema": SCHEMA,
         "authority": "NONE",
         "credit": 0,
         "incremental_spend_usd": 0,
         "model_dependency_count": 0,
+        "run_complete": complete,
+        "pending_families": [] if complete else plan.pending(results),
         "replay": replay,
         "seed": seed,
         "run_tag": run_tag,
         "controller_checkpoints_removed": removed,
         "python": sys.version.split()[0],
         "machine": {"platform": sys.platform, "network_egress": "allowlisted hosts only"},
-        "tool_liveness": liveness,
-        "reachability_from_one_entry": reach,
+        "tool_liveness": liveness if liveness is not None else {"measured": False},
+        "reachability_from_one_entry": reach if reach is not None else {"measured": False},
         "families_not_measured_here": NOT_MEASURED_HERE,
-        "measurements": results,
+        "measurements": dict(results),
         "how_to_read": [
             "in_scope_instance_pass_rate is over FRESH goals the compiler has never seen, judged on the real artifact by stdlib oracles.",
             "out_of_scope_fail_closed_rate must be 1.0: every goal no tool can serve must come back pass=False with nothing written.",
             "Families in families_not_measured_here are not failures and not passes; they are unmeasured on this machine.",
+            "run_complete=false means the run was interrupted (usually a job timeout): the numbers shown are real for the",
+            "families listed and pending_families names the ones that never ran.  An incomplete run is never ALIVE.",
             "Nothing here is a capability credit. Authority NONE.",
         ],
     }
@@ -646,16 +735,31 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--environment-blockers-are-failures", action="store_true",
                     help="count instances blocked by missing apt metadata / refused pip installs as failures (the public runner installs everything)")
     ap.add_argument("--families", default="", help="comma-separated family names to measure (default: all); a debugging aid, never used by the heartbeat verdict")
+    ap.add_argument("--summarize", metavar="RECEIPT_JSON",
+                    help="print the markdown summary for an existing receipt and exit; no measurement is run")
+    ap.add_argument("--environment-blockers-are-failures-for-summary", action="store_true",
+                    help=argparse.SUPPRESS)
     ap.add_argument("--annotate", metavar="RECEIPT_JSON",
                     help="print GitHub workflow-command annotations (::error / ::warning / ::notice) for an existing receipt and exit; no measurement is run")
     ns = ap.parse_args(argv)
+    if ns.summarize:
+        # A run that hit its timeout never reached the code that writes SUMMARY.md,
+        # so the job summary said only "heartbeat produced no summary" -- the one
+        # run that most needed explaining explained nothing.  Rendering the summary
+        # FROM THE PARTIAL RECEIPT means an interrupted run still reports every
+        # family it finished and every family it never reached.
+        existing = json.loads(Path(ns.summarize).read_text(encoding="utf-8"))
+        sys.stdout.write(summary_markdown(
+            existing, environment_blockers_are_failures=ns.environment_blockers_are_failures))
+        return 0
     if ns.annotate:
         receipt = json.loads(Path(ns.annotate).read_text(encoding="utf-8"))
         for line in annotation_lines(receipt, environment_blockers_are_failures=ns.environment_blockers_are_failures):
             print(line)
         return 0
     receipt = run(ns.seed, ns.per_family, ns.oos, [x.strip() for x in ns.entries.split(",") if x.strip()], ns.keep,
-                  only_families={x.strip() for x in ns.families.split(",") if x.strip()} or None)
+                  only_families={x.strip() for x in ns.families.split(",") if x.strip()} or None,
+                  progress_path=ns.out)
     text = json.dumps(receipt, indent=2, sort_keys=True) + "\n"
     if ns.out:
         # The receipt is the ONLY record of a ten-minute measurement.  Measured: the run
@@ -744,9 +848,16 @@ def alive_errors(receipt: Mapping[str, Any], environment_blockers_are_failures: 
     metadata it is reported separately and does not make the verdict NOT ALIVE.
     """
     errors = []
+    if receipt.get("run_complete") is not True:
+        # A run that did not finish measured some things and not others.  Calling it
+        # ALIVE would be the one direction a report must never go -- so an
+        # interrupted run is named, with the families it never reached.
+        pending = list(receipt.get("pending_families") or [])
+        errors.append("MEASUREMENT_INCOMPLETE:" + ",".join(pending[:12]) if pending
+                      else "MEASUREMENT_INCOMPLETE")
     new = (receipt.get("measurements") or {}).get("new")
     if not isinstance(new, Mapping):
-        return ["NEW_ENTRY_NOT_MEASURED"]
+        return errors + ["NEW_ENTRY_NOT_MEASURED"]
     for family, row in sorted((new.get("families") or {}).items()):
         if family == "OUT_OF_SCOPE_MUST_FAIL_CLOSED":
             continue
@@ -799,8 +910,20 @@ def annotation_lines(receipt: Mapping[str, Any], environment_blockers_are_failur
 def summary_markdown(receipt: Mapping[str, Any], environment_blockers_are_failures: bool = False) -> str:
     m = receipt["measurements"]; live = receipt["tool_liveness"]; reach = receipt["reachability_from_one_entry"]
     errors = alive_errors(receipt, environment_blockers_are_failures=environment_blockers_are_failures)
+    complete = receipt.get("run_complete") is True
     lines = ["# Live Brain heartbeat", "",
              f"**Verdict: {'ALIVE' if not errors else 'NOT ALIVE'}** - seed {receipt['seed']}, python {receipt['python']}, platform {receipt['machine']['platform']}", ""]
+    if not complete:
+        # Say it in the first paragraph, not in a footnote: the numbers below are
+        # real but they are not a verdict, and a reader who skims must not mistake
+        # them for one.
+        pending = [str(f) for f in (receipt.get("pending_families") or [])]
+        lines += [f"**This run did NOT finish.** {len(pending)} of the planned families were never "
+                  f"measured, so no verdict about the whole creature can be given.", ""]
+        if pending:
+            lines += ["Families never reached:", ""] + [f"- `{f}`" for f in pending] + [""]
+        lines += ["Everything below is what the families that DID run produced. It is a "
+                  "measurement of part of the suite, not of Brain.", ""]
     if errors:
         lines += ["Why not alive:", ""] + [f"- `{e}`" for e in errors] + [""]
     lines += ["| Fresh-goal family | " + " | ".join(m.keys()) + " |", "|---|" + "---|" * len(m)]
@@ -815,6 +938,10 @@ def summary_markdown(receipt: Mapping[str, Any], environment_blockers_are_failur
                 env = row.get("environment_blocked_here") or 0
                 cells.append(f"{row['oracle_pass']}/{row['instances']}" + (f" ({env} blocked by this machine)" if env else ""))
         lines.append(f"| {f} | " + " | ".join(cells) + " |")
+    if live.get("measured") is False:
+        lines += ["", "Tool liveness and reachability were not reached in this run (it was "
+                  "interrupted before the closing census).", ""]
+        return "\n".join(lines) + "\n"
     lines += ["", "Reachability from the one entry: " + ", ".join(f"{k} {v}" for k, v in sorted(reach["counts"].items())) + f" (of {reach['capabilities_total']})", ""]
     not_runnable = sorted(set(live["adapter_import_failed"]) | set(live["external_dependency_missing_here"]) | set(live["adapter_missing"]))
     lines += [f"Tools runnable on this machine: {live['capabilities_total'] - len(not_runnable)} of {live['capabilities_total']}", ""]
