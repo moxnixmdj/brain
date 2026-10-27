@@ -1,0 +1,11 @@
+{
+  "mission_id": "ASTRA-VERIFY-TESTGEN-001",
+  "status": "COMPLETE",
+  "expanded": 4,
+  "generated": 4,
+  "tests_passed": 4,
+  "tests_failed": 0,
+  "run1_ms": 317.5,
+  "run2_ms": 306.7,
+  "determinism": "artifact_byte_identical"
+}
