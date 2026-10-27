@@ -586,6 +586,233 @@ def _adapter_default_argv(entry, root, targets):
     return [str(x) for x in argv]
 
 
+# A refactoring goal names a SYMBOL, not a path: "rename the function add to
+# plus".  `_bind_inputs` only ever produced paths, text, urls and derived argv,
+# so `module`, `qualname`, `old_param`, `new_param`, `old_symbol` and
+# `new_symbol` raised GOAL_INPUT_BINDING_REQUIRED for every candidate that
+# declared them -- which is all three rename capabilities.  Measured on
+# 34648e4f: "Rename the function add to plus in the python module pkg/calc.py"
+# scored python.refactor.rename_symbol.v1 at 22 and then dropped it for an
+# unbound `module`, and the goal fell through to docx.document.create_from_json_record.
+# The capability was present, correct, and unreachable from language.
+_IDENTIFIER_SLOTS=("module","qualname","old_symbol","new_symbol",
+                   "old_param","new_param")
+
+_RENAME_VERB_RE=re.compile(r"\brenam(?:e|es|ing)\b",re.IGNORECASE)
+
+_RENAME_KIND_PATTERNS=(
+    # parameter a to x in the function add [in module M]
+    ("param",re.compile(
+        r"\brenam(?:e|es|ing)\s+(?:the\s+)?(?:parameter|param|argument|arg)\s+"
+        r"[`\"']?(?P<old>[A-Za-z_]\w*)[`\"']?\s+(?:to|into|as)\s+"
+        r"[`\"']?(?P<new>[A-Za-z_]\w*)[`\"']?(?P<tail>[^.;\n]*)",re.IGNORECASE)),
+    # function/method/class/symbol/attribute ... old to new, either side dotted
+    # ("Calc.scale to Calc.multiply") or quoted (`add` to `plus`): the sentence
+    # is a natural-language instruction, not an identifier-only channel.
+    ("symbol",re.compile(
+        r"\brenam(?:e|es|ing)\s+(?:the\s+)?(?:(?:python\s+)?(?:function|method|class|"
+        r"symbol|identifier|variable|constant|attribute|module|def)\s+)?"
+        r"[`\"']?(?P<old>[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)[`\"']?\s+(?:to|into|as)\s+"
+        r"[`\"']?(?P<new>[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)[`\"']?"
+        r"(?P<tail>[^.;\n]*)",re.IGNORECASE)),
+)
+
+_ENCLOSING_CLASS_RE=re.compile(
+    r"\b(?:in|of|inside|within|on)\s+(?:the\s+)?(?:class|type)\s+[`\"']?(?P<name>[A-Za-z_]\w*)",
+    re.IGNORECASE)
+_ENCLOSING_FUNCTION_RE=re.compile(
+    r"\b(?:in|of|inside|within|on)\s+(?:the\s+)?(?:function|method|def)\s+"
+    r"[`\"']?(?P<name>[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)",
+    re.IGNORECASE)
+
+
+def _relative_to_source_root(rel, source_root):
+    """Re-express a repository path the way the adapter will resolve it.
+
+    A refactoring capability resolves its test list RELATIVE TO `source_root`
+    ("pytest-relative test paths"), while every path the binder reads out of a
+    sentence is repository-relative.  Handing it the repository-relative form
+    made pytest report `file or directory not found` and the adapter refuse with
+    TESTS_RED_AFTER_EDIT -- the edit was right and the referee path was wrong.
+    """
+    if not isinstance(rel,str) or not rel:
+        return rel
+    root=str(source_root or "")
+    if not root or root in (".",""):
+        return rel
+    try:
+        return str(pathlib.PurePosixPath(rel).relative_to(pathlib.PurePosixPath(root)))
+    except ValueError:
+        return rel
+
+def _referee_tests_for_module(root, identifiers):
+    """Existing test modules beside a stated module that name it.
+
+    Deterministic and bounded: one directory, only files whose name marks them
+    as tests, only when they import or mention the module.  Returns [] rather
+    than guessing when more than one candidate set is equally plausible.
+    """
+    module=str((identifiers or {}).get("module") or "")
+    source_root=str((identifiers or {}).get("source_root") or "")
+    if not module or not source_root:
+        return []
+    root_path=(pathlib.Path(root)/source_root).resolve()
+    target=root_path/module
+    if not target.is_file():
+        return []
+    stem=target.stem
+    found=[]
+    try:
+        siblings=sorted(root_path.iterdir())
+    except OSError:
+        return []
+    for path in siblings:
+        if not path.is_file() or path.suffix!=".py" or path.stem==stem:
+            continue
+        name=path.stem.lower()
+        if not (name.startswith("test_") or name.endswith("_test")
+                or name.startswith("tests_") or name.endswith("_tests")):
+            continue
+        try:
+            text=path.read_text(encoding="utf-8",errors="replace")
+        except OSError:
+            continue
+        if re.search(r"\b"+re.escape(stem)+r"\b",text):
+            found.append(str(path.relative_to(pathlib.Path(root).resolve())).replace("\\","/"))
+    return found
+
+def _identifier_slots(goal, root):
+    """The identifiers a refactoring sentence states, keyed by slot name.
+
+    Read, never inferred: every value comes from a phrase in the sentence, and a
+    slot absent from the sentence is absent from the result so the capability
+    still fails closed rather than renaming a symbol the caller never named.
+    """
+    text=str(goal or "")
+    if not text or not _RENAME_VERB_RE.search(text):
+        return {}
+    out={}
+    for kind,pattern in _RENAME_KIND_PATTERNS:
+        m=pattern.search(text)
+        if not m:
+            continue
+        old,new,tail=m.group("old"),m.group("new"),m.group("tail") or ""
+        if old in out.values() or new in out.values():
+            continue
+        cls=_ENCLOSING_CLASS_RE.search(tail)
+        fn=_ENCLOSING_FUNCTION_RE.search(tail)
+        if kind=="param":
+            if not fn:
+                # A parameter belongs to a function; without one the rename
+                # address is ambiguous and the tool must refuse, not guess.
+                continue
+            qualname=fn.group("name")
+            if cls:
+                qualname=cls.group("name")+"."+qualname
+            out.setdefault("old_param",old)
+            out.setdefault("new_param",new)
+            out.setdefault("qualname",qualname)
+        else:
+            # A dotted address states its own scope: "Calc.scale to
+            # Calc.multiply" is the method, and the capability takes the whole
+            # address with the LAST component as the identifier.
+            qualname=old
+            if cls and "." not in old:
+                qualname=cls.group("name")+"."+old
+            out.setdefault("old_symbol",old.split(".")[-1])
+            out.setdefault("new_symbol",new.split(".")[-1])
+            out.setdefault("qualname",qualname)
+    if not out:
+        return {}
+    module=_module_named_by_sentence(text,root)
+    if module:
+        # `module` is resolved by the adapter RELATIVE TO `source_root`, so the
+        # two slots are one binding and are decided together here.  Binding the
+        # repo-relative path and the module's own directory as the root made the
+        # adapter look for "<dir>/<dir>/calc.py" and refuse PATH_MISSING.
+        parent=str(pathlib.PurePosixPath(str(module)).parent)
+        out["module"]=str(pathlib.PurePosixPath(str(module)).name)
+        out["source_root"]=parent or "."
+    return out
+
+
+def _module_named_by_sentence(goal, root):
+    """The python module a refactoring sentence names, as a repo-relative path.
+
+    Only a file the sentence actually spells and that exists is accepted; a
+    nonexistent *.py* path is a destination, not the module to be edited.
+    """
+    rr=pathlib.Path(root).resolve()
+    try:
+        candidates=_repo_paths(goal,root)
+    except Exception:
+        return None
+    pys=[raw for raw,p in candidates
+         if str(raw).endswith(".py") and p.is_file() and rr in p.parents]
+    if len(pys)==1:
+        return pys[0]
+    # Several .py files named: the module is the one that is not a test and not
+    # the report destination.  Tests are evidence here, never the rename target.
+    nontest=[raw for raw in pys
+             if "test" not in pathlib.PurePosixPath(str(raw)).name.lower()]
+    if len(nontest)==1:
+        return nontest[0]
+    return None
+
+
+# Slots that TUNE an execution rather than describe its input.  Their values
+# come from the adapter's own defaults (`args.get("timeout_s") or 300`), and the
+# registry never states them for any capability -- 23 of 46 unreachable
+# capabilities were unreachable for this reason alone: `python_executable` and
+# `timeout_s` are placeholders in the template, `_bind_inputs` could not ground
+# them, and the raise below dropped a candidate that needed no such input.
+_TUNING_SLOT_EXACT=frozenset({"timeout","timeout_s","timeout_seconds","deadline_s",
+                              "python_executable","interpreter","python","python_bin",
+                              "max_candidates","max_attempts","max_results","max_bytes",
+                              "max_lines","max_files","max_depth","workers","jobs",
+                              "retries","seed","memory_mb","time_budget_s"})
+
+_TUNING_SLOT_PREFIXES=("max_","timeout_","deadline_")
+
+# Slots whose absence the adapter itself already tolerates, and which a sentence
+# may legitimately leave unsaid: an unrequested verification suite is not a
+# missing input.
+_OPTIONAL_TEST_SLOTS=frozenset({"tests","verify_tests","verification_tests",
+                                "test_files","run_tests"})
+_TUNING_SLOT_SUFFIXES=("_timeout","_timeout_s","_seconds")
+
+
+def _is_tuning_slot(key):
+    text=str(key or "").lower()
+    if not text:
+        return False
+    if text in _TUNING_SLOT_EXACT:
+        return True
+    if text.endswith(_TUNING_SLOT_SUFFIXES):
+        return True
+    return any(text.startswith(p) for p in _TUNING_SLOT_PREFIXES)
+
+
+def _stated_tuning_value(goal, key):
+    """The number the sentence attaches to this execution knob, if it states one.
+
+    A tuning slot is defaulted only when the sentence is SILENT about it.  "with
+    max age seconds 600" states the value, so skipping the slot would drop a
+    term of the contract the request itself declared -- and typed admission then
+    refuses the run for an unstated input the sentence did state.
+    """
+    words="_".join(str(key or "").lower().split("_"))
+    pattern=r"\b"+r"[\s_-]+".join(re.escape(w) for w in words.split("_") if w)+r"\b"
+    number=r"(?:=|:|of|to|is)?\s*(?P<value>-?\d+(?:\.\d+)?)\b"
+    m=re.search(pattern+r"\s*"+number,str(goal or ""),re.IGNORECASE)
+    if m is None:
+        return None
+    raw=m.group("value")
+    try:
+        return int(raw) if re.fullmatch(r"-?\d+",raw) else float(raw)
+    except ValueError:
+        return None
+
 def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
     template=entry.get("action_template") or {}
     keys=_placeholders(template)
@@ -594,8 +821,21 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
     paths=_repo_paths(goal,root)
     future_text=" ".join(str(x) for x in (future_clauses or []))
     future_paths=_repo_paths(future_text,root) if future_text else []
+    identifiers=_identifier_slots(goal,root)
     result={}
     for key in keys:
+        if _is_tuning_slot(key):
+            # The adapter's default is the authority on its own execution budget
+            # ONLY when the sentence says nothing: a stated number is part of the
+            # request, and inventing one the sentence never gave is equally
+            # forbidden.
+            stated=_stated_tuning_value(goal,key)
+            if stated is not None:
+                result[key]=stated
+            continue
+        if key in identifiers:
+            result[key]=identifiers[key]
+            continue
         if key=="text":
             result[key]=_extract_text_argument(goal)
             continue
@@ -609,6 +849,35 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                 result[key]=urls[0]
                 continue
             raise GoalCompilationFailure("GOAL_URL_BINDING_REQUIRED",str(len(urls)))
+        if key.endswith("_tests") or key in _OPTIONAL_TEST_SLOTS:
+            # `run_tests` is a LIST of test paths under a name that does not end
+            # in _paths, so the list branch below never saw it and every
+            # capability that can VERIFY its own edit failed to bind the one
+            # input that makes the verification law checkable.  The adapter
+            # treats the value as optional (`args.get("run_tests") or []`), so a
+            # sentence that names no test leaves it unset instead of dropping
+            # the capability -- "rename add to plus" is a complete request.
+            tests=_paths_named_by_role(goal,"test",root,_path_role_words(keys))
+            out=_path_named_after_output_verb(goal,root)
+            if out is not None:
+                tests=[t for t in tests if t!=out]
+            tests=[t for t in tests if t not in _claimed_paths(result)]
+            if not tests and identifiers.get("module"):
+                # A refactoring capability's own law is that a blind edit is not
+                # a rename: with no suite to referee it, the adapter returns
+                # PASS_BLIND, verified=false, and the registry's `gate == PASS`
+                # expectation refuses the run.  So the suite is not optional
+                # here -- it is the missing verifier, and it is DISCOVERED, not
+                # invented: the test modules that already sit beside the module
+                # the sentence named and that mention it by name.
+                tests=_referee_tests_for_module(root,identifiers)
+            if tests:
+                tests=[_relative_to_source_root(t,identifiers.get("source_root"))
+                       for t in tests]
+                result[key]=tests
+                continue
+            if key.endswith("_tests") or key in _OPTIONAL_TEST_SLOTS:
+                continue
         if key.endswith("_paths"):
             # A *_paths input is a LIST of repository paths, and the binder only
             # ever produced scalars, so every capability taking test_paths or
@@ -1079,16 +1348,47 @@ def _score(goal, cid, entry):
     }
 
 
+class _Omitted:
+    """A template slot the caller legitimately left unsaid."""
+
+    def __repr__(self):  # pragma: no cover - debugging aid
+        return "<omitted>"
+
+
+_OMITTED=_Omitted()
+
+
+def _optional_when_unstated(key):
+    """Is this slot one the ADAPTER already treats as optional?
+
+    The binder refuses to invent values, so a slot the sentence does not state
+    simply has no entry.  For an execution knob (`timeout_s`,
+    `python_executable`) or an unrequested verification suite (`run_tests`) the
+    adapter's own default is the correct value, and rendering them as a failure
+    made every such capability die at dispatch with
+    GOAL_INPUT_BINDING_REQUIRED:python_executable -- bound, selected, and then
+    unreachable at the last step.
+    """
+    text=str(key or "")
+    return (_is_tuning_slot(text)
+            or text.endswith("_tests")
+            or text in _OPTIONAL_TEST_SLOTS)
+
+
 def _render_template(value, inputs):
     if isinstance(value,dict):
-        return {k:_render_template(v,inputs) for k,v in value.items()}
+        rendered={k:_render_template(v,inputs) for k,v in value.items()}
+        return {k:v for k,v in rendered.items() if v is not _OMITTED}
     if isinstance(value,list):
-        return [_render_template(v,inputs) for v in value]
+        return [v for v in (_render_template(x,inputs) for x in value)
+                if v is not _OMITTED]
     if isinstance(value,str):
         exact=re.fullmatch(r"\$\{input\.([A-Za-z0-9_]+)\}",value)
         if exact:
             key=exact.group(1)
             if key not in inputs:
+                if _optional_when_unstated(key):
+                    return _OMITTED
                 raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",key)
             return json.loads(json.dumps(inputs[key]))
         out=value

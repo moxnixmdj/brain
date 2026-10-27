@@ -1313,7 +1313,26 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
     # payload selector (knowledge fetch json_path: literal []), not a file; every other
     # ``*_path`` key (jq json_path ...) keeps the pinned file binder.
     declared_selectors = _declared_literal_selector_keys(entry)
-    pinned_keys = [k for k in keys if k not in declared_selectors and (k in ("text", "goal", "url") or k.endswith("_path"))]
+    # The pinned binder is authoritative for more than paths: a SYMBOL slot
+    # (`module`, `qualname`, `old_symbol`, `new_symbol`, `old_param`,
+    # `new_param`) and a list of tests (`run_tests`) are read from the sentence
+    # by `gc._bind_inputs` and by nothing else.  Classifying them as "typed"
+    # handed them to the generic type binder, which has no grammar for an
+    # identifier, so every refactoring capability failed with an unstated input
+    # and was skipped by F24 -- after which the artifact-writer fallback answered
+    # "Rename the function add to plus in .../calc.py" with a markdown-to-PDF
+    # converter at score 4 whose markdown_path was the .py file itself.
+    pinned_keys = [
+        k for k in keys
+        if k not in declared_selectors
+        and (
+            k in ("text", "goal", "url")
+            or k.endswith("_path")
+            or k in gc._IDENTIFIER_SLOTS
+            or k.endswith("_tests")
+            or k in gc._OPTIONAL_TEST_SLOTS
+        )
+    ]
     typed_keys = [k for k in keys if k not in pinned_keys]
     inputs: dict[str, Any] = {}
     taken: set[str] = set()
