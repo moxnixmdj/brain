@@ -1,0 +1,26 @@
+{
+  "mission_id": "ASTRA-VERIFY-REALIZE-001",
+  "status": "COMPLETE",
+  "e2e_ms_run1": 1808.8,
+  "e2e_ms_run2": 1957.1,
+  "golden": {
+    "gates": {
+      "lint": "PASS",
+      "type": "PASS",
+      "suite": "PASS",
+      "coverage": "PASS",
+      "perf": "PASS",
+      "security": "PASS"
+    },
+    "realize": "PASS",
+    "head_sha": "7a7e8438f1d86c2df4b7688bbd3eec3565d3d547",
+    "remote_ref": "refs/heads/crown/GH-9900-rename"
+  },
+  "rerun": {
+    "head_sha": "7a7e8438f1d86c2df4b7688bbd3eec3565d3d547",
+    "already_realized": true,
+    "pushed": false,
+    "push_verified": true
+  },
+  "loop": "THE CROWN NOW SHIPS ITSELF: intent is no longer the end of the chain"
+}
