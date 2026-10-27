@@ -416,11 +416,39 @@ class UnifiedModel:
 
     def route(self, goal: str, *, top_k: int = 5) -> dict[str, Any]:
         tokens = tokenize(goal)
+        mentioned = self._ids_mentioned(goal)
+        # Score the ASK, not the sentence. A stated path is data, and its tokens
+        # are not words about the operation -- but they were voting. Measured on
+        # "Report who calls the function top in the python source root
+        # /home/user/brain/…": brain.module.function.invoke scored 674.3, of
+        # which 405.0 was the token `brain` from the caller's own path counted
+        # twice, and terminal.kstar.root.assess.stdlib scored 449.2 of which
+        # 405.0 was the same two hits. The capability that owns `calls` lost to
+        # two capabilities matched by the directory the file happens to live in.
+        #
+        # A capability's own id, stated in the goal, is the opposite case: it is
+        # the ask, so its tokens do vote.
+        addressed_tokens: list[str] = []
+        for cid in mentioned:
+            addressed_tokens.extend(tokenize(cid))
+        # Say it twice, get one vote. "Report the call graph ... writing the
+        # report to R" repeats `report`, and at 269.3 a hit that alone
+        # outscored every operation word in the sentence -- the Markdown-to-PDF
+        # converter, whose only match was that repeated destination noun,
+        # measured 538.6 against 505.9 for the capability that owns `call` and
+        # `graph`. Repetition is how a sentence is phrased, not extra evidence
+        # about what is being asked, so each distinct token votes once.
+        ask_list: list[str] = []
+        seen: set[str] = set()
+        for token in ask_tokens(goal) + addressed_tokens:
+            if token not in seen:
+                seen.add(token)
+                ask_list.append(token)
         scores: dict[str, float] = {}
         matched: set[str] = set()
         unrunnable = self.unrunnable_capabilities()
         unrunnable_matched: set[str] = set()
-        for token in tokens:
+        for token in ask_list:
             postings = self.index.get(token)
             if not postings:
                 continue
@@ -439,14 +467,13 @@ class UnifiedModel:
                     # where the host gets a vote.
                     unrunnable_matched.add(cid)
                 scores[cid] = scores.get(cid, 0.0) + weight
-        mentioned = self._ids_mentioned(goal)
         for cid in mentioned:
             scores[cid] = scores.get(cid, 0.0) + 24.0
             matched.add(cid.casefold())
         # A stated path is data the caller supplied and the binder will bind, not
         # a word of the ask. Charge only the ask to the coverage budget, so that
         # naming a real artifact can never be the reason a request is refused.
-        ask = set(ask_tokens(goal))
+        #
         # A capability's own id is the ask, not a path. 294 of the model's ids
         # ARE repository paths -- "canonical/runtime/x_v1.py.auto.v1" -- and the
         # path grammar matches them whole, so blanking them left no ask at all:
@@ -458,11 +485,9 @@ class UnifiedModel:
         # the model recognises, so those tokens are matched as well as asked.
         # Without that second half an addressed id measured 0.333 against the
         # 0.34 floor and still failed, on a filename token no index carries.
-        addressed_tokens: set[str] = set()
-        for cid in mentioned:
-            addressed_tokens.update(tokenize(cid))
-        ask |= addressed_tokens
-        matched_ask = (matched & ask) | addressed_tokens
+        ask = set(ask_list)
+        addressed_set = set(addressed_tokens)
+        matched_ask = (matched & ask) | addressed_set
         coverage = (len(matched_ask) / len(ask)) if ask else 0.0
         # Naming a capability by its own id is an address, not a keyword. Its
         # path segments also index capabilities that legitimately claim those

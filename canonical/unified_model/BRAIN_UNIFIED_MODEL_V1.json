@@ -26139,7 +26139,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6435,
+  "research_index_records": 6437,
   "routing_tokens": 1958,
   "skills": 18,
   "source_index_entry_points": 421,
@@ -26148,7 +26148,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "330092ff8cac3c8599169da914a5dfe29c90547de1cfc746afadf7142ec0da54"
+  "value": "64b23b91daa3696ab5dc117d604cd4bf023c26fc84536842eb262f618dd7dbc4"
  },
  "engines": [
   {
@@ -191096,6 +191096,51 @@
    }
   },
   {
+   "action_id": "A_FILE_PATH_AND_A_REPEATED_WORD_MUST_NOT_CHOOSE_THE_CAPABILITY_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/A_FILE_PATH_AND_A_REPEATED_WORD_MUST_NOT_CHOOSE_THE_CAPABILITY_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_FILE_PATH_AND_A_REPEATED_WORD_MUST_NOT_CHOOSE_THE_CAPABILITY_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "ac79c0a297fea57da9e5de7c161843ecc2123c8d4ee9efc778461cac2f3bca3e",
+   "status": "",
+   "terms": {
+    "20261027": 1,
+    "269.3": 1,
+    "403.0": 1,
+    "405.0": 3,
+    "a_file_path_and_a_repeated_word_must_not_choose_the_capability_v1_20261027_v1": 2,
+    "about": 2,
+    "brain": 2,
+    "call": 2,
+    "caller": 5,
+    "calls": 2,
+    "capability": 5,
+    "counted": 2,
+    "every": 2,
+    "file": 4,
+    "graph": 2,
+    "instead": 2,
+    "not": 3,
+    "own": 3,
+    "owns": 2,
+    "path": 4,
+    "python": 2,
+    "question": 2,
+    "repeated": 2,
+    "report": 4,
+    "scored": 3,
+    "sentence": 2,
+    "token": 2,
+    "twice": 3,
+    "two": 3,
+    "typed": 2,
+    "v1": 2,
+    "word": 3
+   }
+  },
+  {
    "action_id": "A_FILTER_QUESTION_GETS_THE_LINES_IT_ASKED_FOR_AND_AN_UNDELIMITED_VALUE_IS_NOT_GUESSED_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -193166,6 +193211,31 @@
    }
   },
   {
+   "action_id": "BIND_EACH_SLOT_TO_ITS_STATED_VALUE_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/BIND_EACH_SLOT_TO_ITS_STATED_VALUE_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/BIND_EACH_SLOT_TO_ITS_STATED_VALUE_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "8f2b70d3b38ac33937012afa485aafa2baf7c9fe1e168579ef1fe3de93d740b5",
+   "status": "",
+   "terms": {
+    "20261027": 1,
+    "bind": 1,
+    "bind_each_slot_to_its_stated_value_v1_20261027_v1": 1,
+    "bind_each_slot_to_the_value_the_sentence_states_for_it__quoted_argv_list_and_directory": 1,
+    "each": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "slot": 1,
+    "stated": 1,
+    "test_argv_is_the_quoted_command_path_list_is_a_list_of_the_stated_paths_beginning_at_the_slot_s_own_word_and_path_dir_is_a_stated_directory__measured_python_repair_test_guided_and_python_ast_patch_search_chains_went_from_raising_test_paths_required_to_pass_composer_chain_executed": 1,
+    "the_five_repair_families_scored_zero_of_fifty_each_and_the_route_was_not_the_only_cause__measured_2026_10_27_the_capability_is_chosen_correctly_and_then_cannot_be_bound__test_argv_absorbed_the_rest_of_the_sentence_path_list_produced_one_string_and_chose_the_source_file_as_the_test_corpus_and_path_dir_could_not_be_bound_at_all": 1,
+    "v1": 2,
+    "value": 1
+   }
+  },
+  {
    "action_id": "BM25_INVERSE_DOCUMENT_FREQUENCY_REORDERS_BOUND_CAPABILITY_SELECTION_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -194046,7 +194116,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "e59e954eca2a8b37bc4ebb231776b2ca2f6ede924a267a2c9d6057aaa372089a",
+   "sha256": "a3a16e62be168108f63ae14e8ba1a2b7858b4b6c92d81af7b87178f5d6f3bc36",
    "status": "",
    "terms": {
     "11": 2,
@@ -207217,7 +207287,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "63c2cf21c157af526f8f3f7b3fb305c1c35997edbd00945f1dd78a5041457dd0",
+   "sha256": "a620b2642fe226df94cf2bd3b8ec5e58d74660307603c585464226bcdfacb310",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 15,
    "symbols": [
@@ -213414,9 +213484,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "bcb89df07a894b873c553fb7b9ca86f578528dcfd425cb9df26edcd0a07df0cf",
+   "sha256": "efb60b1ab32e88d3dd93cc90b887915e4206072c99ca8cc5d674d4359a066454",
    "summary": "Routing a sentence to a typed capability chain.",
-   "symbol_count": 46,
+   "symbol_count": 52,
    "symbols": [
     "_bare_alternatives",
     "_bare_stated_value",
@@ -213430,18 +213500,18 @@
     "_exists_in_repo",
     "_fully_bound_contract_tokens",
     "_head_flags",
+    "_is_directory_in_repo",
     "_is_repository_path",
+    "_listed_paths",
     "_mask_a_quoted_value",
     "_no_flags",
     "_noun_matched_path",
+    "_parent_if_directory",
     "_pathish",
     "_preceding_words",
     "_prose_argv",
     "_prose_count",
-    "_prose_ordinal",
-    "_quoted_value",
-    "_quoted_values",
-    "_repo_root"
+    "_prose_ordinal"
    ],
    "terms": {
     "candidate_tokens": 1,
