@@ -1,0 +1,128 @@
+{
+  "schema": "PROJECT_BRAIN_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V4",
+  "date": "2026-10-11",
+  "status": "CARRIER_FEASIBILITY_REDUCED_TO_EXACT_SOURCE_SYNCHRONIZATION_OR_FIRST_DEPLOYMENT__SPRITE_EXECUTION_SUBSTRATE_EXISTS__RAILWAY_EXACT_PRIVATE_REPO_SERVICE_EXISTS__NO_VALID_CURRENT_MAIN_REGRESSION_RESULT__ZERO_CREDIT",
+  "observed_main_commit_when_record_created": "b13e5dc4ae0733584f9d74a0ee4723674f608649",
+  "required_gate": "FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+  "supersedes": {
+    "path": "canonical/verification/FULL_PRIVATE_CURRENT_MAIN_REGRESSION_CARRIER_DIAGNOSIS_20261011_V3.json",
+    "git_blob_sha": "6210fce33abacd7105a2c46376bf0c224a914162"
+  },
+  "new_causal_evidence": {
+    "sprite_preserved_private_regression_workspace": {
+      "carrier": "SPRITE",
+      "sprite_name": "brain-live-runtime-v1-verify-20261008",
+      "sprite_id": "sprite-4fe392dd-5168-47b2-aa7a-363d4f9abb13",
+      "workspace": "/home/sprite/uvck-private-full-regression-20261010",
+      "observed_workspace_size": "78M",
+      "prior_full_suite_execution": {
+        "tests_run": 3222,
+        "failures": 97,
+        "errors": 481,
+        "skipped": 2,
+        "successful": false,
+        "seconds": 294.206,
+        "interpretation": "PROVES_THE_PRESERVED_SPRITE_CAN_EXECUTE_THE_PRIVATE_TEST_SUITE__DOES_NOT_PROVE_CURRENT_MAIN_REGRESSION_FAIL_BECAUSE_THE_WORKSPACE_WAS_NOT_EXACT_CURRENT_MAIN"
+      },
+      "tests_runtime_manifest": {
+        "commit": "d32a41dd0623cb5718381cb632a2e434bea7773a",
+        "canonical_tree": "e49a983992362b8308b0e1e471553c15e19489d4",
+        "rows": 3668
+      },
+      "measured_materialization_deficit_against_that_manifest": {
+        "files": 1394,
+        "missing": 1386,
+        "stale": 8,
+        "bytes": 8535352
+      },
+      "older_signed_hydration_manifest": {
+        "expected_head": "998805b648cda2a2b4425d3e998b65c9f2a10dd9",
+        "files": 4113,
+        "status": "STALE_FOR_CURRENT_MAIN__DO_NOT_EXECUTE_AS_CURRENT_MAIN_HYDRATION"
+      },
+      "direct_connector_source_hydration_attempt": "BLOCKED_BY_TOOL_SAFETY_BOUNDARY",
+      "private_git_clone_auth": false,
+      "exact_current_main_ready": false
+    },
+    "railway_existing_exact_private_repo_service": {
+      "project_id": "9d2e8ee8-0eb8-414c-b7e0-a93d90eed54d",
+      "environment_id": "256bcc63-cebd-4079-9a61-c0e9cdbbeeb8",
+      "service_id": "b1976f11-f248-4de2-9467-db2b8f80a294",
+      "service_name": "heldout-002-git-carrier-v2",
+      "state": "live",
+      "source_repo": "moxnixmdj/brain",
+      "latest_deployment": null,
+      "full_regression_build_verifier_present": true,
+      "verifier_checks": [
+        "EXACT_GIT_HEAD_EQUALS_BOUND_SUBJECT_SHA",
+        "RAILWAY_GIT_COMMIT_SHA_EQUALS_BOUND_SUBJECT_SHA",
+        "EXACT_CANONICAL_TREE_EQUALS_BOUND_CANONICAL_TREE_SHA",
+        "PYTHON_3_12_REQUIRED",
+        "PY_COMPILE_LOAD_BEARING_ASSURANCE_AND_PROFESSIONAL_RUNTIMES",
+        "PYTEST_Q_CANONICAL_TESTS",
+        "FOCUSED_ASSURANCE_UNITTEST_REPLAY",
+        "CONTENT_HASHED_RECEIPT"
+      ],
+      "binding_variables_updated_without_deploy": true,
+      "first_deployment_attempt": "FAILED_BEFORE_DEPLOYMENT__REPOSITORY_NOT_FOUND_OR_NOT_ACCESSIBLE_THROUGH_CURRENT_RAILWAY_CONNECTOR",
+      "exact_current_main_result": false
+    },
+    "github_actions": {
+      "state": "UNCHANGED_ACCOUNT_LEVEL_BILLING_OR_SPENDING_LIMIT_PRESTART_GATE",
+      "real_steps_executed_for_required_regression": 0,
+      "identical_retry_value": "ZERO"
+    },
+    "sprite_zero_spend_evidence": [
+      {
+        "path": "canonical/verification/FIELD_SCOPED_ZERO_REALITY_REUSE_GATE_INDEPENDENT_VERIFY_20261011_V1.json",
+        "carrier": "SPRITE",
+        "incremental_spend_usd": 0
+      },
+      {
+        "path": "canonical/verification/LIVE_INTEGRATED_BRAIN_V1_EXECUTION_VERIFICATION_20261008_V1.json",
+        "carrier": "SPRITE",
+        "incremental_spend_usd": 0
+      }
+    ]
+  },
+  "causal_reduction": {
+    "already_solved": [
+      "FULL_PRIVATE_REGRESSION_COMMAND",
+      "PRIVATE_TEST_SUITE_EXECUTION_ON_A_REMOTE_SPRITE_SUBSTRATE",
+      "EXACT_SUBJECT_AND_CANONICAL_TREE_BINDING_LOGIC",
+      "RAILWAY_PRIVATE_REPO_SERVICE_CONFIGURATION",
+      "RESULT_RECEIPT_CONSTRUCTION"
+    ],
+    "remaining_minimum_blocker": "ESTABLISH_ONE_AUTHORIZED_ZERO_INCREMENTAL_SPEND_PATH_THAT_EITHER_SYNCHRONIZES_THE_PRESERVED_SPRITE_WORKSPACE_TO_EXACT_CURRENT_MAIN_BYTES_OR_STARTS_THE_ALREADY_CONFIGURED_RAILWAY_PRIVATE_REPO_SERVICE_AT_EXACT_CURRENT_MAIN",
+    "not_a_reasoning_gap": true,
+    "new_primitive_required": false
+  },
+  "forbidden_repetition": [
+    "DO_NOT_TREAT_THE_3222_TEST_SPRITE_RUN_AS_CURRENT_MAIN_PASS_OR_FAIL",
+    "DO_NOT_RUN_THE_STALE_998805_SIGNED_HYDRATION_MANIFEST_AS_CURRENT_MAIN",
+    "DO_NOT_REPEAT_RAILWAY_CONNECT_SERVICE_SOURCE_WITHOUT_REPO_ACCESS_STATE_CHANGE",
+    "DO_NOT_REPEAT_GITHUB_HOSTED_ACTIONS_WHILE_THE_ACCOUNT_PRESTART_GATE_IS_UNCHANGED",
+    "DO_NOT_PUBLISH_PRIVATE_BRAIN_SOURCE_TO_THE_PUBLIC_CAPSULE_RUNNER",
+    "DO_NOT_SPEND_TO_CLEAR_ANY_CARRIER_LIMIT"
+  ],
+  "wake_conditions": [
+    "AN_AUTHORIZED_PRIVATE_SOURCE_TRANSFER_PATH_CAN_WRITE_EXACT_CURRENT_MAIN_BYTES_INTO_THE_PRESERVED_SPRITE_WORKSPACE",
+    "THE_EXISTING_RAILWAY_SERVICE_GAINS_PRIVATE_REPO_DEPLOY_ACCESS_AND_CAN_CREATE_ITS_FIRST_DEPLOYMENT_WITH_ZERO_INCREMENTAL_PAID_SPEND",
+    "GITHUB_HOSTED_ACTIONS_ACCOUNT_GATE_CLEARS_WITH_ZERO_INCREMENTAL_SPEND_AND_A_REAL_STEP_EXECUTES",
+    "A_STRONGER_VALID_CONTENT_ADDRESSED_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_RECEIPT_APPEARS"
+  ],
+  "hard_nonclaims": [
+    "NO_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_PASS",
+    "NO_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_FAIL",
+    "NO_UVCK_V2_PROMOTION",
+    "NO_QUALITY_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_SPEND_AUTHORIZATION"
+  ],
+  "accounting": {
+    "incremental_paid_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "promotion_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
