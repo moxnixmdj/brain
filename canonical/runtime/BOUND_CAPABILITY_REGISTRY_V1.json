@@ -7254,6 +7254,96 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-APPLYGATE-001__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-APPLYGATE-001.json"
       }
+    },
+    "python.review.diff_type_gate.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.review.diff_type_gate.v1",
+          "diff_path": "${input.diff_path}",
+          "worktree_path": "${input.worktree_path}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "field": "gate",
+          "type": "field_equals",
+          "value": "PASS"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_review_diff_type_gate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "review",
+        "diff",
+        "type",
+        "mypy",
+        "typecheck",
+        "gate",
+        "pull request",
+        "pr",
+        "type error",
+        "operand",
+        "changed lines",
+        "soundness"
+      ],
+      "limitations": [
+        "mypy stage needs a mypy-bearing python_executable (PyPI tool, offline-probed); absent -> gate PASS_BASELINE_ONLY recorded loudly, the type sweep honestly did not run.",
+        "only new-side changed line ranges decide blocking: untouched pre-existing findings are advisory context listed as out_of_scope (never blockers).",
+        "--follow-imports=silent --ignore-missing-imports: imported modules are trusted silently; cross-module type faults in untouched files are outside this gate's changed-lines law.",
+        "v1 reviews unified diffs of .py files only; non-Python touched rows are skipped by the stage-1/stage-2 machinery."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.review.diff_type_gate"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "advisory_findings",
+        "blocking_findings",
+        "complete",
+        "diff_sha256",
+        "files_touched",
+        "gate",
+        "mypy",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "syntax_errors",
+        "verified"
+      ],
+      "source": {
+        "module": "mypy",
+        "type": "pypi",
+        "version_family": ">=1.5"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-TYPEGATE-001",
+        "observed_effect": {
+          "crown": "natural-language issue -> orchestrator diff -> ruff lint triage AND this type gate (review stage pair)",
+          "golden": "gate PASS on the choreographed rename diff with mypy 2.4.0",
+          "blind_spot_closed": "lint-clean int+str operand lie: ruff lint gate PASS, this gate FAIL with assignment/operator at pkg/core.py:6 -- measured complementarity",
+          "mypy": "2.4.0",
+          "e2e_chain_ms": [
+            1241.0,
+            1163.3
+          ],
+          "deterministic": "typegate artifact byte-identical on rerun"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TYPEGATE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-TYPEGATE-001.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

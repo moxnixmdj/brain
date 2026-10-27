@@ -75,7 +75,7 @@ class BrainUnifiedModelV1Tests(unittest.TestCase):
         live = set(live_brain.load_verified_registry())
         modelled = set(self.model.capabilities)
         self.assertEqual(live, modelled)
-        self.assertEqual(len(modelled), 378)
+        self.assertEqual(len(modelled), 379)
 
     def test_every_capability_has_a_trigger_and_a_route(self):
         for cid, row in self.model.capabilities.items():
@@ -828,7 +828,7 @@ class DeclaredContextBindingTests(unittest.TestCase):
     def test_a_receipt_backed_execution_never_claims_trace_verification(self):
         """`solve()` must report what the adapter established, not more.
 
-        295 of the 378 modelled capabilities are `RECEIPT_BACKED_CAPABILITY`:
+        295 of the 379 modelled capabilities are `RECEIPT_BACKED_CAPABILITY`:
         their only evidence is an execution receipt, and the registry marks them
         `RECEIPT_BACKED_PENDING_PROMOTION`. When one runs, the adapter returns
         `PASS__RECEIPT_BACKED_BOUND_CAPABILITY_EXECUTED`, which states that the
@@ -1133,10 +1133,10 @@ class DeclaredDependencyEnvironmentIndependenceTests(unittest.TestCase):
     def test_status_reports_the_machine_it_actually_runs_on(self):
         """Presence is measured live, so it tracks the real interpreter."""
         status = self.model.status()
-        self.assertEqual(status["counts"]["capabilities"], 378)
+        self.assertEqual(status["counts"]["capabilities"], 379)
         self.assertEqual(
             status["declared_dependencies_present"] + status["declared_dependencies_missing"],
-            378,
+            379,
             "present + missing must account for every capability",
         )
 
@@ -1186,7 +1186,7 @@ class DeclaredDependencyEnvironmentIndependenceTests(unittest.TestCase):
 class SourceIndexTests(unittest.TestCase):
     """The model addresses the whole runtime tree without claiming to run it.
 
-    Measured, the capability registry reached 291 of 2126 ``canonical/runtime``
+    Measured, the capability registry reached 291 of 2127 ``canonical/runtime``
     modules -- 13%. The honest fix is not to promote the rest to capabilities:
     only 404 are entry points, 39 are internal helpers and the remainder are
     imported by nobody, so calling them capabilities would claim execution that
@@ -1304,7 +1304,7 @@ class SourceIndexTests(unittest.TestCase):
         )
         self.assertEqual(int(counts.get("source_index_entry_points", -1)), entry_points)
         # The capability count must not have been inflated by indexing.
-        self.assertEqual(int(counts.get("capabilities", -1)), 378)
+        self.assertEqual(int(counts.get("capabilities", -1)), 379)
 
     def test_status_reports_the_source_index_it_holds(self):
         """The model's self-description must not omit what it indexes.
@@ -1339,17 +1339,17 @@ class SourceIndexTests(unittest.TestCase):
         # The distinction must be stated wherever the larger number appears, so
         # it cannot be read as a capability gain.
         self.assertIs(status.get("source_index_is_addressable_not_executable"), True)
-        self.assertEqual(int(counts["capabilities"]), 378)
+        self.assertEqual(int(counts["capabilities"]), 379)
 
     def test_status_does_not_overcount_reachable_modules(self):
         """A tempting derived figure that is wrong must not be reported.
 
-        `len(capabilities) + len(source_index)` is 2248, but only 256 of the 378
+        `len(capabilities) + len(source_index)` is 2249, but only 257 of the 379
 
         capabilities carry a runtime file -- 122 are named or receipt-backed entries -- so the
-        true figure is 2126. Deriving it correctly needs a filesystem walk, which
+        true figure is 2127. Deriving it correctly needs a filesystem walk, which
         would put host coupling back inside `status()`. Reporting nothing is
-        better than reporting 2248.
+        better than reporting 2249.
         """
         status = self.model.status()
         self.assertNotIn("runtime_modules_reachable", status)
@@ -1450,4 +1450,4 @@ class ResearchIndexTests(unittest.TestCase):
             int(counts.get("research_index_records", -1)),
             len(self.model.research_index),
         )
-        self.assertEqual(int(counts["capabilities"]), 378)
+        self.assertEqual(int(counts["capabilities"]), 379)
