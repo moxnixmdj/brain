@@ -139,3 +139,46 @@ Merging that main into this branch exposed two infrastructure facts, both now fi
    existing `--families` flag so the daily proof finishes instead of being cancelled.
 4. Put `true_capability_harness_v1` in front of every new SWE capability: fresh instances,
    ≥2 independent oracles, public-runner receipt. Until then no SWE row has credit.
+
+## LANDED 2026-10-27 (PR #6287 + #6299, both merged to main)
+
+The scoped retry described above as "the honest next step" is now DONE and on `main`.
+This supersedes the "What this deliberately does NOT claim" section above.
+
+**Wiring (PR #6287):** `live_brain_route_admission_v1.solve` now wraps its unchanged
+primary body (`_solve_body`); on a pre-execution failure of a decisive SWE request it
+re-enters the SAME full gate chain with a typed plan from `swe_typed_plan_v1.build_plan`
+(REUSE of `capability_selection_retrieval_v1.select` + `declared_input_derivation_v1`).
+Ambiguity preserved; non-SWE and executed verdicts never touched.
+
+**Measured (fresh instances, filesystem via the real gate chain as independent oracle):**
+- 5 human SWE sentences: **1/5 -> 3/5 honest PASS**, zero false passes.
+- Front-door regression failure set byte-identical to pristine (A/B worktree); the 8
+  failures are pre-existing fleet drift from main #6292's selection-rate change.
+- New suite `test_swe_typed_plan_v1.py` 11/11; verifier 33/33; model 60+863; all four
+  local gates PASS; signed referee green on both PRs.
+
+**False-PASS fix (PR #6299):** measuring the 10 held-out `INV_` real-SWE tasks exposed a
+fail-OPEN that the first wiring introduced: `select` admits by declared-input CONTRACT,
+not effect, so with a single bindable candidate (F17) "Type-check the file X" bound to a
+repair choreographer that no-op'd to PASS with the source unchanged. `build_plan` now
+applies the selector's OWN E30 `_EFFECT_WORDS` as an admission gate even for
+single-candidate selections; effect-inconsistent goals keep their fail-closed verdict.
+Re-measured: the false PASS is gone (typecheck/lint honest fail-closed).
+
+**Rename family (PR #6299):** the three refactor adapters resolve `module` relative to
+`source_root`; the derivation emitted the full path (doubled prefix -> PATH_MISSING).
+Normalizing it yields `gate=PASS, edit_count=2`; 3/4 fresh rename phrasings pass
+end-to-end with source bytes genuinely changed and every honesty gate clean.
+
+**Honest residual on the 10 `INV_` tasks:** 1 honest PASS (`git_log`) + 9 honest
+fail-closed, zero false credit. The other 9 need their OWN adapters (callers, test
+authoring, lint, typecheck, git commit, debugger, patch extraction) — this is the
+documented "45/52 SWE capabilities never measured from a sentence" gap, NOT a routing
+gap. Fabricating those adapters to raise a headcount would be a false claim.
+
+**Fastest remaining wiring (unchanged priorities):** the effect-guard fix is the template
+for the rest — when a family binds the wrong capability, encode the family's OWN effect
+vocabulary as an admission gate, then build its dedicated adapter with fresh held-out
+instances and >=2 independent oracles (`true_capability_harness_v1`). Owner-only:
+heartbeat still not a required check, protected-path receipt/verifier blind spots.
