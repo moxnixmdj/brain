@@ -28619,7 +28619,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "9be98cfb604b1bdf218eeaaf15565f020f7fb28df7c97f0977d51d0ed24a564b"
+  "value": "efdaefa3bbd5ffca9b6cd047fdd8f9adeb0d78e94781f44a636c246957bfefde"
  },
  "engines": [
   {
@@ -193839,7 +193839,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/AN_EDIT_REQUEST_MUST_RUN_THE_EDIT_CAPABILITY_NOT_A_READ_ONLY_CENSUS_V1_20261027_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "4cc5d1eb2acefb9f06e646bf4d0300d69005cffd33a9c8d0bec25c570ea636d3",
+   "sha256": "6ea7858867419d413c47c56ba811517790b3f523acf220e195bdbc77bebd8a85",
    "status": "",
    "terms": {
     "22": 5,
