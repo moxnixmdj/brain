@@ -220,6 +220,21 @@ _KEY_ALIASES: dict[str, tuple[str, ...]] = {
     "prompt": ("prompt", "question"),
     "pattern": ("pattern", "test pattern", "file pattern"),
     "test_argv": ("test argv", "test_argv", "test command", "command"),
+    # The extract-function refactor states its coordinates the way an engineer
+    # states them: "the function big", "lines 5 to 9", "named total_of". Without
+    # these the capability's own docstring phrasing bound nothing, so the highest
+    # scoring candidate for "Extract the function big ... lines 5 to 9 ... named
+    # total_of" (33, ahead of the next at 22) was dropped as unbindable and a
+    # read-only audit answered instead -- and reported pass=True.
+    "start_line": ("lines", "from line", "start line", "starting at line"),
+    "end_line": ("lines", "to line", "end line", "through line"),
+    "new_name": ("named", "new name", "into a function named", "call it"),
+    # "function named" is deliberately absent: "into a new function named
+    # total_of" also contains it, and _after_key tries the longest alias first,
+    # so it handed `total_of` -- the NEW name -- to the slot that asks WHICH
+    # function to extract, and the adapter failed SYMBOL_NOT_FOUND:total_of.
+    # "the function" is the phrasing that names the operand.
+    "qualname": ("the function", "qualname", "the symbol"),
     "objective": ("objective", "claim"),
     "spec": ("spec", "specification", "relation spec"),
     "product": ("product",),
@@ -268,6 +283,7 @@ def _declared_literal_selector_keys(entry: Mapping[str, Any]) -> set[str]:
         and isinstance(binding.get("value"), list) and str(key).endswith("_path")
     }
 _NUMERIC_KEYS = {"x_value", "y_value", "major", "max_age_s"}
+_LINE_RANGE_KEYS = {"start_line", "end_line"}
 _LIST_NUMERIC_KEYS = {"x_ticks", "y_ticks"}
 _BOOL_KEYS = {"authoritative"}
 _ARGV_KEYS = {"test_argv"}
@@ -734,7 +750,22 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, 
 _VERSION_FRAGMENT = re.compile(r"^v\d+$")
 
 
+_LINE_RANGE_RE = re.compile(
+    r"\s*(\d+)\s*(?:-|\bto\b|\bthrough\b|\buntil\b|\.\.)\s*(\d+)\b", re.I
+)
+
+
 def _parse_typed_value(key: str, tail: str, quoted_only: bool = False):
+    if key in _LINE_RANGE_KEYS:
+        # "lines 5 to 9" is ONE statement of TWO bounds. Read as two numbers the
+        # first key would take 5 and the second would find nothing, so the pair is
+        # parsed once and each key takes its own end. A single stated line is both
+        # ends, which is what "line 7" means for a region.
+        m = _LINE_RANGE_RE.match(tail)
+        if m:
+            return int(m.group(1)) if key == "start_line" else int(m.group(2))
+        single = _number(tail)
+        return int(single) if single is not None else None
     if key in _NUMERIC_KEYS:
         return _number(tail)
     if key in _LIST_NUMERIC_KEYS:

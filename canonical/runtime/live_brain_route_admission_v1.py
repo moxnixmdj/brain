@@ -1968,7 +1968,18 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
                      "ROUTE_ADMISSION_REJECTED:" + str(admission.get("rule")), started, **_extra)
     promised_sources = _promised_source_files(normalized)
     source_digests_before = {raw: _source_digest(raw) for raw in promised_sources}
-    result = _execute(task_id, goal, compiled, admissible, started)
+    try:
+        result = _execute(task_id, goal, compiled, admissible, started)
+    except SystemExit as exc:
+        # Every handler on this path catches Exception, and SystemExit derives from
+        # BaseException, so a capability whose adapter calls sys.exit() did not fail
+        # closed -- it terminated the CALLER. Measured on
+        # "Generate the test scaffold for the python source root D": the capability
+        # was selected correctly and then escaped solve() as an uncaught SystemExit.
+        # A front door that raises is worse than one that refuses.
+        return _fail(task_id, "FAIL_CLOSED__CAPABILITY_EXITED_PROCESS",
+                     "CAPABILITY_EXITED_PROCESS:" + str(exc)[:300], started,
+                     compiled_capability_id=str(compiled.get("capability_id") or ""))
     result["route_admission"] = admission
     result["memory_recalled"] = [
         {"id": r.get("id"), "content": r.get("content"),

@@ -23572,12 +23572,9 @@
     "module",
     "new_name",
     "output_path",
-    "python_executable",
     "qualname",
-    "run_tests",
     "source_root",
-    "start_line",
-    "timeout_s"
+    "start_line"
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
@@ -25419,10 +25416,8 @@
    "input_contract_source": "action_template",
    "input_names": [
     "changed_paths",
-    "diff_path",
     "output_path",
-    "source_root",
-    "test_roots"
+    "source_root"
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
@@ -25494,9 +25489,7 @@
    "incremental_spend_usd": 0,
    "input_contract_source": "action_template",
    "input_names": [
-    "edits",
     "edits_path",
-    "index_path",
     "output_path",
     "source_root"
    ],
@@ -25997,12 +25990,9 @@
    "input_contract_source": "action_template",
    "input_names": [
     "generated_tests_root",
-    "index_path",
     "output_path",
-    "python_executable",
     "source_root",
-    "targets_path",
-    "timeout_s"
+    "targets_path"
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
@@ -28182,7 +28172,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "4add50f5552cc359219aed03a7434573500f686b543ef2bc1d70e41d8f7b91e2"
+  "value": "7b596f028178c8c92f8d58168a5405f05fc767e40106996bffd624655979ce5a"
  },
  "engines": [
   {
@@ -51503,7 +51493,7 @@
   "included_source_count": 927,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "aa16b174a9bf48f95604a4e5c04a7adf50420e138289cbc0c4f90e90d9542e0b"
+  "source_tree_digest": "03740e0ed23c0847cd3956d74c34824a48c7745498128721a0f812262ab8c613"
  },
  "research_index": [
   {
@@ -229155,7 +229145,7 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "a9d0f553621404b651f55591cf1ca140406d58c355e92b25da3951260cd4645f",
+   "sha256": "521aed8cd23a87f374e76959ded49a0d1b3fccbc1949d5a30bd6ba3e6cfedafd",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
    "symbol_count": 65,
    "symbols": [
@@ -235463,7 +235453,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "ad15c7f2d7ca49a16374a1512cf1fc130bdc41dff2902e68df90c7c16c381106",
+   "sha256": "4896c9480a8a9094d76b366298c9e94e69a155cd5d4add13c49cc8217ebc8d1b",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 52,
    "symbols": [

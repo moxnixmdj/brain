@@ -4750,12 +4750,11 @@
           "module": "${input.module}",
           "new_name": "${input.new_name}",
           "output_path": "${input.output_path}",
-          "python_executable": "${input.python_executable}",
           "qualname": "${input.qualname}",
-          "run_tests": "${input.run_tests}",
+          "run_tests": [],
           "source_root": "${input.source_root}",
           "start_line": "${input.start_line}",
-          "timeout_s": "${input.timeout_s}"
+          "timeout_s": 300
         },
         "expect": {
           "field": "gate",
@@ -6835,10 +6834,8 @@
         "args": {
           "capability_id": "python.source.change_impact.testselect.v1",
           "changed_paths": "${input.changed_paths}",
-          "diff_path": "${input.diff_path}",
           "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}",
-          "test_roots": "${input.test_roots}"
+          "source_root": "${input.source_root}"
         },
         "expect": {
           "field": "output_verified",
@@ -6918,9 +6915,7 @@
       "action_template": {
         "args": {
           "capability_id": "python.source.crossfile_edit.choreograph.v1",
-          "edits": "${input.edits}",
           "edits_path": "${input.edits_path}",
-          "index_path": "${input.index_path}",
           "output_path": "${input.output_path}",
           "source_root": "${input.source_root}"
         },
@@ -7459,12 +7454,9 @@
         "args": {
           "capability_id": "python.tests.generate.scaffold.v1",
           "generated_tests_root": "${input.generated_tests_root}",
-          "index_path": "${input.index_path}",
           "output_path": "${input.output_path}",
-          "python_executable": "${input.python_executable}",
           "source_root": "${input.source_root}",
-          "targets_path": "${input.targets_path}",
-          "timeout_s": "${input.timeout_s}"
+          "targets_path": "${input.targets_path}"
         },
         "expect": {
           "field": "verified",
