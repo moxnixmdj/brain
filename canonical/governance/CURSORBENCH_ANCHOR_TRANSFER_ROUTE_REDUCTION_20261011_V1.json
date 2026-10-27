@@ -1,0 +1,120 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_ANCHOR_TRANSFER_ROUTE_REDUCTION_20261011_V1",
+  "date": "2026-10-11",
+  "status": "CANDIDATE_TRUTH_REPAIR__AUTHENTIC_57_8_ANCHOR_CAN_CLOSE_FIXED_BAR_BY_TARGET_SCOPED_NONINFERIORITY_WITHOUT_SCORE_DECOMPOSITION__CURRENT_TRANSFER_PREMISE_OPEN__ZERO_CREDIT",
+  "target_predicate": "CODING_CURSORBENCH_GE_57_8",
+  "frozen_acceptance": "CursorBench 4.0 >= 57.8%",
+  "sources": {
+    "predicate_registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "threshold_route_truth_repair": {
+      "path": "canonical/governance/CURSORBENCH_THRESHOLD_LOWER_BOUND_ROUTE_TRUTH_REPAIR_20261009_V1.json",
+      "git_blob_sha": "8de9469211a12423541f9c55086f520cd474ebca"
+    },
+    "metric_and_anchor_evidence": {
+      "path": "canonical/evidence/CURSORBENCH_4_0_CURRENT_ACCURACY_METRIC_IDENTITY_EVIDENCE_20261009_V1.json",
+      "git_blob_sha": "38fd3f0c3de2ab92022b09d3168f9224d0dcea4e"
+    },
+    "scope_receipt": {
+      "path": "canonical/governance/CURSORBENCH_4_0_SCOPE_COMPLETENESS_RECEIPT_V1.json",
+      "git_blob_sha": "7401589da3b30954104145dc4959e534ab8cd641"
+    },
+    "all_members_information_nogo": {
+      "path": "canonical/governance/CURSORBENCH_CONSTRUCTIVE_SCOPE_THEOREM_INFORMATION_NOGO_20261009_V1.json",
+      "git_blob_sha": "1550a5c44d6c9c99e5a5488886d968942abd68d2"
+    },
+    "current_wait_state": {
+      "path": "canonical/governance/CURSORBENCH_CURRENT_INFORMATION_BOUNDARY_WAIT_STATE_RECONCILIATION_20261010_V1.json",
+      "git_blob_sha": "4f1df11b30d9b69090c31e234449975eb7cdfd89"
+    }
+  },
+  "bound_anchor": {
+    "benchmark": "CURSORBENCH_4_0",
+    "configuration": "OPUS_5_5_MAX",
+    "score": 0.578,
+    "metric": "ACCURACY_PERCENT",
+    "higher_is_better": true,
+    "authentic_current_public_result_bound": true
+  },
+  "theorem": {
+    "name": "CURSORBENCH_FIXED_BAR_ANCHOR_TRANSFER",
+    "statement": "LET_S_BE_THE_EXACT_FROZEN_CURSORBENCH_4_0_SCORE_FUNCTIONAL_AND_LET_O_BE_OPUS_5_5_MAX_WITH_AUTHENTIC_S_O_EQ_0_578__IF_A_CONTENT_ADDRESSED_CERTIFICATE_PROVES_S_BRAIN_GE_S_O_UNDER_THE_SAME_TARGET_EVALUATOR_RELATION__THEN_S_BRAIN_GE_0_578_AND_THE_FIXED_BAR_PREDICATE_IS_SATISFIED.",
+    "proof": [
+      "AUTHENTIC_CURRENT_OWNER_AND_VENDOR_EVIDENCE_BINDS_S_OPUS_5_5_MAX_EQ_0_578.",
+      "THE_TRANSFER_CERTIFICATE_PREMISE_BINDS_S_BRAIN_GE_S_OPUS_5_5_MAX_UNDER_THE_SAME_FROZEN_TARGET_EVALUATOR_RELATION.",
+      "BY_TRANSITIVITY_S_BRAIN_GE_0_578.",
+      "THEREFORE_THE_PUBLIC_FIXED_BAR_CURSORBENCH_4_0_GE_57_8_PERCENT_IS_SATISFIED."
+    ],
+    "stronger_formula_free_subroute": {
+      "statement": "IF_THE_COMPLETE_SCORE_RELEVANT_INPUT_TO_THE_SAME_FROZEN_SCORE_FUNCTIONAL_IS_PROVED_IDENTICAL_FOR_BRAIN_AND_OPUS_5_5_MAX__THEN_THEIR_CURSORBENCH_SCORES_ARE_EQUAL_EVEN_WHEN_THE_INTERNAL_AGGREGATION_FORMULA_DENOMINATOR_TASK_COUNT_PASS_COUNT_AND_WEIGHTS_REMAIN_UNKNOWN.",
+      "reason": "EQUAL_INPUTS_TO_THE_SAME_FUNCTION_PRODUCE_EQUAL_OUTPUTS",
+      "requires_score_formula_disclosure": false,
+      "requires_denominator_disclosure": false,
+      "requires_task_count_disclosure": false,
+      "requires_weight_disclosure": false
+    },
+    "monotone_dominance_subroute": {
+      "statement": "POINTWISE_OR_DISTRIBUTIONAL_DOMINANCE_OF_SCORE_RELEVANT_INPUTS_IS_SUFFICIENT_ONLY_IF_THE_RELEVANT_MONOTONICITY_OF_THE_FROZEN_SCORE_FUNCTIONAL_IS_SEPARATELY_PROVED.",
+      "monotonicity_must_not_be_assumed": true
+    }
+  },
+  "accepted_transfer_certificate_classes": [
+    "DIRECT_TARGET_SCORE_NONINFERIORITY__BRAIN_CURSORBENCH_SCORE_LOWER_BOUND_GE_AUTHENTIC_OPUS_5_5_MAX_SCORE",
+    "EXACT_SCORE_INPUT_EQUIVALENCE__COMPLETE_SCORE_RELEVANT_INPUT_TO_THE_SAME_FROZEN_SCORE_FUNCTIONAL_IS_IDENTICAL",
+    "MONOTONE_SCORE_INPUT_DOMINANCE__ONLY_WITH_SEPARATELY_PROVED_SCORE_FUNCTIONAL_MONOTONICITY"
+  ],
+  "not_required_for_anchor_transfer": [
+    "EXACT_PER_TASK_GRADER_OUTPUT_DOMAIN_DISCLOSURE",
+    "EXACT_PER_TASK_SCORE_CONTRIBUTION_RULE_DISCLOSURE",
+    "EXACT_TASK_COUNT",
+    "EXACT_PASS_COUNT",
+    "EXACT_AGGREGATION_DENOMINATOR",
+    "EXACT_AGGREGATION_WEIGHTS",
+    "UNIVERSAL_SUCCESS",
+    "FORMAL_ALL_MEMBERS_POLICY_ADEQUACY"
+  ],
+  "relation_to_existing_no_go": {
+    "contradiction": false,
+    "reason": "THE_EXISTING_TWO_WORLD_NOGO_BLOCKS_DERIVING_FORMAL_ALL_MEMBERS_ADEQUACY_FROM_CURRENT_SCOPE_AND_OWNER_INFORMATION_ALONE__THIS_ROUTE_REQUIRES_A_NEW_TARGET_SCOPED_SCORE_RELATION_OR_COMPLETE_SCORE_INPUT_EQUIVALENCE_CERTIFICATE_AND_DOES_NOT_DERIVE_ALL_MEMBERS_ADEQUACY."
+  },
+  "current_state": {
+    "anchor_bound": true,
+    "transfer_certificate_bound": false,
+    "score_formula_bound": false,
+    "fixed_bar_proved": false,
+    "acceptance_state": "OPEN",
+    "minimum_policy_changing_delta": "ONE_CONTENT_ADDRESSED_TARGET_SCOPED_BRAIN_VS_OPUS_5_5_MAX_SCORE_NONINFERIORITY_OR_EXACT_SCORE_INPUT_EQUIVALENCE_CERTIFICATE"
+  },
+  "scheduler_repair_candidate": {
+    "add_route": "ROUTE_C__AUTHENTIC_57_8_ANCHOR_TRANSFER",
+    "priority": "PREEMPT_SCORE_DECOMPOSITION_SEARCH_IF_A_VALID_TARGET_SCOPED_TRANSFER_CERTIFICATE_APPEARS",
+    "new_wake_condition": "CONTENT_ADDRESSED_CURSORBENCH_4_0_BRAIN_VS_OPUS_5_5_MAX_SCORE_NONINFERIORITY_OR_EXACT_SCORE_INPUT_EQUIVALENCE_EVIDENCE",
+    "same_information_retry_authority": false,
+    "do_not_claim_current_wake": true
+  },
+  "hard_nonclaims": [
+    "NO_CURRENT_BRAIN_CURSORBENCH_SCORE_IS_INFERRED.",
+    "NO_CURRENT_BRAIN_VS_OPUS_TARGET_NONINFERIORITY_IS_PROVED.",
+    "NO_SCORE_INPUT_EQUIVALENCE_IS_PROVED.",
+    "NO_MONOTONICITY_OF_UNKNOWN_HIDDEN_AGGREGATION_IS_ASSUMED.",
+    "NO_FORMAL_ALL_MEMBERS_ADEQUACY_IS_CLAIMED.",
+    "NO_CURSORBENCH_ACCEPTANCE_FAMILY_OWNERSHIP_CAPABILITY_PROMOTION_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "terminal_authority": false
+}

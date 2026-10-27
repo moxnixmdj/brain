@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_ANCHOR_TRANSFER_LOCAL_LOGIC_CHECK_20261011_V1",
+  "date": "2026-10-11",
+  "status": "LOCAL_DETERMINISTIC_LOGIC_CHECK_PASS__NOT_INDEPENDENT_VERIFICATION__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/CURSORBENCH_ANCHOR_TRANSFER_ROUTE_REDUCTION_20261011_V1.json"
+  },
+  "checked_cases": [
+    {
+      "id": "DIRECT_SCORE_NONINFERIORITY_AT_0_578",
+      "premises": "SAME_EVALUATOR_AND_AUTHENTIC_ANCHOR_AND_BRAIN_LOWER_BOUND_0_578",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "id": "DIRECT_SCORE_NONINFERIORITY_AT_0_577",
+      "premises": "SAME_EVALUATOR_AND_AUTHENTIC_ANCHOR_AND_BRAIN_LOWER_BOUND_0_577",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "id": "EXACT_SCORE_INPUT_EQUIVALENCE",
+      "premises": "SAME_EVALUATOR_AND_AUTHENTIC_ANCHOR_AND_SAME_SCORE_FUNCTIONAL_AND_COMPLETE_SCORE_INPUT_IDENTITY",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "id": "EXACT_SCORE_INPUT_EQUIVALENCE_WITHOUT_IDENTITY",
+      "premises": "SAME_EVALUATOR_AND_AUTHENTIC_ANCHOR_AND_SAME_SCORE_FUNCTIONAL_BUT_NO_COMPLETE_SCORE_INPUT_IDENTITY",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "id": "MONOTONE_DOMINANCE",
+      "premises": "SAME_EVALUATOR_AND_AUTHENTIC_ANCHOR_AND_SCORE_INPUT_DOMINANCE_AND_PROVED_MONOTONICITY",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "id": "DOMINANCE_WITHOUT_MONOTONICITY",
+      "premises": "SAME_EVALUATOR_AND_AUTHENTIC_ANCHOR_AND_SCORE_INPUT_DOMINANCE_BUT_NO_MONOTONICITY_PROOF",
+      "expected": false,
+      "observed": false
+    }
+  ],
+  "deduction": "THE_ANCHOR_TRANSFER_IMPLICATION_IS_VALID_AS_PLAIN_ORDER_TRANSITIVITY__THE_EQUAL_INPUT_SUBROUTE_IS_VALID_AS_FUNCTION_EXTENSIONALITY__THE_DOMINANCE_SUBROUTE_MUST_FAIL_CLOSED_WITHOUT_MONOTONICITY.",
+  "verification_scope": {
+    "independent": false,
+    "remote_carrier": false,
+    "repository_runtime_file_landed": false,
+    "reason_runtime_file_not_landed": "CONNECTOR_MUTATION_SAFETY_LAYER_BLOCKED_THE_COMPANION_CODE_WRITE",
+    "candidate_only": true
+  },
+  "hard_nonclaims": [
+    "NO_TARGET_TRANSFER_PREMISE_IS_PROVED.",
+    "NO_BRAIN_CURSORBENCH_SCORE_IS_CREATED.",
+    "NO_INDEPENDENT_VERIFICATION_IS_CLAIMED.",
+    "NO_ACCEPTANCE_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
