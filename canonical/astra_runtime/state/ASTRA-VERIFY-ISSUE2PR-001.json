@@ -1,0 +1,13 @@
+{
+  "mission_id": "ASTRA-VERIFY-ISSUE2PR-001",
+  "status": "COMPLETE",
+  "run1_ms": 314.8,
+  "run2_ms": 304.5,
+  "determinism": "diff_byte_identical",
+  "planned_ops": 1,
+  "applied_ops": 1,
+  "applied_sites": 6,
+  "tests_selected": 1,
+  "tests_passed": 2,
+  "pytest": "9.1.1"
+}

@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-10-27T08:26:22.168651+00:00",
+  "mission_id": "ASTRA-VERIFY-CROSSFILE-EDIT-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_CROSSFILE_EDIT_001.json",
+  "mission_sha256": "6d7f2cd3ef345e0ed53947b3b489be2cff2f312fd97a6e888ff4c226759b9fb7",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "d9444de2160cd02e3e5907c9dc66284f1aba64ca42af5152a60cf3a931238139",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

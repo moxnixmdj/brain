@@ -1,0 +1,19 @@
+{
+  "adapter": "python_source_symbol_index",
+  "capability_id": "python.source.symbols.index.ast",
+  "full_artifact_path": "canonical/astra_runtime/tmp/ASTRA-VERIFY-PYTHON-SYMBOL-INDEX-001__FULL_INDEX.json",
+  "full_artifact_sha256": "392e75d1a4d3ffcf73dcea9f0ca196da4fb8aad6c82c6454079833114f5699c0",
+  "mission_id": "ASTRA-VERIFY-PYTHON-SYMBOL-INDEX-001",
+  "observed_effect": {
+    "call_edges": 221482,
+    "files": 2196,
+    "references": 579194,
+    "symbols": 86796,
+    "verified": true
+  },
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "unparseable_paths": [
+    "canonical/runtime/livebench_legacy_predecessor_compiler_audit_v1.py",
+    "canonical/runtime/osworld_v21_app_policy_overlay_v1.py"
+  ]
+}

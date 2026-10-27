@@ -1,0 +1,22 @@
+{
+  "mission_id": "ASTRA-VERIFY-CROSSFILE-EDIT-001",
+  "schema": "PROJECT_BRAIN_ASTRA_MISSION_V1",
+  "steps": [
+    {
+      "args": {
+        "edits": [
+          {
+            "module": "canonical/runtime/capability_planner.py",
+            "name": "Capability",
+            "new_name": "PlanningCapability",
+            "op": "rename_symbol"
+          }
+        ],
+        "output_path": "canonical/astra_runtime/tmp/ASTRA-VERIFY-CROSSFILE-EDIT-001__FULL.json",
+        "source_root": "canonical"
+      },
+      "capability_id": "python.source.crossfile_edit.choreograph.v1"
+    }
+  ],
+  "title": "Verify python.source.crossfile_edit.choreograph.v1: cross-file rename plan with per-site evidence, truthful completeness, and cache law (12.7x faster, byte-identical)"
+}

@@ -217,9 +217,128 @@ def _auto_output_path(goal,instance_id,key,suffix):
     )
 
 
+# Spec types whose declared binding may be overruled by a value the goal
+# sentence states explicitly. "literal"/"goal_text" stay spec-authoritative:
+# their bindings exist precisely to override sentence parsing.
+def _channel_candidates(store,effect):
+    """Ordered channel list for ``effect`` from either store shape.
+
+    Typed composition channels: a store maps an effect to every endpoint that
+    published it, in plan order. Legacy single-entry stores (tuple) and new
+    list stores both read; ``None`` means no channel exists.
+    """
+    value=store.get(effect)
+    if value is None:
+        return None
+    if isinstance(value,list):
+        return list(value)
+    return [value]
+
+
+def _channel_endpoint_id(candidate):
+    """Capability/instance id of one channel endpoint (2- or 3-tuple)."""
+    if isinstance(candidate,(tuple,list)) and len(candidate)==3:
+        return candidate[2]
+    if isinstance(candidate,(tuple,list)) and len(candidate)==2:
+        return candidate[0]
+    return None
+
+
+def _channel_where(where,cid,key):
+    """Validate an optional channel predicate; return (provider_set, format).
+
+    Phase C knows two predicates: ``provider`` -- a capability id or a list of
+    them -- and ``format`` -- a declared channel format string matched against
+    a producer's channel_schema for the exact field being bound. Unknown shapes
+    are refused loudly; a predicate the binder cannot evaluate must never
+    degrade into silently picking a producer anyway.
+    """
+    if where is None:
+        return None
+    if not isinstance(where,dict) or not where or set(where)-{"provider","format"}:
+        raise CapabilityProposalFailure(
+            "CAPABILITY_CHANNEL_INVALID:"+str(cid)+":"+str(key)
+        )
+    provider_set=None
+    if "provider" in where:
+        provider=where["provider"]
+        if isinstance(provider,str) and provider.strip():
+            provider_set={provider.strip()}
+        elif (
+            isinstance(provider,list)
+            and provider
+            and all(isinstance(x,str) and x.strip() for x in provider)
+        ):
+            provider_set={x.strip() for x in provider}
+        else:
+            raise CapabilityProposalFailure(
+                "CAPABILITY_CHANNEL_INVALID:"+str(cid)+":"+str(key)
+            )
+    fmt=None
+    if "format" in where:
+        fmt=where["format"]
+        if not (isinstance(fmt,str) and fmt.strip()):
+            raise CapabilityProposalFailure(
+                "CAPABILITY_CHANNEL_INVALID:"+str(cid)+":"+str(key)
+            )
+        fmt=fmt.strip()
+    return provider_set,fmt
+
+
+def _channel_entry_format(entry,field):
+    """Declared format of ``field`` on a registry entry, else None."""
+    schema=(entry or {}).get("channel_schema")
+    if not isinstance(schema,dict):
+        return None
+    spec=schema.get(field)
+    if not isinstance(spec,dict):
+        return None
+    fmt=str(spec.get("format") or "").strip()
+    return fmt or None
+
+
+def _select_channel(candidates,parsed_where,cid,key,field=""):
+    """Pick one channel endpoint under the typed-channel law.
+
+    Predicates filter first: provider id set, then declared channel format for
+    the field being bound (a producer with no schema for that field cannot
+    satisfy a format predicate). More than one survivor under ANY predicate
+    fails closed CAPABILITY_CHANNEL_AMBIGUOUS. Without predicates the
+    historical last-writer-wins law of the in-plan store is preserved exactly.
+    """
+    if not candidates:
+        return None,0
+    if parsed_where is None:
+        return candidates[-1],len(candidates)
+    provider_set,fmt=parsed_where
+    chosen=candidates
+    if provider_set is not None:
+        chosen=[
+            x for x in chosen
+            if _channel_endpoint_id(x) in provider_set
+        ]
+    if fmt is not None:
+        chosen=[
+            x for x in chosen
+            if _channel_entry_format(x[1],field)==fmt
+        ]
+    if len(chosen)>1:
+        raise CapabilityProposalFailure(
+            "CAPABILITY_CHANNEL_AMBIGUOUS:"
+            +str(cid)+":"+str(key)+":"
+            +",".join(sorted(str(_channel_endpoint_id(x)) for x in chosen))
+        )
+    if not chosen:
+        return None,len(candidates)
+    return chosen[0],len(candidates)
+
+
+STATED_PRECEDENCE_TYPES=frozenset({"effect_result","auto_path","goal_url"})
+
+
 def _bind_planned_inputs(
     goal,root,compiler,instance_id,cid,entry,providers,
-    goal_value_index=None,require_aliases=None
+    goal_value_index=None,require_aliases=None,_already_produced_paths=None
 ):
     template=entry.get("action_template") or {}
     placeholders=set(compiler._placeholders(template))
@@ -244,6 +363,41 @@ def _bind_planned_inputs(
             +str(cid)+":"+type(exc).__name__+":"+str(exc)
         ) from exc
     evidence={}
+
+    # Stated-precedence law: for slots a goal states explicitly, the stated
+    # literal wins over any declared proposal binding of a sentence-fillable
+    # type (effect_result/auto_path/goal_url). A binding only fills what the
+    # sentence left open; it may never silently reroute a value the requester
+    # actually wrote. Measured defect class this closes: a consumer carrying
+    # an effect_result binding for json_path rejected goals that stated the
+    # path, producing COMPILED_PATH_BINDING_MISMATCH fail-closures on
+    # direct-tag routes that were valid before the binding existed.
+    # Probe per slot: mask every placeholder but that one; if the compiler can
+    # bind it from the sentence alone, that slot is stated. A stated value that
+    # the compiled prefix already produces is NOT precedence-eligible: naming
+    # it is how the sentence refers to the produced artifact, so the reference
+    # binding keeps authority (reference survives planner relocation; the plain
+    # literal would freeze one rendering).
+    produced=set(str(x) for x in (_already_produced_paths or []))
+    stated={}
+    for _slot in [str(k) for k in declared]:
+        _spec=declared[_slot]
+        if not isinstance(_spec,dict):
+            continue
+        if str(_spec.get("type") or "") not in STATED_PRECEDENCE_TYPES:
+            continue
+        if _slot not in placeholders:
+            continue
+        probe=dict(entry)
+        probe["action_template"]=_mask_declared_placeholders(
+            template,(set(placeholders)-{_slot})
+        )
+        try:
+            prope=compiler._bind_inputs(goal,root,probe)
+        except Exception:
+            continue
+        if isinstance(prope,dict) and _slot in prope and str(prope[_slot]) not in produced:
+            stated[_slot]=json.loads(json.dumps(prope[_slot]))
     requires={
         str(x).strip() for x in entry.get("requires") or []
         if isinstance(x,str) and x.strip()
@@ -268,6 +422,10 @@ def _bind_planned_inputs(
                 "PROPOSAL_BINDING_SPEC_INVALID:"+str(cid)+":"+key
             )
         typ=str(spec.get("type") or "").strip()
+        if key in stated:
+            inputs[key]=stated[key]
+            evidence[key]={"type":"stated_literal","value":inputs[key]}
+            continue
         if typ=="literal":
             if "value" not in spec:
                 raise CapabilityProposalFailure(
@@ -328,6 +486,8 @@ def _bind_planned_inputs(
             effect=str(spec.get("effect") or "").strip()
             field=str(spec.get("field") or "").strip()
             container=str(spec.get("container") or "scalar").strip()
+            where=spec.get("where")
+            parsed_where=_channel_where(where,cid,key)
             if effect not in requires:
                 raise CapabilityProposalFailure(
                     "PROPOSAL_EFFECT_BINDING_NOT_REQUIRED:"
@@ -336,14 +496,24 @@ def _bind_planned_inputs(
             bound_effects=alias_map.get(effect) or [effect]
             refs=[]
             provider_ids=[]
+            channel_counts=[]
             for bound_effect in bound_effects:
-                provider=providers.get(bound_effect)
+                channel=_channel_candidates(providers,bound_effect)
+                if channel is None:
+                    raise CapabilityProposalFailure(
+                        "PROPOSAL_EFFECT_PROVIDER_MISSING:"
+                        +str(cid)+":"+key+":"+bound_effect
+                    )
+                provider,channel_size=_select_channel(
+                    channel,parsed_where,cid,key,field
+                )
                 if provider is None:
                     raise CapabilityProposalFailure(
                         "PROPOSAL_EFFECT_PROVIDER_MISSING:"
                         +str(cid)+":"+key+":"+bound_effect
                     )
-                provider_id,provider_entry=provider
+                channel_counts.append(channel_size)
+                provider_id,provider_entry=provider[0],provider[1]
                 result_fields={
                     str(x).strip()
                     for x in provider_entry.get("result_fields") or []
@@ -354,12 +524,17 @@ def _bind_planned_inputs(
                         "PROPOSAL_EFFECT_RESULT_FIELD_UNDECLARED:"
                         +str(provider_id)+":"+field
                     )
-                refs.append({
+                ref={
                     "$effect_result":{
                         "effect":bound_effect,
                         "field":field,
                     }
-                })
+                }
+                if where is not None:
+                    ref["$effect_result"]["where"]=json.loads(
+                        json.dumps(where)
+                    )
+                refs.append(ref)
                 provider_ids.append(provider_id)
             if container=="scalar":
                 if len(refs)!=1:
@@ -383,6 +558,8 @@ def _bind_planned_inputs(
                 "providers":provider_ids,
                 "provider":provider_ids[0] if len(provider_ids)==1 else None,
                 "container":container,
+                "where":json.loads(json.dumps(where)) if where is not None else None,
+                "channel_candidates":channel_counts,
             }
             continue
         raise CapabilityProposalFailure(
@@ -565,7 +742,10 @@ def multi_verified_capability_v1(
                 if not effect:
                     continue
                 bound=alias_lookup.get(effect,effect)
-                providers[bound]=(instance_id,entry)
+                # Typed channel: publish in plan order, never overwrite.
+                # Untyped readers resolve via _select_channel whose default
+                # keeps the historical last-writer-wins winner exactly.
+                providers.setdefault(bound,[]).append((instance_id,entry,cid))
     proposal={
         "goal_sha256":hashlib.sha256(goal.encode("utf-8")).hexdigest(),
         "clauses":[{

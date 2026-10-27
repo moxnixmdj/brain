@@ -1,0 +1,21 @@
+{
+  "receipt_for": "ASTRA-VERIFY-ISSUE2PR-001",
+  "capability_id": "python.software.issue_to_pr.orchestrate.v1",
+  "adapter_module": "python_issue_to_pr_orchestrate",
+  "observed": {
+    "issue_id": "GH-8842",
+    "verified": true,
+    "planned_op_count": 1,
+    "applied_op_count": 1,
+    "applied_site_count": 6,
+    "test_selected_count": 1,
+    "test_passed_count": 2,
+    "test_failed_count": 0,
+    "loop_median_ms": 314.8,
+    "second_run_ms": 304.5,
+    "diff_sha256": "ee49d7410d3bf30050126bc0812e6cfc117aa530f7eacfa46cdd6fa07aee46a6",
+    "source_tree_untouched": true,
+    "pytest": "9.1.1"
+  },
+  "scale_note": "Plan stage rides slice 4: canonical-tree-scale measured in ASTRA-VERIFY-CROSSFILE-EDIT-001 (25.2s fresh index -> 1.98s cached, byte-identical plans)."
+}

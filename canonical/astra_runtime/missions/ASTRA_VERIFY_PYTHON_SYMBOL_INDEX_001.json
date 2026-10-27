@@ -1,0 +1,14 @@
+{
+  "mission_id": "ASTRA-VERIFY-PYTHON-SYMBOL-INDEX-001",
+  "schema": "PROJECT_BRAIN_ASTRA_MISSION_V1",
+  "steps": [
+    {
+      "args": {
+        "output_path": "canonical/astra_runtime/state/ASTRA-VERIFY-PYTHON-SYMBOL-INDEX-001.json",
+        "source_root": "canonical/runtime"
+      },
+      "capability_id": "python.source.symbols.index.ast"
+    }
+  ],
+  "title": "Verify python.source.symbols.index.ast: semantic index over canonical/runtime"
+}

@@ -1,0 +1,18 @@
+{
+  "adapter": "python_crossfile_edit_choreograph",
+  "capability_id": "python.source.crossfile_edit.choreograph.v1",
+  "mission_id": "ASTRA-VERIFY-CROSSFILE-EDIT-001",
+  "observed_effect": {
+    "ambiguous_sites": 0,
+    "cache_speedup_x": 12.7,
+    "cached_seconds": 1.98,
+    "complete": true,
+    "edit": "rename_symbol Capability -> PlanningCapability in canonical/runtime/capability_planner.py",
+    "fresh_seconds": 25.2,
+    "planned_sites": 2,
+    "plans_byte_identical": true,
+    "source_root": "canonical",
+    "verified": true
+  },
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1"
+}
