@@ -48,6 +48,15 @@ _RENAME_RE = re.compile(
 _MOVE_RE = re.compile(
     r"^\s*move\s+(?P<name>[A-Za-z_]\w*)"
     r"(?:\s+from\s+(?P<src>\S+))?\s+to\s+(?P<dst>\S+)\s*[.;]?\s*$", re.IGNORECASE)
+# rename parameter <old> to <new> in pkg/core.py:describe  |  in pkg.core.helper
+_RENAME_PARAM_RE = re.compile(
+    r"^\s*rename\s+parameter\s+(?P<old>[A-Za-z_]\w*)\s+(?:to|->)\s+(?P<new>[A-Za-z_]\w*)"
+    r"\s+(?:in|for|on)\s+(?P<target>[A-Za-z_./][\w./:]*)\s*[.;]?\s*$", re.IGNORECASE)
+# Compat anchor: `rename helper(n) to helper(count)` names the same law.
+_RENAME_PARAM_CALL_RE = re.compile(
+    r"^\s*rename\s+(?P<fn>[A-Za-z_]\w*)\((?P<old>[A-Za-z_]\w*)\)\s+(?:to|->)\s+"
+    r"(?:[A-Za-z_]\w*)\((?P<new>[A-Za-z_]\w*)\)"
+    r"(?:\s+(?:in|for|on)\s+(?P<target>[A-Za-z_./][\w./:]*))?\s*[.;]?\s*$", re.IGNORECASE)
 _IMP_SNIFFS = re.compile(r"\b(rename|move|delete|extract|inline|wrap|unwrap|change)\b", re.I)
 
 
@@ -141,10 +150,94 @@ def _parse_issue(repo: Path, source_abs: Path, source_root: str, cached: Path | 
 
     ops, evidence, refused = [], [], []
     bound = ambiguous = 0
+
+    def _param_homes(qual: str) -> list[str]:
+        """Homes of a (possibly dotted) function qualname in the index."""
+        out = []
+        for row in index.get("modules") or []:
+            path = str(row["path"])
+            for dfn in row.get("definitions") or []:
+                q = str(dfn["qualname"])
+                if q == qual or (("." not in qual) and q == qual and dfn["name"] == qual):
+                    out.append(path)
+                    break
+                # convenience: leaf name at module scope (`helper` finds helper)
+                if q == qual.split(".")[-1] and dfn["name"] == qual.split(".")[-1] and q.count(".") == 0:
+                    out.append(path)
+                    break
+        return sorted(set(out))
+
+    def _split_target(token: str, func_hint: str | None):
+        """`pkg/core.py:describe` or dotted `pkg.core.describe` -> (module_rel, qualname)."""
+        if ":" in token:
+            mod_spell, qual = token.rsplit(":", 1)
+            mod_dot = _norm_module(mod_spell)
+            if mod_dot not in inv_dot_to_path:
+                return None, None, "QUALIFIER_MODULE_UNKNOWN:" + mod_dot
+            return inv_dot_to_path[mod_dot], qual, None
+        dot = _norm_module(token)
+        parts = dot.split(".")
+        # longest module prefix that exists in the index; the rest is qualname
+        for cut in range(len(parts) - 1, 0, -1):
+            cand = ".".join(parts[:cut])
+            if cand in inv_dot_to_path:
+                return inv_dot_to_path[cand], ".".join(parts[cut:]), None
+        # whole token is a module; qualname is the function hint
+        if dot in inv_dot_to_path and func_hint:
+            return inv_dot_to_path[dot], func_hint, None
+        return None, None, "QUALIFIER_MODULE_UNKNOWN:" + dot
+
     for raw in raw_lines:
         line = raw.strip()
-        m = _RENAME_RE.match(line) or None
-        mv = _MOVE_RE.match(line) if not m else None
+        pm = _RENAME_PARAM_RE.match(line) or _RENAME_PARAM_CALL_RE.match(line) or None
+        m = _RENAME_RE.match(line) if not pm else None
+        mv = _MOVE_RE.match(line) if not (m or pm) else None
+        if pm:
+            old, new = pm.group("old"), pm.group("new")
+            token = pm.group("target") if "target" in pm.re.groupindex and pm.group("target") else None
+            hint = pm.group("fn") if "fn" in pm.re.groupindex else None
+            row = {"raw": line, "parsed_as": "rename_parameter",
+                   "old_param": old, "new_param": new, "target": token, "hint": hint}
+            if not token and not hint:
+                refused.append({"line": line, "reason": "PARAM_TARGET_MISSING"})
+                row["bound"] = False
+                evidence.append(row)
+                continue
+            mod_rel, qual, err = (None, None, None)
+            if token:
+                mod_rel, qual, err = _split_target(token, hint)
+            elif hint:
+                homes_h = _param_homes(hint)
+                if len(homes_h) == 1:
+                    mod_rel, qual = homes_h[0], hint
+                elif not homes_h:
+                    err = "NAME_NOT_FOUND:" + hint
+                else:
+                    err = "NAME_AMBIGUOUS:" + hint
+                    row["homes"] = homes_h
+                    ambiguous += 1
+            if err:
+                refusal = {"line": line, "reason": err}
+                if row.get("homes"):
+                    refusal["homes"] = row["homes"]
+                refused.append(refusal)
+                row["bound"] = False
+                evidence.append(row)
+                continue
+            homes = _param_homes(qual)
+            if mod_rel not in homes:
+                refused.append({"line": line,
+                                "reason": f"QUALIFIER_NOT_A_HOME:{qual}",
+                                "homes": homes})
+                row.update({"bound": False, "homes": homes})
+                evidence.append(row)
+                continue
+            ops.append({"op": "rename_parameter", "module": mod_rel,
+                        "qualname": qual, "old_param": old, "new_param": new})
+            bound += 1
+            row.update({"bound": True, "module": mod_rel, "qualname": qual})
+            evidence.append(row)
+            continue
         if m:
             name, new_name = m.group("name"), m.group("new")
             qualifier = _norm_module(m.group("mod")) if m.group("mod") else None
@@ -224,6 +317,7 @@ def _parse_issue(repo: Path, source_abs: Path, source_root: str, cached: Path | 
         elif _IMP_SNIFFS.search(line) and not line.startswith(("#", ">", "-")):
             refused.append({"line": line,
                             "reason": "UNSUPPORTED_ANCHOR:only strict 'rename ... to ...' / "
+                                      "'rename parameter ... to ... in <module>:<qualname>' / "
                                       "'move ... to ...' clauses bind in v1"})
             evidence.append({"raw": line, "bound": False})
         else:

@@ -6928,7 +6928,7 @@
     "move"
    ],
    "limitations": [
-    "strict anchored grammar only: 'rename N to N2 [in M]' and 'move N [from M] to M2' clauses bind; every other imperative line refuses with the line quoted (never guesses a verb).",
+    "strict anchored grammar only: 'rename N to N2 [in M]', 'rename parameter O to N2 in <module>:<qualname>' (dotted and call-compat spellings) and 'move N [from M] to M2' clauses bind; every other imperative line refuses with the line quoted.",
     "v1 is deterministic text parsing, not an LLM: vague prose ('make it faster') is refused loudly as evidence, not silently interpreted.",
     "module qualifiers are used only as index homes; semantic validity of the ops (collisions, ambiguity at plan time) is slice-4's job downstream."
    ],
@@ -6965,22 +6965,15 @@
    "status": "VERIFIED_BOUND_CAPABILITY",
    "verification": {
     "independently_verified": true,
-    "mission_id": "ASTRA-VERIFY-NLISSUE-001",
+    "mission_id": "ASTRA-VERIFY-NLPARAM-001",
     "observed_effect": {
-     "issue_id": "GH-9101",
-     "issue_text": "title 'Rename helper to compute in pkg/core.py' + duplicated body line",
-     "ops_emitted": 1,
-     "complete": true,
-     "composed_with": "python.software.issue_to_pr.orchestrate.v1 unchanged",
-     "applied_sites": 2,
-     "selected_tests_green": 1,
-     "e2e_median_ms": 300.6,
-     "first_run_ms": 305.0,
-     "deterministic": "diff byte-identical across reruns",
-     "refusal_stories": "NAME_NOT_FOUND w/ lexical candidates; NAME_AMBIGUOUS w/ homes; UNSUPPORTED_ANCHOR w/ quoted line"
+     "verb_set": "rename symbol | rename parameter (strict, dotted, call-compat) | move",
+     "golden": "GH-8820: 2 prose clauses -> 2 bound ops -> 6+5 byte-splices across def+body+callers+suite kwargs; tests green post-apply",
+     "honesty": "getattr dispatch + **kwargs passthrough listed unknown (complete=false), bytes untouched; unsupported imperatives refuse naming all three verbs",
+     "parse_ms": 500
     },
-    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-NLISSUE-001__RECEIPT.json",
-    "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-NLISSUE-001.json"
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-NLPARAM-001__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-NLPARAM-001.json"
    }
   },
   "python.tests.generate.scaffold.v1": {
