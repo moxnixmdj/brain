@@ -122,12 +122,14 @@ class LineRangeTests(unittest.TestCase):
 
 
 class ExtractFunctionIsSelectableTests(unittest.TestCase):
-    # source_root must exist for the binder to accept it, so this points at the
-    # repository rather than at a path that was never created.
+    # source_root must exist AND be a scoped subtree: the binder refuses the
+    # repository root itself with 0_existing_directories_named, so a test that
+    # pointed at REPO_ROOT measured a refusal rather than a binding.
+    SCOPE = REPO_ROOT / "canonical/astra_runtime/tmp"
     GOAL = (
         "Extract the function big from the module calc.py lines 6 to 8 in the "
-        f"python source root {REPO_ROOT} into a new function named total_of "
-        f"writing the report to {REPO_ROOT}/canonical/astra_runtime/tmp/wl_probe.json"
+        f"python source root {SCOPE} into a new function named total_of "
+        f"writing the report to {SCOPE}/wl_probe.json"
     )
 
     def test_the_template_demands_only_what_a_sentence_can_state(self):
@@ -257,3 +259,75 @@ class RefactorEndToEndTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# ---------------------------------------------------------------------------
+# "Which tests does my change break?" is a question with a right answer, and a
+# read-only census is not it.
+#
+# Measured on main at b0da6f4, "Select the tests affected by the changed paths
+# <F> in the python source root <D>" scored
+# python.source.change_impact.testselect.v1 at 22 and python.source.audit.ast at
+# 22 -- an exact tie -- and ranked.sort(key=lambda x:(-x[0],-x[1],x[2])) breaks a
+# tie by CAPABILITY ID, so "audit" sorted before "change_impact" and the census
+# answered. The capability that owns the question declared test/affected/change/
+# selection while the sentence says tests/affected/changed/Select: three of four
+# discriminating words missed on inflection alone.
+#
+# Two declaration-level fixes, no change to the scoring model:
+#   - changed_paths joins _PATH_LIST_KEYS. The adapter requires a LIST and
+#     raises CHANGE_IMPACT_INPUT_REQUIRED on a bare string, which is exactly what
+#     the binder handed it once the capability was selected. The key's own plural
+#     name already said it was a list.
+#   - the inflected forms the sentence actually uses join the capability's
+#     declared keywords.
+# ---------------------------------------------------------------------------
+class WhichTestsDoesMyChangeBreakTests(unittest.TestCase):
+    def setUp(self):
+        import shutil
+        self.dir = REPO_ROOT / "canonical/astra_runtime/tmp/test_change_impact_v1"
+        shutil.rmtree(self.dir, ignore_errors=True)
+        (self.dir / "tests").mkdir(parents=True)
+        (self.dir / "calc.py").write_text("def add(a, b):\n    return a + b\n")
+        (self.dir / "lonely.py").write_text("def nothing():\n    return None\n")
+        (self.dir / "tests" / "test_calc.py").write_text(
+            "from calc import add\n\n\ndef test_add():\n    assert add(2, 3) == 5\n")
+        (self.dir / "tests" / "test_lonely.py").write_text(
+            "from lonely import nothing\n\n\ndef test_nothing():\n    assert nothing() is None\n")
+
+    def test_the_plural_noun_binds_a_list_which_is_what_the_adapter_demands(self):
+        entry = json.loads(
+            (REPO_ROOT / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json").read_text()
+        )["capabilities"]["python.source.change_impact.testselect.v1"]
+        goal = f"Select the tests affected by the changed paths {self.dir}/calc.py"
+        bound = front.bind_typed_key(goal, "changed_paths", REPO_ROOT, entry)
+        self.assertIsInstance(bound, list, f"a bare string raises CHANGE_IMPACT_INPUT_REQUIRED: {bound!r}")
+        self.assertEqual(len(bound), 1)
+        self.assertTrue(str(bound[0]).endswith("calc.py"))
+
+    def test_the_question_selects_the_capability_that_answers_it(self):
+        goal = (f"Select the tests affected by the changed paths {self.dir}/calc.py in the "
+                f"python source root {self.dir} writing the report to {self.dir}/impact.json")
+        result = admission.solve({"task_id": "CHANGE_IMPACT", "goal": goal})
+        self.assertEqual(result.get("compiled_capability_id"),
+                         "python.source.change_impact.testselect.v1")
+        self.assertIs(result.get("pass"), True, str(result.get("reason"))[:300])
+
+    def test_the_report_on_disk_names_the_affected_tests_and_only_those(self):
+        goal = (f"Select the tests affected by the changed paths {self.dir}/calc.py in the "
+                f"python source root {self.dir} writing the report to {self.dir}/impact.json")
+        admission.solve({"task_id": "CHANGE_IMPACT_BYTES", "goal": goal})
+        payload = json.loads((self.dir / "impact.json").read_text())
+        selected = [str(x) for x in payload.get("selected_tests") or []]
+        self.assertTrue(any(x.endswith("test_calc.py") for x in selected), selected)
+        # The negative control that makes this a measurement rather than a
+        # rubber stamp: a test that imports nothing the change touched must not
+        # be swept in, or "select the affected tests" is just "list the tests".
+        self.assertFalse(any(x.endswith("test_lonely.py") for x in selected), selected)
+
+    def test_a_question_about_the_file_is_still_answered_by_the_census(self):
+        goal = (f"Count the functions in the python file {self.dir}/calc.py in the "
+                f"python source root {self.dir} writing the report to {self.dir}/census.json")
+        result = admission.solve({"task_id": "CENSUS_STILL_WINS", "goal": goal})
+        self.assertEqual(result.get("compiled_capability_id"), "python.source.audit.ast")
+        self.assertIs(result.get("pass"), True, str(result.get("reason"))[:300])

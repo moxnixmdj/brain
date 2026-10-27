@@ -25836,6 +25836,11 @@
     "affected",
     "minimal",
     "fast",
+    "changed",
+    "select",
+    "tests",
+    "impacted",
+    "which tests",
     "source",
     "change_impact",
     "testselect",
@@ -28613,7 +28618,7 @@
   "knowledge_documents": 169,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6485,
-  "routing_tokens": 2090,
+  "routing_tokens": 2091,
   "skills": 18,
   "source_index_entry_points": 422,
   "source_index_modules": 1885
@@ -28621,7 +28626,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c324d846186e058552bcc72e0d44e9c8e3f692276d2dee9d0aeb85d44c640b8d"
+  "value": "fded9111b79d75f2b308d6e4d7da686c4a5c77b112281e1c441a469f17178287"
  },
  "engines": [
   {
@@ -31404,10 +31409,11 @@
     "python.source.change_impact.testselect.v1": 446.0
    },
    "changed": {
-    "python.review.diff_coverage_gate.v1": 269.4,
-    "python.review.diff_security_gate.v1": 269.4,
-    "python.review.diff_static_triage.v1": 269.4,
-    "python.review.diff_type_gate.v1": 269.4
+    "python.review.diff_coverage_gate.v1": 225.0,
+    "python.review.diff_security_gate.v1": 225.0,
+    "python.review.diff_static_triage.v1": 225.0,
+    "python.review.diff_type_gate.v1": 225.0,
+    "python.source.change_impact.testselect.v1": 150.0
    },
    "channel": {
     "canonical/runtime/livebench_union25_channel_factorization_v1.py.auto.v1": 298.0,
@@ -33268,6 +33274,9 @@
     "code.impact.tree_sitter.testselect.v1": 224.0,
     "python.source.change_impact.testselect.v1": 224.0,
     "python.source.crossfile_edit.choreograph.v1": 224.0
+   },
+   "impacted": {
+    "python.source.change_impact.testselect.v1": 446.0
    },
    "implement": {
     "python.software.issue_to_pr.orchestrate.v1": 446.0
@@ -36954,7 +36963,8 @@
     "canonical/runtime/seed_preserving_instruction_postprocessor_v2.py.auto.v1": 669.0
    },
    "select": {
-    "web.browser.rendered.capture.chromedriver": 446.0
+    "python.source.change_impact.testselect.v1": 298.0,
+    "web.browser.rendered.capture.chromedriver": 298.0
    },
    "selected": {
     "canonical/runtime/continuity_root3_selected_route_reachability_v1.py.auto.v1": 76.0,
@@ -37819,11 +37829,12 @@
     "evidence.oracle.hypothesis_property.v1": 446.0
    },
    "tests": {
-    "python.repository.acceptance.measure.v1": 150.0,
-    "python.software.repair.loop.strict_progress.ast.v1": 150.0,
-    "python.software.repair.loop.test_guided.ast.v1": 150.0,
-    "python.tests.audit.unittest": 150.0,
-    "python.tests.generate.scaffold.v1": 150.0
+    "python.repository.acceptance.measure.v1": 128.857143,
+    "python.software.repair.loop.strict_progress.ast.v1": 128.857143,
+    "python.software.repair.loop.test_guided.ast.v1": 128.857143,
+    "python.source.change_impact.testselect.v1": 128.857143,
+    "python.tests.audit.unittest": 128.857143,
+    "python.tests.generate.scaffold.v1": 128.857143
    },
    "testselect": {
     "code.impact.tree_sitter.testselect.v1": 298.0,
@@ -52031,7 +52042,7 @@
   "included_source_count": 938,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "0f34106f334991598e88b969f15186404d4ffe3e8c6015db69454e5cfc84f497"
+  "source_tree_digest": "76697e9f50b02d6008e56771a313b05b5945ed54e51509be04161f9df737bb5a"
  },
  "research_index": [
   {
@@ -230028,7 +230039,7 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "521aed8cd23a87f374e76959ded49a0d1b3fccbc1949d5a30bd6ba3e6cfedafd",
+   "sha256": "2d7bdfa73f3b7117e0c1bbc86a13a8e7ecce5fa2786719d570e1b58c84ace387",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
    "symbol_count": 65,
    "symbols": [
