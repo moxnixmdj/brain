@@ -1,0 +1,9 @@
+{
+  "mission_id": "ASTRA-VERIFY-NLISSUE-001",
+  "arc_class": "semantic_engine",
+  "kind": "VERIFY_CAPABILITY_WORTHSHIP",
+  "target_capability": "python.issue.natural_language.parse_edit_intent.v1",
+  "statement": "The natural-language seam of the issue→PR crown: an issue written as ordinary prose ('Rename helper to compute in pkg/core.py') is parsed by strict anchored grammar, names bound through the verified symbol index (ambiguity/unknown names refuse with evidence), and the emitted choreograph ops feed python.software.issue_to_pr.orchestrate.v1 unchanged — producing a verified PR-ready diff with selected tests green. Refusal stories (unknown name with candidates, ambiguous name with homes, unsupported verbs) are as much the feature as the parsable ones.",
+  "input_root": "/home/user/nl_mission/fixrepo",
+  "zero_spend": true
+}
