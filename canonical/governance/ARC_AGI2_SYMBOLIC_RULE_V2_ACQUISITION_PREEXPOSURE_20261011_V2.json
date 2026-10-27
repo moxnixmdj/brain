@@ -1,0 +1,31 @@
+{
+  "schema":"PROJECT_BRAIN_ARC_AGI2_SYMBOLIC_RULE_V2_ACQUISITION_PREEXPOSURE_20261011_V2",
+  "date":"2026-10-11",
+  "status":"FROZEN_BEFORE_ANY_V2_ACQUISITION_RESULT__BINARY_PREDICATE_ELSE_ROUTING__TOP2_BEAM",
+  "split_governance":"canonical/governance/ARC_AGI2_TRAINING_ACQUISITION_SPLIT_PREEXPOSURE_20261011_V1.json",
+  "subject":{
+    "runtime":"canonical/runtime/visual_symbolic_rule_inducer_v2.py",
+    "runtime_blob_sha":"4185afe102483768bd73e4d2bc1c63f3b2b45226",
+    "tests":"canonical/tests/test_visual_symbolic_rule_inducer_v2.py",
+    "tests_blob_sha":"ba9095fb7a878242c9f55aee9527f2d5ab5a170e"
+  },
+  "search_config":{
+    "max_depth":4,
+    "max_predicates_per_node":12,
+    "max_search_subproblems":5000,
+    "max_generated_split_nodes":20000,
+    "subtree_beam":2,
+    "attempts":2,
+    "workers":8
+  },
+  "comparison_baseline":{
+    "verification":"canonical/verification/ARC_AGI2_SYMBOLIC_RULE_ACQUISITION_VERIFY_20261011_V1.json",
+    "v1_score":"45/800",
+    "v1_exact_training_rules":"278/800"
+  },
+  "development_holdout_observed":false,
+  "qualification_holdout_observed":false,
+  "incremental_spend_usd":0,
+  "promotion_authority":false,
+  "terminal_credit_delta":0
+}

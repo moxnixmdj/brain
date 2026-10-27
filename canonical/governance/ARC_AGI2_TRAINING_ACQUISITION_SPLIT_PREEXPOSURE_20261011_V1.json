@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_ARC_AGI2_TRAINING_ACQUISITION_SPLIT_PREEXPOSURE_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_BEFORE_ARC_AGI2_TRAINING_TASK_CONTENT_DEVELOPMENT",
+  "dataset": {
+    "repository": "arcprize/ARC-AGI-2",
+    "commit": "f3283f727488ad98fe575ea6a5ac981e4a188e49",
+    "split_root": "data/training",
+    "declared_task_count": 1000,
+    "benchmark_role": "PUBLIC_TRAINING__ACQUISITION_ALLOWED"
+  },
+  "partition_algorithm": {
+    "key": "SHA256_OF_UTF8_FILENAME",
+    "order": "ASCENDING_HEX_DIGEST_THEN_FILENAME",
+    "acquisition": "FIRST_800",
+    "development_holdout": "NEXT_100",
+    "qualification_holdout": "FINAL_100"
+  },
+  "information_policy": {
+    "acquisition": "TASK_LEVEL_CONTENT_MAY_BE_USED_FOR_AUTOMATED_CAPABILITY_DEVELOPMENT",
+    "development_holdout": "AGGREGATE_FEEDBACK_ONLY__MAY_GUIDE_ITERATION_AFTER_FIRST_RUN",
+    "qualification_holdout": "DO_NOT_READ_OR_SCORE_UNTIL_SUBJECT_IS_FROZEN_FOR_QUALIFICATION",
+    "arc_agi2_public_eval": "BURNED_AS_AGGREGATE_FALSIFICATION_ONLY__DO_NOT_TUNE_FROM_TASK_LEVEL_CONTENT"
+  },
+  "objective": "BUILD_GENERAL_REUSABLE_VISUAL_SYMBOLIC_REPRESENTATION_AND_RULE_INDUCTION__NOT_BENCHMARK_INSTANCE_PATCHES",
+  "incremental_spend_usd": 0,
+  "promotion_authority": false,
+  "terminal_credit_delta": 0
+}

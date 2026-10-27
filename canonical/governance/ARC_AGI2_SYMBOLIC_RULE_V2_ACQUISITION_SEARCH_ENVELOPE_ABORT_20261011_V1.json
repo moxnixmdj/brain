@@ -1,0 +1,20 @@
+{
+  "schema": "PROJECT_BRAIN_ARC_AGI2_SYMBOLIC_RULE_V2_ACQUISITION_SEARCH_ENVELOPE_ABORT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ABORTED_BEFORE_RESULT__SEARCH_ENVELOPE_DOMINATED_WALL_CLOCK__ZERO_CREDIT",
+  "subject": "canonical/runtime/visual_symbolic_rule_inducer_v2.py",
+  "aborted_config": {
+    "max_depth": 5,
+    "max_predicates_per_node": 16,
+    "max_search_subproblems": 6000,
+    "max_generated_split_nodes": 24000,
+    "workers": 8
+  },
+  "reason": "ALL_EIGHT_CORES_SATURATED_FOR_OVER_TWO_MINUTES_WITHOUT_RESULT_RECEIPT__COMPARISON_WOULD_CONFUND_ARCHITECTURE_WITH_EXTRA_SEARCH_COMPUTE",
+  "result_observed": false,
+  "score_observed": false,
+  "repair": "USE_V1_COMPARABLE_SEARCH_ENVELOPE",
+  "capability_credit_delta": 0,
+  "promotion_authority": false,
+  "terminal_credit_delta": 0
+}
