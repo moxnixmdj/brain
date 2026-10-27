@@ -1991,16 +1991,16 @@
   "tournament": {
    "counterexample_receipts": [
     {
-     "git_blob_sha": "9a22f71eac4832186597ab8971442e5fbe32a121",
-     "path": "canonical/runtime/bound_capabilities/python_repository_acceptance_measurement_v1.py"
+     "git_blob_sha": "dc5cf03c0dd7baa32eec219c5d27477460166b4c",
+     "path": "canonical/runtime/brain_unified_model_v1.py"
     },
     {
-     "git_blob_sha": "e25fbb76e0076835e0eb7cc576cd7a5178c837d8",
-     "path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py"
+     "git_blob_sha": "f1d3ba927e508a0f84313c6032ee31ca573b9bdd",
+     "path": "canonical/runtime/compile_brain_unified_model_v1.py"
     },
     {
-     "git_blob_sha": "ce7b77f06af5524e58566601d7759a53713326a9",
-     "path": "canonical/action_intents/TWO_SPELLINGS_OF_ONE_PATH_ARE_ONE_QUESTION_V1_20261027_V1.json"
+     "git_blob_sha": "6521eb7e3390a0e60c2d8104183a7c1cd7dc3e2f",
+     "path": "canonical/action_intents/A_QUESTION_ABOUT_RUNNING_TESTS_MUST_BE_ANSWERED_BY_SOMETHING_THAT_RUNS_THEM_V1_20261027_V1.json"
     }
    ],
    "decisive_question": "Does a sentence that asks for the tests to be run reach a capability that runs them, and does the measurement then tell a passing suite from a failing one -- without altering any argv token that is not a validated test path?",
