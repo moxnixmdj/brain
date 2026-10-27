@@ -236,7 +236,38 @@ BENCHMARK_GOALS: List[Dict[str, Any]] = [
 # The remaining wrong selection is EXT_JQ_TABLE, in the EXTENDED tier, tracked in
 # test_front_door_selection_parity_v1. It is not listed here because this dict is
 # compared against the PRIMARY tier's own report.
-KNOWN_SELECTION_GAPS = {}
+# A CHAIN-LAUNDERED SUBSTITUTION: the sentence never states the JSON file, so
+# the right consumer (xlsx/sqlite create/verify) can only bind it by a
+# world-guess (filled_from_world_not_goal = canonical/CANONICAL_POINTER.json,
+# unjustified), while `auto.pypi.msgpack` is offered by the chained pass with
+# its own ``json_path`` slot left a DANGLING ``$effect_result`` reference --
+# no producer step attached, no binding provenance written.  The
+# unjustified-slot preference in ``goal_compiler.compile_goal`` then reads the
+# grounded plan as guilty and the dangling plan as clean, and hands the goal
+# to the dangling one.  Measured 2026-10-27: xlsx 43 vs msgpack 7.
+#
+# WHY A COMPARE-LEVEL FIX IS NOT THE REPAIR: the same vector -- grounded plan
+# unjustified-world-filled, chained plan dangling, provenance-silent -- is the
+# pinned-correct pair for "Fetch a JSON document and assess its internal
+# consistency." (docx 25 vs knowledge.consistency.assess 8 over the routable
+# view), where the chained answer MUST win.  Both measured vectors are
+# indistinguishable in the compare stage (same provenance maps, same dangling
+# shape), so any polarity there flips one pinned case for the other.  The fix
+# belongs one level down: either the goal states the file (sentences cannot
+# substitute for a compiler law), or producer attachment for
+# ``json.file.available`` acquires sentence facts.
+KNOWN_SELECTION_GAPS = {
+    "EXT_XLSX_CREATE": (
+        "CHAIN_LAUNDERED_SUBSTITUTION__MSGPACK_WINS_WITH_DANGLING_EFFECT_RESULT_"
+        "NO_PRODUCER_NO_PROVENANCE__GROUNDED_XLSX43_LOSES_ON_UNJUSTIFIED_WORLD_SLOT_"
+        "COMPARE_LEVEL_FIX_PROVEN_IMPOSSIBLE_AGAINST_PARITY_PIN_20261027"
+    ),
+    "EXT_SQLITE_VERIFY": (
+        "CHAIN_LAUNDERED_SUBSTITUTION__MSGPACK_WINS_WITH_DANGLING_EFFECT_RESULT_"
+        "NO_PRODUCER_NO_PROVENANCE__GROUNDED_SQLITE_LOSES_ON_UNJUSTIFIED_WORLD_SLOT_"
+        "COMPARE_LEVEL_FIX_PROVEN_IMPOSSIBLE_AGAINST_PARITY_PIN_20261027"
+    ),
+}
 
 # A separate, real COVERAGE gap. Not a wrong selection -- this goal's expected
 # first capability IS selected correctly -- so it is recorded apart from

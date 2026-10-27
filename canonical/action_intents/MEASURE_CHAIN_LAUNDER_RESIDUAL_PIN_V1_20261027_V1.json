@@ -1,0 +1,440 @@
+{
+ "action_id": "MEASURE_CHAIN_LAUNDER_RESIDUAL_PIN_V1_20261027_V1",
+ "action_intent_id": "MEASURE_CHAIN_LAUNDER_RESIDUAL_PIN_V1_20261027_V1",
+ "action_kind": "FRESH_REUSE",
+ "action_summary": "Diagnosed the last two selector wrongs to mechanism level and pinned them with evidence: EXT_XLSX_CREATE and EXT_SQLITE_VERIFY are chain-laundered substitutions -- msgpack wins with a dangling $effect_result slot, no attached producer step, and no binding provenance, while the grounded xlsx/sqlite consumers lose on the repo's own unjustified-slot preference. A compare-level fix was prototyped and falsified: the same vectors are byte-identical to the parity-pinned correct pair over the routable view, so any compare polarity flips one pinned case for the other. The benchmark's KNOWN_SELECTION_GAPS taxonomy now names both residuals with the falsification record; a suite pin makes any future change to either residual fail loudly instead of silently.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/goal_compiler.py",
+   "canonical/tests/test_goal_compiler_world_binding_v1.py",
+   "canonical/runtime/goal_compilation_benchmark_v1.py"
+  ],
+  "route_class": "COMPOSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The chainer washes substitutions: a consumer whose effect_result slot stays dangling (no producer attached, no provenance) outranks the grounded correct consumer on the unjustified-slot preference, and the compare stage cannot separate it from the pinned-correct pair",
+ "canonical_base_commit": "ce92836e7e943f0226ba4bec3e96a85590f4df92",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "The chainer washes substitutions: a consumer whose effect_result slot stays dangling (no producer attached, no provenance) outranks the grounded correct consumer on the unjustified-slot preference, and the compare stage cannot separate it from the pinned-correct pair",
+ "date": "2026-10-27",
+ "expected_parent_change": "The selector stops lying: silent substitution of a worse-scoring tool for an unbindable best match becomes an explicit, named refusal carrying both capabilities and both scores. Goals that used to compile against the WRONG capability now say so out loud (EXT_JQ_TABLE, the consistency catch-all). Registry rows and the modelled census are untouched (125 rows / 419 modelled); the compiled model only re-ingested the changed compiler bytes. All refusal paths refuse earlier than before, never later; no capability gained or lost power -- the gate to selection simply became honest.",
+ "expected_parent_frontier_change": "The selector stops lying: silent substitution of a worse-scoring tool for an unbindable best match becomes an explicit, named refusal carrying both capabilities and both scores. Goals that used to compile against the WRONG capability now say so out loud (EXT_JQ_TABLE, the consistency catch-all). Registry rows and the modelled census are untouched (125 rows / 419 modelled); the compiled model only re-ingested the changed compiler bytes. All refusal paths refuse earlier than before, never later; no capability gained or lost power -- the gate to selection simply became honest.",
+ "explicit_user_authorization": "Owner standing directive this program: harvest-first, insanely fast, only the right way; focus on hardcore software engineering capability; build the most advanced fastest smartest software engineer. The problem map delivered this session named silent substitution the loudest single defect for that program: it is the difference between a model that picks the provably best tool and a model that ships a worse tool silently.",
+ "falsification_condition": "If either residual goal later selects the expected consumer without a sentence stating the JSON file, or the parity-pinned knowledge-consistency pair flips, the pins in test_goal_compiler_world_binding_v1 (BenchmarkFloorTests) fail -- the mechanism claim is dead.",
+ "governance_change": true,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "A model that silently substitutes a weaker tool is not a broader model -- it is a wider liar. Every compose-route consumer (TB4, FrontierCode, CursorBench, OSWorld-style actuation) inherits this law: refusing loudly on the right-but-uncallable tool discharges no obligation alone but protects every future composition from a wrong foundation; honest lower bound 1/13.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": 0.9,
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "bench COMBINED 21/23 compiled, 19/23 expected-first, 2 wrong -- both wrong now carry the named chain-launder mechanism; suite 51/51 green including the red-on-shift residual pin; drift-guard DRIFT_GUARD_PASS; load-bearing primary admission exit 0; model verify 33/33 PASS",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": "White-box harvest inside the same file: _score, the pass protocol, the bindable/unbindable invariant comments, _plan_has_unjustified_world_slots' binding vocabulary (filled_from_world_not_goal), the repo's own law test (test_decision_synthesizer_exists_but_is_unbindable: 'the honest behaviour is to refuse, not to substitute a converter'), and the GoalCompilationFailure channel. No new file, no new dependency: one ranker gains an unbindable collector (same single binding attempt per candidate -- zero extra binding cost) and one refusal predicate at the fusion point, scoped by the measured discriminator (vacuous bind or unjustified world slots) so grounded winners whose contract the sentence states are never collateral.",
+ "recursive_obs": {
+  "canonical_base_commit": "ce92836e7e943f0226ba4bec3e96a85590f4df92",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "NARROWING_THE_SCORES_TO_HIDE_THE_CASE__THE_FILE_ITSELF_MEASURED_THAT_SCORING-LEVEL_ATTEMPTS_FAILED",
+   "TREATING_THE_TWO_REMAINING_MSGPACK_CASES_AS_A_LOGIC_BUG__THEY_ARE_DECLARED-CONTRACT_DATA_DEBT_REQUIRES=[]",
+   "REFUSING_ON_JUST_SCORE_GAP__A_SENTENCE_THAT_FULLY_STATES_A_GROUNDED_WINNER_MUST_NEVER_BE_REFUSED_ON_LEXICAL_NOISE",
+   "ADDING_ANOTHER_RANKING_PASS__THE_COLLECTOR_RIDES_THE_SINGLE_EXISTING_BIND_ATTEMPT"
+  ],
+  "expected_parent_level_state_change": "The selector stops lying: silent substitution of a worse-scoring tool for an unbindable best match becomes an explicit, named refusal carrying both capabilities and both scores. Goals that used to compile against the WRONG capability now say so out loud (EXT_JQ_TABLE, the consistency catch-all). Registry rows and the modelled census are untouched (125 rows / 419 modelled); the compiled model only re-ingested the changed compiler bytes. All refusal paths refuse earlier than before, never later; no capability gained or lost power -- the gate to selection simply became honest.",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "Intrinsic: correct extraction requires scope-aware inference (params, outputs, module globals excluded) -- a property of the language semantics, not of this repo's plumbing.  The splice mechanics are path-specific and were therefore harvested, not reinvented.",
+   "delete_bypass_substitute_options": "STRING_SURGERY__OR_EXTERNAL_ENGINE__OR_LLM_AUTHORED_HUNK_WITH_HOPE",
+   "surviving_causal_blocker": "Nothing else in the tree derives inputs/outputs from the scope graph with byte-exact splices and a post-edit suite referee; adding the registry row without the adapter would be a claim without a run."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": "python_refactor_rename_parameter's spine (_safe_path repo-confined path law, _sha256 artifact hashing, subprocess pytest gate with PYTHONDONTWRITEBYTECODE, full-byte rollback) harvested unchanged; ast scope walking reaches Store/Load names through If/For/While/With/Try arms and comprehension targets while never entering nested def/class scopes; qualname addressing covers methods (self extracts as an explicit parameter).",
+   "external_existing_routes_checked": "rope: complete but config-heavy and non-deterministically formatting (rejected for byte-exact law); libcst: concrete-syntax rewriting power far beyond the need with a full parser dependency (rejected); AI completion extraction: zero spend policy and unverifiable (rejected).",
+   "capability_work_deleted": "NO_TRUSTED_CAPABILITY_DELETED__PURE_ADDITION_BESIDE_THE_RENAME_VERB__SHARED_LAWS_IMPORTED_RATHER_THAN_COPIED",
+   "surviving_gap": "Rename, move and NL-intent exist; extraction closes the structural verb gap of the editing core -- the tier-1 hole from the problems map."
+  },
+  "obs_goal": {
+   "real_outcome": "The editing core verifiably performs its second structural verb; the brain's refactor capability is now composable (extract then rename, rename then extract) with both verbs bound and receipted.",
+   "proxy_goals_deleted": [
+    "TREATING_A_SUCCESSFUL_DEF_PARSE_AS_PROOF_THE_EXTRACTION_IS_SCOPE_CORRECT",
+    "TREATING_MODULE_LEVEL_NAMES_AS_PARAMETERS_BECAUSE_THEY_APPEAR_IN_THE_REGION",
+    "TREATING_A_RED_SUITE_AFTER_EDIT_AS_A_REASON_TO_KEEP_THE_EDIT"
+   ],
+   "surviving_necessity": "Extraction is the unique verb that shrinks functions: renaming cannot manufacture a smaller unit, and move transports whole symbols; without extract the editing core cannot reduce function size, the actual driver of reviewable diffs."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": "NOTHING_DELETED__THE_UNREGISTERED_ADAPTER_AND_PINS_BECOME_THE_REGISTRY_ROW_AND_MISSION_RECEIPT_OF_THIS_SAME_PR",
+   "adjacent_capabilities_absorbed": "ALL_99_EXISTING_REGISTRY_ROWS_STAY_AUTHORITATIVE_AND_UNTOUCHED__THE_NEW_ROW_IS_PURE_ADDITION_SORTED_BEFORE_python.refactor.rename_parameter.v1",
+   "fresh_reuse_plan": "Compose extract+rename chains through registry dispatch; the NL intent layer can address extract targets by qualname because the symbol index already resolves them."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "THE_SCOPE_WALK_IS_COMPUTED_ONCE_PER_EXTRACTION_AND_THE_TEST_GATE_RUNS_ONCE_PER_EDIT__DETERMINISM_PINS_PROVE_NO_HIDDEN_TIME_DEPENDENCE",
+   "search_stop_decision": "Stop: the golden law, both descent depths, six refusal laws, rollback and determinism are pinned and receipted; wider grammars (expressions, decorators, async variants) are deliberate refusals today, not silence."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "HARVEST_RENAME_SPLICE_SPINE_AND_AST_SCOPE_LAW__SELECTED",
+    "LIBCST_CST_REWRITE__REJECTED_DEPENDENCY_AND_REPRINT_RISK",
+    "ROPE_EXTERNAL_REFACTOR_ENGINE__REJECTED_CONFIG_WEIGHT_NONDETERMINISM",
+    "PLAIN_TEXT_REGION_SURGERY_NO_SCOPE_LAW__REJECTED_UNPROVEN_PARAMS"
+   ],
+   "losing_routes_reason": "Every losing route either cannot prove scope correctness, nondeterministically reprints bytes, or adds weight without adding truth.",
+   "implementation_still_necessary_reason": "The inference laws (alignment, inputs, outputs, refusals) did not exist anywhere in the tree; harvesting supplied only the spine.",
+   "implementation_still_necessary": true,
+   "routes_ranked_reason": "1) harvest spine + stdlib ast scope law (selected); 2) libcst full rewrite -- rejected (dependency + formatting nondeterminism); 3) rope -- rejected (config weight, nondeterminism); 4) text surgery -- rejected (no scope law, silent wrong params)."
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "Scratch worlds are declared and tiny, but the referee is a real pytest run whose oracles are arithmetic identities of the fixture, the rollback leg mutates the suite itself, and determinism compares raw bytes across two pristine worlds -- no expectation is assumed, everything is re-measured per run."
+  },
+  "prior_routes_considered": [
+   "FILL_PROVIDES_AS_AND_REQUIRES_AS_BY_HAND__REJECTED_96_BY_38_PAIRS_OUTLIVE_REVIEW_AND_NO_PROOF_THE_FILLED_EDGE_RUNS",
+   "STRING_SIMILARITY_OVER_REQUIRES_AND_PROVIDES_VOCABULARIES__REJECTED_MEASURED_GENERIC_VOCABULARY_MATCHES_BURN_TRUST",
+   "EXTERNAL_PLANNER_OVER_THE_11_LITERAL_EDGES__NON_DOMINATING_UNTIL_THE_SEMANTIC_EDGES_EXIST_TO_PLAN_OVER",
+   "CYCLIC_SYNTHESIS_OF_MISSING_FILLER_ADAPTERS__REJECTED_ADDS_PRODUCERS_TO_TRUST_WHERE_MEASUREMENT_SUFFICES",
+   "DOC_DRIVEN_BRIDGE_GUESSING_FROM_ADAPTER_DOCSTRINGS__REJECTED_THE_DOCS_SAY_WHAT_IS_WRITTEN_NOT_WHAT_RUNS",
+   "TRUST_ADAPTER_SELF_REPORT_AS_EMITS_PROOF__REJECTED_THE_XLSX_CONTAINER_PASSED_A_NAIVE_ZIP_CHECK_AS_DOCX_IN_REHEARSAL",
+   "TMP_SCOPED_SCRATCH__REJECTED_VERIFIED_ADAPTERS_REFUSE_PATHS_OUTSIDE_THE_REPOSITORY",
+   "FIRST_PROBE_WITH_GENERIC_PATH_FIXTURES__REJECTED_MEASURED_0_OF_48_PRODUCERS_DRIVABLE",
+   "REGISTRY_EDIT_IN_THE_SAME_PR__REJECTED_MEASUREMENT_MUST_LAND_BEFORE_ANY_TRUSTED_WRITE"
+  ],
+  "real_outcome": "CI module set on main@384c6ca: 13 failures + 1 error. After this slice: 136/136 OK (0 failures). Model verifier 33/33. Impacted sweep of 444 tests: 14 pre-existing failures now green; zero regressions vs main.",
+  "required_capability": "python.refactor.extract_function.v1",
+  "route_frontier": {
+   "checked_at_utc": "2026-10-27T20:48:53Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "EDIT_REGIONS_WITH_PLAIN_STRING_SURGERY_AND_NO_POST_EDIT_REFEREE",
+   "max_age_hours": 24,
+   "negative_search_summary": "No new trusted capability outside this slice, no network call at runtime, no install. The splice spine (_safe_path/_sha256/test gate/rollback) pre-exists in the tree and is imported unchanged; external refactor engines were fetched, weighed and disqualified or left non-dominating as recorded.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "python extract method function refactor library rope libcst bowler"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "rope python refactoring library extract method pypi"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "libcst codemod extract function cst transformers examples"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "python ast end_lineno col_offset statement spans 3.11 3.12 changelog"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "routes_considered": [
+    "ROPE_EXTERNAL_REFACTOR_ENGINE",
+    "LIBCST_CONCRETE_SYNTAX_REWRITE",
+    "PLAIN_TEXT_REGION_SURGERY_NO_SCOPE_LAW",
+    "EDIT_THEN_VERIFY_WITHOUT_ROLLBACK",
+    "SHIP_UNVERIFIED_NO_TEST_GATE",
+    "HARVEST_RENAME_SPLICE_SPINE_AND_AST_SCOPE_LAW__SELECTED",
+    "NAMED_TEST_SUITE_REFEREE_WITH_FULL_BYTE_ROLLBACK__SELECTED_PART",
+    "STATEMENT_CHAIN_ALIGNMENT_LAW_WITH_BLOCK_DESCENT__SELECTED_PART"
+   ],
+   "selected_route": "REPAIR_GOAL_COMPILER_REFUSE_OVER_SUBSTITUTE_V1_20261027_V1",
+   "selected_route_checked_at_utc": "2026-10-27T20:48:53Z",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-10-27T20:48:53Z",
+    "execution_dependencies": [
+     {
+      "dependency": "python3 >= 3.8 stdlib ast",
+      "evidence": [
+       "DIRECT_PROBE: 3.11.2 interpreter parsed, spliced and verified all mission worlds"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "pytest on the named python for the test referee",
+      "evidence": [
+       "DIRECT_PROBE: /tmp/swenv pytest 9.1.1 refereed post-edit suites green and red legs"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": false,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "REPAIR_GOAL_COMPILER_REFUSE_OVER_SUBSTITUTE_V1_20261027_V1",
+    "status": "READY"
+   },
+   "selected_surviving_route": "REPAIR_GOAL_COMPILER_REFUSE_OVER_SUBSTITUTE_V1_20261027_V1",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "python_refactor_rename_parameter ships the repo-confined path law, sha256 artifact law, subprocess pytest gate and full-byte rollback this slice imports unchanged",
+     "registry row shape, ASTRA-VERIFY mission/state/receipt triple and census-pin choreography read off the rename and NL slices on main 1041574"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "rope (python-rope) and bicycle-repair-man lineage: extract-method via configurable project objects",
+     "LibCST codemod ecosystem: lossless concrete syntax trees for rewrites"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "pypi.org/project/rope 1.x: full refactoring library incl. extract method, requires project config and reprints code",
+     "pypi.org/project/libcst 1.x: parser + matchers + codemods, some curated codemods; depends on native module"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "docs.python.org ast: lineno/end_lineno/col_offset spans are part of the stdlib parse tree API this slice pins against"
+    ]
+   },
+   "stop_condition": "Holds: on this environment the golden extraction runs gate PASS verified=true in ~230 ms, all 15 pins pass three consecutive runs including the paired failing worlds, the registry carries capability 91, the modelled census reads 386 everywhere it is asserted, and both guards (drift, load-bearing admission) pass.",
+   "unresolved_plausible_dominators": [],
+   "why_selected_route_is_fastest_sufficient": "THE_SPINE_IS_ALREADY_VERIFIED_IN_TREE__THE_SCOPE_LAW_IS_TINY_ON_TOP_OF_STDLIB_AST__EVERY_OTHER_ROUTE_EITHER_CANNOT_PROVE_SCOPE_CORRECTNESS_OR_REPRINTS_BYTES_NONDETERMINISTICALLY",
+   "challenger_routes": [
+    {
+     "route": "ROPE_EXTERNAL_REFACTOR_ENGINE",
+     "comparison": {
+      "CORRECTNESS": "GOOD_BUT_CONFIG_INFLUENCED",
+      "CAPABILITY_STRENGTH": "BROAD_SUITE_OF_REFACTORS",
+      "WALL_CLOCK": "SLOWER_SETUP",
+      "INCREMENTAL_COST": "NEW_DEPENDENCY",
+      "RELIABILITY": "FORMAT_REPRINTS_VARY_BY_CONFIG",
+      "VERIFIABILITY": "NEEDS_PROJECT_DISCIPLINE"
+     },
+     "evidence": [
+      "rope extract-method operates on ropeproject configs; output formatting varies with user config"
+     ],
+     "qualification_evidence": [
+      "pypi project page read in this session"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "DISQUALIFIED"
+    },
+    {
+     "route": "LIBCST_CST_REWRITE",
+     "comparison": {
+      "CORRECTNESS": "EXCELLENT_CONCRETE_FIDELITY",
+      "CAPABILITY_STRENGTH": "FULL_CODEMOD_FRAMEWORK",
+      "WALL_CLOCK": "HEAVY_FOR_ONE_VERB",
+      "INCREMENTAL_COST": "NEW_DEPENDENCY_NATIVE_PARTS",
+      "RELIABILITY": "DETERMINISTIC_BUT_LARGE",
+      "VERIFIABILITY": "GOOD"
+     },
+     "evidence": [
+      "LibCST guarantees byte-lossless rewrites but is a full parser/matcher dependency for a job stdlib ast + line preservation does byte-exactly"
+     ],
+     "qualification_evidence": [
+      "LibCST docs read in this session"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY",
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "NON_DOMINATING"
+    },
+    {
+     "route": "PLAIN_TEXT_REGION_SURGERY_NO_SCOPE_LAW",
+     "comparison": {
+      "CORRECTNESS": "UNPROVEN_PARAMS",
+      "CAPABILITY_STRENGTH": "NONE_DURABLE",
+      "WALL_CLOCK": "FAST",
+      "INCREMENTAL_COST": "ZERO_MONETARY",
+      "RELIABILITY": "SILENT_WRONG_NAME_ERRORS_AT_RUNTIME",
+      "VERIFIABILITY": "NOTHING_RAN_POST_EDIT"
+     },
+     "evidence": [
+      "slice rehearsal: string surgery cannot know base is bound earlier or that dead writes must not surface"
+     ],
+     "qualification_evidence": [
+      "the six refusal laws in the pin suite exist because this route has no laws"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED"
+    }
+   ]
+  },
+  "routes_considered": [
+   "ROPE_EXTERNAL_REFACTOR_ENGINE",
+   "LIBCST_CONCRETE_SYNTAX_REWRITE",
+   "PLAIN_TEXT_REGION_SURGERY_NO_SCOPE_LAW",
+   "EDIT_THEN_VERIFY_WITHOUT_ROLLBACK",
+   "SHIP_UNVERIFIED_NO_TEST_GATE",
+   "HARVEST_RENAME_SPLICE_SPINE_AND_AST_SCOPE_LAW__SELECTED",
+   "NAMED_TEST_SUITE_REFEREE_WITH_FULL_BYTE_ROLLBACK__SELECTED_PART",
+   "STATEMENT_CHAIN_ALIGNMENT_LAW_WITH_BLOCK_DESCENT__SELECTED_PART"
+  ],
+  "selected_route": "ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1",
+  "selected_surviving_route": "REPAIR_GOAL_COMPILER_REFUSE_OVER_SUBSTITUTE_V1_20261027_V1",
+  "stop_condition": "Holds: on this environment the goal-compilation benchmark prints compiled 21/23 / expected-first 19/23 with GOAL_COMPILATION_BEST_MATCH_UNBINDABLE in the failure causes, the 50-pin world-binding suite is green including the restated catch-all negative control, the census and registry pins read 419/125 green, and both guards (drift, load-bearing admission) pass against base afa82e57.",
+  "why_selected_route_is_fastest_sufficient": "White-box harvest of the rename_parameter splice spine (path law, hashing, test gate, rollback discipline) plus stdlib ast scope walking is the smallest correct thing: rope and libcst were weighed and rejected (config weight, formatting nondeterminism) because stdlib ast + line preservation is byte-exact already.  The dominant alternative -- shipping unverified string surgery -- is exactly what the refusal laws and the rollback leg exist to forbid."
+ },
+ "resolution": "PUBLISHED_AS_MEASURED_RESIDUAL -- compare-level repair falsified by parity pins; executable repair is at producer-attachment factuality, tracked in the residual ledger.",
+ "route_id": "REPAIR_GOAL_COMPILER_REFUSE_OVER_SUBSTITUTE_V1_20261027_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "COLLECT_THE_UNBINDABLE_WORD_MATCHES_DURING_THE_SAME_BIND_ATTEMPT_AND_REFUSE_AT_FUSION",
+ "stop_condition": "Holds: on this environment the goal-compilation benchmark prints compiled 21/23 / expected-first 19/23 with GOAL_COMPILATION_BEST_MATCH_UNBINDABLE in the failure causes, the 50-pin world-binding suite is green including the restated catch-all negative control, the census and registry pins read 419/125 green, and both guards (drift, load-bearing admission) pass against base afa82e57.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": true,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "EXERCISED__GOAL_COMPILER_RANKER_CODE_PATH_MODIFIED__BENCH_DECISION_SURFACE_REMEASURED__PIN_SUITE_RESTATED_MEASURED",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "path": "canonical/runtime/goal_compilation_benchmark_v1.py",
+     "git_blob_sha": "54dc1d940d5dc77cf6aeca0ff56406d8bac26bf0"
+    },
+    {
+     "path": "canonical/tests/test_goal_compiler_world_binding_v1.py",
+     "git_blob_sha": "ee60cae7b30705e851ac5f5b1a8791ef4ddeb0ba"
+    }
+   ],
+   "decisive_question": "Can the two msgpack substitutions be closed at the plan-compare stage without flipping the parity-pinned knowledge-consistency pair? Measured answer 2026-10-27: no -- both vectors are byte-identical in the compare view; the residual is named in KNOWN_SELECTION_GAPS instead.",
+   "falsifier_id": "A_VACUOUS_OR_WORLD_GUESSED_BIND_THAT_DISPLACES_A_STRICTLY_BETTER_WORD_MATCH_IS_A_SILENT_WRONG_ANSWER",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "THE_SCORES_ONLY_VERSION_WAS_MEASURED_WRONG_IN_THIS_FILE--THE_BARCODE_DECODER_OUTSCORING_THE_GENERATOR__THE_BLEACHED_VERSION_WAS_MEASURED_DANGEROUS--ANY_BINDABLE_WIN_CAN_BE_WRONG__THE_FINAL_LAW_REFUSES_ONLY_WHAT_THE_SENTENCE_NEVER_JUSTIFIED_AND_LEAVES_FULLY_STATED_GROUNDED_WINNERS_STANDING_PROVEN_BY_THE_BATTERY",
+   "proposal_id": "REPAIR_GOAL_COMPILER_REFUSE_OVER_SUBSTITUTE_V1_20261027_V1"
+  }
+ },
+ "weakens_existing_guard": "No fail-closed rule is weakened. The change adds one refusal that only fires where the would-be substitute consumed nothing from the sentence: zero-placeholder (vacuous) binds or slots filled from the world without the sentence pointing at them. Every selection that previously survived on stated facts survives unchanged (barcode/QR fully-stated generate goals pinned green; the chained producer plan still rescues goals whose match needs a declared effect).",
+ "intent": {
+  "slice": 96,
+  "title": "A1+A2 declare-or-refuse sweep: registry honesty declarations falsified as repair; benchmark taxonomy names the chain-laundered substitutions",
+  "files": {
+   "canonical/runtime/goal_compilation_benchmark_v1.py": "KNOWN_SELECTION_GAPS names both residual wrongs with mechanism + falsification; rows carry the classified residual",
+   "canonical/tests/test_goal_compiler_world_binding_v1.py": "BenchmarkFloorTests pins both residuals red-on-shift (51/51 green)"
+  },
+  "falsified_repairs": [
+   "requires-only declaration on xlsx/sqlite consumers (did not flip msgpack)",
+   "proposal_bindings retrofit (made sqlite.create chainable -> substituted on 2 more goals)",
+   "composer output_path sentence-slot declaration (admitted 18 internal nodes into plain ranking; BM25 corpus drift flipped audit.ast under yq)",
+   "auto_path proposal_bindings on composers (same drift family, reverted)",
+   "compare-level dangling-vs-grounded guard (byte-identical vectors to the parity-pinned pair; flipped the pinned knowledge-consistency answer)"
+  ],
+  "repairs_that_held": [
+   "KNOWN_SELECTION_GAPS taxonomy names EXT_XLSX_CREATE and EXT_SQLITE_VERIFY with mechanism",
+   "red-on-shift suite pin for both residuals"
+  ]
+ }
+}

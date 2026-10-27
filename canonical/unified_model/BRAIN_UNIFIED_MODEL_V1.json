@@ -28692,7 +28692,7 @@
   "engines": 26,
   "knowledge_documents": 170,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6492,
+  "research_index_records": 6493,
   "routing_tokens": 2096,
   "skills": 18,
   "source_index_entry_points": 423,
@@ -28701,7 +28701,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "349fd068155c436497d7c545b5c3d6b4e67df995df72e84c22759f08b94c4575"
+  "value": "bfad759aadadbb5ce579c8a4e2f839f6bf3c46c61626f80926c578cb408dd5dc"
  },
  "engines": [
   {
@@ -199814,6 +199814,51 @@
    }
   },
   {
+   "action_id": "MEASURE_CHAIN_LAUNDER_RESIDUAL_PIN_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/MEASURE_CHAIN_LAUNDER_RESIDUAL_PIN_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/MEASURE_CHAIN_LAUNDER_RESIDUAL_PIN_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "1be72381abf5bb9c9689fa2fae2d699b403f6b9436d85db6e9a5f19296a5a5a5",
+   "status": "",
+   "terms": {
+    "125": 1,
+    "20261027": 1,
+    "419": 1,
+    "against": 1,
+    "all": 1,
+    "attached": 1,
+    "became": 1,
+    "becomes": 1,
+    "before": 1,
+    "best": 1,
+    "both": 2,
+    "bytes": 1,
+    "cannot": 1,
+    "capabilities": 1,
+    "capability": 2,
+    "carrying": 1,
+    "catch-all": 1,
+    "census": 1,
+    "chain": 1,
+    "chainer": 1,
+    "changed": 1,
+    "collect_the_unbindable_word_matches_during_the_same_bind_attempt_and_refuse_at_fusion": 1,
+    "compare": 1,
+    "compile": 1,
+    "compiled": 1,
+    "compiler": 1,
+    "consumer": 2,
+    "modelled": 2,
+    "no": 3,
+    "refusal": 2,
+    "rows": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "MODULE_EVIDENCE_REMEASURED_FROM_A_REAL_TEST_RUN_V1_20261023_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -230489,7 +230534,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compilation_benchmark_v1.py",
-   "sha256": "f8b04281e95a5dd7de720976cb0eb304fe4d948aa193c2be417230b9c1932205",
+   "sha256": "614336d82b169068769e3513e157511dd9c0f2afdc698e4511d91b2af365ce5d",
    "summary": "Fixed, measured benchmark for plain-goal -> executable-plan compilation.",
    "symbol_count": 9,
    "symbols": [
