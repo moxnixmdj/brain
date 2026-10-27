@@ -7785,6 +7785,98 @@
     "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-REFACTOR-001__RECEIPT.json",
     "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-REFACTOR-001.json"
    }
+  },
+  "python.review.diff_mutation_gate.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.review.diff_mutation_gate.v1",
+     "anchor_path": "${input.anchor_path}",
+     "diff_path": "${input.diff_path}",
+     "output_path": "${input.output_path}",
+     "run_tests": "${input.run_tests}",
+     "python_executable": "${input.python_executable}",
+     "timeout_s": "${input.timeout_s}",
+     "min_kill_ratio": "${input.min_kill_ratio}",
+     "max_mutants": "${input.max_mutants}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_review_diff_mutation_gate",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "python",
+    "review",
+    "diff",
+    "mutation",
+    "mutant",
+    "test quality",
+    "kill ratio",
+    "survivor",
+    "falsification",
+    "gate",
+    "coverage",
+    "behavior"
+   ],
+   "limitations": [
+    "operators are a surgical set (compare/arith/aug swap, bool swap, numeric bump, return-None) — deliberately review-shaped, not the full mutmut catalogue; equivalence mutants surviving count honestly against the ratio.",
+    "mutants are confined to the diff's hunk new-side lines; the suite's own changed test files are measured, never mutated, and never become mutation targets.",
+    "a red base world refuses (BASE_WORLD_RED): mutants cannot be attributed against a suite that was already green-flavoured broken.",
+    "mutant runs share one wall-clock budget per mutant; a mutant suite timeout is counted as a KILL because the behavioural divergence was observable.",
+    "refusal ladder covers PATH_*, DIFF_EMPTY, DIFF_DOES_NOT_APPLY, GIT_UNAVAILABLE, NO_TESTS_DISCOVERED, NO_MUTABLE_SITES, SYNTAX_ERROR_IN_FILE, SPAN_INTEGRITY, BASE_WORLD_RED, TIMEOUT; no named tests => discovered-suite fallback, never silent PASS."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.review.diff_mutation_gate"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "anchor_path",
+    "diff_sha256",
+    "mutants_generated",
+    "mutants_killed",
+    "mutants_survived",
+    "survivors",
+    "kill_ratio",
+    "changed_lines_targeted",
+    "gate",
+    "complete",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "verified"
+   ],
+   "source": {
+    "module": "python stdlib ast/pytest + git",
+    "type": "runtime",
+    "version_family": ">=3.8"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "ASTRA-VERIFY-MUTGATE-001",
+    "observed_effect": {
+     "golden": "BatchSizer ceil-half fix + diff-carried tests: 8/8 mutants killed, gate PASS, complete=true, e2e 2225 ms",
+     "adversarial": "same fix WITHOUT its tests: survivor witness src/pkg/core.py:13 arith_swap '+'->'-', gate FAIL, kill_ratio 0.875",
+     "immutability": "anchor and diff byte-identical after every leg; scratch deleted",
+     "determinism": "two pristine worlds -> byte-identical artifacts and anchors",
+     "robustness": "diff-created files measured never mutated; 1e9 hunk sentinel clamped to true file extent"
+    },
+    "pin_green": "15/15 x 3 consecutive runs",
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MUTGATE-001__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-MUTGATE-001.json"
+   }
   }
  },
  "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
