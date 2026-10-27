@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-10-27T07:29:04.080289+00:00",
+  "mission_id": "ASTRA-VERIFY-CHANGE-IMPACT-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_CHANGE_IMPACT_001.json",
+  "mission_sha256": "a3275b4576bdfbd19641b75a20ba7d2311c2cfd59b4c894c49746c587ce9ed13",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "3c282bdaa0105857459fced3a419fc573db4c9fc952f5567e887dbfd39b6316e",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

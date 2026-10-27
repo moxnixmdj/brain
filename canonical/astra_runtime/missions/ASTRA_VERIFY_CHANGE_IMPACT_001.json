@@ -1,0 +1,20 @@
+{
+  "mission_id": "ASTRA-VERIFY-CHANGE-IMPACT-001",
+  "schema": "PROJECT_BRAIN_ASTRA_MISSION_V1",
+  "steps": [
+    {
+      "args": {
+        "changed_paths": [
+          "canonical/runtime/capability_planner.py"
+        ],
+        "output_path": "canonical/astra_runtime/tmp/ASTRA-VERIFY-CHANGE-IMPACT-001__FULL.json",
+        "source_root": "canonical",
+        "test_roots": [
+          "canonical/tests"
+        ]
+      },
+      "capability_id": "python.source.change_impact.testselect.v1"
+    }
+  ],
+  "title": "Verify python.source.change_impact.testselect.v1: one-module change selects its observable test closure over the brain's own tree"
+}

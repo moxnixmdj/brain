@@ -6437,6 +6437,89 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYTHON-SYMBOL-INDEX-001__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-PYTHON-SYMBOL-INDEX-001.json"
       }
+    },
+    "python.source.change_impact.testselect.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.change_impact.testselect.v1",
+          "changed_paths": "${input.changed_paths}",
+          "diff_path": "${input.diff_path}",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}",
+          "test_roots": "${input.test_roots}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_change_impact_testselect",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "change",
+        "impact",
+        "diff",
+        "test",
+        "selection",
+        "blame",
+        "callers",
+        "affected",
+        "minimal",
+        "fast"
+      ],
+      "limitations": [
+        "Diff input is unified diff or an explicit changed-path list (paths imply module-wide change).",
+        "Selection is never-miss with carried evidence: same-named definitions across modules widen selection, they never omit."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.source.change_impact.test_selection"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "affected_module_count",
+        "candidate_test_count",
+        "changed_file_count",
+        "changed_symbol_count",
+        "ignored_non_python_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "selected_test_count",
+        "unknown_symbol_module_count"
+      ],
+      "source": {
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-CHANGE-IMPACT-001",
+        "observed_effect": {
+          "source_root": "canonical",
+          "changed_module": "canonical/runtime/capability_planner.py",
+          "changed_files": 1,
+          "changed_symbols": 75,
+          "affected_modules": 4457,
+          "candidate_tests": 2096,
+          "selected_tests": 2070,
+          "verified": true
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-CHANGE-IMPACT-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-CHANGE-IMPACT-001.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
