@@ -1,0 +1,8 @@
+{
+  "mission_id": "ASTRA-VERIFY-APPLYGATE-001",
+  "arc_class": "semantic_engine",
+  "kind": "VERIFY_CAPABILITY_WORTHSHIP",
+  "target_capability": "python.repo.diff_apply_full_testgate.v1",
+  "statement": "Static triage on changed lines can PASS a diff that detonates the suite one import away. This gate applies the produced diff to a pristine anchor copy and runs the WHOLE suite; empty suite is a refusal, never a pass; the anchor is never mutated. Golden leg: NL issue -> orchestrator diff -> triage PASS -> applygate PASS. Sabotage legs: (1) unused-import edit -> BOTH gates fire (F401 blocks statically; runtime fails too); (2) rename-only diff -> triage PASS but applygate FAIL with the broken module named -- the blind spot this capability exists to close. Both legs measured; artifact byte-identical on rerun.",
+  "zero_spend": true
+}
