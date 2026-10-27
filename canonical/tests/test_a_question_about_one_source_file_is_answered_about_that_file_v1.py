@@ -184,13 +184,19 @@ class APreconditionIsNotARequestTests(unittest.TestCase):
         n = float(len(declaring))
         expected = frozenset(t for t, c in counts.items() if c / n > gc._REQUIRES_SHARE_CEILING)
         self.assertEqual(gc._nondiscriminating_requires_tokens(), expected)
-        # The gap that makes the threshold meaningful rather than arbitrary:
-        # measured, 28.6% then 19.6%, nothing in between.
+        # The gap that makes the threshold meaningful rather than arbitrary.
+        # Pinned as a GAP, not as two magic margins: at 118 capabilities the
+        # measured pair was 28.6% / 19.6%, at 121 it is 34.6% / 21.0%, so hard
+        # margins went stale the first time main grew the registry while the
+        # property that justifies the threshold -- a real gap, with the ceiling
+        # strictly between the two groups -- did not move. Ten points is the
+        # weakest claim that still fails if the ceiling ever sits inside a
+        # cluster instead of between two.
+        self.assertEqual(expected, {"available", "file", "python", "source"})
         shares = sorted((c / n for c in counts.values()), reverse=True)
         just_below = max(s for s in shares if s <= gc._REQUIRES_SHARE_CEILING)
         just_above = min(s for s in shares if s > gc._REQUIRES_SHARE_CEILING)
-        self.assertLess(just_below, 0.20)
-        self.assertGreater(just_above, 0.28)
+        self.assertGreater(just_above - just_below, 0.10)
 
     def test_requiring_a_python_file_does_not_outscore_the_capability_asked_for(self):
         goal = (
