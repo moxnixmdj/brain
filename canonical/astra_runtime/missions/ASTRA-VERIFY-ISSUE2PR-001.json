@@ -1,0 +1,9 @@
+{
+  "mission_id": "ASTRA-VERIFY-ISSUE2PR-001",
+  "arc_class": "semantic_engine",
+  "kind": "VERIFY_CAPABILITY_WORTHSHIP",
+  "target_capability": "python.software.issue_to_pr.orchestrate.v1",
+  "statement": "The issue-to-PR loop takes a task file (issue spec with choreograph edit ops) and returns a verified pull-request-ready change: cross-file plan -> apply on an isolated worktree -> fixed-point proof -> minimal test selection and execution -> unified diff + pr_intent + Merkle receipt. Golden fixture: rename helper -> compute across 3 files, 6 applied sites, the 1 affected test selected and executed green; run twice, artifacts byte-identical.",
+  "input_root": "/home/user/mission_i2p/fixrepo",
+  "zero_spend": true
+}
