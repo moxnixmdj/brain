@@ -1,0 +1,20 @@
+{
+ "mission_id": "ASTRA-VERIFY-EXTRACT-001",
+ "status": "COMPLETE",
+ "e2e_ms": 229,
+ "golden": {
+  "world": "extract_mission: pkg/report.py::summarize(values, verbose=False) + tests/test_report.py (baseline 3/3 green)",
+  "extract": {"region": [12, 17], "new_name": "bands", "inputs": ["base"], "outputs": ["band"],
+              "gate": "PASS", "verified": true, "edit_count": 1},
+  "post_world": "def bands(base) inserted before summarize with the branch bytes verbatim (dedented 4) and synthesized return band; call line at identical indent; SCALE read from module scope, never a parameter; dead writes (dead = band - 1 / band - 2) stay inside the new def and out of the outputs list; suite green post-edit (3/3)"
+ },
+ "honesty_legs": {
+  "sub_block_descend": "region 13-14 (odd arm only) extracted def odd_band(base) with inputs [base], outputs [band] from inside the if-arm chain",
+  "rollback": "tampered suite (== 999) -> TESTS_RED_AFTER_EDIT, pkg/report.py sha256 restored to baseline byte-for-byte",
+  "misalignment": "region 14-16 severing the else arm refused REGION_NOT_STATEMENT_ALIGNED; region on the lone return refused RETURN_IN_REGION",
+  "collision": "new_name=summarize refused NEW_NAME_COLLIDES:summarize",
+  "determinism": "two pristine worlds -> artifacts byte-identical and rewritten trees byte-identical",
+  "loud_unverified": "no run_tests named -> verified=false with gate PASS, stated on the stdout row"
+ },
+ "law": "the edit is inference over the real scope graph; what cannot be proven aligned, safe and named refuses before a byte moves"
+}

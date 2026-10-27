@@ -1,0 +1,30 @@
+{
+ "receipt_for": "ASTRA-VERIFY-EXTRACT-001",
+ "capability_id": "python.refactor.extract_function.v1",
+ "adapter_module": "python_refactor_extract_function",
+ "observed": {
+  "golden": {
+   "region": [12, 17],
+   "extracted_name": "bands",
+   "inputs": ["base"],
+   "outputs": ["band"],
+   "edit_count": 1,
+   "files_edited": ["pkg/report.py"],
+   "gate": "PASS",
+   "verified": true,
+   "pytest_rc": 0,
+   "e2e_ms": 229
+  },
+  "white_box_harvest": "repo-confined path law (_safe_path) and artifact hashing (_sha256) imported unchanged from python_refactor_rename_parameter; subprocess/env/test-gate shape reused",
+  "honesty_legs_observed": [
+   "REGION_NOT_STATEMENT_ALIGNED on severed else arm (14-16)",
+   "RETURN_IN_REGION on the lone return line",
+   "NEW_NAME_COLLIDES:summarize on a name already bound at module level",
+   "TESTS_RED_AFTER_EDIT with full byte rollback (sha256 equality against baseline)",
+   "two-world determinism: artifacts and trees byte-identical",
+   "verified=false loudly when no tests are named"
+  ],
+  "composes_with": "python.refactor.rename_parameter.v1 (shared splice/test-gate spine), symbol index addressing by qualname (Meter.class methods extract with explicit self)",
+  "pin_green": "15/15 x 3 consecutive runs (golden math, module-global law, sub-block descend, two-output tuple, zero-output bare call, method self, byte anchors, six refusal laws, rollback, two-world determinism)"
+ }
+}

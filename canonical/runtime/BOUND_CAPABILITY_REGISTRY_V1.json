@@ -4681,7 +4681,98 @@
         "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_PROVENANCE_COUPLING_SUPERCOMPOSER_V1_V1.json"
       }
     },
-    "python.refactor.rename_parameter.v1": {
+    "python.refactor.extract_function.v1": {
+    "action_template": {
+      "args": {
+        "capability_id": "python.refactor.extract_function.v1",
+        "source_root": "${input.source_root}",
+        "module": "${input.module}",
+        "qualname": "${input.qualname}",
+        "new_name": "${input.new_name}",
+        "start_line": "${input.start_line}",
+        "end_line": "${input.end_line}",
+        "output_path": "${input.output_path}",
+        "run_tests": "${input.run_tests}",
+        "python_executable": "${input.python_executable}",
+        "timeout_s": "${input.timeout_s}"
+      },
+      "expect": {
+        "field": "gate",
+        "type": "field_equals",
+        "value": "PASS"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "python_refactor_extract_function",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "python",
+      "refactor",
+      "extract function",
+      "extract method",
+      "ast",
+      "scope",
+      "region",
+      "statement alignment",
+      "dedent",
+      "inputs outputs inference",
+      "semantic edit",
+      "codemod"
+    ],
+    "limitations": [
+      "region bytes move verbatim and dedent exactly 4: comments and formatting inside the region are byte-carried, never reprinted; the extracted def parse-checks BEFORE the file is touched and the rebuilt module parse-checks before it is written.",
+      "regions must tile whole statement chains exactly: partial statements, severed if/else or try arms, straddled blocks and headers refuse REGION_NOT_STATEMENT_ALIGNED; the search descends into same-scope block statements (If/For/While/With/Try arms) and NEVER into a nested def/class scope.",
+      "control-flow escape hatches refuse: RETURN_IN_REGION, LOOP_ESCAPE_IN_REGION, YIELD_IN_REGION and NESTED_DEF_IN_REGION keep the slice total; any global/nonlocal on a touched name refuses REFUSE_NONLOCAL_OR_GLOBAL.",
+      "module-level names never become parameters (they resolve at module scope inside the new def); self extracts as an explicit parameter. Outputs are Store-names proven read later in the enclosing function -- dead writes stay inside the new def; 0 outputs -> bare call, 1 -> x = new(...), >=2 -> tuple unpack.",
+      "no run_tests named => verified=false loudly; a red post-edit suite restores every original byte and refuses TESTS_RED_AFTER_EDIT."
+    ],
+    "platforms": [
+      "linux",
+      "windows",
+      "darwin"
+    ],
+    "provides": [
+      "python.refactor.extract_function"
+    ],
+    "requires": [],
+    "result_fields": [
+      "adapter",
+      "complete",
+      "edit_count",
+      "extracted_name",
+      "files_edited",
+      "gate",
+      "inputs",
+      "output_path",
+      "output_sha256",
+      "output_verified",
+      "outputs",
+      "verified"
+    ],
+    "source": {
+      "module": "python stdlib ast",
+      "type": "runtime",
+      "version_family": ">=3.8"
+    },
+    "status": "VERIFIED_BOUND_CAPABILITY",
+    "verification": {
+      "independently_verified": true,
+      "mission_id": "ASTRA-VERIFY-EXTRACT-001",
+      "observed_effect": {
+        "golden": "summarize region 12-17 -> def bands(base) + band = bands(base): inputs [base], outputs [band], module-global SCALE never a parameter, dead writes dropped, suite green post-edit (gate PASS, verified=true), e2e 229 ms",
+        "sub_block": "odd-arm region 13-14 descends into the if-arm chain -> def odd_band(base), inputs [base], outputs [band]",
+        "honesty": "severed else arm REGION_NOT_STATEMENT_ALIGNED; lone return RETURN_IN_REGION; new_name=summarize NEW_NAME_COLLIDES",
+        "rollback": "tampered suite -> TESTS_RED_AFTER_EDIT, pkg/report.py sha256 restored byte-for-byte",
+        "determinism": "two pristine worlds -> byte-identical artifacts and trees"
+      },
+      "pin_green": "15/15 x 3 consecutive runs",
+      "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-EXTRACT-001__RECEIPT.json",
+      "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-EXTRACT-001.json"
+    }
+  },
+  "python.refactor.rename_parameter.v1": {
       "action_template": {
         "args": {
           "capability_id": "python.refactor.rename_parameter.v1",
