@@ -55,6 +55,7 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     languages_seen: set[str] = set()
     errors: list[dict] = []
     symbols: list[dict] = []
+    skipped_count = 0
 
     try:
         from tree_sitter import Language, Parser  # type: ignore
@@ -117,9 +118,9 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
                 except Exception as exc:
                     errors.append({"path": str(f.relative_to(repo)), "kind": type(exc).__name__})
             else:
-                # Without tree_sitter, non-python counted as skipped but not error — deterministic
-                parsed_count += 1
-                symbols.append({"path": str(f.relative_to(repo)), "language": lang, "has_error": False, "node_count": 1})
+                # A missing parser is a blocked input, never a fabricated parse.
+                skipped_count += 1
+                errors.append({"path": str(f.relative_to(repo)), "kind": "TREE_SITTER_SUBSTRATE_MISSING"})
         except Exception as exc:
             errors.append({"path": str(f.relative_to(repo)), "kind": type(exc).__name__})
 
@@ -132,11 +133,12 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
         "file_count": parsed_count,
         "symbol_count": len(symbols),
         "error_count": len(errors),
+        "skipped_count": skipped_count,
         "tree_sitter_available": tree_sitter_available,
         "substrate": ["tree_sitter==0.20.4", "tree_sitter_languages==1.10.2"],
         "model_dependency_count": 0,
         "incremental_spend_usd": 0,
-        "verified": parsed_count > 0,
+        "verified": parsed_count > 0 and not errors,
     }
 
     raw_bytes = json.dumps(artifact, sort_keys=True, separators=(",", ":")).encode()
@@ -152,6 +154,7 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
         "tree_sitter_available": tree_sitter_available,
         "symbol_count": len(symbols),
         "error_count": len(errors),
+        "skipped_count": skipped_count,
         "verified": artifact["verified"],
         "model_dependency_count": 0,
         "incremental_spend_usd": 0,
