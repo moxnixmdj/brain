@@ -1,0 +1,1 @@
+{"capability_id":"execution.pipeline.8stage.v1","incremental_spend_usd":0,"model_dependency_count":0,"result":{"returncode":0,"stdout":"3\n"},"schema":"PROJECT_BRAIN_EXECUTION_PIPELINE_8STAGE_V1","stages":[["/usr/bin/python3","-c","import sys; sys.stdout.write('a\\na\\nb\\n')"],["/usr/bin/wc","-l"]],"verified":true}
