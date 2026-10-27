@@ -2658,6 +2658,86 @@ def extract_number(text: str) -> float | None:
     return float(m.group(0)) if m else None
 
 
+def _repo_root() -> pathlib.Path:
+    return pathlib.Path(__file__).resolve().parents[2]
+
+
+def _exists_in_repo(candidate: str) -> bool:
+    """Is this candidate a file that is already on disk?  A fact, not a guess."""
+    try:
+        return (_repo_root() / str(candidate)).is_file()
+    except (OSError, ValueError):
+        return False
+
+
+def _is_repository_path(candidate: str) -> bool:
+    """`canonical/x.tar.gz` names a place; `tar.gz` names nothing by itself."""
+    return "/" in str(candidate)
+
+
+def _sole_existing_repository_path(paths: Sequence[str]) -> str | None:
+    """The one input a sentence can actually read, or None when it is ambiguous."""
+    existing = [p for p in paths if _exists_in_repo(p)]
+    repository = [p for p in existing if _is_repository_path(p)]
+    if len(repository) == 1:
+        return repository[0]
+    if len(existing) == 1:
+        return existing[0]
+    return None
+
+
+def _sole_missing_repository_path(paths: Sequence[str]) -> str | None:
+    """The one artifact a sentence names that does not exist yet, or None.
+
+    Deliberately narrow: it answers only when exactly ONE repository path the
+    sentence names is missing.  Zero candidates or several keep the historical
+    order rule untouched, so every sentence that already bound correctly binds
+    exactly as it did.
+    """
+    missing = [p for p in paths if not _exists_in_repo(p)]
+    repository = [p for p in missing if _is_repository_path(p)]
+    return repository[0] if len(repository) == 1 else None
+
+
+_GENERIC_SLOT_WORDS = frozenset({"path", "file", "files", "list", "dir", "directory",
+                                 "input", "inputs", "output", "outputs", "source",
+                                 "sources", "target", "value"})
+
+
+def _slot_words(slot: str) -> set[str]:
+    """The meaningful words in a slot's own name: `archive_path` -> {archive}."""
+    return {w for w in _WORD.findall(str(slot or "").lower())
+            if len(w) > 1 and w not in _GENERIC_SLOT_WORDS}
+
+
+def _preceding_words(goal: str, candidate: str, limit: int = 4) -> set[str]:
+    """The words the sentence puts immediately before a path it names."""
+    body = str(goal or "")
+    index = body.find(str(candidate))
+    if index <= 0:
+        return set()
+    before = body[:index]
+    words = _WORD.findall(before.lower())
+    return set(words[-limit:])
+
+
+def _noun_matched_path(slot: str, paths: Sequence[str], goal: str) -> str | None:
+    """The path the sentence introduced with the word this slot is about.
+
+    "Verify the tar.gz archive <X> against the manifest <M>" names two files in
+    one sentence.  Which one a slot wants is said by the sentence itself: the
+    word it put in front of the path.  `archive_path` looks for "archive",
+    `manifest_path` for "manifest".  This is grammar the sentence already
+    carries, not a table someone wrote by hand, and it answers exactly when one
+    candidate matches and no other does.
+    """
+    wanted = _slot_words(slot)
+    if not wanted or not paths:
+        return None
+    hits = [p for p in paths if wanted & _preceding_words(goal, p)]
+    return hits[0] if len(hits) == 1 else None
+
+
 def bind(signature: Mapping[str, str], goal: str,
          inputs: Mapping[str, Any] | None = None,
          produced: Mapping[str, Any] | None = None) -> dict[str, Any]:
@@ -2697,7 +2777,22 @@ def bind(signature: Mapping[str, str], goal: str,
             continue
         t = str(typ or "").upper()
         if t in ("PATH_FILE", "PATH_INPUT", "PATH_LIST", "PATH_DIR"):
-            if paths:
+            # An input is something that can be READ, so a path that is already
+            # on disk is the better reading of the sentence than "whichever name
+            # came first".  Measured on 29e23ef: "Verify the tar.gz archive
+            # <dir>/x.tar.gz against the manifest <dir>/M.json" bound
+            # manifest_path="tar.gz" -- the prose word "tar.gz" is path-shaped
+            # and stood first -- and the step raised MANIFEST_INPUT_REQUIRED
+            # while the two real paths in the sentence were both available.
+            #
+            # Only the unambiguous case moves: exactly one existing repository
+            # path, or exactly one existing path.  Anything else keeps the
+            # historical order rule byte for byte.
+            named = _noun_matched_path(slot, paths, goal)
+            chosen = named if named is not None else _sole_existing_repository_path(paths)
+            if chosen is not None:
+                args[slot] = chosen
+            elif paths:
                 args[slot] = paths[0]
         elif t == "PATH_OUTPUT":
             # the target is the LAST name in the sentence, not the first --
@@ -2724,6 +2819,15 @@ def bind(signature: Mapping[str, str], goal: str,
             destination = extract_content_destination(goal)
             if destination and destination in paths:
                 args[slot] = destination
+            elif _noun_matched_path(slot, paths, goal) is not None:
+                # "the archive <A>" is what this slot is about, whatever exists.
+                args[slot] = _noun_matched_path(slot, paths, goal)
+            elif _sole_missing_repository_path(paths) is not None:
+                # The artifact this step is asked to PRODUCE is the one that is
+                # not there yet -- when exactly one repository path the sentence
+                # names is missing, that is it.  "against the manifest M" is a
+                # file that exists, so it cannot be the thing to write.
+                args[slot] = _sole_missing_repository_path(paths)
             elif paths:
                 args[slot] = paths[-1]
         elif t == "ARGV":
