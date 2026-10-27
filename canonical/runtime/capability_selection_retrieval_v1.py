@@ -563,6 +563,23 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
     # executable template, which for a derived entry carries the zero-input form and no argument names.
     contract = contract_of(entry, declared)
     required = _arg_names(contract)
+    # Hidden wiring (2026-10-27): typed admission was shortlisting the right SWE
+    # capability and then refusing it on a slot the ADAPTER defaults or the
+    # SENTENCE already determines.  ``declared_input_derivation_v1`` proves both
+    # from the adapter AST and the stated paths; the pinned binder is unchanged.
+    # Every derivation carries its evidence, ambiguity yields nothing, and the
+    # original contract still decides which capabilities the request may name.
+    try:
+        from canonical.runtime import declared_input_derivation_v1 as _derivation
+        _in_scope = (_derivation.is_swe_request(goal)
+                     and str(cid).startswith(_derivation.SWE_CID_PREFIXES))
+        if _in_scope:
+            _shadow, _derived_values, _derivation_report = _derivation.binding_view(goal, entry, root)
+            _bind_contract = _shadow.get("action_template") or contract
+        else:
+            _derived_values, _derivation_report, _bind_contract = {}, {"adapter_defaulted": {}}, contract
+    except Exception:  # derivation is advisory; a fault here keeps the old gate
+        _derived_values, _derivation_report, _bind_contract = {}, {"adapter_defaulted": {}}, contract
     # F29: the request must NAME the capability.  A proposal whose name the request shares
     # only the verbs every request is made of was matched on a verb, not described.  The contract
     # is resolved first, because the catch-all - a capability that takes the whole request - makes
@@ -600,7 +617,7 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
                     "reason": "BINDING_REFUSED:NO_SLOT_FOR_THE_STATED_PAYLOAD:"
                               + ",".join(sorted(kinds))[:120],
                     "required_inputs": required}
-    if not front.is_plain_goal_routable({"action_template": contract}):
+    if not front.is_plain_goal_routable({"action_template": _bind_contract}):
         return {"capability_id": cid, "admitted": False, "reason": "NO_DECLARED_INPUT_CONTRACT",
                 "required_inputs": required}
     conflict = _expectation_compatible(cid, entry, declared)
@@ -614,9 +631,13 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
         # a sentence that states its contract perfectly.
         inputs = front.bind_all_inputs(
             goal,
-            {"action_template": contract, "proposal_bindings": entry.get("proposal_bindings")},
+            {"action_template": _bind_contract, "proposal_bindings": entry.get("proposal_bindings")},
             root, cycle=0, spool=set(),
         )
+        # Evidence-derived values rejoin the bound inputs.  They were removed from
+        # the binder's contract precisely because the sentence states them in a
+        # different SHAPE (a file where the capability declares a directory).
+        inputs.update(_derived_values)
     except Exception as exc:  # the binder is the authority on whether the sentence is enough
         detail = str(exc)
         for prefix in ("GOAL_INPUT_BINDING_REQUIRED:", "GOAL_INPUT_BINDING_REQUIRED"):
@@ -625,11 +646,15 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
                 break
         return {"capability_id": cid, "admitted": False, "reason": "BINDING_REFUSED:" + detail[:160],
                 "required_inputs": required}
-    missing = [name for name in required if name not in inputs]
+    # A slot the adapter itself defaults is not an unstated input: the adapter
+    # owns that value, and demanding it from the sentence was the defect PR #6272
+    # fixed by hand for two capabilities.  The AST evidence is in the report.
+    _adapter_owned = set(_derivation_report.get("adapter_defaulted") or {})
+    missing = [name for name in required if name not in inputs and name not in _adapter_owned]
     if missing:
         return {"capability_id": cid, "admitted": False,
                 "reason": "DECLARED_INPUTS_UNBOUND:" + ",".join(sorted(missing)),
-                "required_inputs": required}
+                "required_inputs": required, "derivation": _derivation_report}
     # Refuse BEFORE execution, on the capability's own declared precondition.
     # The reason carries the BINDING_REFUSED: prefix deliberately: that is the
     # signal the route layer already listens for, and it is what lets the
@@ -676,7 +701,64 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
                               + ",".join(sorted(slots))[:120],
                     "required_inputs": required}
     return {"capability_id": cid, "admitted": True, "inputs": inputs,
-            "required_inputs": required, "specific": is_specific(required)}
+            "required_inputs": required, "specific": is_specific(required),
+            "derivation": _derivation_report}
+
+
+_EFFECT_WORDS: tuple[tuple[tuple[str, ...], tuple[str, ...]], ...] = (
+    (("rename",), ("rename",)),
+    (("extract",), ("extract",)),
+    (("repair", "fix", "broken", "bug", "failing"), ("repair", "patch")),
+    (("scaffold", "generate test"), ("scaffold", "generate")),
+    (("audit", "count the functions"), ("audit",)),
+    (("review", "lint", "type-check", "typecheck"), ("review",)),
+    (("localize", "traceback"), ("fault", "localize")),
+)
+
+
+_NOUN_WORDS = ("parameter", "symbol", "function", "test", "loop", "crossfile",
+               "diff", "patch", "scaffold", "fault", "provenance", "review")
+
+
+def _effect_winner(goal: str, admitted: list[dict[str, Any]],
+                   proposals: list[dict[str, Any]] | None = None) -> str | None:
+    """The one admitted capability whose name states the effect the goal stated.
+
+    Deterministic and fail-closed: the effect word must be in the request, the
+    noun the request names breaks a tie where one exists, and a remaining tie is
+    broken ONLY by the retrieval shortlist order (never by the margin alone).
+    An unstated effect or an unresolved tie returns None.
+    """
+    text = str(goal or "").lower()
+    preferred: list[str] = []
+    for verbs, effects in _EFFECT_WORDS:
+        if any(verb in text for verb in verbs):
+            preferred.extend(effects)
+    if not preferred:
+        return None
+    nouns = {word for word in _NOUN_WORDS if word in text}
+    order = {str(p.get("capability_id")): i for i, p in enumerate(proposals or [])}
+    scored: list[tuple[int, int, str]] = []
+    for row in admitted:
+        cid = str(row.get("capability_id") or "")
+        low = cid.lower()
+        effect = sum(2 for word in set(preferred) if word in low)
+        noun = sum(1 for word in nouns if word in low)
+        total = effect + noun
+        if effect:
+            scored.append((total, -order.get(cid, 10**6), cid))
+    if not scored:
+        return None
+    best = max(row[0] for row in scored)
+    winners = [row for row in scored if row[0] == best]
+    if len(winners) == 1:
+        return winners[0][2]
+    # Total tie: the most relevant shortlisted candidate decides, and only if
+    # exactly one of the tied candidates was shortlisted at all.
+    ranked = sorted(winners, key=lambda row: -row[1])
+    if ranked[0][1] > ranked[1][1]:
+        return ranked[0][2]
+    return None
 
 
 def select(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any,
@@ -718,6 +800,23 @@ def select(goal: str, registry: Mapping[str, Mapping[str, Any]], root: Any,
     # indistinguishable, or none whose contract is specific because it needs nothing - and only
     # when the ranker itself is unambiguous about which one the sentence is for.  The margin is
     # recomputed HERE from the goal and the live registry, so a rule string is never the evidence.
+    # Effect disambiguation (hidden wiring, 2026-10-27).  Once evidence-derived
+    # inputs are bound, SEVERAL SWE capabilities are honestly admissible: a
+    # repair sentence admits the repair loop, the patch search and the test
+    # audit.  They are not equally the request.  The request states an EFFECT
+    # ("rename", "repair", "extract", "audit", "review"), and that word is in the
+    # capability's own name.  A unique best effect match decides; a tie or no
+    # match keeps the ambiguity refusal.  Measured blast radius: only the
+    # ambiguous SWE branch, never a decisive single admission.
+    if len(admitted) > 1:
+        from canonical.runtime import declared_input_derivation_v1 as _swed
+        effect_winner = (_effect_winner(goal, admitted, short.get("proposals") or [])
+                         if _swed.is_swe_request(goal) else None)
+        if effect_winner is not None:
+            chosen = next(row for row in admitted if row["capability_id"] == effect_winner)
+            return {**short, "status": "SELECTED", "selected_capability": effect_winner,
+                    "inputs": chosen.get("inputs") or {}, "admissions": admits,
+                    "rule": "E30_STATED_EFFECT_DISAMBIGUATES_BINDABLE_CANDIDATES"}
     if len(admitted) != 1:
         # The margin may only decide between candidates the request could have meant.  A
         # candidate the request does not NAME (F29) is not one of them, and a candidate whose
