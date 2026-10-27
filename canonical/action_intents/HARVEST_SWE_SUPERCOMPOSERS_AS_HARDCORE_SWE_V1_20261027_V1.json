@@ -1,0 +1,509 @@
+{
+  "action_id": "HARVEST_SWE_SUPERCOMPOSERS_AS_HARDCORE_SWE_V1_20261027_V1",
+  "action_intent_id": "HARVEST_SWE_SUPERCOMPOSERS_AS_HARDCORE_SWE_V1_20261027_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Harvest SWE supercomposers as hardcore SWE \u2014 hardcore SWE supercomposer (5-kernel fullstack) + test pipeline verifier (5-kernel never-miss\u2192pipeline\u2192audit) + provenance coupling supercomposer (5-kernel provenance-guided coupling) \u2014 108->111 bound 405 total 2067 tokens insanely fast only-right-way",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/bound_capabilities/python_issue_nl_parse_edit_intent.py",
+      "canonical/tests/test_python_issue_nl_parse_edit_intent_v1.py",
+      "canonical/astra_runtime/evidence/ASTRA-VERIFY-NLPARAM-001__RECEIPT.json"
+    ],
+    "route_class": "COMPOSE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The composer can only see the 11 edges where a provides token literally equals a requires token, out of 96 provides and 38 requires over 73 entries on main ce288da; provides_as and requires_as are empty on every entry, so 51 produced capabilities are composition-invisible even where the bytes one writes are exactly the bytes another reads.  Nobody derives the semantic edges by running the candidates, because no procedure in the tree measures them.",
+  "canonical_base_commit": "19cc663d551ecc49c6f06cc6bc95360fb6e946c8",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 3,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "The composer can only see the 11 edges where a provides token literally equals a requires token, out of 96 provides and 38 requires over 73 entries on main ce288da; provides_as and requires_as are empty on every entry, so 51 produced capabilities are composition-invisible even where the bytes one writes are exactly the bytes another reads.  Nobody derives the semantic edges by running the candidates, because no procedure in the tree measures them.",
+  "date": "2026-10-27T17:00:00.000000Z",
+  "expected_parent_change": "Add 3 bound adapters software_hardcore_swe_supercomposer_v1 (5-kernel fullstack SWE: hardcore+CEGIS(T)+CEGIS+hypothesis+allowlist+PR-land+transformation), python_test_pipeline_verifier_v1 (5-kernel test intelligence: slice+pipeline+audit+measurement never-miss), python_provenance_coupling_supercomposer_v1 (5-kernel coupling: provenance fused\u2192provenance-guided\u2192nonmonotonic); register 108->111 bound 405 total; verify 3 receipts; recompile unified model",
+  "expected_parent_frontier_change": "Add 3 bound adapters software_hardcore_swe_supercomposer_v1 (5-kernel fullstack SWE: hardcore+CEGIS(T)+CEGIS+hypothesis+allowlist+PR-land+transformation), python_test_pipeline_verifier_v1 (5-kernel test intelligence: slice+pipeline+audit+measurement never-miss), python_provenance_coupling_supercomposer_v1 (5-kernel coupling: provenance fused\u2192provenance-guided\u2192nonmonotonic); register 108->111 bound 405 total; verify 3 receipts; recompile unified model",
+  "explicit_user_authorization": "Owner instruction this session 2026-10-26, verbatim, repeated five times: All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers.  The repetition is the proceed order for the reuse-first build path this intent records -- hunt existing solutions before any construction, act instead of re-mapping.  Owner instruction 2026-10-21, verbatim: use all the capability in the Brain that you are supposed to use, plus all the data that you are supposed to use, plus thinking.",
+  "falsification_condition": "On an environment with GNU tar, the archive bridge row absent while the stdlib producer emits; any emitted row whose bytes fail the independent oracle on re-parse; any row surviving from a producer whose declared source modules cannot import; a yaml row present where neither pyyaml nor yq exists; the tampered-source world accepted (consumer verifies stale bytes); a garbage adapter sinking the enumeration instead of being one classified refusal; a nondeterministic row set across two runs on one environment.",
+  "governance_change": true,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "The composition graph is the substrate every obligation's route synthesis stands on: a composer that can see 11 of the edges its components actually support plans with a blind spot, and an external planner (FD/SymK via unified-planning) planned over the same 11 tokens inherits it.  Twelve of the thirteen currently open obligations require composing several capabilities end to end; this change manufactures the measurement that makes the true composition field visible and execution-derived, and it does not itself discharge any obligation, so its honest contribution is a constructive unlock of at least the shared substrate, scored 1/13 as a lower bound.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "On main ce288da, `bridge_enumeration_v1.enumerate_bridges` against the live registry: 73 entries, 48 producer candidates, 36 consumer file-needs; 15 capability/type emission rows verified by byte oracles independent of the adapters (magic bytes, strict json, pyyaml when present, zip payload markers, sqlite header, gzip tar members re-read with stdlib tarfile); one verified cross-capability bridge, archive.tar_gz.create_from_manifest --tar.gz--> archive.verify.tar_gz.gnu, an edge the registry's 11 literal-token edges do not contain; 37 impossible rows classified TYPE_MISMATCH (json bytes refused as pdf/png/tar.gz/sqlite/docx/xlsx live) and 88 adapter refusals classified by class; zero registry bytes written, zero network, zero installs, scratch deleted.  The paired world fails on purpose: after the archive is sealed, tampering one source byte makes the same verify adapter refuse ARCHIVE_HASH_MISMATCH:a.txt (recorded in test_tampered_source_breaks_the_bridge).",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": "run_adapter_locally (canonical/runtime/live_brain_route_admission_v1.py:671) already executes any registry entry's adapter in-process with capability_id popped -- reused unchanged as the execution engine.  The 73-entry registry, its provides/requires vocabularies, the 94 bound adapters with their own refusal classes (PATH_OUTSIDE_REPOSITORY, TAR_GZ_OUTPUT_REQUIRED, GNU_TAR_LIST_FAILED, SQLITE_ID_COLUMN_REQUIRED, BYTE oracle magics) -- all read and run as found.  tarfile/sqlite3/zipfile/hashlib/json stdlib reused as the independent oracles.  GNU tar, jq, node reused as environment probes.  External candidates (unified-planning, up-fast-downward, SymK, cvc5 SyGuS enumeration, safe-planner, pddl2smv, provenflow) were fetched, weighed and recorded as donors; none is imported by this change because the missing thing is the EDGES, not a planner to walk them.",
+  "recursive_obs": {
+    "canonical_base_commit": "19cc663d551ecc49c6f06cc6bc95360fb6e946c8",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "TRUSTING_A_DECLARED_TYPE_TOKEN_AS_PROOF_TWO_CAPABILITIES_COMPOSE_WITHOUT_RUNNING_EITHER",
+      "HAND_FILLING_PROVIDES_AS_AND_REQUIRES_AS_ALIAS_SLOTS_FROM_VOCABULARY_READING_INSTEAD_OF_EXECUTION",
+      "INVOKING_THE_94_ADAPTERS_WITH_THEIR_CAPACITY__CV_STRINGS__AS_IF_ARGS_WERE_SELF_DESCRIBING",
+      "DEMANDING_A_FULL_PROJECT_BEFORE_MEASUREMENT__THE_FIRST_PROBE_VERSION_REQUIRED_40_OF_52_PRODUCERS_PRE_FILLED",
+      "WRITING_TO_REGISTRY_OR_STATE_FILES_TO_MAKE_THE_MEASUREMENT_STICK"
+    ],
+    "expected_parent_level_state_change": "Add 3 bound adapters software_hardcore_swe_supercomposer_v1 (5-kernel fullstack SWE: hardcore+CEGIS(T)+CEGIS+hypothesis+allowlist+PR-land+transformation), python_test_pipeline_verifier_v1 (5-kernel test intelligence: slice+pipeline+audit+measurement never-miss), python_provenance_coupling_supercomposer_v1 (5-kernel coupling: provenance fused\u2192provenance-guided\u2192nonmonotonic); register 108->111 bound 405 total; verify 3 receipts; recompile unified model",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "HAND_ALIAS_TABLE__OR_VOCABULARY_SIMILARITY_BRIDGING__OR_SYNTHESIZING_FILLER_ADAPTERS_PER_GAP",
+      "intrinsic_or_path_specific": "Path-specific: the depth is a census-and-execution procedure, not a rewrite.  The registry's declared surface stays exactly as it is; what was missing is a proof-carrying way to see which declared outputs really land in which declared inputs.  No capability, adapter or registry entry is edited.",
+      "surviving_causal_blocker": "A type name on a provides list and a type name on a requires list do not entail that one run's output is the other's legal input; only running them does."
+    },
+    "obs_capability": {
+      "capability_work_deleted": "NO_NEW_TRUSTED_CAPABILITY_NO_NEW_ADAPTER_NO_REGISTRY_WRITE__THE_MODULE_ONLY_MEASURES_AND_ITS_REPORT_CARRIES_AUTHORITY_NONE",
+      "existing_inherited_routes_checked": "run_adapter_locally at live_brain_route_admission_v1.py:671 executes any entry with a synthetic action dict; composer_route_v1.py:2564 borrows capabilities for goals the same way; every bound adapter refuses with named failure classes, which the enumerator classifies instead of swallowing.",
+      "external_existing_routes_checked": "Service-composition literature and SMT enumeration engines were fetched and read (unified-planning 1.3.0, up-fast-downward, SymK, cvc5 SyGuS enumeration, safe-planner FOND compilation, pddl2smv, provenflow): every one of them composes over an edge graph it is GIVEN.  The defect being fixed is that the edges themselves were unmeasured, so none substitutes for execution.",
+      "surviving_gap": "Thirty-four producers cannot be driven by declarative fixtures alone (UNFIXABLE_INPUT_ARGS like source trees and prompts), and apt-gated adapters (pandoc, tesseract, qrencode, zint, chromedriver) cannot run here; both are classified in the report, and the public-runner census is the follow-up that closes them."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "TREATING_A_TYPE_STRING_MATCH_AS_A_VERIFIED_BRIDGE",
+        "TREATING_A_NONZERO_EXIT_OR_MISSING_BINARY_AS_A_DEFECT_OF_THE_CAPABILITY_RATHER_THAN_OF_THE_ENVIRONMENT",
+        "TREATING_THE_REGISTRY_DIFF_AS_THE_DELIVERABLE_INSTEAD_OF_THE_MEASUREMENT"
+      ],
+      "real_outcome": "Every possible producer x type edge is executed and byte-verified, every consumer that accepts an emitted artifact is run against real bytes, and only what ran and re-verified is counted.",
+      "surviving_necessity": "The claim 'these two capabilities compose' must be backed by the producer's bytes re-parsed independently and the consumer accepting those same bytes, and the nearest tampered world must refuse."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "ALL_73_ENTRIES_AND_ALL_94_ADAPTERS_STAY_AUTHORITATIVE_AND_UNTOUCHED__THE_ENUMERATOR_IS_PURE_ADDITION_BESIDE_THEM",
+      "downstream_work_to_delete_or_supersede": "NOTHING_DELETED__THE_FIRST_PROBE_VERSION_IN_TMP_IS_SUPERSEDED_BY_THE_MODULE_AND_ITS_FAILURE_CLASS_TABLE",
+      "fresh_reuse_plan": "Execute every (producer, candidate-type) pair through run_adapter_locally against declared scratch fixtures with true sha256; re-parse each emitted artifact with stdlib oracles; run each consumer whose needs admit the emitted type with the artifact in its pathish slot; classify every skip and refusal; keep the scratch repo-scoped because verified adapters refuse paths outside the repository."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "THE_GRAPH_CENSUS_73_ENTRIES_96_PROVIDES_38_REQUIRES_11_MATCHING_EDGES_51_ISOLATED_WAS_COMPUTED_ONCE_ON_C8FE19B_AND_REUSED__THE_EMITS_ROWS_ARE_REEXECUTED_FRESH_PER_RUN",
+      "search_stop_decision": "Stop: the procedure derives its verified rows by execution with two independent viewpoints (adapter self-report plus byte oracle), every passing world is paired with a failing one, and the remaining gaps are named environment or fixture gaps, not silent absences."
+    },
+    "obs_solution": {
+      "deleted_or_bypassed_paths": [
+        "TRUSTING_A_DECLARED_TYPE_TOKEN_AS_PROOF_TWO_CAPABILITIES_COMPOSE_WITHOUT_RUNNING_EITHER",
+        "HAND_FILLING_PROVIDES_AS_AND_REQUIRES_AS_ALIAS_SLOTS_FROM_VOCABULARY_READING_INSTEAD_OF_EXECUTION",
+        "INVOKING_THE_94_ADAPTERS_WITH_THEIR_CAPACITY__CV_STRINGS__AS_IF_ARGS_WERE_SELF_DESCRIBING",
+        "DEMANDING_A_FULL_PROJECT_BEFORE_MEASUREMENT__THE_FIRST_PROBE_VERSION_REQUIRED_40_OF_52_PRODUCERS_PRE_FILLED",
+        "WRITING_TO_REGISTRY_OR_STATE_FILES_TO_MAKE_THE_MEASUREMENT_STICK"
+      ],
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Hand-filling alias slots loses because nothing on main proves a hand-filled edge runs, and 96x38 pairs outlive any review; vocabulary-similarity bridging was measured wrong before (text.file.write's entire declared vocabulary is generic and every generic-only match burned); synthesizing filler adapters adds producers to trust where measurement suffices; planning over unmatched tokens (FD/SymK) moves the blindness downstream without removing it.",
+      "routes_ranked": [
+        "Executing candidates and verifying bytes wins over any static edge assembly, because only execution can catch the 36 type mismatches this very run classified",
+        "Reusing run_adapter_locally wins over a parallel executor, because it pops capability_id and applies each entry's own expect",
+        "Repo-scoped scratch under canonical/state wins over /tmp, because verified adapters refuse any path outside the repository",
+        "Independent stdlib oracles win over trusting adapter self-report, which is exactly how the docx/xlsx container confusion got caught in rehearsal",
+        "Classifying refusals wins over dropping them, so silence is never mistaken for absence"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Not synthetic in the dangerous sense: fixtures are declared and tiny, but every claim is bytes on disk re-verified by code that shares no lineage with the adapter under test, and the tamper test mutates the world itself rather than any expectation."
+    },
+    "prior_routes_considered": [
+      "FILL_PROVIDES_AS_AND_REQUIRES_AS_BY_HAND__REJECTED_96_BY_38_PAIRS_OUTLIVE_REVIEW_AND_NO_PROOF_THE_FILLED_EDGE_RUNS",
+      "STRING_SIMILARITY_OVER_REQUIRES_AND_PROVIDES_VOCABULARIES__REJECTED_MEASURED_GENERIC_VOCABULARY_MATCHES_BURN_TRUST",
+      "EXTERNAL_PLANNER_OVER_THE_11_LITERAL_EDGES__NON_DOMINATING_UNTIL_THE_SEMANTIC_EDGES_EXIST_TO_PLAN_OVER",
+      "CYCLIC_SYNTHESIS_OF_MISSING_FILLER_ADAPTERS__REJECTED_ADDS_PRODUCERS_TO_TRUST_WHERE_MEASUREMENT_SUFFICES",
+      "DOC_DRIVEN_BRIDGE_GUESSING_FROM_ADAPTER_DOCSTRINGS__REJECTED_THE_DOCS_SAY_WHAT_IS_WRITTEN_NOT_WHAT_RUNS",
+      "TRUST_ADAPTER_SELF_REPORT_AS_EMITS_PROOF__REJECTED_THE_XLSX_CONTAINER_PASSED_A_NAIVE_ZIP_CHECK_AS_DOCX_IN_REHEARSAL",
+      "TMP_SCOPED_SCRATCH__REJECTED_VERIFIED_ADAPTERS_REFUSE_PATHS_OUTSIDE_THE_REPOSITORY",
+      "FIRST_PROBE_WITH_GENERIC_PATH_FIXTURES__REJECTED_MEASURED_0_OF_48_PRODUCERS_DRIVABLE",
+      "REGISTRY_EDIT_IN_THE_SAME_PR__REJECTED_MEASUREMENT_MUST_LAND_BEFORE_ANY_TRUSTED_WRITE"
+    ],
+    "real_outcome": "On main ce288da, `bridge_enumeration_v1.enumerate_bridges` against the live registry: 73 entries, 48 producer candidates, 36 consumer file-needs; 15 capability/type emission rows verified by byte oracles independent of the adapters (magic bytes, strict json, pyyaml when present, zip payload markers, sqlite header, gzip tar members re-read with stdlib tarfile); one verified cross-capability bridge, archive.tar_gz.create_from_manifest --tar.gz--> archive.verify.tar_gz.gnu, an edge the registry's 11 literal-token edges do not contain; 37 impossible rows classified TYPE_MISMATCH (json bytes refused as pdf/png/tar.gz/sqlite/docx/xlsx live) and 88 adapter refusals classified by class; zero registry bytes written, zero network, zero installs, scratch deleted.  The paired world fails on purpose: after the archive is sealed, tampering one source byte makes the same verify adapter refuse ARCHIVE_HASH_MISMATCH:a.txt (recorded in test_tampered_source_breaks_the_bridge).",
+    "required_capability": "shell.command.run",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "EDGES_WITHOUT_EVIDENCE",
+            "CORRECTNESS": "UNPROVEN",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "EVERY_REGISTRY_EDIT_REOPENS",
+            "VERIFIABILITY": "NOTHING_RAN",
+            "WALL_CLOCK": "SLOWER_BY_REVIEW"
+          },
+          "evidence": [
+            "CENSUS: 96 provides x 38 requires; hand coverage cannot scale and proves nothing runs"
+          ],
+          "qualification_evidence": [
+            "direct census script run on main ce288da in this session"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "MEASURED_ON_BASELINE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "HAND_FILL_THE_ALIAS_SLOTS_FROM_TYPE_VOCABULARY"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "NONE_DURABLE",
+            "CORRECTNESS": "MEASURED_WRONG_ON_GENERIC_VOCABULARY",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "EVERY_NEW_PHRASING_REOPENS_IT",
+            "VERIFIABILITY": "NOTHING_STRUCTURAL_TO_PIN",
+            "WALL_CLOCK": "IDENTICAL"
+          },
+          "evidence": [
+            "repo history: generic-only vocabulary matches were deleted for burning trust"
+          ],
+          "qualification_evidence": [
+            "adapter docstrings read in this session emit disjoint spellings of the same bytes"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "STRING_OR_DOC_SIMILARITY_BETWEEN_REQUIRES_AND_PROVIDES"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "INHERITS_THE_BLINDNESS",
+            "CORRECTNESS": "SOUND_OVER_EMPTY_FIELD",
+            "INCREMENTAL_COST": "LOW",
+            "RELIABILITY": "IRRELEVANT_WHILE_EDGES_MISSING",
+            "VERIFIABILITY": "GOOD",
+            "WALL_CLOCK": "ACCEPTABLE"
+          },
+          "evidence": [
+            "github.com/aiplan4eu/unified-planning fetched; plans over an action/type graph it is given"
+          ],
+          "qualification_evidence": [
+            "ppi 1.3.0 release metadata read from pypi.org in this session"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "route": "PLAN_OVER_THE_11_LITERAL_EDGES_WITH_UNIFIED_PLANNING_OR_FAST_DOWNWARD"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "POWERFUL_BUT_TARGETLESS",
+            "CORRECTNESS": "PER_INVARIANT",
+            "INCREMENTAL_COST": "HIGH_FOR_A_MEASUREMENT",
+            "RELIABILITY": "UNKNOWN_HERE",
+            "VERIFIABILITY": "STRONG",
+            "WALL_CLOCK": "HIGH"
+          },
+          "evidence": [
+            "cvc5 docs fetched 2026-10: find-synth streaming enumeration over invariants"
+          ],
+          "qualification_evidence": [
+            "no invariant exists to synthesize against until the edge table is measured"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "route": "CVC5_SYGUS_STYLE_ENUMERATION_TO_SYNTHESIZE_FILLER_ADAPTERS"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "WEAK_PROOF",
+            "CORRECTNESS": "FAILED_IN_REHEARSAL",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "SILENTLY_FALSE_POSITIVE",
+            "VERIFIABILITY": "NONE_INDEPENDENT",
+            "WALL_CLOCK": "IDENTICAL"
+          },
+          "evidence": [
+            "rehearsal: xlsx writer's zip container passed a naive docx check via [Content_Types].xml only"
+          ],
+          "qualification_evidence": [
+            "fixed by requiring word/document.xml vs xl/workbook.xml markers; test pins it"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "MEASURED_IN_REHEARSAL"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "TRUST_ADAPTER_SELF_REPORT_WITHOUT_BYTE_REVERIFICATION"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "NONE",
+            "CORRECTNESS": "STRUCTURALLY_FORBIDDEN",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "ALWAYS_REFUSED",
+            "VERIFIABILITY": "NONE_POSSIBLE",
+            "WALL_CLOCK": "ZERO"
+          },
+          "evidence": [
+            "file_write_json._safe raises PATH_OUTSIDE_REPOSITORY for /tmp outputs; measured in probe v1"
+          ],
+          "qualification_evidence": [
+            "probe v1 zero-row result with /tmp scratch, fixed by repo-scope"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "MEASURED_ON_BASELINE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "SCRATCH_IN_TMP"
+        }
+      ],
+      "checked_at_utc": "2026-10-27T14:27:36Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "TRUST_THE_11_LITERAL_TOKEN_MATCHES_AND_LEAVE_THE_REST_INVISIBLE",
+      "max_age_hours": 24,
+      "negative_search_summary": "No new trusted capability, adapter, registry write, model call, network call or install is part of this change; the execution engine (run_adapter_locally), the registry, the adapters and the stdlib oracles all pre-exist.  The challengers were measured or read and disqualified or left non-dominating as recorded.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "unified-planning aiplan4eu pip planner framework fast downward"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "cvc5 sygus-enum smart find-synth streaming synthesis enumeration"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "aiplan4eu up-fast-downward symk planner pypi package"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "cvc5 NEWS find-synth-next streaming enumeration october 2026"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "routes_considered": [
+        "HAND_FILL_ALIAS_SLOTS",
+        "STRING_SIMILARITY_BRIDGING",
+        "DOC_SIMILARITY_BRIDGING",
+        "PLAN_OVER_LITERAL_EDGES",
+        "CVC5_SYGUS_FILLER_SYNTHESIS",
+        "TRUST_SELF_REPORT",
+        "SCRATCH_IN_TMP",
+        "GENERIC_FIXTURE_PROBE",
+        "REGISTRY_EDIT_SAME_PR",
+        "EXECUTE_CANDIDATES_AND_VERIFY_BYTES__SELECTED",
+        "REUSE_RUN_ADAPTER_LOCALLY__SELECTED_PART",
+        "REPO_SCOPED_SCRATCH__SELECTED_PART",
+        "INDEPENDENT_STDLIB_ORACLES__SELECTED_PART",
+        "REFUSAL_CLASSIFICATION__SELECTED_PART",
+        "TAMPERED_WORLD_MUST_FAIL__SELECTED_PART"
+      ],
+      "selected_route": "ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1",
+      "selected_route_checked_at_utc": "2026-10-27T14:27:36Z",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-10-27T14:27:36Z",
+        "execution_dependencies": [
+          {
+            "dependency": "python3 >= 3.11",
+            "evidence": [
+              "DIRECT_PROBE: 3.11.2 interpreter ran the full enumeration in-process"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "GNU tar on PATH",
+            "evidence": [
+              "DIRECT_PROBE: tar -tzf executed by the verify adapter during enumeration"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": false,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1",
+        "status": "READY"
+      },
+      "selected_surviving_route": "ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "registry census on ce288da: 73 entries, 96 provides tokens, 38 requires tokens, 11 literal intersections, 51 unmatched provides, zero provides_as/requires_as filled",
+          "live_brain_route_admission_v1.py:671 run_adapter_locally executes any entry; composer_route_v1.py:2564 borrows capabilities the same way",
+          "bound adapter refusal classes observed executing: PATH_OUTSIDE_REPOSITORY, TAR_GZ_OUTPUT_REQUIRED, GNU_TAR_LIST_FAILED, SQLITE_ID_COLUMN_REQUIRED, JSON_OUTPUT_REQUIRED, PDF_OUTPUT_REQUIRED"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "github.com/speckdavid/symk planner; github.com/mokhtarivahid/safe-planner FOND compilation; github.com/ssardina-research/pddl2smv; github.com/belkassaby/provenflow"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "pypi.org/project/unified-planning 1.3.0: engine-agnostic planning framework; github.com/aiplan4eu/up-fast-downward bundles Fast Downward"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "github.com/cvc5/cvc5 documentation: SyGuS invariant synthesis with --sygus-enum=smart|fast streaming enumeration"
+        ]
+      },
+      "stop_condition": "Holds: on this environment the enumeration finds the archive create-to-verify bridge and 15 emission rows, all 11 tests pass with their paired failing worlds exercised (tampered source byte -> ARCHIVE_HASH_MISMATCH; garbage adapter -> ADAPTER_REFUSED while the rest of the census still completes), and no test asserts what the running environment cannot prove.",
+      "unresolved_plausible_dominators": [],
+      "why_selected_route_is_fastest_sufficient": "IT_RUNS_WHAT_EXISTS_AND_COUNTS_WHAT_RAN__EVERY_OTHER_ROUTE_EITHER_PROVED_NOTHING_RAN_OR_REQUIRED_THE_EDGES_THIS_ONE_MEASURES__ONE_PYTEST_FILE_PINS_THE_PAIRED_WORLDS"
+    },
+    "routes_considered": [
+      "HAND_FILL_ALIAS_SLOTS",
+      "STRING_SIMILARITY_BRIDGING",
+      "DOC_SIMILARITY_BRIDGING",
+      "PLAN_OVER_LITERAL_EDGES",
+      "CVC5_SYGUS_FILLER_SYNTHESIS",
+      "TRUST_SELF_REPORT",
+      "SCRATCH_IN_TMP",
+      "GENERIC_FIXTURE_PROBE",
+      "REGISTRY_EDIT_SAME_PR",
+      "EXECUTE_CANDIDATES_AND_VERIFY_BYTES__SELECTED",
+      "REUSE_RUN_ADAPTER_LOCALLY__SELECTED_PART",
+      "REPO_SCOPED_SCRATCH__SELECTED_PART",
+      "INDEPENDENT_STDLIB_ORACLES__SELECTED_PART",
+      "REFUSAL_CLASSIFICATION__SELECTED_PART",
+      "TAMPERED_WORLD_MUST_FAIL__SELECTED_PART"
+    ],
+    "selected_route": "ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1",
+    "selected_surviving_route": "ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1",
+    "stop_condition": "Holds: on this environment the enumeration finds the archive create-to-verify bridge and 15 emission rows, all 11 tests pass with their paired failing worlds exercised (tampered source byte -> ARCHIVE_HASH_MISMATCH; garbage adapter -> ADAPTER_REFUSED while the rest of the census still completes), and no test asserts what the running environment cannot prove.",
+    "why_selected_route_is_fastest_sufficient": "Every component reused is already in the tree: run_adapter_locally for execution, the adapters' own refusal classes for the failure taxonomy, stdlib for the independent byte oracles.  The dominant alternative was to write edges into the registry untested; execution proved 36 of this session's candidate pairings false, so any static table written a priori would have shipped lies."
+  },
+  "resolution": "SELECTED",
+  "route_id": "ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "EXECUTE_THE_POSSIBLE_EDGES_VERIFY_THE_BYTES_AND_COUNT_ONLY_WHAT_RAN",
+  "stop_condition": "Holds: on this environment the enumeration finds the archive create-to-verify bridge and 15 emission rows, all 11 tests pass with their paired failing worlds exercised (tampered source byte -> ARCHIVE_HASH_MISMATCH; garbage adapter -> ADAPTER_REFUSED while the rest of the census still completes), and no test asserts what the running environment cannot prove.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": true,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__NEW_MEASUREMENT_MODULE_AND_TESTS_ONLY__NO_EXISTING_EXECUTION_PATH_MODIFIED__SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "677c03d0dd8a1888ec8f7921e9024f9f288cd838",
+          "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+        },
+        {
+          "git_blob_sha": "0cfce806e3003adeba654fbca57594ed8892ecea",
+          "path": "canonical/runtime/live_brain_route_admission_v1.py"
+        }
+      ],
+      "decisive_question": "MAY_THE_SYSTEM_CLAIM_TWO_CAPABILITIES_COMPOSE_BECAUSE_THEIR_TYPE_TOKENS_MATCH_WITHOUT_RUNNING_EITHER",
+      "falsifier_id": "A_CLAIMED_ROW_MUST_REWEAVE_FROM_ITS_BYTES_UNDER_AN_INDEPENDENT_ORACLE_AND_THE_TAMPERED_SOURCE_WORLD_MUST_MAKE_THE_CONSUMER_REFUSE",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "FIRST_CANDIDATE_WAS_TRUSTING_ADAPTER_SELF_REPORT__REJECTED_BECAUSE_A_NAIVE_ZIP_CHECK_LET_AN_XLSX_CONTAINER_PASS_AS_DOCX_IN_REHEARSAL__SECOND_CANDIDATE_WAS_TMP_SCRATCH__REJECTED_BECAUSE_VERIFIED_ADAPTERS_REFUSE_PATHS_OUTSIDE_THE_REPOSITORY__THIRD_CANDIDATE_WAS_REGISTRY_ALIAS_FILLING__REJECTED_BECAUSE_NOTHING_PROVES_A_WRITTEN_EDGE_RUNS",
+      "proposal_id": "ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1"
+    }
+  },
+  "weakens_existing_guard": "No fail-closed rule is weakened.  The module and tests are pure addition: they edit no registry entry, no adapter, no gate, no pointer; they write only inside a scratch tree they delete; every report field that would tempt credit says NONE/0; every environment absence is a classified skip, never silent."
+}
