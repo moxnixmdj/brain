@@ -28690,7 +28690,7 @@
   "engines": 26,
   "knowledge_documents": 170,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6488,
+  "research_index_records": 6489,
   "routing_tokens": 2094,
   "skills": 18,
   "source_index_entry_points": 422,
@@ -28699,7 +28699,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d9e65ce4944aa59699e83283b4e64613690dde95b372b9644c7f18130c48acfc"
+  "value": "ceb7a9f8c12370ed01b781cd961c153bdcee81a22cc78dbd9cb52d7e8e300fe0"
  },
  "engines": [
   {
@@ -203258,6 +203258,51 @@
     "v1": 2,
     "whole": 2,
     "whole_name_in_prose_takes_the_route_v1_20261024_v1": 2
+   }
+  },
+  {
+   "action_id": "WRITE_THE_TESTS_FOR_THIS_TREE_MUST_WRITE_TESTS_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/WRITE_THE_TESTS_FOR_THIS_TREE_MUST_WRITE_TESTS_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WRITE_THE_TESTS_FOR_THIS_TREE_MUST_WRITE_TESTS_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "1fb2a2480d65b153e5ae23667a06015442b0cf856da1a2720f928f891d62bb5c",
+   "status": "",
+   "terms": {
+    "adapter": 3,
+    "already": 3,
+    "but": 2,
+    "create": 2,
+    "files": 2,
+    "five": 2,
+    "generated_tests_root": 2,
+    "host": 2,
+    "index_path": 2,
+    "manifest": 2,
+    "may": 2,
+    "measured": 2,
+    "module": 2,
+    "never": 2,
+    "no": 2,
+    "not": 2,
+    "nothing": 2,
+    "pytest": 2,
+    "python": 2,
+    "python_executable": 2,
+    "ran": 2,
+    "request": 2,
+    "runner": 3,
+    "targets_path": 2,
+    "test": 3,
+    "tests": 4,
+    "timeout_s": 2,
+    "tree": 6,
+    "unittest": 2,
+    "v1": 2,
+    "write": 3,
+    "write_the_tests_for_this_tree_must_write_tests_v1_20261027_v1": 2
    }
   }
  ],
