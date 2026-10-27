@@ -1,0 +1,18 @@
+{
+ "capability_id": "software.repair.choreograph.crossfile.v1",
+ "mission_id": "AUTO-VERIFY-SOFTWARE_REPAIR_CROSSFILE_CHOREOGRAPH_V1-V1",
+ "observed_effect": {
+  "adapter": "software_repair_crossfile_choreograph_v1",
+  "choreography_verified": true,
+  "incremental_spend_usd": 0,
+  "model_dependency_count": 0,
+  "output_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_REPAIR_CROSSFILE_CHOREOGRAPH_V1.json",
+  "output_sha256": "3674046cedca9e9e09e5b987157b8342d5b533b46c12399be7b27efb6b632e7b",
+  "output_verified": true,
+  "verified": true
+ },
+ "output_sha256": "3674046cedca9e9e09e5b987157b8342d5b533b46c12399be7b27efb6b632e7b",
+ "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+ "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_REPAIR_CROSSFILE_CHOREOGRAPH_V1.json",
+ "verified": true
+}
