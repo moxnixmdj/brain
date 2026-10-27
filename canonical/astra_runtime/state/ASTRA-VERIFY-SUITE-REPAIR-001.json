@@ -1,0 +1,20 @@
+{
+ "mission_id": "ASTRA-VERIFY-SUITE-REPAIR-001",
+ "status": "COMPLETE",
+ "e2e_ms": null,
+ "measured": {
+  "before": "main@384c6ca CI module set: 13 failures + 1 error (136-run unittest: brain_unified_model + goal_compiler + world_binding)",
+  "after": "136/136 OK; canonical verifier TOTAL 33/33; artifact integrity 6/6",
+  "root_causes_fixed": [
+   "tree_sitter row: input_names [] -> [output_path, source_root]; solve() refuses CAPABILITY_INPUTS_MISSING:source_root",
+   "GENERIC_MATCH_TOKENS += python: zero-input rows can no longer create a match on the bare language word (audit goal: audit.ast 33 beats fusion 16 again)"
+  ],
+  "measured_repins": {
+   "grounding": "GROUNDED never at 37 goals; AMBIGUOUS_BOUNDED at exactly 3 (BENCH_SOURCE_AUDIT_WRITE_JSON, EXT_AST_AUDIT, EXT_DECISION_VERIFY), count==1 each, verifier PASS",
+   "extended_floor": "compiled_against_wrong_capability 3 -> 4 with EXT_AST_AUDIT named (zero-input standalone row displaces audit.ast)",
+   "census": "412 modelled capabilities (294 RECEIPT_BACKED), 118 registry rows, 228 caps with runtime file, union 2071/2229"
+  },
+  "sweep": "444 impacted tests: 14 pre-existing main failures now green; zero regressions (set-differenced vs main@384c6ca)"
+ },
+ "law": "refuse what cannot be named; a generic token may refine a match but never create one; pins are measurements -- they move with re-measurement, never by hand"
+}

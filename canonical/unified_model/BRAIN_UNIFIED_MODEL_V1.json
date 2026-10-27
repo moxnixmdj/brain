@@ -20503,7 +20503,8 @@
    "incremental_spend_usd": 0,
    "input_contract_source": "action_template",
    "input_names": [
-    "output_path"
+    "output_path",
+    "source_root"
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
@@ -23949,9 +23950,12 @@
     "module",
     "new_name",
     "output_path",
+    "python_executable",
     "qualname",
+    "run_tests",
     "source_root",
-    "start_line"
+    "start_line",
+    "timeout_s"
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
@@ -24138,7 +24142,6 @@
    "triggers": [
     "refactor",
     "scaffold",
-    "audit",
     "transformation",
     "python",
     "test_scaffold",
@@ -25793,8 +25796,10 @@
    "input_contract_source": "action_template",
    "input_names": [
     "changed_paths",
+    "diff_path",
     "output_path",
-    "source_root"
+    "source_root",
+    "test_roots"
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
@@ -25866,7 +25871,9 @@
    "incremental_spend_usd": 0,
    "input_contract_source": "action_template",
    "input_names": [
+    "edits",
     "edits_path",
+    "index_path",
     "output_path",
     "source_root"
    ],
@@ -26266,7 +26273,6 @@
     "test",
     "pipeline",
     "slice",
-    "audit",
     "python",
     "verifier",
     "v1",
@@ -26367,9 +26373,12 @@
    "input_contract_source": "action_template",
    "input_names": [
     "generated_tests_root",
+    "index_path",
     "output_path",
+    "python_executable",
     "source_root",
-    "targets_path"
+    "targets_path",
+    "timeout_s"
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
@@ -28619,7 +28628,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "efdaefa3bbd5ffca9b6cd047fdd8f9adeb0d78e94781f44a636c246957bfefde"
+  "value": "174fc7128be4922cde650e6e2fb0935bed454e42e8f60559107d240fd79c536f"
  },
  "engines": [
   {
@@ -29369,20 +29378,18 @@
     "software.repair.choreograph.crossfile.v1": 298.0
    },
    "audit": {
-    "canonical/runtime/composition_cross_step_no_bypass_audit_v1.py.auto.v1": 61.2,
-    "canonical/runtime/composition_cross_step_no_bypass_audit_v2.py.auto.v1": 61.2,
-    "canonical/runtime/escape_progress_shared_gap_audit_v1.py.auto.v1": 61.2,
-    "canonical/runtime/escape_progress_shared_gap_audit_v2.py.auto.v1": 61.2,
-    "canonical/runtime/escape_progress_shared_gap_audit_v3.py.auto.v1": 61.2,
-    "canonical/runtime/finance_direct_source_coverage_audit_v1.py.auto.v1": 61.2,
-    "canonical/runtime/professional_r12_material_defeater_totality_route_audit_v1.py.auto.v1": 61.2,
-    "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py.auto.v1": 61.2,
-    "decision.synthesis.verify.stdlib": 61.2,
-    "pypi.provenance.audit_live_artifact": 61.2,
-    "python.refactor.test_scaffold.fusion.v1": 61.2,
-    "python.source.audit.ast": 61.2,
-    "python.test.pipeline.verifier.v1": 61.2,
-    "python.tests.audit.unittest": 61.2
+    "canonical/runtime/composition_cross_step_no_bypass_audit_v1.py.auto.v1": 70.307692,
+    "canonical/runtime/composition_cross_step_no_bypass_audit_v2.py.auto.v1": 70.307692,
+    "canonical/runtime/escape_progress_shared_gap_audit_v1.py.auto.v1": 70.307692,
+    "canonical/runtime/escape_progress_shared_gap_audit_v2.py.auto.v1": 70.307692,
+    "canonical/runtime/escape_progress_shared_gap_audit_v3.py.auto.v1": 70.307692,
+    "canonical/runtime/finance_direct_source_coverage_audit_v1.py.auto.v1": 70.307692,
+    "canonical/runtime/professional_r12_material_defeater_totality_route_audit_v1.py.auto.v1": 70.307692,
+    "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py.auto.v1": 70.307692,
+    "decision.synthesis.verify.stdlib": 70.307692,
+    "pypi.provenance.audit_live_artifact": 70.307692,
+    "python.source.audit.ast": 70.307692,
+    "python.tests.audit.unittest": 70.307692
    },
    "audit_live_artifact": {
     "pypi.provenance.audit_live_artifact": 446.0
@@ -52031,7 +52038,7 @@
   "included_source_count": 938,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "0b87cb8abdcae9ee8e811a7d9db7a5aecab404e17de1d9a5b5c615a57099abb2"
+  "source_tree_digest": "2e366fb6d7e7ea288575c71dc73cd301926f32a4619f2877fd9716c1cc50bacc"
  },
  "research_index": [
   {
@@ -193832,51 +193839,6 @@
    }
   },
   {
-   "action_id": "AN_EDIT_REQUEST_MUST_RUN_THE_EDIT_CAPABILITY_NOT_A_READ_ONLY_CENSUS_V1_20261027_V1",
-   "capability": false,
-   "date": "2026-10-27",
-   "id": "research:canonical/action_intents/AN_EDIT_REQUEST_MUST_RUN_THE_EDIT_CAPABILITY_NOT_A_READ_ONLY_CENSUS_V1_20261027_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/AN_EDIT_REQUEST_MUST_RUN_THE_EDIT_CAPABILITY_NOT_A_READ_ONLY_CENSUS_V1_20261027_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "6ea7858867419d413c47c56ba811517790b3f523acf220e195bdbc77bebd8a85",
-   "status": "",
-   "terms": {
-    "22": 5,
-    "adapter": 3,
-    "against": 3,
-    "all": 2,
-    "already": 2,
-    "an_edit_request_must_run_the_edit_capability_not_a_read_only_census_v1_20261027_v1": 2,
-    "big": 2,
-    "caller": 2,
-    "capability": 6,
-    "census": 2,
-    "defaults": 2,
-    "dropped": 2,
-    "edit": 3,
-    "function": 3,
-    "had": 2,
-    "inputs": 2,
-    "lines": 2,
-    "more": 2,
-    "named": 2,
-    "new_name": 2,
-    "no": 3,
-    "not": 2,
-    "python_executable": 2,
-    "qualname": 2,
-    "request": 2,
-    "returned": 2,
-    "run_tests": 2,
-    "sentence": 3,
-    "so": 2,
-    "three": 3,
-    "timeout_s": 2,
-    "total_of": 2
-   }
-  },
-  {
    "action_id": "AN_EDIT_THAT_CAN_BE_PROVEN_IS_SERVED_AND_ONE_THAT_CANNOT_IS_REFUSED_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -200568,6 +200530,51 @@
     "v1": 2,
     "verb": 2,
     "were": 2
+   }
+  },
+  {
+   "action_id": "REPAIR_VERIFIER_SUITE_ANTI_INVENTION_AND_GENERIC_RANKING_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/REPAIR_VERIFIER_SUITE_ANTI_INVENTION_AND_GENERIC_RANKING_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/REPAIR_VERIFIER_SUITE_ANTI_INVENTION_AND_GENERIC_RANKING_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "eb455b40152b663f68b86e72df3886ac61f0b405951d9f7a0ba22c1a2e4bef11",
+   "status": "",
+   "terms": {
+    "118": 1,
+    "20261027": 1,
+    "294": 1,
+    "412": 1,
+    "again": 1,
+    "anti": 1,
+    "block": 1,
+    "bound": 1,
+    "but": 1,
+    "byte-exact": 1,
+    "capability": 2,
+    "census": 1,
+    "change": 1,
+    "ci": 1,
+    "control-flow": 1,
+    "core": 1,
+    "correct": 1,
+    "count": 1,
+    "editing": 1,
+    "either": 1,
+    "escape": 1,
+    "every": 1,
+    "extract": 1,
+    "function": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "generic": 1,
+    "green": 1,
+    "no": 2,
+    "suite": 2,
+    "v1": 2,
+    "values": 2,
+    "verifier": 2
    }
   },
   {
@@ -229877,7 +229884,7 @@
    "imported_by_count": 7,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "f22ff7d43b54bcbeae8c81a8f043c4e496d06c17c111d6935a2fcee107c08869",
+   "sha256": "2355deca795ade92622f371c3273f134f73d291f16a407415dc9f3594a075aca",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
    "symbol_count": 128,
    "symbols": [
@@ -229983,7 +229990,7 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "521aed8cd23a87f374e76959ded49a0d1b3fccbc1949d5a30bd6ba3e6cfedafd",
+   "sha256": "a9d0f553621404b651f55591cf1ca140406d58c355e92b25da3951260cd4645f",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
    "symbol_count": 65,
    "symbols": [
@@ -236291,7 +236298,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "4896c9480a8a9094d76b366298c9e94e69a155cd5d4add13c49cc8217ebc8d1b",
+   "sha256": "ad15c7f2d7ca49a16374a1512cf1fc130bdc41dff2902e68df90c7c16c381106",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 52,
    "symbols": [

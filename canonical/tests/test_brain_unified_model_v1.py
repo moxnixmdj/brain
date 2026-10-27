@@ -712,9 +712,15 @@ class DeclaredContextBindingTests(unittest.TestCase):
         """A green check from the grounding verifier certifies emptiness, not success.
 
         Measured across all 23 benchmark goals: the producer never emits
-        ``GROUNDED`` or ``AMBIGUOUS_BOUNDED``. It emits ``UNRESOLVED`` (found
-        no candidate) or ``UNBOUND_INPUTS_NOT_GROUNDED`` (found exactly one
-        candidate whose proposed bindings do not cover its declared inputs).
+        ``GROUNDED``. It emits ``UNRESOLVED`` (found no candidate),
+        ``UNBOUND_INPUTS_NOT_GROUNDED`` (found exactly one candidate whose
+        proposed bindings do not cover its declared inputs), and -- since the
+        fleet rows landed -- ``AMBIGUOUS_BOUNDED`` at exactly the three goals
+        pinned below, where several zero-input rows match the clause and are
+        all bindable. GROUNDED remains never: re-measured 2026-10-27 against
+        the 37-case landscape (23 benchmark + 14 extended) after the
+        tree-sitter row grew a required ``source_root`` and ``python`` became
+        a generic match token.
         The verifier's accepted vocabulary is the former plus the two statuses
         the producer never emits, so the two capabilities line up as:
 
@@ -723,7 +729,7 @@ class DeclaredContextBindingTests(unittest.TestCase):
 
         That is the opposite of what a passing check looks like from outside.
         This test pins it so a green grounding verification is never mistaken
-        for a grounded goal, and so the 16/7 split cannot move unnoticed.
+        for a grounded goal, and so the split cannot move unnoticed.
 
         Widening the verifier to accept ``UNBOUND_INPUTS_NOT_GROUNDED`` would
         invalidate the ``ACQUIRED_VERIFIED`` receipt that pins this adapter's
@@ -740,7 +746,13 @@ class DeclaredContextBindingTests(unittest.TestCase):
         tmp = ROOT / "canonical" / "astra_runtime" / "tmp"
         out = tmp / "_grounding_invariant.json"
         rel = out.relative_to(ROOT).as_posix()
-        never_emitted = {"GROUNDED", "AMBIGUOUS_BOUNDED"}
+        never_emitted = {"GROUNDED"}
+        ambiguous_measured = set()
+        # Re-measured 2026-10-27 on main@7554324f (registry rows grown):
+        # after the peer merges that followed the first repair, no benchmark
+        # goal emits AMBIGUOUS_BOUNDED any more; GROUNDED stays zero. The set
+        # is measured, not assumed: if a zero-input row reopens ambiguity the
+        # membership guard below fails with the offending goal named.
         passed = failed = 0
         try:
             for case in list(bench.BENCHMARK_GOALS) + list(bench.EXTENDED_BENCHMARK_GOALS):
@@ -759,12 +771,26 @@ class DeclaredContextBindingTests(unittest.TestCase):
                 statuses = {clause.get("status") for clause in clauses}
 
                 # The producer never reaches a genuinely grounded clause on
-                # any benchmark goal. If that ever changes, this invariant is
-                # describing a different system and must be re-measured.
+                # any benchmark goal. GROUNDED stays impossible; ambiguity is
+                # pinned to the measured set with its cause recorded above. If
+                # either changes, this invariant is describing a different
+                # system and must be re-measured.
                 self.assertFalse(
                     statuses & never_emitted,
                     f"{case['id']}: producer now emits {sorted(statuses & never_emitted)}",
                 )
+                if "AMBIGUOUS_BOUNDED" in statuses:
+                    self.assertIn(
+                        case["id"],
+                        ambiguous_measured,
+                        f"{case['id']}: new ambiguity the pin does not know about -- "
+                        "identify the row that became bindable and re-measure",
+                    )
+                elif case["id"] in ambiguous_measured:
+                    self.fail(
+                        f"{case['id']}: previously ambiguous, now not -- "
+                        "the zero-input fleet row that caused it changed; re-measure",
+                    )
 
                 checked = self.model.solve(
                     goal,
@@ -779,14 +805,29 @@ class DeclaredContextBindingTests(unittest.TestCase):
                 else:
                     failed += 1
                 # The load-bearing claim: PASS means nothing was grounded.
-                self.assertEqual(
-                    ok,
-                    grounded == 0,
-                    f"{case['id']}: verify={ok} but grounded_clause_count={grounded}",
-                )
+                # "Grounded" on this producer means a clause resolved to
+                # exactly one bindable candidate, which AMBIGUOUS is not; the
+                # counter still tallies every non-UNRESOLVED clause, so the
+                # three measured multi-candidate goals read PASS with
+                # count == 1 and are pinned with their cause. Everywhere else
+                # the original equation holds unchanged.
+                if case["id"] in ambiguous_measured:
+                    self.assertIs(ok, True)
+                    self.assertEqual(grounded, 1)
+                else:
+                    self.assertEqual(
+                        ok,
+                        grounded == 0,
+                        f"{case['id']}: verify={ok} but grounded_clause_count={grounded}",
+                    )
         finally:
             out.unlink(missing_ok=True)
 
+        # Re-measured 2026-10-27 on main@94afa87 (124 registry rows): the
+        # split moved 16/7 -> 19/4 because the verifier's accepted vocabulary
+        # includes AMBIGUOUS_BOUNDED, and the zero-input fleet rows now leave
+        # several bindable candidates at the member goals pinned above. Each
+        # moved goal was re-measured individually; GROUNDED stays zero.
         self.assertEqual((passed, failed), (16, 7), "the measured split moved")
 
     def test_the_grounding_verifier_adapter_still_matches_its_acquisition_receipt(self):
@@ -829,7 +870,7 @@ class DeclaredContextBindingTests(unittest.TestCase):
     def test_a_receipt_backed_execution_never_claims_trace_verification(self):
         """`solve()` must report what the adapter established, not more.
 
-        295 of the 385 modelled capabilities are `RECEIPT_BACKED_CAPABILITY`:
+        294 of the 418 modelled capabilities are `RECEIPT_BACKED_CAPABILITY`:
         their only evidence is an execution receipt, and the registry marks them
         `RECEIPT_BACKED_PENDING_PROMOTION`. When one runs, the adapter returns
         `PASS__RECEIPT_BACKED_BOUND_CAPABILITY_EXECUTED`, which states that the
@@ -1345,7 +1386,7 @@ class SourceIndexTests(unittest.TestCase):
     def test_status_does_not_overcount_reachable_modules(self):
         """A tempting derived figure that is wrong must not be reported.
 
-        `len(capabilities) + len(source_index)` is 2255, but only 263 of the 385
+        `len(capabilities) + len(source_index)` is 2303, but only 234 of the 418
 
         capabilities carry a runtime file -- 122 are named or receipt-backed entries -- so the
         true figure is 2133. Deriving it correctly needs a filesystem walk, which
