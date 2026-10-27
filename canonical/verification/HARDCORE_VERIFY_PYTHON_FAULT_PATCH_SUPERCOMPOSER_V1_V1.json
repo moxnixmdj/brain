@@ -1,0 +1,17 @@
+{
+  "capability_id": "python.fault.patch.supercomposer.v1",
+  "mission_id": "AUTO-VERIFY-HARDCORE_PYTHON_FAULT_PATCH_SUPERCOMPOSER_V1-V1",
+  "observed_effect": {
+    "adapter": "python_fault_patch_supercomposer_v1",
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "output_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_FAULT_PATCH_SUPERCOMPOSER_V1.json",
+    "output_sha256": "77c9758244a33e0e0022dfd9c636edcc7c80667c8af8cbc05ff2f227422bf489",
+    "output_verified": true,
+    "verified": true
+  },
+  "output_sha256": "77c9758244a33e0e0022dfd9c636edcc7c80667c8af8cbc05ff2f227422bf489",
+  "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+  "state_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_FAULT_PATCH_SUPERCOMPOSER_V1.json",
+  "verified": true
+}
