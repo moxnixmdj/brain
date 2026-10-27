@@ -1,0 +1,8 @@
+{
+ "mission_id": "ASTRA-VERIFY-REFACTOR-001",
+ "arc_class": "semantic_engine",
+ "kind": "VERIFY_CAPABILITY_WORTHSHIP",
+ "target_capability": "python.refactor.rename_parameter.v1",
+ "statement": "First scope-aware semantic editing verb. py-AST walks the target module and every other module under the source root: the definition parameter is spliced at its exact identifier span (byte-integrity checked), body uses are renamed through a scope walker that treats nested FunctionDef/Lambda that REBIND the old name as shadowed-k keeps (never edited), ClassDef as an always-opaque scope, and global/nonlocal usage as a hard refusal. Cross-file call sites resolve through a per-module import table (from-imports and module aliases); unresolvable dynamic receivers, getattr(...) dynamic dispatch and **kwargs passthroughs are listed as unknown_sites and LOWER complete instead of being silently edited or silently dropped. The named test suite is the referee: it runs after the bytes are rewritten and a red suite rolls every byte back. Golden leg: rename describe n->size on a fixture repo (lambda capture, recursive keyword calls, from-import caller, alias-module caller) with the suite green post-edit. Honest legs: shadowed module byte-identical; getattr dynamic dispatch listed (complete=false) with its bytes untouched; tampered suite triggers full rollback with refusal; two pristine worlds produce byte-identical trees AND artifacts; rerun refuses PARAM_NOT_FOUND.",
+ "zero_spend": true
+}

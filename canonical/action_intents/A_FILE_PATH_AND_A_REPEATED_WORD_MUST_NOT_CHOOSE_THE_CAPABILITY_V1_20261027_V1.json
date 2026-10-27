@@ -35,7 +35,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Two properties of the caller's sentence were choosing the capability instead of the question. route() scored over tokenize(goal), so every token of the file path the caller typed voted. Measured on \"Report who calls the function top in the python source root /home/user/brain/...\": brain.module.function.invoke scored 674.3 of which 405.0 was the single token brain from the caller's own path counted twice, terminal.kstar.root.assess.stdlib scored 449.2 of which 405.0 was the same two hits, and python.source.symbols.index.ast, which owns calls at 403.0, lost at 483.6. 405.0 of every winner's score was the directory the file happens to live in. Separately, saying a word twice counted as two votes: report appears twice in \"Report the call graph of the functions in the python file F writing the report to R\" at 269.3 a hit, 538.6 for document.convert.markdown_pdf.pandoc_weasyprint whose only match was that destination noun, against 505.9 for the capability that owns call and graph. Nine ordinary software-engineering sentences selected a capability that does not own the operation, and the answer to each was decided by how the caller spelled the path and how many times they repeated a word.",
- "canonical_base_commit": "6879d0f1b961277b201dc92a6fb7860730da5125",
+ "canonical_base_commit": "d148999acca766c7d6c62d302b9771aaf9f7f1e8",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -49,7 +49,7 @@
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
  "load_bearing_primary": {
-  "canonical_base_commit": "6879d0f1b961277b201dc92a6fb7860730da5125",
+  "canonical_base_commit": "d148999acca766c7d6c62d302b9771aaf9f7f1e8",
   "constructive_gap_for_open_obligation_ids": [
    "AUTOMATIONBENCH_GE_40",
    "CHARTOGRAPHY_TOOLS_GE_89",
@@ -84,7 +84,7 @@
   }
  ],
  "recursive_obs": {
-  "canonical_base_commit": "6879d0f1b961277b201dc92a6fb7860730da5125",
+  "canonical_base_commit": "d148999acca766c7d6c62d302b9771aaf9f7f1e8",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "CHARGING_THE_TOKENS_OF_A_STATED_PATH_TO_THE_COVERAGE_BUDGET",
@@ -1994,7 +1994,7 @@
      "path": "canonical/runtime/brain_unified_model_v1.py"
     },
     {
-     "git_blob_sha": "44ff9b2af399324e0eaa8da8ef12c524b2db6a29",
+     "git_blob_sha": "1f2d8f1dcd5954420173f54673b3872767bd9dc2",
      "path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
     }
    ],

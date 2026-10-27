@@ -1,0 +1,26 @@
+{
+ "receipt_for": "ASTRA-VERIFY-REFACTOR-001",
+ "capability_id": "python.refactor.rename_parameter.v1",
+ "adapter_module": "python_refactor_rename_parameter",
+ "observed": {
+  "golden": {
+   "edit_count": 9,
+   "files_edited": ["pkg/core.py", "use/aliasmod.py", "use/caller.py"],
+   "complete": true,
+   "gate": "PASS",
+   "post_edit_pytest_rc": 0,
+   "e2e_ms": 204
+  },
+  "shadowing_preserved": "use/shadowed.py byte-identical; local describe(n: str) never touched",
+  "dynamic_sites_lower_complete": {
+   "getattr_dispatch": "listed in unknown_sites, bytes untouched",
+   "star_star_passthrough": "listed when target call carries **kwargs (pin suite)",
+   "unresolved_attr_receiver": "listed, never edited (pin suite)"
+  },
+  "red_suite_full_rollback": "TESTS_RED_AFTER_EDIT with all bytes restored to baseline",
+  "byte_determinism_two_worlds": true,
+  "rerun_refusal": "PARAM_NOT_FOUND:n on describe (no silent no-op)",
+  "refusal_ladder": ["SOURCE_ROOT_NOT_DIRECTORY", "MODULE_MUST_BE_PY", "SYMBOL_NOT_FOUND", "PARAM_NOT_FOUND", "NEW_PARAM_ALREADY_PRESENT", "INVALID_IDENTIFIER", "MULTI_DEFINITION", "REFUSE_NONLOCAL_OR_GLOBAL", "SYNTAX_ERROR_IN_FILE", "SPAN_INTEGRITY", "PATH_ESCAPE", "TESTS_RED_AFTER_EDIT", "TIMEOUT"],
+  "pin_green": "16/16 x 3 consecutive runs"
+ }
+}
