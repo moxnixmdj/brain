@@ -1,0 +1,23 @@
+{
+ "receipt_for": "ASTRA-VERIFY-NLPARAM-001",
+ "capability_id": "python.issue.natural_language.parse_edit_intent.v1",
+ "adapter_module": "python_issue_nl_parse_edit_intent",
+ "observed": {
+  "golden": {
+   "nl_complete": true,
+   "ops": [
+    {"op": "rename_parameter", "module": "pkg/sizing.py", "qualname": "next", "old_param": "n", "new_param": "size", "edits": 6, "gate": "PASS", "complete": true},
+    {"op": "rename_parameter", "module": "pkg/ratio.py", "qualname": "ratio", "old_param": "whole", "new_param": "divisor", "edits": 5, "gate": "PASS", "complete": false,
+     "unknown_sites": ["getattr dynamic dispatch", "star-star kwargs passthrough"]}
+   ],
+   "dynamic_file_untouched": true,
+   "suite_green_post_apply": true,
+   "parse_ms": 500
+  },
+  "non_contract_legs": ["UNSUPPORTED_ANCHOR message now lists all three verbs",
+                        "NAME_AMBIGUOUS carries homes on the refusal row",
+                        "QUALIFIER_MODULE_UNKNOWN / QUALIFIER_NOT_A_HOME loud"],
+  "composes_with": "python.refactor.rename_parameter.v1 (registry dispatch), symbol index binding law",
+  "pin_green": "24/24 x 3 consecutive runs (15 legacy + 9 new verb pins incl. NL->apply composition pin)"
+ }
+}

@@ -1,0 +1,20 @@
+{
+ "mission_id": "ASTRA-VERIFY-NLPARAM-001",
+ "status": "COMPLETE",
+ "parse_ms": 500,
+ "golden": {
+  "issue": "GH-8820: two strict clauses + title prose",
+  "nl": {"complete": true, "ops": 2, "refused_lines": 0},
+  "apply_0": {"target": "pkg/sizing.py::next n->size", "gate": "PASS", "complete": true, "edit_count": 6},
+  "apply_1": {"target": "pkg/ratio.py::ratio whole->divisor", "gate": "PASS", "complete": false, "edit_count": 5,
+              "unknown_sites": ["getattr dynamic dispatch", "star-star kwargs passthrough"]},
+  "post_world": "suite green; caller kwargs renamed through (from-import AND module-alias); the tests' own `whole=` kwargs renamed to `divisor=`; jobs/dynamic.py byte-identical to baseline (listed, never edited)"
+ },
+ "honesty_legs": {
+  "grammar_strictness": "'also rename parameter whole to divisor on ...' (prefix) refused UNSUPPORTED_ANCHOR with all three verbs named",
+  "ambiguity": "call-compat 'rename helper(x) to helper(v)' with two homes -> NAME_AMBIGUOUS + homes list; homes disambiguate via qualifier",
+  "name_not_found": "unknown qualifier module refused QUALIFIER_MODULE_UNKNOWN; qual defined elsewhere refused QUALIFIER_NOT_A_HOME with real homes listed",
+  "incomplete_means_no_ops": "incomplete parse emits zero machine-consumable ops (never half-bound action)"
+ },
+ "law": "speech binds only what the index can prove; what the engine cannot resolve it lists, never edits"
+}

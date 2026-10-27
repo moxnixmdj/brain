@@ -1,0 +1,17 @@
+{
+ "capability_id": "python.pipeline.allowlist_gate.v1",
+ "mission_id": "AUTO-VERIFY-HARDCORE_PYTHON_PIPELINE_ALLOWLIST_GATE_V1-V1",
+ "observed_effect": {
+  "adapter": "python_pipeline_allowlist_gate_v1",
+  "incremental_spend_usd": 0,
+  "model_dependency_count": 0,
+  "output_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_PIPELINE_ALLOWLIST_GATE_V1.json",
+  "output_sha256": "ebec6f260842ef8f7c24428b3cbf3f6e8a4e6d8876236e2ce485f3b407983ee1",
+  "output_verified": true,
+  "verified": true
+ },
+ "output_sha256": "ebec6f260842ef8f7c24428b3cbf3f6e8a4e6d8876236e2ce485f3b407983ee1",
+ "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+ "state_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_PIPELINE_ALLOWLIST_GATE_V1.json",
+ "verified": true
+}

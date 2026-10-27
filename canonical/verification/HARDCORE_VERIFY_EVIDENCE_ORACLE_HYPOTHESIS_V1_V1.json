@@ -1,0 +1,20 @@
+{
+ "capability_id": "evidence.oracle.hypothesis_property.v1",
+ "mission_id": "AUTO-VERIFY-EVIDENCE_ORACLE_HYPOTHESIS_V1-V1",
+ "observed_effect": {
+  "adapter": "evidence_oracle_hypothesis_v1",
+  "checked": 13,
+  "hypothesis_available": false,
+  "incremental_spend_usd": 0,
+  "model_dependency_count": 0,
+  "output_path": "canonical/astra_runtime/state/HARDCORE_EVIDENCE_ORACLE_HYPOTHESIS_V1.json",
+  "output_sha256": "af7bb225e0252a3459fa9213afd9283e9ee32c86ff81e0db0c1289b5e084cf4a",
+  "output_verified": true,
+  "verified": true,
+  "violations": []
+ },
+ "output_sha256": "af7bb225e0252a3459fa9213afd9283e9ee32c86ff81e0db0c1289b5e084cf4a",
+ "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+ "state_path": "canonical/astra_runtime/state/HARDCORE_EVIDENCE_ORACLE_HYPOTHESIS_V1.json",
+ "verified": true
+}

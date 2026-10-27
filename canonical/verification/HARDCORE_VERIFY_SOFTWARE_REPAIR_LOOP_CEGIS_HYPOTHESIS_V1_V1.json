@@ -1,0 +1,18 @@
+{
+ "capability_id": "software.repair.loop.cegis_hypothesis.v1",
+ "mission_id": "AUTO-VERIFY-SOFTWARE_REPAIR_LOOP_CEGIS_HYPOTHESIS_V1-V1",
+ "observed_effect": {
+  "adapter": "software_repair_loop_cegis_hypothesis_v1",
+  "incremental_spend_usd": 0,
+  "iterations": 1,
+  "model_dependency_count": 0,
+  "output_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_REPAIR_LOOP_CEGIS_HYPOTHESIS_V1.json",
+  "output_sha256": "92a7efef436b483ab4e69b5be1d080fbf1b5c4ea68a5fd2536beec2846ff3396",
+  "output_verified": true,
+  "verified": true
+ },
+ "output_sha256": "92a7efef436b483ab4e69b5be1d080fbf1b5c4ea68a5fd2536beec2846ff3396",
+ "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+ "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_REPAIR_LOOP_CEGIS_HYPOTHESIS_V1.json",
+ "verified": true
+}

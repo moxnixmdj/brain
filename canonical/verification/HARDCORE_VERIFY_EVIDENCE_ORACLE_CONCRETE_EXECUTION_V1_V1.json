@@ -1,0 +1,63 @@
+{
+ "capability_id": "evidence_oracle_concrete_v1",
+ "incremental_spend_usd": 0,
+ "mission_id": "HARDCORE_VERIFY_EVIDENCE_ORACLE_CONCRETE_EXECUTION_V1_V1",
+ "model_dependency_count": 0,
+ "observed_effect": {
+  "checked": 13,
+  "incremental_spend_usd": 0,
+  "model_dependency_count": 0,
+  "output_path": "canonical/astra_runtime/state/HARDCORE_EVIDENCE_ORACLE_CONCRETE_EXECUTION_V1.json",
+  "output_sha256": "db197126d4febfe26b1764adcba3c757bca883a9530d32840854320ed2a4a6f5",
+  "output_verified": true,
+  "status": "CONTRACT_VIOLATION_FOUND",
+  "verified": true,
+  "violations": [
+   {
+    "input": -8,
+    "post": "_ >= 0",
+    "returned": -13
+   },
+   {
+    "input": -3,
+    "post": "_ >= 0",
+    "returned": -8
+   },
+   {
+    "input": -1,
+    "post": "_ >= 0",
+    "returned": -6
+   },
+   {
+    "input": 0,
+    "post": "_ >= 0",
+    "returned": -5
+   },
+   {
+    "input": 1,
+    "post": "_ >= 0",
+    "returned": -4
+   },
+   {
+    "input": 2,
+    "post": "_ >= 0",
+    "returned": -3
+   },
+   {
+    "input": 3,
+    "post": "_ >= 0",
+    "returned": -2
+   },
+   {
+    "input": -100,
+    "post": "_ >= 0",
+    "returned": -105
+   }
+  ]
+ },
+ "output_sha256": "db197126d4febfe26b1764adcba3c757bca883a9530d32840854320ed2a4a6f5",
+ "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+ "state_path": "canonical/astra_runtime/state/HARDCORE_EVIDENCE_ORACLE_CONCRETE_EXECUTION_V1.json",
+ "timestamp": "2026-10-27T14:56:42Z",
+ "verified": true
+}

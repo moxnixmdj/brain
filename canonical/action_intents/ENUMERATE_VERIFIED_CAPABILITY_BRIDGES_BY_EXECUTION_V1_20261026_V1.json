@@ -27,15 +27,15 @@
   "producer_cognition_model_dependency_count": 0,
   "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
   "progress_evidence_paths": [
-   "canonical/runtime/bound_capabilities/python_refactor_rename_parameter.py",
-   "canonical/tests/test_python_refactor_rename_parameter_v1.py",
-   "canonical/astra_runtime/evidence/ASTRA-VERIFY-REFACTOR-001__RECEIPT.json"
+   "canonical/runtime/bound_capabilities/python_issue_nl_parse_edit_intent.py",
+   "canonical/tests/test_python_issue_nl_parse_edit_intent_v1.py",
+   "canonical/astra_runtime/evidence/ASTRA-VERIFY-NLPARAM-001__RECEIPT.json"
   ],
   "route_class": "COMPOSE"
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The composer can only see the 11 edges where a provides token literally equals a requires token, out of 96 provides and 38 requires over 73 entries on main ce288da; provides_as and requires_as are empty on every entry, so 51 produced capabilities are composition-invisible even where the bytes one writes are exactly the bytes another reads.  Nobody derives the semantic edges by running the candidates, because no procedure in the tree measures them.",
- "canonical_base_commit": "6879d0f1b961277b201dc92a6fb7860730da5125",
+ "canonical_base_commit": "d8e87f4407f5df01261465d3dc9e6ea0e1064da1",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -76,7 +76,7 @@
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "prior_work_reused": "run_adapter_locally (canonical/runtime/live_brain_route_admission_v1.py:671) already executes any registry entry's adapter in-process with capability_id popped -- reused unchanged as the execution engine.  The 73-entry registry, its provides/requires vocabularies, the 94 bound adapters with their own refusal classes (PATH_OUTSIDE_REPOSITORY, TAR_GZ_OUTPUT_REQUIRED, GNU_TAR_LIST_FAILED, SQLITE_ID_COLUMN_REQUIRED, BYTE oracle magics) -- all read and run as found.  tarfile/sqlite3/zipfile/hashlib/json stdlib reused as the independent oracles.  GNU tar, jq, node reused as environment probes.  External candidates (unified-planning, up-fast-downward, SymK, cvc5 SyGuS enumeration, safe-planner, pddl2smv, provenflow) were fetched, weighed and recorded as donors; none is imported by this change because the missing thing is the EDGES, not a planner to walk them.",
  "recursive_obs": {
-  "canonical_base_commit": "6879d0f1b961277b201dc92a6fb7860730da5125",
+  "canonical_base_commit": "d8e87f4407f5df01261465d3dc9e6ea0e1064da1",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "TRUSTING_A_DECLARED_TYPE_TOKEN_AS_PROOF_TWO_CAPABILITIES_COMPOSE_WITHOUT_RUNNING_EITHER",
@@ -298,7 +298,7 @@
      "route": "SCRATCH_IN_TMP"
     }
    ],
-   "checked_at_utc": "2026-10-27T13:23:17Z",
+   "checked_at_utc": "2026-10-27T14:27:36Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -353,10 +353,10 @@
     "TAMPERED_WORLD_MUST_FAIL__SELECTED_PART"
    ],
    "selected_route": "ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1",
-   "selected_route_checked_at_utc": "2026-10-27T13:23:17Z",
+   "selected_route_checked_at_utc": "2026-10-27T14:27:36Z",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-27T13:23:17Z",
+    "checked_at_utc": "2026-10-27T14:27:36Z",
     "execution_dependencies": [
      {
       "dependency": "python3 >= 3.11",
@@ -490,7 +490,7 @@
   "tournament": {
    "counterexample_receipts": [
     {
-     "git_blob_sha": "699ab0ed21c08264bb64268d1b6cfbd0c55fdd54",
+     "git_blob_sha": "050692370d133c46aaa1ac948a0f2552e89d3c17",
      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
     },
     {
