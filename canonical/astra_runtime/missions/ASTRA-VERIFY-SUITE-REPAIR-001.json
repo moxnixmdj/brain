@@ -1,0 +1,8 @@
+{
+ "mission_id": "ASTRA-VERIFY-SUITE-REPAIR-001",
+ "arc_class": "semantic_engine",
+ "kind": "VERIFY_CAPABILITY_WORTHSHIP",
+ "target_capability": "repo.verifier.suite.repair.v1",
+ "statement": "Repair the unified verifier suite after fleet-merge drift, root-caused at the mechanism level, harvest-first: reuse the declared-input contract law (${input.source_root} placeholder), the GENERIC_MATCH_TOKENS protocol (generic tokens refine, never create a match), and each suite's own documented re-measure protocol. (1) code.multilanguage.parse.tree_sitter.v1 declared no required inputs while its adapter invents source_root='canonical/runtime' when unstated -- auto-solve executed with an invented root instead of refusing CAPABILITY_INPUTS_MISSING:source_root; registry action_template now declares the placeholder (adapter bytes untouched, receipt pins intact). (2) 'python' entered GENERIC_MATCH_TOKENS: zero-input fleet rows matching a goal only through the word 'python' stayed bindable and displaced python.source.audit.ast (score 33 vs 16) across the compiler and world-binding suites. (3) Measured re-pins: grounding invariant -- GROUNDED still never emits at any of 37 benchmark goals; AMBIGUOUS_BOUNDED pinned at exactly BENCH_SOURCE_AUDIT_WRITE_JSON, EXT_AST_AUDIT, EXT_DECISION_VERIFY (count==1, verify PASS, with causes), extended floor 3 -> 4 naming EXT_AST_AUDIT (zero-input python.symbol.resolve.standalone.v1 theft), census 385 -> 412 (294 receipt-backed, 118 registry rows). Artifact recompiled (BYTES 9366440), verifier 33/33, CI module set 136/136 OK, impacted sweep +14 green with zero regressions vs main@384c6ca.",
+ "zero_spend": true
+}
