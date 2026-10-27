@@ -138,3 +138,81 @@ class RepositoryAcceptanceMeasurementV1Tests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class RepoRelativeTestPathTests(unittest.TestCase):
+    """The compiler states repository-relative paths; the adapter read source-root-relative ones.
+
+    Two spellings of one question.  Refusing the compiler's spelling made this
+    capability unreachable from the front door with ``TEST_PATH_INVALID`` even
+    though the sentence named a real test file that really was inside the stated
+    source root.
+    """
+
+    SOURCE = "def f():\n    return 1\n"
+    TEST = """
+        import unittest
+        from m import f
+        class T(unittest.TestCase):
+            def test_f(self): self.assertEqual(f(), 1)
+        if __name__ == "__main__": unittest.main()
+        """
+    BROKEN = "def f():\n    return 2\n"
+
+    def fixture(self, source=SOURCE):
+        td = tempfile.TemporaryDirectory()
+        root = pathlib.Path(td.name)
+        proj = root / "proj"
+        proj.mkdir()
+        (proj / "m.py").write_text(source, encoding="utf-8")
+        (proj / "test_m.py").write_text(textwrap.dedent(self.TEST), encoding="utf-8")
+        return td, root, proj
+
+    def run_measure(self, root, **extra):
+        args = {
+            "source_root": "proj",
+            "test_paths": ["test_m.py"],
+            "test_argv": [sys.executable, "test_m.py"],
+            "output_path": "receipt.json",
+            "timeout_s": 5,
+        }
+        args.update(extra)
+        return m.run(args, root)
+
+    def test_both_spellings_of_the_same_path_measure_identically(self):
+        td, root, _ = self.fixture()
+        with td:
+            a = self.run_measure(root, test_paths=["test_m.py"])
+            b = self.run_measure(root, test_paths=["proj/test_m.py"])
+            self.assertTrue(a["pass"], a)
+            self.assertTrue(b["pass"], b)
+            self.assertEqual(a["measurements"], b["measurements"])
+            self.assertEqual(a["test_evidence"]["returncode"], b["test_evidence"]["returncode"])
+
+    def test_a_repo_relative_path_outside_the_source_root_is_still_refused(self):
+        # The nearest world in which the test above must fail: widening the
+        # accepted spelling must not widen what may be measured.
+        td, root, _ = self.fixture()
+        with td:
+            (root / "outside.py").write_text("x = 1\n", encoding="utf-8")
+            with self.assertRaisesRegex(m.MeasurementError, "TEST_PATH_INVALID"):
+                self.run_measure(root, test_paths=["outside.py"])
+
+    def test_a_path_that_is_not_a_python_file_is_still_refused(self):
+        td, root, _ = self.fixture()
+        with td:
+            (root / "proj" / "notes.txt").write_text("hello\n", encoding="utf-8")
+            with self.assertRaisesRegex(m.MeasurementError, "TEST_PATH_INVALID"):
+                self.run_measure(root, test_paths=["proj/notes.txt"])
+
+    def test_a_failing_suite_is_measured_as_failing_and_not_reported_as_passing(self):
+        # `pass` on this capability means the measurement succeeded, not that the
+        # tests passed.  A failing suite must be measured as failing.
+        td, root, _ = self.fixture(source=self.BROKEN)
+        with td:
+            out = self.run_measure(root, test_paths=["proj/test_m.py"])
+            self.assertTrue(out["pass"], out)
+            self.assertIs(out["measurements"]["tests_pass"], False)
+            self.assertEqual(out["measurements"]["test_returncode"], 1)
+            self.assertEqual(out["test_evidence"]["returncode"], 1)
+            self.assertIn("MEASUREMENT_SUCCESS_IS_NOT_TASK_ACCEPTANCE", out["hard_nonclaims"])

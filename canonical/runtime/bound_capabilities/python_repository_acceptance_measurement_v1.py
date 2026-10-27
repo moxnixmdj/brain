@@ -123,15 +123,38 @@ def _tree_manifest(root: pathlib.Path, *, max_files: int, max_bytes: int) -> tup
     return rows, _sha_obj(rows)
 
 
-def _validate_test_paths(source_root: pathlib.Path, values: Any) -> list[str]:
+def _validate_test_paths(source_root: pathlib.Path, values: Any, repo: pathlib.Path | None = None) -> list[str]:
+    """Resolve each stated test path, accepting either spelling of the same path.
+
+    The compiler binds repository-relative paths -- it states
+    ``canonical/.../test_calc.py`` -- while this adapter has always read paths
+    relative to ``source_root``.  Those are two spellings of one question, and
+    refusing the compiler's spelling made the capability unreachable from the
+    front door with ``TEST_PATH_INVALID`` even though the sentence named a real
+    test file that really is inside the stated source root.
+
+    Both spellings are tried; whichever names a real file inside ``source_root``
+    wins.  Containment, regular-file, non-symlink and ``.py`` checks are applied
+    to the resolved path exactly as before, so nothing outside the stated source
+    root can be measured, and when ``source_root`` is the repository itself the
+    two spellings coincide and behaviour is unchanged.
+    """
     if not isinstance(values, list) or not values:
         raise MeasurementError("TEST_PATHS_REQUIRED")
     out = []
     for raw in values:
         if not isinstance(raw, str) or not raw:
             raise MeasurementError("TEST_PATH_INVALID")
-        p = (source_root / raw).resolve()
-        if source_root not in p.parents or not p.is_file() or p.is_symlink() or p.suffix != ".py":
+        spellings = [(source_root / raw).resolve()]
+        if repo is not None:
+            spellings.append((repo / raw).resolve())
+        p = next(
+            (c for c in spellings
+             if source_root in c.parents and c.is_file() and not c.is_symlink()
+             and c.suffix == ".py"),
+            None,
+        )
+        if p is None:
             raise MeasurementError("TEST_PATH_INVALID:" + str(raw))
         rel = _rel(source_root, p)
         if rel not in out:
@@ -227,7 +250,7 @@ def run(args: Mapping[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]
     timeout_s = max(1, min(int(args.get("timeout_s", 60)), 300))
     max_files = max(1, min(int(args.get("max_files", 5000)), 20000))
     max_bytes = max(1024, min(int(args.get("max_bytes", 100_000_000)), 500_000_000))
-    test_paths = _validate_test_paths(source_root, args.get("test_paths"))
+    test_paths = _validate_test_paths(source_root, args.get("test_paths"), repo)
     argv = _validate_argv(args.get("test_argv"), test_paths)
 
     before_manifest, before_sha = _tree_manifest(
