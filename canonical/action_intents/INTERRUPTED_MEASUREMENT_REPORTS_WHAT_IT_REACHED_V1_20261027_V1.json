@@ -1,0 +1,995 @@
+{
+ "action_id": "HEARTBEAT_REPORTS_WHAT_IT_REACHED_V1_20261027_V1",
+ "action_kind": "REAL_TASK_EXECUTION",
+ "action_summary": "The heartbeat's verdict reads measurements['new'] only, yet the workflow measured 'old,new', doubling ~1,950 instances to ~47 minutes against a 30-minute timeout -- 17 of 20 runs cancelled. Measuring only the verdict entry was still cancelled at 40m00s, and it returned nothing, because run() assembles its receipt once at the end. This one unit: measures the entry the verdict defines, adds a concurrency group so superseded runs do not stack, persists the receipt atomically after every family with run_complete/pending_families, fails the verdict closed on an incomplete run, puts the warning above the table, and adds --summarize so the workflow can render a summary from a partial receipt.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "execution_guard/live_solver_end_to_end_measurement_v1.py",
+   "canonical/tests/test_live_brain_heartbeat_v1.py",
+   ".github/workflows/live-brain-heartbeat.yml"
+  ],
+  "route_class": "REUSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_HEARTBEAT_PRODUCED_NOTHING_ON_SEVENTEEN_OF_TWENTY_RUNS_AND_STILL_HIT_ITS_TIMEOUT_AFTER_THE_DUPLICATED_ENTRY_WAS_REMOVED__MEASURED_2026_10_27_RUN_40476270088_ONE_ENTRY_THIRTY_SEVEN_FAMILIES_AT_FIFTY_INSTANCES_WAS_CANCELLED_AT_40M00S_AND_RETURNED_NO_RECEIPT_BECAUSE_THE_RECEIPT_IS_ASSEMBLED_ONCE_AT_THE_END",
+ "canonical_base_commit": "7163d0e70e61544827bc74f0895367ae4a5da9f9",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "THE_HEARTBEAT_PRODUCED_NOTHING_ON_SEVENTEEN_OF_TWENTY_RUNS_AND_STILL_HIT_ITS_TIMEOUT_AFTER_THE_DUPLICATED_ENTRY_WAS_REMOVED__MEASURED_2026_10_27_RUN_40476270088_ONE_ENTRY_THIRTY_SEVEN_FAMILIES_AT_FIFTY_INSTANCES_WAS_CANCELLED_AT_40M00S_AND_RETURNED_NO_RECEIPT_BECAUSE_THE_RECEIPT_IS_ASSEMBLED_ONCE_AT_THE_END",
+ "date": "2026-10-27",
+ "expected_parent_change": "THE_RUN_WRITES_ITS_RECEIPT_AFTER_EVERY_FAMILY__AN_INTERRUPTED_RUN_THEREFORE_REPORTS_EVERY_FAMILY_IT_FINISHED_AND_NAMES_EVERY_FAMILY_IT_NEVER_REACHED__THE_RECEIPT_CARRIES_RUN_COMPLETE_AND_PENDING_FAMILIES__AN_INCOMPLETE_RUN_IS_NEVER_ALIVE__AND_THE_WORKFLOW_RENDERS_THE_SUMMARY_FROM_THE_PARTIAL_RECEIPT",
+ "expected_parent_frontier_change": "THE_RUN_WRITES_ITS_RECEIPT_AFTER_EVERY_FAMILY__AN_INTERRUPTED_RUN_THEREFORE_REPORTS_EVERY_FAMILY_IT_FINISHED_AND_NAMES_EVERY_FAMILY_IT_NEVER_REACHED__THE_RECEIPT_CARRIES_RUN_COMPLETE_AND_PENDING_FAMILIES__AN_INCOMPLETE_RUN_IS_NEVER_ALIVE__AND_THE_WORKFLOW_RENDERS_THE_SUMMARY_FROM_THE_PARTIAL_RECEIPT",
+ "explicit_user_authorization": "Owner instruction this session 2026-10-27, verbatim: \"Do the optimal in the fastest way. Everything must be insanely fast, only the right way.\"",
+ "falsification_condition": "AN_INCOMPLETE_RECEIPT_IS_CALLED_ALIVE__OR_A_FAMILY_THAT_DID_NOT_RUN_IS_COUNTED_AS_PASSED__OR_A_PARTIAL_RECEIPT_INVENTS_A_TOOL_CENSUS_IT_NEVER_REACHED__OR_A_COMPLETE_RUN_VERDICT_CHANGES",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "CLAIMS_NO_FRONTIER_PROGRESS__IT_MAKES_AN_INTERRUPTED_MEASUREMENT_INFORMATIVE_AND_FAIL_CLOSED",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": 0.9,
+  "wall_clock_cost_ub": 1
+ },
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "execution_guard/live_solver_end_to_end_measurement_v1.py",
+  "canonical/tests/test_live_brain_heartbeat_v1.py",
+  "canonical/tests/test_measurement_dependency_blockers_do_not_abort_the_census_v1.py",
+  "canonical/tests/test_live_solver_families_v2.py",
+  ".github/workflows/live-brain-heartbeat.yml"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "7163d0e70e61544827bc74f0895367ae4a5da9f9",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "THE_SECOND_MEASURED_ENTRY__DELETED",
+   "ALL_OR_NOTHING_RECEIPT_ASSEMBLY__DELETED",
+   "CONCURRENT_SUPERSEDED_PR_RUNS__CANCELLED"
+  ],
+  "expected_parent_level_state_change": "THE_RUN_WRITES_ITS_RECEIPT_AFTER_EVERY_FAMILY__AN_INTERRUPTED_RUN_THEREFORE_REPORTS_EVERY_FAMILY_IT_FINISHED_AND_NAMES_EVERY_FAMILY_IT_NEVER_REACHED__THE_RECEIPT_CARRIES_RUN_COMPLETE_AND_PENDING_FAMILIES__AN_INCOMPLETE_RUN_IS_NEVER_ALIVE__AND_THE_WORKFLOW_RENDERS_THE_SUMMARY_FROM_THE_PARTIAL_RECEIPT",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "REVERTING_THE_DECLARATION_RETURNS_THE_CAPABILITY_TO_A_SUBSTRATE_BLOCKER_ON_ANY_HOST_WITHOUT_THE_CLI_AND_RESTATES_A_PREFERENCE_AS_A_REQUIREMENT",
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__ONE_FUNCTION_IN_ONE_TOOL",
+   "surviving_causal_blocker": "THE_HEARTBEAT_PRODUCED_NOTHING_ON_SEVENTEEN_OF_TWENTY_RUNS_AND_STILL_HIT_ITS_TIMEOUT_AFTER_THE_DUPLICATED_ENTRY_WAS_REMOVED__MEASURED_2026_10_27_RUN_40476270088_ONE_ENTRY_THIRTY_SEVEN_FAMILIES_AT_FIFTY_INSTANCES_WAS_CANCELLED_AT_40M00S_AND_RETURNED_NO_RECEIPT_BECAUSE_THE_RECEIPT_IS_ASSEMBLED_ONCE_AT_THE_END"
+  },
+  "obs_capability": {
+   "capability_work_deleted": "NO_NEW_CAPABILITY_NO_NEW_PLANNER_AND_NO_NEW_ADAPTER_WAS_WRITTEN",
+   "existing_inherited_routes_checked": [
+    "capability_composer_v1",
+    "composer_route_v1",
+    "capability_planner",
+    "live_brain_route_admission_v1"
+   ],
+   "external_existing_routes_checked": "None needed: the dispatcher, the expectation check, the planner and the execution verifier already exist in-repo and were already generic.",
+   "surviving_gap": "THE_ALIVE_OR_NOT_ALIVE_INSTRUMENT_RETURNED_NOTHING_WHENEVER_IT_TIMED_OUT"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "RAISING_THE_COMPILED_COUNT",
+    "RAISING_THE_CORRECT_SELECTION_COUNT",
+    "RAISING_THE_COUNT_OF_GOALS_THAT_MERELY_EXECUTE"
+   ],
+   "real_outcome": "A sqlite roundtrip the sentence never described now works: create a table with named columns from records that state no status, then verify it against those same records.",
+   "surviving_necessity": "A capability that refuses on a fact the data can supply is not fail-closed, it is unusable; and a refusal that names the wrong cause sends the machine to the wrong remedy."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "THE_SENTENCE_SPECIFIC_ARCHIVE_VERIFIERS_STAY_AUTHORITATIVE_WHEN_THEY_ACCEPT_SO_THE_ALREADY_MERGED_ACCEPTED_GOAL_IS_UNTOUCHED",
+   "downstream_work_to_delete_or_supersede": "NONE",
+   "fresh_reuse_plan": "REUSE_THE_EXISTING_RECEIPT_SHAPE__ADD_TWO_FIELDS_AND_A_PARTIAL_WRITE"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "THE_TRACE_SHAPE_AND_ARTIFACT_SHAPE_CENSUS_OF_ALL_TEN_EXECUTING_GOALS_WAS_COMPUTED_ONCE_AND_DRIVES_THE_INSPECTOR_TABLE",
+   "search_stop_decision": "STOP__THE_FIX_IS_MEASURED_AND_THE_SHARDING_UNIT_IS_NAMED"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "ONLY_PERSISTENCE_MAKES_THE_NEXT_TIMEOUT_INFORMATIVE_WITHOUT_VERIFYING_LESS",
+   "routes_ranked": [
+    "MEASURE_ONLY_THE_VERDICT_ENTRY_AND_PERSIST_PER_FAMILY__SELECTED",
+    "RAISE_THE_TIMEOUT__REJECTED_TWICE_MEASURED_AND_STILL_HIDES_THE_WORKLOAD",
+    "FEWER_INSTANCES__REJECTED_VERIFIES_LESS",
+    "SHARD_FAMILIES_ACROSS_PARALLEL_JOBS__DEFERRED_THE_NAMED_NEXT_UNIT"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "THE_PARTIAL_RECEIPT_WAS_PRODUCED_BY_ACTUALLY_KILLING_A_RUN_AT_25_SECONDS_AND_READING_WHAT_SURVIVED"
+  },
+  "real_outcome": "THE_RUN_WRITES_ITS_RECEIPT_AFTER_EVERY_FAMILY__AN_INTERRUPTED_RUN_THEREFORE_REPORTS_EVERY_FAMILY_IT_FINISHED_AND_NAMES_EVERY_FAMILY_IT_NEVER_REACHED__THE_RECEIPT_CARRIES_RUN_COMPLETE_AND_PENDING_FAMILIES__AN_INCOMPLETE_RUN_IS_NEVER_ALIVE__AND_THE_WORKFLOW_RENDERS_THE_SUMMARY_FROM_THE_PARTIAL_RECEIPT",
+  "required_capability": "GENERIC_TRACE_GROUNDED_ACCEPTANCE_WITH_INDEPENDENT_ARTIFACT_REINSPECTION",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME_COVERAGE",
+      "CORRECTNESS": "ALSO_STOPS_THE_CRASH",
+      "INCREMENTAL_COST": "ZERO_MONETARY",
+      "RELIABILITY": "LEAVES_DOWNSTREAM_SITES_UNGUARDED_FOR_OTHER_CALLERS",
+      "VERIFIABILITY": "A_FILTER_IS_HARDER_TO_PIN_THAN_A_GUARD_AT_THE_SITE_THAT_RAISES",
+      "WALL_CLOCK": "WORSE_PARSES_EVERY_FILE_TWICE"
+     },
+     "evidence": [
+      "one filter at the walk site covers every downstream parse at once"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: the walk in _localize already guards its parse at two of its sites, so the unguarded ones are downstream consumers that receive a path, not the walker itself",
+      "Reasoned: a pre-filter would parse every file twice, and would still leave the downstream sites unguarded for any other caller"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "PRE_FILTER_THE_WALK_WITH_COMPILE_AND_SKIP_WHAT_FAILS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME_ON_THIS_TREE_ZERO_ELSEWHERE",
+      "CORRECTNESS": "FIXES_THIS_REPOSITORY_NOT_THE_CLASS",
+      "INCREMENTAL_COST": "ZERO_MONETARY",
+      "RELIABILITY": "ENCODES_ONE_REPOSITORYS_LAYOUT_AS_POLICY",
+      "VERIFIABILITY": "A_PATH_LIST_CANNOT_BE_PINNED_AGAINST_A_DIFFERENT_TREE",
+      "WALL_CLOCK": "IDENTICAL"
+     },
+     "evidence": [
+      "the file that broke it lives under a capabilities/internalized vendor tree"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: the defect is not about that directory, it is about any file the interpreter cannot parse, which includes first-party code written for a newer grammar",
+      "Reasoned: a path list is a policy about this repository's layout, which is exactly the kind of host-specific fact the acceptance criteria forbid encoding"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "EXCLUDE_VENDORED_OR_THIRD_PARTY_DIRECTORIES_BY_PATH"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "NO_IMPROVEMENT",
+      "CORRECTNESS": "PUSHES_AN_UNKNOWABLE_PRECONDITION_ONTO_THE_CALLER",
+      "INCREMENTAL_COST": "ZERO_MONETARY",
+      "RELIABILITY": "THE_CALLER_CANNOT_PREDICT_WHICH_FILE_WILL_FAIL",
+      "VERIFIABILITY": "NOTHING_TO_PIN",
+      "WALL_CLOCK": "IDENTICAL"
+     },
+     "evidence": [
+      "a caller can always point at a smaller tree that parses"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: measured - the crash occurs on source_root=canonical, which is the natural root for a repository-level repair, so the workaround would exclude the intended use",
+      "DIRECT_PROBE: a caller cannot know in advance which file will fail to parse, so it cannot choose a safe root"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "LET_IT_RAISE_AND_REQUIRE_A_NARROWER_SOURCE_ROOT"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SEVEN_TO_ZERO_UNGUARDED_SITES_AND_THE_FAMILY_BECOMES_USABLE_ON_A_REAL_MIXED_VENDOR_TREE",
+      "CORRECTNESS": "FAIL_CLOSED_PRESERVED_THE_CAPABILITY_STILL_REQUIRES_A_VERIFIED_REPLAY_AND_STILL_REFUSES_WHEN_NO_CANDIDATE_IMPROVES_THE_SCORE",
+      "INCREMENTAL_COST": "ZERO_MONETARY_ZERO_NEW_DEPENDENCY_STANDARD_LIBRARY_ONLY",
+      "RELIABILITY": "A_FILE_THAT_DOES_NOT_PARSE_CONTRIBUTES_NOTHING_WHICH_IS_THE_SAME_RULE_THE_AUDITOR_ALREADY_FOLLOWS_FOR_TIMEOUTS",
+      "VERIFIABILITY": "41_BENCHMARK_TESTS_INCLUDING_ONE_THAT_SKIPS_ITSELF_ON_3_12_SO_IT_CANNOT_PASS_VACUOUSLY",
+      "WALL_CLOCK": "ONE_EXCEPTION_HANDLER_PER_SITE_NO_EXTRA_PARSE"
+     },
+     "evidence": [
+      "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py -- _edit and _pool",
+      "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py -- _imports and _materialize",
+      "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py -- _defs_and_lines and _line_names",
+      "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py -- _static_calls",
+      "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- UnparseableNeighbourTests"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: on source_root=canonical the guided repair goes from SyntaxError to OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS, the coupled repair to OPEN__NO_VERIFIED_REPAIR_IN_STRICT_OR_COUPLED, and value provenance to PASS__BOUNDED_INTERPROCEDURAL_VALUE_PROVENANCE",
+      "DIRECT_PROBE: unguarded ast.parse sites over walked files in the family fall from seven to zero, verified by an awk scan of the previous-line context",
+      "DIRECT_PROBE: negative control reverting the four adapters makes the guided repair raise SyntaxError again on a PEP 695 neighbour",
+      "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, 41 benchmark tests and 161 tests across the thirteen affected suites all pass"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "SELECTED",
+     "route": "SQLITE_SOURCE_SELECTED_BY_COLUMNS_NOT_BY_SENTENCE_V1_20261023_V1"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME_COVERAGE",
+      "CORRECTNESS": "SAME_COVERAGE",
+      "INCREMENTAL_COST": "SAME_COVERAGE",
+      "RELIABILITY": "SAME_COVERAGE",
+      "VERIFIABILITY": "SAME_COVERAGE",
+      "WALL_CLOCK": "SAME_COVERAGE"
+     },
+     "evidence": [
+      "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py -- _edit and _pool",
+      "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py -- _imports and _materialize",
+      "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py -- _defs_and_lines and _line_names",
+      "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py -- _static_calls",
+      "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- UnparseableNeighbourTests"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: on source_root=canonical the guided repair goes from SyntaxError to OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS, the coupled repair to OPEN__NO_VERIFIED_REPAIR_IN_STRICT_OR_COUPLED, and value provenance to PASS__BOUNDED_INTERPROCEDURAL_VALUE_PROVENANCE",
+      "DIRECT_PROBE: unguarded ast.parse sites over walked files in the family fall from seven to zero, verified by an awk scan of the previous-line context",
+      "DIRECT_PROBE: negative control reverting the four adapters makes the guided repair raise SyntaxError again on a PEP 695 neighbour",
+      "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, 41 benchmark tests and 161 tests across the thirteen affected suites all pass"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "SELECTED",
+     "route": "INPUT_BOUND_BY_SENTENCE_ROLE_NOT_BY_FILENAME_V1_20261023_V1",
+     "why_considered": "The typed-input binder matched a role key such as manifest_path by requiring the stem inside the path's own filename, so a real manifest named m9.json could not bind.",
+     "why_not_selected_or_selected": "SELECTED: consulted only after the stem match and the context path both came up empty, so it cannot move a binding that already succeeds, and it binds the role the sentence states."
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME_COVERAGE",
+      "CORRECTNESS": "SAME_COVERAGE",
+      "INCREMENTAL_COST": "SAME_COVERAGE",
+      "RELIABILITY": "SAME_COVERAGE",
+      "VERIFIABILITY": "SAME_COVERAGE",
+      "WALL_CLOCK": "SAME_COVERAGE"
+     },
+     "evidence": [
+      "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py -- _edit and _pool",
+      "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py -- _imports and _materialize",
+      "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py -- _defs_and_lines and _line_names",
+      "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py -- _static_calls",
+      "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- UnparseableNeighbourTests"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: on source_root=canonical the guided repair goes from SyntaxError to OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS, the coupled repair to OPEN__NO_VERIFIED_REPAIR_IN_STRICT_OR_COUPLED, and value provenance to PASS__BOUNDED_INTERPROCEDURAL_VALUE_PROVENANCE",
+      "DIRECT_PROBE: unguarded ast.parse sites over walked files in the family fall from seven to zero, verified by an awk scan of the previous-line context",
+      "DIRECT_PROBE: negative control reverting the four adapters makes the guided repair raise SyntaxError again on a PEP 695 neighbour",
+      "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, 41 benchmark tests and 161 tests across the thirteen affected suites all pass"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "SELECTED",
+     "route": "ABSOLUTE_PATH_NORMALISED_AND_GOALS_ARE_IDEMPOTENT_V1_20261023_V1",
+     "why_considered": "The path scanner cannot match a leading '/', so an absolute path was joined onto the repository root and doubled; and the output binder used non-existence as its proxy for 'this is the output'.",
+     "why_not_selected_or_selected": "SELECTED: normalise an absolute path to its repository-relative form, and bind the destination from the verb the sentence uses rather than from whether the file already exists."
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME_COVERAGE",
+      "CORRECTNESS": "SAME_COVERAGE",
+      "INCREMENTAL_COST": "SAME_COVERAGE",
+      "RELIABILITY": "SAME_COVERAGE",
+      "VERIFIABILITY": "SAME_COVERAGE",
+      "WALL_CLOCK": "SAME_COVERAGE"
+     },
+     "evidence": [
+      "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py -- _edit and _pool",
+      "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py -- _imports and _materialize",
+      "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py -- _defs_and_lines and _line_names",
+      "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py -- _static_calls",
+      "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- UnparseableNeighbourTests"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: on source_root=canonical the guided repair goes from SyntaxError to OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS, the coupled repair to OPEN__NO_VERIFIED_REPAIR_IN_STRICT_OR_COUPLED, and value provenance to PASS__BOUNDED_INTERPROCEDURAL_VALUE_PROVENANCE",
+      "DIRECT_PROBE: unguarded ast.parse sites over walked files in the family fall from seven to zero, verified by an awk scan of the previous-line context",
+      "DIRECT_PROBE: negative control reverting the four adapters makes the guided repair raise SyntaxError again on a PEP 695 neighbour",
+      "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, 41 benchmark tests and 161 tests across the thirteen affected suites all pass"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "SELECTED",
+     "route": "SOURCE_ROOT_BOUND_FROM_THE_SENTENCE_ROLE_V1_20261023_V1",
+     "why_considered": "The binder handled only *_path, so ten capabilities whose input is source_root could never bind and lost the ranking; an AST-audit goal selected a 15-point compiler over the 35-point audit capability.",
+     "why_not_selected_or_selected": "SELECTED: bind a *_root key only when the sentence gives a path that role, taking the parent of the one file it names.  Gating on the role word is what keeps a compound clause's unrelated registry JSON from binding source_root and stealing the plan."
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME_COVERAGE",
+      "CORRECTNESS": "SAME_COVERAGE",
+      "INCREMENTAL_COST": "SAME_COVERAGE",
+      "RELIABILITY": "SAME_COVERAGE",
+      "VERIFIABILITY": "SAME_COVERAGE",
+      "WALL_CLOCK": "SAME_COVERAGE"
+     },
+     "evidence": [
+      "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py -- _edit and _pool",
+      "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py -- _imports and _materialize",
+      "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py -- _defs_and_lines and _line_names",
+      "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py -- _static_calls",
+      "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- UnparseableNeighbourTests"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: on source_root=canonical the guided repair goes from SyntaxError to OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS, the coupled repair to OPEN__NO_VERIFIED_REPAIR_IN_STRICT_OR_COUPLED, and value provenance to PASS__BOUNDED_INTERPROCEDURAL_VALUE_PROVENANCE",
+      "DIRECT_PROBE: unguarded ast.parse sites over walked files in the family fall from seven to zero, verified by an awk scan of the previous-line context",
+      "DIRECT_PROBE: negative control reverting the four adapters makes the guided repair raise SyntaxError again on a PEP 695 neighbour",
+      "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, 41 benchmark tests and 161 tests across the thirteen affected suites all pass"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "SELECTED",
+     "route": "LIST_INPUTS_AND_ADAPTER_DERIVED_ARGV_BOUND_FROM_THE_SENTENCE_V1_20261023_V1",
+     "why_considered": "The binder produced only scalars, so twelve capabilities taking test_paths, evidence_paths or test_argv could never bind and lost the ranking; the whole repair and fault-localisation family was unreachable from a sentence.",
+     "why_not_selected_or_selected": "SELECTED: bind *_paths as the list of paths the sentence gives that role, excluding whatever the sentence gives the output role, and derive *_argv by asking the capability's own adapter for the default it would itself have used, following its delegation when it does not define suite_argv."
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME_COVERAGE",
+      "CORRECTNESS": "SAME_COVERAGE",
+      "INCREMENTAL_COST": "SAME_COVERAGE",
+      "RELIABILITY": "SAME_COVERAGE",
+      "VERIFIABILITY": "SAME_COVERAGE",
+      "WALL_CLOCK": "SAME_COVERAGE"
+     },
+     "evidence": [
+      "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py -- _edit and _pool",
+      "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py -- _imports and _materialize",
+      "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py -- _defs_and_lines and _line_names",
+      "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py -- _static_calls",
+      "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- UnparseableNeighbourTests"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: on source_root=canonical the guided repair goes from SyntaxError to OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS, the coupled repair to OPEN__NO_VERIFIED_REPAIR_IN_STRICT_OR_COUPLED, and value provenance to PASS__BOUNDED_INTERPROCEDURAL_VALUE_PROVENANCE",
+      "DIRECT_PROBE: unguarded ast.parse sites over walked files in the family fall from seven to zero, verified by an awk scan of the previous-line context",
+      "DIRECT_PROBE: negative control reverting the four adapters makes the guided repair raise SyntaxError again on a PEP 695 neighbour",
+      "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, 41 benchmark tests and 161 tests across the thirteen affected suites all pass"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "SELECTED",
+     "route": "PROMISED_SOURCE_CHANGE_CHECKED_BEFORE_PASS_V1_20261023_V1",
+     "why_considered": "The repair loops find a patch, verify it, replay the verification and restore the source, declaring NO_SOURCE_WRITE_OR_PROMOTION_AUTHORITY, while the front door reported PASS for a file still broken.",
+     "why_not_selected_or_selected": "SELECTED: extend the existing promised-artifact idiom to a promised CHANGE -- hash the source files the repair verb governs before execution and fail closed when they are unchanged.  No authority is removed and no capability is edited; the gate only stops an over-claim."
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME_COVERAGE",
+      "CORRECTNESS": "SAME_COVERAGE",
+      "INCREMENTAL_COST": "SAME_COVERAGE",
+      "RELIABILITY": "SAME_COVERAGE",
+      "VERIFIABILITY": "SAME_COVERAGE",
+      "WALL_CLOCK": "SAME_COVERAGE"
+     },
+     "evidence": [
+      "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py -- _edit and _pool",
+      "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py -- _imports and _materialize",
+      "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py -- _defs_and_lines and _line_names",
+      "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py -- _static_calls",
+      "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- UnparseableNeighbourTests"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: on source_root=canonical the guided repair goes from SyntaxError to OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS, the coupled repair to OPEN__NO_VERIFIED_REPAIR_IN_STRICT_OR_COUPLED, and value provenance to PASS__BOUNDED_INTERPROCEDURAL_VALUE_PROVENANCE",
+      "DIRECT_PROBE: unguarded ast.parse sites over walked files in the family fall from seven to zero, verified by an awk scan of the previous-line context",
+      "DIRECT_PROBE: negative control reverting the four adapters makes the guided repair raise SyntaxError again on a PEP 695 neighbour",
+      "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, 41 benchmark tests and 161 tests across the thirteen affected suites all pass"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "SELECTED",
+     "route": "TEXT_FILE_WRITE_VERIFIED_FROM_REAL_EXECUTION_V1_20261023_V1",
+     "why_considered": "text.file.write sat in the registry with no status, no verification and no mission, so it was the one of 72 entries carrying no proof at all and could never be promoted without forging one.",
+     "why_not_selected_or_selected": "SELECTED: run the bound adapter once on a fresh path, then confirm the bytes on disk through pathlib.read_bytes + hashlib.sha256, a code path sharing nothing with the adapter, and promote through promote_pending_binding with a frozen mission whose sha256 is rechecked before any registry mutation."
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME_COVERAGE",
+      "CORRECTNESS": "SAME_COVERAGE",
+      "INCREMENTAL_COST": "SAME_COVERAGE",
+      "RELIABILITY": "SAME_COVERAGE",
+      "VERIFIABILITY": "SAME_COVERAGE",
+      "WALL_CLOCK": "SAME_COVERAGE"
+     },
+     "evidence": [
+      "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py -- _edit and _pool",
+      "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py -- _imports and _materialize",
+      "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py -- _defs_and_lines and _line_names",
+      "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py -- _static_calls",
+      "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- UnparseableNeighbourTests"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: on source_root=canonical the guided repair goes from SyntaxError to OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS, the coupled repair to OPEN__NO_VERIFIED_REPAIR_IN_STRICT_OR_COUPLED, and value provenance to PASS__BOUNDED_INTERPROCEDURAL_VALUE_PROVENANCE",
+      "DIRECT_PROBE: unguarded ast.parse sites over walked files in the family fall from seven to zero, verified by an awk scan of the previous-line context",
+      "DIRECT_PROBE: negative control reverting the four adapters makes the guided repair raise SyntaxError again on a PEP 695 neighbour",
+      "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, 41 benchmark tests and 161 tests across the thirteen affected suites all pass"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "SELECTED",
+     "route": "SHELL_COMMAND_RUN_VERIFIED_COMPLETING_72_OF_72_V1_20261023_V1",
+     "why_considered": "shell.command.run was the last of 72 registry entries carrying no status, no verification and no source, so the registry still held one unverified claim in the one place the machine trusts.",
+     "why_not_selected_or_selected": "SELECTED: simulate the promotion first and measure that zero benchmark goals change selection, then run the bound adapter on an argv that writes a known payload and confirm the bytes on disk through pathlib.read_bytes + hashlib.sha256 against the digest of the payload requested, promoting through promote_pending_binding with a frozen mission rechecked before any registry mutation."
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME_COVERAGE",
+      "CORRECTNESS": "SAME_COVERAGE",
+      "INCREMENTAL_COST": "SAME_COVERAGE",
+      "RELIABILITY": "SAME_COVERAGE",
+      "VERIFIABILITY": "SAME_COVERAGE",
+      "WALL_CLOCK": "SAME_COVERAGE"
+     },
+     "evidence": [
+      "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py -- _edit and _pool",
+      "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py -- _imports and _materialize",
+      "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py -- _defs_and_lines and _line_names",
+      "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py -- _static_calls",
+      "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- UnparseableNeighbourTests"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: on source_root=canonical the guided repair goes from SyntaxError to OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS, the coupled repair to OPEN__NO_VERIFIED_REPAIR_IN_STRICT_OR_COUPLED, and value provenance to PASS__BOUNDED_INTERPROCEDURAL_VALUE_PROVENANCE",
+      "DIRECT_PROBE: unguarded ast.parse sites over walked files in the family fall from seven to zero, verified by an awk scan of the previous-line context",
+      "DIRECT_PROBE: negative control reverting the four adapters makes the guided repair raise SyntaxError again on a PEP 695 neighbour",
+      "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, 41 benchmark tests and 161 tests across the thirteen affected suites all pass"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "SELECTED",
+     "route": "PYTHON_STDLIB_DECLARATION_ENFORCED_NO_EXTERNAL_BINARY_V1_20261023_V1",
+     "why_considered": "30 capabilities declare source.type python_stdlib, a promise that they run on a bare interpreter. Measured across the family, exactly one broke it: sqlite.table.verify_against_json_records shelled out to the sqlite3 CLI and only fell back to the sqlite3 module when the binary was absent.",
+     "why_not_selected_or_selected": "SELECTED: the promise held by accident and the accident already cost something real -- the recorded end-to-end receipt logs that family as environment_blocked_here: 50 for a capability whose only dependency is in the standard library, and re-run here with the binary absent the family passes 3/3. Remove the CLI path so the module is the only path, prove both paths returned identical list[dict] on populated and empty results before changing the preference, and enforce the declaration across the whole family so the next adapter that shells out while claiming no dependency turns a test red."
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME_COVERAGE",
+      "CORRECTNESS": "SAME_COVERAGE",
+      "INCREMENTAL_COST": "SAME_COVERAGE",
+      "RELIABILITY": "SAME_COVERAGE",
+      "VERIFIABILITY": "SAME_COVERAGE",
+      "WALL_CLOCK": "SAME_COVERAGE"
+     },
+     "evidence": [
+      "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py -- _edit and _pool",
+      "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py -- _imports and _materialize",
+      "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py -- _defs_and_lines and _line_names",
+      "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py -- _static_calls",
+      "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- UnparseableNeighbourTests"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: on source_root=canonical the guided repair goes from SyntaxError to OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS, the coupled repair to OPEN__NO_VERIFIED_REPAIR_IN_STRICT_OR_COUPLED, and value provenance to PASS__BOUNDED_INTERPROCEDURAL_VALUE_PROVENANCE",
+      "DIRECT_PROBE: unguarded ast.parse sites over walked files in the family fall from seven to zero, verified by an awk scan of the previous-line context",
+      "DIRECT_PROBE: negative control reverting the four adapters makes the guided repair raise SyntaxError again on a PEP 695 neighbour",
+      "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, 41 benchmark tests and 161 tests across the thirteen affected suites all pass"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "SELECTED",
+     "route": "SQLITE_STATUS_FILTER_TAKEN_FROM_THE_SENTENCE_V1_20261023_V1",
+     "why_considered": "The live harness family SQLITE_FROM_RECORDS passed only 4 of 10 instances and is not pinned as a correct refusal. Dumping its failures_sample showed every failure is the same shape: the goal says 'from the ACTIVE records' and the built table contains those records plus extra ones.",
+     "why_not_selected_or_selected": "SELECTED: sqlite.table.create_from_json_records derived its status filter only from the data and only when every record agreed on one status, so over a mixed collection wanted was None, the filter was skipped, and the adapter returned a confident superset of what was asked for -- a wrong answer shaped like a right one. Read the status the sentence names, choosing it from the distinct status values the records actually carry so no vocabulary is hardcoded, fail closed when the sentence names two, and fix the verify adapter's identical line with it because a create that filters and a verify that does not would contradict each other. Measured 4/10 -> 25/25 on both families."
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME_COVERAGE",
+      "CORRECTNESS": "SAME_COVERAGE",
+      "INCREMENTAL_COST": "SAME_COVERAGE",
+      "RELIABILITY": "SAME_COVERAGE",
+      "VERIFIABILITY": "SAME_COVERAGE",
+      "WALL_CLOCK": "SAME_COVERAGE"
+     },
+     "evidence": [
+      "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py -- _edit and _pool",
+      "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py -- _imports and _materialize",
+      "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py -- _defs_and_lines and _line_names",
+      "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py -- _static_calls",
+      "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- UnparseableNeighbourTests"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: on source_root=canonical the guided repair goes from SyntaxError to OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS, the coupled repair to OPEN__NO_VERIFIED_REPAIR_IN_STRICT_OR_COUPLED, and value provenance to PASS__BOUNDED_INTERPROCEDURAL_VALUE_PROVENANCE",
+      "DIRECT_PROBE: unguarded ast.parse sites over walked files in the family fall from seven to zero, verified by an awk scan of the previous-line context",
+      "DIRECT_PROBE: negative control reverting the four adapters makes the guided repair raise SyntaxError again on a PEP 695 neighbour",
+      "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, 41 benchmark tests and 161 tests across the thirteen affected suites all pass"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "SELECTED",
+     "route": "MEASUREMENT_DEPENDENCY_BLOCKED_NOT_ABORTED_V1_20261023_V1",
+     "why_considered": "The live end-to-end measurement harness could not be run at all on a host without openpyxl or python-docx. It wrapped the solve call in try/except but called case.oracle(result) and the generator before it unguarded, and three of those import openpyxl or docx, so a ModuleNotFoundError aborted the run with exit 1, no receipt, and not one family measured.",
+     "why_not_selected_or_selected": "SELECTED: the harness already had the right vocabulary for this -- ENVIRONMENT_BLOCKED_HERE -- and simply did not apply it to its own dependencies. Extract oracle_outcome and generated_case so a missing library costs its own family, catch only ModuleNotFoundError so every other oracle defect still raises loudly, and keep environment_blockers_are_failures=True so a blocker is still a NOT ALIVE verdict on the runner where the dependency is installed. Measured: exit 1 with zero families measured becomes exit 0 with 36 families measured, 21 all-pass, 6 correctly blocked, and 9 real failures surfaced that the crash had been hiding."
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME_COVERAGE",
+      "CORRECTNESS": "SAME_COVERAGE",
+      "INCREMENTAL_COST": "SAME_COVERAGE",
+      "RELIABILITY": "SAME_COVERAGE",
+      "VERIFIABILITY": "SAME_COVERAGE",
+      "WALL_CLOCK": "SAME_COVERAGE"
+     },
+     "evidence": [
+      "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py -- _edit and _pool",
+      "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py -- _imports and _materialize",
+      "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py -- _defs_and_lines and _line_names",
+      "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py -- _static_calls",
+      "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- UnparseableNeighbourTests"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: on source_root=canonical the guided repair goes from SyntaxError to OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS, the coupled repair to OPEN__NO_VERIFIED_REPAIR_IN_STRICT_OR_COUPLED, and value provenance to PASS__BOUNDED_INTERPROCEDURAL_VALUE_PROVENANCE",
+      "DIRECT_PROBE: unguarded ast.parse sites over walked files in the family fall from seven to zero, verified by an awk scan of the previous-line context",
+      "DIRECT_PROBE: negative control reverting the four adapters makes the guided repair raise SyntaxError again on a PEP 695 neighbour",
+      "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, 41 benchmark tests and 161 tests across the thirteen affected suites all pass"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "SELECTED",
+     "route": "PATH_ROLE_EXCLUSIVITY_ONE_PATH_ONE_ROLE_V1_20261023_V1",
+     "why_considered": "Repairing the measurement harness surfaced nine real failures that a crash had been hiding. Four of them reported FILE_INVALID or NO_LOCALIZED_SOURCE_FILES. Intercepting the adapter call showed test_paths bound to three entries for a sentence that names three paths in three roles: the source root directory, the one real test, and the output report. The adapter validates each entry as an existing .py file, so the directory raised FILE_INVALID and the family scored 0 of 3.",
+     "why_not_selected_or_selected": "SELECTED: a previous guard already dropped the output path, but only by recognising an output VERB, and this sentence says 'save output_path R.json' with no 'to', so the guard never fired -- and nothing at all excluded the source root. Enumerating another verb would fix one phrasing and leave the class. The general rule is role exclusivity: a repository path named in a sentence has exactly one role, so any path already bound to another input key is not also a member of a *_paths list. Applied to both the *_paths and the *_argv branches, which re-derive targets independently. Measured PYTHON_FAULT_LOCALIZE 0/3 -> 3/3, PYTHON_REPAIR_STRICT_PROGRESS moved past FILE_INVALID to a deeper cause, and the benchmark is unchanged at 23/23 compiled and 22/23 selected."
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME_COVERAGE",
+      "CORRECTNESS": "SAME_COVERAGE",
+      "INCREMENTAL_COST": "SAME_COVERAGE",
+      "RELIABILITY": "SAME_COVERAGE",
+      "VERIFIABILITY": "SAME_COVERAGE",
+      "WALL_CLOCK": "SAME_COVERAGE"
+     },
+     "evidence": [
+      "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py -- _edit and _pool",
+      "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py -- _imports and _materialize",
+      "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py -- _defs_and_lines and _line_names",
+      "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py -- _static_calls",
+      "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- UnparseableNeighbourTests"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: on source_root=canonical the guided repair goes from SyntaxError to OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS, the coupled repair to OPEN__NO_VERIFIED_REPAIR_IN_STRICT_OR_COUPLED, and value provenance to PASS__BOUNDED_INTERPROCEDURAL_VALUE_PROVENANCE",
+      "DIRECT_PROBE: unguarded ast.parse sites over walked files in the family fall from seven to zero, verified by an awk scan of the previous-line context",
+      "DIRECT_PROBE: negative control reverting the four adapters makes the guided repair raise SyntaxError again on a PEP 695 neighbour",
+      "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, 41 benchmark tests and 161 tests across the thirteen affected suites all pass"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "SELECTED",
+     "route": "PLURAL_ROLE_WORD_BINDS_A_LIST_OF_PATHS_V1_20261023_V1",
+     "why_considered": "_paths_named_by_role turned the input key test_paths into the role word 'test' and searched for \\btest\\b, which cannot match 'tests'. A *_paths input is a list, and a sentence names a list in the plural as naturally as in the singular -- the live harness itself generates 'using the tests A, B, C'. The fallback branch in _bind_inputs used the same singular-only regex, so both routes missed and the input went unbound.",
+     "why_not_selected_or_selected": "SELECTED: match the role word with an optional plural s in both the role scan and the fallback, which is the general shape rather than another enumerated phrasing, and assert that a word merely containing the role word -- 'latest', 'greatest', 'contestant' -- is still not treated as the role, which is the over-matching risk the widening introduces. Measured on the harness's own phrasing across the ten repair, localisation, patch and audit capabilities: 0 of 10 bound before, 7 of 10 after, each picking up all three tests. The three that still do not bind fail on test_argv and pattern, which are different inputs. Benchmark unchanged at 23/23 compiled and 22/23 selected."
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME_COVERAGE",
+      "CORRECTNESS": "SAME_COVERAGE",
+      "INCREMENTAL_COST": "SAME_COVERAGE",
+      "RELIABILITY": "SAME_COVERAGE",
+      "VERIFIABILITY": "SAME_COVERAGE",
+      "WALL_CLOCK": "SAME_COVERAGE"
+     },
+     "evidence": [
+      "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py -- _edit and _pool",
+      "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py -- _imports and _materialize",
+      "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py -- _defs_and_lines and _line_names",
+      "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py -- _static_calls",
+      "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- UnparseableNeighbourTests"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: on source_root=canonical the guided repair goes from SyntaxError to OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS, the coupled repair to OPEN__NO_VERIFIED_REPAIR_IN_STRICT_OR_COUPLED, and value provenance to PASS__BOUNDED_INTERPROCEDURAL_VALUE_PROVENANCE",
+      "DIRECT_PROBE: unguarded ast.parse sites over walked files in the family fall from seven to zero, verified by an awk scan of the previous-line context",
+      "DIRECT_PROBE: negative control reverting the four adapters makes the guided repair raise SyntaxError again on a PEP 695 neighbour",
+      "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, 41 benchmark tests and 161 tests across the thirteen affected suites all pass"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "SELECTED",
+     "route": "SUITE_ARGV_DELEGATION_FOLLOWED_TO_ANY_DEPTH_V1_20261023_V1",
+     "why_considered": "After the plural role-word fix, three capabilities still could not bind. Two raised GOAL_INPUT_BINDING_REQUIRED:test_argv. test_argv is optional in every adapter that takes it because each falls back to a shared suite_argv embedding the collecting suite runner, and the compiler asks the adapter for that default rather than duplicating the runner. The search looked one module level deep, but the adapters reach the helper at different depths: ptg.suite_argv at depth 1, _REPAIR._PATCH.suite_argv at depth 2, v8._REPAIR._PATCH.suite_argv at depth 3.",
+     "why_not_selected_or_selected": "SELECTED: the delegation is real in all three and only the discovery stopped early, so follow the adapter's own module graph with a bounded recursive search -- a visited set for import cycles and a depth cap so an unbounded graph fails closed rather than walking forever -- and prefer a direct suite_argv over a deeper one. Measured over the repair, localisation, patch and audit family with the harness's own plural phrasing: 7 of 10 bound before, 9 of 10 after. The tenth needs pattern, and a sentence that would use it routes to python.source.audit.ast which binds, so that is routing rather than a binding defect. Benchmark unchanged at 23/23 compiled and 22/23 selected."
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME_COVERAGE",
+      "CORRECTNESS": "SAME_COVERAGE",
+      "INCREMENTAL_COST": "SAME_COVERAGE",
+      "RELIABILITY": "SAME_COVERAGE",
+      "VERIFIABILITY": "SAME_COVERAGE",
+      "WALL_CLOCK": "SAME_COVERAGE"
+     },
+     "evidence": [
+      "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py -- _edit and _pool",
+      "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py -- _imports and _materialize",
+      "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py -- _defs_and_lines and _line_names",
+      "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py -- _static_calls",
+      "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- UnparseableNeighbourTests"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: on source_root=canonical the guided repair goes from SyntaxError to OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS, the coupled repair to OPEN__NO_VERIFIED_REPAIR_IN_STRICT_OR_COUPLED, and value provenance to PASS__BOUNDED_INTERPROCEDURAL_VALUE_PROVENANCE",
+      "DIRECT_PROBE: unguarded ast.parse sites over walked files in the family fall from seven to zero, verified by an awk scan of the previous-line context",
+      "DIRECT_PROBE: negative control reverting the four adapters makes the guided repair raise SyntaxError again on a PEP 695 neighbour",
+      "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, 41 benchmark tests and 161 tests across the thirteen affected suites all pass"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "SELECTED",
+     "route": "NEAREST_ROLE_WORD_OWNS_THE_PATH_V1_20261023_V1",
+     "why_considered": "Six repair and localisation families were measured end to end at one instance each and only one passed. Dumping the compiled inputs for the live harness's own repair sentence showed source_paths and test_paths returning the SAME everything-list: _paths_named_by_role collected every path appearing after the role word with no upper bound, so the first role in the sentence swallowed the rest of it. The repair loop was handed its own tests and the output report as the files to repair and died with RepairLoopError:NO_LOCALIZED_SOURCE_FILES.",
+     "why_not_selected_or_selected": "SELECTED: a path belongs to the role word that most recently PRECEDES it, which is the same one-path-one-role rule already applied to exclusivity, now applied to ownership. Role words are derived from every path-bearing key in the template so nothing is enumerated. Measured: source_paths becomes exactly the file to repair and test_paths exactly the tests, the two lists become disjoint, and the failure cause moves from NO_LOCALIZED_SOURCE_FILES to PROMISED_SOURCE_CHANGE_NOT_APPLIED -- the deliberate gate that fires because the repair loop restores the source, having no write authority. The end-to-end pass rate does NOT move: 1 of 6 before and 1 of 6 after. This is a prerequisite, not a payoff, and is recorded as such rather than as a win. Benchmark unchanged at 23/23 compiled and 22/23 selected."
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME_COVERAGE",
+      "CORRECTNESS": "SAME_COVERAGE",
+      "INCREMENTAL_COST": "SAME_COVERAGE",
+      "RELIABILITY": "SAME_COVERAGE",
+      "VERIFIABILITY": "SAME_COVERAGE",
+      "WALL_CLOCK": "SAME_COVERAGE"
+     },
+     "evidence": [
+      "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py -- _edit and _pool",
+      "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py -- _imports and _materialize",
+      "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py -- _defs_and_lines and _line_names",
+      "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py -- _static_calls",
+      "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- UnparseableNeighbourTests"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: on source_root=canonical the guided repair goes from SyntaxError to OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS, the coupled repair to OPEN__NO_VERIFIED_REPAIR_IN_STRICT_OR_COUPLED, and value provenance to PASS__BOUNDED_INTERPROCEDURAL_VALUE_PROVENANCE",
+      "DIRECT_PROBE: unguarded ast.parse sites over walked files in the family fall from seven to zero, verified by an awk scan of the previous-line context",
+      "DIRECT_PROBE: negative control reverting the four adapters makes the guided repair raise SyntaxError again on a PEP 695 neighbour",
+      "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, 41 benchmark tests and 161 tests across the thirteen affected suites all pass"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "SELECTED",
+     "route": "COMPOSED_FALLBACK_HELD_TO_PROMISED_ARTIFACT_EVIDENCE_V1_20261023_V1",
+     "why_considered": "A goal of the form 'Write the text T to the file X and save the report to Y' returned status PASS__COMPOSED_CAPABILITY_CHAIN with pass=True after writing those 11 bytes into Y. X, the file the goal actually named, was never created on disk and the front door reported the goal done. Composition is attempted at exactly the two moments where the primary path has already failed, and both call sites returned the chain's own verdict untouched. The gate that catches this, promised_artifact_errors, had already run; its result was discarded.",
+     "why_not_selected_or_selected": "SELECTED: apply the gate that already exists to the fallback before it may report success. Two supporting defects were found by measuring the same family. (1) Template key order for the repair capabilities is output_path, source_root, test_argv, test_paths, and test_argv is derived FROM the test paths, so counting a derived argv as a competing claim cancelled the role against itself: exclusivity emptied a correct test_paths, the fallback then assigned every file in the sentence, source included. (2) That masking hid a second defect: _repo_paths only checks that a path RESOLVES under the root, so 'test command /usr/bin/python3 T' bound usr/bin/python3 as a test file and the adapter rejected it with FILE_INVALID. Both are fixed generally: an argv is not a claim, and a role list may only name files that exist. Measured: the false PASS becomes FAIL_CLOSED__PROMISED_ARTIFACT_MISSING naming the exact missing file; test_paths on the route-admission sentence returns exactly the named test; test_paths on the strict-progress sentence returns exactly the named test with no interpreter. Benchmark unchanged at 23/23 compiled and 22/23 selected. Repair-family end-to-end pass rate unchanged at 1 of 6, which is stated rather than hidden: the remaining cause is the deliberate no-write-authority boundary."
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME_COVERAGE",
+      "CORRECTNESS": "SAME_COVERAGE",
+      "INCREMENTAL_COST": "SAME_COVERAGE",
+      "RELIABILITY": "SAME_COVERAGE",
+      "VERIFIABILITY": "SAME_COVERAGE",
+      "WALL_CLOCK": "SAME_COVERAGE"
+     },
+     "evidence": [
+      "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py -- _edit and _pool",
+      "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py -- _imports and _materialize",
+      "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py -- _defs_and_lines and _line_names",
+      "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py -- _static_calls",
+      "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- UnparseableNeighbourTests"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: on source_root=canonical the guided repair goes from SyntaxError to OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS, the coupled repair to OPEN__NO_VERIFIED_REPAIR_IN_STRICT_OR_COUPLED, and value provenance to PASS__BOUNDED_INTERPROCEDURAL_VALUE_PROVENANCE",
+      "DIRECT_PROBE: unguarded ast.parse sites over walked files in the family fall from seven to zero, verified by an awk scan of the previous-line context",
+      "DIRECT_PROBE: negative control reverting the four adapters makes the guided repair raise SyntaxError again on a PEP 695 neighbour",
+      "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, 41 benchmark tests and 161 tests across the thirteen affected suites all pass"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "SELECTED",
+     "route": "EXPLICIT_NAME_KEEPS_A_RECEIPT_PROJECTIONS_ROUTE_V1_20261023_V1",
+     "why_considered": "Running the pytest-style suites for the first time -- unittest cannot execute them and reports them as loader errors rather than failures -- surfaced two red tests in canonical/tests/test_capability_naming_rule_v1.py that had been invisible to every check run so far. (1) 'Run the bytes active query task generator.' NAMES bytes_active_query_task_generator_v1 and still selected python.task.acceptance.measured.objective.v1. (2) 'Run the thing.' was refused as GOAL_INPUT_BINDING_REQUIRED:shell.command.run:argv:not_stated, blaming a capability the request never mentioned.",
+     "why_not_selected_or_selected": "SELECTED, reusing the predicate F29 already defines rather than writing a second notion of 'named'. The named capability's status is RECEIPT_BACKED_PENDING_PROMOTION, so the pinned scorer cannot see it at all -- it filters to VERIFIED_BOUND_CAPABILITY -- and F17, which exists for exactly that class, was consulted only when the pinned path had FAILED. So a sentence naming a receipt projection outright lost to whatever bound capability ranked first. The trigger is new; the authority is unchanged: F17 still accepts receipt projections only. A second change reports the honest diagnosis when the sentence stated no contract anywhere and named no capability. Measured: test_capability_naming_rule_v1.py goes 2 failed 5 passed -> 7 passed. Disabling the F17 trigger alone returns test_f29_a_named_capability_is_still_selected to red; disabling the diagnosis alone returns test_f29_a_request_that_names_nothing_fails_closed to red -- each change has its own negative control. Benchmark unchanged at 23/23 compiled and 22/23 selected; 213 unittest OK; pytest suites 95 passed -> 97 passed with the same 6 pre-existing failures (2 capability DAG, 3 missing openpyxl/docx, 1 the deliberate no-write-authority boundary). Two apparent regressions in test_live_solver_families_v4 were traced to leftover __CONTROLLER_CHECKPOINT.json state files for the fixed task ids TEST_BM25_V4 and TEST_DECISION_V4, not to this change: both pass once the state is removed, and they fail identically with every patch disabled."
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME_COVERAGE",
+      "CORRECTNESS": "SAME_COVERAGE",
+      "INCREMENTAL_COST": "SAME_COVERAGE",
+      "RELIABILITY": "SAME_COVERAGE",
+      "VERIFIABILITY": "SAME_COVERAGE",
+      "WALL_CLOCK": "SAME_COVERAGE"
+     },
+     "evidence": [
+      "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py -- _edit and _pool",
+      "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py -- _imports and _materialize",
+      "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py -- _defs_and_lines and _line_names",
+      "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py -- _static_calls",
+      "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py -- UnparseableNeighbourTests"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: on source_root=canonical the guided repair goes from SyntaxError to OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS, the coupled repair to OPEN__NO_VERIFIED_REPAIR_IN_STRICT_OR_COUPLED, and value provenance to PASS__BOUNDED_INTERPROCEDURAL_VALUE_PROVENANCE",
+      "DIRECT_PROBE: unguarded ast.parse sites over walked files in the family fall from seven to zero, verified by an awk scan of the previous-line context",
+      "DIRECT_PROBE: negative control reverting the four adapters makes the guided repair raise SyntaxError again on a PEP 695 neighbour",
+      "INDEPENDENT_VERIFIER: canonical/runtime/verify_brain_unified_model_v1.py reports TOTAL 33/33 PASS, 41 benchmark tests and 161 tests across the thirteen affected suites all pass"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "SELECTED",
+     "route": "WAVE_SEVEN_RECEIPT_PROSE_FAMILY_GETS_A_SUITE_V1_20261024_V1",
+     "why_considered": "execution_guard/live_solver_families_v7.py defines RECEIPT_PROSE_EXECUTION with a strict oracle -- the compiled capability id must equal the one the sentence named, and the tool result must reproduce a verified sha256 -- and no test file in the repository ran it. Every other wave, v2 through v6, has a suite. That gap hid a measured movement: A/B by disabling the F17 naming hook alone, the family scored 1 of 3 with it off and 3 of 3 with it on, both failures 'wrong capability ran: python.task.acceptance.measured.objective.v1'. Nothing asserted any of it, so the gain was unlocked and could regress silently.",
+     "why_not_selected_or_selected": "SELECTED: add the missing suite rather than widen the routing further. The wider routing was attempted first and measured: admitting a named receipt projection directly through the typed binder instead of through a k=3 retrieval shortlist broke 7 tests in test_live_brain_route_admission_v1.py, including test_both_live_doors_give_the_same_verdict_on_one_sentence, so it was reverted -- the payoff of 5 family instances does not buy 7 regressions in the core suite. Measured instead: over the first 13 path-style receipt-backed targets 6 route to the capability their own sentence names and 7 do not, and all 7 lose to the SAME capability. They are lexical siblings -- bytes_characteristic_, bytes_discrete_sequence_, bytes_domain_free_, bytes_hblind_, bytes_microkernel_v3_ and bytes_scalar_exact_ variants of bytes_active_query_task_generator_v1 -- which is why a k=3 shortlist cannot separate them. The suite pins that number and that list, so routing cannot get worse silently and the residual is stated rather than hidden. 8 tests; disabling the F17 naming hook turns 2 of them red. Benchmark unchanged at 23/23 compiled and 22/23 selected; 213 unittest OK; pytest suites over the live path 115 passed with the same 6 pre-existing failures (2 capability DAG, 3 missing openpyxl/docx, 1 the deliberate no-write-authority boundary, which source_write_authority=False is hard-coded and enforced against in five separate guard modules)."
+    }
+   ],
+   "checked_at_utc": "2026-10-27T09:35:11Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "STOP_MEASURING_AN_ENTRY_THE_VERDICT_NEVER_READS_AND_PERSIST_THE_RECEIPT_SO_A_TIMEOUT_REPORTS_WHAT_IT_REACHED",
+   "max_age_hours": 24,
+   "negative_search_summary": "The skip-and-continue rule for a tree walker is one try/except per call site, so nothing packages it (GitHub shows only linters that already do it). The live challengers were to restrict the walk to files that parse by pre-filtering with compile(), to exclude vendored directories by path, or to let the crash stand and require callers to pass a narrower source_root.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "ast.parse SyntaxError skip file continue walk"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "PEP 695 type alias python 3.12 grammar"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "per file try except in a repository tree walker"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "single file parse error skip ast walk"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "STOP_MEASURING_AN_ENTRY_THE_VERDICT_NEVER_READS_AND_PERSIST_THE_RECEIPT_SO_A_TIMEOUT_REPORTS_WHAT_IT_REACHED",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-10-27T09:35:11Z",
+    "execution_dependencies": [
+     {
+      "dependency": "python3 3.11.2",
+      "evidence": [
+       "DIRECT_PROBE: the interpreter reports 3.11.2, which is below the 3.12 grammar that makes the vendored file unparseable"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/src/stirrup/clients/litellm_client.py",
+      "evidence": [
+       "present; its line 47 is a PEP 695 type alias; it is the file that reproduced the crash and is not modified"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED",
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": false,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "canonical/runtime/verify_brain_unified_model_v1.py",
+      "evidence": [
+       "reports TOTAL 33/33 PASS after this change"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED",
+       "INDEPENDENT_VERIFIER"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "STOP_MEASURING_AN_ENTRY_THE_VERDICT_NEVER_READS_AND_PERSIST_THE_RECEIPT_SO_A_TIMEOUT_REPORTS_WHAT_IT_REACHED",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "measured: python.software.repair.guided.provenance.coupled.v1 raised SyntaxError: invalid syntax (litellm_client.py, line 47) on source_root=canonical before, and returns OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS after",
+     "measured: on the same real red file the localizer ranks evaluate at score 1.0 from one genuine failure, so localization works on real repository bugs and not only synthetic ones",
+     "measured: an audit over the first ten letters of canonical/tests found 5084 tests with 165 failed and 58 errors, so real red tests exist to aim at",
+     "canonical/runtime/bound_capabilities/python_test_audit.py -- already documents that an unhandled TimeoutExpired used to kill the whole audit partway through the corpus, which is the same defect one layer down"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://api.github.com/search/repositories?q=single%20file%20parse%20error%20skip%20ast%20walk -- the skip-and-continue rule for tree walkers is universal in linters and codemods; no standalone project owns it because it is one try/except per call site"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://pypi.org/pypi/astunparse/json and the standard library's own compile() error handling -- both treat a parse failure as a property of one input rather than a fatal condition for the caller"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.python.org/3/library/ast.html#ast.parse -- raises SyntaxError for source the interpreter's grammar does not accept; PEP 695 type aliases are grammar added in 3.12",
+     "https://peps.python.org/pep-0695/ -- the type alias statement, which is why a 3.12-era vendored file is unparseable on 3.11.2"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "MEASURE_ONLY_THE_VERDICT_ENTRY_AND_PERSIST_PER_FAMILY__SELECTED",
+   "RAISE_THE_TIMEOUT__REJECTED_TWICE_MEASURED_AND_STILL_HIDES_THE_WORKLOAD",
+   "FEWER_INSTANCES__REJECTED_VERIFIES_LESS",
+   "SHARD_FAMILIES_ACROSS_PARALLEL_JOBS__DEFERRED_THE_NAMED_NEXT_UNIT"
+  ],
+  "selected_route": "STOP_MEASURING_AN_ENTRY_THE_VERDICT_NEVER_READS_AND_PERSIST_THE_RECEIPT_SO_A_TIMEOUT_REPORTS_WHAT_IT_REACHED",
+  "selected_surviving_route": "STOP_MEASURING_AN_ENTRY_THE_VERDICT_NEVER_READS_AND_PERSIST_THE_RECEIPT_SO_A_TIMEOUT_REPORTS_WHAT_IT_REACHED",
+  "stop_condition": "A_KILLED_RUN_LEAVES_A_READABLE_PARTIAL_RECEIPT_THAT_NAMES_ITS_PENDING_FAMILIES__ALIVE_ERRORS_RETURNS_MEASUREMENT_INCOMPLETE_FOR_IT__THE_SUMMARY_PUTS_THE_WARNING_ABOVE_THE_TABLE__AND_A_COMPLETE_RECEIPT_READS_EXACTLY_AS_BEFORE",
+  "why_selected_route_is_fastest_sufficient": "IT_DELETES_THE_DUPLICATED_MEASUREMENT_AND_MAKES_EVERY_FUTURE_TIMEOUT_INFORMATIVE__NO_PREDICATE_RELAXED_AND_NO_INSTANCE_DROPPED"
+ },
+ "route_id": "WAVE_SEVEN_RECEIPT_PROSE_FAMILY_GETS_A_SUITE_V1_20261024_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "STOP_MEASURING_AN_ENTRY_THE_VERDICT_NEVER_READS_AND_PERSIST_THE_RECEIPT_SO_A_TIMEOUT_REPORTS_WHAT_IT_REACHED",
+ "stop_condition": "A_KILLED_RUN_LEAVES_A_READABLE_PARTIAL_RECEIPT_THAT_NAMES_ITS_PENDING_FAMILIES__ALIVE_ERRORS_RETURNS_MEASUREMENT_INCOMPLETE_FOR_IT__THE_SUMMARY_PUTS_THE_WARNING_ABOVE_THE_TABLE__AND_A_COMPLETE_RECEIPT_READS_EXACTLY_AS_BEFORE",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NOT_APPLICABLE__TEST_ONLY_COVERAGE_OF_AN_EXISTING_VERIFIED_EXECUTION_PATH_WITH_SANDBOX_MEASUREMENT_ONLY",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "7171dc3fafcdd52541858f447205dbdcab63d529",
+     "note": "Base blob: measures old,new against a 30-minute timeout with no concurrency group; 17 of the last 20 runs were cancelled.",
+     "path": ".github/workflows/live-brain-heartbeat.yml"
+    },
+    {
+     "git_blob_sha": "e5c8f2404cdc87a2a577ba6487949ddb9f15bf55",
+     "note": "Base blob: run() builds the receipt once at the end, so a cancelled run returns nothing at all.",
+     "path": "execution_guard/live_solver_end_to_end_measurement_v1.py"
+    }
+   ],
+   "decisive_question": "WHEN_A_SEARCH_WALKS_A_TREE_IS_A_FILE_THE_INTERPRETER_CANNOT_PARSE_A_REASON_TO_ABANDON_THE_SEARCH_OR_A_FACT_ABOUT_THAT_ONE_FILE__AND_CAN_A_SYNTHETIC_BENCHMARK_EVER_REACH_THE_CASE",
+   "falsifier_id": "THE_GUARD_REVERT_AND_THE_PEP695_NEIGHBOUR_BENCHMARK",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "FIRST_ATTEMPT_COMPARED_THE_ENUMERATED_CANDIDATE_COUNT_TO_A_FRESH_GLOB_AND_MEASURED_400_CLAIMED_AGAINST_2192_REAL_FILES_SO_A_CORRECT_TRUNCATED_ENUMERATION_LOOKED_LIKE_A_LIE__CORRECTED_BY_MATCHING_EVERY_CANDIDATE_SHA256_TO_A_REAL_FILE_AND_REPORTING_THE_TRUNCATION_HONESTLY__SECOND_ATTEMPT_DIGESTED_THE_DECISION_INPUT_AS_RAW_BYTES_AND_REFUSED_AN_HONEST_PRODUCER_WHICH_DIGESTS_THE_PARSED_CONTENT__CORRECTED_TO_THE_CANONICAL_JSON_DIGEST_AND_LOCKED_BY_TEST",
+   "proposal_id": "SQLITE_SOURCE_SELECTED_BY_COLUMNS_NOT_BY_SENTENCE_V1_20261023_V1"
+  }
+ },
+ "weakens_existing_guard": false
+}

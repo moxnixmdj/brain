@@ -13,6 +13,11 @@ if str(ROOT) not in sys.path:
 from execution_guard.live_solver_end_to_end_measurement_v1 import alive_errors, summary_markdown  # noqa: E402
 
 ALIVE = {
+    # A receipt is only a candidate verdict when the run that produced it finished.
+    # `run_complete` is now a field of the contract, not an assumption: a run that
+    # stops early measures part of the suite, and `alive_errors` refuses to call that
+    # ALIVE (see test_an_unfinished_run_is_never_alive below).
+    "run_complete": True,
     "seed": 1, "python": "3.11", "machine": {"platform": "linux"},
     "measurements": {"new": {
         "families": {"A": {"oracle_pass": 5, "instances": 5}, "OUT_OF_SCOPE_MUST_FAIL_CLOSED": {"oracle_pass": 5, "instances": 5}},
@@ -55,3 +60,51 @@ def test_missing_new_entry_measurement_is_not_alive():
     r = copy.deepcopy(ALIVE)
     r["measurements"] = {"old": r["measurements"]["new"]}
     assert alive_errors(r) == ["NEW_ENTRY_NOT_MEASURED"]
+
+
+# --------------------------------------------------------------------------- #
+# A run that did not finish
+# --------------------------------------------------------------------------- #
+def _unfinished():
+    """The receipt a timed-out heartbeat can honestly produce: what it reached."""
+    r = copy.deepcopy(ALIVE)
+    r["run_complete"] = False
+    r["pending_families"] = ["LATE_FAMILY_ONE", "LATE_FAMILY_TWO"]
+    r["tool_liveness"] = {"measured": False}
+    r["reachability_from_one_entry"] = {"measured": False}
+    return r
+
+
+def test_an_unfinished_run_is_never_alive():
+    """The families that DID run all pass here -- and that still must not be ALIVE."""
+    assert alive_errors(_unfinished())[0].startswith("MEASUREMENT_INCOMPLETE")
+
+
+def test_an_unfinished_run_names_the_families_it_never_reached():
+    errors = alive_errors(_unfinished())
+    named = " ".join(errors)
+    assert "LATE_FAMILY_ONE" in named and "LATE_FAMILY_TWO" in named
+
+
+def test_an_unfinished_summary_says_so_before_it_shows_any_number():
+    md = summary_markdown(_unfinished())
+    assert "did NOT finish" in md
+    head = md.split("Why not alive")[0]
+    assert "did NOT finish" in head, "the warning must precede the table, not follow it"
+    assert "`LATE_FAMILY_ONE`" in md
+
+
+def test_an_unfinished_summary_does_not_invent_a_census():
+    """Tool liveness was never reached; the summary must say that, not print zeros."""
+    md = summary_markdown(_unfinished())
+    assert "were not reached in this run" in md
+    assert "Tools runnable on this machine" not in md
+
+
+def test_a_finished_run_still_reads_exactly_as_before():
+    """The control: nothing above changed the verdict for a complete receipt."""
+    assert alive_errors(ALIVE) == []
+    md = summary_markdown(ALIVE)
+    assert "**Verdict: ALIVE**" in md
+    assert "did NOT finish" not in md
+    assert "Tools runnable on this machine" in md
