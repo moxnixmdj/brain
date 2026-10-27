@@ -22625,11 +22625,11 @@
     "edit"
    ],
    "verification": {
-    "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-NLISSUE-001__RECEIPT.json",
+    "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-NLPARAM-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "b37685d8ffc1270660648283fdf20e48038fa839725dab9317c0eeb5aa6eea7d",
+    "evidence_sha256": "c2cdb970d5c14bfc0aa621c97363c7a65a7b137c8d9cc27992a4786f60a7a2ff",
     "independent_verification_evident": true,
-    "mission_id": "ASTRA-VERIFY-NLISSUE-001",
+    "mission_id": "ASTRA-VERIFY-NLPARAM-001",
     "module_sha256": null,
     "producer_independent": null
    }
@@ -26148,7 +26148,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "64b23b91daa3696ab5dc117d604cd4bf023c26fc84536842eb262f618dd7dbc4"
+  "value": "942ca88c70b557391249d550762a741e0542a33a7ccabcd77a30a77ed8fa67ff"
  },
  "engines": [
   {
@@ -48765,7 +48765,7 @@
   "included_source_count": 883,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "6432eec40772ef8598ea10c99b6a3a8782a012bafedb9e5b1e24d1973fea229b"
+  "source_tree_digest": "1ea30946f64bdb073fa9243ec9d3b1118d3647db11cad2e42d2b61e150b76dfa"
  },
  "research_index": [
   {
@@ -194116,7 +194116,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "a3a16e62be168108f63ae14e8ba1a2b7858b4b6c92d81af7b87178f5d6f3bc36",
+   "sha256": "671b93c2a79e043d8c210b5432dd314dd666c3b512eed8fba82474fc300abf7a",
    "status": "",
    "terms": {
     "11": 2,
@@ -204763,7 +204763,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_issue_nl_parse_edit_intent.py",
-   "sha256": "88f74194c9383bb7c968890f520239c9c19ad3784b91c2c036cbb14b592af944",
+   "sha256": "da795434cc2ed8b7dcd595ffb9ac84587660c3cd42adfbea3be6b877e740b5d3",
    "summary": "python.issue.natural_language.parse_edit_intent.v1 — issue prose -> edit ops.",
    "symbol_count": 10,
    "symbols": [

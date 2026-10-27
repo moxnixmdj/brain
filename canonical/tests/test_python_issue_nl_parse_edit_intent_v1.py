@@ -244,5 +244,130 @@ class TestNaturalLanguageEditIntent(unittest.TestCase):
         self.assertIn("+from pkg.core import compute", diff)
 
 
+class TestRenameParameterVerb(unittest.TestCase):
+    """The third verb: `rename parameter <old> to <new> in <mod>:<qualname>`.
+    NL layer binds MODULE + QUALNAME through the symbol index; param existence
+    is the apply layer's law (#89 PARAM_NOT_FOUND), not this seam's."""
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp(prefix="nl_param_pins_"))
+
+    def tearDown(self):
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def _issue(self, body: str) -> dict:
+        root = _make_repo(self.tmp)
+        _write_issue(root, {"issue_id": "P-1", "title": body, "body": ""})
+        _run_nl(root)
+        return json.loads((root / "_out" / "nl.json").read_text())
+
+    def test_strict_module_colon_qualname_binds(self):
+        art = self._issue("rename parameter X to value in pkg/core.py:helper")
+        self.assertTrue(art["complete"], art["refusals"])
+        self.assertEqual(art["op_count"], 1)
+        op = art["edits"][0]
+        self.assertEqual(op, {"op": "rename_parameter", "module": "pkg/core.py",
+                              "qualname": "helper", "old_param": "X",
+                              "new_param": "value"})
+
+    def test_dotted_module_tail_split_binds(self):
+        art = self._issue("rename parameter x to value in pkg.core.helper")
+        self.assertTrue(art["complete"], art["refusals"])
+        op = art["edits"][0]
+        self.assertEqual(op["op"], "rename_parameter")
+        self.assertEqual(op["module"], "pkg/core.py")
+        self.assertEqual(op["qualname"], "helper")
+        self.assertEqual((op["old_param"], op["new_param"]), ("x", "value"))
+
+    def test_call_compat_form_binds_when_home_unique(self):
+        art = self._issue("rename helper(x) to helper(value)")
+        self.assertTrue(art["complete"], art["refusals"])
+        self.assertEqual(art["edits"][0]["op"], "rename_parameter")
+        self.assertEqual(art["edits"][0]["qualname"], "helper")
+        self.assertEqual(art["edits"][0]["module"], "pkg/core.py")
+
+    def test_ambiguous_function_hint_refuses_with_homes(self):
+        root = _make_repo(self.tmp)
+        dup = root / "src" / "pkg"
+        (dup / "dup.py").write_text("def mirror(x):\n    return x\n", encoding="utf-8")
+        # now `mirror(x)`... but helper is still unique; make a TRUE ambiguity:
+        (root / "src" / "pkg" / "dup.py").write_text(
+            "def helper(x):\n    return x\n", encoding="utf-8")
+        _write_issue(root, {"issue_id": "P-2", "title": "rename helper(x) to helper(v)", "body": ""})
+        _run_nl(root)
+        art = json.loads((root / "_out" / "nl.json").read_text())
+        self.assertFalse(art["complete"])
+        self.assertTrue(any(r["reason"].startswith("NAME_AMBIGUOUS") for r in art["refusals"]))
+        self.assertIn("homes", art["refusals"][0])
+        self.assertEqual(art["op_count"], 0)  # no machine-consumable ops on incomplete
+
+    def test_unknown_module_qualifier_refuses(self):
+        art = self._issue("rename parameter x to value in pkg/nope.py:helper")
+        self.assertFalse(art["complete"])
+        self.assertTrue(any(r["reason"].startswith("QUALIFIER_MODULE_UNKNOWN")
+                            for r in art["refusals"]))
+
+    def test_qualifier_not_a_home_refuses(self):
+        art = self._issue("rename parameter x to value in pkg/util.py:helper")
+        self.assertFalse(art["complete"])
+        self.assertTrue(any(r["reason"].startswith("QUALIFIER_NOT_A_HOME")
+                            for r in art["refusals"]))
+
+    def test_unsupported_verb_anchor_lists_param_grammar(self):
+        art = self._issue("delete function normalize entirely")
+        self.assertFalse(art["complete"])
+        msg = " ".join(r["reason"] for r in art["refusals"])
+        self.assertIn("rename parameter", msg)
+
+    def test_byte_identical_rerun(self):
+        root = _make_repo(self.tmp)
+        _write_issue(root, {"issue_id": "P-3",
+                            "title": "rename parameter x to value in pkg/core.py:helper",
+                            "body": ""})
+        _run_nl(root)
+        a = (root / "_out" / "nl.json").read_bytes()
+        _run_nl(root)
+        b = (root / "_out" / "nl.json").read_bytes()
+        self.assertEqual(a, b)
+
+    def test_composition_nl_to_semantic_engine_applied_and_pinned(self):
+        """The crown loop minus the forge: NL prose -> bound op -> #89 apply on a
+        worktree -> suite green -> diff proves exactly the intended edit."""
+        # world with a real kwarg call site so propagation is observable
+        root = _make_repo(self.tmp)
+        core = ("def helper(n: int, depth: int = 0):\n"
+                "    return n * 2 + depth\n")
+        (root / "src/pkg/core.py").write_text(core, encoding="utf-8")
+        (root / "src/pkg/util.py").write_text(
+            "from pkg.core import helper\n\n\ndef via(k):\n"
+            "    return helper(n=k)\n", encoding="utf-8")
+        (root / "src/tests/test_core.py").write_text(
+            "import sys, pathlib\n"
+            "sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))\n"
+            "from pkg.core import helper\n"
+            "from pkg.util import via\n\n\n"
+            "def test_contract():\n    assert helper(5) == 10\n    assert helper(3, depth=1) == 7\n"
+            "    assert via(4) == 8\n", encoding="utf-8")
+        _write_issue(root, {"issue_id": "GH-7701",
+                            "body": "rename parameter n to size in pkg/core.py:helper",
+                            "title": "bad param name"})
+        _run_nl(root, extra={"timeout_s": 60})
+        art = json.loads((root / "_out" / "nl.json").read_text())
+        self.assertTrue(art["complete"], art["refusals"])
+        op = art["edits"][0]
+        # same spine the mission uses: registry dispatch to the semantic engine
+        from canonical.runtime.bound_capabilities import python_refactor_rename_parameter as rp
+        rp.run({"source_root": "src", "module": op["module"], "qualname": op["qualname"],
+                "old_param": op["old_param"], "new_param": op["new_param"],
+                "output_path": "_out/refactor.json",
+                "run_tests": ["tests/test_core.py"], "python_executable": sys.executable,
+                "timeout_s": 60}, root)
+        ref = json.loads((root / "_out" / "refactor.json").read_text())
+        self.assertEqual(ref["gate"], "PASS")
+        self.assertTrue(ref["complete"])
+        self.assertIn("def helper(size: int", (root / "src/pkg/core.py").read_text())
+        self.assertIn("helper(size=k)", (root / "src/pkg/util.py").read_text())
+
+
 if __name__ == "__main__":
     unittest.main()

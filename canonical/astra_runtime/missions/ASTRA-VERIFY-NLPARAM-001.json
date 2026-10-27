@@ -1,0 +1,8 @@
+{
+ "mission_id": "ASTRA-VERIFY-NLPARAM-001",
+ "arc_class": "semantic_engine",
+ "kind": "VERIFY_CAPABILITY_WORTHSHIP",
+ "target_capability": "python.issue.natural_language.parse_edit_intent.v1",
+ "statement": "Extend the NL seam with its third verb: 'rename parameter <old> to <new> in <module>:<qualname>' (and the dotted + call-compat spellings), bound through the verified symbol index with the same honesty laws as rename/move (zero-home NAME_NOT_FOUND with lexical candidates; multi-home NAME_AMBIGUOUS with homes unless the qualifier selects; QUALIFIER_MODULE_UNKNOWN / QUALIFIER_NOT_A_HOME loud; unsupported imperatives refuse anchoring only the three verbs). Emitted op feeds python.refactor.rename_parameter.v1 directly: scope-aware def+body rename with cross-file kwarg propagation, dynamic receivers / getattr dispatch / **kwargs passthroughs listed in unknown_sites lowering complete without ever being silently edited. Golden: prose issue GH-8820 with two clauses -> 2 ops -> 6 + 5 edits applied across sizing.py, caller.py, ratio.py AND the suite's own kwargs; tests green post-apply; dynamic.py grown untouched byte-identical while its getattr and **kw sites are listed honestly (complete=false there, true on the fully-resolvable op).",
+ "zero_spend": true
+}
