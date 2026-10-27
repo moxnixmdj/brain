@@ -28629,7 +28629,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c1476ef187a9079b8fc6a489b7311b9fc055f9016550ffff4e8fe788f3503321"
+  "value": "9d566046d8fa7be201fa369db8adaba4950d6f89b9884bbf4c2e1f262dc06203"
  },
  "engines": [
   {
@@ -199988,7 +199988,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/PLAIN_GOAL_COMPOSITE_ADMISSION_AND_IDENTITY_ROUTING_REPAIR_V1_20261027_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "92de47bc02afa7e4ff5316f114c0f9151f9801cf44f3e5e9c2c298ac570a4021",
+   "sha256": "5b8fd73f1139fc0668474747bd4e0f684c01fb98a75645dac4bb8c35d5127646",
    "status": "",
    "terms": {
     "20261027": 1,

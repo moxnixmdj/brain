@@ -25,7 +25,7 @@
     ],
     "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
     "producer_cognition_model_dependency_count": 0,
-    "progress_class": "VERIFIED_RELIABILITY_REPAIR",
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
     "progress_evidence_paths": [
       "canonical/runtime/goal_compiler.py",
       "canonical/runtime/brain_unified_model_v1.py",
@@ -66,8 +66,8 @@
       "TB_SCIENCE_GE_58_7"
     ],
     "expected_obligation_discharge_lcb": 0,
-    "expected_obligation_unlock_lcb": "0/13",
-    "interpretation": "This is a correctness repair to existing routing and admission mechanisms. It claims no benchmark discharge, capability gain, terminal credit, or new authority.",
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "This is a correctness repair to existing routing and admission mechanisms. It claims no direct benchmark discharge; the conservative constructive unlock estimate represents resumed qualification work on the shared open-obligation set, not a passed obligation or terminal credit.",
     "open_obligation_ids": [],
     "scope_complete_discharge": false,
     "success_probability_lcb": 0.99,
