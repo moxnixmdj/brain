@@ -683,6 +683,21 @@ _ARGV = [
 ]
 
 
+def _known_programs() -> frozenset[str]:
+    """Every program the acceptance layer is willing to judge.
+
+    Not a new list.  ``raw_goal_trace_acceptance_v1`` owns it, split between the
+    commands whose re-run proves a read (``_READ_ONLY_COMMANDS``) and the ones
+    whose postcondition proves a write (``_MUTATING_POSTCONDITIONS``).  Writing
+    it here as well would be a list edited once, and a command whose name is in
+    one table but not the other would then be judged by nothing.
+    """
+    from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
+
+    return frozenset(_accept._READ_ONLY_COMMANDS) | frozenset(
+        _accept._MUTATING_POSTCONDITIONS)
+
+
 def extract_argv(text: str) -> list[str] | None:
     """The command line the sentence states, token by token, or None.
 
@@ -724,6 +739,7 @@ def extract_argv(text: str) -> list[str] | None:
                 return None
             if parts and all(isinstance(part, str) and part for part in parts):
                 return parts
+    known = _known_programs()
     for pat in _ARGV:
         m = pat.search(sentence)
         if not m:
@@ -737,8 +753,33 @@ def extract_argv(text: str) -> list[str] | None:
             # An unbalanced quote is a malformed command line, not something to
             # repair by guessing at the missing half.
             return None
-        if parts and all(isinstance(part, str) and part for part in parts):
-            return parts
+        if not (parts and all(isinstance(part, str) and part for part in parts)):
+            continue
+        # AN UNQUOTED command line is only a command line if its first token is a
+        # program.  The pattern makes the "shell|cli|terminal" role word
+        # optional, so it also matches the plain English noun -- and real
+        # sentences use that noun.  Measured 2026-10-27 on
+        # "Repair the python source root D so the test command passes writing the
+        # report to D_out/r.json":
+        #
+        #   capability_id  shell.command.run
+        #   argv           ['passes','writing','the','report','to','D_out/r.json']
+        #   adapter_raised FileNotFoundError:[Errno 2] No such file or directory:
+        #                  'passes'
+        #
+        # The machine tried to EXECUTE THE REST OF THE SENTENCE AS A PROGRAM.  The
+        # quoted form cannot do this -- the quotes are the sentence saying where
+        # the command ends, which is why it wins above and keeps winning here.
+        # Only the unquoted inference needs the proof, and the proof already
+        # exists: _prose_argv refuses any program outside these same tables, and
+        # the adapter itself raises TEST_ARGS_WITHOUT_A_PROGRAM.  The check was
+        # simply absent at this site, so the stricter fallthrough was never
+        # reached.  Refuse here rather than return a guess: a slot filled from
+        # something the sentence does not contain is an invention, and an
+        # invention executes.
+        if parts[0] not in known:
+            continue
+        return parts
     # No command line was QUOTED.  The request may still state one in ordinary
     # English -- "Copy the file a to b" -- and that is the shape almost every
     # real request takes.  This is a fallthrough, not a replacement: a quoted
