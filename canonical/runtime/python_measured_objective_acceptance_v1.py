@@ -11,6 +11,7 @@ import json
 import pathlib
 from typing import Any
 
+from canonical.runtime import acceptance_clause_v1 as acceptance_clause
 from canonical.runtime import raw_task_objective_acceptance_executor_v1 as objective
 
 SCHEMA = "PROJECT_BRAIN_PYTHON_MEASURED_OBJECTIVE_ACCEPTANCE_V1"
@@ -159,8 +160,10 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
             "errors": ["ARGS_NOT_OBJECT"],
             "terminal_authority": False,
         }
+    raw_task_text = str(args.get("task_text") or "")
+    clause = acceptance_clause.extract(raw_task_text, args)
     result = evaluate_from_receipt(
-        str(args.get("task_text") or ""),
+        str(clause.get("acceptance_task_text") or raw_task_text),
         measurement_receipt_path=str(args.get("measurement_receipt_path") or ""),
         root=root,
         response_text=(

@@ -1135,6 +1135,15 @@ def promised_artifact_class(errors: list[str]) -> str:
 
 
 _REPAIR_VERB_RE = re.compile(r"\b(?:repair|fix|patch|correct)\b", re.IGNORECASE)
+# "a measured acceptance repair report" is a noun phrase naming an artifact,
+# not an instruction to mutate a source file.  A file actually named report.py
+# is still a repair target: the negative lookahead keeps that distinction.
+_REPAIR_REPORT_PHRASE_RE = re.compile(
+    r"^\s+(?:a|an|the)?\s*"
+    r"(?:measured\s+|semantic\s+|objective\s+|acceptance\s+|candidate\s+|verified\s+)*"
+    r"(?:report|receipt|result|output)\b(?!\.py\b)",
+    re.IGNORECASE,
+)
 
 
 def _promised_source_files(goal: str) -> list[str]:
@@ -1156,6 +1165,12 @@ def _promised_source_files(goal: str) -> list[str]:
     # after each repair verb, not every source file in the sentence.
     out = []
     for m in _REPAIR_VERB_RE.finditer(text):
+        if _REPAIR_REPORT_PHRASE_RE.match(text[m.end():m.end() + 100]):
+            # The next words are "report"/"receipt"/...: the sentence asks for
+            # evidence about a candidate, not for an existing source file to be
+            # changed.  Demanding a byte change in the nearest .py witness here
+            # made a correct measured-acceptance report fail at the front door.
+            continue
         best = None
         best_at = None
         for raw, path in candidates:

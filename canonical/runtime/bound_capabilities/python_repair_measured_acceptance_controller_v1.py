@@ -21,6 +21,8 @@ import sys
 import tempfile
 from typing import Any, Mapping
 
+from canonical.runtime import acceptance_clause_v1 as acceptance_clause
+
 SCHEMA="PROJECT_BRAIN_PYTHON_REPAIR_MEASURED_ACCEPTANCE_CONTROLLER_V1"
 CAPABILITY_ID="python.software.repair.measured_acceptance.v1"
 MODEL_DEPENDENCY_COUNT=0
@@ -214,6 +216,14 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         raise RepairAcceptanceError("TEST_PATHS_REQUIRED")
     argv=[str(x) for x in (args.get("test_argv") or _REPAIR._PATCH.suite_argv(sys.executable,*test_paths))]
     task_text=str(args.get("task_text") or "").strip()
+    if not task_text:
+        raise RepairAcceptanceError("TASK_TEXT_REQUIRED")
+    # The front door binds the whole goal here.  An explicitly delimited
+    # ``where`` clause is the acceptance contract; the preceding sentence is
+    # routing metadata only when every one of its words is declared.  Any other
+    # shape returns the original lossless text and keeps blocking residuals.
+    clause=acceptance_clause.extract(task_text,args)
+    task_text=str(clause.get("acceptance_task_text") or task_text).strip()
     if not task_text:
         raise RepairAcceptanceError("TASK_TEXT_REQUIRED")
     output=_safe_output(repo,args.get("output_path"))
