@@ -26448,13 +26448,8 @@
    "incremental_spend_usd": 0,
    "input_contract_source": "action_template",
    "input_names": [
-    "generated_tests_root",
-    "index_path",
     "output_path",
-    "python_executable",
-    "source_root",
-    "targets_path",
-    "timeout_s"
+    "source_root"
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
@@ -28695,7 +28690,7 @@
   "engines": 26,
   "knowledge_documents": 170,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6488,
+  "research_index_records": 6489,
   "routing_tokens": 2094,
   "skills": 18,
   "source_index_entry_points": 422,
@@ -28704,7 +28699,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "817e9352b7ac1dde5d66c5682df1312f939d0cabfbf504a4f782370100ef140c"
+  "value": "ceb7a9f8c12370ed01b781cd961c153bdcee81a22cc78dbd9cb52d7e8e300fe0"
  },
  "engines": [
   {
@@ -52236,7 +52231,7 @@
   "included_source_count": 940,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "6a9ac3e33db09c78906cfe382f8bf9f25b7a438fb0c99f6b2fee355e56d142a9"
+  "source_tree_digest": "53ea2abbef85d2c808af4c3bfb1ddf678897213abc889dc0d52ac41e482c7569"
  },
  "research_index": [
   {
@@ -203264,6 +203259,51 @@
     "whole": 2,
     "whole_name_in_prose_takes_the_route_v1_20261024_v1": 2
    }
+  },
+  {
+   "action_id": "WRITE_THE_TESTS_FOR_THIS_TREE_MUST_WRITE_TESTS_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/WRITE_THE_TESTS_FOR_THIS_TREE_MUST_WRITE_TESTS_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WRITE_THE_TESTS_FOR_THIS_TREE_MUST_WRITE_TESTS_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "1fb2a2480d65b153e5ae23667a06015442b0cf856da1a2720f928f891d62bb5c",
+   "status": "",
+   "terms": {
+    "adapter": 3,
+    "already": 3,
+    "but": 2,
+    "create": 2,
+    "files": 2,
+    "five": 2,
+    "generated_tests_root": 2,
+    "host": 2,
+    "index_path": 2,
+    "manifest": 2,
+    "may": 2,
+    "measured": 2,
+    "module": 2,
+    "never": 2,
+    "no": 2,
+    "not": 2,
+    "nothing": 2,
+    "pytest": 2,
+    "python": 2,
+    "python_executable": 2,
+    "ran": 2,
+    "request": 2,
+    "runner": 3,
+    "targets_path": 2,
+    "test": 3,
+    "tests": 4,
+    "timeout_s": 2,
+    "tree": 6,
+    "unittest": 2,
+    "v1": 2,
+    "write": 3,
+    "write_the_tests_for_this_tree_must_write_tests_v1_20261027_v1": 2
+   }
   }
  ],
  "schema": "PROJECT_BRAIN_UNIFIED_MODEL_V1",
@@ -210606,7 +210646,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_tests_generate_scaffold.py",
-   "sha256": "3321063abb69c11a97d2a8022b0364fbffcd7dd47941473dee60ba5f3767e393",
+   "sha256": "fdf81f002fa648ad0ecd14654fd977dc6a4c20a73c9bf8c6d0cb6f00b5433b8c",
    "summary": "python.tests.generate.scaffold.v1 — write tests for uncovered paths.",
    "symbol_count": 10,
    "symbols": [
