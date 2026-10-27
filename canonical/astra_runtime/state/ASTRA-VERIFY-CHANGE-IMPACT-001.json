@@ -1,0 +1,16 @@
+{
+  "adapter": "python_change_impact_testselect",
+  "capability_id": "python.source.change_impact.testselect.v1",
+  "mission_id": "ASTRA-VERIFY-CHANGE-IMPACT-001",
+  "observed_effect": {
+    "affected_modules": 4457,
+    "candidate_tests": 2096,
+    "changed_files": 1,
+    "changed_module": "canonical/runtime/capability_planner.py",
+    "changed_symbols": 75,
+    "selected_tests": 2070,
+    "source_root": "canonical",
+    "verified": true
+  },
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1"
+}

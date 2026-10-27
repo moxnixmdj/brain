@@ -293,6 +293,7 @@ def _admit_bindable_candidates(
                     provider_map,
                     goal_value_index=None,
                     require_aliases=requires_as,
+                    _already_produced_paths=list(prior_paths),
                 )
             else:
                 inputs=compiler._bind_inputs(

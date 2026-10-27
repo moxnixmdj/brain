@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-10-26T23:54:49.558347+00:00",
+  "mission_id": "ASTRA-VERIFY-PYTHON-SYMBOL-INDEX-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_PYTHON_SYMBOL_INDEX_001.json",
+  "mission_sha256": "001b1d02d597b4a7ba235849ae8870a792abd8143b9167ef0ba758a1417026d2",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "3c080231ce87d1e312f90f80adbb24762d8652128871d8ebb6df3886ce860261",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-10-27T07:51:22.631030+00:00",
+  "mission_id": "ASTRA-VERIFY-SYMBOL-RESOLVE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_SYMBOL_RESOLVE_001.json",
+  "mission_sha256": "6615c77e124673d79c12bd3bbffeb327973a76483bce98efe6f57aee3bf7bcb6",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "7861afd2b401af0b79d76279bd471d6a85035cd2c9419c09c09fb51633b3bd9a",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

@@ -39,6 +39,16 @@
       "requires": [
         "manifest.json.available"
       ],
+      "result_fields": [
+        "adapter",
+        "member_count",
+        "members",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "source_sha256"
+      ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/archive_tarfile.py",
         "module": "tarfile",
@@ -296,6 +306,16 @@
         "json.file.available",
         "node.runtime.available"
       ],
+      "result_fields": [
+        "adapter",
+        "decode_export",
+        "encode_export",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "source_path"
+      ],
       "source": {
         "dependency_count": 0,
         "integrity": "sha512-5GX+9tAf29r94Pxv8nCzrv2/t+AkOfem/c/G61+FA2Wadq7THvc5cvr/AVLH0LpukVfNSWRRHvl1fkCdiB9MMQ==",
@@ -326,6 +346,24 @@
           "source_path": "canonical/astra_runtime/tmp/ASTRA-AUTO-VERIFY-NPM-DFINITY-CBOR-B52D51692BC6_SOURCE.json"
         },
         "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-NPM-ACQUIRE-CBOR-001__dfinity-cbor__b52d51692bc6__AUTO_VERIFY.json"
+      },
+      "proposal_bindings": {
+        "json_path": {
+          "type": "effect_result",
+          "container": "scalar",
+          "effect": "json.file.available",
+          "field": "output_path"
+        },
+        "output_path": {
+          "type": "auto_path",
+          "suffix": ".cbor"
+        }
+      },
+      "channel_schema": {
+        "output_path": {
+          "kind": "file",
+          "format": "cbor-binary"
+        }
       }
     },
     "auto.npm.msgpack-msgpack": {
@@ -407,6 +445,16 @@
         "json.file.available",
         "node.runtime.available"
       ],
+      "result_fields": [
+        "adapter",
+        "decode_export",
+        "encode_export",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "source_path"
+      ],
       "source": {
         "dependency_count": 0,
         "integrity": "sha512-47XIizs9XZXvuJgoaJUIE2lFoID8ugvc0jzSHP+Ptfk8nTbnR8g788wv48N03Kx0UkAv559HWRQ3yzOgzlRNUA==",
@@ -437,6 +485,24 @@
           "source_path": "canonical/astra_runtime/tmp/ASTRA-AUTO-VERIFY-NPM-MSGPACK-MSGPACK-69DD66DA69F7_SOURCE.json"
         },
         "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-NPM-ACQUIRE-MSGPACKR-003__msgpack-msgpack__69dd66da69f7__AUTO_VERIFY.json"
+      },
+      "proposal_bindings": {
+        "json_path": {
+          "type": "effect_result",
+          "container": "scalar",
+          "effect": "json.file.available",
+          "field": "output_path"
+        },
+        "output_path": {
+          "type": "auto_path",
+          "suffix": ".msgpack"
+        }
+      },
+      "channel_schema": {
+        "output_path": {
+          "kind": "file",
+          "format": "msgpack-binary"
+        }
       }
     },
     "auto.pypi.bson-modern": {
@@ -516,6 +582,16 @@
       "requires": [
         "json.file.available"
       ],
+      "result_fields": [
+        "adapter",
+        "encode_callable",
+        "module",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "source_path"
+      ],
       "source": {
         "dependency_closure": {
           "closure_sha256": "72f5d32b23edd318fdd0a19f5c0db6b48eb85d5f6d299fd469130a66678cc5b7",
@@ -583,6 +659,24 @@
           "source_path": "canonical/astra_runtime/tmp/ASTRA-AUTO-VERIFY-PYPI-BSON-MODERN-C0BB873E73B6_SOURCE.json"
         },
         "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-PYPI-ACQUIRE-BSON-009__bson-modern__c0bb873e73b6__AUTO_VERIFY.json"
+      },
+      "proposal_bindings": {
+        "json_path": {
+          "type": "effect_result",
+          "container": "scalar",
+          "effect": "json.file.available",
+          "field": "output_path"
+        },
+        "output_path": {
+          "type": "auto_path",
+          "suffix": ".bson"
+        }
+      },
+      "channel_schema": {
+        "output_path": {
+          "kind": "file",
+          "format": "bson-binary"
+        }
       }
     },
     "auto.pypi.msgpack": {
@@ -660,6 +754,16 @@
       "requires": [
         "json.file.available"
       ],
+      "result_fields": [
+        "adapter",
+        "encode_callable",
+        "module",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "source_path"
+      ],
       "source": {
         "license": null,
         "metadata_url": "https://pypi.org/pypi/msgpack/1.2.2/json",
@@ -687,6 +791,24 @@
           "source_path": "canonical/astra_runtime/tmp/ASTRA-AUTO-VERIFY-PYPI-MSGPACK-9F0974D98983_SOURCE.json"
         },
         "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-PYPI-ACQUIRE-MSGPACK-002__msgpack__9f0974d98983__AUTO_VERIFY.json"
+      },
+      "proposal_bindings": {
+        "json_path": {
+          "type": "effect_result",
+          "container": "scalar",
+          "effect": "json.file.available",
+          "field": "output_path"
+        },
+        "output_path": {
+          "type": "auto_path",
+          "suffix": ".msgpack"
+        }
+      },
+      "channel_schema": {
+        "output_path": {
+          "kind": "file",
+          "format": "msgpack-binary"
+        }
       }
     },
     "chart.raster.axis_title_unit_binding.v1": {
@@ -1298,12 +1420,15 @@
         "structured.decision_evidence.available"
       ],
       "result_fields": [
-        "status",
-        "selected_alternative",
+        "adapter",
         "decision_confidence",
         "input_path",
+        "model_dependency_count",
         "output_path",
-        "output_sha256"
+        "output_sha256",
+        "output_verified",
+        "selected_alternative",
+        "status"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/evidence_decision_synthesis.py",
@@ -1525,6 +1650,16 @@
         "docx.document.create"
       ],
       "requires": [],
+      "result_fields": [
+        "adapter",
+        "document_spec",
+        "intent_path",
+        "intent_sha256",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
       "source": {
         "origin": "Ubuntu",
         "packages": [
@@ -2339,6 +2474,16 @@
         "json.file.available"
       ],
       "requires": [],
+      "result_fields": [
+        "adapter",
+        "content_sha256",
+        "json_parsed",
+        "json_top_level_type",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/file_write_json.py",
         "modules": []
@@ -2361,6 +2506,12 @@
           "output_verified": true
         },
         "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-JSON-FILE-WRITE-001__json.file.write__AUTO_VERIFY.json"
+      },
+      "channel_schema": {
+        "output_path": {
+          "kind": "file",
+          "format": "json-text"
+        }
       }
     },
     "json.query.jq": {
@@ -2405,6 +2556,19 @@
       "requires": [
         "json.file.available"
       ],
+      "result_fields": [
+        "adapter",
+        "argv",
+        "input_path",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_text_excerpt",
+        "output_text_utf8_verified",
+        "output_verified",
+        "returncode",
+        "stderr"
+      ],
       "source": {
         "origin": "Ubuntu",
         "packages": [
@@ -2422,6 +2586,18 @@
         "independent_verifier": "python-stdlib-json",
         "mission_id": "ASTRA-VERIFY-JQ-STRUCTURED-DATA-001",
         "verification_evidence": "canonical/astra_runtime/evidence/ASTRA-VERIFY-JQ-STRUCTURED-DATA-001__INDEPENDENT.json"
+      },
+      "proposal_bindings": {
+        "json_path": {
+          "type": "effect_result",
+          "container": "scalar",
+          "effect": "json.file.available",
+          "field": "output_path"
+        },
+        "output_path": {
+          "type": "auto_path",
+          "suffix": ".json"
+        }
       }
     },
     "knowledge.consistency.assess": {
@@ -2783,10 +2959,22 @@
         "linux"
       ],
       "provides": [
+        "json.file.available",
         "numeric.scalar.expression.evaluate"
       ],
       "requires": [
         "typed.scalar.inputs.available"
+      ],
+      "result_fields": [
+        "adapter",
+        "expression",
+        "model_dependency_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "symbolic_result",
+        "value",
+        "variable_names"
       ],
       "source": {
         "dependency_closure": {
@@ -2838,6 +3026,12 @@
         "public_job_id": 109732664034,
         "public_run_id": 36666659921,
         "unsafe_rejection_pass": true
+      },
+      "channel_schema": {
+        "output_path": {
+          "kind": "file",
+          "format": "json-text"
+        }
       }
     },
     "pdf.extract.ocr.tesseract": {
@@ -3018,12 +3212,21 @@
       ],
       "requires": [],
       "result_fields": [
+        "broad_objective_decomposition",
+        "broad_objective_decomposition_available",
+        "candidate_capability_ids",
+        "clauses",
+        "external_discovery_allowed_for_unresolved_only",
+        "goal",
+        "goal_sha256",
+        "grounded_clause_count",
+        "input_contract_bindability_enforced",
+        "model_dependency_count",
         "output_path",
         "output_sha256",
-        "grounded_clause_count",
-        "candidate_capability_ids",
+        "output_verified",
         "unresolved_clause_indexes",
-        "model_dependency_count"
+        "whole_goal_external_discovery_forbidden_if_any_bound_grounding"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py",
@@ -4651,6 +4854,18 @@
         "python.source.audit"
       ],
       "requires": [],
+      "result_fields": [
+        "adapter",
+        "class_count",
+        "distinct_imported_module_count",
+        "file_count",
+        "function_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "unparseable_count",
+        "unparseable_paths"
+      ],
       "source": {
         "module": "ast",
         "type": "python_stdlib",
@@ -4801,13 +5016,16 @@
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
-        "python",
-        "tests",
         "audit",
-        "unittest",
-        "passed",
+        "count",
         "failed",
-        "skipped"
+        "passed",
+        "passes",
+        "python",
+        "skipped",
+        "tests",
+        "unit",
+        "unittest"
       ],
       "platforms": [
         "linux",
@@ -4897,6 +5115,17 @@
         "shell.command.result"
       ],
       "requires": [],
+      "result_fields": [
+        "adapter",
+        "argv",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "returncode",
+        "stderr",
+        "stdout"
+      ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/cli_command.py",
         "type": "python_stdlib"
@@ -5059,13 +5288,14 @@
       ],
       "requires": [],
       "result_fields": [
-        "status",
+        "adapter",
         "candidate_count",
-        "search_root",
         "glob",
         "model_dependency_count",
         "output_path",
-        "output_verified"
+        "output_verified",
+        "search_root",
+        "status"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/source_candidates_enumerate.py",
@@ -5361,6 +5591,20 @@
         "sqlite.table.create_from_json_records"
       ],
       "requires": [],
+      "result_fields": [
+        "adapter",
+        "collection_path",
+        "column_count",
+        "columns",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "row_count",
+        "sqlite_version",
+        "status_value",
+        "table_name"
+      ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/sqlite_table_stdlib.py",
         "module": "sqlite3",
@@ -5506,15 +5750,19 @@
       ],
       "requires": [],
       "result_fields": [
-        "status",
-        "source_path",
-        "source_sha256",
+        "adapter",
         "alternative_count",
         "constraint_count",
         "evidence_count",
+        "json_files_scanned",
+        "model_dependency_count",
         "output_path",
+        "output_sha256",
         "output_verified",
-        "model_dependency_count"
+        "schema_matches_validated",
+        "source_path",
+        "source_sha256",
+        "status"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/decision_evidence_locate.py",
@@ -5758,6 +6006,14 @@
         "text.file.available"
       ],
       "requires": [],
+      "result_fields": [
+        "adapter",
+        "content_sha256",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/file_write_text.py",
         "modules": []
@@ -5976,6 +6232,18 @@
         "xlsx.table.create_from_json_records"
       ],
       "requires": [],
+      "result_fields": [
+        "adapter",
+        "collection_path",
+        "column_count",
+        "columns",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "row_count",
+        "status_value"
+      ],
       "source": {
         "origin": "Ubuntu",
         "packages": [
@@ -6136,10 +6404,21 @@
         "linux"
       ],
       "provides": [
+        "json.file.available",
         "yaml.to_json"
       ],
       "requires": [
         "yaml.file.available"
+      ],
+      "result_fields": [
+        "adapter",
+        "input_path",
+        "input_sha256",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "top_level_type"
       ],
       "source": {
         "origin": "Ubuntu",
@@ -6174,6 +6453,252 @@
           ]
         },
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-YAML-JSON-YQ-001__RECEIPT.json"
+      },
+      "channel_schema": {
+        "output_path": {
+          "kind": "file",
+          "format": "json-text"
+        }
+      }
+    },
+    "python.source.symbols.index.ast": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.symbols.index.ast",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_source_symbol_index",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "source",
+        "symbols",
+        "definitions",
+        "references",
+        "callers",
+        "call",
+        "graph",
+        "navigation",
+        "index",
+        "ast",
+        "who",
+        "calls"
+      ],
+      "limitations": [
+        "Indexes repository-local Python files using the standard-library AST parser.",
+        "Intra-module reference resolution (local/module/builtin/unknown); cross-module resolution is by import table, not full type inference."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.source.symbol_index"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "call_edge_count",
+        "caller_index_size",
+        "file_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "reference_count",
+        "symbol_count",
+        "unparseable_count",
+        "unparseable_paths"
+      ],
+      "source": {
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-PYTHON-SYMBOL-INDEX-001",
+        "observed_effect": {
+          "files": 2196,
+          "symbols": 86796,
+          "references": 579194,
+          "call_edges": 221482,
+          "verified": true
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYTHON-SYMBOL-INDEX-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-PYTHON-SYMBOL-INDEX-001.json"
+      }
+    },
+    "python.source.change_impact.testselect.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.change_impact.testselect.v1",
+          "changed_paths": "${input.changed_paths}",
+          "diff_path": "${input.diff_path}",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}",
+          "test_roots": "${input.test_roots}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_change_impact_testselect",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "change",
+        "impact",
+        "diff",
+        "test",
+        "selection",
+        "blame",
+        "callers",
+        "affected",
+        "minimal",
+        "fast"
+      ],
+      "limitations": [
+        "Diff input is unified diff or an explicit changed-path list (paths imply module-wide change).",
+        "Selection is never-miss with carried evidence: same-named definitions across modules widen selection, they never omit."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.source.change_impact.test_selection"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "affected_module_count",
+        "candidate_test_count",
+        "changed_file_count",
+        "changed_symbol_count",
+        "ignored_non_python_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "selected_test_count",
+        "unknown_symbol_module_count"
+      ],
+      "source": {
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-CHANGE-IMPACT-001",
+        "observed_effect": {
+          "source_root": "canonical",
+          "changed_module": "canonical/runtime/capability_planner.py",
+          "changed_files": 1,
+          "changed_symbols": 75,
+          "affected_modules": 4457,
+          "candidate_tests": 2096,
+          "selected_tests": 2070,
+          "verified": true
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-CHANGE-IMPACT-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-CHANGE-IMPACT-001.json"
+      }
+    },
+    "python.source.symbols.resolve.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.symbols.resolve.v1",
+          "output_path": "${input.output_path}",
+          "queries": "${input.queries}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_symbol_resolve",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "resolve",
+        "definition",
+        "reference",
+        "import",
+        "alias",
+        "cross",
+        "module",
+        "symbol",
+        "lookup"
+      ],
+      "limitations": [
+        "Resolution is truthful, not omniscient: MULTI_HOME lists every candidate, EXTERNAL/BUILTIN declare their lane, UNRESOLVED carries its reason.",
+        "Dynamic receiver objects are not traced; dotted references walk module/class structure only."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.source.symbols.resolve"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "external_count",
+        "multi_home_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "query_count",
+        "resolved_count",
+        "unresolved_count"
+      ],
+      "source": {
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-SYMBOL-RESOLVE-001",
+        "observed_effect": {
+          "source_root": "canonical",
+          "queries": 4,
+          "resolved": 2,
+          "multi_home": 1,
+          "builtin": 1,
+          "external": 0,
+          "unresolved": 0,
+          "verified": true
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SYMBOL-RESOLVE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-SYMBOL-RESOLVE-001.json"
       }
     }
   },
