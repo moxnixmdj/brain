@@ -3987,6 +3987,67 @@
         "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_CONTRACT_ISSUE_ORCHESTRATION_FUSION_V1_V1.json"
       }
     },
+    "python.evidence.contract.supercomposer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.evidence.contract.supercomposer.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_evidence_contract_supercomposer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "evidence",
+        "contract",
+        "supercomposer",
+        "oracle"
+      ],
+      "limitations": [
+        "Evidence\u2192contract 5-kernel, deterministic"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "python.evidence.contract.super.verified",
+        "python.evidence.contract.family.verified"
+      ],
+      "requires": [
+        "evidence.evidence.family.super.verified",
+        "evidence.synthesis.super.verified",
+        "evidence.hypothesis.property_violation",
+        "evidence.oracle.independent_second",
+        "python.contract.issue.composition.verified"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_evidence_contract_supercomposer_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-PYTHON-EVIDENCE-CONTRACT-SUPERCOMPOSER-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_EVIDENCE_CONTRACT_SUPERCOMPOSER_V1_V1.json"
+      }
+    },
     "python.fault.localize.dynamic.dataflow.v1": {
       "action_template": {
         "args": {
@@ -4458,6 +4519,67 @@
           "output_verified": true
         },
         "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_ORCHESTRATION_SYMBOL_SUPERCOMPOSER_V1_V1.json"
+      }
+    },
+    "python.patch.review.supercomposer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.patch.review.supercomposer.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_patch_review_supercomposer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "patch",
+        "review",
+        "supercomposer",
+        "mutation"
+      ],
+      "limitations": [
+        "Patch\u2192review 5-kernel, deterministic"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "python.patch.review.super.verified",
+        "python.patch.review.family.verified"
+      ],
+      "requires": [
+        "python.patch.candidate.objective_acceptance_verified",
+        "python.patch.candidate.semantic_acceptance_verified",
+        "python.patch.candidate.strict_progress.multi_round.test_verified",
+        "python.review.diff_mutation_gate",
+        "python.review.diff_perf_gate"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_patch_review_supercomposer_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-PYTHON-PATCH-REVIEW-SUPERCOMPOSER-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_PATCH_REVIEW_SUPERCOMPOSER_V1_V1.json"
       }
     },
     "python.patch.search.test_guided.ast.v1": {
@@ -7907,6 +8029,67 @@
           "output_verified": true
         },
         "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_SWE_SUPERCOMPOSER_V1_V1.json"
+      }
+    },
+    "software.hardcore.closing.supercomposer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.hardcore.closing.supercomposer.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "software_hardcore_closing_supercomposer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "hardcore",
+        "closing",
+        "supercomposer",
+        "synthesis"
+      ],
+      "limitations": [
+        "5-kernel hardcore closing, deterministic"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "software.hardcore.closing.verified",
+        "software.hardcore.closing.synthesis.verified"
+      ],
+      "requires": [
+        "software.hardcore.final.verified",
+        "software.hardcore.final.synthesis.verified",
+        "software.repair.synthesis.triad_proven",
+        "software.test.contract.verified",
+        "software.verification.super.verified"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/software_hardcore_closing_supercomposer_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-SOFTWARE-HARDCORE-ULTIMATE-SUPERCOMPOSER-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_ULTIMATE_SUPERCOMPOSER_V1_V1.json"
       }
     },
     "software.patch.synthesize.cegis.z3.v1": {

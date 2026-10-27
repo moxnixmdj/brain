@@ -1,0 +1,17 @@
+{
+  "capability_id": "python.patch.review.supercomposer.v1",
+  "mission_id": "AUTO-VERIFY-HARDCORE_PYTHON_PATCH_REVIEW_SUPERCOMPOSER_V1-V1",
+  "observed_effect": {
+    "adapter": "python_patch_review_supercomposer_v1",
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "output_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_PATCH_REVIEW_SUPERCOMPOSER_V1.json",
+    "output_sha256": "ebcb3f3017f3ebae9df5c7052024138000e962fb433cc9b0e15f9d444626075d",
+    "output_verified": true,
+    "verified": true
+  },
+  "output_sha256": "ebcb3f3017f3ebae9df5c7052024138000e962fb433cc9b0e15f9d444626075d",
+  "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+  "state_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_PATCH_REVIEW_SUPERCOMPOSER_V1.json",
+  "verified": true
+}

@@ -1,0 +1,17 @@
+{
+  "capability_id": "software.hardcore.closing.supercomposer.v1",
+  "mission_id": "AUTO-VERIFY-HARDCORE_SOFTWARE_HARDCORE_ULTIMATE_SUPERCOMPOSER_V1-V1",
+  "observed_effect": {
+    "adapter": "software_hardcore_closing_supercomposer_v1",
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "output_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_HARDCORE_ULTIMATE_SUPERCOMPOSER_V1.json",
+    "output_sha256": "950efbf364059363b6f81762a67b96e7f3c19dc54a5d67b83cfc8d48c8c4577a",
+    "output_verified": true,
+    "verified": true
+  },
+  "output_sha256": "950efbf364059363b6f81762a67b96e7f3c19dc54a5d67b83cfc8d48c8c4577a",
+  "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+  "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_HARDCORE_ULTIMATE_SUPERCOMPOSER_V1.json",
+  "verified": true
+}
