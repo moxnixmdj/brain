@@ -268,18 +268,19 @@ def test_solve_runs_a_kernel_refused_step_in_the_local_dag_runner():
         result = adm.solve({"task_id": task_id, "goal": goal})
     finally:
         _cleanup(task_id)
-    # The work is real and the verdict is a refusal, and BOTH are asserted.  The
-    # goal says "repair the python source ... so that the unit tests pass", which
-    # promises a source change; the repair loop finds a patch, verifies it, replays
-    # the verification and then RESTORES the source, because source_write_authority
-    # is False and is enforced against in five separate guard modules.  The front
-    # door therefore fails closed -- correctly.  This assertion used to demand
-    # pass=True and predates the promised_source_change_errors gate.  Asserting the
-    # honest verdict is what keeps the independent oracle below meaningful: a patch
-    # that is real but unapplied must not be reported as a repaired file.
-    assert result["pass"] is False, result
-    assert result["status"] == "FAIL_CLOSED__PROMISED_SOURCE_CHANGE_NOT_APPLIED", result.get("status")
-    assert result["promised_source_change_errors"], result
+    # The work is real and so is the verdict, and BOTH are asserted.  The goal asks
+    # for "the repair report to <path>", so the promised result is the patch, not a
+    # written file: the loop finds a patch, verifies it, replays the verification and
+    # RESTORES the source, because source_write_authority is False and is enforced
+    # against in five separate guard modules.  The door accepts that authority only
+    # because the stated report carries a patch for the stated source that applies to
+    # the bytes on disk -- and the independent oracle below proves the patch is real
+    # by applying it to a private copy and running the bug's own tests.  A patch that
+    # does not apply, or a report the sentence never named, still fails closed.
+    assert result["pass"] is True, result
+    assert result["status"] == (
+        "PASS__CAPABILITY_DAG_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED"), result.get("status")
+    assert "promised_source_change_errors" not in result, result
     assert result["capability_dag"]["executor"] == adm.DAG_LOCAL_EXECUTOR
     assert all(row["pass"] is True for row in result["execution"])
     assert result["controller_execution"]["reason_kernel_not_used"] == "BOUND_CAPABILITY_SOURCE_UNSUPPORTED_IN_AT_LEAST_ONE_DAG_STEP"

@@ -57,6 +57,7 @@ Zero credit, zero spend, zero models.
 from __future__ import annotations
 
 import hashlib
+import json
 import pathlib
 import re
 import importlib.util
@@ -75,6 +76,7 @@ from canonical.runtime.live_integrated_brain_v1 import (
     load_verified_registry,
 )
 from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
+from canonical.runtime.bound_capabilities import python_repair_measured_acceptance_controller_v1 as _acceptance
 
 SCHEMA = "PROJECT_BRAIN_LIVE_BRAIN_ROUTE_ADMISSION_V1"
 _PATH_RE = re.compile(r"[A-Za-z0-9_./-]+/[A-Za-z0-9_.-]+")
@@ -1145,6 +1147,13 @@ _REPAIR_REPORT_PHRASE_RE = re.compile(
     re.IGNORECASE,
 )
 
+# The same words name tools as well as actions.  A verb is followed by its object
+# ("repair the source"); a tool name is followed by what it is ("repair loop",
+# "patch search").  This tuple is the discriminator, and it is a closed list on
+# purpose: an open rule here would silently drop real instructions.
+_TOOL_NOUNS = ("loop", "search", "tool", "engine", "report", "step", "routine",
+               "capability", "pass")
+
 
 def _promised_source_files(goal: str) -> list[str]:
     """Source files the goal asked to have CHANGED, not merely read.
@@ -1171,6 +1180,16 @@ def _promised_source_files(goal: str) -> list[str]:
             # changed.  Demanding a byte change in the nearest .py witness here
             # made a correct measured-acceptance report fail at the front door.
             continue
+        # "with the test guided repair LOOP", "with AST patch SEARCH": the word is
+        # naming a tool, not asking for a change.  Measured on 18ecf7db: that noun
+        # match made the sentence's witness tests the repair target, so the goal
+        # "repair the python source X ... so the unit tests in T1, T2 pass" demanded
+        # T1 change too and no repair could ever satisfy it -- the reference
+        # capability was refused with PROMISED_SOURCE_UNCHANGED:<test file> while
+        # the source it repaired was correctly restored.
+        if text[m.end():m.end() + 24].lstrip().lower().startswith(_TOOL_NOUNS):
+            continue
+            continue
         best = None
         best_at = None
         for raw, path in candidates:
@@ -1191,7 +1210,67 @@ def _source_digest(raw: str) -> str:
         return ""
 
 
-def promised_source_change_errors(goal: str, before: Mapping[str, str]) -> list[str]:
+def _statement_patch_authority(raw: str, artifacts: Mapping[str, Any] | None) -> bool:
+    """Does a stated report carry a patch for this source that really applies?
+
+    Measured on 18ecf7db: "Repair the python source X ... so the unit tests in T
+    pass, and save the repair report to R" was refused
+    PROMISED_SOURCE_CHANGE_NOT_APPLIED although the loop had found, verified and
+    replayed the patch and written it to R with the source restored -- which is
+    exactly the contract the family oracle at live_solver_families_v3.py:430
+    demands (untouched source plus one applicable patch in the report).  The door
+    and the bench were each right about a different sentence, so no run could
+    satisfy both.
+
+    The promise is read from the sentence, not assumed: a goal that states the
+    report's path promised a report.  That promise is only discharged by a patch
+    that applies cleanly to the bytes on disk and changes them -- the same bar
+    the oracle holds, checked with the applier the capability itself uses rather
+    than a second, looser one.
+    """
+    if not artifacts:
+        return False
+    target = (ROOT / raw).resolve()
+    try:
+        current = (ROOT / raw).read_text(encoding="utf-8")
+    except Exception:  # noqa: BLE001 - unreadable source is reported by the caller
+        return False
+    for stated in artifacts:
+        path = ROOT / str(stated)
+        if not path.is_file():
+            continue
+        try:
+            report = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:  # noqa: BLE001 - a non-JSON artifact promises no patch
+            continue
+        patches = report.get("patches") if isinstance(report, Mapping) else None
+        if not isinstance(patches, list):
+            continue
+        for patch in patches:
+            if not isinstance(patch, Mapping):
+                continue
+            named = str(patch.get("source_path") or "")
+            if not named:
+                continue
+            try:
+                if (ROOT / named).resolve() != target:
+                    continue
+            except Exception:  # noqa: BLE001
+                continue
+            diff = str(patch.get("unified_diff") or "")
+            if not diff.strip():
+                continue
+            try:
+                patched = _acceptance._apply_unified_diff(current, diff)
+            except Exception:  # noqa: BLE001 - a patch that does not apply is no promise
+                continue
+            if patched != current:
+                return True
+    return False
+
+
+def promised_source_change_errors(goal: str, before: Mapping[str, str],
+                                  artifacts: list[str] | None = None) -> list[str]:
     """Every source file the goal asked to repair must actually be different now.
 
     The repair loops find a patch, verify it, replay the verification, then restore
@@ -1199,6 +1278,12 @@ def promised_source_change_errors(goal: str, before: Mapping[str, str]) -> list[
     boundary for a capability to hold -- but the front door was reporting PASS for a
     file that is still broken.  That is the over-claim R6 exists to stop, one layer
     down: the goal promised a change and no change happened.
+
+    A repair verb is not always a promise to write in place.  When the sentence
+    also states where the repair report goes, the promised result is the patch,
+    and the file is untouched by design.  Accepting either authority is what lets
+    one sentence be satisfiable at all; the unchanged case still fails closed when
+    no stated report carries a patch that applies.
     """
     errors = []
     for raw, digest in (before or {}).items():
@@ -1206,6 +1291,8 @@ def promised_source_change_errors(goal: str, before: Mapping[str, str]) -> list[
         if not now:
             errors.append("PROMISED_SOURCE_UNREADABLE:" + raw)
         elif now == digest:
+            if _statement_patch_authority(raw, artifacts):
+                continue
             errors.append("PROMISED_SOURCE_UNCHANGED:" + raw)
     return errors
 
@@ -1682,7 +1769,8 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         result["pass"] = False
         result["failure_class"] = cls
         result["promised_artifact_errors"] = missing
-    unchanged = promised_source_change_errors(normalized, source_digests_before) \
+    unchanged = promised_source_change_errors(normalized, source_digests_before,
+                                                  future_artifacts) \
         if result.get("pass") is True else []
     if unchanged:
         result["runtime_status_before_source_change_check"] = result.get("status")
