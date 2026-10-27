@@ -7407,7 +7407,12 @@
     "callers",
     "affected",
     "minimal",
-    "fast"
+    "fast",
+    "changed",
+    "select",
+    "tests",
+    "impacted",
+    "which tests"
    ],
    "limitations": [
     "Diff input is unified diff or an explicit changed-path list (paths imply module-wide change).",

@@ -253,7 +253,13 @@ _KEY_ALIASES: dict[str, tuple[str, ...]] = {
     "report_path": ("report",),
     "source_json_path": ("source json", "state json"),
 }
-_PATH_LIST_KEYS = {"test_paths", "source_paths", "evidence_paths"}
+# changed_paths belongs here because the adapter demands a list -- it rejects a
+# bare string with CHANGE_IMPACT_INPUT_REQUIRED -- while the sentence that states
+# it uses the plural noun with one path in it ("the changed paths <F>"). Measured,
+# the binder handed it the string '/…/calc.py', so python.source.change_impact.
+# testselect.v1 was selected correctly and then raised from inside its own
+# adapter. The key's plural name already said it was a list.
+_PATH_LIST_KEYS = {"test_paths", "source_paths", "evidence_paths", "changed_paths"}
 # A key whose value is a LIST OF NAMES, not a list of paths and not one value.
 # "for the queries top leaf orphan" states three resolutions; the bare-token
 # branch takes one `[A-Za-z0-9_.:/-]+` run and bound `queries` to "top", so the
