@@ -1231,6 +1231,30 @@ def _credit_recall(rows: list, succeeded: bool) -> None:
 COMPOSED_EXECUTOR = "TYPE_LEVEL_COMPOSITION_LOCAL_ADAPTER"
 
 
+def _undo_chain_side_effects(record: dict[str, Any], why: str) -> list[str]:
+    """Remove the files a failed chain created, and say so in the record.
+
+    `pass=False` must describe the repository as well as the report.  Measured
+    2026-10-27 on the public runner, OUT_OF_SCOPE_MUST_FAIL_CLOSED scored 69/100 and
+    every miss was `FAIL_OPEN_SIDE_EFFECT: wrote <file> while failing`: the verdict
+    was fail-closed and the artifact was still there.
+    """
+    try:
+        from canonical.runtime import composer_route_v1 as croute
+        removed = croute.rollback_created(record)
+    except Exception as exc:  # noqa: BLE001 - a rollback failure must not break the report
+        # Named, never silent: a swallowed rollback error is indistinguishable from
+        # "there was nothing to undo", which is exactly the failure this whole branch
+        # exists to prevent.  Measured 2026-10-27: a NameError in the rollback was
+        # hidden here and the leak looked like a no-op.
+        record["side_effects_rollback_error"] = type(exc).__name__ + ":" + str(exc)[:200]
+        removed = []
+    if removed:
+        record["side_effects_rolled_back"] = removed
+        record["side_effects_rolled_back_because"] = why
+    return removed
+
+
 def _composed_holds_up(composed: dict[str, Any], goal: str, future_artifacts: list[str]) -> dict[str, Any]:
     """A fallback must be held to the same evidence as the path it replaces.
 
@@ -1257,6 +1281,10 @@ def _composed_holds_up(composed: dict[str, Any], goal: str, future_artifacts: li
     composed["failure_class"] = cls
     composed["promised_artifact_errors"] = still
     composed["composer_ran_but_left_the_artifact_missing"] = True
+    # The chain is being declared a failure, so what it created must stop existing.
+    # Otherwise the caller reports FAIL_CLOSED while the file it wrote sits on disk,
+    # and the next reader cannot tell a refused goal from an executed one.
+    _undo_chain_side_effects(composed, "promised_artifact_missing")
     return composed
 
 
@@ -1312,7 +1340,7 @@ def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | Non
                                if st.get("adapter_raised")],
             "composer_route": {k: routed.get(k) for k in ("token", "chain", "tried")},
             "composer_execution": {k: executed.get(k) for k in
-                                   ("steps", "produced", "status")},
+                                   ("steps", "produced", "status", "created_paths")},
             "capability_id": (routed["chain"] or [None])[-1],
             "elapsed_ns": perf_counter_ns() - started,
         }
@@ -1322,7 +1350,7 @@ def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | Non
         "executed": True, "execution_proof_type": COMPOSED_EXECUTOR,
         "composer_route": {k: routed.get(k) for k in ("token", "chain", "tried")},
         "composer_execution": {k: executed.get(k) for k in
-                               ("steps", "produced", "status")},
+                               ("steps", "produced", "status", "created_paths")},
         "capability_id": (routed["chain"] or [None])[-1],
         "controller": {"executor": COMPOSED_EXECUTOR, "returncode": 0,
                        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
@@ -1368,6 +1396,11 @@ def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | Non
         out["pass"] = False
         out["failure_class"] = "COMPOSED_CHAIN_NOT_VERIFIED"
         out["unverified_reason"] = verdict.get("reason")
+        # Same rule, one branch later: the verifier refused the chain's output, so
+        # the output must not survive the refusal.  This is the branch that scored
+        # 31 of 100 out-of-scope goals as fail-open on the public runner
+        # (2026-10-27): correct verdict, artifact left behind.
+        _undo_chain_side_effects(out, "composed_chain_not_verified")
     return out
 
 

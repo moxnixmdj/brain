@@ -3023,6 +3023,71 @@ def _declare_an_exit_status_answer(args: dict[str, Any], argv: Sequence[str]) ->
 _INVOKER_STAMPED_KEYS = ("capability_id", "dependency")
 
 
+_ROLLBACK_PATH_KEYS = ("output_path", "archive_path", "target_path", "path", "dest", "destination",
+                       "output", "out", "into", "to", "source_path", "input_path")
+
+
+def _pathish(value: Any) -> str | None:
+    """A string that the chain treats as a file it can touch, or None."""
+    if not isinstance(value, str) or not value or "\n" in value:
+        return None
+    if not _is_repository_path(value):
+        return None
+    return value
+
+
+def _created_between(args: Mapping[str, Any], before: set[str]) -> list[str]:
+    """Files this step brought into existence.
+
+    Only files that did not exist before the step and exist after it, so a step
+    that rewrites or truncates an existing file is not mistaken for a creator.
+    """
+    out: list[str] = []
+    for key, value in args.items():
+        rel = _pathish(value)
+        if rel is None or rel in before:
+            continue
+        if _exists_in_repo(rel) and rel not in out:
+            out.append(rel)
+    return out
+
+
+def rollback_created(executed: Mapping[str, Any]) -> list[str]:
+    """Undo the files a chain created, when the chain's own verdict says it failed.
+
+    A fail-closed report that leaves its artifact on disk is only half closed: the
+    next reader of the directory cannot tell the difference between "Brain did this"
+    and "Brain did this and then denied it".  Measured 2026-10-27 on the public
+    runner: OUT_OF_SCOPE_MUST_FAIL_CLOSED scored 69/100, and every one of the 31
+    misses was this exact shape -- status FAIL_CLOSED__COMPOSED_CHAIN_NOT_VERIFIED
+    with `FAIL_OPEN_SIDE_EFFECT: wrote <file> while failing`.  The verdict was
+    honest; the world was not.
+
+    Deleting is scoped to files the chain itself created and to the moment the
+    chain is declared failed, so a successful chain, or a file the goal already
+    had, is never touched.
+    """
+    # The chain record is the top-level result on the execute_chain path, and it is
+    # nested under `composer_execution` on the live-entry path.  Reading only the
+    # first shape made this a silent no-op exactly where it was needed.
+    candidates: list[str] = []
+    for source in (executed, (executed.get("composer_execution") or {})):
+        if isinstance(source, Mapping):
+            for rel in source.get("created_paths") or []:
+                if isinstance(rel, str) and rel not in candidates:
+                    candidates.append(rel)
+    removed: list[str] = []
+    for rel in candidates:
+        try:
+            path = (_repo_root() / str(rel))
+            if path.is_file():
+                path.unlink()
+                removed.append(str(rel))
+        except OSError:
+            continue
+    return removed
+
+
 def execute_chain(chain: Sequence[str], goal: str,
                   inputs: Mapping[str, Any] | None = None,
                   registry: Mapping[str, Any] | None = None) -> dict[str, Any]:
@@ -3034,6 +3099,7 @@ def execute_chain(chain: Sequence[str], goal: str,
     reg = registry if registry is not None else composer.load_registry()
     steps: list[dict[str, Any]] = []
     produced: dict[str, Any] = {}
+    created_paths: list[str] = []
     for index, cid in enumerate(chain):
         entry = reg.get(cid)
         if not isinstance(entry, Mapping):
@@ -3052,6 +3118,9 @@ def execute_chain(chain: Sequence[str], goal: str,
                     "steps": steps}
         sig = TS.signature(entry)
         args = bind(sig, goal, inputs, produced)
+        # Snapshot what already exists, so this step can only be credited with
+        # files it actually created.
+        existed_before = {v for v in (_pathish(a) for a in args.values()) if v and _exists_in_repo(v)}
         errors = TS.check(sig, args)
         missing = sorted(set(sig) - set(args))
         if missing:
@@ -3088,7 +3157,7 @@ def execute_chain(chain: Sequence[str], goal: str,
                     "status": "FAIL__COMPOSER_STEP_RAISED",
                     "failed_step": {"index": index, "capability_id": cid,
                                     "reason": reason},
-                    "steps": steps}
+                    "created_paths": list(created_paths), "steps": steps}
         # `run_adapter_locally` returns the adapter's own dict AS the result --
         # {"output_path": ..., "output_sha256": ..., "output_verified": True, ...}.
         # It does not wrap it under a "result" key, and it never has.  Reading
@@ -3100,6 +3169,7 @@ def execute_chain(chain: Sequence[str], goal: str,
         # pass=True, so a composed goal answered "done" with a record that said
         # nothing had been produced.  Measured over the composed path: every step
         # of every chain recorded {"raw": null} and `produced` was always {}.
+        created_paths.extend(_created_between(args, existed_before))
         observed = dict(result) if isinstance(result, Mapping) else None
         if observed is not None:
             # run_adapter_locally stamps these two itself; they are provenance
@@ -3130,11 +3200,11 @@ def execute_chain(chain: Sequence[str], goal: str,
         # decide whether the goal was achievable -- the caller still reports its
         # own honest gap, which is what it reported before the chain was believed.
         return {"schema": SCHEMA, "pass": False, "goal": goal, "steps": steps,
-                "produced": dict(produced),
+                "produced": dict(produced), "created_paths": list(created_paths),
                 "status": "FAIL__COMPOSER_CHAIN_RAN_NO_STEP",
                 "failed_step": {"index": 0, "capability_id": None},
                 "authority": "TYPE_LEVEL_COMPOSITION_EXECUTED_LOCALLY"}
     return {"schema": SCHEMA, "pass": True, "goal": goal, "steps": steps,
-            "produced": dict(produced),
+            "produced": dict(produced), "created_paths": list(created_paths),
             "status": "PASS__COMPOSER_CHAIN_EXECUTED",
             "authority": "TYPE_LEVEL_COMPOSITION_EXECUTED_LOCALLY"}

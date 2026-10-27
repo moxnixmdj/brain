@@ -25736,7 +25736,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6434,
+  "research_index_records": 6435,
   "routing_tokens": 1915,
   "skills": 18,
   "source_index_entry_points": 416,
@@ -25745,7 +25745,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "bb2b8ef4517417afd5d5952c781fb4f479b3042b4681d9eb9f89ea71f583ccfd"
+  "value": "d4e0798662220ae4750f084c053d38ae5f78bf2730c9ba9d92d6fdfef9fd6854"
  },
  "engines": [
   {
@@ -193674,6 +193674,31 @@
    }
   },
   {
+   "action_id": "FAIL_CLOSED_MEANS_THE_WORLD_IS_UNCHANGED_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/FAIL_CLOSED_MEANS_THE_WORLD_IS_UNCHANGED_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/FAIL_CLOSED_MEANS_THE_WORLD_IS_UNCHANGED_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "84765761436e6ab98c29aa28c4b3ab694dbfa7d7af65906d3446fe0ae09aa8bd",
+   "status": "",
+   "terms": {
+    "20261027": 1,
+    "a_chain_reports_the_files_it_created_and_both_branches_that_declare_it_failed_remove_them__measured_out_of_scope_fail_closed_17_of_20_before_20_of_20_after_on_one_seed_and_53_of_60_before_60_of_60_after_on_another_after_removing_two_templates_proven_servable_6_of_6_byte_correct": 1,
+    "closed": 1,
+    "fail": 1,
+    "fail_closed_means_the_world_is_unchanged_v1_20261027_v1": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "means": 1,
+    "thirty_one_of_one_hundred_out_of_scope_goals_left_their_artifact_on_disk_while_being_reported_fail_closed__measured_2026_10_27_on_the_public_runner_every_miss_was_fail_open_side_effect_wrote_a_file_while_failing_with_status_fail_closed__composed_chain_not_verified__and_a_further_class_of_misses_were_stale_out_of_scope_templates_the_system_actually_serves_correctly": 1,
+    "unchanged": 1,
+    "undo_the_files_a_chain_created_when_its_own_verdict_refuses_it_and_delete_the_out_of_scope_templates_the_system_actually_serves": 1,
+    "v1": 2,
+    "world": 1
+   }
+  },
+  {
    "action_id": "FAIL_CLOSED_REFUSAL_CARRIES_ITS_CAUSE_SO_THE_MACHINE_CAN_ROUTE_IT_V1_20261022_V1",
    "capability": false,
    "date": "2026-10-22",
@@ -212617,14 +212642,15 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "0e250da5858386cee1e4ba13fe550a4942c219ea7994cf33a56a9e2c91d68844",
+   "sha256": "bcb89df07a894b873c553fb7b9ca86f578528dcfd425cb9df26edcd0a07df0cf",
    "summary": "Routing a sentence to a typed capability chain.",
-   "symbol_count": 43,
+   "symbol_count": 46,
    "symbols": [
     "_bare_alternatives",
     "_bare_stated_value",
     "_character_flags",
     "_contradicts_the_stated_payload",
+    "_created_between",
     "_cut_flags",
     "_declare_a_consumed_output",
     "_declare_a_written_output",
@@ -212636,15 +212662,14 @@
     "_mask_a_quoted_value",
     "_no_flags",
     "_noun_matched_path",
+    "_pathish",
     "_preceding_words",
     "_prose_argv",
     "_prose_count",
     "_prose_ordinal",
     "_quoted_value",
     "_quoted_values",
-    "_repo_root",
-    "_sed_print_script",
-    "_slot_words"
+    "_repo_root"
    ],
    "terms": {
     "candidate_tokens": 1,
@@ -230646,9 +230671,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "d39474706fa953ebc9e949f9e8aa373fd977bd5db32c12daecb918f8c44dbf8b",
+   "sha256": "5b6600a6f1f67595dfc9bef0e7463ffe1a6d92862a4580ba6e0119f6c2fb1d83",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 42,
+   "symbol_count": 43,
    "symbols": [
     "LocalExecutionFailure",
     "_check_expectation",

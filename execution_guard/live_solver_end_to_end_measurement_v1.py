@@ -261,6 +261,15 @@ def gen_exact_literal(rng: random.Random, work: Path, i: int) -> Case:
 # written, so every wording here is a fail-closed test: the machine must not stretch a tool
 # it does not have into an answer it cannot give.
 _OOS_TEMPLATES = [
+    # REMOVED 2026-10-27, on evidence: "Sort the lines of {src} (alphabetically) and
+    # save ... to {o}" is NOT out of scope.  Measured on the six instances this
+    # generator produced for seed 90210: 6 passed, and in all six the output file was
+    # byte-identical to "".join(sorted(source.splitlines(True))) -- independently
+    # checked, not taken from the system's own verdict.  Keeping them here made the
+    # instrument report a fail-open for a request Brain actually serves, which
+    # corrupts the only number this family exists to produce.  An out-of-scope goal is
+    # a goal no capability can serve; when the system serves it correctly, the goal
+    # was never out of scope.
     "Translate the sentence '{s}' into {lang} and save it to {o}.",
     "Write a short poem about {thing} and save it to {o}.",
     "Summarize the file {src} into three sentences and save the summary to {o}.",
@@ -271,14 +280,12 @@ _OOS_TEMPLATES = [
     "Book a flight from {city} to Rome for next Monday and save the confirmation to {o}.",
     "Draft an email to {name} declining the meeting and save it to {o}.",
     "Count the number of vowels in the file {src} and save the count to {o}.",
-    "Sort the lines of {src} alphabetically and save them to {o}.",
     "Convert {n} degrees Celsius to Fahrenheit and save the result to {o}.",
     "Find the capital of {country} and save it to {o}.",
     "Generate a secure password of {n} characters and save it to {o}.",
     "Translate '{s}' into {lang} and write the translation to {o}.",
     "Summarize {src} in three sentences and save the summary to {o}.",
     "Write a Python tutorial for beginners about {thing} and save it to {o}.",
-    "Sort the lines of {src} and save the sorted result to {o}.",
     "Count the vowels in {src} and save the count to {o}.",
     "Plan a two week trip to {city} and save the itinerary to {o}.",
     "Explain the ownership rules of {country} and save the explanation to {o}.",
