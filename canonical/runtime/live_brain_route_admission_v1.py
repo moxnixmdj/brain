@@ -56,10 +56,13 @@ Zero credit, zero spend, zero models.
 """
 from __future__ import annotations
 
+import ast
 import hashlib
 import json
 import pathlib
 import re
+import subprocess
+from pathlib import Path
 import importlib.util
 import sys
 from copy import deepcopy
@@ -1297,6 +1300,239 @@ def promised_source_change_errors(goal: str, before: Mapping[str, str],
     return errors
 
 
+# ------------------------------------------------------------------ observe the world
+#
+# R6 asks whether the stated artifact exists and the source-change gate asks
+# whether the stated bytes moved.  Neither can see the two ways a run lies
+# without writing the wrong thing:
+#
+#   * it does NOTHING and is still reported as an exact acceptance (measured:
+#     "Create a git commit ... containing <dir>/util.py with the message ..."
+#     returned PASS__...EXACT_SEMANTIC_ACCEPTANCE_VERIFIED with pass=True, no
+#     commit, no change, and no artifact named for R6 to look for);
+#   * it DELETES the file it was asked to edit and is still reported as an exact
+#     acceptance (measured: "Rename the parameter text to value throughout the
+#     python source <dir>/util.py" left the file GONE and passed; `rename` is not
+#     in the repair verbs, so no digest was ever taken, and the report it wrote
+#     satisfied R6).
+#
+# The kernel already had the machinery for both -- canonical/runtime/execute_v1.py
+# snapshots the tree itself and names NO_EFFECT / OUT_OF_BOUNDS -- so this reuses
+# its snapshot and diff rather than inventing a second observation.  Only the
+# subtrees the sentence names are walked: a full-repository snapshot measured
+# 188 ms here, which is more than the repair loop itself costs.
+# A no-op is only a broken promise if the sentence promised a change.  Measured on
+# 8f7e411c with the first version of this gate, which asked the question of every
+# goal that named a path: ARCHIVE_VERIFY_GNU 3/3 -> 1/3, PDF_TEXT_EXTRACT 3/3 -> 0/3
+# and SQLITE_VERIFY_RECORDS 3/3 -> 1/3 all became FAIL_CLOSED__NO_OBSERVED_EFFECT,
+# because a verification answers with a verdict and writes nothing.  The refusal was
+# measuring a promise those sentences never made.
+# A no-op is only a broken promise if the sentence promised a FILE.  Two measured
+# corrections live here:
+#   * the first version asked the question of every goal naming a path, and
+#     ARCHIVE_VERIFY_GNU, SQLITE_VERIFY_RECORDS and PDF_TEXT_EXTRACT fell 3/3 -> 0-1/3,
+#     because verification answers with a verdict and pypdf answers with text;
+#   * the second version asked it of every goal carrying a write-ish word, and
+#     "Extract the text from <pdf> with pypdf" still failed for the same reason:
+#     "extract" produces content, not a file.
+# So the promise must be a FILESYSTEM result, read as one of exactly two things:
+# a stated artifact path, or a change verb applied to a path that exists.
+_CHANGE_VERB_RE = re.compile(
+    r"\b(?:write|create|save|generate|build|add|update|modify|convert|compress|"
+    r"repair|fix|patch|correct|commit|rename|move|copy|install|delete|remove|"
+    r"refactor|format|apply|rewrite|replace|edit|produce|emit|make)\b",
+    re.IGNORECASE)
+_DESTRUCTIVE_VERB_RE = re.compile(r"\b(?:delete|remove|move|rename|relocate|discard)\b", re.IGNORECASE)
+_OBSERVATION_MAX_FILES = 4000
+
+
+def _stated_paths(goal: str) -> list[str]:
+    """Every repository-relative path the sentence names, stated or to be created."""
+    out: list[str] = []
+    for raw, _path in goal_compiler._repo_paths(goal, ROOT):
+        raw = str(raw)
+        if front._CAPABILITY_ID_SHAPE.fullmatch(raw):
+            continue
+        if raw not in out:
+            out.append(raw)
+    return out
+
+
+def _destructive_targets(goal: str) -> set[str]:
+    """Paths whose ABSENCE the sentence asked for: deletion, or a move to a new name.
+
+    The verb alone is not enough, and getting this wrong would disable the check
+    that matters most.  Measured: "Rename the parameter text to value throughout
+    the python source <p>" names <p> after the word "rename" but asks for the
+    parameter to be renamed, not the file -- treating <p> as a deletion target
+    would license the very deletion this gate exists to catch.  So a removal verb
+    governs a path when the path is its direct object:
+
+      * delete|remove|discard  - the path follows the verb closely;
+      * move|rename|relocate   - the path follows the verb closely AND the
+                                 sentence states where it goes ("to"/"into").
+    """
+    text = str(goal or "")
+    paths = _stated_paths(goal)
+    out: set[str] = set()
+    for m in _DESTRUCTIVE_VERB_RE.finditer(text):
+        verb = m.group(0).lower()
+        for raw in paths:
+            at = text.find(raw, m.end())
+            if at < 0:
+                continue
+            gap = text[m.end():at]
+            if len(gap.strip()) > 24 or "\n" in gap:
+                continue
+            if verb in ("move", "rename", "relocate"):
+                tail = text[at + len(raw):at + len(raw) + 40].lstrip().lower()
+                if not (tail.startswith("to ") or tail.startswith("into ")):
+                    continue
+            out.add(raw)
+            break
+    return out
+
+
+def _git_head(path: Path) -> str:
+    """The commit this path's repository is on, or '' when it is not one."""
+    try:
+        proc = subprocess.run(["git", "-C", str(path), "rev-parse", "HEAD"],
+                              capture_output=True, text=True, timeout=10)
+        return proc.stdout.strip() if proc.returncode == 0 else ""
+    except Exception:  # noqa: BLE001 - no git is not an effect
+        return ""
+
+
+def _is_python_code(text: str) -> bool:
+    """Is this still source, or has a JSON report been written over it?
+
+    Syntax alone cannot answer that.  Measured: a report written over a module
+    parses cleanly, because `{"cells": [], "x": 1}` is a valid Python expression --
+    so a parse-only check would certify the corruption it exists to catch.  A
+    module that is nothing but one literal expression is data, not code; real
+    modules define, assign and import.
+    """
+    try:
+        tree = ast.parse(text)
+    except SyntaxError:
+        return False
+    body = tree.body
+    if not body:
+        return True
+    if len(body) == 1 and isinstance(body[0], ast.Expr) and isinstance(
+            body[0].value, (ast.Dict, ast.List, ast.Constant)):
+        return False
+    return True
+
+
+def _observation_roots(goal: str) -> list[Path]:
+    roots: list[Path] = []
+    for raw in _stated_paths(goal) + _future_artifacts(goal):
+        parent = (ROOT / raw).parent
+        while not parent.is_dir() and parent != ROOT:
+            parent = parent.parent
+        if parent not in roots:
+            roots.append(parent)
+    # never walk a directory twice: a root that contains another root is dropped
+    return [r for r in roots if not any(o != r and r in o.parents for o in roots)]
+
+
+def observe_world(goal: str) -> dict[str, Any]:
+    """What the filesystem looked like, read here rather than taken on report.
+
+    Bounded on purpose: the walked subtrees are the ones the sentence names, and
+    a subtree larger than _OBSERVATION_MAX_FILES is not walked at all (the path
+    existence and parseability checks still run).  Nothing in the answer is the
+    tool's own claim.
+    """
+    from canonical.runtime import execute_v1 as _kernel
+
+    stated = _stated_paths(goal)
+    files: dict[str, tuple[int, int]] = {}
+    walked = []
+    for root in _observation_roots(goal):
+        try:
+            count = sum(1 for _ in root.rglob("*"))
+        except OSError:
+            continue
+        if count > _OBSERVATION_MAX_FILES:
+            continue
+        walked.append(str(root.relative_to(ROOT)) if root != ROOT else ".")
+        for rel, stat_row in _kernel._snapshot(str(root)).items():
+            files[str(Path(root, rel).relative_to(ROOT))] = stat_row
+    parses: dict[str, bool] = {}
+    for raw in stated:
+        path = ROOT / raw
+        if path.is_file() and path.suffix.lower() == ".py":
+            parses[raw] = _is_python_code(path.read_text(encoding="utf-8", errors="replace"))
+    head = _git_head(ROOT / stated[0]) if stated else ""
+    return {"files": files, "walks": walked, "parses": parses,
+            "git_head": head, "stated": stated}
+
+
+def observed_effect_errors(goal: str, before: Mapping[str, Any],
+                           after: Mapping[str, Any], result: Mapping[str, Any],
+                           artifacts: list[str] | None = None) -> list[str]:
+    """Did the run leave any evidence at all, and did it leave the tree intact?
+
+    Three refusals, each measured on a real run:
+      * NAMED_INPUT_REMOVED       - a file the sentence named is gone afterwards
+                                    and no destructive verb governs it.
+      * NAMED_SOURCE_UNPARSEABLE  - a .py the sentence named parsed before and
+                                    does not parse now (writing JSON over a module
+                                    makes "the bytes changed" true).
+      * NO_OBSERVED_EFFECT        - nothing at all happened: no stated artifact on
+                                    disk, no change in the stated subtrees, no new
+                                    commit.  Only asked when the sentence names a
+                                    path, so a goal that only asks for an answer
+                                    is not accused of doing nothing.
+    """
+    errors: list[str] = []
+    exempt = _destructive_targets(goal)
+    for raw in before.get("parses") or {}:
+        if raw in exempt:
+            continue
+        if not (ROOT / raw).is_file():
+            errors.append("NAMED_INPUT_REMOVED:" + raw)
+        elif before["parses"].get(raw) and after.get("parses", {}).get(raw) is False:
+            errors.append("NAMED_SOURCE_UNPARSEABLE:" + raw)
+    if result.get("pass") is True:
+        promised_file = bool(artifacts) or (
+            bool(_CHANGE_VERB_RE.search(str(goal or ""))) and bool(after.get("stated")))
+        if promised_file:
+            present = any((ROOT / a).is_file() for a in (artifacts or []))
+            from canonical.runtime import execute_v1 as _kernel
+            moved = _kernel._diff(before.get("files") or {}, after.get("files") or {})["changed"]
+            committed = bool(after.get("git_head")) and after.get("git_head") != before.get("git_head")
+            if not (present or moved or committed):
+                errors.append("NO_OBSERVED_EFFECT")
+    return errors
+
+
+def _close_observations(result: dict[str, Any], goal: str,
+                         before: Mapping[str, Any] | None,
+                         artifacts: list[str] | None = None) -> dict[str, Any]:
+    """Apply the filesystem's verdict to a result, wherever the result came from.
+
+    The composed branch returns before the artifact and source-change gates run, so
+    hanging this check only on the single-capability path left the measured lies
+    untouched -- both of them were composed runs.  One function, called at every
+    exit, is the only placement that cannot be bypassed by a new early return.
+    """
+    if not isinstance(result, dict) or result.get("pass") is not True or before is None:
+        return result
+    observed = observed_effect_errors(goal, before, observe_world(goal), result, artifacts)
+    if not observed:
+        return result
+    result["runtime_status_before_observation_check"] = result.get("status")
+    cls = observed[0].split(":", 1)[0]
+    result["status"] = "FAIL_CLOSED__" + cls
+    result["pass"] = False
+    result["failure_class"] = cls
+    result["observed_effect_errors"] = observed
+    return result
+
+
 def _recall_for(goal: str) -> list:
     """What the machine remembers that bears on this goal, before it acts.
 
@@ -1591,8 +1827,9 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         gap_future_artifacts = _future_artifacts(gap_normalized)
         composed = _try_composed(task_id, goal, started)
         if composed is not None:
-            return _composed_holds_up(composed, gap_normalized,
-                                      gap_future_artifacts)
+            return _close_observations(
+                _composed_holds_up(composed, gap_normalized, gap_future_artifacts),
+                gap_normalized, observe_world(gap_normalized), gap_future_artifacts)
         return _fail(task_id, "FAIL__RAW_GOAL_COMPILATION_GAP", "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP", started,
                      compiler_code=exc.code, compiler_detail=exc.detail, route_admission=None)
     except Exception as exc:  # pragma: no cover - defensive, mirrors run_raw_goal
@@ -1601,6 +1838,9 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     future_artifacts = _future_artifacts(normalized)
     # ask memory what it knows about work like this, before deciding anything
     recalled = _recall_for(normalized)
+    # Taken before ANY branch can execute, so the composed early-returns are held to
+    # the same evidence as the single-capability path.
+    world_before = observe_world(normalized)
     admission = route_admission(normalized, compiled, admissible)
     admission["front_compiler_rules"] = list((compiled.get("front_compiler") or {}).get("rules_applied") or [])
     if admission.get("admitted") is not True:
@@ -1721,7 +1961,9 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
                     and composer_route.extract_content(normalized) is not None)):
             composed = _try_composed(task_id, goal, started)
             if composed is not None:
-                return _composed_holds_up(composed, normalized, future_artifacts)
+                return _close_observations(
+                    _composed_holds_up(composed, normalized, future_artifacts),
+                    normalized, world_before, future_artifacts)
         return _fail(task_id, "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
                      "ROUTE_ADMISSION_REJECTED:" + str(admission.get("rule")), started, **_extra)
     promised_sources = _promised_source_files(normalized)
@@ -1762,7 +2004,9 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
                 "promised_artifact_errors": list(missing)}
             # Composition was tried BECAUSE the artifact was missing, so it is
             # the one path that must be re-measured before it may report success.
-            return _composed_holds_up(composed, normalized, future_artifacts)
+            return _close_observations(
+                _composed_holds_up(composed, normalized, future_artifacts),
+                normalized, world_before, future_artifacts)
         result["runtime_status_before_artifact_check"] = result.get("status")
         cls = promised_artifact_class(missing)
         result["status"] = "FAIL_CLOSED__" + cls
@@ -1778,8 +2022,21 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         result["pass"] = False
         result["failure_class"] = "PROMISED_SOURCE_CHANGE_NOT_APPLIED"
         result["promised_source_change_errors"] = unchanged
+    # The third authority: what the filesystem says, not what the tool says.  A
+    # run that did nothing, or that removed the file it was asked to edit, has no
+    # claim to an exact acceptance no matter how clean its own report is.
+    observed = observed_effect_errors(normalized, world_before, observe_world(normalized),
+                                      result, future_artifacts) \
+        if result.get("pass") is True else []
+    if observed:
+        result["runtime_status_before_observation_check"] = result.get("status")
+        cls = observed[0].split(":", 1)[0]
+        result["status"] = "FAIL_CLOSED__" + cls
+        result["pass"] = False
+        result["failure_class"] = cls
+        result["observed_effect_errors"] = observed
     result["elapsed_ns"] = perf_counter_ns() - started
-    return result
+    return _close_observations(result, normalized, world_before, future_artifacts)
 
 
 # ------------------------------------------------------------------ learn on failure
