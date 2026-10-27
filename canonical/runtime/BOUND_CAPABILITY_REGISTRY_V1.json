@@ -2174,6 +2174,150 @@
     "public_run_id": 36685279194
    }
   },
+  "evidence.oracle.concrete_execution.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "evidence.oracle.concrete_execution.v1",
+     "output_path": "${input.output_path}",
+     "source": "${input.source}",
+     "source_path": "${input.source_path}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "evidence_oracle_concrete_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "evidence",
+    "oracle",
+    "concrete",
+    "contract",
+    "violation",
+    "independent",
+    "oracle",
+    "z3",
+    "crosshair",
+    "second"
+   ],
+   "limitations": [
+    "Second independent oracle via concrete execution (13-sample witness). Complements CrossHair symbolic oracle via Z3. No shared machinery. Deterministic, 0 model, $0."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "evidence.concrete_contract_violation",
+    "evidence.oracle.independent_second"
+   ],
+   "requires": [
+    "python.source.file.available"
+   ],
+   "result_fields": [
+    "adapter",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "status",
+    "checked",
+    "violations",
+    "verified",
+    "model_dependency_count",
+    "incremental_spend_usd"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/evidence_oracle_concrete_v1.py",
+    "type": "brain_native_deterministic_composition",
+    "version_family": "v1"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "AUTO-VERIFY-EVIDENCE-ORACLE-CONCRETE-EXECUTION-V1",
+    "observed_effect": {
+     "status": "CONTRACT_VIOLATION_FOUND",
+     "verified": true
+    },
+    "receipt_path": "canonical/verification/HARDCORE_VERIFY_EVIDENCE_ORACLE_CONCRETE_EXECUTION_V1_V1.json",
+    "state_path": "canonical/astra_runtime/state/HARDCORE_EVIDENCE_ORACLE_CONCRETE_EXECUTION_V1.json"
+   }
+  },
+  "execution.pipeline.8stage.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "execution.pipeline.8stage.v1",
+     "output_path": "${input.output_path}",
+     "stages": "${input.stages}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "execution_pipeline_8stage_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "execution",
+    "pipeline",
+    "8stage",
+    "argv",
+    "allowlisted",
+    "shell-free",
+    "composition",
+    "deterministic",
+    "postcondition"
+   ],
+   "limitations": [
+    "N argv-pipes via Popen(stdin=previous.stdout), no shell string, allowlist-checked, deadline-reaped, postcondition-verified. Composition without shell injection. Deterministic, $0, 0 model."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "execution.pipeline.completed",
+    "execution.composition.shell_free"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "returncode",
+    "verified",
+    "model_dependency_count",
+    "incremental_spend_usd"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/execution_pipeline_8stage_v1.py",
+    "type": "brain_native_deterministic_composition",
+    "version_family": "v1"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "AUTO-VERIFY-EXECUTION-PIPELINE-8STAGE-V1",
+    "observed_effect": {
+     "returncode": 0,
+     "verified": true
+    },
+    "receipt_path": "canonical/verification/HARDCORE_VERIFY_EXECUTION_PIPELINE_8STAGE_V1_V1.json",
+    "state_path": "canonical/astra_runtime/state/HARDCORE_EXECUTION_PIPELINE_8STAGE_V1.json"
+   }
+  },
   "finance.saccr.credit.addon.v1": {
    "action_template": {
     "args": {
@@ -3109,6 +3253,79 @@
     "public_job_id": 109732664034,
     "public_run_id": 36666659921,
     "unsafe_rejection_pass": true
+   }
+  },
+  "orchestration.verify.bridge_enumeration.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "orchestration.verify.bridge_enumeration.v1",
+     "output_path": "${input.output_path}",
+     "registry": "${input.registry}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "orchestration_bridge_enumeration_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "orchestration",
+    "bridge",
+    "enumeration",
+    "verified",
+    "emits",
+    "composition",
+    "heal",
+    "token",
+    "execution",
+    "fail-closed"
+   ],
+   "limitations": [
+    "Enumerates every producer\u00d7artifact execution, keeps EMITS_VERIFIED survivors with independent stdlib byte-oracle. Heals 80% dead/73% missing without editing 89 producers. Deterministic, $0, 0 model."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "orchestration.bridge_table.verified",
+    "orchestration.emits.verified"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "emits_verified",
+    "bridge_verified",
+    "counts",
+    "verified",
+    "model_dependency_count",
+    "incremental_spend_usd"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/orchestration_bridge_enumeration_v1.py",
+    "type": "brain_native_deterministic_composition",
+    "version_family": "v1"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "AUTO-VERIFY-ORCHESTRATION-BRIDGE-ENUMERATION-V1",
+    "observed_effect": {
+     "bridge_verified": 1,
+     "emits_verified": 19,
+     "verified": true
+    },
+    "receipt_path": "canonical/verification/HARDCORE_VERIFY_ORCHESTRATION_BRIDGE_ENUMERATION_V1_V1.json",
+    "state_path": "canonical/astra_runtime/state/HARDCORE_ORCHESTRATION_BRIDGE_ENUMERATION_V1.json"
    }
   },
   "pdf.extract.ocr.tesseract": {

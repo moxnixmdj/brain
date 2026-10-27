@@ -1,0 +1,30 @@
+{
+ "capability_id": "orchestration_bridge_enumeration_v1",
+ "incremental_spend_usd": 0,
+ "mission_id": "HARDCORE_VERIFY_ORCHESTRATION_BRIDGE_ENUMERATION_V1_V1",
+ "model_dependency_count": 0,
+ "observed_effect": {
+  "bridge_verified": 1,
+  "counts": {
+   "bridge_verified": 1,
+   "consumer_file_needs": 38,
+   "emits_verified": 19,
+   "execution_failures_classified": 200,
+   "producer_candidates": 71,
+   "registry_entries": 96,
+   "skipped": 54
+  },
+  "emits_verified": 19,
+  "incremental_spend_usd": 0,
+  "model_dependency_count": 0,
+  "output_path": "canonical/astra_runtime/state/HARDCORE_ORCHESTRATION_BRIDGE_ENUMERATION_V1.json",
+  "output_sha256": "f02548284029d0d9cd29327f595f0747184aa55d1fbd221ad90cf151573e3be1",
+  "output_verified": true,
+  "verified": true
+ },
+ "output_sha256": "f02548284029d0d9cd29327f595f0747184aa55d1fbd221ad90cf151573e3be1",
+ "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+ "state_path": "canonical/astra_runtime/state/HARDCORE_ORCHESTRATION_BRIDGE_ENUMERATION_V1.json",
+ "timestamp": "2026-10-27T14:56:42Z",
+ "verified": true
+}
