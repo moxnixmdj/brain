@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_R5_EVALUATOR_REFERENCE_SEMANTIC_VERIFY_V1",
+  "date": "2026-10-10",
+  "status": "PASS__LOCAL_EXACT_RUNTIME_PLUS_INDEPENDENT_WOLFRAM_SEMANTIC_CHECK__ZERO_GLOBAL_CREDIT",
+  "blobs": {
+    "runtime": "fab8c29e1ca96b8b47578768ccd7996360f0c866",
+    "tests": "f0e18b596f77e5022bba7df08dac9ea18d7169a5",
+    "scope": "6d609190ad4db5c6b2f0f20b54338800491d9158",
+    "source": "1b61fa4eb98e0039a46f349d31da725bb02c16e0",
+    "prior_runtime_verify": "e852c4fbc14147c17469f1a4ede4e274d768bbf7"
+  },
+  "local": {
+    "exact_runtime_blob": true,
+    "positive": 1,
+    "adversarial_passed": 4,
+    "adversarial_total": 4
+  },
+  "wolfram": {
+    "source_sha256": "ba13b47579ae77763704e30ca8d595be731024d3b9a1c7743e8b1b47a8a687c8",
+    "verification_sha256": "5450c66f11f432db7b6a358327b7e9175fa6e6570d3351b2cf50a9c5239ca168",
+    "hashes_match": true,
+    "negative_margin_counterexample": false
+  },
+  "boundaries": {
+    "new_python_adapter_independent_carrier": false,
+    "current_evaluator_membership": false,
+    "global_r5_leaf": false,
+    "domain_closure": false
+  },
+  "terminal_authority": false,
+  "terminal_credit_delta": 0
+}
