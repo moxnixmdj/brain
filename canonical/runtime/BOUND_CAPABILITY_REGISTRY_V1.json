@@ -7519,6 +7519,92 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PERFGATE-001__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-PERFGATE-001.json"
       }
+    },
+    "python.review.diff_security_gate.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.review.diff_security_gate.v1",
+          "diff_path": "${input.diff_path}",
+          "worktree_path": "${input.worktree_path}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "field": "gate",
+          "type": "field_equals",
+          "value": "PASS"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_review_diff_security_gate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "review",
+        "diff",
+        "security",
+        "bandit",
+        "gate",
+        "shell=True",
+        "eval",
+        "secrets",
+        "hardcoded password",
+        "injection",
+        "pull request",
+        "pr",
+        "changed lines"
+      ],
+      "limitations": [
+        "bandit stage needs a bandit-bearing python_executable (PyPI tool, offline-probed); absent -> gate PASS_BASELINE_ONLY recorded loudly, the security sweep honestly did not run.",
+        "only new-side changed line ranges decide blocking; hunk context lines inside a changed hunk share the range (conservatism widens blocking, never narrows a real changed-line finding out of blocking).",
+        "policy: HIGH severity blocks; MEDIUM blocks at HIGH confidence; B104-B107 hardcoded-secret family blocks regardless of bandit's LOW label; LOW otherwise advisory.",
+        "static heuristics only: bandit's own false-positive classes are advisory-visible, and absent tool classes (dataflow-level injection) are out of v1 scope."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.review.diff_security_gate"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "advisory_findings",
+        "bandit",
+        "blocking_findings",
+        "complete",
+        "diff_sha256",
+        "files_touched",
+        "gate",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "syntax_errors",
+        "verified"
+      ],
+      "source": {
+        "module": "bandit",
+        "type": "pypi",
+        "version_family": ">=1.7"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-SECGATE-001",
+        "observed_effect": {
+          "crown": "natural-language issue -> orchestrator diff -> lint + type + suite + coverage + perf + this security gate (review fan-in complete)",
+          "golden": "all six review gates PASS on the choreographed rename chain in ~1.8-2.0 s",
+          "isolation_leg": "covered, typed, lint-clean, fast shell=True wrapper with its own green test -> five gates PASS, ONLY this gate FAILs with B602 at pkg/util.py:10",
+          "deterministic": "security artifact byte-identical on rerun"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SECGATE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-SECGATE-001.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

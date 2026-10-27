@@ -1,0 +1,23 @@
+{
+  "mission_id": "ASTRA-VERIFY-SECGATE-001",
+  "status": "COMPLETE",
+  "golden": {
+    "all_six_gates": "PASS",
+    "chain_ms_two_runs": [
+      1986.3,
+      1797.6
+    ]
+  },
+  "blind_leg": {
+    "lint": "PASS",
+    "type": "PASS",
+    "suite": "PASS",
+    "coverage": "PASS",
+    "perf": "PASS",
+    "security": "FAIL"
+  },
+  "blocking_ids": [
+    "B602"
+  ],
+  "determinism": "security artifact byte-identical on rerun"
+}
