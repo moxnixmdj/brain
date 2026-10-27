@@ -1,0 +1,23 @@
+{
+ "receipt_for": "ASTRA-VERIFY-SUITE-REPAIR-001",
+ "capability_id": "repo.verifier.suite.repair.v1",
+ "adapter_module": "goal_compiler",
+ "observed": {
+  "before_red": 14,
+  "after_green": "136/136 OK on the CI module set; 33/33 canonical verifier; 444-test impacted sweep delta +14/-0",
+  "anti_invention_restored": "test_source_root_is_never_filled_by_default green: CAPABILITY_INPUTS_MISSING:source_root",
+  "genericity_fix": "python joined GENERIC_MATCH_TOKENS; audit family selections measured restored (audit.ast score 33 > fusion 16)",
+  "grounding_repinned": "GROUNDED never at 37 goals; AMBIGUOUS_BOUNDED pinned at 3 named goals with cause records",
+  "registry_deltas": "tree_sitter row declares ${input.source_root}; two fleet rows lost the keyword 'audit' it never owned (fusion, pipeline verifier); artifact recompiled, digest and fixed-point pins green",
+  "files": [
+   "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+   "canonical/runtime/goal_compiler.py",
+   "canonical/runtime/state/experience_v1.json",
+   "canonical/tests/test_brain_unified_model_v1.py",
+   "canonical/tests/test_goal_compiler_world_binding_v1.py",
+   "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+   "canonical/action_intents/REPAIR_VERIFIER_SUITE_ANTI_INVENTION_AND_GENERIC_RANKING_V1_20261027_V1.json"
+  ],
+  "harvest_note": "every fix reuses machinery the brain already holds: registry contract placeholders, GENERIC_MATCH_TOKENS protocol, per-suite re-measure docstrings; no new framework, no adapter bytes touched"
+ }
+}

@@ -64,6 +64,14 @@ STOPWORDS={
 GENERIC_MATCH_TOKENS={
     "generate","image","text","extract","create","save","output","input",
     "file","read","write","convert","process","data",
+    # "python" alone names a language, not an operation: zero-input fleet rows
+    # whose entire match is the word "python" score 16 on "Audit python source
+    # structure..." and outrank the right capability only because their empty
+    # input contract makes them bindable where python.source.audit.ast (33)
+    # still needs an unstated source_root. Measured: adding "python" here
+    # restores the audit family selections (compiler + world-binding suites)
+    # and no capability in the live registry loses its last distinctive token.
+    "python",
     # Repository-self-referential vocabulary. Every goal in this repository
     # names the project ("PROJECT BRAIN") and cites a scratch destination
     # under canonical/astra_runtime/tmp/, so these tokens are present in
