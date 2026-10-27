@@ -1,0 +1,17 @@
+{
+  "capability_id": "python.evidence.contract.supercomposer.v1",
+  "mission_id": "AUTO-VERIFY-HARDCORE_PYTHON_EVIDENCE_CONTRACT_SUPERCOMPOSER_V1-V1",
+  "observed_effect": {
+    "adapter": "python_evidence_contract_supercomposer_v1",
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "output_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_EVIDENCE_CONTRACT_SUPERCOMPOSER_V1.json",
+    "output_sha256": "5902199cd082ac90b51d06d35534553c418fded1e8cf805375c5c70efd7da90d",
+    "output_verified": true,
+    "verified": true
+  },
+  "output_sha256": "5902199cd082ac90b51d06d35534553c418fded1e8cf805375c5c70efd7da90d",
+  "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+  "state_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_EVIDENCE_CONTRACT_SUPERCOMPOSER_V1.json",
+  "verified": true
+}
