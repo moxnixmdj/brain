@@ -1,0 +1,1 @@
+{"capability_id":"python.test.pipeline.verifier.v1","found":{"execution.pipeline.completed":true,"python.test.measurement.objective":true,"python.tests.audit":true,"test.selection.minimal":true,"test.slice.never_miss.verified":true},"incremental_spend_usd":0,"model_dependency_count":0,"schema":"PROJECT_BRAIN_PYTHON_TEST_PIPELINE_VERIFIER_V1","verified":true}
