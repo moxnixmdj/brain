@@ -40,7 +40,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The machine could not answer a single question about one source file, and three independent mechanisms each blocked a different sentence, none of them about understanding the request. First, source_root is a directory key in goal_front_compiler_v1._PATH_DIR_KEYS, so a sentence naming one .py file bound nothing: \"Count the functions defined in the python file <abs>/calc.py\" returned FAIL_CLOSED__PROMISED_ARTIFACT_MISSING with compiled_capability_id None, and both python_source_audit and python_source_symbol_index raised PYTHON_AUDIT_ROOT_MISSING / PYTHON_INDEX_ROOT_MISSING on anything but a directory. Second, goal_compiler._score awards 3 points per matched requires token and counts every match as specificity, on the stated reasoning that requirements are informative for environment qualifiers. python.source.file.available is not a qualifier: among the 56 registry entries that declare any precondition its tokens appear in available 82.1%, file 55.4%, source 35.7%, python 28.6%, then a clear gap to test and corpus at 19.6%. So on \"Count the functions defined in the python file F ...\" python.contract.check.crosshair.v1 collected 6 points and specificity 2 for requiring that a python file exist and scored 22, beating the 15 of python.source.audit.ast whose matched keywords were functions and python -- the two words that ARE the question. A capability was chosen for a sentence because both of them need a python file to be there. Third, python.source.symbols.resolve.v1 parsed queries with json.loads, but the binder hands an adapter what the sentence said, so the correctly routed \"resolve the symbol top\" died on JSONDecodeError: Expecting value: line 1 column 1.",
- "canonical_base_commit": "846c2f010d1c0f7d20b32046fa9a2d39663260bb",
+ "canonical_base_commit": "384c6caf7aee25d5ea4587cb4417d48c65f5e44a",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -54,7 +54,7 @@
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
  "load_bearing_primary": {
-  "canonical_base_commit": "846c2f010d1c0f7d20b32046fa9a2d39663260bb",
+  "canonical_base_commit": "384c6caf7aee25d5ea4587cb4417d48c65f5e44a",
   "constructive_gap_for_open_obligation_ids": [
    "AUTOMATIONBENCH_GE_40",
    "CHARTOGRAPHY_TOOLS_GE_89",
@@ -89,7 +89,7 @@
   }
  ],
  "recursive_obs": {
-  "canonical_base_commit": "846c2f010d1c0f7d20b32046fa9a2d39663260bb",
+  "canonical_base_commit": "384c6caf7aee25d5ea4587cb4417d48c65f5e44a",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "CHARGING_THE_TOKENS_OF_A_STATED_PATH_TO_THE_COVERAGE_BUDGET",
@@ -2015,11 +2015,11 @@
      "path": "canonical/runtime/goal_front_compiler_v1.py"
     },
     {
-     "git_blob_sha": "fed222b6209ff5161afc7cadc41d2ef3722caad3",
+     "git_blob_sha": "e87e08007ee5be5c3f95340a8db2bf4ded522e90",
      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
     },
     {
-     "git_blob_sha": "090339914b6fb2441d4c7aa3abe3075da51fab4f",
+     "git_blob_sha": "91d5ab934685365f6537b2273b5969439689c568",
      "path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
     }
    ],
