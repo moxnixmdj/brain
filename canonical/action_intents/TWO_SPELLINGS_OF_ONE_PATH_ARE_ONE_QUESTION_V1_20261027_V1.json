@@ -35,7 +35,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The compiler states repository-relative paths and this adapter read source-root-relative ones, so a sentence that named a real test file inside the stated source root was refused with TEST_PATH_INVALID and the capability was unreachable from the front door.",
- "canonical_base_commit": "a18dd06338de68d3a9859951d2f7dff28839ff9a",
+ "canonical_base_commit": "29e23ef17fc05bda5e87619040172fca531bfe99",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -49,7 +49,7 @@
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
  "load_bearing_primary": {
-  "canonical_base_commit": "a18dd06338de68d3a9859951d2f7dff28839ff9a",
+  "canonical_base_commit": "29e23ef17fc05bda5e87619040172fca531bfe99",
   "constructive_gap_for_open_obligation_ids": [
    "AUTOMATIONBENCH_GE_40",
    "CHARTOGRAPHY_TOOLS_GE_89",
@@ -84,7 +84,7 @@
   }
  ],
  "recursive_obs": {
-  "canonical_base_commit": "a18dd06338de68d3a9859951d2f7dff28839ff9a",
+  "canonical_base_commit": "29e23ef17fc05bda5e87619040172fca531bfe99",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "DECLARING_A_DESTINATION_FOR_A_COMMAND_WHOSE_STDOUT_IS_THE_SOURCE_FILE_SO_THE_WRITE_TRUNCATED_IT",
@@ -1834,7 +1834,7 @@
    "selected_route_checked_at_utc": "2026-10-26T19:40:13Z",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-27T08:40:00Z",
+    "checked_at_utc": "2026-10-27T08:21:36Z",
     "execution_dependencies": [
      {
       "dependency": "python3 3.11.2",
