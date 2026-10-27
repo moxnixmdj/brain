@@ -1,0 +1,24 @@
+{
+  "capability_id": "code.impact.tree_sitter.testselect.v1",
+  "mission_id": "HARDCORE-VERIFY-CODE-TREE-SITTER-IMPACT-V1",
+  "observed_effect": {
+    "adapter": "code_tree_sitter_impact_v1",
+    "affected_file_count": 3,
+    "candidate_test_count": 2,
+    "execution_trace_verified": true,
+    "fallback_count": 0,
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "output_path": "canonical/astra_runtime/state/HARDCORE_CODE_TREE_SITTER_IMPACT_V1.json",
+    "output_sha256": "2df0eae6d95a582bf1dee3028cf293d8f1e73a873cabc8cef46377995a7991ae",
+    "output_verified": true,
+    "selected_test_count": 1,
+    "test_count": 11,
+    "test_suite": "canonical/tests/test_code_tree_sitter_swe_v1.py",
+    "verified": true
+  },
+  "output_sha256": "2df0eae6d95a582bf1dee3028cf293d8f1e73a873cabc8cef46377995a7991ae",
+  "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+  "state_path": "canonical/astra_runtime/state/HARDCORE_CODE_TREE_SITTER_IMPACT_V1.json",
+  "verified": true
+}

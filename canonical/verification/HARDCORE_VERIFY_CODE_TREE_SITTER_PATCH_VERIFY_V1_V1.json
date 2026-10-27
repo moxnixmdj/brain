@@ -1,0 +1,23 @@
+{
+  "capability_id": "code.patch.tree_sitter.verify.v1",
+  "mission_id": "HARDCORE-VERIFY-CODE-TREE-SITTER-PATCH-VERIFY-V1",
+  "observed_effect": {
+    "adapter": "code_tree_sitter_patch_verify_v1",
+    "execution_trace_verified": true,
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "output_path": "canonical/astra_runtime/state/HARDCORE_CODE_TREE_SITTER_PATCH_VERIFY_V1.json",
+    "output_sha256": "28f24cad43c055a11c9a3deff947e57b6958cacd317d4db402be1c41e6abf4d3",
+    "output_verified": true,
+    "source_restored": true,
+    "status": "PATCH_VERIFIED",
+    "test_count": 11,
+    "test_pass_count": 2,
+    "test_suite": "canonical/tests/test_code_tree_sitter_swe_v1.py",
+    "verified": true
+  },
+  "output_sha256": "28f24cad43c055a11c9a3deff947e57b6958cacd317d4db402be1c41e6abf4d3",
+  "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+  "state_path": "canonical/astra_runtime/state/HARDCORE_CODE_TREE_SITTER_PATCH_VERIFY_V1.json",
+  "verified": true
+}

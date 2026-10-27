@@ -1,0 +1,3 @@
+engine: tree-sitter
+nested:
+  enabled: true

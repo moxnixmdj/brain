@@ -1359,6 +1359,225 @@
         "verified_case": 1
       }
     },
+    "code.impact.tree_sitter.testselect.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "code.impact.tree_sitter.testselect.v1",
+          "changed_paths": "${input.changed_paths}",
+          "index_path": "${input.index_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "code_tree_sitter_impact_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "code",
+        "impact",
+        "test",
+        "selection",
+        "tree-sitter",
+        "dependencies",
+        "change",
+        "slice"
+      ],
+      "limitations": [
+        "Selects from tests present in a fresh tree-sitter index; explicit test_paths may widen the candidate set.",
+        "Static and textual dependency evidence is an over-approximation, not a proof about arbitrary reflection or external build plugins; unresolved local imports, changed syntax errors, or an empty reachable set select every candidate test."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "code.impact.test_selection.verified",
+        "code.test.slice.tree_sitter"
+      ],
+      "requires": [
+        "code.symbols.tree_sitter.indexed"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified",
+        "selected_test_count",
+        "candidate_test_count",
+        "affected_file_count",
+        "fallback_count",
+        "model_dependency_count",
+        "incremental_spend_usd"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/code_tree_sitter_impact_v1.py",
+        "dependency_closure": {
+          "closure_sha256": "aa6f8fde9ca370703204ac2ef4e109d32624f9fafe925e0af7b56e2bebd65d13",
+          "resolver": "pip-download-only-binary",
+          "root_filename": "tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+          "root_project": "tree_sitter_languages",
+          "root_version": "1.10.2",
+          "schema": "PROJECT_BRAIN_PYPI_WHEEL_CLOSURE_V1",
+          "source_only_artifacts_allowed": false,
+          "wheel_count": 2,
+          "wheels": [
+            {
+              "bytes": 490490,
+              "filename": "tree_sitter-0.20.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "metadata_url": "https://pypi.org/pypi/tree_sitter/0.20.4/json",
+              "project": "tree_sitter",
+              "sha256": "527ca72c6a8f60fa719af37fa86f58b7ad0e07b8f74d1c1c7e926c5c888a7e6b",
+              "url": "https://files.pythonhosted.org/packages/3f/ce/80b12e0e470bf939dd57507fedad5cdc30e92391703031561e829d6a1819/tree_sitter-0.20.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "version": "0.20.4"
+            },
+            {
+              "bytes": 8422544,
+              "filename": "tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "metadata_url": "https://pypi.org/pypi/tree_sitter_languages/1.10.2/json",
+              "project": "tree_sitter_languages",
+              "sha256": "9ae34ac314a7170be24998a0f994c1ac80761d8d4bd126af27ee53a023d3b849",
+              "url": "https://files.pythonhosted.org/packages/96/81/ab4eda8dbd3f736fcc9a508bc69232d3b9076cd46b932d9bf9d49b9a1ec9/tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "version": "1.10.2"
+            }
+          ]
+        },
+        "licenses": {
+          "tree_sitter": "MIT",
+          "tree_sitter_languages": "Apache-2.0"
+        },
+        "metadata_url": "https://pypi.org/pypi/tree_sitter_languages/1.10.2/json",
+        "project": "tree_sitter_languages",
+        "type": "pypi",
+        "version": "1.10.2",
+        "wheel_filename": "tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "wheel_sha256": "9ae34ac314a7170be24998a0f994c1ac80761d8d4bd126af27ee53a023d3b849"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "canonical.tests.test_code_tree_sitter_swe_v1",
+        "mission_id": "HARDCORE-VERIFY-CODE-TREE-SITTER-IMPACT-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_CODE_TREE_SITTER_IMPACT_V1_V1.json"
+      }
+    },
+    "code.index.tree_sitter.incremental.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "code.index.tree_sitter.incremental.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "code_tree_sitter_incremental_index_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "code",
+        "index",
+        "tree-sitter",
+        "incremental",
+        "symbols",
+        "references",
+        "multi-language"
+      ],
+      "limitations": [
+        "Repository-local index for Python, JavaScript, TypeScript, Rust, Go, Java, C++, and YAML using the pinned tree-sitter substrate.",
+        "Warm reuse requires matching source and row hashes; syntax errors are reported per file, and missing parsers fail closed."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "code.symbols.tree_sitter.indexed",
+        "code.references.tree_sitter.indexed",
+        "code.index.incremental.verified"
+      ],
+      "requires": [
+        "code.ast.tree_sitter.available"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified",
+        "file_count",
+        "definition_count",
+        "reference_count",
+        "syntax_error_count",
+        "parsed_file_count",
+        "reused_file_count",
+        "model_dependency_count",
+        "incremental_spend_usd"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/code_tree_sitter_incremental_index_v1.py",
+        "dependency_closure": {
+          "closure_sha256": "aa6f8fde9ca370703204ac2ef4e109d32624f9fafe925e0af7b56e2bebd65d13",
+          "resolver": "pip-download-only-binary",
+          "root_filename": "tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+          "root_project": "tree_sitter_languages",
+          "root_version": "1.10.2",
+          "schema": "PROJECT_BRAIN_PYPI_WHEEL_CLOSURE_V1",
+          "source_only_artifacts_allowed": false,
+          "wheel_count": 2,
+          "wheels": [
+            {
+              "bytes": 490490,
+              "filename": "tree_sitter-0.20.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "metadata_url": "https://pypi.org/pypi/tree_sitter/0.20.4/json",
+              "project": "tree_sitter",
+              "sha256": "527ca72c6a8f60fa719af37fa86f58b7ad0e07b8f74d1c1c7e926c5c888a7e6b",
+              "url": "https://files.pythonhosted.org/packages/3f/ce/80b12e0e470bf939dd57507fedad5cdc30e92391703031561e829d6a1819/tree_sitter-0.20.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "version": "0.20.4"
+            },
+            {
+              "bytes": 8422544,
+              "filename": "tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "metadata_url": "https://pypi.org/pypi/tree_sitter_languages/1.10.2/json",
+              "project": "tree_sitter_languages",
+              "sha256": "9ae34ac314a7170be24998a0f994c1ac80761d8d4bd126af27ee53a023d3b849",
+              "url": "https://files.pythonhosted.org/packages/96/81/ab4eda8dbd3f736fcc9a508bc69232d3b9076cd46b932d9bf9d49b9a1ec9/tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "version": "1.10.2"
+            }
+          ]
+        },
+        "licenses": {
+          "tree_sitter": "MIT",
+          "tree_sitter_languages": "Apache-2.0"
+        },
+        "metadata_url": "https://pypi.org/pypi/tree_sitter_languages/1.10.2/json",
+        "project": "tree_sitter_languages",
+        "type": "pypi",
+        "version": "1.10.2",
+        "wheel_filename": "tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "wheel_sha256": "9ae34ac314a7170be24998a0f994c1ac80761d8d4bd126af27ee53a023d3b849"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "canonical.tests.test_code_tree_sitter_swe_v1",
+        "mission_id": "HARDCORE-VERIFY-CODE-TREE-SITTER-INCREMENTAL-INDEX-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_CODE_TREE_SITTER_INCREMENTAL_INDEX_V1_V1.json"
+      }
+    },
     "code.multilanguage.parse.tree_sitter.v1": {
       "action_template": {
         "args": {
@@ -1418,7 +1637,8 @@
         "error_count",
         "verified",
         "model_dependency_count",
-        "incremental_spend_usd"
+        "incremental_spend_usd",
+        "skipped_count"
       ],
       "source": {
         "module": "tree_sitter",
@@ -1434,6 +1654,117 @@
         },
         "receipt_path": "canonical/verification/HARDCORE_VERIFY_CODE_MULTILANGUAGE_PARSE_TREE_SITTER_V1_V1.json",
         "state_path": "canonical/astra_runtime/state/HARDCORE_CODE_MULTILANGUAGE_PARSE_TREE_SITTER_V1.json"
+      }
+    },
+    "code.patch.tree_sitter.verify.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "code.patch.tree_sitter.verify.v1",
+          "edits": "${input.edits}",
+          "index_path": "${input.index_path}",
+          "output_path": "${input.output_path}",
+          "selection_path": "${input.selection_path}",
+          "test_cwd": "${input.test_cwd}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "code_tree_sitter_patch_verify_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "code",
+        "patch",
+        "tree-sitter",
+        "verify",
+        "test",
+        "exact-span",
+        "multi-language"
+      ],
+      "limitations": [
+        "Candidate-only exact-byte edits bounded by real tree-sitter nodes; fresh matching index and impact artifacts are mandatory.",
+        "The candidate must reparse without syntax errors and pass the selected test command for every replay; original bytes are restored in all cases, and no merge or promotion authority is conferred."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "code.patch.tree_sitter.verified",
+        "code.patch.multilanguage.test_verified"
+      ],
+      "requires": [
+        "code.symbols.tree_sitter.indexed",
+        "code.impact.test_selection.verified"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified",
+        "status",
+        "source_restored",
+        "test_pass_count",
+        "unified_diff",
+        "model_dependency_count",
+        "incremental_spend_usd"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/code_tree_sitter_patch_verify_v1.py",
+        "dependency_closure": {
+          "closure_sha256": "aa6f8fde9ca370703204ac2ef4e109d32624f9fafe925e0af7b56e2bebd65d13",
+          "resolver": "pip-download-only-binary",
+          "root_filename": "tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+          "root_project": "tree_sitter_languages",
+          "root_version": "1.10.2",
+          "schema": "PROJECT_BRAIN_PYPI_WHEEL_CLOSURE_V1",
+          "source_only_artifacts_allowed": false,
+          "wheel_count": 2,
+          "wheels": [
+            {
+              "bytes": 490490,
+              "filename": "tree_sitter-0.20.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "metadata_url": "https://pypi.org/pypi/tree_sitter/0.20.4/json",
+              "project": "tree_sitter",
+              "sha256": "527ca72c6a8f60fa719af37fa86f58b7ad0e07b8f74d1c1c7e926c5c888a7e6b",
+              "url": "https://files.pythonhosted.org/packages/3f/ce/80b12e0e470bf939dd57507fedad5cdc30e92391703031561e829d6a1819/tree_sitter-0.20.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "version": "0.20.4"
+            },
+            {
+              "bytes": 8422544,
+              "filename": "tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "metadata_url": "https://pypi.org/pypi/tree_sitter_languages/1.10.2/json",
+              "project": "tree_sitter_languages",
+              "sha256": "9ae34ac314a7170be24998a0f994c1ac80761d8d4bd126af27ee53a023d3b849",
+              "url": "https://files.pythonhosted.org/packages/96/81/ab4eda8dbd3f736fcc9a508bc69232d3b9076cd46b932d9bf9d49b9a1ec9/tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "version": "1.10.2"
+            }
+          ]
+        },
+        "licenses": {
+          "tree_sitter": "MIT",
+          "tree_sitter_languages": "Apache-2.0"
+        },
+        "metadata_url": "https://pypi.org/pypi/tree_sitter_languages/1.10.2/json",
+        "project": "tree_sitter_languages",
+        "type": "pypi",
+        "version": "1.10.2",
+        "wheel_filename": "tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "wheel_sha256": "9ae34ac314a7170be24998a0f994c1ac80761d8d4bd126af27ee53a023d3b849"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "canonical.tests.test_code_tree_sitter_swe_v1",
+        "mission_id": "HARDCORE-VERIFY-CODE-TREE-SITTER-PATCH-VERIFY-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_CODE_TREE_SITTER_PATCH_VERIFY_V1_V1.json"
       }
     },
     "decision.synthesis.typed.stdlib": {
@@ -3361,7 +3692,7 @@
         "fail-closed"
       ],
       "limitations": [
-        "Enumerates every producer\u00d7artifact execution, keeps EMITS_VERIFIED survivors with independent stdlib byte-oracle. Heals 80% dead/73% missing without editing 89 producers. Deterministic, $0, 0 model."
+        "Enumerates every producer×artifact execution, keeps EMITS_VERIFIED survivors with independent stdlib byte-oracle. Heals 80% dead/73% missing without editing 89 producers. Deterministic, $0, 0 model."
       ],
       "platforms": [
         "linux",
@@ -4010,7 +4341,7 @@
         "oracle"
       ],
       "limitations": [
-        "Evidence\u2192contract 5-kernel, deterministic"
+        "Evidence→contract 5-kernel, deterministic"
       ],
       "platforms": [
         "linux"
@@ -4171,7 +4502,7 @@
         "backward"
       ],
       "limitations": [
-        "Fault\u2192patch 5-kernel, deterministic"
+        "Fault→patch 5-kernel, deterministic"
       ],
       "platforms": [
         "linux"
@@ -4483,7 +4814,7 @@
         "navigation"
       ],
       "limitations": [
-        "Contract-gated issue \u2192 symbol \u2192 crossfile"
+        "Contract-gated issue → symbol → crossfile"
       ],
       "platforms": [
         "linux"
@@ -4544,7 +4875,7 @@
         "mutation"
       ],
       "limitations": [
-        "Patch\u2192review 5-kernel, deterministic"
+        "Patch→review 5-kernel, deterministic"
       ],
       "platforms": [
         "linux"
@@ -5507,7 +5838,7 @@
         "behavior"
       ],
       "limitations": [
-        "operators are a surgical set (compare/arith/aug swap, bool swap, numeric bump, return-None) \u2014 deliberately review-shaped, not the full mutmut catalogue; equivalence mutants surviving count honestly against the ratio.",
+        "operators are a surgical set (compare/arith/aug swap, bool swap, numeric bump, return-None) — deliberately review-shaped, not the full mutmut catalogue; equivalence mutants surviving count honestly against the ratio.",
         "mutants are confined to the diff's hunk new-side lines; the suite's own changed test files are measured, never mutated, and never become mutation targets.",
         "a red base world refuses (BASE_WORLD_RED): mutants cannot be attributed against a suite that was already green-flavoured broken.",
         "mutant runs share one wall-clock budget per mutant; a mutant suite timeout is counted as a KILL because the behavioural divergence was observable.",
@@ -5965,7 +6296,7 @@
       "limitations": [
         "requires a JSON task file whose edits are choreograph ops (rename_symbol, move_symbol); free-text issue parsing is a separate concern (refuses TASK_SCHEMA_MISSING fields, never guesses).",
         "move_symbol creates a missing target module by declared intent; multi-line import statements, multi-line decorator spans, and aliased-from-import rewrite shapes fail closed rather than guess.",
-        "test execution runs pytest on the selected minimal subset against the given python_executable; pytest absence is reported as test_pytest 'UNAVAILABLE' \u2014 edits are then still proven by the fixed-point re-index and verdict splits explicitly ('edits_verified' vs composite 'verified').",
+        "test execution runs pytest on the selected minimal subset against the given python_executable; pytest absence is reported as test_pytest 'UNAVAILABLE' — edits are then still proven by the fixed-point re-index and verdict splits explicitly ('edits_verified' vs composite 'verified').",
         "writes land only in the named worktree copy; producing the PR itself (git push/gh pr create) is intentionally outside v1."
       ],
       "platforms": [
@@ -6890,11 +7221,6 @@
         "type": "invoke_capability"
       },
       "adapter_module": "python_source_audit",
-      "proposal_bindings": {
-        "source_root": {
-          "type": "path_file_or_dir"
-        }
-      },
       "cost": 1,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
@@ -6916,6 +7242,11 @@
         "windows",
         "darwin"
       ],
+      "proposal_bindings": {
+        "source_root": {
+          "type": "path_file_or_dir"
+        }
+      },
       "provides": [
         "python.source.audit"
       ],
@@ -7131,11 +7462,6 @@
         "type": "invoke_capability"
       },
       "adapter_module": "python_source_symbol_index",
-      "proposal_bindings": {
-        "source_root": {
-          "type": "path_file_or_dir"
-        }
-      },
       "cost": 1,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
@@ -7163,6 +7489,11 @@
         "windows",
         "darwin"
       ],
+      "proposal_bindings": {
+        "source_root": {
+          "type": "path_file_or_dir"
+        }
+      },
       "provides": [
         "python.source.symbol_index",
         "python.source.symbols.index.ast"
@@ -7471,7 +7802,7 @@
         "audit"
       ],
       "limitations": [
-        "Never-miss \u2192 pipeline \u2192 audit \u2192 measurement"
+        "Never-miss → pipeline → audit → measurement"
       ],
       "platforms": [
         "linux"
@@ -7821,6 +8152,67 @@
         "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_EVIDENCE_SYNTHESIS_SUPERCOMPOSER_V1_V1.json"
       }
     },
+    "software.hardcore.closing.supercomposer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.hardcore.closing.supercomposer.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "software_hardcore_closing_supercomposer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "hardcore",
+        "closing",
+        "supercomposer",
+        "synthesis"
+      ],
+      "limitations": [
+        "5-kernel hardcore closing, deterministic"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "software.hardcore.closing.verified",
+        "software.hardcore.closing.synthesis.verified"
+      ],
+      "requires": [
+        "software.hardcore.final.verified",
+        "software.hardcore.final.synthesis.verified",
+        "software.repair.synthesis.triad_proven",
+        "software.test.contract.verified",
+        "software.verification.super.verified"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/software_hardcore_closing_supercomposer_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-SOFTWARE-HARDCORE-ULTIMATE-SUPERCOMPOSER-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_ULTIMATE_SUPERCOMPOSER_V1_V1.json"
+      }
+    },
     "software.hardcore.final.supercomposer.v1": {
       "action_template": {
         "args": {
@@ -8023,67 +8415,6 @@
         "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_SWE_SUPERCOMPOSER_V1_V1.json"
       }
     },
-    "software.hardcore.closing.supercomposer.v1": {
-      "action_template": {
-        "args": {
-          "capability_id": "software.hardcore.closing.supercomposer.v1"
-        },
-        "expect": {
-          "field": "output_verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "type": "invoke_capability"
-      },
-      "adapter_module": "software_hardcore_closing_supercomposer_v1",
-      "cost": 1,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "hardcore",
-        "closing",
-        "supercomposer",
-        "synthesis"
-      ],
-      "limitations": [
-        "5-kernel hardcore closing, deterministic"
-      ],
-      "platforms": [
-        "linux"
-      ],
-      "provides": [
-        "software.hardcore.closing.verified",
-        "software.hardcore.closing.synthesis.verified"
-      ],
-      "requires": [
-        "software.hardcore.final.verified",
-        "software.hardcore.final.synthesis.verified",
-        "software.repair.synthesis.triad_proven",
-        "software.test.contract.verified",
-        "software.verification.super.verified"
-      ],
-      "result_fields": [
-        "adapter",
-        "output_path",
-        "output_sha256",
-        "output_verified",
-        "verified"
-      ],
-      "source": {
-        "adapter_path": "canonical/runtime/bound_capabilities/software_hardcore_closing_supercomposer_v1.py",
-        "module": "ast",
-        "type": "python_stdlib"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "independently_verified_by": "hardcore_verify",
-        "mission_id": "HARDCORE-VERIFY-SOFTWARE-HARDCORE-ULTIMATE-SUPERCOMPOSER-V1",
-        "observed_effect": {
-          "output_verified": true
-        },
-        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_ULTIMATE_SUPERCOMPOSER_V1_V1.json"
-      }
-    },
     "software.patch.synthesize.cegis.z3.v1": {
       "action_template": {
         "args": {
@@ -8115,7 +8446,7 @@
         "architecture"
       ],
       "limitations": [
-        "CEGIS(T) loop synthesize\u2192verify (CrossHair symbolic + concrete) \u2192 counterexample \u2192 resynthesize with DPLL(T) theory solver. 24 frontier 12 max verified, exponential speedup over blind search. Deterministic, 0 model, $0."
+        "CEGIS(T) loop synthesize→verify (CrossHair symbolic + concrete) → counterexample → resynthesize with DPLL(T) theory solver. 24 frontier 12 max verified, exponential speedup over blind search. Deterministic, 0 model, $0."
       ],
       "platforms": [
         "linux",
@@ -8188,7 +8519,7 @@
         "change-impact"
       ],
       "limitations": [
-        "Cross-file atomic choreography inside repair loop: patch\u2192choreograph via 86k/221k symbol graph\u2192change-impact 2070/2096 slice\u2192dual-oracle verify\u2192gate. Multi-file fixes, collision-checked, fail-closed, 50 not 2000 tests, $0, 0 model."
+        "Cross-file atomic choreography inside repair loop: patch→choreograph via 86k/221k symbol graph→change-impact 2070/2096 slice→dual-oracle verify→gate. Multi-file fixes, collision-checked, fail-closed, 50 not 2000 tests, $0, 0 model."
       ],
       "platforms": [
         "linux",
@@ -8261,7 +8592,7 @@
         "counterexample"
       ],
       "limitations": [
-        "HTN loop: CEGIS(T) 24/12 DPLL(T) \u2192 hypothesis 50\u00d7 \u2192 concrete 13 \u2192 choreograph 221k \u2192 slice 50 \u2192 gate \u2014 until pass or budget. Loop not DAG. Deterministic 0 model $0."
+        "HTN loop: CEGIS(T) 24/12 DPLL(T) → hypothesis 50× → concrete 13 → choreograph 221k → slice 50 → gate — until pass or budget. Loop not DAG. Deterministic 0 model $0."
       ],
       "platforms": [
         "linux",
@@ -8528,7 +8859,7 @@
         "verification"
       ],
       "limitations": [
-        "Dual-oracle \u2192 test intelligence \u2192 pipeline \u2192 provenance coupling"
+        "Dual-oracle → test intelligence → pipeline → provenance coupling"
       ],
       "platforms": [
         "linux"
@@ -9408,7 +9739,7 @@
         "40x"
       ],
       "limitations": [
-        "Change-impact 2070/2096 never-miss as mandatory slicer for every repair loop \u2014 50 not 2000 tests, 40x speedup, still never-miss (same-named widen never omit). Deterministic 0 model $0."
+        "Change-impact 2070/2096 never-miss as mandatory slicer for every repair loop — 50 not 2000 tests, 40x speedup, still never-miss (same-named widen never omit). Deterministic 0 model $0."
       ],
       "platforms": [
         "linux",

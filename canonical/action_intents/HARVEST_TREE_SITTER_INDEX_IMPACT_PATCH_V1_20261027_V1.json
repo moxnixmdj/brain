@@ -1,0 +1,488 @@
+{
+  "action_id": "HARVEST_TREE_SITTER_INDEX_IMPACT_PATCH_V1_20261027_V1",
+  "action_intent_id": "HARVEST_TREE_SITTER_INDEX_IMPACT_PATCH_V1_20261027_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Harvest pinned tree-sitter incremental indexing, conservative test impact, and exact-node patch verification — 121->124 bound, 8 languages, executable artifacts, fail-closed fallback.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/bound_capabilities/code_tree_sitter_incremental_index_v1.py",
+      "canonical/runtime/bound_capabilities/code_tree_sitter_impact_v1.py",
+      "canonical/runtime/bound_capabilities/code_tree_sitter_patch_verify_v1.py"
+    ],
+    "route_class": "COMPOSE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::On main afc357c58a, code.ast.tree_sitter.available had no consumer; the bound parser could count non-Python files as parsed without tree-sitter; and no execution-verified multi-language index-to-impact-to-patch chain existed.",
+  "canonical_base_commit": "afc357c58a70a943e7b992bdf391e86b7fd7c8a4",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 3,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "On main afc357c58a, code.ast.tree_sitter.available had no consumer; the bound parser could count non-Python files as parsed without tree-sitter; and no execution-verified multi-language index-to-impact-to-patch chain existed.",
+  "date": "2026-10-27T17:01:37.000000Z",
+  "expected_parent_change": "Add 3 bound capabilities code.index.tree_sitter.incremental.v1, code.impact.tree_sitter.testselect.v1, and code.patch.tree_sitter.verify.v1; harden the existing parser against fabricated non-Python parses; register 121->124; verify all 3 through the promoted execution adapter; add 11 positive/negative tests and recompile the unified model.",
+  "expected_parent_frontier_change": "Add 3 bound capabilities code.index.tree_sitter.incremental.v1, code.impact.tree_sitter.testselect.v1, and code.patch.tree_sitter.verify.v1; harden the existing parser against fabricated non-Python parses; register 121->124; verify all 3 through the promoted execution adapter; add 11 positive/negative tests and recompile the unified model.",
+  "explicit_user_authorization": "Owner instruction this session 2026-10-27, verbatim: All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers. Do the optimal in the fastest way. Everything must be insanely fast, only the right way.",
+  "falsification_condition": "Any cache row reused after a source or row-hash change; any non-Python file counted as parsed without a parser; any selected set omitting the dependency-closure fixture test; any unresolved local import not widening to every candidate; any stale index accepted; any partial-token or expected-byte-mismatched edit written; any failing patch reported verified; any source hash not restored after a trial.",
+  "governance_change": true,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "The open coding and automation obligations need real multi-language parsing, change impact, and verified patch execution. This change supplies a reusable three-stage substrate with fresh artifact binding and conservative fallback; it does not itself claim discharge of any benchmark obligation.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "Live pinned-substrate run: 11 fixture files across Python, JavaScript, TypeScript, Rust, Go, Java, C++, and YAML produced 19 definitions and 70 references with zero syntax errors; cold/warm index bytes were identical and the warm run reused 11/11 files. On 144 real bound-adapter files, cold indexing produced 962 definitions and 58,380 references in 1.3191s; the warm hash-verified cache reused 144/144 in 0.2705s (4.88x local warm-path ratio). Impact selected exactly python/test_calc.py (1 of 2 candidates) with affected closure calc.py -> util.py -> test_calc.py. The exact tree-node minus-to-plus patch passed two test replays and restored the original source. All 11 tests pass, including tampered cache, stale index, unresolved local import, failing patch, partial-token edit, expected-byte mismatch, and the legacy no-substrate negative world. Front-door receipts: 61885968d4975a7c318f85ee7141e5ae3f3cfa46649ba55768748f3f20346aac, 2df0eae6d95a582bf1dee3028cf293d8f1e73a873cabc8cef46377995a7991ae, 28f24cad43c055a11c9a3deff947e57b6958cacd317d4db402be1c41e6abf4d3.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": "Pinned tree_sitter/tree_sitter_languages wheels and their existing requirements hashes; official Parser/get_language APIs; Brain's existing unified-diff parser, suite runner, safe-path conventions, promoted execution adapter, and PyPI dependency-closure loader. No new parser, model, planner, test framework, or external service.",
+  "recursive_obs": {
+    "canonical_base_commit": "afc357c58a70a943e7b992bdf391e86b7fd7c8a4",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "COUNTING_NON_PYTHON_FILES_AS_PARSED_WITHOUT_A_PARSER",
+      "REGEX_OR_SAME_NAME_MATCHING_AS_A_COMPLETE_CROSS_LANGUAGE_DEPENDENCY_PROOF",
+      "RUNNING_THE_FULL_SUITE_WHEN_A_VERIFIED_DEPENDENCY_CLOSURE_IS_AVAILABLE",
+      "FUZZY_TEXT_REPLACEMENT_THAT_CAN_SPLIT_A_TOKEN_OR_LEAVE_SOURCE_MODIFIED",
+      "LABEL_ONLY_CAPABILITY_COMPOSITION_WITHOUT_EXECUTED_ARTIFACTS"
+    ],
+    "expected_parent_level_state_change": "Add 3 bound capabilities code.index.tree_sitter.incremental.v1, code.impact.tree_sitter.testselect.v1, and code.patch.tree_sitter.verify.v1; harden the existing parser against fabricated non-Python parses; register 121->124; verify all 3 through the promoted execution adapter; add 11 positive/negative tests and recompile the unified model.",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "PYTHON_AST_ONLY__REGEX_ONLY__FULL_SUITE_ONLY__FUZZY_TEXT_EDIT__LABEL_ONLY_COMPOSITION",
+      "intrinsic_or_path_specific": "Path-specific: parsing, diff parsing, test running, and promoted execution already exist. The missing work is honest multi-language bindings and executable artifacts between them, plus removal of the old false-success fallback.",
+      "surviving_causal_blocker": "A fast multi-language repair loop is unsound if its index is stale, its selector can omit an affected test, or its patch is not aligned to real syntax nodes and checked by execution."
+    },
+    "obs_capability": {
+      "capability_work_deleted": "DELETED_DUPLICATE_PARSER_PLANNER_TEST_FRAMEWORK_AND_FUZZY_PATCHER__ONLY_SHARED_INTEGRATION_GLUE_AND_THREE_EXECUTABLE_BINDINGS_REMAIN",
+      "existing_inherited_routes_checked": "python_source_symbol_index, python_change_impact_testselect, python_test_guided_patch_search, code_multilanguage_tree_sitter, and verified_bound_capability_execution_adapter were read and the applicable mechanisms reused.",
+      "external_existing_routes_checked": "Official tree-sitter and py-tree-sitter-languages repositories plus PyPI metadata were checked; the exact already-pinned wheels were reused rather than adding another parser dependency.",
+      "surviving_gap": "Arbitrary reflection, external build plugins, and non-Python test discovery still require explicit inputs or conservative full-set fallback; the capability does not claim a universal dynamic-dependency proof."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "MORE_REGISTRY_LABELS_WITHOUT_REAL_SWEE_EFFECTS",
+        "WARM_CACHE_SPEED_WITHOUT_HASH_VALIDATION",
+        "TEST_REDUCTION_WITHOUT_A_FULL_SET_FALLBACK",
+        "PATCH_SUCCESS_WITHOUT_SOURCE_RESTORATION"
+      ],
+      "real_outcome": "A caller can execute a fresh multi-language index, derive a conservative affected-test artifact bound to that exact index, and verify an exact syntax-node patch against the selected tests with source restoration.",
+      "surviving_necessity": "Every stage must consume the preceding artifact and fail on stale hashes or ambiguous inputs; success must be established by independent expected symbols and executable tests, not adapter self-description."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "EXISTING_PYTHON_AST_INDEX_AND_REPAIR_CAPABILITIES_REMAIN; TREE_SITTER_PARSER_IS_HARDENED_NOT_REPLACED; EXISTING_DIFF_PARSER_SUITE_RUNNER_AND_PROMOTED_EXECUTOR_ARE_REUSED",
+      "downstream_work_to_delete_or_supersede": "Temporary probe outputs deleted; the legacy non-Python fake-parse fallback is superseded by explicit substrate-blocked errors; no guard or unrelated capability is deleted.",
+      "fresh_reuse_plan": "Use the pinned parser for per-file rows; reuse rows only when source and row hashes match; reuse the existing unified-diff parser and Python suite runner; execute the three routes through the existing promoted adapter and store the resulting receipts."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "The 121-cap graph census and 144-file performance measurement ran once; warm indexing reuses only hash-valid rows and emits byte-identical artifacts; no repeated external search is needed.",
+      "search_stop_decision": "Stop after the 8-language gold, all paired negative worlds, three promoted execution traces, and the measured cold/warm runs agree; remaining dynamic-language uncertainty is explicitly handled by full-set fallback."
+    },
+    "obs_solution": {
+      "deleted_or_bypassed_paths": [
+        "COUNTING_NON_PYTHON_FILES_AS_PARSED_WITHOUT_A_PARSER",
+        "REGEX_OR_SAME_NAME_MATCHING_AS_A_COMPLETE_CROSS_LANGUAGE_DEPENDENCY_PROOF",
+        "RUNNING_THE_FULL_SUITE_WHEN_A_VERIFIED_DEPENDENCY_CLOSURE_IS_AVAILABLE",
+        "FUZZY_TEXT_REPLACEMENT_THAT_CAN_SPLIT_A_TOKEN_OR_LEAVE_SOURCE_MODIFIED",
+        "LABEL_ONLY_CAPABILITY_COMPOSITION_WITHOUT_EXECUTED_ARTIFACTS"
+      ],
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Python AST cannot cover the declared languages; regex cannot prove node spans or syntax validity; full-suite-only is correct but needlessly slow when a fresh conservative slice exists; fuzzy text patching fails partial-token and stale-byte worlds; label-only composition executes nothing.",
+      "routes_ranked": [
+        "Pinned tree-sitter plus thin integration glue",
+        "Content-hashed per-file warm reuse",
+        "Conservative dependency closure with full-set fallback",
+        "Exact node-aligned candidate patches with executable test replays and finally-restore",
+        "Existing pinned PyPI closure and promoted execution adapter for clean-runner integration"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Small declared fixtures are necessary to cover all 8 languages and exact negative worlds; separately written expected symbol sets and real unittest execution supply the oracles. A 144-file real adapter-tree run supplements the fixture evidence."
+    },
+    "prior_routes_considered": [
+      "PYTHON_AST_ONLY__REJECTED_DOES_NOT_PARSE_THE_OTHER_SEVEN_DECLARED_LANGUAGES",
+      "REGEX_ONLY_INDEX__REJECTED_CANNOT_GUARANTEE_TREE_NODE_SPANS_OR_ERROR_DETECTION",
+      "FULL_SUITE_ONLY__NON_DOMINATING_WHEN_A_FRESH_CONSERVATIVE_SLICE_EXISTS_AND_REMAINS_THE_FALLBACK",
+      "FUZZY_TEXT_PATCH__REJECTED_PARTIAL_TOKEN_AND_STALE_BYTES_WORLDS",
+      "LABEL_ONLY_SUPERCOMPOSER__REJECTED_IT_CHECKS_REGISTRY_LABELS_NOT_REAL_SWEE_EFFECTS"
+    ],
+    "real_outcome": "Live pinned-substrate run: 11 fixture files across Python, JavaScript, TypeScript, Rust, Go, Java, C++, and YAML produced 19 definitions and 70 references with zero syntax errors; cold/warm index bytes were identical and the warm run reused 11/11 files. On 144 real bound-adapter files, cold indexing produced 962 definitions and 58,380 references in 1.3191s; the warm hash-verified cache reused 144/144 in 0.2705s (4.88x local warm-path ratio). Impact selected exactly python/test_calc.py (1 of 2 candidates) with affected closure calc.py -> util.py -> test_calc.py. The exact tree-node minus-to-plus patch passed two test replays and restored the original source. All 11 tests pass, including tampered cache, stale index, unresolved local import, failing patch, partial-token edit, expected-byte mismatch, and the legacy no-substrate negative world. Front-door receipts: 61885968d4975a7c318f85ee7141e5ae3f3cfa46649ba55768748f3f20346aac, 2df0eae6d95a582bf1dee3028cf293d8f1e73a873cabc8cef46377995a7991ae, 28f24cad43c055a11c9a3deff947e57b6958cacd317d4db402be1c41e6abf4d3.",
+    "required_capability": "code.multilanguage.parse.tree_sitter.v1",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "INSUFFICIENT_FOR_7_OTHER_LANGUAGES",
+            "CORRECTNESS": "PYTHON_ONLY",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "SYNTAX_ERROR_INPUT_FAILS",
+            "VERIFIABILITY": "GOOD_FOR_PYTHON_ONLY",
+            "WALL_CLOCK": "FAST_FOR_PYTHON_ONLY"
+          },
+          "evidence": [
+            "existing python_source_symbol_index is stdlib-AST-only"
+          ],
+          "qualification_evidence": [
+            "existing python_source_symbol_index is stdlib-AST-only"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "CONTINUE_PYTHON_AST_ONLY"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "TEXT_ONLY",
+            "CORRECTNESS": "NO_SYNTAX_TREE_OR_NODE_ALIGNMENT",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "FALSE_SPANS_AND_MISSED_SYNTAX_ERRORS",
+            "VERIFIABILITY": "WEAK",
+            "WALL_CLOCK": "LOW"
+          },
+          "evidence": [
+            "partial-token negative world is accepted by raw byte replacement but refused by the selected tree-node check"
+          ],
+          "qualification_evidence": [
+            "partial-token negative world is accepted by raw byte replacement but refused by the selected tree-node check"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "REGEX_ONLY_MULTI_LANGUAGE_INDEX"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SAME_TEST_ORACLE",
+            "CORRECTNESS": "STRONG",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "STRONG",
+            "VERIFIABILITY": "STRONG",
+            "WALL_CLOCK": "PAYS_FULL_SUITE_EACH_ROUND"
+          },
+          "evidence": [
+            "retained as mandatory fallback whenever local dependency evidence is unresolved"
+          ],
+          "qualification_evidence": [
+            "retained as mandatory fallback whenever local dependency evidence is unresolved"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "route": "FULL_TEST_SUITE_AFTER_EVERY_PATCH"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "GENERIC_TEXT_EDIT",
+            "CORRECTNESS": "CAN_SPLIT_TOKENS",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "STALE_OR_PARTIAL_WRITES",
+            "VERIFIABILITY": "NO_TREE_PROOF",
+            "WALL_CLOCK": "LOW"
+          },
+          "evidence": [
+            "test_partial_token_edit_is_refused_before_write and test_expected_bytes_mismatch_is_refused_before_write"
+          ],
+          "qualification_evidence": [
+            "test_partial_token_edit_is_refused_before_write and test_expected_bytes_mismatch_is_refused_before_write"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "FUZZY_TEXT_PATCH_WITHOUT_NODE_ALIGNMENT"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "NO_NEW_REAL_EFFECT",
+            "CORRECTNESS": "REGISTRY_LABELS_ONLY",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "FALSE_COMPOSITION_RISK",
+            "VERIFIABILITY": "NO_ARTIFACT_OR_TEST_ORACLE",
+            "WALL_CLOCK": "LOW"
+          },
+          "evidence": [
+            "selected route executes index -> selection -> patch and validates their hashes"
+          ],
+          "qualification_evidence": [
+            "selected route executes index -> selection -> patch and validates their hashes"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "LABEL_ONLY_SUPERCOMPOSER_WITHOUT_EXECUTION"
+        }
+      ],
+      "checked_at_utc": "2026-10-27T17:01:37Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "PYTHON_AST_INDEX_PLUS_FULL_SUITE_AND_FUZZY_TEXT_PATCH",
+      "max_age_hours": 24,
+      "negative_search_summary": "No new model, planner, parser framework, test framework, or patch framework is introduced. The already pinned tree-sitter wheels supply parsing; Brain supplies the existing diff parser, suite runner, promoted executor, and path-safety patterns. Only integration glue and three executable bindings are added.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "tree-sitter official incremental error-tolerant parsing concrete syntax tree"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "py-tree-sitter Parser set_language tree_sitter_languages get_language pinned"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "pypi tree_sitter 0.20.4 tree_sitter_languages 1.10.2 cp311 wheel sha256"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "tree-sitter py-tree-sitter-languages official repository package metadata"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "routes_considered": [
+        "CONTINUE_PYTHON_AST_ONLY",
+        "REGEX_ONLY_MULTI_LANGUAGE_INDEX",
+        "FULL_TEST_SUITE_AFTER_EVERY_PATCH",
+        "FUZZY_TEXT_PATCH_WITHOUT_NODE_ALIGNMENT",
+        "LABEL_ONLY_SUPERCOMPOSER_WITHOUT_EXECUTION",
+        "TREE_SITTER_INCREMENTAL_INDEX_IMPACT_PATCH__SELECTED",
+        "REUSE_EXISTING_DIFF_PARSER_AND_SUITE_RUNNER__SELECTED_PART",
+        "PINNED_PYPI_DEPENDENCY_CLOSURE__SELECTED_PART",
+        "CONTENT_HASHED_WARM_CACHE__SELECTED_PART",
+        "FULL_TEST_FALLBACK_ON_UNCERTAINTY__SELECTED_PART"
+      ],
+      "selected_route": "TREE_SITTER_INCREMENTAL_INDEX_IMPACT_PATCH_V1_20261027_V1",
+      "selected_route_checked_at_utc": "2026-10-27T17:01:37Z",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-10-27T17:01:37Z",
+        "execution_dependencies": [
+          {
+            "dependency": "python3 >= 3.11",
+            "evidence": [
+              "DIRECT_PROBE: Python 3.11.2 ran all 11 tests and all three promoted execution routes"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "tree_sitter==0.20.4 and tree_sitter_languages==1.10.2",
+            "evidence": [
+              "DIRECT_PROBE: hash-enforced install completed; 8 languages parsed; cp311 wheel SHA-256 values 527ca72c6a8f60fa719af37fa86f58b7ad0e07b8f74d1c1c7e926c5c888a7e6b and 9ae34ac314a7170be24998a0f994c1ac80761d8d4bd126af27ee53a023d3b849"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "CODE_OR_PACKAGE_REGISTRY"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "PyPI metadata and wheel closure for a clean runner",
+            "evidence": [
+              "DIRECT_PROBE: official PyPI JSON metadata matched both downloaded wheel bytes and hashes; dependency closure aa6f8fde9ca370703204ac2ef4e109d32624f9fafe925e0af7b56e2bebd65d13"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "CODE_OR_PACKAGE_REGISTRY"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "PACKAGE_REGISTRY",
+            "observed_at_utc": "2026-10-27T17:01:37Z",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "VOLATILE"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "TREE_SITTER_INCREMENTAL_INDEX_IMPACT_PATCH_V1_20261027_V1",
+        "status": "READY"
+      },
+      "selected_surviving_route": "TREE_SITTER_INCREMENTAL_INDEX_IMPACT_PATCH_V1_20261027_V1",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "requirements/software_engineering_kernel_v1.txt already pins tree_sitter 0.20.4 and tree_sitter_languages 1.10.2 with SHA-256",
+          "python_change_impact_testselect._parse_unified_diff and python_test_guided_patch_search_v1.suite_argv reused",
+          "verified_bound_capability_execution_adapter_v1 executed all three promoted routes and verified their traces"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Existing Brain SWE plan and official repository documentation preferred tree-sitter over inventing regex parsers; no external model or service is used"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "PyPI JSON for tree_sitter 0.20.4 and tree_sitter_languages 1.10.2 supplied exact cp311 wheel URLs and hashes; licenses MIT and Apache-2.0"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "github.com/tree-sitter/tree-sitter and github.com/tree-sitter/py-tree-sitter: concrete syntax trees, error-tolerant parsing, Parser/set_language API",
+          "github.com/grantjenks/py-tree-sitter-languages: get_language prebuilt language pack"
+        ]
+      },
+      "stop_condition": "Holds when the three promoted routes execute with verified traces, the 8-language gold and all paired negative worlds pass (11/11), cold and warm index artifacts are byte-identical, impact selects exactly the dependent fixture test and falls back to all candidates on unresolved local imports, the patch passes two replays and restores source bytes, no model cognition or incremental spend occurs, and the trusted guards accept the diff.",
+      "unresolved_plausible_dominators": [],
+      "why_selected_route_is_fastest_sufficient": "Tree-sitter is already pinned and supplies the exact node spans all three stages need. File-level content-hash reuse avoids reparsing unchanged files; dependency-closure selection avoids the full suite only when evidence is complete and otherwise widens to every candidate; exact node-aligned edits plus real test execution avoid both blind text patching and label-only composition."
+    },
+    "routes_considered": [
+      "CONTINUE_PYTHON_AST_ONLY",
+      "REGEX_ONLY_MULTI_LANGUAGE_INDEX",
+      "FULL_TEST_SUITE_AFTER_EVERY_PATCH",
+      "FUZZY_TEXT_PATCH_WITHOUT_NODE_ALIGNMENT",
+      "LABEL_ONLY_SUPERCOMPOSER_WITHOUT_EXECUTION",
+      "TREE_SITTER_INCREMENTAL_INDEX_IMPACT_PATCH__SELECTED",
+      "REUSE_EXISTING_DIFF_PARSER_AND_SUITE_RUNNER__SELECTED_PART",
+      "PINNED_PYPI_DEPENDENCY_CLOSURE__SELECTED_PART",
+      "CONTENT_HASHED_WARM_CACHE__SELECTED_PART",
+      "FULL_TEST_FALLBACK_ON_UNCERTAINTY__SELECTED_PART"
+    ],
+    "selected_route": "TREE_SITTER_INCREMENTAL_INDEX_IMPACT_PATCH_V1_20261027_V1",
+    "selected_surviving_route": "TREE_SITTER_INCREMENTAL_INDEX_IMPACT_PATCH_V1_20261027_V1",
+    "stop_condition": "Holds when the three promoted routes execute with verified traces, the 8-language gold and all paired negative worlds pass (11/11), cold and warm index artifacts are byte-identical, impact selects exactly the dependent fixture test and falls back to all candidates on unresolved local imports, the patch passes two replays and restores source bytes, no model cognition or incremental spend occurs, and the trusted guards accept the diff.",
+    "why_selected_route_is_fastest_sufficient": "Tree-sitter is already pinned and supplies the exact node spans all three stages need. File-level content-hash reuse avoids reparsing unchanged files; dependency-closure selection avoids the full suite only when evidence is complete and otherwise widens to every candidate; exact node-aligned edits plus real test execution avoid both blind text patching and label-only composition."
+  },
+  "resolution": "SELECTED",
+  "route_id": "TREE_SITTER_INCREMENTAL_INDEX_IMPACT_PATCH_V1_20261027_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "TREE_SITTER_INCREMENTAL_INDEX_IMPACT_PATCH_V1_20261027_V1",
+  "stop_condition": "Holds when the three promoted routes execute with verified traces, the 8-language gold and all paired negative worlds pass (11/11), cold and warm index artifacts are byte-identical, impact selects exactly the dependent fixture test and falls back to all candidates on unresolved local imports, the patch passes two replays and restores source bytes, no model cognition or incremental spend occurs, and the trusted guards accept the diff.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": true,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__THREE_EXECUTABLE_SWE_BINDINGS_AND_PARSER_FAIL_CLOSED_HARDENING__NO_TRUTH_OBLIGATION_PROOF_STATE_MODIFIED",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "7ddb4c19c1c001429fa9c1dc2c5d2425324e82de",
+          "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+        },
+        {
+          "git_blob_sha": "37c0bef08320316e1c93279576757172c1b06b74",
+          "path": "canonical/runtime/bound_capabilities/code_multilanguage_tree_sitter_v1.py"
+        }
+      ],
+      "decisive_question": "MAY_A_MULTI_LANGUAGE_REPAIR_ROUTE_TRUST_A_PARSE_CACHE_OR_TEST_SLICE_OR_TEXT_EDIT_WITHOUT_FRESH_BYTES_AND_EXECUTION_EVIDENCE",
+      "falsifier_id": "TAMPERED_CACHE_STALE_INDEX_UNRESOLVED_IMPORT_PARTIAL_TOKEN_AND_FAILING_PATCH_WORLDS_MUST_ALL_REFUSE_OR_WIDEN_AND_SOURCE_MUST_BE_RESTORED",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "First candidate reused the old fallback and was rejected because it fabricated non-Python parses; second selected tests by repository-wide tests directories and cross-language same-name references and was rejected by the live fixture; third used a new source-type label and the existing front door refused it, so the route now uses the established hash-verified PyPI closure.",
+      "proposal_id": "TREE_SITTER_INCREMENTAL_INDEX_IMPACT_PATCH_V1_20261027_V1"
+    }
+  },
+  "weakens_existing_guard": "No fail-closed rule is weakened. The legacy parser is strengthened to reject fabricated mixed-language success. Three capabilities and three receipts are added; stale artifacts, ambiguous dependencies, invalid edits, failed tests, and path escapes refuse or fall back safely."
+}
