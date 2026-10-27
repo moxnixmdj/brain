@@ -1,0 +1,25 @@
+{
+  "capability_id": "code.index.tree_sitter.incremental.v1",
+  "mission_id": "HARDCORE-VERIFY-CODE-TREE-SITTER-INCREMENTAL-INDEX-V1",
+  "observed_effect": {
+    "adapter": "code_tree_sitter_incremental_index_v1",
+    "definition_count": 19,
+    "execution_trace_verified": true,
+    "file_count": 11,
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "output_path": "canonical/astra_runtime/state/HARDCORE_CODE_TREE_SITTER_INCREMENTAL_INDEX_V1.json",
+    "output_sha256": "61885968d4975a7c318f85ee7141e5ae3f3cfa46649ba55768748f3f20346aac",
+    "output_verified": true,
+    "parsed_file_count": 0,
+    "reference_count": 70,
+    "reused_file_count": 11,
+    "test_count": 11,
+    "test_suite": "canonical/tests/test_code_tree_sitter_swe_v1.py",
+    "verified": true
+  },
+  "output_sha256": "61885968d4975a7c318f85ee7141e5ae3f3cfa46649ba55768748f3f20346aac",
+  "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+  "state_path": "canonical/astra_runtime/state/HARDCORE_CODE_TREE_SITTER_INCREMENTAL_INDEX_V1.json",
+  "verified": true
+}
