@@ -345,6 +345,126 @@ def _adapter_imports(root: Path, rel: str | None) -> list[str]:
     return sorted(modules)
 
 
+def _adapter_path_of(entry: Mapping[str, Any], root: Path) -> str | None:
+    """The adapter source a capability will actually run, as a repo-relative path.
+
+    ``source.adapter_path`` is authoritative when the registry states it. When it
+    does not, the documented convention applies -- ``astra_runtime`` loads
+    ``canonical/runtime/bound_capabilities/<adapter_module>.py`` -- and a file
+    that is not there yields None rather than a guess.
+    """
+    source = entry.get("source") if isinstance(entry.get("source"), Mapping) else {}
+    stated = source.get("adapter_path") or source.get("path")
+    if stated and (root / str(stated)).is_file():
+        return str(stated)
+    module_name = entry.get("adapter_module")
+    if module_name:
+        conventional = "canonical/runtime/bound_capabilities/" + str(module_name) + ".py"
+        if (root / conventional).is_file():
+            return conventional
+    return None
+
+
+_RUNPY_TARGET = re.compile(r"""["']-m["']\s*,\s*["']([A-Za-z0-9_.]+)["']""")
+
+
+def _adapter_runpy_targets(root: Path, rel: str | None) -> list[str]:
+    """Modules an adapter runs with ``sys.executable -m <module>``.
+
+    ``[sys.executable, "-m", "crosshair", "check", target]`` is the adapter
+    stating, in its own source, that the module ``crosshair`` has to be
+    importable for it to do anything at all. That is a tree-derived fact about
+    the capability, exactly like an ``import`` line, and it was the one
+    dependency of ``python.contract.check.crosshair.v1`` that nothing declared:
+    the entry records only the PyPI *project* name ``crosshair-tool``, which is
+    not the name Python imports, so the capability looked satisfied on a machine
+    without it and was selected ahead of everything else for eight of thirteen
+    ordinary Python sentences -- then failed every time with
+    BOUND_PYPI_SOURCE_INCOMPLETE.
+    """
+    if not rel:
+        return []
+    path = root / rel
+    if not path.is_file():
+        return []
+    try:
+        text = path.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return []
+    return sorted({match.group(1).split(".")[0] for match in _RUNPY_TARGET.finditer(text)})
+
+
+_SUBPROCESS_CALLS = frozenset({"run", "Popen", "check_output", "check_call", "call"})
+
+
+def _adapter_executed_programs(root: Path, rel: str | None) -> list[str]:
+    """``argv[0]`` of every subprocess the adapter starts, where the source states it.
+
+    ``argv = ["pandoc", str(src), "-o", str(dst)]`` followed by
+    ``subprocess.run(argv, ...)`` is the adapter naming the program it cannot
+    work without -- as much a declaration as an ``import`` line, and just as
+    tree-derived. Nothing in the registry recorded it: an apt-sourced entry
+    declares distribution *package* names (``pandoc``, ``zbar-tools``,
+    ``poppler-utils``), which are not always the name on PATH, so resolving the
+    package name would exclude a capability on a machine that has the tool under
+    a different name. argv[0] is the name that will actually be exec'd.
+
+    Only a literal first element is reported. ``[sys.executable, "-m",
+    "crosshair", ...]`` names no program -- that dependency is declared by
+    ``_adapter_runpy_targets`` -- and a first element computed at run time is
+    not a fact about the tree.
+    """
+    if not rel:
+        return []
+    path = root / rel
+    if not path.is_file():
+        return []
+    try:
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", DeprecationWarning)
+            tree = ast.parse(path.read_text(encoding="utf-8", errors="replace"))
+    except (SyntaxError, UnicodeDecodeError):
+        return []
+
+    def head(node: Any) -> str | None:
+        if (
+            isinstance(node, ast.List)
+            and node.elts
+            and isinstance(node.elts[0], ast.Constant)
+            and isinstance(node.elts[0].value, str)
+        ):
+            return str(node.elts[0].value)
+        return None
+
+    argv_lists: dict[str, str] = {}
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Assign):
+            found = head(node.value)
+            if found is None:
+                continue
+            for target in node.targets:
+                if isinstance(target, ast.Name):
+                    argv_lists[target.id] = found
+    programs: set[str] = set()
+    for node in ast.walk(tree):
+        if not (
+            isinstance(node, ast.Call)
+            and isinstance(node.func, ast.Attribute)
+            and node.func.attr in _SUBPROCESS_CALLS
+            and isinstance(node.func.value, ast.Name)
+            and node.func.value.id in {"subprocess", "sp"}
+            and node.args
+        ):
+            continue
+        first = node.args[0]
+        found = head(first)
+        if found is None and isinstance(first, ast.Name):
+            found = argv_lists.get(first.id)
+        if found:
+            programs.add(found)
+    return sorted(programs)
+
+
 def _dependency_declaration(
     entry: Mapping[str, Any], root: Path
 ) -> dict[str, Any]:
@@ -395,6 +515,22 @@ def _dependency_declaration(
             # An npm module is resolved by node, not by the Python import
             # machinery, so it is declared but not probed here -- matching the
             # original behaviour, which only probed the npm case via "node".
+        # What the adapter itself imports or runs is a tree-derived fact about
+        # this capability, and it is the only declaration that survives the
+        # difference between a distribution name and an import name. Reading it
+        # here keeps the artifact environment-free -- nothing is probed -- while
+        # ``UnifiedModel`` resolves the names against the machine that answers.
+        adapter_rel = _adapter_path_of(entry, root)
+        for name in sorted(
+            set(_adapter_imports(root, adapter_rel))
+            | set(_adapter_runpy_targets(root, adapter_rel))
+        ):
+            if name in {"__future__"} or name.startswith("canonical"):
+                continue
+            checked.append(name)
+        for name in _adapter_executed_programs(root, adapter_rel):
+            checked.append(name)
+            executables.append(name)
     else:
         kind = "PYTHON_SOURCE"
         modules = _adapter_imports(root, str(adapter_path) if adapter_path else None)
@@ -410,11 +546,11 @@ def _dependency_declaration(
 
     return {
         "kind": kind,
-        "declared_dependencies_checked": sorted(checked),
+        "declared_dependencies_checked": sorted(set(checked)),
         # Names resolved on PATH. Every other declared name is resolved through
         # the Python import machinery. Stating the exception rather than one
         # method per name keeps the artifact free of restated data.
-        "declared_dependency_executables": sorted(executables),
+        "declared_dependency_executables": sorted(set(executables)),
     }
 
 
