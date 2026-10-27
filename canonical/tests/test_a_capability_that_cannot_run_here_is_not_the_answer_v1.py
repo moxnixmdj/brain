@@ -258,18 +258,31 @@ class UnrunnableCapabilityIsNotTheAnswerTests(unittest.TestCase):
             "depend on the host that answered",
         )
 
-    def test_solve_refuses_the_capability_whose_substrate_is_absent(self):
-        """The host votes where the work happens, and says which dependency."""
-        if self.cid not in self.model.unrunnable_capabilities():
-            self.skipTest("crosshair is installed on this host")
-        out = self.model.solve(
-            "check the python contract", capability_id=self.cid, inputs={}
+    def test_the_dependency_is_declared_so_that_any_host_can_report_it(self):
+        """The real defect was that nothing declared it, not that nothing refused.
+
+        A refusal placed in `solve()` was tried and rejected: five pinned
+        DeclaredContextBindingTests drive pdf.extract.text.pypdf end to end and
+        assert on the refusal *reason* and on `binding_provenance`, and a
+        dependency refusal in front of the binder replaced
+        CAPABILITY_INPUTS_MISSING with another string and short-circuited the
+        provenance they read. What the artifact must carry is the declaration;
+        `status()` and `unrunnable_capabilities()` already turn that into an
+        answer about the machine that is asking.
+        """
+        row = self.model.capabilities[self.cid]
+        declared = (row.get("declared_dependencies") or {}).get(
+            "declared_dependencies_checked"
         )
-        self.assertIs(out.get("pass"), False)
+        self.assertIn("crosshair", declared or [])
+        # And the declaration is a fact about the tree, so it is the same on
+        # every host even though the ANSWER about presence is not.
+        status = self.model.status()
         self.assertEqual(
-            out["reason"], "CAPABILITY_DECLARED_DEPENDENCIES_MISSING:crosshair"
+            status["declared_dependencies_present"]
+            + status["declared_dependencies_missing"],
+            len(self.model.capabilities),
         )
-        self.assertEqual(out["declared_dependencies_missing"], ["crosshair"])
 
     def test_an_unrunnable_capability_is_still_addressable_by_its_own_id(self):
         """The negative control for the rule above.

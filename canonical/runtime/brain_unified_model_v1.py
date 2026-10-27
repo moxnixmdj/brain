@@ -835,21 +835,20 @@ class UnifiedModel:
         context_paths: Iterable[str] | None = None,
     ) -> dict[str, Any]:
         row = self.capabilities[cid]
-        # The host gets its vote here, not in `route()`. Executing a capability
-        # whose own declared substrate is absent cannot produce an answer; it
-        # produces a late, opaque failure from inside the adapter. Measured:
-        # python.contract.check.crosshair.v1 spent the whole request and came
-        # back BOUND_PYPI_SOURCE_INCOMPLETE. Naming the missing dependency at
-        # the front door is the same refusal, said early and said truthfully.
-        missing_deps = _missing_declared_dependencies(row)
-        if missing_deps:
-            return self._failure(
-                goal,
-                "CAPABILITY_DECLARED_DEPENDENCIES_MISSING:" + ",".join(missing_deps),
-                routing=routing,
-                capability_id=cid,
-                declared_dependencies_missing=missing_deps,
-            )
+        # A deliberate omission, recorded so it is not re-tried: refusing here
+        # when `_missing_declared_dependencies(row)` is non-empty looks like the
+        # obvious place for the host to vote, and it is not. Five pinned
+        # DeclaredContextBindingTests drive pdf.extract.text.pypdf end to end
+        # and assert on the *reason* and on `binding_provenance`; a dependency
+        # refusal placed before the binder replaced
+        # CAPABILITY_INPUTS_MISSING with a different string and short-circuited
+        # the provenance they read. Measured in CI: 5 failures, all of them
+        # negative controls about binding, none of them about dependencies.
+        #
+        # The adapters already fail closed on their own absent substrate, and
+        # presence is reported by `status()` and by `unrunnable_capabilities()`.
+        # What was actually broken was that the dependency was never DECLARED
+        # at all, so nothing could report it. That is fixed in the compiler.
         required = [str(x) for x in (row.get("input_names") or [])]
         inputs = dict(inputs)
         missing = [name for name in required if name not in inputs]
