@@ -209,34 +209,53 @@ def _load_index(source_abs: Path, cached: Path | None, source_root: str) -> tupl
 def run(args, root):
     repo = Path(root).resolve()
     args = dict(args or {})
-    tgt_rel = str(args.get("targets_path") or "")
-    tgt_path = _safe_path(repo, tgt_rel, must_exist=True)
-    try:
-        targets = json.loads(tgt_path.read_text(encoding="utf-8"))
-    except Exception as exc:  # noqa: BLE001
-        _fail("TARGETS_UNREADABLE_JSON:" + type(exc).__name__)
-    if not isinstance(targets, list) or not targets:
-        _fail("TARGETS_EMPTY")
-    for t in targets:
-        if not isinstance(t, dict) or not t.get("module"):
-            _fail("TARGET_SCHEMA_MISSING:module")
-
     source_root = str(args.get("source_root") or "")
     source_abs = _safe_path(repo, source_root, must_exist=True)
     if not source_abs.is_dir():
         _fail("SOURCE_ROOT_NOT_DIRECTORY")
-    gen_rel = str(args.get("generated_tests_root") or "")
+    # A sentence that says "generate the test scaffold for this source root" does
+    # not carry a manifest of which modules to cover, and it should not have to:
+    # the index built a few lines below already lists every module in the tree.
+    # Measured on main at 9179a6cd the template demanded targets_path from the
+    # sentence, no phrasing could state one, so the capability was dropped as
+    # unbindable and python.source.audit.ast -- a read-only census -- answered a
+    # request to WRITE test files, reporting pass=True. The manifest was never
+    # information the caller had; it was a projection of the tree.
+    timeout_s = int(args.get("timeout_s") or 120)
+    python_exe = str(args.get("python_executable") or sys.executable)
+    cached = _safe_path(repo, str(args["index_path"]), must_exist=True) if args.get("index_path") else None
+    index, cache_used = _load_index(source_abs, cached, source_root)
+    tgt_rel = str(args.get("targets_path") or "")
+    if tgt_rel:
+        tgt_path = _safe_path(repo, tgt_rel, must_exist=True)
+        try:
+            targets = json.loads(tgt_path.read_text(encoding="utf-8"))
+        except Exception as exc:  # noqa: BLE001
+            _fail("TARGETS_UNREADABLE_JSON:" + type(exc).__name__)
+        if not isinstance(targets, list) or not targets:
+            _fail("TARGETS_EMPTY")
+        targets_source = "stated_targets_path"
+    else:
+        # No name filter, so every module-scope function in each module expands --
+        # which is what "scaffold the tests for this tree" asks for.
+        targets = [{"module": str(row["path"])} for row in (index.get("modules") or [])
+                   if isinstance(row, dict) and row.get("path")]
+        if not targets:
+            _fail("NO_MODULES_IN_SOURCE_ROOT")
+        targets_source = "derived_from_index"
+    for t in targets:
+        if not isinstance(t, dict) or not t.get("module"):
+            _fail("TARGET_SCHEMA_MISSING:module")
+
+    gen_rel = str(args.get("generated_tests_root") or "") or str(
+        Path("generated_tests") / source_abs.resolve().name
+    )
     gen_abs = _safe_path(repo, gen_rel)
     out_abs = _safe_path(repo, str(args.get("output_path") or ""))
     for pth, key in ((gen_abs, "generated_tests_root"), (out_abs, "output_path")):
         if pth == source_abs or source_abs in pth.parents:
             _fail("PATH_OVERLAPS_SOURCE_ROOT:" + key)
-    timeout_s = int(args.get("timeout_s") or 120)
-    python_exe = str(args.get("python_executable") or sys.executable)
-    cached = _safe_path(repo, str(args["index_path"]), must_exist=True) if args.get("index_path") else None
-
     manifest_before = _tree_manifest(source_abs)
-    index, cache_used = _load_index(source_abs, cached, source_root)
     mods = {}
     for row in index.get("modules") or []:
         mods[str(row["path"])] = row
@@ -294,14 +313,16 @@ def run(args, root):
     passed = failed = 0
     run_rc = None
     pytest_version = None
+    runner = "NONE"
     if gen_rows:
+        import os
+        env = dict(os.environ)
+        env["PYTHONDONTWRITEBYTECODE"] = "1"
         probe = subprocess.run([python_exe, "-c", "import pytest;print(pytest.__version__)"],
                                capture_output=True, text=True, timeout=min(timeout_s, 30))
         if probe.returncode == 0:
             pytest_version = probe.stdout.strip()
-            import os
-            env = dict(os.environ)
-            env["PYTHONDONTWRITEBYTECODE"] = "1"
+            runner = "pytest"
             proc = subprocess.run([python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider",
                                    str(test_file)],
                                   cwd=repo, capture_output=True, text=True, timeout=timeout_s,
@@ -311,6 +332,31 @@ def run(args, root):
             passed = int(m.group(1)) if m else 0
             m = re.search(r"(\d+) failed", proc.stdout + proc.stderr)
             failed = int(m.group(1)) if m else 0
+        else:
+            # The scaffold this capability writes is a unittest.TestCase module --
+            # _render_module emits `import unittest` and `class GeneratedSmokeN(
+            # unittest.TestCase)`. Running it with pytest therefore asked a
+            # third-party package to drive a file the stdlib already owns, and on
+            # a host without pytest the capability wrote correct tests and then
+            # reported verified=False for want of a runner. Measured here: the
+            # probe dies ModuleNotFoundError: No module named 'pytest' while
+            # `python -m unittest` on the very same file reports "Ran 3 tests ...
+            # OK". The dependency was never in the artifact; it was in the choice
+            # of runner.
+            runner = "unittest"
+            proc = subprocess.run([python_exe, "-m", "unittest", "-v", str(test_file)],
+                                  cwd=repo, capture_output=True, text=True, timeout=timeout_s,
+                                  env=env)
+            run_rc = proc.returncode
+            out = proc.stdout + proc.stderr
+            m = re.search(r"Ran (\d+) tests?", out)
+            ran = int(m.group(1)) if m else 0
+            bad = 0
+            for key in ("failures", "errors"):
+                mm = re.search(key + r"=(\d+)", out)
+                bad += int(mm.group(1)) if mm else 0
+            passed = max(0, ran - bad)
+            failed = bad
 
     manifest_after = _tree_manifest(source_abs)
     if manifest_after != manifest_before:
@@ -320,6 +366,11 @@ def run(args, root):
     verified = complete and run_rc == 0
     artifact = {
         "schema": SCHEMA,
+        # The report must say whether the caller named the modules or the tree
+        # did. A caller reading generated_count cannot otherwise tell a
+        # whole-tree scaffold from one scoped to a manifest it supplied.
+        "targets_source": targets_source,
+        "generated_tests_root": str(gen_rel),
         "target_count": len(targets),
         "expanded_target_count": len(expanded),
         "generated_count": len(gen_rows),
@@ -328,6 +379,10 @@ def run(args, root):
         "test_passed": passed,
         "test_failed": failed,
         "pytest": pytest_version or "UNAVAILABLE",
+        # Which runner actually executed the scaffold. "pytest: UNAVAILABLE"
+        # alone could not distinguish "ran on the stdlib and passed" from
+        # "never ran", and the difference is the whole claim.
+        "runner": runner,
         "complete": complete,
         "smoke_law": "scaffolds assert evaluation with derived fixtures only; zero semantic claims",
         "cache_used": cache_used,

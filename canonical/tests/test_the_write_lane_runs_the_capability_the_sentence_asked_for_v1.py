@@ -331,3 +331,229 @@ class WhichTestsDoesMyChangeBreakTests(unittest.TestCase):
         result = admission.solve({"task_id": "CENSUS_STILL_WINS", "goal": goal})
         self.assertEqual(result.get("compiled_capability_id"), "python.source.audit.ast")
         self.assertIs(result.get("pass"), True, str(result.get("reason"))[:300])
+
+
+# ---------------------------------------------------------------------------
+# "Write the tests for this tree" must WRITE TESTS, and must prove they run.
+#
+# Measured on main at 9179a6cd, python.tests.generate.scaffold.v1 scored 37 on
+# "Generate the test scaffold for the python source root <D>" -- ahead of the
+# next candidate at 31 -- and was dropped as unbindable, because its template
+# demanded five inputs no sentence states: targets_path, generated_tests_root,
+# index_path, python_executable, timeout_s. python.source.audit.ast, which reads
+# and writes nothing, answered a request to CREATE test files and reported
+# pass=True.
+#
+# Two of those were never information the caller had:
+#   - targets_path is a manifest of which modules to cover. The adapter builds a
+#     full symbol index of the tree a few lines later and already lists every
+#     module in it, so the manifest was a projection of the tree, not an input.
+#   - generated_tests_root has one constraint the adapter enforces itself: it may
+#     not be inside source_root. A sibling under generated_tests/ satisfies it.
+#
+# And once it ran, it wrote correct unittest.TestCase scaffolds and then reported
+# verified=False, because the only runner it knew was pytest and this host has
+# none. The file it writes imports unittest; the stdlib already owns it.
+# ---------------------------------------------------------------------------
+class GenerateTheTestsForThisTreeTests(unittest.TestCase):
+    MODULES = {
+        "calc.py": "def add(a: int, b: int) -> int:\n    return a + b\n\n\n"
+                   "def sub(a: int, b: int) -> int:\n    return a - b\n",
+        "text.py": "def shout(s: str) -> str:\n    return s.upper()\n",
+    }
+    UNTYPED = "def mystery(a, b):\n    return a\n"
+
+    def setUp(self):
+        import shutil
+        self.src = REPO_ROOT / "canonical/astra_runtime/tmp/test_scaffold_src"
+        self.out = REPO_ROOT / "canonical/astra_runtime/tmp/test_scaffold_out"
+        for p in (self.src, self.out):
+            shutil.rmtree(p, ignore_errors=True)
+            p.mkdir(parents=True)
+
+    def _write(self, files):
+        for name, body in files.items():
+            (self.src / name).write_text(body)
+
+    def _solve(self):
+        goal = (f"Generate the test scaffold for the python source root {self.src} "
+                f"writing the report to {self.out}/scaffold.json")
+        return admission.solve({"task_id": "SCAFFOLD", "goal": goal})
+
+    def _report(self):
+        return json.loads((self.out / "scaffold.json").read_text())
+
+    def test_it_writes_real_tests_and_proves_they_run(self):
+        self._write(self.MODULES)
+        result = self._solve()
+        self.assertEqual(result.get("compiled_capability_id"),
+                         "python.tests.generate.scaffold.v1")
+        self.assertIs(result.get("pass"), True,
+                      str(result.get("failure_class") or result.get("reason"))[:400])
+        report = self._report()
+        self.assertEqual(report["generated_count"], 3)
+        self.assertEqual(report["test_passed"], 3, report)
+        self.assertEqual(report["test_failed"], 0)
+        self.assertTrue(report["complete"])
+        # The bytes, not the summary: a test file exists and calls the functions.
+        gen = REPO_ROOT / report["generated_tests_root"]
+        files = sorted(gen.rglob("test_*.py"))
+        self.assertEqual(len(files), 1)
+        body = files[0].read_text()
+        self.assertIn("import unittest", body)
+        self.assertIn("add(a=1, b=1)", body)
+        self.assertIn("shout(s=", body)
+
+    def test_the_runner_that_proved_it_is_named(self):
+        # "pytest: UNAVAILABLE" alone could not distinguish "ran on the stdlib and
+        # passed" from "never ran at all" -- and the difference is the whole claim.
+        self._write(self.MODULES)
+        self._solve()
+        report = self._report()
+        self.assertIn(report["runner"], ("pytest", "unittest"))
+        if report["pytest"] == "UNAVAILABLE":
+            self.assertEqual(report["runner"], "unittest")
+        self.assertEqual(report["test_passed"], report["generated_count"])
+
+    def test_the_targets_come_from_the_tree_and_the_report_says_so(self):
+        self._write(self.MODULES)
+        self._solve()
+        report = self._report()
+        self.assertEqual(report["targets_source"], "derived_from_index")
+        self.assertEqual(report["target_count"], 2)
+
+    def test_a_parameter_it_cannot_supply_a_value_for_is_refused_not_guessed(self):
+        # The nearest world in which the accepting row must fail: an unannotated
+        # parameter with no default has no deterministic fixture, and a scaffold
+        # that invented one would assert a claim about code it never understood.
+        self._write({"mystery.py": self.UNTYPED})
+        self._solve()
+        report = self._report()
+        self.assertEqual(report["generated_count"], 0)
+        self.assertEqual(report["refused_count"], 1)
+        self.assertIn("UNANNOTATED_PARAM_NO_DEFAULT",
+                      json.dumps(report.get("refusals") or []))
+        self.assertFalse(report["complete"])
+
+    def test_the_scaffold_never_writes_into_the_tree_it_is_scaffolding(self):
+        self._write(self.MODULES)
+        before = {p.name: p.read_text() for p in self.src.rglob("*.py")}
+        self._solve()
+        after = {p.name: p.read_text() for p in self.src.rglob("*.py")}
+        self.assertEqual(before, after, "the source tree must be byte-identical")
+
+    def test_a_report_inside_the_tree_is_still_refused(self):
+        self._write(self.MODULES)
+        goal = (f"Generate the test scaffold for the python source root {self.src} "
+                f"writing the report to {self.src}/inside.json")
+        result = admission.solve({"task_id": "SCAFFOLD_OVERLAP", "goal": goal})
+        self.assertIs(result.get("pass"), False)
+        self.assertIn("PATH_OVERLAPS_SOURCE_ROOT",
+                      str(result.get("failure_class") or result.get("reason")))
+
+    def test_a_question_about_the_file_is_still_answered_by_the_census(self):
+        self._write(self.MODULES)
+        goal = (f"Count the functions in the python file {self.src}/calc.py in the "
+                f"python source root {self.src} writing the report to {self.out}/c.json")
+        result = admission.solve({"task_id": "CENSUS_NOT_SCAFFOLD", "goal": goal})
+        self.assertEqual(result.get("compiled_capability_id"), "python.source.audit.ast")
+        self.assertIs(result.get("pass"), True, str(result.get("reason"))[:300])
+
+
+# ---------------------------------------------------------------------------
+# "Run the tests" must RUN THE TESTS.
+#
+# Measured on main at 2754cf0d, "Run the python tests in the python source root
+# <D>" scored python.repository.acceptance.measure.v1 at 27, ahead of the next
+# candidate at 22, and was dropped as unbindable on two inputs:
+#
+#   test_argv   GOAL_INPUT_BINDING_REQUIRED:not_stated
+#   test_paths  GOAL_INPUT_BINDING_REQUIRED:no_matching_existing_files_named
+#
+# so python.source.audit.ast -- which executes nothing -- answered a request to
+# RUN a suite and reported pass=True.
+#
+# Neither was information the caller had. The adapter already builds the test
+# command itself (_validate_argv, with the measured reason that 695 of the 2019
+# unittest files here carry no __main__ guard, so running one as a script exits 0
+# having executed nothing). And which files are tests is a fact about the tree:
+# python_change_impact_testselect.py:286 already selects on
+# startswith("test_") or endswith("_test.py"), and python_test_audit.py:116
+# defaults its pattern to test_*.py. The rule existed twice; this reuses it.
+# ---------------------------------------------------------------------------
+class RunTheTestsMeansRunTheTestsTests(unittest.TestCase):
+    PASSING = ("from calc import add\n\n\n"
+               "def test_add():\n    assert add(2, 3) == 5\n")
+    FAILING = ("from calc import add\n\n\n"
+               "def test_add():\n    assert add(2, 3) == 5\n\n\n"
+               "def test_wrong():\n    assert add(1, 1) == 99\n")
+    MODULE = "def add(a: int, b: int) -> int:\n    return a + b\n"
+
+    def setUp(self):
+        import shutil
+        self.src = REPO_ROOT / "canonical/astra_runtime/tmp/test_run_tests_src"
+        self.out = REPO_ROOT / "canonical/astra_runtime/tmp/test_run_tests_out"
+        for p in (self.src, self.out):
+            shutil.rmtree(p, ignore_errors=True)
+            (p / "tests").mkdir(parents=True)
+        (self.src / "calc.py").write_text(self.MODULE)
+
+    def _run(self, test_body, task_id="RUN_TESTS"):
+        (self.src / "tests" / "test_calc.py").write_text(test_body)
+        goal = (f"Run the python tests in the python source root {self.src} "
+                f"writing the report to {self.out}/measure.json")
+        return admission.solve({"task_id": task_id, "goal": goal})
+
+    def _report(self):
+        return json.loads((self.out / "measure.json").read_text())
+
+    def test_it_runs_the_suite_it_found_in_the_tree(self):
+        result = self._run(self.PASSING)
+        self.assertEqual(result.get("compiled_capability_id"),
+                         "python.repository.acceptance.measure.v1")
+        self.assertIs(result.get("pass"), True,
+                      str(result.get("failure_class") or result.get("reason"))[:400])
+        report = self._report()
+        spec = report["measurement_spec"]
+        # the tree said which files are tests; the report says so
+        self.assertEqual(spec["test_paths_source"], "discovered_under_source_root")
+        self.assertEqual(spec["test_paths"], ["tests/test_calc.py"])
+        m = report["measurements"]
+        self.assertTrue(m["tests_pass"], m)
+        self.assertEqual(m["test_returncode"], 0)
+        self.assertEqual(m["test_count"], 1)
+        self.assertTrue(m["repository_source_unchanged"])
+
+    def test_a_suite_that_fails_is_measured_as_failing(self):
+        # The nearest world in which the row above must fail. A measurement that
+        # reported a red suite as green would be worse than no measurement: it is
+        # the evidence every other capability in this lane is judged by.
+        result = self._run(self.FAILING, task_id="RUN_TESTS_RED")
+        self.assertEqual(result.get("compiled_capability_id"),
+                         "python.repository.acceptance.measure.v1")
+        m = self._report()["measurements"]
+        self.assertFalse(m["tests_pass"], m)
+        self.assertEqual(m["test_returncode"], 1)
+        self.assertEqual(m["test_count"], 2, "both tests must have been collected and run")
+
+    def test_a_tree_with_no_tests_is_refused_not_reported_as_green(self):
+        import shutil
+        shutil.rmtree(self.src / "tests")
+        goal = (f"Run the python tests in the python source root {self.src} "
+                f"writing the report to {self.out}/empty.json")
+        result = admission.solve({"task_id": "RUN_TESTS_EMPTY", "goal": goal})
+        self.assertIs(result.get("pass"), False)
+        # The adapter's own reason, not the wrapper's class: failure_class is the
+        # generic LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE for every
+        # adapter that raises, so reading it first would accept a refusal for the
+        # wrong reason. _execute_locally preserves the adapter's message in
+        # "reason" as <ExceptionType>:<message>.
+        self.assertIn("NO_TEST_FILES_UNDER_SOURCE_ROOT", str(result.get("reason")))
+
+    def test_a_question_about_the_file_is_still_answered_by_the_census(self):
+        self._run(self.PASSING, task_id="RUN_TESTS_THEN_ASK")
+        goal = (f"Count the functions in the python file {self.src}/calc.py in the "
+                f"python source root {self.src} writing the report to {self.out}/c.json")
+        result = admission.solve({"task_id": "CENSUS_NOT_RUNNER", "goal": goal})
+        self.assertEqual(result.get("compiled_capability_id"), "python.source.audit.ast")
+        self.assertIs(result.get("pass"), True, str(result.get("reason"))[:300])

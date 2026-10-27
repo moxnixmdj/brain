@@ -5708,13 +5708,11 @@
   "python.repository.acceptance.measure.v1": {
    "action_template": {
     "args": {
-     "capability_id": "python.repository.acceptance.measure.v1",
-     "output_path": "${input.output_path}",
-     "source_root": "${input.source_root}",
-     "test_argv": "${input.test_argv}",
-     "test_paths": "${input.test_paths}",
-     "timeout_s": 60
-    },
+          "capability_id": "python.repository.acceptance.measure.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}",
+          "timeout_s": 60
+        },
     "expect": {
      "field": "output_verified",
      "type": "field_equals",
@@ -7969,7 +7967,11 @@
     "skipped",
     "tests",
     "unit",
-    "unittest"
+    "unittest",
+    "corpus",
+    "pass rate",
+    "pass_rate",
+    "rate report"
    ],
    "platforms": [
     "linux",
@@ -8004,15 +8006,10 @@
   "python.tests.generate.scaffold.v1": {
    "action_template": {
     "args": {
-     "capability_id": "python.tests.generate.scaffold.v1",
-     "generated_tests_root": "${input.generated_tests_root}",
-     "index_path": "${input.index_path}",
-     "output_path": "${input.output_path}",
-     "python_executable": "${input.python_executable}",
-     "source_root": "${input.source_root}",
-     "targets_path": "${input.targets_path}",
-     "timeout_s": "${input.timeout_s}"
-    },
+          "capability_id": "python.tests.generate.scaffold.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
     "expect": {
      "field": "verified",
      "type": "field_equals",

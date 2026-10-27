@@ -24439,9 +24439,7 @@
    "input_contract_source": "action_template",
    "input_names": [
     "output_path",
-    "source_root",
-    "test_argv",
-    "test_paths"
+    "source_root"
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
@@ -24456,7 +24454,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repository_acceptance_measurement_v1.py",
-    "source_sha256": "d7ea124d72b564cefd720e28df2c41cb68083e031b6999ec4206b8145b963796",
+    "source_sha256": "85cfe70b2a3f777ca9645be7850ac05b5a8ce1f4626ebff604ed5637450095f0",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -26421,7 +26419,11 @@
     "skipped",
     "tests",
     "unit",
-    "unittest"
+    "unittest",
+    "corpus",
+    "pass rate",
+    "pass_rate",
+    "rate report"
    ],
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYTHON-TEST-AUDIT-005__RECEIPT.json",
@@ -26448,13 +26450,8 @@
    "incremental_spend_usd": 0,
    "input_contract_source": "action_template",
    "input_names": [
-    "generated_tests_root",
-    "index_path",
     "output_path",
-    "python_executable",
-    "source_root",
-    "targets_path",
-    "timeout_s"
+    "source_root"
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
@@ -28695,8 +28692,8 @@
   "engines": 26,
   "knowledge_documents": 170,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6488,
-  "routing_tokens": 2094,
+  "research_index_records": 6490,
+  "routing_tokens": 2096,
   "skills": 18,
   "source_index_entry_points": 422,
   "source_index_modules": 1886
@@ -28704,7 +28701,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "817e9352b7ac1dde5d66c5682df1312f939d0cabfbf504a4f782370100ef140c"
+  "value": "227c1759039f68178301bba89148a67632f06a08968183d96fa60957a2065fd4"
  },
  "engines": [
   {
@@ -31900,9 +31897,10 @@
     "canonical/runtime/livebench_root1_reused_core_selector_v1.py.auto.v1": 447.0
    },
    "corpus": {
-    "canonical/runtime/openai_math_frontier_corpus_v1.py.auto.v1": 224.5,
-    "code.multilanguage.parse.tree_sitter.v1": 224.5,
-    "source.candidates.enumerate.stdlib": 224.5
+    "canonical/runtime/openai_math_frontier_corpus_v1.py.auto.v1": 180.0,
+    "code.multilanguage.parse.tree_sitter.v1": 180.0,
+    "python.tests.audit.unittest": 180.0,
+    "source.candidates.enumerate.stdlib": 180.0
    },
    "correctness": {
     "canonical/runtime/structured_method_universal_correctness_certificate_v1.py.auto.v1": 447.0
@@ -34922,7 +34920,11 @@
     "canonical/runtime/tool_discovery_observability_partition_v2.py.auto.v1": 298.666667
    },
    "pass": {
-    "python.software.repair.apply.verified.v1": 670.5
+    "python.software.repair.apply.verified.v1": 448.0,
+    "python.tests.audit.unittest": 448.0
+   },
+   "pass_rate": {
+    "python.tests.audit.unittest": 447.0
    },
    "passed": {
     "python.tests.audit.unittest": 447.0
@@ -36099,6 +36101,9 @@
     "chart.raster.scene_graph.v1": 113.25,
     "image.extract.ocr.tesseract": 113.25
    },
+   "rate": {
+    "python.tests.audit.unittest": 670.5
+   },
    "ratio": {
     "python.review.diff_mutation_gate.v1": 670.5
    },
@@ -36343,8 +36348,9 @@
     "python.repo.pr_realize.v1": 298.666667
    },
    "report": {
-    "document.convert.markdown_pdf.pandoc_weasyprint": 298.666667,
-    "docx.document.create_from_json_record": 298.666667
+    "document.convert.markdown_pdf.pandoc_weasyprint": 224.5,
+    "docx.document.create_from_json_record": 224.5,
+    "python.tests.audit.unittest": 336.75
    },
    "repository": {
     "python.patch.search.test_guided.ast.v1": 224.5,
@@ -52236,7 +52242,7 @@
   "included_source_count": 940,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "6a9ac3e33db09c78906cfe382f8bf9f25b7a438fb0c99f6b2fee355e56d142a9"
+  "source_tree_digest": "39450018fde231e71df73f5615a94370bc34148b556f936d770dd631fbe6ab11"
  },
  "research_index": [
   {
@@ -200980,6 +200986,51 @@
    }
   },
   {
+   "action_id": "RUN_THE_TESTS_MEANS_RUN_THE_TESTS_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/RUN_THE_TESTS_MEANS_RUN_THE_TESTS_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/RUN_THE_TESTS_MEANS_RUN_THE_TESTS_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "7c885b20cbfd4ecbbbfb01ac5e9469f89f21e6d6cf94548af2ca1fa6d181a12a",
+   "status": "",
+   "terms": {
+    "116": 1,
+    "174": 1,
+    "2019": 1,
+    "20261027": 1,
+    "22": 1,
+    "27": 1,
+    "2754cf0d": 1,
+    "286": 1,
+    "already": 3,
+    "files": 2,
+    "goal_input_binding_required": 2,
+    "main": 2,
+    "matches": 2,
+    "measured": 3,
+    "measurement": 3,
+    "nothing": 3,
+    "one": 2,
+    "only": 2,
+    "pass": 2,
+    "python": 2,
+    "red": 2,
+    "repository": 2,
+    "request": 2,
+    "run": 8,
+    "run_the_tests_means_run_the_tests_v1_20261027_v1": 2,
+    "suite": 5,
+    "test": 4,
+    "test_paths": 2,
+    "tests": 5,
+    "tree": 3,
+    "unittest": 3,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "SHELL_COMMAND_RUN_VERIFIED_COMPLETING_72_OF_72_V1_20261023_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -203263,6 +203314,51 @@
     "v1": 2,
     "whole": 2,
     "whole_name_in_prose_takes_the_route_v1_20261024_v1": 2
+   }
+  },
+  {
+   "action_id": "WRITE_THE_TESTS_FOR_THIS_TREE_MUST_WRITE_TESTS_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/WRITE_THE_TESTS_FOR_THIS_TREE_MUST_WRITE_TESTS_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WRITE_THE_TESTS_FOR_THIS_TREE_MUST_WRITE_TESTS_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "1fb2a2480d65b153e5ae23667a06015442b0cf856da1a2720f928f891d62bb5c",
+   "status": "",
+   "terms": {
+    "adapter": 3,
+    "already": 3,
+    "but": 2,
+    "create": 2,
+    "files": 2,
+    "five": 2,
+    "generated_tests_root": 2,
+    "host": 2,
+    "index_path": 2,
+    "manifest": 2,
+    "may": 2,
+    "measured": 2,
+    "module": 2,
+    "never": 2,
+    "no": 2,
+    "not": 2,
+    "nothing": 2,
+    "pytest": 2,
+    "python": 2,
+    "python_executable": 2,
+    "ran": 2,
+    "request": 2,
+    "runner": 3,
+    "targets_path": 2,
+    "test": 3,
+    "tests": 4,
+    "timeout_s": 2,
+    "tree": 6,
+    "unittest": 2,
+    "v1": 2,
+    "write": 3,
+    "write_the_tests_for_this_tree_must_write_tests_v1_20261027_v1": 2
    }
   }
  ],
@@ -210606,7 +210702,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_tests_generate_scaffold.py",
-   "sha256": "3321063abb69c11a97d2a8022b0364fbffcd7dd47941473dee60ba5f3767e393",
+   "sha256": "fdf81f002fa648ad0ecd14654fd977dc6a4c20a73c9bf8c6d0cb6f00b5433b8c",
    "summary": "python.tests.generate.scaffold.v1 — write tests for uncovered paths.",
    "symbol_count": 10,
    "symbols": [

@@ -123,6 +123,52 @@ def _tree_manifest(root: pathlib.Path, *, max_files: int, max_bytes: int) -> tup
     return rows, _sha_obj(rows)
 
 
+_SKIP_DISCOVERY_DIRS = {".git", ".tox", ".nox", "node_modules", "__pycache__", ".venv",
+                        "venv", "build", "dist", ".mypy_cache", ".pytest_cache"}
+
+
+def _is_test_file_name(name: str) -> bool:
+    """The repository's own rule for what a test file is called.
+
+    Not invented here: python_change_impact_testselect.py:286 already selects on
+    exactly this pair -- ``name.startswith("test_") or name.endswith("_test.py")``
+    -- and python_test_audit.py:116 defaults its pattern to ``test_*.py``. One
+    rule, one place, reused.
+    """
+    return name.startswith("test_") or name.endswith("_test.py")
+
+
+def _discover_test_paths(source_root: pathlib.Path, limit: int = 5000) -> list[str]:
+    """Every test file under ``source_root``, when the sentence did not name one.
+
+    "Run the python tests in the python source root <D>" names no file, and it
+    should not have to: the tree says which files are tests. Measured on main at
+    2754cf0d that sentence scored python.repository.acceptance.measure.v1 at 27,
+    ahead of the next candidate at 22, and was then dropped as unbindable because
+    the template demanded test_paths from the sentence -- so
+    python.source.audit.ast, which runs nothing, answered a request to RUN the
+    suite and reported pass=True.
+
+    Recursive, because the ordinary layout puts tests in a ``tests/`` directory
+    and a top-level glob finds none of them. Bounded, sorted, and skipping the
+    directories that hold copies rather than sources.
+    """
+    found = []
+    for path in sorted(source_root.rglob("*.py")):
+        if any(part in _SKIP_DISCOVERY_DIRS for part in path.relative_to(source_root).parts):
+            continue
+        if not _is_test_file_name(path.name):
+            continue
+        if path.is_symlink() or not path.is_file():
+            continue
+        found.append(_rel(source_root, path))
+        if len(found) >= limit:
+            break
+    if not found:
+        raise MeasurementError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
+    return found
+
+
 def _validate_test_paths(source_root: pathlib.Path, values: Any, repo: pathlib.Path | None = None) -> list[str]:
     """Resolve each stated test path, accepting either spelling of the same path.
 
@@ -139,7 +185,9 @@ def _validate_test_paths(source_root: pathlib.Path, values: Any, repo: pathlib.P
     root can be measured, and when ``source_root`` is the repository itself the
     two spellings coincide and behaviour is unchanged.
     """
-    if not isinstance(values, list) or not values:
+    if values is None or (isinstance(values, list) and not values):
+        return _discover_test_paths(source_root)
+    if not isinstance(values, list):
         raise MeasurementError("TEST_PATHS_REQUIRED")
     out = []
     for raw in values:
@@ -280,7 +328,13 @@ def run(args: Mapping[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]
     timeout_s = max(1, min(int(args.get("timeout_s", 60)), 300))
     max_files = max(1, min(int(args.get("max_files", 5000)), 20000))
     max_bytes = max(1024, min(int(args.get("max_bytes", 100_000_000)), 500_000_000))
-    test_paths = _validate_test_paths(source_root, args.get("test_paths"), repo)
+    _stated_paths = args.get("test_paths")
+    test_paths = _validate_test_paths(source_root, _stated_paths, repo)
+    # The report must say whether the caller named the tests or the tree did.
+    # "test_count: 1" means nothing if the reader cannot tell that one named file
+    # was measured from the whole suite having been found and run.
+    test_paths_source = ("stated" if isinstance(_stated_paths, list) and _stated_paths
+                         else "discovered_under_source_root")
     argv = _validate_argv(args.get("test_argv"), test_paths, source_root, repo)
 
     before_manifest, before_sha = _tree_manifest(
@@ -314,6 +368,7 @@ def run(args: Mapping[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]
     spec = {
         "source_root": _rel(repo, source_root) if source_root != repo else ".",
         "test_paths": test_paths,
+        "test_paths_source": test_paths_source,
         "test_argv": argv,
         "timeout_s": timeout_s,
         "max_files": max_files,
