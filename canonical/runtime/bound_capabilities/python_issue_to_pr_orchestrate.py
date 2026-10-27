@@ -27,8 +27,10 @@ Correctness laws it refuses to violate:
   NAME_NOT_AT_MODULE_SCOPE (old name gone) and the new name must bind at
   module scope.  Anything else is a hard failure.
 * FAIL CLOSED on any unknown/missing input; v1 applies ``rename_symbol``
-  ops only — ``move_symbol`` plans fine in slice 4 but is refused at apply
-  with UNSUPPORTED_OP_AT_APPLY (listed, never silently skipped).
+  and ``move_symbol`` ops (decorator-aware cut spans, deterministic
+  multi-name import splitting, and re-import injection when the defining
+  module still references the moved name); any other op refuses with
+  UNSUPPORTED_OP_AT_APPLY — listed, never silently skipped.
 * Determinism — same inputs (tree bytes + task) produce byte-identical
   diff, pr_intent and receipt; proven by pins running the loop twice.
 
@@ -213,10 +215,205 @@ def _apply_rename(work_src: Path, op: dict, plan_op: dict) -> dict:
             "splice_total": sum(r["splice_count"] for r in touched)}
 
 
+def _apply_move(work_src: Path, op: dict, plan_op: dict) -> dict:
+    """Apply a choreographed move_symbol plan: cut the (decorator-aware)
+    definition span out of the defining module, insert it at the target
+    module's end (module created if absent), rewrite from-imports that
+    bound the moved name (splitting multi-name imports deterministically),
+    and inject a re-import into the defining module when the slice-4 plan
+    proved it still references the moved name.  Any wobble fails closed."""
+    module, qualname, to_module = op["module"], op["qualname"], op["to_module"]
+    name = qualname.rsplit(".", 1)[-1]
+    defining_dot = (module[:-3] if module.endswith(".py") else module).replace("/", ".")
+    to_dot = (to_module[:-3] if to_module.endswith(".py") else to_module).replace("/", ".")
+
+    # ---- 1. cut the definition block -----------------------------------
+    cut_site = next((s for s in plan_op["sites"] if s["kind"] == "CUT_SPAN"), None)
+    if not cut_site:
+        raise ValueError("MOVE_PLAN_MISSING_CUT_SPAN")
+    src_path = work_src / module
+    if not src_path.is_file():
+        raise ValueError("PLANNED_FILE_MISSING_IN_WORKTREE:" + module)
+    lines = src_path.read_text(encoding="utf-8").splitlines(keepends=True)
+    top = int(cut_site["lineno"]) - 1
+    # decorator-aware upward scan with paren tracking
+    depth, curs = 0, top - 1
+    while curs >= 0:
+        raw = lines[curs].rstrip("\n")
+        stripped = raw.strip()
+        if depth > 0:
+            depth += raw.count(")") - raw.count("(")
+            top = curs
+            curs -= 1
+            continue
+        if stripped.startswith("@"):
+            d = raw.count("(") - raw.count(")")
+            top = curs
+            curs -= 1
+            if d > 0:
+                depth = d
+            continue
+        break
+    if depth != 0:
+        raise ValueError("MOVE_DECORATOR_SPAN_COMPLEX:" + module)
+    bottom = int(cut_site["line_end"]) - 1
+    if not (0 <= top <= bottom < len(lines)):
+        raise ValueError(f"MOVE_SPAN_OUT_OF_RANGE:{module}:{top + 1}-{bottom + 1}")
+    block = lines[top:bottom + 1]
+    head_line = next(l for l in block if re.match(r"\s*(def|class)\s", l))
+    if not re.match(r"\s*(?:def|class)\s+" + re.escape(name) + r"\b", head_line.lstrip("\n")):
+        raise ValueError("MOVE_CUT_NOT_TARGET_DEFINITION:" + module)
+    rem_text = "".join(lines[:top] + lines[bottom + 1:])
+    rem_text = re.sub(r"\n{3,}", "\n\n", rem_text)
+    if not rem_text.endswith("\n"):
+        rem_text += "\n"
+
+    refs_here = [s for s in plan_op["sites"]
+                 if s["kind"] == "REFERENCE" and s["file"] == module]
+    if refs_here:
+        inject = f"from {to_dot} import {name}\n"
+        rem_lines = rem_text.splitlines(keepends=True)
+        insert_at = 0
+        for i, l in enumerate(rem_lines):
+            if re.match(r"(import |from )", l):
+                insert_at = i + 1
+        rem_lines.insert(insert_at, inject)
+        rem_text = "".join(rem_lines)
+    src_path.write_text(rem_text, encoding="utf-8")
+
+    # ---- 2. insert the block at the target end --------------------------
+    tgt_path = work_src / to_module
+    created = not tgt_path.is_file()
+    if created:
+        tgt_path.parent.mkdir(parents=True, exist_ok=True)
+        tgt_path.write_text("", encoding="utf-8")
+    tgt_text = tgt_path.read_text(encoding="utf-8")
+
+    # dependency-closure law: names the moved block loads that were bound at
+    # module scope in the DEFINING module follow the move as injected
+    # from-imports into the TARGET (deterministic order; never silently
+    # dropped — if the block cannot be parsed the whole apply refuses).
+    block_text = "".join(block)
+    try:
+        block_tree = ast.parse(block_text, filename="<moved_block>")
+        src_tree = ast.parse(src_path.read_text(encoding="utf-8"), filename=module)
+    except SyntaxError as exc:
+        raise ValueError(f"MOVE_DEPENDENCY_ANALYSIS_UNPARSEABLE:{exc.lineno}")
+
+    def _bound_names(tree) -> set[str]:
+        bound = set()
+        for node in getattr(tree, "body", []):
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                bound.add(node.name)
+            elif isinstance(node, ast.Assign):
+                for t in node.targets:
+                    if isinstance(t, ast.Name):
+                        bound.add(t.id)
+            elif isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
+                bound.add(node.target.id)
+            elif isinstance(node, ast.Import):
+                bound.update((a.asname or a.name.split(".")[0]) for a in node.names)
+            elif isinstance(node, ast.ImportFrom):
+                bound.update((a.asname or a.name) for a in node.names)
+        return bound
+
+    def _loaded_names(tree) -> set[str]:
+        loaded = set()
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Name) and isinstance(node.ctx, ast.Load):
+                loaded.add(node.id)
+        return loaded
+
+    defining_scope = _bound_names(src_tree)
+    block_own_scope = set(_bound_names(block_tree))
+    for node in ast.walk(block_tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            a = node.args
+            block_own_scope.update(x.arg for x in [*a.posonlyargs, *a.args, *a.kwonlyargs])
+            if a.vararg:
+                block_own_scope.add(a.vararg.arg)
+            if a.kwarg:
+                block_own_scope.add(a.kwarg.arg)
+        else:
+            tgt = getattr(node, "target", None)
+            if isinstance(tgt, ast.Name):
+                block_own_scope.add(tgt.id)
+    needed = sorted(n for n in _loaded_names(block_tree)
+                    if n in defining_scope and n not in block_own_scope and n != name)
+    if needed:
+        inject_line = f"from {defining_dot} import {', '.join(needed)}\n"
+        tgt_lines = tgt_text.splitlines(keepends=True)
+        existing_inject = False
+        insert_at = 0
+        for i, l in enumerate(tgt_lines):
+            if re.match(r"(import |from )", l):
+                insert_at = i + 1
+                if l.strip() == inject_line.strip():
+                    existing_inject = True
+        if not existing_inject:
+            tgt_lines.insert(insert_at, inject_line)
+            tgt_text = "".join(tgt_lines)
+
+    if tgt_text.strip():
+        tgt_text = tgt_text.rstrip("\n") + "\n\n" + block_text.rstrip("\n") + "\n"
+    else:
+        tgt_text = block_text.rstrip("\n") + "\n"
+    tgt_path.write_text(tgt_text, encoding="utf-8")
+
+    # ---- 3. rewrite from-imports on every planned IMPORT_REWRITE site ---
+    rewrites = 0
+    for site in plan_op["sites"]:
+        if site["kind"] != "IMPORT_REWRITE":
+            continue
+        file_rel = site["file"]
+        path = work_src / file_rel
+        text = path.read_text(encoding="utf-8")
+        t_lines = text.splitlines(keepends=True)
+        try:
+            tree = ast.parse(text, filename=file_rel)
+        except SyntaxError as exc:
+            raise ValueError(f"IMPORT_FILE_UNPARSEABLE:{file_rel}:{exc.lineno}")
+        edit_lines = []
+        for node in ast.walk(tree):
+            if isinstance(node, ast.ImportFrom) and str(node.module or "") == defining_dot \
+                    and any(a.name == name for a in node.names):
+                if node.end_lineno != node.lineno:
+                    raise ValueError(f"MULTILINE_IMPORT_SPAN:{file_rel}:{node.lineno}")
+                edit_lines.append(int(node.lineno))
+        if not edit_lines:
+            raise ValueError("IMPORT_REWRITE_STATEMENT_NOT_FOUND:" + file_rel)
+        for lineno in sorted(edit_lines, reverse=True):
+            idx = lineno - 1
+            body = t_lines[idx].rstrip("\n")
+            ending = t_lines[idx][len(body):]
+            _prefix, _mid, tail = body.partition("import")
+            names_part = tail.strip()
+            if names_part.startswith("(") or names_part.endswith("\\"):
+                raise ValueError(f"MULTILINE_IMPORT_SPAN:{file_rel}:{lineno}")
+            names = [x.strip() for x in names_part.split(",")]
+            moved_alias = next(a for a in names if a.split(" as ")[0].strip() == name)
+            others = [a for a in names if a is not moved_alias]
+            seg = [f"from {to_dot} import {moved_alias}"]
+            if others:
+                seg.append(f"from {defining_dot} import {', '.join(others)}")
+            t_lines[idx:idx + 1] = [s + ("\n" if i < len(seg) - 1 else ending)
+                                    for i, s in enumerate(seg)]
+            rewrites += 1
+        path.write_text("".join(t_lines), encoding="utf-8")
+
+    touched = [{"file": module, "op": "CUT"}, {"file": to_module, "op": "INSERT"}]
+    touched += [{"file": s["file"], "op": "IMPORT_REWRITE"} for s in plan_op["sites"]
+                if s["kind"] == "IMPORT_REWRITE"]
+    return {"touched_files": touched,
+            "splice_total": 1 + rewrites + (1 if refs_here else 0)}
+
+
 def _verify_application(work_src: Path, edits: list[dict]) -> tuple[bool, list[str]]:
-    """Fixed-point proof: re-index the edited worktree; re-planning the same
-    renames must refuse (old names gone) and each new name must index as a
-    module-scope definition in its module."""
+    """Fixed-point proof: re-index the edited worktree.  Renames must leave
+    the old name gone and the new name bound at module scope; moves must
+    leave the moved name defined in the target module and absent from the
+    defining module's own definitions (a re-injected from-import is text,
+    not a definition)."""
     from canonical.runtime.bound_capabilities import python_source_symbol_index as indexer
 
     out = work_src / ".orchestrate_probe_index.json"
@@ -224,19 +421,31 @@ def _verify_application(work_src: Path, edits: list[dict]) -> tuple[bool, list[s
     index = json.loads(out.read_text(encoding="utf-8"))
     out.unlink()
     problems = []
-    scope = {}
+    defs_of = {}
     for row in index.get("modules") or []:
-        scope[row["path"]] = {d["name"] for d in row.get("definitions") or []
-                              if str(d["qualname"]).count(".") == 0}
+        defs_of[row["path"]] = {d["name"] for d in row.get("definitions") or []
+                                if str(d["qualname"]).count(".") == 0}
     for op in edits:
-        mod_names = scope.get(op["module"])
-        if mod_names is None:
-            problems.append("MODULE_NOT_REINDEXED:" + op["module"])
-            continue
-        if op["name"] in mod_names:
-            problems.append("OLD_NAME_STILL_DEFINED:" + op["module"] + ":" + op["name"])
-        if op["new_name"] not in mod_names:
-            problems.append("NEW_NAME_NOT_DEFINED:" + op["module"] + ":" + op["new_name"])
+        if op["op"] == "rename_symbol":
+            mod_names = defs_of.get(op["module"])
+            if mod_names is None:
+                problems.append("MODULE_NOT_REINDEXED:" + op["module"])
+                continue
+            if op["name"] in mod_names:
+                problems.append("OLD_NAME_STILL_DEFINED:" + op["module"] + ":" + op["name"])
+            if op["new_name"] not in mod_names:
+                problems.append("NEW_NAME_NOT_DEFINED:" + op["module"] + ":" + op["new_name"])
+        elif op["op"] == "move_symbol":
+            name = str(op["qualname"]).rsplit(".", 1)[-1]
+            src_names = defs_of.get(op["module"], set())
+            tgt_names = defs_of.get(op["to_module"])
+            if tgt_names is None:
+                problems.append("TARGET_MODULE_NOT_REINDEXED:" + op["to_module"])
+                continue
+            if name not in tgt_names:
+                problems.append("MOVED_NAME_NOT_IN_TARGET:" + op["to_module"] + ":" + name)
+            if name in src_names:
+                problems.append("MOVED_NAME_STILL_IN_SOURCE:" + op["module"] + ":" + name)
     return (not problems), problems
 
 
@@ -256,7 +465,7 @@ def run(args, root):
     if not isinstance(edits, list) or not edits:
         _fail("TASK_EDITS_EMPTY")
     for op in edits:
-        if not isinstance(op, dict) or op.get("op") != "rename_symbol":
+        if not isinstance(op, dict) or op.get("op") not in ("rename_symbol", "move_symbol"):
             _fail("UNSUPPORTED_OP_AT_APPLY:" + str((op or {}).get("op")))
     issue_id = str(task["issue_id"])
     title = str(task.get("title") or issue_id)
@@ -296,6 +505,15 @@ def run(args, root):
 
     _copy_tree(source_abs, worktree_abs)
 
+    # a move_symbol into a not-yet-existing module states the intent to
+    # create that module: stage the empty file so the planner can index it.
+    for op in edits:
+        if op["op"] == "move_symbol":
+            tgt = worktree_abs / str(op["to_module"])
+            if not tgt.exists():
+                tgt.parent.mkdir(parents=True, exist_ok=True)
+                tgt.write_text("", encoding="utf-8")
+
     plan_path = ".orchestrate_plan.json"
     ch_args = {"source_root": ".", "output_path": plan_path,
                "edits_path": None, "edits": json.dumps(edits)}
@@ -324,7 +542,8 @@ def run(args, root):
     applied, problems = 0, []
     splice_rows = []
     for op, plan_op in zip(edits, plan["plans"]):
-        apply_row = _apply_rename(worktree_abs, op, plan_op)
+        apply_row = (_apply_rename if op["op"] == "rename_symbol" else _apply_move)(
+            worktree_abs, op, plan_op)
         applied += 1
         splice_rows.append(apply_row)
 
@@ -341,15 +560,18 @@ def run(args, root):
     for row in splice_rows:
         for f in row["touched_files"]:
             rel = f["file"]
-            old_text = (source_abs / rel).read_text(encoding="utf-8")
+            old_file = source_abs / rel
+            old_text = old_file.read_text(encoding="utf-8") if old_file.is_file() else ""
             new_text = (worktree_abs / rel).read_text(encoding="utf-8")
-            old_new[rel] = (old_text, new_text)
+            if old_text != new_text:
+                old_new[rel] = (old_text, new_text)
     diff_chunks = []
     for rel in sorted(old_new):
         old_text, new_text = old_new[rel]
+        created = not (source_abs / rel).is_file()
         diff_chunks.append("".join(difflib.unified_diff(
             old_text.splitlines(keepends=True), new_text.splitlines(keepends=True),
-            fromfile="a/" + rel, tofile="b/" + rel)))
+            fromfile=("/dev/null" if created else "a/" + rel), tofile="b/" + rel)))
     diff_text = "".join(diff_chunks)
     diff_abs.parent.mkdir(parents=True, exist_ok=True)
     diff_abs.write_text(diff_text, encoding="utf-8")
@@ -403,7 +625,9 @@ def run(args, root):
     pr_abs.write_text(pr_text, encoding="utf-8")
     pr_verified = json.loads(pr_abs.read_text(encoding="utf-8")) == pr_intent
 
-    verified = pr_verified and (run_rc == 0 if selected else True) and not problems
+    edits_verified = pr_verified and not problems
+    tests_verified = (run_rc == 0) if selected else True
+    verified = edits_verified and tests_verified
     summary = {
         "adapter": "python_issue_to_pr_orchestrate",
         "task_id": issue_id,
@@ -417,6 +641,7 @@ def run(args, root):
         "test_pytest": pytest_version or "UNAVAILABLE",
         "diff_sha256": diff_sha,
         "pr_intent_verified": pr_verified,
+        "edits_verified": bool(edits_verified),
         "verified": bool(verified),
     }
     output_abs.parent.mkdir(parents=True, exist_ok=True)
