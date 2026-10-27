@@ -273,22 +273,12 @@ def route(goal: str, seed: Sequence[str] | None = None,
     ext = sorted(composer.external_tokens(g))
     have = list(seed) if seed is not None else list(ext)
     tried: list[dict[str, Any]] = []
-    # A sentence that STATES a command line is not a token-scoring question.
-    # `candidate_tokens` scores the registry's keywords against the sentence's
-    # prose, so a sentence whose words match no keyword scores nothing at all --
-    # measured on caaf2e7: "Make a folder named X" returned
-    # OPEN__COMPOSER_NO_REACHABLE_TOKEN with tried=[] (the word "folder" is in
-    # no capability's keywords), while extract_argv had ALREADY returned
-    # ['mkdir', X].  The same sentence with "directory" in place of "folder"
-    # routed fine, because one word happened to be a keyword.  Whether a request
-    # the machine can do is served should not depend on that coincidence.
-    #
-    # Scoped to what the sentence states: extract_argv returns one settled argv
-    # or refuses on ambiguity, and the acceptance layer re-derives it and stops
-    # any step whose argv the sentence does not contain
-    # (STEP_COMMAND_NOT_IN_THE_REQUEST).  Tried AFTER the token loop, so this
-    # only adds reach where there was none -- it cannot preempt a route that
-    # already worked.
+    # MEASURED 2026-10-27: the comment on this block claims it runs AFTER the token
+    # loop; it runs BEFORE it, and the tests say it MUST.  I moved it to match the
+    # comment and 31 tests in test_an_ordinary_sentence_runs_the_command_it_states_v1
+    # failed -- "a stated command is not taken by a keyword match" is a deliberate
+    # rule, not an accident.  The stale comment is the defect, not the order, so the
+    # order is unchanged and the comment now says what the code does.
     stated_command = extract_argv(goal)
     if stated_command is not None:
         reg = composer.load_registry()
@@ -316,6 +306,7 @@ def route(goal: str, seed: Sequence[str] | None = None,
                             "token": token, "chain": list(chain), "tried": tried,
                             "status": "PASS__COMPOSER_ROUTE_FOUND",
                             "authority": "TYPE_LEVEL_COMPOSITION_REACHABLE"}
+
     for token in candidate_tokens(goal, g)[:max_candidates]:
         chain = composer.plan(have, token, g)
         tried.append({"token": token, "reachable": chain is not None,
@@ -710,6 +701,29 @@ def extract_argv(text: str) -> list[str] | None:
     an invention, and an invention executes.
     """
     sentence = str(text or "")
+    # A QUOTED command line ends at its closing quote.  The patterns below run to
+    # the end of the sentence, which is right for "the command cp a b" and wrong for
+    # every sentence that says anything after the command -- and real requests do:
+    #
+    #   "Repair python bug in source S with ast patch search guided by test T using
+    #    test command "python3 T" and save output_path O."
+    #
+    # bound test_argv = ["python3 T", "and", "save", "output_path", "O"], so the
+    # capability raised TEST_ARGS_WITHOUT_A_PROGRAM or ran a command that is not the
+    # command.  Measured 2026-10-27: this was one of three reasons the whole repair
+    # family scored 0/50 on the public runner.  The quotes are the sentence telling
+    # us where the command ends; ignoring them was reading around the evidence.
+    quoted = re.search(r"\b(?:shell\s+|cli\s+|terminal\s+)?command\s+"
+                       r"(?:to\s+run\s+|line\s+)?[\"\'](.+?)[\"\']", sentence, re.I)
+    if quoted:
+        body = quoted.group(1).strip()
+        if body:
+            try:
+                parts = shlex.split(body)
+            except ValueError:
+                return None
+            if parts and all(isinstance(part, str) and part for part in parts):
+                return parts
     for pat in _ARGV:
         m = pat.search(sentence)
         if not m:
@@ -2721,6 +2735,107 @@ def _preceding_words(goal: str, candidate: str, limit: int = 4) -> set[str]:
     return set(words[-limit:])
 
 
+def _stem(word: str) -> str:
+    """Enough stemming to stop a plural from hiding a match: `tests` -> `test`."""
+    w = str(word or "").lower()
+    if len(w) > 3 and w.endswith("es"):
+        return w[:-2]
+    if len(w) > 2 and w.endswith("s"):
+        return w[:-1]
+    return w
+
+
+def _words_match(wanted: set[str], present: set[str]) -> bool:
+    return bool({_stem(w) for w in wanted} & {_stem(p) for p in present})
+
+
+def _stated_directory(slot: str, goal: str) -> str | None:
+    """The directory the sentence names with this slot's own word, when it is one.
+
+    `extract_paths` returns files, so a DIRECTORY slot could never be filled from
+    the sentence at all -- it fell through to the single-path rules and took a file.
+    Measured 2026-10-27 on the repair families: `source_root` bound
+    `<dir>/test_x.py` and the step raised SOURCE_ROOT_INVALID.
+
+    The token after the slot's word is the candidate; it is accepted only when it
+    exists as a directory in the repository.  A path the machine does not have is
+    never invented here.
+    """
+    wanted = {_stem(w) for w in _slot_words(slot)}
+    if not wanted:
+        return None
+    words = re.findall(r"[\w.\-/]+", str(goal or ""))
+    for index, word in enumerate(words[:-1]):
+        if _stem(word) not in wanted:
+            continue
+        for candidate in words[index + 1:index + 4]:
+            cleaned = candidate.strip(".,;:")
+            if "/" not in cleaned:
+                continue
+            if _is_directory_in_repo(cleaned):
+                return cleaned
+    return None
+
+
+def _is_directory_in_repo(candidate: str) -> bool:
+    try:
+        return (_repo_root() / str(candidate)).is_dir()
+    except OSError:
+        return False
+
+
+def _parent_if_directory(candidate: str) -> str | None:
+    """The parent of a stated file, when the parent is a real directory.
+
+    Only used to keep a DIRECTORY slot from being filled with a file the sentence
+    named for a different role -- it never invents a path that is not on disk.
+    """
+    import pathlib as _p
+    parent = _p.PurePosixPath(str(candidate)).parent
+    text = str(parent)
+    if not text or text == ".":
+        return None
+    return text if _is_directory_in_repo(text) else None
+
+
+def _listed_paths(slot: str, paths: Sequence[str], goal: str) -> list[str] | None:
+    """The run of stated paths this LIST slot is about, or None when unclear.
+
+    Starts at the path the slot's own word introduces, then takes the immediately
+    following stated paths while they stay in that path's directory and are still
+    named before anything the sentence treats as a destination ("save ... to").
+    """
+    wanted = _slot_words(slot)
+    if not wanted or not paths:
+        return None
+    starts = [i for i, p in enumerate(paths) if _words_match(wanted, _preceding_words(goal, p))]
+    if not starts:
+        return None
+    # The FIRST match is where the list begins; the run expansion below is what decides
+    # where it ends.  Requiring exactly one match was wrong for a reason worth naming:
+    # the words before a list's second element include the first element's own filename
+    # ("<dir>/test_a.py, <dir>/test_b.py" puts `test` in front of BOTH), so a list
+    # could never start.  Measured: `test_paths` bound the SOURCE file for a sentence
+    # that stated three test paths.
+    first = paths[starts[0]]
+    directory = str(pathlib.PurePosixPath(str(first)).parent)
+    run = [first]
+    for candidate in paths[starts[0] + 1:]:
+        if str(pathlib.PurePosixPath(str(candidate)).parent) != directory:
+            break
+        if candidate in run:
+            continue
+        run.append(candidate)
+    # A destination is not a member of the list even when it shares the directory.
+    run = [c for c in run if not (_preceding_words(goal, c) & _DESTINATION_CUES)]
+    # A single stated path is still the list the sentence states -- returning None for
+    # it sent the slot back to the single-path rules, which chose a DIFFERENT file.
+    return run or None
+
+
+_DESTINATION_CUES = frozenset({"to", "into", "output", "output_path", "save", "saving", "dest"})
+
+
 def _noun_matched_path(slot: str, paths: Sequence[str], goal: str) -> str | None:
     """The path the sentence introduced with the word this slot is about.
 
@@ -2734,7 +2849,7 @@ def _noun_matched_path(slot: str, paths: Sequence[str], goal: str) -> str | None
     wanted = _slot_words(slot)
     if not wanted or not paths:
         return None
-    hits = [p for p in paths if wanted & _preceding_words(goal, p)]
+    hits = [p for p in paths if _words_match(wanted, _preceding_words(goal, p))]
     return hits[0] if len(hits) == 1 else None
 
 
@@ -2776,7 +2891,43 @@ def bind(signature: Mapping[str, str], goal: str,
             args[slot] = produced[slot]
             continue
         t = str(typ or "").upper()
-        if t in ("PATH_FILE", "PATH_INPUT", "PATH_LIST", "PATH_DIR"):
+        if t == "PATH_LIST":
+            # A LIST slot is filled with a LIST -- the paths the sentence states for
+            # it -- and the old rule filled it with one string, chosen by the
+            # single-path rules.  Measured 2026-10-27 on the repair family:
+            #
+            #   "Repair the python source <dir>/calc_x.py with the test guided repair
+            #    loop so that the unit tests in <dir>/test_calc_x_a.py,
+            #    <dir>/test_calc_x_b.py, <dir>/test_calc_x_c.py pass, and save the
+            #    repair report to <report>."
+            #
+            # bound test_paths = "<dir>/calc_x.py" -- the SOURCE, not the tests.  The
+            # loop then raised TEST_PATHS_REQUIRED about a sentence that states three
+            # test paths.  The capability was right, the route was right, and the
+            # sentence was unreadable to the binder.
+            #
+            # The run starts at the path this slot's own word introduces and continues
+            # through the stated paths that share its directory.  Directory-sharing is
+            # the signal, not a guess: a corpus of test files sits in one directory,
+            # and the report the same sentence asks for sits in another, which is how
+            # the run knows where to stop.
+            # A LIST slot always yields a LIST.  It used to yield a bare string when
+            # the sentence stated one path, and the adapters are explicit about the
+            # difference: measured the same day, `test_paths` was a list and
+            # `source_paths` a string in the SAME call, and the loop raised
+            # SOURCE_PATHS_NOT_LIST about a sentence whose source path it had already
+            # read correctly.  One slot type, one shape.
+            listed = _listed_paths(slot, paths, goal)
+            if listed:
+                args[slot] = listed
+                continue
+            named = _noun_matched_path(slot, paths, goal)
+            chosen = named if named is not None else _sole_existing_repository_path(paths)
+            if chosen is None and paths:
+                chosen = paths[0]
+            if chosen is not None:
+                args[slot] = [chosen]
+        if t in ("PATH_FILE", "PATH_INPUT", "PATH_DIR"):
             # An input is something that can be READ, so a path that is already
             # on disk is the better reading of the sentence than "whichever name
             # came first".  Measured on 29e23ef: "Verify the tar.gz archive
@@ -2788,8 +2939,22 @@ def bind(signature: Mapping[str, str], goal: str,
             # Only the unambiguous case moves: exactly one existing repository
             # path, or exactly one existing path.  Anything else keeps the
             # historical order rule byte for byte.
+            if t == "PATH_DIR":
+                stated = _stated_directory(slot, goal)
+                if stated is not None:
+                    args[slot] = stated
+                    continue
             named = _noun_matched_path(slot, paths, goal)
             chosen = named if named is not None else _sole_existing_repository_path(paths)
+            if chosen is not None and t == "PATH_DIR":
+                # A DIRECTORY slot takes a directory.  Measured the same day: on
+                # "Run the strict progress repair loop on the python source root
+                # <dir> with the test <dir>/test_x.py", source_root bound
+                # <dir>/test_x.py -- a file, in the slot that names a tree -- and the
+                # step raised SOURCE_ROOT_INVALID.  The name is in the sentence; the
+                # type is in the name.
+                chosen = chosen if _is_directory_in_repo(chosen) else (
+                    _parent_if_directory(chosen) or chosen)
             if chosen is not None:
                 args[slot] = chosen
             elif paths:

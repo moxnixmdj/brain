@@ -26062,7 +26062,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6436,
+  "research_index_records": 6437,
   "routing_tokens": 1951,
   "skills": 18,
   "source_index_entry_points": 420,
@@ -26071,7 +26071,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "09bbc47c5b0756cf3a50a209eecbc6e2f47a211c9898cf9a49b194c75dd4b4e7"
+  "value": "6810127df99a0ffaf513331b5dd6e41a4e3abf073ac3676d1ff157c46ac8eaa6"
  },
  "engines": [
   {
@@ -193103,6 +193103,31 @@
    }
   },
   {
+   "action_id": "BIND_EACH_SLOT_TO_ITS_STATED_VALUE_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/BIND_EACH_SLOT_TO_ITS_STATED_VALUE_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/BIND_EACH_SLOT_TO_ITS_STATED_VALUE_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "8f2b70d3b38ac33937012afa485aafa2baf7c9fe1e168579ef1fe3de93d740b5",
+   "status": "",
+   "terms": {
+    "20261027": 1,
+    "bind": 1,
+    "bind_each_slot_to_its_stated_value_v1_20261027_v1": 1,
+    "bind_each_slot_to_the_value_the_sentence_states_for_it__quoted_argv_list_and_directory": 1,
+    "each": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "slot": 1,
+    "stated": 1,
+    "test_argv_is_the_quoted_command_path_list_is_a_list_of_the_stated_paths_beginning_at_the_slot_s_own_word_and_path_dir_is_a_stated_directory__measured_python_repair_test_guided_and_python_ast_patch_search_chains_went_from_raising_test_paths_required_to_pass_composer_chain_executed": 1,
+    "the_five_repair_families_scored_zero_of_fifty_each_and_the_route_was_not_the_only_cause__measured_2026_10_27_the_capability_is_chosen_correctly_and_then_cannot_be_bound__test_argv_absorbed_the_rest_of_the_sentence_path_list_produced_one_string_and_chose_the_source_file_as_the_test_corpus_and_path_dir_could_not_be_bound_at_all": 1,
+    "v1": 2,
+    "value": 1
+   }
+  },
+  {
    "action_id": "BM25_INVERSE_DOCUMENT_FREQUENCY_REORDERS_BOUND_CAPABILITY_SELECTION_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -213305,9 +213330,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "bcb89df07a894b873c553fb7b9ca86f578528dcfd425cb9df26edcd0a07df0cf",
+   "sha256": "efb60b1ab32e88d3dd93cc90b887915e4206072c99ca8cc5d674d4359a066454",
    "summary": "Routing a sentence to a typed capability chain.",
-   "symbol_count": 46,
+   "symbol_count": 52,
    "symbols": [
     "_bare_alternatives",
     "_bare_stated_value",
@@ -213321,18 +213346,18 @@
     "_exists_in_repo",
     "_fully_bound_contract_tokens",
     "_head_flags",
+    "_is_directory_in_repo",
     "_is_repository_path",
+    "_listed_paths",
     "_mask_a_quoted_value",
     "_no_flags",
     "_noun_matched_path",
+    "_parent_if_directory",
     "_pathish",
     "_preceding_words",
     "_prose_argv",
     "_prose_count",
-    "_prose_ordinal",
-    "_quoted_value",
-    "_quoted_values",
-    "_repo_root"
+    "_prose_ordinal"
    ],
    "terms": {
     "candidate_tokens": 1,
