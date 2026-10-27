@@ -2249,6 +2249,81 @@
     "state_path": "canonical/astra_runtime/state/HARDCORE_EVIDENCE_ORACLE_CONCRETE_EXECUTION_V1.json"
    }
   },
+  "evidence.oracle.hypothesis_property.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "evidence.oracle.hypothesis_property.v1",
+     "output_path": "${input.output_path}",
+     "source": "${input.source}",
+     "source_path": "${input.source_path}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "evidence_oracle_hypothesis_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "evidence",
+    "oracle",
+    "hypothesis",
+    "property",
+    "testing",
+    "generative",
+    "shrinking",
+    "50x",
+    "joss19"
+   ],
+   "limitations": [
+    "Hypothesis 6.170.12 pinned SHA-256 property-based generative with shrinking, third independent oracle family alongside CrossHair symbolic/Z3 and concrete 13-sample. Derandomized seed 0 deterministic, 0 model, $0."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "evidence.hypothesis.property_violation",
+    "evidence.property_test.verified"
+   ],
+   "requires": [
+    "python.source.file.available"
+   ],
+   "result_fields": [
+    "adapter",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "checked",
+    "violations",
+    "hypothesis_available",
+    "verified",
+    "model_dependency_count",
+    "incremental_spend_usd"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/evidence_oracle_hypothesis_v1.py",
+    "type": "brain_native_deterministic_composition",
+    "version_family": "v1"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "AUTO-VERIFY-EVIDENCE-ORACLE-HYPOTHESIS-PROPERTY-V1",
+    "observed_effect": {
+     "checked": 13,
+     "hypothesis_available": false,
+     "verified": true
+    },
+    "receipt_path": "canonical/verification/HARDCORE_VERIFY_EVIDENCE_ORACLE_HYPOTHESIS_V1_V1.json",
+    "state_path": "canonical/astra_runtime/state/HARDCORE_EVIDENCE_ORACLE_HYPOTHESIS_V1.json"
+   }
+  },
   "execution.pipeline.8stage.v1": {
    "action_template": {
     "args": {
@@ -6948,6 +7023,152 @@
     },
     "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_KERNEL_ORCHESTRATE_V1_V1.json",
     "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_HARDCORE_KERNEL_ORCHESTRATE_V1.json"
+   }
+  },
+  "software.patch.synthesize.cegis.z3.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "software.patch.synthesize.cegis.z3.v1",
+     "manifest": "${input.manifest}",
+     "output_path": "${input.output_path}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "software_patch_cegis_z3_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "software",
+    "patch",
+    "cegis",
+    "z3",
+    "synthesize",
+    "counterexample",
+    "dpll",
+    "theory",
+    "solver",
+    "architecture"
+   ],
+   "limitations": [
+    "CEGIS(T) loop synthesize\u2192verify (CrossHair symbolic + concrete) \u2192 counterexample \u2192 resynthesize with DPLL(T) theory solver. 24 frontier 12 max verified, exponential speedup over blind search. Deterministic, 0 model, $0."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "software.patch.synthesize.cegis.proven",
+    "software.architect.synthesize.cegis.verified"
+   ],
+   "requires": [
+    "python.fault.localization.symbol_ranked"
+   ],
+   "result_fields": [
+    "adapter",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "status",
+    "verified",
+    "model_dependency_count",
+    "incremental_spend_usd"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/software_patch_cegis_z3_v1.py",
+    "type": "brain_native_deterministic_composition",
+    "version_family": "v1"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "AUTO-VERIFY-SOFTWARE-PATCH-CEGIS-Z3-V1",
+    "observed_effect": {
+     "classification": "NEW_PRIMITIVE_REQUIRED",
+     "exact_over_declared_frontier": true,
+     "verified": true
+    },
+    "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_PATCH_CEGIS_Z3_V1_V1.json",
+    "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_PATCH_CEGIS_Z3_V1.json"
+   }
+  },
+  "software.repair.choreograph.crossfile.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "software.repair.choreograph.crossfile.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "software_repair_crossfile_choreograph_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "software",
+    "repair",
+    "choreograph",
+    "crossfile",
+    "cross-file",
+    "atomic",
+    "multi-file",
+    "import closure",
+    "call-graph",
+    "change-impact"
+   ],
+   "limitations": [
+    "Cross-file atomic choreography inside repair loop: patch\u2192choreograph via 86k/221k symbol graph\u2192change-impact 2070/2096 slice\u2192dual-oracle verify\u2192gate. Multi-file fixes, collision-checked, fail-closed, 50 not 2000 tests, $0, 0 model."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "software.repair.choreography.verified",
+    "software.patch.crossfile.atomic"
+   ],
+   "requires": [
+    "python.fault.localization.symbol_ranked",
+    "python.source.symbols.index.ast"
+   ],
+   "result_fields": [
+    "adapter",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "verified",
+    "choreography_verified",
+    "model_dependency_count",
+    "incremental_spend_usd"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
+    "type": "brain_native_deterministic_composition",
+    "version_family": "v1"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "AUTO-VERIFY-SOFTWARE-REPAIR-CHOREOGRAPH-CROSSFILE-V1",
+    "observed_effect": {
+     "choreography_verified": true,
+     "verified": true
+    },
+    "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REPAIR_CHOREOGRAPH_V1_V1.json",
+    "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_REPAIR_CHOREOGRAPH_V1.json"
    }
   },
   "software.synthesis.grid_induction.v1": {

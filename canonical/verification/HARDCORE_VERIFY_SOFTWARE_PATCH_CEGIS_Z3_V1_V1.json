@@ -1,0 +1,18 @@
+{
+ "capability_id": "software.patch.synthesize.cegis.z3.v1",
+ "mission_id": "AUTO-VERIFY-SOFTWARE_PATCH_CEGIS_Z3_V1-V1",
+ "observed_effect": {
+  "adapter": "software_patch_cegis_z3_v1",
+  "incremental_spend_usd": 0,
+  "model_dependency_count": 0,
+  "output_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_PATCH_CEGIS_Z3_V1.json",
+  "output_sha256": "889a8a155d5e2043795daf5633b8c5bbb7b49a3716e7c94ccdaa365a809698a5",
+  "output_verified": true,
+  "status": null,
+  "verified": true
+ },
+ "output_sha256": "889a8a155d5e2043795daf5633b8c5bbb7b49a3716e7c94ccdaa365a809698a5",
+ "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+ "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_PATCH_CEGIS_Z3_V1.json",
+ "verified": true
+}
