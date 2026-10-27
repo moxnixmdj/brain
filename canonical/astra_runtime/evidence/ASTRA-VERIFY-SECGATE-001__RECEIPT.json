@@ -1,0 +1,35 @@
+{
+  "receipt_for": "ASTRA-VERIFY-SECGATE-001",
+  "capability_id": "python.review.diff_security_gate.v1",
+  "adapter_module": "python_review_diff_security_gate",
+  "observed": {
+    "golden": {
+      "all_six_gates": "PASS",
+      "bandit": "bandit 1.9.4"
+    },
+    "blind_leg": {
+      "other_gates": {
+        "lint": "PASS",
+        "type": "PASS",
+        "suite": "PASS",
+        "coverage": "PASS",
+        "perf": "PASS"
+      },
+      "security_gate": "FAIL",
+      "blocking": [
+        {
+          "test_id": "B602",
+          "file": "pkg/util.py",
+          "line": 10,
+          "severity": "HIGH"
+        }
+      ],
+      "evidence": "covered+typed+green+fast shell=True wrapper blocked only here"
+    },
+    "e2e_ms": [
+      1986.3,
+      1797.6
+    ],
+    "crown": "parse_edit_intent -> issue_to_pr_orchestrate -> lint + type + suite + coverage + perf + security gate fan-in (review stage complete)"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "mission_id": "ASTRA-VERIFY-PERFGATE-001",
+  "status": "COMPLETE",
+  "golden": {
+    "all_gates": "PASS",
+    "normalized_ratio": 0.9966,
+    "chain_ms_two_runs": [
+      1991.1,
+      2031.3
+    ]
+  },
+  "blind_leg": {
+    "lint": "PASS",
+    "type": "PASS",
+    "suite": "PASS",
+    "coverage": "FAIL",
+    "perf": "FAIL",
+    "ratio": 19.61
+  },
+  "honesty": "timing artifacts carry raw nanoseconds; verdict stability across reruns pinned",
+  "isolated_leg": {
+    "prior_gates": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+    ],
+    "perf_gate": "FAIL",
+    "slowdown_ratio": 13.8555,
+    "evidence": "planted cost inside helper (executed by the suite -> coverage clean): ONLY the perf gate fires, at the measured ratio"
+  },
+  "statement_integrity": "first blind leg: coverage honestly also fires (uncovered line); second leg isolates perf as the sole firing gate"
+}

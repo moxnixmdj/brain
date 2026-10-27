@@ -1,0 +1,20 @@
+{
+  "receipt_for": "ASTRA-VERIFY-TESTGEN-001",
+  "capability_id": "python.tests.generate.scaffold.v1",
+  "adapter_module": "python_tests_generate_scaffold",
+  "observed": {
+    "verified": true,
+    "generated": 4,
+    "test_passed": 4,
+    "test_failed": 0,
+    "fixture_examples": {
+      "typed-scalar": "celsius_to_kelvin(c=1.5)",
+      "annotated-default": "fan_curve(temp=1.5, max_rpm=1)",
+      "typed-collection": "summarize(readings=[1.5])"
+    },
+    "run1_ms": 317.5,
+    "run2_ms": 306.7,
+    "output_sha256": "8cdb90949edc34494463b33fc07e70abd75239949a494fb5aee97dd51c695bd0",
+    "byte_identical_rerun": true
+  }
+}

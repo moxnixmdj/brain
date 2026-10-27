@@ -1,0 +1,30 @@
+{
+  "mission_id": "ASTRA-VERIFY-APPLYGATE-001",
+  "status": "COMPLETE",
+  "e2e_ms_run1": 538.2,
+  "e2e_ms_run2": 474.3,
+  "golden": {
+    "nl_complete": true,
+    "orchestrate_verified": true,
+    "triage": "PASS",
+    "applygate": "PASS",
+    "tests": 1
+  },
+  "sabotage": {
+    "triage": "FAIL",
+    "applygate": "FAIL",
+    "failing_rows": [
+      "tests/test_core.py"
+    ],
+    "note": "F401 on the changed line blocks statically AND fails at runtime (both gates fire)"
+  },
+  "determinism": "applygate artifact byte-identical on rerun",
+  "blind_spot_leg": {
+    "triage": "PASS",
+    "applygate": "FAIL",
+    "failing_rows": [
+      "tests/test_core.py"
+    ],
+    "note": "rename-only diff: zero F*/E9* on changed lines -> static gate PASS; apply+full-suite gate FAIL with the broken test module named"
+  }
+}

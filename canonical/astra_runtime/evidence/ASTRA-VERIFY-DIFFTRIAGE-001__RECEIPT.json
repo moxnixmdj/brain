@@ -1,0 +1,29 @@
+{
+  "receipt_for": "ASTRA-VERIFY-DIFFTRIAGE-001",
+  "capability_id": "python.review.diff_static_triage.v1",
+  "adapter_module": "python_review_diff_static_triage",
+  "observed": {
+    "golden": {
+      "gate": "PASS",
+      "blocking": 0,
+      "advisory": 0,
+      "verified": true
+    },
+    "sabotage": {
+      "gate": "FAIL",
+      "blocking": 1,
+      "first": {
+        "file": "pkg/core.py",
+        "line": 3,
+        "code": "F821"
+      }
+    },
+    "ruff_version": "ruff 0.17.3",
+    "syntax_gate": "compileall-equivalent via ast.parse always-on",
+    "e2e_ms": [
+      382.2,
+      322.7
+    ],
+    "chain": "python.issue.natural_language.parse_edit_intent.v1 -> python.software.issue_to_pr.orchestrate.v1 -> python.review.diff_static_triage.v1"
+  }
+}

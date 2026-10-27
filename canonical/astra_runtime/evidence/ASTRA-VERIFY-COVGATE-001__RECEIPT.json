@@ -1,0 +1,32 @@
+{
+  "receipt_for": "ASTRA-VERIFY-COVGATE-001",
+  "capability_id": "python.review.diff_coverage_gate.v1",
+  "adapter_module": "python_review_diff_coverage_gate",
+  "observed": {
+    "golden": {
+      "gate": "PASS",
+      "ratio": 1.0,
+      "tests": 1,
+      "verified": true
+    },
+    "blind_leg": {
+      "three_prior_gates_all_pass": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "coverage_gate": "FAIL",
+      "evidence": [
+        {
+          "file": "pkg/util.py",
+          "line": 9
+        }
+      ]
+    },
+    "e2e_ms": [
+      1947.1,
+      1829.4
+    ],
+    "crown": "parse_edit_intent -> issue_to_pr_orchestrate -> review.diff_static_triage + review.diff_type_gate -> repo.diff_apply_full_testgate -> review.diff_coverage_gate"
+  }
+}

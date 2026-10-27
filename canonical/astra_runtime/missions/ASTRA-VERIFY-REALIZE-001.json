@@ -1,0 +1,8 @@
+{
+  "mission_id": "ASTRA-VERIFY-REALIZE-001",
+  "arc_class": "semantic_engine",
+  "kind": "VERIFY_CAPABILITY_WORTHSHIP",
+  "target_capability": "python.repo.pr_realize.v1",
+  "statement": "The crown previously ended at an intent document. This capability cuts a branch from the base, applies the gated diff, commits with pinned identity/dates (sha = pure content function), pushes to origin, and proves via ls-remote that the remote holds exactly the bytes built here -- a local bare repo stands in for the forge so the proof is hermetic and zero-network. Staging is restricted to diff-touched paths so the crown's own bookkeeping files never enter the commit. Golden leg: whole pipeline NL->orchestrate->six review gates->realize with remote sha verified. Rerun: idempotent, identical sha, no force-push.",
+  "zero_spend": true
+}

@@ -35,7 +35,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::route() ranked capabilities by scoring every token of the caller's sentence, including the tokens of the file path the caller typed, and counted a word twice when the sentence said it twice. The token breakdown of \"Report who calls the function top in the python source root /home/user/brain/...\" is decisive: brain.module.function.invoke 674.3 = function 269.3 + brain 202.5 twice; terminal.kstar.root.assess.stdlib 449.2 = root 44.2 + brain 202.5 twice; python.source.symbols.index.ast, which owns calls at 403.0, lost at 483.6. 405.0 of every winner's score was the directory the file happens to live in. The same mechanism let document.convert.markdown_pdf.pandoc_weasyprint win \"Report the call graph of the functions in the python file F writing the report to R\" on the single repeated word report, 538.6 against 505.9, with no operation word matched at all",
- "canonical_base_commit": "5fe2596a15070d4f5e34352c948a0b68fbd35301",
+ "canonical_base_commit": "6879d0f1b961277b201dc92a6fb7860730da5125",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -49,7 +49,7 @@
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
  "load_bearing_primary": {
-  "canonical_base_commit": "5fe2596a15070d4f5e34352c948a0b68fbd35301",
+  "canonical_base_commit": "6879d0f1b961277b201dc92a6fb7860730da5125",
   "constructive_gap_for_open_obligation_ids": [
    "AUTOMATIONBENCH_GE_40",
    "CHARTOGRAPHY_TOOLS_GE_89",
@@ -84,7 +84,7 @@
   }
  ],
  "recursive_obs": {
-  "canonical_base_commit": "5fe2596a15070d4f5e34352c948a0b68fbd35301",
+  "canonical_base_commit": "6879d0f1b961277b201dc92a6fb7860730da5125",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "CHARGING_THE_TOKENS_OF_A_STATED_PATH_TO_THE_COVERAGE_BUDGET",
@@ -1994,7 +1994,7 @@
      "path": "canonical/runtime/brain_unified_model_v1.py"
     },
     {
-     "git_blob_sha": "2a51e1bf3286b745580884b6c36a1838dc954dcb",
+     "git_blob_sha": "44ff9b2af399324e0eaa8da8ef12c524b2db6a29",
      "path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
     }
    ],

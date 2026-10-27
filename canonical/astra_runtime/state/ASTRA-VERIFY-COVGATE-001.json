@@ -1,0 +1,26 @@
+{
+  "mission_id": "ASTRA-VERIFY-COVGATE-001",
+  "status": "COMPLETE",
+  "e2e_ms_run1": 1947.1,
+  "e2e_ms_run2": 1829.4,
+  "golden": {
+    "lint": "PASS",
+    "type": "PASS",
+    "suite": "PASS",
+    "coverage": "PASS",
+    "ratio": 1.0
+  },
+  "blind_leg": {
+    "lint": "PASS",
+    "type": "PASS",
+    "suite": "PASS",
+    "coverage": "FAIL",
+    "miss_rows": [
+      {
+        "file": "pkg/util.py",
+        "line": 9
+      }
+    ]
+  },
+  "determinism": "coverage artifact byte-identical on rerun"
+}

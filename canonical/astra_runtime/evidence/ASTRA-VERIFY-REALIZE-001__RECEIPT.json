@@ -1,0 +1,24 @@
+{
+  "receipt_for": "ASTRA-VERIFY-REALIZE-001",
+  "capability_id": "python.repo.pr_realize.v1",
+  "adapter_module": "python_repo_pr_realize",
+  "observed": {
+    "golden": {
+      "gate": "PASS",
+      "push_verified": true,
+      "head_sha": "7a7e8438f1d86c2df4b7688bbd3eec3565d3d547",
+      "remote_ref": "refs/heads/crown/GH-9900-rename"
+    },
+    "rerun_idempotent": {
+      "head_sha_equal": true,
+      "already_realized": true,
+      "no_force_push": true
+    },
+    "forge": "local bare repo as origin -- hermetic, full push/ls-remote verify semantics",
+    "e2e_ms": [
+      1808.8,
+      1957.1
+    ],
+    "crown": "parse_edit_intent -> issue_to_pr_orchestrate -> six review gates -> pr_realize (SHA-VERIFIED SHIP)"
+  }
+}

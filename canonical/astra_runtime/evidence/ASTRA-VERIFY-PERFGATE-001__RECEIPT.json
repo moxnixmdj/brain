@@ -1,0 +1,38 @@
+{
+  "receipt_for": "ASTRA-VERIFY-PERFGATE-001",
+  "capability_id": "python.review.diff_perf_gate.v1",
+  "adapter_module": "python_review_diff_perf_gate",
+  "observed": {
+    "golden": {
+      "gate": "PASS",
+      "ratio": 0.9966
+    },
+    "blind_leg": {
+      "four_prior_gates_all_pass": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "FAIL"
+      ],
+      "perf_gate": "FAIL",
+      "slowdown_ratio": 19.61,
+      "evidence": "planted loop on fib never executed by the suite: coverage gate also fires honestly (two gates fire); lint/type/suite blind"
+    },
+    "e2e_ms": [
+      1991.1,
+      2031.3
+    ],
+    "crown": "parse_edit_intent -> issue_to_pr_orchestrate -> lint + type + suite + coverage + perf review fan-in",
+    "isolated_leg": {
+      "prior_gates": [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "perf_gate": "FAIL",
+      "slowdown_ratio": 13.8555,
+      "evidence": "planted cost inside helper (executed by the suite -> coverage clean): ONLY the perf gate fires, at the measured ratio"
+    }
+  }
+}
