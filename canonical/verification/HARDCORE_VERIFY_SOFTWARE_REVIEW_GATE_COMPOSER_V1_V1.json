@@ -1,0 +1,18 @@
+{
+ "capability_id": "software.review.gate.composer.v1",
+ "mission_id": "AUTO-VERIFY-SOFTWARE_REVIEW_GATE_COMPOSER_V1-V1",
+ "observed_effect": {
+  "adapter": "software_review_gate_composer_v1",
+  "gates_verified": true,
+  "incremental_spend_usd": 0,
+  "model_dependency_count": 0,
+  "output_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_REVIEW_GATE_COMPOSER_V1.json",
+  "output_sha256": "79b496d609a956dc4b929171b7c28598c8b584d360df2d1996243774b5d4a019",
+  "output_verified": true,
+  "verified": true
+ },
+ "output_sha256": "79b496d609a956dc4b929171b7c28598c8b584d360df2d1996243774b5d4a019",
+ "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+ "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_REVIEW_GATE_COMPOSER_V1.json",
+ "verified": true
+}

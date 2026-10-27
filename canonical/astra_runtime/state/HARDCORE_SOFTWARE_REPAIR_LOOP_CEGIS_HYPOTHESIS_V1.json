@@ -1,0 +1,1 @@
+{"budget":3,"capability_id":"software.repair.loop.cegis_hypothesis.v1","incremental_spend_usd":0,"iterations":[{"cegis":true,"choreograph":true,"concrete":true,"hypothesis":true,"round":0}],"model_dependency_count":0,"schema":"PROJECT_BRAIN_SOFTWARE_REPAIR_LOOP_CEGIS_HYPOTHESIS_V1","verified":true}
