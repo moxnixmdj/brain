@@ -914,6 +914,53 @@ def _structured_binary_format_match(goal,entry):
     }
 
 
+# A precondition token that most of the registry shares discriminates nothing.
+#
+# `_score` pays 3 points per matched `requires` token and counts every one as
+# specificity, on the stated reasoning that "requirements are highly informative
+# for environment qualifiers such as image-only/scanned/local". That is true of a
+# qualifier. It is not true of `python.source.file.available`, which 82% of the
+# entries that declare any precondition also declare, token by token: available
+# 82.1%, file 55.4%, source 35.7%, python 28.6%, then a clear gap to test/corpus
+# at 19.6%.
+#
+# Measured on "Count the functions defined in the python file <abs>/calc.py and
+# write the report to <abs>/a.json", python.source.audit.ast scored 15 on the
+# two keywords that ARE the question -- `functions` and `python` -- and lost to
+# python.software.repair.apply.verified.v1 at 22, whose only keyword match was
+# `write` and which collected 6 points and 2 specificity for requiring that a
+# python file exist. A capability was chosen for a sentence because both of them
+# need a python file to be there.
+#
+# Derived from the registry, never written by hand: the set recomputes whenever
+# the registry changes, so it cannot go stale the way a word list does.
+_REQUIRES_SHARE_CEILING = 0.25
+_nondiscriminating_requires_cache = None
+
+
+def _nondiscriminating_requires_tokens():
+    global _nondiscriminating_requires_cache
+    if _nondiscriminating_requires_cache is not None:
+        return _nondiscriminating_requires_cache
+    out = frozenset()
+    try:
+        path = pathlib.Path(__file__).resolve().parent / "BOUND_CAPABILITY_REGISTRY_V1.json"
+        with open(path, "r", encoding="utf-8") as fh:
+            caps = (json.load(fh) or {}).get("capabilities") or {}
+        declaring = [_tokens(e.get("requires", [])) for e in caps.values() if isinstance(e, dict) and e.get("requires")]
+        if declaring:
+            counts = {}
+            for toks in declaring:
+                for t in toks:
+                    counts[t] = counts.get(t, 0) + 1
+            n = float(len(declaring))
+            out = frozenset(t for t, c in counts.items() if c / n > _REQUIRES_SHARE_CEILING)
+    except Exception:
+        out = frozenset()
+    _nondiscriminating_requires_cache = out
+    return out
+
+
 def _score(goal, cid, entry):
     surface_ok,surface_evidence=_execution_surface_constraint_match(goal,entry)
     if not surface_ok:
@@ -955,13 +1002,19 @@ def _score(goal, cid, entry):
             "matched_identity":[],
             "matched_keywords":sorted(gt & keywords),
         }
-    score=5*len(gt & provides)+4*len(gt & keywords)+3*len(gt & requires)+2*len(gt & identity)
+    # A precondition most of the registry shares is not evidence about this
+    # sentence. See _nondiscriminating_requires_tokens for the measurement.
+    nondiscriminating=_nondiscriminating_requires_tokens()
+    informative_requires=(gt & requires) - nondiscriminating
+    score=5*len(gt & provides)+4*len(gt & keywords)+3*len(informative_requires)+2*len(gt & identity)
     # Prefer more-specific matched preconditions when base scores tie.
-    specificity=len(gt & requires)
+    specificity=len(informative_requires)
     return score,specificity,{
         "goal_tokens":sorted(gt),
         "matched_provides":sorted(gt & provides),
         "matched_requires":sorted(gt & requires),
+        "informative_requires":sorted(informative_requires),
+        "nondiscriminating_requires":sorted((gt & requires) & nondiscriminating),
         "matched_identity":sorted(gt & identity),
         "matched_keywords":sorted(gt & keywords),
     }

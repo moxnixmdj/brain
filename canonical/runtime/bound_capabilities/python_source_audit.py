@@ -8,9 +8,24 @@ def _safe_root(root, raw):
     p=(root/str(raw or "")).resolve()
     if p != root and root not in p.parents:
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
-    if not p.is_dir():
-        raise RuntimeError("PYTHON_AUDIT_ROOT_MISSING")
-    return p
+    if p.is_dir():
+        return p
+    # "Audit the python file F" and "audit the python source root D" are one
+    # question with two scopes. Refusing the first because the caller named a
+    # file meant the machine could answer nothing about a single source file --
+    # measured, "Count the functions defined in the python file <abs>/calc.py"
+    # never reached an adapter at all. The scope stays exactly what the caller
+    # named: one file audits one file, never its siblings.
+    if p.is_file() and p.suffix == ".py":
+        return p
+    raise RuntimeError("PYTHON_AUDIT_ROOT_MISSING")
+
+
+def _py_files(source_root):
+    """The files the audit walks: one named file, or every file under a named tree."""
+    if source_root.is_file():
+        return [source_root]
+    return sorted(source_root.rglob("*.py"))
 
 def _imports(tree):
     out=set()
@@ -34,7 +49,7 @@ def run(args, root):
     imports=set()
     total_functions=0
     total_classes=0
-    for path in sorted(source_root.rglob("*.py")):
+    for path in _py_files(source_root):
         if not path.is_file():
             continue
         raw=path.read_bytes()

@@ -6769,6 +6769,11 @@
         "type": "invoke_capability"
       },
       "adapter_module": "python_source_audit",
+      "proposal_bindings": {
+        "source_root": {
+          "type": "path_file_or_dir"
+        }
+      },
       "cost": 1,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
@@ -7009,6 +7014,11 @@
         "type": "invoke_capability"
       },
       "adapter_module": "python_source_symbol_index",
+      "proposal_bindings": {
+        "source_root": {
+          "type": "path_file_or_dir"
+        }
+      },
       "cost": 1,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
