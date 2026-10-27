@@ -1,0 +1,17 @@
+{
+  "capability_id": "python.provenance.coupling.supercomposer.v1",
+  "mission_id": "AUTO-VERIFY-HARDCORE_PYTHON_PROVENANCE_COUPLING_SUPERCOMPOSER_V1-V1",
+  "observed_effect": {
+    "adapter": "python_provenance_coupling_supercomposer_v1",
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "output_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_PROVENANCE_COUPLING_SUPERCOMPOSER_V1.json",
+    "output_sha256": "cab70e7db8d52db4be618327de93c2b7ea15c318a35b74862a0aef68a775fbc9",
+    "output_verified": true,
+    "verified": true
+  },
+  "output_sha256": "cab70e7db8d52db4be618327de93c2b7ea15c318a35b74862a0aef68a775fbc9",
+  "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+  "state_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_PROVENANCE_COUPLING_SUPERCOMPOSER_V1.json",
+  "verified": true
+}

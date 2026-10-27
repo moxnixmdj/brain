@@ -1,0 +1,17 @@
+{
+  "capability_id": "software.hardcore.swe.supercomposer.v1",
+  "mission_id": "AUTO-VERIFY-HARDCORE_SOFTWARE_HARDCORE_SWE_SUPERCOMPOSER_V1-V1",
+  "observed_effect": {
+    "adapter": "software_hardcore_swe_supercomposer_v1",
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "output_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_HARDCORE_SWE_SUPERCOMPOSER_V1.json",
+    "output_sha256": "88f6c0123a0d1c382ea02556f854b087d957dd78d2e82fb71a35538c485c7580",
+    "output_verified": true,
+    "verified": true
+  },
+  "output_sha256": "88f6c0123a0d1c382ea02556f854b087d957dd78d2e82fb71a35538c485c7580",
+  "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+  "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_HARDCORE_SWE_SUPERCOMPOSER_V1.json",
+  "verified": true
+}

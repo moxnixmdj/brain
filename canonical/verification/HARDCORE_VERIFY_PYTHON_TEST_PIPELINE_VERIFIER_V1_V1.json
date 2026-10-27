@@ -1,0 +1,17 @@
+{
+  "capability_id": "python.test.pipeline.verifier.v1",
+  "mission_id": "AUTO-VERIFY-HARDCORE_PYTHON_TEST_PIPELINE_VERIFIER_V1-V1",
+  "observed_effect": {
+    "adapter": "python_test_pipeline_verifier_v1",
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "output_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_TEST_PIPELINE_VERIFIER_V1.json",
+    "output_sha256": "230409b573f0b792965c64ee6e98bc2586ed1eae8c7d89a425200229ca07ba95",
+    "output_verified": true,
+    "verified": true
+  },
+  "output_sha256": "230409b573f0b792965c64ee6e98bc2586ed1eae8c7d89a425200229ca07ba95",
+  "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+  "state_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_TEST_PIPELINE_VERIFIER_V1.json",
+  "verified": true
+}
