@@ -2027,15 +2027,7 @@
    ],
    "decisive_question": "Does a sentence that asks for the tests to be run reach a capability that runs them, and does the measurement then tell a passing suite from a failing one -- without altering any argv token that is not a validated test path?",
    "falsifier_id": "A_CAPABILITY_THAT_CANNOT_RUN_HERE_IS_NOT_THE_ANSWER_V1_20261027_V1_FALSIFIER",
-   "known_counterexamples_checked": [
-    "canonical/runtime/goal_front_compiler_v1.py",
-    "canonical/runtime/live_brain_route_admission_v1.py",
-    "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
-    "canonical/tests/test_a_question_about_one_source_file_is_answered_about_that_file_v1.py",
-    "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
-    "canonical/runtime/bound_capabilities/python_refactor_extract_function.py",
-    "canonical/runtime/goal_compiler.py"
-   ],
+   "known_counterexamples_checked": true,
    "no_known_counterexample_reason": "Each direction was falsified directly. test_a_passing_suite_that_imports_its_sibling_module_exits_zero and test_a_failing_suite_that_imports_its_sibling_module_still_exits_nonzero pin the suite runner from both sides. test_a_supplied_argv_naming_the_test_by_its_repo_relative_path_measures_it and test_a_failing_suite_supplied_the_same_way_is_still_measured_as_failing pin the argv rewrite from both sides, and test_it_matches_the_measurement_taken_when_no_argv_is_supplied requires the two routes to agree. test_an_argument_that_is_not_a_test_path_passes_through_verbatim is the nearest world in which the rewrite must not fire: the interpreter, -c and a whole harness program must come back untouched and only the test token may change. test_a_stated_test_that_already_passes_is_reported_truthfully_and_nothing_is_written asserts applied False, files_written empty and the source bytes unchanged.",
    "proposal_id": "A_CAPABILITY_THAT_CANNOT_RUN_HERE_IS_NOT_THE_ANSWER_V1_20261027_V1"
   }
