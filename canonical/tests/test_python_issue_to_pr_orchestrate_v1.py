@@ -152,8 +152,9 @@ class TestIssueToPROrchestrate(unittest.TestCase):
         root = _make_repo(self.tmp, broken_test=True)
         res = _run(root)
         self.assertFalse(res["verified"])
+        self.assertTrue(res["edits_verified"])  # apply stage itself proven
         self.assertGreaterEqual(res["test_failed_count"], 1)
-        self.assertEqual(res["applied_op_count"], 1)  # apply still proven
+        self.assertEqual(res["applied_op_count"], 1)
 
     def test_determinism_byte_identical_artifacts(self):
         root = _make_repo(self.tmp)
@@ -181,14 +182,66 @@ class TestIssueToPROrchestrate(unittest.TestCase):
             _run(root, {"output_path": "src/_out.json"})
         self.assertIn("ARTIFACT_PATH_OVERLAPS_SOURCE_OR_WORKTREE", str(cm.exception))
 
-    def test_move_symbol_refused_at_apply(self):
+    def test_move_symbol_golden_apply_and_proof(self):
         root = _make_repo(self.tmp)
-        task = dict(TASK, edits=[{"op": "move_symbol", "module": "pkg/core.py",
-                                  "qualname": "helper", "to_module": "pkg/moved.py"}])
+        (root / "src" / "pkg" / "ops.py").write_text("", encoding="utf-8")
+        (root / "task.json").write_text(json.dumps({
+            "issue_id": "ISSUE-T2", "title": "move helper to pkg/ops.py",
+            "edits": [{"op": "move_symbol", "module": "pkg/core.py",
+                       "qualname": "helper", "to_module": "pkg/ops.py"}],
+        }), encoding="utf-8")
+        res = _run(root)
+        self.assertTrue(res["verified"])
+        core = (root / "_wt" / "pkg" / "core.py").read_text(encoding="utf-8")
+        ops = (root / "_wt" / "pkg" / "ops.py").read_text(encoding="utf-8")
+        util = (root / "_wt" / "pkg" / "util.py").read_text(encoding="utf-8")
+        test = (root / "_wt" / "tests" / "test_core.py").read_text(encoding="utf-8")
+        self.assertNotIn("def helper(", core)
+        self.assertIn("def helper(", ops)
+        self.assertIn("from pkg.ops import helper", util)
+        self.assertIn("from pkg.ops import helper", test)
+        self.assertNotIn("from pkg.core import helper", util)
+
+    def test_move_symbol_split_multi_name_import(self):
+        root = _make_repo(self.tmp)
+        (root / "src" / "pkg" / "ops.py").write_text("", encoding="utf-8")
+        multi = root / "src" / "pkg" / "multi.py"
+        multi.write_text("from pkg.core import helper, normalize\n\n\ndef duo(s):\n"
+                         "    return helper(s) + len(normalize(s))\n", encoding="utf-8")
+        (root / "task.json").write_text(json.dumps({
+            "issue_id": "ISSUE-T3",
+            "edits": [{"op": "move_symbol", "module": "pkg/core.py",
+                       "qualname": "helper", "to_module": "pkg/ops.py"}],
+        }), encoding="utf-8")
+        res = _run(root)
+        self.assertTrue(res["verified"])
+        text = (root / "_wt" / "pkg" / "multi.py").read_text(encoding="utf-8")
+        self.assertIn("from pkg.ops import helper", text)
+        self.assertIn("from pkg.core import normalize", text)
+
+    def test_move_symbol_decorated_cut(self):
+        root = _make_repo(self.tmp)
+        decorated = PKG.replace("def helper(x):",
+                                "@staticmethod\ndef helper(x):")
+        (root / "src" / "pkg" / "core.py").write_text(decorated, encoding="utf-8")
+        (root / "src" / "pkg" / "ops.py").write_text("", encoding="utf-8")
+        (root / "task.json").write_text(json.dumps({
+            "issue_id": "ISSUE-T4",
+            "edits": [{"op": "move_symbol", "module": "pkg/core.py",
+                       "qualname": "helper", "to_module": "pkg/ops.py"}],
+        }), encoding="utf-8")
+        res = _run(root)
+        self.assertTrue(res["verified"])
+        ops = (root / "_wt" / "pkg" / "ops.py").read_text(encoding="utf-8")
+        self.assertIn("@staticmethod\ndef helper(", ops)
+
+    def test_unknown_op_refused_at_apply(self):
+        root = _make_repo(self.tmp)
+        task = dict(TASK, edits=[{"op": "inline_function", "module": "pkg/core.py", "name": "helper"}])
         (root / "task.json").write_text(json.dumps(task), encoding="utf-8")
         with self.assertRaises(SystemExit) as cm:
             _run(root)
-        self.assertIn("UNSUPPORTED_OP_AT_APPLY:move_symbol", str(cm.exception))
+        self.assertIn("UNSUPPORTED_OP_AT_APPLY:inline_function", str(cm.exception))
 
     def test_missing_task_field_fails_closed(self):
         root = _make_repo(self.tmp)
