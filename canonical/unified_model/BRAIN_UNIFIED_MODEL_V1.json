@@ -24933,13 +24933,13 @@
   "research_index_records": 6430,
   "routing_tokens": 1848,
   "skills": 18,
-  "source_index_entry_points": 409,
-  "source_index_modules": 1867
+  "source_index_entry_points": 408,
+  "source_index_modules": 1866
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f8aee1901b32e21209d0e9399f02aaa54e15457e37f22166dd51d0bb6b10bde1"
+  "value": "3da5132ee5c296ba58a67dd35d8d3ab95e5740c506fa4a98e014841b702e7193"
  },
  "engines": [
   {
@@ -202758,52 +202758,6 @@
     "safe_path": 1,
     "selection": 1,
     "testselect": 1
-   }
-  },
-  {
-   "capability": false,
-   "classification": "ENTRY_POINT",
-   "executable_entry_point": true,
-   "id": "source:canonical/runtime/bound_capabilities/python_crossfile_edit_choreograph.py",
-   "imported_by_count": 0,
-   "kind": "SOURCE_ADDRESSABLE_MODULE",
-   "path": "canonical/runtime/bound_capabilities/python_crossfile_edit_choreograph.py",
-   "sha256": "87b9852cdedd992835727fb0ba9effc80b750d90ad1c21e4e690105f81e2ed3c",
-   "summary": "python.source.crossfile_edit.choreograph.v1 — plan cross-file edits.",
-   "symbol_count": 11,
-   "symbols": [
-    "_classify_sites",
-    "_dotted",
-    "_load_index",
-    "_module_scope_names",
-    "_move_sites",
-    "_rename_sites",
-    "_safe_path",
-    "_sha256_text",
-    "_systemic",
-    "build_plan",
-    "run"
-   ],
-   "terms": {
-    "build_plan": 1,
-    "choreograph": 1,
-    "classify_sites": 1,
-    "cross-file": 1,
-    "crossfile": 1,
-    "dotted": 1,
-    "edit": 1,
-    "edits": 1,
-    "load_index": 1,
-    "module_scope_names": 1,
-    "move_sites": 1,
-    "plan": 1,
-    "python": 1,
-    "python.source.crossfile_edit.choreograph.v1": 1,
-    "rename_sites": 1,
-    "run": 1,
-    "safe_path": 1,
-    "sha256_text": 1,
-    "systemic": 1
    }
   },
   {
