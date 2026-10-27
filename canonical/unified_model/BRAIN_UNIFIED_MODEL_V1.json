@@ -22501,7 +22501,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "4648a8e7fbe9a208a8b2e16f391c44c1d3d8dde51271e2eb1446c89bde9c3241",
+    "source_sha256": "80c87e8a419541e12b201621ce31419c2fab3d83c03f5ca910d53e0404c90755",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22588,7 +22588,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repository_acceptance_measurement_v1.py",
-    "source_sha256": "a17890910cbf7df6c9121bba02b12e41bb368b5b38ea4e4452d90b0645e0c9a2",
+    "source_sha256": "d7ea124d72b564cefd720e28df2c41cb68083e031b6999ec4206b8145b963796",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -22615,6 +22615,12 @@
     "content-addressed",
     "objective",
     "receipt",
+    "tests",
+    "run the tests",
+    "run tests",
+    "test suite",
+    "test path",
+    "source root",
     "measure",
     "v1",
     "content",
@@ -22669,7 +22675,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
-    "source_sha256": "58acc439a74742e3ec1c880fe7b8b2b5b1f78e43821c09c4b539d3cf706e9676",
+    "source_sha256": "8026c41d795890dcfdb48f79ec9c5a54d4f1cd13f2b43bcae6958bf2f5a10479",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -24930,8 +24936,8 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6430,
-  "routing_tokens": 1848,
+  "research_index_records": 6431,
+  "routing_tokens": 1850,
   "skills": 18,
   "source_index_entry_points": 408,
   "source_index_modules": 1866
@@ -24939,7 +24945,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3da5132ee5c296ba58a67dd35d8d3ab95e5740c506fa4a98e014841b702e7193"
+  "value": "63f8ceffc2fccaa3bdb55b339c29c83913262df423cbbf457e96e99d7e4f0891"
  },
  "engines": [
   {
@@ -30583,6 +30589,9 @@
     "python.software.repair.measured_acceptance.v1": 90.444444,
     "python.software.repair.semantic_acceptance.v1": 90.444444
    },
+   "path": {
+    "python.repository.acceptance.measure.v1": 600.0
+   },
    "pdf": {
     "document.convert.markdown_pdf.pandoc_weasyprint": 161.2,
     "pdf.extract.ocr.tesseract": 161.2,
@@ -31837,23 +31846,24 @@
     "chart.raster.axis_title_unit_binding.v1": 115.714286
    },
    "root": {
-    "canonical/runtime/professional_quality_r10_root_subject_binding_verify_v1.py.auto.v1": 46.222222,
-    "canonical/runtime/professional_quality_r11_root_subject_binding_verify_v1.py.auto.v1": 46.222222,
-    "canonical/runtime/professional_quality_r12_root_subject_binding_verify_v1.py.auto.v1": 46.222222,
-    "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v1.py.auto.v1": 46.222222,
-    "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v2.py.auto.v1": 46.222222,
-    "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v3.py.auto.v1": 46.222222,
-    "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v4.py.auto.v1": 46.222222,
-    "canonical/runtime/professional_quality_r2_root_subject_binding_verify_v2.py.auto.v1": 46.222222,
-    "canonical/runtime/professional_quality_r3_root_subject_binding_verify_v1.py.auto.v1": 46.222222,
-    "canonical/runtime/professional_quality_r4_root_subject_binding_verify_v1.py.auto.v1": 46.222222,
-    "canonical/runtime/professional_quality_r5_root_subject_binding_verify_v1.py.auto.v1": 46.222222,
-    "canonical/runtime/professional_quality_r6_root_subject_binding_verify_v1.py.auto.v1": 46.222222,
-    "canonical/runtime/professional_quality_r7_root_subject_binding_verify_v1.py.auto.v1": 46.222222,
-    "canonical/runtime/professional_quality_r8_root_subject_binding_verify_v1.py.auto.v1": 46.222222,
-    "canonical/runtime/professional_quality_r9_root_subject_binding_verify_v1.py.auto.v1": 46.222222,
-    "engine:TERMINAL_ROOT": 46.222222,
-    "terminal.kstar.root.assess.stdlib": 46.222222
+    "canonical/runtime/professional_quality_r10_root_subject_binding_verify_v1.py.auto.v1": 43.894737,
+    "canonical/runtime/professional_quality_r11_root_subject_binding_verify_v1.py.auto.v1": 43.894737,
+    "canonical/runtime/professional_quality_r12_root_subject_binding_verify_v1.py.auto.v1": 43.894737,
+    "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v1.py.auto.v1": 43.894737,
+    "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v2.py.auto.v1": 43.894737,
+    "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v3.py.auto.v1": 43.894737,
+    "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v4.py.auto.v1": 43.894737,
+    "canonical/runtime/professional_quality_r2_root_subject_binding_verify_v2.py.auto.v1": 43.894737,
+    "canonical/runtime/professional_quality_r3_root_subject_binding_verify_v1.py.auto.v1": 43.894737,
+    "canonical/runtime/professional_quality_r4_root_subject_binding_verify_v1.py.auto.v1": 43.894737,
+    "canonical/runtime/professional_quality_r5_root_subject_binding_verify_v1.py.auto.v1": 43.894737,
+    "canonical/runtime/professional_quality_r6_root_subject_binding_verify_v1.py.auto.v1": 43.894737,
+    "canonical/runtime/professional_quality_r7_root_subject_binding_verify_v1.py.auto.v1": 43.894737,
+    "canonical/runtime/professional_quality_r8_root_subject_binding_verify_v1.py.auto.v1": 43.894737,
+    "canonical/runtime/professional_quality_r9_root_subject_binding_verify_v1.py.auto.v1": 43.894737,
+    "engine:TERMINAL_ROOT": 43.894737,
+    "python.repository.acceptance.measure.v1": 65.842105,
+    "terminal.kstar.root.assess.stdlib": 43.894737
    },
    "root1": {
     "canonical/runtime/livebench_root1_reused_core_selector_v1.py.auto.v1": 267.333333,
@@ -31965,8 +31975,9 @@
     "xlsx.table.verify_against_json_records": 161.2
    },
    "run": {
-    "canonical/verification/run_long_horizon_continuity_v1.py.auto.v1": 267.333333,
-    "shell.command.run": 267.333333
+    "canonical/verification/run_long_horizon_continuity_v1.py.auto.v1": 201.0,
+    "python.repository.acceptance.measure.v1": 301.5,
+    "shell.command.run": 201.0
    },
    "run_long_horizon_continuity_v1": {
     "canonical/verification/run_long_horizon_continuity_v1.py.auto.v1": 400.0
@@ -32622,21 +32633,22 @@
     "canonical/runtime/livebench_union25_sound_lower_bound_hitting_set_v1.py.auto.v1": 400.0
    },
    "source": {
-    "canonical/runtime/dual_judgment_source_gate_activation_v1.py.auto.v1": 51.75,
-    "canonical/runtime/finance_direct_source_coverage_audit_v1.py.auto.v1": 51.75,
-    "canonical/runtime/p3_binary_explicit_source_membership_v1.py.auto.v1": 51.75,
-    "canonical/runtime/p3_source_positive_selection_cell_v1.py.auto.v1": 51.75,
-    "canonical/runtime/r2_finance_normalized_source_universe_direct_adequacy_v1.py.auto.v1": 51.75,
-    "canonical/runtime/sec_extracted_xbrl_instance_source_native_verify_v1.py.auto.v1": 51.75,
-    "python.software.repair.apply.verified.v1": 51.75,
-    "python.source.audit.ast": 51.75,
-    "python.source.change_impact.testselect.v1": 51.75,
-    "python.source.symbols.index.ast": 51.75,
-    "python.source.symbols.resolve.v1": 51.75,
-    "source.authority.identity.ror": 51.75,
-    "source.candidates.enumerate.stdlib": 51.75,
-    "source.evidence.extract.objective_grounded.stdlib": 51.75,
-    "source.objective_relevance.rank.bm25": 51.75
+    "canonical/runtime/dual_judgment_source_gate_activation_v1.py.auto.v1": 48.823529,
+    "canonical/runtime/finance_direct_source_coverage_audit_v1.py.auto.v1": 48.823529,
+    "canonical/runtime/p3_binary_explicit_source_membership_v1.py.auto.v1": 48.823529,
+    "canonical/runtime/p3_source_positive_selection_cell_v1.py.auto.v1": 48.823529,
+    "canonical/runtime/r2_finance_normalized_source_universe_direct_adequacy_v1.py.auto.v1": 48.823529,
+    "canonical/runtime/sec_extracted_xbrl_instance_source_native_verify_v1.py.auto.v1": 48.823529,
+    "python.repository.acceptance.measure.v1": 73.235294,
+    "python.software.repair.apply.verified.v1": 48.823529,
+    "python.source.audit.ast": 48.823529,
+    "python.source.change_impact.testselect.v1": 48.823529,
+    "python.source.symbols.index.ast": 48.823529,
+    "python.source.symbols.resolve.v1": 48.823529,
+    "source.authority.identity.ror": 48.823529,
+    "source.candidates.enumerate.stdlib": 48.823529,
+    "source.evidence.extract.objective_grounded.stdlib": 48.823529,
+    "source.objective_relevance.rank.bm25": 48.823529
    },
    "source.authority.identity.ror": {
     "source.authority.identity.ror": 2400.0
@@ -32776,6 +32788,9 @@
    "substrate": {
     "canonical/runtime/dual_judgment_general_substrate_role_v1.py.auto.v1": 267.333333,
     "canonical/runtime/root3_seven_class_one_substrate_policy_v1.py.auto.v1": 267.333333
+   },
+   "suite": {
+    "python.repository.acceptance.measure.v1": 600.0
    },
    "summary": {
     "canonical/runtime/aa_briefcase_component_summary_noninversion_v1.py.auto.v1": 400.0
@@ -33110,9 +33125,10 @@
     "python.software.repair.loop.test_guided.ast.v1": 267.333333
    },
    "tests": {
-    "python.software.repair.loop.strict_progress.ast.v1": 201.0,
-    "python.software.repair.loop.test_guided.ast.v1": 201.0,
-    "python.tests.audit.unittest": 201.0
+    "python.repository.acceptance.measure.v1": 161.2,
+    "python.software.repair.loop.strict_progress.ast.v1": 161.2,
+    "python.software.repair.loop.test_guided.ast.v1": 161.2,
+    "python.tests.audit.unittest": 161.2
    },
    "testselect": {
     "python.source.change_impact.testselect.v1": 400.0
@@ -47081,7 +47097,7 @@
   "included_source_count": 870,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "6df0781359c3bec95bdcb93e9f64b128b8a4792d96b27bc550c234750ec52d6f"
+  "source_tree_digest": "e2bfa58c53196a1a557742f640f731c3db6aaebeaf246043487852cab25a1151"
  },
  "research_index": [
   {
@@ -189862,6 +189878,51 @@
    }
   },
   {
+   "action_id": "A_QUESTION_ABOUT_RUNNING_TESTS_MUST_BE_ANSWERED_BY_SOMETHING_THAT_RUNS_THEM_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27T09:40:00Z",
+   "id": "research:canonical/action_intents/A_QUESTION_ABOUT_RUNNING_TESTS_MUST_BE_ANSWERED_BY_SOMETHING_THAT_RUNS_THEM_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_QUESTION_ABOUT_RUNNING_TESTS_MUST_BE_ANSWERED_BY_SOMETHING_THAT_RUNS_THEM_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "51c00c648f4f97b734c49723ef9362600efd304a8ddafca7c6ece1b6d7539d2a",
+   "status": "",
+   "terms": {
+    "20261027": 1,
+    "a_question_about_running_tests_must_be_answered_by_something_that_runs_them_v1_20261027_v1": 1,
+    "about": 1,
+    "answer": 1,
+    "answered": 3,
+    "asking": 1,
+    "asks": 1,
+    "because": 1,
+    "broken": 1,
+    "caller": 1,
+    "capability": 3,
+    "catch": 1,
+    "collected": 1,
+    "collecting": 1,
+    "copied": 1,
+    "correct": 1,
+    "cwd": 1,
+    "defects": 1,
+    "directory": 1,
+    "failing": 2,
+    "nothing": 2,
+    "own": 2,
+    "passing": 2,
+    "run": 2,
+    "runner": 2,
+    "runs": 3,
+    "sentence": 3,
+    "so": 2,
+    "suite": 6,
+    "tests": 4,
+    "v1": 2,
+    "workspace": 2
+   }
+  },
+  {
    "action_id": "A_QUESTION_ASKED_THE_PLAINEST_WAY_GETS_THE_ANSWER_IT_MEANS_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -192272,7 +192333,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/ENUMERATE_VERIFIED_CAPABILITY_BRIDGES_BY_EXECUTION_V1_20261026_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "1131d834e6561ce0916a0d72ace8980866ce9bce0af7b5c426940e1d1c187b7f",
+   "sha256": "96cf51b0a6d572b15ae43d40cfd834db63f50d7892dd989c7bbcebea214c8f81",
    "status": "",
    "terms": {
     "11": 2,
