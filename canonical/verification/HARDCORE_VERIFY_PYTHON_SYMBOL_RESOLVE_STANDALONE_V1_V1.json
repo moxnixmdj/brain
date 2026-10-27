@@ -1,0 +1,17 @@
+{
+ "capability_id": "python.symbol.resolve.standalone.v1",
+ "mission_id": "AUTO-VERIFY-HARDCORE_PYTHON_SYMBOL_RESOLVE_STANDALONE_V1-V1",
+ "observed_effect": {
+  "adapter": "python_symbol_resolve_standalone_v1",
+  "incremental_spend_usd": 0,
+  "model_dependency_count": 0,
+  "output_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_SYMBOL_RESOLVE_STANDALONE_V1.json",
+  "output_sha256": "46678cfa634cadf880ae612b88ed98fdedf9ddb4356dc5974ba511634ab962bb",
+  "output_verified": true,
+  "verified": true
+ },
+ "output_sha256": "46678cfa634cadf880ae612b88ed98fdedf9ddb4356dc5974ba511634ab962bb",
+ "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+ "state_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_SYMBOL_RESOLVE_STANDALONE_V1.json",
+ "verified": true
+}
