@@ -125,16 +125,53 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         raise RepairApplyError("ARGS_NOT_OBJECT")
     repo=pathlib.Path(root).resolve()
     source_root=_safe_dir(repo,args.get("source_root","."))
-    test_paths=[_safe_file(repo,x) for x in (args.get("test_paths") or [])]
+    _stated_tests=[x for x in (args.get("test_paths") or []) if str(x).strip()]
+    if _stated_tests:
+        test_paths=[_safe_file(repo,x) for x in _stated_tests]
+        test_paths_source="stated"
+    else:
+        # "Fix the failing test in the python source root D" names no file, and
+        # which files are tests is a fact about the tree.  The command on the
+        # next line was already derived when unstated; only this list was
+        # missing.  This is the same fallback python_coupled_software_repair_loop
+        # already had, reading the same shared module -- one rule, one place,
+        # eleven consumers.  A tree with no tests raises rather than reporting a
+        # green empty suite: test_count 0 with returncode 0 would be a pass for a
+        # suite that was never found.
+        from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import discover_test_files
+        try:
+            test_paths=discover_test_files(source_root)
+            test_paths_source="discovered_under_source_root"
+        except FileNotFoundError:
+            raise RepairApplyError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
     if not test_paths:
         raise RepairApplyError("TEST_PATHS_REQUIRED")
-    argv=[str(x) for x in (args.get("test_argv") or _REPAIR._PATCH.suite_argv(sys.executable,*test_paths))]
+    if test_paths_source=="discovered_under_source_root":
+        # A command line bound at COMPILE time cannot name a corpus that was only
+        # found at RUN time.  Measured on 96015b9, with a fixture whose add(1,2)
+        # returned -1 and whose test genuinely failed:
+        #
+        #   pre_apply_test_returncode  0
+        #   applied                    false
+        #   status                     PASS__STATED_TEST_ALREADY_PASSES_NOTHING_TO_REPAIR
+        #
+        # A LIE.  The bound argv was the collecting runner built for whatever
+        # targets existed when the binder ran -- none -- so it collected zero
+        # tests and returned 0, and gate 1 read that as "the test already
+        # passes" and declined to repair a file that was broken.  Zero tests
+        # passing is not a passing suite.  Derive the command from the tests
+        # this run actually found; that is still the adapter's own suite_argv,
+        # which is what the pinned binding requires, never an invented command.
+        argv=[str(x) for x in _REPAIR._PATCH.suite_argv(sys.executable,*test_paths)]
+    else:
+        argv=[str(x) for x in (args.get("test_argv") or _REPAIR._PATCH.suite_argv(sys.executable,*test_paths))]
     if not argv:
         raise RepairApplyError("TEST_ARGV_EMPTY")
     output=_safe_output(repo,args.get("output_path"))
     timeout=max(1,min(int(args.get("timeout_s",60)),MAX_TIMEOUT_S))
 
     out=_base(args,repo)
+    out["test_paths_source"]=test_paths_source
     rel_tests,run_argv=_candidate_test_layout(repo,source_root,test_paths,argv)
     if not rel_tests:
         raise RepairApplyError("TEST_PATHS_OUTSIDE_SOURCE_ROOT")

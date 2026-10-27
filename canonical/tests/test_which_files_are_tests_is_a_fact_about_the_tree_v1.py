@@ -46,6 +46,11 @@ class _Tree(unittest.TestCase):
         import shutil
         self.dir = REPO_ROOT / "canonical/astra_runtime/tmp/test_corpus_discovery_v1"
         shutil.rmtree(self.dir, ignore_errors=True)
+        # Removing at setUp only left the tree behind for the next command that
+        # walked the repository -- including the repo-integrity guard, which then
+        # failed on TAUTOLOGICAL_ASSERTION against these fixtures' `assert True`.
+        # A fixture is scratch, and scratch does not outlive the test.
+        self.addCleanup(shutil.rmtree, self.dir, True)
         (self.dir / "tests").mkdir(parents=True)
         (self.dir / "calc.py").write_text("def add(a, b):\n    return a + b\n")
         (self.dir / "tests" / "test_calc.py").write_text("def test_add():\n    assert True\n")
