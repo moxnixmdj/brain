@@ -1,0 +1,17 @@
+{
+  "capability_id": "python.refactor.test_scaffold.fusion.v1",
+  "mission_id": "AUTO-VERIFY-HARDCORE_PYTHON_REFACTOR_TEST_SCAFFOLD_FUSION_V1-V1",
+  "observed_effect": {
+    "adapter": "python_refactor_test_scaffold_fusion_v1",
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "output_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_REFACTOR_TEST_SCAFFOLD_FUSION_V1.json",
+    "output_sha256": "4552bca50a991424d5e49c61f1db137478fd51edcad1805fdf96222859fb2061",
+    "output_verified": true,
+    "verified": true
+  },
+  "output_sha256": "4552bca50a991424d5e49c61f1db137478fd51edcad1805fdf96222859fb2061",
+  "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+  "state_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_REFACTOR_TEST_SCAFFOLD_FUSION_V1.json",
+  "verified": true
+}
