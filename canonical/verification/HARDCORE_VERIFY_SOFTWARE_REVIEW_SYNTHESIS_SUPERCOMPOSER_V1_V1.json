@@ -1,0 +1,17 @@
+{
+  "capability_id": "software.review.synthesis.supercomposer.v1",
+  "mission_id": "AUTO-VERIFY-HARDCORE_SOFTWARE_REVIEW_SYNTHESIS_SUPERCOMPOSER_V1-V1",
+  "observed_effect": {
+    "adapter": "software_review_synthesis_supercomposer_v1",
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "output_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_REVIEW_SYNTHESIS_SUPERCOMPOSER_V1.json",
+    "output_sha256": "093e2b7bb919ce5a686f097f127190cba75164f5e1a1c2a7d5f3a883f50527fc",
+    "output_verified": true,
+    "verified": true
+  },
+  "output_sha256": "093e2b7bb919ce5a686f097f127190cba75164f5e1a1c2a7d5f3a883f50527fc",
+  "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+  "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_REVIEW_SYNTHESIS_SUPERCOMPOSER_V1.json",
+  "verified": true
+}

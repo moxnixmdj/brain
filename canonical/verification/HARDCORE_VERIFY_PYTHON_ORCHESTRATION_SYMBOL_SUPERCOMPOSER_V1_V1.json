@@ -1,0 +1,17 @@
+{
+  "capability_id": "python.orchestration.symbol.supercomposer.v1",
+  "mission_id": "AUTO-VERIFY-HARDCORE_PYTHON_ORCHESTRATION_SYMBOL_SUPERCOMPOSER_V1-V1",
+  "observed_effect": {
+    "adapter": "python_orchestration_symbol_supercomposer_v1",
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "output_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_ORCHESTRATION_SYMBOL_SUPERCOMPOSER_V1.json",
+    "output_sha256": "73861f4c6c7deb854bf1c15a7f040ae1867bbbf3f1f29e2e803ce0b0ea42d4f2",
+    "output_verified": true,
+    "verified": true
+  },
+  "output_sha256": "73861f4c6c7deb854bf1c15a7f040ae1867bbbf3f1f29e2e803ce0b0ea42d4f2",
+  "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+  "state_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_ORCHESTRATION_SYMBOL_SUPERCOMPOSER_V1.json",
+  "verified": true
+}
