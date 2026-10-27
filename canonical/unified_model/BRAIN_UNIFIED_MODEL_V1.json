@@ -144,7 +144,11 @@
    "adapter_module": "cli_command",
    "cost": 1,
    "declared_dependencies": {
-    "declared_dependencies_checked": [],
+    "declared_dependencies_checked": [
+     "hashlib",
+     "pathlib",
+     "subprocess"
+    ],
     "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
@@ -204,7 +208,12 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [
-     "node"
+     "hashlib",
+     "json",
+     "node",
+     "pathlib",
+     "subprocess",
+     "sys"
     ],
     "declared_dependency_executables": [
      "node"
@@ -275,7 +284,12 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [
-     "node"
+     "hashlib",
+     "json",
+     "node",
+     "pathlib",
+     "subprocess",
+     "sys"
     ],
     "declared_dependency_executables": [
      "node"
@@ -345,7 +359,12 @@
    "adapter_module": "python_library_codec",
    "cost": 1,
    "declared_dependencies": {
-    "declared_dependencies_checked": [],
+    "declared_dependencies_checked": [
+     "hashlib",
+     "importlib",
+     "json",
+     "pathlib"
+    ],
     "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
@@ -408,7 +427,12 @@
    "adapter_module": "python_library_codec",
    "cost": 1,
    "declared_dependencies": {
-    "declared_dependencies_checked": [],
+    "declared_dependencies_checked": [
+     "hashlib",
+     "importlib",
+     "json",
+     "pathlib"
+    ],
     "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
@@ -20521,8 +20545,15 @@
    "adapter_module": "pandoc_weasyprint",
    "cost": 2,
    "declared_dependencies": {
-    "declared_dependencies_checked": [],
-    "declared_dependency_executables": [],
+    "declared_dependencies_checked": [
+     "hashlib",
+     "pandoc",
+     "pathlib",
+     "subprocess"
+    ],
+    "declared_dependency_executables": [
+     "pandoc"
+    ],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -20583,7 +20614,15 @@
    "adapter_module": "python_document_builder",
    "cost": 2,
    "declared_dependencies": {
-    "declared_dependencies_checked": [],
+    "declared_dependencies_checked": [
+     "hashlib",
+     "importlib",
+     "json",
+     "pathlib",
+     "re",
+     "sys",
+     "zipfile"
+    ],
     "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
@@ -20644,7 +20683,13 @@
    "adapter_module": "docx_report_from_json",
    "cost": 2,
    "declared_dependencies": {
-    "declared_dependencies_checked": [],
+    "declared_dependencies_checked": [
+     "importlib",
+     "json",
+     "pathlib",
+     "re",
+     "sys"
+    ],
     "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
@@ -21160,7 +21205,11 @@
    "adapter_module": "cli_command",
    "cost": 1,
    "declared_dependencies": {
-    "declared_dependencies_checked": [],
+    "declared_dependencies_checked": [
+     "hashlib",
+     "pathlib",
+     "subprocess"
+    ],
     "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
@@ -21220,8 +21269,15 @@
    "adapter_module": "image_ocr_tesseract",
    "cost": 1,
    "declared_dependencies": {
-    "declared_dependencies_checked": [],
-    "declared_dependency_executables": [],
+    "declared_dependencies_checked": [
+     "hashlib",
+     "pathlib",
+     "subprocess",
+     "tesseract"
+    ],
+    "declared_dependency_executables": [
+     "tesseract"
+    ],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -21281,7 +21337,11 @@
    "adapter_module": "cli_command",
    "cost": 1,
    "declared_dependencies": {
-    "declared_dependencies_checked": [],
+    "declared_dependencies_checked": [
+     "hashlib",
+     "pathlib",
+     "subprocess"
+    ],
     "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
@@ -21402,8 +21462,16 @@
    "adapter_module": "jq_query",
    "cost": 1,
    "declared_dependencies": {
-    "declared_dependencies_checked": [],
-    "declared_dependency_executables": [],
+    "declared_dependencies_checked": [
+     "hashlib",
+     "jq",
+     "pathlib",
+     "re",
+     "subprocess"
+    ],
+    "declared_dependency_executables": [
+     "jq"
+    ],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -21724,7 +21792,15 @@
    "adapter_module": "numeric_expression_sympy",
    "cost": 1,
    "declared_dependencies": {
-    "declared_dependencies_checked": [],
+    "declared_dependencies_checked": [
+     "ast",
+     "hashlib",
+     "json",
+     "math",
+     "pathlib",
+     "re",
+     "sympy"
+    ],
     "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
@@ -21799,8 +21875,18 @@
    "adapter_module": "pdf_ocr_tesseract",
    "cost": 2,
    "declared_dependencies": {
-    "declared_dependencies_checked": [],
-    "declared_dependency_executables": [],
+    "declared_dependencies_checked": [
+     "hashlib",
+     "pathlib",
+     "pdftoppm",
+     "subprocess",
+     "tempfile",
+     "tesseract"
+    ],
+    "declared_dependency_executables": [
+     "pdftoppm",
+     "tesseract"
+    ],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -21857,7 +21943,11 @@
    "adapter_module": "pdf_pypdf",
    "cost": 1,
    "declared_dependencies": {
-    "declared_dependencies_checked": [],
+    "declared_dependencies_checked": [
+     "hashlib",
+     "pathlib",
+     "pypdf"
+    ],
     "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
@@ -22219,7 +22309,14 @@
    "adapter_module": "crosshair_contract_oracle",
    "cost": 1,
    "declared_dependencies": {
-    "declared_dependencies_checked": [],
+    "declared_dependencies_checked": [
+     "crosshair",
+     "json",
+     "pathlib",
+     "re",
+     "subprocess",
+     "sys"
+    ],
     "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
@@ -22720,7 +22817,18 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [
-     "pytest"
+     "argparse",
+     "ast",
+     "difflib",
+     "hashlib",
+     "json",
+     "pathlib",
+     "pytest",
+     "re",
+     "shutil",
+     "subprocess",
+     "sys",
+     "time"
     ],
     "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
@@ -24981,7 +25089,14 @@
    "adapter_module": "xlsx_table_xlsxwriter",
    "cost": 2,
    "declared_dependencies": {
-    "declared_dependencies_checked": [],
+    "declared_dependencies_checked": [
+     "hashlib",
+     "json",
+     "pathlib",
+     "re",
+     "sys",
+     "xlsxwriter"
+    ],
     "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
@@ -25045,7 +25160,14 @@
    "adapter_module": "xlsx_verify_openpyxl",
    "cost": 2,
    "declared_dependencies": {
-    "declared_dependencies_checked": [],
+    "declared_dependencies_checked": [
+     "hashlib",
+     "json",
+     "openpyxl",
+     "pathlib",
+     "re",
+     "sys"
+    ],
     "declared_dependency_executables": [],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
@@ -25112,8 +25234,17 @@
    "adapter_module": "yq_yaml_json",
    "cost": 1,
    "declared_dependencies": {
-    "declared_dependencies_checked": [],
-    "declared_dependency_executables": [],
+    "declared_dependencies_checked": [
+     "hashlib",
+     "json",
+     "pathlib",
+     "subprocess",
+     "yaml",
+     "yq"
+    ],
+    "declared_dependency_executables": [
+     "yq"
+    ],
     "kind": "PACKAGE_OR_SYSTEM_TOOL"
    },
    "entrypoint": "run",
@@ -25182,7 +25313,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6432,
+  "research_index_records": 6433,
   "routing_tokens": 1878,
   "skills": 18,
   "source_index_entry_points": 411,
@@ -25191,7 +25322,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "19d0ac68af85cc870a73d6878c6edd8b149a1ac4955f69d954e09116580cab8d"
+  "value": "f9acd3586cc06063603c6ba66f3fb6be5b0ab9353758c6acd72092cb46139e05"
  },
  "engines": [
   {
@@ -47455,7 +47586,7 @@
  },
  "provenance": {
   "compiler": "canonical/runtime/compile_brain_unified_model_v1.py",
-  "compiler_sha256": "c1114bed2cb3f6f3425b5db25baf256b5d903f23f92c4880a6477681c4698af7",
+  "compiler_sha256": "9aff61c1087b61205d63b9795b72433d4288271fe8e9e627836baa72cacb6bb5",
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
@@ -188949,6 +189080,51 @@
    }
   },
   {
+   "action_id": "A_CAPABILITY_THAT_CANNOT_RUN_HERE_IS_NOT_THE_ANSWER_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27T09:49:26Z",
+   "id": "research:canonical/action_intents/A_CAPABILITY_THAT_CANNOT_RUN_HERE_IS_NOT_THE_ANSWER_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_CAPABILITY_THAT_CANNOT_RUN_HERE_IS_NOT_THE_ANSWER_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "c4a968222859b1cb5f68ec1c13d202d8dd1e2b850b0dd7471cd867c29fa6a5a8",
+   "status": "",
+   "terms": {
+    "0.240": 1,
+    "0.34": 1,
+    "0.556": 1,
+    "20261027": 1,
+    "a_capability_that_cannot_run_here_is_not_the_answer_v1_20261027_v1": 1,
+    "about": 2,
+    "absent": 1,
+    "absolute": 1,
+    "adapter": 1,
+    "against": 1,
+    "answer": 1,
+    "answered": 1,
+    "caller": 2,
+    "cannot": 3,
+    "capability": 5,
+    "coverage": 2,
+    "crosshair": 2,
+    "declared": 2,
+    "every": 2,
+    "file": 2,
+    "machine": 2,
+    "measured": 2,
+    "name": 2,
+    "not": 4,
+    "path": 3,
+    "paths": 2,
+    "python": 2,
+    "sentence": 3,
+    "so": 2,
+    "substrate": 2,
+    "tokens": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_CAPABILITY_WHOSE_OWN_PRECONDITION_THE_SENTENCE_CANNOT_MEET_IS_REFUSED_AT_ADMISSION_NOT_CRASHED_AT_EXECUTION_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -205448,9 +205624,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "d427abe0ca4e7a9b205d426204b5d8c687bd382a7372f52255c1c7aa4ae17d16",
+   "sha256": "63c2cf21c157af526f8f3f7b3fb305c1c35997edbd00945f1dd78a5041457dd0",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
-   "symbol_count": 13,
+   "symbol_count": 15,
    "symbols": [
     "UnifiedModel",
     "UnifiedModelError",
@@ -205459,15 +205635,18 @@
     "_normalise_capability_id",
     "_print",
     "artifact_digest",
+    "ask_tokens",
     "canonical_json",
     "digest_value",
     "load_model",
     "main",
     "open_model",
+    "path_literals",
     "tokenize"
    ],
    "terms": {
     "artifact_digest": 1,
+    "ask_tokens": 1,
     "brain": 3,
     "canonical_json": 1,
     "compiled": 1,
@@ -205483,6 +205662,7 @@
     "one": 1,
     "open_model": 1,
     "over": 1,
+    "path_literals": 1,
     "print": 1,
     "tokenize": 1,
     "unified": 2,
@@ -211434,12 +211614,15 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/compile_brain_unified_model_v1.py",
-   "sha256": "c1114bed2cb3f6f3425b5db25baf256b5d903f23f92c4880a6477681c4698af7",
+   "sha256": "9aff61c1087b61205d63b9795b72433d4288271fe8e9e627836baa72cacb6bb5",
    "summary": "Compile the whole live Brain into one content-addressed model artifact.",
-   "symbol_count": 31,
+   "symbol_count": 34,
    "symbols": [
     "UnifiedModelCompileError",
+    "_adapter_executed_programs",
     "_adapter_imports",
+    "_adapter_path_of",
+    "_adapter_runpy_targets",
     "_build_grammar",
     "_bullets",
     "_capability_row",
@@ -211458,13 +211641,13 @@
     "_source_index_rows",
     "_term_counts",
     "_theory_block",
-    "_unique",
-    "artifact_digest",
-    "canonical_json",
-    "compile_model"
+    "_unique"
    ],
    "terms": {
+    "adapter_executed_programs": 1,
     "adapter_imports": 1,
+    "adapter_path_of": 1,
+    "adapter_runpy_targets": 1,
     "artifact": 1,
     "artifact_digest": 1,
     "brain": 2,
@@ -211478,11 +211661,9 @@
     "digest_bytes": 1,
     "digest_file": 1,
     "digest_value": 1,
-    "engine_rows": 1,
     "fabric_surfaces": 1,
     "first_paragraph": 1,
     "headings": 1,
-    "knowledge_rows": 1,
     "law_authority_map": 1,
     "law_family_and_version": 1,
     "live": 1,
@@ -211490,7 +211671,6 @@
     "model": 2,
     "one": 1,
     "placeholders": 1,
-    "skill_rows": 1,
     "term_counts": 1,
     "tokenize": 1,
     "unified": 1,

@@ -100,6 +100,71 @@ def tokenize(text: str) -> list[str]:
     return out
 
 
+# The compiler's own repository-path scanner, character class and all: a path
+# literal is two or more "/"-joined segments. Kept byte-for-byte in step with
+# ``goal_compiler._repo_paths_uncached`` -- if the two ever disagree, coverage is
+# measured over words the caller never asked with.
+_PATH_LITERAL = re.compile(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+")
+_URL_LITERAL = re.compile(r"https?://[^\s)\]}>]+")
+
+
+def path_literals(text: str, root: str | Path | None = None) -> list[str]:
+    """The spans of ``text`` that name a real artifact, in sentence order.
+
+    A literal counts only when something is actually there: the literal itself
+    exists, or its parent directory does (so "write a new file into an existing
+    directory" is still recognised as naming a destination). That requirement is
+    what keeps prose out -- "and/or", "read/write" and "input/output" match the
+    path shape but resolve to no parent directory, so they stay question words.
+    """
+    body = _URL_LITERAL.sub(" ", str(text or ""))
+    rr = Path(ROOT if root is None else root).resolve()
+    found: list[str] = []
+    for match in _PATH_LITERAL.finditer(body):
+        raw = match.group(0).rstrip(".,;:!?)]}")
+        candidates: list[Path] = []
+        start = match.start()
+        if start > 0 and body[start - 1] == "/":
+            candidates.append(Path("/" + raw))
+        candidates.append(rr / raw)
+        for candidate in candidates:
+            try:
+                if candidate.exists() or candidate.parent.is_dir():
+                    break
+            except OSError:
+                continue
+        else:
+            continue
+        found.append(match.group(0))
+    return found
+
+
+def ask_tokens(text: str, root: str | Path | None = None) -> list[str]:
+    """The caller's ASK: the sentence with its stated path literals blanked out.
+
+    ``route()`` fails closed when the model recognises too little of a sentence.
+    Charging the tokens of a stated path to that budget made the verdict a
+    lottery on how many times a sentence happened to repeat an indexed word.
+    Measured: "/home/user/brain/canonical/astra_runtime/tmp/x/calc.py" alone
+    contributes eleven tokens no capability can ever claim, so "Count the
+    functions defined in the python file <that path> and write the report to
+    <another path>" scored coverage 0.240 against the 0.34 floor and was refused
+    as GOAL_NOT_REPRESENTED_IN_MODEL before a single capability was considered --
+    while "Run the python tests ..." squeaked past at 0.257 only because the
+    sentence repeats its own keywords.
+
+    A path is a located artifact the binder will bind, not a word to be
+    understood. It is the same distinction the compiler already draws for a
+    quoted literal (a quoted literal's words are not the task's words) and for a
+    bare version token (a name fragment, not a stated value). Scoring is left
+    untouched: only the denominator of the coverage budget changes.
+    """
+    ask = str(text or "")
+    for literal in path_literals(ask, root):
+        ask = ask.replace(literal, " ")
+    return tokenize(ask)
+
+
 # --------------------------------------------------------------------------- loading
 
 
@@ -168,6 +233,10 @@ class UnifiedModel:
             terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
             for term in terms:
                 self._source_df[str(term)] = self._source_df.get(str(term), 0) + 1
+        # Lazily resolved, because presence is a property of the machine that is
+        # answering and probing 74 capabilities on every construction would be
+        # paid for even by a caller that only wants `status()`.
+        self._unrunnable: dict[str, list[str]] | None = None
         # The research record: governance decisions, verification receipts,
         # action intents. Evidence *about* capabilities, never a capability, so
         # `solve()` never routes here either. See the compiler's _research_rows.
@@ -314,22 +383,87 @@ class UnifiedModel:
                 hits.add(eid)
         return hits
 
+    def unrunnable_capabilities(self) -> dict[str, list[str]]:
+        """Capabilities whose own declared dependencies do not resolve *here*.
+
+        Resolved on the machine that is answering, never compiled in -- see
+        ``_dependency_declaration``, which records the declaration precisely so
+        that this answer can be true of the host rather than of whichever
+        machine last built the artifact.
+
+        A capability that cannot resolve the substrate it declares can only
+        fail. Measured: ``python.contract.check.crosshair.v1`` -- whose adapter
+        runs ``sys.executable -m crosshair`` on a machine without crosshair --
+        was selected for eight of thirteen ordinary Python software-engineering
+        sentences and failed every one of them with
+        ``BOUND_PYPI_SOURCE_INCOMPLETE``, after spending the whole request
+        getting there.
+
+        This is reported by ``route()`` and enforced by ``solve()``. It is
+        deliberately NOT used to filter the ranking: what the model contains is
+        not a fact about one host, and this sandbox has pypdf while the CI
+        runner does not, so hiding capabilities here would make routing
+        host-dependent.
+        """
+        if self._unrunnable is None:
+            found: dict[str, list[str]] = {}
+            for cid, row in self.capabilities.items():
+                missing = _missing_declared_dependencies(row)
+                if missing:
+                    found[cid] = missing
+            self._unrunnable = found
+        return self._unrunnable
+
     def route(self, goal: str, *, top_k: int = 5) -> dict[str, Any]:
         tokens = tokenize(goal)
         scores: dict[str, float] = {}
         matched: set[str] = set()
+        unrunnable = self.unrunnable_capabilities()
+        unrunnable_matched: set[str] = set()
         for token in tokens:
             postings = self.index.get(token)
             if not postings:
                 continue
             matched.add(token)
             for cid, weight in postings.items():
+                if cid in unrunnable:
+                    # Recorded, not removed. `route()` answers "what does the
+                    # model contain", and that is not a fact about this host:
+                    # the pinned route for "extract text from a pdf document"
+                    # is pdf.extract.text.pypdf on every machine, and this
+                    # sandbox happens to have pypdf while the CI runner does
+                    # not. Hiding a capability here would make the ranking
+                    # host-dependent, which is exactly what
+                    # test_status_reports_the_machine_it_actually_runs_on
+                    # exists to prevent. `solve()`, which does run things, is
+                    # where the host gets a vote.
+                    unrunnable_matched.add(cid)
                 scores[cid] = scores.get(cid, 0.0) + weight
         mentioned = self._ids_mentioned(goal)
         for cid in mentioned:
             scores[cid] = scores.get(cid, 0.0) + 24.0
             matched.add(cid.casefold())
-        coverage = (len(matched) / len(tokens)) if tokens else 0.0
+        # A stated path is data the caller supplied and the binder will bind, not
+        # a word of the ask. Charge only the ask to the coverage budget, so that
+        # naming a real artifact can never be the reason a request is refused.
+        ask = set(ask_tokens(goal))
+        # A capability's own id is the ask, not a path. 294 of the model's ids
+        # ARE repository paths -- "canonical/runtime/x_v1.py.auto.v1" -- and the
+        # path grammar matches them whole, so blanking them left no ask at all:
+        # coverage collapsed to 0.0 and every addressed capability stopped being
+        # addressable. Measured, that regressed
+        # test_every_capability_is_addressable_by_its_own_id on 294 subtests.
+        #
+        # And every token of an id the model contains is by definition a token
+        # the model recognises, so those tokens are matched as well as asked.
+        # Without that second half an addressed id measured 0.333 against the
+        # 0.34 floor and still failed, on a filename token no index carries.
+        addressed_tokens: set[str] = set()
+        for cid in mentioned:
+            addressed_tokens.update(tokenize(cid))
+        ask |= addressed_tokens
+        matched_ask = (matched & ask) | addressed_tokens
+        coverage = (len(matched_ask) / len(ask)) if ask else 0.0
         # Naming a capability by its own id is an address, not a keyword. Its
         # path segments also index capabilities that legitimately claim those
         # words, so a flat +24 can be outscored by the noise the address itself
@@ -370,6 +504,7 @@ class UnifiedModel:
             "query_tokens": tokens,
             "matched_token_count": len(matched),
             "coverage": round(coverage, 6),
+            "unrunnable_on_this_host": sorted(unrunnable_matched),
             "confident": confident,
             "best": rows[0] if rows else None,
             "candidates": rows,
@@ -700,6 +835,20 @@ class UnifiedModel:
         context_paths: Iterable[str] | None = None,
     ) -> dict[str, Any]:
         row = self.capabilities[cid]
+        # A deliberate omission, recorded so it is not re-tried: refusing here
+        # when `_missing_declared_dependencies(row)` is non-empty looks like the
+        # obvious place for the host to vote, and it is not. Five pinned
+        # DeclaredContextBindingTests drive pdf.extract.text.pypdf end to end
+        # and assert on the *reason* and on `binding_provenance`; a dependency
+        # refusal placed before the binder replaced
+        # CAPABILITY_INPUTS_MISSING with a different string and short-circuited
+        # the provenance they read. Measured in CI: 5 failures, all of them
+        # negative controls about binding, none of them about dependencies.
+        #
+        # The adapters already fail closed on their own absent substrate, and
+        # presence is reported by `status()` and by `unrunnable_capabilities()`.
+        # What was actually broken was that the dependency was never DECLARED
+        # at all, so nothing could report it. That is fixed in the compiler.
         required = [str(x) for x in (row.get("input_names") or [])]
         inputs = dict(inputs)
         missing = [name for name in required if name not in inputs]
