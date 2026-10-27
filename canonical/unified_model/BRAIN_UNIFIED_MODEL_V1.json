@@ -26062,7 +26062,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6436,
+  "research_index_records": 6437,
   "routing_tokens": 1951,
   "skills": 18,
   "source_index_entry_points": 420,
@@ -26071,7 +26071,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "09bbc47c5b0756cf3a50a209eecbc6e2f47a211c9898cf9a49b194c75dd4b4e7"
+  "value": "63878be00229f60f36dd9a452ed2830aa9af6b144c8dca66542af62190b50ab0"
  },
  "engines": [
   {
@@ -48657,7 +48657,7 @@
   "included_source_count": 882,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "eea3ad228e5c8396a1f9b0a7de0291f9bf986b5b795571bdc65d515d1f823d72"
+  "source_tree_digest": "c3e1ac33276f1299eaed47efa0e60dcad20dc50283dc540250f59a0010b99475"
  },
  "research_index": [
   {
@@ -191483,6 +191483,51 @@
    }
   },
   {
+   "action_id": "A_QUESTION_ABOUT_ONE_SOURCE_FILE_MUST_BE_ANSWERED_ABOUT_THAT_FILE_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/A_QUESTION_ABOUT_ONE_SOURCE_FILE_MUST_BE_ANSWERED_ABOUT_THAT_FILE_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_QUESTION_ABOUT_ONE_SOURCE_FILE_MUST_BE_ANSWERED_ABOUT_THAT_FILE_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "ce055f5b2bdd513da08e2371604efda9db0cbad5c16ec95e7bd3116b4078ebe7",
+   "status": "",
+   "terms": {
+    "15": 1,
+    "19.6": 1,
+    "20261027": 1,
+    "22": 1,
+    "28.6": 1,
+    "a_question_about_one_source_file_must_be_answered_about_that_file_v1_20261027_v1": 2,
+    "about": 6,
+    "adapter": 2,
+    "answered": 2,
+    "both": 2,
+    "but": 2,
+    "capability": 2,
+    "count": 2,
+    "defined": 2,
+    "directory": 2,
+    "file": 9,
+    "functions": 3,
+    "machine": 2,
+    "matched": 2,
+    "none": 2,
+    "not": 3,
+    "one": 3,
+    "points": 2,
+    "python": 6,
+    "question": 4,
+    "resolve": 2,
+    "sentence": 5,
+    "so": 3,
+    "source": 3,
+    "specificity": 2,
+    "v1": 2,
+    "words": 2
+   }
+  },
+  {
    "action_id": "A_QUESTION_ABOUT_PART_OF_A_FILE_GETS_THAT_PART_AND_A_READER_NEVER_WRITES_OVER_WHAT_IT_READ_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -205076,11 +205121,12 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_source_audit.py",
-   "sha256": "2a1a56fe8080b611ab1e0b2dfce211c096617722ffc0b57a80d15cd6027de8db",
+   "sha256": "f5c5a7bb1dc067b1c06f6e1fe88575946a9c6662998e623bad07d8a8d35f1f7a",
    "summary": "Deterministic repository-local Python source structural audit.",
-   "symbol_count": 3,
+   "symbol_count": 4,
    "symbols": [
     "_imports",
+    "_py_files",
     "_safe_root",
     "run"
    ],
@@ -205088,6 +205134,7 @@
     "audit": 2,
     "deterministic": 1,
     "imports": 1,
+    "py_files": 1,
     "python": 2,
     "repository-local": 1,
     "run": 1,
@@ -205104,12 +205151,13 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
-   "sha256": "e321d818cface200d9d9fa7e72462f383d8c70e0f3278dc99faf7e4e7eaba421",
+   "sha256": "e094ca537a9695a89b69462dec7be6928dfa57fafc33f1b63f889ed91fa14866",
    "summary": "Deterministic repository-local Python semantic symbol index (stdlib ast).",
-   "symbol_count": 5,
+   "symbol_count": 6,
    "symbols": [
     "_ModuleIndexer",
     "_module_names_prepass",
+    "_py_files",
     "_safe_root",
     "_signature",
     "run"
@@ -205120,6 +205168,7 @@
     "index": 2,
     "module_names_prepass": 1,
     "moduleindexer": 1,
+    "py_files": 1,
     "python": 2,
     "repository-local": 1,
     "run": 1,
@@ -205163,9 +205212,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_symbol_resolve.py",
-   "sha256": "5ef40dc486a1d380e5cba2313ac51ebfdf064124eb2f9df0760815e66ab46d59",
+   "sha256": "7d2dabb7f94db714c6a94de8512e48ff059b4da46b3be8a550d186245f9758bf",
    "summary": "python.source.symbols.resolve.v1 — resolve a Python name to its definition.",
-   "symbol_count": 16,
+   "symbol_count": 17,
    "symbols": [
     "_Refusal",
     "_builtin_lookup",
@@ -205176,6 +205225,7 @@
     "_materialize",
     "_queries_from_raw",
     "_resolvable",
+    "_resolve_bare_name_globally",
     "_resolve_dotted_reference",
     "_resolve_in_module",
     "_safe_path",
@@ -205200,6 +205250,7 @@
     "refusal": 1,
     "resolvable": 1,
     "resolve": 2,
+    "resolve_bare_name_globally": 1,
     "resolve_dotted_reference": 1,
     "resolve_in_module": 1,
     "run": 1,
@@ -224920,9 +224971,9 @@
    "imported_by_count": 7,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "8c631920fa339d7a632b198844f91b5ca572eb9ebf443a392ab60e2c744893a1",
+   "sha256": "2bedeb2e429ca05a2536e462db06ac3796cfdf08a3d7ea51a7fc0372aa48275e",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
-   "symbol_count": 127,
+   "symbol_count": 128,
    "symbols": [
     "GoalCompilationFailure",
     "_adapter_default_argv",
@@ -225026,7 +225077,7 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "1b735ab4be0f07cca0802be789f537ecc2a5726a40d6e4c5e022d0cb40c9b3de",
+   "sha256": "a9d0f553621404b651f55591cf1ca140406d58c355e92b25da3951260cd4645f",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
    "symbol_count": 65,
    "symbols": [

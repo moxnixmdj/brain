@@ -35,6 +35,7 @@ produces the structural digest of a fresh artifact build.
 """
 import hashlib
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -255,26 +256,9 @@ def _resolve_in_module(index, modules, definitions_by_module, qualnames_by_qual,
                 "import_from": target,
             }
         # last: any module that defines the bare name (MULTI_HOME is honest)
-        hits = []
-        for cand_path, defs in definitions_by_module.items():
-            for d in defs:
-                if d["name"] == name and d["qualname"].count(".") == 0:
-                    hits.append(d)
-        hits = sorted(hits, key=lambda r: (r["module"], r["lineno"], r["qualname"]))
-        if len(hits) == 1:
-            return {
-                "status": "RESOLVED",
-                "reason": "RESOLVED_VIA_GLOBAL_NAME_FALLBACK",
-                "definitions": hits,
-                "resolved_from": "GLOBAL_BY_BARE_NAME",
-            }
-        if hits:
-            return {
-                "status": "MULTI_HOME",
-                "reason": "AMBIGUOUS_BARE_NAME_FALLBACK",
-                "definitions": hits,
-                "resolved_from": None,
-            }
+        global_hit = _resolve_bare_name_globally(definitions_by_module, name)
+        if global_hit is not None:
+            return global_hit
         return {
             "status": "UNRESOLVED",
             "reason": "NAME_NOT_FOUND_IN_MODULE_SCOPE_OR_IMPORTS",
@@ -341,6 +325,37 @@ def _resolve_dotted_reference(index, modules, definitions_by_module, qualnames_b
     return {"status": "RESOLVED", "reason": None, "definitions": [current_row], "resolved_from": "DOTTED_REFERENCE"}
 
 
+def _resolve_bare_name_globally(definitions_by_module, name):
+    """Every module that defines this bare name at module scope.
+
+    One definition is RESOLVED, several is MULTI_HOME with all of them listed,
+    and nothing found returns None so the caller can keep its own reason. This
+    is the never-miss over-approximation the module docstring promises: a name
+    defined in three places is reported as three, never as the first hit.
+    """
+    hits = []
+    for cand_path, defs in definitions_by_module.items():
+        for d in defs:
+            if d["name"] == name and d["qualname"].count(".") == 0:
+                hits.append(d)
+    hits = sorted(hits, key=lambda r: (r["module"], r["lineno"], r["qualname"]))
+    if len(hits) == 1:
+        return {
+            "status": "RESOLVED",
+            "reason": "RESOLVED_VIA_GLOBAL_NAME_FALLBACK",
+            "definitions": hits,
+            "resolved_from": "GLOBAL_BY_BARE_NAME",
+        }
+    if hits:
+        return {
+            "status": "MULTI_HOME",
+            "reason": "AMBIGUOUS_BARE_NAME_FALLBACK",
+            "definitions": hits,
+            "resolved_from": None,
+        }
+    return None
+
+
 def _builtin_lookup(name):
     import builtins
     return {"status": "BUILTIN", "reason": None, "definitions": [], "resolved_from": "BUILTIN"} if hasattr(builtins, name) else None
@@ -377,7 +392,32 @@ def build_resolution(source_root, queries, root, cached_index_path=None):
         if line is not None:
             line = int(line)
         name = str(q.get("name") or "")
-        if not module or not name:
+        if not module:
+            # A bare name: search every module in the tree. One definition is
+            # RESOLVED, several is MULTI_HOME with all of them, none is
+            # UNRESOLVED with a truthful reason. Nothing is guessed.
+            if not name:
+                return _fail_row(q, "NAME_REQUIRED")
+            builtin = _builtin_lookup(name)
+            res = _resolve_bare_name_globally(definitions_by_module, name)
+            if res is None:
+                res = builtin or {
+                    "status": "UNRESOLVED",
+                    "reason": "NAME_NOT_DEFINED_IN_SOURCE_ROOT",
+                    "definitions": [],
+                    "resolved_from": None,
+                }
+            rows.append({
+                "schema": ARTIFACT_SCHEMA,
+                "query": {"name": name},
+                "source_root": source_root,
+                "status": res["status"],
+                "resolved_from": res.get("resolved_from"),
+                "reason": res.get("reason"),
+                "definitions": res["definitions"],
+            })
+            continue
+        if not name:
             return _fail_row(q, "MODULE_AND_NAME_REQUIRED")
         if module not in modules:
             rows.append({
@@ -425,18 +465,41 @@ def _fail_row(q, reason):
 
 
 def _queries_from_raw(raw):
+    """Accept every way one resolution question can be written.
+
+    The binder hands this adapter what the sentence said. "Resolve the symbol
+    top" binds a bare name; "for the queries top leaf" binds a phrase. Both are
+    the same question the JSON array form asks, and refusing them meant the
+    capability was selected correctly and then died on ``json.loads`` --
+    measured: ``JSONDecodeError: Expecting value: line 1 column 1`` on a
+    perfectly good binding.
+
+    A bare name is a whole-tree resolution: which file and which definition does
+    this name come from. That is exactly what the adapter promises, and it is
+    the one form a sentence can supply without also naming a module and a line.
+    """
+    if isinstance(raw, str):
+        raw = [part for part in re.split(r"[,;]\s*|\s+", raw.strip()) if part]
     if not isinstance(raw, list) or not raw:
-        _systemic("queries must be a non-empty JSON array")
+        _systemic("queries must be a non-empty JSON array or a non-empty list of names")
     out = []
     for q in raw:
+        if isinstance(q, str):
+            name = q.strip()
+            if not name:
+                _systemic("each query must name something")
+            out.append({"name": name})
+            continue
         if not isinstance(q, dict):
-            _systemic("each query must be an object")
+            _systemic("each query must be an object or a name")
         if "reference" in q:
             out.append({"reference": str(q["reference"])})
         elif "module" in q and "name" in q:
             out.append({"module": str(q["module"]), "line": q.get("line"), "name": str(q["name"])})
+        elif "name" in q:
+            out.append({"name": str(q["name"])})
         else:
-            _systemic("each query must use `reference` or (`module`, `name`)")
+            _systemic("each query must use `reference`, `name`, or (`module`, `name`)")
     return out
 
 
@@ -452,7 +515,15 @@ def run(args, root):
     raw_queries = args.get("queries")
     if raw_queries is None:
         _systemic("queries input is required")
-    queries = _queries_from_raw(json.loads(raw_queries) if isinstance(raw_queries, str) else raw_queries)
+    if isinstance(raw_queries, str):
+        stripped = raw_queries.strip()
+        try:
+            raw_queries = json.loads(stripped)
+        except ValueError:
+            # Not JSON: the sentence stated the names directly. That is a
+            # binding, not an error -- _queries_from_raw takes it apart.
+            raw_queries = stripped
+    queries = _queries_from_raw(raw_queries)
     cached_index_path = None
     if args.get("index_path"):
         candidate = _safe_path(root, str(args["index_path"]), allow_overwrite=True)

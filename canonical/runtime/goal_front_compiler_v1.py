@@ -239,6 +239,13 @@ _KEY_ALIASES: dict[str, tuple[str, ...]] = {
     "source_json_path": ("source json", "state json"),
 }
 _PATH_LIST_KEYS = {"test_paths", "source_paths", "evidence_paths"}
+# A key whose value is a LIST OF NAMES, not a list of paths and not one value.
+# "for the queries top leaf orphan" states three resolutions; the bare-token
+# branch takes one `[A-Za-z0-9_.:/-]+` run and bound `queries` to "top", so the
+# capability answered one of the three questions asked and its artifact honestly
+# reported query_count 1. A truthful answer to a narrower question is still not
+# the answer to the question.
+_NAME_LIST_KEYS = {"queries"}
 _PATH_DIR_KEYS = {"source_root"}
 _PATH_FILE_KEYS = {"path"}
 # F20: ``json_path`` is a SELECTOR INSIDE the fetched JSON payload (a list of key/index parts,
@@ -633,7 +640,7 @@ def _kv_pairs(text: str) -> dict[str, float] | None:
     return out or None
 
 
-def bind_typed_key(goal: str, key: str, root: pathlib.Path):
+def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, Any] | None = None):
     """Bind one input key the pinned binder cannot. Raises GoalCompilationFailure when absent."""
     paths = gc._repo_paths(goal, root)
     if key in _PATH_FILE_KEYS:
@@ -645,6 +652,29 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path):
         dirs = [raw for raw, p in paths if p.is_dir()]
         if len(dirs) == 1:
             return dirs[0]
+        # A scope key is a scope, not a directory. "Audit the python source root
+        # D" and "audit the python file F" are one question at two scopes, and
+        # refusing the second because the caller named a file left the machine
+        # unable to answer ANY question about a single source file -- measured,
+        # "Count the functions defined in the python file <abs>/calc.py" never
+        # reached an adapter at all.
+        #
+        # Declaration-driven, not global: 19 capabilities take `source_root` and
+        # most of them (a test runner, a repair loop) cannot index one file, so
+        # the caller's file may only bind where the capability says its adapter
+        # accepts one. The scope stays exactly what the caller named -- one file
+        # means one file, never its siblings -- and anything but exactly one
+        # named existing file still fails closed.
+        bindings = entry.get("proposal_bindings") if isinstance(entry, Mapping) else None
+        declared_file_scope = (
+            isinstance(bindings, Mapping)
+            and isinstance(bindings.get(key), Mapping)
+            and bindings[key].get("type") == "path_file_or_dir"
+        )
+        if not dirs and declared_file_scope:
+            files = [raw for raw, p in paths if p.is_file()]
+            if len(files) == 1:
+                return files[0]
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":" + str(len(dirs)) + "_existing_directories_named")
     if key in _PATH_LIST_KEYS:
         files = [raw for raw, p in paths if p.is_file()]
@@ -723,6 +753,30 @@ def _parse_typed_value(key: str, tail: str, quoted_only: bool = False):
             if isinstance(value, list) and all(isinstance(p, (str, int)) for p in value):
                 return value
         return None
+    if key in _NAME_LIST_KEYS:
+        # A list of names is a list only when it is DELIMITED. "for the queries
+        # top, leaf, orphan" states three; "for the queries top leaf orphan" is
+        # indistinguishable by shape from "...top leaf writing the report to R",
+        # where `writing` is as valid an identifier as `leaf` is. Guessing there
+        # would put prose words into the artifact as UNRESOLVED names and report
+        # a lie about the source, so an undelimited tail binds exactly one name.
+        # One name is a list of one, which is what the single-name sentence means.
+        delimited = [part.strip() for part in re.split(r"[,;]+", tail) if part.strip()]
+        if len(delimited) > 1:
+            names = []
+            for idx, part in enumerate(delimited):
+                # Every part but the last must BE a name. The last one may carry
+                # the rest of the sentence, because the delimiter run ended where
+                # the prose resumed: "top, leaf, orphan writing the report to R".
+                strict = idx < len(delimited) - 1
+                pattern = r"\s*([A-Za-z_][A-Za-z0-9_.]*)\s*$" if strict else r"\s*([A-Za-z_][A-Za-z0-9_.]*)"
+                m = re.match(pattern, part)
+                if not m:
+                    return None
+                names.append(m.group(1))
+            return names
+        m = re.match(r"\s*([A-Za-z_][A-Za-z0-9_.]*)", tail)
+        return [m.group(1)] if m else None
     if key in _BOOL_KEYS:
         m = re.match(r"\s*(true|false|yes|no)\b", tail, re.I)
         return (m.group(1).lower() in ("true", "yes")) if m else None
@@ -1304,7 +1358,7 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
         if isinstance(inputs.get(key), str) and inputs[key]:
             taken.add(inputs[key])
     for key in typed_keys:
-        inputs[key] = bind_typed_key(goal, key, root)
+        inputs[key] = bind_typed_key(goal, key, root, entry)
     repair_output_collisions(goal, inputs, root, exclude=produced_paths, entry=entry,
                              cycle=cycle, spool=spool)
     return inputs

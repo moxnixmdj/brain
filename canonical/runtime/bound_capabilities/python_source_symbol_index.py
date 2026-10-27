@@ -24,9 +24,24 @@ def _safe_root(root, raw):
     p = (root / str(raw or "")).resolve()
     if p != root and root not in p.parents:
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
-    if not p.is_dir():
-        raise RuntimeError("PYTHON_INDEX_ROOT_MISSING")
-    return p
+    if p.is_dir():
+        return p
+    # Same law as python_source_audit: "the call graph of the python file F" and
+    # "the call graph of the python source root D" are one question with two
+    # scopes. Refusing the first because the caller named a file left the
+    # machine unable to answer any call-graph or who-calls question about a
+    # single file. The scope stays exactly what the caller named -- one file
+    # indexes one file, never its siblings.
+    if p.is_file() and p.suffix == ".py":
+        return p
+    raise RuntimeError("PYTHON_INDEX_ROOT_MISSING")
+
+
+def _py_files(source_root):
+    """The files the index walks: one named file, or every file under a named tree."""
+    if source_root.is_file():
+        return [source_root]
+    return sorted(source_root.rglob("*.py"))
 
 
 def _signature(node):
@@ -260,7 +275,7 @@ def run(args, root):
     reference_total = 0
     call_edge_total = 0
 
-    for path in sorted(source_root.rglob("*.py")):
+    for path in _py_files(source_root):
         if not path.is_file():
             continue
         raw = path.read_bytes()
