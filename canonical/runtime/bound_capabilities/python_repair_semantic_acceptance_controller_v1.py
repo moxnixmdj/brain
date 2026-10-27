@@ -9,6 +9,7 @@ import tempfile
 from typing import Any, Mapping
 
 from canonical.runtime.bound_capabilities import python_repair_measured_acceptance_controller_v1 as v8
+from canonical.runtime import acceptance_clause_v1 as acceptance_clause
 from canonical.runtime import python_request_acceptance_union_v1 as union
 
 SCHEMA="PROJECT_BRAIN_PYTHON_REPAIR_SEMANTIC_ACCEPTANCE_CONTROLLER_V1"
@@ -35,6 +36,10 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         raise SemanticRepairError("TEST_PATHS_REQUIRED")
     argv=[str(x) for x in (args.get("test_argv") or v8._REPAIR._PATCH.suite_argv(sys.executable,*test_paths))]
     task_text=str(args.get("task_text") or "").strip()
+    if not task_text:
+        raise SemanticRepairError("TASK_TEXT_REQUIRED")
+    clause=acceptance_clause.extract(task_text,args)
+    task_text=str(clause.get("acceptance_task_text") or task_text).strip()
     if not task_text:
         raise SemanticRepairError("TASK_TEXT_REQUIRED")
     output=v8._safe_output(repo,args.get("output_path"))
