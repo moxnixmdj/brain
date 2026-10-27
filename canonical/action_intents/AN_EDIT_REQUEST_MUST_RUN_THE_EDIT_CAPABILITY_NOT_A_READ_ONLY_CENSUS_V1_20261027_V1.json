@@ -38,7 +38,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The write lane returned a certified wrong answer. Measured on origin/main at cfbbdc28: \"Extract the function big from the module calc.py lines 5 to 9 in the python source root D into a new function named total_of\" scored python.refactor.extract_function.v1 at 33, ahead of the next candidate at 22, and was then dropped as unbindable, so python.source.audit.ast -- a capability that reads and changes nothing -- answered the extract-method request and returned pass=True with a census of the whole directory (totals files 2, functions 3). front.bind_typed_key failed GOAL_INPUT_BINDING_REQUIRED:not_stated on seven declared inputs. Four of them the sentence states plainly -- start_line and end_line are \"lines 5 to 9\", new_name is \"named total_of\", qualname is \"the function big\" -- but the binder had no grammar for any of them: _NUMERIC_KEYS was {x_value, y_value, major, max_age_s} and _KEY_ALIASES had no entry for new_name or qualname. Three more no sentence could ever state -- python_executable, run_tests, timeout_s -- while the adapter already defaults all three at python_refactor_extract_function.py:203-205 (python_executable falls back to sys.executable, timeout_s to 300, run_tests to []). The same defect dropped three more capabilities that all outscore the audit: python.source.crossfile_edit.choreograph.v1 30 against 22, python.tests.generate.scaffold.v1 37 against 22, python.source.change_impact.testselect.v1 22 against 22. Separately, every handler on the execution path catches Exception while SystemExit derives from BaseException, so a capability whose adapter calls sys.exit() escaped solve() and terminated the caller.",
- "canonical_base_commit": "afc357c58a70a943e7b992bdf391e86b7fd7c8a4",
+ "canonical_base_commit": "94afa87134dc8a1ec522165248585fcd252019f2",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -52,7 +52,7 @@
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
  "load_bearing_primary": {
-  "canonical_base_commit": "afc357c58a70a943e7b992bdf391e86b7fd7c8a4",
+  "canonical_base_commit": "94afa87134dc8a1ec522165248585fcd252019f2",
   "constructive_gap_for_open_obligation_ids": [
    "AUTOMATIONBENCH_GE_40",
    "CHARTOGRAPHY_TOOLS_GE_89",
@@ -91,7 +91,7 @@
   }
  ],
  "recursive_obs": {
-  "canonical_base_commit": "afc357c58a70a943e7b992bdf391e86b7fd7c8a4",
+  "canonical_base_commit": "94afa87134dc8a1ec522165248585fcd252019f2",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "CHARGING_THE_TOKENS_OF_A_STATED_PATH_TO_THE_COVERAGE_BUDGET",
@@ -1718,7 +1718,7 @@
      "why_not_selected_or_selected": "SELECTED: separate the two acts. Refusing keeps the one-word rule. Taking over a route now requires the caller's WHOLE name, in order, in PROSE -- repository paths and identifier tokens are stripped first, a trailing version token is optional because prose drops it, and among several names stated the MOST SPECIFIC one wins. Measured in three steps over the same 13 path-style receipt-backed targets: 6 of 13 before, 10 of 13 once the whole name was required (the 3 remaining lost to a SIBLING, because 'bytes characteristic active query task generator v10' also states the whole of bytes_active_query_task_generator_v1 with one extra word in the middle), and 13 of 13 once specificity decides. The ordinary sentences that caused the regression now name ZERO receipt projections, and the 4 core failures are gone: test_live_brain_route_admission_v1 and test_capability_naming_rule_v1 are 42 passed. The end-to-end family moved with it: RECEIPT_PROSE_EXECUTION 12 instances went 7 of 12 (0.5833) to 12 of 12 (1.0), measured with the harness itself. Benchmark unchanged at 23/23 compiled and 22/23 selected; 213 unittest OK; pytest suites over the live path 117 passed with the same 6 pre-existing failures (2 capability DAG, 3 missing openpyxl/docx, 1 the deliberate no-write-authority boundary, which source_write_authority=False is hard-coded and enforced against in five separate guard modules). The wave 7 suite now asserts 13 of 13 and an empty residual, with the three-step history kept in the file; 3 of its 10 tests go red when the change is reverted."
     }
    ],
-   "checked_at_utc": "2026-10-27T17:30:33Z",
+   "checked_at_utc": "2026-10-27T17:33:28Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -1834,10 +1834,10 @@
     "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1"
    ],
    "selected_route": "AN_EDIT_REQUEST_MUST_RUN_THE_EDIT_CAPABILITY_NOT_A_READ_ONLY_CENSUS_V1_20261027_V1",
-   "selected_route_checked_at_utc": "2026-10-27T17:30:33Z",
+   "selected_route_checked_at_utc": "2026-10-27T17:33:28Z",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-27T17:30:33Z",
+    "checked_at_utc": "2026-10-27T17:33:28Z",
     "execution_dependencies": [
      {
       "dependency": "python3 3.11.2",
@@ -1961,7 +1961,7 @@
  "v22_prewrite_admission": {
   "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-  "checked_at_utc": "2026-10-27T17:30:33Z",
+  "checked_at_utc": "2026-10-27T17:33:28Z",
   "currentness": {
    "accepted_families": 5,
    "meta_envelope_open_count": 8,
@@ -2005,7 +2005,7 @@
      "path": "canonical/runtime/live_brain_route_admission_v1.py"
     },
     {
-     "git_blob_sha": "7ddb4c19c1c001429fa9c1dc2c5d2425324e82de",
+     "git_blob_sha": "56c5ce317676704ff4a488d0ba5ad07e8aed6ac4",
      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
     },
     {
@@ -2013,7 +2013,7 @@
      "path": "canonical/tests/test_a_question_about_one_source_file_is_answered_about_that_file_v1.py"
     },
     {
-     "git_blob_sha": "98fbd700cd9d8dd3ed4e23b444d6b10bd635aa12",
+     "git_blob_sha": "f3739331dbda18b7a5c0c93b7920f4b821e3988f",
      "path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
     },
     {
