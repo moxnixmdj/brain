@@ -35,7 +35,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A sentence asking to run tests was answered by a capability that runs none, and nothing downstream could catch it because the only obligation the sentence produced was the existence of a report. Two further defects then made the correct capability's own measurement wrong: the collecting suite runner imported a suite without putting the suite's own directory on sys.path, so an ordinary `from m import f` raised ModuleNotFoundError and a passing suite measured as failing; and a supplied test_argv was passed through verbatim into a copied workspace whose cwd is that workspace, so the caller's repository-relative test path named nothing there and the runner collected zero tests.",
- "canonical_base_commit": "4bcb20974d8af00e9b475baf992f30eaa5c9e79a",
+ "canonical_base_commit": "aa7b7053d829bbf18721c3dadc63a41dd57c26b9",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -49,7 +49,7 @@
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
  "load_bearing_primary": {
-  "canonical_base_commit": "4bcb20974d8af00e9b475baf992f30eaa5c9e79a",
+  "canonical_base_commit": "aa7b7053d829bbf18721c3dadc63a41dd57c26b9",
   "constructive_gap_for_open_obligation_ids": [
    "AUTOMATIONBENCH_GE_40",
    "CHARTOGRAPHY_TOOLS_GE_89",
@@ -84,7 +84,7 @@
   }
  ],
  "recursive_obs": {
-  "canonical_base_commit": "4bcb20974d8af00e9b475baf992f30eaa5c9e79a",
+  "canonical_base_commit": "aa7b7053d829bbf18721c3dadc63a41dd57c26b9",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "DECLARING_A_DESTINATION_FOR_A_COMMAND_WHOSE_STDOUT_IS_THE_SOURCE_FILE_SO_THE_WRITE_TRUNCATED_IT",
