@@ -335,19 +335,54 @@ def test_a_repair_sentence_reaches_a_repair_capability_end_to_end():
     finally:
         _cleanup(task_id)
     assert str(result.get("compiled_capability_id", "")).startswith("python.software.repair."), result
-    # The capability really did the work: it found the patch and verified it.
+    # The capability really did the work: it found the patch, verified it, and --
+    # since python.software.repair.apply.verified.v1 -- landed it.  The repair
+    # loops still restore the source and still declare NO_SOURCE_WRITE authority;
+    # that boundary is unchanged.  What changed is that a capability now holds the
+    # other half of it, so the goal's promise that the file is repaired is kept
+    # rather than merely reported as unkept.
     report = json.loads((work / "report.json").read_text(encoding="utf-8"))
-    assert report["status"] == "PASS__VERIFIED_MULTI_EDIT_PATCH_FOUND", report["status"]
-    assert "+    return a + b" in json.dumps(report["patches"]), report["patches"]
-    # But the loops restore the source and declare NO_SOURCE_WRITE authority, so
-    # the goal's promise -- that the file is repaired -- was not kept, and the
-    # front door must say so instead of reporting PASS over an unchanged bug.
-    assert result["pass"] is False, result
-    assert result["status"] == "FAIL_CLOSED__PROMISED_SOURCE_CHANGE_NOT_APPLIED", result
-    assert result["promised_source_change_errors"] == [
-        "PROMISED_SOURCE_UNCHANGED:%s/mod.py" % base], result
-    assert "NO_SOURCE_WRITE_OR_PROMOTION_AUTHORITY" in report["hard_nonclaims"], report
-    assert (work / "mod.py").read_text(encoding="utf-8") == "def add(a, b):\n    return a - b\n"
+    assert report["status"] == "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE", report["status"]
+    assert "+    return a + b" in json.dumps(report["unified_diffs"]), report["unified_diffs"]
+    # The claim is about the bytes on disk and about the stated test, not about
+    # the report: the file really changed, and the stated test really went from
+    # failing to passing on it.
+    assert (work / "mod.py").read_text(encoding="utf-8") == "def add(a, b):\n    return a + b\n"
+    assert report["pre_apply_test_returncode"] == 1, report
+    assert report["post_apply_test_returncode"] == 0, report
+    assert report["files_written"] == [base + "/mod.py"], report["files_written"]
+    # And it is honest about cognition and cost.
+    assert report["model_dependency_count"] == 0, report
+    assert report["incremental_spend_usd"] == 0, report
+    assert result["pass"] is True, result
+    assert result["status"] == (
+        "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED"
+        "__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED"), result
+    # The promise the sentence made -- that mod.py is repaired -- was kept, so the
+    # promised-source-change gate has nothing to report.
+    assert not result.get("promised_source_change_errors"), result
+    # This capability does hold write authority, so it must not claim the loops'
+    # non-claim; it states its own limits instead.
+    assert "NO_SOURCE_WRITE_OR_PROMOTION_AUTHORITY" not in report["hard_nonclaims"], report
+    assert report["hard_nonclaims"], report
+
+
+def test_the_promised_source_change_gate_still_fires_when_nothing_changed():
+    """Coverage for the gate the test above no longer exercises.
+
+    Now that one capability can land a repair, a repair sentence no longer trips
+    the promised-source-change gate -- which is the point.  But the gate itself
+    must still fire on exactly what it was built for: a goal that promised a
+    source change where the bytes are identical afterwards.  Asserting it here
+    directly keeps that guarantee from being lost with the old end-to-end path.
+    """
+    target = WORK / "unchanged"
+    target.mkdir(parents=True, exist_ok=True)
+    (target / "still_broken.py").write_text("def add(a, b):\n    return a - b\n", encoding="utf-8")
+    raw = "canonical/astra_runtime/tmp/test_live_brain_route_admission/unchanged/still_broken.py"
+    before = {raw: adm._source_digest(raw)}
+    errors = adm.promised_source_change_errors("Repair the python source file " + raw, before)
+    assert errors == ["PROMISED_SOURCE_UNCHANGED:" + raw], errors
 
 
 def test_a_goal_that_only_reads_source_still_passes():
