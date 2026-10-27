@@ -28701,7 +28701,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "740e0951d3bd55f4c9ff735e02e50e89b8f4b5e4c9e14fe11203a4e7bdbdd33a"
+  "value": "eb0a219959d2b318d07e17dc2576489bd42873190adaf2aed8aeadb43b5e53ac"
  },
  "engines": [
   {
@@ -203630,7 +203630,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/WIRE_DECLARED_INPUT_DERIVATION_FOR_HUMAN_SWE_SENTENCES_V1_20261027_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "25e1bb03d485f4ccc85e9aa97b863e7d3d4a5322f842cbcb043bbe78fb8c083d",
+   "sha256": "63944bd4441d4f9c21751ea02935635e4e9081d90a46b9c069893a2db628697a",
    "status": "",
    "terms": {
     "20261027": 1,
@@ -266674,10 +266674,11 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/swe_typed_plan_v1.py",
-   "sha256": "3890f48ce62351077c92ef834f7bada0d58a4c9bd9c83c4f9c6b5aa8f7d39d31",
+   "sha256": "8016900f3e07178df9e2bcfc32c386f2aec2e189802dae9dd055c56f9b0b85b4",
    "summary": "Scoped typed-SWE execution plan for the live front door (hidden-tool wiring).",
-   "symbol_count": 5,
+   "symbol_count": 6,
    "symbols": [
+    "_effect_consistent",
     "_execution_template",
     "_fresh_output_path",
     "build_plan",
@@ -266687,6 +266688,7 @@
    "terms": {
     "build_plan": 1,
     "door": 1,
+    "effect_consistent": 1,
     "execution": 1,
     "execution_template": 1,
     "fresh_output_path": 1,
