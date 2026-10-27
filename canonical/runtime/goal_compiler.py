@@ -1453,7 +1453,8 @@ def _plan_has_unjustified_world_slots(plan):
 
 def _rank_bindable_candidates(
     goal, registry, root, context_paths=None, future_clauses=None,
-    proposal_binder=None, effect_providers=None, allow_world_binding=False
+    proposal_binder=None, effect_providers=None, allow_world_binding=False,
+    unbindable_out=None
 ):
     """Score every live capability the goal could select, then try to bind it.
 
@@ -1466,6 +1467,12 @@ def _rank_bindable_candidates(
     disambiguation power that bindability provides.
 
     The inferred pass therefore runs only when nothing grounded survived.
+
+    ``unbindable_out`` (optional list) receives every word-matched candidate
+    that could NOT be bound at this level, as ``(score, specificity, cid)``
+    tuples. The caller compares it against the bindable survivors: when the
+    best word-match is unbindable, the honest answer is a refusal -- never a
+    substitution with a weaker-scoring tool that happens to be callable.
     """
     ranked=[]
     for cid,entry in sorted((registry or {}).items()):
@@ -1509,12 +1516,16 @@ def _rank_bindable_candidates(
             inputs=None
         if inputs is None:
             if not allow_world_binding or _uses_effect_result_bindings(entry):
+                if unbindable_out is not None:
+                    unbindable_out.append((score,specificity,cid))
                 continue
             # BIND FIRST, THEN RANK. Ambiguity is frequently an artefact of
             # ranking unbound candidates: several capabilities match the words,
             # but only some can actually be called with what the world offers.
             completed=_complete_inputs_via_world_binding(goal,root,cid,entry)
             if completed is None:
+                if unbindable_out is not None:
+                    unbindable_out.append((score,specificity,cid))
                 continue
             inputs,binding_provenance=completed
         ranked.append((score,specificity,cid,entry,inputs,evidence,binding_provenance))
@@ -2090,6 +2101,7 @@ def _compile_single_goal(
     goal, registry, root, context_paths=None, future_clauses=None,
     proposal_binder=None, effect_providers=None, attach_producer_steps=False
 ):
+    ranked_unbindable=[]  # [(score, specificity, cid), ...] word-matched, could not bind
     ranked=_rank_bindable_candidates(
         goal,registry,root,
         context_paths=context_paths,
@@ -2097,6 +2109,7 @@ def _compile_single_goal(
         proposal_binder=proposal_binder,
         effect_providers=effect_providers,
         allow_world_binding=False,
+        unbindable_out=ranked_unbindable,
     )
     binding_source="GOAL_STATEMENT"
     if not ranked:
@@ -2107,8 +2120,50 @@ def _compile_single_goal(
             proposal_binder=proposal_binder,
             effect_providers=effect_providers,
             allow_world_binding=True,
+            unbindable_out=ranked_unbindable,
         )
         binding_source="GOAL_STATEMENT+WORLD_BINDING"
+    if ranked and ranked_unbindable:
+        # THE LAW THIS REPO ALREADY STATES: when the best word-match cannot be
+        # called, refuse -- never substitute a weaker-scoring tool merely
+        # because it happens to be callable.  Bindable-beats-unbindable
+        # regardless of score is the measured failure shape that made a
+        # barcode decoder outrank the barcode generator, msgpack cover XLSX,
+        # and pandoc cover jq.
+        #
+        # Precise scope: the predicate fires only against a substitution that
+        # consumed NOTHING from the sentence -- the would-be substitute either
+        # declares no input placeholders at all (a vacuous bind: it attaches
+        # to any sentence for free, e.g. msgpack/kstar catch-alls) or filled at
+        # least one slot with a world guess the goal never justified
+        # (``filled_from_world_not_goal``: pandoc pinning markdown_path to
+        # AGENTS.md for a jq query).  A sentence that fully states a grounded
+        # candidate's contract therefore still selects it with certainty:
+        # lexical noise from unbindable neighbours (a decoder outscoring the
+        # generator the sentence fully names) is noise, not law.
+        best_unbindable=max(ranked_unbindable, key=lambda x:(x[0],x[1]))
+        survivor_provenance=ranked[0][6]
+        survivor_args=((ranked[0][3].get("action_template") or {}).get("args") or {})
+        survivor_vacuous=not any(
+            isinstance(v,str) and v.startswith("${input.") for v in survivor_args.values()
+        )
+        survivor_unjustified=bool(
+            isinstance(survivor_provenance,dict)
+            and (survivor_provenance.get("filled_from_world_not_goal") or {})
+        )
+        if best_unbindable[0] > ranked[0][0] and (survivor_vacuous or survivor_unjustified):
+            raise GoalCompilationFailure(
+                "GOAL_COMPILATION_BEST_MATCH_UNBINDABLE",
+                json.dumps({
+                    "unbindable_best_match": best_unbindable[2],
+                    "unbindable_best_match_score": best_unbindable[0],
+                    "substitute_refused": ranked[0][2],
+                    "substitute_score": ranked[0][0],
+                    "substitute_binding": (
+                        "VACUOUS" if survivor_vacuous else "UNJUSTIFIED_WORLD_SLOTS"
+                    ),
+                }, sort_keys=True),
+            )
     if not ranked:
         raise GoalCompilationFailure("GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH")
     best=ranked[0]
