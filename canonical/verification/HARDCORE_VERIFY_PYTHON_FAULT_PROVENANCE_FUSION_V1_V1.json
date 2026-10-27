@@ -1,0 +1,17 @@
+{
+ "capability_id": "python.fault.provenance.fusion.v1",
+ "mission_id": "AUTO-VERIFY-HARDCORE_PYTHON_FAULT_PROVENANCE_FUSION_V1-V1",
+ "observed_effect": {
+  "adapter": "python_fault_provenance_fusion_v1",
+  "incremental_spend_usd": 0,
+  "model_dependency_count": 0,
+  "output_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_FAULT_PROVENANCE_FUSION_V1.json",
+  "output_sha256": "46f2f6ae6aebdb29a820a6136e1acc2aa302222ba9e62c6855e6e1ef4e669d8d",
+  "output_verified": true,
+  "verified": true
+ },
+ "output_sha256": "46f2f6ae6aebdb29a820a6136e1acc2aa302222ba9e62c6855e6e1ef4e669d8d",
+ "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+ "state_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_FAULT_PROVENANCE_FUSION_V1.json",
+ "verified": true
+}
