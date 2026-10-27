@@ -966,6 +966,7 @@ def _nondiscriminating_requires_tokens():
     except Exception:
         out = frozenset()
     _nondiscriminating_requires_cache = out
+    return out
 
 
 # A verb does not carry its own meaning; its OBJECT does.  "write the repair
