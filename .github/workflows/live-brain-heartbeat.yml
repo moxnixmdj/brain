@@ -9,6 +9,26 @@ name: live-brain-heartbeat
 # It installs the apt/pip dependencies the sandbox lacks so every tool's liveness is measured
 # on the public runner.  It never pushes, never merges, never writes to main.
 # Receipts are artifacts; authority NONE; nothing here is a capability credit.
+#
+# MEASURED 2026-10-27, on the tree at 4d2c1a8 (37 families, one entry):
+#   fixed overhead per run ................ 56 s  (tool liveness + reachability)
+#   cheapest family, per instance ......... 0.63 s
+#   python repair families, per instance .. 1.34 s
+#   families x instances ................. 37 x 50 = 1,850 in-scope + 100 out-of-scope
+# The run used to measure BOTH entries, so every one of those ~1,950 instances was
+# executed twice: ~47 minutes of work against a 30-minute job timeout.  The job was
+# therefore cancelled on 17 of the last 20 runs -- five daily schedule runs in a row --
+# and because the step never finished, the artifact upload then failed too, so no
+# receipt and no summary survived.  `alive_errors()` -- the verdict -- reads ONLY the
+# `measurements["new"]` entry, and `test_live_brain_heartbeat_v1` asserts that a
+# receipt holding only `old` is NOT ALIVE.  The second entry was diagnostic, not
+# evidence, and it cost more than the entire verdict.
+#
+# So this measures the ONE entry the verdict is defined on.  Nothing is verified
+# less: same families, same 50 instances each, same 100 out-of-scope goals, same
+# fail-closed rules, same `--require-all-alive`.  Speed comes from removing the
+# duplicated work, not from measuring less (the same principle as "Speed by
+# removing duplicated work, not by verifying less").
 
 on:
   schedule:
@@ -33,10 +53,30 @@ on:
 permissions:
   contents: read
 
+# Measured 2026-10-17: three heartbeat runs were in flight at once (01:02, 01:15,
+# 01:19), each ~28 minutes, because every PR touching the goal compiler starts one
+# and nothing ever cancelled the older run.  A superseded run can only report on a
+# tree nobody is looking at any more, so cancelling it costs no evidence -- it frees
+# the runner for the run that does report.  Scoped to one ref: a push to main and a
+# pull request never cancel each other.
+concurrency:
+  group: live-brain-heartbeat-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   heartbeat:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # MEASURED 2026-10-27 on the first run of this file: ONE entry, 37 families at
+    # 50 instances, still hit 40 minutes (run 40476270088 was cancelled at 40m00s).
+    # So the estimate "~24 min for one entry" was wrong and is corrected here: the
+    # real cost of the full suite is above 40 minutes in this sandbox and unknown on
+    # the public runner, because no run has finished long enough to report it.
+    # Raising the ceiling further would only hide that; the run is kept at 40 minutes
+    # and now PERSISTS ITS RECEIPT AFTER EVERY FAMILY, so an interrupted run reports
+    # every family it finished and names every family it never reached.  The job
+    # summary publishes the measured wall clock, and the next change is to shard the
+    # families so the work is parallel rather than merely long.
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -52,16 +92,33 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p heartbeat_out
+          started=$(date +%s)
           python3 execution_guard/live_solver_end_to_end_measurement_v1.py \
-            --per-family 50 --oos 100 --entries old,new \
+            --per-family 50 --oos 100 --entries new \
             --out heartbeat_out/LIVE_BRAIN_HEARTBEAT_RECEIPT.json \
             --summary-md heartbeat_out/SUMMARY.md \
             --require-all-alive \
             --environment-blockers-are-failures
+          echo "measurement wall clock: $(( $(date +%s) - started ))s" \
+            | tee -a "$GITHUB_STEP_SUMMARY"
       - name: publish the verdict
         if: always()
         run: |
-          if [ -f heartbeat_out/SUMMARY.md ]; then cat heartbeat_out/SUMMARY.md >> "$GITHUB_STEP_SUMMARY"; else echo "heartbeat produced no summary" >> "$GITHUB_STEP_SUMMARY"; fi
+          # A run that hit its timeout never reaches the code that writes SUMMARY.md.
+          # Render it from the receipt the run persisted after every family instead,
+          # so the interrupted run still reports what it measured and names the
+          # families it never reached -- rather than saying "no summary", which is
+          # what the cancelled runs used to say.
+          if [ -f heartbeat_out/SUMMARY.md ]; then
+            cat heartbeat_out/SUMMARY.md >> "$GITHUB_STEP_SUMMARY"
+          elif [ -f heartbeat_out/LIVE_BRAIN_HEARTBEAT_RECEIPT.json ]; then
+            echo "The run did not finish; this summary is rendered from its partial receipt." >> "$GITHUB_STEP_SUMMARY"
+            python3 execution_guard/live_solver_end_to_end_measurement_v1.py \
+              --summarize heartbeat_out/LIVE_BRAIN_HEARTBEAT_RECEIPT.json \
+              --environment-blockers-are-failures >> "$GITHUB_STEP_SUMMARY" || true
+          else
+            echo "heartbeat produced neither a summary nor a receipt" >> "$GITHUB_STEP_SUMMARY"
+          fi
           # the same verdict as check annotations, so the reasons are readable from the PR and the API without opening logs
           python3 execution_guard/live_solver_end_to_end_measurement_v1.py --annotate heartbeat_out/LIVE_BRAIN_HEARTBEAT_RECEIPT.json --environment-blockers-are-failures || true
       - uses: actions/upload-artifact@v4

@@ -25103,7 +25103,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6431,
+  "research_index_records": 6432,
   "routing_tokens": 1871,
   "skills": 18,
   "source_index_entry_points": 410,
@@ -25112,7 +25112,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8c5f89f5c13818c256ebe697778064fad6303bdc90696da2cb3db2430d51c14c"
+  "value": "b156854d3ee1cbb33ec2fc481fe66a212d7e63de6e166d01ee0355c02df2eb70"
  },
  "engines": [
   {
@@ -193219,6 +193219,30 @@
     "looked": 1,
     "sentence": 2,
     "source": 2,
+    "v1": 2
+   }
+  },
+  {
+   "action_id": "HEARTBEAT_REPORTS_WHAT_IT_REACHED_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/INTERRUPTED_MEASUREMENT_REPORTS_WHAT_IT_REACHED_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/INTERRUPTED_MEASUREMENT_REPORTS_WHAT_IT_REACHED_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "41c867e52d719917c4cb1121c75bf374c5d40339409b0de58f9e75ecef55b019",
+   "status": "",
+   "terms": {
+    "20261027": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "heartbeat_reports_what_it_reached_v1_20261027_v1": 1,
+    "interrupted": 1,
+    "measurement": 1,
+    "reached": 1,
+    "reports": 1,
+    "stop_measuring_an_entry_the_verdict_never_reads_and_persist_the_receipt_so_a_timeout_reports_what_it_reached": 1,
+    "the_heartbeat_produced_nothing_on_seventeen_of_twenty_runs_and_still_hit_its_timeout_after_the_duplicated_entry_was_removed__measured_2026_10_27_run_40476270088_one_entry_thirty_seven_families_at_fifty_instances_was_cancelled_at_40m00s_and_returned_no_receipt_because_the_receipt_is_assembled_once_at_the_end": 1,
+    "the_run_writes_its_receipt_after_every_family__an_interrupted_run_therefore_reports_every_family_it_finished_and_names_every_family_it_never_reached__the_receipt_carries_run_complete_and_pending_families__an_incomplete_run_is_never_alive__and_the_workflow_renders_the_summary_from_the_partial_receipt": 1,
     "v1": 2
    }
   },
